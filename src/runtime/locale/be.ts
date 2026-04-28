@@ -100,6 +100,11 @@ export default defineLocale<Messages>({
       decrement: 'Паменшыць',
       increment: 'Павялічыць'
     },
+    listbox: {
+      noData: 'Няма даных',
+      noMatch: 'Супадзенняў не знойдзена',
+      search: 'Пошук…'
+    },
     modal: {
       close: 'Закрыць'
     },

@@ -59,6 +59,12 @@ if (props.zoom) {
   useEventListener(window, 'scroll', () => {
     open.value = false
   })
+
+  useEventListener(window, 'keydown', (e: KeyboardEvent) => {
+    if (e.key === 'Escape' && open.value) {
+      open.value = false
+    }
+  })
 }
 </script>
 

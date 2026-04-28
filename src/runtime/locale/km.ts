@@ -100,6 +100,11 @@ export default defineLocale<Messages>({
       decrement: 'បន្ថយ',
       increment: 'បង្កើន'
     },
+    listbox: {
+      noData: 'មិនមានទិន្នន័យ',
+      noMatch: 'មិនមានទិន្នន័យដែលត្រូវគ្នាទេ',
+      search: 'ស្វែងរក…'
+    },
     modal: {
       close: 'បិទ'
     },

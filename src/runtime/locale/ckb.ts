@@ -30,7 +30,7 @@ export default defineLocale<Messages>({
       prev: 'پێشتر'
     },
     chatPrompt: {
-      placeholder: 'نامەکەت لێرە بنوسە...'
+      placeholder: 'نامەکەت لێرە بنوسە…'
     },
     chatPromptSubmit: {
       label: 'ناردن'
@@ -100,6 +100,11 @@ export default defineLocale<Messages>({
     inputNumber: {
       decrement: 'کەمکردنەوە',
       increment: 'زیادکردن'
+    },
+    listbox: {
+      noData: 'هیچ داتایەک نییە',
+      noMatch: 'هیچ ئەنجامێک نەدۆزرایەوە',
+      search: 'گەڕان…'
     },
     modal: {
       close: 'داخستن'

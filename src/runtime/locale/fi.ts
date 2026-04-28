@@ -100,6 +100,11 @@ export default defineLocale<Messages>({
       decrement: 'Vähennä',
       increment: 'Kasvata'
     },
+    listbox: {
+      noData: 'Ei tietoja',
+      noMatch: 'Ei vastaavia tietoja',
+      search: 'Hae…'
+    },
     modal: {
       close: 'Sulje'
     },

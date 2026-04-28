@@ -12,6 +12,8 @@ export interface CardProps {
    * @defaultValue 'div'
    */
   as?: any
+  title?: string
+  description?: string
   /**
    * @defaultValue 'outline'
    */
@@ -22,6 +24,8 @@ export interface CardProps {
 
 export interface CardSlots {
   header?(props?: {}): VNode[]
+  title?(props?: {}): VNode[]
+  description?(props?: {}): VNode[]
   default?(props?: {}): VNode[]
   footer?(props?: {}): VNode[]
 }
@@ -47,8 +51,20 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.card || {}) 
 
 <template>
   <Primitive :as="as" data-slot="root" :class="ui.root({ class: [uiProp?.root, props.class] })">
-    <div v-if="!!slots.header" data-slot="header" :class="ui.header({ class: uiProp?.header })">
-      <slot name="header" />
+    <div v-if="!!slots.header || (title || !!slots.title) || (description || !!slots.description)" data-slot="header" :class="ui.header({ class: uiProp?.header })">
+      <slot name="header">
+        <div v-if="title || !!slots.title" data-slot="title" :class="ui.title({ class: uiProp?.title })">
+          <slot name="title">
+            {{ title }}
+          </slot>
+        </div>
+
+        <div v-if="description || !!slots.description" data-slot="description" :class="ui.description({ class: uiProp?.description })">
+          <slot name="description">
+            {{ description }}
+          </slot>
+        </div>
+      </slot>
     </div>
 
     <div v-if="!!slots.default" data-slot="body" :class="ui.body({ class: uiProp?.body })">

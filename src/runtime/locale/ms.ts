@@ -100,6 +100,11 @@ export default defineLocale<Messages>({
       decrement: 'Kurangkan',
       increment: 'Naikkan'
     },
+    listbox: {
+      noData: 'Tiada data',
+      noMatch: 'Tiada data yang sepadan',
+      search: 'Cari…'
+    },
     modal: {
       close: 'Tutup'
     },

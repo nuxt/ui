@@ -100,6 +100,11 @@ export default defineLocale<Messages>({
       decrement: 'Minska',
       increment: 'Öka'
     },
+    listbox: {
+      noData: 'Inga data',
+      noMatch: 'Inga matchande data',
+      search: 'Sök…'
+    },
     modal: {
       close: 'Stäng'
     },

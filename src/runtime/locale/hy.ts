@@ -100,6 +100,11 @@ export default defineLocale<Messages>({
       decrement: 'Պակասեցնել',
       increment: 'Ավելացնել'
     },
+    listbox: {
+      noData: 'Տվյալներ չկան',
+      noMatch: 'Համընկնումներ չեն գտնվել',
+      search: 'Որոնում…'
+    },
     modal: {
       close: 'Փակել'
     },

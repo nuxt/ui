@@ -100,6 +100,11 @@ export default defineLocale<Messages>({
       decrement: 'Zvogëlo',
       increment: 'Rrit'
     },
+    listbox: {
+      noData: 'Nuk ka të dhëna',
+      noMatch: 'Nuk ka të dhëna që përputhen',
+      search: 'Kërko…'
+    },
     modal: {
       close: 'Mbyll'
     },

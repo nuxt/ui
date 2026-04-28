@@ -67,7 +67,28 @@ export default defineNuxtConfig({
   },
 
   routeRules: {
+    // Agent discovery Link headers on the homepage (RFC 8288, RFC 9727)
+    '/': {
+      headers: {
+        Link: [
+          '</sitemap.xml>; rel="sitemap"; type="application/xml"',
+          '</sitemap.md>; rel="describedby"; type="text/markdown"',
+          '</.well-known/api-catalog>; rel="api-catalog"; type="application/linkset+json"',
+          '</.well-known/mcp/server-card.json>; rel="service-desc"; type="application/json"',
+          '</docs>; rel="service-doc"; type="text/html"',
+          '</llms.txt>; rel="describedby"; type="text/plain"',
+          '</llms-full.txt>; rel="describedby"; type="text/plain"',
+          '</>; rel="alternate"; type="text/markdown"'
+        ].join(', '),
+        Vary: 'Accept, User-Agent'
+      }
+    },
     '/docs/**': { headers: { Vary: 'Accept, User-Agent' } },
+    // Our markdown rewrites (see `modules/md-rewrite.ts`) internally route
+    // `/` and `/docs/**` to `/raw/**`, so the `Vary` rules above no longer
+    // match the rewritten path. This rule re-applies it on the actual
+    // served response.
+    '/raw/**': { headers: { Vary: 'Accept, User-Agent' } },
     // v4 redirects - moved to `docs/`
     '/getting-started/**': { redirect: { to: '/docs/getting-started/**', statusCode: 301 }, prerender: false },
     '/components/**': { redirect: { to: '/docs/components/**', statusCode: 301 }, prerender: false },
@@ -197,15 +218,40 @@ export default defineNuxtConfig({
     }],
     prerender: {
       routes: [
+        '/',
         '/docs/getting-started',
+        // Prerender the homepage markdown so Vercel's filesystem check after the
+        // `/` → `/raw/index.md` rewrite (see `modules/md-rewrite.ts`) resolves
+        // to a static file, the same way `/docs/*.md` does.
+        '/raw/index.md',
         '/api/countries.json',
         '/api/phone-codes.json',
         '/api/locales.json',
         '/api/module.json'
-        // '/api/github/pulls.json',
-        // '/api/github/releases.json'
       ],
       crawlLinks: true
+    }
+  },
+
+  vite: {
+    optimizeDeps: {
+      include: [
+        'tailwindcss/colors',
+        'ai',
+        '@ai-sdk/vue',
+        'prettier',
+        'tailwind-variants',
+        '@comark/vue',
+        '@comark/vue/plugins/highlight',
+        'vaul-vue',
+        '@vueuse/integrations/useFuse',
+        '@floating-ui/dom',
+        '@tiptap/vue-3',
+        '@tiptap/suggestion',
+        '@tiptap/pm/state',
+        'shiki-transformer-color-highlight',
+        'json5'
+      ]
     }
   },
 

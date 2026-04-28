@@ -20,7 +20,7 @@ export function useSearch() {
     open.value = true
   }
 
-  const links = computed(() => [!searchTerm.value && {
+  const links = computed(() => [{
     label: 'Ask AI',
     description: 'Ask the AI assistant powered by our custom MCP server for help.',
     icon: 'i-lucide-bot',
@@ -101,28 +101,9 @@ export function useSearch() {
     icon: 'i-simple-icons-github',
     to: 'https://github.com/nuxt/ui/releases',
     target: '_blank'
-  }].filter(link => !!link))
+  }])
 
   const groups = computed(() => [{
-    id: 'ai',
-    label: 'AI',
-    ignoreFilter: true,
-    postFilter: (searchTerm: string, items: any[]) => {
-      if (!searchTerm) {
-        return []
-      }
-
-      return items
-    },
-    items: [{
-      label: 'Ask AI',
-      icon: 'i-lucide-bot',
-      ui: {
-        itemLeadingIcon: 'group-data-highlighted:not-group-data-disabled:text-primary'
-      },
-      onSelect
-    }]
-  }, {
     id: 'framework',
     label: 'Framework',
     items: frameworks.value

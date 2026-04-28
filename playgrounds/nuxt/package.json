@@ -12,9 +12,9 @@
     "@ai-sdk/anthropic": "^3.0.71",
     "@ai-sdk/gateway": "^3.0.104",
     "@ai-sdk/vue": "^3.0.168",
-    "@comark/vue": "^0.2.1",
-    "@iconify-json/lucide": "^1.2.102",
-    "@iconify-json/simple-icons": "^1.2.79",
+    "@comark/vue": "^0.3.1",
+    "@iconify-json/lucide": "^1.2.104",
+    "@iconify-json/simple-icons": "^1.2.80",
     "@internationalized/date": "^3.12.1",
     "@nuxt/content": "^3.13.0",
     "@nuxt/ui": "workspace:*",
@@ -22,7 +22,7 @@
     "@tiptap/extension-text-align": "^3.22.4",
     "ai": "^6.0.168",
     "nuxt": "^4.4.2",
-    "tailwindcss": "^4.2.2",
+    "tailwindcss": "^4.2.4",
     "zod": "^4.3.6"
   },
   "devDependencies": {

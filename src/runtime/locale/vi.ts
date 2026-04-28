@@ -100,6 +100,11 @@ export default defineLocale<Messages>({
       decrement: 'Giảm',
       increment: 'Tăng'
     },
+    listbox: {
+      noData: 'Không có dữ liệu',
+      noMatch: 'Không có kết quả phù hợp',
+      search: 'Tìm kiếm…'
+    },
     modal: {
       close: 'Đóng'
     },

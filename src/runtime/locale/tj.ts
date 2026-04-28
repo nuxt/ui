@@ -100,6 +100,11 @@ export default defineLocale<Messages>({
       decrement: 'Кам кардан',
       increment: 'Зиёд кардан'
     },
+    listbox: {
+      noData: 'Маълумот нест',
+      noMatch: 'Маълумоти мувофиқ ёфт нашуд',
+      search: 'Ҷустуҷӯ…'
+    },
     modal: {
       close: 'Бастан'
     },
