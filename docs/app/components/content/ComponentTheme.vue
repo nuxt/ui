@@ -81,7 +81,7 @@ const themeLink = computed(() => {
   return `https://github.com/nuxt/ui/blob/v4/src/theme/${slug}.ts`
 })
 
-const { data: ast } = await useAsyncData(`component-theme-${camelName}-${hash({ props })}`, async () => {
+const { data: ast } = useAsyncData(`component-theme-${camelName}-${hash({ props })}`, async () => {
   const md = `
 ::code-collapse{class="nuxt-only"}
 
@@ -119,8 +119,8 @@ Some colors in \`compoundVariants\` are omitted for readability. Check out the s
   : ''}
 `
 
-  return parseMarkdown(md)
-}, { watch: [framework] })
+  return cachedParseMarkdown(md)
+}, { lazy: import.meta.client, watch: [framework] })
 </script>
 
 <template>

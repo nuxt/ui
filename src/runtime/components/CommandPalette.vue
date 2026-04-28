@@ -1,6 +1,7 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import type { ListboxRootProps, ListboxRootEmits } from 'reka-ui'
+import type { VNode } from 'vue'
 import type { FuseResult } from 'fuse.js'
 import type { AppConfig } from '@nuxt/schema'
 import type { UseFuseOptions } from '@vueuse/integrations/useFuse'
@@ -59,12 +60,16 @@ export interface CommandPaletteGroup<T extends CommandPaletteItem = CommandPalet
   highlightedIcon?: IconProps['name']
 }
 
-export interface CommandPaletteProps<G extends CommandPaletteGroup<T> = CommandPaletteGroup<any>, T extends CommandPaletteItem = CommandPaletteItem> extends Pick<ListboxRootProps, 'multiple' | 'disabled' | 'modelValue' | 'defaultValue' | 'highlightOnHover' | 'selectionBehavior'>, Pick<UseComponentIconsProps, 'loading' | 'loadingIcon'> {
+export interface CommandPaletteProps<G extends CommandPaletteGroup<T> = CommandPaletteGroup<any>, T extends CommandPaletteItem = CommandPaletteItem> extends Pick<ListboxRootProps, 'multiple' | 'disabled' | 'modelValue' | 'defaultValue' | 'highlightOnHover' | 'selectionBehavior' | 'by'>, Pick<UseComponentIconsProps, 'loading' | 'loadingIcon'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
    */
   as?: any
+  /**
+   * @defaultValue 'md'
+   */
+  size?: CommandPalette['variants']['size']
   /**
    * The icon displayed in the input.
    * @defaultValue appConfig.ui.icons.search
@@ -124,6 +129,11 @@ export interface CommandPaletteProps<G extends CommandPaletteGroup<T> = CommandP
    * @IconifyIcon
    */
   backIcon?: IconProps['name']
+  /**
+   * Configure the input or hide it with `false`.
+   * @defaultValue true
+   */
+  input?: boolean | Omit<InputProps, 'modelValue' | 'defaultValue'>
   groups?: G[]
   /**
    * Options for [useFuse](https://vueuse.org/integrations/useFuse).
@@ -150,11 +160,16 @@ export interface CommandPaletteProps<G extends CommandPaletteGroup<T> = CommandP
      */
     overscan?: number
     /**
-     * Estimated size (in px) of each item
+     * Estimated size (in px) of each item, or a function that returns the size for a given index
      * @defaultValue 32
      */
-    estimateSize?: number
+    estimateSize?: number | ((index: number) => number)
   }
+  /**
+   * When `items` is an array of objects, select the field to use as the value instead of the object itself.
+   * @defaultValue undefined
+   */
+  valueKey?: GetItemKeys<T>
   /**
    * The key used to get the label from the item.
    * @defaultValue 'label'
@@ -171,6 +186,13 @@ export interface CommandPaletteProps<G extends CommandPaletteGroup<T> = CommandP
    * @defaultValue false
    */
   preserveGroupOrder?: boolean
+  /**
+   * Delay (in milliseconds) before the search term is passed to Fuse (debounced).
+   * Useful when indexing large datasets where fuzzy search becomes the bottleneck — the input stays responsive while Fuse and the result pipeline only re-run after typing settles.
+   * Set to `0` (the default) to disable.
+   * @defaultValue 0
+   */
+  searchDelay?: number
   class?: any
   ui?: CommandPalette['slots']
 }
@@ -179,29 +201,35 @@ export type CommandPaletteEmits<T extends CommandPaletteItem = CommandPaletteIte
   'update:open': [value: boolean]
 }
 
-type SlotProps<T> = (props: { item: T, index: number, ui: CommandPalette['ui'] }) => any
+type SlotProps<T> = (props: { item: T, index: number, ui: CommandPalette['ui'] }) => VNode[]
+type GroupSlotProps<T extends CommandPaletteItem = CommandPaletteItem, G extends CommandPaletteGroup<T> = CommandPaletteGroup<T>> = (props: { group: G, label: string, ui: CommandPalette['ui'] }) => VNode[]
 
-export type CommandPaletteSlots<G extends CommandPaletteGroup<T> = CommandPaletteGroup<any>, T extends CommandPaletteItem = CommandPaletteItem> = {
-  'empty'(props: { searchTerm?: string }): any
-  'footer'(props: { ui: CommandPalette['ui'] }): any
-  'back'(props: { ui: CommandPalette['ui'] }): any
-  'close'(props: { ui: CommandPalette['ui'] }): any
-  'item': SlotProps<T>
-  'item-leading': SlotProps<T>
-  'item-label': SlotProps<T>
-  'item-description': SlotProps<T>
-  'item-trailing': SlotProps<T>
-} & Record<string, SlotProps<G>> & Record<string, SlotProps<T>>
+type GroupSlots<T extends CommandPaletteItem = CommandPaletteItem, G extends CommandPaletteGroup<T> = CommandPaletteGroup<T>> = {
+  'group-label'?: GroupSlotProps<T, G>
+} & Record<`${string}-group-label`, GroupSlotProps<T, G>>
+
+export type CommandPaletteSlots<T extends CommandPaletteItem = CommandPaletteItem, G extends CommandPaletteGroup<T> = CommandPaletteGroup<T>> = {
+  'empty'?(props: { searchTerm: string }): VNode[]
+  'footer'?(props: { ui: CommandPalette['ui'] }): VNode[]
+  'back'?(props: { ui: CommandPalette['ui'] }): VNode[]
+  'close'?(props: { ui: CommandPalette['ui'] }): VNode[]
+  'item'?: SlotProps<T>
+  'item-leading'?: SlotProps<T>
+  'item-label'?: SlotProps<T>
+  'item-description'?: SlotProps<T>
+  'item-trailing'?: SlotProps<T>
+} & Record<string, SlotProps<T>> & GroupSlots<T, G>
 
 </script>
 
 <script setup lang="ts" generic="G extends CommandPaletteGroup<T>, T extends CommandPaletteItem">
 import { computed, ref, useTemplateRef, toRef } from 'vue'
-import { ListboxRoot, ListboxFilter, ListboxContent, ListboxGroup, ListboxGroupLabel, ListboxVirtualizer, ListboxItem, ListboxItemIndicator, useForwardProps, useForwardPropsEmits } from 'reka-ui'
+import { ListboxRoot, ListboxFilter, ListboxContent, ListboxGroup, ListboxGroupLabel, ListboxVirtualizer, ListboxItem, ListboxItemIndicator, useForwardPropsEmits } from 'reka-ui'
 import { defu } from 'defu'
-import { reactivePick, createReusableTemplate, refThrottled } from '@vueuse/core'
+import { reactivePick, createReusableTemplate, refDebounced, refThrottled } from '@vueuse/core'
 import { useFuse } from '@vueuse/integrations/useFuse'
 import { useAppConfig } from '#imports'
+import { useComponentUI } from '../composables/useComponentUI'
 import { useLocale } from '../composables/useLocale'
 import { omit, get } from '../utils'
 import { highlight } from '../utils/fuse'
@@ -220,30 +248,31 @@ import UKbd from './Kbd.vue'
 defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<CommandPaletteProps<G, T>>(), {
-  modelValue: '',
   labelKey: 'label',
   descriptionKey: 'description',
+  input: true,
   autofocus: true,
   back: true,
   preserveGroupOrder: false,
   virtualize: false,
-  highlightOnHover: true
+  highlightOnHover: true,
+  searchDelay: 0
 })
 const emits = defineEmits<CommandPaletteEmits<T>>()
-const slots = defineSlots<CommandPaletteSlots<G, T>>()
+const slots = defineSlots<CommandPaletteSlots<T, G>>()
 
 const searchTerm = defineModel<string>('searchTerm', { default: '' })
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as CommandPalette['AppConfig']
+const uiProp = useComponentUI('commandPalette', props)
 
-const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'disabled', 'multiple', 'modelValue', 'defaultValue', 'highlightOnHover'), emits)
-const inputProps = useForwardProps(reactivePick(props, 'loading'))
+const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'disabled', 'multiple', 'modelValue', 'defaultValue', 'highlightOnHover', 'by'), emits)
 const virtualizerProps = toRef(() => {
   if (!props.virtualize) return false
 
   return defu(typeof props.virtualize === 'boolean' ? {} : props.virtualize, {
-    estimateSize: getEstimateSize(filteredItems.value, 'md', props.descriptionKey as string)
+    estimateSize: getEstimateSize(filteredItems.value, 'md', props.descriptionKey as string, !!slots['item-description'])
   })
 })
 
@@ -265,6 +294,7 @@ const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: C
 })
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.commandPalette || {}) })({
+  size: props.size,
   virtualize: !!props.virtualize
 }))
 
@@ -295,7 +325,12 @@ const items = computed(() => groups.value?.filter((group) => {
   return true
 })?.flatMap(group => group.items?.map(item => ({ ...item, group: group.id })) || []) || [])
 
-const { results: fuseResults } = useFuse<typeof items.value[number]>(searchTerm, items, fuse)
+// Opt-in debounce for the value piped into Fuse. Default `0` short-circuits inside `refDebounced`
+// so generic uses (menus, pickers) stay effectively instant, while large consumers (e.g. ContentSearch)
+// can opt in to avoid running fuzzy search on every keystroke.
+const fuseSearchTerm = refDebounced(searchTerm, () => props.searchDelay)
+
+const { results: fuseResults } = useFuse<typeof items.value[number]>(fuseSearchTerm, items, fuse)
 
 const throttledFuseResults = refThrottled(fuseResults, 16, true)
 
@@ -303,7 +338,7 @@ function processGroupItems(group: G, items: (T & { matches?: FuseResult<T>['matc
   let processedItems = items
 
   if (group?.postFilter && typeof group.postFilter === 'function') {
-    processedItems = group.postFilter(searchTerm.value, processedItems)
+    processedItems = group.postFilter(fuseSearchTerm.value, processedItems)
   }
 
   return {
@@ -311,8 +346,8 @@ function processGroupItems(group: G, items: (T & { matches?: FuseResult<T>['matc
     items: processedItems.slice(0, fuse.value.resultLimit).map((item) => {
       return {
         ...item,
-        labelHtml: highlight<T>(item, searchTerm.value, props.labelKey),
-        suffixHtml: highlight<T>(item, searchTerm.value, undefined, [props.labelKey])
+        labelHtml: highlight<T>(item, fuseSearchTerm.value, props.labelKey),
+        suffixHtml: highlight<T>(item, fuseSearchTerm.value, undefined, [props.labelKey])
       }
     })
   }
@@ -438,100 +473,103 @@ function onSelect(e: Event, item: T) {
 <!-- eslint-disable vue/no-v-html -->
 <template>
   <DefineItemTemplate v-slot="{ item, index, group }">
-    <ListboxItem
-      :value="omit(item, ['matches' as any, 'group' as any, 'onSelect', 'labelHtml', 'suffixHtml', 'children'])"
-      :disabled="item.disabled"
-      as-child
-      @select="onSelect($event, item as T)"
-    >
-      <ULink v-slot="{ active, ...slotProps }" v-bind="pickLinkProps(item)" custom>
-        <ULinkBase v-bind="slotProps" data-slot="item" :class="ui.item({ class: [props.ui?.item, item.ui?.item, item.class], active: active || item.active })">
-          <slot :name="((item.slot || group?.slot || 'item') as keyof CommandPaletteSlots<G, T>)" :item="(item as any)" :index="index" :ui="ui">
-            <slot :name="((item.slot ? `${item.slot}-leading` : group?.slot ? `${group.slot}-leading` : `item-leading`) as keyof CommandPaletteSlots<G, T>)" :item="(item as any)" :index="index" :ui="ui">
-              <UIcon v-if="item.loading" :name="loadingIcon || appConfig.ui.icons.loading" data-slot="itemLeadingIcon" :class="ui.itemLeadingIcon({ class: [props.ui?.itemLeadingIcon, item.ui?.itemLeadingIcon], loading: true })" />
-              <UIcon v-else-if="item.icon" :name="item.icon" data-slot="itemLeadingIcon" :class="ui.itemLeadingIcon({ class: [props.ui?.itemLeadingIcon, item.ui?.itemLeadingIcon], active: active || item.active })" />
-              <UAvatar v-else-if="item.avatar" :size="((item.ui?.itemLeadingAvatarSize || props.ui?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" data-slot="itemLeadingAvatar" :class="ui.itemLeadingAvatar({ class: [props.ui?.itemLeadingAvatar, item.ui?.itemLeadingAvatar], active: active || item.active })" />
+    <ULink v-slot="{ active, ...slotProps }" v-bind="pickLinkProps(item)" custom>
+      <ListboxItem
+        :value="props.valueKey ? get(item, props.valueKey as string) : omit(item, ['matches' as any, 'group' as any, 'onSelect', 'labelHtml', 'suffixHtml', 'children'])"
+        :disabled="item.disabled"
+        as-child
+        @select="onSelect($event, item as T)"
+      >
+        <ULinkBase v-bind="slotProps" data-slot="item" :class="ui.item({ class: [uiProp?.item, item.ui?.item, item.class], active: active || item.active })">
+          <slot :name="((item.slot || group?.slot || 'item') as keyof CommandPaletteSlots<T>)" :item="(item as any)" :index="index" :ui="ui">
+            <slot :name="((item.slot ? `${item.slot}-leading` : group?.slot ? `${group.slot}-leading` : `item-leading`) as keyof CommandPaletteSlots<T>)" :item="(item as any)" :index="index" :ui="ui">
+              <UIcon v-if="item.loading" :name="loadingIcon || appConfig.ui.icons.loading" data-slot="itemLeadingIcon" :class="ui.itemLeadingIcon({ class: [uiProp?.itemLeadingIcon, item.ui?.itemLeadingIcon], loading: true })" />
+              <UIcon v-else-if="item.icon" :name="item.icon" data-slot="itemLeadingIcon" :class="ui.itemLeadingIcon({ class: [uiProp?.itemLeadingIcon, item.ui?.itemLeadingIcon], active: active || item.active })" />
+              <UAvatar v-else-if="item.avatar" :size="((item.ui?.itemLeadingAvatarSize || uiProp?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" data-slot="itemLeadingAvatar" :class="ui.itemLeadingAvatar({ class: [uiProp?.itemLeadingAvatar, item.ui?.itemLeadingAvatar], active: active || item.active })" />
               <UChip
                 v-else-if="item.chip"
-                :size="((item.ui?.itemLeadingChipSize || props.ui?.itemLeadingChipSize || ui.itemLeadingChipSize()) as ChipProps['size'])"
+                :size="((item.ui?.itemLeadingChipSize || uiProp?.itemLeadingChipSize || ui.itemLeadingChipSize()) as ChipProps['size'])"
                 inset
                 standalone
                 v-bind="item.chip"
                 data-slot="itemLeadingChip"
-                :class="ui.itemLeadingChip({ class: [props.ui?.itemLeadingChip, item.ui?.itemLeadingChip], active: active || item.active })"
+                :class="ui.itemLeadingChip({ class: [uiProp?.itemLeadingChip, item.ui?.itemLeadingChip], active: active || item.active })"
               />
             </slot>
 
-            <span v-if="(item.prefix || (item.labelHtml || get(item, props.labelKey as string)) || (item.suffixHtml || item.suffix) || !!slots[(item.slot ? `${item.slot}-label` : group?.slot ? `${group.slot}-label` : `item-label`) as keyof CommandPaletteSlots<G, T>]) || (get(item, props.descriptionKey as string) || !!slots[(item.slot ? `${item.slot}-description` : group?.slot ? `${group.slot}-description` : `item-description`) as keyof CommandPaletteSlots<G, T>])" data-slot="itemWrapper" :class="ui.itemWrapper({ class: [props.ui?.itemWrapper, item.ui?.itemWrapper] })">
-              <span data-slot="itemLabel" :class="ui.itemLabel({ class: [props.ui?.itemLabel, item.ui?.itemLabel], active: active || item.active })">
-                <slot :name="((item.slot ? `${item.slot}-label` : group?.slot ? `${group.slot}-label` : `item-label`) as keyof CommandPaletteSlots<G, T>)" :item="(item as any)" :index="index" :ui="ui">
-                  <span v-if="item.prefix" data-slot="itemLabelPrefix" :class="ui.itemLabelPrefix({ class: [props.ui?.itemLabelPrefix, item.ui?.itemLabelPrefix] })">{{ item.prefix }}</span>
+            <span v-if="(item.prefix || (item.labelHtml || get(item, props.labelKey as string)) || (item.suffixHtml || item.suffix) || !!slots[(item.slot ? `${item.slot}-label` : group?.slot ? `${group.slot}-label` : `item-label`) as keyof CommandPaletteSlots<T>]) || (get(item, props.descriptionKey as string) || !!slots[(item.slot ? `${item.slot}-description` : group?.slot ? `${group.slot}-description` : `item-description`) as keyof CommandPaletteSlots<T>])" data-slot="itemWrapper" :class="ui.itemWrapper({ class: [uiProp?.itemWrapper, item.ui?.itemWrapper] })">
+              <span data-slot="itemLabel" :class="ui.itemLabel({ class: [uiProp?.itemLabel, item.ui?.itemLabel], active: active || item.active })">
+                <slot :name="((item.slot ? `${item.slot}-label` : group?.slot ? `${group.slot}-label` : `item-label`) as keyof CommandPaletteSlots<T>)" :item="(item as any)" :index="index" :ui="ui">
+                  <span v-if="item.prefix" data-slot="itemLabelPrefix" :class="ui.itemLabelPrefix({ class: [uiProp?.itemLabelPrefix, item.ui?.itemLabelPrefix] })">{{ item.prefix }}</span>
 
-                  <span v-if="item.labelHtml" data-slot="itemLabelBase" :class="ui.itemLabelBase({ class: [props.ui?.itemLabelBase, item.ui?.itemLabelBase], active: active || item.active })" v-html="item.labelHtml" />
-                  <span v-else data-slot="itemLabelBase" :class="ui.itemLabelBase({ class: [props.ui?.itemLabelBase, item.ui?.itemLabelBase], active: active || item.active })">{{ get(item, props.labelKey as string) }}</span>
+                  <span v-if="item.labelHtml" data-slot="itemLabelBase" :class="ui.itemLabelBase({ class: [uiProp?.itemLabelBase, item.ui?.itemLabelBase], active: active || item.active })" v-html="item.labelHtml" />
+                  <span v-else data-slot="itemLabelBase" :class="ui.itemLabelBase({ class: [uiProp?.itemLabelBase, item.ui?.itemLabelBase], active: active || item.active })">{{ get(item, props.labelKey as string) }}</span>
 
-                  <span v-if="item.suffixHtml" data-slot="itemLabelSuffix" :class="ui.itemLabelSuffix({ class: [props.ui?.itemLabelSuffix, item.ui?.itemLabelSuffix], active: active || item.active })" v-html="item.suffixHtml" />
-                  <span v-else-if="item.suffix" data-slot="itemLabelSuffix" :class="ui.itemLabelSuffix({ class: [props.ui?.itemLabelSuffix, item.ui?.itemLabelSuffix], active: active || item.active })">{{ item.suffix }}</span>
+                  <span v-if="item.suffixHtml" data-slot="itemLabelSuffix" :class="ui.itemLabelSuffix({ class: [uiProp?.itemLabelSuffix, item.ui?.itemLabelSuffix], active: active || item.active })" v-html="item.suffixHtml" />
+                  <span v-else-if="item.suffix" data-slot="itemLabelSuffix" :class="ui.itemLabelSuffix({ class: [uiProp?.itemLabelSuffix, item.ui?.itemLabelSuffix], active: active || item.active })">{{ item.suffix }}</span>
                 </slot>
               </span>
 
-              <span v-if="get(item, props.descriptionKey as string)" data-slot="itemDescription" :class="ui.itemDescription({ class: [props.ui?.itemDescription, item.ui?.itemDescription] })">
-                <slot :name="((item.slot ? `${item.slot}-description` : group?.slot ? `${group.slot}-description` : `item-description`) as keyof CommandPaletteSlots<G, T>)" :item="(item as any)" :index="index" :ui="ui">
+              <span v-if="get(item, props.descriptionKey as string) || !!slots[(item.slot ? `${item.slot}-description` : group?.slot ? `${group.slot}-description` : `item-description`) as keyof CommandPaletteSlots<T>]" data-slot="itemDescription" :class="ui.itemDescription({ class: [uiProp?.itemDescription, item.ui?.itemDescription] })">
+                <slot :name="((item.slot ? `${item.slot}-description` : group?.slot ? `${group.slot}-description` : `item-description`) as keyof CommandPaletteSlots<T>)" :item="(item as any)" :index="index" :ui="ui">
                   {{ get(item, props.descriptionKey as string) }}
                 </slot>
               </span>
             </span>
 
-            <span data-slot="itemTrailing" :class="ui.itemTrailing({ class: [props.ui?.itemTrailing, item.ui?.itemTrailing] })">
-              <slot :name="((item.slot ? `${item.slot}-trailing` : group?.slot ? `${group.slot}-trailing` : `item-trailing`) as keyof CommandPaletteSlots<G, T>)" :item="(item as any)" :index="index" :ui="ui">
+            <span data-slot="itemTrailing" :class="ui.itemTrailing({ class: [uiProp?.itemTrailing, item.ui?.itemTrailing] })">
+              <slot :name="((item.slot ? `${item.slot}-trailing` : group?.slot ? `${group.slot}-trailing` : `item-trailing`) as keyof CommandPaletteSlots<T>)" :item="(item as any)" :index="index" :ui="ui">
                 <UIcon
                   v-if="item.children && item.children.length > 0"
                   :name="childrenIcon || appConfig.ui.icons.chevronRight"
                   data-slot="itemTrailingIcon"
-                  :class="ui.itemTrailingIcon({ class: [props.ui?.itemTrailingIcon, item.ui?.itemTrailingIcon] })"
+                  :class="ui.itemTrailingIcon({ class: [uiProp?.itemTrailingIcon, item.ui?.itemTrailingIcon] })"
                 />
 
-                <span v-else-if="item.kbds?.length" data-slot="itemTrailingKbds" :class="ui.itemTrailingKbds({ class: [props.ui?.itemTrailingKbds, item.ui?.itemTrailingKbds] })">
-                  <UKbd v-for="(kbd, kbdIndex) in item.kbds" :key="kbdIndex" :size="((item.ui?.itemTrailingKbdsSize || props.ui?.itemTrailingKbdsSize || ui.itemTrailingKbdsSize()) as KbdProps['size'])" v-bind="typeof kbd === 'string' ? { value: kbd } : kbd" />
+                <span v-else-if="item.kbds?.length" data-slot="itemTrailingKbds" :class="ui.itemTrailingKbds({ class: [uiProp?.itemTrailingKbds, item.ui?.itemTrailingKbds] })">
+                  <UKbd v-for="(kbd, kbdIndex) in item.kbds" :key="kbdIndex" :size="((item.ui?.itemTrailingKbdsSize || uiProp?.itemTrailingKbdsSize || ui.itemTrailingKbdsSize()) as KbdProps['size'])" v-bind="typeof kbd === 'string' ? { value: kbd } : kbd" />
                 </span>
 
-                <UIcon v-else-if="group?.highlightedIcon" :name="group.highlightedIcon" data-slot="itemTrailingHighlightedIcon" :class="ui.itemTrailingHighlightedIcon({ class: [props.ui?.itemTrailingHighlightedIcon, item.ui?.itemTrailingHighlightedIcon] })" />
+                <UIcon v-else-if="group?.highlightedIcon" :name="group.highlightedIcon" data-slot="itemTrailingHighlightedIcon" :class="ui.itemTrailingHighlightedIcon({ class: [uiProp?.itemTrailingHighlightedIcon, item.ui?.itemTrailingHighlightedIcon] })" />
               </slot>
 
               <ListboxItemIndicator v-if="!item.children?.length" as-child>
-                <UIcon :name="selectedIcon || appConfig.ui.icons.check" data-slot="itemTrailingIcon" :class="ui.itemTrailingIcon({ class: [props.ui?.itemTrailingIcon, item.ui?.itemTrailingIcon] })" />
+                <UIcon :name="selectedIcon || appConfig.ui.icons.check" data-slot="itemTrailingIcon" :class="ui.itemTrailingIcon({ class: [uiProp?.itemTrailingIcon, item.ui?.itemTrailingIcon] })" />
               </ListboxItemIndicator>
             </span>
           </slot>
         </ULinkBase>
-      </ULink>
-    </ListboxItem>
+      </ListboxItem>
+    </ULink>
   </DefineItemTemplate>
 
-  <ListboxRoot v-bind="{ ...rootProps, ...$attrs }" ref="rootRef" :selection-behavior="selectionBehavior" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <ListboxFilter v-model="searchTerm" as-child>
+  <ListboxRoot v-bind="{ ...rootProps, ...$attrs }" ref="rootRef" :selection-behavior="selectionBehavior" data-slot="root" :class="ui.root({ class: [uiProp?.root, props.class] })">
+    <ListboxFilter v-if="input" v-model="searchTerm" as-child>
       <UInput
-        :placeholder="placeholder"
         variant="none"
+        :size="size"
+        v-bind="typeof props.input === 'object' ? props.input : {}"
+        :placeholder="placeholder"
         :autofocus="autofocus"
-        v-bind="inputProps"
+        :loading="loading"
         :loading-icon="loadingIcon"
         :trailing-icon="trailingIcon"
         :icon="icon || appConfig.ui.icons.search"
         data-slot="input"
-        :class="ui.input({ class: props.ui?.input })"
+        :class="ui.input({ class: uiProp?.input })"
         @keydown.backspace="onBackspace"
       >
         <template v-if="history?.length && (back || !!slots.back)" #leading>
           <slot name="back" :ui="ui">
             <UButton
+              :size="size"
               :icon="backIcon || appConfig.ui.icons.arrowLeft"
               color="neutral"
               variant="link"
               :aria-label="t('commandPalette.back')"
               v-bind="(typeof back === 'object' ? back : {})"
               data-slot="back"
-              :class="ui.back({ class: props.ui?.back })"
+              :class="ui.back({ class: uiProp?.back })"
               @click="navigateBack"
             />
           </slot>
@@ -541,13 +579,14 @@ function onSelect(e: Event, item: T) {
           <slot name="close" :ui="ui">
             <UButton
               v-if="close"
+              :size="size"
               :icon="closeIcon || appConfig.ui.icons.close"
               color="neutral"
               variant="ghost"
               :aria-label="t('commandPalette.close')"
               v-bind="(typeof close === 'object' ? close : {})"
               data-slot="close"
-              :class="ui.close({ class: props.ui?.close })"
+              :class="ui.close({ class: uiProp?.close })"
               @click="emits('update:open', false)"
             />
           </slot>
@@ -555,8 +594,8 @@ function onSelect(e: Event, item: T) {
       </UInput>
     </ListboxFilter>
 
-    <ListboxContent data-slot="content" :class="ui.content({ class: props.ui?.content })">
-      <div v-if="filteredGroups?.length" role="presentation" data-slot="viewport" :class="ui.viewport({ class: props.ui?.viewport })">
+    <ListboxContent data-slot="content" :class="ui.content({ class: uiProp?.content })">
+      <div v-if="filteredGroups?.length" role="presentation" data-slot="viewport" :class="ui.viewport({ class: uiProp?.viewport })">
         <ListboxVirtualizer
           v-if="!!virtualize"
           v-slot="{ option: item, virtualItem }"
@@ -568,9 +607,11 @@ function onSelect(e: Event, item: T) {
         </ListboxVirtualizer>
 
         <template v-else>
-          <ListboxGroup v-for="group in filteredGroups" :key="`group-${group.id}`" data-slot="group" :class="ui.group({ class: props.ui?.group })">
-            <ListboxGroupLabel v-if="get(group, props.labelKey as string)" data-slot="label" :class="ui.label({ class: props.ui?.label })">
-              {{ get(group, props.labelKey as string) }}
+          <ListboxGroup v-for="group in filteredGroups" :key="`group-${group.id}`" data-slot="group" :class="ui.group({ class: uiProp?.group })">
+            <ListboxGroupLabel v-if="get(group, props.labelKey as string) || !!slots[(group.slot ? `${group.slot}-group-label` : 'group-label') as keyof CommandPaletteSlots<T, G>]" data-slot="label" :class="ui.label({ class: uiProp?.label })">
+              <slot :name="((group.slot ? `${group.slot}-group-label` : 'group-label') as keyof GroupSlots<T, G>)" :group="group" :label="get(group, props.labelKey as string)" :ui="ui">
+                {{ get(group, props.labelKey as string) }}
+              </slot>
             </ListboxGroupLabel>
 
             <ReuseItemTemplate
@@ -584,14 +625,14 @@ function onSelect(e: Event, item: T) {
         </template>
       </div>
 
-      <div v-else data-slot="empty" :class="ui.empty({ class: props.ui?.empty })">
+      <div v-else data-slot="empty" :class="ui.empty({ class: uiProp?.empty })">
         <slot name="empty" :search-term="searchTerm">
           {{ searchTerm ? t('commandPalette.noMatch', { searchTerm }) : t('commandPalette.noData') }}
         </slot>
       </div>
     </ListboxContent>
 
-    <div v-if="!!slots.footer" data-slot="footer" :class="ui.footer({ class: props.ui?.footer })">
+    <div v-if="!!slots.footer" data-slot="footer" :class="ui.footer({ class: uiProp?.footer })">
       <slot name="footer" :ui="ui" />
     </div>
   </ListboxRoot>

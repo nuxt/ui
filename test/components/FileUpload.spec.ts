@@ -1,11 +1,10 @@
 import { describe, it, expect, vi, test } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { renderEach } from '../component-render'
 import { mount } from '@vue/test-utils'
 import FileUpload from '../../src/runtime/components/FileUpload.vue'
-import type { FileUploadProps, FileUploadSlots } from '../../src/runtime/components/FileUpload.vue'
 import type { FormInputEvents } from '../../src/module'
-import ComponentRender from '../component-render'
 import { renderForm } from '../utils/form'
 import theme from '#build/ui/file-upload'
 
@@ -41,7 +40,7 @@ describe('FileUpload', () => {
 
   const props = { modelValue }
 
-  it.each([
+  renderEach(FileUpload, [
     // Props
     ['with modelValue', { props }],
     ['with id', { props: { id: 'id' } }],
@@ -64,6 +63,7 @@ describe('FileUpload', () => {
     ['without dropzone', { props: { dropzone: false } }],
     ['without interactive', { props: { interactive: false } }],
     ['without preview', { props: { ...props, preview: false } }],
+    ['without preview with multiple', { props: { ...props, preview: false, multiple: true } }],
     ['with required', { props: { required: true } }],
     ['with disabled', { props: { disabled: true } }],
     ['with fileIcon', { props: { ...props, fileIcon: 'i-lucide-house' } }],
@@ -87,10 +87,7 @@ describe('FileUpload', () => {
     ['with file-name slot', { props, slots: { 'file-name': () => 'File name slot' } }],
     ['with file-size slot', { props, slots: { 'file-size': () => 'File size slot' } }],
     ['with file-trailing slot', { props, slots: { 'file-trailing': () => 'File trailing slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: FileUploadProps, slots?: Partial<FileUploadSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, FileUpload)
-    expect(html).toMatchSnapshot()
-  })
+  ])
 
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(FileUpload, {
@@ -107,6 +104,25 @@ describe('FileUpload', () => {
     expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 
+  it('reactively changes multiple and accept attributes', async () => {
+    const wrapper = await mountSuspended(FileUpload, {
+      props: {
+        multiple: false,
+        accept: 'image/*'
+      }
+    })
+
+    const input = wrapper.find('input[type="file"]')
+
+    expect(input.attributes('accept')).toBe('image/*')
+    expect(input.attributes('multiple')).toBeUndefined()
+
+    await wrapper.setProps({ multiple: true, accept: 'application/pdf' })
+
+    expect(input.attributes('accept')).toBe('application/pdf')
+    expect(input.attributes('multiple')).toBe('')
+  })
+
   describe('emits', () => {
     test('update:modelValue event', async () => {
       const wrapper = mount(FileUpload)
@@ -115,6 +131,12 @@ describe('FileUpload', () => {
       const file2 = new File(['bar'], 'file2.txt', { type: 'text/plain' })
       await setFilesOnInput(input, [file1, file2])
       expect(wrapper.emitted('update:modelValue')).toBeTruthy()
+    })
+
+    test('update:modelValue emits null when removing a single file', async () => {
+      const wrapper = mount(FileUpload, { props })
+      await wrapper.find('button').trigger('click')
+      expect(wrapper.emitted('update:modelValue')?.at(-1)?.[0]).toBeNull()
     })
 
     test('change event', async () => {

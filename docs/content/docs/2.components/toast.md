@@ -324,6 +324,39 @@ name: 'toast-example'
 In this example, we use the `AppConfig` to configure the `expand` prop of the `Toaster` component globally.
 ::
 
+### Deduplicated toasts :badge{label="4.5+" class="align-text-top"}
+
+When calling `toast.add` with an `id` that already exists, the existing toast will pulse instead of creating a duplicate.
+
+::component-example
+---
+collapse: true
+name: 'toast-duplicate-example'
+---
+::
+
+### With callback
+
+Pass an `onUpdateOpen` field to execute a callback when the toast is closed (either by expiration or user dismissal).
+
+::component-example
+---
+collapse: true
+name: 'toast-callback-example'
+---
+::
+
+### With HTML content
+
+Use the [`h()` render function](https://vuejs.org/api/render-function.html#h) in the `title` or `description` fields to render HTML elements or Vue components with custom styling.
+
+::component-example
+---
+collapse: true
+name: 'toast-html-example'
+---
+::
+
 ## API
 
 ### Props

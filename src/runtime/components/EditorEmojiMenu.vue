@@ -16,7 +16,11 @@ export interface EditorEmojiMenuItem {
   [key: string]: any
 }
 
-export interface EditorEmojiMenuProps<T extends EditorEmojiMenuItem = EditorEmojiMenuItem> extends Partial<Pick<EditorMenuOptions<T>, 'editor' | 'char' | 'pluginKey' | 'filterFields' | 'limit' | 'options' | 'appendTo'>> {
+export interface EditorEmojiMenuProps<T extends EditorEmojiMenuItem = EditorEmojiMenuItem> extends Partial<Pick<EditorMenuOptions<T>, 'editor' | 'char' | 'pluginKey' | 'filterFields' | 'limit' | 'options' | 'suggestion' | 'appendTo'>> {
+  /**
+   * @defaultValue 'md'
+   */
+  size?: EditorEmojiMenu['variants']['size']
   items?: T[] | T[][]
   class?: any
   ui?: EditorEmojiMenu['slots']
@@ -39,8 +43,9 @@ const props = withDefaults(defineProps<EditorEmojiMenuProps<T>>(), {
 
 const appConfig = useAppConfig() as EditorEmojiMenu['AppConfig']
 
-// eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.editorEmojiMenu || {}) })())
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.editorEmojiMenu || {}) })({
+  size: props.size
+}))
 
 let menu: ReturnType<typeof useEditorMenu> | null = null
 
@@ -59,6 +64,7 @@ onMounted(async () => {
     filterFields: props.filterFields,
     limit: props.limit,
     options: props.options,
+    suggestion: props.suggestion,
     appendTo: props.appendTo,
     ui,
     onSelect: (editor, range, item) => {

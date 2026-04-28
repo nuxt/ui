@@ -1,7 +1,10 @@
 <script setup lang="ts">
-import { Chat } from '@ai-sdk/vue'
+import { isTextUIPart } from 'ai'
 import type { UIMessage } from 'ai'
-import { getTextFromMessage } from '@nuxt/ui/utils/ai'
+import { Chat } from '@ai-sdk/vue'
+import { isPartStreaming } from '@nuxt/ui/utils/ai'
+import { Comark } from '@comark/vue'
+import highlight from '@comark/vue/plugins/highlight'
 
 const messages: UIMessage[] = []
 const input = ref('')
@@ -38,6 +41,8 @@ const chat = new Chat({
 })
 
 function onSubmit() {
+  if (!input.value.trim()) return
+
   chat.sendMessage({ text: input.value })
 
   input.value = ''
@@ -48,38 +53,65 @@ function onClose(e: Event) {
 
   ai.value = false
 }
+
+const ui = {
+  prose: {
+    p: { base: 'my-2 leading-6' },
+    li: { base: 'my-0.5 leading-6' },
+    ul: { base: 'my-2' },
+    ol: { base: 'my-2' },
+    h1: { base: 'text-xl my-2' },
+    h2: { base: 'text-lg my-2' },
+    h3: { base: 'text-base my-2' },
+    h4: { base: 'text-sm my-2' },
+    pre: { root: 'my-2' },
+    table: { root: 'my-2' },
+    hr: { base: 'my-2' }
+  }
+}
 </script>
 
 <template>
   <UContentSearch v-model:search-term="searchTerm" open :groups="groups">
     <template v-if="ai" #content>
-      <UChatPalette>
-        <UChatMessages
-          :messages="chat.messages"
-          :status="chat.status"
-          :user="{ side: 'left', variant: 'naked', avatar: { src: 'https://github.com/benjamincanac.png' } }"
-          :assistant="{ icon: 'i-lucide-bot' }"
-        >
-          <template #content="{ message }">
-            <MDC
-              :value="getTextFromMessage(message)"
-              :cache-key="message.id"
-              class="[&_.my-5]:my-2.5 *:first:!mt-0 *:last:!mb-0 [&_.leading-7]:!leading-6"
+      <UTheme :ui="ui">
+        <UChatPalette>
+          <UChatMessages
+            :messages="chat.messages"
+            :status="chat.status"
+            :user="{ side: 'left', variant: 'naked', avatar: { src: 'https://github.com/benjamincanac.png', loading: 'lazy' as const } }"
+            :assistant="{ icon: 'i-lucide-bot' }"
+          >
+            <template #content="{ message }">
+              <template v-for="(part, index) in message.parts" :key="`${message.id}-${part.type}-${index}`">
+                <template v-if="isTextUIPart(part)">
+                  <Comark
+                    v-if="message.role === 'assistant'"
+                    :markdown="part.text"
+                    :streaming="isPartStreaming(part)"
+                    :plugins="[highlight()]"
+                    class="*:first:mt-0 *:last:mb-0"
+                  />
+                  <p v-else-if="message.role === 'user'" class="whitespace-pre-wrap leading-6">
+                    {{ part.text }}
+                  </p>
+                </template>
+              </template>
+            </template>
+          </UChatMessages>
+
+          <template #prompt>
+            <UChatPrompt
+              v-model="input"
+              icon="i-lucide-search"
+              variant="naked"
+              :error="chat.error"
+              @submit="onSubmit"
+              @close="onClose"
             />
           </template>
-        </UChatMessages>
-
-        <template #prompt>
-          <UChatPrompt
-            v-model="input"
-            icon="i-lucide-search"
-            variant="naked"
-            :error="chat.error"
-            @submit="onSubmit"
-            @close="onClose"
-          />
-        </template>
-      </UChatPalette>
+        </UChatPalette>
+      </UTheme>
     </template>
   </UContentSearch>
 </template>

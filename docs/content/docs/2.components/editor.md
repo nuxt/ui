@@ -9,7 +9,6 @@ links:
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/Editor.vue
-navigation.badge: Soon
 ---
 
 ## Usage
@@ -27,6 +26,26 @@ class: 'relative h-176 overflow-y-auto !p-0 rounded-b-md'
 
 ::callout{icon="i-simple-icons-github" to="https://github.com/nuxt/ui/blob/v4/docs/app/components/content/examples/editor/EditorExample.vue" aria-label="View source code"}
 This example demonstrates a production-ready Editor component. Check out the source code on GitHub.
+::
+
+::warning
+If you encounter prosemirror-related errors such as `Adding different instances of a keyed plugin` when using the Editor component or its extensions, you may need to add prosemirror packages to the `vite.optimizeDeps.include` list in your `nuxt.config.ts` file. This ensures Vite pre-bundles these dependencies to avoid loading multiple instances.
+
+```ts [nuxt.config.ts]
+export default defineNuxtConfig({
+  vite: {
+    optimizeDeps: {
+      include: [
+        '@nuxt/ui > prosemirror-state',
+        '@nuxt/ui > prosemirror-transform',
+        '@nuxt/ui > prosemirror-model',
+        '@nuxt/ui > prosemirror-view',
+        '@nuxt/ui > prosemirror-gapcursor'
+      ]
+    }
+  }
+})
+```
 ::
 
 ### Content
@@ -114,7 +133,7 @@ You can use the `extensions` prop to add additional TipTap extensions to enhance
 ```vue
 <script setup lang="ts">
 import { Emoji } from '@tiptap/extension-emoji'
-import TextAlign from '@tiptap/extension-text-align'
+import { TextAlign } from '@tiptap/extension-text-align'
 
 const value = ref('<h1>Hello World</h1>\n')
 </script>
@@ -153,12 +172,32 @@ external:
   - modelValue
 class: 'p-8'
 props:
-  modelValue: |
-    <h1>Hello World</h1>
-    <p></p>
+  modelValue: ''
   placeholder: 'Start writing...'
-  class: 'w-full min-h-21'
+  class: 'w-full min-h-7'
 ---
+::
+
+::note
+The `placeholder` prop accepts a string or an object with [PlaceholderOptions](https://tiptap.dev/docs/editor/extensions/functionality/placeholder) and an additional `mode` property:
+- `everyLine`: Display placeholder on every empty line when focused (default).
+- `firstLine`: Display placeholder only on the first line when the editor is empty.
+
+```vue
+<template>
+  <UEditor :placeholder="{ placeholder: 'Start writing...', mode: 'firstLine' }" />
+</template>
+```
+::
+
+::tip
+By default, placeholders only appear on top-level empty nodes. To show placeholders in nested elements like list items, set `includeChildren` to `true`:
+
+```vue
+<template>
+  <UEditor :placeholder="{ placeholder: 'Start writing...', includeChildren: true }" />
+</template>
+```
 ::
 
 ::callout{icon="i-custom-tiptap" to="https://tiptap.dev/docs/editor/extensions/functionality/placeholder" target="_blank"}
@@ -216,6 +255,7 @@ The Editor component provides these default handlers, which you can reference in
 | `blockquote`{lang="ts-type"} | Toggle blockquotes | |
 | `bulletList`{lang="ts-type"} | Toggle bullet lists | Handles list conversions |
 | `orderedList`{lang="ts-type"} | Toggle ordered lists | Handles list conversions |
+| `taskList`{lang="ts-type"} | Toggle task lists | Handles list conversions |
 | `codeBlock`{lang="ts-type"} | Toggle code blocks | |
 | `horizontalRule`{lang="ts-type"} | Insert horizontal rules | |
 | `paragraph`{lang="ts-type"} | Set paragraph format | |
@@ -229,6 +269,10 @@ The Editor component provides these default handlers, which you can reference in
 | `suggestion`{lang="ts-type"} | Trigger suggestion menu | Inserts `/` character |
 | `mention`{lang="ts-type"} | Trigger mention menu | Inserts `@` character |
 | `emoji`{lang="ts-type"} | Trigger emoji picker | Inserts `:` character |
+
+::warning
+The `taskList` and `textAlign` handlers only work when their respective extensions are installed, as they are not included in the Editor by default.
+::
 
 Here's how to use default handlers in toolbar or suggestion menu items:
 
@@ -317,9 +361,13 @@ Check out the image upload example for a complete implementation with custom han
 
 ## Examples
 
+::callout{icon="i-simple-icons-github" to="https://github.com/nuxt-ui-templates/editor" target="_blank"}
+Check out the source code of our **Editor template** on GitHub for a real-life example.
+::
+
 ### With toolbar
 
-You can use the [EditorToolbar](/docs/components/editor-toolbar) component to add a fixed, bubble, or floating toolbar to the Editor with common formatting actions.
+You can use the [EditorToolbar](/docs/components/editor-toolbar) component to add a `fixed`, `bubble`, or `floating` toolbar to the Editor with common formatting actions.
 
 ::component-example
 ---
@@ -408,22 +456,8 @@ name: 'editor-image-upload-node'
 preview: false
 collapse: true
 lang: 'ts'
-name: 'editor-image-upload'
+name: 'editor-image-upload-extension'
 ---
-::
-
-::warning
-If you encounter a `Adding different instances of a keyed plugin` error when creating a custom extension, you may need to add `prosemirror-state` to the vite `optimizeDeps` include list in your `nuxt.config.ts` file.
-
-```ts [nuxt.config.ts]
-export default defineNuxtConfig({
-  vite: {
-    optimizeDeps: {
-      include: ['prosemirror-state']
-    }
-  }
-})
-```
 ::
 
 3. Use the custom extension in the Editor:
@@ -440,6 +474,146 @@ class: '!p-0'
 
 ::callout{icon="i-custom-tiptap" to="https://tiptap.dev/docs/editor/extensions/custom-extensions" target="_blank"}
 Learn more about creating custom extensions in the TipTap documentation.
+::
+
+### With AI completion
+
+This example demonstrates how to add AI-powered features to the Editor using the [Vercel AI SDK](https://ai-sdk.dev/), specifically the [`useCompletion`](https://ai-sdk.dev/docs/reference/ai-sdk-ui/use-completion) composable for streaming text completions, combined with the [Vercel AI Gateway](https://vercel.com/ai-gateway) to access AI models through a centralized endpoint. It includes ghost text autocompletion and text transformation actions (fix grammar, extend, reduce, simplify, translate, etc.).
+
+::note
+You need to install these dependencies first to use this example:
+
+::code-group{sync="pm"}
+
+```bash [pnpm]
+pnpm add ai @ai-sdk/gateway @ai-sdk/vue
+```
+
+```bash [yarn]
+yarn add ai @ai-sdk/gateway @ai-sdk/vue
+```
+
+```bash [npm]
+npm install ai @ai-sdk/gateway @ai-sdk/vue
+```
+
+```bash [bun]
+bun add ai @ai-sdk/gateway @ai-sdk/vue
+```
+
+::
+
+::
+
+1. Create a custom TipTap extension that handles inline ghost text suggestions:
+
+::component-example
+---
+preview: false
+collapse: true
+name: 'editor-completion-extension'
+lang: 'ts'
+---
+::
+
+2. Create a composable that manages AI completion state and handlers:
+
+::component-example
+---
+preview: false
+collapse: true
+name: 'editor-use-completion'
+filename: 'useEditorCompletion'
+lang: 'ts'
+---
+::
+
+3. Create a server API endpoint to handle completion requests using [`streamText`](https://ai-sdk.dev/docs/reference/ai-sdk-core/stream-text#streamtext):
+
+::code-collapse
+
+```ts [server/api/completion.post.ts]
+import { streamText } from 'ai'
+import { gateway } from '@ai-sdk/gateway'
+
+export default defineEventHandler(async (event) => {
+  const { prompt, mode, language } = await readBody(event)
+  if (!prompt) {
+    throw createError({ statusCode: 400, message: 'Prompt is required' })
+  }
+
+  let system: string
+  let maxOutputTokens: number
+
+  const preserveMarkdown = 'IMPORTANT: Preserve all markdown formatting (bold, italic, links, etc.) exactly as in the original.'
+
+  switch (mode) {
+    case 'fix':
+      system = `You are a writing assistant. Fix all spelling and grammar errors in the given text. ${preserveMarkdown} Only output the corrected text, nothing else.`
+      maxOutputTokens = 500
+      break
+    case 'extend':
+      system = `You are a writing assistant. Extend the given text with more details, examples, and explanations while maintaining the same style. ${preserveMarkdown} Only output the extended text, nothing else.`
+      maxOutputTokens = 500
+      break
+    case 'reduce':
+      system = `You are a writing assistant. Make the given text more concise by removing unnecessary words while keeping the meaning. ${preserveMarkdown} Only output the reduced text, nothing else.`
+      maxOutputTokens = 300
+      break
+    case 'simplify':
+      system = `You are a writing assistant. Simplify the given text to make it easier to understand, using simpler words and shorter sentences. ${preserveMarkdown} Only output the simplified text, nothing else.`
+      maxOutputTokens = 400
+      break
+    case 'summarize':
+      system = 'You are a writing assistant. Summarize the given text concisely while keeping the key points. Only output the summary, nothing else.'
+      maxOutputTokens = 200
+      break
+    case 'translate':
+      system = `You are a writing assistant. Translate the given text to ${language || 'English'}. ${preserveMarkdown} Only output the translated text, nothing else.`
+      maxOutputTokens = 500
+      break
+    case 'continue':
+    default:
+      system = `You are a writing assistant providing inline autocompletions.
+CRITICAL RULES:
+- Output ONLY the NEW text that comes AFTER the user's input
+- NEVER repeat any words from the end of the user's text
+- Keep completions short (1 sentence max)
+- Match the tone and style of the existing text
+- ${preserveMarkdown}`
+      maxOutputTokens = 25
+      break
+  }
+
+  return streamText({
+    model: gateway('anthropic/claude-haiku-4.5'),
+    system,
+    prompt,
+    maxOutputTokens
+  }).toTextStreamResponse()
+})
+```
+
+::
+
+4. Use the composable in the Editor:
+
+::component-example
+---
+elevated: true
+collapse: true
+prettier: true
+name: 'editor-completion-example'
+class: '!p-0'
+---
+::
+
+::note
+The completion extension can be configured with `autoTrigger: true` to automatically suggest completions while typing (disabled by default). You can also manually trigger it with :kbd{value="meta"} :kbd{value="j" class="ms-px"}.
+::
+
+::callout{icon="i-simple-icons-vercel" to="https://ai-sdk.dev/" target="_blank"}
+Learn more about the Vercel AI SDK and available providers.
 ::
 
 ## API

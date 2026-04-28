@@ -1,6 +1,6 @@
-import type { NuxtOptions } from '@nuxt/schema'
+import type { ModuleOptions } from '../module'
 
-export default (options: Required<NuxtOptions['ui']>) => ({
+export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: ['relative z-50 w-full', options.theme.transitions && 'transition-colors'],
     container: 'flex items-center justify-between gap-3 h-12',

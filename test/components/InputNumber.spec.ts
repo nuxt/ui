@@ -2,11 +2,10 @@ import { reactive } from 'vue'
 import { describe, it, expect, test } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { renderEach } from '../component-render'
 import { flushPromises } from '@vue/test-utils'
 import InputNumber from '../../src/runtime/components/InputNumber.vue'
-import type { InputNumberProps, InputNumberSlots } from '../../src/runtime/components/InputNumber.vue'
 import type { FormInputEvents } from '../../src/module'
-import ComponentRender from '../component-render'
 import { renderForm } from '../utils/form'
 import theme from '#build/ui/input-number'
 
@@ -14,7 +13,7 @@ describe('InputNumber', () => {
   const sizes = Object.keys(theme.variants.size) as any
   const variants = Object.keys(theme.variants.variant) as any
 
-  it.each([
+  renderEach(InputNumber, [
     // Props
     ['with name', { props: { name: 'name' } }],
     ['with placeholder', { props: { placeholder: 'Number...' } }],
@@ -40,10 +39,7 @@ describe('InputNumber', () => {
     // Slots
     ['with increment slot', { slots: { increment: () => '+' } }],
     ['with decrement slot', { slots: { decrement: () => '-' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: InputNumberProps, slots?: Partial<InputNumberSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, InputNumber)
-    expect(html).toMatchSnapshot()
-  })
+  ])
 
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(InputNumber, {

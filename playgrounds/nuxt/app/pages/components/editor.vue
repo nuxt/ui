@@ -1,11 +1,14 @@
 <script setup lang="ts">
 import { upperFirst } from 'scule'
-import type { EditorToolbarItem, EditorMentionMenuItem, EditorEmojiMenuItem, DropdownMenuItem, EditorSuggestionMenuItem, EditorCustomHandlers } from '@nuxt/ui'
+import { refDebounced } from '@vueuse/core'
+import type { EditorToolbarItem, EditorEmojiMenuItem, DropdownMenuItem, EditorSuggestionMenuItem, EditorCustomHandlers } from '@nuxt/ui'
 import type { JSONContent } from '@tiptap/vue-3'
 import { mapEditorItems } from '@nuxt/ui/utils/editor'
 import { Emoji, gitHubEmojis } from '@tiptap/extension-emoji'
-import TextAlign from '@tiptap/extension-text-align'
-import ImageUpload from '../../components/editor/ImageUpload'
+import { TextAlign } from '@tiptap/extension-text-align'
+import { ImageUpload } from '../../components/editor/EditorImageUploadExtension'
+
+const editorRef = useTemplateRef('editorRef')
 
 const content = ref(`# Nuxt UI: A Modern UI Library
 
@@ -70,16 +73,19 @@ Whether you're working on a personal project or building an enterprise applicati
 Visit our [documentation](https://ui.nuxt.com) to learn more and explore all available components.
 `)
 
+const { extension: completionExtension, handlers: aiHandlers, isLoading: aiLoading } = useEditorCompletion(editorRef)
+
 const customHandlers = {
   imageUpload: {
     canExecute: (editor: any) => editor.can().insertContent({ type: 'imageUpload' }),
     execute: (editor: any) => editor.chain().focus().insertContent({ type: 'imageUpload' }),
     isActive: (editor: any) => editor.isActive('imageUpload'),
     isDisabled: undefined
-  }
+  },
+  ...aiHandlers
 } satisfies EditorCustomHandlers
 
-const toolbarItems = [[{
+const toolbarItems = computed(() => [[{
   kind: 'undo',
   icon: 'i-lucide-undo',
   tooltip: { text: 'Undo' }
@@ -87,6 +93,60 @@ const toolbarItems = [[{
   kind: 'redo',
   icon: 'i-lucide-redo',
   tooltip: { text: 'Redo' }
+}], [{
+  icon: 'i-lucide-sparkles',
+  label: 'Improve',
+  activeColor: 'neutral',
+  activeVariant: 'ghost',
+  loading: aiLoading.value,
+  content: {
+    align: 'start'
+  },
+  items: [{
+    kind: 'aiFix',
+    icon: 'i-lucide-spell-check',
+    label: 'Fix spelling & grammar'
+  }, {
+    kind: 'aiExtend',
+    icon: 'i-lucide-unfold-vertical',
+    label: 'Extend text'
+  }, {
+    kind: 'aiReduce',
+    icon: 'i-lucide-fold-vertical',
+    label: 'Reduce text'
+  }, {
+    kind: 'aiSimplify',
+    icon: 'i-lucide-lightbulb',
+    label: 'Simplify text'
+  }, {
+    kind: 'aiContinue',
+    icon: 'i-lucide-text',
+    label: 'Continue sentence'
+  }, {
+    kind: 'aiSummarize',
+    icon: 'i-lucide-list',
+    label: 'Summarize'
+  }, {
+    icon: 'i-lucide-languages',
+    label: 'Translate',
+    children: [{
+      kind: 'aiTranslate',
+      language: 'English',
+      label: 'English'
+    }, {
+      kind: 'aiTranslate',
+      language: 'French',
+      label: 'French'
+    }, {
+      kind: 'aiTranslate',
+      language: 'Spanish',
+      label: 'Spanish'
+    }, {
+      kind: 'aiTranslate',
+      language: 'German',
+      label: 'German'
+    }]
+  }]
 }], [{
   kind: 'suggestion',
   icon: 'i-lucide-square-slash'
@@ -181,26 +241,33 @@ const toolbarItems = [[{
   icon: 'i-lucide-image',
   tooltip: { text: 'Image' }
 }], [{
-  kind: 'textAlign',
-  align: 'left',
-  icon: 'i-lucide-align-left',
-  tooltip: { text: 'Align Left' }
-}, {
-  kind: 'textAlign',
-  align: 'center',
-  icon: 'i-lucide-align-center',
-  tooltip: { text: 'Align Center' }
-}, {
-  kind: 'textAlign',
-  align: 'right',
-  icon: 'i-lucide-align-right',
-  tooltip: { text: 'Align Right' }
-}, {
-  kind: 'textAlign',
-  align: 'justify',
   icon: 'i-lucide-align-justify',
-  tooltip: { text: 'Align Justify' }
-}]] satisfies EditorToolbarItem<typeof customHandlers>[][]
+  tooltip: { text: 'Text Align' },
+  content: {
+    align: 'end'
+  },
+  items: [{
+    kind: 'textAlign',
+    align: 'left',
+    icon: 'i-lucide-align-left',
+    label: 'Align Left'
+  }, {
+    kind: 'textAlign',
+    align: 'center',
+    icon: 'i-lucide-align-center',
+    label: 'Align Center'
+  }, {
+    kind: 'textAlign',
+    align: 'right',
+    icon: 'i-lucide-align-right',
+    label: 'Align Right'
+  }, {
+    kind: 'textAlign',
+    align: 'justify',
+    icon: 'i-lucide-align-justify',
+    label: 'Align Justify'
+  }]
+}]] satisfies EditorToolbarItem<typeof customHandlers>[][])
 
 const imageToolbarItems = (editor: any): EditorToolbarItem<typeof customHandlers>[][] => {
   const node = editor.state.doc.nodeAt(editor.state.selection.from)
@@ -319,6 +386,13 @@ const handleItems = (editor: any): DropdownMenuItem[][] => {
 
 const suggestionItems = [[{
   type: 'label',
+  label: 'AI'
+}, {
+  kind: 'aiContinue',
+  label: 'Continue writing',
+  icon: 'i-lucide-sparkles'
+}], [{
+  type: 'label',
   label: 'Style'
 }, {
   kind: 'paragraph',
@@ -376,39 +450,29 @@ const suggestionItems = [[{
   icon: 'i-lucide-separator-horizontal'
 }]] satisfies EditorSuggestionMenuItem<typeof customHandlers>[][]
 
-const mentionItems: EditorMentionMenuItem[] = [{
-  label: 'benjamincanac',
-  avatar: { src: 'https://avatars.githubusercontent.com/u/739984?v=4' }
-}, {
-  label: 'HugoRCD',
-  avatar: { src: 'https://avatars.githubusercontent.com/u/71938701?v=4' }
-}, {
-  label: 'romhml',
-  avatar: { src: 'https://avatars.githubusercontent.com/u/25613751?v=4' }
-}, {
-  label: 'sandros94',
-  avatar: { src: 'https://avatars.githubusercontent.com/u/13056429?v=4' }
-}, {
-  label: 'hywax',
-  avatar: { src: 'https://avatars.githubusercontent.com/u/149865959?v=4' }
-}, {
-  label: 'J-Michalek',
-  avatar: { src: 'https://avatars.githubusercontent.com/u/71264422?v=4' }
-}, {
-  label: 'genu',
-  avatar: { src: 'https://avatars.githubusercontent.com/u/928780?v=4' }
-}]
+const searchTerm = ref('')
+const searchTermDebounced = refDebounced(searchTerm, 200)
+
+const { data: mentionItems } = await useFetch('https://dummyjson.com/users/search?limit=10', {
+  params: { q: searchTermDebounced },
+  transform: (data: { users: { id: number, firstName: string, lastName: string, image: string }[] }) => {
+    return data.users?.map(user => ({ id: user.id, label: `${user.firstName} ${user.lastName}`, avatar: { src: user.image } })) || []
+  },
+  lazy: true
+})
 
 const emojiItems: EditorEmojiMenuItem[] = gitHubEmojis.filter(emoji => !emoji.name.startsWith('regional_indicator_'))
 </script>
 
 <template>
   <UEditor
+    ref="editorRef"
     v-slot="{ editor, handlers }"
     v-model="content"
     :extensions="[
       Emoji,
       ImageUpload,
+      completionExtension,
       TextAlign.configure({
         types: ['heading', 'paragraph']
       })
@@ -454,6 +518,12 @@ const emojiItems: EditorEmojiMenuItem[] = gitHubEmojis.filter(emoji => !emoji.na
       }"
     />
 
+    <UEditorSuggestionMenu :editor="editor" :items="suggestionItems" />
+
+    <UEditorMentionMenu v-model:search-term="searchTerm" :editor="editor" :items="mentionItems" ignore-filter />
+
+    <UEditorEmojiMenu :editor="editor" :items="emojiItems" />
+
     <UEditorDragHandle v-slot="{ ui, onClick }" :editor="editor" @node-change="selectedNode = $event">
       <UButton
         icon="i-lucide-plus"
@@ -488,9 +558,5 @@ const emojiItems: EditorEmojiMenuItem[] = gitHubEmojis.filter(emoji => !emoji.na
         />
       </UDropdownMenu>
     </UEditorDragHandle>
-
-    <UEditorSuggestionMenu :editor="editor" :items="suggestionItems" />
-    <UEditorMentionMenu :editor="editor" :items="mentionItems" />
-    <UEditorEmojiMenu :editor="editor" :items="emojiItems" />
   </UEditor>
 </template>

@@ -7,7 +7,8 @@ const items = [{
   date: '2025-05-24T14:58:55Z',
   action: 'opened this',
   avatar: {
-    src: 'https://github.com/J-Michalek.png'
+    src: 'https://github.com/J-Michalek.png',
+    loading: 'lazy' as const
   }
 }, {
   username: 'J-Michalek',
@@ -20,7 +21,8 @@ const items = [{
   action: 'commented on this',
   description: 'I\'ve made a few changes, let me know what you think! Basically I updated the design, removed unnecessary divs, used Avatar component for the indicator since it supports icon already.',
   avatar: {
-    src: 'https://github.com/benjamincanac.png'
+    src: 'https://github.com/benjamincanac.png',
+    loading: 'lazy' as const
   }
 }, {
   username: 'J-Michalek',
@@ -28,7 +30,8 @@ const items = [{
   action: 'commented on this',
   description: 'Looks great! Good job on cleaning it up.',
   avatar: {
-    src: 'https://github.com/J-Michalek.png'
+    src: 'https://github.com/J-Michalek.png',
+    loading: 'lazy' as const
   }
 }, {
   username: 'benjamincanac',

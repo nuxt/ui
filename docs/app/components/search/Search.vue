@@ -14,13 +14,14 @@ defineProps<{
   navigation?: ContentNavigationItem[]
 }>()
 
-const { links, groups, fullscreen, chat, searchTerm, messages } = useSearch()
+const { links, groups, searchTerm } = useSearch()
+const { track } = useAnalytics()
 
-function onClose() {
-  chat.value = false
-
-  fullscreen.value = false
-}
+watchDebounced(searchTerm, (term) => {
+  if (term) {
+    track('Search Performed', { term })
+  }
+}, { debounce: 500 })
 </script>
 
 <template>
@@ -30,11 +31,6 @@ function onClose() {
     :files="files"
     :groups="groups"
     :navigation="navigation"
-    :fullscreen="fullscreen"
-    :fuse="{ resultLimit: 115 }"
-  >
-    <template v-if="chat" #content>
-      <SearchChat v-model:messages="messages" v-model:fullscreen="fullscreen" @close="onClose" />
-    </template>
-  </UContentSearch>
+    :fuse="{ resultLimit: 30 }"
+  />
 </template>

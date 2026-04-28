@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'Senden'
     },
+    chatReasoning: {
+      thinking: 'Denkt nach…',
+      thought: 'Nachgedacht',
+      thoughtFor: '{duration} nachgedacht'
+    },
     colorMode: {
       dark: 'Dunkel',
       light: 'Hell',
@@ -57,6 +62,10 @@ export default defineLocale<Messages>({
     },
     contentToc: {
       title: 'Auf dieser Seite'
+    },
+    dropdownMenu: {
+      noMatch: 'Nichts gefunden',
+      search: 'Suchen…'
     },
     dashboardSearch: {
       theme: 'Thema'
@@ -91,6 +100,11 @@ export default defineLocale<Messages>({
       decrement: 'Verringern',
       increment: 'Erhöhen'
     },
+    listbox: {
+      noData: 'Keine Daten',
+      noMatch: 'Nichts gefunden',
+      search: 'Suchen…'
+    },
     modal: {
       close: 'Schließen'
     },
@@ -110,7 +124,15 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'Code in die Zwischenablage kopieren'
+      },
+      prompt: {
+        copy: 'Prompt kopieren',
+        openIn: 'In {name} öffnen'
       }
+    },
+    sidebar: {
+      close: 'Schließen',
+      toggle: 'Umschalten'
     },
     selectMenu: {
       create: '"{label}" erstellen',

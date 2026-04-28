@@ -1,10 +1,11 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { ContentNavigationItem } from '@nuxt/content'
 import type { AppConfig } from '@nuxt/schema'
 import type { UseFuseOptions } from '@vueuse/integrations/useFuse'
 import theme from '#build/ui/content/content-search'
-import type { ButtonProps, InputProps, LinkProps, ModalProps, CommandPaletteProps, CommandPaletteSlots, CommandPaletteGroup, CommandPaletteItem, IconProps, LinkPropsKeys } from '../../types'
+import type { ButtonProps, LinkProps, ModalProps, CommandPaletteProps, CommandPaletteSlots, CommandPaletteGroup, CommandPaletteItem, IconProps, LinkPropsKeys } from '../../types'
 import type { ComponentConfig } from '../../types/tv'
 
 type ContentSearch = ComponentConfig<typeof theme, AppConfig, 'contentSearch'>
@@ -35,31 +36,11 @@ export interface ContentSearchItem extends Omit<LinkProps, 'custom'>, CommandPal
   icon?: IconProps['name']
 }
 
-export interface ContentSearchProps<T extends ContentSearchLink = ContentSearchLink> extends Pick<ModalProps, 'title' | 'description' | 'overlay' | 'transition' | 'content' | 'dismissible' | 'fullscreen' | 'modal' | 'portal'> {
+export interface ContentSearchProps<T extends ContentSearchLink = ContentSearchLink> extends Pick<ModalProps, 'title' | 'description' | 'overlay' | 'transition' | 'content' | 'dismissible' | 'fullscreen' | 'modal' | 'portal'>, Pick<CommandPaletteProps<CommandPaletteGroup<ContentSearchItem>, ContentSearchItem>, 'icon' | 'placeholder' | 'autofocus' | 'loading' | 'loadingIcon' | 'closeIcon' | 'groups'> {
   /**
-   * The icon displayed in the input.
-   * @defaultValue appConfig.ui.icons.search
-   * @IconifyIcon
+   * @defaultValue 'md'
    */
-  icon?: IconProps['name']
-  /**
-   * The placeholder text for the input.
-   * @defaultValue t('commandPalette.placeholder')
-   */
-  placeholder?: InputProps['placeholder']
-  /**
-   * Automatically focus the input when component is mounted.
-   * @defaultValue true
-   */
-  autofocus?: boolean
-  /** When `true`, the loading icon will be displayed. */
-  loading?: boolean
-  /**
-   * The icon when the `loading` prop is `true`.
-   * @defaultValue appConfig.ui.icons.loading
-   * @IconifyIcon
-   */
-  loadingIcon?: IconProps['name']
+  size?: ContentSearch['variants']['size']
   /**
    * Display a close button in the input (useful when inside a Modal for example).
    * `{ size: 'md', color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
@@ -68,12 +49,6 @@ export interface ContentSearchProps<T extends ContentSearchLink = ContentSearchL
    */
   close?: boolean | Omit<ButtonProps, LinkPropsKeys>
   /**
-   * The icon displayed in the close button.
-   * @defaultValue appConfig.ui.icons.close
-   * @IconifyIcon
-   */
-  closeIcon?: IconProps['name']
-  /**
    * Keyboard shortcut to open the search (used by [`defineShortcuts`](https://ui.nuxt.com/docs/composables/define-shortcuts))
    * @defaultValue 'meta_k'
    */
@@ -81,14 +56,28 @@ export interface ContentSearchProps<T extends ContentSearchLink = ContentSearchL
   /** Links group displayed as the first group in the command palette. */
   links?: T[]
   navigation?: ContentNavigationItem[]
-  /** Custom groups displayed between navigation and color mode group. */
-  groups?: CommandPaletteGroup<ContentSearchItem>[]
   files?: ContentSearchFile[]
   /**
    * Options for [useFuse](https://vueuse.org/integrations/useFuse) passed to the [CommandPalette](https://ui.nuxt.com/docs/components/command-palette).
-   * @defaultValue { fuseOptions: { includeMatches: true } }
+   * @defaultValue {
+      fuseOptions: {
+        ignoreLocation: true,
+        includeMatches: true,
+        threshold: 0.1,
+        keys: ['label', 'suffix']
+      },
+      resultLimit: 12,
+      matchAllWhenSearchEmpty: true
+    }
    */
   fuse?: UseFuseOptions<T>
+  /**
+   * Delay (in milliseconds) before the search term is passed to Fuse (debounced).
+   * Useful for large doc sets where running fuzzy search on every keystroke is the bottleneck — the input stays responsive while Fuse only re-runs after typing settles.
+   * Set to `0` to disable.
+   * @defaultValue 100
+   */
+  searchDelay?: number
   /**
    * When `true`, the theme command will be added to the groups.
    * @defaultValue true
@@ -98,8 +87,8 @@ export interface ContentSearchProps<T extends ContentSearchLink = ContentSearchL
   ui?: ContentSearch['slots'] & CommandPaletteProps<CommandPaletteGroup<ContentSearchItem>, ContentSearchItem>['ui']
 }
 
-export type ContentSearchSlots = CommandPaletteSlots<CommandPaletteGroup<ContentSearchItem>, ContentSearchItem> & {
-  content(props: { close: () => void }): any
+export type ContentSearchSlots = CommandPaletteSlots<ContentSearchItem> & {
+  content?(props: { close: () => void }): VNode[]
 }
 
 </script>
@@ -110,6 +99,7 @@ import { useForwardProps } from 'reka-ui'
 import { defu } from 'defu'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig, useColorMode, defineShortcuts } from '#imports'
+import { useComponentUI } from '../../composables/useComponentUI'
 import { useContentSearch } from '../../composables/useContentSearch'
 import { useLocale } from '../../composables/useLocale'
 import { omit, transformUI } from '../../utils'
@@ -121,7 +111,8 @@ const props = withDefaults(defineProps<ContentSearchProps<T>>(), {
   shortcut: 'meta_k',
   colorMode: true,
   close: true,
-  fullscreen: false
+  fullscreen: false,
+  searchDelay: 100
 })
 const slots = defineSlots<ContentSearchSlots>()
 
@@ -132,8 +123,9 @@ const { open, mapNavigationItems, postFilter } = useContentSearch()
 // eslint-disable-next-line vue/no-dupe-keys
 const colorMode = useColorMode()
 const appConfig = useAppConfig() as ContentSearch['AppConfig']
+const uiProp = useComponentUI('contentSearch', props)
 
-const commandPaletteProps = useForwardProps(reactivePick(props, 'icon', 'placeholder', 'autofocus', 'loading', 'loadingIcon', 'close', 'closeIcon'))
+const commandPaletteProps = useForwardProps(reactivePick(props, 'size', 'icon', 'placeholder', 'autofocus', 'loading', 'loadingIcon', 'close', 'closeIcon', 'searchDelay'))
 const modalProps = useForwardProps(reactivePick(props, 'overlay', 'transition', 'content', 'dismissible', 'fullscreen', 'modal', 'portal'))
 
 const getProxySlots = () => omit(slots, ['content'])
@@ -145,6 +137,7 @@ const fuse = computed(() => defu({}, props.fuse, {
 } as UseFuseOptions<T>))
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.contentSearch || {}) })({
+  size: props.size,
   fullscreen: props.fullscreen
 }))
 
@@ -268,7 +261,7 @@ defineExpose({
     :description="description || t('contentSearch.description')"
     v-bind="modalProps"
     data-slot="modal"
-    :class="ui.modal({ class: [props.ui?.modal, props.class] })"
+    :class="ui.modal({ class: [uiProp?.modal, props.class] })"
   >
     <template #content="contentData">
       <slot name="content" v-bind="contentData">
@@ -278,7 +271,8 @@ defineExpose({
           v-bind="commandPaletteProps"
           :groups="groups"
           :fuse="fuse"
-          :ui="transformUI(omit(ui, ['modal']), props.ui)"
+          :input="{ fixed: true }"
+          :ui="transformUI(omit(ui, ['modal']), uiProp)"
           @update:model-value="onSelect"
           @update:open="open = $event"
         >

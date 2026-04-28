@@ -78,7 +78,7 @@ export type UseResizableReturn = {
   collapse: (value?: boolean) => void
 }
 
-export const useResizable = (key: string, options: Ref<UseResizableProps> | UseResizableProps = {}, { collapsed = ref(false) }: { collapsed?: Ref<boolean> } = {}): UseResizableReturn => {
+export function useResizable(key: string, options: Ref<UseResizableProps> | UseResizableProps = {}, { collapsed = ref(false) }: { collapsed?: Ref<boolean> } = {}): UseResizableReturn {
   const el = ref<HTMLElement | null>(null)
   const opts = computed(() => ({
     side: 'left',

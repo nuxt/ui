@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { EditorCustomHandlers, EditorToolbarItem } from '@nuxt/ui'
 import type { Editor } from '@tiptap/vue-3'
-import ImageUpload from './EditorImageUpload'
+import { ImageUpload } from './EditorImageUploadExtension'
 
 const value = ref(`# Image Upload
 
@@ -21,6 +21,11 @@ const customHandlers = {
 } satisfies EditorCustomHandlers
 
 const items = [[{
+  kind: 'imageUpload',
+  icon: 'i-lucide-image',
+  label: 'Add image',
+  variant: 'soft'
+}], [{
   icon: 'i-lucide-heading',
   content: {
     align: 'start'
@@ -66,10 +71,6 @@ const items = [[{
   kind: 'mark',
   mark: 'code',
   icon: 'i-lucide-code'
-}], [{
-  kind: 'imageUpload',
-  icon: 'i-lucide-image',
-  label: 'Add image'
 }]] satisfies EditorToolbarItem<typeof customHandlers>[][]
 </script>
 

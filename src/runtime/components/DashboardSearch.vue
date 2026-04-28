@@ -1,38 +1,18 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
-import type { UseFuseOptions } from '@vueuse/integrations/useFuse'
 import theme from '#build/ui/dashboard-search'
-import type { ButtonProps, InputProps, ModalProps, CommandPaletteProps, CommandPaletteSlots, CommandPaletteGroup, CommandPaletteItem, IconProps, LinkPropsKeys } from '../types'
+import type { ButtonProps, ModalProps, CommandPaletteProps, CommandPaletteSlots, CommandPaletteGroup, CommandPaletteItem, LinkPropsKeys } from '../types'
 import type { ComponentConfig } from '../types/tv'
 
 type DashboardSearch = ComponentConfig<typeof theme, AppConfig, 'dashboardSearch'>
 
-export interface DashboardSearchProps<T extends CommandPaletteItem = CommandPaletteItem> extends Pick<ModalProps, 'title' | 'description' | 'overlay' | 'transition' | 'content' | 'dismissible' | 'fullscreen' | 'modal' | 'portal'> {
+export interface DashboardSearchProps<T extends CommandPaletteItem = CommandPaletteItem> extends Pick<ModalProps, 'title' | 'description' | 'overlay' | 'transition' | 'content' | 'dismissible' | 'fullscreen' | 'modal' | 'portal'>, Pick<CommandPaletteProps<CommandPaletteGroup<T>, T>, 'icon' | 'placeholder' | 'autofocus' | 'loading' | 'loadingIcon' | 'closeIcon' | 'groups' | 'fuse'> {
   /**
-   * The icon displayed in the input.
-   * @defaultValue appConfig.ui.icons.search
-   * @IconifyIcon
+   * @defaultValue 'md'
    */
-  icon?: IconProps['name']
-  /**
-   * The placeholder text for the input.
-   * @defaultValue t('commandPalette.placeholder')
-   */
-  placeholder?: InputProps['placeholder']
-  /**
-   * Automatically focus the input when component is mounted.
-   * @defaultValue true
-   */
-  autofocus?: boolean
-  /** When `true`, the loading icon will be displayed. */
-  loading?: boolean
-  /**
-   * The icon when the `loading` prop is `true`.
-   * @defaultValue appConfig.ui.icons.loading
-   * @IconifyIcon
-   */
-  loadingIcon?: IconProps['name']
+  size?: DashboardSearch['variants']['size']
   /**
    * Display a close button in the input (useful when inside a Modal for example).
    * `{ size: 'md', color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
@@ -41,22 +21,17 @@ export interface DashboardSearchProps<T extends CommandPaletteItem = CommandPale
    */
   close?: boolean | Omit<ButtonProps, LinkPropsKeys>
   /**
-   * The icon displayed in the close button.
-   * @defaultValue appConfig.ui.icons.close
-   * @IconifyIcon
-   */
-  closeIcon?: IconProps['name']
-  /**
    * Keyboard shortcut to open the search (used by [`defineShortcuts`](https://ui.nuxt.com/docs/composables/define-shortcuts))
    * @defaultValue 'meta_k'
    */
   shortcut?: string
-  groups?: CommandPaletteGroup<T>[]
   /**
-   * Options for [useFuse](https://vueuse.org/integrations/useFuse) passed to the [CommandPalette](https://ui.nuxt.com/docs/components/command-palette).
-   * @defaultValue {}
+   * Delay (in milliseconds) before the search term is passed to Fuse (debounced).
+   * Useful for large datasets where running fuzzy search on every keystroke is the bottleneck — the input stays responsive while Fuse only re-runs after typing settles.
+   * Set to `0` to disable.
+   * @defaultValue 100
    */
-  fuse?: UseFuseOptions<T>
+  searchDelay?: number
   /**
    * When `true`, the theme command will be added to the groups.
    * @defaultValue true
@@ -66,8 +41,8 @@ export interface DashboardSearchProps<T extends CommandPaletteItem = CommandPale
   ui?: DashboardSearch['slots'] & CommandPaletteProps<CommandPaletteGroup<CommandPaletteItem>, CommandPaletteItem>['ui']
 }
 
-export type DashboardSearchSlots = CommandPaletteSlots<CommandPaletteGroup<CommandPaletteItem>, CommandPaletteItem> & {
-  content(props: { close: () => void }): any
+export type DashboardSearchSlots = CommandPaletteSlots<CommandPaletteItem> & {
+  content?(props: { close: () => void }): VNode[]
 }
 
 </script>
@@ -78,6 +53,7 @@ import { useForwardProps } from 'reka-ui'
 import { defu } from 'defu'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig, useColorMode, defineShortcuts, useRuntimeHook } from '#imports'
+import { useComponentUI } from '../composables/useComponentUI'
 import { useLocale } from '../composables/useLocale'
 import { omit, transformUI } from '../utils'
 import { tv } from '../utils/tv'
@@ -88,7 +64,8 @@ const props = withDefaults(defineProps<DashboardSearchProps>(), {
   shortcut: 'meta_k',
   colorMode: true,
   close: true,
-  fullscreen: false
+  fullscreen: false,
+  searchDelay: 100
 })
 const slots = defineSlots<DashboardSearchSlots>()
 
@@ -103,8 +80,9 @@ const { t } = useLocale()
 // eslint-disable-next-line vue/no-dupe-keys
 const colorMode = useColorMode()
 const appConfig = useAppConfig() as DashboardSearch['AppConfig']
+const uiProp = useComponentUI('dashboardSearch', props)
 
-const commandPaletteProps = useForwardProps(reactivePick(props, 'icon', 'placeholder', 'autofocus', 'loading', 'loadingIcon', 'close', 'closeIcon'))
+const commandPaletteProps = useForwardProps(reactivePick(props, 'size', 'icon', 'placeholder', 'autofocus', 'loading', 'loadingIcon', 'close', 'closeIcon', 'searchDelay'))
 const modalProps = useForwardProps(reactivePick(props, 'overlay', 'transition', 'content', 'dismissible', 'fullscreen', 'modal', 'portal'))
 
 const getProxySlots = () => omit(slots, ['content'])
@@ -115,6 +93,7 @@ const fuse = computed(() => defu({}, props.fuse, {
 }))
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dashboardSearch || {}) })({
+  size: props.size,
   fullscreen: props.fullscreen
 }))
 
@@ -187,7 +166,7 @@ defineExpose({
     :description="description || t('dashboardSearch.description')"
     v-bind="modalProps"
     data-slot="modal"
-    :class="ui.modal({ class: [props.ui?.modal, props.class] })"
+    :class="ui.modal({ class: [uiProp?.modal, props.class] })"
   >
     <template #content="contentData">
       <slot name="content" v-bind="contentData">
@@ -197,7 +176,8 @@ defineExpose({
           v-bind="commandPaletteProps"
           :groups="groups"
           :fuse="fuse"
-          :ui="transformUI(omit(ui, ['modal']), props.ui)"
+          :input="{ fixed: true }"
+          :ui="transformUI(omit(ui, ['modal']), uiProp)"
           @update:model-value="onSelect"
           @update:open="open = $event"
         >

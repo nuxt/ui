@@ -1,5 +1,6 @@
 <script lang="ts">
 import type { ToastRootProps, ToastRootEmits } from 'reka-ui'
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/toast'
 import type { AvatarProps, ButtonProps, IconProps, ProgressProps, LinkPropsKeys } from '../types'
@@ -62,19 +63,20 @@ export interface ToastProps extends Pick<ToastRootProps, 'defaultOpen' | 'open' 
 export interface ToastEmits extends ToastRootEmits {}
 
 export interface ToastSlots {
-  leading(props: { ui: Toast['ui'] }): any
-  title(props?: {}): any
-  description(props?: {}): any
-  actions(props?: {}): any
-  close(props: { ui: Toast['ui'] }): any
+  leading?(props: { ui: Toast['ui'] }): VNode[]
+  title?(props?: {}): VNode[]
+  description?(props?: {}): VNode[]
+  actions?(props?: {}): VNode[]
+  close?(props: { ui: Toast['ui'] }): VNode[]
 }
 </script>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, nextTick, useTemplateRef } from 'vue'
+import { ref, computed, onMounted, useTemplateRef } from 'vue'
 import { ToastRoot, ToastTitle, ToastDescription, ToastAction, ToastClose, useForwardPropsEmits } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
+import { useComponentUI } from '../composables/useComponentUI'
 import { useLocale } from '../composables/useLocale'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
@@ -92,6 +94,7 @@ const slots = defineSlots<ToastSlots>()
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as Toast['AppConfig']
+const uiProp = useComponentUI('toast', props)
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'defaultOpen', 'open', 'duration', 'type'), emits)
 
@@ -105,13 +108,11 @@ const rootRef = useTemplateRef('rootRef')
 const height = ref(0)
 
 onMounted(() => {
-  if (!rootRef.value) {
+  if (!rootRef.value?.$el?.getBoundingClientRect) {
     return
   }
 
-  nextTick(() => {
-    height.value = rootRef.value?.$el?.getBoundingClientRect()?.height
-  })
+  height.value = rootRef.value.$el.getBoundingClientRect().height
 })
 
 defineExpose({
@@ -126,16 +127,16 @@ defineExpose({
     v-bind="rootProps"
     :data-orientation="orientation"
     data-slot="root"
-    :class="ui.root({ class: [props.ui?.root, props.class] })"
+    :class="ui.root({ class: [uiProp?.root, props.class] })"
     :style="{ '--height': height }"
   >
     <slot name="leading" :ui="ui">
-      <UAvatar v-if="avatar" :size="((props.ui?.avatarSize || ui.avatarSize()) as AvatarProps['size'])" v-bind="avatar" data-slot="avatar" :class="ui.avatar({ class: props.ui?.avatar })" />
-      <UIcon v-else-if="icon" :name="icon" data-slot="icon" :class="ui.icon({ class: props.ui?.icon })" />
+      <UAvatar v-if="avatar" :size="((uiProp?.avatarSize || ui.avatarSize()) as AvatarProps['size'])" v-bind="avatar" data-slot="avatar" :class="ui.avatar({ class: uiProp?.avatar })" />
+      <UIcon v-else-if="icon" :name="icon" data-slot="icon" :class="ui.icon({ class: uiProp?.icon })" />
     </slot>
 
-    <div data-slot="wrapper" :class="ui.wrapper({ class: props.ui?.wrapper })">
-      <ToastTitle v-if="title || !!slots.title" data-slot="title" :class="ui.title({ class: props.ui?.title })">
+    <div data-slot="wrapper" :class="ui.wrapper({ class: uiProp?.wrapper })">
+      <ToastTitle v-if="title || !!slots.title" data-slot="title" :class="ui.title({ class: uiProp?.title })">
         <slot name="title">
           <component :is="title()" v-if="typeof title === 'function'" />
           <component :is="title" v-else-if="typeof title === 'object'" />
@@ -144,7 +145,7 @@ defineExpose({
           </template>
         </slot>
       </ToastTitle>
-      <ToastDescription v-if="description || !!slots.description" data-slot="description" :class="ui.description({ class: props.ui?.description })">
+      <ToastDescription v-if="description || !!slots.description" data-slot="description" :class="ui.description({ class: uiProp?.description })">
         <slot name="description">
           <component :is="description()" v-if="typeof description === 'function'" />
           <component :is="description" v-else-if="typeof description === 'object'" />
@@ -154,7 +155,7 @@ defineExpose({
         </slot>
       </ToastDescription>
 
-      <div v-if="orientation === 'vertical' && (actions?.length || !!slots.actions)" data-slot="actions" :class="ui.actions({ class: props.ui?.actions })">
+      <div v-if="orientation === 'vertical' && (actions?.length || !!slots.actions)" data-slot="actions" :class="ui.actions({ class: uiProp?.actions })">
         <slot name="actions">
           <ToastAction v-for="(action, index) in actions" :key="index" :alt-text="action.label || 'Action'" as-child @click.stop>
             <UButton size="xs" :color="color" v-bind="action" />
@@ -163,7 +164,7 @@ defineExpose({
       </div>
     </div>
 
-    <div v-if="(orientation === 'horizontal' && (actions?.length || !!slots.actions)) || close" data-slot="actions" :class="ui.actions({ class: props.ui?.actions, orientation: 'horizontal' })">
+    <div v-if="(orientation === 'horizontal' && (actions?.length || !!slots.actions)) || close" data-slot="actions" :class="ui.actions({ class: uiProp?.actions, orientation: 'horizontal' })">
       <template v-if="orientation === 'horizontal' && (actions?.length || !!slots.actions)">
         <slot name="actions">
           <ToastAction v-for="(action, index) in actions" :key="index" :alt-text="action.label || 'Action'" as-child @click.stop>
@@ -182,7 +183,7 @@ defineExpose({
             :aria-label="t('toast.close')"
             v-bind="(typeof close === 'object' ? close : {})"
             data-slot="close"
-            :class="ui.close({ class: props.ui?.close })"
+            :class="ui.close({ class: uiProp?.close })"
             @click.stop
           />
         </slot>
@@ -196,7 +197,7 @@ defineExpose({
       v-bind="(typeof progress === 'object' ? progress as Partial<ProgressProps> : {})"
       size="sm"
       data-slot="progress"
-      :class="ui.progress({ class: props.ui?.progress })"
+      :class="ui.progress({ class: uiProp?.progress })"
     />
   </ToastRoot>
 </template>

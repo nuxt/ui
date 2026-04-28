@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/dashboard-navbar'
 import type { DashboardContext } from '../utils/dashboard'
@@ -37,13 +38,13 @@ export interface DashboardNavbarProps {
 type DashboardNavbarSlotsProps = Omit<DashboardContext, 'storage' | 'storageKey' | 'persistent' | 'unit'>
 
 export interface DashboardNavbarSlots {
-  title(props?: {}): any
-  leading(props: DashboardNavbarSlotsProps & { ui: DashboardNavbar['ui'] }): any
-  trailing(props: DashboardNavbarSlotsProps & { ui: DashboardNavbar['ui'] }): any
-  left(props: DashboardNavbarSlotsProps): any
-  default(props: DashboardNavbarSlotsProps): any
-  right(props: DashboardNavbarSlotsProps): any
-  toggle(props: DashboardNavbarSlotsProps & { ui: DashboardNavbar['ui'] }): any
+  title?(props?: {}): VNode[]
+  leading?(props: DashboardNavbarSlotsProps & { ui: DashboardNavbar['ui'] }): VNode[]
+  trailing?(props: DashboardNavbarSlotsProps & { ui: DashboardNavbar['ui'] }): VNode[]
+  left?(props: DashboardNavbarSlotsProps): VNode[]
+  default?(props: DashboardNavbarSlotsProps): VNode[]
+  right?(props: DashboardNavbarSlotsProps): VNode[]
+  toggle?(props: DashboardNavbarSlotsProps & { ui: DashboardNavbar['ui'] }): VNode[]
 }
 </script>
 
@@ -52,6 +53,7 @@ import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
+import { useComponentUI } from '../composables/useComponentUI'
 import { useDashboard } from '../utils/dashboard'
 import { tv } from '../utils/tv'
 import UDashboardSidebarToggle from './DashboardSidebarToggle.vue'
@@ -66,6 +68,7 @@ const props = withDefaults(defineProps<DashboardNavbarProps>(), {
 const slots = defineSlots<DashboardNavbarSlots>()
 
 const appConfig = useAppConfig() as DashboardNavbar['AppConfig']
+const uiProp = useComponentUI('dashboardNavbar', props)
 const dashboardContext = useDashboard({})
 
 const [DefineToggleTemplate, ReuseToggleTemplate] = createReusableTemplate()
@@ -82,21 +85,21 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dashboardNav
         v-bind="(typeof toggle === 'object' ? toggle : {})"
         :side="toggleSide"
         data-slot="toggle"
-        :class="ui.toggle({ class: props.ui?.toggle, toggleSide })"
+        :class="ui.toggle({ class: uiProp?.toggle, toggleSide })"
       />
     </slot>
   </DefineToggleTemplate>
 
-  <Primitive :as="as" v-bind="$attrs" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <div data-slot="left" :class="ui.left({ class: props.ui?.left })">
+  <Primitive :as="as" v-bind="$attrs" data-slot="root" :class="ui.root({ class: [uiProp?.root, props.class] })">
+    <div data-slot="left" :class="ui.left({ class: uiProp?.left })">
       <ReuseToggleTemplate v-if="toggleSide === 'left'" />
 
       <slot name="left" v-bind="dashboardContext">
         <slot name="leading" v-bind="{ ...dashboardContext, ui }">
-          <UIcon v-if="icon" :name="icon" data-slot="icon" :class="ui.icon({ class: props.ui?.icon })" />
+          <UIcon v-if="icon" :name="icon" data-slot="icon" :class="ui.icon({ class: uiProp?.icon })" />
         </slot>
 
-        <h1 data-slot="title" :class="ui.title({ class: props.ui?.title })">
+        <h1 data-slot="title" :class="ui.title({ class: uiProp?.title })">
           <slot name="title">
             {{ title }}
           </slot>
@@ -106,11 +109,11 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dashboardNav
       </slot>
     </div>
 
-    <div v-if="!!slots.default" data-slot="center" :class="ui.center({ class: props.ui?.center })">
+    <div v-if="!!slots.default" data-slot="center" :class="ui.center({ class: uiProp?.center })">
       <slot v-bind="dashboardContext" />
     </div>
 
-    <div data-slot="right" :class="ui.right({ class: props.ui?.right })">
+    <div data-slot="right" :class="ui.right({ class: uiProp?.right })">
       <slot name="right" v-bind="dashboardContext" />
 
       <ReuseToggleTemplate v-if="toggleSide === 'right'" />

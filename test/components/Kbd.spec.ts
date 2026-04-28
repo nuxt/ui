@@ -1,16 +1,15 @@
 import { describe, it, expect } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { renderEach } from '../component-render'
 import Kbd from '../../src/runtime/components/Kbd.vue'
-import type { KbdProps, KbdSlots } from '../../src/runtime/components/Kbd.vue'
-import ComponentRender from '../component-render'
 import theme from '#build/ui/kbd'
 
 describe('Kbd', () => {
   const sizes = Object.keys(theme.variants.size) as any
   const variants = Object.keys(theme.variants.variant) as any
 
-  it.each([
+  renderEach(Kbd, [
     // Props
     ['with value', { props: { value: 'K' } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { value: 'K', size } }]),
@@ -20,10 +19,7 @@ describe('Kbd', () => {
     ['with class', { props: { value: 'K', class: 'font-bold' } }],
     // Slots
     ['with default slot', { slots: { default: () => 'Default slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: KbdProps, slots?: Partial<KbdSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, Kbd)
-    expect(html).toMatchSnapshot()
-  })
+  ])
 
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(Kbd, {

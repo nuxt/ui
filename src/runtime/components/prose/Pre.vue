@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/prose/pre'
 import type { IconProps } from '../../types'
@@ -19,14 +20,15 @@ export interface ProsePreProps {
 }
 
 export interface ProsePreSlots {
-  default(props?: {}): any
+  default(props?: {}): VNode[]
 }
 </script>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, useTemplateRef } from 'vue'
 import { useClipboard } from '@vueuse/core'
 import { useAppConfig } from '#imports'
+import { useComponentUI } from '../../composables/useComponentUI'
 import { useLocale } from '../../composables/useLocale'
 import { tv } from '../../utils/tv'
 import UCodeIcon from './CodeIcon.vue'
@@ -38,17 +40,26 @@ defineSlots<ProsePreSlots>()
 const { t } = useLocale()
 const { copy, copied } = useClipboard()
 const appConfig = useAppConfig() as ProsePre['AppConfig']
+const uiProp = useComponentUI('prose.pre', props)
+
+const baseRef = useTemplateRef('baseRef')
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.pre || {}) })())
+
+function copyCode() {
+  const code = props.code ?? baseRef.value?.textContent ?? ''
+
+  copy(code)
+}
 </script>
 
 <template>
-  <div :class="ui.root({ class: [props.ui?.root], filename: !!filename })">
-    <div v-if="filename && !hideHeader" :class="ui.header({ class: props.ui?.header })">
-      <UCodeIcon :icon="icon" :filename="filename" :class="ui.icon({ class: props.ui?.icon })" />
+  <div :class="ui.root({ class: [uiProp?.root], filename: !!filename })">
+    <div v-if="filename && !hideHeader" :class="ui.header({ class: uiProp?.header })">
+      <UCodeIcon :icon="icon" :filename="filename" :class="ui.icon({ class: uiProp?.icon })" />
 
-      <span :class="ui.filename({ class: props.ui?.filename })">{{ filename }}</span>
+      <span :class="ui.filename({ class: uiProp?.filename })">{{ filename }}</span>
     </div>
 
     <UButton
@@ -57,24 +68,11 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.pre |
       variant="outline"
       size="sm"
       :aria-label="t('prose.pre.copy')"
-      :class="ui.copy({ class: props.ui?.copy })"
+      :class="ui.copy({ class: uiProp?.copy })"
       tabindex="-1"
-      @click="copy(props.code || '')"
+      @click="copyCode"
     />
 
-    <pre :class="ui.base({ class: [props.ui?.base, props.class] })" v-bind="$attrs"><slot /></pre>
+    <pre ref="baseRef" :class="ui.base({ class: [uiProp?.base, props.class] })" v-bind="$attrs"><slot /></pre>
   </div>
 </template>
-
-<style>
-.shiki span.line {
-  display: block;
-}
-
-.shiki span.line.highlight {
-  margin: 0 -16px;
-  padding: 0 16px;
-
-  @apply bg-(--ui-bg-accented)/50;
-}
-</style>

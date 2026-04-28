@@ -30,10 +30,15 @@ export default defineLocale<Messages>({
       prev: 'پێشتر'
     },
     chatPrompt: {
-      placeholder: 'نامەکەت لێرە بنوسە...'
+      placeholder: 'نامەکەت لێرە بنوسە…'
     },
     chatPromptSubmit: {
       label: 'ناردن'
+    },
+    chatReasoning: {
+      thinking: 'بیرکردنەوە…',
+      thought: 'بیری کردەوە',
+      thoughtFor: 'بە ماوەی {duration} بیری کردەوە'
     },
     colorMode: {
       dark: 'تاریک',
@@ -58,6 +63,10 @@ export default defineLocale<Messages>({
     },
     contentToc: {
       title: 'لەم پەڕەیەدا'
+    },
+    dropdownMenu: {
+      noMatch: 'هیچ ئەنجامێک نەدۆزرایەوە',
+      search: 'گەڕان…'
     },
     dashboardSearch: {
       theme: 'ڕووکار'
@@ -92,6 +101,11 @@ export default defineLocale<Messages>({
       decrement: 'کەمکردنەوە',
       increment: 'زیادکردن'
     },
+    listbox: {
+      noData: 'هیچ داتایەک نییە',
+      noMatch: 'هیچ ئەنجامێک نەدۆزرایەوە',
+      search: 'گەڕان…'
+    },
     modal: {
       close: 'داخستن'
     },
@@ -111,7 +125,15 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'لەبەرگرتنەوەی کۆد'
+      },
+      prompt: {
+        copy: 'لەبەرگرتنەوەی فەرمان',
+        openIn: 'کردنەوە لە {name}'
       }
+    },
+    sidebar: {
+      close: 'داخستن',
+      toggle: 'گۆڕین'
     },
     selectMenu: {
       create: '"{label}" زیادکردنی',

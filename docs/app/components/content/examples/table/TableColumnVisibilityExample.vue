@@ -78,16 +78,19 @@ const columns: TableColumn<Payment>[] = [{
   header: 'Email'
 }, {
   accessorKey: 'amount',
-  header: () => h('div', { class: 'text-right' }, 'Amount'),
+  header: 'Amount',
+  meta: {
+    class: {
+      th: 'text-right',
+      td: 'text-right font-medium'
+    }
+  },
   cell: ({ row }) => {
     const amount = Number.parseFloat(row.getValue('amount'))
-
-    const formatted = new Intl.NumberFormat('en-US', {
+    return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'EUR'
     }).format(amount)
-
-    return h('div', { class: 'text-right font-medium' }, formatted)
   }
 }]
 
@@ -100,7 +103,7 @@ const columnVisibility = ref({
 
 <template>
   <div class="flex flex-col flex-1 w-full">
-    <div class="flex justify-end px-4 py-3.5 border-b  border-accented">
+    <div class="flex justify-end px-4 py-3.5 border-b border-accented">
       <UDropdownMenu
         :items="table?.tableApi?.getAllColumns().filter(column => column.getCanHide()).map(column => ({
           label: upperFirst(column.id),

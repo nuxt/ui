@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Avatar > renders with alt correctly 1`] = `"<span data-slot="root" class="inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle bg-elevated size-8 text-base"><span data-slot="fallback" class="font-medium leading-none text-muted truncate">BC</span></span>"`;
+exports[`Avatar > renders with alt correctly 1`] = `"<span data-slot="root" class="inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle bg-elevated size-8 text-base"><span data-slot="fallback" class="font-medium text-muted truncate">BC</span></span>"`;
 
 exports[`Avatar > renders with as (object) correctly 1`] = `
 "<section data-slot="root" class="inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle bg-elevated size-8 text-base">
@@ -10,11 +10,13 @@ exports[`Avatar > renders with as (object) correctly 1`] = `
 
 exports[`Avatar > renders with as (partial object) correctly 1`] = `"<span data-slot="root" class="inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle bg-elevated size-8 text-base"><p src="https://github.com/benjamincanac.png" width="32" height="32" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></p></span>"`;
 
-exports[`Avatar > renders with as correctly 1`] = `"<section data-slot="root" class="inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle bg-elevated size-8 text-base"><span data-slot="fallback" class="font-medium leading-none text-muted truncate">&nbsp;</span></section>"`;
+exports[`Avatar > renders with as correctly 1`] = `"<section data-slot="root" class="inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle bg-elevated size-8 text-base"><span data-slot="fallback" class="font-medium text-muted truncate">&nbsp;</span></section>"`;
 
-exports[`Avatar > renders with chip correctly 1`] = `"<span data-slot="root" class="relative inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle bg-elevated size-8 text-base"><span data-slot="fallback" class="font-medium leading-none text-muted truncate">&nbsp;</span><span data-slot="base" class="rounded-full ring ring-bg flex items-center justify-center text-inverted font-medium whitespace-nowrap bg-primary h-[8px] min-w-[8px] text-[8px] top-0 right-0 absolute">1</span></span>"`;
+exports[`Avatar > renders with chip correctly 1`] = `"<span data-slot="root" class="relative inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle bg-elevated size-8 text-base"><span data-slot="fallback" class="font-medium text-muted truncate">&nbsp;</span><span data-slot="base" class="rounded-full ring ring-bg flex items-center justify-center text-inverted font-medium whitespace-nowrap bg-primary h-[8px] min-w-[8px] text-[8px] top-0 right-0 absolute">1</span></span>"`;
 
-exports[`Avatar > renders with class correctly 1`] = `"<span data-slot="root" class="inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle size-8 text-base bg-default"><span data-slot="fallback" class="font-medium leading-none text-muted truncate">&nbsp;</span></span>"`;
+exports[`Avatar > renders with class correctly 1`] = `"<span data-slot="root" class="inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle size-8 text-base bg-default"><span data-slot="fallback" class="font-medium text-muted truncate">&nbsp;</span></span>"`;
+
+exports[`Avatar > renders with custom size correctly 1`] = `"<span data-slot="root" class="inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle bg-elevated text-base size-100"><img src="https://github.com/benjamincanac.png" width="400" height="400" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span>"`;
 
 exports[`Avatar > renders with default slot correctly 1`] = `"<span data-slot="root" class="inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle bg-elevated size-8 text-base">🇫🇷</span>"`;
 
@@ -40,6 +42,6 @@ exports[`Avatar > renders with size xs correctly 1`] = `"<span data-slot="root" 
 
 exports[`Avatar > renders with src correctly 1`] = `"<span data-slot="root" class="inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle bg-elevated size-8 text-base"><img src="https://github.com/benjamincanac.png" width="32" height="32" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span>"`;
 
-exports[`Avatar > renders with text correctly 1`] = `"<span data-slot="root" class="inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle bg-elevated size-8 text-base"><span data-slot="fallback" class="font-medium leading-none text-muted truncate">+1</span></span>"`;
+exports[`Avatar > renders with text correctly 1`] = `"<span data-slot="root" class="inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle bg-elevated size-8 text-base"><span data-slot="fallback" class="font-medium text-muted truncate">+1</span></span>"`;
 
-exports[`Avatar > renders with ui correctly 1`] = `"<span data-slot="root" class="inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle bg-elevated size-8 text-base"><span data-slot="fallback" class="leading-none text-muted truncate font-bold">&nbsp;</span></span>"`;
+exports[`Avatar > renders with ui correctly 1`] = `"<span data-slot="root" class="inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle bg-elevated size-8 text-base"><span data-slot="fallback" class="text-muted truncate font-bold">&nbsp;</span></span>"`;

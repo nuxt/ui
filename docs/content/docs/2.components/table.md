@@ -5,6 +5,7 @@ links:
   - label: TanStack Table
     avatar:
       src: https://github.com/tanstack.png
+      loading: lazy
     to: https://tanstack.com/table/latest
   - label: GitHub
     icon: i-simple-icons-github
@@ -13,7 +14,7 @@ links:
 
 ## Usage
 
-The Table component is built on top of [TanStack Table](https://tanstack.com/table/latest) and is powered by the [useVueTable](https://tanstack.com/table/latest/docs/framework/vue/vue-table#usevuetable) composable to provide a flexible and fully type-safe API. *Some features of TanStack Table are not supported yet, we'll add more over time.*
+The Table component is built on top of [TanStack Table](https://tanstack.com/table/latest) and is powered by the [useVueTable](https://tanstack.com/table/latest/docs/framework/vue/vue-table#usevuetable) composable to provide a flexible and fully type-safe API.
 
 ::component-example
 ---
@@ -33,6 +34,7 @@ Use the `data` prop as an array of objects, the columns will be generated based 
 
 ::component-code
 ---
+prettier: true
 collapse: true
 class: '!p-0'
 ignore:
@@ -77,7 +79,7 @@ Use the `columns` prop as an array of [ColumnDef](https://tanstack.com/table/lat
 
 - `accessorKey`: [The key of the row object to use when extracting the value for the column.]{class="text-muted"}
 - `header`: [The header to display for the column. If a string is passed, it can be used as a default for the column ID. If a function is passed, it will be passed a props object for the header and should return the rendered header value (the exact type depends on the adapter being used).]{class="text-muted"}
-- `footer`: [The footer to display for the column. Works exactly like header, but is displayed under the table.]{class="text-muted"}
+- [`footer`](#with-column-footer): [The footer to display for the column. Works exactly like header, but is displayed under the table.]{class="text-muted"}
 - `cell`: [The cell to display each row for the column. If a function is passed, it will be passed a props object for the cell and should return the rendered cell value (the exact type depends on the adapter being used).]{class="text-muted"}
 - `meta`: [Extra properties for the column.]{class="text-muted"}
   - `class`:
@@ -86,6 +88,10 @@ Use the `columns` prop as an array of [ColumnDef](https://tanstack.com/table/lat
   - `style`:
     - `td`: [The style to apply to the `td` element.]{class="text-muted"}
     - `th`: [The style to apply to the `th` element.]{class="text-muted"}
+  - [`colspan`](#with-column-span):
+    - `td`: [The colspan attribute to apply to the `td` element.]{class="text-muted"}
+  - [`rowspan`](#with-column-span):
+    - `td`: [The rowspan attribute to apply to the `td` element.]{class="text-muted"}
 
 In order to render components or other HTML elements, you will need to use the Vue [`h` function](https://vuejs.org/api/render-function.html#h) inside the `header` and `cell` props. This is different from other components that use slots but allows for more flexibility.
 
@@ -101,7 +107,7 @@ class: '!p-0'
 name: 'table-columns-example'
 highlights:
   - 53
-  - 105
+  - 108
 ---
 ::
 
@@ -122,8 +128,11 @@ Use the `meta` prop as an object ([TableMeta](https://tanstack.com/table/latest/
 ---
 prettier: true
 collapse: true
-name: 'table-custom-meta-example'
+name: 'table-meta-example'
 class: '!p-0'
+highlights:
+  - 128
+  - 140
 ---
 ::
 
@@ -133,6 +142,7 @@ Use the `loading` prop to display a loading state, the `loading-color` prop to c
 
 ::component-code
 ---
+prettier: true
 collapse: true
 class: '!p-0'
 ignore:
@@ -180,6 +190,7 @@ Use the `sticky` prop to make the header or footer sticky.
 
 ::component-code
 ---
+prettier: true
 collapse: true
 class: '!p-0'
 ignore:
@@ -245,8 +256,8 @@ prettier: true
 collapse: true
 name: 'table-row-actions-example'
 highlights:
-  - 110
-  - 134
+  - 115
+  - 141
 class: '!p-0'
 ---
 ::
@@ -266,13 +277,13 @@ collapse: true
 name: 'table-row-expandable-example'
 highlights:
   - 55
-  - 71
+  - 72
 class: '!p-0'
 ---
 ::
 
 ::tip
-You can use the `expanded` prop to control the expandable state of the rows (can be binded with `v-model`).
+You can use the `expanded` prop to control the expandable state of the rows (can be bound with `v-model`).
 ::
 
 ::note
@@ -297,10 +308,34 @@ prettier: true
 collapse: true
 name: 'table-grouped-rows-example'
 highlights:
-  - 159
-  - 169
+  - 157
+  - 160
 class: '!p-0'
 ---
+::
+
+### With row pinning :badge{label="4.6+" class="align-text-top"}
+
+You can add a column that renders a [Button](/docs/components/button) component inside the `cell` to toggle the pinning state of a row using the TanStack Table [Row Pinning APIs](https://tanstack.com/table/latest/docs/api/features/row-pinning). Pinned rows will stay at the top or bottom of the table regardless of sorting or filtering.
+
+::component-example
+---
+prettier: true
+collapse: true
+name: 'table-row-pinning-example'
+overflowHidden: true
+highlights:
+  - 91
+  - 107
+  - 160
+  - 165
+  - 168
+class: '!p-0'
+---
+::
+
+::tip
+You can use the `row-pinning` prop to control the pinning state of the rows (can be bound with `v-model`).
 ::
 
 ### With row selection
@@ -320,7 +355,7 @@ class: '!p-0'
 ::
 
 ::tip
-You can use the `row-selection` prop to control the selection state of the rows (can be binded with `v-model`).
+You can use the `row-selection` prop to control the selection state of the rows (can be bound with `v-model`).
 ::
 
 ### With row select event
@@ -337,8 +372,8 @@ prettier: true
 collapse: true
 name: 'table-row-select-event-example'
 highlights:
-  - 123
-  - 130
+  - 124
+  - 131
 class: '!p-0'
 ---
 ::
@@ -361,8 +396,8 @@ prettier: true
 collapse: true
 name: 'table-row-context-menu-event-example'
 highlights:
-  - 130
-  - 170
+  - 133
+  - 173
 class: '!p-0'
 ---
 ::
@@ -381,8 +416,8 @@ prettier: true
 collapse: true
 name: 'table-row-hover-event-example'
 highlights:
-  - 126
-  - 149
+  - 129
+  - 152
 class: '!p-0'
 ---
 ::
@@ -401,8 +436,25 @@ prettier: true
 collapse: true
 name: 'table-column-footer-example'
 highlights:
-  - 94
-  - 108
+  - 100
+  - 112
+class: '!p-0'
+---
+::
+
+### With column span
+
+You can use the `colspan` and `rowspan` properties in the column `meta` to merge cells. These properties accept a static value or a function that receives the cell and returns the span value.
+
+::note
+When using `rowspan`, cells that are "absorbed" by a previous row's span need to be visually hidden. Use the `class` meta with a function that returns `'hidden'` for those cells.
+::
+
+::component-example
+---
+prettier: true
+collapse: true
+name: 'table-column-span-example'
 class: '!p-0'
 ---
 ::
@@ -424,7 +476,7 @@ class: '!p-0'
 ::
 
 ::tip
-You can use the `sorting` prop to control the sorting state of the columns (can be binded with `v-model`).
+You can use the `sorting` prop to control the sorting state of the columns (can be bound with `v-model`).
 ::
 
 You can also create a reusable component to make any column header sortable.
@@ -460,14 +512,14 @@ collapse: true
 overflowHidden: true
 name: 'table-column-pinning-example'
 highlights:
-  - 100
-  - 113
+  - 108
+  - 126
 class: '!p-0 overflow-clip'
 ---
 ::
 
 ::tip
-You can use the `column-pinning` prop to control the pinning state of the columns (can be binded with `v-model`).
+You can use the `column-pinning` prop to control the pinning state of the columns (can be bound with `v-model`).
 ::
 
 ### With column visibility
@@ -480,14 +532,14 @@ prettier: true
 collapse: true
 name: 'table-column-visibility-example'
 highlights:
-  - 135
-  - 142
+  - 121
+  - 146
 class: '!p-0'
 ---
 ::
 
 ::tip
-You can use the `column-visibility` prop to control the visibility state of the columns (can be binded with `v-model`).
+You can use the `column-visibility` prop to control the visibility state of the columns (can be bound with `v-model`).
 ::
 
 ### With column filters
@@ -500,14 +552,14 @@ prettier: true
 collapse: true
 name: 'table-column-filters-example'
 highlights:
-  - 135
-  - 142
+  - 123
+  - 128
 class: '!p-0'
 ---
 ::
 
 ::tip
-You can use the `column-filters` prop to control the filters state of the columns (can be binded with `v-model`).
+You can use the `column-filters` prop to control the filters state of the columns (can be bound with `v-model`).
 ::
 
 ### With global filter
@@ -520,11 +572,13 @@ prettier: true
 collapse: true
 name: 'table-global-filter-example'
 class: '!p-0'
+highlights:
+  - 116
 ---
 ::
 
 ::tip
-You can use the `global-filter` prop to control the global filter state (can be binded with `v-model`).
+You can use the `global-filter` prop to control the global filter state (can be bound with `v-model`).
 ::
 
 ### With pagination
@@ -539,11 +593,14 @@ prettier: true
 collapse: true
 name: 'table-pagination-example'
 class: '!p-0'
+highlights:
+  - 204
+  - 209
 ---
 ::
 
 ::tip
-You can use the `pagination` prop to control the pagination state (can be binded with `v-model`).
+You can use the `pagination` prop to control the pagination state (can be bound with `v-model`).
 ::
 
 ### With fetched data
@@ -555,13 +612,20 @@ You can fetch data from an API and use them in the Table.
 prettier: true
 collapse: true
 name: 'table-fetch-example'
+highlights:
+  - 15
+  - 26
 class: '!p-0'
 ---
 ::
 
+::note
+This example uses `useLazyFetch` with `server: false` to fetch data on the client without blocking the initial render. The loading state checks for both `pending` and `idle` status to display a loading indicator before and during the fetch.
+::
+
 ### With infinite scroll
 
-If you use server-side pagination, you can use the [`useInfiniteScroll`](https://vueuse.org/core/useInfiniteScroll/#useinfinitescroll) composable to load more data when scrolling.
+If you use server-side pagination, you can use the [`useInfiniteScroll`](https://vueuse.org/core/useInfiniteScroll/#useinfinitescroll) composable to load more data  as the user scrolls.
 
 ::component-example
 ---
@@ -574,6 +638,10 @@ overflowHidden: true
 name: 'table-infinite-scroll-example'
 class: '!p-0'
 ---
+::
+
+::note
+This example uses `useLazyFetch` with `server: false` to fetch data on the client without blocking the initial render. The loading state checks for both `pending` and `idle` status to display a loading indicator before and during the fetch. Additional pages are loaded as the user scrolls.
 ::
 
 ### With drag and drop
@@ -589,8 +657,8 @@ Since the table ref doesn't expose the tbody element, add a unique class to it v
 prettier: true
 collapse: true
 highlights:
-  - 76
-  - 78
+  - 81
+  - 83
 name: 'table-drag-and-drop-example'
 class: '!p-0'
 ---
@@ -598,16 +666,17 @@ class: '!p-0'
 
 ### With virtualization :badge{label="4.1+" class="align-text-top"}
 
-Use the `virtualize` prop to enable virtualization for large datasets as a boolean or an object with options like `{ estimateSize: 65, overscan: 12 }`. You can also pass other [TanStack Virtual options](https://tanstack.com/virtual/latest/docs/api/virtualizer#optional-options) to customize the virtualization behavior.
+Use the `virtualize` prop to enable virtualization for large datasets as a boolean or an object with options like `{ estimateSize: 65, overscan: 12 }`. You can also pass other [TanStack Virtual options](https://tanstack.com/virtual/latest/docs/api/virtualizer#optional-options) to customize the virtualization behavior. The `sticky` prop works in combination with `virtualize` to keep the header or footer visible while scrolling through large datasets.
 
 ::warning
-When virtualization is enabled, the divider between rows and sticky properties are not supported.
+Row pinning is not supported when virtualization is enabled.
 ::
 
 ::component-example
 ---
 prettier: true
 collapse: true
+overflowHidden: true
 name: 'table-virtualize-example'
 class: '!p-0'
 ---

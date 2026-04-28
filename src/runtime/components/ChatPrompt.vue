@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/chat-prompt'
 import type { TextareaProps, TextareaSlots } from '../types'
@@ -32,8 +33,8 @@ export interface ChatPromptEmits {
 }
 
 export interface ChatPromptSlots extends TextareaSlots {
-  header(props?: {}): any
-  footer(props?: {}): any
+  header?(props?: {}): VNode[]
+  footer?(props?: {}): VNode[]
 }
 </script>
 
@@ -42,6 +43,8 @@ import { computed, toRef, useTemplateRef } from 'vue'
 import { Primitive, useForwardProps } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
+import { useComponentUI } from '../composables/useComponentUI'
+import { useIMEGuard } from '../composables/useIMEGuard'
 import { useLocale } from '../composables/useLocale'
 import { omit, transformUI } from '../utils'
 import { tv } from '../utils/tv'
@@ -62,6 +65,7 @@ const model = defineModel<string>({ default: '' })
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as ChatPrompt['AppConfig']
+const uiProp = useComponentUI('chatPrompt', props)
 
 const textareaProps = useForwardProps(reactivePick(props, 'rows', 'autofocus', 'autofocusDelay', 'autoresize', 'autoresizeDelay', 'maxrows', 'icon', 'avatar', 'loading', 'loadingIcon'))
 
@@ -87,14 +91,18 @@ function blur(e: Event) {
   emits('close', e)
 }
 
+const { onKeydown: onEnter, onCompositionEnd } = useIMEGuard((event) => {
+  submit(event)
+})
+
 defineExpose({
   textareaRef: toRef(() => textareaRef.value?.textareaRef)
 })
 </script>
 
 <template>
-  <Primitive :as="as" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })" @submit.prevent="submit">
-    <div v-if="!!slots.header" data-slot="header" :class="ui.header({ class: props.ui?.header })">
+  <Primitive :as="as" data-slot="root" :class="ui.root({ class: [uiProp?.root, props.class] })" @submit.prevent="submit">
+    <div v-if="!!slots.header" data-slot="header" :class="ui.header({ class: uiProp?.header })">
       <slot name="header" />
     </div>
 
@@ -104,11 +112,13 @@ defineExpose({
       :placeholder="placeholder || t('chatPrompt.placeholder')"
       :disabled="Boolean(error) || disabled"
       variant="none"
+      fixed
       v-bind="{ ...textareaProps, ...$attrs }"
-      :ui="transformUI(omit(ui, ['root', 'body', 'header', 'footer']), props.ui)"
+      :ui="transformUI(omit(ui, ['root', 'body', 'header', 'footer']), uiProp)"
       data-slot="body"
-      :class="ui.body({ class: props.ui?.body })"
-      @keydown.enter.exact.prevent="submit"
+      :class="ui.body({ class: uiProp?.body })"
+      @keydown.enter.exact="onEnter"
+      @compositionend="onCompositionEnd"
       @keydown.esc="blur"
     >
       <template v-for="(_, name) in getProxySlots()" #[name]="slotData">
@@ -116,7 +126,7 @@ defineExpose({
       </template>
     </UTextarea>
 
-    <div v-if="!!slots.footer" data-slot="footer" :class="ui.footer({ class: props.ui?.footer })">
+    <div v-if="!!slots.footer" data-slot="footer" :class="ui.footer({ class: uiProp?.footer })">
       <slot name="footer" />
     </div>
   </Primitive>

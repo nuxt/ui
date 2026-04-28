@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'Билдирүү жөнөтүү'
     },
+    chatReasoning: {
+      thinking: 'Ойлонуда…',
+      thought: 'Ойлонду',
+      thoughtFor: '{duration} ойлонду'
+    },
     colorMode: {
       dark: 'Караңгы',
       light: 'Жарык',
@@ -57,6 +62,10 @@ export default defineLocale<Messages>({
     },
     contentToc: {
       title: 'Бул бетте'
+    },
+    dropdownMenu: {
+      noMatch: 'Сүйлөшкөн маалыматтар жок',
+      search: 'Издөө…'
     },
     dashboardSearch: {
       theme: 'Тема'
@@ -91,6 +100,11 @@ export default defineLocale<Messages>({
       decrement: 'Азайтуу',
       increment: 'Кошуу'
     },
+    listbox: {
+      noData: 'Маалымат жок',
+      noMatch: 'Сүйлөшкөн маалыматтар жок',
+      search: 'Издөө…'
+    },
     modal: {
       close: 'Жабуу'
     },
@@ -110,7 +124,15 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'Кодду алмашуу буферине көчүрүү'
+      },
+      prompt: {
+        copy: 'Суроону көчүрүү',
+        openIn: '{name} ичинде ачуу'
       }
+    },
+    sidebar: {
+      close: 'Жабуу',
+      toggle: 'Которуу'
     },
     selectMenu: {
       create: '"{label}" жасоо',
