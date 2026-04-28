@@ -6,7 +6,7 @@ exports[`ChatMessages > renders with assistant correctly 1`] = `
     <!--v-if-->
     <div data-slot="container" class="relative flex items-start justify-end ms-auto max-w-[75%] gap-3 pb-8">
       <!--v-if-->
-      <div data-slot="content" class="relative text-pretty min-w-0 *:first:mt-0 *:last:mb-0 bg-elevated/50 space-y-4 px-4 py-3 rounded-lg min-h-12">Hello, how are you?</div>
+      <div data-slot="content" class="relative text-pretty min-w-0 *:first:mt-0 *:last:mb-0 space-y-4 px-4 py-3 rounded-lg min-h-12 bg-elevated/50">Hello, how are you?</div>
       <!--v-if-->
     </div>
   </article>
@@ -29,7 +29,7 @@ exports[`ChatMessages > renders with class correctly 1`] = `
     <!--v-if-->
     <div data-slot="container" class="relative flex items-start justify-end ms-auto max-w-[75%] gap-3 pb-8">
       <!--v-if-->
-      <div data-slot="content" class="relative text-pretty min-w-0 *:first:mt-0 *:last:mb-0 bg-elevated/50 space-y-4 px-4 py-3 rounded-lg min-h-12">Hello, how are you?</div>
+      <div data-slot="content" class="relative text-pretty min-w-0 *:first:mt-0 *:last:mb-0 space-y-4 px-4 py-3 rounded-lg min-h-12 bg-elevated/50">Hello, how are you?</div>
       <!--v-if-->
     </div>
   </article>
@@ -52,7 +52,7 @@ exports[`ChatMessages > renders with compact correctly 1`] = `
     <!--v-if-->
     <div data-slot="container" class="relative flex items-start justify-end ms-auto max-w-[75%] gap-1.5 pb-3">
       <!--v-if-->
-      <div data-slot="content" class="relative text-pretty min-w-0 *:first:mt-0 *:last:mb-0 bg-elevated/50 space-y-2 px-2 py-1 rounded-lg min-h-8">Hello, how are you?</div>
+      <div data-slot="content" class="relative text-pretty min-w-0 *:first:mt-0 *:last:mb-0 space-y-2 px-2 py-1 rounded-lg min-h-8 bg-elevated/50">Hello, how are you?</div>
       <!--v-if-->
     </div>
   </article>
@@ -75,7 +75,7 @@ exports[`ChatMessages > renders with content slot correctly 1`] = `
     <!--v-if-->
     <div data-slot="container" class="relative flex items-start justify-end ms-auto max-w-[75%] gap-3 pb-8">
       <!--v-if-->
-      <div data-slot="content" class="relative text-pretty min-w-0 *:first:mt-0 *:last:mb-0 bg-elevated/50 space-y-4 px-4 py-3 rounded-lg min-h-12">Content slot</div>
+      <div data-slot="content" class="relative text-pretty min-w-0 *:first:mt-0 *:last:mb-0 space-y-4 px-4 py-3 rounded-lg min-h-12 bg-elevated/50">Content slot</div>
       <!--v-if-->
     </div>
   </article>
@@ -105,7 +105,7 @@ exports[`ChatMessages > renders with files slot correctly 1`] = `
     <!--v-if-->
     <div data-slot="container" class="relative flex items-start justify-end ms-auto max-w-[75%] gap-3 pb-8">
       <!--v-if-->
-      <div data-slot="content" class="relative text-pretty min-w-0 *:first:mt-0 *:last:mb-0 bg-elevated/50 space-y-4 px-4 py-3 rounded-lg min-h-12">Hello, how are you?</div>
+      <div data-slot="content" class="relative text-pretty min-w-0 *:first:mt-0 *:last:mb-0 space-y-4 px-4 py-3 rounded-lg min-h-12 bg-elevated/50">Hello, how are you?</div>
       <!--v-if-->
     </div>
   </article>
@@ -128,7 +128,7 @@ exports[`ChatMessages > renders with indicator slot correctly 1`] = `
     <!--v-if-->
     <div data-slot="container" class="relative flex items-start justify-end ms-auto max-w-[75%] gap-3 pb-8">
       <!--v-if-->
-      <div data-slot="content" class="relative text-pretty min-w-0 *:first:mt-0 *:last:mb-0 bg-elevated/50 space-y-4 px-4 py-3 rounded-lg min-h-12">Hello, how are you?</div>
+      <div data-slot="content" class="relative text-pretty min-w-0 *:first:mt-0 *:last:mb-0 space-y-4 px-4 py-3 rounded-lg min-h-12 bg-elevated/50">Hello, how are you?</div>
       <!--v-if-->
     </div>
   </article>
@@ -158,7 +158,7 @@ exports[`ChatMessages > renders with messages correctly 1`] = `
     <!--v-if-->
     <div data-slot="container" class="relative flex items-start justify-end ms-auto max-w-[75%] gap-3 pb-8">
       <!--v-if-->
-      <div data-slot="content" class="relative text-pretty min-w-0 *:first:mt-0 *:last:mb-0 bg-elevated/50 space-y-4 px-4 py-3 rounded-lg min-h-12">Hello, how are you?</div>
+      <div data-slot="content" class="relative text-pretty min-w-0 *:first:mt-0 *:last:mb-0 space-y-4 px-4 py-3 rounded-lg min-h-12 bg-elevated/50">Hello, how are you?</div>
       <!--v-if-->
     </div>
   </article>
@@ -181,7 +181,7 @@ exports[`ChatMessages > renders with status error correctly 1`] = `
     <!--v-if-->
     <div data-slot="container" class="relative flex items-start justify-end ms-auto max-w-[75%] gap-3 pb-8">
       <!--v-if-->
-      <div data-slot="content" class="relative text-pretty min-w-0 *:first:mt-0 *:last:mb-0 bg-elevated/50 space-y-4 px-4 py-3 rounded-lg min-h-12">Hello, how are you?</div>
+      <div data-slot="content" class="relative text-pretty min-w-0 *:first:mt-0 *:last:mb-0 space-y-4 px-4 py-3 rounded-lg min-h-12 bg-elevated/50">Hello, how are you?</div>
       <!--v-if-->
     </div>
   </article>
@@ -204,7 +204,7 @@ exports[`ChatMessages > renders with status ready correctly 1`] = `
     <!--v-if-->
     <div data-slot="container" class="relative flex items-start justify-end ms-auto max-w-[75%] gap-3 pb-8">
       <!--v-if-->
-      <div data-slot="content" class="relative text-pretty min-w-0 *:first:mt-0 *:last:mb-0 bg-elevated/50 space-y-4 px-4 py-3 rounded-lg min-h-12">Hello, how are you?</div>
+      <div data-slot="content" class="relative text-pretty min-w-0 *:first:mt-0 *:last:mb-0 space-y-4 px-4 py-3 rounded-lg min-h-12 bg-elevated/50">Hello, how are you?</div>
       <!--v-if-->
     </div>
   </article>
@@ -227,7 +227,7 @@ exports[`ChatMessages > renders with status streaming correctly 1`] = `
     <!--v-if-->
     <div data-slot="container" class="relative flex items-start justify-end ms-auto max-w-[75%] gap-3 pb-8">
       <!--v-if-->
-      <div data-slot="content" class="relative text-pretty min-w-0 *:first:mt-0 *:last:mb-0 bg-elevated/50 space-y-4 px-4 py-3 rounded-lg min-h-12">Hello, how are you?</div>
+      <div data-slot="content" class="relative text-pretty min-w-0 *:first:mt-0 *:last:mb-0 space-y-4 px-4 py-3 rounded-lg min-h-12 bg-elevated/50">Hello, how are you?</div>
       <!--v-if-->
     </div>
   </article>
@@ -250,7 +250,7 @@ exports[`ChatMessages > renders with status submitted correctly 1`] = `
     <!--v-if-->
     <div data-slot="container" class="relative flex items-start justify-end ms-auto max-w-[75%] gap-3 pb-8">
       <!--v-if-->
-      <div data-slot="content" class="relative text-pretty min-w-0 *:first:mt-0 *:last:mb-0 bg-elevated/50 space-y-4 px-4 py-3 rounded-lg min-h-12">Hello, how are you?</div>
+      <div data-slot="content" class="relative text-pretty min-w-0 *:first:mt-0 *:last:mb-0 space-y-4 px-4 py-3 rounded-lg min-h-12 bg-elevated/50">Hello, how are you?</div>
       <!--v-if-->
     </div>
   </article>
@@ -282,7 +282,7 @@ exports[`ChatMessages > renders with ui correctly 1`] = `
     <!--v-if-->
     <div data-slot="container" class="relative flex items-start justify-end ms-auto max-w-[75%] gap-3 pb-8">
       <!--v-if-->
-      <div data-slot="content" class="relative text-pretty min-w-0 *:first:mt-0 *:last:mb-0 bg-elevated/50 space-y-4 px-4 py-3 rounded-lg min-h-12">Hello, how are you?</div>
+      <div data-slot="content" class="relative text-pretty min-w-0 *:first:mt-0 *:last:mb-0 space-y-4 px-4 py-3 rounded-lg min-h-12 bg-elevated/50">Hello, how are you?</div>
       <!--v-if-->
     </div>
   </article>
@@ -305,7 +305,7 @@ exports[`ChatMessages > renders with user correctly 1`] = `
     <!--v-if-->
     <div data-slot="container" class="relative flex items-start justify-end ms-auto max-w-[75%] gap-3 pb-8">
       <div data-slot="leading" class="inline-flex items-center justify-center min-h-6 mt-2"><span data-slot="root" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img src="https://github.com/benjamincanac.png" width="32" height="32" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span></div>
-      <div data-slot="content" class="relative text-pretty min-w-0 *:first:mt-0 *:last:mb-0 bg-elevated/50 space-y-4 px-4 py-3 rounded-lg min-h-12">Hello, how are you?</div>
+      <div data-slot="content" class="relative text-pretty min-w-0 *:first:mt-0 *:last:mb-0 space-y-4 px-4 py-3 rounded-lg min-h-12 bg-elevated/50">Hello, how are you?</div>
       <!--v-if-->
     </div>
   </article>
@@ -328,7 +328,7 @@ exports[`ChatMessages > renders with viewport slot correctly 1`] = `
     <!--v-if-->
     <div data-slot="container" class="relative flex items-start justify-end ms-auto max-w-[75%] gap-3 pb-8">
       <!--v-if-->
-      <div data-slot="content" class="relative text-pretty min-w-0 *:first:mt-0 *:last:mb-0 bg-elevated/50 space-y-4 px-4 py-3 rounded-lg min-h-12">Hello, how are you?</div>
+      <div data-slot="content" class="relative text-pretty min-w-0 *:first:mt-0 *:last:mb-0 space-y-4 px-4 py-3 rounded-lg min-h-12 bg-elevated/50">Hello, how are you?</div>
       <!--v-if-->
     </div>
   </article>

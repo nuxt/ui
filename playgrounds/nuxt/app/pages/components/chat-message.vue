@@ -6,7 +6,7 @@ const variants = Object.keys(theme.variants.variant)
 
 const attrs = reactive({
   color: [theme.defaultVariants.color],
-  variant: [theme.defaultVariants.variant],
+  variant: [theme.defaultVariants.variant]
 })
 </script>
 

@@ -98,7 +98,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.chatMessage 
 
 <template>
   <Primitive :as="as" :data-role="role" data-slot="root" :class="ui.root({ class: [uiProp?.root, props.class] })">
-    <div v-if="(!!slots.files && fileParts.length) || !!slots.header" data-slot="header" :class="ui.container({ class: uiProp?.header })">
+    <div v-if="(!!slots.files && fileParts.length) || !!slots.header" data-slot="header" :class="ui.header({ class: uiProp?.header })">
       <slot name="header" v-bind="{ ...messageProps }">
         <div v-if="!!slots.files && fileParts.length" data-slot="files" :class="ui.files({ class: uiProp?.files })">
           <slot name="files" v-bind="{ ...messageProps, parts: fileParts }" />
