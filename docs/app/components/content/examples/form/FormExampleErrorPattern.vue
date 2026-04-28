@@ -4,14 +4,14 @@ import type { FormSubmitEvent } from '@nuxt/ui'
 
 const schema = z.object({
   email: z.email('Invalid email'),
-  favoriteDates: z.array(z.string().regex(/\d\d\d\d-\d\d-\d\d/, 'Must be formatted like YYYY-MM-DD')).min(1, 'Please add at least one date')
+  favoriteDates: z.array(z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'Must be formatted like YYYY-MM-DD')).min(1, 'Please add at least one date')
 })
 
 type Schema = z.output<typeof schema>
 
 const state = reactive<Partial<Schema>>({
   email: undefined,
-  favoriteDates: undefined
+  favoriteDates: []
 })
 
 const toast = useToast()
