@@ -250,7 +250,13 @@ export default defineNuxtConfig({
         '@tiptap/suggestion',
         '@tiptap/pm/state',
         'shiki-transformer-color-highlight',
-        'json5'
+        'json5',
+        '@internationalized/date',
+        'fflate',
+        'shiki/wasm',
+        '@tanstack/vue-table',
+        '@tanstack/vue-virtual',
+        '@vueuse/integrations/useSortable'
       ]
     }
   },
