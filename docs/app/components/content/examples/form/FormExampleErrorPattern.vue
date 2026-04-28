@@ -4,14 +4,14 @@ import type { FormSubmitEvent } from '@nuxt/ui'
 
 const schema = z.object({
   email: z.email('Invalid email'),
-  favoriteDates: z.array(z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'Must be formatted like YYYY-MM-DD')).min(1, 'Please add at least one date')
+  tags: z.array(z.string().regex(/^[a-z-]+$/, 'Lowercase letters and dashes only')).min(1, 'Please add at least one tag')
 })
 
 type Schema = z.output<typeof schema>
 
 const state = reactive<Partial<Schema>>({
   email: undefined,
-  favoriteDates: []
+  tags: []
 })
 
 const toast = useToast()
@@ -27,8 +27,8 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
       <UInput v-model="state.email" />
     </UFormField>
 
-    <UFormField label="Favorite Dates" name="favoriteDates" :error-pattern="/favoriteDates\..+/">
-      <UInputTags v-model="state.favoriteDates" />
+    <UFormField label="Tags" name="tags" :error-pattern="/^tags\..+/">
+      <UInputTags v-model="state.tags" />
     </UFormField>
 
     <UButton type="submit">

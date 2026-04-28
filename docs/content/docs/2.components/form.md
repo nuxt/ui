@@ -74,24 +74,6 @@ It requires two props:
   ::
 ::
 
-### Error reporting
-
-Errors are matched to the corresponding [FormField](/docs/components/form-field) component using its `name` prop. For example, the validation rule defined for the `email` attribute in your schema will be applied to `<FormField name="email">`{lang="vue"}.
-
-Nested fields are matched using dot notation. A rule like `{ user: z.object({ email: z.string() }) }`{lang="ts"} will be applied to `<FormField name="user.email">`{lang="vue"}.
-
-::warning
-Errors that include array indices in their name (e.g. `tags.0`, `tags.1`) are not matched by `name` alone. Use the `error-pattern` prop on the [FormField](/docs/components/form-field) component with a regular expression like `/^tags\..+/`{lang="ts"} to display them. This is especially relevant for components with array values such as [InputTags](/docs/components/input-tags).
-::
-
-::component-example
----
-name: 'form-example-error-pattern'
-props:
-  class: 'w-60'
----
-::
-
 ### Custom validation
 
 Use the `validate` prop to apply your own validation logic.
@@ -108,6 +90,24 @@ It can be used alongside the `schema` prop to handle complex use cases.
 ::component-example
 ---
 name: 'form-example-basic'
+props:
+  class: 'w-60'
+---
+::
+
+### Error reporting
+
+Errors are matched to the corresponding [FormField](/docs/components/form-field) using its `name` prop. An error on the `email` field is shown by `<FormField name="email">`{lang="vue"}.
+
+Nested fields are matched using dot notation. A schema like `{ user: z.object({ email: z.string() }) }`{lang="ts"} will be applied to `<FormField name="user.email">`{lang="vue"}.
+
+::warning
+Errors on array items include the index in their name (e.g. `tags.0`, `tags.1`) and won't match `<FormField name="tags">`{lang="vue"} by `name` alone. Use the `error-pattern` prop with a regular expression like `/^tags\..+/`{lang="ts"} to capture them. This is especially useful for components like [InputTags](/docs/components/input-tags).
+::
+
+::component-example
+---
+name: 'form-example-error-pattern'
 props:
   class: 'w-60'
 ---
@@ -201,13 +201,13 @@ name: 'form-example-nested'
 ::
 
 Or to validate list inputs:
+
 ::component-example
 ---
 collapse: true
 name: 'form-example-nested-list'
 ---
 ::
-
 
 ## API
 
