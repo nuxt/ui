@@ -17,6 +17,6 @@ const attrs = reactive({
   </Navbar>
 
   <Matrix v-slot="props" :attrs="attrs">
-    <UChatMessage content="My message" v-bind="props" />
+    <UChatMessage id="1" role="user" :parts="[{ type: 'text', text: 'Hello, how are you?' }]" v-bind="props" />
   </Matrix>
 </template>
