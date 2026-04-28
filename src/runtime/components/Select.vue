@@ -149,11 +149,12 @@ export interface SelectSlots<
 
 <script setup lang="ts" generic="T extends ArrayOrNested<SelectItem>, VK extends GetItemKeys<T> = 'value', M extends boolean = false, Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>">
 import { useTemplateRef, computed, onMounted, toRef } from 'vue'
-import { SelectRoot, SelectArrow, SelectTrigger, SelectPortal, SelectContent, SelectViewport, SelectValue as RSelectValue, SelectLabel, SelectGroup, SelectItem as RSelectItem, SelectItemIndicator, SelectItemText, SelectSeparator, useForwardPropsEmits } from 'reka-ui'
+import { SelectRoot, SelectArrow, SelectTrigger, SelectPortal, SelectContent, SelectViewport, SelectValue as RSelectValue, SelectLabel, SelectGroup, SelectItem as RSelectItem, SelectItemIndicator, SelectItemText, SelectSeparator } from 'reka-ui'
 import { defu } from 'defu'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { useComponentDefaults } from '../composables/useComponentUI'
+import { useComponentProps } from '../composables/useComponentUI'
+import { useForwardProps } from '../composables/useForwardProps'
 import { useFieldGroup, FieldGroupReset } from '../composables/useFieldGroup'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFormField } from '../composables/useFormField'
@@ -176,11 +177,11 @@ const _props = withDefaults(defineProps<SelectProps<T, VK, M, Mod>>(), {
 const emits = defineEmits<SelectEmits<T, VK, M, Mod>>()
 const slots = defineSlots<SelectSlots<T, VK, M, Mod>>()
 
-const props = useComponentDefaults<SelectProps<T, VK, M, Mod>>('select', _props, theme)
+const props = useComponentProps<SelectProps<T, VK, M, Mod>>('select', _props, theme)
 
 const appConfig = useAppConfig() as Select['AppConfig']
 
-const rootProps = useForwardPropsEmits(reactivePick(props, 'open', 'defaultOpen', 'disabled', 'autocomplete', 'required', 'multiple'), emits)
+const rootProps = useForwardProps(reactivePick(props, 'open', 'defaultOpen', 'disabled', 'autocomplete', 'required', 'multiple'), emits)
 const portalProps = usePortal(toRef(() => props.portal))
 const position = computed(() => props.content?.position ?? appConfig.ui?.select?.defaultVariants?.position ?? theme.defaultVariants?.position)
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: position.value }) as SelectContentProps)
@@ -308,9 +309,9 @@ defineExpose({
     v-slot="{ modelValue, open }"
     :name="name"
     v-bind="rootProps"
-    :autocomplete="autocomplete"
+    :autocomplete="props.autocomplete"
     :disabled="disabled"
-    :default-value="(defaultValue as Exclude<SelectItem, boolean> | Exclude<SelectItem, boolean>[])"
+    :default-value="(props.defaultValue as Exclude<SelectItem, boolean> | Exclude<SelectItem, boolean>[])"
     :model-value="(modelValue as Exclude<SelectItem, boolean> | Exclude<SelectItem, boolean>[])"
     @update:model-value="onUpdate"
     @update:open="onUpdateOpen"

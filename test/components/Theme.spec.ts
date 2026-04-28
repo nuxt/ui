@@ -4,11 +4,14 @@ import type { ThemeProps, ThemeSlots } from '../../src/runtime/components/Theme.
 import Theme from '../../src/runtime/components/Theme.vue'
 import { renderEach, componentRender } from '../component-render'
 import { h, ref, nextTick } from 'vue'
+import { TooltipProvider } from 'reka-ui'
 import Button from '../../src/runtime/components/Button.vue'
 import Badge from '../../src/runtime/components/Badge.vue'
 import Alert from '../../src/runtime/components/Alert.vue'
 import Input from '../../src/runtime/components/Input.vue'
 import Checkbox from '../../src/runtime/components/Checkbox.vue'
+import Tooltip from '../../src/runtime/components/Tooltip.vue'
+import FormField from '../../src/runtime/components/FormField.vue'
 import type { ButtonProps } from '../../src/runtime/types'
 
 type CaseOptions = { props?: ThemeProps, slots?: ThemeSlots }
@@ -359,5 +362,111 @@ describe('Theme', () => {
 
     expect(wrapper.find('button').classes()).toContain('bg-error/10')
     expect(wrapper.find('button').classes()).toContain('rounded-full')
+  })
+
+  // Boolean values supplied via `:props` must reach a Reka primitive root through
+  // `useForwardProps`. This is the path where Vue's auto-casting of unset Boolean
+  // props would otherwise turn the proxy result into `false` and silently swallow
+  // the theme value — the test pins down that the proxy + forwarder cooperate.
+  test(':props forwards a boolean to a reka primitive root (tooltip arrow)', async () => {
+    const wrapper = await mountSuspended({
+      components: { Theme, TooltipProvider, Tooltip },
+      template: `
+        <Theme :props="{ tooltip: { arrow: true } }">
+          <TooltipProvider>
+            <Tooltip text="Themed" :open="true" :portal="false" />
+          </TooltipProvider>
+        </Theme>
+      `
+    })
+
+    expect(wrapper.find('[data-slot="arrow"]').exists()).toBe(true)
+  })
+
+  // Without a `<UTheme :props>` ancestor, an unset Boolean prop must stay unset
+  // so the underlying Reka primitive's own default applies. The proxy gates the
+  // `_props` fallback on `withDefaults` having a real default, otherwise Vue's
+  // auto-cast `false` would leak through.
+  test('bare component does not pass Vue auto-cast `false` to reka primitive', async () => {
+    const wrapper = await mountSuspended({
+      components: { TooltipProvider, Tooltip },
+      template: `
+        <TooltipProvider>
+          <Tooltip text="Bare" :open="true" :portal="false" />
+        </TooltipProvider>
+      `
+    })
+
+    expect(wrapper.find('[data-slot="arrow"]').exists()).toBe(false)
+  })
+
+  // `useFormField` must receive the raw `_props` rather than the
+  // `useComponentProps` proxy, otherwise `<UTheme :props>` defaults would shadow
+  // values injected by `<UFormField>` (size, name, disabled, error...). This test
+  // locks down the precedence: explicit FormField context > `<UTheme :props>`.
+  test(':props on a child of <UFormField> still honors field injection', async () => {
+    const wrapper = await mountSuspended({
+      components: { Theme, FormField, Checkbox },
+      template: `
+        <Theme :props="{ checkbox: { color: 'success', size: 'xs' } }">
+          <FormField label="Accept" size="xl">
+            <Checkbox model-value />
+          </FormField>
+        </Theme>
+      `
+    })
+
+    // theme `color` flows through the proxy onto the checkbox
+    expect(wrapper.html()).toContain('focus-visible:outline-success')
+    // FormField label is wired up
+    expect(wrapper.text()).toContain('Accept')
+    // FormField-injected `size` (xl) wins over `<UTheme :props>` size (xs).
+    // `useFormField` reads `_props.size` (raw, undefined here) so it falls back
+    // to the FormField context — proving the proxy isn't shadowing field injection.
+    expect(wrapper.find('button[role="checkbox"]').classes()).toContain('size-5')
+    expect(wrapper.find('button[role="checkbox"]').classes()).not.toContain('size-3')
+  })
+
+  // FormField validation errors must always win over `<UTheme :props>` color.
+  // `useFormField` reads raw `_props` and short-circuits to `'error'` when a
+  // validation message is present, so the proxy fallback in
+  // `color: color.value ?? props.color` never runs.
+  test('FormField validation error overrides :props color', async () => {
+    const wrapper = await mountSuspended({
+      components: { Theme, FormField, Checkbox },
+      template: `
+        <Theme :props="{ checkbox: { color: 'success' } }">
+          <FormField label="Required" error="This field is required">
+            <Checkbox model-value />
+          </FormField>
+        </Theme>
+      `
+    })
+
+    expect(wrapper.html()).toContain('focus-visible:outline-error')
+    expect(wrapper.html()).not.toContain('focus-visible:outline-success')
+  })
+
+  test('reactivity: toggling a boolean in :props re-renders the reka primitive', async () => {
+    const themeProps = ref<{ tooltip: { arrow?: boolean } }>({ tooltip: { arrow: false } })
+
+    const wrapper = await mountSuspended({
+      components: { Theme, TooltipProvider, Tooltip },
+      setup: () => ({ themeProps }),
+      template: `
+        <Theme :props="themeProps">
+          <TooltipProvider>
+            <Tooltip text="Themed" :open="true" :portal="false" />
+          </TooltipProvider>
+        </Theme>
+      `
+    })
+
+    expect(wrapper.find('[data-slot="arrow"]').exists()).toBe(false)
+
+    themeProps.value = { tooltip: { arrow: true } }
+    await nextTick()
+
+    expect(wrapper.find('[data-slot="arrow"]').exists()).toBe(true)
   })
 })

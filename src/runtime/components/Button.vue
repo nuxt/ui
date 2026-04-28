@@ -47,7 +47,7 @@ import { computed, ref, inject } from 'vue'
 import { defu } from 'defu'
 import { useForwardProps } from 'reka-ui'
 import { useAppConfig } from '#imports'
-import { useComponentDefaults } from '../composables/useComponentUI'
+import { useComponentProps } from '../composables/useComponentUI'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFieldGroup } from '../composables/useFieldGroup'
 import { formLoadingInjectionKey } from '../composables/useFormField'
@@ -62,7 +62,7 @@ import ULinkBase from './LinkBase.vue'
 const _props = defineProps<ButtonProps>()
 const slots = defineSlots<ButtonSlots>()
 
-const props = useComponentDefaults('button', _props, theme)
+const props = useComponentProps('button', _props, theme)
 
 const appConfig = useAppConfig() as Button['AppConfig']
 const { orientation, size: buttonSize } = useFieldGroup<ButtonProps>(_props)
@@ -121,7 +121,7 @@ const ui = computed(() => tv({
 <template>
   <ULink
     v-slot="{ active, ...slotProps }"
-    :type="type"
+    :type="props.type"
     :disabled="disabled || isLoading"
     v-bind="omit(linkProps, ['type', 'disabled', 'onClick'])"
     custom
@@ -132,8 +132,8 @@ const ui = computed(() => tv({
       :class="ui.base({
         class: [props.ui?.base, props.class],
         active,
-        ...(active && activeVariant ? { variant: activeVariant } : {}),
-        ...(active && activeColor ? { color: activeColor } : {})
+        ...(active && props.activeVariant ? { variant: props.activeVariant } : {}),
+        ...(active && props.activeColor ? { color: props.activeColor } : {})
       })"
       @click="onClickWrapper"
     >
@@ -143,8 +143,8 @@ const ui = computed(() => tv({
       </slot>
 
       <slot :ui="ui">
-        <span v-if="label !== undefined && label !== null" data-slot="label" :class="ui.label({ class: props.ui?.label, active })">
-          {{ label }}
+        <span v-if="props.label !== undefined && props.label !== null" data-slot="label" :class="ui.label({ class: props.ui?.label, active })">
+          {{ props.label }}
         </span>
       </slot>
 

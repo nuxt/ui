@@ -90,10 +90,10 @@ Load these based on your task. **Do not load all files at once** — only load w
 | Props defaults | Use `withDefaults()` for runtime, JSDoc `@defaultValue` for docs |
 | Template slots | Add `data-slot="name"` attributes on all elements |
 | Computed ui | Always use `computed(() => tv(...))` for reactive theming |
-| Theme defaults | Wrap raw props with `useComponentDefaults(name, _props, theme)` to resolve the priority chain (explicit prop > `<UTheme :props>` > `withDefaults` > `app.config.defaultVariants` > `theme.defaultVariants`). Pass the **raw** `_props` (not the proxy) to `useFormField` / `useFieldGroup` so their injection precedence stays correct. |
+| Theme defaults | Wrap raw props with `useComponentProps(name, _props, theme)` to resolve the priority chain (explicit prop > `<UTheme :props>` > `withDefaults` > `app.config.defaultVariants` > `theme.defaultVariants`). Pass the **raw** `_props` (not the proxy) to `useFormField` / `useFieldGroup` so their injection precedence stays correct. |
 | Theme classes only | Use `useComponentUI(name, props)` when you only need to merge `<UTheme :ui>` slot-class overrides with the component `ui` prop |
 | Semantic colors | Use `text-default`, `bg-elevated`, etc. - never Tailwind palette |
-| Reka UI props | Use `reactivePick` + `useForwardPropsEmits` to forward props |
+| Reka UI props | Use `reactivePick` + `useForwardProps(source, emits?)` from `composables/useForwardProps` to forward props (proxy-aware; reka-ui's `useForwardProps` / `useForwardPropsEmits` filter out `<UTheme :props>` defaults) |
 | Form components | Use `useFormField` and `useFieldGroup` composables |
 
 ## Component Creation Workflow

@@ -2,11 +2,11 @@
 import { type VNode, computed } from 'vue'
 import defu from 'defu'
 import { injectThemeContext, provideThemeContext } from '../composables/useComponentUI'
-import type { ThemeDefaults, ThemeUI } from '../composables/useComponentUI'
+import type { ThemeContextDefaults, ThemeDefaults, ThemeUI } from '../composables/useComponentUI'
 
 export interface ThemeProps {
   /**
-   * Per-component prop defaults that flow through `useComponentDefaults` to
+   * Per-component prop defaults that flow through `useComponentProps` to
    * every descendant. Each key maps to a partial of that component's props.
    * @example `{ button: { color: 'warning' }, tooltip: { delayDuration: 0 } }`
    */
@@ -34,16 +34,16 @@ const NAMESPACES = new Set(['prose'])
 /**
  * Lift the flat `ThemeUI` shape (`{ button: { base: '...' } }`) into the
  * per-component defaults shape (`{ button: { ui: { base: '...' } } }`) so
- * `useComponentDefaults('button', ...)` reads slot classes from the same
+ * `useComponentProps('button', ...)` reads slot classes from the same
  * `ThemeContext.defaults` map as every other prop default.
  *
  * Namespaced maps like `{ prose: { p: { base: '...' } } }` preserve their
  * nesting so prose components' `useComponentUI('prose.p', ...)` lookup still
  * resolves: `{ prose: { p: { ui: { base: '...' } } } }`.
  */
-function normalizeUi(ui?: ThemeUI): ThemeDefaults {
+function normalizeUi(ui?: ThemeUI): ThemeContextDefaults {
   if (!ui) return {}
-  const result: ThemeDefaults = {}
+  const result: ThemeContextDefaults = {}
   for (const [key, value] of Object.entries(ui)) {
     if (!value || typeof value !== 'object') continue
     if (NAMESPACES.has(key)) {

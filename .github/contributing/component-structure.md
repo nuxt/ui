@@ -239,15 +239,15 @@ defineExpose({
 
 `tv()`'s `defaultVariants` only apply when computing CSS classes — they do **not** affect runtime checks (e.g. `<component :is>`, `v-if`, computed conditionals). They also can't carry per-instance overrides set from `<UTheme :props>` or `app.config.ts`.
 
-Wrap your raw props with `useComponentDefaults` to get a proxy that resolves the priority chain **explicit prop > nearest `<UTheme :props>` > `withDefaults` > `app.config.ui.<name>.defaultVariants` > `theme.defaultVariants`** for any prop, including ones that drive template logic.
+Wrap your raw props with `useComponentProps` to get a proxy that resolves the priority chain **explicit prop > nearest `<UTheme :props>` > `withDefaults` > `app.config.ui.<name>.defaultVariants` > `theme.defaultVariants`** for any prop, including ones that drive template logic.
 
 ```vue
 <script setup lang="ts">
-import { useComponentDefaults } from '../composables/useComponentUI'
+import { useComponentProps } from '../composables/useComponentUI'
 
 const _props = withDefaults(defineProps<RadioGroupProps>(), { /* ... */ })
 
-const props = useComponentDefaults<RadioGroupProps>('radioGroup', _props, theme)
+const props = useComponentProps<RadioGroupProps>('radioGroup', _props, theme)
 </script>
 
 <template>
@@ -259,6 +259,8 @@ Notes:
 - The proxy passes through to `_props` for explicitly set props, so `withDefaults` fallbacks stay lower priority than `<UTheme>` overrides.
 - Pass the **raw** `_props` (not the proxy) to composables that read `vnode.props` themselves — `useFormField`, `useFieldGroup` — so they keep their own injection precedence intact. Use nullish coalescing in `tv()` calls when you need the field-group value to win: `size: formSize.value ?? props.size`.
 - The `ui` prop is deep-merged (explicit slot classes layered on top of theme overrides). All other props are explicit-wins.
+- **Always read props as `props.x` in templates and `<script setup>`.** Bare prop names (`{{ label }}`, `v-if="arrow"`) auto-resolve to `_props` and bypass the proxy, so `<UTheme :props>` defaults won't apply.
+- Reka primitives' `useForwardProps` filters root props by `vm.vnode.props ∪ withDefaults` and would strip theme-supplied values. Migrated components import `useForwardProps` from `composables/useForwardProps.ts` instead — same `(source, emits?)` signature.
 
 ## Key Patterns
 
@@ -270,7 +272,7 @@ Notes:
 | `createReusableTemplate` | Complex template reuse (Table, Modal) |
 | `useTemplateRef` | Template refs (Vue 3.5+) |
 | `toRef(() => props.x)` | Reactive prop access |
-| `useComponentDefaults` | Resolve theme defaults for any prop (incl. variants driving `<component :is>`, `v-if`, etc.) |
+| `useComponentProps` | Resolve theme defaults for any prop (incl. variants driving `<component :is>`, `v-if`, etc.) |
 
 ## Export Types
 

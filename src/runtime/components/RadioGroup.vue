@@ -90,10 +90,11 @@ export interface RadioGroupSlots<T extends RadioGroupItem[] = RadioGroupItem[]> 
 
 <script setup lang="ts" generic="T extends RadioGroupItem[], VK extends GetItemKeys<T> = 'value'">
 import { computed, useId } from 'vue'
-import { RadioGroupRoot, RadioGroupItem as RRadioGroupItem, RadioGroupIndicator, Label, useForwardPropsEmits } from 'reka-ui'
+import { RadioGroupRoot, RadioGroupItem as RRadioGroupItem, RadioGroupIndicator, Label } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { useComponentDefaults } from '../composables/useComponentUI'
+import { useComponentProps } from '../composables/useComponentUI'
+import { useForwardProps } from '../composables/useForwardProps'
 import { useFormField } from '../composables/useFormField'
 import { get } from '../utils'
 import { tv } from '../utils/tv'
@@ -107,11 +108,11 @@ const _props = withDefaults(defineProps<RadioGroupProps<T, VK>>(), {
 const emits = defineEmits<RadioGroupEmits<T, VK>>()
 const slots = defineSlots<RadioGroupSlots<T>>()
 
-const props = useComponentDefaults<RadioGroupProps<T, VK>>('radioGroup', _props, theme)
+const props = useComponentProps<RadioGroupProps<T, VK>>('radioGroup', _props, theme)
 
 const appConfig = useAppConfig() as RadioGroup['AppConfig']
 
-const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'loop', 'required'), emits)
+const rootProps = useForwardProps(reactivePick(props, 'as', 'loop', 'required'), emits)
 
 const { emitFormChange, emitFormInput, color, name, size, id: _id, disabled, ariaAttrs } = useFormField<RadioGroupProps<T>>(_props, { bind: false })
 const id = _id.value ?? useId()
@@ -178,8 +179,8 @@ function onUpdate(value: any) {
   <RadioGroupRoot
     :id="id"
     v-bind="rootProps"
-    :model-value="(modelValue as Exclude<RadioGroupItem, boolean> | Exclude<RadioGroupItem, boolean>[])"
-    :default-value="(defaultValue as Exclude<RadioGroupItem, boolean> | Exclude<RadioGroupItem, boolean>[])"
+    :model-value="(props.modelValue as Exclude<RadioGroupItem, boolean> | Exclude<RadioGroupItem, boolean>[])"
+    :default-value="(props.defaultValue as Exclude<RadioGroupItem, boolean> | Exclude<RadioGroupItem, boolean>[])"
     :orientation="props.orientation"
     :name="name"
     :disabled="disabled"
@@ -188,9 +189,9 @@ function onUpdate(value: any) {
     @update:model-value="onUpdate"
   >
     <fieldset data-slot="fieldset" :class="ui.fieldset({ class: props.ui?.fieldset })" v-bind="ariaAttrs">
-      <legend v-if="legend || !!slots.legend" data-slot="legend" :class="ui.legend({ class: props.ui?.legend })">
+      <legend v-if="props.legend || !!slots.legend" data-slot="legend" :class="ui.legend({ class: props.ui?.legend })">
         <slot name="legend">
-          {{ legend }}
+          {{ props.legend }}
         </slot>
       </legend>
 
@@ -209,12 +210,12 @@ function onUpdate(value: any) {
 
         <div v-if="(item.label || !!slots.label) || (item.description || !!slots.description)" data-slot="wrapper" :class="ui.wrapper({ class: [props.ui?.wrapper, item.ui?.wrapper] })">
           <component :is="props.variant === 'list' ? Label : 'p'" v-if="item.label || !!slots.label" :for="item.id" data-slot="label" :class="ui.label({ class: [props.ui?.label, item.ui?.label], disabled: item.disabled || disabled })">
-            <slot name="label" :item="item" :model-value="(modelValue as RadioGroupValue)">
+            <slot name="label" :item="item" :model-value="(props.modelValue as RadioGroupValue)">
               {{ item.label }}
             </slot>
           </component>
           <p v-if="item.description || !!slots.description" data-slot="description" :class="ui.description({ class: [props.ui?.description, item.ui?.description], disabled: item.disabled || disabled })">
-            <slot name="description" :item="item" :model-value="(modelValue as RadioGroupValue)">
+            <slot name="description" :item="item" :model-value="(props.modelValue as RadioGroupValue)">
               {{ item.description }}
             </slot>
           </p>

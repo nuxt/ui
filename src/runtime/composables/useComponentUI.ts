@@ -29,36 +29,37 @@ export type ThemeUI = {
   [K in keyof typeof ui]?: ThemeSlotOverrides<(typeof ui)[K]>
 }
 
-/**
- * Map a theme key (camelCase component name) to its `<PascalCase>Props` type
- * exported from `@nuxt/ui`. Falls back to `Record<string, any>` when no
- * matching props type exists (e.g. `prose` namespace).
- */
-type ComponentPropsOf<K extends string> = `${Capitalize<K>}Props` extends keyof typeof ComponentTypes
-  ? typeof ComponentTypes[`${Capitalize<K>}Props` & keyof typeof ComponentTypes]
-  : Record<string, any>
+type LowerFirst<S extends string> = S extends `${infer F}${infer R}` ? `${Lowercase<F>}${R}` : S
+type StripPropsSuffix<S extends string> = S extends `${infer N}Props` ? LowerFirst<N> : never
 
 /**
- * Per-component defaults shape: `{ button: { color: 'warning', ui: { base: '...' } } }`.
- * Known keys are auto-derived from the theme registry (`#build/ui`) and typed
- * against each component's exported `Props` interface for full autocompletion
- * in `<UTheme>`. Unknown string keys fall through to a loose shape so
- * downstream augmentations remain possible.
+ * Strict per-component defaults shape used by `<UTheme :props>`. Built by
+ * remapping every `<PascalCase>Props` export from `@nuxt/ui` into its
+ * camelCase theme key, with the value being `Partial<XProps>`. Authored as a
+ * key-remapped mapped type rather than a conditional lookup so editors
+ * (Volar / vue-tsc) reliably surface autocompletion inside `<UTheme :props>`.
  */
 export type ThemeDefaults = {
-  [K in keyof typeof ui & string]?: Partial<ComponentPropsOf<K>>
-} & {
+  [K in keyof typeof ComponentTypes & string as StripPropsSuffix<K>]?: Partial<typeof ComponentTypes[K]>
+}
+
+/**
+ * Loose internal shape stored on the injected `ThemeContext`. Allows the
+ * `prose` namespace and any unknown keys downstream code (e.g. `normalizeUi`)
+ * may funnel through, without polluting the user-facing `ThemeDefaults` type.
+ */
+export type ThemeContextDefaults = ThemeDefaults & {
   [name: string]: Record<string, any> | undefined
 }
 
 export type ThemeContext = {
-  defaults: ComputedRef<ThemeDefaults>
+  defaults: ComputedRef<ThemeContextDefaults>
 }
 
 const [_injectThemeContext, provideThemeContext] = createContext<ThemeContext>('UTheme', 'RootContext')
 
 /**
- * Module-level fallback so components can call `useComponentDefaults` outside any
+ * Module-level fallback so components can call `useComponentProps` outside any
  * `<UTheme>` wrapper without crashing.
  */
 export const defaultThemeContext: ThemeContext = {
@@ -100,7 +101,7 @@ function propIsDefined(vnode: VNode | null | undefined, prop: string): boolean {
  * component's tv() theme for defaults. The `ui` prop is deep-merged
  * (explicit slot classes override theme slot classes) instead of being replaced.
  */
-export function useComponentDefaults<T extends object>(
+export function useComponentProps<T extends object>(
   name: string,
   props: T,
   theme?: Record<string, any>
@@ -127,7 +128,15 @@ export function useComponentDefaults<T extends object>(
       const themeValue = themeEntry?.[prop]
       if (themeValue !== undefined) return themeValue
 
-      if (raw !== undefined) return raw
+      // Only fall back to `raw` when `withDefaults` set an explicit default for
+      // this prop. Otherwise Vue's runtime would auto-cast unset Boolean props
+      // to `false` (and other typed props to their normalized fallback), which
+      // would override defaults baked into the underlying primitive when those
+      // props are forwarded downstream.
+      const propDef = (vm?.type as any)?.props?.[prop]
+      if (propDef && Object.prototype.hasOwnProperty.call(propDef, 'default')) {
+        return raw
+      }
 
       const appConfigDefault = appConfig.ui?.[name]?.defaultVariants?.[prop]
       if (appConfigDefault !== undefined) return appConfigDefault
@@ -146,7 +155,7 @@ type ComponentUIProps<T extends keyof UIConfig> = {
 
 /**
  * Backward-compat shim used by components that haven't migrated to
- * `useComponentDefaults` yet. Returns the merged `ui` (slot-class overrides)
+ * `useComponentProps` yet. Returns the merged `ui` (slot-class overrides)
  * the same way it did before, but sourced from the new `ThemeContext.defaults`.
  */
 export function useComponentUI<T extends keyof UIConfig>(name: T, props: ComponentUIProps<T>): ComputedRef<UIConfigSlots<T>>
