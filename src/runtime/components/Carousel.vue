@@ -171,19 +171,19 @@ const prevIcon = computed(() => props.prevIcon || (dir.value === 'rtl' ? appConf
 const nextIcon = computed(() => props.nextIcon || (dir.value === 'rtl' ? appConfig.ui.icons.arrowLeft : appConfig.ui.icons.arrowRight))
 
 const stopAutoplayOnInteraction = computed(() => {
-  if (typeof _props.autoplay === 'boolean') {
+  if (typeof props.autoplay === 'boolean') {
     return true
   }
 
-  return _props.autoplay.stopOnInteraction ?? true
+  return props.autoplay?.stopOnInteraction ?? true
 })
 
 const stopAutoScrollOnInteraction = computed(() => {
-  if (typeof _props.autoScroll === 'boolean') {
+  if (typeof props.autoScroll === 'boolean') {
     return true
   }
 
-  return _props.autoScroll.stopOnInteraction ?? true
+  return props.autoScroll?.stopOnInteraction ?? true
 })
 
 // eslint-disable-next-line vue/no-dupe-keys
