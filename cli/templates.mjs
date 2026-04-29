@@ -52,18 +52,22 @@ export interface ${upperName}Slots {
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
+import { useComponentProps } from '../composables/useComponentUI'
 import { tv } from '../utils/tv'
 
-const props = defineProps<${upperName}Props>()
+const _props = defineProps<${upperName}Props>()
 defineSlots<${upperName}Slots>()
+
+const props = useComponentProps('${camelName}', _props, theme)
 
 const appConfig = useAppConfig() as ${upperName}['AppConfig']
 
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.${camelName} || {}) })())
 </script>
 
 <template>
-  <Primitive :as="as" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <Primitive :as="props.as" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <slot />
   </Primitive>
 </template>
@@ -71,42 +75,54 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.${camelName}
       : `
 <script lang="ts">
 import type { ${upperName}RootProps, ${upperName}RootEmits } from 'reka-ui'
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/${prose ? 'prose/' : ''}${content ? 'content/' : ''}${kebabName}'
 import type { ComponentConfig } from '../types/tv'
 
 type ${upperName} = ComponentConfig<typeof theme, AppConfig, '${camelName}'>
 
-export interface ${upperName}Props extends Pick<${upperName}RootProps> {
+// TODO: narrow with \`Pick<${upperName}RootProps, '...' | '...'>\` to expose only the props you need.
+export interface ${upperName}Props extends ${upperName}RootProps {
   class?: any
   ui?: ${upperName}['slots']
 }
 
 export interface ${upperName}Emits extends ${upperName}RootEmits {}
 
-export interface ${upperName}Slots {}
+export interface ${upperName}Slots {
+  default?(props?: {}): VNode[]
+}
 </script>
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { ${upperName}Root, useForwardPropsEmits } from 'reka-ui'
+import { ${upperName}Root } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
+import { useComponentProps } from '../composables/useComponentUI'
+import { useForwardProps } from '../composables/useForwardProps'
 import { tv } from '../utils/tv'
 
-const props = defineProps<${upperName}Props>()
+const _props = defineProps<${upperName}Props>()
 const emits = defineEmits<${upperName}Emits>()
-const slots = defineSlots<${upperName}Slots>()
+defineSlots<${upperName}Slots>()
+
+const props = useComponentProps('${camelName}', _props, theme)
 
 const appConfig = useAppConfig() as ${upperName}['AppConfig']
 
-const rootProps = useForwardPropsEmits(reactivePick(props), emits)
+// TODO: list the same keys as in \`${upperName}Props\` Pick.
+const rootProps = useForwardProps(reactivePick(props, 'as'), emits)
 
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.${camelName} || {}) })())
 </script>
 
 <template>
-  <${upperName}Root v-bind="rootProps" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })" />
+  <${upperName}Root v-bind="rootProps" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+    <slot />
+  </${upperName}Root>
 </template>
 `
   }
