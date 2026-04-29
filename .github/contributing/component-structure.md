@@ -50,25 +50,25 @@ export interface ComponentNameSlots {
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
-import { useComponentUI } from '../composables/useComponentUI'
+import { useComponentProps } from '../composables/useComponentUI'
 import { tv } from '../utils/tv'
 
-// 7. Props with withDefaults for runtime defaults
-const props = withDefaults(defineProps<ComponentNameProps>(), {
-  as: 'div'
-})
+// 7. Raw props (use withDefaults only when you actually need a runtime default)
+const _props = defineProps<ComponentNameProps>()
 const slots = defineSlots<ComponentNameSlots>()
 
-// 8. App config
+// 8. Theme-aware proxy: resolves explicit > <UTheme :props> > withDefaults
+//    > app.config.defaultVariants > theme.defaultVariants. The `ui` prop is
+//    deep-merged automatically, so reach for `props.ui?.<slot>` in the template.
+const props = useComponentProps('componentName', _props, theme)
+
+// 9. App config
 const appConfig = useAppConfig() as ComponentName['AppConfig']
 
-// 9. Theme-aware ui prop - merges Theme context with component ui prop
-const uiProp = useComponentUI('componentName', props)
-
 // 10. Computed UI - always computed for reactivity
-const ui = computed(() => tv({ 
-  extend: tv(theme), 
-  ...(appConfig.ui?.componentName || {}) 
+const ui = computed(() => tv({
+  extend: tv(theme),
+  ...(appConfig.ui?.componentName || {})
 })({
   color: props.color,
   size: props.size
@@ -76,8 +76,8 @@ const ui = computed(() => tv({
 </script>
 
 <template>
-  <!-- 11. data-slot on all elements, use uiProp instead of props.ui -->
-  <Primitive :as="as" data-slot="root" :class="ui.root({ class: [uiProp?.root, props.class] })">
+  <!-- 11. data-slot on every element, always read props as `props.x` -->
+  <Primitive :as="props.as" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <slot :ui="ui" />
   </Primitive>
 </template>
@@ -113,34 +113,40 @@ export interface CollapsibleSlots {
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { CollapsibleRoot, CollapsibleTrigger, CollapsibleContent, useForwardPropsEmits } from 'reka-ui'
+import { CollapsibleRoot, CollapsibleTrigger, CollapsibleContent } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { useComponentUI } from '../composables/useComponentUI'
+import { useComponentProps } from '../composables/useComponentUI'
+import { useForwardProps } from '../composables/useForwardProps'
 import { tv } from '../utils/tv'
 
-const props = withDefaults(defineProps<CollapsibleProps>(), {
+const _props = withDefaults(defineProps<CollapsibleProps>(), {
   unmountOnHide: true
 })
 const emits = defineEmits<CollapsibleEmits>()
 const slots = defineSlots<CollapsibleSlots>()
 
-const appConfig = useAppConfig() as Collapsible['AppConfig']
-const uiProp = useComponentUI('collapsible', props)
+// Theme-aware proxy. `props` deep-merges `ui` and resolves <UTheme :props> defaults.
+const props = useComponentProps('collapsible', _props, theme)
 
-// Forward only Reka UI props
-const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'defaultOpen', 'open', 'disabled', 'unmountOnHide'), emits)
+const appConfig = useAppConfig() as Collapsible['AppConfig']
+
+// Pick from `props` (the proxy) so theme-supplied values flow through.
+// Use the local `useForwardProps` — reka-ui's `useForwardProps` /
+// `useForwardPropsEmits` filter root props by `vm.vnode.props ∪ withDefaults`
+// and would strip <UTheme :props> values.
+const rootProps = useForwardProps(reactivePick(props, 'as', 'defaultOpen', 'open', 'disabled', 'unmountOnHide'), emits)
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.collapsible || {}) })())
 </script>
 
 <template>
-  <CollapsibleRoot v-slot="{ open }" v-bind="rootProps" data-slot="root" :class="ui.root({ class: [uiProp?.root, props.class] })">
+  <CollapsibleRoot v-slot="{ open }" v-bind="rootProps" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <CollapsibleTrigger v-if="!!slots.default" as-child>
       <slot :open="open" />
     </CollapsibleTrigger>
 
-    <CollapsibleContent data-slot="content" :class="ui.content({ class: uiProp?.content })">
+    <CollapsibleContent data-slot="content" :class="ui.content({ class: props.ui?.content })">
       <slot name="content" />
     </CollapsibleContent>
   </CollapsibleRoot>
@@ -235,21 +241,11 @@ defineExpose({
 </script>
 ```
 
-## Resolving Theme Defaults
+## Theme Defaults
 
-`tv()`'s `defaultVariants` only apply when computing CSS classes — they do **not** affect runtime checks (e.g. `<component :is>`, `v-if`, computed conditionals). They also can't carry per-instance overrides set from `<UTheme :props>` or `app.config.ts`.
-
-Wrap your raw props with `useComponentProps` to get a proxy that resolves the priority chain **explicit prop > nearest `<UTheme :props>` > `withDefaults` > `app.config.ui.<name>.defaultVariants` > `theme.defaultVariants`** for any prop, including ones that drive template logic.
+`useComponentProps` is the primary integration with `<UTheme>`. The proxy resolves the priority chain **explicit prop > nearest `<UTheme :props>` > `withDefaults` > `app.config.ui.<name>.defaultVariants` > `theme.defaultVariants`** for every prop — including ones driving template logic that `tv().defaultVariants` can't reach (`<component :is>`, `v-if`, computed conditionals):
 
 ```vue
-<script setup lang="ts">
-import { useComponentProps } from '../composables/useComponentUI'
-
-const _props = withDefaults(defineProps<RadioGroupProps>(), { /* ... */ })
-
-const props = useComponentProps<RadioGroupProps>('radioGroup', _props, theme)
-</script>
-
 <template>
   <component :is="props.variant === 'list' ? 'div' : Label" />
 </template>
@@ -257,22 +253,24 @@ const props = useComponentProps<RadioGroupProps>('radioGroup', _props, theme)
 
 Notes:
 - The proxy passes through to `_props` for explicitly set props, so `withDefaults` fallbacks stay lower priority than `<UTheme>` overrides.
-- Pass the **raw** `_props` (not the proxy) to composables that read `vnode.props` themselves — `useFormField`, `useFieldGroup` — so they keep their own injection precedence intact. Use nullish coalescing in `tv()` calls when you need the field-group value to win: `size: formSize.value ?? props.size`.
-- The `ui` prop is deep-merged (explicit slot classes layered on top of theme overrides). All other props are explicit-wins.
-- **Always read props as `props.x` in templates and `<script setup>`.** Bare prop names (`{{ label }}`, `v-if="arrow"`) auto-resolve to `_props` and bypass the proxy, so `<UTheme :props>` defaults won't apply.
-- Reka primitives' `useForwardProps` filters root props by `vm.vnode.props ∪ withDefaults` and would strip theme-supplied values. Migrated components import `useForwardProps` from `composables/useForwardProps.ts` instead — same `(source, emits?)` signature.
+- The `ui` prop is deep-merged (slot classes layered on top of theme overrides). All other props are explicit-wins.
+- **Always read props as `props.x` in templates and `<script setup>`.** Bare prop names (`{{ label }}`, `v-if="arrow"`) resolve to `_props` and bypass the proxy, so `<UTheme :props>` defaults won't apply. The `nuxt-ui/no-bare-prop-refs` ESLint rule autofixes this.
+- Pass the **raw** `_props` (not the proxy) to composables that read `vnode.props` themselves — `useFormField`, `useFieldGroup` — so their own injection precedence stays intact. Use nullish coalescing in `tv()` calls when you need the field-group value to win: `size: formSize.value ?? props.size`.
+- Reka primitives' `useForwardProps` / `useForwardPropsEmits` filter root props by `vm.vnode.props ∪ withDefaults` and would strip theme-supplied values. Import `useForwardProps` from `composables/useForwardProps.ts` instead — same `(source, emits?)` signature, proxy-aware.
+- `useComponentUI` is a back-compat shim for unmigrated components — don't reach for it in new code.
 
 ## Key Patterns
 
 | Pattern | Usage |
 |---------|-------|
+| `useComponentProps(name, _props, theme)` | Theme-aware proxy — default for new components |
+| `useForwardProps(source, emits?)` (local) | Forward Reka UI props/emits without filtering theme defaults |
 | `withDefaults` | Runtime default values |
 | `defineOptions({ inheritAttrs: false })` | When spreading `$attrs` to inner element |
-| `reactivePick` + `useForwardPropsEmits` | Forward Reka UI props/emits |
+| `reactivePick` | Pick keys off `props` (the proxy) before forwarding |
 | `createReusableTemplate` | Complex template reuse (Table, Modal) |
 | `useTemplateRef` | Template refs (Vue 3.5+) |
 | `toRef(() => props.x)` | Reactive prop access |
-| `useComponentProps` | Resolve theme defaults for any prop (incl. variants driving `<component :is>`, `v-if`, etc.) |
 
 ## Export Types
 
@@ -281,3 +279,16 @@ Add to `src/runtime/types/index.ts`:
 ```ts
 export * from '../components/ComponentName.vue'
 ```
+
+## Register in `ThemeDefaults`
+
+The `ThemeDefaults` interface in `src/runtime/composables/useComponentUI.ts` powers autocomplete inside `<UTheme :props="{ componentName: { … } }">`. The CLI scaffolder (`nuxt-ui make component`) auto-inserts the entry; only do this manually if you skipped the CLI:
+
+```ts
+export interface ThemeDefaults {
+  // ... existing entries
+  componentName?: Partial<ComponentTypes.ComponentNameProps>
+}
+```
+
+The key is the component name in camelCase (matches the `#build/ui` registry). The value is `Partial<XProps>`. This is a flat literal interface (not a mapped type) because Volar only surfaces inner-prop autocomplete for interface members, not mapped-type members, in template inline objects.

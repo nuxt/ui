@@ -90,8 +90,8 @@ Load these based on your task. **Do not load all files at once** — only load w
 | Props defaults | Use `withDefaults()` for runtime, JSDoc `@defaultValue` for docs |
 | Template slots | Add `data-slot="name"` attributes on all elements |
 | Computed ui | Always use `computed(() => tv(...))` for reactive theming |
-| Theme defaults | Wrap raw props with `useComponentProps(name, _props, theme)` to resolve the priority chain (explicit prop > `<UTheme :props>` > `withDefaults` > `app.config.defaultVariants` > `theme.defaultVariants`). Pass the **raw** `_props` (not the proxy) to `useFormField` / `useFieldGroup` so their injection precedence stays correct. |
-| Theme classes only | Use `useComponentUI(name, props)` when you only need to merge `<UTheme :ui>` slot-class overrides with the component `ui` prop |
+| Theme defaults | Wrap raw props with `useComponentProps(name, _props, theme)` to resolve the priority chain (explicit prop > `<UTheme :props>` > `withDefaults` > `app.config.defaultVariants` > `theme.defaultVariants`). The proxy deep-merges `ui` automatically — read `props.ui?.<slot>` in templates. Pass the **raw** `_props` (not the proxy) to `useFormField` / `useFieldGroup` so their injection precedence stays correct. |
+| Theme classes only (back-compat) | `useComponentUI(name, props)` is a shim for unmigrated components. Don't use it in new code — `useComponentProps` covers it. |
 | Semantic colors | Use `text-default`, `bg-elevated`, etc. - never Tailwind palette |
 | Reka UI props | Use `reactivePick` + `useForwardProps(source, emits?)` from `composables/useForwardProps` to forward props (proxy-aware; reka-ui's `useForwardProps` / `useForwardPropsEmits` filter out `<UTheme :props>` defaults) |
 | Form components | Use `useFormField` and `useFieldGroup` composables |
@@ -107,12 +107,13 @@ Progress:
 - [ ] 2. Implement component in src/runtime/components/
 - [ ] 3. Create theme in src/theme/
 - [ ] 4. Export types from src/runtime/types/index.ts
-- [ ] 5. Write tests in test/components/
-- [ ] 6. Create docs in docs/content/docs/2.components/
-- [ ] 7. Add playground page
-- [ ] 8. Run pnpm run lint
-- [ ] 9. Run pnpm run typecheck
-- [ ] 10. Run pnpm run test
+- [ ] 5. Register in ThemeDefaults interface (src/runtime/composables/useComponentUI.ts)
+- [ ] 6. Write tests in test/components/
+- [ ] 7. Create docs in docs/content/docs/2.components/
+- [ ] 8. Add playground page
+- [ ] 9. Run pnpm run lint
+- [ ] 10. Run pnpm run typecheck
+- [ ] 11. Run pnpm run test
 ```
 
 ### PR Review Checklist
