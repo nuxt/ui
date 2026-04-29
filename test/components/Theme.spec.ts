@@ -12,6 +12,9 @@ import Input from '../../src/runtime/components/Input.vue'
 import Checkbox from '../../src/runtime/components/Checkbox.vue'
 import Tooltip from '../../src/runtime/components/Tooltip.vue'
 import FormField from '../../src/runtime/components/FormField.vue'
+import FieldGroup from '../../src/runtime/components/FieldGroup.vue'
+import Avatar from '../../src/runtime/components/Avatar.vue'
+import AvatarGroup from '../../src/runtime/components/AvatarGroup.vue'
 import type { ButtonProps } from '../../src/runtime/types'
 
 type CaseOptions = { props?: ThemeProps, slots?: ThemeSlots }
@@ -445,6 +448,51 @@ describe('Theme', () => {
 
     expect(wrapper.html()).toContain('focus-visible:outline-error')
     expect(wrapper.html()).not.toContain('focus-visible:outline-success')
+  })
+
+  // `useFieldGroup` shares the same closer-context-wins fallback as
+  // `useFormField` (`_props.size ?? fieldGroup.size`). A child Button inside
+  // `<UFieldGroup>` must take its size from the wrapping group, not from
+  // `<UTheme :props="{ button: { size } }">`. Regressed once when components
+  // were passing the proxy `props` to `useFieldGroup` instead of `_props`.
+  test('FieldGroup size wins over :props button size', async () => {
+    const wrapper = await mountSuspended({
+      components: { Theme, FieldGroup, Button },
+      template: `
+        <Theme :props="{ button: { size: 'xs' } }">
+          <FieldGroup size="xl">
+            <Button label="Save" />
+          </FieldGroup>
+        </Theme>
+      `
+    })
+
+    const btn = wrapper.find('button')
+    expect(btn.classes()).toContain('text-base')
+    expect(btn.classes()).not.toContain('text-xs')
+  })
+
+  // `useAvatarGroup` follows the same pattern: `<UAvatarGroup size>` is the
+  // closer context and must beat `<UTheme :props="{ avatar: { size } }">`.
+  test('AvatarGroup size wins over :props avatar size', async () => {
+    const wrapper = await mountSuspended({
+      components: { Theme, AvatarGroup, Avatar },
+      template: `
+        <Theme :props="{ avatar: { size: 'xs' } }">
+          <AvatarGroup size="xl">
+            <Avatar src="https://example.com/a.png" />
+            <Avatar src="https://example.com/b.png" />
+          </AvatarGroup>
+        </Theme>
+      `
+    })
+
+    const avatars = wrapper.findAll('span[data-slot="root"]')
+    expect(avatars.length).toBeGreaterThan(0)
+    avatars.forEach((avatar) => {
+      expect(avatar.classes()).toContain('size-10')
+      expect(avatar.classes()).not.toContain('size-6')
+    })
   })
 
   test('reactivity: toggling a boolean in :props re-renders the reka primitive', async () => {
