@@ -63,7 +63,7 @@ function normalizeUi(ui?: ThemeUI): ThemeContextDefaults {
 
 provideThemeContext({
   defaults: computed(() => defu(
-    _props.props ?? {},
+    (_props.props ?? {}) as ThemeContextDefaults,
     normalizeUi(_props.ui),
     parent.defaults.value
   ))
