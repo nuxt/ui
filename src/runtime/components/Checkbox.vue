@@ -65,7 +65,7 @@ import { computed, useAttrs, useId } from 'vue'
 import { Primitive, CheckboxRoot, CheckboxIndicator, Label } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '../composables/useComponentUI'
+import { useComponentProps } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
 import { useFormField } from '../composables/useFormField'
 import { tv } from '../utils/tv'
@@ -77,7 +77,7 @@ const _props = defineProps<CheckboxProps<T>>()
 const slots = defineSlots<CheckboxSlots>()
 const emits = defineEmits<CheckboxEmits<T>>()
 
-const props = useComponentProps<CheckboxProps<T>>('checkbox', _props, theme)
+const props = useComponentProps<CheckboxProps<T>>('checkbox', _props)
 
 const appConfig = useAppConfig() as Checkbox['AppConfig']
 
@@ -114,7 +114,7 @@ function onUpdate(value: any) {
 
 <!-- eslint-disable vue/no-template-shadow -->
 <template>
-  <Primitive :as="props.variant === 'list' ? props.as : Label" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <Primitive :as="(!props.variant || props.variant === 'list') ? props.as : Label" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <div data-slot="container" :class="ui.container({ class: props.ui?.container })">
       <CheckboxRoot
         :id="id"
@@ -135,7 +135,7 @@ function onUpdate(value: any) {
     </div>
 
     <div v-if="(props.label || !!slots.label) || (props.description || !!slots.description)" data-slot="wrapper" :class="ui.wrapper({ class: props.ui?.wrapper })">
-      <component :is="props.variant === 'list' ? Label : 'p'" v-if="props.label || !!slots.label" :for="id" data-slot="label" :class="ui.label({ class: props.ui?.label })">
+      <component :is="(!props.variant || props.variant === 'list') ? Label : 'p'" v-if="props.label || !!slots.label" :for="id" data-slot="label" :class="ui.label({ class: props.ui?.label })">
         <slot name="label" :label="props.label">
           {{ props.label }}
         </slot>

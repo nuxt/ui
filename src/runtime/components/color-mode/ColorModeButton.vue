@@ -18,22 +18,23 @@ import { computed } from 'vue'
 import { useForwardProps } from 'reka-ui'
 import { reactiveOmit } from '@vueuse/core'
 import { useColorMode, useAppConfig } from '#imports'
-import { useComponentUI } from '../../composables/useComponentUI'
+import { useComponentProps } from '../../composables/useComponentProps'
 import { useLocale } from '../../composables/useLocale'
 import UButton from '../Button.vue'
 import UIcon from '../Icon.vue'
 
 defineOptions({ inheritAttrs: false })
 
-const props = withDefaults(defineProps<ColorModeButtonProps>(), {
+const _props = withDefaults(defineProps<ColorModeButtonProps>(), {
   color: 'neutral',
   variant: 'ghost'
 })
 
+const props = useComponentProps('button', _props)
+
 const { t } = useLocale()
 const colorMode = useColorMode()
 const appConfig = useAppConfig()
-const uiProp = useComponentUI('button', props)
 
 const buttonProps = useForwardProps(reactiveOmit(props, 'icon'))
 
@@ -57,8 +58,8 @@ const isDark = computed({
     @click="isDark = !isDark"
   >
     <template #leading="{ ui }">
-      <UIcon :class="ui.leadingIcon({ class: [uiProp?.leadingIcon, 'hidden dark:inline-block'] })" :name="appConfig.ui.icons.dark" />
-      <UIcon :class="ui.leadingIcon({ class: [uiProp?.leadingIcon, 'dark:hidden'] })" :name="appConfig.ui.icons.light" />
+      <UIcon :class="ui.leadingIcon({ class: [props.ui?.leadingIcon, 'hidden dark:inline-block'] })" :name="appConfig.ui.icons.dark" />
+      <UIcon :class="ui.leadingIcon({ class: [props.ui?.leadingIcon, 'dark:hidden'] })" :name="appConfig.ui.icons.light" />
     </template>
   </UButton>
 </template>

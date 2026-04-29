@@ -52,13 +52,13 @@ export interface ${upperName}Slots {
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '../composables/useComponentUI'
+import { useComponentProps } from '../composables/useComponentProps'
 import { tv } from '../utils/tv'
 
 const _props = defineProps<${upperName}Props>()
 defineSlots<${upperName}Slots>()
 
-const props = useComponentProps('${camelName}', _props, theme)
+const props = useComponentProps('${camelName}', _props)
 
 const appConfig = useAppConfig() as ${upperName}['AppConfig']
 
@@ -100,7 +100,7 @@ import { computed } from 'vue'
 import { ${upperName}Root } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '../composables/useComponentUI'
+import { useComponentProps } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
 import { tv } from '../utils/tv'
 
@@ -108,7 +108,7 @@ const _props = defineProps<${upperName}Props>()
 const emits = defineEmits<${upperName}Emits>()
 defineSlots<${upperName}Slots>()
 
-const props = useComponentProps('${camelName}', _props, theme)
+const props = useComponentProps('${camelName}', _props)
 
 const appConfig = useAppConfig() as ${upperName}['AppConfig']
 

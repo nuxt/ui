@@ -49,24 +49,27 @@ export interface ChipSlots {
 import { computed } from 'vue'
 import { Primitive, Slot } from 'reka-ui'
 import { useAppConfig } from '#imports'
-import { useComponentUI } from '../composables/useComponentUI'
+import { useComponentProps } from '../composables/useComponentProps'
 import { useAvatarGroup } from '../composables/useAvatarGroup'
 import { tv } from '../utils/tv'
 
 defineOptions({ inheritAttrs: false })
 
-const props = withDefaults(defineProps<ChipProps>(), {
+const _props = withDefaults(defineProps<ChipProps>(), {
   inset: false,
   standalone: false
 })
+
 defineSlots<ChipSlots>()
+
+const props = useComponentProps('chip', _props)
 
 const show = defineModel<boolean>('show', { default: true })
 
-const { size } = useAvatarGroup(props)
+const { size } = useAvatarGroup(_props)
 const appConfig = useAppConfig() as Chip['AppConfig']
-const uiProp = useComponentUI('chip', props)
 
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.chip || {}) })({
   color: props.color,
   size: size.value,
@@ -77,14 +80,14 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.chip || {}) 
 </script>
 
 <template>
-  <Primitive :as="as" data-slot="root" :class="ui.root({ class: [uiProp?.root, props.class] })">
+  <Primitive :as="props.as" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <Slot v-bind="$attrs">
       <slot />
     </Slot>
 
-    <span v-if="show" data-slot="base" :class="ui.base({ class: uiProp?.base })">
+    <span v-if="show" data-slot="base" :class="ui.base({ class: props.ui?.base })">
       <slot name="content">
-        {{ text }}
+        {{ props.text }}
       </slot>
     </span>
   </Primitive>

@@ -19,21 +19,23 @@ export interface ProseBlockquoteSlots {
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useAppConfig } from '#imports'
-import { useComponentUI } from '../../composables/useComponentUI'
+import { useComponentProps } from '../../composables/useComponentProps'
 import { tv } from '../../utils/tv'
 
-const props = defineProps<ProseBlockquoteProps>()
+const _props = defineProps<ProseBlockquoteProps>()
+
 defineSlots<ProseBlockquoteSlots>()
 
+const props = useComponentProps('prose.blockquote', _props)
+
 const appConfig = useAppConfig() as ProseBlockquote['AppConfig']
-const uiProp = useComponentUI('prose.blockquote', props)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.blockquote || {}) }))
 </script>
 
 <template>
-  <blockquote :class="ui({ class: [uiProp?.base, props.class] })">
+  <blockquote :class="ui({ class: [props.ui?.base, props.class] })">
     <slot />
   </blockquote>
 </template>

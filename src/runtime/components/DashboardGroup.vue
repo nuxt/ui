@@ -28,19 +28,21 @@ import { Primitive } from 'reka-ui'
 import { useNuxtApp, useAppConfig } from '#imports'
 import { provideDashboardContext } from '../utils/dashboard'
 import { tv } from '../utils/tv'
-import { useComponentUI } from '../composables/useComponentUI'
+import { useComponentProps } from '../composables/useComponentProps'
 
-const props = withDefaults(defineProps<DashboardGroupProps>(), {
+const _props = withDefaults(defineProps<DashboardGroupProps>(), {
   storage: 'cookie',
   storageKey: 'dashboard',
   persistent: true,
   unit: '%'
 })
+
 defineSlots<DashboardGroupSlots>()
+
+const props = useComponentProps('dashboardGroup', _props)
 
 const nuxtApp = useNuxtApp()
 const appConfig = useAppConfig() as DashboardGroup['AppConfig']
-const uiProp = useComponentUI('dashboardGroup', props)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dashboardGroup || {}) }))
@@ -68,7 +70,7 @@ provideDashboardContext({
 </script>
 
 <template>
-  <Primitive :as="as" :class="ui({ class: [uiProp?.base, props.class] })">
+  <Primitive :as="props.as" :class="ui({ class: [props.ui?.base, props.class] })">
     <slot />
   </Primitive>
 </template>

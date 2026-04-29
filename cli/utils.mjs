@@ -18,7 +18,7 @@ export async function appendFile(path, contents) {
 
 /**
  * Insert a `key?: Partial<ComponentTypes.XProps>` entry into the `ThemeDefaults`
- * interface in `src/runtime/composables/useComponentUI.ts`, keeping entries
+ * interface in `src/runtime/composables/useComponentProps.ts`, keeping entries
  * sorted alphabetically and avoiding duplicates.
  */
 export async function appendThemeDefault(path, key, propsType) {

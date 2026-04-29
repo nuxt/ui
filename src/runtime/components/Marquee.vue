@@ -50,19 +50,22 @@ export interface MarqueeSlots {
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
-import { useComponentUI } from '../composables/useComponentUI'
+import { useComponentProps } from '../composables/useComponentProps'
 import { tv } from '../utils/tv'
 
-const props = withDefaults(defineProps<MarqueeProps>(), {
+const _props = withDefaults(defineProps<MarqueeProps>(), {
   orientation: 'horizontal',
   repeat: 4,
   overlay: true
 })
+
 defineSlots<MarqueeSlots>()
 
-const appConfig = useAppConfig() as Marquee['AppConfig']
-const uiProp = useComponentUI('marquee', props)
+const props = useComponentProps('marquee', _props)
 
+const appConfig = useAppConfig() as Marquee['AppConfig']
+
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.marquee || {}) })({
   pauseOnHover: props.pauseOnHover,
   orientation: props.orientation,
@@ -72,8 +75,8 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.marquee || {
 </script>
 
 <template>
-  <Primitive :as="as" :data-orientation="orientation" data-slot="root" :class="ui.root({ class: [uiProp?.root, props.class] })">
-    <div v-for="i in repeat" :key="i" data-slot="content" :class="ui.content({ class: [uiProp?.content] })">
+  <Primitive :as="props.as" :data-orientation="props.orientation" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+    <div v-for="i in props.repeat" :key="i" data-slot="content" :class="ui.content({ class: [props.ui?.content] })">
       <slot />
     </div>
   </Primitive>

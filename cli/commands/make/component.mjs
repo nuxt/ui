@@ -79,8 +79,8 @@ export default defineCommand({
       await appendFile(typesPath, `export * from '../components/${args.content ? 'content/' : ''}${pascal}.vue'`)
       await sortFile(typesPath)
 
-      const useComponentUIPath = resolve(path, 'src/runtime/composables/useComponentUI.ts')
-      await appendThemeDefault(useComponentUIPath, camelCase(name), `${pascal}Props`)
+      const useComponentPropsPath = resolve(path, 'src/runtime/composables/useComponentProps.ts')
+      await appendThemeDefault(useComponentPropsPath, camelCase(name), `${pascal}Props`)
     }
   }
 })

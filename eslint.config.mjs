@@ -83,6 +83,18 @@ const noBarePropRefs = {
               messageId: 'bareRef',
               data: { name, propsVar },
               fix(fixer) {
+                // Handle object literal shorthand: `{ to, target }` should
+                // become `{ to: props.to, target: props.target }`, not the
+                // syntactically-broken `{ props.to, props.target }`.
+                const parent = id.parent
+                if (
+                  parent
+                  && parent.type === 'Property'
+                  && parent.shorthand
+                  && parent.key === id
+                ) {
+                  return fixer.replaceText(parent, `${name}: ${propsVar}.${name}`)
+                }
                 return fixer.replaceText(id, `${propsVar}.${name}`)
               }
             })

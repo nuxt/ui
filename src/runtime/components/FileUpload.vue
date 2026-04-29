@@ -142,7 +142,7 @@ import { Primitive, VisuallyHidden } from 'reka-ui'
 import { createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useLocale } from '../composables/useLocale'
-import { useComponentProps } from '../composables/useComponentUI'
+import { useComponentProps } from '../composables/useComponentProps'
 import { useFormField } from '../composables/useFormField'
 import { useFileUpload } from '../composables/useFileUpload'
 import { tv } from '../utils/tv'
@@ -169,7 +169,7 @@ const slots = defineSlots<FileUploadSlots<M>>()
 
 const modelValue = defineModel<(M extends true ? File[] : File) | null>()
 
-const props = useComponentProps<FileUploadProps<M>>('fileUpload', _props, theme)
+const props = useComponentProps<FileUploadProps<M>>('fileUpload', _props)
 
 const appConfig = useAppConfig() as FileUpload['AppConfig']
 

@@ -69,10 +69,11 @@ export interface InputTagsSlots<T extends InputTagItem = InputTagItem> {
 
 <script setup lang="ts" generic="T extends InputTagItem">
 import { computed, useTemplateRef, onMounted, toRaw, toRef } from 'vue'
-import { TagsInputRoot, TagsInputItem, TagsInputItemText, TagsInputItemDelete, TagsInputInput, useForwardPropsEmits } from 'reka-ui'
+import { TagsInputRoot, TagsInputItem, TagsInputItemText, TagsInputItemDelete, TagsInputInput } from 'reka-ui'
+import { useForwardProps } from '../composables/useForwardProps'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { useComponentUI } from '../composables/useComponentUI'
+import { useComponentProps } from '../composables/useComponentProps'
 import { useFieldGroup } from '../composables/useFieldGroup'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFormField } from '../composables/useFormField'
@@ -82,24 +83,26 @@ import UAvatar from './Avatar.vue'
 
 defineOptions({ inheritAttrs: false })
 
-const props = withDefaults(defineProps<InputTagsProps<T>>(), {
+const _props = withDefaults(defineProps<InputTagsProps<T>>(), {
   type: 'text',
   autofocusDelay: 0
 })
 const emits = defineEmits<InputTagsEmits<T>>()
 const slots = defineSlots<InputTagsSlots<T>>()
 
+const props = useComponentProps<InputTagsProps<T>>('inputTags', _props)
+
 const appConfig = useAppConfig() as InputTags['AppConfig']
-const uiProp = useComponentUI('inputTags', props)
 
-const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'addOnPaste', 'addOnTab', 'addOnBlur', 'duplicate', 'delimiter', 'max', 'convertValue', 'displayValue', 'required'), emits)
+const rootProps = useForwardProps(reactivePick(props, 'as', 'addOnPaste', 'addOnTab', 'addOnBlur', 'duplicate', 'delimiter', 'max', 'convertValue', 'displayValue', 'required'), emits)
 
-const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, size: formFieldSize, color, id, name, highlight, disabled, ariaAttrs } = useFormField<InputTagsProps>(props)
-const { orientation, size: fieldGroupSize } = useFieldGroup<InputTagsProps>(props)
+const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, size: formFieldSize, color, id, name, highlight, disabled, ariaAttrs } = useFormField<InputTagsProps>(_props)
+const { orientation, size: fieldGroupSize } = useFieldGroup<InputTagsProps>(_props)
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props)
 
 const inputSize = computed(() => fieldGroupSize.value || formFieldSize.value)
 
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.inputTags || {}) })({
   color: color.value,
   variant: props.variant,
@@ -157,10 +160,10 @@ defineExpose({
   <TagsInputRoot
     :id="id"
     v-slot="{ modelValue: tags }"
-    :model-value="modelValue"
+    :model-value="props.modelValue"
     :default-value="defaultValue"
     data-slot="root"
-    :class="ui.root({ class: [ui.base({ class: uiProp?.base }), uiProp?.root, props.class] })"
+    :class="ui.root({ class: [ui.base({ class: props.ui?.base }), props.ui?.root, props.class] })"
     v-bind="rootProps"
     :name="name"
     :disabled="disabled"
@@ -171,19 +174,19 @@ defineExpose({
       :key="index"
       :value="item"
       data-slot="item"
-      :class="ui.item({ class: [uiProp?.item] })"
+      :class="ui.item({ class: [props.ui?.item] })"
     >
-      <TagsInputItemText data-slot="itemText" :class="ui.itemText({ class: [uiProp?.itemText] })">
+      <TagsInputItemText data-slot="itemText" :class="ui.itemText({ class: [props.ui?.itemText] })">
         <slot v-if="!!slots['item-text']" name="item-text" :item="(item as T)" :index="index" :ui="ui" />
       </TagsInputItemText>
 
       <TagsInputItemDelete
         data-slot="itemDelete"
-        :class="ui.itemDelete({ class: [uiProp?.itemDelete] })"
+        :class="ui.itemDelete({ class: [props.ui?.itemDelete] })"
         :disabled="disabled"
       >
         <slot name="item-delete" :item="(item as T)" :index="index" :ui="ui">
-          <UIcon :name="deleteIcon || appConfig.ui.icons.close" data-slot="itemDeleteIcon" :class="ui.itemDeleteIcon({ class: [uiProp?.itemDeleteIcon] })" />
+          <UIcon :name="props.deleteIcon || appConfig.ui.icons.close" data-slot="itemDeleteIcon" :class="ui.itemDeleteIcon({ class: [props.ui?.itemDeleteIcon] })" />
         </slot>
       </TagsInputItemDelete>
     </TagsInputItem>
@@ -191,26 +194,26 @@ defineExpose({
     <TagsInputInput
       ref="inputRef"
       v-bind="{ ...$attrs, ...ariaAttrs }"
-      :placeholder="placeholder"
-      :max-length="maxLength"
+      :placeholder="props.placeholder"
+      :max-length="props.maxLength"
       data-slot="input"
-      :class="ui.input({ class: uiProp?.input })"
+      :class="ui.input({ class: props.ui?.input })"
       @blur="onBlur"
       @focus="onFocus"
     />
 
     <slot :ui="ui" />
 
-    <span v-if="isLeading || !!avatar || !!slots.leading" data-slot="leading" :class="ui.leading({ class: uiProp?.leading })">
+    <span v-if="isLeading || !!props.avatar || !!slots.leading" data-slot="leading" :class="ui.leading({ class: props.ui?.leading })">
       <slot name="leading" :ui="ui">
-        <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" data-slot="leadingIcon" :class="ui.leadingIcon({ class: uiProp?.leadingIcon })" />
-        <UAvatar v-else-if="!!avatar" :size="((uiProp?.leadingAvatarSize || ui.leadingAvatarSize()) as AvatarProps['size'])" v-bind="avatar" data-slot="leadingAvatar" :class="ui.leadingAvatar({ class: uiProp?.leadingAvatar })" />
+        <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" data-slot="leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
+        <UAvatar v-else-if="!!props.avatar" :size="((props.ui?.leadingAvatarSize || ui.leadingAvatarSize()) as AvatarProps['size'])" v-bind="props.avatar" data-slot="leadingAvatar" :class="ui.leadingAvatar({ class: props.ui?.leadingAvatar })" />
       </slot>
     </span>
 
-    <span v-if="isTrailing || !!slots.trailing" data-slot="trailing" :class="ui.trailing({ class: uiProp?.trailing })">
+    <span v-if="isTrailing || !!slots.trailing" data-slot="trailing" :class="ui.trailing({ class: props.ui?.trailing })">
       <slot name="trailing" :ui="ui">
-        <UIcon v-if="trailingIconName" :name="trailingIconName" data-slot="trailingIcon" :class="ui.trailingIcon({ class: uiProp?.trailingIcon })" />
+        <UIcon v-if="trailingIconName" :name="trailingIconName" data-slot="trailingIcon" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
       </slot>
     </span>
   </TagsInputRoot>

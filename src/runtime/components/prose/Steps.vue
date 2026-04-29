@@ -24,21 +24,23 @@ export interface ProseStepsSlots {
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useAppConfig } from '#imports'
-import { useComponentUI } from '../../composables/useComponentUI'
+import { useComponentProps } from '../../composables/useComponentProps'
 import { tv } from '../../utils/tv'
 
-const props = defineProps<ProseStepsProps>()
+const _props = defineProps<ProseStepsProps>()
+
 defineSlots<ProseStepsSlots>()
 
+const props = useComponentProps('prose.steps', _props)
+
 const appConfig = useAppConfig() as ProseSteps['AppConfig']
-const uiProp = useComponentUI('prose.steps', props)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.steps || {}) }))
 </script>
 
 <template>
-  <div :class="ui({ class: [uiProp?.base, props.class], level: props.level })">
+  <div :class="ui({ class: [props.ui?.base, props.class], level: props.level })">
     <slot />
   </div>
 </template>

@@ -153,7 +153,7 @@ import { SelectRoot, SelectArrow, SelectTrigger, SelectPortal, SelectContent, Se
 import { defu } from 'defu'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '../composables/useComponentUI'
+import { useComponentProps } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
 import { useFieldGroup, FieldGroupReset } from '../composables/useFieldGroup'
 import { useComponentIcons } from '../composables/useComponentIcons'
@@ -177,7 +177,7 @@ const _props = withDefaults(defineProps<SelectProps<T, VK, M, Mod>>(), {
 const emits = defineEmits<SelectEmits<T, VK, M, Mod>>()
 const slots = defineSlots<SelectSlots<T, VK, M, Mod>>()
 
-const props = useComponentProps<SelectProps<T, VK, M, Mod>>('select', _props, theme)
+const props = useComponentProps<SelectProps<T, VK, M, Mod>>('select', _props)
 
 const appConfig = useAppConfig() as Select['AppConfig']
 

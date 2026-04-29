@@ -47,7 +47,7 @@ import { computed, ref, inject } from 'vue'
 import { defu } from 'defu'
 import { useForwardProps } from 'reka-ui'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '../composables/useComponentUI'
+import { useComponentProps } from '../composables/useComponentProps'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFieldGroup } from '../composables/useFieldGroup'
 import { formLoadingInjectionKey } from '../composables/useFormField'
@@ -62,7 +62,7 @@ import ULinkBase from './LinkBase.vue'
 const _props = defineProps<ButtonProps>()
 const slots = defineSlots<ButtonSlots>()
 
-const props = useComponentProps('button', _props, theme)
+const props = useComponentProps('button', _props)
 
 const appConfig = useAppConfig() as Button['AppConfig']
 const { orientation, size: buttonSize } = useFieldGroup<ButtonProps>(_props)

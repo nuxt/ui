@@ -1,8 +1,8 @@
 <script lang="ts">
 import { type VNode, computed } from 'vue'
 import defu from 'defu'
-import { injectThemeContext, provideThemeContext } from '../composables/useComponentUI'
-import type { ThemeContextDefaults, ThemeDefaults, ThemeUI } from '../composables/useComponentUI'
+import { injectThemeContext, provideThemeContext } from '../composables/useComponentProps'
+import type { ThemeContextDefaults, ThemeDefaults, ThemeUI } from '../composables/useComponentProps'
 
 export interface ThemeProps {
   /**
@@ -38,7 +38,7 @@ const NAMESPACES = new Set(['prose'])
  * `ThemeContext.defaults` map as every other prop default.
  *
  * Namespaced maps like `{ prose: { p: { base: '...' } } }` preserve their
- * nesting so prose components' `useComponentUI('prose.p', ...)` lookup still
+ * nesting so prose components' `useComponentProps('prose.p', ...)` lookup still
  * resolves: `{ prose: { p: { ui: { base: '...' } } } }`.
  */
 function normalizeUi(ui?: ThemeUI): ThemeContextDefaults {

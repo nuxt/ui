@@ -76,7 +76,7 @@ import { computed, onUnmounted } from 'vue'
 import { CollapsibleRoot, CollapsibleTrigger, CollapsibleContent } from 'reka-ui'
 import { reactivePick, createReusableTemplate } from '@vueuse/core'
 import { useRouter, useAppConfig, useNuxtApp } from '#imports'
-import { useComponentProps } from '../../composables/useComponentUI'
+import { useComponentProps } from '../../composables/useComponentProps'
 import { useForwardProps } from '../../composables/useForwardProps'
 import { useScrollspy } from '../../composables/useScrollspy'
 import { useLocale } from '../../composables/useLocale'
@@ -91,7 +91,7 @@ const _props = withDefaults(defineProps<ContentTocProps<T>>(), {
 const emits = defineEmits<ContentTocEmits>()
 const slots = defineSlots<ContentTocSlots<T>>()
 
-const props = useComponentProps('contentToc', _props, theme)
+const props = useComponentProps<ContentTocProps<T>>('contentToc', _props)
 
 const rootProps = useForwardProps(reactivePick(props, 'as', 'open', 'defaultOpen'), emits)
 

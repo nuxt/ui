@@ -120,12 +120,12 @@ import useEmblaCarousel from 'embla-carousel-vue'
 import { Primitive, useForwardProps } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { useComponentUI } from '../composables/useComponentUI'
+import { useComponentProps } from '../composables/useComponentProps'
 import { useLocale } from '../composables/useLocale'
 import { tv } from '../utils/tv'
 import UButton from './Button.vue'
 
-const props = withDefaults(defineProps<CarouselProps<T>>(), {
+const _props = withDefaults(defineProps<CarouselProps<T>>(), {
   orientation: 'horizontal',
   arrows: false,
   dots: false,
@@ -154,34 +154,39 @@ const props = withDefaults(defineProps<CarouselProps<T>>(), {
   fade: false,
   wheelGestures: false
 })
+
 defineSlots<CarouselSlots<T>>()
 const emits = defineEmits<CarouselEmits>()
 
+const props = useComponentProps<CarouselProps<T>>('carousel', _props)
+
 const { dir, t } = useLocale()
 const appConfig = useAppConfig() as Carousel['AppConfig']
-const uiProp = useComponentUI('carousel', props)
 
 const rootProps = useForwardProps(reactivePick(props, 'active', 'align', 'breakpoints', 'containScroll', 'dragFree', 'dragThreshold', 'duration', 'inViewThreshold', 'loop', 'skipSnaps', 'slidesToScroll', 'startIndex', 'watchDrag', 'watchResize', 'watchSlides', 'watchFocus'))
 
+// eslint-disable-next-line vue/no-dupe-keys
 const prevIcon = computed(() => props.prevIcon || (dir.value === 'rtl' ? appConfig.ui.icons.arrowRight : appConfig.ui.icons.arrowLeft))
+// eslint-disable-next-line vue/no-dupe-keys
 const nextIcon = computed(() => props.nextIcon || (dir.value === 'rtl' ? appConfig.ui.icons.arrowLeft : appConfig.ui.icons.arrowRight))
 
 const stopAutoplayOnInteraction = computed(() => {
-  if (typeof props.autoplay === 'boolean') {
+  if (typeof _props.autoplay === 'boolean') {
     return true
   }
 
-  return props.autoplay.stopOnInteraction ?? true
+  return _props.autoplay.stopOnInteraction ?? true
 })
 
 const stopAutoScrollOnInteraction = computed(() => {
-  if (typeof props.autoScroll === 'boolean') {
+  if (typeof _props.autoScroll === 'boolean') {
     return true
   }
 
-  return props.autoScroll.stopOnInteraction ?? true
+  return _props.autoScroll.stopOnInteraction ?? true
 })
 
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.carousel || {}) })({
   orientation: props.orientation
 }))
@@ -343,40 +348,40 @@ defineExpose({
 
 <template>
   <Primitive
-    :as="as"
+    :as="props.as"
     role="region"
     aria-roledescription="carousel"
-    :data-orientation="orientation"
+    :data-orientation="props.orientation"
     tabindex="0"
     data-slot="root"
-    :class="ui.root({ class: [uiProp?.root, props.class] })"
+    :class="ui.root({ class: [props.ui?.root, props.class] })"
     @keydown="onKeyDown"
   >
-    <div ref="emblaRef" data-slot="viewport" :class="ui.viewport({ class: uiProp?.viewport })">
-      <div data-slot="container" :class="ui.container({ class: uiProp?.container })">
+    <div ref="emblaRef" data-slot="viewport" :class="ui.viewport({ class: props.ui?.viewport })">
+      <div data-slot="container" :class="ui.container({ class: props.ui?.container })">
         <div
-          v-for="(item, index) in items"
+          v-for="(item, index) in props.items"
           :key="index"
-          v-bind="dots ? { role: 'tabpanel' } : { 'role': 'group', 'aria-roledescription': 'slide' }"
+          v-bind="props.dots ? { role: 'tabpanel' } : { 'role': 'group', 'aria-roledescription': 'slide' }"
           data-slot="item"
-          :class="ui.item({ class: [uiProp?.item, isCarouselItem(item) && item.ui?.item, isCarouselItem(item) && item.class] })"
+          :class="ui.item({ class: [props.ui?.item, isCarouselItem(item) && item.ui?.item, isCarouselItem(item) && item.class] })"
         >
           <slot :item="item" :index="index" />
         </div>
       </div>
     </div>
 
-    <div v-if="arrows || dots" data-slot="controls" :class="ui.controls({ class: uiProp?.controls })">
-      <div v-if="arrows" data-slot="arrows" :class="ui.arrows({ class: uiProp?.arrows })">
+    <div v-if="props.arrows || props.dots" data-slot="controls" :class="ui.controls({ class: props.ui?.controls })">
+      <div v-if="props.arrows" data-slot="arrows" :class="ui.arrows({ class: props.ui?.arrows })">
         <UButton
           :disabled="!canScrollPrev"
           :icon="prevIcon"
           color="neutral"
           variant="outline"
           :aria-label="t('carousel.prev')"
-          v-bind="typeof prev === 'object' ? prev : undefined"
+          v-bind="typeof props.prev === 'object' ? props.prev : undefined"
           data-slot="prev"
-          :class="ui.prev({ class: uiProp?.prev })"
+          :class="ui.prev({ class: props.ui?.prev })"
           @click="scrollPrev"
         />
         <UButton
@@ -385,14 +390,14 @@ defineExpose({
           color="neutral"
           variant="outline"
           :aria-label="t('carousel.next')"
-          v-bind="typeof next === 'object' ? next : undefined"
+          v-bind="typeof props.next === 'object' ? props.next : undefined"
           data-slot="next"
-          :class="ui.next({ class: uiProp?.next })"
+          :class="ui.next({ class: props.ui?.next })"
           @click="scrollNext"
         />
       </div>
 
-      <div v-if="dots" role="tablist" :aria-label="t('carousel.dots')" data-slot="dots" :class="ui.dots({ class: uiProp?.dots })">
+      <div v-if="props.dots" role="tablist" :aria-label="t('carousel.dots')" data-slot="dots" :class="ui.dots({ class: props.ui?.dots })">
         <template v-for="(_, index) in scrollSnaps" :key="index">
           <button
             type="button"
@@ -400,7 +405,7 @@ defineExpose({
             :aria-label="t('carousel.goto', { slide: index + 1 })"
             :aria-selected="selectedIndex === index"
             data-slot="dot"
-            :class="ui.dot({ class: uiProp?.dot, active: selectedIndex === index })"
+            :class="ui.dot({ class: props.ui?.dot, active: selectedIndex === index })"
             :data-state="selectedIndex === index ? 'active' : undefined"
             @click="scrollTo(index)"
           />

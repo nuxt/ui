@@ -4,17 +4,9 @@ import { computed, getCurrentInstance } from 'vue'
 import defu from 'defu'
 import { createContext } from 'reka-ui'
 import { useAppConfig } from '#imports'
-import type { TVConfig } from '../types/tv'
 import type * as ComponentTypes from '../types'
 import type * as ui from '#build/ui'
 import { get } from '../utils'
-
-type UIConfig = TVConfig<typeof ui>
-type ExtractUISlots<C> = C extends { slots?: infer S } ? NonNullable<S> : never
-type UIConfigSlots<T extends keyof UIConfig>
-  = 'slots' extends keyof NonNullable<UIConfig[T]>
-    ? ExtractUISlots<NonNullable<UIConfig[T]>>
-    : { base?: ClassValue }
 
 type ThemeSlotOverrides<T> = T extends { slots: infer S extends Record<string, any> }
   ? { [K in keyof S]?: ClassValue }
@@ -214,28 +206,37 @@ function propIsDefined(vnode: VNode | null | undefined, prop: string): boolean {
 /**
  * Resolve a component's props with the priority chain:
  *   explicit prop > nearest UTheme > withDefaults
- *     > app.config.ui.<name>.defaultVariants > theme.defaultVariants
+ *     > app.config.ui.<name>.defaultVariants
  *
  * The returned proxy transparently reads from `props`, falling through to the
- * injected `ThemeContext`, `app.config.ui.<name>.defaultVariants`, and the
- * component's tv() theme for defaults. The `ui` prop is deep-merged
- * (explicit slot classes override theme slot classes) instead of being replaced.
+ * injected `ThemeContext` and `app.config.ui.<name>.defaultVariants` for
+ * defaults. The component's tv() `defaultVariants` are intentionally left out
+ * of the proxy fallback — they continue to drive `tv()`-internal class
+ * resolution (the original semantics) without leaking into prop reads. The
+ * `ui` prop is deep-merged (explicit slot classes override theme slot classes)
+ * instead of being replaced.
  */
-export function useComponentProps<T extends object>(
-  name: string,
-  props: T,
-  theme?: Record<string, any>
-): T {
+export function useComponentProps<T extends object>(name: string, props: T): T {
   const vm = getCurrentInstance()
   const { defaults } = injectThemeContext()
   const appConfig = useAppConfig() as { ui?: Record<string, any> }
 
   return new Proxy(props, {
     get(target, prop, receiver) {
+      // Advertise as a Vue reactive proxy so `toRefs`, `reactiveOmit`,
+      // `reactivePick`, and similar utilities don't warn when given the proxy.
+      // Reads still flow through to the underlying reactive `props` object
+      // returned by `defineProps`, so reactivity tracking works normally.
+      if (prop === '__v_isReactive') return true
+      if (prop === '__v_raw') return target
+
       const raw = Reflect.get(target, prop, receiver)
       if (typeof prop !== 'string') return raw
 
-      const themeEntry = defaults.value[name]
+      // Support dotted-path names (e.g. `prose.p`, `prose.code`) so prose
+      // components can pull from the same nested `ThemeContext.defaults` shape
+      // that `normalizeUi` produces in `<UTheme>`.
+      const themeEntry = name.includes('.') ? get(defaults.value, name) : defaults.value[name]
 
       if (prop === 'ui') {
         const themeUi = themeEntry?.ui
@@ -258,33 +259,11 @@ export function useComponentProps<T extends object>(
         return raw
       }
 
-      const appConfigDefault = appConfig.ui?.[name]?.defaultVariants?.[prop]
-      if (appConfigDefault !== undefined) return appConfigDefault
-
-      return theme?.defaultVariants?.[prop]
+      const appConfigEntry = name.includes('.') ? get(appConfig.ui ?? {}, name) : appConfig.ui?.[name]
+      return appConfigEntry?.defaultVariants?.[prop]
     },
     has: (t, p) => Reflect.has(t, p),
     ownKeys: t => Reflect.ownKeys(t),
     getOwnPropertyDescriptor: (t, p) => Reflect.getOwnPropertyDescriptor(t, p)
-  })
-}
-
-type ComponentUIProps<T extends keyof UIConfig> = {
-  ui?: UIConfigSlots<T>
-}
-
-/**
- * Backward-compat shim used by components that haven't migrated to
- * `useComponentProps` yet. Returns the merged `ui` (slot-class overrides)
- * the same way it did before, but sourced from the new `ThemeContext.defaults`.
- */
-export function useComponentUI<T extends keyof UIConfig>(name: T, props: ComponentUIProps<T>): ComputedRef<UIConfigSlots<T>>
-export function useComponentUI(name: string, props: { ui?: any }): ComputedRef<any>
-export function useComponentUI(name: string, props: { ui?: any }): ComputedRef<any> {
-  const { defaults } = injectThemeContext()
-
-  return computed(() => {
-    const themeUi = get(defaults.value, `${name}.ui`) || {}
-    return defu(props.ui ?? {}, themeUi)
   })
 }

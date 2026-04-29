@@ -50,7 +50,7 @@ export interface ComponentNameSlots {
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '../composables/useComponentUI'
+import { useComponentProps } from '../composables/useComponentProps'
 import { tv } from '../utils/tv'
 
 // 7. Raw props (use withDefaults only when you actually need a runtime default)
@@ -60,7 +60,7 @@ const slots = defineSlots<ComponentNameSlots>()
 // 8. Theme-aware proxy: resolves explicit > <UTheme :props> > withDefaults
 //    > app.config.defaultVariants > theme.defaultVariants. The `ui` prop is
 //    deep-merged automatically, so reach for `props.ui?.<slot>` in the template.
-const props = useComponentProps('componentName', _props, theme)
+const props = useComponentProps('componentName', _props)
 
 // 9. App config
 const appConfig = useAppConfig() as ComponentName['AppConfig']
@@ -116,7 +116,7 @@ import { computed } from 'vue'
 import { CollapsibleRoot, CollapsibleTrigger, CollapsibleContent } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '../composables/useComponentUI'
+import { useComponentProps } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
 import { tv } from '../utils/tv'
 
@@ -127,7 +127,7 @@ const emits = defineEmits<CollapsibleEmits>()
 const slots = defineSlots<CollapsibleSlots>()
 
 // Theme-aware proxy. `props` deep-merges `ui` and resolves <UTheme :props> defaults.
-const props = useComponentProps('collapsible', _props, theme)
+const props = useComponentProps('collapsible', _props)
 
 const appConfig = useAppConfig() as Collapsible['AppConfig']
 
@@ -193,12 +193,17 @@ import { useFieldGroup } from '../composables/useFieldGroup'
 
 defineOptions({ inheritAttrs: false })
 
-const { 
-  id, name, size, color, highlight, disabled, 
-  ariaAttrs, emitFormBlur, emitFormInput, emitFormChange 
-} = useFormField<InputProps>(props, { deferInputValidation: true })
+// Pass raw `_props` (not the proxy) so the wrapping `<UFormField>` /
+// `<UFieldGroup>` keep precedence over `<UTheme :props>` / `withDefaults` /
+// `app.config` defaults. Their internal fallback is `props?.x ?? injected.x`,
+// so handing them the proxy would leak theme defaults into "explicit prop"
+// and silently override the wrapper.
+const {
+  id, name, size, color, highlight, disabled,
+  ariaAttrs, emitFormBlur, emitFormInput, emitFormChange
+} = useFormField<InputProps>(_props, { deferInputValidation: true })
 
-const { orientation, size: fieldGroupSize } = useFieldGroup<InputProps>(props)
+const { orientation, size: fieldGroupSize } = useFieldGroup<InputProps>(_props)
 </script>
 
 <template>
@@ -255,15 +260,14 @@ Notes:
 - The proxy passes through to `_props` for explicitly set props, so `withDefaults` fallbacks stay lower priority than `<UTheme>` overrides.
 - The `ui` prop is deep-merged (slot classes layered on top of theme overrides). All other props are explicit-wins.
 - **Always read props as `props.x` in templates and `<script setup>`.** Bare prop names (`{{ label }}`, `v-if="arrow"`) resolve to `_props` and bypass the proxy, so `<UTheme :props>` defaults won't apply. The `nuxt-ui/no-bare-prop-refs` ESLint rule autofixes this.
-- Pass the **raw** `_props` (not the proxy) to composables that read `vnode.props` themselves — `useFormField`, `useFieldGroup` — so their own injection precedence stays intact. Use nullish coalescing in `tv()` calls when you need the field-group value to win: `size: formSize.value ?? props.size`.
+- Pass the **raw** `_props` (not the proxy) to context composables — `useFormField`, `useFieldGroup`, `useAvatarGroup`. Their internal fallback is `props?.x ?? injected.x`, so the wrapping `<UFormField>` / `<UFieldGroup>` / `<UAvatarGroup>` should beat `<UTheme :props>` / `withDefaults` / `app.config` defaults (closer context wins). Then in `tv()` calls, fall back to the proxy: `size: formSize.value ?? props.size` — that gives you the full chain `explicit > closer-context > UTheme > withDefaults > app.config > tv defaults`. `useComponentIcons` has no injection chain, so pass the proxy `props` so theme overrides flow through.
 - Reka primitives' `useForwardProps` / `useForwardPropsEmits` filter root props by `vm.vnode.props ∪ withDefaults` and would strip theme-supplied values. Import `useForwardProps` from `composables/useForwardProps.ts` instead — same `(source, emits?)` signature, proxy-aware.
-- `useComponentUI` is a back-compat shim for unmigrated components — don't reach for it in new code.
 
 ## Key Patterns
 
 | Pattern | Usage |
 |---------|-------|
-| `useComponentProps(name, _props, theme)` | Theme-aware proxy — default for new components |
+| `useComponentProps(name, _props)` | Theme-aware proxy — default for new components |
 | `useForwardProps(source, emits?)` (local) | Forward Reka UI props/emits without filtering theme defaults |
 | `withDefaults` | Runtime default values |
 | `defineOptions({ inheritAttrs: false })` | When spreading `$attrs` to inner element |
@@ -282,7 +286,7 @@ export * from '../components/ComponentName.vue'
 
 ## Register in `ThemeDefaults`
 
-The `ThemeDefaults` interface in `src/runtime/composables/useComponentUI.ts` powers autocomplete inside `<UTheme :props="{ componentName: { … } }">`. The CLI scaffolder (`nuxt-ui make component`) auto-inserts the entry; only do this manually if you skipped the CLI:
+The `ThemeDefaults` interface in `src/runtime/composables/useComponentProps.ts` powers autocomplete inside `<UTheme :props="{ componentName: { … } }">`. The CLI scaffolder (`nuxt-ui make component`) auto-inserts the entry; only do this manually if you skipped the CLI:
 
 ```ts
 export interface ThemeDefaults {
