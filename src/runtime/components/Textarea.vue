@@ -174,7 +174,7 @@ function autoFocus() {
 
 function autoResize() {
   if (props.autoresize && textareaRef.value) {
-    textareaRef.value.rows = _props.rows
+    textareaRef.value.rows = props.rows!
     const overflow = textareaRef.value.style.overflow
     textareaRef.value.style.overflow = 'hidden'
 
@@ -186,7 +186,7 @@ function autoResize() {
     const { scrollHeight } = textareaRef.value
     const newRows = (scrollHeight - padding) / lineHeight
 
-    if (newRows > _props.rows) {
+    if (newRows > props.rows!) {
       textareaRef.value.rows = props.maxrows ? Math.min(newRows, props.maxrows) : newRows
     }
 

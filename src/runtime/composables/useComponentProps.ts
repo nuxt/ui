@@ -94,6 +94,9 @@ export interface ThemeDefaults {
   fileUpload?: Partial<ComponentTypes.FileUploadProps>
   footer?: Partial<ComponentTypes.FooterProps>
   footerColumns?: Partial<ComponentTypes.FooterColumnsProps>
+  // TODO: `FormProps` carries three generics for state, schema, and fields —
+  // none of which are themable defaults. Loosened to `any` so this entry stays
+  // assignable from any concrete `Form` instance.
   form?: Partial<ComponentTypes.FormProps<any, any, any>>
   formField?: Partial<ComponentTypes.FormFieldProps>
   header?: Partial<ComponentTypes.HeaderProps>
@@ -262,6 +265,11 @@ export function useComponentProps<T extends object>(name: string, props: T): T {
       const appConfigEntry = name.includes('.') ? get(appConfig.ui ?? {}, name) : appConfig.ui?.[name]
       return appConfigEntry?.defaultVariants?.[prop]
     },
+    // `has`, `ownKeys`, and `getOwnPropertyDescriptor` reflect the underlying
+    // `defineProps` schema only — theme defaults are NOT enumerable. As a
+    // result, `Object.keys(props)`, `for…in`, and `{ ...props }` see only the
+    // declared prop keys, but each value lookup still flows through the proxy.
+    // This is the contract our internal `useForwardProps` relies on.
     has: (t, p) => Reflect.has(t, p),
     ownKeys: t => Reflect.ownKeys(t),
     getOwnPropertyDescriptor: (t, p) => Reflect.getOwnPropertyDescriptor(t, p)

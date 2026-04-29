@@ -111,7 +111,7 @@ defineExpose({
     <UTextarea
       ref="textareaRef"
       v-model="model"
-      :placeholder="props.placeholder || t('chatPrompt.placeholder')"
+      :placeholder="props.placeholder ?? t('chatPrompt.placeholder')"
       :disabled="Boolean(props.error) || props.disabled"
       variant="none"
       fixed

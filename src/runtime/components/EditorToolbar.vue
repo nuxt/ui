@@ -134,7 +134,7 @@ const Component = computed(() => {
     bubble: BubbleMenu,
     floating: FloatingMenu,
     fixed: 'template'
-  }[_props.layout])
+  }[props.layout!])
 })
 
 const rootProps = useForwardProps(reactiveOmit(props, 'as', 'color', 'variant', 'activeColor', 'activeVariant', 'size', 'items', 'layout', 'editor', 'class', 'ui'))

@@ -334,7 +334,7 @@ const items = computed(() => groups.value?.filter((group) => {
 // Opt-in debounce for the value piped into Fuse. Default `0` short-circuits inside `refDebounced`
 // so generic uses (menus, pickers) stay effectively instant, while large consumers (e.g. ContentSearch)
 // can opt in to avoid running fuzzy search on every keystroke.
-const fuseSearchTerm = refDebounced(searchTerm, () => _props.searchDelay)
+const fuseSearchTerm = refDebounced(searchTerm, () => props.searchDelay!)
 
 const { results: fuseResults } = useFuse<typeof items.value[number]>(fuseSearchTerm, items, fuse)
 
@@ -352,8 +352,8 @@ function processGroupItems(group: G, items: (T & { matches?: FuseResult<T>['matc
     items: processedItems.slice(0, fuse.value.resultLimit).map((item) => {
       return {
         ...item,
-        labelHtml: highlight<T>(item, fuseSearchTerm.value, _props.labelKey),
-        suffixHtml: highlight<T>(item, fuseSearchTerm.value, undefined, [_props.labelKey])
+        labelHtml: highlight<T>(item, fuseSearchTerm.value, props.labelKey!),
+        suffixHtml: highlight<T>(item, fuseSearchTerm.value, undefined, [props.labelKey!])
       }
     })
   }

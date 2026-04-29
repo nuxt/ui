@@ -267,7 +267,7 @@ const loading = ref(false)
 provide(formLoadingInjectionKey, readonly(loading))
 
 async function onSubmitWrapper(payload: Event) {
-  loading.value = _props.loadingAuto && true
+  loading.value = !!props.loadingAuto
 
   const event = payload as FormSubmitEvent<FormData<S, T>>
 

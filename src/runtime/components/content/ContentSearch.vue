@@ -95,11 +95,11 @@ export type ContentSearchSlots = CommandPaletteSlots<ContentSearchItem> & {
 
 <script setup lang="ts" generic="T extends ContentSearchLink">
 import { computed, useTemplateRef } from 'vue'
-import { useForwardProps } from 'reka-ui'
 import { defu } from 'defu'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig, useColorMode, defineShortcuts } from '#imports'
 import { useComponentProps } from '../../composables/useComponentProps'
+import { useForwardProps } from '../../composables/useForwardProps'
 import { useContentSearch } from '../../composables/useContentSearch'
 import { useLocale } from '../../composables/useLocale'
 import { omit, transformUI } from '../../utils'
@@ -246,7 +246,7 @@ function onSelect(item: ContentSearchItem) {
 }
 
 defineShortcuts({
-  [_props.shortcut]: {
+  [props.shortcut!]: {
     usingInput: true,
     handler: () => open.value = !open.value
   }

@@ -45,9 +45,9 @@ export interface ButtonSlots {
 <script setup lang="ts">
 import { computed, ref, inject } from 'vue'
 import { defu } from 'defu'
-import { useForwardProps } from 'reka-ui'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
+import { useForwardProps } from '../composables/useForwardProps'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFieldGroup } from '../composables/useFieldGroup'
 import { formLoadingInjectionKey } from '../composables/useFormField'
