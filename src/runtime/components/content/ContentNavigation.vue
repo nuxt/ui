@@ -201,15 +201,15 @@ const defaultValue = computed(() => {
     </slot>
   </DefineLinkTemplate>
 
-  <Primitive :as="props.as" v-bind="$attrs" :as-child="_props.level > 0" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <AccordionRoot as="ul" :disabled="disabled" v-bind="rootProps" :default-value="defaultValue" :class="_props.level > 0 ? ui.listWithChildren({ class: props.ui?.listWithChildren }) : ui.list({ class: props.ui?.list })">
+  <Primitive :as="props.as" v-bind="$attrs" :as-child="props.level! > 0" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+    <AccordionRoot as="ul" :disabled="disabled" v-bind="rootProps" :default-value="defaultValue" :class="props.level! > 0 ? ui.listWithChildren({ class: props.ui?.listWithChildren }) : ui.list({ class: props.ui?.list })">
       <template v-for="(link, index) in props.navigation" :key="index">
         <AccordionItem
           v-if="link.children?.length"
           as="li"
           :disabled="!!link.disabled"
           data-slot="itemWithChildren"
-          :class="ui.itemWithChildren({ class: [props.ui?.itemWithChildren, link.ui?.itemWithChildren], level: _props.level > 0 })"
+          :class="ui.itemWithChildren({ class: [props.ui?.itemWithChildren, link.ui?.itemWithChildren], level: props.level! > 0 })"
           :value="String(index)"
         >
           <AccordionTrigger
@@ -227,7 +227,7 @@ const defaultValue = computed(() => {
               v-bind="rootProps"
               :navigation="link.children"
               :default-open="props.defaultOpen"
-              :level="_props.level + 1"
+              :level="props.level! + 1"
               :trailing-icon="props.trailingIcon"
               :color="props.color"
               :variant="props.variant"
@@ -242,9 +242,9 @@ const defaultValue = computed(() => {
           </AccordionContent>
         </AccordionItem>
 
-        <li v-else data-slot="item" :class="ui.item({ class: [props.ui?.item, link.ui?.item], level: _props.level > 0 })">
+        <li v-else data-slot="item" :class="ui.item({ class: [props.ui?.item, link.ui?.item], level: props.level! > 0 })">
           <ULink v-slot="{ active, ...slotProps }" v-bind="pickLinkProps(mapContentNavigationItem(link))" custom>
-            <ULinkBase v-bind="slotProps" data-slot="link" :class="ui.link({ class: [props.ui?.link, link.ui?.link, link.class], active, disabled: !!link.disabled, level: _props.level > 0 })">
+            <ULinkBase v-bind="slotProps" data-slot="link" :class="ui.link({ class: [props.ui?.link, link.ui?.link, link.class], active, disabled: !!link.disabled, level: props.level! > 0 })">
               <ReuseLinkTemplate :link="link" :active="active" />
             </ULinkBase>
           </ULink>
