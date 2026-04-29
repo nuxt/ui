@@ -58,8 +58,10 @@ const _props = defineProps<ComponentNameProps>()
 const slots = defineSlots<ComponentNameSlots>()
 
 // 8. Theme-aware proxy: resolves explicit > <UTheme :props> > withDefaults
-//    > app.config.defaultVariants > theme.defaultVariants. The `ui` prop is
-//    deep-merged automatically, so reach for `props.ui?.<slot>` in the template.
+//    > app.config.ui.<name>.defaultVariants. The `ui` prop is deep-merged
+//    automatically, so reach for `props.ui?.<slot>` in the template.
+//    `theme.defaultVariants` is NOT in this chain — it only feeds `tv()`
+//    class resolution.
 const props = useComponentProps('componentName', _props)
 
 // 9. App config
@@ -248,7 +250,7 @@ defineExpose({
 
 ## Theme Defaults
 
-`useComponentProps` is the primary integration with `<UTheme>`. The proxy resolves the priority chain **explicit prop > nearest `<UTheme :props>` > `withDefaults` > `app.config.ui.<name>.defaultVariants` > `theme.defaultVariants`** for every prop — including ones driving template logic that `tv().defaultVariants` can't reach (`<component :is>`, `v-if`, computed conditionals):
+`useComponentProps` is the primary integration with `<UTheme>`. The proxy resolves the priority chain **explicit prop > nearest `<UTheme :props>` > `withDefaults` > `app.config.ui.<name>.defaultVariants`** for every prop — including ones driving template logic that `tv().defaultVariants` can't reach (`<component :is>`, `v-if`, computed conditionals). `theme.defaultVariants` is intentionally NOT in the proxy chain — it only feeds `tv()` class resolution. If a prop value is consumed in template logic, it must come from one of the proxy-resolved sources (typically `withDefaults`):
 
 ```vue
 <template>
