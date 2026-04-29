@@ -325,7 +325,7 @@ function getDropdownItems(item: EditorToolbarDropdownItem) {
       ...$attrs
     }"
   >
-    <Primitive :as="as" role="toolbar" data-slot="base" :class="ui.base({ class: [props.ui?.base, props.class] })">
+    <Primitive :as="props.as" role="toolbar" data-slot="base" :class="ui.base({ class: [props.ui?.base, props.class] })">
       <template v-for="(group, groupIndex) in groups" :key="`group-${groupIndex}`">
         <div role="group" data-slot="group" :class="ui.group({ class: props.ui?.group })">
           <template v-for="(item, index) in group" :key="`group-${groupIndex}-${index}`">

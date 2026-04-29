@@ -122,7 +122,7 @@ const ui = computed(() => tv({
   <ULink
     v-slot="{ active, ...slotProps }"
     :type="props.type"
-    :disabled="disabled || isLoading"
+    :disabled="props.disabled || isLoading"
     v-bind="omit(linkProps, ['type', 'disabled', 'onClick'])"
     custom
   >
@@ -139,7 +139,7 @@ const ui = computed(() => tv({
     >
       <slot name="leading" :ui="ui">
         <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" data-slot="leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon, active })" />
-        <UAvatar v-else-if="!!avatar" :size="((props.ui?.leadingAvatarSize || ui.leadingAvatarSize()) as AvatarProps['size'])" v-bind="avatar" data-slot="leadingAvatar" :class="ui.leadingAvatar({ class: props.ui?.leadingAvatar, active })" />
+        <UAvatar v-else-if="!!props.avatar" :size="((props.ui?.leadingAvatarSize || ui.leadingAvatarSize()) as AvatarProps['size'])" v-bind="props.avatar" data-slot="leadingAvatar" :class="ui.leadingAvatar({ class: props.ui?.leadingAvatar, active })" />
       </slot>
 
       <slot :ui="ui">

@@ -278,9 +278,9 @@ defineExpose({
           <component
             :is="as.link"
             :type="as.link === 'button' ? 'button' : undefined"
-            :disabled="item.disabled || disabled"
+            :disabled="item.disabled || props.disabled"
             data-slot="link"
-            :class="ui.link({ class: [props.ui?.link, item.ui?.link, item.class], selected: isSelected, disabled: item.disabled || disabled })"
+            :class="ui.link({ class: [props.ui?.link, item.ui?.link, item.class], selected: isSelected, disabled: item.disabled || props.disabled })"
             :style="!nested && level > 1 ? { paddingLeft: flattenedPaddingFormula(level) } : undefined"
           >
             <slot
@@ -376,7 +376,7 @@ defineExpose({
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     :get-key="getItemKey"
     :default-expanded="defaultExpanded"
-    :selection-behavior="selectionBehavior"
+    :selection-behavior="props.selectionBehavior"
   >
     <TreeVirtualizer
       v-if="!!props.virtualize"

@@ -268,7 +268,7 @@ const trackThumbStyle = computed(() => ({
 </script>
 
 <template>
-  <Primitive :as="as" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })" :data-disabled="disabled ? true : undefined">
+  <Primitive :as="props.as" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })" :data-disabled="disabled ? true : undefined">
     <div data-slot="picker" :class="ui.picker({ class: props.ui?.picker })">
       <div
         ref="selectorRef"

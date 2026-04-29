@@ -260,8 +260,8 @@ defineExpose({
 <template>
   <UModal
     v-model:open="open"
-    :title="title || t('contentSearch.title')"
-    :description="description || t('contentSearch.description')"
+    :title="props.title || t('contentSearch.title')"
+    :description="props.description || t('contentSearch.description')"
     v-bind="modalProps"
     data-slot="modal"
     :class="ui.modal({ class: [props.ui?.modal, props.class] })"

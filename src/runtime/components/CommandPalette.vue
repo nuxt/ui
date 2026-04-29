@@ -489,7 +489,7 @@ function onSelect(e: Event, item: T) {
         <ULinkBase v-bind="slotProps" data-slot="item" :class="ui.item({ class: [props.ui?.item, item.ui?.item, item.class], active: active || item.active })">
           <slot :name="((item.slot || group?.slot || 'item') as keyof CommandPaletteSlots<T>)" :item="(item as any)" :index="index" :ui="ui">
             <slot :name="((item.slot ? `${item.slot}-leading` : group?.slot ? `${group.slot}-leading` : `item-leading`) as keyof CommandPaletteSlots<T>)" :item="(item as any)" :index="index" :ui="ui">
-              <UIcon v-if="item.loading" :name="loadingIcon || appConfig.ui.icons.loading" data-slot="itemLeadingIcon" :class="ui.itemLeadingIcon({ class: [props.ui?.itemLeadingIcon, item.ui?.itemLeadingIcon], loading: true })" />
+              <UIcon v-if="item.loading" :name="props.loadingIcon || appConfig.ui.icons.loading" data-slot="itemLeadingIcon" :class="ui.itemLeadingIcon({ class: [props.ui?.itemLeadingIcon, item.ui?.itemLeadingIcon], loading: true })" />
               <UIcon v-else-if="item.icon" :name="item.icon" data-slot="itemLeadingIcon" :class="ui.itemLeadingIcon({ class: [props.ui?.itemLeadingIcon, item.ui?.itemLeadingIcon], active: active || item.active })" />
               <UAvatar v-else-if="item.avatar" :size="((item.ui?.itemLeadingAvatarSize || props.ui?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" data-slot="itemLeadingAvatar" :class="ui.itemLeadingAvatar({ class: [props.ui?.itemLeadingAvatar, item.ui?.itemLeadingAvatar], active: active || item.active })" />
               <UChip
@@ -549,7 +549,7 @@ function onSelect(e: Event, item: T) {
     </ULink>
   </DefineItemTemplate>
 
-  <ListboxRoot v-bind="{ ...rootProps, ...$attrs }" ref="rootRef" :selection-behavior="selectionBehavior" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <ListboxRoot v-bind="{ ...rootProps, ...$attrs }" ref="rootRef" :selection-behavior="props.selectionBehavior" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <ListboxFilter v-if="props.input" v-model="searchTerm" as-child>
       <UInput
         variant="none"
@@ -557,8 +557,8 @@ function onSelect(e: Event, item: T) {
         v-bind="typeof props.input === 'object' ? props.input : {}"
         :placeholder="placeholder"
         :autofocus="props.autofocus"
-        :loading="loading"
-        :loading-icon="loadingIcon"
+        :loading="props.loading"
+        :loading-icon="props.loadingIcon"
         :trailing-icon="props.trailingIcon"
         :icon="props.icon || appConfig.ui.icons.search"
         data-slot="input"

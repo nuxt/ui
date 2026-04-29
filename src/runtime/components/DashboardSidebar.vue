@@ -158,7 +158,7 @@ function toggleOpen() {
   <DefineResizeHandleTemplate>
     <slot name="resize-handle" :on-mouse-down="onMouseDown" :on-touch-start="onTouchStart" :on-double-click="onDoubleClick" :ui="ui">
       <UDashboardResizeHandle
-        v-if="resizable"
+        v-if="props.resizable"
         :aria-controls="id"
         data-slot="handle"
         :class="ui.handle({ class: props.ui?.handle })"

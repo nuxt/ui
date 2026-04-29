@@ -123,8 +123,8 @@ const chevronIconName = computed(() => props.chevronIcon || appConfig.ui.icons?.
   <CollapsibleRoot
     v-slot="{ open: isOpen }"
     :open="resolvedOpen"
-    :disabled="disabled"
-    :unmount-on-hide="unmountOnHide"
+    :disabled="props.disabled"
+    :unmount-on-hide="props.unmountOnHide"
     data-slot="root"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     @update:open="setOpen"

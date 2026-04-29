@@ -112,7 +112,7 @@ defineExpose({
       ref="textareaRef"
       v-model="model"
       :placeholder="props.placeholder || t('chatPrompt.placeholder')"
-      :disabled="Boolean(props.error) || disabled"
+      :disabled="Boolean(props.error) || props.disabled"
       variant="none"
       fixed
       v-bind="{ ...textareaProps, ...$attrs }"

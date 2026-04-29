@@ -161,7 +161,7 @@ defineExpose({
     :id="id"
     v-slot="{ modelValue: tags }"
     :model-value="props.modelValue"
-    :default-value="defaultValue"
+    :default-value="props.defaultValue"
     data-slot="root"
     :class="ui.root({ class: [ui.base({ class: props.ui?.base }), props.ui?.root, props.class] })"
     v-bind="rootProps"

@@ -77,7 +77,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dashboardPan
 
   <slot name="resize-handle" :on-mouse-down="onMouseDown" :on-touch-start="onTouchStart" :on-double-click="onDoubleClick">
     <UDashboardResizeHandle
-      v-if="resizable"
+      v-if="props.resizable"
       :aria-controls="id"
       data-slot="handle"
       :class="ui.handle({ class: props.ui?.handle })"

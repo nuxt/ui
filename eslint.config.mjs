@@ -8,10 +8,21 @@ import { createConfigForNuxt } from '@nuxt/eslint-config/flat'
  *
  * Auto-fixes by rewriting `arrow` → `props.arrow`.
  *
- * Heuristic for "is this identifier a prop?":
- *   1. Property signatures of any `interface *Props` declared in the same file.
- *   2. Members accessed as `_props.X` or `props.X` anywhere in the script.
+ * In `<script setup>`, every free identifier in a template expression resolves
+ * to either (a) a setup-scope binding or (b) `__props.X`. So if an identifier
+ * isn't a known setup binding, slot-scoped variable, or JS global, it must be
+ * a prop access — and therefore needs the `props.` prefix to flow through the
+ * proxy. This catches inherited props (extended/picked from imported types)
+ * that no static interface walk would find.
  */
+const KNOWN_GLOBALS = new Set([
+  'undefined', 'null', 'true', 'false', 'NaN', 'Infinity',
+  'console', 'window', 'document', 'navigator', 'location', 'history',
+  'Math', 'JSON', 'Object', 'Array', 'String', 'Number', 'Boolean',
+  'Date', 'RegExp', 'Promise', 'Symbol', 'Error', 'Map', 'Set',
+  'WeakMap', 'WeakSet', 'Proxy', 'Reflect',
+  'parseInt', 'parseFloat', 'isNaN', 'isFinite', 'encodeURIComponent', 'decodeURIComponent'
+])
 const noBarePropRefs = {
   meta: {
     type: 'problem',
@@ -33,18 +44,7 @@ const noBarePropRefs = {
     let usesComponentProps = false
     let propsVar = 'props'
     let rawPropsVar = '_props'
-    const propNames = new Set()
     const setupBindings = new Set()
-
-    function collectInterfaceProps(node) {
-      if (!node || node.type !== 'TSInterfaceDeclaration') return
-      if (!node.id?.name?.endsWith('Props')) return
-      for (const member of node.body.body) {
-        if (member.type === 'TSPropertySignature' && member.key?.type === 'Identifier') {
-          propNames.add(member.key.name)
-        }
-      }
-    }
 
     function collectIdsFromPattern(pattern) {
       if (!pattern) return
@@ -75,9 +75,16 @@ const noBarePropRefs = {
             if (ref.variable) continue
             const id = ref.id
             const name = id.name
-            if (!name || !propNames.has(name)) continue
+            if (!name) continue
             if (name === propsVar || name === rawPropsVar) continue
             if (setupBindings.has(name)) continue
+            if (KNOWN_GLOBALS.has(name)) continue
+            if (name.startsWith('$') || name.startsWith('_')) continue
+            // Skip PascalCase identifiers — they're TypeScript type references
+            // inside `as TypeName` casts, generic params (`T`), or `keyof X`,
+            // not runtime prop reads. Vue components / props are camelCase by
+            // convention; type names are PascalCase.
+            if (/^[A-Z]/.test(name)) continue
             context.report({
               node: id,
               messageId: 'bareRef',
@@ -102,9 +109,6 @@ const noBarePropRefs = {
         }
       },
       {
-        TSInterfaceDeclaration(node) {
-          collectInterfaceProps(node)
-        },
         'Program > VariableDeclaration > VariableDeclarator'(node) {
           collectIdsFromPattern(node.id)
         },
@@ -128,13 +132,6 @@ const noBarePropRefs = {
           const rawArg = node.arguments[1]
           if (rawArg?.type === 'Identifier') {
             rawPropsVar = rawArg.name
-          }
-        },
-        MemberExpression(node) {
-          if (node.object?.type !== 'Identifier') return
-          if (node.object.name !== rawPropsVar && node.object.name !== propsVar) return
-          if (node.property?.type === 'Identifier' && !node.computed) {
-            propNames.add(node.property.name)
           }
         }
       }

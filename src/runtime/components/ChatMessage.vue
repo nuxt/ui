@@ -93,7 +93,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.chatMessage 
 </script>
 
 <template>
-  <Primitive :as="props.as" :data-role="role" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <Primitive :as="props.as" :data-role="props.role" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <div v-if="!!slots.files && fileParts.length" data-slot="files" :class="ui.files({ class: props.ui?.files })">
       <slot name="files" v-bind="{ ...messageProps, parts: fileParts }" />
     </div>
@@ -112,7 +112,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.chatMessage 
             {{ props.content }}
           </template>
           <template v-else>
-            <template v-for="(part, index) in textParts" :key="`${id}-${part.type}-${index}`">
+            <template v-for="(part, index) in textParts" :key="`${props.id}-${part.type}-${index}`">
               {{ part.text }}
             </template>
           </template>

@@ -147,10 +147,10 @@ defineExpose({
 <template>
   <TabsRoot
     v-bind="rootProps"
-    :model-value="modelValue"
-    :default-value="defaultValue"
+    :model-value="props.modelValue"
+    :default-value="props.defaultValue"
     :orientation="props.orientation"
-    :activation-mode="activationMode"
+    :activation-mode="props.activationMode"
     data-slot="root"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
   >
