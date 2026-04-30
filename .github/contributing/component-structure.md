@@ -201,11 +201,26 @@ defineOptions({ inheritAttrs: false })
 // so handing them the proxy would leak theme defaults into "explicit prop"
 // and silently override the wrapper.
 const {
-  id, name, size, color, highlight, disabled,
+  id, name, size: formFieldSize, color, highlight, disabled,
   ariaAttrs, emitFormBlur, emitFormInput, emitFormChange
 } = useFormField<InputProps>(_props, { deferInputValidation: true })
 
 const { orientation, size: fieldGroupSize } = useFieldGroup<InputProps>(_props)
+
+const inputSize = computed(() => fieldGroupSize.value || formFieldSize.value)
+
+// In `tv()` calls, fall back to `props.X` (the proxy) so `<UTheme :props>`
+// applies when there is no wrapping FormField/FieldGroup. Without `?? props.X`,
+// theme size/color/highlight is silently dropped on bare inputs.
+//
+// Final precedence: explicit > closer-context (form/group) > <UTheme :props>
+//                   > withDefaults > app.config > tv defaults
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.input || {}) })({
+  color: color.value ?? props.color,
+  size: inputSize.value ?? props.size,
+  highlight: highlight.value ?? props.highlight,
+  variant: props.variant
+}))
 </script>
 
 <template>
@@ -220,6 +235,8 @@ const { orientation, size: fieldGroupSize } = useFieldGroup<InputProps>(_props)
   >
 </template>
 ```
+
+The same `?? props.X` pattern applies to `useAvatarGroup` (`size`) and any other context composable whose contract is `props?.x ?? injected.x`. The composable itself stays untouched — the fallback lives at the `tv()` call site so the wrapper-vs-theme precedence is explicit and reviewable.
 
 ## Components with Icons
 
@@ -262,7 +279,7 @@ Notes:
 - The proxy passes through to `_props` for explicitly set props, so `withDefaults` fallbacks stay lower priority than `<UTheme>` overrides.
 - The `ui` prop is deep-merged (slot classes layered on top of theme overrides). All other props are explicit-wins.
 - **Always read props as `props.x` in templates and `<script setup>`.** Bare prop names (`{{ label }}`, `v-if="arrow"`) resolve to `_props` and bypass the proxy, so `<UTheme :props>` defaults won't apply. The `nuxt-ui/no-bare-prop-refs` ESLint rule autofixes this.
-- Pass the **raw** `_props` (not the proxy) to context composables — `useFormField`, `useFieldGroup`, `useAvatarGroup`. Their internal fallback is `props?.x ?? injected.x`, so the wrapping `<UFormField>` / `<UFieldGroup>` / `<UAvatarGroup>` should beat `<UTheme :props>` / `withDefaults` / `app.config` defaults (closer context wins). Then in `tv()` calls, fall back to the proxy: `size: formSize.value ?? props.size` — that gives you the full chain `explicit > closer-context > UTheme > withDefaults > app.config > tv defaults`. `useComponentIcons` has no injection chain, so pass the proxy `props` so theme overrides flow through.
+- Pass the **raw** `_props` (not the proxy) to context composables — `useFormField`, `useFieldGroup`, `useAvatarGroup`. Their internal fallback is `props?.x ?? injected.x`, so the wrapping `<UFormField>` / `<UFieldGroup>` / `<UAvatarGroup>` should beat `<UTheme :props>` / `withDefaults` / `app.config` defaults (closer context wins). **Then always fall back to the proxy in `tv()` calls** — `size: formSize.value ?? props.size`, `color: color.value ?? props.color`, `highlight: highlight.value ?? props.highlight`. Without `?? props.X`, `<UTheme :props>` is silently dropped when no closer context wraps the component. Final chain: `explicit > closer-context > UTheme > withDefaults > app.config > tv defaults`. `useComponentIcons` has no injection chain, so pass the proxy `props` directly.
 - Reka primitives' `useForwardProps` / `useForwardPropsEmits` filter root props by `vm.vnode.props ∪ withDefaults` and would strip theme-supplied values. Import `useForwardProps` from `composables/useForwardProps.ts` instead — same `(source, emits?)` signature, proxy-aware.
 
 ## Key Patterns
