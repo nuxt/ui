@@ -9,6 +9,12 @@ if (!page.value) {
 const { url } = useSiteConfig()
 const appConfig = useAppConfig()
 
+if (import.meta.server) {
+  prerenderRoutes(['/raw/index.md'])
+}
+
+useCanonical()
+
 useSeoMeta({
   titleTemplate: '%s - Nuxt UI',
   title: page.value.title,

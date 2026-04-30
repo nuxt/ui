@@ -25,9 +25,9 @@ useSeoMeta({
 })
 
 if (page.value.image) {
-  defineOgImage({ url: page.value.image })
+  useSeoMeta({ ogImage: page.value.image })
 } else {
-  defineOgImageComponent('Docs', {
+  defineOgImage('Docs.takumi', {
     headline: 'Blog',
     title,
     description

@@ -14,6 +14,7 @@ export default defineNuxtConfig({
     'nuxt-component-meta',
     'nuxt-llms',
     'nuxt-og-image',
+    'nuxt-schema-org',
     'motion-v/nuxt',
     '@vercel/analytics',
     '@vercel/speed-insights'
@@ -43,6 +44,10 @@ export default defineNuxtConfig({
   },
 
   css: ['~/assets/css/main.css'],
+
+  site: {
+    name: 'Nuxt UI'
+  },
 
   content: {
     build: {
@@ -220,10 +225,6 @@ export default defineNuxtConfig({
       routes: [
         '/',
         '/docs/getting-started',
-        // Prerender the homepage markdown so Vercel's filesystem check after the
-        // `/` → `/raw/index.md` rewrite (see `modules/md-rewrite.ts`) resolves
-        // to a static file, the same way `/docs/*.md` does.
-        '/raw/index.md',
         '/api/countries.json',
         '/api/phone-codes.json',
         '/api/locales.json',
@@ -404,5 +405,24 @@ export default defineNuxtConfig({
   mcp: {
     name: 'Nuxt UI',
     browserRedirect: '/docs/getting-started/ai/mcp'
+  },
+
+  ogImage: {
+    zeroRuntime: true
+  },
+
+  schemaOrg: {
+    identity: {
+      type: 'Organization',
+      name: 'Nuxt',
+      logo: '/icon.svg',
+      sameAs: [
+        'https://github.com/nuxt',
+        'https://x.com/nuxt_js',
+        'https://bsky.app/profile/nuxt.com',
+        'https://www.linkedin.com/showcase/nuxt-framework/',
+        'https://m.webtoo.ls/@nuxt'
+      ]
+    }
   }
 })

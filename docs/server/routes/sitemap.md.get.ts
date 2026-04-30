@@ -1,7 +1,6 @@
 import { queryCollection } from '@nuxt/content/server'
-import { eventHandler, setHeader } from 'h3'
 
-export default eventHandler(async (event) => {
+export default defineEventHandler(async (event) => {
   const pages = await queryCollection(event, 'docs')
     .select('path', 'title')
     .where('extension', '=', 'md')
@@ -42,6 +41,6 @@ export default eventHandler(async (event) => {
     md += '\n'
   }
 
-  setHeader(event, 'Content-Type', 'text/markdown; charset=utf-8')
+  setResponseHeader(event, 'Content-Type', 'text/markdown; charset=utf-8')
   return md
 })

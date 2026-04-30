@@ -37,10 +37,12 @@ useSeoMeta({
   title: String(props.error.statusCode)
 })
 
-useServerSeoMeta({
-  ogSiteName: 'Nuxt UI',
-  twitterCard: 'summary_large_image'
-})
+if (import.meta.server) {
+  useSeoMeta({
+    ogSiteName: 'Nuxt UI',
+    twitterCard: 'summary_large_image'
+  })
+}
 
 useFaviconFromTheme()
 
