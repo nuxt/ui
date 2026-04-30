@@ -1,5 +1,6 @@
 import { withoutTrailingSlash } from 'ufo'
-import { toValue, type MaybeRefOrGetter } from 'vue'
+import type { MaybeRefOrGetter } from 'vue'
+import { toValue } from 'vue'
 
 export function useCanonical(markdownAlternate?: MaybeRefOrGetter<string | undefined>) {
   const route = useRoute()

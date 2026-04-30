@@ -24,7 +24,7 @@ defineProps<{
         <h1 class="text-4xl font-semibold mb-0 flex gap-1">
           <span>{{ title }}</span>
         </h1>
-        <p class="text-2xl text-slate-500 truncate line-clamp-1 mt-2 mb-8">
+        <p class="text-2xl text-slate-500 overflow-hidden text-nowrap text-ellipsis mt-2 mb-8">
           {{ description }}
         </p>
       </div>

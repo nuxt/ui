@@ -53,7 +53,7 @@ withDefaults(defineProps<{
       <h1 class="text-5xl font-semibold mb-0 flex gap-1">
         <span>{{ title }}</span>
       </h1>
-      <p class="text-3xl text-slate-500 line-clamp-2">
+      <p class="text-3xl text-slate-500 overflow-hidden" style="max-height: 5.2em;">
         {{ description }}
       </p>
     </div>

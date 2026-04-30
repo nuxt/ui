@@ -34,6 +34,21 @@ if (page.value.image) {
   })
 }
 
+if (import.meta.server) {
+  useSchemaOrg([
+    defineArticle({
+      '@type': 'BlogPosting',
+      'headline': title,
+      'description': description,
+      'datePublished': page.value.date,
+      'author': page.value.authors?.map((author: { name: string, to?: string }) => ({
+        name: author.name,
+        url: author.to
+      }))
+    })
+  ])
+}
+
 const tree = ref<Record<string, Node>>({})
 const activePath = ref()
 

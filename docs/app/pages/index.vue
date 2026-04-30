@@ -11,9 +11,18 @@ const appConfig = useAppConfig()
 
 if (import.meta.server) {
   prerenderRoutes(['/raw/index.md'])
+
+  useSchemaOrg([
+    defineSoftwareApp({
+      name: 'Nuxt UI',
+      operatingSystem: 'Web',
+      applicationCategory: 'DeveloperApplication',
+      offers: { price: 0, priceCurrency: 'USD' }
+    })
+  ])
 }
 
-useCanonical()
+useCanonical('/raw/index.md')
 
 useSeoMeta({
   titleTemplate: '%s - Nuxt UI',
