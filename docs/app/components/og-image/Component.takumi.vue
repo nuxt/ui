@@ -2,7 +2,7 @@
 defineProps<{
   title: string
   description: string
-  component: string
+  slug: string
 }>()
 </script>
 
@@ -31,7 +31,7 @@ defineProps<{
     </div>
     <div class="mx-[106px] bg-slate-50 text-center">
       <img
-        :src="`/components/light/${component}.png`"
+        :src="`/components/light/${slug}.png`"
         class="mx-auto h-[400px] object-contain"
       >
     </div>

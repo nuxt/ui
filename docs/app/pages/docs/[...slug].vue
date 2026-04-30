@@ -63,7 +63,7 @@ if (route.path.startsWith('/docs/components/')) {
   defineOgImage('Component.takumi', {
     title: page.value.title,
     description: page.value.description,
-    component: (route.params.slug as string[]).pop() as string
+    slug: (route.params.slug as string[]).pop() as string
   })
 } else {
   defineOgImage('Docs.takumi', {
