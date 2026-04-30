@@ -26,6 +26,7 @@ export interface AvatarGroupProps {
 
 export interface AvatarGroupSlots {
   default?(props?: {}): VNode[]
+  overflow?(props: { hiddenCount: number, avatarProps: { text: string, class: any } }): VNode[]
 }
 </script>
 
@@ -90,6 +91,11 @@ const hiddenCount = computed(() => {
   return children.value.length - visibleAvatars.value.length
 })
 
+const overflowAvatarProps = computed(() => ({
+  text: `+${hiddenCount.value}`,
+  class: ui.value.base({ class: uiProp.value?.base })
+}))
+
 provide(avatarGroupInjectionKey, computed(() => ({
   size: props.size
 })))
@@ -97,7 +103,9 @@ provide(avatarGroupInjectionKey, computed(() => ({
 
 <template>
   <Primitive :as="as" data-slot="root" :class="ui.root({ class: [uiProp?.root, props.class] })">
-    <UAvatar v-if="hiddenCount > 0" :text="`+${hiddenCount}`" data-slot="base" :class="ui.base({ class: uiProp?.base })" />
+    <slot v-if="hiddenCount > 0" name="overflow" :hidden-count="hiddenCount" :avatar-props="overflowAvatarProps">
+      <UAvatar v-bind="overflowAvatarProps" data-slot="base" />
+    </slot>
     <component :is="avatar" v-for="(avatar, count) in visibleAvatars" :key="count" data-slot="base" :class="ui.base({ class: uiProp?.base })" />
   </Primitive>
 </template>

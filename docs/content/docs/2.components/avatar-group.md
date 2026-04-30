@@ -69,6 +69,12 @@ slots:
 :u-avatar{src="https://github.com/noook.png" alt="Neil Richter" loading="lazy"}
 ::
 
+### Overflow tooltip
+
+Use the `overflow` slot to customize the `+X` avatar. The slot receives the hidden count and the default avatar props, so you can wrap the overflow avatar with a [Tooltip](/docs/components/tooltip) and provide either a static string or a helper function that derives the label from the count.
+
+:component-example{name="avatar-group-overflow-tooltip-example"}
+
 ## Examples
 
 ### With tooltip
