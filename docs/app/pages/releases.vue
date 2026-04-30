@@ -12,6 +12,8 @@ useSeoMeta({
   ogDescription: page.value.description
 })
 
+useCanonical()
+
 defineOgImage('Docs.takumi')
 
 const { data: versions } = await useFetch('https://ungh.cc/repos/nuxt/ui/releases', {

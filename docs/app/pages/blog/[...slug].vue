@@ -34,6 +34,8 @@ if (page.value.image) {
   })
 }
 
+useCanonical()
+
 if (import.meta.server) {
   useSchemaOrg([
     defineArticle({

@@ -18,6 +18,8 @@ useSeoMeta({
   ogDescription: page.value.description
 })
 
+useCanonical()
+
 defineOgImage('Docs.takumi')
 
 function formatDate(date: string) {
