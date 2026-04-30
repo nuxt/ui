@@ -225,7 +225,7 @@ export type TableSlots<T extends TableData = TableData> = {
 
 <script setup lang="ts" generic="T extends TableData">
 import { computed, useTemplateRef, watch, toRef } from 'vue'
-import { Primitive, useForwardProps } from 'reka-ui'
+import { Primitive } from 'reka-ui'
 import { upperFirst } from 'scule'
 import { defu } from 'defu'
 import { FlexRender, getCoreRowModel, getFilteredRowModel, getSortedRowModel, getExpandedRowModel, useVueTable } from '@tanstack/vue-table'
@@ -233,6 +233,7 @@ import { useVirtualizer } from '@tanstack/vue-virtual'
 import { reactivePick, createReusableTemplate, createRef } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
+import { useForwardProps } from '../composables/useForwardProps'
 import { useLocale } from '../composables/useLocale'
 import { tv } from '../utils/tv'
 

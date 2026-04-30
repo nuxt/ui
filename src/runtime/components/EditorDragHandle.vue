@@ -48,11 +48,11 @@ export interface EditorDragHandleEmits {
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import DragHandle from '@tiptap/extension-drag-handle-vue-3'
-import { useForwardProps } from 'reka-ui'
 import { reactiveOmit, reactivePick } from '@vueuse/core'
 import { defu } from 'defu'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
+import { useForwardProps } from '../composables/useForwardProps'
 import { buildFloatingUIMiddleware } from '../utils/editor'
 import { transformUI } from '../utils'
 import { tv } from '../utils/tv'

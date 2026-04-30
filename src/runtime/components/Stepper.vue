@@ -79,10 +79,11 @@ export type StepperSlots<T extends StepperItem = StepperItem> = {
 
 <script setup lang="ts" generic="T extends StepperItem">
 import { computed } from 'vue'
-import { StepperRoot, StepperItem, StepperTrigger, StepperIndicator, StepperSeparator, StepperTitle, StepperDescription, useForwardProps } from 'reka-ui'
+import { StepperRoot, StepperItem, StepperTrigger, StepperIndicator, StepperSeparator, StepperTitle, StepperDescription } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
+import { useForwardProps } from '../composables/useForwardProps'
 import { tv } from '../utils/tv'
 import { get } from '../utils'
 import UIcon from './Icon.vue'

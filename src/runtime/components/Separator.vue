@@ -51,10 +51,11 @@ export interface SeparatorSlots {
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { Separator, useForwardProps } from 'reka-ui'
+import { Separator } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
+import { useForwardProps } from '../composables/useForwardProps'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'

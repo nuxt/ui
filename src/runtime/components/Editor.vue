@@ -87,7 +87,7 @@ export interface EditorSlots<H extends EditorCustomHandlers = EditorCustomHandle
 <script setup lang="ts" generic="T extends Content, H extends EditorCustomHandlers">
 import { computed, provide, useAttrs, watch } from 'vue'
 import { defu } from 'defu'
-import { Primitive, useForwardProps } from 'reka-ui'
+import { Primitive } from 'reka-ui'
 import { mergeAttributes } from '@tiptap/core'
 import Code from '@tiptap/extension-code'
 import HorizontalRule from '@tiptap/extension-horizontal-rule'
@@ -100,6 +100,7 @@ import { useEditor, EditorContent } from '@tiptap/vue-3'
 import { reactiveOmit } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
+import { useForwardProps } from '../composables/useForwardProps'
 import { createHandlers } from '../utils/editor'
 import { tv } from '../utils/tv'
 

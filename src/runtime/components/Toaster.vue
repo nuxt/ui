@@ -48,10 +48,11 @@ export default {
 
 <script setup lang="ts">
 import { ref, computed, toRef, provide } from 'vue'
-import { ToastProvider, ToastViewport, ToastPortal, useForwardProps } from 'reka-ui'
+import { ToastProvider, ToastViewport, ToastPortal } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
+import { useForwardProps } from '../composables/useForwardProps'
 import { useToast, toastMaxInjectionKey } from '../composables/useToast'
 import { usePortal } from '../composables/usePortal'
 import { omit } from '../utils'

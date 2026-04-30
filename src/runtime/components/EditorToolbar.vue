@@ -97,12 +97,13 @@ export type EditorToolbarSlots<
 
 <script setup lang="ts" generic="T extends ArrayOrNested<EditorToolbarItem>">
 import { computed, inject } from 'vue'
-import { Primitive, Separator, useForwardProps } from 'reka-ui'
+import { Primitive, Separator } from 'reka-ui'
 import { defu } from 'defu'
 import { BubbleMenu, FloatingMenu } from '@tiptap/vue-3/menus'
 import { reactiveOmit } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
+import { useForwardProps } from '../composables/useForwardProps'
 import { isArrayOfArray, pick, omit } from '../utils'
 import { createHandlers } from '../utils/editor'
 import { tv } from '../utils/tv'

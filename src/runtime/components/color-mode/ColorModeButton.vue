@@ -15,10 +15,10 @@ export interface ColorModeButtonProps extends Omit<ButtonProps, LinkPropsKeys | 
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { useForwardProps } from 'reka-ui'
 import { reactiveOmit } from '@vueuse/core'
 import { useColorMode, useAppConfig } from '#imports'
 import { useComponentProps } from '../../composables/useComponentProps'
+import { useForwardProps } from '../../composables/useForwardProps'
 import { useLocale } from '../../composables/useLocale'
 import UButton from '../Button.vue'
 import UIcon from '../Icon.vue'
