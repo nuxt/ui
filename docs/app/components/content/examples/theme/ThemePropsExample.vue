@@ -2,7 +2,7 @@
   <UTheme
     :props="{
       button: { color: 'neutral', variant: 'subtle', size: 'lg' },
-      tooltip: { delayDuration: 0 }
+      tooltip: { delayDuration: 0, arrow: true }
     }"
   >
     <div class="flex items-center gap-2">

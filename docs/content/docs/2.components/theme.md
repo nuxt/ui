@@ -51,7 +51,7 @@ Explicit props on a component (e.g. `<UButton color="primary" />`) always win ov
 
 ### Multiple
 
-You can theme multiple component types at once by passing different keys in the `ui` prop.
+You can theme multiple component types at once by passing different keys in the `ui` or `props` prop.
 
 ::component-example
 ---
@@ -61,7 +61,7 @@ name: 'theme-multiple-example'
 
 ### Nested
 
-Theme components can be nested. When nested, the innermost Theme's overrides take precedence for the components it wraps.
+Theme components can be nested. When nested, the innermost Theme's overrides take precedence for the components it wraps. Keys that aren't overridden by the inner Theme (whether on the same component or on different ones) are inherited from the outer Theme, so you can configure global defaults near the root and only override what you need locally.
 
 ::component-example
 ---
@@ -103,6 +103,10 @@ Use the Theme component to apply consistent styling across a group of form compo
 ---
 name: 'theme-form-example'
 ---
+::
+
+::tip
+`<UFormField>`, `<UFieldGroup>` and `<UAvatarGroup>` keep precedence over `<UTheme :props>` for `size`, `color` and `highlight`, so the closer wrapper always wins. Validation errors also force the `error` color over any theme value.
 ::
 
 ### With prose components
