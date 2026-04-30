@@ -84,9 +84,6 @@ export interface ThemeDefaults {
   dropdownMenu?: Partial<ComponentTypes.DropdownMenuProps>
   editor?: Partial<ComponentTypes.EditorProps>
   editorDragHandle?: Partial<ComponentTypes.EditorDragHandleProps>
-  editorEmojiMenu?: Partial<ComponentTypes.EditorEmojiMenuProps>
-  editorMentionMenu?: Partial<ComponentTypes.EditorMentionMenuProps>
-  editorSuggestionMenu?: Partial<ComponentTypes.EditorSuggestionMenuProps>
   editorToolbar?: Partial<ComponentTypes.EditorToolbarProps>
   empty?: Partial<ComponentTypes.EmptyProps>
   error?: Partial<ComponentTypes.ErrorProps>
@@ -100,7 +97,6 @@ export interface ThemeDefaults {
   form?: Partial<ComponentTypes.FormProps<any, any, any>>
   formField?: Partial<ComponentTypes.FormFieldProps>
   header?: Partial<ComponentTypes.HeaderProps>
-  icon?: Partial<ComponentTypes.IconProps>
   input?: Partial<ComponentTypes.InputProps>
   inputDate?: Partial<ComponentTypes.InputDateProps>
   inputMenu?: Partial<ComponentTypes.InputMenuProps>
@@ -108,7 +104,6 @@ export interface ThemeDefaults {
   inputTags?: Partial<ComponentTypes.InputTagsProps>
   inputTime?: Partial<ComponentTypes.InputTimeProps>
   kbd?: Partial<ComponentTypes.KbdProps>
-  link?: Partial<ComponentTypes.LinkProps>
   listbox?: Partial<ComponentTypes.ListboxProps>
   main?: Partial<ComponentTypes.MainProps>
   marquee?: Partial<ComponentTypes.MarqueeProps>
