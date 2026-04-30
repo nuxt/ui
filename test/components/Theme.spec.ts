@@ -328,6 +328,38 @@ describe('Theme', () => {
     expect(wrapper.find('.inner-btn').classes()).not.toContain('bg-error/10')
   })
 
+  // Real-world layout: an outer `<UTheme :props>` set near the root configures
+  // a "global" component (e.g. tooltip), and an inner `<UTheme :props>` further
+  // down the tree only overrides a different component (e.g. button). Both
+  // should compose: tooltips below the inner theme still inherit the outer's
+  // tooltip defaults, and the inner's button override applies only locally.
+  test('nested :props inherits across different components', async () => {
+    const wrapper = await mountSuspended({
+      components: { Theme, TooltipProvider, Tooltip, Button },
+      template: `
+        <Theme :props="{ tooltip: { arrow: true }, button: { color: 'error', variant: 'soft' } }">
+          <TooltipProvider>
+            <Theme :props="{ button: { color: 'success' } }">
+              <Tooltip text="Inner tooltip" :open="true" :portal="false">
+                <Button label="Inner" class="inner-btn" />
+              </Tooltip>
+            </Theme>
+          </TooltipProvider>
+        </Theme>
+      `
+    })
+
+    // Inner button picks up the inner theme's color override, but inherits
+    // `variant: 'soft'` from the outer theme (proven by `bg-success/10` —
+    // the soft variant of success).
+    expect(wrapper.find('.inner-btn').classes()).toContain('bg-success/10')
+    expect(wrapper.find('.inner-btn').classes()).not.toContain('bg-error/10')
+
+    // Tooltip below the inner theme inherits the outer theme's `arrow: true`
+    // because the inner theme didn't touch the `tooltip` key.
+    expect(wrapper.find('[data-slot="arrow"]').exists()).toBe(true)
+  })
+
   test('reacts to :props changes', async () => {
     const themeProps = ref<{ button: Partial<ButtonProps> }>({ button: { color: 'error', variant: 'soft' } })
 

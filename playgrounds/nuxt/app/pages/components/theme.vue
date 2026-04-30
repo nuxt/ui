@@ -12,6 +12,7 @@ const size = ref<keyof typeof theme.variants.size>('lg')
 const checkbox = ref<boolean>(false)
 const radio = ref<string>('1')
 const select = ref<string>('')
+const input = ref<string>('')
 const radioItems = ['1', '2', '3']
 const selectItems = ['Apple', 'Banana', 'Cherry']
 </script>
@@ -35,24 +36,6 @@ const selectItems = ['Apple', 'Banana', 'Cherry']
           <UButton label="Themed" />
           <UButton label="Themed with icon" icon="i-lucide-rocket" />
           <UButton label="Themed square" icon="i-lucide-star" square />
-        </div>
-      </UTheme>
-    </div>
-
-    <!-- Multiple components share one :props object -->
-    <div class="flex flex-col gap-2">
-      <p class="text-sm font-medium text-muted">
-        <code>:props</code> applies to multiple components at once
-      </p>
-
-      <UTheme :props="{ button: { color, variant }, tooltip: { delayDuration: 0, arrow: true } }">
-        <div class="flex items-center gap-2">
-          <UTooltip text="Instant tooltip from theme">
-            <UButton label="Hover me" />
-          </UTooltip>
-          <UTooltip text="Same delay">
-            <UButton label="And me" icon="i-lucide-rocket" />
-          </UTooltip>
         </div>
       </UTheme>
     </div>
@@ -90,52 +73,67 @@ const selectItems = ['Apple', 'Banana', 'Cherry']
       </UTheme>
     </div>
 
-    <!-- Nested UTheme: inner overrides outer, non-overridden keys inherit -->
+    <!-- Nested UTheme: inner overrides bleed in, other components inherit from outer -->
     <div class="flex flex-col gap-2">
       <p class="text-sm font-medium text-muted">
-        Nested <code>&lt;UTheme&gt;</code>: inner overrides bleed in, outer keys are inherited
+        Nested <code>&lt;UTheme&gt;</code>: outer sets tooltip globally, inner only overrides button — both compose
       </p>
 
-      <UTheme :props="{ button: { color, variant, size } }">
+      <UTheme :props="{ button: { color, variant, size }, tooltip: { delayDuration: 0, arrow: true } }">
         <div class="flex items-center gap-2">
-          <UButton label="Outer" />
+          <UTooltip text="Outer tooltip (instant + arrow)">
+            <UButton label="Outer" />
+          </UTooltip>
           <UTheme :props="{ button: { color: 'success' } }">
-            <UButton label="color=success (inner)" />
+            <UTooltip text="Inner tooltip still inherits delay + arrow">
+              <UButton label="color=success (inner)" />
+            </UTooltip>
           </UTheme>
-          <UButton label="Outer again" />
+          <UTooltip text="Outer tooltip again">
+            <UButton label="Outer again" />
+          </UTooltip>
         </div>
       </UTheme>
     </div>
 
-    <!-- :props on migrated form components -->
+    <!-- :props on form components (with and without UFormField wrapping) -->
     <div class="flex flex-col gap-2">
       <p class="text-sm font-medium text-muted">
-        <code>:props</code> flows into migrated form components (Checkbox, RadioGroup, Select)
+        <code>:props</code> flows into every form component (with or without <code>&lt;UFormField&gt;</code>)
       </p>
 
-      <UTheme :props="{ checkbox: { color }, radioGroup: { color, orientation: 'horizontal' }, select: { color, variant: 'subtle' } }">
-        <div class="flex items-center gap-6">
-          <UCheckbox v-model="checkbox" label="Themed checkbox" />
-          <URadioGroup v-model="radio" :items="radioItems" />
-          <USelect v-model="select" :items="selectItems" placeholder="Themed select" />
+      <UTheme :props="{ input: { size, color }, pinInput: { size, color }, checkbox: { size, color }, switch: { size, color }, radioGroup: { color, orientation: 'horizontal' }, select: { color, variant: 'subtle' } }">
+        <div class="flex flex-col gap-4">
+          <div class="flex items-center gap-4">
+            <UInput v-model="input" placeholder="Bare input" />
+            <UPinInput :length="3" />
+            <UCheckbox v-model="checkbox" label="Bare checkbox" />
+            <USwitch label="Bare switch" />
+          </div>
+          <div class="flex items-center gap-6">
+            <URadioGroup v-model="radio" :items="radioItems" />
+            <USelect v-model="select" :items="selectItems" placeholder="Themed select" />
+          </div>
         </div>
       </UTheme>
     </div>
 
-    <!-- UFormField + themed UCheckbox: useFormField must read raw _props -->
+    <!-- Closer context wins: UFormField/FieldGroup beats :props; error beats both -->
     <div class="flex flex-col gap-2">
       <p class="text-sm font-medium text-muted">
-        <code>&lt;UFormField&gt;</code> wrapping a themed <code>&lt;UCheckbox&gt;</code> — field injection still works alongside <code>:props</code>
+        Closer context wins: <code>&lt;UFormField size="xl"&gt;</code> beats <code>:props</code>; validation error forces <code>error</code> color
       </p>
 
-      <UTheme :props="{ checkbox: { color } }">
+      <UTheme :props="{ input: { size, color } }">
         <div class="flex flex-col gap-3">
-          <UFormField label="Accept terms" description="Color comes from theme, label/description from FormField" required>
-            <UCheckbox v-model="checkbox" />
+          <UFormField label="Bare (theme size applies)">
+            <UInput v-model="input" placeholder="theme size" />
           </UFormField>
-
-          <UFormField label="With validation error" description="Validation error forces 'error' color, overriding theme" error="This field is required">
-            <UCheckbox v-model="checkbox" />
+          <UFormField label="FormField size=xl wins" size="xl">
+            <UInput v-model="input" placeholder="formfield size" />
+          </UFormField>
+          <UFormField label="With error: error color wins" error="Required">
+            <UInput v-model="input" placeholder="error color" />
           </UFormField>
         </div>
       </UTheme>
@@ -144,7 +142,7 @@ const selectItems = ['Apple', 'Banana', 'Cherry']
     <!-- Baseline: bare components must keep Reka primitives' own defaults -->
     <div class="flex flex-col gap-2">
       <p class="text-sm font-medium text-muted">
-        Without <code>&lt;UTheme&gt;</code> (baseline) — bare Tooltip should use Reka's default delay and have no arrow; bare Checkbox should match unstyled defaults
+        Without <code>&lt;UTheme&gt;</code> (baseline) — bare Tooltip uses Reka's default delay and has no arrow; bare Checkbox matches unstyled defaults
       </p>
 
       <div class="flex items-center gap-4">
