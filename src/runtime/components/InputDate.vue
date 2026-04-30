@@ -109,10 +109,10 @@ const inputSize = computed(() => fieldGroupSize.value || formFieldSize.value)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.inputDate || {}) })({
-  color: color.value,
+  color: color.value ?? props.color,
   variant: props.variant,
-  size: inputSize.value,
-  highlight: highlight.value,
+  size: inputSize.value ?? props.size,
+  highlight: highlight.value ?? props.highlight,
   fixed: props.fixed,
   loading: props.loading,
   leading: isLeading.value || !!props.avatar || !!slots.leading,

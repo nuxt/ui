@@ -72,7 +72,7 @@ const appConfig = useAppConfig() as Chip['AppConfig']
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.chip || {}) })({
   color: props.color,
-  size: size.value,
+  size: size.value ?? props.size,
   position: props.position,
   inset: props.inset,
   standalone: props.standalone

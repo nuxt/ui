@@ -214,7 +214,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.fileUpload |
   layout: layout.value,
   position: position.value,
   multiple: props.multiple,
-  highlight: highlight.value,
+  highlight: highlight.value ?? props.highlight,
   disabled: props.disabled
 }))
 

@@ -314,11 +314,11 @@ const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: I
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.inputMenu || {}) })({
-  color: color.value,
+  color: color.value ?? props.color,
   variant: props.variant,
-  size: inputSize?.value,
+  size: inputSize?.value ?? props.size,
   loading: props.loading,
-  highlight: highlight.value,
+  highlight: highlight.value ?? props.highlight,
   fixed: props.fixed,
   leading: isLeading.value || !!props.avatar || !!slots.leading,
   trailing: isTrailing.value || !!slots.trailing,

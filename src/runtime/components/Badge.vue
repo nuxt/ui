@@ -66,7 +66,7 @@ const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponen
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.badge || {}) })({
   color: props.color,
   variant: props.variant,
-  size: fieldGroupSize.value || props.size,
+  size: fieldGroupSize.value ?? props.size,
   square: props.square || (!slots.default && !props.label),
   fieldGroup: orientation.value
 }))

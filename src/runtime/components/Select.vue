@@ -201,7 +201,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.select || {}
   variant: props.variant,
   size: selectSize.value ?? props.size,
   loading: props.loading,
-  highlight: highlight.value,
+  highlight: highlight.value ?? props.highlight,
   leading: isLeading.value || !!props.avatar || !!slots.leading,
   trailing: isTrailing.value || !!slots.trailing,
   fieldGroup: orientation.value,

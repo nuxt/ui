@@ -71,7 +71,7 @@ const { size } = useAvatarGroup(_props)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.avatar || {}) })({
-  size: size.value
+  size: size.value ?? props.size
 }))
 
 const rootClass = computed(() => ui.value.root({ class: [props.ui?.root, props.class] }))

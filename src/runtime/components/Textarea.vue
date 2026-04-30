@@ -102,11 +102,11 @@ const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponen
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.textarea || {}) })({
-  color: color.value,
+  color: color.value ?? props.color,
   variant: props.variant,
-  size: size?.value,
+  size: size?.value ?? props.size,
   loading: props.loading,
-  highlight: highlight.value,
+  highlight: highlight.value ?? props.highlight,
   fixed: props.fixed,
   autoresize: props.autoresize,
   leading: isLeading.value || !!props.avatar || !!slots.leading,

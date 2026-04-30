@@ -78,10 +78,10 @@ const { emitFormInput, emitFormFocus, emitFormChange, emitFormBlur, size, color,
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pinInput || {}) })({
-  color: color.value,
+  color: color.value ?? props.color,
   variant: props.variant,
-  size: size.value,
-  highlight: highlight.value,
+  size: size.value ?? props.size,
+  highlight: highlight.value ?? props.highlight,
   fixed: props.fixed
 }))
 

@@ -112,10 +112,10 @@ const id = _id.value ?? useId()
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.checkboxGroup || {}) })({
-  size: size.value,
+  size: size.value ?? props.size,
   required: props.required,
   orientation: props.orientation,
-  color: props.color,
+  color: color.value ?? props.color,
   variant: props.variant,
   disabled: disabled.value
 }))
