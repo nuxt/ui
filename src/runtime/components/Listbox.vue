@@ -41,6 +41,10 @@ export interface ListboxProps<T extends ArrayOrNested<ListboxItem> = ArrayOrNest
    */
   as?: any
   /**
+   * @defaultValue 'primary'
+   */
+  color?: Listbox['variants']['color']
+  /**
    * @defaultValue 'md'
    */
   size?: Listbox['variants']['size']
