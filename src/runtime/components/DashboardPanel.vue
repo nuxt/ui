@@ -36,7 +36,6 @@ const _props = withDefaults(defineProps<DashboardPanelProps>(), {
   minSize: 15,
   resizable: false
 })
-
 defineSlots<DashboardPanelSlots>()
 
 const props = useComponentProps('dashboardPanel', _props)

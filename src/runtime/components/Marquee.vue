@@ -58,7 +58,6 @@ const _props = withDefaults(defineProps<MarqueeProps>(), {
   repeat: 4,
   overlay: true
 })
-
 defineSlots<MarqueeSlots>()
 
 const props = useComponentProps('marquee', _props)

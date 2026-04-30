@@ -121,7 +121,6 @@ const _props = withDefaults(defineProps<EditorToolbarProps<T>>(), {
   activeVariant: 'soft',
   size: 'sm'
 })
-
 defineSlots<EditorToolbarSlots<T>>()
 
 const props = useComponentProps<EditorToolbarProps<T>>('editorToolbar', _props)

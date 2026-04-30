@@ -59,7 +59,6 @@ const _props = withDefaults(defineProps<ChipProps>(), {
   inset: false,
   standalone: false
 })
-
 defineSlots<ChipSlots>()
 
 const props = useComponentProps('chip', _props)

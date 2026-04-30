@@ -36,7 +36,6 @@ const _props = withDefaults(defineProps<DashboardGroupProps>(), {
   persistent: true,
   unit: '%'
 })
-
 defineSlots<DashboardGroupSlots>()
 
 const props = useComponentProps('dashboardGroup', _props)

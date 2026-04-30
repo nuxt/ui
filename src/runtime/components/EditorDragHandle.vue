@@ -65,7 +65,6 @@ const _props = withDefaults(defineProps<EditorDragHandleProps>(), {
   variant: 'ghost',
   size: 'sm'
 })
-
 defineSlots<EditorDragHandleSlots>()
 const emit = defineEmits<EditorDragHandleEmits>()
 

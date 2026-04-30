@@ -155,7 +155,6 @@ const _props = withDefaults(defineProps<CarouselProps<T>>(), {
   fade: false,
   wheelGestures: false
 })
-
 defineSlots<CarouselSlots<T>>()
 const emits = defineEmits<CarouselEmits>()
 

@@ -41,7 +41,6 @@ import { tv } from '../utils/tv'
 const _props = withDefaults(defineProps<FieldGroupProps>(), {
   orientation: 'horizontal'
 })
-
 defineSlots<FieldGroupSlots>()
 
 const props = useComponentProps('fieldGroup', _props)

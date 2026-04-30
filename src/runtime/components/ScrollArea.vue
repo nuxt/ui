@@ -94,7 +94,6 @@ const _props = withDefaults(defineProps<ScrollAreaProps<T>>(), {
   orientation: 'vertical',
   virtualize: false
 })
-
 defineSlots<ScrollAreaSlots<T>>()
 const emits = defineEmits<ScrollAreaEmits>()
 

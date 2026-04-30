@@ -31,7 +31,6 @@ import { useComponentProps } from '../composables/useComponentProps'
 const _props = withDefaults(defineProps<MainProps>(), {
   as: 'main'
 })
-
 defineSlots<MainSlots>()
 
 const props = useComponentProps('main', _props)

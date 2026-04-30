@@ -32,7 +32,6 @@ import { useComponentProps } from '../composables/useComponentProps'
 const _props = withDefaults(defineProps<PageListProps>(), {
   divide: false
 })
-
 defineSlots<PageListSlots>()
 
 const props = useComponentProps('pageList', _props)

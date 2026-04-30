@@ -66,7 +66,6 @@ const _props = withDefaults(defineProps<ToasterProps>(), {
   progress: true,
   max: 5
 })
-
 defineSlots<ToasterSlots>()
 
 const props = useComponentProps('toaster', _props)

@@ -46,7 +46,6 @@ import { tv } from '../utils/tv'
 const _props = withDefaults(defineProps<KbdProps>(), {
   as: 'kbd'
 })
-
 defineSlots<KbdSlots>()
 
 const props = useComponentProps('kbd', _props)
