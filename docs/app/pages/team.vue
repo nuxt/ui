@@ -12,7 +12,9 @@ useSeoMeta({
   ogDescription: page.value.description
 })
 
-defineOgImageComponent('Docs')
+useCanonical()
+
+defineOgImage('Docs.takumi')
 
 const { data: module } = await useFetch('/api/module.json')
 

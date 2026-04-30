@@ -1,9 +1,8 @@
 import { queryCollection } from '@nuxt/content/server'
-import { eventHandler, setHeader } from 'h3'
 
 const DOMAIN = 'https://ui.nuxt.com'
 
-export default eventHandler(async (event) => {
+export default defineCachedEventHandler(async (event) => {
   const page = await queryCollection(event, 'index').first() as any
 
   const title = page?.title || 'Nuxt UI'
@@ -66,7 +65,10 @@ Nuxt UI is a free and open source Vue UI library powered by [Reka UI](https://re
 - X (Twitter): <https://x.com/nuxt_js>
 `
 
-  setHeader(event, 'Content-Type', 'text/markdown; charset=utf-8')
-  setHeader(event, 'Link', `<${DOMAIN}>; rel="canonical"`)
+  setResponseHeader(event, 'Content-Type', 'text/markdown; charset=utf-8')
+  setResponseHeader(event, 'Link', `<${DOMAIN}>; rel="canonical", <${DOMAIN}>; rel="alternate"; type="text/html"`)
   return frontmatter + body
+}, {
+  swr: true,
+  maxAge: 60 * 60
 })
