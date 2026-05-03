@@ -19,12 +19,12 @@ export default (options: Required<ModuleOptions>) => ({
       horizontal: {
         root: 'w-full flex-row',
         border: 'w-full',
-        container: 'mx-3 whitespace-nowrap'
+        container: 'whitespace-nowrap'
       },
       vertical: {
         root: 'h-full flex-col',
         border: 'h-full',
-        container: 'my-2'
+        container: ''
       }
     },
     size: {
@@ -52,6 +52,30 @@ export default (options: Required<ModuleOptions>) => ({
     }
   },
   compoundVariants: [{
+    orientation: 'horizontal',
+    position: 'start',
+    class: { container: 'me-3' }
+  }, {
+    orientation: 'horizontal',
+    position: 'center',
+    class: { container: 'mx-3' }
+  }, {
+    orientation: 'horizontal',
+    position: 'end',
+    class: { container: 'ms-3' }
+  }, {
+    orientation: 'vertical',
+    position: 'start',
+    class: { container: 'mb-2' }
+  }, {
+    orientation: 'vertical',
+    position: 'center',
+    class: { container: 'my-2' }
+  }, {
+    orientation: 'vertical',
+    position: 'end',
+    class: { container: 'mt-2' }
+  }, {
     orientation: 'horizontal',
     size: 'xs',
     class: { border: 'border-t' }
