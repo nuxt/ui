@@ -60,6 +60,7 @@ import { Separator, useForwardProps } from 'reka-ui'
 import { reactivePick, createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentUI } from '../composables/useComponentUI'
+import { useResolvedVariants } from '../composables/useResolvedVariants'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
@@ -75,13 +76,15 @@ const uiProp = useComponentUI('separator', props)
 
 const rootProps = useForwardProps(reactivePick(props, 'as', 'decorative', 'orientation'))
 
+const { position } = useResolvedVariants('separator', props, theme, ['position'])
+
 const [DefineContainer, ReuseContainer] = createReusableTemplate()
 
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.separator || {}) })({
   color: props.color,
   orientation: props.orientation,
   size: props.size,
-  position: props.position,
+  position: position.value,
   type: props.type
 }))
 </script>
