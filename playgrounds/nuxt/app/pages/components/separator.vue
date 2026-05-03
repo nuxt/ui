@@ -36,5 +36,30 @@
     </div>
 
     <USeparator label="As simple as it gets" type="dotted" size="lg" color="primary" />
+
+    <USeparator label="Start" position="start" />
+
+    <USeparator label="End" position="end" />
+
+    <div class="h-24 flex gap-4 items-center">
+      <div class="flex-1 text-center">
+        Start
+      </div>
+
+      <USeparator
+        :avatar="{ src: 'https://github.com/benjamincanac.png' }"
+        decorative
+        orientation="vertical"
+        position="start"
+      />
+
+      <USeparator decorative orientation="vertical" position="end">
+        <UAvatar size="2xs" src="https://github.com/sandros94.png" />
+      </USeparator>
+
+      <div class="flex-1 text-center">
+        End
+      </div>
+    </div>
   </div>
 </template>

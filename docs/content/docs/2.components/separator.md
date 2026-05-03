@@ -47,6 +47,21 @@ props:
 ---
 ::
 
+### Position
+
+Use the `position` prop to change the position of the content of the Separator. Defaults to `center`.
+
+::component-code
+---
+ignore:
+  - class
+class: 'p-8'
+props:
+  position: start
+  label: 'Hello World'
+---
+::
+
 ### Icon
 
 Use the `icon` prop to display an icon in the middle of the Separator.

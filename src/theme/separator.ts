@@ -34,6 +34,11 @@ export default (options: Required<ModuleOptions>) => ({
       lg: '',
       xl: ''
     },
+    position: {
+      start: '',
+      center: '',
+      end: ''
+    },
     type: {
       solid: {
         border: 'border-solid'
@@ -90,6 +95,7 @@ export default (options: Required<ModuleOptions>) => ({
   defaultVariants: {
     color: 'neutral',
     size: 'xs',
-    type: 'solid'
+    type: 'solid',
+    position: 'center'
   }
 })

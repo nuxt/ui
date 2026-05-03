@@ -40,6 +40,11 @@ export interface SeparatorProps extends Pick<_SeparatorProps, 'decorative'> {
    * @defaultValue 'horizontal'
    */
   orientation?: Separator['variants']['orientation']
+  /**
+   * The position of the content.
+   * @defaultValue 'center'
+   */
+  position?: Separator['variants']['position']
   class?: any
   ui?: Separator['slots']
 }
@@ -52,7 +57,7 @@ export interface SeparatorSlots {
 <script setup lang="ts">
 import { computed } from 'vue'
 import { Separator, useForwardProps } from 'reka-ui'
-import { reactivePick } from '@vueuse/core'
+import { reactivePick, createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentUI } from '../composables/useComponentUI'
 import { tv } from '../utils/tv'
@@ -60,7 +65,8 @@ import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
 
 const props = withDefaults(defineProps<SeparatorProps>(), {
-  orientation: 'horizontal'
+  orientation: 'horizontal',
+  position: 'center'
 })
 const slots = defineSlots<SeparatorSlots>()
 
@@ -69,28 +75,38 @@ const uiProp = useComponentUI('separator', props)
 
 const rootProps = useForwardProps(reactivePick(props, 'as', 'decorative', 'orientation'))
 
+const [DefineContainer, ReuseContainer] = createReusableTemplate()
+
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.separator || {}) })({
   color: props.color,
   orientation: props.orientation,
   size: props.size,
+  position: props.position,
   type: props.type
 }))
 </script>
 
 <template>
+  <DefineContainer>
+    <div data-slot="container" :class="ui.container({ class: uiProp?.container })">
+      <slot :ui="ui">
+        <span v-if="label" data-slot="label" :class="ui.label({ class: uiProp?.label })">{{ label }}</span>
+        <UIcon v-else-if="icon" :name="icon" data-slot="icon" :class="ui.icon({ class: uiProp?.icon })" />
+        <UAvatar v-else-if="avatar" :size="((uiProp?.avatarSize || ui.avatarSize()) as AvatarProps['size'])" v-bind="avatar" data-slot="avatar" :class="ui.avatar({ class: uiProp?.avatar })" />
+      </slot>
+    </div>
+  </DefineContainer>
   <Separator v-bind="rootProps" data-slot="root" :class="ui.root({ class: [uiProp?.root, props.class] })">
+    <ReuseContainer v-if="(label || icon || avatar || !!slots.default) && position === 'start'" />
+
     <div data-slot="border" :class="ui.border({ class: uiProp?.border })" />
 
-    <template v-if="label || icon || avatar || !!slots.default">
-      <div data-slot="container" :class="ui.container({ class: uiProp?.container })">
-        <slot :ui="ui">
-          <span v-if="label" data-slot="label" :class="ui.label({ class: uiProp?.label })">{{ label }}</span>
-          <UIcon v-else-if="icon" :name="icon" data-slot="icon" :class="ui.icon({ class: uiProp?.icon })" />
-          <UAvatar v-else-if="avatar" :size="((uiProp?.avatarSize || ui.avatarSize()) as AvatarProps['size'])" v-bind="avatar" data-slot="avatar" :class="ui.avatar({ class: uiProp?.avatar })" />
-        </slot>
-      </div>
+    <template v-if="(label || icon || avatar || !!slots.default) && position === 'center'">
+      <ReuseContainer />
 
       <div data-slot="border" :class="ui.border({ class: uiProp?.border })" />
     </template>
+
+    <ReuseContainer v-if="(label || icon || avatar || !!slots.default) && position === 'end'" />
   </Separator>
 </template>
