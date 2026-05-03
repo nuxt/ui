@@ -554,7 +554,7 @@ exports[`AuthForm > renders with providers correctly 1`] = `
     <div data-orientation="horizontal" role="separator" data-slot="root" class="flex items-center align-center text-center w-full flex-row">
       <!--v-if-->
       <div data-slot="border" class="border-default w-full border-solid border-t"></div>
-      <div data-slot="container" class="font-medium text-default flex mx-3 whitespace-nowrap"><span data-slot="label" class="text-sm">or</span></div>
+      <div data-slot="container" class="font-medium text-default flex whitespace-nowrap mx-3"><span data-slot="label" class="text-sm">or</span></div>
       <div data-slot="border" class="border-default w-full border-solid border-t"></div>
       <!--v-if-->
     </div>
