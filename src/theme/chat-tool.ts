@@ -42,8 +42,5 @@ export default (options: Required<ModuleOptions>) => ({
         chevronIcon: ['absolute inset-0 opacity-0 group-hover:opacity-100 group-data-[state=open]:opacity-100', options.theme.transitions && 'transition-[rotate,opacity] duration-200']
       }
     }
-  },
-  defaultVariants: {
-    variant: 'inline'
   }
 })

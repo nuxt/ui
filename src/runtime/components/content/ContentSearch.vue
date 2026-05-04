@@ -95,11 +95,11 @@ export type ContentSearchSlots = CommandPaletteSlots<ContentSearchItem> & {
 
 <script setup lang="ts" generic="T extends ContentSearchLink">
 import { computed, useTemplateRef } from 'vue'
-import { useForwardProps } from 'reka-ui'
 import { defu } from 'defu'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig, useColorMode, defineShortcuts } from '#imports'
-import { useComponentUI } from '../../composables/useComponentUI'
+import { useComponentProps } from '../../composables/useComponentProps'
+import { useForwardProps } from '../../composables/useForwardProps'
 import { useContentSearch } from '../../composables/useContentSearch'
 import { useLocale } from '../../composables/useLocale'
 import { omit, transformUI } from '../../utils'
@@ -107,7 +107,7 @@ import { tv } from '../../utils/tv'
 import UModal from '../Modal.vue'
 import UCommandPalette from '../CommandPalette.vue'
 
-const props = withDefaults(defineProps<ContentSearchProps<T>>(), {
+const _props = withDefaults(defineProps<ContentSearchProps<T>>(), {
   shortcut: 'meta_k',
   colorMode: true,
   close: true,
@@ -116,6 +116,8 @@ const props = withDefaults(defineProps<ContentSearchProps<T>>(), {
 })
 const slots = defineSlots<ContentSearchSlots>()
 
+const props = useComponentProps<ContentSearchProps<T>>('contentSearch', _props)
+
 const searchTerm = defineModel<string>('searchTerm', { default: '' })
 
 const { t } = useLocale()
@@ -123,19 +125,20 @@ const { open, mapNavigationItems, postFilter } = useContentSearch()
 // eslint-disable-next-line vue/no-dupe-keys
 const colorMode = useColorMode()
 const appConfig = useAppConfig() as ContentSearch['AppConfig']
-const uiProp = useComponentUI('contentSearch', props)
 
 const commandPaletteProps = useForwardProps(reactivePick(props, 'size', 'icon', 'placeholder', 'autofocus', 'loading', 'loadingIcon', 'close', 'closeIcon', 'searchDelay'))
 const modalProps = useForwardProps(reactivePick(props, 'overlay', 'transition', 'content', 'dismissible', 'fullscreen', 'modal', 'portal'))
 
 const getProxySlots = () => omit(slots, ['content'])
 
+// eslint-disable-next-line vue/no-dupe-keys
 const fuse = computed(() => defu({}, props.fuse, {
   fuseOptions: {
     includeMatches: true
   }
 } as UseFuseOptions<T>))
 
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.contentSearch || {}) })({
   size: props.size,
   fullscreen: props.fullscreen
@@ -243,7 +246,7 @@ function onSelect(item: ContentSearchItem) {
 }
 
 defineShortcuts({
-  [props.shortcut]: {
+  [props.shortcut!]: {
     usingInput: true,
     handler: () => open.value = !open.value
   }
@@ -257,11 +260,11 @@ defineExpose({
 <template>
   <UModal
     v-model:open="open"
-    :title="title || t('contentSearch.title')"
-    :description="description || t('contentSearch.description')"
+    :title="props.title || t('contentSearch.title')"
+    :description="props.description || t('contentSearch.description')"
     v-bind="modalProps"
     data-slot="modal"
-    :class="ui.modal({ class: [uiProp?.modal, props.class] })"
+    :class="ui.modal({ class: [props.ui?.modal, props.class] })"
   >
     <template #content="contentData">
       <slot name="content" v-bind="contentData">
@@ -272,7 +275,7 @@ defineExpose({
           :groups="groups"
           :fuse="fuse"
           :input="{ fixed: true }"
-          :ui="transformUI(omit(ui, ['modal']), uiProp)"
+          :ui="transformUI(omit(ui, ['modal']), props.ui)"
           @update:model-value="onSelect"
           @update:open="open = $event"
         >

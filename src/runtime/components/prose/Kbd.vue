@@ -15,19 +15,20 @@ export interface ProseKbdProps {
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useAppConfig } from '#imports'
-import { useComponentUI } from '../../composables/useComponentUI'
+import { useComponentProps } from '../../composables/useComponentProps'
 import { tv } from '../../utils/tv'
 import UKbd from '../Kbd.vue'
 
-const props = defineProps<ProseKbdProps>()
+const _props = defineProps<ProseKbdProps>()
+
+const props = useComponentProps('prose.kbd', _props)
 
 const appConfig = useAppConfig() as ProseKbd['AppConfig']
-const uiProp = useComponentUI('prose.kbd', props)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.kbd || {}) }))
 </script>
 
 <template>
-  <UKbd :value="value" :class="ui({ class: [uiProp?.base, props.class] })" />
+  <UKbd :value="props.value" :class="ui({ class: [props.ui?.base, props.class] })" />
 </template>
