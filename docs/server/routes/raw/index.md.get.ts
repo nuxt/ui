@@ -15,12 +15,12 @@ export default defineCachedEventHandler(async (event) => {
     `canonical_url: ${JSON.stringify(DOMAIN)}`,
     `last_updated: ${JSON.stringify(new Date().toISOString().split('T')[0])}`,
     '---',
-    ''
+    '\n'
   ].join('\n')
 
   const body = `# ${title}
 
-> ${description}
+${description}
 
 ## About
 
@@ -36,16 +36,17 @@ Nuxt UI is a free and open source Vue UI library powered by [Reka UI](https://re
 
 ## Installation
 
-- Nuxt: <${DOMAIN}/docs/getting-started/installation/nuxt.md>
-- Vue: <${DOMAIN}/docs/getting-started/installation/vue.md>
+- Nuxt: <${DOMAIN}/raw/docs/getting-started/installation/nuxt.md>
+- Vue: <${DOMAIN}/raw/docs/getting-started/installation/vue.md>
 
 ## Explore
 
-- Getting started: <${DOMAIN}/docs/getting-started.md>
-- Components: <${DOMAIN}/docs/components.md>
-- Composables: <${DOMAIN}/docs/composables/define-shortcuts.md>
-- Typography: <${DOMAIN}/docs/typography.md>
-- Sitemap: <${DOMAIN}/sitemap.md>
+- Documentation: <${DOMAIN}/docs>
+- Components: <${DOMAIN}/raw/docs/components.md>
+- Composables: <${DOMAIN}/raw/docs/composables/define-shortcuts.md>
+- Typography: <${DOMAIN}/raw/docs/typography.md>
+- Sitemap (XML): <${DOMAIN}/sitemap.xml>
+- Sitemap (Markdown): <${DOMAIN}/sitemap.md>
 - LLMs index: <${DOMAIN}/llms.txt>
 - Full LLMs documentation: <${DOMAIN}/llms-full.txt>
 
@@ -66,7 +67,10 @@ Nuxt UI is a free and open source Vue UI library powered by [Reka UI](https://re
 `
 
   setResponseHeader(event, 'Content-Type', 'text/markdown; charset=utf-8')
-  setResponseHeader(event, 'Link', `<${DOMAIN}>; rel="canonical", <${DOMAIN}>; rel="alternate"; type="text/html"`)
+  setResponseHeader(event, 'Link', [
+    `<${DOMAIN}>; rel="canonical"`,
+    `<${DOMAIN}>; rel="alternate"; type="text/html"`
+  ].join(', '))
   return frontmatter + body
 }, {
   swr: true,

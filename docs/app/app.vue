@@ -15,8 +15,6 @@ const { data: files } = useLazyAsyncData('search', () => queryCollectionSearchSe
 
 const color = computed(() => colorMode.value === 'dark' ? (colors as any)[appConfig.ui.colors.neutral][900] : 'white')
 
-useCanonical()
-
 useHead({
   meta: [
     { name: 'viewport', content: 'width=device-width, initial-scale=1' },
