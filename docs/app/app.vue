@@ -70,16 +70,14 @@ provide('navigation', rootNavigation)
 
         <template v-if="!route.path.startsWith('/examples')">
           <Footer />
-
-          <ClientOnly>
-            <Search :files="files" :navigation="navigationByFramework" />
-          </ClientOnly>
         </template>
       </div>
 
       <template v-if="!route.path.startsWith('/examples')">
         <ClientOnly>
           <Chat />
+
+          <Search :files="files" :navigation="navigationByFramework" />
         </ClientOnly>
       </template>
     </div>
