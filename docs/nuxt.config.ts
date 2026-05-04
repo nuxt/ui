@@ -257,7 +257,14 @@ export default defineNuxtConfig({
         'shiki/wasm',
         '@tanstack/vue-table',
         '@tanstack/vue-virtual',
-        '@vueuse/integrations/useSortable'
+        '@vueuse/integrations/useSortable',
+        'embla-carousel-vue',
+        'embla-carousel-autoplay',
+        'embla-carousel-auto-scroll',
+        'embla-carousel-auto-height',
+        'embla-carousel-class-names',
+        'embla-carousel-fade',
+        'embla-carousel-wheel-gestures'
       ]
     }
   },
