@@ -104,6 +104,25 @@ export function useSearch() {
   }])
 
   const groups = computed(() => [{
+    id: 'ai',
+    label: 'AI',
+    ignoreFilter: true,
+    postFilter: (searchTerm: string, items: any[]) => {
+      if (!searchTerm) {
+        return []
+      }
+
+      return items
+    },
+    items: [{
+      label: 'Ask AI',
+      icon: 'i-lucide-bot',
+      ui: {
+        itemLeadingIcon: 'group-data-highlighted:not-group-data-disabled:text-primary'
+      },
+      onSelect
+    }]
+  }, {
     id: 'framework',
     label: 'Framework',
     items: frameworks.value
