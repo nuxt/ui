@@ -88,7 +88,7 @@ describe('ChatMessage', () => {
       }
     })
 
-    for (const key of ['as', 'icon', 'avatar', 'variant', 'side', 'actions', 'compact', 'class', 'ui']) {
+    for (const key of ['as', 'icon', 'avatar', 'variant', 'color', 'side', 'actions', 'compact', 'class', 'ui']) {
       expect(captured[0]).not.toHaveProperty(key)
     }
   })

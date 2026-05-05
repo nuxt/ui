@@ -85,7 +85,7 @@ const appConfig = useAppConfig() as ChatMessage['AppConfig']
 const fileParts = computed(() => props.parts?.filter((part): part is FileUIPart => part.type === 'file') ?? [])
 const textParts = computed(() => props.parts?.filter((part): part is TextUIPart => part.type === 'text') ?? [])
 
-const messageProps = computed(() => omit(props, ['as', 'icon', 'avatar', 'variant', 'side', 'actions', 'compact', 'class', 'ui', 'content']))
+const messageProps = computed(() => omit(props, ['as', 'icon', 'avatar', 'variant', 'color', 'side', 'actions', 'compact', 'class', 'ui', 'content']))
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.chatMessage || {}) })({
