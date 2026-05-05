@@ -17,6 +17,8 @@ useSeoMeta({
   ogImage: joinURL(url, '/figma/og-image.png')
 })
 
+useCanonical()
+
 const video = ref<HTMLVideoElement | null>(null)
 const played = ref(false)
 

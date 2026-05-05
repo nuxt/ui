@@ -9,15 +9,7 @@ links:
 
 ## Usage
 
-The Theme component allows you to override the theme of all child components without modifying each one individually. It uses Vue's `provide` / `inject` mechanism under the hood, so the overrides apply at any depth.
-
-Use the `ui` prop to pass an object where keys are component names (camelCase) and values are their slot class overrides:
-
-::component-example
----
-name: 'theme-example'
----
-::
+The Theme component allows you to override default **slot classes** and **props** of all child components without modifying each one individually. It uses Vue's `provide` / `inject` mechanism under the hood, so the overrides apply at any depth.
 
 ::note
 The Theme component doesn't render any HTML element, it only provides theme overrides to its children.
@@ -35,9 +27,35 @@ For app-level theme configuration, we recommend using the `vite.config.ts` file 
 :::
 ::
 
-### Multiple
+### Slot classes
 
-You can theme multiple component types at once by passing different keys in the `ui` prop.
+Use the `ui` prop to override slot classes of descendant components. Keys are component names (camelCase) and values are their slot class overrides.
+
+::component-example
+---
+name: 'theme-ui-example'
+---
+::
+
+### Prop defaults :badge{label="Soon" class="align-text-top"}
+
+Use the `props` prop to override the default value of any prop on descendant components. Each key maps to a partial of that component's props.
+
+::component-example
+---
+name: 'theme-props-example'
+---
+::
+
+::tip
+Explicit props on a component (e.g. `<UButton color="primary" />`) always win over `<UTheme :props>`. Theme defaults only apply when the prop wasn't passed explicitly.
+::
+
+## Examples
+
+### Multiple components
+
+Use different keys in `ui` or `props` to theme multiple component types at once.
 
 ::component-example
 ---
@@ -45,9 +63,9 @@ name: 'theme-multiple-example'
 ---
 ::
 
-### Nested
+### Nested themes
 
-Theme components can be nested. When nested, the innermost Theme's overrides take precedence for the components it wraps.
+Nest multiple Theme components to compose overrides. The innermost Theme takes precedence, while unoverridden keys are inherited from the outer Theme.
 
 ::component-example
 ---
@@ -55,9 +73,9 @@ name: 'theme-nested-example'
 ---
 ::
 
-### Priority
+### Explicit priority
 
-The `ui` prop on individual components always takes priority over the Theme component. This lets you override specific instances while still benefiting from the shared theme.
+Explicitly setting any prop (including `ui`) on an individual component always takes priority over the Theme component.
 
 ::component-example
 ---
@@ -65,9 +83,9 @@ name: 'theme-priority-example'
 ---
 ::
 
-### Deep
+### Deep propagation
 
-Because the Theme component uses Vue's `provide` / `inject`, the overrides are available to all descendant components regardless of how deeply nested they are.
+The overrides are available to all descendant components regardless of how deeply nested they are.
 
 ::component-example
 ---
@@ -79,9 +97,7 @@ name: 'theme-deep-example'
 In this example, `MyButton` is a custom component that renders a `UButton` internally. The theme overrides still apply because they propagate through the entire component tree.
 ::
 
-## Examples
-
-### With form components
+### Form components
 
 Use the Theme component to apply consistent styling across a group of form components.
 
@@ -91,9 +107,13 @@ name: 'theme-form-example'
 ---
 ::
 
-### With prose components
+::tip
+`<UFormField>`, `<UFieldGroup>` and `<UAvatarGroup>` keep precedence over `<UTheme :props>` for `size`, `color` and `highlight`. Validation errors also force the `error` color over any theme value.
+::
 
-You can theme prose (typography) components by nesting them under the `prose` key. This is useful when rendering Markdown content with a tighter or custom typographic scale.
+### Prose components
+
+Use the `prose` namespace to theme typography components. Keys are nested under `prose` (e.g. `prose.p`, `prose.code`).
 
 ::component-example
 ---

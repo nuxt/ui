@@ -1,8 +1,6 @@
-import { eventHandler, setHeader } from 'h3'
-
 const DOMAIN = 'https://ui.nuxt.com'
 
-export default eventHandler((event) => {
+export default defineCachedEventHandler((event) => {
   const linkset = {
     linkset: [
       {
@@ -26,6 +24,10 @@ export default eventHandler((event) => {
           {
             href: `${DOMAIN}/llms.txt`,
             type: 'text/plain'
+          },
+          {
+            href: `${DOMAIN}/llms-full.txt`,
+            type: 'text/plain'
           }
         ],
         'service-doc': [
@@ -38,7 +40,9 @@ export default eventHandler((event) => {
     ]
   }
 
-  setHeader(event, 'Content-Type', 'application/linkset+json; charset=utf-8')
-  setHeader(event, 'Cache-Control', 'public, max-age=3600')
+  setResponseHeader(event, 'Content-Type', 'application/linkset+json; charset=utf-8')
   return linkset
+}, {
+  swr: true,
+  maxAge: 60 * 60
 })

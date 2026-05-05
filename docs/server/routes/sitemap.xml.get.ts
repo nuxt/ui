@@ -1,13 +1,12 @@
 import { queryCollection } from '@nuxt/content/server'
-import { eventHandler, setHeader } from 'h3'
-
-const DOMAIN = 'https://ui.nuxt.com'
 
 function xmlEscape(str: string): string {
   return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;')
 }
 
-export default eventHandler(async (event) => {
+const DOMAIN = 'https://ui.nuxt.com'
+
+export default defineEventHandler(async (event) => {
   const pages = await queryCollection(event, 'docs')
     .select('path')
     .where('extension', '=', 'md')
@@ -25,6 +24,6 @@ export default eventHandler(async (event) => {
 ${urls}
 </urlset>`
 
-  setHeader(event, 'Content-Type', 'application/xml; charset=utf-8')
+  setResponseHeader(event, 'Content-Type', 'application/xml; charset=utf-8')
   return xml
 })

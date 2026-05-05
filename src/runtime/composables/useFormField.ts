@@ -24,6 +24,26 @@ export const formInputsInjectionKey: InjectionKey<Ref<Record<string, { id?: stri
 export const formLoadingInjectionKey: InjectionKey<Readonly<Ref<boolean>>> = Symbol('nuxt-ui.form-loading')
 export const formErrorsInjectionKey: InjectionKey<Readonly<Ref<FormErrorWithId[]>>> = Symbol('nuxt-ui.form-errors')
 
+/**
+ * Wires an input to its wrapping `<UFormField>` (id/name/aria, validation events, error-driven color).
+ *
+ * **Always pass the raw `_props`, never the `useComponentProps` proxy.**
+ * The internal fallback `props?.x ?? formField?.value.x` must distinguish
+ * "explicit prop" from "theme default" — passing the proxy would leak
+ * `<UTheme :props>` defaults into the explicit slot and let theme size/color
+ * silently override the wrapping field (regression-tested in `Theme.spec.ts`).
+ *
+ * To get `<UTheme :props>` to apply when no `<UFormField>` wraps the input,
+ * fall back to the proxy at the `tv()` call site:
+ *
+ * ```ts
+ * size: size.value ?? props.size,
+ * color: color.value ?? props.color,
+ * highlight: highlight.value ?? props.highlight
+ * ```
+ *
+ * Final precedence: `explicit > FormField > <UTheme :props> > withDefaults > app.config > tv defaults`.
+ */
 export function useFormField<T>(props?: Props<T>, opts?: { bind?: boolean, deferInputValidation?: boolean }) {
   const formOptions = inject(formOptionsInjectionKey, undefined)
   const formBus = inject(formBusInjectionKey, undefined)

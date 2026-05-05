@@ -26,20 +26,22 @@ import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
 import { tv } from '../utils/tv'
-import { useComponentUI } from '../composables/useComponentUI'
+import { useComponentProps } from '../composables/useComponentProps'
 
-const props = defineProps<PageBodyProps>()
+const _props = defineProps<PageBodyProps>()
+
 defineSlots<PageBodySlots>()
 
+const props = useComponentProps('pageBody', _props)
+
 const appConfig = useAppConfig() as PageBody['AppConfig']
-const uiProp = useComponentUI('pageBody', props)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pageBody || {}) }))
 </script>
 
 <template>
-  <Primitive :as="as" :class="ui({ class: [uiProp?.base, props.class] })">
+  <Primitive :as="props.as" :class="ui({ class: [props.ui?.base, props.class] })">
     <slot />
   </Primitive>
 </template>
