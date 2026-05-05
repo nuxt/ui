@@ -1,10 +1,10 @@
 import { queryCollection } from '@nuxt/content/server'
 
-const DOMAIN = 'https://ui.nuxt.com'
-
 function xmlEscape(str: string): string {
   return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;')
 }
+
+const DOMAIN = 'https://ui.nuxt.com'
 
 export default defineEventHandler(async (event) => {
   const pages = await queryCollection(event, 'docs')

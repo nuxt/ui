@@ -20,7 +20,6 @@ props:
 ---
 ::
 
-
 ::note
 You can pass any property from the HTML `<img>` element such as `alt`, `loading`, etc.
 ::
@@ -35,6 +34,8 @@ Use the `src` prop to set the image URL.
 
 ::component-code
 ---
+ignore:
+  - loading
 props:
   src: 'https://github.com/benjamincanac.png'
   loading: lazy
@@ -49,6 +50,7 @@ Use the `size` prop to set the size of the Avatar.
 ---
 ignore:
   - src
+  - loading
 props:
   src: 'https://github.com/benjamincanac.png'
   size: xl
@@ -100,6 +102,18 @@ props:
 The `alt` prop is passed to the `img` element as the `alt` attribute.
 ::
 
+### Color :badge{label="Soon" class="align-text-top"}
+
+Use the `color` prop to change the color of the Avatar.
+
+::component-code
+---
+props:
+  color: primary
+  alt: 'Benjamin Canac'
+---
+::
+
 ### Chip
 
 Use the `chip` prop to display a chip around the Avatar.
@@ -109,6 +123,7 @@ Use the `chip` prop to display a chip around the Avatar.
 prettier: true
 ignore:
   - src
+  - loading
   - chip.inset
 props:
   src: 'https://github.com/benjamincanac.png'

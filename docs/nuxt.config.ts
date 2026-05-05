@@ -77,7 +77,7 @@ export default defineNuxtConfig({
       headers: {
         Link: [
           '</sitemap.xml>; rel="sitemap"; type="application/xml"',
-          '</sitemap.md>; rel="describedby"; type="text/markdown"',
+          '</sitemap.md>; rel="sitemap"; type="text/markdown"',
           '</.well-known/api-catalog>; rel="api-catalog"; type="application/linkset+json"',
           '</.well-known/mcp/server-card.json>; rel="service-desc"; type="application/json"',
           '</docs>; rel="service-doc"; type="text/html"',
@@ -257,7 +257,14 @@ export default defineNuxtConfig({
         'shiki/wasm',
         '@tanstack/vue-table',
         '@tanstack/vue-virtual',
-        '@vueuse/integrations/useSortable'
+        '@vueuse/integrations/useSortable',
+        'embla-carousel-vue',
+        'embla-carousel-autoplay',
+        'embla-carousel-auto-scroll',
+        'embla-carousel-auto-height',
+        'embla-carousel-class-names',
+        'embla-carousel-fade',
+        'embla-carousel-wheel-gestures'
       ]
     }
   },

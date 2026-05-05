@@ -73,7 +73,7 @@ import { computed, ref, watch } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useMouseInElement, pausableFilter } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { useComponentUI } from '../composables/useComponentUI'
+import { useComponentProps } from '../composables/useComponentProps'
 import { getSlotChildrenText } from '../utils'
 import { tv } from '../utils/tv'
 import ULink from './Link.vue'
@@ -81,20 +81,22 @@ import UIcon from './Icon.vue'
 
 defineOptions({ inheritAttrs: false })
 
-const props = withDefaults(defineProps<PageCardProps>(), {
+const _props = withDefaults(defineProps<PageCardProps>(), {
   orientation: 'vertical'
 })
 const slots = defineSlots<PageCardSlots>()
+
+const props = useComponentProps('pageCard', _props)
 
 const cardRef = ref<HTMLElement>()
 const motionControl = pausableFilter()
 
 const appConfig = useAppConfig() as PageCard['AppConfig']
-const uiProp = useComponentUI('pageCard', props)
 const { elementX, elementY } = useMouseInElement(cardRef, {
   eventFilter: motionControl.eventFilter
 })
 
+// eslint-disable-next-line vue/no-dupe-keys
 const spotlight = computed(() => props.spotlight && (elementX.value !== 0 || elementY.value !== 0))
 
 watch(() => props.spotlight, (value) => {
@@ -105,6 +107,7 @@ watch(() => props.spotlight, (value) => {
   }
 }, { immediate: true })
 
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pageCard || {}) })({
   orientation: props.orientation,
   reverse: props.reverse,
@@ -126,44 +129,44 @@ const ariaLabel = computed(() => {
 <template>
   <Primitive
     ref="cardRef"
-    :as="as"
-    :data-orientation="orientation"
+    :as="props.as"
+    :data-orientation="props.orientation"
     data-slot="root"
-    :class="ui.root({ class: [uiProp?.root, props.class] })"
+    :class="ui.root({ class: [props.ui?.root, props.class] })"
     :style="spotlight && { '--spotlight-x': `${elementX}px`, '--spotlight-y': `${elementY}px` }"
-    @click="onClick"
+    @click="props.onClick"
   >
-    <div v-if="props.spotlight" data-slot="spotlight" :class="ui.spotlight({ class: uiProp?.spotlight })" />
+    <div v-if="props.spotlight" data-slot="spotlight" :class="ui.spotlight({ class: props.ui?.spotlight })" />
 
-    <div data-slot="container" :class="ui.container({ class: uiProp?.container })">
-      <div v-if="!!slots.header || (icon || !!slots.leading) || !!slots.body || (title || !!slots.title) || (description || !!slots.description) || !!slots.footer" data-slot="wrapper" :class="ui.wrapper({ class: uiProp?.wrapper })">
-        <div v-if="!!slots.header" data-slot="header" :class="ui.header({ class: uiProp?.header })">
+    <div data-slot="container" :class="ui.container({ class: props.ui?.container })">
+      <div v-if="!!slots.header || (props.icon || !!slots.leading) || !!slots.body || (props.title || !!slots.title) || (props.description || !!slots.description) || !!slots.footer" data-slot="wrapper" :class="ui.wrapper({ class: props.ui?.wrapper })">
+        <div v-if="!!slots.header" data-slot="header" :class="ui.header({ class: props.ui?.header })">
           <slot name="header" />
         </div>
 
-        <div v-if="icon || !!slots.leading" data-slot="leading" :class="ui.leading({ class: uiProp?.leading })">
+        <div v-if="props.icon || !!slots.leading" data-slot="leading" :class="ui.leading({ class: props.ui?.leading })">
           <slot name="leading" :ui="ui">
-            <UIcon v-if="icon" :name="icon" data-slot="leadingIcon" :class="ui.leadingIcon({ class: uiProp?.leadingIcon })" />
+            <UIcon v-if="props.icon" :name="props.icon" data-slot="leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
           </slot>
         </div>
 
-        <div v-if="!!slots.body || (title || !!slots.title) || (description || !!slots.description)" data-slot="body" :class="ui.body({ class: uiProp?.body })">
+        <div v-if="!!slots.body || (props.title || !!slots.title) || (props.description || !!slots.description)" data-slot="body" :class="ui.body({ class: props.ui?.body })">
           <slot name="body">
-            <div v-if="title || !!slots.title" data-slot="title" :class="ui.title({ class: uiProp?.title })">
+            <div v-if="props.title || !!slots.title" data-slot="title" :class="ui.title({ class: props.ui?.title })">
               <slot name="title">
-                {{ title }}
+                {{ props.title }}
               </slot>
             </div>
 
-            <div v-if="description || !!slots.description" data-slot="description" :class="ui.description({ class: uiProp?.description })">
+            <div v-if="props.description || !!slots.description" data-slot="description" :class="ui.description({ class: props.ui?.description })">
               <slot name="description">
-                {{ description }}
+                {{ props.description }}
               </slot>
             </div>
           </slot>
         </div>
 
-        <div v-if="!!slots.footer" data-slot="footer" :class="ui.footer({ class: uiProp?.footer })">
+        <div v-if="!!slots.footer" data-slot="footer" :class="ui.footer({ class: props.ui?.footer })">
           <slot name="footer" />
         </div>
       </div>
@@ -172,9 +175,9 @@ const ariaLabel = computed(() => {
     </div>
 
     <ULink
-      v-if="to"
+      v-if="props.to"
       :aria-label="ariaLabel"
-      v-bind="{ to, target, ...$attrs }"
+      v-bind="{ to: props.to, target: props.target, ...$attrs }"
       class="focus:outline-none peer"
       raw
     >

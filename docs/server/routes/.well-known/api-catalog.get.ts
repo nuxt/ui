@@ -24,6 +24,10 @@ export default defineCachedEventHandler((event) => {
           {
             href: `${DOMAIN}/llms.txt`,
             type: 'text/plain'
+          },
+          {
+            href: `${DOMAIN}/llms-full.txt`,
+            type: 'text/plain'
           }
         ],
         'service-doc': [

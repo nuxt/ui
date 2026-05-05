@@ -15,8 +15,6 @@ const { data: files } = useLazyAsyncData('search', () => queryCollectionSearchSe
 
 const color = computed(() => colorMode.value === 'dark' ? (colors as any)[appConfig.ui.colors.neutral][900] : 'white')
 
-useCanonical()
-
 useHead({
   meta: [
     { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -70,16 +68,14 @@ provide('navigation', rootNavigation)
 
         <template v-if="!route.path.startsWith('/examples')">
           <Footer />
-
-          <ClientOnly>
-            <Search :files="files" :navigation="navigationByFramework" />
-          </ClientOnly>
         </template>
       </div>
 
       <template v-if="!route.path.startsWith('/examples')">
         <ClientOnly>
           <Chat />
+
+          <Search :files="files" :navigation="navigationByFramework" />
         </ClientOnly>
       </template>
     </div>

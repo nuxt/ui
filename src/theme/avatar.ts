@@ -1,11 +1,25 @@
-export default {
+import type { ModuleOptions } from '../module'
+
+export default (options: Required<ModuleOptions>) => ({
   slots: {
-    root: 'inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle bg-elevated',
+    root: 'inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle',
     image: 'h-full w-full rounded-[inherit] object-cover',
-    fallback: 'font-medium text-muted truncate',
-    icon: 'text-muted shrink-0'
+    fallback: 'font-medium truncate',
+    icon: 'shrink-0'
   },
   variants: {
+    color: {
+      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, {
+        root: `bg-${color}/10`,
+        fallback: `text-${color}`,
+        icon: `text-${color}`
+      }])),
+      neutral: {
+        root: 'bg-elevated',
+        fallback: 'text-muted',
+        icon: 'text-muted'
+      }
+    },
     size: {
       '3xs': {
         root: 'size-4 text-[8px]'
@@ -37,6 +51,7 @@ export default {
     }
   },
   defaultVariants: {
-    size: 'md'
+    size: 'md',
+    color: 'neutral'
   }
-}
+})

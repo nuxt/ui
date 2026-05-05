@@ -1,8 +1,8 @@
 <script setup lang="ts">
 withDefaults(defineProps<{
-  title: string
-  description: string
-  headline: string
+  title?: string
+  description?: string
+  headline?: string
   framework?: string
 }>(), {
   framework: 'nuxt'
@@ -25,11 +25,11 @@ withDefaults(defineProps<{
       <path d="M958 60.0001H938C933.524 60.0001 929.926 59.9395 927 63C924.074 65.8905 925 67.5792 925 72V141C925 151.372 923.648 156.899 919 162C914.352 166.931 908.468 169 899 169C889.705 169 882.648 166.931 878 162C873.352 156.899 873 151.372 873 141V72.0001C873 67.5793 872.926 65.8906 870 63.0001C867.074 59.9396 863.476 60.0001 859 60.0001H840V141C840 159.023 845.016 173.458 855 184C865.156 194.542 879.893 200 899 200C918.107 200 932.844 194.542 943 184C953.156 173.458 958 159.023 958 141V60.0001Z" fill="#00DC82" />
       <path fill-rule="evenodd" clip-rule="evenodd" d="M1000 60.0233L1020 60V77L1020 128V156.007L1020 181L1020 189.004C1020 192.938 1019.98 194.429 1017 197.001C1014.02 199.725 1009.56 200 1005 200H986.001V181.006L986 130.012V70.0215C986 66.1576 986.016 64.5494 989 62.023C991.819 59.6358 995.437 60.0233 1000 60.0233Z" fill="#00DC82" />
     </svg>
-    <div class="mx-26 mt-24 border-y-2 border-slate-200 h-14 flex flex-row items-center">
-      <div class="h-full flex items-center border-r-2 border-slate-200 text-green-500 px-6">
+    <div class="mx-26 mt-12 border-y-2 border-solid border-slate-200 h-14 flex flex-row items-center">
+      <div class="h-full flex items-center border-r-2 border-solid border-slate-200 text-green-500 px-6">
         <svg
           v-if="framework === 'nuxt'"
-          class="h-[40px] w-[40px] mt-[10px]"
+          class="h-[40px] w-[40px]"
           viewBox="0 0 512 512"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -38,22 +38,22 @@ withDefaults(defineProps<{
         </svg>
         <svg
           v-else
-          class="w-[34px] h-[30px] mt-6"
+          class="w-[34px] h-[30px]"
           viewBox="0 0 261.76 226.69"
           xmlns="http://www.w3.org/2000/svg"
         >
           <g transform="matrix(1.3333 0 0 -1.3333 -76.311 313.34)"><g transform="translate(178.06 235.01)"><path d="m0 0-22.669-39.264-22.669 39.264h-75.491l98.16-170.02 98.16 170.02z" fill="#41b883" /></g><g transform="translate(178.06 235.01)"><path d="m0 0-22.669-39.264-22.669 39.264h-36.227l58.896-102.01 58.896 102.01z" fill="#34495e" /></g></g>
         </svg>
       </div>
-      <div class="h-full uppercase flex items-center border-r-2 border-slate-200 text-green-500 text-[20px] font-semibold px-6 pt-1">
+      <div v-if="headline" class="h-full uppercase flex items-center border-r-2 border-solid border-slate-200 text-green-500 text-[20px] font-semibold px-6">
         {{ headline }}
       </div>
     </div>
-    <div class="mx-34 mt-12 h-[240px] flex flex-col justify-center">
-      <h1 class="text-5xl font-semibold mb-0 flex gap-1">
-        <span>{{ title }}</span>
+    <div class="mx-34 mt-12 h-[280px] flex flex-col justify-center">
+      <h1 v-if="title" class="text-4xl font-semibold text-left mb-4">
+        {{ title }}
       </h1>
-      <p class="text-3xl text-slate-500 overflow-hidden" style="max-height: 5.2em;">
+      <p v-if="description" class="text-3xl/11 text-slate-500" :style="{ lineClamp: 3, textOverflow: 'ellipsis' }">
         {{ description }}
       </p>
     </div>

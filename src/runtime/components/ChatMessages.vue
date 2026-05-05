@@ -87,19 +87,21 @@ import { Presence } from 'reka-ui'
 import { defu } from 'defu'
 import { useElementBounding, useEventListener, useMutationObserver, watchThrottled } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { useComponentUI } from '../composables/useComponentUI'
+import { useComponentProps } from '../composables/useComponentProps'
 import { omit } from '../utils'
 import { tv } from '../utils/tv'
 import UChatMessage from './ChatMessage.vue'
 import UButton from './Button.vue'
 
-const props = withDefaults(defineProps<ChatMessagesProps<T>>(), {
+const _props = withDefaults(defineProps<ChatMessagesProps<T>>(), {
   autoScroll: true,
   shouldAutoScroll: false,
   shouldScrollToBottom: true,
   spacingOffset: 0
 })
 const slots = defineSlots<ChatMessagesSlots<T>>()
+
+const props = useComponentProps<ChatMessagesProps<T>>('chatMessages', _props)
 
 const getProxySlots = () => omit(slots, ['default', 'indicator', 'viewport'])
 
@@ -112,11 +114,11 @@ const showIndicator = computed(() => {
 })
 
 const appConfig = useAppConfig() as ChatMessages['AppConfig']
-const uiProp = useComponentUI('chatMessages', props)
 
 const userProps = toRef(() => defu(props.user, { side: 'right' as const, variant: 'soft' as const }))
 const assistantProps = toRef(() => defu(props.assistant, { side: 'left' as const, variant: 'naked' as const }))
 
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.chatMessages || {}) })({
   compact: props.compact
 }))
@@ -311,18 +313,18 @@ onMounted(() => {
 <template>
   <div
     ref="el"
-    :data-status="status"
+    :data-status="props.status"
     data-slot="root"
-    :class="ui.root({ class: [uiProp?.root, props.class] })"
+    :class="ui.root({ class: [props.ui?.root, props.class] })"
     :style="{ '--last-message-height': `${lastMessageHeight}px` }"
   >
     <slot>
-      <template v-for="message in messages" :key="message.id">
+      <template v-for="message in props.messages" :key="message.id">
         <UChatMessage
           v-if="message.parts?.length"
           v-bind="{ ...(message.role === 'user' ? userProps : assistantProps), ...message }"
           :ref="el => registerMessageRef(message.id, el as ComponentPublicInstance)"
-          :compact="compact"
+          :compact="props.compact"
         >
           <template v-for="(_, name) in getProxySlots()" #[name]="slotData">
             <slot :name="name" v-bind="{ ...(slotData as any), message }" />
@@ -336,11 +338,11 @@ onMounted(() => {
       id="indicator"
       role="assistant"
       v-bind="{ ...assistantProps, actions: undefined, parts: [] }"
-      :compact="compact"
+      :compact="props.compact"
     >
       <template #content>
         <slot name="indicator" :ui="ui">
-          <div data-slot="indicator" :class="ui.indicator({ class: uiProp?.indicator })">
+          <div data-slot="indicator" :class="ui.indicator({ class: props.ui?.indicator })">
             <span />
             <span />
             <span />
@@ -350,16 +352,16 @@ onMounted(() => {
     </UChatMessage>
 
     <Presence :present="showAutoScroll">
-      <div :data-state="showAutoScroll ? 'open' : 'closed'" data-slot="viewport" :class="ui.viewport({ class: uiProp?.viewport })">
+      <div :data-state="showAutoScroll ? 'open' : 'closed'" data-slot="viewport" :class="ui.viewport({ class: props.ui?.viewport })">
         <slot name="viewport" :ui="ui" :on-click="onAutoScrollClick">
           <UButton
-            v-if="autoScroll"
-            :icon="autoScrollIcon || appConfig.ui.icons.arrowDown"
+            v-if="props.autoScroll"
+            :icon="props.autoScrollIcon || appConfig.ui.icons.arrowDown"
             color="neutral"
             variant="outline"
-            v-bind="(typeof autoScroll === 'object' ? autoScroll : {})"
+            v-bind="(typeof props.autoScroll === 'object' ? props.autoScroll : {})"
             data-slot="autoScroll"
-            :class="ui.autoScroll({ class: uiProp?.autoScroll })"
+            :class="ui.autoScroll({ class: props.ui?.autoScroll })"
             @click="onAutoScrollClick"
           />
         </slot>

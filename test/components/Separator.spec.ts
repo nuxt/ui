@@ -13,6 +13,8 @@ describe('Separator', () => {
     // Props
     ['with label', { props: { label: '+1' } }],
     ['with icon', { props: { icon: 'i-lucide-image' } }],
+    ['with position start', { props: { position: 'start', icon: 'i-lucide-image' } }],
+    ['with position end', { props: { position: 'end', icon: 'i-lucide-image' } }],
     ['with avatar', { props: { avatar: { src: 'https://github.com/benjamincanac.png' } } }],
     ['with orientation vertical', { props: { orientation: 'vertical' } }],
     ['with decorative', { props: { decorative: true } }],

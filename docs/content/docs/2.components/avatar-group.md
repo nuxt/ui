@@ -69,6 +69,27 @@ slots:
 :u-avatar{src="https://github.com/noook.png" alt="Neil Richter" loading="lazy"}
 ::
 
+### Color :badge{label="Soon" class="align-text-top"}
+
+Use the `color` prop to change the color of all the avatars.
+
+::component-code
+---
+prettier: true
+props:
+  color: primary
+slots:
+  default: |
+
+    <UAvatar alt="Benjamin Canac" />
+    <UAvatar alt="Romain Hamel" />
+    <UAvatar alt="Neil Richter" />
+---
+:u-avatar{alt="Benjamin Canac"}
+:u-avatar{alt="Romain Hamel"}
+:u-avatar{alt="Neil Richter"}
+::
+
 ## Examples
 
 ### With tooltip
