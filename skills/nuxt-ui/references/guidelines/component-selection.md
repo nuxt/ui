@@ -85,7 +85,7 @@ Decision matrices for choosing the right component. When in doubt, use the MCP `
 
 ## Markdown
 
-When rendering markdown (for instance with Comark), **prefer Prose components** — they are styled and tuned for markdown contexts. Generic Nuxt UI components can also be used. `<ComarkRenderer>` (or `<Comark>`) auto-resolves `ProseX` components when `@nuxt/ui` is installed. In markdown, the `Prose` prefix can be omitted (`::callout`, `::steps`, etc.).
+When rendering Markdown (for instance with Comark), **prefer Prose components** — they are styled and tuned for Markdown contexts. Generic Nuxt UI components can also be used. `<ComarkRenderer>` (or `<Comark>`) auto-resolves `ProseX` components when `@nuxt/ui` is installed. In Markdown, the `Prose` prefix can be omitted (`::callout`, `::steps`, etc.).
 
 | Need | Use | Not |
 |---|---|---|
@@ -100,9 +100,6 @@ When rendering markdown (for instance with Comark), **prefer Prose components** 
 - Prose components use native Vue slots — Comark maps named `#slot` blocks directly to `<slot name="..." />`
 - Theme via `appConfig.ui.prose.<name>` using the same override pattern as other Nuxt UI components
 - `Callout` colors: `neutral` (default), `primary`, `secondary`, `info`, `success`, `warning`, `error`
-- Shorthand callout aliases: `::note`, `::tip`, `::warning`, `::caution` — expand to `Callout` with preset color + icon
-- `Tabs` `sync` prop persists selected tab to localStorage; `hash` scrolls to an anchor on tab change
-- `Steps` `level` prop sets the heading level the step titles map to (default: `3`)
 
 ## Layout containers
 

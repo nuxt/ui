@@ -153,7 +153,26 @@ Quick-reference index of all 125+ components. For full API docs (props, slots, e
 | `UPricingPlan` | Individual pricing plan card |
 | `UPricingTable` | Feature comparison table |
 
-## Prose (Markdown)
+## Prose — Base Typography
+
+Standard Markdown elements auto-resolved by Comark/Content/MDC. No `::` prefix needed — they map directly from markdown syntax (`# Heading` → `ProseH1`, `**bold**` → `ProseStrong`, etc.). Themed via `appConfig.ui.prose.<name>`.
+
+| Component | Renders | Notable |
+|---|---|---|
+| `H1` `H2` `H3` `H4` | Headings | H1–H3 get anchor links + TOC entries |
+| `P` | Paragraph | |
+| `A` | Link | External links get target/rel handling |
+| `Strong` | Bold | |
+| `Em` | Italic | |
+| `Blockquote` | Blockquote | |
+| `Hr` | Horizontal rule | |
+| `Ul` `Ol` `Li` | Lists | Supports nesting and mixed lists |
+| `Table` `Thead` `Tbody` `Tr` `Th` `Td` | Tables | |
+| `Img` | Image | Zoom on click (`:zoom="false"` to disable), `@nuxt/image` support |
+| `Pre` | Code block | Copy button, filename + icon, line highlighting (`{2,4-6}`), diff |
+| `Code` | Inline code | `color` and `lang` props |
+
+## Prose — Feature Components
 
 Nuxt UI-specific Prose components. In markdown files they are used **without the `Prose` prefix** (e.g. `::callout`, `::steps`). In Vue they are referenced as `ProseCallout`, `ProseSteps`, etc. Comark resolves them automatically when `@nuxt/ui` is installed.
 
