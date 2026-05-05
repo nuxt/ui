@@ -100,6 +100,11 @@ export default defineLocale<Messages>({
       decrement: 'Azalt',
       increment: 'Artır'
     },
+    listbox: {
+      noData: 'Məlumat yoxdur',
+      noMatch: 'Uyğun məlumat tapılmadı',
+      search: 'Axtar…'
+    },
     modal: {
       close: 'Bağla'
     },
@@ -119,6 +124,10 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'Kodu buferə kopyala'
+      },
+      prompt: {
+        copy: 'Təlimatı kopyala',
+        openIn: '{name} ilə aç'
       }
     },
     sidebar: {

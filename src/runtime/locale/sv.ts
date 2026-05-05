@@ -100,6 +100,11 @@ export default defineLocale<Messages>({
       decrement: 'Minska',
       increment: 'Öka'
     },
+    listbox: {
+      noData: 'Inga data',
+      noMatch: 'Inga matchande data',
+      search: 'Sök…'
+    },
     modal: {
       close: 'Stäng'
     },
@@ -119,6 +124,10 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'Kopiera kod till urklipp'
+      },
+      prompt: {
+        copy: 'Kopiera prompt',
+        openIn: 'Öppna i {name}'
       }
     },
     sidebar: {

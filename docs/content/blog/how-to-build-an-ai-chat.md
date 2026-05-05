@@ -29,7 +29,7 @@ By the end of this tutorial, you'll have a fully functional AI chatbot with:
 - **Server-side AI integration** using Nitro API routes and the AI SDK
 
 ::callout{icon="i-simple-icons-github"}
-Check out the [`Nuxt`](https://github.com/nuxt-ui-templates/chat){target="_blank"} and [`Vue`](https://github.com/nuxt-ui-templates/chat-vue){target="_blank"} AI Chat templates on GitHub for production-ready implementations with authentication, database persistence, and more.
+Check out the [`Nuxt`](https://github.com/nuxt-ui-templates/chat) and [`Vue`](https://github.com/nuxt-ui-templates/chat-vue) AI Chat templates on GitHub for production-ready implementations with authentication, database persistence, and more.
 ::
 
 ## Prerequisites
@@ -54,19 +54,19 @@ Install Nuxt UI and the AI-specific dependencies:
 
 ::code-group{sync="pm"}
 ```bash [pnpm]
-pnpm add @nuxt/ui tailwindcss @nuxtjs/mdc @nuxthub/core drizzle-orm drizzle-kit @libsql/client ai @ai-sdk/vue zod
+pnpm add @nuxt/ui tailwindcss @comark/nuxt @shikijs/langs @nuxthub/core drizzle-orm drizzle-kit @libsql/client ai @ai-sdk/vue zod
 ```
 
 ```bash [yarn]
-yarn add @nuxt/ui tailwindcss @nuxtjs/mdc @nuxthub/core drizzle-orm drizzle-kit @libsql/client ai @ai-sdk/vue zod
+yarn add @nuxt/ui tailwindcss @comark/nuxt @shikijs/langs @nuxthub/core drizzle-orm drizzle-kit @libsql/client ai @ai-sdk/vue zod
 ```
 
 ```bash [npm]
-npm install @nuxt/ui tailwindcss @nuxtjs/mdc @nuxthub/core drizzle-orm drizzle-kit @libsql/client ai @ai-sdk/vue zod
+npm install @nuxt/ui tailwindcss @comark/nuxt @shikijs/langs @nuxthub/core drizzle-orm drizzle-kit @libsql/client ai @ai-sdk/vue zod
 ```
 
 ```bash [bun]
-bun add @nuxt/ui tailwindcss @nuxtjs/mdc @nuxthub/core drizzle-orm drizzle-kit @libsql/client ai @ai-sdk/vue zod
+bun add @nuxt/ui tailwindcss @comark/nuxt @shikijs/langs @nuxthub/core drizzle-orm drizzle-kit @libsql/client ai @ai-sdk/vue zod
 ```
 ::
 
@@ -79,7 +79,7 @@ Update your `nuxt.config.ts` to register the modules:
 export default defineNuxtConfig({
   modules: [
     '@nuxt/ui',
-    '@nuxtjs/mdc',
+    '@comark/nuxt',
     '@nuxthub/core'
   ],
 
@@ -88,14 +88,12 @@ export default defineNuxtConfig({
   },
 
   css: ['~/assets/css/main.css'],
-
-  mdc: {
-    headings: {
-      anchorLinks: false // Disable anchor links in AI responses
-    }
-  },
 })
 ```
+::
+
+::note{to="/docs/typography"}
+`@comark/nuxt` automatically enables Nuxt UI's [prose components](/docs/typography), so Markdown rendered by Comark is styled to match your theme.
 ::
 
 Create the main CSS file to import Tailwind CSS and Nuxt UI:
@@ -243,6 +241,8 @@ import {
 } from 'ai'
 import type { UIMessage } from 'ai'
 
+const DEFAULT_MODEL = 'anthropic/claude-haiku-4.5'
+
 const MODELS = [
   { value: 'openai/gpt-5-nano', label: 'GPT-5 Nano' },
   { value: 'anthropic/claude-haiku-4.5', label: 'Claude Haiku 4.5' },
@@ -254,10 +254,10 @@ export default defineEventHandler(async (event) => {
     id: z.string()
   }).parse)
 
-  const { model, messages } = await readValidatedBody(event, z.object({
+  const { model = DEFAULT_MODEL, messages } = await readValidatedBody(event, z.object({
     model: z.string().refine(value => MODELS.some(m => m.value === value), {
       message: 'Invalid model'
-    }),
+    }).optional(),
     messages: z.array(z.custom<UIMessage>())
   }).parse)
 
@@ -273,7 +273,7 @@ export default defineEventHandler(async (event) => {
   // Generate a title for the chat if it doesn't have one
   if (!chat.title) {
     const { text: title } = await generateText({
-      model: 'anthropic/claude-haiku-4.5',
+      model: DEFAULT_MODEL,
       system: `Generate a short title (max 30 characters) based on the user's message. No quotes or punctuation.`,
       prompt: JSON.stringify(messages[0])
     })
@@ -468,6 +468,44 @@ The [`UChatPrompt`](/docs/components/chat-prompt) component automatically handle
 - A loading state when `status` is set to `streaming`
 - Focus management and keyboard shortcuts
 
+### Setting up Markdown rendering
+
+AI models often respond with Markdown formatting (code blocks, lists, bold text, etc.). Before building the chat page, create a custom [`Comark`](https://comark.dev) component that will handle streaming Markdown rendering. Using [`defineComarkComponent`](https://comark.dev/rendering/vue#code-definecomarkcomponent), you can enable the `highlight` plugin for syntax highlighting in code blocks and register additional [Shiki](https://shiki.style) languages beyond the defaults (TypeScript, JavaScript, Vue, Shell, JSON, YAML, Markdown):
+
+::code-tree-intersection
+```ts [app/components/chat/Comark.ts]
+import highlight from '@comark/nuxt/plugins/highlight'
+import python from '@shikijs/langs/python'
+import sql from '@shikijs/langs/sql'
+import go from '@shikijs/langs/go'
+import rust from '@shikijs/langs/rust'
+
+export default defineComarkComponent({
+  name: 'ChatComark',
+  plugins: [
+    highlight({
+      languages: [python, sql, go, rust]
+    })
+  ],
+  class: '*:first:mt-0 *:last:mb-0'
+})
+```
+::
+
+This creates a `<ChatComark>` component we'll use in the chat page to render assistant messages and reasoning content.
+
+Since Comark uses Shiki with dual themes, you need to add the following CSS to your stylesheet for dark mode support:
+
+```css [app/assets/css/main.css]
+html.dark .shiki span {
+  color: var(--shiki-dark) !important;
+  background-color: var(--shiki-dark-bg) !important;
+  font-style: var(--shiki-dark-font-style) !important;
+  font-weight: var(--shiki-dark-font-weight) !important;
+  text-decoration: var(--shiki-dark-text-decoration) !important;
+}
+```
+
 ## Creating the chat page
 
 The chat page is where the actual conversation happens. It integrates the AI SDK's [`Chat`](https://ai-sdk.dev/docs/reference/ai-sdk-ui/chat) class and [`DefaultChatTransport`](https://ai-sdk.dev/docs/reference/ai-sdk-ui/default-chat-transport) for real-time streaming.
@@ -479,7 +517,7 @@ The chat page is where the actual conversation happens. It integrates the AI SDK
 <script setup lang="ts">
 import { DefaultChatTransport, isReasoningUIPart, isTextUIPart } from 'ai'
 import { Chat } from '@ai-sdk/vue'
-import { isReasoningStreaming } from '@nuxt/ui/utils/ai'
+import { isPartStreaming } from '@nuxt/ui/utils/ai'
 
 const route = useRoute()
 const toast = useToast()
@@ -546,21 +584,24 @@ onMounted(() => {
               <UChatReasoning
                 v-if="isReasoningUIPart(part)"
                 :text="part.text"
-                :streaming="isReasoningStreaming(message, index, chat)"
+                :streaming="isPartStreaming(part)"
               >
-                <MDC
-                  :value="part.text"
-                  :cache-key="`reasoning-${message.id}-${index}`"
-                  class="*:first:mt-0 *:last:mb-0"
+                <ChatComark
+                  :markdown="part.text"
+                  :streaming="isPartStreaming(part)"
                 />
               </UChatReasoning>
 
-              <MDC
-                v-else-if="isTextUIPart(part)"
-                :value="part.text"
-                :cache-key="`${message.id}-${index}`"
-                class="*:first:mt-0 *:last:mb-0"
-              />
+              <template v-else-if="isTextUIPart(part)">
+                <ChatComark
+                  v-if="message.role === 'assistant'"
+                  :markdown="part.text"
+                  :streaming="isPartStreaming(part)"
+                />
+                <p v-else-if="message.role === 'user'" class="whitespace-pre-wrap">
+                  {{ part.text }}
+                </p>
+              </template>
             </template>
           </template>
         </UChatMessages>
@@ -609,13 +650,9 @@ The [`UChatMessages`](/docs/components/chat-messages) component is purpose-built
 - A loading indicator while the assistant processes
 - An "Auto scroll" button when scrolled up
 
-**Rendering Markdown with MDC**
+**Rendering Message Parts**
 
-AI models often respond with Markdown formatting (code blocks, lists, bold text, etc.). We iterate over message `parts` using AI SDK helpers like `isTextUIPart` and `isReasoningUIPart`, rendering text with the [`MDC`](https://github.com/nuxt-content/mdc#mdc) component from [`@nuxtjs/mdc`](https://github.com/nuxt-content/mdc) and reasoning with [`UChatReasoning`](/docs/components/chat-reasoning). The `isReasoningStreaming` utility from `@nuxt/ui/utils/ai` detects if a reasoning part is currently being streamed.
-
-::note{to="/docs/typography"}
-Nuxt UI provides pre-styled prose components, so your markdown content will be automatically styled to match your theme.
-::
+We iterate over message `parts` using AI SDK helpers like `isTextUIPart` and `isReasoningUIPart`, rendering assistant text with the `<ChatComark>` component we created earlier and reasoning content with [`UChatReasoning`](/docs/components/chat-reasoning). The `isPartStreaming` utility from `@nuxt/ui/utils/ai` detects if a part is currently being streamed.
 
 **UChatPromptSubmit Component**
 
@@ -758,7 +795,7 @@ async function createChat() {
 <script setup lang="ts">
 import { DefaultChatTransport, isReasoningUIPart, isTextUIPart } from 'ai'
 import { Chat } from '@ai-sdk/vue'
-import { isReasoningStreaming } from '@nuxt/ui/utils/ai'
+import { isPartStreaming } from '@nuxt/ui/utils/ai'
 
 const route = useRoute()
 const toast = useToast()
@@ -828,21 +865,24 @@ onMounted(() => {
               <UChatReasoning
                 v-if="isReasoningUIPart(part)"
                 :text="part.text"
-                :streaming="isReasoningStreaming(message, index, chat)"
+                :streaming="isPartStreaming(part)"
               >
-                <MDC
-                  :value="part.text"
-                  :cache-key="`reasoning-${message.id}-${index}`"
-                  class="*:first:mt-0 *:last:mb-0"
+                <ChatComark
+                  :markdown="part.text"
+                  :streaming="isPartStreaming(part)"
                 />
               </UChatReasoning>
 
-              <MDC
-                v-else-if="isTextUIPart(part)"
-                :value="part.text"
-                :cache-key="`${message.id}-${index}`"
-                class="*:first:mt-0 *:last:mb-0"
-              />
+              <template v-else-if="isTextUIPart(part)">
+                <ChatComark
+                  v-if="message.role === 'assistant'"
+                  :markdown="part.text"
+                  :streaming="isPartStreaming(part)"
+                />
+                <p v-else-if="message.role === 'user'" class="whitespace-pre-wrap">
+                  {{ part.text }}
+                </p>
+              </template>
             </template>
           </template>
         </UChatMessages>
@@ -940,7 +980,7 @@ Update the chat page to include the model selector and pass the selected model t
 <script setup lang="ts">
 import { DefaultChatTransport, isReasoningUIPart, isTextUIPart } from 'ai'
 import { Chat } from '@ai-sdk/vue'
-import { isReasoningStreaming } from '@nuxt/ui/utils/ai'
+import { isPartStreaming } from '@nuxt/ui/utils/ai'
 
 const route = useRoute()
 const toast = useToast()
@@ -1010,21 +1050,24 @@ onMounted(() => {
               <UChatReasoning
                 v-if="isReasoningUIPart(part)"
                 :text="part.text"
-                :streaming="isReasoningStreaming(message, index, chat)"
+                :streaming="isPartStreaming(part)"
               >
-                <MDC
-                  :value="part.text"
-                  :cache-key="`reasoning-${message.id}-${index}`"
-                  class="*:first:mt-0 *:last:mb-0"
+                <ChatComark
+                  :markdown="part.text"
+                  :streaming="isPartStreaming(part)"
                 />
               </UChatReasoning>
 
-              <MDC
-                v-else-if="isTextUIPart(part)"
-                :value="part.text"
-                :cache-key="`${message.id}-${index}`"
-                class="*:first:mt-0 *:last:mb-0"
-              />
+              <template v-else-if="isTextUIPart(part)">
+                <ChatComark
+                  v-if="message.role === 'assistant'"
+                  :markdown="part.text"
+                  :streaming="isPartStreaming(part)"
+                />
+                <p v-else-if="message.role === 'user'" class="whitespace-pre-wrap">
+                  {{ part.text }}
+                </p>
+              </template>
             </template>
           </template>
         </UChatMessages>
@@ -1109,7 +1152,7 @@ You've built a complete AI chatbot with:
 
 - **A complete chat interface** using Nuxt UI components
 - **Real-time streaming responses** with the AI SDK
-- **Markdown rendering** with MDC for rich content display
+- **Streaming Markdown rendering** with Comark for rich content display
 - **Multi-model support** via AI Gateway
 - **Database persistence** with SQLite (local) / Turso (production) and Drizzle ORM
 

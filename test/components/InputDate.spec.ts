@@ -22,11 +22,17 @@ describe('InputDate', () => {
     ['with modelValue', { props: { modelValue: new CalendarDate(2025, 1, 1) } }],
     ['with default value', { props: { defaultValue: new CalendarDate(2025, 1, 1) } }],
     ['with range', { props: { range: true } }],
+    ['with range and modelValue', { props: { range: true, modelValue: { start: new CalendarDate(2025, 1, 1), end: new CalendarDate(2025, 1, 15) } } }],
+    ['with range and defaultValue', { props: { range: true, defaultValue: { start: new CalendarDate(2025, 1, 1), end: new CalendarDate(2025, 1, 15) } } }],
     ['with disabled', { props: { disabled: true } }],
     ['with readonly', { props: { readonly: true } }],
     ['with isDateUnavailable', { props: { isDateUnavailable: () => true } }],
     ['with minValue', { props: { minValue: new CalendarDate(2025, 1, 1) } }],
     ['with maxValue', { props: { maxValue: new CalendarDate(2025, 1, 31) } }],
+    ['with icon', { props: { icon: 'i-lucide-clock' } }],
+    ['with leadingIcon', { props: { leadingIcon: 'i-lucide-arrow-left' } }],
+    ['with trailingIcon', { props: { trailingIcon: 'i-lucide-arrow-right' } }],
+    ['with separatorIcon', { props: { range: true, separatorIcon: 'i-lucide-arrow-right' } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { size } }]),
     ...variants.map((variant: string) => [`with primary variant ${variant}`, { props: { variant, defaultValue: new CalendarDate(2025, 1, 15) } }]),
     ...variants.map((variant: string) => [`with neutral variant ${variant}`, { props: { variant, color: 'neutral', defaultValue: new CalendarDate(2025, 1, 15) } }]),
@@ -42,7 +48,7 @@ describe('InputDate', () => {
   ])
 
   describe('emits', () => {
-    test('update:modelValue event single', async () => {
+    test('update:modelValue event', async () => {
       const wrapper = await mountSuspended(InputDate)
       const date = new CalendarDate(2025, 1, 1)
 
@@ -52,7 +58,7 @@ describe('InputDate', () => {
 
     test('update:modelValue event range', async () => {
       const wrapper = await mountSuspended(InputDate, { props: { range: true } })
-      const date = [new CalendarDate(2025, 1, 1), new CalendarDate(2025, 1, 2)]
+      const date = { start: new CalendarDate(2025, 1, 1), end: new CalendarDate(2025, 1, 2) }
 
       await wrapper.setValue(date)
       expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [[date]] })

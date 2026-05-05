@@ -30,6 +30,7 @@ describe('ContentNavigation', () => {
   }, {
     title: 'Components',
     path: '/components',
+    disabled: true,
     children: [{
       title: 'ContentNavigation',
       path: '/components/content-navigation'

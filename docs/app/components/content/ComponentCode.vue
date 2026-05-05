@@ -8,6 +8,8 @@ import { CalendarDate, Time } from '@internationalized/date'
 import * as theme from '#build/ui'
 import { get, set } from '#ui/utils'
 
+const { track } = useAnalytics()
+
 interface CastImport {
   name: string
   from: string
@@ -21,6 +23,7 @@ interface Cast {
 
 type CastDateValue = [number, number, number]
 type CastTimeValue = [number, number, number]
+type CastTimeRangeValue = { start: CastTimeValue, end: CastTimeValue }
 
 const castMap: Record<string, Cast> = {
   'DateValue': {
@@ -52,6 +55,13 @@ const castMap: Record<string, Cast> = {
     get: (args: CastTimeValue) => new Time(...args),
     template: (value: Time) => {
       return value ? `new Time(${value.hour}, ${value.minute}, ${value.second})` : 'null'
+    },
+    imports: [{ name: 'Time', from: '@internationalized/date' }]
+  },
+  'TimeRangeValue': {
+    get: (args: CastTimeRangeValue) => ({ start: new Time(...args.start), end: new Time(...args.end) }),
+    template: (value: { start: Time, end: Time }) => {
+      return value ? `{ start: new Time(${value.start.hour}, ${value.start.minute}, ${value.start.second}), end: new Time(${value.end.hour}, ${value.end.minute}, ${value.end.second}) }` : 'null'
     },
     imports: [{ name: 'Time', from: '@internationalized/date' }]
   }
@@ -190,7 +200,7 @@ const options = computed(() => {
   })
 })
 
-const code = computed(() => {
+function buildCode() {
   let code = ''
 
   if (props.prose) {
@@ -228,8 +238,9 @@ ${props.slots?.default}
     code += `
 <script setup lang="ts">
 `
-    // Collect imports from cast types
     const importsBySource = new Map<string, Set<string>>()
+
+    // Collect imports from cast types
     for (const key of props.external) {
       const cast = props.cast?.[key]
       if (cast && castMap[cast]) {
@@ -344,6 +355,32 @@ ${props.slots?.default}
   }
 
   return code
+}
+
+function wrapCode(markdown: string, cssClass: string) {
+  if (props.collapse) {
+    return markdown.replace('::code-collapse', `::code-collapse{class="${cssClass}"}`)
+  }
+  return `::div{class="${cssClass}"}\n${markdown}\n::`
+}
+
+const code = computed(() => {
+  const nuxtCode = buildCode()
+  const vueCode = addVueImports(nuxtCode)
+
+  if (vueCode !== nuxtCode) {
+    return wrapCode(nuxtCode, 'nuxt-only') + '\n\n' + wrapCode(vueCode, 'vue-only')
+  }
+
+  return nuxtCode
+})
+
+const playgroundUrl = computed(() => {
+  if (props.prose) return null
+  const rawMarkdown = buildCode()
+  const vueMarkdown = addVueImports(rawMarkdown)
+  const match = vueMarkdown.match(/```vue[^\n]*\n([\s\S]*?)\n```/)
+  return match?.[1] ? getPlaygroundUrl(match[1].trim()) : null
 })
 
 const codeKey = computed(() => `component-code-${name}-${hash(props)}`)
@@ -434,6 +471,20 @@ const { data: ast } = useAsyncData(codeKey, async () => {
       </div>
 
       <ClientOnly>
+        <UTooltip v-if="playgroundUrl" text="Open in playground" :content="{ side: 'right' }">
+          <UButton
+            :to="playgroundUrl"
+            target="_blank"
+            icon="i-lucide-play"
+            color="neutral"
+            variant="outline"
+            size="sm"
+            class="absolute -bottom-[13px] -right-[13px] z-1 rounded-full lg:opacity-0 lg:group-hover/component:opacity-100 ring-muted transition-opacity duration-200"
+            aria-label="Open in playground"
+            @click="track('Playground Opened', { component: camelName, source: 'code' })"
+          />
+        </UTooltip>
+
         <LazyComponentThemeVisualizer
           :container="componentContainer"
           :position-container="wrapperContainer"

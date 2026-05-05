@@ -99,6 +99,11 @@ export type Messages = {
     decrement: string
     increment: string
   }
+  listbox: {
+    noData: string
+    noMatch: string
+    search: string
+  }
   modal: {
     close: string
   }
@@ -118,6 +123,10 @@ export type Messages = {
     }
     pre: {
       copy: string
+    }
+    prompt: {
+      copy: string
+      openIn: string
     }
   }
   chatReasoning: {

@@ -9,7 +9,6 @@ links:
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/ChatReasoning.vue
-navigation.badge: Soon
 ---
 
 ## Usage
@@ -63,7 +62,7 @@ props:
 ::
 
 ::tip
-Use the `isReasoningStreaming` utility from `@nuxt/ui/utils/ai` to determine if a reasoning part is currently being streamed.
+Use the `isPartStreaming` utility from `@nuxt/ui/utils/ai` to determine if a part is currently being streamed.
 ::
 
 ### Shimmer

@@ -85,10 +85,10 @@ export interface ChatPromptSubmitEmits {
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { useForwardProps } from 'reka-ui'
 import { reactiveOmit } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { useComponentUI } from '../composables/useComponentUI'
+import { useComponentProps } from '../composables/useComponentProps'
+import { useForwardProps } from '../composables/useForwardProps'
 import { useLocale } from '../composables/useLocale'
 import { transformUI } from '../utils'
 import { tv } from '../utils/tv'
@@ -96,7 +96,7 @@ import UButton from './Button.vue'
 
 defineOptions({ inheritAttrs: false })
 
-const props = withDefaults(defineProps<ChatPromptSubmitProps>(), {
+const _props = withDefaults(defineProps<ChatPromptSubmitProps>(), {
   status: 'ready',
   streamingColor: 'neutral',
   streamingVariant: 'subtle',
@@ -108,11 +108,14 @@ const props = withDefaults(defineProps<ChatPromptSubmitProps>(), {
 const emits = defineEmits<ChatPromptSubmitEmits>()
 const slots = defineSlots<ButtonSlots>()
 
+const props = useComponentProps('chatPromptSubmit', _props)
+
 const { t } = useLocale()
 const appConfig = useAppConfig() as ChatPromptSubmit['AppConfig']
-const uiProp = useComponentUI('chatPromptSubmit', props)
 
-const buttonProps = useForwardProps(reactiveOmit(props, 'icon', 'color', 'variant', 'status', 'streamingIcon', 'streamingColor', 'streamingVariant', 'submittedIcon', 'submittedColor', 'submittedVariant', 'errorIcon', 'errorColor', 'errorVariant', 'class', 'ui'))
+const buttonProps = useForwardProps(reactiveOmit(props, 'icon', 'color', 'variant', 'status', 'disabled', 'streamingIcon', 'streamingColor', 'streamingVariant', 'submittedIcon', 'submittedColor', 'submittedVariant', 'errorIcon', 'errorColor', 'errorVariant', 'class', 'ui'))
+
+const disabled = computed(() => props.status === 'ready' ? props.disabled : false)
 
 const statusButtonProps = computed(() => ({
   ready: {
@@ -156,11 +159,12 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.chatPromptSu
     v-bind="{
       ...buttonProps,
       ...statusButtonProps,
+      disabled,
       'aria-label': t('chatPromptSubmit.label'),
       ...$attrs
     }"
-    :class="ui.base({ class: [uiProp?.base, props.class] })"
-    :ui="transformUI(ui, uiProp)"
+    :class="ui.base({ class: [props.ui?.base, props.class] })"
+    :ui="transformUI(ui, props.ui)"
   >
     <template v-for="(_, name) in slots" #[name]="slotData">
       <slot :name="name" v-bind="slotData" />

@@ -6,21 +6,36 @@ export function useHeader() {
     to: '/docs',
     active: route.path.startsWith('/docs/')
   }, {
-    label: 'Figma',
-    to: '/figma'
-  }, {
     label: 'Templates',
     to: '/templates'
   }, {
-    label: 'Showcase',
-    to: '/showcase'
+    label: 'Resources',
+    active: route.path.startsWith('/showcase') || route.path.startsWith('/community') || route.path.startsWith('/blog'),
+    children: [{
+      label: 'Showcase',
+      description: 'Discover websites built with Nuxt UI.',
+      icon: 'i-lucide-presentation',
+      to: '/showcase'
+    }, {
+      label: 'Community',
+      description: 'Explore projects built around Nuxt UI.',
+      icon: 'i-lucide-globe',
+      to: '/community'
+    }, {
+      label: 'Playground',
+      description: 'Try Nuxt UI components live in your browser.',
+      icon: 'i-lucide-square-terminal',
+      to: '/play',
+      target: '_blank'
+    }, {
+      label: 'Blog',
+      description: 'Read the latest news and updates.',
+      icon: 'i-lucide-newspaper',
+      to: '/blog'
+    }]
   }, {
-    label: 'Community',
-    to: '/community'
-  }, {
-    label: 'Blog',
-    to: '/blog',
-    active: route.path.startsWith('/blog')
+    label: 'Figma',
+    to: '/figma'
   }, {
     label: 'Releases',
     to: '/releases'
@@ -47,10 +62,6 @@ export function useHeader() {
     to: '/docs/typography',
     active: route.path.startsWith('/docs/typography')
   }, {
-    label: 'Figma',
-    icon: 'i-simple-icons-figma',
-    to: '/figma'
-  }, {
     label: 'Templates',
     icon: 'i-lucide-panels-top-left',
     to: '/templates'
@@ -63,14 +74,19 @@ export function useHeader() {
     icon: 'i-lucide-globe',
     to: '/community'
   }, {
-    label: 'Team',
-    icon: 'i-lucide-users',
-    to: '/team'
+    label: 'Playground',
+    icon: 'i-lucide-square-terminal',
+    to: '/play',
+    target: '_blank'
   }, {
     label: 'Blog',
     icon: 'i-lucide-newspaper',
     to: '/blog',
     active: route.path.startsWith('/blog')
+  }, {
+    label: 'Figma',
+    icon: 'i-simple-icons-figma',
+    to: '/figma'
   }, {
     label: 'Releases',
     icon: 'i-lucide-rocket',

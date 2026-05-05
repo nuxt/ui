@@ -6,7 +6,7 @@ import { computePosition } from '@floating-ui/dom'
 import type { Strategy, Placement } from '@floating-ui/dom'
 import type { Editor } from '@tiptap/vue-3'
 import { VueRenderer } from '@tiptap/vue-3'
-import type { SuggestionProps } from '@tiptap/suggestion'
+import type { SuggestionOptions, SuggestionProps } from '@tiptap/suggestion'
 import Suggestion from '@tiptap/suggestion'
 import { PluginKey } from '@tiptap/pm/state'
 import type { FloatingUIOptions } from '../types/editor'
@@ -65,6 +65,10 @@ export interface EditorMenuOptions<T = any> {
    * @see https://floating-ui.com/docs/computePosition#options
    */
   options?: FloatingUIOptions
+  /**
+   * Optional TipTap Suggestion matching options.
+   */
+  suggestion?: Omit<Partial<SuggestionOptions>, 'pluginKey' | 'editor' | 'char' | 'items' | 'command' | 'render'>
   /**
    * The DOM element to append the menu to. Default is the editor's parent element.
    *
@@ -333,7 +337,8 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
     element.addEventListener('mousedown', handleMouseDown)
 
     const appendToElement = typeof options.appendTo === 'function' ? options.appendTo() : options.appendTo
-    ;(appendToElement ?? options.editor.view.dom.parentElement)?.appendChild(element)
+    const container = appendToElement ?? options.editor.view.dom.parentElement
+    container?.appendChild(element)
     if (renderer.element) {
       element.appendChild(renderer.element)
     }
@@ -490,6 +495,7 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
 
   // Create the suggestion plugin
   const plugin = Suggestion({
+    ...(options.suggestion || {}),
     pluginKey: pluginKeyInstance,
     editor: options.editor,
     char: options.char,

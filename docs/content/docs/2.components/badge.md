@@ -104,6 +104,8 @@ Use the `avatar` prop to show an [Avatar](/docs/components/avatar) inside the Ba
 ::component-code
 ---
 prettier: true
+ignore:
+  - avatar.loading
 props:
   avatar:
     src: 'https://github.com/nuxt.png'

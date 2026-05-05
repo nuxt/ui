@@ -2,9 +2,9 @@ export function useFrameworks() {
   const framework = useCookie('nuxt-ui-framework', { default: () => 'nuxt' })
   const { track } = useAnalytics()
 
-  function setFramework(value: 'nuxt' | 'vue') {
+  function setFramework(value: 'nuxt' | 'vue', source?: string) {
     framework.value = value
-    track('Framework Switched', { framework: value })
+    track('Framework Switched', { framework: value, source: source || 'search' })
   }
 
   const frameworks = computed(() => [{
@@ -21,6 +21,7 @@ export function useFrameworks() {
 
   return {
     framework,
+    setFramework,
     frameworks
   }
 }

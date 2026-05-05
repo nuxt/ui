@@ -19,7 +19,7 @@ export default (options: Required<ModuleOptions>) => ({
         handle: 'mb-4'
       },
       right: {
-        content: 'flex-row',
+        content: 'flex-row rtl:flex-row-reverse',
         handle: '!ml-4'
       },
       bottom: {
@@ -27,7 +27,7 @@ export default (options: Required<ModuleOptions>) => ({
         handle: 'mt-4'
       },
       left: {
-        content: 'flex-row-reverse',
+        content: 'flex-row-reverse rtl:flex-row',
         handle: '!mr-4'
       }
     },

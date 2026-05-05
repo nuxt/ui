@@ -101,6 +101,11 @@ export default defineLocale<Messages>({
       decrement: 'تقليل',
       increment: 'زيادة'
     },
+    listbox: {
+      noData: 'لا توجد بيانات',
+      noMatch: 'لا توجد نتائج مطابقة',
+      search: 'بحث…'
+    },
     modal: {
       close: 'إغلاق'
     },
@@ -120,6 +125,10 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'نسخ الكود إلى الحافظة'
+      },
+      prompt: {
+        copy: 'نسخ التعليمات',
+        openIn: 'فتح في {name}'
       }
     },
     sidebar: {

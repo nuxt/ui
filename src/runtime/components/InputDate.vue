@@ -53,8 +53,8 @@ export interface InputDateProps<R extends boolean = false> extends UseComponentI
   ui?: InputDate['slots']
 }
 
-export interface InputDateEmits<R extends boolean> extends Omit<DateFieldRootEmits & DateRangeFieldRootEmits, 'update:modelValue'> {
-  'update:modelValue': [date: InputDateModelValue<R>]
+export interface InputDateEmits<R extends boolean = false> extends Omit<DateFieldRootEmits & DateRangeFieldRootEmits, 'update:modelValue'> {
+  'update:modelValue': [value: InputDateModelValue<R>]
   'change': [event: Event]
   'blur': [event: FocusEvent]
   'focus': [event: FocusEvent]
@@ -70,11 +70,12 @@ export interface InputDateSlots {
 
 <script setup lang="ts" generic="R extends boolean">
 import { computed, onMounted, ref } from 'vue'
-import { useForwardPropsEmits } from 'reka-ui'
+import { } from 'reka-ui'
+import { useForwardProps } from '../composables/useForwardProps'
 import { DateField as SingleDateField, DateRangeField as RangeDateField } from 'reka-ui/namespaced'
 import { reactiveOmit, createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { useComponentUI } from '../composables/useComponentUI'
+import { useComponentProps } from '../composables/useComponentProps'
 import { useFieldGroup } from '../composables/useFieldGroup'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFormField } from '../composables/useFormField'
@@ -84,18 +85,19 @@ import UAvatar from './Avatar.vue'
 
 defineOptions({ inheritAttrs: false })
 
-const props = withDefaults(defineProps<InputDateProps<R>>(), {
+const _props = withDefaults(defineProps<InputDateProps<R>>(), {
   autofocusDelay: 0
 })
 const emits = defineEmits<InputDateEmits<R>>()
 const slots = defineSlots<InputDateSlots>()
 
-const appConfig = useAppConfig() as InputDate['AppConfig']
-const uiProp = useComponentUI('inputDate', props)
+const props = useComponentProps<InputDateProps<R>>('inputDate', _props)
 
-const rootProps = useForwardPropsEmits(reactiveOmit(props, 'id', 'name', 'range', 'modelValue', 'defaultValue', 'color', 'variant', 'size', 'highlight', 'fixed', 'disabled', 'autofocus', 'autofocusDelay', 'icon', 'avatar', 'leading', 'leadingIcon', 'trailing', 'trailingIcon', 'loading', 'loadingIcon', 'separatorIcon', 'class', 'ui'), emits)
-const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, size: formGroupSize, color, id, name, highlight, disabled, ariaAttrs } = useFormField<InputDateProps<R>>(props)
-const { orientation, size: fieldGroupSize } = useFieldGroup<InputDateProps<R>>(props)
+const appConfig = useAppConfig() as InputDate['AppConfig']
+
+const rootProps = useForwardProps(reactiveOmit(props, 'id', 'name', 'range', 'modelValue', 'defaultValue', 'color', 'variant', 'size', 'highlight', 'fixed', 'disabled', 'autofocus', 'autofocusDelay', 'icon', 'avatar', 'leading', 'leadingIcon', 'trailing', 'trailingIcon', 'loading', 'loadingIcon', 'separatorIcon', 'class', 'ui'), emits)
+const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, size: formFieldSize, color, id, name, highlight, disabled, ariaAttrs } = useFormField<InputDateProps<R>>(_props)
+const { orientation, size: fieldGroupSize } = useFieldGroup<InputDateProps<R>>(_props)
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props)
 
 const [DefineSegmentsTemplate, ReuseSegmentsTemplate] = createReusableTemplate<{
@@ -103,13 +105,14 @@ const [DefineSegmentsTemplate, ReuseSegmentsTemplate] = createReusableTemplate<{
   type?: 'start' | 'end'
 }>()
 
-const inputSize = computed(() => fieldGroupSize.value || formGroupSize.value)
+const inputSize = computed(() => fieldGroupSize.value || formFieldSize.value)
 
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.inputDate || {}) })({
-  color: color.value,
+  color: color.value ?? props.color,
   variant: props.variant,
-  size: inputSize.value,
-  highlight: highlight.value,
+  size: inputSize.value ?? props.size,
+  highlight: highlight.value ?? props.highlight,
   fixed: props.fixed,
   loading: props.loading,
   leading: isLeading.value || !!props.avatar || !!slots.leading,
@@ -171,7 +174,7 @@ defineExpose({
       :type="type"
       :part="segment.part"
       data-slot="segment"
-      :class="ui.segment({ class: uiProp?.segment })"
+      :class="ui.segment({ class: props.ui?.segment })"
       :data-segment="segment.part"
     >
       {{ segment.value.trim() }}
@@ -182,12 +185,12 @@ defineExpose({
     v-bind="{ ...rootProps, ...$attrs, ...ariaAttrs }"
     :id="id"
     v-slot="{ segments }"
-    :model-value="(modelValue as DateValue)"
-    :default-value="(defaultValue as DateValue)"
+    :model-value="(props.modelValue as DateValue)"
+    :default-value="(props.defaultValue as DateValue)"
     :name="name"
     :disabled="disabled"
     data-slot="base"
-    :class="ui.base({ class: [uiProp?.base, props.class] })"
+    :class="ui.base({ class: [props.ui?.base, props.class] })"
     @update:model-value="onUpdate"
     @blur="onBlur"
     @focus="onFocus"
@@ -198,23 +201,23 @@ defineExpose({
     <template v-else>
       <ReuseSegmentsTemplate :segments="segments.start" type="start" />
       <slot name="separator" :ui="ui">
-        <UIcon :name="separatorIcon || appConfig.ui.icons.minus" data-slot="separatorIcon" :class="ui.separatorIcon({ class: uiProp?.separatorIcon })" />
+        <UIcon :name="props.separatorIcon || appConfig.ui.icons.minus" data-slot="separatorIcon" :class="ui.separatorIcon({ class: props.ui?.separatorIcon })" />
       </slot>
       <ReuseSegmentsTemplate :segments="segments.end" type="end" />
     </template>
 
     <slot :ui="ui" />
 
-    <span v-if="isLeading || !!avatar || !!slots.leading" data-slot="leading" :class="ui.leading({ class: uiProp?.leading })">
+    <span v-if="isLeading || !!props.avatar || !!slots.leading" data-slot="leading" :class="ui.leading({ class: props.ui?.leading })">
       <slot name="leading" :ui="ui">
-        <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" data-slot="leadingIcon" :class="ui.leadingIcon({ class: uiProp?.leadingIcon })" />
-        <UAvatar v-else-if="!!avatar" :size="((uiProp?.leadingAvatarSize || ui.leadingAvatarSize()) as AvatarProps['size'])" v-bind="avatar" data-slot="leadingAvatar" :class="ui.leadingAvatar({ class: uiProp?.leadingAvatar })" />
+        <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" data-slot="leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
+        <UAvatar v-else-if="!!props.avatar" :size="((props.ui?.leadingAvatarSize || ui.leadingAvatarSize()) as AvatarProps['size'])" v-bind="props.avatar" data-slot="leadingAvatar" :class="ui.leadingAvatar({ class: props.ui?.leadingAvatar })" />
       </slot>
     </span>
 
-    <span v-if="isTrailing || !!slots.trailing" data-slot="trailing" :class="ui.trailing({ class: uiProp?.trailing })">
+    <span v-if="isTrailing || !!slots.trailing" data-slot="trailing" :class="ui.trailing({ class: props.ui?.trailing })">
       <slot name="trailing" :ui="ui">
-        <UIcon v-if="trailingIconName" :name="trailingIconName" data-slot="trailingIcon" :class="ui.trailingIcon({ class: uiProp?.trailingIcon })" />
+        <UIcon v-if="trailingIconName" :name="trailingIconName" data-slot="trailingIcon" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
       </slot>
     </span>
   </DateField.Root>

@@ -100,6 +100,11 @@ export default defineLocale<Messages>({
       decrement: 'घटाना',
       increment: 'बढ़ाना'
     },
+    listbox: {
+      noData: 'कोई डेटा नहीं',
+      noMatch: 'कोई मेल खाता डेटा नहीं',
+      search: 'खोजें…'
+    },
     modal: {
       close: 'बंद करें'
     },
@@ -119,6 +124,10 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'कोड को क्लिपबोर्ड पर कॉपी करें'
+      },
+      prompt: {
+        copy: 'प्रॉम्प्ट कॉपी करें',
+        openIn: '{name} में खोलें'
       }
     },
     sidebar: {

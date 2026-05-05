@@ -7,8 +7,9 @@ exports[`SelectMenu > renders with ariaLabel correctly 1`] = `
 <!--teleport start-->
 
 
+
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
-  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width)" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
+  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width) data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in]" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
     <div tabindex="-1" data-slot="focusScope" class="flex flex-col min-h-0">
       <div data-slot="root" class="relative inline-flex items-center border-b border-default"><input type="text" placeholder="Search…" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent md:text-sm" autocomplete="off" aria-disabled="false" aria-expanded="true" aria-controls="reka-combobox-content-v-0" aria-autocomplete="list" role="combobox" value="" aria-activedescendant="reka-combobox-item-v-3">
         <!--v-if-->
@@ -42,6 +43,7 @@ exports[`SelectMenu > renders with ariaLabel correctly 1`] = `
 </div>
 
 
+
 <!--teleport end-->
 <!--v-if-->"
 `;
@@ -53,8 +55,9 @@ exports[`SelectMenu > renders with arrow correctly 1`] = `
 <!--teleport start-->
 
 
+
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
-  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width)" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
+  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width) data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in]" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
     <div tabindex="-1" data-slot="focusScope" class="flex flex-col min-h-0">
       <div data-slot="root" class="relative inline-flex items-center border-b border-default"><input type="text" placeholder="Search…" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent md:text-sm" autocomplete="off" aria-disabled="false" aria-expanded="true" aria-controls="reka-combobox-content-v-0" aria-autocomplete="list" role="combobox" value="" aria-activedescendant="reka-combobox-item-v-3">
         <!--v-if-->
@@ -85,6 +88,7 @@ exports[`SelectMenu > renders with arrow correctly 1`] = `
     </div><span style="position: absolute; top: 0px; transform-origin: center 0; transform: rotate(180deg); visibility: hidden;"><svg width="10" height="5" rounded="true" viewBox="0 0 12 6" preserveAspectRatio="none" data-slot="arrow" class="fill-bg stroke-default" style="display: block;"><path d="M0 0L4.58579 4.58579C5.36683 5.36683 6.63316 5.36684 7.41421 4.58579L12 0"></path></svg></span>
   </div>
 </div>
+
 
 
 <!--teleport end-->
@@ -119,8 +123,9 @@ exports[`SelectMenu > renders with by correctly 1`] = `
 <!--teleport start-->
 
 
+
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
-  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width)" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
+  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width) data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in]" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
     <div tabindex="-1" data-slot="focusScope" class="flex flex-col min-h-0">
       <div data-slot="root" class="relative inline-flex items-center border-b border-default"><input type="text" placeholder="Search…" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent md:text-sm" autocomplete="off" aria-disabled="false" aria-expanded="true" aria-controls="reka-combobox-content-v-0" aria-autocomplete="list" role="combobox" value="" aria-activedescendant="reka-combobox-item-v-3">
         <!--v-if-->
@@ -154,6 +159,7 @@ exports[`SelectMenu > renders with by correctly 1`] = `
 </div>
 
 
+
 <!--teleport end-->
 <!--v-if-->"
 `;
@@ -165,8 +171,9 @@ exports[`SelectMenu > renders with class correctly 1`] = `
 <!--teleport start-->
 
 
+
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
-  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width)" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
+  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width) data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in]" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
     <div tabindex="-1" data-slot="focusScope" class="flex flex-col min-h-0">
       <div data-slot="root" class="relative inline-flex items-center border-b border-default"><input type="text" placeholder="Search…" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent md:text-sm" autocomplete="off" aria-disabled="false" aria-expanded="true" aria-controls="reka-combobox-content-v-0" aria-autocomplete="list" role="combobox" value="" aria-activedescendant="reka-combobox-item-v-3">
         <!--v-if-->
@@ -200,6 +207,7 @@ exports[`SelectMenu > renders with class correctly 1`] = `
 </div>
 
 
+
 <!--teleport end-->
 <!--v-if-->"
 `;
@@ -211,8 +219,9 @@ exports[`SelectMenu > renders with clear and clearIcon correctly 1`] = `
 <!--teleport start-->
 
 
+
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
-  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width)" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
+  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width) data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in]" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
     <div tabindex="-1" data-slot="focusScope" class="flex flex-col min-h-0">
       <div data-slot="root" class="relative inline-flex items-center border-b border-default"><input type="text" placeholder="Search…" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent md:text-sm" autocomplete="off" aria-disabled="false" aria-expanded="true" aria-controls="reka-combobox-content-v-0" aria-autocomplete="list" role="combobox" value="" aria-activedescendant="reka-combobox-item-v-3">
         <!--v-if-->
@@ -244,6 +253,7 @@ exports[`SelectMenu > renders with clear and clearIcon correctly 1`] = `
     <!--v-if-->
   </div>
 </div>
+
 
 
 <!--teleport end-->
@@ -257,8 +267,9 @@ exports[`SelectMenu > renders with clear correctly 1`] = `
 <!--teleport start-->
 
 
+
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
-  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width)" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
+  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width) data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in]" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
     <div tabindex="-1" data-slot="focusScope" class="flex flex-col min-h-0">
       <div data-slot="root" class="relative inline-flex items-center border-b border-default"><input type="text" placeholder="Search…" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent md:text-sm" autocomplete="off" aria-disabled="false" aria-expanded="true" aria-controls="reka-combobox-content-v-0" aria-autocomplete="list" role="combobox" value="" aria-activedescendant="reka-combobox-item-v-3">
         <!--v-if-->
@@ -292,6 +303,7 @@ exports[`SelectMenu > renders with clear correctly 1`] = `
 </div>
 
 
+
 <!--teleport end-->
 <!--v-if-->"
 `;
@@ -303,8 +315,9 @@ exports[`SelectMenu > renders with create-item-label slot correctly 1`] = `
 <!--teleport start-->
 
 
+
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
-  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width)" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
+  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width) data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in]" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
     <div tabindex="-1" data-slot="focusScope" class="flex flex-col min-h-0">
       <div data-slot="root" class="relative inline-flex items-center border-b border-default"><input type="text" placeholder="Search…" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent md:text-sm" autocomplete="off" aria-disabled="false" aria-expanded="true" aria-controls="reka-combobox-content-v-0" aria-autocomplete="list" role="combobox" value="New value" aria-activedescendant="reka-combobox-item-v-3">
         <!--v-if-->
@@ -323,6 +336,7 @@ exports[`SelectMenu > renders with create-item-label slot correctly 1`] = `
 </div>
 
 
+
 <!--teleport end-->
 <!--v-if-->"
 `;
@@ -334,8 +348,9 @@ exports[`SelectMenu > renders with default slot correctly 1`] = `
 <!--teleport start-->
 
 
+
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
-  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width)" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
+  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width) data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in]" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
     <div tabindex="-1" data-slot="focusScope" class="flex flex-col min-h-0">
       <div data-slot="root" class="relative inline-flex items-center border-b border-default"><input type="text" placeholder="Search…" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent md:text-sm" autocomplete="off" aria-disabled="false" aria-expanded="true" aria-controls="reka-combobox-content-v-0" aria-autocomplete="list" role="combobox" value="" aria-activedescendant="reka-combobox-item-v-3">
         <!--v-if-->
@@ -369,6 +384,7 @@ exports[`SelectMenu > renders with default slot correctly 1`] = `
 </div>
 
 
+
 <!--teleport end-->
 <!--v-if-->"
 `;
@@ -380,8 +396,9 @@ exports[`SelectMenu > renders with defaultValue correctly 1`] = `
 <!--teleport start-->
 
 
+
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
-  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width)" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
+  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width) data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in]" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
     <div tabindex="-1" data-slot="focusScope" class="flex flex-col min-h-0">
       <div data-slot="root" class="relative inline-flex items-center border-b border-default"><input type="text" placeholder="Search…" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent md:text-sm" autocomplete="off" aria-disabled="false" aria-expanded="true" aria-controls="reka-combobox-content-v-0" aria-autocomplete="list" role="combobox" value="" aria-activedescendant="reka-combobox-item-v-3">
         <!--v-if-->
@@ -415,6 +432,7 @@ exports[`SelectMenu > renders with defaultValue correctly 1`] = `
 </div>
 
 
+
 <!--teleport end-->
 <!--v-if-->"
 `;
@@ -426,8 +444,9 @@ exports[`SelectMenu > renders with descriptionKey correctly 1`] = `
 <!--teleport start-->
 
 
+
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
-  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width)" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
+  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width) data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in]" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
     <div tabindex="-1" data-slot="focusScope" class="flex flex-col min-h-0">
       <div data-slot="root" class="relative inline-flex items-center border-b border-default"><input type="text" placeholder="Search…" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent md:text-sm" autocomplete="off" aria-disabled="false" aria-expanded="true" aria-controls="reka-combobox-content-v-0" aria-autocomplete="list" role="combobox" value="" aria-activedescendant="reka-combobox-item-v-3">
         <!--v-if-->
@@ -461,6 +480,7 @@ exports[`SelectMenu > renders with descriptionKey correctly 1`] = `
 </div>
 
 
+
 <!--teleport end-->
 <!--v-if-->"
 `;
@@ -472,8 +492,9 @@ exports[`SelectMenu > renders with disabled correctly 1`] = `
 <!--teleport start-->
 
 
+
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
-  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width)" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
+  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width) data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in]" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
     <div tabindex="-1" data-slot="focusScope" class="flex flex-col min-h-0">
       <div data-slot="root" class="relative inline-flex items-center border-b border-default"><input type="text" placeholder="Search…" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent md:text-sm" disabled="" autocomplete="off" data-disabled="" aria-disabled="true" aria-expanded="true" aria-controls="reka-combobox-content-v-0" aria-autocomplete="list" role="combobox" value="">
         <!--v-if-->
@@ -507,6 +528,7 @@ exports[`SelectMenu > renders with disabled correctly 1`] = `
 </div>
 
 
+
 <!--teleport end-->
 <!--v-if-->"
 `;
@@ -525,8 +547,9 @@ exports[`SelectMenu > renders with id correctly 1`] = `
 <!--teleport start-->
 
 
+
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
-  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width)" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
+  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width) data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in]" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
     <div tabindex="-1" data-slot="focusScope" class="flex flex-col min-h-0">
       <div data-slot="root" class="relative inline-flex items-center border-b border-default"><input type="text" placeholder="Search…" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent md:text-sm" autocomplete="off" aria-disabled="false" aria-expanded="true" aria-controls="reka-combobox-content-v-0" aria-autocomplete="list" role="combobox" value="" aria-activedescendant="reka-combobox-item-v-3">
         <!--v-if-->
@@ -560,6 +583,7 @@ exports[`SelectMenu > renders with id correctly 1`] = `
 </div>
 
 
+
 <!--teleport end-->
 <!--v-if-->"
 `;
@@ -571,8 +595,9 @@ exports[`SelectMenu > renders with item slot correctly 1`] = `
 <!--teleport start-->
 
 
+
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
-  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width)" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
+  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width) data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in]" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
     <div tabindex="-1" data-slot="focusScope" class="flex flex-col min-h-0">
       <div data-slot="root" class="relative inline-flex items-center border-b border-default"><input type="text" placeholder="Search…" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent md:text-sm" autocomplete="off" aria-disabled="false" aria-expanded="true" aria-controls="reka-combobox-content-v-0" aria-autocomplete="list" role="combobox" value="" aria-activedescendant="reka-combobox-item-v-3">
         <!--v-if-->
@@ -596,6 +621,7 @@ exports[`SelectMenu > renders with item slot correctly 1`] = `
 </div>
 
 
+
 <!--teleport end-->
 <!--v-if-->"
 `;
@@ -607,8 +633,9 @@ exports[`SelectMenu > renders with item-description slot correctly 1`] = `
 <!--teleport start-->
 
 
+
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
-  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width)" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
+  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width) data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in]" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
     <div tabindex="-1" data-slot="focusScope" class="flex flex-col min-h-0">
       <div data-slot="root" class="relative inline-flex items-center border-b border-default"><input type="text" placeholder="Search…" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent md:text-sm" autocomplete="off" aria-disabled="false" aria-expanded="true" aria-controls="reka-combobox-content-v-0" aria-autocomplete="list" role="combobox" value="" aria-activedescendant="reka-combobox-item-v-3">
         <!--v-if-->
@@ -632,6 +659,7 @@ exports[`SelectMenu > renders with item-description slot correctly 1`] = `
 </div>
 
 
+
 <!--teleport end-->
 <!--v-if-->"
 `;
@@ -643,8 +671,9 @@ exports[`SelectMenu > renders with item-label slot correctly 1`] = `
 <!--teleport start-->
 
 
+
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
-  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width)" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
+  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width) data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in]" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
     <div tabindex="-1" data-slot="focusScope" class="flex flex-col min-h-0">
       <div data-slot="root" class="relative inline-flex items-center border-b border-default"><input type="text" placeholder="Search…" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent md:text-sm" autocomplete="off" aria-disabled="false" aria-expanded="true" aria-controls="reka-combobox-content-v-0" aria-autocomplete="list" role="combobox" value="" aria-activedescendant="reka-combobox-item-v-3">
         <!--v-if-->
@@ -678,6 +707,7 @@ exports[`SelectMenu > renders with item-label slot correctly 1`] = `
 </div>
 
 
+
 <!--teleport end-->
 <!--v-if-->"
 `;
@@ -689,8 +719,9 @@ exports[`SelectMenu > renders with item-leading slot correctly 1`] = `
 <!--teleport start-->
 
 
+
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
-  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width)" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
+  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width) data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in]" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
     <div tabindex="-1" data-slot="focusScope" class="flex flex-col min-h-0">
       <div data-slot="root" class="relative inline-flex items-center border-b border-default"><input type="text" placeholder="Search…" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent md:text-sm" autocomplete="off" aria-disabled="false" aria-expanded="true" aria-controls="reka-combobox-content-v-0" aria-autocomplete="list" role="combobox" value="" aria-activedescendant="reka-combobox-item-v-3">
         <!--v-if-->
@@ -724,6 +755,7 @@ exports[`SelectMenu > renders with item-leading slot correctly 1`] = `
 </div>
 
 
+
 <!--teleport end-->
 <!--v-if-->"
 `;
@@ -735,8 +767,9 @@ exports[`SelectMenu > renders with item-trailing slot correctly 1`] = `
 <!--teleport start-->
 
 
+
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
-  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width)" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
+  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width) data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in]" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
     <div tabindex="-1" data-slot="focusScope" class="flex flex-col min-h-0">
       <div data-slot="root" class="relative inline-flex items-center border-b border-default"><input type="text" placeholder="Search…" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent md:text-sm" autocomplete="off" aria-disabled="false" aria-expanded="true" aria-controls="reka-combobox-content-v-0" aria-autocomplete="list" role="combobox" value="" aria-activedescendant="reka-combobox-item-v-3">
         <!--v-if-->
@@ -768,6 +801,7 @@ exports[`SelectMenu > renders with item-trailing slot correctly 1`] = `
     <!--v-if-->
   </div>
 </div>
+
 
 
 <!--teleport end-->
@@ -781,8 +815,9 @@ exports[`SelectMenu > renders with items correctly 1`] = `
 <!--teleport start-->
 
 
+
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
-  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width)" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
+  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width) data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in]" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
     <div tabindex="-1" data-slot="focusScope" class="flex flex-col min-h-0">
       <div data-slot="root" class="relative inline-flex items-center border-b border-default"><input type="text" placeholder="Search…" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent md:text-sm" autocomplete="off" aria-disabled="false" aria-expanded="true" aria-controls="reka-combobox-content-v-0" aria-autocomplete="list" role="combobox" value="" aria-activedescendant="reka-combobox-item-v-3">
         <!--v-if-->
@@ -816,6 +851,7 @@ exports[`SelectMenu > renders with items correctly 1`] = `
 </div>
 
 
+
 <!--teleport end-->
 <!--v-if-->"
 `;
@@ -827,8 +863,9 @@ exports[`SelectMenu > renders with items with description correctly 1`] = `
 <!--teleport start-->
 
 
+
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
-  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width)" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
+  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width) data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in]" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
     <div tabindex="-1" data-slot="focusScope" class="flex flex-col min-h-0">
       <div data-slot="root" class="relative inline-flex items-center border-b border-default"><input type="text" placeholder="Search…" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent md:text-sm" autocomplete="off" aria-disabled="false" aria-expanded="true" aria-controls="reka-combobox-content-v-0" aria-autocomplete="list" role="combobox" value="" aria-activedescendant="reka-combobox-item-v-3">
         <!--v-if-->
@@ -852,6 +889,7 @@ exports[`SelectMenu > renders with items with description correctly 1`] = `
 </div>
 
 
+
 <!--teleport end-->
 <!--v-if-->"
 `;
@@ -863,8 +901,9 @@ exports[`SelectMenu > renders with labelKey correctly 1`] = `
 <!--teleport start-->
 
 
+
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
-  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width)" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
+  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width) data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in]" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
     <div tabindex="-1" data-slot="focusScope" class="flex flex-col min-h-0">
       <div data-slot="root" class="relative inline-flex items-center border-b border-default"><input type="text" placeholder="Search…" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent md:text-sm" autocomplete="off" aria-disabled="false" aria-expanded="true" aria-controls="reka-combobox-content-v-0" aria-autocomplete="list" role="combobox" value="" aria-activedescendant="reka-combobox-item-v-3">
         <!--v-if-->
@@ -898,6 +937,7 @@ exports[`SelectMenu > renders with labelKey correctly 1`] = `
 </div>
 
 
+
 <!--teleport end-->
 <!--v-if-->"
 `;
@@ -914,8 +954,9 @@ exports[`SelectMenu > renders with leading slot correctly 1`] = `
 <!--teleport start-->
 
 
+
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
-  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width)" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
+  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width) data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in]" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
     <div tabindex="-1" data-slot="focusScope" class="flex flex-col min-h-0">
       <div data-slot="root" class="relative inline-flex items-center border-b border-default"><input type="text" placeholder="Search…" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent md:text-sm" autocomplete="off" aria-disabled="false" aria-expanded="true" aria-controls="reka-combobox-content-v-0" aria-autocomplete="list" role="combobox" value="" aria-activedescendant="reka-combobox-item-v-3">
         <!--v-if-->
@@ -947,6 +988,7 @@ exports[`SelectMenu > renders with leading slot correctly 1`] = `
     <!--v-if-->
   </div>
 </div>
+
 
 
 <!--teleport end-->
@@ -1004,8 +1046,9 @@ exports[`SelectMenu > renders with modelValue correctly 1`] = `
 <!--teleport start-->
 
 
+
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
-  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width)" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
+  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width) data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in]" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
     <div tabindex="-1" data-slot="focusScope" class="flex flex-col min-h-0">
       <div data-slot="root" class="relative inline-flex items-center border-b border-default"><input type="text" placeholder="Search…" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent md:text-sm" autocomplete="off" aria-disabled="false" aria-expanded="true" aria-controls="reka-combobox-content-v-0" aria-autocomplete="list" role="combobox" value="" aria-activedescendant="reka-combobox-item-v-3">
         <!--v-if-->
@@ -1039,6 +1082,7 @@ exports[`SelectMenu > renders with modelValue correctly 1`] = `
 </div>
 
 
+
 <!--teleport end-->
 <!--v-if-->"
 `;
@@ -1050,8 +1094,9 @@ exports[`SelectMenu > renders with multiple and modelValue correctly 1`] = `
 <!--teleport start-->
 
 
+
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
-  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width)" role="listbox" aria-orientation="vertical" aria-multiselectable="true" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
+  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width) data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in]" role="listbox" aria-orientation="vertical" aria-multiselectable="true" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
     <div tabindex="-1" data-slot="focusScope" class="flex flex-col min-h-0">
       <div data-slot="root" class="relative inline-flex items-center border-b border-default"><input type="text" placeholder="Search…" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent md:text-sm" autocomplete="off" aria-disabled="false" aria-expanded="true" aria-controls="reka-combobox-content-v-0" aria-autocomplete="list" role="combobox" value="" aria-activedescendant="reka-combobox-item-v-3">
         <!--v-if-->
@@ -1085,6 +1130,7 @@ exports[`SelectMenu > renders with multiple and modelValue correctly 1`] = `
 </div>
 
 
+
 <!--teleport end-->
 <!--v-if-->"
 `;
@@ -1096,8 +1142,9 @@ exports[`SelectMenu > renders with multiple correctly 1`] = `
 <!--teleport start-->
 
 
+
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
-  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width)" role="listbox" aria-orientation="vertical" aria-multiselectable="true" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
+  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width) data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in]" role="listbox" aria-orientation="vertical" aria-multiselectable="true" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
     <div tabindex="-1" data-slot="focusScope" class="flex flex-col min-h-0">
       <div data-slot="root" class="relative inline-flex items-center border-b border-default"><input type="text" placeholder="Search…" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent md:text-sm" autocomplete="off" aria-disabled="false" aria-expanded="true" aria-controls="reka-combobox-content-v-0" aria-autocomplete="list" role="combobox" value="" aria-activedescendant="reka-combobox-item-v-3">
         <!--v-if-->
@@ -1129,6 +1176,7 @@ exports[`SelectMenu > renders with multiple correctly 1`] = `
     <!--v-if-->
   </div>
 </div>
+
 
 
 <!--teleport end-->
@@ -1142,8 +1190,9 @@ exports[`SelectMenu > renders with name correctly 1`] = `
 <!--teleport start-->
 
 
+
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
-  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width)" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
+  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width) data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in]" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
     <div tabindex="-1" data-slot="focusScope" class="flex flex-col min-h-0">
       <div data-slot="root" class="relative inline-flex items-center border-b border-default"><input type="text" placeholder="Search…" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent md:text-sm" autocomplete="off" aria-disabled="false" aria-expanded="true" aria-controls="reka-combobox-content-v-0" aria-autocomplete="list" role="combobox" value="" aria-activedescendant="reka-combobox-item-v-3">
         <!--v-if-->
@@ -1175,6 +1224,7 @@ exports[`SelectMenu > renders with name correctly 1`] = `
     <!--v-if-->
   </div>
 </div>
+
 
 
 <!--teleport end-->
@@ -1188,8 +1238,9 @@ exports[`SelectMenu > renders with neutral variant ghost correctly 1`] = `
 <!--teleport start-->
 
 
+
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
-  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width)" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
+  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width) data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in]" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
     <div tabindex="-1" data-slot="focusScope" class="flex flex-col min-h-0">
       <div data-slot="root" class="relative inline-flex items-center border-b border-default"><input type="text" placeholder="Search…" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent md:text-sm" autocomplete="off" aria-disabled="false" aria-expanded="true" aria-controls="reka-combobox-content-v-0" aria-autocomplete="list" role="combobox" value="" aria-activedescendant="reka-combobox-item-v-3">
         <!--v-if-->
@@ -1221,6 +1272,7 @@ exports[`SelectMenu > renders with neutral variant ghost correctly 1`] = `
     <!--v-if-->
   </div>
 </div>
+
 
 
 <!--teleport end-->
@@ -1234,8 +1286,9 @@ exports[`SelectMenu > renders with neutral variant none correctly 1`] = `
 <!--teleport start-->
 
 
+
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
-  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width)" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
+  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width) data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in]" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
     <div tabindex="-1" data-slot="focusScope" class="flex flex-col min-h-0">
       <div data-slot="root" class="relative inline-flex items-center border-b border-default"><input type="text" placeholder="Search…" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent md:text-sm" autocomplete="off" aria-disabled="false" aria-expanded="true" aria-controls="reka-combobox-content-v-0" aria-autocomplete="list" role="combobox" value="" aria-activedescendant="reka-combobox-item-v-3">
         <!--v-if-->
@@ -1267,6 +1320,7 @@ exports[`SelectMenu > renders with neutral variant none correctly 1`] = `
     <!--v-if-->
   </div>
 </div>
+
 
 
 <!--teleport end-->
@@ -1280,8 +1334,9 @@ exports[`SelectMenu > renders with neutral variant outline correctly 1`] = `
 <!--teleport start-->
 
 
+
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
-  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width)" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
+  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width) data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in]" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
     <div tabindex="-1" data-slot="focusScope" class="flex flex-col min-h-0">
       <div data-slot="root" class="relative inline-flex items-center border-b border-default"><input type="text" placeholder="Search…" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent md:text-sm" autocomplete="off" aria-disabled="false" aria-expanded="true" aria-controls="reka-combobox-content-v-0" aria-autocomplete="list" role="combobox" value="" aria-activedescendant="reka-combobox-item-v-3">
         <!--v-if-->
@@ -1313,6 +1368,7 @@ exports[`SelectMenu > renders with neutral variant outline correctly 1`] = `
     <!--v-if-->
   </div>
 </div>
+
 
 
 <!--teleport end-->
@@ -1326,8 +1382,9 @@ exports[`SelectMenu > renders with neutral variant soft correctly 1`] = `
 <!--teleport start-->
 
 
+
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
-  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width)" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
+  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width) data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in]" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
     <div tabindex="-1" data-slot="focusScope" class="flex flex-col min-h-0">
       <div data-slot="root" class="relative inline-flex items-center border-b border-default"><input type="text" placeholder="Search…" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent md:text-sm" autocomplete="off" aria-disabled="false" aria-expanded="true" aria-controls="reka-combobox-content-v-0" aria-autocomplete="list" role="combobox" value="" aria-activedescendant="reka-combobox-item-v-3">
         <!--v-if-->
@@ -1359,6 +1416,7 @@ exports[`SelectMenu > renders with neutral variant soft correctly 1`] = `
     <!--v-if-->
   </div>
 </div>
+
 
 
 <!--teleport end-->
@@ -1372,8 +1430,9 @@ exports[`SelectMenu > renders with neutral variant subtle correctly 1`] = `
 <!--teleport start-->
 
 
+
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
-  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width)" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
+  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width) data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in]" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
     <div tabindex="-1" data-slot="focusScope" class="flex flex-col min-h-0">
       <div data-slot="root" class="relative inline-flex items-center border-b border-default"><input type="text" placeholder="Search…" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent md:text-sm" autocomplete="off" aria-disabled="false" aria-expanded="true" aria-controls="reka-combobox-content-v-0" aria-autocomplete="list" role="combobox" value="" aria-activedescendant="reka-combobox-item-v-3">
         <!--v-if-->
@@ -1405,6 +1464,7 @@ exports[`SelectMenu > renders with neutral variant subtle correctly 1`] = `
     <!--v-if-->
   </div>
 </div>
+
 
 
 <!--teleport end-->
@@ -1418,8 +1478,9 @@ exports[`SelectMenu > renders with placeholder correctly 1`] = `
 <!--teleport start-->
 
 
+
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
-  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width)" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
+  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width) data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in]" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
     <div tabindex="-1" data-slot="focusScope" class="flex flex-col min-h-0">
       <div data-slot="root" class="relative inline-flex items-center border-b border-default"><input type="text" placeholder="Search…" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent md:text-sm" autocomplete="off" aria-disabled="false" aria-expanded="true" aria-controls="reka-combobox-content-v-0" aria-autocomplete="list" role="combobox" value="" aria-activedescendant="reka-combobox-item-v-3">
         <!--v-if-->
@@ -1451,6 +1512,7 @@ exports[`SelectMenu > renders with placeholder correctly 1`] = `
     <!--v-if-->
   </div>
 </div>
+
 
 
 <!--teleport end-->
@@ -1464,8 +1526,9 @@ exports[`SelectMenu > renders with primary variant ghost correctly 1`] = `
 <!--teleport start-->
 
 
+
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
-  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width)" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
+  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width) data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in]" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
     <div tabindex="-1" data-slot="focusScope" class="flex flex-col min-h-0">
       <div data-slot="root" class="relative inline-flex items-center border-b border-default"><input type="text" placeholder="Search…" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent md:text-sm" autocomplete="off" aria-disabled="false" aria-expanded="true" aria-controls="reka-combobox-content-v-0" aria-autocomplete="list" role="combobox" value="" aria-activedescendant="reka-combobox-item-v-3">
         <!--v-if-->
@@ -1497,6 +1560,7 @@ exports[`SelectMenu > renders with primary variant ghost correctly 1`] = `
     <!--v-if-->
   </div>
 </div>
+
 
 
 <!--teleport end-->
@@ -1510,8 +1574,9 @@ exports[`SelectMenu > renders with primary variant none correctly 1`] = `
 <!--teleport start-->
 
 
+
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
-  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width)" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
+  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width) data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in]" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
     <div tabindex="-1" data-slot="focusScope" class="flex flex-col min-h-0">
       <div data-slot="root" class="relative inline-flex items-center border-b border-default"><input type="text" placeholder="Search…" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent md:text-sm" autocomplete="off" aria-disabled="false" aria-expanded="true" aria-controls="reka-combobox-content-v-0" aria-autocomplete="list" role="combobox" value="" aria-activedescendant="reka-combobox-item-v-3">
         <!--v-if-->
@@ -1543,6 +1608,7 @@ exports[`SelectMenu > renders with primary variant none correctly 1`] = `
     <!--v-if-->
   </div>
 </div>
+
 
 
 <!--teleport end-->
@@ -1556,8 +1622,9 @@ exports[`SelectMenu > renders with primary variant outline correctly 1`] = `
 <!--teleport start-->
 
 
+
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
-  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width)" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
+  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width) data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in]" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
     <div tabindex="-1" data-slot="focusScope" class="flex flex-col min-h-0">
       <div data-slot="root" class="relative inline-flex items-center border-b border-default"><input type="text" placeholder="Search…" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent md:text-sm" autocomplete="off" aria-disabled="false" aria-expanded="true" aria-controls="reka-combobox-content-v-0" aria-autocomplete="list" role="combobox" value="" aria-activedescendant="reka-combobox-item-v-3">
         <!--v-if-->
@@ -1589,6 +1656,7 @@ exports[`SelectMenu > renders with primary variant outline correctly 1`] = `
     <!--v-if-->
   </div>
 </div>
+
 
 
 <!--teleport end-->
@@ -1602,8 +1670,9 @@ exports[`SelectMenu > renders with primary variant soft correctly 1`] = `
 <!--teleport start-->
 
 
+
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
-  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width)" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
+  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width) data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in]" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
     <div tabindex="-1" data-slot="focusScope" class="flex flex-col min-h-0">
       <div data-slot="root" class="relative inline-flex items-center border-b border-default"><input type="text" placeholder="Search…" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent md:text-sm" autocomplete="off" aria-disabled="false" aria-expanded="true" aria-controls="reka-combobox-content-v-0" aria-autocomplete="list" role="combobox" value="" aria-activedescendant="reka-combobox-item-v-3">
         <!--v-if-->
@@ -1635,6 +1704,7 @@ exports[`SelectMenu > renders with primary variant soft correctly 1`] = `
     <!--v-if-->
   </div>
 </div>
+
 
 
 <!--teleport end-->
@@ -1648,8 +1718,9 @@ exports[`SelectMenu > renders with primary variant subtle correctly 1`] = `
 <!--teleport start-->
 
 
+
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
-  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width)" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
+  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width) data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in]" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
     <div tabindex="-1" data-slot="focusScope" class="flex flex-col min-h-0">
       <div data-slot="root" class="relative inline-flex items-center border-b border-default"><input type="text" placeholder="Search…" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent md:text-sm" autocomplete="off" aria-disabled="false" aria-expanded="true" aria-controls="reka-combobox-content-v-0" aria-autocomplete="list" role="combobox" value="" aria-activedescendant="reka-combobox-item-v-3">
         <!--v-if-->
@@ -1681,6 +1752,7 @@ exports[`SelectMenu > renders with primary variant subtle correctly 1`] = `
     <!--v-if-->
   </div>
 </div>
+
 
 
 <!--teleport end-->
@@ -1694,8 +1766,9 @@ exports[`SelectMenu > renders with required correctly 1`] = `
 <!--teleport start-->
 
 
+
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
-  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width)" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
+  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width) data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in]" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
     <div tabindex="-1" data-slot="focusScope" class="flex flex-col min-h-0">
       <div data-slot="root" class="relative inline-flex items-center border-b border-default"><input type="text" placeholder="Search…" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent md:text-sm" autocomplete="off" aria-disabled="false" aria-expanded="true" aria-controls="reka-combobox-content-v-0" aria-autocomplete="list" role="combobox" value="" aria-activedescendant="reka-combobox-item-v-3">
         <!--v-if-->
@@ -1729,6 +1802,7 @@ exports[`SelectMenu > renders with required correctly 1`] = `
 </div>
 
 
+
 <!--teleport end-->
 <!--v-if-->"
 `;
@@ -1740,8 +1814,9 @@ exports[`SelectMenu > renders with searchInput icon correctly 1`] = `
 <!--teleport start-->
 
 
+
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
-  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width)" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
+  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width) data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in]" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
     <div tabindex="-1" data-slot="focusScope" class="flex flex-col min-h-0">
       <div data-slot="root" class="relative inline-flex items-center border-b border-default"><input type="text" placeholder="Search…" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent ps-9 md:text-sm" autocomplete="off" aria-disabled="false" aria-expanded="true" aria-controls="reka-combobox-content-v-0" aria-autocomplete="list" role="combobox" value="" aria-activedescendant="reka-combobox-item-v-3"><span data-slot="leading" class="absolute inset-y-0 start-0 flex items-center ps-2.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="leadingIcon" class="shrink-0 text-dimmed size-5"></svg></span>
         <!--v-if-->
@@ -1774,6 +1849,7 @@ exports[`SelectMenu > renders with searchInput icon correctly 1`] = `
 </div>
 
 
+
 <!--teleport end-->
 <!--v-if-->"
 `;
@@ -1785,8 +1861,9 @@ exports[`SelectMenu > renders with searchInput placeholder correctly 1`] = `
 <!--teleport start-->
 
 
+
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
-  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width)" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
+  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width) data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in]" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
     <div tabindex="-1" data-slot="focusScope" class="flex flex-col min-h-0">
       <div data-slot="root" class="relative inline-flex items-center border-b border-default"><input type="text" placeholder="Filter items..." data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent md:text-sm" autocomplete="off" aria-disabled="false" aria-expanded="true" aria-controls="reka-combobox-content-v-0" aria-autocomplete="list" role="combobox" value="" aria-activedescendant="reka-combobox-item-v-3">
         <!--v-if-->
@@ -1820,6 +1897,7 @@ exports[`SelectMenu > renders with searchInput placeholder correctly 1`] = `
 </div>
 
 
+
 <!--teleport end-->
 <!--v-if-->"
 `;
@@ -1831,8 +1909,9 @@ exports[`SelectMenu > renders with selectedIcon correctly 1`] = `
 <!--teleport start-->
 
 
+
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
-  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width)" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
+  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width) data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in]" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
     <div tabindex="-1" data-slot="focusScope" class="flex flex-col min-h-0">
       <div data-slot="root" class="relative inline-flex items-center border-b border-default"><input type="text" placeholder="Search…" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent md:text-sm" autocomplete="off" aria-disabled="false" aria-expanded="true" aria-controls="reka-combobox-content-v-0" aria-autocomplete="list" role="combobox" value="" aria-activedescendant="reka-combobox-item-v-3">
         <!--v-if-->
@@ -1866,6 +1945,7 @@ exports[`SelectMenu > renders with selectedIcon correctly 1`] = `
 </div>
 
 
+
 <!--teleport end-->
 <!--v-if-->"
 `;
@@ -1877,8 +1957,9 @@ exports[`SelectMenu > renders with size lg correctly 1`] = `
 <!--teleport start-->
 
 
+
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
-  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width)" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
+  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width) data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in]" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
     <div tabindex="-1" data-slot="focusScope" class="flex flex-col min-h-0">
       <div data-slot="root" class="relative inline-flex items-center border-b border-default"><input type="text" placeholder="Search…" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-3 py-2 text-base/5 gap-2 text-highlighted bg-transparent md:text-sm" autocomplete="off" aria-disabled="false" aria-expanded="true" aria-controls="reka-combobox-content-v-0" aria-autocomplete="list" role="combobox" value="" aria-activedescendant="reka-combobox-item-v-3">
         <!--v-if-->
@@ -1912,6 +1993,7 @@ exports[`SelectMenu > renders with size lg correctly 1`] = `
 </div>
 
 
+
 <!--teleport end-->
 <!--v-if-->"
 `;
@@ -1923,8 +2005,9 @@ exports[`SelectMenu > renders with size md correctly 1`] = `
 <!--teleport start-->
 
 
+
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
-  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width)" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
+  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width) data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in]" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
     <div tabindex="-1" data-slot="focusScope" class="flex flex-col min-h-0">
       <div data-slot="root" class="relative inline-flex items-center border-b border-default"><input type="text" placeholder="Search…" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent md:text-sm" autocomplete="off" aria-disabled="false" aria-expanded="true" aria-controls="reka-combobox-content-v-0" aria-autocomplete="list" role="combobox" value="" aria-activedescendant="reka-combobox-item-v-3">
         <!--v-if-->
@@ -1958,6 +2041,7 @@ exports[`SelectMenu > renders with size md correctly 1`] = `
 </div>
 
 
+
 <!--teleport end-->
 <!--v-if-->"
 `;
@@ -1969,8 +2053,9 @@ exports[`SelectMenu > renders with size sm correctly 1`] = `
 <!--teleport start-->
 
 
+
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
-  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width)" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
+  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width) data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in]" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
     <div tabindex="-1" data-slot="focusScope" class="flex flex-col min-h-0">
       <div data-slot="root" class="relative inline-flex items-center border-b border-default"><input type="text" placeholder="Search…" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm/4 gap-1.5 text-highlighted bg-transparent md:text-xs" autocomplete="off" aria-disabled="false" aria-expanded="true" aria-controls="reka-combobox-content-v-0" aria-autocomplete="list" role="combobox" value="" aria-activedescendant="reka-combobox-item-v-3">
         <!--v-if-->
@@ -2004,6 +2089,7 @@ exports[`SelectMenu > renders with size sm correctly 1`] = `
 </div>
 
 
+
 <!--teleport end-->
 <!--v-if-->"
 `;
@@ -2015,8 +2101,9 @@ exports[`SelectMenu > renders with size xl correctly 1`] = `
 <!--teleport start-->
 
 
+
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
-  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width)" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
+  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width) data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in]" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
     <div tabindex="-1" data-slot="focusScope" class="flex flex-col min-h-0">
       <div data-slot="root" class="relative inline-flex items-center border-b border-default"><input type="text" placeholder="Search…" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-3 py-2 text-base gap-2 text-highlighted bg-transparent" autocomplete="off" aria-disabled="false" aria-expanded="true" aria-controls="reka-combobox-content-v-0" aria-autocomplete="list" role="combobox" value="" aria-activedescendant="reka-combobox-item-v-3">
         <!--v-if-->
@@ -2050,6 +2137,7 @@ exports[`SelectMenu > renders with size xl correctly 1`] = `
 </div>
 
 
+
 <!--teleport end-->
 <!--v-if-->"
 `;
@@ -2061,8 +2149,9 @@ exports[`SelectMenu > renders with size xs correctly 1`] = `
 <!--teleport start-->
 
 
+
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
-  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width)" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
+  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width) data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in]" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
     <div tabindex="-1" data-slot="focusScope" class="flex flex-col min-h-0">
       <div data-slot="root" class="relative inline-flex items-center border-b border-default"><input type="text" placeholder="Search…" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2 py-1 text-sm/4 gap-1 text-highlighted bg-transparent md:text-xs" autocomplete="off" aria-disabled="false" aria-expanded="true" aria-controls="reka-combobox-content-v-0" aria-autocomplete="list" role="combobox" value="" aria-activedescendant="reka-combobox-item-v-3">
         <!--v-if-->
@@ -2096,6 +2185,7 @@ exports[`SelectMenu > renders with size xs correctly 1`] = `
 </div>
 
 
+
 <!--teleport end-->
 <!--v-if-->"
 `;
@@ -2116,8 +2206,9 @@ exports[`SelectMenu > renders with trailing slot correctly 1`] = `
 <!--teleport start-->
 
 
+
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
-  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width)" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
+  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width) data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in]" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
     <div tabindex="-1" data-slot="focusScope" class="flex flex-col min-h-0">
       <div data-slot="root" class="relative inline-flex items-center border-b border-default"><input type="text" placeholder="Search…" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent md:text-sm" autocomplete="off" aria-disabled="false" aria-expanded="true" aria-controls="reka-combobox-content-v-0" aria-autocomplete="list" role="combobox" value="" aria-activedescendant="reka-combobox-item-v-3">
         <!--v-if-->
@@ -2149,6 +2240,7 @@ exports[`SelectMenu > renders with trailing slot correctly 1`] = `
     <!--v-if-->
   </div>
 </div>
+
 
 
 <!--teleport end-->
@@ -2171,8 +2263,9 @@ exports[`SelectMenu > renders with trailingIcon correctly 2`] = `
 <!--teleport start-->
 
 
+
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
-  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width)" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
+  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width) data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in]" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
     <div tabindex="-1" data-slot="focusScope" class="flex flex-col min-h-0">
       <div data-slot="root" class="relative inline-flex items-center border-b border-default"><input type="text" placeholder="Search…" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent md:text-sm" autocomplete="off" aria-disabled="false" aria-expanded="true" aria-controls="reka-combobox-content-v-0" aria-autocomplete="list" role="combobox" value="" aria-activedescendant="reka-combobox-item-v-3">
         <!--v-if-->
@@ -2206,6 +2299,7 @@ exports[`SelectMenu > renders with trailingIcon correctly 2`] = `
 </div>
 
 
+
 <!--teleport end-->
 <!--v-if-->"
 `;
@@ -2217,8 +2311,9 @@ exports[`SelectMenu > renders with ui correctly 1`] = `
 <!--teleport start-->
 
 
+
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
-  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width)" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
+  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width) data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in]" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
     <div tabindex="-1" data-slot="focusScope" class="flex flex-col min-h-0">
       <div data-slot="root" class="relative inline-flex items-center border-b border-default"><input type="text" placeholder="Search…" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent md:text-sm" autocomplete="off" aria-disabled="false" aria-expanded="true" aria-controls="reka-combobox-content-v-0" aria-autocomplete="list" role="combobox" value="" aria-activedescendant="reka-combobox-item-v-3">
         <!--v-if-->
@@ -2252,6 +2347,7 @@ exports[`SelectMenu > renders with ui correctly 1`] = `
 </div>
 
 
+
 <!--teleport end-->
 <!--v-if-->"
 `;
@@ -2263,8 +2359,9 @@ exports[`SelectMenu > renders with valueKey correctly 1`] = `
 <!--teleport start-->
 
 
+
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
-  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width)" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
+  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width) data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in]" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
     <div tabindex="-1" data-slot="focusScope" class="flex flex-col min-h-0">
       <div data-slot="root" class="relative inline-flex items-center border-b border-default"><input type="text" placeholder="Search…" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent md:text-sm" autocomplete="off" aria-disabled="false" aria-expanded="true" aria-controls="reka-combobox-content-v-0" aria-autocomplete="list" role="combobox" value="" aria-activedescendant="reka-combobox-item-v-3">
         <!--v-if-->
@@ -2298,6 +2395,7 @@ exports[`SelectMenu > renders with valueKey correctly 1`] = `
 </div>
 
 
+
 <!--teleport end-->
 <!--v-if-->"
 `;
@@ -2309,8 +2407,9 @@ exports[`SelectMenu > renders with virtualize correctly 1`] = `
 <!--teleport start-->
 
 
+
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
-  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width)" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-empty="" data-side="bottom" data-align="center">
+  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="-1" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width) data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in]" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-empty="" data-side="bottom" data-align="center">
     <div tabindex="-1" data-slot="focusScope" class="flex flex-col min-h-0">
       <div data-slot="root" class="relative inline-flex items-center border-b border-default"><input type="text" placeholder="Search…" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent md:text-sm" autocomplete="off" aria-disabled="false" aria-expanded="true" aria-controls="reka-combobox-content-v-0" aria-autocomplete="list" role="combobox" value="">
         <!--v-if-->
@@ -2328,6 +2427,7 @@ exports[`SelectMenu > renders with virtualize correctly 1`] = `
 </div>
 
 
+
 <!--teleport end-->
 <!--v-if-->"
 `;
@@ -2339,8 +2439,9 @@ exports[`SelectMenu > renders without searchInput correctly 1`] = `
 <!--teleport start-->
 
 
+
 <div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
-  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="0" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width)" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
+  <div data-dismissable-layer="" style="display: flex; flex-direction: column; box-sizing: border-box; --reka-combobox-content-transform-origin: var(--reka-popper-transform-origin); --reka-combobox-content-available-width: var(--reka-popper-available-width); --reka-combobox-content-available-height: var(--reka-popper-available-height); --reka-combobox-trigger-width: var(--reka-popper-anchor-width); --reka-combobox-trigger-height: var(--reka-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" tabindex="0" data-slot="content" class="max-h-60 bg-default shadow-lg rounded-md ring ring-default overflow-hidden pointer-events-auto flex flex-col origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width) data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in]" role="listbox" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" position="popper" id="reka-combobox-content-v-0" data-state="open" data-side="bottom" data-align="center">
     <div tabindex="-1" data-slot="focusScope" class="flex flex-col min-h-0">
       <!--v-if-->
       <!--v-if-->
@@ -2369,6 +2470,7 @@ exports[`SelectMenu > renders without searchInput correctly 1`] = `
     <!--v-if-->
   </div>
 </div>
+
 
 
 <!--teleport end-->

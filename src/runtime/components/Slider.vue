@@ -45,15 +45,16 @@ export interface SliderEmits {
 
 <script setup lang="ts" generic="T extends number | number[]">
 import { computed } from 'vue'
-import { SliderRoot, SliderRange, SliderTrack, SliderThumb, useForwardPropsEmits } from 'reka-ui'
+import { SliderRoot, SliderRange, SliderTrack, SliderThumb } from 'reka-ui'
+import { useForwardProps } from '../composables/useForwardProps'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { useComponentUI } from '../composables/useComponentUI'
+import { useComponentProps } from '../composables/useComponentProps'
 import { useFormField } from '../composables/useFormField'
 import { tv } from '../utils/tv'
 import UTooltip from './Tooltip.vue'
 
-const props = withDefaults(defineProps<SliderProps>(), {
+const _props = withDefaults(defineProps<SliderProps>(), {
   min: 0,
   max: 100,
   step: 1,
@@ -61,14 +62,15 @@ const props = withDefaults(defineProps<SliderProps>(), {
 })
 const emits = defineEmits<SliderEmits>()
 
+const props = useComponentProps<SliderProps>('slider', _props)
+
 const modelValue = defineModel<T>()
 
 const appConfig = useAppConfig() as Slider['AppConfig']
-const uiProp = useComponentUI('slider', props)
 
-const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'orientation', 'min', 'max', 'step', 'minStepsBetweenThumbs', 'inverted'), emits)
+const rootProps = useForwardProps(reactivePick(props, 'as', 'orientation', 'min', 'max', 'step', 'minStepsBetweenThumbs', 'inverted'), emits)
 
-const { id, emitFormChange, emitFormInput, size, color, name, disabled, ariaAttrs } = useFormField<SliderProps>(props)
+const { id, emitFormChange, emitFormInput, size, color, name, disabled, ariaAttrs } = useFormField<SliderProps>(_props)
 
 const defaultSliderValue = computed(() => {
   if (typeof props.defaultValue === 'number') {
@@ -91,10 +93,11 @@ const sliderValue = computed({
 
 const thumbs = computed(() => sliderValue.value?.length ?? 1)
 
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.slider || {}) })({
   disabled: disabled.value,
-  size: size.value,
-  color: color.value,
+  size: size.value ?? props.size,
+  color: color.value ?? props.color,
   orientation: props.orientation
 }))
 
@@ -114,25 +117,25 @@ function onChange(value: any) {
     :name="name"
     :disabled="disabled"
     data-slot="root"
-    :class="ui.root({ class: [uiProp?.root, props.class] })"
+    :class="ui.root({ class: [props.ui?.root, props.class] })"
     :default-value="defaultSliderValue"
     @update:model-value="emitFormInput()"
     @value-commit="onChange"
   >
-    <SliderTrack data-slot="track" :class="ui.track({ class: uiProp?.track })">
-      <SliderRange data-slot="range" :class="ui.range({ class: uiProp?.range })" />
+    <SliderTrack data-slot="track" :class="ui.track({ class: props.ui?.track })">
+      <SliderRange data-slot="range" :class="ui.range({ class: props.ui?.range })" />
     </SliderTrack>
 
     <template v-for="thumb in thumbs" :key="thumb">
       <UTooltip
-        v-if="!!tooltip"
+        v-if="!!props.tooltip"
         :text="thumbs > 1 ? String(sliderValue?.[thumb - 1]) : String(sliderValue)"
         disable-closing-trigger
-        v-bind="(typeof tooltip === 'object' ? tooltip : {})"
+        v-bind="(typeof props.tooltip === 'object' ? props.tooltip : {})"
       >
-        <SliderThumb data-slot="thumb" :class="ui.thumb({ class: uiProp?.thumb })" :aria-label="thumbs === 1 ? 'Thumb' : `Thumb ${thumb} of ${thumbs}`" />
+        <SliderThumb data-slot="thumb" :class="ui.thumb({ class: props.ui?.thumb })" :aria-label="thumbs === 1 ? 'Thumb' : `Thumb ${thumb} of ${thumbs}`" />
       </UTooltip>
-      <SliderThumb v-else data-slot="thumb" :class="ui.thumb({ class: uiProp?.thumb })" :aria-label="thumbs === 1 ? 'Thumb' : `Thumb ${thumb} of ${thumbs}`" />
+      <SliderThumb v-else data-slot="thumb" :class="ui.thumb({ class: props.ui?.thumb })" :aria-label="thumbs === 1 ? 'Thumb' : `Thumb ${thumb} of ${thumbs}`" />
     </template>
   </SliderRoot>
 </template>

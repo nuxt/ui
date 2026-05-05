@@ -17,7 +17,8 @@ import {
   USlider,
   UPinInput,
   UCheckboxGroup,
-  UFileUpload
+  UFileUpload,
+  UListbox
 } from '#components'
 
 export async function renderForm(options: {
@@ -63,7 +64,8 @@ export async function renderForm(options: {
           USlider,
           UPinInput,
           UCheckboxGroup,
-          UFileUpload
+          UFileUpload,
+          UListbox
         },
         template: options.slotTemplate
       }

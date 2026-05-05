@@ -61,7 +61,7 @@ import { Primitive, useDateFormatter } from 'reka-ui'
 import { createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useLocale } from '../composables/useLocale'
-import { useComponentUI } from '../composables/useComponentUI'
+import { useComponentProps } from '../composables/useComponentProps'
 import ImageComponent from '#build/ui-image-component'
 import { getSlotChildrenText } from '../utils'
 import { tv } from '../utils/tv'
@@ -71,15 +71,16 @@ import UUser from './User.vue'
 
 defineOptions({ inheritAttrs: false })
 
-const props = withDefaults(defineProps<ChangelogVersionProps>(), {
+const _props = withDefaults(defineProps<ChangelogVersionProps>(), {
   as: 'article',
   indicator: true
 })
 const slots = defineSlots<ChangelogVersionSlots>()
 
+const props = useComponentProps('changelogVersion', _props)
+
 const { locale } = useLocale()
 const appConfig = useAppConfig() as ChangelogVersion['AppConfig']
-const uiProp = useComponentUI('changelogVersion', props)
 const formatter = useDateFormatter(locale.value.code)
 
 const [DefineLinkTemplate, ReuseLinkTemplate] = createReusableTemplate()
@@ -92,10 +93,12 @@ const [DefineDateTemplate, ReuseDateTemplate] = createReusableTemplate<{ hidden?
   }
 })
 
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.changelogVersion || {}) })({
   to: !!props.to || !!props.onClick
 }))
 
+// eslint-disable-next-line vue/no-dupe-keys
 const date = computed(() => {
   if (!props.date) {
     return
@@ -127,9 +130,9 @@ const ariaLabel = computed(() => {
 <template>
   <DefineLinkTemplate>
     <ULink
-      v-if="to"
+      v-if="props.to"
       :aria-label="ariaLabel"
-      v-bind="{ to, target, ...$attrs }"
+      v-bind="{ to: props.to, target: props.target, ...$attrs }"
       class="focus:outline-none peer"
       raw
     >
@@ -138,64 +141,64 @@ const ariaLabel = computed(() => {
   </DefineLinkTemplate>
 
   <DefineDateTemplate v-slot="{ hidden }">
-    <time v-if="date" :datetime="datetime" data-slot="date" :class="ui.date({ class: uiProp?.date, hidden })">
+    <time v-if="date" :datetime="datetime" data-slot="date" :class="ui.date({ class: props.ui?.date, hidden })">
       <slot name="date">
         {{ date }}
       </slot>
     </time>
   </DefineDateTemplate>
 
-  <Primitive :as="as" data-slot="root" :class="ui.root({ class: [uiProp?.root, props.class] })" @click="onClick">
-    <div v-if="!!props.indicator || !!slots.indicator" data-slot="indicator" :class="ui.indicator({ class: uiProp?.indicator })">
+  <Primitive :as="props.as" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })" @click="props.onClick">
+    <div v-if="!!props.indicator || !!slots.indicator" data-slot="indicator" :class="ui.indicator({ class: props.ui?.indicator })">
       <slot name="indicator" :ui="ui">
         <ReuseDateTemplate />
 
-        <div data-slot="dot" :class="ui.dot({ class: uiProp?.dot })">
-          <div data-slot="dotInner" :class="ui.dotInner({ class: uiProp?.dotInner })" />
+        <div data-slot="dot" :class="ui.dot({ class: props.ui?.dot })">
+          <div data-slot="dotInner" :class="ui.dotInner({ class: props.ui?.dotInner })" />
         </div>
       </slot>
     </div>
 
-    <div data-slot="container" :class="ui.container({ class: uiProp?.container })">
-      <div v-if="!!slots.header || (date || !!slots.date) || (badge || !!slots.badge) || (title || !!slots.title) || (description || !!slots.description) || (image || !!slots.image)" data-slot="header" :class="ui.header({ class: uiProp?.header })">
+    <div data-slot="container" :class="ui.container({ class: props.ui?.container })">
+      <div v-if="!!slots.header || (date || !!slots.date) || (props.badge || !!slots.badge) || (props.title || !!slots.title) || (props.description || !!slots.description) || (props.image || !!slots.image)" data-slot="header" :class="ui.header({ class: props.ui?.header })">
         <slot name="header">
-          <div v-if="(date || !!slots.date) || (badge || !!slots.badge)" data-slot="meta" :class="ui.meta({ class: uiProp?.meta, badge: (!!badge || !!slots.badge) || !props.indicator })">
+          <div v-if="(date || !!slots.date) || (props.badge || !!slots.badge)" data-slot="meta" :class="ui.meta({ class: props.ui?.meta, badge: (!!props.badge || !!slots.badge) || !props.indicator })">
             <slot name="badge" :ui="ui">
               <UBadge
-                v-if="badge"
+                v-if="props.badge"
                 color="neutral"
                 variant="solid"
-                v-bind="typeof badge === 'string' ? { label: badge } : badge"
+                v-bind="typeof props.badge === 'string' ? { label: props.badge } : props.badge"
                 data-slot="badge"
-                :class="ui.badge({ class: uiProp?.badge })"
+                :class="ui.badge({ class: props.ui?.badge })"
               />
             </slot>
 
             <ReuseDateTemplate :hidden="!!props.indicator" />
           </div>
 
-          <h2 v-if="title || !!slots.title" data-slot="title" :class="ui.title({ class: uiProp?.title })">
+          <h2 v-if="props.title || !!slots.title" data-slot="title" :class="ui.title({ class: props.ui?.title })">
             <ReuseLinkTemplate />
 
             <slot name="title">
-              {{ title }}
+              {{ props.title }}
             </slot>
           </h2>
 
-          <div v-if="description || !!slots.description" data-slot="description" :class="ui.description({ class: uiProp?.description })">
+          <div v-if="props.description || !!slots.description" data-slot="description" :class="ui.description({ class: props.ui?.description })">
             <slot name="description">
-              {{ description }}
+              {{ props.description }}
             </slot>
           </div>
 
-          <div v-if="image || !!slots.image" data-slot="imageWrapper" :class="ui.imageWrapper({ class: uiProp?.imageWrapper })">
+          <div v-if="props.image || !!slots.image" data-slot="imageWrapper" :class="ui.imageWrapper({ class: props.ui?.imageWrapper })">
             <slot name="image" :ui="ui">
               <component
                 :is="ImageComponent"
-                v-if="image"
-                v-bind="typeof image === 'string' ? { src: image, alt: title } : { alt: title, ...image }"
+                v-if="props.image"
+                v-bind="typeof props.image === 'string' ? { src: props.image, alt: props.title } : { alt: props.title, ...props.image }"
                 data-slot="image"
-                :class="ui.image({ class: uiProp?.image, to: !!to })"
+                :class="ui.image({ class: props.ui?.image, to: !!props.to })"
               />
             </slot>
 
@@ -206,12 +209,12 @@ const ariaLabel = computed(() => {
 
       <slot name="body" />
 
-      <div v-if="!!slots.footer || (authors?.length || !!slots.authors) || !!slots.actions" data-slot="footer" :class="ui.footer({ class: uiProp?.footer, body: !!slots.body })">
+      <div v-if="!!slots.footer || (props.authors?.length || !!slots.authors) || !!slots.actions" data-slot="footer" :class="ui.footer({ class: props.ui?.footer, body: !!slots.body })">
         <slot name="footer">
-          <div v-if="authors?.length || !!slots.authors" data-slot="authors" :class="ui.authors({ class: uiProp?.authors })">
+          <div v-if="props.authors?.length || !!slots.authors" data-slot="authors" :class="ui.authors({ class: props.ui?.authors })">
             <slot name="authors">
               <UUser
-                v-for="(author, index) in authors"
+                v-for="(author, index) in props.authors"
                 :key="index"
                 v-bind="author"
               />

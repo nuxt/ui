@@ -101,6 +101,11 @@ export default defineLocale<Messages>({
       decrement: 'הפחת',
       increment: 'הוסף'
     },
+    listbox: {
+      noData: 'אין נתונים',
+      noMatch: 'לא נמצאה התאמה',
+      search: 'חפש…'
+    },
     modal: {
       close: 'סגור'
     },
@@ -120,6 +125,10 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'העתק קוד ללוח'
+      },
+      prompt: {
+        copy: 'העתק הנחיה',
+        openIn: 'פתח ב-{name}'
       }
     },
     sidebar: {

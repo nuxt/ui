@@ -151,6 +151,7 @@ Use the `avatar` prop to show an [Avatar](/docs/components/avatar) inside the In
 prettier: true
 ignore:
   - modelValue
+  - avatar.loading
 external:
   - modelValue
 props:

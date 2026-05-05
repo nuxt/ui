@@ -2,7 +2,9 @@
 import { isReasoningUIPart, isTextUIPart, isToolUIPart, getToolName } from 'ai'
 import type { UIMessage } from 'ai'
 import { Chat } from '@ai-sdk/vue'
-import { isReasoningStreaming, isToolStreaming } from '@nuxt/ui/utils/ai'
+import { isPartStreaming, isToolStreaming } from '@nuxt/ui/utils/ai'
+import { Comark } from '@comark/vue'
+import highlight from '@comark/vue/plugins/highlight'
 
 const toast = useToast()
 
@@ -36,6 +38,13 @@ function onSubmit() {
   input.value = ''
 }
 
+function clearMessages() {
+  if (chat.status === 'streaming') {
+    chat.stop()
+  }
+  chat.messages = []
+}
+
 function getDomain(url: string): string {
   try {
     return new URL(url).hostname.replace(/^www\./, '')
@@ -50,34 +59,56 @@ function getFaviconUrl(url: string): string {
 </script>
 
 <template>
-  <UDashboardNavbar class="absolute top-0 inset-x-0 z-5 border-b-0 lg:pointer-events-none" />
+  <UDashboardNavbar class="absolute top-0 inset-x-0 z-5 border-b-0 lg:pointer-events-none">
+    <template #right>
+      <UButton
+        v-if="chat.messages.length"
+        icon="i-lucide-list-x"
+        color="neutral"
+        variant="ghost"
+        class="pointer-events-auto"
+        @click="clearMessages"
+      />
+    </template>
+  </UDashboardNavbar>
 
   <div class="flex-1 flex flex-col gap-4 sm:gap-6 max-w-xl w-full mx-auto min-h-0">
     <UChatMessages
+      should-auto-scroll
       :messages="chat.messages"
       :status="chat.status"
-      :spacing-offset="48"
+      :spacing-offset="72"
+      :assistant="{ actions: [{ label: 'Edit', icon: 'i-lucide-pencil', onClick: () => console.log('edit') }] }"
     >
       <template #content="{ message }">
         <template v-for="(part, index) in message.parts" :key="`${message.id}-${part.type}-${index}`">
           <UChatReasoning
             v-if="isReasoningUIPart(part)"
             :text="part.text"
-            :streaming="isReasoningStreaming(message, index, chat)"
+            :streaming="isPartStreaming(part)"
             chevron="leading"
           >
-            <MDC
-              :value="part.text"
-              :cache-key="`reasoning-${message.id}-${index}`"
+            <Comark
+              :markdown="part.text"
+              :streaming="isPartStreaming(part)"
+              :plugins="[highlight()]"
               class="*:first:mt-0 *:last:mb-0"
             />
           </UChatReasoning>
-          <MDC
-            v-else-if="isTextUIPart(part)"
-            :value="part.text"
-            :cache-key="`${message.id}-${index}`"
-            class="*:first:mt-0 *:last:mb-0"
-          />
+
+          <template v-else-if="isTextUIPart(part)">
+            <Comark
+              v-if="message.role === 'assistant'"
+              :markdown="part.text"
+              :streaming="isPartStreaming(part)"
+              :plugins="[highlight()]"
+              class="*:first:mt-0 *:last:mb-0"
+            />
+            <p v-else-if="message.role === 'user'" class="whitespace-pre-wrap">
+              {{ part.text }}
+            </p>
+          </template>
+
           <UChatTool
             v-else-if="isToolUIPart(part) && getToolName(part) === 'web_search'"
             :text="isToolStreaming(part) ? 'Searching the web...' : 'Searched the web'"

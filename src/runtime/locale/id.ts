@@ -100,6 +100,11 @@ export default defineLocale<Messages>({
       decrement: 'Kurangi',
       increment: 'Tambah'
     },
+    listbox: {
+      noData: 'Tidak ada data',
+      noMatch: 'Tidak ada data yang cocok',
+      search: 'Cari…'
+    },
     modal: {
       close: 'Tutup'
     },
@@ -119,6 +124,10 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'Salin kode ke clipboard'
+      },
+      prompt: {
+        copy: 'Salin prompt',
+        openIn: 'Buka di {name}'
       }
     },
     sidebar: {
