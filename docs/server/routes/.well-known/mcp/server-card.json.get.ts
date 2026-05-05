@@ -1,7 +1,10 @@
+import { listMcpDefinitions } from '@nuxtjs/mcp-toolkit/server'
+
 const DOMAIN = 'https://ui.nuxt.com'
 
-export default defineCachedEventHandler((event) => {
+export default defineCachedEventHandler(async (event) => {
   const { version } = useRuntimeConfig(event).public
+  const { tools, resources, prompts } = await listMcpDefinitions({ event })
 
   const serverCard = {
     $schema: 'https://modelcontextprotocol.io/schema/server-card/v1',
@@ -27,33 +30,9 @@ export default defineCachedEventHandler((event) => {
       prompts: { listChanged: false },
       logging: {}
     },
-    tools: [
-      // TODO: import tool definitions from MCP toolkit instead of duplicating
-      { name: 'search-components', description: 'Search Nuxt UI components by name, description, or category.' },
-      { name: 'get-component', description: 'Get the full documentation for a Nuxt UI component.' },
-      { name: 'get-component-metadata', description: 'Get the metadata (props, slots, events) for a Nuxt UI component.' },
-      { name: 'list-examples', description: 'List component examples.' },
-      { name: 'get-example', description: 'Get the source code for a component example.' },
-      { name: 'search-composables', description: 'Search Nuxt UI composables.' },
-      { name: 'search-documentation', description: 'Search the full Nuxt UI documentation.' },
-      { name: 'get-documentation-page', description: 'Get the markdown content of a documentation page.' },
-      { name: 'search-icons', description: 'Search icons from the default icon collections.' },
-      { name: 'list-templates', description: 'List official Nuxt UI starter templates.' },
-      { name: 'get-template', description: 'Get details of a Nuxt UI starter template.' },
-      { name: 'get-migration-guide', description: 'Get the Nuxt UI migration guide between major versions.' }
-    ],
-    resources: [
-      { name: 'components', description: 'Catalog of all Nuxt UI components.' },
-      { name: 'composables', description: 'Catalog of all Nuxt UI composables.' },
-      { name: 'documentation-pages', description: 'Catalog of all Nuxt UI documentation pages.' },
-      { name: 'examples', description: 'Catalog of all component examples.' },
-      { name: 'templates', description: 'Catalog of official Nuxt UI starter templates.' }
-    ],
-    prompts: [
-      { name: 'find-component-for-usecase', description: 'Find the best Nuxt UI component for a specific use case.' },
-      { name: 'implement-component-with-props', description: 'Implement a Nuxt UI component with the right props and slots.' },
-      { name: 'setup-project-with-template', description: 'Bootstrap a new project from a Nuxt UI starter template.' }
-    ],
+    tools: tools.map(t => ({ name: t.name, description: t.description })),
+    resources: resources.map(r => ({ name: r.name, uri: r.uri, description: r.description })),
+    prompts: prompts.map(p => ({ name: p.name, description: p.description })),
     authentication: {
       required: false
     }
