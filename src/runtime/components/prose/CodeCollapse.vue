@@ -40,19 +40,21 @@ export interface ProseCodeCollapseSlots {
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useAppConfig } from '#imports'
-import { useComponentUI } from '../../composables/useComponentUI'
+import { useComponentProps } from '../../composables/useComponentProps'
 import { useLocale } from '../../composables/useLocale'
 import { tv } from '../../utils/tv'
 import UButton from '../Button.vue'
 
-const props = defineProps<ProseCodeCollapseProps>()
+const _props = defineProps<ProseCodeCollapseProps>()
+
 defineSlots<ProseCodeCollapseSlots>()
+
+const props = useComponentProps('prose.codeCollapse', _props)
 
 const open = defineModel<boolean>('open', { default: false })
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as ProseCodeCollapse['AppConfig']
-const uiProp = useComponentUI('prose.codeCollapse', props)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.codeCollapse || {}) })({
@@ -61,18 +63,18 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.codeC
 </script>
 
 <template>
-  <div :class="ui.root({ class: [uiProp?.root, props.class] })">
+  <div :class="ui.root({ class: [props.ui?.root, props.class] })">
     <slot />
 
-    <div :class="ui.footer({ class: uiProp?.footer })">
+    <div :class="ui.footer({ class: props.ui?.footer })">
       <UButton
-        :icon="icon || appConfig.ui.icons.chevronDown"
+        :icon="props.icon || appConfig.ui.icons.chevronDown"
         color="neutral"
         variant="outline"
         :data-state="open ? 'open' : 'closed'"
         :label="`${open ? (props.closeText || t('prose.codeCollapse.closeText')) : (props.openText || t('prose.codeCollapse.openText'))} ${props.name || t('prose.codeCollapse.name')}`"
-        :class="ui.trigger({ class: uiProp?.trigger })"
-        :ui="{ leadingIcon: ui.triggerIcon({ class: uiProp?.triggerIcon }) }"
+        :class="ui.trigger({ class: props.ui?.trigger })"
+        :ui="{ leadingIcon: ui.triggerIcon({ class: props.ui?.triggerIcon }) }"
         @click="open = !open"
       />
     </div>

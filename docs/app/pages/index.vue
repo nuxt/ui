@@ -9,6 +9,21 @@ if (!page.value) {
 const { url } = useSiteConfig()
 const appConfig = useAppConfig()
 
+if (import.meta.server) {
+  prerenderRoutes(['/raw/index.md'])
+
+  useSchemaOrg([
+    defineSoftwareApp({
+      name: 'Nuxt UI',
+      operatingSystem: 'Web',
+      applicationCategory: 'DeveloperApplication',
+      offers: { price: 0, priceCurrency: 'USD' }
+    })
+  ])
+}
+
+useCanonical('/raw/index.md')
+
 useSeoMeta({
   titleTemplate: '%s - Nuxt UI',
   title: page.value.title,

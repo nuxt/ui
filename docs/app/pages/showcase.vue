@@ -14,7 +14,9 @@ useSeoMeta({
   ogDescription: page.value.description
 })
 
-defineOgImageComponent('Docs')
+useCanonical()
+
+defineOgImage('Docs.takumi')
 </script>
 
 <template>

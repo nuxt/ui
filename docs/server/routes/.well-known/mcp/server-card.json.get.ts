@@ -1,8 +1,6 @@
-import { eventHandler, setHeader } from 'h3'
-
 const DOMAIN = 'https://ui.nuxt.com'
 
-export default eventHandler((event) => {
+export default defineCachedEventHandler((event) => {
   const { version } = useRuntimeConfig(event).public
 
   const serverCard = {
@@ -12,15 +10,10 @@ export default eventHandler((event) => {
       version,
       title: 'Nuxt UI MCP Server',
       description: 'MCP server providing tools, resources and prompts to help AI agents build with Nuxt UI — search components and composables, retrieve documentation, fetch component metadata, and list starter templates.',
-      vendor: 'NuxtLabs',
       homepage: DOMAIN,
       documentation: `${DOMAIN}/docs/getting-started/ai/mcp`,
       license: 'MIT',
       repository: 'https://github.com/nuxt/ui'
-    },
-    transport: {
-      type: 'streamable-http',
-      endpoint: `${DOMAIN}/mcp`
     },
     endpoints: [
       {
@@ -35,6 +28,7 @@ export default eventHandler((event) => {
       logging: {}
     },
     tools: [
+      // TODO: import tool definitions from MCP toolkit instead of duplicating
       { name: 'search-components', description: 'Search Nuxt UI components by name, description, or category.' },
       { name: 'get-component', description: 'Get the full documentation for a Nuxt UI component.' },
       { name: 'get-component-metadata', description: 'Get the metadata (props, slots, events) for a Nuxt UI component.' },
@@ -65,7 +59,9 @@ export default eventHandler((event) => {
     }
   }
 
-  setHeader(event, 'Content-Type', 'application/json; charset=utf-8')
-  setHeader(event, 'Cache-Control', 'public, max-age=3600')
+  setResponseHeader(event, 'Content-Type', 'application/json; charset=utf-8')
   return serverCard
+}, {
+  swr: true,
+  maxAge: 60 * 60
 })

@@ -25,21 +25,23 @@ export interface ProseFieldGroupSlots {
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
-import { useComponentUI } from '../../composables/useComponentUI'
+import { useComponentProps } from '../../composables/useComponentProps'
 import { tv } from '../../utils/tv'
 
-const props = defineProps<ProseFieldGroupProps>()
+const _props = defineProps<ProseFieldGroupProps>()
+
 defineSlots<ProseFieldGroupSlots>()
 
+const props = useComponentProps('prose.fieldGroup', _props)
+
 const appConfig = useAppConfig() as ProseFieldGroup['AppConfig']
-const uiProp = useComponentUI('prose.fieldGroup', props)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.fieldGroup || {}) }))
 </script>
 
 <template>
-  <Primitive :as="as" :class="ui({ class: [uiProp?.base, props.class] })">
+  <Primitive :as="props.as" :class="ui({ class: [props.ui?.base, props.class] })">
     <slot />
   </Primitive>
 </template>

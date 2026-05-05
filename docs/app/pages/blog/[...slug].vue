@@ -25,13 +25,30 @@ useSeoMeta({
 })
 
 if (page.value.image) {
-  defineOgImage({ url: page.value.image })
+  useSeoMeta({ ogImage: page.value.image })
 } else {
-  defineOgImageComponent('Docs', {
+  defineOgImage('Docs.takumi', {
     headline: 'Blog',
     title,
     description
   })
+}
+
+useCanonical()
+
+if (import.meta.server) {
+  useSchemaOrg([
+    defineArticle({
+      '@type': 'BlogPosting',
+      'headline': title,
+      'description': description,
+      'datePublished': page.value.date,
+      'author': page.value.authors?.map((author: { name: string, to?: string }) => ({
+        name: author.name,
+        url: author.to
+      }))
+    })
+  ])
 }
 
 const tree = ref<Record<string, Node>>({})
