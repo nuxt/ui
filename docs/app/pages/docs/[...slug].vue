@@ -59,53 +59,42 @@ useSeoMeta({
   ogDescription: description
 })
 
-if (route.path.startsWith('/docs/components/')) {
-  defineOgImageComponent('OgImageComponent', {
-    title: page.value.title,
-    description: page.value.description,
-    component: (route.params.slug as string[]).pop() as string
-  })
-} else {
-  defineOgImageComponent('Docs', {
-    title: page.value.title,
-    description: page.value.description,
-    headline: breadcrumb.value?.[breadcrumb.value.length - 1]?.label || 'Nuxt UI',
-    framework: page.value?.framework
-  })
-}
-
-// Pre-render the markdown path + add it to alternate links
-const site = useSiteConfig()
 const path = computed(() => route.path.replace(/\/$/, ''))
-prerenderRoutes([joinURL('/raw', `${path.value}.md`)])
-useHead({
-  link: [
-    {
-      rel: 'alternate',
-      href: `${site.url}${path.value}.md`,
-      type: 'text/markdown'
-    }
-  ],
-  script: [{
-    type: 'application/ld+json',
-    innerHTML: JSON.stringify({
-      '@context': 'https://schema.org',
+
+if (import.meta.server) {
+  prerenderRoutes([joinURL('/raw', `${path.value}.md`)])
+
+  if (route.path.startsWith('/docs/components/')) {
+    defineOgImage('Component.takumi', {
+      title: page.value.title,
+      description: page.value.description,
+      slug: (route.params.slug as string[]).pop() as string
+    })
+  } else {
+    defineOgImage('Docs.takumi', {
+      title: page.value.title,
+      description: page.value.description,
+      headline: breadcrumb.value?.[breadcrumb.value.length - 1]?.label || 'Nuxt UI',
+      framework: page.value?.framework
+    })
+  }
+
+  useSchemaOrg([
+    defineArticle({
       '@type': 'TechArticle',
       'headline': `${prefix}${title} ${suffix}`.trim(),
-      'description': description,
-      'url': joinURL(site.url, path.value),
-      'breadcrumb': {
-        '@type': 'BreadcrumbList',
-        'itemListElement': breadcrumb.value?.map((item, index) => ({
-          '@type': 'ListItem',
-          'position': index + 1,
-          'name': item.label,
-          'item': item.to ? joinURL(site.url, String(item.to)) : undefined
-        })) || []
-      }
-    }).replace(/</g, '\\u003c').replace(/>/g, '\\u003e')
-  }]
-})
+      'description': description
+    }),
+    defineBreadcrumb({
+      itemListElement: breadcrumb.value?.map(item => ({
+        name: item.label,
+        item: item.to ? String(item.to) : undefined
+      })) || []
+    })
+  ])
+}
+
+useCanonical(computed(() => `${path.value}.md`))
 
 const { open, messages } = useChat()
 

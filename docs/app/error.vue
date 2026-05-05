@@ -37,10 +37,12 @@ useSeoMeta({
   title: String(props.error.statusCode)
 })
 
-useServerSeoMeta({
-  ogSiteName: 'Nuxt UI',
-  twitterCard: 'summary_large_image'
-})
+if (import.meta.server) {
+  useSeoMeta({
+    ogSiteName: 'Nuxt UI',
+    twitterCard: 'summary_large_image'
+  })
+}
 
 useFaviconFromTheme()
 
@@ -53,16 +55,20 @@ provide('navigation', rootNavigation)
   <UApp>
     <NuxtLoadingIndicator color="var(--ui-primary)" :height="2" />
 
-    <div :class="[route.path.startsWith('/docs/') && 'root']">
-      <!-- <Banner /> -->
+    <div class="flex">
+      <div class="flex-1 min-w-0" :class="[route.path.startsWith('/docs/') && 'root']">
+        <!-- <Banner /> -->
 
-      <Header />
+        <Header />
 
-      <UError :error="error" />
+        <UError :error="error" />
 
-      <Footer />
+        <Footer />
+      </div>
 
       <ClientOnly>
+        <Chat />
+
         <Search :files="files" :navigation="navigationByFramework" />
       </ClientOnly>
     </div>

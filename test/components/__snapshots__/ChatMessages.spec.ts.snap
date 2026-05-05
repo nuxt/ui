@@ -13,7 +13,7 @@ exports[`ChatMessages > renders with assistant correctly 1`] = `
   <article data-role="assistant" data-slot="root" class="group/message relative w-full scroll-mt-4 sm:scroll-mt-6">
     <!--v-if-->
     <div data-slot="container" class="relative flex items-start gap-3 pb-8">
-      <div data-slot="leading" class="inline-flex items-center justify-center min-h-6"><span data-slot="root" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><span class="iconify i-lucide:bot text-muted shrink-0" aria-hidden="true" data-slot="icon"></span></span></div>
+      <div data-slot="leading" class="inline-flex items-center justify-center min-h-6"><span data-slot="root" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><span class="iconify i-lucide:bot shrink-0 text-muted" aria-hidden="true" data-slot="icon"></span></span></div>
       <div data-slot="content" class="relative text-pretty min-w-0 *:first:mt-0 *:last:mb-0 space-y-4 w-full">I am fine, thank you!</div>
       <!--v-if-->
     </div>

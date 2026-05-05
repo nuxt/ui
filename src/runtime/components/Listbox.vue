@@ -41,6 +41,10 @@ export interface ListboxProps<T extends ArrayOrNested<ListboxItem> = ArrayOrNest
    */
   as?: any
   /**
+   * @defaultValue 'primary'
+   */
+  color?: Listbox['variants']['color']
+  /**
    * @defaultValue 'md'
    */
   size?: Listbox['variants']['size']
@@ -154,11 +158,12 @@ export type ListboxSlots<T extends ArrayOrNested<ListboxItem> = ArrayOrNested<Li
 </script>
 
 <script setup lang="ts" generic="T extends ArrayOrNested<ListboxItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false, Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>">
-import { ListboxRoot, ListboxContent, ListboxGroup, ListboxGroupLabel, ListboxVirtualizer, ListboxItem as RekaListboxItem, ListboxItemIndicator, ListboxFilter, useForwardPropsEmits } from 'reka-ui'
+import { ListboxRoot, ListboxContent, ListboxGroup, ListboxGroupLabel, ListboxVirtualizer, ListboxItem as RekaListboxItem, ListboxItemIndicator, ListboxFilter } from 'reka-ui'
+import { useForwardProps } from '../composables/useForwardProps'
 import { createReusableTemplate, reactivePick } from '@vueuse/core'
 import { defu } from 'defu'
 import { useAppConfig } from '#imports'
-import { useComponentUI } from '../composables/useComponentUI'
+import { useComponentProps } from '../composables/useComponentProps'
 import { useFilter } from '../composables/useFilter'
 import { useFormField } from '../composables/useFormField'
 import { useLocale } from '../composables/useLocale'
@@ -172,7 +177,7 @@ import UInput from './Input.vue'
 
 defineOptions({ inheritAttrs: false })
 
-const props = withDefaults(defineProps<ListboxProps<T, VK, M, Mod>>(), {
+const _props = withDefaults(defineProps<ListboxProps<T, VK, M, Mod>>(), {
   labelKey: 'label',
   descriptionKey: 'description',
   highlightOnHover: true,
@@ -183,14 +188,15 @@ const props = withDefaults(defineProps<ListboxProps<T, VK, M, Mod>>(), {
 const emits = defineEmits<ListboxEmits<T, VK, M, Mod>>()
 const slots = defineSlots<ListboxSlots<T>>()
 
+const props = useComponentProps<ListboxProps<T, VK, M, Mod>>('listbox', _props)
+
 const searchTerm = defineModel<string>('searchTerm', { default: '' })
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as Listbox['AppConfig']
-const uiProp = useComponentUI('listbox', props)
 const { filterGroups } = useFilter()
 
-const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'multiple', 'selectionBehavior', 'highlightOnHover', 'by', 'orientation', 'required'), emits)
+const rootProps = useForwardProps(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'multiple', 'selectionBehavior', 'highlightOnHover', 'by', 'orientation', 'required'), emits)
 
 const virtualizerProps = toRef(() => {
   if (!props.virtualize) return false
@@ -201,7 +207,7 @@ const virtualizerProps = toRef(() => {
 })
 const inputProps = toRef(() => defu(typeof props.filter === 'object' ? props.filter : {}, { placeholder: t('listbox.search'), variant: 'none' }) as Omit<InputProps, 'modelValue' | 'defaultValue'>)
 
-const { emitFormChange, emitFormInput, name, size, color, id, highlight, disabled, ariaAttrs } = useFormField<InputProps>(props, { bind: false })
+const { emitFormChange, emitFormInput, name, size, color, id, highlight, disabled, ariaAttrs } = useFormField<InputProps>(_props, { bind: false })
 
 const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: ListboxItem, index: number }>({
   props: {
@@ -216,10 +222,11 @@ const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: L
   }
 })
 
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.listbox || {}) })({
-  color: color.value,
-  size: size.value,
-  highlight: highlight.value,
+  color: color.value ?? props.color,
+  size: size.value ?? props.size,
+  highlight: highlight.value ?? props.highlight,
   disabled: disabled.value,
   virtualize: !!props.virtualize
 }))
@@ -291,54 +298,54 @@ const filteredItems = computed(() => filteredGroups.value.flatMap(group => group
 <!-- eslint-disable vue/no-template-shadow -->
 <template>
   <DefineItemTemplate v-slot="{ item, index }">
-    <ListboxGroupLabel v-if="item.type === 'label'" data-slot="label" :class="ui.label({ class: [uiProp?.label, item.ui?.label, item.class] })">
+    <ListboxGroupLabel v-if="item.type === 'label'" data-slot="label" :class="ui.label({ class: [props.ui?.label, item.ui?.label, item.class] })">
       {{ get(item, props.labelKey as string) }}
     </ListboxGroupLabel>
 
-    <div v-else-if="item.type === 'separator'" role="separator" data-slot="separator" :class="ui.separator({ class: [uiProp?.separator, item.ui?.separator, item.class] })" />
+    <div v-else-if="item.type === 'separator'" role="separator" data-slot="separator" :class="ui.separator({ class: [props.ui?.separator, item.ui?.separator, item.class] })" />
 
     <RekaListboxItem
       v-else
       :value="props.valueKey ? get(item, props.valueKey as string) : item"
       :disabled="item.disabled"
       data-slot="item"
-      :class="ui.item({ class: [uiProp?.item, item.ui?.item, item.class] })"
+      :class="ui.item({ class: [props.ui?.item, item.ui?.item, item.class] })"
       @select="onSelect($event, item)"
     >
       <slot name="item" :item="(item as NestedItem<T>)" :index="index" :ui="ui">
         <slot name="item-leading" :item="(item as NestedItem<T>)" :index="index" :ui="ui">
-          <UIcon v-if="item.icon" :name="item.icon" data-slot="itemLeadingIcon" :class="ui.itemLeadingIcon({ class: [uiProp?.itemLeadingIcon, item.ui?.itemLeadingIcon] })" />
-          <UAvatar v-else-if="item.avatar" :size="((item.ui?.itemLeadingAvatarSize || uiProp?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" data-slot="itemLeadingAvatar" :class="ui.itemLeadingAvatar({ class: [uiProp?.itemLeadingAvatar, item.ui?.itemLeadingAvatar] })" />
+          <UIcon v-if="item.icon" :name="item.icon" data-slot="itemLeadingIcon" :class="ui.itemLeadingIcon({ class: [props.ui?.itemLeadingIcon, item.ui?.itemLeadingIcon] })" />
+          <UAvatar v-else-if="item.avatar" :size="((item.ui?.itemLeadingAvatarSize || props.ui?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" data-slot="itemLeadingAvatar" :class="ui.itemLeadingAvatar({ class: [props.ui?.itemLeadingAvatar, item.ui?.itemLeadingAvatar] })" />
           <UChip
             v-else-if="item.chip"
-            :size="((item.ui?.itemLeadingChipSize || uiProp?.itemLeadingChipSize || ui.itemLeadingChipSize()) as ChipProps['size'])"
+            :size="((item.ui?.itemLeadingChipSize || props.ui?.itemLeadingChipSize || ui.itemLeadingChipSize()) as ChipProps['size'])"
             inset
             standalone
             v-bind="item.chip"
             data-slot="itemLeadingChip"
-            :class="ui.itemLeadingChip({ class: [uiProp?.itemLeadingChip, item.ui?.itemLeadingChip] })"
+            :class="ui.itemLeadingChip({ class: [props.ui?.itemLeadingChip, item.ui?.itemLeadingChip] })"
           />
         </slot>
 
-        <span v-if="get(item, props.labelKey as string) || get(item, props.descriptionKey as string) || !!slots['item-label'] || !!slots['item-description']" data-slot="itemWrapper" :class="ui.itemWrapper({ class: [uiProp?.itemWrapper, item.ui?.itemWrapper] })">
-          <span v-if="get(item, props.labelKey as string) || !!slots['item-label']" data-slot="itemLabel" :class="ui.itemLabel({ class: [uiProp?.itemLabel, item.ui?.itemLabel] })">
+        <span v-if="get(item, props.labelKey as string) || get(item, props.descriptionKey as string) || !!slots['item-label'] || !!slots['item-description']" data-slot="itemWrapper" :class="ui.itemWrapper({ class: [props.ui?.itemWrapper, item.ui?.itemWrapper] })">
+          <span v-if="get(item, props.labelKey as string) || !!slots['item-label']" data-slot="itemLabel" :class="ui.itemLabel({ class: [props.ui?.itemLabel, item.ui?.itemLabel] })">
             <slot name="item-label" :item="(item as NestedItem<T>)" :index="index">
               {{ get(item, props.labelKey as string) }}
             </slot>
           </span>
 
-          <span v-if="get(item, props.descriptionKey as string) || !!slots['item-description']" data-slot="itemDescription" :class="ui.itemDescription({ class: [uiProp?.itemDescription, item.ui?.itemDescription] })">
+          <span v-if="get(item, props.descriptionKey as string) || !!slots['item-description']" data-slot="itemDescription" :class="ui.itemDescription({ class: [props.ui?.itemDescription, item.ui?.itemDescription] })">
             <slot name="item-description" :item="(item as NestedItem<T>)" :index="index">
               {{ get(item, props.descriptionKey as string) }}
             </slot>
           </span>
         </span>
 
-        <span data-slot="itemTrailing" :class="ui.itemTrailing({ class: [uiProp?.itemTrailing, item.ui?.itemTrailing] })">
+        <span data-slot="itemTrailing" :class="ui.itemTrailing({ class: [props.ui?.itemTrailing, item.ui?.itemTrailing] })">
           <slot name="item-trailing" :item="(item as NestedItem<T>)" :index="index" :ui="ui" />
 
           <ListboxItemIndicator as-child>
-            <UIcon :name="selectedIcon || appConfig.ui.icons.check" data-slot="itemTrailingIcon" :class="ui.itemTrailingIcon({ class: [uiProp?.itemTrailingIcon, item.ui?.itemTrailingIcon] })" />
+            <UIcon :name="props.selectedIcon || appConfig.ui.icons.check" data-slot="itemTrailingIcon" :class="ui.itemTrailingIcon({ class: [props.ui?.itemTrailingIcon, item.ui?.itemTrailingIcon] })" />
           </ListboxItemIndicator>
         </span>
       </slot>
@@ -351,34 +358,34 @@ const filteredItems = computed(() => filteredGroups.value.flatMap(group => group
     :disabled="disabled"
     :name="name"
     data-slot="root"
-    :class="ui.root({ class: [uiProp?.root, props.class] })"
+    :class="ui.root({ class: [props.ui?.root, props.class] })"
     @update:model-value="onUpdate"
   >
-    <ListboxFilter v-if="filter" v-model="searchTerm" as-child>
+    <ListboxFilter v-if="props.filter" v-model="searchTerm" as-child>
       <UInput
-        :autofocus="autofocus"
-        :autofocus-delay="autofocusDelay"
+        :autofocus="props.autofocus"
+        :autofocus-delay="props.autofocusDelay"
         :size="size"
         v-bind="inputProps"
         data-slot="input"
-        :class="ui.input({ class: uiProp?.input })"
+        :class="ui.input({ class: props.ui?.input })"
       />
     </ListboxFilter>
 
-    <ListboxContent data-slot="content" :class="ui.content({ class: uiProp?.content })">
-      <div v-if="loading" data-slot="loading" :class="ui.loading({ class: uiProp?.loading })">
+    <ListboxContent data-slot="content" :class="ui.content({ class: props.ui?.content })">
+      <div v-if="props.loading" data-slot="loading" :class="ui.loading({ class: props.ui?.loading })">
         <slot name="loading">
-          <UIcon :name="loadingIcon || appConfig.ui.icons.loading" data-slot="loadingIcon" :class="ui.loadingIcon({ class: uiProp?.loadingIcon })" />
+          <UIcon :name="props.loadingIcon || appConfig.ui.icons.loading" data-slot="loadingIcon" :class="ui.loadingIcon({ class: props.ui?.loadingIcon })" />
         </slot>
       </div>
-      <div v-else-if="!filteredItems.length" data-slot="empty" :class="ui.empty({ class: uiProp?.empty })">
+      <div v-else-if="!filteredItems.length" data-slot="empty" :class="ui.empty({ class: props.ui?.empty })">
         <slot name="empty" :search-term="searchTerm">
           {{ searchTerm ? t('listbox.noMatch', { searchTerm }) : t('listbox.noData') }}
         </slot>
       </div>
 
       <ListboxVirtualizer
-        v-else-if="!!virtualize"
+        v-else-if="!!props.virtualize"
         v-slot="{ option: item, virtualItem }"
         :options="(filteredItems as any[])"
         :text-content="(item: any) => get(item, props.labelKey as string)"
@@ -388,7 +395,7 @@ const filteredItems = computed(() => filteredGroups.value.flatMap(group => group
       </ListboxVirtualizer>
 
       <template v-else>
-        <ListboxGroup v-for="(group, groupIndex) in filteredGroups" :key="`group-${groupIndex}`" data-slot="group" :class="ui.group({ class: uiProp?.group })">
+        <ListboxGroup v-for="(group, groupIndex) in filteredGroups" :key="`group-${groupIndex}`" data-slot="group" :class="ui.group({ class: props.ui?.group })">
           <ReuseItemTemplate v-for="(item, index) in group" :key="`group-${groupIndex}-${index}`" :item="item" :index="index" />
         </ListboxGroup>
       </template>

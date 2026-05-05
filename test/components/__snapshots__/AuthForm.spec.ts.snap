@@ -7,7 +7,7 @@ exports[`AuthForm > renders with as correctly 1`] = `
     <!--v-if-->
     <!--v-if-->
     <form id="v-0-0-0" class="space-y-5" data-slot="form">
-      <div data-slot="root" class="text-sm">
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
           <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-1" data-slot="label" class="block font-medium text-default">Email</label>
             <!--v-if-->
@@ -22,7 +22,7 @@ exports[`AuthForm > renders with as correctly 1`] = `
           <div id="v-0-0-1-error" data-slot="error" class="mt-2 text-error">Invalid email format</div>
         </div>
       </div>
-      <div data-slot="root" class="text-sm">
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
           <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-2" data-slot="label" class="block font-medium text-default">Password</label>
             <!--v-if-->
@@ -55,7 +55,7 @@ exports[`AuthForm > renders with class correctly 1`] = `
     <!--v-if-->
     <!--v-if-->
     <form id="v-0-0-0" class="space-y-5" data-slot="form">
-      <div data-slot="root" class="text-sm">
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
           <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-1" data-slot="label" class="block font-medium text-default">Email</label>
             <!--v-if-->
@@ -70,7 +70,7 @@ exports[`AuthForm > renders with class correctly 1`] = `
           <div id="v-0-0-1-error" data-slot="error" class="mt-2 text-error">Invalid email format</div>
         </div>
       </div>
-      <div data-slot="root" class="text-sm">
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
           <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-2" data-slot="label" class="block font-medium text-default">Password</label>
             <!--v-if-->
@@ -107,7 +107,7 @@ exports[`AuthForm > renders with description correctly 1`] = `
     <!--v-if-->
     <!--v-if-->
     <form id="v-0-0-0" class="space-y-5" data-slot="form">
-      <div data-slot="root" class="text-sm">
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
           <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-1" data-slot="label" class="block font-medium text-default">Email</label>
             <!--v-if-->
@@ -122,7 +122,7 @@ exports[`AuthForm > renders with description correctly 1`] = `
           <div id="v-0-0-1-error" data-slot="error" class="mt-2 text-error">Invalid email format</div>
         </div>
       </div>
-      <div data-slot="root" class="text-sm">
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
           <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-2" data-slot="label" class="block font-medium text-default">Password</label>
             <!--v-if-->
@@ -159,7 +159,7 @@ exports[`AuthForm > renders with description slot correctly 1`] = `
     <!--v-if-->
     <!--v-if-->
     <form id="v-0-0-0" class="space-y-5" data-slot="form">
-      <div data-slot="root" class="text-sm">
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
           <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-1" data-slot="label" class="block font-medium text-default">Email</label>
             <!--v-if-->
@@ -174,7 +174,7 @@ exports[`AuthForm > renders with description slot correctly 1`] = `
           <div id="v-0-0-1-error" data-slot="error" class="mt-2 text-error">Invalid email format</div>
         </div>
       </div>
-      <div data-slot="root" class="text-sm">
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
           <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-2" data-slot="label" class="block font-medium text-default">Password</label>
             <!--v-if-->
@@ -207,7 +207,7 @@ exports[`AuthForm > renders with disabled correctly 1`] = `
     <!--v-if-->
     <!--v-if-->
     <form id="v-0-0-0" class="space-y-5" data-slot="form">
-      <div data-slot="root" class="text-sm">
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
           <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-1" data-slot="label" class="block font-medium text-default">Email</label>
             <!--v-if-->
@@ -222,7 +222,7 @@ exports[`AuthForm > renders with disabled correctly 1`] = `
           <div id="v-0-0-1-error" data-slot="error" class="mt-2 text-error">Invalid email format</div>
         </div>
       </div>
-      <div data-slot="root" class="text-sm">
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
           <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-2" data-slot="label" class="block font-medium text-default">Password</label>
             <!--v-if-->
@@ -255,7 +255,7 @@ exports[`AuthForm > renders with fields correctly 1`] = `
     <!--v-if-->
     <!--v-if-->
     <form id="v-0-0-0" class="space-y-5" data-slot="form">
-      <div data-slot="root" class="text-sm">
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
           <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-1" data-slot="label" class="block font-medium text-default">Email</label>
             <!--v-if-->
@@ -270,7 +270,7 @@ exports[`AuthForm > renders with fields correctly 1`] = `
           <div id="v-0-0-1-error" data-slot="error" class="mt-2 text-error">Invalid email format</div>
         </div>
       </div>
-      <div data-slot="root" class="text-sm">
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
           <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-2" data-slot="label" class="block font-medium text-default">Password</label>
             <!--v-if-->
@@ -303,7 +303,7 @@ exports[`AuthForm > renders with footer slot correctly 1`] = `
     <!--v-if-->
     <!--v-if-->
     <form id="v-0-0-0" class="space-y-5" data-slot="form">
-      <div data-slot="root" class="text-sm">
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
           <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-1" data-slot="label" class="block font-medium text-default">Email</label>
             <!--v-if-->
@@ -318,7 +318,7 @@ exports[`AuthForm > renders with footer slot correctly 1`] = `
           <div id="v-0-0-1-error" data-slot="error" class="mt-2 text-error">Invalid email format</div>
         </div>
       </div>
-      <div data-slot="root" class="text-sm">
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
           <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-2" data-slot="label" class="block font-medium text-default">Password</label>
             <!--v-if-->
@@ -351,7 +351,7 @@ exports[`AuthForm > renders with header slot correctly 1`] = `
     <!--v-if-->
     <!--v-if-->
     <form id="v-0-0-0" class="space-y-5" data-slot="form">
-      <div data-slot="root" class="text-sm">
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
           <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-1" data-slot="label" class="block font-medium text-default">Email</label>
             <!--v-if-->
@@ -366,7 +366,7 @@ exports[`AuthForm > renders with header slot correctly 1`] = `
           <div id="v-0-0-1-error" data-slot="error" class="mt-2 text-error">Invalid email format</div>
         </div>
       </div>
-      <div data-slot="root" class="text-sm">
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
           <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-2" data-slot="label" class="block font-medium text-default">Password</label>
             <!--v-if-->
@@ -403,7 +403,7 @@ exports[`AuthForm > renders with icon correctly 1`] = `
     <!--v-if-->
     <!--v-if-->
     <form id="v-0-0-0" class="space-y-5" data-slot="form">
-      <div data-slot="root" class="text-sm">
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
           <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-1" data-slot="label" class="block font-medium text-default">Email</label>
             <!--v-if-->
@@ -418,7 +418,7 @@ exports[`AuthForm > renders with icon correctly 1`] = `
           <div id="v-0-0-1-error" data-slot="error" class="mt-2 text-error">Invalid email format</div>
         </div>
       </div>
-      <div data-slot="root" class="text-sm">
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
           <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-2" data-slot="label" class="block font-medium text-default">Password</label>
             <!--v-if-->
@@ -455,7 +455,7 @@ exports[`AuthForm > renders with leading slot correctly 1`] = `
     <!--v-if-->
     <!--v-if-->
     <form id="v-0-0-0" class="space-y-5" data-slot="form">
-      <div data-slot="root" class="text-sm">
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
           <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-1" data-slot="label" class="block font-medium text-default">Email</label>
             <!--v-if-->
@@ -470,7 +470,7 @@ exports[`AuthForm > renders with leading slot correctly 1`] = `
           <div id="v-0-0-1-error" data-slot="error" class="mt-2 text-error">Invalid email format</div>
         </div>
       </div>
-      <div data-slot="root" class="text-sm">
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
           <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-2" data-slot="label" class="block font-medium text-default">Password</label>
             <!--v-if-->
@@ -503,7 +503,7 @@ exports[`AuthForm > renders with loading correctly 1`] = `
     <!--v-if-->
     <!--v-if-->
     <form id="v-0-0-0" class="space-y-5" data-slot="form">
-      <div data-slot="root" class="text-sm">
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
           <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-1" data-slot="label" class="block font-medium text-default">Email</label>
             <!--v-if-->
@@ -518,7 +518,7 @@ exports[`AuthForm > renders with loading correctly 1`] = `
           <div id="v-0-0-1-error" data-slot="error" class="mt-2 text-error">Invalid email format</div>
         </div>
       </div>
-      <div data-slot="root" class="text-sm">
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
           <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-2" data-slot="label" class="block font-medium text-default">Password</label>
             <!--v-if-->
@@ -550,13 +550,16 @@ exports[`AuthForm > renders with providers correctly 1`] = `
     <div data-slot="providers" class="space-y-3"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center ring ring-inset ring-accented text-default bg-elevated hover:bg-accented/75 active:bg-accented/75 disabled:bg-elevated aria-disabled:bg-elevated focus:outline-none focus-visible:ring-2 focus-visible:ring-inverted"><span class="iconify i-simple-icons:google shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span><span data-slot="label" class="truncate">Google</span>
         <!--v-if-->
       </button></div>
-    <div data-orientation="horizontal" role="separator" data-slot="separator" class="flex items-center align-center text-center w-full flex-row">
+    <!---->
+    <div data-orientation="horizontal" role="separator" data-slot="root" class="flex items-center align-center text-center w-full flex-row">
+      <!--v-if-->
       <div data-slot="border" class="border-default w-full border-solid border-t"></div>
-      <div data-slot="container" class="font-medium text-default flex mx-3 whitespace-nowrap"><span data-slot="label" class="text-sm">or</span></div>
+      <div data-slot="container" class="font-medium text-default flex whitespace-nowrap mx-3"><span data-slot="label" class="text-sm">or</span></div>
       <div data-slot="border" class="border-default w-full border-solid border-t"></div>
+      <!--v-if-->
     </div>
     <form id="v-0-0-0" class="space-y-5" data-slot="form">
-      <div data-slot="root" class="text-sm">
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
           <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-1" data-slot="label" class="block font-medium text-default">Email</label>
             <!--v-if-->
@@ -571,7 +574,7 @@ exports[`AuthForm > renders with providers correctly 1`] = `
           <div id="v-0-0-1-error" data-slot="error" class="mt-2 text-error">Invalid email format</div>
         </div>
       </div>
-      <div data-slot="root" class="text-sm">
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
           <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-2" data-slot="label" class="block font-medium text-default">Password</label>
             <!--v-if-->
@@ -604,7 +607,7 @@ exports[`AuthForm > renders with providers slot correctly 1`] = `
     <div data-slot="providers" class="space-y-3">Providers</div>
     <!--v-if-->
     <form id="v-0-0-0" class="space-y-5" data-slot="form">
-      <div data-slot="root" class="text-sm">
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
           <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-1" data-slot="label" class="block font-medium text-default">Email</label>
             <!--v-if-->
@@ -619,7 +622,7 @@ exports[`AuthForm > renders with providers slot correctly 1`] = `
           <div id="v-0-0-1-error" data-slot="error" class="mt-2 text-error">Invalid email format</div>
         </div>
       </div>
-      <div data-slot="root" class="text-sm">
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
           <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-2" data-slot="label" class="block font-medium text-default">Password</label>
             <!--v-if-->
@@ -652,7 +655,7 @@ exports[`AuthForm > renders with separator correctly 1`] = `
     <!--v-if-->
     <!--v-if-->
     <form id="v-0-0-0" class="space-y-5" data-slot="form">
-      <div data-slot="root" class="text-sm">
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
           <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-1" data-slot="label" class="block font-medium text-default">Email</label>
             <!--v-if-->
@@ -667,7 +670,7 @@ exports[`AuthForm > renders with separator correctly 1`] = `
           <div id="v-0-0-1-error" data-slot="error" class="mt-2 text-error">Invalid email format</div>
         </div>
       </div>
-      <div data-slot="root" class="text-sm">
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
           <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-2" data-slot="label" class="block font-medium text-default">Password</label>
             <!--v-if-->
@@ -700,7 +703,7 @@ exports[`AuthForm > renders with submit correctly 1`] = `
     <!--v-if-->
     <!--v-if-->
     <form id="v-0-0-0" class="space-y-5" data-slot="form">
-      <div data-slot="root" class="text-sm">
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
           <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-1" data-slot="label" class="block font-medium text-default">Email</label>
             <!--v-if-->
@@ -715,7 +718,7 @@ exports[`AuthForm > renders with submit correctly 1`] = `
           <div id="v-0-0-1-error" data-slot="error" class="mt-2 text-error">Invalid email format</div>
         </div>
       </div>
-      <div data-slot="root" class="text-sm">
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
           <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-2" data-slot="label" class="block font-medium text-default">Password</label>
             <!--v-if-->
@@ -748,7 +751,7 @@ exports[`AuthForm > renders with submit slot correctly 1`] = `
     <!--v-if-->
     <!--v-if-->
     <form id="v-0-0-0" class="space-y-5" data-slot="form">
-      <div data-slot="root" class="text-sm">
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
           <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-1" data-slot="label" class="block font-medium text-default">Email</label>
             <!--v-if-->
@@ -763,7 +766,7 @@ exports[`AuthForm > renders with submit slot correctly 1`] = `
           <div id="v-0-0-1-error" data-slot="error" class="mt-2 text-error">Invalid email format</div>
         </div>
       </div>
-      <div data-slot="root" class="text-sm">
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
           <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-2" data-slot="label" class="block font-medium text-default">Password</label>
             <!--v-if-->
@@ -797,7 +800,7 @@ exports[`AuthForm > renders with title correctly 1`] = `
     <!--v-if-->
     <!--v-if-->
     <form id="v-0-0-0" class="space-y-5" data-slot="form">
-      <div data-slot="root" class="text-sm">
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
           <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-1" data-slot="label" class="block font-medium text-default">Email</label>
             <!--v-if-->
@@ -812,7 +815,7 @@ exports[`AuthForm > renders with title correctly 1`] = `
           <div id="v-0-0-1-error" data-slot="error" class="mt-2 text-error">Invalid email format</div>
         </div>
       </div>
-      <div data-slot="root" class="text-sm">
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
           <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-2" data-slot="label" class="block font-medium text-default">Password</label>
             <!--v-if-->
@@ -849,7 +852,7 @@ exports[`AuthForm > renders with title slot correctly 1`] = `
     <!--v-if-->
     <!--v-if-->
     <form id="v-0-0-0" class="space-y-5" data-slot="form">
-      <div data-slot="root" class="text-sm">
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
           <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-1" data-slot="label" class="block font-medium text-default">Email</label>
             <!--v-if-->
@@ -864,7 +867,7 @@ exports[`AuthForm > renders with title slot correctly 1`] = `
           <div id="v-0-0-1-error" data-slot="error" class="mt-2 text-error">Invalid email format</div>
         </div>
       </div>
-      <div data-slot="root" class="text-sm">
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
           <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-2" data-slot="label" class="block font-medium text-default">Password</label>
             <!--v-if-->
@@ -897,7 +900,7 @@ exports[`AuthForm > renders with ui correctly 1`] = `
     <!--v-if-->
     <!--v-if-->
     <form id="v-0-0-0" class="space-y-5" data-slot="form">
-      <div data-slot="root" class="text-sm">
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
           <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-1" data-slot="label" class="block font-medium text-default">Email</label>
             <!--v-if-->
@@ -912,7 +915,7 @@ exports[`AuthForm > renders with ui correctly 1`] = `
           <div id="v-0-0-1-error" data-slot="error" class="mt-2 text-error">Invalid email format</div>
         </div>
       </div>
-      <div data-slot="root" class="text-sm">
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
           <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-2" data-slot="label" class="block font-medium text-default">Password</label>
             <!--v-if-->
@@ -945,7 +948,7 @@ exports[`AuthForm > renders with validation slot correctly 1`] = `
     <!--v-if-->
     <!--v-if-->
     <form id="v-0-0-0" class="space-y-5" data-slot="form">
-      <div data-slot="root" class="text-sm">
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
           <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-1" data-slot="label" class="block font-medium text-default">Email</label>
             <!--v-if-->
@@ -960,7 +963,7 @@ exports[`AuthForm > renders with validation slot correctly 1`] = `
           <div id="v-0-0-1-error" data-slot="error" class="mt-2 text-error">Invalid email format</div>
         </div>
       </div>
-      <div data-slot="root" class="text-sm">
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
           <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-2" data-slot="label" class="block font-medium text-default">Password</label>
             <!--v-if-->
