@@ -36,3 +36,6 @@ playgrounds/repl/auto-imports.d.ts
 playgrounds/repl/components.d.ts
 playgrounds/repl/public/nuxt-ui.*
 playgrounds/repl/dist/
+
+# VSC
+.history
