@@ -16,7 +16,12 @@ useSeoMeta({
 
 useCanonical()
 
-defineOgImage('Docs.takumi')
+if (import.meta.server) {
+  defineOgImage('Docs.takumi', {
+    title: page.value.title,
+    description: page.value.description
+  })
+}
 </script>
 
 <template>

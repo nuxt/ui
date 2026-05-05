@@ -1,8 +1,8 @@
 <script setup lang="ts">
 withDefaults(defineProps<{
-  title: string
-  description: string
-  headline: string
+  title?: string
+  description?: string
+  headline?: string
   framework?: string
 }>(), {
   framework: 'nuxt'
@@ -45,15 +45,15 @@ withDefaults(defineProps<{
           <g transform="matrix(1.3333 0 0 -1.3333 -76.311 313.34)"><g transform="translate(178.06 235.01)"><path d="m0 0-22.669-39.264-22.669 39.264h-75.491l98.16-170.02 98.16 170.02z" fill="#41b883" /></g><g transform="translate(178.06 235.01)"><path d="m0 0-22.669-39.264-22.669 39.264h-36.227l58.896-102.01 58.896 102.01z" fill="#34495e" /></g></g>
         </svg>
       </div>
-      <div class="h-full uppercase flex items-center border-r-2 border-solid border-slate-200 text-green-500 text-[20px] font-semibold px-6">
+      <div v-if="headline" class="h-full uppercase flex items-center border-r-2 border-solid border-slate-200 text-green-500 text-[20px] font-semibold px-6">
         {{ headline }}
       </div>
     </div>
     <div class="mx-34 mt-12 h-[280px] flex flex-col justify-center">
-      <h1 class="text-4xl font-semibold text-left mb-4">
+      <h1 v-if="title" class="text-4xl font-semibold text-left mb-4">
         {{ title }}
       </h1>
-      <p class="text-3xl/11 text-slate-500" :style="{ lineClamp: 3, textOverflow: 'ellipsis' }">
+      <p v-if="description" class="text-3xl/11 text-slate-500" :style="{ lineClamp: 3, textOverflow: 'ellipsis' }">
         {{ description }}
       </p>
     </div>

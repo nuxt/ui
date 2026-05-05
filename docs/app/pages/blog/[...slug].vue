@@ -24,19 +24,19 @@ useSeoMeta({
   ogDescription: description
 })
 
-if (page.value.image) {
-  useSeoMeta({ ogImage: page.value.image })
-} else {
-  defineOgImage('Docs.takumi', {
-    headline: 'Blog',
-    title,
-    description
-  })
-}
-
 useCanonical()
 
 if (import.meta.server) {
+  if (page.value.image) {
+    useSeoMeta({ ogImage: page.value.image })
+  } else {
+    defineOgImage('Docs.takumi', {
+      headline: 'Blog',
+      title: page.value.title,
+      description: page.value.description
+    })
+  }
+
   useSchemaOrg([
     defineArticle({
       '@type': 'BlogPosting',
