@@ -44,7 +44,7 @@ export default defineNuxtPlugin(() => {
   // Head
   const headData: UseHeadInput = {
     style: [{
-      innerHTML: () => root.value,
+      innerHTML: root,
       tagPriority: 'critical',
       id: 'nuxt-ui-colors'
     }]

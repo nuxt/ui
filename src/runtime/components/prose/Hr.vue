@@ -14,18 +14,19 @@ export interface ProseHrProps {
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useAppConfig } from '#imports'
-import { useComponentUI } from '../../composables/useComponentUI'
+import { useComponentProps } from '../../composables/useComponentProps'
 import { tv } from '../../utils/tv'
 
-const props = defineProps<ProseHrProps>()
+const _props = defineProps<ProseHrProps>()
+
+const props = useComponentProps('prose.hr', _props)
 
 const appConfig = useAppConfig() as ProseHr['AppConfig']
-const uiProp = useComponentUI('prose.hr', props)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.hr || {}) }))
 </script>
 
 <template>
-  <hr :class="ui({ class: [uiProp?.base, props.class] })">
+  <hr :class="ui({ class: [props.ui?.base, props.class] })">
 </template>

@@ -49,18 +49,18 @@ export type DashboardSearchSlots = CommandPaletteSlots<CommandPaletteItem> & {
 
 <script setup lang="ts">
 import { computed, useTemplateRef } from 'vue'
-import { useForwardProps } from 'reka-ui'
 import { defu } from 'defu'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig, useColorMode, defineShortcuts, useRuntimeHook } from '#imports'
-import { useComponentUI } from '../composables/useComponentUI'
+import { useComponentProps } from '../composables/useComponentProps'
+import { useForwardProps } from '../composables/useForwardProps'
 import { useLocale } from '../composables/useLocale'
 import { omit, transformUI } from '../utils'
 import { tv } from '../utils/tv'
 import UCommandPalette from './CommandPalette.vue'
 import UModal from './Modal.vue'
 
-const props = withDefaults(defineProps<DashboardSearchProps>(), {
+const _props = withDefaults(defineProps<DashboardSearchProps>(), {
   shortcut: 'meta_k',
   colorMode: true,
   close: true,
@@ -68,6 +68,8 @@ const props = withDefaults(defineProps<DashboardSearchProps>(), {
   searchDelay: 100
 })
 const slots = defineSlots<DashboardSearchSlots>()
+
+const props = useComponentProps('dashboardSearch', _props)
 
 const open = defineModel<boolean>('open', { default: false })
 const searchTerm = defineModel<string>('searchTerm', { default: '' })
@@ -80,7 +82,6 @@ const { t } = useLocale()
 // eslint-disable-next-line vue/no-dupe-keys
 const colorMode = useColorMode()
 const appConfig = useAppConfig() as DashboardSearch['AppConfig']
-const uiProp = useComponentUI('dashboardSearch', props)
 
 const commandPaletteProps = useForwardProps(reactivePick(props, 'size', 'icon', 'placeholder', 'autofocus', 'loading', 'loadingIcon', 'close', 'closeIcon', 'searchDelay'))
 const modalProps = useForwardProps(reactivePick(props, 'overlay', 'transition', 'content', 'dismissible', 'fullscreen', 'modal', 'portal'))
@@ -92,6 +93,7 @@ const fuse = computed(() => defu({}, props.fuse, {
   }
 }))
 
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dashboardSearch || {}) })({
   size: props.size,
   fullscreen: props.fullscreen
@@ -162,11 +164,11 @@ defineExpose({
 <template>
   <UModal
     v-model:open="open"
-    :title="title || t('dashboardSearch.title')"
-    :description="description || t('dashboardSearch.description')"
+    :title="props.title || t('dashboardSearch.title')"
+    :description="props.description || t('dashboardSearch.description')"
     v-bind="modalProps"
     data-slot="modal"
-    :class="ui.modal({ class: [uiProp?.modal, props.class] })"
+    :class="ui.modal({ class: [props.ui?.modal, props.class] })"
   >
     <template #content="contentData">
       <slot name="content" v-bind="contentData">
@@ -177,7 +179,7 @@ defineExpose({
           :groups="groups"
           :fuse="fuse"
           :input="{ fixed: true }"
-          :ui="transformUI(omit(ui, ['modal']), uiProp)"
+          :ui="transformUI(omit(ui, ['modal']), props.ui)"
           @update:model-value="onSelect"
           @update:open="open = $event"
         >
