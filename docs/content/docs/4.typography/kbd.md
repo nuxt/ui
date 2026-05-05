@@ -1,7 +1,6 @@
 ---
 title: Kbd
 description: 'Display keyboard shortcuts and key combinations with proper styling.'
-framework: nuxt
 category: components
 links:
   - label: GitHub

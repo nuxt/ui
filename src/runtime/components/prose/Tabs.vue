@@ -33,20 +33,21 @@ export interface ProseTabsSlots {
 <script setup lang="ts">
 import { computed, watch, onMounted, ref, onBeforeUpdate } from 'vue'
 import { useState, useAppConfig } from '#imports'
-import { useComponentUI } from '../../composables/useComponentUI'
+import { useComponentProps } from '../../composables/useComponentProps'
 import { transformUI } from '../../utils'
 import { tv } from '../../utils/tv'
 import UTabs from '../Tabs.vue'
 
-const props = withDefaults(defineProps<ProseTabsProps>(), {
+const _props = withDefaults(defineProps<ProseTabsProps>(), {
   defaultValue: '0'
 })
 const slots = defineSlots<ProseTabsSlots>()
 
+const props = useComponentProps('prose.tabs', _props)
+
 const model = defineModel<string>()
 
 const appConfig = useAppConfig() as ProseTabs['AppConfig']
-const uiProp = useComponentUI('prose.tabs', props)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.tabs || {}) }))
@@ -118,7 +119,7 @@ onBeforeUpdate(() => rerenderCount.value++)
     :items="items"
     :class="props.class"
     :unmount-on-hide="false"
-    :ui="transformUI(ui(), uiProp)"
+    :ui="transformUI(ui(), props.ui)"
     @update:model-value="onUpdateModelValue"
   >
     <template #content="{ item }">

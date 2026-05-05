@@ -100,6 +100,11 @@ export default defineLocale<Messages>({
       decrement: 'Reducer',
       increment: 'Øg'
     },
+    listbox: {
+      noData: 'Ingen data',
+      noMatch: 'Ingen matchende data',
+      search: 'Søg…'
+    },
     modal: {
       close: 'Luk'
     },
@@ -119,6 +124,10 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'Kopiér kode til udklipsholder'
+      },
+      prompt: {
+        copy: 'Kopiér prompt',
+        openIn: 'Åbn i {name}'
       }
     },
     sidebar: {

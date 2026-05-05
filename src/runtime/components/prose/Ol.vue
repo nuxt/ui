@@ -19,21 +19,23 @@ export interface ProseOlSlots {
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useAppConfig } from '#imports'
-import { useComponentUI } from '../../composables/useComponentUI'
+import { useComponentProps } from '../../composables/useComponentProps'
 import { tv } from '../../utils/tv'
 
-const props = defineProps<ProseOlProps>()
+const _props = defineProps<ProseOlProps>()
+
 defineSlots<ProseOlSlots>()
 
+const props = useComponentProps('prose.ol', _props)
+
 const appConfig = useAppConfig() as ProseOl['AppConfig']
-const uiProp = useComponentUI('prose.ol', props)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.ol || {}) }))
 </script>
 
 <template>
-  <ol :class="ui({ class: [uiProp?.base, props.class] })">
+  <ol :class="ui({ class: [props.ui?.base, props.class] })">
     <slot />
   </ol>
 </template>

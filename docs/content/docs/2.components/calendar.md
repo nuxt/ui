@@ -287,7 +287,7 @@ name: 'calendar-date-picker-example'
 
 ### As a date range picker
 
-Use a [Button](/docs/components/button) and a [Popover](/docs/components/popover) component to create a date range picker.
+Use a [Button](/docs/components/button) and a [Popover](/docs/components/popover) component to create a date range picker with preset ranges.
 
 ::component-example
 ---

@@ -58,13 +58,14 @@ bun add @nuxt/ui tailwindcss
 
 ```ts [nuxt.config.ts]
 export default defineNuxtConfig({
-  modules: ['@nuxt/ui']
+  modules: ['@nuxt/ui'],
+  css: ['~/assets/css/main.css']
 })
 ```
 
 2. Import Tailwind CSS and Nuxt UI in your CSS:
 
-```css [assets/css/main.css]
+```css [app/assets/css/main.css]
 @import "tailwindcss";
 @import "@nuxt/ui";
 ```
@@ -90,7 +91,9 @@ export default defineConfig({
 
 2. Use the Nuxt UI Vue plugin in your `main.ts`:
 
-```ts [main.ts]
+```ts [src/main.ts]
+import './assets/css/main.css'
+
 import { createApp } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import ui from '@nuxt/ui/vue-plugin'
@@ -111,7 +114,7 @@ app.mount('#app')
 
 3. Import Tailwind CSS and Nuxt UI in your CSS:
 
-```css [assets/main.css]
+```css [src/assets/css/main.css]
 @import "tailwindcss";
 @import "@nuxt/ui";
 ```

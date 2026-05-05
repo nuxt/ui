@@ -2,7 +2,7 @@ import { z } from 'zod'
 import { queryCollection } from '@nuxt/content/server'
 
 export default defineMcpTool({
-  description: 'Searches components by category or text filter',
+  description: 'Search components by name, description, or category',
   annotations: {
     readOnlyHint: true,
     destructiveHint: false,
@@ -44,7 +44,6 @@ export default defineMcpTool({
       links: component.links
     }))
 
-    // Apply search filter if provided
     if (search) {
       const searchLower = search.toLowerCase()
       results = results.filter(component =>

@@ -100,6 +100,11 @@ export default defineLocale<Messages>({
       decrement: 'Ayirish',
       increment: 'Qoʻshish'
     },
+    listbox: {
+      noData: 'Maʼlumot yoʻq',
+      noMatch: 'Mos keluvchi natija topilmadi',
+      search: 'Qidirish…'
+    },
     modal: {
       close: 'Yopish'
     },
@@ -119,6 +124,10 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'Koddan buferga nusxa olish'
+      },
+      prompt: {
+        copy: 'So\'rovni nusxalash',
+        openIn: '{name}da ochish'
       }
     },
     sidebar: {

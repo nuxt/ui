@@ -100,6 +100,11 @@ export default defineLocale<Messages>({
       decrement: 'Уменьшить',
       increment: 'Увеличить'
     },
+    listbox: {
+      noData: 'Нет данных',
+      noMatch: 'Совпадений не найдено',
+      search: 'Поиск…'
+    },
     modal: {
       close: 'Закрыть'
     },
@@ -119,6 +124,10 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'Скопировать код в буфер обмена'
+      },
+      prompt: {
+        copy: 'Скопировать промпт',
+        openIn: 'Открыть в {name}'
       }
     },
     sidebar: {

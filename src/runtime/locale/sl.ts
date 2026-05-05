@@ -100,6 +100,11 @@ export default defineLocale<Messages>({
       decrement: 'Zmanjšaj',
       increment: 'Povišaj'
     },
+    listbox: {
+      noData: 'Ni podatkov',
+      noMatch: 'Ni ujemanj',
+      search: 'Išči…'
+    },
     modal: {
       close: 'Zapri'
     },
@@ -119,6 +124,10 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'Kopiraj kodo v odložišče'
+      },
+      prompt: {
+        copy: 'Kopiraj poziv',
+        openIn: 'Odpri v {name}'
       }
     },
     sidebar: {

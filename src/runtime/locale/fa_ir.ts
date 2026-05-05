@@ -101,6 +101,11 @@ export default defineLocale<Messages>({
       decrement: 'کاهش',
       increment: 'افزایش'
     },
+    listbox: {
+      noData: 'داده‌ای موجود نیست',
+      noMatch: 'داده‌ای یافت نشد',
+      search: 'جستجو…'
+    },
     modal: {
       close: 'بستن'
     },
@@ -120,6 +125,10 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'کپی کد در کلیپ‌بورد'
+      },
+      prompt: {
+        copy: 'کپی دستور',
+        openIn: 'باز کردن در {name}'
       }
     },
     sidebar: {

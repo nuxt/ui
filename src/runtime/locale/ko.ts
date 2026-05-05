@@ -100,6 +100,11 @@ export default defineLocale<Messages>({
       decrement: '감소',
       increment: '증가'
     },
+    listbox: {
+      noData: '데이터가 없습니다.',
+      noMatch: '일치하는 데이터가 없습니다.',
+      search: '검색…'
+    },
     modal: {
       close: '닫기'
     },
@@ -119,6 +124,10 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: '코드를 클립보드에 복사'
+      },
+      prompt: {
+        copy: '프롬프트 복사',
+        openIn: '{name}에서 열기'
       }
     },
     sidebar: {

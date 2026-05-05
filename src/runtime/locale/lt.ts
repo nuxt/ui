@@ -100,6 +100,11 @@ export default defineLocale<Messages>({
       decrement: 'Sumažinti',
       increment: 'Padidinti'
     },
+    listbox: {
+      noData: 'Nėra duomenų',
+      noMatch: 'Nėra atitinkančių duomenų',
+      search: 'Ieškoti…'
+    },
     modal: {
       close: 'Uždaryti'
     },
@@ -119,6 +124,10 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'Kopijuoti kodą į iškarpinę'
+      },
+      prompt: {
+        copy: 'Kopijuoti užklausą',
+        openIn: 'Atidaryti {name}'
       }
     },
     sidebar: {

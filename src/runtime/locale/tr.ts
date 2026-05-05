@@ -100,6 +100,11 @@ export default defineLocale<Messages>({
       decrement: 'Azalt',
       increment: 'Arttır'
     },
+    listbox: {
+      noData: 'Veri yok',
+      noMatch: 'Eşleşen veri yok',
+      search: 'Ara…'
+    },
     modal: {
       close: 'Kapat'
     },
@@ -119,6 +124,10 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'Kodu panoya kopyala'
+      },
+      prompt: {
+        copy: 'İstemi kopyala',
+        openIn: '{name} içinde aç'
       }
     },
     sidebar: {
