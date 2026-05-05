@@ -32,7 +32,7 @@ export default (options: Required<ModuleOptions>) => ({
     },
     color: {
       ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, { link: `focus-visible:outline-${color}` }])),
-      neutral: ''
+      neutral: { link: 'focus-visible:outline-inverted' }
     }
   },
   compoundVariants: [{
@@ -48,7 +48,13 @@ export default (options: Required<ModuleOptions>) => ({
     class: {
       link: `text-${color}`
     }
-  }))],
+  })), {
+    color: 'neutral',
+    active: true,
+    class: {
+      link: 'text-highlighted'
+    }
+  }],
   defaultVariants: {
     color: 'primary'
   }

@@ -90,6 +90,7 @@ const appConfig = useAppConfig() as Breadcrumb['AppConfig']
 // eslint-disable-next-line vue/no-dupe-keys
 const separatorIcon = computed(() => props.separatorIcon || (dir.value === 'rtl' ? appConfig.ui.icons.chevronLeft : appConfig.ui.icons.chevronRight))
 
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.breadcrumb || {}) })({
   color: props.color
 }))

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { BreadcrumbItem } from '@nuxt/ui'
 import theme from '#build/ui/breadcrumb'
 
 const colors = Object.keys(theme.variants.color)
@@ -26,7 +27,7 @@ const items = [{
 }, {
   label: 'Breadcrumb',
   to: '/components/breadcrumb'
-}]
+}] satisfies BreadcrumbItem[]
 </script>
 
 <template>
@@ -34,7 +35,7 @@ const items = [{
     <USelect v-model="attrs.color" :items="colors" multiple />
   </Navbar>
 
-  <Matrix v-slot="props" :attrs="attrs">
+  <Matrix v-slot="props" :attrs="attrs" class="flex-col">
     <UBreadcrumb :items="items" v-bind="props">
       <template #dropdown="{ item }">
         <UDropdownMenu :items="item.children">
