@@ -83,6 +83,27 @@ Decision matrices for choosing the right component. When in doubt, use the MCP `
 - Use `UBanner` for site-wide messages (maintenance, new feature)
 - Never use a toast for information the user needs to act on — use an alert or modal instead
 
+## Markdown
+
+When rendering markdown (for instance with Comark), **prefer Prose components** — they are styled and tuned for markdown contexts. Generic Nuxt UI components can also be used. `<ComarkRenderer>` (or `<Comark>`) auto-resolves `ProseX` components when `@nuxt/ui` is installed. In markdown, the `Prose` prefix can be omitted (`::callout`, `::steps`, etc.).
+
+| Need | Use | Not |
+|---|---|---|
+| Note / warning / tip | `Callout` | `UAlert` |
+| Tabbed content | `Tabs` + `TabsItem` | `UTabs` |
+| Step-by-step list | `Steps` | custom list |
+| Content card grid | `Card` + `CardGroup` | `UCard` |
+| Collapsible section | `Collapsible` / `Accordion` | `UCollapsible` / `UAccordion` |
+| Tabbed code blocks | `CodeGroup` | manual tabs |
+
+### Rules
+- Prose components use native Vue slots — Comark maps named `#slot` blocks directly to `<slot name="..." />`
+- Theme via `appConfig.ui.prose.<name>` using the same override pattern as other Nuxt UI components
+- `Callout` colors: `neutral` (default), `primary`, `secondary`, `info`, `success`, `warning`, `error`
+- Shorthand callout aliases: `::note`, `::tip`, `::warning`, `::caution` — expand to `Callout` with preset color + icon
+- `Tabs` `sync` prop persists selected tab to localStorage; `hash` scrolls to an anchor on tab change
+- `Steps` `level` prop sets the heading level the step titles map to (default: `3`)
+
 ## Layout containers
 
 | Need | Component | Why |
