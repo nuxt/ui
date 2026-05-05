@@ -14,14 +14,14 @@ export interface SeparatorProps extends Pick<_SeparatorProps, 'decorative'> {
    * @defaultValue 'div'
    */
   as?: any
-  /** Display a label in the middle. */
+  /** Display a label on the separator. */
   label?: string
   /**
-   * Display an icon in the middle.
+   * Display an icon on the separator.
    * @IconifyIcon
    */
   icon?: IconProps['name']
-  /** Display an avatar in the middle. */
+  /** Display an avatar on the separator. */
   avatar?: AvatarProps
   /**
    * @defaultValue 'neutral'
@@ -79,6 +79,8 @@ const rootProps = useForwardProps(reactivePick(props, 'as', 'decorative', 'orien
 
 const [DefineContainer, ReuseContainer] = createReusableTemplate()
 
+const hasContent = computed(() => !!(props.label || props.icon || props.avatar || slots.default))
+
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.separator || {}) })({
   color: props.color,
@@ -99,17 +101,18 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.separator ||
       </slot>
     </div>
   </DefineContainer>
+
   <Separator v-bind="rootProps" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <ReuseContainer v-if="(props.label || props.icon || props.avatar || !!slots.default) && props.position === 'start'" />
+    <ReuseContainer v-if="hasContent && props.position === 'start'" />
 
     <div data-slot="border" :class="ui.border({ class: props.ui?.border })" />
 
-    <template v-if="(props.label || props.icon || props.avatar || !!slots.default) && props.position === 'center'">
+    <template v-if="hasContent && props.position === 'center'">
       <ReuseContainer />
 
       <div data-slot="border" :class="ui.border({ class: props.ui?.border })" />
     </template>
 
-    <ReuseContainer v-if="(props.label || props.icon || props.avatar || !!slots.default) && props.position === 'end'" />
+    <ReuseContainer v-if="hasContent && props.position === 'end'" />
   </Separator>
 </template>

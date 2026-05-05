@@ -119,7 +119,6 @@ export default (options: Required<ModuleOptions>) => ({
   defaultVariants: {
     color: 'neutral',
     size: 'xs',
-    type: 'solid',
-    position: 'center'
+    type: 'solid'
   }
 })
