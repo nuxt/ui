@@ -110,7 +110,10 @@ props:
 Unlike the [`Select`](/docs/components/select) component, the SelectMenu expects the whole object to be passed to the `v-model` directive or the `default-value` prop by default.
 ::
 
-You can also pass an array of arrays to the `items` prop to display separated groups of items.
+### Grouped Items
+You can pass an array of arrays to the `items` prop to display separated groups of items.
+
+Use the label property to name each group heading.
 
 ::component-code
 ---
@@ -125,12 +128,16 @@ external:
 props:
   modelValue: 'Apple'
   items:
-    - - Apple
+    - - type: label
+        label: Fruits
+      - Apple
       - Banana
       - Blueberry
       - Grapes
       - Pineapple
-    - - Aubergine
+    - - type: label
+        label: Vegetables
+      - Aubergine
       - Broccoli
       - Carrot
       - Courgette
