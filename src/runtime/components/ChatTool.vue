@@ -76,12 +76,12 @@ export interface ChatToolSlots {
 import { ref, computed } from 'vue'
 import { CollapsibleRoot, CollapsibleTrigger, CollapsibleContent } from 'reka-ui'
 import { useAppConfig } from '#imports'
-import { useComponentUI } from '../composables/useComponentUI'
+import { useComponentProps } from '../composables/useComponentProps'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 import UChatShimmer from './ChatShimmer.vue'
 
-const props = withDefaults(defineProps<ChatToolProps>(), {
+const _props = withDefaults(defineProps<ChatToolProps>(), {
   open: undefined,
   loading: false,
   streaming: false,
@@ -92,9 +92,11 @@ const props = withDefaults(defineProps<ChatToolProps>(), {
 const emits = defineEmits<ChatToolEmits>()
 const slots = defineSlots<ChatToolSlots>()
 
-const appConfig = useAppConfig() as ChatTool['AppConfig']
-const uiProp = useComponentUI('chatTool', props)
+const props = useComponentProps('chatTool', _props)
 
+const appConfig = useAppConfig() as ChatTool['AppConfig']
+
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.chatTool || {}) })({
   variant: props.variant,
   chevron: props.chevron,
@@ -121,50 +123,50 @@ const chevronIconName = computed(() => props.chevronIcon || appConfig.ui.icons?.
   <CollapsibleRoot
     v-slot="{ open: isOpen }"
     :open="resolvedOpen"
-    :disabled="disabled"
-    :unmount-on-hide="unmountOnHide"
+    :disabled="props.disabled"
+    :unmount-on-hide="props.unmountOnHide"
     data-slot="root"
-    :class="ui.root({ class: [uiProp?.root, props.class] })"
+    :class="ui.root({ class: [props.ui?.root, props.class] })"
     @update:open="setOpen"
   >
     <CollapsibleTrigger as-child :disabled="!hasContent">
       <button
         type="button"
         data-slot="trigger"
-        :class="ui.trigger({ class: uiProp?.trigger })"
+        :class="ui.trigger({ class: props.ui?.trigger })"
       >
-        <span v-if="resolvedIcon || (hasContent && chevron === 'leading')" data-slot="leading" :class="ui.leading({ class: uiProp?.leading })">
+        <span v-if="resolvedIcon || (hasContent && props.chevron === 'leading')" data-slot="leading" :class="ui.leading({ class: props.ui?.leading })">
           <UIcon
             v-if="resolvedIcon"
             :name="resolvedIcon"
             data-slot="leadingIcon"
-            :class="ui.leadingIcon({ class: uiProp?.leadingIcon, alone: !(hasContent && chevron === 'leading') })"
+            :class="ui.leadingIcon({ class: props.ui?.leadingIcon, alone: !(hasContent && props.chevron === 'leading') })"
           />
           <UIcon
-            v-if="hasContent && chevron === 'leading'"
+            v-if="hasContent && props.chevron === 'leading'"
             :name="chevronIconName"
             data-slot="chevronIcon"
-            :class="ui.chevronIcon({ class: uiProp?.chevronIcon, alone: !resolvedIcon })"
+            :class="ui.chevronIcon({ class: props.ui?.chevronIcon, alone: !resolvedIcon })"
           />
         </span>
 
-        <span data-slot="label" :class="ui.label({ class: uiProp?.label })">
-          <UChatShimmer v-if="streaming && text" :text="text" v-bind="props.shimmer" />
-          <template v-else>{{ text }}</template>
-          <span v-if="suffix" data-slot="suffix" :class="ui.suffix({ class: uiProp?.suffix })">{{ suffix }}</span>
+        <span data-slot="label" :class="ui.label({ class: props.ui?.label })">
+          <UChatShimmer v-if="props.streaming && props.text" :text="props.text" v-bind="props.shimmer" />
+          <template v-else>{{ props.text }}</template>
+          <span v-if="props.suffix" data-slot="suffix" :class="ui.suffix({ class: props.ui?.suffix })">{{ props.suffix }}</span>
         </span>
 
         <UIcon
-          v-if="hasContent && chevron === 'trailing'"
+          v-if="hasContent && props.chevron === 'trailing'"
           :name="chevronIconName"
           data-slot="trailingIcon"
-          :class="ui.trailingIcon({ class: uiProp?.trailingIcon })"
+          :class="ui.trailingIcon({ class: props.ui?.trailingIcon })"
         />
       </button>
     </CollapsibleTrigger>
 
-    <CollapsibleContent data-slot="content" :class="ui.content({ class: uiProp?.content })">
-      <div data-slot="body" :class="ui.body({ class: uiProp?.body })">
+    <CollapsibleContent data-slot="content" :class="ui.content({ class: props.ui?.content })">
+      <div data-slot="body" :class="ui.body({ class: props.ui?.body })">
         <slot :open="isOpen" />
       </div>
     </CollapsibleContent>

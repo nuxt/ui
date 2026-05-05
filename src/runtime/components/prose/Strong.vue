@@ -19,21 +19,23 @@ export interface ProseStrongSlots {
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useAppConfig } from '#imports'
-import { useComponentUI } from '../../composables/useComponentUI'
+import { useComponentProps } from '../../composables/useComponentProps'
 import { tv } from '../../utils/tv'
 
-const props = defineProps<ProseStrongProps>()
+const _props = defineProps<ProseStrongProps>()
+
 defineSlots<ProseStrongSlots>()
 
+const props = useComponentProps('prose.strong', _props)
+
 const appConfig = useAppConfig() as ProseStrong['AppConfig']
-const uiProp = useComponentUI('prose.strong', props)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.strong || {}) }))
 </script>
 
 <template>
-  <strong :class="ui({ class: [uiProp?.base, props.class] })">
+  <strong :class="ui({ class: [props.ui?.base, props.class] })">
     <slot />
   </strong>
 </template>

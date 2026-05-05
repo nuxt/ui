@@ -26,26 +26,27 @@ export interface DashboardSidebarCollapseProps extends Omit<ButtonProps, LinkPro
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { useForwardProps } from 'reka-ui'
 import { reactiveOmit } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useLocale } from '../composables/useLocale'
-import { useComponentUI } from '../composables/useComponentUI'
+import { useComponentProps } from '../composables/useComponentProps'
+import { useForwardProps } from '../composables/useForwardProps'
 import { useDashboard } from '../utils/dashboard'
 import { tv } from '../utils/tv'
 import UButton from './Button.vue'
 
-const props = withDefaults(defineProps<DashboardSidebarCollapseProps>(), {
+const _props = withDefaults(defineProps<DashboardSidebarCollapseProps>(), {
   color: 'neutral',
   variant: 'ghost',
   side: 'left'
 })
 
+const props = useComponentProps('dashboardSidebarCollapse', _props)
+
 const buttonProps = useForwardProps(reactiveOmit(props, 'icon', 'side', 'class'))
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as DashboardSidebarCollapse['AppConfig']
-const uiProp = useComponentUI('dashboardSidebarCollapse', props)
 const { sidebarCollapsed, collapseSidebar } = useDashboard({ sidebarCollapsed: ref(false), collapseSidebar: () => {} })
 
 // eslint-disable-next-line vue/no-dupe-keys
@@ -60,7 +61,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dashboardSid
       'aria-label': sidebarCollapsed ? t('dashboardSidebarCollapse.expand') : t('dashboardSidebarCollapse.collapse'),
       ...$attrs
     }"
-    :class="ui({ class: [uiProp?.base, props.class], side: props.side })"
+    :class="ui({ class: [props.ui?.base, props.class], side: props.side })"
     @click="collapseSidebar?.(!sidebarCollapsed)"
   />
 </template>

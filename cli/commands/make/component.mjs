@@ -3,7 +3,7 @@ import { resolve } from 'pathe'
 import { defineCommand } from 'citty'
 import { consola } from 'consola'
 import { splitByCase, upperFirst, camelCase, kebabCase } from 'scule'
-import { appendFile, sortFile } from '../../utils.mjs'
+import { appendFile, appendThemeDefault, sortFile } from '../../utils.mjs'
 import templates from '../../templates.mjs'
 
 export default defineCommand({
@@ -75,8 +75,12 @@ export default defineCommand({
 
     if (!args.prose) {
       const typesPath = resolve(path, 'src/runtime/types/index.ts')
-      await appendFile(typesPath, `export * from '../components/${args.content ? 'content/' : ''}${splitByCase(name).map(p => upperFirst(p)).join('')}.vue'`)
+      const pascal = splitByCase(name).map(p => upperFirst(p)).join('')
+      await appendFile(typesPath, `export * from '../components/${args.content ? 'content/' : ''}${pascal}.vue'`)
       await sortFile(typesPath)
+
+      const useComponentPropsPath = resolve(path, 'src/runtime/composables/useComponentProps.ts')
+      await appendThemeDefault(useComponentPropsPath, camelCase(name), `${pascal}Props`)
     }
   }
 })

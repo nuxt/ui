@@ -21,23 +21,25 @@ export interface ProseAccordionItemSlots {
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useAppConfig } from '#imports'
-import { useComponentUI } from '../../composables/useComponentUI'
+import { useComponentProps } from '../../composables/useComponentProps'
 import { tv } from '../../utils/tv'
 
-const props = defineProps<ProseAccordionItemProps>()
+const _props = defineProps<ProseAccordionItemProps>()
+
 defineSlots<ProseAccordionItemSlots>()
 
+const props = useComponentProps('prose.accordionItem', _props)
+
 const appConfig = useAppConfig() as ProseAccordionItem['AppConfig']
-const uiProp = useComponentUI('prose.accordionItem', props)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.accordionItem || {}) }))
 </script>
 
 <template>
-  <div :class="ui({ class: [uiProp?.base, props.class] })">
+  <div :class="ui({ class: [props.ui?.base, props.class] })">
     <slot>
-      {{ description }}
+      {{ props.description }}
     </slot>
   </div>
 </template>

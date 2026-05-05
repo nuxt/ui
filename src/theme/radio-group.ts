@@ -175,7 +175,6 @@ export default (options: Required<ModuleOptions>) => ({
     size: 'md',
     color: 'primary',
     variant: 'list',
-    orientation: 'vertical',
     indicator: 'start'
   }
 })

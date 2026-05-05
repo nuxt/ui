@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { withoutTrailingSlash } from 'ufo'
 import colors from 'tailwindcss/colors'
 
 const route = useRoute()
@@ -23,7 +22,6 @@ useHead({
   ],
   link: computed(() => [
     // { rel: 'icon', type: 'image/svg+xml', href: '/icon.svg' },
-    { rel: 'canonical', href: `https://ui.nuxt.com${withoutTrailingSlash(route.path)}` },
     ...link.value
   ]),
   style,
@@ -32,10 +30,18 @@ useHead({
   }
 })
 
-useServerSeoMeta({
-  ogSiteName: 'Nuxt UI',
-  twitterCard: 'summary_large_image'
-})
+if (import.meta.server) {
+  useSeoMeta({
+    ogSiteName: 'Nuxt UI',
+    twitterCard: 'summary_large_image'
+  })
+
+  useSchemaOrg([
+    defineWebSite({
+      name: useSiteConfig().name
+    })
+  ])
+}
 
 useFaviconFromTheme()
 
@@ -62,16 +68,14 @@ provide('navigation', rootNavigation)
 
         <template v-if="!route.path.startsWith('/examples')">
           <Footer />
-
-          <ClientOnly>
-            <Search :files="files" :navigation="navigationByFramework" />
-          </ClientOnly>
         </template>
       </div>
 
       <template v-if="!route.path.startsWith('/examples')">
         <ClientOnly>
           <Chat />
+
+          <Search :files="files" :navigation="navigationByFramework" />
         </ClientOnly>
       </template>
     </div>
