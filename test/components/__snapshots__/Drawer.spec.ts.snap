@@ -185,7 +185,7 @@ exports[`Drawer > renders with direction left correctly 1`] = `
 
 
 <div data-state="open" style="pointer-events: auto;" data-vaul-overlay="" data-vaul-snap-points="false" data-vaul-snap-points-overlay="true" data-slot="overlay" class="fixed inset-0 bg-elevated/75"></div>
-<div data-dismissable-layer="" style="pointer-events: auto; --snap-point-height: 0;" tabindex="-1" data-vaul-drawer="" data-vaul-drawer-direction="left" data-vaul-delayed-snap-points="false" data-vaul-snap-points="false" data-slot="content" class="fixed bg-default ring ring-default flex focus:outline-none flex-row-reverse w-auto max-w-[calc(100%-2rem)] inset-y-0 left-0 rounded-r-lg" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open">
+<div data-dismissable-layer="" style="pointer-events: auto; --snap-point-height: 0;" tabindex="-1" data-vaul-drawer="" data-vaul-drawer-direction="left" data-vaul-delayed-snap-points="false" data-vaul-snap-points="false" data-slot="content" class="fixed bg-default ring ring-default flex focus:outline-none flex-row-reverse rtl:flex-row w-auto max-w-[calc(100%-2rem)] inset-y-0 left-0 rounded-r-lg" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open">
   <div data-vaul-drawer-visible="true" data-vaul-handle="" aria-hidden="true" data-slot="handle" class="shrink-0 !bg-accented transition-opacity !mr-4 !h-12 !w-1.5 mt-auto mb-auto"><span data-vaul-handle-hitarea="" aria-hidden="true"></span></div>
   <!--v-if-->
   <div data-slot="container" class="w-full flex flex-col gap-4 p-4 overflow-y-auto">
@@ -210,7 +210,7 @@ exports[`Drawer > renders with direction left inset correctly 1`] = `
 
 
 <div data-state="open" style="pointer-events: auto;" data-vaul-overlay="" data-vaul-snap-points="false" data-vaul-snap-points-overlay="true" data-slot="overlay" class="fixed inset-0 bg-elevated/75"></div>
-<div data-dismissable-layer="" style="pointer-events: auto; --snap-point-height: 0;" tabindex="-1" data-vaul-drawer="" data-vaul-drawer-direction="left" data-vaul-delayed-snap-points="false" data-vaul-snap-points="false" data-slot="content" class="fixed bg-default ring ring-default flex focus:outline-none flex-row-reverse rounded-lg after:hidden overflow-hidden [--initial-transform:calc(100%+1.5rem)] w-auto max-w-[calc(100%-2rem)] inset-y-4 left-4" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open">
+<div data-dismissable-layer="" style="pointer-events: auto; --snap-point-height: 0;" tabindex="-1" data-vaul-drawer="" data-vaul-drawer-direction="left" data-vaul-delayed-snap-points="false" data-vaul-snap-points="false" data-slot="content" class="fixed bg-default ring ring-default flex focus:outline-none flex-row-reverse rtl:flex-row rounded-lg after:hidden overflow-hidden [--initial-transform:calc(100%+1.5rem)] w-auto max-w-[calc(100%-2rem)] inset-y-4 left-4" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open">
   <div data-vaul-drawer-visible="true" data-vaul-handle="" aria-hidden="true" data-slot="handle" class="shrink-0 !bg-accented transition-opacity !mr-4 !h-12 !w-1.5 mt-auto mb-auto"><span data-vaul-handle-hitarea="" aria-hidden="true"></span></div>
   <!--v-if-->
   <div data-slot="container" class="w-full flex flex-col gap-4 p-4 overflow-y-auto">
@@ -235,7 +235,7 @@ exports[`Drawer > renders with direction right correctly 1`] = `
 
 
 <div data-state="open" style="pointer-events: auto;" data-vaul-overlay="" data-vaul-snap-points="false" data-vaul-snap-points-overlay="true" data-slot="overlay" class="fixed inset-0 bg-elevated/75"></div>
-<div data-dismissable-layer="" style="pointer-events: auto; --snap-point-height: 0;" tabindex="-1" data-vaul-drawer="" data-vaul-drawer-direction="right" data-vaul-delayed-snap-points="false" data-vaul-snap-points="false" data-slot="content" class="fixed bg-default ring ring-default flex focus:outline-none flex-row w-auto max-w-[calc(100%-2rem)] inset-y-0 right-0 rounded-l-lg" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open">
+<div data-dismissable-layer="" style="pointer-events: auto; --snap-point-height: 0;" tabindex="-1" data-vaul-drawer="" data-vaul-drawer-direction="right" data-vaul-delayed-snap-points="false" data-vaul-snap-points="false" data-slot="content" class="fixed bg-default ring ring-default flex focus:outline-none flex-row rtl:flex-row-reverse w-auto max-w-[calc(100%-2rem)] inset-y-0 right-0 rounded-l-lg" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open">
   <div data-vaul-drawer-visible="true" data-vaul-handle="" aria-hidden="true" data-slot="handle" class="shrink-0 !bg-accented transition-opacity !ml-4 !h-12 !w-1.5 mt-auto mb-auto"><span data-vaul-handle-hitarea="" aria-hidden="true"></span></div>
   <!--v-if-->
   <div data-slot="container" class="w-full flex flex-col gap-4 p-4 overflow-y-auto">
@@ -260,7 +260,7 @@ exports[`Drawer > renders with direction right inset correctly 1`] = `
 
 
 <div data-state="open" style="pointer-events: auto;" data-vaul-overlay="" data-vaul-snap-points="false" data-vaul-snap-points-overlay="true" data-slot="overlay" class="fixed inset-0 bg-elevated/75"></div>
-<div data-dismissable-layer="" style="pointer-events: auto; --snap-point-height: 0;" tabindex="-1" data-vaul-drawer="" data-vaul-drawer-direction="right" data-vaul-delayed-snap-points="false" data-vaul-snap-points="false" data-slot="content" class="fixed bg-default ring ring-default flex focus:outline-none flex-row rounded-lg after:hidden overflow-hidden [--initial-transform:calc(100%+1.5rem)] w-auto max-w-[calc(100%-2rem)] inset-y-4 right-4" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open">
+<div data-dismissable-layer="" style="pointer-events: auto; --snap-point-height: 0;" tabindex="-1" data-vaul-drawer="" data-vaul-drawer-direction="right" data-vaul-delayed-snap-points="false" data-vaul-snap-points="false" data-slot="content" class="fixed bg-default ring ring-default flex focus:outline-none flex-row rtl:flex-row-reverse rounded-lg after:hidden overflow-hidden [--initial-transform:calc(100%+1.5rem)] w-auto max-w-[calc(100%-2rem)] inset-y-4 right-4" id="" role="dialog" aria-describedby="reka-dialog-description-v-0-0-1" aria-labelledby="reka-dialog-title-v-0-0-0" data-state="open">
   <div data-vaul-drawer-visible="true" data-vaul-handle="" aria-hidden="true" data-slot="handle" class="shrink-0 !bg-accented transition-opacity !ml-4 !h-12 !w-1.5 mt-auto mb-auto"><span data-vaul-handle-hitarea="" aria-hidden="true"></span></div>
   <!--v-if-->
   <div data-slot="container" class="w-full flex flex-col gap-4 p-4 overflow-y-auto">

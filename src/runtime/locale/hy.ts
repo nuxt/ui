@@ -100,6 +100,11 @@ export default defineLocale<Messages>({
       decrement: 'Պակասեցնել',
       increment: 'Ավելացնել'
     },
+    listbox: {
+      noData: 'Տվյալներ չկան',
+      noMatch: 'Համընկնումներ չեն գտնվել',
+      search: 'Որոնում…'
+    },
     modal: {
       close: 'Փակել'
     },
@@ -119,6 +124,10 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'Պատճենել կոդը սեղմատախտակին'
+      },
+      prompt: {
+        copy: 'Պատճենել հարցումը',
+        openIn: 'Բացել {name}-ում'
       }
     },
     sidebar: {

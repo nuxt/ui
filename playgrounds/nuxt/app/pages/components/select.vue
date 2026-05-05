@@ -81,6 +81,7 @@ const valueMultiple = ref([fruits[0]!, vegetables[0]!])
     <USelect v-model="valueMultiple" multiple placeholder="Multiple" :items="items" v-bind="props" />
     <USelect :default-value="valueMultiple" multiple placeholder="Multiple" :items="items" v-bind="props" />
     <USelect multiple placeholder="Multiple with badges" :items="itemsBadges" v-bind="props" />
+    <USelect :default-value="value" :items="items" v-bind="props" :content="{ position: 'item-aligned' }" />
     <USelect placeholder="Highlight" highlight :items="items" v-bind="props" />
     <USelect placeholder="Disabled" disabled :items="items" v-bind="props" />
     <USelect placeholder="Required" required :items="items" v-bind="props" />

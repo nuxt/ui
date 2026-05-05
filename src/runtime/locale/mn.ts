@@ -100,6 +100,11 @@ export default defineLocale<Messages>({
       decrement: 'Хасах',
       increment: 'Нэмэх'
     },
+    listbox: {
+      noData: 'Мэдээлэл байхгүй',
+      noMatch: 'Тохирох мэдээлэл олдсонгүй',
+      search: 'Хайх…'
+    },
     modal: {
       close: 'Хаах'
     },
@@ -119,6 +124,10 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'Кодыг санах ойд хуулах'
+      },
+      prompt: {
+        copy: 'Хүсэлтийг хуулах',
+        openIn: '{name} дотор нээх'
       }
     },
     sidebar: {

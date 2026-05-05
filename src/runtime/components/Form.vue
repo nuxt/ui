@@ -81,14 +81,14 @@ import { useEventBus } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { formOptionsInjectionKey, formInputsInjectionKey, formBusInjectionKey, formLoadingInjectionKey, formErrorsInjectionKey, formStateInjectionKey } from '../composables/useFormField'
 import { tv } from '../utils/tv'
-import { useComponentUI } from '../composables/useComponentUI'
+import { useComponentProps } from '../composables/useComponentProps'
 import { validateSchema, getAtPath, setAtPath } from '../utils/form'
 import { FormValidationException } from '../types/form'
 
 type I = InferInput<S>
 type O = InferOutput<S>
 
-const props = withDefaults(defineProps<FormProps<S, T, N>>(), {
+const _props = withDefaults(defineProps<FormProps<S, T, N>>(), {
   validateOn() {
     return ['input', 'blur', 'change'] as FormInputEvents[]
   },
@@ -100,8 +100,9 @@ const props = withDefaults(defineProps<FormProps<S, T, N>>(), {
 const emits = defineEmits<FormEmits<S, T>>()
 defineSlots<FormSlots>()
 
+const props = useComponentProps<FormProps<S, T, N>>('form', _props)
+
 const appConfig = useAppConfig() as FormConfig['AppConfig']
-const uiProp = useComponentUI('form', props)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.form || {}) }))
@@ -117,6 +118,7 @@ const parentBus = props.nested === true && inject(
 )
 
 const parentState = props.nested === true ? inject(formStateInjectionKey, undefined) : undefined
+// eslint-disable-next-line vue/no-dupe-keys
 const state = computed(() => {
   if (parentState?.value) {
     return props.name ? getAtPath(parentState.value, props.name) : parentState.value
@@ -265,7 +267,7 @@ const loading = ref(false)
 provide(formLoadingInjectionKey, readonly(loading))
 
 async function onSubmitWrapper(payload: Event) {
-  loading.value = props.loadingAuto && true
+  loading.value = !!props.loadingAuto
 
   const event = payload as FormSubmitEvent<FormData<S, T>>
 
@@ -288,6 +290,7 @@ async function onSubmitWrapper(payload: Event) {
   }
 }
 
+// eslint-disable-next-line vue/no-dupe-keys
 const disabled = computed(() => props.disabled || loading.value)
 
 provide(formOptionsInjectionKey, computed(() => ({
@@ -459,7 +462,7 @@ defineExpose(api)
     :is="parentBus ? 'div' : 'form'"
     :id="formId"
     ref="formRef"
-    :class="ui({ class: [uiProp?.base, props.class] })"
+    :class="ui({ class: [props.ui?.base, props.class] })"
     @submit.prevent="onSubmitWrapper"
   >
     <slot :errors="errors" :loading="loading" />

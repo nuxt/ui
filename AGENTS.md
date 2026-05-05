@@ -65,6 +65,7 @@ Options:
 
 - **Conventional commits**: All commit messages must follow [conventional commits](https://conventionalcommits.org) (e.g. `fix(Button): resolve hover state`, `feat(Modal): add fullscreen prop`).
 - **Semantic colors**: Use `text-default`, `bg-elevated`, etc. — never raw Tailwind palette colors like `text-gray-500`.
+- **`Soon` badge on docs headings**: PRs that introduce a new feature or fix often add `:badge{label="Soon" class="align-text-top"}` to the relevant docs heading. This is intentional: the docs site redeploys on merge, but the feature only ships on the next npm release — the badge bridges that gap. Do NOT flag this as inconsistent in reviews. See [documentation.md](.github/contributing/documentation.md) for details.
 
 ## Library Source (`src/` and `test/`)
 
@@ -89,9 +90,10 @@ Load these based on your task. **Do not load all files at once** — only load w
 | Props defaults | Use `withDefaults()` for runtime, JSDoc `@defaultValue` for docs |
 | Template slots | Add `data-slot="name"` attributes on all elements |
 | Computed ui | Always use `computed(() => tv(...))` for reactive theming |
-| Theme support | Use `useComponentUI(name, props)` to merge Theme context with component `ui` prop |
+| Theme defaults | Wrap raw props with `useComponentProps(name, _props)` to resolve the priority chain (explicit prop > `<UTheme :props>` > `withDefaults` > `app.config.ui.<name>.defaultVariants`). The proxy deep-merges `ui` automatically — read `props.ui?.<slot>` in templates. `theme.defaultVariants` is **not** read by the proxy — it only feeds `tv()` class resolution. Pass the **raw** `_props` (not the proxy) to `useFormField` / `useFieldGroup` / `useAvatarGroup` so their injection precedence (closer context wins) stays correct. |
+| Form/group fallback | When consuming `size` / `color` / `highlight` from `useFormField`, `useFieldGroup`, or `useAvatarGroup`, always fall back to the proxy in `tv()` calls: `size: size.value ?? props.size`, `color: color.value ?? props.color`, `highlight: highlight.value ?? props.highlight`. This gives the full precedence `explicit > group/formField > <UTheme :props> > undefined`. Without the `?? props.X` fallback, `<UTheme :props>` is silently dropped when the closer context (FormField/FieldGroup/AvatarGroup) is absent. |
 | Semantic colors | Use `text-default`, `bg-elevated`, etc. - never Tailwind palette |
-| Reka UI props | Use `reactivePick` + `useForwardPropsEmits` to forward props |
+| Reka UI props | Use `reactivePick` + `useForwardProps(source, emits?)` from `composables/useForwardProps` to forward props (proxy-aware; reka-ui's `useForwardProps` / `useForwardPropsEmits` filter out `<UTheme :props>` defaults) |
 | Form components | Use `useFormField` and `useFieldGroup` composables |
 
 ## Component Creation Workflow
@@ -105,12 +107,13 @@ Progress:
 - [ ] 2. Implement component in src/runtime/components/
 - [ ] 3. Create theme in src/theme/
 - [ ] 4. Export types from src/runtime/types/index.ts
-- [ ] 5. Write tests in test/components/
-- [ ] 6. Create docs in docs/content/docs/2.components/
-- [ ] 7. Add playground page
-- [ ] 8. Run pnpm run lint
-- [ ] 9. Run pnpm run typecheck
-- [ ] 10. Run pnpm run test
+- [ ] 5. Register in ThemeDefaults interface (src/runtime/composables/useComponentProps.ts)
+- [ ] 6. Write tests in test/components/
+- [ ] 7. Create docs in docs/content/docs/2.components/
+- [ ] 8. Add playground page
+- [ ] 9. Run pnpm run lint
+- [ ] 10. Run pnpm run typecheck
+- [ ] 11. Run pnpm run test
 ```
 
 ### PR Review Checklist
@@ -126,6 +129,9 @@ PR Review:
 - [ ] Conventional commit message format
 - [ ] All checks pass (lint, typecheck, test)
 ```
+
+**Do NOT flag as issues:**
+- `:badge{label="Soon"}` on docs headings in PRs adding new features/fixes (intentional — bridges the gap between docs deploy on merge and feature shipping on next npm release).
 
 ## Before Submitting
 

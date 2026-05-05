@@ -84,6 +84,15 @@ export interface LinkProps extends NuxtLinkProps, /** @vue-ignore */ Omit<Button
   custom?: boolean
   /** When `true`, only styles from `class`, `activeClass`, and `inactiveClass` will be applied. */
   raw?: boolean
+  /**
+   * Control i18n auto-localization when `@nuxtjs/i18n` is installed.
+   * - `undefined` / `true` (default): auto-localizes to the current locale using `$localePath`.
+   *   Paths already carrying a locale prefix (from e.g. `switchLocalePath()`) are detected
+   *   and left untouched to prevent double-prefixing.
+   * - `false`: explicitly disables auto-localization.
+   * - `string`: localizes to a specific locale (e.g. `'fr'`).
+   */
+  locale?: boolean | string
   class?: any
 }
 
@@ -91,7 +100,7 @@ export interface LinkProps extends NuxtLinkProps, /** @vue-ignore */ Omit<Button
  * Link-related props that can be omitted from ButtonProps when link functionality is not needed.
  * Use this with `Omit<ButtonProps, LinkPropsKeys>` in components where buttons should not act as links.
  */
-export type LinkPropsKeys = 'to' | 'href' | 'target' | 'rel' | 'noRel' | 'external' | 'prefetch' | 'prefetchOn' | 'prefetchedClass' | 'noPrefetch' | 'trailingSlash' | 'replace' | 'ariaCurrentValue' | 'active' | 'activeClass' | 'exact' | 'exactQuery' | 'exactHash' | 'inactiveClass' | 'download' | 'ping' | 'referrerpolicy' | 'hreflang' | 'media'
+export type LinkPropsKeys = 'to' | 'href' | 'target' | 'rel' | 'noRel' | 'external' | 'prefetch' | 'prefetchOn' | 'prefetchedClass' | 'noPrefetch' | 'trailingSlash' | 'replace' | 'ariaCurrentValue' | 'active' | 'activeClass' | 'exact' | 'exactQuery' | 'exactHash' | 'inactiveClass' | 'locale' | 'download' | 'ping' | 'referrerpolicy' | 'hreflang' | 'media'
 
 export interface LinkSlots {
   default?(props: { active: boolean }): VNode[]
@@ -110,9 +119,9 @@ import { computed } from 'vue'
 import { isEqual } from 'ohash/utils'
 import { useForwardProps, Slot } from 'reka-ui'
 import { defu } from 'defu'
-import { reactiveOmit } from '@vueuse/core'
 import { hasProtocol } from 'ufo'
-import { useRoute, useAppConfig } from '#imports'
+import { reactiveOmit } from '@vueuse/core'
+import { useRoute, useAppConfig, useNuxtApp } from '#imports'
 import { mergeClasses } from '../utils'
 import { tv } from '../utils/tv'
 import { isPartiallyEqual } from '../utils/link'
@@ -130,8 +139,9 @@ defineSlots<LinkSlots>()
 
 const route = useRoute()
 const appConfig = useAppConfig() as Link['AppConfig']
+const nuxtApp = useNuxtApp()
 
-const nuxtLinkProps = useForwardProps(reactiveOmit(props, 'as', 'type', 'disabled', 'active', 'exact', 'exactQuery', 'exactHash', 'activeClass', 'inactiveClass', 'to', 'href', 'raw', 'custom', 'class'))
+const nuxtLinkProps = useForwardProps(reactiveOmit(props, 'as', 'type', 'disabled', 'active', 'exact', 'exactQuery', 'exactHash', 'activeClass', 'inactiveClass', 'to', 'href', 'raw', 'custom', 'locale', 'class'))
 
 const ui = computed(() => tv({
   extend: tv(theme),
@@ -145,7 +155,33 @@ const ui = computed(() => tv({
   }, appConfig.ui?.link || {})
 }))
 
-const to = computed(() => props.to ?? props.href)
+const to = computed(() => {
+  const path = props.to ?? props.href
+  if (!path) return path
+
+  if (typeof path !== 'string') return path
+
+  if (props.external || hasProtocol(path, { acceptRelative: true })) {
+    return path
+  }
+
+  if (props.locale === false) {
+    return path
+  }
+
+  const localePath = nuxtApp.$localePath as ((route: RouteLocationRaw, locale?: string) => string) | undefined
+  if (!localePath) {
+    return path
+  }
+
+  const i18n = nuxtApp.$i18n as { localeCodes?: { value: string[] } } | undefined
+  const codes = i18n?.localeCodes?.value
+  if (codes?.length && new RegExp(`^/(${codes.join('|')})($|[/?#])`).test(path)) {
+    return path
+  }
+
+  return localePath(path, typeof props.locale === 'string' ? props.locale : undefined)
+})
 
 const isInternalLink = computed(() => {
   if (!to.value) return false

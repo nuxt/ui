@@ -1,0 +1,25 @@
+{
+  "skills": [
+    {
+      "name": "nuxt-ui",
+      "description": "Build UIs with @nuxt/ui v4 — 125+ accessible Vue components with Tailwind CSS theming. Use when creating interfaces, customizing themes to match a brand, building forms, or composing layouts like dashboards, docs sites, and chat interfaces.",
+      "files": [
+        "SKILL.md",
+        "references/components.md",
+        "references/guidelines/component-selection.md",
+        "references/guidelines/conventions.md",
+        "references/guidelines/design-system.md",
+        "references/guidelines/forms.md",
+        "references/layouts/chat.md",
+        "references/layouts/dashboard.md",
+        "references/layouts/docs.md",
+        "references/layouts/editor.md",
+        "references/layouts/landing.md",
+        "references/recipes/auth.md",
+        "references/recipes/data-tables.md",
+        "references/recipes/navigation.md",
+        "references/recipes/overlays.md"
+      ]
+    }
+  ]
+}

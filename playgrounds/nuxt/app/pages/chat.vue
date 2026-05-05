@@ -3,6 +3,8 @@ import { isReasoningUIPart, isTextUIPart, isToolUIPart, getToolName } from 'ai'
 import type { UIMessage } from 'ai'
 import { Chat } from '@ai-sdk/vue'
 import { isPartStreaming, isToolStreaming } from '@nuxt/ui/utils/ai'
+import { Comark } from '@comark/vue'
+import highlight from '@comark/vue/plugins/highlight'
 
 const toast = useToast()
 
@@ -72,9 +74,11 @@ function getFaviconUrl(url: string): string {
 
   <div class="flex-1 flex flex-col gap-4 sm:gap-6 max-w-xl w-full mx-auto min-h-0">
     <UChatMessages
+      should-auto-scroll
       :messages="chat.messages"
       :status="chat.status"
-      :spacing-offset="48"
+      :spacing-offset="72"
+      :assistant="{ actions: [{ label: 'Edit', icon: 'i-lucide-pencil', onClick: () => console.log('edit') }] }"
     >
       <template #content="{ message }">
         <template v-for="(part, index) in message.parts" :key="`${message.id}-${part.type}-${index}`">
@@ -84,18 +88,20 @@ function getFaviconUrl(url: string): string {
             :streaming="isPartStreaming(part)"
             chevron="leading"
           >
-            <MDC
-              :value="part.text"
-              :cache-key="`reasoning-${message.id}-${index}`"
+            <Comark
+              :markdown="part.text"
+              :streaming="isPartStreaming(part)"
+              :plugins="[highlight()]"
               class="*:first:mt-0 *:last:mb-0"
             />
           </UChatReasoning>
 
           <template v-else-if="isTextUIPart(part)">
-            <MDC
+            <Comark
               v-if="message.role === 'assistant'"
-              :value="part.text"
-              :cache-key="`${message.id}-${index}`"
+              :markdown="part.text"
+              :streaming="isPartStreaming(part)"
+              :plugins="[highlight()]"
               class="*:first:mt-0 *:last:mb-0"
             />
             <p v-else-if="message.role === 'user'" class="whitespace-pre-wrap">

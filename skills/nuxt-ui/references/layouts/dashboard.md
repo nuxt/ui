@@ -2,6 +2,13 @@
 
 Build admin interfaces with resizable sidebars, multi-panel layouts, and toolbars.
 
+## When to use
+
+- Admin panels, back-office UIs
+- Email clients, project management tools
+- Any app with a persistent sidebar and content panels
+- Combine with chat or editor layouts for specialized dashboards
+
 ## Component tree
 
 ```
@@ -53,9 +60,9 @@ const items = computed<NavigationMenuItem[]>(() => [{
 
       <template #default="{ collapsed }">
         <UNavigationMenu
+          :collapsed="collapsed"
           :items="items"
           orientation="vertical"
-          :ui="{ link: collapsed ? 'justify-center' : undefined }"
         />
       </template>
 
@@ -86,6 +93,9 @@ definePageMeta({ layout: 'dashboard' })
   <UDashboardPanel>
     <template #header>
       <UDashboardNavbar title="Home">
+        <template #leading>
+          <UDashboardSidebarCollapse />
+        </template>
         <template #right>
           <UButton icon="i-lucide-plus" label="New" />
         </template>
@@ -99,43 +109,48 @@ definePageMeta({ layout: 'dashboard' })
 </template>
 ```
 
+### Common mistakes
+
+- Forgetting `definePageMeta({ layout: 'dashboard' })` — the page won't use the dashboard layout without it.
+- Putting content directly in `UDashboardPanel` without using `#body` slot — content won't scroll properly.
+- Not handling the `collapsed` slot prop — sidebar content should adapt when collapsed (hide labels, center icons).
+
 ## Key components
 
 ### DashboardGroup
 
-Root layout wrapper. Manages sidebar state and persistence.
+Root wrapper. Manages sidebar state and persistence.
 
-| Prop | Default | Description |
+| Prop | Default | Purpose |
 |---|---|---|
-| `storage` | `'cookie'` | State persistence: `'cookie'`, `'localStorage'`, `false` |
+| `storage` | `'cookie'` | `'cookie'`, `'localStorage'`, `false` |
 | `storage-key` | `'dashboard'` | Storage key name |
-| `unit` | `'percentages'` | Size unit: `'percentages'` or `'pixels'` |
 
 ### DashboardSidebar
 
 Resizable, collapsible sidebar. Must be inside `DashboardGroup`.
 
-| Prop | Default | Description |
+| Prop | Default | Purpose |
 |---|---|---|
-| `resizable` | `false` | Enable resize by dragging |
-| `collapsible` | `false` | Enable collapse when dragged to edge |
+| `resizable` | `false` | Drag to resize |
+| `collapsible` | `false` | Collapse when dragged to edge |
 | `side` | `'left'` | `'left'` or `'right'` |
-| `mode` | `'slideover'` | Mobile menu mode: `'modal'`, `'slideover'`, `'drawer'` |
+| `mode` | `'slideover'` | Mobile: `'modal'`, `'slideover'`, `'drawer'` |
 
-Slots receive `{ collapsed }` prop. Control state: `v-model:collapsed`, `v-model:open` (mobile).
+All slots receive `{ collapsed, collapse }` — `collapsed` is the boolean state, `collapse(value)` toggles it programmatically. Use `v-model:collapsed` and `v-model:open` (mobile) for state control.
 
 ### DashboardPanel
 
-Content panel with `#header`, `#body` (scrollable), `#footer`, and `#default` (raw) slots.
-
-| Prop | Default | Description |
-|---|---|---|
-| `id` | `—` | Unique ID (required for multi-panel) |
-| `resizable` | `false` | Enable resize by dragging |
+Content panel with `#header`, `#body` (scrollable), `#footer`, and `#default` (raw, no scroll) slots.
 
 ### DashboardNavbar / DashboardToolbar
 
-Navbar has `#left`, `#default`, `#right` slots and a `title` prop. Toolbar has the same slots for filters/actions below the navbar.
+Navbar: `#leading`, `#left`, `#default`, `#right` slots + `title` prop. Use `UDashboardSidebarCollapse` in `#leading` to toggle sidebar on mobile.
+Toolbar: same slots, sits below navbar for filters/actions.
+
+### UNavigationMenu in sidebar
+
+Always pass `:collapsed="collapsed"` to `UNavigationMenu` inside a collapsible sidebar — it auto-hides labels and centers icons. Use `NavigationMenuItem[][]` (array of arrays) for separate groups (main nav + footer links).
 
 ## Multi-panel (list-detail)
 
@@ -171,7 +186,6 @@ definePageMeta({ layout: 'dashboard' })
 <UDashboardPanel>
   <template #header>
     <UDashboardNavbar title="Users" />
-
     <UDashboardToolbar>
       <template #left>
         <UInput icon="i-lucide-search" placeholder="Search..." />
@@ -193,7 +207,6 @@ definePageMeta({ layout: 'dashboard' })
       <template #header>
         <UDashboardSearchButton />
       </template>
-      <!-- ... -->
     </UDashboardSidebar>
 
     <slot />

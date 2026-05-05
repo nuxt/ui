@@ -26,28 +26,29 @@ export interface DashboardSidebarToggleProps extends Omit<ButtonProps, LinkProps
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { useForwardProps } from 'reka-ui'
 import { reactiveOmit } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useLocale } from '../composables/useLocale'
-import { useComponentUI } from '../composables/useComponentUI'
+import { useComponentProps } from '../composables/useComponentProps'
+import { useForwardProps } from '../composables/useForwardProps'
 import { useDashboard } from '../utils/dashboard'
 import { tv } from '../utils/tv'
 import UButton from './Button.vue'
 
 defineOptions({ inheritAttrs: false })
 
-const props = withDefaults(defineProps<DashboardSidebarToggleProps>(), {
+const _props = withDefaults(defineProps<DashboardSidebarToggleProps>(), {
   color: 'neutral',
   variant: 'ghost',
   side: 'left'
 })
 
+const props = useComponentProps('dashboardSidebarToggle', _props)
+
 const buttonProps = useForwardProps(reactiveOmit(props, 'icon', 'side', 'class'))
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as DashboardSidebarToggle['AppConfig']
-const uiProp = useComponentUI('dashboardSidebarToggle', props)
 const { sidebarOpen, toggleSidebar } = useDashboard({ sidebarOpen: ref(false), toggleSidebar: () => {} })
 
 // eslint-disable-next-line vue/no-dupe-keys
@@ -62,7 +63,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dashboardSid
       'aria-label': sidebarOpen ? t('dashboardSidebarToggle.close') : t('dashboardSidebarToggle.open'),
       ...$attrs
     }"
-    :class="ui({ class: [uiProp?.base, props.class], side: props.side })"
+    :class="ui({ class: [props.ui?.base, props.class], side: props.side })"
     @click="toggleSidebar"
   />
 </template>

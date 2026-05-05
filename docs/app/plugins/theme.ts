@@ -61,53 +61,74 @@ export default defineNuxtPlugin({
       useHead({
         script: [{
           innerHTML: `
-            var colorsEl = document.querySelector('style#nuxt-ui-colors');
-            if (colorsEl) {
-              let html = colorsEl.innerHTML;
-
-              if (localStorage.getItem('nuxt-ui-primary')) {
-                const primaryColor = localStorage.getItem('nuxt-ui-primary');
-                if (primaryColor !== 'black') {
+            (function() {
+              var primaryColor = localStorage.getItem('nuxt-ui-primary');
+              var neutralColor = localStorage.getItem('nuxt-ui-neutral');
+              if (!primaryColor && !neutralColor) return;
+              function swapColors(el) {
+                var html = el.innerHTML;
+                if (primaryColor && primaryColor !== 'black') {
                   html = html.replace(
                     /(--ui-color-primary-\\d{2,3}:\\s*var\\(--color-)${appConfig.ui.colors.primary}(-\\d{2,3}.*?\\))/g,
                     \`$1\${primaryColor}$2\`
                   );
                 }
+                if (neutralColor) {
+                  html = html.replace(
+                    /(--ui-color-neutral-\\d{2,3}:\\s*var\\(--color-)${appConfig.ui.colors.neutral}(-\\d{2,3}.*?\\))/g,
+                    \`$1\${neutralColor === 'neutral' ? 'old-neutral' : neutralColor}$2\`
+                  );
+                }
+                el.innerHTML = html;
               }
-              if (localStorage.getItem('nuxt-ui-neutral')) {
-                let neutralColor = localStorage.getItem('nuxt-ui-neutral');
-                html = html.replace(
-                  /(--ui-color-neutral-\\d{2,3}:\\s*var\\(--color-)${appConfig.ui.colors.neutral}(-\\d{2,3}.*?\\))/g,
-                  \`$1\${neutralColor === 'neutral' ? 'old-neutral' : neutralColor}$2\`
-                );
+              var colorsEl = document.querySelector('style#nuxt-ui-colors');
+              if (colorsEl) {
+                swapColors(colorsEl);
+              } else {
+                var obs = new MutationObserver(function(mutations) {
+                  for (var i = 0; i < mutations.length; i++) {
+                    for (var j = 0; j < mutations[i].addedNodes.length; j++) {
+                      var node = mutations[i].addedNodes[j];
+                      if (node.id === 'nuxt-ui-colors') {
+                        swapColors(node);
+                        obs.disconnect();
+                        return;
+                      }
+                    }
+                  }
+                });
+                obs.observe(document.head, { childList: true });
               }
-
-              colorsEl.innerHTML = html;
-            }
+            })();
             `.replace(/\s+/g, ' '),
           type: 'text/javascript',
-          tagPriority: 'high'
+          tagPriority: -1
         }, {
           innerHTML: `
             if (localStorage.getItem('nuxt-ui-radius')) {
-              document.querySelector('style#nuxt-ui-radius').innerHTML = ':root { --ui-radius: ' + localStorage.getItem('nuxt-ui-radius') + 'rem; }';
+              var el = document.querySelector('style#nuxt-ui-radius');
+              if (el) { el.innerHTML = ':root { --ui-radius: ' + localStorage.getItem('nuxt-ui-radius') + 'rem; }'; }
             }
           `.replace(/\s+/g, ' '),
           type: 'text/javascript',
-          tagPriority: 'high'
+          tagPriority: -1
         }, {
           innerHTML: `
-            if (localStorage.getItem('nuxt-ui-black-as-primary') === 'true') {
-              document.querySelector('style#nuxt-ui-black-as-primary').innerHTML = ':root { --ui-primary: black; } .dark { --ui-primary: white; }';
-            } else {
-              document.querySelector('style#nuxt-ui-black-as-primary').innerHTML = '';
+            var bapEl = document.querySelector('style#nuxt-ui-black-as-primary');
+            if (bapEl) {
+              if (localStorage.getItem('nuxt-ui-black-as-primary') === 'true') {
+                bapEl.innerHTML = ':root { --ui-primary: black; } .dark { --ui-primary: white; }';
+              } else {
+                bapEl.innerHTML = '';
+              }
             }
           `.replace(/\s+/g, ' ')
         }, {
           innerHTML: [
             `if (localStorage.getItem('nuxt-ui-font')) {`,
             `var font = localStorage.getItem('nuxt-ui-font');`,
-            `document.querySelector('style#nuxt-ui-font').innerHTML = ':root { --font-sans: \\'' + font + '\\', sans-serif; }';`,
+            `var fontEl = document.querySelector('style#nuxt-ui-font');`,
+            `if (fontEl) { fontEl.innerHTML = ':root { --font-sans: \\'' + font + '\\', sans-serif; }'; }`,
             `if (font !== 'Public Sans') {`,
             `var lnk = document.createElement('link');`,
             `lnk.rel = 'stylesheet';`,
@@ -138,7 +159,7 @@ export default defineNuxtPlugin({
             })();
           `.replace(/\s+/g, ' '),
           type: 'text/javascript',
-          tagPriority: 'high'
+          tagPriority: -1
         }, {
           innerHTML: `
             (function() {
@@ -169,7 +190,7 @@ export default defineNuxtPlugin({
             })();
           `.replace(/\s+/g, ' '),
           type: 'text/javascript',
-          tagPriority: 'high'
+          tagPriority: -1
         }]
       })
     }

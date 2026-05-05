@@ -100,6 +100,11 @@ export default defineLocale<Messages>({
       decrement: 'Μείωση',
       increment: 'Αύξηση'
     },
+    listbox: {
+      noData: 'Δεν υπάρχουν δεδομένα',
+      noMatch: 'Δεν βρέθηκαν δεδομένα',
+      search: 'Αναζήτηση…'
+    },
     modal: {
       close: 'Κλείσιμο'
     },
@@ -119,6 +124,10 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'Αντιγραφή κώδικα στο πρόχειρο'
+      },
+      prompt: {
+        copy: 'Αντιγραφή εντολής',
+        openIn: 'Άνοιγμα σε {name}'
       }
     },
     sidebar: {
