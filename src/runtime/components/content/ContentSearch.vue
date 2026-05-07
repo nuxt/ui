@@ -58,12 +58,6 @@ export interface ContentSearchProps<T extends ContentSearchLink = ContentSearchL
   navigation?: ContentNavigationItem[]
   files?: ContentSearchFile[]
   /**
-   * Async search function (e.g. from [`useSearchCollection`](https://content.nuxt.com/docs/utils/use-search-collection)).
-   * When provided, ContentSearch calls it on each keystroke and uses the results instead of Fuse.
-   * Results are mapped, sanitized, and grouped by navigation internally.
-   */
-  search?: (query: string, opts?: any) => Promise<(ContentSearchFile & { snippets?: { title?: string, content?: string } })[]>
-  /**
    * Options for [useFuse](https://vueuse.org/integrations/useFuse) passed to the [CommandPalette](https://ui.nuxt.com/docs/components/command-palette).
    * @defaultValue {
       fuseOptions: {
@@ -78,8 +72,19 @@ export interface ContentSearchProps<T extends ContentSearchLink = ContentSearchL
    */
   fuse?: UseFuseOptions<T>
   /**
-   * Delay (in milliseconds) before the search term is passed to Fuse (debounced).
-   * Useful for large doc sets where running fuzzy search on every keystroke is the bottleneck — the input stays responsive while Fuse only re-runs after typing settles.
+   * Async search function (e.g. from [`useSearchCollection`](https://content.nuxt.com/docs/utils/use-search-collection)).
+   * When provided, ContentSearch calls it on each keystroke and uses the results instead of Fuse.
+   * Results are mapped, sanitized, and grouped by navigation internally.
+   */
+  search?: (query: string, opts?: any) => Promise<(ContentSearchFile & { snippets?: { title?: string, content?: string } })[]>
+  /**
+   * Status of the async search index (e.g. from `useSearchCollection`).
+   * When the status transitions to `'ready'`, the search is automatically re-triggered if there's a pending term.
+   */
+  searchStatus?: string
+  /**
+   * Delay (in milliseconds) before the search is triggered (debounced).
+   * Keeps the input responsive by only running the search after typing settles.
    * Set to `0` to disable.
    * @defaultValue 100
    */
@@ -159,10 +164,8 @@ const debouncedSearchTerm = refDebounced(searchTerm, () => props.searchDelay!)
 const searchResults = shallowRef<ContentSearchItem[]>([])
 const searching = ref(false)
 
-watch(debouncedSearchTerm, async (term) => {
-  if (!props.search) return
-
-  if (!term) {
+async function runSearch(term: string) {
+  if (!props.search || !term) {
     searchResults.value = []
     return
   }
@@ -178,6 +181,20 @@ watch(debouncedSearchTerm, async (term) => {
     searchResults.value = []
   }
   searching.value = false
+}
+
+watch(debouncedSearchTerm, runSearch)
+
+watch(() => props.search, () => {
+  if (debouncedSearchTerm.value) {
+    runSearch(debouncedSearchTerm.value)
+  }
+})
+
+watch(() => props.searchStatus, (status) => {
+  if (status === 'ready' && debouncedSearchTerm.value) {
+    runSearch(debouncedSearchTerm.value)
+  }
 })
 
 const linksGroup = computed(() => {

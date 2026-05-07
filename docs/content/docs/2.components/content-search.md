@@ -22,6 +22,8 @@ The ContentSearch component extends the [CommandPalette](/docs/components/comman
 
 Use the `files` and `navigation` props with the `files`{lang="ts-type"} and `navigation`{lang="ts-type"} values you fetched using the `queryCollectionSearchSections` and `queryCollectionNavigation` composables from `@nuxt/content`.
 
+Alternatively, use the `search` prop to provide an async search function (e.g. from [`useSearchCollection`](https://content.nuxt.com/docs/utils/use-search-collection)) for full-text search instead of client-side Fuse.js filtering.
+
 ::component-example
 ---
 iframe:
@@ -135,6 +137,50 @@ const searchTerm = ref('')
 
 ::tip
 It is recommended to wrap the `ContentSearch` component in a [ClientOnly](https://nuxt.com/docs/api/components/client-only) component so it's not rendered on the server.
+::
+
+### With `useSearchCollection` :badge{label="Soon" class="align-text-top"}
+
+Use the `search` prop with [`useSearchCollection`](https://content.nuxt.com/docs/utils/use-search-collection) for FTS5 full-text search instead of client-side filtering:
+
+```vue [app.vue]
+<script setup lang="ts">
+const { data: navigation } = await useAsyncData('navigation', () => queryCollectionNavigation('content'))
+
+const { search, status, init } = useSearchCollection('content', {
+  immediate: false,
+  ignoredTags: ['style']
+})
+
+const { open } = useContentSearch()
+
+watch(open, (value) => {
+  if (value && status.value === 'idle') {
+    init()
+  }
+})
+
+const searchTerm = ref('')
+</script>
+
+<template>
+  <UApp>
+    <ClientOnly>
+      <LazyUContentSearch
+        v-model:search-term="searchTerm"
+        shortcut="meta_k"
+        :navigation="navigation"
+        :search="search"
+        :search-status="status"
+        :fuse="{ resultLimit: 20 }"
+      />
+    </ClientOnly>
+  </UApp>
+</template>
+```
+
+::note
+When using the `search` prop, you don't need to pass `files` — the component will use the async search function on each keystroke instead of Fuse.js. Results are automatically mapped and grouped by navigation.
 ::
 
 ## API
