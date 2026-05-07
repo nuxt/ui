@@ -1,14 +1,9 @@
 <script setup lang="ts">
-import colors from 'tailwindcss/colors'
-
 const route = useRoute()
 const appConfig = useAppConfig()
-const colorMode = useColorMode()
-const { style, link } = useTheme()
+const { style, link, color } = useTheme()
 
-const { data: navigation } = await useAsyncData('navigation', () => queryCollectionNavigation('docs', ['framework', 'category', 'description']))
-
-const color = computed(() => colorMode.value === 'dark' ? (colors as any)[appConfig.ui.colors.neutral][900] : 'white')
+const { data: navigation } = await useFetch('/api/navigation.json')
 
 useHead({
   meta: [
@@ -16,10 +11,7 @@ useHead({
     { key: 'theme-color', name: 'theme-color', content: color }
   ],
   link,
-  style,
-  htmlAttrs: {
-    lang: 'en'
-  }
+  style
 })
 
 if (import.meta.server) {
