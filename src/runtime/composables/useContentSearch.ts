@@ -108,9 +108,12 @@ function _useContentSearch() {
   function mapSearchResult(
     result: ContentSearchFile & { snippets?: { title?: string, content?: string } },
     navigation?: ContentNavigationItem[]
-  ): ContentSearchItem {
+  ): ContentSearchItem | null {
     const basePath = result.id.split('#')[0]!
     const { link, parent, root } = findNavItem(basePath, navigation)
+
+    if (navigation?.length && !link) return null
+
     return {
       label: result.title,
       labelHtml: result.snippets?.title ? sanitizeSnippet(result.snippets.title) : undefined,
@@ -135,6 +138,7 @@ function _useContentSearch() {
 
   return {
     open,
+    findNavItem,
     mapFile,
     mapNavigationItems,
     mapLinks,

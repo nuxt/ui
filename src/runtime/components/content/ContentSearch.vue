@@ -170,9 +170,9 @@ watch(debouncedSearchTerm, async (term) => {
   try {
     const results = await props.search(term, {
       limit: (fuse.value as UseFuseOptions<T>).resultLimit,
-      snippet: { columns: ['title', 'content'], around: 30 }
+      snippet: { columns: ['title', 'content'], around: 20 }
     })
-    searchResults.value = results.map(result => mapSearchResult(result, props.navigation))
+    searchResults.value = results.map(result => mapSearchResult(result, props.navigation)).filter(Boolean) as ContentSearchItem[]
   } catch {
     searchResults.value = []
   }
