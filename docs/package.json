@@ -19,7 +19,7 @@
     "@iconify-json/simple-icons": "^1.2.80",
     "@iconify-json/vscode-icons": "^1.2.48",
     "@nuxt/a11y": "1.0.0-alpha.1",
-    "@nuxt/content": "https://pkg.pr.new/@nuxt/content@9d9a0d2",
+    "@nuxt/content": "https://pkg.pr.new/@nuxt/content@80dc9c2",
     "@nuxt/image": "^2.0.0",
     "@nuxt/ui": "workspace:*",
     "@nuxtjs/mcp-toolkit": "^0.16.0",
