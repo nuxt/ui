@@ -37,6 +37,11 @@ export default defineNuxtConfig({
   },
 
   app: {
+    head: {
+      htmlAttrs: {
+        lang: 'en'
+      }
+    },
     rootAttrs: {
       'data-vaul-drawer-wrapper': '',
       'class': 'bg-default'
@@ -72,6 +77,7 @@ export default defineNuxtConfig({
   },
 
   routeRules: {
+    '/api/navigation.json': { prerender: true },
     // Agent discovery Link headers on the homepage (RFC 8288, RFC 9727)
     '/': {
       headers: {

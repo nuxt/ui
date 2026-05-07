@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import colors from 'tailwindcss/colors'
 import type { NuxtError } from '#app'
 
 const props = defineProps<{
@@ -7,18 +6,14 @@ const props = defineProps<{
 }>()
 
 const route = useRoute()
-const appConfig = useAppConfig()
-const colorMode = useColorMode()
-const { style, link } = useTheme()
+const { style, link, color } = useTheme()
 
-const { data: navigation } = await useAsyncData('navigation', () => queryCollectionNavigation('docs', ['framework', 'category', 'description']))
+const { data: navigation } = await useFetch('/api/navigation.json')
 const { data: files } = useLazyAsyncData('search', () => queryCollectionSearchSections('docs', {
   ignoredTags: ['style']
 }), {
   server: false
 })
-
-const color = computed(() => colorMode.value === 'dark' ? (colors as any)[appConfig.ui.colors.neutral][900] : 'white')
 
 useHead({
   meta: [
@@ -26,10 +21,7 @@ useHead({
     { key: 'theme-color', name: 'theme-color', content: color }
   ],
   link,
-  style,
-  htmlAttrs: {
-    lang: 'en'
-  }
+  style
 })
 
 useSeoMeta({
