@@ -2,7 +2,8 @@ import { ref } from 'vue'
 import type { ContentNavigationItem } from '@nuxt/content'
 import { createSharedComposable } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import type { ContentSearchFile, ContentSearchItem } from '../components/content/ContentSearch.vue'
+import { sanitizeSnippet } from '../utils/search'
+import type { ContentSearchFile, ContentSearchItem, ContentSearchLink } from '../components/content/ContentSearch.vue'
 
 function _useContentSearch() {
   const open = ref(false)
@@ -68,6 +69,61 @@ function _useContentSearch() {
   }
 
   /**
+   * Map links to ContentSearchItems
+   */
+  function mapLinks(links: ContentSearchLink[]): ContentSearchItem[] {
+    return links.flatMap(link => [{
+      ...link,
+      suffix: link.description,
+      description: undefined,
+      icon: link.icon || appConfig.ui.icons.file,
+      children: undefined
+    } as ContentSearchItem, ...(link.children?.map(child => ({
+      ...child,
+      prefix: link.label,
+      suffix: child.description,
+      description: undefined,
+      icon: child.icon || link.icon || appConfig.ui.icons.file
+    } as ContentSearchItem)) || [])])
+  }
+
+  /**
+   * Find a navigation item by path
+   */
+  function findNavItem(path: string, nodes?: ContentNavigationItem[], root?: ContentNavigationItem, parent?: ContentNavigationItem): { link?: ContentNavigationItem, parent?: ContentNavigationItem, root?: ContentNavigationItem } {
+    for (const node of nodes || []) {
+      const currentRoot = root || node
+      if (node.path === path) return { link: node, parent, root: currentRoot }
+      if (node.children?.length) {
+        const found = findNavItem(path, node.children, currentRoot, node)
+        if (found.link) return found
+      }
+    }
+    return {}
+  }
+
+  /**
+   * Map a search result to a ContentSearchItem
+   */
+  function mapSearchResult(
+    result: ContentSearchFile & { snippets?: { title?: string, content?: string } },
+    navigation?: ContentNavigationItem[]
+  ): ContentSearchItem {
+    const basePath = result.id.split('#')[0]!
+    const { link, parent, root } = findNavItem(basePath, navigation)
+    return {
+      label: result.title,
+      labelHtml: result.snippets?.title ? sanitizeSnippet(result.snippets.title) : undefined,
+      prefix: result.titles.length ? (result.titles.join(' > ') + ' >') : undefined,
+      description: result.content.replaceAll('<', '&lt;').replaceAll('>', '&gt;'),
+      descriptionHtml: result.snippets?.content ? sanitizeSnippet(result.snippets.content) : undefined,
+      to: result.id,
+      icon: ((link as any)?.icon || (parent as any)?.icon || (root as any)?.icon || (result.level > 1 ? appConfig.ui.icons.hash : appConfig.ui.icons.file)) as string,
+      level: result.level
+    }
+  }
+
+  /**
    * Post-filter function to filter only first level items when no query
    */
   function postFilter(query: string, items: ContentSearchItem[]): ContentSearchItem[] {
@@ -81,6 +137,8 @@ function _useContentSearch() {
     open,
     mapFile,
     mapNavigationItems,
+    mapLinks,
+    mapSearchResult,
     postFilter
   }
 }

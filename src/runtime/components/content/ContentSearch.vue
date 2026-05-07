@@ -58,6 +58,12 @@ export interface ContentSearchProps<T extends ContentSearchLink = ContentSearchL
   navigation?: ContentNavigationItem[]
   files?: ContentSearchFile[]
   /**
+   * Async search function (e.g. from [`useSearchCollection`](https://content.nuxt.com/docs/utils/use-search-collection)).
+   * When provided, ContentSearch calls it on each keystroke and uses the results instead of Fuse.
+   * Results are mapped, sanitized, and grouped by navigation internally.
+   */
+  search?: (query: string, opts?: any) => Promise<(ContentSearchFile & { snippets?: { title?: string, content?: string } })[]>
+  /**
    * Options for [useFuse](https://vueuse.org/integrations/useFuse) passed to the [CommandPalette](https://ui.nuxt.com/docs/components/command-palette).
    * @defaultValue {
       fuseOptions: {
@@ -94,9 +100,9 @@ export type ContentSearchSlots = CommandPaletteSlots<ContentSearchItem> & {
 </script>
 
 <script setup lang="ts" generic="T extends ContentSearchLink">
-import { computed, useTemplateRef } from 'vue'
+import { computed, ref, shallowRef, useTemplateRef, watch } from 'vue'
 import { defu } from 'defu'
-import { reactivePick } from '@vueuse/core'
+import { reactivePick, refDebounced } from '@vueuse/core'
 import { useAppConfig, useColorMode, defineShortcuts } from '#imports'
 import { useComponentProps } from '../../composables/useComponentProps'
 import { useForwardProps } from '../../composables/useForwardProps'
@@ -121,7 +127,7 @@ const props = useComponentProps<ContentSearchProps<T>>('contentSearch', _props)
 const searchTerm = defineModel<string>('searchTerm', { default: '' })
 
 const { t } = useLocale()
-const { open, mapNavigationItems, postFilter } = useContentSearch()
+const { open, mapNavigationItems, mapLinks, mapSearchResult, postFilter } = useContentSearch()
 // eslint-disable-next-line vue/no-dupe-keys
 const colorMode = useColorMode()
 const appConfig = useAppConfig() as ContentSearch['AppConfig']
@@ -134,7 +140,8 @@ const getProxySlots = () => omit(slots, ['content'])
 // eslint-disable-next-line vue/no-dupe-keys
 const fuse = computed(() => defu({}, props.fuse, {
   fuseOptions: {
-    includeMatches: true
+    includeMatches: true,
+    keys: ['label', 'suffix']
   }
 } as UseFuseOptions<T>))
 
@@ -146,27 +153,47 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.contentSearc
 
 const commandPaletteRef = useTemplateRef('commandPaletteRef')
 
-const mappedLinksItems = computed(() => {
-  if (!props.links?.length) {
-    return []
+const debouncedSearchTerm = refDebounced(searchTerm, () => props.searchDelay!)
+
+const searchResults = shallowRef<ContentSearchItem[]>([])
+const searching = ref(false)
+
+watch(debouncedSearchTerm, async (term) => {
+  if (!props.search) return
+
+  if (!term) {
+    searchResults.value = []
+    return
   }
 
-  return props.links.flatMap(link => [{
-    ...link,
-    suffix: link.description,
-    description: undefined,
-    icon: link.icon || appConfig.ui.icons.file,
-    children: undefined
-  }, ...(link.children?.map(child => ({
-    ...child,
-    prefix: link.label + ' >',
-    suffix: child.description,
-    description: undefined,
-    icon: child.icon || link.icon || appConfig.ui.icons.file
-  })) || [])])
+  searching.value = true
+  try {
+    const results = await props.search(term, {
+      limit: (fuse.value as UseFuseOptions<T>).resultLimit,
+      snippet: { columns: ['title', 'content'], around: 30 }
+    })
+    searchResults.value = results.map(result => mapSearchResult(result, props.navigation))
+  } catch {
+    searchResults.value = []
+  }
+  searching.value = false
 })
 
-const mappedNavigationGroups = computed(() => {
+const linksGroup = computed(() => {
+  if (!props.links?.length) {
+    return null
+  }
+
+  return { id: 'links', label: t('contentSearch.links'), items: mapLinks(props.links) }
+})
+
+const searchGroups = computed(() => {
+  if (!searchTerm.value || !searchResults.value.length) return []
+
+  return [{ id: 'search', label: t('contentSearch.search'), items: searchResults.value, ignoreFilter: true }]
+})
+
+const navigationGroups = computed(() => {
   if (!props.navigation?.length) {
     return []
   }
@@ -219,11 +246,15 @@ const themeGroup = computed(() => {
 const groups = computed(() => {
   const groups = []
 
-  if (mappedLinksItems.value.length) {
-    groups.push({ id: 'links', label: t('contentSearch.links'), items: mappedLinksItems.value })
+  if (linksGroup.value) {
+    groups.push(linksGroup.value)
   }
 
-  groups.push(...mappedNavigationGroups.value)
+  if (props.search) {
+    groups.push(...searchGroups.value)
+  } else {
+    groups.push(...navigationGroups.value)
+  }
 
   groups.push(...(props.groups || []))
 

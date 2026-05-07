@@ -57,6 +57,19 @@ function truncateHTMLFromStart(html: string, maxLength: number) {
   return truncated
 }
 
+export function sanitizeSnippet(snippet: string, tag: string = 'mark'): string {
+  const tagOpen = `\0${tag}O\0`
+  const tagClose = `\0${tag}C\0`
+
+  return escapeHTML(
+    snippet
+      .replaceAll(`<${tag}>`, tagOpen)
+      .replaceAll(`</${tag}>`, tagClose)
+  )
+    .replaceAll(tagOpen, `<${tag}>`)
+    .replaceAll(tagClose, `</${tag}>`)
+}
+
 export function highlight<T>(item: T & { matches?: FuseResult<T>['matches'] }, searchTerm: string, forceKey?: GetItemKeys<T>, omitKeys?: GetItemKeys<T>[]) {
   function generateHighlightedText(value: FuseResultMatch['value'], indices: FuseResultMatch['indices'] = []) {
     value = value || ''

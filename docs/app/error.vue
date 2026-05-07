@@ -12,11 +12,6 @@ const colorMode = useColorMode()
 const { style, link } = useTheme()
 
 const { data: navigation } = await useAsyncData('navigation', () => queryCollectionNavigation('docs', ['framework', 'category', 'description']))
-const { data: files } = useLazyAsyncData('search', () => queryCollectionSearchSections('docs', {
-  ignoredTags: ['style']
-}), {
-  server: false
-})
 
 const color = computed(() => colorMode.value === 'dark' ? (colors as any)[appConfig.ui.colors.neutral][900] : 'white')
 
@@ -69,7 +64,7 @@ provide('navigation', rootNavigation)
       <ClientOnly>
         <Chat />
 
-        <Search :files="files" :navigation="navigationByFramework" />
+        <Search :navigation="navigationByFramework" />
       </ClientOnly>
     </div>
   </UApp>

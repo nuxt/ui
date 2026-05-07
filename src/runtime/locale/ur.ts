@@ -56,6 +56,7 @@ export default defineLocale<Messages>({
     },
     contentSearch: {
       links: 'لنکس',
+      search: 'نتائج',
       theme: 'تھیم'
     },
     contentSearchButton: {

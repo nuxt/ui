@@ -7,11 +7,6 @@ const colorMode = useColorMode()
 const { style, link } = useTheme()
 
 const { data: navigation } = await useAsyncData('navigation', () => queryCollectionNavigation('docs', ['framework', 'category', 'description']))
-const { data: files } = useLazyAsyncData('search', () => queryCollectionSearchSections('docs', {
-  ignoredTags: ['style']
-}), {
-  server: false
-})
 
 const color = computed(() => colorMode.value === 'dark' ? (colors as any)[appConfig.ui.colors.neutral][900] : 'white')
 
@@ -20,10 +15,7 @@ useHead({
     { name: 'viewport', content: 'width=device-width, initial-scale=1' },
     { key: 'theme-color', name: 'theme-color', content: color }
   ],
-  link: computed(() => [
-    // { rel: 'icon', type: 'image/svg+xml', href: '/icon.svg' },
-    ...link.value
-  ]),
+  link,
   style,
   htmlAttrs: {
     lang: 'en'
@@ -75,7 +67,7 @@ provide('navigation', rootNavigation)
         <ClientOnly>
           <Chat />
 
-          <Search :files="files" :navigation="navigationByFramework" />
+          <Search :navigation="navigationByFramework" />
         </ClientOnly>
       </template>
     </div>
