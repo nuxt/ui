@@ -142,7 +142,8 @@ const fuse = computed(() => defu({}, props.fuse, {
   fuseOptions: {
     includeMatches: true,
     keys: ['label', 'suffix']
-  }
+  },
+  resultLimit: 12
 } as UseFuseOptions<T>))
 
 // eslint-disable-next-line vue/no-dupe-keys
