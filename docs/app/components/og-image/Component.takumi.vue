@@ -1,8 +1,8 @@
 <script setup lang="ts">
 defineProps<{
-  title: string
-  description: string
-  slug: string
+  title?: string
+  description?: string
+  slug?: string
 }>()
 </script>
 
@@ -21,15 +21,15 @@ defineProps<{
     </svg>
     <div class="w-full border-b-2 border-solid border-slate-200">
       <div class="mx-34 mt-16 mb-2 py-4">
-        <h1 class="text-3xl font-semibold mb-2 flex gap-1">
-          <span>{{ title }}</span>
+        <h1 v-if="title" class="text-3xl font-semibold mb-2 flex gap-1">
+          {{ title }}
         </h1>
-        <p class="text-2xl text-slate-500" :style="{ lineClamp: 1, textOverflow: 'ellipsis' }">
+        <p v-if="description" class="text-2xl text-slate-500" :style="{ lineClamp: 1, textOverflow: 'ellipsis' }">
           {{ description }}
         </p>
       </div>
     </div>
-    <div class="mx-[106px] bg-slate-50 text-center">
+    <div v-if="slug" class="mx-[106px] bg-slate-50 text-center">
       <img
         :src="`/components/light/${slug}.png`"
         class="mx-auto h-[420px] object-contain"
