@@ -14,6 +14,8 @@ const { links, groups, searchTerm } = useSearch()
 const { open } = useContentSearch()
 const { track } = useAnalytics()
 
+const fuse = { resultLimit: 20 }
+
 watch(open, (value) => {
   if (value && status.value === 'idle') {
     init()
@@ -35,6 +37,6 @@ watchDebounced(searchTerm, (term) => {
     :navigation="navigation"
     :search="search"
     :search-status="status"
-    :fuse="{ resultLimit: 20 }"
+    :fuse="fuse"
   />
 </template>
