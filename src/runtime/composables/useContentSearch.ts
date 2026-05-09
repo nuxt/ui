@@ -112,8 +112,6 @@ function _useContentSearch() {
     const basePath = result.id.split('#')[0]!
     const { link, parent, root } = findNavItem(basePath, navigation)
 
-    if (navigation?.length && !link) return null
-
     return {
       label: result.title,
       labelHtml: result.snippets?.title ? sanitizeSnippet(result.snippets.title) : undefined,
