@@ -119,6 +119,12 @@ export default (options: Required<ModuleOptions>) => ({
     class: {
       content: `bg-${color}/10 text-${color} ring ring-${color}/25`
     }
+  })), ...(options.theme.colors || []).map((color: string) => ({
+    color,
+    variant: 'naked',
+    class: {
+      content: `text-${color}`
+    }
   })), {
     color: 'neutral',
     variant: 'solid',
