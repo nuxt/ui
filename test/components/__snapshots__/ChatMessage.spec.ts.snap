@@ -194,7 +194,7 @@ exports[`ChatMessage > renders with primary variant naked correctly 1`] = `
   <!--v-if-->
   <div data-slot="container" class="relative flex items-start gap-3 pb-8">
     <!--v-if-->
-    <div data-slot="content" class="relative text-pretty min-w-0 *:first:mt-0 *:last:mb-0 space-y-4">Hello, how are you?</div>
+    <div data-slot="content" class="relative text-pretty min-w-0 *:first:mt-0 *:last:mb-0 space-y-4 text-primary">Hello, how are you?</div>
     <!--v-if-->
   </div>
 </article>"
