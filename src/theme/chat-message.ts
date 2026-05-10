@@ -3,13 +3,13 @@ import type { ModuleOptions } from '../module'
 export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: 'group/message relative w-full',
-    header: '',
+    header: 'mb-1.5',
     container: 'relative flex items-start',
     leading: 'inline-flex items-center justify-center min-h-6',
     leadingIcon: 'shrink-0',
     leadingAvatar: 'shrink-0',
     leadingAvatarSize: '',
-    files: 'flex items-center gap-1.5 mb-1.5',
+    files: 'flex items-center gap-1.5',
     content: 'relative text-pretty min-w-0 *:first:mt-0 *:last:mb-0',
     actions: ['[@media(hover:hover)]:opacity-0 group-hover/message:opacity-100 absolute bottom-0 flex items-center', options.theme.transitions && 'transition-opacity']
   },
