@@ -196,7 +196,7 @@
   "devDependencies": {
     "@nuxt/eslint-config": "^1.15.2",
     "@nuxt/module-builder": "^1.0.2",
-    "@nuxt/test-utils": "^4.0.3",
+    "@nuxt/test-utils": "^4.0.2",
     "@release-it/conventional-changelog": "^10.0.6",
     "@tanstack/table-core": "^8.21.3",
     "@vitejs/plugin-vue": "^6.0.5",
