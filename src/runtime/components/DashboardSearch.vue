@@ -3,12 +3,13 @@
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/dashboard-search'
+import type { UseFuseOptions } from '@vueuse/integrations/useFuse'
 import type { ButtonProps, ModalProps, CommandPaletteProps, CommandPaletteSlots, CommandPaletteGroup, CommandPaletteItem, LinkPropsKeys } from '../types'
 import type { ComponentConfig } from '../types/tv'
 
 type DashboardSearch = ComponentConfig<typeof theme, AppConfig, 'dashboardSearch'>
 
-export interface DashboardSearchProps<T extends CommandPaletteItem = CommandPaletteItem> extends Pick<ModalProps, 'title' | 'description' | 'overlay' | 'transition' | 'content' | 'dismissible' | 'fullscreen' | 'modal' | 'portal'>, Pick<CommandPaletteProps<CommandPaletteGroup<T>, T>, 'icon' | 'placeholder' | 'autofocus' | 'loading' | 'loadingIcon' | 'closeIcon' | 'groups' | 'fuse'> {
+export interface DashboardSearchProps<T extends CommandPaletteItem = CommandPaletteItem> extends Pick<ModalProps, 'title' | 'description' | 'overlay' | 'transition' | 'content' | 'dismissible' | 'fullscreen' | 'modal' | 'portal'>, Pick<CommandPaletteProps<CommandPaletteGroup<T>, T>, 'icon' | 'placeholder' | 'autofocus' | 'loading' | 'loadingIcon' | 'closeIcon' | 'groups'> {
   /**
    * @defaultValue 'md'
    */
@@ -25,6 +26,20 @@ export interface DashboardSearchProps<T extends CommandPaletteItem = CommandPale
    * @defaultValue 'meta_k'
    */
   shortcut?: string
+  /**
+   * Options for [useFuse](https://vueuse.org/integrations/useFuse) passed to the [CommandPalette](https://ui.nuxt.com/docs/components/command-palette).
+   * @defaultValue {
+      fuseOptions: {
+        ignoreLocation: true,
+        useTokenSearch: true,
+        threshold: 0.1,
+        keys: ['label', 'suffix']
+      },
+      resultLimit: 12,
+      matchAllWhenSearchEmpty: true
+    }
+   */
+  fuse?: UseFuseOptions<T>
   /**
    * Delay (in milliseconds) before the search term is passed to Fuse (debounced).
    * Useful for large datasets where running fuzzy search on every keystroke is the bottleneck — the input stays responsive while Fuse only re-runs after typing settles.
@@ -90,6 +105,7 @@ const getProxySlots = () => omit(slots, ['content'])
 
 const fuse = computed(() => defu({}, props.fuse, {
   fuseOptions: {
+    useTokenSearch: true
   }
 }))
 
