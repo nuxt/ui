@@ -1,7 +1,8 @@
 ---
-title: CodeTree
+title: ProseCodeTree
 description: 'Visualize file and folder structures with syntax-highlighted code.'
 category: components
+navigation.title: CodeTree
 links:
   - label: GitHub
     icon: i-simple-icons-github

@@ -14,7 +14,10 @@ const { links, groups, searchTerm } = useSearch()
 const { open } = useContentSearch()
 const { track } = useAnalytics()
 
-const fuse = { resultLimit: 20 }
+const fuse = {
+  fuseOptions: { useTokenSearch: false },
+  resultLimit: 20
+}
 
 watch(open, (value) => {
   if (value && status.value === 'idle') {

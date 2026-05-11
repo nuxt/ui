@@ -103,25 +103,36 @@ function _useContentSearch() {
   }
 
   /**
-   * Map a search result to a ContentSearchItem
+   * Map search results to ContentSearchItems.
+   * Caches `findNavItem` lookups by base path so multiple sections
+   * of the same page don't each trigger a full tree walk.
    */
-  function mapSearchResult(
-    result: ContentSearchFile & { snippets?: { title?: string, content?: string } },
+  function mapSearchResults(
+    results: (ContentSearchFile & { snippets?: { title?: string, content?: string } })[],
     navigation?: ContentNavigationItem[]
-  ): ContentSearchItem {
-    const basePath = result.id.split('#')[0]!
-    const { link, parent, root } = findNavItem(basePath, navigation)
+  ): ContentSearchItem[] {
+    const navCache = new Map<string, ReturnType<typeof findNavItem>>()
 
-    return {
-      label: result.title,
-      labelHtml: result.snippets?.title ? sanitizeSnippet(result.snippets.title) : undefined,
-      prefix: result.titles.length ? (result.titles.join(' > ') + ' >') : undefined,
-      description: result.content.replaceAll('<', '&lt;').replaceAll('>', '&gt;'),
-      descriptionHtml: result.snippets?.content ? sanitizeSnippet(result.snippets.content) : undefined,
-      to: result.id,
-      icon: ((link as any)?.icon || (parent as any)?.icon || (root as any)?.icon || (result.level > 1 ? appConfig.ui.icons.hash : appConfig.ui.icons.file)) as string,
-      level: result.level
-    }
+    return results.map((result) => {
+      const basePath = result.id.split('#')[0]!
+      let nav = navCache.get(basePath)
+      if (!nav) {
+        nav = findNavItem(basePath, navigation)
+        navCache.set(basePath, nav)
+      }
+      const { link, parent, root } = nav
+
+      return {
+        label: result.title,
+        labelHtml: result.snippets?.title ? sanitizeSnippet(result.snippets.title) : undefined,
+        prefix: result.titles.length ? (result.titles.join(' > ') + ' >') : undefined,
+        description: result.content.replaceAll('<', '&lt;').replaceAll('>', '&gt;'),
+        descriptionHtml: result.snippets?.content ? sanitizeSnippet(result.snippets.content) : undefined,
+        to: result.id,
+        icon: (link?.icon || parent?.icon || root?.icon || (result.level > 1 ? appConfig.ui.icons.hash : appConfig.ui.icons.file)) as string,
+        level: result.level
+      }
+    })
   }
 
   /**
@@ -140,7 +151,7 @@ function _useContentSearch() {
     mapFile,
     mapNavigationItems,
     mapLinks,
-    mapSearchResult,
+    mapSearchResults,
     postFilter
   }
 }

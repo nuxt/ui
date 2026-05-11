@@ -133,7 +133,7 @@ const props = useComponentProps<ContentSearchProps<T>>('contentSearch', _props)
 const searchTerm = defineModel<string>('searchTerm', { default: '' })
 
 const { t } = useLocale()
-const { open, mapNavigationItems, mapLinks, mapSearchResult, postFilter } = useContentSearch()
+const { open, mapNavigationItems, mapLinks, mapSearchResults, postFilter } = useContentSearch()
 // eslint-disable-next-line vue/no-dupe-keys
 const colorMode = useColorMode()
 const appConfig = useAppConfig() as ContentSearch['AppConfig']
@@ -176,7 +176,7 @@ async function runSearch(term: string) {
       limit: (fuse.value as UseFuseOptions<T>).resultLimit,
       snippet: { columns: ['title', 'content'], around: 20 }
     })
-    searchResults.value = results.map(result => mapSearchResult(result, props.navigation)).filter(Boolean) as ContentSearchItem[]
+    searchResults.value = mapSearchResults(results, props.navigation)
   } catch {
     searchResults.value = []
   }
