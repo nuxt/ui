@@ -80,7 +80,7 @@ function _useContentSearch() {
       children: undefined
     } as ContentSearchItem, ...(link.children?.map(child => ({
       ...child,
-      prefix: link.label,
+      prefix: link.label + ' >',
       suffix: child.description,
       description: undefined,
       icon: child.icon || link.icon || appConfig.ui.icons.file
