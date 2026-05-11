@@ -71,6 +71,9 @@ export function sanitizeSnippet(snippet: string, tag: string = 'mark'): string {
 }
 
 export function highlight<T>(item: T & { matches?: FuseResult<T>['matches'] }, searchTerm: string, forceKey?: GetItemKeys<T>, omitKeys?: GetItemKeys<T>[]) {
+  const tokens = searchTerm.split(/\s+/).filter(Boolean)
+  const minTokenLength = tokens.length > 0 ? Math.min(...tokens.map(t => t.length)) : searchTerm.length
+
   function generateHighlightedText(value: FuseResultMatch['value'], indices: FuseResultMatch['indices'] = []) {
     value = value || ''
     let content = ''
@@ -83,7 +86,7 @@ export function highlight<T>(item: T & { matches?: FuseResult<T>['matches'] }, s
       }
 
       const lastIndiceNextIndex = region[1] + 1
-      const isMatched = (lastIndiceNextIndex - region[0]) >= searchTerm.length
+      const isMatched = (lastIndiceNextIndex - region[0]) >= minTokenLength
 
       content += [
         sanitize(value.substring(nextUnhighlightedRegionStartingIndex, region[0])),

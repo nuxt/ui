@@ -63,6 +63,7 @@ export interface ContentSearchProps<T extends ContentSearchLink = ContentSearchL
       fuseOptions: {
         ignoreLocation: true,
         includeMatches: true,
+        useTokenSearch: true,
         threshold: 0.1,
         keys: ['label', 'suffix']
       },
@@ -146,6 +147,7 @@ const getProxySlots = () => omit(slots, ['content'])
 const fuse = computed(() => defu({}, props.fuse, {
   fuseOptions: {
     includeMatches: true,
+    useTokenSearch: true,
     keys: ['label', 'suffix']
   },
   resultLimit: 12
