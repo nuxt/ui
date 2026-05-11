@@ -108,7 +108,7 @@ function _useContentSearch() {
   function mapSearchResult(
     result: ContentSearchFile & { snippets?: { title?: string, content?: string } },
     navigation?: ContentNavigationItem[]
-  ): ContentSearchItem | null {
+  ): ContentSearchItem {
     const basePath = result.id.split('#')[0]!
     const { link, parent, root } = findNavItem(basePath, navigation)
 

@@ -106,7 +106,7 @@ export type ContentSearchSlots = CommandPaletteSlots<ContentSearchItem> & {
 </script>
 
 <script setup lang="ts" generic="T extends ContentSearchLink">
-import { computed, ref, shallowRef, useTemplateRef, watch } from 'vue'
+import { computed, shallowRef, useTemplateRef, watch } from 'vue'
 import { defu } from 'defu'
 import { reactivePick, refDebounced } from '@vueuse/core'
 import { useAppConfig, useColorMode, defineShortcuts } from '#imports'
@@ -164,7 +164,6 @@ const commandPaletteRef = useTemplateRef('commandPaletteRef')
 const debouncedSearchTerm = refDebounced(searchTerm, () => props.searchDelay!)
 
 const searchResults = shallowRef<ContentSearchItem[]>([])
-const searching = ref(false)
 
 async function runSearch(term: string) {
   if (!props.search || !term) {
@@ -172,7 +171,6 @@ async function runSearch(term: string) {
     return
   }
 
-  searching.value = true
   try {
     const results = await props.search(term, {
       limit: (fuse.value as UseFuseOptions<T>).resultLimit,
@@ -182,7 +180,6 @@ async function runSearch(term: string) {
   } catch {
     searchResults.value = []
   }
-  searching.value = false
 }
 
 watch(debouncedSearchTerm, runSearch)

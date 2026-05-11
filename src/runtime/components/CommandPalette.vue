@@ -482,7 +482,7 @@ function onSelect(e: Event, item: T) {
   <DefineItemTemplate v-slot="{ item, index, group }">
     <ULink v-slot="{ active, ...slotProps }" v-bind="pickLinkProps(item)" custom>
       <ListboxItem
-        :value="props.valueKey ? get(item, props.valueKey as string) : omit(item, ['matches' as any, 'group' as any, 'onSelect', 'labelHtml', 'suffixHtml', 'children'])"
+        :value="props.valueKey ? get(item, props.valueKey as string) : omit(item, ['matches' as any, 'group' as any, 'onSelect', 'labelHtml', 'suffixHtml', 'descriptionHtml', 'children'])"
         :disabled="item.disabled"
         as-child
         @select="onSelect($event, item as T)"
