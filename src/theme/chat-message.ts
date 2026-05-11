@@ -3,32 +3,27 @@ import type { ModuleOptions } from '../module'
 export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: 'group/message relative w-full',
+    header: 'mb-1.5',
     container: 'relative flex items-start',
     leading: 'inline-flex items-center justify-center min-h-6',
     leadingIcon: 'shrink-0',
     leadingAvatar: 'shrink-0',
     leadingAvatarSize: '',
-    files: 'flex items-center gap-1.5 mb-1.5',
+    files: 'flex items-center gap-1.5',
     content: 'relative text-pretty min-w-0 *:first:mt-0 *:last:mb-0',
     actions: ['[@media(hover:hover)]:opacity-0 group-hover/message:opacity-100 absolute bottom-0 flex items-center', options.theme.transitions && 'transition-opacity']
   },
   variants: {
     variant: {
-      solid: {
-        content: 'bg-inverted text-inverted'
-      },
-      outline: {
-        content: 'bg-default ring ring-default'
-      },
-      soft: {
-        content: 'bg-elevated/50'
-      },
-      subtle: {
-        content: 'bg-elevated/50 ring ring-default'
-      },
-      naked: {
-        content: ''
-      }
+      solid: '',
+      outline: '',
+      soft: '',
+      subtle: '',
+      naked: ''
+    },
+    color: {
+      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, ''])),
+      neutral: ''
     },
     side: {
       left: {},
@@ -100,8 +95,63 @@ export default (options: Required<ModuleOptions>) => ({
     class: {
       content: 'w-full'
     }
+  }, ...(options.theme.colors || []).map((color: string) => ({
+    color,
+    variant: 'solid',
+    class: {
+      content: `bg-${color} text-inverted`
+    }
+  })), ...(options.theme.colors || []).map((color: string) => ({
+    color,
+    variant: 'outline',
+    class: {
+      content: `text-${color} ring ring-${color}/25`
+    }
+  })), ...(options.theme.colors || []).map((color: string) => ({
+    color,
+    variant: 'soft',
+    class: {
+      content: `bg-${color}/10 text-${color}`
+    }
+  })), ...(options.theme.colors || []).map((color: string) => ({
+    color,
+    variant: 'subtle',
+    class: {
+      content: `bg-${color}/10 text-${color} ring ring-${color}/25`
+    }
+  })), ...(options.theme.colors || []).map((color: string) => ({
+    color,
+    variant: 'naked',
+    class: {
+      content: `text-${color}`
+    }
+  })), {
+    color: 'neutral',
+    variant: 'solid',
+    class: {
+      content: 'bg-inverted text-inverted'
+    }
+  }, {
+    color: 'neutral',
+    variant: 'outline',
+    class: {
+      content: 'bg-default ring ring-default'
+    }
+  }, {
+    color: 'neutral',
+    variant: 'soft',
+    class: {
+      content: 'bg-elevated/50'
+    }
+  }, {
+    color: 'neutral',
+    variant: 'subtle',
+    class: {
+      content: 'bg-elevated/50 ring ring-default'
+    }
   }],
   defaultVariants: {
-    variant: 'naked'
+    variant: 'naked',
+    color: 'neutral'
   }
 })

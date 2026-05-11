@@ -24,6 +24,10 @@ export interface ChatMessageProps<TMetadata = unknown, TDataParts extends UIData
    */
   variant?: ChatMessage['variants']['variant']
   /**
+   * @defaultValue 'neutral'
+   */
+  color?: ChatMessage['variants']['color']
+  /**
    * @defaultValue 'left'
    */
   side?: ChatMessage['variants']['side']
@@ -49,6 +53,7 @@ export interface ChatMessageProps<TMetadata = unknown, TDataParts extends UIData
 }
 
 export interface ChatMessageSlots<TMetadata = unknown, TDataParts extends UIDataTypes = UIDataTypes, TTools extends UITools = UITools> {
+  header?(props: UIMessage<TMetadata, TDataParts, TTools>): VNode[]
   leading?(props: UIMessage<TMetadata, TDataParts, TTools> & { avatar: ChatMessageProps<TMetadata, TDataParts, TTools>['avatar'], ui: ChatMessage['ui'] }): VNode[]
   files?(props: Omit<UIMessage<TMetadata, TDataParts, TTools>, 'parts'> & { parts: FileUIPart[] }): VNode[]
   content?(props: UIMessage<TMetadata, TDataParts, TTools> & { content?: string }): VNode[]
@@ -80,11 +85,12 @@ const appConfig = useAppConfig() as ChatMessage['AppConfig']
 const fileParts = computed(() => props.parts?.filter((part): part is FileUIPart => part.type === 'file') ?? [])
 const textParts = computed(() => props.parts?.filter((part): part is TextUIPart => part.type === 'text') ?? [])
 
-const messageProps = computed(() => omit(props, ['as', 'icon', 'avatar', 'variant', 'side', 'actions', 'compact', 'class', 'ui', 'content']))
+const messageProps = computed(() => omit(props, ['as', 'icon', 'avatar', 'variant', 'color', 'side', 'actions', 'compact', 'class', 'ui', 'content']))
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.chatMessage || {}) })({
   variant: props.variant,
+  color: props.color,
   side: props.side,
   leading: !!props.icon || !!props.avatar || !!slots.leading,
   actions: !!props.actions || !!slots.actions,
@@ -94,8 +100,12 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.chatMessage 
 
 <template>
   <Primitive :as="props.as" :data-role="props.role" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <div v-if="!!slots.files && fileParts.length" data-slot="files" :class="ui.files({ class: props.ui?.files })">
-      <slot name="files" v-bind="{ ...messageProps, parts: fileParts }" />
+    <div v-if="(!!slots.files && fileParts.length) || !!slots.header" data-slot="header" :class="ui.header({ class: props.ui?.header })">
+      <slot name="header" v-bind="{ ...messageProps }">
+        <div v-if="!!slots.files && fileParts.length" data-slot="files" :class="ui.files({ class: props.ui?.files })">
+          <slot name="files" v-bind="{ ...messageProps, parts: fileParts }" />
+        </div>
+      </slot>
     </div>
 
     <div data-slot="container" :class="ui.container({ class: props.ui?.container })">
