@@ -354,7 +354,7 @@ function processGroupItems(group: G, items: (T & { matches?: FuseResult<T>['matc
         ...item,
         labelHtml: item.labelHtml ?? highlight<T>(item, fuseSearchTerm.value, props.labelKey!),
         suffixHtml: item.suffixHtml ?? highlight<T>(item, fuseSearchTerm.value, 'suffix' as GetItemKeys<T>, [props.labelKey!]),
-        descriptionHtml: (item as any).descriptionHtml ?? highlight<T>(item, fuseSearchTerm.value, props.descriptionKey as GetItemKeys<T>, [props.labelKey!, 'suffix' as GetItemKeys<T>])
+        descriptionHtml: item.descriptionHtml ?? highlight<T>(item, fuseSearchTerm.value, props.descriptionKey as GetItemKeys<T>, [props.labelKey!, 'suffix' as GetItemKeys<T>])
       }
     })
   }
