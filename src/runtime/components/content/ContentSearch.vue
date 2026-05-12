@@ -163,22 +163,22 @@ const commandPaletteRef = useTemplateRef('commandPaletteRef')
 
 const debouncedSearchTerm = refDebounced(searchTerm, () => props.searchDelay!)
 
-const searchResults = shallowRef<ContentSearchItem[]>([])
+const rawSearchResults = shallowRef<(ContentSearchFile & { snippets?: { title?: string, content?: string } })[]>([])
+const searchResults = computed(() => mapSearchResults(rawSearchResults.value, props.navigation))
 
 async function runSearch(term: string) {
   if (!props.search || !term) {
-    searchResults.value = []
+    rawSearchResults.value = []
     return
   }
 
   try {
-    const results = await props.search(term, {
+    rawSearchResults.value = await props.search(term, {
       limit: (fuse.value as UseFuseOptions<T>).resultLimit,
       snippet: { columns: ['title', 'content'], around: 20 }
     })
-    searchResults.value = mapSearchResults(results, props.navigation)
   } catch {
-    searchResults.value = []
+    rawSearchResults.value = []
   }
 }
 
