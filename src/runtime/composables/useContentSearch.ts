@@ -124,10 +124,13 @@ function _useContentSearch() {
 
       if (navigation?.length && !link) return acc
 
+      const prefixParts = [...new Set([parent?.title, ...result.titles].filter(Boolean))]
+      const prefix = prefixParts.length ? (prefixParts.join(' > ') + ' >') : undefined
+
       acc.push({
         label: result.title,
         labelHtml: result.snippets?.title ? sanitizeSnippet(result.snippets.title) : undefined,
-        prefix: result.titles.length ? (result.titles.join(' > ') + ' >') : undefined,
+        prefix,
         description: result.content.replaceAll('<', '&lt;').replaceAll('>', '&gt;'),
         descriptionHtml: result.snippets?.content ? sanitizeSnippet(result.snippets.content) : undefined,
         to: result.id,
