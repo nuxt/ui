@@ -352,8 +352,8 @@ function processGroupItems(group: G, items: (T & { matches?: FuseResult<T>['matc
     items: processedItems.slice(0, fuse.value.resultLimit).map((item) => {
       return {
         ...item,
-        labelHtml: highlight<T>(item, fuseSearchTerm.value, props.labelKey!),
-        suffixHtml: highlight<T>(item, fuseSearchTerm.value, undefined, [props.labelKey!])
+        labelHtml: highlight<T>(item, fuseSearchTerm.value, props.labelKey!, undefined, fuse.value.fuseOptions?.useTokenSearch),
+        suffixHtml: highlight<T>(item, fuseSearchTerm.value, 'suffix' as GetItemKeys<T>, [props.labelKey!], fuse.value.fuseOptions?.useTokenSearch)
       }
     })
   }

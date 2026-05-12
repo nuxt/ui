@@ -57,8 +57,8 @@ function truncateHTMLFromStart(html: string, maxLength: number) {
   return truncated
 }
 
-export function highlight<T>(item: T & { matches?: FuseResult<T>['matches'] }, searchTerm: string, forceKey?: GetItemKeys<T>, omitKeys?: GetItemKeys<T>[]) {
-  const tokens = searchTerm.split(/\s+/).filter(Boolean)
+export function highlight<T>(item: T & { matches?: FuseResult<T>['matches'] }, searchTerm: string, forceKey?: GetItemKeys<T>, omitKeys?: GetItemKeys<T>[], useTokenSearch?: boolean) {
+  const tokens = useTokenSearch ? (searchTerm.match(/[\p{L}\p{M}\p{N}_]+/gu) || []) : []
   const minTokenLength = tokens.length > 0 ? Math.min(...tokens.map(t => t.length)) : searchTerm.length
 
   function generateHighlightedText(value: FuseResultMatch['value'], indices: FuseResultMatch['indices'] = []) {
