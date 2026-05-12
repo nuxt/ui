@@ -410,20 +410,35 @@ const filteredGroups = computed(() => {
     return processedGroup.items?.length ? processedGroup : undefined
   }).filter(group => !!group)
 
-  const nonFuseGroups = currentGroups
-    ?.map((group, index) => ({ ...group, index }))
-    ?.filter(group => group.ignoreFilter && group.items?.length)
-    ?.map((group) => {
-      const processedGroup = processGroupItems(group, group.items || [])
-      return { ...processedGroup, index: group.index }
-    })
-    // Filter out groups without items after postFilter
-    ?.filter(group => group.items?.length) || []
+  const result = [...fuseGroups]
 
-  return nonFuseGroups.reduce((acc, group) => {
-    acc.splice(group.index, 0, group)
-    return acc
-  }, [...fuseGroups])
+  for (const group of currentGroups || []) {
+    if (!group.ignoreFilter || !group.items?.length) {
+      continue
+    }
+
+    const processedGroup = processGroupItems(group, group.items)
+    if (!processedGroup.items?.length) {
+      continue
+    }
+
+    const originalIndex = currentGroups!.indexOf(group)
+    const precedingIds = new Set<string>()
+    for (let i = 0; i < originalIndex; i++) {
+      precedingIds.add(currentGroups![i]!.id)
+    }
+
+    let insertAfter = -1
+    for (let i = 0; i < result.length; i++) {
+      if (precedingIds.has(result[i]!.id)) {
+        insertAfter = i
+      }
+    }
+
+    result.splice(insertAfter + 1, 0, processedGroup)
+  }
+
+  return result
 })
 
 const filteredItems = computed(() => filteredGroups.value.flatMap(group => group.items || []))
