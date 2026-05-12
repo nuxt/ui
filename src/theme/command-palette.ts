@@ -25,10 +25,10 @@ export default (options: Required<ModuleOptions>) => ({
     itemTrailingKbdsSize: '',
     itemWrapper: 'flex-1 flex flex-col text-start min-w-0',
     itemLabel: 'truncate space-x-1 text-dimmed',
-    itemDescription: 'truncate text-muted [&>mark]:text-primary [&>mark]:bg-transparent',
     itemLabelBase: 'text-highlighted [&>mark]:text-primary [&>mark]:bg-primary/15',
     itemLabelPrefix: 'text-default',
-    itemLabelSuffix: 'text-dimmed [&>mark]:text-primary [&>mark]:bg-transparent'
+    itemLabelSuffix: 'text-dimmed [&>mark]:text-primary [&>mark]:bg-primary/15',
+    itemDescription: 'truncate text-muted [&>mark]:text-primary [&>mark]:bg-primary/15'
   },
   variants: {
     virtualize: {

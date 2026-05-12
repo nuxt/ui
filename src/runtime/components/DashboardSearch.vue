@@ -103,6 +103,7 @@ const modalProps = useForwardProps(reactivePick(props, 'overlay', 'transition', 
 
 const getProxySlots = () => omit(slots, ['content'])
 
+// eslint-disable-next-line vue/no-dupe-keys
 const fuse = computed(() => defu({}, props.fuse, {
   fuseOptions: {
     useTokenSearch: true
