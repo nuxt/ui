@@ -23,7 +23,7 @@ export function useSearch() {
   const links = computed(() => [{
     label: 'Ask AI',
     description: 'Ask the AI assistant powered by our custom MCP server for help.',
-    icon: 'i-lucide-bot',
+    icon: 'i-lucide-bot-message-square',
     kbds: ['meta', 'i'],
     ui: {
       itemLeadingIcon: 'group-data-highlighted:not-group-data-disabled:text-primary'
@@ -120,7 +120,7 @@ export function useSearch() {
     },
     items: [{
       label: 'Ask AI',
-      icon: 'i-lucide-bot',
+      icon: 'i-lucide-bot-message-square',
       ui: {
         itemLeadingIcon: 'group-data-highlighted:not-group-data-disabled:text-primary'
       },
