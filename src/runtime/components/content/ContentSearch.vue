@@ -147,8 +147,7 @@ const getProxySlots = () => omit(slots, ['content'])
 const fuse = computed(() => defu({}, props.fuse, {
   fuseOptions: {
     includeMatches: true,
-    useTokenSearch: true,
-    keys: ['label', 'suffix']
+    useTokenSearch: true
   },
   resultLimit: 12
 } as UseFuseOptions<T>))
