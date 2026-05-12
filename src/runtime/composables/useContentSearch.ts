@@ -113,7 +113,7 @@ function _useContentSearch() {
   ): ContentSearchItem[] {
     const navCache = new Map<string, ReturnType<typeof findNavItem>>()
 
-    return results.map((result) => {
+    return results.reduce<ContentSearchItem[]>((acc, result) => {
       const basePath = result.id.split('#')[0]!
       let nav = navCache.get(basePath)
       if (!nav) {
@@ -122,7 +122,9 @@ function _useContentSearch() {
       }
       const { link, parent, root } = nav
 
-      return {
+      if (navigation?.length && !link) return acc
+
+      acc.push({
         label: result.title,
         labelHtml: result.snippets?.title ? sanitizeSnippet(result.snippets.title) : undefined,
         prefix: result.titles.length ? (result.titles.join(' > ') + ' >') : undefined,
@@ -131,8 +133,10 @@ function _useContentSearch() {
         to: result.id,
         icon: (link?.icon || parent?.icon || root?.icon || (result.level > 1 ? appConfig.ui.icons.hash : appConfig.ui.icons.file)) as string,
         level: result.level
-      }
-    })
+      })
+
+      return acc
+    }, [])
   }
 
   /**

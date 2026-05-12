@@ -15,7 +15,6 @@ const { open } = useContentSearch()
 const { track } = useAnalytics()
 
 const fuse = {
-  fuseOptions: { useTokenSearch: false },
   resultLimit: 20
 }
 
