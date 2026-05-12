@@ -970,7 +970,7 @@ You can use the `fuse` prop to override the options of [useFuse](https://vueuse.
   fuseOptions: {
     ignoreLocation: true,
     threshold: 0.1,
-    keys: ['label', 'suffix']
+    keys: ['label', 'description', 'suffix']
   },
   resultLimit: 12,
   matchAllWhenSearchEmpty: true
