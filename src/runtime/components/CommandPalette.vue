@@ -223,7 +223,7 @@ export type CommandPaletteSlots<T extends CommandPaletteItem = CommandPaletteIte
 </script>
 
 <script setup lang="ts" generic="G extends CommandPaletteGroup<T>, T extends CommandPaletteItem">
-import { computed, ref, useTemplateRef, toRef } from 'vue'
+import { computed, ref, useTemplateRef, toRef, watch, nextTick } from 'vue'
 import { ListboxRoot, ListboxFilter, ListboxContent, ListboxGroup, ListboxGroupLabel, ListboxVirtualizer, ListboxItem, ListboxItemIndicator } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
 import { defu } from 'defu'
@@ -444,6 +444,12 @@ const filteredGroups = computed(() => {
 const filteredItems = computed(() => filteredGroups.value.flatMap(group => group.items || []))
 
 const rootRef = useTemplateRef('rootRef')
+
+watch(filteredGroups, () => {
+  nextTick(() => {
+    rootRef.value?.highlightFirstItem()
+  })
+})
 
 function navigate(item: T) {
   if (!item.children?.length) {
