@@ -84,6 +84,9 @@ export default (options: Required<ModuleOptions>) => ({
         description: 'cursor-not-allowed'
       }
     },
+    highlight: {
+      true: ''
+    },
     checked: {
       true: ''
     }
@@ -113,6 +116,20 @@ export default (options: Required<ModuleOptions>) => ({
       disabled: true,
       class: {
         root: 'cursor-not-allowed'
+      }
+    },
+    ...(options.theme.colors || []).map((color: string) => ({
+      color,
+      highlight: true,
+      class: {
+        base: `ring-${color}`
+      }
+    })),
+    {
+      color: 'neutral',
+      highlight: true,
+      class: {
+        base: 'ring-inverted'
       }
     }
   ],
