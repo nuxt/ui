@@ -190,9 +190,27 @@ exports[`Checkbox > renders with neutral variant card correctly 1`] = `
 </label>"
 `;
 
+exports[`Checkbox > renders with neutral variant card highlight correctly 1`] = `
+"<label data-slot="root" class="relative flex items-start border border-muted rounded-lg flex-row p-3.5 has-data-[state=checked]:border-inverted">
+  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-inverted size-4 ring-inverted" id="v-0" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-inverted"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-full"></svg></span>
+      <!--v-if-->
+    </button></div>
+  <!--v-if-->
+</label>"
+`;
+
 exports[`Checkbox > renders with neutral variant list correctly 1`] = `
 "<div data-slot="root" class="relative flex items-start flex-row">
   <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-inverted size-4" id="v-0" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-inverted"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-full"></svg></span>
+      <!--v-if-->
+    </button></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Checkbox > renders with neutral variant list highlight correctly 1`] = `
+"<div data-slot="root" class="relative flex items-start flex-row">
+  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-inverted size-4 ring-inverted" id="v-0" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-inverted"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-full"></svg></span>
       <!--v-if-->
     </button></div>
   <!--v-if-->
@@ -208,9 +226,27 @@ exports[`Checkbox > renders with primary variant card correctly 1`] = `
 </label>"
 `;
 
+exports[`Checkbox > renders with primary variant card highlight correctly 1`] = `
+"<label data-slot="root" class="relative flex items-start border border-muted rounded-lg flex-row p-3.5 has-data-[state=checked]:border-primary">
+  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4 ring-primary" id="v-0" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-primary"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-full"></svg></span>
+      <!--v-if-->
+    </button></div>
+  <!--v-if-->
+</label>"
+`;
+
 exports[`Checkbox > renders with primary variant list correctly 1`] = `
 "<div data-slot="root" class="relative flex items-start flex-row">
   <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-primary"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-full"></svg></span>
+      <!--v-if-->
+    </button></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Checkbox > renders with primary variant list highlight correctly 1`] = `
+"<div data-slot="root" class="relative flex items-start flex-row">
+  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4 ring-primary" id="v-0" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-primary"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-full"></svg></span>
       <!--v-if-->
     </button></div>
   <!--v-if-->

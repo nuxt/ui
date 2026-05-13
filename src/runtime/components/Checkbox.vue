@@ -34,6 +34,8 @@ export interface CheckboxProps<T = boolean> extends Pick<CheckboxRootProps<T>, '
    * @defaultValue 'start'
    */
   indicator?: Checkbox['variants']['indicator']
+  /** Highlight the ring color like a focus state. */
+  highlight?: boolean
   /**
    * The icon displayed when checked.
    * @defaultValue appConfig.ui.icons.check
@@ -83,7 +85,7 @@ const appConfig = useAppConfig() as Checkbox['AppConfig']
 
 const rootProps = useForwardProps(reactivePick(props, 'required', 'value', 'defaultValue', 'modelValue', 'trueValue', 'falseValue'), emits)
 
-const { id: _id, emitFormChange, emitFormInput, size, color, name, disabled, ariaAttrs } = useFormField<CheckboxProps<T>>(_props)
+const { id: _id, emitFormChange, emitFormInput, size, color, highlight, name, disabled, ariaAttrs } = useFormField<CheckboxProps<T>>(_props)
 const id = _id.value ?? useId()
 
 const attrs = useAttrs()
@@ -99,6 +101,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.checkbox || 
   color: color.value ?? props.color,
   variant: props.variant,
   indicator: props.indicator,
+  highlight: highlight.value ?? props.highlight,
   required: props.required,
   disabled: disabled.value
 }))
