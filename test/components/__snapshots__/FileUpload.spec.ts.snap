@@ -142,6 +142,17 @@ exports[`FileUpload > renders with disabled correctly 2`] = `
 </div>"
 `;
 
+exports[`FileUpload > renders with disabled variant button correctly 1`] = `
+"<div data-slot="root" class="relative flex flex-col"><button type="button" disabled="" data-dragging="false" data-slot="base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] text-sm border-dashed data-[dragging=true]:bg-elevated/25 cursor-not-allowed opacity-75 focus-visible:outline-primary p-1.5" tabindex="-1">
+    <!--v-if-->
+    <div data-slot="wrapper" class="flex flex-col items-center justify-center text-center"><span class="iconify i-lucide:upload shrink-0 size-5" aria-hidden="true" data-slot="icon"></span>
+      <!--v-if-->
+    </div>
+  </button>
+  <!--v-if--><input data-hidden="" tabindex="-1" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;" type="file" accept="*" disabled="">
+</div>"
+`;
+
 exports[`FileUpload > renders with file slot correctly 1`] = `
 "<div data-slot="root" class="relative flex flex-col">
   <div role="button" data-dragging="false" data-slot="base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 focus-visible:outline-primary hover:bg-elevated/25" tabindex="0">

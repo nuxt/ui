@@ -60,6 +60,7 @@ describe('FileUpload', () => {
     ['with highlight neutral', { props: { highlight: true, color: 'neutral' } }],
     ['with required', { props: { required: true } }],
     ['with disabled', { props: { disabled: true } }],
+    ['with disabled variant button', { props: { disabled: true, variant: 'button' } }],
     ['with accept', { props: { accept: 'image/*' } }],
     ['with multiple', { props: { ...props, multiple: true } }],
     ['without dropzone', { props: { dropzone: false } }],
