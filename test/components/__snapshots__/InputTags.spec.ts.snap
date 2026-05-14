@@ -133,8 +133,24 @@ exports[`InputTags > renders with neutral variant ghost correctly 1`] = `
 </div>"
 `;
 
+exports[`InputTags > renders with neutral variant ghost highlight correctly 1`] = `
+"<div data-slot="root" class="relative inline-flex items-center flex-wrap rounded-md transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent hover:bg-elevated has-focus:bg-elevated disabled:bg-transparent dark:disabled:bg-transparent ring ring-inset ring-inverted md:text-sm" dir="ltr"><input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" data-slot="input" class="flex-1 border-0 bg-transparent placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75">
+  <!--v-if-->
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
 exports[`InputTags > renders with neutral variant none correctly 1`] = `
 "<div data-slot="root" class="relative inline-flex items-center flex-wrap rounded-md transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent md:text-sm" dir="ltr"><input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" data-slot="input" class="flex-1 border-0 bg-transparent placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75">
+  <!--v-if-->
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`InputTags > renders with neutral variant none highlight correctly 1`] = `
+"<div data-slot="root" class="relative inline-flex items-center flex-wrap rounded-md transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent ring ring-inset ring-inverted md:text-sm" dir="ltr"><input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" data-slot="input" class="flex-1 border-0 bg-transparent placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75">
   <!--v-if-->
   <!--v-if-->
   <!--v-if-->
@@ -149,6 +165,14 @@ exports[`InputTags > renders with neutral variant outline correctly 1`] = `
 </div>"
 `;
 
+exports[`InputTags > renders with neutral variant outline highlight correctly 1`] = `
+"<div data-slot="root" class="relative inline-flex items-center flex-wrap rounded-md transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default has-focus-visible:ring-2 has-focus-visible:ring-inset has-focus-visible:ring-inverted ring ring-inset ring-inverted md:text-sm" dir="ltr"><input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" data-slot="input" class="flex-1 border-0 bg-transparent placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75">
+  <!--v-if-->
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
 exports[`InputTags > renders with neutral variant soft correctly 1`] = `
 "<div data-slot="root" class="relative inline-flex items-center flex-wrap rounded-md transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-elevated/50 hover:bg-elevated has-focus:bg-elevated disabled:bg-elevated/50 md:text-sm" dir="ltr"><input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" data-slot="input" class="flex-1 border-0 bg-transparent placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75">
   <!--v-if-->
@@ -157,8 +181,24 @@ exports[`InputTags > renders with neutral variant soft correctly 1`] = `
 </div>"
 `;
 
+exports[`InputTags > renders with neutral variant soft highlight correctly 1`] = `
+"<div data-slot="root" class="relative inline-flex items-center flex-wrap rounded-md transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-elevated/50 hover:bg-elevated has-focus:bg-elevated disabled:bg-elevated/50 ring ring-inset ring-inverted md:text-sm" dir="ltr"><input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" data-slot="input" class="flex-1 border-0 bg-transparent placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75">
+  <!--v-if-->
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
 exports[`InputTags > renders with neutral variant subtle correctly 1`] = `
 "<div data-slot="root" class="relative inline-flex items-center flex-wrap rounded-md transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-elevated ring ring-inset ring-accented has-focus-visible:ring-2 has-focus-visible:ring-inset has-focus-visible:ring-inverted md:text-sm" dir="ltr"><input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" data-slot="input" class="flex-1 border-0 bg-transparent placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75">
+  <!--v-if-->
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`InputTags > renders with neutral variant subtle highlight correctly 1`] = `
+"<div data-slot="root" class="relative inline-flex items-center flex-wrap rounded-md transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-elevated has-focus-visible:ring-2 has-focus-visible:ring-inset has-focus-visible:ring-inverted ring ring-inset ring-inverted md:text-sm" dir="ltr"><input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" data-slot="input" class="flex-1 border-0 bg-transparent placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75">
   <!--v-if-->
   <!--v-if-->
   <!--v-if-->
@@ -181,8 +221,24 @@ exports[`InputTags > renders with primary variant ghost correctly 1`] = `
 </div>"
 `;
 
+exports[`InputTags > renders with primary variant ghost highlight correctly 1`] = `
+"<div data-slot="root" class="relative inline-flex items-center flex-wrap rounded-md transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent hover:bg-elevated has-focus:bg-elevated disabled:bg-transparent dark:disabled:bg-transparent ring ring-inset ring-primary md:text-sm" dir="ltr"><input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" data-slot="input" class="flex-1 border-0 bg-transparent placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75">
+  <!--v-if-->
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
 exports[`InputTags > renders with primary variant none correctly 1`] = `
 "<div data-slot="root" class="relative inline-flex items-center flex-wrap rounded-md transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent md:text-sm" dir="ltr"><input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" data-slot="input" class="flex-1 border-0 bg-transparent placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75">
+  <!--v-if-->
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`InputTags > renders with primary variant none highlight correctly 1`] = `
+"<div data-slot="root" class="relative inline-flex items-center flex-wrap rounded-md transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent ring ring-inset ring-primary md:text-sm" dir="ltr"><input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" data-slot="input" class="flex-1 border-0 bg-transparent placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75">
   <!--v-if-->
   <!--v-if-->
   <!--v-if-->
@@ -197,6 +253,14 @@ exports[`InputTags > renders with primary variant outline correctly 1`] = `
 </div>"
 `;
 
+exports[`InputTags > renders with primary variant outline highlight correctly 1`] = `
+"<div data-slot="root" class="relative inline-flex items-center flex-wrap rounded-md transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default has-focus-visible:ring-2 has-focus-visible:ring-inset has-focus-visible:ring-primary ring ring-inset ring-primary md:text-sm" dir="ltr"><input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" data-slot="input" class="flex-1 border-0 bg-transparent placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75">
+  <!--v-if-->
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
 exports[`InputTags > renders with primary variant soft correctly 1`] = `
 "<div data-slot="root" class="relative inline-flex items-center flex-wrap rounded-md transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-elevated/50 hover:bg-elevated has-focus:bg-elevated disabled:bg-elevated/50 md:text-sm" dir="ltr"><input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" data-slot="input" class="flex-1 border-0 bg-transparent placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75">
   <!--v-if-->
@@ -205,8 +269,24 @@ exports[`InputTags > renders with primary variant soft correctly 1`] = `
 </div>"
 `;
 
+exports[`InputTags > renders with primary variant soft highlight correctly 1`] = `
+"<div data-slot="root" class="relative inline-flex items-center flex-wrap rounded-md transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-elevated/50 hover:bg-elevated has-focus:bg-elevated disabled:bg-elevated/50 ring ring-inset ring-primary md:text-sm" dir="ltr"><input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" data-slot="input" class="flex-1 border-0 bg-transparent placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75">
+  <!--v-if-->
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
 exports[`InputTags > renders with primary variant subtle correctly 1`] = `
 "<div data-slot="root" class="relative inline-flex items-center flex-wrap rounded-md transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-elevated ring ring-inset ring-accented has-focus-visible:ring-2 has-focus-visible:ring-inset has-focus-visible:ring-primary md:text-sm" dir="ltr"><input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" data-slot="input" class="flex-1 border-0 bg-transparent placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75">
+  <!--v-if-->
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`InputTags > renders with primary variant subtle highlight correctly 1`] = `
+"<div data-slot="root" class="relative inline-flex items-center flex-wrap rounded-md transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-elevated has-focus-visible:ring-2 has-focus-visible:ring-inset has-focus-visible:ring-primary ring ring-inset ring-primary md:text-sm" dir="ltr"><input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" data-slot="input" class="flex-1 border-0 bg-transparent placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75">
   <!--v-if-->
   <!--v-if-->
   <!--v-if-->

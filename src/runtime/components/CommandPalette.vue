@@ -141,7 +141,7 @@ export interface CommandPaletteProps<G extends CommandPaletteGroup<T> = CommandP
       fuseOptions: {
         ignoreLocation: true,
         threshold: 0.1,
-        keys: ['label', 'suffix']
+        keys: ['label', 'description', 'suffix']
       },
       resultLimit: 12,
       matchAllWhenSearchEmpty: true
@@ -223,7 +223,7 @@ export type CommandPaletteSlots<T extends CommandPaletteItem = CommandPaletteIte
 </script>
 
 <script setup lang="ts" generic="G extends CommandPaletteGroup<T>, T extends CommandPaletteItem">
-import { computed, ref, useTemplateRef, toRef } from 'vue'
+import { computed, ref, useTemplateRef, toRef, watch, nextTick } from 'vue'
 import { ListboxRoot, ListboxFilter, ListboxContent, ListboxGroup, ListboxGroupLabel, ListboxVirtualizer, ListboxItem, ListboxItemIndicator } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
 import { defu } from 'defu'
@@ -306,7 +306,7 @@ const fuse = computed(() => defu({}, props.fuse, {
   fuseOptions: {
     ignoreLocation: true,
     threshold: 0.1,
-    keys: [props.labelKey, 'suffix']
+    keys: [props.labelKey, props.descriptionKey, 'suffix']
   },
   resultLimit: 12,
   matchAllWhenSearchEmpty: true
@@ -352,8 +352,9 @@ function processGroupItems(group: G, items: (T & { matches?: FuseResult<T>['matc
     items: processedItems.slice(0, fuse.value.resultLimit).map((item) => {
       return {
         ...item,
-        labelHtml: highlight<T>(item, fuseSearchTerm.value, props.labelKey!),
-        suffixHtml: highlight<T>(item, fuseSearchTerm.value, undefined, [props.labelKey!])
+        labelHtml: item.labelHtml ?? highlight<T>(item, fuseSearchTerm.value, props.labelKey!, undefined, fuse.value.fuseOptions?.useTokenSearch),
+        suffixHtml: item.suffixHtml ?? highlight<T>(item, fuseSearchTerm.value, 'suffix' as GetItemKeys<T>, [props.labelKey!], fuse.value.fuseOptions?.useTokenSearch),
+        descriptionHtml: item.descriptionHtml ?? highlight<T>(item, fuseSearchTerm.value, props.descriptionKey as GetItemKeys<T>, [props.labelKey!, 'suffix' as GetItemKeys<T>], fuse.value.fuseOptions?.useTokenSearch)
       }
     })
   }
@@ -409,25 +410,46 @@ const filteredGroups = computed(() => {
     return processedGroup.items?.length ? processedGroup : undefined
   }).filter(group => !!group)
 
-  const nonFuseGroups = currentGroups
-    ?.map((group, index) => ({ ...group, index }))
-    ?.filter(group => group.ignoreFilter && group.items?.length)
-    ?.map((group) => {
-      const processedGroup = processGroupItems(group, group.items || [])
-      return { ...processedGroup, index: group.index }
-    })
-    // Filter out groups without items after postFilter
-    ?.filter(group => group.items?.length) || []
+  const result = [...fuseGroups]
 
-  return nonFuseGroups.reduce((acc, group) => {
-    acc.splice(group.index, 0, group)
-    return acc
-  }, [...fuseGroups])
+  for (const group of currentGroups || []) {
+    if (!group.ignoreFilter || !group.items?.length) {
+      continue
+    }
+
+    const processedGroup = processGroupItems(group, group.items)
+    if (!processedGroup.items?.length) {
+      continue
+    }
+
+    const originalIndex = currentGroups!.indexOf(group)
+    const precedingIds = new Set<string>()
+    for (let i = 0; i < originalIndex; i++) {
+      precedingIds.add(currentGroups![i]!.id)
+    }
+
+    let insertAfter = -1
+    for (let i = 0; i < result.length; i++) {
+      if (precedingIds.has(result[i]!.id)) {
+        insertAfter = i
+      }
+    }
+
+    result.splice(insertAfter + 1, 0, processedGroup)
+  }
+
+  return result
 })
 
 const filteredItems = computed(() => filteredGroups.value.flatMap(group => group.items || []))
 
 const rootRef = useTemplateRef('rootRef')
+
+watch(filteredGroups, () => {
+  nextTick(() => {
+    rootRef.value?.highlightFirstItem()
+  })
+})
 
 function navigate(item: T) {
   if (!item.children?.length) {
@@ -481,7 +503,7 @@ function onSelect(e: Event, item: T) {
   <DefineItemTemplate v-slot="{ item, index, group }">
     <ULink v-slot="{ active, ...slotProps }" v-bind="pickLinkProps(item)" custom>
       <ListboxItem
-        :value="props.valueKey ? get(item, props.valueKey as string) : omit(item, ['matches' as any, 'group' as any, 'onSelect', 'labelHtml', 'suffixHtml', 'children'])"
+        :value="props.valueKey ? get(item, props.valueKey as string) : omit(item, ['matches' as any, 'group' as any, 'onSelect', 'labelHtml', 'suffixHtml', 'descriptionHtml', 'children'])"
         :disabled="item.disabled"
         as-child
         @select="onSelect($event, item as T)"
@@ -516,7 +538,8 @@ function onSelect(e: Event, item: T) {
                 </slot>
               </span>
 
-              <span v-if="get(item, props.descriptionKey as string) || !!slots[(item.slot ? `${item.slot}-description` : group?.slot ? `${group.slot}-description` : `item-description`) as keyof CommandPaletteSlots<T>]" data-slot="itemDescription" :class="ui.itemDescription({ class: [props.ui?.itemDescription, item.ui?.itemDescription] })">
+              <span v-if="item.descriptionHtml" data-slot="itemDescription" :class="ui.itemDescription({ class: [props.ui?.itemDescription, item.ui?.itemDescription] })" v-html="item.descriptionHtml" />
+              <span v-else-if="get(item, props.descriptionKey as string) || !!slots[(item.slot ? `${item.slot}-description` : group?.slot ? `${group.slot}-description` : `item-description`) as keyof CommandPaletteSlots<T>]" data-slot="itemDescription" :class="ui.itemDescription({ class: [props.ui?.itemDescription, item.ui?.itemDescription] })">
                 <slot :name="((item.slot ? `${item.slot}-description` : group?.slot ? `${group.slot}-description` : `item-description`) as keyof CommandPaletteSlots<T>)" :item="(item as any)" :index="index" :ui="ui">
                   {{ get(item, props.descriptionKey as string) }}
                 </slot>

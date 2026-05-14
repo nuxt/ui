@@ -10,7 +10,7 @@ import { get } from '../utils'
 
 type ThemeSlotOverrides<T> = T extends { slots: infer S extends Record<string, any> }
   ? { [K in keyof S]?: ClassValue }
-  : { [K in keyof T]?: T[K] extends Record<string, any> ? ThemeSlotOverrides<T[K]> : ClassValue }
+  : { [K in keyof T]?: T[K] extends any[] ? ClassValue : T[K] extends Record<string, any> ? ThemeSlotOverrides<T[K]> : ClassValue }
 
 /**
  * Flat slot-class override shape: `{ button: { base: '...' }, modal: {...} }`.

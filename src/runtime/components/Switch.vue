@@ -23,6 +23,8 @@ export interface SwitchProps<T = boolean> extends Pick<SwitchRootProps<T>, 'disa
    * @defaultValue 'md'
    */
   size?: Switch['variants']['size']
+  /** Highlight the ring color like a focus state. */
+  highlight?: boolean
   /** When `true`, the loading icon will be displayed. */
   loading?: boolean
   /**
@@ -80,7 +82,7 @@ const appConfig = useAppConfig() as Switch['AppConfig']
 
 const rootProps = useForwardProps(reactivePick(props, 'required', 'value', 'defaultValue', 'modelValue', 'trueValue', 'falseValue'), emits)
 
-const { id: _id, emitFormChange, emitFormInput, size, color, name, disabled, ariaAttrs } = useFormField<SwitchProps<T>>(_props)
+const { id: _id, emitFormChange, emitFormInput, size, color, highlight, name, disabled, ariaAttrs } = useFormField<SwitchProps<T>>(_props)
 const id = _id.value ?? useId()
 
 const attrs = useAttrs()
@@ -94,6 +96,7 @@ const forwardedAttrs = computed(() => {
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.switch || {}) })({
   size: size.value ?? props.size,
   color: color.value ?? props.color,
+  highlight: highlight.value ?? props.highlight,
   required: props.required,
   loading: props.loading,
   disabled: disabled.value || props.loading
