@@ -556,10 +556,10 @@ defineExpose({
               v-if="isSelectItem(item) && item.badge !== undefined && item.badge !== null"
               color="neutral"
               variant="soft"
-              :size="((item.ui?.itemBadgeSize || uiProp?.itemBadgeSize || ui.itemBadgeSize()) as BadgeProps['size'])"
+              :size="((item.ui?.itemBadgeSize || ui.itemBadgeSize()) as BadgeProps['size'])"
               v-bind="(typeof item.badge === 'string' || typeof item.badge === 'number') ? { label: item.badge } : item.badge"
               data-slot="itemLeadingBadge"
-              :class="ui.itemBadge({ class: [uiProp?.itemBadge, item.ui?.itemBadge] })"
+              :class="ui.itemBadge({ class: [item.ui?.itemBadge] })"
             />
           </span>
 
