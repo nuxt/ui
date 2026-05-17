@@ -5,7 +5,9 @@ export default (options: Required<ModuleOptions>) => ({
     root: 'relative',
     fieldset: 'flex gap-x-2',
     legend: 'mb-1 block font-medium text-default',
-    item: ''
+    item: '',
+    label: 'block font-medium text-default',
+    description: 'text-muted'
   },
   variants: {
     orientation: {
