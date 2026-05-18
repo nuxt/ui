@@ -123,6 +123,18 @@ describe('InputMenu', () => {
     }
   )
 
+  it('with trailing false should not render trailing section', () => {
+    const wrapper = mount(InputMenu, {
+      props: {
+        ...props,
+        trailing: false
+      }
+    })
+
+    expect(wrapper.find('[data-slot="trailing"]').exists()).toBe(false)
+    expect(wrapper.find('[data-slot="trailingIcon"]').exists()).toBe(false)
+  })
+
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(InputMenu, {
       props: {

@@ -41,7 +41,7 @@ export function useComponentIcons(componentProps: MaybeRefOrGetter<UseComponentI
   const props = computed(() => toValue(componentProps))
 
   const isLeading = computed(() => (props.value.icon && props.value.leading) || (props.value.icon && !props.value.trailing) || (props.value.loading && !props.value.trailing) || !!props.value.leadingIcon)
-  const isTrailing = computed(() => (props.value.icon && props.value.trailing) || (props.value.loading && props.value.trailing) || !!props.value.trailingIcon)
+  const isTrailing = computed(() => (props.value.icon && props.value.trailing) || (props.value.loading && props.value.trailing) || (!!props.value.trailingIcon && props.value.trailing !== false))
 
   const leadingIconName = computed(() => {
     if (props.value.loading) {
