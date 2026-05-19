@@ -3,7 +3,7 @@ import type { ModuleOptions } from '../module'
 export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: 'group/message relative w-full',
-    header: 'mb-1.5',
+    header: 'flex mb-1.5',
     container: 'relative flex items-start',
     body: '',
     leading: 'inline-flex items-center justify-center min-h-6',
