@@ -56,6 +56,7 @@ export interface ChatMessageSlots<TMetadata = unknown, TDataParts extends UIData
   header?(props: UIMessage<TMetadata, TDataParts, TTools>): VNode[]
   leading?(props: UIMessage<TMetadata, TDataParts, TTools> & { avatar: ChatMessageProps<TMetadata, TDataParts, TTools>['avatar'], ui: ChatMessage['ui'] }): VNode[]
   files?(props: Omit<UIMessage<TMetadata, TDataParts, TTools>, 'parts'> & { parts: FileUIPart[] }): VNode[]
+  body?(props: UIMessage<TMetadata, TDataParts, TTools>): VNode[]
   content?(props: UIMessage<TMetadata, TDataParts, TTools> & { content?: string }): VNode[]
   actions?(props: UIMessage<TMetadata, TDataParts, TTools> & { actions: ChatMessageProps<TMetadata, TDataParts, TTools>['actions'] }): VNode[]
 }
