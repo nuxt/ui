@@ -3,7 +3,7 @@ import type { ContentNavigationItem } from '@nuxt/content'
 import { createSharedComposable } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { sanitizeSnippet } from '../utils/search'
-import type { ContentSearchFile, ContentSearchItem, ContentSearchLink } from '../components/content/ContentSearch.vue'
+import type { ContentSearchFile, ContentSearchItem, ContentSearchLink, ContentSearchResult } from '../components/content/ContentSearch.vue'
 
 function _useContentSearch() {
   const open = ref(false)
@@ -80,7 +80,7 @@ function _useContentSearch() {
       children: undefined
     } as ContentSearchItem, ...(link.children?.map(child => ({
       ...child,
-      prefix: link.label + ' >',
+      prefix: link.label ? link.label + ' >' : undefined,
       suffix: child.description,
       description: undefined,
       icon: child.icon || link.icon || appConfig.ui.icons.file
@@ -108,13 +108,13 @@ function _useContentSearch() {
    * of the same page don't each trigger a full tree walk.
    */
   function mapSearchResults(
-    results: (ContentSearchFile & { snippets?: { title?: string, content?: string } })[],
+    results: ContentSearchResult[],
     navigation?: ContentNavigationItem[]
   ): ContentSearchItem[] {
     const navCache = new Map<string, ReturnType<typeof findNavItem>>()
 
     return results.reduce<ContentSearchItem[]>((acc, result) => {
-      const basePath = result.id.split('#')[0]!
+      const basePath = result.id.split('#')[0] ?? result.id
       let nav = navCache.get(basePath)
       if (!nav) {
         nav = findNavItem(basePath, navigation)
@@ -124,7 +124,12 @@ function _useContentSearch() {
 
       if (navigation?.length && !link) return acc
 
-      const prefixParts = [...new Set([parent?.title, ...result.titles].filter(Boolean))]
+      // Include `root?.title` so index pages still show their section name in the
+      // prefix. `findNavItem` returns the section root when a result's path matches
+      // a top-level node directly (e.g. `/docs/typography` from `1.index.md`), which
+      // leaves `parent` undefined and would otherwise drop the section context.
+      // For sub-pages, `root.title === parent.title`, and the `Set` dedupes it.
+      const prefixParts = [...new Set([root?.title, parent?.title, ...result.titles].filter(Boolean))]
       const prefix = prefixParts.length ? (prefixParts.join(' > ') + ' >') : undefined
 
       acc.push({
@@ -154,7 +159,6 @@ function _useContentSearch() {
 
   return {
     open,
-    findNavItem,
     mapFile,
     mapNavigationItems,
     mapLinks,

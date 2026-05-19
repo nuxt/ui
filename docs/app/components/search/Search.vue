@@ -15,7 +15,11 @@ const { open } = useContentSearch()
 const { track } = useAnalytics()
 
 const fuse = {
-  resultLimit: 20
+  resultLimit: 20,
+  fuseOptions: {
+    useTokenSearch: false,
+    threshold: 0
+  }
 }
 
 watch(open, (value) => {

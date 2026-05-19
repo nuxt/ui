@@ -28,6 +28,25 @@ export interface ContentSearchFile {
   content: string
 }
 
+export interface ContentSearchResult extends ContentSearchFile {
+  snippets?: {
+    title?: string
+    content?: string
+  }
+}
+
+export interface ContentSearchOptions {
+  limit?: number
+  snippet?: {
+    columns?: ('title' | 'content')[]
+    around?: number
+  }
+}
+
+export type ContentSearchStatus = 'idle' | 'loading' | 'ready' | 'error'
+
+export type ContentSearchFn = (query: string, opts?: ContentSearchOptions) => Promise<ContentSearchResult[]>
+
 export interface ContentSearchItem extends Omit<LinkProps, 'custom'>, CommandPaletteItem {
   level?: number
   /**
@@ -77,12 +96,12 @@ export interface ContentSearchProps<T extends ContentSearchLink = ContentSearchL
    * When provided, ContentSearch calls it on each keystroke and uses the results instead of Fuse.
    * Results are mapped, sanitized, and grouped by navigation internally.
    */
-  search?: (query: string, opts?: any) => Promise<(ContentSearchFile & { snippets?: { title?: string, content?: string } })[]>
+  search?: ContentSearchFn
   /**
    * Status of the async search index (e.g. from `useSearchCollection`).
    * When the status transitions to `'ready'`, the search is automatically re-triggered if there's a pending term.
    */
-  searchStatus?: string
+  searchStatus?: ContentSearchStatus
   /**
    * Delay (in milliseconds) before the search is triggered (debounced).
    * Keeps the input responsive by only running the search after typing settles.
@@ -162,21 +181,32 @@ const commandPaletteRef = useTemplateRef('commandPaletteRef')
 
 const debouncedSearchTerm = refDebounced(searchTerm, () => props.searchDelay!)
 
-const rawSearchResults = shallowRef<(ContentSearchFile & { snippets?: { title?: string, content?: string } })[]>([])
+const rawSearchResults = shallowRef<ContentSearchResult[]>([])
 const searchResults = computed(() => mapSearchResults(rawSearchResults.value, props.navigation))
 
+let searchRequestId = 0
+
 async function runSearch(term: string) {
+  // Always bump the request id, even on the early-return path — otherwise an
+  // in-flight prior request could resolve after we clear results and overwrite
+  // them again (e.g. user types "foo" then backspaces before "foo" settles).
+  const requestId = ++searchRequestId
+
   if (!props.search || !term) {
     rawSearchResults.value = []
     return
   }
-
   try {
-    rawSearchResults.value = await props.search(term, {
+    const results = await props.search(term, {
       limit: (fuse.value as UseFuseOptions<T>).resultLimit,
       snippet: { columns: ['title', 'content'], around: 20 }
     })
-  } catch {
+    // Discard stale responses: a newer request started before this one resolved.
+    if (requestId !== searchRequestId) return
+    rawSearchResults.value = results
+  } catch (err) {
+    if (requestId !== searchRequestId) return
+    console.error('[ContentSearch] search failed:', err)
     rawSearchResults.value = []
   }
 }

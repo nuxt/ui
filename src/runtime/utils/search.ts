@@ -57,17 +57,21 @@ function truncateHTMLFromStart(html: string, maxLength: number) {
   return truncated
 }
 
-export function sanitizeSnippet(snippet: string, tag: string = 'mark'): string {
-  const tagOpen = `\0${tag}O\0`
-  const tagClose = `\0${tag}C\0`
+// Escape an FTS snippet to safe HTML while preserving the `<mark>` highlight tags.
+// The tag is intentionally hardcoded — exposing it as a parameter would let a
+// caller smuggle through arbitrary tags (e.g. `<script>`) since `v-html` is
+// used to render the result downstream.
+export function sanitizeSnippet(snippet: string): string {
+  const tagOpen = '\0markO\0'
+  const tagClose = '\0markC\0'
 
   return escapeHTML(
     snippet
-      .replaceAll(`<${tag}>`, tagOpen)
-      .replaceAll(`</${tag}>`, tagClose)
+      .replaceAll('<mark>', tagOpen)
+      .replaceAll('</mark>', tagClose)
   )
-    .replaceAll(tagOpen, `<${tag}>`)
-    .replaceAll(tagClose, `</${tag}>`)
+    .replaceAll(tagOpen, '<mark>')
+    .replaceAll(tagClose, '</mark>')
 }
 
 export function highlight<T>(item: T & { matches?: FuseResult<T>['matches'] }, searchTerm: string, forceKey?: GetItemKeys<T>, omitKeys?: GetItemKeys<T>[], useTokenSearch?: boolean) {

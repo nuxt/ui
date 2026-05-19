@@ -1,4 +1,5 @@
-import { describe } from 'vitest'
+import { describe, it, expect, vi, afterEach } from 'vitest'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { renderEach } from '../../component-render'
 import ContentSearch from '../../../src/runtime/components/content/ContentSearch.vue'
 import theme from '#build/ui/content/content-search'
@@ -134,4 +135,72 @@ describe('ContentSearch', () => {
     ['with ui', { props: { ...props, ui: { input: '[&>input]:text-lg' } } }],
     ['with class', { props: { ...props, class: 'sm:max-w-5xl' } }]
   ])
+
+  describe('async search', () => {
+    afterEach(() => {
+      vi.useRealTimers()
+    })
+
+    it('debounces and re-triggers when searchStatus becomes ready', async () => {
+      vi.useFakeTimers({ shouldAdvanceTime: true })
+      const search = vi.fn(async () => [])
+
+      const wrapper = await mountSuspended(ContentSearch, {
+        props: {
+          open: true,
+          portal: false,
+          navigation,
+          search,
+          searchTerm: ''
+        }
+      })
+
+      await wrapper.setProps({ searchTerm: 'foo' })
+      expect(search).not.toHaveBeenCalled()
+
+      await vi.advanceTimersByTimeAsync(150)
+      expect(search).toHaveBeenCalledTimes(1)
+      expect(search).toHaveBeenLastCalledWith('foo', expect.objectContaining({
+        snippet: { columns: ['title', 'content'], around: 20 }
+      }))
+
+      await wrapper.setProps({ searchStatus: 'ready' })
+      await vi.advanceTimersByTimeAsync(0)
+      expect(search).toHaveBeenCalledTimes(2)
+
+      wrapper.unmount()
+    })
+
+    // Regression test: results whose path matches a section root (e.g. an
+    // `index.md` page) used to drop the section name from the prefix because
+    // `findNavItem` returns the top-level node with `parent: undefined`.
+    it('includes the section title in the prefix for index-page results', async () => {
+      vi.useFakeTimers({ shouldAdvanceTime: true })
+      const search = vi.fn(async () => [{
+        id: '/getting-started#some-section',
+        title: 'Some Section',
+        titles: ['Introduction', 'Usage'],
+        level: 3,
+        content: 'lorem ipsum'
+      }])
+
+      const wrapper = await mountSuspended(ContentSearch, {
+        props: {
+          open: true,
+          portal: false,
+          navigation,
+          search,
+          searchTerm: ''
+        }
+      })
+
+      await wrapper.setProps({ searchTerm: 'lorem' })
+      await vi.advanceTimersByTimeAsync(150)
+      await wrapper.vm.$nextTick()
+
+      expect(wrapper.text()).toContain('Getting Started > Introduction > Usage >')
+
+      wrapper.unmount()
+    })
+  })
 })
