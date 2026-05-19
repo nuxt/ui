@@ -30,7 +30,7 @@ export default (options: Required<ModuleOptions>) => ({
       left: {},
       right: {
         container: 'justify-end ms-auto max-w-[75%]',
-        files: 'justify-end',
+        header: 'justify-end',
         actions: 'right-0'
       }
     },
