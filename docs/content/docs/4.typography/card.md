@@ -1,7 +1,8 @@
 ---
-title: Card
+title: ProseCard
 description: 'Create highlighted content blocks with optional links and navigation.'
 category: components
+navigation.title: Card
 links:
   - label: GitHub
     icon: i-simple-icons-github

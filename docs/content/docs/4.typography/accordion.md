@@ -1,7 +1,8 @@
 ---
-title: Accordion
+title: ProseAccordion
 description: 'Create expandable content sections for better information organization.'
 category: components
+navigation.title: Accordion
 links:
   - label: GitHub
     icon: i-simple-icons-github

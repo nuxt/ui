@@ -2,7 +2,8 @@ import { ref } from 'vue'
 import type { ContentNavigationItem } from '@nuxt/content'
 import { createSharedComposable } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import type { ContentSearchFile, ContentSearchItem } from '../components/content/ContentSearch.vue'
+import { sanitizeSnippet } from '../utils/search'
+import type { ContentSearchFile, ContentSearchItem, ContentSearchLink, ContentSearchResult } from '../components/content/ContentSearch.vue'
 
 function _useContentSearch() {
   const open = ref(false)
@@ -68,6 +69,85 @@ function _useContentSearch() {
   }
 
   /**
+   * Map links to ContentSearchItems
+   */
+  function mapLinks(links: ContentSearchLink[]): ContentSearchItem[] {
+    return links.flatMap(link => [{
+      ...link,
+      suffix: link.description,
+      description: undefined,
+      icon: link.icon || appConfig.ui.icons.file,
+      children: undefined
+    } as ContentSearchItem, ...(link.children?.map(child => ({
+      ...child,
+      prefix: link.label ? link.label + ' >' : undefined,
+      suffix: child.description,
+      description: undefined,
+      icon: child.icon || link.icon || appConfig.ui.icons.file
+    } as ContentSearchItem)) || [])])
+  }
+
+  /**
+   * Find a navigation item by path
+   */
+  function findNavItem(path: string, nodes?: ContentNavigationItem[], root?: ContentNavigationItem, parent?: ContentNavigationItem): { link?: ContentNavigationItem, parent?: ContentNavigationItem, root?: ContentNavigationItem } {
+    for (const node of nodes || []) {
+      const currentRoot = root || node
+      if (node.path === path) return { link: node, parent, root: currentRoot }
+      if (node.children?.length) {
+        const found = findNavItem(path, node.children, currentRoot, node)
+        if (found.link) return found
+      }
+    }
+    return {}
+  }
+
+  /**
+   * Map search results to ContentSearchItems.
+   * Caches `findNavItem` lookups by base path so multiple sections
+   * of the same page don't each trigger a full tree walk.
+   */
+  function mapSearchResults(
+    results: ContentSearchResult[],
+    navigation?: ContentNavigationItem[]
+  ): ContentSearchItem[] {
+    const navCache = new Map<string, ReturnType<typeof findNavItem>>()
+
+    return results.reduce<ContentSearchItem[]>((acc, result) => {
+      const basePath = result.id.split('#')[0] ?? result.id
+      let nav = navCache.get(basePath)
+      if (!nav) {
+        nav = findNavItem(basePath, navigation)
+        navCache.set(basePath, nav)
+      }
+      const { link, parent, root } = nav
+
+      if (navigation?.length && !link) return acc
+
+      // Include `root?.title` so index pages still show their section name in the
+      // prefix. `findNavItem` returns the section root when a result's path matches
+      // a top-level node directly (e.g. `/docs/typography` from `1.index.md`), which
+      // leaves `parent` undefined and would otherwise drop the section context.
+      // For sub-pages, `root.title === parent.title`, and the `Set` dedupes it.
+      const prefixParts = [...new Set([root?.title, parent?.title, ...result.titles].filter(Boolean))]
+      const prefix = prefixParts.length ? (prefixParts.join(' > ') + ' >') : undefined
+
+      acc.push({
+        label: result.title,
+        labelHtml: result.snippets?.title ? sanitizeSnippet(result.snippets.title) : undefined,
+        prefix,
+        description: result.content.replaceAll('<', '&lt;').replaceAll('>', '&gt;'),
+        descriptionHtml: result.snippets?.content ? sanitizeSnippet(result.snippets.content) : undefined,
+        to: result.id,
+        icon: (link?.icon || parent?.icon || root?.icon || (result.level > 1 ? appConfig.ui.icons.hash : appConfig.ui.icons.file)) as string,
+        level: result.level
+      })
+
+      return acc
+    }, [])
+  }
+
+  /**
    * Post-filter function to filter only first level items when no query
    */
   function postFilter(query: string, items: ContentSearchItem[]): ContentSearchItem[] {
@@ -81,6 +161,8 @@ function _useContentSearch() {
     open,
     mapFile,
     mapNavigationItems,
+    mapLinks,
+    mapSearchResults,
     postFilter
   }
 }

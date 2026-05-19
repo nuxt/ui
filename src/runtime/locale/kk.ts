@@ -55,6 +55,7 @@ export default defineLocale<Messages>({
     },
     contentSearch: {
       links: 'Сілтемелер',
+      search: 'Нәтижелер',
       theme: 'Тақырып'
     },
     contentSearchButton: {
