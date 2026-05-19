@@ -62,6 +62,7 @@ import { Primitive, useDateFormatter } from 'reka-ui'
 import { useAppConfig } from '#imports'
 import { useLocale } from '../composables/useLocale'
 import { useComponentProps } from '../composables/useComponentProps'
+import { usePrefix } from '../composables/usePrefix'
 import ImageComponent from '#build/ui-image-component'
 import { getSlotChildrenText } from '../utils'
 import { tv } from '../utils/tv'
@@ -84,6 +85,7 @@ const props = useComponentProps('blogPost', _props)
 const { locale } = useLocale()
 const appConfig = useAppConfig() as BlogPost['AppConfig']
 const formatter = useDateFormatter(locale.value.code)
+const prefix = usePrefix()
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.blogPost || {}) })({
@@ -140,10 +142,10 @@ const ariaLabel = computed(() => {
         v-if="props.to"
         :aria-label="ariaLabel"
         v-bind="{ to: props.to, target: props.target, ...$attrs }"
-        class="focus:outline-none peer"
+        :class="prefix('focus:outline-none peer')"
         raw
       >
-        <span class="absolute inset-0" aria-hidden="true" />
+        <span :class="prefix('absolute inset-0')" aria-hidden="true" />
       </ULink>
 
       <slot name="body">
