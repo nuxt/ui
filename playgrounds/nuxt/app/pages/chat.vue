@@ -56,11 +56,33 @@ function getDomain(url: string): string {
 function getFaviconUrl(url: string): string {
   return `https://www.google.com/s2/favicons?sz=32&domain=${getDomain(url)}`
 }
+
+function generateMessages() {
+  chat.messages.push({
+    id: '1',
+    parts: [{ type: 'text', text: 'Hello, how are you?' }],
+    role: 'user'
+  })
+  chat.messages.push({
+    id: '1',
+    parts: [{ type: 'text', text: 'Fine, and you ?' }],
+    role: 'assistant'
+  })
+}
 </script>
 
 <template>
   <UDashboardNavbar class="absolute top-0 inset-x-0 z-5 border-b-0 lg:pointer-events-none">
     <template #right>
+      <UButton
+        v-if="!chat.messages.length"
+        icon="i-lucide-messages-square"
+        label="Generate messages"
+        color="neutral"
+        variant="ghost"
+        class="pointer-events-auto"
+        @click="generateMessages"
+      />
       <UButton
         v-if="chat.messages.length"
         icon="i-lucide-list-x"
@@ -78,7 +100,8 @@ function getFaviconUrl(url: string): string {
       :messages="chat.messages"
       :status="chat.status"
       :spacing-offset="72"
-      :assistant="{ actions: [{ label: 'Edit', icon: 'i-lucide-pencil', onClick: () => console.log('edit') }] }"
+      :assistant="{ actions: [{ label: 'Edit', icon: 'i-lucide-pencil', onClick: () => console.log('edit') }], icon: 'i-lucide-bot', variant: 'outline' }"
+      :user="{ actions: [{ label: 'Edit', icon: 'i-lucide-pencil', onClick: () => console.log('edit') }], icon: 'i-lucide-user' }"
     >
       <template #content="{ message }">
         <template v-for="(part, index) in message.parts" :key="`${message.id}-${part.type}-${index}`">

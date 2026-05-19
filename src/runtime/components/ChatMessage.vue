@@ -116,31 +116,35 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.chatMessage 
         </slot>
       </div>
 
-      <div v-if="props.content || textParts.length || !!slots.content" data-slot="content" :class="ui.content({ class: props.ui?.content })">
-        <slot name="content" v-bind="{ ...messageProps, content: props.content }">
-          <template v-if="props.content">
-            {{ props.content }}
-          </template>
-          <template v-else>
-            <template v-for="(part, index) in textParts" :key="`${props.id}-${part.type}-${index}`">
-              {{ part.text }}
-            </template>
-          </template>
-        </slot>
-      </div>
+      <div v-if="props.content || textParts.length || !!slots.content || props.actions || !!slots.actions || !!slots.header" data-slot="body" :class="ui.body({ class: props.ui?.body })">
+        <slot name="body" v-bind="{ ...messageProps }">
+          <div v-if="props.content || textParts.length || !!slots.content" data-slot="content" :class="ui.content({ class: props.ui?.content })">
+            <slot name="content" v-bind="{ ...messageProps, content: props.content }">
+              <template v-if="props.content">
+                {{ props.content }}
+              </template>
+              <template v-else>
+                <template v-for="(part, index) in textParts" :key="`${props.id}-${part.type}-${index}`">
+                  {{ part.text }}
+                </template>
+              </template>
+            </slot>
+          </div>
 
-      <div v-if="props.actions || !!slots.actions" data-slot="actions" :class="ui.actions({ class: props.ui?.actions })">
-        <slot name="actions" v-bind="{ ...messageProps, actions: props.actions }">
-          <UTooltip v-for="(action, index) in props.actions" :key="index" :text="action.label">
-            <UButton
-              size="sm"
-              color="neutral"
-              variant="ghost"
-              v-bind="omit(action, ['onClick'])"
-              :label="undefined"
-              @click="typeof action.onClick === 'function' ? action.onClick($event, messageProps) : undefined"
-            />
-          </UTooltip>
+          <div v-if="props.actions || !!slots.actions" data-slot="actions" :class="ui.actions({ class: props.ui?.actions })">
+            <slot name="actions" v-bind="{ ...messageProps, actions: props.actions }">
+              <UTooltip v-for="(action, index) in props.actions" :key="index" :text="action.label">
+                <UButton
+                  size="sm"
+                  color="neutral"
+                  variant="ghost"
+                  v-bind="omit(action, ['onClick'])"
+                  :label="undefined"
+                  @click="typeof action.onClick === 'function' ? action.onClick($event, messageProps) : undefined"
+                />
+              </UTooltip>
+            </slot>
+          </div>
         </slot>
       </div>
     </div>

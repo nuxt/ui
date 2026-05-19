@@ -5,6 +5,7 @@ export default (options: Required<ModuleOptions>) => ({
     root: 'group/message relative w-full',
     header: 'mb-1.5',
     container: 'relative flex items-start',
+    body: '',
     leading: 'inline-flex items-center justify-center min-h-6',
     leadingIcon: 'shrink-0',
     leadingAvatar: 'shrink-0',
@@ -29,7 +30,8 @@ export default (options: Required<ModuleOptions>) => ({
       left: {},
       right: {
         container: 'justify-end ms-auto max-w-[75%]',
-        files: 'justify-end'
+        files: 'justify-end',
+        actions: 'right-0'
       }
     },
     leading: {
@@ -60,20 +62,6 @@ export default (options: Required<ModuleOptions>) => ({
     actions: true,
     class: {
       container: 'pb-8'
-    }
-  }, {
-    leading: true,
-    compact: false,
-    side: 'left',
-    class: {
-      actions: 'left-11'
-    }
-  }, {
-    leading: true,
-    compact: true,
-    side: 'left',
-    class: {
-      actions: 'left-6.5'
     }
   }, {
     variant: ['solid', 'outline', 'soft', 'subtle'],
