@@ -55,6 +55,7 @@ export default defineLocale<Messages>({
     },
     contentSearch: {
       links: 'Odkazy',
+      search: 'Výsledky',
       theme: 'Barevný režim'
     },
     contentSearchButton: {

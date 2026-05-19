@@ -23,7 +23,7 @@ export function useSearch() {
   const links = computed(() => [{
     label: 'Ask AI',
     description: 'Ask the AI assistant powered by our custom MCP server for help.',
-    icon: 'i-lucide-bot',
+    icon: 'i-lucide-bot-message-square',
     kbds: ['meta', 'i'],
     ui: {
       itemLeadingIcon: 'group-data-highlighted:not-group-data-disabled:text-primary'
@@ -104,6 +104,10 @@ export function useSearch() {
   }])
 
   const groups = computed(() => [{
+    id: 'framework',
+    label: 'Framework',
+    items: frameworks.value
+  }, {
     id: 'ai',
     label: 'AI',
     ignoreFilter: true,
@@ -116,16 +120,12 @@ export function useSearch() {
     },
     items: [{
       label: 'Ask AI',
-      icon: 'i-lucide-bot',
+      icon: 'i-lucide-bot-message-square',
       ui: {
         itemLeadingIcon: 'group-data-highlighted:not-group-data-disabled:text-primary'
       },
       onSelect
     }]
-  }, {
-    id: 'framework',
-    label: 'Framework',
-    items: frameworks.value
   }])
 
   return {

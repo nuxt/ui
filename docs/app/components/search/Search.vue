@@ -1,25 +1,32 @@
 <script setup lang="ts">
 import type { ContentNavigationItem } from '@nuxt/content'
 
-interface ContentSearchFile {
-  id: string
-  title: string
-  titles: string[]
-  level: number
-  content: string
-}
-
 defineProps<{
-  files?: ContentSearchFile[]
   navigation?: ContentNavigationItem[]
 }>()
 
+const { status, search, init } = useSearchCollection('docs', {
+  immediate: false,
+  ignoredTags: ['style']
+})
+
 const { links, groups, searchTerm } = useSearch()
+const { open } = useContentSearch()
 const { track } = useAnalytics()
 
 const fuse = {
-  resultLimit: 30
+  resultLimit: 20,
+  fuseOptions: {
+    useTokenSearch: false,
+    threshold: 0
+  }
 }
+
+watch(open, (value) => {
+  if (value && status.value === 'idle') {
+    init()
+  }
+})
 
 watchDebounced(searchTerm, (term) => {
   if (term) {
@@ -32,9 +39,10 @@ watchDebounced(searchTerm, (term) => {
   <UContentSearch
     v-model:search-term="searchTerm"
     :links="links"
-    :files="files"
     :groups="groups"
     :navigation="navigation"
+    :search="search"
+    :search-status="status"
     :fuse="fuse"
   />
 </template>

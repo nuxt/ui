@@ -83,7 +83,9 @@ describe('InputMenu', () => {
     ['with virtualize', { props: { ...props, virtualize: true } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { ...props, size } }]),
     ...variants.map((variant: string) => [`with primary variant ${variant}`, { props: { ...props, variant } }]),
+    ...variants.map((variant: string) => [`with primary variant ${variant} highlight`, { props: { ...props, variant, highlight: true } }]),
     ...variants.map((variant: string) => [`with neutral variant ${variant}`, { props: { ...props, variant, color: 'neutral' } }]),
+    ...variants.map((variant: string) => [`with neutral variant ${variant} highlight`, { props: { ...props, variant, color: 'neutral', highlight: true } }]),
     ['with ariaLabel', { props, attrs: { 'aria-label': 'Aria label' } }],
     ['with as', { props: { ...props, as: 'section' } }],
     ['with class', { props: { ...props, class: 'absolute' } }],
@@ -120,6 +122,18 @@ describe('InputMenu', () => {
       expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [[spec.expected]] })
     }
   )
+
+  it('with trailing false should not render trailing section', () => {
+    const wrapper = mount(InputMenu, {
+      props: {
+        ...props,
+        trailing: false
+      }
+    })
+
+    expect(wrapper.find('[data-slot="trailing"]').exists()).toBe(false)
+    expect(wrapper.find('[data-slot="trailingIcon"]').exists()).toBe(false)
+  })
 
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(InputMenu, {

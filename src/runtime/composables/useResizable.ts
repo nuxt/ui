@@ -56,6 +56,10 @@ export type UseResizableProps = {
    */
   storageKey?: string
   /**
+   * Options to pass to the underlying storage (`useCookie` or `useStorage`).
+   */
+  storageOptions?: Record<string, any>
+  /**
    * Whether to persist the size in the storage.
    * @defaultValue true
    */
@@ -108,8 +112,8 @@ export function useResizable(key: string, options: Ref<UseResizableProps> | UseR
 
   const storageData = (opts.value.persistent && (opts.value.resizable || opts.value.collapsible))
     ? opts.value.storage === 'cookie'
-      ? useCookie<StorageType>(key, { default: () => defaultStorageValue })
-      : useStorage<StorageType>(key, defaultStorageValue)
+      ? useCookie<StorageType>(key, { ...opts.value.storageOptions, default: () => defaultStorageValue })
+      : useStorage<StorageType>(key, defaultStorageValue, undefined, opts.value.storageOptions)
     : ref(defaultStorageValue)
 
   const isCollapsed = computed({

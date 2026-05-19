@@ -59,6 +59,8 @@ export interface RadioGroupProps<T extends RadioGroupItem[] = RadioGroupItem[], 
    * @defaultValue 'primary'
    */
   color?: RadioGroup['variants']['color']
+  /** Highlight the ring color like a focus state. */
+  highlight?: boolean
   /**
    * The orientation the radio buttons are laid out.
    * @defaultValue 'vertical'
@@ -114,13 +116,14 @@ const appConfig = useAppConfig() as RadioGroup['AppConfig']
 
 const rootProps = useForwardProps(reactivePick(props, 'as', 'loop', 'required'), emits)
 
-const { emitFormChange, emitFormInput, color, name, size, id: _id, disabled, ariaAttrs } = useFormField<RadioGroupProps<T>>(_props, { bind: false })
+const { emitFormChange, emitFormInput, color, name, size, highlight, id: _id, disabled, ariaAttrs } = useFormField<RadioGroupProps<T>>(_props, { bind: false })
 const id = _id.value ?? useId()
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.radioGroup || {}) })({
   size: size.value ?? props.size,
   color: color.value ?? props.color,
+  highlight: highlight.value ?? props.highlight,
   disabled: disabled.value,
   required: props.required,
   orientation: props.orientation,

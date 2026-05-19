@@ -80,7 +80,9 @@ describe('SelectMenu', () => {
     ['with virtualize', { props: { ...props, virtualize: true } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { ...props, size } }]),
     ...variants.map((variant: string) => [`with primary variant ${variant}`, { props: { ...props, variant } }]),
+    ...variants.map((variant: string) => [`with primary variant ${variant} highlight`, { props: { ...props, variant, highlight: true } }]),
     ...variants.map((variant: string) => [`with neutral variant ${variant}`, { props: { ...props, variant, color: 'neutral' } }]),
+    ...variants.map((variant: string) => [`with neutral variant ${variant} highlight`, { props: { ...props, variant, color: 'neutral', highlight: true } }]),
     ['with ariaLabel', { props, attrs: { 'aria-label': 'Aria label' } }],
     ['with class', { props: { ...props, class: 'rounded-full' } }],
     ['with ui', { props: { ...props, ui: { group: 'p-2' } } }],
@@ -115,6 +117,18 @@ describe('SelectMenu', () => {
       expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [[spec.expected]] })
     }
   )
+
+  it('with trailing false should not render trailing section', () => {
+    const wrapper = mount(SelectMenu, {
+      props: {
+        ...props,
+        trailing: false
+      }
+    })
+
+    expect(wrapper.find('[data-slot="trailing"]').exists()).toBe(false)
+    expect(wrapper.find('[data-slot="trailingIcon"]').exists()).toBe(false)
+  })
 
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(SelectMenu, {

@@ -22,7 +22,11 @@ export default defineNuxtConfig({
         'tailwindcss/colors',
         'vaul-vue',
         'tailwind-variants',
-        '@vueuse/integrations/useFuse'
+        '@vueuse/integrations/useFuse',
+        'ai',
+        '@ai-sdk/vue',
+        '@comark/vue',
+        '@comark/vue/plugins/highlight'
       ]
     }
   }

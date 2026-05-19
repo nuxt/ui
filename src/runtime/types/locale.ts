@@ -45,6 +45,7 @@ export type Messages = {
   contentSearch: {
     description?: string
     links: string
+    search: string
     theme: string
     title?: string
   }

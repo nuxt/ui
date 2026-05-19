@@ -1,7 +1,8 @@
 ---
-title: Icon
+title: ProseIcon
 description: 'Display icons from popular icon libraries to enhance your content.'
 category: components
+navigation.title: Icon
 links:
   - label: GitHub
     icon: i-simple-icons-github
