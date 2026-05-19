@@ -64,7 +64,7 @@ function generateMessages() {
     role: 'user'
   })
   chat.messages.push({
-    id: '1',
+    id: '2',
     parts: [{ type: 'text', text: 'Fine, and you ?' }],
     role: 'assistant'
   })

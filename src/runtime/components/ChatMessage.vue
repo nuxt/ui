@@ -116,7 +116,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.chatMessage 
         </slot>
       </div>
 
-      <div v-if="props.content || textParts.length || !!slots.content || props.actions || !!slots.actions || !!slots.header" data-slot="body" :class="ui.body({ class: props.ui?.body })">
+      <div v-if="props.content || textParts.length || !!slots.content || props.actions || !!slots.actions || !!slots.body" data-slot="body" :class="ui.body({ class: props.ui?.body })">
         <slot name="body" v-bind="{ ...messageProps }">
           <div v-if="props.content || textParts.length || !!slots.content" data-slot="content" :class="ui.content({ class: props.ui?.content })">
             <slot name="content" v-bind="{ ...messageProps, content: props.content }">
