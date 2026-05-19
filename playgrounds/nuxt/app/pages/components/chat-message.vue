@@ -1,9 +1,6 @@
 <script setup lang="ts">
 import theme from '#build/ui/chat-message'
-<<<<<<< HEAD
 import type { ButtonProps } from '@nuxt/ui'
-=======
->>>>>>> v4
 
 const colors = Object.keys(theme.variants.color)
 const variants = Object.keys(theme.variants.variant)
@@ -12,7 +9,6 @@ const attrs = reactive({
   color: [theme.defaultVariants.color],
   variant: [theme.defaultVariants.variant]
 })
-<<<<<<< HEAD
 
 const actions = ref<ButtonProps[]>([
   {
@@ -20,8 +16,6 @@ const actions = ref<ButtonProps[]>([
     icon: 'i-lucide-copy'
   }
 ])
-=======
->>>>>>> v4
 </script>
 
 <template>
@@ -32,7 +26,6 @@ const actions = ref<ButtonProps[]>([
 
   <Matrix v-slot="props" :attrs="attrs">
     <UChatMessage id="1" role="user" :parts="[{ type: 'text', text: 'Hello, how are you?' }]" v-bind="props" />
-<<<<<<< HEAD
     <UChatMessage
       id="2"
       role="user"
@@ -41,7 +34,5 @@ const actions = ref<ButtonProps[]>([
       :actions="actions"
       v-bind="props"
     />
-=======
->>>>>>> v4
   </Matrix>
 </template>
