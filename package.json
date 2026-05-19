@@ -191,7 +191,7 @@
     "unplugin-auto-import": "^21.0.0",
     "unplugin-vue-components": "^32.0.0",
     "vaul-vue": "0.4.1",
-    "vue-component-type-helpers": "^3.2.8"
+    "vue-component-type-helpers": "^3.3.0"
   },
   "devDependencies": {
     "@nuxt/eslint-config": "^1.15.2",
@@ -201,18 +201,18 @@
     "@tanstack/table-core": "^8.21.3",
     "@vitejs/plugin-vue": "^6.0.5",
     "@vue/test-utils": "^2.4.10",
-    "ai": "^6.0.177",
+    "ai": "^6.0.185",
     "embla-carousel": "^8.6.0",
-    "eslint": "^10.3.0",
+    "eslint": "^10.4.0",
     "happy-dom": "^20.9.0",
     "nuxt": "^4.4.2",
     "release-it": "^19.2.4",
     "unbuild": "^3.6.1",
-    "vitest": "^4.1.5",
+    "vitest": "^4.1.6",
     "vitest-axe": "^0.1.0",
     "vitest-environment-nuxt": "^1.0.1",
     "vue": "^3.5.30",
-    "vue-tsc": "^3.2.8"
+    "vue-tsc": "^3.3.0"
   },
   "peerDependencies": {
     "@inertiajs/vue3": "^2.0.7 || ^3.0.0",
