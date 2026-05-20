@@ -199,7 +199,7 @@
     "@nuxt/test-utils": "^4.0.2",
     "@release-it/conventional-changelog": "^10.0.6",
     "@tanstack/table-core": "^8.21.3",
-    "@vitejs/plugin-vue": "^6.0.5",
+    "@vitejs/plugin-vue": "^6.0.7",
     "@vue/test-utils": "^2.4.10",
     "ai": "^6.0.185",
     "embla-carousel": "^8.6.0",
@@ -211,7 +211,7 @@
     "vitest": "^4.1.6",
     "vitest-axe": "^0.1.0",
     "vitest-environment-nuxt": "^1.0.1",
-    "vue": "^3.5.30",
+    "vue": "^3.5.34",
     "vue-tsc": "^3.3.0"
   },
   "peerDependencies": {
