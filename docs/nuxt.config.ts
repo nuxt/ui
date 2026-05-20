@@ -8,7 +8,6 @@ export default defineNuxtConfig({
     '../src/module',
     '@nuxt/content',
     '@nuxt/image',
-    '@nuxt/a11y',
     '@nuxtjs/mcp-toolkit',
     '@vueuse/nuxt',
     'nuxt-component-meta',
