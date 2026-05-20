@@ -80,6 +80,7 @@ import { useComponentProps } from '../../composables/useComponentProps'
 import { useForwardProps } from '../../composables/useForwardProps'
 import { useScrollspy } from '../../composables/useScrollspy'
 import { useLocale } from '../../composables/useLocale'
+import { usePrefix } from '../../composables/usePrefix'
 import { tv } from '../../utils/tv'
 import UIcon from '../Icon.vue'
 
@@ -99,6 +100,7 @@ const { t } = useLocale()
 const router = useRouter()
 const appConfig = useAppConfig() as ContentToc['AppConfig']
 const { activeHeadings, updateHeadings } = useScrollspy()
+const prefix = usePrefix()
 
 const [DefineListTemplate, ReuseListTemplate] = createReusableTemplate<{ links: T[], level: number }>({
   props: {
@@ -266,19 +268,19 @@ onUnmounted(() => {
       </div>
 
       <template v-if="props.links?.length">
-        <CollapsibleTrigger data-slot="trigger" :class="ui.trigger({ class: [props.ui?.trigger, 'lg:hidden'] })">
+        <CollapsibleTrigger data-slot="trigger" :class="ui.trigger({ class: [props.ui?.trigger, prefix('lg:hidden')] })">
           <ReuseTriggerTemplate :open="open" />
         </CollapsibleTrigger>
 
-        <CollapsibleContent data-slot="content" :class="ui.content({ class: [props.ui?.content, 'lg:hidden'] })">
+        <CollapsibleContent data-slot="content" :class="ui.content({ class: [props.ui?.content, prefix('lg:hidden')] })">
           <ReuseContentTemplate />
         </CollapsibleContent>
 
-        <p data-slot="trigger" :class="ui.trigger({ class: [props.ui?.trigger, 'hidden lg:flex'] })">
+        <p data-slot="trigger" :class="ui.trigger({ class: [props.ui?.trigger, prefix('hidden lg:flex')] })">
           <ReuseTriggerTemplate :open="open" />
         </p>
 
-        <div data-slot="content" :class="ui.content({ class: [props.ui?.content, 'hidden lg:flex'] })">
+        <div data-slot="content" :class="ui.content({ class: [props.ui?.content, prefix('hidden lg:flex')] })">
           <ReuseContentTemplate />
         </div>
       </template>

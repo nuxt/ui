@@ -4,11 +4,6 @@ const appConfig = useAppConfig()
 const { style, link, color } = useTheme()
 
 const { data: navigation } = await useFetch('/api/navigation.json')
-const { data: files } = useLazyAsyncData('search', () => queryCollectionSearchSections('docs', {
-  ignoredTags: ['style']
-}), {
-  server: false
-})
 
 useHead({
   meta: [
@@ -64,7 +59,7 @@ provide('navigation', rootNavigation)
         <ClientOnly>
           <Chat />
 
-          <Search :files="files" :navigation="navigationByFramework" />
+          <Search :navigation="navigationByFramework" />
         </ClientOnly>
       </template>
     </div>

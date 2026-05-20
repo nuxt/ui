@@ -74,6 +74,7 @@ import { Primitive } from 'reka-ui'
 import { useMouseInElement, pausableFilter } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
+import { usePrefix } from '../composables/usePrefix'
 import { getSlotChildrenText } from '../utils'
 import { tv } from '../utils/tv'
 import ULink from './Link.vue'
@@ -95,6 +96,7 @@ const appConfig = useAppConfig() as PageCard['AppConfig']
 const { elementX, elementY } = useMouseInElement(cardRef, {
   eventFilter: motionControl.eventFilter
 })
+const prefix = usePrefix()
 
 // eslint-disable-next-line vue/no-dupe-keys
 const spotlight = computed(() => props.spotlight && (elementX.value !== 0 || elementY.value !== 0))
@@ -178,10 +180,10 @@ const ariaLabel = computed(() => {
       v-if="props.to"
       :aria-label="ariaLabel"
       v-bind="{ to: props.to, target: props.target, ...$attrs }"
-      class="focus:outline-none peer"
+      :class="prefix('focus:outline-none peer')"
       raw
     >
-      <span class="absolute inset-0" aria-hidden="true" />
+      <span :class="prefix('absolute inset-0')" aria-hidden="true" />
     </ULink>
   </Primitive>
 </template>

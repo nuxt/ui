@@ -55,6 +55,7 @@ export default defineLocale<Messages>({
     },
     contentSearch: {
       links: 'Linkek',
+      search: 'Eredmények',
       theme: 'Téma'
     },
     contentSearchButton: {

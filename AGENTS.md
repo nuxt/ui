@@ -140,6 +140,7 @@ PR Review:
 - [ ] `pnpm run test` passes
 - [ ] Documentation is updated if applicable
 - [ ] Commit message follows conventional commits
+- [ ] PR description follows [.github/PULL_REQUEST_TEMPLATE.md](.github/PULL_REQUEST_TEMPLATE.md) (linked issue, type of change, description, checklist)
 
 Multiple commits are fine — PRs are squash merged, so no need to rebase or force push.
 

@@ -55,6 +55,7 @@ export default defineLocale<Messages>({
     },
     contentSearch: {
       links: 'Havolalar',
+      search: 'Natijalar',
       theme: 'Mavzu'
     },
     contentSearchButton: {

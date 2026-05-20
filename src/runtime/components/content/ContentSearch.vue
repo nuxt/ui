@@ -28,6 +28,25 @@ export interface ContentSearchFile {
   content: string
 }
 
+export interface ContentSearchResult extends ContentSearchFile {
+  snippets?: {
+    title?: string
+    content?: string
+  }
+}
+
+export interface ContentSearchOptions {
+  limit?: number
+  snippet?: {
+    columns?: ('title' | 'content')[]
+    around?: number
+  }
+}
+
+export type ContentSearchStatus = 'idle' | 'loading' | 'ready' | 'error'
+
+export type ContentSearchFn = (query: string, opts?: ContentSearchOptions) => Promise<ContentSearchResult[]>
+
 export interface ContentSearchItem extends Omit<LinkProps, 'custom'>, CommandPaletteItem {
   level?: number
   /**
@@ -73,8 +92,19 @@ export interface ContentSearchProps<T extends ContentSearchLink = ContentSearchL
    */
   fuse?: UseFuseOptions<T>
   /**
-   * Delay (in milliseconds) before the search term is passed to Fuse (debounced).
-   * Useful for large doc sets where running fuzzy search on every keystroke is the bottleneck — the input stays responsive while Fuse only re-runs after typing settles.
+   * Async search function (e.g. from [`useSearchCollection`](https://content.nuxt.com/docs/utils/use-search-collection)).
+   * When provided, ContentSearch calls it on each keystroke and uses the results instead of Fuse.
+   * Results are mapped, sanitized, and grouped by navigation internally.
+   */
+  search?: ContentSearchFn
+  /**
+   * Status of the async search index (e.g. from `useSearchCollection`).
+   * When the status transitions to `'ready'`, the search is automatically re-triggered if there's a pending term.
+   */
+  searchStatus?: ContentSearchStatus
+  /**
+   * Delay (in milliseconds) before the search is triggered (debounced).
+   * Keeps the input responsive by only running the search after typing settles.
    * Set to `0` to disable.
    * @defaultValue 100
    */
@@ -95,9 +125,9 @@ export type ContentSearchSlots = CommandPaletteSlots<ContentSearchItem> & {
 </script>
 
 <script setup lang="ts" generic="T extends ContentSearchLink">
-import { computed, useTemplateRef } from 'vue'
+import { computed, shallowRef, useTemplateRef, watch } from 'vue'
 import { defu } from 'defu'
-import { reactivePick } from '@vueuse/core'
+import { reactivePick, refDebounced } from '@vueuse/core'
 import { useAppConfig, useColorMode, defineShortcuts } from '#imports'
 import { useComponentProps } from '../../composables/useComponentProps'
 import { useForwardProps } from '../../composables/useForwardProps'
@@ -122,7 +152,7 @@ const props = useComponentProps<ContentSearchProps<T>>('contentSearch', _props)
 const searchTerm = defineModel<string>('searchTerm', { default: '' })
 
 const { t } = useLocale()
-const { open, mapNavigationItems, postFilter } = useContentSearch()
+const { open, mapNavigationItems, mapLinks, mapSearchResults, postFilter } = useContentSearch()
 // eslint-disable-next-line vue/no-dupe-keys
 const colorMode = useColorMode()
 const appConfig = useAppConfig() as ContentSearch['AppConfig']
@@ -137,7 +167,8 @@ const fuse = computed(() => defu({}, props.fuse, {
   fuseOptions: {
     includeMatches: true,
     useTokenSearch: true
-  }
+  },
+  resultLimit: 12
 } as UseFuseOptions<T>))
 
 // eslint-disable-next-line vue/no-dupe-keys
@@ -148,27 +179,67 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.contentSearc
 
 const commandPaletteRef = useTemplateRef('commandPaletteRef')
 
-const mappedLinksItems = computed(() => {
-  if (!props.links?.length) {
-    return []
-  }
+const debouncedSearchTerm = refDebounced(searchTerm, () => props.searchDelay!)
 
-  return props.links.flatMap(link => [{
-    ...link,
-    suffix: link.description,
-    description: undefined,
-    icon: link.icon || appConfig.ui.icons.file,
-    children: undefined
-  }, ...(link.children?.map(child => ({
-    ...child,
-    prefix: link.label + ' >',
-    suffix: child.description,
-    description: undefined,
-    icon: child.icon || link.icon || appConfig.ui.icons.file
-  })) || [])])
+const rawSearchResults = shallowRef<ContentSearchResult[]>([])
+const searchResults = computed(() => mapSearchResults(rawSearchResults.value, props.navigation))
+
+let searchRequestId = 0
+
+async function runSearch(term: string) {
+  // Always bump the request id, even on the early-return path — otherwise an
+  // in-flight prior request could resolve after we clear results and overwrite
+  // them again (e.g. user types "foo" then backspaces before "foo" settles).
+  const requestId = ++searchRequestId
+
+  if (!props.search || !term) {
+    rawSearchResults.value = []
+    return
+  }
+  try {
+    const results = await props.search(term, {
+      limit: (fuse.value as UseFuseOptions<T>).resultLimit,
+      snippet: { columns: ['title', 'content'], around: 20 }
+    })
+    // Discard stale responses: a newer request started before this one resolved.
+    if (requestId !== searchRequestId) return
+    rawSearchResults.value = results
+  } catch (err) {
+    if (requestId !== searchRequestId) return
+    console.error('[ContentSearch] search failed:', err)
+    rawSearchResults.value = []
+  }
+}
+
+watch(debouncedSearchTerm, runSearch)
+
+watch(() => props.search, () => {
+  if (debouncedSearchTerm.value) {
+    runSearch(debouncedSearchTerm.value)
+  }
 })
 
-const mappedNavigationGroups = computed(() => {
+watch(() => props.searchStatus, (status) => {
+  if (status === 'ready' && debouncedSearchTerm.value) {
+    runSearch(debouncedSearchTerm.value)
+  }
+})
+
+const linksGroup = computed(() => {
+  if (!props.links?.length) {
+    return null
+  }
+
+  return { id: 'links', label: t('contentSearch.links'), items: mapLinks(props.links) }
+})
+
+const searchGroups = computed(() => {
+  if (!searchTerm.value || !searchResults.value.length) return []
+
+  return [{ id: 'search', label: t('contentSearch.search'), items: searchResults.value, ignoreFilter: true }]
+})
+
+const navigationGroups = computed(() => {
   if (!props.navigation?.length) {
     return []
   }
@@ -221,11 +292,15 @@ const themeGroup = computed(() => {
 const groups = computed(() => {
   const groups = []
 
-  if (mappedLinksItems.value.length) {
-    groups.push({ id: 'links', label: t('contentSearch.links'), items: mappedLinksItems.value })
+  if (linksGroup.value) {
+    groups.push(linksGroup.value)
   }
 
-  groups.push(...mappedNavigationGroups.value)
+  if (props.search) {
+    groups.push(...searchGroups.value)
+  } else {
+    groups.push(...navigationGroups.value)
+  }
 
   groups.push(...(props.groups || []))
 

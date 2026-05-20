@@ -55,6 +55,7 @@ export default defineLocale<Messages>({
     },
     contentSearch: {
       links: 'Lingid',
+      search: 'Tulemused',
       theme: 'Teema'
     },
     contentSearchButton: {

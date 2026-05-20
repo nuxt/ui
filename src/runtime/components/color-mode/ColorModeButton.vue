@@ -20,6 +20,7 @@ import { useColorMode, useAppConfig } from '#imports'
 import { useComponentProps } from '../../composables/useComponentProps'
 import { useForwardProps } from '../../composables/useForwardProps'
 import { useLocale } from '../../composables/useLocale'
+import { usePrefix } from '../../composables/usePrefix'
 import UButton from '../Button.vue'
 import UIcon from '../Icon.vue'
 
@@ -35,6 +36,7 @@ const props = useComponentProps('button', _props)
 const { t } = useLocale()
 const colorMode = useColorMode()
 const appConfig = useAppConfig()
+const prefix = usePrefix()
 
 const buttonProps = useForwardProps(reactiveOmit(props, 'icon'))
 
@@ -58,8 +60,8 @@ const isDark = computed({
     @click="isDark = !isDark"
   >
     <template #leading="{ ui }">
-      <UIcon :class="ui.leadingIcon({ class: [props.ui?.leadingIcon, 'hidden dark:inline-block'] })" :name="appConfig.ui.icons.dark" />
-      <UIcon :class="ui.leadingIcon({ class: [props.ui?.leadingIcon, 'dark:hidden'] })" :name="appConfig.ui.icons.light" />
+      <UIcon :class="ui.leadingIcon({ class: [props.ui?.leadingIcon, prefix('hidden dark:inline-block')] })" :name="appConfig.ui.icons.dark" />
+      <UIcon :class="ui.leadingIcon({ class: [props.ui?.leadingIcon, prefix('dark:hidden')] })" :name="appConfig.ui.icons.light" />
     </template>
   </UButton>
 </template>
