@@ -6,12 +6,11 @@ settings:
 
 overrides:
   '@nuxt/kit': ^4.4.6
+  '@nuxt/test-utils': 4.0.2
   '@nuxt/ui': workspace:*
-  nitropack: ^2.13.0
   unplugin: ^3.0.0
   c12: ^3.3.2
   typescript: ^6.0.3
-  '@nuxt/test-utils': 4.0.2
 
 importers:
 
@@ -6750,7 +6749,7 @@ packages:
       '@takumi-rs/wasm': ^1.0.0-beta.3
       '@unhead/vue': ^2.0.5 || ^3.0.0
       fontless: ^0.2.0
-      nitropack: ^2.13.0
+      nitropack: ^2.13.4
       playwright-core: ^1.50.0
       satori: '>=0.19.2'
       sharp: ^0.34.0
