@@ -21,7 +21,7 @@ function _useContentSearch() {
     // top-level section title isn't repeated in the prefix — only the
     // intermediate ancestors between section and leaf are.
     const prefix = [...new Set([...ancestors.map(a => a.title), ...file.titles].filter(Boolean))]
-    const ancestorIcon = [...ancestors].reverse().find(a => a.icon)?.icon
+    const ancestorIcon = ancestors.findLast(a => a.icon)?.icon
 
     return {
       prefix: prefix?.length ? (prefix.join(' > ') + ' >') : undefined,
@@ -138,9 +138,7 @@ function _useContentSearch() {
       const prefixParts = [...new Set([...sectionChain.map(s => s.title), ...result.titles].filter(Boolean))]
       const prefix = prefixParts.length ? (prefixParts.join(' > ') + ' >') : undefined
 
-      // Walk ancestors closest-first so a deep result inherits the icon from
-      // its nearest annotated ancestor rather than the top-level section.
-      const ancestorIcon = [...ancestors].reverse().find(a => a.icon)?.icon
+      const ancestorIcon = ancestors.findLast(a => a.icon)?.icon
 
       acc.push({
         label: result.title,
