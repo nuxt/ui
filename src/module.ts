@@ -1,7 +1,6 @@
 import { defu } from 'defu'
 import { createResolver, defineNuxtModule, addComponentsDir, addImports, addImportsDir, addPlugin, hasNuxtModule } from '@nuxt/kit'
-import type { HookResult } from '@nuxt/schema'
-import type { ModuleDependencies } from 'nuxt/schema'
+import type { HookResult, ModuleDependencies } from '@nuxt/schema'
 import { addTemplates } from './templates'
 import { publicComposables } from './imports'
 import { defaultOptions, getDefaultConfig, resolveColors } from './utils/defaults'

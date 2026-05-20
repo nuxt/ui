@@ -21,7 +21,7 @@
     "@tiptap/extension-emoji": "^3.22.4",
     "@tiptap/extension-text-align": "^3.22.4",
     "ai": "^6.0.185",
-    "nuxt": "^4.4.2",
+    "nuxt": "^4.4.6",
     "tailwindcss": "^4.3.0",
     "zod": "^4.4.3"
   },
