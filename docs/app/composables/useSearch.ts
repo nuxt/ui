@@ -22,7 +22,6 @@ export function useSearch() {
 
   const links = computed(() => [{
     label: 'Ask AI',
-    description: 'Ask the AI assistant powered by our custom MCP server for help.',
     icon: 'i-lucide-bot-message-square',
     kbds: ['meta', 'i'],
     ui: {

@@ -11,6 +11,7 @@ const toast = useToast()
 const { track } = useAnalytics()
 const route = useRoute()
 const { open, messages } = useChat()
+const { open: searchOpen } = useContentSearch()
 const { framework } = useFrameworks()
 const { resetTheme, applyThemeSettings, hasCSSChanges, hasConfigChanges } = useTheme()
 
@@ -203,7 +204,12 @@ function clearMessages() {
 defineShortcuts({
   meta_i: {
     handler: () => {
-      open.value = !open.value
+      if (searchOpen.value) {
+        searchOpen.value = false
+        open.value = true
+      } else {
+        open.value = !open.value
+      }
     },
     usingInput: true
   }
