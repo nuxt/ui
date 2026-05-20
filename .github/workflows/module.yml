@@ -79,6 +79,9 @@ jobs:
       contents: read
       pull-requests: read
 
+    env:
+      pnpm_config_strict_dep_builds: false
+
     strategy:
       matrix:
         os: [ubuntu-latest] # macos-latest, windows-latest
@@ -105,7 +108,7 @@ jobs:
         run: pnpm install https://pkg.pr.new/@nuxt/ui@${{ env.COMMIT_SHA }} --lockfile-only
 
       - name: Install dependencies
-        run: pnpm install --ignore-workspace --config.strict-dep-builds=false
+        run: pnpm install --ignore-workspace
 
       - name: Prepare
         run: pnpm nuxt prepare
