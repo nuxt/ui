@@ -17,9 +17,7 @@ function _useContentSearch() {
     link: ContentNavigationItem,
     ancestors: ContentNavigationItem[] = []
   ): ContentSearchItem {
-    // Items here are rendered grouped under their section's label, so the
-    // top-level section title isn't repeated in the prefix — only the
-    // intermediate ancestors between section and leaf are.
+    // Top-level section title is omitted — items render under their section's group label.
     const prefix = [...new Set([...ancestors.map(a => a.title), ...file.titles].filter(Boolean))]
     const ancestorIcon = ancestors.findLast(a => a.icon)?.icon
 
@@ -92,9 +90,7 @@ function _useContentSearch() {
   }
 
   /**
-   * Find a navigation item by path, returning the full ancestor chain
-   * (root → ... → immediate parent) so callers can render the complete
-   * breadcrumb prefix instead of just the top-level section + parent.
+   * Find a navigation item by path, returning the full ancestor chain (root → parent).
    */
   function findNavItem(path: string, nodes?: ContentNavigationItem[], ancestors: ContentNavigationItem[] = []): { link?: ContentNavigationItem, ancestors?: ContentNavigationItem[] } {
     for (const node of nodes || []) {
@@ -129,11 +125,9 @@ function _useContentSearch() {
 
       if (navigation?.length && !link) return acc
 
-      // Build the prefix from every ancestor title (root → immediate parent) so
-      // deep results keep their full section context. When the matched link is
-      // itself a top-level section (e.g. `/docs` from `1.index.md`), there are
-      // no ancestors above it — fall back to the link so its title still
-      // appears in the prefix.
+      // Fall back to the matched link when ancestors is empty so top-level
+      // index-page results still show their section title (results are flat
+      // here — no group label like `mapFile`).
       const sectionChain = ancestors.length ? ancestors : (link ? [link] : [])
       const prefixParts = [...new Set([...sectionChain.map(s => s.title), ...result.titles].filter(Boolean))]
       const prefix = prefixParts.length ? (prefixParts.join(' > ') + ' >') : undefined
