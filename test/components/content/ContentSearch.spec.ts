@@ -202,5 +202,53 @@ describe('ContentSearch', () => {
 
       wrapper.unmount()
     })
+
+    // Regression test: results more than two nav levels deep used to drop
+    // every intermediate ancestor because `findNavItem` only tracked the
+    // top-level root and the immediate parent.
+    it('includes every intermediate ancestor in the prefix for deeply nested results', async () => {
+      vi.useFakeTimers({ shouldAdvanceTime: true })
+      const deepNavigation = [{
+        title: 'Docs',
+        path: '/docs',
+        children: [{
+          title: 'Guide',
+          path: '/docs/guide',
+          children: [{
+            title: 'Best Practices',
+            path: '/docs/guide/best-practices',
+            children: [{
+              title: 'Nuxt Plugins',
+              path: '/docs/guide/best-practices/plugins'
+            }]
+          }]
+        }]
+      }]
+      const search = vi.fn(async () => [{
+        id: '/docs/guide/best-practices/plugins',
+        title: 'Nuxt Plugins',
+        titles: [],
+        level: 1,
+        content: 'lorem ipsum'
+      }])
+
+      const wrapper = await mountSuspended(ContentSearch, {
+        props: {
+          open: true,
+          portal: false,
+          navigation: deepNavigation,
+          search,
+          searchTerm: ''
+        }
+      })
+
+      await wrapper.setProps({ searchTerm: 'lorem' })
+      await vi.advanceTimersByTimeAsync(150)
+      await wrapper.vm.$nextTick()
+
+      expect(wrapper.text()).toContain('Docs > Guide > Best Practices >')
+
+      wrapper.unmount()
+    })
   })
 })

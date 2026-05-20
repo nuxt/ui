@@ -15,16 +15,18 @@ function _useContentSearch() {
   function mapFile(
     file: ContentSearchFile,
     link: ContentNavigationItem,
-    parent?: ContentNavigationItem
+    ancestors: ContentNavigationItem[] = []
   ): ContentSearchItem {
-    const prefix = [...new Set([parent?.title, ...file.titles].filter(Boolean))]
+    // Top-level section title is omitted — items render under their section's group label.
+    const prefix = [...new Set([...ancestors.map(a => a.title), ...file.titles].filter(Boolean))]
+    const ancestorIcon = ancestors.findLast(a => a.icon)?.icon
 
     return {
       prefix: prefix?.length ? (prefix.join(' > ') + ' >') : undefined,
       label: file.id === link.path ? link.title : file.title,
       suffix: file.content.replaceAll('<', '&lt;').replaceAll('>', '&gt;'),
       to: file.id,
-      icon: (link.icon || parent?.icon || (file.level > 1 ? appConfig.ui.icons.hash : appConfig.ui.icons.file)) as string,
+      icon: (link.icon || ancestorIcon || (file.level > 1 ? appConfig.ui.icons.hash : appConfig.ui.icons.file)) as string,
       level: file.level
     }
   }
@@ -53,19 +55,19 @@ function _useContentSearch() {
 
     function visit(
       nodes: ContentNavigationItem[],
-      nodeParent?: ContentNavigationItem
+      ancestors: ContentNavigationItem[]
     ): ContentSearchItem[] {
       return nodes.flatMap((link) => {
         if (link.children?.length) {
-          return visit(link.children, link)
+          return visit(link.children, [...ancestors, link])
         }
 
         const matched = link.path ? filesByPath.get(link.path) : undefined
-        return matched?.map(file => mapFile(file, link, nodeParent)) || []
+        return matched?.map(file => mapFile(file, link, ancestors)) || []
       })
     }
 
-    return visit(children, parent)
+    return visit(children, parent ? [parent] : [])
   }
 
   /**
@@ -88,14 +90,13 @@ function _useContentSearch() {
   }
 
   /**
-   * Find a navigation item by path
+   * Find a navigation item by path, returning the full ancestor chain (root → parent).
    */
-  function findNavItem(path: string, nodes?: ContentNavigationItem[], root?: ContentNavigationItem, parent?: ContentNavigationItem): { link?: ContentNavigationItem, parent?: ContentNavigationItem, root?: ContentNavigationItem } {
+  function findNavItem(path: string, nodes?: ContentNavigationItem[], ancestors: ContentNavigationItem[] = []): { link?: ContentNavigationItem, ancestors?: ContentNavigationItem[] } {
     for (const node of nodes || []) {
-      const currentRoot = root || node
-      if (node.path === path) return { link: node, parent, root: currentRoot }
+      if (node.path === path) return { link: node, ancestors }
       if (node.children?.length) {
-        const found = findNavItem(path, node.children, currentRoot, node)
+        const found = findNavItem(path, node.children, [...ancestors, node])
         if (found.link) return found
       }
     }
@@ -120,17 +121,18 @@ function _useContentSearch() {
         nav = findNavItem(basePath, navigation)
         navCache.set(basePath, nav)
       }
-      const { link, parent, root } = nav
+      const { link, ancestors = [] } = nav
 
       if (navigation?.length && !link) return acc
 
-      // Include `root?.title` so index pages still show their section name in the
-      // prefix. `findNavItem` returns the section root when a result's path matches
-      // a top-level node directly (e.g. `/docs/typography` from `1.index.md`), which
-      // leaves `parent` undefined and would otherwise drop the section context.
-      // For sub-pages, `root.title === parent.title`, and the `Set` dedupes it.
-      const prefixParts = [...new Set([root?.title, parent?.title, ...result.titles].filter(Boolean))]
+      // Fall back to the matched link when ancestors is empty so top-level
+      // index-page results still show their section title (results are flat
+      // here — no group label like `mapFile`).
+      const sectionChain = ancestors.length ? ancestors : (link ? [link] : [])
+      const prefixParts = [...new Set([...sectionChain.map(s => s.title), ...result.titles].filter(Boolean))]
       const prefix = prefixParts.length ? (prefixParts.join(' > ') + ' >') : undefined
+
+      const ancestorIcon = ancestors.findLast(a => a.icon)?.icon
 
       acc.push({
         label: result.title,
@@ -139,7 +141,7 @@ function _useContentSearch() {
         description: result.content.replaceAll('<', '&lt;').replaceAll('>', '&gt;'),
         descriptionHtml: result.snippets?.content ? sanitizeSnippet(result.snippets.content) : undefined,
         to: result.id,
-        icon: (link?.icon || parent?.icon || root?.icon || (result.level > 1 ? appConfig.ui.icons.hash : appConfig.ui.icons.file)) as string,
+        icon: (link?.icon || ancestorIcon || (result.level > 1 ? appConfig.ui.icons.hash : appConfig.ui.icons.file)) as string,
         level: result.level
       })
 
