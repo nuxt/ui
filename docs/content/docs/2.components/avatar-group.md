@@ -69,7 +69,7 @@ slots:
 :u-avatar{src="https://github.com/noook.png" alt="Neil Richter" loading="lazy"}
 ::
 
-### Color :badge{label="Soon" class="align-text-top"}
+### Color :badge{label="4.8+" class="align-text-top"}
 
 Use the `color` prop to change the color of all the avatars.
 

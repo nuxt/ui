@@ -113,7 +113,7 @@ props:
 When using the [`ChatMessages`](/docs/components/chat-messages) component, the `variant` prop is set to `naked` for `assistant` messages and `soft` for `user` messages.
 ::
 
-### Color :badge{label="Soon" class="align-text-top"}
+### Color :badge{label="4.8+" class="align-text-top"}
 
 Use the `color` prop to change the color of the message.
 

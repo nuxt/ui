@@ -37,7 +37,7 @@ name: 'theme-ui-example'
 ---
 ::
 
-### Prop defaults :badge{label="Soon" class="align-text-top"}
+### Prop defaults :badge{label="4.8+" class="align-text-top"}
 
 Use the `props` prop to override the default value of any prop on descendant components. Each key maps to a partial of that component's props.
 

@@ -255,7 +255,7 @@ props:
 ---
 ::
 
-### Mode :badge{label="Soon" class="align-text-top"}
+### Mode :badge{label="4.8+" class="align-text-top"}
 
 Set the `mode` prop to `autocomplete` to turn the InputMenu into a free-form text input with suggestions. The `modelValue` becomes the input text (`string`) instead of a selected item.
 

@@ -38,7 +38,7 @@ props:
 ---
 ::
 
-### Icon :badge{label="Soon" class="align-text-top"}
+### Icon :badge{label="4.8+" class="align-text-top"}
 
 Use the `icon` prop to display an icon above the status code.
 
