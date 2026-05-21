@@ -3,14 +3,15 @@ import type { ModuleOptions } from '../module'
 export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: 'group/message relative w-full',
-    header: 'mb-1.5',
+    header: 'flex mb-1.5',
     container: 'relative flex items-start',
+    body: 'min-w-0',
     leading: 'inline-flex items-center justify-center min-h-6',
     leadingIcon: 'shrink-0',
     leadingAvatar: 'shrink-0',
     leadingAvatarSize: '',
     files: 'flex items-center gap-1.5',
-    content: 'relative text-pretty min-w-0 *:first:mt-0 *:last:mb-0',
+    content: 'relative text-pretty *:first:mt-0 *:last:mb-0',
     actions: ['[@media(hover:hover)]:opacity-0 group-hover/message:opacity-100 absolute bottom-0 flex items-center', options.theme.transitions && 'transition-opacity']
   },
   variants: {
@@ -29,7 +30,8 @@ export default (options: Required<ModuleOptions>) => ({
       left: {},
       right: {
         container: 'justify-end ms-auto max-w-[75%]',
-        files: 'justify-end'
+        header: 'justify-end',
+        actions: 'right-0'
       }
     },
     leading: {
@@ -60,20 +62,6 @@ export default (options: Required<ModuleOptions>) => ({
     actions: true,
     class: {
       container: 'pb-8'
-    }
-  }, {
-    leading: true,
-    compact: false,
-    side: 'left',
-    class: {
-      actions: 'left-11'
-    }
-  }, {
-    leading: true,
-    compact: true,
-    side: 'left',
-    class: {
-      actions: 'left-6.5'
     }
   }, {
     variant: ['solid', 'outline', 'soft', 'subtle'],
@@ -151,6 +139,7 @@ export default (options: Required<ModuleOptions>) => ({
     }
   }],
   defaultVariants: {
+    side: 'left',
     variant: 'naked',
     color: 'neutral'
   }
