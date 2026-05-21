@@ -80,6 +80,7 @@ const valueMultiple = ref([fruits[0]!, vegetables[0]!])
       v-bind="props"
       clear
     />
+    <UInputMenu placeholder="Autocomplete" mode="autocomplete" :items="items" v-bind="props" />
     <UInputMenu placeholder="Highlight" highlight :items="items" v-bind="props" />
     <UInputMenu placeholder="Disabled" disabled :items="items" v-bind="props" />
     <UInputMenu placeholder="Required" required :items="items" v-bind="props" />

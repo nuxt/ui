@@ -57,11 +57,12 @@ describe('InputMenu', () => {
     ['with disabled', { props: { ...props, disabled: true } }],
     ['with required', { props: { ...props, required: true } }],
     // Autocomplete
-    ['with autocomplete', { props: { ...props, autocomplete: true } }],
-    ['with autocomplete and modelValue', { props: { ...props, autocomplete: true, modelValue: 'Backlog' } }],
-    ['with autocomplete and defaultValue', { props: { ...props, autocomplete: true, defaultValue: 'Backlog' } }],
-    ['with autocomplete and placeholder', { props: { ...props, autocomplete: true, placeholder: 'Type something...' } }],
-    ['with autocomplete and content', { props: { ...props, autocomplete: true, content: { hideWhenEmpty: true } } }],
+    ['with mode autocomplete', { props: { ...props, mode: 'autocomplete' as const } }],
+    ['with mode autocomplete and modelValue', { props: { ...props, mode: 'autocomplete' as const, modelValue: 'Backlog' } }],
+    ['with mode autocomplete and defaultValue', { props: { ...props, mode: 'autocomplete' as const, defaultValue: 'Backlog' } }],
+    ['with mode autocomplete and placeholder', { props: { ...props, mode: 'autocomplete' as const, placeholder: 'Type something...' } }],
+    ['with mode autocomplete and content', { props: { ...props, mode: 'autocomplete' as const, content: { hideWhenEmpty: true } } }],
+    ['with html autocomplete attribute', { props: { ...props, autocomplete: 'email' } }],
     ['with icon', { props: { icon: 'i-lucide-search' } }],
     ['with leading and icon', { props: { leading: true, icon: 'i-lucide-arrow-left' } }],
     ['with leadingIcon', { props: { leadingIcon: 'i-lucide-arrow-left' } }],
@@ -180,21 +181,21 @@ describe('InputMenu', () => {
     })
 
     test('update:modelValue event with autocomplete', async () => {
-      const wrapper = mount(InputMenu, { props: { items: ['Option 1', 'Option 2'], autocomplete: true } })
+      const wrapper = mount(InputMenu, { props: { items: ['Option 1', 'Option 2'], mode: 'autocomplete' as const } })
       const input = wrapper.findComponent({ name: 'AutocompleteRoot' })
       await input.setValue('Option 1')
       expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [['Option 1']] })
     })
 
     test('change event with autocomplete', async () => {
-      const wrapper = mount(InputMenu, { props: { items: ['Option 1', 'Option 2'], autocomplete: true } })
+      const wrapper = mount(InputMenu, { props: { items: ['Option 1', 'Option 2'], mode: 'autocomplete' as const } })
       const input = wrapper.findComponent({ name: 'AutocompleteRoot' })
       await input.setValue('Option 1')
       expect(wrapper.emitted()).toMatchObject({ change: [[{ type: 'change' }]] })
     })
 
     test('searchTerm syncs when parent updates modelValue in autocomplete mode', async () => {
-      const wrapper = mount(InputMenu, { props: { items: ['Option 1', 'Option 2'], autocomplete: true, modelValue: 'Option 1' } })
+      const wrapper = mount(InputMenu, { props: { items: ['Option 1', 'Option 2'], mode: 'autocomplete' as const, modelValue: 'Option 1' } })
 
       await wrapper.setProps({ modelValue: 'Option 2' })
 
