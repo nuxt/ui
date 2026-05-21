@@ -100,7 +100,7 @@ function generateMessages() {
       :messages="chat.messages"
       :status="chat.status"
       :spacing-offset="72"
-      :assistant="{ actions: [{ label: 'Edit', icon: 'i-lucide-pencil', onClick: () => console.log('edit') }], icon: 'i-lucide-bot', variant: 'outline' }"
+      :assistant="{ actions: [{ label: 'Edit', icon: 'i-lucide-pencil', onClick: () => console.log('edit') }] }"
       :user="{ actions: [{ label: 'Edit', icon: 'i-lucide-pencil', onClick: () => console.log('edit') }], icon: 'i-lucide-user' }"
     >
       <template #content="{ message }">

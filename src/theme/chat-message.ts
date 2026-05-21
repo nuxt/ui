@@ -5,13 +5,13 @@ export default (options: Required<ModuleOptions>) => ({
     root: 'group/message relative w-full',
     header: 'flex mb-1.5',
     container: 'relative flex items-start',
-    body: '',
+    body: 'min-w-0',
     leading: 'inline-flex items-center justify-center min-h-6',
     leadingIcon: 'shrink-0',
     leadingAvatar: 'shrink-0',
     leadingAvatarSize: '',
     files: 'flex items-center gap-1.5',
-    content: 'relative text-pretty min-w-0 *:first:mt-0 *:last:mb-0',
+    content: 'relative text-pretty *:first:mt-0 *:last:mb-0',
     actions: ['[@media(hover:hover)]:opacity-0 group-hover/message:opacity-100 absolute bottom-0 flex items-center', options.theme.transitions && 'transition-opacity']
   },
   variants: {
