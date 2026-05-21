@@ -139,6 +139,7 @@ export default (options: Required<ModuleOptions>) => ({
     }
   }],
   defaultVariants: {
+    side: 'left',
     variant: 'naked',
     color: 'neutral'
   }
