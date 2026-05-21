@@ -79,6 +79,9 @@ jobs:
       contents: read
       pull-requests: read
 
+    env:
+      pnpm_config_strict_dep_builds: false
+
     strategy:
       matrix:
         os: [ubuntu-latest] # macos-latest, windows-latest
