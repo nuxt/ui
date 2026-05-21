@@ -21,6 +21,7 @@ const builtinImportMap = computed(() => ({
   imports: {
     ...vueImportMap.value.imports,
     '@nuxt/ui': '/nuxt-ui.js',
+    '@nuxt/ui/composables': '/nuxt-ui.js',
     'zod': 'https://esm.sh/zod@4?external=vue',
     '@vueuse/core': 'https://esm.sh/@vueuse/core?external=vue',
     '@tanstack/vue-table': 'https://esm.sh/@tanstack/vue-table?external=vue',
