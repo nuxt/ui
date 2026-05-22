@@ -503,7 +503,7 @@ defineExpose({
           type="button"
           data-slot="more"
           :data-state="isOverflowActive ? 'active' : 'inactive'"
-          :class="ui.trigger({ class: [props.ui?.more, measuring && 'grow-0 shrink-0', !measuring && !overflowItems.length && 'hidden'] })"
+          :class="ui.trigger({ class: [ui.more({ class: props.ui?.more }), measuring && 'grow-0 shrink-0', !measuring && !overflowItems.length && 'hidden'] })"
         >
           <slot name="more" :items="overflowItems" :is-active="isOverflowActive" :ui="ui">
             <UIcon :name="props.moreIcon || appConfig.ui.icons.ellipsis" data-slot="leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
