@@ -51,11 +51,17 @@ export default (options: Required<ModuleOptions>) => ({
       }
     },
     overflow: {
-      scroll: '',
-      wrap: {
-        list: 'flex-wrap'
+      scroll: {
+        trigger: 'shrink-0 grow-0'
       },
-      collapse: ''
+      wrap: {
+        list: 'flex-wrap',
+        trigger: 'shrink-0 grow-0',
+        indicator: 'inset-auto translate-none transition-[top,left,width,height] duration-200'
+      },
+      collapse: {
+        trigger: 'shrink-0 grow-0'
+      }
     },
     size: {
       xs: {

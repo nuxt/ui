@@ -69,7 +69,7 @@ export interface TabsProps<T extends TabsItem = TabsItem> extends Pick<TabsRootP
   /**
    * Controls how the tab list handles items that don't fit:
    * - `'scroll'` enables scrolling along the list axis.
-   * - `'wrap'` allows tabs to wrap onto multiple lines (the indicator is hidden).
+   * - `'wrap'` allows tabs to wrap onto multiple lines.
    * - `'collapse'` hides overflowing tabs behind a "more" dropdown.
    *
    * When omitted, no overflow handling is applied.
@@ -187,10 +187,12 @@ function onValueChange(value: string | number) {
 
 // --- Overflow: collapse mode
 const isCollapse = computed(() => props.overflow === 'collapse')
+const isWrap = computed(() => props.overflow === 'wrap')
 const isVerticalList = computed(() => props.orientation === 'vertical')
 
 const listRef = ref<InstanceType<typeof TabsList> | null>(null)
 const moreRef = ref<HTMLElement | null>(null)
+const customIndicatorStyle = ref<Record<string, string>>({ visibility: 'hidden' })
 const visibleCount = ref<number>(props.items?.length ?? 0)
 const naturalSizes = ref<number[]>([])
 const moreSize = ref<number>(0)
@@ -252,35 +254,8 @@ async function remeasure() {
   measureNaturalSizes()
   measuring.value = false
   computeVisibleCount()
+  updateCustomIndicator()
 }
-
-let resizeObserver: ResizeObserver | null = null
-
-onMounted(() => {
-  if (!isCollapse.value) return
-  remeasure()
-  const listEl = getEl(listRef.value)
-  if (listEl && typeof ResizeObserver !== 'undefined') {
-    resizeObserver = new ResizeObserver(() => {
-      // Sizes don't change on container resize; only the budget does.
-      computeVisibleCount()
-    })
-    resizeObserver.observe(listEl)
-  }
-})
-
-onBeforeUnmount(() => {
-  resizeObserver?.disconnect()
-  resizeObserver = null
-})
-
-watch(() => [props.overflow, props.orientation, props.triggerOrientation, props.size, props.variant, props.items?.length], () => {
-  if (!isCollapse.value) {
-    visibleCount.value = props.items?.length ?? 0
-    return
-  }
-  remeasure()
-})
 
 const overflowItems = computed<T[]>(() => {
   if (!isCollapse.value || !props.items) return []
@@ -294,14 +269,145 @@ const isOverflowActive = computed(() => {
   })
 })
 
+const useCustomIndicator = computed(() => isWrap.value || (isCollapse.value && isOverflowActive.value))
+
+const indicatorClass = computed(() => ui.value.indicator({
+  class: [
+    props.ui?.indicator,
+    useCustomIndicator.value && 'inset-auto translate-none transition-[top,left,width,height] duration-200'
+  ]
+}))
+
+function setCustomIndicatorRect(listEl: HTMLElement, rect: DOMRect) {
+  const listRect = listEl.getBoundingClientRect()
+  const top = rect.top - listRect.top + listEl.scrollTop
+  const left = rect.left - listRect.left + listEl.scrollLeft
+
+  if (props.variant === 'link') {
+    if (props.orientation === 'vertical') {
+      customIndicatorStyle.value = {
+        visibility: 'visible',
+        top: `${top}px`,
+        left: `${left}px`,
+        width: '1px',
+        height: `${rect.height}px`,
+        transform: 'none'
+      }
+    } else {
+      customIndicatorStyle.value = {
+        visibility: 'visible',
+        top: `${top + rect.height - 1}px`,
+        left: `${left}px`,
+        width: `${rect.width}px`,
+        height: '1px',
+        transform: 'none'
+      }
+    }
+    return
+  }
+
+  customIndicatorStyle.value = {
+    visibility: 'visible',
+    top: `${top}px`,
+    left: `${left}px`,
+    width: `${rect.width}px`,
+    height: `${rect.height}px`,
+    transform: 'none'
+  }
+}
+
+async function updateCustomIndicator() {
+  if (!useCustomIndicator.value) {
+    customIndicatorStyle.value = { visibility: 'hidden' }
+    return
+  }
+
+  await nextTick()
+  const listEl = getEl(listRef.value)
+  if (!listEl) {
+    customIndicatorStyle.value = { visibility: 'hidden' }
+    return
+  }
+
+  if (isCollapse.value && isOverflowActive.value) {
+    if (!moreRef.value) {
+      customIndicatorStyle.value = { visibility: 'hidden' }
+      return
+    }
+    setCustomIndicatorRect(listEl, moreRef.value.getBoundingClientRect())
+    return
+  }
+
+  const activeTab = listEl.querySelector('[role="tab"][data-state="active"]') as HTMLElement | null
+  if (!activeTab) {
+    customIndicatorStyle.value = { visibility: 'hidden' }
+    return
+  }
+
+  setCustomIndicatorRect(listEl, activeTab.getBoundingClientRect())
+}
+
+function setupCustomIndicator() {
+  customResizeObserver?.disconnect()
+  customResizeObserver = null
+  if (!useCustomIndicator.value) return
+  updateCustomIndicator()
+  const listEl = getEl(listRef.value)
+  if (listEl && typeof ResizeObserver !== 'undefined') {
+    customResizeObserver = new ResizeObserver(() => updateCustomIndicator())
+    customResizeObserver.observe(listEl)
+  }
+}
+
+let resizeObserver: ResizeObserver | null = null
+let customResizeObserver: ResizeObserver | null = null
+
+onMounted(() => {
+  if (isCollapse.value) {
+    remeasure()
+    const listEl = getEl(listRef.value)
+    if (listEl && typeof ResizeObserver !== 'undefined') {
+      resizeObserver = new ResizeObserver(() => {
+        // Sizes don't change on container resize; only the budget does.
+        computeVisibleCount()
+        updateCustomIndicator()
+      })
+      resizeObserver.observe(listEl)
+    }
+  }
+  setupCustomIndicator()
+})
+
+onBeforeUnmount(() => {
+  resizeObserver?.disconnect()
+  resizeObserver = null
+  customResizeObserver?.disconnect()
+  customResizeObserver = null
+})
+
+watch(() => [props.overflow, props.orientation, props.triggerOrientation, props.size, props.variant, props.items?.length], () => {
+  if (!isCollapse.value) {
+    visibleCount.value = props.items?.length ?? 0
+  } else {
+    remeasure()
+  }
+  setupCustomIndicator()
+})
+
+watch([activeValue, isOverflowActive, visibleCount], () => {
+  setupCustomIndicator()
+  updateCustomIndicator()
+})
+
 function isTriggerHidden(index: number) {
   return isCollapse.value && index >= visibleCount.value
 }
 
 function activateOverflowItem(realIndex: number) {
-  const t = triggersRef.value[realIndex]
-  const el = getEl(t)
-  el?.click?.()
+  const item = props.items?.[realIndex]
+  if (!item) return
+  const value = get(item, props.valueKey as string) ?? String(realIndex)
+  onValueChange(value)
 }
 
 const moreMenuItems = computed<DropdownMenuItem[]>(() => {
@@ -326,8 +432,6 @@ const moreMenuItems = computed<DropdownMenuItem[]>(() => {
   })
 })
 
-const showIndicator = computed(() => props.overflow !== 'wrap')
-
 defineExpose({
   triggersRef
 })
@@ -336,7 +440,7 @@ defineExpose({
 <template>
   <TabsRoot
     v-bind="rootProps"
-    :model-value="props.modelValue"
+    :model-value="activeValue"
     :default-value="props.defaultValue"
     :orientation="props.orientation"
     :activation-mode="props.activationMode"
@@ -345,7 +449,14 @@ defineExpose({
     @update:model-value="onValueChange"
   >
     <TabsList ref="listRef" data-slot="list" :class="ui.list({ class: props.ui?.list })">
-      <TabsIndicator v-if="showIndicator" data-slot="indicator" :class="ui.indicator({ class: props.ui?.indicator })" />
+      <div
+        v-if="useCustomIndicator"
+        aria-hidden="true"
+        data-slot="indicator"
+        :class="indicatorClass"
+        :style="customIndicatorStyle"
+      />
+      <TabsIndicator v-else data-slot="indicator" :class="ui.indicator({ class: props.ui?.indicator })" />
 
       <slot name="list-leading" />
 
