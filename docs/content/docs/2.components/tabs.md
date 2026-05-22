@@ -217,6 +217,73 @@ props:
 ---
 ::
 
+### Trigger orientation :badge{label="Soon" class="align-text-top"}
+
+Use the `trigger-orientation` prop to stack the icon or avatar on top of the label inside each tab trigger. Defaults to `horizontal`.
+
+::component-code
+---
+ignore:
+  - content
+  - items
+  - class
+external:
+  - items
+externalTypes:
+  - TabsItem[]
+props:
+  triggerOrientation: vertical
+  variant: link
+  color: neutral
+  content: false
+  items:
+    - label: Account
+      icon: 'i-lucide-user'
+    - label: Password
+      icon: 'i-lucide-lock'
+  class: 'w-full'
+---
+::
+
+### Overflow :badge{label="Soon" class="align-text-top"}
+
+Use the `overflow` prop to control how the tab list handles items that don't fit in the available space:
+
+- `scroll`{lang="ts-type"} enables scrolling along the list axis.
+- `wrap`{lang="ts-type"} allows tabs to wrap onto multiple lines.
+- `collapse`{lang="ts-type"} hides overflowing tabs behind a **More** dropdown.
+
+When omitted, no overflow handling is applied.
+
+#### Scroll
+
+::component-example
+---
+collapse: true
+name: 'tabs-overflow-scroll-example'
+---
+::
+
+#### Wrap
+
+::component-example
+---
+collapse: true
+name: 'tabs-overflow-wrap-example'
+---
+::
+
+#### Collapse
+
+Use the `more-label` and `more-icon` props to customize the overflow trigger. You can also use the `#more` slot to fully customize it.
+
+::component-example
+---
+collapse: true
+name: 'tabs-overflow-collapse-example'
+---
+::
+
 ## Examples
 
 ### Control active item
@@ -240,6 +307,17 @@ You can control the active item by a URL query parameter, using `route.query.tab
 Use the `#content` slot to customize the content of each item.
 
 :component-example{name="tabs-content-slot-example"}
+
+### With bottom tab bar :badge{label="Soon" class="align-text-top"}
+
+Combine `trigger-orientation="vertical"` with the `ui` prop to create a mobile-style bottom tab bar with icons and small labels.
+
+::component-example
+---
+collapse: true
+name: 'tabs-trigger-orientation-example'
+---
+::
 
 ### With custom slot
 
