@@ -334,6 +334,60 @@ name: 'tabs-custom-slot-example'
 ---
 ::
 
+### `class` prop
+
+Use the `class` prop to override the base styles of the Tabs.
+
+::component-code
+---
+ignore:
+  - items
+  - class
+external:
+  - items
+externalTypes:
+  - TabsItem[]
+props:
+  items:
+    - label: Account
+      icon: 'i-lucide-user'
+      content: 'This is the account content.'
+    - label: Password
+      icon: 'i-lucide-lock'
+      content: 'This is the password content.'
+  class: 'w-96'
+---
+::
+
+### `ui` prop
+
+Use the `ui` prop to override the slot styles of the Tabs.
+
+::component-code
+---
+prettier: true
+ignore:
+  - ui
+  - items
+  - class
+external:
+  - items
+externalTypes:
+  - TabsItem[]
+props:
+  content: false
+  items:
+    - label: Account
+      icon: 'i-lucide-user'
+    - label: Password
+      icon: 'i-lucide-lock'
+  class: 'w-full'
+  ui:
+    list: 'bg-default ring ring-default'
+    trigger: 'data-[state=active]:text-primary'
+---
+::
+
 ## API
 
 ### Props

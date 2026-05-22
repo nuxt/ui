@@ -4,6 +4,7 @@ export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: 'flex items-center gap-2',
     list: 'relative flex p-1 group',
+    tablist: 'flex flex-1 min-w-0',
     indicator: 'absolute transition-[translate,width] duration-200',
     trigger: ['group relative inline-flex items-center min-w-0 data-[state=inactive]:text-muted hover:data-[state=inactive]:not-disabled:text-default font-medium rounded-md disabled:cursor-not-allowed disabled:opacity-75', options.theme.transitions && 'transition-colors'],
     leadingIcon: 'shrink-0',
@@ -55,7 +56,7 @@ export default (options: Required<ModuleOptions>) => ({
         trigger: 'shrink-0 grow-0'
       },
       wrap: {
-        list: 'flex-wrap',
+        tablist: 'flex-wrap',
         trigger: 'shrink-0 grow-0',
         indicator: 'inset-auto translate-none transition-[top,left,width,height] duration-200'
       },
@@ -128,13 +129,13 @@ export default (options: Required<ModuleOptions>) => ({
     orientation: 'horizontal',
     overflow: 'scroll',
     class: {
-      list: 'overflow-x-auto'
+      tablist: 'overflow-x-auto'
     }
   }, {
     orientation: 'vertical',
     overflow: 'scroll',
     class: {
-      list: 'overflow-y-auto'
+      tablist: 'overflow-y-auto'
     }
   }, ...(options.theme.colors || []).map((color: string) => ({
     color,

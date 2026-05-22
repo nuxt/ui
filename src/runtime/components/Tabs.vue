@@ -190,7 +190,7 @@ const isCollapse = computed(() => props.overflow === 'collapse')
 const isWrap = computed(() => props.overflow === 'wrap')
 const isVerticalList = computed(() => props.orientation === 'vertical')
 
-const listRef = ref<InstanceType<typeof TabsList> | null>(null)
+const listRef = ref<HTMLElement | null>(null)
 const moreRef = ref<HTMLElement | null>(null)
 const customIndicatorStyle = ref<Record<string, string>>({ visibility: 'hidden' })
 const visibleCount = ref<number>(props.items?.length ?? 0)
@@ -447,7 +447,7 @@ defineExpose({
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     @update:model-value="onValueChange"
   >
-    <TabsList ref="listRef" data-slot="list" :class="ui.list({ class: props.ui?.list })">
+    <div ref="listRef" data-slot="list" :class="ui.list({ class: props.ui?.list })">
       <div
         v-if="useCustomIndicator"
         aria-hidden="true"
@@ -457,38 +457,42 @@ defineExpose({
       />
       <TabsIndicator v-else data-slot="indicator" :class="ui.indicator({ class: props.ui?.indicator })" />
 
-      <slot name="list-leading" />
+      <TabsList data-slot="tablist" :class="ui.tablist({ class: props.ui?.tablist })">
+        <slot name="list-leading" />
 
-      <TabsTrigger
-        v-for="(item, index) of props.items"
-        :key="get(item, props.valueKey as string) ?? index"
-        :ref="el => setTriggerRef(index, el)"
-        :value="get(item, props.valueKey as string) ?? String(index)"
-        :disabled="item.disabled"
-        data-slot="trigger"
-        :class="ui.trigger({ class: [props.ui?.trigger, item.ui?.trigger, isTriggerHidden(index) && 'hidden', measuring && isCollapse && 'grow-0 shrink-0'] })"
-      >
-        <slot name="leading" :item="item" :index="index" :ui="ui">
-          <UIcon v-if="item.icon" :name="item.icon" data-slot="leadingIcon" :class="ui.leadingIcon({ class: [props.ui?.leadingIcon, item.ui?.leadingIcon] })" />
-          <UAvatar v-else-if="item.avatar" :size="((item.ui?.leadingAvatarSize || props.ui?.leadingAvatarSize || ui.leadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" data-slot="leadingAvatar" :class="ui.leadingAvatar({ class: [props.ui?.leadingAvatar, item.ui?.leadingAvatar] })" />
-        </slot>
+        <TabsTrigger
+          v-for="(item, index) of props.items"
+          :key="get(item, props.valueKey as string) ?? index"
+          :ref="el => setTriggerRef(index, el)"
+          :value="get(item, props.valueKey as string) ?? String(index)"
+          :disabled="item.disabled"
+          data-slot="trigger"
+          :class="ui.trigger({ class: [props.ui?.trigger, item.ui?.trigger, isTriggerHidden(index) && 'hidden', measuring && isCollapse && 'grow-0 shrink-0'] })"
+        >
+          <slot name="leading" :item="item" :index="index" :ui="ui">
+            <UIcon v-if="item.icon" :name="item.icon" data-slot="leadingIcon" :class="ui.leadingIcon({ class: [props.ui?.leadingIcon, item.ui?.leadingIcon] })" />
+            <UAvatar v-else-if="item.avatar" :size="((item.ui?.leadingAvatarSize || props.ui?.leadingAvatarSize || ui.leadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" data-slot="leadingAvatar" :class="ui.leadingAvatar({ class: [props.ui?.leadingAvatar, item.ui?.leadingAvatar] })" />
+          </slot>
 
-        <span v-if="get(item, props.labelKey as string) || !!slots.default" data-slot="label" :class="ui.label({ class: [props.ui?.label, item.ui?.label] })">
-          <slot :item="item" :index="index">{{ get(item, props.labelKey as string) }}</slot>
-        </span>
+          <span v-if="get(item, props.labelKey as string) || !!slots.default" data-slot="label" :class="ui.label({ class: [props.ui?.label, item.ui?.label] })">
+            <slot :item="item" :index="index">{{ get(item, props.labelKey as string) }}</slot>
+          </span>
 
-        <slot name="trailing" :item="item" :index="index" :ui="ui">
-          <UBadge
-            v-if="item.badge || item.badge === 0"
-            color="neutral"
-            variant="outline"
-            :size="((item.ui?.trailingBadgeSize || props.ui?.trailingBadgeSize || ui.trailingBadgeSize()) as BadgeProps['size'])"
-            v-bind="(typeof item.badge === 'string' || typeof item.badge === 'number') ? { label: item.badge } : item.badge"
-            data-slot="trailingBadge"
-            :class="ui.trailingBadge({ class: [props.ui?.trailingBadge, item.ui?.trailingBadge] })"
-          />
-        </slot>
-      </TabsTrigger>
+          <slot name="trailing" :item="item" :index="index" :ui="ui">
+            <UBadge
+              v-if="item.badge || item.badge === 0"
+              color="neutral"
+              variant="outline"
+              :size="((item.ui?.trailingBadgeSize || props.ui?.trailingBadgeSize || ui.trailingBadgeSize()) as BadgeProps['size'])"
+              v-bind="(typeof item.badge === 'string' || typeof item.badge === 'number') ? { label: item.badge } : item.badge"
+              data-slot="trailingBadge"
+              :class="ui.trailingBadge({ class: [props.ui?.trailingBadge, item.ui?.trailingBadge] })"
+            />
+          </slot>
+        </TabsTrigger>
+
+        <slot name="list-trailing" />
+      </TabsList>
 
       <UDropdownMenu
         v-if="isCollapse"
@@ -502,14 +506,12 @@ defineExpose({
           :class="ui.trigger({ class: [props.ui?.more, measuring && 'grow-0 shrink-0', !measuring && !overflowItems.length && 'hidden'] })"
         >
           <slot name="more" :items="overflowItems" :is-active="isOverflowActive" :ui="ui">
-            <UIcon :name="props.moreIcon || appConfig.ui.icons.ellipsis" :class="ui.leadingIcon()" />
-            <span :class="ui.label()">{{ props.moreLabel }}</span>
+            <UIcon :name="props.moreIcon || appConfig.ui.icons.ellipsis" data-slot="leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
+            <span data-slot="label" :class="ui.label({ class: props.ui?.label })">{{ props.moreLabel }}</span>
           </slot>
         </button>
       </UDropdownMenu>
-
-      <slot name="list-trailing" />
-    </TabsList>
+    </div>
 
     <template v-if="!!props.content">
       <TabsContent v-for="(item, index) of props.items" :key="get(item, props.valueKey as string) ?? index" :value="get(item, props.valueKey as string) ?? String(index)" data-slot="content" :class="ui.content({ class: [props.ui?.content, item.ui?.content, item.class] })">
