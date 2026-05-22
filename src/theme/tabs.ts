@@ -12,7 +12,8 @@ export default (options: Required<ModuleOptions>) => ({
     label: 'truncate',
     trailingBadge: 'shrink-0',
     trailingBadgeSize: 'sm',
-    content: 'focus:outline-none w-full'
+    content: 'focus:outline-none w-full',
+    more: ''
   },
   variants: {
     color: {
@@ -42,6 +43,19 @@ export default (options: Required<ModuleOptions>) => ({
         list: 'flex-col',
         indicator: 'top-0 h-(--reka-tabs-indicator-size) translate-y-(--reka-tabs-indicator-position)'
       }
+    },
+    triggerOrientation: {
+      horizontal: '',
+      vertical: {
+        trigger: 'flex-col items-center justify-center'
+      }
+    },
+    overflow: {
+      scroll: '',
+      wrap: {
+        list: 'flex-wrap'
+      },
+      collapse: ''
     },
     size: {
       xs: {
@@ -98,6 +112,18 @@ export default (options: Required<ModuleOptions>) => ({
       list: 'border-s -ms-px',
       indicator: '-start-px w-px'
     }
+  }, {
+    orientation: 'horizontal',
+    overflow: 'scroll',
+    class: {
+      list: 'overflow-x-auto'
+    }
+  }, {
+    orientation: 'vertical',
+    overflow: 'scroll',
+    class: {
+      list: 'overflow-y-auto'
+    }
   }, ...(options.theme.colors || []).map((color: string) => ({
     color,
     variant: 'pill',
@@ -130,6 +156,7 @@ export default (options: Required<ModuleOptions>) => ({
   defaultVariants: {
     color: 'primary',
     variant: 'pill',
-    size: 'md'
+    size: 'md',
+    triggerOrientation: 'horizontal'
   }
 })
