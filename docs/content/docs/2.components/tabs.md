@@ -255,34 +255,19 @@ Use the `overflow` prop to control how the tab list handles items that don't fit
 
 When omitted, no overflow handling is applied.
 
-#### Scroll
+### Scroll
 
-::component-example
----
-collapse: true
-name: 'tabs-overflow-scroll-example'
----
-::
+:component-example{name="tabs-overflow-scroll-example"}
 
-#### Wrap
+### Wrap
 
-::component-example
----
-collapse: true
-name: 'tabs-overflow-wrap-example'
----
-::
+:component-example{name="tabs-overflow-wrap-example"}
 
-#### Collapse
+### Collapse
 
 Use the `more-label` and `more-icon` props to customize the overflow trigger. You can also use the `#more` slot to fully customize it.
 
-::component-example
----
-collapse: true
-name: 'tabs-overflow-collapse-example'
----
-::
+:component-example{name="tabs-overflow-collapse-example"}
 
 ## Examples
 
@@ -312,12 +297,7 @@ Use the `#content` slot to customize the content of each item.
 
 Combine `trigger-orientation="vertical"` with the `ui` prop to create a mobile-style bottom tab bar with icons and small labels.
 
-::component-example
----
-collapse: true
-name: 'tabs-trigger-orientation-example'
----
-::
+:component-example{name="tabs-trigger-orientation-example"}
 
 ### With custom slot
 

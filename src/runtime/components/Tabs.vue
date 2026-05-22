@@ -394,7 +394,6 @@ watch(() => [props.overflow, props.orientation, props.triggerOrientation, props.
 })
 
 watch([activeValue, isOverflowActive, visibleCount], () => {
-  setupCustomIndicator()
   updateCustomIndicator()
 })
 
