@@ -269,13 +269,12 @@ const isOverflowActive = computed(() => {
   })
 })
 
-const useCustomIndicator = computed(() => isWrap.value || (isCollapse.value && isOverflowActive.value))
+// Use a single custom indicator for wrap/collapse so position animates consistently
+// (including visible tab ↔ More transitions in collapse mode).
+const useCustomIndicator = computed(() => isWrap.value || isCollapse.value)
 
 const indicatorClass = computed(() => ui.value.indicator({
-  class: [
-    props.ui?.indicator,
-    useCustomIndicator.value && 'inset-auto translate-none transition-[top,left,width,height] duration-200'
-  ]
+  class: props.ui?.indicator
 }))
 
 function setCustomIndicatorRect(listEl: HTMLElement, rect: DOMRect) {
@@ -467,7 +466,7 @@ defineExpose({
         :value="get(item, props.valueKey as string) ?? String(index)"
         :disabled="item.disabled"
         data-slot="trigger"
-        :class="ui.trigger({ class: [props.ui?.trigger, item.ui?.trigger, isTriggerHidden(index) && 'hidden'] })"
+        :class="ui.trigger({ class: [props.ui?.trigger, item.ui?.trigger, isTriggerHidden(index) && 'hidden', measuring && isCollapse && 'grow-0 shrink-0'] })"
       >
         <slot name="leading" :item="item" :index="index" :ui="ui">
           <UIcon v-if="item.icon" :name="item.icon" data-slot="leadingIcon" :class="ui.leadingIcon({ class: [props.ui?.leadingIcon, item.ui?.leadingIcon] })" />
@@ -500,7 +499,7 @@ defineExpose({
           type="button"
           data-slot="more"
           :data-state="isOverflowActive ? 'active' : 'inactive'"
-          :class="ui.trigger({ class: [props.ui?.more, !measuring && !overflowItems.length && 'hidden'] })"
+          :class="ui.trigger({ class: [props.ui?.more, measuring && 'grow-0 shrink-0', !measuring && !overflowItems.length && 'hidden'] })"
         >
           <slot name="more" :items="overflowItems" :is-active="isOverflowActive" :ui="ui">
             <UIcon :name="props.moreIcon || appConfig.ui.icons.ellipsis" :class="ui.leadingIcon()" />

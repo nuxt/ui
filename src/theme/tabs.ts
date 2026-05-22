@@ -60,7 +60,7 @@ export default (options: Required<ModuleOptions>) => ({
         indicator: 'inset-auto translate-none transition-[top,left,width,height] duration-200'
       },
       collapse: {
-        trigger: 'shrink-0 grow-0'
+        indicator: 'inset-auto translate-none transition-[top,left,width,height] duration-200'
       }
     },
     size: {
@@ -117,6 +117,12 @@ export default (options: Required<ModuleOptions>) => ({
     class: {
       list: 'border-s -ms-px',
       indicator: '-start-px w-px'
+    }
+  }, {
+    triggerOrientation: 'vertical',
+    class: {
+      trigger: 'gap-1 py-1',
+      label: 'text-[10px]/3 font-normal'
     }
   }, {
     orientation: 'horizontal',
