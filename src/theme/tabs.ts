@@ -4,7 +4,7 @@ export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: 'flex items-center gap-2',
     list: 'relative flex p-1 group',
-    tablist: 'flex flex-1 min-w-0 min-h-0',
+    tablist: 'flex min-w-0',
     indicator: 'absolute transition-[translate,width] duration-200',
     trigger: ['group relative inline-flex items-center min-w-0 data-[state=inactive]:text-muted hover:data-[state=inactive]:not-disabled:text-default font-medium rounded-md disabled:cursor-not-allowed disabled:opacity-75', options.theme.transitions && 'transition-colors'],
     leadingIcon: 'shrink-0',
@@ -37,13 +37,13 @@ export default (options: Required<ModuleOptions>) => ({
       horizontal: {
         root: 'flex-col',
         list: 'w-full',
-        tablist: 'flex-row',
+        tablist: 'w-full flex-row',
         indicator: 'left-0 w-(--reka-tabs-indicator-size) translate-x-(--reka-tabs-indicator-position)',
         trigger: 'justify-center'
       },
       vertical: {
         list: 'flex-col',
-        tablist: 'flex-col w-full',
+        tablist: 'w-full flex-col',
         indicator: 'top-0 h-(--reka-tabs-indicator-size) translate-y-(--reka-tabs-indicator-position)'
       }
     },
@@ -63,6 +63,7 @@ export default (options: Required<ModuleOptions>) => ({
         indicator: 'inset-auto translate-none transition-[top,left,width,height] duration-200'
       },
       collapse: {
+        tablist: 'flex-1 min-w-0 min-h-0',
         indicator: 'inset-auto translate-none transition-[top,left,width,height] duration-200',
         more: 'grow-0 shrink-0'
       }
@@ -132,13 +133,15 @@ export default (options: Required<ModuleOptions>) => ({
     orientation: 'horizontal',
     overflow: 'scroll',
     class: {
-      tablist: 'overflow-x-auto'
+      list: 'overflow-x-auto',
+      tablist: 'w-max shrink-0'
     }
   }, {
     orientation: 'vertical',
     overflow: 'scroll',
     class: {
-      tablist: 'overflow-y-auto'
+      list: 'overflow-y-auto',
+      tablist: 'h-max shrink-0'
     }
   }, ...(options.theme.colors || []).map((color: string) => ({
     color,
