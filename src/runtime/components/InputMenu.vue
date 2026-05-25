@@ -444,9 +444,7 @@ function onUpdate(value: any) {
 }
 
 function onInputUpdate(value: string) {
-  if (!isAutocomplete.value) {
-    searchTerm.value = value
-  }
+  searchTerm.value = value
 }
 
 function onBlur(event: FocusEvent) {
@@ -665,6 +663,7 @@ defineExpose({
         v-else
         :id="id"
         ref="inputRef"
+        :model-value="isAutocomplete ? searchTerm : undefined"
         v-bind="{ ...(!isAutocomplete ? { displayValue } : {}), ...$attrs, ...ariaAttrs }"
         :type="props.type"
         :placeholder="props.placeholder"
