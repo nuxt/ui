@@ -244,9 +244,10 @@ const searchGroups = computed(() => {
     const groups = []
     for (const collection of collections) {
       const items = searchResults.value.filter(item => item.collection === collection)
+      const navSection = props.navigation?.find(link => link.path === `/${collection}`)
       groups.push({
         id: `search-${collection}`,
-        label: collection.charAt(0).toUpperCase() + collection.slice(1),
+        label: navSection?.title || collection.charAt(0).toUpperCase() + collection.slice(1),
         items,
         ignoreFilter: true
       })
