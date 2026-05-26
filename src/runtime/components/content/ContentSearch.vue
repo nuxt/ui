@@ -29,6 +29,7 @@ export interface ContentSearchFile {
 }
 
 export interface ContentSearchResult extends ContentSearchFile {
+  collection?: string
   snippets?: {
     title?: string
     content?: string
@@ -48,6 +49,7 @@ export type ContentSearchStatus = 'idle' | 'loading' | 'ready' | 'error'
 export type ContentSearchFn = (query: string, opts?: ContentSearchOptions) => Promise<ContentSearchResult[]>
 
 export interface ContentSearchItem extends Omit<LinkProps, 'custom'>, CommandPaletteItem {
+  collection?: string
   level?: number
   /**
    * @IconifyIcon
@@ -235,6 +237,22 @@ const linksGroup = computed(() => {
 
 const searchGroups = computed(() => {
   if (!searchTerm.value || !searchResults.value.length) return []
+
+  const collections = new Set(searchResults.value.map(item => item.collection).filter((c): c is string => !!c))
+
+  if (collections.size) {
+    const groups = []
+    for (const collection of collections) {
+      const items = searchResults.value.filter(item => item.collection === collection)
+      groups.push({
+        id: `search-${collection}`,
+        label: collection.charAt(0).toUpperCase() + collection.slice(1),
+        items,
+        ignoreFilter: true
+      })
+    }
+    return groups
+  }
 
   return [{ id: 'search', label: t('contentSearch.search'), items: searchResults.value, ignoreFilter: true }]
 })

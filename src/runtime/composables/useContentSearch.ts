@@ -135,6 +135,7 @@ function _useContentSearch() {
       const ancestorIcon = ancestors.findLast(a => a.icon)?.icon
 
       acc.push({
+        collection: result.collection,
         label: result.title,
         labelHtml: result.snippets?.title ? sanitizeSnippet(result.snippets.title) : undefined,
         prefix,
