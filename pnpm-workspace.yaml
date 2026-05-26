@@ -15,7 +15,7 @@ overrides:
   '@nuxt/test-utils': 4.0.2
   '@nuxt/ui': workspace:*
   unplugin: ^3.0.0
-  c12: ^3.3.2
+  c12: ^3.3.4
   typescript: ^6.0.3
 
 allowBuilds:
