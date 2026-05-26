@@ -110,7 +110,7 @@ export default defineLocale<Messages>({
       close: 'ปิด'
     },
     pricingTable: {
-      caption: 'การเปรียบเทียบราคาสินค้า'
+      caption: 'การเปรียบเทียบราคา'
     },
     prose: {
       codeCollapse: {
