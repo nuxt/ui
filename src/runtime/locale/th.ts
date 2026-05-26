@@ -34,11 +34,6 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'ส่ง'
     },
-    chatReasoning: {
-      thinking: 'กำลังคิด…',
-      thought: 'คิดแล้ว',
-      thoughtFor: 'คิดเป็นเวลา {duration}'
-    },
     colorMode: {
       dark: 'มืด',
       light: 'สว่าง',
@@ -130,6 +125,11 @@ export default defineLocale<Messages>({
         copy: 'คัดลอกพรอมต์',
         openIn: 'เปิดใน {name}'
       }
+    },
+    chatReasoning: {
+      thinking: 'กำลังคิด…',
+      thought: 'คิดแล้ว',
+      thoughtFor: 'คิดเป็นเวลา {duration}'
     },
     sidebar: {
       close: 'ปิด',
