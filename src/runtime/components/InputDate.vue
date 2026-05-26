@@ -69,7 +69,7 @@ export interface InputDateSlots {
 </script>
 
 <script setup lang="ts" generic="R extends boolean">
-import { computed, onMounted, ref } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
 import { } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
 import { DateField as SingleDateField, DateRangeField as RangeDateField } from 'reka-ui/namespaced'
@@ -135,6 +135,11 @@ function onUpdate(value: any) {
   emitFormChange()
   emitFormInput()
 }
+
+watch(() => props.modelValue, () => {
+  emitFormChange()
+  emitFormInput()
+})
 
 function onBlur(event: FocusEvent) {
   emitFormBlur()
