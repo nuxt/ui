@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/page-aside'
 import type { ComponentConfig } from '../types/tv'
@@ -16,9 +17,9 @@ export interface PageAsideProps {
 }
 
 export interface PageAsideSlots {
-  top(props?: {}): any
-  default(props?: {}): any
-  bottom(props?: {}): any
+  top?(props?: {}): VNode[]
+  default?(props?: {}): VNode[]
+  bottom?(props?: {}): VNode[]
 }
 </script>
 
@@ -26,12 +27,15 @@ export interface PageAsideSlots {
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
+import { useComponentProps } from '../composables/useComponentProps'
 import { tv } from '../utils/tv'
 
-const props = withDefaults(defineProps<PageAsideProps>(), {
+const _props = withDefaults(defineProps<PageAsideProps>(), {
   as: 'aside'
 })
 const slots = defineSlots<PageAsideSlots>()
+
+const props = useComponentProps('pageAside', _props)
 
 const appConfig = useAppConfig() as PageAside['AppConfig']
 
@@ -40,7 +44,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pageAside ||
 </script>
 
 <template>
-  <Primitive :as="as" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <Primitive :as="props.as" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <div data-slot="container" :class="ui.container({ class: props.ui?.container })">
       <div v-if="!!slots.top" data-slot="top" :class="ui.top({ class: props.ui?.top })">
         <div data-slot="topHeader" :class="ui.topHeader({ class: props.ui?.topHeader })" />

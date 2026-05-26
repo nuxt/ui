@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { PropType } from 'vue'
+import type { PropType, VNode } from 'vue'
 import type { ContentNavigationItem } from '@nuxt/content'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/content/content-surround'
@@ -41,13 +41,13 @@ export interface ContentSurroundProps<T extends ContentSurroundLink = ContentSur
   ui?: ContentSurround['slots']
 }
 
-type SlotProps<T> = (props: { link: T, ui: ContentSurround['ui'] }) => any
+type SlotProps<T> = (props: { link: T, ui: ContentSurround['ui'] }) => VNode[]
 
 export interface ContentSurroundSlots<T extends ContentSurroundLink = ContentSurroundLink> {
-  'link': SlotProps<T>
-  'link-leading': SlotProps<T>
-  'link-title': SlotProps<T>
-  'link-description': SlotProps<T>
+  'link'?: SlotProps<T>
+  'link-leading'?: SlotProps<T>
+  'link-title'?: SlotProps<T>
+  'link-description'?: SlotProps<T>
 }
 </script>
 
@@ -56,16 +56,24 @@ import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
+import { useComponentProps } from '../../composables/useComponentProps'
+import { useLocale } from '../../composables/useLocale'
+import { usePrefix } from '../../composables/usePrefix'
 import { tv } from '../../utils/tv'
 import ULink from '../Link.vue'
 import UIcon from '../Icon.vue'
 
 defineOptions({ inheritAttrs: false })
 
-const props = defineProps<ContentSurroundProps<T>>()
+const _props = defineProps<ContentSurroundProps<T>>()
+
 defineSlots<ContentSurroundSlots<T>>()
 
+const props = useComponentProps<ContentSurroundProps<T>>('contentSurround', _props)
+
+const { dir } = useLocale()
 const appConfig = useAppConfig() as ContentSurround['AppConfig']
+const prefix = usePrefix()
 
 const [DefineLinkTemplate, ReuseLinkTemplate] = createReusableTemplate<{ link?: ContentSurroundLink, icon: IconProps['name'], direction: 'left' | 'right' }>({
   props: {
@@ -77,6 +85,11 @@ const [DefineLinkTemplate, ReuseLinkTemplate] = createReusableTemplate<{ link?: 
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.contentSurround || {}) })())
+
+// eslint-disable-next-line vue/no-dupe-keys
+const prevIcon = computed(() => props.prevIcon || (dir.value === 'rtl' ? appConfig.ui.icons.arrowRight : appConfig.ui.icons.arrowLeft))
+// eslint-disable-next-line vue/no-dupe-keys
+const nextIcon = computed(() => props.nextIcon || (dir.value === 'rtl' ? appConfig.ui.icons.arrowLeft : appConfig.ui.icons.arrowRight))
 </script>
 
 <template>
@@ -102,11 +115,11 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.contentSurro
         </p>
       </slot>
     </ULink>
-    <span v-else class="hidden lg:block">&nbsp;</span>
+    <span v-else :class="prefix('hidden sm:block')">&nbsp;</span>
   </DefineLinkTemplate>
 
-  <Primitive v-if="surround" :as="as" v-bind="$attrs" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <ReuseLinkTemplate :link="surround[0]" :icon="prevIcon || appConfig.ui.icons.arrowLeft" direction="left" />
-    <ReuseLinkTemplate :link="surround[1]" :icon="nextIcon || appConfig.ui.icons.arrowRight" direction="right" />
+  <Primitive v-if="props.surround" :as="props.as" v-bind="$attrs" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+    <ReuseLinkTemplate :link="props.surround[0]" :icon="prevIcon" direction="left" />
+    <ReuseLinkTemplate :link="props.surround[1]" :icon="nextIcon" direction="right" />
   </Primitive>
 </template>

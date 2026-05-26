@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/dashboard-toolbar'
 import type { ComponentConfig } from '../types/tv'
@@ -16,9 +17,9 @@ export interface DashboardToolbarProps {
 }
 
 export interface DashboardToolbarSlots {
-  default(props?: {}): any
-  left(props?: {}): any
-  right(props?: {}): any
+  default?(props?: {}): VNode[]
+  left?(props?: {}): VNode[]
+  right?(props?: {}): VNode[]
 }
 </script>
 
@@ -26,10 +27,14 @@ export interface DashboardToolbarSlots {
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
+import { useComponentProps } from '../composables/useComponentProps'
 import { tv } from '../utils/tv'
 
-const props = defineProps<DashboardToolbarProps>()
+const _props = defineProps<DashboardToolbarProps>()
+
 defineSlots<DashboardToolbarSlots>()
+
+const props = useComponentProps('dashboardToolbar', _props)
 
 const appConfig = useAppConfig() as DashboardToolbar['AppConfig']
 
@@ -38,7 +43,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dashboardToo
 </script>
 
 <template>
-  <Primitive :as="as" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <Primitive :as="props.as" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <slot>
       <div data-slot="left" :class="ui.left({ class: [props.ui?.left] })">
         <slot name="left" />

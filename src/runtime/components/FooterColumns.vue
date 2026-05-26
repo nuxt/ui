@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/footer-columns'
 import type { IconProps, LinkProps } from '../types'
@@ -32,17 +33,17 @@ export interface FooterColumnsProps<T extends FooterColumnLink = FooterColumnLin
   ui?: FooterColumns['slots']
 }
 
-type SlotProps<T> = (props: { link: T, active: boolean, ui: FooterColumns['ui'] }) => any
+type SlotProps<T> = (props: { link: T, active: boolean, ui: FooterColumns['ui'] }) => VNode[]
 
 export interface FooterColumnsSlots<T extends FooterColumnLink = FooterColumnLink> {
-  'left'(props?: {}): any
-  'default'(props?: {}): any
-  'right'(props?: {}): any
-  'column-label'?: (props: { column: FooterColumn<T> }) => any
-  'link': SlotProps<T>
-  'link-leading': SlotProps<T>
-  'link-label'(props: { link: T, active: boolean }): any
-  'link-trailing'(props: { link: T, active: boolean }): any
+  'left'?(props?: {}): VNode[]
+  'default'?(props?: {}): VNode[]
+  'right'?(props?: {}): VNode[]
+  'column-label'?: (props: { column: FooterColumn<T> }) => VNode[]
+  'link'?: SlotProps<T>
+  'link-leading'?: SlotProps<T>
+  'link-label'?(props: { link: T, active: boolean }): VNode[]
+  'link-trailing'?(props: { link: T, active: boolean }): VNode[]
 }
 </script>
 
@@ -50,16 +51,19 @@ export interface FooterColumnsSlots<T extends FooterColumnLink = FooterColumnLin
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
+import { useComponentProps } from '../composables/useComponentProps'
 import { pickLinkProps } from '../utils/link'
 import { tv } from '../utils/tv'
 import ULink from './Link.vue'
 import ULinkBase from './LinkBase.vue'
 import UIcon from './Icon.vue'
 
-const props = withDefaults(defineProps<FooterColumnsProps<T>>(), {
+const _props = withDefaults(defineProps<FooterColumnsProps<T>>(), {
   as: 'nav'
 })
 const slots = defineSlots<FooterColumnsSlots<T>>()
+
+const props = useComponentProps<FooterColumnsProps<T>>('footerColumns', _props)
 
 const appConfig = useAppConfig() as FooterColumns['AppConfig']
 
@@ -68,14 +72,14 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.footerColumn
 </script>
 
 <template>
-  <Primitive :as="as" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <Primitive :as="props.as" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <div v-if="!!slots.left" data-slot="left" :class="ui.left({ class: props.ui?.left })">
       <slot name="left" />
     </div>
 
-    <div v-if="!!slots.default || columns?.length" data-slot="center" :class="ui.center({ class: props.ui?.center })">
+    <div v-if="!!slots.default || props.columns?.length" data-slot="center" :class="ui.center({ class: props.ui?.center })">
       <slot>
-        <div v-for="(column, index) in columns" :key="index">
+        <div v-for="(column, index) in props.columns" :key="index">
           <h3 data-slot="label" :class="ui.label({ class: props.ui?.label })">
             <slot name="column-label" :column="column">
               {{ column.label }}

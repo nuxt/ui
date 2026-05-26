@@ -1,9 +1,10 @@
 <script lang="ts">
 import type { CheckboxGroupRootProps, CheckboxGroupRootEmits } from 'reka-ui'
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/checkbox-group'
 import type { CheckboxProps } from '../types'
-import type { AcceptableValue, GetItemKeys, GetModelValue } from '../types/utils'
+import type { AcceptableValue, GetItemKeys, GetModelValue, GetModelValueEmits } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
 type CheckboxGroup = ComponentConfig<typeof theme, AppConfig, 'checkboxGroup'>
@@ -20,7 +21,7 @@ export type CheckboxGroupItem = CheckboxGroupValue | {
   [key: string]: any
 }
 
-export interface CheckboxGroupProps<T extends CheckboxGroupItem[] = CheckboxGroupItem[], VK extends GetItemKeys<T> = 'value'> extends Pick<CheckboxGroupRootProps, 'disabled' | 'loop' | 'name' | 'required'>, Pick<CheckboxProps, 'color' | 'indicator' | 'icon'> {
+export interface CheckboxGroupProps<T extends CheckboxGroupItem[] = CheckboxGroupItem[], VK extends GetItemKeys<T> = 'value'> extends Pick<CheckboxGroupRootProps, 'disabled' | 'loop' | 'name' | 'required'>, Pick<CheckboxProps, 'color' | 'highlight' | 'indicator' | 'icon'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -59,57 +60,62 @@ export interface CheckboxGroupProps<T extends CheckboxGroupItem[] = CheckboxGrou
    * The orientation the checkbox buttons are laid out.
    * @defaultValue 'vertical'
    */
-  orientation?: CheckboxGroupRootProps['orientation']
+  orientation?: CheckboxGroup['variants']['orientation']
   class?: any
   ui?: CheckboxGroup['slots'] & CheckboxProps['ui']
 }
 
-export type CheckboxGroupEmits<T extends CheckboxGroupItem[] = CheckboxGroupItem[]> = CheckboxGroupRootEmits<T[number]> & {
+export type CheckboxGroupEmits<T extends CheckboxGroupItem[] = CheckboxGroupItem[], VK extends GetItemKeys<T> = 'value'> = Omit<CheckboxGroupRootEmits, 'update:modelValue'> & {
   change: [event: Event]
-}
+} & GetModelValueEmits<T, VK, true>
 
-type SlotProps<T extends CheckboxGroupItem> = (props: { item: T & { id: string } }) => any
+type SlotProps<T extends CheckboxGroupItem> = (props: { item: T & { id: string } }) => VNode[]
 
 export interface CheckboxGroupSlots<T extends CheckboxGroupItem[] = CheckboxGroupItem[]> {
-  legend(props?: {}): any
-  label: SlotProps<T[number]>
-  description: SlotProps<T[number]>
+  legend?(props?: {}): VNode[]
+  label?: SlotProps<T[number]>
+  description?: SlotProps<T[number]>
 }
 </script>
 
 <script setup lang="ts" generic="T extends CheckboxGroupItem[], VK extends GetItemKeys<T> = 'value'">
 import { computed, useId } from 'vue'
-import { CheckboxGroupRoot, useForwardProps, useForwardPropsEmits } from 'reka-ui'
+import { CheckboxGroupRoot } from 'reka-ui'
+import { useForwardProps } from '../composables/useForwardProps'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
+import { useComponentProps } from '../composables/useComponentProps'
 import { useFormField } from '../composables/useFormField'
 import { get, omit } from '../utils'
 import { tv } from '../utils/tv'
 import UCheckbox from './Checkbox.vue'
 
-const props = withDefaults(defineProps<CheckboxGroupProps<T, VK>>(), {
+const _props = withDefaults(defineProps<CheckboxGroupProps<T, VK>>(), {
   labelKey: 'label',
   descriptionKey: 'description',
   valueKey: 'value' as never,
   orientation: 'vertical'
 })
-const emits = defineEmits<CheckboxGroupEmits<T>>()
+const emits = defineEmits<CheckboxGroupEmits<T, VK>>()
 const slots = defineSlots<CheckboxGroupSlots<T>>()
+
+const props = useComponentProps<CheckboxGroupProps<T, VK>>('checkboxGroup', _props)
 
 const appConfig = useAppConfig() as CheckboxGroup['AppConfig']
 
-const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'orientation', 'loop', 'required'), emits)
+const rootProps = useForwardProps(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'orientation', 'loop', 'required'), emits)
 const checkboxProps = useForwardProps(reactivePick(props, 'variant', 'indicator', 'icon'))
 const getProxySlots = () => omit(slots, ['legend'])
 
-const { emitFormChange, emitFormInput, color, name, size, id: _id, disabled, ariaAttrs } = useFormField<CheckboxGroupProps<T>>(props, { bind: false })
+const { emitFormChange, emitFormInput, color, highlight, name, size, id: _id, disabled, ariaAttrs } = useFormField<CheckboxGroupProps<T>>(_props, { bind: false })
 const id = _id.value ?? useId()
 
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.checkboxGroup || {}) })({
-  size: size.value,
+  size: size.value ?? props.size,
   required: props.required,
   orientation: props.orientation,
-  color: props.color,
+  color: color.value ?? props.color,
   variant: props.variant,
   disabled: disabled.value
 }))
@@ -164,7 +170,7 @@ function onUpdate(value: any) {
 <template>
   <CheckboxGroupRoot
     :id="id"
-    v-bind="rootProps"
+    v-bind="(rootProps as any)"
     :name="name"
     :disabled="disabled"
     data-slot="root"
@@ -172,9 +178,9 @@ function onUpdate(value: any) {
     @update:model-value="onUpdate"
   >
     <fieldset data-slot="fieldset" :class="ui.fieldset({ class: props.ui?.fieldset })" v-bind="ariaAttrs">
-      <legend v-if="legend || !!slots.legend" data-slot="legend" :class="ui.legend({ class: props.ui?.legend })">
+      <legend v-if="props.legend || !!slots.legend" data-slot="legend" :class="ui.legend({ class: props.ui?.legend })">
         <slot name="legend">
-          {{ legend }}
+          {{ props.legend }}
         </slot>
       </legend>
 
@@ -183,6 +189,7 @@ function onUpdate(value: any) {
         :key="item.value"
         v-bind="{ ...item, ...checkboxProps }"
         :color="color"
+        :highlight="highlight"
         :size="size"
         :name="name"
         :disabled="item.disabled || disabled"

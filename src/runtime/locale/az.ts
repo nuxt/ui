@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'Göndər'
     },
+    chatReasoning: {
+      thinking: 'Düşünür…',
+      thought: 'Düşündü',
+      thoughtFor: '{duration} düşündü'
+    },
     colorMode: {
       dark: 'Qaranlıq',
       light: 'İşıqlı',
@@ -50,6 +55,7 @@ export default defineLocale<Messages>({
     },
     contentSearch: {
       links: 'Bağlantılar',
+      search: 'Nəticələr',
       theme: 'Tema'
     },
     contentSearchButton: {
@@ -57,6 +63,10 @@ export default defineLocale<Messages>({
     },
     contentToc: {
       title: 'Bu səhifədə'
+    },
+    dropdownMenu: {
+      noMatch: 'Uyğun məlumat tapılmadı',
+      search: 'Axtar…'
     },
     dashboardSearch: {
       theme: 'Tema'
@@ -91,6 +101,11 @@ export default defineLocale<Messages>({
       decrement: 'Azalt',
       increment: 'Artır'
     },
+    listbox: {
+      noData: 'Məlumat yoxdur',
+      noMatch: 'Uyğun məlumat tapılmadı',
+      search: 'Axtar…'
+    },
     modal: {
       close: 'Bağla'
     },
@@ -110,7 +125,15 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'Kodu buferə kopyala'
+      },
+      prompt: {
+        copy: 'Təlimatı kopyala',
+        openIn: '{name} ilə aç'
       }
+    },
+    sidebar: {
+      close: 'Bağla',
+      toggle: 'Dəyişdir'
     },
     selectMenu: {
       create: '"{label}" yarat',

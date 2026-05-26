@@ -17,6 +17,8 @@ useSeoMeta({
   ogImage: joinURL(url, '/figma/og-image.png')
 })
 
+useCanonical()
+
 const video = ref<HTMLVideoElement | null>(null)
 const played = ref(false)
 
@@ -86,7 +88,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div v-if="page" class="relative">
+  <main v-if="page" class="relative">
     <div id="cursor1" class="absolute z-10 pointer-events-none" :style="{ opacity: 0 }">
       <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" class="absolute top-0 left-0 drop-shadow-[0_1px_2px_rgb(0,0,0,0.25)] text-inverted">
         <path
@@ -98,7 +100,7 @@ onMounted(async () => {
           d="M4.037 4.688a.495.495 0 0 1 .651-.651l16 6.5a.5.5 0 0 1-.063.947l-6.124 1.58a2 2 0 0 0-1.438 1.435l-1.579 6.126a.5.5 0 0 1-.947.063z"
         />
       </svg>
-      <UBadge color="info" class="absolute top-[18px] left-[18px] py-1 px-1 rounded-sm font-semibold leading-none">
+      <UBadge color="info" class="absolute top-[18px] left-[18px] p-1 rounded-sm font-semibold leading-none">
         Hugo
       </UBadge>
     </div>
@@ -113,7 +115,7 @@ onMounted(async () => {
           d="M4.037 4.688a.495.495 0 0 1 .651-.651l16 6.5a.5.5 0 0 1-.063.947l-6.124 1.58a2 2 0 0 0-1.438 1.435l-1.579 6.126a.5.5 0 0 1-.947.063z"
         />
       </svg>
-      <UBadge color="success" class="absolute top-[18px] left-[18px] py-1 px-1 rounded-sm font-semibold leading-none">
+      <UBadge color="success" class="absolute top-[18px] left-[18px] p-1 rounded-sm font-semibold leading-none">
         Sarah
       </UBadge>
     </div>
@@ -121,9 +123,7 @@ onMounted(async () => {
     <UPageHero
       :links="page.hero.links"
       class="relative"
-      :ui="{
-        container: 'relative !pb-0 lg:py-32'
-      }"
+      :ui="{ container: 'relative py-10 sm:py-16 lg:py-24 !pb-0' }"
     >
       <template #title>
         <MDC :value="page.hero.title" unwrap="p" cache-key="figma-hero-title" />
@@ -143,7 +143,7 @@ onMounted(async () => {
         />
         <div v-if="!played" class="group cursor-pointer absolute inset-0 flex items-center justify-center backdrop-blur-xs" @click="video?.play(); played = true">
           <UButton
-            icon="i-heroicons-play-20-solid"
+            icon="i-lucide-play"
             size="xl"
             color="neutral"
             variant="solid"
@@ -170,7 +170,7 @@ onMounted(async () => {
         description: 'mt-2'
       }"
       orientation="horizontal"
-      class="rounded-none bg-gradient-to-b from-elevated/50 to-default"
+      class="rounded-none bg-linear-to-b from-elevated/50 to-default"
     >
       <template #title>
         <MDC :value="page.cta1.title" unwrap="p" cache-key="figma-cta-1-title" />
@@ -217,7 +217,7 @@ onMounted(async () => {
       <div aria-hidden="true" class="absolute z-[-1] border-x border-default inset-0 mx-4 sm:mx-6 lg:mx-8" />
       <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 items-start justify-center border border-default border-b-0 sm:divide-x divide-y lg:divide-y-0 divide-default">
         <li v-for="(step, index) in page?.section4.steps" :key="step.title" class="relative flex flex-col gap-y-4 justify-start group h-full p-4 bg-default" :class="{ 'hover:bg-muted/50': step.to }">
-          <ULink :to="step.to" target="_blank" class="absolute inset-0 z-10" />
+          <ULink v-if="step.to" :to="step.to" :aria-label="`Open ${step.title}`" target="_blank" class="absolute inset-0 z-10" />
           <NuxtImg v-if="step.image" v-bind="step.image" class="rounded-sm" loading="lazy" />
           <div>
             <h2 class="font-semibold inline-flex items-center gap-x-1">
@@ -254,5 +254,5 @@ onMounted(async () => {
         </template>
       </UAccordion>
     </UPageSection>
-  </div>
+  </main>
 </template>

@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'Жіберу'
     },
+    chatReasoning: {
+      thinking: 'Ойлануда…',
+      thought: 'Ойланды',
+      thoughtFor: '{duration} ойланды'
+    },
     colorMode: {
       dark: 'Қараңғы',
       light: 'Ашық',
@@ -50,6 +55,7 @@ export default defineLocale<Messages>({
     },
     contentSearch: {
       links: 'Сілтемелер',
+      search: 'Нәтижелер',
       theme: 'Тақырып'
     },
     contentSearchButton: {
@@ -57,6 +63,10 @@ export default defineLocale<Messages>({
     },
     contentToc: {
       title: 'Мазмұны'
+    },
+    dropdownMenu: {
+      noMatch: 'Сәйкес келетін деректер жоқ',
+      search: 'Іздеу…'
     },
     dashboardSearch: {
       theme: 'Тақырып'
@@ -91,6 +101,11 @@ export default defineLocale<Messages>({
       decrement: 'Азайту',
       increment: 'Арттыру'
     },
+    listbox: {
+      noData: 'Деректер жоқ',
+      noMatch: 'Сәйкес келетін деректер жоқ',
+      search: 'Іздеу…'
+    },
     modal: {
       close: 'Жабу'
     },
@@ -110,7 +125,15 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'Кодты алмасу буферіне көшіру'
+      },
+      prompt: {
+        copy: 'Сұранысты көшіру',
+        openIn: '{name} ішінде ашу'
       }
+    },
+    sidebar: {
+      close: 'Жабу',
+      toggle: 'Ауыстыру'
     },
     selectMenu: {
       create: '"{label}" жасау',

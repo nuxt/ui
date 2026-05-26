@@ -711,6 +711,41 @@ exports[`CheckboxGroup > renders with neutral variant card correctly 1`] = `
 </div>"
 `;
 
+exports[`CheckboxGroup > renders with neutral variant card highlight correctly 1`] = `
+"<div id="v-0" data-slot="root" class="relative" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;">
+  <fieldset data-slot="fieldset" class="flex gap-x-2 flex-col gap-y-1">
+    <!--v-if--><label data-slot="root" class="relative flex items-start border border-muted rounded-lg flex-row p-3.5 has-data-[state=checked]:border-inverted">
+      <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-inverted size-4 ring-inverted" id="v-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-reka-collection-item="" tabindex="-1" data-orientation="vertical"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-inverted"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-full"></svg></span>
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+        <p for="v-0:1" data-slot="label" class="block font-medium text-default">Option 1</p>
+        <!--v-if-->
+      </div>
+    </label><label data-slot="root" class="relative flex items-start border border-muted rounded-lg flex-row p-3.5 has-data-[state=checked]:border-inverted">
+      <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-inverted size-4 ring-inverted" id="v-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="" tabindex="-1" data-orientation="vertical">
+          <!---->
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+        <p for="v-0:2" data-slot="label" class="block font-medium text-default">Option 2</p>
+        <!--v-if-->
+      </div>
+    </label><label data-slot="root" class="relative flex items-start border border-muted rounded-lg flex-row p-3.5 has-data-[state=checked]:border-inverted">
+      <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-inverted size-4 ring-inverted" id="v-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="" tabindex="-1" data-orientation="vertical">
+          <!---->
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+        <p for="v-0:3" data-slot="label" class="block font-medium text-default">Option 3</p>
+        <!--v-if-->
+      </div>
+    </label>
+  </fieldset>
+  <!--v-if-->
+</div>"
+`;
+
 exports[`CheckboxGroup > renders with neutral variant list correctly 1`] = `
 "<div id="v-0" data-slot="root" class="relative" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;">
   <fieldset data-slot="fieldset" class="flex gap-x-2 flex-col gap-y-1">
@@ -746,6 +781,41 @@ exports[`CheckboxGroup > renders with neutral variant list correctly 1`] = `
 </div>"
 `;
 
+exports[`CheckboxGroup > renders with neutral variant list highlight correctly 1`] = `
+"<div id="v-0" data-slot="root" class="relative" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;">
+  <fieldset data-slot="fieldset" class="flex gap-x-2 flex-col gap-y-1">
+    <!--v-if-->
+    <div data-slot="root" class="relative flex items-start flex-row">
+      <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-inverted size-4 ring-inverted" id="v-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-reka-collection-item="" tabindex="-1" data-orientation="vertical"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-inverted"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-full"></svg></span>
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class="w-full ms-2 text-sm"><label for="v-0:1" data-slot="label" class="block font-medium text-default">Option 1</label>
+        <!--v-if-->
+      </div>
+    </div>
+    <div data-slot="root" class="relative flex items-start flex-row">
+      <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-inverted size-4 ring-inverted" id="v-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="" tabindex="-1" data-orientation="vertical">
+          <!---->
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class="w-full ms-2 text-sm"><label for="v-0:2" data-slot="label" class="block font-medium text-default">Option 2</label>
+        <!--v-if-->
+      </div>
+    </div>
+    <div data-slot="root" class="relative flex items-start flex-row">
+      <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-inverted size-4 ring-inverted" id="v-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="" tabindex="-1" data-orientation="vertical">
+          <!---->
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class="w-full ms-2 text-sm"><label for="v-0:3" data-slot="label" class="block font-medium text-default">Option 3</label>
+        <!--v-if-->
+      </div>
+    </div>
+  </fieldset>
+  <!--v-if-->
+</div>"
+`;
+
 exports[`CheckboxGroup > renders with neutral variant table correctly 1`] = `
 "<div id="v-0" data-slot="root" class="relative" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;">
   <fieldset data-slot="fieldset" class="flex flex-col gap-0 -space-y-px">
@@ -768,6 +838,41 @@ exports[`CheckboxGroup > renders with neutral variant table correctly 1`] = `
       </div>
     </label><label data-slot="root" class="relative flex items-start flex-row border border-muted p-3.5 first-of-type:rounded-t-lg last-of-type:rounded-b-lg has-data-[state=checked]:bg-elevated has-data-[state=checked]:border-inverted/50 has-data-[state=checked]:z-[1]">
       <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-inverted size-4" id="v-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="" tabindex="-1" data-orientation="vertical">
+          <!---->
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+        <p for="v-0:3" data-slot="label" class="block font-medium text-default">Option 3</p>
+        <!--v-if-->
+      </div>
+    </label>
+  </fieldset>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`CheckboxGroup > renders with neutral variant table highlight correctly 1`] = `
+"<div id="v-0" data-slot="root" class="relative" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;">
+  <fieldset data-slot="fieldset" class="flex flex-col gap-0 -space-y-px">
+    <!--v-if--><label data-slot="root" class="relative flex items-start flex-row border border-muted p-3.5 first-of-type:rounded-t-lg last-of-type:rounded-b-lg has-data-[state=checked]:bg-elevated has-data-[state=checked]:border-inverted/50 has-data-[state=checked]:z-[1]">
+      <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-inverted size-4 ring-inverted" id="v-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-reka-collection-item="" tabindex="-1" data-orientation="vertical"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-inverted"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-full"></svg></span>
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+        <p for="v-0:1" data-slot="label" class="block font-medium text-default">Option 1</p>
+        <!--v-if-->
+      </div>
+    </label><label data-slot="root" class="relative flex items-start flex-row border border-muted p-3.5 first-of-type:rounded-t-lg last-of-type:rounded-b-lg has-data-[state=checked]:bg-elevated has-data-[state=checked]:border-inverted/50 has-data-[state=checked]:z-[1]">
+      <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-inverted size-4 ring-inverted" id="v-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="" tabindex="-1" data-orientation="vertical">
+          <!---->
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+        <p for="v-0:2" data-slot="label" class="block font-medium text-default">Option 2</p>
+        <!--v-if-->
+      </div>
+    </label><label data-slot="root" class="relative flex items-start flex-row border border-muted p-3.5 first-of-type:rounded-t-lg last-of-type:rounded-b-lg has-data-[state=checked]:bg-elevated has-data-[state=checked]:border-inverted/50 has-data-[state=checked]:z-[1]">
+      <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-inverted size-4 ring-inverted" id="v-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="" tabindex="-1" data-orientation="vertical">
           <!---->
           <!--v-if-->
         </button></div>
@@ -816,6 +921,41 @@ exports[`CheckboxGroup > renders with primary variant card correctly 1`] = `
 </div>"
 `;
 
+exports[`CheckboxGroup > renders with primary variant card highlight correctly 1`] = `
+"<div id="v-0" data-slot="root" class="relative" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;">
+  <fieldset data-slot="fieldset" class="flex gap-x-2 flex-col gap-y-1">
+    <!--v-if--><label data-slot="root" class="relative flex items-start border border-muted rounded-lg flex-row p-3.5 has-data-[state=checked]:border-primary">
+      <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4 ring-primary" id="v-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-reka-collection-item="" tabindex="-1" data-orientation="vertical"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-primary"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-full"></svg></span>
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+        <p for="v-0:1" data-slot="label" class="block font-medium text-default">Option 1</p>
+        <!--v-if-->
+      </div>
+    </label><label data-slot="root" class="relative flex items-start border border-muted rounded-lg flex-row p-3.5 has-data-[state=checked]:border-primary">
+      <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4 ring-primary" id="v-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="" tabindex="-1" data-orientation="vertical">
+          <!---->
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+        <p for="v-0:2" data-slot="label" class="block font-medium text-default">Option 2</p>
+        <!--v-if-->
+      </div>
+    </label><label data-slot="root" class="relative flex items-start border border-muted rounded-lg flex-row p-3.5 has-data-[state=checked]:border-primary">
+      <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4 ring-primary" id="v-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="" tabindex="-1" data-orientation="vertical">
+          <!---->
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+        <p for="v-0:3" data-slot="label" class="block font-medium text-default">Option 3</p>
+        <!--v-if-->
+      </div>
+    </label>
+  </fieldset>
+  <!--v-if-->
+</div>"
+`;
+
 exports[`CheckboxGroup > renders with primary variant list correctly 1`] = `
 "<div id="v-0" data-slot="root" class="relative" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;">
   <fieldset data-slot="fieldset" class="flex gap-x-2 flex-col gap-y-1">
@@ -851,6 +991,41 @@ exports[`CheckboxGroup > renders with primary variant list correctly 1`] = `
 </div>"
 `;
 
+exports[`CheckboxGroup > renders with primary variant list highlight correctly 1`] = `
+"<div id="v-0" data-slot="root" class="relative" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;">
+  <fieldset data-slot="fieldset" class="flex gap-x-2 flex-col gap-y-1">
+    <!--v-if-->
+    <div data-slot="root" class="relative flex items-start flex-row">
+      <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4 ring-primary" id="v-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-reka-collection-item="" tabindex="-1" data-orientation="vertical"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-primary"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-full"></svg></span>
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class="w-full ms-2 text-sm"><label for="v-0:1" data-slot="label" class="block font-medium text-default">Option 1</label>
+        <!--v-if-->
+      </div>
+    </div>
+    <div data-slot="root" class="relative flex items-start flex-row">
+      <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4 ring-primary" id="v-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="" tabindex="-1" data-orientation="vertical">
+          <!---->
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class="w-full ms-2 text-sm"><label for="v-0:2" data-slot="label" class="block font-medium text-default">Option 2</label>
+        <!--v-if-->
+      </div>
+    </div>
+    <div data-slot="root" class="relative flex items-start flex-row">
+      <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4 ring-primary" id="v-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="" tabindex="-1" data-orientation="vertical">
+          <!---->
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class="w-full ms-2 text-sm"><label for="v-0:3" data-slot="label" class="block font-medium text-default">Option 3</label>
+        <!--v-if-->
+      </div>
+    </div>
+  </fieldset>
+  <!--v-if-->
+</div>"
+`;
+
 exports[`CheckboxGroup > renders with primary variant table correctly 1`] = `
 "<div id="v-0" data-slot="root" class="relative" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;">
   <fieldset data-slot="fieldset" class="flex flex-col gap-0 -space-y-px">
@@ -873,6 +1048,41 @@ exports[`CheckboxGroup > renders with primary variant table correctly 1`] = `
       </div>
     </label><label data-slot="root" class="relative flex items-start flex-row border border-muted p-3.5 first-of-type:rounded-t-lg last-of-type:rounded-b-lg has-data-[state=checked]:bg-primary/10 has-data-[state=checked]:border-primary/50 has-data-[state=checked]:z-[1]">
       <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="" tabindex="-1" data-orientation="vertical">
+          <!---->
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+        <p for="v-0:3" data-slot="label" class="block font-medium text-default">Option 3</p>
+        <!--v-if-->
+      </div>
+    </label>
+  </fieldset>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`CheckboxGroup > renders with primary variant table highlight correctly 1`] = `
+"<div id="v-0" data-slot="root" class="relative" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;">
+  <fieldset data-slot="fieldset" class="flex flex-col gap-0 -space-y-px">
+    <!--v-if--><label data-slot="root" class="relative flex items-start flex-row border border-muted p-3.5 first-of-type:rounded-t-lg last-of-type:rounded-b-lg has-data-[state=checked]:bg-primary/10 has-data-[state=checked]:border-primary/50 has-data-[state=checked]:z-[1]">
+      <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4 ring-primary" id="v-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-reka-collection-item="" tabindex="-1" data-orientation="vertical"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-primary"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-full"></svg></span>
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+        <p for="v-0:1" data-slot="label" class="block font-medium text-default">Option 1</p>
+        <!--v-if-->
+      </div>
+    </label><label data-slot="root" class="relative flex items-start flex-row border border-muted p-3.5 first-of-type:rounded-t-lg last-of-type:rounded-b-lg has-data-[state=checked]:bg-primary/10 has-data-[state=checked]:border-primary/50 has-data-[state=checked]:z-[1]">
+      <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4 ring-primary" id="v-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="" tabindex="-1" data-orientation="vertical">
+          <!---->
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class="w-full ms-2 text-sm">
+        <p for="v-0:2" data-slot="label" class="block font-medium text-default">Option 2</p>
+        <!--v-if-->
+      </div>
+    </label><label data-slot="root" class="relative flex items-start flex-row border border-muted p-3.5 first-of-type:rounded-t-lg last-of-type:rounded-b-lg has-data-[state=checked]:bg-primary/10 has-data-[state=checked]:border-primary/50 has-data-[state=checked]:z-[1]">
+      <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4 ring-primary" id="v-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="" tabindex="-1" data-orientation="vertical">
           <!---->
           <!--v-if-->
         </button></div>
@@ -1138,8 +1348,7 @@ exports[`CheckboxGroup > renders with valueKey correctly 1`] = `
   <fieldset data-slot="fieldset" class="flex gap-x-2 flex-col gap-y-1">
     <!--v-if-->
     <div data-slot="root" class="relative flex items-start flex-row">
-      <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0:Option 1" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="" tabindex="-1" data-orientation="vertical">
-          <!---->
+      <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0:Option 1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-reka-collection-item="" tabindex="-1" data-orientation="vertical"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-primary"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-full"></svg></span>
           <!--v-if-->
         </button></div>
       <div data-slot="wrapper" class="w-full ms-2 text-sm"><label for="v-0:Option 1" data-slot="label" class="block font-medium text-default">Option 1</label>

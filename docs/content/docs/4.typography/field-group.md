@@ -1,8 +1,8 @@
 ---
-title: FieldGroup
+title: ProseFieldGroup
 description: 'Group related fields together for comprehensive API documentation.'
-framework: nuxt
 category: components
+navigation.title: FieldGroup
 links:
   - label: GitHub
     icon: i-simple-icons-github
@@ -13,7 +13,7 @@ links:
 
 Group fields together in a list.
 
-::code-preview
+:::code-preview
 
 ::field-group{class="my-0"}
 
@@ -57,7 +57,7 @@ Group fields together in a list.
 ::
 ```
 
-::
+:::
 
 ## API
 

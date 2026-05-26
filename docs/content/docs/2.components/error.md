@@ -10,10 +10,10 @@ links:
 
 ## Usage
 
-The Error component works together with the [Header](/docs/components/header) component to create a full-height layout that extends to the viewport's available height.
+The Error component renders a `<main>` element that works together with the [Header](/docs/components/header) component to create a full-height layout that extends to the viewport's available height.
 
 ::tip{to="/docs/getting-started/theme/css-variables#header"}
-The Error component uses the `--ui-header-height` CSS variable to position itself correctly below the [Header](/docs/components/header).
+The Error component uses the `--ui-header-height` CSS variable to position itself correctly below the `Header`.
 ::
 
 ### Error
@@ -36,6 +36,55 @@ props:
     message: 'The page you are looking for does not exist.'
   class: '!min-h-96'
 ---
+::
+
+### Icon :badge{label="4.8+" class="align-text-top"}
+
+Use the `icon` prop to display an icon above the status code.
+
+::component-code
+---
+hide:
+  - class
+prettier: true
+ignore:
+  - error.statusCode
+  - error.statusMessage
+  - error.message
+props:
+  icon: 'i-lucide-file-x'
+  error:
+    statusCode: 404
+    statusMessage: 'Page not found'
+    message: 'The page you are looking for does not exist.'
+  class: '!min-h-96'
+---
+::
+
+Use the `#leading` slot to display a custom element, such as a logo.
+
+::component-code
+---
+hide:
+  - class
+prettier: true
+ignore:
+  - error.statusCode
+  - error.statusMessage
+  - error.message
+props:
+  error:
+    statusCode: 404
+    statusMessage: 'Page not found'
+    message: 'The page you are looking for does not exist.'
+  class: '!min-h-96'
+slots:
+  leading: |
+
+    <img src="https://github.com/nuxt.png" alt="Logo" class="size-10 rounded-full">
+---
+#leading
+:img{src="https://github.com/nuxt.png" alt="Logo" class="size-10 rounded-full"}
 ::
 
 ### Clear

@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/avatar'
 import type { ChipProps, IconProps } from '../types'
@@ -24,6 +25,10 @@ export interface AvatarProps extends /** @vue-ignore */ Omit<ImgHTMLAttributes, 
    * @defaultValue 'md'
    */
   size?: Avatar['variants']['size']
+  /**
+   * @defaultValue 'neutral'
+   */
+  color?: Avatar['variants']['color']
   chip?: boolean | ChipProps
   class?: any
   style?: any
@@ -31,7 +36,7 @@ export interface AvatarProps extends /** @vue-ignore */ Omit<ImgHTMLAttributes, 
 }
 
 export interface AvatarSlots {
-  default(props?: {}): any
+  default?(props?: {}): VNode[]
 }
 </script>
 
@@ -41,6 +46,7 @@ import { Primitive, Slot } from 'reka-ui'
 import { defu } from 'defu'
 import { useAppConfig } from '#imports'
 import ImageComponent from '#build/ui-image-component'
+import { useComponentProps } from '../composables/useComponentProps'
 import { useAvatarGroup } from '../composables/useAvatarGroup'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
@@ -48,8 +54,11 @@ import UChip from './Chip.vue'
 
 defineOptions({ inheritAttrs: false })
 
-const props = defineProps<AvatarProps>()
+const _props = defineProps<AvatarProps>()
 
+const props = useComponentProps('avatar', _props)
+
+// eslint-disable-next-line vue/no-dupe-keys
 const as = computed(() => {
   if (typeof props.as === 'string' || typeof props.as?.render === 'function') {
     return { root: props.as }
@@ -61,24 +70,26 @@ const as = computed(() => {
 const fallback = computed(() => props.text || (props.alt || '').split(' ').map(word => word.charAt(0)).join('').substring(0, 2))
 
 const appConfig = useAppConfig() as Avatar['AppConfig']
-const { size } = useAvatarGroup(props)
+
+const { size, color } = useAvatarGroup(_props)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.avatar || {}) })({
-  size: size.value
+  size: size.value ?? props.size,
+  color: color.value ?? props.color
 }))
 
-const sizePx = computed(() => ({
-  '3xs': 16,
-  '2xs': 20,
-  'xs': 24,
-  'sm': 28,
-  'md': 32,
-  'lg': 36,
-  'xl': 40,
-  '2xl': 44,
-  '3xl': 48
-})[props.size || 'md'])
+const rootClass = computed(() => ui.value.root({ class: [props.ui?.root, props.class] }))
+
+const sizePx = computed(() => {
+  const sizeClass = rootClass.value.split(' ').find(c => /^size-\d+$/.test(c))
+  if (sizeClass) {
+    const num = Number.parseFloat(sizeClass.split('-')[1] ?? '')
+    if (!Number.isNaN(num)) return num * 4
+  }
+
+  return null
+})
 
 const error = ref(false)
 
@@ -99,14 +110,14 @@ function onError() {
     :as="as.root"
     v-bind="props.chip ? (typeof props.chip === 'object' ? { inset: true, ...props.chip } : { inset: true }) : {}"
     data-slot="root"
-    :class="ui.root({ class: [props.ui?.root, props.class] })"
+    :class="rootClass"
     :style="props.style"
   >
     <component
       :is="as.img || ImageComponent"
-      v-if="src && !error"
-      :src="src"
-      :alt="alt"
+      v-if="props.src && !error"
+      :src="props.src"
+      :alt="props.alt"
       :width="sizePx"
       :height="sizePx"
       v-bind="$attrs"
@@ -117,7 +128,7 @@ function onError() {
 
     <Slot v-else v-bind="$attrs">
       <slot>
-        <UIcon v-if="icon" :name="icon" data-slot="icon" :class="ui.icon({ class: props.ui?.icon })" />
+        <UIcon v-if="props.icon" :name="props.icon" data-slot="icon" :class="ui.icon({ class: props.ui?.icon })" />
         <span v-else data-slot="fallback" :class="ui.fallback({ class: props.ui?.fallback })">{{ fallback || '&nbsp;' }}</span>
       </slot>
     </Slot>

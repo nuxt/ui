@@ -1,5 +1,6 @@
 <script lang="ts">
 import type { ToastProviderProps } from 'reka-ui'
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/toaster'
 import type { ComponentConfig } from '../types/tv'
@@ -37,7 +38,7 @@ export interface ToasterProps extends Omit<ToastProviderProps, 'swipeDirection'>
 }
 
 export interface ToasterSlots {
-  default(props?: {}): any
+  default?(props?: {}): VNode[]
 }
 
 export default {
@@ -47,16 +48,18 @@ export default {
 
 <script setup lang="ts">
 import { ref, computed, toRef, provide } from 'vue'
-import { ToastProvider, ToastViewport, ToastPortal, useForwardProps } from 'reka-ui'
+import { ToastProvider, ToastViewport, ToastPortal } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
+import { useComponentProps } from '../composables/useComponentProps'
+import { useForwardProps } from '../composables/useForwardProps'
 import { useToast, toastMaxInjectionKey } from '../composables/useToast'
 import { usePortal } from '../composables/usePortal'
 import { omit } from '../utils'
 import { tv } from '../utils/tv'
 import UToast from './Toast.vue'
 
-const props = withDefaults(defineProps<ToasterProps>(), {
+const _props = withDefaults(defineProps<ToasterProps>(), {
   expand: true,
   portal: true,
   duration: 5000,
@@ -64,6 +67,8 @@ const props = withDefaults(defineProps<ToasterProps>(), {
   max: 5
 })
 defineSlots<ToasterSlots>()
+
+const props = useComponentProps('toaster', _props)
 
 const { toasts, remove } = useToast()
 const appConfig = useAppConfig() as Toaster['AppConfig']
@@ -89,6 +94,7 @@ const swipeDirection = computed(() => {
   return 'right'
 })
 
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.toaster || {}) })({
   position: props.position,
   swipeDirection: swipeDirection.value
@@ -123,11 +129,12 @@ function getOffset(index: number) {
       v-for="(toast, index) of toasts"
       :key="toast.id"
       ref="refs"
-      :progress="progress"
-      v-bind="omit(toast, ['id', 'close'])"
+      :progress="props.progress"
+      v-bind="omit(toast, ['id', 'close', '_duplicate', '_updated'])"
       :close="(toast.close as boolean)"
       :data-expanded="expanded"
       :data-front="!expanded && index === toasts.length - 1"
+      :data-pulsing="toast._duplicate ? (toast._duplicate % 2 === 0 ? 'even' : 'odd') : undefined"
       :style="{
         '--index': (index - toasts.length) + toasts.length,
         '--before': toasts.length - 1 - index,
@@ -149,8 +156,8 @@ function getOffset(index: number) {
         :class="ui.viewport({ class: [props.ui?.viewport, props.class] })"
         :style="{
           '--scale-factor': '0.05',
-          '--translate-factor': position?.startsWith('top') ? '1px' : '-1px',
-          '--gap': position?.startsWith('top') ? '16px' : '-16px',
+          '--translate-factor': props.position?.startsWith('top') ? '1px' : '-1px',
+          '--gap': props.position?.startsWith('top') ? '16px' : '-16px',
           '--front-height': `${frontHeight}px`,
           '--height': `${height}px`
         }"

@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { Ref } from 'vue'
+import type { Ref, VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/button'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
@@ -36,17 +36,18 @@ export interface ButtonProps extends UseComponentIconsProps, Omit<LinkProps, 'ra
 }
 
 export interface ButtonSlots {
-  leading(props: { ui: Button['ui'] }): any
-  default(props: { ui: Button['ui'] }): any
-  trailing(props: { ui: Button['ui'] }): any
+  leading?(props: { ui: Button['ui'] }): VNode[]
+  default?(props: { ui: Button['ui'] }): VNode[]
+  trailing?(props: { ui: Button['ui'] }): VNode[]
 }
 </script>
 
 <script setup lang="ts">
 import { computed, ref, inject } from 'vue'
 import { defu } from 'defu'
-import { useForwardProps } from 'reka-ui'
 import { useAppConfig } from '#imports'
+import { useComponentProps } from '../composables/useComponentProps'
+import { useForwardProps } from '../composables/useForwardProps'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFieldGroup } from '../composables/useFieldGroup'
 import { formLoadingInjectionKey } from '../composables/useFormField'
@@ -58,11 +59,13 @@ import UAvatar from './Avatar.vue'
 import ULink from './Link.vue'
 import ULinkBase from './LinkBase.vue'
 
-const props = defineProps<ButtonProps>()
+const _props = defineProps<ButtonProps>()
 const slots = defineSlots<ButtonSlots>()
 
+const props = useComponentProps('button', _props)
+
 const appConfig = useAppConfig() as Button['AppConfig']
-const { orientation, size: buttonSize } = useFieldGroup<ButtonProps>(props)
+const { orientation, size: buttonSize } = useFieldGroup<ButtonProps>(_props)
 
 const linkProps = useForwardProps(pickLinkProps(props))
 
@@ -87,6 +90,7 @@ const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponen
   computed(() => ({ ...props, loading: isLoading.value }))
 )
 
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({
   extend: tv(theme),
   ...defu({
@@ -104,7 +108,7 @@ const ui = computed(() => tv({
 })({
   color: props.color,
   variant: props.variant,
-  size: buttonSize.value,
+  size: buttonSize.value ?? props.size,
   loading: isLoading.value,
   block: props.block,
   square: props.square || (!slots.default && !props.label),
@@ -117,8 +121,8 @@ const ui = computed(() => tv({
 <template>
   <ULink
     v-slot="{ active, ...slotProps }"
-    :type="type"
-    :disabled="disabled || isLoading"
+    :type="props.type"
+    :disabled="props.disabled || isLoading"
     v-bind="omit(linkProps, ['type', 'disabled', 'onClick'])"
     custom
   >
@@ -128,19 +132,19 @@ const ui = computed(() => tv({
       :class="ui.base({
         class: [props.ui?.base, props.class],
         active,
-        ...(active && activeVariant ? { variant: activeVariant } : {}),
-        ...(active && activeColor ? { color: activeColor } : {})
+        ...(active && props.activeVariant ? { variant: props.activeVariant } : {}),
+        ...(active && props.activeColor ? { color: props.activeColor } : {})
       })"
       @click="onClickWrapper"
     >
       <slot name="leading" :ui="ui">
         <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" data-slot="leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon, active })" />
-        <UAvatar v-else-if="!!avatar" :size="((props.ui?.leadingAvatarSize || ui.leadingAvatarSize()) as AvatarProps['size'])" v-bind="avatar" data-slot="leadingAvatar" :class="ui.leadingAvatar({ class: props.ui?.leadingAvatar, active })" />
+        <UAvatar v-else-if="!!props.avatar" :size="((props.ui?.leadingAvatarSize || ui.leadingAvatarSize()) as AvatarProps['size'])" v-bind="props.avatar" data-slot="leadingAvatar" :class="ui.leadingAvatar({ class: props.ui?.leadingAvatar, active })" />
       </slot>
 
       <slot :ui="ui">
-        <span v-if="label !== undefined && label !== null" data-slot="label" :class="ui.label({ class: props.ui?.label, active })">
-          {{ label }}
+        <span v-if="props.label !== undefined && props.label !== null" data-slot="label" :class="ui.label({ class: props.ui?.label, active })">
+          {{ props.label }}
         </span>
       </slot>
 

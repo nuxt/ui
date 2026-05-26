@@ -1,9 +1,11 @@
 <script lang="ts">
 import type { CalendarRootProps, CalendarRootEmits, RangeCalendarRootProps, RangeCalendarRootEmits, DateRange, CalendarCellTriggerProps } from 'reka-ui'
+import { getWeekNumber } from 'reka-ui/date'
+import type { VNode } from 'vue'
 import type { DateValue } from '@internationalized/date'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/calendar'
-import type { ButtonProps, IconProps } from '../types'
+import type { ButtonProps, IconProps, LinkPropsKeys } from '../types'
 import type { ComponentConfig } from '../types/tv'
 
 type Calendar = ComponentConfig<typeof theme, AppConfig, 'calendar'>
@@ -38,7 +40,7 @@ export interface CalendarProps<R extends boolean = false, M extends boolean = fa
    * Configure the next year button.
    * `{ color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
    */
-  nextYear?: ButtonProps
+  nextYear?: Omit<ButtonProps, LinkPropsKeys>
   /**
    * The icon to use for the next month control.
    * @defaultValue appConfig.ui.icons.chevronRight
@@ -49,7 +51,7 @@ export interface CalendarProps<R extends boolean = false, M extends boolean = fa
    * Configure the next month button.
    * `{ color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
    */
-  nextMonth?: ButtonProps
+  nextMonth?: Omit<ButtonProps, LinkPropsKeys>
   /**
    * The icon to use for the previous year control.
    * @defaultValue appConfig.ui.icons.chevronDoubleLeft
@@ -60,7 +62,7 @@ export interface CalendarProps<R extends boolean = false, M extends boolean = fa
    * Configure the prev year button.
    * `{ color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
    */
-  prevYear?: ButtonProps
+  prevYear?: Omit<ButtonProps, LinkPropsKeys>
   /**
    * The icon to use for the previous month control.
    * @defaultValue appConfig.ui.icons.chevronLeft
@@ -71,7 +73,7 @@ export interface CalendarProps<R extends boolean = false, M extends boolean = fa
    * Configure the prev month button.
    * `{ color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
    */
-  prevMonth?: ButtonProps
+  prevMonth?: Omit<ButtonProps, LinkPropsKeys>
   /**
    * @defaultValue 'primary'
    */
@@ -94,53 +96,65 @@ export interface CalendarProps<R extends boolean = false, M extends boolean = fa
   yearControls?: boolean
   defaultValue?: CalendarDefaultValue<R, M>
   modelValue?: CalendarModelValue<R, M>
+  weekNumbers?: boolean
   class?: any
   ui?: Calendar['slots']
 }
 
-export interface CalendarEmits<R extends boolean, M extends boolean> extends Omit<CalendarRootEmits & RangeCalendarRootEmits, 'update:modelValue'> {
-  'update:modelValue': [date: CalendarModelValue<R, M>]
+export interface CalendarEmits<R extends boolean = false, M extends boolean = false> extends Omit<CalendarRootEmits & RangeCalendarRootEmits, 'update:modelValue'> {
+  'update:modelValue': [value: CalendarModelValue<R, M>]
 }
 
 export interface CalendarSlots {
-  'heading': (props: { value: string }) => any
-  'day': (props: Pick<CalendarCellTriggerProps, 'day'>) => any
-  'week-day': (props: { day: string }) => any
+  'heading'?: (props: { value: string }) => VNode[]
+  'day'?: (props: Pick<CalendarCellTriggerProps, 'day'>) => VNode[]
+  'week-day'?: (props: { day: string }) => VNode[]
 }
 </script>
 
 <script setup lang="ts" generic="R extends boolean, M extends boolean">
 import { computed } from 'vue'
-import { useForwardPropsEmits } from 'reka-ui'
+import { } from 'reka-ui'
+import { useForwardProps } from '../composables/useForwardProps'
 import { Calendar as SingleCalendar, RangeCalendar } from 'reka-ui/namespaced'
 import { reactiveOmit } from '@vueuse/core'
 import { useAppConfig } from '#imports'
+import { useComponentProps } from '../composables/useComponentProps'
 import { useLocale } from '../composables/useLocale'
 import { tv } from '../utils/tv'
 import UButton from './Button.vue'
 
-const props = withDefaults(defineProps<CalendarProps<R, M>>(), {
+const _props = withDefaults(defineProps<CalendarProps<R, M>>(), {
   fixedWeeks: true,
   monthControls: true,
   yearControls: true
 })
 const emits = defineEmits<CalendarEmits<R, M>>()
+
 defineSlots<CalendarSlots>()
 
-const { dir, t } = useLocale()
+const props = useComponentProps<CalendarProps<R, M>>('calendar', _props)
+
+const { dir, t, locale } = useLocale()
 const appConfig = useAppConfig() as Calendar['AppConfig']
 
-const rootProps = useForwardPropsEmits(reactiveOmit(props, 'range', 'modelValue', 'defaultValue', 'color', 'variant', 'size', 'monthControls', 'yearControls', 'class', 'ui'), emits)
+const rootProps = useForwardProps(reactiveOmit(props, 'range', 'modelValue', 'defaultValue', 'color', 'variant', 'size', 'monthControls', 'yearControls', 'class', 'ui'), emits)
 
+// eslint-disable-next-line vue/no-dupe-keys
 const nextYearIcon = computed(() => props.nextYearIcon || (dir.value === 'rtl' ? appConfig.ui.icons.chevronDoubleLeft : appConfig.ui.icons.chevronDoubleRight))
+// eslint-disable-next-line vue/no-dupe-keys
 const nextMonthIcon = computed(() => props.nextMonthIcon || (dir.value === 'rtl' ? appConfig.ui.icons.chevronLeft : appConfig.ui.icons.chevronRight))
+// eslint-disable-next-line vue/no-dupe-keys
 const prevYearIcon = computed(() => props.prevYearIcon || (dir.value === 'rtl' ? appConfig.ui.icons.chevronDoubleRight : appConfig.ui.icons.chevronDoubleLeft))
+// eslint-disable-next-line vue/no-dupe-keys
 const prevMonthIcon = computed(() => props.prevMonthIcon || (dir.value === 'rtl' ? appConfig.ui.icons.chevronRight : appConfig.ui.icons.chevronLeft))
 
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.calendar || {}) })({
   color: props.color,
+  size: props.size,
   variant: props.variant,
-  size: props.size
+  weekNumbers: props.weekNumbers
 }))
 
 function paginateYear(date: DateValue, sign: -1 | 1) {
@@ -158,8 +172,8 @@ const Calendar = computed(() => props.range ? RangeCalendar : SingleCalendar)
   <Calendar.Root
     v-slot="{ weekDays, grid }"
     v-bind="rootProps"
-    :model-value="(modelValue as DateValue | DateValue[])"
-    :default-value="(defaultValue as DateValue)"
+    :model-value="(props.modelValue as DateValue | DateValue[])"
+    :default-value="(props.defaultValue as DateValue)"
     data-slot="root"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
   >
@@ -210,6 +224,14 @@ const Calendar = computed(() => props.range ? RangeCalendar : SingleCalendar)
             data-slot="gridRow"
             :class="ui.gridRow({ class: props.ui?.gridRow })"
           >
+            <td
+              v-if="props.weekNumbers && weekDates[0]"
+              role="gridcell"
+              data-slot="cellWeek"
+              :class="ui.cellWeek({ class: props.ui?.cellWeek })"
+            >
+              {{ getWeekNumber(weekDates[0], locale.code) }}
+            </td>
             <Calendar.Cell
               v-for="weekDate in weekDates"
               :key="weekDate.toString()"

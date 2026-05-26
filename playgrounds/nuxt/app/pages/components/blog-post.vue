@@ -30,7 +30,9 @@ const orientation = ref('vertical' as keyof typeof theme.variants.orientation)
         description: 'benjamincanac',
         avatar: {
           src: 'https://github.com/benjamincanac.png'
-        }
+        },
+        to: 'https://github.com/benjamincanac',
+        target: '_blank'
       }]"
       :orientation="orientation"
       v-bind="props"

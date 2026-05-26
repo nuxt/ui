@@ -5,10 +5,6 @@ export default defineAppConfig({
     max: 5,
     expand: true
   },
-  theme: {
-    radius: 0.25,
-    blackAsPrimary: false
-  },
   ui: {
     colors: {
       primary: 'green',

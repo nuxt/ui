@@ -1,8 +1,8 @@
 ---
-title: CodeCollapse
+title: ProseCodeCollapse
 description: 'Make long code blocks collapsible to save space and improve readability.'
-framework: nuxt
 category: components
+navigation.title: CodeCollapse
 links:
   - label: GitHub
     icon: i-simple-icons-github
@@ -17,7 +17,7 @@ Wrap your code-block with a `code-collapse` component to display a collapsible c
 
 ::code-collapse{class="[&>div]:my-0"}
 
-```css [main.css]
+```css [app/assets/css/main.css]
 @import "tailwindcss";
 @import "@nuxt/ui";
 
@@ -47,7 +47,7 @@ Wrap your code-block with a `code-collapse` component to display a collapsible c
 ````mdc
 ::code-collapse
 
-```css [main.css]
+```css [app/assets/css/main.css]
 @import "tailwindcss";
 @import "@nuxt/ui";
 

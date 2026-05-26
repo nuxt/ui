@@ -1,9 +1,10 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import type { DropdownMenuRootProps, DropdownMenuRootEmits, DropdownMenuContentProps, DropdownMenuContentEmits, DropdownMenuArrowProps } from 'reka-ui'
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/dropdown-menu'
-import type { AvatarProps, IconProps, KbdProps, LinkProps } from '../types'
+import type { AvatarProps, IconProps, InputProps, KbdProps, LinkProps } from '../types'
 import type { ArrayOrNested, DynamicSlots, GetItemKeys, MergeTypes, NestedItem, EmitsToProps } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
@@ -31,6 +32,9 @@ export interface DropdownMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'cust
   checked?: boolean
   open?: boolean
   defaultOpen?: boolean
+  filter?: boolean | Omit<InputProps, 'modelValue' | 'defaultValue'>
+  filterFields?: string[]
+  ignoreFilter?: boolean
   children?: ArrayOrNested<DropdownMenuItem>
   onSelect?: (e: Event) => void
   onUpdateChecked?: (checked: boolean) => void
@@ -71,6 +75,7 @@ export interface DropdownMenuProps<T extends ArrayOrNested<DropdownMenuItem> = A
   content?: Omit<DropdownMenuContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<DropdownMenuContentEmits>>
   /**
    * Display an arrow alongside the menu.
+   * `{ rounded: true }`{lang="ts-type"}
    * @defaultValue false
    */
   arrow?: boolean | Omit<DropdownMenuArrowProps, 'as' | 'asChild'>
@@ -89,6 +94,23 @@ export interface DropdownMenuProps<T extends ArrayOrNested<DropdownMenuItem> = A
    * @defaultValue 'description'
    */
   descriptionKey?: GetItemKeys<T>
+  /**
+   * Whether to display a filter input or not.
+   * Can be an object to pass additional props to the input.
+   * `{ placeholder: 'Search...', variant: 'none' }`{lang="ts-type"}
+   * @defaultValue false
+   */
+  filter?: boolean | Omit<InputProps, 'modelValue' | 'defaultValue'>
+  /**
+   * The fields to filter by.
+   * @defaultValue [labelKey]
+   */
+  filterFields?: string[]
+  /**
+   * When `true`, items will not be filtered which is useful for custom filtering.
+   * @defaultValue false
+   */
+  ignoreFilter?: boolean
   disabled?: boolean
   class?: any
   ui?: DropdownMenu['slots']
@@ -96,53 +118,63 @@ export interface DropdownMenuProps<T extends ArrayOrNested<DropdownMenuItem> = A
 
 export interface DropdownMenuEmits extends DropdownMenuRootEmits {}
 
-type SlotProps<T extends DropdownMenuItem> = (props: { item: T, active?: boolean, index: number, ui: DropdownMenu['ui'] }) => any
+type SlotProps<T extends DropdownMenuItem> = (props: { item: T, active: boolean, index: number, ui: DropdownMenu['ui'] }) => VNode[]
 
 export type DropdownMenuSlots<
   A extends ArrayOrNested<DropdownMenuItem> = ArrayOrNested<DropdownMenuItem>,
   T extends NestedItem<A> = NestedItem<A>
 > = {
-  'default'(props: { open: boolean }): any
-  'item': SlotProps<T>
-  'item-leading': SlotProps<T>
-  'item-label': (props: { item: T, active?: boolean, index: number }) => any
-  'item-description': (props: { item: T, active?: boolean, index: number }) => any
-  'item-trailing': SlotProps<T>
-  'content-top': (props?: {}) => any
-  'content-bottom': (props?: {}) => any
+  'default'?(props: { open: boolean }): VNode[]
+  'item'?: SlotProps<T>
+  'item-leading'?: SlotProps<T>
+  'item-label'?: (props: { item: T, active: boolean, index: number }) => VNode[]
+  'item-description'?: (props: { item: T, active: boolean, index: number }) => VNode[]
+  'item-trailing'?: SlotProps<T>
+  'empty'?(props: { searchTerm: string }): VNode[]
+  'content-top'?: (props: { sub: boolean }) => VNode[]
+  'content-bottom'?: (props: { sub: boolean }) => VNode[]
 }
-& DynamicSlots<MergeTypes<T>, 'label' | 'description', { active?: boolean, index: number }>
-& DynamicSlots<MergeTypes<T>, 'leading' | 'trailing', { active?: boolean, index: number, ui: DropdownMenu['ui'] }>
+& DynamicSlots<MergeTypes<T>, 'label' | 'description', { active: boolean, index: number }>
+& DynamicSlots<MergeTypes<T>, 'leading' | 'trailing', { active: boolean, index: number, ui: DropdownMenu['ui'] }>
 
 </script>
 
 <script setup lang="ts" generic="T extends ArrayOrNested<DropdownMenuItem>">
 import { computed, toRef } from 'vue'
 import { defu } from 'defu'
-import { DropdownMenuRoot, DropdownMenuTrigger, DropdownMenuArrow, useForwardPropsEmits } from 'reka-ui'
+import { DropdownMenuRoot, DropdownMenuTrigger, DropdownMenuArrow } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
+import { useComponentProps } from '../composables/useComponentProps'
+import { useForwardProps } from '../composables/useForwardProps'
 import { omit } from '../utils'
 import { tv } from '../utils/tv'
 import UDropdownMenuContent from './DropdownMenuContent.vue'
 
-const props = withDefaults(defineProps<DropdownMenuProps<T>>(), {
+const _props = withDefaults(defineProps<DropdownMenuProps<T>>(), {
   portal: true,
   modal: true,
   externalIcon: true,
   labelKey: 'label',
-  descriptionKey: 'description'
+  descriptionKey: 'description',
+  filter: false,
+  ignoreFilter: false
 })
 const emits = defineEmits<DropdownMenuEmits>()
 const slots = defineSlots<DropdownMenuSlots<T>>()
 
+const searchTerm = defineModel<string>('searchTerm', { default: '' })
+
+const props = useComponentProps<DropdownMenuProps<T>>('dropdownMenu', _props)
+
 const appConfig = useAppConfig() as DropdownMenu['AppConfig']
 
-const rootProps = useForwardPropsEmits(reactivePick(props, 'defaultOpen', 'open', 'modal'), emits)
+const rootProps = useForwardProps(reactivePick(props, 'defaultOpen', 'open', 'modal'), emits)
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8 }) as DropdownMenuContentProps)
-const arrowProps = toRef(() => props.arrow as DropdownMenuArrowProps)
+const arrowProps = toRef(() => defu(props.arrow, { rounded: true }) as DropdownMenuArrowProps)
 const getProxySlots = () => omit(slots, ['default'])
 
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dropdownMenu || {}) })({
   size: props.size
 }))
@@ -150,28 +182,33 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dropdownMenu
 
 <template>
   <DropdownMenuRoot v-slot="{ open }" v-bind="rootProps">
-    <DropdownMenuTrigger v-if="!!slots.default" as-child :class="props.class" :disabled="disabled">
+    <DropdownMenuTrigger v-if="!!slots.default" as-child :class="props.class" :disabled="props.disabled">
       <slot :open="open" />
     </DropdownMenuTrigger>
 
     <UDropdownMenuContent
+      v-model:search-term="searchTerm"
       :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })"
       :ui="ui"
       :ui-override="props.ui"
       v-bind="contentProps"
-      :items="items"
-      :portal="portal"
-      :label-key="(labelKey as keyof NestedItem<T>)"
-      :description-key="(descriptionKey as keyof NestedItem<T>)"
-      :checked-icon="checkedIcon"
-      :loading-icon="loadingIcon"
-      :external-icon="externalIcon"
+      :items="props.items"
+      :portal="props.portal"
+      :label-key="(props.labelKey as string & keyof NestedItem<T>)"
+      :description-key="(props.descriptionKey as string & keyof NestedItem<T>)"
+      :checked-icon="props.checkedIcon"
+      :loading-icon="props.loadingIcon"
+      :external-icon="props.externalIcon"
+      :size="props.size"
+      :filter="props.filter"
+      :filter-fields="props.filterFields"
+      :ignore-filter="props.ignoreFilter"
     >
       <template v-for="(_, name) in getProxySlots()" #[name]="slotData">
         <slot :name="(name as keyof DropdownMenuSlots<T>)" v-bind="slotData" />
       </template>
 
-      <DropdownMenuArrow v-if="!!arrow" v-bind="arrowProps" data-slot="arrow" :class="ui.arrow({ class: props.ui?.arrow })" />
+      <DropdownMenuArrow v-if="!!props.arrow" v-bind="arrowProps" data-slot="arrow" :class="ui.arrow({ class: props.ui?.arrow })" />
     </UDropdownMenuContent>
   </DropdownMenuRoot>
 </template>

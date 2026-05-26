@@ -1,8 +1,8 @@
 ---
-title: Collapsible
+title: ProseCollapsible
 description: 'Toggle content visibility with smooth expand and collapse animations.'
-framework: nuxt
 category: components
+navigation.title: Collapsible
 links:
   - label: GitHub
     icon: i-simple-icons-github

@@ -1,7 +1,9 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/blog-post'
 import type { BadgeProps, LinkProps, UserProps } from '../types'
+import type { ImgHTMLAttributes } from '../types/html'
 import type { ComponentConfig } from '../types/tv'
 
 type BlogPost = ComponentConfig<typeof theme, AppConfig, 'blogPost'>
@@ -25,7 +27,7 @@ export interface BlogPostProps {
   /** The authors of the blog post. */
   authors?: UserProps[]
   /** The image of the blog post. Can be a string or an object. */
-  image?: string | (Partial<HTMLImageElement> & { [key: string]: any })
+  image?: string | (Partial<ImgHTMLAttributes> & { [key: string]: any })
   /**
    * The orientation of the blog post.
    * @defaultValue 'vertical'
@@ -43,22 +45,25 @@ export interface BlogPostProps {
 }
 
 export interface BlogPostSlots {
-  date(props?: {}): any
-  badge(props?: {}): any
-  title(props?: {}): any
-  description(props?: {}): any
-  authors(props: { ui: BlogPost['ui'] }): any
-  header(props: { ui: BlogPost['ui'] }): any
-  body(props?: {}): any
-  footer(props?: {}): any
+  date?(props?: {}): VNode[]
+  badge?(props?: {}): VNode[]
+  title?(props?: {}): VNode[]
+  description?(props?: {}): VNode[]
+  authors?(props: { ui: BlogPost['ui'] }): VNode[]
+  header?(props: { ui: BlogPost['ui'] }): VNode[]
+  body?(props?: {}): VNode[]
+  footer?(props?: {}): VNode[]
 }
 </script>
 
 <script setup lang="ts">
 import { computed } from 'vue'
 import { Primitive, useDateFormatter } from 'reka-ui'
+import { useAppConfig } from '#imports'
+import { useLocale } from '../composables/useLocale'
+import { useComponentProps } from '../composables/useComponentProps'
+import { usePrefix } from '../composables/usePrefix'
 import ImageComponent from '#build/ui-image-component'
-import { useLocale, useAppConfig } from '#imports'
 import { getSlotChildrenText } from '../utils'
 import { tv } from '../utils/tv'
 import ULink from './Link.vue'
@@ -69,16 +74,20 @@ import UUser from './User.vue'
 
 defineOptions({ inheritAttrs: false })
 
-const props = withDefaults(defineProps<BlogPostProps>(), {
+const _props = withDefaults(defineProps<BlogPostProps>(), {
   as: 'article',
   orientation: 'vertical'
 })
 const slots = defineSlots<BlogPostSlots>()
 
+const props = useComponentProps('blogPost', _props)
+
 const { locale } = useLocale()
 const appConfig = useAppConfig() as BlogPost['AppConfig']
 const formatter = useDateFormatter(locale.value.code)
+const prefix = usePrefix()
 
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.blogPost || {}) })({
   orientation: props.orientation,
   variant: props.variant,
@@ -86,6 +95,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.blogPost || 
   to: !!props.to || !!props.onClick
 }))
 
+// eslint-disable-next-line vue/no-dupe-keys
 const date = computed(() => {
   if (!props.date) {
     return
@@ -115,38 +125,37 @@ const ariaLabel = computed(() => {
 </script>
 
 <template>
-  <Primitive :as="as" :data-orientation="orientation" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })" @click="onClick">
-    <div v-if="image || !!slots.header" data-slot="header" :class="ui.header({ class: props.ui?.header })">
+  <Primitive :as="props.as" :data-orientation="props.orientation" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })" @click="props.onClick">
+    <div v-if="props.image || !!slots.header" data-slot="header" :class="ui.header({ class: props.ui?.header })">
       <slot name="header" :ui="ui">
         <component
           :is="ImageComponent"
-          v-bind="typeof image === 'string' ? { src: image, alt: title } : { alt: title, ...image }"
+          v-bind="typeof props.image === 'string' ? { src: props.image, alt: props.title } : { alt: props.title, ...props.image }"
           data-slot="image"
-          :class="ui.image({ class: props.ui?.image, to: !!to })"
+          :class="ui.image({ class: props.ui?.image, to: !!props.to })"
         />
       </slot>
     </div>
 
     <div data-slot="body" :class="ui.body({ class: props.ui?.body })">
       <ULink
-        v-if="to"
+        v-if="props.to"
         :aria-label="ariaLabel"
-        v-bind="{ to, target, ...$attrs }"
-        class="focus:outline-none peer"
-        tabindex="-1"
+        v-bind="{ to: props.to, target: props.target, ...$attrs }"
+        :class="prefix('focus:outline-none peer')"
         raw
       >
-        <span class="absolute inset-0" aria-hidden="true" />
+        <span :class="prefix('absolute inset-0')" aria-hidden="true" />
       </ULink>
 
       <slot name="body">
-        <div v-if="(date || !!slots.date) || (badge || !!slots.badge)" data-slot="meta" :class="ui.meta({ class: props.ui?.meta })">
+        <div v-if="(date || !!slots.date) || (props.badge || !!slots.badge)" data-slot="meta" :class="ui.meta({ class: props.ui?.meta })">
           <slot name="badge">
             <UBadge
-              v-if="badge"
+              v-if="props.badge"
               color="neutral"
               variant="subtle"
-              v-bind="typeof badge === 'string' ? { label: badge } : badge"
+              v-bind="typeof props.badge === 'string' ? { label: props.badge } : props.badge"
               data-slot="badge"
               :class="ui.badge({ class: props.ui?.badge })"
             />
@@ -159,24 +168,24 @@ const ariaLabel = computed(() => {
           </time>
         </div>
 
-        <h2 v-if="title || !!slots.title" data-slot="title" :class="ui.title({ class: props.ui?.title })">
+        <h2 v-if="props.title || !!slots.title" data-slot="title" :class="ui.title({ class: props.ui?.title })">
           <slot name="title">
-            {{ title }}
+            {{ props.title }}
           </slot>
         </h2>
 
-        <div v-if="description || !!slots.description" data-slot="description" :class="ui.description({ class: props.ui?.description })">
+        <div v-if="props.description || !!slots.description" data-slot="description" :class="ui.description({ class: props.ui?.description })">
           <slot name="description">
-            {{ description }}
+            {{ props.description }}
           </slot>
         </div>
 
-        <div v-if="authors?.length || !!slots.authors" data-slot="authors" :class="ui.authors({ class: props.ui?.authors })">
+        <div v-if="props.authors?.length || !!slots.authors" data-slot="authors" :class="ui.authors({ class: props.ui?.authors })">
           <slot name="authors" :ui="ui">
-            <template v-if="authors?.length">
-              <UAvatarGroup v-if="authors.length > 1">
+            <template v-if="props.authors?.length">
+              <UAvatarGroup v-if="props.authors.length > 1">
                 <ULink
-                  v-for="(author, index) in authors"
+                  v-for="(author, index) in props.authors"
                   :key="index"
                   :to="author.to"
                   :target="author.target"
@@ -187,7 +196,7 @@ const ariaLabel = computed(() => {
                   <UAvatar v-bind="author.avatar" />
                 </ULink>
               </UAvatarGroup>
-              <UUser v-else v-bind="authors[0]" />
+              <UUser v-else v-bind="props.authors[0]" />
             </template>
           </slot>
         </div>

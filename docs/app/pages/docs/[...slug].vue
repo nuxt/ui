@@ -1,6 +1,9 @@
 <script setup lang="ts">
+import { joinURL } from 'ufo'
 import { kebabCase } from 'scule'
 import type { ContentNavigationItem } from '@nuxt/content'
+
+const isDev = import.meta.dev
 
 const route = useRoute()
 const { framework } = useFrameworks()
@@ -56,39 +59,87 @@ useSeoMeta({
   ogDescription: description
 })
 
-if (route.path.startsWith('/docs/components/')) {
-  defineOgImageComponent('OgImageComponent', {
-    title: page.value.title,
-    description: page.value.description,
-    component: (route.params.slug as string[]).pop() as string
-  })
-} else {
-  defineOgImageComponent('Docs', {
-    title: page.value.title,
-    description: page.value.description,
-    headline: breadcrumb.value?.[breadcrumb.value.length - 1]?.label || 'Nuxt UI',
-    framework: page.value?.framework
-  })
+const path = computed(() => route.path.replace(/\/$/, ''))
+
+if (import.meta.server) {
+  prerenderRoutes([joinURL('/raw', `${path.value}.md`)])
+
+  if (route.path.startsWith('/docs/components/')) {
+    defineOgImage('Component.takumi', {
+      title: page.value.title,
+      description: page.value.description,
+      slug: (route.params.slug as string[]).pop() as string
+    })
+  } else {
+    defineOgImage('Docs.takumi', {
+      title: page.value.title,
+      description: page.value.description,
+      headline: breadcrumb.value?.[breadcrumb.value.length - 1]?.label || 'Nuxt UI',
+      framework: page.value?.framework
+    })
+  }
+
+  useSchemaOrg([
+    defineArticle({
+      '@type': 'TechArticle',
+      'headline': `${prefix}${title} ${suffix}`.trim(),
+      'description': description
+    }),
+    defineBreadcrumb({
+      itemListElement: breadcrumb.value?.map(item => ({
+        name: item.label,
+        item: item.to ? String(item.to) : undefined
+      })) || []
+    })
+  ])
 }
 
-const communityLinks = computed(() => [{
+useCanonical(computed(() => `${path.value}.md`))
+
+const { open, messages } = useChat()
+
+const links = computed(() => [{
   icon: 'i-lucide-file-pen',
   label: 'Edit this page',
   to: `https://github.com/nuxt/ui/edit/v4/docs/content/${page?.value?.stem}.md`,
   target: '_blank'
 }, {
-  icon: 'i-lucide-star',
-  label: 'Star on GitHub',
-  to: `https://github.com/nuxt/ui`,
-  target: '_blank'
+  icon: 'i-lucide-bot-message-square',
+  label: 'Explain with AI',
+  onClick: () => {
+    messages.value = [...messages.value, {
+      id: String(Date.now()),
+      role: 'user',
+      parts: [{ type: 'text', text: 'Read this documentation page and summarize it. I want to ask questions about it.' }]
+    }]
+    open.value = true
+  }
 }])
 </script>
 
 <template>
-  <UPage v-if="page">
-    <UPageHeader :title="page.title">
+  <UPage
+    v-if="page"
+    :ui="open ? {
+      center: 'lg:col-span-10',
+      right: 'lg:hidden'
+    } : undefined"
+  >
+    <UPageHeader>
       <template #headline>
         <UBreadcrumb :items="breadcrumb" />
+      </template>
+
+      <template #title>
+        {{ page.title }}
+
+        <UBadge
+          v-if="page.navigation?.badge"
+          :label="page.navigation?.badge"
+          variant="subtle"
+          size="lg"
+          class="rounded-full align-middle"
+        />
       </template>
 
       <template #description>
@@ -121,15 +172,17 @@ const communityLinks = computed(() => [{
     </UPageBody>
 
     <template v-if="page?.body?.toc?.links?.length" #right>
-      <UContentToc :links="page.body.toc.links" class="z-[2]">
+      <UContentToc :links="page.body.toc.links" class="z-2">
         <template #bottom>
           <USeparator v-if="page.body?.toc?.links?.length" type="dashed" />
 
-          <UPageLinks title="Community" :links="communityLinks" />
+          <UPageLinks :links="links" />
 
-          <USeparator type="dashed" />
+          <template v-if="!isDev">
+            <USeparator type="dashed" />
 
-          <AdsCarbon />
+            <AdsCarbon />
+          </template>
         </template>
       </UContentToc>
     </template>

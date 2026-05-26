@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { ComponentConfig } from '../../types/tv'
 import theme from '#build/ui/prose/code-group'
@@ -20,7 +21,7 @@ export interface ProseCodeGroupProps {
 }
 
 export interface ProseCodeGroupSlots {
-  default(props?: {}): any
+  default(props?: {}): VNode[]
 }
 </script>
 
@@ -28,13 +29,16 @@ export interface ProseCodeGroupSlots {
 import { computed, watch, onMounted, ref, onBeforeUpdate } from 'vue'
 import { TabsRoot, TabsList, TabsIndicator, TabsTrigger, TabsContent } from 'reka-ui'
 import { useState, useAppConfig } from '#imports'
+import { useComponentProps } from '../../composables/useComponentProps'
 import { tv } from '../../utils/tv'
 import UCodeIcon from './CodeIcon.vue'
 
-const props = withDefaults(defineProps<ProseCodeGroupProps>(), {
+const _props = withDefaults(defineProps<ProseCodeGroupProps>(), {
   defaultValue: '0'
 })
 const slots = defineSlots<ProseCodeGroupSlots>()
+
+const props = useComponentProps('prose.codeGroup', _props)
 
 const model = defineModel<string>()
 
@@ -92,7 +96,7 @@ onBeforeUpdate(() => rerenderCount.value++)
 </script>
 
 <template>
-  <TabsRoot v-model="model" :default-value="defaultValue" :unmount-on-hide="false" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <TabsRoot v-model="model" :default-value="props.defaultValue" :unmount-on-hide="false" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <TabsList :class="ui.list({ class: props.ui?.list })">
       <TabsIndicator :class="ui.indicator({ class: props.ui?.indicator })" />
 

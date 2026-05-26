@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/field-group'
 import type { ComponentConfig } from '../types/tv'
@@ -21,11 +22,11 @@ export interface FieldGroupProps {
    */
   orientation?: FieldGroup['variants']['orientation']
   class?: any
-  ui?: FieldGroup['slots']
+  ui?: { base?: any }
 }
 
 export interface FieldGroupSlots {
-  default(props?: {}): any
+  default?(props?: {}): VNode[]
 }
 </script>
 
@@ -33,13 +34,16 @@ export interface FieldGroupSlots {
 import { provide, computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
+import { useComponentProps } from '../composables/useComponentProps'
 import { fieldGroupInjectionKey } from '../composables/useFieldGroup'
 import { tv } from '../utils/tv'
 
-const props = withDefaults(defineProps<FieldGroupProps>(), {
+const _props = withDefaults(defineProps<FieldGroupProps>(), {
   orientation: 'horizontal'
 })
 defineSlots<FieldGroupSlots>()
+
+const props = useComponentProps('fieldGroup', _props)
 
 const appConfig = useAppConfig() as FieldGroup['AppConfig']
 
@@ -53,7 +57,7 @@ provide(fieldGroupInjectionKey, computed(() => ({
 </script>
 
 <template>
-  <Primitive :as="as" :data-orientation="orientation" :class="ui({ orientation, class: props.class })">
+  <Primitive :as="props.as" :data-orientation="props.orientation" :class="ui({ orientation: props.orientation, class: [props.ui?.base, props.class] })">
     <slot />
   </Primitive>
 </template>

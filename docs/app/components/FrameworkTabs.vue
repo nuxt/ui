@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { framework, frameworks } = useFrameworks()
+const { framework, setFramework, frameworks } = useFrameworks()
 
 const value = ref<string | undefined>(undefined)
 
@@ -9,6 +9,10 @@ onMounted(() => {
 watch(framework, () => {
   value.value = framework.value
 })
+
+function onFrameworkChange(newFramework: string) {
+  setFramework(newFramework as 'nuxt' | 'vue', 'tabs')
+}
 </script>
 
 <template>
@@ -22,6 +26,6 @@ watch(framework, () => {
       trigger: 'px-1 data-[state=active]:text-highlighted w-full'
     }"
     size="xs"
-    @update:model-value="(framework = $event as string)"
+    @update:model-value="onFrameworkChange($event as string)"
   />
 </template>

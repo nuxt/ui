@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/prose/collapsible'
 import type { IconProps, CollapsibleProps } from '../../types'
@@ -32,21 +33,25 @@ export interface ProseCollapsibleProps {
 }
 
 export interface ProseCollapsibleSlots {
-  default(props?: {}): any
+  default(props?: {}): VNode[]
 }
 </script>
 
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useAppConfig } from '#imports'
+import { useComponentProps } from '../../composables/useComponentProps'
 import { useLocale } from '../../composables/useLocale'
 import { transformUI } from '../../utils'
 import { tv } from '../../utils/tv'
 import UCollapsible from '../Collapsible.vue'
 import UIcon from '../Icon.vue'
 
-const props = defineProps<ProseCollapsibleProps>()
+const _props = defineProps<ProseCollapsibleProps>()
+
 defineSlots<ProseCollapsibleSlots>()
+
+const props = useComponentProps('prose.collapsible', _props)
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as ProseCollapsible['AppConfig']
@@ -59,7 +64,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.colla
   <UCollapsible :unmount-on-hide="false" :class="props.class" :ui="transformUI(ui, props.ui)">
     <template #default="{ open }">
       <button :class="ui.trigger({ class: props.ui?.trigger })">
-        <UIcon :name="icon || appConfig.ui.icons.chevronDown" :class="ui.triggerIcon({ class: props.ui?.triggerIcon })" />
+        <UIcon :name="props.icon || appConfig.ui.icons.chevronDown" :class="ui.triggerIcon({ class: props.ui?.triggerIcon })" />
 
         <span :class="ui.triggerLabel({ class: props.ui?.triggerLabel })">
           {{ open ? (props.closeText || t('prose.collapsible.closeText')) : (props.openText || t('prose.collapsible.openText')) }} {{ props.name || t('prose.collapsible.name') }}

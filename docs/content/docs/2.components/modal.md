@@ -294,7 +294,7 @@ slots:
 :placeholder{class="h-48"}
 ::
 
-### Scrollable :badge{label="4.2+"}
+### Scrollable :badge{label="4.2+" class="align-text-top"}
 
 Use the `scrollable` prop to make the Modal's content scrollable within the overlay.
 
@@ -443,6 +443,10 @@ You can use a [CommandPalette](/docs/components/command-palette) component insid
 collapse: true
 name: 'modal-command-palette-example'
 ---
+::
+
+::note
+This example uses `useLazyFetch` with `immediate: false` to only fetch data when the Modal opens.
 ::
 
 ## API

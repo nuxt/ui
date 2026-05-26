@@ -26,8 +26,8 @@ The ChatPalette component is a structured layout wrapper that organizes [ChatMes
 
 ## Examples
 
-::note{to="https://ai-sdk.dev/docs/getting-started/nuxt" target="_blank"}
-These chat components are designed to be used with the **AI SDK v5** from **Vercel AI SDK**.
+::tip{to="/docs/components/chat"}
+Check the **Chat** overview page for installation instructions, server setup and usage examples.
 ::
 
 ### Within a Modal
@@ -59,6 +59,7 @@ overflowHidden: true
 name: 'chat-palette-content-search-example'
 ---
 ::
+
 
 ## API
 

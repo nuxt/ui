@@ -39,6 +39,8 @@ ignore:
   - plans
 external:
   - plans
+externalTypes:
+  - PricingPlanProps[]
 props:
   plans:
     - title: Solo
@@ -81,6 +83,8 @@ ignore:
   - plans
 external:
   - plans
+externalTypes:
+  - PricingPlanProps[]
 props:
   orientation: vertical
   plans:
@@ -128,6 +132,8 @@ ignore:
   - compact
 external:
   - plans
+externalTypes:
+  - PricingPlanProps[]
 class: 'p-8'
 props:
   compact: true
@@ -172,6 +178,8 @@ ignore:
   - scale
 external:
   - plans
+externalTypes:
+  - PricingPlanProps[]
 class: 'p-8'
 props:
   scale: true

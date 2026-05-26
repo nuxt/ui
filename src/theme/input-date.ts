@@ -1,6 +1,7 @@
 import { defuFn } from 'defu'
 import type { ModuleOptions } from '../module'
 import input from './input'
+import { fieldGroupVariant } from './field-group'
 
 export default (options: Required<ModuleOptions>) => {
   return defuFn({
@@ -11,26 +12,27 @@ export default (options: Required<ModuleOptions>) => {
       separatorIcon: 'shrink-0 size-4 text-muted'
     },
     variants: {
+      ...fieldGroupVariant,
       size: {
         xs: {
           base: (prev: string) => [prev, 'gap-0.25'],
-          segment: 'data-[segment=day]:w-6 data-[segment=month]:w-6 data-[segment=year]:w-9'
+          segment: 'data-[segment=day]:w-8 data-[segment=month]:w-8 data-[segment=year]:w-10'
         },
         sm: {
           base: (prev: string) => [prev, 'gap-0.5'],
-          segment: 'data-[segment=day]:w-6 data-[segment=month]:w-6 data-[segment=year]:w-9'
+          segment: 'data-[segment=day]:w-8 data-[segment=month]:w-8 data-[segment=year]:w-10'
         },
         md: {
           base: (prev: string) => [prev, 'gap-0.5'],
-          segment: 'data-[segment=day]:w-7 data-[segment=month]:w-7 data-[segment=year]:w-11'
+          segment: 'data-[segment=day]:w-9 data-[segment=month]:w-9 data-[segment=year]:w-11'
         },
         lg: {
           base: (prev: string) => [prev, 'gap-0.75'],
-          segment: 'data-[segment=day]:w-7 data-[segment=month]:w-7 data-[segment=year]:w-11'
+          segment: 'data-[segment=day]:w-9 data-[segment=month]:w-9 data-[segment=year]:w-11'
         },
         xl: {
           base: (prev: string) => [prev, 'gap-0.75'],
-          segment: 'data-[segment=day]:w-8 data-[segment=month]:w-8 data-[segment=year]:w-13'
+          segment: 'data-[segment=day]:w-10 data-[segment=month]:w-10 data-[segment=year]:w-12'
         }
       }
     },

@@ -1,8 +1,8 @@
 ---
-title: CodeGroup
+title: ProseCodeGroup
 description: 'Group multiple code examples in tabbed interfaces for easy comparison.'
-framework: nuxt
 category: components
+navigation.title: CodeGroup
 links:
   - label: GitHub
     icon: i-simple-icons-github

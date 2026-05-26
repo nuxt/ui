@@ -1,8 +1,8 @@
 ---
-title: CodePreview
+title: ProseCodePreview
 description: 'Display code examples with a preview and their source for clearer documentation.'
-framework: nuxt
 category: components
+navigation.title: CodePreview
 links:
   - label: GitHub
     icon: i-simple-icons-github

@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/dashboard-panel'
 import type { UseResizableProps } from '../composables/useResizable'
@@ -12,17 +13,18 @@ export interface DashboardPanelProps extends Pick<UseResizableProps, 'id' | 'min
 }
 
 export interface DashboardPanelSlots {
-  'default'(props?: {}): any
-  'header'(props?: {}): any
-  'body'(props?: {}): any
-  'footer'(props?: {}): any
-  'resize-handle'(props: { onMouseDown: (e: MouseEvent) => void, onTouchStart: (e: TouchEvent) => void, onDoubleClick: (e: MouseEvent) => void }): any
+  'default'?(props?: {}): VNode[]
+  'header'?(props?: {}): VNode[]
+  'body'?(props?: {}): VNode[]
+  'footer'?(props?: {}): VNode[]
+  'resize-handle'?(props: { onMouseDown: (e: MouseEvent) => void, onTouchStart: (e: TouchEvent) => void, onDoubleClick: (e: MouseEvent) => void }): VNode[]
 }
 </script>
 
 <script setup lang="ts">
 import { computed, useId, toRef } from 'vue'
 import { useAppConfig } from '#imports'
+import { useComponentProps } from '../composables/useComponentProps'
 import { useResizable } from '../composables/useResizable'
 import { useDashboard } from '../utils/dashboard'
 import { tv } from '../utils/tv'
@@ -30,11 +32,13 @@ import UDashboardResizeHandle from './DashboardResizeHandle.vue'
 
 defineOptions({ inheritAttrs: false })
 
-const props = withDefaults(defineProps<DashboardPanelProps>(), {
+const _props = withDefaults(defineProps<DashboardPanelProps>(), {
   minSize: 15,
   resizable: false
 })
 defineSlots<DashboardPanelSlots>()
+
+const props = useComponentProps('dashboardPanel', _props)
 
 const appConfig = useAppConfig() as DashboardPanel['AppConfig']
 const dashboardContext = useDashboard({ storageKey: 'dashboard', unit: '%' })
@@ -72,7 +76,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dashboardPan
 
   <slot name="resize-handle" :on-mouse-down="onMouseDown" :on-touch-start="onTouchStart" :on-double-click="onDoubleClick">
     <UDashboardResizeHandle
-      v-if="resizable"
+      v-if="props.resizable"
       :aria-controls="id"
       data-slot="handle"
       :class="ui.handle({ class: props.ui?.handle })"

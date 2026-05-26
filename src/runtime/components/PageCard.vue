@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/page-card'
 import type { IconProps, LinkProps } from '../types'
@@ -57,13 +58,13 @@ export interface PageCardProps {
 }
 
 export interface PageCardSlots {
-  header(props?: {}): any
-  body(props?: {}): any
-  leading(props: { ui: PageCard['ui'] }): any
-  title(props?: {}): any
-  description(props?: {}): any
-  footer(props?: {}): any
-  default(props?: {}): any
+  header?(props?: {}): VNode[]
+  body?(props?: {}): VNode[]
+  leading?(props: { ui: PageCard['ui'] }): VNode[]
+  title?(props?: {}): VNode[]
+  description?(props?: {}): VNode[]
+  footer?(props?: {}): VNode[]
+  default?(props?: {}): VNode[]
 }
 </script>
 
@@ -72,6 +73,8 @@ import { computed, ref, watch } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useMouseInElement, pausableFilter } from '@vueuse/core'
 import { useAppConfig } from '#imports'
+import { useComponentProps } from '../composables/useComponentProps'
+import { usePrefix } from '../composables/usePrefix'
 import { getSlotChildrenText } from '../utils'
 import { tv } from '../utils/tv'
 import ULink from './Link.vue'
@@ -79,10 +82,12 @@ import UIcon from './Icon.vue'
 
 defineOptions({ inheritAttrs: false })
 
-const props = withDefaults(defineProps<PageCardProps>(), {
+const _props = withDefaults(defineProps<PageCardProps>(), {
   orientation: 'vertical'
 })
 const slots = defineSlots<PageCardSlots>()
+
+const props = useComponentProps('pageCard', _props)
 
 const cardRef = ref<HTMLElement>()
 const motionControl = pausableFilter()
@@ -91,7 +96,9 @@ const appConfig = useAppConfig() as PageCard['AppConfig']
 const { elementX, elementY } = useMouseInElement(cardRef, {
   eventFilter: motionControl.eventFilter
 })
+const prefix = usePrefix()
 
+// eslint-disable-next-line vue/no-dupe-keys
 const spotlight = computed(() => props.spotlight && (elementX.value !== 0 || elementY.value !== 0))
 
 watch(() => props.spotlight, (value) => {
@@ -102,6 +109,7 @@ watch(() => props.spotlight, (value) => {
   }
 }, { immediate: true })
 
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pageCard || {}) })({
   orientation: props.orientation,
   reverse: props.reverse,
@@ -123,38 +131,38 @@ const ariaLabel = computed(() => {
 <template>
   <Primitive
     ref="cardRef"
-    :as="as"
-    :data-orientation="orientation"
+    :as="props.as"
+    :data-orientation="props.orientation"
     data-slot="root"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     :style="spotlight && { '--spotlight-x': `${elementX}px`, '--spotlight-y': `${elementY}px` }"
-    @click="onClick"
+    @click="props.onClick"
   >
     <div v-if="props.spotlight" data-slot="spotlight" :class="ui.spotlight({ class: props.ui?.spotlight })" />
 
     <div data-slot="container" :class="ui.container({ class: props.ui?.container })">
-      <div v-if="!!slots.header || (icon || !!slots.leading) || !!slots.body || (title || !!slots.title) || (description || !!slots.description) || !!slots.footer" data-slot="wrapper" :class="ui.wrapper({ class: props.ui?.wrapper })">
+      <div v-if="!!slots.header || (props.icon || !!slots.leading) || !!slots.body || (props.title || !!slots.title) || (props.description || !!slots.description) || !!slots.footer" data-slot="wrapper" :class="ui.wrapper({ class: props.ui?.wrapper })">
         <div v-if="!!slots.header" data-slot="header" :class="ui.header({ class: props.ui?.header })">
           <slot name="header" />
         </div>
 
-        <div v-if="icon || !!slots.leading" data-slot="leading" :class="ui.leading({ class: props.ui?.leading })">
+        <div v-if="props.icon || !!slots.leading" data-slot="leading" :class="ui.leading({ class: props.ui?.leading })">
           <slot name="leading" :ui="ui">
-            <UIcon v-if="icon" :name="icon" data-slot="leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
+            <UIcon v-if="props.icon" :name="props.icon" data-slot="leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
           </slot>
         </div>
 
-        <div v-if="!!slots.body || (title || !!slots.title) || (description || !!slots.description)" data-slot="body" :class="ui.body({ class: props.ui?.body })">
+        <div v-if="!!slots.body || (props.title || !!slots.title) || (props.description || !!slots.description)" data-slot="body" :class="ui.body({ class: props.ui?.body })">
           <slot name="body">
-            <div v-if="title || !!slots.title" data-slot="title" :class="ui.title({ class: props.ui?.title })">
+            <div v-if="props.title || !!slots.title" data-slot="title" :class="ui.title({ class: props.ui?.title })">
               <slot name="title">
-                {{ title }}
+                {{ props.title }}
               </slot>
             </div>
 
-            <div v-if="description || !!slots.description" data-slot="description" :class="ui.description({ class: props.ui?.description })">
+            <div v-if="props.description || !!slots.description" data-slot="description" :class="ui.description({ class: props.ui?.description })">
               <slot name="description">
-                {{ description }}
+                {{ props.description }}
               </slot>
             </div>
           </slot>
@@ -169,13 +177,13 @@ const ariaLabel = computed(() => {
     </div>
 
     <ULink
-      v-if="to"
+      v-if="props.to"
       :aria-label="ariaLabel"
-      v-bind="{ to, target, ...$attrs }"
-      class="focus:outline-none peer"
+      v-bind="{ to: props.to, target: props.target, ...$attrs }"
+      :class="prefix('focus:outline-none peer')"
       raw
     >
-      <span class="absolute inset-0" aria-hidden="true" />
+      <span :class="prefix('absolute inset-0')" aria-hidden="true" />
     </ULink>
   </Primitive>
 </template>

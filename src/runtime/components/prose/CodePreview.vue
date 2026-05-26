@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { ComponentConfig } from '../../types/tv'
 import theme from '#build/ui/prose/code-preview'
@@ -11,18 +12,21 @@ export interface ProseCodePreviewProps {
 }
 
 export interface ProseCodePreviewSlots {
-  default(props?: {}): any
-  code(props?: {}): any
+  default(props?: {}): VNode[]
+  code(props?: {}): VNode[]
 }
 </script>
 
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useAppConfig } from '#imports'
+import { useComponentProps } from '../../composables/useComponentProps'
 import { tv } from '../../utils/tv'
 
-const props = defineProps<ProseCodePreviewProps>()
+const _props = defineProps<ProseCodePreviewProps>()
 const slots = defineSlots<ProseCodePreviewSlots>()
+
+const props = useComponentProps('prose.codePreview', _props)
 
 const appConfig = useAppConfig() as ProseCodePreview['AppConfig']
 

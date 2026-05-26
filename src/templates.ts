@@ -2,7 +2,7 @@ import { fileURLToPath } from 'node:url'
 import { camelCase, kebabCase } from 'scule'
 import { genExport } from 'knitwork'
 import colors from 'tailwindcss/colors'
-import { addTemplate, addTypeTemplate, hasNuxtModule, logger, updateTemplates } from '@nuxt/kit'
+import { addTemplate, addTypeTemplate, hasNuxtModule, logger, updateTemplates, getLayerDirectories } from '@nuxt/kit'
 import type { Nuxt, NuxtTemplate, NuxtTypeTemplate } from '@nuxt/schema'
 import type { Resolver } from '@nuxt/kit'
 import type { ModuleOptions } from './module'
@@ -63,6 +63,8 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
           if (isDev) {
             const templatePath = fileURLToPath(new URL(`./theme/${path ? `${path}/` : ''}${kebabCase(component)}`, import.meta.url))
             const themeUtilsPath = fileURLToPath(new URL('./utils/theme', import.meta.url))
+            const defaultVariantsJson = JSON.stringify(options.theme?.defaultVariants) ?? 'undefined'
+            const prefixJson = JSON.stringify(options.theme?.prefix) ?? 'undefined'
 
             return [
               `import template from ${JSON.stringify(templatePath)}`,
@@ -70,8 +72,8 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
               ...generateVariantDeclarations(variants),
               `const options = ${JSON.stringify(options, null, 2)}`,
               `let result = typeof template === 'function' ? (template as Function)(options) : template`,
-              `result = applyDefaultVariants(result, options.theme?.defaultVariants)`,
-              `result = applyPrefixToObject(result, options.theme?.prefix)`,
+              `result = applyDefaultVariants(result, ${defaultVariantsJson})`,
+              `result = applyPrefixToObject(result, ${prefixJson})`,
               `const theme = ${json}`,
               `export default result as typeof theme`
             ].join('\n\n')
@@ -87,7 +89,7 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
     }
   }
 
-  if (!!nuxt && ((hasNuxtModule('@nuxtjs/mdc') || options.mdc) || (hasNuxtModule('@nuxt/content') || options.content))) {
+  if (options.prose || options.mdc || options.content || (!!nuxt && (hasNuxtModule('@nuxtjs/mdc') || hasNuxtModule('@nuxt/content')))) {
     hasProse = true
 
     const path = 'prose'
@@ -101,7 +103,7 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
     })
   }
 
-  if (!!nuxt && (hasNuxtModule('@nuxt/content') || options.content)) {
+  if (options.content || (!!nuxt && hasNuxtModule('@nuxt/content'))) {
     hasContent = true
 
     writeThemeTemplate(themeContent, 'content')
@@ -110,16 +112,35 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
   writeThemeTemplate(theme)
 
   async function generateSources() {
-    let sources = ''
+    if (!nuxt) {
+      return '@source "./ui";'
+    }
 
-    if (!!nuxt && !!resolve && options.experimental?.componentDetection) {
-      const dirs = [...new Set([
-        nuxt.options.rootDir,
-        ...(nuxt.options._layers?.map(layer => layer.config.rootDir).filter(Boolean) || [])
-      ])]
+    const sources: string[] = []
+    const layers = getLayerDirectories(nuxt).map(layer => layer.app)
 
+    // Add layer sources
+    for (const layer of layers) {
+      sources.push(`@source "${layer}**/*";`)
+    }
+
+    // Add inline sources from Nuxt config (classes defined in config)
+    const inlineConfigs = [
+      nuxt.options.app?.rootAttrs?.class,
+      nuxt.options.app?.head?.htmlAttrs?.class,
+      nuxt.options.app?.head?.bodyAttrs?.class
+    ]
+
+    for (const value of inlineConfigs) {
+      if (value && typeof value === 'string') {
+        sources.push(`@source inline(${JSON.stringify(value)});`)
+      }
+    }
+
+    // Add theme sources (component detection or all)
+    if (resolve && options.experimental?.componentDetection) {
       const detectedComponents = await detectUsedComponents(
-        dirs,
+        layers,
         options.prefix!,
         resolve('./runtime/components'),
         Array.isArray(options.experimental.componentDetection) ? options.experimental.componentDetection : undefined
@@ -139,10 +160,8 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
 
         previousDetectedComponents = detectedComponents
 
-        const sourcesList: string[] = []
-
         if (hasProse) {
-          sourcesList.push('@source "./ui/prose";')
+          sources.push('@source "./ui/prose";')
         }
 
         for (const component of detectedComponents) {
@@ -150,40 +169,27 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
           const camelComponent = camelCase(component)
 
           if (hasContent && (themeContent as any)[camelComponent]) {
-            sourcesList.push(`@source "./ui/content/${kebabComponent}.ts";`)
+            sources.push(`@source "./ui/content/${kebabComponent}.ts";`)
           } else if ((theme as any)[camelComponent]) {
-            sourcesList.push(`@source "./ui/${kebabComponent}.ts";`)
+            sources.push(`@source "./ui/${kebabComponent}.ts";`)
           }
         }
-
-        sources = sourcesList.join('\n')
       } else {
         if (!previousDetectedComponents || previousDetectedComponents.size > 0) {
           logger.info('Nuxt UI detected no components in use, including all components')
         }
         previousDetectedComponents = new Set()
+
+        sources.push('@source "./ui";')
       }
+    } else {
+      sources.push('@source "./ui";')
     }
 
-    return sources || '@source "./ui";'
+    return sources.join('\n')
   }
 
-  templates.push({
-    filename: 'ui.css',
-    write: true,
-    getContents: async () => {
-      const sources = await generateSources()
-      const prefix = options.theme?.prefix ? `${options.theme.prefix}:` : ''
-
-      return `${sources}
-
-@layer base {
-  body {
-    @apply ${prefix}antialiased ${prefix}text-default ${prefix}bg-default ${prefix}scheme-light ${prefix}dark:scheme-dark;
-  }
-}
-
-@theme static {
+  const themeBlocks = `@theme static {
   --color-old-neutral-50: ${colors.neutral[50]};
   --color-old-neutral-100: ${colors.neutral[100]};
   --color-old-neutral-200: ${colors.neutral[200]};
@@ -241,13 +247,43 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
   --divide-color-bg: var(--ui-bg);
   --outline-color-default: var(--ui-border);
   --outline-color-inverted: var(--ui-border-inverted);
+  --stroke-bg: var(--ui-bg);
   --stroke-default: var(--ui-border);
   --stroke-inverted: var(--ui-border-inverted);
+  --fill-bg: var(--ui-bg);
   --fill-default: var(--ui-border);
   --fill-inverted: var(--ui-border-inverted);
 }
 `
+
+  templates.push({
+    filename: 'ui.css',
+    write: true,
+    getContents: async () => {
+      const sources = await generateSources()
+      const prefix = options.theme?.prefix ? `${options.theme.prefix}:` : ''
+
+      return `${sources}
+
+@layer base {
+  body {
+    @apply ${prefix}antialiased ${prefix}text-default ${prefix}bg-default ${prefix}scheme-light ${prefix}dark:scheme-dark;
+  }
+}
+
+${themeBlocks}`
     }
+  })
+
+  // Static fallback shipped in the published npm package and exposed via
+  // `package.json` `imports` so tooling that resolves `#build/ui.css` through
+  // Node module resolution (Prettier, Tailwind IntelliSense) has something to
+  // read. Strips `@source` directives (paths don't exist on consumer machines)
+  // and the body rule (runtime template handles it with the user's prefix).
+  templates.push({
+    filename: 'ui.static.css',
+    write: true,
+    getContents: () => themeBlocks
   })
 
   templates.push({
@@ -274,7 +310,7 @@ import colors from 'tailwindcss/colors'
 
 type IconsConfig = Record<${iconUnion} | (string & {}), string>
 
-type NeutralColor = 'slate' | 'gray' | 'zinc' | 'neutral' | 'stone'
+type NeutralColor = 'slate' | 'gray' | 'zinc' | 'neutral' | 'stone' | 'taupe' | 'mauve' | 'mist' | 'olive'
 type Color = Exclude<keyof typeof colors, 'inherit' | 'current' | 'transparent' | 'black' | 'white' | NeutralColor> | (string & {})
 
 type AppConfigUI = {

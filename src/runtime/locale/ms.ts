@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'Hantar mesej'
     },
+    chatReasoning: {
+      thinking: 'Berfikir…',
+      thought: 'Telah berfikir',
+      thoughtFor: 'Berfikir selama {duration}'
+    },
     colorMode: {
       dark: 'Gelap',
       light: 'Cerah',
@@ -50,6 +55,7 @@ export default defineLocale<Messages>({
     },
     contentSearch: {
       links: 'Pautan',
+      search: 'Keputusan',
       theme: 'Tema'
     },
     contentSearchButton: {
@@ -57,6 +63,10 @@ export default defineLocale<Messages>({
     },
     contentToc: {
       title: 'Di halaman ini'
+    },
+    dropdownMenu: {
+      noMatch: 'Tiada data yang sepadan',
+      search: 'Cari…'
     },
     dashboardSearch: {
       theme: 'Tema'
@@ -91,6 +101,11 @@ export default defineLocale<Messages>({
       decrement: 'Kurangkan',
       increment: 'Naikkan'
     },
+    listbox: {
+      noData: 'Tiada data',
+      noMatch: 'Tiada data yang sepadan',
+      search: 'Cari…'
+    },
     modal: {
       close: 'Tutup'
     },
@@ -110,7 +125,15 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'Salin kod ke papan klip'
+      },
+      prompt: {
+        copy: 'Salin gesaan',
+        openIn: 'Buka dalam {name}'
       }
+    },
+    sidebar: {
+      close: 'Tutup',
+      toggle: 'Togol'
     },
     selectMenu: {
       create: 'Cipta "{label}"',

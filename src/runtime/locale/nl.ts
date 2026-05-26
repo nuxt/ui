@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'Versturen'
     },
+    chatReasoning: {
+      thinking: 'Aan het denken…',
+      thought: 'Nagedacht',
+      thoughtFor: '{duration} nagedacht'
+    },
     colorMode: {
       dark: 'Donker',
       light: 'Licht',
@@ -50,6 +55,7 @@ export default defineLocale<Messages>({
     },
     contentSearch: {
       links: 'Links',
+      search: 'Resultaten',
       theme: 'Thema'
     },
     contentSearchButton: {
@@ -57,6 +63,10 @@ export default defineLocale<Messages>({
     },
     contentToc: {
       title: 'Op deze pagina'
+    },
+    dropdownMenu: {
+      noMatch: 'Geen overeenkomende gegevens',
+      search: 'Zoeken…'
     },
     dashboardSearch: {
       theme: 'Thema'
@@ -91,6 +101,11 @@ export default defineLocale<Messages>({
       decrement: 'Verlagen',
       increment: 'Verhogen'
     },
+    listbox: {
+      noData: 'Geen gegevens',
+      noMatch: 'Geen overeenkomende gegevens',
+      search: 'Zoeken…'
+    },
     modal: {
       close: 'Sluiten'
     },
@@ -110,7 +125,15 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'Code naar klembord kopiëren'
+      },
+      prompt: {
+        copy: 'Prompt kopiëren',
+        openIn: 'Openen in {name}'
       }
+    },
+    sidebar: {
+      close: 'Sluiten',
+      toggle: 'Schakelen'
     },
     selectMenu: {
       create: '"{label}" creëren',

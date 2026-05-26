@@ -1,6 +1,6 @@
 <script lang="ts">
-import type { ComponentPublicInstance } from 'vue'
-import type { DateFieldRootProps, DateFieldRootEmits, DateRangeFieldRootProps, DateRangeFieldRootEmits, DateValue } from 'reka-ui'
+import type { ComponentPublicInstance, VNode } from 'vue'
+import type { DateFieldRootProps, DateFieldRootEmits, DateRangeFieldRootProps, DateRangeFieldRootEmits, DateValue, SegmentPart } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import type { AvatarProps, IconProps } from '../types'
@@ -35,6 +35,8 @@ export interface InputDateProps<R extends boolean = false> extends UseComponentI
   size?: InputDate['variants']['size']
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
+  /** Keep the mobile text size on all breakpoints. */
+  fixed?: boolean
   autofocus?: boolean
   autofocusDelay?: number
   /**
@@ -51,27 +53,29 @@ export interface InputDateProps<R extends boolean = false> extends UseComponentI
   ui?: InputDate['slots']
 }
 
-export interface InputDateEmits<R extends boolean> extends Omit<DateFieldRootEmits & DateRangeFieldRootEmits, 'update:modelValue'> {
-  'update:modelValue': [date: InputDateModelValue<R>]
+export interface InputDateEmits<R extends boolean = false> extends Omit<DateFieldRootEmits & DateRangeFieldRootEmits, 'update:modelValue'> {
+  'update:modelValue': [value: InputDateModelValue<R>]
   'change': [event: Event]
   'blur': [event: FocusEvent]
   'focus': [event: FocusEvent]
 }
 
 export interface InputDateSlots {
-  leading(props: { ui: InputDate['ui'] }): any
-  default(props: { ui: InputDate['ui'] }): any
-  trailing(props: { ui: InputDate['ui'] }): any
-  separator(props: { ui: InputDate['ui'] }): any
+  leading?(props: { ui: InputDate['ui'] }): VNode[]
+  default?(props: { ui: InputDate['ui'] }): VNode[]
+  trailing?(props: { ui: InputDate['ui'] }): VNode[]
+  separator?(props: { ui: InputDate['ui'] }): VNode[]
 }
 </script>
 
 <script setup lang="ts" generic="R extends boolean">
 import { computed, onMounted, ref } from 'vue'
-import { useForwardPropsEmits } from 'reka-ui'
+import { } from 'reka-ui'
+import { useForwardProps } from '../composables/useForwardProps'
 import { DateField as SingleDateField, DateRangeField as RangeDateField } from 'reka-ui/namespaced'
 import { reactiveOmit, createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
+import { useComponentProps } from '../composables/useComponentProps'
 import { useFieldGroup } from '../composables/useFieldGroup'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFormField } from '../composables/useFormField'
@@ -81,32 +85,35 @@ import UAvatar from './Avatar.vue'
 
 defineOptions({ inheritAttrs: false })
 
-const props = withDefaults(defineProps<InputDateProps<R>>(), {
+const _props = withDefaults(defineProps<InputDateProps<R>>(), {
   autofocusDelay: 0
 })
 const emits = defineEmits<InputDateEmits<R>>()
 const slots = defineSlots<InputDateSlots>()
 
+const props = useComponentProps<InputDateProps<R>>('inputDate', _props)
+
 const appConfig = useAppConfig() as InputDate['AppConfig']
 
-const rootProps = useForwardPropsEmits(reactiveOmit(props, 'id', 'name', 'range', 'modelValue', 'defaultValue', 'color', 'variant', 'size', 'highlight', 'disabled', 'autofocus', 'autofocusDelay', 'icon', 'avatar', 'leading', 'leadingIcon', 'trailing', 'trailingIcon', 'loading', 'loadingIcon', 'separatorIcon', 'class', 'ui'), emits)
-const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, size: formGroupSize, color, id, name, highlight, disabled, ariaAttrs } = useFormField<InputDateProps<R>>(props)
-const { orientation, size: fieldGroupSize } = useFieldGroup<InputDateProps<R>>(props)
+const rootProps = useForwardProps(reactiveOmit(props, 'id', 'name', 'range', 'modelValue', 'defaultValue', 'color', 'variant', 'size', 'highlight', 'fixed', 'disabled', 'autofocus', 'autofocusDelay', 'icon', 'avatar', 'leading', 'leadingIcon', 'trailing', 'trailingIcon', 'loading', 'loadingIcon', 'separatorIcon', 'class', 'ui'), emits)
+const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, size: formFieldSize, color, id, name, highlight, disabled, ariaAttrs } = useFormField<InputDateProps<R>>(_props)
+const { orientation, size: fieldGroupSize } = useFieldGroup<InputDateProps<R>>(_props)
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props)
 
 const [DefineSegmentsTemplate, ReuseSegmentsTemplate] = createReusableTemplate<{
-  // todo: need to make a PR in reka-ui to export this type - https://github.com/unovue/reka-ui/issues/2260
-  segments?: Parameters<InstanceType<typeof SingleDateField.Root>['$slots']['default'] & {}>[0]['segments']
+  segments?: { part: SegmentPart, value: string }[]
   type?: 'start' | 'end'
 }>()
 
-const inputSize = computed(() => fieldGroupSize.value || formGroupSize.value)
+const inputSize = computed(() => fieldGroupSize.value || formFieldSize.value)
 
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.inputDate || {}) })({
-  color: color.value,
+  color: color.value ?? props.color,
   variant: props.variant,
-  size: inputSize.value,
-  highlight: highlight.value,
+  size: inputSize.value ?? props.size,
+  highlight: highlight.value ?? props.highlight,
+  fixed: props.fixed,
   loading: props.loading,
   leading: isLeading.value || !!props.avatar || !!slots.leading,
   trailing: isTrailing.value || !!slots.trailing,
@@ -114,6 +121,11 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.inputDate ||
 }))
 
 const inputsRef = ref<ComponentPublicInstance[]>([])
+
+function setInputRef(index: number, el: Element | ComponentPublicInstance | null) {
+  // @ts-expect-error - ComponentPublicInstance type mismatch in Nuxt module augmentation
+  inputsRef.value[index] = el
+}
 
 function onUpdate(value: any) {
   // @ts-expect-error - 'target' does not exist in type 'EventInit'
@@ -158,7 +170,7 @@ defineExpose({
     <DateField.Input
       v-for="(segment, index) in segments"
       :key="`${segment.part}-${index}`"
-      :ref="el => (inputsRef[index] = el as ComponentPublicInstance)"
+      :ref="el => setInputRef(index, el)"
       :type="type"
       :part="segment.part"
       data-slot="segment"
@@ -173,8 +185,8 @@ defineExpose({
     v-bind="{ ...rootProps, ...$attrs, ...ariaAttrs }"
     :id="id"
     v-slot="{ segments }"
-    :model-value="(modelValue as DateValue)"
-    :default-value="(defaultValue as DateValue)"
+    :model-value="(props.modelValue as DateValue)"
+    :default-value="(props.defaultValue as DateValue)"
     :name="name"
     :disabled="disabled"
     data-slot="base"
@@ -189,17 +201,17 @@ defineExpose({
     <template v-else>
       <ReuseSegmentsTemplate :segments="segments.start" type="start" />
       <slot name="separator" :ui="ui">
-        <UIcon :name="separatorIcon || appConfig.ui.icons.minus" data-slot="separatorIcon" :class="ui.separatorIcon({ class: props.ui?.separatorIcon })" />
+        <UIcon :name="props.separatorIcon || appConfig.ui.icons.minus" data-slot="separatorIcon" :class="ui.separatorIcon({ class: props.ui?.separatorIcon })" />
       </slot>
       <ReuseSegmentsTemplate :segments="segments.end" type="end" />
     </template>
 
     <slot :ui="ui" />
 
-    <span v-if="isLeading || !!avatar || !!slots.leading" data-slot="leading" :class="ui.leading({ class: props.ui?.leading })">
+    <span v-if="isLeading || !!props.avatar || !!slots.leading" data-slot="leading" :class="ui.leading({ class: props.ui?.leading })">
       <slot name="leading" :ui="ui">
         <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" data-slot="leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
-        <UAvatar v-else-if="!!avatar" :size="((props.ui?.leadingAvatarSize || ui.leadingAvatarSize()) as AvatarProps['size'])" v-bind="avatar" data-slot="leadingAvatar" :class="ui.leadingAvatar({ class: props.ui?.leadingAvatar })" />
+        <UAvatar v-else-if="!!props.avatar" :size="((props.ui?.leadingAvatarSize || ui.leadingAvatarSize()) as AvatarProps['size'])" v-bind="props.avatar" data-slot="leadingAvatar" :class="ui.leadingAvatar({ class: props.ui?.leadingAvatar })" />
       </slot>
     </span>
 

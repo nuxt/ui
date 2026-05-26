@@ -1,62 +1,52 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
-import type { UseFuseOptions } from '@vueuse/integrations/useFuse'
 import theme from '#build/ui/dashboard-search'
-import type { ButtonProps, InputProps, ModalProps, CommandPaletteProps, CommandPaletteSlots, CommandPaletteGroup, CommandPaletteItem, IconProps } from '../types'
+import type { UseFuseOptions } from '@vueuse/integrations/useFuse'
+import type { ButtonProps, ModalProps, CommandPaletteProps, CommandPaletteSlots, CommandPaletteGroup, CommandPaletteItem, LinkPropsKeys } from '../types'
 import type { ComponentConfig } from '../types/tv'
 
 type DashboardSearch = ComponentConfig<typeof theme, AppConfig, 'dashboardSearch'>
 
-export interface DashboardSearchProps<T extends CommandPaletteItem = CommandPaletteItem> extends Pick<ModalProps, 'title' | 'description' | 'overlay' | 'transition' | 'content' | 'dismissible' | 'fullscreen' | 'modal' | 'portal'> {
+export interface DashboardSearchProps<T extends CommandPaletteItem = CommandPaletteItem> extends Pick<ModalProps, 'title' | 'description' | 'overlay' | 'transition' | 'content' | 'dismissible' | 'fullscreen' | 'modal' | 'portal'>, Pick<CommandPaletteProps<CommandPaletteGroup<T>, T>, 'icon' | 'trailingIcon' | 'selectedIcon' | 'childrenIcon' | 'placeholder' | 'autofocus' | 'loading' | 'loadingIcon' | 'closeIcon' | 'back' | 'backIcon' | 'disabled' | 'highlightOnHover' | 'labelKey' | 'descriptionKey' | 'preserveGroupOrder' | 'virtualize' | 'groups'> {
   /**
-   * The icon displayed in the input.
-   * @defaultValue appConfig.ui.icons.search
-   * @IconifyIcon
+   * @defaultValue 'md'
    */
-  icon?: IconProps['name']
-  /**
-   * The placeholder text for the input.
-   * @defaultValue t('commandPalette.placeholder')
-   */
-  placeholder?: InputProps['placeholder']
-  /**
-   * Automatically focus the input when component is mounted.
-   * @defaultValue true
-   */
-  autofocus?: boolean
-  /** When `true`, the loading icon will be displayed. */
-  loading?: boolean
-  /**
-   * The icon when the `loading` prop is `true`.
-   * @defaultValue appConfig.ui.icons.loading
-   * @IconifyIcon
-   */
-  loadingIcon?: IconProps['name']
+  size?: DashboardSearch['variants']['size']
   /**
    * Display a close button in the input (useful when inside a Modal for example).
    * `{ size: 'md', color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
    * @emits 'update:open'
    * @defaultValue true
    */
-  close?: boolean | Partial<ButtonProps>
-  /**
-   * The icon displayed in the close button.
-   * @defaultValue appConfig.ui.icons.close
-   * @IconifyIcon
-   */
-  closeIcon?: IconProps['name']
+  close?: boolean | Omit<ButtonProps, LinkPropsKeys>
   /**
    * Keyboard shortcut to open the search (used by [`defineShortcuts`](https://ui.nuxt.com/docs/composables/define-shortcuts))
    * @defaultValue 'meta_k'
    */
   shortcut?: string
-  groups?: CommandPaletteGroup<T>[]
   /**
    * Options for [useFuse](https://vueuse.org/integrations/useFuse) passed to the [CommandPalette](https://ui.nuxt.com/docs/components/command-palette).
-   * @defaultValue {}
+   * @defaultValue {
+      fuseOptions: {
+        ignoreLocation: true,
+        useTokenSearch: true,
+        threshold: 0.1,
+        keys: ['label', 'description', 'suffix']
+      },
+      resultLimit: 12,
+      matchAllWhenSearchEmpty: true
+    }
    */
   fuse?: UseFuseOptions<T>
+  /**
+   * Delay (in milliseconds) before the search term is passed to Fuse (debounced).
+   * Useful for large datasets where running fuzzy search on every keystroke is the bottleneck — the input stays responsive while Fuse only re-runs after typing settles.
+   * Set to `0` to disable.
+   * @defaultValue 100
+   */
+  searchDelay?: number
   /**
    * When `true`, the theme command will be added to the groups.
    * @defaultValue true
@@ -66,31 +56,35 @@ export interface DashboardSearchProps<T extends CommandPaletteItem = CommandPale
   ui?: DashboardSearch['slots'] & CommandPaletteProps<CommandPaletteGroup<CommandPaletteItem>, CommandPaletteItem>['ui']
 }
 
-export type DashboardSearchSlots = CommandPaletteSlots<CommandPaletteGroup<CommandPaletteItem>, CommandPaletteItem> & {
-  content(props: { close: () => void }): any
+export type DashboardSearchSlots = CommandPaletteSlots<CommandPaletteItem> & {
+  content?(props: { close: () => void }): VNode[]
 }
 
 </script>
 
 <script setup lang="ts">
 import { computed, useTemplateRef } from 'vue'
-import { useForwardProps } from 'reka-ui'
 import { defu } from 'defu'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig, useColorMode, defineShortcuts, useRuntimeHook } from '#imports'
+import { useComponentProps } from '../composables/useComponentProps'
+import { useForwardProps } from '../composables/useForwardProps'
 import { useLocale } from '../composables/useLocale'
 import { omit, transformUI } from '../utils'
 import { tv } from '../utils/tv'
 import UCommandPalette from './CommandPalette.vue'
 import UModal from './Modal.vue'
 
-const props = withDefaults(defineProps<DashboardSearchProps>(), {
+const _props = withDefaults(defineProps<DashboardSearchProps>(), {
   shortcut: 'meta_k',
   colorMode: true,
   close: true,
-  fullscreen: false
+  fullscreen: false,
+  searchDelay: 100
 })
 const slots = defineSlots<DashboardSearchSlots>()
+
+const props = useComponentProps('dashboardSearch', _props)
 
 const open = defineModel<boolean>('open', { default: false })
 const searchTerm = defineModel<string>('searchTerm', { default: '' })
@@ -104,17 +98,21 @@ const { t } = useLocale()
 const colorMode = useColorMode()
 const appConfig = useAppConfig() as DashboardSearch['AppConfig']
 
-const commandPaletteProps = useForwardProps(reactivePick(props, 'icon', 'placeholder', 'autofocus', 'loading', 'loadingIcon', 'close', 'closeIcon'))
+const commandPaletteProps = useForwardProps(reactivePick(props, 'size', 'icon', 'trailingIcon', 'selectedIcon', 'childrenIcon', 'placeholder', 'autofocus', 'loading', 'loadingIcon', 'close', 'closeIcon', 'back', 'backIcon', 'disabled', 'highlightOnHover', 'labelKey', 'descriptionKey', 'preserveGroupOrder', 'virtualize', 'searchDelay'))
 const modalProps = useForwardProps(reactivePick(props, 'overlay', 'transition', 'content', 'dismissible', 'fullscreen', 'modal', 'portal'))
 
 const getProxySlots = () => omit(slots, ['content'])
 
+// eslint-disable-next-line vue/no-dupe-keys
 const fuse = computed(() => defu({}, props.fuse, {
   fuseOptions: {
+    useTokenSearch: true
   }
 }))
 
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dashboardSearch || {}) })({
+  size: props.size,
   fullscreen: props.fullscreen
 }))
 
@@ -183,8 +181,8 @@ defineExpose({
 <template>
   <UModal
     v-model:open="open"
-    :title="title || t('dashboardSearch.title')"
-    :description="description || t('dashboardSearch.description')"
+    :title="props.title || t('dashboardSearch.title')"
+    :description="props.description || t('dashboardSearch.description')"
     v-bind="modalProps"
     data-slot="modal"
     :class="ui.modal({ class: [props.ui?.modal, props.class] })"
@@ -197,6 +195,7 @@ defineExpose({
           v-bind="commandPaletteProps"
           :groups="groups"
           :fuse="fuse"
+          :input="{ fixed: true }"
           :ui="transformUI(omit(ui, ['modal']), props.ui)"
           @update:model-value="onSelect"
           @update:open="open = $event"

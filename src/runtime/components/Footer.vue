@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { ComponentConfig } from '../types/tv'
 import theme from '#build/ui/footer'
@@ -16,11 +17,11 @@ export interface FooterProps {
 }
 
 export interface FooterSlots {
-  left(props?: {}): any
-  default(props?: {}): any
-  right(props?: {}): any
-  top(props?: {}): any
-  bottom(props?: {}): any
+  left?(props?: {}): VNode[]
+  default?(props?: {}): VNode[]
+  right?(props?: {}): VNode[]
+  top?(props?: {}): VNode[]
+  bottom?(props?: {}): VNode[]
 }
 </script>
 
@@ -28,13 +29,16 @@ export interface FooterSlots {
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
+import { useComponentProps } from '../composables/useComponentProps'
 import { tv } from '../utils/tv'
 import UContainer from './Container.vue'
 
-const props = withDefaults(defineProps<FooterProps>(), {
+const _props = withDefaults(defineProps<FooterProps>(), {
   as: 'footer'
 })
 const slots = defineSlots<FooterSlots>()
+
+const props = useComponentProps('footer', _props)
 
 const appConfig = useAppConfig() as Footer['AppConfig']
 
@@ -43,7 +47,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.footer || {}
 </script>
 
 <template>
-  <Primitive :as="as" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <Primitive :as="props.as" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <div v-if="!!slots.top" data-slot="top" :class="ui.top({ class: props.ui?.top })">
       <slot name="top" />
     </div>

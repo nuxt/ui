@@ -26,18 +26,19 @@ role: 'user'
 id: '1'
 avatar:
   src: 'https://github.com/benjamincanac.png'
+  loading: lazy
 ---
 ::
 
 ::
 
 ::tip{to="/docs/components/chat-messages"}
-Use the [`ChatMessages`](/docs/components/chat-messages) component to display a list of chat messages.
+Use the `ChatMessages` component to display a list of chat messages.
 ::
 
 ### Parts
 
-Use the `parts` prop to display the message content using the AI SDK v5 format.
+Use the `parts` prop to display the message content using the AI SDK format.
 
 ::component-code
 ---
@@ -57,7 +58,7 @@ props:
 ::
 
 ::note
-The `parts` prop is the recommended format for AI SDK v5. Each part has a `type` (e.g., 'text') and corresponding content. The ChatMessage component also supports the deprecated `content` prop for backward compatibility.
+The `parts` prop is the recommended format for the AI SDK. Each part has a `type` (e.g., 'text') and corresponding content. The ChatMessage component also supports the deprecated `content` prop for backward compatibility.
 ::
 
 ### Side
@@ -112,6 +113,29 @@ props:
 When using the [`ChatMessages`](/docs/components/chat-messages) component, the `variant` prop is set to `naked` for `assistant` messages and `soft` for `user` messages.
 ::
 
+### Color :badge{label="4.8+" class="align-text-top"}
+
+Use the `color` prop to change the color of the message.
+
+::component-code
+---
+prettier: true
+ignore:
+  - parts
+  - role
+  - id
+props:
+  variant: 'soft'
+  color: 'primary'
+  parts:
+    - type: 'text'
+      id: '1'
+      text: 'Hello! Tell me more about building AI chatbots with Nuxt UI.'
+  role: 'user'
+  id: '1'
+---
+::
+
 ### Icon
 
 Use the `icon` prop to display an [Icon](/docs/components/icon) component next to the message.
@@ -151,9 +175,11 @@ ignore:
   - variant
   - role
   - id
+  - avatar.loading
 props:
   avatar:
     src: 'https://github.com/benjamincanac.png'
+    loading: lazy
   variant: 'soft'
   side: 'right'
   parts:
@@ -180,7 +206,7 @@ props:
   parts:
     - type: 'text'
       id: '1'
-      text: 'Nuxt UI offers several features for building AI chatbots including the ChatMessage, ChatMessages, and ChatPrompt components. Best practices include using the Chat class from AI SDK v5, implementing proper message styling with variants, and utilizing the built-in actions for message interactions. The components are fully customizable with theming support and responsive design.'
+      text: 'Nuxt UI offers several features for building AI chatbots including the ChatMessage, ChatMessages, and ChatPrompt components. Best practices include using the Chat class from AI SDK, implementing proper message styling with variants, and utilizing the built-in actions for message interactions. The components are fully customizable with theming support and responsive design.'
   role: 'assistant'
   id: '1'
 ---
@@ -195,6 +221,8 @@ Use the `actions` prop to display actions below the message that will be display
 prettier: true
 external:
   - actions
+externalTypes:
+  - ButtonProps[]
 ignore:
   - parts
   - actions
@@ -207,10 +235,16 @@ props:
   parts:
     - type: 'text'
       id: '1'
-      text: 'Nuxt UI offers several features for building AI chatbots including the ChatMessage, ChatMessages, and ChatPrompt components. Best practices include using the Chat class from AI SDK v5, implementing proper message styling with variants, and utilizing the built-in actions for message interactions. The components are fully customizable with theming support and responsive design.'
+      text: 'Nuxt UI offers several features for building AI chatbots including the ChatMessage, ChatMessages, and ChatPrompt components. Best practices include using the Chat class from AI SDK, implementing proper message styling with variants, and utilizing the built-in actions for message interactions. The components are fully customizable with theming support and responsive design.'
   role: 'user'
   id: '1'
 ---
+::
+
+## Examples
+
+::tip{to="/docs/components/chat"}
+Check the **Chat** overview page for installation instructions, server setup and usage examples.
 ::
 
 ## API

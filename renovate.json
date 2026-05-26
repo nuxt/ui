@@ -2,17 +2,17 @@
   "extends": [
     "github>nuxt/renovate-config-nuxt"
   ],
+  "timezone": "Europe/Paris",
+  "schedule": ["* 6-9 * * 1"],
   "lockFileMaintenance": {
     "enabled": true
   },
   "baseBranchPatterns": [
-    "v2",
-    "v3",
     "v4"
   ],
   "ignoreDeps": [
-    "typescript",
-    "actions/stale"
+    "actions/stale",
+    "@nuxt/test-utils"
   ],
   "packageRules": [
     {
@@ -28,6 +28,28 @@
       "matchPackageNames": [
         "reka-ui",
         "vaul-vue"
+      ]
+    },
+    {
+      "groupName": "tiptap",
+      "matchPackageNames": [
+        "@tiptap/*"
+      ]
+    },
+    {
+      "groupName": "vite",
+      "matchPackageNames": [
+        "@vitejs/plugin-vue",
+        "vite",
+        "vue",
+        "vue-router"
+      ]
+    },
+    {
+      "groupName": "vue-tsc",
+      "matchPackageNames": [
+        "vue-tsc",
+        "vue-component-type-helpers"
       ]
     },
     {

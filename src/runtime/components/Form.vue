@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/form'
 import type { FormSchema, FormError, FormInputEvents, FormErrorEvent, FormSubmitEvent, FormEvent, Form, FormErrorWithId, InferInput, InferOutput, FormData } from '../types/form'
@@ -60,6 +61,7 @@ export type FormProps<S extends FormSchema, T extends boolean = true, N extends 
    */
   loadingAuto?: boolean
   class?: any
+  ui?: { base?: any }
   onSubmit?: ((event: FormSubmitEvent<FormData<S, T>>) => void | Promise<void>) | (() => void | Promise<void>)
 } & /** @vue-ignore */ Omit<FormHTMLAttributes, 'name'>
 
@@ -69,23 +71,24 @@ export interface FormEmits<S extends FormSchema, T extends boolean = true> {
 }
 
 export interface FormSlots {
-  default(props: { errors: FormError[], loading: boolean }): any
+  default?(props: { errors: FormErrorWithId[], loading: boolean }): VNode[]
 }
 </script>
 
 <script lang="ts" setup generic="S extends FormSchema, T extends boolean = true, N extends boolean = false">
-import { provide, inject, nextTick, ref, onUnmounted, onMounted, computed, useId, readonly, reactive } from 'vue'
+import { provide, inject, nextTick, ref, onUnmounted, onMounted, computed, useId, readonly, reactive, useTemplateRef } from 'vue'
 import { useEventBus } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { formOptionsInjectionKey, formInputsInjectionKey, formBusInjectionKey, formLoadingInjectionKey, formErrorsInjectionKey, formStateInjectionKey } from '../composables/useFormField'
 import { tv } from '../utils/tv'
+import { useComponentProps } from '../composables/useComponentProps'
 import { validateSchema, getAtPath, setAtPath } from '../utils/form'
 import { FormValidationException } from '../types/form'
 
 type I = InferInput<S>
 type O = InferOutput<S>
 
-const props = withDefaults(defineProps<FormProps<S, T, N>>(), {
+const _props = withDefaults(defineProps<FormProps<S, T, N>>(), {
   validateOn() {
     return ['input', 'blur', 'change'] as FormInputEvents[]
   },
@@ -97,11 +100,15 @@ const props = withDefaults(defineProps<FormProps<S, T, N>>(), {
 const emits = defineEmits<FormEmits<S, T>>()
 defineSlots<FormSlots>()
 
+const props = useComponentProps<FormProps<S, T, N>>('form', _props)
+
 const appConfig = useAppConfig() as FormConfig['AppConfig']
 
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.form || {}) }))
 
 const formId = props.id ?? useId() as string
+const formRef = useTemplateRef('formRef')
 
 const bus = useEventBus<FormEvent<I>>(`form-${formId}`)
 
@@ -111,6 +118,7 @@ const parentBus = props.nested === true && inject(
 )
 
 const parentState = props.nested === true ? inject(formStateInjectionKey, undefined) : undefined
+// eslint-disable-next-line vue/no-dupe-keys
 const state = computed(() => {
   if (parentState?.value) {
     return props.name ? getAtPath(parentState.value, props.name) : parentState.value
@@ -259,7 +267,7 @@ const loading = ref(false)
 provide(formLoadingInjectionKey, readonly(loading))
 
 async function onSubmitWrapper(payload: Event) {
-  loading.value = props.loadingAuto && true
+  loading.value = !!props.loadingAuto
 
   const event = payload as FormSubmitEvent<FormData<S, T>>
 
@@ -282,6 +290,7 @@ async function onSubmitWrapper(payload: Event) {
   }
 }
 
+// eslint-disable-next-line vue/no-dupe-keys
 const disabled = computed(() => props.disabled || loading.value)
 
 provide(formOptionsInjectionKey, computed(() => ({
@@ -399,6 +408,10 @@ const api = {
   },
 
   async submit() {
+    if (formRef.value instanceof HTMLFormElement && formRef.value.reportValidity() === false) {
+      return
+    }
+
     await onSubmitWrapper(new Event('submit'))
   },
 
@@ -448,7 +461,8 @@ defineExpose(api)
   <component
     :is="parentBus ? 'div' : 'form'"
     :id="formId"
-    :class="ui({ class: props.class })"
+    ref="formRef"
+    :class="ui({ class: [props.ui?.base, props.class] })"
     @submit.prevent="onSubmitWrapper"
   >
     <slot :errors="errors" :loading="loading" />

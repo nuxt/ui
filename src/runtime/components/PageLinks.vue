@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/page-links'
 import type { IconProps, LinkProps } from '../types'
@@ -28,14 +29,14 @@ export interface PageLinksProps<T extends PageLink = PageLink> {
   ui?: PageLinks['slots']
 }
 
-type SlotProps<T> = (props: { link: T, active: boolean, ui: PageLinks['ui'] }) => any
+type SlotProps<T> = (props: { link: T, active: boolean, ui: PageLinks['ui'] }) => VNode[]
 
 export interface PageLinksSlots<T extends PageLink = PageLink> {
-  'title'(props?: {}): any
-  'link': SlotProps<T>
-  'link-leading': SlotProps<T>
-  'link-label'(props: { link: T, active: boolean }): any
-  'link-trailing'(props: { link: T, active: boolean }): any
+  'title'?(props?: {}): VNode[]
+  'link'?: SlotProps<T>
+  'link-leading'?: SlotProps<T>
+  'link-label'?(props: { link: T, active: boolean }): VNode[]
+  'link-trailing'?(props: { link: T, active: boolean }): VNode[]
 }
 </script>
 
@@ -43,16 +44,19 @@ export interface PageLinksSlots<T extends PageLink = PageLink> {
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
+import { useComponentProps } from '../composables/useComponentProps'
 import { pickLinkProps } from '../utils/link'
 import { tv } from '../utils/tv'
 import ULink from './Link.vue'
 import ULinkBase from './LinkBase.vue'
 import UIcon from './Icon.vue'
 
-const props = withDefaults(defineProps<PageLinksProps<T>>(), {
+const _props = withDefaults(defineProps<PageLinksProps<T>>(), {
   as: 'nav'
 })
 const slots = defineSlots<PageLinksSlots<T>>()
+
+const props = useComponentProps<PageLinksProps<T>>('pageLinks', _props)
 
 const appConfig = useAppConfig() as PageLinks['AppConfig']
 
@@ -61,15 +65,15 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pageLinks ||
 </script>
 
 <template>
-  <Primitive :as="as" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <p v-if="title || !!slots.title" data-slot="title" :class="ui.title({ class: props.ui?.title })">
+  <Primitive :as="props.as" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+    <p v-if="props.title || !!slots.title" data-slot="title" :class="ui.title({ class: props.ui?.title })">
       <slot name="title">
-        {{ title }}
+        {{ props.title }}
       </slot>
     </p>
 
     <ul data-slot="list" :class="ui.list({ class: props.ui?.list })">
-      <li v-for="(link, index) in links" :key="index" data-slot="item" :class="ui.item({ class: [props.ui?.item, link.ui?.item] })">
+      <li v-for="(link, index) in props.links" :key="index" data-slot="item" :class="ui.item({ class: [props.ui?.item, link.ui?.item] })">
         <ULink v-slot="{ active, ...slotProps }" v-bind="pickLinkProps(link)" custom>
           <ULinkBase v-bind="slotProps" data-slot="link" :class="ui.link({ class: [props.ui?.link, link.ui?.link, link.class], active })">
             <slot name="link" :link="link" :active="active" :ui="ui">

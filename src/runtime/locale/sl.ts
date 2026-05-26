@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'Pošlji sporočilo'
     },
+    chatReasoning: {
+      thinking: 'Razmišlja…',
+      thought: 'Razmislil',
+      thoughtFor: 'Razmišljal {duration}'
+    },
     colorMode: {
       dark: 'Temno',
       light: 'Svetlo',
@@ -50,6 +55,7 @@ export default defineLocale<Messages>({
     },
     contentSearch: {
       links: 'Povezave',
+      search: 'Rezultati',
       theme: 'Tema'
     },
     contentSearchButton: {
@@ -57,6 +63,10 @@ export default defineLocale<Messages>({
     },
     contentToc: {
       title: 'Na tej strani'
+    },
+    dropdownMenu: {
+      noMatch: 'Ni ujemanj',
+      search: 'Išči…'
     },
     dashboardSearch: {
       theme: 'Tema'
@@ -91,6 +101,11 @@ export default defineLocale<Messages>({
       decrement: 'Zmanjšaj',
       increment: 'Povišaj'
     },
+    listbox: {
+      noData: 'Ni podatkov',
+      noMatch: 'Ni ujemanj',
+      search: 'Išči…'
+    },
     modal: {
       close: 'Zapri'
     },
@@ -110,7 +125,15 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'Kopiraj kodo v odložišče'
+      },
+      prompt: {
+        copy: 'Kopiraj poziv',
+        openIn: 'Odpri v {name}'
       }
+    },
+    sidebar: {
+      close: 'Zapri',
+      toggle: 'Preklopi'
     },
     selectMenu: {
       create: 'Ustvari "{label}"',

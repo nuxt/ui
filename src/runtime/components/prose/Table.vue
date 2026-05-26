@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { ComponentConfig } from '../../types/tv'
 import theme from '#build/ui/prose/table'
@@ -11,17 +12,21 @@ export interface ProseTableProps {
 }
 
 export interface ProseTableSlots {
-  default(props?: {}): any
+  default(props?: {}): VNode[]
 }
 </script>
 
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useAppConfig } from '#imports'
+import { useComponentProps } from '../../composables/useComponentProps'
 import { tv } from '../../utils/tv'
 
-const props = defineProps<ProseTableProps>()
+const _props = defineProps<ProseTableProps>()
+
 defineSlots<ProseTableSlots>()
+
+const props = useComponentProps('prose.table', _props)
 
 const appConfig = useAppConfig() as ProseTable['AppConfig']
 

@@ -50,6 +50,7 @@ export default defineLocale<Messages>({
     },
     contentSearch: {
       links: 'Links',
+      search: 'Results',
       theme: 'Theme'
     },
     contentSearchButton: {
@@ -57,6 +58,10 @@ export default defineLocale<Messages>({
     },
     contentToc: {
       title: 'On this page'
+    },
+    dropdownMenu: {
+      noMatch: 'No matching data',
+      search: 'Search…'
     },
     dashboardSearch: {
       theme: 'Theme'
@@ -91,6 +96,11 @@ export default defineLocale<Messages>({
       decrement: 'Decrement',
       increment: 'Increment'
     },
+    listbox: {
+      noData: 'No data',
+      noMatch: 'No matching data',
+      search: 'Search…'
+    },
     modal: {
       close: 'Close'
     },
@@ -110,7 +120,20 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'Copy code to clipboard'
+      },
+      prompt: {
+        copy: 'Copy prompt',
+        openIn: 'Open in {name}'
       }
+    },
+    chatReasoning: {
+      thinking: 'Thinking…',
+      thought: 'Thought',
+      thoughtFor: 'Thought for {duration}'
+    },
+    sidebar: {
+      close: 'Close',
+      toggle: 'Toggle'
     },
     selectMenu: {
       create: 'Create "{label}"',

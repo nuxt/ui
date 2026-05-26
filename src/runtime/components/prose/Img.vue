@@ -22,19 +22,22 @@ export interface ProseImgProps {
 
 <script setup lang="ts">
 import { ref, computed, useId } from 'vue'
-import { withTrailingSlash, withLeadingSlash, joinURL } from 'ufo'
 import { DialogRoot, DialogPortal, DialogTrigger } from 'reka-ui'
 import { AnimatePresence, Motion } from 'motion-v'
 import { useEventListener, createReusableTemplate } from '@vueuse/core'
 import { useRuntimeConfig, useAppConfig } from '#imports'
 import ImageComponent from '#build/ui-image-component'
+import { useComponentProps } from '../../composables/useComponentProps'
+import { resolveBaseURL } from '../../utils'
 import { tv } from '../../utils/tv'
 
 defineOptions({ inheritAttrs: false })
 
-const props = withDefaults(defineProps<ProseImgProps>(), {
+const _props = withDefaults(defineProps<ProseImgProps>(), {
   zoom: true
 })
+
+const props = useComponentProps('prose.img', _props)
 
 const appConfig = useAppConfig() as ProseImg['AppConfig']
 
@@ -43,26 +46,26 @@ const [DefineZoomedImageTemplate, ReuseZoomedImageTemplate] = createReusableTemp
 
 const open = ref(false)
 
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.img || {}) })({
   zoom: props.zoom,
-  open: open.value
+  open: open.value,
+  width: !!props.width
 }))
 
-const refinedSrc = computed(() => {
-  if (props.src?.startsWith('/') && !props.src.startsWith('//')) {
-    const _base = withLeadingSlash(withTrailingSlash(useRuntimeConfig().app.baseURL))
-    if (_base !== '/' && !props.src.startsWith(_base)) {
-      return joinURL(_base, props.src)
-    }
-  }
-  return props.src
-})
+const refinedSrc = computed(() => resolveBaseURL(props.src, useRuntimeConfig().app.baseURL))
 
 const layoutId = computed(() => `${refinedSrc.value}::${useId()}`)
 
 if (props.zoom) {
   useEventListener(window, 'scroll', () => {
     open.value = false
+  })
+
+  useEventListener(window, 'keydown', (e: KeyboardEvent) => {
+    if (e.key === 'Escape' && open.value) {
+      open.value = false
+    }
   })
 }
 </script>
@@ -72,9 +75,9 @@ if (props.zoom) {
     <component
       :is="ImageComponent"
       :src="refinedSrc"
-      :alt="alt"
-      :width="width"
-      :height="height"
+      :alt="props.alt"
+      :width="props.width"
+      :height="props.height"
       v-bind="$attrs"
       :class="ui.base({ class: [props.ui?.base, props.class] })"
     />
@@ -84,13 +87,13 @@ if (props.zoom) {
     <component
       :is="ImageComponent"
       :src="refinedSrc"
-      :alt="alt"
+      :alt="props.alt"
       v-bind="$attrs"
       :class="ui.zoomedImage({ class: [props.ui?.zoomedImage] })"
     />
   </DefineZoomedImageTemplate>
 
-  <DialogRoot v-if="zoom" v-slot="{ close }" v-model:open="open" :modal="false">
+  <DialogRoot v-if="props.zoom" v-slot="{ close }" v-model:open="open" :modal="false">
     <DialogTrigger as-child>
       <Motion :layout-id="layoutId" as-child :transition="{ type: 'spring', bounce: 0.15, duration: 0.5, ease: 'easeInOut' }">
         <ReuseImageTemplate />

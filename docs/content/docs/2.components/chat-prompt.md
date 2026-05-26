@@ -35,21 +35,18 @@ class: 'rounded-full'
 ---
 placeholder: 'Select a model'
 variant: 'ghost'
-icon: 'i-simple-icons-openai'
-modelValue: 'gpt-4o'
+icon: 'i-simple-icons-anthropic'
+modelValue: 'claude-opus-4.6'
 items:
-  - label: 'Gemini 2.5 Pro'
-    value: 'gemini-2.5-pro'
-    icon: 'i-simple-icons-googlegemini'
-  - label: 'GPT-4o'
-    value: 'gpt-4o'
-    icon: 'i-simple-icons-openai'
-  - label: 'Claude 3.5 Sonnet'
-    value: 'claude-3.5-sonnet'
+  - label: 'Claude Opus 4.6'
+    value: 'claude-opus-4.6'
     icon: 'i-simple-icons-anthropic'
-  - label: 'Llama 4'
-    value: 'llama-4'
-    icon: 'i-simple-icons-ollama'
+  - label: 'Gemini 3 Pro'
+    value: 'gemini-3-pro'
+    icon: 'i-simple-icons-googlegemini'
+  - label: 'GPT-5'
+    value: 'gpt-5'
+    icon: 'i-simple-icons-openai'
 ---
 ::::
 
@@ -60,7 +57,7 @@ items:
 ::note
 The ChatPrompt handles the following events:
 
-- The form is submitted when the user presses :kbd{value="enter"} or when the user clicks on the submit button.
+- The form is submitted when the user presses :kbd{value="enter"} or when the user clicks on the submit button. Set the `submit-on-enter` prop to `false` to submit with :kbd{value="ctrl"} + :kbd{value="enter"} (or :kbd{value="cmd"} + :kbd{value="enter"} on macOS) instead, allowing :kbd{value="enter"} to insert a newline.
 - The textarea is blurred when :kbd{value="escape"} is pressed and emits a `close` event.
 ::
 
@@ -80,62 +77,11 @@ props:
 
 ## Examples
 
-::note{to="https://ai-sdk.dev/docs/getting-started/nuxt" target="_blank"}
-These chat components are designed to be used with the **AI SDK v5** from **Vercel AI SDK**.
+::tip{to="/docs/components/chat"}
+Check the **Chat** overview page for installation instructions, server setup and usage examples.
 ::
 
-::callout{icon="i-simple-icons-github" to="https://github.com/nuxt-ui-templates/chat" target="_blank"}
-Check out the source code of our **AI Chat template** on GitHub for a real-life example.
-::
-
-### Within a page
-
-Use the ChatPrompt component with the `Chat` class from AI SDK v5 to display a chat prompt within a page.
-
-Pass the `input` prop alongside the `error` prop to disable the textarea when an error occurs.
-
-```vue [pages/\[id\\].vue] {2,5,13-17,34,36}
-<script setup lang="ts">
-import { Chat } from '@ai-sdk/vue'
-import { getTextFromMessage } from '@nuxt/ui/utils/ai'
-
-const input = ref('')
-
-const chat = new Chat({
-  onError(error) {
-    console.error(error)
-  }
-})
-
-function onSubmit() {
-  chat.sendMessage({ text: input.value })
-
-  input.value = ''
-}
-</script>
-
-<template>
-  <UDashboardPanel>
-    <template #body>
-      <UContainer>
-        <UChatMessages :messages="chat.messages" :status="chat.status">
-          <template #content="{ message }">
-            <MDC :value="getTextFromMessage(message)" :cache-key="message.id" class="*:first:mt-0 *:last:mb-0" />
-          </template>
-        </UChatMessages>
-      </UContainer>
-    </template>
-
-    <template #footer>
-      <UContainer class="pb-4 sm:pb-6">
-        <UChatPrompt v-model="input" :error="chat.error" @submit="onSubmit">
-          <UChatPromptSubmit :status="chat.status" @stop="chat.stop()" @reload="chat.regenerate()" />
-        </UChatPrompt>
-      </UContainer>
-    </template>
-  </UDashboardPanel>
-</template>
-```
+### As a starting point
 
 You can also use it as a starting point for a chat interface.
 

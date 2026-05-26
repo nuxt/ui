@@ -1,6 +1,7 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import type { ContextMenuRootProps, ContextMenuRootEmits, ContextMenuContentProps, ContextMenuContentEmits } from 'reka-ui'
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/context-menu'
 import type { AvatarProps, IconProps, KbdProps, LinkProps } from '../types'
@@ -88,36 +89,38 @@ export interface ContextMenuProps<T extends ArrayOrNested<ContextMenuItem> = Arr
 
 export interface ContextMenuEmits extends ContextMenuRootEmits {}
 
-type SlotProps<T extends ContextMenuItem> = (props: { item: T, active?: boolean, index: number, ui: ContextMenu['ui'] }) => any
+type SlotProps<T extends ContextMenuItem> = (props: { item: T, active: boolean, index: number, ui: ContextMenu['ui'] }) => VNode[]
 
 export type ContextMenuSlots<
   A extends ArrayOrNested<ContextMenuItem> = ArrayOrNested<ContextMenuItem>,
   T extends NestedItem<A> = NestedItem<A>
 > = {
-  'default'(props?: {}): any
-  'item': SlotProps<T>
-  'item-leading': SlotProps<T>
-  'item-label': (props: { item: T, active?: boolean, index: number }) => any
-  'item-description': (props: { item: T, active?: boolean, index: number }) => any
-  'item-trailing': SlotProps<T>
-  'content-top': (props?: {}) => any
-  'content-bottom': (props?: {}) => any
+  'default'?(props?: {}): VNode[]
+  'item'?: SlotProps<T>
+  'item-leading'?: SlotProps<T>
+  'item-label'?: (props: { item: T, active: boolean, index: number }) => VNode[]
+  'item-description'?: (props: { item: T, active: boolean, index: number }) => VNode[]
+  'item-trailing'?: SlotProps<T>
+  'content-top'?: (props: { sub: boolean }) => VNode[]
+  'content-bottom'?: (props: { sub: boolean }) => VNode[]
 }
-& DynamicSlots<MergeTypes<T>, 'label' | 'description', { active?: boolean, index: number }>
-& DynamicSlots<MergeTypes<T>, 'leading' | 'trailing', { active?: boolean, index: number, ui: ContextMenu['ui'] }>
+& DynamicSlots<MergeTypes<T>, 'label' | 'description', { active: boolean, index: number }>
+& DynamicSlots<MergeTypes<T>, 'leading' | 'trailing', { active: boolean, index: number, ui: ContextMenu['ui'] }>
 
 </script>
 
 <script setup lang="ts" generic="T extends ArrayOrNested<ContextMenuItem>">
 import { computed, toRef } from 'vue'
-import { ContextMenuRoot, ContextMenuTrigger, useForwardPropsEmits } from 'reka-ui'
+import { ContextMenuRoot, ContextMenuTrigger } from 'reka-ui'
+import { useForwardProps } from '../composables/useForwardProps'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
+import { useComponentProps } from '../composables/useComponentProps'
 import { omit } from '../utils'
 import { tv } from '../utils/tv'
 import UContextMenuContent from './ContextMenuContent.vue'
 
-const props = withDefaults(defineProps<ContextMenuProps<T>>(), {
+const _props = withDefaults(defineProps<ContextMenuProps<T>>(), {
   portal: true,
   modal: true,
   externalIcon: true,
@@ -127,12 +130,15 @@ const props = withDefaults(defineProps<ContextMenuProps<T>>(), {
 const emits = defineEmits<ContextMenuEmits>()
 const slots = defineSlots<ContextMenuSlots<T>>()
 
+const props = useComponentProps<ContextMenuProps<T>>('contextMenu', _props)
+
 const appConfig = useAppConfig() as ContextMenu['AppConfig']
 
-const rootProps = useForwardPropsEmits(reactivePick(props, 'modal'), emits)
+const rootProps = useForwardProps(reactivePick(props, 'modal'), emits)
 const contentProps = toRef(() => props.content)
 const getProxySlots = () => omit(slots, ['default'])
 
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.contextMenu || {}) })({
   size: props.size
 }))
@@ -140,7 +146,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.contextMenu 
 
 <template>
   <ContextMenuRoot v-bind="rootProps">
-    <ContextMenuTrigger v-if="!!slots.default" as-child :disabled="disabled" :class="props.class">
+    <ContextMenuTrigger v-if="!!slots.default" as-child :disabled="props.disabled" :class="props.class">
       <slot />
     </ContextMenuTrigger>
 
@@ -149,13 +155,13 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.contextMenu 
       :ui="ui"
       :ui-override="props.ui"
       v-bind="contentProps"
-      :items="items"
-      :portal="portal"
-      :label-key="(labelKey as keyof NestedItem<T>)"
-      :description-key="(descriptionKey as keyof NestedItem<T>)"
-      :checked-icon="checkedIcon"
-      :loading-icon="loadingIcon"
-      :external-icon="externalIcon"
+      :items="props.items"
+      :portal="props.portal"
+      :label-key="(props.labelKey as string & keyof NestedItem<T>)"
+      :description-key="(props.descriptionKey as string & keyof NestedItem<T>)"
+      :checked-icon="props.checkedIcon"
+      :loading-icon="props.loadingIcon"
+      :external-icon="props.externalIcon"
     >
       <template v-for="(_, name) in getProxySlots()" #[name]="slotData">
         <slot :name="(name as keyof ContextMenuSlots<T>)" v-bind="slotData" />

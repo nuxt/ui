@@ -12,7 +12,14 @@ useSeoMeta({
   ogDescription: page.value.description
 })
 
-defineOgImageComponent('Docs')
+useCanonical()
+
+if (import.meta.server) {
+  defineOgImage('Docs.takumi', {
+    title: page.value.title,
+    description: page.value.description
+  })
+}
 
 const { data: module } = await useFetch('/api/module.json')
 
@@ -32,7 +39,7 @@ const icons = {
 </script>
 
 <template>
-  <div v-if="page">
+  <main v-if="page">
     <UPageHero
       :title="page.hero.title"
       :description="page.hero.description"
@@ -69,6 +76,7 @@ const icons = {
             <UAvatar
               :src="`https://ipx.nuxt.com/f_auto,s_80x80/gh_avatar/${user.login}`"
               :srcset="`https://ipx.nuxt.com/f_auto,s_160x160/gh_avatar/${user.login} 2x`"
+              :alt="`${user.name} avatar`"
               size="3xl"
               class="mx-auto"
             />
@@ -82,7 +90,7 @@ const icons = {
               variant="link"
               :to="link.url"
               :icon="icons[key as keyof typeof icons] || icons.website"
-              :alt="`Link to ${user.name}'s ${key} profile`"
+              :aria-label="`Link to ${user.name}'s ${key} profile`"
               target="_blank"
               size="sm"
             />
@@ -90,7 +98,7 @@ const icons = {
               :to="`https://github.com/${user.login}`"
               color="neutral"
               variant="link"
-              :alt="`Link to ${user.name}'s GitHub profile`"
+              :aria-label="`Link to ${user.name}'s GitHub profile`"
               :icon="icons.github"
               target="_blank"
             />
@@ -99,7 +107,7 @@ const icons = {
               :to="user.websiteUrl"
               color="neutral"
               variant="link"
-              :alt="`Link to ${user.name}'s personal website`"
+              :aria-label="`Link to ${user.name}'s personal website`"
               :icon="icons.website"
               target="_blank"
             />
@@ -137,6 +145,7 @@ const icons = {
             <UAvatar
               :src="`https://ipx.nuxt.com/f_auto,s_80x80/gh_avatar/${contributor.username}`"
               :srcset="`https://ipx.nuxt.com/f_auto,s_160x160/gh_avatar/${contributor.username} 2x`"
+              :alt="`${contributor.username} avatar`"
               size="3xl"
               class="mx-auto"
               loading="lazy"
@@ -148,7 +157,7 @@ const icons = {
               :to="`https://github.com/${contributor.username}`"
               color="neutral"
               variant="link"
-              :alt="`Link to ${contributor.username}'s GitHub profile`"
+              :aria-label="`Link to ${contributor.username}'s GitHub profile`"
               :icon="icons.github"
               target="_blank"
             />
@@ -156,5 +165,5 @@ const icons = {
         </UPageCard>
       </UPageGrid>
     </UPageSection>
-  </div>
+  </main>
 </template>

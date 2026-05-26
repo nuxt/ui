@@ -17,7 +17,7 @@ The PageCard component provides a flexible way to display content in a card with
 ::u-page-card
 ---
 title: 'Tailwind CSS'
-description: 'Nuxt UI integrates with latest Tailwind CSS v4, bringing significant improvements.'
+description: 'Nuxt UI integrates with latest Tailwind CSS, bringing significant improvements.'
 icon: 'i-simple-icons-tailwindcss'
 class: 'w-96'
 ---
@@ -58,7 +58,7 @@ ignore:
   - title
 props:
   title: 'Tailwind CSS'
-  description: 'Nuxt UI integrates with latest Tailwind CSS v4, bringing significant improvements.'
+  description: 'Nuxt UI integrates with latest Tailwind CSS, bringing significant improvements.'
   class: 'w-96'
 ---
 ::
@@ -77,7 +77,7 @@ ignore:
   - description
 props:
   title: 'Tailwind CSS'
-  description: 'Nuxt UI integrates with latest Tailwind CSS v4, bringing significant improvements.'
+  description: 'Nuxt UI integrates with latest Tailwind CSS, bringing significant improvements.'
   icon: 'i-simple-icons-tailwindcss'
   class: 'w-96'
 ---
@@ -99,7 +99,7 @@ ignore:
   - target
 props:
   title: 'Tailwind CSS'
-  description: 'Nuxt UI integrates with latest Tailwind CSS v4, bringing significant improvements.'
+  description: 'Nuxt UI integrates with latest Tailwind CSS, bringing significant improvements.'
   icon: 'i-simple-icons-tailwindcss'
   to: 'https://tailwindcss.com/docs/v4-beta'
   target: _blank
@@ -124,7 +124,7 @@ ignore:
   - target
 props:
   title: 'Tailwind CSS'
-  description: 'Nuxt UI integrates with latest Tailwind CSS v4, bringing significant improvements.'
+  description: 'Nuxt UI integrates with latest Tailwind CSS, bringing significant improvements.'
   icon: 'i-simple-icons-tailwindcss'
   to: 'https://tailwindcss.com/docs/v4-beta'
   target: _blank
@@ -150,7 +150,7 @@ ignore:
   - icon
 props:
   title: 'Tailwind CSS'
-  description: 'Nuxt UI integrates with latest Tailwind CSS v4, bringing significant improvements.'
+  description: 'Nuxt UI integrates with latest Tailwind CSS, bringing significant improvements.'
   icon: 'i-simple-icons-tailwindcss'
   orientation: horizontal
 slots:
@@ -175,7 +175,7 @@ ignore:
   - icon
 props:
   title: 'Tailwind CSS'
-  description: 'Nuxt UI integrates with latest Tailwind CSS v4, bringing significant improvements.'
+  description: 'Nuxt UI integrates with latest Tailwind CSS, bringing significant improvements.'
   icon: 'i-simple-icons-tailwindcss'
   orientation: horizontal
   reverse: true
@@ -204,7 +204,7 @@ ignore:
   - orientation
 props:
   title: 'Tailwind CSS'
-  description: 'Nuxt UI integrates with latest Tailwind CSS v4, bringing significant improvements.'
+  description: 'Nuxt UI integrates with latest Tailwind CSS, bringing significant improvements.'
   icon: 'i-simple-icons-tailwindcss'
   orientation: horizontal
   highlight: true
@@ -238,7 +238,7 @@ ignore:
   - orientation
 props:
   title: 'Tailwind CSS'
-  description: 'Nuxt UI integrates with latest Tailwind CSS v4, bringing significant improvements.'
+  description: 'Nuxt UI integrates with latest Tailwind CSS, bringing significant improvements.'
   icon: 'i-simple-icons-tailwindcss'
   orientation: horizontal
   spotlight: true
@@ -275,7 +275,7 @@ name: 'page-card-testimonial-example'
 ::
 
 ::tip{to="/docs/components/page-columns"}
-You can use the [`PageColumns`](/docs/components/page-columns) component to display multiple PageCard in a multi-column layout.
+You can use the `PageColumns` component to display multiple PageCard in a multi-column layout.
 ::
 
 ## API

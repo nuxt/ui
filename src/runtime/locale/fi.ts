@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'Lähetä'
     },
+    chatReasoning: {
+      thinking: 'Ajattelee…',
+      thought: 'Ajatteli',
+      thoughtFor: 'Ajatteli {duration}'
+    },
     colorMode: {
       dark: 'Tumma',
       light: 'Vaalea',
@@ -50,6 +55,7 @@ export default defineLocale<Messages>({
     },
     contentSearch: {
       links: 'Linkit',
+      search: 'Tulokset',
       theme: 'Teema'
     },
     contentSearchButton: {
@@ -57,6 +63,10 @@ export default defineLocale<Messages>({
     },
     contentToc: {
       title: 'Tällä sivulla'
+    },
+    dropdownMenu: {
+      noMatch: 'Ei vastaavia tietoja',
+      search: 'Hae…'
     },
     dashboardSearch: {
       theme: 'Teema'
@@ -91,6 +101,11 @@ export default defineLocale<Messages>({
       decrement: 'Vähennä',
       increment: 'Kasvata'
     },
+    listbox: {
+      noData: 'Ei tietoja',
+      noMatch: 'Ei vastaavia tietoja',
+      search: 'Hae…'
+    },
     modal: {
       close: 'Sulje'
     },
@@ -110,7 +125,15 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'Kopioi koodi leikepöydälle'
+      },
+      prompt: {
+        copy: 'Kopioi kehote',
+        openIn: 'Avaa sovelluksessa {name}'
       }
+    },
+    sidebar: {
+      close: 'Sulje',
+      toggle: 'Vaihda'
     },
     selectMenu: {
       create: 'Luo "{label}"',

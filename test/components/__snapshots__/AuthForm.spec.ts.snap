@@ -7,30 +7,30 @@ exports[`AuthForm > renders with as correctly 1`] = `
     <!--v-if-->
     <!--v-if-->
     <form id="v-0-0-0" class="space-y-5" data-slot="form">
-      <div data-slot="root" class="text-sm">
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
-          <div data-slot="labelWrapper" class="flex content-center items-center justify-between"><label for="v-0-0-1" data-slot="label" class="block font-medium text-default">Email</label>
+          <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-1" data-slot="label" class="block font-medium text-default">Email</label>
             <!--v-if-->
           </div>
           <!--v-if-->
         </div>
-        <div class="mt-1 relative">
-          <div data-slot="root" class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error" autocomplete="off" aria-invalid="true" aria-describedby="v-0-0-1-error">
+        <div class="relative mt-1">
+          <div data-slot="root" class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error md:text-sm" autocomplete="off" aria-invalid="true" aria-describedby="v-0-0-1-error">
             <!--v-if-->
             <!--v-if-->
           </div>
           <div id="v-0-0-1-error" data-slot="error" class="mt-2 text-error">Invalid email format</div>
         </div>
       </div>
-      <div data-slot="root" class="text-sm">
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
-          <div data-slot="labelWrapper" class="flex content-center items-center justify-between"><label for="v-0-0-2" data-slot="label" class="block font-medium text-default">Password</label>
+          <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-2" data-slot="label" class="block font-medium text-default">Password</label>
             <!--v-if-->
           </div>
           <!--v-if-->
         </div>
-        <div class="mt-1 relative">
-          <div data-slot="root" class="relative inline-flex items-center w-full"><input id="v-0-0-2" type="password" name="password" data-slot="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary pe-9" autocomplete="off" aria-invalid="false">
+        <div class="relative mt-1">
+          <div data-slot="root" class="relative inline-flex items-center w-full"><input id="v-0-0-2" type="password" name="password" data-slot="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary pe-9 md:text-sm" autocomplete="off" aria-invalid="false">
             <!--v-if--><span data-slot="trailing" class="absolute inset-y-0 end-0 flex items-center pe-2.5"><button type="button" aria-label="Show password" aria-pressed="false" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5" aria-controls="v-0-0-2"><span class="iconify i-lucide:eye shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
             <!--v-if-->
             <!--v-if--></button></span>
@@ -55,30 +55,30 @@ exports[`AuthForm > renders with class correctly 1`] = `
     <!--v-if-->
     <!--v-if-->
     <form id="v-0-0-0" class="space-y-5" data-slot="form">
-      <div data-slot="root" class="text-sm">
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
-          <div data-slot="labelWrapper" class="flex content-center items-center justify-between"><label for="v-0-0-1" data-slot="label" class="block font-medium text-default">Email</label>
+          <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-1" data-slot="label" class="block font-medium text-default">Email</label>
             <!--v-if-->
           </div>
           <!--v-if-->
         </div>
-        <div class="mt-1 relative">
-          <div data-slot="root" class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error" autocomplete="off" aria-invalid="true" aria-describedby="v-0-0-1-error">
+        <div class="relative mt-1">
+          <div data-slot="root" class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error md:text-sm" autocomplete="off" aria-invalid="true" aria-describedby="v-0-0-1-error">
             <!--v-if-->
             <!--v-if-->
           </div>
           <div id="v-0-0-1-error" data-slot="error" class="mt-2 text-error">Invalid email format</div>
         </div>
       </div>
-      <div data-slot="root" class="text-sm">
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
-          <div data-slot="labelWrapper" class="flex content-center items-center justify-between"><label for="v-0-0-2" data-slot="label" class="block font-medium text-default">Password</label>
+          <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-2" data-slot="label" class="block font-medium text-default">Password</label>
             <!--v-if-->
           </div>
           <!--v-if-->
         </div>
-        <div class="mt-1 relative">
-          <div data-slot="root" class="relative inline-flex items-center w-full"><input id="v-0-0-2" type="password" name="password" data-slot="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary pe-9" autocomplete="off" aria-invalid="false">
+        <div class="relative mt-1">
+          <div data-slot="root" class="relative inline-flex items-center w-full"><input id="v-0-0-2" type="password" name="password" data-slot="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary pe-9 md:text-sm" autocomplete="off" aria-invalid="false">
             <!--v-if--><span data-slot="trailing" class="absolute inset-y-0 end-0 flex items-center pe-2.5"><button type="button" aria-label="Show password" aria-pressed="false" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5" aria-controls="v-0-0-2"><span class="iconify i-lucide:eye shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
             <!--v-if-->
             <!--v-if--></button></span>
@@ -107,30 +107,30 @@ exports[`AuthForm > renders with description correctly 1`] = `
     <!--v-if-->
     <!--v-if-->
     <form id="v-0-0-0" class="space-y-5" data-slot="form">
-      <div data-slot="root" class="text-sm">
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
-          <div data-slot="labelWrapper" class="flex content-center items-center justify-between"><label for="v-0-0-1" data-slot="label" class="block font-medium text-default">Email</label>
+          <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-1" data-slot="label" class="block font-medium text-default">Email</label>
             <!--v-if-->
           </div>
           <!--v-if-->
         </div>
-        <div class="mt-1 relative">
-          <div data-slot="root" class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error" autocomplete="off" aria-invalid="true" aria-describedby="v-0-0-1-error">
+        <div class="relative mt-1">
+          <div data-slot="root" class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error md:text-sm" autocomplete="off" aria-invalid="true" aria-describedby="v-0-0-1-error">
             <!--v-if-->
             <!--v-if-->
           </div>
           <div id="v-0-0-1-error" data-slot="error" class="mt-2 text-error">Invalid email format</div>
         </div>
       </div>
-      <div data-slot="root" class="text-sm">
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
-          <div data-slot="labelWrapper" class="flex content-center items-center justify-between"><label for="v-0-0-2" data-slot="label" class="block font-medium text-default">Password</label>
+          <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-2" data-slot="label" class="block font-medium text-default">Password</label>
             <!--v-if-->
           </div>
           <!--v-if-->
         </div>
-        <div class="mt-1 relative">
-          <div data-slot="root" class="relative inline-flex items-center w-full"><input id="v-0-0-2" type="password" name="password" data-slot="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary pe-9" autocomplete="off" aria-invalid="false">
+        <div class="relative mt-1">
+          <div data-slot="root" class="relative inline-flex items-center w-full"><input id="v-0-0-2" type="password" name="password" data-slot="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary pe-9 md:text-sm" autocomplete="off" aria-invalid="false">
             <!--v-if--><span data-slot="trailing" class="absolute inset-y-0 end-0 flex items-center pe-2.5"><button type="button" aria-label="Show password" aria-pressed="false" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5" aria-controls="v-0-0-2"><span class="iconify i-lucide:eye shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
             <!--v-if-->
             <!--v-if--></button></span>
@@ -159,30 +159,30 @@ exports[`AuthForm > renders with description slot correctly 1`] = `
     <!--v-if-->
     <!--v-if-->
     <form id="v-0-0-0" class="space-y-5" data-slot="form">
-      <div data-slot="root" class="text-sm">
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
-          <div data-slot="labelWrapper" class="flex content-center items-center justify-between"><label for="v-0-0-1" data-slot="label" class="block font-medium text-default">Email</label>
+          <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-1" data-slot="label" class="block font-medium text-default">Email</label>
             <!--v-if-->
           </div>
           <!--v-if-->
         </div>
-        <div class="mt-1 relative">
-          <div data-slot="root" class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error" autocomplete="off" aria-invalid="true" aria-describedby="v-0-0-1-error">
+        <div class="relative mt-1">
+          <div data-slot="root" class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error md:text-sm" autocomplete="off" aria-invalid="true" aria-describedby="v-0-0-1-error">
             <!--v-if-->
             <!--v-if-->
           </div>
           <div id="v-0-0-1-error" data-slot="error" class="mt-2 text-error">Invalid email format</div>
         </div>
       </div>
-      <div data-slot="root" class="text-sm">
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
-          <div data-slot="labelWrapper" class="flex content-center items-center justify-between"><label for="v-0-0-2" data-slot="label" class="block font-medium text-default">Password</label>
+          <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-2" data-slot="label" class="block font-medium text-default">Password</label>
             <!--v-if-->
           </div>
           <!--v-if-->
         </div>
-        <div class="mt-1 relative">
-          <div data-slot="root" class="relative inline-flex items-center w-full"><input id="v-0-0-2" type="password" name="password" data-slot="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary pe-9" autocomplete="off" aria-invalid="false">
+        <div class="relative mt-1">
+          <div data-slot="root" class="relative inline-flex items-center w-full"><input id="v-0-0-2" type="password" name="password" data-slot="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary pe-9 md:text-sm" autocomplete="off" aria-invalid="false">
             <!--v-if--><span data-slot="trailing" class="absolute inset-y-0 end-0 flex items-center pe-2.5"><button type="button" aria-label="Show password" aria-pressed="false" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5" aria-controls="v-0-0-2"><span class="iconify i-lucide:eye shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
             <!--v-if-->
             <!--v-if--></button></span>
@@ -207,30 +207,30 @@ exports[`AuthForm > renders with disabled correctly 1`] = `
     <!--v-if-->
     <!--v-if-->
     <form id="v-0-0-0" class="space-y-5" data-slot="form">
-      <div data-slot="root" class="text-sm">
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
-          <div data-slot="labelWrapper" class="flex content-center items-center justify-between"><label for="v-0-0-1" data-slot="label" class="block font-medium text-default">Email</label>
+          <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-1" data-slot="label" class="block font-medium text-default">Email</label>
             <!--v-if-->
           </div>
           <!--v-if-->
         </div>
-        <div class="mt-1 relative">
-          <div data-slot="root" class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error" disabled="" autocomplete="off" aria-invalid="true" aria-describedby="v-0-0-1-error">
+        <div class="relative mt-1">
+          <div data-slot="root" class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error md:text-sm" disabled="" autocomplete="off" aria-invalid="true" aria-describedby="v-0-0-1-error">
             <!--v-if-->
             <!--v-if-->
           </div>
           <div id="v-0-0-1-error" data-slot="error" class="mt-2 text-error">Invalid email format</div>
         </div>
       </div>
-      <div data-slot="root" class="text-sm">
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
-          <div data-slot="labelWrapper" class="flex content-center items-center justify-between"><label for="v-0-0-2" data-slot="label" class="block font-medium text-default">Password</label>
+          <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-2" data-slot="label" class="block font-medium text-default">Password</label>
             <!--v-if-->
           </div>
           <!--v-if-->
         </div>
-        <div class="mt-1 relative">
-          <div data-slot="root" class="relative inline-flex items-center w-full"><input id="v-0-0-2" type="password" name="password" data-slot="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary pe-9" disabled="" autocomplete="off" aria-invalid="false">
+        <div class="relative mt-1">
+          <div data-slot="root" class="relative inline-flex items-center w-full"><input id="v-0-0-2" type="password" name="password" data-slot="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary pe-9 md:text-sm" disabled="" autocomplete="off" aria-invalid="false">
             <!--v-if--><span data-slot="trailing" class="absolute inset-y-0 end-0 flex items-center pe-2.5"><button type="button" aria-label="Show password" aria-pressed="false" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5" aria-controls="v-0-0-2"><span class="iconify i-lucide:eye shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
             <!--v-if-->
             <!--v-if--></button></span>
@@ -255,30 +255,30 @@ exports[`AuthForm > renders with fields correctly 1`] = `
     <!--v-if-->
     <!--v-if-->
     <form id="v-0-0-0" class="space-y-5" data-slot="form">
-      <div data-slot="root" class="text-sm">
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
-          <div data-slot="labelWrapper" class="flex content-center items-center justify-between"><label for="v-0-0-1" data-slot="label" class="block font-medium text-default">Email</label>
+          <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-1" data-slot="label" class="block font-medium text-default">Email</label>
             <!--v-if-->
           </div>
           <!--v-if-->
         </div>
-        <div class="mt-1 relative">
-          <div data-slot="root" class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error" autocomplete="off" aria-invalid="true" aria-describedby="v-0-0-1-error">
+        <div class="relative mt-1">
+          <div data-slot="root" class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error md:text-sm" autocomplete="off" aria-invalid="true" aria-describedby="v-0-0-1-error">
             <!--v-if-->
             <!--v-if-->
           </div>
           <div id="v-0-0-1-error" data-slot="error" class="mt-2 text-error">Invalid email format</div>
         </div>
       </div>
-      <div data-slot="root" class="text-sm">
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
-          <div data-slot="labelWrapper" class="flex content-center items-center justify-between"><label for="v-0-0-2" data-slot="label" class="block font-medium text-default">Password</label>
+          <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-2" data-slot="label" class="block font-medium text-default">Password</label>
             <!--v-if-->
           </div>
           <!--v-if-->
         </div>
-        <div class="mt-1 relative">
-          <div data-slot="root" class="relative inline-flex items-center w-full"><input id="v-0-0-2" type="password" name="password" data-slot="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary pe-9" autocomplete="off" aria-invalid="false">
+        <div class="relative mt-1">
+          <div data-slot="root" class="relative inline-flex items-center w-full"><input id="v-0-0-2" type="password" name="password" data-slot="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary pe-9 md:text-sm" autocomplete="off" aria-invalid="false">
             <!--v-if--><span data-slot="trailing" class="absolute inset-y-0 end-0 flex items-center pe-2.5"><button type="button" aria-label="Show password" aria-pressed="false" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5" aria-controls="v-0-0-2"><span class="iconify i-lucide:eye shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
             <!--v-if-->
             <!--v-if--></button></span>
@@ -303,30 +303,30 @@ exports[`AuthForm > renders with footer slot correctly 1`] = `
     <!--v-if-->
     <!--v-if-->
     <form id="v-0-0-0" class="space-y-5" data-slot="form">
-      <div data-slot="root" class="text-sm">
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
-          <div data-slot="labelWrapper" class="flex content-center items-center justify-between"><label for="v-0-0-1" data-slot="label" class="block font-medium text-default">Email</label>
+          <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-1" data-slot="label" class="block font-medium text-default">Email</label>
             <!--v-if-->
           </div>
           <!--v-if-->
         </div>
-        <div class="mt-1 relative">
-          <div data-slot="root" class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error" autocomplete="off" aria-invalid="true" aria-describedby="v-0-0-1-error">
+        <div class="relative mt-1">
+          <div data-slot="root" class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error md:text-sm" autocomplete="off" aria-invalid="true" aria-describedby="v-0-0-1-error">
             <!--v-if-->
             <!--v-if-->
           </div>
           <div id="v-0-0-1-error" data-slot="error" class="mt-2 text-error">Invalid email format</div>
         </div>
       </div>
-      <div data-slot="root" class="text-sm">
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
-          <div data-slot="labelWrapper" class="flex content-center items-center justify-between"><label for="v-0-0-2" data-slot="label" class="block font-medium text-default">Password</label>
+          <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-2" data-slot="label" class="block font-medium text-default">Password</label>
             <!--v-if-->
           </div>
           <!--v-if-->
         </div>
-        <div class="mt-1 relative">
-          <div data-slot="root" class="relative inline-flex items-center w-full"><input id="v-0-0-2" type="password" name="password" data-slot="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary pe-9" autocomplete="off" aria-invalid="false">
+        <div class="relative mt-1">
+          <div data-slot="root" class="relative inline-flex items-center w-full"><input id="v-0-0-2" type="password" name="password" data-slot="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary pe-9 md:text-sm" autocomplete="off" aria-invalid="false">
             <!--v-if--><span data-slot="trailing" class="absolute inset-y-0 end-0 flex items-center pe-2.5"><button type="button" aria-label="Show password" aria-pressed="false" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5" aria-controls="v-0-0-2"><span class="iconify i-lucide:eye shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
             <!--v-if-->
             <!--v-if--></button></span>
@@ -351,30 +351,30 @@ exports[`AuthForm > renders with header slot correctly 1`] = `
     <!--v-if-->
     <!--v-if-->
     <form id="v-0-0-0" class="space-y-5" data-slot="form">
-      <div data-slot="root" class="text-sm">
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
-          <div data-slot="labelWrapper" class="flex content-center items-center justify-between"><label for="v-0-0-1" data-slot="label" class="block font-medium text-default">Email</label>
+          <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-1" data-slot="label" class="block font-medium text-default">Email</label>
             <!--v-if-->
           </div>
           <!--v-if-->
         </div>
-        <div class="mt-1 relative">
-          <div data-slot="root" class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error" autocomplete="off" aria-invalid="true" aria-describedby="v-0-0-1-error">
+        <div class="relative mt-1">
+          <div data-slot="root" class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error md:text-sm" autocomplete="off" aria-invalid="true" aria-describedby="v-0-0-1-error">
             <!--v-if-->
             <!--v-if-->
           </div>
           <div id="v-0-0-1-error" data-slot="error" class="mt-2 text-error">Invalid email format</div>
         </div>
       </div>
-      <div data-slot="root" class="text-sm">
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
-          <div data-slot="labelWrapper" class="flex content-center items-center justify-between"><label for="v-0-0-2" data-slot="label" class="block font-medium text-default">Password</label>
+          <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-2" data-slot="label" class="block font-medium text-default">Password</label>
             <!--v-if-->
           </div>
           <!--v-if-->
         </div>
-        <div class="mt-1 relative">
-          <div data-slot="root" class="relative inline-flex items-center w-full"><input id="v-0-0-2" type="password" name="password" data-slot="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary pe-9" autocomplete="off" aria-invalid="false">
+        <div class="relative mt-1">
+          <div data-slot="root" class="relative inline-flex items-center w-full"><input id="v-0-0-2" type="password" name="password" data-slot="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary pe-9 md:text-sm" autocomplete="off" aria-invalid="false">
             <!--v-if--><span data-slot="trailing" class="absolute inset-y-0 end-0 flex items-center pe-2.5"><button type="button" aria-label="Show password" aria-pressed="false" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5" aria-controls="v-0-0-2"><span class="iconify i-lucide:eye shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
             <!--v-if-->
             <!--v-if--></button></span>
@@ -403,30 +403,30 @@ exports[`AuthForm > renders with icon correctly 1`] = `
     <!--v-if-->
     <!--v-if-->
     <form id="v-0-0-0" class="space-y-5" data-slot="form">
-      <div data-slot="root" class="text-sm">
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
-          <div data-slot="labelWrapper" class="flex content-center items-center justify-between"><label for="v-0-0-1" data-slot="label" class="block font-medium text-default">Email</label>
+          <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-1" data-slot="label" class="block font-medium text-default">Email</label>
             <!--v-if-->
           </div>
           <!--v-if-->
         </div>
-        <div class="mt-1 relative">
-          <div data-slot="root" class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error" autocomplete="off" aria-invalid="true" aria-describedby="v-0-0-1-error">
+        <div class="relative mt-1">
+          <div data-slot="root" class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error md:text-sm" autocomplete="off" aria-invalid="true" aria-describedby="v-0-0-1-error">
             <!--v-if-->
             <!--v-if-->
           </div>
           <div id="v-0-0-1-error" data-slot="error" class="mt-2 text-error">Invalid email format</div>
         </div>
       </div>
-      <div data-slot="root" class="text-sm">
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
-          <div data-slot="labelWrapper" class="flex content-center items-center justify-between"><label for="v-0-0-2" data-slot="label" class="block font-medium text-default">Password</label>
+          <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-2" data-slot="label" class="block font-medium text-default">Password</label>
             <!--v-if-->
           </div>
           <!--v-if-->
         </div>
-        <div class="mt-1 relative">
-          <div data-slot="root" class="relative inline-flex items-center w-full"><input id="v-0-0-2" type="password" name="password" data-slot="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary pe-9" autocomplete="off" aria-invalid="false">
+        <div class="relative mt-1">
+          <div data-slot="root" class="relative inline-flex items-center w-full"><input id="v-0-0-2" type="password" name="password" data-slot="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary pe-9 md:text-sm" autocomplete="off" aria-invalid="false">
             <!--v-if--><span data-slot="trailing" class="absolute inset-y-0 end-0 flex items-center pe-2.5"><button type="button" aria-label="Show password" aria-pressed="false" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5" aria-controls="v-0-0-2"><span class="iconify i-lucide:eye shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
             <!--v-if-->
             <!--v-if--></button></span>
@@ -455,30 +455,30 @@ exports[`AuthForm > renders with leading slot correctly 1`] = `
     <!--v-if-->
     <!--v-if-->
     <form id="v-0-0-0" class="space-y-5" data-slot="form">
-      <div data-slot="root" class="text-sm">
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
-          <div data-slot="labelWrapper" class="flex content-center items-center justify-between"><label for="v-0-0-1" data-slot="label" class="block font-medium text-default">Email</label>
+          <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-1" data-slot="label" class="block font-medium text-default">Email</label>
             <!--v-if-->
           </div>
           <!--v-if-->
         </div>
-        <div class="mt-1 relative">
-          <div data-slot="root" class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error" autocomplete="off" aria-invalid="true" aria-describedby="v-0-0-1-error">
+        <div class="relative mt-1">
+          <div data-slot="root" class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error md:text-sm" autocomplete="off" aria-invalid="true" aria-describedby="v-0-0-1-error">
             <!--v-if-->
             <!--v-if-->
           </div>
           <div id="v-0-0-1-error" data-slot="error" class="mt-2 text-error">Invalid email format</div>
         </div>
       </div>
-      <div data-slot="root" class="text-sm">
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
-          <div data-slot="labelWrapper" class="flex content-center items-center justify-between"><label for="v-0-0-2" data-slot="label" class="block font-medium text-default">Password</label>
+          <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-2" data-slot="label" class="block font-medium text-default">Password</label>
             <!--v-if-->
           </div>
           <!--v-if-->
         </div>
-        <div class="mt-1 relative">
-          <div data-slot="root" class="relative inline-flex items-center w-full"><input id="v-0-0-2" type="password" name="password" data-slot="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary pe-9" autocomplete="off" aria-invalid="false">
+        <div class="relative mt-1">
+          <div data-slot="root" class="relative inline-flex items-center w-full"><input id="v-0-0-2" type="password" name="password" data-slot="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary pe-9 md:text-sm" autocomplete="off" aria-invalid="false">
             <!--v-if--><span data-slot="trailing" class="absolute inset-y-0 end-0 flex items-center pe-2.5"><button type="button" aria-label="Show password" aria-pressed="false" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5" aria-controls="v-0-0-2"><span class="iconify i-lucide:eye shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
             <!--v-if-->
             <!--v-if--></button></span>
@@ -503,30 +503,30 @@ exports[`AuthForm > renders with loading correctly 1`] = `
     <!--v-if-->
     <!--v-if-->
     <form id="v-0-0-0" class="space-y-5" data-slot="form">
-      <div data-slot="root" class="text-sm">
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
-          <div data-slot="labelWrapper" class="flex content-center items-center justify-between"><label for="v-0-0-1" data-slot="label" class="block font-medium text-default">Email</label>
+          <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-1" data-slot="label" class="block font-medium text-default">Email</label>
             <!--v-if-->
           </div>
           <!--v-if-->
         </div>
-        <div class="mt-1 relative">
-          <div data-slot="root" class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error" autocomplete="off" aria-invalid="true" aria-describedby="v-0-0-1-error">
+        <div class="relative mt-1">
+          <div data-slot="root" class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error md:text-sm" autocomplete="off" aria-invalid="true" aria-describedby="v-0-0-1-error">
             <!--v-if-->
             <!--v-if-->
           </div>
           <div id="v-0-0-1-error" data-slot="error" class="mt-2 text-error">Invalid email format</div>
         </div>
       </div>
-      <div data-slot="root" class="text-sm">
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
-          <div data-slot="labelWrapper" class="flex content-center items-center justify-between"><label for="v-0-0-2" data-slot="label" class="block font-medium text-default">Password</label>
+          <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-2" data-slot="label" class="block font-medium text-default">Password</label>
             <!--v-if-->
           </div>
           <!--v-if-->
         </div>
-        <div class="mt-1 relative">
-          <div data-slot="root" class="relative inline-flex items-center w-full"><input id="v-0-0-2" type="password" name="password" data-slot="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary pe-9" autocomplete="off" aria-invalid="false">
+        <div class="relative mt-1">
+          <div data-slot="root" class="relative inline-flex items-center w-full"><input id="v-0-0-2" type="password" name="password" data-slot="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary pe-9 md:text-sm" autocomplete="off" aria-invalid="false">
             <!--v-if--><span data-slot="trailing" class="absolute inset-y-0 end-0 flex items-center pe-2.5"><button type="button" aria-label="Show password" aria-pressed="false" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5" aria-controls="v-0-0-2"><span class="iconify i-lucide:eye shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
             <!--v-if-->
             <!--v-if--></button></span>
@@ -550,36 +550,39 @@ exports[`AuthForm > renders with providers correctly 1`] = `
     <div data-slot="providers" class="space-y-3"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center ring ring-inset ring-accented text-default bg-elevated hover:bg-accented/75 active:bg-accented/75 disabled:bg-elevated aria-disabled:bg-elevated focus:outline-none focus-visible:ring-2 focus-visible:ring-inverted"><span class="iconify i-simple-icons:google shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span><span data-slot="label" class="truncate">Google</span>
         <!--v-if-->
       </button></div>
-    <div data-orientation="horizontal" role="separator" data-slot="separator" class="flex items-center align-center text-center w-full flex-row">
+    <!---->
+    <div data-orientation="horizontal" role="separator" data-slot="root" class="flex items-center align-center text-center w-full flex-row">
+      <!--v-if-->
       <div data-slot="border" class="border-default w-full border-solid border-t"></div>
-      <div data-slot="container" class="font-medium text-default flex mx-3 whitespace-nowrap"><span data-slot="label" class="text-sm">or</span></div>
+      <div data-slot="container" class="font-medium text-default flex whitespace-nowrap mx-3"><span data-slot="label" class="text-sm">or</span></div>
       <div data-slot="border" class="border-default w-full border-solid border-t"></div>
+      <!--v-if-->
     </div>
     <form id="v-0-0-0" class="space-y-5" data-slot="form">
-      <div data-slot="root" class="text-sm">
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
-          <div data-slot="labelWrapper" class="flex content-center items-center justify-between"><label for="v-0-0-1" data-slot="label" class="block font-medium text-default">Email</label>
+          <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-1" data-slot="label" class="block font-medium text-default">Email</label>
             <!--v-if-->
           </div>
           <!--v-if-->
         </div>
-        <div class="mt-1 relative">
-          <div data-slot="root" class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error" autocomplete="off" aria-invalid="true" aria-describedby="v-0-0-1-error">
+        <div class="relative mt-1">
+          <div data-slot="root" class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error md:text-sm" autocomplete="off" aria-invalid="true" aria-describedby="v-0-0-1-error">
             <!--v-if-->
             <!--v-if-->
           </div>
           <div id="v-0-0-1-error" data-slot="error" class="mt-2 text-error">Invalid email format</div>
         </div>
       </div>
-      <div data-slot="root" class="text-sm">
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
-          <div data-slot="labelWrapper" class="flex content-center items-center justify-between"><label for="v-0-0-2" data-slot="label" class="block font-medium text-default">Password</label>
+          <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-2" data-slot="label" class="block font-medium text-default">Password</label>
             <!--v-if-->
           </div>
           <!--v-if-->
         </div>
-        <div class="mt-1 relative">
-          <div data-slot="root" class="relative inline-flex items-center w-full"><input id="v-0-0-2" type="password" name="password" data-slot="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary pe-9" autocomplete="off" aria-invalid="false">
+        <div class="relative mt-1">
+          <div data-slot="root" class="relative inline-flex items-center w-full"><input id="v-0-0-2" type="password" name="password" data-slot="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary pe-9 md:text-sm" autocomplete="off" aria-invalid="false">
             <!--v-if--><span data-slot="trailing" class="absolute inset-y-0 end-0 flex items-center pe-2.5"><button type="button" aria-label="Show password" aria-pressed="false" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5" aria-controls="v-0-0-2"><span class="iconify i-lucide:eye shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
             <!--v-if-->
             <!--v-if--></button></span>
@@ -604,30 +607,30 @@ exports[`AuthForm > renders with providers slot correctly 1`] = `
     <div data-slot="providers" class="space-y-3">Providers</div>
     <!--v-if-->
     <form id="v-0-0-0" class="space-y-5" data-slot="form">
-      <div data-slot="root" class="text-sm">
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
-          <div data-slot="labelWrapper" class="flex content-center items-center justify-between"><label for="v-0-0-1" data-slot="label" class="block font-medium text-default">Email</label>
+          <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-1" data-slot="label" class="block font-medium text-default">Email</label>
             <!--v-if-->
           </div>
           <!--v-if-->
         </div>
-        <div class="mt-1 relative">
-          <div data-slot="root" class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error" autocomplete="off" aria-invalid="true" aria-describedby="v-0-0-1-error">
+        <div class="relative mt-1">
+          <div data-slot="root" class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error md:text-sm" autocomplete="off" aria-invalid="true" aria-describedby="v-0-0-1-error">
             <!--v-if-->
             <!--v-if-->
           </div>
           <div id="v-0-0-1-error" data-slot="error" class="mt-2 text-error">Invalid email format</div>
         </div>
       </div>
-      <div data-slot="root" class="text-sm">
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
-          <div data-slot="labelWrapper" class="flex content-center items-center justify-between"><label for="v-0-0-2" data-slot="label" class="block font-medium text-default">Password</label>
+          <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-2" data-slot="label" class="block font-medium text-default">Password</label>
             <!--v-if-->
           </div>
           <!--v-if-->
         </div>
-        <div class="mt-1 relative">
-          <div data-slot="root" class="relative inline-flex items-center w-full"><input id="v-0-0-2" type="password" name="password" data-slot="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary pe-9" autocomplete="off" aria-invalid="false">
+        <div class="relative mt-1">
+          <div data-slot="root" class="relative inline-flex items-center w-full"><input id="v-0-0-2" type="password" name="password" data-slot="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary pe-9 md:text-sm" autocomplete="off" aria-invalid="false">
             <!--v-if--><span data-slot="trailing" class="absolute inset-y-0 end-0 flex items-center pe-2.5"><button type="button" aria-label="Show password" aria-pressed="false" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5" aria-controls="v-0-0-2"><span class="iconify i-lucide:eye shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
             <!--v-if-->
             <!--v-if--></button></span>
@@ -652,30 +655,30 @@ exports[`AuthForm > renders with separator correctly 1`] = `
     <!--v-if-->
     <!--v-if-->
     <form id="v-0-0-0" class="space-y-5" data-slot="form">
-      <div data-slot="root" class="text-sm">
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
-          <div data-slot="labelWrapper" class="flex content-center items-center justify-between"><label for="v-0-0-1" data-slot="label" class="block font-medium text-default">Email</label>
+          <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-1" data-slot="label" class="block font-medium text-default">Email</label>
             <!--v-if-->
           </div>
           <!--v-if-->
         </div>
-        <div class="mt-1 relative">
-          <div data-slot="root" class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error" autocomplete="off" aria-invalid="true" aria-describedby="v-0-0-1-error">
+        <div class="relative mt-1">
+          <div data-slot="root" class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error md:text-sm" autocomplete="off" aria-invalid="true" aria-describedby="v-0-0-1-error">
             <!--v-if-->
             <!--v-if-->
           </div>
           <div id="v-0-0-1-error" data-slot="error" class="mt-2 text-error">Invalid email format</div>
         </div>
       </div>
-      <div data-slot="root" class="text-sm">
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
-          <div data-slot="labelWrapper" class="flex content-center items-center justify-between"><label for="v-0-0-2" data-slot="label" class="block font-medium text-default">Password</label>
+          <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-2" data-slot="label" class="block font-medium text-default">Password</label>
             <!--v-if-->
           </div>
           <!--v-if-->
         </div>
-        <div class="mt-1 relative">
-          <div data-slot="root" class="relative inline-flex items-center w-full"><input id="v-0-0-2" type="password" name="password" data-slot="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary pe-9" autocomplete="off" aria-invalid="false">
+        <div class="relative mt-1">
+          <div data-slot="root" class="relative inline-flex items-center w-full"><input id="v-0-0-2" type="password" name="password" data-slot="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary pe-9 md:text-sm" autocomplete="off" aria-invalid="false">
             <!--v-if--><span data-slot="trailing" class="absolute inset-y-0 end-0 flex items-center pe-2.5"><button type="button" aria-label="Show password" aria-pressed="false" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5" aria-controls="v-0-0-2"><span class="iconify i-lucide:eye shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
             <!--v-if-->
             <!--v-if--></button></span>
@@ -700,30 +703,30 @@ exports[`AuthForm > renders with submit correctly 1`] = `
     <!--v-if-->
     <!--v-if-->
     <form id="v-0-0-0" class="space-y-5" data-slot="form">
-      <div data-slot="root" class="text-sm">
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
-          <div data-slot="labelWrapper" class="flex content-center items-center justify-between"><label for="v-0-0-1" data-slot="label" class="block font-medium text-default">Email</label>
+          <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-1" data-slot="label" class="block font-medium text-default">Email</label>
             <!--v-if-->
           </div>
           <!--v-if-->
         </div>
-        <div class="mt-1 relative">
-          <div data-slot="root" class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error" autocomplete="off" aria-invalid="true" aria-describedby="v-0-0-1-error">
+        <div class="relative mt-1">
+          <div data-slot="root" class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error md:text-sm" autocomplete="off" aria-invalid="true" aria-describedby="v-0-0-1-error">
             <!--v-if-->
             <!--v-if-->
           </div>
           <div id="v-0-0-1-error" data-slot="error" class="mt-2 text-error">Invalid email format</div>
         </div>
       </div>
-      <div data-slot="root" class="text-sm">
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
-          <div data-slot="labelWrapper" class="flex content-center items-center justify-between"><label for="v-0-0-2" data-slot="label" class="block font-medium text-default">Password</label>
+          <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-2" data-slot="label" class="block font-medium text-default">Password</label>
             <!--v-if-->
           </div>
           <!--v-if-->
         </div>
-        <div class="mt-1 relative">
-          <div data-slot="root" class="relative inline-flex items-center w-full"><input id="v-0-0-2" type="password" name="password" data-slot="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary pe-9" autocomplete="off" aria-invalid="false">
+        <div class="relative mt-1">
+          <div data-slot="root" class="relative inline-flex items-center w-full"><input id="v-0-0-2" type="password" name="password" data-slot="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary pe-9 md:text-sm" autocomplete="off" aria-invalid="false">
             <!--v-if--><span data-slot="trailing" class="absolute inset-y-0 end-0 flex items-center pe-2.5"><button type="button" aria-label="Show password" aria-pressed="false" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5" aria-controls="v-0-0-2"><span class="iconify i-lucide:eye shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
             <!--v-if-->
             <!--v-if--></button></span>
@@ -748,30 +751,30 @@ exports[`AuthForm > renders with submit slot correctly 1`] = `
     <!--v-if-->
     <!--v-if-->
     <form id="v-0-0-0" class="space-y-5" data-slot="form">
-      <div data-slot="root" class="text-sm">
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
-          <div data-slot="labelWrapper" class="flex content-center items-center justify-between"><label for="v-0-0-1" data-slot="label" class="block font-medium text-default">Email</label>
+          <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-1" data-slot="label" class="block font-medium text-default">Email</label>
             <!--v-if-->
           </div>
           <!--v-if-->
         </div>
-        <div class="mt-1 relative">
-          <div data-slot="root" class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error" autocomplete="off" aria-invalid="true" aria-describedby="v-0-0-1-error">
+        <div class="relative mt-1">
+          <div data-slot="root" class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error md:text-sm" autocomplete="off" aria-invalid="true" aria-describedby="v-0-0-1-error">
             <!--v-if-->
             <!--v-if-->
           </div>
           <div id="v-0-0-1-error" data-slot="error" class="mt-2 text-error">Invalid email format</div>
         </div>
       </div>
-      <div data-slot="root" class="text-sm">
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
-          <div data-slot="labelWrapper" class="flex content-center items-center justify-between"><label for="v-0-0-2" data-slot="label" class="block font-medium text-default">Password</label>
+          <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-2" data-slot="label" class="block font-medium text-default">Password</label>
             <!--v-if-->
           </div>
           <!--v-if-->
         </div>
-        <div class="mt-1 relative">
-          <div data-slot="root" class="relative inline-flex items-center w-full"><input id="v-0-0-2" type="password" name="password" data-slot="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary pe-9" autocomplete="off" aria-invalid="false">
+        <div class="relative mt-1">
+          <div data-slot="root" class="relative inline-flex items-center w-full"><input id="v-0-0-2" type="password" name="password" data-slot="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary pe-9 md:text-sm" autocomplete="off" aria-invalid="false">
             <!--v-if--><span data-slot="trailing" class="absolute inset-y-0 end-0 flex items-center pe-2.5"><button type="button" aria-label="Show password" aria-pressed="false" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5" aria-controls="v-0-0-2"><span class="iconify i-lucide:eye shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
             <!--v-if-->
             <!--v-if--></button></span>
@@ -797,30 +800,30 @@ exports[`AuthForm > renders with title correctly 1`] = `
     <!--v-if-->
     <!--v-if-->
     <form id="v-0-0-0" class="space-y-5" data-slot="form">
-      <div data-slot="root" class="text-sm">
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
-          <div data-slot="labelWrapper" class="flex content-center items-center justify-between"><label for="v-0-0-1" data-slot="label" class="block font-medium text-default">Email</label>
+          <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-1" data-slot="label" class="block font-medium text-default">Email</label>
             <!--v-if-->
           </div>
           <!--v-if-->
         </div>
-        <div class="mt-1 relative">
-          <div data-slot="root" class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error" autocomplete="off" aria-invalid="true" aria-describedby="v-0-0-1-error">
+        <div class="relative mt-1">
+          <div data-slot="root" class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error md:text-sm" autocomplete="off" aria-invalid="true" aria-describedby="v-0-0-1-error">
             <!--v-if-->
             <!--v-if-->
           </div>
           <div id="v-0-0-1-error" data-slot="error" class="mt-2 text-error">Invalid email format</div>
         </div>
       </div>
-      <div data-slot="root" class="text-sm">
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
-          <div data-slot="labelWrapper" class="flex content-center items-center justify-between"><label for="v-0-0-2" data-slot="label" class="block font-medium text-default">Password</label>
+          <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-2" data-slot="label" class="block font-medium text-default">Password</label>
             <!--v-if-->
           </div>
           <!--v-if-->
         </div>
-        <div class="mt-1 relative">
-          <div data-slot="root" class="relative inline-flex items-center w-full"><input id="v-0-0-2" type="password" name="password" data-slot="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary pe-9" autocomplete="off" aria-invalid="false">
+        <div class="relative mt-1">
+          <div data-slot="root" class="relative inline-flex items-center w-full"><input id="v-0-0-2" type="password" name="password" data-slot="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary pe-9 md:text-sm" autocomplete="off" aria-invalid="false">
             <!--v-if--><span data-slot="trailing" class="absolute inset-y-0 end-0 flex items-center pe-2.5"><button type="button" aria-label="Show password" aria-pressed="false" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5" aria-controls="v-0-0-2"><span class="iconify i-lucide:eye shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
             <!--v-if-->
             <!--v-if--></button></span>
@@ -849,30 +852,30 @@ exports[`AuthForm > renders with title slot correctly 1`] = `
     <!--v-if-->
     <!--v-if-->
     <form id="v-0-0-0" class="space-y-5" data-slot="form">
-      <div data-slot="root" class="text-sm">
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
-          <div data-slot="labelWrapper" class="flex content-center items-center justify-between"><label for="v-0-0-1" data-slot="label" class="block font-medium text-default">Email</label>
+          <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-1" data-slot="label" class="block font-medium text-default">Email</label>
             <!--v-if-->
           </div>
           <!--v-if-->
         </div>
-        <div class="mt-1 relative">
-          <div data-slot="root" class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error" autocomplete="off" aria-invalid="true" aria-describedby="v-0-0-1-error">
+        <div class="relative mt-1">
+          <div data-slot="root" class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error md:text-sm" autocomplete="off" aria-invalid="true" aria-describedby="v-0-0-1-error">
             <!--v-if-->
             <!--v-if-->
           </div>
           <div id="v-0-0-1-error" data-slot="error" class="mt-2 text-error">Invalid email format</div>
         </div>
       </div>
-      <div data-slot="root" class="text-sm">
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
-          <div data-slot="labelWrapper" class="flex content-center items-center justify-between"><label for="v-0-0-2" data-slot="label" class="block font-medium text-default">Password</label>
+          <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-2" data-slot="label" class="block font-medium text-default">Password</label>
             <!--v-if-->
           </div>
           <!--v-if-->
         </div>
-        <div class="mt-1 relative">
-          <div data-slot="root" class="relative inline-flex items-center w-full"><input id="v-0-0-2" type="password" name="password" data-slot="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary pe-9" autocomplete="off" aria-invalid="false">
+        <div class="relative mt-1">
+          <div data-slot="root" class="relative inline-flex items-center w-full"><input id="v-0-0-2" type="password" name="password" data-slot="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary pe-9 md:text-sm" autocomplete="off" aria-invalid="false">
             <!--v-if--><span data-slot="trailing" class="absolute inset-y-0 end-0 flex items-center pe-2.5"><button type="button" aria-label="Show password" aria-pressed="false" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5" aria-controls="v-0-0-2"><span class="iconify i-lucide:eye shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
             <!--v-if-->
             <!--v-if--></button></span>
@@ -897,30 +900,30 @@ exports[`AuthForm > renders with ui correctly 1`] = `
     <!--v-if-->
     <!--v-if-->
     <form id="v-0-0-0" class="space-y-5" data-slot="form">
-      <div data-slot="root" class="text-sm">
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
-          <div data-slot="labelWrapper" class="flex content-center items-center justify-between"><label for="v-0-0-1" data-slot="label" class="block font-medium text-default">Email</label>
+          <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-1" data-slot="label" class="block font-medium text-default">Email</label>
             <!--v-if-->
           </div>
           <!--v-if-->
         </div>
-        <div class="mt-1 relative">
-          <div data-slot="root" class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error" autocomplete="off" aria-invalid="true" aria-describedby="v-0-0-1-error">
+        <div class="relative mt-1">
+          <div data-slot="root" class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error md:text-sm" autocomplete="off" aria-invalid="true" aria-describedby="v-0-0-1-error">
             <!--v-if-->
             <!--v-if-->
           </div>
           <div id="v-0-0-1-error" data-slot="error" class="mt-2 text-error">Invalid email format</div>
         </div>
       </div>
-      <div data-slot="root" class="text-sm">
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
-          <div data-slot="labelWrapper" class="flex content-center items-center justify-between"><label for="v-0-0-2" data-slot="label" class="block font-medium text-default">Password</label>
+          <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-2" data-slot="label" class="block font-medium text-default">Password</label>
             <!--v-if-->
           </div>
           <!--v-if-->
         </div>
-        <div class="mt-1 relative">
-          <div data-slot="root" class="relative inline-flex items-center w-full"><input id="v-0-0-2" type="password" name="password" data-slot="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary pe-9" autocomplete="off" aria-invalid="false">
+        <div class="relative mt-1">
+          <div data-slot="root" class="relative inline-flex items-center w-full"><input id="v-0-0-2" type="password" name="password" data-slot="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary pe-9 md:text-sm" autocomplete="off" aria-invalid="false">
             <!--v-if--><span data-slot="trailing" class="absolute inset-y-0 end-0 flex items-center pe-2.5"><button type="button" aria-label="Show password" aria-pressed="false" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5" aria-controls="v-0-0-2"><span class="iconify i-lucide:eye shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
             <!--v-if-->
             <!--v-if--></button></span>
@@ -945,30 +948,30 @@ exports[`AuthForm > renders with validation slot correctly 1`] = `
     <!--v-if-->
     <!--v-if-->
     <form id="v-0-0-0" class="space-y-5" data-slot="form">
-      <div data-slot="root" class="text-sm">
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
-          <div data-slot="labelWrapper" class="flex content-center items-center justify-between"><label for="v-0-0-1" data-slot="label" class="block font-medium text-default">Email</label>
+          <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-1" data-slot="label" class="block font-medium text-default">Email</label>
             <!--v-if-->
           </div>
           <!--v-if-->
         </div>
-        <div class="mt-1 relative">
-          <div data-slot="root" class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error" autocomplete="off" aria-invalid="true" aria-describedby="v-0-0-1-error">
+        <div class="relative mt-1">
+          <div data-slot="root" class="relative inline-flex items-center w-full"><input id="v-0-0-1" type="text" name="email" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-error ring ring-inset ring-error md:text-sm" autocomplete="off" aria-invalid="true" aria-describedby="v-0-0-1-error">
             <!--v-if-->
             <!--v-if-->
           </div>
           <div id="v-0-0-1-error" data-slot="error" class="mt-2 text-error">Invalid email format</div>
         </div>
       </div>
-      <div data-slot="root" class="text-sm">
+      <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
-          <div data-slot="labelWrapper" class="flex content-center items-center justify-between"><label for="v-0-0-2" data-slot="label" class="block font-medium text-default">Password</label>
+          <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-2" data-slot="label" class="block font-medium text-default">Password</label>
             <!--v-if-->
           </div>
           <!--v-if-->
         </div>
-        <div class="mt-1 relative">
-          <div data-slot="root" class="relative inline-flex items-center w-full"><input id="v-0-0-2" type="password" name="password" data-slot="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary pe-9" autocomplete="off" aria-invalid="false">
+        <div class="relative mt-1">
+          <div data-slot="root" class="relative inline-flex items-center w-full"><input id="v-0-0-2" type="password" name="password" data-slot="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary pe-9 md:text-sm" autocomplete="off" aria-invalid="false">
             <!--v-if--><span data-slot="trailing" class="absolute inset-y-0 end-0 flex items-center pe-2.5"><button type="button" aria-label="Show password" aria-pressed="false" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-inverted p-1.5" aria-controls="v-0-0-2"><span class="iconify i-lucide:eye shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
             <!--v-if-->
             <!--v-if--></button></span>

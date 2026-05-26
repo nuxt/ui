@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
-import type { MaybeRefOrGetter } from '@vueuse/shared'
+import type { MaybeRefOrGetter } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/color-picker'
 import type { HSLObject } from 'colortranslator'
@@ -43,6 +43,7 @@ export type ColorPickerProps = {
   as?: any
   /**
    * Throttle time in ms for the color picker
+   * @defaultValue 50
    */
   throttle?: number
   /**
@@ -51,6 +52,7 @@ export type ColorPickerProps = {
   disabled?: boolean
   /**
    * The default value of the color picker
+   * @defaultValue '#FFFFFF'
    */
   defaultValue?: string
   /**
@@ -75,18 +77,22 @@ import { useEventListener, useElementBounding, watchThrottled, watchPausable } f
 import { isClient } from '@vueuse/shared'
 import { ColorTranslator } from 'colortranslator'
 import { useAppConfig } from '#imports'
+import { useComponentProps } from '../composables/useComponentProps'
 import { tv } from '../utils/tv'
 
-const props = withDefaults(defineProps<ColorPickerProps>(), {
+const _props = withDefaults(defineProps<ColorPickerProps>(), {
   format: 'hex',
   throttle: 50,
   defaultValue: '#FFFFFF'
 })
 
+const props = useComponentProps('colorPicker', _props)
+
 const modelValue = defineModel<string>(undefined)
 
 const appConfig = useAppConfig() as ColorPicker['AppConfig']
 
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.colorPicker || {}) })({
   size: props.size
 }))
@@ -205,6 +211,7 @@ const selectorThumbRef = ref<HTMLDivElement | null>(null)
 const trackRef = ref<HTMLDivElement | null>(null)
 const trackThumbRef = ref<HTMLDivElement | null>(null)
 
+// eslint-disable-next-line vue/no-dupe-keys
 const disabled = computed(() => props.disabled)
 
 const { position: selectorThumbPosition } = useColorDraggable(selectorThumbRef, selectorRef, 'both', {
@@ -263,7 +270,7 @@ const trackThumbStyle = computed(() => ({
 </script>
 
 <template>
-  <Primitive :as="as" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })" :data-disabled="disabled ? true : undefined">
+  <Primitive :as="props.as" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })" :data-disabled="disabled ? true : undefined">
     <div data-slot="picker" :class="ui.picker({ class: props.ui?.picker })">
       <div
         ref="selectorRef"

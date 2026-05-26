@@ -1,9 +1,12 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, vi, afterEach } from 'vitest'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { renderEach } from '../../component-render'
 import ContentSearch from '../../../src/runtime/components/content/ContentSearch.vue'
-import type { ContentSearchProps } from '../../../src/runtime/components/content/ContentSearch.vue'
-import ComponentRender from '../../component-render'
+import theme from '#build/ui/content/content-search'
 
 describe('ContentSearch', () => {
+  const sizes = Object.keys(theme.variants.size) as any
+
   const links = [{
     label: 'Docs',
     to: '/getting-started',
@@ -59,12 +62,12 @@ describe('ContentSearch', () => {
     content: 'We\'ve transitioned from Headless UI to Reka UI as our core component foundation. This shift brings several key advantages: Extensive Component Library: With 55+ primitives, Reka UI significantly expands our component offerings.Active Development: Reka UI\'s growing popularity ensures ongoing improvements and updates.Enhanced Accessibility: Built-in accessibility features align with our commitment to inclusive design.Vue 3 Optimization: Seamless integration with Vue 3 and the Composition API. This transition empowers Nuxt UI to become a more comprehensive and flexible UI library, offering developers greater power and customization options.',
     level: 2
   }, {
-    id: '/getting-started#tailwind-css-v4',
-    title: 'Tailwind CSS v4',
+    id: '/getting-started#tailwind-css',
+    title: 'Tailwind CSS',
     titles: [
       'Introduction'
     ],
-    content: 'Nuxt UI integrates the latest Tailwind CSS v4, bringing significant improvements: Built for performance: Full builds in the new engine are up to 5x faster, and incremental builds are over 100x faster — and measured in microseconds.Unified toolchain: Built-in import handling, vendor prefixing, and syntax transforms, with no additional tooling required.CSS-first configuration: A reimagined developer experience where you customize and extend the framework directly in CSS instead of a JavaScript configuration file.Designed for the modern web: Built on native cascade layers, wide-gamut colors, and including first-class support for modern CSS features like container queries, @starting-style, popovers, and more. Learn about all the breaking changes in Tailwind CSS v4.',
+    content: 'Nuxt UI integrates the latest Tailwind CSS, bringing significant improvements: Built for performance: Full builds in the new engine are up to 5x faster, and incremental builds are over 100x faster — and measured in microseconds.Unified toolchain: Built-in import handling, vendor prefixing, and syntax transforms, with no additional tooling required.CSS-first configuration: A reimagined developer experience where you customize and extend the framework directly in CSS instead of a JavaScript configuration file.Designed for the modern web: Built on native cascade layers, wide-gamut colors, and including first-class support for modern CSS features like container queries, @starting-style, popovers, and more. Learn about all the breaking changes in Tailwind CSS.',
     level: 2
   }, {
     id: '/getting-started#tailwind-variants',
@@ -118,7 +121,7 @@ describe('ContentSearch', () => {
 
   const props = { links, navigation, files, open: true, portal: false }
 
-  it.each([
+  renderEach(ContentSearch, [
     // Props
     ['with links', { props }],
     ['with icon', { props: { ...props, icon: 'i-lucide-home' } }],
@@ -127,10 +130,125 @@ describe('ContentSearch', () => {
     ['with loadingIcon', { props: { ...props, loading: true, loadingIcon: 'i-lucide-loading' } }],
     ['without colorMode', { props: { ...props, colorMode: false } }],
     ['with fullscreen', { props: { ...props, fullscreen: true } }],
+    ['with search function', { props: { ...props, search: async () => [], files: undefined } }],
+    ...sizes.map((size: string) => [`with size ${size}`, { props: { ...props, size } }]),
     ['with ui', { props: { ...props, ui: { input: '[&>input]:text-lg' } } }],
     ['with class', { props: { ...props, class: 'sm:max-w-5xl' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ContentSearchProps }) => {
-    const html = await ComponentRender(nameOrHtml, options, ContentSearch)
-    expect(html).toMatchSnapshot()
+  ])
+
+  describe('async search', () => {
+    afterEach(() => {
+      vi.useRealTimers()
+    })
+
+    it('debounces and re-triggers when searchStatus becomes ready', async () => {
+      vi.useFakeTimers({ shouldAdvanceTime: true })
+      const search = vi.fn(async () => [])
+
+      const wrapper = await mountSuspended(ContentSearch, {
+        props: {
+          open: true,
+          portal: false,
+          navigation,
+          search,
+          searchTerm: ''
+        }
+      })
+
+      await wrapper.setProps({ searchTerm: 'foo' })
+      expect(search).not.toHaveBeenCalled()
+
+      await vi.advanceTimersByTimeAsync(150)
+      expect(search).toHaveBeenCalledTimes(1)
+      expect(search).toHaveBeenLastCalledWith('foo', expect.objectContaining({
+        snippet: { columns: ['title', 'content'], around: 20 }
+      }))
+
+      await wrapper.setProps({ searchStatus: 'ready' })
+      await vi.advanceTimersByTimeAsync(0)
+      expect(search).toHaveBeenCalledTimes(2)
+
+      wrapper.unmount()
+    })
+
+    // Regression test: results whose path matches a section root (e.g. an
+    // `index.md` page) used to drop the section name from the prefix because
+    // `findNavItem` returns the top-level node with `parent: undefined`.
+    it('includes the section title in the prefix for index-page results', async () => {
+      vi.useFakeTimers({ shouldAdvanceTime: true })
+      const search = vi.fn(async () => [{
+        id: '/getting-started#some-section',
+        title: 'Some Section',
+        titles: ['Introduction', 'Usage'],
+        level: 3,
+        content: 'lorem ipsum'
+      }])
+
+      const wrapper = await mountSuspended(ContentSearch, {
+        props: {
+          open: true,
+          portal: false,
+          navigation,
+          search,
+          searchTerm: ''
+        }
+      })
+
+      await wrapper.setProps({ searchTerm: 'lorem' })
+      await vi.advanceTimersByTimeAsync(150)
+      await wrapper.vm.$nextTick()
+
+      expect(wrapper.text()).toContain('Getting Started > Introduction > Usage >')
+
+      wrapper.unmount()
+    })
+
+    // Regression test: results more than two nav levels deep used to drop
+    // every intermediate ancestor because `findNavItem` only tracked the
+    // top-level root and the immediate parent.
+    it('includes every intermediate ancestor in the prefix for deeply nested results', async () => {
+      vi.useFakeTimers({ shouldAdvanceTime: true })
+      const deepNavigation = [{
+        title: 'Docs',
+        path: '/docs',
+        children: [{
+          title: 'Guide',
+          path: '/docs/guide',
+          children: [{
+            title: 'Best Practices',
+            path: '/docs/guide/best-practices',
+            children: [{
+              title: 'Nuxt Plugins',
+              path: '/docs/guide/best-practices/plugins'
+            }]
+          }]
+        }]
+      }]
+      const search = vi.fn(async () => [{
+        id: '/docs/guide/best-practices/plugins',
+        title: 'Nuxt Plugins',
+        titles: [],
+        level: 1,
+        content: 'lorem ipsum'
+      }])
+
+      const wrapper = await mountSuspended(ContentSearch, {
+        props: {
+          open: true,
+          portal: false,
+          navigation: deepNavigation,
+          search,
+          searchTerm: ''
+        }
+      })
+
+      await wrapper.setProps({ searchTerm: 'lorem' })
+      await vi.advanceTimersByTimeAsync(150)
+      await wrapper.vm.$nextTick()
+
+      expect(wrapper.text()).toContain('Docs > Guide > Best Practices >')
+
+      wrapper.unmount()
+    })
   })
 })

@@ -711,6 +711,41 @@ exports[`RadioGroup > renders with neutral variant card correctly 1`] = `
 </div>"
 `;
 
+exports[`RadioGroup > renders with neutral variant card highlight correctly 1`] = `
+"<div id="v-0-0" data-slot="root" class="relative" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" role="radiogroup" aria-orientation="vertical" aria-required="false">
+  <fieldset data-slot="fieldset" class="flex gap-x-2 flex-col gap-y-1">
+    <!--v-if--><label data-slot="item" class="flex items-start border border-muted rounded-lg flex-row text-sm p-3.5 has-data-[state=checked]:border-inverted">
+      <div data-slot="container" class="flex items-center h-5"><button data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-active="" data-slot="base" class="rounded-full ring ring-inset overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-inverted size-4 ring-inverted" id="v-0-0:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" value="1" aria-label="1"><span data-state="checked" data-slot="indicator" class="flex items-center justify-center size-full after:bg-default after:rounded-full bg-inverted after:size-1.5"></span>
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class="w-full ms-2">
+        <p for="v-0-0:1" data-slot="label" class="block font-medium text-default">Option 1</p>
+        <!--v-if-->
+      </div>
+    </label><label data-slot="item" class="flex items-start border border-muted rounded-lg flex-row text-sm p-3.5 has-data-[state=checked]:border-inverted">
+      <div data-slot="container" class="flex items-center h-5"><button data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-slot="base" class="rounded-full ring ring-inset overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-inverted size-4 ring-inverted" id="v-0-0:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2" aria-label="2">
+          <!---->
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class="w-full ms-2">
+        <p for="v-0-0:2" data-slot="label" class="block font-medium text-default">Option 2</p>
+        <!--v-if-->
+      </div>
+    </label><label data-slot="item" class="flex items-start border border-muted rounded-lg flex-row text-sm p-3.5 has-data-[state=checked]:border-inverted">
+      <div data-slot="container" class="flex items-center h-5"><button data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-slot="base" class="rounded-full ring ring-inset overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-inverted size-4 ring-inverted" id="v-0-0:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="3" aria-label="3">
+          <!---->
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class="w-full ms-2">
+        <p for="v-0-0:3" data-slot="label" class="block font-medium text-default">Option 3</p>
+        <!--v-if-->
+      </div>
+    </label>
+  </fieldset>
+  <!--v-if-->
+</div>"
+`;
+
 exports[`RadioGroup > renders with neutral variant list correctly 1`] = `
 "<div id="v-0-0" data-slot="root" class="relative" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" role="radiogroup" aria-orientation="vertical" aria-required="false">
   <fieldset data-slot="fieldset" class="flex gap-x-2 flex-col gap-y-1">
@@ -746,6 +781,41 @@ exports[`RadioGroup > renders with neutral variant list correctly 1`] = `
 </div>"
 `;
 
+exports[`RadioGroup > renders with neutral variant list highlight correctly 1`] = `
+"<div id="v-0-0" data-slot="root" class="relative" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" role="radiogroup" aria-orientation="vertical" aria-required="false">
+  <fieldset data-slot="fieldset" class="flex gap-x-2 flex-col gap-y-1">
+    <!--v-if-->
+    <div data-slot="item" class="flex items-start flex-row text-sm">
+      <div data-slot="container" class="flex items-center h-5"><button data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-active="" data-slot="base" class="rounded-full ring ring-inset overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-inverted size-4 ring-inverted" id="v-0-0:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" value="1" aria-label="1"><span data-state="checked" data-slot="indicator" class="flex items-center justify-center size-full after:bg-default after:rounded-full bg-inverted after:size-1.5"></span>
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class="w-full ms-2"><label for="v-0-0:1" data-slot="label" class="block font-medium text-default">Option 1</label>
+        <!--v-if-->
+      </div>
+    </div>
+    <div data-slot="item" class="flex items-start flex-row text-sm">
+      <div data-slot="container" class="flex items-center h-5"><button data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-slot="base" class="rounded-full ring ring-inset overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-inverted size-4 ring-inverted" id="v-0-0:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2" aria-label="2">
+          <!---->
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class="w-full ms-2"><label for="v-0-0:2" data-slot="label" class="block font-medium text-default">Option 2</label>
+        <!--v-if-->
+      </div>
+    </div>
+    <div data-slot="item" class="flex items-start flex-row text-sm">
+      <div data-slot="container" class="flex items-center h-5"><button data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-slot="base" class="rounded-full ring ring-inset overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-inverted size-4 ring-inverted" id="v-0-0:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="3" aria-label="3">
+          <!---->
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class="w-full ms-2"><label for="v-0-0:3" data-slot="label" class="block font-medium text-default">Option 3</label>
+        <!--v-if-->
+      </div>
+    </div>
+  </fieldset>
+  <!--v-if-->
+</div>"
+`;
+
 exports[`RadioGroup > renders with neutral variant table correctly 1`] = `
 "<div id="v-0-0" data-slot="root" class="relative" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" role="radiogroup" aria-orientation="vertical" aria-required="false">
   <fieldset data-slot="fieldset" class="flex flex-col gap-0 -space-y-px">
@@ -768,6 +838,41 @@ exports[`RadioGroup > renders with neutral variant table correctly 1`] = `
       </div>
     </label><label data-slot="item" class="flex items-start border border-muted flex-row text-sm p-3.5 first-of-type:rounded-t-lg last-of-type:rounded-b-lg has-data-[state=checked]:bg-elevated has-data-[state=checked]:border-inverted/50 has-data-[state=checked]:z-[1]">
       <div data-slot="container" class="flex items-center h-5"><button data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-slot="base" class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-inverted size-4" id="v-0-0:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="3" aria-label="3">
+          <!---->
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class="w-full ms-2">
+        <p for="v-0-0:3" data-slot="label" class="block font-medium text-default">Option 3</p>
+        <!--v-if-->
+      </div>
+    </label>
+  </fieldset>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`RadioGroup > renders with neutral variant table highlight correctly 1`] = `
+"<div id="v-0-0" data-slot="root" class="relative" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" role="radiogroup" aria-orientation="vertical" aria-required="false">
+  <fieldset data-slot="fieldset" class="flex flex-col gap-0 -space-y-px">
+    <!--v-if--><label data-slot="item" class="flex items-start border border-muted flex-row text-sm p-3.5 first-of-type:rounded-t-lg last-of-type:rounded-b-lg has-data-[state=checked]:bg-elevated has-data-[state=checked]:border-inverted/50 has-data-[state=checked]:z-[1]">
+      <div data-slot="container" class="flex items-center h-5"><button data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-active="" data-slot="base" class="rounded-full ring ring-inset overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-inverted size-4 ring-inverted" id="v-0-0:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" value="1" aria-label="1"><span data-state="checked" data-slot="indicator" class="flex items-center justify-center size-full after:bg-default after:rounded-full bg-inverted after:size-1.5"></span>
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class="w-full ms-2">
+        <p for="v-0-0:1" data-slot="label" class="block font-medium text-default">Option 1</p>
+        <!--v-if-->
+      </div>
+    </label><label data-slot="item" class="flex items-start border border-muted flex-row text-sm p-3.5 first-of-type:rounded-t-lg last-of-type:rounded-b-lg has-data-[state=checked]:bg-elevated has-data-[state=checked]:border-inverted/50 has-data-[state=checked]:z-[1]">
+      <div data-slot="container" class="flex items-center h-5"><button data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-slot="base" class="rounded-full ring ring-inset overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-inverted size-4 ring-inverted" id="v-0-0:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2" aria-label="2">
+          <!---->
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class="w-full ms-2">
+        <p for="v-0-0:2" data-slot="label" class="block font-medium text-default">Option 2</p>
+        <!--v-if-->
+      </div>
+    </label><label data-slot="item" class="flex items-start border border-muted flex-row text-sm p-3.5 first-of-type:rounded-t-lg last-of-type:rounded-b-lg has-data-[state=checked]:bg-elevated has-data-[state=checked]:border-inverted/50 has-data-[state=checked]:z-[1]">
+      <div data-slot="container" class="flex items-center h-5"><button data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-slot="base" class="rounded-full ring ring-inset overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-inverted size-4 ring-inverted" id="v-0-0:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="3" aria-label="3">
           <!---->
           <!--v-if-->
         </button></div>
@@ -816,6 +921,41 @@ exports[`RadioGroup > renders with primary variant card correctly 1`] = `
 </div>"
 `;
 
+exports[`RadioGroup > renders with primary variant card highlight correctly 1`] = `
+"<div id="v-0-0" data-slot="root" class="relative" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" role="radiogroup" aria-orientation="vertical" aria-required="false">
+  <fieldset data-slot="fieldset" class="flex gap-x-2 flex-col gap-y-1">
+    <!--v-if--><label data-slot="item" class="flex items-start border border-muted rounded-lg flex-row text-sm p-3.5 has-data-[state=checked]:border-primary">
+      <div data-slot="container" class="flex items-center h-5"><button data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-active="" data-slot="base" class="rounded-full ring ring-inset overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4 ring-primary" id="v-0-0:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" value="1" aria-label="1"><span data-state="checked" data-slot="indicator" class="flex items-center justify-center size-full after:bg-default after:rounded-full bg-primary after:size-1.5"></span>
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class="w-full ms-2">
+        <p for="v-0-0:1" data-slot="label" class="block font-medium text-default">Option 1</p>
+        <!--v-if-->
+      </div>
+    </label><label data-slot="item" class="flex items-start border border-muted rounded-lg flex-row text-sm p-3.5 has-data-[state=checked]:border-primary">
+      <div data-slot="container" class="flex items-center h-5"><button data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-slot="base" class="rounded-full ring ring-inset overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4 ring-primary" id="v-0-0:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2" aria-label="2">
+          <!---->
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class="w-full ms-2">
+        <p for="v-0-0:2" data-slot="label" class="block font-medium text-default">Option 2</p>
+        <!--v-if-->
+      </div>
+    </label><label data-slot="item" class="flex items-start border border-muted rounded-lg flex-row text-sm p-3.5 has-data-[state=checked]:border-primary">
+      <div data-slot="container" class="flex items-center h-5"><button data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-slot="base" class="rounded-full ring ring-inset overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4 ring-primary" id="v-0-0:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="3" aria-label="3">
+          <!---->
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class="w-full ms-2">
+        <p for="v-0-0:3" data-slot="label" class="block font-medium text-default">Option 3</p>
+        <!--v-if-->
+      </div>
+    </label>
+  </fieldset>
+  <!--v-if-->
+</div>"
+`;
+
 exports[`RadioGroup > renders with primary variant list correctly 1`] = `
 "<div id="v-0-0" data-slot="root" class="relative" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" role="radiogroup" aria-orientation="vertical" aria-required="false">
   <fieldset data-slot="fieldset" class="flex gap-x-2 flex-col gap-y-1">
@@ -851,6 +991,41 @@ exports[`RadioGroup > renders with primary variant list correctly 1`] = `
 </div>"
 `;
 
+exports[`RadioGroup > renders with primary variant list highlight correctly 1`] = `
+"<div id="v-0-0" data-slot="root" class="relative" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" role="radiogroup" aria-orientation="vertical" aria-required="false">
+  <fieldset data-slot="fieldset" class="flex gap-x-2 flex-col gap-y-1">
+    <!--v-if-->
+    <div data-slot="item" class="flex items-start flex-row text-sm">
+      <div data-slot="container" class="flex items-center h-5"><button data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-active="" data-slot="base" class="rounded-full ring ring-inset overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4 ring-primary" id="v-0-0:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" value="1" aria-label="1"><span data-state="checked" data-slot="indicator" class="flex items-center justify-center size-full after:bg-default after:rounded-full bg-primary after:size-1.5"></span>
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class="w-full ms-2"><label for="v-0-0:1" data-slot="label" class="block font-medium text-default">Option 1</label>
+        <!--v-if-->
+      </div>
+    </div>
+    <div data-slot="item" class="flex items-start flex-row text-sm">
+      <div data-slot="container" class="flex items-center h-5"><button data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-slot="base" class="rounded-full ring ring-inset overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4 ring-primary" id="v-0-0:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2" aria-label="2">
+          <!---->
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class="w-full ms-2"><label for="v-0-0:2" data-slot="label" class="block font-medium text-default">Option 2</label>
+        <!--v-if-->
+      </div>
+    </div>
+    <div data-slot="item" class="flex items-start flex-row text-sm">
+      <div data-slot="container" class="flex items-center h-5"><button data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-slot="base" class="rounded-full ring ring-inset overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4 ring-primary" id="v-0-0:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="3" aria-label="3">
+          <!---->
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class="w-full ms-2"><label for="v-0-0:3" data-slot="label" class="block font-medium text-default">Option 3</label>
+        <!--v-if-->
+      </div>
+    </div>
+  </fieldset>
+  <!--v-if-->
+</div>"
+`;
+
 exports[`RadioGroup > renders with primary variant table correctly 1`] = `
 "<div id="v-0-0" data-slot="root" class="relative" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" role="radiogroup" aria-orientation="vertical" aria-required="false">
   <fieldset data-slot="fieldset" class="flex flex-col gap-0 -space-y-px">
@@ -873,6 +1048,41 @@ exports[`RadioGroup > renders with primary variant table correctly 1`] = `
       </div>
     </label><label data-slot="item" class="flex items-start border border-muted flex-row text-sm p-3.5 first-of-type:rounded-t-lg last-of-type:rounded-b-lg has-data-[state=checked]:bg-primary/10 has-data-[state=checked]:border-primary/50 has-data-[state=checked]:z-[1]">
       <div data-slot="container" class="flex items-center h-5"><button data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-slot="base" class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0-0:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="3" aria-label="3">
+          <!---->
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class="w-full ms-2">
+        <p for="v-0-0:3" data-slot="label" class="block font-medium text-default">Option 3</p>
+        <!--v-if-->
+      </div>
+    </label>
+  </fieldset>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`RadioGroup > renders with primary variant table highlight correctly 1`] = `
+"<div id="v-0-0" data-slot="root" class="relative" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" role="radiogroup" aria-orientation="vertical" aria-required="false">
+  <fieldset data-slot="fieldset" class="flex flex-col gap-0 -space-y-px">
+    <!--v-if--><label data-slot="item" class="flex items-start border border-muted flex-row text-sm p-3.5 first-of-type:rounded-t-lg last-of-type:rounded-b-lg has-data-[state=checked]:bg-primary/10 has-data-[state=checked]:border-primary/50 has-data-[state=checked]:z-[1]">
+      <div data-slot="container" class="flex items-center h-5"><button data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-active="" data-slot="base" class="rounded-full ring ring-inset overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4 ring-primary" id="v-0-0:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" value="1" aria-label="1"><span data-state="checked" data-slot="indicator" class="flex items-center justify-center size-full after:bg-default after:rounded-full bg-primary after:size-1.5"></span>
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class="w-full ms-2">
+        <p for="v-0-0:1" data-slot="label" class="block font-medium text-default">Option 1</p>
+        <!--v-if-->
+      </div>
+    </label><label data-slot="item" class="flex items-start border border-muted flex-row text-sm p-3.5 first-of-type:rounded-t-lg last-of-type:rounded-b-lg has-data-[state=checked]:bg-primary/10 has-data-[state=checked]:border-primary/50 has-data-[state=checked]:z-[1]">
+      <div data-slot="container" class="flex items-center h-5"><button data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-slot="base" class="rounded-full ring ring-inset overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4 ring-primary" id="v-0-0:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="2" aria-label="2">
+          <!---->
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class="w-full ms-2">
+        <p for="v-0-0:2" data-slot="label" class="block font-medium text-default">Option 2</p>
+        <!--v-if-->
+      </div>
+    </label><label data-slot="item" class="flex items-start border border-muted flex-row text-sm p-3.5 first-of-type:rounded-t-lg last-of-type:rounded-b-lg has-data-[state=checked]:bg-primary/10 has-data-[state=checked]:border-primary/50 has-data-[state=checked]:z-[1]">
+      <div data-slot="container" class="flex items-center h-5"><button data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-slot="base" class="rounded-full ring ring-inset overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4 ring-primary" id="v-0-0:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="3" aria-label="3">
           <!---->
           <!--v-if-->
         </button></div>
@@ -1138,8 +1348,7 @@ exports[`RadioGroup > renders with valueKey correctly 1`] = `
   <fieldset data-slot="fieldset" class="flex gap-x-2 flex-col gap-y-1">
     <!--v-if-->
     <div data-slot="item" class="flex items-start flex-row text-sm">
-      <div data-slot="container" class="flex items-center h-5"><button data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-slot="base" class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0-0:Option 1" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" value="Option 1" aria-label="Option 1">
-          <!---->
+      <div data-slot="container" class="flex items-center h-5"><button data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-active="" data-slot="base" class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary size-4" id="v-0-0:Option 1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" value="Option 1" aria-label="Option 1"><span data-state="checked" data-slot="indicator" class="flex items-center justify-center size-full after:bg-default after:rounded-full bg-primary after:size-1.5"></span>
           <!--v-if-->
         </button></div>
       <div data-slot="wrapper" class="w-full ms-2"><label for="v-0-0:Option 1" data-slot="label" class="block font-medium text-default">Option 1</label>

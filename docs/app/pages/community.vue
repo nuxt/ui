@@ -12,18 +12,23 @@ useSeoMeta({
   ogDescription: page.value.description
 })
 
-defineOgImageComponent('Docs')
+useCanonical()
+
+if (import.meta.server) {
+  defineOgImage('Docs.takumi', {
+    title: page.value.title,
+    description: page.value.description
+  })
+}
 </script>
 
 <template>
-  <div v-if="page">
+  <main v-if="page">
     <UPageHero
       :title="page.hero.title"
       :description="page.hero.description"
       class="md:border-b border-default"
-      :ui="{
-        container: 'relative lg:py-32'
-      }"
+      :ui="{ container: 'relative py-10 sm:py-16 lg:py-24' }"
     >
       <template #top>
         <div class="absolute z-[-1] rounded-full bg-primary blur-[300px] size-60 sm:size-80 transform -translate-x-1/2 left-1/2 -translate-y-80" />
@@ -48,13 +53,16 @@ defineOgImageComponent('Docs')
             :ui="{ footer: 'pointer-events-auto z-[1]' }"
           >
             <template #leading>
-              <UAvatar v-bind="item.avatar" size="3xl" class="mx-auto" loading="lazy" />
+              <UAvatar v-bind="item.avatar" :alt="`${item.label} logo`" size="3xl" class="mx-auto" loading="lazy" />
             </template>
 
             <template v-if="item.user" #footer>
               <UButton
                 :label="item.user.name"
-                :avatar="item.user.avatar"
+                :avatar="{
+                  ...item.user.avatar,
+                  alt: `${item.user.name} avatar`
+                }"
                 :to="item.user.to"
                 target="_blank"
                 size="sm"
@@ -67,5 +75,5 @@ defineOgImageComponent('Docs')
         </UPageGrid>
       </div>
     </UPageSection>
-  </div>
+  </main>
 </template>

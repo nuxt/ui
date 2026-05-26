@@ -1,8 +1,8 @@
 ---
-title: CodeTree
+title: ProseCodeTree
 description: 'Visualize file and folder structures with syntax-highlighted code.'
-framework: nuxt
 category: components
+navigation.title: CodeTree
 links:
   - label: GitHub
     icon: i-simple-icons-github
@@ -64,13 +64,13 @@ export default defineAppConfig({
     "typecheck": "nuxt typecheck"
   },
   "dependencies": {
-    "@iconify-json/lucide": "^1.2.18",
+    "@iconify-json/lucide": "^1.2.0",
     "@nuxt/ui": "^4.0.0",
     "nuxt": "^4.0.0"
   },
   "devDependencies": {
-    "typescript": "^5.8.2",
-    "vue-tsc": "^2.2.10"
+    "typescript": "^6.0.0",
+    "vue-tsc": "^3.2.0"
   }
 }
 ```
@@ -215,13 +215,13 @@ export default defineAppConfig({
     "typecheck": "nuxt typecheck"
   },
   "dependencies": {
-    "@iconify-json/lucide": "^1.2.18",
+    "@iconify-json/lucide": "^1.2.0",
     "@nuxt/ui": "^4.0.0",
     "nuxt": "^4.0.0"
   },
   "devDependencies": {
-    "typescript": "^5.8.2",
-    "vue-tsc": "^2.2.10"
+    "typescript": "^6.0.0",
+    "vue-tsc": "^3.2.0"
   }
 }
 ```

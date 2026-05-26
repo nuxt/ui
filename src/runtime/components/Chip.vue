@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/chip'
 import type { ComponentConfig } from '../types/tv'
@@ -39,8 +40,8 @@ export interface ChipEmits {
 }
 
 export interface ChipSlots {
-  default(props?: {}): any
-  content(props?: {}): any
+  default?(props?: {}): VNode[]
+  content?(props?: {}): VNode[]
 }
 </script>
 
@@ -48,25 +49,29 @@ export interface ChipSlots {
 import { computed } from 'vue'
 import { Primitive, Slot } from 'reka-ui'
 import { useAppConfig } from '#imports'
+import { useComponentProps } from '../composables/useComponentProps'
 import { useAvatarGroup } from '../composables/useAvatarGroup'
 import { tv } from '../utils/tv'
 
 defineOptions({ inheritAttrs: false })
 
-const props = withDefaults(defineProps<ChipProps>(), {
+const _props = withDefaults(defineProps<ChipProps>(), {
   inset: false,
   standalone: false
 })
 defineSlots<ChipSlots>()
 
+const props = useComponentProps('chip', _props)
+
 const show = defineModel<boolean>('show', { default: true })
 
-const { size } = useAvatarGroup(props)
+const { size } = useAvatarGroup(_props)
 const appConfig = useAppConfig() as Chip['AppConfig']
 
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.chip || {}) })({
   color: props.color,
-  size: size.value,
+  size: size.value ?? props.size,
   position: props.position,
   inset: props.inset,
   standalone: props.standalone
@@ -74,14 +79,14 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.chip || {}) 
 </script>
 
 <template>
-  <Primitive :as="as" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <Primitive :as="props.as" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <Slot v-bind="$attrs">
       <slot />
     </Slot>
 
     <span v-if="show" data-slot="base" :class="ui.base({ class: props.ui?.base })">
       <slot name="content">
-        {{ text }}
+        {{ props.text }}
       </slot>
     </span>
   </Primitive>

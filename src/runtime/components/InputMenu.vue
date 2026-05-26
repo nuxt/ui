@@ -1,11 +1,13 @@
 <script lang="ts">
 import type { ComboboxRootProps, ComboboxRootEmits, ComboboxContentProps, ComboboxContentEmits, ComboboxArrowProps } from 'reka-ui'
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/input-menu'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
-import type { AvatarProps, ChipProps, IconProps, InputProps } from '../types'
+import type { AvatarProps, ButtonProps, ChipProps, IconProps, InputProps, LinkPropsKeys } from '../types'
+import type { ModelModifiers, ApplyModifiers } from '../types/input'
 import type { InputHTMLAttributes } from '../types/html'
-import type { AcceptableValue, ArrayOrNested, GetItemKeys, GetItemValue, GetModelValue, GetModelValueEmits, NestedItem, EmitsToProps } from '../types/utils'
+import type { AcceptableValue, ArrayOrNested, GetItemKeys, GetItemValue, GetModelValue, NestedItem, EmitsToProps } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
 type InputMenu = ComponentConfig<typeof theme, AppConfig, 'inputMenu'>
@@ -33,7 +35,12 @@ export type InputMenuItem = InputMenuValue | {
   [key: string]: any
 }
 
-export interface InputMenuProps<T extends ArrayOrNested<InputMenuItem> = ArrayOrNested<InputMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false> extends Pick<ComboboxRootProps<T>, 'open' | 'defaultOpen' | 'disabled' | 'name' | 'resetSearchTermOnBlur' | 'resetSearchTermOnSelect' | 'highlightOnHover' | 'openOnClick' | 'openOnFocus'>, UseComponentIconsProps, /** @vue-ignore */ Omit<InputHTMLAttributes, 'disabled' | 'name' | 'type' | 'placeholder' | 'autofocus' | 'maxlength' | 'minlength' | 'pattern' | 'size' | 'min' | 'max' | 'step'> {
+type ExcludeItem = { type: 'label' | 'separator' }
+type IsClearUsed<M extends boolean, C extends boolean | object> = M extends false
+  ? (C extends true ? null : C extends object ? null : never)
+  : never
+
+export interface InputMenuProps<T extends ArrayOrNested<InputMenuItem> = ArrayOrNested<InputMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false, Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>, C extends boolean | object = false> extends Pick<ComboboxRootProps<T>, 'open' | 'defaultOpen' | 'disabled' | 'name' | 'resetSearchTermOnBlur' | 'resetSearchTermOnSelect' | 'resetModelValueOnClear' | 'highlightOnHover' | 'openOnClick' | 'openOnFocus' | 'by'>, UseComponentIconsProps, /** @vue-ignore */ Omit<InputHTMLAttributes, 'disabled' | 'name' | 'type' | 'placeholder' | 'autofocus' | 'maxlength' | 'minlength' | 'pattern' | 'size' | 'min' | 'max' | 'step'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -78,12 +85,25 @@ export interface InputMenuProps<T extends ArrayOrNested<InputMenuItem> = ArrayOr
    */
   deleteIcon?: IconProps['name']
   /**
+   * Display a clear button to reset the model value.
+   * Can be an object to pass additional props to the Button.
+   * @defaultValue false
+   */
+  clear?: (C & boolean) | (C & Partial<Omit<ButtonProps, LinkPropsKeys>>)
+  /**
+   * The icon displayed in the clear button.
+   * @defaultValue appConfig.ui.icons.close
+   * @IconifyIcon
+   */
+  clearIcon?: IconProps['name']
+  /**
    * The content of the menu.
    * @defaultValue { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: 'popper' }
    */
   content?: Omit<ComboboxContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<ComboboxContentEmits>>
   /**
    * Display an arrow alongside the menu.
+   * `{ rounded: true }`{lang="ts-type"}
    * @defaultValue false
    */
   arrow?: boolean | Omit<ComboboxArrowProps, 'as' | 'asChild'>
@@ -104,10 +124,10 @@ export interface InputMenuProps<T extends ArrayOrNested<InputMenuItem> = ArrayOr
      */
     overscan?: number
     /**
-     * Estimated size (in px) of each item
+     * Estimated size (in px) of each item, or a function that returns the size for a given index
      * @defaultValue 32
      */
-    estimateSize?: number
+    estimateSize?: number | ((index: number) => number)
   }
   /**
    * When `items` is an array of objects, select the field to use as the value instead of the object itself.
@@ -126,13 +146,23 @@ export interface InputMenuProps<T extends ArrayOrNested<InputMenuItem> = ArrayOr
   descriptionKey?: GetItemKeys<T>
   items?: T
   /** The value of the InputMenu when initially rendered. Use when you do not need to control the state of the InputMenu. */
-  defaultValue?: GetModelValue<T, VK, M>
+  defaultValue?: ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod> | IsClearUsed<M, C>
   /** The controlled value of the InputMenu. Can be binded-with with `v-model`. */
-  modelValue?: GetModelValue<T, VK, M>
+  modelValue?: ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod> | IsClearUsed<M, C>
+  modelModifiers?: Mod
   /** Whether multiple options can be selected or not. */
   multiple?: M & boolean
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
+  /** Keep the mobile text size on all breakpoints. */
+  fixed?: boolean
+  /**
+   * The behavior of the InputMenu.
+   * - `combobox`: select one (or many) items from a list of suggestions.
+   * - `autocomplete`: free-form text input with optional suggestions. The `modelValue` becomes the input text (`string`) instead of a selected item.
+   * @defaultValue 'combobox'
+   */
+  mode?: 'combobox' | 'autocomplete'
   /**
    * Determines if custom user input that does not exist in options can be added.
    * @defaultValue false
@@ -152,65 +182,81 @@ export interface InputMenuProps<T extends ArrayOrNested<InputMenuItem> = ArrayOr
   ui?: InputMenu['slots']
 }
 
-export type InputMenuEmits<A extends ArrayOrNested<InputMenuItem>, VK extends GetItemKeys<A> | undefined, M extends boolean> = Pick<ComboboxRootEmits, 'update:open'> & {
+export interface InputMenuEmits<
+  A extends ArrayOrNested<InputMenuItem>,
+  VK extends GetItemKeys<A> | undefined = undefined,
+  M extends boolean = false,
+  Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>,
+  C extends boolean | object = false
+> extends Pick<ComboboxRootEmits, 'update:open'> {
   'change': [event: Event]
   'blur': [event: FocusEvent]
   'focus': [event: FocusEvent]
   'create': [item: string]
+  'clear': []
   /** Event handler when highlighted element changes. */
   'highlight': [payload: {
     ref: HTMLElement
-    value: GetModelValue<A, VK, M>
+    value: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod> | IsClearUsed<M, C>
   } | undefined]
-  'remove-tag': [item: GetModelValue<A, VK, M>]
-} & GetModelValueEmits<A, VK, M>
+  'remove-tag': [item: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod> | IsClearUsed<M, C>]
+  /** Event handler called when the value changes. */
+  'update:modelValue': [value: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod> | IsClearUsed<M, C>]
+}
 
-type SlotProps<T extends InputMenuItem> = (props: { item: T, index: number, ui: InputMenu['ui'] }) => any
+type SlotProps<T extends InputMenuItem> = (props: { item: T, index: number, ui: InputMenu['ui'] }) => VNode[]
 
 export interface InputMenuSlots<
   A extends ArrayOrNested<InputMenuItem> = ArrayOrNested<InputMenuItem>,
   VK extends GetItemKeys<A> | undefined = undefined,
   M extends boolean = false,
+  Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>,
+  C extends boolean | object = false,
   T extends NestedItem<A> = NestedItem<A>
 > {
-  'leading'(props: { modelValue?: GetModelValue<A, VK, M>, open: boolean, ui: InputMenu['ui'] }): any
-  'trailing'(props: { modelValue?: GetModelValue<A, VK, M>, open: boolean, ui: InputMenu['ui'] }): any
-  'empty'(props: { searchTerm?: string }): any
-  'item': SlotProps<T>
-  'item-leading': SlotProps<T>
-  'item-label'(props: { item: T, index: number }): any
-  'item-description'(props: { item: T, index: number }): any
-  'item-trailing': SlotProps<T>
-  'tags-item-text'(props: { item: T, index: number }): any
-  'tags-item-delete': SlotProps<T>
-  'content-top': (props?: {}) => any
-  'content-bottom': (props?: {}) => any
-  'create-item-label'(props: { item: string }): any
+  'leading'?(props: { modelValue: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod> | IsClearUsed<M, C>, open: boolean, ui: InputMenu['ui'] }): VNode[]
+  'trailing'?(props: { modelValue: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod> | IsClearUsed<M, C>, open: boolean, ui: InputMenu['ui'] }): VNode[]
+  'empty'?(props: { searchTerm: string }): VNode[]
+  'item'?: SlotProps<T>
+  'item-leading'?: SlotProps<T>
+  'item-label'?(props: { item: T, index: number }): VNode[]
+  'item-description'?(props: { item: T, index: number }): VNode[]
+  'item-trailing'?: SlotProps<T>
+  'tags-item-text'?(props: { item: T, index: number }): VNode[]
+  'tags-item-delete'?: SlotProps<T>
+  'content-top'?: (props?: {}) => VNode[]
+  'content-bottom'?: (props?: {}) => VNode[]
+  'create-item-label'?(props: { item: string }): VNode[]
 }
 </script>
 
-<script setup lang="ts" generic="T extends ArrayOrNested<InputMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false">
-import { computed, useTemplateRef, toRef, onMounted, toRaw, nextTick } from 'vue'
-import { ComboboxRoot, ComboboxArrow, ComboboxAnchor, ComboboxInput, ComboboxTrigger, ComboboxPortal, ComboboxContent, ComboboxEmpty, ComboboxGroup, ComboboxVirtualizer, ComboboxLabel, ComboboxSeparator, ComboboxItem, ComboboxItemIndicator, TagsInputRoot, TagsInputItem, TagsInputItemText, TagsInputItemDelete, TagsInputInput, useForwardPropsEmits, useFilter } from 'reka-ui'
+<script setup lang="ts" generic="T extends ArrayOrNested<InputMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false, Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>, C extends boolean | object = false">
+import { computed, useTemplateRef, toRef, onMounted, toRaw, nextTick, watch } from 'vue'
+import { TagsInputRoot, TagsInputItem, TagsInputItemText, TagsInputItemDelete, TagsInputInput } from 'reka-ui'
+import { useForwardProps } from '../composables/useForwardProps'
+import { Combobox, Autocomplete } from 'reka-ui/namespaced'
 import { defu } from 'defu'
 import { isEqual } from 'ohash/utils'
-import { reactivePick, createReusableTemplate } from '@vueuse/core'
+import { reactivePick, reactiveOmit, createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { useFieldGroup } from '../composables/useFieldGroup'
+import { useComponentProps } from '../composables/useComponentProps'
+import { useFieldGroup, FieldGroupReset } from '../composables/useFieldGroup'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFormField } from '../composables/useFormField'
+import { useFilter } from '../composables/useFilter'
 import { useLocale } from '../composables/useLocale'
 import { usePortal } from '../composables/usePortal'
-import { compare, get, getDisplayValue, isArrayOfArray } from '../utils'
+import { compare, get, getDisplayValue, isArrayOfArray, looseToNumber } from '../utils'
 import { getEstimateSize } from '../utils/virtualizer'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
+import UButton from './Button.vue'
 import UChip from './Chip.vue'
 
 defineOptions({ inheritAttrs: false })
 
-const props = withDefaults(defineProps<InputMenuProps<T, VK, M>>(), {
+const _props = withDefaults(defineProps<InputMenuProps<T, VK, M, Mod, C>>(), {
   type: 'text',
   autofocusDelay: 0,
   portal: true,
@@ -218,34 +264,44 @@ const props = withDefaults(defineProps<InputMenuProps<T, VK, M>>(), {
   descriptionKey: 'description',
   resetSearchTermOnBlur: true,
   resetSearchTermOnSelect: true,
-  virtualize: false
+  resetModelValueOnClear: true,
+  virtualize: false,
+  mode: 'combobox'
 })
-const emits = defineEmits<InputMenuEmits<T, VK, M>>()
-const slots = defineSlots<InputMenuSlots<T, VK, M>>()
+const emits = defineEmits<InputMenuEmits<T, VK, M, Mod, C>>()
+const slots = defineSlots<InputMenuSlots<T, VK, M, Mod, C>>()
+
+const props = useComponentProps<InputMenuProps<T, VK, M, Mod, C>>('inputMenu', _props)
 
 const searchTerm = defineModel<string>('searchTerm', { default: '' })
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as InputMenu['AppConfig']
-const { contains } = useFilter({ sensitivity: 'base' })
+const { filterGroups } = useFilter()
 
-const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'open', 'defaultOpen', 'required', 'multiple', 'resetSearchTermOnBlur', 'resetSearchTermOnSelect', 'highlightOnHover', 'openOnClick', 'openOnFocus'), emits)
+const isAutocomplete = computed(() => props.mode === 'autocomplete')
+
+const rootPropsPick = reactivePick(props, 'as', 'modelValue', 'defaultValue', 'open', 'defaultOpen', 'required', 'multiple', 'resetSearchTermOnBlur', 'resetSearchTermOnSelect', 'resetModelValueOnClear', 'highlightOnHover', 'openOnClick', 'openOnFocus', 'by')
+const rootPropsOmitted = reactiveOmit(rootPropsPick, 'multiple', 'resetSearchTermOnSelect', 'resetModelValueOnClear', 'by')
+const rootProps = useForwardProps(computed(() => isAutocomplete.value ? rootPropsOmitted : rootPropsPick), emits)
+const Component = computed(() => isAutocomplete.value ? Autocomplete : Combobox)
 const portalProps = usePortal(toRef(() => props.portal))
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: 'popper' }) as ComboboxContentProps)
-const arrowProps = toRef(() => props.arrow as ComboboxArrowProps)
+const arrowProps = toRef(() => defu(props.arrow, { rounded: true }) as ComboboxArrowProps)
+const clearProps = computed(() => typeof props.clear === 'object' ? props.clear : {} as Partial<Omit<ButtonProps, LinkPropsKeys>>)
 const virtualizerProps = toRef(() => {
   if (!props.virtualize) return false
 
   return defu(typeof props.virtualize === 'boolean' ? {} : props.virtualize, {
-    estimateSize: getEstimateSize(items.value, inputSize.value || 'md', props.descriptionKey as string)
+    estimateSize: getEstimateSize(filteredItems.value, inputSize.value || 'md', props.descriptionKey as string, !!slots['item-description'])
   })
 })
 
-const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, size: formGroupSize, color, id, name, highlight, disabled, ariaAttrs } = useFormField<InputProps>(props)
-const { orientation, size: fieldGroupSize } = useFieldGroup<InputProps>(props)
+const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, size: formFieldSize, color, id, name, highlight, disabled, ariaAttrs } = useFormField<InputProps>(_props)
+const { orientation, size: fieldGroupSize } = useFieldGroup<InputProps>(_props)
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(toRef(() => defu(props, { trailingIcon: appConfig.ui.icons.chevronDown })))
 
-const inputSize = computed(() => fieldGroupSize.value || formGroupSize.value)
+const inputSize = computed(() => fieldGroupSize.value || formFieldSize.value)
 
 const [DefineCreateItemTemplate, ReuseCreateItemTemplate] = createReusableTemplate()
 const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: InputMenuItem, index: number }>({
@@ -261,12 +317,14 @@ const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: I
   }
 })
 
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.inputMenu || {}) })({
-  color: color.value,
+  color: color.value ?? props.color,
   variant: props.variant,
-  size: inputSize?.value,
+  size: inputSize?.value ?? props.size,
   loading: props.loading,
-  highlight: highlight.value,
+  highlight: highlight.value ?? props.highlight,
+  fixed: props.fixed,
   leading: isLeading.value || !!props.avatar || !!slots.leading,
   trailing: isTrailing.value || !!slots.trailing,
   multiple: props.multiple,
@@ -277,10 +335,11 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.inputMenu ||
 // eslint-disable-next-line vue/no-dupe-keys
 const items = computed(() => groups.value.flatMap(group => group) as T[])
 
-function displayValue(value: GetItemValue<T, VK>): string {
-  return getDisplayValue<T[], GetItemValue<T, VK>>(items.value, value, {
+function displayValue(value: GetItemValue<T, VK, ExcludeItem>): string {
+  return getDisplayValue<T[], GetItemValue<T, VK, ExcludeItem>>(items.value, value, {
     labelKey: props.labelKey,
-    valueKey: props.valueKey
+    valueKey: props.valueKey,
+    by: props.by
   }) ?? ''
 }
 
@@ -299,29 +358,14 @@ const filteredGroups = computed(() => {
 
   const fields = Array.isArray(props.filterFields) ? props.filterFields : [props.labelKey] as string[]
 
-  return groups.value.map(items => items.filter((item) => {
-    if (item === undefined || item === null) {
-      return false
-    }
-
-    if (typeof item !== 'object') {
-      return contains(String(item), searchTerm.value)
-    }
-
-    if (item.type && ['label', 'separator'].includes(item.type)) {
-      return true
-    }
-
-    return fields.some((field) => {
-      const value = get(item, field)
-      return value !== undefined && value !== null && contains(String(value), searchTerm.value)
-    })
-  })).filter(group => group.filter(item =>
-    !isInputItem(item) || (!item.type || !['label', 'separator'].includes(item.type))
-  ).length > 0)
+  return filterGroups(groups.value, searchTerm.value, {
+    fields,
+    isStructural: (item: InputMenuItem) => isInputItem(item) && !!item.type && ['label', 'separator'].includes(item.type)
+  })
 })
 const filteredItems = computed(() => filteredGroups.value.flatMap(group => group))
 
+// eslint-disable-next-line vue/no-dupe-keys
 const createItem = computed(() => {
   if (!props.createItem || !searchTerm.value) {
     return false
@@ -330,7 +374,7 @@ const createItem = computed(() => {
   const newItem = props.valueKey ? { [props.valueKey]: searchTerm.value } as NestedItem<T> : searchTerm.value
 
   if ((typeof props.createItem === 'object' && props.createItem.when === 'always') || props.createItem === 'always') {
-    return !filteredItems.value.find(item => compare(item, newItem, props.valueKey as string))
+    return !filteredItems.value.find(item => compare(item, newItem, (props.by ?? props.valueKey) as string | undefined))
   }
 
   return !filteredItems.value.length
@@ -347,7 +391,11 @@ function autoFocus() {
 
 onMounted(() => {
   nextTick(() => {
-    searchTerm.value = ''
+    if (isAutocomplete.value) {
+      searchTerm.value = String(props.modelValue ?? props.defaultValue ?? '')
+    } else {
+      searchTerm.value = ''
+    }
   })
 
   setTimeout(() => {
@@ -355,18 +403,49 @@ onMounted(() => {
   }, props.autofocusDelay)
 })
 
+watch(() => props.modelValue, (newValue) => {
+  if (isAutocomplete.value) {
+    searchTerm.value = String(newValue ?? '')
+  }
+})
+
 function onUpdate(value: any) {
   if (toRaw(props.modelValue) === value) {
     return
   }
+
+  if (props.modelModifiers?.trim && (typeof value === 'string' || value === null || value === undefined)) {
+    value = value?.trim() ?? null
+  }
+
+  if (props.modelModifiers?.number) {
+    value = looseToNumber(value)
+  }
+
+  if (props.modelModifiers?.nullable) {
+    value ??= null
+  }
+
+  if (props.modelModifiers?.optional && !props.modelModifiers?.nullable && value !== null) {
+    value ??= undefined
+  }
+
   // @ts-expect-error - 'target' does not exist in type 'EventInit'
   const event = new Event('change', { target: { value } })
   emits('change', event)
   emitFormChange()
   emitFormInput()
 
-  if (props.resetSearchTermOnSelect) {
+  if (isAutocomplete.value) {
+    searchTerm.value = String(value ?? '')
+  } else if (props.resetSearchTermOnSelect) {
     searchTerm.value = ''
+  }
+}
+
+function onInputUpdate(value: string) {
+  if (!isAutocomplete.value) {
+    searchTerm.value = value
   }
 }
 
@@ -391,7 +470,7 @@ function onUpdateOpen(value: boolean) {
 
     // Since we use `displayValue` prop inside ComboboxInput we should reset searchTerm manually
     // https://reka-ui.com/docs/components/combobox#api-reference
-    if (props.resetSearchTermOnBlur) {
+    if (!isAutocomplete.value && props.resetSearchTermOnBlur) {
       const STATE_ANIMATION_DELAY_MS = 100
 
       timeoutId = setTimeout(() => {
@@ -406,10 +485,10 @@ function onUpdateOpen(value: boolean) {
   }
 }
 
-function onRemoveTag(event: any, modelValue: GetModelValue<T, VK, true>) {
+function onRemoveTag(event: any, modelValue: GetModelValue<T, VK, true, ExcludeItem>) {
   if (props.multiple) {
     const filteredValue = modelValue.filter(value => !isEqual(value, event))
-    emits('update:modelValue', filteredValue as GetModelValue<T, VK, M>)
+    emits('update:modelValue', filteredValue as ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>)
     emits('remove-tag', event)
     onUpdate(filteredValue)
   }
@@ -439,15 +518,29 @@ function isInputItem(item: InputMenuItem): item is Exclude<InputMenuItem, InputM
   return typeof item === 'object' && item !== null
 }
 
+function isModelValueEmpty(modelValue: ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>): boolean {
+  if (props.multiple && Array.isArray(modelValue)) {
+    return modelValue.length === 0
+  }
+  return modelValue === undefined || modelValue === null || modelValue === ''
+}
+
+function onClear() {
+  emits('clear')
+}
+
+const viewportRef = useTemplateRef('viewportRef')
+
 defineExpose({
-  inputRef: toRef(() => inputRef.value?.$el as HTMLInputElement)
+  inputRef: toRef(() => inputRef.value?.$el as HTMLInputElement),
+  viewportRef: toRef(() => viewportRef.value)
 })
 </script>
 
 <!-- eslint-disable vue/no-template-shadow -->
 <template>
   <DefineCreateItemTemplate>
-    <ComboboxItem
+    <Component.Item
       data-slot="item"
       :class="ui.item({ class: props.ui?.item })"
       :value="searchTerm"
@@ -458,17 +551,17 @@ defineExpose({
           {{ t('inputMenu.create', { label: searchTerm }) }}
         </slot>
       </span>
-    </ComboboxItem>
+    </Component.Item>
   </DefineCreateItemTemplate>
 
   <DefineItemTemplate v-slot="{ item, index }">
-    <ComboboxLabel v-if="isInputItem(item) && item.type === 'label'" data-slot="label" :class="ui.label({ class: [props.ui?.label, item.ui?.label, item.class] })">
+    <Component.Label v-if="isInputItem(item) && item.type === 'label'" data-slot="label" :class="ui.label({ class: [props.ui?.label, item.ui?.label, item.class] })">
       {{ get(item, props.labelKey as string) }}
-    </ComboboxLabel>
+    </Component.Label>
 
-    <ComboboxSeparator v-else-if="isInputItem(item) && item.type === 'separator'" data-slot="separator" :class="ui.separator({ class: [props.ui?.separator, item.ui?.separator, item.class] })" />
+    <Component.Separator v-else-if="isInputItem(item) && item.type === 'separator'" data-slot="separator" :class="ui.separator({ class: [props.ui?.separator, item.ui?.separator, item.class] })" />
 
-    <ComboboxItem
+    <Component.Item
       v-else
       data-slot="item"
       :class="ui.item({ class: [props.ui?.item, isInputItem(item) && item.ui?.item, isInputItem(item) && item.class] })"
@@ -508,140 +601,156 @@ defineExpose({
         <span data-slot="itemTrailing" :class="ui.itemTrailing({ class: [props.ui?.itemTrailing, isInputItem(item) && item.ui?.itemTrailing] })">
           <slot name="item-trailing" :item="(item as NestedItem<T>)" :index="index" :ui="ui" />
 
-          <ComboboxItemIndicator as-child>
-            <UIcon :name="selectedIcon || appConfig.ui.icons.check" data-slot="itemTrailingIcon" :class="ui.itemTrailingIcon({ class: [props.ui?.itemTrailingIcon, isInputItem(item) && item.ui?.itemTrailingIcon] })" />
-          </ComboboxItemIndicator>
+          <Component.ItemIndicator v-if="!isAutocomplete" as-child>
+            <UIcon :name="props.selectedIcon || appConfig.ui.icons.check" data-slot="itemTrailingIcon" :class="ui.itemTrailingIcon({ class: [props.ui?.itemTrailingIcon, isInputItem(item) && item.ui?.itemTrailingIcon] })" />
+          </Component.ItemIndicator>
         </span>
       </slot>
-    </ComboboxItem>
+    </Component.Item>
   </DefineItemTemplate>
 
-  <ComboboxRoot
+  <Component.Root
     v-slot="{ modelValue, open }"
     v-bind="rootProps"
     :name="name"
     :disabled="disabled"
     data-slot="root"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
-    :as-child="!!multiple"
+    :as-child="!!props.multiple && !isAutocomplete"
     ignore-filter
     @update:model-value="onUpdate"
     @update:open="onUpdateOpen"
   >
-    <ComboboxAnchor :as-child="!multiple" data-slot="base" :class="ui.base({ class: props.ui?.base })">
+    <Component.Anchor :as-child="!props.multiple" data-slot="base" :class="ui.base({ class: props.ui?.base })">
       <TagsInputRoot
-        v-if="multiple"
+        v-if="props.multiple && !isAutocomplete"
         v-slot="{ modelValue: tags }"
         :model-value="(modelValue as string[])"
         :disabled="disabled"
-        :required="required"
+        :required="props.required"
         delimiter=""
         as-child
         @blur="onBlur"
         @focus="onFocus"
-        @remove-tag="onRemoveTag($event, modelValue as GetModelValue<T, VK, true>)"
+        @remove-tag="onRemoveTag($event, modelValue as GetModelValue<T, VK, true, ExcludeItem>)"
       >
         <TagsInputItem v-for="(item, index) in tags" :key="index" :value="item" data-slot="tagsItem" :class="ui.tagsItem({ class: [props.ui?.tagsItem, isInputItem(item) && item.ui?.tagsItem] })">
           <TagsInputItemText data-slot="tagsItemText" :class="ui.tagsItemText({ class: [props.ui?.tagsItemText, isInputItem(item) && item.ui?.tagsItemText] })">
             <slot name="tags-item-text" :item="(item as NestedItem<T>)" :index="index">
-              {{ displayValue(item as GetItemValue<T, VK>) }}
+              {{ displayValue(item as GetItemValue<T, VK, ExcludeItem>) }}
             </slot>
           </TagsInputItemText>
 
           <TagsInputItemDelete data-slot="tagsItemDelete" :class="ui.tagsItemDelete({ class: [props.ui?.tagsItemDelete, isInputItem(item) && item.ui?.tagsItemDelete] })" :disabled="disabled">
             <slot name="tags-item-delete" :item="(item as NestedItem<T>)" :index="index" :ui="ui">
-              <UIcon :name="deleteIcon || appConfig.ui.icons.close" data-slot="tagsItemDeleteIcon" :class="ui.tagsItemDeleteIcon({ class: [props.ui?.tagsItemDeleteIcon, isInputItem(item) && item.ui?.tagsItemDeleteIcon] })" />
+              <UIcon :name="props.deleteIcon || appConfig.ui.icons.close" data-slot="tagsItemDeleteIcon" :class="ui.tagsItemDeleteIcon({ class: [props.ui?.tagsItemDeleteIcon, isInputItem(item) && item.ui?.tagsItemDeleteIcon] })" />
             </slot>
           </TagsInputItemDelete>
         </TagsInputItem>
 
-        <ComboboxInput v-model="searchTerm" as-child>
+        <Component.Input v-model="searchTerm" as-child>
           <TagsInputInput
             :id="id"
             ref="inputRef"
             v-bind="{ ...$attrs, ...ariaAttrs }"
-            :placeholder="placeholder"
+            :placeholder="props.placeholder"
             data-slot="tagsInput"
             :class="ui.tagsInput({ class: props.ui?.tagsInput })"
             @change.stop
           />
-        </ComboboxInput>
+        </Component.Input>
       </TagsInputRoot>
 
-      <ComboboxInput
+      <Component.Input
         v-else
         :id="id"
         ref="inputRef"
-        :display-value="displayValue"
-        v-bind="{ ...$attrs, ...ariaAttrs }"
-        :type="type"
-        :placeholder="placeholder"
-        :required="required"
+        v-bind="{ ...(!isAutocomplete ? { displayValue } : {}), ...$attrs, ...ariaAttrs }"
+        :type="props.type"
+        :placeholder="props.placeholder"
+        :required="props.required"
         @blur="onBlur"
         @focus="onFocus"
         @change.stop
-        @update:model-value="searchTerm = $event"
+        @update:model-value="onInputUpdate"
       />
 
-      <span v-if="isLeading || !!avatar || !!slots.leading" data-slot="leading" :class="ui.leading({ class: props.ui?.leading })">
-        <slot name="leading" :model-value="(modelValue as GetModelValue<T, VK, M>)" :open="open" :ui="ui">
+      <span v-if="isLeading || !!props.avatar || !!slots.leading" data-slot="leading" :class="ui.leading({ class: props.ui?.leading })">
+        <slot name="leading" :model-value="(modelValue as ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>)" :open="open" :ui="ui">
           <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" data-slot="leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
-          <UAvatar v-else-if="!!avatar" :size="((props.ui?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="avatar" data-slot="itemLeadingAvatar" :class="ui.itemLeadingAvatar({ class: props.ui?.itemLeadingAvatar })" />
+          <UAvatar v-else-if="!!props.avatar" :size="((props.ui?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="props.avatar" data-slot="itemLeadingAvatar" :class="ui.itemLeadingAvatar({ class: props.ui?.itemLeadingAvatar })" />
         </slot>
       </span>
 
-      <ComboboxTrigger v-if="isTrailing || !!slots.trailing" data-slot="trailing" :class="ui.trailing({ class: props.ui?.trailing })">
-        <slot name="trailing" :model-value="(modelValue as GetModelValue<T, VK, M>)" :open="open" :ui="ui">
-          <UIcon v-if="trailingIconName" :name="trailingIconName" data-slot="trailingIcon" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
+      <Component.Trigger v-if="isTrailing || !!slots.trailing || !!props.clear" data-slot="trailing" :class="ui.trailing({ class: props.ui?.trailing })">
+        <slot name="trailing" :model-value="(modelValue as ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>)" :open="open" :ui="ui">
+          <Component.Cancel v-if="!!props.clear && !isModelValueEmpty(modelValue as ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>)" as-child>
+            <UButton
+              as="span"
+              :icon="props.clearIcon || appConfig.ui.icons.close"
+              :size="inputSize"
+              variant="link"
+              color="neutral"
+              tabindex="-1"
+              v-bind="clearProps"
+              data-slot="trailingClear"
+              :class="ui.trailingClear({ class: props.ui?.trailingClear })"
+              @click.stop="onClear"
+            />
+          </Component.Cancel>
+
+          <UIcon v-else-if="trailingIconName" :name="trailingIconName" data-slot="trailingIcon" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
         </slot>
-      </ComboboxTrigger>
-    </ComboboxAnchor>
+      </Component.Trigger>
+    </Component.Anchor>
 
-    <ComboboxPortal v-bind="portalProps">
-      <ComboboxContent data-slot="content" :class="ui.content({ class: props.ui?.content })" v-bind="contentProps" @focus-outside.prevent>
-        <slot name="content-top" />
+    <Component.Portal v-bind="portalProps">
+      <FieldGroupReset>
+        <Component.Content data-slot="content" :class="ui.content({ class: props.ui?.content })" v-bind="contentProps" @focus-outside.prevent>
+          <slot name="content-top" />
 
-        <ComboboxEmpty data-slot="empty" :class="ui.empty({ class: props.ui?.empty })">
-          <slot name="empty" :search-term="searchTerm">
-            {{ searchTerm ? t('inputMenu.noMatch', { searchTerm }) : t('inputMenu.noData') }}
-          </slot>
-        </ComboboxEmpty>
+          <Component.Empty data-slot="empty" :class="ui.empty({ class: props.ui?.empty })">
+            <slot name="empty" :search-term="searchTerm">
+              {{ searchTerm ? t('inputMenu.noMatch', { searchTerm }) : t('inputMenu.noData') }}
+            </slot>
+          </Component.Empty>
 
-        <div role="presentation" data-slot="viewport" :class="ui.viewport({ class: props.ui?.viewport })">
-          <template v-if="!!virtualize">
-            <ReuseCreateItemTemplate v-if="createItem && createItemPosition === 'top'" />
+          <div ref="viewportRef" role="presentation" data-slot="viewport" :class="ui.viewport({ class: props.ui?.viewport })">
+            <template v-if="!!props.virtualize">
+              <ReuseCreateItemTemplate v-if="createItem && createItemPosition === 'top'" />
 
-            <ComboboxVirtualizer
-              v-slot="{ option: item, virtualItem }"
-              :options="(filteredItems as any[])"
-              :text-content="item => isInputItem(item) ? get(item, props.labelKey as string) : String(item)"
-              v-bind="virtualizerProps"
-            >
-              <ReuseItemTemplate :item="item" :index="virtualItem.index" />
-            </ComboboxVirtualizer>
+              <Component.Virtualizer
+                v-slot="{ option: item, virtualItem }"
+                :options="(filteredItems as any[])"
+                :text-content="item => isInputItem(item) ? get(item, props.labelKey as string) : String(item)"
+                v-bind="virtualizerProps"
+              >
+                <ReuseItemTemplate :item="item" :index="virtualItem.index" />
+              </Component.Virtualizer>
 
-            <ReuseCreateItemTemplate v-if="createItem && createItemPosition === 'bottom'" />
-          </template>
+              <ReuseCreateItemTemplate v-if="createItem && createItemPosition === 'bottom'" />
+            </template>
 
-          <template v-else>
-            <ComboboxGroup v-if="createItem && createItemPosition === 'top'" data-slot="group" :class="ui.group({ class: props.ui?.group })">
-              <ReuseCreateItemTemplate />
-            </ComboboxGroup>
+            <template v-else>
+              <Component.Group v-if="createItem && createItemPosition === 'top'" data-slot="group" :class="ui.group({ class: props.ui?.group })">
+                <ReuseCreateItemTemplate />
+              </Component.Group>
 
-            <ComboboxGroup v-for="(group, groupIndex) in filteredGroups" :key="`group-${groupIndex}`" data-slot="group" :class="ui.group({ class: props.ui?.group })">
-              <ReuseItemTemplate v-for="(item, index) in group" :key="`group-${groupIndex}-${index}`" :item="item" :index="index" />
-            </ComboboxGroup>
+              <Component.Group v-for="(group, groupIndex) in filteredGroups" :key="`group-${groupIndex}`" data-slot="group" :class="ui.group({ class: props.ui?.group })">
+                <ReuseItemTemplate v-for="(item, index) in group" :key="`group-${groupIndex}-${index}`" :item="item" :index="index" />
+              </Component.Group>
 
-            <ComboboxGroup v-if="createItem && createItemPosition === 'bottom'" data-slot="group" :class="ui.group({ class: props.ui?.group })">
-              <ReuseCreateItemTemplate />
-            </ComboboxGroup>
-          </template>
-        </div>
+              <Component.Group v-if="createItem && createItemPosition === 'bottom'" data-slot="group" :class="ui.group({ class: props.ui?.group })">
+                <ReuseCreateItemTemplate />
+              </Component.Group>
+            </template>
+          </div>
 
-        <slot name="content-bottom" />
+          <slot name="content-bottom" />
 
-        <ComboboxArrow v-if="!!arrow" v-bind="arrowProps" data-slot="arrow" :class="ui.arrow({ class: props.ui?.arrow })" />
-      </ComboboxContent>
-    </ComboboxPortal>
-  </ComboboxRoot>
+          <Component.Arrow v-if="!!props.arrow" v-bind="arrowProps" data-slot="arrow" :class="ui.arrow({ class: props.ui?.arrow })" />
+        </Component.Content>
+      </FieldGroupReset>
+    </Component.Portal>
+  </Component.Root>
 </template>

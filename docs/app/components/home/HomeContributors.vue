@@ -20,7 +20,7 @@ const { width } = useElementSize(el)
 
 <template>
   <div
-    class="isolate rounded-full relative circle w-full aspect-[1/1] p-8 sm:p-12 md:p-14 lg:p-10 xl:p-16 before:absolute before:inset-px before:bg-default before:rounded-full z-(--level)"
+    class="isolate rounded-full relative circle w-full aspect-square p-8 sm:p-12 md:p-14 lg:p-10 xl:p-16 before:absolute before:inset-px before:bg-default before:rounded-full z-(--level)"
     :class="{ 'animation-paused': paused }"
     :style="{
       '--duration': `${((level + 1) * 8)}s`,

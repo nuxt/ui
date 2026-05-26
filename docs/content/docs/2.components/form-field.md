@@ -143,6 +143,14 @@ slots:
 This sets the `color` to `error` on the form control. You can change it globally in your `app.config.ts`.
 ::
 
+### Error pattern
+
+Use the `error-pattern` prop to match form errors with a regular expression. This is especially relevant for components with array values such as [InputTags](/docs/components/input-tags), where errors include array indices in their name (e.g. `tags.0`).
+
+::tip{to="/docs/components/form#error-reporting"}
+See an example of using `error-pattern` within a Form.
+::
+
 ### Size
 
 Use the `size` prop to change the size of the FormField, the `size` is proxied to the form control.
@@ -161,6 +169,30 @@ props:
   hint: Optional
   help: Please enter a valid email address.
   size: xl
+slots:
+  default: |
+
+    <UInput placeholder="Enter your email" class="w-full" />
+---
+
+:u-input{placeholder="Enter your email" class="w-full"}
+::
+
+### Orientation :badge{label="4.3+" class="align-text-top"}
+
+Use the `orientation` prop to change the layout of the FormField. Defaults to `vertical`.
+
+::component-code
+---
+prettier: true
+ignore:
+  - label
+  - class
+props:
+  orientation: horizontal
+  label: Email
+  help: Please enter a valid email address.
+  class: w-72
 slots:
   default: |
 

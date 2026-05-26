@@ -1,40 +1,48 @@
 <script setup lang="ts">
 import type { ContentNavigationItem } from '@nuxt/content'
 
-interface ContentSearchFile {
-  id: string
-  title: string
-  titles: string[]
-  level: number
-  content: string
-}
-
 defineProps<{
-  files?: ContentSearchFile[]
   navigation?: ContentNavigationItem[]
 }>()
 
-const { links, groups, fullscreen, chat, searchTerm, messages } = useSearch()
+const { status, search, init } = useSearchCollection('docs', {
+  immediate: false,
+  ignoredTags: ['style']
+})
 
-function onClose() {
-  chat.value = false
+const { links, groups, searchTerm } = useSearch()
+const { open } = useContentSearch()
+const { track } = useAnalytics()
 
-  fullscreen.value = false
+const fuse = {
+  resultLimit: 20,
+  fuseOptions: {
+    useTokenSearch: false,
+    threshold: 0
+  }
 }
+
+watch(open, (value) => {
+  if (value && status.value === 'idle') {
+    init()
+  }
+})
+
+watchDebounced(searchTerm, (term) => {
+  if (term) {
+    track('Search Performed', { term })
+  }
+}, { debounce: 500 })
 </script>
 
 <template>
   <UContentSearch
     v-model:search-term="searchTerm"
     :links="links"
-    :files="files"
     :groups="groups"
     :navigation="navigation"
-    :fullscreen="fullscreen"
-    :fuse="{ resultLimit: 115 }"
-  >
-    <template v-if="chat" #content>
-      <SearchChat v-model:messages="messages" v-model:fullscreen="fullscreen" @close="onClose" />
-    </template>
-  </UContentSearch>
+    :search="search"
+    :search-status="status"
+    :fuse="fuse"
+  />
 </template>

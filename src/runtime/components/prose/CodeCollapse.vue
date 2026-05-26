@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/prose/code-collapse'
 import type { IconProps } from '../../types'
@@ -32,19 +33,23 @@ export interface ProseCodeCollapseProps {
 }
 
 export interface ProseCodeCollapseSlots {
-  default(props?: {}): any
+  default(props?: {}): VNode[]
 }
 </script>
 
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useAppConfig } from '#imports'
+import { useComponentProps } from '../../composables/useComponentProps'
 import { useLocale } from '../../composables/useLocale'
 import { tv } from '../../utils/tv'
 import UButton from '../Button.vue'
 
-const props = defineProps<ProseCodeCollapseProps>()
+const _props = defineProps<ProseCodeCollapseProps>()
+
 defineSlots<ProseCodeCollapseSlots>()
+
+const props = useComponentProps('prose.codeCollapse', _props)
 
 const open = defineModel<boolean>('open', { default: false })
 
@@ -63,7 +68,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.codeC
 
     <div :class="ui.footer({ class: props.ui?.footer })">
       <UButton
-        :icon="icon || appConfig.ui.icons.chevronDown"
+        :icon="props.icon || appConfig.ui.icons.chevronDown"
         color="neutral"
         variant="outline"
         :data-state="open ? 'open' : 'closed'"

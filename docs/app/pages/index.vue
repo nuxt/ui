@@ -7,6 +7,22 @@ if (!page.value) {
 }
 
 const { url } = useSiteConfig()
+const appConfig = useAppConfig()
+
+if (import.meta.server) {
+  prerenderRoutes(['/raw/index.md'])
+
+  useSchemaOrg([
+    defineSoftwareApp({
+      name: 'Nuxt UI',
+      operatingSystem: 'Web',
+      applicationCategory: 'DeveloperApplication',
+      offers: { price: 0, priceCurrency: 'USD' }
+    })
+  ])
+}
+
+useCanonical('/raw/index.md')
 
 useSeoMeta({
   titleTemplate: '%s - Nuxt UI',
@@ -21,6 +37,7 @@ const { data: components } = await useAsyncData('index-components', () => {
   return queryCollection('docs')
     .where('path', 'LIKE', '/docs/components/%')
     .where('extension', '=', 'md')
+    .where('index', 'IS NULL')
     .select('path', 'title', 'description', 'category')
     .all()
 })
@@ -43,7 +60,7 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
 </script>
 
 <template>
-  <div v-if="page">
+  <main v-if="page">
     <UPageHero
       orientation="horizontal"
       :ui="{
@@ -87,8 +104,8 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
           pause-on-hover
           :overlay="false"
           :ui="{
-            root: '[--gap:--spacing(4)] [--duration:40s] border-default absolute w-full left-0 border-y lg:border-x lg:border-y-0 lg:w-[calc(50%-6px)] 2xl:w-[320px] lg:flex-col',
-            content: 'lg:w-auto lg:flex-col lg:animate-[marquee-vertical_var(--duration)_linear_infinite] lg:rtl:animate-[marquee-vertical-rtl_var(--duration)_linear_infinite] lg:h-[fit-content]'
+            root: '[--gap:--spacing(4)] [--duration:40s] border-default absolute w-full left-0 border-y lg:border-x lg:border-y-0 lg:w-[calc(50%-6px)] 2xl:max-w-[320px] lg:flex-col',
+            content: 'lg:w-auto lg:flex-col lg:animate-[marquee-vertical_var(--duration)_linear_infinite] lg:rtl:animate-[marquee-vertical-rtl_var(--duration)_linear_infinite] lg:h-fit'
           }"
         >
           <ULink
@@ -96,6 +113,7 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
             :key="component.path"
             class="relative group/link aspect-video border-default w-[290px] xl:w-[330px] 2xl:w-[320px] 2xl:p-2 2xl:border-y"
             :to="component.path"
+            tabindex="-1"
           >
             <UColorModeImage
               :light="`${component.path.replace('/docs/components/', '/components/light/')}.png`"
@@ -116,8 +134,8 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
           reverse
           :overlay="false"
           :ui="{
-            root: '[--gap:--spacing(4)] [--duration:40s] border-default absolute w-full mt-[180px] left-0 border-y lg:mt-auto lg:left-auto lg:border-y-0 lg:border-x lg:w-[calc(50%-6px)] 2xl:w-[320px] lg:right-0 lg:flex-col',
-            content: 'lg:w-auto lg:flex-col lg:animate-[marquee-vertical_var(--duration)_linear_infinite] lg:rtl:animate-[marquee-vertical-rtl_var(--duration)_linear_infinite] lg:h-[fit-content] lg:[animation-direction:reverse]'
+            root: '[--gap:--spacing(4)] [--duration:40s] border-default absolute w-full mt-[180px] left-0 border-y lg:mt-auto lg:left-auto lg:border-y-0 lg:border-x lg:w-[calc(50%-6px)] 2xl:max-w-[320px] lg:right-0 lg:flex-col',
+            content: 'lg:w-auto lg:flex-col lg:animate-[marquee-vertical_var(--duration)_linear_infinite] lg:rtl:animate-[marquee-vertical-rtl_var(--duration)_linear_infinite] lg:h-fit lg:[animation-direction:reverse]'
           }"
         >
           <ULink
@@ -125,6 +143,7 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
             :key="component.path"
             class="relative group/link aspect-video border-default w-[290px] xl:w-[330px] 2xl:w-[320px] 2xl:p-2 2xl:border-y"
             :to="component.path"
+            tabindex="-1"
           >
             <UColorModeImage
               :light="`${component.path.replace('/docs/components/', '/components/light/')}.png`"
@@ -144,8 +163,8 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
 
     <USeparator />
 
-    <UPageSection :ui="{ container: 'lg:py-16', root: 'bg-muted/25' }">
-      <ul class="grid grid-cols-1 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 gap-y-6 lg:gap-x-8 lg:gap-y-8 xl:gap-y-10">
+    <UPageSection :ui="{ container: 'lg:py-16' }" class="bg-elevated/25">
+      <ul class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8 xl:gap-y-10">
         <Motion
           v-for="(feature, index) in page?.features"
           :key="feature.title"
@@ -156,7 +175,7 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
           :in-view-options="{ once: true }"
           class="flex items-start gap-x-3 relative group"
         >
-          <NuxtLink v-if="feature.to" :to="feature.to" class="absolute inset-0 z-10">
+          <NuxtLink v-if="feature.to" :to="feature.to" class="absolute inset-0 z-10 focus-visible:outline-primary">
             <span class="sr-only">Go to {{ feature.title }}</span>
           </NuxtLink>
 
@@ -176,7 +195,7 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
           <div class="flex flex-col">
             <h2 class="font-medium text-highlighted inline-flex items-center gap-x-1">
               {{ feature.title }}
-              <UIcon v-if="feature.to" name="i-lucide-arrow-right" class="size-4 shrink-0 opacity-0 group-hover:opacity-100 transition-all duration-200 -translate-x-1 group-hover:translate-x-0" />
+              <UIcon v-if="feature.to" :name="appConfig.ui.icons.arrowRight" class="size-4 shrink-0 opacity-0 group-hover:opacity-100 transition-all duration-200 -translate-x-1 group-hover:translate-x-0" />
             </h2>
             <p class="text-sm text-muted">
               {{ feature.description }}
@@ -206,7 +225,7 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
       :features="page.css_variables.features"
       :links="page.css_variables.links"
       orientation="horizontal"
-      :ui="{ root: 'bg-muted/25' }"
+      class="bg-elevated/25"
     >
       <MDC :value="page.css_variables.code" cache-key="index-css-variables-code" />
     </UPageSection>
@@ -234,7 +253,7 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
       :links="page.templates.links"
       :features="page.templates.features"
       orientation="horizontal"
-      :ui="{ root: 'bg-muted/25' }"
+      class="bg-elevated/25"
     >
       <UCarousel
         v-slot="{ item }"
@@ -252,13 +271,12 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
       >
         <UPageCard
           :to="item.links?.[0]?.to"
-          :icon="item.icon"
-          :title="item.title"
           target="_blank"
           variant="subtle"
           class="group rounded-md"
+          tabindex="-1"
           :ui="{
-            container: 'p-4 sm:p-4',
+            container: 'p-0!',
             wrapper: 'flex-row items-center gap-1.5',
             leading: 'mb-0',
             leadingIcon: 'text-highlighted'
@@ -271,7 +289,7 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
             width="620"
             height="348"
             loading="lazy"
-            class="rounded-lg w-full border border-default aspect-video"
+            class="rounded-md w-full aspect-video"
           />
         </UPageCard>
       </UCarousel>
@@ -288,7 +306,7 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
     >
       <template #features>
         <li>
-          <NuxtLink to="https://npm.chart.dev/@nuxt/ui" target="_blank" class="min-w-0 group">
+          <NuxtLink to="https://npm.chart.dev/@nuxt/ui" target="_blank" class="min-w-0 group focus-visible:outline-primary">
             <p class="text-4xl font-semibold truncate text-highlighted group-hover:text-primary transition-colors">
               {{ format(module?.stats?.downloads ?? 0) }}+
             </p>
@@ -297,7 +315,7 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
         </li>
 
         <li>
-          <NuxtLink to="https://github.com/nuxt/ui" target="_blank" class="min-w-0 group">
+          <NuxtLink to="https://github.com/nuxt/ui" target="_blank" class="min-w-0 group focus-visible:outline-primary">
             <p class="text-4xl font-semibold text-highlighted truncate group-hover:text-primary transition-colors">
               {{ format(module?.stats?.stars ?? 0) }}+
             </p>
@@ -306,9 +324,9 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
         </li>
 
         <li>
-          <NuxtLink to="https://github.com/nuxt/ui/graphs/contributors" target="_blank" class="min-w-0 group">
+          <NuxtLink to="https://github.com/nuxt/ui/graphs/contributors" target="_blank" class="min-w-0 group focus-visible:outline-primary">
             <p class="text-4xl font-semibold text-highlighted truncate group-hover:text-primary transition-colors">
-              250+
+              300+
             </p>
             <p class="text-muted text-sm truncate">Contributors</p>
           </NuxtLink>
@@ -318,6 +336,8 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
       <div ref="contributorsRef" class="p-4 sm:px-6 md:px-8 lg:px-12 xl:px-14 overflow-hidden flex relative">
         <LazyHomeContributors :contributors="module?.contributors" :paused="!isContributorsInView || isContributorsHovered" />
       </div>
+
+      <LazyStarsBg />
     </UPageSection>
-  </div>
+  </main>
 </template>

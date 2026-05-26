@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/page-columns'
 import type { ComponentConfig } from '../types/tv'
@@ -12,10 +13,11 @@ export interface PageColumnsProps {
    */
   as?: any
   class?: any
+  ui?: { base?: any }
 }
 
 export interface PageColumnsSlots {
-  default(props?: {}): any
+  default?(props?: {}): VNode[]
 }
 </script>
 
@@ -24,17 +26,22 @@ import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
 import { tv } from '../utils/tv'
+import { useComponentProps } from '../composables/useComponentProps'
 
-const props = defineProps<PageColumnsProps>()
+const _props = defineProps<PageColumnsProps>()
+
 defineSlots<PageColumnsSlots>()
+
+const props = useComponentProps('pageColumns', _props)
 
 const appConfig = useAppConfig() as PageColumns['AppConfig']
 
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pageColumns || {}) }))
 </script>
 
 <template>
-  <Primitive :as="as" :class="ui({ class: props.class })">
+  <Primitive :as="props.as" :class="ui({ class: [props.ui?.base, props.class] })">
     <slot />
   </Primitive>
 </template>

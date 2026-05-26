@@ -2,12 +2,12 @@
 import type { ChatStatus } from 'ai'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/chat-prompt-submit'
-import type { ButtonProps, ButtonSlots, IconProps } from '../types'
+import type { ButtonProps, ButtonSlots, IconProps, LinkPropsKeys } from '../types'
 import type { ComponentConfig } from '../types/tv'
 
 type ChatPromptSubmit = ComponentConfig<typeof theme, AppConfig, 'chatPromptSubmit'>
 
-export interface ChatPromptSubmitProps extends Omit<ButtonProps, 'icon' | 'color' | 'variant'> {
+export interface ChatPromptSubmitProps extends Omit<ButtonProps, LinkPropsKeys | 'icon' | 'color' | 'variant'> {
   status?: ChatStatus
   /**
    * The icon displayed in the button when the status is `ready`.
@@ -85,9 +85,10 @@ export interface ChatPromptSubmitEmits {
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { useForwardProps } from 'reka-ui'
 import { reactiveOmit } from '@vueuse/core'
 import { useAppConfig } from '#imports'
+import { useComponentProps } from '../composables/useComponentProps'
+import { useForwardProps } from '../composables/useForwardProps'
 import { useLocale } from '../composables/useLocale'
 import { transformUI } from '../utils'
 import { tv } from '../utils/tv'
@@ -95,7 +96,7 @@ import UButton from './Button.vue'
 
 defineOptions({ inheritAttrs: false })
 
-const props = withDefaults(defineProps<ChatPromptSubmitProps>(), {
+const _props = withDefaults(defineProps<ChatPromptSubmitProps>(), {
   status: 'ready',
   streamingColor: 'neutral',
   streamingVariant: 'subtle',
@@ -107,10 +108,14 @@ const props = withDefaults(defineProps<ChatPromptSubmitProps>(), {
 const emits = defineEmits<ChatPromptSubmitEmits>()
 const slots = defineSlots<ButtonSlots>()
 
+const props = useComponentProps('chatPromptSubmit', _props)
+
 const { t } = useLocale()
 const appConfig = useAppConfig() as ChatPromptSubmit['AppConfig']
 
-const buttonProps = useForwardProps(reactiveOmit(props, 'icon', 'color', 'variant', 'status', 'streamingIcon', 'streamingColor', 'streamingVariant', 'submittedIcon', 'submittedColor', 'submittedVariant', 'errorIcon', 'errorColor', 'errorVariant', 'class', 'ui'))
+const buttonProps = useForwardProps(reactiveOmit(props, 'icon', 'color', 'variant', 'status', 'disabled', 'streamingIcon', 'streamingColor', 'streamingVariant', 'submittedIcon', 'submittedColor', 'submittedVariant', 'errorIcon', 'errorColor', 'errorVariant', 'class', 'ui'))
+
+const disabled = computed(() => props.status === 'ready' ? props.disabled : false)
 
 const statusButtonProps = computed(() => ({
   ready: {
@@ -154,6 +159,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.chatPromptSu
     v-bind="{
       ...buttonProps,
       ...statusButtonProps,
+      disabled,
       'aria-label': t('chatPromptSubmit.label'),
       ...$attrs
     }"

@@ -1,46 +1,31 @@
 <script setup lang="ts">
-import { withoutTrailingSlash } from 'ufo'
-import colors from 'tailwindcss/colors'
-import { Analytics } from '@vercel/analytics/nuxt'
-import { SpeedInsights } from '@vercel/speed-insights/nuxt'
-
 const route = useRoute()
 const appConfig = useAppConfig()
-const colorMode = useColorMode()
+const { style, link, color } = useTheme()
 
-const { data: navigation } = await useAsyncData('navigation', () => queryCollectionNavigation('docs', ['framework', 'category', 'description']))
-const { data: files } = useLazyAsyncData('search', () => queryCollectionSearchSections('docs', {
-  ignoredTags: ['style']
-}), {
-  server: false
-})
-
-const color = computed(() => colorMode.value === 'dark' ? (colors as any)[appConfig.ui.colors.neutral][900] : 'white')
-const radius = computed(() => `:root { --ui-radius: ${appConfig.theme.radius}rem; }`)
-const blackAsPrimary = computed(() => appConfig.theme.blackAsPrimary ? `:root { --ui-primary: black; } .dark { --ui-primary: white; }` : ':root {}')
+const { data: navigation } = await useFetch('/api/navigation.json')
 
 useHead({
   meta: [
     { name: 'viewport', content: 'width=device-width, initial-scale=1' },
     { key: 'theme-color', name: 'theme-color', content: color }
   ],
-  link: [
-    // { rel: 'icon', type: 'image/svg+xml', href: '/icon.svg' },
-    { rel: 'canonical', href: `https://ui.nuxt.com${withoutTrailingSlash(route.path)}` }
-  ],
-  style: [
-    { innerHTML: radius, id: 'nuxt-ui-radius', tagPriority: -2 },
-    { innerHTML: blackAsPrimary, id: 'nuxt-ui-black-as-primary', tagPriority: -2 }
-  ],
-  htmlAttrs: {
-    lang: 'en'
-  }
+  link,
+  style
 })
 
-useServerSeoMeta({
-  ogSiteName: 'Nuxt UI',
-  twitterCard: 'summary_large_image'
-})
+if (import.meta.server) {
+  useSeoMeta({
+    ogSiteName: 'Nuxt UI',
+    twitterCard: 'summary_large_image'
+  })
+
+  useSchemaOrg([
+    defineWebSite({
+      name: useSiteConfig().name
+    })
+  ])
+}
 
 useFaviconFromTheme()
 
@@ -53,25 +38,28 @@ provide('navigation', rootNavigation)
   <UApp :toaster="appConfig.toaster">
     <NuxtLoadingIndicator color="var(--ui-primary)" :height="2" />
 
-    <Analytics :debug="false" />
-    <SpeedInsights :debug="false" />
+    <div class="flex">
+      <div class="flex-1 min-w-0" :class="[route.path.startsWith('/docs/') && 'root']">
+        <template v-if="!route.path.startsWith('/examples')">
+          <!-- <Banner /> -->
 
-    <div :class="[route.path.startsWith('/docs/') && 'root']">
+          <Header />
+        </template>
+
+        <NuxtLayout>
+          <NuxtPage />
+        </NuxtLayout>
+
+        <template v-if="!route.path.startsWith('/examples')">
+          <Footer />
+        </template>
+      </div>
+
       <template v-if="!route.path.startsWith('/examples')">
-        <Banner />
-
-        <Header />
-      </template>
-
-      <NuxtLayout>
-        <NuxtPage />
-      </NuxtLayout>
-
-      <template v-if="!route.path.startsWith('/examples')">
-        <Footer />
-
         <ClientOnly>
-          <Search :files="files" :navigation="navigationByFramework" />
+          <Chat />
+
+          <Search :navigation="navigationByFramework" />
         </ClientOnly>
       </template>
     </div>

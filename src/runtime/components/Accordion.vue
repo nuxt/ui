@@ -1,6 +1,7 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import type { AccordionRootProps, AccordionRootEmits } from 'reka-ui'
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/accordion'
 import type { IconProps } from '../types'
@@ -21,7 +22,12 @@ export interface AccordionItem {
   trailingIcon?: IconProps['name']
   slot?: string
   content?: string
-  /** A unique value for the accordion item. Defaults to the index. */
+  /**
+   * A unique value for the accordion item. Defaults to the index.
+   * Also used as the Vue `key` for this item, so providing a stable value prevents
+   * accordion content (and its local state) from remounting when items are added, removed,
+   * or reordered.
+   */
   value?: string
   disabled?: boolean
   class?: any
@@ -43,6 +49,11 @@ export interface AccordionProps<T extends AccordionItem = AccordionItem> extends
    */
   trailingIcon?: IconProps['name']
   /**
+   * The key used to get the value from the item.
+   * @defaultValue 'value'
+   */
+  valueKey?: GetItemKeys<T>
+  /**
    * The key used to get the label from the item.
    * @defaultValue 'label'
    */
@@ -53,52 +64,58 @@ export interface AccordionProps<T extends AccordionItem = AccordionItem> extends
 
 export interface AccordionEmits extends AccordionRootEmits {}
 
-type SlotProps<T extends AccordionItem> = (props: { item: T, index: number, open: boolean, ui: Accordion['ui'] }) => any
+type SlotProps<T extends AccordionItem> = (props: { item: T, index: number, open: boolean, ui: Accordion['ui'] }) => VNode[]
 
 export type AccordionSlots<T extends AccordionItem = AccordionItem> = {
-  leading: SlotProps<T>
-  default(props: { item: T, index: number, open: boolean }): any
-  trailing: SlotProps<T>
-  content: SlotProps<T>
-  body: SlotProps<T>
+  default?(props: { item: T, index: number, open: boolean }): VNode[]
+  leading?: SlotProps<T>
+  trailing?: SlotProps<T>
+  content?: SlotProps<T>
+  body?: SlotProps<T>
 } & DynamicSlots<T, 'body', { index: number, open: boolean, ui: Accordion['ui'] }>
 
 </script>
 
 <script setup lang="ts" generic="T extends AccordionItem">
 import { computed } from 'vue'
-import { AccordionRoot, AccordionItem, AccordionHeader, AccordionTrigger, AccordionContent, useForwardPropsEmits } from 'reka-ui'
+import { AccordionRoot, AccordionItem, AccordionHeader, AccordionTrigger, AccordionContent } from 'reka-ui'
+import { useForwardProps } from '../composables/useForwardProps'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
+import { useComponentProps } from '../composables/useComponentProps'
 import { get } from '../utils'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 
-const props = withDefaults(defineProps<AccordionProps<T>>(), {
+const _props = withDefaults(defineProps<AccordionProps<T>>(), {
   type: 'single',
   collapsible: true,
   unmountOnHide: true,
+  valueKey: 'value',
   labelKey: 'label'
 })
 const emits = defineEmits<AccordionEmits>()
 const slots = defineSlots<AccordionSlots<T>>()
 
+const props = useComponentProps<AccordionProps<T>>('accordion', _props)
+
 const appConfig = useAppConfig() as Accordion['AppConfig']
 
-const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'collapsible', 'defaultValue', 'disabled', 'modelValue', 'unmountOnHide'), emits)
+const rootProps = useForwardProps(reactivePick(props, 'as', 'collapsible', 'defaultValue', 'disabled', 'modelValue', 'unmountOnHide'), emits)
 
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.accordion || {}) })({
   disabled: props.disabled
 }))
 </script>
 
 <template>
-  <AccordionRoot v-bind="rootProps" :type="type" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <AccordionRoot v-bind="rootProps" :type="props.type" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <AccordionItem
       v-for="(item, index) in props.items"
       v-slot="{ open }"
-      :key="index"
-      :value="item.value || String(index)"
+      :key="get(item, props.valueKey as string) ?? index"
+      :value="get(item, props.valueKey as string) ?? String(index)"
       :disabled="item.disabled"
       data-slot="item"
       :class="ui.item({ class: [props.ui?.item, item.ui?.item, item.class] })"
@@ -114,7 +131,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.accordion ||
           </span>
 
           <slot name="trailing" :item="item" :index="index" :open="open" :ui="ui">
-            <UIcon :name="item.trailingIcon || trailingIcon || appConfig.ui.icons.chevronDown" data-slot="trailingIcon" :class="ui.trailingIcon({ class: [props.ui?.trailingIcon, item.ui?.trailingIcon] })" />
+            <UIcon :name="item.trailingIcon || props.trailingIcon || appConfig.ui.icons.chevronDown" data-slot="trailingIcon" :class="ui.trailingIcon({ class: [props.ui?.trailingIcon, item.ui?.trailingIcon] })" />
           </slot>
         </AccordionTrigger>
       </AccordionHeader>

@@ -1,8 +1,8 @@
 ---
-title: Tabs
+title: ProseTabs
 description: 'Organize related content in interactive tabbed interfaces.'
-framework: nuxt
 category: components
+navigation.title: Tabs
 links:
   - label: GitHub
     icon: i-simple-icons-github
