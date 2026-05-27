@@ -26,8 +26,8 @@ const testimonials: { user: UserProps, quote: string }[] = [{
     name: 'Kevin Olson',
     description: 'Founder of Fume.app',
     avatar: {
-      src: 'https://ipx.nuxt.com/f_auto,s_40x40/gh_avatar/acidjazz',
-      srcset: 'https://ipx.nuxt.com/f_auto,s_80x80/gh_avatar/acidjazz 2x',
+      src: 'https://ipx.nuxt.com/f_auto,h_40/gh_avatar/acidjazz',
+      srcset: 'https://ipx.nuxt.com/f_auto,h_80/gh_avatar/acidjazz 2x',
       loading: 'lazy' as const
     }
   },
@@ -37,8 +37,8 @@ const testimonials: { user: UserProps, quote: string }[] = [{
     name: 'Michael Hoffmann',
     description: 'Senior Frontend Developer',
     avatar: {
-      src: 'https://ipx.nuxt.com/f_auto,s_40x40/gh_avatar/mokkapps',
-      srcset: 'https://ipx.nuxt.com/f_auto,s_80x80/gh_avatar/mokkapps 2x',
+      src: 'https://ipx.nuxt.com/f_auto,h_40/gh_avatar/mokkapps',
+      srcset: 'https://ipx.nuxt.com/f_auto,h_80/gh_avatar/mokkapps 2x',
       loading: 'lazy' as const
     }
   },
@@ -48,8 +48,8 @@ const testimonials: { user: UserProps, quote: string }[] = [{
     name: 'Harlan Wilton',
     description: 'Nuxt core team member',
     avatar: {
-      src: 'https://ipx.nuxt.com/f_auto,s_40x40/gh_avatar/harlan-zw',
-      srcset: 'https://ipx.nuxt.com/f_auto,s_80x80/gh_avatar/harlan-zw 2x',
+      src: 'https://ipx.nuxt.com/f_auto,h_40/gh_avatar/harlan-zw',
+      srcset: 'https://ipx.nuxt.com/f_auto,h_80/gh_avatar/harlan-zw 2x',
       loading: 'lazy' as const
     }
   },
