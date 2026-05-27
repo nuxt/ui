@@ -6,7 +6,7 @@ exports[`AuthForm > renders with as correctly 1`] = `
   <div data-slot="body" class="gap-y-6 flex flex-col">
     <!--v-if-->
     <!--v-if-->
-    <form id="v-0-0-0" class="space-y-5" data-slot="form">
+    <form id="v-0-0-0" method="post" class="space-y-5" data-slot="form">
       <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
           <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-1" data-slot="label" class="block font-medium text-default">Email</label>
@@ -54,7 +54,7 @@ exports[`AuthForm > renders with class correctly 1`] = `
   <div data-slot="body" class="gap-y-6 flex flex-col">
     <!--v-if-->
     <!--v-if-->
-    <form id="v-0-0-0" class="space-y-5" data-slot="form">
+    <form id="v-0-0-0" method="post" class="space-y-5" data-slot="form">
       <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
           <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-1" data-slot="label" class="block font-medium text-default">Email</label>
@@ -106,7 +106,7 @@ exports[`AuthForm > renders with description correctly 1`] = `
   <div data-slot="body" class="gap-y-6 flex flex-col">
     <!--v-if-->
     <!--v-if-->
-    <form id="v-0-0-0" class="space-y-5" data-slot="form">
+    <form id="v-0-0-0" method="post" class="space-y-5" data-slot="form">
       <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
           <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-1" data-slot="label" class="block font-medium text-default">Email</label>
@@ -158,7 +158,7 @@ exports[`AuthForm > renders with description slot correctly 1`] = `
   <div data-slot="body" class="gap-y-6 flex flex-col">
     <!--v-if-->
     <!--v-if-->
-    <form id="v-0-0-0" class="space-y-5" data-slot="form">
+    <form id="v-0-0-0" method="post" class="space-y-5" data-slot="form">
       <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
           <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-1" data-slot="label" class="block font-medium text-default">Email</label>
@@ -206,7 +206,7 @@ exports[`AuthForm > renders with disabled correctly 1`] = `
   <div data-slot="body" class="gap-y-6 flex flex-col">
     <!--v-if-->
     <!--v-if-->
-    <form id="v-0-0-0" class="space-y-5" data-slot="form">
+    <form id="v-0-0-0" method="post" class="space-y-5" data-slot="form">
       <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
           <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-1" data-slot="label" class="block font-medium text-default">Email</label>
@@ -254,7 +254,7 @@ exports[`AuthForm > renders with fields correctly 1`] = `
   <div data-slot="body" class="gap-y-6 flex flex-col">
     <!--v-if-->
     <!--v-if-->
-    <form id="v-0-0-0" class="space-y-5" data-slot="form">
+    <form id="v-0-0-0" method="post" class="space-y-5" data-slot="form">
       <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
           <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-1" data-slot="label" class="block font-medium text-default">Email</label>
@@ -302,7 +302,7 @@ exports[`AuthForm > renders with footer slot correctly 1`] = `
   <div data-slot="body" class="gap-y-6 flex flex-col">
     <!--v-if-->
     <!--v-if-->
-    <form id="v-0-0-0" class="space-y-5" data-slot="form">
+    <form id="v-0-0-0" method="post" class="space-y-5" data-slot="form">
       <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
           <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-1" data-slot="label" class="block font-medium text-default">Email</label>
@@ -350,7 +350,7 @@ exports[`AuthForm > renders with header slot correctly 1`] = `
   <div data-slot="body" class="gap-y-6 flex flex-col">
     <!--v-if-->
     <!--v-if-->
-    <form id="v-0-0-0" class="space-y-5" data-slot="form">
+    <form id="v-0-0-0" method="post" class="space-y-5" data-slot="form">
       <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
           <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-1" data-slot="label" class="block font-medium text-default">Email</label>
@@ -402,7 +402,7 @@ exports[`AuthForm > renders with icon correctly 1`] = `
   <div data-slot="body" class="gap-y-6 flex flex-col">
     <!--v-if-->
     <!--v-if-->
-    <form id="v-0-0-0" class="space-y-5" data-slot="form">
+    <form id="v-0-0-0" method="post" class="space-y-5" data-slot="form">
       <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
           <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-1" data-slot="label" class="block font-medium text-default">Email</label>
@@ -454,7 +454,7 @@ exports[`AuthForm > renders with leading slot correctly 1`] = `
   <div data-slot="body" class="gap-y-6 flex flex-col">
     <!--v-if-->
     <!--v-if-->
-    <form id="v-0-0-0" class="space-y-5" data-slot="form">
+    <form id="v-0-0-0" method="post" class="space-y-5" data-slot="form">
       <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
           <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-1" data-slot="label" class="block font-medium text-default">Email</label>
@@ -502,7 +502,7 @@ exports[`AuthForm > renders with loading correctly 1`] = `
   <div data-slot="body" class="gap-y-6 flex flex-col">
     <!--v-if-->
     <!--v-if-->
-    <form id="v-0-0-0" class="space-y-5" data-slot="form">
+    <form id="v-0-0-0" method="post" class="space-y-5" data-slot="form">
       <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
           <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-1" data-slot="label" class="block font-medium text-default">Email</label>
@@ -558,7 +558,7 @@ exports[`AuthForm > renders with providers correctly 1`] = `
       <div data-slot="border" class="border-default w-full border-solid border-t"></div>
       <!--v-if-->
     </div>
-    <form id="v-0-0-0" class="space-y-5" data-slot="form">
+    <form id="v-0-0-0" method="post" class="space-y-5" data-slot="form">
       <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
           <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-1" data-slot="label" class="block font-medium text-default">Email</label>
@@ -606,7 +606,7 @@ exports[`AuthForm > renders with providers slot correctly 1`] = `
   <div data-slot="body" class="gap-y-6 flex flex-col">
     <div data-slot="providers" class="space-y-3">Providers</div>
     <!--v-if-->
-    <form id="v-0-0-0" class="space-y-5" data-slot="form">
+    <form id="v-0-0-0" method="post" class="space-y-5" data-slot="form">
       <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
           <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-1" data-slot="label" class="block font-medium text-default">Email</label>
@@ -654,7 +654,7 @@ exports[`AuthForm > renders with separator correctly 1`] = `
   <div data-slot="body" class="gap-y-6 flex flex-col">
     <!--v-if-->
     <!--v-if-->
-    <form id="v-0-0-0" class="space-y-5" data-slot="form">
+    <form id="v-0-0-0" method="post" class="space-y-5" data-slot="form">
       <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
           <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-1" data-slot="label" class="block font-medium text-default">Email</label>
@@ -702,7 +702,7 @@ exports[`AuthForm > renders with submit correctly 1`] = `
   <div data-slot="body" class="gap-y-6 flex flex-col">
     <!--v-if-->
     <!--v-if-->
-    <form id="v-0-0-0" class="space-y-5" data-slot="form">
+    <form id="v-0-0-0" method="post" class="space-y-5" data-slot="form">
       <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
           <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-1" data-slot="label" class="block font-medium text-default">Email</label>
@@ -750,7 +750,7 @@ exports[`AuthForm > renders with submit slot correctly 1`] = `
   <div data-slot="body" class="gap-y-6 flex flex-col">
     <!--v-if-->
     <!--v-if-->
-    <form id="v-0-0-0" class="space-y-5" data-slot="form">
+    <form id="v-0-0-0" method="post" class="space-y-5" data-slot="form">
       <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
           <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-1" data-slot="label" class="block font-medium text-default">Email</label>
@@ -799,7 +799,7 @@ exports[`AuthForm > renders with title correctly 1`] = `
   <div data-slot="body" class="gap-y-6 flex flex-col">
     <!--v-if-->
     <!--v-if-->
-    <form id="v-0-0-0" class="space-y-5" data-slot="form">
+    <form id="v-0-0-0" method="post" class="space-y-5" data-slot="form">
       <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
           <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-1" data-slot="label" class="block font-medium text-default">Email</label>
@@ -851,7 +851,7 @@ exports[`AuthForm > renders with title slot correctly 1`] = `
   <div data-slot="body" class="gap-y-6 flex flex-col">
     <!--v-if-->
     <!--v-if-->
-    <form id="v-0-0-0" class="space-y-5" data-slot="form">
+    <form id="v-0-0-0" method="post" class="space-y-5" data-slot="form">
       <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
           <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-1" data-slot="label" class="block font-medium text-default">Email</label>
@@ -899,7 +899,7 @@ exports[`AuthForm > renders with ui correctly 1`] = `
   <div data-slot="body" class="gap-y-6 flex flex-col">
     <!--v-if-->
     <!--v-if-->
-    <form id="v-0-0-0" class="space-y-5" data-slot="form">
+    <form id="v-0-0-0" method="post" class="space-y-5" data-slot="form">
       <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
           <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-1" data-slot="label" class="block font-medium text-default">Email</label>
@@ -947,7 +947,7 @@ exports[`AuthForm > renders with validation slot correctly 1`] = `
   <div data-slot="body" class="gap-y-6 flex flex-col">
     <!--v-if-->
     <!--v-if-->
-    <form id="v-0-0-0" class="space-y-5" data-slot="form">
+    <form id="v-0-0-0" method="post" class="space-y-5" data-slot="form">
       <div data-orientation="vertical" data-slot="root" class="text-sm">
         <div data-slot="wrapper" class="">
           <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1"><label for="v-0-0-1" data-slot="label" class="block font-medium text-default">Email</label>
