@@ -18,6 +18,7 @@ logs
 
 # Misc
 .DS_Store
+.cursor
 .fleet
 .idea
 
