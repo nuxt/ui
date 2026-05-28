@@ -210,7 +210,6 @@ export default defineNuxtConfig({
   },
 
   experimental: {
-    asyncContext: true,
     defaults: {
       nuxtLink: {
         externalRelAttribute: 'noopener'
@@ -221,6 +220,9 @@ export default defineNuxtConfig({
   compatibilityDate: '2026-01-14',
 
   nitro: {
+    experimental: {
+      asyncContext: true
+    },
     publicAssets: [{
       dir: resolve('../skills'),
       baseURL: '/.well-known/skills',
