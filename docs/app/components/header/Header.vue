@@ -10,6 +10,13 @@ function toggleChat() {
   }
   open.value = !open.value
 }
+
+defineShortcuts({
+  meta_g: {
+    usingInput: true,
+    handler: () => window.open('https://github.com/nuxt/ui', '_blank')
+  }
+})
 </script>
 
 <!-- eslint-disable vue/no-template-shadow -->
@@ -31,7 +38,11 @@ function toggleChat() {
     <UNavigationMenu :items="desktopLinks" variant="link" content-orientation="vertical" />
 
     <template #right>
-      <UTooltip text="Ask AI for help" :kbds="['meta', 'I']" ignore-non-keyboard-focus>
+      <UTooltip text="Search" :kbds="['meta', 'K']" ignore-non-keyboard-focus>
+        <UContentSearchButton />
+      </UTooltip>
+
+      <UTooltip text="Ask AI" :kbds="['meta', 'I']" ignore-non-keyboard-focus>
         <UButton
           color="neutral"
           variant="ghost"
@@ -43,11 +54,7 @@ function toggleChat() {
 
       <ThemePicker />
 
-      <UTooltip text="Search" :kbds="['meta', 'K']" ignore-non-keyboard-focus>
-        <UContentSearchButton />
-      </UTooltip>
-
-      <UTooltip text="Open on GitHub" class="hidden lg:flex">
+      <UTooltip text="Open on GitHub" :kbds="['meta', 'G']" class="hidden lg:flex">
         <UButton
           color="neutral"
           variant="ghost"
