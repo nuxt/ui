@@ -332,7 +332,7 @@ export function useResizable(key: string, options: Ref<UseResizableProps> | UseR
   }
 
   // Initial sync of storage value to external collapsed ref
-  if (isRef(collapsed) && storageData.value?.collapsed) {
+  if (isRef(collapsed) && typeof storageData.value?.collapsed === 'boolean') {
     collapsed.value = storageData.value.collapsed
   }
 
