@@ -435,7 +435,7 @@ const filteredGroups = computed(() => {
       }
     }
 
-    result.splice(insertAfter === -1 ? result.length : insertAfter + 1, 0, processedGroup)
+    result.splice(insertAfter + 1, 0, processedGroup)
   }
 
   return result

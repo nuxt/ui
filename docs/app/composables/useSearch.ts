@@ -105,6 +105,7 @@ export function useSearch() {
   const groups = computed(() => [{
     id: 'framework',
     label: 'Framework',
+    ignoreFilter: true,
     items: frameworks.value
   }, {
     id: 'ai',
