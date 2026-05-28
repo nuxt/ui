@@ -146,6 +146,35 @@ describe('CommandPalette', () => {
     ['with footer slot', { props, slots: { footer: () => 'Footer slot' } }]
   ])
 
+  it('does not push ignoreFilter groups above fuse groups when predecessor is absent', async () => {
+    const groupsWithIgnoreFilter = [{
+      id: 'links',
+      items: [{ label: 'Get Started', suffix: 'Learn how to get started with Nuxt UI.' }]
+    }, {
+      id: 'search',
+      label: 'Search',
+      ignoreFilter: true,
+      items: [{ label: 'Search result for vue' }]
+    }, {
+      id: 'framework',
+      label: 'Framework',
+      items: [{ label: 'Vue', suffix: 'vue framework' }]
+    }]
+
+    const wrapper = await mountSuspended(CommandPalette, {
+      props: {
+        groups: groupsWithIgnoreFilter,
+        searchTerm: 'vue'
+      }
+    })
+
+    const groupOrder = wrapper.findAll('[data-slot="group"]').map((group) => {
+      return group.find('[data-slot="itemLabelBase"]')?.text()
+    })
+
+    expect(groupOrder.indexOf('Vue')).toBeLessThan(groupOrder.indexOf('Search result for vue'))
+  })
+
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(CommandPalette, {
       props: {
