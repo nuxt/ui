@@ -31,7 +31,7 @@ function toggleChat() {
     <UNavigationMenu :items="desktopLinks" variant="link" content-orientation="vertical" />
 
     <template #right>
-      <UTooltip text="Ask AI for help">
+      <UTooltip text="Ask AI for help" :kbds="['meta', 'I']" ignore-non-keyboard-focus>
         <UButton
           color="neutral"
           variant="ghost"
@@ -43,7 +43,7 @@ function toggleChat() {
 
       <ThemePicker />
 
-      <UTooltip text="Search" :kbds="['meta', 'K']">
+      <UTooltip text="Search" :kbds="['meta', 'K']" ignore-non-keyboard-focus>
         <UContentSearchButton />
       </UTooltip>
 
