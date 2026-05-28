@@ -116,8 +116,12 @@ export function useResizable(key: string, options: Ref<UseResizableProps> | UseR
       : useStorage<StorageType>(key, defaultStorageValue, undefined, opts.value.storageOptions)
     : ref(defaultStorageValue)
 
+  if (storageData.value == null || typeof storageData.value !== 'object') {
+    storageData.value = { ...defaultStorageValue }
+  }
+
   const isCollapsed = computed({
-    get: () => storageData.value.collapsed,
+    get: () => storageData.value?.collapsed ?? defaultStorageValue.collapsed,
     set: (value: boolean) => {
       if (!opts.value.collapsible) {
         return
@@ -133,7 +137,7 @@ export function useResizable(key: string, options: Ref<UseResizableProps> | UseR
   const previousSize = ref(opts.value.defaultSize)
 
   const size = computed({
-    get: () => storageData.value.size,
+    get: () => storageData.value?.size ?? defaultStorageValue.size,
     set: (value) => { storageData.value.size = value }
   })
 
@@ -328,7 +332,7 @@ export function useResizable(key: string, options: Ref<UseResizableProps> | UseR
   }
 
   // Initial sync of storage value to external collapsed ref
-  if (isRef(collapsed) && storageData.value.collapsed) {
+  if (isRef(collapsed) && storageData.value?.collapsed) {
     collapsed.value = storageData.value.collapsed
   }
 
@@ -339,8 +343,12 @@ export function useResizable(key: string, options: Ref<UseResizableProps> | UseR
         return
       }
 
-      if (storageData.value.collapsed !== value) {
-        storageData.value.collapsed = value
+      if (storageData.value?.collapsed !== value) {
+        if (storageData.value == null || typeof storageData.value !== 'object') {
+          storageData.value = { ...defaultStorageValue, collapsed: value }
+        } else {
+          storageData.value.collapsed = value
+        }
       }
     })
   }
