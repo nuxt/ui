@@ -99,8 +99,7 @@ export function useSearch() {
     description: 'Check out the repository on GitHub.',
     icon: 'i-simple-icons-github',
     to: 'https://github.com/nuxt/ui/releases',
-    target: '_blank',
-    kbds: ['meta', 'g']
+    target: '_blank'
   }])
 
   const groups = computed(() => [{

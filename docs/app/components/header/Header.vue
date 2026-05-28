@@ -10,13 +10,6 @@ function toggleChat() {
   }
   open.value = !open.value
 }
-
-defineShortcuts({
-  meta_g: {
-    usingInput: true,
-    handler: () => window.open('https://github.com/nuxt/ui', '_blank')
-  }
-})
 </script>
 
 <!-- eslint-disable vue/no-template-shadow -->
@@ -54,7 +47,7 @@ defineShortcuts({
 
       <ThemePicker />
 
-      <UTooltip text="Open on GitHub" :kbds="['meta', 'G']" class="hidden lg:flex">
+      <UTooltip text="Open on GitHub" class="hidden lg:flex">
         <UButton
           color="neutral"
           variant="ghost"
