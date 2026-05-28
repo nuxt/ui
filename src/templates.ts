@@ -323,6 +323,8 @@ type AppConfigUI = {
   tv?: typeof defaultConfig
 } & TVConfig<typeof ui>
 
+type AppConfigRuntimeUI = Required<Pick<AppConfigUI, 'colors' | 'icons' | 'tv'>> & Omit<AppConfigUI, 'colors' | 'icons' | 'tv'>
+
 declare module '@nuxt/schema' {
   interface AppConfigInput {
     /**
@@ -330,6 +332,9 @@ declare module '@nuxt/schema' {
      * @see https://ui.nuxt.com/docs/getting-started/theme/components
      */
     ui?: AppConfigUI
+  }
+  interface AppConfig {
+    ui: AppConfigRuntimeUI
   }
 }
 
