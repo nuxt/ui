@@ -56,6 +56,7 @@ export default defineLocale<Messages>({
     },
     contentSearch: {
       links: 'پیوندها',
+      search: 'نتایج',
       theme: 'تم'
     },
     contentSearchButton: {
@@ -100,6 +101,11 @@ export default defineLocale<Messages>({
     inputNumber: {
       decrement: 'کاهش',
       increment: 'افزایش'
+    },
+    listbox: {
+      noData: 'داده‌ای موجود نیست',
+      noMatch: 'داده‌ای یافت نشد',
+      search: 'جستجو…'
     },
     modal: {
       close: 'بستن'

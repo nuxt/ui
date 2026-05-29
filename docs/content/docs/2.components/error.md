@@ -38,6 +38,55 @@ props:
 ---
 ::
 
+### Icon :badge{label="4.8+" class="align-text-top"}
+
+Use the `icon` prop to display an icon above the status code.
+
+::component-code
+---
+hide:
+  - class
+prettier: true
+ignore:
+  - error.statusCode
+  - error.statusMessage
+  - error.message
+props:
+  icon: 'i-lucide-file-x'
+  error:
+    statusCode: 404
+    statusMessage: 'Page not found'
+    message: 'The page you are looking for does not exist.'
+  class: '!min-h-96'
+---
+::
+
+Use the `#leading` slot to display a custom element, such as a logo.
+
+::component-code
+---
+hide:
+  - class
+prettier: true
+ignore:
+  - error.statusCode
+  - error.statusMessage
+  - error.message
+props:
+  error:
+    statusCode: 404
+    statusMessage: 'Page not found'
+    message: 'The page you are looking for does not exist.'
+  class: '!min-h-96'
+slots:
+  leading: |
+
+    <img src="https://github.com/nuxt.png" alt="Logo" class="size-10 rounded-full">
+---
+#leading
+:img{src="https://github.com/nuxt.png" alt="Logo" class="size-10 rounded-full"}
+::
+
 ### Clear
 
 Use the `clear` prop to customize or hide the clear button (with `false` value).

@@ -5,7 +5,7 @@ import type { ContentNavigationItem } from '@nuxt/content'
 import type { AppConfig } from '@nuxt/schema'
 import type { UseFuseOptions } from '@vueuse/integrations/useFuse'
 import theme from '#build/ui/content/content-search'
-import type { ButtonProps, InputProps, LinkProps, ModalProps, CommandPaletteProps, CommandPaletteSlots, CommandPaletteGroup, CommandPaletteItem, IconProps, LinkPropsKeys } from '../../types'
+import type { ButtonProps, LinkProps, ModalProps, CommandPaletteProps, CommandPaletteSlots, CommandPaletteGroup, CommandPaletteItem, IconProps, LinkPropsKeys } from '../../types'
 import type { ComponentConfig } from '../../types/tv'
 
 type ContentSearch = ComponentConfig<typeof theme, AppConfig, 'contentSearch'>
@@ -28,6 +28,25 @@ export interface ContentSearchFile {
   content: string
 }
 
+export interface ContentSearchResult extends ContentSearchFile {
+  snippets?: {
+    title?: string
+    content?: string
+  }
+}
+
+export interface ContentSearchOptions {
+  limit?: number
+  snippet?: {
+    columns?: ('title' | 'content')[]
+    around?: number
+  }
+}
+
+export type ContentSearchStatus = 'idle' | 'loading' | 'ready' | 'error'
+
+export type ContentSearchFn = (query: string, opts?: ContentSearchOptions) => Promise<ContentSearchResult[]>
+
 export interface ContentSearchItem extends Omit<LinkProps, 'custom'>, CommandPaletteItem {
   level?: number
   /**
@@ -36,35 +55,11 @@ export interface ContentSearchItem extends Omit<LinkProps, 'custom'>, CommandPal
   icon?: IconProps['name']
 }
 
-export interface ContentSearchProps<T extends ContentSearchLink = ContentSearchLink> extends Pick<ModalProps, 'title' | 'description' | 'overlay' | 'transition' | 'content' | 'dismissible' | 'fullscreen' | 'modal' | 'portal'> {
+export interface ContentSearchProps<T extends ContentSearchLink = ContentSearchLink> extends Pick<ModalProps, 'title' | 'description' | 'overlay' | 'transition' | 'content' | 'dismissible' | 'fullscreen' | 'modal' | 'portal'>, Pick<CommandPaletteProps<CommandPaletteGroup<ContentSearchItem>, ContentSearchItem>, 'icon' | 'trailingIcon' | 'selectedIcon' | 'childrenIcon' | 'placeholder' | 'autofocus' | 'loading' | 'loadingIcon' | 'closeIcon' | 'back' | 'backIcon' | 'disabled' | 'highlightOnHover' | 'labelKey' | 'descriptionKey' | 'preserveGroupOrder' | 'virtualize' | 'groups'> {
   /**
    * @defaultValue 'md'
    */
   size?: ContentSearch['variants']['size']
-  /**
-   * The icon displayed in the input.
-   * @defaultValue appConfig.ui.icons.search
-   * @IconifyIcon
-   */
-  icon?: IconProps['name']
-  /**
-   * The placeholder text for the input.
-   * @defaultValue t('commandPalette.placeholder')
-   */
-  placeholder?: InputProps['placeholder']
-  /**
-   * Automatically focus the input when component is mounted.
-   * @defaultValue true
-   */
-  autofocus?: boolean
-  /** When `true`, the loading icon will be displayed. */
-  loading?: boolean
-  /**
-   * The icon when the `loading` prop is `true`.
-   * @defaultValue appConfig.ui.icons.loading
-   * @IconifyIcon
-   */
-  loadingIcon?: IconProps['name']
   /**
    * Display a close button in the input (useful when inside a Modal for example).
    * `{ size: 'md', color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
@@ -73,12 +68,6 @@ export interface ContentSearchProps<T extends ContentSearchLink = ContentSearchL
    */
   close?: boolean | Omit<ButtonProps, LinkPropsKeys>
   /**
-   * The icon displayed in the close button.
-   * @defaultValue appConfig.ui.icons.close
-   * @IconifyIcon
-   */
-  closeIcon?: IconProps['name']
-  /**
    * Keyboard shortcut to open the search (used by [`defineShortcuts`](https://ui.nuxt.com/docs/composables/define-shortcuts))
    * @defaultValue 'meta_k'
    */
@@ -86,14 +75,40 @@ export interface ContentSearchProps<T extends ContentSearchLink = ContentSearchL
   /** Links group displayed as the first group in the command palette. */
   links?: T[]
   navigation?: ContentNavigationItem[]
-  /** Custom groups displayed between navigation and color mode group. */
-  groups?: CommandPaletteGroup<ContentSearchItem>[]
   files?: ContentSearchFile[]
   /**
    * Options for [useFuse](https://vueuse.org/integrations/useFuse) passed to the [CommandPalette](https://ui.nuxt.com/docs/components/command-palette).
-   * @defaultValue { fuseOptions: { includeMatches: true } }
+   * @defaultValue {
+      fuseOptions: {
+        ignoreLocation: true,
+        includeMatches: true,
+        useTokenSearch: true,
+        threshold: 0.1,
+        keys: ['label', 'description', 'suffix']
+      },
+      resultLimit: 12,
+      matchAllWhenSearchEmpty: true
+    }
    */
   fuse?: UseFuseOptions<T>
+  /**
+   * Async search function (e.g. from [`useSearchCollection`](https://content.nuxt.com/docs/utils/use-search-collection)).
+   * When provided, ContentSearch calls it on each keystroke and uses the results instead of Fuse.
+   * Results are mapped, sanitized, and grouped by navigation internally.
+   */
+  search?: ContentSearchFn
+  /**
+   * Status of the async search index (e.g. from `useSearchCollection`).
+   * When the status transitions to `'ready'`, the search is automatically re-triggered if there's a pending term.
+   */
+  searchStatus?: ContentSearchStatus
+  /**
+   * Delay (in milliseconds) before the search is triggered (debounced).
+   * Keeps the input responsive by only running the search after typing settles.
+   * Set to `0` to disable.
+   * @defaultValue 100
+   */
+  searchDelay?: number
   /**
    * When `true`, the theme command will be added to the groups.
    * @defaultValue true
@@ -110,12 +125,12 @@ export type ContentSearchSlots = CommandPaletteSlots<ContentSearchItem> & {
 </script>
 
 <script setup lang="ts" generic="T extends ContentSearchLink">
-import { computed, useTemplateRef } from 'vue'
-import { useForwardProps } from 'reka-ui'
+import { computed, shallowRef, useTemplateRef, watch } from 'vue'
 import { defu } from 'defu'
-import { reactivePick } from '@vueuse/core'
+import { reactivePick, refDebounced } from '@vueuse/core'
 import { useAppConfig, useColorMode, defineShortcuts } from '#imports'
-import { useComponentUI } from '../../composables/useComponentUI'
+import { useComponentProps } from '../../composables/useComponentProps'
+import { useForwardProps } from '../../composables/useForwardProps'
 import { useContentSearch } from '../../composables/useContentSearch'
 import { useLocale } from '../../composables/useLocale'
 import { omit, transformUI } from '../../utils'
@@ -123,34 +138,40 @@ import { tv } from '../../utils/tv'
 import UModal from '../Modal.vue'
 import UCommandPalette from '../CommandPalette.vue'
 
-const props = withDefaults(defineProps<ContentSearchProps<T>>(), {
+const _props = withDefaults(defineProps<ContentSearchProps<T>>(), {
   shortcut: 'meta_k',
   colorMode: true,
   close: true,
-  fullscreen: false
+  fullscreen: false,
+  searchDelay: 100
 })
 const slots = defineSlots<ContentSearchSlots>()
+
+const props = useComponentProps<ContentSearchProps<T>>('contentSearch', _props)
 
 const searchTerm = defineModel<string>('searchTerm', { default: '' })
 
 const { t } = useLocale()
-const { open, mapNavigationItems, postFilter } = useContentSearch()
+const { open, mapNavigationItems, mapLinks, mapSearchResults, postFilter } = useContentSearch()
 // eslint-disable-next-line vue/no-dupe-keys
 const colorMode = useColorMode()
 const appConfig = useAppConfig() as ContentSearch['AppConfig']
-const uiProp = useComponentUI('contentSearch', props)
 
-const commandPaletteProps = useForwardProps(reactivePick(props, 'size', 'icon', 'placeholder', 'autofocus', 'loading', 'loadingIcon', 'close', 'closeIcon'))
+const commandPaletteProps = useForwardProps(reactivePick(props, 'size', 'icon', 'trailingIcon', 'selectedIcon', 'childrenIcon', 'placeholder', 'autofocus', 'loading', 'loadingIcon', 'close', 'closeIcon', 'back', 'backIcon', 'disabled', 'highlightOnHover', 'labelKey', 'descriptionKey', 'preserveGroupOrder', 'virtualize', 'searchDelay'))
 const modalProps = useForwardProps(reactivePick(props, 'overlay', 'transition', 'content', 'dismissible', 'fullscreen', 'modal', 'portal'))
 
 const getProxySlots = () => omit(slots, ['content'])
 
+// eslint-disable-next-line vue/no-dupe-keys
 const fuse = computed(() => defu({}, props.fuse, {
   fuseOptions: {
-    includeMatches: true
-  }
+    includeMatches: true,
+    useTokenSearch: true
+  },
+  resultLimit: 12
 } as UseFuseOptions<T>))
 
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.contentSearch || {}) })({
   size: props.size,
   fullscreen: props.fullscreen
@@ -158,27 +179,67 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.contentSearc
 
 const commandPaletteRef = useTemplateRef('commandPaletteRef')
 
-const mappedLinksItems = computed(() => {
-  if (!props.links?.length) {
-    return []
-  }
+const debouncedSearchTerm = refDebounced(searchTerm, () => props.searchDelay!)
 
-  return props.links.flatMap(link => [{
-    ...link,
-    suffix: link.description,
-    description: undefined,
-    icon: link.icon || appConfig.ui.icons.file,
-    children: undefined
-  }, ...(link.children?.map(child => ({
-    ...child,
-    prefix: link.label + ' >',
-    suffix: child.description,
-    description: undefined,
-    icon: child.icon || link.icon || appConfig.ui.icons.file
-  })) || [])])
+const rawSearchResults = shallowRef<ContentSearchResult[]>([])
+const searchResults = computed(() => mapSearchResults(rawSearchResults.value, props.navigation))
+
+let searchRequestId = 0
+
+async function runSearch(term: string) {
+  // Always bump the request id, even on the early-return path — otherwise an
+  // in-flight prior request could resolve after we clear results and overwrite
+  // them again (e.g. user types "foo" then backspaces before "foo" settles).
+  const requestId = ++searchRequestId
+
+  if (!props.search || !term) {
+    rawSearchResults.value = []
+    return
+  }
+  try {
+    const results = await props.search(term, {
+      limit: (fuse.value as UseFuseOptions<T>).resultLimit,
+      snippet: { columns: ['title', 'content'], around: 20 }
+    })
+    // Discard stale responses: a newer request started before this one resolved.
+    if (requestId !== searchRequestId) return
+    rawSearchResults.value = results
+  } catch (err) {
+    if (requestId !== searchRequestId) return
+    console.error('[ContentSearch] search failed:', err)
+    rawSearchResults.value = []
+  }
+}
+
+watch(debouncedSearchTerm, runSearch)
+
+watch(() => props.search, () => {
+  if (debouncedSearchTerm.value) {
+    runSearch(debouncedSearchTerm.value)
+  }
 })
 
-const mappedNavigationGroups = computed(() => {
+watch(() => props.searchStatus, (status) => {
+  if (status === 'ready' && debouncedSearchTerm.value) {
+    runSearch(debouncedSearchTerm.value)
+  }
+})
+
+const linksGroup = computed(() => {
+  if (!props.links?.length) {
+    return null
+  }
+
+  return { id: 'links', label: t('contentSearch.links'), items: mapLinks(props.links) }
+})
+
+const searchGroups = computed(() => {
+  if (!searchTerm.value || !searchResults.value.length) return []
+
+  return [{ id: 'search', label: t('contentSearch.search'), items: searchResults.value, ignoreFilter: true }]
+})
+
+const navigationGroups = computed(() => {
   if (!props.navigation?.length) {
     return []
   }
@@ -231,11 +292,15 @@ const themeGroup = computed(() => {
 const groups = computed(() => {
   const groups = []
 
-  if (mappedLinksItems.value.length) {
-    groups.push({ id: 'links', label: t('contentSearch.links'), items: mappedLinksItems.value })
+  if (linksGroup.value) {
+    groups.push(linksGroup.value)
   }
 
-  groups.push(...mappedNavigationGroups.value)
+  if (props.search) {
+    groups.push(...searchGroups.value)
+  } else {
+    groups.push(...navigationGroups.value)
+  }
 
   groups.push(...(props.groups || []))
 
@@ -258,7 +323,7 @@ function onSelect(item: ContentSearchItem) {
 }
 
 defineShortcuts({
-  [props.shortcut]: {
+  [props.shortcut!]: {
     usingInput: true,
     handler: () => open.value = !open.value
   }
@@ -272,11 +337,11 @@ defineExpose({
 <template>
   <UModal
     v-model:open="open"
-    :title="title || t('contentSearch.title')"
-    :description="description || t('contentSearch.description')"
+    :title="props.title || t('contentSearch.title')"
+    :description="props.description || t('contentSearch.description')"
     v-bind="modalProps"
     data-slot="modal"
-    :class="ui.modal({ class: [uiProp?.modal, props.class] })"
+    :class="ui.modal({ class: [props.ui?.modal, props.class] })"
   >
     <template #content="contentData">
       <slot name="content" v-bind="contentData">
@@ -287,7 +352,7 @@ defineExpose({
           :groups="groups"
           :fuse="fuse"
           :input="{ fixed: true }"
-          :ui="transformUI(omit(ui, ['modal']), uiProp)"
+          :ui="transformUI(omit(ui, ['modal']), props.ui)"
           @update:model-value="onSelect"
           @update:open="open = $event"
         >

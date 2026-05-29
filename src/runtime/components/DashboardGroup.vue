@@ -7,7 +7,7 @@ import type { ComponentConfig } from '../types/tv'
 
 type DashboardGroup = ComponentConfig<typeof theme, AppConfig, 'dashboardGroup'>
 
-export interface DashboardGroupProps extends Pick<UseResizableProps, 'storage' | 'storageKey' | 'persistent' | 'unit'> {
+export interface DashboardGroupProps extends Pick<UseResizableProps, 'storage' | 'storageKey' | 'storageOptions' | 'persistent' | 'unit'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -28,9 +28,9 @@ import { Primitive } from 'reka-ui'
 import { useNuxtApp, useAppConfig } from '#imports'
 import { provideDashboardContext } from '../utils/dashboard'
 import { tv } from '../utils/tv'
-import { useComponentUI } from '../composables/useComponentUI'
+import { useComponentProps } from '../composables/useComponentProps'
 
-const props = withDefaults(defineProps<DashboardGroupProps>(), {
+const _props = withDefaults(defineProps<DashboardGroupProps>(), {
   storage: 'cookie',
   storageKey: 'dashboard',
   persistent: true,
@@ -38,9 +38,10 @@ const props = withDefaults(defineProps<DashboardGroupProps>(), {
 })
 defineSlots<DashboardGroupSlots>()
 
+const props = useComponentProps('dashboardGroup', _props)
+
 const nuxtApp = useNuxtApp()
 const appConfig = useAppConfig() as DashboardGroup['AppConfig']
-const uiProp = useComponentUI('dashboardGroup', props)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dashboardGroup || {}) }))
@@ -51,6 +52,7 @@ const sidebarCollapsed = ref(false)
 provideDashboardContext({
   storage: props.storage,
   storageKey: props.storageKey,
+  storageOptions: props.storageOptions,
   persistent: props.persistent,
   unit: props.unit,
   sidebarOpen,
@@ -68,7 +70,7 @@ provideDashboardContext({
 </script>
 
 <template>
-  <Primitive :as="as" :class="ui({ class: [uiProp?.base, props.class] })">
+  <Primitive :as="props.as" :class="ui({ class: [props.ui?.base, props.class] })">
     <slot />
   </Primitive>
 </template>

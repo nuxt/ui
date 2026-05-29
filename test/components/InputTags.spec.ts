@@ -30,7 +30,9 @@ describe('InputTags', () => {
     ['with ui', { props: { ui: {} } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { size } }]),
     ...variants.map((variant: string) => [`with primary variant ${variant}`, { props: { variant } }]),
+    ...variants.map((variant: string) => [`with primary variant ${variant} highlight`, { props: { variant, highlight: true } }]),
     ...variants.map((variant: string) => [`with neutral variant ${variant}`, { props: { variant, color: 'neutral' } }]),
+    ...variants.map((variant: string) => [`with neutral variant ${variant} highlight`, { props: { variant, color: 'neutral', highlight: true } }]),
     // Slots
     ['with leading slot', { slots: { leading: () => 'Leading slot' } }],
     ['with default slot', { slots: { default: () => 'Default slot' } }],

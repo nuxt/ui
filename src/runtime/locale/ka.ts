@@ -55,6 +55,7 @@ export default defineLocale<Messages>({
     },
     contentSearch: {
       links: 'ბმულები',
+      search: 'შედეგები',
       theme: 'თემა'
     },
     contentSearchButton: {
@@ -101,6 +102,11 @@ export default defineLocale<Messages>({
     inputNumber: {
       decrement: 'დაკლება',
       increment: 'დამატება'
+    },
+    listbox: {
+      noData: 'მონაცემები არ არის',
+      noMatch: 'შესატყვისი მონაცემები არ არის',
+      search: 'ძიება…'
     },
     modal: {
       close: 'დახურვა'

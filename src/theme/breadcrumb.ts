@@ -5,7 +5,7 @@ export default (options: Required<ModuleOptions>) => ({
     root: 'relative min-w-0',
     list: 'flex items-center gap-1.5',
     item: 'flex min-w-0',
-    link: 'group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-primary',
+    link: 'group relative flex items-center gap-1.5 text-sm min-w-0',
     linkLeadingIcon: 'shrink-0 size-5',
     linkLeadingAvatar: 'shrink-0',
     linkLeadingAvatarSize: '2xs',
@@ -16,7 +16,7 @@ export default (options: Required<ModuleOptions>) => ({
   variants: {
     active: {
       true: {
-        link: 'text-primary font-semibold'
+        link: 'font-semibold'
       },
       false: {
         link: 'text-muted font-medium'
@@ -29,6 +29,10 @@ export default (options: Required<ModuleOptions>) => ({
     },
     to: {
       true: ''
+    },
+    color: {
+      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, { link: `focus-visible:outline-${color}` }])),
+      neutral: { link: 'focus-visible:outline-inverted' }
     }
   },
   compoundVariants: [{
@@ -38,5 +42,20 @@ export default (options: Required<ModuleOptions>) => ({
     class: {
       link: ['hover:text-default', options.theme.transitions && 'transition-colors']
     }
-  }]
+  }, ...(options.theme.colors || []).map((color: string) => ({
+    color,
+    active: true,
+    class: {
+      link: `text-${color}`
+    }
+  })), {
+    color: 'neutral',
+    active: true,
+    class: {
+      link: 'text-highlighted'
+    }
+  }],
+  defaultVariants: {
+    color: 'primary'
+  }
 })

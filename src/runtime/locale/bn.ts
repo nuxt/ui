@@ -55,6 +55,7 @@ export default defineLocale<Messages>({
     },
     contentSearch: {
       links: 'লিংকসমূহ',
+      search: 'ফলাফল',
       theme: 'থিম'
     },
     contentSearchButton: {
@@ -99,6 +100,11 @@ export default defineLocale<Messages>({
     inputNumber: {
       decrement: 'হ্রাস করুন',
       increment: 'বৃদ্ধি করুন'
+    },
+    listbox: {
+      noData: 'কোন তথ্য নেই',
+      noMatch: 'কোন মিল পাওয়া যায়নি',
+      search: 'অনুসন্ধান করুন…'
     },
     modal: {
       close: 'বন্ধ করুন'

@@ -1,41 +1,31 @@
 <script setup lang="ts">
-import { withoutTrailingSlash } from 'ufo'
-import colors from 'tailwindcss/colors'
-
 const route = useRoute()
 const appConfig = useAppConfig()
-const colorMode = useColorMode()
-const { style, link } = useTheme()
+const { style, link, color } = useTheme()
 
-const { data: navigation } = await useAsyncData('navigation', () => queryCollectionNavigation('docs', ['framework', 'category', 'description']))
-const { data: files } = useLazyAsyncData('search', () => queryCollectionSearchSections('docs', {
-  ignoredTags: ['style']
-}), {
-  server: false
-})
-
-const color = computed(() => colorMode.value === 'dark' ? (colors as any)[appConfig.ui.colors.neutral][900] : 'white')
+const { data: navigation } = await useFetch('/api/navigation.json')
 
 useHead({
   meta: [
     { name: 'viewport', content: 'width=device-width, initial-scale=1' },
     { key: 'theme-color', name: 'theme-color', content: color }
   ],
-  link: computed(() => [
-    // { rel: 'icon', type: 'image/svg+xml', href: '/icon.svg' },
-    { rel: 'canonical', href: `https://ui.nuxt.com${withoutTrailingSlash(route.path)}` },
-    ...link.value
-  ]),
-  style,
-  htmlAttrs: {
-    lang: 'en'
-  }
+  link,
+  style
 })
 
-useServerSeoMeta({
-  ogSiteName: 'Nuxt UI',
-  twitterCard: 'summary_large_image'
-})
+if (import.meta.server) {
+  useSeoMeta({
+    ogSiteName: 'Nuxt UI',
+    twitterCard: 'summary_large_image'
+  })
+
+  useSchemaOrg([
+    defineWebSite({
+      name: useSiteConfig().name
+    })
+  ])
+}
 
 useFaviconFromTheme()
 
@@ -62,16 +52,14 @@ provide('navigation', rootNavigation)
 
         <template v-if="!route.path.startsWith('/examples')">
           <Footer />
-
-          <ClientOnly>
-            <Search :files="files" :navigation="navigationByFramework" />
-          </ClientOnly>
         </template>
       </div>
 
       <template v-if="!route.path.startsWith('/examples')">
         <ClientOnly>
           <Chat />
+
+          <Search :navigation="navigationByFramework" />
         </ClientOnly>
       </template>
     </div>

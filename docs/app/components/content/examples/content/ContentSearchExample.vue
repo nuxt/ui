@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import type { ContentNavigationItem } from '@nuxt/content'
 
-const { data: files } = useLazyAsyncData('content-search-example', () => queryCollectionSearchSections('docs'), {
+const { data: files } = useLazyAsyncData('content-search-example', () => queryCollectionSearchSections('docs', {
+  ignoredTags: ['style']
+}), {
   server: false
 })
 

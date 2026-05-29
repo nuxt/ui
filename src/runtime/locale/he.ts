@@ -56,6 +56,7 @@ export default defineLocale<Messages>({
     },
     contentSearch: {
       links: 'קישורים',
+      search: 'תוצאות',
       theme: 'ערכת נושא'
     },
     contentSearchButton: {
@@ -100,6 +101,11 @@ export default defineLocale<Messages>({
     inputNumber: {
       decrement: 'הפחת',
       increment: 'הוסף'
+    },
+    listbox: {
+      noData: 'אין נתונים',
+      noMatch: 'לא נמצאה התאמה',
+      search: 'חפש…'
     },
     modal: {
       close: 'סגור'

@@ -55,6 +55,7 @@ export default defineLocale<Messages>({
     },
     contentSearch: {
       links: 'Հղումներ',
+      search: 'Արդյունքներ',
       theme: 'Թեմա'
     },
     contentSearchButton: {
@@ -99,6 +100,11 @@ export default defineLocale<Messages>({
     inputNumber: {
       decrement: 'Պակասեցնել',
       increment: 'Ավելացնել'
+    },
+    listbox: {
+      noData: 'Տվյալներ չկան',
+      noMatch: 'Համընկնումներ չեն գտնվել',
+      search: 'Որոնում…'
     },
     modal: {
       close: 'Փակել'

@@ -55,6 +55,7 @@ export default defineLocale<Messages>({
     },
     contentSearch: {
       links: '連結',
+      search: '搜尋結果',
       theme: '主題'
     },
     contentSearchButton: {
@@ -99,6 +100,11 @@ export default defineLocale<Messages>({
     inputNumber: {
       decrement: '減少',
       increment: '增加'
+    },
+    listbox: {
+      noData: '沒有資料',
+      noMatch: '沒有相符的資料',
+      search: '搜尋…'
     },
     modal: {
       close: '關閉'

@@ -55,6 +55,7 @@ export default defineLocale<Messages>({
     },
     contentSearch: {
       links: 'Ссылки',
+      search: 'Результаты',
       theme: 'Тема'
     },
     contentSearchButton: {
@@ -99,6 +100,11 @@ export default defineLocale<Messages>({
     inputNumber: {
       decrement: 'Уменьшить',
       increment: 'Увеличить'
+    },
+    listbox: {
+      noData: 'Нет данных',
+      noMatch: 'Совпадений не найдено',
+      search: 'Поиск…'
     },
     modal: {
       close: 'Закрыть'

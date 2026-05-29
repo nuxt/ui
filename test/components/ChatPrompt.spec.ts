@@ -72,6 +72,39 @@ describe('ChatPrompt', () => {
     vi.useRealTimers()
   })
 
+  it('does not emit submit on Enter when submitOnEnter is false', async () => {
+    const wrapper = await mountSuspended(ChatPrompt, {
+      props: { modelValue: 'Hello', submitOnEnter: false }
+    })
+
+    const textarea = wrapper.find('textarea')
+    await textarea.trigger('keydown', { key: 'Enter' })
+
+    expect(wrapper.emitted('submit')).toBeUndefined()
+  })
+
+  it('emits submit on Ctrl+Enter when submitOnEnter is false', async () => {
+    const wrapper = await mountSuspended(ChatPrompt, {
+      props: { modelValue: 'Hello', submitOnEnter: false }
+    })
+
+    const textarea = wrapper.find('textarea')
+    await textarea.trigger('keydown', { key: 'Enter', ctrlKey: true })
+
+    expect(wrapper.emitted('submit')).toHaveLength(1)
+  })
+
+  it('emits submit on Meta+Enter when submitOnEnter is false', async () => {
+    const wrapper = await mountSuspended(ChatPrompt, {
+      props: { modelValue: 'Hello', submitOnEnter: false }
+    })
+
+    const textarea = wrapper.find('textarea')
+    await textarea.trigger('keydown', { key: 'Enter', metaKey: true })
+
+    expect(wrapper.emitted('submit')).toHaveLength(1)
+  })
+
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(ChatPrompt, {
       props: {

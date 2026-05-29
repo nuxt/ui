@@ -20,14 +20,16 @@ export interface ProseH1Slots {
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useAppConfig, useRuntimeConfig } from '#imports'
-import { useComponentUI } from '../../composables/useComponentUI'
+import { useComponentProps } from '../../composables/useComponentProps'
 import { tv } from '../../utils/tv'
 
-const props = defineProps<ProseH1Props>()
+const _props = defineProps<ProseH1Props>()
+
 defineSlots<ProseH1Slots>()
 
+const props = useComponentProps('prose.h1', _props)
+
 const appConfig = useAppConfig() as ProseH1['AppConfig']
-const uiProp = useComponentUI('prose.h1', props)
 const { headings } = useRuntimeConfig().public?.mdc || {}
 
 // eslint-disable-next-line vue/no-dupe-keys
@@ -37,8 +39,8 @@ const generate = computed(() => props.id && typeof headings?.anchorLinks === 'ob
 </script>
 
 <template>
-  <h1 :id="id" :class="ui.base({ class: [uiProp?.base, props.class] })">
-    <a v-if="id && generate" :href="`#${id}`" :class="ui.link({ class: uiProp?.link })">
+  <h1 :id="props.id" :class="ui.base({ class: [props.ui?.base, props.class] })">
+    <a v-if="props.id && generate" :href="`#${props.id}`" :class="ui.link({ class: props.ui?.link })">
       <slot />
     </a>
     <slot v-else />

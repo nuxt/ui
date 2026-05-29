@@ -55,6 +55,7 @@ export default defineLocale<Messages>({
     },
     contentSearch: {
       links: 'Lidhje',
+      search: 'Rezultatet',
       theme: 'Tema'
     },
     contentSearchButton: {
@@ -99,6 +100,11 @@ export default defineLocale<Messages>({
     inputNumber: {
       decrement: 'Zvogëlo',
       increment: 'Rrit'
+    },
+    listbox: {
+      noData: 'Nuk ka të dhëna',
+      noMatch: 'Nuk ka të dhëna që përputhen',
+      search: 'Kërko…'
     },
     modal: {
       close: 'Mbyll'

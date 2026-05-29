@@ -55,6 +55,7 @@ export default defineLocale<Messages>({
     },
     contentSearch: {
       links: 'Σύνδεσμοι',
+      search: 'Αποτελέσματα',
       theme: 'Θέμα'
     },
     contentSearchButton: {
@@ -99,6 +100,11 @@ export default defineLocale<Messages>({
     inputNumber: {
       decrement: 'Μείωση',
       increment: 'Αύξηση'
+    },
+    listbox: {
+      noData: 'Δεν υπάρχουν δεδομένα',
+      noMatch: 'Δεν βρέθηκαν δεδομένα',
+      search: 'Αναζήτηση…'
     },
     modal: {
       close: 'Κλείσιμο'

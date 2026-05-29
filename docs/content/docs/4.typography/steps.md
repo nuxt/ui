@@ -1,7 +1,8 @@
 ---
-title: Steps
+title: ProseSteps
 description: 'Transform headings into numbered step-by-step guides and tutorials.'
 category: components
+navigation.title: Steps
 links:
   - label: GitHub
     icon: i-simple-icons-github

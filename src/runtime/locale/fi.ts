@@ -55,6 +55,7 @@ export default defineLocale<Messages>({
     },
     contentSearch: {
       links: 'Linkit',
+      search: 'Tulokset',
       theme: 'Teema'
     },
     contentSearchButton: {
@@ -99,6 +100,11 @@ export default defineLocale<Messages>({
     inputNumber: {
       decrement: 'Vähennä',
       increment: 'Kasvata'
+    },
+    listbox: {
+      noData: 'Ei tietoja',
+      noMatch: 'Ei vastaavia tietoja',
+      search: 'Hae…'
     },
     modal: {
       close: 'Sulje'

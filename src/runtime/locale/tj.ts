@@ -55,6 +55,7 @@ export default defineLocale<Messages>({
     },
     contentSearch: {
       links: 'Пайвандҳо',
+      search: 'Натиҷаҳо',
       theme: 'Мавзӯъ'
     },
     contentSearchButton: {
@@ -99,6 +100,11 @@ export default defineLocale<Messages>({
     inputNumber: {
       decrement: 'Кам кардан',
       increment: 'Зиёд кардан'
+    },
+    listbox: {
+      noData: 'Маълумот нест',
+      noMatch: 'Маълумоти мувофиқ ёфт нашуд',
+      search: 'Ҷустуҷӯ…'
     },
     modal: {
       close: 'Бастан'

@@ -55,6 +55,7 @@ export default defineLocale<Messages>({
     },
     contentSearch: {
       links: 'Odkazy',
+      search: 'Výsledky',
       theme: 'Farebný režim'
     },
     contentSearchButton: {
@@ -99,6 +100,11 @@ export default defineLocale<Messages>({
     inputNumber: {
       decrement: 'Znížiť',
       increment: 'Zvýšiť'
+    },
+    listbox: {
+      noData: 'Žiadne dáta',
+      noMatch: 'Žiadna zhoda',
+      search: 'Hľadať…'
     },
     modal: {
       close: 'Zatvoriť'

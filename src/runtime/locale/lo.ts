@@ -29,7 +29,7 @@ export default defineLocale<Messages>({
       prev: 'ກ່ອນໜ້າ'
     },
     chatPrompt: {
-      placeholder: 'ພິມຂໍ້ຄວາມຂອງທ່ານທີ່ນີ້...'
+      placeholder: 'ພິມຂໍ້ຄວາມຂອງທ່ານທີ່ນີ້…'
     },
     chatPromptSubmit: {
       label: 'ສົ່ງຄຳສັ່ງ'
@@ -51,27 +51,28 @@ export default defineLocale<Messages>({
       close: 'ປິດ',
       noData: 'ບໍ່ມີຂໍ້ມູນ',
       noMatch: 'ບໍ່ພົບຂໍ້ມູນທີ່ກົງກັນ',
-      placeholder: 'ພິມຄຳສັ່ງ ຫຼື ຄົ້ນຫາ...'
+      placeholder: 'ພິມຄຳສັ່ງ ຫຼື ຄົ້ນຫາ…'
     },
     contentSearch: {
       links: 'ລິ້ງ',
+      search: 'ຜົນໄດ້ຮັບ',
       theme: 'ທີມ'
     },
     contentSearchButton: {
-      label: 'ຄົ້ນຫາ...'
+      label: 'ຄົ້ນຫາ…'
     },
     contentToc: {
       title: 'ໃນໜ້ານີ້'
     },
     dropdownMenu: {
       noMatch: 'ບໍ່ພົບຂໍ້ມູນທີ່ກົງກັນ',
-      search: 'ຄົ້ນຫາ...'
+      search: 'ຄົ້ນຫາ…'
     },
     dashboardSearch: {
       theme: 'ທີມ'
     },
     dashboardSearchButton: {
-      label: 'ຄົ້ນຫາ...'
+      label: 'ຄົ້ນຫາ…'
     },
     dashboardSidebarCollapse: {
       collapse: 'ຫຍໍ້ແຖບດ້ານຂ້າງ',
@@ -99,6 +100,11 @@ export default defineLocale<Messages>({
     inputNumber: {
       decrement: 'ຫຼຸດລົງ',
       increment: 'ເພີ່ມຂຶ້ນ'
+    },
+    listbox: {
+      noData: 'ບໍ່ມີຂໍ້ມູນ',
+      noMatch: 'ບໍ່ພົບຂໍ້ມູນທີ່ກົງກັນ',
+      search: 'ຄົ້ນຫາ…'
     },
     modal: {
       close: 'ປິດ'
@@ -133,7 +139,7 @@ export default defineLocale<Messages>({
       create: 'ສ້າງ "{label}"',
       noData: 'ບໍ່ມີຂໍ້ມູນ',
       noMatch: 'ບໍ່ພົບຂໍ້ມູນທີ່ກົງກັນ',
-      search: 'ຄົ້ນຫາ...'
+      search: 'ຄົ້ນຫາ…'
     },
     slideover: {
       close: 'ປິດ'

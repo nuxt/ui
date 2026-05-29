@@ -55,6 +55,7 @@ export default defineLocale<Messages>({
     },
     contentSearch: {
       links: 'Bağlantılar',
+      search: 'Sonuçlar',
       theme: 'Tema'
     },
     contentSearchButton: {
@@ -99,6 +100,11 @@ export default defineLocale<Messages>({
     inputNumber: {
       decrement: 'Azalt',
       increment: 'Arttır'
+    },
+    listbox: {
+      noData: 'Veri yok',
+      noMatch: 'Eşleşen veri yok',
+      search: 'Ara…'
     },
     modal: {
       close: 'Kapat'

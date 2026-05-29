@@ -55,6 +55,7 @@ export default defineLocale<Messages>({
     },
     contentSearch: {
       links: 'Linkek',
+      search: 'Eredmények',
       theme: 'Téma'
     },
     contentSearchButton: {
@@ -99,6 +100,11 @@ export default defineLocale<Messages>({
     inputNumber: {
       decrement: 'Csökkent',
       increment: 'Növel'
+    },
+    listbox: {
+      noData: 'Nincs adat',
+      noMatch: 'Nincs találat',
+      search: 'Keresés…'
     },
     modal: {
       close: 'Bezárás'

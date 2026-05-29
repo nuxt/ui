@@ -55,6 +55,7 @@ export default defineLocale<Messages>({
     },
     contentSearch: {
       links: 'リンク',
+      search: '検索結果',
       theme: 'テーマ'
     },
     contentSearchButton: {
@@ -99,6 +100,11 @@ export default defineLocale<Messages>({
     inputNumber: {
       decrement: '減らす',
       increment: '増やす'
+    },
+    listbox: {
+      noData: 'データがありません',
+      noMatch: '一致するデータがありません',
+      search: '検索…'
     },
     modal: {
       close: '閉じる'

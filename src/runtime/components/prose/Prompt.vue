@@ -30,7 +30,7 @@ export interface ProsePromptSlots {
 import { computed } from 'vue'
 import { useClipboard } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { useComponentUI } from '../../composables/useComponentUI'
+import { useComponentProps } from '../../composables/useComponentProps'
 import { useLocale } from '../../composables/useLocale'
 import { getSlotChildrenText } from '../../utils'
 import { tv } from '../../utils/tv'
@@ -39,15 +39,16 @@ import UButton from '../Button.vue'
 
 defineOptions({ inheritAttrs: false })
 
-const props = withDefaults(defineProps<ProsePromptProps>(), {
+const _props = withDefaults(defineProps<ProsePromptProps>(), {
   actions: () => ['copy']
 })
 const slots = defineSlots<ProsePromptSlots>()
 
+const props = useComponentProps('prose.prompt', _props)
+
 const { t } = useLocale()
 const { copy, copied } = useClipboard()
 const appConfig = useAppConfig() as ProsePrompt['AppConfig']
-const uiProp = useComponentUI('prose.prompt', props)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.prompt || {}) })())
@@ -77,18 +78,18 @@ function openInWindsurf() {
 </script>
 
 <template>
-  <div :class="ui.root({ class: [uiProp?.root, props.class] })" v-bind="$attrs">
-    <UIcon v-if="icon" :name="icon" :class="ui.icon({ class: uiProp?.icon })" />
+  <div :class="ui.root({ class: [props.ui?.root, props.class] })" v-bind="$attrs">
+    <UIcon v-if="props.icon" :name="props.icon" :class="ui.icon({ class: props.ui?.icon })" />
 
-    <div :class="ui.content({ class: uiProp?.content })">
-      <p v-if="description" :class="ui.description({ class: uiProp?.description })">
-        {{ description }}
+    <div :class="ui.content({ class: props.ui?.content })">
+      <p v-if="props.description" :class="ui.description({ class: props.ui?.description })">
+        {{ props.description }}
       </p>
     </div>
 
-    <div :class="ui.actions({ class: uiProp?.actions })">
+    <div :class="ui.actions({ class: props.ui?.actions })">
       <UButton
-        v-if="actions.includes('copy')"
+        v-if="props.actions.includes('copy')"
         :icon="copied ? appConfig.ui.icons.copyCheck : appConfig.ui.icons.copy"
         size="sm"
         :label="t('prose.prompt.copy')"
@@ -96,7 +97,7 @@ function openInWindsurf() {
       />
 
       <UButton
-        v-if="actions.includes('cursor')"
+        v-if="props.actions.includes('cursor')"
         icon="i-simple-icons-cursor"
         color="neutral"
         variant="outline"
@@ -106,7 +107,7 @@ function openInWindsurf() {
       />
 
       <UButton
-        v-if="actions.includes('windsurf')"
+        v-if="props.actions.includes('windsurf')"
         icon="i-simple-icons-windsurf"
         color="neutral"
         variant="outline"

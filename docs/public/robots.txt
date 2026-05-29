@@ -1,4 +1,5 @@
 User-agent: *
+Content-Signal: search=yes, ai-train=yes, ai-input=yes
 Disallow: /vercel/
 Disallow: /node_modules/
 Disallow: /docs/src/
