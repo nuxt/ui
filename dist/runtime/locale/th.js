@@ -32,11 +32,6 @@ export default defineLocale({
     chatPromptSubmit: {
       label: "\u0E2A\u0E48\u0E07"
     },
-    chatReasoning: {
-      thinking: "\u0E01\u0E33\u0E25\u0E31\u0E07\u0E04\u0E34\u0E14\u2026",
-      thought: "\u0E04\u0E34\u0E14\u0E41\u0E25\u0E49\u0E27",
-      thoughtFor: "\u0E04\u0E34\u0E14\u0E40\u0E1B\u0E47\u0E19\u0E40\u0E27\u0E25\u0E32 {duration}"
-    },
     colorMode: {
       dark: "\u0E21\u0E37\u0E14",
       light: "\u0E2A\u0E27\u0E48\u0E32\u0E07",
@@ -53,6 +48,7 @@ export default defineLocale({
     },
     contentSearch: {
       links: "\u0E25\u0E34\u0E07\u0E01\u0E4C",
+      search: "\u0E1C\u0E25\u0E25\u0E31\u0E1E\u0E18\u0E4C",
       theme: "\u0E18\u0E35\u0E21"
     },
     contentSearchButton: {
@@ -98,11 +94,16 @@ export default defineLocale({
       decrement: "\u0E25\u0E14",
       increment: "\u0E40\u0E1E\u0E34\u0E48\u0E21"
     },
+    listbox: {
+      noData: "\u0E44\u0E21\u0E48\u0E21\u0E35\u0E02\u0E49\u0E2D\u0E21\u0E39\u0E25",
+      noMatch: "\u0E44\u0E21\u0E48\u0E1E\u0E1A\u0E02\u0E49\u0E2D\u0E21\u0E39\u0E25\u0E17\u0E35\u0E48\u0E15\u0E23\u0E07\u0E01\u0E31\u0E19",
+      search: "\u0E04\u0E49\u0E19\u0E2B\u0E32\u2026"
+    },
     modal: {
       close: "\u0E1B\u0E34\u0E14"
     },
     pricingTable: {
-      caption: "\u0E01\u0E32\u0E23\u0E40\u0E1B\u0E23\u0E35\u0E22\u0E1A\u0E40\u0E17\u0E35\u0E22\u0E1A\u0E23\u0E32\u0E04\u0E32\u0E2A\u0E34\u0E19\u0E04\u0E49\u0E32"
+      caption: "\u0E01\u0E32\u0E23\u0E40\u0E1B\u0E23\u0E35\u0E22\u0E1A\u0E40\u0E17\u0E35\u0E22\u0E1A\u0E23\u0E32\u0E04\u0E32"
     },
     prose: {
       codeCollapse: {
@@ -122,6 +123,11 @@ export default defineLocale({
         copy: "\u0E04\u0E31\u0E14\u0E25\u0E2D\u0E01\u0E1E\u0E23\u0E2D\u0E21\u0E15\u0E4C",
         openIn: "\u0E40\u0E1B\u0E34\u0E14\u0E43\u0E19 {name}"
       }
+    },
+    chatReasoning: {
+      thinking: "\u0E01\u0E33\u0E25\u0E31\u0E07\u0E04\u0E34\u0E14\u2026",
+      thought: "\u0E04\u0E34\u0E14\u0E41\u0E25\u0E49\u0E27",
+      thoughtFor: "\u0E04\u0E34\u0E14\u0E40\u0E1B\u0E47\u0E19\u0E40\u0E27\u0E25\u0E32 {duration}"
     },
     sidebar: {
       close: "\u0E1B\u0E34\u0E14",

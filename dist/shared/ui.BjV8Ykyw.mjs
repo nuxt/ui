@@ -359,14 +359,26 @@ const authForm = {
   }
 };
 
-const avatar = {
+const avatar = (options) => ({
   slots: {
-    root: "inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle bg-elevated",
+    root: "inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle",
     image: "h-full w-full rounded-[inherit] object-cover",
-    fallback: "font-medium text-muted truncate",
-    icon: "text-muted shrink-0"
+    fallback: "font-medium truncate",
+    icon: "shrink-0"
   },
   variants: {
+    color: {
+      ...Object.fromEntries((options.theme.colors || []).map((color) => [color, {
+        root: `bg-${color}/10`,
+        fallback: `text-${color}`,
+        icon: `text-${color}`
+      }])),
+      neutral: {
+        root: "bg-elevated",
+        fallback: "text-muted",
+        icon: "text-muted"
+      }
+    },
     size: {
       "3xs": {
         root: "size-4 text-[8px]"
@@ -398,11 +410,12 @@ const avatar = {
     }
   },
   defaultVariants: {
-    size: "md"
+    size: "md",
+    color: "neutral"
   }
-};
+});
 
-const avatarGroup = {
+const avatarGroup = (options) => ({
   slots: {
     root: "inline-flex flex-row-reverse justify-end",
     base: "relative rounded-full ring-bg first:me-0"
@@ -436,12 +449,17 @@ const avatarGroup = {
       "3xl": {
         base: "ring-3 -me-2"
       }
+    },
+    color: {
+      ...Object.fromEntries((options.theme.colors || []).map((color) => [color, ""])),
+      neutral: ""
     }
   },
   defaultVariants: {
-    size: "md"
+    size: "md",
+    color: "neutral"
   }
-};
+});
 
 const fieldGroupVariant = {
   fieldGroup: {
@@ -770,7 +788,7 @@ const breadcrumb = (options) => ({
     root: "relative min-w-0",
     list: "flex items-center gap-1.5",
     item: "flex min-w-0",
-    link: "group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-primary",
+    link: "group relative flex items-center gap-1.5 text-sm min-w-0",
     linkLeadingIcon: "shrink-0 size-5",
     linkLeadingAvatar: "shrink-0",
     linkLeadingAvatarSize: "2xs",
@@ -781,7 +799,7 @@ const breadcrumb = (options) => ({
   variants: {
     active: {
       true: {
-        link: "text-primary font-semibold"
+        link: "font-semibold"
       },
       false: {
         link: "text-muted font-medium"
@@ -794,6 +812,10 @@ const breadcrumb = (options) => ({
     },
     to: {
       true: ""
+    },
+    color: {
+      ...Object.fromEntries((options.theme.colors || []).map((color) => [color, { link: `focus-visible:outline-${color}` }])),
+      neutral: { link: "focus-visible:outline-inverted" }
     }
   },
   compoundVariants: [{
@@ -803,7 +825,22 @@ const breadcrumb = (options) => ({
     class: {
       link: ["hover:text-default", options.theme.transitions && "transition-colors"]
     }
-  }]
+  }, ...(options.theme.colors || []).map((color) => ({
+    color,
+    active: true,
+    class: {
+      link: `text-${color}`
+    }
+  })), {
+    color: "neutral",
+    active: true,
+    class: {
+      link: "text-highlighted"
+    }
+  }],
+  defaultVariants: {
+    color: "primary"
+  }
 });
 
 const button = (options) => ({
@@ -1170,13 +1207,17 @@ const card$1 = {
   slots: {
     root: "rounded-lg overflow-hidden",
     header: "p-4 sm:px-6",
+    title: "text-highlighted font-semibold",
+    description: "mt-1 text-muted text-sm",
     body: "p-4 sm:p-6",
     footer: "p-4 sm:px-6"
   },
   variants: {
     variant: {
       solid: {
-        root: "bg-inverted text-inverted"
+        root: "bg-inverted text-inverted",
+        title: "text-inverted",
+        description: "text-dimmed"
       },
       outline: {
         root: "bg-default ring ring-default divide-y divide-default"
@@ -1285,38 +1326,35 @@ const changelogVersions = {
 const chatMessage = (options) => ({
   slots: {
     root: "group/message relative w-full",
+    header: "flex mb-1.5",
     container: "relative flex items-start",
+    body: "min-w-0",
     leading: "inline-flex items-center justify-center min-h-6",
     leadingIcon: "shrink-0",
     leadingAvatar: "shrink-0",
     leadingAvatarSize: "",
-    files: "flex items-center gap-1.5 mb-1.5",
-    content: "relative text-pretty min-w-0 *:first:mt-0 *:last:mb-0",
-    actions: ["opacity-0 group-hover/message:opacity-100 absolute bottom-0 flex items-center", options.theme.transitions && "transition-opacity"]
+    files: "flex items-center gap-1.5",
+    content: "relative text-pretty wrap-break-word *:first:mt-0 *:last:mb-0",
+    actions: ["[@media(hover:hover)]:opacity-0 group-hover/message:opacity-100 absolute bottom-0 flex items-center", options.theme.transitions && "transition-opacity"]
   },
   variants: {
     variant: {
-      solid: {
-        content: "bg-inverted text-inverted"
-      },
-      outline: {
-        content: "bg-default ring ring-default"
-      },
-      soft: {
-        content: "bg-elevated/50"
-      },
-      subtle: {
-        content: "bg-elevated/50 ring ring-default"
-      },
-      naked: {
-        content: ""
-      }
+      solid: "",
+      outline: "",
+      soft: "",
+      subtle: "",
+      naked: ""
+    },
+    color: {
+      ...Object.fromEntries((options.theme.colors || []).map((color) => [color, ""])),
+      neutral: ""
     },
     side: {
       left: {},
       right: {
         container: "justify-end ms-auto max-w-[75%]",
-        files: "justify-end"
+        header: "justify-end",
+        actions: "right-0"
       }
     },
     leading: {
@@ -1349,20 +1387,6 @@ const chatMessage = (options) => ({
       container: "pb-8"
     }
   }, {
-    leading: true,
-    compact: false,
-    side: "left",
-    class: {
-      actions: "left-11"
-    }
-  }, {
-    leading: true,
-    compact: true,
-    side: "left",
-    class: {
-      actions: "left-6.5"
-    }
-  }, {
     variant: ["solid", "outline", "soft", "subtle"],
     compact: false,
     class: {
@@ -1382,9 +1406,65 @@ const chatMessage = (options) => ({
     class: {
       content: "w-full"
     }
+  }, ...(options.theme.colors || []).map((color) => ({
+    color,
+    variant: "solid",
+    class: {
+      content: `bg-${color} text-inverted`
+    }
+  })), ...(options.theme.colors || []).map((color) => ({
+    color,
+    variant: "outline",
+    class: {
+      content: `text-${color} ring ring-${color}/25`
+    }
+  })), ...(options.theme.colors || []).map((color) => ({
+    color,
+    variant: "soft",
+    class: {
+      content: `bg-${color}/10 text-${color}`
+    }
+  })), ...(options.theme.colors || []).map((color) => ({
+    color,
+    variant: "subtle",
+    class: {
+      content: `bg-${color}/10 text-${color} ring ring-${color}/25`
+    }
+  })), ...(options.theme.colors || []).map((color) => ({
+    color,
+    variant: "naked",
+    class: {
+      content: `text-${color}`
+    }
+  })), {
+    color: "neutral",
+    variant: "solid",
+    class: {
+      content: "bg-inverted text-inverted"
+    }
+  }, {
+    color: "neutral",
+    variant: "outline",
+    class: {
+      content: "bg-default ring ring-default"
+    }
+  }, {
+    color: "neutral",
+    variant: "soft",
+    class: {
+      content: "bg-elevated/50"
+    }
+  }, {
+    color: "neutral",
+    variant: "subtle",
+    class: {
+      content: "bg-elevated/50 ring ring-default"
+    }
   }],
   defaultVariants: {
-    variant: "naked"
+    side: "left",
+    variant: "naked",
+    color: "neutral"
   }
 });
 
@@ -1521,9 +1601,6 @@ const chatTool = (options) => ({
         chevronIcon: ["absolute inset-0 opacity-0 group-hover:opacity-100 group-data-[state=open]:opacity-100", options.theme.transitions && "transition-[rotate,opacity] duration-200"]
       }
     }
-  },
-  defaultVariants: {
-    variant: "inline"
   }
 });
 
@@ -1611,6 +1688,9 @@ const checkbox = (options) => ({
         description: "cursor-not-allowed"
       }
     },
+    highlight: {
+      true: ""
+    },
     checked: {
       true: ""
     }
@@ -1640,6 +1720,20 @@ const checkbox = (options) => ({
       disabled: true,
       class: {
         root: "cursor-not-allowed"
+      }
+    },
+    ...(options.theme.colors || []).map((color) => ({
+      color,
+      highlight: true,
+      class: {
+        base: `ring-${color}`
+      }
+    })),
+    {
+      color: "neutral",
+      highlight: true,
+      class: {
+        base: "ring-inverted"
       }
     }
   ],
@@ -1890,10 +1984,10 @@ const commandPalette = (options) => ({
     itemTrailingKbdsSize: "",
     itemWrapper: "flex-1 flex flex-col text-start min-w-0",
     itemLabel: "truncate space-x-1 text-dimmed",
-    itemDescription: "truncate text-muted",
-    itemLabelBase: "text-highlighted [&>mark]:text-inverted [&>mark]:bg-primary",
+    itemLabelBase: "text-highlighted [&>mark]:text-primary [&>mark]:bg-primary/15",
     itemLabelPrefix: "text-default",
-    itemLabelSuffix: "text-dimmed [&>mark]:text-inverted [&>mark]:bg-primary"
+    itemLabelSuffix: "text-dimmed [&>mark]:text-primary [&>mark]:bg-primary/15",
+    itemDescription: "truncate text-muted [&>mark]:text-primary [&>mark]:bg-primary/15"
   },
   variants: {
     virtualize: {
@@ -2008,7 +2102,7 @@ const container = {
 
 const contextMenu = (options) => ({
   slots: {
-    content: "min-w-32 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] origin-(--reka-context-menu-content-transform-origin) flex flex-col",
+    content: "min-w-32 max-h-(--reka-context-menu-content-available-height) bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] origin-(--reka-context-menu-content-transform-origin) flex flex-col",
     viewport: "relative divide-y divide-default scroll-py-1 overflow-y-auto flex-1",
     group: "p-1 isolate",
     label: "w-full flex items-center font-semibold text-highlighted",
@@ -2287,7 +2381,7 @@ const drawer = (options) => ({
         handle: "mb-4"
       },
       right: {
-        content: "flex-row",
+        content: "flex-row rtl:flex-row-reverse",
         handle: "!ml-4"
       },
       bottom: {
@@ -2295,7 +2389,7 @@ const drawer = (options) => ({
         handle: "mt-4"
       },
       left: {
-        content: "flex-row-reverse",
+        content: "flex-row-reverse rtl:flex-row",
         handle: "!mr-4"
       }
     },
@@ -2398,7 +2492,7 @@ const drawer = (options) => ({
 
 const dropdownMenu = (options) => ({
   slots: {
-    content: "min-w-32 bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] origin-(--reka-dropdown-menu-content-transform-origin) flex flex-col",
+    content: "min-w-32 max-h-(--reka-dropdown-menu-content-available-height) bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] origin-(--reka-dropdown-menu-content-transform-origin) flex flex-col",
     input: "border-b border-default",
     empty: "text-center text-muted",
     viewport: "relative divide-y divide-default scroll-py-1 overflow-y-auto flex-1",
@@ -2745,6 +2839,8 @@ const empty = {
 const error = {
   slots: {
     root: "min-h-[calc(100vh-var(--ui-header-height))] flex flex-col items-center justify-center text-center",
+    leading: "mb-4 flex items-center justify-center",
+    leadingIcon: "size-10 shrink-0 text-primary",
     statusCode: "text-base font-semibold text-primary",
     statusMessage: "mt-2 text-4xl sm:text-5xl font-bold text-highlighted text-balance",
     message: "mt-4 text-lg text-muted text-balance",
@@ -3021,8 +3117,7 @@ const formField = {
     }
   },
   defaultVariants: {
-    size: "md",
-    orientation: "vertical"
+    size: "md"
   }
 };
 
@@ -3299,7 +3394,7 @@ const inputMenu = (options) => {
       trailing: "group absolute inset-y-0 end-0 flex items-center disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none",
       trailingClear: "p-0",
       arrow: "fill-bg stroke-default",
-      content: "max-h-60 w-(--reka-combobox-trigger-width) bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] origin-(--reka-combobox-content-transform-origin) pointer-events-auto flex flex-col",
+      content: "max-h-[min(15rem,var(--reka-combobox-content-available-height,15rem))] w-(--reka-combobox-trigger-width) bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] origin-(--reka-combobox-content-transform-origin) pointer-events-auto flex flex-col",
       viewport: "relative scroll-py-1 overflow-y-auto flex-1",
       group: "p-1 isolate",
       empty: "text-center text-muted",
@@ -3750,6 +3845,132 @@ const link = (options) => ({
     disabled: false,
     class: ["hover:text-default", options.theme.transitions && "transition-colors"]
   }]
+});
+
+const listbox = (options) => ({
+  slots: {
+    root: "flex flex-col min-h-0 min-w-0 ring ring-inset ring-default rounded-lg overflow-hidden",
+    input: "border-b border-default",
+    content: "relative overflow-y-auto flex-1 max-h-60 scroll-py-1 focus:outline-none",
+    group: "p-1 isolate",
+    label: "font-semibold text-highlighted",
+    separator: "-mx-1 my-1 h-px bg-border",
+    empty: "text-center text-muted",
+    loading: "flex items-center justify-center text-muted",
+    loadingIcon: "animate-spin shrink-0",
+    item: ["group relative w-full flex items-start select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 text-default data-highlighted:not-data-disabled:text-highlighted data-highlighted:not-data-disabled:before:bg-elevated/50", options.theme.transitions && "transition-colors before:transition-colors"],
+    itemLeadingIcon: ["shrink-0 text-dimmed group-data-highlighted:not-group-data-disabled:text-default", options.theme.transitions && "transition-colors"],
+    itemLeadingAvatar: "shrink-0",
+    itemLeadingAvatarSize: "",
+    itemLeadingChip: "shrink-0",
+    itemLeadingChipSize: "",
+    itemWrapper: "flex-1 flex flex-col min-w-0",
+    itemLabel: "truncate",
+    itemDescription: "truncate text-muted",
+    itemTrailing: "ms-auto inline-flex gap-1.5 items-center",
+    itemTrailingIcon: "shrink-0"
+  },
+  variants: {
+    size: {
+      xs: {
+        label: "p-1 text-[10px]/3 gap-1",
+        empty: "py-3 text-xs",
+        loading: "py-3",
+        loadingIcon: "size-4",
+        item: "p-1 text-xs gap-1",
+        itemLeadingIcon: "size-4",
+        itemLeadingAvatarSize: "3xs",
+        itemLeadingChip: "size-4",
+        itemLeadingChipSize: "sm",
+        itemTrailingIcon: "size-4"
+      },
+      sm: {
+        label: "p-1.5 text-[10px]/3 gap-1.5",
+        empty: "py-4 text-xs",
+        loading: "py-4",
+        loadingIcon: "size-4",
+        item: "p-1.5 text-xs gap-1.5",
+        itemLeadingIcon: "size-4",
+        itemLeadingAvatarSize: "3xs",
+        itemLeadingChip: "size-4",
+        itemLeadingChipSize: "sm",
+        itemTrailingIcon: "size-4"
+      },
+      md: {
+        label: "p-1.5 text-xs gap-1.5",
+        empty: "py-6 text-sm",
+        loading: "py-6",
+        loadingIcon: "size-5",
+        item: "p-1.5 text-sm gap-1.5",
+        itemLeadingIcon: "size-5",
+        itemLeadingAvatarSize: "2xs",
+        itemLeadingChip: "size-5",
+        itemLeadingChipSize: "md",
+        itemTrailingIcon: "size-5"
+      },
+      lg: {
+        label: "p-2 text-xs gap-2",
+        empty: "py-7 text-sm",
+        loading: "py-7",
+        loadingIcon: "size-5",
+        item: "p-2 text-sm gap-2",
+        itemLeadingIcon: "size-5",
+        itemLeadingAvatarSize: "2xs",
+        itemLeadingChip: "size-5",
+        itemLeadingChipSize: "md",
+        itemTrailingIcon: "size-5"
+      },
+      xl: {
+        label: "p-2 text-sm gap-2",
+        empty: "py-8 text-base",
+        loading: "py-8",
+        loadingIcon: "size-6",
+        item: "p-2 text-base gap-2",
+        itemLeadingIcon: "size-6",
+        itemLeadingAvatarSize: "xs",
+        itemLeadingChip: "size-6",
+        itemLeadingChipSize: "lg",
+        itemTrailingIcon: "size-6",
+        itemDescription: "text-sm"
+      }
+    },
+    color: {
+      ...Object.fromEntries((options.theme.colors || []).map((color) => [color, ""])),
+      neutral: ""
+    },
+    virtualize: {
+      true: {
+        content: "p-1 isolate"
+      },
+      false: {
+        content: "divide-y divide-default"
+      }
+    },
+    disabled: {
+      true: {
+        root: "opacity-75 cursor-not-allowed"
+      }
+    },
+    highlight: {
+      true: ""
+    }
+  },
+  compoundVariants: [...(options.theme.colors || []).map((color) => ({
+    color,
+    highlight: true,
+    class: {
+      root: `ring ring-inset ring-${color}`
+    }
+  })), {
+    color: "neutral",
+    highlight: true,
+    class: {
+      root: "ring ring-inset ring-inverted"
+    }
+  }],
+  defaultVariants: {
+    size: "md"
+  }
 });
 
 const main = {
@@ -5231,6 +5452,9 @@ const radioGroup = (options) => ({
         indicator: "after:size-2"
       }
     },
+    highlight: {
+      true: ""
+    },
     disabled: {
       true: {
         item: "opacity-75",
@@ -5301,13 +5525,26 @@ const radioGroup = (options) => ({
       class: {
         item: "cursor-not-allowed"
       }
+    },
+    ...(options.theme.colors || []).map((color) => ({
+      color,
+      highlight: true,
+      class: {
+        base: `ring-${color}`
+      }
+    })),
+    {
+      color: "neutral",
+      highlight: true,
+      class: {
+        base: "ring-inverted"
+      }
     }
   ],
   defaultVariants: {
     size: "md",
     color: "primary",
     variant: "list",
-    orientation: "vertical",
     indicator: "start"
   }
 });
@@ -5342,7 +5579,7 @@ const select = (options) => {
       value: "truncate pointer-events-none",
       placeholder: "truncate text-dimmed",
       arrow: "fill-bg stroke-default",
-      content: "max-h-60 w-(--reka-select-trigger-width) bg-default shadow-lg rounded-md ring ring-default overflow-hidden origin-(--reka-select-content-transform-origin) pointer-events-auto flex flex-col",
+      content: "max-h-[min(15rem,var(--reka-select-content-available-height,15rem))] w-(--reka-select-trigger-width) bg-default shadow-lg rounded-md ring ring-default overflow-hidden origin-(--reka-select-content-transform-origin) pointer-events-auto flex flex-col",
       viewport: "relative divide-y divide-default scroll-py-1 overflow-y-auto flex-1",
       group: "p-1 isolate",
       empty: "text-center text-muted",
@@ -5452,7 +5689,7 @@ const selectMenu = (options) => {
       input: "border-b border-default",
       focusScope: "flex flex-col min-h-0",
       viewport: "relative scroll-py-1 overflow-y-auto flex-1",
-      content: (content) => [content, "origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width)"],
+      content: (content) => [content, "max-h-[min(15rem,var(--reka-combobox-content-available-height,15rem))] origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width)"],
       trailingClear: "p-0"
     },
     variants: {
@@ -5494,12 +5731,12 @@ const separator = (options) => ({
       horizontal: {
         root: "w-full flex-row",
         border: "w-full",
-        container: "mx-3 whitespace-nowrap"
+        container: "whitespace-nowrap"
       },
       vertical: {
         root: "h-full flex-col",
         border: "h-full",
-        container: "my-2"
+        container: ""
       }
     },
     size: {
@@ -5508,6 +5745,11 @@ const separator = (options) => ({
       md: "",
       lg: "",
       xl: ""
+    },
+    position: {
+      start: "",
+      center: "",
+      end: ""
     },
     type: {
       solid: {
@@ -5522,6 +5764,30 @@ const separator = (options) => ({
     }
   },
   compoundVariants: [{
+    orientation: "horizontal",
+    position: "start",
+    class: { container: "me-3" }
+  }, {
+    orientation: "horizontal",
+    position: "center",
+    class: { container: "mx-3" }
+  }, {
+    orientation: "horizontal",
+    position: "end",
+    class: { container: "ms-3" }
+  }, {
+    orientation: "vertical",
+    position: "start",
+    class: { container: "mb-2" }
+  }, {
+    orientation: "vertical",
+    position: "center",
+    class: { container: "my-2" }
+  }, {
+    orientation: "vertical",
+    position: "end",
+    class: { container: "mt-2" }
+  }, {
     orientation: "horizontal",
     size: "xs",
     class: { border: "border-t" }
@@ -6124,6 +6390,9 @@ const _switch = (options) => ({
         icon: "animate-spin"
       }
     },
+    highlight: {
+      true: ""
+    },
     required: {
       true: {
         label: "after:content-['*'] after:ms-0.5 after:text-error"
@@ -6138,6 +6407,22 @@ const _switch = (options) => ({
       }
     }
   },
+  compoundVariants: [
+    ...(options.theme.colors || []).map((color) => ({
+      color,
+      highlight: true,
+      class: {
+        base: `ring ring-${color}`
+      }
+    })),
+    {
+      color: "neutral",
+      highlight: true,
+      class: {
+        base: "ring ring-inverted"
+      }
+    }
+  ],
   defaultVariants: {
     color: "primary",
     size: "md"
@@ -6147,10 +6432,10 @@ const _switch = (options) => ({
 const table$1 = (options) => ({
   slots: {
     root: "relative overflow-auto",
-    base: "min-w-full",
+    base: "min-w-full overflow-clip",
     caption: "sr-only",
     thead: "relative",
-    tbody: "isolate [&>tr]:data-[selectable=true]:hover:bg-elevated/50 [&>tr]:data-[selectable=true]:focus-visible:outline-primary",
+    tbody: "isolate [&>tr]:data-[selectable=true]:hover:bg-elevated/50 [&>tr]:data-[selectable=true]:focus-visible:outline-primary divide-y divide-default",
     tfoot: "relative",
     tr: "data-[selected=true]:bg-elevated/50",
     th: "px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&:has([role=checkbox])]:pe-0",
@@ -6160,12 +6445,6 @@ const table$1 = (options) => ({
     loading: "py-6 text-center"
   },
   variants: {
-    virtualize: {
-      false: {
-        base: "overflow-clip",
-        tbody: "divide-y divide-default"
-      }
-    },
     pinned: {
       true: {
         th: "sticky bg-default/75 z-1",
@@ -6961,6 +7240,7 @@ const theme = {
   inputTime: inputTime,
   kbd: kbd$1,
   link: link,
+  listbox: listbox,
   main: main,
   marquee: marquee,
   modal: modal,
@@ -7409,11 +7689,11 @@ const pre = {
 
 const prompt = {
   slots: {
-    root: "relative flex items-center gap-2 border border-muted bg-muted rounded-md px-4 py-3 my-5 last:mb-0",
+    root: "relative flex flex-wrap items-center gap-2 border border-muted bg-muted rounded-md px-4 py-3 my-5 last:mb-0",
     icon: "size-4 shrink-0 text-highlighted",
-    content: "flex-1 min-w-0",
+    content: "min-w-0",
     description: "text-sm/6 text-default font-medium",
-    actions: "flex items-center shrink-0 gap-1.5"
+    actions: "flex flex-wrap items-center gap-1.5 ms-auto"
   }
 };
 
@@ -7978,21 +8258,7 @@ function getTemplates(options, uiConfig, nuxt, resolve) {
     }
     return sources.join("\n");
   }
-  templates.push({
-    filename: "ui.css",
-    write: true,
-    getContents: async () => {
-      const sources = await generateSources();
-      const prefix = options.theme?.prefix ? `${options.theme.prefix}:` : "";
-      return `${sources}
-
-@layer base {
-  body {
-    @apply ${prefix}antialiased ${prefix}text-default ${prefix}bg-default ${prefix}scheme-light ${prefix}dark:scheme-dark;
-  }
-}
-
-@theme static {
+  const themeBlocks = `@theme static {
   --color-old-neutral-50: ${colors.neutral[50]};
   --color-old-neutral-100: ${colors.neutral[100]};
   --color-old-neutral-200: ${colors.neutral[200]};
@@ -8058,7 +8324,27 @@ function getTemplates(options, uiConfig, nuxt, resolve) {
   --fill-inverted: var(--ui-border-inverted);
 }
 `;
+  templates.push({
+    filename: "ui.css",
+    write: true,
+    getContents: async () => {
+      const sources = await generateSources();
+      const prefix = options.theme?.prefix ? `${options.theme.prefix}:` : "";
+      return `${sources}
+
+@layer base {
+  body {
+    @apply ${prefix}antialiased ${prefix}text-default ${prefix}bg-default ${prefix}scheme-light ${prefix}dark:scheme-dark;
+  }
+}
+
+${themeBlocks}`;
     }
+  });
+  templates.push({
+    filename: "ui.static.css",
+    write: true,
+    getContents: () => themeBlocks
   });
   templates.push({
     filename: "ui/index.ts",
@@ -8075,7 +8361,7 @@ function getTemplates(options, uiConfig, nuxt, resolve) {
       const iconKeys = Object.keys(uiConfig?.icons || {});
       const iconUnion = iconKeys.length ? iconKeys.map((i) => JSON.stringify(i)).join(" | ") : "string";
       return `import * as ui from '#build/ui'
-import type { TVConfig } from '@nuxt/ui'
+import type { TVConfig, DeepRequired } from '@nuxt/ui'
 import type { defaultConfig } from 'tailwind-variants'
 import colors from 'tailwindcss/colors'
 
@@ -8094,6 +8380,8 @@ type AppConfigUI = {
   tv?: typeof defaultConfig
 } & TVConfig<typeof ui>
 
+type AppConfigRuntimeUI = DeepRequired<Pick<AppConfigUI, 'colors' | 'icons' | 'tv'>> & Omit<AppConfigUI, 'colors' | 'icons' | 'tv'>
+
 declare module '@nuxt/schema' {
   interface AppConfigInput {
     /**
@@ -8101,6 +8389,9 @@ declare module '@nuxt/schema' {
      * @see https://ui.nuxt.com/docs/getting-started/theme/components
      */
     ui?: AppConfigUI
+  }
+  interface AppConfig {
+    ui: AppConfigRuntimeUI
   }
 }
 
@@ -8153,4 +8444,4 @@ const publicComposables = {
   useToast: ["useToast"]
 };
 
-export { getDefaultConfig as a, addTemplates as b, defaultOptions as d, getTemplates as g, publicComposables as p, resolveColors as r };
+export { addTemplates as a, getTemplates as b, defaultOptions as d, getDefaultConfig as g, publicComposables as p, resolveColors as r };

@@ -7,12 +7,12 @@ import { computed, watch, onBeforeUpdate, ref } from "vue";
 import { TreeRoot, TreeItem } from "reka-ui";
 import { createReusableTemplate } from "@vueuse/core";
 import { useAppConfig } from "#imports";
-import { useComponentUI } from "../../composables/useComponentUI";
+import { useComponentProps } from "../../composables/useComponentProps";
 import { tv } from "../../utils/tv";
 import UCodeIcon from "./CodeIcon.vue";
 import UIcon from "../Icon.vue";
 defineOptions({ inheritAttrs: false });
-const props = defineProps({
+const _props = defineProps({
   items: { type: Array, required: false },
   modelValue: { type: String, required: false },
   defaultValue: { type: String, required: false },
@@ -22,8 +22,8 @@ const props = defineProps({
 });
 const emits = defineEmits(["update:modelValue"]);
 const slots = defineSlots();
+const props = useComponentProps("prose.codeTree", _props);
 const appConfig = useAppConfig();
-const uiProp = useComponentUI("prose.codeTree", props);
 const [DefineTreeTemplate, ReuseTreeTemplate] = createReusableTemplate();
 const ui = computed(() => tv({ extend: tv(theme), ...appConfig.ui?.prose?.codeTree || {} })());
 const initialPath = props.modelValue ?? props.defaultValue;
@@ -125,7 +125,7 @@ onBeforeUpdate(() => rerenderCount.value++);
       v-for="(item, index) in items"
       :key="`${level}-${index}`"
       role="presentation"
-      :class="level > 1 ? ui.itemWithChildren({ class: uiProp?.itemWithChildren }) : ui.item({ class: uiProp?.item })"
+      :class="level > 1 ? ui.itemWithChildren({ class: props.ui?.itemWithChildren }) : ui.item({ class: props.ui?.item })"
     >
       <TreeItem
         v-slot="{ isExpanded, isSelected }"
@@ -135,27 +135,27 @@ onBeforeUpdate(() => rerenderCount.value++);
       >
         <button
           type="button"
-          :class="ui.link({ class: uiProp?.link, active: isSelected })"
+          :class="ui.link({ class: props.ui?.link, active: isSelected })"
         >
           <UIcon
             v-if="item.children?.length"
             :name="isExpanded ? appConfig.ui.icons.folderOpen : appConfig.ui.icons.folder"
-            :class="ui.linkLeadingIcon({ class: uiProp?.linkLeadingIcon })"
+            :class="ui.linkLeadingIcon({ class: props.ui?.linkLeadingIcon })"
           />
           <UCodeIcon
             v-else
             :filename="item.label"
-            :class="ui.linkLeadingIcon({ class: uiProp?.linkLeadingIcon })"
+            :class="ui.linkLeadingIcon({ class: props.ui?.linkLeadingIcon })"
           />
 
-          <span :class="ui.linkLabel({ class: uiProp?.linkLabel })">
+          <span :class="ui.linkLabel({ class: props.ui?.linkLabel })">
             {{ item.label }}
           </span>
 
-          <span v-if="item.children?.length" :class="ui.linkTrailing({ class: uiProp?.linkTrailing })">
+          <span v-if="item.children?.length" :class="ui.linkTrailing({ class: props.ui?.linkTrailing })">
             <UIcon
               :name="appConfig.ui.icons.chevronDown"
-              :class="ui.linkTrailingIcon({ class: uiProp?.linkTrailingIcon })"
+              :class="ui.linkTrailingIcon({ class: props.ui?.linkTrailingIcon })"
             />
           </span>
         </button>
@@ -163,7 +163,7 @@ onBeforeUpdate(() => rerenderCount.value++);
         <ul
           v-if="item.children?.length && isExpanded"
           role="group"
-          :class="ui.listWithChildren({ class: uiProp?.listWithChildren })"
+          :class="ui.listWithChildren({ class: props.ui?.listWithChildren })"
         >
           <ReuseTreeTemplate :items="item.children" :level="level + 1" />
         </ul>
@@ -171,18 +171,18 @@ onBeforeUpdate(() => rerenderCount.value++);
     </li>
   </DefineTreeTemplate>
 
-  <div v-bind="$attrs" :class="ui.root({ class: [uiProp?.root, props.class] })">
+  <div v-bind="$attrs" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <TreeRoot
       v-model="model"
       v-model:expanded="expanded"
-      :class="ui.list({ class: uiProp?.list })"
+      :class="ui.list({ class: props.ui?.list })"
       :items="items"
       :get-key="(item2) => item2.path"
     >
       <ReuseTreeTemplate :items="items" :level="1" />
     </TreeRoot>
 
-    <div :class="ui.content({ class: uiProp?.content })">
+    <div :class="ui.content({ class: props.ui?.content })">
       <component :is="lastSelectedItem?.component" />
     </div>
   </div>

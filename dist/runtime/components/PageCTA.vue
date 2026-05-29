@@ -6,11 +6,12 @@ import theme from "#build/ui/page-cta";
 import { computed } from "vue";
 import { Primitive } from "reka-ui";
 import { useAppConfig } from "#imports";
-import { useComponentUI } from "../composables/useComponentUI";
+import { useComponentProps } from "../composables/useComponentProps";
+import { usePrefix } from "../composables/usePrefix";
 import { tv } from "../utils/tv";
 import UButton from "./Button.vue";
 import UContainer from "./Container.vue";
-const props = defineProps({
+const _props = defineProps({
   as: { type: null, required: false },
   class: { type: null, required: false },
   title: { type: String, required: false },
@@ -22,8 +23,9 @@ const props = defineProps({
   ui: { type: Object, required: false }
 });
 const slots = defineSlots();
+const props = useComponentProps("pageCTA", _props);
 const appConfig = useAppConfig();
-const uiProp = useComponentUI("pageCTA", props);
+const prefix = usePrefix();
 const ui = computed(() => tv({ extend: tv(theme), ...appConfig.ui?.pageCTA || {} })({
   variant: props.variant,
   orientation: props.orientation,
@@ -33,36 +35,36 @@ const ui = computed(() => tv({ extend: tv(theme), ...appConfig.ui?.pageCTA || {}
 </script>
 
 <template>
-  <Primitive :as="as" :data-orientation="orientation" data-slot="root" :class="ui.root({ class: [uiProp?.root, props.class] })">
+  <Primitive :as="props.as" :data-orientation="props.orientation" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <slot name="top" />
 
-    <UContainer data-slot="container" :class="ui.container({ class: uiProp?.container })">
-      <div v-if="!!slots.header || (title || !!slots.title) || (description || !!slots.description) || !!slots.body || !!slots.footer || (links?.length || !!slots.links)" data-slot="wrapper" :class="ui.wrapper({ class: uiProp?.wrapper })">
-        <div v-if="!!slots.header || (title || !!slots.title) || (description || !!slots.description)" data-slot="header" :class="ui.header({ class: uiProp?.header })">
+    <UContainer data-slot="container" :class="ui.container({ class: props.ui?.container })">
+      <div v-if="!!slots.header || (props.title || !!slots.title) || (props.description || !!slots.description) || !!slots.body || !!slots.footer || (props.links?.length || !!slots.links)" data-slot="wrapper" :class="ui.wrapper({ class: props.ui?.wrapper })">
+        <div v-if="!!slots.header || (props.title || !!slots.title) || (props.description || !!slots.description)" data-slot="header" :class="ui.header({ class: props.ui?.header })">
           <slot name="header">
-            <h2 v-if="title || !!slots.title" data-slot="title" :class="ui.title({ class: uiProp?.title })">
+            <h2 v-if="props.title || !!slots.title" data-slot="title" :class="ui.title({ class: props.ui?.title })">
               <slot name="title">
-                {{ title }}
+                {{ props.title }}
               </slot>
             </h2>
 
-            <div v-if="description || !!slots.description" data-slot="description" :class="ui.description({ class: uiProp?.description })">
+            <div v-if="props.description || !!slots.description" data-slot="description" :class="ui.description({ class: props.ui?.description })">
               <slot name="description">
-                {{ description }}
+                {{ props.description }}
               </slot>
             </div>
           </slot>
         </div>
 
-        <div v-if="!!slots.body" data-slot="body" :class="ui.body({ class: uiProp?.body })">
+        <div v-if="!!slots.body" data-slot="body" :class="ui.body({ class: props.ui?.body })">
           <slot name="body" />
         </div>
 
-        <div v-if="!!slots.footer || (links?.length || !!slots.links)" data-slot="footer" :class="ui.footer({ class: uiProp?.footer })">
+        <div v-if="!!slots.footer || (props.links?.length || !!slots.links)" data-slot="footer" :class="ui.footer({ class: props.ui?.footer })">
           <slot name="footer">
-            <div v-if="links?.length || !!slots.links" data-slot="links" :class="ui.links({ class: uiProp?.links })">
+            <div v-if="props.links?.length || !!slots.links" data-slot="links" :class="ui.links({ class: props.ui?.links })">
               <slot name="links">
-                <UButton v-for="(link, index) in links" :key="index" size="lg" v-bind="link" />
+                <UButton v-for="(link, index) in props.links" :key="index" size="lg" v-bind="link" />
               </slot>
             </div>
           </slot>
@@ -70,7 +72,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...appConfig.ui?.pageCTA || {}
       </div>
 
       <slot v-if="!!slots.default" />
-      <div v-else-if="orientation === 'horizontal'" class="hidden lg:block" />
+      <div v-else-if="props.orientation === 'horizontal'" :class="prefix('hidden lg:block')" />
     </UContainer>
 
     <slot name="bottom" />

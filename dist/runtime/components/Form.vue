@@ -8,10 +8,10 @@ import { useEventBus } from "@vueuse/core";
 import { useAppConfig } from "#imports";
 import { formOptionsInjectionKey, formInputsInjectionKey, formBusInjectionKey, formLoadingInjectionKey, formErrorsInjectionKey, formStateInjectionKey } from "../composables/useFormField";
 import { tv } from "../utils/tv";
-import { useComponentUI } from "../composables/useComponentUI";
+import { useComponentProps } from "../composables/useComponentProps";
 import { validateSchema, getAtPath, setAtPath } from "../utils/form";
 import { FormValidationException } from "../types/form";
-const props = defineProps({
+const _props = defineProps({
   id: { type: [String, Number], required: false },
   schema: { type: null, required: false },
   state: { type: null, required: false },
@@ -31,8 +31,8 @@ const props = defineProps({
 });
 const emits = defineEmits(["submit", "error"]);
 defineSlots();
+const props = useComponentProps("form", _props);
 const appConfig = useAppConfig();
-const uiProp = useComponentUI("form", props);
 const ui = computed(() => tv({ extend: tv(theme), ...appConfig.ui?.form || {} }));
 const formId = props.id ?? useId();
 const formRef = useTemplateRef("formRef");
@@ -151,7 +151,7 @@ async function _validate(opts = { silent: false, nested: false, transform: false
 const loading = ref(false);
 provide(formLoadingInjectionKey, readonly(loading));
 async function onSubmitWrapper(payload) {
-  loading.value = props.loadingAuto && true;
+  loading.value = !!props.loadingAuto;
   const event = payload;
   try {
     event.data = await _validate({ nested: true, transform: props.transform });
@@ -293,7 +293,8 @@ defineExpose(api);
     :is="parentBus ? 'div' : 'form'"
     :id="formId"
     ref="formRef"
-    :class="ui({ class: [uiProp?.base, props.class] })"
+    method="post"
+    :class="ui({ class: [props.ui?.base, props.class] })"
     @submit.prevent="onSubmitWrapper"
   >
     <slot :errors="errors" :loading="loading" />

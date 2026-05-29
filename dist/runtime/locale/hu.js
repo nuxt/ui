@@ -53,6 +53,7 @@ export default defineLocale({
     },
     contentSearch: {
       links: "Linkek",
+      search: "Eredm\xE9nyek",
       theme: "T\xE9ma"
     },
     contentSearchButton: {
@@ -97,6 +98,11 @@ export default defineLocale({
     inputNumber: {
       decrement: "Cs\xF6kkent",
       increment: "N\xF6vel"
+    },
+    listbox: {
+      noData: "Nincs adat",
+      noMatch: "Nincs tal\xE1lat",
+      search: "Keres\xE9s\u2026"
     },
     modal: {
       close: "Bez\xE1r\xE1s"

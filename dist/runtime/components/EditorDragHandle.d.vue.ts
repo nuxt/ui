@@ -70,7 +70,7 @@ declare const __VLS_export: __VLS_WithSlots<import("vue").DefineComponent<Editor
         pos: number;
     }) => any) | undefined;
 }>, {
-    size: "xs" | "sm" | "md" | "lg" | "xl";
+    size: "md" | "xs" | "sm" | "lg" | "xl";
     color: "error" | "primary" | "secondary" | "success" | "info" | "warning" | "neutral";
     variant: "link" | "solid" | "outline" | "soft" | "subtle" | "ghost";
 }, {}, {}, {}, string, import("vue").ComponentProvideOptions, false, {}, any>, EditorDragHandleSlots>;

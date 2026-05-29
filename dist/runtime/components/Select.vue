@@ -4,12 +4,12 @@ import theme from "#build/ui/select";
 
 <script setup>
 import { useTemplateRef, computed, onMounted, toRef } from "vue";
-import { SelectRoot, SelectArrow, SelectTrigger, SelectPortal, SelectContent, SelectViewport, SelectValue as RSelectValue, SelectLabel, SelectGroup, SelectItem as RSelectItem, SelectItemIndicator, SelectItemText, SelectSeparator, useForwardPropsEmits } from "reka-ui";
+import { SelectRoot, SelectArrow, SelectTrigger, SelectPortal, SelectContent, SelectViewport, SelectValue as RSelectValue, SelectLabel, SelectGroup, SelectItem as RSelectItem, SelectItemIndicator, SelectItemText, SelectSeparator } from "reka-ui";
 import { defu } from "defu";
 import { reactivePick } from "@vueuse/core";
 import { useAppConfig } from "#imports";
-import { useComponentUI } from "../composables/useComponentUI";
-import { useResolvedVariants } from "../composables/useResolvedVariants";
+import { useComponentProps } from "../composables/useComponentProps";
+import { useForwardProps } from "../composables/useForwardProps";
 import { useFieldGroup, FieldGroupReset } from "../composables/useFieldGroup";
 import { useComponentIcons } from "../composables/useComponentIcons";
 import { useFormField } from "../composables/useFormField";
@@ -20,7 +20,7 @@ import UIcon from "./Icon.vue";
 import UAvatar from "./Avatar.vue";
 import UChip from "./Chip.vue";
 defineOptions({ inheritAttrs: false });
-const props = defineProps({
+const _props = defineProps({
   id: { type: String, required: false },
   placeholder: { type: String, required: false },
   color: { type: null, required: false },
@@ -60,26 +60,24 @@ const props = defineProps({
 });
 const emits = defineEmits(["change", "blur", "focus", "update:modelValue", "update:open"]);
 const slots = defineSlots();
+const props = useComponentProps("select", _props);
 const appConfig = useAppConfig();
-const uiProp = useComponentUI("select", props);
-const rootProps = useForwardPropsEmits(reactivePick(props, "open", "defaultOpen", "disabled", "autocomplete", "required", "multiple"), emits);
+const rootProps = useForwardProps(reactivePick(props, "open", "defaultOpen", "disabled", "autocomplete", "required", "multiple"), emits);
 const portalProps = usePortal(toRef(() => props.portal));
-const { position } = useResolvedVariants("select", props, theme, ["position"], {
-  position: () => props.content?.position
-});
+const position = computed(() => props.content?.position ?? appConfig.ui?.select?.defaultVariants?.position ?? theme.defaultVariants?.position);
 const contentProps = toRef(() => defu(props.content, { side: "bottom", sideOffset: 8, collisionPadding: 8, position: position.value }));
 const arrowProps = toRef(() => defu(props.arrow, { rounded: true }));
-const { emitFormChange, emitFormInput, emitFormBlur, emitFormFocus, size: formFieldSize, color, id, name, highlight, disabled, ariaAttrs } = useFormField(props);
-const { orientation, size: fieldGroupSize } = useFieldGroup(props);
+const { emitFormChange, emitFormInput, emitFormBlur, emitFormFocus, size: formFieldSize, color, id, name, highlight, disabled, ariaAttrs } = useFormField(_props);
+const { orientation, size: fieldGroupSize } = useFieldGroup(_props);
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(toRef(() => defu(props, { trailingIcon: appConfig.ui.icons.chevronDown })));
 const selectSize = computed(() => fieldGroupSize.value || formFieldSize.value);
 const isItemAligned = computed(() => position.value === "item-aligned");
 const ui = computed(() => tv({ extend: tv(theme), ...appConfig.ui?.select || {} })({
-  color: color.value,
+  color: color.value ?? props.color,
   variant: props.variant,
-  size: selectSize?.value,
+  size: selectSize.value ?? props.size,
   loading: props.loading,
-  highlight: highlight.value,
+  highlight: highlight.value ?? props.highlight,
   leading: isLeading.value || !!props.avatar || !!slots.leading,
   trailing: isTrailing.value || !!slots.trailing,
   fieldGroup: orientation.value,
@@ -162,9 +160,9 @@ defineExpose({
     v-slot="{ modelValue, open }"
     :name="name"
     v-bind="rootProps"
-    :autocomplete="autocomplete"
+    :autocomplete="props.autocomplete"
     :disabled="disabled"
-    :default-value="defaultValue"
+    :default-value="props.defaultValue"
     :model-value="modelValue"
     @update:model-value="onUpdate"
     @update:open="onUpdateOpen"
@@ -173,90 +171,90 @@ defineExpose({
       :id="id"
       ref="triggerRef"
       data-slot="base"
-      :class="ui.base({ class: [uiProp?.base, props.class] })"
+      :class="ui.base({ class: [props.ui?.base, props.class] })"
       v-bind="{ ...$attrs, ...ariaAttrs }"
     >
-      <span v-if="isLeading || !!avatar || !!slots.leading" data-slot="leading" :class="ui.leading({ class: uiProp?.leading })">
+      <span v-if="isLeading || !!props.avatar || !!slots.leading" data-slot="leading" :class="ui.leading({ class: props.ui?.leading })">
         <slot name="leading" :model-value="modelValue" :open="open" :ui="ui">
-          <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" data-slot="leadingIcon" :class="ui.leadingIcon({ class: uiProp?.leadingIcon })" />
-          <UAvatar v-else-if="!!avatar" :size="uiProp?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()" v-bind="avatar" data-slot="itemLeadingAvatar" :class="ui.itemLeadingAvatar({ class: uiProp?.itemLeadingAvatar })" />
+          <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" data-slot="leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
+          <UAvatar v-else-if="!!props.avatar" :size="props.ui?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()" v-bind="props.avatar" data-slot="itemLeadingAvatar" :class="ui.itemLeadingAvatar({ class: props.ui?.itemLeadingAvatar })" />
         </slot>
       </span>
 
       <template v-for="displayedModelValue in [displayValue(modelValue)]" :key="displayedModelValue">
         <RSelectValue
           :data-slot="displayedModelValue != null ? 'value' : 'placeholder'"
-          :class="displayedModelValue != null ? ui.value({ class: uiProp?.value }) : ui.placeholder({ class: uiProp?.placeholder })"
+          :class="displayedModelValue != null ? ui.value({ class: props.ui?.value }) : ui.placeholder({ class: props.ui?.placeholder })"
         >
           <slot :model-value="modelValue" :open="open" :ui="ui">
-            {{ displayedModelValue ?? (placeholder ?? "\xA0") }}
+            {{ displayedModelValue ?? (props.placeholder ?? "\xA0") }}
           </slot>
         </RSelectValue>
       </template>
 
-      <span v-if="isTrailing || !!slots.trailing" data-slot="trailing" :class="ui.trailing({ class: uiProp?.trailing })">
+      <span v-if="isTrailing || !!slots.trailing" data-slot="trailing" :class="ui.trailing({ class: props.ui?.trailing })">
         <slot name="trailing" :model-value="modelValue" :open="open" :ui="ui">
-          <UIcon v-if="trailingIconName" :name="trailingIconName" data-slot="trailingIcon" :class="ui.trailingIcon({ class: uiProp?.trailingIcon })" />
+          <UIcon v-if="trailingIconName" :name="trailingIconName" data-slot="trailingIcon" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
         </slot>
       </span>
     </SelectTrigger>
 
     <SelectPortal v-bind="portalProps">
       <FieldGroupReset>
-        <SelectContent data-slot="content" :class="ui.content({ class: uiProp?.content })" v-bind="contentProps">
+        <SelectContent data-slot="content" :class="ui.content({ class: props.ui?.content })" v-bind="contentProps">
           <slot name="content-top" />
 
-          <component :is="isItemAligned ? SelectViewport : 'div'" ref="viewportRef" role="presentation" data-slot="viewport" :class="ui.viewport({ class: uiProp?.viewport })">
-            <SelectGroup v-for="(group, groupIndex) in groups" :key="`group-${groupIndex}`" data-slot="group" :class="ui.group({ class: uiProp?.group })">
+          <component :is="isItemAligned ? SelectViewport : 'div'" ref="viewportRef" role="presentation" data-slot="viewport" :class="ui.viewport({ class: props.ui?.viewport })">
+            <SelectGroup v-for="(group, groupIndex) in groups" :key="`group-${groupIndex}`" data-slot="group" :class="ui.group({ class: props.ui?.group })">
               <template v-for="(item, index) in group" :key="`group-${groupIndex}-${index}`">
-                <SelectLabel v-if="isSelectItem(item) && item.type === 'label'" data-slot="label" :class="ui.label({ class: [uiProp?.label, item.ui?.label, item.class] })">
+                <SelectLabel v-if="isSelectItem(item) && item.type === 'label'" data-slot="label" :class="ui.label({ class: [props.ui?.label, item.ui?.label, item.class] })">
                   {{ get(item, props.labelKey) }}
                 </SelectLabel>
 
-                <SelectSeparator v-else-if="isSelectItem(item) && item.type === 'separator'" data-slot="separator" :class="ui.separator({ class: [uiProp?.separator, item.ui?.separator, item.class] })" />
+                <SelectSeparator v-else-if="isSelectItem(item) && item.type === 'separator'" data-slot="separator" :class="ui.separator({ class: [props.ui?.separator, item.ui?.separator, item.class] })" />
 
                 <RSelectItem
                   v-else
                   data-slot="item"
-                  :class="ui.item({ class: [uiProp?.item, isSelectItem(item) && item.ui?.item, isSelectItem(item) && item.class] })"
+                  :class="ui.item({ class: [props.ui?.item, isSelectItem(item) && item.ui?.item, isSelectItem(item) && item.class] })"
                   :disabled="isSelectItem(item) && item.disabled"
                   :value="isSelectItem(item) ? get(item, props.valueKey) : item"
                   @select="isSelectItem(item) && item.onSelect?.($event)"
                 >
                   <slot name="item" :item="item" :index="index" :ui="ui">
                     <slot name="item-leading" :item="item" :index="index" :ui="ui">
-                      <UIcon v-if="isSelectItem(item) && item.icon" :name="item.icon" data-slot="itemLeadingIcon" :class="ui.itemLeadingIcon({ class: [uiProp?.itemLeadingIcon, item.ui?.itemLeadingIcon] })" />
-                      <UAvatar v-else-if="isSelectItem(item) && item.avatar" :size="item.ui?.itemLeadingAvatarSize || uiProp?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()" v-bind="item.avatar" data-slot="itemLeadingAvatar" :class="ui.itemLeadingAvatar({ class: [uiProp?.itemLeadingAvatar, item.ui?.itemLeadingAvatar] })" />
+                      <UIcon v-if="isSelectItem(item) && item.icon" :name="item.icon" data-slot="itemLeadingIcon" :class="ui.itemLeadingIcon({ class: [props.ui?.itemLeadingIcon, item.ui?.itemLeadingIcon] })" />
+                      <UAvatar v-else-if="isSelectItem(item) && item.avatar" :size="item.ui?.itemLeadingAvatarSize || props.ui?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()" v-bind="item.avatar" data-slot="itemLeadingAvatar" :class="ui.itemLeadingAvatar({ class: [props.ui?.itemLeadingAvatar, item.ui?.itemLeadingAvatar] })" />
                       <UChip
                         v-else-if="isSelectItem(item) && item.chip"
-                        :size="item.ui?.itemLeadingChipSize || uiProp?.itemLeadingChipSize || ui.itemLeadingChipSize()"
+                        :size="item.ui?.itemLeadingChipSize || props.ui?.itemLeadingChipSize || ui.itemLeadingChipSize()"
                         inset
                         standalone
                         v-bind="item.chip"
                         data-slot="itemLeadingChip"
-                        :class="ui.itemLeadingChip({ class: [uiProp?.itemLeadingChip, item.ui?.itemLeadingChip] })"
+                        :class="ui.itemLeadingChip({ class: [props.ui?.itemLeadingChip, item.ui?.itemLeadingChip] })"
                       />
                     </slot>
 
-                    <span data-slot="itemWrapper" :class="ui.itemWrapper({ class: [uiProp?.itemWrapper, isSelectItem(item) && item.ui?.itemWrapper] })">
-                      <SelectItemText data-slot="itemLabel" :class="ui.itemLabel({ class: [uiProp?.itemLabel, isSelectItem(item) && item.ui?.itemLabel] })">
+                    <span data-slot="itemWrapper" :class="ui.itemWrapper({ class: [props.ui?.itemWrapper, isSelectItem(item) && item.ui?.itemWrapper] })">
+                      <SelectItemText data-slot="itemLabel" :class="ui.itemLabel({ class: [props.ui?.itemLabel, isSelectItem(item) && item.ui?.itemLabel] })">
                         <slot name="item-label" :item="item" :index="index">
                           {{ isSelectItem(item) ? get(item, props.labelKey) : item }}
                         </slot>
                       </SelectItemText>
 
-                      <span v-if="isSelectItem(item) && (get(item, props.descriptionKey) || !!slots['item-description'])" data-slot="itemDescription" :class="ui.itemDescription({ class: [uiProp?.itemDescription, isSelectItem(item) && item.ui?.itemDescription] })">
+                      <span v-if="isSelectItem(item) && (get(item, props.descriptionKey) || !!slots['item-description'])" data-slot="itemDescription" :class="ui.itemDescription({ class: [props.ui?.itemDescription, isSelectItem(item) && item.ui?.itemDescription] })">
                         <slot name="item-description" :item="item" :index="index">
                           {{ get(item, props.descriptionKey) }}
                         </slot>
                       </span>
                     </span>
 
-                    <span data-slot="itemTrailing" :class="ui.itemTrailing({ class: [uiProp?.itemTrailing, isSelectItem(item) && item.ui?.itemTrailing] })">
+                    <span data-slot="itemTrailing" :class="ui.itemTrailing({ class: [props.ui?.itemTrailing, isSelectItem(item) && item.ui?.itemTrailing] })">
                       <slot name="item-trailing" :item="item" :index="index" :ui="ui" />
 
                       <SelectItemIndicator as-child>
-                        <UIcon :name="selectedIcon || appConfig.ui.icons.check" data-slot="itemTrailingIcon" :class="ui.itemTrailingIcon({ class: [uiProp?.itemTrailingIcon, isSelectItem(item) && item.ui?.itemTrailingIcon] })" />
+                        <UIcon :name="props.selectedIcon || appConfig.ui.icons.check" data-slot="itemTrailingIcon" :class="ui.itemTrailingIcon({ class: [props.ui?.itemTrailingIcon, isSelectItem(item) && item.ui?.itemTrailingIcon] })" />
                       </SelectItemIndicator>
                     </span>
                   </slot>
@@ -267,7 +265,7 @@ defineExpose({
 
           <slot name="content-bottom" />
 
-          <SelectArrow v-if="!!arrow" v-bind="arrowProps" data-slot="arrow" :class="ui.arrow({ class: uiProp?.arrow })" />
+          <SelectArrow v-if="!!props.arrow" v-bind="arrowProps" data-slot="arrow" :class="ui.arrow({ class: props.ui?.arrow })" />
         </SelectContent>
       </FieldGroupReset>
     </SelectPortal>

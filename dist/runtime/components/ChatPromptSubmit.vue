@@ -4,16 +4,16 @@ import theme from "#build/ui/chat-prompt-submit";
 
 <script setup>
 import { computed } from "vue";
-import { useForwardProps } from "reka-ui";
 import { reactiveOmit } from "@vueuse/core";
 import { useAppConfig } from "#imports";
-import { useComponentUI } from "../composables/useComponentUI";
+import { useComponentProps } from "../composables/useComponentProps";
+import { useForwardProps } from "../composables/useForwardProps";
 import { useLocale } from "../composables/useLocale";
 import { transformUI } from "../utils";
 import { tv } from "../utils/tv";
 import UButton from "./Button.vue";
 defineOptions({ inheritAttrs: false });
-const props = defineProps({
+const _props = defineProps({
   status: { type: String, required: false, default: "ready" },
   icon: { type: null, required: false },
   color: { type: null, required: false },
@@ -52,9 +52,9 @@ const props = defineProps({
 });
 const emits = defineEmits(["stop", "reload"]);
 const slots = defineSlots();
+const props = useComponentProps("chatPromptSubmit", _props);
 const { t } = useLocale();
 const appConfig = useAppConfig();
-const uiProp = useComponentUI("chatPromptSubmit", props);
 const buttonProps = useForwardProps(reactiveOmit(props, "icon", "color", "variant", "status", "disabled", "streamingIcon", "streamingColor", "streamingVariant", "submittedIcon", "submittedColor", "submittedVariant", "errorIcon", "errorColor", "errorVariant", "class", "ui"));
 const disabled = computed(() => props.status === "ready" ? props.disabled : false);
 const statusButtonProps = computed(() => ({
@@ -101,8 +101,8 @@ const ui = computed(() => tv({ extend: tv(theme), ...appConfig.ui?.chatPromptSub
   'aria-label': t('chatPromptSubmit.label'),
   ...$attrs
 }"
-    :class="ui.base({ class: [uiProp?.base, props.class] })"
-    :ui="transformUI(ui, uiProp)"
+    :class="ui.base({ class: [props.ui?.base, props.class] })"
+    :ui="transformUI(ui, props.ui)"
   >
     <template v-for="(_, name) in slots" #[name]="slotData">
       <slot :name="name" v-bind="slotData" />

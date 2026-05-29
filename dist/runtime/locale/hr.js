@@ -53,6 +53,7 @@ export default defineLocale({
     },
     contentSearch: {
       links: "Poveznice",
+      search: "Rezultati",
       theme: "Tema"
     },
     contentSearchButton: {
@@ -97,6 +98,11 @@ export default defineLocale({
     inputNumber: {
       decrement: "Smanji",
       increment: "Pove\u0107aj"
+    },
+    listbox: {
+      noData: "Nema podataka",
+      noMatch: "Nema odgovaraju\u0107ih podataka",
+      search: "Pretra\u017Eivanje\u2026"
     },
     modal: {
       close: "Zatvori"

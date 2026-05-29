@@ -4,17 +4,18 @@ import theme from "#build/ui/tree";
 
 <script setup>
 import { computed, toRef, useTemplateRef } from "vue";
-import { TreeRoot, TreeItem, TreeVirtualizer, useForwardPropsEmits } from "reka-ui";
+import { TreeRoot, TreeItem, TreeVirtualizer } from "reka-ui";
+import { useForwardProps } from "../composables/useForwardProps";
 import { reactivePick, createReusableTemplate } from "@vueuse/core";
 import { defu } from "defu";
 import { useAppConfig } from "#imports";
-import { useComponentUI } from "../composables/useComponentUI";
+import { useComponentProps } from "../composables/useComponentProps";
 import { get } from "../utils";
 import { getEstimateSize } from "../utils/virtualizer";
 import { tv } from "../utils/tv";
 import UIcon from "./Icon.vue";
 defineOptions({ inheritAttrs: false });
-const props = defineProps({
+const _props = defineProps({
   as: { type: null, required: false },
   color: { type: null, required: false },
   size: { type: null, required: false },
@@ -42,9 +43,9 @@ const props = defineProps({
 });
 const emits = defineEmits(["update:modelValue", "update:expanded"]);
 const slots = defineSlots();
+const props = useComponentProps("tree", _props);
 const appConfig = useAppConfig();
-const uiProp = useComponentUI("tree", props);
-const rootProps = useForwardPropsEmits(reactivePick(props, "items", "multiple", "expanded", "disabled", "propagateSelect", "bubbleSelect"), emits);
+const rootProps = useForwardProps(reactivePick(props, "items", "multiple", "expanded", "disabled", "propagateSelect", "bubbleSelect"), emits);
 const as = computed(() => {
   if (typeof props.as === "string" || typeof props.as?.render === "function") {
     return { root: props.as, link: "button" };
@@ -120,7 +121,7 @@ defineExpose({
   <DefineItemTemplate v-slot="{ item, index, level }">
     <li
       role="presentation"
-      :class="!!nested && level > 1 ? ui.itemWithChildren({ class: [uiProp?.itemWithChildren, item.ui?.itemWithChildren] }) : ui.item({ class: [uiProp?.item, item.ui?.item] })"
+      :class="!!nested && level > 1 ? ui.itemWithChildren({ class: [props.ui?.itemWithChildren, item.ui?.itemWithChildren] }) : ui.item({ class: [props.ui?.item, item.ui?.item] })"
     >
       <TreeItem
         v-slot="{ isExpanded, isSelected, isIndeterminate, handleSelect, handleToggle }"
@@ -138,9 +139,9 @@ defineExpose({
           <component
             :is="as.link"
             :type="as.link === 'button' ? 'button' : void 0"
-            :disabled="item.disabled || disabled"
+            :disabled="item.disabled || props.disabled"
             data-slot="link"
-            :class="ui.link({ class: [uiProp?.link, item.ui?.link, item.class], selected: isSelected, disabled: item.disabled || disabled })"
+            :class="ui.link({ class: [props.ui?.link, item.ui?.link, item.class], selected: isSelected, disabled: item.disabled || props.disabled })"
             :style="!nested && level > 1 ? { paddingLeft: flattenedPaddingFormula(level) } : void 0"
           >
             <slot
@@ -157,20 +158,20 @@ defineExpose({
                   v-if="item.icon"
                   :name="item.icon"
                   data-slot="linkLeadingIcon"
-                  :class="ui.linkLeadingIcon({ class: [uiProp?.linkLeadingIcon, item.ui?.linkLeadingIcon] })"
+                  :class="ui.linkLeadingIcon({ class: [props.ui?.linkLeadingIcon, item.ui?.linkLeadingIcon] })"
                 />
                 <UIcon
                   v-else-if="item.children?.length"
-                  :name="isExpanded ? expandedIcon ?? appConfig.ui.icons.folderOpen : collapsedIcon ?? appConfig.ui.icons.folder"
+                  :name="isExpanded ? props.expandedIcon ?? appConfig.ui.icons.folderOpen : props.collapsedIcon ?? appConfig.ui.icons.folder"
                   data-slot="linkLeadingIcon"
-                  :class="ui.linkLeadingIcon({ class: [uiProp?.linkLeadingIcon, item.ui?.linkLeadingIcon] })"
+                  :class="ui.linkLeadingIcon({ class: [props.ui?.linkLeadingIcon, item.ui?.linkLeadingIcon] })"
                 />
               </slot>
 
               <span
                 v-if="getItemLabel(item) || !!slots[item.slot ? `${item.slot}-label` : 'item-label']"
                 data-slot="linkLabel"
-                :class="ui.linkLabel({ class: [uiProp?.linkLabel, item.ui?.linkLabel] })"
+                :class="ui.linkLabel({ class: [props.ui?.linkLabel, item.ui?.linkLabel] })"
               >
                 <slot
                   :name="item.slot ? `${item.slot}-label` : 'item-label'"
@@ -184,7 +185,7 @@ defineExpose({
               <span
                 v-if="item.trailingIcon || item.children?.length || !!slots[item.slot ? `${item.slot}-trailing` : 'item-trailing']"
                 data-slot="linkTrailing"
-                :class="ui.linkTrailing({ class: [uiProp?.linkTrailing, item.ui?.linkTrailing] })"
+                :class="ui.linkTrailing({ class: [props.ui?.linkTrailing, item.ui?.linkTrailing] })"
               >
                 <slot
                   :name="item.slot ? `${item.slot}-trailing` : 'item-trailing'"
@@ -195,13 +196,13 @@ defineExpose({
                     v-if="item.trailingIcon"
                     :name="item.trailingIcon"
                     data-slot="linkTrailingIcon"
-                    :class="ui.linkTrailingIcon({ class: [uiProp?.linkTrailingIcon, item.ui?.linkTrailingIcon] })"
+                    :class="ui.linkTrailingIcon({ class: [props.ui?.linkTrailingIcon, item.ui?.linkTrailingIcon] })"
                   />
                   <UIcon
                     v-else-if="item.children?.length"
-                    :name="trailingIcon ?? appConfig.ui.icons.chevronDown"
+                    :name="props.trailingIcon ?? appConfig.ui.icons.chevronDown"
                     data-slot="linkTrailingIcon"
-                    :class="ui.linkTrailingIcon({ class: [uiProp?.linkTrailingIcon, item.ui?.linkTrailingIcon] })"
+                    :class="ui.linkTrailingIcon({ class: [props.ui?.linkTrailingIcon, item.ui?.linkTrailingIcon] })"
                   />
                 </slot>
               </span>
@@ -213,7 +214,7 @@ defineExpose({
           v-if="nested && item.children?.length && isExpanded"
           role="group"
           data-slot="listWithChildren"
-          :class="ui.listWithChildren({ class: [uiProp?.listWithChildren, item.ui?.listWithChildren] })"
+          :class="ui.listWithChildren({ class: [props.ui?.listWithChildren, item.ui?.listWithChildren] })"
         >
           <ReuseTreeTemplate :items="item.children" :level="level + 1" />
         </ul>
@@ -230,16 +231,16 @@ defineExpose({
     v-slot="{ flattenItems }"
     v-bind="{ ...rootProps, ...$attrs }"
     :as="as.root"
-    :model-value="modelValue"
-    :default-value="defaultValue"
+    :model-value="props.modelValue"
+    :default-value="props.defaultValue"
     data-slot="root"
-    :class="ui.root({ class: [uiProp?.root, props.class] })"
+    :class="ui.root({ class: [props.ui?.root, props.class] })"
     :get-key="getItemKey"
     :default-expanded="defaultExpanded"
-    :selection-behavior="selectionBehavior"
+    :selection-behavior="props.selectionBehavior"
   >
     <TreeVirtualizer
-      v-if="!!virtualize"
+      v-if="!!props.virtualize"
       v-slot="{ item, virtualItem }"
       :text-content="(item2) => getItemLabel(item2.value)"
       v-bind="virtualizerProps"
@@ -257,6 +258,6 @@ defineExpose({
       />
     </template>
 
-    <ReuseTreeTemplate v-else :items="items" :level="1" />
+    <ReuseTreeTemplate v-else :items="props.items" :level="1" />
   </TreeRoot>
 </template>

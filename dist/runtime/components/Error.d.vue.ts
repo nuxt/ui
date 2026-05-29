@@ -2,7 +2,7 @@ import type { VNode } from 'vue';
 import type { AppConfig } from '@nuxt/schema';
 import type { NuxtError } from '#app';
 import theme from '#build/ui/error';
-import type { ButtonProps } from '../types';
+import type { ButtonProps, IconProps } from '../types';
 import type { ComponentConfig } from '../types/tv';
 type Error = ComponentConfig<typeof theme, AppConfig, 'error'>;
 export interface ErrorProps {
@@ -11,6 +11,11 @@ export interface ErrorProps {
      * @defaultValue 'main'
      */
     as?: any;
+    /**
+     * The icon displayed above the status code.
+     * @IconifyIcon
+     */
+    icon?: IconProps['name'];
     error?: Partial<NuxtError & {
         message: string;
     }>;
@@ -30,6 +35,9 @@ export interface ErrorProps {
 }
 export interface ErrorSlots {
     default?(props?: {}): VNode[];
+    leading?(props: {
+        ui: Error['ui'];
+    }): VNode[];
     statusCode?(props?: {}): VNode[];
     statusMessage?(props?: {}): VNode[];
     message?(props?: {}): VNode[];

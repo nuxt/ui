@@ -7,7 +7,7 @@ import { ref, computed, toRef, useId, watch } from "vue";
 import { defu } from "defu";
 import { createReusableTemplate } from "@vueuse/core";
 import { useAppConfig, useRuntimeHook, useRoute } from "#imports";
-import { useComponentUI } from "../composables/useComponentUI";
+import { useComponentProps } from "../composables/useComponentProps";
 import { useResizable } from "../composables/useResizable";
 import { useLocale } from "../composables/useLocale";
 import { useDashboard } from "../utils/dashboard";
@@ -18,7 +18,7 @@ import USlideover from "./Slideover.vue";
 import UModal from "./Modal.vue";
 import UDrawer from "./Drawer.vue";
 defineOptions({ inheritAttrs: false });
-const props = defineProps({
+const _props = defineProps({
   mode: { type: null, required: false, default: "slideover" },
   menu: { type: null, required: false },
   toggle: { type: [Boolean, Object], required: false, default: true },
@@ -36,12 +36,12 @@ const props = defineProps({
   collapsedSize: { type: Number, required: false, default: 0 }
 });
 const slots = defineSlots();
+const props = useComponentProps("dashboardSidebar", _props);
 const open = defineModel("open", { type: Boolean, ...{ default: false } });
 const collapsed = defineModel("collapsed", { type: Boolean, ...{ default: false } });
 const route = useRoute();
 const { t } = useLocale();
 const appConfig = useAppConfig();
-const uiProp = useComponentUI("dashboardSidebar", props);
 const dashboardContext = useDashboard({
   storageKey: "dashboard",
   unit: "%",
@@ -82,11 +82,11 @@ function toggleOpen() {
   <DefineToggleTemplate>
     <slot name="toggle" :open="open" :toggle="toggleOpen" :ui="ui">
       <UDashboardSidebarToggle
-        v-if="toggle"
-        v-bind="typeof toggle === 'object' ? toggle : {}"
-        :side="toggleSide"
+        v-if="props.toggle"
+        v-bind="typeof props.toggle === 'object' ? props.toggle : {}"
+        :side="props.toggleSide"
         data-slot="toggle"
-        :class="ui.toggle({ class: uiProp?.toggle, toggleSide })"
+        :class="ui.toggle({ class: props.ui?.toggle, toggleSide: props.toggleSide })"
       />
     </slot>
   </DefineToggleTemplate>
@@ -94,10 +94,10 @@ function toggleOpen() {
   <DefineResizeHandleTemplate>
     <slot name="resize-handle" :on-mouse-down="onMouseDown" :on-touch-start="onTouchStart" :on-double-click="onDoubleClick" :ui="ui">
       <UDashboardResizeHandle
-        v-if="resizable"
+        v-if="props.resizable"
         :aria-controls="id"
         data-slot="handle"
-        :class="ui.handle({ class: uiProp?.handle })"
+        :class="ui.handle({ class: props.ui?.handle })"
         @mousedown="onMouseDown"
         @touchstart="onTouchStart"
         @dblclick="onDoubleClick"
@@ -105,7 +105,7 @@ function toggleOpen() {
     </slot>
   </DefineResizeHandleTemplate>
 
-  <ReuseResizeHandleTemplate v-if="side === 'right'" />
+  <ReuseResizeHandleTemplate v-if="props.side === 'right'" />
 
   <div
     :id="id"
@@ -114,23 +114,23 @@ function toggleOpen() {
     :data-collapsed="isCollapsed"
     :data-dragging="isDragging"
     data-slot="root"
-    :class="ui.root({ class: [uiProp?.root, props.class] })"
+    :class="ui.root({ class: [props.ui?.root, props.class] })"
     :style="{ '--width': `${size || 0}${dashboardContext.unit}` }"
   >
-    <div v-if="!!slots.header" data-slot="header" :class="ui.header({ class: uiProp?.header })">
+    <div v-if="!!slots.header" data-slot="header" :class="ui.header({ class: props.ui?.header })">
       <slot name="header" :collapsed="isCollapsed" :collapse="collapse" />
     </div>
 
-    <div data-slot="body" :class="ui.body({ class: uiProp?.body })">
+    <div data-slot="body" :class="ui.body({ class: props.ui?.body })">
       <slot :collapsed="isCollapsed" :collapse="collapse" />
     </div>
 
-    <div v-if="!!slots.footer" data-slot="footer" :class="ui.footer({ class: uiProp?.footer })">
+    <div v-if="!!slots.footer" data-slot="footer" :class="ui.footer({ class: props.ui?.footer })">
       <slot name="footer" :collapsed="isCollapsed" :collapse="collapse" />
     </div>
   </div>
 
-  <ReuseResizeHandleTemplate v-if="side === 'left'" />
+  <ReuseResizeHandleTemplate v-if="props.side === 'left'" />
 
   <Menu
     v-model:open="open"
@@ -138,27 +138,27 @@ function toggleOpen() {
     :description="t('dashboardSidebar.description')"
     v-bind="menuProps"
     :ui="{
-  overlay: ui.overlay({ class: uiProp?.overlay }),
-  content: ui.content({ class: uiProp?.content })
+  overlay: ui.overlay({ class: props.ui?.overlay }),
+  content: ui.content({ class: props.ui?.content })
 }"
   >
     <template #content="contentData">
       <slot name="content" v-bind="contentData">
-        <div v-if="!!slots.header || mode !== 'drawer'" data-slot="header" :class="ui.header({ class: uiProp?.header, menu: true })">
-          <ReuseToggleTemplate v-if="mode !== 'drawer' && toggleSide === 'left'" />
+        <div v-if="!!slots.header || props.mode !== 'drawer'" data-slot="header" :class="ui.header({ class: props.ui?.header, menu: true })">
+          <ReuseToggleTemplate v-if="props.mode !== 'drawer' && props.toggleSide === 'left'" />
 
           <slot name="header" :collapsed="false" :collapse="() => {
 }" />
 
-          <ReuseToggleTemplate v-if="mode !== 'drawer' && toggleSide === 'right'" />
+          <ReuseToggleTemplate v-if="props.mode !== 'drawer' && props.toggleSide === 'right'" />
         </div>
 
-        <div data-slot="body" :class="ui.body({ class: uiProp?.body, menu: true })">
+        <div data-slot="body" :class="ui.body({ class: props.ui?.body, menu: true })">
           <slot :collapsed="false" :collapse="() => {
 }" />
         </div>
 
-        <div v-if="!!slots.footer" data-slot="footer" :class="ui.footer({ class: uiProp?.footer, menu: true })">
+        <div v-if="!!slots.footer" data-slot="footer" :class="ui.footer({ class: props.ui?.footer, menu: true })">
           <slot name="footer" :collapsed="false" :collapse="() => {
 }" />
         </div>

@@ -53,6 +53,7 @@ export default defineLocale({
     },
     contentSearch: {
       links: "Tenglar",
+      search: "Ni\xF0urst\xF6\xF0ur",
       theme: "\xDEema"
     },
     contentSearchButton: {
@@ -97,6 +98,11 @@ export default defineLocale({
     inputNumber: {
       decrement: "Minnka",
       increment: "Auka"
+    },
+    listbox: {
+      noData: "Engin g\xF6gn",
+      noMatch: "Engin g\xF6gn fundust",
+      search: "Leita\u2026"
     },
     modal: {
       close: "Loka"

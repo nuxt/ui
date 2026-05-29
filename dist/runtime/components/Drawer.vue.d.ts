@@ -75,9 +75,9 @@ declare const __VLS_export: __VLS_WithSlots<import("vue").DefineComponent<Drawer
     "onUpdate:activeSnapPoint"?: ((val: string | number) => any) | undefined;
     onAnimationEnd?: ((open: boolean) => any) | undefined;
 }>, {
-    overlay: boolean;
     modal: boolean;
     portal: boolean | string | HTMLElement;
+    overlay: boolean;
     direction: import("vaul-vue").DrawerDirection;
     handle: boolean;
     dismissible: boolean;

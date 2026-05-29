@@ -52,6 +52,7 @@ export default defineLocale({
     },
     contentSearch: {
       links: "Links",
+      search: "Results",
       theme: "Theme"
     },
     contentSearchButton: {
@@ -97,6 +98,11 @@ export default defineLocale({
       decrement: "Decrement",
       increment: "Increment"
     },
+    listbox: {
+      noData: "No data",
+      noMatch: "No matching data",
+      search: "Search\u2026"
+    },
     modal: {
       close: "Close"
     },
@@ -123,7 +129,7 @@ export default defineLocale({
       }
     },
     chatReasoning: {
-      thinking: "Thinking...",
+      thinking: "Thinking\u2026",
       thought: "Thought",
       thoughtFor: "Thought for {duration}"
     },

@@ -53,6 +53,7 @@ export default defineLocale({
     },
     contentSearch: {
       links: "Ligaz\xF3ns",
+      search: "Resultados",
       theme: "Tema"
     },
     contentSearchButton: {
@@ -97,6 +98,11 @@ export default defineLocale({
     inputNumber: {
       decrement: "Diminu\xEDr",
       increment: "Aumentar"
+    },
+    listbox: {
+      noData: "Sen datos",
+      noMatch: "Non hai datos coincidentes",
+      search: "Buscar\u2026"
     },
     modal: {
       close: "Pechar"

@@ -98,10 +98,10 @@ declare const __VLS_export: __VLS_WithSlots<import("vue").DefineComponent<ModalP
     "onClose:prevent"?: (() => any) | undefined;
 }>, {
     close: boolean | Omit<ButtonProps, LinkPropsKeys>;
-    transition: boolean;
-    overlay: boolean;
     modal: boolean;
+    transition: boolean;
     portal: boolean | string | HTMLElement;
+    overlay: boolean;
     dismissible: boolean;
 }, {}, {}, {}, string, import("vue").ComponentProvideOptions, false, {}, any>, ModalSlots>;
 type __VLS_WithSlots<T, S> = T & {

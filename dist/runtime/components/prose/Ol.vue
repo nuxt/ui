@@ -5,20 +5,20 @@ import theme from "#build/ui/prose/ol";
 <script setup>
 import { computed } from "vue";
 import { useAppConfig } from "#imports";
-import { useComponentUI } from "../../composables/useComponentUI";
+import { useComponentProps } from "../../composables/useComponentProps";
 import { tv } from "../../utils/tv";
-const props = defineProps({
+const _props = defineProps({
   class: { type: null, required: false },
   ui: { type: Object, required: false }
 });
 defineSlots();
+const props = useComponentProps("prose.ol", _props);
 const appConfig = useAppConfig();
-const uiProp = useComponentUI("prose.ol", props);
 const ui = computed(() => tv({ extend: tv(theme), ...appConfig.ui?.prose?.ol || {} }));
 </script>
 
 <template>
-  <ol :class="ui({ class: [uiProp?.base, props.class] })">
+  <ol :class="ui({ class: [props.ui?.base, props.class] })">
     <slot />
   </ol>
 </template>

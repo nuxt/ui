@@ -20,6 +20,8 @@ export interface SwitchProps<T = boolean> extends Pick<SwitchRootProps<T>, 'disa
      * @defaultValue 'md'
      */
     size?: Switch['variants']['size'];
+    /** Highlight the ring color like a focus state. */
+    highlight?: boolean;
     /** When `true`, the loading icon will be displayed. */
     loading?: boolean;
     /**

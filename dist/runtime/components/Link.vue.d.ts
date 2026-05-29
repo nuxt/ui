@@ -76,13 +76,22 @@ export interface LinkProps extends NuxtLinkProps, /** @vue-ignore */ Omit<Button
     custom?: boolean;
     /** When `true`, only styles from `class`, `activeClass`, and `inactiveClass` will be applied. */
     raw?: boolean;
+    /**
+     * Control i18n auto-localization when `@nuxtjs/i18n` is installed.
+     * - `undefined` / `true` (default): auto-localizes to the current locale using `$localePath`.
+     *   Paths already carrying a locale prefix (from e.g. `switchLocalePath()`) are detected
+     *   and left untouched to prevent double-prefixing.
+     * - `false`: explicitly disables auto-localization.
+     * - `string`: localizes to a specific locale (e.g. `'fr'`).
+     */
+    locale?: boolean | string;
     class?: any;
 }
 /**
  * Link-related props that can be omitted from ButtonProps when link functionality is not needed.
  * Use this with `Omit<ButtonProps, LinkPropsKeys>` in components where buttons should not act as links.
  */
-export type LinkPropsKeys = 'to' | 'href' | 'target' | 'rel' | 'noRel' | 'external' | 'prefetch' | 'prefetchOn' | 'prefetchedClass' | 'noPrefetch' | 'trailingSlash' | 'replace' | 'ariaCurrentValue' | 'active' | 'activeClass' | 'exact' | 'exactQuery' | 'exactHash' | 'inactiveClass' | 'download' | 'ping' | 'referrerpolicy' | 'hreflang' | 'media';
+export type LinkPropsKeys = 'to' | 'href' | 'target' | 'rel' | 'noRel' | 'external' | 'prefetch' | 'prefetchOn' | 'prefetchedClass' | 'noPrefetch' | 'trailingSlash' | 'replace' | 'ariaCurrentValue' | 'active' | 'activeClass' | 'exact' | 'exactQuery' | 'exactHash' | 'inactiveClass' | 'locale' | 'download' | 'ping' | 'referrerpolicy' | 'hreflang' | 'media';
 export interface LinkSlots {
     default?(props: {
         active: boolean;
@@ -91,9 +100,9 @@ export interface LinkSlots {
 declare const _default: typeof __VLS_export;
 export default _default;
 declare const __VLS_export: __VLS_WithSlots<import("vue").DefineComponent<LinkProps, {}, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").PublicProps, Readonly<LinkProps> & Readonly<{}>, {
-    active: boolean;
-    as: any;
     type: "reset" | "submit" | "button";
+    as: any;
+    active: boolean;
     ariaCurrentValue: "page" | "step" | "location" | "date" | "time" | "true" | "false";
 }, {}, {}, {}, string, import("vue").ComponentProvideOptions, false, {}, any>, LinkSlots>;
 type __VLS_WithSlots<T, S> = T & {

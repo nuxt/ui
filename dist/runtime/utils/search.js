@@ -41,7 +41,16 @@ function truncateHTMLFromStart(html, maxLength) {
   }
   return truncated;
 }
-export function highlight(item, searchTerm, forceKey, omitKeys) {
+export function sanitizeSnippet(snippet) {
+  const tagOpen = "\0markO\0";
+  const tagClose = "\0markC\0";
+  return escapeHTML(
+    snippet.replaceAll("<mark>", tagOpen).replaceAll("</mark>", tagClose)
+  ).replaceAll(tagOpen, "<mark>").replaceAll(tagClose, "</mark>");
+}
+export function highlight(item, searchTerm, forceKey, omitKeys, useTokenSearch) {
+  const tokens = useTokenSearch ? searchTerm.match(/[\p{L}\p{M}\p{N}_]+/gu) || [] : [];
+  const minTokenLength = tokens.length > 0 ? Math.min(...tokens.map((t) => t.length)) : searchTerm.length;
   function generateHighlightedText(value, indices = []) {
     value = value || "";
     let content = "";
@@ -51,7 +60,7 @@ export function highlight(item, searchTerm, forceKey, omitKeys) {
         return;
       }
       const lastIndiceNextIndex = region[1] + 1;
-      const isMatched = lastIndiceNextIndex - region[0] >= searchTerm.length;
+      const isMatched = lastIndiceNextIndex - region[0] >= minTokenLength;
       content += [
         sanitize(value.substring(nextUnhighlightedRegionStartingIndex, region[0])),
         isMatched && `<mark>`,

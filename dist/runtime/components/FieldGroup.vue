@@ -6,10 +6,10 @@ import theme from "#build/ui/field-group";
 import { provide, computed } from "vue";
 import { Primitive } from "reka-ui";
 import { useAppConfig } from "#imports";
-import { useComponentUI } from "../composables/useComponentUI";
+import { useComponentProps } from "../composables/useComponentProps";
 import { fieldGroupInjectionKey } from "../composables/useFieldGroup";
 import { tv } from "../utils/tv";
-const props = defineProps({
+const _props = defineProps({
   as: { type: null, required: false },
   size: { type: null, required: false },
   orientation: { type: null, required: false, default: "horizontal" },
@@ -17,8 +17,8 @@ const props = defineProps({
   ui: { type: Object, required: false }
 });
 defineSlots();
+const props = useComponentProps("fieldGroup", _props);
 const appConfig = useAppConfig();
-const uiProp = useComponentUI("fieldGroup", props);
 const ui = computed(() => tv({ extend: tv(theme), ...appConfig.ui?.fieldGroup || {} }));
 provide(fieldGroupInjectionKey, computed(() => ({
   orientation: props.orientation,
@@ -27,7 +27,7 @@ provide(fieldGroupInjectionKey, computed(() => ({
 </script>
 
 <template>
-  <Primitive :as="as" :data-orientation="orientation" :class="ui({ orientation, class: [uiProp?.base, props.class] })">
+  <Primitive :as="props.as" :data-orientation="props.orientation" :class="ui({ orientation: props.orientation, class: [props.ui?.base, props.class] })">
     <slot />
   </Primitive>
 </template>

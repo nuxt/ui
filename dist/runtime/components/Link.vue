@@ -26,6 +26,7 @@ const props = defineProps({
   inactiveClass: { type: String, required: false },
   custom: { type: Boolean, required: false },
   raw: { type: Boolean, required: false },
+  locale: { type: [Boolean, String], required: false },
   class: { type: null, required: false },
   to: { type: null, required: false },
   href: { type: null, required: false },
@@ -48,7 +49,7 @@ defineSlots();
 const route = useRoute();
 const appConfig = useAppConfig();
 const nuxtApp = useNuxtApp();
-const nuxtLinkProps = useForwardProps(reactiveOmit(props, "as", "type", "disabled", "active", "exact", "exactQuery", "exactHash", "activeClass", "inactiveClass", "to", "href", "raw", "custom", "class"));
+const nuxtLinkProps = useForwardProps(reactiveOmit(props, "as", "type", "disabled", "active", "exact", "exactQuery", "exactHash", "activeClass", "inactiveClass", "to", "href", "raw", "custom", "locale", "class"));
 const ui = computed(() => tv({
   extend: tv(theme),
   ...defu({
@@ -67,11 +68,19 @@ const to = computed(() => {
   if (props.external || hasProtocol(path, { acceptRelative: true })) {
     return path;
   }
-  const localePath = nuxtApp.$localePath;
-  if (localePath) {
-    return localePath(path);
+  if (props.locale === false) {
+    return path;
   }
-  return path;
+  const localePath = nuxtApp.$localePath;
+  if (!localePath) {
+    return path;
+  }
+  const i18n = nuxtApp.$i18n;
+  const codes = i18n?.localeCodes?.value;
+  if (codes?.length && new RegExp(`^/(${codes.join("|")})($|[/?#])`).test(path)) {
+    return path;
+  }
+  return localePath(path, typeof props.locale === "string" ? props.locale : void 0);
 });
 const isInternalLink = computed(() => {
   if (!to.value) return false;

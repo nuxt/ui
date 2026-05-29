@@ -57,8 +57,8 @@ declare const __VLS_export: __VLS_WithSlots<import("vue").DefineComponent<Progre
     "onUpdate:modelValue"?: ((value: string[] | undefined) => any) | undefined;
     "onUpdate:max"?: ((value: number) => any) | undefined;
 }>, {
-    modelValue: number | null;
     orientation: Progress["variants"]["orientation"];
+    modelValue: number | null;
     inverted: boolean;
 }, {}, {}, {}, string, import("vue").ComponentProvideOptions, false, {}, any>, ProgressSlots>;
 type __VLS_WithSlots<T, S> = T & {

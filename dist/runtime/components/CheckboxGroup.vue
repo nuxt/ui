@@ -4,15 +4,16 @@ import theme from "#build/ui/checkbox-group";
 
 <script setup>
 import { computed, useId } from "vue";
-import { CheckboxGroupRoot, useForwardProps, useForwardPropsEmits } from "reka-ui";
+import { CheckboxGroupRoot } from "reka-ui";
+import { useForwardProps } from "../composables/useForwardProps";
 import { reactivePick } from "@vueuse/core";
 import { useAppConfig } from "#imports";
-import { useComponentUI } from "../composables/useComponentUI";
+import { useComponentProps } from "../composables/useComponentProps";
 import { useFormField } from "../composables/useFormField";
 import { get, omit } from "../utils";
 import { tv } from "../utils/tv";
 import UCheckbox from "./Checkbox.vue";
-const props = defineProps({
+const _props = defineProps({
   as: { type: null, required: false },
   legend: { type: String, required: false },
   valueKey: { type: null, required: false, default: "value" },
@@ -31,23 +32,24 @@ const props = defineProps({
   name: { type: String, required: false },
   required: { type: Boolean, required: false },
   color: { type: null, required: false },
+  highlight: { type: Boolean, required: false },
   indicator: { type: null, required: false },
   icon: { type: null, required: false }
 });
 const emits = defineEmits(["change", "update:modelValue"]);
 const slots = defineSlots();
+const props = useComponentProps("checkboxGroup", _props);
 const appConfig = useAppConfig();
-const uiProp = useComponentUI("checkboxGroup", props);
-const rootProps = useForwardPropsEmits(reactivePick(props, "as", "modelValue", "defaultValue", "orientation", "loop", "required"), emits);
+const rootProps = useForwardProps(reactivePick(props, "as", "modelValue", "defaultValue", "orientation", "loop", "required"), emits);
 const checkboxProps = useForwardProps(reactivePick(props, "variant", "indicator", "icon"));
 const getProxySlots = () => omit(slots, ["legend"]);
-const { emitFormChange, emitFormInput, color, name, size, id: _id, disabled, ariaAttrs } = useFormField(props, { bind: false });
+const { emitFormChange, emitFormInput, color, highlight, name, size, id: _id, disabled, ariaAttrs } = useFormField(_props, { bind: false });
 const id = _id.value ?? useId();
 const ui = computed(() => tv({ extend: theme, ...appConfig.ui?.checkboxGroup || {} })({
-  size: size.value,
+  size: size.value ?? props.size,
   required: props.required,
   orientation: props.orientation,
-  color: props.color,
+  color: color.value ?? props.color,
   variant: props.variant,
   disabled: disabled.value
 }));
@@ -98,13 +100,13 @@ function onUpdate(value) {
     :name="name"
     :disabled="disabled"
     data-slot="root"
-    :class="ui.root({ class: [uiProp?.root, props.class] })"
+    :class="ui.root({ class: [props.ui?.root, props.class] })"
     @update:model-value="onUpdate"
   >
-    <fieldset data-slot="fieldset" :class="ui.fieldset({ class: uiProp?.fieldset })" v-bind="ariaAttrs">
-      <legend v-if="legend || !!slots.legend" data-slot="legend" :class="ui.legend({ class: uiProp?.legend })">
+    <fieldset data-slot="fieldset" :class="ui.fieldset({ class: props.ui?.fieldset })" v-bind="ariaAttrs">
+      <legend v-if="props.legend || !!slots.legend" data-slot="legend" :class="ui.legend({ class: props.ui?.legend })">
         <slot name="legend">
-          {{ legend }}
+          {{ props.legend }}
         </slot>
       </legend>
 
@@ -113,12 +115,13 @@ function onUpdate(value) {
         :key="item.value"
         v-bind="{ ...item, ...checkboxProps }"
         :color="color"
+        :highlight="highlight"
         :size="size"
         :name="name"
         :disabled="item.disabled || disabled"
-        :ui="{ ...uiProp ? omit(uiProp, ['root']) : void 0, ...item.ui || {} }"
+        :ui="{ ...props.ui ? omit(props.ui, ['root']) : void 0, ...item.ui || {} }"
         data-slot="item"
-        :class="ui.item({ class: [uiProp?.item, item.ui?.item, item.class], disabled: item.disabled || disabled })"
+        :class="ui.item({ class: [props.ui?.item, item.ui?.item, item.class], disabled: item.disabled || disabled })"
       >
         <template v-for="(_, name) in getProxySlots()" #[name]>
           <slot :name="name" :item="item" />

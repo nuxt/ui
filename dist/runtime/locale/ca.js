@@ -53,6 +53,7 @@ export default defineLocale({
     },
     contentSearch: {
       links: "Enlla\xE7os",
+      search: "Resultats",
       theme: "Tema"
     },
     contentSearchButton: {
@@ -97,6 +98,11 @@ export default defineLocale({
     inputNumber: {
       decrement: "Decrementar",
       increment: "Incrementar"
+    },
+    listbox: {
+      noData: "Sense dades",
+      noMatch: "No hi ha dades coincidents",
+      search: "Cerca\u2026"
     },
     modal: {
       close: "Tancar"

@@ -8,26 +8,28 @@ import { Primitive } from "reka-ui";
 import { useNuxtApp, useAppConfig } from "#imports";
 import { provideDashboardContext } from "../utils/dashboard";
 import { tv } from "../utils/tv";
-import { useComponentUI } from "../composables/useComponentUI";
-const props = defineProps({
+import { useComponentProps } from "../composables/useComponentProps";
+const _props = defineProps({
   as: { type: null, required: false },
   class: { type: null, required: false },
   ui: { type: Object, required: false },
   storage: { type: String, required: false, default: "cookie" },
   storageKey: { type: String, required: false, default: "dashboard" },
+  storageOptions: { type: Object, required: false },
   persistent: { type: Boolean, required: false, default: true },
   unit: { type: String, required: false, default: "%" }
 });
 defineSlots();
+const props = useComponentProps("dashboardGroup", _props);
 const nuxtApp = useNuxtApp();
 const appConfig = useAppConfig();
-const uiProp = useComponentUI("dashboardGroup", props);
 const ui = computed(() => tv({ extend: tv(theme), ...appConfig.ui?.dashboardGroup || {} }));
 const sidebarOpen = ref(false);
 const sidebarCollapsed = ref(false);
 provideDashboardContext({
   storage: props.storage,
   storageKey: props.storageKey,
+  storageOptions: props.storageOptions,
   persistent: props.persistent,
   unit: props.unit,
   sidebarOpen,
@@ -45,7 +47,7 @@ provideDashboardContext({
 </script>
 
 <template>
-  <Primitive :as="as" :class="ui({ class: [uiProp?.base, props.class] })">
+  <Primitive :as="props.as" :class="ui({ class: [props.ui?.base, props.class] })">
     <slot />
   </Primitive>
 </template>

@@ -62,8 +62,8 @@ export interface PageSectionSlots {
 declare const _default: typeof __VLS_export;
 export default _default;
 declare const __VLS_export: __VLS_WithSlots<import("vue").DefineComponent<PageSectionProps, {}, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").PublicProps, Readonly<PageSectionProps> & Readonly<{}>, {
-    orientation: PageSection["variants"]["orientation"];
     as: any;
+    orientation: PageSection["variants"]["orientation"];
 }, {}, {}, {}, string, import("vue").ComponentProvideOptions, false, {}, any>, PageSectionSlots>;
 type __VLS_WithSlots<T, S> = T & {
     new (): {

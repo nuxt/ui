@@ -4,14 +4,15 @@ import theme from "#build/ui/context-menu";
 
 <script setup>
 import { computed, toRef } from "vue";
-import { ContextMenuRoot, ContextMenuTrigger, useForwardPropsEmits } from "reka-ui";
+import { ContextMenuRoot, ContextMenuTrigger } from "reka-ui";
+import { useForwardProps } from "../composables/useForwardProps";
 import { reactivePick } from "@vueuse/core";
 import { useAppConfig } from "#imports";
-import { useComponentUI } from "../composables/useComponentUI";
+import { useComponentProps } from "../composables/useComponentProps";
 import { omit } from "../utils";
 import { tv } from "../utils/tv";
 import UContextMenuContent from "./ContextMenuContent.vue";
-const props = defineProps({
+const _props = defineProps({
   size: { type: null, required: false },
   items: { type: null, required: false },
   checkedIcon: { type: null, required: false },
@@ -29,9 +30,9 @@ const props = defineProps({
 });
 const emits = defineEmits(["update:open"]);
 const slots = defineSlots();
+const props = useComponentProps("contextMenu", _props);
 const appConfig = useAppConfig();
-const uiProp = useComponentUI("contextMenu", props);
-const rootProps = useForwardPropsEmits(reactivePick(props, "modal"), emits);
+const rootProps = useForwardProps(reactivePick(props, "modal"), emits);
 const contentProps = toRef(() => props.content);
 const getProxySlots = () => omit(slots, ["default"]);
 const ui = computed(() => tv({ extend: tv(theme), ...appConfig.ui?.contextMenu || {} })({
@@ -41,22 +42,22 @@ const ui = computed(() => tv({ extend: tv(theme), ...appConfig.ui?.contextMenu |
 
 <template>
   <ContextMenuRoot v-bind="rootProps">
-    <ContextMenuTrigger v-if="!!slots.default" as-child :disabled="disabled" :class="props.class">
+    <ContextMenuTrigger v-if="!!slots.default" as-child :disabled="props.disabled" :class="props.class">
       <slot />
     </ContextMenuTrigger>
 
     <UContextMenuContent
-      :class="ui.content({ class: [!slots.default && props.class, uiProp?.content] })"
+      :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })"
       :ui="ui"
-      :ui-override="uiProp"
+      :ui-override="props.ui"
       v-bind="contentProps"
-      :items="items"
-      :portal="portal"
-      :label-key="labelKey"
-      :description-key="descriptionKey"
-      :checked-icon="checkedIcon"
-      :loading-icon="loadingIcon"
-      :external-icon="externalIcon"
+      :items="props.items"
+      :portal="props.portal"
+      :label-key="props.labelKey"
+      :description-key="props.descriptionKey"
+      :checked-icon="props.checkedIcon"
+      :loading-icon="props.loadingIcon"
+      :external-icon="props.externalIcon"
     >
       <template v-for="(_, name) in getProxySlots()" #[name]="slotData">
         <slot :name="name" v-bind="slotData" />

@@ -5,13 +5,13 @@ import theme from "#build/ui/prose/collapsible";
 <script setup>
 import { computed } from "vue";
 import { useAppConfig } from "#imports";
-import { useComponentUI } from "../../composables/useComponentUI";
+import { useComponentProps } from "../../composables/useComponentProps";
 import { useLocale } from "../../composables/useLocale";
 import { transformUI } from "../../utils";
 import { tv } from "../../utils/tv";
 import UCollapsible from "../Collapsible.vue";
 import UIcon from "../Icon.vue";
-const props = defineProps({
+const _props = defineProps({
   icon: { type: null, required: false },
   name: { type: String, required: false },
   openText: { type: String, required: false },
@@ -20,19 +20,19 @@ const props = defineProps({
   ui: { type: Object, required: false }
 });
 defineSlots();
+const props = useComponentProps("prose.collapsible", _props);
 const { t } = useLocale();
 const appConfig = useAppConfig();
-const uiProp = useComponentUI("prose.collapsible", props);
 const ui = computed(() => tv({ extend: tv(theme), ...appConfig.ui?.prose?.collapsible || {} })());
 </script>
 
 <template>
-  <UCollapsible :unmount-on-hide="false" :class="props.class" :ui="transformUI(ui, uiProp)">
+  <UCollapsible :unmount-on-hide="false" :class="props.class" :ui="transformUI(ui, props.ui)">
     <template #default="{ open }">
-      <button :class="ui.trigger({ class: uiProp?.trigger })">
-        <UIcon :name="icon || appConfig.ui.icons.chevronDown" :class="ui.triggerIcon({ class: uiProp?.triggerIcon })" />
+      <button :class="ui.trigger({ class: props.ui?.trigger })">
+        <UIcon :name="props.icon || appConfig.ui.icons.chevronDown" :class="ui.triggerIcon({ class: props.ui?.triggerIcon })" />
 
-        <span :class="ui.triggerLabel({ class: uiProp?.triggerLabel })">
+        <span :class="ui.triggerLabel({ class: props.ui?.triggerLabel })">
           {{ open ? props.closeText || t("prose.collapsible.closeText") : props.openText || t("prose.collapsible.openText") }} {{ props.name || t("prose.collapsible.name") }}
         </span>
       </button>

@@ -53,6 +53,7 @@ export default defineLocale({
     },
     contentSearch: {
       links: "Ba\u011Flant\u0131lar",
+      search: "N\u0259tic\u0259l\u0259r",
       theme: "Tema"
     },
     contentSearchButton: {
@@ -97,6 +98,11 @@ export default defineLocale({
     inputNumber: {
       decrement: "Azalt",
       increment: "Art\u0131r"
+    },
+    listbox: {
+      noData: "M\u0259lumat yoxdur",
+      noMatch: "Uy\u011Fun m\u0259lumat tap\u0131lmad\u0131",
+      search: "Axtar\u2026"
     },
     modal: {
       close: "Ba\u011Fla"

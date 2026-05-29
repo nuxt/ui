@@ -4,11 +4,11 @@ import theme from "#build/ui/dashboard-search-button";
 
 <script setup>
 import { computed, toRef } from "vue";
-import { useForwardProps } from "reka-ui";
 import { defu } from "defu";
 import { reactiveOmit, createReusableTemplate } from "@vueuse/core";
 import { useAppConfig } from "#imports";
-import { useComponentUI } from "../composables/useComponentUI";
+import { useComponentProps } from "../composables/useComponentProps";
+import { useForwardProps } from "../composables/useForwardProps";
 import { useLocale } from "../composables/useLocale";
 import { useDashboard } from "../utils/dashboard";
 import { omit, transformUI } from "../utils";
@@ -17,7 +17,7 @@ import UButton from "./Button.vue";
 import UKbd from "./Kbd.vue";
 import UTooltip from "./Tooltip.vue";
 defineOptions({ inheritAttrs: false });
-const props = defineProps({
+const _props = defineProps({
   icon: { type: null, required: false },
   label: { type: String, required: false },
   color: { type: null, required: false, default: "neutral" },
@@ -48,13 +48,13 @@ const props = defineProps({
   viewTransition: { type: Boolean, required: false }
 });
 const slots = defineSlots();
+const props = useComponentProps("dashboardSearchButton", _props);
 const [DefineButtonTemplate, ReuseButtonTemplate] = createReusableTemplate();
 const getProxySlots = () => omit(slots, ["trailing"]);
 const buttonProps = useForwardProps(reactiveOmit(props, "icon", "label", "variant", "collapsed", "tooltip", "kbds", "class", "ui"));
 const tooltipProps = toRef(() => defu(typeof props.tooltip === "boolean" ? {} : props.tooltip, { delayDuration: 0, content: { side: "right" } }));
 const { t } = useLocale();
 const appConfig = useAppConfig();
-const uiProp = useComponentUI("dashboardSearchButton", props);
 const { toggleSearch } = useDashboard({ toggleSearch: () => {
 } });
 const ui = computed(() => tv({ extend: tv(theme), ...appConfig.ui?.dashboardSearchButton || {} })({
@@ -65,19 +65,19 @@ const ui = computed(() => tv({ extend: tv(theme), ...appConfig.ui?.dashboardSear
 <template>
   <DefineButtonTemplate>
     <UButton
-      :icon="icon || appConfig.ui.icons.search"
-      :label="label || t('dashboardSearchButton.label')"
-      :variant="variant || (collapsed ? 'ghost' : 'outline')"
+      :icon="props.icon || appConfig.ui.icons.search"
+      :label="props.label || t('dashboardSearchButton.label')"
+      :variant="props.variant || (props.collapsed ? 'ghost' : 'outline')"
       v-bind="{
   ...buttonProps,
-  ...collapsed ? {
+  ...props.collapsed ? {
     'square': true,
-    'aria-label': label || t('dashboardSearchButton.label')
+    'aria-label': props.label || t('dashboardSearchButton.label')
   } : {},
   ...$attrs
 }"
-      :class="ui.base({ class: [uiProp?.base, props.class] })"
-      :ui="transformUI(ui, uiProp)"
+      :class="ui.base({ class: [props.ui?.base, props.class] })"
+      :ui="transformUI(ui, props.ui)"
       @click="toggleSearch"
     >
       <template v-for="(_, name) in getProxySlots()" #[name]="slotData">
@@ -85,10 +85,10 @@ const ui = computed(() => tv({ extend: tv(theme), ...appConfig.ui?.dashboardSear
       </template>
 
       <template #trailing="{ ui: uiProxy }">
-        <span data-slot="trailing" :class="ui.trailing({ class: uiProp?.trailing })">
+        <span data-slot="trailing" :class="ui.trailing({ class: props.ui?.trailing })">
           <slot name="trailing" :ui="uiProxy">
-            <template v-if="kbds?.length">
-              <UKbd v-for="(kbd, index) in kbds" :key="index" variant="subtle" v-bind="typeof kbd === 'string' ? { value: kbd } : kbd" />
+            <template v-if="props.kbds?.length">
+              <UKbd v-for="(kbd, index) in props.kbds" :key="index" variant="subtle" v-bind="typeof kbd === 'string' ? { value: kbd } : kbd" />
             </template>
           </slot>
         </span>
@@ -96,7 +96,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...appConfig.ui?.dashboardSear
     </UButton>
   </DefineButtonTemplate>
 
-  <UTooltip v-if="collapsed && tooltip" :text="label || t('dashboardSearchButton.label')" v-bind="tooltipProps">
+  <UTooltip v-if="props.collapsed && props.tooltip" :text="props.label || t('dashboardSearchButton.label')" v-bind="tooltipProps">
     <ReuseButtonTemplate />
   </UTooltip>
   <ReuseButtonTemplate v-else />

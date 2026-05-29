@@ -4,7 +4,7 @@ import 'pathe';
 import 'unplugin';
 import 'defu';
 import '@tailwindcss/vite';
-import './shared/ui.DN1xpmfD.mjs';
+import './shared/ui.BjV8Ykyw.mjs';
 import '../dist/runtime/utils/index.js';
 import 'scule';
 import 'knitwork';

@@ -4,12 +4,13 @@ import theme from "#build/ui/editor-toolbar";
 
 <script setup>
 import { computed, inject } from "vue";
-import { Primitive, Separator, useForwardProps } from "reka-ui";
+import { Primitive, Separator } from "reka-ui";
 import { defu } from "defu";
 import { BubbleMenu, FloatingMenu } from "@tiptap/vue-3/menus";
 import { reactiveOmit } from "@vueuse/core";
 import { useAppConfig } from "#imports";
-import { useComponentUI } from "../composables/useComponentUI";
+import { useComponentProps } from "../composables/useComponentProps";
+import { useForwardProps } from "../composables/useForwardProps";
 import { isArrayOfArray, pick, omit } from "../utils";
 import { createHandlers } from "../utils/editor";
 import { tv } from "../utils/tv";
@@ -17,7 +18,7 @@ import UButton from "./Button.vue";
 import UDropdownMenu from "./DropdownMenu.vue";
 import UTooltip from "./Tooltip.vue";
 defineOptions({ inheritAttrs: false });
-const props = defineProps({
+const _props = defineProps({
   as: { type: null, required: false },
   color: { type: null, required: false, default: "neutral" },
   variant: { type: null, required: false, default: "ghost" },
@@ -38,8 +39,8 @@ const props = defineProps({
   options: { type: Object, required: false }
 });
 defineSlots();
+const props = useComponentProps("editorToolbar", _props);
 const appConfig = useAppConfig();
-const uiProp = useComponentUI("editorToolbar", props);
 const handlers = inject("editorHandlers", computed(() => createHandlers()));
 const Component = computed(() => {
   return {
@@ -177,9 +178,9 @@ function getDropdownItems(item) {
   <Primitive
     :as="Component"
     v-bind="Component !== 'template' ? {
-  editor,
+  editor: props.editor,
   tabindex: -1,
-  class: ui.root({ class: uiProp?.root }),
+  class: ui.root({ class: props.ui?.root }),
   ...rootProps,
   options,
   ...$attrs
@@ -187,9 +188,9 @@ function getDropdownItems(item) {
   ...$attrs
 }"
   >
-    <Primitive :as="as" role="toolbar" data-slot="base" :class="ui.base({ class: [uiProp?.base, props.class] })">
+    <Primitive :as="props.as" role="toolbar" data-slot="base" :class="ui.base({ class: [props.ui?.base, props.class] })">
       <template v-for="(group, groupIndex) in groups" :key="`group-${groupIndex}`">
-        <div role="group" data-slot="group" :class="ui.group({ class: uiProp?.group })">
+        <div role="group" data-slot="group" :class="ui.group({ class: props.ui?.group })">
           <template v-for="(item, index) in group" :key="`group-${groupIndex}-${index}`">
             <slot
               :name="item.slot || 'item'"
@@ -236,7 +237,7 @@ function getDropdownItems(item) {
         <Separator
           v-if="groupIndex < groups.length - 1"
           data-slot="separator"
-          :class="ui.separator({ class: uiProp?.separator })"
+          :class="ui.separator({ class: props.ui?.separator })"
           orientation="vertical"
         />
       </template>

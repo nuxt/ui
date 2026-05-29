@@ -10,6 +10,7 @@ export type ColorPickerProps = {
     as?: any;
     /**
      * Throttle time in ms for the color picker
+     * @defaultValue 50
      */
     throttle?: number;
     /**
@@ -18,6 +19,7 @@ export type ColorPickerProps = {
     disabled?: boolean;
     /**
      * The default value of the color picker
+     * @defaultValue '#FFFFFF'
      */
     defaultValue?: string;
     /**

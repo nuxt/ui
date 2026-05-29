@@ -12,14 +12,14 @@ export interface SeparatorProps extends Pick<_SeparatorProps, 'decorative'> {
      * @defaultValue 'div'
      */
     as?: any;
-    /** Display a label in the middle. */
+    /** Display a label on the separator. */
     label?: string;
     /**
-     * Display an icon in the middle.
+     * Display an icon on the separator.
      * @IconifyIcon
      */
     icon?: IconProps['name'];
-    /** Display an avatar in the middle. */
+    /** Display an avatar on the separator. */
     avatar?: AvatarProps;
     /**
      * @defaultValue 'neutral'
@@ -38,6 +38,11 @@ export interface SeparatorProps extends Pick<_SeparatorProps, 'decorative'> {
      * @defaultValue 'horizontal'
      */
     orientation?: Separator['variants']['orientation'];
+    /**
+     * The position of the content.
+     * @defaultValue 'center'
+     */
+    position?: Separator['variants']['position'];
     class?: any;
     ui?: Separator['slots'];
 }
@@ -49,6 +54,7 @@ export interface SeparatorSlots {
 declare const _default: typeof __VLS_export;
 export default _default;
 declare const __VLS_export: __VLS_WithSlots<import("vue").DefineComponent<SeparatorProps, {}, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").PublicProps, Readonly<SeparatorProps> & Readonly<{}>, {
+    position: Separator["variants"]["position"];
     orientation: Separator["variants"]["orientation"];
 }, {}, {}, {}, string, import("vue").ComponentProvideOptions, false, {}, any>, SeparatorSlots>;
 type __VLS_WithSlots<T, S> = T & {

@@ -59,8 +59,8 @@ export interface BlogPostSlots {
 declare const _default: typeof __VLS_export;
 export default _default;
 declare const __VLS_export: __VLS_WithSlots<import("vue").DefineComponent<BlogPostProps, {}, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").PublicProps, Readonly<BlogPostProps> & Readonly<{}>, {
-    orientation: BlogPost["variants"]["orientation"];
     as: any;
+    orientation: BlogPost["variants"]["orientation"];
 }, {}, {}, {}, string, import("vue").ComponentProvideOptions, false, {}, any>, BlogPostSlots>;
 type __VLS_WithSlots<T, S> = T & {
     new (): {

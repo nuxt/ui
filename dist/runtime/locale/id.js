@@ -53,6 +53,7 @@ export default defineLocale({
     },
     contentSearch: {
       links: "Tautan",
+      search: "Hasil",
       theme: "Tema"
     },
     contentSearchButton: {
@@ -97,6 +98,11 @@ export default defineLocale({
     inputNumber: {
       decrement: "Kurangi",
       increment: "Tambah"
+    },
+    listbox: {
+      noData: "Tidak ada data",
+      noMatch: "Tidak ada data yang cocok",
+      search: "Cari\u2026"
     },
     modal: {
       close: "Tutup"

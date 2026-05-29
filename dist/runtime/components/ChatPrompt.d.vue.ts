@@ -19,6 +19,12 @@ export interface ChatPromptProps extends Pick<TextareaProps, 'rows' | 'autofocus
      * @defaultValue 'outline'
      */
     variant?: ChatPrompt['variants']['variant'];
+    /**
+     * When `true`, pressing `Enter` submits and `Shift+Enter` inserts a newline.
+     * When `false`, pressing `Enter` inserts a newline and `Ctrl+Enter` / `Cmd+Enter` submits.
+     * @defaultValue true
+     */
+    submitOnEnter?: boolean;
     error?: Error;
     class?: any;
     ui?: ChatPrompt['slots'] & TextareaProps['ui'];
@@ -52,6 +58,7 @@ declare const __VLS_export: __VLS_WithSlots<import("vue").DefineComponent<ChatPr
     autofocus: boolean;
     rows: number;
     autoresize: boolean;
+    submitOnEnter: boolean;
 }, {}, {}, {}, string, import("vue").ComponentProvideOptions, false, {}, any>, ChatPromptSlots>;
 type __VLS_WithSlots<T, S> = T & {
     new (): {

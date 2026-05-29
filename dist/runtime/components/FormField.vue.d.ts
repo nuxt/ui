@@ -11,7 +11,7 @@ export interface FormFieldProps {
     as?: any;
     /** The name of the FormField. Also used to match form errors. */
     name?: string;
-    /** A regular expression to match form error names. */
+    /** A regular expression to match form error names. Useful for components with array values such as InputTags, where errors include array indices in their name (e.g. `tags.0`). */
     errorPattern?: RegExp;
     label?: string;
     description?: string;
@@ -62,6 +62,7 @@ declare const _default: typeof __VLS_export;
 export default _default;
 declare const __VLS_export: __VLS_WithSlots<import("vue").DefineComponent<FormFieldProps, {}, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").PublicProps, Readonly<FormFieldProps> & Readonly<{}>, {
     error: boolean | string;
+    orientation: FormField["variants"]["orientation"];
 }, {}, {}, {}, string, import("vue").ComponentProvideOptions, false, {}, any>, FormFieldSlots>;
 type __VLS_WithSlots<T, S> = T & {
     new (): {

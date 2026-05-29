@@ -53,6 +53,7 @@ export default defineLocale({
     },
     contentSearch: {
       links: "Linkit",
+      search: "Tulokset",
       theme: "Teema"
     },
     contentSearchButton: {
@@ -97,6 +98,11 @@ export default defineLocale({
     inputNumber: {
       decrement: "V\xE4henn\xE4",
       increment: "Kasvata"
+    },
+    listbox: {
+      noData: "Ei tietoja",
+      noMatch: "Ei vastaavia tietoja",
+      search: "Hae\u2026"
     },
     modal: {
       close: "Sulje"

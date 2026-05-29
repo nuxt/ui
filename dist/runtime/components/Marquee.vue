@@ -6,9 +6,9 @@ import theme from "#build/ui/marquee";
 import { computed } from "vue";
 import { Primitive } from "reka-ui";
 import { useAppConfig } from "#imports";
-import { useComponentUI } from "../composables/useComponentUI";
+import { useComponentProps } from "../composables/useComponentProps";
 import { tv } from "../utils/tv";
-const props = defineProps({
+const _props = defineProps({
   as: { type: null, required: false },
   pauseOnHover: { type: Boolean, required: false },
   reverse: { type: Boolean, required: false },
@@ -19,8 +19,8 @@ const props = defineProps({
   ui: { type: Object, required: false }
 });
 defineSlots();
+const props = useComponentProps("marquee", _props);
 const appConfig = useAppConfig();
-const uiProp = useComponentUI("marquee", props);
 const ui = computed(() => tv({ extend: tv(theme), ...appConfig.ui?.marquee || {} })({
   pauseOnHover: props.pauseOnHover,
   orientation: props.orientation,
@@ -30,8 +30,8 @@ const ui = computed(() => tv({ extend: tv(theme), ...appConfig.ui?.marquee || {}
 </script>
 
 <template>
-  <Primitive :as="as" :data-orientation="orientation" data-slot="root" :class="ui.root({ class: [uiProp?.root, props.class] })">
-    <div v-for="i in repeat" :key="i" data-slot="content" :class="ui.content({ class: [uiProp?.content] })">
+  <Primitive :as="props.as" :data-orientation="props.orientation" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+    <div v-for="i in props.repeat" :key="i" data-slot="content" :class="ui.content({ class: [props.ui?.content] })">
       <slot />
     </div>
   </Primitive>

@@ -25,6 +25,10 @@ export interface AvatarProps extends /** @vue-ignore */ Omit<ImgHTMLAttributes, 
      * @defaultValue 'md'
      */
     size?: Avatar['variants']['size'];
+    /**
+     * @defaultValue 'neutral'
+     */
+    color?: Avatar['variants']['color'];
     chip?: boolean | ChipProps;
     class?: any;
     style?: any;

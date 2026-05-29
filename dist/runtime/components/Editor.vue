@@ -5,7 +5,7 @@ import theme from "#build/ui/editor";
 <script setup>
 import { computed, provide, useAttrs, watch } from "vue";
 import { defu } from "defu";
-import { Primitive, useForwardProps } from "reka-ui";
+import { Primitive } from "reka-ui";
 import { mergeAttributes } from "@tiptap/core";
 import Code from "@tiptap/extension-code";
 import HorizontalRule from "@tiptap/extension-horizontal-rule";
@@ -17,11 +17,12 @@ import StarterKit from "@tiptap/starter-kit";
 import { useEditor, EditorContent } from "@tiptap/vue-3";
 import { reactiveOmit } from "@vueuse/core";
 import { useAppConfig } from "#imports";
-import { useComponentUI } from "../composables/useComponentUI";
+import { useComponentProps } from "../composables/useComponentProps";
+import { useForwardProps } from "../composables/useForwardProps";
 import { createHandlers } from "../utils/editor";
 import { tv } from "../utils/tv";
 defineOptions({ inheritAttrs: false });
-const props = defineProps({
+const _props = defineProps({
   as: { type: null, required: false },
   modelValue: { type: null, required: false },
   contentType: { type: String, required: false },
@@ -65,9 +66,9 @@ const props = defineProps({
 });
 const emits = defineEmits(["update:modelValue"]);
 defineSlots();
+const props = useComponentProps("editor", _props);
 const attrs = useAttrs();
 const appConfig = useAppConfig();
-const uiProp = useComponentUI("editor", props);
 const ui = computed(() => tv({ extend: tv(theme), ...appConfig.ui?.editor || {} })({
   placeholderMode: typeof props.placeholder === "object" ? props.placeholder.mode : void 0
 }));
@@ -78,7 +79,7 @@ const editorProps = computed(() => defu(props.editorProps, {
     autocorrect: "off",
     autocapitalize: "off",
     ...attrs,
-    class: ui.value.base({ class: uiProp.value?.base })
+    class: ui.value.base({ class: props.ui?.base })
   }
 }));
 const contentType = computed(() => props.contentType || (typeof props.modelValue === "string" ? "html" : "json"));
@@ -196,7 +197,7 @@ defineExpose({
 </script>
 
 <template>
-  <Primitive :as="as" data-slot="root" :class="ui.root({ class: [uiProp?.root, props.class] })">
+  <Primitive :as="props.as" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <template v-if="editor">
       <slot :editor="editor" :handlers="handlers" />
 
@@ -204,7 +205,7 @@ defineExpose({
         role="presentation"
         :editor="editor"
         data-slot="content"
-        :class="ui.content({ class: uiProp?.content })"
+        :class="ui.content({ class: props.ui?.content })"
       />
     </template>
   </Primitive>

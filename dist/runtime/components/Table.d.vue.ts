@@ -52,7 +52,7 @@ export interface TableProps<T extends TableData = TableData> extends TableOption
     meta?: TableMeta<T>;
     /**
      * Enable virtualization for large datasets.
-     * Note: when enabled, the divider between rows, sticky and row pinning properties are not supported.
+     * Note: row pinning is not supported when virtualization is enabled.
      * @see https://tanstack.com/virtual/latest/docs/api/virtualizer#options
      * @defaultValue false
      */
@@ -75,7 +75,6 @@ export interface TableProps<T extends TableData = TableData> extends TableOption
     empty?: string;
     /**
      * Whether the table should have a sticky header or footer. True for both, 'header' for header only, 'footer' for footer only.
-     * Note: this prop is not supported when `virtualize` is true.
      * @defaultValue false
      */
     sticky?: boolean | 'header' | 'footer';

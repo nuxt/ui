@@ -4,15 +4,15 @@ import theme from "#build/ui/dashboard-sidebar-collapse";
 
 <script setup>
 import { ref, computed } from "vue";
-import { useForwardProps } from "reka-ui";
 import { reactiveOmit } from "@vueuse/core";
 import { useAppConfig } from "#imports";
 import { useLocale } from "../composables/useLocale";
-import { useComponentUI } from "../composables/useComponentUI";
+import { useComponentProps } from "../composables/useComponentProps";
+import { useForwardProps } from "../composables/useForwardProps";
 import { useDashboard } from "../utils/dashboard";
 import { tv } from "../utils/tv";
 import UButton from "./Button.vue";
-const props = defineProps({
+const _props = defineProps({
   color: { type: null, required: false, default: "neutral" },
   variant: { type: null, required: false, default: "ghost" },
   side: { type: String, required: false, default: "left" },
@@ -40,10 +40,10 @@ const props = defineProps({
   exactActiveClass: { type: String, required: false },
   viewTransition: { type: Boolean, required: false }
 });
+const props = useComponentProps("dashboardSidebarCollapse", _props);
 const buttonProps = useForwardProps(reactiveOmit(props, "icon", "side", "class"));
 const { t } = useLocale();
 const appConfig = useAppConfig();
-const uiProp = useComponentUI("dashboardSidebarCollapse", props);
 const { sidebarCollapsed, collapseSidebar } = useDashboard({ sidebarCollapsed: ref(false), collapseSidebar: () => {
 } });
 const ui = computed(() => tv({ extend: tv(theme), ...appConfig.ui?.dashboardSidebarCollapse || {} }));
@@ -57,7 +57,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...appConfig.ui?.dashboardSide
   'aria-label': sidebarCollapsed ? t('dashboardSidebarCollapse.expand') : t('dashboardSidebarCollapse.collapse'),
   ...$attrs
 }"
-    :class="ui({ class: [uiProp?.base, props.class], side: props.side })"
+    :class="ui({ class: [props.ui?.base, props.class], side: props.side })"
     @click="collapseSidebar?.(!sidebarCollapsed)"
   />
 </template>

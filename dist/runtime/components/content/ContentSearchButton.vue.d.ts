@@ -48,9 +48,9 @@ declare const _default: typeof __VLS_export;
 export default _default;
 declare const __VLS_export: __VLS_WithSlots<import("vue").DefineComponent<ContentSearchButtonProps, {}, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").PublicProps, Readonly<ContentSearchButtonProps> & Readonly<{}>, {
     color: "error" | "primary" | "secondary" | "success" | "info" | "warning" | "neutral";
-    collapsed: boolean;
     tooltip: boolean | TooltipProps;
     kbds: KbdProps["value"][] | KbdProps[];
+    collapsed: boolean;
 }, {}, {}, {}, string, import("vue").ComponentProvideOptions, false, {}, any>, ButtonSlots>;
 type __VLS_WithSlots<T, S> = T & {
     new (): {

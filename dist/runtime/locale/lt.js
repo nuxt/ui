@@ -53,6 +53,7 @@ export default defineLocale({
     },
     contentSearch: {
       links: "Nuorodos",
+      search: "Rezultatai",
       theme: "Tema"
     },
     contentSearchButton: {
@@ -97,6 +98,11 @@ export default defineLocale({
     inputNumber: {
       decrement: "Suma\u017Einti",
       increment: "Padidinti"
+    },
+    listbox: {
+      noData: "N\u0117ra duomen\u0173",
+      noMatch: "N\u0117ra atitinkan\u010Di\u0173 duomen\u0173",
+      search: "Ie\u0161koti\u2026"
     },
     modal: {
       close: "U\u017Edaryti"

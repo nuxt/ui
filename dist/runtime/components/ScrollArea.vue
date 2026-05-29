@@ -8,10 +8,10 @@ import { Primitive } from "reka-ui";
 import { defu } from "defu";
 import { useVirtualizer } from "@tanstack/vue-virtual";
 import { useAppConfig } from "#imports";
-import { useComponentUI } from "../composables/useComponentUI";
+import { useComponentProps } from "../composables/useComponentProps";
 import { tv } from "../utils/tv";
 import { useLocale } from "../composables/useLocale";
-const props = defineProps({
+const _props = defineProps({
   as: { type: null, required: false },
   orientation: { type: null, required: false, default: "vertical" },
   items: { type: Array, required: false },
@@ -21,9 +21,9 @@ const props = defineProps({
 });
 defineSlots();
 const emits = defineEmits(["scroll"]);
+const props = useComponentProps("scrollArea", _props);
 const { dir } = useLocale();
 const appConfig = useAppConfig();
-const uiProp = useComponentUI("scrollArea", props);
 const ui = computed(() => tv({ extend: tv(theme), ...appConfig.ui?.scrollArea || {} })({
   orientation: props.orientation
 }));
@@ -160,15 +160,15 @@ defineExpose({
 <template>
   <Primitive
     ref="rootRef"
-    :as="as"
+    :as="props.as"
     data-slot="root"
-    :data-orientation="orientation"
-    :class="ui.root({ class: [uiProp?.root, props.class] })"
+    :data-orientation="props.orientation"
+    :class="ui.root({ class: [props.ui?.root, props.class] })"
   >
     <template v-if="virtualizer">
       <div
         data-slot="viewport"
-        :class="ui.viewport({ class: uiProp?.viewport })"
+        :class="ui.viewport({ class: props.ui?.viewport })"
         :style="virtualViewportStyle"
       >
         <div
@@ -177,11 +177,11 @@ defineExpose({
           :ref="measureElement"
           :data-index="virtualItem.index"
           data-slot="item"
-          :class="ui.item({ class: uiProp?.item })"
+          :class="ui.item({ class: props.ui?.item })"
           :style="getVirtualItemStyle(virtualItem)"
         >
           <slot
-            :item="items?.[virtualItem.index]"
+            :item="props.items?.[virtualItem.index]"
             :index="virtualItem.index"
             :virtual-item="virtualItem"
           />
@@ -190,13 +190,13 @@ defineExpose({
     </template>
 
     <template v-else>
-      <div data-slot="viewport" :class="ui.viewport({ class: uiProp?.viewport })">
-        <template v-if="items">
+      <div data-slot="viewport" :class="ui.viewport({ class: props.ui?.viewport })">
+        <template v-if="props.items">
           <div
-            v-for="(item, index) in items"
+            v-for="(item, index) in props.items"
             :key="getItemKey(item, index)"
             data-slot="item"
-            :class="ui.item({ class: uiProp?.item })"
+            :class="ui.item({ class: props.ui?.item })"
           >
             <slot :item="item" :index="index" />
           </div>

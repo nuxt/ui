@@ -59,7 +59,7 @@ export interface FormEmits<S extends FormSchema, T extends boolean = true> {
 }
 export interface FormSlots {
     default?(props: {
-        errors: FormError[];
+        errors: FormErrorWithId[];
         loading: boolean;
     }): VNode[];
 }

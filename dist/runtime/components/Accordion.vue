@@ -4,14 +4,15 @@ import theme from "#build/ui/accordion";
 
 <script setup>
 import { computed } from "vue";
-import { AccordionRoot, AccordionItem, AccordionHeader, AccordionTrigger, AccordionContent, useForwardPropsEmits } from "reka-ui";
+import { AccordionRoot, AccordionItem, AccordionHeader, AccordionTrigger, AccordionContent } from "reka-ui";
+import { useForwardProps } from "../composables/useForwardProps";
 import { reactivePick } from "@vueuse/core";
 import { useAppConfig } from "#imports";
-import { useComponentUI } from "../composables/useComponentUI";
+import { useComponentProps } from "../composables/useComponentProps";
 import { get } from "../utils";
 import { tv } from "../utils/tv";
 import UIcon from "./Icon.vue";
-const props = defineProps({
+const _props = defineProps({
   as: { type: null, required: false },
   items: { type: Array, required: false },
   trailingIcon: { type: null, required: false },
@@ -28,16 +29,16 @@ const props = defineProps({
 });
 const emits = defineEmits(["update:modelValue"]);
 const slots = defineSlots();
+const props = useComponentProps("accordion", _props);
 const appConfig = useAppConfig();
-const uiProp = useComponentUI("accordion", props);
-const rootProps = useForwardPropsEmits(reactivePick(props, "as", "collapsible", "defaultValue", "disabled", "modelValue", "unmountOnHide"), emits);
+const rootProps = useForwardProps(reactivePick(props, "as", "collapsible", "defaultValue", "disabled", "modelValue", "unmountOnHide"), emits);
 const ui = computed(() => tv({ extend: tv(theme), ...appConfig.ui?.accordion || {} })({
   disabled: props.disabled
 }));
 </script>
 
 <template>
-  <AccordionRoot v-bind="rootProps" :type="type" data-slot="root" :class="ui.root({ class: [uiProp?.root, props.class] })">
+  <AccordionRoot v-bind="rootProps" :type="props.type" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <AccordionItem
       v-for="(item, index) in props.items"
       v-slot="{ open }"
@@ -45,27 +46,27 @@ const ui = computed(() => tv({ extend: tv(theme), ...appConfig.ui?.accordion || 
       :value="get(item, props.valueKey) ?? String(index)"
       :disabled="item.disabled"
       data-slot="item"
-      :class="ui.item({ class: [uiProp?.item, item.ui?.item, item.class] })"
+      :class="ui.item({ class: [props.ui?.item, item.ui?.item, item.class] })"
     >
-      <AccordionHeader as="div" data-slot="header" :class="ui.header({ class: [uiProp?.header, item.ui?.header] })">
-        <AccordionTrigger data-slot="trigger" :class="ui.trigger({ class: [uiProp?.trigger, item.ui?.trigger], disabled: item.disabled })">
+      <AccordionHeader as="div" data-slot="header" :class="ui.header({ class: [props.ui?.header, item.ui?.header] })">
+        <AccordionTrigger data-slot="trigger" :class="ui.trigger({ class: [props.ui?.trigger, item.ui?.trigger], disabled: item.disabled })">
           <slot name="leading" :item="item" :index="index" :open="open" :ui="ui">
-            <UIcon v-if="item.icon" :name="item.icon" data-slot="leadingIcon" :class="ui.leadingIcon({ class: [uiProp?.leadingIcon, item?.ui?.leadingIcon] })" />
+            <UIcon v-if="item.icon" :name="item.icon" data-slot="leadingIcon" :class="ui.leadingIcon({ class: [props.ui?.leadingIcon, item?.ui?.leadingIcon] })" />
           </slot>
 
-          <span v-if="get(item, props.labelKey) || !!slots.default" data-slot="label" :class="ui.label({ class: [uiProp?.label, item.ui?.label] })">
+          <span v-if="get(item, props.labelKey) || !!slots.default" data-slot="label" :class="ui.label({ class: [props.ui?.label, item.ui?.label] })">
             <slot :item="item" :index="index" :open="open">{{ get(item, props.labelKey) }}</slot>
           </span>
 
           <slot name="trailing" :item="item" :index="index" :open="open" :ui="ui">
-            <UIcon :name="item.trailingIcon || trailingIcon || appConfig.ui.icons.chevronDown" data-slot="trailingIcon" :class="ui.trailingIcon({ class: [uiProp?.trailingIcon, item.ui?.trailingIcon] })" />
+            <UIcon :name="item.trailingIcon || props.trailingIcon || appConfig.ui.icons.chevronDown" data-slot="trailingIcon" :class="ui.trailingIcon({ class: [props.ui?.trailingIcon, item.ui?.trailingIcon] })" />
           </slot>
         </AccordionTrigger>
       </AccordionHeader>
 
-      <AccordionContent v-if="item.content || !!slots.content || item.slot && !!slots[item.slot] || !!slots.body || item.slot && !!slots[`${item.slot}-body`]" data-slot="content" :class="ui.content({ class: [uiProp?.content, item.ui?.content] })">
+      <AccordionContent v-if="item.content || !!slots.content || item.slot && !!slots[item.slot] || !!slots.body || item.slot && !!slots[`${item.slot}-body`]" data-slot="content" :class="ui.content({ class: [props.ui?.content, item.ui?.content] })">
         <slot :name="item.slot || 'content'" :item="item" :index="index" :open="open" :ui="ui">
-          <div data-slot="body" :class="ui.body({ class: [uiProp?.body, item.ui?.body] })">
+          <div data-slot="body" :class="ui.body({ class: [props.ui?.body, item.ui?.body] })">
             <slot :name="item.slot ? `${item.slot}-body` : 'body'" :item="item" :index="index" :open="open" :ui="ui">
               {{ item.content }}
             </slot>

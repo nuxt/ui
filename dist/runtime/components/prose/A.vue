@@ -5,23 +5,23 @@ import theme from "#build/ui/prose/a";
 <script setup>
 import { computed } from "vue";
 import { useAppConfig } from "#imports";
-import { useComponentUI } from "../../composables/useComponentUI";
+import { useComponentProps } from "../../composables/useComponentProps";
 import { tv } from "../../utils/tv";
 import ULink from "../Link.vue";
-const props = defineProps({
+const _props = defineProps({
   href: { type: String, required: false },
   target: { type: null, required: false },
   class: { type: null, required: false },
   ui: { type: Object, required: false }
 });
 defineSlots();
+const props = useComponentProps("prose.a", _props);
 const appConfig = useAppConfig();
-const uiProp = useComponentUI("prose.a", props);
 const ui = computed(() => tv({ extend: tv(theme), ...appConfig.ui?.prose?.a || {} }));
 </script>
 
 <template>
-  <ULink :href="href" :target="target" :class="ui({ class: [uiProp?.base, props.class] })" raw>
+  <ULink :href="props.href" :target="props.target" :class="ui({ class: [props.ui?.base, props.class] })" raw>
     <slot />
   </ULink>
 </template>

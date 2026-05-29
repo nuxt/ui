@@ -39,17 +39,23 @@ type ComponentUI<T extends {
     [K in keyof Required<T['slots']>]: (props?: Record<string, any>) => string;
 }>;
 type GetComponentAppConfig<A, U extends string, K extends string> = A extends Record<U, Record<K, any>> ? A[U][K] : {};
-type ComponentAppConfig<T, A extends Record<string, any>, K extends string, U extends string = 'ui' | 'ui.prose'> = A & (U extends 'ui.prose' ? {
-    ui?: {
-        prose?: {
+type ComponentAppConfig<T, A extends Record<string, any>, K extends string, U extends string = 'ui' | 'ui.prose'> = Omit<A, 'ui'> & {
+    ui: U extends 'ui.prose' ? (A extends {
+        ui: infer UI;
+    } ? Omit<UI, 'prose'> : Record<string, never>) & {
+        prose?: (A extends {
+            ui: {
+                prose?: infer P;
+            };
+        } ? Omit<NonNullable<P>, K> : Record<string, never>) & {
             [k in K]?: Partial<T>;
         };
-    };
-} : {
-    [key in Exclude<U, 'ui.prose'>]?: {
+    } : (A extends {
+        ui: infer UI;
+    } ? Omit<UI, K> : Record<string, never>) & {
         [k in K]?: Partial<T>;
     };
-});
+};
 /**
  * Defines the configuration shape expected for a component.
  * @template T The component's theme imported from `#build/ui/*`.

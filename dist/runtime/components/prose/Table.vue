@@ -5,21 +5,21 @@ import theme from "#build/ui/prose/table";
 <script setup>
 import { computed } from "vue";
 import { useAppConfig } from "#imports";
-import { useComponentUI } from "../../composables/useComponentUI";
+import { useComponentProps } from "../../composables/useComponentProps";
 import { tv } from "../../utils/tv";
-const props = defineProps({
+const _props = defineProps({
   class: { type: null, required: false },
   ui: { type: Object, required: false }
 });
 defineSlots();
+const props = useComponentProps("prose.table", _props);
 const appConfig = useAppConfig();
-const uiProp = useComponentUI("prose.table", props);
 const ui = computed(() => tv({ extend: tv(theme), ...appConfig.ui?.prose?.table || {} })());
 </script>
 
 <template>
-  <div :class="ui.root({ class: [uiProp?.root, props.class] })">
-    <table :class="ui.base({ class: uiProp?.base })">
+  <div :class="ui.root({ class: [props.ui?.root, props.class] })">
+    <table :class="ui.base({ class: props.ui?.base })">
       <slot />
     </table>
   </div>

@@ -8,13 +8,13 @@ import { Presence } from "reka-ui";
 import { defu } from "defu";
 import { useElementBounding, useEventListener, useMutationObserver, watchThrottled } from "@vueuse/core";
 import { useAppConfig } from "#imports";
-import { useComponentUI } from "../composables/useComponentUI";
+import { useComponentProps } from "../composables/useComponentProps";
 import { omit } from "../utils";
 import { tv } from "../utils/tv";
 import UChatMessage from "./ChatMessage.vue";
 import UButton from "./Button.vue";
-const props = defineProps({
-  messages: { type: Array, required: false },
+const _props = defineProps({
+  messages: { type: null, required: false },
   status: { type: String, required: false },
   shouldAutoScroll: { type: Boolean, required: false, default: false },
   shouldScrollToBottom: { type: Boolean, required: false, default: true },
@@ -28,6 +28,7 @@ const props = defineProps({
   ui: { type: Object, required: false }
 });
 const slots = defineSlots();
+const props = useComponentProps("chatMessages", _props);
 const getProxySlots = () => omit(slots, ["default", "indicator", "viewport"]);
 const showIndicator = computed(() => {
   if (props.status === "submitted") return true;
@@ -36,7 +37,6 @@ const showIndicator = computed(() => {
   return lastMessage?.role === "assistant" && !lastMessage.parts?.length;
 });
 const appConfig = useAppConfig();
-const uiProp = useComponentUI("chatMessages", props);
 const userProps = toRef(() => defu(props.user, { side: "right", variant: "soft" }));
 const assistantProps = toRef(() => defu(props.assistant, { side: "left", variant: "naked" }));
 const ui = computed(() => tv({ extend: tv(theme), ...appConfig.ui?.chatMessages || {} })({
@@ -188,21 +188,21 @@ onMounted(() => {
 <template>
   <div
     ref="el"
-    :data-status="status"
+    :data-status="props.status"
     data-slot="root"
-    :class="ui.root({ class: [uiProp?.root, props.class] })"
+    :class="ui.root({ class: [props.ui?.root, props.class] })"
     :style="{ '--last-message-height': `${lastMessageHeight}px` }"
   >
     <slot>
-      <template v-for="message in messages" :key="message.id">
+      <template v-for="message in props.messages" :key="message.id">
         <UChatMessage
           v-if="message.parts?.length"
           v-bind="{ ...message.role === 'user' ? userProps : assistantProps, ...message }"
           :ref="(el) => registerMessageRef(message.id, el)"
-          :compact="compact"
+          :compact="props.compact"
         >
           <template v-for="(_, name) in getProxySlots()" #[name]="slotData">
-            <slot :name="name" v-bind="slotData" :message="message" />
+            <slot :name="name" v-bind="{ ...slotData, message }" />
           </template>
         </UChatMessage>
       </template>
@@ -213,11 +213,11 @@ onMounted(() => {
       id="indicator"
       role="assistant"
       v-bind="{ ...assistantProps, actions: void 0, parts: [] }"
-      :compact="compact"
+      :compact="props.compact"
     >
       <template #content>
         <slot name="indicator" :ui="ui">
-          <div data-slot="indicator" :class="ui.indicator({ class: uiProp?.indicator })">
+          <div data-slot="indicator" :class="ui.indicator({ class: props.ui?.indicator })">
             <span />
             <span />
             <span />
@@ -227,16 +227,16 @@ onMounted(() => {
     </UChatMessage>
 
     <Presence :present="showAutoScroll">
-      <div :data-state="showAutoScroll ? 'open' : 'closed'" data-slot="viewport" :class="ui.viewport({ class: uiProp?.viewport })">
+      <div :data-state="showAutoScroll ? 'open' : 'closed'" data-slot="viewport" :class="ui.viewport({ class: props.ui?.viewport })">
         <slot name="viewport" :ui="ui" :on-click="onAutoScrollClick">
           <UButton
-            v-if="autoScroll"
-            :icon="autoScrollIcon || appConfig.ui.icons.arrowDown"
+            v-if="props.autoScroll"
+            :icon="props.autoScrollIcon || appConfig.ui.icons.arrowDown"
             color="neutral"
             variant="outline"
-            v-bind="typeof autoScroll === 'object' ? autoScroll : {}"
+            v-bind="typeof props.autoScroll === 'object' ? props.autoScroll : {}"
             data-slot="autoScroll"
-            :class="ui.autoScroll({ class: uiProp?.autoScroll })"
+            :class="ui.autoScroll({ class: props.ui?.autoScroll })"
             @click="onAutoScrollClick"
           />
         </slot>

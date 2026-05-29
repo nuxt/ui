@@ -49,6 +49,7 @@ export type Messages = {
     contentSearch: {
         description?: string;
         links: string;
+        search: string;
         theme: string;
         title?: string;
     };
@@ -102,6 +103,11 @@ export type Messages = {
     inputNumber: {
         decrement: string;
         increment: string;
+    };
+    listbox: {
+        noData: string;
+        noMatch: string;
+        search: string;
     };
     modal: {
         close: string;

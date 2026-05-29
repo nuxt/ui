@@ -13,6 +13,7 @@ const props = defineProps({
   as: { type: null, required: false },
   color: { type: null, required: false },
   size: { type: null, required: false },
+  highlight: { type: Boolean, required: false },
   loading: { type: Boolean, required: false },
   loadingIcon: { type: null, required: false },
   label: { type: String, required: false },

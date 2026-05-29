@@ -10,7 +10,7 @@ type DashboardSidebarMenu<T> = T extends 'modal' ? ModalProps : T extends 'slide
 export interface DashboardSidebarProps<T extends DashboardSidebarMode = DashboardSidebarMode> extends Pick<UseResizableProps, 'id' | 'side' | 'minSize' | 'maxSize' | 'defaultSize' | 'resizable' | 'collapsible' | 'collapsedSize'> {
     /**
      * The mode of the sidebar menu.
-     * @defaultValue 'modal'
+     * @defaultValue 'slideover'
      */
     mode?: T;
     /**

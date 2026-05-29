@@ -7,7 +7,7 @@ import { useTemplateRef, computed, onMounted } from "vue";
 import { Primitive } from "reka-ui";
 import { useVModel } from "@vueuse/core";
 import { useAppConfig } from "#imports";
-import { useComponentUI } from "../composables/useComponentUI";
+import { useComponentProps } from "../composables/useComponentProps";
 import { useFieldGroup } from "../composables/useFieldGroup";
 import { useComponentIcons } from "../composables/useComponentIcons";
 import { useFormField } from "../composables/useFormField";
@@ -16,7 +16,7 @@ import { tv } from "../utils/tv";
 import UIcon from "./Icon.vue";
 import UAvatar from "./Avatar.vue";
 defineOptions({ inheritAttrs: false });
-const props = defineProps({
+const _props = defineProps({
   as: { type: null, required: false },
   id: { type: String, required: false },
   name: { type: String, required: false },
@@ -48,20 +48,20 @@ const props = defineProps({
 });
 const emits = defineEmits(["update:modelValue", "blur", "change"]);
 const slots = defineSlots();
+const props = useComponentProps("input", _props);
 const modelValue = useVModel(props, "modelValue", emits, { defaultValue: props.defaultValue });
 const appConfig = useAppConfig();
-const uiProp = useComponentUI("input", props);
-const { emitFormBlur, emitFormInput, emitFormChange, size: formFieldSize, color, id, name, highlight, disabled, emitFormFocus, ariaAttrs } = useFormField(props, { deferInputValidation: true });
-const { orientation, size: fieldGroupSize } = useFieldGroup(props);
+const { emitFormBlur, emitFormInput, emitFormChange, size: formFieldSize, color, id, name, highlight, disabled, emitFormFocus, ariaAttrs } = useFormField(_props, { deferInputValidation: true });
+const { orientation, size: fieldGroupSize } = useFieldGroup(_props);
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props);
 const inputSize = computed(() => fieldGroupSize.value || formFieldSize.value);
 const ui = computed(() => tv({ extend: tv(theme), ...appConfig.ui?.input || {} })({
   type: props.type,
-  color: color.value,
+  color: color.value ?? props.color,
   variant: props.variant,
-  size: inputSize?.value,
+  size: inputSize?.value ?? props.size,
   loading: props.loading,
-  highlight: highlight.value,
+  highlight: highlight.value ?? props.highlight,
   fixed: props.fixed,
   leading: isLeading.value || !!props.avatar || !!slots.leading,
   trailing: isTrailing.value || !!slots.trailing,
@@ -120,19 +120,19 @@ defineExpose({
 </script>
 
 <template>
-  <Primitive :as="as" data-slot="root" :class="ui.root({ class: [uiProp?.root, props.class] })">
+  <Primitive :as="props.as" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <input
       :id="id"
       ref="inputRef"
-      :type="type"
+      :type="props.type"
       :value="modelValue"
       :name="name"
-      :placeholder="placeholder"
+      :placeholder="props.placeholder"
       data-slot="base"
-      :class="ui.base({ class: uiProp?.base })"
+      :class="ui.base({ class: props.ui?.base })"
       :disabled="disabled"
-      :required="required"
-      :autocomplete="autocomplete"
+      :required="props.required"
+      :autocomplete="props.autocomplete"
       v-bind="{ ...$attrs, ...ariaAttrs }"
       @input="onInput"
       @blur="onBlur"
@@ -142,16 +142,16 @@ defineExpose({
 
     <slot :ui="ui" />
 
-    <span v-if="isLeading || !!avatar || !!slots.leading" data-slot="leading" :class="ui.leading({ class: uiProp?.leading })">
+    <span v-if="isLeading || !!props.avatar || !!slots.leading" data-slot="leading" :class="ui.leading({ class: props.ui?.leading })">
       <slot name="leading" :ui="ui">
-        <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" data-slot="leadingIcon" :class="ui.leadingIcon({ class: uiProp?.leadingIcon })" />
-        <UAvatar v-else-if="!!avatar" :size="uiProp?.leadingAvatarSize || ui.leadingAvatarSize()" v-bind="avatar" data-slot="leadingAvatar" :class="ui.leadingAvatar({ class: uiProp?.leadingAvatar })" />
+        <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" data-slot="leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
+        <UAvatar v-else-if="!!props.avatar" :size="props.ui?.leadingAvatarSize || ui.leadingAvatarSize()" v-bind="props.avatar" data-slot="leadingAvatar" :class="ui.leadingAvatar({ class: props.ui?.leadingAvatar })" />
       </slot>
     </span>
 
-    <span v-if="isTrailing || !!slots.trailing" data-slot="trailing" :class="ui.trailing({ class: uiProp?.trailing })">
+    <span v-if="isTrailing || !!slots.trailing" data-slot="trailing" :class="ui.trailing({ class: props.ui?.trailing })">
       <slot name="trailing" :ui="ui">
-        <UIcon v-if="trailingIconName" :name="trailingIconName" data-slot="trailingIcon" :class="ui.trailingIcon({ class: uiProp?.trailingIcon })" />
+        <UIcon v-if="trailingIconName" :name="trailingIconName" data-slot="trailingIcon" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
       </slot>
     </span>
   </Primitive>

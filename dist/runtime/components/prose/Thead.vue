@@ -5,20 +5,20 @@ import theme from "#build/ui/prose/thead";
 <script setup>
 import { computed } from "vue";
 import { useAppConfig } from "#imports";
-import { useComponentUI } from "../../composables/useComponentUI";
+import { useComponentProps } from "../../composables/useComponentProps";
 import { tv } from "../../utils/tv";
-const props = defineProps({
+const _props = defineProps({
   class: { type: null, required: false },
   ui: { type: Object, required: false }
 });
 defineSlots();
+const props = useComponentProps("prose.thead", _props);
 const appConfig = useAppConfig();
-const uiProp = useComponentUI("prose.thead", props);
 const ui = computed(() => tv({ extend: tv(theme), ...appConfig.ui?.prose?.thead || {} }));
 </script>
 
 <template>
-  <thead :class="ui({ class: [uiProp?.base, props.class] })">
+  <thead :class="ui({ class: [props.ui?.base, props.class] })">
     <slot />
   </thead>
 </template>

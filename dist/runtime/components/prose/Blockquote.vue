@@ -5,20 +5,20 @@ import theme from "#build/ui/prose/blockquote";
 <script setup>
 import { computed } from "vue";
 import { useAppConfig } from "#imports";
-import { useComponentUI } from "../../composables/useComponentUI";
+import { useComponentProps } from "../../composables/useComponentProps";
 import { tv } from "../../utils/tv";
-const props = defineProps({
+const _props = defineProps({
   class: { type: null, required: false },
   ui: { type: Object, required: false }
 });
 defineSlots();
+const props = useComponentProps("prose.blockquote", _props);
 const appConfig = useAppConfig();
-const uiProp = useComponentUI("prose.blockquote", props);
 const ui = computed(() => tv({ extend: tv(theme), ...appConfig.ui?.prose?.blockquote || {} }));
 </script>
 
 <template>
-  <blockquote :class="ui({ class: [uiProp?.base, props.class] })">
+  <blockquote :class="ui({ class: [props.ui?.base, props.class] })">
     <slot />
   </blockquote>
 </template>

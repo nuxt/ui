@@ -14,6 +14,10 @@ export interface AvatarGroupProps {
      */
     size?: AvatarGroup['variants']['size'];
     /**
+     * @defaultValue 'neutral'
+     */
+    color?: AvatarGroup['variants']['color'];
+    /**
      * The maximum number of avatars to display.
      */
     max?: number | string;

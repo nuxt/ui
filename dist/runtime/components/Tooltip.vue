@@ -5,15 +5,16 @@ import theme from "#build/ui/tooltip";
 <script setup>
 import { computed, toRef } from "vue";
 import { defu } from "defu";
-import { TooltipRoot, TooltipTrigger, TooltipPortal, TooltipContent, TooltipArrow, useForwardPropsEmits, injectTooltipProviderContext } from "reka-ui";
+import { TooltipRoot, TooltipTrigger, TooltipPortal, TooltipContent, TooltipArrow, injectTooltipProviderContext } from "reka-ui";
 import { reactivePick } from "@vueuse/core";
 import { useAppConfig } from "#imports";
-import { useComponentUI } from "../composables/useComponentUI";
+import { useComponentProps } from "../composables/useComponentProps";
+import { useForwardProps } from "../composables/useForwardProps";
 import { FieldGroupReset } from "../composables/useFieldGroup";
 import { usePortal } from "../composables/usePortal";
 import { tv } from "../utils/tv";
 import UKbd from "./Kbd.vue";
-const props = defineProps({
+const _props = defineProps({
   text: { type: String, required: false },
   kbds: { type: Array, required: false },
   content: { type: Object, required: false },
@@ -32,10 +33,10 @@ const props = defineProps({
 });
 const emits = defineEmits(["update:open"]);
 const slots = defineSlots();
+const props = useComponentProps("tooltip", _props);
 const appConfig = useAppConfig();
-const uiProp = useComponentUI("tooltip", props);
 const providerContext = injectTooltipProviderContext();
-const rootProps = useForwardPropsEmits(reactivePick(props, "defaultOpen", "open", "delayDuration", "disableHoverableContent", "disableClosingTrigger", "ignoreNonKeyboardFocus"), emits);
+const rootProps = useForwardProps(reactivePick(props, "defaultOpen", "open", "delayDuration", "disableHoverableContent", "disableClosingTrigger", "ignoreNonKeyboardFocus"), emits);
 const portalProps = usePortal(toRef(() => props.portal));
 const contentProps = toRef(() => defu(props.content, providerContext.content.value, { side: "bottom", sideOffset: 8, collisionPadding: 8 }));
 const arrowProps = toRef(() => defu(props.arrow, { rounded: true }));
@@ -45,23 +46,23 @@ const ui = computed(() => tv({ extend: tv(theme), ...appConfig.ui?.tooltip || {}
 </script>
 
 <template>
-  <TooltipRoot v-slot="{ open }" v-bind="rootProps" :disabled="!(text || kbds?.length || !!slots.content) || props.disabled">
-    <TooltipTrigger v-if="!!slots.default || !!reference" v-bind="$attrs" as-child :reference="reference" :class="props.class">
+  <TooltipRoot v-slot="{ open }" v-bind="rootProps" :disabled="!(props.text || props.kbds?.length || !!slots.content) || props.disabled">
+    <TooltipTrigger v-if="!!slots.default || !!props.reference" v-bind="$attrs" as-child :reference="props.reference" :class="props.class">
       <slot :open="open" />
     </TooltipTrigger>
 
     <TooltipPortal v-bind="portalProps">
       <FieldGroupReset>
-        <TooltipContent v-bind="contentProps" data-slot="content" :class="ui.content({ class: [!slots.default && props.class, uiProp?.content] })">
+        <TooltipContent v-bind="contentProps" data-slot="content" :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })">
           <slot name="content" :ui="ui">
-            <span v-if="text" data-slot="text" :class="ui.text({ class: uiProp?.text })">{{ text }}</span>
+            <span v-if="props.text" data-slot="text" :class="ui.text({ class: props.ui?.text })">{{ props.text }}</span>
 
-            <span v-if="kbds?.length" data-slot="kbds" :class="ui.kbds({ class: uiProp?.kbds })">
-              <UKbd v-for="(kbd, index) in kbds" :key="index" :size="uiProp?.kbdsSize || ui.kbdsSize()" v-bind="typeof kbd === 'string' ? { value: kbd } : kbd" />
+            <span v-if="props.kbds?.length" data-slot="kbds" :class="ui.kbds({ class: props.ui?.kbds })">
+              <UKbd v-for="(kbd, index) in props.kbds" :key="index" :size="props.ui?.kbdsSize || ui.kbdsSize()" v-bind="typeof kbd === 'string' ? { value: kbd } : kbd" />
             </span>
           </slot>
 
-          <TooltipArrow v-if="!!arrow" v-bind="arrowProps" data-slot="arrow" :class="ui.arrow({ class: uiProp?.arrow })" />
+          <TooltipArrow v-if="!!props.arrow" v-bind="arrowProps" data-slot="arrow" :class="ui.arrow({ class: props.ui?.arrow })" />
         </TooltipContent>
       </FieldGroupReset>
     </TooltipPortal>

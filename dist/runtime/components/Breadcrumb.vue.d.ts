@@ -31,6 +31,10 @@ export interface BreadcrumbProps<T extends BreadcrumbItem = BreadcrumbItem> {
      */
     separatorIcon?: IconProps['name'];
     /**
+     * @defaultValue 'primary'
+     */
+    color?: Breadcrumb['variants']['color'];
+    /**
      * The key used to get the label from the item.
      * @defaultValue 'label'
      */

@@ -5,6 +5,7 @@
 <script setup>
 import { useForwardProps } from "reka-ui";
 import { reactiveOmit } from "@vueuse/core";
+import { usePrefix } from "../../composables/usePrefix";
 import UAvatar from "../Avatar.vue";
 defineOptions({ inheritAttrs: false });
 const props = defineProps({
@@ -15,15 +16,17 @@ const props = defineProps({
   icon: { type: null, required: false },
   text: { type: String, required: false },
   size: { type: null, required: false },
+  color: { type: null, required: false },
   chip: { type: [Boolean, Object], required: false },
   class: { type: null, required: false },
   style: { type: null, required: false },
   ui: { type: Object, required: false }
 });
 const avatarProps = useForwardProps(reactiveOmit(props, "light", "dark"));
+const prefix = usePrefix();
 </script>
 
 <template>
-  <UAvatar v-bind="{ ...avatarProps, ...$attrs }" :src="light" class="dark:hidden" />
-  <UAvatar v-bind="{ ...avatarProps, ...$attrs }" :src="dark" class="hidden dark:block" />
+  <UAvatar v-bind="{ ...avatarProps, ...$attrs }" :src="light" :class="prefix('dark:hidden')" />
+  <UAvatar v-bind="{ ...avatarProps, ...$attrs }" :src="dark" :class="prefix('hidden dark:block')" />
 </template>

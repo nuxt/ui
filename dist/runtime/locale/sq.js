@@ -53,6 +53,7 @@ export default defineLocale({
     },
     contentSearch: {
       links: "Lidhje",
+      search: "Rezultatet",
       theme: "Tema"
     },
     contentSearchButton: {
@@ -97,6 +98,11 @@ export default defineLocale({
     inputNumber: {
       decrement: "Zvog\xEBlo",
       increment: "Rrit"
+    },
+    listbox: {
+      noData: "Nuk ka t\xEB dh\xEBna",
+      noMatch: "Nuk ka t\xEB dh\xEBna q\xEB p\xEBrputhen",
+      search: "K\xEBrko\u2026"
     },
     modal: {
       close: "Mbyll"

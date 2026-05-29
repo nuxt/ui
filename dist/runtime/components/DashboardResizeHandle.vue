@@ -7,23 +7,23 @@ import { computed } from "vue";
 import { Primitive } from "reka-ui";
 import { useAppConfig } from "#imports";
 import { tv } from "../utils/tv";
-import { useComponentUI } from "../composables/useComponentUI";
-const props = defineProps({
+import { useComponentProps } from "../composables/useComponentProps";
+const _props = defineProps({
   as: { type: null, required: false },
   class: { type: null, required: false },
   ui: { type: Object, required: false }
 });
 defineSlots();
+const props = useComponentProps("dashboardResizeHandle", _props);
 const appConfig = useAppConfig();
-const uiProp = useComponentUI("dashboardResizeHandle", props);
 const ui = computed(() => tv({ extend: tv(theme), ...appConfig.ui?.dashboardResizeHandle || {} }));
 </script>
 
 <template>
   <Primitive
-    :as="as"
+    :as="props.as"
     role="separator"
-    :class="ui({ class: [uiProp?.base, props.class] })"
+    :class="ui({ class: [props.ui?.base, props.class] })"
   >
     <slot />
   </Primitive>

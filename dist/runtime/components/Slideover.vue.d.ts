@@ -98,11 +98,11 @@ declare const __VLS_export: __VLS_WithSlots<import("vue").DefineComponent<Slideo
     "onClose:prevent"?: (() => any) | undefined;
 }>, {
     close: boolean | Omit<ButtonProps, LinkPropsKeys>;
-    transition: boolean;
-    side: Slideover["variants"]["side"];
-    overlay: boolean;
     modal: boolean;
+    transition: boolean;
     portal: boolean | string | HTMLElement;
+    overlay: boolean;
+    side: Slideover["variants"]["side"];
     dismissible: boolean;
 }, {}, {}, {}, string, import("vue").ComponentProvideOptions, false, {}, any>, SlideoverSlots>;
 type __VLS_WithSlots<T, S> = T & {

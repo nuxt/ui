@@ -1,6 +1,6 @@
 import type { VNode } from 'vue';
 import type { UseResizableProps } from '../composables/useResizable';
-export interface DashboardGroupProps extends Pick<UseResizableProps, 'storage' | 'storageKey' | 'persistent' | 'unit'> {
+export interface DashboardGroupProps extends Pick<UseResizableProps, 'storage' | 'storageKey' | 'storageOptions' | 'persistent' | 'unit'> {
     /**
      * The element or component this component should render as.
      * @defaultValue 'div'

@@ -105,8 +105,8 @@ declare const __VLS_export: __VLS_WithSlots<import("vue").DefineComponent<Pagina
     "onUpdate:page"?: ((value: number) => any) | undefined;
 }>, {
     color: "error" | "primary" | "secondary" | "success" | "info" | "warning" | "neutral";
-    variant: "link" | "solid" | "outline" | "soft" | "subtle" | "ghost";
     activeColor: "error" | "primary" | "secondary" | "success" | "info" | "warning" | "neutral";
+    variant: "link" | "solid" | "outline" | "soft" | "subtle" | "ghost";
     activeVariant: "link" | "solid" | "outline" | "soft" | "subtle" | "ghost";
     itemsPerPage: number;
     showEdges: boolean;

@@ -8,11 +8,11 @@ import { Primitive } from "reka-ui";
 import { useAppConfig } from "#imports";
 import { useFieldGroup } from "../composables/useFieldGroup";
 import { useComponentIcons } from "../composables/useComponentIcons";
-import { useComponentUI } from "../composables/useComponentUI";
+import { useComponentProps } from "../composables/useComponentProps";
 import { tv } from "../utils/tv";
 import UIcon from "./Icon.vue";
 import UAvatar from "./Avatar.vue";
-const props = defineProps({
+const _props = defineProps({
   as: { type: null, required: false, default: "span" },
   label: { type: [String, Number], required: false },
   color: { type: null, required: false },
@@ -29,34 +29,34 @@ const props = defineProps({
   trailingIcon: { type: null, required: false }
 });
 const slots = defineSlots();
+const props = useComponentProps("badge", _props);
 const appConfig = useAppConfig();
-const uiProp = useComponentUI("badge", props);
-const { orientation, size: fieldGroupSize } = useFieldGroup(props);
+const { orientation, size: fieldGroupSize } = useFieldGroup(_props);
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props);
 const ui = computed(() => tv({ extend: tv(theme), ...appConfig.ui?.badge || {} })({
   color: props.color,
   variant: props.variant,
-  size: fieldGroupSize.value || props.size,
+  size: fieldGroupSize.value ?? props.size,
   square: props.square || !slots.default && !props.label,
   fieldGroup: orientation.value
 }));
 </script>
 
 <template>
-  <Primitive :as="as" data-slot="base" :class="ui.base({ class: [uiProp?.base, props.class] })">
+  <Primitive :as="props.as" data-slot="base" :class="ui.base({ class: [props.ui?.base, props.class] })">
     <slot name="leading" :ui="ui">
-      <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" data-slot="leadingIcon" :class="ui.leadingIcon({ class: uiProp?.leadingIcon })" />
-      <UAvatar v-else-if="!!avatar" :size="uiProp?.leadingAvatarSize || ui.leadingAvatarSize()" v-bind="avatar" data-slot="leadingAvatar" :class="ui.leadingAvatar({ class: uiProp?.leadingAvatar })" />
+      <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" data-slot="leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
+      <UAvatar v-else-if="!!props.avatar" :size="props.ui?.leadingAvatarSize || ui.leadingAvatarSize()" v-bind="props.avatar" data-slot="leadingAvatar" :class="ui.leadingAvatar({ class: props.ui?.leadingAvatar })" />
     </slot>
 
     <slot :ui="ui">
-      <span v-if="label !== void 0 && label !== null" data-slot="label" :class="ui.label({ class: uiProp?.label })">
-        {{ label }}
+      <span v-if="props.label !== void 0 && props.label !== null" data-slot="label" :class="ui.label({ class: props.ui?.label })">
+        {{ props.label }}
       </span>
     </slot>
 
     <slot name="trailing" :ui="ui">
-      <UIcon v-if="isTrailing && trailingIconName" :name="trailingIconName" data-slot="trailingIcon" :class="ui.trailingIcon({ class: uiProp?.trailingIcon })" />
+      <UIcon v-if="isTrailing && trailingIconName" :name="trailingIconName" data-slot="trailingIcon" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
     </slot>
   </Primitive>
 </template>

@@ -27,7 +27,7 @@ export default defineLocale({
       prev: "Aurretikoa"
     },
     chatPrompt: {
-      placeholder: "Idatzi zure mezua hemen..."
+      placeholder: "Idatzi zure mezua hemen\u2026"
     },
     chatPromptSubmit: {
       label: "Bidali"
@@ -49,10 +49,11 @@ export default defineLocale({
       close: "Itxi",
       noData: "Daturik gabe",
       noMatch: "Ez da datu bat ere aurkitu",
-      placeholder: "Idatzi komando bat edo bilatu..."
+      placeholder: "Idatzi komando bat edo bilatu\u2026"
     },
     contentSearch: {
       links: "Estekak",
+      search: "Emaitzak",
       theme: "Gaia"
     },
     contentSearchButton: {
@@ -97,6 +98,11 @@ export default defineLocale({
     inputNumber: {
       decrement: "Murriztu",
       increment: "Handitu"
+    },
+    listbox: {
+      noData: "Daturik gabe",
+      noMatch: "Ez da datu bat ere aurkitu",
+      search: "Bilatu\u2026"
     },
     modal: {
       close: "Itxi"

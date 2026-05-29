@@ -3,6 +3,9 @@ import type { AcceptableValue as _AcceptableValue } from 'reka-ui';
 export type DeepPartial<T> = {
     [P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : T[P] | undefined;
 };
+export type DeepRequired<T> = {
+    [P in keyof T]-?: NonNullable<T[P]> extends object ? DeepRequired<NonNullable<T[P]>> : NonNullable<T[P]>;
+};
 export type DynamicSlotsKeys<Name extends string | undefined, Suffix extends string | undefined = undefined> = (Name extends string ? Suffix extends string ? Name | `${Name}-${Suffix}` : Name : never);
 export type DynamicSlots<T extends {
     slot?: string;

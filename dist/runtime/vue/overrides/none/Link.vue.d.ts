@@ -64,9 +64,9 @@ export interface LinkSlots {
 declare const _default: typeof __VLS_export;
 export default _default;
 declare const __VLS_export: __VLS_WithSlots<import("vue").DefineComponent<LinkProps, {}, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").PublicProps, Readonly<LinkProps> & Readonly<{}>, {
-    active: boolean;
-    as: any;
     type: "reset" | "submit" | "button";
+    as: any;
+    active: boolean;
     ariaCurrentValue: string;
 }, {}, {}, {}, string, import("vue").ComponentProvideOptions, false, {}, any>, LinkSlots>;
 type __VLS_WithSlots<T, S> = T & {

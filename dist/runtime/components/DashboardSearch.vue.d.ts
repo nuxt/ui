@@ -1,39 +1,15 @@
 import type { VNode } from 'vue';
 import type { AppConfig } from '@nuxt/schema';
-import type { UseFuseOptions } from '@vueuse/integrations/useFuse';
 import theme from '#build/ui/dashboard-search';
-import type { ButtonProps, InputProps, ModalProps, CommandPaletteProps, CommandPaletteSlots, CommandPaletteGroup, CommandPaletteItem, IconProps, LinkPropsKeys } from '../types';
+import type { UseFuseOptions } from '@vueuse/integrations/useFuse';
+import type { ButtonProps, ModalProps, CommandPaletteProps, CommandPaletteSlots, CommandPaletteGroup, CommandPaletteItem, LinkPropsKeys } from '../types';
 import type { ComponentConfig } from '../types/tv';
 type DashboardSearch = ComponentConfig<typeof theme, AppConfig, 'dashboardSearch'>;
-export interface DashboardSearchProps<T extends CommandPaletteItem = CommandPaletteItem> extends Pick<ModalProps, 'title' | 'description' | 'overlay' | 'transition' | 'content' | 'dismissible' | 'fullscreen' | 'modal' | 'portal'> {
+export interface DashboardSearchProps<T extends CommandPaletteItem = CommandPaletteItem> extends Pick<ModalProps, 'title' | 'description' | 'overlay' | 'transition' | 'content' | 'dismissible' | 'fullscreen' | 'modal' | 'portal'>, Pick<CommandPaletteProps<CommandPaletteGroup<T>, T>, 'icon' | 'trailingIcon' | 'selectedIcon' | 'childrenIcon' | 'placeholder' | 'autofocus' | 'loading' | 'loadingIcon' | 'closeIcon' | 'back' | 'backIcon' | 'disabled' | 'highlightOnHover' | 'labelKey' | 'descriptionKey' | 'preserveGroupOrder' | 'virtualize' | 'groups'> {
     /**
      * @defaultValue 'md'
      */
     size?: DashboardSearch['variants']['size'];
-    /**
-     * The icon displayed in the input.
-     * @defaultValue appConfig.ui.icons.search
-     * @IconifyIcon
-     */
-    icon?: IconProps['name'];
-    /**
-     * The placeholder text for the input.
-     * @defaultValue t('commandPalette.placeholder')
-     */
-    placeholder?: InputProps['placeholder'];
-    /**
-     * Automatically focus the input when component is mounted.
-     * @defaultValue true
-     */
-    autofocus?: boolean;
-    /** When `true`, the loading icon will be displayed. */
-    loading?: boolean;
-    /**
-     * The icon when the `loading` prop is `true`.
-     * @defaultValue appConfig.ui.icons.loading
-     * @IconifyIcon
-     */
-    loadingIcon?: IconProps['name'];
     /**
      * Display a close button in the input (useful when inside a Modal for example).
      * `{ size: 'md', color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
@@ -42,22 +18,31 @@ export interface DashboardSearchProps<T extends CommandPaletteItem = CommandPale
      */
     close?: boolean | Omit<ButtonProps, LinkPropsKeys>;
     /**
-     * The icon displayed in the close button.
-     * @defaultValue appConfig.ui.icons.close
-     * @IconifyIcon
-     */
-    closeIcon?: IconProps['name'];
-    /**
      * Keyboard shortcut to open the search (used by [`defineShortcuts`](https://ui.nuxt.com/docs/composables/define-shortcuts))
      * @defaultValue 'meta_k'
      */
     shortcut?: string;
-    groups?: CommandPaletteGroup<T>[];
     /**
      * Options for [useFuse](https://vueuse.org/integrations/useFuse) passed to the [CommandPalette](https://ui.nuxt.com/docs/components/command-palette).
-     * @defaultValue {}
+     * @defaultValue {
+        fuseOptions: {
+          ignoreLocation: true,
+          useTokenSearch: true,
+          threshold: 0.1,
+          keys: ['label', 'description', 'suffix']
+        },
+        resultLimit: 12,
+        matchAllWhenSearchEmpty: true
+      }
      */
     fuse?: UseFuseOptions<T>;
+    /**
+     * Delay (in milliseconds) before the search term is passed to Fuse (debounced).
+     * Useful for large datasets where running fuzzy search on every keystroke is the bottleneck — the input stays responsive while Fuse only re-runs after typing settles.
+     * Set to `0` to disable.
+     * @defaultValue 100
+     */
+    searchDelay?: number;
     /**
      * When `true`, the theme command will be added to the groups.
      * @defaultValue true
@@ -90,6 +75,7 @@ declare const __VLS_export: __VLS_WithSlots<import("vue").DefineComponent<Dashbo
 }>, {
     close: boolean | Omit<ButtonProps, LinkPropsKeys>;
     colorMode: boolean;
+    searchDelay: number;
     fullscreen: boolean;
     shortcut: string;
 }, {}, {}, {}, string, import("vue").ComponentProvideOptions, false, {}, any>, DashboardSearchSlots>;

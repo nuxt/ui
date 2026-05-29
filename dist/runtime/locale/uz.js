@@ -53,6 +53,7 @@ export default defineLocale({
     },
     contentSearch: {
       links: "Havolalar",
+      search: "Natijalar",
       theme: "Mavzu"
     },
     contentSearchButton: {
@@ -97,6 +98,11 @@ export default defineLocale({
     inputNumber: {
       decrement: "Ayirish",
       increment: "Qo\u02BBshish"
+    },
+    listbox: {
+      noData: "Ma\u02BClumot yo\u02BBq",
+      noMatch: "Mos keluvchi natija topilmadi",
+      search: "Qidirish\u2026"
     },
     modal: {
       close: "Yopish"

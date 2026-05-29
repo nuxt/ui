@@ -53,6 +53,7 @@ export default defineLocale({
     },
     contentSearch: {
       links: "Linken",
+      search: "Resultater",
       theme: "Thema"
     },
     contentSearchButton: {
@@ -63,7 +64,7 @@ export default defineLocale({
     },
     dropdownMenu: {
       noMatch: "Keng entspriechend Donn\xE9e\xEBn",
-      search: "Sichen.."
+      search: "Sichen\u2026"
     },
     dashboardSearch: {
       theme: "Thema"
@@ -98,6 +99,11 @@ export default defineLocale({
       decrement: "Dekrement\xE9ieren",
       increment: "Inkrement\xE9ieren"
     },
+    listbox: {
+      noData: "Keng Donn\xE9e\xEBn",
+      noMatch: "Keng entspriechend Donn\xE9e\xEBn",
+      search: "Sichen\u2026"
+    },
     modal: {
       close: "Zoumaachen"
     },
@@ -131,7 +137,7 @@ export default defineLocale({
       create: '"{label}" erstellen',
       noData: "Keng Donn\xE9e\xEBn",
       noMatch: "Keng entspriechend Donn\xE9e\xEBn",
-      search: "Sichen.."
+      search: "Sichen\u2026"
     },
     slideover: {
       close: "Zoumaachen"

@@ -3,7 +3,7 @@ import { join, normalize } from 'pathe';
 import { createUnplugin } from 'unplugin';
 import { defu } from 'defu';
 import tailwind from '@tailwindcss/vite';
-import { g as getTemplates, p as publicComposables, d as defaultOptions, r as resolveColors, a as getDefaultConfig } from './shared/ui.DN1xpmfD.mjs';
+import { b as getTemplates, p as publicComposables, d as defaultOptions, r as resolveColors, g as getDefaultConfig } from './shared/ui.BjV8Ykyw.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import MagicString from 'magic-string';

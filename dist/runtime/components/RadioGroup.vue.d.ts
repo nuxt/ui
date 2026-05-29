@@ -54,6 +54,8 @@ export interface RadioGroupProps<T extends RadioGroupItem[] = RadioGroupItem[], 
      * @defaultValue 'primary'
      */
     color?: RadioGroup['variants']['color'];
+    /** Highlight the ring color like a focus state. */
+    highlight?: boolean;
     /**
      * The orientation the radio buttons are laid out.
      * @defaultValue 'vertical'

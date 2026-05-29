@@ -7,7 +7,7 @@ import { useTemplateRef, computed, onMounted, nextTick, watch } from "vue";
 import { Primitive } from "reka-ui";
 import { useVModel } from "@vueuse/core";
 import { useAppConfig } from "#imports";
-import { useComponentUI } from "../composables/useComponentUI";
+import { useComponentProps } from "../composables/useComponentProps";
 import { useComponentIcons } from "../composables/useComponentIcons";
 import { useFormField } from "../composables/useFormField";
 import { looseToNumber } from "../utils";
@@ -15,7 +15,7 @@ import { tv } from "../utils/tv";
 import UIcon from "./Icon.vue";
 import UAvatar from "./Avatar.vue";
 defineOptions({ inheritAttrs: false });
-const props = defineProps({
+const _props = defineProps({
   as: { type: null, required: false },
   id: { type: String, required: false },
   name: { type: String, required: false },
@@ -49,17 +49,17 @@ const props = defineProps({
 });
 const emits = defineEmits(["update:modelValue", "blur", "change"]);
 const slots = defineSlots();
+const props = useComponentProps("textarea", _props);
 const modelValue = useVModel(props, "modelValue", emits, { defaultValue: props.defaultValue });
 const appConfig = useAppConfig();
-const uiProp = useComponentUI("textarea", props);
-const { emitFormFocus, emitFormBlur, emitFormInput, emitFormChange, size, color, id, name, highlight, disabled, ariaAttrs } = useFormField(props, { deferInputValidation: true });
+const { emitFormFocus, emitFormBlur, emitFormInput, emitFormChange, size, color, id, name, highlight, disabled, ariaAttrs } = useFormField(_props, { deferInputValidation: true });
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props);
 const ui = computed(() => tv({ extend: tv(theme), ...appConfig.ui?.textarea || {} })({
-  color: color.value,
+  color: color.value ?? props.color,
   variant: props.variant,
-  size: size?.value,
+  size: size?.value ?? props.size,
   loading: props.loading,
-  highlight: highlight.value,
+  highlight: highlight.value ?? props.highlight,
   fixed: props.fixed,
   autoresize: props.autoresize,
   leading: isLeading.value || !!props.avatar || !!slots.leading,
@@ -133,7 +133,8 @@ onMounted(() => {
   setTimeout(() => {
     autoFocus();
   }, props.autofocusDelay);
-  setTimeout(() => {
+  setTimeout(async () => {
+    await nextTick();
     autoResize();
   }, props.autoresizeDelay);
 });
@@ -144,18 +145,18 @@ defineExpose({
 </script>
 
 <template>
-  <Primitive :as="as" data-slot="root" :class="ui.root({ class: [uiProp?.root, props.class] })">
+  <Primitive :as="props.as" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <textarea
       :id="id"
       ref="textareaRef"
       :value="modelValue"
       :name="name"
-      :rows="rows"
-      :placeholder="placeholder"
+      :rows="props.rows"
+      :placeholder="props.placeholder"
       data-slot="base"
-      :class="ui.base({ class: uiProp?.base })"
+      :class="ui.base({ class: props.ui?.base })"
       :disabled="disabled"
-      :required="required"
+      :required="props.required"
       v-bind="{ ...$attrs, ...ariaAttrs }"
       @input="onInput"
       @blur="onBlur"
@@ -165,16 +166,16 @@ defineExpose({
 
     <slot :ui="ui" />
 
-    <span v-if="isLeading || !!avatar || !!slots.leading" data-slot="leading" :class="ui.leading({ class: uiProp?.leading })">
+    <span v-if="isLeading || !!props.avatar || !!slots.leading" data-slot="leading" :class="ui.leading({ class: props.ui?.leading })">
       <slot name="leading" :ui="ui">
-        <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" data-slot="leadingIcon" :class="ui.leadingIcon({ class: uiProp?.leadingIcon })" />
-        <UAvatar v-else-if="!!avatar" :size="uiProp?.leadingAvatarSize || ui.leadingAvatarSize()" v-bind="avatar" data-slot="leadingAvatar" :class="ui.leadingAvatar({ class: uiProp?.leadingAvatar })" />
+        <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" data-slot="leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
+        <UAvatar v-else-if="!!props.avatar" :size="props.ui?.leadingAvatarSize || ui.leadingAvatarSize()" v-bind="props.avatar" data-slot="leadingAvatar" :class="ui.leadingAvatar({ class: props.ui?.leadingAvatar })" />
       </slot>
     </span>
 
-    <span v-if="isTrailing || !!slots.trailing" data-slot="trailing" :class="ui.trailing({ class: uiProp?.trailing })">
+    <span v-if="isTrailing || !!slots.trailing" data-slot="trailing" :class="ui.trailing({ class: props.ui?.trailing })">
       <slot name="trailing" :ui="ui">
-        <UIcon v-if="trailingIconName" :name="trailingIconName" data-slot="trailingIcon" :class="ui.trailingIcon({ class: uiProp?.trailingIcon })" />
+        <UIcon v-if="trailingIconName" :name="trailingIconName" data-slot="trailingIcon" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
       </slot>
     </span>
   </Primitive>

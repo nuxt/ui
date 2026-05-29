@@ -31,6 +31,8 @@ export interface CheckboxProps<T = boolean> extends Pick<CheckboxRootProps<T>, '
      * @defaultValue 'start'
      */
     indicator?: Checkbox['variants']['indicator'];
+    /** Highlight the ring color like a focus state. */
+    highlight?: boolean;
     /**
      * The icon displayed when checked.
      * @defaultValue appConfig.ui.icons.check

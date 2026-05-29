@@ -7,16 +7,17 @@ export default {
 
 <script setup>
 import { ref, computed, toRef, provide } from "vue";
-import { ToastProvider, ToastViewport, ToastPortal, useForwardProps } from "reka-ui";
+import { ToastProvider, ToastViewport, ToastPortal } from "reka-ui";
 import { reactivePick } from "@vueuse/core";
 import { useAppConfig } from "#imports";
-import { useComponentUI } from "../composables/useComponentUI";
+import { useComponentProps } from "../composables/useComponentProps";
+import { useForwardProps } from "../composables/useForwardProps";
 import { useToast, toastMaxInjectionKey } from "../composables/useToast";
 import { usePortal } from "../composables/usePortal";
 import { omit } from "../utils";
 import { tv } from "../utils/tv";
 import UToast from "./Toast.vue";
-const props = defineProps({
+const _props = defineProps({
   position: { type: null, required: false },
   expand: { type: Boolean, required: false, default: true },
   progress: { type: Boolean, required: false, default: true },
@@ -30,9 +31,9 @@ const props = defineProps({
   swipeThreshold: { type: Number, required: false }
 });
 defineSlots();
+const props = useComponentProps("toaster", _props);
 const { toasts, remove } = useToast();
 const appConfig = useAppConfig();
-const uiProp = useComponentUI("toaster", props);
 provide(toastMaxInjectionKey, toRef(() => props.max));
 const providerProps = useForwardProps(reactivePick(props, "duration", "label", "swipeThreshold", "disableSwipe"));
 const portalProps = usePortal(toRef(() => props.portal));
@@ -79,7 +80,7 @@ function getOffset(index) {
       v-for="(toast, index) of toasts"
       :key="toast.id"
       ref="refs"
-      :progress="progress"
+      :progress="props.progress"
       v-bind="omit(toast, ['id', 'close', '_duplicate', '_updated'])"
       :close="toast.close"
       :data-expanded="expanded"
@@ -94,7 +95,7 @@ function getOffset(index) {
   '--transform': 'translateY(var(--translate)) scale(var(--scale))'
 }"
       data-slot="base"
-      :class="ui.base({ class: [uiProp?.base, toast.onClick ? 'cursor-pointer' : void 0] })"
+      :class="ui.base({ class: [props.ui?.base, toast.onClick ? 'cursor-pointer' : void 0] })"
       @update:open="onUpdateOpen($event, toast.id)"
       @click="toast.onClick && toast.onClick(toast)"
     />
@@ -103,11 +104,11 @@ function getOffset(index) {
       <ToastViewport
         :data-expanded="expanded"
         data-slot="viewport"
-        :class="ui.viewport({ class: [uiProp?.viewport, props.class] })"
+        :class="ui.viewport({ class: [props.ui?.viewport, props.class] })"
         :style="{
   '--scale-factor': '0.05',
-  '--translate-factor': position?.startsWith('top') ? '1px' : '-1px',
-  '--gap': position?.startsWith('top') ? '16px' : '-16px',
+  '--translate-factor': props.position?.startsWith('top') ? '1px' : '-1px',
+  '--gap': props.position?.startsWith('top') ? '16px' : '-16px',
   '--front-height': `${frontHeight}px`,
   '--height': `${height}px`
 }"

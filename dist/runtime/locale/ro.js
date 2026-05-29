@@ -53,6 +53,7 @@ export default defineLocale({
     },
     contentSearch: {
       links: "Linkuri",
+      search: "Rezultate",
       theme: "Tem\u0103"
     },
     contentSearchButton: {
@@ -97,6 +98,11 @@ export default defineLocale({
     inputNumber: {
       decrement: "Scade",
       increment: "Cre\u0219te"
+    },
+    listbox: {
+      noData: "Nu exist\u0103 date",
+      noMatch: "Nu exist\u0103 date corespunz\u0103toare",
+      search: "Caut\u0103\u2026"
     },
     modal: {
       close: "\xCEnchide"

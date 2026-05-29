@@ -53,6 +53,7 @@ export default defineLocale({
     },
     contentSearch: {
       links: "Li\xEAn k\u1EBFt",
+      search: "K\u1EBFt qu\u1EA3",
       theme: "Ch\u1EE7 \u0111\u1EC1"
     },
     contentSearchButton: {
@@ -97,6 +98,11 @@ export default defineLocale({
     inputNumber: {
       decrement: "Gi\u1EA3m",
       increment: "T\u0103ng"
+    },
+    listbox: {
+      noData: "Kh\xF4ng c\xF3 d\u1EEF li\u1EC7u",
+      noMatch: "Kh\xF4ng c\xF3 k\u1EBFt qu\u1EA3 ph\xF9 h\u1EE3p",
+      search: "T\xECm ki\u1EBFm\u2026"
     },
     modal: {
       close: "\u0110\xF3ng"

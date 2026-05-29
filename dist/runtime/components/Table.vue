@@ -4,18 +4,19 @@ import theme from "#build/ui/table";
 
 <script setup>
 import { computed, useTemplateRef, watch, toRef } from "vue";
-import { Primitive, useForwardProps } from "reka-ui";
+import { Primitive } from "reka-ui";
 import { upperFirst } from "scule";
 import { defu } from "defu";
 import { FlexRender, getCoreRowModel, getFilteredRowModel, getSortedRowModel, getExpandedRowModel, useVueTable } from "@tanstack/vue-table";
 import { useVirtualizer } from "@tanstack/vue-virtual";
 import { reactivePick, createReusableTemplate, createRef } from "@vueuse/core";
 import { useAppConfig } from "#imports";
-import { useComponentUI } from "../composables/useComponentUI";
+import { useComponentProps } from "../composables/useComponentProps";
+import { useForwardProps } from "../composables/useForwardProps";
 import { useLocale } from "../composables/useLocale";
 import { tv } from "../utils/tv";
 defineOptions({ inheritAttrs: false });
-const props = defineProps({
+const _props = defineProps({
   as: { type: null, required: false },
   data: { type: Array, required: false },
   columns: { type: Array, required: false },
@@ -65,9 +66,9 @@ const props = defineProps({
   mergeOptions: { type: Function, required: false }
 });
 const slots = defineSlots();
+const props = useComponentProps("table", _props);
 const { t } = useLocale();
 const appConfig = useAppConfig();
-const uiProp = useComponentUI("table", props);
 const data = createRef(props.data ?? [], props.watchOptions?.deep !== false);
 const meta = computed(() => props.meta ?? {});
 const columns = computed(() => processColumns(props.columns ?? Object.keys(data.value[0] ?? {}).map((accessorKey) => ({ accessorKey, header: upperFirst(accessorKey) }))));
@@ -90,11 +91,10 @@ function processColumns(columns2) {
   });
 }
 const ui = computed(() => tv({ extend: tv(theme), ...appConfig.ui?.table || {} })({
-  sticky: props.virtualize ? false : props.sticky,
+  sticky: props.sticky,
   loading: props.loading,
   loadingColor: props.loadingColor,
-  loadingAnimation: props.loadingAnimation,
-  virtualize: !!props.virtualize
+  loadingAnimation: props.loadingAnimation
 }));
 const [DefineTableTemplate, ReuseTableTemplate] = createReusableTemplate();
 const [DefineRowTemplate, ReuseRowTemplate] = createReusableTemplate({
@@ -238,15 +238,11 @@ const virtualizer = !!props.virtualize && useVirtualizer({
     return typeof estimate === "function" ? estimate(index) : estimate;
   }
 });
-const renderedSize = computed(() => {
-  if (!virtualizer) {
-    return 0;
-  }
-  const virtualItems = virtualizer.value.getVirtualItems();
-  if (!virtualItems?.length) {
-    return 0;
-  }
-  return virtualItems.reduce((sum, item) => sum + item.size, 0);
+const virtualItems = computed(() => virtualizer ? virtualizer.value.getVirtualItems() : []);
+const virtualPaddingTop = computed(() => virtualItems.value[0]?.start ?? 0);
+const virtualPaddingBottom = computed(() => {
+  if (!virtualizer || !virtualItems.value.length) return 0;
+  return virtualizer.value.getTotalSize() - (virtualItems.value[virtualItems.value.length - 1]?.end ?? 0);
 });
 function valueUpdater(updaterOrValue, ref) {
   ref.value = typeof updaterOrValue === "function" ? updaterOrValue(ref.value) : updaterOrValue;
@@ -320,7 +316,7 @@ defineExpose({
       data-slot="tr"
       :class="ui.tr({
   class: [
-    uiProp?.tr,
+    props.ui?.tr,
     resolveValue(tableApi.options.meta?.class?.tr, row)
   ]
 })"
@@ -339,7 +335,7 @@ defineExpose({
         data-slot="td"
         :class="ui.td({
   class: [
-    uiProp?.td,
+    props.ui?.td,
     resolveValue(cell.column.columnDef.meta?.class?.td, cell)
   ],
   pinned: !!cell.column.getIsPinned()
@@ -355,23 +351,23 @@ defineExpose({
       </td>
     </tr>
 
-    <tr v-if="row.getIsExpanded()" data-slot="tr" :class="ui.tr({ class: [uiProp?.tr] })">
-      <td :colspan="row.getAllCells().length" data-slot="td" :class="ui.td({ class: [uiProp?.td] })">
+    <tr v-if="row.getIsExpanded()" data-slot="tr" :class="ui.tr({ class: [props.ui?.tr] })">
+      <td :colspan="row.getAllCells().length" data-slot="td" :class="ui.td({ class: [props.ui?.td] })">
         <slot name="expanded" :row="row" />
       </td>
     </tr>
   </DefineRowTemplate>
 
   <DefineTableTemplate>
-    <table ref="tableRef" data-slot="base" :class="ui.base({ class: [uiProp?.base] })">
-      <caption v-if="caption || !!slots.caption" data-slot="caption" :class="ui.caption({ class: [uiProp?.caption] })">
+    <table ref="tableRef" data-slot="base" :class="ui.base({ class: [props.ui?.base] })">
+      <caption v-if="props.caption || !!slots.caption" data-slot="caption" :class="ui.caption({ class: [props.ui?.caption] })">
         <slot name="caption">
-          {{ caption }}
+          {{ props.caption }}
         </slot>
       </caption>
 
-      <thead data-slot="thead" :class="ui.thead({ class: [uiProp?.thead] })">
-        <tr v-for="headerGroup in tableApi.getHeaderGroups()" :key="headerGroup.id" data-slot="tr" :class="ui.tr({ class: [uiProp?.tr] })">
+      <thead data-slot="thead" :class="ui.thead({ class: [props.ui?.thead] })">
+        <tr v-for="headerGroup in tableApi.getHeaderGroups()" :key="headerGroup.id" data-slot="tr" :class="ui.tr({ class: [props.ui?.tr] })">
           <th
             v-for="header in headerGroup.headers"
             :key="header.id"
@@ -382,7 +378,7 @@ defineExpose({
             data-slot="th"
             :class="ui.th({
   class: [
-    uiProp?.th,
+    props.ui?.th,
     resolveValue(header.column.columnDef.meta?.class?.th, header)
   ],
   pinned: !!header.column.getIsPinned()
@@ -398,25 +394,29 @@ defineExpose({
           </th>
         </tr>
 
-        <tr data-slot="separator" :class="ui.separator({ class: [uiProp?.separator] })" />
+        <tr data-slot="separator" :class="ui.separator({ class: [props.ui?.separator] })" />
       </thead>
 
-      <tbody data-slot="tbody" :class="ui.tbody({ class: [uiProp?.tbody] })">
+      <tbody data-slot="tbody" :class="ui.tbody({ class: [props.ui?.tbody] })">
         <slot name="body-top" />
 
         <template v-if="rows.length">
           <ReuseRowTemplate v-for="row in topRows" :key="row.id" :row="row" />
 
           <template v-if="virtualizer">
-            <template v-for="(virtualRow, index) in virtualizer.getVirtualItems()" :key="centerRows[virtualRow.index]?.id">
+            <tr v-if="virtualPaddingTop > 0" :style="{ height: `${virtualPaddingTop}px` }" aria-hidden="true">
+              <td :colspan="tableApi.getAllLeafColumns().length" />
+            </tr>
+            <template v-for="virtualRow in virtualItems" :key="centerRows[virtualRow.index]?.id ?? `virtual-${virtualRow.index}`">
               <ReuseRowTemplate
+                v-if="centerRows[virtualRow.index]"
                 :row="centerRows[virtualRow.index]"
-                :style="{
-  height: `${virtualRow.size}px`,
-  transform: `translateY(${virtualRow.start - index * virtualRow.size}px)`
-}"
+                :style="{ height: `${virtualRow.size}px` }"
               />
             </template>
+            <tr v-if="virtualPaddingBottom > 0" :style="{ height: `${virtualPaddingBottom}px` }" aria-hidden="true">
+              <td :colspan="tableApi.getAllLeafColumns().length" />
+            </tr>
           </template>
 
           <template v-else>
@@ -426,16 +426,16 @@ defineExpose({
           <ReuseRowTemplate v-for="row in bottomRows" :key="row.id" :row="row" />
         </template>
 
-        <tr v-else-if="loading && !!slots['loading']">
-          <td :colspan="tableApi.getAllLeafColumns().length" data-slot="loading" :class="ui.loading({ class: uiProp?.loading })">
+        <tr v-else-if="props.loading && !!slots['loading']">
+          <td :colspan="tableApi.getAllLeafColumns().length" data-slot="loading" :class="ui.loading({ class: props.ui?.loading })">
             <slot name="loading" />
           </td>
         </tr>
 
         <tr v-else>
-          <td :colspan="tableApi.getAllLeafColumns().length" data-slot="empty" :class="ui.empty({ class: uiProp?.empty })">
+          <td :colspan="tableApi.getAllLeafColumns().length" data-slot="empty" :class="ui.empty({ class: props.ui?.empty })">
             <slot name="empty">
-              {{ empty || t("table.noData") }}
+              {{ props.empty || t("table.noData") }}
             </slot>
           </td>
         </tr>
@@ -446,14 +446,11 @@ defineExpose({
       <tfoot
         v-if="hasFooter"
         data-slot="tfoot"
-        :class="ui.tfoot({ class: [uiProp?.tfoot] })"
-        :style="virtualizer ? {
-  transform: `translateY(${virtualizer.getTotalSize() - renderedSize}px)`
-} : void 0"
+        :class="ui.tfoot({ class: [props.ui?.tfoot] })"
       >
-        <tr data-slot="separator" :class="ui.separator({ class: [uiProp?.separator] })" />
+        <tr data-slot="separator" :class="ui.separator({ class: [props.ui?.separator] })" />
 
-        <tr v-for="footerGroup in tableApi.getFooterGroups()" :key="footerGroup.id" data-slot="tr" :class="ui.tr({ class: [uiProp?.tr] })">
+        <tr v-for="footerGroup in tableApi.getFooterGroups()" :key="footerGroup.id" data-slot="tr" :class="ui.tr({ class: [props.ui?.tr] })">
           <th
             v-for="header in footerGroup.headers"
             :key="header.id"
@@ -463,7 +460,7 @@ defineExpose({
             data-slot="th"
             :class="ui.th({
   class: [
-    uiProp?.th,
+    props.ui?.th,
     resolveValue(header.column.columnDef.meta?.class?.th, header)
   ],
   pinned: !!header.column.getIsPinned()
@@ -482,15 +479,7 @@ defineExpose({
     </table>
   </DefineTableTemplate>
 
-  <Primitive ref="rootRef" :as="as" v-bind="$attrs" data-slot="root" :class="ui.root({ class: [uiProp?.root, props.class] })">
-    <div
-      v-if="virtualizer"
-      :style="{
-  height: `${virtualizer.getTotalSize()}px`
-}"
-    >
-      <ReuseTableTemplate />
-    </div>
-    <ReuseTableTemplate v-else />
+  <Primitive ref="rootRef" :as="props.as" v-bind="$attrs" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+    <ReuseTableTemplate />
   </Primitive>
 </template>

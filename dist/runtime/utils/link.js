@@ -21,6 +21,7 @@ export const linkKeys = [
   "href",
   "hreflang",
   "inactiveClass",
+  "locale",
   "media",
   "noPrefetch",
   "noRel",

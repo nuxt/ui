@@ -5,18 +5,18 @@ import theme from "#build/ui/prose/em";
 <script setup>
 import { computed } from "vue";
 import { useAppConfig } from "#imports";
-import { useComponentUI } from "../../composables/useComponentUI";
+import { useComponentProps } from "../../composables/useComponentProps";
 import { tv } from "../../utils/tv";
-const props = defineProps({
+const _props = defineProps({
   class: { type: String, required: false },
   ui: { type: Object, required: false }
 });
 defineSlots();
+const props = useComponentProps("prose.em", _props);
 const appConfig = useAppConfig();
-const uiProp = useComponentUI("prose.em", props);
 const ui = computed(() => tv({ extend: tv(theme), ...appConfig.ui?.prose?.em || {} }));
 </script>
 
 <template>
-  <em :class="ui({ class: [uiProp?.base, props.class] })"><slot /></em>
+  <em :class="ui({ class: [props.ui?.base, props.class] })"><slot /></em>
 </template>

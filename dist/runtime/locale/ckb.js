@@ -28,7 +28,7 @@ export default defineLocale({
       prev: "\u067E\u06CE\u0634\u062A\u0631"
     },
     chatPrompt: {
-      placeholder: "\u0646\u0627\u0645\u06D5\u06A9\u06D5\u062A \u0644\u06CE\u0631\u06D5 \u0628\u0646\u0648\u0633\u06D5..."
+      placeholder: "\u0646\u0627\u0645\u06D5\u06A9\u06D5\u062A \u0644\u06CE\u0631\u06D5 \u0628\u0646\u0648\u0633\u06D5\u2026"
     },
     chatPromptSubmit: {
       label: "\u0646\u0627\u0631\u062F\u0646"
@@ -54,6 +54,7 @@ export default defineLocale({
     },
     contentSearch: {
       links: "\u0628\u06D5\u0633\u062A\u06D5\u0631\u06D5\u06A9\u0627\u0646",
+      search: "\u0626\u06D5\u0646\u062C\u0627\u0645\u06D5\u06A9\u0627\u0646",
       theme: "\u0695\u0648\u0648\u06A9\u0627\u0631"
     },
     contentSearchButton: {
@@ -98,6 +99,11 @@ export default defineLocale({
     inputNumber: {
       decrement: "\u06A9\u06D5\u0645\u06A9\u0631\u062F\u0646\u06D5\u0648\u06D5",
       increment: "\u0632\u06CC\u0627\u062F\u06A9\u0631\u062F\u0646"
+    },
+    listbox: {
+      noData: "\u0647\u06CC\u0686 \u062F\u0627\u062A\u0627\u06CC\u06D5\u06A9 \u0646\u06CC\u06CC\u06D5",
+      noMatch: "\u0647\u06CC\u0686 \u0626\u06D5\u0646\u062C\u0627\u0645\u06CE\u06A9 \u0646\u06D5\u062F\u06C6\u0632\u0631\u0627\u06CC\u06D5\u0648\u06D5",
+      search: "\u06AF\u06D5\u0695\u0627\u0646\u2026"
     },
     modal: {
       close: "\u062F\u0627\u062E\u0633\u062A\u0646"

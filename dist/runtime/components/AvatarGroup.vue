@@ -6,22 +6,24 @@ import theme from "#build/ui/avatar-group";
 import { computed, provide } from "vue";
 import { Primitive } from "reka-ui";
 import { useAppConfig } from "#imports";
-import { useComponentUI } from "../composables/useComponentUI";
+import { useComponentProps } from "../composables/useComponentProps";
 import { avatarGroupInjectionKey } from "../composables/useAvatarGroup";
 import { tv } from "../utils/tv";
 import UAvatar from "./Avatar.vue";
-const props = defineProps({
+const _props = defineProps({
   as: { type: null, required: false },
   size: { type: null, required: false },
+  color: { type: null, required: false },
   max: { type: [Number, String], required: false },
   class: { type: null, required: false },
   ui: { type: Object, required: false }
 });
 const slots = defineSlots();
+const props = useComponentProps("avatarGroup", _props);
 const appConfig = useAppConfig();
-const uiProp = useComponentUI("avatarGroup", props);
 const ui = computed(() => tv({ extend: tv(theme), ...appConfig.ui?.avatarGroup || {} })({
-  size: props.size
+  size: props.size,
+  color: props.color
 }));
 const max = computed(() => typeof props.max === "string" ? Number.parseInt(props.max, 10) : props.max);
 const children = computed(() => {
@@ -55,13 +57,14 @@ const hiddenCount = computed(() => {
   return children.value.length - visibleAvatars.value.length;
 });
 provide(avatarGroupInjectionKey, computed(() => ({
-  size: props.size
+  size: props.size,
+  color: props.color
 })));
 </script>
 
 <template>
-  <Primitive :as="as" data-slot="root" :class="ui.root({ class: [uiProp?.root, props.class] })">
-    <UAvatar v-if="hiddenCount > 0" :text="`+${hiddenCount}`" data-slot="base" :class="ui.base({ class: uiProp?.base })" />
-    <component :is="avatar" v-for="(avatar, count) in visibleAvatars" :key="count" data-slot="base" :class="ui.base({ class: uiProp?.base })" />
+  <Primitive :as="props.as" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+    <UAvatar v-if="hiddenCount > 0" :text="`+${hiddenCount}`" data-slot="base" :class="ui.base({ class: props.ui?.base })" />
+    <component :is="avatar" v-for="(avatar, count) in visibleAvatars" :key="count" data-slot="base" :class="ui.base({ class: props.ui?.base })" />
   </Primitive>
 </template>

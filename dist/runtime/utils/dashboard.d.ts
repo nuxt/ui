@@ -1,6 +1,6 @@
 import type { Ref } from 'vue';
 import type { UseResizableProps } from '../composables/useResizable';
-export interface DashboardContext extends Pick<UseResizableProps, 'storage' | 'storageKey' | 'persistent' | 'unit'> {
+export interface DashboardContext extends Pick<UseResizableProps, 'storage' | 'storageKey' | 'storageOptions' | 'persistent' | 'unit'> {
     sidebarOpen?: Ref<boolean>;
     sidebarCollapsed?: Ref<boolean>;
     toggleSearch?: () => void;

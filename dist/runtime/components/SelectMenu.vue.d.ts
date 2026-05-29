@@ -229,6 +229,29 @@ declare const __VLS_export: <T extends ArrayOrNested<SelectMenuItem>, VK extends
         onChange?: ((event: Event) => any) | undefined;
         onFocus?: ((event: FocusEvent) => any) | undefined;
         onClear?: (() => any) | undefined;
+        onCreate?: ((item: string) => any) | undefined;
+        "onUpdate:open"?: ((value: boolean) => any) | undefined;
+        "onUpdate:modelValue"?: ((value: (Mod extends {
+            number: true;
+        } ? (Mod extends {
+            optional: true;
+        } ? (Mod extends {
+            nullable: true;
+        } ? GetModelValue<T, VK, M, ExcludeItem> | null : GetModelValue<T, VK, M, ExcludeItem>) | undefined : Mod extends {
+            nullable: true;
+        } ? GetModelValue<T, VK, M, ExcludeItem> | null : GetModelValue<T, VK, M, ExcludeItem>) extends infer T_1 ? T_1 extends (Mod extends {
+            optional: true;
+        } ? (Mod extends {
+            nullable: true;
+        } ? GetModelValue<T, VK, M, ExcludeItem> | null : GetModelValue<T, VK, M, ExcludeItem>) | undefined : Mod extends {
+            nullable: true;
+        } ? GetModelValue<T, VK, M, ExcludeItem> | null : GetModelValue<T, VK, M, ExcludeItem>) ? T_1 extends string ? number | T_1 : T_1 : never : never : Mod extends {
+            optional: true;
+        } ? (Mod extends {
+            nullable: true;
+        } ? GetModelValue<T, VK, M, ExcludeItem> | null : GetModelValue<T, VK, M, ExcludeItem>) | undefined : Mod extends {
+            nullable: true;
+        } ? GetModelValue<T, VK, M, ExcludeItem> | null : GetModelValue<T, VK, M, ExcludeItem>) | IsClearUsed<M, C>) => any) | undefined;
         onHighlight?: ((payload: {
             ref: HTMLElement;
             value: (Mod extends {
@@ -253,29 +276,6 @@ declare const __VLS_export: <T extends ArrayOrNested<SelectMenuItem>, VK extends
                 nullable: true;
             } ? GetModelValue<T, VK, M, ExcludeItem> | null : GetModelValue<T, VK, M, ExcludeItem>) | IsClearUsed<M, C>;
         } | undefined) => any) | undefined;
-        "onUpdate:open"?: ((value: boolean) => any) | undefined;
-        onCreate?: ((item: string) => any) | undefined;
-        "onUpdate:modelValue"?: ((value: (Mod extends {
-            number: true;
-        } ? (Mod extends {
-            optional: true;
-        } ? (Mod extends {
-            nullable: true;
-        } ? GetModelValue<T, VK, M, ExcludeItem> | null : GetModelValue<T, VK, M, ExcludeItem>) | undefined : Mod extends {
-            nullable: true;
-        } ? GetModelValue<T, VK, M, ExcludeItem> | null : GetModelValue<T, VK, M, ExcludeItem>) extends infer T_1 ? T_1 extends (Mod extends {
-            optional: true;
-        } ? (Mod extends {
-            nullable: true;
-        } ? GetModelValue<T, VK, M, ExcludeItem> | null : GetModelValue<T, VK, M, ExcludeItem>) | undefined : Mod extends {
-            nullable: true;
-        } ? GetModelValue<T, VK, M, ExcludeItem> | null : GetModelValue<T, VK, M, ExcludeItem>) ? T_1 extends string ? number | T_1 : T_1 : never : never : Mod extends {
-            optional: true;
-        } ? (Mod extends {
-            nullable: true;
-        } ? GetModelValue<T, VK, M, ExcludeItem> | null : GetModelValue<T, VK, M, ExcludeItem>) | undefined : Mod extends {
-            nullable: true;
-        } ? GetModelValue<T, VK, M, ExcludeItem> | null : GetModelValue<T, VK, M, ExcludeItem>) | IsClearUsed<M, C>) => any) | undefined;
         "onUpdate:searchTerm"?: ((value: string) => any) | undefined;
     }> & (typeof globalThis extends {
         __VLS_PROPS_FALLBACK: infer P;
@@ -286,7 +286,27 @@ declare const __VLS_export: <T extends ArrayOrNested<SelectMenuItem>, VK extends
     }>) => void;
     attrs: any;
     slots: SelectMenuSlots<T, VK, M, Mod, C, NestedItem<T>>;
-    emit: (((evt: "blur", event: FocusEvent) => void) & ((evt: "change", event: Event) => void) & ((evt: "focus", event: FocusEvent) => void) & ((evt: "clear") => void) & ((evt: "highlight", payload: {
+    emit: (((evt: "blur", event: FocusEvent) => void) & ((evt: "change", event: Event) => void) & ((evt: "focus", event: FocusEvent) => void) & ((evt: "clear") => void) & ((evt: "create", item: string) => void) & ((evt: "update:open", value: boolean) => void) & ((evt: "update:modelValue", value: (Mod extends {
+        number: true;
+    } ? (Mod extends {
+        optional: true;
+    } ? (Mod extends {
+        nullable: true;
+    } ? GetModelValue<T, VK, M, ExcludeItem> | null : GetModelValue<T, VK, M, ExcludeItem>) | undefined : Mod extends {
+        nullable: true;
+    } ? GetModelValue<T, VK, M, ExcludeItem> | null : GetModelValue<T, VK, M, ExcludeItem>) extends infer T_1 ? T_1 extends (Mod extends {
+        optional: true;
+    } ? (Mod extends {
+        nullable: true;
+    } ? GetModelValue<T, VK, M, ExcludeItem> | null : GetModelValue<T, VK, M, ExcludeItem>) | undefined : Mod extends {
+        nullable: true;
+    } ? GetModelValue<T, VK, M, ExcludeItem> | null : GetModelValue<T, VK, M, ExcludeItem>) ? T_1 extends string ? number | T_1 : T_1 : never : never : Mod extends {
+        optional: true;
+    } ? (Mod extends {
+        nullable: true;
+    } ? GetModelValue<T, VK, M, ExcludeItem> | null : GetModelValue<T, VK, M, ExcludeItem>) | undefined : Mod extends {
+        nullable: true;
+    } ? GetModelValue<T, VK, M, ExcludeItem> | null : GetModelValue<T, VK, M, ExcludeItem>) | IsClearUsed<M, C>) => void) & ((evt: "highlight", payload: {
         ref: HTMLElement;
         value: (Mod extends {
             number: true;
@@ -309,27 +329,7 @@ declare const __VLS_export: <T extends ArrayOrNested<SelectMenuItem>, VK extends
         } ? GetModelValue<T, VK, M, ExcludeItem> | null : GetModelValue<T, VK, M, ExcludeItem>) | undefined : Mod extends {
             nullable: true;
         } ? GetModelValue<T, VK, M, ExcludeItem> | null : GetModelValue<T, VK, M, ExcludeItem>) | IsClearUsed<M, C>;
-    } | undefined) => void) & ((evt: "update:open", value: boolean) => void) & ((evt: "create", item: string) => void) & ((evt: "update:modelValue", value: (Mod extends {
-        number: true;
-    } ? (Mod extends {
-        optional: true;
-    } ? (Mod extends {
-        nullable: true;
-    } ? GetModelValue<T, VK, M, ExcludeItem> | null : GetModelValue<T, VK, M, ExcludeItem>) | undefined : Mod extends {
-        nullable: true;
-    } ? GetModelValue<T, VK, M, ExcludeItem> | null : GetModelValue<T, VK, M, ExcludeItem>) extends infer T_1 ? T_1 extends (Mod extends {
-        optional: true;
-    } ? (Mod extends {
-        nullable: true;
-    } ? GetModelValue<T, VK, M, ExcludeItem> | null : GetModelValue<T, VK, M, ExcludeItem>) | undefined : Mod extends {
-        nullable: true;
-    } ? GetModelValue<T, VK, M, ExcludeItem> | null : GetModelValue<T, VK, M, ExcludeItem>) ? T_1 extends string ? number | T_1 : T_1 : never : never : Mod extends {
-        optional: true;
-    } ? (Mod extends {
-        nullable: true;
-    } ? GetModelValue<T, VK, M, ExcludeItem> | null : GetModelValue<T, VK, M, ExcludeItem>) | undefined : Mod extends {
-        nullable: true;
-    } ? GetModelValue<T, VK, M, ExcludeItem> | null : GetModelValue<T, VK, M, ExcludeItem>) | IsClearUsed<M, C>) => void)) & ((event: "update:searchTerm", value: string) => void);
+    } | undefined) => void)) & ((event: "update:searchTerm", value: string) => void);
 }>) => import("vue").VNode & {
     __ctx?: Awaited<typeof __VLS_setup>;
 };

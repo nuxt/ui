@@ -22,7 +22,7 @@ export function useResizable(key, options = {}, { collapsed = ref(false) } = {})
     size: opts.value.defaultSize,
     collapsed: unref(collapsed) ?? false
   };
-  const storageData = opts.value.persistent && (opts.value.resizable || opts.value.collapsible) ? opts.value.storage === "cookie" ? useCookie(key, { default: () => defaultStorageValue }) : useStorage(key, defaultStorageValue) : ref(defaultStorageValue);
+  const storageData = opts.value.persistent && (opts.value.resizable || opts.value.collapsible) ? opts.value.storage === "cookie" ? useCookie(key, { ...opts.value.storageOptions, default: () => defaultStorageValue }) : useStorage(key, defaultStorageValue, void 0, opts.value.storageOptions) : ref(defaultStorageValue);
   const isCollapsed = computed({
     get: () => storageData.value.collapsed,
     set: (value) => {

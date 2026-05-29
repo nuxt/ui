@@ -53,6 +53,7 @@ export default defineLocale({
     },
     contentSearch: {
       links: "Odkazy",
+      search: "V\xFDsledky",
       theme: "Farebn\xFD re\u017Eim"
     },
     contentSearchButton: {
@@ -97,6 +98,11 @@ export default defineLocale({
     inputNumber: {
       decrement: "Zn\xED\u017Ei\u0165",
       increment: "Zv\xFD\u0161i\u0165"
+    },
+    listbox: {
+      noData: "\u017Diadne d\xE1ta",
+      noMatch: "\u017Diadna zhoda",
+      search: "H\u013Eada\u0165\u2026"
     },
     modal: {
       close: "Zatvori\u0165"

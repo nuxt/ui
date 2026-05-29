@@ -54,6 +54,7 @@ export default defineLocale({
     },
     contentSearch: {
       links: "\u0626\u06C7\u0644\u0627\u0646\u0645\u0649\u0644\u0627\u0631",
+      search: "\u0646\u06D5\u062A\u0649\u062C\u0649\u0644\u06D5\u0631",
       theme: "\u062A\u06D0\u0645\u0627"
     },
     contentSearchButton: {
@@ -98,6 +99,11 @@ export default defineLocale({
     inputNumber: {
       decrement: "\u0626\u0627\u0632\u0627\u064A\u062A\u0649\u0634",
       increment: "\u0643\u06C6\u067E\u06D5\u064A\u062A\u0649\u0634"
+    },
+    listbox: {
+      noData: "\u0633\u0627\u0646\u0644\u0649\u0642 \u0645\u06D5\u0644\u06C7\u0645\u0627\u062A \u064A\u0648\u0642",
+      noMatch: "\u0645\u0627\u0633 \u0643\u06D0\u0644\u0649\u062F\u0649\u063A\u0627\u0646 \u0633\u0627\u0646\u0644\u0649\u0642 \u0645\u06D5\u0644\u06C7\u0645\u0627\u062A \u064A\u0648\u0642",
+      search: "\u0626\u0649\u0632\u062F\u06D5\u0634\u2026"
     },
     modal: {
       close: "\u062A\u0627\u0642\u0627\u0634"

@@ -5,14 +5,15 @@ import theme from "#build/ui/dropdown-menu";
 <script setup>
 import { computed, toRef } from "vue";
 import { defu } from "defu";
-import { DropdownMenuRoot, DropdownMenuTrigger, DropdownMenuArrow, useForwardPropsEmits } from "reka-ui";
+import { DropdownMenuRoot, DropdownMenuTrigger, DropdownMenuArrow } from "reka-ui";
 import { reactivePick } from "@vueuse/core";
 import { useAppConfig } from "#imports";
-import { useComponentUI } from "../composables/useComponentUI";
+import { useComponentProps } from "../composables/useComponentProps";
+import { useForwardProps } from "../composables/useForwardProps";
 import { omit } from "../utils";
 import { tv } from "../utils/tv";
 import UDropdownMenuContent from "./DropdownMenuContent.vue";
-const props = defineProps({
+const _props = defineProps({
   size: { type: null, required: false },
   items: { type: null, required: false },
   checkedIcon: { type: null, required: false },
@@ -36,9 +37,9 @@ const props = defineProps({
 const emits = defineEmits(["update:open"]);
 const slots = defineSlots();
 const searchTerm = defineModel("searchTerm", { type: String, ...{ default: "" } });
+const props = useComponentProps("dropdownMenu", _props);
 const appConfig = useAppConfig();
-const uiProp = useComponentUI("dropdownMenu", props);
-const rootProps = useForwardPropsEmits(reactivePick(props, "defaultOpen", "open", "modal"), emits);
+const rootProps = useForwardProps(reactivePick(props, "defaultOpen", "open", "modal"), emits);
 const contentProps = toRef(() => defu(props.content, { side: "bottom", sideOffset: 8, collisionPadding: 8 }));
 const arrowProps = toRef(() => defu(props.arrow, { rounded: true }));
 const getProxySlots = () => omit(slots, ["default"]);
@@ -49,33 +50,33 @@ const ui = computed(() => tv({ extend: tv(theme), ...appConfig.ui?.dropdownMenu 
 
 <template>
   <DropdownMenuRoot v-slot="{ open }" v-bind="rootProps">
-    <DropdownMenuTrigger v-if="!!slots.default" as-child :class="props.class" :disabled="disabled">
+    <DropdownMenuTrigger v-if="!!slots.default" as-child :class="props.class" :disabled="props.disabled">
       <slot :open="open" />
     </DropdownMenuTrigger>
 
     <UDropdownMenuContent
       v-model:search-term="searchTerm"
-      :class="ui.content({ class: [!slots.default && props.class, uiProp?.content] })"
+      :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })"
       :ui="ui"
-      :ui-override="uiProp"
+      :ui-override="props.ui"
       v-bind="contentProps"
-      :items="items"
-      :portal="portal"
-      :label-key="labelKey"
-      :description-key="descriptionKey"
-      :checked-icon="checkedIcon"
-      :loading-icon="loadingIcon"
-      :external-icon="externalIcon"
-      :size="size"
-      :filter="filter"
-      :filter-fields="filterFields"
-      :ignore-filter="ignoreFilter"
+      :items="props.items"
+      :portal="props.portal"
+      :label-key="props.labelKey"
+      :description-key="props.descriptionKey"
+      :checked-icon="props.checkedIcon"
+      :loading-icon="props.loadingIcon"
+      :external-icon="props.externalIcon"
+      :size="props.size"
+      :filter="props.filter"
+      :filter-fields="props.filterFields"
+      :ignore-filter="props.ignoreFilter"
     >
       <template v-for="(_, name) in getProxySlots()" #[name]="slotData">
         <slot :name="name" v-bind="slotData" />
       </template>
 
-      <DropdownMenuArrow v-if="!!arrow" v-bind="arrowProps" data-slot="arrow" :class="ui.arrow({ class: uiProp?.arrow })" />
+      <DropdownMenuArrow v-if="!!props.arrow" v-bind="arrowProps" data-slot="arrow" :class="ui.arrow({ class: props.ui?.arrow })" />
     </UDropdownMenuContent>
   </DropdownMenuRoot>
 </template>

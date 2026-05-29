@@ -134,7 +134,7 @@ export interface CommandPaletteProps<G extends CommandPaletteGroup<T> = CommandP
         fuseOptions: {
           ignoreLocation: true,
           threshold: 0.1,
-          keys: ['label', 'suffix']
+          keys: ['label', 'description', 'suffix']
         },
         resultLimit: 12,
         matchAllWhenSearchEmpty: true
@@ -179,6 +179,13 @@ export interface CommandPaletteProps<G extends CommandPaletteGroup<T> = CommandP
      * @defaultValue false
      */
     preserveGroupOrder?: boolean;
+    /**
+     * Delay (in milliseconds) before the search term is passed to Fuse (debounced).
+     * Useful when indexing large datasets where fuzzy search becomes the bottleneck — the input stays responsive while Fuse and the result pipeline only re-run after typing settles.
+     * Set to `0` (the default) to disable.
+     * @defaultValue 0
+     */
+    searchDelay?: number;
     class?: any;
     ui?: CommandPalette['slots'];
 }
@@ -223,12 +230,12 @@ declare const __VLS_export: <G extends CommandPaletteGroup<T>, T extends Command
     props: import("vue").PublicProps & __VLS_PrettifyLocal<(CommandPaletteProps<G, T> & {
         searchTerm?: string;
     }) & {
+        "onUpdate:open"?: ((value: boolean) => any) | undefined;
+        "onUpdate:modelValue"?: ((value: T) => any) | undefined;
         onHighlight?: ((payload: {
             ref: HTMLElement;
             value: T;
         } | undefined) => any) | undefined;
-        "onUpdate:open"?: ((value: boolean) => any) | undefined;
-        "onUpdate:modelValue"?: ((value: T) => any) | undefined;
         "onUpdate:searchTerm"?: ((value: string) => any) | undefined;
         onEntryFocus?: ((event: CustomEvent<any>) => any) | undefined;
         onLeave?: ((event: Event) => any) | undefined;
@@ -238,10 +245,10 @@ declare const __VLS_export: <G extends CommandPaletteGroup<T>, T extends Command
     expose: (exposed: {}) => void;
     attrs: any;
     slots: CommandPaletteSlots<T, G>;
-    emit: (((evt: "highlight", payload: {
+    emit: (((evt: "update:open", value: boolean) => void) & ((evt: "update:modelValue", value: T) => void) & ((evt: "highlight", payload: {
         ref: HTMLElement;
         value: T;
-    } | undefined) => void) & ((evt: "update:open", value: boolean) => void) & ((evt: "update:modelValue", value: T) => void) & ((evt: "entryFocus", event: CustomEvent<any>) => void) & ((evt: "leave", event: Event) => void)) & ((event: "update:searchTerm", value: string) => void);
+    } | undefined) => void) & ((evt: "entryFocus", event: CustomEvent<any>) => void) & ((evt: "leave", event: Event) => void)) & ((event: "update:searchTerm", value: string) => void);
 }>) => import("vue").VNode & {
     __ctx?: Awaited<typeof __VLS_setup>;
 };

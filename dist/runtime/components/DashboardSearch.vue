@@ -4,28 +4,22 @@ import theme from "#build/ui/dashboard-search";
 
 <script setup>
 import { computed, useTemplateRef } from "vue";
-import { useForwardProps } from "reka-ui";
 import { defu } from "defu";
 import { reactivePick } from "@vueuse/core";
 import { useAppConfig, useColorMode, defineShortcuts, useRuntimeHook } from "#imports";
-import { useComponentUI } from "../composables/useComponentUI";
+import { useComponentProps } from "../composables/useComponentProps";
+import { useForwardProps } from "../composables/useForwardProps";
 import { useLocale } from "../composables/useLocale";
 import { omit, transformUI } from "../utils";
 import { tv } from "../utils/tv";
 import UCommandPalette from "./CommandPalette.vue";
 import UModal from "./Modal.vue";
-const props = defineProps({
+const _props = defineProps({
   size: { type: null, required: false },
-  icon: { type: null, required: false },
-  placeholder: { type: String, required: false },
-  autofocus: { type: Boolean, required: false },
-  loading: { type: Boolean, required: false },
-  loadingIcon: { type: null, required: false },
   close: { type: [Boolean, Object], required: false, default: true },
-  closeIcon: { type: null, required: false },
   shortcut: { type: String, required: false, default: "meta_k" },
-  groups: { type: Array, required: false },
   fuse: { type: Object, required: false },
+  searchDelay: { type: Number, required: false, default: 100 },
   colorMode: { type: Boolean, required: false, default: true },
   class: { type: null, required: false },
   ui: { type: Object, required: false },
@@ -37,9 +31,28 @@ const props = defineProps({
   dismissible: { type: Boolean, required: false },
   fullscreen: { type: Boolean, required: false, default: false },
   modal: { type: Boolean, required: false },
-  portal: { type: [Boolean, String], required: false, skipCheck: true }
+  portal: { type: [Boolean, String], required: false, skipCheck: true },
+  icon: { type: null, required: false },
+  trailingIcon: { type: null, required: false },
+  selectedIcon: { type: null, required: false },
+  childrenIcon: { type: null, required: false },
+  placeholder: { type: String, required: false },
+  autofocus: { type: Boolean, required: false },
+  loading: { type: Boolean, required: false },
+  loadingIcon: { type: null, required: false },
+  closeIcon: { type: null, required: false },
+  back: { type: [Boolean, Object], required: false },
+  backIcon: { type: null, required: false },
+  disabled: { type: Boolean, required: false },
+  highlightOnHover: { type: Boolean, required: false },
+  labelKey: { type: null, required: false },
+  descriptionKey: { type: null, required: false },
+  preserveGroupOrder: { type: Boolean, required: false },
+  virtualize: { type: [Boolean, Object], required: false },
+  groups: { type: Array, required: false }
 });
 const slots = defineSlots();
+const props = useComponentProps("dashboardSearch", _props);
 const open = defineModel("open", { type: Boolean, ...{ default: false } });
 const searchTerm = defineModel("searchTerm", { type: String, ...{ default: "" } });
 useRuntimeHook("dashboard:search:toggle", () => {
@@ -48,12 +61,13 @@ useRuntimeHook("dashboard:search:toggle", () => {
 const { t } = useLocale();
 const colorMode = useColorMode();
 const appConfig = useAppConfig();
-const uiProp = useComponentUI("dashboardSearch", props);
-const commandPaletteProps = useForwardProps(reactivePick(props, "size", "icon", "placeholder", "autofocus", "loading", "loadingIcon", "close", "closeIcon"));
+const commandPaletteProps = useForwardProps(reactivePick(props, "size", "icon", "trailingIcon", "selectedIcon", "childrenIcon", "placeholder", "autofocus", "loading", "loadingIcon", "close", "closeIcon", "back", "backIcon", "disabled", "highlightOnHover", "labelKey", "descriptionKey", "preserveGroupOrder", "virtualize", "searchDelay"));
 const modalProps = useForwardProps(reactivePick(props, "overlay", "transition", "content", "dismissible", "fullscreen", "modal", "portal"));
 const getProxySlots = () => omit(slots, ["content"]);
 const fuse = computed(() => defu({}, props.fuse, {
-  fuseOptions: {}
+  fuseOptions: {
+    useTokenSearch: true
+  }
 }));
 const ui = computed(() => tv({ extend: tv(theme), ...appConfig.ui?.dashboardSearch || {} })({
   size: props.size,
@@ -114,11 +128,11 @@ defineExpose({
 <template>
   <UModal
     v-model:open="open"
-    :title="title || t('dashboardSearch.title')"
-    :description="description || t('dashboardSearch.description')"
+    :title="props.title || t('dashboardSearch.title')"
+    :description="props.description || t('dashboardSearch.description')"
     v-bind="modalProps"
     data-slot="modal"
-    :class="ui.modal({ class: [uiProp?.modal, props.class] })"
+    :class="ui.modal({ class: [props.ui?.modal, props.class] })"
   >
     <template #content="contentData">
       <slot name="content" v-bind="contentData">
@@ -129,7 +143,7 @@ defineExpose({
           :groups="groups"
           :fuse="fuse"
           :input="{ fixed: true }"
-          :ui="transformUI(omit(ui, ['modal']), uiProp)"
+          :ui="transformUI(omit(ui, ['modal']), props.ui)"
           @update:model-value="onSelect"
           @update:open="open = $event"
         >

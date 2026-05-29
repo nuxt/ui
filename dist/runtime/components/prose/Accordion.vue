@@ -5,18 +5,18 @@ import theme from "#build/ui/prose/accordion";
 <script setup>
 import { computed, ref, onBeforeUpdate } from "vue";
 import { useAppConfig } from "#imports";
-import { useComponentUI } from "../../composables/useComponentUI";
+import { useComponentProps } from "../../composables/useComponentProps";
 import { transformUI } from "../../utils";
 import { tv } from "../../utils/tv";
 import UAccordion from "../Accordion.vue";
-const props = defineProps({
+const _props = defineProps({
   type: { type: String, required: false, default: "multiple" },
   class: { type: null, required: false },
   ui: { type: Object, required: false }
 });
 const slots = defineSlots();
+const props = useComponentProps("prose.accordion", _props);
 const appConfig = useAppConfig();
-const uiProp = useComponentUI("prose.accordion", props);
 const ui = computed(() => tv({ extend: tv(theme), ...appConfig.ui?.prose?.accordion || {} }));
 const rerenderCount = ref(1);
 const items = computed(() => {
@@ -39,7 +39,7 @@ onBeforeUpdate(() => rerenderCount.value++);
 </script>
 
 <template>
-  <UAccordion :type="type" :items="items" :unmount-on-hide="false" :class="props.class" :ui="transformUI(ui(), uiProp)">
+  <UAccordion :type="props.type" :items="items" :unmount-on-hide="false" :class="props.class" :ui="transformUI(ui(), props.ui)">
     <template #content="{ item }">
       <component :is="item.component" />
     </template>

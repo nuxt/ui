@@ -1,6 +1,6 @@
 import { defu } from 'defu';
 import { defineNuxtModule, createResolver, addPlugin, hasNuxtModule, addComponentsDir, addImportsDir, addImports } from '@nuxt/kit';
-import { d as defaultOptions, r as resolveColors, a as getDefaultConfig, p as publicComposables, b as addTemplates } from './shared/ui.DN1xpmfD.mjs';
+import { d as defaultOptions, r as resolveColors, g as getDefaultConfig, p as publicComposables, a as addTemplates } from './shared/ui.BjV8Ykyw.mjs';
 import '../dist/runtime/utils/index.js';
 import 'node:url';
 import 'scule';
@@ -11,7 +11,7 @@ import 'pathe';
 import 'tinyglobby';
 
 const name = "@nuxt/ui";
-const version = "4.6.1";
+const version = "4.8.1";
 
 const module$1 = defineNuxtModule({
   meta: {
@@ -50,7 +50,7 @@ const module$1 = defineNuxtModule({
         }
       },
       "@nuxtjs/mdc": {
-        optional: !userUiOptions.mdc && !userUiOptions.content,
+        optional: !userUiOptions.mdc,
         defaults: {
           highlight: {
             theme: {
@@ -142,7 +142,7 @@ const module$1 = defineNuxtModule({
     });
     addImports(
       Object.entries(publicComposables).flatMap(
-        ([file, exports$1]) => exports$1.map((name2) => ({ name: name2, from: resolve(`./runtime/composables/${file}`) }))
+        ([file, exports]) => exports.map((name2) => ({ name: name2, from: resolve(`./runtime/composables/${file}`) }))
       )
     );
     addTemplates(options, nuxt, resolve);

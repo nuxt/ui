@@ -61,8 +61,9 @@ export function defineShortcuts(config, options = {}) {
     if (!e.key) {
       return;
     }
-    const alphabetKey = layoutIndependent ? /^Key[A-Z]$/i.test(e.code) : /^[a-z]{1}$/i.test(e.key);
-    const shiftableKey = layoutIndependent ? shiftableCodes.includes(e.code) : shiftableKeys.includes(e.key.toLowerCase());
+    const useCode = layoutIndependent || e.altKey;
+    const alphabetKey = useCode ? /^Key[A-Z]$/i.test(e.code) : /^[a-z]{1}$/i.test(e.key);
+    const shiftableKey = useCode ? shiftableCodes.includes(e.code) : shiftableKeys.includes(e.key.toLowerCase());
     let chainedKey;
     chainedInputs.value.push(layoutIndependent ? e.code : e.key);
     if (chainedInputs.value.length >= 2) {
@@ -82,6 +83,10 @@ export function defineShortcuts(config, options = {}) {
     for (const shortcut of shortcuts.value.filter((s) => !s.chained)) {
       if (layoutIndependent) {
         if (e.code !== shortcut.key) {
+          continue;
+        }
+      } else if (shortcut.altKey && e.altKey) {
+        if (e.code !== convertKeyToCode(shortcut.key)) {
           continue;
         }
       } else {

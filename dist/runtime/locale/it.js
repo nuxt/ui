@@ -53,6 +53,7 @@ export default defineLocale({
     },
     contentSearch: {
       links: "Collegamenti",
+      search: "Risultati",
       theme: "Tema"
     },
     contentSearchButton: {
@@ -97,6 +98,11 @@ export default defineLocale({
     inputNumber: {
       decrement: "Diminuisci",
       increment: "Aumenta"
+    },
+    listbox: {
+      noData: "Nessun dato",
+      noMatch: "Nessun dato corrispondente",
+      search: "Cerca\u2026"
     },
     modal: {
       close: "Chiudi"

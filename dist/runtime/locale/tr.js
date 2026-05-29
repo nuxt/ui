@@ -53,6 +53,7 @@ export default defineLocale({
     },
     contentSearch: {
       links: "Ba\u011Flant\u0131lar",
+      search: "Sonu\xE7lar",
       theme: "Tema"
     },
     contentSearchButton: {
@@ -97,6 +98,11 @@ export default defineLocale({
     inputNumber: {
       decrement: "Azalt",
       increment: "Artt\u0131r"
+    },
+    listbox: {
+      noData: "Veri yok",
+      noMatch: "E\u015Fle\u015Fen veri yok",
+      search: "Ara\u2026"
     },
     modal: {
       close: "Kapat"

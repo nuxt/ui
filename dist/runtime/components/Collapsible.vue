@@ -4,12 +4,13 @@ import theme from "#build/ui/collapsible";
 
 <script setup>
 import { computed } from "vue";
-import { CollapsibleRoot, CollapsibleTrigger, CollapsibleContent, useForwardPropsEmits } from "reka-ui";
+import { CollapsibleRoot, CollapsibleTrigger, CollapsibleContent } from "reka-ui";
+import { useForwardProps } from "../composables/useForwardProps";
 import { reactivePick } from "@vueuse/core";
 import { useAppConfig } from "#imports";
-import { useComponentUI } from "../composables/useComponentUI";
+import { useComponentProps } from "../composables/useComponentProps";
 import { tv } from "../utils/tv";
-const props = defineProps({
+const _props = defineProps({
   as: { type: null, required: false },
   class: { type: null, required: false },
   ui: { type: Object, required: false },
@@ -20,19 +21,19 @@ const props = defineProps({
 });
 const emits = defineEmits(["update:open"]);
 const slots = defineSlots();
+const props = useComponentProps("collapsible", _props);
 const appConfig = useAppConfig();
-const uiProp = useComponentUI("collapsible", props);
-const rootProps = useForwardPropsEmits(reactivePick(props, "as", "defaultOpen", "open", "disabled", "unmountOnHide"), emits);
+const rootProps = useForwardProps(reactivePick(props, "as", "defaultOpen", "open", "disabled", "unmountOnHide"), emits);
 const ui = computed(() => tv({ extend: tv(theme), ...appConfig.ui?.collapsible || {} })());
 </script>
 
 <template>
-  <CollapsibleRoot v-slot="{ open }" v-bind="rootProps" data-slot="root" :class="ui.root({ class: [uiProp?.root, props.class] })">
+  <CollapsibleRoot v-slot="{ open }" v-bind="rootProps" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <CollapsibleTrigger v-if="!!slots.default" as-child>
       <slot :open="open" />
     </CollapsibleTrigger>
 
-    <CollapsibleContent data-slot="content" :class="ui.content({ class: uiProp?.content })">
+    <CollapsibleContent data-slot="content" :class="ui.content({ class: props.ui?.content })">
       <slot name="content" />
     </CollapsibleContent>
   </CollapsibleRoot>

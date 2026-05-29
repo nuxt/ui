@@ -9,6 +9,8 @@ export interface CardProps {
      * @defaultValue 'div'
      */
     as?: any;
+    title?: string;
+    description?: string;
     /**
      * @defaultValue 'outline'
      */
@@ -18,6 +20,8 @@ export interface CardProps {
 }
 export interface CardSlots {
     header?(props?: {}): VNode[];
+    title?(props?: {}): VNode[];
+    description?(props?: {}): VNode[];
     default?(props?: {}): VNode[];
     footer?(props?: {}): VNode[];
 }

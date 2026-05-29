@@ -51,6 +51,10 @@ export type UseResizableProps = {
      */
     storageKey?: string;
     /**
+     * Options to pass to the underlying storage (`useCookie` or `useStorage`).
+     */
+    storageOptions?: Record<string, any>;
+    /**
      * Whether to persist the size in the storage.
      * @defaultValue true
      */

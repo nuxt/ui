@@ -5,20 +5,20 @@ import theme from "#build/ui/prose/strong";
 <script setup>
 import { computed } from "vue";
 import { useAppConfig } from "#imports";
-import { useComponentUI } from "../../composables/useComponentUI";
+import { useComponentProps } from "../../composables/useComponentProps";
 import { tv } from "../../utils/tv";
-const props = defineProps({
+const _props = defineProps({
   class: { type: null, required: false },
   ui: { type: Object, required: false }
 });
 defineSlots();
+const props = useComponentProps("prose.strong", _props);
 const appConfig = useAppConfig();
-const uiProp = useComponentUI("prose.strong", props);
 const ui = computed(() => tv({ extend: tv(theme), ...appConfig.ui?.prose?.strong || {} }));
 </script>
 
 <template>
-  <strong :class="ui({ class: [uiProp?.base, props.class] })">
+  <strong :class="ui({ class: [props.ui?.base, props.class] })">
     <slot />
   </strong>
 </template>
