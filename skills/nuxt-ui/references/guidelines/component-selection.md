@@ -83,6 +83,24 @@ Decision matrices for choosing the right component. When in doubt, use the MCP `
 - Use `UBanner` for site-wide messages (maintenance, new feature)
 - Never use a toast for information the user needs to act on — use an alert or modal instead
 
+## Markdown
+
+When rendering Markdown (for instance with Comark), **prefer Prose components** — they are styled and tuned for Markdown contexts. Generic Nuxt UI components can also be used. `<ComarkRenderer>` (or `<Comark>`) auto-resolves `ProseX` components when `@nuxt/ui` is installed. In Markdown, the `Prose` prefix can be omitted (`::callout`, `::steps`, etc.).
+
+| Need | Use | Not |
+|---|---|---|
+| Note / warning / tip | `Callout` | `UAlert` |
+| Tabbed content | `Tabs` + `TabsItem` | `UTabs` |
+| Step-by-step list | `Steps` | custom list |
+| Content card grid | `Card` + `CardGroup` | `UCard` |
+| Collapsible section | `Collapsible` / `Accordion` | `UCollapsible` / `UAccordion` |
+| Tabbed code blocks | `CodeGroup` | manual tabs |
+
+### Rules
+- Prose components use native Vue slots — Comark maps named `#slot` blocks directly to `<slot name="..." />`
+- Theme via `appConfig.ui.prose.<name>` using the same override pattern as other Nuxt UI components
+- `Callout` colors: `neutral` (default), `primary`, `secondary`, `info`, `success`, `warning`, `error`
+
 ## Layout containers
 
 | Need | Component | Why |

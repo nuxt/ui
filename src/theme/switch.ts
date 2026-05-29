@@ -69,6 +69,9 @@ export default (options: Required<ModuleOptions>) => ({
         icon: 'animate-spin'
       }
     },
+    highlight: {
+      true: ''
+    },
     required: {
       true: {
         label: 'after:content-[\'*\'] after:ms-0.5 after:text-error'
@@ -83,6 +86,22 @@ export default (options: Required<ModuleOptions>) => ({
       }
     }
   },
+  compoundVariants: [
+    ...(options.theme.colors || []).map((color: string) => ({
+      color,
+      highlight: true,
+      class: {
+        base: `ring ring-${color}`
+      }
+    })),
+    {
+      color: 'neutral',
+      highlight: true,
+      class: {
+        base: 'ring ring-inverted'
+      }
+    }
+  ],
   defaultVariants: {
     color: 'primary',
     size: 'md'

@@ -55,6 +55,7 @@ export default defineLocale<Messages>({
     },
     contentSearch: {
       links: 'Спасылкі',
+      search: 'Вынікі',
       theme: 'Тэма'
     },
     contentSearchButton: {
@@ -99,6 +100,11 @@ export default defineLocale<Messages>({
     inputNumber: {
       decrement: 'Паменшыць',
       increment: 'Павялічыць'
+    },
+    listbox: {
+      noData: 'Няма даных',
+      noMatch: 'Супадзенняў не знойдзена',
+      search: 'Пошук…'
     },
     modal: {
       close: 'Закрыць'

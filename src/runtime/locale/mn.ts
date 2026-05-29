@@ -55,6 +55,7 @@ export default defineLocale<Messages>({
     },
     contentSearch: {
       links: 'Холбоосууд',
+      search: 'Үр дүн',
       theme: 'Загвар'
     },
     contentSearchButton: {
@@ -99,6 +100,11 @@ export default defineLocale<Messages>({
     inputNumber: {
       decrement: 'Хасах',
       increment: 'Нэмэх'
+    },
+    listbox: {
+      noData: 'Мэдээлэл байхгүй',
+      noMatch: 'Тохирох мэдээлэл олдсонгүй',
+      search: 'Хайх…'
     },
     modal: {
       close: 'Хаах'

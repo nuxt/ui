@@ -55,6 +55,7 @@ export default defineLocale<Messages>({
     },
     contentSearch: {
       links: 'Nuorodos',
+      search: 'Rezultatai',
       theme: 'Tema'
     },
     contentSearchButton: {
@@ -99,6 +100,11 @@ export default defineLocale<Messages>({
     inputNumber: {
       decrement: 'Sumažinti',
       increment: 'Padidinti'
+    },
+    listbox: {
+      noData: 'Nėra duomenų',
+      noMatch: 'Nėra atitinkančių duomenų',
+      search: 'Ieškoti…'
     },
     modal: {
       close: 'Uždaryti'

@@ -55,6 +55,7 @@ export default defineLocale<Messages>({
     },
     contentSearch: {
       links: 'Povezave',
+      search: 'Rezultati',
       theme: 'Tema'
     },
     contentSearchButton: {
@@ -99,6 +100,11 @@ export default defineLocale<Messages>({
     inputNumber: {
       decrement: 'Zmanjšaj',
       increment: 'Povišaj'
+    },
+    listbox: {
+      noData: 'Ni podatkov',
+      noMatch: 'Ni ujemanj',
+      search: 'Išči…'
     },
     modal: {
       close: 'Zapri'

@@ -112,6 +112,33 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.ch
 :::
 ::
 
+### Color :badge{label="4.8+" class="align-text-top"}
+
+Use the `color` prop to change the color of the active Breadcrumb.
+
+::component-code
+---
+ignore:
+  - items
+external:
+  - items
+externalTypes:
+  - BreadcrumbItem[]
+props:
+  color: 'secondary'
+  items:
+    - label: 'Docs'
+      icon: 'i-lucide-book-open'
+      to: '/docs'
+    - label: 'Components'
+      icon: 'i-lucide-box'
+      to: '/docs/components'
+    - label: 'Breadcrumb'
+      icon: 'i-lucide-link'
+      to: '/docs/components/breadcrumb'
+---
+::
+
 ## Examples
 
 ### With separator slot

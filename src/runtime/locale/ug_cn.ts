@@ -56,6 +56,7 @@ export default defineLocale<Messages>({
     },
     contentSearch: {
       links: 'ئۇلانمىلار',
+      search: 'نەتىجىلەر',
       theme: 'تېما'
     },
     contentSearchButton: {
@@ -100,6 +101,11 @@ export default defineLocale<Messages>({
     inputNumber: {
       decrement: 'ئازايتىش',
       increment: 'كۆپەيتىش'
+    },
+    listbox: {
+      noData: 'سانلىق مەلۇمات يوق',
+      noMatch: 'ماس كېلىدىغان سانلىق مەلۇمات يوق',
+      search: 'ئىزدەش…'
     },
     modal: {
       close: 'تاقاش'

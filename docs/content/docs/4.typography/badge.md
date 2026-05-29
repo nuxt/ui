@@ -1,7 +1,8 @@
 ---
-title: Badge
+title: ProseBadge
 description: 'Display version numbers, status labels, and tags within your content.'
 category: components
+navigation.title: Badge
 links:
   - label: GitHub
     icon: i-simple-icons-github

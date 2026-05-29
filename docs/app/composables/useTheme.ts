@@ -20,6 +20,8 @@ export function useTheme() {
   const { track } = useAnalytics()
   const { framework } = useFrameworks()
 
+  const color = computed(() => colorMode.value === 'dark' ? (colors as any)[appConfig.ui.colors.neutral][900] : 'white')
+
   const aiThemeExtras = useState<Record<string, any>>('nuxt-ui-ai-theme', () => readLocalStorage('nuxt-ui-ai-theme', {}))
   const customColorsData = useState<Record<string, Record<string, string>>>('nuxt-ui-custom-colors', () => readLocalStorage('nuxt-ui-custom-colors', {}))
   const cssVariablesData = useState<{ light?: Record<string, string>, dark?: Record<string, string> }>('nuxt-ui-css-variables', () => readLocalStorage('nuxt-ui-css-variables', {}))
@@ -395,6 +397,7 @@ export function useTheme() {
   }
 
   return {
+    color,
     style,
     link,
     neutralColors,

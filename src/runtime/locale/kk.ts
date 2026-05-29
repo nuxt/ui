@@ -55,6 +55,7 @@ export default defineLocale<Messages>({
     },
     contentSearch: {
       links: 'Сілтемелер',
+      search: 'Нәтижелер',
       theme: 'Тақырып'
     },
     contentSearchButton: {
@@ -99,6 +100,11 @@ export default defineLocale<Messages>({
     inputNumber: {
       decrement: 'Азайту',
       increment: 'Арттыру'
+    },
+    listbox: {
+      noData: 'Деректер жоқ',
+      noMatch: 'Сәйкес келетін деректер жоқ',
+      search: 'Іздеу…'
     },
     modal: {
       close: 'Жабу'

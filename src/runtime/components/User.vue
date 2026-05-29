@@ -45,7 +45,8 @@ export interface UserSlots {
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
-import { useComponentUI } from '../composables/useComponentUI'
+import { useComponentProps } from '../composables/useComponentProps'
+import { usePrefix } from '../composables/usePrefix'
 import { tv } from '../utils/tv'
 import UChip from './Chip.vue'
 import UAvatar from './Avatar.vue'
@@ -53,14 +54,17 @@ import ULink from './Link.vue'
 
 defineOptions({ inheritAttrs: false })
 
-const props = withDefaults(defineProps<UserProps>(), {
+const _props = withDefaults(defineProps<UserProps>(), {
   orientation: 'horizontal'
 })
 const slots = defineSlots<UserSlots>()
 
-const appConfig = useAppConfig() as User['AppConfig']
-const uiProp = useComponentUI('user', props)
+const props = useComponentProps('user', _props)
 
+const appConfig = useAppConfig() as User['AppConfig']
+const prefix = usePrefix()
+
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.user || {}) })({
   size: props.size,
   orientation: props.orientation,
@@ -69,41 +73,41 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.user || {}) 
 </script>
 
 <template>
-  <Primitive :as="as" :data-orientation="orientation" data-slot="root" :class="ui.root({ class: [uiProp?.root, props.class] })" @click="onClick">
+  <Primitive :as="props.as" :data-orientation="props.orientation" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })" @click="props.onClick">
     <slot name="avatar" :ui="ui">
-      <UChip v-if="chip && avatar" inset v-bind="typeof chip === 'object' ? chip : {}" :size="size">
-        <UAvatar :alt="name" v-bind="avatar" :size="size" data-slot="avatar" :class="ui.avatar({ class: uiProp?.avatar })" />
+      <UChip v-if="props.chip && props.avatar" inset v-bind="typeof props.chip === 'object' ? props.chip : {}" :size="props.size">
+        <UAvatar :alt="props.name" v-bind="props.avatar" :size="props.size" data-slot="avatar" :class="ui.avatar({ class: props.ui?.avatar })" />
       </UChip>
       <UAvatar
-        v-else-if="avatar"
-        :alt="name"
-        v-bind="avatar"
-        :size="size"
+        v-else-if="props.avatar"
+        :alt="props.name"
+        v-bind="props.avatar"
+        :size="props.size"
         data-slot="avatar"
-        :class="ui.avatar({ class: uiProp?.avatar })"
+        :class="ui.avatar({ class: props.ui?.avatar })"
       />
     </slot>
 
-    <div data-slot="wrapper" :class="ui.wrapper({ class: uiProp?.wrapper })">
+    <div data-slot="wrapper" :class="ui.wrapper({ class: props.ui?.wrapper })">
       <ULink
-        v-if="to"
-        :aria-label="name"
-        v-bind="{ to, target, ...$attrs }"
-        class="focus:outline-none peer"
+        v-if="props.to"
+        :aria-label="props.name"
+        v-bind="{ to: props.to, target: props.target, ...$attrs }"
+        :class="prefix('focus:outline-none peer')"
         raw
       >
-        <span class="absolute inset-0" aria-hidden="true" />
+        <span :class="prefix('absolute inset-0')" aria-hidden="true" />
       </ULink>
 
       <slot>
-        <p v-if="name || !!slots.name" data-slot="name" :class="ui.name({ class: uiProp?.name })">
+        <p v-if="props.name || !!slots.name" data-slot="name" :class="ui.name({ class: props.ui?.name })">
           <slot name="name">
-            {{ name }}
+            {{ props.name }}
           </slot>
         </p>
-        <p v-if="description || !!slots.description" data-slot="description" :class="ui.description({ class: uiProp?.description })">
+        <p v-if="props.description || !!slots.description" data-slot="description" :class="ui.description({ class: props.ui?.description })">
           <slot name="description">
-            {{ description }}
+            {{ props.description }}
           </slot>
         </p>
       </slot>

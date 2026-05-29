@@ -1,12 +1,12 @@
 ---
-title: Prompt
+title: ProsePrompt
 description: 'Display pre-built AI prompts with one-click copy and IDE integration.'
 category: components
+navigation.title: Prompt
 links:
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/prose/Prompt.vue
-navigation.badge: Soon
 ---
 
 ## Usage

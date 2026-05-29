@@ -21,23 +21,25 @@ export interface ProseTabsItemSlots {
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useAppConfig } from '#imports'
-import { useComponentUI } from '../../composables/useComponentUI'
+import { useComponentProps } from '../../composables/useComponentProps'
 import { tv } from '../../utils/tv'
 
-const props = defineProps<ProseTabsItemProps>()
+const _props = defineProps<ProseTabsItemProps>()
+
 defineSlots<ProseTabsItemSlots>()
 
+const props = useComponentProps('prose.tabsItem', _props)
+
 const appConfig = useAppConfig() as ProseTabsItem['AppConfig']
-const uiProp = useComponentUI('prose.tabsItem', props)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.tabsItem || {}) }))
 </script>
 
 <template>
-  <div :class="ui({ class: [uiProp?.base, props.class] })">
+  <div :class="ui({ class: [props.ui?.base, props.class] })">
     <slot>
-      {{ description }}
+      {{ props.description }}
     </slot>
   </div>
 </template>

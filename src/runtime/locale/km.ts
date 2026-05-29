@@ -55,6 +55,7 @@ export default defineLocale<Messages>({
     },
     contentSearch: {
       links: 'តំណភ្ជាប់',
+      search: 'លទ្ធផល',
       theme: 'រូបរាង'
     },
     contentSearchButton: {
@@ -99,6 +100,11 @@ export default defineLocale<Messages>({
     inputNumber: {
       decrement: 'បន្ថយ',
       increment: 'បង្កើន'
+    },
+    listbox: {
+      noData: 'មិនមានទិន្នន័យ',
+      noMatch: 'មិនមានទិន្នន័យដែលត្រូវគ្នាទេ',
+      search: 'ស្វែងរក…'
     },
     modal: {
       close: 'បិទ'

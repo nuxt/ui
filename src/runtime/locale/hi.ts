@@ -55,6 +55,7 @@ export default defineLocale<Messages>({
     },
     contentSearch: {
       links: 'लिंक्स',
+      search: 'परिणाम',
       theme: 'थीम'
     },
     contentSearchButton: {
@@ -99,6 +100,11 @@ export default defineLocale<Messages>({
     inputNumber: {
       decrement: 'घटाना',
       increment: 'बढ़ाना'
+    },
+    listbox: {
+      noData: 'कोई डेटा नहीं',
+      noMatch: 'कोई मेल खाता डेटा नहीं',
+      search: 'खोजें…'
     },
     modal: {
       close: 'बंद करें'

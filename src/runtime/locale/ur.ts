@@ -56,6 +56,7 @@ export default defineLocale<Messages>({
     },
     contentSearch: {
       links: 'لنکس',
+      search: 'نتائج',
       theme: 'تھیم'
     },
     contentSearchButton: {
@@ -100,6 +101,11 @@ export default defineLocale<Messages>({
     inputNumber: {
       decrement: 'کمی',
       increment: 'اضافہ'
+    },
+    listbox: {
+      noData: 'کوئی ڈیٹا نہیں',
+      noMatch: 'کوئی ملتا جلتا ڈیٹا نہیں ملا',
+      search: 'تلاش کریں…'
     },
     modal: {
       close: 'بند کریں'

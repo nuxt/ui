@@ -55,6 +55,7 @@ export default defineLocale<Messages>({
     },
     contentSearch: {
       links: 'Linkuri',
+      search: 'Rezultate',
       theme: 'Temă'
     },
     contentSearchButton: {
@@ -99,6 +100,11 @@ export default defineLocale<Messages>({
     inputNumber: {
       decrement: 'Scade',
       increment: 'Crește'
+    },
+    listbox: {
+      noData: 'Nu există date',
+      noMatch: 'Nu există date corespunzătoare',
+      search: 'Caută…'
     },
     modal: {
       close: 'Închide'

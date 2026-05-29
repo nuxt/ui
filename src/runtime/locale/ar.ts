@@ -56,6 +56,7 @@ export default defineLocale<Messages>({
     },
     contentSearch: {
       links: 'الروابط',
+      search: 'النتائج',
       theme: 'السمة'
     },
     contentSearchButton: {
@@ -100,6 +101,11 @@ export default defineLocale<Messages>({
     inputNumber: {
       decrement: 'تقليل',
       increment: 'زيادة'
+    },
+    listbox: {
+      noData: 'لا توجد بيانات',
+      noMatch: 'لا توجد نتائج مطابقة',
+      search: 'بحث…'
     },
     modal: {
       close: 'إغلاق'

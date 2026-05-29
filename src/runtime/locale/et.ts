@@ -55,6 +55,7 @@ export default defineLocale<Messages>({
     },
     contentSearch: {
       links: 'Lingid',
+      search: 'Tulemused',
       theme: 'Teema'
     },
     contentSearchButton: {
@@ -99,6 +100,11 @@ export default defineLocale<Messages>({
     inputNumber: {
       decrement: 'Vähenda',
       increment: 'Suurenda'
+    },
+    listbox: {
+      noData: 'Pole andmeid',
+      noMatch: 'Pole vastavaid andmeid',
+      search: 'Otsi…'
     },
     modal: {
       close: 'Sulge'

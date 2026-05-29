@@ -55,6 +55,7 @@ export default defineLocale<Messages>({
     },
     contentSearch: {
       links: '链接',
+      search: '搜索结果',
       theme: '主题'
     },
     contentSearchButton: {
@@ -99,6 +100,11 @@ export default defineLocale<Messages>({
     inputNumber: {
       decrement: '减少',
       increment: '增加'
+    },
+    listbox: {
+      noData: '没有数据',
+      noMatch: '没有匹配的数据',
+      search: '搜索…'
     },
     modal: {
       close: '关闭'

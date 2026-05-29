@@ -141,7 +141,7 @@ export interface CalendarSlots {
 
 <script setup lang="ts" generic="R extends boolean, M extends boolean">
 import { computed, ref, shallowRef, watch } from 'vue'
-import { useDateFormatter, useForwardPropsEmits } from 'reka-ui'
+import { useDateFormatter } from 'reka-ui'
 import {
   Calendar as SingleCalendar,
   MonthPicker,
@@ -152,12 +152,13 @@ import {
 } from 'reka-ui/namespaced'
 import { reactiveOmit } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { useComponentUI } from '../composables/useComponentUI'
+import { useComponentProps } from '../composables/useComponentProps'
+import { useForwardProps } from '../composables/useForwardProps'
 import { useLocale } from '../composables/useLocale'
 import { tv } from '../utils/tv'
 import UButton from './Button.vue'
 
-const props = withDefaults(defineProps<CalendarProps<R, M>>(), {
+const _props = withDefaults(defineProps<CalendarProps<R, M>>(), {
   type: 'date',
   fixedWeeks: true,
   monthControls: true,
@@ -168,7 +169,7 @@ defineSlots<CalendarSlots>()
 
 const { dir, t, code } = useLocale()
 const appConfig = useAppConfig() as Calendar['AppConfig']
-const uiProp = useComponentUI('calendar', props)
+const props = useComponentProps<CalendarProps<R, M>>('calendar', _props)
 const formatter = shallowRef(useDateFormatter(code.value))
 
 watch(() => code.value, (value) => {
@@ -294,7 +295,7 @@ function paginateYear(date: DateValue, sign: -1 | 1) {
   return sign === -1 ? date.subtract({ years: 1 }) : date.add({ years: 1 })
 }
 
-const dayRootProps = useForwardPropsEmits(
+const dayRootProps = useForwardProps(
   reactiveOmit(props, 'type', 'view', 'defaultView', 'range', 'modelValue', 'defaultValue', 'placeholder', 'color', 'variant', 'size', 'monthControls', 'yearControls', 'class', 'ui'),
   emits
 )
@@ -304,9 +305,13 @@ const calendarRootProps = computed(() => ({
   'onUpdate:placeholder': updatePlaceholder
 }))
 
+// eslint-disable-next-line vue/no-dupe-keys
 const nextYearIcon = computed(() => props.nextYearIcon || (dir.value === 'rtl' ? appConfig.ui.icons.chevronDoubleLeft : appConfig.ui.icons.chevronDoubleRight))
+// eslint-disable-next-line vue/no-dupe-keys
 const nextMonthIcon = computed(() => props.nextMonthIcon || (dir.value === 'rtl' ? appConfig.ui.icons.chevronLeft : appConfig.ui.icons.chevronRight))
+// eslint-disable-next-line vue/no-dupe-keys
 const prevYearIcon = computed(() => props.prevYearIcon || (dir.value === 'rtl' ? appConfig.ui.icons.chevronDoubleRight : appConfig.ui.icons.chevronDoubleLeft))
+// eslint-disable-next-line vue/no-dupe-keys
 const prevMonthIcon = computed(() => props.prevMonthIcon || (dir.value === 'rtl' ? appConfig.ui.icons.chevronRight : appConfig.ui.icons.chevronLeft))
 
 const prevMonthLabel = computed(() => t('calendar.prevMonth'))
@@ -449,22 +454,22 @@ function onPickerPlaceholderUpdate(value: DateValue) {
     v-if="view === 'day'"
     v-slot="{ weekDays, grid, date }"
     v-bind="calendarRootProps"
-    :model-value="(modelValue as DateValue | DateValue[])"
-    :default-value="(defaultValue as DateValue)"
+    :model-value="(props.modelValue as DateValue | DateValue[])"
+    :default-value="(props.defaultValue as DateValue)"
     :placeholder="localPlaceholder"
     :locale="code"
     :dir="dir"
     data-slot="root"
-    :class="ui.root({ class: [uiProp?.root, props.class] })"
+    :class="ui.root({ class: [props.ui?.root, props.class] })"
   >
-    <DayCalendar.Header data-slot="header" :class="ui.header({ class: uiProp?.header })">
+    <DayCalendar.Header data-slot="header" :class="ui.header({ class: props.ui?.header })">
       <DayCalendar.Prev v-if="props.yearControls" :prev-page="(value: DateValue) => paginateYear(value, -1)" :aria-label="prevYearLabel" as-child>
         <UButton :icon="prevYearIcon" :size="props.size" color="neutral" variant="ghost" v-bind="props.prevYear" />
       </DayCalendar.Prev>
       <DayCalendar.Prev v-if="showMonthNavigation" :aria-label="prevMonthLabel" as-child>
         <UButton :icon="prevMonthIcon" :size="props.size" color="neutral" variant="ghost" v-bind="props.prevMonth" />
       </DayCalendar.Prev>
-      <DayCalendar.Heading v-slot="{ headingValue }" data-slot="heading" :class="ui.heading({ class: uiProp?.heading })">
+      <DayCalendar.Heading v-slot="{ headingValue }" data-slot="heading" :class="ui.heading({ class: props.ui?.heading })">
         <slot
           name="heading"
           :value="headingValue"
@@ -501,20 +506,20 @@ function onPickerPlaceholderUpdate(value: DateValue) {
         <UButton :icon="nextYearIcon" :size="props.size" color="neutral" variant="ghost" v-bind="props.nextYear" />
       </DayCalendar.Next>
     </DayCalendar.Header>
-    <div data-slot="body" :class="ui.body({ class: uiProp?.body })">
+    <div data-slot="body" :class="ui.body({ class: props.ui?.body })">
       <DayCalendar.Grid
         v-for="month in grid"
         :key="month.value.toString()"
         data-slot="grid"
-        :class="ui.grid({ class: uiProp?.grid })"
+        :class="ui.grid({ class: props.ui?.grid })"
       >
         <DayCalendar.GridHead>
-          <DayCalendar.GridRow data-slot="gridWeekDaysRow" :class="ui.gridWeekDaysRow({ class: uiProp?.gridWeekDaysRow })">
+          <DayCalendar.GridRow data-slot="gridWeekDaysRow" :class="ui.gridWeekDaysRow({ class: props.ui?.gridWeekDaysRow })">
             <DayCalendar.HeadCell
               v-for="day in weekDays"
               :key="day"
               data-slot="headCell"
-              :class="ui.headCell({ class: uiProp?.headCell })"
+              :class="ui.headCell({ class: props.ui?.headCell })"
             >
               <slot name="week-day" :day="day">
                 {{ day }}
@@ -522,18 +527,18 @@ function onPickerPlaceholderUpdate(value: DateValue) {
             </DayCalendar.HeadCell>
           </DayCalendar.GridRow>
         </DayCalendar.GridHead>
-        <DayCalendar.GridBody data-slot="gridBody" :class="ui.gridBody({ class: uiProp?.gridBody })">
+        <DayCalendar.GridBody data-slot="gridBody" :class="ui.gridBody({ class: props.ui?.gridBody })">
           <DayCalendar.GridRow
             v-for="(weekDates, index) in month.rows"
             :key="`weekDate-${index}`"
             data-slot="gridRow"
-            :class="ui.gridRow({ class: uiProp?.gridRow })"
+            :class="ui.gridRow({ class: props.ui?.gridRow })"
           >
             <td
-              v-if="weekNumbers && weekDates[0]"
+              v-if="props.weekNumbers && weekDates[0]"
               role="gridcell"
               data-slot="cellWeek"
-              :class="ui.cellWeek({ class: uiProp?.cellWeek })"
+              :class="ui.cellWeek({ class: props.ui?.cellWeek })"
             >
               {{ getWeekNumber(weekDates[0], code) }}
             </td>
@@ -542,13 +547,13 @@ function onPickerPlaceholderUpdate(value: DateValue) {
               :key="weekDate.toString()"
               :date="weekDate"
               data-slot="cell"
-              :class="ui.cell({ class: uiProp?.cell })"
+              :class="ui.cell({ class: props.ui?.cell })"
             >
               <DayCalendar.CellTrigger
                 :day="weekDate"
                 :month="month.value"
                 data-slot="cellTrigger"
-                :class="ui.cellTrigger({ class: uiProp?.cellTrigger })"
+                :class="ui.cellTrigger({ class: props.ui?.cellTrigger })"
               >
                 <slot name="day" :day="weekDate">
                   {{ weekDate.day }}
@@ -567,12 +572,12 @@ function onPickerPlaceholderUpdate(value: DateValue) {
     v-slot="{ grid, date }"
     v-bind="pickerRootProps"
     data-slot="root"
-    :class="ui.root({ class: ['inline-flex w-fit flex-col gap-4', uiProp?.root, props.class] })"
+    :class="ui.root({ class: ['inline-flex w-fit flex-col gap-4', props.ui?.root, props.class] })"
   >
     <component
       :is="picker.header"
       data-slot="header"
-      :class="ui.header({ class: ['grid w-full grid-cols-[auto_1fr_1fr_auto] items-center gap-1', uiProp?.header] })"
+      :class="ui.header({ class: ['grid w-full grid-cols-[auto_1fr_1fr_auto] items-center gap-1', props.ui?.header] })"
     >
       <component :is="picker.prev" v-if="props.yearControls" :aria-label="picker.previousLabel" as-child>
         <UButton :icon="prevYearIcon" :size="props.size" color="neutral" variant="ghost" v-bind="props.prevYear" />
@@ -581,7 +586,7 @@ function onPickerPlaceholderUpdate(value: DateValue) {
         :is="picker.heading"
         v-slot="{ headingValue }"
         data-slot="heading"
-        :class="ui.heading({ class: ['col-span-2 overflow-visible whitespace-nowrap text-center', uiProp?.heading] })"
+        :class="ui.heading({ class: ['col-span-2 overflow-visible whitespace-nowrap text-center', props.ui?.heading] })"
       >
         <slot
           name="heading"
@@ -626,7 +631,7 @@ function onPickerPlaceholderUpdate(value: DateValue) {
       :is="picker.grid"
       as="div"
       :data-slot="pickerSlotNames.grid"
-      :class="ui.grid({ class: uiProp?.grid })"
+      :class="ui.grid({ class: props.ui?.grid })"
     >
       <component :is="picker.gridBody" as="div">
         <component
@@ -635,7 +640,7 @@ function onPickerPlaceholderUpdate(value: DateValue) {
           :key="rowIndex"
           as="div"
           :data-slot="pickerSlotNames.row"
-          :class="ui.gridRow({ class: uiProp?.gridRow })"
+          :class="ui.gridRow({ class: props.ui?.gridRow })"
         >
           <component
             :is="picker.cell"
@@ -644,14 +649,14 @@ function onPickerPlaceholderUpdate(value: DateValue) {
             as="div"
             :date="cellDate"
             :data-slot="pickerSlotNames.cell"
-            :class="ui.cell({ class: uiProp?.cell })"
+            :class="ui.cell({ class: props.ui?.cell })"
           >
             <component
               :is="picker.cellTrigger"
               v-slot="slotProps"
               v-bind="{ [picker.itemProp]: cellDate }"
               :data-slot="pickerSlotNames.trigger"
-              :class="ui.cellTrigger({ class: uiProp?.cellTrigger })"
+              :class="ui.cellTrigger({ class: props.ui?.cellTrigger })"
             >
               <slot v-if="picker.kind === 'month'" name="month-cell" :month="cellDate" :selected="slotProps.selected" :disabled="slotProps.disabled">
                 {{ slotProps.monthValue }}

@@ -1,7 +1,8 @@
 ---
-title: Kbd
+title: ProseKbd
 description: 'Display keyboard shortcuts and key combinations with proper styling.'
 category: components
+navigation.title: Kbd
 links:
   - label: GitHub
     icon: i-simple-icons-github

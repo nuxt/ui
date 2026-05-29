@@ -81,7 +81,7 @@ You can use multiple `EditorMentionMenu` components on the same editor with diff
 ```
 ::
 
-### Suggestion :badge{label="Soon" class="align-text-top"}
+### Suggestion :badge{label="4.7+" class="align-text-top"}
 
 Use the `suggestion` prop to customize TipTap's [Suggestion matching behavior](https://tiptap.dev/docs/editor/api/utilities/suggestion#settings).
 

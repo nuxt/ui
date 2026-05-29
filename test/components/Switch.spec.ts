@@ -28,6 +28,8 @@ describe('Switch', () => {
     ['with description', { props: { label: 'Label', description: 'Description' } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { size } }]),
     ['with color neutral', { props: { color: 'neutral', defaultValue: true } }],
+    ['with highlight', { props: { highlight: true } }],
+    ['with highlight neutral', { props: { highlight: true, color: 'neutral' } }],
     ['with ariaLabel', { attrs: { 'aria-label': 'Aria label' } }],
     ['with trueValue/falseValue as string', { props: { trueValue: 'on', falseValue: 'off', defaultValue: 'on' } }],
     ['with trueValue/falseValue as number', { props: { trueValue: 1, falseValue: 0, defaultValue: 1 } }],
