@@ -46,4 +46,22 @@ describe('Modal', () => {
 
     expect(await axe(wrapper.element)).toHaveNoViolations()
   })
+
+  it('unmounts content when closed by default', async () => {
+    const wrapper = await mountSuspended(Modal, {
+      props: { open: false, portal: false },
+      slots: { body: () => 'Body content' }
+    })
+
+    expect(wrapper.text()).not.toContain('Body content')
+  })
+
+  it('keeps content mounted when closed with unmountOnHide false', async () => {
+    const wrapper = await mountSuspended(Modal, {
+      props: { open: false, portal: false, unmountOnHide: false },
+      slots: { body: () => 'Body content' }
+    })
+
+    expect(wrapper.text()).toContain('Body content')
+  })
 })

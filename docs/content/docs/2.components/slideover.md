@@ -351,6 +351,38 @@ slots:
 :placeholder{class="h-full"}
 ::
 
+### Unmount :badge{label="Soon" class="align-text-top"}
+
+Use the `unmount-on-hide` prop to control whether the Slideover is unmounted from the DOM when closed. Defaults to `true`.
+
+::note
+When set to `false`, the Slideover's content stays in the DOM when closed (hidden with `display: none`) instead of being unmounted. This can be useful for SEO and performance by avoiding remounts on every open.
+::
+
+::component-code
+---
+prettier: true
+ignore:
+  - title
+props:
+  unmountOnHide: false
+  title: 'Slideover mounted on hide'
+slots:
+  default: |
+
+    <UButton label="Open" color="neutral" variant="subtle" />
+
+  body: |
+
+    <Placeholder class="h-full" />
+---
+
+:u-button{label="Open" color="neutral" variant="subtle"}
+
+#body
+:placeholder{class="h-full"}
+::
+
 ## Examples
 
 ### Control open state

@@ -99,7 +99,8 @@ const _props = withDefaults(defineProps<ModalProps>(), {
   overlay: true,
   transition: true,
   modal: true,
-  dismissible: true
+  dismissible: true,
+  unmountOnHide: true
 })
 const emits = defineEmits<ModalEmits>()
 const slots = defineSlots<ModalSlots>()
@@ -109,7 +110,7 @@ const props = useComponentProps('modal', _props)
 const { t } = useLocale()
 const appConfig = useAppConfig() as Modal['AppConfig']
 
-const rootProps = useForwardProps(reactivePick(props, 'open', 'defaultOpen', 'modal'), emits)
+const rootProps = useForwardProps(reactivePick(props, 'open', 'defaultOpen', 'modal', 'unmountOnHide'), emits)
 const portalProps = usePortal(toRef(() => props.portal))
 const contentProps = toRef(() => props.content)
 const contentEvents = computed(() => {

@@ -45,5 +45,6 @@ watchDebounced(searchTerm, (term) => {
     :search-status="status"
     :fuse="fuse"
     :transition="false"
+    :unmount-on-hide="false"
   />
 </template>

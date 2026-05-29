@@ -294,6 +294,38 @@ slots:
 :placeholder{class="h-48"}
 ::
 
+### Unmount :badge{label="Soon" class="align-text-top"}
+
+Use the `unmount-on-hide` prop to control whether the Modal is unmounted from the DOM when closed. Defaults to `true`.
+
+::note
+When set to `false`, the Modal's content stays in the DOM when closed (hidden with `display: none`) instead of being unmounted. This can be useful for SEO and performance by avoiding remounts on every open.
+::
+
+::component-code
+---
+prettier: true
+ignore:
+  - title
+props:
+  unmountOnHide: false
+  title: 'Modal mounted on hide'
+slots:
+  default: |
+
+    <UButton label="Open" color="neutral" variant="subtle" />
+
+  body: |
+
+    <Placeholder class="h-48" />
+---
+
+:u-button{label="Open" color="neutral" variant="subtle"}
+
+#body
+:placeholder{class="h-48"}
+::
+
 ### Scrollable :badge{label="4.2+" class="align-text-top"}
 
 Use the `scrollable` prop to make the Modal's content scrollable within the overlay.
