@@ -210,7 +210,7 @@
     "unbuild": "^3.6.1",
     "vitest": "^4.1.7",
     "vitest-axe": "^0.1.0",
-    "vitest-environment-nuxt": "^1.0.1",
+    "vitest-environment-nuxt": "^2.0.0",
     "vue": "^3.5.34",
     "vue-tsc": "^3.3.3"
   },
