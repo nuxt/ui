@@ -323,7 +323,7 @@ type AppConfigUI = {
   tv?: typeof defaultConfig
 } & TVConfig<typeof ui>
 
-type AppConfigRuntimeUI = DeepRequired<Pick<AppConfigUI, 'colors' | 'icons' | 'tv'>> & Omit<AppConfigUI, 'colors' | 'icons' | 'tv'>
+type AppConfigRuntimeUI = DeepRequired<Pick<AppConfigUI, 'colors' | 'icons' | 'tv'>> & typeof ui
 
 declare module '@nuxt/schema' {
   interface AppConfigInput {
@@ -333,7 +333,7 @@ declare module '@nuxt/schema' {
      */
     ui?: AppConfigUI
   }
-  interface AppConfig {
+  interface CustomAppConfig {
     ui: AppConfigRuntimeUI
   }
 }
