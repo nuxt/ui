@@ -211,7 +211,7 @@ export default defineNuxtModule<ModuleOptions>({
 
     nuxt.options.alias['#ui'] = resolve('./runtime')
 
-    nuxt.options.appConfig.ui = defu(nuxt.options.appConfig.ui || {}, getDefaultConfig(options.theme))
+    nuxt.options.appConfig.ui = defu(nuxt.options.appConfig.ui || {}, getDefaultConfig(options.theme)) as typeof nuxt.options.appConfig.ui
 
     nuxt.options.build.transpile.push('reka-ui')
 

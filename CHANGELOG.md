@@ -1,5 +1,17 @@
 # Changelog
 
+## [4.8.1](https://github.com/nuxt/ui/compare/v4.8.0...v4.8.1) (2026-05-28)
+
+### Bug Fixes
+
+* **ContentSearch/DashboardSearch:** proxy missing CommandPalette props ([#6505](https://github.com/nuxt/ui/issues/6505)) ([631f5dc](https://github.com/nuxt/ui/commit/631f5dc543fecaa36d5090a10a3db3223e9671b5))
+* **Form:** add `method="post"` to prevent credential leaking via GET before hydration ([#6512](https://github.com/nuxt/ui/issues/6512)) ([7a0825a](https://github.com/nuxt/ui/commit/7a0825ad6a17627ce4c6dd860df3cebb7cf1d813))
+* **Icon:** avoid recursive icon resolution ([#6495](https://github.com/nuxt/ui/issues/6495)) ([d50c121](https://github.com/nuxt/ui/commit/d50c121c05372082a7414d205d612513e89d3af7))
+* **locale:** improve Thai translation accuracy and consistency ([#6509](https://github.com/nuxt/ui/issues/6509)) ([5d82418](https://github.com/nuxt/ui/commit/5d82418c56e956a9f1b684b48f9bf40197cdf3aa))
+* **module:** expose component theme keys in AppConfig type ([#6520](https://github.com/nuxt/ui/issues/6520)) ([ffaf163](https://github.com/nuxt/ui/commit/ffaf163f77601015e4fa9e29bc18a33ca7dcb93d))
+* **module:** revert `tagPriority` to `-2` for inline style tag ([2dac778](https://github.com/nuxt/ui/commit/2dac77803466b79a12a2c806c90a6b48b75a5a63))
+* **Select/SelectMenu/InputMenu:** add fallback for `max-height` ([#6503](https://github.com/nuxt/ui/issues/6503)) ([f4d7cbe](https://github.com/nuxt/ui/commit/f4d7cbe71f3cb62eaf8b92a4da73f115324fcf6a))
+
 ## [4.8.0](https://github.com/nuxt/ui/compare/v4.7.1...v4.8.0) (2026-05-21)
 
 ### ⚠ BREAKING CHANGES
