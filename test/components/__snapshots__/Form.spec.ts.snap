@@ -124,9 +124,21 @@ exports[`Form > joi validation works > without error 1`] = `
 </form>"
 `;
 
+exports[`Form > renders with aria-label correctly 1`] = `"<form id="v-0-0" method="post" class="" aria-label="Contact form"></form>"`;
+
+exports[`Form > renders with class correctly 1`] = `"<form id="v-0-0" method="post" class="gap-4"></form>"`;
+
 exports[`Form > renders with default slot correctly 1`] = `"<form id="v-0-0" method="post" class="">Form slot</form>"`;
 
+exports[`Form > renders with id correctly 1`] = `"<form id="id" method="post" class=""></form>"`;
+
+exports[`Form > renders with method correctly 1`] = `"<form id="v-0-0" method="get" class=""></form>"`;
+
+exports[`Form > renders with name correctly 1`] = `"<form id="v-0-0" name="contact" method="post" class=""></form>"`;
+
 exports[`Form > renders with state correctly 1`] = `"<form id="v-0-0" method="post" class=""></form>"`;
+
+exports[`Form > renders with ui correctly 1`] = `"<form id="v-0-0" method="post" class="rounded-lg"></form>"`;
 
 exports[`Form > superstruct validation works > with error 1`] = `
 "<form id="42" method="post" class="">
