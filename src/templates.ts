@@ -6,7 +6,7 @@ import { addTemplate, addTypeTemplate, hasNuxtModule, logger, updateTemplates, g
 import type { Nuxt, NuxtTemplate, NuxtTypeTemplate } from '@nuxt/schema'
 import type { Resolver } from '@nuxt/kit'
 import type { ModuleOptions } from './module'
-import { applyDefaultVariants, applyPrefixToObject } from './utils/theme'
+import { applyDefaultVariants, applyPrefixToObject, applyUnstyled } from './utils/theme'
 import { detectUsedComponents } from './utils/components'
 import * as theme from './theme'
 import * as themeProse from './theme/prose'
@@ -34,6 +34,8 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
           result = applyDefaultVariants(result, options.theme?.defaultVariants)
           // Apply Tailwind prefix if configured
           result = applyPrefixToObject(result, options.theme?.prefix)
+          // Strip default theme classes if `unstyled` is enabled
+          result = applyUnstyled(result, options.theme?.unstyled)
 
           const variants = Object.entries(result.variants || {})
             .filter(([_, values]) => {
@@ -65,15 +67,17 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
             const themeUtilsPath = fileURLToPath(new URL('./utils/theme', import.meta.url))
             const defaultVariantsJson = JSON.stringify(options.theme?.defaultVariants) ?? 'undefined'
             const prefixJson = JSON.stringify(options.theme?.prefix) ?? 'undefined'
+            const unstyledJson = JSON.stringify(options.theme?.unstyled) ?? 'undefined'
 
             return [
               `import template from ${JSON.stringify(templatePath)}`,
-              `import { applyDefaultVariants, applyPrefixToObject } from ${JSON.stringify(themeUtilsPath)}`,
+              `import { applyDefaultVariants, applyPrefixToObject, applyUnstyled } from ${JSON.stringify(themeUtilsPath)}`,
               ...generateVariantDeclarations(variants),
               `const options = ${JSON.stringify(options, null, 2)}`,
               `let result = typeof template === 'function' ? (template as Function)(options) : template`,
               `result = applyDefaultVariants(result, ${defaultVariantsJson})`,
               `result = applyPrefixToObject(result, ${prefixJson})`,
+              `result = applyUnstyled(result, ${unstyledJson})`,
               `const theme = ${json}`,
               `export default result as typeof theme`
             ].join('\n\n')
