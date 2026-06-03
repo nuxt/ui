@@ -162,7 +162,7 @@ You can listen to the `@error` event to handle errors. This event is triggered w
 By default, the form automatically focuses the first field with an error when submission fails through the `focus-on-error` prop. You can disable this by passing `:focus-on-error="false"`.
 ::
 
-Here's an example of using the `@error` event to add custom behavior, such as smoothly scrolling the focused element into view:
+Here's an example of using the `@error` event to add custom behavior, such as displaying a toast notification when validation fails:
 
 ::component-example
 ---

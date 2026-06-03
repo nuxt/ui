@@ -22,10 +22,9 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
 }
 
 async function onError(event: FormErrorEvent) {
-  if (event?.errors?.[0]?.id) {
-    const element = document.getElementById(event.errors[0].id)
-    element?.focus()
-    element?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+  const error = event.errors[0]
+  if (error) {
+    toast.add({ title: 'Error', description: `Please check the form ${error.name}.`, color: 'error' })
   }
 }
 </script>
