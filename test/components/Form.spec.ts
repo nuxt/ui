@@ -557,6 +557,16 @@ describe('Form', () => {
         { id: 'password', name: 'password' }
       ])
     })
+
+    it('reactivity: dirty works for nested forms', async () => {
+      const nestedInput = wrapper.find('#nested')
+      expect(form.dirty).toBe(false)
+
+      nestedInput.trigger('change')
+      await flushPromises()
+
+      expect(form.dirty).toBe(true)
+    })
   })
 
   describe('apply transform', async () => {

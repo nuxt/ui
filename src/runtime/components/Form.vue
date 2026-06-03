@@ -448,7 +448,15 @@ const api = {
 
   disabled,
   loading,
-  dirty: computed(() => !!dirtyFields.size),
+  dirty: computed(() => {
+    if (dirtyFields.size > 0) return true
+
+    for (const form of nestedForms.value.values()) {
+      if ((form.api.dirty as any).value) return true
+    }
+
+    return false
+  }),
   dirtyFields: readonly(dirtyFields),
   blurredFields: readonly(blurredFields),
   touchedFields: readonly(touchedFields)
