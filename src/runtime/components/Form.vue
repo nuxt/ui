@@ -286,10 +286,6 @@ async function onSubmitWrapper(payload: Event) {
       throw error
     }
 
-    if (props.focusOnError) {
-      scrollToErrorEl(error.errors)
-    }
-
     const errorEvent: FormErrorEvent = {
       ...event,
       errors: error.errors
@@ -297,6 +293,11 @@ async function onSubmitWrapper(payload: Event) {
     emits('error', errorEvent)
   } finally {
     loading.value = false
+  }
+
+  if (props.focusOnError && errors.value.length > 0) {
+    await nextTick()
+    scrollToErrorEl(errors.value)
   }
 }
 
