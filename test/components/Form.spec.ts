@@ -285,7 +285,7 @@ describe('Form', () => {
       })
 
       await form.submit()
-      await new Promise(resolve => setTimeout(resolve, 0))
+      await flushPromises()
 
       expect(emailInputMock.focus).toHaveBeenCalledTimes(1)
       expect(passwordInputMock.focus).toHaveBeenCalledTimes(0)
