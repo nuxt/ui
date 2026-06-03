@@ -43,7 +43,7 @@
     "minimark": "^0.2.0",
     "motion-v": "^2.2.1",
     "nuxt": "^4.4.8",
-    "nuxt-component-meta": "^0.17.2",
+    "nuxt-component-meta": "https://pkg.pr.new/nuxt-component-meta@ef01cc7",
     "nuxt-llms": "^0.2.0",
     "nuxt-og-image": "^6.5.2",
     "nuxt-schema-org": "^6.1.0",
