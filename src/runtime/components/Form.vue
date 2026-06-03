@@ -61,7 +61,8 @@ export type FormProps<S extends FormSchema, T extends boolean = true, N extends 
    */
   loadingAuto?: boolean
   /**
-   * when `true`, form component will be auto focus on first Element
+   * When `true`, the form automatically focuses the first field with an error on failed submission.
+   * @defaultValue `true`
    */
   focusOnError?: boolean
   class?: any

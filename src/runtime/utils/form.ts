@@ -115,11 +115,11 @@ export function setAtPath<T extends object>(
   return data
 }
 
+let timeOut: NodeJS.Timeout | null = null
 export function scrollToErrorEl(errors: FormErrorWithId[]) {
   const error = errors[0]
   if (error) {
     const el = document.getElementById(error.id!)
-    let timeOut
     if (el) {
       if (timeOut) clearTimeout(timeOut)
       timeOut = setTimeout(() => {
