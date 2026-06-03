@@ -1,6 +1,6 @@
 import type { StandardSchemaV1 } from '@standard-schema/spec'
 import type { Struct } from 'superstruct'
-import type { FormSchema, ValidateReturnSchema } from '../types/form'
+import type { FormErrorWithId, FormSchema, ValidateReturnSchema } from '../types/form'
 
 export function isSuperStructSchema(schema: any): schema is Struct<any, any> {
   return (
@@ -113,4 +113,18 @@ export function setAtPath<T extends object>(
   current[lastKey] = value
 
   return data
+}
+
+export function scrollToErrorEl(errors: FormErrorWithId[]) {
+  const error = errors[0]
+  if (error) {
+    const el = document.getElementById(error.id!)
+    let timeOut
+    if (el) {
+      if (timeOut) clearTimeout(timeOut)
+      timeOut = setTimeout(() => {
+        el.focus()
+      }, 0)
+    }
+  }
 }

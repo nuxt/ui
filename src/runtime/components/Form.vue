@@ -60,6 +60,10 @@ export type FormProps<S extends FormSchema, T extends boolean = true, N extends 
    * @defaultValue `true`
    */
   loadingAuto?: boolean
+  /**
+   * when `true`, form component will be auto focus on first Element
+   */
+  focusOnError?: boolean
   class?: any
   ui?: { base?: any }
   onSubmit?: ((event: FormSubmitEvent<FormData<S, T>>) => void | Promise<void>) | (() => void | Promise<void>)
@@ -82,7 +86,7 @@ import { useAppConfig } from '#imports'
 import { formOptionsInjectionKey, formInputsInjectionKey, formBusInjectionKey, formLoadingInjectionKey, formErrorsInjectionKey, formStateInjectionKey } from '../composables/useFormField'
 import { tv } from '../utils/tv'
 import { useComponentProps } from '../composables/useComponentProps'
-import { validateSchema, getAtPath, setAtPath } from '../utils/form'
+import { validateSchema, getAtPath, setAtPath, scrollToErrorEl } from '../utils/form'
 import { FormValidationException } from '../types/form'
 
 type I = InferInput<S>
@@ -93,6 +97,7 @@ const _props = withDefaults(defineProps<FormProps<S, T, N>>(), {
     return ['input', 'blur', 'change'] as FormInputEvents[]
   },
   validateOnInputDelay: 300,
+  focusOnError: true,
   transform: () => true as T,
   loadingAuto: true
 })
@@ -278,6 +283,10 @@ async function onSubmitWrapper(payload: Event) {
   } catch (error) {
     if (!(error instanceof FormValidationException)) {
       throw error
+    }
+
+    if (props.focusOnError) {
+      scrollToErrorEl(error.errors)
     }
 
     const errorEvent: FormErrorEvent = {

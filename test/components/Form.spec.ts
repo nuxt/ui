@@ -275,6 +275,24 @@ describe('Form', () => {
       expect(passwordField.text()).toBe('Invalid input: expected string, received undefined')
     })
 
+    it('focuses on first error element on submit error', async () => {
+      const emailInputMock = { focus: vi.fn() }
+      const passwordInputMock = { focus: vi.fn() }
+      const getElementByIdSpy = vi.spyOn(document, 'getElementById').mockImplementation((id) => {
+        if (id === 'email') return emailInputMock as any
+        if (id === 'password') return passwordInputMock as any
+        return null
+      })
+
+      await form.submit()
+      await new Promise(resolve => setTimeout(resolve, 0))
+
+      expect(emailInputMock.focus).toHaveBeenCalledTimes(1)
+      expect(passwordInputMock.focus).toHaveBeenCalledTimes(0)
+
+      getElementByIdSpy.mockRestore()
+    })
+
     it('validate on submit works', async () => {
       state.email = 'bob@dylan.com'
       state.password = 'strongpassword'
