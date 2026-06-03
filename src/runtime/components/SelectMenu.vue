@@ -225,7 +225,7 @@ export interface SelectMenuSlots<
 </script>
 
 <script setup lang="ts" generic="T extends ArrayOrNested<SelectMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false, Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>, C extends boolean | object = false">
-import { useTemplateRef, computed, onMounted, toRef, toRaw } from 'vue'
+import { useTemplateRef, computed, ref, onMounted, toRef, toRaw, watch, nextTick } from 'vue'
 import { ComboboxRoot, ComboboxArrow, ComboboxAnchor, ComboboxInput, ComboboxTrigger, ComboboxCancel, ComboboxPortal, ComboboxContent, ComboboxEmpty, ComboboxGroup, ComboboxVirtualizer, ComboboxLabel, ComboboxSeparator, ComboboxItem, ComboboxItemIndicator, FocusScope } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
 import { defu } from 'defu'
@@ -426,7 +426,10 @@ function onUpdate(value: any) {
   }
 }
 
+const isOpen = ref(false)
 function onUpdateOpen(value: boolean) {
+  isOpen.value = value
+
   let timeoutId
 
   if (!value) {
@@ -488,6 +491,21 @@ function onClear() {
 }
 
 const viewportRef = useTemplateRef('viewportRef')
+
+const comboboxRootRef = useTemplateRef('comboboxRootRef')
+
+// reka-ui only re-highlights the first item when the list goes from empty to non-empty.
+// With `create-item`, the create item is always registered so the count never drops to 0,
+// leaving the highlight stale when async `items` load. Re-highlight when items change while open.
+// Wait an extra tick so freshly mounted items are registered in reka-ui's collection before highlighting.
+watch(() => props.items, async () => {
+  if (!isOpen.value) {
+    return
+  }
+
+  await nextTick()
+  comboboxRootRef.value?.highlightFirstItem?.()
+}, { flush: 'post' })
 
 defineExpose({
   triggerRef: toRef(() => triggerRef.value?.$el as HTMLButtonElement),
@@ -569,6 +587,7 @@ defineExpose({
 
   <ComboboxRoot
     :id="id"
+    ref="comboboxRootRef"
     v-slot="{ modelValue, open }"
     v-bind="({ ...rootProps, ...$attrs, ...ariaAttrs } as any)"
     ignore-filter
