@@ -32,10 +32,10 @@ export type FormProps<S extends FormSchema, T extends boolean = true, N extends 
   disabled?: boolean
 
   /**
-   * Path of the form's state within it's parent form.
-   * Used for nesting forms. Only available if `nested` is true.
+   * The `name` attribute of the form element.
+   * For nested forms (`nested` is true), this is also used as the path of the form's state within its parent form.
    */
-  name?: N extends true ? string : never
+  name?: string
 
   /**
    * Delay in milliseconds before validating the form on input events.
@@ -462,6 +462,7 @@ defineExpose(api)
     :is="parentBus ? 'div' : 'form'"
     :id="formId"
     ref="formRef"
+    :name="parentBus ? undefined : props.name"
     method="post"
     :class="ui({ class: [props.ui?.base, props.class] })"
     @submit.prevent="onSubmitWrapper"
