@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { VNode } from 'vue'
+import type { ComputedRef, VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/form'
 import type { FormSchema, FormError, FormInputEvents, FormErrorEvent, FormSubmitEvent, FormEvent, Form, FormErrorWithId, InferInput, InferOutput, FormData } from '../types/form'
@@ -452,7 +452,7 @@ const api = {
     if (dirtyFields.size > 0) return true
 
     for (const form of nestedForms.value.values()) {
-      if ((form.api.dirty as any).value) return true
+      if ((form.api.dirty as unknown as ComputedRef<boolean>).value) return true
     }
 
     return false
