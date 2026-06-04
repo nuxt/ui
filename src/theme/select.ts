@@ -100,6 +100,9 @@ export default (options: Required<ModuleOptions>) => {
         'item-aligned': {
           content: ''
         }
+      },
+      multiple: {
+        true: ''
       }
     },
     compoundVariants: (prev: Record<string, any>[]) => prev.map(item => ({
