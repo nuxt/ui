@@ -163,6 +163,29 @@ name: 'toast-actions-example'
 ---
 ::
 
+### Duration
+
+Pass a `duration` field to the `toast.add` method to change how long the Toast remains visible (in milliseconds). Defaults to `5000`.
+
+::tip
+Set the `duration` field to `0` to keep the Toast open until it's manually closed.
+::
+
+::component-example
+---
+options:
+  - name: 'duration'
+    label: 'duration'
+    default: 0
+    items:
+      - 0
+      - 1000
+      - 3000
+      - 5000
+name: 'toast-duration-example'
+---
+::
+
 ### Progress
 
 Pass a `progress` field to customize or hide the [Progress](/docs/components/progress) bar (with `false` value).

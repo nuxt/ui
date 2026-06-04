@@ -9,7 +9,7 @@ import type { ComponentConfig } from '../types/tv'
 
 type Toast = ComponentConfig<typeof theme, AppConfig, 'toast'>
 
-export interface ToastProps extends Pick<ToastRootProps, 'defaultOpen' | 'open' | 'type' | 'duration'> {
+export interface ToastProps extends Pick<ToastRootProps, 'defaultOpen' | 'open' | 'type'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'li'
@@ -50,6 +50,13 @@ export interface ToastProps extends Pick<ToastRootProps, 'defaultOpen' | 'open' 
    * `{ size: 'xs' }`{lang="ts-type"}
    */
   actions?: ButtonProps[]
+  /**
+   * The time in milliseconds before the toast automatically closes. Overrides the global `toaster.duration`.
+   *
+   * Set to `0` to keep the toast open until it's manually closed.
+   * @defaultValue 5000
+   */
+  duration?: number
   /**
    * Display a progress bar showing the toast's remaining duration.
    * `{ size: 'sm' }`{lang="ts-type"}
@@ -126,7 +133,7 @@ defineExpose({
 <template>
   <ToastRoot
     ref="rootRef"
-    v-slot="{ remaining, duration, open }"
+    v-slot="{ remaining, duration: totalDuration, open }"
     v-bind="rootProps"
     :data-orientation="props.orientation"
     data-slot="root"
@@ -194,8 +201,8 @@ defineExpose({
     </div>
 
     <UProgress
-      v-if="props.progress && open && remaining > 0 && duration"
-      :model-value="remaining / duration * 100"
+      v-if="props.progress && open && remaining > 0 && totalDuration"
+      :model-value="remaining / totalDuration * 100"
       :color="props.color"
       v-bind="(typeof props.progress === 'object' ? props.progress as Partial<ProgressProps> : {})"
       size="sm"
