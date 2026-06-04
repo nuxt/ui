@@ -15,19 +15,20 @@ export interface ProseIconProps {
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useAppConfig } from '#imports'
-import { useComponentUI } from '../../composables/useComponentUI'
+import { useComponentProps } from '../../composables/useComponentProps'
 import { tv } from '../../utils/tv'
 import UIcon from '../Icon.vue'
 
-const props = defineProps<ProseIconProps>()
+const _props = defineProps<ProseIconProps>()
+
+const props = useComponentProps('prose.icon', _props)
 
 const appConfig = useAppConfig() as ProseIcon['AppConfig']
-const uiProp = useComponentUI('prose.icon', props)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.icon || {}) }))
 </script>
 
 <template>
-  <UIcon :name="name" :class="ui({ class: [uiProp?.base, props.class] })" />
+  <UIcon :name="props.name" :class="ui({ class: [props.ui?.base, props.class] })" />
 </template>

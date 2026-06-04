@@ -189,22 +189,7 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
     return sources.join('\n')
   }
 
-  templates.push({
-    filename: 'ui.css',
-    write: true,
-    getContents: async () => {
-      const sources = await generateSources()
-      const prefix = options.theme?.prefix ? `${options.theme.prefix}:` : ''
-
-      return `${sources}
-
-@layer base {
-  body {
-    @apply ${prefix}antialiased ${prefix}text-default ${prefix}bg-default ${prefix}scheme-light ${prefix}dark:scheme-dark;
-  }
-}
-
-@theme static {
+  const themeBlocks = `@theme static {
   --color-old-neutral-50: ${colors.neutral[50]};
   --color-old-neutral-100: ${colors.neutral[100]};
   --color-old-neutral-200: ${colors.neutral[200]};
@@ -270,7 +255,35 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
   --fill-inverted: var(--ui-border-inverted);
 }
 `
+
+  templates.push({
+    filename: 'ui.css',
+    write: true,
+    getContents: async () => {
+      const sources = await generateSources()
+      const prefix = options.theme?.prefix ? `${options.theme.prefix}:` : ''
+
+      return `${sources}
+
+@layer base {
+  body {
+    @apply ${prefix}antialiased ${prefix}text-default ${prefix}bg-default ${prefix}scheme-light ${prefix}dark:scheme-dark;
+  }
+}
+
+${themeBlocks}`
     }
+  })
+
+  // Static fallback shipped in the published npm package and exposed via
+  // `package.json` `imports` so tooling that resolves `#build/ui.css` through
+  // Node module resolution (Prettier, Tailwind IntelliSense) has something to
+  // read. Strips `@source` directives (paths don't exist on consumer machines)
+  // and the body rule (runtime template handles it with the user's prefix).
+  templates.push({
+    filename: 'ui.static.css',
+    write: true,
+    getContents: () => themeBlocks
   })
 
   templates.push({
@@ -291,7 +304,7 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
       const iconUnion = iconKeys.length ? iconKeys.map(i => JSON.stringify(i)).join(' | ') : 'string'
 
       return `import * as ui from '#build/ui'
-import type { TVConfig } from '@nuxt/ui'
+import type { TVConfig, DeepRequired } from '@nuxt/ui'
 import type { defaultConfig } from 'tailwind-variants'
 import colors from 'tailwindcss/colors'
 
@@ -310,6 +323,8 @@ type AppConfigUI = {
   tv?: typeof defaultConfig
 } & TVConfig<typeof ui>
 
+type AppConfigRuntimeUI = DeepRequired<Pick<AppConfigUI, 'colors' | 'icons' | 'tv'>> & typeof ui
+
 declare module '@nuxt/schema' {
   interface AppConfigInput {
     /**
@@ -317,6 +332,9 @@ declare module '@nuxt/schema' {
      * @see https://ui.nuxt.com/docs/getting-started/theme/components
      */
     ui?: AppConfigUI
+  }
+  interface CustomAppConfig {
+    ui: AppConfigRuntimeUI
   }
 }
 

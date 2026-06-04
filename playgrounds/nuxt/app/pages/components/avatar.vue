@@ -2,15 +2,18 @@
 import theme from '#build/ui/avatar'
 
 const sizes = Object.keys(theme.variants.size)
+const colors = Object.keys(theme.variants.color)
 
 const attrs = reactive({
-  size: [theme.defaultVariants.size]
+  size: [theme.defaultVariants.size],
+  color: [theme.defaultVariants.color]
 })
 </script>
 
 <template>
   <Navbar>
     <USelect v-model="attrs.size" :items="sizes" multiple />
+    <USelect v-model="attrs.color" :items="colors" multiple />
   </Navbar>
 
   <Matrix v-slot="props" :attrs="attrs">

@@ -29,43 +29,44 @@ export interface FooterSlots {
 import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
-import { useComponentUI } from '../composables/useComponentUI'
+import { useComponentProps } from '../composables/useComponentProps'
 import { tv } from '../utils/tv'
 import UContainer from './Container.vue'
 
-const props = withDefaults(defineProps<FooterProps>(), {
+const _props = withDefaults(defineProps<FooterProps>(), {
   as: 'footer'
 })
 const slots = defineSlots<FooterSlots>()
 
+const props = useComponentProps('footer', _props)
+
 const appConfig = useAppConfig() as Footer['AppConfig']
-const uiProp = useComponentUI('footer', props)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.footer || {}) })())
 </script>
 
 <template>
-  <Primitive :as="as" data-slot="root" :class="ui.root({ class: [uiProp?.root, props.class] })">
-    <div v-if="!!slots.top" data-slot="top" :class="ui.top({ class: uiProp?.top })">
+  <Primitive :as="props.as" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+    <div v-if="!!slots.top" data-slot="top" :class="ui.top({ class: props.ui?.top })">
       <slot name="top" />
     </div>
 
-    <UContainer data-slot="container" :class="ui.container({ class: uiProp?.container })">
-      <div data-slot="right" :class="ui.right({ class: uiProp?.right })">
+    <UContainer data-slot="container" :class="ui.container({ class: props.ui?.container })">
+      <div data-slot="right" :class="ui.right({ class: props.ui?.right })">
         <slot name="right" />
       </div>
 
-      <div data-slot="center" :class="ui.center({ class: uiProp?.center })">
+      <div data-slot="center" :class="ui.center({ class: props.ui?.center })">
         <slot />
       </div>
 
-      <div data-slot="left" :class="ui.left({ class: uiProp?.left })">
+      <div data-slot="left" :class="ui.left({ class: props.ui?.left })">
         <slot name="left" />
       </div>
     </UContainer>
 
-    <div v-if="!!slots.bottom" data-slot="bottom" :class="ui.bottom({ class: uiProp?.bottom })">
+    <div v-if="!!slots.bottom" data-slot="bottom" :class="ui.bottom({ class: props.ui?.bottom })">
       <slot name="bottom" />
     </div>
   </Primitive>

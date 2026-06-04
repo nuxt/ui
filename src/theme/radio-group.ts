@@ -99,6 +99,9 @@ export default (options: Required<ModuleOptions>) => ({
         indicator: 'after:size-2'
       }
     },
+    highlight: {
+      true: ''
+    },
     disabled: {
       true: {
         item: 'opacity-75',
@@ -169,13 +172,26 @@ export default (options: Required<ModuleOptions>) => ({
       class: {
         item: 'cursor-not-allowed'
       }
+    },
+    ...(options.theme.colors || []).map((color: string) => ({
+      color,
+      highlight: true,
+      class: {
+        base: `ring-${color}`
+      }
+    })),
+    {
+      color: 'neutral',
+      highlight: true,
+      class: {
+        base: 'ring-inverted'
+      }
     }
   ],
   defaultVariants: {
     size: 'md',
     color: 'primary',
     variant: 'list',
-    orientation: 'vertical',
     indicator: 'start'
   }
 })

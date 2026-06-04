@@ -55,6 +55,7 @@ export default defineLocale<Messages>({
     },
     contentSearch: {
       links: '链接',
+      search: '搜索结果',
       theme: '主题'
     },
     contentSearchButton: {

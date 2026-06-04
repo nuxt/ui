@@ -55,6 +55,7 @@ export default defineLocale<Messages>({
     },
     contentSearch: {
       links: '連結',
+      search: '搜尋結果',
       theme: '主題'
     },
     contentSearchButton: {

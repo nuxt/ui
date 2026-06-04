@@ -8,12 +8,12 @@ export default defineNuxtConfig({
     '../src/module',
     '@nuxt/content',
     '@nuxt/image',
-    '@nuxt/a11y',
     '@nuxtjs/mcp-toolkit',
     '@vueuse/nuxt',
     'nuxt-component-meta',
     'nuxt-llms',
     'nuxt-og-image',
+    'nuxt-schema-org',
     'motion-v/nuxt',
     '@vercel/analytics',
     '@vercel/speed-insights'
@@ -36,6 +36,11 @@ export default defineNuxtConfig({
   },
 
   app: {
+    head: {
+      htmlAttrs: {
+        lang: 'en'
+      }
+    },
     rootAttrs: {
       'data-vaul-drawer-wrapper': '',
       'class': 'bg-default'
@@ -43,6 +48,10 @@ export default defineNuxtConfig({
   },
 
   css: ['~/assets/css/main.css'],
+
+  site: {
+    name: 'Nuxt UI'
+  },
 
   content: {
     build: {
@@ -67,12 +76,13 @@ export default defineNuxtConfig({
   },
 
   routeRules: {
+    '/api/navigation.json': { prerender: true },
     // Agent discovery Link headers on the homepage (RFC 8288, RFC 9727)
     '/': {
       headers: {
         Link: [
           '</sitemap.xml>; rel="sitemap"; type="application/xml"',
-          '</sitemap.md>; rel="describedby"; type="text/markdown"',
+          '</sitemap.md>; rel="sitemap"; type="text/markdown"',
           '</.well-known/api-catalog>; rel="api-catalog"; type="application/linkset+json"',
           '</.well-known/mcp/server-card.json>; rel="service-desc"; type="application/json"',
           '</docs>; rel="service-doc"; type="text/html"',
@@ -200,7 +210,6 @@ export default defineNuxtConfig({
   },
 
   experimental: {
-    asyncContext: true,
     defaults: {
       nuxtLink: {
         externalRelAttribute: 'noopener'
@@ -211,6 +220,9 @@ export default defineNuxtConfig({
   compatibilityDate: '2026-01-14',
 
   nitro: {
+    experimental: {
+      asyncContext: true
+    },
     publicAssets: [{
       dir: resolve('../skills'),
       baseURL: '/.well-known/skills',
@@ -220,10 +232,6 @@ export default defineNuxtConfig({
       routes: [
         '/',
         '/docs/getting-started',
-        // Prerender the homepage markdown so Vercel's filesystem check after the
-        // `/` → `/raw/index.md` rewrite (see `modules/md-rewrite.ts`) resolves
-        // to a static file, the same way `/docs/*.md` does.
-        '/raw/index.md',
         '/api/countries.json',
         '/api/phone-codes.json',
         '/api/locales.json',
@@ -249,13 +257,23 @@ export default defineNuxtConfig({
         '@tiptap/vue-3',
         '@tiptap/suggestion',
         '@tiptap/pm/state',
-        'shiki-transformer-color-highlight'
+        'shiki-transformer-color-highlight',
+        'json5',
+        '@internationalized/date',
+        'fflate',
+        'shiki/wasm',
+        '@tanstack/vue-table',
+        '@tanstack/vue-virtual',
+        '@vueuse/integrations/useSortable',
+        'embla-carousel-vue',
+        'embla-carousel-autoplay',
+        'embla-carousel-auto-scroll',
+        'embla-carousel-auto-height',
+        'embla-carousel-class-names',
+        'embla-carousel-fade',
+        'embla-carousel-wheel-gestures'
       ]
     }
-  },
-
-  a11y: {
-    logIssues: false
   },
 
   componentMeta: {
@@ -397,5 +415,27 @@ export default defineNuxtConfig({
   mcp: {
     name: 'Nuxt UI',
     browserRedirect: '/docs/getting-started/ai/mcp'
+  },
+
+  ogImage: {
+    zeroRuntime: true,
+    security: {
+      renderTimeout: 60000
+    }
+  },
+
+  schemaOrg: {
+    identity: {
+      type: 'Organization',
+      name: 'Nuxt',
+      logo: '/icon.svg',
+      sameAs: [
+        'https://github.com/nuxt',
+        'https://x.com/nuxt_js',
+        'https://bsky.app/profile/nuxt.com',
+        'https://www.linkedin.com/showcase/nuxt-framework/',
+        'https://m.webtoo.ls/@nuxt'
+      ]
+    }
   }
 })

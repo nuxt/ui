@@ -55,6 +55,7 @@ export default defineLocale<Messages>({
     },
     contentSearch: {
       links: 'Спасылкі',
+      search: 'Вынікі',
       theme: 'Тэма'
     },
     contentSearchButton: {

@@ -153,6 +153,51 @@ Quick-reference index of all 125+ components. For full API docs (props, slots, e
 | `UPricingPlan` | Individual pricing plan card |
 | `UPricingTable` | Feature comparison table |
 
+## Prose — Base Typography
+
+Standard Markdown elements auto-resolved by Comark/Content/MDC. No `::` prefix needed — they map directly from markdown syntax (`# Heading` → `ProseH1`, `**bold**` → `ProseStrong`, etc.). Themed via `appConfig.ui.prose.<name>`.
+
+| Component | Renders | Notable |
+|---|---|---|
+| `H1` `H2` `H3` `H4` | Headings | H1–H3 get anchor links + TOC entries |
+| `P` | Paragraph | |
+| `A` | Link | External links get target/rel handling |
+| `Strong` | Bold | |
+| `Em` | Italic | |
+| `Blockquote` | Blockquote | |
+| `Hr` | Horizontal rule | |
+| `Ul` `Ol` `Li` | Lists | Supports nesting and mixed lists |
+| `Table` `Thead` `Tbody` `Tr` `Th` `Td` | Tables | |
+| `Img` | Image | Zoom on click (`:zoom="false"` to disable), `@nuxt/image` support |
+| `Pre` | Code block | Copy button, filename + icon, line highlighting (`{2,4-6}`), diff |
+| `Code` | Inline code | `color` and `lang` props |
+
+## Prose — Feature Components
+
+Nuxt UI-specific Prose components. In markdown files they are used **without the `Prose` prefix** (e.g. `::callout`, `::steps`). In Vue they are referenced as `ProseCallout`, `ProseSteps`, etc. Comark resolves them automatically when `@nuxt/ui` is installed.
+
+Nuxt UI also registers shorthand aliases for `Callout`: `::note`, `::tip`, `::warning`, `::caution` (preset `color` + `icon`).
+
+| Component | Purpose |
+|---|---|
+| `Callout` | Highlighted note/warning/tip (`color`, `icon`, `to`) |
+| `Badge` | Inline badge/tag |
+| `Kbd` | Keyboard key |
+| `Icon` | Inline Iconify icon |
+| `Prompt` | Terminal prompt block |
+| `Card` `CardGroup` | Content card and card grid |
+| `Steps` | Numbered step list (`level` prop sets heading depth) |
+| `Tabs` `TabsItem` | Tabbed content (`sync` for localStorage, `hash` for scroll-on-change) |
+| `Accordion` `AccordionItem` | Collapsible accordion sections |
+| `Collapsible` | Single collapsible section |
+| `Field` `FieldGroup` | Form field display |
+| `CodeGroup` | Tabbed code blocks |
+| `CodeCollapse` | Collapsible code block |
+| `CodeIcon` | File-type icon in code headers |
+| `CodePreview` | Code + live rendered preview side by side |
+| `CodeTree` | File tree display |
+| `Script` | Script injection |
+
 ## Content (Nuxt Content)
 
 | Component | Purpose |

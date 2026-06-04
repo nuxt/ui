@@ -85,10 +85,19 @@ export default defineNuxtPlugin({
               if (colorsEl) {
                 swapColors(colorsEl);
               } else {
-                requestAnimationFrame(function() {
-                  var el = document.getElementById('nuxt-ui-colors');
-                  if (el) swapColors(el);
+                var obs = new MutationObserver(function(mutations) {
+                  for (var i = 0; i < mutations.length; i++) {
+                    for (var j = 0; j < mutations[i].addedNodes.length; j++) {
+                      var node = mutations[i].addedNodes[j];
+                      if (node.id === 'nuxt-ui-colors') {
+                        swapColors(node);
+                        obs.disconnect();
+                        return;
+                      }
+                    }
+                  }
                 });
+                obs.observe(document.head, { childList: true });
               }
             })();
             `.replace(/\s+/g, ' '),

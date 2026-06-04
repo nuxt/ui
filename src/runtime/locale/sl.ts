@@ -55,6 +55,7 @@ export default defineLocale<Messages>({
     },
     contentSearch: {
       links: 'Povezave',
+      search: 'Rezultati',
       theme: 'Tema'
     },
     contentSearchButton: {

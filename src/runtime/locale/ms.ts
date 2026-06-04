@@ -55,6 +55,7 @@ export default defineLocale<Messages>({
     },
     contentSearch: {
       links: 'Pautan',
+      search: 'Keputusan',
       theme: 'Tema'
     },
     contentSearchButton: {
