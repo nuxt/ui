@@ -2,7 +2,7 @@
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/form'
-import type { FormSchema, FormError, FormInputEvents, FormErrorEvent, FormSubmitEvent, FormEvent, Form, FormErrorWithId, InferInput, InferOutput, FormData } from '../types/form'
+import type { FormSchema, FormError, FormInputEvents, FormErrorEvent, FormSubmitEvent, FormEvent, Form, FormErrorWithId, InferInput, InferOutput, FormData, FormState } from '../types/form'
 import type { FormHTMLAttributes } from '../types/html'
 import type { ComponentConfig } from '../types/tv'
 
@@ -13,13 +13,13 @@ export type FormProps<S extends FormSchema, T extends boolean = true, N extends 
   /** Schema to validate the form state. Supports Standard Schema objects, Yup, Joi, and Superstructs. */
   schema?: S
   /** An object representing the current state of the form. */
-  state?: N extends false ? Partial<InferInput<S>> : never
+  state?: N extends false ? FormState<S> : never
   /**
    * Custom validation function to validate the form state.
    * @param state - The current state of the form.
    * @returns A promise that resolves to an array of FormError objects, or an array of FormError objects directly.
    */
-  validate?: (state: Partial<InferInput<S>>) => Promise<FormError[]> | FormError[]
+  validate?: (state: FormState<S>) => Promise<FormError[]> | FormError[]
 
   /**
    * The list of input events that trigger the form validation.
