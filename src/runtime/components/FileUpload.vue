@@ -125,14 +125,14 @@ export interface FileUploadSlots<M extends boolean = false> {
   'label'?(props?: {}): VNode[]
   'description'?(props?: {}): VNode[]
   'actions'?(props: { files: FileUploadFiles<M> | undefined, open: UseFileDialogReturn['open'], removeFile: (index?: number) => void }): VNode[]
-  'files'?(props: { files: FileUploadFiles<M> }): VNode[]
+  'files'?(props: { files: FileUploadFiles<M>, removeFile: (index?: number) => void }): VNode[]
   'files-top'?(props: { files: FileUploadFiles<M>, open: UseFileDialogReturn['open'], removeFile: (index?: number) => void }): VNode[]
   'files-bottom'?(props: { files: FileUploadFiles<M>, open: UseFileDialogReturn['open'], removeFile: (index?: number) => void }): VNode[]
-  'file'?(props: { file: File, index: number }): VNode[]
+  'file'?(props: { file: File, index: number, removeFile: (index?: number) => void }): VNode[]
   'file-leading'?(props: { file: File, index: number, ui: FileUpload['ui'] }): VNode[]
   'file-name'?(props: { file: File, index: number }): VNode[]
   'file-size'?(props: { file: File, index: number }): VNode[]
-  'file-trailing'?(props: { file: File, index: number, ui: FileUpload['ui'] }): VNode[]
+  'file-trailing'?(props: { file: File, index: number, ui: FileUpload['ui'], removeFile: (index?: number) => void }): VNode[]
 }
 </script>
 
@@ -297,9 +297,9 @@ defineExpose({
       <slot name="files-top" :files="modelValue" :open="open" :remove-file="removeFile" />
 
       <div data-slot="files" :class="ui.files({ class: props.ui?.files })">
-        <slot name="files" :files="modelValue">
+        <slot name="files" :files="modelValue" :remove-file="removeFile">
           <div v-for="(file, index) in Array.isArray(modelValue) ? modelValue : [modelValue]" :key="(file as File).name" data-slot="file" :class="ui.file({ class: props.ui?.file })">
-            <slot name="file" :file="file" :index="index">
+            <slot name="file" :file="file" :index="index" :remove-file="removeFile">
               <slot name="file-leading" :file="file" :index="index" :ui="ui">
                 <UAvatar
                   :as="{ img: 'img' }"
@@ -325,7 +325,7 @@ defineExpose({
                 </span>
               </div>
 
-              <slot name="file-trailing" :file="file" :index="index" :ui="ui">
+              <slot name="file-trailing" :file="file" :index="index" :ui="ui" :remove-file="removeFile">
                 <UButton
                   v-if="props.fileDelete"
                   color="neutral"
