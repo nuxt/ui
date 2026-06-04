@@ -35,7 +35,7 @@ export type InferOutput<Schema> = Schema extends StandardSchemaV1 ? StandardSche
     : never
 
 export type FormState<S extends FormSchema> = {
-  [K in keyof InferInput<S>]?: InferInput<S>[K] | unknown
+  [K in keyof InferInput<S>]?: any
 }
 
 export type FormData<S extends FormSchema, T extends boolean = true> = T extends true ? InferOutput<S> : InferInput<S>
