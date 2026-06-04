@@ -205,7 +205,8 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.select || {}
   leading: isLeading.value || !!props.avatar || !!slots.leading,
   trailing: isTrailing.value || !!slots.trailing,
   fieldGroup: orientation.value,
-  position: position.value
+  position: position.value,
+  multiple: props.multiple
 }))
 
 const groups = computed<SelectItem[][]>(() =>
