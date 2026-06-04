@@ -16,6 +16,7 @@ overrides:
   '@nuxt/ui': workspace:*
   unplugin: ^3.0.0
   c12: ^3.3.4
+  h3: 1.15.11
   typescript: ^6.0.3
 
 allowBuilds:
