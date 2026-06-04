@@ -12,9 +12,20 @@ import { renderForm } from '../utils/form'
 import UForm from '../../src/runtime/components/Form.vue'
 
 describe('Form', () => {
+  const props = { state: {} }
+
   renderEach(UForm, [
-    ['with state', { props: { state: {} } }],
-    ['with default slot', { props: { state: {} }, slots: { default: () => 'Form slot' } }]
+    // Props
+    ['with state', { props }],
+    ['with name', { props: { ...props, name: 'contact' } }],
+    ['with method', { props: { ...props, method: 'get' } }],
+    ['with id', { props: { ...props, id: 'id' } }],
+    ['with class', { props: { ...props, class: 'gap-4' } }],
+    ['with ui', { props: { ...props, ui: { base: 'rounded-lg' } } }],
+    // Attrs
+    ['with aria-label', { props, attrs: { 'aria-label': 'Contact form' } }],
+    // Slots
+    ['with default slot', { props, slots: { default: () => 'Form slot' } }]
   ])
 
   it('passes accessibility tests', async () => {
