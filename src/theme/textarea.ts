@@ -5,6 +5,7 @@ import input from './input'
 export default (options: Required<ModuleOptions>) => {
   return defu({
     slots: {
+      root: 'relative inline-flex items-center align-top',
       leading: 'absolute start-0 flex items-start',
       trailing: 'absolute end-0 flex items-start'
     },
