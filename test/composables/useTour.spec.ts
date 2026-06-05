@@ -91,6 +91,17 @@ describe('useTour', () => {
       expect(tour.total.value).toBe(0)
     })
 
+    it('does not open when there are no steps', () => {
+      const tour = useTour([])
+
+      tour.start()
+      expect(tour.open.value).toBe(false)
+      expect(tour.total.value).toBe(0)
+
+      tour.goTo(2)
+      expect(tour.open.value).toBe(false)
+    })
+
     it('passes arbitrary step fields through via current', () => {
       const tour = useTour([{ target: null, title: 'x', side: 'right', body: 'hello' }])
       tour.start()
@@ -144,6 +155,21 @@ describe('useTour', () => {
       tour.start()
 
       expect(tour.reference.value).toBe(el)
+    })
+
+    it('is undefined for a non-matching selector', () => {
+      const tour = useTour([{ target: '#no-such-id' }])
+      tour.start()
+
+      expect(tour.reference.value).toBeUndefined()
+    })
+
+    it('does not throw on a malformed selector and resolves to undefined', () => {
+      const tour = useTour([{ target: '#a b]' }])
+      tour.start()
+
+      expect(() => tour.reference.value).not.toThrow()
+      expect(tour.reference.value).toBeUndefined()
     })
 
     it('falls back to a centered virtual element when target is null', () => {

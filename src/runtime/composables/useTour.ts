@@ -125,7 +125,12 @@ export function useTour(steps: MaybeRefOrGetter<TourStep[]>, options: UseTourOpt
 
     if (typeof target === 'string') {
       const selector = target.startsWith('#') || target.startsWith('.') ? target : `#${target}`
-      return (document.querySelector(selector) as ReferenceElement | null) ?? undefined
+      try {
+        return (document.querySelector(selector) as ReferenceElement | null) ?? undefined
+      } catch {
+        // Ignore malformed selectors and leave the step unanchored.
+        return undefined
+      }
     }
 
     return target
@@ -143,7 +148,11 @@ export function useTour(steps: MaybeRefOrGetter<TourStep[]>, options: UseTourOpt
 
   function goTo(value: number) {
     index.value = value
-    open.value = true
+    // Don't open with nothing to show — the `total` watcher only reacts to changes,
+    // so it can't catch a tour that is started while already empty.
+    if (total.value > 0) {
+      open.value = true
+    }
   }
 
   function start(value: number = options.initialStep ?? 0) {
