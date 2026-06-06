@@ -1,6 +1,6 @@
 export default {
   slots: {
-    root: 'relative my-5 group',
+    root: 'relative my-5 group min-h-(--ui-pre-height)',
     header: 'flex items-center gap-1.5 border border-muted bg-default border-b-0 relative rounded-t-md px-4 py-3',
     filename: 'text-default text-sm/6',
     icon: 'size-4 shrink-0',

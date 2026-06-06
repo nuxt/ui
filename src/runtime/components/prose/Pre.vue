@@ -26,7 +26,7 @@ export interface ProsePreSlots {
 
 <script setup lang="ts">
 import { computed, useTemplateRef } from 'vue'
-import { useClipboard } from '@vueuse/core'
+import { useClipboard, useElementSize } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../../composables/useComponentProps'
 import { useLocale } from '../../composables/useLocale'
@@ -45,6 +45,7 @@ const { copy, copied } = useClipboard()
 const appConfig = useAppConfig() as ProsePre['AppConfig']
 
 const baseRef = useTemplateRef('baseRef')
+const { height: preHeight } = useElementSize(baseRef)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.pre || {}) })())
@@ -57,7 +58,7 @@ function copyCode() {
 </script>
 
 <template>
-  <div :class="ui.root({ class: [props.ui?.root], filename: !!props.filename })">
+  <div :style="{ '--ui-pre-height': `${preHeight}px` }" :class="ui.root({ class: [props.ui?.root], filename: !!props.filename })">
     <div v-if="props.filename && !props.hideHeader" :class="ui.header({ class: props.ui?.header })">
       <UCodeIcon :icon="props.icon" :filename="props.filename" :class="ui.icon({ class: props.ui?.icon })" />
 
