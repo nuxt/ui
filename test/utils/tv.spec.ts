@@ -98,6 +98,11 @@ describe('tv class replace (slotless component)', () => {
     expect(build()({ class: () => 'block w-full' })).toBe('block w-full')
   })
 
+  it('replaces the base through a `:ui` function forwarded in the class array', () => {
+    // Mirrors how a slotless component forwards `class: [props.ui?.base, props.class]`.
+    expect(build()({ class: [() => 'block w-full', undefined] })).toBe('block w-full')
+  })
+
   it('passes the resolved default classes to the replacer', () => {
     let received: string | undefined
     build()({ class: (defaults: string) => {
