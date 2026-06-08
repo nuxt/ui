@@ -81,8 +81,7 @@ export default (options: Required<ModuleOptions>) => ({
     orientation: 'horizontal',
     variant: 'pill',
     class: {
-      indicator: 'inset-y-1',
-      trigger: ssr('before:w-[round(100%,1px)]')
+      indicator: 'inset-y-1'
     }
   }, {
     orientation: 'horizontal',
@@ -98,7 +97,7 @@ export default (options: Required<ModuleOptions>) => ({
     class: {
       indicator: 'inset-x-1',
       list: 'items-center',
-      trigger: ['w-full justify-center', ssr('before:h-[round(100%,1px)]')]
+      trigger: 'w-full justify-center'
     }
   }, {
     orientation: 'vertical',
