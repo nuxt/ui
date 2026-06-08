@@ -1,12 +1,12 @@
 <script setup lang="ts">
 const { framework, setFramework, frameworks } = useFrameworks()
 
-const value = ref(framework.value)
+// Pages are prerendered with the cookie default (`nuxt`), so initialize with the
+// same value to keep the hydration markup in sync. Reading the real cookie during
+// setup would mismatch the prerendered HTML and leave the tabs unresponsive.
+const value = ref('nuxt')
 
 onMounted(() => {
-  // On prerendered pages `useCookie` keeps the SSR/payload value during hydration,
-  // so re-read the actual cookie to reflect the visitor's chosen framework.
-  refreshCookie('nuxt-ui-framework')
   value.value = framework.value
 })
 
