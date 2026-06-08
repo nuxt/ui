@@ -1,11 +1,8 @@
 <script setup lang="ts">
 const { framework, setFramework, frameworks } = useFrameworks()
 
-const value = ref<string | undefined>(undefined)
+const value = ref(framework.value)
 
-onMounted(() => {
-  value.value = framework.value
-})
 watch(framework, () => {
   value.value = framework.value
 })
