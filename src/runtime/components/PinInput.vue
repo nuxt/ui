@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
-import type { ComponentPublicInstance } from 'vue'
+import type { ComponentPublicInstance, VNode } from 'vue'
 import type { PinInputRootEmits, PinInputRootProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/pin-input'
@@ -40,10 +40,12 @@ export interface PinInputProps<T extends PinInputType = 'text'> extends Pick<Pin
   /** Keep the mobile text size on all breakpoints. */
   fixed?: boolean
   /**
-   * Group inputs by inserting a separator after every Nth input.
-   * @example 3 // Insert a separator after every 3rd input → [X][X][X] • [X][X][X]
+   * Group inputs by inserting a separator between them.
+   * Pass a number to insert one after every Nth input, or an array of positions to insert after specific inputs.
+   * @example 3 // after every 3rd input → [X][X][X] • [X][X][X]
+   * @example [3, 4] // after the 3rd and 4th inputs → [X][X][X] • [X] • [X][X][X]
    */
-  separator?: number
+  separator?: number | number[]
   class?: any
   ui?: PinInput['slots']
 }
@@ -53,6 +55,9 @@ export type PinInputEmits<T extends PinInputType = 'text'> = PinInputRootEmits<T
   blur: [event: Event]
 }
 
+export interface PinInputSlots {
+  separator?(props: { index: number }): VNode[]
+}
 </script>
 
 <script setup lang="ts" generic="T extends PinInputType">
@@ -72,6 +77,7 @@ const _props = withDefaults(defineProps<PinInputProps<T>>(), {
   autofocusDelay: 0
 })
 const emits = defineEmits<PinInputEmits<T>>()
+defineSlots<PinInputSlots>()
 
 const props = useComponentProps<PinInputProps<T>>('pinInput', _props)
 
@@ -119,9 +125,18 @@ function autoFocus() {
 }
 
 function shouldInsertSeparator(index: number) {
-  return props.separator !== undefined
-    && (index + 1) % props.separator === 0
-    && (index + 1) < looseToNumber(props.length)
+  if (props.separator === undefined) {
+    return false
+  }
+
+  const position = index + 1
+  if (position >= looseToNumber(props.length)) {
+    return false
+  }
+
+  return Array.isArray(props.separator)
+    ? props.separator.includes(position)
+    : props.separator > 0 && position % props.separator === 0
 }
 
 onMounted(() => {
@@ -161,10 +176,11 @@ defineExpose({
       <span
         v-if="shouldInsertSeparator(index as number)"
         data-slot="separator"
+        role="presentation"
         aria-hidden="true"
         :class="ui.separator({ class: props.ui?.separator })"
       >
-        <slot name="separator">•</slot>
+        <slot name="separator" :index="(index as number)">•</slot>
       </span>
     </template>
   </PinInputRoot>
