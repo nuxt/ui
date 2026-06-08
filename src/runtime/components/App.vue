@@ -21,7 +21,7 @@ export default {
 </script>
 
 <script setup lang="ts" generic="T extends Messages">
-import { toRef, useId, provide } from 'vue'
+import { toRef, provide } from 'vue'
 import { ConfigProvider, TooltipProvider, useForwardProps } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { localeContextInjectionKey } from '../composables/useLocale'
@@ -38,6 +38,12 @@ const configProviderProps = useForwardProps(reactivePick(props, 'scrollBody'))
 const tooltipProps = toRef(() => props.tooltip)
 const toasterProps = toRef(() => props.toaster)
 
+// Vue's `useId` includes the app `idPrefix`, which can differ between Nuxt prerender
+// SSR and client hydration. Reka needs the provider to replay the same sequence on
+// both sides, so keep this generator scoped to the `UApp` render instance.
+let id = 0
+const useRekaId = () => `nuxt-ui-${++id}`
+
 const locale = toRef(() => props.locale)
 provide(localeContextInjectionKey, locale)
 
@@ -46,7 +52,7 @@ provide(portalTargetInjectionKey, portal)
 </script>
 
 <template>
-  <ConfigProvider :use-id="() => (useId() as string)" :dir="props.dir || locale?.dir" :locale="locale?.code" v-bind="configProviderProps">
+  <ConfigProvider :use-id="useRekaId" :dir="props.dir || locale?.dir" :locale="locale?.code" v-bind="configProviderProps">
     <TooltipProvider v-bind="tooltipProps">
       <UToaster v-if="toaster !== null" v-bind="toasterProps">
         <slot />
