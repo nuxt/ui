@@ -98,7 +98,7 @@ export default (options: Required<ModuleOptions>) => ({
     class: {
       indicator: 'inset-x-1',
       list: 'items-center',
-      trigger: ssr('before:h-[round(100%,1px)]')
+      trigger: ['w-full justify-center', ssr('before:h-[round(100%,1px)]')]
     }
   }, {
     orientation: 'vertical',
