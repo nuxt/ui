@@ -134,9 +134,12 @@ function shouldInsertSeparator(index: number) {
     return false
   }
 
-  return Array.isArray(props.separator)
-    ? props.separator.includes(position)
-    : props.separator > 0 && position % props.separator === 0
+  if (Array.isArray(props.separator)) {
+    return props.separator.includes(position)
+  }
+
+  const separator = looseToNumber(props.separator)
+  return Number.isInteger(separator) && separator > 0 && position % separator === 0
 }
 
 onMounted(() => {
