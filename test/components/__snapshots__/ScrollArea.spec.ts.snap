@@ -56,6 +56,16 @@ exports[`ScrollArea > renders with orientation vertical correctly 1`] = `
 </div>"
 `;
 
+exports[`ScrollArea > renders with shadow correctly 1`] = `
+"<div data-slot="root" data-orientation="vertical" class="relative overflow-y-auto overflow-x-hidden">
+  <div data-slot="viewport" class="relative flex flex-col">
+    <div data-slot="item" class=""></div>
+    <div data-slot="item" class=""></div>
+    <div data-slot="item" class=""></div>
+  </div>
+</div>"
+`;
+
 exports[`ScrollArea > renders with ui correctly 1`] = `
 "<div data-slot="root" data-orientation="vertical" class="relative overflow-y-auto overflow-x-hidden">
   <div data-slot="viewport" class="relative flex flex-col gap-4">
