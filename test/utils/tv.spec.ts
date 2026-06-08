@@ -75,4 +75,40 @@ describe('tv class replace', () => {
     const ui = tvt({ extend: tvt(theme), slots: { label: () => 'from-config' } })({ color: 'primary', size: 'md' })
     expect(ui.label({ class: () => 'from-ui' })).toBe('from-ui')
   })
+
+  it('replaces the base slot through a function forwarded in the class array', () => {
+    // Mirrors how components forward `class: [props.ui?.base, props.class]`.
+    expect(build().base({ class: [undefined, () => 'block w-full'] })).toBe('block w-full')
+  })
+})
+
+describe('tv class replace (slotless component)', () => {
+  // A slotless theme has only a `base` and no `slots`, so `tv()(props)` returns
+  // a string rather than an object of slot functions (e.g. the Container theme).
+  const tvBase = tv as unknown as (config?: any) => (props?: any) => string
+  const build = () => tvBase({ extend: tvBase({ base: 'inline-flex rounded-md px-4' }) })
+
+  it('still merges plain classes', () => {
+    const result = build()({ class: 'font-bold' })
+    expect(result).toContain('inline-flex')
+    expect(result).toContain('font-bold')
+  })
+
+  it('replaces the base through a function in `:ui` / `class`', () => {
+    expect(build()({ class: () => 'block w-full' })).toBe('block w-full')
+  })
+
+  it('passes the resolved default classes to the replacer', () => {
+    let received: string | undefined
+    build()({ class: (defaults: string) => {
+      received = defaults
+      return 'whatever'
+    } })
+    expect(received).toContain('inline-flex')
+  })
+
+  it('applies a construction-time `base` replacer from `app.config.ui`', () => {
+    const ui = tvBase({ extend: tvBase({ base: 'inline-flex px-4' }), base: () => 'block' })
+    expect(ui()).toBe('block')
+  })
 })

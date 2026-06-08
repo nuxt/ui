@@ -87,6 +87,16 @@ function plainClasses(value: unknown): ClassValue[] {
 }
 
 /**
+ * Apply a replacer: drop the baked-in default chain and return only the
+ * replacement, plus any plain classes passed alongside it. `resolveDefaults`
+ * computes the slot's default classes (without any user class) so the replacer
+ * can reuse part of them.
+ */
+function applyReplacer(replacer: SlotClassReplacer, slotProps: Record<string, any>, resolveDefaults: () => string): string {
+  return cnMerge(replacer(resolveDefaults()), ...plainClasses(slotProps.class), ...plainClasses(slotProps.className))(config) ?? ''
+}
+
+/**
  * Wrap the slot functions returned by `tv()` so a replacer (from `:ui` / `class`
  * at call time, or from `app.config.ui` at construction time) drops the slot's
  * baked-in default chain and returns only its replacement. Without a replacer the
@@ -105,12 +115,7 @@ function wrapSlots(slots: Record<string, any>, directives?: Record<string, SlotC
         if (!replacer) {
           return slot(slotProps)
         }
-
-        // Resolve the slot's default classes (without any user class) to hand to
-        // the replacer, then return only the replacement plus any plain classes
-        // passed alongside — the default chain is dropped.
-        const defaults = slot({ ...slotProps, class: undefined, className: undefined })
-        return cnMerge(replacer(defaults), ...plainClasses(slotProps.class), ...plainClasses(slotProps.className))(config)
+        return applyReplacer(replacer, slotProps, () => slot({ ...slotProps, class: undefined, className: undefined }))
       }
     }
   })
@@ -166,7 +171,22 @@ export const tv = ((componentConfig?: any) => {
   return new Proxy(component, {
     apply(target, thisArg, args) {
       const result = Reflect.apply(target, thisArg, args)
-      return (result && typeof result === 'object') ? wrapSlots(result, directives) : result
+      if (result && typeof result === 'object') {
+        return wrapSlots(result, directives)
+      }
+
+      // Slotless components (only a `base`, no `slots`) return a string. Honor a
+      // replacer passed through `class` / `className` or a `base` directive from
+      // `app.config.ui`, otherwise return the merged string untouched.
+      if (typeof result === 'string') {
+        const slotProps = args[0] ?? {}
+        const replacer = findReplacer(slotProps.class) ?? findReplacer(slotProps.className) ?? directives?.base
+        if (replacer) {
+          return applyReplacer(replacer, slotProps, () => Reflect.apply(target, thisArg, [{ ...slotProps, class: undefined, className: undefined }]))
+        }
+      }
+
+      return result
     }
   })
 }) as unknown as WideTV
