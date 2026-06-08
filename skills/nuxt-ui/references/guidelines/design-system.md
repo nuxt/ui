@@ -226,7 +226,7 @@ export default defineAppConfig({
 })
 ```
 
-### `UTheme` (scoped overrides)
+### Theme component
 
 Override theme for a section of the component tree without affecting the rest of the app. Renders no DOM element — uses `provide`/`inject`:
 
