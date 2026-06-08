@@ -80,6 +80,11 @@ describe('tv class replace', () => {
     // Mirrors how components forward `class: [props.ui?.base, props.class]`.
     expect(build().base({ class: [undefined, () => 'block w-full'] })).toBe('block w-full')
   })
+
+  it('lets the last replacer win when several are forwarded in the class array', () => {
+    // Mirrors `[props.ui?.base, props.class]` with both set: `class` wins, like twMerge.
+    expect(build().base({ class: [() => 'block', () => 'w-full'] })).toBe('w-full')
+  })
 })
 
 describe('tv class replace (slotless component)', () => {

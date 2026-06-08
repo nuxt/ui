@@ -60,25 +60,33 @@ const baseTv = /* @__PURE__ */ createTV(config)
  * Find a class **replacer** — a function `(defaults) => classes` that replaces a
  * slot's default classes instead of merging onto them. It may sit directly in a
  * slot's `class` value (the `transformUI` scalar path) or inside the array a
- * component forwards (e.g. `[props.ui?.base, props.class]`).
+ * component forwards (e.g. `[props.ui?.base, props.class]`). Arrays are scanned
+ * deeply and the **last** replacer wins, mirroring `twMerge`'s last-in-wins
+ * semantics so e.g. `props.class` overrides `props.ui?.base`.
  */
 function findReplacer(value: unknown): SlotClassReplacer | undefined {
   if (typeof value === 'function') {
     return value as SlotClassReplacer
   }
   if (Array.isArray(value)) {
-    return value.find(item => typeof item === 'function') as SlotClassReplacer | undefined
+    for (let i = value.length - 1; i >= 0; i--) {
+      const replacer = findReplacer(value[i])
+      if (replacer) {
+        return replacer
+      }
+    }
   }
   return undefined
 }
 
 /**
  * Keep the plain (non-function) classes passed alongside a replacer so they
- * still apply on top of the replacement.
+ * still apply on top of the replacement. Nested arrays are flattened so plain
+ * classes are never dropped.
  */
 function plainClasses(value: unknown): ClassValue[] {
   if (Array.isArray(value)) {
-    return value.filter(item => typeof item !== 'function') as ClassValue[]
+    return value.flatMap(item => plainClasses(item))
   }
   if (typeof value === 'function') {
     return []
