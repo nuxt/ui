@@ -32,10 +32,10 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
 
           // Override default variants from nuxt.config.ts
           result = applyDefaultVariants(result, options.theme?.defaultVariants)
-          // Apply Tailwind prefix if configured
-          result = applyPrefixToObject(result, options.theme?.prefix)
           // Strip default theme classes if `unstyled` is enabled
           result = applyUnstyled(result, options.theme?.unstyled)
+          // Apply Tailwind prefix if configured
+          result = applyPrefixToObject(result, options.theme?.prefix)
 
           const variants = Object.entries(result.variants || {})
             .filter(([_, values]) => {
@@ -76,8 +76,8 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
               `const options = ${JSON.stringify(options, null, 2)}`,
               `let result = typeof template === 'function' ? (template as Function)(options) : template`,
               `result = applyDefaultVariants(result, ${defaultVariantsJson})`,
-              `result = applyPrefixToObject(result, ${prefixJson})`,
               `result = applyUnstyled(result, ${unstyledJson})`,
+              `result = applyPrefixToObject(result, ${prefixJson})`,
               `const theme = ${json}`,
               `export default result as typeof theme`
             ].join('\n\n')
