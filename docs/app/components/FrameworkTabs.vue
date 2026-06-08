@@ -3,6 +3,13 @@ const { framework, setFramework, frameworks } = useFrameworks()
 
 const value = ref(framework.value)
 
+onMounted(() => {
+  // On prerendered pages `useCookie` keeps the SSR/payload value during hydration,
+  // so re-read the actual cookie to reflect the visitor's chosen framework.
+  refreshCookie('nuxt-ui-framework')
+  value.value = framework.value
+})
+
 watch(framework, () => {
   value.value = framework.value
 })
