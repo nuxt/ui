@@ -105,17 +105,8 @@ export default (options: Required<ModuleOptions>) => {
         true: ''
       }
     },
-    compoundVariants: (prev: Record<string, any>[]) => prev.map(item => ({
-      ...item,
-      class: typeof item.class === 'string' ? replaceFocus(item.class) : item.class
-    })),
     defaultVariants: {
       position: 'popper'
     }
   }, input(options))
-}
-
-function replaceFocus(str: string): string {
-  return str
-    .replace(/focus-visible:/g, 'focus:')
 }
