@@ -56,9 +56,9 @@ export default (options: Required<ModuleOptions>) => ({
     },
     to: {
       true: {
-        root: ['has-focus-visible:ring-2 has-focus-visible:ring-primary', options.theme.transitions && 'transition'],
+        root: ['outline-primary/25 has-focus-visible:outline-3', options.theme.transitions && 'transition'],
         image: 'transform transition-transform duration-200 group-hover/blog-post:scale-110',
-        avatar: 'transform transition-transform duration-200 hover:scale-115 focus-visible:outline-primary'
+        avatar: 'transform transition-transform duration-200 hover:scale-115 outline-primary/25 focus-visible:outline-3'
       }
     },
     image: {

@@ -3,7 +3,7 @@ import type { ModuleOptions } from '../module'
 export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: '',
-    trigger: ['group flex w-full items-center gap-1.5 text-muted text-sm disabled:cursor-default disabled:hover:text-muted hover:text-default focus-visible:outline-offset-2 focus-visible:outline-primary min-w-0', options.theme.transitions && 'transition-colors'],
+    trigger: ['group flex w-full items-center gap-1.5 text-muted text-sm disabled:cursor-default disabled:hover:text-muted hover:text-default outline-primary/25 focus-visible:outline-3 min-w-0', options.theme.transitions && 'transition-colors'],
     leading: 'relative size-4 shrink-0',
     leadingIcon: 'size-4 shrink-0',
     chevronIcon: 'size-4 shrink-0 group-data-[state=open]:rotate-180 transition-transform duration-200',

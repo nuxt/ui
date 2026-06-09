@@ -56,7 +56,7 @@ export default (options: Required<ModuleOptions>) => ({
     },
     to: {
       true: {
-        root: ['has-focus-visible:ring-2 has-focus-visible:ring-primary', options.theme.transitions && 'transition']
+        root: ['outline-primary/25 has-focus-visible:outline-3', options.theme.transitions && 'transition']
       }
     },
     title: {
