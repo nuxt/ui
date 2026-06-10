@@ -1,6 +1,6 @@
 export default {
   slots: {
-    root: 'relative [&_pre]:h-[200px] bg-muted',
+    root: 'relative [&_pre]:h-[200px] bg-muted min-h-(--ui-code-height)',
     footer: 'h-16 absolute inset-x-px bottom-px rounded-b-md flex items-center justify-center',
     trigger: 'group',
     triggerIcon: 'group-data-[state=open]:rotate-180'

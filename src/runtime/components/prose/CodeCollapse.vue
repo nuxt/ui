@@ -38,7 +38,8 @@ export interface ProseCodeCollapseSlots {
 </script>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, useTemplateRef } from 'vue'
+import { useElementSize } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../../composables/useComponentProps'
 import { useLocale } from '../../composables/useLocale'
@@ -60,10 +61,20 @@ const appConfig = useAppConfig() as ProseCodeCollapse['AppConfig']
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.codeCollapse || {}) })({
   open: open.value
 }))
+
+const rootRef = useTemplateRef('rootRef')
+const preEl = computed(() => rootRef.value?.querySelector('pre') ?? null)
+const { height: preHeight } = useElementSize(preEl, { width: 0, height: 0 }, { box: 'border-box' })
+
+const codeHeight = computed(() => {
+  if (!preEl.value || !rootRef.value) return 0
+  const offset = preEl.value.getBoundingClientRect().top - rootRef.value.getBoundingClientRect().top
+  return preHeight.value + offset
+})
 </script>
 
 <template>
-  <div :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <div ref="rootRef" :style="{ '--ui-code-height': `${codeHeight}px` }" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <slot />
 
     <div :class="ui.footer({ class: props.ui?.footer })">
