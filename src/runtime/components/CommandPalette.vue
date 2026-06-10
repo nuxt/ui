@@ -447,7 +447,16 @@ const rootRef = useTemplateRef('rootRef')
 
 watch(filteredGroups, () => {
   nextTick(() => {
-    rootRef.value?.highlightFirstItem()
+    // Re-highlight the first item when results change (e.g. after debounced or
+    // async data renders). Only scroll it into view when the palette already has
+    // focus — otherwise results resolving while the palette is below the fold
+    // (e.g. `useLazyFetch`) would scroll the whole page to it.
+    const root = rootRef.value
+    if (root?.$el?.contains(document.activeElement)) {
+      root.highlightFirstItem()
+    } else {
+      root?.highlightSelected(undefined, false)
+    }
   })
 })
 
