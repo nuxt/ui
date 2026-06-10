@@ -452,8 +452,10 @@ watch(filteredGroups, () => {
     // focus — otherwise results resolving while the palette is below the fold
     // (e.g. `useLazyFetch`) would scroll the whole page to it.
     const root = rootRef.value
-    if (root?.$el?.contains(document.activeElement)) {
-      root.highlightFirstItem()
+    // `$el` is on the component instance but not part of reka-ui's exposed type.
+    const rootEl = (root as unknown as { $el?: HTMLElement } | null)?.$el
+    if (rootEl?.contains(document.activeElement)) {
+      root?.highlightFirstItem()
     } else {
       root?.highlightSelected(undefined, false)
     }

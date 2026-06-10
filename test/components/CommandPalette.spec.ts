@@ -176,31 +176,33 @@ describe('CommandPalette', () => {
     const original = window.HTMLElement.prototype.scrollIntoView
     window.HTMLElement.prototype.scrollIntoView = scrollSpy
 
-    const wrapper = await mountSuspended(CommandPalette, {
-      props: { groups: [{ id: 'users', items: [] }], autofocus: false } as any,
-      attachTo: document.body
-    })
-    await new Promise(resolve => setTimeout(resolve, 60))
+    try {
+      const wrapper = await mountSuspended(CommandPalette, {
+        props: { groups: [{ id: 'users', items: [] }], autofocus: false } as any,
+        attachTo: document.body
+      })
+      await new Promise(resolve => setTimeout(resolve, 60))
 
-    // Items arrive asynchronously while the palette is not focused
-    await wrapper.setProps({
-      groups: [{ id: 'users', items: Array.from({ length: 10 }, (_, i) => ({ label: `User ${i}` })) }]
-    } as any)
-    await new Promise(resolve => setTimeout(resolve, 60))
+      // Items arrive asynchronously while the palette is not focused
+      await wrapper.setProps({
+        groups: [{ id: 'users', items: Array.from({ length: 10 }, (_, i) => ({ label: `User ${i}` })) }]
+      } as any)
+      await new Promise(resolve => setTimeout(resolve, 60))
 
-    // First item is highlighted for keyboard entry, but the page was not scrolled to it.
-    expect(wrapper.find('[data-highlighted]').exists()).toBe(true)
-    expect(scrollSpy).not.toHaveBeenCalled()
+      // First item is highlighted for keyboard entry, but the page was not scrolled to it.
+      expect(wrapper.find('[data-highlighted]').exists()).toBe(true)
+      expect(scrollSpy).not.toHaveBeenCalled()
 
-    // Once the palette has focus, a results change scrolls the highlight into view.
-    ;(wrapper.find('input').element as HTMLInputElement).focus()
-    await wrapper.setProps({
-      groups: [{ id: 'users', items: Array.from({ length: 8 }, (_, i) => ({ label: `Person ${i}` })) }]
-    } as any)
-    await new Promise(resolve => setTimeout(resolve, 60))
+      // Once the palette has focus, a results change scrolls the highlight into view.
+      ;(wrapper.find('input').element as HTMLInputElement).focus()
+      await wrapper.setProps({
+        groups: [{ id: 'users', items: Array.from({ length: 8 }, (_, i) => ({ label: `Person ${i}` })) }]
+      } as any)
+      await new Promise(resolve => setTimeout(resolve, 60))
 
-    expect(scrollSpy).toHaveBeenCalled()
-
-    window.HTMLElement.prototype.scrollIntoView = original
+      expect(scrollSpy).toHaveBeenCalled()
+    } finally {
+      window.HTMLElement.prototype.scrollIntoView = original
+    }
   })
 })
