@@ -290,7 +290,7 @@ describe('Theme', () => {
     })
 
     expect(wrapper.find('button').classes()).toContain('bg-error/10')
-    expect(wrapper.html()).toContain('focus-visible:outline-success')
+    expect(wrapper.html()).toContain('focus-visible:ring-success')
   })
 
   test(':props does not leak outside scope', async () => {
@@ -452,7 +452,7 @@ describe('Theme', () => {
     })
 
     // theme `color` flows through the proxy onto the checkbox
-    expect(wrapper.html()).toContain('focus-visible:outline-success')
+    expect(wrapper.html()).toContain('focus-visible:ring-success')
     // FormField label is wired up
     expect(wrapper.text()).toContain('Accept')
     // FormField-injected `size` (xl) wins over `<UTheme :props>` size (xs).
@@ -478,8 +478,8 @@ describe('Theme', () => {
       `
     })
 
-    expect(wrapper.html()).toContain('focus-visible:outline-error')
-    expect(wrapper.html()).not.toContain('focus-visible:outline-success')
+    expect(wrapper.html()).toContain('focus-visible:ring-error')
+    expect(wrapper.html()).not.toContain('focus-visible:ring-success')
   })
 
   // `useFieldGroup` shares the same closer-context-wins fallback as
