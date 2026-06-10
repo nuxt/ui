@@ -29,7 +29,20 @@ const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
 const { findSurround, findBreadcrumb } = useNavigation(navigation!)
 
 const breadcrumb = computed(() => findBreadcrumb(page.value?.path as string))
-const surround = computed(() => findSurround(page.value?.path as string))
+
+// The surround links are framework-specific. Prerendered pages bake in the page's
+// framework (or the `nuxt` default), but `useFrameworks` reads the real cookie on the
+// client, so keep using the prerendered value through hydration to avoid a mismatch,
+// then switch to the actual framework once mounted.
+const hydrated = ref(false)
+onMounted(() => {
+  hydrated.value = true
+})
+
+const surround = computed(() => findSurround(
+  page.value?.path as string,
+  hydrated.value ? framework.value : ((page.value?.framework as string) || 'nuxt')
+))
 
 if (!import.meta.prerender) {
   // Redirect to the correct framework version if the page is not the current framework

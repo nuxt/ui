@@ -121,4 +121,18 @@ describe('Button', () => {
 
     expect(await axe(wrapper.element)).toHaveNoViolations()
   })
+
+  it('replaces a slot class through a `:ui` function', async () => {
+    const wrapper = await mountSuspended(Button, {
+      props: {
+        label: 'Button',
+        ui: { label: () => 'text-3xl font-bold' }
+      }
+    })
+
+    const label = wrapper.get('[data-slot="label"]')
+    expect(label.classes()).toContain('text-3xl')
+    // The default `truncate` class is dropped, not merged.
+    expect(label.classes()).not.toContain('truncate')
+  })
 })

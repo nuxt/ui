@@ -28,5 +28,6 @@ const onComplete = (e: string[]) => {
     <UPinInput placeholder="○" highlight v-bind="props" />
     <UPinInput placeholder="○" disabled v-bind="props" />
     <UPinInput placeholder="○" required v-bind="props" />
+    <UPinInput placeholder="○" :length="6" :separator="3" v-bind="props" />
   </Matrix>
 </template>
