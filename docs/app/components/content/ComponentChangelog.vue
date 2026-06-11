@@ -115,9 +115,9 @@ function normalizeCommitMessage(commit: Commit) {
   >
     <template #title="{ item }">
       <UBadge v-if="item.tag === 'unreleased'" color="neutral" variant="subtle" :label="item.title" class="w-12.5 justify-center" />
-      <NuxtLink v-else :to="item.url" target="_blank" class="hover:underline">
+      <ULink v-else :to="item.url" target="_blank">
         <UBadge variant="subtle" :label="item.tag" />
-      </NuxtLink>
+      </ULink>
 
       <time v-if="item.published_at" :datetime="item.published_at" class="text-xs text-dimmed font-normal">
         {{ useTimeAgo(new Date(item.published_at)) }}

@@ -2,7 +2,7 @@ import type { ModuleOptions } from '../module'
 
 export default (options: Required<ModuleOptions>) => ({
   slots: {
-    root: 'relative overflow-auto',
+    root: 'relative overflow-auto outline-primary/25 focus-visible:outline-3',
     base: 'min-w-full overflow-clip',
     caption: 'sr-only',
     thead: 'relative',

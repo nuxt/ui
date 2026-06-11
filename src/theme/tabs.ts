@@ -18,12 +18,16 @@ export default (options: Required<ModuleOptions>) => ({
     label: 'truncate',
     trailingBadge: 'shrink-0',
     trailingBadgeSize: 'sm',
-    content: 'focus:outline-none w-full'
+    content: 'w-full rounded-md focus-visible:outline-3'
   },
   variants: {
     color: {
-      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, ''])),
-      neutral: ''
+      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, {
+        content: `outline-${color}/25`
+      }])),
+      neutral: {
+        content: 'outline-inverted/25'
+      }
     },
     variant: {
       pill: {

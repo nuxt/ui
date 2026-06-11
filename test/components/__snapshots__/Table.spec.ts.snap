@@ -1,7 +1,7 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Table > renders with as correctly 1`] = `
-"<section data-slot="root" class="relative overflow-auto">
+"<section data-slot="root" class="relative overflow-auto outline-primary/25 focus-visible:outline-3">
   <table data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
     <thead data-slot="thead" class="relative">
@@ -56,7 +56,7 @@ exports[`Table > renders with as correctly 1`] = `
 `;
 
 exports[`Table > renders with body-bottom slot correctly 1`] = `
-"<div data-slot="root" class="relative overflow-auto">
+"<div data-slot="root" class="relative overflow-auto outline-primary/25 focus-visible:outline-3">
   <table data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
     <thead data-slot="thead" class="relative">
@@ -111,7 +111,7 @@ exports[`Table > renders with body-bottom slot correctly 1`] = `
 `;
 
 exports[`Table > renders with body-top slot correctly 1`] = `
-"<div data-slot="root" class="relative overflow-auto">
+"<div data-slot="root" class="relative overflow-auto outline-primary/25 focus-visible:outline-3">
   <table data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
     <thead data-slot="thead" class="relative">
@@ -165,7 +165,7 @@ exports[`Table > renders with body-top slot correctly 1`] = `
 `;
 
 exports[`Table > renders with caption correctly 1`] = `
-"<div data-slot="root" class="relative overflow-auto">
+"<div data-slot="root" class="relative overflow-auto outline-primary/25 focus-visible:outline-3">
   <table data-slot="base" class="min-w-full overflow-clip">
     <caption data-slot="caption" class="sr-only">Table caption</caption>
     <thead data-slot="thead" class="relative">
@@ -220,7 +220,7 @@ exports[`Table > renders with caption correctly 1`] = `
 `;
 
 exports[`Table > renders with caption slot correctly 1`] = `
-"<div data-slot="root" class="relative overflow-auto">
+"<div data-slot="root" class="relative overflow-auto outline-primary/25 focus-visible:outline-3">
   <table data-slot="base" class="min-w-full overflow-clip">
     <caption data-slot="caption" class="sr-only">Caption slot</caption>
     <thead data-slot="thead" class="relative">
@@ -275,7 +275,7 @@ exports[`Table > renders with caption slot correctly 1`] = `
 `;
 
 exports[`Table > renders with cell slot correctly 1`] = `
-"<div data-slot="root" class="relative overflow-auto">
+"<div data-slot="root" class="relative overflow-auto outline-primary/25 focus-visible:outline-3">
   <table data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
     <thead data-slot="thead" class="relative">
@@ -330,7 +330,7 @@ exports[`Table > renders with cell slot correctly 1`] = `
 `;
 
 exports[`Table > renders with class correctly 1`] = `
-"<div data-slot="root" class="overflow-auto absolute">
+"<div data-slot="root" class="overflow-auto outline-primary/25 focus-visible:outline-3 absolute">
   <table data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
     <thead data-slot="thead" class="relative">
@@ -385,7 +385,7 @@ exports[`Table > renders with class correctly 1`] = `
 `;
 
 exports[`Table > renders with columns correctly 1`] = `
-"<div data-slot="root" class="relative overflow-auto">
+"<div data-slot="root" class="relative overflow-auto outline-primary/25 focus-visible:outline-3">
   <table data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
     <thead data-slot="thead" class="relative">
@@ -570,7 +570,7 @@ exports[`Table > renders with columns correctly 1`] = `
 `;
 
 exports[`Table > renders with data correctly 1`] = `
-"<div data-slot="root" class="relative overflow-auto">
+"<div data-slot="root" class="relative overflow-auto outline-primary/25 focus-visible:outline-3">
   <table data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
     <thead data-slot="thead" class="relative">
@@ -625,7 +625,7 @@ exports[`Table > renders with data correctly 1`] = `
 `;
 
 exports[`Table > renders with empty correctly 1`] = `
-"<div data-slot="root" class="relative overflow-auto">
+"<div data-slot="root" class="relative overflow-auto outline-primary/25 focus-visible:outline-3">
   <table data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
     <thead data-slot="thead" class="relative">
@@ -643,7 +643,7 @@ exports[`Table > renders with empty correctly 1`] = `
 `;
 
 exports[`Table > renders with empty slot correctly 1`] = `
-"<div data-slot="root" class="relative overflow-auto">
+"<div data-slot="root" class="relative overflow-auto outline-primary/25 focus-visible:outline-3">
   <table data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
     <thead data-slot="thead" class="relative">
@@ -706,7 +706,7 @@ exports[`Table > renders with empty slot correctly 1`] = `
 `;
 
 exports[`Table > renders with expanded slot correctly 1`] = `
-"<div data-slot="root" class="relative overflow-auto">
+"<div data-slot="root" class="relative overflow-auto outline-primary/25 focus-visible:outline-3">
   <table data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
     <thead data-slot="thead" class="relative">
@@ -761,7 +761,7 @@ exports[`Table > renders with expanded slot correctly 1`] = `
 `;
 
 exports[`Table > renders with header slot correctly 1`] = `
-"<div data-slot="root" class="relative overflow-auto">
+"<div data-slot="root" class="relative overflow-auto outline-primary/25 focus-visible:outline-3">
   <table data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
     <thead data-slot="thead" class="relative">
@@ -816,7 +816,7 @@ exports[`Table > renders with header slot correctly 1`] = `
 `;
 
 exports[`Table > renders with loading animation carousel correctly 1`] = `
-"<div data-slot="root" class="relative overflow-auto">
+"<div data-slot="root" class="relative overflow-auto outline-primary/25 focus-visible:outline-3">
   <table data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
     <thead data-slot="thead" class="relative after:absolute after:z-1 after:h-px after:bg-primary after:animate-[carousel_2s_ease-in-out_infinite] rtl:after:animate-[carousel-rtl_2s_ease-in-out_infinite]">
@@ -871,7 +871,7 @@ exports[`Table > renders with loading animation carousel correctly 1`] = `
 `;
 
 exports[`Table > renders with loading animation carousel-inverse correctly 1`] = `
-"<div data-slot="root" class="relative overflow-auto">
+"<div data-slot="root" class="relative overflow-auto outline-primary/25 focus-visible:outline-3">
   <table data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
     <thead data-slot="thead" class="relative after:absolute after:z-1 after:h-px after:bg-primary after:animate-[carousel-inverse_2s_ease-in-out_infinite] rtl:after:animate-[carousel-inverse-rtl_2s_ease-in-out_infinite]">
@@ -926,7 +926,7 @@ exports[`Table > renders with loading animation carousel-inverse correctly 1`] =
 `;
 
 exports[`Table > renders with loading animation elastic correctly 1`] = `
-"<div data-slot="root" class="relative overflow-auto">
+"<div data-slot="root" class="relative overflow-auto outline-primary/25 focus-visible:outline-3">
   <table data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
     <thead data-slot="thead" class="relative after:absolute after:z-1 after:h-px after:bg-primary after:animate-[elastic_2s_ease-in-out_infinite]">
@@ -981,7 +981,7 @@ exports[`Table > renders with loading animation elastic correctly 1`] = `
 `;
 
 exports[`Table > renders with loading animation swing correctly 1`] = `
-"<div data-slot="root" class="relative overflow-auto">
+"<div data-slot="root" class="relative overflow-auto outline-primary/25 focus-visible:outline-3">
   <table data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
     <thead data-slot="thead" class="relative after:absolute after:z-1 after:h-px after:bg-primary after:animate-[swing_2s_ease-in-out_infinite]">
@@ -1036,7 +1036,7 @@ exports[`Table > renders with loading animation swing correctly 1`] = `
 `;
 
 exports[`Table > renders with loading color error correctly 1`] = `
-"<div data-slot="root" class="relative overflow-auto">
+"<div data-slot="root" class="relative overflow-auto outline-primary/25 focus-visible:outline-3">
   <table data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
     <thead data-slot="thead" class="relative after:absolute after:z-1 after:h-px after:bg-error after:animate-[carousel_2s_ease-in-out_infinite] rtl:after:animate-[carousel-rtl_2s_ease-in-out_infinite]">
@@ -1091,7 +1091,7 @@ exports[`Table > renders with loading color error correctly 1`] = `
 `;
 
 exports[`Table > renders with loading color info correctly 1`] = `
-"<div data-slot="root" class="relative overflow-auto">
+"<div data-slot="root" class="relative overflow-auto outline-primary/25 focus-visible:outline-3">
   <table data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
     <thead data-slot="thead" class="relative after:absolute after:z-1 after:h-px after:bg-info after:animate-[carousel_2s_ease-in-out_infinite] rtl:after:animate-[carousel-rtl_2s_ease-in-out_infinite]">
@@ -1146,7 +1146,7 @@ exports[`Table > renders with loading color info correctly 1`] = `
 `;
 
 exports[`Table > renders with loading color neutral correctly 1`] = `
-"<div data-slot="root" class="relative overflow-auto">
+"<div data-slot="root" class="relative overflow-auto outline-primary/25 focus-visible:outline-3">
   <table data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
     <thead data-slot="thead" class="relative after:absolute after:z-1 after:h-px after:bg-inverted after:animate-[carousel_2s_ease-in-out_infinite] rtl:after:animate-[carousel-rtl_2s_ease-in-out_infinite]">
@@ -1201,7 +1201,7 @@ exports[`Table > renders with loading color neutral correctly 1`] = `
 `;
 
 exports[`Table > renders with loading color primary correctly 1`] = `
-"<div data-slot="root" class="relative overflow-auto">
+"<div data-slot="root" class="relative overflow-auto outline-primary/25 focus-visible:outline-3">
   <table data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
     <thead data-slot="thead" class="relative after:absolute after:z-1 after:h-px after:bg-primary after:animate-[carousel_2s_ease-in-out_infinite] rtl:after:animate-[carousel-rtl_2s_ease-in-out_infinite]">
@@ -1256,7 +1256,7 @@ exports[`Table > renders with loading color primary correctly 1`] = `
 `;
 
 exports[`Table > renders with loading color secondary correctly 1`] = `
-"<div data-slot="root" class="relative overflow-auto">
+"<div data-slot="root" class="relative overflow-auto outline-primary/25 focus-visible:outline-3">
   <table data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
     <thead data-slot="thead" class="relative after:absolute after:z-1 after:h-px after:bg-secondary after:animate-[carousel_2s_ease-in-out_infinite] rtl:after:animate-[carousel-rtl_2s_ease-in-out_infinite]">
@@ -1311,7 +1311,7 @@ exports[`Table > renders with loading color secondary correctly 1`] = `
 `;
 
 exports[`Table > renders with loading color success correctly 1`] = `
-"<div data-slot="root" class="relative overflow-auto">
+"<div data-slot="root" class="relative overflow-auto outline-primary/25 focus-visible:outline-3">
   <table data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
     <thead data-slot="thead" class="relative after:absolute after:z-1 after:h-px after:bg-success after:animate-[carousel_2s_ease-in-out_infinite] rtl:after:animate-[carousel-rtl_2s_ease-in-out_infinite]">
@@ -1366,7 +1366,7 @@ exports[`Table > renders with loading color success correctly 1`] = `
 `;
 
 exports[`Table > renders with loading color warning correctly 1`] = `
-"<div data-slot="root" class="relative overflow-auto">
+"<div data-slot="root" class="relative overflow-auto outline-primary/25 focus-visible:outline-3">
   <table data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
     <thead data-slot="thead" class="relative after:absolute after:z-1 after:h-px after:bg-warning after:animate-[carousel_2s_ease-in-out_infinite] rtl:after:animate-[carousel-rtl_2s_ease-in-out_infinite]">
@@ -1421,7 +1421,7 @@ exports[`Table > renders with loading color warning correctly 1`] = `
 `;
 
 exports[`Table > renders with loading correctly 1`] = `
-"<div data-slot="root" class="relative overflow-auto">
+"<div data-slot="root" class="relative overflow-auto outline-primary/25 focus-visible:outline-3">
   <table data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
     <thead data-slot="thead" class="relative after:absolute after:z-1 after:h-px after:bg-primary after:animate-[carousel_2s_ease-in-out_infinite] rtl:after:animate-[carousel-rtl_2s_ease-in-out_infinite]">
@@ -1476,7 +1476,7 @@ exports[`Table > renders with loading correctly 1`] = `
 `;
 
 exports[`Table > renders with loading slot correctly 1`] = `
-"<div data-slot="root" class="relative overflow-auto">
+"<div data-slot="root" class="relative overflow-auto outline-primary/25 focus-visible:outline-3">
   <table data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
     <thead data-slot="thead" class="relative after:absolute after:z-1 after:h-px after:bg-primary after:animate-[carousel_2s_ease-in-out_infinite] rtl:after:animate-[carousel-rtl_2s_ease-in-out_infinite]">
@@ -1539,7 +1539,7 @@ exports[`Table > renders with loading slot correctly 1`] = `
 `;
 
 exports[`Table > renders with meta field on columns correctly 1`] = `
-"<div data-slot="root" class="relative overflow-auto">
+"<div data-slot="root" class="relative overflow-auto outline-primary/25 focus-visible:outline-3">
   <table data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
     <thead data-slot="thead" class="relative">
@@ -1724,7 +1724,7 @@ exports[`Table > renders with meta field on columns correctly 1`] = `
 `;
 
 exports[`Table > renders with meta prop correctly 1`] = `
-"<div data-slot="root" class="relative overflow-auto">
+"<div data-slot="root" class="relative overflow-auto outline-primary/25 focus-visible:outline-3">
   <table data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
     <thead data-slot="thead" class="relative">
@@ -1779,7 +1779,7 @@ exports[`Table > renders with meta prop correctly 1`] = `
 `;
 
 exports[`Table > renders with row pinning and virtualization correctly 1`] = `
-"<div data-slot="root" class="relative overflow-auto">
+"<div data-slot="root" class="relative overflow-auto outline-primary/25 focus-visible:outline-3">
   <table data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
     <thead data-slot="thead" class="relative">
@@ -1801,7 +1801,7 @@ exports[`Table > renders with row pinning and virtualization correctly 1`] = `
 `;
 
 exports[`Table > renders with row pinning correctly 1`] = `
-"<div data-slot="root" class="relative overflow-auto">
+"<div data-slot="root" class="relative overflow-auto outline-primary/25 focus-visible:outline-3">
   <table data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
     <thead data-slot="thead" class="relative">
@@ -1856,7 +1856,7 @@ exports[`Table > renders with row pinning correctly 1`] = `
 `;
 
 exports[`Table > renders with sticky correctly 1`] = `
-"<div data-slot="root" class="relative overflow-auto">
+"<div data-slot="root" class="relative overflow-auto outline-primary/25 focus-visible:outline-3">
   <table data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
     <thead data-slot="thead" class="sticky top-0 inset-x-0 bg-default/75 backdrop-blur z-1">
@@ -1911,7 +1911,7 @@ exports[`Table > renders with sticky correctly 1`] = `
 `;
 
 exports[`Table > renders with ui correctly 1`] = `
-"<div data-slot="root" class="relative overflow-auto">
+"<div data-slot="root" class="relative overflow-auto outline-primary/25 focus-visible:outline-3">
   <table data-slot="base" class="min-w-full overflow-clip table-auto">
     <!--v-if-->
     <thead data-slot="thead" class="relative">
@@ -1966,7 +1966,7 @@ exports[`Table > renders with ui correctly 1`] = `
 `;
 
 exports[`Table > renders with virtualize and sticky correctly 1`] = `
-"<div data-slot="root" class="relative overflow-auto">
+"<div data-slot="root" class="relative overflow-auto outline-primary/25 focus-visible:outline-3">
   <table data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
     <thead data-slot="thead" class="sticky top-0 inset-x-0 bg-default/75 backdrop-blur z-1">
@@ -2028,7 +2028,7 @@ exports[`Table > renders with virtualize and sticky correctly 1`] = `
 `;
 
 exports[`Table > renders with virtualize correctly 1`] = `
-"<div data-slot="root" class="relative overflow-auto">
+"<div data-slot="root" class="relative overflow-auto outline-primary/25 focus-visible:outline-3">
   <table data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
     <thead data-slot="thead" class="relative">
@@ -2050,7 +2050,7 @@ exports[`Table > renders with virtualize correctly 1`] = `
 `;
 
 exports[`Table > renders without data correctly 1`] = `
-"<div data-slot="root" class="relative overflow-auto">
+"<div data-slot="root" class="relative overflow-auto outline-primary/25 focus-visible:outline-3">
   <table data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
     <thead data-slot="thead" class="relative">

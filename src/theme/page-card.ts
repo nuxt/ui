@@ -56,7 +56,7 @@ export default (options: Required<ModuleOptions>) => ({
     },
     to: {
       true: {
-        root: ['outline-primary/25 has-focus-visible:outline-3', options.theme.transitions && 'transition']
+        root: ['outline-primary/25 has-[>a:focus-visible]:outline-3', options.theme.transitions && 'transition']
       }
     },
     title: {
@@ -113,6 +113,13 @@ export default (options: Required<ModuleOptions>) => ({
     highlight: false,
     class: {
       root: 'hover:ring-accented'
+    }
+  }, {
+    variant: ['outline', 'subtle'],
+    to: true,
+    highlight: false,
+    class: {
+      root: 'has-[>a:focus-visible]:ring-primary'
     }
   }, {
     variant: 'ghost',

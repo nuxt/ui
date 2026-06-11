@@ -9,7 +9,7 @@ export default (options: Required<ModuleOptions>) => ({
   variants: {
     color: {
       ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, {
-        base: `border border-${color}/25 bg-${color}/10 text-${color}-600 dark:text-${color}-300 [&_a]:text-${color} [&_a]:hover:border-${color} [&_a]:outline-${color}/25 [&_a]:focus-visible:outline-3 [&_code]:text-${color}-600 dark:[&_code]:text-${color}-300 [&_code]:border-${color}/25 [&_a]:hover:[&>code]:border-${color} [&_a]:hover:[&>code]:text-${color} [&_a]:focus-visible:[&>code]:border-${color} [&_a]:focus-visible:[&>code]:text-${color} [&>ul]:marker:text-${color}/50`,
+        base: `border border-${color}/25 bg-${color}/10 text-${color}-600 dark:text-${color}-300 [&_a]:text-${color} [&_a]:hover:border-${color} [&_a]:outline-${color}/25 [&_a]:focus-visible:outline-3 [&_a]:focus-visible:has-[>code]:outline-0 [&_code]:text-${color}-600 dark:[&_code]:text-${color}-300 [&_code]:border-${color}/25 [&_a]:[&>code]:outline-${color}/25 [&_a]:hover:[&>code]:border-${color} [&_a]:hover:[&>code]:text-${color} [&_a]:focus-visible:[&>code]:border-${color} [&_a]:focus-visible:[&>code]:text-${color} [&>ul]:marker:text-${color}/50`,
         icon: `text-${color}`,
         externalIcon: `text-${color}-600 dark:text-${color}-300`
       }])),
@@ -27,14 +27,14 @@ export default (options: Required<ModuleOptions>) => ({
     color,
     to: true,
     class: {
-      base: `hover:border-${color} has-focus-visible:border-${color}`,
+      base: `hover:border-${color} outline-${color}/25 has-[>a:focus-visible]:outline-3 has-[>a:focus-visible]:border-${color}`,
       externalIcon: `group-hover:text-${color}`
     }
   })), {
     color: 'neutral',
     to: true,
     class: {
-      base: 'hover:border-inverted has-focus-visible:border-inverted',
+      base: 'hover:border-inverted outline-inverted/25 has-[>a:focus-visible]:outline-3 has-[>a:focus-visible]:border-inverted',
       externalIcon: 'group-hover:text-highlighted'
     }
   }],

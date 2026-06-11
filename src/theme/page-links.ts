@@ -6,7 +6,7 @@ export default (options: Required<ModuleOptions>) => ({
     title: 'text-sm font-semibold flex items-center gap-1.5',
     list: 'flex flex-col gap-2',
     item: 'relative',
-    link: 'group text-sm flex items-center gap-1.5 outline-primary/25 focus-visible:outline-3',
+    link: 'group text-sm flex items-center gap-1.5 rounded-sm outline-primary/25 focus-visible:outline-3',
     linkLeadingIcon: 'size-5 shrink-0',
     linkLabel: 'truncate',
     linkLabelExternalIcon: 'size-3 absolute top-0 text-dimmed'

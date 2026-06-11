@@ -346,11 +346,9 @@ defineShortcuts({
         @submit="onSubmit"
       >
         <template #footer>
-          <div class="flex items-center gap-1.5 text-xs text-dimmed">
-            <NuxtLink to="https://vercel.com/ai-gateway" target="_blank" class="inline-flex items-center gap-1 hover:text-muted transition-colors">
-              Powered by <UIcon name="i-simple-icons-vercel" class="size-3" /> AI Gateway
-            </NuxtLink>
-          </div>
+          <ULink to="https://vercel.com/ai-gateway" target="_blank" class="text-xs text-dimmed hover:text-muted">
+            Powered by <UIcon name="i-simple-icons-vercel" class="size-3" /> AI Gateway
+          </ULink>
 
           <UChatPromptSubmit
             size="sm"

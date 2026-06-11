@@ -1,40 +1,48 @@
 @keyframes accordion-up {
   from {
     height: var(--reka-accordion-content-height);
+    overflow: hidden;
   }
 
   to {
     height: 0;
+    overflow: hidden;
   }
 }
 
 @keyframes accordion-down {
   from {
     height: 0;
+    overflow: hidden;
   }
 
   to {
     height: var(--reka-accordion-content-height);
+    overflow: hidden;
   }
 }
 
 @keyframes collapsible-up {
   from {
     height: var(--reka-collapsible-content-height);
+    overflow: hidden;
   }
 
   to {
     height: 0;
+    overflow: hidden;
   }
 }
 
 @keyframes collapsible-down {
   from {
     height: 0;
+    overflow: hidden;
   }
 
   to {
     height: var(--reka-collapsible-content-height);
+    overflow: hidden;
   }
 }
 
