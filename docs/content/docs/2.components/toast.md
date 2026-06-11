@@ -163,6 +163,29 @@ name: 'toast-actions-example'
 ---
 ::
 
+### Duration
+
+Pass a `duration` field to the `toast.add` method to change how long the Toast remains visible (in milliseconds). Defaults to `5000`.
+
+::tip
+Set the `duration` field to `0` to keep the Toast open until it's manually closed.
+::
+
+::component-example
+---
+options:
+  - name: 'duration'
+    label: 'duration'
+    default: 0
+    items:
+      - 0
+      - 1000
+      - 3000
+      - 5000
+name: 'toast-duration-example'
+---
+::
+
 ### Progress
 
 Pass a `progress` field to customize or hide the [Progress](/docs/components/progress) bar (with `false` value).
@@ -226,9 +249,6 @@ name: 'toast-example'
 :toaster-position-example
 ::
 
-::note{to="https://github.com/nuxt/ui/blob/v4/docs/app/app.config.ts#L3"}
-In this example, we use the `AppConfig` to configure the `position` prop of the `Toaster` component globally.
-::
 
 ### Change global duration
 
@@ -256,9 +276,6 @@ name: 'toast-example'
 :toaster-duration-example
 ::
 
-::note{to="https://github.com/nuxt/ui/blob/v4/docs/app/app.config.ts#L4"}
-In this example, we use the `AppConfig` to configure the `duration` prop of the `Toaster` component globally.
-::
 
 ### Change global max :badge{label="4.1+" class="align-text-top"}
 
@@ -286,9 +303,6 @@ name: 'toast-example'
 :toaster-max-example
 ::
 
-::note{to="https://github.com/nuxt/ui/blob/v4/docs/app/app.config.ts#L5"}
-In this example, we use the `AppConfig` to configure the `max` prop of the `Toaster` component globally.
-::
 
 ### Stacked toasts
 
@@ -320,9 +334,6 @@ name: 'toast-example'
 :toaster-expand-example
 ::
 
-::note{to="https://github.com/nuxt/ui/blob/v4/docs/app/app.config.ts#L6"}
-In this example, we use the `AppConfig` to configure the `expand` prop of the `Toaster` component globally.
-::
 
 ### Deduplicated toasts :badge{label="4.5+" class="align-text-top"}
 

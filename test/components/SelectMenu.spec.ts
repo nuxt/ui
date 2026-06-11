@@ -173,6 +173,43 @@ describe('SelectMenu', () => {
     })
   })
 
+  describe('create-item', () => {
+    // With `create-item`, the create item is always registered so reka-ui's collection
+    // never goes from empty to non-empty, leaving the highlight stale when async items load.
+    test('re-highlights first item when items change while open', async () => {
+      const wrapper = mount(SelectMenu, {
+        attachTo: document.body,
+        props: {
+          open: true,
+          portal: false,
+          ignoreFilter: true,
+          createItem: 'always',
+          multiple: true,
+          items: []
+        }
+      })
+
+      const root = wrapper.findComponent({ name: 'ComboboxRoot' })
+      // Track open state (the watcher only re-highlights while the menu is open)
+      await root.vm.$emit('update:open', true)
+      await flushPromises()
+
+      // Set the search term so the create item renders and becomes the only (highlighted) item.
+      await wrapper.setProps({ searchTerm: 'a' })
+      await flushPromises()
+
+      // Items arrive asynchronously (e.g. fetched from a backend)
+      await wrapper.setProps({ items: ['Option 1', 'Option 2'] })
+      await flushPromises()
+
+      const highlighted = wrapper.find('[role="option"][data-highlighted]')
+      expect(highlighted.exists()).toBe(true)
+      expect(highlighted.text()).toContain('Option 1')
+
+      wrapper.unmount()
+    })
+  })
+
   describe('it should display correct label', () => {
     test.each([null, undefined, ''])('falsy model value %s should display placeholder', (modelValue) => {
       const wrapper = mount(SelectMenu, {

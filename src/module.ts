@@ -53,6 +53,14 @@ export interface ModuleOptions {
     transitions?: boolean
 
     /**
+     * Remove all default theme classes from components, keeping only their
+     * structure and the classes you supply via `class`, `ui` or `app.config.ui`.
+     * @defaultValue `false`
+     * @see https://ui.nuxt.com/docs/getting-started/installation/nuxt#themeunstyled
+     */
+    unstyled?: boolean
+
+    /**
      * The default variants to use for components
      * @see https://ui.nuxt.com/docs/getting-started/installation/nuxt#themedefaultvariants
      */
@@ -211,7 +219,7 @@ export default defineNuxtModule<ModuleOptions>({
 
     nuxt.options.alias['#ui'] = resolve('./runtime')
 
-    nuxt.options.appConfig.ui = defu(nuxt.options.appConfig.ui || {}, getDefaultConfig(options.theme))
+    nuxt.options.appConfig.ui = defu(nuxt.options.appConfig.ui || {}, getDefaultConfig(options.theme)) as typeof nuxt.options.appConfig.ui
 
     nuxt.options.build.transpile.push('reka-ui')
 

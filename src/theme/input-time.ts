@@ -34,9 +34,15 @@ export default (options: Required<ModuleOptions>) => {
           base: (prev: string) => [prev, 'gap-0.75'],
           segment: 'not-data-[segment=literal]:w-10'
         }
-      }
+      },
+      variant: (prev: Record<string, string>) => Object.fromEntries(
+        Object.entries(prev).map(([key, value]) => [key, replaceFocus(value)])
+      )
     },
-    compoundVariants: [{
+    compoundVariants: (prev: Record<string, any>[]) => [...prev.map(item => ({
+      ...item,
+      class: typeof item.class === 'string' ? replaceFocus(item.class) : item.class
+    })), {
       variant: 'outline',
       class: {
         segment: 'focus:bg-elevated'
@@ -63,4 +69,10 @@ export default (options: Required<ModuleOptions>) => {
       }
     }]
   }, input(options))
+}
+
+function replaceFocus(str: string): string {
+  return str
+    .replace(/focus:/g, 'has-focus:')
+    .replace(/focus-visible:/g, 'has-focus-visible:')
 }

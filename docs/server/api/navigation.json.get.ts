@@ -2,5 +2,5 @@
 import { queryCollectionNavigation } from '@nuxt/content/server'
 
 export default defineEventHandler((event) => {
-  return queryCollectionNavigation(event, 'docs', ['framework', 'category'])
+  return queryCollectionNavigation(event, 'docs', ['framework', 'category', 'description'])
 })

@@ -18,8 +18,10 @@ logs
 
 # Misc
 .DS_Store
+.cursor
 .fleet
 .idea
+.claude
 
 # Local env files
 .env

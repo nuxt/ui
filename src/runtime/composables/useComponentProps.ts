@@ -1,16 +1,16 @@
 import type { ComputedRef, VNode } from 'vue'
-import type { ClassValue } from 'tailwind-variants'
 import { computed, getCurrentInstance } from 'vue'
 import defu from 'defu'
 import { createContext } from 'reka-ui'
 import { useAppConfig } from '#imports'
 import type * as ComponentTypes from '../types'
+import type { SlotClass } from '../types/tv'
 import type * as ui from '#build/ui'
 import { get } from '../utils'
 
 type ThemeSlotOverrides<T> = T extends { slots: infer S extends Record<string, any> }
-  ? { [K in keyof S]?: ClassValue }
-  : { [K in keyof T]?: T[K] extends any[] ? ClassValue : T[K] extends Record<string, any> ? ThemeSlotOverrides<T[K]> : ClassValue }
+  ? { [K in keyof S]?: SlotClass }
+  : { [K in keyof T]?: T[K] extends any[] ? SlotClass : T[K] extends Record<string, any> ? ThemeSlotOverrides<T[K]> : SlotClass }
 
 /**
  * Flat slot-class override shape: `{ button: { base: '...' }, modal: {...} }`.
