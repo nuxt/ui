@@ -232,27 +232,27 @@ props:
 ---
 ::
 
-### View Controls :badge{label="Soon" class="align-text-top"}
+### View Control :badge{label="Soon" class="align-text-top"}
 
-Use the `view-controls` prop to make the heading a button that switches between the day, month and year views. Defaults to `true`.
+Use the `view-control` prop to make the heading a button that switches between the day, month and year views. Defaults to `true`.
 
 ::component-code
 ---
 props:
-  viewControls: false
+  viewControl: false
 ---
 ::
 
-Use the `view-button` prop to override the heading button.
+Set the `view-control` prop to an object to override the heading button.
 
 ::component-code
 ---
 prettier: true
 ignore:
-  - viewButton.color
-  - viewButton.variant
+  - viewControl.color
+  - viewControl.variant
 props:
-  viewButton:
+  viewControl:
     color: primary
     variant: soft
 ---

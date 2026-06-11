@@ -89,10 +89,12 @@ export interface CalendarProps<R extends boolean = false, M extends boolean = fa
    */
   prevMonth?: Omit<ButtonProps, LinkPropsKeys>
   /**
-   * Configure the heading button that switches between the day, month and year views.
+   * Whether to make the heading a button that switches between the day, month and year views.
+   * Has no effect when `type` is `year`. Can be an object to override the button props.
    * `{ color: 'neutral', variant: 'ghost', block: true }`{lang="ts-type"}
+   * @defaultValue true
    */
-  viewButton?: Omit<ButtonProps, LinkPropsKeys>
+  viewControl?: boolean | Omit<ButtonProps, LinkPropsKeys>
   /**
    * @defaultValue 'primary'
    */
@@ -113,8 +115,6 @@ export interface CalendarProps<R extends boolean = false, M extends boolean = fa
   monthControls?: boolean
   /** Show year controls */
   yearControls?: boolean
-  /** Make the heading a button that switches between the day, month and year views. Has no effect when `type` is `year`. */
-  viewControls?: boolean
   defaultValue?: CalendarDefaultValue<R, M>
   modelValue?: CalendarModelValue<R, M>
   weekNumbers?: boolean
@@ -154,7 +154,7 @@ const _props = withDefaults(defineProps<CalendarProps<R, M>>(), {
   fixedWeeks: true,
   monthControls: true,
   yearControls: true,
-  viewControls: true
+  viewControl: true
 })
 const emits = defineEmits<CalendarEmits<R, M>>()
 
@@ -254,7 +254,7 @@ const Picker = computed(() => {
   return props.range ? RangeCalendar : SingleCalendar
 }) as unknown as ComputedRef<Record<string, Component>>
 
-const omittedProps = ['type', 'placeholder', 'range', 'modelValue', 'defaultValue', 'color', 'variant', 'size', 'monthControls', 'yearControls', 'viewControls', 'viewButton', 'class', 'ui']
+const omittedProps = ['type', 'placeholder', 'range', 'modelValue', 'defaultValue', 'color', 'variant', 'size', 'monthControls', 'yearControls', 'viewControl', 'class', 'ui']
 // Only declared by the day `Calendar` / `RangeCalendar` primitives, omitted in other views to avoid fallthrough attributes.
 const dayOnlyProps = ['pagedNavigation', 'weekStartsOn', 'weekdayFormat', 'fixedWeeks', 'numberOfMonths', 'isDateDisabled', 'isDateUnavailable', 'isDateHighlightable', 'disableDaysOutsideCurrentView', 'maximumDays']
 const monthOnlyProps = ['isMonthDisabled', 'isMonthUnavailable']
@@ -333,13 +333,13 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.calendar || 
           :set-placeholder="setPlaceholder"
         >
           <UButton
-            v-if="switchable && props.viewControls"
+            v-if="switchable && props.viewControl"
             :label="headingValue"
             :size="props.size"
             color="neutral"
             variant="ghost"
             block
-            v-bind="props.viewButton"
+            v-bind="(typeof props.viewControl === 'object' ? props.viewControl : {})"
             @click="cycleView"
           />
           <span v-else data-slot="headingLabel" :class="ui.headingLabel({ class: props.ui?.headingLabel })">{{ headingValue }}</span>
