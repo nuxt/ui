@@ -115,6 +115,14 @@ function handleEnter(event: KeyboardEvent) {
   onEnter(event)
 }
 
+function onKeydown(event: KeyboardEvent) {
+  if (event.key === 'Enter') {
+    handleEnter(event)
+  } else if (event.key === 'Escape') {
+    blur(event)
+  }
+}
+
 defineExpose({
   textareaRef: toRef(() => textareaRef.value?.textareaRef)
 })
@@ -137,9 +145,8 @@ defineExpose({
       :ui="transformUI(omit(ui, ['root', 'body', 'header', 'footer']), props.ui)"
       data-slot="body"
       :class="ui.body({ class: props.ui?.body })"
-      @keydown.enter="handleEnter"
+      @keydown="onKeydown"
       @compositionend="onCompositionEnd"
-      @keydown.esc="blur"
     >
       <template v-for="(_, name) in getProxySlots()" #[name]="slotData">
         <slot :name="name" v-bind="slotData" />

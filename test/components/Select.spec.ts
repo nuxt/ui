@@ -221,6 +221,31 @@ describe('Select', () => {
     })
   })
 
+  describe('label', () => {
+    test('clicking the FormField label opens the menu', async () => {
+      const wrapper = await renderForm({
+        slotVars: {
+          items: ['Option 1', 'Option 2']
+        },
+        slotTemplate: `
+        <UFormField name="value" label="Label">
+          <USelect :items="items" :portal="false" />
+        </UFormField>
+        `
+      })
+
+      const trigger = wrapper.find('[data-slot="base"]')
+      expect(trigger.attributes('aria-expanded')).toBe('false')
+
+      // Native `<label for>` clicks forward a `click` to the trigger without a
+      // preceding `pointerdown`, so the menu is still closed when the click lands.
+      await trigger.trigger('click')
+      await flushPromises()
+
+      expect(trigger.attributes('aria-expanded')).toBe('true')
+    })
+  })
+
   describe('form integration', async () => {
     async function createForm(validateOn?: FormInputEvents[]) {
       const wrapper = await renderForm({
