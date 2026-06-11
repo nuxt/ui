@@ -107,9 +107,13 @@ describe('Calendar', () => {
       await wrapper.find('[data-reka-month-picker-cell-trigger][data-value="2025-06-01"]').trigger('click')
 
       expect(wrapper.emitted('update:modelValue')).toBeUndefined()
-      expect(wrapper.emitted('update:placeholder')).toBeTruthy()
       expect(wrapper.find('[data-reka-calendar-cell-trigger]').exists()).toBe(true)
-      expect(wrapper.find('[data-slot="heading"]').text()).toContain('June 2025')
+
+      const placeholders = wrapper.emitted('update:placeholder') as [CalendarDate][] | undefined
+      expect(placeholders).toBeTruthy()
+      const placeholder = placeholders!.at(-1)![0]
+      expect(placeholder.year).toBe(2025)
+      expect(placeholder.month).toBe(6)
     })
 
     test('does not forward day-only props to month and year pickers', async () => {
