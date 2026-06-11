@@ -238,6 +238,10 @@ Use the `view-control` prop to make the heading a button that switches between t
 
 ::component-code
 ---
+items:
+  viewControl:
+    - true
+    - false
 props:
   viewControl: false
 ---
