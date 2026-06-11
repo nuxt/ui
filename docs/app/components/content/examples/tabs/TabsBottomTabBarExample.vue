@@ -28,13 +28,11 @@ const items: TabsItem[] = [
 <template>
   <UTabs
     variant="pill"
-    color="neutral"
     :items="items"
     :ui="{
-      root: 'w-full border-t border-default py-2',
       list: 'justify-around w-full',
-      trigger: 'grow-0 flex-col gap-1 py-1',
-      label: 'text-[10px]/3 font-normal'
+      trigger: 'grow-1 flex-col gap-1 py-1',
+      label: 'text-[10px]/3'
     }"
     class="w-full"
   />
