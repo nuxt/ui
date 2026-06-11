@@ -241,6 +241,17 @@ Use the `#content` slot to customize the content of each item.
 
 :component-example{name="tabs-content-slot-example"}
 
+### With bottom tab bar
+
+Use the `ui` prop to transform the Tabs into a mobile-style bottom tab bar with icons and small labels, similar to YouTube or Instagram.
+
+::component-example
+---
+collapse: true
+name: 'tabs-bottom-tab-bar-example'
+---
+::
+
 ### With custom slot
 
 Use the `slot` property to customize a specific item.
