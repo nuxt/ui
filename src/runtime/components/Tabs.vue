@@ -184,6 +184,9 @@ const isVerticalList = computed(() => props.orientation === 'vertical')
 
 const listRef = ref<HTMLElement | null>(null)
 const moreRef = ref<HTMLElement | null>(null)
+// Rendered client-side only so the CSS active-trigger fallback (see `ssr` in the theme)
+// keeps highlighting the active tab during SSR / pre-hydration.
+const isMounted = ref(false)
 const customIndicatorStyle = ref<Record<string, string>>({ visibility: 'hidden' })
 const visibleCount = ref<number>(props.items?.length ?? 0)
 const naturalSizes = ref<number[]>([])
@@ -354,6 +357,7 @@ let resizeObserver: ResizeObserver | null = null
 let customResizeObserver: ResizeObserver | null = null
 
 onMounted(() => {
+  isMounted.value = true
   if (isCollapse.value) {
     remeasure()
     const listEl = getEl(listRef.value)
@@ -440,7 +444,7 @@ defineExpose({
   >
     <div ref="listRef" data-slot="list" :class="ui.list({ class: props.ui?.list })">
       <div
-        v-if="useCustomIndicator"
+        v-if="useCustomIndicator && isMounted"
         aria-hidden="true"
         data-slot="indicator"
         :class="indicatorClass"
