@@ -4905,6 +4905,154 @@ exports[`Calendar > renders with size xs correctly 1`] = `
 </div>"
 `;
 
+exports[`Calendar > renders with type month and isMonthDisabled correctly 1`] = `
+"<div aria-label="Month Picker, 2025" dir="ltr" data-slot="root">
+  <div data-slot="header" class="flex items-center justify-between">
+    <!--v-if--><button type="button" aria-label="Previous year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="leadingIcon" class="shrink-0 size-5"></svg>
+      <!--v-if-->
+      <!--v-if-->
+    </button>
+    <div id="reka-month-picker-heading-v-0" role="heading" aria-level="2" data-slot="heading" class="flex-1 min-w-0 text-center"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent">
+        <!--v-if--><span data-slot="label" class="truncate">2025</span>
+        <!--v-if-->
+      </button></div><button type="button" aria-label="Next year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="leadingIcon" class="shrink-0 size-5"></svg>
+      <!--v-if-->
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </div>
+  <div data-slot="body" class="flex flex-col space-y-4 pt-4 sm:flex-row sm:space-x-4 sm:space-y-0">
+    <table tabindex="-1" role="application" aria-labelledby="reka-month-picker-heading-v-0" data-slot="grid" class="w-full border-collapse select-none space-y-1 focus:outline-none">
+      <!--v-if-->
+      <tbody data-slot="gridBody" class="grid">
+        <tr role="row" data-slot="gridRow" class="grid grid-cols-4">
+          <!--v-if-->
+          <td role="gridcell" aria-disabled="true" data-disabled="" data-slot="cell" class="relative text-center text-sm">
+            <div role="button" aria-label="January 2025" data-reka-month-picker-cell-trigger="" aria-disabled="true" data-value="2025-01-01" data-disabled="" data-today="" data-focused="" tabindex="0" data-slot="cellTrigger" class="m-0.5 relative flex items-center justify-center whitespace-nowrap focus-visible:ring-2 focus:outline-none data-disabled:text-muted data-unavailable:line-through data-unavailable:text-muted data-unavailable:pointer-events-none data-today:font-semibold transition focus-visible:ring-primary rounded-md data-selected:bg-primary data-selected:text-inverted data-today:not-data-selected:text-primary data-highlighted:bg-primary/20 hover:not-data-selected:bg-primary/20 h-8 px-3">Jan</div>
+          </td>
+          <td role="gridcell" aria-disabled="true" data-disabled="" data-slot="cell" class="relative text-center text-sm">
+            <div role="button" aria-label="February 2025" data-reka-month-picker-cell-trigger="" aria-disabled="true" data-value="2025-02-01" data-disabled="" data-slot="cellTrigger" class="m-0.5 relative flex items-center justify-center whitespace-nowrap focus-visible:ring-2 focus:outline-none data-disabled:text-muted data-unavailable:line-through data-unavailable:text-muted data-unavailable:pointer-events-none data-today:font-semibold transition focus-visible:ring-primary rounded-md data-selected:bg-primary data-selected:text-inverted data-today:not-data-selected:text-primary data-highlighted:bg-primary/20 hover:not-data-selected:bg-primary/20 h-8 px-3">Feb</div>
+          </td>
+          <td role="gridcell" aria-disabled="true" data-disabled="" data-slot="cell" class="relative text-center text-sm">
+            <div role="button" aria-label="March 2025" data-reka-month-picker-cell-trigger="" aria-disabled="true" data-value="2025-03-01" data-disabled="" data-slot="cellTrigger" class="m-0.5 relative flex items-center justify-center whitespace-nowrap focus-visible:ring-2 focus:outline-none data-disabled:text-muted data-unavailable:line-through data-unavailable:text-muted data-unavailable:pointer-events-none data-today:font-semibold transition focus-visible:ring-primary rounded-md data-selected:bg-primary data-selected:text-inverted data-today:not-data-selected:text-primary data-highlighted:bg-primary/20 hover:not-data-selected:bg-primary/20 h-8 px-3">Mar</div>
+          </td>
+          <td role="gridcell" aria-disabled="true" data-disabled="" data-slot="cell" class="relative text-center text-sm">
+            <div role="button" aria-label="April 2025" data-reka-month-picker-cell-trigger="" aria-disabled="true" data-value="2025-04-01" data-disabled="" data-slot="cellTrigger" class="m-0.5 relative flex items-center justify-center whitespace-nowrap focus-visible:ring-2 focus:outline-none data-disabled:text-muted data-unavailable:line-through data-unavailable:text-muted data-unavailable:pointer-events-none data-today:font-semibold transition focus-visible:ring-primary rounded-md data-selected:bg-primary data-selected:text-inverted data-today:not-data-selected:text-primary data-highlighted:bg-primary/20 hover:not-data-selected:bg-primary/20 h-8 px-3">Apr</div>
+          </td>
+        </tr>
+        <tr role="row" data-slot="gridRow" class="grid grid-cols-4">
+          <!--v-if-->
+          <td role="gridcell" aria-disabled="true" data-disabled="" data-slot="cell" class="relative text-center text-sm">
+            <div role="button" aria-label="May 2025" data-reka-month-picker-cell-trigger="" aria-disabled="true" data-value="2025-05-01" data-disabled="" data-slot="cellTrigger" class="m-0.5 relative flex items-center justify-center whitespace-nowrap focus-visible:ring-2 focus:outline-none data-disabled:text-muted data-unavailable:line-through data-unavailable:text-muted data-unavailable:pointer-events-none data-today:font-semibold transition focus-visible:ring-primary rounded-md data-selected:bg-primary data-selected:text-inverted data-today:not-data-selected:text-primary data-highlighted:bg-primary/20 hover:not-data-selected:bg-primary/20 h-8 px-3">May</div>
+          </td>
+          <td role="gridcell" aria-disabled="true" data-disabled="" data-slot="cell" class="relative text-center text-sm">
+            <div role="button" aria-label="June 2025" data-reka-month-picker-cell-trigger="" aria-disabled="true" data-value="2025-06-01" data-disabled="" data-slot="cellTrigger" class="m-0.5 relative flex items-center justify-center whitespace-nowrap focus-visible:ring-2 focus:outline-none data-disabled:text-muted data-unavailable:line-through data-unavailable:text-muted data-unavailable:pointer-events-none data-today:font-semibold transition focus-visible:ring-primary rounded-md data-selected:bg-primary data-selected:text-inverted data-today:not-data-selected:text-primary data-highlighted:bg-primary/20 hover:not-data-selected:bg-primary/20 h-8 px-3">Jun</div>
+          </td>
+          <td role="gridcell" aria-disabled="true" data-disabled="" data-slot="cell" class="relative text-center text-sm">
+            <div role="button" aria-label="July 2025" data-reka-month-picker-cell-trigger="" aria-disabled="true" data-value="2025-07-01" data-disabled="" data-slot="cellTrigger" class="m-0.5 relative flex items-center justify-center whitespace-nowrap focus-visible:ring-2 focus:outline-none data-disabled:text-muted data-unavailable:line-through data-unavailable:text-muted data-unavailable:pointer-events-none data-today:font-semibold transition focus-visible:ring-primary rounded-md data-selected:bg-primary data-selected:text-inverted data-today:not-data-selected:text-primary data-highlighted:bg-primary/20 hover:not-data-selected:bg-primary/20 h-8 px-3">Jul</div>
+          </td>
+          <td role="gridcell" aria-disabled="true" data-disabled="" data-slot="cell" class="relative text-center text-sm">
+            <div role="button" aria-label="August 2025" data-reka-month-picker-cell-trigger="" aria-disabled="true" data-value="2025-08-01" data-disabled="" data-slot="cellTrigger" class="m-0.5 relative flex items-center justify-center whitespace-nowrap focus-visible:ring-2 focus:outline-none data-disabled:text-muted data-unavailable:line-through data-unavailable:text-muted data-unavailable:pointer-events-none data-today:font-semibold transition focus-visible:ring-primary rounded-md data-selected:bg-primary data-selected:text-inverted data-today:not-data-selected:text-primary data-highlighted:bg-primary/20 hover:not-data-selected:bg-primary/20 h-8 px-3">Aug</div>
+          </td>
+        </tr>
+        <tr role="row" data-slot="gridRow" class="grid grid-cols-4">
+          <!--v-if-->
+          <td role="gridcell" aria-disabled="true" data-disabled="" data-slot="cell" class="relative text-center text-sm">
+            <div role="button" aria-label="September 2025" data-reka-month-picker-cell-trigger="" aria-disabled="true" data-value="2025-09-01" data-disabled="" data-slot="cellTrigger" class="m-0.5 relative flex items-center justify-center whitespace-nowrap focus-visible:ring-2 focus:outline-none data-disabled:text-muted data-unavailable:line-through data-unavailable:text-muted data-unavailable:pointer-events-none data-today:font-semibold transition focus-visible:ring-primary rounded-md data-selected:bg-primary data-selected:text-inverted data-today:not-data-selected:text-primary data-highlighted:bg-primary/20 hover:not-data-selected:bg-primary/20 h-8 px-3">Sep</div>
+          </td>
+          <td role="gridcell" aria-disabled="true" data-disabled="" data-slot="cell" class="relative text-center text-sm">
+            <div role="button" aria-label="October 2025" data-reka-month-picker-cell-trigger="" aria-disabled="true" data-value="2025-10-01" data-disabled="" data-slot="cellTrigger" class="m-0.5 relative flex items-center justify-center whitespace-nowrap focus-visible:ring-2 focus:outline-none data-disabled:text-muted data-unavailable:line-through data-unavailable:text-muted data-unavailable:pointer-events-none data-today:font-semibold transition focus-visible:ring-primary rounded-md data-selected:bg-primary data-selected:text-inverted data-today:not-data-selected:text-primary data-highlighted:bg-primary/20 hover:not-data-selected:bg-primary/20 h-8 px-3">Oct</div>
+          </td>
+          <td role="gridcell" aria-disabled="true" data-disabled="" data-slot="cell" class="relative text-center text-sm">
+            <div role="button" aria-label="November 2025" data-reka-month-picker-cell-trigger="" aria-disabled="true" data-value="2025-11-01" data-disabled="" data-slot="cellTrigger" class="m-0.5 relative flex items-center justify-center whitespace-nowrap focus-visible:ring-2 focus:outline-none data-disabled:text-muted data-unavailable:line-through data-unavailable:text-muted data-unavailable:pointer-events-none data-today:font-semibold transition focus-visible:ring-primary rounded-md data-selected:bg-primary data-selected:text-inverted data-today:not-data-selected:text-primary data-highlighted:bg-primary/20 hover:not-data-selected:bg-primary/20 h-8 px-3">Nov</div>
+          </td>
+          <td role="gridcell" aria-disabled="true" data-disabled="" data-slot="cell" class="relative text-center text-sm">
+            <div role="button" aria-label="December 2025" data-reka-month-picker-cell-trigger="" aria-disabled="true" data-value="2025-12-01" data-disabled="" data-slot="cellTrigger" class="m-0.5 relative flex items-center justify-center whitespace-nowrap focus-visible:ring-2 focus:outline-none data-disabled:text-muted data-unavailable:line-through data-unavailable:text-muted data-unavailable:pointer-events-none data-today:font-semibold transition focus-visible:ring-primary rounded-md data-selected:bg-primary data-selected:text-inverted data-today:not-data-selected:text-primary data-highlighted:bg-primary/20 hover:not-data-selected:bg-primary/20 h-8 px-3">Dec</div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div style="border: 0px; clip: rect(0px, 0px, 0px, 0px); clip-path: inset(50%); height: 1px; margin: -1px; overflow: hidden; padding: 0px; position: absolute; white-space: nowrap; width: 1px;">
+    <div role="heading" aria-level="2">Month Picker, 2025</div>
+  </div>
+</div>"
+`;
+
+exports[`Calendar > renders with type month and isMonthUnavailable correctly 1`] = `
+"<div aria-label="Month Picker, 2025" dir="ltr" data-slot="root">
+  <div data-slot="header" class="flex items-center justify-between">
+    <!--v-if--><button type="button" aria-label="Previous year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="leadingIcon" class="shrink-0 size-5"></svg>
+      <!--v-if-->
+      <!--v-if-->
+    </button>
+    <div id="reka-month-picker-heading-v-0" role="heading" aria-level="2" data-slot="heading" class="flex-1 min-w-0 text-center"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent">
+        <!--v-if--><span data-slot="label" class="truncate">2025</span>
+        <!--v-if-->
+      </button></div><button type="button" aria-label="Next year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="leadingIcon" class="shrink-0 size-5"></svg>
+      <!--v-if-->
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </div>
+  <div data-slot="body" class="flex flex-col space-y-4 pt-4 sm:flex-row sm:space-x-4 sm:space-y-0">
+    <table tabindex="-1" role="application" aria-labelledby="reka-month-picker-heading-v-0" data-slot="grid" class="w-full border-collapse select-none space-y-1 focus:outline-none">
+      <!--v-if-->
+      <tbody data-slot="gridBody" class="grid">
+        <tr role="row" data-slot="gridRow" class="grid grid-cols-4">
+          <!--v-if-->
+          <td role="gridcell" aria-disabled="true" data-slot="cell" class="relative text-center text-sm">
+            <div role="button" aria-label="January 2025" data-reka-month-picker-cell-trigger="" aria-disabled="true" data-value="2025-01-01" data-unavailable="" data-today="" data-focused="" tabindex="0" data-slot="cellTrigger" class="m-0.5 relative flex items-center justify-center whitespace-nowrap focus-visible:ring-2 focus:outline-none data-disabled:text-muted data-unavailable:line-through data-unavailable:text-muted data-unavailable:pointer-events-none data-today:font-semibold transition focus-visible:ring-primary rounded-md data-selected:bg-primary data-selected:text-inverted data-today:not-data-selected:text-primary data-highlighted:bg-primary/20 hover:not-data-selected:bg-primary/20 h-8 px-3">Jan</div>
+          </td>
+          <td role="gridcell" aria-disabled="true" data-slot="cell" class="relative text-center text-sm">
+            <div role="button" aria-label="February 2025" data-reka-month-picker-cell-trigger="" aria-disabled="true" data-value="2025-02-01" data-unavailable="" tabindex="-1" data-slot="cellTrigger" class="m-0.5 relative flex items-center justify-center whitespace-nowrap focus-visible:ring-2 focus:outline-none data-disabled:text-muted data-unavailable:line-through data-unavailable:text-muted data-unavailable:pointer-events-none data-today:font-semibold transition focus-visible:ring-primary rounded-md data-selected:bg-primary data-selected:text-inverted data-today:not-data-selected:text-primary data-highlighted:bg-primary/20 hover:not-data-selected:bg-primary/20 h-8 px-3">Feb</div>
+          </td>
+          <td role="gridcell" aria-disabled="true" data-slot="cell" class="relative text-center text-sm">
+            <div role="button" aria-label="March 2025" data-reka-month-picker-cell-trigger="" aria-disabled="true" data-value="2025-03-01" data-unavailable="" tabindex="-1" data-slot="cellTrigger" class="m-0.5 relative flex items-center justify-center whitespace-nowrap focus-visible:ring-2 focus:outline-none data-disabled:text-muted data-unavailable:line-through data-unavailable:text-muted data-unavailable:pointer-events-none data-today:font-semibold transition focus-visible:ring-primary rounded-md data-selected:bg-primary data-selected:text-inverted data-today:not-data-selected:text-primary data-highlighted:bg-primary/20 hover:not-data-selected:bg-primary/20 h-8 px-3">Mar</div>
+          </td>
+          <td role="gridcell" aria-disabled="true" data-slot="cell" class="relative text-center text-sm">
+            <div role="button" aria-label="April 2025" data-reka-month-picker-cell-trigger="" aria-disabled="true" data-value="2025-04-01" data-unavailable="" tabindex="-1" data-slot="cellTrigger" class="m-0.5 relative flex items-center justify-center whitespace-nowrap focus-visible:ring-2 focus:outline-none data-disabled:text-muted data-unavailable:line-through data-unavailable:text-muted data-unavailable:pointer-events-none data-today:font-semibold transition focus-visible:ring-primary rounded-md data-selected:bg-primary data-selected:text-inverted data-today:not-data-selected:text-primary data-highlighted:bg-primary/20 hover:not-data-selected:bg-primary/20 h-8 px-3">Apr</div>
+          </td>
+        </tr>
+        <tr role="row" data-slot="gridRow" class="grid grid-cols-4">
+          <!--v-if-->
+          <td role="gridcell" aria-disabled="true" data-slot="cell" class="relative text-center text-sm">
+            <div role="button" aria-label="May 2025" data-reka-month-picker-cell-trigger="" aria-disabled="true" data-value="2025-05-01" data-unavailable="" tabindex="-1" data-slot="cellTrigger" class="m-0.5 relative flex items-center justify-center whitespace-nowrap focus-visible:ring-2 focus:outline-none data-disabled:text-muted data-unavailable:line-through data-unavailable:text-muted data-unavailable:pointer-events-none data-today:font-semibold transition focus-visible:ring-primary rounded-md data-selected:bg-primary data-selected:text-inverted data-today:not-data-selected:text-primary data-highlighted:bg-primary/20 hover:not-data-selected:bg-primary/20 h-8 px-3">May</div>
+          </td>
+          <td role="gridcell" aria-disabled="true" data-slot="cell" class="relative text-center text-sm">
+            <div role="button" aria-label="June 2025" data-reka-month-picker-cell-trigger="" aria-disabled="true" data-value="2025-06-01" data-unavailable="" tabindex="-1" data-slot="cellTrigger" class="m-0.5 relative flex items-center justify-center whitespace-nowrap focus-visible:ring-2 focus:outline-none data-disabled:text-muted data-unavailable:line-through data-unavailable:text-muted data-unavailable:pointer-events-none data-today:font-semibold transition focus-visible:ring-primary rounded-md data-selected:bg-primary data-selected:text-inverted data-today:not-data-selected:text-primary data-highlighted:bg-primary/20 hover:not-data-selected:bg-primary/20 h-8 px-3">Jun</div>
+          </td>
+          <td role="gridcell" aria-disabled="true" data-slot="cell" class="relative text-center text-sm">
+            <div role="button" aria-label="July 2025" data-reka-month-picker-cell-trigger="" aria-disabled="true" data-value="2025-07-01" data-unavailable="" tabindex="-1" data-slot="cellTrigger" class="m-0.5 relative flex items-center justify-center whitespace-nowrap focus-visible:ring-2 focus:outline-none data-disabled:text-muted data-unavailable:line-through data-unavailable:text-muted data-unavailable:pointer-events-none data-today:font-semibold transition focus-visible:ring-primary rounded-md data-selected:bg-primary data-selected:text-inverted data-today:not-data-selected:text-primary data-highlighted:bg-primary/20 hover:not-data-selected:bg-primary/20 h-8 px-3">Jul</div>
+          </td>
+          <td role="gridcell" aria-disabled="true" data-slot="cell" class="relative text-center text-sm">
+            <div role="button" aria-label="August 2025" data-reka-month-picker-cell-trigger="" aria-disabled="true" data-value="2025-08-01" data-unavailable="" tabindex="-1" data-slot="cellTrigger" class="m-0.5 relative flex items-center justify-center whitespace-nowrap focus-visible:ring-2 focus:outline-none data-disabled:text-muted data-unavailable:line-through data-unavailable:text-muted data-unavailable:pointer-events-none data-today:font-semibold transition focus-visible:ring-primary rounded-md data-selected:bg-primary data-selected:text-inverted data-today:not-data-selected:text-primary data-highlighted:bg-primary/20 hover:not-data-selected:bg-primary/20 h-8 px-3">Aug</div>
+          </td>
+        </tr>
+        <tr role="row" data-slot="gridRow" class="grid grid-cols-4">
+          <!--v-if-->
+          <td role="gridcell" aria-disabled="true" data-slot="cell" class="relative text-center text-sm">
+            <div role="button" aria-label="September 2025" data-reka-month-picker-cell-trigger="" aria-disabled="true" data-value="2025-09-01" data-unavailable="" tabindex="-1" data-slot="cellTrigger" class="m-0.5 relative flex items-center justify-center whitespace-nowrap focus-visible:ring-2 focus:outline-none data-disabled:text-muted data-unavailable:line-through data-unavailable:text-muted data-unavailable:pointer-events-none data-today:font-semibold transition focus-visible:ring-primary rounded-md data-selected:bg-primary data-selected:text-inverted data-today:not-data-selected:text-primary data-highlighted:bg-primary/20 hover:not-data-selected:bg-primary/20 h-8 px-3">Sep</div>
+          </td>
+          <td role="gridcell" aria-disabled="true" data-slot="cell" class="relative text-center text-sm">
+            <div role="button" aria-label="October 2025" data-reka-month-picker-cell-trigger="" aria-disabled="true" data-value="2025-10-01" data-unavailable="" tabindex="-1" data-slot="cellTrigger" class="m-0.5 relative flex items-center justify-center whitespace-nowrap focus-visible:ring-2 focus:outline-none data-disabled:text-muted data-unavailable:line-through data-unavailable:text-muted data-unavailable:pointer-events-none data-today:font-semibold transition focus-visible:ring-primary rounded-md data-selected:bg-primary data-selected:text-inverted data-today:not-data-selected:text-primary data-highlighted:bg-primary/20 hover:not-data-selected:bg-primary/20 h-8 px-3">Oct</div>
+          </td>
+          <td role="gridcell" aria-disabled="true" data-slot="cell" class="relative text-center text-sm">
+            <div role="button" aria-label="November 2025" data-reka-month-picker-cell-trigger="" aria-disabled="true" data-value="2025-11-01" data-unavailable="" tabindex="-1" data-slot="cellTrigger" class="m-0.5 relative flex items-center justify-center whitespace-nowrap focus-visible:ring-2 focus:outline-none data-disabled:text-muted data-unavailable:line-through data-unavailable:text-muted data-unavailable:pointer-events-none data-today:font-semibold transition focus-visible:ring-primary rounded-md data-selected:bg-primary data-selected:text-inverted data-today:not-data-selected:text-primary data-highlighted:bg-primary/20 hover:not-data-selected:bg-primary/20 h-8 px-3">Nov</div>
+          </td>
+          <td role="gridcell" aria-disabled="true" data-slot="cell" class="relative text-center text-sm">
+            <div role="button" aria-label="December 2025" data-reka-month-picker-cell-trigger="" aria-disabled="true" data-value="2025-12-01" data-unavailable="" tabindex="-1" data-slot="cellTrigger" class="m-0.5 relative flex items-center justify-center whitespace-nowrap focus-visible:ring-2 focus:outline-none data-disabled:text-muted data-unavailable:line-through data-unavailable:text-muted data-unavailable:pointer-events-none data-today:font-semibold transition focus-visible:ring-primary rounded-md data-selected:bg-primary data-selected:text-inverted data-today:not-data-selected:text-primary data-highlighted:bg-primary/20 hover:not-data-selected:bg-primary/20 h-8 px-3">Dec</div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div style="border: 0px; clip: rect(0px, 0px, 0px, 0px); clip-path: inset(50%); height: 1px; margin: -1px; overflow: hidden; padding: 0px; position: absolute; white-space: nowrap; width: 1px;">
+    <div role="heading" aria-level="2">Month Picker, 2025</div>
+  </div>
+</div>"
+`;
+
 exports[`Calendar > renders with type month and modelValue correctly 1`] = `
 "<div aria-label="Month Picker, 2025" dir="ltr" data-slot="root">
   <div data-slot="header" class="flex items-center justify-between">
@@ -5123,6 +5271,148 @@ exports[`Calendar > renders with type month correctly 1`] = `
   </div>
   <div style="border: 0px; clip: rect(0px, 0px, 0px, 0px); clip-path: inset(50%); height: 1px; margin: -1px; overflow: hidden; padding: 0px; position: absolute; white-space: nowrap; width: 1px;">
     <div role="heading" aria-level="2">Month Picker, 2025</div>
+  </div>
+</div>"
+`;
+
+exports[`Calendar > renders with type year and isYearDisabled correctly 1`] = `
+"<div aria-label="Year Picker, 2020 - 2031" dir="ltr" data-slot="root">
+  <div data-slot="header" class="flex items-center justify-between">
+    <!--v-if--><button type="button" aria-label="Previous year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="leadingIcon" class="shrink-0 size-5"></svg>
+      <!--v-if-->
+      <!--v-if-->
+    </button>
+    <div id="reka-year-picker-heading-v-0" role="heading" aria-level="2" data-slot="heading" class="flex-1 min-w-0 text-center"><span data-slot="headingLabel" class="font-medium block truncate p-1.5 text-sm">2020 - 2031</span></div><button type="button" aria-label="Next year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="leadingIcon" class="shrink-0 size-5"></svg>
+      <!--v-if-->
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </div>
+  <div data-slot="body" class="flex flex-col space-y-4 pt-4 sm:flex-row sm:space-x-4 sm:space-y-0">
+    <table tabindex="-1" role="application" aria-labelledby="reka-year-picker-heading-v-0" data-slot="grid" class="w-full border-collapse select-none space-y-1 focus:outline-none">
+      <!--v-if-->
+      <tbody data-slot="gridBody" class="grid">
+        <tr role="row" data-slot="gridRow" class="grid grid-cols-4">
+          <!--v-if-->
+          <td role="gridcell" aria-disabled="true" data-disabled="" data-slot="cell" class="relative text-center text-sm">
+            <div role="button" aria-label="2020" data-reka-year-picker-cell-trigger="" aria-disabled="true" data-value="2020-01-01" data-disabled="" data-slot="cellTrigger" class="m-0.5 relative flex items-center justify-center whitespace-nowrap focus-visible:ring-2 focus:outline-none data-disabled:text-muted data-unavailable:line-through data-unavailable:text-muted data-unavailable:pointer-events-none data-today:font-semibold transition focus-visible:ring-primary rounded-md data-selected:bg-primary data-selected:text-inverted data-today:not-data-selected:text-primary data-highlighted:bg-primary/20 hover:not-data-selected:bg-primary/20 h-8 px-3">2020</div>
+          </td>
+          <td role="gridcell" aria-disabled="true" data-disabled="" data-slot="cell" class="relative text-center text-sm">
+            <div role="button" aria-label="2021" data-reka-year-picker-cell-trigger="" aria-disabled="true" data-value="2021-01-01" data-disabled="" data-slot="cellTrigger" class="m-0.5 relative flex items-center justify-center whitespace-nowrap focus-visible:ring-2 focus:outline-none data-disabled:text-muted data-unavailable:line-through data-unavailable:text-muted data-unavailable:pointer-events-none data-today:font-semibold transition focus-visible:ring-primary rounded-md data-selected:bg-primary data-selected:text-inverted data-today:not-data-selected:text-primary data-highlighted:bg-primary/20 hover:not-data-selected:bg-primary/20 h-8 px-3">2021</div>
+          </td>
+          <td role="gridcell" aria-disabled="true" data-disabled="" data-slot="cell" class="relative text-center text-sm">
+            <div role="button" aria-label="2022" data-reka-year-picker-cell-trigger="" aria-disabled="true" data-value="2022-01-01" data-disabled="" data-slot="cellTrigger" class="m-0.5 relative flex items-center justify-center whitespace-nowrap focus-visible:ring-2 focus:outline-none data-disabled:text-muted data-unavailable:line-through data-unavailable:text-muted data-unavailable:pointer-events-none data-today:font-semibold transition focus-visible:ring-primary rounded-md data-selected:bg-primary data-selected:text-inverted data-today:not-data-selected:text-primary data-highlighted:bg-primary/20 hover:not-data-selected:bg-primary/20 h-8 px-3">2022</div>
+          </td>
+          <td role="gridcell" aria-disabled="true" data-disabled="" data-slot="cell" class="relative text-center text-sm">
+            <div role="button" aria-label="2023" data-reka-year-picker-cell-trigger="" aria-disabled="true" data-value="2023-01-01" data-disabled="" data-slot="cellTrigger" class="m-0.5 relative flex items-center justify-center whitespace-nowrap focus-visible:ring-2 focus:outline-none data-disabled:text-muted data-unavailable:line-through data-unavailable:text-muted data-unavailable:pointer-events-none data-today:font-semibold transition focus-visible:ring-primary rounded-md data-selected:bg-primary data-selected:text-inverted data-today:not-data-selected:text-primary data-highlighted:bg-primary/20 hover:not-data-selected:bg-primary/20 h-8 px-3">2023</div>
+          </td>
+        </tr>
+        <tr role="row" data-slot="gridRow" class="grid grid-cols-4">
+          <!--v-if-->
+          <td role="gridcell" aria-disabled="true" data-disabled="" data-slot="cell" class="relative text-center text-sm">
+            <div role="button" aria-label="2024" data-reka-year-picker-cell-trigger="" aria-disabled="true" data-value="2024-01-01" data-disabled="" data-slot="cellTrigger" class="m-0.5 relative flex items-center justify-center whitespace-nowrap focus-visible:ring-2 focus:outline-none data-disabled:text-muted data-unavailable:line-through data-unavailable:text-muted data-unavailable:pointer-events-none data-today:font-semibold transition focus-visible:ring-primary rounded-md data-selected:bg-primary data-selected:text-inverted data-today:not-data-selected:text-primary data-highlighted:bg-primary/20 hover:not-data-selected:bg-primary/20 h-8 px-3">2024</div>
+          </td>
+          <td role="gridcell" aria-disabled="true" data-disabled="" data-slot="cell" class="relative text-center text-sm">
+            <div role="button" aria-label="2025" data-reka-year-picker-cell-trigger="" aria-disabled="true" data-value="2025-01-01" data-disabled="" data-today="" data-focused="" tabindex="0" data-slot="cellTrigger" class="m-0.5 relative flex items-center justify-center whitespace-nowrap focus-visible:ring-2 focus:outline-none data-disabled:text-muted data-unavailable:line-through data-unavailable:text-muted data-unavailable:pointer-events-none data-today:font-semibold transition focus-visible:ring-primary rounded-md data-selected:bg-primary data-selected:text-inverted data-today:not-data-selected:text-primary data-highlighted:bg-primary/20 hover:not-data-selected:bg-primary/20 h-8 px-3">2025</div>
+          </td>
+          <td role="gridcell" aria-disabled="true" data-disabled="" data-slot="cell" class="relative text-center text-sm">
+            <div role="button" aria-label="2026" data-reka-year-picker-cell-trigger="" aria-disabled="true" data-value="2026-01-01" data-disabled="" data-slot="cellTrigger" class="m-0.5 relative flex items-center justify-center whitespace-nowrap focus-visible:ring-2 focus:outline-none data-disabled:text-muted data-unavailable:line-through data-unavailable:text-muted data-unavailable:pointer-events-none data-today:font-semibold transition focus-visible:ring-primary rounded-md data-selected:bg-primary data-selected:text-inverted data-today:not-data-selected:text-primary data-highlighted:bg-primary/20 hover:not-data-selected:bg-primary/20 h-8 px-3">2026</div>
+          </td>
+          <td role="gridcell" aria-disabled="true" data-disabled="" data-slot="cell" class="relative text-center text-sm">
+            <div role="button" aria-label="2027" data-reka-year-picker-cell-trigger="" aria-disabled="true" data-value="2027-01-01" data-disabled="" data-slot="cellTrigger" class="m-0.5 relative flex items-center justify-center whitespace-nowrap focus-visible:ring-2 focus:outline-none data-disabled:text-muted data-unavailable:line-through data-unavailable:text-muted data-unavailable:pointer-events-none data-today:font-semibold transition focus-visible:ring-primary rounded-md data-selected:bg-primary data-selected:text-inverted data-today:not-data-selected:text-primary data-highlighted:bg-primary/20 hover:not-data-selected:bg-primary/20 h-8 px-3">2027</div>
+          </td>
+        </tr>
+        <tr role="row" data-slot="gridRow" class="grid grid-cols-4">
+          <!--v-if-->
+          <td role="gridcell" aria-disabled="true" data-disabled="" data-slot="cell" class="relative text-center text-sm">
+            <div role="button" aria-label="2028" data-reka-year-picker-cell-trigger="" aria-disabled="true" data-value="2028-01-01" data-disabled="" data-slot="cellTrigger" class="m-0.5 relative flex items-center justify-center whitespace-nowrap focus-visible:ring-2 focus:outline-none data-disabled:text-muted data-unavailable:line-through data-unavailable:text-muted data-unavailable:pointer-events-none data-today:font-semibold transition focus-visible:ring-primary rounded-md data-selected:bg-primary data-selected:text-inverted data-today:not-data-selected:text-primary data-highlighted:bg-primary/20 hover:not-data-selected:bg-primary/20 h-8 px-3">2028</div>
+          </td>
+          <td role="gridcell" aria-disabled="true" data-disabled="" data-slot="cell" class="relative text-center text-sm">
+            <div role="button" aria-label="2029" data-reka-year-picker-cell-trigger="" aria-disabled="true" data-value="2029-01-01" data-disabled="" data-slot="cellTrigger" class="m-0.5 relative flex items-center justify-center whitespace-nowrap focus-visible:ring-2 focus:outline-none data-disabled:text-muted data-unavailable:line-through data-unavailable:text-muted data-unavailable:pointer-events-none data-today:font-semibold transition focus-visible:ring-primary rounded-md data-selected:bg-primary data-selected:text-inverted data-today:not-data-selected:text-primary data-highlighted:bg-primary/20 hover:not-data-selected:bg-primary/20 h-8 px-3">2029</div>
+          </td>
+          <td role="gridcell" aria-disabled="true" data-disabled="" data-slot="cell" class="relative text-center text-sm">
+            <div role="button" aria-label="2030" data-reka-year-picker-cell-trigger="" aria-disabled="true" data-value="2030-01-01" data-disabled="" data-slot="cellTrigger" class="m-0.5 relative flex items-center justify-center whitespace-nowrap focus-visible:ring-2 focus:outline-none data-disabled:text-muted data-unavailable:line-through data-unavailable:text-muted data-unavailable:pointer-events-none data-today:font-semibold transition focus-visible:ring-primary rounded-md data-selected:bg-primary data-selected:text-inverted data-today:not-data-selected:text-primary data-highlighted:bg-primary/20 hover:not-data-selected:bg-primary/20 h-8 px-3">2030</div>
+          </td>
+          <td role="gridcell" aria-disabled="true" data-disabled="" data-slot="cell" class="relative text-center text-sm">
+            <div role="button" aria-label="2031" data-reka-year-picker-cell-trigger="" aria-disabled="true" data-value="2031-01-01" data-disabled="" data-slot="cellTrigger" class="m-0.5 relative flex items-center justify-center whitespace-nowrap focus-visible:ring-2 focus:outline-none data-disabled:text-muted data-unavailable:line-through data-unavailable:text-muted data-unavailable:pointer-events-none data-today:font-semibold transition focus-visible:ring-primary rounded-md data-selected:bg-primary data-selected:text-inverted data-today:not-data-selected:text-primary data-highlighted:bg-primary/20 hover:not-data-selected:bg-primary/20 h-8 px-3">2031</div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div style="border: 0px; clip: rect(0px, 0px, 0px, 0px); clip-path: inset(50%); height: 1px; margin: -1px; overflow: hidden; padding: 0px; position: absolute; white-space: nowrap; width: 1px;">
+    <div role="heading" aria-level="2">Year Picker, 2020 - 2031</div>
+  </div>
+</div>"
+`;
+
+exports[`Calendar > renders with type year and isYearUnavailable correctly 1`] = `
+"<div aria-label="Year Picker, 2020 - 2031" dir="ltr" data-slot="root">
+  <div data-slot="header" class="flex items-center justify-between">
+    <!--v-if--><button type="button" aria-label="Previous year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="leadingIcon" class="shrink-0 size-5"></svg>
+      <!--v-if-->
+      <!--v-if-->
+    </button>
+    <div id="reka-year-picker-heading-v-0" role="heading" aria-level="2" data-slot="heading" class="flex-1 min-w-0 text-center"><span data-slot="headingLabel" class="font-medium block truncate p-1.5 text-sm">2020 - 2031</span></div><button type="button" aria-label="Next year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated focus:outline-none focus-visible:bg-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="leadingIcon" class="shrink-0 size-5"></svg>
+      <!--v-if-->
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </div>
+  <div data-slot="body" class="flex flex-col space-y-4 pt-4 sm:flex-row sm:space-x-4 sm:space-y-0">
+    <table tabindex="-1" role="application" aria-labelledby="reka-year-picker-heading-v-0" data-slot="grid" class="w-full border-collapse select-none space-y-1 focus:outline-none">
+      <!--v-if-->
+      <tbody data-slot="gridBody" class="grid">
+        <tr role="row" data-slot="gridRow" class="grid grid-cols-4">
+          <!--v-if-->
+          <td role="gridcell" aria-disabled="true" data-slot="cell" class="relative text-center text-sm">
+            <div role="button" aria-label="2020" data-reka-year-picker-cell-trigger="" aria-disabled="true" data-value="2020-01-01" data-unavailable="" tabindex="-1" data-slot="cellTrigger" class="m-0.5 relative flex items-center justify-center whitespace-nowrap focus-visible:ring-2 focus:outline-none data-disabled:text-muted data-unavailable:line-through data-unavailable:text-muted data-unavailable:pointer-events-none data-today:font-semibold transition focus-visible:ring-primary rounded-md data-selected:bg-primary data-selected:text-inverted data-today:not-data-selected:text-primary data-highlighted:bg-primary/20 hover:not-data-selected:bg-primary/20 h-8 px-3">2020</div>
+          </td>
+          <td role="gridcell" aria-disabled="true" data-slot="cell" class="relative text-center text-sm">
+            <div role="button" aria-label="2021" data-reka-year-picker-cell-trigger="" aria-disabled="true" data-value="2021-01-01" data-unavailable="" tabindex="-1" data-slot="cellTrigger" class="m-0.5 relative flex items-center justify-center whitespace-nowrap focus-visible:ring-2 focus:outline-none data-disabled:text-muted data-unavailable:line-through data-unavailable:text-muted data-unavailable:pointer-events-none data-today:font-semibold transition focus-visible:ring-primary rounded-md data-selected:bg-primary data-selected:text-inverted data-today:not-data-selected:text-primary data-highlighted:bg-primary/20 hover:not-data-selected:bg-primary/20 h-8 px-3">2021</div>
+          </td>
+          <td role="gridcell" aria-disabled="true" data-slot="cell" class="relative text-center text-sm">
+            <div role="button" aria-label="2022" data-reka-year-picker-cell-trigger="" aria-disabled="true" data-value="2022-01-01" data-unavailable="" tabindex="-1" data-slot="cellTrigger" class="m-0.5 relative flex items-center justify-center whitespace-nowrap focus-visible:ring-2 focus:outline-none data-disabled:text-muted data-unavailable:line-through data-unavailable:text-muted data-unavailable:pointer-events-none data-today:font-semibold transition focus-visible:ring-primary rounded-md data-selected:bg-primary data-selected:text-inverted data-today:not-data-selected:text-primary data-highlighted:bg-primary/20 hover:not-data-selected:bg-primary/20 h-8 px-3">2022</div>
+          </td>
+          <td role="gridcell" aria-disabled="true" data-slot="cell" class="relative text-center text-sm">
+            <div role="button" aria-label="2023" data-reka-year-picker-cell-trigger="" aria-disabled="true" data-value="2023-01-01" data-unavailable="" tabindex="-1" data-slot="cellTrigger" class="m-0.5 relative flex items-center justify-center whitespace-nowrap focus-visible:ring-2 focus:outline-none data-disabled:text-muted data-unavailable:line-through data-unavailable:text-muted data-unavailable:pointer-events-none data-today:font-semibold transition focus-visible:ring-primary rounded-md data-selected:bg-primary data-selected:text-inverted data-today:not-data-selected:text-primary data-highlighted:bg-primary/20 hover:not-data-selected:bg-primary/20 h-8 px-3">2023</div>
+          </td>
+        </tr>
+        <tr role="row" data-slot="gridRow" class="grid grid-cols-4">
+          <!--v-if-->
+          <td role="gridcell" aria-disabled="true" data-slot="cell" class="relative text-center text-sm">
+            <div role="button" aria-label="2024" data-reka-year-picker-cell-trigger="" aria-disabled="true" data-value="2024-01-01" data-unavailable="" tabindex="-1" data-slot="cellTrigger" class="m-0.5 relative flex items-center justify-center whitespace-nowrap focus-visible:ring-2 focus:outline-none data-disabled:text-muted data-unavailable:line-through data-unavailable:text-muted data-unavailable:pointer-events-none data-today:font-semibold transition focus-visible:ring-primary rounded-md data-selected:bg-primary data-selected:text-inverted data-today:not-data-selected:text-primary data-highlighted:bg-primary/20 hover:not-data-selected:bg-primary/20 h-8 px-3">2024</div>
+          </td>
+          <td role="gridcell" aria-disabled="true" data-slot="cell" class="relative text-center text-sm">
+            <div role="button" aria-label="2025" data-reka-year-picker-cell-trigger="" aria-disabled="true" data-value="2025-01-01" data-unavailable="" data-today="" data-focused="" tabindex="0" data-slot="cellTrigger" class="m-0.5 relative flex items-center justify-center whitespace-nowrap focus-visible:ring-2 focus:outline-none data-disabled:text-muted data-unavailable:line-through data-unavailable:text-muted data-unavailable:pointer-events-none data-today:font-semibold transition focus-visible:ring-primary rounded-md data-selected:bg-primary data-selected:text-inverted data-today:not-data-selected:text-primary data-highlighted:bg-primary/20 hover:not-data-selected:bg-primary/20 h-8 px-3">2025</div>
+          </td>
+          <td role="gridcell" aria-disabled="true" data-slot="cell" class="relative text-center text-sm">
+            <div role="button" aria-label="2026" data-reka-year-picker-cell-trigger="" aria-disabled="true" data-value="2026-01-01" data-unavailable="" tabindex="-1" data-slot="cellTrigger" class="m-0.5 relative flex items-center justify-center whitespace-nowrap focus-visible:ring-2 focus:outline-none data-disabled:text-muted data-unavailable:line-through data-unavailable:text-muted data-unavailable:pointer-events-none data-today:font-semibold transition focus-visible:ring-primary rounded-md data-selected:bg-primary data-selected:text-inverted data-today:not-data-selected:text-primary data-highlighted:bg-primary/20 hover:not-data-selected:bg-primary/20 h-8 px-3">2026</div>
+          </td>
+          <td role="gridcell" aria-disabled="true" data-slot="cell" class="relative text-center text-sm">
+            <div role="button" aria-label="2027" data-reka-year-picker-cell-trigger="" aria-disabled="true" data-value="2027-01-01" data-unavailable="" tabindex="-1" data-slot="cellTrigger" class="m-0.5 relative flex items-center justify-center whitespace-nowrap focus-visible:ring-2 focus:outline-none data-disabled:text-muted data-unavailable:line-through data-unavailable:text-muted data-unavailable:pointer-events-none data-today:font-semibold transition focus-visible:ring-primary rounded-md data-selected:bg-primary data-selected:text-inverted data-today:not-data-selected:text-primary data-highlighted:bg-primary/20 hover:not-data-selected:bg-primary/20 h-8 px-3">2027</div>
+          </td>
+        </tr>
+        <tr role="row" data-slot="gridRow" class="grid grid-cols-4">
+          <!--v-if-->
+          <td role="gridcell" aria-disabled="true" data-slot="cell" class="relative text-center text-sm">
+            <div role="button" aria-label="2028" data-reka-year-picker-cell-trigger="" aria-disabled="true" data-value="2028-01-01" data-unavailable="" tabindex="-1" data-slot="cellTrigger" class="m-0.5 relative flex items-center justify-center whitespace-nowrap focus-visible:ring-2 focus:outline-none data-disabled:text-muted data-unavailable:line-through data-unavailable:text-muted data-unavailable:pointer-events-none data-today:font-semibold transition focus-visible:ring-primary rounded-md data-selected:bg-primary data-selected:text-inverted data-today:not-data-selected:text-primary data-highlighted:bg-primary/20 hover:not-data-selected:bg-primary/20 h-8 px-3">2028</div>
+          </td>
+          <td role="gridcell" aria-disabled="true" data-slot="cell" class="relative text-center text-sm">
+            <div role="button" aria-label="2029" data-reka-year-picker-cell-trigger="" aria-disabled="true" data-value="2029-01-01" data-unavailable="" tabindex="-1" data-slot="cellTrigger" class="m-0.5 relative flex items-center justify-center whitespace-nowrap focus-visible:ring-2 focus:outline-none data-disabled:text-muted data-unavailable:line-through data-unavailable:text-muted data-unavailable:pointer-events-none data-today:font-semibold transition focus-visible:ring-primary rounded-md data-selected:bg-primary data-selected:text-inverted data-today:not-data-selected:text-primary data-highlighted:bg-primary/20 hover:not-data-selected:bg-primary/20 h-8 px-3">2029</div>
+          </td>
+          <td role="gridcell" aria-disabled="true" data-slot="cell" class="relative text-center text-sm">
+            <div role="button" aria-label="2030" data-reka-year-picker-cell-trigger="" aria-disabled="true" data-value="2030-01-01" data-unavailable="" tabindex="-1" data-slot="cellTrigger" class="m-0.5 relative flex items-center justify-center whitespace-nowrap focus-visible:ring-2 focus:outline-none data-disabled:text-muted data-unavailable:line-through data-unavailable:text-muted data-unavailable:pointer-events-none data-today:font-semibold transition focus-visible:ring-primary rounded-md data-selected:bg-primary data-selected:text-inverted data-today:not-data-selected:text-primary data-highlighted:bg-primary/20 hover:not-data-selected:bg-primary/20 h-8 px-3">2030</div>
+          </td>
+          <td role="gridcell" aria-disabled="true" data-slot="cell" class="relative text-center text-sm">
+            <div role="button" aria-label="2031" data-reka-year-picker-cell-trigger="" aria-disabled="true" data-value="2031-01-01" data-unavailable="" tabindex="-1" data-slot="cellTrigger" class="m-0.5 relative flex items-center justify-center whitespace-nowrap focus-visible:ring-2 focus:outline-none data-disabled:text-muted data-unavailable:line-through data-unavailable:text-muted data-unavailable:pointer-events-none data-today:font-semibold transition focus-visible:ring-primary rounded-md data-selected:bg-primary data-selected:text-inverted data-today:not-data-selected:text-primary data-highlighted:bg-primary/20 hover:not-data-selected:bg-primary/20 h-8 px-3">2031</div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div style="border: 0px; clip: rect(0px, 0px, 0px, 0px); clip-path: inset(50%); height: 1px; margin: -1px; overflow: hidden; padding: 0px; position: absolute; white-space: nowrap; width: 1px;">
+    <div role="heading" aria-level="2">Year Picker, 2020 - 2031</div>
   </div>
 </div>"
 `;

@@ -40,9 +40,13 @@ describe('Calendar', () => {
     ['with type month', { props: { type: 'month' } }],
     ['with type month and modelValue', { props: { type: 'month', modelValue: new CalendarDate(2025, 6, 1) } }],
     ['with type month and range', { props: { type: 'month', range: true, modelValue: { start: new CalendarDate(2025, 2, 1), end: new CalendarDate(2025, 6, 1) } } }],
+    ['with type month and isMonthDisabled', { props: { type: 'month', isMonthDisabled: () => true } }],
+    ['with type month and isMonthUnavailable', { props: { type: 'month', isMonthUnavailable: () => true } }],
     ['with type year', { props: { type: 'year' } }],
     ['with type year and modelValue', { props: { type: 'year', modelValue: new CalendarDate(2025, 1, 1) } }],
     ['with type year and range', { props: { type: 'year', range: true, modelValue: { start: new CalendarDate(2024, 1, 1), end: new CalendarDate(2027, 1, 1) } } }],
+    ['with type year and isYearDisabled', { props: { type: 'year', isYearDisabled: () => true } }],
+    ['with type year and isYearUnavailable', { props: { type: 'year', isYearUnavailable: () => true } }],
     ['without fixedWeeks', { props: { fixedWeeks: false } }],
     ['without monthControls', { props: { monthControls: false } }],
     ['without yearControls', { props: { yearControls: false } }],
@@ -115,6 +119,14 @@ describe('Calendar', () => {
       expect(root.attributes('fixedweeks')).toBeUndefined()
       expect(root.attributes('numberofmonths')).toBeUndefined()
       expect(root.attributes('weekdayformat')).toBeUndefined()
+    })
+
+    test('does not forward month and year props to the day calendar', async () => {
+      const wrapper = await mountSuspended(Calendar, { props: { isMonthDisabled: () => true, isYearDisabled: () => true } })
+
+      const root = wrapper.find('[data-slot="root"]')
+      expect(root.attributes('ismonthdisabled')).toBeUndefined()
+      expect(root.attributes('isyeardisabled')).toBeUndefined()
     })
   })
 

@@ -350,7 +350,7 @@ name: 'calendar-events-example'
 
 ### With disabled dates
 
-Use the `is-date-disabled` prop with a function to mark specific dates as disabled.
+Use the `is-date-disabled` prop with a function to mark specific dates as disabled. When using `type="month"` or `type="year"`, use the `is-month-disabled` or `is-year-disabled` prop instead.
 
 ::component-example
 ---
@@ -360,7 +360,7 @@ name: 'calendar-disabled-dates-example'
 
 ### With unavailable dates
 
-Use the `is-date-unavailable` prop with a function to mark specific dates as unavailable.
+Use the `is-date-unavailable` prop with a function to mark specific dates as unavailable. When using `type="month"` or `type="year"`, use the `is-month-unavailable` or `is-year-unavailable` prop instead.
 
 ::component-example
 ---
