@@ -18,12 +18,16 @@ export default (options: Required<ModuleOptions>) => ({
     label: 'truncate',
     trailingBadge: 'shrink-0',
     trailingBadgeSize: 'sm',
-    content: 'focus:outline-none w-full'
+    content: 'w-full rounded-md focus-visible:outline-3'
   },
   variants: {
     color: {
-      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, ''])),
-      neutral: ''
+      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, {
+        content: `outline-${color}/25`
+      }])),
+      neutral: {
+        content: 'outline-inverted/25'
+      }
     },
     variant: {
       pill: {
@@ -34,7 +38,7 @@ export default (options: Required<ModuleOptions>) => ({
       link: {
         list: 'border-default',
         indicator: 'rounded-full',
-        trigger: [`focus:outline-none`, ssr('after:content-[\'\']', 'after:absolute', 'after:rounded-full')]
+        trigger: ssr('after:content-[\'\']', 'after:absolute', 'after:rounded-full')
       }
     },
     orientation: {
@@ -112,28 +116,28 @@ export default (options: Required<ModuleOptions>) => ({
     variant: 'pill',
     class: {
       indicator: `bg-${color}`,
-      trigger: [`data-[state=active]:text-inverted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-${color}`, ssr(`before:bg-${color}`)]
+      trigger: [`data-[state=active]:text-inverted outline-${color}/25 focus-visible:outline-3`, ssr(`before:bg-${color}`)]
     }
   })), {
     color: 'neutral',
     variant: 'pill',
     class: {
       indicator: 'bg-inverted',
-      trigger: [`data-[state=active]:text-inverted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-inverted`, ssr('before:bg-inverted')]
+      trigger: [`data-[state=active]:text-inverted outline-inverted/25 focus-visible:outline-3`, ssr('before:bg-inverted')]
     }
   }, ...(options.theme.colors || []).map((color: string) => ({
     color,
     variant: 'link',
     class: {
       indicator: `bg-${color}`,
-      trigger: [`data-[state=active]:text-${color} focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-${color}`, ssr(`after:bg-${color}`)]
+      trigger: [`data-[state=active]:text-${color} outline-${color}/25 focus-visible:outline-3`, ssr(`after:bg-${color}`)]
     }
   })), {
     color: 'neutral',
     variant: 'link',
     class: {
       indicator: 'bg-inverted',
-      trigger: [`data-[state=active]:text-highlighted focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-inverted`, ssr('after:bg-inverted')]
+      trigger: [`data-[state=active]:text-highlighted outline-inverted/25 focus-visible:outline-3`, ssr('after:bg-inverted')]
     }
   }],
   defaultVariants: {

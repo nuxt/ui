@@ -11,7 +11,6 @@ const { status, search, init } = useSearchCollection('docs', {
 })
 
 const { links, groups, searchTerm } = useSearch()
-const { open } = useContentSearch()
 const { track } = useAnalytics()
 
 const fuse = {
@@ -22,11 +21,7 @@ const fuse = {
   }
 }
 
-watch(open, (value) => {
-  if (value && status.value === 'idle') {
-    init()
-  }
-})
+onNuxtReady(init)
 
 watchDebounced(searchTerm, (term) => {
   if (term) {

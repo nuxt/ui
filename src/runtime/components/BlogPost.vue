@@ -126,6 +126,14 @@ const ariaLabel = computed(() => {
 
 <template>
   <Primitive :as="props.as" :data-orientation="props.orientation" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })" @click="props.onClick">
+    <ULink
+      v-if="props.to"
+      :aria-label="ariaLabel"
+      v-bind="{ to: props.to, target: props.target, ...$attrs }"
+      :class="prefix('focus:outline-none absolute inset-0')"
+      raw
+    />
+
     <div v-if="props.image || !!slots.header" data-slot="header" :class="ui.header({ class: props.ui?.header })">
       <slot name="header" :ui="ui">
         <component
@@ -138,16 +146,6 @@ const ariaLabel = computed(() => {
     </div>
 
     <div data-slot="body" :class="ui.body({ class: props.ui?.body })">
-      <ULink
-        v-if="props.to"
-        :aria-label="ariaLabel"
-        v-bind="{ to: props.to, target: props.target, ...$attrs }"
-        :class="prefix('focus:outline-none peer')"
-        raw
-      >
-        <span :class="prefix('absolute inset-0')" aria-hidden="true" />
-      </ULink>
-
       <slot name="body">
         <div v-if="(date || !!slots.date) || (props.badge || !!slots.badge)" data-slot="meta" :class="ui.meta({ class: props.ui?.meta })">
           <slot name="badge">
