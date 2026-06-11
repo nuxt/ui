@@ -27,7 +27,6 @@ type CalendarModelValue<R extends boolean = false, M extends boolean = false> = 
 
 type _CalendarRootProps = Omit<CalendarRootProps, 'as' | 'asChild' | 'modelValue' | 'defaultValue' | 'dir' | 'calendarLabel' | 'multiple'>
 type _RangeCalendarRootProps = Omit<RangeCalendarRootProps, 'as' | 'asChild' | 'modelValue' | 'defaultValue' | 'dir' | 'calendarLabel' | 'multiple'>
-
 export interface CalendarProps<R extends boolean = false, M extends boolean = false> extends _RangeCalendarRootProps, _CalendarRootProps {
   /**
    * The element or component this component should render as.
@@ -231,7 +230,7 @@ function onSelect(value: DateValue | DateRange) {
 
   const resolved = resolveDateValue(value)
   if (resolved) {
-    placeholder.value = resolved
+    setPlaceholder(resolved)
   }
   setView(VIEWS[VIEWS.indexOf(view.value) - 1]!)
 }
@@ -252,7 +251,17 @@ const Picker = computed(() => {
   return props.range ? RangeCalendar : SingleCalendar
 }) as unknown as ComputedRef<Record<string, Component>>
 
-const rootProps = useForwardProps(reactiveOmit(props, 'type', 'placeholder', 'range', 'modelValue', 'defaultValue', 'color', 'variant', 'size', 'monthControls', 'yearControls', 'viewControls', 'viewButton', 'class', 'ui'))
+const omittedProps = ['type', 'placeholder', 'range', 'modelValue', 'defaultValue', 'color', 'variant', 'size', 'monthControls', 'yearControls', 'viewControls', 'viewButton', 'class', 'ui']
+// Only declared by the day `Calendar` / `RangeCalendar` primitives, omitted in other views to avoid fallthrough attributes.
+const dayOnlyProps = ['pagedNavigation', 'weekStartsOn', 'weekdayFormat', 'fixedWeeks', 'numberOfMonths', 'isDateDisabled', 'isDateUnavailable', 'isDateHighlightable', 'disableDaysOutsideCurrentView', 'maximumDays']
+// Only declared by the range pickers, omitted when drilling above the terminal view since the picker is not a range picker there.
+const rangeOnlyProps = ['allowNonContiguousRanges', 'fixedDate']
+
+const rootProps = useForwardProps(reactiveOmit(props, (_, key) =>
+  omittedProps.includes(key as string)
+  || (view.value !== 'day' && dayOnlyProps.includes(key as string))
+  || (!isMinView.value && rangeOnlyProps.includes(key as string))
+))
 
 function cellProps(cellDate: DateValue, monthValue: DateValue) {
   if (view.value === 'month') {

@@ -80,6 +80,44 @@ describe('Calendar', () => {
     })
   })
 
+  describe('views', () => {
+    test('heading button cycles through day, month and year views', async () => {
+      const wrapper = await mountSuspended(Calendar)
+
+      expect(wrapper.find('[data-reka-calendar-cell-trigger]').exists()).toBe(true)
+
+      await wrapper.find('[data-slot="heading"] button').trigger('click')
+      expect(wrapper.find('[data-reka-month-picker-cell-trigger]').exists()).toBe(true)
+
+      await wrapper.find('[data-slot="heading"] button').trigger('click')
+      expect(wrapper.find('[data-reka-year-picker-cell-trigger]').exists()).toBe(true)
+
+      await wrapper.find('[data-slot="heading"] button').trigger('click')
+      expect(wrapper.find('[data-reka-calendar-cell-trigger]').exists()).toBe(true)
+    })
+
+    test('drill-down selection updates placeholder without emitting update:modelValue', async () => {
+      const wrapper = await mountSuspended(Calendar)
+
+      await wrapper.find('[data-slot="heading"] button').trigger('click')
+      await wrapper.find('[data-reka-month-picker-cell-trigger][data-value="2025-06-01"]').trigger('click')
+
+      expect(wrapper.emitted('update:modelValue')).toBeUndefined()
+      expect(wrapper.emitted('update:placeholder')).toBeTruthy()
+      expect(wrapper.find('[data-reka-calendar-cell-trigger]').exists()).toBe(true)
+      expect(wrapper.find('[data-slot="heading"]').text()).toContain('June 2025')
+    })
+
+    test('does not forward day-only props to month and year pickers', async () => {
+      const wrapper = await mountSuspended(Calendar, { props: { type: 'month', numberOfMonths: 2, weekdayFormat: 'short' } })
+
+      const root = wrapper.find('[data-slot="root"]')
+      expect(root.attributes('fixedweeks')).toBeUndefined()
+      expect(root.attributes('numberofmonths')).toBeUndefined()
+      expect(root.attributes('weekdayformat')).toBeUndefined()
+    })
+  })
+
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(Calendar, {
       props: {
