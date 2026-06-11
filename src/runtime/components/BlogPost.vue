@@ -130,11 +130,9 @@ const ariaLabel = computed(() => {
       v-if="props.to"
       :aria-label="ariaLabel"
       v-bind="{ to: props.to, target: props.target, ...$attrs }"
-      :class="prefix('focus:outline-none')"
+      :class="prefix('focus:outline-none absolute inset-0')"
       raw
-    >
-      <span :class="prefix('absolute inset-0')" aria-hidden="true" />
-    </ULink>
+    />
 
     <div v-if="props.image || !!slots.header" data-slot="header" :class="ui.header({ class: props.ui?.header })">
       <slot name="header" :ui="ui">

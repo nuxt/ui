@@ -115,11 +115,11 @@ export default (options: Required<ModuleOptions>) => {
     compoundVariants: [{
       variant: 'soft',
       multiple: true,
-      class: 'has-focus:bg-elevated'
+      class: 'has-focus:bg-elevated has-focus-visible:outline-3'
     }, {
       variant: 'ghost',
       multiple: true,
-      class: 'has-focus:bg-elevated'
+      class: 'has-focus:bg-elevated has-focus-visible:outline-3'
     }, ...(options.theme.colors || []).map((color: string) => ({
       color,
       multiple: true,
