@@ -47,12 +47,6 @@ export default (options: Required<ModuleOptions>) => ({
         indicator: 'top-0 h-(--reka-tabs-indicator-size) translate-y-(--reka-tabs-indicator-position)'
       }
     },
-    triggerOrientation: {
-      horizontal: '',
-      vertical: {
-        trigger: 'flex-col items-center justify-center'
-      }
-    },
     overflow: {
       scroll: {
         trigger: 'shrink-0 grow-0'
@@ -124,12 +118,6 @@ export default (options: Required<ModuleOptions>) => ({
       indicator: '-start-px w-px'
     }
   }, {
-    triggerOrientation: 'vertical',
-    class: {
-      trigger: 'gap-1 py-1',
-      label: 'text-[10px]/3 font-normal'
-    }
-  }, {
     orientation: 'horizontal',
     overflow: 'scroll',
     class: {
@@ -175,7 +163,6 @@ export default (options: Required<ModuleOptions>) => ({
   defaultVariants: {
     color: 'primary',
     variant: 'pill',
-    size: 'md',
-    triggerOrientation: 'horizontal'
+    size: 'md'
   }
 })

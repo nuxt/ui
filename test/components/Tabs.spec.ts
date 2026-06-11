@@ -8,7 +8,6 @@ import theme from '#build/ui/tabs'
 describe('Tabs', () => {
   const variants = Object.keys(theme.variants.variant) as any
   const sizes = Object.keys(theme.variants.size) as any
-  const triggerOrientations = Object.keys(theme.variants.triggerOrientation) as any
   const overflows = Object.keys(theme.variants.overflow) as any
 
   const items = [{
@@ -46,7 +45,6 @@ describe('Tabs', () => {
     ['with valueKey', { props: { ...props, valueKey: 'label', defaultValue: 'Tab1' } }],
     ['with labelKey', { props: { ...props, labelKey: 'icon' } }],
     ['with orientation vertical', { props: { ...props, orientation: 'vertical' } }],
-    ...triggerOrientations.map((triggerOrientation: string) => [`with triggerOrientation ${triggerOrientation}`, { props: { ...props, triggerOrientation, content: false } }]),
     ...overflows.map((overflow: string) => [`with overflow ${overflow}`, { props: { items: manyItems, overflow, content: false, class: 'w-96' } }]),
     ['with moreLabel', { props: { items: manyItems, overflow: 'collapse', moreLabel: 'Show more', content: false, class: 'w-96' } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { ...props, size } }]),

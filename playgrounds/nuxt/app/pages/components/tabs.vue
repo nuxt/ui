@@ -4,7 +4,6 @@ import theme from '#build/ui/tabs'
 const colors = Object.keys(theme.variants.color)
 const variants = Object.keys(theme.variants.variant)
 const orientations = Object.keys(theme.variants.orientation)
-const triggerOrientations = Object.keys(theme.variants.triggerOrientation)
 const overflows = ['none', ...Object.keys(theme.variants.overflow)]
 const sizes = Object.keys(theme.variants.size)
 
@@ -15,7 +14,6 @@ const attrs = reactive({
 })
 
 const orientation = ref('horizontal' as keyof typeof theme.variants.orientation)
-const triggerOrientation = ref('horizontal' as keyof typeof theme.variants.triggerOrientation)
 const overflow = ref<'none' | keyof typeof theme.variants.overflow>('none')
 
 const items = [{
@@ -58,14 +56,12 @@ const overflowProp = computed(() => overflow.value === 'none' ? undefined : over
     <USelect v-model="attrs.variant" :items="variants" placeholder="Variant" multiple />
     <USelect v-model="attrs.size" :items="sizes" placeholder="Size" multiple />
     <USelect v-model="orientation" :items="orientations" placeholder="Orientation" />
-    <USelect v-model="triggerOrientation" :items="triggerOrientations" placeholder="Trigger orientation" />
     <USelect v-model="overflow" :items="overflows" placeholder="Overflow" />
   </Navbar>
 
   <Matrix v-slot="props" :attrs="attrs" container-class="gap-4">
     <UTabs
       :orientation="orientation"
-      :trigger-orientation="triggerOrientation"
       :items="[{ label: 'Monthly' }, { label: 'Yearly' }]"
       :content="false"
       v-bind="props"
@@ -73,7 +69,6 @@ const overflowProp = computed(() => overflow.value === 'none' ? undefined : over
 
     <UTabs
       :orientation="orientation"
-      :trigger-orientation="triggerOrientation"
       :items="items"
       class="w-80"
       v-bind="props"
@@ -85,7 +80,6 @@ const overflowProp = computed(() => overflow.value === 'none' ? undefined : over
 
     <UTabs
       :orientation="orientation"
-      :trigger-orientation="triggerOrientation"
       :overflow="overflowProp"
       :items="manyItems"
       :class="orientation === 'vertical' ? 'h-80' : 'w-96'"

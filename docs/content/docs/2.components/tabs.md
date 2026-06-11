@@ -217,34 +217,6 @@ props:
 ---
 ::
 
-### Trigger orientation :badge{label="Soon" class="align-text-top"}
-
-Use the `trigger-orientation` prop to stack the icon or avatar on top of the label inside each tab trigger. Defaults to `horizontal`.
-
-::component-code
----
-ignore:
-  - content
-  - items
-  - class
-external:
-  - items
-externalTypes:
-  - TabsItem[]
-props:
-  triggerOrientation: vertical
-  variant: link
-  color: neutral
-  content: false
-  items:
-    - label: Account
-      icon: 'i-lucide-user'
-    - label: Password
-      icon: 'i-lucide-lock'
-  class: 'w-full'
----
-::
-
 ### Overflow :badge{label="Soon" class="align-text-top"}
 
 Use the `overflow` prop to control how the tab list handles items that don't fit in the available space:
@@ -292,12 +264,6 @@ You can control the active item by a URL query parameter, using `route.query.tab
 Use the `#content` slot to customize the content of each item.
 
 :component-example{name="tabs-content-slot-example"}
-
-### With bottom tab bar :badge{label="Soon" class="align-text-top"}
-
-Combine `trigger-orientation="vertical"` with the `ui` prop to create a mobile-style bottom tab bar with icons and small labels.
-
-:component-example{name="tabs-trigger-orientation-example"}
 
 ### With custom slot
 

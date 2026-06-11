@@ -61,12 +61,6 @@ export interface TabsProps<T extends TabsItem = TabsItem> extends Pick<TabsRootP
    */
   orientation?: Tabs['variants']['orientation']
   /**
-   * The orientation of the content inside each tab trigger.
-   * Use `'vertical'` to stack the icon/avatar on top of the label.
-   * @defaultValue 'horizontal'
-   */
-  triggerOrientation?: Tabs['variants']['triggerOrientation']
-  /**
    * Controls how the tab list handles items that don't fit:
    * - `'scroll'` enables scrolling along the list axis.
    * - `'wrap'` allows tabs to wrap onto multiple lines.
@@ -141,7 +135,6 @@ const _props = withDefaults(defineProps<TabsProps<T>>(), {
   content: true,
   defaultValue: '0',
   orientation: 'horizontal',
-  triggerOrientation: 'horizontal',
   unmountOnHide: true,
   valueKey: 'value',
   labelKey: 'label',
@@ -162,7 +155,6 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.tabs || {}) 
   variant: props.variant,
   size: props.size,
   orientation: props.orientation,
-  triggerOrientation: props.triggerOrientation,
   overflow: props.overflow
 }))
 
@@ -384,7 +376,7 @@ onBeforeUnmount(() => {
   customResizeObserver = null
 })
 
-watch(() => [props.overflow, props.orientation, props.triggerOrientation, props.size, props.variant, props.items?.length], () => {
+watch(() => [props.overflow, props.orientation, props.size, props.variant, props.items?.length], () => {
   if (!isCollapse.value) {
     visibleCount.value = props.items?.length ?? 0
   } else {
