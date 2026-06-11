@@ -27,7 +27,7 @@ const items: TabsItem[] = [
 
 <template>
   <UTabs
-    variant="link"
+    variant="pill"
     color="neutral"
     :items="items"
     :ui="{
