@@ -291,8 +291,19 @@ Use the `color` prop to change the color of the calendar.
 
 ::component-code
 ---
+cast:
+  defaultValue: DateRange
+hide:
+  - range
+  - defaultValue
+  - defaultValue.start
+  - defaultValue.end
 props:
   color: neutral
+  range: true
+  defaultValue:
+    start: [2022, 2, 3]
+    end: [2022, 2, 20]
 ---
 ::
 
