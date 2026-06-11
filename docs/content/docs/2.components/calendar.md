@@ -417,6 +417,16 @@ name: 'calendar-external-controls-example'
 ---
 ::
 
+### With today's date
+
+Use the `today` function from `@internationalized/date` with `getLocalTimeZone` to set the value to the current date.
+
+::component-example
+---
+name: 'calendar-today-example'
+---
+::
+
 ### As a date picker
 
 Use a [Button](/docs/components/button) and a [Popover](/docs/components/popover) component to create a date picker.
