@@ -1,7 +1,7 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Listbox > renders with by correctly 1`] = `
-"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 ring ring-inset ring-default rounded-lg overflow-hidden">
+"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 ring ring-inset ring-default rounded-lg overflow-hidden outline-primary/25 has-focus-visible:outline-3 has-focus-visible:ring-primary">
   <!--v-if-->
   <div data-slot="content" class="relative overflow-y-auto flex-1 max-h-60 scroll-py-1 focus:outline-none divide-y divide-default" role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
     <div role="group" aria-labelledby="reka-listbox-group-v-0-0-0" data-slot="group" class="p-1 isolate">
@@ -24,7 +24,7 @@ exports[`Listbox > renders with by correctly 1`] = `
 `;
 
 exports[`Listbox > renders with class correctly 1`] = `
-"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 ring ring-inset ring-default rounded-lg overflow-hidden max-h-64">
+"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 ring ring-inset ring-default rounded-lg overflow-hidden outline-primary/25 has-focus-visible:outline-3 has-focus-visible:ring-primary max-h-64">
   <!--v-if-->
   <div data-slot="content" class="relative overflow-y-auto flex-1 max-h-60 scroll-py-1 focus:outline-none divide-y divide-default" role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
     <div role="group" aria-labelledby="reka-listbox-group-v-0-0-0" data-slot="group" class="p-1 isolate">
@@ -47,7 +47,7 @@ exports[`Listbox > renders with class correctly 1`] = `
 `;
 
 exports[`Listbox > renders with defaultValue correctly 1`] = `
-"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 ring ring-inset ring-default rounded-lg overflow-hidden">
+"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 ring ring-inset ring-default rounded-lg overflow-hidden outline-primary/25 has-focus-visible:outline-3 has-focus-visible:ring-primary">
   <!--v-if-->
   <div data-slot="content" class="relative overflow-y-auto flex-1 max-h-60 scroll-py-1 focus:outline-none divide-y divide-default" role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
     <div role="group" aria-labelledby="reka-listbox-group-v-0-0-0" data-slot="group" class="p-1 isolate">
@@ -70,7 +70,7 @@ exports[`Listbox > renders with defaultValue correctly 1`] = `
 `;
 
 exports[`Listbox > renders with descriptionKey correctly 1`] = `
-"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 ring ring-inset ring-default rounded-lg overflow-hidden">
+"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 ring ring-inset ring-default rounded-lg overflow-hidden outline-primary/25 has-focus-visible:outline-3 has-focus-visible:ring-primary">
   <!--v-if-->
   <div data-slot="content" class="relative overflow-y-auto flex-1 max-h-60 scroll-py-1 focus:outline-none divide-y divide-default" role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
     <div role="group" aria-labelledby="reka-listbox-group-v-0-0-0" data-slot="group" class="p-1 isolate">
@@ -93,7 +93,7 @@ exports[`Listbox > renders with descriptionKey correctly 1`] = `
 `;
 
 exports[`Listbox > renders with disabled correctly 1`] = `
-"<div dir="ltr" data-disabled="" data-slot="root" class="flex flex-col min-h-0 min-w-0 ring ring-inset ring-default rounded-lg overflow-hidden opacity-75 cursor-not-allowed">
+"<div dir="ltr" data-disabled="" data-slot="root" class="flex flex-col min-h-0 min-w-0 ring ring-inset ring-default rounded-lg overflow-hidden outline-primary/25 has-focus-visible:outline-3 has-focus-visible:ring-primary opacity-75 cursor-not-allowed">
   <!--v-if-->
   <div data-slot="content" class="relative overflow-y-auto flex-1 max-h-60 scroll-py-1 focus:outline-none divide-y divide-default" role="listbox" tabindex="0" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
     <div role="group" aria-labelledby="reka-listbox-group-v-0-0-0" data-slot="group" class="p-1 isolate">
@@ -116,7 +116,7 @@ exports[`Listbox > renders with disabled correctly 1`] = `
 `;
 
 exports[`Listbox > renders with filter and placeholder correctly 1`] = `
-"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 ring ring-inset ring-default rounded-lg overflow-hidden">
+"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 ring ring-inset ring-default rounded-lg overflow-hidden outline-primary/25 has-focus-visible:outline-3 has-focus-visible:ring-primary">
   <div data-slot="root" class="relative inline-flex items-center border-b border-default"><input type="text" placeholder="Filter..." data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent focus:outline-none md:text-sm" autocomplete="off" aria-disabled="false" value="" aria-activedescendant="reka-listbox-item-v-0-0-1">
     <!--v-if-->
     <!--v-if-->
@@ -142,7 +142,7 @@ exports[`Listbox > renders with filter and placeholder correctly 1`] = `
 `;
 
 exports[`Listbox > renders with filter correctly 1`] = `
-"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 ring ring-inset ring-default rounded-lg overflow-hidden">
+"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 ring ring-inset ring-default rounded-lg overflow-hidden outline-primary/25 has-focus-visible:outline-3 has-focus-visible:ring-primary">
   <div data-slot="root" class="relative inline-flex items-center border-b border-default"><input type="text" placeholder="Search…" data-slot="input" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-transparent focus:outline-none md:text-sm" autocomplete="off" aria-disabled="false" value="" aria-activedescendant="reka-listbox-item-v-0-0-1">
     <!--v-if-->
     <!--v-if-->
@@ -168,7 +168,7 @@ exports[`Listbox > renders with filter correctly 1`] = `
 `;
 
 exports[`Listbox > renders with highlight correctly 1`] = `
-"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 ring ring-inset ring-default rounded-lg overflow-hidden">
+"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 rounded-lg overflow-hidden outline-primary/25 has-focus-visible:outline-3 has-focus-visible:ring-primary ring ring-inset ring-primary">
   <!--v-if-->
   <div data-slot="content" class="relative overflow-y-auto flex-1 max-h-60 scroll-py-1 focus:outline-none divide-y divide-default" role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
     <div role="group" aria-labelledby="reka-listbox-group-v-0-0-0" data-slot="group" class="p-1 isolate">
@@ -191,7 +191,7 @@ exports[`Listbox > renders with highlight correctly 1`] = `
 `;
 
 exports[`Listbox > renders with highlight neutral correctly 1`] = `
-"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 rounded-lg overflow-hidden ring ring-inset ring-inverted">
+"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 rounded-lg overflow-hidden outline-inverted/25 has-focus-visible:outline-3 has-focus-visible:ring-inverted ring ring-inset ring-inverted">
   <!--v-if-->
   <div data-slot="content" class="relative overflow-y-auto flex-1 max-h-60 scroll-py-1 focus:outline-none divide-y divide-default" role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
     <div role="group" aria-labelledby="reka-listbox-group-v-0-0-0" data-slot="group" class="p-1 isolate">
@@ -214,7 +214,7 @@ exports[`Listbox > renders with highlight neutral correctly 1`] = `
 `;
 
 exports[`Listbox > renders with id correctly 1`] = `
-"<div dir="ltr" id="id" data-slot="root" class="flex flex-col min-h-0 min-w-0 ring ring-inset ring-default rounded-lg overflow-hidden">
+"<div dir="ltr" id="id" data-slot="root" class="flex flex-col min-h-0 min-w-0 ring ring-inset ring-default rounded-lg overflow-hidden outline-primary/25 has-focus-visible:outline-3 has-focus-visible:ring-primary">
   <!--v-if-->
   <div data-slot="content" class="relative overflow-y-auto flex-1 max-h-60 scroll-py-1 focus:outline-none divide-y divide-default" role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
     <div role="group" aria-labelledby="reka-listbox-group-v-0-0-0" data-slot="group" class="p-1 isolate">
@@ -237,7 +237,7 @@ exports[`Listbox > renders with id correctly 1`] = `
 `;
 
 exports[`Listbox > renders with item slot correctly 1`] = `
-"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 ring ring-inset ring-default rounded-lg overflow-hidden">
+"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 ring ring-inset ring-default rounded-lg overflow-hidden outline-primary/25 has-focus-visible:outline-3 has-focus-visible:ring-primary">
   <!--v-if-->
   <div data-slot="content" class="relative overflow-y-auto flex-1 max-h-60 scroll-py-1 focus:outline-none divide-y divide-default" role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
     <div role="group" aria-labelledby="reka-listbox-group-v-0-0-0" data-slot="group" class="p-1 isolate">
@@ -252,7 +252,7 @@ exports[`Listbox > renders with item slot correctly 1`] = `
 `;
 
 exports[`Listbox > renders with item-description slot correctly 1`] = `
-"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 ring ring-inset ring-default rounded-lg overflow-hidden">
+"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 ring ring-inset ring-default rounded-lg overflow-hidden outline-primary/25 has-focus-visible:outline-3 has-focus-visible:ring-primary">
   <!--v-if-->
   <div data-slot="content" class="relative overflow-y-auto flex-1 max-h-60 scroll-py-1 focus:outline-none divide-y divide-default" role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
     <div role="group" aria-labelledby="reka-listbox-group-v-0-0-0" data-slot="group" class="p-1 isolate">
@@ -267,7 +267,7 @@ exports[`Listbox > renders with item-description slot correctly 1`] = `
 `;
 
 exports[`Listbox > renders with item-label slot correctly 1`] = `
-"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 ring ring-inset ring-default rounded-lg overflow-hidden">
+"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 ring ring-inset ring-default rounded-lg overflow-hidden outline-primary/25 has-focus-visible:outline-3 has-focus-visible:ring-primary">
   <!--v-if-->
   <div data-slot="content" class="relative overflow-y-auto flex-1 max-h-60 scroll-py-1 focus:outline-none divide-y divide-default" role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
     <div role="group" aria-labelledby="reka-listbox-group-v-0-0-0" data-slot="group" class="p-1 isolate">
@@ -290,7 +290,7 @@ exports[`Listbox > renders with item-label slot correctly 1`] = `
 `;
 
 exports[`Listbox > renders with item-leading slot correctly 1`] = `
-"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 ring ring-inset ring-default rounded-lg overflow-hidden">
+"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 ring ring-inset ring-default rounded-lg overflow-hidden outline-primary/25 has-focus-visible:outline-3 has-focus-visible:ring-primary">
   <!--v-if-->
   <div data-slot="content" class="relative overflow-y-auto flex-1 max-h-60 scroll-py-1 focus:outline-none divide-y divide-default" role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
     <div role="group" aria-labelledby="reka-listbox-group-v-0-0-0" data-slot="group" class="p-1 isolate">
@@ -313,7 +313,7 @@ exports[`Listbox > renders with item-leading slot correctly 1`] = `
 `;
 
 exports[`Listbox > renders with item-trailing slot correctly 1`] = `
-"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 ring ring-inset ring-default rounded-lg overflow-hidden">
+"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 ring ring-inset ring-default rounded-lg overflow-hidden outline-primary/25 has-focus-visible:outline-3 has-focus-visible:ring-primary">
   <!--v-if-->
   <div data-slot="content" class="relative overflow-y-auto flex-1 max-h-60 scroll-py-1 focus:outline-none divide-y divide-default" role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
     <div role="group" aria-labelledby="reka-listbox-group-v-0-0-0" data-slot="group" class="p-1 isolate">
@@ -336,7 +336,7 @@ exports[`Listbox > renders with item-trailing slot correctly 1`] = `
 `;
 
 exports[`Listbox > renders with items correctly 1`] = `
-"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 ring ring-inset ring-default rounded-lg overflow-hidden">
+"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 ring ring-inset ring-default rounded-lg overflow-hidden outline-primary/25 has-focus-visible:outline-3 has-focus-visible:ring-primary">
   <!--v-if-->
   <div data-slot="content" class="relative overflow-y-auto flex-1 max-h-60 scroll-py-1 focus:outline-none divide-y divide-default" role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
     <div role="group" aria-labelledby="reka-listbox-group-v-0-0-0" data-slot="group" class="p-1 isolate">
@@ -359,7 +359,7 @@ exports[`Listbox > renders with items correctly 1`] = `
 `;
 
 exports[`Listbox > renders with items with description correctly 1`] = `
-"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 ring ring-inset ring-default rounded-lg overflow-hidden">
+"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 ring ring-inset ring-default rounded-lg overflow-hidden outline-primary/25 has-focus-visible:outline-3 has-focus-visible:ring-primary">
   <!--v-if-->
   <div data-slot="content" class="relative overflow-y-auto flex-1 max-h-60 scroll-py-1 focus:outline-none divide-y divide-default" role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
     <div role="group" aria-labelledby="reka-listbox-group-v-0-0-0" data-slot="group" class="p-1 isolate">
@@ -374,7 +374,7 @@ exports[`Listbox > renders with items with description correctly 1`] = `
 `;
 
 exports[`Listbox > renders with labelKey correctly 1`] = `
-"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 ring ring-inset ring-default rounded-lg overflow-hidden">
+"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 ring ring-inset ring-default rounded-lg overflow-hidden outline-primary/25 has-focus-visible:outline-3 has-focus-visible:ring-primary">
   <!--v-if-->
   <div data-slot="content" class="relative overflow-y-auto flex-1 max-h-60 scroll-py-1 focus:outline-none divide-y divide-default" role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
     <div role="group" aria-labelledby="reka-listbox-group-v-0-0-0" data-slot="group" class="p-1 isolate">
@@ -397,7 +397,7 @@ exports[`Listbox > renders with labelKey correctly 1`] = `
 `;
 
 exports[`Listbox > renders with loading correctly 1`] = `
-"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 ring ring-inset ring-default rounded-lg overflow-hidden">
+"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 ring ring-inset ring-default rounded-lg overflow-hidden outline-primary/25 has-focus-visible:outline-3 has-focus-visible:ring-primary">
   <!--v-if-->
   <div data-slot="content" class="relative overflow-y-auto flex-1 max-h-60 scroll-py-1 focus:outline-none divide-y divide-default" role="listbox" tabindex="0" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
     <div data-slot="loading" class="flex items-center justify-center text-muted py-6"><span class="iconify i-lucide:loader-circle animate-spin shrink-0 size-5" aria-hidden="true" data-slot="loadingIcon"></span></div>
@@ -407,7 +407,7 @@ exports[`Listbox > renders with loading correctly 1`] = `
 `;
 
 exports[`Listbox > renders with loadingIcon correctly 1`] = `
-"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 ring ring-inset ring-default rounded-lg overflow-hidden">
+"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 ring ring-inset ring-default rounded-lg overflow-hidden outline-primary/25 has-focus-visible:outline-3 has-focus-visible:ring-primary">
   <!--v-if-->
   <div data-slot="content" class="relative overflow-y-auto flex-1 max-h-60 scroll-py-1 focus:outline-none divide-y divide-default" role="listbox" tabindex="0" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
     <div data-slot="loading" class="flex items-center justify-center text-muted py-6"><span class="iconify i-lucide:loader animate-spin shrink-0 size-5" aria-hidden="true" data-slot="loadingIcon"></span></div>
@@ -417,7 +417,7 @@ exports[`Listbox > renders with loadingIcon correctly 1`] = `
 `;
 
 exports[`Listbox > renders with modelValue correctly 1`] = `
-"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 ring ring-inset ring-default rounded-lg overflow-hidden">
+"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 ring ring-inset ring-default rounded-lg overflow-hidden outline-primary/25 has-focus-visible:outline-3 has-focus-visible:ring-primary">
   <!--v-if-->
   <div data-slot="content" class="relative overflow-y-auto flex-1 max-h-60 scroll-py-1 focus:outline-none divide-y divide-default" role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
     <div role="group" aria-labelledby="reka-listbox-group-v-0-0-0" data-slot="group" class="p-1 isolate">
@@ -440,7 +440,7 @@ exports[`Listbox > renders with modelValue correctly 1`] = `
 `;
 
 exports[`Listbox > renders with multiple and modelValue correctly 1`] = `
-"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 ring ring-inset ring-default rounded-lg overflow-hidden">
+"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 ring ring-inset ring-default rounded-lg overflow-hidden outline-primary/25 has-focus-visible:outline-3 has-focus-visible:ring-primary">
   <!--v-if-->
   <div data-slot="content" class="relative overflow-y-auto flex-1 max-h-60 scroll-py-1 focus:outline-none divide-y divide-default" role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="true" data-orientation="vertical">
     <div role="group" aria-labelledby="reka-listbox-group-v-0-0-0" data-slot="group" class="p-1 isolate">
@@ -463,7 +463,7 @@ exports[`Listbox > renders with multiple and modelValue correctly 1`] = `
 `;
 
 exports[`Listbox > renders with multiple correctly 1`] = `
-"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 ring ring-inset ring-default rounded-lg overflow-hidden">
+"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 ring ring-inset ring-default rounded-lg overflow-hidden outline-primary/25 has-focus-visible:outline-3 has-focus-visible:ring-primary">
   <!--v-if-->
   <div data-slot="content" class="relative overflow-y-auto flex-1 max-h-60 scroll-py-1 focus:outline-none divide-y divide-default" role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="true" data-orientation="vertical">
     <div role="group" aria-labelledby="reka-listbox-group-v-0-0-0" data-slot="group" class="p-1 isolate">
@@ -486,7 +486,7 @@ exports[`Listbox > renders with multiple correctly 1`] = `
 `;
 
 exports[`Listbox > renders with name correctly 1`] = `
-"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 ring ring-inset ring-default rounded-lg overflow-hidden">
+"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 ring ring-inset ring-default rounded-lg overflow-hidden outline-primary/25 has-focus-visible:outline-3 has-focus-visible:ring-primary">
   <!--v-if-->
   <div data-slot="content" class="relative overflow-y-auto flex-1 max-h-60 scroll-py-1 focus:outline-none divide-y divide-default" role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
     <div role="group" aria-labelledby="reka-listbox-group-v-0-0-0" data-slot="group" class="p-1 isolate">
@@ -509,7 +509,7 @@ exports[`Listbox > renders with name correctly 1`] = `
 `;
 
 exports[`Listbox > renders with required correctly 1`] = `
-"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 ring ring-inset ring-default rounded-lg overflow-hidden">
+"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 ring ring-inset ring-default rounded-lg overflow-hidden outline-primary/25 has-focus-visible:outline-3 has-focus-visible:ring-primary">
   <!--v-if-->
   <div data-slot="content" class="relative overflow-y-auto flex-1 max-h-60 scroll-py-1 focus:outline-none divide-y divide-default" role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
     <div role="group" aria-labelledby="reka-listbox-group-v-0-0-0" data-slot="group" class="p-1 isolate">
@@ -532,7 +532,7 @@ exports[`Listbox > renders with required correctly 1`] = `
 `;
 
 exports[`Listbox > renders with selectedIcon correctly 1`] = `
-"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 ring ring-inset ring-default rounded-lg overflow-hidden">
+"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 ring ring-inset ring-default rounded-lg overflow-hidden outline-primary/25 has-focus-visible:outline-3 has-focus-visible:ring-primary">
   <!--v-if-->
   <div data-slot="content" class="relative overflow-y-auto flex-1 max-h-60 scroll-py-1 focus:outline-none divide-y divide-default" role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
     <div role="group" aria-labelledby="reka-listbox-group-v-0-0-0" data-slot="group" class="p-1 isolate">
@@ -555,7 +555,7 @@ exports[`Listbox > renders with selectedIcon correctly 1`] = `
 `;
 
 exports[`Listbox > renders with size lg correctly 1`] = `
-"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 ring ring-inset ring-default rounded-lg overflow-hidden">
+"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 ring ring-inset ring-default rounded-lg overflow-hidden outline-primary/25 has-focus-visible:outline-3 has-focus-visible:ring-primary">
   <!--v-if-->
   <div data-slot="content" class="relative overflow-y-auto flex-1 max-h-60 scroll-py-1 focus:outline-none divide-y divide-default" role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
     <div role="group" aria-labelledby="reka-listbox-group-v-0-0-0" data-slot="group" class="p-1 isolate">
@@ -578,7 +578,7 @@ exports[`Listbox > renders with size lg correctly 1`] = `
 `;
 
 exports[`Listbox > renders with size md correctly 1`] = `
-"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 ring ring-inset ring-default rounded-lg overflow-hidden">
+"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 ring ring-inset ring-default rounded-lg overflow-hidden outline-primary/25 has-focus-visible:outline-3 has-focus-visible:ring-primary">
   <!--v-if-->
   <div data-slot="content" class="relative overflow-y-auto flex-1 max-h-60 scroll-py-1 focus:outline-none divide-y divide-default" role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
     <div role="group" aria-labelledby="reka-listbox-group-v-0-0-0" data-slot="group" class="p-1 isolate">
@@ -601,7 +601,7 @@ exports[`Listbox > renders with size md correctly 1`] = `
 `;
 
 exports[`Listbox > renders with size sm correctly 1`] = `
-"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 ring ring-inset ring-default rounded-lg overflow-hidden">
+"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 ring ring-inset ring-default rounded-lg overflow-hidden outline-primary/25 has-focus-visible:outline-3 has-focus-visible:ring-primary">
   <!--v-if-->
   <div data-slot="content" class="relative overflow-y-auto flex-1 max-h-60 scroll-py-1 focus:outline-none divide-y divide-default" role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
     <div role="group" aria-labelledby="reka-listbox-group-v-0-0-0" data-slot="group" class="p-1 isolate">
@@ -624,7 +624,7 @@ exports[`Listbox > renders with size sm correctly 1`] = `
 `;
 
 exports[`Listbox > renders with size xl correctly 1`] = `
-"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 ring ring-inset ring-default rounded-lg overflow-hidden">
+"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 ring ring-inset ring-default rounded-lg overflow-hidden outline-primary/25 has-focus-visible:outline-3 has-focus-visible:ring-primary">
   <!--v-if-->
   <div data-slot="content" class="relative overflow-y-auto flex-1 max-h-60 scroll-py-1 focus:outline-none divide-y divide-default" role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
     <div role="group" aria-labelledby="reka-listbox-group-v-0-0-0" data-slot="group" class="p-1 isolate">
@@ -647,7 +647,7 @@ exports[`Listbox > renders with size xl correctly 1`] = `
 `;
 
 exports[`Listbox > renders with size xs correctly 1`] = `
-"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 ring ring-inset ring-default rounded-lg overflow-hidden">
+"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 ring ring-inset ring-default rounded-lg overflow-hidden outline-primary/25 has-focus-visible:outline-3 has-focus-visible:ring-primary">
   <!--v-if-->
   <div data-slot="content" class="relative overflow-y-auto flex-1 max-h-60 scroll-py-1 focus:outline-none divide-y divide-default" role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
     <div role="group" aria-labelledby="reka-listbox-group-v-0-0-0" data-slot="group" class="p-1 isolate">
@@ -670,7 +670,7 @@ exports[`Listbox > renders with size xs correctly 1`] = `
 `;
 
 exports[`Listbox > renders with ui correctly 1`] = `
-"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 ring ring-inset ring-default rounded-lg overflow-hidden">
+"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 ring ring-inset ring-default rounded-lg overflow-hidden outline-primary/25 has-focus-visible:outline-3 has-focus-visible:ring-primary">
   <!--v-if-->
   <div data-slot="content" class="relative overflow-y-auto flex-1 max-h-60 scroll-py-1 focus:outline-none divide-y divide-default p-2" role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
     <div role="group" aria-labelledby="reka-listbox-group-v-0-0-0" data-slot="group" class="p-1 isolate">
@@ -693,7 +693,7 @@ exports[`Listbox > renders with ui correctly 1`] = `
 `;
 
 exports[`Listbox > renders with valueKey correctly 1`] = `
-"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 ring ring-inset ring-default rounded-lg overflow-hidden">
+"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 ring ring-inset ring-default rounded-lg overflow-hidden outline-primary/25 has-focus-visible:outline-3 has-focus-visible:ring-primary">
   <!--v-if-->
   <div data-slot="content" class="relative overflow-y-auto flex-1 max-h-60 scroll-py-1 focus:outline-none divide-y divide-default" role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
     <div role="group" aria-labelledby="reka-listbox-group-v-0-0-0" data-slot="group" class="p-1 isolate">
@@ -716,7 +716,7 @@ exports[`Listbox > renders with valueKey correctly 1`] = `
 `;
 
 exports[`Listbox > renders with virtualize correctly 1`] = `
-"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 ring ring-inset ring-default rounded-lg overflow-hidden">
+"<div dir="ltr" data-slot="root" class="flex flex-col min-h-0 min-w-0 ring ring-inset ring-default rounded-lg overflow-hidden outline-primary/25 has-focus-visible:outline-3 has-focus-visible:ring-primary">
   <!--v-if-->
   <div data-slot="content" class="relative overflow-y-auto flex-1 max-h-60 scroll-py-1 focus:outline-none p-1 isolate" role="listbox" tabindex="0" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical">
     <div data-reka-virtualizer="" style="position: relative; width: 100%; height: 128px;"></div>
