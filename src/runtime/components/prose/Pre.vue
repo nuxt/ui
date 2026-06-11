@@ -71,7 +71,6 @@ function copyCode() {
       size="sm"
       :aria-label="t('prose.pre.copy')"
       :class="ui.copy({ class: props.ui?.copy })"
-      tabindex="-1"
       @click="copyCode"
     />
 
