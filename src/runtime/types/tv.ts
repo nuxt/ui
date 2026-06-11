@@ -1,13 +1,27 @@
 import type { ClassValue, TVVariants, TVCompoundVariants, TVDefaultVariants } from 'tailwind-variants'
 
 /**
+ * A function form for a slot class that **replaces** the slot's default classes
+ * instead of merging onto them. It receives the slot's fully resolved default
+ * class string and returns the classes to use in its place.
+ * @example title: defaults => 'text-xl font-bold'
+ */
+export type SlotClassReplacer = (defaults: string) => ClassValue
+
+/**
+ * The value accepted for a slot in `:ui`, the `class` prop or `app.config.ui`:
+ * either classes to merge (the default) or a {@link SlotClassReplacer} to replace.
+ */
+export type SlotClass = ClassValue | SlotClassReplacer
+
+/**
  * Defines the AppConfig object based on the tailwind-variants configuration.
  */
 export type TVConfig<T extends Record<string, any>> = {
   [P in keyof T]?: {
-    [K in keyof T[P]as K extends 'base' | 'slots' | 'variants' | 'defaultVariants' ? K : never]?: K extends 'base' ? ClassValue
+    [K in keyof T[P]as K extends 'base' | 'slots' | 'variants' | 'defaultVariants' ? K : never]?: K extends 'base' ? SlotClass
       : K extends 'slots' ? {
-        [S in keyof T[P]['slots']]?: ClassValue
+        [S in keyof T[P]['slots']]?: SlotClass
       }
         : K extends 'variants' ? TVVariants<T[P]['slots'], ClassValue, WidenVariantsValues<T[P]['variants']>>
           : K extends 'defaultVariants' ? TVDefaultVariants<WidenVariantsValues<T[P]['variants']>, T[P]['slots'], object, undefined>
@@ -37,7 +51,7 @@ type ComponentVariants<T extends { variants?: Record<string, Record<string, any>
 }
 
 type ComponentSlots<T extends { slots?: Record<string, any> }> = Id<{
-  [K in keyof T['slots']]?: ClassValue
+  [K in keyof T['slots']]?: SlotClass
 }>
 
 type ComponentUI<T extends { slots?: Record<string, any> }> = Id<{
@@ -52,11 +66,17 @@ type ComponentAppConfig<
   A extends Record<string, any>,
   K extends string,
   U extends string = 'ui' | 'ui.prose'
-> = A & (
-  U extends 'ui.prose'
-    ? { ui?: { prose?: { [k in K]?: Partial<T> } } }
-    : { [key in Exclude<U, 'ui.prose'>]?: { [k in K]?: Partial<T> } }
-)
+> = Omit<A, 'ui'> & {
+  ui: U extends 'ui.prose'
+    ? (A extends { ui: infer UI } ? Omit<UI, 'prose'> : Record<string, never>) & {
+      prose?: (A extends { ui: { prose?: infer P } } ? Omit<NonNullable<P>, K> : Record<string, never>) & {
+        [k in K]?: Partial<T>
+      }
+    }
+    : (A extends { ui: infer UI } ? Omit<UI, K> : Record<string, never>) & {
+      [k in K]?: Partial<T>
+    }
+}
 
 /**
  * Defines the configuration shape expected for a component.

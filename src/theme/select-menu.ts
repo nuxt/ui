@@ -8,7 +8,7 @@ export default (options: Required<ModuleOptions>) => {
       input: 'border-b border-default',
       focusScope: 'flex flex-col min-h-0',
       viewport: 'relative scroll-py-1 overflow-y-auto flex-1',
-      content: (content: string) => [content, 'max-h-[min(15rem,var(--reka-combobox-content-available-height))] origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width)'],
+      content: (content: string) => [content, 'max-h-[min(15rem,var(--reka-combobox-content-available-height,15rem))] origin-(--reka-combobox-content-transform-origin) w-(--reka-combobox-trigger-width)'],
       trailingClear: 'p-0'
     },
     variants: {
@@ -20,15 +20,6 @@ export default (options: Required<ModuleOptions>) => {
           viewport: 'divide-y divide-default'
         }
       }
-    },
-    compoundVariants: (prev: Record<string, any>[]) => prev.map(item => ({
-      ...item,
-      class: typeof item.class === 'string' ? replaceFocus(item.class) : item.class
-    }))
+    }
   }, select(options))
-}
-
-function replaceFocus(str: string): string {
-  return str
-    .replace(/focus:/g, 'focus-visible:')
 }
