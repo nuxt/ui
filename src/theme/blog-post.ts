@@ -56,9 +56,9 @@ export default (options: Required<ModuleOptions>) => ({
     },
     to: {
       true: {
-        root: ['has-focus-visible:ring-2 has-focus-visible:ring-primary', options.theme.transitions && 'transition'],
+        root: ['outline-primary/25 has-[>a:focus-visible]:outline-3', options.theme.transitions && 'transition'],
         image: 'transform transition-transform duration-200 group-hover/blog-post:scale-110',
-        avatar: 'transform transition-transform duration-200 hover:scale-115 focus-visible:outline-primary'
+        avatar: 'inline-flex transform transition-transform duration-200 hover:scale-115 rounded-full outline-primary/25 focus-visible:outline-3'
       }
     },
     image: {
@@ -82,6 +82,12 @@ export default (options: Required<ModuleOptions>) => ({
     to: true,
     class: {
       root: 'hover:bg-elevated hover:ring-accented'
+    }
+  }, {
+    variant: ['outline', 'subtle'],
+    to: true,
+    class: {
+      root: 'has-[>a:focus-visible]:ring-primary'
     }
   }, {
     variant: 'ghost',

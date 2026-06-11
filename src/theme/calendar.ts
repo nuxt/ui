@@ -13,18 +13,18 @@ export default (options: Required<ModuleOptions>) => ({
     headCell: 'rounded-md',
     headCellWeek: 'rounded-md text-muted',
     cell: 'relative text-center',
-    cellTrigger: ['m-0.5 relative flex items-center justify-center rounded-full whitespace-nowrap focus-visible:ring-2 focus:outline-none data-disabled:text-muted data-unavailable:line-through data-unavailable:text-muted data-unavailable:pointer-events-none data-today:font-semibold data-[outside-view]:text-muted', options.theme.transitions && 'transition'],
+    cellTrigger: ['m-0.5 relative flex items-center justify-center rounded-full whitespace-nowrap focus-visible:outline-3 data-disabled:text-muted data-unavailable:line-through data-unavailable:text-muted data-unavailable:pointer-events-none data-today:font-semibold data-[outside-view]:text-muted', options.theme.transitions && 'transition'],
     cellWeek: 'relative text-center text-muted'
   },
   variants: {
     color: {
       ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, {
         headCell: `text-${color}`,
-        cellTrigger: `focus-visible:ring-${color}`
+        cellTrigger: `outline-${color}/25`
       }])),
       neutral: {
         headCell: 'text-highlighted',
-        cellTrigger: 'focus-visible:ring-inverted'
+        cellTrigger: 'outline-inverted/25'
       }
     },
     variant: {
