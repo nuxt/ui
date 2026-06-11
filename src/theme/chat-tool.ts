@@ -10,7 +10,7 @@ export default (options: Required<ModuleOptions>) => ({
     label: 'truncate',
     suffix: 'text-dimmed ms-1',
     trailingIcon: 'size-4 shrink-0 group-data-[state=open]:rotate-180 transition-transform duration-200',
-    content: 'data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out]',
+    content: 'data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] data-[state=closed]:overflow-hidden',
     body: 'text-sm text-dimmed whitespace-pre-wrap'
   },
   variants: {

@@ -9,7 +9,7 @@ export default (options: Required<ModuleOptions>) => ({
     chevronIcon: 'size-4 shrink-0 group-data-[state=open]:rotate-180 transition-transform duration-200',
     label: 'truncate',
     trailingIcon: 'size-4 shrink-0 group-data-[state=open]:rotate-180 transition-transform duration-200',
-    content: 'data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] rounded-sm outline-primary/25 has-focus-visible:outline-3',
+    content: 'data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] data-[state=closed]:overflow-hidden rounded-sm outline-primary/25 has-focus-visible:outline-3',
     body: 'max-h-[200px] pt-2 overflow-y-auto text-sm text-dimmed whitespace-pre-wrap focus:outline-none'
   },
   variants: {

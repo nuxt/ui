@@ -125,7 +125,7 @@ export default (options: Required<ModuleOptions>) => ({
     class: {
       childList: 'ms-5 border-s border-default',
       childItem: 'ps-1.5 -ms-px',
-      content: 'data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out]'
+      content: 'data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] data-[state=closed]:overflow-hidden'
     }
   }, {
     orientation: 'vertical',
