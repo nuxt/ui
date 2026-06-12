@@ -88,8 +88,12 @@ export default (options: Required<ModuleOptions>) => ({
       }
     },
     color: {
-      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, ''])),
-      neutral: ''
+      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, {
+        root: `outline-${color}/25 has-focus-visible:outline-3 has-focus-visible:ring-${color}`
+      }])),
+      neutral: {
+        root: 'outline-inverted/25 has-focus-visible:outline-3 has-focus-visible:ring-inverted'
+      }
     },
     virtualize: {
       true: {
@@ -122,6 +126,7 @@ export default (options: Required<ModuleOptions>) => ({
     }
   }],
   defaultVariants: {
+    color: 'primary',
     size: 'md'
   }
 })

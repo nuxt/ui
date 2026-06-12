@@ -8,7 +8,7 @@ export default (options: Required<ModuleOptions>) => {
   return {
     slots: {
       root: 'relative inline-flex items-center',
-      base: ['w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75', options.theme.transitions && 'transition-colors'],
+      base: ['w-full rounded-md border-0 placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75', options.theme.transitions && 'transition-colors'],
       increment: 'absolute flex items-center',
       decrement: 'absolute flex items-center'
     },
@@ -61,7 +61,11 @@ export default (options: Required<ModuleOptions>) => {
     compoundVariants: [...(options.theme.colors || []).map((color: string) => ({
       color,
       variant: ['outline', 'subtle'],
-      class: `focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-${color}`
+      class: `outline-${color}/25 focus-visible:outline-3 focus-visible:ring-${color}`
+    })), ...(options.theme.colors || []).map((color: string) => ({
+      color,
+      variant: ['soft', 'ghost'],
+      class: `outline-${color}/25 focus-visible:outline-3`
     })), ...(options.theme.colors || []).map((color: string) => ({
       color,
       highlight: true,
@@ -69,7 +73,11 @@ export default (options: Required<ModuleOptions>) => {
     })), {
       color: 'neutral',
       variant: ['outline', 'subtle'],
-      class: 'focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-inverted'
+      class: 'outline-inverted/25 focus-visible:outline-3 focus-visible:ring-inverted'
+    }, {
+      color: 'neutral',
+      variant: ['soft', 'ghost'],
+      class: 'outline-inverted/25 focus-visible:outline-3'
     }, {
       color: 'neutral',
       highlight: true,

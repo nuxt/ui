@@ -5,7 +5,7 @@ export default (options: Required<ModuleOptions>) => ({
     root: '',
     list: '',
     item: 'relative',
-    link: 'group text-sm flex items-center gap-1.5 py-1 focus-visible:outline-primary',
+    link: 'group text-sm flex items-center gap-1.5 py-1 rounded-sm outline-primary/25 focus-visible:outline-3',
     linkLeading: 'rounded-md p-1 inline-flex ring-inset ring',
     linkLeadingIcon: 'size-4 shrink-0',
     linkLabel: 'truncate',

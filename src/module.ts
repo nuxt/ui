@@ -53,6 +53,14 @@ export interface ModuleOptions {
     transitions?: boolean
 
     /**
+     * Remove all default theme classes from components, keeping only their
+     * structure and the classes you supply via `class`, `ui` or `app.config.ui`.
+     * @defaultValue `false`
+     * @see https://ui.nuxt.com/docs/getting-started/installation/nuxt#themeunstyled
+     */
+    unstyled?: boolean
+
+    /**
      * The default variants to use for components
      * @see https://ui.nuxt.com/docs/getting-started/installation/nuxt#themedefaultvariants
      */

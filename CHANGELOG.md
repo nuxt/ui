@@ -1,5 +1,14 @@
 # Changelog
 
+## [4.8.2](https://github.com/nuxt/ui/compare/v4.8.1...v4.8.2) (2026-06-04)
+
+### Bug Fixes
+
+* **Form:** support setting the `name` attribute ([#6539](https://github.com/nuxt/ui/issues/6539)) ([f8186e2](https://github.com/nuxt/ui/commit/f8186e2d49472629cb0ea29ef1da468227bde677))
+* **InputMenu/SelectMenu:** re-highlight first item when items change ([#6538](https://github.com/nuxt/ui/issues/6538)) ([0414dd0](https://github.com/nuxt/ui/commit/0414dd0d1ba694962562efdabfb60c135ab742ad))
+* **InputNumber/InputDate/InputTime/Calendar:** restore `locale` prop ([#6546](https://github.com/nuxt/ui/issues/6546)) ([ed2f955](https://github.com/nuxt/ui/commit/ed2f955f092b6213ba2c3a4750260433f0edc2c6))
+* **module:** merge custom variants into AppConfig type ([#6531](https://github.com/nuxt/ui/issues/6531)) ([f0571c3](https://github.com/nuxt/ui/commit/f0571c3786cdddb54712bb89154f8482e0c3c62e))
+
 ## [4.8.1](https://github.com/nuxt/ui/compare/v4.8.0...v4.8.1) (2026-05-28)
 
 ### Bug Fixes

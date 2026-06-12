@@ -21,6 +21,7 @@ logs
 .cursor
 .fleet
 .idea
+.claude
 
 # Local env files
 .env

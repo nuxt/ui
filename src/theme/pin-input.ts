@@ -3,7 +3,8 @@ import type { ModuleOptions } from '../module'
 export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: 'relative inline-flex items-center gap-1.5',
-    base: ['rounded-md border-0 placeholder:text-dimmed text-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75', options.theme.transitions && 'transition-colors']
+    base: ['rounded-md border-0 placeholder:text-dimmed text-center disabled:cursor-not-allowed disabled:opacity-75', options.theme.transitions && 'transition-colors'],
+    separator: 'text-dimmed flex items-center justify-center'
   },
   variants: {
     size: {
@@ -28,7 +29,7 @@ export default (options: Required<ModuleOptions>) => ({
       soft: 'text-highlighted bg-elevated/50 hover:bg-elevated focus:bg-elevated disabled:bg-elevated/50',
       subtle: 'text-highlighted bg-elevated ring ring-inset ring-accented',
       ghost: 'text-highlighted bg-transparent hover:bg-elevated focus:bg-elevated disabled:bg-transparent dark:disabled:bg-transparent',
-      none: 'text-highlighted bg-transparent'
+      none: 'text-highlighted bg-transparent focus:outline-none'
     },
     color: {
       ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, ''])),
@@ -44,7 +45,11 @@ export default (options: Required<ModuleOptions>) => ({
   compoundVariants: [...(options.theme.colors || []).map((color: string) => ({
     color,
     variant: ['outline', 'subtle'],
-    class: `focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-${color}`
+    class: `outline-${color}/25 focus-visible:outline-3 focus-visible:ring-${color}`
+  })), ...(options.theme.colors || []).map((color: string) => ({
+    color,
+    variant: ['soft', 'ghost'],
+    class: `outline-${color}/25 focus-visible:outline-3`
   })), ...(options.theme.colors || []).map((color: string) => ({
     color,
     highlight: true,
@@ -52,7 +57,11 @@ export default (options: Required<ModuleOptions>) => ({
   })), {
     color: 'neutral',
     variant: ['outline', 'subtle'],
-    class: 'focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-inverted'
+    class: 'outline-inverted/25 focus-visible:outline-3 focus-visible:ring-inverted'
+  }, {
+    color: 'neutral',
+    variant: ['soft', 'ghost'],
+    class: 'outline-inverted/25 focus-visible:outline-3'
   }, {
     color: 'neutral',
     highlight: true,
