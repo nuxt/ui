@@ -7,6 +7,9 @@ export default {
   },
   variants: {
     open: {
+      true: {
+        root: 'rounded-md'
+      },
       false: {
         root: 'max-h-[200px] overflow-hidden rounded-b-md [&_pre]:overflow-hidden',
         footer: 'inset-x-0 bottom-0 border border-t-0 border-muted bg-linear-to-t from-muted'
