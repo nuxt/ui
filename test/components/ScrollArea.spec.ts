@@ -22,6 +22,7 @@ describe('ScrollArea', () => {
     ['with virtualize padding', { props: { ...props, virtualize: { paddingStart: 20, paddingEnd: 20 } } }],
     ['with virtualize lanes', { props: { ...props, virtualize: { lanes: 3 } } }],
     ['with virtualize scrollMargin', { props: { ...props, virtualize: { scrollMargin: 10 } } }],
+    ['with shadow', { props: { ...props, shadow: true } }],
     ['with as', { props: { ...props, as: 'section' } }],
     ['with class', { props: { ...props, class: 'absolute' } }],
     ['with ui', { props: { ...props, ui: { viewport: 'gap-4' } } }],

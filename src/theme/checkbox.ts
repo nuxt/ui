@@ -4,7 +4,7 @@ export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: 'relative flex items-start',
     container: 'flex items-center',
-    base: 'rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2',
+    base: 'rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-3',
     indicator: 'flex items-center justify-center size-full text-inverted',
     icon: 'shrink-0 size-full',
     wrapper: 'w-full',
@@ -14,11 +14,11 @@ export default (options: Required<ModuleOptions>) => ({
   variants: {
     color: {
       ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, {
-        base: `focus-visible:outline-${color}`,
+        base: `outline-${color}/25 focus-visible:ring-${color}`,
         indicator: `bg-${color}`
       }])),
       neutral: {
-        base: 'focus-visible:outline-inverted',
+        base: 'outline-inverted/25 focus-visible:ring-inverted',
         indicator: 'bg-inverted'
       }
     },

@@ -7,7 +7,7 @@ export default (options: Required<ModuleOptions>) => ({
     legend: 'mb-1 block font-medium text-default',
     item: 'flex items-start',
     container: 'flex items-center',
-    base: 'rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2',
+    base: 'rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-3',
     indicator: 'flex items-center justify-center size-full after:bg-default after:rounded-full',
     wrapper: 'w-full',
     label: 'block font-medium text-default',
@@ -16,11 +16,11 @@ export default (options: Required<ModuleOptions>) => ({
   variants: {
     color: {
       ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, {
-        base: `focus-visible:outline-${color}`,
+        base: `outline-${color}/25 focus-visible:ring-${color}`,
         indicator: `bg-${color}`
       }])),
       neutral: {
-        base: 'focus-visible:outline-inverted',
+        base: 'outline-inverted/25 focus-visible:ring-inverted',
         indicator: 'bg-inverted'
       }
     },
