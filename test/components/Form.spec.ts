@@ -348,7 +348,7 @@ describe('Form', () => {
     it.skip('dirtyFields works', async () => {
       const email = wrapper.find('#email')
 
-      email.trigger('change')
+      await email.trigger('change')
       await flushPromises()
 
       expect(form.dirtyFields.has('email')).toBe(true)
