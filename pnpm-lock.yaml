@@ -6881,7 +6881,7 @@ packages:
     hasBin: true
 
   nuxt-component-meta@https://pkg.pr.new/nuxt-component-meta@ef01cc7:
-    resolution: {tarball: https://pkg.pr.new/nuxt-component-meta@ef01cc7}
+    resolution: {integrity: sha512-y95sfj5Qr+4GvVRnGE44R+CHdakVh+t+ZlRFnTt1Rpx7MHj1hgEALDuoE4e5ow0cQz48cBxboENis9zewUoC7g==, tarball: https://pkg.pr.new/nuxt-component-meta@ef01cc7}
     version: 0.17.2
     hasBin: true
 
