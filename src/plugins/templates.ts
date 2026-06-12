@@ -35,7 +35,12 @@ export default function TemplatePlugin(options: NuxtUIOptions, appConfig: Record
     enforce: 'pre',
     vite: {
       async config(config) {
-        const alias = await writeTemplates(config.root || process.cwd())
+        // `config.root` is not resolved yet when `config` hooks run, so a
+        // CLI-provided root (e.g. `vite some/dir`) can still be relative here.
+        // Alias targets must be absolute: Vite 8 warns on relative targets and
+        // resolvers like @tailwindcss/vite reject them, which silently drops
+        // every theme class from the generated CSS.
+        const alias = await writeTemplates(path.resolve(config.root || '.'))
 
         return {
           resolve: {
