@@ -62,9 +62,10 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.codeC
   open: open.value
 }))
 
+// Safari does not propagate the `pre` height change to the root element when expanded, sync it manually (#6398)
 const rootRef = useTemplateRef('rootRef')
-const preEl = computed(() => rootRef.value?.querySelector('pre') ?? null)
-const { height: preHeight } = useElementSize(preEl, { width: 0, height: 0 }, { box: 'border-box' })
+const preEl = computed(() => rootRef.value?.querySelector('pre'))
+const { height: preHeight } = useElementSize(preEl, undefined, { box: 'border-box' })
 
 const codeHeight = computed(() => {
   if (!preEl.value || !rootRef.value) return 0
@@ -74,7 +75,7 @@ const codeHeight = computed(() => {
 </script>
 
 <template>
-  <div ref="rootRef" :style="{ '--ui-code-height': `${codeHeight}px` }" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <div ref="rootRef" :style="{ '--code-height': `${codeHeight}px` }" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <slot />
 
     <div :class="ui.footer({ class: props.ui?.footer })">
