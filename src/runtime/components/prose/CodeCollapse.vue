@@ -38,8 +38,7 @@ export interface ProseCodeCollapseSlots {
 </script>
 
 <script setup lang="ts">
-import { computed, useTemplateRef } from 'vue'
-import { useElementSize } from '@vueuse/core'
+import { computed } from 'vue'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../../composables/useComponentProps'
 import { useLocale } from '../../composables/useLocale'
@@ -61,21 +60,10 @@ const appConfig = useAppConfig() as ProseCodeCollapse['AppConfig']
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.codeCollapse || {}) })({
   open: open.value
 }))
-
-// Safari does not propagate the `pre` height change to the root element when expanded, sync it manually (#6398)
-const rootRef = useTemplateRef('rootRef')
-const preEl = computed(() => rootRef.value?.querySelector('pre'))
-const { height: preHeight } = useElementSize(preEl, undefined, { box: 'border-box' })
-
-const codeHeight = computed(() => {
-  if (!preEl.value || !rootRef.value) return 0
-  const offset = preEl.value.getBoundingClientRect().top - rootRef.value.getBoundingClientRect().top
-  return preHeight.value + offset
-})
 </script>
 
 <template>
-  <div ref="rootRef" :style="{ '--code-height': `${codeHeight}px` }" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <div :class="ui.root({ class: [props.ui?.root, props.class] })">
     <slot />
 
     <div :class="ui.footer({ class: props.ui?.footer })">
