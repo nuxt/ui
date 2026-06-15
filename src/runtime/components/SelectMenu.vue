@@ -315,7 +315,8 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.selectMenu |
   leading: isLeading.value || !!props.avatar || !!slots.leading,
   trailing: isTrailing.value || !!slots.trailing,
   fieldGroup: orientation.value,
-  virtualize: !!props.virtualize
+  virtualize: !!props.virtualize,
+  multiple: props.multiple
 }))
 
 function displayValue(value: GetItemValue<T, VK, ExcludeItem> | GetItemValue<T, VK, ExcludeItem>[]): string | undefined {
@@ -586,10 +587,9 @@ defineExpose({
   </DefineItemTemplate>
 
   <ComboboxRoot
-    :id="id"
     ref="comboboxRootRef"
     v-slot="{ modelValue, open }"
-    v-bind="({ ...rootProps, ...$attrs, ...ariaAttrs } as any)"
+    v-bind="(rootProps as any)"
     ignore-filter
     as-child
     :name="name"
@@ -598,7 +598,14 @@ defineExpose({
     @update:open="onUpdateOpen"
   >
     <ComboboxAnchor as-child>
-      <ComboboxTrigger ref="triggerRef" data-slot="base" :class="ui.base({ class: [props.ui?.base, props.class] })" tabindex="0">
+      <ComboboxTrigger
+        :id="id"
+        ref="triggerRef"
+        data-slot="base"
+        :class="ui.base({ class: [props.ui?.base, props.class] })"
+        tabindex="0"
+        v-bind="{ ...$attrs, ...ariaAttrs }"
+      >
         <span v-if="isLeading || !!props.avatar || !!slots.leading" data-slot="leading" :class="ui.leading({ class: props.ui?.leading })">
           <slot name="leading" :model-value="(modelValue as ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>)" :open="open" :ui="ui">
             <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" data-slot="leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />

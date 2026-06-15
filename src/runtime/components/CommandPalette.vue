@@ -447,7 +447,18 @@ const rootRef = useTemplateRef('rootRef')
 
 watch(filteredGroups, () => {
   nextTick(() => {
-    rootRef.value?.highlightFirstItem()
+    // Re-highlight the first item when results change (e.g. after debounced or
+    // async data renders). Only scroll it into view when the palette already has
+    // focus — otherwise results resolving while the palette is below the fold
+    // (e.g. `useLazyFetch`) would scroll the whole page to it.
+    const root = rootRef.value
+    // `$el` is on the component instance but not part of reka-ui's exposed type.
+    const rootEl = (root as unknown as { $el?: HTMLElement } | null)?.$el
+    if (rootEl?.contains(document.activeElement)) {
+      root?.highlightFirstItem()
+    } else {
+      root?.highlightSelected(undefined, false)
+    }
   })
 })
 
@@ -577,13 +588,13 @@ function onSelect(e: Event, item: T) {
       <UInput
         variant="none"
         :size="props.size"
-        v-bind="typeof props.input === 'object' ? props.input : {}"
         :placeholder="placeholder"
         :autofocus="props.autofocus"
         :loading="props.loading"
         :loading-icon="props.loadingIcon"
         :trailing-icon="props.trailingIcon"
         :icon="props.icon || appConfig.ui.icons.search"
+        v-bind="typeof props.input === 'object' ? props.input : {}"
         data-slot="input"
         :class="ui.input({ class: props.ui?.input })"
         @keydown.backspace="onBackspace"
