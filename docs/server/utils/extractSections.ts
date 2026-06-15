@@ -14,7 +14,6 @@ export function extractSections(markdown: string, sectionTitles: string[]): stri
   for (const line of lines) {
     if (inHeader) {
       if (line.startsWith('## ')) {
-        inHeader = false
         break
       }
       result.push(line)
