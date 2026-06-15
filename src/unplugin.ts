@@ -78,6 +78,14 @@ export interface NuxtUIOptions extends Omit<ModuleOptions, 'fonts' | 'colorMode'
    * @see https://ui.nuxt.com/docs/getting-started/installation/vue#scanpackages
    */
   scanPackages?: string[]
+  /**
+   * Root directory where the `.nuxt-ui` directory (generated theme templates) is created.
+   * Useful for setups like `electron-vite` where `config.root` points to a sub-directory
+   * (e.g. `src/renderer`) that Tailwind doesn't scan.
+   * @defaultValue `config.root`
+   * @see https://ui.nuxt.com/docs/getting-started/installation/vue#root
+   */
+  root?: string
 }
 
 export const runtimeDir = normalize(fileURLToPath(new URL('./runtime', import.meta.url)))
