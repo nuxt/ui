@@ -70,7 +70,7 @@ export interface ChatMessagesProps<T extends UIMessage[] = UIMessage[]> {
 }
 
 export type ChatMessagesSlots<T extends UIMessage[] = UIMessage[]> = {
-  default?(props?: {}): VNode[]
+  default?(props: { registerMessageRef: (id: string, element: ComponentPublicInstance | null) => void }): VNode[]
   indicator?(props: { ui: ChatMessages['ui'] }): VNode[]
   viewport?(props: { ui: ChatMessages['ui'], onClick: () => void }): VNode[]
 } & {
@@ -308,6 +308,10 @@ onMounted(() => {
     }, { childList: true, subtree: true })
   }
 })
+
+defineExpose({
+  registerMessageRef
+})
 </script>
 
 <template>
@@ -318,7 +322,7 @@ onMounted(() => {
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     :style="{ '--last-message-height': `${lastMessageHeight}px` }"
   >
-    <slot>
+    <slot :register-message-ref="registerMessageRef">
       <template v-for="message in props.messages" :key="message.id">
         <UChatMessage
           v-if="message.parts?.length"
