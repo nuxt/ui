@@ -40,7 +40,9 @@ export default function TemplatePlugin(options: NuxtUIOptions, appConfig: Record
         // Alias targets must be absolute: Vite 8 warns on relative targets and
         // resolvers like @tailwindcss/vite reject them, which silently drops
         // every theme class from the generated CSS.
-        const alias = await writeTemplates(path.resolve(config.root || '.'))
+        // `options.root` lets setups like `electron-vite` override the location
+        // when `config.root` points to a sub-directory Tailwind doesn't scan.
+        const alias = await writeTemplates(path.resolve(options.root || config.root || '.'))
 
         return {
           resolve: {
