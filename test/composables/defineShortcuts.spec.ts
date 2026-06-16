@@ -215,7 +215,15 @@ describe('defineShortcuts', () => {
       const handler = vi.fn()
       await registerShortcuts({ alt_k: handler })
 
-      fireKeydown('k', { altKey: true })
+      fireKeydown('k', { altKey: true, code: 'KeyK' })
+      expect(handler).toHaveBeenCalledOnce()
+    })
+
+    it('alt_k triggers when Alt produces a special character (macOS)', async () => {
+      const handler = vi.fn()
+      await registerShortcuts({ alt_k: handler })
+
+      fireKeydown('˚', { altKey: true, code: 'KeyK' })
       expect(handler).toHaveBeenCalledOnce()
     })
 
@@ -223,7 +231,7 @@ describe('defineShortcuts', () => {
       const handler = vi.fn()
       await registerShortcuts({ k: handler })
 
-      fireKeydown('k', { altKey: true })
+      fireKeydown('˚', { altKey: true, code: 'KeyK' })
       expect(handler).not.toHaveBeenCalled()
     })
 
@@ -231,7 +239,7 @@ describe('defineShortcuts', () => {
       const handler = vi.fn()
       await registerShortcuts({ alt_k: handler })
 
-      fireKeydown('k')
+      fireKeydown('k', { code: 'KeyK' })
       expect(handler).not.toHaveBeenCalled()
     })
   })

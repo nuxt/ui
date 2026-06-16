@@ -1,33 +1,17 @@
 <script setup lang="ts">
-import colors from 'tailwindcss/colors'
-
 const route = useRoute()
 const appConfig = useAppConfig()
-const colorMode = useColorMode()
-const { style, link } = useTheme()
+const { style, link, color } = useTheme()
 
-const { data: navigation } = await useAsyncData('navigation', () => queryCollectionNavigation('docs', ['framework', 'category', 'description']))
-const { data: files } = useLazyAsyncData('search', () => queryCollectionSearchSections('docs', {
-  ignoredTags: ['style']
-}), {
-  server: false
-})
-
-const color = computed(() => colorMode.value === 'dark' ? (colors as any)[appConfig.ui.colors.neutral][900] : 'white')
+const { data: navigation } = await useFetch('/api/navigation.json')
 
 useHead({
   meta: [
     { name: 'viewport', content: 'width=device-width, initial-scale=1' },
     { key: 'theme-color', name: 'theme-color', content: color }
   ],
-  link: computed(() => [
-    // { rel: 'icon', type: 'image/svg+xml', href: '/icon.svg' },
-    ...link.value
-  ]),
-  style,
-  htmlAttrs: {
-    lang: 'en'
-  }
+  link,
+  style
 })
 
 if (import.meta.server) {
@@ -75,7 +59,7 @@ provide('navigation', rootNavigation)
         <ClientOnly>
           <Chat />
 
-          <Search :files="files" :navigation="navigationByFramework" />
+          <Search :navigation="navigationByFramework" />
         </ClientOnly>
       </template>
     </div>

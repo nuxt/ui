@@ -7,7 +7,7 @@ import type { ComponentConfig } from '../types/tv'
 
 type DashboardGroup = ComponentConfig<typeof theme, AppConfig, 'dashboardGroup'>
 
-export interface DashboardGroupProps extends Pick<UseResizableProps, 'storage' | 'storageKey' | 'persistent' | 'unit'> {
+export interface DashboardGroupProps extends Pick<UseResizableProps, 'storage' | 'storageKey' | 'storageOptions' | 'persistent' | 'unit'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -52,6 +52,7 @@ const sidebarCollapsed = ref(false)
 provideDashboardContext({
   storage: props.storage,
   storageKey: props.storageKey,
+  storageOptions: props.storageOptions,
   persistent: props.persistent,
   unit: props.unit,
   sidebarOpen,

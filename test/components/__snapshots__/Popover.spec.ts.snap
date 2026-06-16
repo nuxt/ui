@@ -98,6 +98,24 @@ exports[`Popover > renders with open correctly 1`] = `
 <!--teleport end-->"
 `;
 
+exports[`Popover > renders with reference correctly 1`] = `
+"<!--v-if-->
+<!--v-if-->
+<!--teleport start-->
+
+
+
+<div data-reka-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
+  <div data-dismissable-layer="" style="--reka-popover-content-transform-origin: var(--reka-popper-transform-origin); --reka-popover-content-available-width: var(--reka-popper-available-width); --reka-popover-content-available-height: var(--reka-popper-available-height); --reka-popover-trigger-width: var(--reka-popper-anchor-width); --reka-popover-trigger-height: var(--reka-popper-anchor-height); animation: none;" tabindex="-1" data-slot="content" class="bg-default shadow-lg rounded-md ring ring-default data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] origin-(--reka-popover-content-transform-origin) focus:outline-none pointer-events-auto" id="reka-popover-content-v-0-0-0" data-state="open" aria-labelledby="" role="dialog" data-side="bottom" data-align="center">Content slot
+    <!--v-if-->
+  </div>
+</div>
+
+
+
+<!--teleport end-->"
+`;
+
 exports[`Popover > renders with ui correctly 1`] = `
 "<!--v-if-->
 <!--v-if-->

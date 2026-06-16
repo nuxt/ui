@@ -205,7 +205,8 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.select || {}
   leading: isLeading.value || !!props.avatar || !!slots.leading,
   trailing: isTrailing.value || !!slots.trailing,
   fieldGroup: orientation.value,
-  position: position.value
+  position: position.value,
+  multiple: props.multiple
 }))
 
 const groups = computed<SelectItem[][]>(() =>
@@ -292,6 +293,16 @@ function isSelectItem(item: SelectItem): item is Exclude<SelectItem, SelectValue
   return typeof item === 'object' && item !== null
 }
 
+function onTriggerClick(open: boolean) {
+  // A real pointer click opens the menu via `pointerdown` (so `open` is already `true`
+  // here), and keyboard activation opens via `keydown`. A `<label for>` click only
+  // forwards a `click` with no `pointerdown`, so the menu is still closed. In that case
+  // re-dispatch a `pointerdown` to open it, matching SelectMenu (Combobox opens on click).
+  if (!open) {
+    triggerRef.value?.$el?.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true, button: 0 }))
+  }
+}
+
 const viewportRef = useTemplateRef('viewportRef')
 
 defineExpose({
@@ -322,6 +333,7 @@ defineExpose({
       data-slot="base"
       :class="ui.base({ class: [props.ui?.base, props.class] })"
       v-bind="{ ...$attrs, ...ariaAttrs }"
+      @click="onTriggerClick(open)"
     >
       <span v-if="isLeading || !!props.avatar || !!slots.leading" data-slot="leading" :class="ui.leading({ class: props.ui?.leading })">
         <slot name="leading" :model-value="(modelValue as ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>)" :open="open" :ui="ui">

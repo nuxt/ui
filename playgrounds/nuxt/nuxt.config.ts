@@ -18,11 +18,15 @@ export default defineNuxtConfig({
   vite: {
     optimizeDeps: {
       include: [
+        '@ai-sdk/vue',
+        '@comark/vue',
+        '@comark/vue/plugins/highlight',
         '@vueuse/core',
-        'tailwindcss/colors',
-        'vaul-vue',
+        '@vueuse/integrations/useFuse',
+        'ai',
         'tailwind-variants',
-        '@vueuse/integrations/useFuse'
+        'tailwindcss/colors',
+        'vaul-vue'
       ]
     }
   }

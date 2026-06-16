@@ -47,7 +47,7 @@ props:
 ---
 ::
 
-### Position :badge{label="Soon" class="align-text-top"}
+### Position :badge{label="4.8+" class="align-text-top"}
 
 Use the `position` prop to change the position of the content of the Separator. Defaults to `center`.
 

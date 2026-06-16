@@ -54,6 +54,7 @@ import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
+import { usePrefix } from '../composables/usePrefix'
 import { tv } from '../utils/tv'
 import UButton from './Button.vue'
 import UContainer from './Container.vue'
@@ -66,6 +67,7 @@ const slots = defineSlots<PageHeroSlots>()
 const props = useComponentProps('pageHero', _props)
 
 const appConfig = useAppConfig() as PageHero['AppConfig']
+const prefix = usePrefix()
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pageHero || {}) })({
@@ -119,7 +121,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pageHero || 
       </div>
 
       <slot v-if="!!slots.default" />
-      <div v-else-if="props.orientation === 'horizontal'" class="hidden lg:block" />
+      <div v-else-if="props.orientation === 'horizontal'" :class="prefix('hidden lg:block')" />
     </UContainer>
 
     <slot name="bottom" />

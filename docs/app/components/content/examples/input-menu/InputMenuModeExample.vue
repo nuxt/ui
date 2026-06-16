@@ -6,7 +6,7 @@ const value = ref('')
 <template>
   <UInputMenu
     v-model="value"
-    autocomplete
+    mode="autocomplete"
     :items="items"
     :trailing-icon="false"
     :content="{ hideWhenEmpty: true }"

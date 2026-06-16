@@ -7,11 +7,11 @@ description: 'A composable to display toast notifications in your app.'
 
 Use the auto-imported `useToast` composable to display [Toast](/docs/components/toast) notifications.
 
-```vue
-<script setup lang="ts">
-const toast = useToast()
-</script>
-```
+::component-example
+---
+name: 'use-toast-example'
+---
+::
 
 - The `useToast` composable uses Nuxt's `useState` to manage the toast state, ensuring reactivity across your application.
 - A maximum of 5 toasts are displayed at a time. When adding a new toast that would exceed this limit, the oldest toast is automatically removed.

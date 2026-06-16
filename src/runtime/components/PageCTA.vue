@@ -56,6 +56,7 @@ import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
+import { usePrefix } from '../composables/usePrefix'
 import { tv } from '../utils/tv'
 import UButton from './Button.vue'
 import UContainer from './Container.vue'
@@ -69,6 +70,7 @@ const slots = defineSlots<PageCTASlots>()
 const props = useComponentProps('pageCTA', _props)
 
 const appConfig = useAppConfig() as PageCTA['AppConfig']
+const prefix = usePrefix()
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pageCTA || {}) })({
@@ -117,7 +119,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pageCTA || {
       </div>
 
       <slot v-if="!!slots.default" />
-      <div v-else-if="props.orientation === 'horizontal'" class="hidden lg:block" />
+      <div v-else-if="props.orientation === 'horizontal'" :class="prefix('hidden lg:block')" />
     </UContainer>
 
     <slot name="bottom" />

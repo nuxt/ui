@@ -435,6 +435,14 @@ import { isTextUIPart } from 'ai'
 ```
 ::
 
+### Expose
+
+When accessing the component via a template ref, you can use the following:
+
+| Name | Type |
+| ---- | ---- |
+| `registerMessageRef(id: string, element: ComponentPublicInstance \| null)`{lang="ts-type"} | `void`{lang="ts-type"} |
+
 ## Theme
 
 :component-theme

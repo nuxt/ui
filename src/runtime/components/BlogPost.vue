@@ -62,6 +62,7 @@ import { Primitive, useDateFormatter } from 'reka-ui'
 import { useAppConfig } from '#imports'
 import { useLocale } from '../composables/useLocale'
 import { useComponentProps } from '../composables/useComponentProps'
+import { usePrefix } from '../composables/usePrefix'
 import ImageComponent from '#build/ui-image-component'
 import { getSlotChildrenText } from '../utils'
 import { tv } from '../utils/tv'
@@ -84,6 +85,7 @@ const props = useComponentProps('blogPost', _props)
 const { locale } = useLocale()
 const appConfig = useAppConfig() as BlogPost['AppConfig']
 const formatter = useDateFormatter(locale.value.code)
+const prefix = usePrefix()
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.blogPost || {}) })({
@@ -124,6 +126,14 @@ const ariaLabel = computed(() => {
 
 <template>
   <Primitive :as="props.as" :data-orientation="props.orientation" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })" @click="props.onClick">
+    <ULink
+      v-if="props.to"
+      :aria-label="ariaLabel"
+      v-bind="{ to: props.to, target: props.target, ...$attrs }"
+      :class="prefix('focus:outline-none absolute inset-0')"
+      raw
+    />
+
     <div v-if="props.image || !!slots.header" data-slot="header" :class="ui.header({ class: props.ui?.header })">
       <slot name="header" :ui="ui">
         <component
@@ -136,16 +146,6 @@ const ariaLabel = computed(() => {
     </div>
 
     <div data-slot="body" :class="ui.body({ class: props.ui?.body })">
-      <ULink
-        v-if="props.to"
-        :aria-label="ariaLabel"
-        v-bind="{ to: props.to, target: props.target, ...$attrs }"
-        class="focus:outline-none peer"
-        raw
-      >
-        <span class="absolute inset-0" aria-hidden="true" />
-      </ULink>
-
       <slot name="body">
         <div v-if="(date || !!slots.date) || (props.badge || !!slots.badge)" data-slot="meta" :class="ui.meta({ class: props.ui?.meta })">
           <slot name="badge">

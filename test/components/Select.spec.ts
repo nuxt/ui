@@ -73,7 +73,9 @@ describe('Select', () => {
     ['with arrow', { props: { ...props, arrow: true } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { ...props, size } }]),
     ...variants.map((variant: string) => [`with primary variant ${variant}`, { props: { ...props, variant } }]),
+    ...variants.map((variant: string) => [`with primary variant ${variant} highlight`, { props: { ...props, variant, highlight: true } }]),
     ...variants.map((variant: string) => [`with neutral variant ${variant}`, { props: { ...props, variant, color: 'neutral' } }]),
+    ...variants.map((variant: string) => [`with neutral variant ${variant} highlight`, { props: { ...props, variant, color: 'neutral', highlight: true } }]),
     ['with ariaLabel', { props, attrs: { 'aria-label': 'Aria label' } }],
     ['with class', { props: { ...props, class: 'rounded-full' } }],
     ['with ui', { props: { ...props, ui: { group: 'p-2' } } }],
@@ -107,6 +109,18 @@ describe('Select', () => {
       expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [[spec.expected]] })
     }
   )
+
+  it('with trailing false should not render trailing section', () => {
+    const wrapper = mount(Select, {
+      props: {
+        ...props,
+        trailing: false
+      }
+    })
+
+    expect(wrapper.find('[data-slot="trailing"]').exists()).toBe(false)
+    expect(wrapper.find('[data-slot="trailingIcon"]').exists()).toBe(false)
+  })
 
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(Select, {
@@ -204,6 +218,31 @@ describe('Select', () => {
       const input = wrapper.findComponent({ name: 'SelectRoot' })
       await input.vm.$emit('update:open', false)
       expect(wrapper.emitted()).toMatchObject({ blur: [[{ type: 'blur' }]] })
+    })
+  })
+
+  describe('label', () => {
+    test('clicking the FormField label opens the menu', async () => {
+      const wrapper = await renderForm({
+        slotVars: {
+          items: ['Option 1', 'Option 2']
+        },
+        slotTemplate: `
+        <UFormField name="value" label="Label">
+          <USelect :items="items" :portal="false" />
+        </UFormField>
+        `
+      })
+
+      const trigger = wrapper.find('[data-slot="base"]')
+      expect(trigger.attributes('aria-expanded')).toBe('false')
+
+      // Native `<label for>` clicks forward a `click` to the trigger without a
+      // preceding `pointerdown`, so the menu is still closed when the click lands.
+      await trigger.trigger('click')
+      await flushPromises()
+
+      expect(trigger.attributes('aria-expanded')).toBe('true')
     })
   })
 

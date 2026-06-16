@@ -55,6 +55,7 @@ export default defineLocale<Messages>({
     },
     contentSearch: {
       links: 'ລິ້ງ',
+      search: 'ຜົນໄດ້ຮັບ',
       theme: 'ທີມ'
     },
     contentSearchButton: {

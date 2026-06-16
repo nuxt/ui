@@ -55,6 +55,7 @@ export default defineLocale<Messages>({
     },
     contentSearch: {
       links: 'Tautan',
+      search: 'Hasil',
       theme: 'Tema'
     },
     contentSearchButton: {

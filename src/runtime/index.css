@@ -5,6 +5,13 @@
 @variant light (&:where(.light, .light *));
 @variant dark (&:where(.dark, .dark *));
 
+@layer base {
+  /* Chromium applies an `outline-offset` on focused links, reset it so focus outlines hug elements consistently */
+  a:focus-visible {
+    outline-offset: 0;
+  }
+}
+
 @layer theme {
   :root, :host {
     --ui-header-height: 4rem;

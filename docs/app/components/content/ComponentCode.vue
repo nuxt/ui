@@ -8,8 +8,6 @@ import { CalendarDate, Time } from '@internationalized/date'
 import * as theme from '#build/ui'
 import { get, set } from '#ui/utils'
 
-const { track } = useAnalytics()
-
 interface CastImport {
   name: string
   from: string
@@ -471,19 +469,7 @@ const { data: ast } = useAsyncData(codeKey, async () => {
       </div>
 
       <ClientOnly>
-        <UTooltip v-if="playgroundUrl" text="Open in playground" :content="{ side: 'right' }">
-          <UButton
-            :to="playgroundUrl"
-            target="_blank"
-            icon="i-lucide-play"
-            color="neutral"
-            variant="outline"
-            size="sm"
-            class="absolute -bottom-[13px] -right-[13px] z-1 rounded-full lg:opacity-0 lg:group-hover/component:opacity-100 ring-muted transition-opacity duration-200"
-            aria-label="Open in playground"
-            @click="track('Playground Opened', { component: camelName, source: 'code' })"
-          />
-        </UTooltip>
+        <ComponentPlaygroundButton v-if="playgroundUrl" :to="playgroundUrl" :component="camelName" />
 
         <LazyComponentThemeVisualizer
           :container="componentContainer"

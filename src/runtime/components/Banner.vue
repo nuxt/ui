@@ -70,6 +70,7 @@ import { Primitive } from 'reka-ui'
 import { useHead, useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { useLocale } from '../composables/useLocale'
+import { usePrefix } from '../composables/usePrefix'
 import { tv } from '../utils/tv'
 import ULink from './Link.vue'
 import UContainer from './Container.vue'
@@ -86,6 +87,7 @@ const props = useComponentProps('banner', _props)
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as Banner['AppConfig']
+const prefix = usePrefix()
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.banner || {}) })({
@@ -159,11 +161,10 @@ function onClose() {
       v-if="props.to"
       :aria-label="props.title"
       v-bind="{ to: props.to, target: props.target, ...$attrs }"
-      class="focus:outline-none"
-      tabindex="-1"
+      :class="prefix('focus:outline-none')"
       raw
     >
-      <span class="absolute inset-0" aria-hidden="true" />
+      <span :class="prefix('absolute inset-0')" aria-hidden="true" />
     </ULink>
 
     <UContainer data-slot="container" :class="ui.container({ class: props.ui?.container })">

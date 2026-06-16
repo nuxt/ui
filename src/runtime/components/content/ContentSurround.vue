@@ -58,6 +58,7 @@ import { createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../../composables/useComponentProps'
 import { useLocale } from '../../composables/useLocale'
+import { usePrefix } from '../../composables/usePrefix'
 import { tv } from '../../utils/tv'
 import ULink from '../Link.vue'
 import UIcon from '../Icon.vue'
@@ -72,6 +73,7 @@ const props = useComponentProps<ContentSurroundProps<T>>('contentSurround', _pro
 
 const { dir } = useLocale()
 const appConfig = useAppConfig() as ContentSurround['AppConfig']
+const prefix = usePrefix()
 
 const [DefineLinkTemplate, ReuseLinkTemplate] = createReusableTemplate<{ link?: ContentSurroundLink, icon: IconProps['name'], direction: 'left' | 'right' }>({
   props: {
@@ -113,7 +115,7 @@ const nextIcon = computed(() => props.nextIcon || (dir.value === 'rtl' ? appConf
         </p>
       </slot>
     </ULink>
-    <span v-else class="hidden sm:block">&nbsp;</span>
+    <span v-else :class="prefix('hidden sm:block')">&nbsp;</span>
   </DefineLinkTemplate>
 
   <Primitive v-if="props.surround" :as="props.as" v-bind="$attrs" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">

@@ -255,18 +255,18 @@ props:
 ---
 ::
 
-### Autocomplete :badge{label="4.6+" class="align-text-top"}
+### Mode :badge{label="4.8+" class="align-text-top"}
 
-Use the `autocomplete` prop to turn the InputMenu into a free-form text input with suggestions. The `modelValue` becomes the input text (`string`) instead of a selected item.
+Set the `mode` prop to `autocomplete` to turn the InputMenu into a free-form text input with suggestions. The `modelValue` becomes the input text (`string`) instead of a selected item.
 
 ::component-example
 ---
-name: 'input-menu-autocomplete-example'
+name: 'input-menu-mode-example'
 ---
 ::
 
 ::caution
-When `autocomplete` is `true`, `multiple`, `by`, `resetSearchTermOnSelect` and `resetModelValueOnClear` are not applicable.
+When `mode` is `autocomplete`, `multiple`, `by`, `resetSearchTermOnSelect` and `resetModelValueOnClear` are not applicable.
 ::
 
 ::tip

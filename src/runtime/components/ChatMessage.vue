@@ -24,6 +24,10 @@ export interface ChatMessageProps<TMetadata = unknown, TDataParts extends UIData
    */
   variant?: ChatMessage['variants']['variant']
   /**
+   * @defaultValue 'neutral'
+   */
+  color?: ChatMessage['variants']['color']
+  /**
    * @defaultValue 'left'
    */
   side?: ChatMessage['variants']['side']
@@ -49,8 +53,10 @@ export interface ChatMessageProps<TMetadata = unknown, TDataParts extends UIData
 }
 
 export interface ChatMessageSlots<TMetadata = unknown, TDataParts extends UIDataTypes = UIDataTypes, TTools extends UITools = UITools> {
+  header?(props: UIMessage<TMetadata, TDataParts, TTools>): VNode[]
   leading?(props: UIMessage<TMetadata, TDataParts, TTools> & { avatar: ChatMessageProps<TMetadata, TDataParts, TTools>['avatar'], ui: ChatMessage['ui'] }): VNode[]
   files?(props: Omit<UIMessage<TMetadata, TDataParts, TTools>, 'parts'> & { parts: FileUIPart[] }): VNode[]
+  body?(props: UIMessage<TMetadata, TDataParts, TTools>): VNode[]
   content?(props: UIMessage<TMetadata, TDataParts, TTools> & { content?: string }): VNode[]
   actions?(props: UIMessage<TMetadata, TDataParts, TTools> & { actions: ChatMessageProps<TMetadata, TDataParts, TTools>['actions'] }): VNode[]
 }
@@ -80,11 +86,12 @@ const appConfig = useAppConfig() as ChatMessage['AppConfig']
 const fileParts = computed(() => props.parts?.filter((part): part is FileUIPart => part.type === 'file') ?? [])
 const textParts = computed(() => props.parts?.filter((part): part is TextUIPart => part.type === 'text') ?? [])
 
-const messageProps = computed(() => omit(props, ['as', 'icon', 'avatar', 'variant', 'side', 'actions', 'compact', 'class', 'ui', 'content']))
+const messageProps = computed(() => omit(props, ['as', 'icon', 'avatar', 'variant', 'color', 'side', 'actions', 'compact', 'class', 'ui', 'content']))
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.chatMessage || {}) })({
   variant: props.variant,
+  color: props.color,
   side: props.side,
   leading: !!props.icon || !!props.avatar || !!slots.leading,
   actions: !!props.actions || !!slots.actions,
@@ -94,8 +101,12 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.chatMessage 
 
 <template>
   <Primitive :as="props.as" :data-role="props.role" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <div v-if="!!slots.files && fileParts.length" data-slot="files" :class="ui.files({ class: props.ui?.files })">
-      <slot name="files" v-bind="{ ...messageProps, parts: fileParts }" />
+    <div v-if="(!!slots.files && fileParts.length) || !!slots.header" data-slot="header" :class="ui.header({ class: props.ui?.header })">
+      <slot name="header" v-bind="{ ...messageProps }">
+        <div v-if="!!slots.files && fileParts.length" data-slot="files" :class="ui.files({ class: props.ui?.files })">
+          <slot name="files" v-bind="{ ...messageProps, parts: fileParts }" />
+        </div>
+      </slot>
     </div>
 
     <div data-slot="container" :class="ui.container({ class: props.ui?.container })">
@@ -106,31 +117,35 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.chatMessage 
         </slot>
       </div>
 
-      <div v-if="props.content || textParts.length || !!slots.content" data-slot="content" :class="ui.content({ class: props.ui?.content })">
-        <slot name="content" v-bind="{ ...messageProps, content: props.content }">
-          <template v-if="props.content">
-            {{ props.content }}
-          </template>
-          <template v-else>
-            <template v-for="(part, index) in textParts" :key="`${props.id}-${part.type}-${index}`">
-              {{ part.text }}
-            </template>
-          </template>
-        </slot>
-      </div>
+      <div v-if="props.content || textParts.length || !!slots.content || props.actions || !!slots.actions || !!slots.body" data-slot="body" :class="ui.body({ class: props.ui?.body })">
+        <slot name="body" v-bind="{ ...messageProps }">
+          <div v-if="props.content || textParts.length || !!slots.content" data-slot="content" :class="ui.content({ class: props.ui?.content })">
+            <slot name="content" v-bind="{ ...messageProps, content: props.content }">
+              <template v-if="props.content">
+                {{ props.content }}
+              </template>
+              <template v-else>
+                <template v-for="(part, index) in textParts" :key="`${props.id}-${part.type}-${index}`">
+                  {{ part.text }}
+                </template>
+              </template>
+            </slot>
+          </div>
 
-      <div v-if="props.actions || !!slots.actions" data-slot="actions" :class="ui.actions({ class: props.ui?.actions })">
-        <slot name="actions" v-bind="{ ...messageProps, actions: props.actions }">
-          <UTooltip v-for="(action, index) in props.actions" :key="index" :text="action.label">
-            <UButton
-              size="sm"
-              color="neutral"
-              variant="ghost"
-              v-bind="omit(action, ['onClick'])"
-              :label="undefined"
-              @click="typeof action.onClick === 'function' ? action.onClick($event, messageProps) : undefined"
-            />
-          </UTooltip>
+          <div v-if="props.actions || !!slots.actions" data-slot="actions" :class="ui.actions({ class: props.ui?.actions })">
+            <slot name="actions" v-bind="{ ...messageProps, actions: props.actions }">
+              <UTooltip v-for="(action, index) in props.actions" :key="index" :text="action.label">
+                <UButton
+                  size="sm"
+                  color="neutral"
+                  variant="ghost"
+                  v-bind="omit(action, ['onClick'])"
+                  :label="undefined"
+                  @click="typeof action.onClick === 'function' ? action.onClick($event, messageProps) : undefined"
+                />
+              </UTooltip>
+            </slot>
+          </div>
         </slot>
       </div>
     </div>

@@ -40,7 +40,7 @@ type IsClearUsed<M extends boolean, C extends boolean | object> = M extends fals
   ? (C extends true ? null : C extends object ? null : never)
   : never
 
-export interface InputMenuProps<T extends ArrayOrNested<InputMenuItem> = ArrayOrNested<InputMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false, Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>, C extends boolean | object = false> extends Pick<ComboboxRootProps<T>, 'open' | 'defaultOpen' | 'disabled' | 'name' | 'resetSearchTermOnBlur' | 'resetSearchTermOnSelect' | 'resetModelValueOnClear' | 'highlightOnHover' | 'openOnClick' | 'openOnFocus' | 'by'>, UseComponentIconsProps, /** @vue-ignore */ Omit<InputHTMLAttributes, 'autocomplete' | 'disabled' | 'name' | 'type' | 'placeholder' | 'autofocus' | 'maxlength' | 'minlength' | 'pattern' | 'size' | 'min' | 'max' | 'step'> {
+export interface InputMenuProps<T extends ArrayOrNested<InputMenuItem> = ArrayOrNested<InputMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false, Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>, C extends boolean | object = false> extends Pick<ComboboxRootProps<T>, 'open' | 'defaultOpen' | 'disabled' | 'name' | 'resetSearchTermOnBlur' | 'resetSearchTermOnSelect' | 'resetModelValueOnClear' | 'highlightOnHover' | 'openOnClick' | 'openOnFocus' | 'by'>, UseComponentIconsProps, /** @vue-ignore */ Omit<InputHTMLAttributes, 'disabled' | 'name' | 'type' | 'placeholder' | 'autofocus' | 'maxlength' | 'minlength' | 'pattern' | 'size' | 'min' | 'max' | 'step'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -157,11 +157,12 @@ export interface InputMenuProps<T extends ArrayOrNested<InputMenuItem> = ArrayOr
   /** Keep the mobile text size on all breakpoints. */
   fixed?: boolean
   /**
-   * When `true`, the input accepts free-form text with optional suggestions.
-   * The `modelValue` becomes the input text (string) instead of a selected item.
-   * @defaultValue false
+   * The behavior of the InputMenu.
+   * - `combobox`: select one (or many) items from a list of suggestions.
+   * - `autocomplete`: free-form text input with optional suggestions. The `modelValue` becomes the input text (`string`) instead of a selected item.
+   * @defaultValue 'combobox'
    */
-  autocomplete?: boolean
+  mode?: 'combobox' | 'autocomplete'
   /**
    * Determines if custom user input that does not exist in options can be added.
    * @defaultValue false
@@ -230,7 +231,7 @@ export interface InputMenuSlots<
 </script>
 
 <script setup lang="ts" generic="T extends ArrayOrNested<InputMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false, Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>, C extends boolean | object = false">
-import { computed, useTemplateRef, toRef, onMounted, toRaw, nextTick, watch } from 'vue'
+import { computed, ref, useTemplateRef, toRef, onMounted, toRaw, nextTick, watch } from 'vue'
 import { TagsInputRoot, TagsInputItem, TagsInputItemText, TagsInputItemDelete, TagsInputInput } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
 import { Combobox, Autocomplete } from 'reka-ui/namespaced'
@@ -264,7 +265,8 @@ const _props = withDefaults(defineProps<InputMenuProps<T, VK, M, Mod, C>>(), {
   resetSearchTermOnBlur: true,
   resetSearchTermOnSelect: true,
   resetModelValueOnClear: true,
-  virtualize: false
+  virtualize: false,
+  mode: 'combobox'
 })
 const emits = defineEmits<InputMenuEmits<T, VK, M, Mod, C>>()
 const slots = defineSlots<InputMenuSlots<T, VK, M, Mod, C>>()
@@ -277,9 +279,12 @@ const { t } = useLocale()
 const appConfig = useAppConfig() as InputMenu['AppConfig']
 const { filterGroups } = useFilter()
 
+const isAutocomplete = computed(() => props.mode === 'autocomplete')
+
 const rootPropsPick = reactivePick(props, 'as', 'modelValue', 'defaultValue', 'open', 'defaultOpen', 'required', 'multiple', 'resetSearchTermOnBlur', 'resetSearchTermOnSelect', 'resetModelValueOnClear', 'highlightOnHover', 'openOnClick', 'openOnFocus', 'by')
-const rootProps = useForwardProps(props.autocomplete ? reactiveOmit(rootPropsPick, 'multiple', 'resetSearchTermOnSelect', 'resetModelValueOnClear', 'by') : rootPropsPick, emits)
-const Component = computed(() => props.autocomplete ? Autocomplete : Combobox)
+const rootPropsOmitted = reactiveOmit(rootPropsPick, 'multiple', 'resetSearchTermOnSelect', 'resetModelValueOnClear', 'by')
+const rootProps = useForwardProps(computed(() => isAutocomplete.value ? rootPropsOmitted : rootPropsPick), emits)
+const Component = computed(() => isAutocomplete.value ? Autocomplete : Combobox)
 const portalProps = usePortal(toRef(() => props.portal))
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: 'popper' }) as ComboboxContentProps)
 const arrowProps = toRef(() => defu(props.arrow, { rounded: true }) as ComboboxArrowProps)
@@ -386,7 +391,7 @@ function autoFocus() {
 
 onMounted(() => {
   nextTick(() => {
-    if (props.autocomplete) {
+    if (isAutocomplete.value) {
       searchTerm.value = String(props.modelValue ?? props.defaultValue ?? '')
     } else {
       searchTerm.value = ''
@@ -399,7 +404,7 @@ onMounted(() => {
 })
 
 watch(() => props.modelValue, (newValue) => {
-  if (props.autocomplete) {
+  if (isAutocomplete.value) {
     searchTerm.value = String(newValue ?? '')
   }
 })
@@ -431,7 +436,7 @@ function onUpdate(value: any) {
   emitFormChange()
   emitFormInput()
 
-  if (props.autocomplete) {
+  if (isAutocomplete.value) {
     searchTerm.value = String(value ?? '')
   } else if (props.resetSearchTermOnSelect) {
     searchTerm.value = ''
@@ -439,7 +444,7 @@ function onUpdate(value: any) {
 }
 
 function onInputUpdate(value: string) {
-  if (!props.autocomplete) {
+  if (!isAutocomplete.value) {
     searchTerm.value = value
   }
 }
@@ -454,7 +459,10 @@ function onFocus(event: FocusEvent) {
   emitFormFocus()
 }
 
+const isOpen = ref(false)
 function onUpdateOpen(value: boolean) {
+  isOpen.value = value
+
   let timeoutId
 
   if (!value) {
@@ -465,7 +473,7 @@ function onUpdateOpen(value: boolean) {
 
     // Since we use `displayValue` prop inside ComboboxInput we should reset searchTerm manually
     // https://reka-ui.com/docs/components/combobox#api-reference
-    if (!props.autocomplete && props.resetSearchTermOnBlur) {
+    if (!isAutocomplete.value && props.resetSearchTermOnBlur) {
       const STATE_ANIMATION_DELAY_MS = 100
 
       timeoutId = setTimeout(() => {
@@ -525,6 +533,21 @@ function onClear() {
 }
 
 const viewportRef = useTemplateRef('viewportRef')
+
+const comboboxRootRef = useTemplateRef('comboboxRootRef')
+
+// reka-ui only re-highlights the first item when the list goes from empty to non-empty.
+// With `create-item`, the create item is always registered so the count never drops to 0,
+// leaving the highlight stale when async `items` load. Re-highlight when items change while open.
+// Wait an extra tick so freshly mounted items are registered in reka-ui's collection before highlighting.
+watch(() => props.items, async () => {
+  if (!isOpen.value) {
+    return
+  }
+
+  await nextTick()
+  comboboxRootRef.value?.highlightFirstItem?.()
+}, { flush: 'post' })
 
 defineExpose({
   inputRef: toRef(() => inputRef.value?.$el as HTMLInputElement),
@@ -596,7 +619,7 @@ defineExpose({
         <span data-slot="itemTrailing" :class="ui.itemTrailing({ class: [props.ui?.itemTrailing, isInputItem(item) && item.ui?.itemTrailing] })">
           <slot name="item-trailing" :item="(item as NestedItem<T>)" :index="index" :ui="ui" />
 
-          <Component.ItemIndicator v-if="!props.autocomplete" as-child>
+          <Component.ItemIndicator v-if="!isAutocomplete" as-child>
             <UIcon :name="props.selectedIcon || appConfig.ui.icons.check" data-slot="itemTrailingIcon" :class="ui.itemTrailingIcon({ class: [props.ui?.itemTrailingIcon, isInputItem(item) && item.ui?.itemTrailingIcon] })" />
           </Component.ItemIndicator>
         </span>
@@ -605,20 +628,21 @@ defineExpose({
   </DefineItemTemplate>
 
   <Component.Root
+    ref="comboboxRootRef"
     v-slot="{ modelValue, open }"
     v-bind="rootProps"
     :name="name"
     :disabled="disabled"
     data-slot="root"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
-    :as-child="!!props.multiple && !props.autocomplete"
+    :as-child="!!props.multiple && !isAutocomplete"
     ignore-filter
     @update:model-value="onUpdate"
     @update:open="onUpdateOpen"
   >
     <Component.Anchor :as-child="!props.multiple" data-slot="base" :class="ui.base({ class: props.ui?.base })">
       <TagsInputRoot
-        v-if="props.multiple && !props.autocomplete"
+        v-if="props.multiple && !isAutocomplete"
         v-slot="{ modelValue: tags }"
         :model-value="(modelValue as string[])"
         :disabled="disabled"
@@ -660,7 +684,7 @@ defineExpose({
         v-else
         :id="id"
         ref="inputRef"
-        v-bind="{ ...(!props.autocomplete ? { displayValue } : {}), ...$attrs, ...ariaAttrs }"
+        v-bind="{ ...(!isAutocomplete ? { displayValue } : {}), ...$attrs, ...ariaAttrs }"
         :type="props.type"
         :placeholder="props.placeholder"
         :required="props.required"

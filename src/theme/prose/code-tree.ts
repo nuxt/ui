@@ -7,7 +7,7 @@ export default (options: Required<ModuleOptions>) => ({
     item: '',
     listWithChildren: 'ms-4.5 border-s border-default',
     itemWithChildren: 'ps-1.5 -ms-px',
-    link: 'relative group peer w-full px-2.5 py-1.5 before:inset-y-px before:inset-x-0 flex items-center gap-1.5 text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2',
+    link: 'relative group peer w-full px-2.5 py-1.5 before:inset-y-px before:inset-x-0 flex items-center gap-1.5 text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none before:outline-primary/25 focus-visible:before:outline-3',
     linkLeadingIcon: 'size-4 shrink-0',
     linkLabel: 'truncate',
     linkTrailing: 'ms-auto inline-flex gap-1.5 items-center',

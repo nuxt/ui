@@ -1,6 +1,6 @@
 export default {
   slots: {
-    root: 'relative',
+    root: 'relative outline-primary/25 focus-visible:outline-3',
     viewport: 'relative flex',
     item: ''
   },

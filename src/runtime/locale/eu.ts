@@ -55,6 +55,7 @@ export default defineLocale<Messages>({
     },
     contentSearch: {
       links: 'Estekak',
+      search: 'Emaitzak',
       theme: 'Gaia'
     },
     contentSearchButton: {

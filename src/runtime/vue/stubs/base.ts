@@ -5,7 +5,7 @@ import { useColorMode as useColorModeVueUse } from '@vueuse/core'
 import appConfig from '#build/app.config'
 import type { NuxtApp } from '#app'
 
-export { useHead } from '@unhead/vue'
+export { injectHead, useHead } from '@unhead/vue'
 
 export { useAppConfig } from '../composables/useAppConfig'
 export { defineShortcuts } from '../../composables/defineShortcuts'

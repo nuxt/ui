@@ -9,6 +9,8 @@ import meta from '#nuxt-component-meta'
 import { getComponentExample } from '#component-example/nitro'
 
 type ComponentAttributes = {
+  'slug'?: string
+  'prose'?: string
   ':prose'?: string
   ':props'?: string
   ':external'?: string
@@ -16,6 +18,8 @@ type ComponentAttributes = {
   ':ignore'?: string
   ':hide'?: string
   ':slots'?: string
+  ':model'?: string
+  ':cast'?: string
 }
 
 type ThemeConfig = {
@@ -24,13 +28,57 @@ type ThemeConfig = {
 }
 
 type CodeConfig = {
-  props: Record<string, unknown>
+  props: Record<string, any>
   external: string[]
   externalTypes: string[]
   ignore: string[]
   hide: string[]
   componentName: string
   slots?: Record<string, string>
+  model?: string[]
+  cast?: Record<string, string>
+  prose?: boolean
+}
+
+const CAST_TEMPLATES: Record<string, (raw: any) => string> = {
+  'DateValue': (raw) => {
+    if (!raw || !Array.isArray(raw)) return 'null'
+    const [y, m, d] = raw
+    return `new CalendarDate(${y}, ${m}, ${d})`
+  },
+  'DateValue[]': (raw) => {
+    if (!Array.isArray(raw)) return '[]'
+    return `[${raw.map(([y, m, d]: number[]) => `new CalendarDate(${y}, ${m}, ${d})`).join(', ')}]`
+  },
+  'DateRange': (raw) => {
+    if (!raw?.start || !raw?.end) return '{ start: null, end: null }'
+    const [sy, sm, sd] = raw.start
+    const [ey, em, ed] = raw.end
+    return `{ start: new CalendarDate(${sy}, ${sm}, ${sd}), end: new CalendarDate(${ey}, ${em}, ${ed}) }`
+  },
+  'TimeValue': (raw) => {
+    if (!raw || !Array.isArray(raw)) return 'null'
+    const [h, m, s] = raw
+    return `new Time(${h}, ${m}, ${s})`
+  },
+  'TimeRangeValue': (raw) => {
+    if (!raw?.start || !raw?.end) return 'null'
+    const [sh, sm, ss] = raw.start
+    const [eh, em, es] = raw.end
+    return `{ start: new Time(${sh}, ${sm}, ${ss}), end: new Time(${eh}, ${em}, ${es}) }`
+  }
+}
+
+const CAST_IMPORTS: Record<string, { name: string, from: string }> = {
+  'DateValue': { name: 'CalendarDate', from: '@internationalized/date' },
+  'DateValue[]': { name: 'CalendarDate', from: '@internationalized/date' },
+  'DateRange': { name: 'CalendarDate', from: '@internationalized/date' },
+  'TimeValue': { name: 'Time', from: '@internationalized/date' },
+  'TimeRangeValue': { name: 'Time', from: '@internationalized/date' }
+}
+
+function stringifyValue(value: any, quote: string = '"'): string {
+  return json5.stringify(value, { quote, space: 2 })?.replace(/,([ |\t\n]+[}|\]])/g, '$1') ?? ''
 }
 
 type Document = {
@@ -248,61 +296,123 @@ const generateComponentCode = ({
   externalTypes,
   hide,
   componentName,
-  slots
+  slots,
+  model,
+  cast,
+  prose
 }: CodeConfig) => {
-  const filteredProps = Object.fromEntries(
-    Object.entries(props).filter(([key]) => !hide.includes(key))
-  )
+  const pascalCaseName = componentName.charAt(0).toUpperCase() + componentName.slice(1)
 
-  const imports = external
-    .filter((_, index) => externalTypes[index] && externalTypes[index] !== 'undefined')
-    .map((ext, index) => {
-      const type = externalTypes[index]?.replace(/[[\]]/g, '')
-      return `import type { ${type} } from '@nuxt/ui'`
-    })
-    .join('\n')
-
-  let itemsCode = ''
-  if (props.items) {
-    itemsCode = `const items = ref<${externalTypes[0]}>(${json5.stringify(props.items, null, 2)})`
-    delete filteredProps.items
+  if (prose) {
+    const proseProps = Object.entries(props)
+      .filter(([key, value]) => !hide.includes(key) && value !== undefined && value !== null && value !== '')
+      .map(([key, value]) => `${key}="${value}"`)
+      .join(' ')
+    const defaultSlot = slots?.default?.trim() ?? ''
+    return `::${componentName}${proseProps ? `{${proseProps}}` : ''}\n${defaultSlot}\n::`
   }
 
-  let calendarValueCode = ''
-  if (componentName === 'calendar' && props.modelValue && Array.isArray(props.modelValue)) {
-    calendarValueCode = `const value = ref(new CalendarDate(${props.modelValue.join(', ')}))`
-  }
+  const externalSet = new Set(external)
+  const modelSet = new Set(model || [])
 
-  const propsString = Object.entries(filteredProps)
-    .map(([key, value]) => {
-      const formattedKey = kebabCase(key)
-      if (typeof value === 'string') {
-        return `${formattedKey}="${value}"`
-      } else if (typeof value === 'number') {
-        return `:${formattedKey}="${value}"`
-      } else if (typeof value === 'boolean') {
-        return value ? formattedKey : `:${formattedKey}="false"`
+  const propAttributes: string[] = []
+
+  for (const [key, value] of Object.entries(props)) {
+    if (hide.includes(key)) continue
+    if (value === undefined || value === null || value === '') continue
+
+    if (key === 'modelValue') {
+      propAttributes.push(`v-model="value"`)
+      continue
+    }
+
+    if (modelSet.has(key)) {
+      propAttributes.push(`v-model:${kebabCase(key)}="${key}"`)
+      continue
+    }
+
+    const name = kebabCase(key)
+
+    if (typeof value === 'boolean') {
+      propAttributes.push(value ? name : `:${name}="false"`)
+      continue
+    }
+
+    if (typeof value === 'object') {
+      if (externalSet.has(key)) {
+        propAttributes.push(`:${name}="${key}"`)
+      } else {
+        propAttributes.push(`:${name}="${stringifyValue(value, '\'')}"`)
       }
-      return ''
-    })
-    .filter(Boolean)
-    .join(' ')
+      continue
+    }
 
-  const itemsProp = props.items ? ':items="items"' : ''
-  const vModelProp = componentName === 'calendar' && props.modelValue ? 'v-model="value"' : ''
-  const allProps = [propsString, itemsProp, vModelProp].filter(Boolean).join(' ')
-  const formattedProps = allProps ? ` ${allProps}` : ''
+    if (typeof value === 'number') {
+      propAttributes.push(`:${name}="${value}"`)
+      continue
+    }
+
+    propAttributes.push(`${name}="${value}"`)
+  }
+
+  // Build <script setup>
+  const importsBySource = new Map<string, Set<string>>()
+  const refDeclarations: string[] = []
+
+  if (cast) {
+    for (const key of external) {
+      const castType = cast[key]
+      if (castType && CAST_IMPORTS[castType]) {
+        const imp = CAST_IMPORTS[castType]
+        if (!importsBySource.has(imp.from)) importsBySource.set(imp.from, new Set())
+        importsBySource.get(imp.from)!.add(imp.name)
+      }
+    }
+  }
+
+  const typeImports: string[] = []
+  if (externalTypes?.length) {
+    const removeBrackets = (t: string): string => t.endsWith('[]') ? removeBrackets(t.slice(0, -2)) : t
+    const types = externalTypes
+      .filter(t => t && t !== 'undefined')
+      .map(removeBrackets)
+    if (types.length) {
+      typeImports.push(`import type { ${types.join(', ')} } from '@nuxt/ui'`)
+    }
+  }
+
+  for (const [i, key] of external.entries()) {
+    if (!(key in props)) continue
+    const castType = cast?.[key]
+    const refType = castType ? 'shallowRef' : 'ref'
+    const typeAnnotation = externalTypes?.[i] && externalTypes[i] !== 'undefined' ? `<${externalTypes[i]}>` : ''
+    const value = castType && CAST_TEMPLATES[castType]
+      ? CAST_TEMPLATES[castType](props[key])
+      : stringifyValue(props[key])
+    const varName = key === 'modelValue' ? 'value' : key
+    refDeclarations.push(`const ${varName} = ${refType}${typeAnnotation}(${value})`)
+  }
 
   let scriptSetup = ''
-  if (imports || itemsCode || calendarValueCode) {
-    scriptSetup = '<script setup lang="ts">'
-    if (imports) scriptSetup += `\n${imports}`
-    if (imports && (itemsCode || calendarValueCode)) scriptSetup += '\n'
-    if (calendarValueCode) scriptSetup += `\n${calendarValueCode}`
-    if (itemsCode) scriptSetup += `\n${itemsCode}`
-    scriptSetup += '\n</script>\n\n'
+  const hasScript = importsBySource.size > 0 || typeImports.length > 0 || refDeclarations.length > 0
+  if (hasScript) {
+    scriptSetup = '<script setup lang="ts">\n'
+    for (const [source, names] of importsBySource) {
+      scriptSetup += `import { ${Array.from(names).join(', ')} } from '${source}'\n`
+    }
+    for (const line of typeImports) {
+      scriptSetup += `${line}\n`
+    }
+    if ((importsBySource.size > 0 || typeImports.length > 0) && refDeclarations.length > 0) {
+      scriptSetup += '\n'
+    }
+    for (const line of refDeclarations) {
+      scriptSetup += `${line}\n`
+    }
+    scriptSetup += '</script>\n\n'
   }
 
+  // Slots
   let componentContent = ''
   let slotContent = ''
 
@@ -327,14 +437,11 @@ const generateComponentCode = ({
     })
   }
 
-  const pascalCaseName = componentName.charAt(0).toUpperCase() + componentName.slice(1)
+  const formattedProps = propAttributes.length ? ` ${propAttributes.join(' ')}` : ''
 
-  let componentTemplate = ''
-  if (componentContent || slotContent) {
-    componentTemplate = `<U${pascalCaseName}${formattedProps}>${componentContent}${slotContent}</U${pascalCaseName}>` // Removed space before closing tag
-  } else {
-    componentTemplate = `<U${pascalCaseName}${formattedProps} />`
-  }
+  const componentTemplate = (componentContent || slotContent)
+    ? `<U${pascalCaseName}${formattedProps}>${componentContent}${slotContent}</U${pascalCaseName}>`
+    : `<U${pascalCaseName}${formattedProps} />`
 
   return `${scriptSetup}<template>
   ${componentTemplate}
@@ -369,6 +476,11 @@ export async function transformMDC(event: H3Event, doc: Document): Promise<Docum
     const ignore = attributes[':ignore'] ? json5.parse(attributes[':ignore']) : []
     const hide = attributes[':hide'] ? json5.parse(attributes[':hide']) : []
     const slots = attributes[':slots'] ? json5.parse(attributes[':slots']) : {}
+    const model = attributes[':model'] ? json5.parse(attributes[':model']) : []
+    const cast = attributes[':cast'] ? json5.parse(attributes[':cast']) : {}
+    const slug = attributes.slug
+    const prose = attributes.prose !== undefined || parseBoolean(attributes[':prose'])
+    const effectiveName = slug ? camelCase(slug) : componentName
 
     const code = generateComponentCode({
       props,
@@ -376,11 +488,14 @@ export async function transformMDC(event: H3Event, doc: Document): Promise<Docum
       externalTypes,
       ignore,
       hide,
-      componentName,
-      slots
+      componentName: effectiveName,
+      slots,
+      model,
+      cast,
+      prose
     })
 
-    replaceNodeWithPre(node, 'vue', code)
+    replaceNodeWithPre(node, prose ? 'mdc' : 'vue', code)
   })
 
   visitAndReplace(doc, 'component-props', (node) => {

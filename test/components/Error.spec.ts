@@ -23,6 +23,7 @@ describe('Error', () => {
     // Props
     ['with error', { props }],
     ['with error using status/statusText', { props: { error: errorWithStatus } }],
+    ['with icon', { props: { ...props, icon: 'i-lucide-alert-triangle' } }],
     ['with redirect', { props: { ...props, redirect: '/blog' } }],
     ['with clear', { props: { ...props, clear: { label: 'Home' } } }],
     ['with as', { props: { ...props, as: 'section' } }],
@@ -30,6 +31,7 @@ describe('Error', () => {
     ['with ui', { props: { ...props, ui: { links: 'mt-16' } } }],
     // Slots
     ['with default slot', { props, slots: { default: () => 'Default slot' } }],
+    ['with leading slot', { props, slots: { leading: () => 'Leading slot' } }],
     ['with statusCode slot', { props, slots: { statusCode: () => 'Status code slot' } }],
     ['with statusMessage slot', { props, slots: { statusMessage: () => 'Status message slot' } }],
     ['with message slot', { props, slots: { message: () => 'Message slot' } }],

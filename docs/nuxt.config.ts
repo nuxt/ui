@@ -8,7 +8,6 @@ export default defineNuxtConfig({
     '../src/module',
     '@nuxt/content',
     '@nuxt/image',
-    '@nuxt/a11y',
     '@nuxtjs/mcp-toolkit',
     '@vueuse/nuxt',
     'nuxt-component-meta',
@@ -37,6 +36,11 @@ export default defineNuxtConfig({
   },
 
   app: {
+    head: {
+      htmlAttrs: {
+        lang: 'en'
+      }
+    },
     rootAttrs: {
       'data-vaul-drawer-wrapper': '',
       'class': 'bg-default'
@@ -72,6 +76,7 @@ export default defineNuxtConfig({
   },
 
   routeRules: {
+    '/api/navigation.json': { prerender: true },
     // Agent discovery Link headers on the homepage (RFC 8288, RFC 9727)
     '/': {
       headers: {
@@ -205,7 +210,6 @@ export default defineNuxtConfig({
   },
 
   experimental: {
-    asyncContext: true,
     defaults: {
       nuxtLink: {
         externalRelAttribute: 'noopener'
@@ -216,6 +220,9 @@ export default defineNuxtConfig({
   compatibilityDate: '2026-01-14',
 
   nitro: {
+    experimental: {
+      asyncContext: true
+    },
     publicAssets: [{
       dir: resolve('../skills'),
       baseURL: '/.well-known/skills',
@@ -267,10 +274,6 @@ export default defineNuxtConfig({
         'embla-carousel-wheel-gestures'
       ]
     }
-  },
-
-  a11y: {
-    logIssues: false
   },
 
   componentMeta: {

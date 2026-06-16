@@ -55,6 +55,7 @@ export default defineLocale<Messages>({
     },
     contentSearch: {
       links: 'Tenglar',
+      search: 'Niðurstöður',
       theme: 'Þema'
     },
     contentSearchButton: {
