@@ -4,34 +4,30 @@ import type { TabsItem } from '@nuxt/ui'
 const items: TabsItem[] = [
   {
     label: 'Home',
-    icon: 'i-lucide-house',
-    content: 'Home content'
+    icon: 'i-lucide-house'
   },
   {
     label: 'Activity',
-    icon: 'i-lucide-activity',
-    content: 'Activity content'
+    icon: 'i-lucide-activity'
   },
   {
     label: 'Settings',
-    icon: 'i-lucide-settings',
-    content: 'Settings content'
+    icon: 'i-lucide-settings'
   },
   {
     label: 'Profile',
-    icon: 'i-lucide-user',
-    content: 'Profile content'
+    icon: 'i-lucide-user'
   }
 ]
 </script>
 
 <template>
   <UTabs
-    variant="pill"
     :items="items"
+    :content="false"
     :ui="{
       list: 'justify-around w-full',
-      trigger: 'grow-1 flex-col gap-1 py-1',
+      trigger: 'grow flex-col gap-1 py-1',
       label: 'text-[10px]/3'
     }"
     class="w-full"
