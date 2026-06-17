@@ -13,7 +13,6 @@ export default defineCachedEventHandler(async (event) => {
     `title: ${JSON.stringify(title)}`,
     `description: ${JSON.stringify(description)}`,
     `canonical_url: ${JSON.stringify(DOMAIN)}`,
-    `last_updated: ${JSON.stringify(new Date().toISOString().split('T')[0])}`,
     '---',
     '\n'
   ].join('\n')

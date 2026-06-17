@@ -62,12 +62,14 @@ if (!import.meta.prerender) {
 const title = page.value?.seo?.title ? page.value.seo.title : page.value?.navigation?.title ? page.value.navigation.title : page.value?.title
 const prefix = page.value?.path.includes('components/') || page.value?.path.includes('composables/') ? 'Vue ' : ''
 const suffix = page.value?.path.includes('components/') ? 'Component ' : page.value?.path.includes('composables/') ? 'Composable ' : ''
+// A `Vue X Component` title already says Vue, so only tag the framework on pages without that prefix
+const framework = !prefix && page.value?.framework === 'vue' ? ' for Vue' : ''
 const description = page.value?.seo?.description ? page.value.seo.description : page.value?.description
 
 useSeoMeta({
-  titleTemplate: `${prefix}%s ${suffix}- Nuxt UI ${page.value?.framework === 'vue' ? ' for Vue' : ''}`,
+  titleTemplate: `${prefix}%s ${suffix}- Nuxt UI${framework}`,
   title,
-  ogTitle: `${prefix}${title} ${suffix}- Nuxt UI ${page.value?.framework === 'vue' ? ' for Vue' : ''}`,
+  ogTitle: `${prefix}${title} ${suffix}- Nuxt UI${framework}`,
   description,
   ogDescription: description
 })
