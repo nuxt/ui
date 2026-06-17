@@ -55,7 +55,7 @@ This component uses the `@internationalized/date` package for locale-aware forma
 :::
 ::
 
-### Type :badge{label="Soon" class="align-text-top"}
+### Type :badge{label="4.9+" class="align-text-top"}
 
 Use the `type` prop to change what the calendar selects. Defaults to `date`.
 
@@ -232,7 +232,7 @@ props:
 ---
 ::
 
-### View Control :badge{label="Soon" class="align-text-top"}
+### View Control :badge{label="4.9+" class="align-text-top"}
 
 Use the `view-control` prop to make the heading a button that switches between the day, month and year views. Defaults to `true`.
 

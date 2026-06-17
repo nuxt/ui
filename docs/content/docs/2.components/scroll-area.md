@@ -91,7 +91,7 @@ options:
 ---
 ::
 
-### Shadow :badge{label="Soon" class="align-text-top"}
+### Shadow :badge{label="4.9+" class="align-text-top"}
 
 Use the `shadow` prop to display fade shadows on the scrollable edges, indicating that more content is available in the scroll direction. The fade automatically follows the `orientation` and only appears when the content overflows.
 
