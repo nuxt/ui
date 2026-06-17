@@ -14,8 +14,10 @@ const feedbacks = [
   { required: true },
   { description: 'This is a description' },
   { error: 'This is an error' },
+  { error: 'This is an error', errorIcon: 'i-lucide-circle-alert' },
   { hint: 'This is a hint' },
-  { help: 'Help! I need somebody!' }
+  { help: 'Help! I need somebody!' },
+  { help: 'Help! I need somebody!', helpIcon: 'i-lucide-info' }
 ]
 </script>
 

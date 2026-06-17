@@ -2,6 +2,7 @@
 import type { Ref, VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/form-field'
+import type { IconProps } from '../types'
 import type { ComponentConfig } from '../types/tv'
 
 type FormField = ComponentConfig<typeof theme, AppConfig, 'formField'>
@@ -19,7 +20,17 @@ export interface FormFieldProps {
   label?: string
   description?: string
   help?: string
+  /**
+   * The icon displayed next to the help message.
+   * @IconifyIcon
+   */
+  helpIcon?: IconProps['name']
   error?: boolean | string
+  /**
+   * The icon displayed next to the error message.
+   * @IconifyIcon
+   */
+  errorIcon?: IconProps['name']
   hint?: string
   /**
    * @defaultValue 'md'
@@ -47,7 +58,9 @@ export interface FormFieldSlots {
   hint?(props: { hint: string | undefined }): VNode[]
   description?(props: { description: string | undefined }): VNode[]
   help?(props: { help: string | undefined }): VNode[]
+  helpLeading?(props: { help: string | undefined, ui: FormField['ui'] }): VNode[]
   error?(props: { error: string | true | undefined }): VNode[]
+  errorLeading?(props: { error: string | true | undefined, ui: FormField['ui'] }): VNode[]
   default?(props: { error: string | true | undefined }): VNode[]
 }
 </script>
@@ -60,6 +73,7 @@ import { useComponentProps } from '../composables/useComponentProps'
 import { formFieldInjectionKey, inputIdInjectionKey, formErrorsInjectionKey, formInputsInjectionKey } from '../composables/useFormField'
 import { tv } from '../utils/tv'
 import type { FormError, FormFieldInjectedOptions } from '../types/form'
+import UIcon from './Icon.vue'
 
 const _props = withDefaults(defineProps<FormFieldProps>(), {
   error: undefined,
@@ -137,11 +151,21 @@ provide(formFieldInjectionKey, computed(() => ({
     <div :class="[(props.label || !!slots.label || props.description || !!slots.description) && ui.container({ class: props.ui?.container })]">
       <slot :error="error" />
       <div v-if="props.error !== false && ((typeof error === 'string' && error) || !!slots.error)" :id="`${ariaId}-error`" data-slot="error" :class="ui.error({ class: props.ui?.error })">
+        <span v-if="props.errorIcon || !!slots.errorLeading" data-slot="errorLeading" :class="ui.errorLeading({ class: props.ui?.errorLeading })" aria-hidden="true">
+          <slot name="errorLeading" :error="error" :ui="ui">
+            <UIcon v-if="props.errorIcon" :name="props.errorIcon" data-slot="errorIcon" :class="ui.errorIcon({ class: props.ui?.errorIcon })" />
+          </slot>
+        </span>
         <slot name="error" :error="error">
           {{ error }}
         </slot>
       </div>
       <div v-else-if="props.help || !!slots.help" :id="`${ariaId}-help`" data-slot="help" :class="ui.help({ class: props.ui?.help })">
+        <span v-if="props.helpIcon || !!slots.helpLeading" data-slot="helpLeading" :class="ui.helpLeading({ class: props.ui?.helpLeading })" aria-hidden="true">
+          <slot name="helpLeading" :help="props.help" :ui="ui">
+            <UIcon v-if="props.helpIcon" :name="props.helpIcon" data-slot="helpIcon" :class="ui.helpIcon({ class: props.ui?.helpIcon })" />
+          </slot>
+        </span>
         <slot name="help" :help="props.help">
           {{ props.help }}
         </slot>

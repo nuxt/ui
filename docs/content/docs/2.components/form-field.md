@@ -116,6 +116,28 @@ slots:
 :u-input{placeholder="Enter your email" class="w-full"}
 ::
 
+### Help icon :badge{label="Soon" class="align-text-top"}
+
+Use the `help-icon` prop to display an icon next to the help message. Use the `#help-leading` slot to customize the icon.
+
+::component-code
+---
+prettier: true
+ignore:
+  - label
+props:
+  label: Email
+  help: Please enter a valid email address.
+  helpIcon: i-lucide-info
+slots:
+  default: |
+
+    <UInput placeholder="Enter your email" class="w-full" />
+---
+
+:u-input{placeholder="Enter your email" class="w-full"}
+::
+
 ### Error
 
 Use the `error` prop to display an error message below the form control. When used together with the `help` prop, the `error` prop takes precedence.
@@ -130,6 +152,28 @@ ignore:
 props:
   label: Email
   error: Please enter a valid email address.
+slots:
+  default: |
+
+    <UInput placeholder="Enter your email" class="w-full" />
+---
+
+:u-input{placeholder="Enter your email" class="w-full"}
+::
+
+### Error icon :badge{label="Soon" class="align-text-top"}
+
+Use the `error-icon` prop to display an icon next to the error message. Use the `#error-leading` slot to customize the icon.
+
+::component-code
+---
+prettier: true
+ignore:
+  - label
+props:
+  label: Email
+  error: Please enter a valid email address.
+  errorIcon: i-lucide-circle-alert
 slots:
   default: |
 

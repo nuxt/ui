@@ -68,7 +68,9 @@ describe('FormField', () => {
     ['with label and description', { props: { label: 'Username', description: 'Enter your username' } }],
     ['with required', { props: { label: 'Username', required: true } }],
     ['with help', { props: { help: 'Username must be unique' } }],
+    ['with help icon', { props: { help: 'Username must be unique', helpIcon: 'i-lucide-info' } }],
     ['with error', { props: { error: 'Username is already taken' } }],
+    ['with error icon', { props: { error: 'Username is already taken', errorIcon: 'i-lucide-circle-alert' } }],
     ['with hint', { props: { hint: 'Use letters, numbers, and special characters' } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { label: 'Username', description: 'Enter your username', size } }]),
     ...orientations.map((orientation: string) => [`with orientation ${orientation}`, { props: { label: 'Username', description: 'Enter your username', orientation } }]),
@@ -81,7 +83,9 @@ describe('FormField', () => {
     ['with description slot', { slots: { description: () => 'Description slot' } }],
     ['with error slot', { slots: { error: () => 'Error slot' } }],
     ['with hint slot', { slots: { hint: () => 'Hint slot' } }],
-    ['with help slot', { slots: { help: () => 'Help slot' } }]
+    ['with help slot', { slots: { help: () => 'Help slot' } }],
+    ['with help leading slot', { props: { help: 'Username must be unique' }, slots: { helpLeading: () => 'Help icon slot' } }],
+    ['with error leading slot', { props: { error: 'Username is already taken' }, slots: { errorLeading: () => 'Error icon slot' } }]
   ])
 
   it('passes accessibility tests', async () => {

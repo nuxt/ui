@@ -19,7 +19,9 @@ exports[`AuthForm > renders with as correctly 1`] = `
             <!--v-if-->
             <!--v-if-->
           </div>
-          <div id="v-1-error" data-slot="error" class="mt-2 text-error">Invalid email format</div>
+          <div id="v-1-error" data-slot="error" class="mt-2 flex items-start gap-1.5 text-error">
+            <!--v-if-->Invalid email format
+          </div>
         </div>
       </div>
       <div data-orientation="vertical" data-slot="root" class="text-sm">
@@ -65,7 +67,9 @@ exports[`AuthForm > renders with class correctly 1`] = `
             <!--v-if-->
             <!--v-if-->
           </div>
-          <div id="v-1-error" data-slot="error" class="mt-2 text-error">Invalid email format</div>
+          <div id="v-1-error" data-slot="error" class="mt-2 flex items-start gap-1.5 text-error">
+            <!--v-if-->Invalid email format
+          </div>
         </div>
       </div>
       <div data-orientation="vertical" data-slot="root" class="text-sm">
@@ -115,7 +119,9 @@ exports[`AuthForm > renders with description correctly 1`] = `
             <!--v-if-->
             <!--v-if-->
           </div>
-          <div id="v-1-error" data-slot="error" class="mt-2 text-error">Invalid email format</div>
+          <div id="v-1-error" data-slot="error" class="mt-2 flex items-start gap-1.5 text-error">
+            <!--v-if-->Invalid email format
+          </div>
         </div>
       </div>
       <div data-orientation="vertical" data-slot="root" class="text-sm">
@@ -165,7 +171,9 @@ exports[`AuthForm > renders with description slot correctly 1`] = `
             <!--v-if-->
             <!--v-if-->
           </div>
-          <div id="v-1-error" data-slot="error" class="mt-2 text-error">Invalid email format</div>
+          <div id="v-1-error" data-slot="error" class="mt-2 flex items-start gap-1.5 text-error">
+            <!--v-if-->Invalid email format
+          </div>
         </div>
       </div>
       <div data-orientation="vertical" data-slot="root" class="text-sm">
@@ -211,7 +219,9 @@ exports[`AuthForm > renders with disabled correctly 1`] = `
             <!--v-if-->
             <!--v-if-->
           </div>
-          <div id="v-1-error" data-slot="error" class="mt-2 text-error">Invalid email format</div>
+          <div id="v-1-error" data-slot="error" class="mt-2 flex items-start gap-1.5 text-error">
+            <!--v-if-->Invalid email format
+          </div>
         </div>
       </div>
       <div data-orientation="vertical" data-slot="root" class="text-sm">
@@ -257,7 +267,9 @@ exports[`AuthForm > renders with fields correctly 1`] = `
             <!--v-if-->
             <!--v-if-->
           </div>
-          <div id="v-1-error" data-slot="error" class="mt-2 text-error">Invalid email format</div>
+          <div id="v-1-error" data-slot="error" class="mt-2 flex items-start gap-1.5 text-error">
+            <!--v-if-->Invalid email format
+          </div>
         </div>
       </div>
       <div data-orientation="vertical" data-slot="root" class="text-sm">
@@ -303,7 +315,9 @@ exports[`AuthForm > renders with footer slot correctly 1`] = `
             <!--v-if-->
             <!--v-if-->
           </div>
-          <div id="v-1-error" data-slot="error" class="mt-2 text-error">Invalid email format</div>
+          <div id="v-1-error" data-slot="error" class="mt-2 flex items-start gap-1.5 text-error">
+            <!--v-if-->Invalid email format
+          </div>
         </div>
       </div>
       <div data-orientation="vertical" data-slot="root" class="text-sm">
@@ -349,7 +363,9 @@ exports[`AuthForm > renders with header slot correctly 1`] = `
             <!--v-if-->
             <!--v-if-->
           </div>
-          <div id="v-1-error" data-slot="error" class="mt-2 text-error">Invalid email format</div>
+          <div id="v-1-error" data-slot="error" class="mt-2 flex items-start gap-1.5 text-error">
+            <!--v-if-->Invalid email format
+          </div>
         </div>
       </div>
       <div data-orientation="vertical" data-slot="root" class="text-sm">
@@ -399,7 +415,9 @@ exports[`AuthForm > renders with icon correctly 1`] = `
             <!--v-if-->
             <!--v-if-->
           </div>
-          <div id="v-1-error" data-slot="error" class="mt-2 text-error">Invalid email format</div>
+          <div id="v-1-error" data-slot="error" class="mt-2 flex items-start gap-1.5 text-error">
+            <!--v-if-->Invalid email format
+          </div>
         </div>
       </div>
       <div data-orientation="vertical" data-slot="root" class="text-sm">
@@ -449,7 +467,9 @@ exports[`AuthForm > renders with leading slot correctly 1`] = `
             <!--v-if-->
             <!--v-if-->
           </div>
-          <div id="v-1-error" data-slot="error" class="mt-2 text-error">Invalid email format</div>
+          <div id="v-1-error" data-slot="error" class="mt-2 flex items-start gap-1.5 text-error">
+            <!--v-if-->Invalid email format
+          </div>
         </div>
       </div>
       <div data-orientation="vertical" data-slot="root" class="text-sm">
@@ -495,7 +515,9 @@ exports[`AuthForm > renders with loading correctly 1`] = `
             <!--v-if-->
             <!--v-if-->
           </div>
-          <div id="v-1-error" data-slot="error" class="mt-2 text-error">Invalid email format</div>
+          <div id="v-1-error" data-slot="error" class="mt-2 flex items-start gap-1.5 text-error">
+            <!--v-if-->Invalid email format
+          </div>
         </div>
       </div>
       <div data-orientation="vertical" data-slot="root" class="text-sm">
@@ -549,7 +571,9 @@ exports[`AuthForm > renders with providers correctly 1`] = `
             <!--v-if-->
             <!--v-if-->
           </div>
-          <div id="v-1-error" data-slot="error" class="mt-2 text-error">Invalid email format</div>
+          <div id="v-1-error" data-slot="error" class="mt-2 flex items-start gap-1.5 text-error">
+            <!--v-if-->Invalid email format
+          </div>
         </div>
       </div>
       <div data-orientation="vertical" data-slot="root" class="text-sm">
@@ -595,7 +619,9 @@ exports[`AuthForm > renders with providers slot correctly 1`] = `
             <!--v-if-->
             <!--v-if-->
           </div>
-          <div id="v-1-error" data-slot="error" class="mt-2 text-error">Invalid email format</div>
+          <div id="v-1-error" data-slot="error" class="mt-2 flex items-start gap-1.5 text-error">
+            <!--v-if-->Invalid email format
+          </div>
         </div>
       </div>
       <div data-orientation="vertical" data-slot="root" class="text-sm">
@@ -641,7 +667,9 @@ exports[`AuthForm > renders with separator correctly 1`] = `
             <!--v-if-->
             <!--v-if-->
           </div>
-          <div id="v-1-error" data-slot="error" class="mt-2 text-error">Invalid email format</div>
+          <div id="v-1-error" data-slot="error" class="mt-2 flex items-start gap-1.5 text-error">
+            <!--v-if-->Invalid email format
+          </div>
         </div>
       </div>
       <div data-orientation="vertical" data-slot="root" class="text-sm">
@@ -687,7 +715,9 @@ exports[`AuthForm > renders with submit correctly 1`] = `
             <!--v-if-->
             <!--v-if-->
           </div>
-          <div id="v-1-error" data-slot="error" class="mt-2 text-error">Invalid email format</div>
+          <div id="v-1-error" data-slot="error" class="mt-2 flex items-start gap-1.5 text-error">
+            <!--v-if-->Invalid email format
+          </div>
         </div>
       </div>
       <div data-orientation="vertical" data-slot="root" class="text-sm">
@@ -733,7 +763,9 @@ exports[`AuthForm > renders with submit slot correctly 1`] = `
             <!--v-if-->
             <!--v-if-->
           </div>
-          <div id="v-1-error" data-slot="error" class="mt-2 text-error">Invalid email format</div>
+          <div id="v-1-error" data-slot="error" class="mt-2 flex items-start gap-1.5 text-error">
+            <!--v-if-->Invalid email format
+          </div>
         </div>
       </div>
       <div data-orientation="vertical" data-slot="root" class="text-sm">
@@ -780,7 +812,9 @@ exports[`AuthForm > renders with title correctly 1`] = `
             <!--v-if-->
             <!--v-if-->
           </div>
-          <div id="v-1-error" data-slot="error" class="mt-2 text-error">Invalid email format</div>
+          <div id="v-1-error" data-slot="error" class="mt-2 flex items-start gap-1.5 text-error">
+            <!--v-if-->Invalid email format
+          </div>
         </div>
       </div>
       <div data-orientation="vertical" data-slot="root" class="text-sm">
@@ -830,7 +864,9 @@ exports[`AuthForm > renders with title slot correctly 1`] = `
             <!--v-if-->
             <!--v-if-->
           </div>
-          <div id="v-1-error" data-slot="error" class="mt-2 text-error">Invalid email format</div>
+          <div id="v-1-error" data-slot="error" class="mt-2 flex items-start gap-1.5 text-error">
+            <!--v-if-->Invalid email format
+          </div>
         </div>
       </div>
       <div data-orientation="vertical" data-slot="root" class="text-sm">
@@ -876,7 +912,9 @@ exports[`AuthForm > renders with ui correctly 1`] = `
             <!--v-if-->
             <!--v-if-->
           </div>
-          <div id="v-1-error" data-slot="error" class="mt-2 text-error">Invalid email format</div>
+          <div id="v-1-error" data-slot="error" class="mt-2 flex items-start gap-1.5 text-error">
+            <!--v-if-->Invalid email format
+          </div>
         </div>
       </div>
       <div data-orientation="vertical" data-slot="root" class="text-sm">
@@ -922,7 +960,9 @@ exports[`AuthForm > renders with validation slot correctly 1`] = `
             <!--v-if-->
             <!--v-if-->
           </div>
-          <div id="v-1-error" data-slot="error" class="mt-2 text-error">Invalid email format</div>
+          <div id="v-1-error" data-slot="error" class="mt-2 flex items-start gap-1.5 text-error">
+            <!--v-if-->Invalid email format
+          </div>
         </div>
       </div>
       <div data-orientation="vertical" data-slot="root" class="text-sm">

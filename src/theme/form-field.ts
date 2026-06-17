@@ -6,9 +6,13 @@ export default {
     label: 'block font-medium text-default',
     container: 'relative',
     description: 'text-muted',
-    error: 'mt-2 text-error',
+    error: 'mt-2 flex items-start gap-1.5 text-error',
+    errorLeading: 'inline-flex shrink-0 items-center h-lh',
+    errorIcon: 'size-4',
     hint: 'text-muted',
-    help: 'mt-2 text-muted'
+    help: 'mt-2 flex items-start gap-1.5 text-muted',
+    helpLeading: 'inline-flex shrink-0 items-center h-lh',
+    helpIcon: 'size-4'
   },
   variants: {
     size: {
