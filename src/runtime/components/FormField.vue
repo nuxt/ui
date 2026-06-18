@@ -151,7 +151,7 @@ provide(formFieldInjectionKey, computed(() => ({
     <div :class="[(props.label || !!slots.label || props.description || !!slots.description) && ui.container({ class: props.ui?.container })]">
       <slot :error="error" />
       <div v-if="props.error !== false && ((typeof error === 'string' && error) || !!slots.error)" :id="`${ariaId}-error`" data-slot="error" :class="ui.error({ class: props.ui?.error })">
-        <span v-if="props.errorIcon || !!slots.errorLeading" data-slot="errorLeading" :class="ui.errorLeading({ class: props.ui?.errorLeading })" aria-hidden="true">
+        <span v-if="props.errorIcon || !!slots.errorLeading" data-slot="errorLeading" :class="ui.errorLeading({ class: props.ui?.errorLeading })">
           <slot name="errorLeading" :error="error" :ui="ui">
             <UIcon v-if="props.errorIcon" :name="props.errorIcon" data-slot="errorIcon" :class="ui.errorIcon({ class: props.ui?.errorIcon })" />
           </slot>
@@ -161,7 +161,7 @@ provide(formFieldInjectionKey, computed(() => ({
         </slot>
       </div>
       <div v-else-if="props.help || !!slots.help" :id="`${ariaId}-help`" data-slot="help" :class="ui.help({ class: props.ui?.help })">
-        <span v-if="props.helpIcon || !!slots.helpLeading" data-slot="helpLeading" :class="ui.helpLeading({ class: props.ui?.helpLeading })" aria-hidden="true">
+        <span v-if="props.helpIcon || !!slots.helpLeading" data-slot="helpLeading" :class="ui.helpLeading({ class: props.ui?.helpLeading })">
           <slot name="helpLeading" :help="props.help" :ui="ui">
             <UIcon v-if="props.helpIcon" :name="props.helpIcon" data-slot="helpIcon" :class="ui.helpIcon({ class: props.ui?.helpIcon })" />
           </slot>

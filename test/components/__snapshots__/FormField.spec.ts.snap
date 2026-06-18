@@ -69,7 +69,7 @@ exports[`FormField > renders with error icon correctly 1`] = `
     <!--v-if-->
   </div>
   <div class="">
-    <div id="v-0-0-error" data-slot="error" class="mt-2 flex items-start gap-1.5 text-error"><span data-slot="errorLeading" class="inline-flex shrink-0 items-center h-lh" aria-hidden="true"><span class="iconify i-lucide:circle-alert size-4" aria-hidden="true" data-slot="errorIcon"></span></span>Username is already taken</div>
+    <div id="v-0-0-error" data-slot="error" class="mt-2 flex items-start gap-1.5 text-error"><span data-slot="errorLeading" class="inline-flex shrink-0 items-center h-lh"><span class="iconify i-lucide:circle-alert size-4" aria-hidden="true" data-slot="errorIcon"></span></span>Username is already taken</div>
   </div>
 </div>"
 `;
@@ -81,7 +81,7 @@ exports[`FormField > renders with error leading slot correctly 1`] = `
     <!--v-if-->
   </div>
   <div class="">
-    <div id="v-0-0-error" data-slot="error" class="mt-2 flex items-start gap-1.5 text-error"><span data-slot="errorLeading" class="inline-flex shrink-0 items-center h-lh" aria-hidden="true">Error icon slot</span>Username is already taken</div>
+    <div id="v-0-0-error" data-slot="error" class="mt-2 flex items-start gap-1.5 text-error"><span data-slot="errorLeading" class="inline-flex shrink-0 items-center h-lh">Error icon slot</span>Username is already taken</div>
   </div>
 </div>"
 `;
@@ -121,7 +121,7 @@ exports[`FormField > renders with help icon correctly 1`] = `
     <!--v-if-->
   </div>
   <div class="">
-    <div id="v-0-0-help" data-slot="help" class="mt-2 flex items-start gap-1.5 text-muted"><span data-slot="helpLeading" class="inline-flex shrink-0 items-center h-lh" aria-hidden="true"><span class="iconify i-lucide:info size-4" aria-hidden="true" data-slot="helpIcon"></span></span>Username must be unique</div>
+    <div id="v-0-0-help" data-slot="help" class="mt-2 flex items-start gap-1.5 text-muted"><span data-slot="helpLeading" class="inline-flex shrink-0 items-center h-lh"><span class="iconify i-lucide:info size-4" aria-hidden="true" data-slot="helpIcon"></span></span>Username must be unique</div>
   </div>
 </div>"
 `;
@@ -133,7 +133,7 @@ exports[`FormField > renders with help leading slot correctly 1`] = `
     <!--v-if-->
   </div>
   <div class="">
-    <div id="v-0-0-help" data-slot="help" class="mt-2 flex items-start gap-1.5 text-muted"><span data-slot="helpLeading" class="inline-flex shrink-0 items-center h-lh" aria-hidden="true">Help icon slot</span>Username must be unique</div>
+    <div id="v-0-0-help" data-slot="help" class="mt-2 flex items-start gap-1.5 text-muted"><span data-slot="helpLeading" class="inline-flex shrink-0 items-center h-lh">Help icon slot</span>Username must be unique</div>
   </div>
 </div>"
 `;
