@@ -1,8 +1,8 @@
 title: The Intuitive Vue UI Library
-description: A comprehensive Vue UI component library (Nuxt optional) with 125+ accessible, Tailwind CSS components for building modern web applications. Works with Nuxt and plain Vue apps (Vite, Inertia, SSR).
+description: A comprehensive Vue UI component library with 125+ accessible, Tailwind CSS components for building modern web applications. Works with Nuxt and plain Vue apps (Vite, Inertia, SSR).
 hero:
   title: The Intuitive Vue UI Library
-  description: A comprehensive Vue UI component library (Nuxt optional) with 125+ accessible, Tailwind CSS components for building modern web applications. Works with Nuxt and plain Vue apps (Vite, Inertia, SSR).
+  description: A comprehensive Vue UI component library with 125+ accessible, Tailwind CSS components for building modern web applications.
   links:
     - label: Get started
       to: /docs/getting-started/installation/nuxt
@@ -14,7 +14,6 @@ hero:
       to: /docs/components
       variant: outline
       color: neutral
-      trailingIcon: i-lucide-arrow-right
   features:
     - icon: i-logos-tailwindcss-icon
       title: Styled with Tailwind CSS

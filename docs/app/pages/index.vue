@@ -33,22 +33,11 @@ useSeoMeta({
   ogImage: joinURL(url, '/og-image.png')
 })
 
-const { data: components } = await useAsyncData('index-components', () => {
-  return queryCollection('docs')
-    .where('path', 'LIKE', '/docs/components/%')
-    .where('extension', '=', 'md')
-    .where('index', 'IS NULL')
-    .select('path', 'title', 'description', 'category')
-    .all()
-})
-
 const { data: templates } = await useAsyncData('index-templates', () => queryCollection('templates').first(), {
   transform: data => data?.items?.filter(template => template.framework === 'nuxt') || []
 })
 
 const { data: module } = await useFetch('/api/module.json')
-
-const { format } = Intl.NumberFormat('en', { notation: 'compact' })
 
 const contributorsRef = ref(null)
 const isContributorsInView = ref(false)
@@ -62,12 +51,9 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
 <template>
   <main v-if="page">
     <UPageHero
-      orientation="horizontal"
       :ui="{
-        container: 'pb-0 sm:pb-0 lg:py-0',
-        title: 'lg:mt-16',
-        links: 'lg:mb-16',
-        description: 'text-balance'
+        description: 'max-w-2xl mx-auto',
+        container: 'relative py-10 sm:py-16 lg:py-24 sm:gap-y-16'
       }"
     >
       <template #title>
@@ -79,86 +65,10 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
 
       <template #links>
         <UButton v-for="link of page.hero.links" :key="link.label" v-bind="link" size="xl" />
-        <div class="w-full my-6">
-          <USeparator class="w-1/2" type="dashed" />
-        </div>
-        <div class="flex flex-col gap-4">
-          <Motion
-            v-for="(feature, index) in page.hero.features"
-            :key="feature.title"
-            as-child
-            :initial="{ opacity: 0, transform: 'translateX(-10px)' }"
-            :while-in-view="{ opacity: 1, transform: 'translateX(0)' }"
-            :transition="{ delay: 0.2 + 0.4 * index }"
-            :in-view-options="{ once: true }"
-          >
-            <UPageFeature v-bind="feature" class="opacity-0" />
-          </Motion>
-        </div>
       </template>
 
       <LazySkyBg is-index />
-
-      <div class="h-[344px] lg:h-full lg:relative w-full lg:min-h-[calc(100vh-var(--ui-header-height)-1px)] overflow-hidden">
-        <UMarquee
-          pause-on-hover
-          :overlay="false"
-          :ui="{
-            root: '[--gap:--spacing(4)] [--duration:40s] border-default absolute w-full left-0 border-y lg:border-x lg:border-y-0 lg:w-[calc(50%-6px)] 2xl:max-w-[320px] lg:flex-col',
-            content: 'lg:w-auto lg:flex-col lg:animate-[marquee-vertical_var(--duration)_linear_infinite] lg:rtl:animate-[marquee-vertical-rtl_var(--duration)_linear_infinite] lg:h-fit'
-          }"
-        >
-          <ULink
-            v-for="component of components?.slice(0, 10)"
-            :key="component.path"
-            class="relative group/link aspect-video border-default w-[290px] xl:w-[330px] 2xl:w-[320px] 2xl:p-2 2xl:border-y"
-            :to="component.path"
-            tabindex="-1"
-          >
-            <UColorModeImage
-              :light="`${component.path.replace('/docs/components/', '/components/light/')}.png`"
-              :dark="`${component.path.replace('/docs/components/', '/components/dark/')}.png`"
-              :alt="`${component.title} preview`"
-              width="290"
-              height="163"
-              format="webp"
-              class="hover:scale-105 lg:hover:scale-110 transition-transform aspect-video w-full border-x lg:border-x-0 lg:border-y border-default 2xl:border-y-0"
-              loading="lazy"
-            />
-            <UBadge color="neutral" variant="outline" size="md" :label="component.title" class="hidden lg:block absolute mx-auto top-4 left-6 xl:left-4 group-hover/link:opacity-100 opacity-0 transition-all duration-300 pointer-events-none -translate-y-2 group-hover/link:translate-y-0" />
-          </ULink>
-        </UMarquee>
-
-        <UMarquee
-          pause-on-hover
-          reverse
-          :overlay="false"
-          :ui="{
-            root: '[--gap:--spacing(4)] [--duration:40s] border-default absolute w-full mt-[180px] left-0 border-y lg:mt-auto lg:left-auto lg:border-y-0 lg:border-x lg:w-[calc(50%-6px)] 2xl:max-w-[320px] lg:right-0 lg:flex-col',
-            content: 'lg:w-auto lg:flex-col lg:animate-[marquee-vertical_var(--duration)_linear_infinite] lg:rtl:animate-[marquee-vertical-rtl_var(--duration)_linear_infinite] lg:h-fit lg:[animation-direction:reverse]'
-          }"
-        >
-          <ULink
-            v-for="component of components?.slice(10, 20)"
-            :key="component.path"
-            class="relative group/link aspect-video border-default w-[290px] xl:w-[330px] 2xl:w-[320px] 2xl:p-2 2xl:border-y"
-            :to="component.path"
-            tabindex="-1"
-          >
-            <UColorModeImage
-              :light="`${component.path.replace('/docs/components/', '/components/light/')}.png`"
-              :dark="`${component.path.replace('/docs/components/', '/components/dark/')}.png`"
-              :alt="`${component.title} preview`"
-              width="290"
-              height="163"
-              format="webp"
-              class="hover:scale-105 lg:hover:scale-110 transition-transform aspect-video w-full border-x lg:border-x-0 lg:border-y border-default 2xl:border-y-0"
-              loading="lazy"
-            />
-            <UBadge color="neutral" variant="outline" size="md" :label="component.title" class="hidden lg:block absolute mx-auto top-4 left-6 xl:left-4 group-hover/link:opacity-100 opacity-0 transition-all duration-300 pointer-events-none -translate-y-2 group-hover/link:translate-y-0" />
-          </ULink>
-        </UMarquee>
-      </div>
+      <Playground />
     </UPageHero>
 
     <USeparator />
