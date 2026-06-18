@@ -67,10 +67,10 @@ export default defineNuxtPlugin({
               if (!primaryColor && !neutralColor) return;
               function swapColors(el) {
                 var html = el.innerHTML;
-                if (primaryColor && primaryColor !== 'black') {
+                if (primaryColor) {
                   html = html.replace(
                     /(--ui-color-primary-\\d{2,3}:\\s*var\\(--color-)${appConfig.ui.colors.primary}(-\\d{2,3}.*?\\))/g,
-                    \`$1\${primaryColor}$2\`
+                    \`$1\${primaryColor === 'neutral' ? 'old-neutral' : primaryColor}$2\`
                   );
                 }
                 if (neutralColor) {
@@ -112,17 +112,6 @@ export default defineNuxtPlugin({
           `.replace(/\s+/g, ' '),
           type: 'text/javascript',
           tagPriority: -1
-        }, {
-          innerHTML: `
-            var bapEl = document.querySelector('style#nuxt-ui-black-as-primary');
-            if (bapEl) {
-              if (localStorage.getItem('nuxt-ui-black-as-primary') === 'true') {
-                bapEl.innerHTML = ':root { --ui-primary: black; } .dark { --ui-primary: white; }';
-              } else {
-                bapEl.innerHTML = '';
-              }
-            }
-          `.replace(/\s+/g, ' ')
         }, {
           innerHTML: [
             `if (localStorage.getItem('nuxt-ui-font')) {`,

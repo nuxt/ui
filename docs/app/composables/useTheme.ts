@@ -64,7 +64,6 @@ export function useTheme() {
   const _radius = useLocalStorage('nuxt-ui-radius', 0.25)
   const _font = useLocalStorage('nuxt-ui-font', 'Public Sans')
   const _iconSet = useLocalStorage('nuxt-ui-icons', 'lucide')
-  const _blackAsPrimary = useLocalStorage('nuxt-ui-black-as-primary', false)
 
   const neutralColors = ['slate', 'gray', 'zinc', 'neutral', 'stone', 'taupe', 'mauve', 'mist', 'olive']
   const neutral = computed({
@@ -87,7 +86,6 @@ export function useTheme() {
     set(option) {
       appConfig.ui.colors.primary = option
       window.localStorage.setItem('nuxt-ui-primary', appConfig.ui.colors.primary)
-      setBlackAsPrimary(false)
       track('Theme Changed', { setting: 'primary', value: option })
     }
   })
@@ -154,20 +152,10 @@ export function useTheme() {
     }
   })
 
-  const blackAsPrimary = computed(() => _blackAsPrimary.value)
-
-  function setBlackAsPrimary(value: boolean) {
-    _blackAsPrimary.value = value
-    if (value) {
-      track('Theme Changed', { setting: 'primary', value: 'black' })
-    }
-  }
-
   const hasCustomColors = computed(() => Object.keys(customColorsData.value).length > 0)
   const hasCSSVariables = computed(() => Object.keys(cssVariablesData.value.light || {}).length > 0 || Object.keys(cssVariablesData.value.dark || {}).length > 0)
 
   const radiusStyle = computed(() => `:root { --ui-radius: ${_radius.value}rem; }`)
-  const blackAsPrimaryStyle = computed(() => _blackAsPrimary.value ? `:root { --ui-primary: black; } .dark { --ui-primary: white; }` : ':root {}')
   const fontStyle = computed(() => `:root { --font-sans: '${_font.value}', sans-serif; }`)
   const customColorsStyle = computed(() => {
     const entries = Object.entries(customColorsData.value)
@@ -203,7 +191,6 @@ export function useTheme() {
 
   const style = [
     { innerHTML: radiusStyle, id: 'nuxt-ui-radius', tagPriority: -2 },
-    { innerHTML: blackAsPrimaryStyle, id: 'nuxt-ui-black-as-primary', tagPriority: -2 },
     { innerHTML: fontStyle, id: 'nuxt-ui-font', tagPriority: -2 },
     { innerHTML: customColorsStyle, id: 'chat-custom-colors', tagPriority: -2 },
     { innerHTML: cssVariablesStyle, id: 'chat-css-variables', tagPriority: -2 }
@@ -211,7 +198,6 @@ export function useTheme() {
 
   const hasCSSChanges = computed(() => {
     return _radius.value !== 0.25
-      || _blackAsPrimary.value
       || _font.value !== 'Public Sans'
       || hasCustomColors.value
       || hasCSSVariables.value
@@ -255,9 +241,6 @@ export function useTheme() {
     if (_radius.value !== 0.25) {
       rootLines.push(`  --ui-radius: ${_radius.value}rem;`)
     }
-    if (_blackAsPrimary.value) {
-      rootLines.push('  --ui-primary: black;')
-    }
 
     if (rootLines.length) {
       lines.push('', ':root {', ...rootLines, '}')
@@ -268,9 +251,6 @@ export function useTheme() {
     }
 
     const darkLines: string[] = []
-    if (_blackAsPrimary.value) {
-      darkLines.push('  --ui-primary: white;')
-    }
     if (darkOverrides.length) {
       darkLines.push(...darkOverrides.map(([key, val]) => `  ${key}: ${val};`))
     }
@@ -362,7 +342,8 @@ export function useTheme() {
     if (settings.radius !== undefined && Number.isFinite(Number(settings.radius))) radius.value = Number(settings.radius)
     if (settings.font && SAFE_NAME.test(settings.font)) font.value = settings.font
     if (settings.icons && settings.icons in themeIcons) icon.value = settings.icons
-    if (settings.blackAsPrimary !== undefined) setBlackAsPrimary(!!settings.blackAsPrimary)
+    // Legacy `blackAsPrimary` flag now maps to a `neutral` primary.
+    if (settings.blackAsPrimary) primary.value = 'neutral'
 
     const colorKeys = ['secondary', 'success', 'info', 'warning', 'error'] as const
     const savedExtras: Record<string, any> = { ...aiThemeExtras.value }
@@ -406,7 +387,7 @@ export function useTheme() {
     _font.value = 'Public Sans'
     _iconSet.value = 'lucide'
     appConfig.ui.icons = themeIcons.lucide as any
-    _blackAsPrimary.value = false
+    window.localStorage.removeItem('nuxt-ui-black-as-primary')
 
     const defaultColors: Record<string, string> = { secondary: 'blue', success: 'green', info: 'blue', warning: 'yellow', error: 'red' }
     const extras = aiThemeExtras.value
@@ -442,8 +423,6 @@ export function useTheme() {
     neutral,
     primaryColors,
     primary,
-    blackAsPrimary,
-    setBlackAsPrimary,
     radiuses,
     radius,
     fonts,

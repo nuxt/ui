@@ -1,3 +1,4 @@
+import { reactive } from 'vue'
 import { createTV, cnMerge } from 'tailwind-variants'
 import type { ClassValue, TVVariants, TVCompoundVariants, TVDefaultVariants, TVReturnType, defaultConfig } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
@@ -55,6 +56,39 @@ const appConfigTv = appConfig as AppConfig & { ui: { tv: typeof defaultConfig } 
 const config = appConfigTv.ui?.tv
 
 const baseTv = /* @__PURE__ */ createTV(config)
+
+// `reactive()` is cached per raw target, so this resolves to the same proxy Nuxt's
+// `useAppConfig()` wraps `#build/app.config` in — reads below track that dependency, so
+// mutating `appConfig.ui.colors` (e.g. the docs theme picker) re-renders components live.
+const reactiveAppConfig = reactive(appConfig) as AppConfig & { ui?: { colors?: Record<string, string> } }
+
+// Variant keys whose value is a color and whose variant always defines a `neutral` entry.
+const COLOR_KEYS = ['color', 'highlightColor'] as const
+
+/**
+ * Map a color-bearing variant value to the `neutral` variant when its alias is configured as
+ * `'neutral'` in `app.config` (e.g. `colors: { primary: 'neutral' }`). The `neutral` variant is a
+ * distinct class set (`bg-inverted`, `bg-elevated`, …) that a CSS-variable swap can't reproduce, so
+ * the substitution has to happen on the `tv()` variant key. `defaultVariants` (read off the resolved
+ * `tv` component, `extend` included) supplies the fallback for the common case where the color isn't
+ * passed explicitly — e.g. a default Button whose `'primary'` comes from the theme. Returns the
+ * original object untouched when nothing matches, so the common path allocates nothing.
+ */
+function remapNeutralColors(props: Record<string, any>, defaultVariants?: Record<string, any>): Record<string, any> {
+  const colors = reactiveAppConfig.ui?.colors
+  if (!colors) {
+    return props
+  }
+
+  let out: Record<string, any> | undefined
+  for (const key of COLOR_KEYS) {
+    const value = props[key] ?? defaultVariants?.[key]
+    if (typeof value === 'string' && value !== 'neutral' && colors[value] === 'neutral') {
+      (out ??= { ...props })[key] = 'neutral'
+    }
+  }
+  return out ?? props
+}
 
 /**
  * Find a class **replacer** — a function `(defaults) => classes` that replaces a
@@ -178,6 +212,12 @@ export const tv = ((componentConfig?: any) => {
 
   return new Proxy(component, {
     apply(target, thisArg, args) {
+      // Substitute the `neutral` variant for any color alias configured as `'neutral'` before
+      // resolving classes (e.g. `color: 'primary'` → `color: 'neutral'` when `primary: 'neutral'`).
+      if (args[0] && typeof args[0] === 'object') {
+        args = [remapNeutralColors(args[0] as Record<string, any>, (target as { defaultVariants?: Record<string, any> }).defaultVariants), ...args.slice(1)]
+      }
+
       const result = Reflect.apply(target, thisArg, args)
       if (result && typeof result === 'object') {
         return wrapSlots(result, directives)

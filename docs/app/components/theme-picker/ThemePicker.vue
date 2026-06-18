@@ -18,8 +18,6 @@ const {
   neutral,
   primaryColors,
   primary,
-  blackAsPrimary,
-  setBlackAsPrimary,
   radiuses,
   radius,
   fonts,
@@ -68,9 +66,9 @@ const {
 
         <div class="grid grid-cols-3 gap-1 -mx-2">
           <ThemePickerButton
-            label="Black"
-            :selected="blackAsPrimary"
-            @click="setBlackAsPrimary(true)"
+            label="Neutral"
+            :selected="primary === 'neutral'"
+            @click="primary = 'neutral'"
           >
             <template #leading>
               <span class="inline-block size-2 rounded-full bg-black dark:bg-white" />
@@ -82,7 +80,7 @@ const {
             :key="color"
             :label="color"
             :chip="color"
-            :selected="!blackAsPrimary && primary === color"
+            :selected="primary === color"
             @click="primary = color"
           />
         </div>

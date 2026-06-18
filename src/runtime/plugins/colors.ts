@@ -13,6 +13,12 @@ function getColor(color: keyof typeof colors, shade: typeof shades[number]): str
 }
 
 function generateShades(key: string, value: string, prefix?: string) {
+  // A non-neutral color configured as `neutral` mirrors the resolved neutral scale, so its shades
+  // match the neutral design tokens (`--ui-bg-elevated`, `--ui-text`, … all follow `colors.neutral`)
+  // instead of Tailwind's literal `old-neutral`.
+  if (value === 'neutral' && key !== 'neutral') {
+    return shades.map(shade => `--ui-color-${key}-${shade}: var(--ui-color-neutral-${shade});`).join('\n  ')
+  }
   const prefixStr = prefix ? `${prefix}-` : ''
   return `${shades.map(shade => `--ui-color-${key}-${shade}: var(--${prefixStr}color-${value === 'neutral' ? 'old-neutral' : value}-${shade}, ${getColor(value as keyof typeof colors, shade)});`).join('\n  ')}`
 }
@@ -37,10 +43,10 @@ export default defineNuxtPlugin(() => {
   ${Object.entries(appConfig.ui.colors).map(([key, value]: [string, string]) => generateShades(key, value, prefix)).join('\n  ')}
   }
   :root, :host, .light {
-  ${Object.keys(colors).map(key => generateColor(key, 500)).join('\n  ')}
+  ${Object.entries(colors).map(([key, value]: [string, string]) => value === 'neutral' ? `--ui-${key}: var(--ui-bg-inverted);` : generateColor(key, 500)).join('\n  ')}
   }
   .dark {
-  ${Object.keys(colors).map(key => generateColor(key, 400)).join('\n  ')}
+  ${Object.entries(colors).filter(([, value]) => value !== 'neutral').map(([key]) => generateColor(key, 400)).join('\n  ')}
   }
 }`
   })
