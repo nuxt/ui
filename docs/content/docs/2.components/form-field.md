@@ -116,9 +116,9 @@ slots:
 :u-input{placeholder="Enter your email" class="w-full"}
 ::
 
-### Help icon :badge{label="Soon" class="align-text-top"}
+### Help icon
 
-Use the `help-icon` prop to display an icon next to the help message. Use the `#help-leading` slot to customize the icon.
+Use the `help-icon` prop to display an icon next to the help message.
 
 ::component-code
 ---
@@ -161,9 +161,9 @@ slots:
 :u-input{placeholder="Enter your email" class="w-full"}
 ::
 
-### Error icon :badge{label="Soon" class="align-text-top"}
+### Error icon
 
-Use the `error-icon` prop to display an icon next to the error message. Use the `#error-leading` slot to customize the icon.
+Use the `error-icon` prop to display an icon next to the error message.
 
 ::component-code
 ---
@@ -181,10 +181,6 @@ slots:
 ---
 
 :u-input{placeholder="Enter your email" class="w-full"}
-::
-
-::tip{to="/docs/getting-started/theme/design-system#colors"}
-This sets the `color` to `error` on the form control. You can change it globally in your `app.config.ts`.
 ::
 
 ### Error pattern
