@@ -1,5 +1,5 @@
 policy:
-  - template: ['bug-report.yml', 'feature-request.yml', 'question.yml']
+  - template: ['bug-report.yml', 'feature-request.yml']
     section:
       - id: ['package']
         block-list: []
