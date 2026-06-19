@@ -63,7 +63,11 @@ const baseTv = /* @__PURE__ */ createTV(config)
 const reactiveAppConfig = reactive(appConfig) as AppConfig & { ui?: { colors?: Record<string, string> } }
 
 // Variant keys whose value is a color and whose variant always defines a `neutral` entry.
-const COLOR_KEYS = ['color', 'highlightColor'] as const
+// Only `color` strictly needs remapping — its `neutral` variant is a distinct class set
+// (`bg-inverted`, `bg-elevated`, …, with different hover opacities) that a CSS-variable swap can't
+// reproduce. The others currently resolve to the same `--ui-bg-inverted` through the colors plugin,
+// but are remapped too so they stay correct if their `neutral` variant ever diverges.
+const COLOR_KEYS = ['color', 'highlightColor', 'loadingColor', 'spotlightColor'] as const
 
 /**
  * Map a color-bearing variant value to the `neutral` variant when its alias is configured as

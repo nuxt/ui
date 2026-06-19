@@ -9,9 +9,10 @@ import Button from '../../src/runtime/components/Button.vue'
 // a baked `app.config.ts` value lands in, so mutating it here reproduces that scenario in either env.
 describe('primary: neutral', () => {
   const colors = (appConfig as { ui: { colors: Record<string, string> } }).ui.colors
+  const originalPrimary = colors.primary as string
 
   afterEach(() => {
-    colors.primary = 'green'
+    colors.primary = originalPrimary
   })
 
   it('resolves the default (primary) color to the neutral variant', async () => {

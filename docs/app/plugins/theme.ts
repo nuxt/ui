@@ -72,6 +72,12 @@ export default defineNuxtPlugin({
                     /(--ui-color-primary-\\d{2,3}:\\s*var\\(--color-)${appConfig.ui.colors.primary}(-\\d{2,3}.*?\\))/g,
                     \`$1\${primaryColor === 'neutral' ? 'old-neutral' : primaryColor}$2\`
                   );
+                  // Match the runtime colors plugin: a 'neutral' primary points '--ui-primary' at
+                  // '--ui-bg-inverted' (high contrast) instead of shade 500/400, so the no-flash paint
+                  // matches the post-hydration 'neutral' variant instead of snapping from grey.
+                  if (primaryColor === 'neutral') {
+                    html = html.replace(/--ui-primary:\\s*var\\(--ui-color-primary-\\d{2,3}\\)/g, '--ui-primary: var(--ui-bg-inverted)');
+                  }
                 }
                 if (neutralColor) {
                   html = html.replace(
