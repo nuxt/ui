@@ -142,14 +142,14 @@ css_variables:
     @import "@nuxt/ui";
 
     :root {
-      --ui-primary: black;
+      --ui-primary: var(--ui-color-primary-700);
       --ui-radius: 0.5rem;
       --ui-container: var(--container-5xl);
       --ui-header-height: --spacing(24);
     }
 
     .dark {
-      --ui-primary: white;
+      --ui-primary: var(--ui-color-primary-200);
       --ui-bg: var(--ui-color-neutral-950);
     }
     ```
