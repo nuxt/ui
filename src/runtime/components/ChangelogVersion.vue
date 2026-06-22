@@ -150,7 +150,7 @@ const ariaLabel = computed(() => {
     </time>
   </DefineDateTemplate>
 
-  <Primitive :as="props.as" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })" @click="props.onClick">
+  <Primitive :as="props.as" v-bind="!props.to ? $attrs : {}" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })" @click="props.onClick">
     <div v-if="!!props.indicator || !!slots.indicator" data-slot="indicator" :class="ui.indicator({ class: props.ui?.indicator })">
       <slot name="indicator" :ui="ui">
         <ReuseDateTemplate />

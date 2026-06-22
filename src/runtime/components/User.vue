@@ -73,7 +73,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.user || {}) 
 </script>
 
 <template>
-  <Primitive :as="props.as" :data-orientation="props.orientation" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })" @click="props.onClick">
+  <Primitive :as="props.as" v-bind="!props.to ? $attrs : {}" :data-orientation="props.orientation" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })" @click="props.onClick">
     <slot name="avatar" :ui="ui">
       <UChip v-if="props.chip && props.avatar" inset v-bind="typeof props.chip === 'object' ? props.chip : {}" :size="props.size">
         <UAvatar :alt="props.name" v-bind="props.avatar" :size="props.size" data-slot="avatar" :class="ui.avatar({ class: props.ui?.avatar })" />

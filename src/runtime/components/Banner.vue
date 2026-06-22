@@ -152,6 +152,7 @@ function onClose() {
   <Primitive
     v-show="isVisible"
     :as="props.as"
+    v-bind="!props.to ? $attrs : {}"
     class="banner"
     :data-banner-id="id"
     data-slot="root"
