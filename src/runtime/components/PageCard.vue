@@ -132,6 +132,7 @@ const ariaLabel = computed(() => {
   <Primitive
     ref="cardRef"
     :as="props.as"
+    v-bind="!props.to ? $attrs : {}"
     :data-orientation="props.orientation"
     data-slot="root"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
