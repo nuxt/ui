@@ -27,6 +27,7 @@ const modelValue = defineModel<string>({ required: true })
 function getEmojiFlag(locale: string): string {
   const languageToCountry: Record<string, string> = {
     ar: 'sa', // Arabic -> Saudi Arabia
+    be: 'by', // Belarusian -> Belarus
     bn: 'bd', // Bengali -> Bangladesh
     ca: 'es', // Catalan -> Spain
     ckb: 'iq', // Central Kurdish -> Iraq
