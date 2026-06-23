@@ -148,7 +148,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.slideover ||
       <slot :open="open" />
     </DialogTrigger>
 
-    <DialogPortal v-bind="portalProps">
+    <DialogPortal v-bind="portalProps" :force-mount="(portalProps.disabled && props.unmountOnHide === false) || undefined">
       <FieldGroupReset>
         <DialogOverlay v-if="props.overlay" data-slot="overlay" :class="ui.overlay({ class: props.ui?.overlay })" />
 
