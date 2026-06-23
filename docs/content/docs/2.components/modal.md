@@ -392,6 +392,10 @@ slots:
 You can inspect the DOM to see the Modal's content being rendered even while it is closed.
 ::
 
+::tip
+When the `portal` prop is set to `false`, the content is also rendered on the server. This is useful to render an open Modal during SSR without a flash on page load, or to expose its content for SEO.
+::
+
 ## Examples
 
 ### Control open state
