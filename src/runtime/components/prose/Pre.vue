@@ -28,19 +28,21 @@ export interface ProsePreSlots {
 import { computed, useTemplateRef } from 'vue'
 import { useClipboard } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { useComponentUI } from '../../composables/useComponentUI'
+import { useComponentProps } from '../../composables/useComponentProps'
 import { useLocale } from '../../composables/useLocale'
 import { tv } from '../../utils/tv'
 import UCodeIcon from './CodeIcon.vue'
 import UButton from '../Button.vue'
 
-const props = defineProps<ProsePreProps>()
+const _props = defineProps<ProsePreProps>()
+
 defineSlots<ProsePreSlots>()
+
+const props = useComponentProps('prose.pre', _props)
 
 const { t } = useLocale()
 const { copy, copied } = useClipboard()
 const appConfig = useAppConfig() as ProsePre['AppConfig']
-const uiProp = useComponentUI('prose.pre', props)
 
 const baseRef = useTemplateRef('baseRef')
 
@@ -55,11 +57,11 @@ function copyCode() {
 </script>
 
 <template>
-  <div :class="ui.root({ class: [uiProp?.root], filename: !!filename })">
-    <div v-if="filename && !hideHeader" :class="ui.header({ class: uiProp?.header })">
-      <UCodeIcon :icon="icon" :filename="filename" :class="ui.icon({ class: uiProp?.icon })" />
+  <div :class="ui.root({ class: [props.ui?.root], filename: !!props.filename })">
+    <div v-if="props.filename && !props.hideHeader" :class="ui.header({ class: props.ui?.header })">
+      <UCodeIcon :icon="props.icon" :filename="props.filename" :class="ui.icon({ class: props.ui?.icon })" />
 
-      <span :class="ui.filename({ class: uiProp?.filename })">{{ filename }}</span>
+      <span :class="ui.filename({ class: props.ui?.filename })">{{ props.filename }}</span>
     </div>
 
     <UButton
@@ -68,11 +70,10 @@ function copyCode() {
       variant="outline"
       size="sm"
       :aria-label="t('prose.pre.copy')"
-      :class="ui.copy({ class: uiProp?.copy })"
-      tabindex="-1"
+      :class="ui.copy({ class: props.ui?.copy })"
       @click="copyCode"
     />
 
-    <pre ref="baseRef" :class="ui.base({ class: [uiProp?.base, props.class] })" v-bind="$attrs"><slot /></pre>
+    <pre ref="baseRef" :class="ui.base({ class: [props.ui?.base, props.class] })" v-bind="$attrs"><slot /></pre>
   </div>
 </template>

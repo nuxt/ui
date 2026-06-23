@@ -56,8 +56,11 @@ describe('FileUpload', () => {
     ...positions.map((position: string) => [`with position ${position} multiple`, { props: { ...props, position, multiple: true } }]),
     ...sizes.map((size: string) => [`with size ${size}`, { props: { ...props, size } }]),
     ...sizes.map((size: string) => [`with size ${size} variant button`, { props: { ...props, size, variant: 'button' } }]),
+    ['with highlight', { props: { highlight: true } }],
+    ['with highlight neutral', { props: { highlight: true, color: 'neutral' } }],
     ['with required', { props: { required: true } }],
     ['with disabled', { props: { disabled: true } }],
+    ['with disabled variant button', { props: { disabled: true, variant: 'button' } }],
     ['with accept', { props: { accept: 'image/*' } }],
     ['with multiple', { props: { ...props, multiple: true } }],
     ['without dropzone', { props: { dropzone: false } }],
@@ -88,6 +91,22 @@ describe('FileUpload', () => {
     ['with file-size slot', { props, slots: { 'file-size': () => 'File size slot' } }],
     ['with file-trailing slot', { props, slots: { 'file-trailing': () => 'File trailing slot' } }]
   ])
+
+  it('hides the icon when icon is false', async () => {
+    const withIcon = await mountSuspended(FileUpload)
+    expect(withIcon.find('[data-slot="icon"]').exists()).toBe(true)
+
+    const withoutIcon = await mountSuspended(FileUpload, { props: { icon: false } })
+    expect(withoutIcon.find('[data-slot="icon"]').exists()).toBe(false)
+  })
+
+  it('hides the icon when icon is false with variant button', async () => {
+    const withIcon = await mountSuspended(FileUpload, { props: { variant: 'button' } })
+    expect(withIcon.find('[data-slot="icon"]').exists()).toBe(true)
+
+    const withoutIcon = await mountSuspended(FileUpload, { props: { variant: 'button', icon: false } })
+    expect(withoutIcon.find('[data-slot="icon"]').exists()).toBe(false)
+  })
 
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(FileUpload, {

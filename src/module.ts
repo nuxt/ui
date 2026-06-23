@@ -1,7 +1,6 @@
 import { defu } from 'defu'
 import { createResolver, defineNuxtModule, addComponentsDir, addImports, addImportsDir, addPlugin, hasNuxtModule } from '@nuxt/kit'
-import type { HookResult } from '@nuxt/schema'
-import type { ModuleDependencies } from 'nuxt/schema'
+import type { HookResult, ModuleDependencies } from '@nuxt/schema'
 import { addTemplates } from './templates'
 import { publicComposables } from './imports'
 import { defaultOptions, getDefaultConfig, resolveColors } from './utils/defaults'
@@ -52,6 +51,14 @@ export interface ModuleOptions {
      * @see https://ui.nuxt.com/docs/getting-started/installation/nuxt#themetransitions
      */
     transitions?: boolean
+
+    /**
+     * Remove all default theme classes from components, keeping only their
+     * structure and the classes you supply via `class`, `ui` or `app.config.ui`.
+     * @defaultValue `false`
+     * @see https://ui.nuxt.com/docs/getting-started/installation/nuxt#themeunstyled
+     */
+    unstyled?: boolean
 
     /**
      * The default variants to use for components
@@ -161,7 +168,7 @@ export default defineNuxtModule<ModuleOptions>({
         }
       },
       '@nuxtjs/mdc': {
-        optional: !userUiOptions.mdc && !userUiOptions.content,
+        optional: !userUiOptions.mdc,
         defaults: {
           highlight: {
             theme: {
@@ -212,7 +219,7 @@ export default defineNuxtModule<ModuleOptions>({
 
     nuxt.options.alias['#ui'] = resolve('./runtime')
 
-    nuxt.options.appConfig.ui = defu(nuxt.options.appConfig.ui || {}, getDefaultConfig(options.theme))
+    nuxt.options.appConfig.ui = defu(nuxt.options.appConfig.ui || {}, getDefaultConfig(options.theme)) as typeof nuxt.options.appConfig.ui
 
     nuxt.options.build.transpile.push('reka-ui')
 

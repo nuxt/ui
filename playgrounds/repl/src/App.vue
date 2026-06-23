@@ -2,7 +2,7 @@
 <script setup lang="ts">
 import { ref, computed, watchEffect } from 'vue'
 import { Repl, useStore, useVueImportMap } from '@vue/repl'
-import { useColorMode } from '@vueuse/core'
+import { useColorMode, useClipboard } from '@vueuse/core'
 import CodeMirror from '@vue/repl/codemirror-editor'
 
 const colorMode = useColorMode()
@@ -21,6 +21,7 @@ const builtinImportMap = computed(() => ({
   imports: {
     ...vueImportMap.value.imports,
     '@nuxt/ui': '/nuxt-ui.js',
+    '@nuxt/ui/composables': '/nuxt-ui.js',
     'zod': 'https://esm.sh/zod@4?external=vue',
     '@vueuse/core': 'https://esm.sh/@vueuse/core?external=vue',
     '@tanstack/vue-table': 'https://esm.sh/@tanstack/vue-table?external=vue',
@@ -144,9 +145,14 @@ if (!hasInitialHash) {
   }, 'src/App.vue')
 }
 
+const hasChanged = ref(hasInitialHash)
+
 watchEffect(() => {
   const serialized = store.serialize()
-  if (!hasInitialHash && store.getFiles()['App.vue']?.trimEnd() === defaultCode.trimEnd()) {
+  const isDefault = !hasInitialHash && store.getFiles()['App.vue']?.trimEnd() === defaultCode.trimEnd()
+
+  hasChanged.value = !isDefault
+  if (isDefault) {
     if (location.hash) {
       history.replaceState({}, '', location.pathname)
     }
@@ -154,6 +160,11 @@ watchEffect(() => {
   }
   history.replaceState({}, '', serialized)
 })
+
+const { copy, copied } = useClipboard()
+function share() {
+  copy(location.href)
+}
 
 const previewOptions = {
   headHTML: [
@@ -182,6 +193,17 @@ const previewOptions = {
         </template>
 
         <template #right>
+          <UTooltip :text="copied ? 'Copied!' : 'Share'" :disabled="!hasChanged">
+            <UButton
+              color="neutral"
+              variant="ghost"
+              :icon="copied ? 'i-lucide-circle-check' : 'i-lucide-share'"
+              :disabled="!hasChanged"
+              aria-label="Share"
+              @click="share"
+            />
+          </UTooltip>
+
           <UColorModeButton />
 
           <UTooltip text="Open on GitHub">

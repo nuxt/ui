@@ -1,26 +1,17 @@
 ---
 title: useScrollShadow
 description: 'A composable to apply scroll shadow effects on any scrollable element.'
-navigation.badge: New
 ---
 
 ## Usage
 
 Use the auto-imported `useScrollShadow` composable to apply fade shadows on the edges of a scrollable element, indicating that more content is available in the scroll direction.
 
-```vue
-<script setup lang="ts">
-const el = useTemplateRef('el')
-
-const { style } = useScrollShadow(el)
-</script>
-
-<template>
-  <div ref="el" class="max-h-[200px] overflow-y-auto" :style="style">
-    <!-- Scrollable content -->
-  </div>
-</template>
-```
+::component-example
+---
+name: 'use-scroll-shadow-example'
+---
+::
 
 - Uses CSS `mask-image` to fade content at the edges rather than overlay elements, so it works on any background.
 - Automatically detects whether the element is overflowing and only applies shadows when needed.

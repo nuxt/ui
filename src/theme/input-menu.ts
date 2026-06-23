@@ -9,7 +9,7 @@ export default (options: Required<ModuleOptions>) => {
       trailing: 'group absolute inset-y-0 end-0 flex items-center disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none',
       trailingClear: 'p-0',
       arrow: 'fill-bg stroke-default',
-      content: 'max-h-60 w-(--reka-combobox-trigger-width) bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] origin-(--reka-combobox-content-transform-origin) pointer-events-auto flex flex-col',
+      content: 'max-h-[min(15rem,var(--reka-combobox-content-available-height,15rem))] w-(--reka-combobox-trigger-width) bg-default shadow-lg rounded-md ring ring-default overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] origin-(--reka-combobox-content-transform-origin) pointer-events-auto flex flex-col',
       viewport: 'relative scroll-py-1 overflow-y-auto flex-1',
       group: 'p-1 isolate',
       empty: 'text-center text-muted',
@@ -46,7 +46,7 @@ export default (options: Required<ModuleOptions>) => {
           root: 'flex-wrap'
         },
         false: {
-          base: 'w-full border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75'
+          base: 'w-full border-0 placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75'
         }
       },
       size: {
@@ -115,21 +115,21 @@ export default (options: Required<ModuleOptions>) => {
     compoundVariants: [{
       variant: 'soft',
       multiple: true,
-      class: 'has-focus:bg-elevated'
+      class: 'has-focus:bg-elevated has-focus-visible:outline-3'
     }, {
       variant: 'ghost',
       multiple: true,
-      class: 'has-focus:bg-elevated'
+      class: 'has-focus:bg-elevated has-focus-visible:outline-3'
     }, ...(options.theme.colors || []).map((color: string) => ({
       color,
       multiple: true,
       variant: ['outline', 'subtle'],
-      class: `has-focus-visible:ring-2 has-focus-visible:ring-${color}`
+      class: `has-focus-visible:outline-3 has-focus-visible:ring-${color}`
     })), {
       color: 'neutral',
       multiple: true,
       variant: ['outline', 'subtle'],
-      class: 'has-focus-visible:ring-2 has-focus-visible:ring-inverted'
+      class: 'has-focus-visible:outline-3 has-focus-visible:ring-inverted'
     }]
   }, input(options))
 }

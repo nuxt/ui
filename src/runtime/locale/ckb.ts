@@ -56,6 +56,7 @@ export default defineLocale<Messages>({
     },
     contentSearch: {
       links: 'بەستەرەکان',
+      search: 'ئەنجامەکان',
       theme: 'ڕووکار'
     },
     contentSearchButton: {

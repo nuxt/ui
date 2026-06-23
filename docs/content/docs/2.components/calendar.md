@@ -55,6 +55,44 @@ This component uses the `@internationalized/date` package for locale-aware forma
 :::
 ::
 
+### Type :badge{label="4.9+" class="align-text-top"}
+
+Use the `type` prop to change what the calendar selects. Defaults to `date`.
+
+When using `date`, click the heading to switch from the day view to a month then year view for quick navigation, then drill back down to pick a date.
+
+::component-code
+---
+cast:
+  modelValue: DateValue
+ignore:
+  - type
+  - modelValue
+external:
+  - modelValue
+props:
+  type: month
+  modelValue: [2022, 2, 1]
+---
+::
+
+Use `type="year"` to render a standalone year picker.
+
+::component-code
+---
+cast:
+  modelValue: DateValue
+ignore:
+  - type
+  - modelValue
+external:
+  - modelValue
+props:
+  type: year
+  modelValue: [2022, 1, 1]
+---
+::
+
 ### Multiple
 
 Use the `multiple` prop to allow multiple selections.
@@ -98,14 +136,174 @@ props:
 ---
 ::
 
+The `range` prop also works with `type="month"` and `type="year"`, letting you select a range of months or years.
+
+::component-code
+---
+prettier: true
+cast:
+  modelValue: DateRange
+ignore:
+  - type
+  - range
+  - modelValue.start
+  - modelValue.end
+external:
+  - modelValue
+props:
+  type: month
+  range: true
+  modelValue:
+    start: [2022, 2, 1]
+    end: [2022, 6, 1]
+---
+::
+
+### Number Of Months
+
+Use the `numberOfMonths` prop to change the number of months in the calendar.
+
+::component-code
+---
+props:
+  numberOfMonths: 3
+---
+::
+
+### Month Controls
+
+Use the `month-controls` prop to show the month controls. Defaults to `true`.
+
+::component-code
+---
+props:
+  monthControls: false
+---
+::
+
+Use the `prev-month` and `next-month` props to override the month buttons.
+
+::component-code
+---
+prettier: true
+ignore:
+  - prevMonth.color
+  - prevMonth.variant
+  - nextMonth.color
+  - nextMonth.variant
+props:
+  prevMonth:
+    color: primary
+    variant: soft
+  nextMonth:
+    color: primary
+    variant: soft
+---
+::
+
+### Year Controls
+
+Use the `year-controls` prop to show the year controls. Defaults to `true`.
+
+::component-code
+---
+props:
+  yearControls: false
+---
+::
+
+Use the `prev-year` and `next-year` props to override the year buttons.
+
+::component-code
+---
+prettier: true
+ignore:
+  - prevYear.color
+  - prevYear.variant
+  - nextYear.color
+  - nextYear.variant
+props:
+  prevYear:
+    color: primary
+    variant: soft
+  nextYear:
+    color: primary
+    variant: soft
+---
+::
+
+### View Control :badge{label="4.9+" class="align-text-top"}
+
+Use the `view-control` prop to make the heading a button that switches between the day, month and year views. Defaults to `true`.
+
+::component-code
+---
+items:
+  viewControl:
+    - true
+    - false
+props:
+  viewControl: false
+---
+::
+
+Set the `view-control` prop to an object to override the heading button.
+
+::component-code
+---
+prettier: true
+ignore:
+  - viewControl.color
+  - viewControl.variant
+props:
+  viewControl:
+    color: primary
+    variant: soft
+---
+::
+
+### Fixed Weeks
+
+Use the `fixed-weeks` prop to display the calendar with fixed weeks.
+
+::component-code
+---
+props:
+  fixedWeeks: false
+---
+::
+
+### Week Numbers :badge{label="4.4+" class="align-text-top"}
+
+Use the `week-numbers` prop to display week numbers in the calendar.
+
+::component-code
+---
+props:
+  weekNumbers: true
+  fixedWeeks: true
+---
+::
+
 ### Color
 
 Use the `color` prop to change the color of the calendar.
 
 ::component-code
 ---
+cast:
+  defaultValue: DateRange
+hide:
+  - range
+  - defaultValue
+  - defaultValue.start
+  - defaultValue.end
 props:
   color: neutral
+  range: true
+  defaultValue:
+    start: [2022, 2, 3]
+    end: [2022, 2, 20]
 ---
 ::
 
@@ -153,62 +351,6 @@ props:
 ---
 ::
 
-### Number Of Months
-
-Use the `numberOfMonths` prop to change the number of months in the calendar.
-
-::component-code
----
-props:
-  numberOfMonths: 3
----
-::
-
-### Month Controls
-
-Use the `month-controls` prop to show the month controls. Defaults to `true`.
-
-::component-code
----
-props:
-  monthControls: false
----
-::
-
-### Year Controls
-
-Use the `year-controls` prop to show the year controls. Defaults to `true`.
-
-::component-code
----
-props:
-  yearControls: false
----
-::
-
-### Fixed Weeks
-
-Use the `fixed-weeks` prop to display the calendar with fixed weeks.
-
-::component-code
----
-props:
-  fixedWeeks: false
----
-::
-
-### Week Numbers :badge{label="4.4+" class="align-text-top"}
-
-Use the `week-numbers` prop to display week numbers in the calendar.
-
-::component-code
----
-props:
-  weekNumbers: true
-  fixedWeeks: true
----
-::
-
 ## Examples
 
 ### With chip events
@@ -223,7 +365,7 @@ name: 'calendar-events-example'
 
 ### With disabled dates
 
-Use the `is-date-disabled` prop with a function to mark specific dates as disabled.
+Use the `is-date-disabled` prop with a function to mark specific dates as disabled. When using `type="month"` or `type="year"`, use the `is-month-disabled` or `is-year-disabled` prop instead.
 
 ::component-example
 ---
@@ -233,7 +375,7 @@ name: 'calendar-disabled-dates-example'
 
 ### With unavailable dates
 
-Use the `is-date-unavailable` prop with a function to mark specific dates as unavailable.
+Use the `is-date-unavailable` prop with a function to mark specific dates as unavailable. When using `type="month"` or `type="year"`, use the `is-month-unavailable` or `is-year-unavailable` prop instead.
 
 ::component-example
 ---
@@ -272,6 +414,16 @@ You can control the calendar with external controls by manipulating the date pas
 ::component-example
 ---
 name: 'calendar-external-controls-example'
+---
+::
+
+### With today's date
+
+Use the `today` function from `@internationalized/date` with `getLocalTimeZone` to set the value to the current date.
+
+::component-example
+---
+name: 'calendar-today-example'
 ---
 ::
 

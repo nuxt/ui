@@ -14,11 +14,49 @@ function readLocalStorage<T>(key: string, fallback: T): T {
   }
 }
 
+// AI `applyTheme` output is untrusted and ends up concatenated into <style> rules, so
+// only persist values that are plain CSS-safe tokens. This is the single write boundary,
+// which keeps every downstream sink (live useHead styles and the FOUC inline scripts) safe.
+const SAFE_NAME = /^[\w -]{1,50}$/
+const SAFE_HEX = /^#[0-9a-f]{3,8}$/i
+const SAFE_CSS_VAR_KEY = /^--[\w-]+$/
+const SAFE_CSS_VAR_VALUE = /^(?:var\(--[\w-]+\)|#[0-9a-f]{3,8}|[a-z]+)$/i
+
+function sanitizeCustomColors(input: Record<string, any>): Record<string, Record<string, string>> {
+  const result: Record<string, Record<string, string>> = {}
+  for (const [name, shades] of Object.entries(input)) {
+    if (!SAFE_NAME.test(name) || typeof shades !== 'object' || !shades) continue
+    const safeShades: Record<string, string> = {}
+    for (const [shade, hex] of Object.entries(shades as Record<string, unknown>)) {
+      if (/^\d{2,3}$/.test(shade) && typeof hex === 'string' && SAFE_HEX.test(hex)) {
+        safeShades[shade] = hex
+      }
+    }
+    if (Object.keys(safeShades).length) result[name] = safeShades
+  }
+  return result
+}
+
+function sanitizeCSSVariables(input: { light?: Record<string, any>, dark?: Record<string, any> }): { light: Record<string, string>, dark: Record<string, string> } {
+  const clean = (vars?: Record<string, unknown>) => {
+    const result: Record<string, string> = {}
+    for (const [key, value] of Object.entries(vars || {})) {
+      if (SAFE_CSS_VAR_KEY.test(key) && typeof value === 'string' && SAFE_CSS_VAR_VALUE.test(value)) {
+        result[key] = value
+      }
+    }
+    return result
+  }
+  return { light: clean(input.light), dark: clean(input.dark) }
+}
+
 export function useTheme() {
   const appConfig = useAppConfig()
   const colorMode = useColorMode()
   const { track } = useAnalytics()
   const { framework } = useFrameworks()
+
+  const color = computed(() => colorMode.value === 'dark' ? (colors as any)[appConfig.ui.colors.neutral][900] : 'white')
 
   const aiThemeExtras = useState<Record<string, any>>('nuxt-ui-ai-theme', () => readLocalStorage('nuxt-ui-ai-theme', {}))
   const customColorsData = useState<Record<string, Record<string, string>>>('nuxt-ui-custom-colors', () => readLocalStorage('nuxt-ui-custom-colors', {}))
@@ -311,17 +349,18 @@ export function useTheme() {
 
   function applyThemeSettings(settings: Record<string, any>) {
     if (settings.customColors && typeof settings.customColors === 'object') {
-      injectCustomColors(settings.customColors)
+      const safeCustomColors = sanitizeCustomColors(settings.customColors)
+      if (Object.keys(safeCustomColors).length) injectCustomColors(safeCustomColors)
     }
 
     if (settings.cssVariables && typeof settings.cssVariables === 'object') {
-      injectCSSVariables(settings.cssVariables)
+      injectCSSVariables(sanitizeCSSVariables(settings.cssVariables))
     }
 
-    if (settings.primary) primary.value = settings.primary
-    if (settings.neutral) neutral.value = settings.neutral
-    if (settings.radius !== undefined) radius.value = settings.radius
-    if (settings.font) font.value = settings.font
+    if (settings.primary && SAFE_NAME.test(settings.primary)) primary.value = settings.primary
+    if (settings.neutral && neutralColors.includes(settings.neutral)) neutral.value = settings.neutral
+    if (settings.radius !== undefined && Number.isFinite(Number(settings.radius))) radius.value = Number(settings.radius)
+    if (settings.font && SAFE_NAME.test(settings.font)) font.value = settings.font
     if (settings.icons && settings.icons in themeIcons) icon.value = settings.icons
     if (settings.blackAsPrimary !== undefined) setBlackAsPrimary(!!settings.blackAsPrimary)
 
@@ -329,7 +368,7 @@ export function useTheme() {
     const savedExtras: Record<string, any> = { ...aiThemeExtras.value }
 
     for (const color of colorKeys) {
-      if (settings[color]) {
+      if (settings[color] && SAFE_NAME.test(settings[color])) {
         (appConfig.ui.colors as any)[color] = settings[color]
         savedExtras.colors = savedExtras.colors || {}
         savedExtras.colors[color] = settings[color]
@@ -339,7 +378,8 @@ export function useTheme() {
     if (settings.ui) {
       savedExtras.ui = savedExtras.ui || {}
       for (const [key, value] of Object.entries(settings.ui)) {
-        if (key === 'colors') continue
+        // Skip `colors` (handled above) and prototype-chain keys that would pollute appConfig.ui when assigned.
+        if (key === 'colors' || key === '__proto__' || key === 'constructor' || key === 'prototype') continue
 
         const merged = defu(value as Record<string, any>, (appConfig.ui as any)[key] || {}, savedExtras.ui[key] || {})
         ;(appConfig.ui as any)[key] = merged
@@ -395,6 +435,7 @@ export function useTheme() {
   }
 
   return {
+    color,
     style,
     link,
     neutralColors,

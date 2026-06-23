@@ -57,6 +57,8 @@ describe('Listbox', () => {
     ['with selectedIcon', { props: { ...props, selectedIcon: 'i-lucide-check' } }],
     ['with virtualize', { props: { ...props, virtualize: true } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { ...props, size } }]),
+    ['with highlight', { props: { ...props, highlight: true } }],
+    ['with highlight neutral', { props: { ...props, highlight: true, color: 'neutral' } }],
     ['with class', { props: { ...props, class: 'max-h-64' } }],
     ['with ui', { props: { ...props, ui: { content: 'p-2' } } }],
     // Slots

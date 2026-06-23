@@ -205,7 +205,28 @@ export default defineAppConfig({
 
 Tailwind Variants uses `tailwind-merge` under the hood — conflicting classes are resolved automatically.
 
-### `UTheme` (scoped overrides)
+### Replace instead of merge
+
+Classes from the `ui` prop, the `class` prop, and global config are merged onto the component defaults. To replace a slot's defaults entirely instead, set it to a function in the `ui` prop or global config. It receives the resolved default classes as its argument, so you can reuse part of them.
+
+```vue
+<UButton :ui="{ label: () => 'text-base font-bold' }" />
+```
+
+```ts
+// app.config.ts, applies to every instance
+export default defineAppConfig({
+  ui: {
+    button: {
+      slots: {
+        label: () => 'text-base font-bold'
+      }
+    }
+  }
+})
+```
+
+### Theme component
 
 Override theme for a section of the component tree without affecting the rest of the app. Renders no DOM element — uses `provide`/`inject`:
 

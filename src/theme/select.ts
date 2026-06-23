@@ -7,11 +7,11 @@ export default (options: Required<ModuleOptions>) => {
   return defuFn({
     slots: {
       root: () => undefined,
-      base: () => ['relative group rounded-md inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75', options.theme.transitions && 'transition-colors'],
+      base: () => ['relative group rounded-md inline-flex items-center disabled:cursor-not-allowed disabled:opacity-75', options.theme.transitions && 'transition-colors'],
       value: 'truncate pointer-events-none',
       placeholder: 'truncate text-dimmed',
       arrow: 'fill-bg stroke-default',
-      content: 'max-h-60 w-(--reka-select-trigger-width) bg-default shadow-lg rounded-md ring ring-default overflow-hidden origin-(--reka-select-content-transform-origin) pointer-events-auto flex flex-col',
+      content: 'max-h-[min(15rem,var(--reka-select-content-available-height,15rem))] w-(--reka-select-trigger-width) bg-default shadow-lg rounded-md ring ring-default overflow-hidden origin-(--reka-select-content-transform-origin) pointer-events-auto flex flex-col',
       viewport: 'relative divide-y divide-default scroll-py-1 overflow-y-auto flex-1',
       group: 'p-1 isolate',
       empty: 'text-center text-muted',
@@ -100,19 +100,13 @@ export default (options: Required<ModuleOptions>) => {
         'item-aligned': {
           content: ''
         }
+      },
+      multiple: {
+        true: ''
       }
     },
-    compoundVariants: (prev: Record<string, any>[]) => prev.map(item => ({
-      ...item,
-      class: typeof item.class === 'string' ? replaceFocus(item.class) : item.class
-    })),
     defaultVariants: {
       position: 'popper'
     }
   }, input(options))
-}
-
-function replaceFocus(str: string): string {
-  return str
-    .replace(/focus-visible:/g, 'focus:')
 }
