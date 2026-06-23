@@ -34,7 +34,7 @@ const props = withDefaults(defineProps<AppProps<T>>(), {
 })
 defineSlots<AppSlots>()
 
-const configProviderProps = useForwardProps(reactivePick(props, 'scrollBody'))
+const configProviderProps = useForwardProps(reactivePick(props, 'scrollBody', 'teleportTo'))
 const tooltipProps = toRef(() => props.tooltip)
 const toasterProps = toRef(() => props.toaster)
 
