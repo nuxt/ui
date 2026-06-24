@@ -99,3 +99,15 @@ items:
       target: '_blank'
       avatar:
         src: 'https://github.com/lehuuphuc.png'
+  - label: 'json-render'
+    description: 'Pre-built Nuxt UI components for json-render that render AI-generated interfaces from your LLM in real time.'
+    avatar:
+      src: 'https://json-render.dev/favicon.ico'
+    to: 'https://json-render-nuxt-ui.brainchimps.com'
+    target: '_blank'
+    user:
+      name: 'brainchimps'
+      to: 'https://github.com/brainchimps'
+      target: '_blank'
+      avatar:
+        src: 'https://github.com/brainchimps.png'

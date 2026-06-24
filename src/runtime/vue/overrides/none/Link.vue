@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { ButtonHTMLAttributes } from 'vue'
+import type { ButtonHTMLAttributes, VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/link'
 import type { ComponentConfig } from '../../../types/tv'
@@ -66,13 +66,14 @@ export interface LinkProps extends BaseLinkProps {
 }
 
 export interface LinkSlots {
-  default(props: { active: boolean }): any
+  default?(props: { active: boolean }): VNode[]
 }
 </script>
 
 <script setup lang="ts">
 import { computed, inject } from 'vue'
 import { defu } from 'defu'
+import { Slot } from 'reka-ui'
 import { hasProtocol } from 'ufo'
 import { useAppConfig } from '#imports'
 import { mergeClasses } from '../../../utils'
@@ -169,7 +170,7 @@ const navigate = handleNavigation
 </script>
 
 <template>
-  <template v-if="custom">
+  <Slot v-if="custom">
     <slot
       v-bind="{
         ...$attrs,
@@ -184,7 +185,7 @@ const navigate = handleNavigation
         active: isLinkActive
       }"
     />
-  </template>
+  </Slot>
   <ULinkBase
     v-else
     v-bind="{

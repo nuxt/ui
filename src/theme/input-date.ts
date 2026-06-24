@@ -16,27 +16,33 @@ export default (options: Required<ModuleOptions>) => {
       size: {
         xs: {
           base: (prev: string) => [prev, 'gap-0.25'],
-          segment: 'data-[segment=day]:w-6 data-[segment=month]:w-6 data-[segment=year]:w-9'
+          segment: 'data-[segment=day]:w-8 data-[segment=month]:w-8 data-[segment=year]:w-10'
         },
         sm: {
           base: (prev: string) => [prev, 'gap-0.5'],
-          segment: 'data-[segment=day]:w-6 data-[segment=month]:w-6 data-[segment=year]:w-9'
+          segment: 'data-[segment=day]:w-8 data-[segment=month]:w-8 data-[segment=year]:w-10'
         },
         md: {
           base: (prev: string) => [prev, 'gap-0.5'],
-          segment: 'data-[segment=day]:w-7 data-[segment=month]:w-7 data-[segment=year]:w-11'
+          segment: 'data-[segment=day]:w-9 data-[segment=month]:w-9 data-[segment=year]:w-11'
         },
         lg: {
           base: (prev: string) => [prev, 'gap-0.75'],
-          segment: 'data-[segment=day]:w-7 data-[segment=month]:w-7 data-[segment=year]:w-11'
+          segment: 'data-[segment=day]:w-9 data-[segment=month]:w-9 data-[segment=year]:w-11'
         },
         xl: {
           base: (prev: string) => [prev, 'gap-0.75'],
-          segment: 'data-[segment=day]:w-8 data-[segment=month]:w-8 data-[segment=year]:w-13'
+          segment: 'data-[segment=day]:w-10 data-[segment=month]:w-10 data-[segment=year]:w-12'
         }
-      }
+      },
+      variant: (prev: Record<string, string>) => Object.fromEntries(
+        Object.entries(prev).map(([key, value]) => [key, replaceFocus(value)])
+      )
     },
-    compoundVariants: [{
+    compoundVariants: (prev: Record<string, any>[]) => [...prev.map(item => ({
+      ...item,
+      class: typeof item.class === 'string' ? replaceFocus(item.class) : item.class
+    })), {
       variant: 'outline',
       class: {
         segment: 'focus:bg-elevated'
@@ -63,4 +69,10 @@ export default (options: Required<ModuleOptions>) => {
       }
     }]
   }, input(options))
+}
+
+function replaceFocus(str: string): string {
+  return str
+    .replace(/focus:/g, 'has-focus:')
+    .replace(/focus-visible:/g, 'has-focus-visible:')
 }

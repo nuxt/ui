@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { ComponentPublicInstance, CSSProperties } from 'vue'
+import type { ComponentPublicInstance, CSSProperties, VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { VirtualItem, VirtualizerOptions } from '@tanstack/vue-virtual'
 import theme from '#build/ui/scroll-area'
@@ -27,6 +27,13 @@ export interface ScrollAreaVirtualizeOptions extends Partial<Omit<
    * @defaultValue undefined
    */
   lanes?: number
+  /**
+   * Skip per-item DOM measurement for uniform-height items.
+   * When `true`, uses `estimateSize` only — significantly improving performance for uniform items.
+   * When `false` (default), measures each item for variable-height layouts (e.g., masonry).
+   * @defaultValue false
+   */
+  skipMeasurement?: boolean
 }
 
 export type ScrollAreaItem = any
@@ -52,16 +59,22 @@ export interface ScrollAreaProps<T extends ScrollAreaItem = ScrollAreaItem> {
    * @defaultValue false
    */
   virtualize?: boolean | ScrollAreaVirtualizeOptions
+  /**
+   * Display fade shadows on the scrollable edges to indicate more content.
+   * Pass an object to configure the shadow size (in px).
+   * @defaultValue false
+   */
+  shadow?: boolean | { size?: number }
   class?: any
   ui?: ScrollArea['slots']
 }
 
 export interface ScrollAreaSlots<T extends ScrollAreaItem = ScrollAreaItem> {
-  default(
+  default?(
     props:
       | { item: T, index: number, virtualItem?: VirtualItem }
-      | Record<string, never>,
-  ): any
+      | { item: T, index: 0 },
+  ): VNode[]
 }
 
 export interface ScrollAreaEmits {
@@ -74,31 +87,45 @@ export interface ScrollAreaEmits {
 </script>
 
 <script setup lang="ts" generic="T extends ScrollAreaItem">
-import { computed, toRef, useTemplateRef, watch } from 'vue'
+import { computed, onMounted, onUnmounted, toRef, useTemplateRef, watch } from 'vue'
 import { Primitive } from 'reka-ui'
 import { defu } from 'defu'
 import { useVirtualizer } from '@tanstack/vue-virtual'
 import { useAppConfig } from '#imports'
-import { useComponentUI } from '../composables/useComponentUI'
+import { useComponentProps } from '../composables/useComponentProps'
 import { tv } from '../utils/tv'
 import { useLocale } from '../composables/useLocale'
+import { useScrollShadow } from '../composables/useScrollShadow'
 
-const props = withDefaults(defineProps<ScrollAreaProps<T>>(), {
+const _props = withDefaults(defineProps<ScrollAreaProps<T>>(), {
   orientation: 'vertical',
-  virtualize: false
+  virtualize: false,
+  shadow: false
 })
 defineSlots<ScrollAreaSlots<T>>()
 const emits = defineEmits<ScrollAreaEmits>()
 
+const props = useComponentProps<ScrollAreaProps<T>>('scrollArea', _props)
+
 const { dir } = useLocale()
 const appConfig = useAppConfig() as ScrollArea['AppConfig']
-const uiProp = useComponentUI('scrollArea', props)
 
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.scrollArea || {}) })({
   orientation: props.orientation
 }))
 
 const rootRef = useTemplateRef<ComponentPublicInstance>('rootRef')
+
+const scrollShadowStyle = props.shadow
+  ? useScrollShadow(
+    computed(() => rootRef.value?.$el as HTMLElement | undefined),
+    {
+      orientation: () => props.orientation ?? 'vertical',
+      size: typeof props.shadow === 'object' ? props.shadow.size : undefined
+    }
+  ).style
+  : undefined
 
 const isRtl = computed(() => dir.value === 'rtl')
 const isHorizontal = computed(() => props.orientation === 'horizontal')
@@ -120,6 +147,10 @@ const virtualizerProps = toRef(() => {
 const lanes = computed(() => {
   const value = virtualizerProps.value.lanes
   return typeof value === 'number' ? value : undefined
+})
+
+const skipMeasurement = computed(() => {
+  return typeof props.virtualize === 'object' && props.virtualize.skipMeasurement === true
 })
 
 const virtualizer = !!props.virtualize && useVirtualizer({
@@ -194,15 +225,36 @@ function getVirtualItemStyle(virtualItem: VirtualItem): CSSProperties {
   }
 }
 
-// Remeasure when lanes change
-watch(lanes, () => {
+// Recalculate layout on container resize (e.g. estimateSize depends on lane width)
+let resizeObserver: ResizeObserver | null = null
+let rafId: number | null = null
+
+onMounted(() => {
   if (virtualizer) {
-    virtualizer.value.measure()
+    const el = rootRef.value?.$el
+    if (el) {
+      resizeObserver = new ResizeObserver(() => {
+        if (rafId !== null) return
+        rafId = requestAnimationFrame(() => {
+          rafId = null
+          virtualizer.value.measure()
+        })
+      })
+      resizeObserver.observe(el)
+    }
   }
-}, { flush: 'sync' })
+})
+
+onUnmounted(() => {
+  if (rafId !== null) {
+    cancelAnimationFrame(rafId)
+    rafId = null
+  }
+  resizeObserver?.disconnect()
+})
 
 function measureElement(el: Element | ComponentPublicInstance | null) {
-  if (el && virtualizer) {
+  if (el && virtualizer && !skipMeasurement.value) {
     const element = el instanceof Element ? el : (el as ComponentPublicInstance).$el as Element
     virtualizer.value.measureElement(element)
   }
@@ -235,15 +287,16 @@ defineExpose({
 <template>
   <Primitive
     ref="rootRef"
-    :as="as"
+    :as="props.as"
     data-slot="root"
-    :data-orientation="orientation"
-    :class="ui.root({ class: [uiProp?.root, props.class] })"
+    :data-orientation="props.orientation"
+    :class="ui.root({ class: [props.ui?.root, props.class] })"
+    :style="scrollShadowStyle"
   >
     <template v-if="virtualizer">
       <div
         data-slot="viewport"
-        :class="ui.viewport({ class: uiProp?.viewport })"
+        :class="ui.viewport({ class: props.ui?.viewport })"
         :style="virtualViewportStyle"
       >
         <div
@@ -252,11 +305,11 @@ defineExpose({
           :ref="measureElement"
           :data-index="virtualItem.index"
           data-slot="item"
-          :class="ui.item({ class: uiProp?.item })"
+          :class="ui.item({ class: props.ui?.item })"
           :style="getVirtualItemStyle(virtualItem)"
         >
           <slot
-            :item="(items?.[virtualItem.index] as T)"
+            :item="(props.items?.[virtualItem.index] as T)"
             :index="virtualItem.index"
             :virtual-item="virtualItem"
           />
@@ -265,20 +318,20 @@ defineExpose({
     </template>
 
     <template v-else>
-      <div data-slot="viewport" :class="ui.viewport({ class: uiProp?.viewport })">
-        <template v-if="items?.length">
+      <div data-slot="viewport" :class="ui.viewport({ class: props.ui?.viewport })">
+        <template v-if="props.items">
           <div
-            v-for="(item, index) in items"
+            v-for="(item, index) in props.items"
             :key="getItemKey(item, index)"
             data-slot="item"
-            :class="ui.item({ class: uiProp?.item })"
+            :class="ui.item({ class: props.ui?.item })"
           >
             <slot :item="item" :index="index" />
           </div>
         </template>
 
         <template v-else>
-          <slot />
+          <slot :item="({} as T)" :index="0" />
         </template>
       </div>
     </template>

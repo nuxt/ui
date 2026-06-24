@@ -1,16 +1,24 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Link > renders with activeClass correctly 1`] = `"<button type="button" class="focus-visible:outline-primary text-highlighted"></button>"`;
+exports[`Link > renders with activeClass correctly 1`] = `"<button type="button" class="outline-primary/25 focus-visible:outline-3 rounded-md text-highlighted"></button>"`;
 
-exports[`Link > renders with as correctly 1`] = `"<div class="focus-visible:outline-primary text-muted hover:text-default transition-colors"></div>"`;
+exports[`Link > renders with as correctly 1`] = `"<div class="outline-primary/25 focus-visible:outline-3 rounded-md text-muted hover:text-default transition-colors"></div>"`;
 
-exports[`Link > renders with class correctly 1`] = `"<button type="button" class="focus-visible:outline-primary text-muted hover:text-default transition-colors font-medium"></button>"`;
+exports[`Link > renders with class correctly 1`] = `"<button type="button" class="outline-primary/25 focus-visible:outline-3 rounded-md text-muted hover:text-default transition-colors font-medium"></button>"`;
 
-exports[`Link > renders with default slot correctly 1`] = `"<button type="button" class="focus-visible:outline-primary text-muted hover:text-default transition-colors">Default slot</button>"`;
+exports[`Link > renders with default slot correctly 1`] = `"<button type="button" class="outline-primary/25 focus-visible:outline-3 rounded-md text-muted hover:text-default transition-colors">Default slot</button>"`;
 
-exports[`Link > renders with disabled correctly 1`] = `"<button type="button" disabled="" class="focus-visible:outline-primary text-muted cursor-not-allowed opacity-75"></button>"`;
+exports[`Link > renders with disabled correctly 1`] = `"<button type="button" disabled="" class="outline-primary/25 focus-visible:outline-3 rounded-md text-muted cursor-not-allowed opacity-75"></button>"`;
 
-exports[`Link > renders with inactiveClass correctly 1`] = `"<button type="button" class="focus-visible:outline-primary text-muted hover:text-default transition-colors"></button>"`;
+exports[`Link > renders with external prop correctly 1`] = `"<a href="/api/download" rel="noopener noreferrer" class="outline-primary/25 focus-visible:outline-3 rounded-md text-muted hover:text-default transition-colors"></a>"`;
+
+exports[`Link > renders with external to and target correctly 1`] = `"<a href="https://example.com" rel="noopener noreferrer" target="_blank" class="outline-primary/25 focus-visible:outline-3 rounded-md text-muted hover:text-default transition-colors"></a>"`;
+
+exports[`Link > renders with external to correctly 1`] = `"<a href="https://example.com" rel="noopener noreferrer" class="outline-primary/25 focus-visible:outline-3 rounded-md text-muted hover:text-default transition-colors"></a>"`;
+
+exports[`Link > renders with inactiveClass correctly 1`] = `"<button type="button" class="outline-primary/25 focus-visible:outline-3 rounded-md text-muted hover:text-default transition-colors"></button>"`;
+
+exports[`Link > renders with internal to and target correctly 1`] = `"<a href="/about" rel="noopener noreferrer" target="_blank" class="outline-primary/25 focus-visible:outline-3 rounded-md text-muted hover:text-default transition-colors"></a>"`;
 
 exports[`Link > renders with raw activeClass correctly 1`] = `"<button type="button" class="text-highlighted"></button>"`;
 
@@ -18,6 +26,6 @@ exports[`Link > renders with raw correctly 1`] = `"<button type="button" class="
 
 exports[`Link > renders with raw inactiveClass correctly 1`] = `"<button type="button" class="hover:text-primary"></button>"`;
 
-exports[`Link > renders with to correctly 1`] = `"<a href="/" class="focus-visible:outline-primary text-muted hover:text-default transition-colors"></a>"`;
+exports[`Link > renders with to correctly 1`] = `"<a href="/" class="outline-primary/25 focus-visible:outline-3 rounded-md text-muted hover:text-default transition-colors"></a>"`;
 
-exports[`Link > renders with type correctly 1`] = `"<button type="submit" class="focus-visible:outline-primary text-muted hover:text-default transition-colors"></button>"`;
+exports[`Link > renders with type correctly 1`] = `"<button type="submit" class="outline-primary/25 focus-visible:outline-3 rounded-md text-muted hover:text-default transition-colors"></button>"`;

@@ -1,5 +1,6 @@
 <script lang="ts">
 import type { NumberFieldRootProps } from 'reka-ui'
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/input-number'
 import type { ButtonProps, IconProps, LinkPropsKeys } from '../types'
@@ -11,7 +12,11 @@ type InputNumber = ComponentConfig<typeof theme, AppConfig, 'inputNumber'>
 
 type InputNumberValue = number | null
 
-export interface InputNumberProps<T extends InputNumberValue = InputNumberValue> extends Pick<NumberFieldRootProps, 'modelValue' | 'defaultValue' | 'min' | 'max' | 'step' | 'stepSnapping' | 'disabled' | 'required' | 'id' | 'name' | 'formatOptions' | 'disableWheelChange' | 'invertWheelChange' | 'readonly' | 'focusOnChange'>, /** @vue-ignore */ Omit<InputHTMLAttributes, 'disabled' | 'min' | 'max' | 'readonly' | 'required' | 'step' | 'name' | 'placeholder' | 'type' | 'autofocus' | 'maxlength' | 'minlength' | 'pattern' | 'size'> {
+type ApplyModifiers<T extends InputNumberValue, Mod extends Pick<ModelModifiers, 'optional'>>
+  = | T
+    | (Mod extends { optional: true } ? undefined : never)
+
+export interface InputNumberProps<T extends InputNumberValue = InputNumberValue, Mod extends Pick<ModelModifiers, 'optional'> = Pick<ModelModifiers, 'optional'>> extends Pick<NumberFieldRootProps, | 'min' | 'max' | 'step' | 'stepSnapping' | 'disabled' | 'required' | 'id' | 'name' | 'formatOptions' | 'disableWheelChange' | 'invertWheelChange' | 'readonly' | 'focusOnChange' | 'locale'>, /** @vue-ignore */ Omit<InputHTMLAttributes, 'disabled' | 'min' | 'max' | 'readonly' | 'required' | 'step' | 'name' | 'placeholder' | 'type' | 'autofocus' | 'maxlength' | 'minlength' | 'pattern' | 'size'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -24,6 +29,8 @@ export interface InputNumberProps<T extends InputNumberValue = InputNumberValue>
   size?: InputNumber['variants']['size']
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
+  /** Keep the mobile text size on all breakpoints. */
+  fixed?: boolean
   /**
    * The orientation of the input number.
    * @defaultValue 'horizontal'
@@ -57,29 +64,32 @@ export interface InputNumberProps<T extends InputNumberValue = InputNumberValue>
   decrementDisabled?: boolean
   autofocus?: boolean
   autofocusDelay?: number
-  modelModifiers?: Pick<ModelModifiers<T>, 'optional'>
+  defaultValue?: NonNullable<T>
+  modelValue?: ApplyModifiers<T, Mod>
+  modelModifiers?: Mod
   class?: any
   ui?: InputNumber['slots']
 }
 
-export interface InputNumberEmits<T extends InputNumberValue = InputNumberValue> {
-  'update:modelValue': [value: T]
+export interface InputNumberEmits<T extends InputNumberValue = InputNumberValue, Mod extends Pick<ModelModifiers, 'optional'> = Pick<ModelModifiers, 'optional'>> {
+  'update:modelValue': [value: ApplyModifiers<T, Mod>]
   'blur': [event: FocusEvent]
   'change': [event: Event]
 }
 
 export interface InputNumberSlots {
-  increment(props?: {}): any
-  decrement(props?: {}): any
+  increment?(props?: {}): VNode[]
+  decrement?(props?: {}): VNode[]
 }
 </script>
 
-<script setup lang="ts" generic="T extends InputNumberValue = InputNumberValue">
+<script setup lang="ts" generic="T extends InputNumberValue = InputNumberValue, Mod extends Pick<ModelModifiers, 'optional'> = Pick<ModelModifiers, 'optional'>">
 import { onMounted, computed, useTemplateRef, toRef } from 'vue'
-import { NumberFieldRoot, NumberFieldInput, NumberFieldDecrement, NumberFieldIncrement, useForwardPropsEmits } from 'reka-ui'
+import { NumberFieldRoot, NumberFieldInput, NumberFieldDecrement, NumberFieldIncrement } from 'reka-ui'
+import { useForwardProps } from '../composables/useForwardProps'
 import { reactivePick, useVModel } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { useComponentUI } from '../composables/useComponentUI'
+import { useComponentProps } from '../composables/useComponentProps'
 import { useFieldGroup } from '../composables/useFieldGroup'
 import { useFormField } from '../composables/useFormField'
 import { useLocale } from '../composables/useLocale'
@@ -88,46 +98,53 @@ import UButton from './Button.vue'
 
 defineOptions({ inheritAttrs: false })
 
-const props = withDefaults(defineProps<InputNumberProps<T>>(), {
+const _props = withDefaults(defineProps<InputNumberProps<T, Mod>>(), {
   orientation: 'horizontal',
   increment: true,
   decrement: true
 })
-const emits = defineEmits<InputNumberEmits<T>>()
+const emits = defineEmits<InputNumberEmits<T, Mod>>()
+
 defineSlots<InputNumberSlots>()
 
-const modelValue = useVModel<InputNumberProps<T>, 'modelValue', 'update:modelValue'>(props, 'modelValue', emits, { defaultValue: props.defaultValue })
+const props = useComponentProps<InputNumberProps<T, Mod>>('inputNumber', _props)
+
+// eslint-disable-next-line vue/no-dupe-keys
+const modelValue = useVModel<InputNumberProps<T, Mod>, 'modelValue', 'update:modelValue'>(props, 'modelValue', emits, { defaultValue: props.defaultValue })
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as InputNumber['AppConfig']
-const uiProp = useComponentUI('inputNumber', props)
 
-const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'defaultValue', 'min', 'max', 'step', 'stepSnapping', 'formatOptions', 'disableWheelChange', 'invertWheelChange', 'readonly', 'focusOnChange'), emits)
+const rootProps = useForwardProps(reactivePick(props, 'as', 'stepSnapping', 'formatOptions', 'disableWheelChange', 'invertWheelChange', 'required', 'readonly', 'focusOnChange', 'locale'), emits)
 
-const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, id, color, size: formGroupSize, name, highlight, disabled, ariaAttrs } = useFormField<InputNumberProps<T>>(props)
-const { orientation, size: fieldGroupSize } = useFieldGroup<InputNumberProps<T>>(props)
+const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, id, color, size: formFieldSize, name, highlight, disabled, ariaAttrs } = useFormField<InputNumberProps<T, Mod>>(_props)
+const { orientation, size: fieldGroupSize } = useFieldGroup<InputNumberProps<T, Mod>>(_props)
 
-const inputSize = computed(() => fieldGroupSize.value || formGroupSize.value)
+const inputSize = computed(() => fieldGroupSize.value || formFieldSize.value)
 
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.inputNumber || {}) })({
-  color: color.value,
+  color: color.value ?? props.color,
   variant: props.variant,
-  size: inputSize.value,
-  highlight: highlight.value,
+  size: inputSize.value ?? props.size,
+  highlight: highlight.value ?? props.highlight,
+  fixed: props.fixed,
   orientation: props.orientation,
   fieldGroup: orientation.value,
   increment: props.orientation === 'vertical' ? (!!props.increment || !!props.decrement) : !!props.increment,
   decrement: props.orientation === 'vertical' ? false : !!props.decrement
 }))
 
+// eslint-disable-next-line vue/no-dupe-keys
 const incrementIcon = computed(() => props.incrementIcon || (props.orientation === 'horizontal' ? appConfig.ui.icons.plus : appConfig.ui.icons.chevronUp))
+// eslint-disable-next-line vue/no-dupe-keys
 const decrementIcon = computed(() => props.decrementIcon || (props.orientation === 'horizontal' ? appConfig.ui.icons.minus : appConfig.ui.icons.chevronDown))
 
 const inputRef = useTemplateRef('inputRef')
 
-function onUpdate(value: number | undefined) {
+function onUpdate(value: ApplyModifiers<T, Mod> | undefined) {
   if (props.modelModifiers?.optional) {
-    value = value ?? undefined
+    modelValue.value = value = value ?? undefined
   }
 
   // @ts-expect-error - 'target' does not exist in type 'EventInit'
@@ -164,26 +181,30 @@ defineExpose({
   <NumberFieldRoot
     v-bind="rootProps"
     :id="id"
+    :default-value="props.defaultValue"
     :model-value="modelValue"
+    :min="props.min"
+    :max="props.max"
+    :step="props.step"
     data-slot="root"
-    :class="ui.root({ class: [uiProp?.root, props.class] })"
+    :class="ui.root({ class: [props.ui?.root, props.class] })"
     :name="name"
     :disabled="disabled"
-    @update:model-value="onUpdate"
+    @update:model-value="(val) => onUpdate(val as ApplyModifiers<T, Mod>)"
   >
     <NumberFieldInput
       v-bind="{ ...$attrs, ...ariaAttrs }"
       ref="inputRef"
-      :placeholder="placeholder"
-      :required="required"
+      :placeholder="props.placeholder"
+      :required="props.required"
       data-slot="base"
-      :class="ui.base({ class: uiProp?.base })"
+      :class="ui.base({ class: props.ui?.base })"
       @blur="onBlur"
       @focus="emitFormFocus"
     />
 
-    <div v-if="!!increment" data-slot="increment" :class="ui.increment({ class: uiProp?.increment })">
-      <NumberFieldIncrement as-child :disabled="disabled || incrementDisabled">
+    <div v-if="!!props.increment" data-slot="increment" :class="ui.increment({ class: props.ui?.increment })">
+      <NumberFieldIncrement as-child :disabled="disabled || props.incrementDisabled">
         <slot name="increment">
           <UButton
             :icon="incrementIcon"
@@ -191,14 +212,14 @@ defineExpose({
             :size="inputSize"
             variant="link"
             :aria-label="t('inputNumber.increment')"
-            v-bind="typeof increment === 'object' ? increment : undefined"
+            v-bind="typeof props.increment === 'object' ? props.increment : undefined"
           />
         </slot>
       </NumberFieldIncrement>
     </div>
 
-    <div v-if="!!decrement" data-slot="decrement" :class="ui.decrement({ class: uiProp?.decrement })">
-      <NumberFieldDecrement as-child :disabled="disabled || decrementDisabled">
+    <div v-if="!!props.decrement" data-slot="decrement" :class="ui.decrement({ class: props.ui?.decrement })">
+      <NumberFieldDecrement as-child :disabled="disabled || props.decrementDisabled">
         <slot name="decrement">
           <UButton
             :icon="decrementIcon"
@@ -206,7 +227,7 @@ defineExpose({
             :size="inputSize"
             variant="link"
             :aria-label="t('inputNumber.decrement')"
-            v-bind="typeof decrement === 'object' ? decrement : undefined"
+            v-bind="typeof props.decrement === 'object' ? props.decrement : undefined"
           />
         </slot>
       </NumberFieldDecrement>

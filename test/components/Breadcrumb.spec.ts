@@ -1,9 +1,8 @@
 import { describe, it, expect } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { renderEach } from '../component-render'
 import Breadcrumb from '../../src/runtime/components/Breadcrumb.vue'
-import type { BreadcrumbProps, BreadcrumbSlots } from '../../src/runtime/components/Breadcrumb.vue'
-import ComponentRender from '../component-render'
 
 describe('Breadcrumb', () => {
   const items = [{
@@ -21,16 +20,17 @@ describe('Breadcrumb', () => {
     label: 'Breadcrumb',
     to: '/components/breadcrumb',
     icon: 'i-lucide-link',
-    slot: 'custom'
+    slot: 'custom' as const
   }]
 
   const props = { items }
 
-  it.each([
+  renderEach(Breadcrumb<typeof items[number]>, [
     // Props
     ['with items', { props }],
     ['with labelKey', { props: { ...props, labelKey: 'icon' } }],
     ['with separatorIcon', { props: { ...props, separatorIcon: 'i-lucide-minus' } }],
+    ['with color neutral', { props: { ...props, color: 'neutral' } }],
     ['with as', { props: { ...props, as: 'div' } }],
     ['with class', { props: { ...props, class: 'w-48' } }],
     ['with ui', { props: { ...props, ui: { link: 'font-bold' } } }],
@@ -41,10 +41,7 @@ describe('Breadcrumb', () => {
     ['with item-trailing slot', { props, slots: { 'item-trailing': () => 'Item trailing slot' } }],
     ['with custom slot', { props, slots: { custom: () => 'Custom slot' } }],
     ['with separator slot', { props, slots: { separator: () => '/' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: BreadcrumbProps, slots?: Partial<BreadcrumbSlots & { custom: () => 'Custom slot' }> }) => {
-    const html = await ComponentRender(nameOrHtml, options, Breadcrumb)
-    expect(html).toMatchSnapshot()
-  })
+  ])
 
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(Breadcrumb, {

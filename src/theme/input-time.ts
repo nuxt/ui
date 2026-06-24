@@ -8,34 +8,41 @@ export default (options: Required<ModuleOptions>) => {
     slots: {
       root: () => undefined,
       base: () => ['group relative inline-flex items-center rounded-md select-none', options.theme.transitions && 'transition-colors'],
-      segment: ['rounded text-center outline-hidden data-placeholder:text-dimmed data-[segment=literal]:text-muted data-invalid:text-error data-disabled:cursor-not-allowed data-disabled:opacity-75', options.theme.transitions && 'transition-colors']
+      segment: ['rounded text-center outline-hidden data-placeholder:text-dimmed data-[segment=literal]:text-muted data-invalid:text-error data-disabled:cursor-not-allowed data-disabled:opacity-75', options.theme.transitions && 'transition-colors'],
+      separatorIcon: 'shrink-0 size-4 text-muted'
     },
     variants: {
       ...fieldGroupVariant,
       size: {
         xs: {
           base: (prev: string) => [prev, 'gap-0.25'],
-          segment: 'not-data-[segment=literal]:w-6'
+          segment: 'not-data-[segment=literal]:w-8'
         },
         sm: {
           base: (prev: string) => [prev, 'gap-0.5'],
-          segment: 'not-data-[segment=literal]:w-6'
+          segment: 'not-data-[segment=literal]:w-8'
         },
         md: {
           base: (prev: string) => [prev, 'gap-0.5'],
-          segment: 'not-data-[segment=literal]:w-7'
+          segment: 'not-data-[segment=literal]:w-9'
         },
         lg: {
           base: (prev: string) => [prev, 'gap-0.75'],
-          segment: 'not-data-[segment=literal]:w-7'
+          segment: 'not-data-[segment=literal]:w-9'
         },
         xl: {
           base: (prev: string) => [prev, 'gap-0.75'],
-          segment: 'not-data-[segment=literal]:w-8'
+          segment: 'not-data-[segment=literal]:w-10'
         }
-      }
+      },
+      variant: (prev: Record<string, string>) => Object.fromEntries(
+        Object.entries(prev).map(([key, value]) => [key, replaceFocus(value)])
+      )
     },
-    compoundVariants: [{
+    compoundVariants: (prev: Record<string, any>[]) => [...prev.map(item => ({
+      ...item,
+      class: typeof item.class === 'string' ? replaceFocus(item.class) : item.class
+    })), {
       variant: 'outline',
       class: {
         segment: 'focus:bg-elevated'
@@ -62,4 +69,10 @@ export default (options: Required<ModuleOptions>) => {
       }
     }]
   }, input(options))
+}
+
+function replaceFocus(str: string): string {
+  return str
+    .replace(/focus:/g, 'has-focus:')
+    .replace(/focus-visible:/g, 'has-focus-visible:')
 }

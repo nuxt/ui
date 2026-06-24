@@ -165,10 +165,6 @@ props:
 ---
 ::
 
-::tip
-Use the `by` prop to compare objects by a field instead of reference when the `model-value` is an object.
-::
-
 ### Multiple
 
 Use the `multiple` prop to allow multiple selections, the selected items will be separated by a comma in the trigger.
@@ -255,6 +251,41 @@ props:
     align: center
     side: bottom
     sideOffset: 8
+  items:
+    - Backlog
+    - Todo
+    - In Progress
+    - Done
+  class: 'w-48'
+---
+::
+
+::note
+These options only apply when `content.position` is `popper` (default).
+::
+
+### Position :badge{label="4.7+" class="align-text-top"}
+
+Use the `content.position` prop to control how the Select content is positioned relative to the trigger. Defaults to `popper`, which positions the content like other popovers. Set it to `item-aligned` to align the content with the selected item (similar to a native macOS menu).
+
+::component-code
+---
+prettier: true
+ignore:
+  - items
+  - modelValue
+  - class
+external:
+  - items
+  - modelValue
+items:
+  content.position:
+    - item-aligned
+    - popper
+props:
+  modelValue: 'Todo'
+  content:
+    position: item-aligned
   items:
     - Backlog
     - Todo
@@ -492,6 +523,7 @@ ignore:
   - items
   - modelValue
   - class
+  - avatar.loading
 external:
   - items
   - modelValue
@@ -499,6 +531,7 @@ props:
   modelValue: 'Nuxt'
   avatar:
     src: 'https://github.com/nuxt.png'
+    loading: lazy
   items:
     - Nuxt
     - NuxtHub
@@ -728,6 +761,10 @@ collapse: true
 ---
 ::
 
+::note
+This example uses `useLazyFetch` with `immediate: false` to only fetch data when the menu opens, avoiding unnecessary API calls on page load.
+::
+
 ### With infinite scroll :badge{label="4.4+" class="align-text-top"}
 
 You can use the [`useInfiniteScroll`](https://vueuse.org/core/useInfiniteScroll/) composable to load more data as the user scrolls.
@@ -742,6 +779,10 @@ highlights:
 overflowHidden: true
 name: 'select-infinite-scroll-example'
 ---
+::
+
+::note
+This example uses `useLazyFetch` with `immediate: false` so data is only loaded as the user scrolls.
 ::
 
 ### With full content width

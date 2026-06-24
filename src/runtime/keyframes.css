@@ -1,40 +1,110 @@
 @keyframes accordion-up {
   from {
     height: var(--reka-accordion-content-height);
+    overflow: hidden;
   }
 
   to {
     height: 0;
+    overflow: hidden;
   }
 }
 
 @keyframes accordion-down {
   from {
     height: 0;
+    overflow: hidden;
   }
 
   to {
     height: var(--reka-accordion-content-height);
+    overflow: hidden;
   }
 }
 
 @keyframes collapsible-up {
   from {
     height: var(--reka-collapsible-content-height);
+    overflow: hidden;
   }
 
   to {
     height: 0;
+    overflow: hidden;
   }
 }
 
 @keyframes collapsible-down {
   from {
     height: 0;
+    overflow: hidden;
   }
 
   to {
     height: var(--reka-collapsible-content-height);
+    overflow: hidden;
+  }
+}
+
+@keyframes toast-slide-in-from-top {
+  from {
+    transform: translateY(-100%);
+  }
+
+  to {
+    transform: var(--transform);
+  }
+}
+
+@keyframes toast-slide-in-from-bottom {
+  from {
+    transform: translateY(100%);
+  }
+
+  to {
+    transform: var(--transform);
+  }
+}
+
+@keyframes toast-slide-up {
+  from {
+    transform: translateX(0) translateY(var(--translate));
+  }
+
+  to {
+    transform: translateX(0) translateY(calc(var(--translate) - 100%));
+  }
+}
+
+@keyframes toast-slide-down {
+  from {
+    transform: translateX(0) translateY(var(--translate));
+  }
+
+  to {
+    transform: translateX(0) translateY(calc(var(--translate) + 100%));
+  }
+}
+
+@keyframes toast-pulse-a {
+  0%,
+  100% {
+    scale: 1;
+  }
+
+  50% {
+    scale: 1.04;
+  }
+}
+
+@keyframes toast-pulse-b {
+  0%,
+  100% {
+    scale: 1;
+  }
+
+  50% {
+    scale: 1.04;
   }
 }
 
@@ -44,8 +114,7 @@
   }
 
   to {
-    transform: translateY(calc((var(--before) - var(--height)) * var(--gap)))
-      scale(var(--scale));
+    transform: translateY(calc((var(--before) - var(--height)) * var(--gap))) scale(var(--scale));
   }
 }
 
@@ -55,9 +124,7 @@
   }
 
   to {
-    transform: translateY(
-      calc((var(--offset) - var(--height)) * var(--translate-factor))
-    );
+    transform: translateY(calc((var(--offset) - var(--height)) * var(--translate-factor)));
   }
 }
 
@@ -535,5 +602,25 @@
 
   to {
     transform: translate3d(0, calc(-100% * var(--gap)), 0);
+  }
+}
+
+@keyframes shimmer {
+  from {
+    background-position: 100% center;
+  }
+
+  to {
+    background-position: 0% center;
+  }
+}
+
+@keyframes shimmer-rtl {
+  from {
+    background-position: 0% center;
+  }
+
+  to {
+    background-position: 100% center;
   }
 }

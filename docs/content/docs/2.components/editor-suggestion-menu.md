@@ -6,7 +6,6 @@ links:
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/EditorSuggestionMenu.vue
-navigation.badge: New
 ---
 
 ## Usage
@@ -66,6 +65,27 @@ Use the `char` prop to change the trigger character. Defaults to `/`{lang="ts-ty
 <template>
   <UEditor v-slot="{ editor }">
     <UEditorSuggestionMenu :editor="editor" :items="items" char=">" />
+  </UEditor>
+</template>
+```
+
+### Suggestion :badge{label="4.7+" class="align-text-top"}
+
+Use the `suggestion` prop to customize TipTap's [Suggestion matching behavior](https://tiptap.dev/docs/editor/api/utilities/suggestion#settings).
+
+This is useful when the trigger character should open directly after other characters instead of requiring the default whitespace prefix.
+
+```vue
+<template>
+  <UEditor v-slot="{ editor }">
+    <UEditorSuggestionMenu
+      :editor="editor"
+      :items="items"
+      char=":"
+      :suggestion="{
+        allowedPrefixes: null
+      }"
+    />
   </UEditor>
 </template>
 ```

@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'Jo\'natish'
     },
+    chatReasoning: {
+      thinking: 'O\'ylayapti…',
+      thought: 'O\'yladi',
+      thoughtFor: '{duration} o\'yladi'
+    },
     colorMode: {
       dark: 'Qorong\'i',
       light: 'Yorug\'',
@@ -50,6 +55,7 @@ export default defineLocale<Messages>({
     },
     contentSearch: {
       links: 'Havolalar',
+      search: 'Natijalar',
       theme: 'Mavzu'
     },
     contentSearchButton: {
@@ -57,6 +63,10 @@ export default defineLocale<Messages>({
     },
     contentToc: {
       title: 'Ushbu sahifada'
+    },
+    dropdownMenu: {
+      noMatch: 'Mos keluvchi natija topilmadi',
+      search: 'Qidirish…'
     },
     dashboardSearch: {
       theme: 'Mavzu'
@@ -91,6 +101,11 @@ export default defineLocale<Messages>({
       decrement: 'Ayirish',
       increment: 'Qoʻshish'
     },
+    listbox: {
+      noData: 'Maʼlumot yoʻq',
+      noMatch: 'Mos keluvchi natija topilmadi',
+      search: 'Qidirish…'
+    },
     modal: {
       close: 'Yopish'
     },
@@ -110,7 +125,15 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'Koddan buferga nusxa olish'
+      },
+      prompt: {
+        copy: 'So\'rovni nusxalash',
+        openIn: '{name}da ochish'
       }
+    },
+    sidebar: {
+      close: 'Yopish',
+      toggle: 'Almashtirish'
     },
     selectMenu: {
       create: '"{label}" yaratish',

@@ -1,5 +1,6 @@
 <script lang="ts">
 import type { PaginationRootProps, PaginationRootEmits } from 'reka-ui'
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/pagination'
 import type { ButtonProps, IconProps } from '../types'
@@ -81,12 +82,12 @@ export interface PaginationProps extends Partial<Pick<PaginationRootProps, 'defa
 export interface PaginationEmits extends PaginationRootEmits {}
 
 export interface PaginationSlots {
-  first(props?: {}): any
-  prev(props?: {}): any
-  next(props?: {}): any
-  last(props?: {}): any
-  ellipsis(props: { ui: Pagination['ui'] }): any
-  item(props: {
+  first?(props?: {}): VNode[]
+  prev?(props?: {}): VNode[]
+  next?(props?: {}): VNode[]
+  last?(props?: {}): VNode[]
+  ellipsis?(props: { ui: Pagination['ui'] }): VNode[]
+  item?(props: {
     page: number
     pageCount: number
     item: {
@@ -96,21 +97,22 @@ export interface PaginationSlots {
       value: number
     }
     index: number
-  }): any
+  }): VNode[]
 }
 </script>
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { PaginationRoot, PaginationList, PaginationListItem, PaginationFirst, PaginationPrev, PaginationEllipsis, PaginationNext, PaginationLast, useForwardPropsEmits } from 'reka-ui'
+import { PaginationRoot, PaginationList, PaginationListItem, PaginationFirst, PaginationPrev, PaginationEllipsis, PaginationNext, PaginationLast } from 'reka-ui'
+import { useForwardProps } from '../composables/useForwardProps'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { useComponentUI } from '../composables/useComponentUI'
+import { useComponentProps } from '../composables/useComponentProps'
 import { useLocale } from '../composables/useLocale'
 import { tv } from '../utils/tv'
 import UButton from './Button.vue'
 
-const props = withDefaults(defineProps<PaginationProps>(), {
+const _props = withDefaults(defineProps<PaginationProps>(), {
   color: 'neutral',
   variant: 'outline',
   activeColor: 'primary',
@@ -124,15 +126,20 @@ const props = withDefaults(defineProps<PaginationProps>(), {
 const emits = defineEmits<PaginationEmits>()
 const slots = defineSlots<PaginationSlots>()
 
+const props = useComponentProps('pagination', _props)
+
 const { dir } = useLocale()
 const appConfig = useAppConfig() as Pagination['AppConfig']
-const uiProp = useComponentUI('pagination', props)
 
-const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'defaultPage', 'disabled', 'itemsPerPage', 'page', 'showEdges', 'siblingCount', 'total'), emits)
+const rootProps = useForwardProps(reactivePick(props, 'as', 'defaultPage', 'disabled', 'itemsPerPage', 'page', 'showEdges', 'siblingCount', 'total'), emits)
 
+// eslint-disable-next-line vue/no-dupe-keys
 const firstIcon = computed(() => props.firstIcon || (dir.value === 'rtl' ? appConfig.ui.icons.chevronDoubleRight : appConfig.ui.icons.chevronDoubleLeft))
+// eslint-disable-next-line vue/no-dupe-keys
 const prevIcon = computed(() => props.prevIcon || (dir.value === 'rtl' ? appConfig.ui.icons.chevronRight : appConfig.ui.icons.chevronLeft))
+// eslint-disable-next-line vue/no-dupe-keys
 const nextIcon = computed(() => props.nextIcon || (dir.value === 'rtl' ? appConfig.ui.icons.chevronLeft : appConfig.ui.icons.chevronRight))
+// eslint-disable-next-line vue/no-dupe-keys
 const lastIcon = computed(() => props.lastIcon || (dir.value === 'rtl' ? appConfig.ui.icons.chevronDoubleLeft : appConfig.ui.icons.chevronDoubleRight))
 
 // eslint-disable-next-line vue/no-dupe-keys
@@ -140,49 +147,49 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pagination |
 </script>
 
 <template>
-  <PaginationRoot v-slot="{ page, pageCount }" v-bind="rootProps" data-slot="root" :class="ui.root({ class: [uiProp?.root, props.class] })">
-    <PaginationList v-slot="{ items }" data-slot="list" :class="ui.list({ class: uiProp?.list })">
-      <PaginationFirst v-if="showControls || !!slots.first" as-child data-slot="first" :class="ui.first({ class: uiProp?.first })">
+  <PaginationRoot v-slot="{ page, pageCount }" v-bind="(rootProps as any)" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+    <PaginationList v-slot="{ items }" data-slot="list" :class="ui.list({ class: props.ui?.list })">
+      <PaginationFirst v-if="props.showControls || !!slots.first" as-child data-slot="first" :class="ui.first({ class: props.ui?.first })">
         <slot name="first">
-          <UButton :color="color" :variant="variant" :size="size" :icon="firstIcon" :to="to?.(1)" />
+          <UButton :color="props.color" :variant="props.variant" :size="props.size" :icon="firstIcon" :to="props.to?.(1)" />
         </slot>
       </PaginationFirst>
-      <PaginationPrev v-if="showControls || !!slots.prev" as-child data-slot="prev" :class="ui.prev({ class: uiProp?.prev })">
+      <PaginationPrev v-if="props.showControls || !!slots.prev" as-child data-slot="prev" :class="ui.prev({ class: props.ui?.prev })">
         <slot name="prev">
-          <UButton :color="color" :variant="variant" :size="size" :icon="prevIcon" :to="page > 1 ? to?.(page - 1) : undefined" />
+          <UButton :color="props.color" :variant="props.variant" :size="props.size" :icon="prevIcon" :to="page > 1 ? props.to?.(page - 1) : undefined" />
         </slot>
       </PaginationPrev>
 
       <template v-for="(item, index) in items" :key="index">
-        <PaginationListItem v-if="item.type === 'page'" as-child :value="item.value" data-slot="item" :class="ui.item({ class: uiProp?.item })">
+        <PaginationListItem v-if="item.type === 'page'" as-child :value="item.value" data-slot="item" :class="ui.item({ class: props.ui?.item })">
           <slot name="item" v-bind="{ item, index, page, pageCount }">
             <UButton
-              :color="page === item.value ? activeColor : color"
-              :variant="page === item.value ? activeVariant : variant"
-              :size="size"
+              :color="page === item.value ? props.activeColor : props.color"
+              :variant="page === item.value ? props.activeVariant : props.variant"
+              :size="props.size"
               :label="String(item.value)"
               :ui="{ label: ui.label() }"
-              :to="to?.(item.value)"
+              :to="props.to?.(item.value)"
               square
             />
           </slot>
         </PaginationListItem>
 
-        <PaginationEllipsis v-else as-child data-slot="ellipsis" :class="ui.ellipsis({ class: uiProp?.ellipsis })">
+        <PaginationEllipsis v-else as-child data-slot="ellipsis" :class="ui.ellipsis({ class: props.ui?.ellipsis })">
           <slot name="ellipsis" :ui="ui">
-            <UButton as="div" :color="color" :variant="variant" :size="size" :icon="ellipsisIcon || appConfig.ui.icons.ellipsis" />
+            <UButton as="div" :color="props.color" :variant="props.variant" :size="props.size" :icon="props.ellipsisIcon || appConfig.ui.icons.ellipsis" />
           </slot>
         </PaginationEllipsis>
       </template>
 
-      <PaginationNext v-if="showControls || !!slots.next" as-child data-slot="next" :class="ui.next({ class: uiProp?.next })">
+      <PaginationNext v-if="props.showControls || !!slots.next" as-child data-slot="next" :class="ui.next({ class: props.ui?.next })">
         <slot name="next">
-          <UButton :color="color" :variant="variant" :size="size" :icon="nextIcon" :to="page < pageCount ? to?.(page + 1) : undefined" />
+          <UButton :color="props.color" :variant="props.variant" :size="props.size" :icon="nextIcon" :to="page < pageCount ? props.to?.(page + 1) : undefined" />
         </slot>
       </PaginationNext>
-      <PaginationLast v-if="showControls || !!slots.last" as-child data-slot="last" :class="ui.last({ class: uiProp?.last })">
+      <PaginationLast v-if="props.showControls || !!slots.last" as-child data-slot="last" :class="ui.last({ class: props.ui?.last })">
         <slot name="last">
-          <UButton :color="color" :variant="variant" :size="size" :icon="lastIcon" :to="to?.(pageCount)" />
+          <UButton :color="props.color" :variant="props.variant" :size="props.size" :icon="lastIcon" :to="props.to?.(pageCount)" />
         </slot>
       </PaginationLast>
     </PaginationList>

@@ -6,7 +6,7 @@ export default (options: Required<ModuleOptions>) => ({
     header: 'flex',
     item: 'group text-center relative w-full',
     container: 'relative',
-    trigger: 'rounded-full font-medium text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated focus-visible:outline-2 focus-visible:outline-offset-2',
+    trigger: 'rounded-full font-medium text-center align-middle flex items-center justify-center font-semibold group-data-[state=completed]:text-inverted group-data-[state=active]:text-inverted text-muted bg-elevated focus-visible:outline-3',
     indicator: 'flex items-center justify-center size-full',
     icon: 'shrink-0',
     separator: 'absolute rounded-full group-data-[disabled]:opacity-75 bg-accented',
@@ -71,11 +71,11 @@ export default (options: Required<ModuleOptions>) => ({
 
     color: {
       ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, {
-        trigger: `group-data-[state=completed]:bg-${color} group-data-[state=active]:bg-${color} focus-visible:outline-${color}`,
+        trigger: `group-data-[state=completed]:bg-${color} group-data-[state=active]:bg-${color} outline-${color}/25`,
         separator: `group-data-[state=completed]:bg-${color}`
       }])),
       neutral: {
-        trigger: `group-data-[state=completed]:bg-inverted group-data-[state=active]:bg-inverted focus-visible:outline-inverted`,
+        trigger: `group-data-[state=completed]:bg-inverted group-data-[state=active]:bg-inverted outline-inverted/25`,
         separator: `group-data-[state=completed]:bg-inverted`
       }
     }

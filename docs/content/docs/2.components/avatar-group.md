@@ -39,13 +39,13 @@ props:
 slots:
   default: |
 
-    <UAvatar src="https://github.com/benjamincanac.png" alt="Benjamin Canac" />
-    <UAvatar src="https://github.com/romhml.png" alt="Romain Hamel" />
-    <UAvatar src="https://github.com/noook.png" alt="Neil Richter" />
+    <UAvatar src="https://github.com/benjamincanac.png" alt="Benjamin Canac" loading="lazy" />
+    <UAvatar src="https://github.com/romhml.png" alt="Romain Hamel" loading="lazy" />
+    <UAvatar src="https://github.com/noook.png" alt="Neil Richter" loading="lazy" />
 ---
-:u-avatar{src="https://github.com/benjamincanac.png" alt="Benjamin Canac"}
-:u-avatar{src="https://github.com/romhml.png" alt="Romain Hamel"}
-:u-avatar{src="https://github.com/noook.png" alt="Neil Richter"}
+:u-avatar{src="https://github.com/benjamincanac.png" alt="Benjamin Canac" loading="lazy"}
+:u-avatar{src="https://github.com/romhml.png" alt="Romain Hamel" loading="lazy"}
+:u-avatar{src="https://github.com/noook.png" alt="Neil Richter" loading="lazy"}
 ::
 
 ### Max
@@ -60,13 +60,34 @@ props:
 slots:
   default: |
 
-    <UAvatar src="https://github.com/benjamincanac.png" alt="Benjamin Canac" />
-    <UAvatar src="https://github.com/romhml.png" alt="Romain Hamel" />
-    <UAvatar src="https://github.com/noook.png" alt="Neil Richter" />
+    <UAvatar src="https://github.com/benjamincanac.png" alt="Benjamin Canac" loading="lazy" />
+    <UAvatar src="https://github.com/romhml.png" alt="Romain Hamel" loading="lazy" />
+    <UAvatar src="https://github.com/noook.png" alt="Neil Richter" loading="lazy" />
 ---
-:u-avatar{src="https://github.com/benjamincanac.png" alt="Benjamin Canac"}
-:u-avatar{src="https://github.com/romhml.png" alt="Romain Hamel"}
-:u-avatar{src="https://github.com/noook.png" alt="Neil Richter"}
+:u-avatar{src="https://github.com/benjamincanac.png" alt="Benjamin Canac" loading="lazy"}
+:u-avatar{src="https://github.com/romhml.png" alt="Romain Hamel" loading="lazy"}
+:u-avatar{src="https://github.com/noook.png" alt="Neil Richter" loading="lazy"}
+::
+
+### Color :badge{label="4.8+" class="align-text-top"}
+
+Use the `color` prop to change the color of all the avatars.
+
+::component-code
+---
+prettier: true
+props:
+  color: primary
+slots:
+  default: |
+
+    <UAvatar alt="Benjamin Canac" />
+    <UAvatar alt="Romain Hamel" />
+    <UAvatar alt="Neil Richter" />
+---
+:u-avatar{alt="Benjamin Canac"}
+:u-avatar{alt="Romain Hamel"}
+:u-avatar{alt="Neil Richter"}
 ::
 
 ## Examples

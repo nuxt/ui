@@ -14,7 +14,14 @@ useSeoMeta({
   ogDescription: page.value.description
 })
 
-defineOgImageComponent('Docs')
+useCanonical()
+
+if (import.meta.server) {
+  defineOgImage('Docs.takumi', {
+    title: page.value.title,
+    description: page.value.description
+  })
+}
 </script>
 
 <template>
@@ -56,7 +63,7 @@ defineOgImageComponent('Docs')
               :modifiers="{
                 position: 'top'
               }"
-              class="aspect-[16/9] size-full opacity-75 group-hover:opacity-100 group-hover:scale-110 duration-200 transition-[scale,opacity] pointer-events-none"
+              class="aspect-video size-full opacity-75 group-hover:opacity-100 group-hover:scale-110 duration-200 transition-[scale,opacity] pointer-events-none"
             />
 
             <div class="absolute flex items-center px-2.5 py-0.75 gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none bg-black/90 rounded-full">

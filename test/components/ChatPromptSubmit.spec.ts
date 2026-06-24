@@ -1,21 +1,69 @@
 import { describe, it, expect } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { renderEach } from '../component-render'
 import ChatPromptSubmit from '../../src/runtime/components/ChatPromptSubmit.vue'
-import type { ChatPromptSubmitProps } from '../../src/runtime/components/ChatPromptSubmit.vue'
-import ComponentRender from '../component-render'
 
 describe('ChatPromptSubmit', () => {
   const statuses = ['ready', 'submitted', 'streaming', 'error'] as any
 
-  it.each([
+  renderEach(ChatPromptSubmit, [
     // Props
     ['with icon', { props: { icon: 'i-lucide-send' } }],
     ...statuses.map((status: string) => [`with status ${status}`, { props: { status } }]),
     ['with class', { props: { class: '' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ChatPromptSubmitProps }) => {
-    const html = await ComponentRender(nameOrHtml, options, ChatPromptSubmit)
-    expect(html).toMatchSnapshot()
+  ])
+
+  it('disables the button when status is ready and disabled is true', async () => {
+    const wrapper = await mountSuspended(ChatPromptSubmit, {
+      props: {
+        status: 'ready',
+        disabled: true
+      }
+    })
+
+    expect(wrapper.find('button').attributes('disabled')).toBeDefined()
+  })
+
+  it('does not disable the button when status is streaming even if disabled is true', async () => {
+    const wrapper = await mountSuspended(ChatPromptSubmit, {
+      props: {
+        status: 'streaming',
+        disabled: true
+      }
+    })
+
+    expect(wrapper.find('button').attributes('disabled')).toBeUndefined()
+  })
+
+  it('does not disable the button when status is submitted even if disabled is true', async () => {
+    const wrapper = await mountSuspended(ChatPromptSubmit, {
+      props: {
+        status: 'submitted',
+        disabled: true
+      }
+    })
+
+    expect(wrapper.find('button').attributes('disabled')).toBeUndefined()
+  })
+
+  it('does not disable the button when status is error even if disabled is true', async () => {
+    const wrapper = await mountSuspended(ChatPromptSubmit, {
+      props: {
+        status: 'error',
+        disabled: true
+      }
+    })
+
+    expect(wrapper.find('button').attributes('disabled')).toBeUndefined()
+  })
+
+  it('hides the icon when icon is false', async () => {
+    const withIcon = await mountSuspended(ChatPromptSubmit)
+    expect(withIcon.find('[data-slot="leadingIcon"]').exists()).toBe(true)
+
+    const withoutIcon = await mountSuspended(ChatPromptSubmit, { props: { icon: false } })
+    expect(withoutIcon.find('[data-slot="leadingIcon"]').exists()).toBe(false)
   })
 
   it('passes accessibility tests', async () => {

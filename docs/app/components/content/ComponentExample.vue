@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { ChipProps } from '@nuxt/ui'
-import { camelCase } from 'scule'
+import { camelCase, upperFirst } from 'scule'
 import { hash } from 'ohash'
 import { useElementSize } from '@vueuse/core'
 import { get, set } from '#ui/utils'
@@ -89,33 +89,48 @@ const { width } = useElementSize(el)
 
 const camelName = camelCase(props.name)
 
-const data = await fetchComponentExample(camelName)
+const exampleModules = import.meta.glob('~/components/content/examples/**/*.vue')
+const exampleMatch = Object.entries(exampleModules).find(([path]) => path.endsWith(`/${upperFirst(camelName)}.vue`))
+const resolvedComponent = exampleMatch ? defineAsyncComponent(exampleMatch[1] as any) : undefined
+
+const { data } = await useFetchComponentExample(camelName)
 
 const componentProps = reactive({ ...(props.props || {}) })
 
-const code = computed(() => {
-  let code = ''
-
-  if (props.collapse) {
-    code += `::code-collapse
-`
-  }
-
-  code += `\`\`\`${props.lang} ${props.preview ? '' : ` [${props.filename ?? data.pascalName}.${props.lang}]`}${props.highlights?.length ? `{${props.highlights.join('-')}}` : ''}
-${data?.code ?? ''}
+function buildCodeBlock(source: string, cssClass?: string) {
+  const codeFence = `\`\`\`${props.lang} ${props.preview ? '' : ` [${props.filename ?? data.value?.pascalName}.${props.lang}]`}${props.highlights?.length ? `{${props.highlights.join('-')}}` : ''}
+${source}
 \`\`\``
 
   if (props.collapse) {
-    code += `
+    return `::code-collapse${cssClass ? `{class="${cssClass}"}` : ''}
+${codeFence}
 ::`
   }
 
-  return code
+  if (cssClass) {
+    return `::div{class="${cssClass}"}
+${codeFence}
+::`
+  }
+
+  return codeFence
+}
+
+const code = computed(() => {
+  const rawCode = data.value?.code ?? ''
+  const vueCode = addVueImports(rawCode)
+
+  if (vueCode !== rawCode) {
+    return buildCodeBlock(rawCode, 'nuxt-only') + '\n\n' + buildCodeBlock(vueCode, 'vue-only')
+  }
+
+  return buildCodeBlock(rawCode)
 })
 
-const { data: ast } = await useAsyncData(`component-example-${camelName}${hash({ props: componentProps, collapse: props.collapse })}`, async () => {
+const { data: ast } = useAsyncData(`component-example-${camelName}${hash({ props: componentProps, collapse: props.collapse })}`, async () => {
   if (!props.prettier) {
-    return parseMarkdown(code.value)
+    return cachedParseMarkdown(code.value)
   }
 
   let formatted = ''
@@ -130,8 +145,8 @@ const { data: ast } = await useAsyncData(`component-example-${camelName}${hash({
     formatted = code.value
   }
 
-  return parseMarkdown(formatted)
-}, { watch: [code] })
+  return cachedParseMarkdown(formatted)
+}, { lazy: import.meta.client, watch: [code] })
 
 const optionsValues = ref(props.options?.reduce((acc, option) => {
   if (option.name) {
@@ -146,6 +161,12 @@ const optionsValues = ref(props.options?.reduce((acc, option) => {
   }
   return acc
 }, {} as Record<string, any>) || {})
+
+const playgroundUrl = computed(() => {
+  const rawCode = data.value?.code
+  if (!rawCode) return null
+  return getPlaygroundUrl(addVueImports(rawCode))
+})
 
 const urlSearchParams = computed(() => {
   const params = {
@@ -165,7 +186,7 @@ const urlSearchParams = computed(() => {
   <div ref="el" class="my-5" :style="{ '--ui-header-height': '4rem' }">
     <template v-if="preview">
       <div ref="wrapperContainer" class="relative group/component">
-        <div class="border border-muted relative z-[1]" :class="[{ 'border-b-0 rounded-t-md': props.source, 'rounded-md': !props.source, 'overflow-hidden': props.overflowHidden }]">
+        <div class="border border-muted relative z-1" :class="[{ 'border-b-0 rounded-t-md': props.source, 'rounded-md': !props.source, 'overflow-hidden': props.overflowHidden }]">
           <div v-if="props.options?.length || !!slots.options" class="flex gap-4 p-4 border-b border-muted">
             <slot name="options" />
 
@@ -225,12 +246,14 @@ const urlSearchParams = computed(() => {
             class="relative w-full"
             :class="[props.class, { 'dark:bg-neutral-950/50 rounded-t-md': props.elevated }, !iframeMobile && 'lg:left-1/2 lg:-translate-x-1/2 lg:w-[1024px]']"
           />
-          <div v-else ref="componentContainer" class="flex justify-center p-4" :class="[props.class, { 'dark:bg-neutral-950/50 rounded-t-md': props.elevated }]">
-            <component :is="camelName" v-bind="{ ...componentProps, ...optionsValues }" />
+          <div v-else-if="resolvedComponent" ref="componentContainer" class="flex justify-center p-4" :class="[props.class, { 'dark:bg-neutral-950/50 rounded-t-md': props.elevated }]">
+            <component :is="resolvedComponent" v-bind="{ ...componentProps, ...optionsValues }" />
           </div>
         </div>
 
         <ClientOnly>
+          <ComponentPlaygroundButton v-if="playgroundUrl" :to="playgroundUrl" :component="camelName" />
+
           <LazyComponentThemeVisualizer
             :container="componentContainer"
             :position-container="wrapperContainer"
@@ -240,10 +263,10 @@ const urlSearchParams = computed(() => {
     </template>
 
     <template v-if="props.source">
-      <div v-if="!!slots.code" class="[&_pre]:!rounded-t-none [&_div.my-5]:!mt-0">
+      <div v-if="!!slots.code" class="[&_pre]:rounded-t-none! [&_div.my-5]:mt-0!">
         <slot name="code" />
       </div>
-      <MDCRenderer v-else-if="ast" :body="ast.body" :data="ast.data" class="[&_pre]:!rounded-t-none [&_div.my-5]:!mt-0" />
+      <MDCRenderer v-else-if="ast" :body="ast.body" :data="ast.data" class="[&_pre]:rounded-t-none! [&_div.my-5]:mt-0!" />
     </template>
   </div>
 </template>

@@ -8,7 +8,7 @@ export default (options: Required<ModuleOptions>) => {
   return {
     slots: {
       root: 'relative inline-flex items-center',
-      base: ['w-full rounded-md border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75', options.theme.transitions && 'transition-colors'],
+      base: ['w-full rounded-md border-0 placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75', options.theme.transitions && 'transition-colors'],
       increment: 'absolute flex items-center',
       decrement: 'absolute flex items-center'
     },
@@ -19,10 +19,10 @@ export default (options: Required<ModuleOptions>) => {
         neutral: ''
       },
       size: {
-        xs: 'px-2 py-1 text-xs gap-1',
-        sm: 'px-2.5 py-1.5 text-xs gap-1.5',
-        md: 'px-2.5 py-1.5 text-sm gap-1.5',
-        lg: 'px-3 py-2 text-sm gap-2',
+        xs: 'px-2 py-1 text-sm/4 gap-1',
+        sm: 'px-2.5 py-1.5 text-sm/4 gap-1.5',
+        md: 'px-2.5 py-1.5 text-base/5 gap-1.5',
+        lg: 'px-3 py-2 text-base/5 gap-2',
         xl: 'px-3 py-2 text-base gap-2'
       },
       variant: {
@@ -48,6 +48,9 @@ export default (options: Required<ModuleOptions>) => {
       highlight: {
         true: ''
       },
+      fixed: {
+        false: ''
+      },
       increment: {
         false: ''
       },
@@ -58,7 +61,11 @@ export default (options: Required<ModuleOptions>) => {
     compoundVariants: [...(options.theme.colors || []).map((color: string) => ({
       color,
       variant: ['outline', 'subtle'],
-      class: `focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-${color}`
+      class: `outline-${color}/25 focus-visible:outline-3 focus-visible:ring-${color}`
+    })), ...(options.theme.colors || []).map((color: string) => ({
+      color,
+      variant: ['soft', 'ghost'],
+      class: `outline-${color}/25 focus-visible:outline-3`
     })), ...(options.theme.colors || []).map((color: string) => ({
       color,
       highlight: true,
@@ -66,7 +73,11 @@ export default (options: Required<ModuleOptions>) => {
     })), {
       color: 'neutral',
       variant: ['outline', 'subtle'],
-      class: 'focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-inverted'
+      class: 'outline-inverted/25 focus-visible:outline-3 focus-visible:ring-inverted'
+    }, {
+      color: 'neutral',
+      variant: ['soft', 'ghost'],
+      class: 'outline-inverted/25 focus-visible:outline-3'
     }, {
       color: 'neutral',
       highlight: true,
@@ -115,6 +126,22 @@ export default (options: Required<ModuleOptions>) => {
       increment: true,
       size: 'xl',
       class: 'pe-11'
+    }, {
+      fixed: false,
+      size: 'xs',
+      class: 'md:text-xs'
+    }, {
+      fixed: false,
+      size: 'sm',
+      class: 'md:text-xs'
+    }, {
+      fixed: false,
+      size: 'md',
+      class: 'md:text-sm'
+    }, {
+      fixed: false,
+      size: 'lg',
+      class: 'md:text-sm'
     }],
     defaultVariants: {
       size: 'md',

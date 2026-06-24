@@ -116,9 +116,12 @@ Use the `avatar` prop to show an [Avatar](/docs/components/avatar) inside the Bu
 ::component-code
 ---
 prettier: true
+ignore:
+  - avatar.loading
 props:
   avatar:
     src: 'https://github.com/nuxt.png'
+    loading: lazy
   size: md
   color: neutral
   variant: outline
@@ -134,9 +137,12 @@ The `label` as prop or slot is optional so you can use the Button as an avatar-o
 ::component-code
 ---
 prettier: true
+ignore:
+  - avatar.loading
 props:
   avatar:
     src: 'https://github.com/nuxt.png'
+    loading: lazy
   size: md
   color: neutral
   variant: outline

@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/kbd'
 import type { KbdKey } from '../composables/useKbd'
@@ -30,7 +31,7 @@ export interface KbdProps {
 }
 
 export interface KbdSlots {
-  default(props?: {}): any
+  default?(props?: {}): VNode[]
 }
 </script>
 
@@ -39,26 +40,27 @@ import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
 import { useKbd } from '../composables/useKbd'
+import { useComponentProps } from '../composables/useComponentProps'
 import { tv } from '../utils/tv'
-import { useComponentUI } from '../composables/useComponentUI'
 
-const props = withDefaults(defineProps<KbdProps>(), {
+const _props = withDefaults(defineProps<KbdProps>(), {
   as: 'kbd'
 })
 defineSlots<KbdSlots>()
 
+const props = useComponentProps('kbd', _props)
+
 const { getKbdKey } = useKbd()
 const appConfig = useAppConfig() as Kbd['AppConfig']
-const uiProp = useComponentUI('kbd', props)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.kbd || {}) }))
 </script>
 
 <template>
-  <Primitive :as="as" :class="ui({ class: [uiProp?.base, props.class], color: props.color, variant: props.variant, size: props.size })">
+  <Primitive :as="props.as" :class="ui({ class: [props.ui?.base, props.class], color: props.color, variant: props.variant, size: props.size })">
     <slot>
-      {{ getKbdKey(value) }}
+      {{ getKbdKey(props.value) }}
     </slot>
   </Primitive>
 </template>

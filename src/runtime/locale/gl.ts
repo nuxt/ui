@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'Enviar'
     },
+    chatReasoning: {
+      thinking: 'Pensando…',
+      thought: 'Pensou',
+      thoughtFor: 'Pensou durante {duration}'
+    },
     colorMode: {
       dark: 'Oscuro',
       light: 'Claro',
@@ -50,6 +55,7 @@ export default defineLocale<Messages>({
     },
     contentSearch: {
       links: 'Ligazóns',
+      search: 'Resultados',
       theme: 'Tema'
     },
     contentSearchButton: {
@@ -57,6 +63,10 @@ export default defineLocale<Messages>({
     },
     contentToc: {
       title: 'Nesta páxina'
+    },
+    dropdownMenu: {
+      noMatch: 'Non hai datos coincidentes',
+      search: 'Buscar…'
     },
     dashboardSearch: {
       theme: 'Tema'
@@ -91,6 +101,11 @@ export default defineLocale<Messages>({
       decrement: 'Diminuír',
       increment: 'Aumentar'
     },
+    listbox: {
+      noData: 'Sen datos',
+      noMatch: 'Non hai datos coincidentes',
+      search: 'Buscar…'
+    },
     modal: {
       close: 'Pechar'
     },
@@ -110,7 +125,15 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'Copiar código ao portapapeis'
+      },
+      prompt: {
+        copy: 'Copiar instrución',
+        openIn: 'Abrir en {name}'
       }
+    },
+    sidebar: {
+      close: 'Pechar',
+      toggle: 'Alternar'
     },
     selectMenu: {
       create: 'Crear "{label}"',

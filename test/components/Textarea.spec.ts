@@ -1,10 +1,9 @@
 import { describe, it, expect, test } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { renderEach } from '../component-render'
 import { flushPromises, mount } from '@vue/test-utils'
 import Textarea from '../../src/runtime/components/Textarea.vue'
-import type { TextareaProps, TextareaSlots } from '../../src/runtime/components/Textarea.vue'
-import ComponentRender from '../component-render'
 import theme from '#build/ui/textarea'
 import { renderForm } from '../utils/form'
 import type { FormInputEvents } from '../../src/module'
@@ -13,7 +12,7 @@ describe('Textarea', () => {
   const sizes = Object.keys(theme.variants.size) as any
   const variants = Object.keys(theme.variants.variant) as any
 
-  it.each([
+  renderEach(Textarea, [
     // Props
     ['with id', { props: { id: 'id' } }],
     ['with name', { props: { name: 'name' } }],
@@ -37,7 +36,9 @@ describe('Textarea', () => {
     ['with loadingIcon', { props: { loading: true, loadingIcon: 'i-lucide-loader' } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { size } }]),
     ...variants.map((variant: string) => [`with primary variant ${variant}`, { props: { variant } }]),
+    ...variants.map((variant: string) => [`with primary variant ${variant} highlight`, { props: { variant, highlight: true } }]),
     ...variants.map((variant: string) => [`with neutral variant ${variant}`, { props: { variant, color: 'neutral' } }]),
+    ...variants.map((variant: string) => [`with neutral variant ${variant} highlight`, { props: { variant, color: 'neutral', highlight: true } }]),
     ['with ariaLabel', { attrs: { 'aria-label': 'Aria label' } }],
     ['with as', { props: { as: 'section' } }],
     ['with class', { props: { class: 'w-48' } }],
@@ -46,10 +47,7 @@ describe('Textarea', () => {
     ['with default slot', { slots: { default: () => 'Default slot' } }],
     ['with leading slot', { slots: { leading: () => 'Leading slot' } }],
     ['with trailing slot', { slots: { trailing: () => 'Trailing slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: TextareaProps, slots?: Partial<TextareaSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, Textarea)
-    expect(html).toMatchSnapshot()
-  })
+  ])
 
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(Textarea, {
@@ -64,22 +62,27 @@ describe('Textarea', () => {
     expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 
-  it.each([
-    ['with .trim modifier', { props: { modelModifiers: { trim: true } } }, { input: 'input  ', expected: 'input' }],
-    ['with .number modifier', { props: { modelModifiers: { number: true } } }, { input: '42', expected: 42 }],
-    ['with .lazy modifier', { props: { modelModifiers: { lazy: true } } }, { input: 'input', expected: 'input' }],
-    ['with .nullable modifier', { props: { modelModifiers: { nullable: true } } }, { input: '', expected: null }],
-    ['with .optional modifier', { props: { modelModifiers: { optional: true } } }, { input: '', expected: undefined }]
-  ])('%s works', async (_nameOrHtml: string, options: { props?: any, slots?: any }, spec: { input: any, expected: any }) => {
-    const wrapper = mount(Textarea, {
-      ...options
-    })
+  renderEach(
+    Textarea,
+    [
+      ['with .trim modifier', { props: { modelModifiers: { trim: true } } }, { input: 'input  ', expected: 'input' }],
+      ['with .number modifier', { props: { modelModifiers: { number: true } } }, { input: '42', expected: 42 }],
+      ['with .lazy modifier', { props: { modelModifiers: { lazy: true } } }, { input: 'input', expected: 'input' }],
+      ['with .nullable modifier', { props: { modelModifiers: { nullable: true } } }, { input: '', expected: null }],
+      ['with .optional modifier', { props: { modelModifiers: { optional: true } } }, { input: '', expected: undefined }]
+    ],
+    '%s works',
+    async (_, options, spec) => {
+      const wrapper = mount(Textarea, {
+        ...options
+      })
 
-    const input = wrapper.find('textarea')
-    await input.setValue(spec.input)
+      const input = wrapper.find('textarea')
+      await input.setValue(spec.input)
 
-    expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [[spec.expected]] })
-  })
+      expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [[spec.expected]] })
+    }
+  )
 
   test('with .lazy modifier updates on change only', async () => {
     const wrapper = mount(Textarea, {

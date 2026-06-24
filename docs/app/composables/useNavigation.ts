@@ -170,9 +170,9 @@ export const useNavigation = (navigation: Ref<ContentNavigationItem[] | undefine
     return groupChildrenByCategory(children, slug)
   })
 
-  function findSurround(path: string): [ContentNavigationItem | undefined, ContentNavigationItem | undefined] {
+  function findSurround(path: string, fwk: string = framework.value): [ContentNavigationItem | undefined, ContentNavigationItem | undefined] {
     const flattenNavigation = navigationByCategory.value
-      ?.flatMap(item => filterChildrenByFramework(item, framework.value)?.children) ?? []
+      ?.flatMap(item => filterChildrenByFramework(item, fwk)?.children) ?? []
 
     const index = flattenNavigation.findIndex(item => item?.path === path)
     if (index === -1) {

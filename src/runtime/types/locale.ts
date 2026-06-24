@@ -45,6 +45,7 @@ export type Messages = {
   contentSearch: {
     description?: string
     links: string
+    search: string
     theme: string
     title?: string
   }
@@ -53,6 +54,10 @@ export type Messages = {
   }
   contentToc: {
     title: string
+  }
+  dropdownMenu: {
+    noMatch: string
+    search: string
   }
   dashboardSearch: {
     description?: string
@@ -95,6 +100,11 @@ export type Messages = {
     decrement: string
     increment: string
   }
+  listbox: {
+    noData: string
+    noMatch: string
+    search: string
+  }
   modal: {
     close: string
   }
@@ -115,6 +125,19 @@ export type Messages = {
     pre: {
       copy: string
     }
+    prompt: {
+      copy: string
+      openIn: string
+    }
+  }
+  chatReasoning: {
+    thinking: string
+    thought: string
+    thoughtFor: string
+  }
+  sidebar: {
+    close: string
+    toggle: string
   }
   selectMenu: {
     create: string

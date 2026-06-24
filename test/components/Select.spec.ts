@@ -1,10 +1,9 @@
 import { describe, it, expect, test } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { renderEach } from '../component-render'
 import { flushPromises, mount } from '@vue/test-utils'
 import Select from '../../src/runtime/components/Select.vue'
-import type { SelectProps, SelectSlots } from '../../src/runtime/components/Select.vue'
-import ComponentRender from '../component-render'
 import theme from '#build/ui/input'
 import { renderForm } from '../utils/form'
 import type { FormInputEvents } from '../../src/module'
@@ -40,7 +39,7 @@ describe('Select', () => {
 
   const props = { open: true, portal: false, items }
 
-  it.each([
+  renderEach(Select, [
     // Props
     ['with items', { props }],
     ['with items with description', { props: { ...props, items: itemsWithDescription } }],
@@ -74,7 +73,9 @@ describe('Select', () => {
     ['with arrow', { props: { ...props, arrow: true } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { ...props, size } }]),
     ...variants.map((variant: string) => [`with primary variant ${variant}`, { props: { ...props, variant } }]),
+    ...variants.map((variant: string) => [`with primary variant ${variant} highlight`, { props: { ...props, variant, highlight: true } }]),
     ...variants.map((variant: string) => [`with neutral variant ${variant}`, { props: { ...props, variant, color: 'neutral' } }]),
+    ...variants.map((variant: string) => [`with neutral variant ${variant} highlight`, { props: { ...props, variant, color: 'neutral', highlight: true } }]),
     ['with ariaLabel', { props, attrs: { 'aria-label': 'Aria label' } }],
     ['with class', { props: { ...props, class: 'rounded-full' } }],
     ['with ui', { props: { ...props, ui: { group: 'p-2' } } }],
@@ -86,25 +87,39 @@ describe('Select', () => {
     ['with item-label slot', { props, slots: { 'item-label': () => 'Item label slot' } }],
     ['with item-description slot', { props: { ...props, items: itemsWithDescription }, slots: { 'item-description': () => 'Item description slot' } }],
     ['with item-trailing slot', { props, slots: { 'item-trailing': () => 'Item trailing slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: SelectProps, slots?: Partial<SelectSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, Select)
-    expect(html).toMatchSnapshot()
-  })
+  ])
 
-  it.each([
-    ['with .trim modifier', { props: { modelModifiers: { trim: true } } }, { input: 'input  ', expected: 'input' }],
-    ['with .number modifier', { props: { modelModifiers: { number: true } } }, { input: '42', expected: 42 }],
-    ['with .nullable modifier', { props: { modelModifiers: { nullable: true } } }, { input: null, expected: null }],
-    ['with .optional modifier', { props: { modelModifiers: { optional: true } } }, { input: undefined, expected: undefined }]
-  ])('%s works', async (_nameOrHtml: string, options: { props?: any, slots?: any }, spec: { input: any, expected: any }) => {
+  renderEach(
+    Select,
+    [
+      ['with .trim modifier', { props: { modelModifiers: { trim: true } } }, { input: 'input  ', expected: 'input' }],
+      ['with .number modifier', { props: { modelModifiers: { number: true } } }, { input: '42', expected: 42 }],
+      ['with .nullable modifier', { props: { modelModifiers: { nullable: true } } }, { input: null, expected: null }],
+      ['with .optional modifier', { props: { modelModifiers: { optional: true } } }, { input: undefined, expected: undefined }]
+    ],
+    '%s works',
+    async (_, options, spec) => {
+      const wrapper = mount(Select, {
+        ...options
+      })
+
+      const select = wrapper.findComponent({ name: 'SelectRoot' })
+      await select.setValue(spec.input)
+
+      expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [[spec.expected]] })
+    }
+  )
+
+  it('with trailing false should not render trailing section', () => {
     const wrapper = mount(Select, {
-      ...options
+      props: {
+        ...props,
+        trailing: false
+      }
     })
 
-    const select = wrapper.findComponent({ name: 'SelectRoot' })
-    await select.setValue(spec.input)
-
-    expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [[spec.expected]] })
+    expect(wrapper.find('[data-slot="trailing"]').exists()).toBe(false)
+    expect(wrapper.find('[data-slot="trailingIcon"]').exists()).toBe(false)
   })
 
   it('passes accessibility tests', async () => {
@@ -203,6 +218,31 @@ describe('Select', () => {
       const input = wrapper.findComponent({ name: 'SelectRoot' })
       await input.vm.$emit('update:open', false)
       expect(wrapper.emitted()).toMatchObject({ blur: [[{ type: 'blur' }]] })
+    })
+  })
+
+  describe('label', () => {
+    test('clicking the FormField label opens the menu', async () => {
+      const wrapper = await renderForm({
+        slotVars: {
+          items: ['Option 1', 'Option 2']
+        },
+        slotTemplate: `
+        <UFormField name="value" label="Label">
+          <USelect :items="items" :portal="false" />
+        </UFormField>
+        `
+      })
+
+      const trigger = wrapper.find('[data-slot="base"]')
+      expect(trigger.attributes('aria-expanded')).toBe('false')
+
+      // Native `<label for>` clicks forward a `click` to the trigger without a
+      // preceding `pointerdown`, so the menu is still closed when the click lands.
+      await trigger.trigger('click')
+      await flushPromises()
+
+      expect(trigger.attributes('aria-expanded')).toBe('true')
     })
   })
 

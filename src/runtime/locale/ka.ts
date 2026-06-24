@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'შეტყობინების გაგზავნა'
     },
+    chatReasoning: {
+      thinking: 'ფიქრობს…',
+      thought: 'იფიქრა',
+      thoughtFor: '{duration} ფიქრობდა'
+    },
     colorMode: {
       dark: 'ბნელი',
       light: 'ნათელი',
@@ -50,6 +55,7 @@ export default defineLocale<Messages>({
     },
     contentSearch: {
       links: 'ბმულები',
+      search: 'შედეგები',
       theme: 'თემა'
     },
     contentSearchButton: {
@@ -57,6 +63,10 @@ export default defineLocale<Messages>({
     },
     contentToc: {
       title: 'ამ გვერდზე'
+    },
+    dropdownMenu: {
+      noMatch: 'შესატყვისი მონაცემები არ არის',
+      search: 'ძიება…'
     },
     dashboardSearch: {
       theme: 'თემა'
@@ -93,6 +103,11 @@ export default defineLocale<Messages>({
       decrement: 'დაკლება',
       increment: 'დამატება'
     },
+    listbox: {
+      noData: 'მონაცემები არ არის',
+      noMatch: 'შესატყვისი მონაცემები არ არის',
+      search: 'ძიება…'
+    },
     modal: {
       close: 'დახურვა'
     },
@@ -112,7 +127,15 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'კოდის კოპირება ბუფერში'
+      },
+      prompt: {
+        copy: 'მოთხოვნის კოპირება',
+        openIn: 'გახსნა {name}-ში'
       }
+    },
+    sidebar: {
+      close: 'დახურვა',
+      toggle: 'გადართვა'
     },
     selectMenu: {
       create: 'დაამატე "{label}"', // "Create" translates as "შექმნა", but since we are simply adding new choice, creating sounds wrong, thus I chose to use "დაამატე", meaning "add".

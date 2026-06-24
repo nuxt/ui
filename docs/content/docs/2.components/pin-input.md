@@ -85,17 +85,6 @@ props:
 ---
 ::
 
-### Length
-
-Use the `length` prop to change the amount of inputs.
-
-::component-code
----
-props:
-  length: 6
----
-::
-
 ### Placeholder
 
 Use the `placeholder` prop to set a placeholder text.
@@ -103,6 +92,51 @@ Use the `placeholder` prop to set a placeholder text.
 ::component-code
 ---
 props:
+  placeholder: '○'
+---
+::
+
+### Length
+
+Use the `length` prop to change the amount of inputs.
+
+::component-code
+---
+ignore:
+  - placeholder
+props:
+  length: 6
+  placeholder: '○'
+---
+::
+
+### Separator :badge{label="4.9+" class="align-text-top"}
+
+Use the `separator` prop to insert a separator between groups of inputs. Pass a number to insert one after every Nth input.
+
+::component-code
+---
+ignore:
+  - placeholder
+props:
+  length: 6
+  separator: 3
+  placeholder: '○'
+---
+::
+
+You can also pass an array of positions to insert separators after specific inputs.
+
+::component-code
+---
+prettier: true
+ignore:
+  - placeholder
+  - length
+  - separator
+props:
+  length: 7
+  separator: [3, 4]
   placeholder: '○'
 ---
 ::
@@ -170,11 +204,27 @@ props:
 ---
 ::
 
+## Examples
+
+### With separator slot :badge{label="4.9+" class="align-text-top"}
+
+Use the `separator` slot to customize the separator appearance.
+
+::component-example
+---
+name: 'pin-input-separator-slot-example'
+---
+::
+
 ## API
 
 ### Props
 
 :component-props
+
+### Slots
+
+:component-slots
 
 ### Emits
 

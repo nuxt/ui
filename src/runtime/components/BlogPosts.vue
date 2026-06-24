@@ -1,5 +1,6 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/blog-posts'
 import type { BlogPostProps, BlogPostSlots } from '../types'
@@ -24,14 +25,14 @@ export interface BlogPostsProps<T extends BlogPostProps = BlogPostProps> {
 }
 
 type ExtendSlotWithPost<T extends BlogPostProps, K extends keyof BlogPostSlots>
-  = BlogPostSlots[K] extends (props: infer P) => any
-    ? (props: P & { post: T }) => any
-    : BlogPostSlots[K]
+  = Required<BlogPostSlots>[K] extends (props: infer P) => VNode[]
+    ? (props: P & { post: T }) => VNode[]
+    : Required<BlogPostSlots>[K]
 
 export type BlogPostsSlots<T extends BlogPostProps = BlogPostProps> = {
-  [K in keyof BlogPostSlots]: ExtendSlotWithPost<T, K>
+  [K in keyof BlogPostSlots]?: ExtendSlotWithPost<T, K>
 } & {
-  default(props?: {}): any
+  default?(props?: {}): VNode[]
 }
 
 </script>
@@ -42,30 +43,31 @@ import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
 import { omit } from '../utils'
 import { tv } from '../utils/tv'
-import { useComponentUI } from '../composables/useComponentUI'
+import { useComponentProps } from '../composables/useComponentProps'
 import UBlogPost from './BlogPost.vue'
 
-const props = withDefaults(defineProps<BlogPostsProps>(), {
+const _props = withDefaults(defineProps<BlogPostsProps>(), {
   orientation: 'horizontal'
 })
 const slots = defineSlots<BlogPostsSlots<T>>()
 
+const props = useComponentProps<BlogPostsProps>('blogPosts', _props)
+
 const getProxySlots = () => omit(slots, ['default'])
 
 const appConfig = useAppConfig() as BlogPosts['AppConfig']
-const uiProp = useComponentUI('blogPosts', props)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.blogPosts || {}) }))
 </script>
 
 <template>
-  <Primitive :as="as" :data-orientation="orientation" :class="ui({ orientation, class: [uiProp?.base, props.class] })">
+  <Primitive :as="props.as" :data-orientation="props.orientation" :class="ui({ orientation: props.orientation, class: [props.ui?.base, props.class] })">
     <slot>
       <UBlogPost
-        v-for="(post, index) in posts"
+        v-for="(post, index) in props.posts"
         :key="index"
-        :orientation="orientation === 'vertical' ? 'horizontal' : 'vertical'"
+        :orientation="props.orientation === 'vertical' ? 'horizontal' : 'vertical'"
         v-bind="post"
       >
         <template v-for="(_, name) in getProxySlots()" #[name]="slotData">

@@ -1,5 +1,6 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/pricing-plans'
 import type { PricingPlanProps, PricingPlanSlots } from '../types'
@@ -35,14 +36,14 @@ export interface PricingPlansProps {
 }
 
 type ExtendSlotWithPlan<T extends PricingPlanProps, K extends keyof PricingPlanSlots>
-  = PricingPlanSlots[K] extends (props: infer P) => any
-    ? (props: P & { plan: T }) => any
+  = PricingPlanSlots[K] extends (props: infer P) => VNode[]
+    ? (props: P & { plan: T }) => VNode[]
     : PricingPlanSlots[K]
 
 export type PricingPlansSlots<T extends PricingPlanProps = PricingPlanProps> = {
-  [K in keyof PricingPlanSlots]: ExtendSlotWithPlan<T, K>
+  [K in keyof PricingPlanSlots]?: ExtendSlotWithPlan<T, K>
 } & {
-  default(props?: {}): any
+  default?(props?: {}): VNode[]
 }
 
 </script>
@@ -53,20 +54,21 @@ import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
 import { omit } from '../utils'
 import { tv } from '../utils/tv'
-import { useComponentUI } from '../composables/useComponentUI'
+import { useComponentProps } from '../composables/useComponentProps'
 import UPricingPlan from './PricingPlan.vue'
 
-const props = withDefaults(defineProps<PricingPlansProps>(), {
+const _props = withDefaults(defineProps<PricingPlansProps>(), {
   orientation: 'horizontal',
   compact: false,
   scale: false
 })
 const slots = defineSlots<PricingPlansSlots<T>>()
 
+const props = useComponentProps<PricingPlansProps>('pricingPlans', _props)
+
 const getProxySlots = () => omit(slots, ['default'])
 
 const appConfig = useAppConfig() as PricingPlans['AppConfig']
-const uiProp = useComponentUI('pricingPlans', props)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pricingPlans || {}) }))
@@ -87,12 +89,12 @@ function mapSlot(slot: any) {
 </script>
 
 <template>
-  <Primitive :as="as" :data-orientation="orientation" :class="ui({ class: [uiProp?.base, props.class], compact, scale, orientation })" :style="{ '--count': count }">
+  <Primitive :as="props.as" :data-orientation="props.orientation" :class="ui({ class: [props.ui?.base, props.class], compact: props.compact, scale: props.scale, orientation: props.orientation })" :style="{ '--count': count }">
     <slot>
       <UPricingPlan
-        v-for="(plan, index) in plans"
+        v-for="(plan, index) in props.plans"
         :key="index"
-        :orientation="orientation === 'vertical' ? 'horizontal' : 'vertical'"
+        :orientation="props.orientation === 'vertical' ? 'horizontal' : 'vertical'"
         v-bind="plan"
       >
         <template v-for="(_, name) in getProxySlots()" #[name]="slotData">

@@ -1,5 +1,4 @@
 import type { H3Event } from 'h3'
-import { getRequestURL } from 'h3'
 import json5 from 'json5'
 import { camelCase, kebabCase } from 'scule'
 import { visit } from '@nuxt/content/runtime'
@@ -7,9 +6,11 @@ import { queryCollection } from '@nuxt/content/server'
 import * as theme from '../../.nuxt/ui'
 import meta from '#nuxt-component-meta'
 // @ts-expect-error - no types available
-import components from '#component-example/nitro'
+import { getComponentExample } from '#component-example/nitro'
 
 type ComponentAttributes = {
+  'slug'?: string
+  'prose'?: string
   ':prose'?: string
   ':props'?: string
   ':external'?: string
@@ -17,6 +18,8 @@ type ComponentAttributes = {
   ':ignore'?: string
   ':hide'?: string
   ':slots'?: string
+  ':model'?: string
+  ':cast'?: string
 }
 
 type ThemeConfig = {
@@ -25,13 +28,57 @@ type ThemeConfig = {
 }
 
 type CodeConfig = {
-  props: Record<string, unknown>
+  props: Record<string, any>
   external: string[]
   externalTypes: string[]
   ignore: string[]
   hide: string[]
   componentName: string
   slots?: Record<string, string>
+  model?: string[]
+  cast?: Record<string, string>
+  prose?: boolean
+}
+
+const CAST_TEMPLATES: Record<string, (raw: any) => string> = {
+  'DateValue': (raw) => {
+    if (!raw || !Array.isArray(raw)) return 'null'
+    const [y, m, d] = raw
+    return `new CalendarDate(${y}, ${m}, ${d})`
+  },
+  'DateValue[]': (raw) => {
+    if (!Array.isArray(raw)) return '[]'
+    return `[${raw.map(([y, m, d]: number[]) => `new CalendarDate(${y}, ${m}, ${d})`).join(', ')}]`
+  },
+  'DateRange': (raw) => {
+    if (!raw?.start || !raw?.end) return '{ start: null, end: null }'
+    const [sy, sm, sd] = raw.start
+    const [ey, em, ed] = raw.end
+    return `{ start: new CalendarDate(${sy}, ${sm}, ${sd}), end: new CalendarDate(${ey}, ${em}, ${ed}) }`
+  },
+  'TimeValue': (raw) => {
+    if (!raw || !Array.isArray(raw)) return 'null'
+    const [h, m, s] = raw
+    return `new Time(${h}, ${m}, ${s})`
+  },
+  'TimeRangeValue': (raw) => {
+    if (!raw?.start || !raw?.end) return 'null'
+    const [sh, sm, ss] = raw.start
+    const [eh, em, es] = raw.end
+    return `{ start: new Time(${sh}, ${sm}, ${ss}), end: new Time(${eh}, ${em}, ${es}) }`
+  }
+}
+
+const CAST_IMPORTS: Record<string, { name: string, from: string }> = {
+  'DateValue': { name: 'CalendarDate', from: '@internationalized/date' },
+  'DateValue[]': { name: 'CalendarDate', from: '@internationalized/date' },
+  'DateRange': { name: 'CalendarDate', from: '@internationalized/date' },
+  'TimeValue': { name: 'Time', from: '@internationalized/date' },
+  'TimeRangeValue': { name: 'Time', from: '@internationalized/date' }
+}
+
+function stringifyValue(value: any, quote: string = '"'): string {
+  return json5.stringify(value, { quote, space: 2 })?.replace(/,([ |\t\n]+[}|\]])/g, '$1') ?? ''
 }
 
 type Document = {
@@ -86,6 +133,54 @@ function visitAndReplace(doc: Document, type: string, handler: (node: any[]) => 
     }
     return true
   }, node => node)
+}
+
+const BLOCK_ELEMENTS = new Set([
+  'pre', 'p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
+  'ul', 'ol', 'li', 'blockquote', 'table', 'hr'
+])
+
+function collectBlockChildren(nodes: any[]): any[] {
+  const result: any[] = []
+  for (const child of nodes) {
+    if (typeof child === 'string') {
+      if (child.trim()) {
+        result.push(['p', {}, child])
+      }
+    } else if (Array.isArray(child)) {
+      if (BLOCK_ELEMENTS.has(child[0])) {
+        result.push(child)
+      } else {
+        result.push(...collectBlockChildren(child.slice(2)))
+      }
+    }
+  }
+  return result
+}
+
+function replaceWithChildren(node: any[], newChildren: any[]) {
+  const collected = collectBlockChildren(newChildren)
+  node[0] = '__flatten'
+  node[1] = {}
+  node.length = 2
+  for (const child of collected) {
+    node.push(child)
+  }
+}
+
+function flattenMarkers(node: any): void {
+  if (!Array.isArray(node)) return
+  let i = 2
+  while (i < node.length) {
+    const child = node[i]
+    if (Array.isArray(child) && (child[0] === '__flatten' || child[0] === 'div')) {
+      const innerChildren = child.slice(2)
+      node.splice(i, 1, ...innerChildren)
+    } else {
+      flattenMarkers(child)
+      i++
+    }
+  }
 }
 
 function generateTSInterface(
@@ -201,61 +296,123 @@ const generateComponentCode = ({
   externalTypes,
   hide,
   componentName,
-  slots
+  slots,
+  model,
+  cast,
+  prose
 }: CodeConfig) => {
-  const filteredProps = Object.fromEntries(
-    Object.entries(props).filter(([key]) => !hide.includes(key))
-  )
+  const pascalCaseName = componentName.charAt(0).toUpperCase() + componentName.slice(1)
 
-  const imports = external
-    .filter((_, index) => externalTypes[index] && externalTypes[index] !== 'undefined')
-    .map((ext, index) => {
-      const type = externalTypes[index]?.replace(/[[\]]/g, '')
-      return `import type { ${type} } from '@nuxt/ui'`
-    })
-    .join('\n')
-
-  let itemsCode = ''
-  if (props.items) {
-    itemsCode = `const items = ref<${externalTypes[0]}>(${json5.stringify(props.items, null, 2)})`
-    delete filteredProps.items
+  if (prose) {
+    const proseProps = Object.entries(props)
+      .filter(([key, value]) => !hide.includes(key) && value !== undefined && value !== null && value !== '')
+      .map(([key, value]) => `${key}="${value}"`)
+      .join(' ')
+    const defaultSlot = slots?.default?.trim() ?? ''
+    return `::${componentName}${proseProps ? `{${proseProps}}` : ''}\n${defaultSlot}\n::`
   }
 
-  let calendarValueCode = ''
-  if (componentName === 'calendar' && props.modelValue && Array.isArray(props.modelValue)) {
-    calendarValueCode = `const value = ref(new CalendarDate(${props.modelValue.join(', ')}))`
-  }
+  const externalSet = new Set(external)
+  const modelSet = new Set(model || [])
 
-  const propsString = Object.entries(filteredProps)
-    .map(([key, value]) => {
-      const formattedKey = kebabCase(key)
-      if (typeof value === 'string') {
-        return `${formattedKey}="${value}"`
-      } else if (typeof value === 'number') {
-        return `:${formattedKey}="${value}"`
-      } else if (typeof value === 'boolean') {
-        return value ? formattedKey : `:${formattedKey}="false"`
+  const propAttributes: string[] = []
+
+  for (const [key, value] of Object.entries(props)) {
+    if (hide.includes(key)) continue
+    if (value === undefined || value === null || value === '') continue
+
+    if (key === 'modelValue') {
+      propAttributes.push(`v-model="value"`)
+      continue
+    }
+
+    if (modelSet.has(key)) {
+      propAttributes.push(`v-model:${kebabCase(key)}="${key}"`)
+      continue
+    }
+
+    const name = kebabCase(key)
+
+    if (typeof value === 'boolean') {
+      propAttributes.push(value ? name : `:${name}="false"`)
+      continue
+    }
+
+    if (typeof value === 'object') {
+      if (externalSet.has(key)) {
+        propAttributes.push(`:${name}="${key}"`)
+      } else {
+        propAttributes.push(`:${name}="${stringifyValue(value, '\'')}"`)
       }
-      return ''
-    })
-    .filter(Boolean)
-    .join(' ')
+      continue
+    }
 
-  const itemsProp = props.items ? ':items="items"' : ''
-  const vModelProp = componentName === 'calendar' && props.modelValue ? 'v-model="value"' : ''
-  const allProps = [propsString, itemsProp, vModelProp].filter(Boolean).join(' ')
-  const formattedProps = allProps ? ` ${allProps}` : ''
+    if (typeof value === 'number') {
+      propAttributes.push(`:${name}="${value}"`)
+      continue
+    }
+
+    propAttributes.push(`${name}="${value}"`)
+  }
+
+  // Build <script setup>
+  const importsBySource = new Map<string, Set<string>>()
+  const refDeclarations: string[] = []
+
+  if (cast) {
+    for (const key of external) {
+      const castType = cast[key]
+      if (castType && CAST_IMPORTS[castType]) {
+        const imp = CAST_IMPORTS[castType]
+        if (!importsBySource.has(imp.from)) importsBySource.set(imp.from, new Set())
+        importsBySource.get(imp.from)!.add(imp.name)
+      }
+    }
+  }
+
+  const typeImports: string[] = []
+  if (externalTypes?.length) {
+    const removeBrackets = (t: string): string => t.endsWith('[]') ? removeBrackets(t.slice(0, -2)) : t
+    const types = externalTypes
+      .filter(t => t && t !== 'undefined')
+      .map(removeBrackets)
+    if (types.length) {
+      typeImports.push(`import type { ${types.join(', ')} } from '@nuxt/ui'`)
+    }
+  }
+
+  for (const [i, key] of external.entries()) {
+    if (!(key in props)) continue
+    const castType = cast?.[key]
+    const refType = castType ? 'shallowRef' : 'ref'
+    const typeAnnotation = externalTypes?.[i] && externalTypes[i] !== 'undefined' ? `<${externalTypes[i]}>` : ''
+    const value = castType && CAST_TEMPLATES[castType]
+      ? CAST_TEMPLATES[castType](props[key])
+      : stringifyValue(props[key])
+    const varName = key === 'modelValue' ? 'value' : key
+    refDeclarations.push(`const ${varName} = ${refType}${typeAnnotation}(${value})`)
+  }
 
   let scriptSetup = ''
-  if (imports || itemsCode || calendarValueCode) {
-    scriptSetup = '<script setup lang="ts">'
-    if (imports) scriptSetup += `\n${imports}`
-    if (imports && (itemsCode || calendarValueCode)) scriptSetup += '\n'
-    if (calendarValueCode) scriptSetup += `\n${calendarValueCode}`
-    if (itemsCode) scriptSetup += `\n${itemsCode}`
-    scriptSetup += '\n</script>\n\n'
+  const hasScript = importsBySource.size > 0 || typeImports.length > 0 || refDeclarations.length > 0
+  if (hasScript) {
+    scriptSetup = '<script setup lang="ts">\n'
+    for (const [source, names] of importsBySource) {
+      scriptSetup += `import { ${Array.from(names).join(', ')} } from '${source}'\n`
+    }
+    for (const line of typeImports) {
+      scriptSetup += `${line}\n`
+    }
+    if ((importsBySource.size > 0 || typeImports.length > 0) && refDeclarations.length > 0) {
+      scriptSetup += '\n'
+    }
+    for (const line of refDeclarations) {
+      scriptSetup += `${line}\n`
+    }
+    scriptSetup += '</script>\n\n'
   }
 
+  // Slots
   let componentContent = ''
   let slotContent = ''
 
@@ -280,14 +437,11 @@ const generateComponentCode = ({
     })
   }
 
-  const pascalCaseName = componentName.charAt(0).toUpperCase() + componentName.slice(1)
+  const formattedProps = propAttributes.length ? ` ${propAttributes.join(' ')}` : ''
 
-  let componentTemplate = ''
-  if (componentContent || slotContent) {
-    componentTemplate = `<U${pascalCaseName}${formattedProps}>${componentContent}${slotContent}</U${pascalCaseName}>` // Removed space before closing tag
-  } else {
-    componentTemplate = `<U${pascalCaseName}${formattedProps} />`
-  }
+  const componentTemplate = (componentContent || slotContent)
+    ? `<U${pascalCaseName}${formattedProps}>${componentContent}${slotContent}</U${pascalCaseName}>`
+    : `<U${pascalCaseName}${formattedProps} />`
 
   return `${scriptSetup}<template>
   ${componentTemplate}
@@ -322,6 +476,11 @@ export async function transformMDC(event: H3Event, doc: Document): Promise<Docum
     const ignore = attributes[':ignore'] ? json5.parse(attributes[':ignore']) : []
     const hide = attributes[':hide'] ? json5.parse(attributes[':hide']) : []
     const slots = attributes[':slots'] ? json5.parse(attributes[':slots']) : {}
+    const model = attributes[':model'] ? json5.parse(attributes[':model']) : []
+    const cast = attributes[':cast'] ? json5.parse(attributes[':cast']) : {}
+    const slug = attributes.slug
+    const prose = attributes.prose !== undefined || parseBoolean(attributes[':prose'])
+    const effectiveName = slug ? camelCase(slug) : componentName
 
     const code = generateComponentCode({
       props,
@@ -329,11 +488,14 @@ export async function transformMDC(event: H3Event, doc: Document): Promise<Docum
       externalTypes,
       ignore,
       hide,
-      componentName,
-      slots
+      componentName: effectiveName,
+      slots,
+      model,
+      cast,
+      prose
     })
 
-    replaceNodeWithPre(node, 'vue', code)
+    replaceNodeWithPre(node, prose ? 'mdc' : 'vue', code)
   })
 
   visitAndReplace(doc, 'component-props', (node) => {
@@ -393,57 +555,28 @@ export async function transformMDC(event: H3Event, doc: Document): Promise<Docum
   visitAndReplace(doc, 'component-example', (node) => {
     const camelName = camelCase(node[1]['name'])
     const name = camelName.charAt(0).toUpperCase() + camelName.slice(1)
-    const code = components[name].code
-    replaceNodeWithPre(node, 'vue', code, `${name}.vue`)
+    const component = getComponentExample(name)
+    if (component) {
+      replaceNodeWithPre(node, 'vue', component.code, `${name}.vue`)
+    }
   })
 
-  const changelogNodes: any[] = []
-  visit(doc.body, (node) => {
-    if (Array.isArray(node) && node[0] === 'component-changelog') {
-      changelogNodes.push(node)
-    }
-    return true
-  }, node => node)
-
-  for (const node of changelogNodes) {
-    const prefix = node[1]?.prefix
+  visitAndReplace(doc, 'component-changelog', (node) => {
+    const prefix = (node[1] as Record<string, string>)?.prefix
     const pascalName = componentName.charAt(0).toUpperCase() + componentName.slice(1)
     const kebabName = kebabCase(componentName)
+    const componentPath = `src/runtime/components/${prefix ? `${prefix}/` : ''}${pascalName}.vue`
+    const themePath = `src/theme/${prefix ? `${prefix}/` : ''}${kebabName}.ts`
 
-    const paths = [
-      `src/runtime/components/${prefix ? `${prefix}/` : ''}${pascalName}.vue`,
-      `src/theme/${prefix ? `${prefix}/` : ''}${kebabName}.ts`
-    ]
-
-    try {
-      const requestUrl = getRequestURL(event)
-      const baseURL = `${requestUrl.protocol}//${requestUrl.host}`
-      const commits = await $fetch<Array<{ sha: string, message: string }>>('/api/github/commits', {
-        baseURL,
-        query: { path: paths }
-      })
-
-      if (!commits?.length) {
-        node[0] = 'p'
-        node[1] = {}
-        node[2] = 'No recent changes.'
-      } else {
-        const changelogLines = commits.map((commit) => {
-          const shortSha = commit.sha.slice(0, 5)
-          const message = commit.message.replace(/\(.*?\)/, '').replace(/#(\d+)/g, '[#$1](https://github.com/nuxt/ui/issues/$1)')
-          return `- [\`${shortSha}\`](https://github.com/nuxt/ui/commit/${commit.sha}) — ${message}`
-        }).join('\n')
-
-        node[0] = 'p'
-        node[1] = {}
-        node[2] = changelogLines
-      }
-    } catch {
-      node[0] = 'p'
-      node[1] = {}
-      node[2] = `See the [releases page](https://github.com/nuxt/ui/releases) for the latest changes.`
-    }
-  }
+    node[0] = 'p'
+    node[1] = {}
+    node[2] = 'See commit history for '
+    node[3] = ['a', { href: `https://github.com/nuxt/ui/commits/v4/${componentPath}` }, 'component']
+    node[4] = ' and '
+    node[5] = ['a', { href: `https://github.com/nuxt/ui/commits/v4/${themePath}` }, 'theme']
+    node[6] = '.'
+    node.length = 7
+  })
 
   // Transform callout components (tip, note, warning, caution, callout) to blockquotes
   const calloutTypes = ['tip', 'note', 'warning', 'caution', 'callout']
@@ -461,73 +594,29 @@ export async function transformMDC(event: H3Event, doc: Document): Promise<Docum
       const content = node.slice(2)
       const label = calloutLabels[calloutType]
 
-      // Build the blockquote content
-      let blockquoteText = `> [!${label}]`
+      const blockquoteChildren: any[] = []
 
-      // Add link if present
+      let firstLine = `[!${label}]`
       if (attrs.to) {
-        blockquoteText += `\n> See: ${attrs.to}`
+        firstLine += `\nSee: ${attrs.to}`
       }
+      blockquoteChildren.push(['p', {}, firstLine])
 
-      // Extract text content from children
-      const extractText = (children: any[]): string => {
-        return children.map((child) => {
-          if (typeof child === 'string') return child
-          if (Array.isArray(child)) {
-            const tag = child[0]
-            const childAttrs = child[1] || {}
-            const childContent = child.slice(2)
-            if (tag === 'code') return `\`${extractText(childContent)}\``
-            if (tag === 'a') return `[${extractText(childContent)}](${childAttrs.href || ''})`
-            if (tag === 'pre') {
-              const lang = childAttrs.language || ''
-              const code = childAttrs.code || extractText(childContent)
-              return `\n\`\`\`${lang}\n${code}\n\`\`\`\n`
-            }
-            return extractText(childContent)
-          }
-          return ''
-        }).join('')
-      }
+      blockquoteChildren.push(...collectBlockChildren(content))
 
-      if (content.length > 0) {
-        const textContent = extractText(content)
-        if (textContent.trim()) {
-          blockquoteText += `\n> ${textContent.trim().split('\n').join('\n> ')}`
-        }
-      }
-
-      node[0] = 'p'
+      node[0] = 'blockquote'
       node[1] = {}
-      node[2] = blockquoteText
-      node.length = 3
+      node.length = 2
+      for (const child of blockquoteChildren) {
+        node.push(child)
+      }
     })
   }
 
   // Transform framework-only - extract content from both slots and label them
   visitAndReplace(doc, 'framework-only', (node) => {
     const children = node.slice(2)
-    let nuxtContent = ''
-    let vueContent = ''
-
-    // Helper to extract text from AST nodes
-    const extractContent = (nodes: any[]): string => {
-      return nodes.map((n: any) => {
-        if (typeof n === 'string') return n
-        if (Array.isArray(n)) {
-          const tag = n[0]
-          const attrs = n[1] || {}
-          const content = n.slice(2)
-          if (tag === 'pre') {
-            const lang = attrs.language || ''
-            const code = attrs.code || ''
-            return `\n\`\`\`${lang}\n${code}\n\`\`\`\n`
-          }
-          return extractContent(content)
-        }
-        return ''
-      }).join('')
-    }
+    const allChildren: any[] = []
 
     for (const child of children) {
       if (Array.isArray(child) && child[0] === 'template') {
@@ -535,26 +624,21 @@ export async function transformMDC(event: H3Event, doc: Document): Promise<Docum
           ? 'nuxt'
           : child[1]?.['v-slot:vue'] !== undefined ? 'vue' : null
         if (slotAttr === 'nuxt') {
-          nuxtContent = extractContent(child.slice(2))
+          allChildren.push(['p', {}, ['strong', {}, 'Nuxt:']])
+          allChildren.push(...collectBlockChildren(child.slice(2)))
         } else if (slotAttr === 'vue') {
-          vueContent = extractContent(child.slice(2))
+          allChildren.push(['p', {}, ['strong', {}, 'Vue:']])
+          allChildren.push(...collectBlockChildren(child.slice(2)))
         }
       }
     }
 
-    let output = ''
-    if (nuxtContent.trim()) {
-      output += '**Nuxt:**\n' + nuxtContent.trim()
-    }
-    if (vueContent.trim()) {
-      if (output) output += '\n\n'
-      output += '**Vue:**\n' + vueContent.trim()
-    }
-
-    node[0] = 'p'
+    node[0] = '__flatten'
     node[1] = {}
-    node[2] = output || ''
-    node.length = 3
+    node.length = 2
+    for (const child of allChildren) {
+      node.push(child)
+    }
   })
 
   // Transform badge to inline text
@@ -573,33 +657,18 @@ export async function transformMDC(event: H3Event, doc: Document): Promise<Docum
     const content = node.slice(2)
     const title = attrs.title || ''
 
-    // Extract text content from children
-    const extractText = (children: any[]): string => {
-      return children.map((child) => {
-        if (typeof child === 'string') return child
-        if (Array.isArray(child)) {
-          const tag = child[0]
-          const childContent = child.slice(2)
-          if (tag === 'code') return `\`${extractText(childContent)}\``
-          if (tag === 'a') return `[${extractText(childContent)}](${child[1]?.href || ''})`
-          return extractText(childContent)
-        }
-        return ''
-      }).join('')
+    const allChildren: any[] = []
+    if (title) {
+      allChildren.push(['p', {}, ['strong', {}, title]])
     }
+    allChildren.push(...collectBlockChildren(content))
 
-    let cardText = title ? `**${title}**` : ''
-    if (content.length > 0) {
-      const textContent = extractText(content)
-      if (textContent.trim()) {
-        cardText += cardText ? `\n${textContent.trim()}` : textContent.trim()
-      }
-    }
-
-    node[0] = 'p'
+    node[0] = '__flatten'
     node[1] = {}
-    node[2] = cardText
-    node.length = 3
+    node.length = 2
+    for (const child of allChildren) {
+      node.push(child)
+    }
   })
 
   // Transform accordion-item to Q&A format
@@ -608,34 +677,18 @@ export async function transformMDC(event: H3Event, doc: Document): Promise<Docum
     const content = node.slice(2)
     const label = attrs.label || ''
 
-    // Extract text content from children
-    const extractText = (children: any[]): string => {
-      return children.map((child) => {
-        if (typeof child === 'string') return child
-        if (Array.isArray(child)) {
-          const tag = child[0]
-          const childContent = child.slice(2)
-          if (tag === 'code') return `\`${extractText(childContent)}\``
-          if (tag === 'a') return `[${extractText(childContent)}](${child[1]?.href || ''})`
-          if (tag === 'p') return extractText(childContent)
-          return extractText(childContent)
-        }
-        return ''
-      }).join('')
+    const allChildren: any[] = []
+    if (label) {
+      allChildren.push(['p', {}, ['strong', {}, `Q: ${label}`]])
     }
+    allChildren.push(...collectBlockChildren(content))
 
-    let itemText = label ? `**Q: ${label}**` : ''
-    if (content.length > 0) {
-      const textContent = extractText(content)
-      if (textContent.trim()) {
-        itemText += `\n\nA: ${textContent.trim()}`
-      }
-    }
-
-    node[0] = 'p'
+    node[0] = '__flatten'
     node[1] = {}
-    node[2] = itemText
-    node.length = 3
+    node.length = 2
+    for (const child of allChildren) {
+      node.push(child)
+    }
   })
 
   const componentsListNodes: any[] = []
@@ -653,91 +706,32 @@ export async function transformMDC(event: H3Event, doc: Document): Promise<Docum
     const components = await queryCollection(event, 'docs')
       .where('path', 'LIKE', '/docs/components/%')
       .where('extension', '=', 'md')
+      .where('index', 'IS NULL')
       .where('category', '=', category)
       .select('path', 'title')
       .all()
 
-    const links = components.map((c: any) => `- [${c.title}](https://ui.nuxt.com/raw${c.path}.md)`).join('\n')
+    const listItems = components.map((c: any) =>
+      ['li', {}, ['a', { href: `https://ui.nuxt.com/raw${c.path}.md` }, c.title]]
+    )
 
-    node[0] = 'p'
+    node[0] = 'ul'
     node[1] = {}
-    node[2] = links
+    node.length = 2
+    for (const item of listItems) {
+      node.push(item)
+    }
   }
 
   // Remove wrapper elements by extracting children content
-  const wrapperTypes = ['card-group', 'accordion', 'steps', 'code-group', 'code-collapse', 'tabs']
+  const wrapperTypes = ['card-group', 'accordion', 'steps', 'code-group', 'code-collapse', 'tabs', 'div']
   for (const wrapperType of wrapperTypes) {
     visitAndReplace(doc, wrapperType, (node) => {
-      const children = node.slice(2)
-
-      // Extract text from transformed children (they should be paragraphs now)
-      const extractFromChildren = (nodes: any[]): string => {
-        return nodes.map((child: any) => {
-          if (typeof child === 'string') return child
-          if (Array.isArray(child)) {
-            const tag = child[0]
-            const attrs = child[1] || {}
-            const content = child.slice(2)
-            // Handle pre/code blocks
-            if (tag === 'pre') {
-              const lang = attrs.language || ''
-              const code = attrs.code || ''
-              return `\n\`\`\`${lang}\n${code}\n\`\`\`\n`
-            }
-            // Handle paragraphs and other text
-            if (tag === 'p') {
-              const text = content.map((c: any) => typeof c === 'string' ? c : '').join('')
-              return text + '\n\n'
-            }
-            return extractFromChildren(content)
-          }
-          return ''
-        }).join('')
-      }
-
-      const extracted = extractFromChildren(children).trim()
-      node[0] = 'p'
-      node[1] = {}
-      node[2] = extracted
-      node.length = 3
+      replaceWithChildren(node, node.slice(2))
     })
   }
 
-  // Transform field-group to remove wrapper (fields already handled)
-  const fieldWrappers = ['field-group', 'collapsible']
-  for (const wrapperType of fieldWrappers) {
-    visitAndReplace(doc, wrapperType, (node) => {
-      const children = node.slice(2)
-      const extractFromChildren = (nodes: any[]): string => {
-        return nodes.map((child: any) => {
-          if (typeof child === 'string') return child
-          if (Array.isArray(child)) {
-            const tag = child[0]
-            const attrs = child[1] || {}
-            const content = child.slice(2)
-            if (tag === 'pre') {
-              const lang = attrs.language || ''
-              const code = attrs.code || ''
-              return `\n\`\`\`${lang}\n${code}\n\`\`\`\n`
-            }
-            if (tag === 'p') {
-              const text = content.map((c: any) => typeof c === 'string' ? c : '').join('')
-              return text + '\n\n'
-            }
-            return extractFromChildren(content)
-          }
-          return ''
-        }).join('')
-      }
-      const extracted = extractFromChildren(children).trim()
-      node[0] = 'p'
-      node[1] = {}
-      node[2] = extracted
-      node.length = 3
-    })
-  }
-
-  // Transform field to a definition format
+  // Transform field to a definition format (before field-group unwrapping so attrs are intact)
   visitAndReplace(doc, 'field', (node) => {
     const attrs = node[1] || {}
     const content = node.slice(2)
@@ -749,24 +743,40 @@ export async function transformMDC(event: H3Event, doc: Document): Promise<Docum
       return nodes.map((child: any) => {
         if (typeof child === 'string') return child
         if (Array.isArray(child)) {
-          const content = child.slice(2)
-          return extractText(content)
+          const innerContent = child.slice(2)
+          return extractText(innerContent)
         }
         return ''
       }).join('')
     }
 
-    let fieldText = `**${name}**`
-    if (type) fieldText += ` (\`${type}\`)`
-    if (required) fieldText += ' *required*'
+    const parts: any[] = [['strong', {}, name]]
+    if (type) {
+      parts.push(' (', ['code', {}, type], ')')
+    }
+    if (required) {
+      parts.push(' ', ['em', {}, 'required'])
+    }
     const desc = extractText(content).trim()
-    if (desc) fieldText += `: ${desc}`
+    if (desc) {
+      parts.push(`: ${desc}`)
+    }
 
     node[0] = 'p'
     node[1] = {}
-    node[2] = fieldText
-    node.length = 3
+    node.length = 2
+    for (const part of parts) {
+      node.push(part)
+    }
   })
+
+  // Remove field-group / collapsible wrappers (after fields are transformed to <p>)
+  const fieldWrappers = ['field-group', 'collapsible']
+  for (const wrapperType of fieldWrappers) {
+    visitAndReplace(doc, wrapperType, (node) => {
+      replaceWithChildren(node, node.slice(2))
+    })
+  }
 
   // Transform code-preview to extract the Vue code as a code block
   visitAndReplace(doc, 'code-preview', (node) => {
@@ -810,7 +820,7 @@ export async function transformMDC(event: H3Event, doc: Document): Promise<Docum
   visitAndReplace(doc, 'icons-theme', (node) => {
     node[0] = 'p'
     node[1] = {}
-    node[2] = '*See the interactive theme picker on the documentation website.*'
+    node[2] = ['em', {}, 'See the interactive theme picker on the documentation website.']
     node.length = 3
   })
 
@@ -825,7 +835,7 @@ export async function transformMDC(event: H3Event, doc: Document): Promise<Docum
   visitAndReplace(doc, 'supported-languages', (node) => {
     node[0] = 'p'
     node[1] = {}
-    node[2] = '*See the full list of supported languages on the documentation website.*'
+    node[2] = ['em', {}, 'See the full list of supported languages on the documentation website.']
     node.length = 3
   })
 
@@ -834,11 +844,25 @@ export async function transformMDC(event: H3Event, doc: Document): Promise<Docum
     const attrs = node[1] || {}
     const label = attrs.label || ''
     const to = attrs.to || ''
-    node[0] = 'p'
-    node[1] = {}
-    node[2] = to ? `[${label}](${to})` : label
-    node.length = 3
+    if (to) {
+      node[0] = 'p'
+      node[1] = {}
+      node[2] = ['a', { href: to }, label]
+      node.length = 3
+    } else {
+      node[0] = 'p'
+      node[1] = {}
+      node[2] = label
+      node.length = 3
+    }
   })
+
+  // Flatten __flatten markers by splicing their children into parents
+  if (Array.isArray(doc.body)) {
+    flattenMarkers(doc.body)
+  } else if (doc.body?.value && Array.isArray(doc.body.value)) {
+    flattenMarkers(doc.body.value)
+  }
 
   return doc
 }

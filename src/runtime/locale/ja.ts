@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: '送信'
     },
+    chatReasoning: {
+      thinking: '考えています…',
+      thought: '考えました',
+      thoughtFor: '{duration}考えました'
+    },
     colorMode: {
       dark: 'ダーク',
       light: 'ライト',
@@ -50,6 +55,7 @@ export default defineLocale<Messages>({
     },
     contentSearch: {
       links: 'リンク',
+      search: '検索結果',
       theme: 'テーマ'
     },
     contentSearchButton: {
@@ -57,6 +63,10 @@ export default defineLocale<Messages>({
     },
     contentToc: {
       title: 'このページ内'
+    },
+    dropdownMenu: {
+      noMatch: '一致するデータがありません',
+      search: '検索…'
     },
     dashboardSearch: {
       theme: 'テーマ'
@@ -91,6 +101,11 @@ export default defineLocale<Messages>({
       decrement: '減らす',
       increment: '増やす'
     },
+    listbox: {
+      noData: 'データがありません',
+      noMatch: '一致するデータがありません',
+      search: '検索…'
+    },
     modal: {
       close: '閉じる'
     },
@@ -110,7 +125,15 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'コードをクリップボードにコピー'
+      },
+      prompt: {
+        copy: 'プロンプトをコピー',
+        openIn: '{name}で開く'
       }
+    },
+    sidebar: {
+      close: '閉じる',
+      toggle: '切り替え'
     },
     selectMenu: {
       create: '"{label}"を作成',

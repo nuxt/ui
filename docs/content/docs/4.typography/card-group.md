@@ -1,8 +1,8 @@
 ---
-title: CardGroup
+title: ProseCardGroup
 description: 'Organize multiple cards in responsive grid layouts for better content presentation.'
-framework: nuxt
 category: components
+navigation.title: CardGroup
 links:
   - label: GitHub
     icon: i-simple-icons-github

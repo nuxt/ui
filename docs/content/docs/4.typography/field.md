@@ -1,8 +1,8 @@
 ---
-title: Field
+title: ProseField
 description: 'Document API parameters, props, and configuration options clearly.'
-framework: nuxt
 category: components
+navigation.title: Field
 links:
   - label: GitHub
     icon: i-simple-icons-github

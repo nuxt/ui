@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'Skicka'
     },
+    chatReasoning: {
+      thinking: 'Tänker…',
+      thought: 'Tänkte',
+      thoughtFor: 'Tänkte i {duration}'
+    },
     colorMode: {
       dark: 'Mörkt',
       light: 'Ljust',
@@ -50,6 +55,7 @@ export default defineLocale<Messages>({
     },
     contentSearch: {
       links: 'Länkar',
+      search: 'Resultat',
       theme: 'Tema'
     },
     contentSearchButton: {
@@ -57,6 +63,10 @@ export default defineLocale<Messages>({
     },
     contentToc: {
       title: 'På denna sida'
+    },
+    dropdownMenu: {
+      noMatch: 'Inga matchande data',
+      search: 'Sök…'
     },
     dashboardSearch: {
       theme: 'Tema'
@@ -91,6 +101,11 @@ export default defineLocale<Messages>({
       decrement: 'Minska',
       increment: 'Öka'
     },
+    listbox: {
+      noData: 'Inga data',
+      noMatch: 'Inga matchande data',
+      search: 'Sök…'
+    },
     modal: {
       close: 'Stäng'
     },
@@ -110,7 +125,15 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'Kopiera kod till urklipp'
+      },
+      prompt: {
+        copy: 'Kopiera prompt',
+        openIn: 'Öppna i {name}'
       }
+    },
+    sidebar: {
+      close: 'Stäng',
+      toggle: 'Växla'
     },
     selectMenu: {
       create: 'Skapa "{label}"',

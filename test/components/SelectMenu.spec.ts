@@ -1,9 +1,8 @@
 import { describe, it, expect, test } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { renderEach } from '../component-render'
 import SelectMenu from '../../src/runtime/components/SelectMenu.vue'
-import type { SelectMenuProps, SelectMenuSlots } from '../../src/runtime/components/SelectMenu.vue'
-import ComponentRender from '../component-render'
 import theme from '#build/ui/input'
 import { renderForm } from '../utils/form'
 import { flushPromises, mount } from '@vue/test-utils'
@@ -40,7 +39,7 @@ describe('SelectMenu', () => {
 
   const props = { open: true, portal: false, items }
 
-  it.each([
+  renderEach(SelectMenu, [
     // Props
     ['with items', { props }],
     ['with items with description', { props: { ...props, items: itemsWithDescription } }],
@@ -81,7 +80,9 @@ describe('SelectMenu', () => {
     ['with virtualize', { props: { ...props, virtualize: true } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { ...props, size } }]),
     ...variants.map((variant: string) => [`with primary variant ${variant}`, { props: { ...props, variant } }]),
+    ...variants.map((variant: string) => [`with primary variant ${variant} highlight`, { props: { ...props, variant, highlight: true } }]),
     ...variants.map((variant: string) => [`with neutral variant ${variant}`, { props: { ...props, variant, color: 'neutral' } }]),
+    ...variants.map((variant: string) => [`with neutral variant ${variant} highlight`, { props: { ...props, variant, color: 'neutral', highlight: true } }]),
     ['with ariaLabel', { props, attrs: { 'aria-label': 'Aria label' } }],
     ['with class', { props: { ...props, class: 'rounded-full' } }],
     ['with ui', { props: { ...props, ui: { group: 'p-2' } } }],
@@ -95,25 +96,38 @@ describe('SelectMenu', () => {
     ['with item-description slot', { props: { ...props, items: itemsWithDescription }, slots: { 'item-description': () => 'Item description slot' } }],
     ['with item-trailing slot', { props, slots: { 'item-trailing': () => 'Item trailing slot' } }],
     ['with create-item-label slot', { props: { ...props, searchTerm: 'New value', createItem: true }, slots: { 'create-item-label': () => 'Create item slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: SelectMenuProps, slots?: Partial<SelectMenuSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, SelectMenu)
-    expect(html).toMatchSnapshot()
-  })
+  ])
 
-  it.each([
-    ['with .trim modifier', { props: { modelModifiers: { trim: true } } }, { input: 'input  ', expected: 'input' }],
-    ['with .number modifier', { props: { modelModifiers: { number: true } } }, { input: '42', expected: 42 }],
-    ['with .nullable modifier', { props: { modelModifiers: { nullable: true } } }, { input: null, expected: null }],
-    ['with .optional modifier', { props: { modelModifiers: { optional: true } } }, { input: undefined, expected: undefined }]
-  ])('%s works', async (_nameOrHtml: string, options: { props?: any, slots?: any }, spec: { input: any, expected: any }) => {
+  renderEach(
+    SelectMenu,
+    [
+      ['with .trim modifier', { props: { modelModifiers: { trim: true } } }, { input: 'input  ', expected: 'input' }],
+      ['with .number modifier', { props: { modelModifiers: { number: true } } }, { input: '42', expected: 42 }],
+      ['with .nullable modifier', { props: { modelModifiers: { nullable: true } } }, { input: null, expected: null }],
+      ['with .optional modifier', { props: { modelModifiers: { optional: true } } }, { input: undefined, expected: undefined }]
+    ],
+    '%s works', async (_, options, spec) => {
+      const wrapper = mount(SelectMenu, {
+        ...options
+      })
+
+      const selectMenu = wrapper.findComponent({ name: 'ComboboxRoot' })
+      await selectMenu.setValue(spec.input)
+
+      expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [[spec.expected]] })
+    }
+  )
+
+  it('with trailing false should not render trailing section', () => {
     const wrapper = mount(SelectMenu, {
-      ...options
+      props: {
+        ...props,
+        trailing: false
+      }
     })
 
-    const selectMenu = wrapper.findComponent({ name: 'ComboboxRoot' })
-    await selectMenu.setValue(spec.input)
-
-    expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [[spec.expected]] })
+    expect(wrapper.find('[data-slot="trailing"]').exists()).toBe(false)
+    expect(wrapper.find('[data-slot="trailingIcon"]').exists()).toBe(false)
   })
 
   it('passes accessibility tests', async () => {
@@ -156,6 +170,43 @@ describe('SelectMenu', () => {
       const input = wrapper.findComponent({ name: 'ComboboxRoot' })
       input.vm.$emit('update:open', false)
       expect(wrapper.emitted()).toMatchObject({ blur: [[{ type: 'blur' }]] })
+    })
+  })
+
+  describe('create-item', () => {
+    // With `create-item`, the create item is always registered so reka-ui's collection
+    // never goes from empty to non-empty, leaving the highlight stale when async items load.
+    test('re-highlights first item when items change while open', async () => {
+      const wrapper = mount(SelectMenu, {
+        attachTo: document.body,
+        props: {
+          open: true,
+          portal: false,
+          ignoreFilter: true,
+          createItem: 'always',
+          multiple: true,
+          items: []
+        }
+      })
+
+      const root = wrapper.findComponent({ name: 'ComboboxRoot' })
+      // Track open state (the watcher only re-highlights while the menu is open)
+      await root.vm.$emit('update:open', true)
+      await flushPromises()
+
+      // Set the search term so the create item renders and becomes the only (highlighted) item.
+      await wrapper.setProps({ searchTerm: 'a' })
+      await flushPromises()
+
+      // Items arrive asynchronously (e.g. fetched from a backend)
+      await wrapper.setProps({ items: ['Option 1', 'Option 2'] })
+      await flushPromises()
+
+      const highlighted = wrapper.find('[role="option"][data-highlighted]')
+      expect(highlighted.exists()).toBe(true)
+      expect(highlighted.text()).toContain('Option 1')
+
+      wrapper.unmount()
     })
   })
 

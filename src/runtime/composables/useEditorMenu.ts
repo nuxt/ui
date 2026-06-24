@@ -1,12 +1,12 @@
 import { ref, h, computed, unref, watch } from 'vue'
 import type { Ref, ComputedRef, MaybeRef } from 'vue'
 import { defu } from 'defu'
-import { useFilter } from 'reka-ui'
+import { useFilter } from './useFilter'
 import { computePosition } from '@floating-ui/dom'
 import type { Strategy, Placement } from '@floating-ui/dom'
 import type { Editor } from '@tiptap/vue-3'
 import { VueRenderer } from '@tiptap/vue-3'
-import type { SuggestionProps } from '@tiptap/suggestion'
+import type { SuggestionOptions, SuggestionProps } from '@tiptap/suggestion'
 import Suggestion from '@tiptap/suggestion'
 import { PluginKey } from '@tiptap/pm/state'
 import type { FloatingUIOptions } from '../types/editor'
@@ -66,6 +66,10 @@ export interface EditorMenuOptions<T = any> {
    */
   options?: FloatingUIOptions
   /**
+   * Optional TipTap Suggestion matching options.
+   */
+  suggestion?: Omit<Partial<SuggestionOptions>, 'pluginKey' | 'editor' | 'char' | 'items' | 'command' | 'render'>
+  /**
    * The DOM element to append the menu to. Default is the editor's parent element.
    *
    * Sometimes the menu needs to be appended to a different DOM context due to accessibility, clipping, or z-index issues.
@@ -97,7 +101,7 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
   let scrollHandler: (() => void) | null = null
   let stopItemsWatch: (() => void) | null = null
 
-  const { contains, startsWith } = useFilter({ sensitivity: 'base' })
+  const { score } = useFilter()
 
   // Helper function to cleanup menu immediately (no animation)
   const cleanupMenu = () => {
@@ -136,51 +140,36 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
 
   const filterFields = options.filterFields ?? ['label']
 
-  // matchType: 0 = exact, 1 = startsWith, 2 = contains (lower = better)
   const defaultFilter = (items: T[], query: string) => {
     if (!query) return items
 
-    const matched: { item: T, fieldIndex: number, matchType: number }[] = []
+    const scored: { item: T, score: number }[] = []
 
     for (const item of items) {
-      let bestMatchType = 3
-      let bestFieldIndex = filterFields.length
+      let bestScore: number | null = null
 
-      for (let i = 0; i < filterFields.length; i++) {
-        const value = get(item as any, filterFields[i]!)
-        if (value === undefined || value === null) continue
+      for (const field of filterFields) {
+        const value = get(item as any, field)
+        if (value == null) continue
 
         const values = Array.isArray(value) ? value.map(String) : [String(value)]
 
         for (const v of values) {
           const normalized = v.replace(/[\s_-]/g, '')
-
-          let matchType = 3
-          if (startsWith(v, query) || startsWith(normalized, query)) {
-            matchType = (v.length === query.length || normalized.length === query.length) ? 0 : 1
-          } else if (contains(v, query) || contains(normalized, query)) {
-            matchType = 2
-          }
-
-          if (matchType < bestMatchType || (matchType === bestMatchType && i < bestFieldIndex)) {
-            bestMatchType = matchType
-            bestFieldIndex = i
-          }
+          const s = Math.min(score(v, query) ?? 3, score(normalized, query) ?? 3)
+          if (bestScore === null || s < bestScore) bestScore = s
+          if (bestScore === 0) break
         }
+        if (bestScore === 0) break
       }
 
-      if (bestMatchType < 3) {
-        matched.push({ item, fieldIndex: bestFieldIndex, matchType: bestMatchType })
+      if (bestScore !== null && bestScore < 3) {
+        scored.push({ item, score: bestScore })
       }
     }
 
-    // Sort: by match specificity first (exact > startsWith > contains), then by field index
-    matched.sort((a, b) => {
-      if (a.matchType !== b.matchType) return a.matchType - b.matchType
-      return a.fieldIndex - b.fieldIndex
-    })
-
-    return matched.map(({ item }) => item)
+    scored.sort((a, b) => a.score - b.score)
+    return scored.map(({ item }) => item)
   }
 
   const filter = options.filter || defaultFilter
@@ -348,7 +337,8 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
     element.addEventListener('mousedown', handleMouseDown)
 
     const appendToElement = typeof options.appendTo === 'function' ? options.appendTo() : options.appendTo
-    ;(appendToElement ?? options.editor.view.dom.parentElement)?.appendChild(element)
+    const container = appendToElement ?? options.editor.view.dom.parentElement
+    container?.appendChild(element)
     if (renderer.element) {
       element.appendChild(renderer.element)
     }
@@ -505,6 +495,7 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
 
   // Create the suggestion plugin
   const plugin = Suggestion({
+    ...(options.suggestion || {}),
     pluginKey: pluginKeyInstance,
     editor: options.editor,
     char: options.char,

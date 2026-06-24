@@ -12,7 +12,8 @@ const groups = ref([
         to: 'https://github.com/benjamincanac',
         target: '_blank',
         avatar: {
-          src: 'https://github.com/benjamincanac.png'
+          src: 'https://github.com/benjamincanac.png',
+          loading: 'lazy' as const
         }
       },
       {
@@ -21,7 +22,8 @@ const groups = ref([
         to: 'https://github.com/romhml',
         target: '_blank',
         avatar: {
-          src: 'https://github.com/romhml.png'
+          src: 'https://github.com/romhml.png',
+          loading: 'lazy' as const
         }
       },
       {
@@ -30,7 +32,8 @@ const groups = ref([
         to: 'https://github.com/atinux',
         target: '_blank',
         avatar: {
-          src: 'https://github.com/atinux.png'
+          src: 'https://github.com/atinux.png',
+          loading: 'lazy' as const
         }
       },
       {
@@ -39,7 +42,8 @@ const groups = ref([
         to: 'https://github.com/HugoRCD',
         target: '_blank',
         avatar: {
-          src: 'https://github.com/HugoRCD.png'
+          src: 'https://github.com/HugoRCD.png',
+          loading: 'lazy' as const
         }
       },
       {
@@ -48,7 +52,8 @@ const groups = ref([
         to: 'https://github.com/sandros94',
         target: '_blank',
         avatar: {
-          src: 'https://github.com/sandros94.png'
+          src: 'https://github.com/sandros94.png',
+          loading: 'lazy' as const
         }
       },
       {
@@ -57,7 +62,8 @@ const groups = ref([
         to: 'https://github.com/danielroe',
         target: '_blank',
         avatar: {
-          src: 'https://github.com/danielroe.png'
+          src: 'https://github.com/danielroe.png',
+          loading: 'lazy' as const
         }
       },
       {
@@ -66,7 +72,8 @@ const groups = ref([
         to: 'https://github.com/J-Michalek',
         target: '_blank',
         avatar: {
-          src: 'https://github.com/J-Michalek.png'
+          src: 'https://github.com/J-Michalek.png',
+          loading: 'lazy' as const
         }
       },
       {
@@ -75,7 +82,8 @@ const groups = ref([
         to: 'https://github.com/genu',
         target: '_blank',
         avatar: {
-          src: 'https://github.com/genu.png'
+          src: 'https://github.com/genu.png',
+          loading: 'lazy' as const
         }
       }
     ]

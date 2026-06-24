@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/prose/card'
 import type { IconProps, LinkProps } from '../../types'
@@ -21,62 +22,65 @@ export interface ProseCardProps {
 }
 
 export interface ProseCardSlots {
-  default(props?: {}): any
-  title(props?: {}): any
+  default(props?: {}): VNode[]
+  title(props?: {}): VNode[]
 }
 </script>
 
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useAppConfig } from '#imports'
-import { useComponentUI } from '../../composables/useComponentUI'
+import { useComponentProps } from '../../composables/useComponentProps'
 import { tv } from '../../utils/tv'
 import ULink from '../Link.vue'
 import UIcon from '../Icon.vue'
 
 defineOptions({ inheritAttrs: false })
 
-const props = defineProps<ProseCardProps>()
+const _props = defineProps<ProseCardProps>()
 const slots = defineSlots<ProseCardSlots>()
 
-const appConfig = useAppConfig() as ProseCard['AppConfig']
-const uiProp = useComponentUI('prose.card', props)
+const props = useComponentProps('prose.card', _props)
 
+const appConfig = useAppConfig() as ProseCard['AppConfig']
+
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.card || {}) })({
   color: props.color,
   to: !!props.to,
   title: !!props.title
 }))
 
+// eslint-disable-next-line vue/no-dupe-keys
 const target = computed(() => props.target || (!!props.to && typeof props.to === 'string' && props.to.startsWith('http') ? '_blank' : undefined))
 
 const ariaLabel = computed(() => (props.title || 'Card link').trim())
 </script>
 
 <template>
-  <div :class="ui.base({ class: [uiProp?.base, props.class] })">
+  <div :class="ui.base({ class: [props.ui?.base, props.class] })">
     <ULink
-      v-if="to"
+      v-if="props.to"
       :aria-label="ariaLabel"
-      v-bind="{ to, target, ...$attrs }"
+      v-bind="{ to: props.to, target, ...$attrs }"
       class="focus:outline-none"
       raw
     >
       <span class="absolute inset-0" aria-hidden="true" />
     </ULink>
 
-    <UIcon v-if="icon" :name="icon" :class="ui.icon({ class: uiProp?.icon })" />
-    <UIcon v-if="!!to && target === '_blank'" :name="appConfig.ui.icons.external" :class="ui.externalIcon({ class: uiProp?.externalIcon })" />
+    <UIcon v-if="props.icon" :name="props.icon" :class="ui.icon({ class: props.ui?.icon })" />
+    <UIcon v-if="!!props.to && target === '_blank'" :name="appConfig.ui.icons.external" :class="ui.externalIcon({ class: props.ui?.externalIcon })" />
 
-    <p v-if="title || !!slots.title" :class="ui.title({ class: uiProp?.title })">
+    <p v-if="props.title || !!slots.title" :class="ui.title({ class: props.ui?.title })">
       <slot name="title" mdc-unwrap="p">
-        {{ title }}
+        {{ props.title }}
       </slot>
     </p>
 
-    <div v-if="!!slots.default" :class="ui.description({ class: uiProp?.description })">
+    <div v-if="!!slots.default" :class="ui.description({ class: props.ui?.description })">
       <slot>
-        {{ description }}
+        {{ props.description }}
       </slot>
     </div>
   </div>

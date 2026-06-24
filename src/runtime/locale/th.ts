@@ -50,6 +50,7 @@ export default defineLocale<Messages>({
     },
     contentSearch: {
       links: 'ลิงก์',
+      search: 'ผลลัพธ์',
       theme: 'ธีม'
     },
     contentSearchButton: {
@@ -57,6 +58,10 @@ export default defineLocale<Messages>({
     },
     contentToc: {
       title: 'ในหน้านี้'
+    },
+    dropdownMenu: {
+      noMatch: 'ไม่พบข้อมูลที่ตรงกัน',
+      search: 'ค้นหา…'
     },
     dashboardSearch: {
       theme: 'ธีม'
@@ -91,11 +96,16 @@ export default defineLocale<Messages>({
       decrement: 'ลด',
       increment: 'เพิ่ม'
     },
+    listbox: {
+      noData: 'ไม่มีข้อมูล',
+      noMatch: 'ไม่พบข้อมูลที่ตรงกัน',
+      search: 'ค้นหา…'
+    },
     modal: {
       close: 'ปิด'
     },
     pricingTable: {
-      caption: 'การเปรียบเทียบราคาสินค้า'
+      caption: 'การเปรียบเทียบราคา'
     },
     prose: {
       codeCollapse: {
@@ -110,7 +120,20 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'คัดลอกโค้ดไปยังคลิปบอร์ด'
+      },
+      prompt: {
+        copy: 'คัดลอกพรอมต์',
+        openIn: 'เปิดใน {name}'
       }
+    },
+    chatReasoning: {
+      thinking: 'กำลังคิด…',
+      thought: 'คิดแล้ว',
+      thoughtFor: 'คิดเป็นเวลา {duration}'
+    },
+    sidebar: {
+      close: 'ปิด',
+      toggle: 'สลับ'
     },
     selectMenu: {
       create: 'สร้าง "{label}"',

@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'भेजें'
     },
+    chatReasoning: {
+      thinking: 'सोच रहा है…',
+      thought: 'सोचा',
+      thoughtFor: '{duration} सोचा'
+    },
     colorMode: {
       dark: 'गहरा',
       light: 'हल्का',
@@ -50,6 +55,7 @@ export default defineLocale<Messages>({
     },
     contentSearch: {
       links: 'लिंक्स',
+      search: 'परिणाम',
       theme: 'थीम'
     },
     contentSearchButton: {
@@ -57,6 +63,10 @@ export default defineLocale<Messages>({
     },
     contentToc: {
       title: 'इस पृष्ठ पर'
+    },
+    dropdownMenu: {
+      noMatch: 'कोई मेल खाता डेटा नहीं',
+      search: 'खोजें…'
     },
     dashboardSearch: {
       theme: 'थीम'
@@ -91,6 +101,11 @@ export default defineLocale<Messages>({
       decrement: 'घटाना',
       increment: 'बढ़ाना'
     },
+    listbox: {
+      noData: 'कोई डेटा नहीं',
+      noMatch: 'कोई मेल खाता डेटा नहीं',
+      search: 'खोजें…'
+    },
     modal: {
       close: 'बंद करें'
     },
@@ -110,7 +125,15 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'कोड को क्लिपबोर्ड पर कॉपी करें'
+      },
+      prompt: {
+        copy: 'प्रॉम्प्ट कॉपी करें',
+        openIn: '{name} में खोलें'
       }
+    },
+    sidebar: {
+      close: 'बंद करें',
+      toggle: 'टॉगल करें'
     },
     selectMenu: {
       create: '"{label}" बनाएँ',

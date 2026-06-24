@@ -18,7 +18,14 @@ useSeoMeta({
   ogDescription: page.value.description
 })
 
-defineOgImageComponent('Docs')
+useCanonical()
+
+if (import.meta.server) {
+  defineOgImage('Docs.takumi', {
+    title: page.value.title,
+    description: page.value.description
+  })
+}
 
 function formatDate(date: string) {
   return new Date(date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })

@@ -113,8 +113,9 @@ export function defineShortcuts(config: MaybeRef<ShortcutsConfig>, options: Shor
       return
     }
 
-    const alphabetKey = layoutIndependent ? /^Key[A-Z]$/i.test(e.code) : /^[a-z]{1}$/i.test(e.key)
-    const shiftableKey = layoutIndependent ? shiftableCodes.includes(e.code) : shiftableKeys.includes(e.key.toLowerCase())
+    const useCode = layoutIndependent || e.altKey
+    const alphabetKey = useCode ? /^Key[A-Z]$/i.test(e.code) : /^[a-z]{1}$/i.test(e.key)
+    const shiftableKey = useCode ? shiftableCodes.includes(e.code) : shiftableKeys.includes(e.key.toLowerCase())
 
     let chainedKey
     // push either code or key depending on layoutIndependent flag
@@ -144,6 +145,11 @@ export function defineShortcuts(config: MaybeRef<ShortcutsConfig>, options: Shor
         if (e.code !== shortcut.key) {
           continue
         }
+      } else if (shortcut.altKey && e.altKey) {
+        // Alt/Option modifies e.key on macOS (e.g. Alt+K → "˚"), so compare via e.code
+        if (e.code !== convertKeyToCode(shortcut.key)) {
+          continue
+        }
       } else {
         if (e.key.toLowerCase() !== shortcut.key) {
           continue
@@ -156,10 +162,13 @@ export function defineShortcuts(config: MaybeRef<ShortcutsConfig>, options: Shor
       if (e.ctrlKey !== shortcut.ctrlKey) {
         continue
       }
-      // shift modifier is only checked in combination with alphabet keys and some extra keys
-      // (shift with special characters would change the key)
-      // also check shift if the shortcut explicitly requires it or if shift is pressed
-      if ((alphabetKey || shiftableKey || shortcut.shiftKey || e.shiftKey) && e.shiftKey !== shortcut.shiftKey) {
+      if (e.altKey !== shortcut.altKey) {
+        continue
+      }
+      // Shift modifier is checked for alphabet keys, shiftable keys, explicit shift shortcuts,
+      // or when shift is pressed alongside meta/ctrl (where shift doesn't transform the key value).
+      // Without meta/ctrl, shift changes the key itself (e.g. / -> ?) so the check is skipped.
+      if ((alphabetKey || shiftableKey || shortcut.shiftKey || (e.shiftKey && (e.metaKey || e.ctrlKey))) && e.shiftKey !== shortcut.shiftKey) {
         continue
       }
 

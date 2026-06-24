@@ -8,11 +8,11 @@ type ContentSearchButton = ComponentConfig<typeof theme, AppConfig, 'contentSear
 
 export interface ContentSearchButtonProps extends Omit<ButtonProps, LinkPropsKeys | 'icon' | 'label' | 'color' | 'variant'> {
   /**
-   * The icon displayed in the button.
+   * The icon displayed in the button. Set to `false` to hide the icon.
    * @defaultValue appConfig.ui.icons.search
    * @IconifyIcon
    */
-  icon?: IconProps['name']
+  icon?: IconProps['name'] | false
   /**
    * The label displayed in the button.
    * @defaultValue t('contentSearchButton.label')
@@ -51,11 +51,11 @@ export interface ContentSearchButtonProps extends Omit<ButtonProps, LinkPropsKey
 
 <script setup lang="ts">
 import { computed, toRef } from 'vue'
-import { useForwardProps } from 'reka-ui'
 import { defu } from 'defu'
 import { reactiveOmit, createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { useComponentUI } from '../../composables/useComponentUI'
+import { useComponentProps } from '../../composables/useComponentProps'
+import { useForwardProps } from '../../composables/useForwardProps'
 import { useContentSearch } from '../../composables/useContentSearch'
 import { useLocale } from '../../composables/useLocale'
 import { omit, transformUI } from '../../utils'
@@ -66,13 +66,15 @@ import UTooltip from '../Tooltip.vue'
 
 defineOptions({ inheritAttrs: false })
 
-const props = withDefaults(defineProps<ContentSearchButtonProps>(), {
+const _props = withDefaults(defineProps<ContentSearchButtonProps>(), {
   color: 'neutral',
   collapsed: true,
   tooltip: false,
   kbds: () => ['meta', 'k']
 })
 const slots = defineSlots<ButtonSlots>()
+
+const props = useComponentProps('contentSearchButton', _props)
 
 const [DefineButtonTemplate, ReuseButtonTemplate] = createReusableTemplate()
 
@@ -84,8 +86,8 @@ const tooltipProps = toRef(() => defu(typeof props.tooltip === 'boolean' ? {} : 
 const { t } = useLocale()
 const { open } = useContentSearch()
 const appConfig = useAppConfig() as ContentSearchButton['AppConfig']
-const uiProp = useComponentUI('contentSearchButton', props)
 
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.contentSearchButton || {}) })({
   collapsed: props.collapsed
 }))
@@ -94,19 +96,19 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.contentSearc
 <template>
   <DefineButtonTemplate>
     <UButton
-      :icon="icon || appConfig.ui.icons.search"
-      :label="label || t('contentSearchButton.label')"
-      :variant="variant || (collapsed ? 'ghost' : 'outline')"
+      :icon="props.icon === false ? undefined : (props.icon ?? appConfig.ui.icons.search)"
+      :label="props.label || t('contentSearchButton.label')"
+      :variant="props.variant || (props.collapsed ? 'ghost' : 'outline')"
       v-bind="{
         ...buttonProps,
-        ...(collapsed ? {
+        ...(props.collapsed ? {
           'square': true,
-          'aria-label': label || t('contentSearchButton.label')
+          'aria-label': props.label || t('contentSearchButton.label')
         } : {}),
         ...$attrs
       }"
-      :class="ui.base({ class: [uiProp?.base, props.class] })"
-      :ui="transformUI(ui, uiProp)"
+      :class="ui.base({ class: [props.ui?.base, props.class] })"
+      :ui="transformUI(ui, props.ui)"
       @click="open = true"
     >
       <template v-for="(_, name) in getProxySlots()" #[name]="slotData">
@@ -114,10 +116,10 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.contentSearc
       </template>
 
       <template #trailing="{ ui: uiProxy }">
-        <div data-slot="trailing" :class="ui.trailing({ class: uiProp?.trailing })">
+        <div data-slot="trailing" :class="ui.trailing({ class: props.ui?.trailing })">
           <slot name="trailing" :ui="uiProxy">
-            <template v-if="kbds?.length">
-              <UKbd v-for="(kbd, index) in kbds" :key="index" variant="subtle" v-bind="typeof kbd === 'string' ? { value: kbd } : kbd" />
+            <template v-if="props.kbds?.length">
+              <UKbd v-for="(kbd, index) in props.kbds" :key="index" variant="subtle" v-bind="typeof kbd === 'string' ? { value: kbd } : kbd" />
             </template>
           </slot>
         </div>
@@ -125,7 +127,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.contentSearc
     </UButton>
   </DefineButtonTemplate>
 
-  <UTooltip v-if="collapsed && tooltip" :text="label || t('contentSearchButton.label')" v-bind="tooltipProps">
+  <UTooltip v-if="props.collapsed && props.tooltip" :text="props.label || t('contentSearchButton.label')" v-bind="tooltipProps">
     <ReuseButtonTemplate />
   </UTooltip>
   <ReuseButtonTemplate v-else />

@@ -34,6 +34,11 @@ export default defineLocale<Messages>({
     chatPromptSubmit: {
       label: 'প্রেরণ করুন'
     },
+    chatReasoning: {
+      thinking: 'ভাবছে…',
+      thought: 'ভেবেছে',
+      thoughtFor: '{duration} ভেবেছে'
+    },
     colorMode: {
       dark: 'গাঢ়',
       light: 'হালকা',
@@ -50,6 +55,7 @@ export default defineLocale<Messages>({
     },
     contentSearch: {
       links: 'লিংকসমূহ',
+      search: 'ফলাফল',
       theme: 'থিম'
     },
     contentSearchButton: {
@@ -57,6 +63,10 @@ export default defineLocale<Messages>({
     },
     contentToc: {
       title: 'এই পৃষ্ঠায়'
+    },
+    dropdownMenu: {
+      noMatch: 'কোন মিল পাওয়া যায়নি',
+      search: 'অনুসন্ধান করুন…'
     },
     dashboardSearch: {
       theme: 'থিম'
@@ -91,6 +101,11 @@ export default defineLocale<Messages>({
       decrement: 'হ্রাস করুন',
       increment: 'বৃদ্ধি করুন'
     },
+    listbox: {
+      noData: 'কোন তথ্য নেই',
+      noMatch: 'কোন মিল পাওয়া যায়নি',
+      search: 'অনুসন্ধান করুন…'
+    },
     modal: {
       close: 'বন্ধ করুন'
     },
@@ -110,7 +125,15 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'কোড ক্লিপবোর্ডে কপি করুন'
+      },
+      prompt: {
+        copy: 'প্রম্পট কপি করুন',
+        openIn: '{name}-এ খুলুন'
       }
+    },
+    sidebar: {
+      close: 'বন্ধ করুন',
+      toggle: 'টগল করুন'
     },
     selectMenu: {
       create: '"{label}" তৈরি করুন',

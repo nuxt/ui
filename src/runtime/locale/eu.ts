@@ -29,10 +29,15 @@ export default defineLocale<Messages>({
       prev: 'Aurretikoa'
     },
     chatPrompt: {
-      placeholder: 'Idatzi zure mezua hemen...'
+      placeholder: 'Idatzi zure mezua hemen…'
     },
     chatPromptSubmit: {
       label: 'Bidali'
+    },
+    chatReasoning: {
+      thinking: 'Pentsatzen…',
+      thought: 'Pentsatu du',
+      thoughtFor: '{duration} pentsatzen'
     },
     colorMode: {
       dark: 'Iluna',
@@ -46,10 +51,11 @@ export default defineLocale<Messages>({
       close: 'Itxi',
       noData: 'Daturik gabe',
       noMatch: 'Ez da datu bat ere aurkitu',
-      placeholder: 'Idatzi komando bat edo bilatu...'
+      placeholder: 'Idatzi komando bat edo bilatu…'
     },
     contentSearch: {
       links: 'Estekak',
+      search: 'Emaitzak',
       theme: 'Gaia'
     },
     contentSearchButton: {
@@ -57,6 +63,10 @@ export default defineLocale<Messages>({
     },
     contentToc: {
       title: 'Orri honetan'
+    },
+    dropdownMenu: {
+      noMatch: 'Ez da datu bat ere aurkitu',
+      search: 'Bilatu…'
     },
     dashboardSearch: {
       theme: 'Gaia'
@@ -91,6 +101,11 @@ export default defineLocale<Messages>({
       decrement: 'Murriztu',
       increment: 'Handitu'
     },
+    listbox: {
+      noData: 'Daturik gabe',
+      noMatch: 'Ez da datu bat ere aurkitu',
+      search: 'Bilatu…'
+    },
     modal: {
       close: 'Itxi'
     },
@@ -110,7 +125,15 @@ export default defineLocale<Messages>({
       },
       pre: {
         copy: 'Kopiatu kodea clipboard-era'
+      },
+      prompt: {
+        copy: 'Kopiatu prompt',
+        openIn: '{name}(e)n ireki'
       }
+    },
+    sidebar: {
+      close: 'Itxi',
+      toggle: 'Txandakatu'
     },
     selectMenu: {
       create: 'Sortu {label}',

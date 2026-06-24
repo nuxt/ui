@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/pricing-plan'
 import type { BadgeProps, ButtonProps, IconProps } from '../types'
@@ -92,19 +93,19 @@ export interface PricingPlanProps {
 }
 
 export interface PricingPlanSlots {
-  badge(props: { ui: PricingPlan['ui'] }): any
-  title(props?: {}): any
-  description(props?: {}): any
-  price(props?: {}): any
-  discount(props?: {}): any
-  billing(props: { ui: PricingPlan['ui'] }): any
-  features(props?: {}): any
-  button(props: { ui: PricingPlan['ui'] }): any
-  header(props?: {}): any
-  body(props?: {}): any
-  footer(props?: {}): any
-  tagline(props?: {}): any
-  terms(props?: {}): any
+  badge?(props: { ui: PricingPlan['ui'] }): VNode[]
+  title?(props?: {}): VNode[]
+  description?(props?: {}): VNode[]
+  price?(props?: {}): VNode[]
+  discount?(props?: {}): VNode[]
+  billing?(props: { ui: PricingPlan['ui'] }): VNode[]
+  features?(props?: {}): VNode[]
+  button?(props: { ui: PricingPlan['ui'] }): VNode[]
+  header?(props?: {}): VNode[]
+  body?(props?: {}): VNode[]
+  footer?(props?: {}): VNode[]
+  tagline?(props?: {}): VNode[]
+  terms?(props?: {}): VNode[]
 }
 </script>
 
@@ -113,7 +114,7 @@ import { computed } from 'vue'
 import { Primitive } from 'reka-ui'
 import { createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { useComponentUI } from '../composables/useComponentUI'
+import { useComponentProps } from '../composables/useComponentProps'
 import { tv } from '../utils/tv'
 import UBadge from './Badge.vue'
 import UButton from './Button.vue'
@@ -121,16 +122,18 @@ import UIcon from './Icon.vue'
 
 defineOptions({ inheritAttrs: false })
 
-const props = withDefaults(defineProps<PricingPlanProps>(), {
+const _props = withDefaults(defineProps<PricingPlanProps>(), {
   orientation: 'vertical'
 })
 const slots = defineSlots<PricingPlanSlots>()
 
+const props = useComponentProps('pricingPlan', _props)
+
 const appConfig = useAppConfig() as PricingPlan['AppConfig']
-const uiProp = useComponentUI('pricingPlan', props)
 
 const [DefinePriceTemplate, ReusePriceTemplate] = createReusableTemplate()
 
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pricingPlan || {}) })({
   orientation: props.orientation,
   variant: props.variant,
@@ -138,101 +141,102 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pricingPlan 
   scale: props.scale
 }))
 
+// eslint-disable-next-line vue/no-dupe-keys
 const features = computed(() => props.features?.map(feature => typeof feature === 'string' ? { title: feature } : feature))
 </script>
 
 <template>
   <DefinePriceTemplate>
-    <div v-if="discount || price || !!slots.discount || !!slots.price || billingCycle || billingPeriod || !!slots.billing" data-slot="priceWrapper" :class="ui.priceWrapper({ class: uiProp?.priceWrapper })">
-      <div v-if="(discount && price) || !!slots.discount" data-slot="discount" :class="ui.discount({ class: uiProp?.discount })">
+    <div v-if="props.discount || props.price || !!slots.discount || !!slots.price || props.billingCycle || props.billingPeriod || !!slots.billing" data-slot="priceWrapper" :class="ui.priceWrapper({ class: props.ui?.priceWrapper })">
+      <div v-if="(props.discount && props.price) || !!slots.discount" data-slot="discount" :class="ui.discount({ class: props.ui?.discount })">
         <slot name="discount">
-          {{ price }}
+          {{ props.price }}
         </slot>
       </div>
 
-      <div v-if="(discount || price) || !!slots.price" data-slot="price" :class="ui.price({ class: uiProp?.price })">
+      <div v-if="(props.discount || props.price) || !!slots.price" data-slot="price" :class="ui.price({ class: props.ui?.price })">
         <slot name="price">
-          {{ discount || price }}
+          {{ props.discount || props.price }}
         </slot>
       </div>
 
-      <div v-if="billingCycle || billingPeriod || !!slots.billing" data-slot="billing" :class="ui.billing({ class: uiProp?.billing })">
+      <div v-if="props.billingCycle || props.billingPeriod || !!slots.billing" data-slot="billing" :class="ui.billing({ class: props.ui?.billing })">
         <slot name="billing" :ui="ui">
-          <span data-slot="billingPeriod" :class="ui.billingPeriod({ class: uiProp?.billingPeriod })">
-            {{ billingPeriod || '&nbsp;' }}
+          <span data-slot="billingPeriod" :class="ui.billingPeriod({ class: props.ui?.billingPeriod })">
+            {{ props.billingPeriod || '&nbsp;' }}
           </span>
 
-          <span v-if="billingCycle" data-slot="billingCycle" :class="ui.billingCycle({ class: uiProp?.billingCycle })">
-            {{ billingCycle }}
+          <span v-if="props.billingCycle" data-slot="billingCycle" :class="ui.billingCycle({ class: props.ui?.billingCycle })">
+            {{ props.billingCycle }}
           </span>
         </slot>
       </div>
     </div>
   </DefinePriceTemplate>
 
-  <Primitive :as="as" v-bind="$attrs" :data-orientation="orientation" data-slot="root" :class="ui.root({ class: [uiProp?.root, props.class] })">
-    <div v-if="!!slots.header && orientation === 'vertical'" data-slot="header" :class="ui.header({ class: uiProp?.header })">
+  <Primitive :as="props.as" v-bind="$attrs" :data-orientation="props.orientation" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+    <div v-if="!!slots.header && props.orientation === 'vertical'" data-slot="header" :class="ui.header({ class: props.ui?.header })">
       <slot name="header" />
     </div>
 
-    <div data-slot="body" :class="ui.body({ class: uiProp?.body })">
+    <div data-slot="body" :class="ui.body({ class: props.ui?.body })">
       <slot name="body">
-        <div data-slot="titleWrapper" :class="ui.titleWrapper({ class: uiProp?.titleWrapper })">
-          <div v-if="title || !!slots.title" data-slot="title" :class="ui.title({ class: uiProp?.title })">
+        <div data-slot="titleWrapper" :class="ui.titleWrapper({ class: props.ui?.titleWrapper })">
+          <div v-if="props.title || !!slots.title" data-slot="title" :class="ui.title({ class: props.ui?.title })">
             <slot name="title">
-              {{ title }}
+              {{ props.title }}
             </slot>
           </div>
 
           <slot name="badge" :ui="ui">
             <UBadge
-              v-if="badge"
+              v-if="props.badge"
               color="primary"
               variant="subtle"
-              v-bind="typeof badge === 'string' ? { label: badge } : badge"
+              v-bind="typeof props.badge === 'string' ? { label: props.badge } : props.badge"
               data-slot="badge"
-              :class="ui.badge({ class: uiProp?.badge })"
+              :class="ui.badge({ class: props.ui?.badge })"
             />
           </slot>
         </div>
 
-        <div v-if="description || !!slots.description" data-slot="description" :class="ui.description({ class: uiProp?.description })">
+        <div v-if="props.description || !!slots.description" data-slot="description" :class="ui.description({ class: props.ui?.description })">
           <slot name="description">
-            {{ description }}
+            {{ props.description }}
           </slot>
         </div>
 
-        <ReusePriceTemplate v-if="orientation === 'vertical'" />
+        <ReusePriceTemplate v-if="props.orientation === 'vertical'" />
 
-        <ul v-if="features?.length || !!slots.features" data-slot="features" :class="ui.features({ class: uiProp?.features })">
+        <ul v-if="features?.length || !!slots.features" data-slot="features" :class="ui.features({ class: props.ui?.features })">
           <slot name="features">
-            <li v-for="(feature, index) in features" :key="index" data-slot="feature" :class="ui.feature({ class: uiProp?.feature })">
-              <UIcon :name="feature.icon || appConfig.ui.icons.success" data-slot="featureIcon" :class="ui.featureIcon({ class: uiProp?.featureIcon })" />
+            <li v-for="(feature, index) in features" :key="index" data-slot="feature" :class="ui.feature({ class: props.ui?.feature })">
+              <UIcon :name="feature.icon || appConfig.ui.icons.success" data-slot="featureIcon" :class="ui.featureIcon({ class: props.ui?.featureIcon })" />
 
-              <span data-slot="featureTitle" :class="ui.featureTitle({ class: uiProp?.featureTitle })">{{ feature.title }}</span>
+              <span data-slot="featureTitle" :class="ui.featureTitle({ class: props.ui?.featureTitle })">{{ feature.title }}</span>
             </li>
           </slot>
         </ul>
       </slot>
     </div>
 
-    <div v-if="(terms || !!slots.terms) || (button || !!slots.button) || orientation === 'horizontal' || (tagline || !!slots.tagline) || !!slots.footer" data-slot="footer" :class="ui.footer({ class: uiProp?.footer })">
+    <div v-if="(props.terms || !!slots.terms) || (props.button || !!slots.button) || props.orientation === 'horizontal' || (props.tagline || !!slots.tagline) || !!slots.footer" data-slot="footer" :class="ui.footer({ class: props.ui?.footer })">
       <slot name="footer">
-        <div v-if="tagline || !!slots.tagline" data-slot="tagline" :class="ui.tagline({ class: uiProp?.tagline })">
+        <div v-if="props.tagline || !!slots.tagline" data-slot="tagline" :class="ui.tagline({ class: props.ui?.tagline })">
           <slot name="tagline">
-            {{ tagline }}
+            {{ props.tagline }}
           </slot>
         </div>
 
-        <ReusePriceTemplate v-if="orientation === 'horizontal'" />
+        <ReusePriceTemplate v-if="props.orientation === 'horizontal'" />
 
         <slot name="button" :ui="ui">
-          <UButton v-if="button" v-bind="{ block: true, size: 'lg', ...button }" data-slot="button" :class="ui.button({ class: uiProp?.button })" @click="button?.onClick" />
+          <UButton v-if="props.button" v-bind="{ block: true, size: 'lg', ...props.button }" data-slot="button" :class="ui.button({ class: props.ui?.button })" @click="props.button?.onClick" />
         </slot>
 
-        <div v-if="terms || !!slots.terms" data-slot="terms" :class="ui.terms({ class: uiProp?.terms })">
+        <div v-if="props.terms || !!slots.terms" data-slot="terms" :class="ui.terms({ class: props.ui?.terms })">
           <slot name="terms">
-            {{ terms }}
+            {{ props.terms }}
           </slot>
         </div>
       </slot>

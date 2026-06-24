@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/prose/a'
 import type { ComponentConfig } from '../../types/tv'
@@ -13,29 +14,31 @@ export interface ProseAProps {
 }
 
 export interface ProseASlots {
-  default(props?: {}): any
+  default(props?: {}): VNode[]
 }
 </script>
 
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useAppConfig } from '#imports'
-import { useComponentUI } from '../../composables/useComponentUI'
+import { useComponentProps } from '../../composables/useComponentProps'
 import { tv } from '../../utils/tv'
 import ULink from '../Link.vue'
 
-const props = defineProps<ProseAProps>()
+const _props = defineProps<ProseAProps>()
+
 defineSlots<ProseASlots>()
 
+const props = useComponentProps('prose.a', _props)
+
 const appConfig = useAppConfig() as ProseA['AppConfig']
-const uiProp = useComponentUI('prose.a', props)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.a || {}) }))
 </script>
 
 <template>
-  <ULink :href="href" :target="target" :class="ui({ class: [uiProp?.base, props.class] })" raw>
+  <ULink :href="props.href" :target="props.target" :class="ui({ class: [props.ui?.base, props.class] })" raw>
     <slot />
   </ULink>
 </template>

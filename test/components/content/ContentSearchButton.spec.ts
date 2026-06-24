@@ -1,18 +1,23 @@
 import { describe, it, expect } from 'vitest'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
 import ContentSearchButton from '../../../src/runtime/components/content/ContentSearchButton.vue'
-import type { ContentSearchButtonProps } from '../../../src/runtime/components/content/ContentSearchButton.vue'
-import ComponentRender from '../../component-render'
+import { renderEach } from '../../component-render'
 
 describe('DashboardSearchButton', () => {
-  it.each([
+  renderEach(ContentSearchButton, [
     // Props
     ['with label', { props: { label: 'Open' } }],
     ['with icon', { props: { icon: 'i-lucide-house' } }],
     ['with kbds', { props: { kbds: ['alt', 'o'] } }],
     ['without collapsed', { props: { collapsed: false } }],
     ['with class', { props: { class: 'w-full' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ContentSearchButtonProps }) => {
-    const html = await ComponentRender(nameOrHtml, options, ContentSearchButton)
-    expect(html).toMatchSnapshot()
+  ])
+
+  it('hides the icon when icon is false', async () => {
+    const withIcon = await mountSuspended(ContentSearchButton, { props: { collapsed: false } })
+    expect(withIcon.find('[data-slot="leadingIcon"]').exists()).toBe(true)
+
+    const withoutIcon = await mountSuspended(ContentSearchButton, { props: { collapsed: false, icon: false } })
+    expect(withoutIcon.find('[data-slot="leadingIcon"]').exists()).toBe(false)
   })
 })

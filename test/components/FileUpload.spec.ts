@@ -1,11 +1,10 @@
 import { describe, it, expect, vi, test } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { renderEach } from '../component-render'
 import { mount } from '@vue/test-utils'
 import FileUpload from '../../src/runtime/components/FileUpload.vue'
-import type { FileUploadProps, FileUploadSlots } from '../../src/runtime/components/FileUpload.vue'
 import type { FormInputEvents } from '../../src/module'
-import ComponentRender from '../component-render'
 import { renderForm } from '../utils/form'
 import theme from '#build/ui/file-upload'
 
@@ -41,7 +40,7 @@ describe('FileUpload', () => {
 
   const props = { modelValue }
 
-  it.each([
+  renderEach(FileUpload, [
     // Props
     ['with modelValue', { props }],
     ['with id', { props: { id: 'id' } }],
@@ -57,8 +56,11 @@ describe('FileUpload', () => {
     ...positions.map((position: string) => [`with position ${position} multiple`, { props: { ...props, position, multiple: true } }]),
     ...sizes.map((size: string) => [`with size ${size}`, { props: { ...props, size } }]),
     ...sizes.map((size: string) => [`with size ${size} variant button`, { props: { ...props, size, variant: 'button' } }]),
+    ['with highlight', { props: { highlight: true } }],
+    ['with highlight neutral', { props: { highlight: true, color: 'neutral' } }],
     ['with required', { props: { required: true } }],
     ['with disabled', { props: { disabled: true } }],
+    ['with disabled variant button', { props: { disabled: true, variant: 'button' } }],
     ['with accept', { props: { accept: 'image/*' } }],
     ['with multiple', { props: { ...props, multiple: true } }],
     ['without dropzone', { props: { dropzone: false } }],
@@ -88,9 +90,22 @@ describe('FileUpload', () => {
     ['with file-name slot', { props, slots: { 'file-name': () => 'File name slot' } }],
     ['with file-size slot', { props, slots: { 'file-size': () => 'File size slot' } }],
     ['with file-trailing slot', { props, slots: { 'file-trailing': () => 'File trailing slot' } }]
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: FileUploadProps, slots?: Partial<FileUploadSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, FileUpload)
-    expect(html).toMatchSnapshot()
+  ])
+
+  it('hides the icon when icon is false', async () => {
+    const withIcon = await mountSuspended(FileUpload)
+    expect(withIcon.find('[data-slot="icon"]').exists()).toBe(true)
+
+    const withoutIcon = await mountSuspended(FileUpload, { props: { icon: false } })
+    expect(withoutIcon.find('[data-slot="icon"]').exists()).toBe(false)
+  })
+
+  it('hides the icon when icon is false with variant button', async () => {
+    const withIcon = await mountSuspended(FileUpload, { props: { variant: 'button' } })
+    expect(withIcon.find('[data-slot="icon"]').exists()).toBe(true)
+
+    const withoutIcon = await mountSuspended(FileUpload, { props: { variant: 'button', icon: false } })
+    expect(withoutIcon.find('[data-slot="icon"]').exists()).toBe(false)
   })
 
   it('passes accessibility tests', async () => {
@@ -106,6 +121,25 @@ describe('FileUpload', () => {
     })
 
     expect(await axe(wrapper.element)).toHaveNoViolations()
+  })
+
+  it('reactively changes multiple and accept attributes', async () => {
+    const wrapper = await mountSuspended(FileUpload, {
+      props: {
+        multiple: false,
+        accept: 'image/*'
+      }
+    })
+
+    const input = wrapper.find('input[type="file"]')
+
+    expect(input.attributes('accept')).toBe('image/*')
+    expect(input.attributes('multiple')).toBeUndefined()
+
+    await wrapper.setProps({ multiple: true, accept: 'application/pdf' })
+
+    expect(input.attributes('accept')).toBe('application/pdf')
+    expect(input.attributes('multiple')).toBe('')
   })
 
   describe('emits', () => {

@@ -4,21 +4,28 @@ packages:
   - docs
   - playgrounds/nuxt
   - playgrounds/vue
+  - playgrounds/repl
 
 ignoreWorkspaceRootCheck: true
 
-ignoredBuiltDependencies:
-  - '@parcel/watcher'
-  - '@tailwindcss/oxide'
-  - '@vercel/speed-insights'
-  - esbuild
-  - unrs-resolver
-  - vue-demi
+linkWorkspacePackages: true
 
-onlyBuiltDependencies:
-  - better-sqlite3
-  - puppeteer
-  - sharp
+overrides:
+  '@nuxt/kit': ^4.4.8
+  '@nuxt/test-utils': 4.0.2
+  '@nuxt/ui': workspace:*
+  unplugin: ^3.0.0
+  c12: ^3.3.4
+  h3: 1.15.11
+  typescript: ^6.0.3
 
-patchedDependencies:
-  reka-ui: patches/reka-ui.patch
+allowBuilds:
+  better-sqlite3: true
+  puppeteer: true
+  sharp: true
+  '@parcel/watcher': false
+  '@tailwindcss/oxide': false
+  '@vercel/speed-insights': false
+  esbuild: false
+  unrs-resolver: false
+  vue-demi: false

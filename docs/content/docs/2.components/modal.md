@@ -360,6 +360,42 @@ slots:
 :placeholder{class="h-full"}
 ::
 
+### Unmount :badge{label="Soon" class="align-text-top"}
+
+Use the `unmount-on-hide` prop to prevent the Modal's content from being unmounted when it is closed. Defaults to `true`.
+
+::component-code
+---
+prettier: true
+ignore:
+  - title
+props:
+  unmountOnHide: false
+  title: 'Modal'
+slots:
+  default: |
+
+    <UButton label="Open" color="neutral" variant="subtle" />
+
+  body: |
+
+    <Placeholder class="h-48" />
+---
+
+:u-button{label="Open" color="neutral" variant="subtle"}
+
+#body
+:placeholder{class="h-48"}
+::
+
+::note
+You can inspect the DOM to see the Modal's content being rendered even while it is closed.
+::
+
+::tip
+When the `portal` prop is set to `false`, the content is also rendered on the server. This is useful to render an open Modal during SSR without a flash on page load, or to expose its content for SEO.
+::
+
 ## Examples
 
 ### Control open state
@@ -443,6 +479,10 @@ You can use a [CommandPalette](/docs/components/command-palette) component insid
 collapse: true
 name: 'modal-command-palette-example'
 ---
+::
+
+::note
+This example uses `useLazyFetch` with `immediate: false` to only fetch data when the Modal opens.
 ::
 
 ## API

@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/prose/callout'
 import type { IconProps, LinkProps } from '../../types'
@@ -19,47 +20,51 @@ export interface ProseCalloutProps {
 }
 
 export interface ProseCalloutSlots {
-  default(props?: {}): any
+  default(props?: {}): VNode[]
 }
 </script>
 
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useAppConfig } from '#imports'
-import { useComponentUI } from '../../composables/useComponentUI'
+import { useComponentProps } from '../../composables/useComponentProps'
 import { tv } from '../../utils/tv'
 import ULink from '../Link.vue'
 import UIcon from '../Icon.vue'
 
 defineOptions({ inheritAttrs: false })
 
-const props = defineProps<ProseCalloutProps>()
+const _props = defineProps<ProseCalloutProps>()
+
 defineSlots<ProseCalloutSlots>()
 
-const appConfig = useAppConfig() as ProseCallout['AppConfig']
-const uiProp = useComponentUI('prose.callout', props)
+const props = useComponentProps('prose.callout', _props)
 
+const appConfig = useAppConfig() as ProseCallout['AppConfig']
+
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.callout || {}) })({
   color: props.color,
   to: !!props.to
 }))
 
+// eslint-disable-next-line vue/no-dupe-keys
 const target = computed(() => props.target || (!!props.to && typeof props.to === 'string' && props.to.startsWith('http') ? '_blank' : undefined))
 </script>
 
 <template>
-  <div :class="ui.base({ class: [uiProp?.base, props.class] })">
+  <div :class="ui.base({ class: [props.ui?.base, props.class] })">
     <ULink
-      v-if="to"
-      v-bind="{ to, target, ...$attrs }"
+      v-if="props.to"
+      v-bind="{ to: props.to, target, ...$attrs }"
       class="focus:outline-none"
       raw
     >
       <span class="absolute inset-0" aria-hidden="true" />
     </ULink>
 
-    <UIcon v-if="icon" :name="icon" :class="ui.icon({ class: uiProp?.icon })" />
-    <UIcon v-if="!!to && target === '_blank'" :name="appConfig.ui.icons.external" :class="ui.externalIcon({ class: uiProp?.externalIcon })" />
+    <UIcon v-if="props.icon" :name="props.icon" :class="ui.icon({ class: props.ui?.icon })" />
+    <UIcon v-if="!!props.to && target === '_blank'" :name="appConfig.ui.icons.external" :class="ui.externalIcon({ class: props.ui?.externalIcon })" />
 
     <slot mdc-unwrap="p" />
   </div>

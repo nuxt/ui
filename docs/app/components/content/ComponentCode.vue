@@ -21,6 +21,7 @@ interface Cast {
 
 type CastDateValue = [number, number, number]
 type CastTimeValue = [number, number, number]
+type CastTimeRangeValue = { start: CastTimeValue, end: CastTimeValue }
 
 const castMap: Record<string, Cast> = {
   'DateValue': {
@@ -52,6 +53,13 @@ const castMap: Record<string, Cast> = {
     get: (args: CastTimeValue) => new Time(...args),
     template: (value: Time) => {
       return value ? `new Time(${value.hour}, ${value.minute}, ${value.second})` : 'null'
+    },
+    imports: [{ name: 'Time', from: '@internationalized/date' }]
+  },
+  'TimeRangeValue': {
+    get: (args: CastTimeRangeValue) => ({ start: new Time(...args.start), end: new Time(...args.end) }),
+    template: (value: { start: Time, end: Time }) => {
+      return value ? `{ start: new Time(${value.start.hour}, ${value.start.minute}, ${value.start.second}), end: new Time(${value.end.hour}, ${value.end.minute}, ${value.end.second}) }` : 'null'
     },
     imports: [{ name: 'Time', from: '@internationalized/date' }]
   }
@@ -145,7 +153,7 @@ function setComponentProp(name: string, value: any) {
 }
 
 const componentTheme = ((props.prose ? theme.prose : theme) as any)[camelName]
-const meta = await fetchComponentMeta(name as any)
+const { data: meta } = await useFetchComponentMeta(name as any)
 
 function mapKeys(obj: object, parentKey = ''): any {
   return Object.entries(obj || {}).flatMap(([key, value]: [string, any]) => {
@@ -163,7 +171,7 @@ const options = computed(() => {
   const keys = mapKeys(props.props || {})
 
   return keys.map((key: string) => {
-    const prop = meta?.meta?.props?.find((prop: any) => prop.name === key)
+    const prop = meta.value?.meta?.props?.find((prop: any) => prop.name === key)
     const propItems = get(props.items, key, [])
     const items = propItems.length
       ? propItems.map((item: any) => ({
@@ -190,7 +198,7 @@ const options = computed(() => {
   })
 })
 
-const code = computed(() => {
+function buildCode() {
   let code = ''
 
   if (props.prose) {
@@ -228,8 +236,9 @@ ${props.slots?.default}
     code += `
 <script setup lang="ts">
 `
-    // Collect imports from cast types
     const importsBySource = new Map<string, Set<string>>()
+
+    // Collect imports from cast types
     for (const key of props.external) {
       const cast = props.cast?.[key]
       if (cast && castMap[cast]) {
@@ -292,7 +301,7 @@ ${props.slots?.default}
       continue
     }
 
-    const prop = meta?.meta?.props?.find((prop: any) => prop.name === key)
+    const prop = meta.value?.meta?.props?.find((prop: any) => prop.name === key)
     const propDefault = prop && (prop.default ?? prop.tags?.find(tag => tag.name === 'defaultValue')?.text ?? componentTheme?.defaultVariants?.[prop.name])
     const name = kebabCase(key)
 
@@ -344,6 +353,32 @@ ${props.slots?.default}
   }
 
   return code
+}
+
+function wrapCode(markdown: string, cssClass: string) {
+  if (props.collapse) {
+    return markdown.replace('::code-collapse', `::code-collapse{class="${cssClass}"}`)
+  }
+  return `::div{class="${cssClass}"}\n${markdown}\n::`
+}
+
+const code = computed(() => {
+  const nuxtCode = buildCode()
+  const vueCode = addVueImports(nuxtCode)
+
+  if (vueCode !== nuxtCode) {
+    return wrapCode(nuxtCode, 'nuxt-only') + '\n\n' + wrapCode(vueCode, 'vue-only')
+  }
+
+  return nuxtCode
+})
+
+const playgroundUrl = computed(() => {
+  if (props.prose) return null
+  const rawMarkdown = buildCode()
+  const vueMarkdown = addVueImports(rawMarkdown)
+  const match = vueMarkdown.match(/```vue[^\n]*\n([\s\S]*?)\n```/)
+  return match?.[1] ? getPlaygroundUrl(match[1].trim()) : null
 })
 
 const codeKey = computed(() => `component-code-${name}-${hash(props)}`)
@@ -351,9 +386,9 @@ const codeKey = computed(() => `component-code-${name}-${hash(props)}`)
 const wrapperContainer = ref<HTMLElement | null>(null)
 const componentContainer = ref<HTMLElement | null>(null)
 
-const { data: ast } = await useAsyncData(codeKey, async () => {
+const { data: ast } = useAsyncData(codeKey, async () => {
   if (!props.prettier) {
-    return parseMarkdown(code.value)
+    return cachedParseMarkdown(code.value)
   }
 
   let formatted = ''
@@ -368,8 +403,8 @@ const { data: ast } = await useAsyncData(codeKey, async () => {
     formatted = code.value
   }
 
-  return parseMarkdown(formatted)
-}, { watch: [code] })
+  return cachedParseMarkdown(formatted)
+}, { lazy: import.meta.client, watch: [code] })
 </script>
 
 <template>
@@ -423,7 +458,7 @@ const { data: ast } = await useAsyncData(codeKey, async () => {
         </template>
       </div>
 
-      <div v-if="component" ref="componentContainer" class="flex justify-center border border-b-0 border-muted relative p-4 z-[1]" :class="[!options.length && 'rounded-t-md', props.class, { 'overflow-hidden': props.overflowHidden, 'dark:bg-neutral-950/50': props.elevated }]">
+      <div v-if="component" ref="componentContainer" class="flex justify-center border border-b-0 border-muted relative p-4 z-1" :class="[!options.length && 'rounded-t-md', props.class, { 'overflow-hidden': props.overflowHidden, 'dark:bg-neutral-950/50': props.elevated }]">
         <component :is="component" v-bind="{ ...componentProps, ...componentEvents }">
           <template v-for="slot in Object.keys(slots || {})" :key="slot" #[slot]>
             <slot :name="slot" mdc-unwrap="p">
@@ -434,6 +469,8 @@ const { data: ast } = await useAsyncData(codeKey, async () => {
       </div>
 
       <ClientOnly>
+        <ComponentPlaygroundButton v-if="playgroundUrl" :to="playgroundUrl" :component="camelName" />
+
         <LazyComponentThemeVisualizer
           :container="componentContainer"
           :position-container="wrapperContainer"
@@ -443,6 +480,6 @@ const { data: ast } = await useAsyncData(codeKey, async () => {
       </ClientOnly>
     </div>
 
-    <MDCRenderer v-if="ast" :body="ast.body" :data="ast.data" class="[&_pre]:!rounded-t-none [&_div.my-5]:!mt-0" />
+    <MDCRenderer v-if="ast" :body="ast.body" :data="ast.data" class="[&_pre]:rounded-t-none! [&_div.my-5]:mt-0!" />
   </div>
 </template>
