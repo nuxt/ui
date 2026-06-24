@@ -4,7 +4,7 @@ import type { VNode } from 'vue'
 import type { ToasterProps } from '../types'
 import type { Locale, Messages } from '../types/locale'
 
-export interface AppProps<T extends Messages = Messages> extends Omit<ConfigProviderProps, 'useId' | 'locale'> {
+export interface AppProps<T extends Messages = Messages> extends Omit<ConfigProviderProps, 'useId' | 'locale' | 'teleportTo'> {
   tooltip?: TooltipProviderProps
   toaster?: ToasterProps | null
   locale?: Locale<T>

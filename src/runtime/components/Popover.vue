@@ -9,7 +9,7 @@ import type { ComponentConfig } from '../types/tv'
 type Popover = ComponentConfig<typeof theme, AppConfig, 'popover'>
 type PopoverMode = 'click' | 'hover'
 
-export interface PopoverProps<M extends PopoverMode = PopoverMode> extends PopoverRootProps, Pick<HoverCardRootProps, 'openDelay' | 'closeDelay'> {
+export interface PopoverProps<M extends PopoverMode = PopoverMode> extends PopoverRootProps, Pick<HoverCardRootProps, 'openDelay' | 'closeDelay' | 'enableTouch'> {
   /**
    * The display mode of the popover.
    * @defaultValue 'click'
@@ -89,7 +89,7 @@ const props = useComponentProps<PopoverProps<M>>('popover', _props)
 
 const appConfig = useAppConfig() as Popover['AppConfig']
 
-const pick = props.mode === 'hover' ? reactivePick(props, 'defaultOpen', 'open', 'openDelay', 'closeDelay') : reactivePick(props, 'defaultOpen', 'open', 'modal')
+const pick = props.mode === 'hover' ? reactivePick(props, 'defaultOpen', 'open', 'openDelay', 'closeDelay', 'enableTouch') : reactivePick(props, 'defaultOpen', 'open', 'modal')
 const rootProps = useForwardProps(pick, emits)
 const portalProps = usePortal(toRef(() => props.portal))
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8 }) as PopoverContentProps)

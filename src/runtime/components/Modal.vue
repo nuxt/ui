@@ -111,7 +111,7 @@ const props = useComponentProps('modal', _props)
 const { t } = useLocale()
 const appConfig = useAppConfig() as Modal['AppConfig']
 
-const rootProps = useForwardProps(reactivePick(props, 'open', 'defaultOpen', 'modal'), emits)
+const rootProps = useForwardProps(reactivePick(props, 'open', 'defaultOpen', 'modal', 'unmountOnHide'), emits)
 const portalProps = usePortal(toRef(() => props.portal))
 const contentProps = toRef(() => props.content)
 const contentEvents = computed(() => {
@@ -224,7 +224,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.modal || {})
       <slot :open="open" />
     </DialogTrigger>
 
-    <DialogPortal v-bind="portalProps">
+    <DialogPortal v-bind="portalProps" :force-mount="(portalProps.disabled && props.unmountOnHide === false) || undefined">
       <FieldGroupReset>
         <template v-if="props.scrollable">
           <DialogOverlay data-slot="overlay" :class="ui.overlay({ class: props.ui?.overlay })">
