@@ -67,7 +67,7 @@ watch(formRating, (value) => {
             v-model="ratingNoRing"
             :color="color"
             :size="size"
-            :ui="{ star: 'focus-within:ring-0 focus-within:ring-offset-0' }"
+            :ui="{ star: 'focus-within:ring-0' }"
           />
         </div>
       </div>

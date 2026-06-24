@@ -2,6 +2,9 @@
 description: A component to display and collect ratings from users.
 category: form
 links:
+  - label: Rating
+    icon: i-custom-reka-ui
+    to: https://reka-ui.com/docs/components/rating
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/InputRating.vue
@@ -209,7 +212,7 @@ external:
 props:
   modelValue: 3
   ui:
-    star: 'focus-within:ring-0 focus-within:ring-offset-0'
+    star: 'focus-within:ring-0'
 ---
 ::
 

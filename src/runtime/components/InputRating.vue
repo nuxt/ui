@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { RatingRootProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/input-rating'
 import type { IconProps } from '../types'
@@ -6,24 +7,16 @@ import type { ComponentConfig } from '../types/tv'
 
 type InputRating = ComponentConfig<typeof theme, AppConfig, 'inputRating'>
 
-export interface InputRatingProps {
+export interface InputRatingProps extends Pick<RatingRootProps, 'name' | 'disabled' | 'required' | 'clearable' | 'hoverable' | 'defaultValue'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
    */
   as?: any
+  /** The id of the rating. */
+  id?: string
   /**
-   * The rating value (0 to max).
-   * @defaultValue 0
-   */
-  modelValue?: number
-  /**
-   * The default rating value.
-   * @defaultValue 0
-   */
-  defaultValue?: number
-  /**
-   * Maximum rating value.
+   * The maximum rating value.
    * @defaultValue 5
    */
   max?: number
@@ -38,29 +31,13 @@ export interface InputRatingProps {
    */
   readonly?: boolean
   /**
-   * Disable the rating.
-   * @defaultValue false
-   */
-  disabled?: boolean
-  /**
-   * Allow clearing the rating by clicking on the current value.
-   * @defaultValue false
-   */
-  clearable?: boolean
-  /**
-   * Show hover preview.
-   * @defaultValue true
-   */
-  hoverable?: boolean
-  /**
-   * The icon to use for stars.
+   * The icon displayed for each rating value.
    * @defaultValue appConfig.ui.icons.star
    * @IconifyIcon
    */
   icon?: IconProps['name']
   /**
-   * The icon to use for empty stars (outline version).
-   * If not provided, uses the same icon as `icon` but with outline style.
+   * The icon displayed for empty rating values. Defaults to `icon` when not provided.
    * @IconifyIcon
    */
   emptyIcon?: IconProps['name']
@@ -72,24 +49,17 @@ export interface InputRatingProps {
    * @defaultValue 'md'
    */
   size?: InputRating['variants']['size']
-  /** Form field name. */
-  name?: string
-  /** Form field id. */
-  id?: string
-  /** Form field required. */
-  required?: boolean
   /**
    * The orientation of the rating.
    * @defaultValue 'horizontal'
    */
-  orientation?: 'horizontal' | 'vertical'
+  orientation?: InputRating['variants']['orientation']
   class?: any
   ui?: InputRating['slots']
 }
 
 export interface InputRatingEmits {
-  'update:modelValue': [value: number]
-  'change': [event: Event]
+  change: [event: Event]
 }
 
 export interface InputRatingSlots {
@@ -98,17 +68,19 @@ export interface InputRatingSlots {
 </script>
 
 <script setup lang="ts">
-import { computed, useId } from 'vue'
-import { RatingRoot, RatingItem, RatingItemIndicator, useForwardProps } from 'reka-ui'
-import { reactivePick, useVModel } from '@vueuse/core'
+import { computed } from 'vue'
+import { RatingRoot, RatingItem, RatingItemIndicator } from 'reka-ui'
+import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
+import { useComponentProps } from '../composables/useComponentProps'
+import { useForwardProps } from '../composables/useForwardProps'
 import { useFormField } from '../composables/useFormField'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 
 defineOptions({ inheritAttrs: false })
 
-const props = withDefaults(defineProps<InputRatingProps>(), {
+const _props = withDefaults(defineProps<InputRatingProps>(), {
   max: 5,
   allowHalf: false,
   readonly: false,
@@ -117,47 +89,38 @@ const props = withDefaults(defineProps<InputRatingProps>(), {
   hoverable: true,
   clearable: false
 })
-
 const emits = defineEmits<InputRatingEmits>()
 defineSlots<InputRatingSlots>()
 
-const modelValue = useVModel(props, 'modelValue', emits, {
-  defaultValue: props.defaultValue,
-  passive: false
-})
+const props = useComponentProps<InputRatingProps>('inputRating', _props)
+
+const modelValue = defineModel<number>()
 
 const appConfig = useAppConfig() as InputRating['AppConfig']
 
-const rootProps = useForwardProps(reactivePick(props, 'as'))
+const rootProps = useForwardProps(reactivePick(props, 'as', 'clearable', 'required', 'defaultValue'))
 
-const { id: _id, emitFormChange, emitFormInput, size, color, name, disabled: formDisabled, ariaAttrs } = useFormField<InputRatingProps>(props)
-const fieldId = _id.value ?? useId()
+const { id, emitFormChange, emitFormInput, size, color, name, disabled: formDisabled, ariaAttrs } = useFormField<InputRatingProps>(_props)
 
-// Functional disabled: includes readonly for interaction blocking
-const disabled = computed(() => formDisabled.value || props.disabled || props.readonly)
-// Visual disabled: only when explicitly disabled (not readonly)
-const isVisuallyDisabled = computed(() => formDisabled.value || props.disabled)
+// `readonly` blocks interaction too, but only an explicit `disabled` dims the control.
+const disabled = computed(() => formDisabled.value || props.readonly)
 
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.inputRating || {}) })({
-  size: size.value,
-  color: color.value,
+  size: size.value ?? props.size,
+  color: color.value ?? props.color,
   orientation: props.orientation,
-  readonly: props.readonly && !props.disabled, // Only apply readonly styles if not disabled
-  disabled: isVisuallyDisabled.value // Only apply disabled styles when explicitly disabled
+  readonly: props.readonly && !formDisabled.value,
+  disabled: formDisabled.value
 }))
 
-const starIcon = computed(() => props.icon || (appConfig.ui.icons as any).star || 'i-lucide-star')
-const emptyStarIcon = computed(() => {
-  if (props.emptyIcon) return props.emptyIcon
-  return starIcon.value
-})
+const starIcon = computed(() => props.icon ?? appConfig.ui.icons.star)
+const emptyStarIcon = computed(() => props.emptyIcon ?? starIcon.value)
 
 function onUpdate(value: number) {
-  modelValue.value = value
-
   // @ts-expect-error - 'target' does not exist in type 'EventInit'
-  const changeEvent = new Event('change', { target: { value } })
-  emits('change', changeEvent)
+  const event = new Event('change', { target: { value } })
+  emits('change', event)
   emitFormChange()
   emitFormInput()
 }
@@ -166,15 +129,14 @@ function onUpdate(value: number) {
 <template>
   <RatingRoot
     v-bind="{ ...rootProps, ...$attrs, ...ariaAttrs }"
-    :id="fieldId"
+    :id="id"
     v-model="modelValue"
+    :name="name"
     :length="props.max"
     :step="props.allowHalf ? 0.5 : 1"
     :disabled="disabled"
     :hoverable="props.hoverable && !disabled"
-    :clearable="props.clearable"
-    :orientation="orientation"
-    :name="name"
+    :orientation="props.orientation"
     data-slot="root"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     @update:model-value="onUpdate"
@@ -198,6 +160,7 @@ function onUpdate(value: number) {
             <!-- Empty icon as background -->
             <UIcon
               :name="emptyStarIcon"
+              data-slot="emptyIcon"
               :class="ui.emptyIcon({ class: props.ui?.emptyIcon })"
             />
 
@@ -207,10 +170,12 @@ function onUpdate(value: number) {
               :key="step"
               :step="step"
               :aria-label="`Rate ${step} ${step === 1 ? 'star' : 'stars'} out of ${props.max}`"
+              data-slot="indicator"
               :class="ui.indicator({ class: props.ui?.indicator })"
             >
               <UIcon
                 :name="starIcon"
+                data-slot="icon"
                 :class="ui.icon({ class: props.ui?.icon })"
               />
             </RatingItemIndicator>

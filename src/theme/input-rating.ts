@@ -3,7 +3,7 @@ import type { ModuleOptions } from '../module'
 export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: '',
-    star: 'relative inline-block cursor-pointer transition-colors select-none focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-white dark:focus-within:ring-offset-gray-900 rounded-sm',
+    star: ['relative inline-block cursor-pointer select-none focus-within:outline-none focus-within:ring-2 rounded-sm', options.theme.transitions && 'transition-colors'],
     indicator: 'absolute inset-0 overflow-hidden w-[var(--reka-rating-item-step-width)] opacity-[var(--reka-rating-item-step-opacity)] z-[var(--reka-rating-item-step-z-index)]',
     icon: 'block',
     emptyIcon: 'w-full h-full text-muted pointer-events-none'
@@ -41,12 +41,12 @@ export default (options: Required<ModuleOptions>) => ({
     },
     color: {
       ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, {
-        indicator: `data-[state=active]:text-${color}-500 dark:data-[state=active]:text-${color}-400`,
-        star: `focus-within:ring-${color}-500 dark:focus-within:ring-${color}-400`
+        indicator: `data-[state=active]:text-${color}`,
+        star: `focus-within:ring-${color}`
       }])),
       neutral: {
-        indicator: 'data-[state=active]:text-gray-500 dark:data-[state=active]:text-gray-400',
-        star: 'focus-within:ring-gray-500 dark:focus-within:ring-gray-400'
+        indicator: 'data-[state=active]:text-inverted',
+        star: 'focus-within:ring-inverted'
       }
     },
     readonly: {
