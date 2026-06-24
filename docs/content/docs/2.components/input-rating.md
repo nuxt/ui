@@ -36,6 +36,21 @@ props:
 ---
 ::
 
+### Length
+
+Use the `length` prop to set the number of stars. Defaults to `5`.
+
+::component-code
+---
+external:
+  - modelValue
+props:
+  length: 10
+  modelValue: 7.5
+  step: 0.5
+---
+::
+
 ### Step
 
 Use the `step` prop to control the granularity of each star. Set it to `0.5` to allow half-star ratings.
@@ -47,6 +62,34 @@ external:
 props:
   step: 0.5
   modelValue: 3.5
+---
+::
+
+### Clearable
+
+Use the `clearable` prop to allow users to clear the rating by clicking on the currently selected value. Defaults to `false`.
+
+::component-code
+---
+external:
+  - modelValue
+props:
+  clearable: true
+  modelValue: 3
+---
+::
+
+### Hoverable
+
+Use the `hoverable` prop to control whether the rating previews the value when hovering over the stars. Defaults to `true`.
+
+::component-code
+---
+external:
+  - modelValue
+props:
+  hoverable: false
+  modelValue: 3
 ---
 ::
 
@@ -88,21 +131,6 @@ props:
   icon: 'i-lucide-star'
   emptyIcon: 'i-lucide-star-off'
   modelValue: 3
----
-::
-
-### Length
-
-Use the `length` prop to set the number of stars. Defaults to `5`.
-
-::component-code
----
-external:
-  - modelValue
-props:
-  length: 10
-  modelValue: 7.5
-  step: 0.5
 ---
 ::
 
@@ -152,20 +180,6 @@ external:
 props:
   orientation: horizontal
   modelValue: 4
----
-::
-
-### Clearable
-
-Use the `clearable` prop to allow users to clear the rating by clicking on the currently selected value. Defaults to `false`.
-
-::component-code
----
-external:
-  - modelValue
-props:
-  clearable: true
-  modelValue: 3
 ---
 ::
 
