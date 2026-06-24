@@ -17,8 +17,8 @@ describe('InputRating', () => {
     // Props
     ['with modelValue', { props: { modelValue: 3 } }],
     ['with defaultValue', { props: { defaultValue: 3 } }],
-    ['with max', { props: { max: 10, modelValue: 7 } }],
-    ['with allowHalf', { props: { allowHalf: true, modelValue: 3.5 } }],
+    ['with length', { props: { length: 10, modelValue: 7 } }],
+    ['with step', { props: { step: 0.5, modelValue: 3.5 } }],
     ['with readonly', { props: { readonly: true, modelValue: 4 } }],
     ['with disabled', { props: { disabled: true, modelValue: 3 } }],
     ['with clearable', { props: { clearable: true, modelValue: 3 } }],
@@ -80,10 +80,10 @@ describe('InputRating', () => {
       expect(wrapper.emitted()).toHaveProperty('change')
     })
 
-    test('half star with allowHalf', async () => {
+    test('half star with step', async () => {
       const wrapper = mount(InputRating, {
         props: {
-          allowHalf: true,
+          step: 0.5,
           modelValue: 0
         }
       })

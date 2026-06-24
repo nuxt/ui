@@ -24,13 +24,10 @@ const value = ref(3)
 
   <Matrix v-slot="props" :attrs="attrs" container-class="gap-8">
     <UInputRating v-model="value" :orientation="orientation" v-bind="props" />
-    <UInputRating :default-value="3" :orientation="orientation" v-bind="props" />
-    <UInputRating allow-half :model-value="2.5" :orientation="orientation" v-bind="props" />
-    <UInputRating :max="10" :model-value="7" :orientation="orientation" v-bind="props" />
-    <UInputRating clearable :model-value="3" :orientation="orientation" v-bind="props" />
+    <UInputRating :step="0.5" :model-value="2.5" :orientation="orientation" v-bind="props" />
+    <UInputRating :length="10" :model-value="7" :orientation="orientation" v-bind="props" />
     <UInputRating readonly :model-value="4" :orientation="orientation" v-bind="props" />
     <UInputRating disabled :model-value="3" :orientation="orientation" v-bind="props" />
     <UInputRating icon="i-lucide-heart" :model-value="4" :orientation="orientation" v-bind="props" />
-    <UInputRating :model-value="3" :hoverable="false" :orientation="orientation" v-bind="props" />
   </Matrix>
 </template>

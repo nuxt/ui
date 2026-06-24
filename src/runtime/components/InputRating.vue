@@ -7,7 +7,7 @@ import type { ComponentConfig } from '../types/tv'
 
 type InputRating = ComponentConfig<typeof theme, AppConfig, 'inputRating'>
 
-export interface InputRatingProps extends Pick<RatingRootProps, 'name' | 'disabled' | 'required' | 'clearable' | 'hoverable' | 'defaultValue'> {
+export interface InputRatingProps extends Pick<RatingRootProps, 'length' | 'step' | 'name' | 'disabled' | 'required' | 'clearable' | 'hoverable' | 'defaultValue'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -15,16 +15,6 @@ export interface InputRatingProps extends Pick<RatingRootProps, 'name' | 'disabl
   as?: any
   /** The id of the rating. */
   id?: string
-  /**
-   * The maximum rating value.
-   * @defaultValue 5
-   */
-  max?: number
-  /**
-   * Allow half star ratings.
-   * @defaultValue false
-   */
-  allowHalf?: boolean
   /**
    * Make the rating readonly (non-interactive).
    * @defaultValue false
@@ -82,8 +72,8 @@ import UIcon from './Icon.vue'
 defineOptions({ inheritAttrs: false })
 
 const _props = withDefaults(defineProps<InputRatingProps>(), {
-  max: 5,
-  allowHalf: false,
+  length: 5,
+  step: 1,
   readonly: false,
   defaultValue: 0,
   orientation: 'horizontal',
@@ -99,7 +89,7 @@ const modelValue = defineModel<number>()
 
 const appConfig = useAppConfig() as InputRating['AppConfig']
 
-const rootProps = useForwardProps(reactivePick(props, 'as', 'clearable', 'required', 'defaultValue'))
+const rootProps = useForwardProps(reactivePick(props, 'as', 'length', 'step', 'clearable', 'required', 'defaultValue'))
 
 const { id, emitFormChange, emitFormInput, size, color, name, disabled: formDisabled, ariaAttrs } = useFormField<InputRatingProps>(_props)
 
@@ -132,8 +122,6 @@ function onUpdate(value: number) {
     :id="id"
     v-model="modelValue"
     :name="name"
-    :length="props.max"
-    :step="props.allowHalf ? 0.5 : 1"
     :disabled="disabled"
     :aria-readonly="props.readonly || undefined"
     :hoverable="props.hoverable && !disabled"
@@ -165,7 +153,7 @@ function onUpdate(value: number) {
             v-for="step in steps"
             :key="step"
             :step="step"
-            :aria-label="`Rate ${step} ${step === 1 ? 'star' : 'stars'} out of ${props.max}`"
+            :aria-label="`Rate ${step} ${step === 1 ? 'star' : 'stars'} out of ${props.length}`"
             data-slot="indicator"
             :class="ui.indicator({ class: props.ui?.indicator })"
           >

@@ -3,10 +3,10 @@ import type { ModuleOptions } from '../module'
 export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: '',
-    star: ['relative inline-block cursor-pointer select-none focus-within:outline-none focus-within:ring-2 rounded-sm', options.theme.transitions && 'transition-colors'],
-    indicator: 'absolute inset-0 overflow-hidden w-[var(--reka-rating-item-step-width)] opacity-[var(--reka-rating-item-step-opacity)] z-[var(--reka-rating-item-step-z-index)]',
+    star: ['relative inline-block cursor-pointer select-none rounded-sm has-focus-visible:outline-3', options.theme.transitions && 'transition'],
+    indicator: 'absolute inset-0 overflow-hidden outline-none w-(--reka-rating-item-step-width) opacity-(--reka-rating-item-step-opacity) z-(--reka-rating-item-step-z-index)',
     icon: 'block',
-    emptyIcon: 'w-full h-full text-muted pointer-events-none'
+    emptyIcon: 'block w-full h-full text-muted pointer-events-none'
   },
   variants: {
     orientation: {
@@ -42,11 +42,11 @@ export default (options: Required<ModuleOptions>) => ({
     color: {
       ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, {
         indicator: `data-[state=active]:text-${color}`,
-        star: `focus-within:ring-${color}`
+        star: `outline-${color}/25`
       }])),
       neutral: {
-        indicator: 'data-[state=active]:text-inverted',
-        star: 'focus-within:ring-inverted'
+        indicator: 'data-[state=active]:text-highlighted',
+        star: 'outline-inverted/25'
       }
     },
     readonly: {

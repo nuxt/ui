@@ -1,4 +1,5 @@
 ---
+title: InputRating
 description: A component to display and collect ratings from users.
 category: form
 links:
@@ -8,6 +9,7 @@ links:
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/InputRating.vue
+navigation.badge: Soon
 ---
 
 ## Usage
@@ -34,23 +36,23 @@ props:
 ---
 ::
 
-### Half Stars
+### Step
 
-Use the `allow-half` prop to enable half-star ratings. When enabled, clicking on the left half of a star will set a half-star value.
+Use the `step` prop to control the granularity of each star. Set it to `0.5` to allow half-star ratings.
 
 ::component-code
 ---
 external:
   - modelValue
 props:
-  allowHalf: true
+  step: 0.5
   modelValue: 3.5
 ---
 ::
 
-### Custom Icons
+### Icon
 
-Use the `icon` prop to customize the icon used for stars. Defaults to `i-lucide-star`. Use the `empty-icon` prop to customize the icon used for empty stars. If not provided, uses the same icon as `icon`.
+Use the `icon` prop to customize the icon used for stars. Defaults to `i-lucide-star`.
 
 ::component-code
 ---
@@ -59,17 +61,6 @@ external:
 props:
   icon: 'i-lucide-heart'
   modelValue: 4
----
-::
-
-::component-code
----
-external:
-  - modelValue
-props:
-  icon: 'i-lucide-star'
-  emptyIcon: 'i-lucide-star-off'
-  modelValue: 3
 ---
 ::
 
@@ -85,18 +76,33 @@ You can customize the default star icon globally in your `vite.config.ts` under 
 :::
 ::
 
-### Max Value
+### Empty Icon
 
-Use the `max` prop to set the maximum number of stars. Defaults to `5`.
+Use the `empty-icon` prop to customize the icon used for empty stars. If not provided, uses the same icon as `icon`.
 
 ::component-code
 ---
 external:
   - modelValue
 props:
-  max: 10
+  icon: 'i-lucide-star'
+  emptyIcon: 'i-lucide-star-off'
+  modelValue: 3
+---
+::
+
+### Length
+
+Use the `length` prop to set the number of stars. Defaults to `5`.
+
+::component-code
+---
+external:
+  - modelValue
+props:
+  length: 10
   modelValue: 7.5
-  allowHalf: true
+  step: 0.5
 ---
 ::
 
@@ -191,37 +197,6 @@ props:
 ---
 ::
 
-::component-code
----
-external:
-  - modelValue
-props:
-  disabled: true
-  modelValue: 4.5
----
-::
-
-## Examples
-
-### With Form Integration
-
-The InputRating component integrates seamlessly with forms and supports form validation.
-
-::component-code
----
-hide:
-  - class
-ignore:
-  - class
-external:
-  - modelValue
-props:
-  name: rating
-  required: true
-  modelValue: 0
----
-::
-
 ## API
 
 ### Props
@@ -243,4 +218,3 @@ props:
 ## Changelog
 
 :component-changelog
-
