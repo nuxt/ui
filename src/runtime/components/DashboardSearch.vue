@@ -4,7 +4,7 @@ import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/dashboard-search'
 import type { UseFuseOptions } from '@vueuse/integrations/useFuse'
-import type { ButtonProps, ModalProps, CommandPaletteProps, CommandPaletteSlots, CommandPaletteGroup, CommandPaletteItem, LinkPropsKeys } from '../types'
+import type { ButtonProps, ModalProps, CommandPaletteProps, CommandPaletteSlots, CommandPaletteGroup, CommandPaletteItem, LinkPropsKeys, InputProps } from '../types'
 import type { ComponentConfig } from '../types/tv'
 
 type DashboardSearch = ComponentConfig<typeof theme, AppConfig, 'dashboardSearch'>
@@ -21,6 +21,12 @@ export interface DashboardSearchProps<T extends CommandPaletteItem = CommandPale
    * @defaultValue true
    */
   close?: boolean | Omit<ButtonProps, LinkPropsKeys>
+  /**
+   * Configure the input or hide it with `false`.
+   * `{ fixed: true }`{lang="ts-type"}
+   * @defaultValue true
+   */
+  input?: boolean | Omit<InputProps, 'modelValue' | 'defaultValue'>
   /**
    * Keyboard shortcut to open the search (used by [`defineShortcuts`](https://ui.nuxt.com/docs/composables/define-shortcuts))
    * @defaultValue 'meta_k'
@@ -100,6 +106,12 @@ const appConfig = useAppConfig() as DashboardSearch['AppConfig']
 
 const commandPaletteProps = useForwardProps(reactivePick(props, 'size', 'icon', 'trailingIcon', 'selectedIcon', 'childrenIcon', 'placeholder', 'autofocus', 'loading', 'loadingIcon', 'close', 'closeIcon', 'back', 'backIcon', 'disabled', 'highlightOnHover', 'labelKey', 'descriptionKey', 'preserveGroupOrder', 'virtualize', 'searchDelay'))
 const modalProps = useForwardProps(reactivePick(props, 'overlay', 'transition', 'content', 'dismissible', 'fullscreen', 'modal', 'portal', 'unmountOnHide'))
+const inputProps = computed(() => {
+  if (props.input === false) {
+    return false
+  }
+  return defu(typeof props.input === 'object' ? props.input : {}, { fixed: true })
+})
 
 const getProxySlots = () => omit(slots, ['content'])
 
@@ -195,7 +207,7 @@ defineExpose({
           v-bind="commandPaletteProps"
           :groups="groups"
           :fuse="fuse"
-          :input="{ fixed: true }"
+          :input="inputProps"
           :ui="transformUI(omit(ui, ['modal']), props.ui)"
           @update:model-value="onSelect"
           @update:open="open = $event"

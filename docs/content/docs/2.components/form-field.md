@@ -97,7 +97,7 @@ slots:
 
 ### Help
 
-Use the `help` prop to display a help message below the form control.
+Use the `help` prop to display a help message below the form control. When used together with the `error` prop, the `error` prop takes precedence.
 
 ::component-code
 ---

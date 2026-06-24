@@ -91,6 +91,21 @@ options:
 ---
 ::
 
+### Shadow :badge{label="4.9+" class="align-text-top"}
+
+Use the `shadow` prop to display fade shadows on the scrollable edges, indicating that more content is available in the scroll direction. The fade automatically follows the `orientation` and only appears when the content overflows.
+
+::component-example
+---
+collapse: true
+name: 'scroll-area-shadow-example'
+---
+::
+
+::tip
+Pass an object to the `shadow` prop to configure the fade size, e.g. `:shadow="{ size: 48 }"`.
+::
+
 ## Examples
 
 ### As masonry layout

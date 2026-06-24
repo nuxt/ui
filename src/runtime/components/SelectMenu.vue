@@ -225,7 +225,7 @@ export interface SelectMenuSlots<
 </script>
 
 <script setup lang="ts" generic="T extends ArrayOrNested<SelectMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false, Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>, C extends boolean | object = false">
-import { useTemplateRef, computed, onMounted, toRef, toRaw } from 'vue'
+import { useTemplateRef, computed, ref, onMounted, toRef, toRaw, watch, nextTick } from 'vue'
 import { ComboboxRoot, ComboboxArrow, ComboboxAnchor, ComboboxInput, ComboboxTrigger, ComboboxCancel, ComboboxPortal, ComboboxContent, ComboboxEmpty, ComboboxGroup, ComboboxVirtualizer, ComboboxLabel, ComboboxSeparator, ComboboxItem, ComboboxItemIndicator, FocusScope } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
 import { defu } from 'defu'
@@ -315,7 +315,8 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.selectMenu |
   leading: isLeading.value || !!props.avatar || !!slots.leading,
   trailing: isTrailing.value || !!slots.trailing,
   fieldGroup: orientation.value,
-  virtualize: !!props.virtualize
+  virtualize: !!props.virtualize,
+  multiple: props.multiple
 }))
 
 function displayValue(value: GetItemValue<T, VK, ExcludeItem> | GetItemValue<T, VK, ExcludeItem>[]): string | undefined {
@@ -426,7 +427,10 @@ function onUpdate(value: any) {
   }
 }
 
+const isOpen = ref(false)
 function onUpdateOpen(value: boolean) {
+  isOpen.value = value
+
   let timeoutId
 
   if (!value) {
@@ -488,6 +492,21 @@ function onClear() {
 }
 
 const viewportRef = useTemplateRef('viewportRef')
+
+const comboboxRootRef = useTemplateRef('comboboxRootRef')
+
+// reka-ui only re-highlights the first item when the list goes from empty to non-empty.
+// With `create-item`, the create item is always registered so the count never drops to 0,
+// leaving the highlight stale when async `items` load. Re-highlight when items change while open.
+// Wait an extra tick so freshly mounted items are registered in reka-ui's collection before highlighting.
+watch(() => props.items, async () => {
+  if (!isOpen.value) {
+    return
+  }
+
+  await nextTick()
+  comboboxRootRef.value?.highlightFirstItem?.()
+}, { flush: 'post' })
 
 defineExpose({
   triggerRef: toRef(() => triggerRef.value?.$el as HTMLButtonElement),
@@ -568,9 +587,9 @@ defineExpose({
   </DefineItemTemplate>
 
   <ComboboxRoot
-    :id="id"
+    ref="comboboxRootRef"
     v-slot="{ modelValue, open }"
-    v-bind="({ ...rootProps, ...$attrs, ...ariaAttrs } as any)"
+    v-bind="(rootProps as any)"
     ignore-filter
     as-child
     :name="name"
@@ -579,7 +598,14 @@ defineExpose({
     @update:open="onUpdateOpen"
   >
     <ComboboxAnchor as-child>
-      <ComboboxTrigger ref="triggerRef" data-slot="base" :class="ui.base({ class: [props.ui?.base, props.class] })" tabindex="0">
+      <ComboboxTrigger
+        :id="id"
+        ref="triggerRef"
+        data-slot="base"
+        :class="ui.base({ class: [props.ui?.base, props.class] })"
+        tabindex="0"
+        v-bind="{ ...$attrs, ...ariaAttrs }"
+      >
         <span v-if="isLeading || !!props.avatar || !!slots.leading" data-slot="leading" :class="ui.leading({ class: props.ui?.leading })">
           <slot name="leading" :model-value="(modelValue as ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>)" :open="open" :ui="ui">
             <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" data-slot="leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />

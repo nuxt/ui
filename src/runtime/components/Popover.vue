@@ -9,7 +9,7 @@ import type { ComponentConfig } from '../types/tv'
 type Popover = ComponentConfig<typeof theme, AppConfig, 'popover'>
 type PopoverMode = 'click' | 'hover'
 
-export interface PopoverProps<M extends PopoverMode = PopoverMode> extends PopoverRootProps, Pick<HoverCardRootProps, 'openDelay' | 'closeDelay'> {
+export interface PopoverProps<M extends PopoverMode = PopoverMode> extends PopoverRootProps, Pick<HoverCardRootProps, 'openDelay' | 'closeDelay' | 'enableTouch'> {
   /**
    * The display mode of the popover.
    * @defaultValue 'click'
@@ -34,6 +34,8 @@ export interface PopoverProps<M extends PopoverMode = PopoverMode> extends Popov
   /**
    * The reference (or anchor) element that is being referred to for positioning.
    *
+   * Accepts an element or a virtual element (anything with `getBoundingClientRect`),
+   * and can be changed reactively to re-anchor the popover (e.g. for a guided tour).
    * If not provided will use the current component as anchor.
    */
   reference?: HoverCardTriggerProps['reference']
@@ -87,7 +89,7 @@ const props = useComponentProps<PopoverProps<M>>('popover', _props)
 
 const appConfig = useAppConfig() as Popover['AppConfig']
 
-const pick = props.mode === 'hover' ? reactivePick(props, 'defaultOpen', 'open', 'openDelay', 'closeDelay') : reactivePick(props, 'defaultOpen', 'open', 'modal')
+const pick = props.mode === 'hover' ? reactivePick(props, 'defaultOpen', 'open', 'openDelay', 'closeDelay', 'enableTouch') : reactivePick(props, 'defaultOpen', 'open', 'modal')
 const rootProps = useForwardProps(pick, emits)
 const portalProps = usePortal(toRef(() => props.portal))
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8 }) as PopoverContentProps)
@@ -120,7 +122,7 @@ const Component = computed(() => props.mode === 'hover' ? HoverCard : Popover)
 
 <template>
   <Component.Root v-slot="{ open, close }: { open: boolean, close?: () => void }" v-bind="rootProps">
-    <Component.Trigger v-if="!!slots.default || !!props.reference" as-child :reference="props.reference" :class="props.class">
+    <Component.Trigger v-if="!!slots.default" as-child :class="props.class">
       <slot :open="open" />
     </Component.Trigger>
 
@@ -130,7 +132,7 @@ const Component = computed(() => props.mode === 'hover' ? HoverCard : Popover)
 
     <Component.Portal v-bind="portalProps">
       <FieldGroupReset>
-        <Component.Content v-bind="contentProps" data-slot="content" :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })" v-on="contentEvents">
+        <Component.Content v-bind="contentProps" :reference="props.reference ?? props.content?.reference" data-slot="content" :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })" v-on="contentEvents">
           <slot name="content" v-bind="((close ? { close } : {}) as SlotProps<M>)" />
 
           <Component.Arrow v-if="!!props.arrow" v-bind="arrowProps" data-slot="arrow" :class="ui.arrow({ class: props.ui?.arrow })" />

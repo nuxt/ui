@@ -1,6 +1,8 @@
 import { describe, it, expect } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { createSSRApp, h } from 'vue'
+import { renderToString } from 'vue/server-renderer'
 import { renderEach } from '../component-render'
 import Modal from '../../src/runtime/components/Modal.vue'
 
@@ -47,21 +49,31 @@ describe('Modal', () => {
     expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 
-  it('unmounts content when closed by default', async () => {
-    const wrapper = await mountSuspended(Modal, {
-      props: { open: false, portal: false },
-      slots: { body: () => 'Body content' }
+  describe('SSR', () => {
+    const TITLE = 'SSR Modal Content'
+
+    // `renderToString` reproduces the `useMounted()` gate in reka's `Teleport`
+    // (false on the server), so this asserts the real server-rendered output.
+    async function renderSSR(props: Record<string, any>) {
+      const ctx: Record<string, any> = {}
+      const html = await renderToString(createSSRApp(() => h(Modal as any, props)), ctx)
+      return html + JSON.stringify(ctx.teleports ?? {})
+    }
+
+    it('does not render content during SSR by default', async () => {
+      expect(await renderSSR({ open: true, portal: false, title: TITLE })).not.toContain(TITLE)
     })
 
-    expect(wrapper.text()).not.toContain('Body content')
-  })
-
-  it('keeps content mounted when closed with unmountOnHide false', async () => {
-    const wrapper = await mountSuspended(Modal, {
-      props: { open: false, portal: false, unmountOnHide: false },
-      slots: { body: () => 'Body content' }
+    it('renders an open modal during SSR when unmountOnHide is false and portal is disabled', async () => {
+      expect(await renderSSR({ open: true, portal: false, unmountOnHide: false, title: TITLE })).toContain(TITLE)
     })
 
-    expect(wrapper.text()).toContain('Body content')
+    it('keeps a closed modal in the SSR output when unmountOnHide is false (SEO)', async () => {
+      expect(await renderSSR({ open: false, portal: false, unmountOnHide: false, title: TITLE })).toContain(TITLE)
+    })
+
+    it('does not force content into SSR when the portal is enabled', async () => {
+      expect(await renderSSR({ open: true, unmountOnHide: false, title: TITLE })).not.toContain(TITLE)
+    })
   })
 })

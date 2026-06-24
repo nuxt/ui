@@ -353,11 +353,7 @@ slots:
 
 ### Unmount :badge{label="Soon" class="align-text-top"}
 
-Use the `unmount-on-hide` prop to control whether the Slideover is unmounted from the DOM when closed. Defaults to `true`.
-
-::note
-When set to `false`, the Slideover's content stays in the DOM when closed (hidden with `display: none`) instead of being unmounted. This can be useful for SEO and performance by avoiding remounts on every open.
-::
+Use the `unmount-on-hide` prop to prevent the Slideover's content from being unmounted when it is closed. Defaults to `true`.
 
 ::component-code
 ---
@@ -366,7 +362,7 @@ ignore:
   - title
 props:
   unmountOnHide: false
-  title: 'Slideover mounted on hide'
+  title: 'Slideover'
 slots:
   default: |
 
@@ -381,6 +377,14 @@ slots:
 
 #body
 :placeholder{class="h-full"}
+::
+
+::note
+You can inspect the DOM to see the Slideover's content being rendered even while it is closed.
+::
+
+::tip
+When the `portal` prop is set to `false`, the content is also rendered on the server. This is useful to render an open Slideover during SSR without a flash on page load, or to expose its content for SEO.
 ::
 
 ## Examples

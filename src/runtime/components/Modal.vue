@@ -61,7 +61,9 @@ export interface ModalProps extends DialogRootProps {
 }
 
 export interface ModalEmits extends DialogRootEmits {
+  'leave': []
   'after:leave': []
+  'enter': []
   'after:enter': []
   'close:prevent': []
 }
@@ -99,8 +101,7 @@ const _props = withDefaults(defineProps<ModalProps>(), {
   overlay: true,
   transition: true,
   modal: true,
-  dismissible: true,
-  unmountOnHide: true
+  dismissible: true
 })
 const emits = defineEmits<ModalEmits>()
 const slots = defineSlots<ModalSlots>()
@@ -150,7 +151,9 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.modal || {})
         data-slot="content"
         :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })"
         v-bind="contentProps"
+        @enter="emits('enter')"
         @after-enter="emits('after:enter')"
+        @leave="emits('leave')"
         @after-leave="emits('after:leave')"
         v-on="contentEvents"
       >
@@ -221,7 +224,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.modal || {})
       <slot :open="open" />
     </DialogTrigger>
 
-    <DialogPortal v-bind="portalProps">
+    <DialogPortal v-bind="portalProps" :force-mount="(portalProps.disabled && props.unmountOnHide === false) || undefined">
       <FieldGroupReset>
         <template v-if="props.scrollable">
           <DialogOverlay data-slot="overlay" :class="ui.overlay({ class: props.ui?.overlay })">

@@ -17,7 +17,10 @@ export function useForwardProps<T extends object, E extends string = string>(
   source: MaybeRef<T> | ComputedRef<T>,
   emits?: (event: E, ...args: any[]) => void
 ): ComputedRef<Partial<T>> {
-  const emitAsProps = emits ? useEmitAsProps(emits) : {}
+  // reka-ui 2.10.0 tightened `useEmitAsProps` to require an `Emit<Name, Fn>` inferred
+  // from a concrete `defineEmits` signature; our generic proxy emit doesn't satisfy it,
+  // so cast at the call site (this is a runtime-transparent name → `onXxx` prop mapping).
+  const emitAsProps = emits ? useEmitAsProps(emits as Parameters<typeof useEmitAsProps>[0]) : {}
   return computed(() => {
     const src = isRef(source) ? source.value : source
     const out: Record<string, any> = { ...emitAsProps }

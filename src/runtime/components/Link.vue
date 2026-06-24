@@ -133,7 +133,8 @@ const props = withDefaults(defineProps<LinkProps>(), {
   as: 'button',
   type: 'button',
   ariaCurrentValue: 'page',
-  active: undefined
+  active: undefined,
+  locale: undefined
 })
 defineSlots<LinkSlots>()
 

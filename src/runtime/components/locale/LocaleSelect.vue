@@ -27,6 +27,7 @@ const modelValue = defineModel<string>({ required: true })
 function getEmojiFlag(locale: string): string {
   const languageToCountry: Record<string, string> = {
     ar: 'sa', // Arabic -> Saudi Arabia
+    be: 'by', // Belarusian -> Belarus
     bn: 'bd', // Bengali -> Bangladesh
     ca: 'es', // Catalan -> Spain
     ckb: 'iq', // Central Kurdish -> Iraq
@@ -35,10 +36,12 @@ function getEmojiFlag(locale: string): string {
     el: 'gr', // Greek -> Greece
     en: 'us', // English -> United States (default)
     et: 'ee', // Estonian -> Estonia
+    eu: 'es', // Basque -> Spain
     gl: 'es', // Galician -> Spain
     he: 'il', // Hebrew -> Israel
     hi: 'in', // Hindi -> India
     hy: 'am', // Armenian -> Armenia
+    is: 'is', // Icelandic -> Iceland
     ja: 'jp', // Japanese -> Japan
     ka: 'ge', // Georgian -> Georgia
     kk: 'kz', // Kazakh -> Kazakhstan
@@ -46,6 +49,7 @@ function getEmojiFlag(locale: string): string {
     ko: 'kr', // Korean -> South Korea
     ky: 'kg', // Kyrgyz -> Kyrgyzstan
     lb: 'lu', // Luxembourgish -> Luxembourg
+    lo: 'la', // Lao -> Laos
     ms: 'my', // Malay -> Malaysia
     nb: 'no', // Norwegian Bokmål -> Norway
     sl: 'si', // Slovenian -> Slovenia

@@ -14,9 +14,11 @@ export default defineEventHandler(async (event) => {
     .order('path', 'ASC')
     .all()
 
-  const today = new Date().toISOString().split('T')[0]
+  // No `<lastmod>`: this route runs as a serverless function (no git, no source files) so a
+  // truthful per-page date is unavailable, and a uniform build date is a signal search engines
+  // learn to ignore. Omitting it lets them rely on their own crawl history instead.
   const urls = pages.map(page =>
-    `  <url>\n    <loc>${xmlEscape(`${DOMAIN}${page.path}`)}</loc>\n    <lastmod>${today}</lastmod>\n  </url>`
+    `  <url>\n    <loc>${xmlEscape(`${DOMAIN}${page.path}`)}</loc>\n  </url>`
   ).join('\n')
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>

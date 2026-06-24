@@ -61,7 +61,9 @@ export interface SlideoverProps extends DialogRootProps {
 }
 
 export interface SlideoverEmits extends DialogRootEmits {
+  'leave': []
   'after:leave': []
+  'enter': []
   'after:enter': []
   'close:prevent': []
 }
@@ -100,8 +102,7 @@ const _props = withDefaults(defineProps<SlideoverProps>(), {
   transition: true,
   modal: true,
   dismissible: true,
-  side: 'right',
-  unmountOnHide: true
+  side: 'right'
 })
 const emits = defineEmits<SlideoverEmits>()
 const slots = defineSlots<SlideoverSlots>()
@@ -147,7 +148,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.slideover ||
       <slot :open="open" />
     </DialogTrigger>
 
-    <DialogPortal v-bind="portalProps">
+    <DialogPortal v-bind="portalProps" :force-mount="(portalProps.disabled && props.unmountOnHide === false) || undefined">
       <FieldGroupReset>
         <DialogOverlay v-if="props.overlay" data-slot="overlay" :class="ui.overlay({ class: props.ui?.overlay })" />
 
@@ -156,7 +157,9 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.slideover ||
           data-slot="content"
           :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })"
           v-bind="contentProps"
+          @enter="emits('enter')"
           @after-enter="emits('after:enter')"
+          @leave="emits('leave')"
           @after-leave="emits('after:leave')"
           v-on="contentEvents"
         >

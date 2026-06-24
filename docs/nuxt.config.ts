@@ -276,10 +276,6 @@ export default defineNuxtConfig({
     }
   },
 
-  a11y: {
-    logIssues: false
-  },
-
   componentMeta: {
     transformers: [(component, code) => {
       // Simplify ui in slot prop types: `leading(props: { ui: Button['ui'] })` -> `leading(props: { ui: object })`

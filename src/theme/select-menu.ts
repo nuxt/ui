@@ -20,15 +20,6 @@ export default (options: Required<ModuleOptions>) => {
           viewport: 'divide-y divide-default'
         }
       }
-    },
-    compoundVariants: (prev: Record<string, any>[]) => prev.map(item => ({
-      ...item,
-      class: typeof item.class === 'string' ? replaceFocus(item.class) : item.class
-    }))
+    }
   }, select(options))
-}
-
-function replaceFocus(str: string): string {
-  return str
-    .replace(/focus:/g, 'focus-visible:')
 }

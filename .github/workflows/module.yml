@@ -62,8 +62,8 @@ jobs:
         run: pnpm run dev:vue:build
 
       - name: Publish
-        # Only publish preview package on ubuntu during PRs
-        if: matrix.os == 'ubuntu-latest'
+        # Only publish preview package on ubuntu, and skip forks of the repo (pkg-pr-new still runs on fork PRs against nuxt/ui)
+        if: matrix.os == 'ubuntu-latest' && github.repository_owner == 'nuxt'
         run: pnpx pkg-pr-new publish --compact --no-template --pnpm
 
   playground:

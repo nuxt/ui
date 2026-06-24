@@ -46,7 +46,7 @@ export default (options: Required<ModuleOptions>) => {
           root: 'flex-wrap'
         },
         false: {
-          base: 'w-full border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75'
+          base: 'w-full border-0 placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75'
         }
       },
       size: {
@@ -115,21 +115,21 @@ export default (options: Required<ModuleOptions>) => {
     compoundVariants: [{
       variant: 'soft',
       multiple: true,
-      class: 'has-focus:bg-elevated'
+      class: 'has-focus:bg-elevated has-focus-visible:outline-3'
     }, {
       variant: 'ghost',
       multiple: true,
-      class: 'has-focus:bg-elevated'
+      class: 'has-focus:bg-elevated has-focus-visible:outline-3'
     }, ...(options.theme.colors || []).map((color: string) => ({
       color,
       multiple: true,
       variant: ['outline', 'subtle'],
-      class: `has-focus-visible:ring-2 has-focus-visible:ring-${color}`
+      class: `has-focus-visible:outline-3 has-focus-visible:ring-${color}`
     })), {
       color: 'neutral',
       multiple: true,
       variant: ['outline', 'subtle'],
-      class: 'has-focus-visible:ring-2 has-focus-visible:ring-inverted'
+      class: 'has-focus-visible:outline-3 has-focus-visible:ring-inverted'
     }]
   }, input(options))
 }
