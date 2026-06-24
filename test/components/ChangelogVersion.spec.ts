@@ -58,8 +58,10 @@ describe('ChangelogVersion', () => {
       props: { title: 'v1.0.0' },
       attrs: { 'aria-label': 'test-label', 'data-testid': 'test-id' }
     })
-    expect(wrapper.attributes('aria-label')).toBe('test-label')
-    expect(wrapper.attributes('data-testid')).toBe('test-id')
+    // Root is a fragment (DefineTemplate blocks render leading comments), so target the root element directly
+    const root = wrapper.find('[data-slot="root"]')
+    expect(root.attributes('aria-label')).toBe('test-label')
+    expect(root.attributes('data-testid')).toBe('test-id')
   })
 
   it('forwards attrs to link when `to` prop is set', async () => {
@@ -67,7 +69,7 @@ describe('ChangelogVersion', () => {
       props: { title: 'v1.0.0', to: 'https://github.com/benjamincanac' },
       attrs: { 'aria-label': 'test-label' }
     })
-    expect(wrapper.attributes('aria-label')).toBeUndefined()
+    expect(wrapper.find('[data-slot="root"]').attributes('aria-label')).toBeUndefined()
     expect(wrapper.find('a').attributes('aria-label')).toBe('test-label')
   })
 })
