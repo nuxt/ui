@@ -165,6 +165,17 @@ function askQuestion(question: string) {
   onSubmit()
 }
 
+// The sidebar keeps its content mounted when closed (offcanvas), so the prompt's
+// `autofocus` only fires once. Refocus it each time the sidebar reopens.
+const promptRef = useTemplateRef('promptRef')
+watch(open, (value) => {
+  if (value) {
+    nextTick(() => {
+      promptRef.value?.textareaRef?.focus()
+    })
+  }
+})
+
 const suggestions = [
   {
     category: 'Components',
@@ -335,6 +346,7 @@ defineShortcuts({
 
     <template #footer>
       <UChatPrompt
+        ref="promptRef"
         v-model="input"
         :error="chat.error"
         placeholder="Ask me anything..."

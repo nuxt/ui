@@ -1,6 +1,8 @@
 import { describe, it, expect } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { createSSRApp, h } from 'vue'
+import { renderToString } from 'vue/server-renderer'
 import { renderEach } from '../component-render'
 import Slideover from '../../src/runtime/components/Slideover.vue'
 import theme from '#build/ui/slideover'
@@ -45,5 +47,33 @@ describe('Slideover', () => {
     })
 
     expect(await axe(wrapper.element)).toHaveNoViolations()
+  })
+
+  describe('SSR', () => {
+    const TITLE = 'SSR Slideover Content'
+
+    // `renderToString` reproduces the `useMounted()` gate in reka's `Teleport`
+    // (false on the server), so this asserts the real server-rendered output.
+    async function renderSSR(props: Record<string, any>) {
+      const ctx: Record<string, any> = {}
+      const html = await renderToString(createSSRApp(() => h(Slideover as any, props)), ctx)
+      return html + JSON.stringify(ctx.teleports ?? {})
+    }
+
+    it('does not render content during SSR by default', async () => {
+      expect(await renderSSR({ open: true, portal: false, title: TITLE })).not.toContain(TITLE)
+    })
+
+    it('renders an open slideover during SSR when unmountOnHide is false and portal is disabled', async () => {
+      expect(await renderSSR({ open: true, portal: false, unmountOnHide: false, title: TITLE })).toContain(TITLE)
+    })
+
+    it('keeps a closed slideover in the SSR output when unmountOnHide is false (SEO)', async () => {
+      expect(await renderSSR({ open: false, portal: false, unmountOnHide: false, title: TITLE })).toContain(TITLE)
+    })
+
+    it('does not force content into SSR when the portal is enabled', async () => {
+      expect(await renderSSR({ open: true, unmountOnHide: false, title: TITLE })).not.toContain(TITLE)
+    })
   })
 })

@@ -42,6 +42,10 @@ slots:
 
 Use the `mode` prop to change the mode of the Popover. Defaults to `click`.
 
+::tip
+In `hover` mode, set the `enable-touch` prop to let users toggle the Popover by tapping the trigger on touch devices, or use the `click` mode for triggers meant to be tapped.
+::
+
 ::component-code
 ---
 prettier: true
@@ -51,6 +55,7 @@ items:
     - hover
 props:
   mode: 'hover'
+  enableTouch: true
 slots:
   default: |
 
