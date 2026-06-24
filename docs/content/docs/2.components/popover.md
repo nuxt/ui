@@ -55,6 +55,7 @@ items:
     - hover
 props:
   mode: 'hover'
+  enableTouch: true
 slots:
   default: |
 
