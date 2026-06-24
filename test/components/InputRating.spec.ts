@@ -59,13 +59,11 @@ describe('InputRating', () => {
       })
 
       const item = wrapper.find('button[role="radio"][value="3"]')
-      if (item.exists()) {
-        await item.trigger('click')
-        await flushPromises()
+      await item.trigger('click')
+      await flushPromises()
 
-        expect(wrapper.emitted()).toHaveProperty('update:modelValue')
-        expect(wrapper.emitted('update:modelValue')?.[0]).toEqual([3])
-      }
+      expect(wrapper.emitted()).toHaveProperty('update:modelValue')
+      expect(wrapper.emitted('update:modelValue')?.[0]).toEqual([3])
     })
 
     test('change event on click', async () => {
@@ -76,12 +74,10 @@ describe('InputRating', () => {
       })
 
       const item = wrapper.find('button[role="radio"][value="4"]')
-      if (item.exists()) {
-        await item.trigger('click')
-        await flushPromises()
+      await item.trigger('click')
+      await flushPromises()
 
-        expect(wrapper.emitted()).toHaveProperty('change')
-      }
+      expect(wrapper.emitted()).toHaveProperty('change')
     })
 
     test('half star with allowHalf', async () => {
@@ -93,15 +89,13 @@ describe('InputRating', () => {
       })
 
       const item = wrapper.find('button[role="radio"][value="0.5"]')
-      if (item.exists()) {
-        await item.trigger('click')
-        await flushPromises()
+      await item.trigger('click')
+      await flushPromises()
 
-        expect(wrapper.emitted()).toHaveProperty('update:modelValue')
-        // Should emit 0.5 for half star
-        const emitted = wrapper.emitted('update:modelValue')
-        expect(emitted?.[0]?.[0]).toBe(0.5)
-      }
+      expect(wrapper.emitted()).toHaveProperty('update:modelValue')
+      // Should emit 0.5 for half star
+      const emitted = wrapper.emitted('update:modelValue')
+      expect(emitted?.[0]?.[0]).toBe(0.5)
     })
   })
 
@@ -115,12 +109,10 @@ describe('InputRating', () => {
       })
 
       const item = wrapper.find('button[role="radio"][value="5"]')
-      if (item.exists()) {
-        await item.trigger('click')
-        await flushPromises()
+      await item.trigger('click')
+      await flushPromises()
 
-        expect(wrapper.emitted('update:modelValue')).toBeUndefined()
-      }
+      expect(wrapper.emitted('update:modelValue')).toBeUndefined()
     })
   })
 
@@ -134,12 +126,10 @@ describe('InputRating', () => {
       })
 
       const item = wrapper.find('button[role="radio"][value="5"]')
-      if (item.exists()) {
-        await item.trigger('click')
-        await flushPromises()
+      await item.trigger('click')
+      await flushPromises()
 
-        expect(wrapper.emitted('update:modelValue')).toBeUndefined()
-      }
+      expect(wrapper.emitted('update:modelValue')).toBeUndefined()
     })
   })
 
@@ -177,19 +167,15 @@ describe('InputRating', () => {
 
       // Set rating to 2 (should fail validation) by clicking second star
       const item2 = rating.find('button[role="radio"][value="2"]')
-      if (item2.exists()) {
-        await item2.trigger('click')
-        await flushPromises()
-      }
+      await item2.trigger('click')
+      await flushPromises()
 
       expect(wrapper.text()).toContain('Rating must be at least 3')
 
       // Set rating to 4 (should pass validation) by clicking fourth star
       const item4 = rating.find('button[role="radio"][value="4"]')
-      if (item4.exists()) {
-        await item4.trigger('click')
-        await flushPromises()
-      }
+      await item4.trigger('click')
+      await flushPromises()
       expect(wrapper.text()).not.toContain('Rating must be at least 3')
     })
 
@@ -202,19 +188,15 @@ describe('InputRating', () => {
 
       // Set rating to 2 (should fail validation) by clicking second star
       const item2 = rating.find('button[role="radio"][value="2"]')
-      if (item2.exists()) {
-        await item2.trigger('click')
-        await flushPromises()
-      }
+      await item2.trigger('click')
+      await flushPromises()
 
       expect(wrapper.text()).toContain('Rating must be at least 3')
 
       // Set rating to 4 (should pass validation) by clicking fourth star
       const item4 = rating.find('button[role="radio"][value="4"]')
-      if (item4.exists()) {
-        await item4.trigger('click')
-        await flushPromises()
-      }
+      await item4.trigger('click')
+      await flushPromises()
       expect(wrapper.text()).not.toContain('Rating must be at least 3')
     })
   })

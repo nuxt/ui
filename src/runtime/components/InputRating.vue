@@ -63,7 +63,8 @@ export interface InputRatingEmits {
 }
 
 export interface InputRatingSlots {
-  star(props: { index: number, value: number, filled: boolean, half: boolean }): any
+  /** Rendered for each star. `filled` is `false` for the empty background layer and `true` for the highlighted overlay. */
+  star(props: { index: number, filled: boolean }): any
 }
 </script>
 
@@ -115,7 +116,6 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.inputRating 
 }))
 
 const starIcon = computed(() => props.icon ?? appConfig.ui.icons.star)
-const emptyStarIcon = computed(() => props.emptyIcon ?? starIcon.value)
 
 function onUpdate(value: number) {
   // @ts-expect-error - 'target' does not exist in type 'EventInit'
@@ -135,6 +135,7 @@ function onUpdate(value: number) {
     :length="props.max"
     :step="props.allowHalf ? 0.5 : 1"
     :disabled="disabled"
+    :aria-readonly="props.readonly || undefined"
     :hoverable="props.hoverable && !disabled"
     :orientation="props.orientation"
     data-slot="root"
@@ -150,36 +151,32 @@ function onUpdate(value: number) {
         :class="ui.star({ class: props.ui?.star })"
       >
         <template #default="{ steps }">
-          <slot
-            name="star"
-            :index="item"
-            :value="modelValue ?? 0"
-            :filled="(modelValue ?? 0) >= item"
-            :half="!!props.allowHalf && (modelValue ?? 0) >= item - 0.5 && (modelValue ?? 0) < item"
-          >
-            <!-- Empty icon as background -->
+          <!-- Empty icon as background -->
+          <slot name="star" :index="item" :filled="false">
             <UIcon
-              :name="emptyStarIcon"
+              :name="props.emptyIcon ?? starIcon"
               data-slot="emptyIcon"
               :class="ui.emptyIcon({ class: props.ui?.emptyIcon })"
             />
+          </slot>
 
-            <!-- Indicators overlaid for each step -->
-            <RatingItemIndicator
-              v-for="step in steps"
-              :key="step"
-              :step="step"
-              :aria-label="`Rate ${step} ${step === 1 ? 'star' : 'stars'} out of ${props.max}`"
-              data-slot="indicator"
-              :class="ui.indicator({ class: props.ui?.indicator })"
-            >
+          <!-- Indicators overlaid for each step, clipped to the rated fraction -->
+          <RatingItemIndicator
+            v-for="step in steps"
+            :key="step"
+            :step="step"
+            :aria-label="`Rate ${step} ${step === 1 ? 'star' : 'stars'} out of ${props.max}`"
+            data-slot="indicator"
+            :class="ui.indicator({ class: props.ui?.indicator })"
+          >
+            <slot name="star" :index="item" :filled="true">
               <UIcon
                 :name="starIcon"
                 data-slot="icon"
                 :class="ui.icon({ class: props.ui?.icon })"
               />
-            </RatingItemIndicator>
-          </slot>
+            </slot>
+          </RatingItemIndicator>
         </template>
       </RatingItem>
     </template>

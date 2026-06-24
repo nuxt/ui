@@ -61,14 +61,18 @@ export default (options: Required<ModuleOptions>) => ({
         root: 'opacity-75 cursor-not-allowed',
         star: 'cursor-not-allowed pointer-events-none'
       },
-      false: {
-        star: 'hover:scale-110'
-      }
+      false: {}
     }
   },
+  compoundVariants: [{
+    readonly: false,
+    disabled: false,
+    class: {
+      star: 'hover:scale-110'
+    }
+  }],
   defaultVariants: {
     size: 'md',
-    color: 'primary',
-    orientation: 'horizontal'
+    color: 'primary'
   }
 })

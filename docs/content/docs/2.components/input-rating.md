@@ -201,25 +201,6 @@ props:
 ---
 ::
 
-### Focus Ring
-
-The InputRating component displays a focus ring by default for accessibility purposes, helping keyboard users identify the focused element. If you need to remove the focus ring for design reasons, you can override it using the `ui` prop:
-
-::component-code
----
-external:
-  - modelValue
-props:
-  modelValue: 3
-  ui:
-    star: 'focus-within:ring-0'
----
-::
-
-::note
-Removing the focus ring may impact accessibility for keyboard users. Consider providing alternative visual indicators when removing the default focus ring.
-::
-
 ## Examples
 
 ### With Form Integration
