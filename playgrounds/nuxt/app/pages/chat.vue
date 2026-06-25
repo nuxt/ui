@@ -1,18 +1,15 @@
 <script setup lang="ts">
 import { isReasoningUIPart, isTextUIPart, isToolUIPart, getToolName } from 'ai'
-import type { UIMessage } from 'ai'
-import { Chat } from '@ai-sdk/vue'
+import { useChat } from '@ai-sdk/vue'
 import { isPartStreaming, isToolStreaming } from '@nuxt/ui/utils/ai'
 import { Comark } from '@comark/vue'
 import highlight from '@comark/vue/plugins/highlight'
 
 const toast = useToast()
 
-const messages: UIMessage[] = []
 const input = ref('')
 
-const chat = new Chat({
-  messages,
+const { messages, status, error, sendMessage, regenerate, stop } = useChat({
   onError(error) {
     let message = error.message
     try {
@@ -33,16 +30,16 @@ const chat = new Chat({
 function onSubmit() {
   if (!input.value.trim()) return
 
-  chat.sendMessage({ text: input.value })
+  sendMessage({ text: input.value })
 
   input.value = ''
 }
 
 function clearMessages() {
-  if (chat.status === 'streaming') {
-    chat.stop()
+  if (status.value === 'streaming') {
+    stop()
   }
-  chat.messages = []
+  messages.value = []
 }
 
 function getDomain(url: string): string {
@@ -58,16 +55,19 @@ function getFaviconUrl(url: string): string {
 }
 
 function generateMessages() {
-  chat.messages.push({
-    id: '1',
-    parts: [{ type: 'text', text: 'Hello, how are you?' }],
-    role: 'user'
-  })
-  chat.messages.push({
-    id: '2',
-    parts: [{ type: 'text', text: 'Fine, and you ?' }],
-    role: 'assistant'
-  })
+  messages.value = [
+    ...messages.value,
+    {
+      id: '1',
+      parts: [{ type: 'text', text: 'Hello, how are you?' }],
+      role: 'user'
+    },
+    {
+      id: '2',
+      parts: [{ type: 'text', text: 'Fine, and you ?' }],
+      role: 'assistant'
+    }
+  ]
 }
 </script>
 
@@ -75,7 +75,7 @@ function generateMessages() {
   <UDashboardNavbar class="absolute top-0 inset-x-0 z-5 border-b-0 lg:pointer-events-none">
     <template #right>
       <UButton
-        v-if="!chat.messages.length"
+        v-if="!messages.length"
         icon="i-lucide-messages-square"
         label="Generate messages"
         color="neutral"
@@ -84,7 +84,7 @@ function generateMessages() {
         @click="generateMessages"
       />
       <UButton
-        v-if="chat.messages.length"
+        v-if="messages.length"
         icon="i-lucide-list-x"
         color="neutral"
         variant="ghost"
@@ -97,8 +97,8 @@ function generateMessages() {
   <div class="flex-1 flex flex-col gap-4 sm:gap-6 max-w-xl w-full mx-auto min-h-0">
     <UChatMessages
       should-auto-scroll
-      :messages="chat.messages"
-      :status="chat.status"
+      :messages="messages"
+      :status="status"
       :spacing-offset="72"
       :assistant="{ actions: [{ label: 'Edit', icon: 'i-lucide-pencil', onClick: () => console.log('edit') }] }"
       :user="{ actions: [{ label: 'Edit', icon: 'i-lucide-pencil', onClick: () => console.log('edit') }], icon: 'i-lucide-user' }"
@@ -166,12 +166,12 @@ function generateMessages() {
 
     <UChatPrompt
       v-model="input"
-      :error="chat.error"
+      :error="error"
       variant="subtle"
       class="sticky bottom-0"
       @submit="onSubmit"
     >
-      <UChatPromptSubmit :status="chat.status" @stop="chat.stop()" @reload="chat.regenerate()" />
+      <UChatPromptSubmit :status="status" @stop="stop()" @reload="regenerate()" />
     </UChatPrompt>
   </div>
 </template>

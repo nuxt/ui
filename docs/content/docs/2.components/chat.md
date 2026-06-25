@@ -137,7 +137,7 @@ export default defineEventHandler(async (event) => {
   return streamText({
     model: gateway('anthropic/claude-sonnet-4.6'),
     maxOutputTokens: 10000,
-    system: 'You are a helpful assistant.',
+    instructions: 'You are a helpful assistant.',
     messages: await convertToModelMessages(messages)
   }).toUIMessageStreamResponse()
 })
@@ -157,7 +157,7 @@ export default defineEventHandler(async (event) => {
   return streamText({
     model: gateway('anthropic/claude-sonnet-4.6'),
     maxOutputTokens: 10000,
-    system: 'You are a helpful assistant.',
+    instructions: 'You are a helpful assistant.',
     messages: await convertToModelMessages(messages),
     providerOptions: {
       anthropic: {
@@ -197,7 +197,7 @@ export default defineEventHandler(async (event) => {
 
   return streamText({
     model: gateway('anthropic/claude-sonnet-4.6'),
-    system: 'You are a helpful assistant.',
+    instructions: 'You are a helpful assistant.',
     messages: await convertToModelMessages(messages),
     tools: {
       web_search: anthropic.tools.webSearch_20250305({})
@@ -216,7 +216,7 @@ export default defineEventHandler(async (event) => {
 
   return streamText({
     model: gateway('google/gemini-3-flash'),
-    system: 'You are a helpful assistant.',
+    instructions: 'You are a helpful assistant.',
     messages: await convertToModelMessages(messages),
     tools: {
       google_search: google.tools.googleSearch({})
@@ -235,7 +235,7 @@ export default defineEventHandler(async (event) => {
 
   return streamText({
     model: gateway('openai/gpt-5-nano'),
-    system: 'You are a helpful assistant.',
+    instructions: 'You are a helpful assistant.',
     messages: await convertToModelMessages(messages),
     tools: {
       web_search: openai.tools.webSearch({})
@@ -271,7 +271,7 @@ yarn add @ai-sdk/mcp
 Then, configure your server endpoint to use MCP tools:
 
 ```ts [server/api/chat.post.ts]
-import { streamText, convertToModelMessages, stepCountIs } from 'ai'
+import { streamText, convertToModelMessages, isStepCount } from 'ai'
 import { createMCPClient } from '@ai-sdk/mcp'
 import { gateway } from '@ai-sdk/gateway'
 
@@ -286,9 +286,9 @@ export default defineEventHandler(async (event) => {
   return streamText({
     model: gateway('anthropic/claude-sonnet-4.6'),
     maxOutputTokens: 10000,
-    system: 'You are a helpful assistant. Use your tools to search for relevant information before answering questions.',
+    instructions: 'You are a helpful assistant. Use your tools to search for relevant information before answering questions.',
     messages: await convertToModelMessages(messages),
-    stopWhen: stepCountIs(6),
+    stopWhen: isStepCount(6),
     tools,
     onFinish: async () => {
       await httpClient.close()
@@ -303,27 +303,27 @@ export default defineEventHandler(async (event) => {
 
 ## Client Setup
 
-Use the `Chat` class from `@ai-sdk/vue` to manage chat state and connect to your server endpoint:
+Use the `useChat` composable from `@ai-sdk/vue` to manage chat state and connect to your server endpoint:
 
 ::framework-only
 #nuxt
 ```vue
 <script setup lang="ts">
 import { isReasoningUIPart, isTextUIPart, isToolUIPart, getToolName } from 'ai'
-import { Chat } from '@ai-sdk/vue'
+import { useChat } from '@ai-sdk/vue'
 import { isPartStreaming, isToolStreaming } from '@nuxt/ui/utils/ai'
 import highlight from '@comark/nuxt/plugins/highlight'
 
 const input = ref('')
 
-const chat = new Chat({
+const { messages, status, error, sendMessage, regenerate, stop } = useChat({
   onError(error) {
     console.error(error)
   }
 })
 
 function onSubmit() {
-  chat.sendMessage({ text: input.value })
+  sendMessage({ text: input.value })
 
   input.value = ''
 }
@@ -331,8 +331,8 @@ function onSubmit() {
 
 <template>
   <UChatMessages
-    :messages="chat.messages"
-    :status="chat.status"
+    :messages="messages"
+    :status="status"
   >
     <template #content="{ message }">
       <template
@@ -376,13 +376,13 @@ function onSubmit() {
 
   <UChatPrompt
     v-model="input"
-    :error="chat.error"
+    :error="error"
     @submit="onSubmit"
   >
     <UChatPromptSubmit
-      :status="chat.status"
-      @stop="chat.stop()"
-      @reload="chat.regenerate()"
+      :status="status"
+      @stop="stop()"
+      @reload="regenerate()"
     />
   </UChatPrompt>
 </template>
@@ -393,21 +393,21 @@ function onSubmit() {
 <script setup lang="ts">
 import { ref } from 'vue'
 import { isReasoningUIPart, isTextUIPart, isToolUIPart, getToolName } from 'ai'
-import { Chat } from '@ai-sdk/vue'
+import { useChat } from '@ai-sdk/vue'
 import { isPartStreaming, isToolStreaming } from '@nuxt/ui/utils/ai'
 import { Comark } from '@comark/vue'
 import highlight from '@comark/vue/plugins/highlight'
 
 const input = ref('')
 
-const chat = new Chat({
+const { messages, status, error, sendMessage, regenerate, stop } = useChat({
   onError(error) {
     console.error(error)
   }
 })
 
 function onSubmit() {
-  chat.sendMessage({ text: input.value })
+  sendMessage({ text: input.value })
 
   input.value = ''
 }
@@ -415,8 +415,8 @@ function onSubmit() {
 
 <template>
   <UChatMessages
-    :messages="chat.messages"
-    :status="chat.status"
+    :messages="messages"
+    :status="status"
   >
     <template #content="{ message }">
       <template
@@ -460,13 +460,13 @@ function onSubmit() {
 
   <UChatPrompt
     v-model="input"
-    :error="chat.error"
+    :error="error"
     @submit="onSubmit"
   >
     <UChatPromptSubmit
-      :status="chat.status"
-      @stop="chat.stop()"
-      @reload="chat.regenerate()"
+      :status="status"
+      @stop="stop()"
+      @reload="regenerate()"
     />
   </UChatPrompt>
 </template>

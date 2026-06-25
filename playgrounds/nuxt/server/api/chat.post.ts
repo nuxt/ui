@@ -8,7 +8,7 @@ export default defineEventHandler(async (event) => {
 
   return streamText({
     model: gateway('anthropic/claude-sonnet-4.6'),
-    system: 'You are a helpful assistant. When answering questions, search the web for up-to-date information when relevant.',
+    instructions: 'You are a helpful assistant. When answering questions, search the web for up-to-date information when relevant.',
     messages: await convertToModelMessages(messages),
     tools: {
       web_search: anthropic.tools.webSearch_20250305()

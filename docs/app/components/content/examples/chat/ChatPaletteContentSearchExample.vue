@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { isTextUIPart } from 'ai'
-import type { UIMessage } from 'ai'
-import { Chat } from '@ai-sdk/vue'
+import { useChat } from '@ai-sdk/vue'
 import { isPartStreaming } from '@nuxt/ui/utils/ai'
 import { Comark } from '@comark/vue'
 import highlight from '@comark/vue/plugins/highlight'
 
-const messages: UIMessage[] = []
 const input = ref('')
+
+const { messages, status, error, sendMessage, regenerate } = useChat()
 
 const groups = computed(() => [{
   id: 'ai',
@@ -21,13 +21,13 @@ const groups = computed(() => [{
       ai.value = true
 
       if (searchTerm.value) {
-        messages.push({
+        messages.value = [...messages.value, {
           id: '1',
           role: 'user',
           parts: [{ type: 'text', text: searchTerm.value }]
-        })
+        }]
 
-        chat.regenerate()
+        regenerate()
       }
     }
   }]
@@ -36,14 +36,10 @@ const groups = computed(() => [{
 const ai = ref(false)
 const searchTerm = ref('')
 
-const chat = new Chat({
-  messages
-})
-
 function onSubmit() {
   if (!input.value.trim()) return
 
-  chat.sendMessage({ text: input.value })
+  sendMessage({ text: input.value })
 
   input.value = ''
 }
@@ -77,8 +73,8 @@ const ui = {
       <UTheme :ui="ui">
         <UChatPalette>
           <UChatMessages
-            :messages="chat.messages"
-            :status="chat.status"
+            :messages="messages"
+            :status="status"
             :user="{ side: 'left', variant: 'naked', avatar: { src: 'https://github.com/benjamincanac.png', loading: 'lazy' as const } }"
             :assistant="{ icon: 'i-lucide-bot' }"
           >
@@ -105,7 +101,7 @@ const ui = {
               v-model="input"
               icon="i-lucide-search"
               variant="naked"
-              :error="chat.error"
+              :error="error"
               @submit="onSubmit"
               @close="onClose"
             />

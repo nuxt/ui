@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { isTextUIPart } from 'ai'
 import type { UIMessage } from 'ai'
-import { Chat } from '@ai-sdk/vue'
+import { useChat } from '@ai-sdk/vue'
 import { isPartStreaming } from '@nuxt/ui/utils/ai'
 import { Comark } from '@comark/vue'
 import highlight from '@comark/vue/plugins/highlight'
 
-const messages: UIMessage[] = [{
+const initialMessages: UIMessage[] = [{
   id: '1',
   role: 'user',
   parts: [{ type: 'text', text: 'What is Nuxt UI?' }]
@@ -17,14 +17,14 @@ const messages: UIMessage[] = [{
 }]
 const input = ref('')
 
-const chat = new Chat({
-  messages
+const { messages, status, error, sendMessage } = useChat({
+  messages: initialMessages
 })
 
 function onSubmit() {
   if (!input.value.trim()) return
 
-  chat.sendMessage({ text: input.value })
+  sendMessage({ text: input.value })
 
   input.value = ''
 }
@@ -52,8 +52,8 @@ const ui = {
       <UTheme :ui="ui">
         <UChatPalette>
           <UChatMessages
-            :messages="chat.messages"
-            :status="chat.status"
+            :messages="messages"
+            :status="status"
             :user="{ side: 'left', variant: 'naked', avatar: { src: 'https://github.com/benjamincanac.png', loading: 'lazy' as const } }"
             :assistant="{ icon: 'i-lucide-bot' }"
           >
@@ -80,7 +80,7 @@ const ui = {
               v-model="input"
               icon="i-lucide-search"
               variant="naked"
-              :error="chat.error"
+              :error="error"
               @submit="onSubmit"
             />
           </template>
