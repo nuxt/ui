@@ -132,7 +132,7 @@
     "@internationalized/date": "^3.12.2",
     "@internationalized/number": "^3.6.7",
     "@nuxt/fonts": "^0.14.0",
-    "@nuxt/icon": "^2.2.3",
+    "@nuxt/icon": "https://pkg.pr.new/@nuxt/icon@1de044f",
     "@nuxt/kit": "^4.4.8",
     "@nuxt/schema": "^4.4.8",
     "@nuxtjs/color-mode": "^4.0.1",
