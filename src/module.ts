@@ -4,6 +4,7 @@ import type { HookResult, ModuleDependencies } from '@nuxt/schema'
 import { addTemplates } from './templates'
 import { publicComposables } from './imports'
 import { defaultOptions, getDefaultConfig, resolveColors } from './utils/defaults'
+import { getClientBundleIcons, hasIconCollection } from './utils/icons'
 import { name, version } from '../package.json'
 
 export type * from './runtime/types'
@@ -220,6 +221,25 @@ export default defineNuxtModule<ModuleOptions>({
     nuxt.options.alias['#ui'] = resolve('./runtime')
 
     nuxt.options.appConfig.ui = defu(nuxt.options.appConfig.ui || {}, getDefaultConfig(options.theme)) as typeof nuxt.options.appConfig.ui
+
+    // Pre-bundle the icons Nuxt UI uses into `@nuxt/icon`'s client bundle so they're
+    // embedded at build time instead of fetched at runtime. Its `clientBundle.scan`
+    // skips `node_modules`, so it can't discover the icons baked into our components.
+    //
+    // Only icons whose collection data is installed are added — `@nuxt/icon` reads that
+    // data from the filesystem at build time and fails the build otherwise, so missing
+    // collections gracefully fall back to runtime loading. It resolves that data from
+    // `[rootDir, workspaceDir]` (nuxt/icon#502), so we check the same paths from the same
+    // `nuxt` instance to stay aligned with what it can actually load in every build
+    // context (the module's own prepare fixture, the playground, the docs, …).
+    const iconResolvePaths = [nuxt.options.rootDir, nuxt.options.workspaceDir].filter(Boolean)
+    const isCollectionInstalled = (collection: string) => hasIconCollection(collection, iconResolvePaths)
+
+    nuxt.hook('icon:clientBundleIcons', (icons) => {
+      for (const name of getClientBundleIcons(nuxt.options.appConfig.ui?.icons, isCollectionInstalled)) {
+        icons.add(name)
+      }
+    })
 
     nuxt.options.build.transpile.push('reka-ui')
 
