@@ -236,6 +236,7 @@
     "@tiptap/starter-kit": "^3",
     "@tiptap/suggestion": "^3",
     "@tiptap/vue-3": "^3",
+    "ai": "^6 || ^7",
     "joi": "^18.0.0",
     "superstruct": "^2.0.0",
     "tailwindcss": "^4.0.0",
@@ -256,6 +257,9 @@
       "optional": true
     },
     "@nuxt/content": {
+      "optional": true
+    },
+    "ai": {
       "optional": true
     },
     "joi": {
