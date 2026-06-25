@@ -76,6 +76,36 @@ const trustedCollections = new Set(
 )
 
 /**
+ * Normalize a user-provided icon into a `{collection}:{name}` bundle name.
+ *
+ * Unlike {@link toBundleName} (which only handles Nuxt UI's own `i-{collection}-{name}`
+ * defaults), this accepts the forms a user might list in `icon.clientBundle.icons`:
+ * with or without the `i-` prefix, and either dash- or colon-separated. The colon form
+ * (`material-symbols:menu`) is the only way to bundle a multi-word collection, since a
+ * dashed name can't be split into collection and icon without `@nuxt/icon`'s collection
+ * list — matching how `@iconify/vue` expects multi-word collections to be written.
+ */
+export function parseIconName(icon: unknown): string | undefined {
+  if (typeof icon !== 'string') {
+    return
+  }
+
+  const id = icon.startsWith(ICON_PREFIX) ? icon.slice(ICON_PREFIX.length) : icon
+
+  const colon = id.indexOf(':')
+  if (colon > 0) {
+    return colon < id.length - 1 ? id : undefined
+  }
+
+  const dash = id.indexOf('-')
+  if (dash < 1 || dash === id.length - 1) {
+    return
+  }
+
+  return `${id.slice(0, dash)}:${id.slice(dash + 1)}`
+}
+
+/**
  * Resolve the icons Nuxt UI uses into `@nuxt/icon` client-bundle names so they're
  * embedded at build time instead of fetched at runtime.
  *

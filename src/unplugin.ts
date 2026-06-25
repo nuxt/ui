@@ -22,6 +22,7 @@ import AppConfigPlugin from './plugins/app-config'
 import ComponentImportPlugin from './plugins/components'
 import NuxtEnvironmentPlugin from './plugins/nuxt-environment'
 import AutoImportPlugin from './plugins/auto-import'
+import IconsPlugin from './plugins/icons'
 
 import type { TVConfig } from './runtime/types/tv'
 
@@ -40,9 +41,25 @@ export interface NuxtUIOptions extends Omit<ModuleOptions, 'fonts' | 'colorMode'
   dts?: boolean
   ui?: AppConfigUI
   /**
-   * Default props for the `Icon` component
+   * Default props for the `Icon` component, and build-time icon bundling.
    */
-  icon?: Pick<RuntimeOptions, 'customize' | 'size' | 'mode'>
+  icon?: Pick<RuntimeOptions, 'customize' | 'size' | 'mode'> & {
+    /**
+     * Embed the icons Nuxt UI uses into the build so they render during SSR and fully
+     * offline, instead of being fetched from the Iconify API at runtime. Enabled by
+     * default for Nuxt UI's own icons (when their collection is installed); set to
+     * `false` to opt out.
+     * @see https://ui.nuxt.com/docs/getting-started/integrations/ssr#icons-display
+     */
+    clientBundle?: false | {
+      /**
+       * Extra icons to bundle, on top of Nuxt UI's defaults. Accepts `i-{collection}-{name}`
+       * or `{collection}:{name}` (use the colon form for multi-word collections, e.g.
+       * `material-symbols:menu`). Only bundled when the collection's data is installed.
+       */
+      icons?: string[]
+    }
+  }
   /**
    * Enable or disable `@vueuse/core` color-mode integration
    * @defaultValue `true`
@@ -96,13 +113,16 @@ export const NuxtUIPlugin = createUnplugin<NuxtUIOptions | undefined>((_options 
   options.theme = options.theme || {}
   options.theme.colors = resolveColors(options.theme.colors)
 
-  const appConfig = defu({ ui: options.ui, colorMode: options.colorMode, icon: options.icon }, { ui: getDefaultConfig(options.theme) })
+  // `clientBundle` is a build-time concern, so keep it out of the runtime app config.
+  const { clientBundle, ...icon } = options.icon || {}
+  const appConfig = defu({ ui: options.ui, colorMode: options.colorMode, icon }, { ui: getDefaultConfig(options.theme) })
 
   return [
     NuxtEnvironmentPlugin(options),
     ComponentImportPlugin(options, meta),
     AutoImportPlugin(options, meta),
     tailwind(),
+    IconsPlugin(options, appConfig),
     PluginsPlugin(options),
     TemplatePlugin(options, appConfig),
     AppConfigPlugin(options, appConfig),

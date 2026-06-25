@@ -54,11 +54,13 @@ export default function PluginsPlugin(options: NuxtUIOptions) {
       })
 
       return `
+        import __nuxt_ui_icons__ from "virtual:nuxt-ui-icons"
         ${plugins.map(p => `import ${genSafeVariableName(p)} from "${p}"`).join('\n')}
         ${proseImports.map(c => `import ${c.name} from "${c.path}"`).join('\n')}
 
 export default {
   install (app, pluginOptions = {}) {
+    app.use(__nuxt_ui_icons__, pluginOptions)
 ${plugins.map(p => `    app.use(${genSafeVariableName(p)}, pluginOptions)`).join('\n')}
 ${proseImports.map(c => `    app.component('${c.name}', ${c.name})`).join('\n')}
   }
