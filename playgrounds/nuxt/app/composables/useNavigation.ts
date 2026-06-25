@@ -44,6 +44,7 @@ const components = [
   'input-date',
   'input-menu',
   'input-number',
+  'input-rating',
   'input-tags',
   'input-time',
   'input',
