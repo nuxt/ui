@@ -1,5 +1,6 @@
 <script lang="ts">
-import type { RatingRootProps } from 'reka-ui'
+import type { VNode } from 'vue'
+import type { RatingRootProps, RatingRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/input-rating'
 import type { IconProps } from '../types'
@@ -7,7 +8,7 @@ import type { ComponentConfig } from '../types/tv'
 
 type InputRating = ComponentConfig<typeof theme, AppConfig, 'inputRating'>
 
-export interface InputRatingProps extends Pick<RatingRootProps, 'length' | 'step' | 'name' | 'disabled' | 'required' | 'clearable' | 'hoverable' | 'defaultValue'> {
+export interface InputRatingProps extends Pick<RatingRootProps, 'length' | 'step' | 'name' | 'disabled' | 'required' | 'clearable' | 'hoverable' | 'modelValue' | 'defaultValue'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -48,13 +49,13 @@ export interface InputRatingProps extends Pick<RatingRootProps, 'length' | 'step
   ui?: InputRating['slots']
 }
 
-export interface InputRatingEmits {
+export interface InputRatingEmits extends RatingRootEmits {
   change: [event: Event]
 }
 
 export interface InputRatingSlots {
-  /** Rendered for each star. `filled` is `false` for the empty background layer and `true` for the highlighted overlay. */
-  star(props: { index: number, filled: boolean }): any
+  /** Rendered for each item. `filled` is `false` for the empty background layer and `true` for the highlighted overlay. */
+  item?(props: { index: number, filled: boolean }): VNode[]
 }
 </script>
 
@@ -77,7 +78,7 @@ const _props = withDefaults(defineProps<InputRatingProps>(), {
   readonly: false,
   defaultValue: 0,
   orientation: 'horizontal',
-  hoverable: true,
+  hoverable: false,
   clearable: false
 })
 const emits = defineEmits<InputRatingEmits>()
@@ -85,11 +86,9 @@ defineSlots<InputRatingSlots>()
 
 const props = useComponentProps<InputRatingProps>('inputRating', _props)
 
-const modelValue = defineModel<number>()
-
 const appConfig = useAppConfig() as InputRating['AppConfig']
 
-const rootProps = useForwardProps(reactivePick(props, 'as', 'length', 'step', 'clearable', 'required', 'defaultValue'))
+const rootProps = useForwardProps(reactivePick(props, 'as', 'length', 'step', 'hoverable', 'clearable', 'required', 'modelValue', 'defaultValue'), emits)
 
 const { id, emitFormChange, emitFormInput, size, color, name, disabled: formDisabled, ariaAttrs } = useFormField<InputRatingProps>(_props)
 
@@ -120,53 +119,49 @@ function onUpdate(value: number) {
   <RatingRoot
     v-bind="{ ...rootProps, ...$attrs, ...ariaAttrs }"
     :id="id"
-    v-model="modelValue"
+    v-slot="{ items }"
     :name="name"
     :disabled="disabled"
     :aria-readonly="props.readonly || undefined"
-    :hoverable="props.hoverable && !disabled"
     :orientation="props.orientation"
     data-slot="root"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     @update:model-value="onUpdate"
   >
-    <template #default="{ items }">
-      <RatingItem
-        v-for="item in items"
-        :key="item"
-        :item="item"
-        data-slot="star"
-        :class="ui.star({ class: props.ui?.star })"
-      >
-        <template #default="{ steps }">
-          <!-- Empty icon as background -->
-          <slot name="star" :index="item" :filled="false">
-            <UIcon
-              :name="props.emptyIcon ?? starIcon"
-              data-slot="emptyIcon"
-              :class="ui.emptyIcon({ class: props.ui?.emptyIcon })"
-            />
-          </slot>
+    <RatingItem
+      v-for="item in items"
+      v-slot="{ steps }"
+      :key="item"
+      :item="item"
+      data-slot="item"
+      :class="ui.item({ class: props.ui?.item })"
+    >
+      <!-- Empty icon as background -->
+      <slot name="item" :index="item" :filled="false">
+        <UIcon
+          :name="props.emptyIcon ?? starIcon"
+          data-slot="emptyIcon"
+          :class="ui.emptyIcon({ class: props.ui?.emptyIcon })"
+        />
+      </slot>
 
-          <!-- Indicators overlaid for each step, clipped to the rated fraction -->
-          <RatingItemIndicator
-            v-for="step in steps"
-            :key="step"
-            :step="step"
-            :aria-label="`Rate ${step} ${step === 1 ? 'star' : 'stars'} out of ${props.length}`"
-            data-slot="indicator"
-            :class="ui.indicator({ class: props.ui?.indicator })"
-          >
-            <slot name="star" :index="item" :filled="true">
-              <UIcon
-                :name="starIcon"
-                data-slot="icon"
-                :class="ui.icon({ class: props.ui?.icon })"
-              />
-            </slot>
-          </RatingItemIndicator>
-        </template>
-      </RatingItem>
-    </template>
+      <!-- Indicators overlaid for each step, clipped to the rated fraction -->
+      <RatingItemIndicator
+        v-for="step in steps"
+        :key="step"
+        :step="step"
+        :aria-label="`Rate ${step} out of ${props.length}`"
+        data-slot="indicator"
+        :class="ui.indicator({ class: props.ui?.indicator })"
+      >
+        <slot name="item" :index="item" :filled="true">
+          <UIcon
+            :name="starIcon"
+            data-slot="icon"
+            :class="ui.icon({ class: props.ui?.icon })"
+          />
+        </slot>
+      </RatingItemIndicator>
+    </RatingItem>
   </RatingRoot>
 </template>

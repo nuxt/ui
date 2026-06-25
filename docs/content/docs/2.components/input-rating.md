@@ -36,32 +36,32 @@ props:
 ---
 ::
 
-### Length
-
-Use the `length` prop to set the number of stars. Defaults to `5`.
-
-::component-code
----
-external:
-  - modelValue
-props:
-  length: 10
-  modelValue: 7.5
-  step: 0.5
----
-::
-
 ### Step
 
 Use the `step` prop to control the granularity of each star. Set it to `0.5` to allow half-star ratings.
 
 ::component-code
 ---
-external:
-  - modelValue
+ignore:
+  - defaultValue
 props:
   step: 0.5
-  modelValue: 3.5
+  defaultValue: 3.5
+---
+::
+
+### Length
+
+Use the `length` prop to set the number of stars. Defaults to `5`.
+
+::component-code
+---
+ignore:
+  - defaultValue
+props:
+  length: 10
+  step: 0.5
+  defaultValue: 7.5
 ---
 ::
 
@@ -71,25 +71,25 @@ Use the `clearable` prop to allow users to clear the rating by clicking on the c
 
 ::component-code
 ---
-external:
-  - modelValue
+ignore:
+  - defaultValue
 props:
   clearable: true
-  modelValue: 3
+  defaultValue: 3
 ---
 ::
 
 ### Hoverable
 
-Use the `hoverable` prop to control whether the rating previews the value when hovering over the stars. Defaults to `true`.
+Use the `hoverable` prop to control whether the rating previews the value when hovering over the stars. Defaults to `false`.
 
 ::component-code
 ---
-external:
-  - modelValue
+ignore:
+  - defaultValue
 props:
-  hoverable: false
-  modelValue: 3
+  hoverable: true
+  defaultValue: 3
 ---
 ::
 
@@ -99,11 +99,11 @@ Use the `icon` prop to customize the icon used for stars. Defaults to `i-lucide-
 
 ::component-code
 ---
-external:
-  - modelValue
+ignore:
+  - defaultValue
 props:
   icon: 'i-lucide-heart'
-  modelValue: 4
+  defaultValue: 4
 ---
 ::
 
@@ -125,12 +125,12 @@ Use the `empty-icon` prop to customize the icon used for empty stars. If not pro
 
 ::component-code
 ---
-external:
-  - modelValue
+ignore:
+  - defaultValue
 props:
-  icon: 'i-lucide-star'
-  emptyIcon: 'i-lucide-star-off'
-  modelValue: 3
+  emptyIcon: 'i-ph-star'
+  icon: 'i-ph-star-fill'
+  defaultValue: 3
 ---
 ::
 
@@ -140,11 +140,11 @@ Use the `color` prop to change the color of the filled stars.
 
 ::component-code
 ---
-external:
-  - modelValue
+ignore:
+  - defaultValue
 props:
-  color: primary
-  modelValue: 4
+  color: neutral
+  defaultValue: 4
 ---
 ::
 
@@ -154,6 +154,8 @@ Use the `size` prop to change the size of the stars.
 
 ::component-code
 ---
+ignore:
+  - defaultValue
 items:
   size:
     - xs
@@ -161,11 +163,10 @@ items:
     - md
     - lg
     - xl
-external:
-  - modelValue
+  - defaultValue
 props:
-  size: md
-  modelValue: 4
+  size: xl
+  defaultValue: 4
 ---
 ::
 
@@ -175,11 +176,11 @@ Use the `orientation` prop to change the orientation of the rating. Defaults to 
 
 ::component-code
 ---
-external:
-  - modelValue
+ignore:
+  - defaultValue
 props:
-  orientation: horizontal
-  modelValue: 4
+  orientation: vertical
+  defaultValue: 4
 ---
 ::
 
@@ -189,11 +190,11 @@ Use the `disabled` prop to disable the InputRating component. When disabled, the
 
 ::component-code
 ---
-external:
-  - modelValue
+ignore:
+  - defaultValue
 props:
   disabled: true
-  modelValue: 3
+  defaultValue: 3
 ---
 ::
 
@@ -203,11 +204,11 @@ Use the `readonly` prop to display a rating without allowing user interaction. U
 
 ::component-code
 ---
-external:
-  - modelValue
+ignore:
+  - defaultValue
 props:
   readonly: true
-  modelValue: 4.5
+  defaultValue: 4.5
 ---
 ::
 

@@ -22,7 +22,7 @@ describe('InputRating', () => {
     ['with readonly', { props: { readonly: true, modelValue: 4 } }],
     ['with disabled', { props: { disabled: true, modelValue: 3 } }],
     ['with clearable', { props: { clearable: true, modelValue: 3 } }],
-    ['with hoverable false', { props: { hoverable: false, modelValue: 3 } }],
+    ['with hoverable', { props: { hoverable: true, modelValue: 3 } }],
     ['with icon', { props: { icon: 'i-lucide-heart', modelValue: 4 } }],
     ['with emptyIcon', { props: { emptyIcon: 'i-lucide-star-off', modelValue: 3 } }],
     ['with id', { props: { id: 'rating-id', modelValue: 3 } }],
@@ -34,7 +34,7 @@ describe('InputRating', () => {
     ['with class', { props: { class: 'inline-flex', modelValue: 3 } }],
     ['with ui', { props: { ui: { root: 'gap-1' }, modelValue: 3 } }],
     // Slots
-    ['with star slot', { slots: { star: () => '⭐' }, props: { modelValue: 3 } }]
+    ['with item slot', { slots: { item: () => '⭐' }, props: { modelValue: 3 } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: InputRatingProps, slots?: Partial<InputRatingSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, InputRating)
     expect(html).toMatchSnapshot()
