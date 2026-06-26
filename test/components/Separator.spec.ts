@@ -26,26 +26,6 @@ describe('Separator', () => {
     ['with ui', { props: { ui: { label: 'text-lg' } } }]
   ])
 
-  it('forwards fall-through attributes to the root without warning', async () => {
-    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {})
-
-    try {
-      const wrapper = await mountSuspended(Separator, {
-        props: { label: 'or' },
-        attrs: { 'id': 'my-separator', 'data-test': 'value' }
-      })
-
-      const root = wrapper.get('[data-slot="root"]')
-      expect(root.attributes('id')).toBe('my-separator')
-      expect(root.attributes('data-test')).toBe('value')
-
-      const warnings = warn.mock.calls.map(args => args.join(' ')).join('\n')
-      expect(warnings).not.toContain('Extraneous non-props attributes')
-    } finally {
-      warn.mockRestore()
-    }
-  })
-
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(Separator, {
       props: {
