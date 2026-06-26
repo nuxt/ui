@@ -711,6 +711,21 @@ In this example, the avatar is computed from the `value` property of the selecte
 You can also use the `#leading` slot to display the selected avatar.
 ::
 
+### With badge in items
+
+You can use the `badge` property to display a [Badge](/docs/components/badge) inside the items.
+
+::component-example
+---
+collapse: true
+name: 'select-items-badge-example'
+---
+::
+
+::tip
+You can also use the `#leading` slot to display the selected badge.
+::
+
 ### With chip in items
 
 You can use the `chip` property to display a [Chip](/docs/components/chip) inside the items.

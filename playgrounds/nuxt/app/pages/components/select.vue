@@ -16,7 +16,11 @@ const attrs = reactive({
 const fruits = ['Apple', 'Banana', 'Blueberry', 'Grapes', 'Pineapple']
 const vegetables = ['Aubergine', 'Broccoli', 'Carrot', 'Courgette', 'Leek']
 
-const items = [[{ label: 'Fruits', type: 'label' as const }, ...fruits], [{ label: 'Vegetables', type: 'label' as const }, ...vegetables]]
+const items = [[{ label: 'Fruits', type: 'label' as const }, ...fruits], [{ label: 'Vegetables', type: 'label' as const }, ...vegetables]] satisfies SelectItem[][]
+const itemsBadges = [
+  [{ label: 'Fruits', type: 'label' }, ...fruits.map(f => ({ label: f, badge: Math.floor(Math.random() * 10) + 1 }))],
+  [{ label: 'Vegetables', type: 'label' }, ...vegetables.map(f => ({ label: f, badge: Math.floor(Math.random() * 10) + 1 }))]
+] satisfies SelectItem[][]
 
 const statuses = [{
   label: 'Backlog',
@@ -76,6 +80,7 @@ const valueMultiple = ref([fruits[0]!, vegetables[0]!])
     <USelect :default-value="value" :items="items" v-bind="props" />
     <USelect v-model="valueMultiple" multiple placeholder="Multiple" :items="items" v-bind="props" />
     <USelect :default-value="valueMultiple" multiple placeholder="Multiple" :items="items" v-bind="props" />
+    <USelect multiple placeholder="Multiple with badges" :items="itemsBadges" v-bind="props" />
     <USelect :default-value="value" :items="items" v-bind="props" :content="{ position: 'item-aligned' }" />
     <USelect placeholder="Highlight" highlight :items="items" v-bind="props" />
     <USelect placeholder="Disabled" disabled :items="items" v-bind="props" />

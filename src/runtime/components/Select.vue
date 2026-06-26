@@ -4,7 +4,7 @@ import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/select'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
-import type { AvatarProps, ChipProps, IconProps, InputProps } from '../types'
+import type { AvatarProps, BadgeProps, ChipProps, IconProps, InputProps } from '../types'
 import type { ModelModifiers, ApplyModifiers } from '../types/input'
 import type { ButtonHTMLAttributes } from '../types/html'
 import type { AcceptableValue, ArrayOrNested, GetItemKeys, GetModelValue, NestedItem, EmitsToProps } from '../types/utils'
@@ -24,6 +24,11 @@ export type SelectItem = SelectValue | {
   avatar?: AvatarProps
   chip?: ChipProps
   /**
+   * Display a badge on the item.
+   * `{ color: 'neutral', variant: 'soft', size: 'sm' }`{lang="ts-type"}
+   */
+  badge?: string | number | BadgeProps
+  /**
    * The item type.
    * @defaultValue 'item'
    */
@@ -32,7 +37,7 @@ export type SelectItem = SelectValue | {
   disabled?: boolean
   onSelect?: (e: Event) => void
   class?: any
-  ui?: Pick<Select['slots'], 'label' | 'separator' | 'item' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemLeadingChipSize' | 'itemLeadingChip' | 'itemWrapper' | 'itemLabel' | 'itemDescription' | 'itemTrailing' | 'itemTrailingIcon'>
+  ui?: Pick<Select['slots'], 'label' | 'separator' | 'item' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemLeadingChipSize' | 'itemLeadingChip' | 'itemWrapper' | 'itemLabel' | 'itemDescription' | 'itemTrailing' | 'itemTrailingIcon' | 'itemBadge' | 'itemBadgeSize'>
   [key: string]: any
 }
 
@@ -402,6 +407,15 @@ defineExpose({
                         <slot name="item-label" :item="(item as NestedItem<T>)" :index="index">
                           {{ isSelectItem(item) ? get(item, props.labelKey as string) : item }}
                         </slot>
+                        <UBadge
+                          v-if="isSelectItem(item) && item.badge !== undefined && item.badge !== null"
+                          color="neutral"
+                          variant="outline"
+                          :size="((item.ui?.itemBadgeSize || ui.itemBadgeSize()) as BadgeProps['size'])"
+                          v-bind="(typeof item.badge === 'string' || typeof item.badge === 'number') ? { label: item.badge } : item.badge"
+                          data-slot="itemBadge"
+                          :class="ui.itemBadge({ class: [item.ui?.itemBadge] })"
+                        />
                       </SelectItemText>
 
                       <span v-if="isSelectItem(item) && (get(item, props.descriptionKey as string) || !!slots['item-description'])" data-slot="itemDescription" :class="ui.itemDescription({ class: [props.ui?.itemDescription, isSelectItem(item) && item.ui?.itemDescription] })">
