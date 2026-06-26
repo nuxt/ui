@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, vi } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { renderEach } from '../component-render'
@@ -25,6 +25,24 @@ describe('Separator', () => {
     ['with class', { props: { class: 'flex-row-reverse' } }],
     ['with ui', { props: { ui: { label: 'text-lg' } } }]
   ])
+
+  it('forwards fall-through attributes to the root without warning', async () => {
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {})
+
+    const wrapper = await mountSuspended(Separator, {
+      props: { label: 'or' },
+      attrs: { 'id': 'my-separator', 'data-test': 'value' }
+    })
+
+    const root = wrapper.get('[data-slot="root"]')
+    expect(root.attributes('id')).toBe('my-separator')
+    expect(root.attributes('data-test')).toBe('value')
+
+    const warnings = warn.mock.calls.map(args => args.join(' ')).join('\n')
+    expect(warnings).not.toContain('Extraneous non-props attributes')
+
+    warn.mockRestore()
+  })
 
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(Separator, {
