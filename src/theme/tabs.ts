@@ -10,6 +10,7 @@ export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: 'flex items-center gap-2',
     list: 'relative flex p-1 group',
+    tablist: 'flex min-w-0',
     indicator: 'absolute transition-[translate,width] duration-200',
     trigger: ['group relative inline-flex items-center min-w-0 data-[state=inactive]:text-muted hover:data-[state=inactive]:not-disabled:text-default font-medium rounded-md disabled:cursor-not-allowed disabled:opacity-75', options.theme.transitions && 'transition-colors'],
     leadingIcon: 'shrink-0',
@@ -18,7 +19,8 @@ export default (options: Required<ModuleOptions>) => ({
     label: 'truncate',
     trailingBadge: 'shrink-0',
     trailingBadgeSize: 'sm',
-    content: 'w-full rounded-md focus-visible:outline-3'
+    content: 'w-full rounded-md focus-visible:outline-3',
+    more: ''
   },
   variants: {
     color: {
@@ -45,12 +47,29 @@ export default (options: Required<ModuleOptions>) => ({
       horizontal: {
         root: 'flex-col',
         list: 'w-full',
+        tablist: 'w-full flex-row',
         indicator: 'left-0 w-(--reka-tabs-indicator-size) translate-x-(--reka-tabs-indicator-position)',
         trigger: 'justify-center'
       },
       vertical: {
         list: 'flex-col',
+        tablist: 'w-full flex-col',
         indicator: 'top-0 h-(--reka-tabs-indicator-size) translate-y-(--reka-tabs-indicator-position)'
+      }
+    },
+    overflow: {
+      scroll: {
+        trigger: 'shrink-0 grow-0'
+      },
+      wrap: {
+        tablist: 'flex-wrap',
+        trigger: 'shrink-0 grow-0',
+        indicator: 'inset-auto translate-none transition-[top,left,width,height] duration-200'
+      },
+      collapse: {
+        tablist: 'flex-1 min-w-0 min-h-0',
+        indicator: 'inset-auto translate-none transition-[top,left,width,height] duration-200',
+        more: 'grow-0 shrink-0'
       }
     },
     size: {
@@ -110,6 +129,20 @@ export default (options: Required<ModuleOptions>) => ({
       list: 'border-s -ms-px',
       indicator: '-start-px w-px',
       trigger: ssr('after:inset-y-0', 'after:-start-[calc(var(--spacing)+1px)]', 'after:w-px')
+    }
+  }, {
+    orientation: 'horizontal',
+    overflow: 'scroll',
+    class: {
+      list: 'overflow-x-auto',
+      tablist: 'w-max shrink-0'
+    }
+  }, {
+    orientation: 'vertical',
+    overflow: 'scroll',
+    class: {
+      list: 'overflow-y-auto',
+      tablist: 'h-max shrink-0'
     }
   }, ...(options.theme.colors || []).map((color: string) => ({
     color,

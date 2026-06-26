@@ -217,6 +217,30 @@ props:
 ---
 ::
 
+### Overflow :badge{label="Soon" class="align-text-top"}
+
+Use the `overflow` prop to control how the tab list handles items that don't fit in the available space:
+
+- `scroll`{lang="ts-type"} enables scrolling along the list axis.
+- `wrap`{lang="ts-type"} allows tabs to wrap onto multiple lines.
+- `collapse`{lang="ts-type"} hides overflowing tabs behind a **More** dropdown.
+
+When omitted, no overflow handling is applied.
+
+### Scroll
+
+:component-example{name="tabs-overflow-scroll-example"}
+
+### Wrap
+
+:component-example{name="tabs-overflow-wrap-example"}
+
+### Collapse
+
+Use the `more-label` and `more-icon` props to customize the overflow trigger. You can also use the `#more` slot to fully customize it.
+
+:component-example{name="tabs-overflow-collapse-example"}
+
 ## Examples
 
 ### Control active item
