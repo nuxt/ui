@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from 'vitest'
+import { describe, it, expect } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { renderEach } from '../component-render'
