@@ -152,7 +152,7 @@ function onClick() {
     :compute-position-config="computePositionConfig"
     :editor="props.editor"
     :on-node-change="onNodeChange"
-    data-slot="root"
+    :data-slot="($attrs['data-slot'] as string | undefined) ?? 'root'"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     @click="onClick"
   >

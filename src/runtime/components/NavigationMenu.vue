@@ -513,6 +513,7 @@ function onLinkTrailingClick(e: Event, item: NavigationMenuItem) {
 
   <NavigationMenuRoot
     v-bind="{
+      'data-slot': 'root',
       ...rootProps,
       ...(props.orientation === 'horizontal' ? {
         modelValue: props.modelValue as string,
@@ -521,7 +522,6 @@ function onLinkTrailingClick(e: Event, item: NavigationMenuItem) {
       ...$attrs
     }"
     :data-collapsed="props.collapsed"
-    data-slot="root"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
   >
     <slot name="list-leading" />

@@ -57,9 +57,9 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dashboardPan
   <div
     :id="id"
     ref="el"
+    data-slot="root"
     v-bind="$attrs"
     :data-dragging="isDragging"
-    data-slot="root"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     :style="[size ? { '--width': `${size}${dashboardContext.unit}` } : undefined]"
   >

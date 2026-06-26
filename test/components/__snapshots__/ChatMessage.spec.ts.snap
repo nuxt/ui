@@ -30,7 +30,7 @@ exports[`ChatMessage > renders with avatar correctly 1`] = `
 "<article data-role="user" data-slot="root" class="group/message relative w-full scroll-mt-4 sm:scroll-mt-6">
   <!--v-if-->
   <div data-slot="container" class="relative flex items-start gap-3 pb-8">
-    <div data-slot="leading" class="inline-flex items-center justify-center min-h-6"><span data-slot="root" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img src="https://github.com/benjamincanac.png" width="32" height="32" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span></div>
+    <div data-slot="leading" class="inline-flex items-center justify-center min-h-6"><span data-slot="leadingAvatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img src="https://github.com/benjamincanac.png" width="32" height="32" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span></div>
     <div data-slot="body" class="min-w-0">
       <div data-slot="content" class="relative text-pretty wrap-break-word *:first:mt-0 *:last:mb-0 space-y-4 w-full">Hello, how are you?</div>
       <!--v-if-->

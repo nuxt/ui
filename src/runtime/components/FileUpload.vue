@@ -355,7 +355,7 @@ defineExpose({
     </template>
   </DefineFilesTemplate>
 
-  <Primitive :as="props.as" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <Primitive :as="props.as" :data-slot="($attrs['data-slot'] as string | undefined) ?? 'root'" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <slot :open="open" :remove-file="removeFile" :ui="ui">
       <component
         :is="variant === 'button' ? 'button' : 'div'"
@@ -414,7 +414,7 @@ defineExpose({
       :multiple="(multiple as boolean)"
       :required="props.required"
       :disabled="disabled"
-      v-bind="{ ...$attrs, ...ariaAttrs }"
+      v-bind="{ ...$attrs, ...ariaAttrs, 'data-slot': undefined }"
     />
   </Primitive>
 </template>

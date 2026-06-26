@@ -91,7 +91,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dashboardNav
     </slot>
   </DefineToggleTemplate>
 
-  <Primitive :as="props.as" v-bind="$attrs" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <Primitive :as="props.as" data-slot="root" v-bind="$attrs" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <div data-slot="left" :class="ui.left({ class: props.ui?.left })">
       <ReuseToggleTemplate v-if="props.toggleSide === 'left'" />
 

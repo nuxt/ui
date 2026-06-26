@@ -77,7 +77,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.user || {}) 
     :as="props.as"
     v-bind="!props.to ? $attrs : {}"
     :data-orientation="props.orientation"
-    data-slot="root"
+    :data-slot="($attrs['data-slot'] as string | undefined) ?? 'root'"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     @click="props.onClick"
   >
@@ -99,7 +99,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.user || {}) 
       <ULink
         v-if="props.to"
         :aria-label="props.name"
-        v-bind="{ to: props.to, target: props.target, ...$attrs }"
+        v-bind="{ 'to': props.to, 'target': props.target, ...$attrs, 'data-slot': undefined }"
         :class="prefix('focus:outline-none peer')"
         raw
       >

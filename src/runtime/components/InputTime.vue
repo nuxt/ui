@@ -196,14 +196,13 @@ defineExpose({
   </DefineSegmentsTemplate>
 
   <TimeField.Root
-    v-bind="{ ...rootProps, ...$attrs, ...ariaAttrs }"
+    v-bind="{ 'data-slot': 'base', ...rootProps, ...$attrs, ...ariaAttrs }"
     :id="id"
     v-slot="{ segments }"
     :name="name"
     :disabled="disabled"
     :model-value="(props.modelValue as TimeValue)"
     :default-value="(props.defaultValue as TimeValue)"
-    data-slot="base"
     :class="ui.base({ class: [props.ui?.base, props.class] })"
     @update:model-value="onUpdate"
     @blur="onBlur"

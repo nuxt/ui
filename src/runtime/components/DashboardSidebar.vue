@@ -174,10 +174,10 @@ function toggleOpen() {
   <div
     :id="id"
     ref="el"
+    data-slot="root"
     v-bind="$attrs"
     :data-collapsed="isCollapsed"
     :data-dragging="isDragging"
-    data-slot="root"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     :style="{ '--width': `${size || 0}${dashboardContext.unit}` }"
   >

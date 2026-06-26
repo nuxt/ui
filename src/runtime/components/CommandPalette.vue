@@ -583,7 +583,7 @@ function onSelect(e: Event, item: T) {
     </ULink>
   </DefineItemTemplate>
 
-  <ListboxRoot v-bind="{ ...rootProps, ...$attrs }" ref="rootRef" :selection-behavior="props.selectionBehavior" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <ListboxRoot v-bind="{ 'data-slot': 'root', ...rootProps, ...$attrs }" ref="rootRef" :selection-behavior="props.selectionBehavior" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <ListboxFilter v-if="props.input" v-model="searchTerm" as-child>
       <UInput
         variant="none"

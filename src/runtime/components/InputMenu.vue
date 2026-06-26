@@ -633,7 +633,7 @@ defineExpose({
     v-bind="rootProps"
     :name="name"
     :disabled="disabled"
-    data-slot="root"
+    :data-slot="($attrs['data-slot'] as string | undefined) ?? 'root'"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     :as-child="!!props.multiple && !isAutocomplete"
     ignore-filter
@@ -684,7 +684,7 @@ defineExpose({
         v-else
         :id="id"
         ref="inputRef"
-        v-bind="{ ...(!isAutocomplete ? { displayValue } : {}), ...$attrs, ...ariaAttrs }"
+        v-bind="{ ...(!isAutocomplete ? { displayValue } : {}), ...$attrs, ...ariaAttrs, 'data-slot': undefined }"
         :type="props.type"
         :placeholder="props.placeholder"
         :required="props.required"

@@ -185,7 +185,7 @@ defineExpose({
 </script>
 
 <template>
-  <Primitive :as="props.as" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <Primitive :as="props.as" :data-slot="($attrs['data-slot'] as string | undefined) ?? 'root'" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <input
       :id="id"
       ref="inputRef"
@@ -193,12 +193,12 @@ defineExpose({
       :value="modelValue"
       :name="name"
       :placeholder="props.placeholder"
-      data-slot="base"
       :class="ui.base({ class: props.ui?.base })"
       :disabled="disabled"
       :required="props.required"
       :autocomplete="props.autocomplete"
       v-bind="{ ...$attrs, ...ariaAttrs }"
+      data-slot="base"
       @input="onInput"
       @blur="onBlur"
       @change="onChange"

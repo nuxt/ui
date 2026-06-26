@@ -270,8 +270,8 @@ const menuProps = toRef(() => defu(props.menu, {
   <Primitive
     v-if="props.collapsible === 'none'"
     :as="props.as"
-    v-bind="$attrs"
     data-slot="root"
+    v-bind="$attrs"
     :data-variant="props.variant"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
   >
@@ -282,8 +282,8 @@ const menuProps = toRef(() => defu(props.menu, {
   <template v-else>
     <Primitive
       :as="props.as"
-      v-bind="$attrs"
       data-slot="root"
+      v-bind="$attrs"
       :data-state="state"
       :data-collapsible="state === 'collapsed' ? props.collapsible : undefined"
       :data-variant="props.variant"

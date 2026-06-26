@@ -354,10 +354,9 @@ const filteredItems = computed(() => filteredGroups.value.flatMap(group => group
 
   <ListboxRoot
     :id="id"
-    v-bind="{ ...rootProps, ...$attrs, ...ariaAttrs }"
+    v-bind="{ 'data-slot': 'root', ...rootProps, ...$attrs, ...ariaAttrs }"
     :disabled="disabled"
     :name="name"
-    data-slot="root"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     @update:model-value="onUpdate"
   >
