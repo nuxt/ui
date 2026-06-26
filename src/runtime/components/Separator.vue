@@ -104,7 +104,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.separator ||
     </div>
   </DefineContainer>
 
-  <Separator v-bind="{ 'data-slot': 'root', ...rootProps, ...$attrs }" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <Separator v-bind="{ ...rootProps, ...$attrs }" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <ReuseContainer v-if="hasContent && props.position === 'start'" />
 
     <div data-slot="border" :class="ui.border({ class: props.ui?.border })" />
