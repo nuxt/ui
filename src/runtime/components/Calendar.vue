@@ -6,7 +6,9 @@ import type { DateValue } from '@internationalized/date'
 import { getLocalTimeZone, today } from '@internationalized/date'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/calendar'
-import type { ButtonProps, IconProps, LinkPropsKeys } from '../types'
+import type { ButtonProps } from './Button.vue'
+import type { IconProps } from './Icon.vue'
+import type { LinkPropsKeys } from './Link.vue'
 import type { ComponentConfig } from '../types/tv'
 
 type Calendar = ComponentConfig<typeof theme, AppConfig, 'calendar'>

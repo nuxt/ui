@@ -4,7 +4,9 @@ import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { ContentNavigationItem } from '@nuxt/content'
 import theme from '#build/ui/content/content-navigation'
-import type { BadgeProps, IconProps, LinkProps } from '../../types'
+import type { BadgeProps } from '../Badge.vue'
+import type { IconProps } from '../Icon.vue'
+import type { LinkProps } from '../Link.vue'
 import type { ComponentConfig } from '../../types/tv'
 
 type ContentNavigation = ComponentConfig<typeof theme, AppConfig, 'contentNavigation'>
