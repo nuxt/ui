@@ -104,7 +104,7 @@ const appConfig = useAppConfig() as Accordion['AppConfig']
 const rootProps = useForwardProps(reactivePick(props, 'as', 'collapsible', 'defaultValue', 'disabled', 'modelValue', 'unmountOnHide'), emits)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.accordion || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.accordion || {}) })({
   disabled: props.disabled
 }))
 </script>

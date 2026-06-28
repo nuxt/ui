@@ -101,7 +101,7 @@ const { emitFormFocus, emitFormBlur, emitFormInput, emitFormChange, size, color,
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.textarea || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.textarea || {}) })({
   color: color.value ?? props.color,
   variant: props.variant,
   size: size?.value ?? props.size,

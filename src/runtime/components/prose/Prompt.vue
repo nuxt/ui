@@ -51,7 +51,7 @@ const { copy, copied } = useClipboard()
 const appConfig = useAppConfig() as ProsePrompt['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.prompt || {}) })())
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.prose?.prompt || {}) })())
 
 function getPromptText() {
   const children = slots.default?.()

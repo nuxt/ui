@@ -87,7 +87,7 @@ const appConfig = useAppConfig() as PageSection['AppConfig']
 const prefix = usePrefix()
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pageSection || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.pageSection || {}) })({
   orientation: props.orientation,
   reverse: props.reverse,
   title: !!props.title || !!slots.title,

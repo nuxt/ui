@@ -134,7 +134,7 @@ const appConfig = useAppConfig() as PricingPlan['AppConfig']
 const [DefinePriceTemplate, ReusePriceTemplate] = createReusableTemplate()
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pricingPlan || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.pricingPlan || {}) })({
   orientation: props.orientation,
   variant: props.variant,
   highlight: props.highlight,

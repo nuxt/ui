@@ -108,7 +108,7 @@ const appConfig = useAppConfig() as Toast['AppConfig']
 const rootProps = useForwardProps(reactivePick(props, 'as', 'defaultOpen', 'open', 'duration', 'type'), emits)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.toast || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.toast || {}) })({
   color: props.color,
   orientation: props.orientation,
   title: !!props.title || !!slots.title

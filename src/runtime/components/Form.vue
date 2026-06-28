@@ -105,7 +105,7 @@ const props = useComponentProps<FormProps<S, T, N>>('form', _props)
 const appConfig = useAppConfig() as FormConfig['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.form || {}) }))
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.form || {}) }))
 
 const formId = props.id ?? useId() as string
 const formRef = useTemplateRef('formRef')

@@ -88,7 +88,7 @@ const { open } = useContentSearch()
 const appConfig = useAppConfig() as ContentSearchButton['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.contentSearchButton || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.contentSearchButton || {}) })({
   collapsed: props.collapsed
 }))
 </script>

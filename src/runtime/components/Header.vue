@@ -113,7 +113,7 @@ watch(() => route.fullPath, () => {
 })
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.header || {}) })())
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.header || {}) })())
 
 const Menu = computed(() => ({
   slideover: USlideover,

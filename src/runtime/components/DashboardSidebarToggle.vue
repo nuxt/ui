@@ -52,7 +52,7 @@ const appConfig = useAppConfig() as DashboardSidebarToggle['AppConfig']
 const { sidebarOpen, toggleSidebar } = useDashboard({ sidebarOpen: ref(false), toggleSidebar: () => {} })
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dashboardSidebarToggle || {}) }))
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.dashboardSidebarToggle || {}) }))
 </script>
 
 <template>

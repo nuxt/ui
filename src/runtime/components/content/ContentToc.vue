@@ -112,7 +112,7 @@ const [DefineTriggerTemplate, ReuseTriggerTemplate] = createReusableTemplate<{ o
 const [DefineContentTemplate, ReuseContentTemplate] = createReusableTemplate()
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.contentToc || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.contentToc || {}) })({
   color: props.color,
   highlight: props.highlight,
   highlightVariant: props.highlightVariant,

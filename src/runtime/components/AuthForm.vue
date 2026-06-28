@@ -151,7 +151,7 @@ const { t } = useLocale()
 const appConfig = useAppConfig() as AuthForm['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.authForm || {}) })())
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.authForm || {}) })())
 
 const formRef = useTemplateRef('formRef')
 const passwordVisibility = reactive<Record<string, boolean>>(

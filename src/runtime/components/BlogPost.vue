@@ -88,7 +88,7 @@ const formatter = useDateFormatter(locale.value.code)
 const prefix = usePrefix()
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.blogPost || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.blogPost || {}) })({
   orientation: props.orientation,
   variant: props.variant,
   image: !!props.image,

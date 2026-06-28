@@ -108,7 +108,7 @@ const [DefineSegmentsTemplate, ReuseSegmentsTemplate] = createReusableTemplate<{
 const inputSize = computed(() => fieldGroupSize.value || formFieldSize.value)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.inputDate || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.inputDate || {}) })({
   color: color.value ?? props.color,
   variant: props.variant,
   size: inputSize.value ?? props.size,

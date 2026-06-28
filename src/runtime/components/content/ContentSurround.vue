@@ -84,7 +84,7 @@ const [DefineLinkTemplate, ReuseLinkTemplate] = createReusableTemplate<{ link?: 
 })
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.contentSurround || {}) })())
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.contentSurround || {}) })())
 
 // eslint-disable-next-line vue/no-dupe-keys
 const prevIcon = computed(() => props.prevIcon || (dir.value === 'rtl' ? appConfig.ui.icons.arrowRight : appConfig.ui.icons.arrowLeft))

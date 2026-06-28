@@ -54,7 +54,7 @@ const { getKbdKey } = useKbd()
 const appConfig = useAppConfig() as Kbd['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.kbd || {}) }))
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.kbd || {}) }))
 </script>
 
 <template>

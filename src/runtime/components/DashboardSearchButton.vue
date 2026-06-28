@@ -88,7 +88,7 @@ const appConfig = useAppConfig() as DashboardSearchButton['AppConfig']
 const { toggleSearch } = useDashboard({ toggleSearch: () => {} })
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dashboardSearchButton || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.dashboardSearchButton || {}) })({
   collapsed: props.collapsed
 }))
 </script>

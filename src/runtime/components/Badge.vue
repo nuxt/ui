@@ -63,7 +63,7 @@ const { orientation, size: fieldGroupSize } = useFieldGroup<BadgeProps>(_props)
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.badge || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.badge || {}) })({
   color: props.color,
   variant: props.variant,
   size: fieldGroupSize.value ?? props.size,

@@ -94,7 +94,7 @@ const sliderValue = computed({
 const thumbs = computed(() => sliderValue.value?.length ?? 1)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.slider || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.slider || {}) })({
   disabled: disabled.value,
   size: size.value ?? props.size,
   color: color.value ?? props.color,

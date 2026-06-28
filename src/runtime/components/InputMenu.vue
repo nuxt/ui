@@ -318,7 +318,7 @@ const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: I
 })
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.inputMenu || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.inputMenu || {}) })({
   color: color.value ?? props.color,
   variant: props.variant,
   size: inputSize?.value ?? props.size,

@@ -290,7 +290,7 @@ const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: N
 })
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.navigationMenu || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.navigationMenu || {}) })({
   orientation: props.orientation,
   contentOrientation: props.orientation === 'vertical' ? undefined : props.contentOrientation,
   collapsed: props.collapsed,

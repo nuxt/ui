@@ -59,7 +59,7 @@ const props = useComponentProps<PageAnchorsProps<T>>('pageAnchors', _props)
 const appConfig = useAppConfig() as PageAnchors['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pageAnchors || {}) })())
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.pageAnchors || {}) })())
 </script>
 
 <template>

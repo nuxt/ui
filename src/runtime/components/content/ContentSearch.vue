@@ -184,7 +184,7 @@ const fuse = computed(() => defu({}, props.fuse, {
 } as UseFuseOptions<T>))
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.contentSearch || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.contentSearch || {}) })({
   size: props.size,
   fullscreen: props.fullscreen
 }))

@@ -96,7 +96,7 @@ const { id, emitFormChange, emitFormInput, size, color, name, disabled: formDisa
 const disabled = computed(() => formDisabled.value || props.readonly)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.inputRating || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.inputRating || {}) })({
   size: size.value ?? props.size,
   color: color.value ?? props.color,
   orientation: props.orientation,

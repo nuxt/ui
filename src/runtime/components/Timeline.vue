@@ -92,7 +92,7 @@ const modelValue = defineModel<string | number>()
 const appConfig = useAppConfig() as Timeline['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.timeline || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.timeline || {}) })({
   orientation: props.orientation,
   size: props.size,
   color: props.color,

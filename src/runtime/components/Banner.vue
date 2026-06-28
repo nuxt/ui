@@ -90,7 +90,7 @@ const appConfig = useAppConfig() as Banner['AppConfig']
 const prefix = usePrefix()
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.banner || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.banner || {}) })({
   color: props.color,
   to: !!props.to
 }))

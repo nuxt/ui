@@ -125,7 +125,7 @@ watch(() => route.fullPath, () => {
 })
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dashboardSidebar || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.dashboardSidebar || {}) })({
   side: props.side
 }))
 
