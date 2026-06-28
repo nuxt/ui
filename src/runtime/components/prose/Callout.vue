@@ -2,7 +2,8 @@
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/prose/callout'
-import type { IconProps, LinkProps } from '../../types'
+import type { IconProps } from '../Icon.vue'
+import type { LinkProps } from '../Link.vue'
 import type { ComponentConfig } from '../../types/tv'
 
 type ProseCallout = ComponentConfig<typeof theme, AppConfig, 'callout', 'ui.prose'>

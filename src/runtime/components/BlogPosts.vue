@@ -3,7 +3,7 @@
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/blog-posts'
-import type { BlogPostProps, BlogPostSlots } from '../types'
+import type { BlogPostProps, BlogPostSlots } from './BlogPost.vue'
 import type { ComponentConfig } from '../types/tv'
 
 type BlogPosts = ComponentConfig<typeof theme, AppConfig, 'blogPosts'>

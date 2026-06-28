@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { IconifyRenderMode } from '@iconify/vue'
-import type { IconProps } from '../../types'
+import type { IconProps } from '../../components/Icon.vue'
 
 type CustomizeFn = Exclude<IconProps['customize'], boolean | null | undefined>
 </script>
