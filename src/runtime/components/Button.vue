@@ -93,7 +93,7 @@ const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponen
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({
-  extend: tv(theme),
+  extend: theme,
   ...defu({
     variants: {
       active: {

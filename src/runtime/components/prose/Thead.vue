@@ -31,7 +31,7 @@ const props = useComponentProps('prose.thead', _props)
 const appConfig = useAppConfig() as ProseThead['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.thead || {}) }))
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.prose?.thead || {}) }))
 </script>
 
 <template>

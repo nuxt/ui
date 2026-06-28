@@ -93,7 +93,7 @@ const forwardedAttrs = computed(() => {
 })
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.switch || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.switch || {}) })({
   size: size.value ?? props.size,
   color: color.value ?? props.color,
   highlight: highlight.value ?? props.highlight,

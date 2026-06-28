@@ -199,7 +199,7 @@ const selectSize = computed(() => fieldGroupSize.value || formFieldSize.value)
 const isItemAligned = computed(() => position.value === 'item-aligned')
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.select || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.select || {}) })({
   color: color.value ?? props.color,
   variant: props.variant,
   size: selectSize.value ?? props.size,

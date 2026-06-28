@@ -125,7 +125,7 @@ const { orientation, size: fieldGroupSize } = useFieldGroup<InputNumberProps<T, 
 const inputSize = computed(() => fieldGroupSize.value || formFieldSize.value)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.inputNumber || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.inputNumber || {}) })({
   color: color.value ?? props.color,
   variant: props.variant,
   size: inputSize.value ?? props.size,

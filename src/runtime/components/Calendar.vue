@@ -295,7 +295,7 @@ const prevLabel = computed(() => view.value === 'day' ? t('calendar.prevMonth') 
 const nextLabel = computed(() => view.value === 'day' ? t('calendar.nextMonth') : t('calendar.nextYear'))
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.calendar || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.calendar || {}) })({
   color: props.color,
   size: props.size,
   variant: props.variant,

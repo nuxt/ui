@@ -51,7 +51,7 @@ const appConfig = useAppConfig() as DashboardSidebarCollapse['AppConfig']
 const { sidebarCollapsed, collapseSidebar } = useDashboard({ sidebarCollapsed: ref(false), collapseSidebar: () => {} })
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dashboardSidebarCollapse || {}) }))
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.dashboardSidebarCollapse || {}) }))
 </script>
 
 <template>

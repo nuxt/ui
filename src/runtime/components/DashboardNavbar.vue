@@ -77,7 +77,7 @@ const dashboardContext = useDashboard({})
 const [DefineToggleTemplate, ReuseToggleTemplate] = createReusableTemplate()
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dashboardNavbar || {}) })())
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.dashboardNavbar || {}) })())
 </script>
 
 <template>

@@ -67,7 +67,7 @@ const props = useComponentProps('empty', _props)
 const appConfig = useAppConfig() as Empty['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.empty || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.empty || {}) })({
   variant: props.variant,
   size: props.size
 }))

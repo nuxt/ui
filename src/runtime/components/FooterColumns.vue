@@ -69,7 +69,7 @@ const props = useComponentProps<FooterColumnsProps<T>>('footerColumns', _props)
 const appConfig = useAppConfig() as FooterColumns['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.footerColumns || {}) })())
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.footerColumns || {}) })())
 </script>
 
 <template>

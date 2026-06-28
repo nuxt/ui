@@ -142,7 +142,7 @@ const contentProps = toRef(() => props.content)
 const getProxySlots = () => omit(slots, ['default'])
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.contextMenu || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.contextMenu || {}) })({
   size: props.size
 }))
 </script>

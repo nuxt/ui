@@ -71,7 +71,7 @@ const getProxySlots = () => omit(slots, ['default'])
 const appConfig = useAppConfig() as PricingPlans['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pricingPlans || {}) }))
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.pricingPlans || {}) }))
 
 const count = computed(() => props.plans?.length || slots.default?.()?.flatMap(mapSlot).filter(Boolean)?.length || 3)
 

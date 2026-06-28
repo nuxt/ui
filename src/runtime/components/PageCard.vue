@@ -111,7 +111,7 @@ watch(() => props.spotlight, (value) => {
 }, { immediate: true })
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pageCard || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.pageCard || {}) })({
   orientation: props.orientation,
   reverse: props.reverse,
   variant: props.variant,

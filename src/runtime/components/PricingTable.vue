@@ -134,7 +134,7 @@ const formatSlotName = (item: { id?: string, title: string }): string => {
 }
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pricingTable || {}) })())
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.pricingTable || {}) })())
 
 const [DefineTierTemplate, ReuseTierTemplate] = createReusableTemplate<{ tier: PricingTableTier }>({
   props: {

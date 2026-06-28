@@ -75,7 +75,7 @@ const appConfig = useAppConfig() as Avatar['AppConfig']
 const { size, color } = useAvatarGroup(_props)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.avatar || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.avatar || {}) })({
   size: size.value ?? props.size,
   color: color.value ?? props.color
 }))

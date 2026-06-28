@@ -148,7 +148,7 @@ const options = computed(() => defu((props as any).options, {
 }))
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.editorToolbar || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.editorToolbar || {}) })({
   layout: props.layout
 }))
 

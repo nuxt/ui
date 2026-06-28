@@ -48,7 +48,7 @@ const props = useComponentProps('fieldGroup', _props)
 const appConfig = useAppConfig() as FieldGroup['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.fieldGroup || {}) }))
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.fieldGroup || {}) }))
 
 provide(fieldGroupInjectionKey, computed(() => ({
   orientation: props.orientation,

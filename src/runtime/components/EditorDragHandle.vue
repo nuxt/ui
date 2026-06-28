@@ -78,7 +78,7 @@ const buttonProps = useForwardProps(reactiveOmit(props, 'icon', 'options', 'edit
 const appConfig = useAppConfig() as EditorDragHandle['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.editorDragHandle || {}) })())
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.editorDragHandle || {}) })())
 
 const floatingUIOptions = computed(() => defu(props.options, {
   strategy: 'absolute' as Strategy,

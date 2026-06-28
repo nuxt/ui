@@ -58,7 +58,7 @@ const getProxySlots = () => omit(slots, ['default'])
 const appConfig = useAppConfig() as BlogPosts['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.blogPosts || {}) }))
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.blogPosts || {}) }))
 </script>
 
 <template>

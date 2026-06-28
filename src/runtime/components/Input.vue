@@ -103,7 +103,7 @@ const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponen
 const inputSize = computed(() => fieldGroupSize.value || formFieldSize.value)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.input || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.input || {}) })({
   type: props.type as Input['variants']['type'],
   color: color.value ?? props.color,
   variant: props.variant,

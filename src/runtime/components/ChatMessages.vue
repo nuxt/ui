@@ -122,7 +122,7 @@ const userProps = toRef(() => defu(props.user, { side: 'right' as const, variant
 const assistantProps = toRef(() => defu(props.assistant, { side: 'left' as const, variant: 'naked' as const }))
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.chatMessages || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.chatMessages || {}) })({
   compact: props.compact
 }))
 

@@ -179,7 +179,7 @@ const arrowProps = toRef(() => defu(props.arrow, { rounded: true }) as DropdownM
 const getProxySlots = () => omit(slots, ['default'])
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dropdownMenu || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.dropdownMenu || {}) })({
   size: props.size
 }))
 </script>

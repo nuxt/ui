@@ -189,7 +189,7 @@ const stopAutoScrollOnInteraction = computed(() => {
 })
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.carousel || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.carousel || {}) })({
   orientation: props.orientation
 }))
 

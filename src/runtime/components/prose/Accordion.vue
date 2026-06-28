@@ -36,7 +36,7 @@ const props = useComponentProps('prose.accordion', _props)
 const appConfig = useAppConfig() as ProseAccordion['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.accordion || {}) }))
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.prose?.accordion || {}) }))
 
 const rerenderCount = ref(1)
 

@@ -98,7 +98,7 @@ const [DefineDateTemplate, ReuseDateTemplate] = createReusableTemplate<{ hidden?
 })
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.changelogVersion || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.changelogVersion || {}) })({
   to: !!props.to || !!props.onClick
 }))
 

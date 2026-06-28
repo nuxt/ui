@@ -137,7 +137,7 @@ const contentEvents = computed(() => {
 const [DefineContentTemplate, ReuseContentTemplate] = createReusableTemplate()
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.modal || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.modal || {}) })({
   transition: props.transition,
   fullscreen: props.fullscreen,
   overlay: props.overlay,

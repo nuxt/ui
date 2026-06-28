@@ -39,7 +39,7 @@ const props = useComponentProps('pageList', _props)
 const appConfig = useAppConfig() as PageList['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pageList || {}) }))
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.pageList || {}) }))
 </script>
 
 <template>

@@ -32,7 +32,7 @@ const props = useComponentProps('prose.kbd', _props)
 const appConfig = useAppConfig() as ProseKbd['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.kbd || {}) }))
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.prose?.kbd || {}) }))
 </script>
 
 <template>

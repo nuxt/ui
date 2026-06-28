@@ -67,7 +67,7 @@ const appConfig = useAppConfig() as User['AppConfig']
 const prefix = usePrefix()
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.user || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.user || {}) })({
   size: props.size,
   orientation: props.orientation,
   to: !!props.to || !!props.onClick

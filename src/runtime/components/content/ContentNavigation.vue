@@ -133,7 +133,7 @@ const appConfig = useAppConfig() as ContentNavigation['AppConfig']
 const [DefineLinkTemplate, ReuseLinkTemplate] = createReusableTemplate<{ link: ContentNavigationLink, active: boolean }>()
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.contentNavigation || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.contentNavigation || {}) })({
   color: props.color,
   variant: props.variant,
   highlight: props.highlight,
