@@ -2,7 +2,8 @@
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/avatar'
-import type { ChipProps, IconProps } from '../types'
+import type { ChipProps } from './Chip.vue'
+import type { IconProps } from './Icon.vue'
 import type { ImgHTMLAttributes } from '../types/html'
 import type { ComponentConfig } from '../types/tv'
 

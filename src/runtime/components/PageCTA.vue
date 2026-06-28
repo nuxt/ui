@@ -2,7 +2,7 @@
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/page-cta'
-import type { ButtonProps } from '../types'
+import type { ButtonProps } from './Button.vue'
 import type { ComponentConfig } from '../types/tv'
 
 type PageCTA = ComponentConfig<typeof theme, AppConfig, 'pageCTA'>

@@ -2,7 +2,7 @@
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/page-logos'
-import type { MarqueeProps } from '../types'
+import type { MarqueeProps } from './Marquee.vue'
 import type { ComponentConfig } from '../types/tv'
 
 type PageLogos = ComponentConfig<typeof theme, AppConfig, 'pageLogos'>

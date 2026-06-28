@@ -2,7 +2,9 @@
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/pricing-plan'
-import type { BadgeProps, ButtonProps, IconProps } from '../types'
+import type { BadgeProps } from './Badge.vue'
+import type { ButtonProps } from './Button.vue'
+import type { IconProps } from './Icon.vue'
 import type { ComponentConfig } from '../types/tv'
 
 type PricingPlan = ComponentConfig<typeof theme, AppConfig, 'pricingPlan'>

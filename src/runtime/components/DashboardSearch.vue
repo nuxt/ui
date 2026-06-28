@@ -4,7 +4,11 @@ import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/dashboard-search'
 import type { UseFuseOptions } from '@vueuse/integrations/useFuse'
-import type { ButtonProps, ModalProps, CommandPaletteProps, CommandPaletteSlots, CommandPaletteGroup, CommandPaletteItem, LinkPropsKeys, InputProps } from '../types'
+import type { ButtonProps } from './Button.vue'
+import type { ModalProps } from './Modal.vue'
+import type { CommandPaletteProps, CommandPaletteSlots, CommandPaletteGroup, CommandPaletteItem } from './CommandPalette.vue'
+import type { LinkPropsKeys } from './Link.vue'
+import type { InputProps } from './Input.vue'
 import type { ComponentConfig } from '../types/tv'
 
 type DashboardSearch = ComponentConfig<typeof theme, AppConfig, 'dashboardSearch'>

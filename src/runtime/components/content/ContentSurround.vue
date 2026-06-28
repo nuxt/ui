@@ -3,7 +3,7 @@ import type { PropType, VNode } from 'vue'
 import type { ContentNavigationItem } from '@nuxt/content'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/content/content-surround'
-import type { IconProps } from '../../types'
+import type { IconProps } from '../Icon.vue'
 import type { ComponentConfig } from '../../types/tv'
 
 type ContentSurround = ComponentConfig<typeof theme, AppConfig, 'contentSurround'>

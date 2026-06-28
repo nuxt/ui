@@ -4,7 +4,8 @@ import type { TimeFieldRootEmits, TimeFieldRootProps, TimeRangeFieldRootEmits, T
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/input-time'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
-import type { AvatarProps, IconProps } from '../types'
+import type { AvatarProps } from './Avatar.vue'
+import type { IconProps } from './Icon.vue'
 import type { ComponentConfig } from '../types/tv'
 
 type InputTime = ComponentConfig<typeof theme, AppConfig, 'inputTime'>

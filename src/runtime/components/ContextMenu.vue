@@ -4,7 +4,10 @@ import type { ContextMenuRootProps, ContextMenuRootEmits, ContextMenuContentProp
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/context-menu'
-import type { AvatarProps, IconProps, KbdProps, LinkProps } from '../types'
+import type { AvatarProps } from './Avatar.vue'
+import type { IconProps } from './Icon.vue'
+import type { KbdProps } from './Kbd.vue'
+import type { LinkProps } from './Link.vue'
 import type { ArrayOrNested, DynamicSlots, GetItemKeys, MergeTypes, NestedItem, EmitsToProps } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 

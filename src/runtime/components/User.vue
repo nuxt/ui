@@ -2,7 +2,9 @@
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/user'
-import type { AvatarProps, ChipProps, LinkProps } from '../types'
+import type { AvatarProps } from './Avatar.vue'
+import type { ChipProps } from './Chip.vue'
+import type { LinkProps } from './Link.vue'
 import type { ComponentConfig } from '../types/tv'
 
 type User = ComponentConfig<typeof theme, AppConfig, 'user'>

@@ -3,7 +3,7 @@
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/pricing-table'
-import type { PricingPlanProps } from '../types'
+import type { PricingPlanProps } from './PricingPlan.vue'
 import type { ComponentConfig } from '../types/tv'
 
 type PricingTable = ComponentConfig<typeof theme, AppConfig, 'pricingTable'>

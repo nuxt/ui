@@ -4,7 +4,7 @@ import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { SpringOptions, UseScrollOptions } from 'motion-v'
 import theme from '#build/ui/changelog-versions'
-import type { ChangelogVersionProps, ChangelogVersionSlots } from '../types'
+import type { ChangelogVersionProps, ChangelogVersionSlots } from './ChangelogVersion.vue'
 import type { ComponentConfig } from '../types/tv'
 
 type ChangelogVersions = ComponentConfig<typeof theme, AppConfig, 'changelogVersions'>
