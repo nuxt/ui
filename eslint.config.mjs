@@ -177,9 +177,4 @@ export default createConfigForNuxt({
       ]
     }]
   }
-}, {
-  files: ['src/runtime/composables/useComponentProps.ts'],
-  rules: {
-    'no-restricted-imports': 'off'
-  }
 })
