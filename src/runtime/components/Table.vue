@@ -440,8 +440,8 @@ const virtualizerProps = toRef(() => defu(typeof props.virtualize === 'boolean' 
 }))
 
 const getScrollElement = () => (isExternalScroll.value ? virtualizerProps.value.getScrollElement?.() : rootRef.value?.$el) ?? null
-// Offset applied to the spacer rows: `scrollMargin` is the table's offset within an external scroll element.
-const scrollMargin = computed(() => isExternalScroll.value ? (virtualizerProps.value.scrollMargin ?? 0) : 0)
+// Offset applied to the spacer rows: `scrollMargin` is the table's offset within the scroll element (0 unless set).
+const scrollMargin = computed(() => virtualizerProps.value.scrollMargin ?? 0)
 
 const virtualizer = !!props.virtualize && useVirtualizer({
   ...virtualizerProps.value,
