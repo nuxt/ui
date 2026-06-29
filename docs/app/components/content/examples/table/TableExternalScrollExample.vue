@@ -76,7 +76,7 @@ const columns: TableColumn<Payment>[] = [{
 <template>
   <div
     ref="container"
-    class="w-full h-96 overflow-y-auto"
+    class="w-full h-96 overflow-auto"
   >
     <div
       ref="title"

@@ -2065,7 +2065,7 @@ exports[`Table > renders with virtualize correctly 1`] = `
 `;
 
 exports[`Table > renders with virtualize external scroll element correctly 1`] = `
-"<div data-slot="root" class="relative overflow-auto outline-primary/25 focus-visible:outline-3" style="overflow: visible;">
+"<div data-slot="root" class="relative outline-primary/25 focus-visible:outline-3 overflow-visible">
   <table data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
     <thead data-slot="thead" class="relative">

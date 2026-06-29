@@ -287,12 +287,16 @@ function processColumns(columns: TableColumn<T>[]): TableColumn<T>[] {
   })
 }
 
+// When an external scroll element is provided, it owns the scroll (the root grows inline).
+const isExternalScroll = computed(() => typeof props.virtualize === 'object' && !!props.virtualize.getScrollElement)
+
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.table || {}) })({
   sticky: props.sticky,
   loading: props.loading,
   loadingColor: props.loadingColor,
-  loadingAnimation: props.loadingAnimation
+  loadingAnimation: props.loadingAnimation,
+  externalScroll: isExternalScroll.value
 }))
 
 const [DefineTableTemplate, ReuseTableTemplate] = createReusableTemplate()
@@ -435,8 +439,6 @@ const virtualizerProps = toRef(() => defu(typeof props.virtualize === 'boolean' 
   overscan: 12
 }))
 
-// When an external scroll element is provided, it owns the scroll (the root grows inline).
-const isExternalScroll = computed(() => typeof props.virtualize === 'object' && !!props.virtualize.getScrollElement)
 const getScrollElement = () => (isExternalScroll.value ? virtualizerProps.value.getScrollElement?.() : rootRef.value?.$el) ?? null
 // Offset applied to the spacer rows: `scrollMargin` is the table's offset within an external scroll element.
 const scrollMargin = computed(() => isExternalScroll.value ? (virtualizerProps.value.scrollMargin ?? 0) : 0)
@@ -715,14 +717,7 @@ defineExpose({
     </table>
   </DefineTableTemplate>
 
-  <Primitive
-    ref="rootRef"
-    :as="props.as"
-    v-bind="$attrs"
-    data-slot="root"
-    :class="ui.root({ class: [props.ui?.root, props.class] })"
-    :style="isExternalScroll ? { overflow: 'visible' } : undefined"
-  >
+  <Primitive ref="rootRef" :as="props.as" v-bind="$attrs" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <ReuseTableTemplate />
   </Primitive>
 </template>

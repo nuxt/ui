@@ -703,7 +703,7 @@ class: '!p-0'
 ::
 
 ::note
-In this mode the root's `overflow` becomes `visible`, so a `sticky` header anchors to the external scroll container rather than the table root.
+In this mode the table root's `overflow` is `visible` and the external container owns scrolling on both axes, so give it `overflow-auto` (not just `overflow-y-auto`) to keep wide tables horizontally scrollable. A `sticky` header then anchors to that container.
 ::
 
 ### With tree data
