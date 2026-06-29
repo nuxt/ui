@@ -171,6 +171,10 @@ class: '!p-0'
 Because the container owns the scroll, the toolbar's find and "Top" buttons scroll it directly with `container.scrollTo`.
 ::
 
+::caution
+The `shadow` prop has no effect in this mode, since the root no longer owns the scroll. Apply your own fade to the scroll container instead.
+::
+
 ### With programmatic scroll
 
 You can use the exposed `virtualizer` to programmatically control scroll position.

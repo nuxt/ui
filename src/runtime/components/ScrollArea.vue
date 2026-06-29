@@ -140,6 +140,9 @@ const isVertical = computed(() => !isHorizontal.value)
 // When an external scroll element is provided, it owns the scroll
 const isExternalScroll = computed(() => typeof props.virtualize === 'object' && !!props.virtualize.getScrollElement)
 
+// The scroll viewport: the external element when provided, otherwise the component's root.
+const getScrollElement = () => (isExternalScroll.value ? virtualizerProps.value.getScrollElement?.() : rootRef.value?.$el) ?? null
+
 const virtualizerProps = toRef(() => {
   const options = typeof props.virtualize === 'boolean' ? {} : props.virtualize
 
@@ -188,7 +191,7 @@ const virtualizer = !!props.virtualize && useVirtualizer({
   get count() {
     return props.items?.length || 0
   },
-  getScrollElement: () => isExternalScroll.value ? (virtualizerProps.value.getScrollElement?.() ?? null) : rootRef.value?.$el,
+  getScrollElement,
   get horizontal() {
     return isHorizontal.value
   },
@@ -237,12 +240,12 @@ function getVirtualItemStyle(virtualItem: VirtualItem): CSSProperties {
 }
 
 // Recalculate layout when the scroll viewport resizes (e.g. estimateSize depends on lane width).
-// The viewport is the external element when provided, otherwise the root; re-observe if it changes.
+// Re-observe if the scroll element changes.
 let resizeObserver: ResizeObserver | null = null
 let rafId: number | null = null
 
 watch(
-  () => (isExternalScroll.value && virtualizerProps.value.getScrollElement?.()) || rootRef.value?.$el,
+  getScrollElement,
   (el) => {
     resizeObserver?.disconnect()
     resizeObserver = null
