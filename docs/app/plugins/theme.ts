@@ -58,6 +58,13 @@ export default defineNuxtPlugin({
       // settings on first paint and prevent a flash of unstyled content (FOUC).
       // The script IDs (chat-custom-colors, chat-css-variables, nuxt-ui-radius, etc.)
       // correspond to the <style> elements managed by useTheme via useHead.
+      //
+      // IMPORTANT: each `innerHTML` is collapsed with `.replace(/\s+/g, ' ')` onto a single line, so
+      // `//` line comments inside them would comment out the rest of the script. Keep them comment-free.
+      //
+      // A `'neutral'` primary mirrors the runtime colors plugin: the primary scale points at
+      // `--ui-color-neutral-*` (following whatever neutral resolves to) and `--ui-primary` at
+      // `--ui-bg-inverted`, so the no-flash paint matches the post-hydration `neutral` variant.
       useHead({
         script: [{
           innerHTML: `
@@ -67,17 +74,14 @@ export default defineNuxtPlugin({
               if (!primaryColor && !neutralColor) return;
               function swapColors(el) {
                 var html = el.innerHTML;
-                if (primaryColor) {
+                if (primaryColor === 'neutral') {
+                  html = html.replace(/(--ui-color-primary-(\\d{2,3}):\\s*)var\\(--color-[^;]*/g, '$1var(--ui-color-neutral-$2)');
+                  html = html.replace(/--ui-primary:\\s*var\\(--ui-color-primary-\\d{2,3}\\)/g, '--ui-primary: var(--ui-bg-inverted)');
+                } else if (primaryColor) {
                   html = html.replace(
                     /(--ui-color-primary-\\d{2,3}:\\s*var\\(--color-)${appConfig.ui.colors.primary}(-\\d{2,3}.*?\\))/g,
-                    \`$1\${primaryColor === 'neutral' ? 'old-neutral' : primaryColor}$2\`
+                    \`$1\${primaryColor}$2\`
                   );
-                  // Match the runtime colors plugin: a 'neutral' primary points '--ui-primary' at
-                  // '--ui-bg-inverted' (high contrast) instead of shade 500/400, so the no-flash paint
-                  // matches the post-hydration 'neutral' variant instead of snapping from grey.
-                  if (primaryColor === 'neutral') {
-                    html = html.replace(/--ui-primary:\\s*var\\(--ui-color-primary-\\d{2,3}\\)/g, '--ui-primary: var(--ui-bg-inverted)');
-                  }
                 }
                 if (neutralColor) {
                   html = html.replace(
