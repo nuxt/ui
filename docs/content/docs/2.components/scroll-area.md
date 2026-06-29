@@ -167,7 +167,7 @@ class: '!p-0'
 options:
   - name: orientation
     label: orientation
-    default: horizontal
+    default: vertical
     items:
       - vertical
       - horizontal

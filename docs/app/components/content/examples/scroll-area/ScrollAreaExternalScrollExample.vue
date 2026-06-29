@@ -2,7 +2,7 @@
 const props = withDefaults(defineProps<{
   orientation?: 'vertical' | 'horizontal'
 }>(), {
-  orientation: 'horizontal'
+  orientation: 'vertical'
 })
 
 type User = {
@@ -22,7 +22,7 @@ const { data: users } = useLazyFetch('https://dummyjson.com/users?limit=100&sele
 
 const isHorizontal = computed(() => props.orientation === 'horizontal')
 
-// The container owns the scroll; the list virtualizes against it so everything shares one scrollbar.
+// The container owns the scroll; the list virtualizes against it so the header and cards share one scrollbar.
 const container = useTemplateRef('container')
 const title = useTemplateRef('title')
 const toolbar = useTemplateRef('toolbar')
@@ -32,10 +32,10 @@ const scrollArea = useTemplateRef('scrollArea')
 const itemSize = computed(() => isHorizontal.value ? 256 : 88)
 const getScrollElement = () => container.value
 
-// `scrollMargin` is the list's offset along the scroll axis: the title + toolbar height when vertical, none when horizontal.
-const { height: titleHeight } = useElementSize(title, undefined, { box: 'border-box' })
+// `scrollMargin` is the title's offset along the scroll axis: its width when it sits left of the cards, its height when it sits above them.
+const { width: titleWidth, height: titleHeight } = useElementSize(title, undefined, { box: 'border-box' })
 const { height: toolbarHeight } = useElementSize(toolbar, undefined, { box: 'border-box' })
-const scrollMargin = computed(() => isHorizontal.value ? 0 : titleHeight.value + toolbarHeight.value)
+const scrollMargin = computed(() => isHorizontal.value ? titleWidth.value : toolbarHeight.value + titleHeight.value)
 
 // Find: jump through the items whose name matches the query (like a find toolbar).
 const query = ref('')
@@ -77,17 +77,18 @@ watch(matches, () => {
     ref="container"
     :class="isHorizontal ? 'w-full overflow-x-auto' : 'w-full h-128 overflow-y-auto'"
   >
+    <!-- Vertical: the header sits above the toolbar and scrolls away as you scroll down. -->
     <div
+      v-if="!isHorizontal"
       ref="title"
-      class="z-10 flex items-end justify-between gap-4 p-6 bg-elevated/50"
-      :class="isHorizontal && 'sticky left-0'"
+      class="flex items-end justify-between gap-4 p-6 bg-elevated/50"
     >
       <div>
         <h2 class="text-2xl font-bold text-highlighted">
           Members
         </h2>
         <p class="text-muted">
-          This header and the virtualized list share one scrollbar.
+          This header scrolls away with the cards, sharing one scrollbar.
         </p>
       </div>
       <UBadge
@@ -140,49 +141,72 @@ watch(matches, () => {
         />
       </UFieldGroup>
 
-      <div class="ms-auto">
-        <UButton
-          :icon="isHorizontal ? 'i-lucide-arrow-left-to-line' : 'i-lucide-arrow-up-to-line'"
-          color="neutral"
-          variant="outline"
-          :label="isHorizontal ? 'Start' : 'Top'"
-          @click="scrollToStart"
-        />
-      </div>
+      <UButton
+        :icon="isHorizontal ? 'i-lucide-arrow-left-to-line' : 'i-lucide-arrow-up-to-line'"
+        color="neutral"
+        variant="outline"
+        class="ms-auto"
+        :label="isHorizontal ? 'Start' : 'Top'"
+        @click="scrollToStart"
+      />
     </div>
 
-    <UScrollArea
-      ref="scrollArea"
-      v-slot="{ item, index }"
-      :orientation="orientation"
-      :items="users"
-      :class="isHorizontal && 'h-44'"
-      :virtualize="{ scrollMargin, getScrollElement, estimateSize: itemSize, skipMeasurement: true }"
-    >
-      <UPageCard
-        class="rounded-none h-full"
-        :class="[isHorizontal && 'w-64', index === currentMatch && 'bg-primary/10']"
+    <!-- Horizontal: the header sits left of the cards (in the row) so it scrolls away with them. -->
+    <div :class="isHorizontal && 'flex'">
+      <div
+        v-if="isHorizontal"
+        ref="title"
+        class="w-72 shrink-0 flex flex-col justify-center gap-4 p-6 bg-elevated/50 border-r border-default"
       >
-        <div
-          class="flex gap-3 h-full min-w-0"
-          :class="isHorizontal ? 'flex-col items-center justify-center text-center' : 'items-center'"
-        >
-          <UAvatar
-            :src="item.image"
-            :alt="item.firstName"
-            :size="isHorizontal ? '2xl' : 'lg'"
-            loading="lazy"
-          />
-          <div class="min-w-0">
-            <p class="font-medium text-highlighted truncate">
-              {{ item.firstName }} {{ item.lastName }}
-            </p>
-            <p class="text-sm text-muted truncate">
-              {{ item.email }}
-            </p>
-          </div>
+        <div>
+          <h2 class="text-2xl font-bold text-highlighted">
+            Members
+          </h2>
+          <p class="text-muted">
+            This header scrolls away with the cards, sharing one scrollbar.
+          </p>
         </div>
-      </UPageCard>
-    </UScrollArea>
+        <UBadge
+          color="neutral"
+          variant="subtle"
+          class="self-start"
+          :label="`${users.length} members`"
+        />
+      </div>
+
+      <UScrollArea
+        ref="scrollArea"
+        v-slot="{ item, index }"
+        :orientation="orientation"
+        :items="users"
+        :class="isHorizontal && 'h-48 shrink-0'"
+        :virtualize="{ scrollMargin, getScrollElement, estimateSize: itemSize, skipMeasurement: true }"
+      >
+        <UPageCard
+          class="rounded-none h-full"
+          :class="[isHorizontal && 'w-64', index === currentMatch && 'bg-primary/10']"
+        >
+          <div
+            class="flex gap-3 h-full min-w-0"
+            :class="isHorizontal ? 'flex-col items-center justify-center text-center' : 'items-center'"
+          >
+            <UAvatar
+              :src="item.image"
+              :alt="item.firstName"
+              :size="isHorizontal ? '2xl' : 'lg'"
+              loading="lazy"
+            />
+            <div class="min-w-0">
+              <p class="font-medium text-highlighted truncate">
+                {{ item.firstName }} {{ item.lastName }}
+              </p>
+              <p class="text-sm text-muted truncate">
+                {{ item.email }}
+              </p>
+            </div>
+          </div>
+        </UPageCard>
+      </UScrollArea>
+    </div>
   </div>
 </template>
