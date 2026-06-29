@@ -21,9 +21,9 @@ describe('getClientBundleIcons', () => {
 
   it('skips overrides from collections Nuxt UI does not ship defaults in', () => {
     // `heroicons` is single-word and would convert safely, but `svg-spinners` would
-    // mis-convert to `svg:...` and break the client bundle. Without `@nuxt/icon`'s
-    // collection list we can't tell them apart, so we only trust shipped collections
-    // (`lucide`) and leave everything else to runtime loading.
+    // mis-convert to `svg:...`. Without `@nuxt/icon`'s collection list we can't tell them
+    // apart, so we only trust shipped collections (`lucide`) and leave everything else to
+    // runtime loading rather than emit a wrong name `@nuxt/icon` would drop and warn about.
     const names = getClientBundleIcons({
       check: 'i-heroicons-check',
       loading: 'i-svg-spinners-90-ring',
@@ -41,13 +41,5 @@ describe('getClientBundleIcons', () => {
 
   it('returns an empty array when no icons are provided', () => {
     expect(getClientBundleIcons()).toEqual([])
-  })
-
-  it('drops collections whose data is not installed', () => {
-    // `@nuxt/icon` reads icon data from disk at build time and fails the build on a
-    // missing collection, so icons are only bundled when their collection is available.
-    expect(getClientBundleIcons(defaultIcons, () => false)).toEqual([])
-    expect(getClientBundleIcons(defaultIcons, collection => collection === 'lucide').length)
-      .toBe(new Set(Object.values(defaultIcons)).size)
   })
 })
