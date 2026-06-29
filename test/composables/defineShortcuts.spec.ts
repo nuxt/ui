@@ -456,4 +456,32 @@ describe('defineShortcuts', () => {
       expect(handler).not.toHaveBeenCalled()
     })
   })
+
+  describe('IME composition', () => {
+    it('does NOT trigger a shortcut while composing', async () => {
+      const handler = vi.fn()
+      await registerShortcuts({ a: handler })
+
+      fireKeydown('a', { isComposing: true })
+      expect(handler).not.toHaveBeenCalled()
+    })
+
+    it('does NOT accumulate chained input while composing', async () => {
+      const handler = vi.fn()
+      await registerShortcuts({ 'g-i': handler })
+
+      fireKeydown('g', { isComposing: true })
+      fireKeydown('i', { isComposing: true })
+      expect(handler).not.toHaveBeenCalled()
+    })
+
+    it('triggers once composition has ended', async () => {
+      const handler = vi.fn()
+      await registerShortcuts({ a: handler })
+
+      fireKeydown('a', { isComposing: true })
+      fireKeydown('a')
+      expect(handler).toHaveBeenCalledOnce()
+    })
+  })
 })

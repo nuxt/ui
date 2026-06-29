@@ -108,6 +108,13 @@ export function defineShortcuts(config: MaybeRef<ShortcutsConfig>, options: Shor
   const shiftableCodes = shiftableKeys.map(k => convertKeyToCode(k))
 
   const onKeyDown = (e: KeyboardEvent) => {
+    // Ignore keydowns dispatched during IME composition (for example picking a
+    // Japanese or Chinese candidate), otherwise the composed keystrokes can match
+    // and fire a shortcut. Same condition as the useIMEGuard composable.
+    if (e.isComposing || e.keyCode === 229) {
+      return
+    }
+
     // Input autocomplete triggers a keydown event
     if (!e.key) {
       return
