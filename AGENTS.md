@@ -95,7 +95,6 @@ Load these based on your task. **Do not load all files at once** — only load w
 | Semantic colors | Use `text-default`, `bg-elevated`, etc. - never Tailwind palette |
 | Reka UI props | Use `reactivePick` + `useForwardProps(source, emits?)` from `composables/useForwardProps` to forward props (proxy-aware; reka-ui's `useForwardProps` / `useForwardPropsEmits` filter out `<UTheme :props>` defaults) |
 | Form components | Use `useFormField` and `useFieldGroup` composables |
-| Unhead compatibility | `@unhead/vue` is kept at **v2** to stay aligned with Nuxt, but the library also runs in Vue apps on unhead **v3**. Only use head APIs present in both: on v3 `injectHead().hooks` is a `HookableCore` (exposes `hook` / `removeHook` / `callHook` only, and is typed optional) — **not** the full v2 `Hookable`. Avoid v2-only methods like `hookOnce`; use `head.hooks?.hook(...)` and self-unhook for once semantics. |
 
 ## Component Creation Workflow
 
