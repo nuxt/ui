@@ -81,6 +81,7 @@ jobs:
 
     env:
       pnpm_config_strict_dep_builds: false
+      pnpm_config_verify_deps_before_run: false
 
     strategy:
       matrix:
