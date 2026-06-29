@@ -2,7 +2,8 @@
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/prose/callout'
-import type { IconProps, LinkProps } from '../../types'
+import type { IconProps } from '../Icon.vue'
+import type { LinkProps } from '../Link.vue'
 import type { ComponentConfig } from '../../types/tv'
 
 type ProseCallout = ComponentConfig<typeof theme, AppConfig, 'callout', 'ui.prose'>
@@ -43,7 +44,7 @@ const props = useComponentProps('prose.callout', _props)
 const appConfig = useAppConfig() as ProseCallout['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.callout || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.prose?.callout || {}) })({
   color: props.color,
   to: !!props.to
 }))

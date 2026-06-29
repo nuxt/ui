@@ -37,7 +37,7 @@ const props = useComponentProps('pageColumns', _props)
 const appConfig = useAppConfig() as PageColumns['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pageColumns || {}) }))
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.pageColumns || {}) }))
 </script>
 
 <template>

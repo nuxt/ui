@@ -5,7 +5,9 @@ import type { Placement, Strategy } from '@floating-ui/dom'
 import type { Editor, JSONContent } from '@tiptap/vue-3'
 import type { DragHandleProps } from '@tiptap/extension-drag-handle-vue-3'
 import theme from '#build/ui/editor-drag-handle'
-import type { ButtonProps, IconProps, LinkPropsKeys } from '../types'
+import type { ButtonProps } from './Button.vue'
+import type { IconProps } from './Icon.vue'
+import type { LinkPropsKeys } from './Link.vue'
 import type { FloatingUIOptions } from '../types/editor'
 import type { ComponentConfig } from '../types/tv'
 
@@ -76,7 +78,7 @@ const buttonProps = useForwardProps(reactiveOmit(props, 'icon', 'options', 'edit
 const appConfig = useAppConfig() as EditorDragHandle['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.editorDragHandle || {}) })())
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.editorDragHandle || {}) })())
 
 const floatingUIOptions = computed(() => defu(props.options, {
   strategy: 'absolute' as Strategy,

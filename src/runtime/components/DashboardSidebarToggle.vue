@@ -1,7 +1,8 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/dashboard-sidebar-toggle'
-import type { ButtonProps, LinkPropsKeys } from '../types'
+import type { ButtonProps } from './Button.vue'
+import type { LinkPropsKeys } from './Link.vue'
 import type { ComponentConfig } from '../types/tv'
 
 type DashboardSidebarToggle = ComponentConfig<typeof theme, AppConfig, 'dashboardSidebarToggle'>
@@ -52,7 +53,7 @@ const appConfig = useAppConfig() as DashboardSidebarToggle['AppConfig']
 const { sidebarOpen, toggleSidebar } = useDashboard({ sidebarOpen: ref(false), toggleSidebar: () => {} })
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dashboardSidebarToggle || {}) }))
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.dashboardSidebarToggle || {}) }))
 </script>
 
 <template>

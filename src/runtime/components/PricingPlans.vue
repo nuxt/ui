@@ -3,7 +3,7 @@
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/pricing-plans'
-import type { PricingPlanProps, PricingPlanSlots } from '../types'
+import type { PricingPlanProps, PricingPlanSlots } from './PricingPlan.vue'
 import type { ComponentConfig } from '../types/tv'
 
 type PricingPlans = ComponentConfig<typeof theme, AppConfig, 'pricingPlans'>
@@ -71,7 +71,7 @@ const getProxySlots = () => omit(slots, ['default'])
 const appConfig = useAppConfig() as PricingPlans['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pricingPlans || {}) }))
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.pricingPlans || {}) }))
 
 const count = computed(() => props.plans?.length || slots.default?.()?.flatMap(mapSlot).filter(Boolean)?.length || 3)
 

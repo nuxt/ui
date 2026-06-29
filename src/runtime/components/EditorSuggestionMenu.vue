@@ -2,7 +2,7 @@
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/editor-suggestion-menu'
 import type { EditorMenuOptions } from '../composables/useEditorMenu'
-import type { IconProps } from '../types'
+import type { IconProps } from './Icon.vue'
 import type { EditorItem, EditorCustomHandlers } from '../types/editor'
 import type { ComponentConfig } from '../types/tv'
 
@@ -69,7 +69,7 @@ const appConfig = useAppConfig() as EditorSuggestionMenu['AppConfig']
 
 const handlers = inject('editorHandlers', computed(() => createHandlers()))
 
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.editorSuggestionMenu || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.editorSuggestionMenu || {}) })({
   size: props.size
 }))
 

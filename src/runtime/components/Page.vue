@@ -46,7 +46,7 @@ onBeforeUpdate(() => {
 })
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.page || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.page || {}) })({
   left: hasLeft.value,
   right: hasRight.value
 }))

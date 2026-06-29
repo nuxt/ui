@@ -3,7 +3,7 @@ import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/badge'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
-import type { AvatarProps } from '../types'
+import type { AvatarProps } from './Avatar.vue'
 import type { ComponentConfig } from '../types/tv'
 
 type Badge = ComponentConfig<typeof theme, AppConfig, 'badge'>
@@ -63,7 +63,7 @@ const { orientation, size: fieldGroupSize } = useFieldGroup<BadgeProps>(_props)
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.badge || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.badge || {}) })({
   color: props.color,
   variant: props.variant,
   size: fieldGroupSize.value ?? props.size,
