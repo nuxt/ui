@@ -10,7 +10,9 @@ import type { ClassNamesOptionsType } from 'embla-carousel-class-names'
 import type { FadeOptionsType } from 'embla-carousel-fade'
 import type { WheelGesturesPluginOptions } from 'embla-carousel-wheel-gestures'
 import theme from '#build/ui/carousel'
-import type { ButtonProps, IconProps, LinkPropsKeys } from '../types'
+import type { ButtonProps } from './Button.vue'
+import type { IconProps } from './Icon.vue'
+import type { LinkPropsKeys } from './Link.vue'
 import type { AcceptableValue } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
@@ -187,7 +189,7 @@ const stopAutoScrollOnInteraction = computed(() => {
 })
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.carousel || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.carousel || {}) })({
   orientation: props.orientation
 }))
 

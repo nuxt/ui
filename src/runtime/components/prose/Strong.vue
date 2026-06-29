@@ -31,7 +31,7 @@ const props = useComponentProps('prose.strong', _props)
 const appConfig = useAppConfig() as ProseStrong['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.strong || {}) }))
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.prose?.strong || {}) }))
 </script>
 
 <template>

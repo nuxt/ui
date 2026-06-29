@@ -1,6 +1,6 @@
 import { describe, expectTypeOf, test } from 'vitest'
 import type * as ui from '#build/ui'
-import type { ThemeDefaults } from '../../src/runtime/composables/useComponentProps'
+import type { ThemeDefaults } from '../../src/runtime/types/theme'
 
 /**
  * Hand-maintained list of `#build/ui` exports that intentionally don't

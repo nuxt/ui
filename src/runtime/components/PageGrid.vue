@@ -37,7 +37,7 @@ const props = useComponentProps('pageGrid', _props)
 const appConfig = useAppConfig() as PageGrid['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pageGrid || {}) }))
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.pageGrid || {}) }))
 </script>
 
 <template>

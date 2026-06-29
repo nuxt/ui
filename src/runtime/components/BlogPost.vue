@@ -2,7 +2,9 @@
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/blog-post'
-import type { BadgeProps, LinkProps, UserProps } from '../types'
+import type { BadgeProps } from './Badge.vue'
+import type { LinkProps } from './Link.vue'
+import type { UserProps } from './User.vue'
 import type { ImgHTMLAttributes } from '../types/html'
 import type { ComponentConfig } from '../types/tv'
 
@@ -88,7 +90,7 @@ const formatter = useDateFormatter(locale.value.code)
 const prefix = usePrefix()
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.blogPost || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.blogPost || {}) })({
   orientation: props.orientation,
   variant: props.variant,
   image: !!props.image,
@@ -125,7 +127,14 @@ const ariaLabel = computed(() => {
 </script>
 
 <template>
-  <Primitive :as="props.as" :data-orientation="props.orientation" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })" @click="props.onClick">
+  <Primitive
+    :as="props.as"
+    v-bind="!props.to ? $attrs : {}"
+    :data-orientation="props.orientation"
+    data-slot="root"
+    :class="ui.root({ class: [props.ui?.root, props.class] })"
+    @click="props.onClick"
+  >
     <ULink
       v-if="props.to"
       :aria-label="ariaLabel"

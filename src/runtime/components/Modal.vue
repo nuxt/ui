@@ -3,7 +3,9 @@ import type { DialogRootProps, DialogRootEmits, DialogContentProps, DialogConten
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/modal'
-import type { ButtonProps, IconProps, LinkPropsKeys } from '../types'
+import type { ButtonProps } from './Button.vue'
+import type { IconProps } from './Icon.vue'
+import type { LinkPropsKeys } from './Link.vue'
 import type { EmitsToProps } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
@@ -111,7 +113,7 @@ const props = useComponentProps('modal', _props)
 const { t } = useLocale()
 const appConfig = useAppConfig() as Modal['AppConfig']
 
-const rootProps = useForwardProps(reactivePick(props, 'open', 'defaultOpen', 'modal'), emits)
+const rootProps = useForwardProps(reactivePick(props, 'open', 'defaultOpen', 'modal', 'unmountOnHide'), emits)
 const portalProps = usePortal(toRef(() => props.portal))
 const contentProps = toRef(() => props.content)
 const contentEvents = computed(() => {
@@ -135,7 +137,7 @@ const contentEvents = computed(() => {
 const [DefineContentTemplate, ReuseContentTemplate] = createReusableTemplate()
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.modal || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.modal || {}) })({
   transition: props.transition,
   fullscreen: props.fullscreen,
   overlay: props.overlay,
@@ -224,7 +226,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.modal || {})
       <slot :open="open" />
     </DialogTrigger>
 
-    <DialogPortal v-bind="portalProps">
+    <DialogPortal v-bind="portalProps" :force-mount="(portalProps.disabled && props.unmountOnHide === false) || undefined">
       <FieldGroupReset>
         <template v-if="props.scrollable">
           <DialogOverlay data-slot="overlay" :class="ui.overlay({ class: props.ui?.overlay })">

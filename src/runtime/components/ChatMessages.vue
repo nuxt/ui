@@ -4,7 +4,10 @@ import type { ComponentPublicInstance, VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { UIDataTypes, UIMessage, UITools, ChatStatus } from 'ai'
 import theme from '#build/ui/chat-messages'
-import type { ButtonProps, ChatMessageProps, ChatMessageSlots, IconProps, LinkPropsKeys } from '../types'
+import type { ButtonProps } from './Button.vue'
+import type { ChatMessageProps, ChatMessageSlots } from './ChatMessage.vue'
+import type { IconProps } from './Icon.vue'
+import type { LinkPropsKeys } from './Link.vue'
 import type { ComponentConfig } from '../types/tv'
 
 type ChatMessages = ComponentConfig<typeof theme, AppConfig, 'chatMessages'>
@@ -119,7 +122,7 @@ const userProps = toRef(() => defu(props.user, { side: 'right' as const, variant
 const assistantProps = toRef(() => defu(props.assistant, { side: 'left' as const, variant: 'naked' as const }))
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.chatMessages || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.chatMessages || {}) })({
   compact: props.compact
 }))
 

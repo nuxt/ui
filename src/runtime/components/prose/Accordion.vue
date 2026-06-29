@@ -2,7 +2,7 @@
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/prose/accordion'
-import type { AccordionProps } from '../../types'
+import type { AccordionProps } from '../Accordion.vue'
 import type { ComponentConfig } from '../../types/tv'
 
 type ProseAccordion = ComponentConfig<typeof theme, AppConfig, 'accordion', 'ui.prose'>
@@ -36,7 +36,7 @@ const props = useComponentProps('prose.accordion', _props)
 const appConfig = useAppConfig() as ProseAccordion['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.accordion || {}) }))
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.prose?.accordion || {}) }))
 
 const rerenderCount = ref(1)
 

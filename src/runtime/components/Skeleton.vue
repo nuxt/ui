@@ -30,7 +30,7 @@ const props = useComponentProps('skeleton', _props)
 const appConfig = useAppConfig() as Skeleton['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.skeleton || {}) }))
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.skeleton || {}) }))
 </script>
 
 <template>

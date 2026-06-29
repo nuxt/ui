@@ -32,7 +32,7 @@ const props = useComponentProps('prose.badge', _props)
 const appConfig = useAppConfig() as ProseBadge['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.badge || {}) }))
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.prose?.badge || {}) }))
 </script>
 
 <template>

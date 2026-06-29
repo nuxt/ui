@@ -2,7 +2,8 @@
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/page-anchors'
-import type { IconProps, LinkProps } from '../types'
+import type { IconProps } from './Icon.vue'
+import type { LinkProps } from './Link.vue'
 import type { ComponentConfig } from '../types/tv'
 
 type PageAnchors = ComponentConfig<typeof theme, AppConfig, 'pageAnchors'>
@@ -59,7 +60,7 @@ const props = useComponentProps<PageAnchorsProps<T>>('pageAnchors', _props)
 const appConfig = useAppConfig() as PageAnchors['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pageAnchors || {}) })())
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.pageAnchors || {}) })())
 </script>
 
 <template>

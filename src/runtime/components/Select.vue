@@ -4,7 +4,10 @@ import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/select'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
-import type { AvatarProps, ChipProps, IconProps, InputProps } from '../types'
+import type { AvatarProps } from './Avatar.vue'
+import type { ChipProps } from './Chip.vue'
+import type { IconProps } from './Icon.vue'
+import type { InputProps } from './Input.vue'
 import type { ModelModifiers, ApplyModifiers } from '../types/input'
 import type { ButtonHTMLAttributes } from '../types/html'
 import type { AcceptableValue, ArrayOrNested, GetItemKeys, GetModelValue, NestedItem, EmitsToProps } from '../types/utils'
@@ -181,7 +184,7 @@ const props = useComponentProps<SelectProps<T, VK, M, Mod>>('select', _props)
 
 const appConfig = useAppConfig() as Select['AppConfig']
 
-const rootProps = useForwardProps(reactivePick(props, 'open', 'defaultOpen', 'disabled', 'autocomplete', 'required', 'multiple'), emits)
+const rootProps = useForwardProps(reactivePick(props, 'open', 'defaultOpen', 'disabled', 'autocomplete', 'required', 'multiple', 'nullableValue'), emits)
 const portalProps = usePortal(toRef(() => props.portal))
 const position = computed(() => props.content?.position ?? appConfig.ui?.select?.defaultVariants?.position ?? theme.defaultVariants?.position)
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: position.value }) as SelectContentProps)
@@ -196,7 +199,7 @@ const selectSize = computed(() => fieldGroupSize.value || formFieldSize.value)
 const isItemAligned = computed(() => position.value === 'item-aligned')
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.select || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.select || {}) })({
   color: color.value ?? props.color,
   variant: props.variant,
   size: selectSize.value ?? props.size,

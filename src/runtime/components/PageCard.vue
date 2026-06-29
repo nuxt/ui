@@ -2,7 +2,8 @@
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/page-card'
-import type { IconProps, LinkProps } from '../types'
+import type { IconProps } from './Icon.vue'
+import type { LinkProps } from './Link.vue'
 import type { ComponentConfig } from '../types/tv'
 
 type PageCard = ComponentConfig<typeof theme, AppConfig, 'pageCard'>
@@ -110,7 +111,7 @@ watch(() => props.spotlight, (value) => {
 }, { immediate: true })
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pageCard || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.pageCard || {}) })({
   orientation: props.orientation,
   reverse: props.reverse,
   variant: props.variant,
@@ -132,6 +133,7 @@ const ariaLabel = computed(() => {
   <Primitive
     ref="cardRef"
     :as="props.as"
+    v-bind="!props.to ? $attrs : {}"
     :data-orientation="props.orientation"
     data-slot="root"
     :class="ui.root({ class: [props.ui?.root, props.class] })"

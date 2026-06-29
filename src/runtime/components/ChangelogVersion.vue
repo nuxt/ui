@@ -2,7 +2,9 @@
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/changelog-version'
-import type { BadgeProps, LinkProps, UserProps } from '../types'
+import type { BadgeProps } from './Badge.vue'
+import type { LinkProps } from './Link.vue'
+import type { UserProps } from './User.vue'
 import type { ImgHTMLAttributes } from '../types/html'
 import type { ComponentConfig } from '../types/tv'
 
@@ -96,7 +98,7 @@ const [DefineDateTemplate, ReuseDateTemplate] = createReusableTemplate<{ hidden?
 })
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.changelogVersion || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.changelogVersion || {}) })({
   to: !!props.to || !!props.onClick
 }))
 
@@ -150,7 +152,7 @@ const ariaLabel = computed(() => {
     </time>
   </DefineDateTemplate>
 
-  <Primitive :as="props.as" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })" @click="props.onClick">
+  <Primitive :as="props.as" v-bind="!props.to ? $attrs : {}" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })" @click="props.onClick">
     <div v-if="!!props.indicator || !!slots.indicator" data-slot="indicator" :class="ui.indicator({ class: props.ui?.indicator })">
       <slot name="indicator" :ui="ui">
         <ReuseDateTemplate />

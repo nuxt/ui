@@ -4,7 +4,12 @@ import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/input-menu'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
-import type { AvatarProps, ButtonProps, ChipProps, IconProps, InputProps, LinkPropsKeys } from '../types'
+import type { AvatarProps } from './Avatar.vue'
+import type { ButtonProps } from './Button.vue'
+import type { ChipProps } from './Chip.vue'
+import type { IconProps } from './Icon.vue'
+import type { InputProps } from './Input.vue'
+import type { LinkPropsKeys } from './Link.vue'
 import type { ModelModifiers, ApplyModifiers } from '../types/input'
 import type { InputHTMLAttributes } from '../types/html'
 import type { AcceptableValue, ArrayOrNested, GetItemKeys, GetItemValue, GetModelValue, NestedItem, EmitsToProps } from '../types/utils'
@@ -318,7 +323,7 @@ const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: I
 })
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.inputMenu || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.inputMenu || {}) })({
   color: color.value ?? props.color,
   variant: props.variant,
   size: inputSize?.value ?? props.size,
