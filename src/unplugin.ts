@@ -43,7 +43,7 @@ export interface NuxtUIOptions extends Omit<ModuleOptions, 'fonts' | 'colorMode'
   /**
    * Default props for the `Icon` component, and build-time icon bundling.
    */
-  icon?: Pick<RuntimeOptions, 'customize' | 'size' | 'mode'> & {
+  icon?: Partial<Pick<RuntimeOptions, 'customize' | 'size' | 'mode'>> & {
     /**
      * Embed the icons Nuxt UI uses into the build so they render during SSR and fully
      * offline, instead of being fetched from the Iconify API at runtime. Enabled by
