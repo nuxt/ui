@@ -29,3 +29,6 @@ allowBuilds:
   esbuild: false
   unrs-resolver: false
   vue-demi: false
+
+minimumReleaseAgeExclude:
+  - '@nuxt/icon@2.2.5'
