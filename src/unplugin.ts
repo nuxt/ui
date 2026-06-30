@@ -8,7 +8,7 @@ import type { Options as ComponentsOptions } from 'unplugin-vue-components/types
 import { defu } from 'defu'
 import tailwind from '@tailwindcss/vite'
 import type colors from 'tailwindcss/colors'
-import type { RuntimeOptions } from '@nuxt/icon'
+import type { ModuleOptions as NuxtIconModuleOptions, RuntimeOptions } from '@nuxt/icon'
 
 import type * as ui from '#build/ui'
 
@@ -41,36 +41,15 @@ export interface NuxtUIOptions extends Omit<ModuleOptions, 'fonts' | 'colorMode'
   dts?: boolean
   ui?: AppConfigUI
   /**
-   * Default props for the `Icon` component, and build-time icon bundling.
+   * Default props for the `Icon` component, plus build-time icon bundling through
+   * `clientBundle`, which mirrors [`@nuxt/icon`'s option](https://github.com/nuxt/icon#client-bundle)
+   * (`icons`, `scan`, `sizeLimitKb`). Bundling is enabled by default for Nuxt UI's own icons
+   * (when their collection is installed); set `clientBundle: false` to opt out.
+   * @see https://ui.nuxt.com/docs/getting-started/integrations/icons/vue#collections
    */
   icon?: Partial<Pick<RuntimeOptions, 'customize' | 'size' | 'mode'>> & {
-    /**
-     * Embed the icons Nuxt UI uses into the build so they render during SSR and fully
-     * offline, instead of being fetched from the Iconify API at runtime. Enabled by
-     * default for Nuxt UI's own icons (when their collection is installed); set to
-     * `false` to opt out.
-     * @see https://ui.nuxt.com/docs/getting-started/integrations/ssr#icons-display
-     */
-    clientBundle?: false | {
-      /**
-       * Extra icons to bundle, on top of Nuxt UI's defaults. Accepts `i-{collection}-{name}`
-       * or `{collection}:{name}` (use the colon form for multi-word collections, e.g.
-       * `material-symbols:menu`). Only bundled when the collection's data is installed.
-       */
-      icons?: string[]
-      /**
-       * Scan your source for icon usages and bundle the ones from installed collections, so
-       * icons you use in your own components render offline too. Mirrors `@nuxt/icon`'s
-       * `clientBundle.scan`.
-       * @defaultValue `false`
-       */
-      scan?: boolean | {
-        /** @defaultValue `['**\/*.{vue,jsx,tsx,md,mdc,mdx,yml,yaml}']` */
-        globInclude?: string[]
-        /** @defaultValue `['node_modules', 'dist', 'build', 'coverage', 'test', 'tests', '.*']` */
-        globExclude?: string[]
-      }
-    }
+    // `includeCustomCollections` is omitted: the Vue build has no custom-collections feature.
+    clientBundle?: false | Omit<NonNullable<NuxtIconModuleOptions['clientBundle']>, 'includeCustomCollections'>
   }
   /**
    * Enable or disable `@vueuse/core` color-mode integration

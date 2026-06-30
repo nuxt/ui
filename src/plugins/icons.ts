@@ -136,12 +136,23 @@ function extractUsedIcons(code: string, regex: RegExp): string[] {
  * depend on what Vite has transformed when the virtual module is first loaded.
  */
 async function scanUsedIcons(root: string, scan: ScanOptions, collections: string[]): Promise<string[]> {
-  if (!collections.length) {
+  const {
+    globInclude = SCAN_GLOB_INCLUDE,
+    globExclude = SCAN_GLOB_EXCLUDE,
+    ignoreCollections = [],
+    additionalCollections = []
+  } = typeof scan === 'object' ? scan : {}
+
+  // Scan for the installed collections plus any explicitly added, minus ignored ones.
+  const scanned = new Set([...collections, ...additionalCollections])
+  for (const collection of ignoreCollections) {
+    scanned.delete(collection)
+  }
+  if (!scanned.size) {
     return []
   }
 
-  const { globInclude = SCAN_GLOB_INCLUDE, globExclude = SCAN_GLOB_EXCLUDE } = typeof scan === 'object' ? scan : {}
-  const regex = createMatchRegex(collections)
+  const regex = createMatchRegex([...scanned])
   const files = await glob(globInclude, { cwd: root, ignore: globExclude, absolute: true, expandDirectories: false })
 
   const names = new Set<string>()
@@ -177,22 +188,31 @@ export default function IconsPlugin(options: NuxtUIOptions, appConfig: Record<st
   let source: Promise<string> | undefined
 
   async function generate(): Promise<string> {
-    if (options.icon?.clientBundle === false) {
+    const clientBundle = options.icon?.clientBundle
+    if (clientBundle === false) {
       return 'export const icons = {}'
     }
 
     const names = new Set(resolveBundleNames(options, appConfig))
 
-    const scan = options.icon?.clientBundle?.scan
-    if (scan) {
-      for (const name of await scanUsedIcons(root, scan, getInstalledCollections([root]))) {
+    if (clientBundle?.scan) {
+      for (const name of await scanUsedIcons(root, clientBundle.scan, getInstalledCollections([root]))) {
         names.add(name)
       }
     }
 
-    const data = await loadIconsData([...names], root)
+    const serialized = JSON.stringify(await loadIconsData([...names], root))
 
-    return `export const icons = ${JSON.stringify(data)}`
+    // Guard against an oversized client bundle (same default as `@nuxt/icon`; `0` disables).
+    const sizeLimitKb = clientBundle?.sizeLimitKb ?? 256
+    if (sizeLimitKb > 0) {
+      const sizeKb = Buffer.byteLength(serialized) / 1024
+      if (sizeKb > sizeLimitKb) {
+        throw new Error(`[Nuxt UI] The icon client bundle is ${sizeKb.toFixed(2)}KB, exceeding the ${sizeLimitKb}KB limit. Bundle fewer icons via \`icon.clientBundle\`, or raise \`icon.clientBundle.sizeLimitKb\` (\`0\` disables this check).`)
+      }
+    }
+
+    return `export const icons = ${serialized}`
   }
 
   return {
