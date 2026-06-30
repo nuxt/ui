@@ -17,6 +17,8 @@ type ScanOptions = NonNullable<ClientBundle['scan']>
 // Mirrors `@nuxt/icon`'s `clientBundle.scan` defaults.
 const SCAN_GLOB_INCLUDE = ['**/*.{vue,jsx,tsx,md,mdc,mdx,yml,yaml}']
 const SCAN_GLOB_EXCLUDE = ['node_modules', 'dist', 'build', 'coverage', 'test', 'tests', '.*']
+// Cap concurrent file reads during the scan to avoid `EMFILE` on large workspaces.
+const SCAN_CONCURRENCY = 20
 
 /**
  * Resolve the `{collection}:{name}` icons to embed: Nuxt UI's own defaults plus any the
@@ -107,13 +109,18 @@ function getInstalledCollections(dirs: string[]): string[] {
   return [...collections]
 }
 
+function escapeRegExp(value: string): string {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+}
+
 /**
  * Match `i-{collection}-{name}`, `{collection}-{name}` and `{collection}:{name}` for known
  * collections only. Collections are sorted longest-first so multi-word names (e.g.
  * `material-symbols`) win over any shorter prefix — the same approach as `@nuxt/icon`.
+ * Names are escaped (they come from the filesystem) so they can't inject regex syntax.
  */
 function createMatchRegex(collections: string[]): RegExp {
-  const alternation = [...collections].sort((a, b) => b.length - a.length).join('|')
+  const alternation = [...collections].sort((a, b) => b.length - a.length).map(escapeRegExp).join('|')
   return new RegExp(`\\b(?:i-)?(${alternation})[:-]([a-z0-9-]+)\\b`, 'g')
 }
 
@@ -138,12 +145,16 @@ async function scanUsedIcons(root: string, scan: ScanOptions, collections: strin
   const files = await glob(globInclude, { cwd: root, ignore: globExclude, absolute: true, expandDirectories: false })
 
   const names = new Set<string>()
-  await Promise.all(files.map(async (file) => {
-    const code = await readFile(file, 'utf8').catch(() => '')
-    for (const name of extractUsedIcons(code, regex)) {
-      names.add(name)
-    }
-  }))
+  // Read in small batches rather than all at once, so large workspaces don't exhaust file
+  // descriptors (`EMFILE`).
+  for (let i = 0; i < files.length; i += SCAN_CONCURRENCY) {
+    await Promise.all(files.slice(i, i + SCAN_CONCURRENCY).map(async (file) => {
+      const code = await readFile(file, 'utf8').catch(() => '')
+      for (const name of extractUsedIcons(code, regex)) {
+        names.add(name)
+      }
+    }))
+  }
 
   return [...names]
 }
