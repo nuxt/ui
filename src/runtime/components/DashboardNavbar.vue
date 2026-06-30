@@ -3,7 +3,9 @@ import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/dashboard-navbar'
 import type { DashboardContext } from '../utils/dashboard'
-import type { ButtonProps, IconProps, LinkPropsKeys } from '../types'
+import type { ButtonProps } from './Button.vue'
+import type { IconProps } from './Icon.vue'
+import type { LinkPropsKeys } from './Link.vue'
 import type { ComponentConfig } from '../types/tv'
 
 type DashboardNavbar = ComponentConfig<typeof theme, AppConfig, 'dashboardNavbar'>
@@ -75,7 +77,7 @@ const dashboardContext = useDashboard({})
 const [DefineToggleTemplate, ReuseToggleTemplate] = createReusableTemplate()
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dashboardNavbar || {}) })())
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.dashboardNavbar || {}) })())
 </script>
 
 <template>

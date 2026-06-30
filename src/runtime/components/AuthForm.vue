@@ -3,7 +3,16 @@
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/auth-form'
-import type { ButtonProps, FormProps, FormFieldProps, SeparatorProps, InputProps, CheckboxProps, SelectMenuProps, PinInputProps, IconProps, LinkPropsKeys } from '../types'
+import type { ButtonProps } from './Button.vue'
+import type { FormProps } from './Form.vue'
+import type { FormFieldProps } from './FormField.vue'
+import type { SeparatorProps } from './Separator.vue'
+import type { InputProps } from './Input.vue'
+import type { CheckboxProps } from './Checkbox.vue'
+import type { SelectMenuProps } from './SelectMenu.vue'
+import type { PinInputProps } from './PinInput.vue'
+import type { IconProps } from './Icon.vue'
+import type { LinkPropsKeys } from './Link.vue'
 import type { FormSchema, FormSubmitEvent, InferInput } from '../types/form'
 import type { FormHTMLAttributes } from '../types/html'
 import type { NonUnion } from '../types/utils'
@@ -105,7 +114,7 @@ export type AuthFormSlots<T extends object = object, F extends AuthFormField = A
 </script>
 
 <script setup lang="ts" generic="T extends FormSchema, F extends AuthFormField">
-import { reactive, ref, computed, useTemplateRef } from 'vue'
+import { reactive, shallowReactive, computed, useTemplateRef } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
@@ -151,11 +160,18 @@ const { t } = useLocale()
 const appConfig = useAppConfig() as AuthForm['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.authForm || {}) })())
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.authForm || {}) })())
 
 const formRef = useTemplateRef('formRef')
-const passwordVisibility = ref(false)
-const passwordRef = useTemplateRef('passwordRef')
+const passwordVisibility = reactive<Record<string, boolean>>(
+  (_props.fields as TypedAuthFormField[] || []).reduce<Record<string, boolean>>((acc, field) => {
+    if (field.type === 'password' && field.name) {
+      acc[field.name as string] = false
+    }
+    return acc
+  }, {})
+)
+const passwordRefs = shallowReactive<Record<string, { inputRef?: HTMLInputElement | null } | null>>({})
 
 function pickFieldProps(field: F) {
   const fields = ['name', 'errorPattern', 'help', 'error', 'hint', 'size', 'required', 'eagerValidation', 'validateOnInputDelay'] as (keyof F)[]
@@ -282,23 +298,23 @@ defineExpose({
             />
             <UInput
               v-else-if="field.type === 'password'"
-              ref="passwordRef"
+              :ref="(el: any) => { passwordRefs[field.name] = el }"
               v-model="state[field.name]"
               data-slot="password"
               :class="ui.password({ class: props.ui?.password })"
               v-bind="(omitFieldProps(field) as AuthFormInputField<'password'>)"
-              :type="passwordVisibility ? 'text' : 'password'"
+              :type="passwordVisibility[field.name] ? 'text' : 'password'"
             >
               <template #trailing>
                 <UButton
                   color="neutral"
                   variant="link"
                   size="sm"
-                  :icon="passwordVisibility ? appConfig.ui.icons.eyeOff : appConfig.ui.icons.eye"
-                  :aria-label="passwordVisibility ? t('authForm.hidePassword') : t('authForm.showPassword')"
-                  :aria-pressed="passwordVisibility"
-                  :aria-controls="passwordRef?.[0]?.inputRef?.id"
-                  @click="passwordVisibility = !passwordVisibility"
+                  :icon="passwordVisibility[field.name] ? appConfig.ui.icons.eyeOff : appConfig.ui.icons.eye"
+                  :aria-label="passwordVisibility[field.name] ? t('authForm.hidePassword') : t('authForm.showPassword')"
+                  :aria-pressed="!!passwordVisibility[field.name]"
+                  :aria-controls="passwordRefs[field.name]?.inputRef?.id"
+                  @click="passwordVisibility[field.name] = !passwordVisibility[field.name]"
                 />
               </template>
             </UInput>

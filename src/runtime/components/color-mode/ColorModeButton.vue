@@ -1,5 +1,6 @@
 <script lang="ts">
-import type { ButtonProps, LinkPropsKeys } from '../../types'
+import type { ButtonProps } from '../Button.vue'
+import type { LinkPropsKeys } from '../Link.vue'
 
 export interface ColorModeButtonProps extends Omit<ButtonProps, LinkPropsKeys | 'color' | 'variant'> {
   /**

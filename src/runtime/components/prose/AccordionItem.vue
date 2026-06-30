@@ -33,7 +33,7 @@ const props = useComponentProps('prose.accordionItem', _props)
 const appConfig = useAppConfig() as ProseAccordionItem['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.accordionItem || {}) }))
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.prose?.accordionItem || {}) }))
 </script>
 
 <template>

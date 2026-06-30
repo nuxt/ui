@@ -3,7 +3,8 @@ import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { NuxtError } from '#app'
 import theme from '#build/ui/error'
-import type { ButtonProps, IconProps } from '../types'
+import type { ButtonProps } from './Button.vue'
+import type { IconProps } from './Icon.vue'
 import type { ComponentConfig } from '../types/tv'
 
 type Error = ComponentConfig<typeof theme, AppConfig, 'error'>
@@ -68,7 +69,7 @@ const { t } = useLocale()
 const appConfig = useAppConfig() as Error['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.error || {}) })())
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.error || {}) })())
 
 function handleError() {
   clearError({ redirect: props.redirect })

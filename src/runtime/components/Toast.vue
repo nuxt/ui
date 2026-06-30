@@ -3,7 +3,11 @@ import type { ToastRootProps, ToastRootEmits } from 'reka-ui'
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/toast'
-import type { AvatarProps, ButtonProps, IconProps, ProgressProps, LinkPropsKeys } from '../types'
+import type { AvatarProps } from './Avatar.vue'
+import type { ButtonProps } from './Button.vue'
+import type { IconProps } from './Icon.vue'
+import type { ProgressProps } from './Progress.vue'
+import type { LinkPropsKeys } from './Link.vue'
 import type { StringOrVNode } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
@@ -108,7 +112,7 @@ const appConfig = useAppConfig() as Toast['AppConfig']
 const rootProps = useForwardProps(reactivePick(props, 'as', 'defaultOpen', 'open', 'duration', 'type'), emits)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.toast || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.toast || {}) })({
   color: props.color,
   orientation: props.orientation,
   title: !!props.title || !!slots.title

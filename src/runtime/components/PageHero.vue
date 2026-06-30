@@ -2,7 +2,7 @@
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/page-hero'
-import type { ButtonProps } from '../types'
+import type { ButtonProps } from './Button.vue'
 import type { ComponentConfig } from '../types/tv'
 
 type PageHero = ComponentConfig<typeof theme, AppConfig, 'pageHero'>
@@ -70,7 +70,7 @@ const appConfig = useAppConfig() as PageHero['AppConfig']
 const prefix = usePrefix()
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pageHero || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.pageHero || {}) })({
   orientation: props.orientation,
   reverse: props.reverse,
   title: !!props.title || !!slots.title

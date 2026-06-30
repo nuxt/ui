@@ -1,7 +1,7 @@
 import type { UnpluginOptions } from 'unplugin'
 import { getIconData } from '@iconify/utils'
 import { loadCollectionFromFS } from '@iconify/utils/lib/loader/fs'
-import { getClientBundleIcons, hasIconCollection, parseIconName } from '../utils/icons'
+import { getClientBundleIcons, parseIconName } from '../utils/icons'
 import type { NuxtUIOptions } from '../unplugin'
 
 const VIRTUAL_ID = 'virtual:nuxt-ui-icons'
@@ -10,21 +10,20 @@ type IconData = NonNullable<ReturnType<typeof getIconData>>
 
 /**
  * Resolve the `{collection}:{name}` icons to embed: Nuxt UI's own defaults plus any the
- * user lists in `icon.clientBundle.icons`, restricted to collections whose data is
- * installed under `root` (others fall back to runtime loading instead of breaking).
+ * user lists in `icon.clientBundle.icons`. Names whose collection isn't installed are kept
+ * here and dropped later by {@link loadIconsData} (which loads best-effort), so an
+ * uninstalled collection degrades to runtime loading instead of breaking the build.
  */
-function resolveBundleNames(options: NuxtUIOptions, appConfig: Record<string, any>, root: string): string[] {
-  const isAvailable = (collection: string) => hasIconCollection(collection, [root])
+function resolveBundleNames(options: NuxtUIOptions, appConfig: Record<string, any>): string[] {
+  // Nuxt UI's defaults — already restricted to trusted, single-word collections.
+  const names = new Set(getClientBundleIcons(appConfig.ui?.icons))
 
-  // Nuxt UI's defaults — already gated to trusted, single-word collections.
-  const names = new Set(getClientBundleIcons(appConfig.ui?.icons, isAvailable))
-
-  // User additions can be from any collection, so long as its data is installed.
+  // User additions can be from any collection.
   const clientBundle = options.icon?.clientBundle
   if (clientBundle && Array.isArray(clientBundle.icons)) {
     for (const icon of clientBundle.icons) {
       const name = parseIconName(icon)
-      if (name && isAvailable(name.slice(0, name.indexOf(':')))) {
+      if (name) {
         names.add(name)
       }
     }
@@ -88,7 +87,7 @@ export default function IconsPlugin(options: NuxtUIOptions, appConfig: Record<st
       return 'export default { install() {} }'
     }
 
-    const data = await loadIconsData(resolveBundleNames(options, appConfig, root), root)
+    const data = await loadIconsData(resolveBundleNames(options, appConfig), root)
 
     return [
       `import { addIcon } from '@iconify/vue'`,

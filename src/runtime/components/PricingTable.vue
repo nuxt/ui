@@ -3,7 +3,7 @@
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/pricing-table'
-import type { PricingPlanProps } from '../types'
+import type { PricingPlanProps } from './PricingPlan.vue'
 import type { ComponentConfig } from '../types/tv'
 
 type PricingTable = ComponentConfig<typeof theme, AppConfig, 'pricingTable'>
@@ -134,7 +134,7 @@ const formatSlotName = (item: { id?: string, title: string }): string => {
 }
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pricingTable || {}) })())
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.pricingTable || {}) })())
 
 const [DefineTierTemplate, ReuseTierTemplate] = createReusableTemplate<{ tier: PricingTableTier }>({
   props: {

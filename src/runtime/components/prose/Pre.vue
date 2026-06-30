@@ -2,7 +2,7 @@
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/prose/pre'
-import type { IconProps } from '../../types'
+import type { IconProps } from '../Icon.vue'
 import type { ComponentConfig } from '../../types/tv'
 
 type ProsePre = ComponentConfig<typeof theme, AppConfig, 'pre', 'ui.prose'>
@@ -47,7 +47,7 @@ const appConfig = useAppConfig() as ProsePre['AppConfig']
 const baseRef = useTemplateRef('baseRef')
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.pre || {}) })())
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.prose?.pre || {}) })())
 
 function copyCode() {
   const code = props.code ?? baseRef.value?.textContent ?? ''

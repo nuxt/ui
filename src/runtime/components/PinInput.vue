@@ -88,7 +88,7 @@ const rootProps = useForwardProps(reactivePick(props, 'disabled', 'id', 'mask', 
 const { emitFormInput, emitFormFocus, emitFormChange, emitFormBlur, size, color, id, name, highlight, disabled, ariaAttrs } = useFormField<PinInputProps>(_props)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pinInput || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.pinInput || {}) })({
   color: color.value ?? props.color,
   variant: props.variant,
   size: size.value ?? props.size,

@@ -2,7 +2,9 @@
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/banner'
-import type { ButtonProps, IconProps, LinkProps, LinkPropsKeys } from '../types'
+import type { ButtonProps } from './Button.vue'
+import type { IconProps } from './Icon.vue'
+import type { LinkProps, LinkPropsKeys } from './Link.vue'
 import type { ComponentConfig } from '../types/tv'
 
 type Banner = ComponentConfig<typeof theme, AppConfig, 'banner'>
@@ -90,7 +92,7 @@ const appConfig = useAppConfig() as Banner['AppConfig']
 const prefix = usePrefix()
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.banner || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.banner || {}) })({
   color: props.color,
   to: !!props.to
 }))

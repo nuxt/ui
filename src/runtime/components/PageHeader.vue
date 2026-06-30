@@ -2,7 +2,7 @@
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/page-header'
-import type { ButtonProps } from '../types'
+import type { ButtonProps } from './Button.vue'
 import type { ComponentConfig } from '../types/tv'
 
 type PageHeader = ComponentConfig<typeof theme, AppConfig, 'pageHeader'>
@@ -50,7 +50,7 @@ const props = useComponentProps('pageHeader', _props)
 const appConfig = useAppConfig() as PageHeader['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pageHeader || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.pageHeader || {}) })({
   title: !!props.title || !!slots.title
 }))
 </script>

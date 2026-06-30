@@ -62,7 +62,13 @@ export default defineNuxtPlugin(() => {
     style.setAttribute('data-nuxt-ui-colors', '')
     document.head.appendChild(style)
 
-    injectHead().hooks.hookOnce('dom:rendered', removeTemporaryColorsStyle)
+    // `hookOnce` is only available on unhead v2's `Hookable`. In v3 `hooks` is a `HookableCore`
+    // that exposes `hook` only, so self-unhook to keep the once semantics across both versions.
+    const head = injectHead()
+    const unhook = head.hooks?.hook('dom:rendered', () => {
+      removeTemporaryColorsStyle()
+      unhook?.()
+    })
   }
 
   useHead(headData)
