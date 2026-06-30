@@ -1,4 +1,10 @@
 <script setup lang="ts">
+const props = withDefaults(defineProps<{
+  orientation?: 'vertical' | 'horizontal'
+}>(), {
+  orientation: 'vertical'
+})
+
 type User = {
   id: number
   firstName: string
@@ -14,19 +20,22 @@ const { data: users } = useLazyFetch('https://dummyjson.com/users?limit=100&sele
   server: false
 })
 
-// The container owns the scroll; the list virtualizes against it so everything shares one scrollbar.
+const isHorizontal = computed(() => props.orientation === 'horizontal')
+
+// The container owns the scroll; the list virtualizes against it so the header and cards share one scrollbar.
 const container = useTemplateRef('container')
 const title = useTemplateRef('title')
 const toolbar = useTemplateRef('toolbar')
 const scrollArea = useTemplateRef('scrollArea')
 
-const ITEM_SIZE = 88
+// Item size along the scroll axis: card width when horizontal, row height when vertical.
+const itemSize = computed(() => isHorizontal.value ? 256 : 88)
 const getScrollElement = () => container.value
 
-// `scrollMargin` is the list's offset within the scroll element (border-box height of the title + toolbar above it).
-const { height: titleHeight } = useElementSize(title, undefined, { box: 'border-box' })
+// `scrollMargin` is the title's offset along the scroll axis: its width when it sits left of the cards, its height when it sits above them.
+const { width: titleWidth, height: titleHeight } = useElementSize(title, undefined, { box: 'border-box' })
 const { height: toolbarHeight } = useElementSize(toolbar, undefined, { box: 'border-box' })
-const scrollMargin = computed(() => titleHeight.value + toolbarHeight.value)
+const scrollMargin = computed(() => isHorizontal.value ? titleWidth.value : toolbarHeight.value + titleHeight.value)
 
 // Find: jump through the items whose name matches the query (like a find toolbar).
 const query = ref('')
@@ -52,8 +61,8 @@ function step(delta: number) {
   scrollToMatch()
 }
 
-function scrollToTop() {
-  container.value?.scrollTo({ top: 0, behavior: 'smooth' })
+function scrollToStart() {
+  container.value?.scrollTo(isHorizontal.value ? { left: 0, behavior: 'smooth' } : { top: 0, behavior: 'smooth' })
 }
 
 // Re-runs on a new query and when `users` resolves, so the first match centers as soon as results arrive.
@@ -66,9 +75,11 @@ watch(matches, () => {
 <template>
   <div
     ref="container"
-    class="w-full h-128 overflow-y-auto"
+    :class="isHorizontal ? 'w-full overflow-x-auto' : 'w-full h-128 overflow-y-auto'"
   >
+    <!-- Vertical: the header sits above the toolbar and scrolls away as you scroll down. -->
     <div
+      v-if="!isHorizontal"
       ref="title"
       class="flex items-end justify-between gap-4 p-6 bg-elevated/50"
     >
@@ -77,7 +88,7 @@ watch(matches, () => {
           Members
         </h2>
         <p class="text-muted">
-          This header and the virtualized list share one scrollbar.
+          This header scrolls away with the cards, sharing one scrollbar.
         </p>
       </div>
       <UBadge
@@ -89,7 +100,8 @@ watch(matches, () => {
 
     <div
       ref="toolbar"
-      class="sticky top-0 z-10 flex items-center px-6 py-3 border-y border-default bg-elevated/50 backdrop-blur"
+      class="z-10 flex items-center px-6 py-3 border-y border-default bg-elevated/50 backdrop-blur"
+      :class="isHorizontal ? 'sticky left-0' : 'sticky top-0'"
     >
       <UFieldGroup>
         <UInput
@@ -112,7 +124,7 @@ watch(matches, () => {
           </template>
         </UInput>
         <UButton
-          icon="i-lucide-chevron-up"
+          :icon="isHorizontal ? 'i-lucide-chevron-left' : 'i-lucide-chevron-up'"
           color="neutral"
           variant="outline"
           aria-label="Previous match"
@@ -120,7 +132,7 @@ watch(matches, () => {
           @click="step(-1)"
         />
         <UButton
-          icon="i-lucide-chevron-down"
+          :icon="isHorizontal ? 'i-lucide-chevron-right' : 'i-lucide-chevron-down'"
           color="neutral"
           variant="outline"
           aria-label="Next match"
@@ -129,35 +141,72 @@ watch(matches, () => {
         />
       </UFieldGroup>
 
-      <div class="ms-auto">
-        <UButton
-          icon="i-lucide-arrow-up-to-line"
-          color="neutral"
-          variant="outline"
-          label="Top"
-          @click="scrollToTop"
-        />
-      </div>
+      <UButton
+        :icon="isHorizontal ? 'i-lucide-arrow-left-to-line' : 'i-lucide-arrow-up-to-line'"
+        color="neutral"
+        variant="outline"
+        class="ms-auto"
+        :label="isHorizontal ? 'Start' : 'Top'"
+        @click="scrollToStart"
+      />
     </div>
 
-    <UScrollArea
-      ref="scrollArea"
-      v-slot="{ item, index }"
-      :items="users"
-      :virtualize="{ scrollMargin, getScrollElement, estimateSize: ITEM_SIZE, skipMeasurement: true }"
-    >
-      <UPageCard
-        orientation="horizontal"
-        class="rounded-none"
-        :class="[index === currentMatch && 'bg-primary/10']"
+    <!-- Horizontal: the header sits left of the cards (in the row) so it scrolls away with them. -->
+    <div :class="isHorizontal && 'flex'">
+      <div
+        v-if="isHorizontal"
+        ref="title"
+        class="w-72 shrink-0 flex flex-col justify-center gap-4 p-6 bg-elevated/50 border-r border-default"
       >
-        <UUser
-          :name="`${item.firstName} ${item.lastName}`"
-          :description="item.email"
-          :avatar="{ src: item.image, alt: item.firstName, loading: 'lazy' as const }"
-          size="lg"
+        <div>
+          <h2 class="text-2xl font-bold text-highlighted">
+            Members
+          </h2>
+          <p class="text-muted">
+            This header scrolls away with the cards, sharing one scrollbar.
+          </p>
+        </div>
+        <UBadge
+          color="neutral"
+          variant="subtle"
+          class="self-start"
+          :label="`${users.length} members`"
         />
-      </UPageCard>
-    </UScrollArea>
+      </div>
+
+      <UScrollArea
+        ref="scrollArea"
+        v-slot="{ item, index }"
+        :orientation="orientation"
+        :items="users"
+        :class="isHorizontal && 'h-48 shrink-0'"
+        :virtualize="{ scrollMargin, getScrollElement, estimateSize: itemSize, skipMeasurement: isHorizontal }"
+      >
+        <UPageCard
+          class="rounded-none h-full"
+          :class="[isHorizontal && 'w-64', index === currentMatch && 'bg-primary/10']"
+        >
+          <div
+            class="flex gap-3 h-full min-w-0"
+            :class="isHorizontal ? 'flex-col items-center justify-center text-center' : 'items-center'"
+          >
+            <UAvatar
+              :src="item.image"
+              :alt="item.firstName"
+              :size="isHorizontal ? '2xl' : 'lg'"
+              loading="lazy"
+            />
+            <div class="min-w-0">
+              <p class="font-medium text-highlighted truncate">
+                {{ item.firstName }} {{ item.lastName }}
+              </p>
+              <p class="text-sm text-muted truncate">
+                {{ item.email }}
+              </p>
+            </div>
+          </div>
+        </UPageCard>
+      </UScrollArea>
+    </div>
   </div>
 </template>
