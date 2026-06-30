@@ -215,8 +215,8 @@ function getVirtualItemStyle(virtualItem: VirtualItem): CSSProperties {
   const hasLanes = lanes.value !== undefined && lanes.value > 1
   const lane = virtualItem.lane
   const gap = virtualizerProps.value.gap ?? 0
-  // In external-scroll mode `start` includes `scrollMargin`; subtract it so items sit inline.
-  const offset = virtualItem.start - (isExternalScroll.value ? (virtualizerProps.value.scrollMargin ?? 0) : 0)
+  // `start` includes `scrollMargin`; subtract it so items sit inline (0 unless set).
+  const offset = virtualItem.start - (virtualizerProps.value.scrollMargin ?? 0)
 
   // For cross-axis gaps: calculate size and position accounting for gaps between lanes
   // laneSize = (100% - (lanes - 1) * gap) / lanes
