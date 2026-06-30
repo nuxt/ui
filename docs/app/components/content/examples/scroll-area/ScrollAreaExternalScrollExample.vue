@@ -180,7 +180,7 @@ watch(matches, () => {
         :orientation="orientation"
         :items="users"
         :class="isHorizontal && 'h-48 shrink-0'"
-        :virtualize="{ scrollMargin, getScrollElement, estimateSize: itemSize, skipMeasurement: true }"
+        :virtualize="{ scrollMargin, getScrollElement, estimateSize: itemSize, skipMeasurement: isHorizontal }"
       >
         <UPageCard
           class="rounded-none h-full"
