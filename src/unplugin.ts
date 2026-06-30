@@ -58,6 +58,18 @@ export interface NuxtUIOptions extends Omit<ModuleOptions, 'fonts' | 'colorMode'
        * `material-symbols:menu`). Only bundled when the collection's data is installed.
        */
       icons?: string[]
+      /**
+       * Scan your source for icon usages and bundle the ones from installed collections, so
+       * icons you use in your own components render offline too. Mirrors `@nuxt/icon`'s
+       * `clientBundle.scan`.
+       * @defaultValue `false`
+       */
+      scan?: boolean | {
+        /** @defaultValue `['**\/*.{vue,jsx,tsx,md,mdc,mdx,yml,yaml}']` */
+        globInclude?: string[]
+        /** @defaultValue `['node_modules', 'dist', 'build', 'coverage', 'test', 'tests', '.*']` */
+        globExclude?: string[]
+      }
     }
   }
   /**
