@@ -71,10 +71,12 @@ export async function loadIconsData(names: string[], cwd: string): Promise<Recor
  * Embed the icons Nuxt UI uses into the build so they render synchronously during SSR and
  * fully offline, instead of being fetched from the Iconify API at runtime.
  *
- * `@iconify/vue` looks icons up from an in-memory store, so the generated
- * `virtual:nuxt-ui-icons` module registers the bundled data via `addIcon` from a Vue
- * plugin. The Vue plugin install runs on both server and client, which is what makes the
- * icons available during SSR (see `PluginsPlugin`, which `app.use`s it).
+ * The generated `virtual:nuxt-ui-icons` module exports only the inlined icon data, with no
+ * imports of its own: a virtual module has no location on disk to resolve a bare specifier
+ * like `@iconify/vue` from, so the `addIcon` registration lives in the runtime plugin
+ * `runtime/vue/plugins/icons`, which `PluginsPlugin` includes. That plugin imports the data
+ * from here and `@iconify/vue` from its own location (the same instance the components use,
+ * so the in-memory store is shared), and its install runs on both server and client.
  */
 export default function IconsPlugin(options: NuxtUIOptions, appConfig: Record<string, any>) {
   // `config.root` is the Vite equivalent of Nuxt's `rootDir`; resolving from it (not
@@ -84,16 +86,12 @@ export default function IconsPlugin(options: NuxtUIOptions, appConfig: Record<st
 
   async function generate(): Promise<string> {
     if (options.icon?.clientBundle === false) {
-      return 'export default { install() {} }'
+      return 'export const icons = {}'
     }
 
     const data = await loadIconsData(resolveBundleNames(options, appConfig), root)
 
-    return [
-      `import { addIcon } from '@iconify/vue'`,
-      `const icons = ${JSON.stringify(data)}`,
-      `export default { install() { for (const name in icons) addIcon(name, icons[name]) } }`
-    ].join('\n')
+    return `export const icons = ${JSON.stringify(data)}`
   }
 
   return {
