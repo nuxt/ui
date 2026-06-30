@@ -1,3 +1,4 @@
+import { join } from 'node:path'
 import { describe, it, expect } from 'vitest'
 import { createSSRApp, h } from 'vue'
 import { renderToString } from 'vue/server-renderer'
@@ -7,6 +8,16 @@ import { loadIconsData } from '../../src/plugins/icons'
 describe('loadIconsData', () => {
   it('loads the SVG data for an installed collection', async () => {
     const data = await loadIconsData(['lucide:check'], process.cwd())
+
+    expect(data['lucide:check']?.body).toBeTruthy()
+  })
+
+  it('resolves a collection installed in an ancestor when given a nested cwd', async () => {
+    // The build passes the Vite `config.root`, which may be a nested project dir, so
+    // `loadCollectionFromFS` must walk up to where `@iconify-json/lucide` is installed rather
+    // than only looking in `cwd` — otherwise workspace/monorepo builds miss it (nuxt/icon#502).
+    const nestedCwd = join(process.cwd(), 'src')
+    const data = await loadIconsData(['lucide:check'], nestedCwd)
 
     expect(data['lucide:check']?.body).toBeTruthy()
   })
