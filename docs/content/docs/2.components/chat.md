@@ -16,6 +16,10 @@ Nuxt UI provides a set of components designed to build AI-powered chat interface
 Check out the [`Nuxt`](https://github.com/nuxt-ui-templates/chat) and [`Vue`](https://github.com/nuxt-ui-templates/chat-vue) AI Chat templates on GitHub for production-ready implementations.
 ::
 
+:::tip{to="https://docs.langchain.com/oss/javascript/langchain/frontend/overview" target="_blank"}
+Building with LangChain? The Chat components can render agent state from any Vue composable: use the [DeepAgents harness adapter](https://vercel.com/changelog/deepagents-and-opencode-harness-adapters) with the AI SDK `Chat` class, or connect `@langchain/vue`'s `useStream` / `useMessages` to `UChatMessages` and `UChatPrompt`.
+:::
+
 ## Components
 
 | Component | Description |
