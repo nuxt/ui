@@ -1,4 +1,4 @@
-import { streamText, convertToModelMessages } from 'ai'
+import { streamText, convertToModelMessages, toUIMessageStream, createUIMessageStreamResponse } from 'ai'
 import { anthropic } from '@ai-sdk/anthropic'
 import type { AnthropicLanguageModelOptions } from '@ai-sdk/anthropic'
 import { gateway } from '@ai-sdk/gateway'
@@ -6,7 +6,7 @@ import { gateway } from '@ai-sdk/gateway'
 export default defineEventHandler(async (event) => {
   const { messages } = await readBody(event)
 
-  return streamText({
+  const result = streamText({
     model: gateway('anthropic/claude-sonnet-5'),
     instructions: 'You are a helpful assistant. When answering questions, search the web for up-to-date information when relevant.',
     messages: await convertToModelMessages(messages),
@@ -21,5 +21,7 @@ export default defineEventHandler(async (event) => {
         effort: 'low'
       } satisfies AnthropicLanguageModelOptions
     }
-  }).toUIMessageStreamResponse()
+  })
+
+  return createUIMessageStreamResponse({ stream: toUIMessageStream({ stream: result.stream }) })
 })

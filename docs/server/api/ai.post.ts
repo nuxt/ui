@@ -1,4 +1,4 @@
-import { streamText, convertToModelMessages, smoothStream, jsonSchema, isStepCount } from 'ai'
+import { streamText, convertToModelMessages, smoothStream, jsonSchema, isStepCount, toUIMessageStream, createUIMessageStreamResponse } from 'ai'
 import type { AnthropicLanguageModelOptions } from '@ai-sdk/anthropic'
 import { gateway } from '@ai-sdk/gateway'
 import { z } from 'zod'
@@ -373,7 +373,7 @@ Guidelines:
 - Format responses in a conversational way, not as documentation sections.
     `
 
-  return streamText({
+  const result = streamText({
     model: gateway('anthropic/claude-sonnet-5'),
     maxOutputTokens: 8000,
     abortSignal: abortController.signal,
@@ -403,5 +403,7 @@ Guidelines:
     onError: (error) => {
       console.error('streamText error:', error)
     }
-  }).toUIMessageStreamResponse()
+  })
+
+  return createUIMessageStreamResponse({ stream: toUIMessageStream({ stream: result.stream }) })
 })

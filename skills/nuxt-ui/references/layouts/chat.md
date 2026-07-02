@@ -60,34 +60,38 @@ html.dark .shiki span {
 Using [Vercel AI Gateway](https://vercel.com/ai-gateway) (recommended):
 
 ```ts [server/api/chat.post.ts]
-import { streamText, convertToModelMessages } from 'ai'
+import { streamText, convertToModelMessages, toUIMessageStream, createUIMessageStreamResponse } from 'ai'
 import { gateway } from '@ai-sdk/gateway'
 
 export default defineEventHandler(async (event) => {
   const { messages } = await readBody(event)
 
-  return streamText({
+  const result = streamText({
     model: gateway('anthropic/claude-sonnet-5'),
     instructions: 'You are a helpful assistant.',
     messages: await convertToModelMessages(messages)
-  }).toUIMessageStreamResponse()
+  })
+
+  return createUIMessageStreamResponse({ stream: toUIMessageStream({ stream: result.stream }) })
 })
 ```
 
 Or with a direct provider (e.g., `pnpm add @ai-sdk/openai`):
 
 ```ts [server/api/chat.post.ts]
-import { streamText, convertToModelMessages } from 'ai'
+import { streamText, convertToModelMessages, toUIMessageStream, createUIMessageStreamResponse } from 'ai'
 import { openai } from '@ai-sdk/openai'
 
 export default defineEventHandler(async (event) => {
   const { messages } = await readBody(event)
 
-  return streamText({
+  const result = streamText({
     model: openai('gpt-5-nano'),
     instructions: 'You are a helpful assistant.',
     messages: await convertToModelMessages(messages)
-  }).toUIMessageStreamResponse()
+  })
+
+  return createUIMessageStreamResponse({ stream: toUIMessageStream({ stream: result.stream }) })
 })
 ```
 

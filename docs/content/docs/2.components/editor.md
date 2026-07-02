@@ -533,7 +533,7 @@ lang: 'ts'
 ::code-collapse
 
 ```ts [server/api/completion.post.ts]
-import { streamText } from 'ai'
+import { streamText, createTextStreamResponse } from 'ai'
 import { gateway } from '@ai-sdk/gateway'
 
 export default defineEventHandler(async (event) => {
@@ -585,12 +585,14 @@ CRITICAL RULES:
       break
   }
 
-  return streamText({
+  const result = streamText({
     model: gateway('anthropic/claude-haiku-4.5'),
     instructions,
     prompt,
     maxOutputTokens
-  }).toTextStreamResponse()
+  })
+
+  return createTextStreamResponse({ stream: result.textStream })
 })
 ```
 
