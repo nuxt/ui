@@ -201,7 +201,7 @@
     "@tanstack/table-core": "^8.21.3",
     "@vitejs/plugin-vue": "^6.0.7",
     "@vue/test-utils": "^2.4.11",
-    "ai": "^7.0.0",
+    "ai": "^7.0.9",
     "embla-carousel": "^8.6.0",
     "eslint": "^10.6.0",
     "happy-dom": "^20.10.6",

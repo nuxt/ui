@@ -31,11 +31,4 @@ allowBuilds:
   vue-demi: false
 
 minimumReleaseAgeExclude:
-  - '@ai-sdk/anthropic@4.0.0'
-  - '@ai-sdk/gateway@4.0.0'
-  - '@ai-sdk/mcp@2.0.0'
-  - '@ai-sdk/provider-utils@5.0.0'
-  - '@ai-sdk/provider@4.0.0'
-  - '@ai-sdk/vue@4.0.0'
   - '@nuxt/icon@2.2.5'
-  - ai@7.0.0
