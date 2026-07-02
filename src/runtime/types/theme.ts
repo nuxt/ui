@@ -135,6 +135,7 @@ export interface ThemeDefaults {
   skeleton?: Partial<ComponentTypes.SkeletonProps>
   slideover?: Partial<ComponentTypes.SlideoverProps>
   slider?: Partial<ComponentTypes.SliderProps>
+  splitter?: Partial<ComponentTypes.SplitterProps>
   stepper?: Partial<ComponentTypes.StepperProps>
   switch?: Partial<ComponentTypes.SwitchProps>
   table?: Partial<ComponentTypes.TableProps>
