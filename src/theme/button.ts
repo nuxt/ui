@@ -25,31 +25,43 @@ export default (options: Required<ModuleOptions>) => ({
       link: ''
     },
     size: {
-      xs: {
+      '3xs': {
+        base: 'px-1 py-0.5 text-[8px]/3 gap-1 rounded-sm',
+        leadingIcon: 'size-3',
+        leadingAvatarSize: '3xs',
+        trailingIcon: 'size-3'
+      },
+      '2xs': {
+        base: 'px-1.5 py-1 text-[10px]/3 gap-1 rounded-sm',
+        leadingIcon: 'size-3',
+        leadingAvatarSize: '3xs',
+        trailingIcon: 'size-3'
+      },
+      'xs': {
         base: 'px-2 py-1 text-xs gap-1',
         leadingIcon: 'size-4',
         leadingAvatarSize: '3xs',
         trailingIcon: 'size-4'
       },
-      sm: {
+      'sm': {
         base: 'px-2.5 py-1.5 text-xs gap-1.5',
         leadingIcon: 'size-4',
         leadingAvatarSize: '3xs',
         trailingIcon: 'size-4'
       },
-      md: {
+      'md': {
         base: 'px-2.5 py-1.5 text-sm gap-1.5',
         leadingIcon: 'size-5',
         leadingAvatarSize: '2xs',
         trailingIcon: 'size-5'
       },
-      lg: {
+      'lg': {
         base: 'px-3 py-2 text-sm gap-2',
         leadingIcon: 'size-5',
         leadingAvatarSize: '2xs',
         trailingIcon: 'size-5'
       },
-      xl: {
+      'xl': {
         base: 'px-3 py-2 text-base gap-2',
         leadingIcon: 'size-6',
         leadingAvatarSize: 'xs',
@@ -131,6 +143,14 @@ export default (options: Required<ModuleOptions>) => ({
     color: 'neutral',
     variant: 'link',
     class: 'text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted outline-inverted/25 focus-visible:outline-3'
+  }, {
+    size: '3xs',
+    square: true,
+    class: 'p-0.5'
+  }, {
+    size: '2xs',
+    square: true,
+    class: 'p-1'
   }, {
     size: 'xs',
     square: true,
