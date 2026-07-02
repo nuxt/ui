@@ -374,7 +374,7 @@ Guidelines:
     `
 
   return streamText({
-    model: gateway('anthropic/claude-sonnet-4.6'),
+    model: gateway('anthropic/claude-sonnet-5'),
     maxOutputTokens: 8000,
     abortSignal: abortController.signal,
     providerOptions: {
