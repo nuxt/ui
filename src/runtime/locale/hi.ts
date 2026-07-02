@@ -82,6 +82,9 @@ export default defineLocale<Messages>({
       close: 'साइडबार बंद करें',
       open: 'साइडबार खोलें'
     },
+    drawer: {
+      close: 'बंद करें'
+    },
     error: {
       clear: 'होम पेज पर वापस जाएं'
     },

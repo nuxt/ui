@@ -82,6 +82,9 @@ export default defineLocale<Messages>({
       close: 'Κλείσιμο πλευρικής μπάρας',
       open: 'Άνοιγμα πλευρικής μπάρας'
     },
+    drawer: {
+      close: 'Κλείσιμο'
+    },
     error: {
       clear: 'Επιστροφή στην αρχική'
     },

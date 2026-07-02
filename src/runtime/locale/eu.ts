@@ -82,6 +82,9 @@ export default defineLocale<Messages>({
       close: 'Alboko barra itxi',
       open: 'Alboko barra zabaldu'
     },
+    drawer: {
+      close: 'Itxi'
+    },
     error: {
       clear: 'Hasierara itzuli'
     },

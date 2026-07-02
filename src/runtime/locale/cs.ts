@@ -82,6 +82,9 @@ export default defineLocale<Messages>({
       close: 'Zavřít postranní panel',
       open: 'Otevřít postranní panel'
     },
+    drawer: {
+      close: 'Zavřít'
+    },
     error: {
       clear: 'Zpět na úvod'
     },

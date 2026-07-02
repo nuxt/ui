@@ -77,6 +77,9 @@ export default defineLocale<Messages>({
       close: 'Aizvērt sānjoslu',
       open: 'Atvērt sānjoslu'
     },
+    drawer: {
+      close: 'Aizvērt'
+    },
     error: {
       clear: 'Atpakaļ uz sākumlapu'
     },

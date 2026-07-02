@@ -82,6 +82,9 @@ export default defineLocale<Messages>({
       close: 'Pechar barra lateral',
       open: 'Abrir barra lateral'
     },
+    drawer: {
+      close: 'Pechar'
+    },
     error: {
       clear: 'Volver ao inicio'
     },

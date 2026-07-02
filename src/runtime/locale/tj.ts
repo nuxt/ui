@@ -82,6 +82,9 @@ export default defineLocale<Messages>({
       close: 'Пӯшидан',
       open: 'Кушодан'
     },
+    drawer: {
+      close: 'Бастан'
+    },
     error: {
       clear: 'Тоза кардан'
     },

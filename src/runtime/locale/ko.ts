@@ -82,6 +82,9 @@ export default defineLocale<Messages>({
       close: '사이드바 닫기',
       open: '사이드바 열기'
     },
+    drawer: {
+      close: '닫기'
+    },
     error: {
       clear: '홈으로 돌아가기'
     },

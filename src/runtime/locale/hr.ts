@@ -82,6 +82,9 @@ export default defineLocale<Messages>({
       close: 'Zatvori bočnu traku',
       open: 'Otvori bočnu traku'
     },
+    drawer: {
+      close: 'Zatvori'
+    },
     error: {
       clear: 'Natrag na početnu'
     },
