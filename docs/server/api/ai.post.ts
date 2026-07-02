@@ -380,7 +380,8 @@ Guidelines:
     providerOptions: {
       anthropic: {
         thinking: {
-          type: 'adaptive'
+          type: 'adaptive',
+          display: 'summarized'
         },
         effort: 'low'
       } satisfies AnthropicLanguageModelOptions,
