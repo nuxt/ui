@@ -1,4 +1,4 @@
-import { streamText, convertToModelMessages, smoothStream, jsonSchema, stepCountIs } from 'ai'
+import { streamText, convertToModelMessages, smoothStream, jsonSchema, isStepCount } from 'ai'
 import type { AnthropicLanguageModelOptions } from '@ai-sdk/anthropic'
 import { gateway } from '@ai-sdk/gateway'
 import { z } from 'zod'
@@ -388,10 +388,10 @@ Guidelines:
         caching: 'auto'
       }
     },
-    system,
+    instructions: system,
     messages: await convertToModelMessages(messages),
     experimental_transform: smoothStream(),
-    stopWhen: stepCountIs(6),
+    stopWhen: isStepCount(6),
     tools: {
       ...mcpTools,
       getThemeGuide,

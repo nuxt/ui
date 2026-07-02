@@ -68,7 +68,7 @@ export default defineEventHandler(async (event) => {
 
   return streamText({
     model: gateway('anthropic/claude-sonnet-5'),
-    system: 'You are a helpful assistant.',
+    instructions: 'You are a helpful assistant.',
     messages: await convertToModelMessages(messages)
   }).toUIMessageStreamResponse()
 })
@@ -85,7 +85,7 @@ export default defineEventHandler(async (event) => {
 
   return streamText({
     model: openai('gpt-5-nano'),
-    system: 'You are a helpful assistant.',
+    instructions: 'You are a helpful assistant.',
     messages: await convertToModelMessages(messages)
   }).toUIMessageStreamResponse()
 })

@@ -6,7 +6,7 @@ export default defineEventHandler(async (event) => {
 
   return streamText({
     model: gateway('anthropic/claude-haiku-4.5'),
-    system: 'You are a helpful assistant for Nuxt UI, a UI library for Nuxt and Vue.',
+    instructions: 'You are a helpful assistant for Nuxt UI, a UI library for Nuxt and Vue.',
     messages: await convertToModelMessages(messages)
   }).toUIMessageStreamResponse()
 })

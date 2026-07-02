@@ -587,7 +587,7 @@ CRITICAL RULES:
 
   return streamText({
     model: gateway('anthropic/claude-haiku-4.5'),
-    system,
+    instructions: system,
     prompt,
     maxOutputTokens
   }).toTextStreamResponse()
