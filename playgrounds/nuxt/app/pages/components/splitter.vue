@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { SplitterItem } from '#build/ui'
+import type { SplitterItem } from '@nuxt/ui'
 
 const orientation = ref('horizontal' as 'horizontal' | 'vertical')
 
