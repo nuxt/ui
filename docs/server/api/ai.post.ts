@@ -405,5 +405,6 @@ Guidelines:
     }
   })
 
-  return createUIMessageStreamResponse({ stream: toUIMessageStream({ stream: result.stream }) })
+  const stream = toUIMessageStream({ stream: result.stream })
+  return createUIMessageStreamResponse({ stream })
 })
