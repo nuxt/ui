@@ -296,26 +296,32 @@ export default defineEventHandler(async (event) => {
   const httpClient = await createMCPClient({
     transport: { type: 'http', url: 'https://your-app.com/mcp' }
   })
-  const tools = await httpClient.tools()
+  try {
+    const tools = await httpClient.tools()
 
-  const result = streamText({
-    model: gateway('anthropic/claude-sonnet-5'),
-    maxOutputTokens: 10000,
-    instructions: 'You are a helpful assistant. Use your tools to search for relevant information before answering questions.',
-    messages: await convertToModelMessages(messages),
-    stopWhen: isStepCount(6),
-    tools,
-    onEnd: async () => {
-      await httpClient.close()
-    },
-    onError: async (error) => {
-      console.error(error)
-      await httpClient.close()
-    }
-  })
+    const result = streamText({
+      model: gateway('anthropic/claude-sonnet-5'),
+      maxOutputTokens: 10000,
+      instructions: 'You are a helpful assistant. Use your tools to search for relevant information before answering questions.',
+      messages: await convertToModelMessages(messages),
+      stopWhen: isStepCount(6),
+      tools,
+      onEnd: async () => {
+        await httpClient.close()
+      },
+      onError: async (error) => {
+        console.error(error)
+        await httpClient.close()
+      }
+    })
 
-  const stream = toUIMessageStream({ stream: result.stream })
-  return createUIMessageStreamResponse({ stream })
+    const stream = toUIMessageStream({ stream: result.stream })
+    return createUIMessageStreamResponse({ stream })
+  } catch (error) {
+    // Close the MCP client if setup fails before streaming starts
+    await httpClient.close()
+    throw error
+  }
 })
 ```
 
