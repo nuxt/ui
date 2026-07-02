@@ -13,8 +13,8 @@
     "@ai-sdk/gateway": "^4.0.7",
     "@ai-sdk/vue": "^4.0.9",
     "@comark/vue": "^0.4.0",
-    "@iconify-json/lucide": "^1.2.114",
-    "@iconify-json/simple-icons": "^1.2.87",
+    "@iconify-json/lucide": "^1.2.115",
+    "@iconify-json/simple-icons": "^1.2.88",
     "@internationalized/date": "^3.12.2",
     "@nuxt/content": "^3.14.0",
     "@nuxt/ui": "workspace:*",
@@ -22,11 +22,11 @@
     "@tiptap/extension-text-align": "^3.26.1",
     "ai": "^7.0.9",
     "nuxt": "^4.4.8",
-    "tailwindcss": "^4.3.1",
+    "tailwindcss": "^4.3.2",
     "zod": "^4.4.3"
   },
   "devDependencies": {
     "typescript": "^6.0.3",
-    "vue-tsc": "^3.3.5"
+    "vue-tsc": "^3.3.6"
   }
 }
