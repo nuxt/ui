@@ -9,9 +9,9 @@
     "typecheck": "nuxt typecheck"
   },
   "dependencies": {
-    "@ai-sdk/anthropic": "^3.0.89",
-    "@ai-sdk/gateway": "^3.0.139",
-    "@ai-sdk/vue": "^3.0.214",
+    "@ai-sdk/anthropic": "^4.0.4",
+    "@ai-sdk/gateway": "^4.0.7",
+    "@ai-sdk/vue": "^4.0.9",
     "@comark/vue": "^0.4.0",
     "@iconify-json/lucide": "^1.2.114",
     "@iconify-json/simple-icons": "^1.2.87",
@@ -20,7 +20,7 @@
     "@nuxt/ui": "workspace:*",
     "@tiptap/extension-emoji": "^3.26.1",
     "@tiptap/extension-text-align": "^3.26.1",
-    "ai": "^6.0.214",
+    "ai": "^7.0.9",
     "nuxt": "^4.4.8",
     "tailwindcss": "^4.3.1",
     "zod": "^4.4.3"

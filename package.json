@@ -201,7 +201,7 @@
     "@tanstack/table-core": "^8.21.3",
     "@vitejs/plugin-vue": "^6.0.7",
     "@vue/test-utils": "^2.4.11",
-    "ai": "^6.0.214",
+    "ai": "^7.0.9",
     "embla-carousel": "^8.6.0",
     "eslint": "^10.6.0",
     "happy-dom": "^20.10.6",
@@ -236,6 +236,7 @@
     "@tiptap/starter-kit": "^3",
     "@tiptap/suggestion": "^3",
     "@tiptap/vue-3": "^3",
+    "ai": "^6 || ^7",
     "joi": "^18.0.0",
     "superstruct": "^2.0.0",
     "tailwindcss": "^4.0.0",
@@ -256,6 +257,9 @@
       "optional": true
     },
     "@nuxt/content": {
+      "optional": true
+    },
+    "ai": {
       "optional": true
     },
     "joi": {
