@@ -4,7 +4,11 @@ import type { DropdownMenuRootProps, DropdownMenuRootEmits, DropdownMenuContentP
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/dropdown-menu'
-import type { AvatarProps, IconProps, InputProps, KbdProps, LinkProps } from '../types'
+import type { AvatarProps } from './Avatar.vue'
+import type { IconProps } from './Icon.vue'
+import type { InputProps } from './Input.vue'
+import type { KbdProps } from './Kbd.vue'
+import type { LinkProps } from './Link.vue'
 import type { ArrayOrNested, DynamicSlots, GetItemKeys, MergeTypes, NestedItem, EmitsToProps } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
@@ -175,7 +179,7 @@ const arrowProps = toRef(() => defu(props.arrow, { rounded: true }) as DropdownM
 const getProxySlots = () => omit(slots, ['default'])
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dropdownMenu || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.dropdownMenu || {}) })({
   size: props.size
 }))
 </script>

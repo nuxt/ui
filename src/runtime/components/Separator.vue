@@ -3,7 +3,8 @@ import type { SeparatorProps as _SeparatorProps } from 'reka-ui'
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/separator'
-import type { AvatarProps, IconProps } from '../types'
+import type { AvatarProps } from './Avatar.vue'
+import type { IconProps } from './Icon.vue'
 import type { ComponentConfig } from '../types/tv'
 
 type Separator = ComponentConfig<typeof theme, AppConfig, 'separator'>
@@ -65,6 +66,8 @@ import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
 
+defineOptions({ inheritAttrs: false })
+
 const _props = withDefaults(defineProps<SeparatorProps>(), {
   orientation: 'horizontal',
   position: 'center'
@@ -82,7 +85,7 @@ const [DefineContainer, ReuseContainer] = createReusableTemplate()
 const hasContent = computed(() => !!(props.label || props.icon || props.avatar || slots.default))
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.separator || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.separator || {}) })({
   color: props.color,
   orientation: props.orientation,
   size: props.size,
@@ -102,7 +105,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.separator ||
     </div>
   </DefineContainer>
 
-  <Separator v-bind="rootProps" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <Separator v-bind="{ ...rootProps, ...$attrs }" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <ReuseContainer v-if="hasContent && props.position === 'start'" />
 
     <div data-slot="border" :class="ui.border({ class: props.ui?.border })" />

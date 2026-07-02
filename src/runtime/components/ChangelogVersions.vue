@@ -4,7 +4,7 @@ import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { SpringOptions, UseScrollOptions } from 'motion-v'
 import theme from '#build/ui/changelog-versions'
-import type { ChangelogVersionProps, ChangelogVersionSlots } from '../types'
+import type { ChangelogVersionProps, ChangelogVersionSlots } from './ChangelogVersion.vue'
 import type { ComponentConfig } from '../types/tv'
 
 type ChangelogVersions = ComponentConfig<typeof theme, AppConfig, 'changelogVersions'>
@@ -79,7 +79,7 @@ const y = useSpring(scrollYProgress, springOptions)
 const height = useTransform(() => `${Number(y.get()) * 100}%`)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.changelogVersions || {}) })())
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.changelogVersions || {}) })())
 </script>
 
 <template>

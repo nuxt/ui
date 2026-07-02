@@ -4,7 +4,9 @@ import type { ComponentPublicInstance, VNode } from 'vue'
 import type { TabsRootProps, TabsRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/tabs'
-import type { AvatarProps, BadgeProps, IconProps } from '../types'
+import type { AvatarProps } from './Avatar.vue'
+import type { BadgeProps } from './Badge.vue'
+import type { IconProps } from './Icon.vue'
 import type { DynamicSlots, GetItemKeys } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
@@ -125,7 +127,7 @@ const appConfig = useAppConfig() as Tabs['AppConfig']
 const rootProps = useForwardProps(reactivePick(props, 'as', 'unmountOnHide'), emits)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.tabs || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.tabs || {}) })({
   color: props.color,
   variant: props.variant,
   size: props.size,

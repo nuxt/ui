@@ -1,7 +1,8 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/dashboard-sidebar-collapse'
-import type { ButtonProps, LinkPropsKeys } from '../types'
+import type { ButtonProps } from './Button.vue'
+import type { LinkPropsKeys } from './Link.vue'
 import type { ComponentConfig } from '../types/tv'
 
 type DashboardSidebarCollapse = ComponentConfig<typeof theme, AppConfig, 'dashboardSidebarCollapse'>
@@ -50,7 +51,7 @@ const appConfig = useAppConfig() as DashboardSidebarCollapse['AppConfig']
 const { sidebarCollapsed, collapseSidebar } = useDashboard({ sidebarCollapsed: ref(false), collapseSidebar: () => {} })
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dashboardSidebarCollapse || {}) }))
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.dashboardSidebarCollapse || {}) }))
 </script>
 
 <template>

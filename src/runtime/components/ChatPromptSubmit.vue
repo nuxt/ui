@@ -2,7 +2,9 @@
 import type { ChatStatus } from 'ai'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/chat-prompt-submit'
-import type { ButtonProps, ButtonSlots, IconProps, LinkPropsKeys } from '../types'
+import type { ButtonProps, ButtonSlots } from './Button.vue'
+import type { IconProps } from './Icon.vue'
+import type { LinkPropsKeys } from './Link.vue'
 import type { ComponentConfig } from '../types/tv'
 
 type ChatPromptSubmit = ComponentConfig<typeof theme, AppConfig, 'chatPromptSubmit'>
@@ -151,7 +153,7 @@ const statusButtonProps = computed(() => ({
 } satisfies { [key: string]: ButtonProps })[props.status])
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.chatPromptSubmit || {}) })())
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.chatPromptSubmit || {}) })())
 </script>
 
 <template>

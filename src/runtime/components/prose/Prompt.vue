@@ -2,7 +2,7 @@
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/prose/prompt'
-import type { IconProps } from '../../types'
+import type { IconProps } from '../Icon.vue'
 import type { ComponentConfig } from '../../types/tv'
 
 type ProsePrompt = ComponentConfig<typeof theme, AppConfig, 'prompt', 'ui.prose'>
@@ -51,7 +51,7 @@ const { copy, copied } = useClipboard()
 const appConfig = useAppConfig() as ProsePrompt['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.prompt || {}) })())
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.prose?.prompt || {}) })())
 
 function getPromptText() {
   const children = slots.default?.()

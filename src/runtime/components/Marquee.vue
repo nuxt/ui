@@ -65,7 +65,7 @@ const props = useComponentProps('marquee', _props)
 const appConfig = useAppConfig() as Marquee['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.marquee || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.marquee || {}) })({
   pauseOnHover: props.pauseOnHover,
   orientation: props.orientation,
   reverse: props.reverse,

@@ -72,7 +72,7 @@ const props = useComponentProps('formField', _props)
 const appConfig = useAppConfig() as FormField['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.formField || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.formField || {}) })({
   size: props.size,
   required: props.required,
   orientation: props.orientation

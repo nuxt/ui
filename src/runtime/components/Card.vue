@@ -46,7 +46,7 @@ const props = useComponentProps('card', _props)
 const appConfig = useAppConfig() as Card['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.card || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.card || {}) })({
   variant: props.variant
 }))
 </script>

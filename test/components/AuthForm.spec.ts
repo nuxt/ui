@@ -45,6 +45,36 @@ describe('AuthForm', () => {
     ['with footer slot', { props, slots: { footer: () => 'Footer' } }]
   ])
 
+  it('toggles password fields visibility independently', async () => {
+    const passwordFields = [{
+      name: 'password',
+      label: 'Password',
+      type: 'password' as const
+    }, {
+      name: 'password_confirmation',
+      label: 'Password confirmation',
+      type: 'password' as const
+    }] satisfies AuthFormProps['fields']
+
+    const wrapper = await mountSuspended(AuthForm, {
+      props: { fields: passwordFields }
+    })
+
+    const inputs = () => wrapper.findAll('input')
+    const toggles = wrapper.findAll('button[aria-label="Show password"]')
+    expect(toggles).toHaveLength(2)
+
+    // `aria-controls` points to its own input, not a shared one
+    expect(toggles[0]!.attributes('aria-controls')).toBe(inputs()[0]!.attributes('id'))
+    expect(toggles[1]!.attributes('aria-controls')).toBe(inputs()[1]!.attributes('id'))
+    expect(toggles[0]!.attributes('aria-controls')).not.toBe(toggles[1]!.attributes('aria-controls'))
+
+    // Revealing the first field does not reveal the second
+    await toggles[0]!.trigger('click')
+    expect(inputs()[0]!.attributes('type')).toBe('text')
+    expect(inputs()[1]!.attributes('type')).toBe('password')
+  })
+
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(AuthForm, {
       props: {

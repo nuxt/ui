@@ -103,7 +103,13 @@ export interface TableProps<T extends TableData = TableData> extends TableOption
    * @see https://tanstack.com/virtual/latest/docs/api/virtualizer#options
    * @defaultValue false
    */
-  virtualize?: boolean | (Partial<Omit<VirtualizerOptions<Element, Element>, 'getScrollElement' | 'count' | 'estimateSize' | 'overscan'>> & {
+  virtualize?: boolean | (Partial<Omit<VirtualizerOptions<Element, Element>, 'count' | 'estimateSize' | 'overscan'>> & {
+    /**
+     * Virtualize against an external scroll element instead of the table's own root.
+     * Pair with `scrollMargin` set to the table's offset from the scroll element's start.
+     * @defaultValue undefined
+     */
+    getScrollElement?: () => Element | null
     /**
      * Number of items rendered outside the visible area
      * @defaultValue 12
@@ -281,12 +287,16 @@ function processColumns(columns: TableColumn<T>[]): TableColumn<T>[] {
   })
 }
 
+// When an external scroll element is provided, it owns the scroll (the root grows inline).
+const isExternalScroll = computed(() => typeof props.virtualize === 'object' && !!props.virtualize.getScrollElement)
+
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.table || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.table || {}) })({
   sticky: props.sticky,
   loading: props.loading,
   loadingColor: props.loadingColor,
-  loadingAnimation: props.loadingAnimation
+  loadingAnimation: props.loadingAnimation,
+  externalScroll: isExternalScroll.value
 }))
 
 const [DefineTableTemplate, ReuseTableTemplate] = createReusableTemplate()
@@ -429,12 +439,19 @@ const virtualizerProps = toRef(() => defu(typeof props.virtualize === 'boolean' 
   overscan: 12
 }))
 
+const getScrollElement = () => (isExternalScroll.value ? virtualizerProps.value.getScrollElement?.() : rootRef.value?.$el) ?? null
+// Offset applied to the spacer rows: `scrollMargin` is the table's offset within the scroll element (0 unless set).
+const scrollMargin = computed(() => virtualizerProps.value.scrollMargin ?? 0)
+
 const virtualizer = !!props.virtualize && useVirtualizer({
   ...virtualizerProps.value,
   get count() {
     return centerRows.value.length
   },
-  getScrollElement: () => rootRef.value?.$el,
+  get scrollMargin() {
+    return scrollMargin.value
+  },
+  getScrollElement,
   estimateSize: (index: number) => {
     const estimate = virtualizerProps.value.estimateSize
     return typeof estimate === 'function' ? estimate(index) : estimate
@@ -443,11 +460,12 @@ const virtualizer = !!props.virtualize && useVirtualizer({
 
 const virtualItems = computed(() => virtualizer ? virtualizer.value.getVirtualItems() : [])
 
-const virtualPaddingTop = computed(() => virtualItems.value[0]?.start ?? 0)
+// `start`/`end` include `scrollMargin`; exclude it from the spacers so the rows sit inline below preceding content.
+const virtualPaddingTop = computed(() => (virtualItems.value[0]?.start ?? 0) - scrollMargin.value)
 
 const virtualPaddingBottom = computed(() => {
   if (!virtualizer || !virtualItems.value.length) return 0
-  return virtualizer.value.getTotalSize() - (virtualItems.value[virtualItems.value.length - 1]?.end ?? 0)
+  return virtualizer.value.getTotalSize() - (virtualItems.value[virtualItems.value.length - 1]?.end ?? 0) + scrollMargin.value
 })
 
 function valueUpdater<T extends Updater<any>>(updaterOrValue: T, ref: Ref) {

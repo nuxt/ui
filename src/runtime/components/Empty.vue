@@ -3,7 +3,9 @@ import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/empty'
 import type { ComponentConfig } from '../types/tv'
-import type { ButtonProps, IconProps, AvatarProps } from '../types'
+import type { ButtonProps } from './Button.vue'
+import type { IconProps } from './Icon.vue'
+import type { AvatarProps } from './Avatar.vue'
 
 type Empty = ComponentConfig<typeof theme, AppConfig, 'empty'>
 
@@ -65,7 +67,7 @@ const props = useComponentProps('empty', _props)
 const appConfig = useAppConfig() as Empty['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.empty || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.empty || {}) })({
   variant: props.variant,
   size: props.size
 }))

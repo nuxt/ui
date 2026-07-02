@@ -2,7 +2,7 @@
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/prose/tabs'
-import type { TabsProps } from '../../types'
+import type { TabsProps } from '../Tabs.vue'
 import type { ComponentConfig } from '../../types/tv'
 
 type ProseTabs = ComponentConfig<typeof theme, AppConfig, 'tabs', 'ui.prose'>
@@ -50,7 +50,7 @@ const model = defineModel<string>()
 const appConfig = useAppConfig() as ProseTabs['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.tabs || {}) }))
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.prose?.tabs || {}) }))
 
 const rerenderCount = ref(1)
 

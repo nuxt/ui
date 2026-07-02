@@ -3,7 +3,7 @@ import type { VNode } from 'vue'
 import type { RatingRootProps, RatingRootEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/input-rating'
-import type { IconProps } from '../types'
+import type { IconProps } from './Icon.vue'
 import type { ComponentConfig } from '../types/tv'
 
 type InputRating = ComponentConfig<typeof theme, AppConfig, 'inputRating'>
@@ -96,7 +96,7 @@ const { id, emitFormChange, emitFormInput, size, color, name, disabled: formDisa
 const disabled = computed(() => formDisabled.value || props.readonly)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.inputRating || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.inputRating || {}) })({
   size: size.value ?? props.size,
   color: color.value ?? props.color,
   orientation: props.orientation,

@@ -2064,6 +2064,28 @@ exports[`Table > renders with virtualize correctly 1`] = `
 </div>"
 `;
 
+exports[`Table > renders with virtualize external scroll element correctly 1`] = `
+"<div data-slot="root" class="relative outline-primary/25 focus-visible:outline-3 overflow-visible">
+  <table data-slot="base" class="min-w-full overflow-clip">
+    <!--v-if-->
+    <thead data-slot="thead" class="relative">
+      <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-left rtl:text-right font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
+      </tr>
+      <tr data-slot="separator" class="absolute z-1 left-0 w-full h-px bg-(--ui-border-accented)"></tr>
+    </thead>
+    <tbody data-slot="tbody" class="isolate [&amp;>tr]:data-[selectable=true]:hover:bg-elevated/50 [&amp;>tr]:data-[selectable=true]:outline-primary/25 [&amp;>tr]:data-[selectable=true]:focus-visible:outline-3 divide-y divide-default">
+      <!--v-if-->
+      <!--v-if-->
+    </tbody>
+    <!--v-if-->
+  </table>
+</div>"
+`;
+
 exports[`Table > renders without data correctly 1`] = `
 "<div data-slot="root" class="relative overflow-auto outline-primary/25 focus-visible:outline-3">
   <table data-slot="base" class="min-w-full overflow-clip">
