@@ -204,7 +204,7 @@ const suggestions = [
 ]
 
 function clearMessages() {
-  if (status.value === 'streaming') {
+  if (status.value === 'streaming' || status.value === 'submitted') {
     stop()
   }
   messages.value = []
