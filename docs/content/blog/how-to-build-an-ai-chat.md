@@ -329,7 +329,7 @@ export default defineEventHandler(async (event) => {
 
       writer.merge(result.toUIMessageStream())
     },
-    onFinish: async ({ messages }) => {
+    onEnd: async ({ messages }) => {
       // Save the assistant's response to the database
       await db.insert(schema.messages).values(messages.map(message => ({
         chatId: chat.id,
@@ -360,14 +360,14 @@ When a chat doesn't have a title yet, we use [`generateText`](https://ai-sdk.dev
 
 The [`streamText`](https://ai-sdk.dev/docs/reference/ai-sdk-core/stream-text) function generates a streaming response from the AI model. Key options include:
 - `model`: The AI model to use
-- `system`: Instructions that guide the AI's behavior
+- `instructions`: Guidance that shapes the AI's behavior
 - `messages`: The conversation history
 
 **UIMessageStream**
 
 The [`createUIMessageStream`](https://ai-sdk.dev/docs/reference/ai-sdk-ui/create-ui-message-stream#createuimessagestream) and [`createUIMessageStreamResponse`](https://ai-sdk.dev/docs/reference/ai-sdk-ui/create-ui-message-stream-response#createuimessagestreamresponse) functions create a stream that the AI SDK client can consume. The response streams chunks as they're generated, creating the real-time typing effect.
 
-The `writer.write()` method allows sending custom data events to the client (like `data-chat-title`), while `onFinish` is called when streaming completes, perfect for persisting the assistant's response.
+The `writer.write()` method allows sending custom data events to the client (like `data-chat-title`), while `onEnd` is called when streaming completes, perfect for persisting the assistant's response.
 
 ### Fetching a chat
 

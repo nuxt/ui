@@ -290,7 +290,7 @@ export default defineEventHandler(async (event) => {
     messages: await convertToModelMessages(messages),
     stopWhen: isStepCount(6),
     tools,
-    onFinish: async () => {
+    onEnd: async () => {
       await httpClient.close()
     },
     onError: async (error) => {
