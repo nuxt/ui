@@ -237,7 +237,8 @@ import {
   createUIMessageStream,
   createUIMessageStreamResponse,
   generateText,
-  streamText
+  streamText,
+  toUIMessageStream
 } from 'ai'
 import type { UIMessage } from 'ai'
 
@@ -327,7 +328,7 @@ export default defineEventHandler(async (event) => {
         })
       }
 
-      writer.merge(result.toUIMessageStream())
+      writer.merge(toUIMessageStream({ stream: result.stream }))
     },
     onEnd: async ({ messages }) => {
       // Save the assistant's response to the database
