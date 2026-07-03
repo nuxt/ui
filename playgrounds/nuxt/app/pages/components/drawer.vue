@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const open = ref(false)
 const inset = ref(false)
-const close = ref(false)
+const close = ref(true)
 </script>
 
 <template>
@@ -11,7 +11,7 @@ const close = ref(false)
   </Navbar>
 
   <div class="flex flex-col gap-2 min-h-0">
-    <UDrawer v-model:open="open" title="Drawer with v-model" description="This is useful to control the state yourself." :inset="inset" :close="close">
+    <UDrawer v-model:open="open" title="Drawer with v-model" :inset="inset" :close="close">
       <UButton color="neutral" variant="outline" label="Open with v-model" />
 
       <template #body>
@@ -86,7 +86,7 @@ const close = ref(false)
       </template>
     </UDrawer>
 
-    <UDrawer title="Drawer with right direction" direction="right" :inset="inset" :close="close">
+    <UDrawer title="Drawer with right direction" description="A longer description to check how it wraps across the full width below the title and the close button." direction="right" :inset="inset" :close="close">
       <UButton color="neutral" variant="outline" label="Open on right" />
 
       <template #body>
