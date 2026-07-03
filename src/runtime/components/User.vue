@@ -30,7 +30,7 @@ export interface UserProps {
   orientation?: User['variants']['orientation']
   to?: LinkProps['to']
   target?: LinkProps['target']
-  onClick?: (event: MouseEvent) => void | Promise<void>
+  onClick?: (event: MouseEvent) => void
   class?: any
   ui?: User['slots']
 }

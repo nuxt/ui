@@ -137,10 +137,10 @@
     "@nuxt/schema": "^4.4.8",
     "@nuxtjs/color-mode": "^4.0.1",
     "@standard-schema/spec": "^1.1.0",
-    "@tailwindcss/postcss": "^4.3.1",
-    "@tailwindcss/vite": "^4.3.1",
+    "@tailwindcss/postcss": "^4.3.2",
+    "@tailwindcss/vite": "^4.3.2",
     "@tanstack/vue-table": "^8.21.3",
-    "@tanstack/vue-virtual": "^3.13.30",
+    "@tanstack/vue-virtual": "^3.13.31",
     "@tiptap/core": "^3.26.1",
     "@tiptap/extension-bubble-menu": "^3.26.1",
     "@tiptap/extension-code": "^3.26.1",
@@ -184,14 +184,14 @@
     "scule": "^1.3.0",
     "tailwind-merge": "^3.6.0",
     "tailwind-variants": "^3.2.2",
-    "tailwindcss": "^4.3.1",
+    "tailwindcss": "^4.3.2",
     "tinyglobby": "^0.2.17",
     "ufo": "^1.6.4",
-    "unplugin": "^3.2.0",
+    "unplugin": "^3.3.0",
     "unplugin-auto-import": "^21.0.0",
     "unplugin-vue-components": "^32.1.0",
     "vaul-vue": "0.4.1",
-    "vue-component-type-helpers": "^3.3.5"
+    "vue-component-type-helpers": "^3.3.6"
   },
   "devDependencies": {
     "@nuxt/eslint-config": "^1.16.0",
@@ -201,7 +201,7 @@
     "@tanstack/table-core": "^8.21.3",
     "@vitejs/plugin-vue": "^6.0.7",
     "@vue/test-utils": "^2.4.11",
-    "ai": "^6.0.214",
+    "ai": "^7.0.9",
     "embla-carousel": "^8.6.0",
     "eslint": "^10.6.0",
     "happy-dom": "^20.10.6",
@@ -212,7 +212,7 @@
     "vitest-axe": "^0.1.0",
     "vitest-environment-nuxt": "^2.0.0",
     "vue": "^3.5.39",
-    "vue-tsc": "^3.3.5"
+    "vue-tsc": "^3.3.6"
   },
   "peerDependencies": {
     "@inertiajs/vue3": "^2.0.7 || ^3.0.0",
@@ -236,6 +236,7 @@
     "@tiptap/starter-kit": "^3",
     "@tiptap/suggestion": "^3",
     "@tiptap/vue-3": "^3",
+    "ai": "^6 || ^7",
     "joi": "^18.0.0",
     "superstruct": "^2.0.0",
     "tailwindcss": "^4.0.0",
@@ -256,6 +257,9 @@
       "optional": true
     },
     "@nuxt/content": {
+      "optional": true
+    },
+    "ai": {
       "optional": true
     },
     "joi": {

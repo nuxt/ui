@@ -5,7 +5,7 @@ export interface LinkBaseProps {
   as?: string
   type?: string
   disabled?: boolean
-  onClick?: ((e: MouseEvent) => void | Promise<void>) | Array<((e: MouseEvent) => void | Promise<void>)>
+  onClick?: ((e: MouseEvent) => void) | Array<((e: MouseEvent) => void)>
   href?: string
   target?: LinkProps['target']
   rel?: LinkProps['rel']
