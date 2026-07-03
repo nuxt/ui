@@ -1,4 +1,5 @@
 import { readFile } from 'node:fs/promises'
+import { consola } from 'consola'
 import { glob } from 'tinyglobby'
 import type { UnpluginOptions } from 'unplugin'
 import { IconUsageScanner, collectionNames, generateClientBundleCode, resolveBundleIcons } from '@nuxt/icon/utils'
@@ -77,6 +78,7 @@ export default function IconsPlugin(options: NuxtUIOptions, appConfig: Record<st
   // `config.root` is the Vite equivalent of Nuxt's `rootDir`; resolving from it (not
   // `process.cwd()`) is what keeps workspace/monorepo builds working (nuxt/icon#502).
   let root = options.root || process.cwd()
+  let isBuild = false
   let source: Promise<string> | undefined
 
   async function generate(): Promise<string> {
@@ -102,7 +104,13 @@ export default function IconsPlugin(options: NuxtUIOptions, appConfig: Record<st
     })
 
     if (failed.length) {
-      throw new Error(`[Nuxt UI] Could not resolve the icons requested in \`icon.clientBundle.icons\`: ${failed.join(', ')}. Install their \`@iconify-json/*\` collection, or remove them.`)
+      // Like `@nuxt/icon`: an unresolved explicitly-listed icon is a build error, but only a
+      // warning in dev, so a typo doesn't crash the dev server (it falls back to runtime there).
+      const message = `[Nuxt UI] Could not resolve the icons requested in \`icon.clientBundle.icons\`: ${failed.join(', ')}. Install their \`@iconify-json/*\` collection, or remove them.`
+      if (isBuild) {
+        throw new Error(message)
+      }
+      consola.warn(message)
     }
 
     return generateClientBundleCode(collections, { sizeLimitKb: clientBundle?.sizeLimitKb }).code
@@ -118,17 +126,13 @@ export default function IconsPlugin(options: NuxtUIOptions, appConfig: Record<st
     },
     loadInclude: id => id === VIRTUAL_ID,
     load() {
-      // Don't cache a rejection: if generation fails (e.g. a missing collection), clear the
-      // cache so the fix is picked up on the next load without a full dev-server restart.
-      source ||= generate().catch((error) => {
-        source = undefined
-        throw error
-      })
+      source ||= generate()
       return source
     },
     vite: {
       configResolved(config) {
         root = options.root || config.root || root
+        isBuild = config.command === 'build'
       }
     }
   } satisfies UnpluginOptions
