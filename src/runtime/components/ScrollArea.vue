@@ -116,9 +116,13 @@ const props = useComponentProps<ScrollAreaProps<T>>('scrollArea', _props)
 const { dir } = useLocale()
 const appConfig = useAppConfig() as ScrollArea['AppConfig']
 
+// When an external scroll element is provided, it owns the scroll (the root grows inline).
+const isExternalScroll = computed(() => typeof props.virtualize === 'object' && !!props.virtualize.getScrollElement)
+
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.scrollArea || {}) })({
-  orientation: props.orientation
+  orientation: props.orientation,
+  externalScroll: isExternalScroll.value
 }))
 
 const rootRef = useTemplateRef<ComponentPublicInstance>('rootRef')
@@ -136,9 +140,6 @@ const scrollShadowStyle = props.shadow
 const isRtl = computed(() => dir.value === 'rtl')
 const isHorizontal = computed(() => props.orientation === 'horizontal')
 const isVertical = computed(() => !isHorizontal.value)
-
-// When an external scroll element is provided, it owns the scroll
-const isExternalScroll = computed(() => typeof props.virtualize === 'object' && !!props.virtualize.getScrollElement)
 
 // The scroll viewport: the external element when provided, otherwise the component's root.
 const getScrollElement = () => (isExternalScroll.value ? virtualizerProps.value.getScrollElement?.() : rootRef.value?.$el) ?? null
@@ -214,8 +215,8 @@ function getVirtualItemStyle(virtualItem: VirtualItem): CSSProperties {
   const hasLanes = lanes.value !== undefined && lanes.value > 1
   const lane = virtualItem.lane
   const gap = virtualizerProps.value.gap ?? 0
-  // In external-scroll mode `start` includes `scrollMargin`; subtract it so items sit inline.
-  const offset = virtualItem.start - (isExternalScroll.value ? (virtualizerProps.value.scrollMargin ?? 0) : 0)
+  // `start` includes `scrollMargin`; subtract it so items sit inline (0 unless set).
+  const offset = virtualItem.start - virtualizerProps.value.scrollMargin
 
   // For cross-axis gaps: calculate size and position accounting for gaps between lanes
   // laneSize = (100% - (lanes - 1) * gap) / lanes
@@ -308,7 +309,7 @@ defineExpose({
     data-slot="root"
     :data-orientation="props.orientation"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
-    :style="[scrollShadowStyle, isExternalScroll ? { overflow: 'visible' } : undefined]"
+    :style="scrollShadowStyle"
   >
     <template v-if="virtualizer">
       <div

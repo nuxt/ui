@@ -28,7 +28,7 @@ export interface PageFeatureProps {
   orientation?: PageFeature['variants']['orientation']
   to?: LinkProps['to']
   target?: LinkProps['target']
-  onClick?: (event: MouseEvent) => void | Promise<void>
+  onClick?: (event: MouseEvent) => void
   class?: any
   ui?: PageFeature['slots']
 }
