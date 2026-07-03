@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { getClientBundleIcons, parseIconName } from '../../src/utils/icons'
+import { getClientBundleIcons } from '../../src/utils/icons'
 import defaultIcons from '../../src/theme/icons'
 
 describe('getClientBundleIcons', () => {
@@ -41,26 +41,5 @@ describe('getClientBundleIcons', () => {
 
   it('returns an empty array when no icons are provided', () => {
     expect(getClientBundleIcons()).toEqual([])
-  })
-})
-
-describe('parseIconName', () => {
-  it('parses the user-facing icon forms into `{collection}:{name}`', () => {
-    // with or without the `i-` prefix, dash or colon separated
-    expect(parseIconName('i-lucide-heart')).toBe('lucide:heart')
-    expect(parseIconName('lucide-heart')).toBe('lucide:heart')
-    expect(parseIconName('lucide:heart')).toBe('lucide:heart')
-    // the colon form is the only way to bundle a multi-word collection
-    expect(parseIconName('i-simple-icons:github')).toBe('simple-icons:github')
-    expect(parseIconName('material-symbols:menu')).toBe('material-symbols:menu')
-  })
-
-  it('returns undefined for values that are not parseable icon names', () => {
-    expect(parseIconName('')).toBeUndefined()
-    expect(parseIconName('i-')).toBeUndefined()
-    expect(parseIconName('i-lucide-')).toBeUndefined()
-    expect(parseIconName('lucide:')).toBeUndefined()
-    expect(parseIconName('lucide')).toBeUndefined()
-    expect(parseIconName(42)).toBeUndefined()
   })
 })

@@ -1,17 +1,68 @@
+import { readFile } from 'node:fs/promises'
+import { glob } from 'tinyglobby'
 import type { UnpluginOptions } from 'unplugin'
-import { IconUsageScanner, generateClientBundleCode, resolveBundleIcons } from '@nuxt/icon/utils'
-import { getClientBundleIcons, parseIconName } from '../utils/icons'
+import { IconUsageScanner, collectionNames, generateClientBundleCode, resolveBundleIcons } from '@nuxt/icon/utils'
+import { getClientBundleIcons } from '../utils/icons'
 import type { NuxtUIOptions } from '../unplugin'
 
 const VIRTUAL_ID = 'virtual:nuxt-ui-icons'
+// Cap concurrent file reads during the scan so large workspaces don't exhaust file
+// descriptors (`EMFILE`) — `@nuxt/icon`'s own `scanFiles` reads them all at once.
+const SCAN_CONCURRENCY = 20
+
+// `@nuxt/icon`'s known collections, longest-first, so multi-word names (e.g. `material-symbols`)
+// win over a shorter prefix when splitting a dashed icon.
+const knownCollections = [...collectionNames].sort((a, b) => b.length - a.length)
+
+/**
+ * Normalize a user-provided icon (from `icon.clientBundle.icons`) into `{collection}:{name}`.
+ * The colon form is unambiguous for any collection; for the dashed form we match against the
+ * known collection list (longest-first) so multi-word collections like `material-symbols` split
+ * correctly instead of mis-splitting on the first dash (which would then hard-fail the build).
+ */
+function parseUserIcon(icon: string): string | undefined {
+  const id = icon.replace(/^i[-:]/, '')
+
+  const colon = id.indexOf(':')
+  if (colon > 0) {
+    return colon < id.length - 1 ? id : undefined
+  }
+
+  const collection = knownCollections.find(name => id.startsWith(`${name}-`) && id.length > name.length + 1)
+  if (collection) {
+    return `${collection}:${id.slice(collection.length + 1)}`
+  }
+
+  // Unknown collection: best-effort split on the first dash.
+  const dash = id.indexOf('-')
+  return dash > 0 && dash < id.length - 1 ? `${id.slice(0, dash)}:${id.slice(dash + 1)}` : undefined
+}
+
+/**
+ * Scan the project source for icon usages, reusing `@nuxt/icon`'s globs and matcher but
+ * reading files in bounded batches to avoid `EMFILE` on large workspaces.
+ */
+async function scanUsedIcons(scanner: IconUsageScanner, root: string): Promise<Set<string>> {
+  const files = await glob(scanner.globInclude, { cwd: root, ignore: scanner.globExclude, absolute: true, expandDirectories: false })
+
+  const names = new Set<string>()
+  for (let i = 0; i < files.length; i += SCAN_CONCURRENCY) {
+    await Promise.all(files.slice(i, i + SCAN_CONCURRENCY).map(async (file) => {
+      const code = await readFile(file, 'utf8').catch(() => '')
+      scanner.extractFromCode(code, names)
+    }))
+  }
+
+  return names
+}
 
 /**
  * Embed the icons Nuxt UI uses into the build so they render synchronously during SSR and
  * fully offline, instead of being fetched from the Iconify API at runtime.
  *
- * The scanning, resolving from installed `@iconify-json/*` packages, and code generation are
- * delegated to `@nuxt/icon/utils` — the canonical implementation (nuxt/icon#506) — so we
- * don't duplicate it. This plugin only feeds Nuxt UI's own defaults into it:
+ * The resolving from installed `@iconify-json/*` packages and code generation are delegated to
+ * `@nuxt/icon/utils` — the canonical implementation (nuxt/icon#506) — so we don't duplicate it.
+ * This plugin only feeds Nuxt UI's own defaults into it:
  *
  * - Nuxt UI's defaults go through `extraIcons`, so a missing collection degrades to runtime
  *   loading rather than failing the build (Nuxt UI hard-depends on no collection).
@@ -35,12 +86,12 @@ export default function IconsPlugin(options: NuxtUIOptions, appConfig: Record<st
     }
 
     const icons = (clientBundle?.icons ?? [])
-      .map(icon => parseIconName(icon))
+      .map(icon => parseUserIcon(icon))
       .filter((name): name is string => !!name)
 
     let scannedIcons: Set<string> | undefined
     if (clientBundle?.scan) {
-      scannedIcons = await new IconUsageScanner(clientBundle.scan).scanFiles(root)
+      scannedIcons = await scanUsedIcons(new IconUsageScanner(clientBundle.scan), root)
     }
 
     const { collections, failed } = await resolveBundleIcons({
@@ -67,7 +118,12 @@ export default function IconsPlugin(options: NuxtUIOptions, appConfig: Record<st
     },
     loadInclude: id => id === VIRTUAL_ID,
     load() {
-      source ||= generate()
+      // Don't cache a rejection: if generation fails (e.g. a missing collection), clear the
+      // cache so the fix is picked up on the next load without a full dev-server restart.
+      source ||= generate().catch((error) => {
+        source = undefined
+        throw error
+      })
       return source
     },
     vite: {
