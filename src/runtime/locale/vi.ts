@@ -82,6 +82,9 @@ export default defineLocale<Messages>({
       close: 'Đóng thanh bên',
       open: 'Mở thanh bên'
     },
+    drawer: {
+      close: 'Đóng'
+    },
     error: {
       clear: 'Quay lại trang chủ'
     },

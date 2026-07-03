@@ -82,6 +82,9 @@ export default defineLocale<Messages>({
       close: 'Zapri stransko vrstico',
       open: 'Odpri stransko vrstico'
     },
+    drawer: {
+      close: 'Zapri'
+    },
     error: {
       clear: 'Nazaj na domačo stran'
     },

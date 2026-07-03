@@ -82,6 +82,9 @@ export default defineLocale<Messages>({
       close: 'Tutup bar sisi',
       open: 'Buka bar sisi'
     },
+    drawer: {
+      close: 'Tutup'
+    },
     error: {
       clear: 'Kembali ke laman utama'
     },

@@ -82,6 +82,9 @@ export default defineLocale<Messages>({
       close: 'გვერდითი ზოლის დახურვა',
       open: 'გვერდითი ზოლის გახსნა'
     },
+    drawer: {
+      close: 'დახურვა'
+    },
     error: {
       // While "home" translates as "სახლი", I chose to use "მთავარი" (meaning "main") as contextually this sounds better.
       // If any Georgian prefers literal translation, please submit patch.

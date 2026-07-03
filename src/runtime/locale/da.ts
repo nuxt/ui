@@ -82,6 +82,9 @@ export default defineLocale<Messages>({
       close: 'Luk sidemenu',
       open: 'Åbn sidemenu'
     },
+    drawer: {
+      close: 'Luk'
+    },
     error: {
       clear: 'Tilbage til forsiden'
     },
