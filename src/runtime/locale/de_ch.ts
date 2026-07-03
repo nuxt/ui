@@ -82,6 +82,9 @@ export default defineLocale<Messages>({
       close: 'Seitenleiste schliessen',
       open: 'Seitenleiste öffnen'
     },
+    drawer: {
+      close: 'Schliessen'
+    },
     error: {
       clear: 'Zurück zur Startseite'
     },

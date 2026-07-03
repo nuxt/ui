@@ -82,6 +82,9 @@ export default defineLocale<Messages>({
       close: 'Stäng sidofältet',
       open: 'Öppna sidofältet'
     },
+    drawer: {
+      close: 'Stäng'
+    },
     error: {
       clear: 'Tillbaka till startsidan'
     },

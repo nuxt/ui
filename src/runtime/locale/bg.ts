@@ -82,6 +82,9 @@ export default defineLocale<Messages>({
       close: 'Затвори',
       open: 'Отвори'
     },
+    drawer: {
+      close: 'Затворете'
+    },
     error: {
       clear: 'Изчисти'
     },

@@ -82,6 +82,9 @@ export default defineLocale<Messages>({
       close: 'Хажуугийн самбарыг хаах',
       open: 'Хажуугийн самбарыг нээх'
     },
+    drawer: {
+      close: 'Хаах'
+    },
     error: {
       clear: 'Нүүр хуудас руу буцах'
     },

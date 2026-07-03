@@ -90,6 +90,70 @@ slots:
 :placeholder{class="h-48"}
 ::
 
+### Close :badge{label="Soon" class="align-text-top"}
+
+Use the `close` prop to display a close button in the Drawer. Defaults to `false`.
+
+You can pass any property from the [Button](/docs/components/button) component to customize it.
+
+::component-code
+---
+prettier: true
+ignore:
+  - title
+  - close.color
+  - close.variant
+props:
+  title: 'Drawer with close button'
+  close:
+    color: primary
+    variant: outline
+    class: 'rounded-full'
+slots:
+  default: |
+
+    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
+
+  body: |
+
+    <Placeholder class="h-48" />
+---
+
+:u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
+
+#body
+:placeholder{class="h-48"}
+::
+
+### Close Icon :badge{label="Soon" class="align-text-top"}
+
+Use the `close-icon` prop to customize the close button [Icon](/docs/components/icon). Defaults to `i-lucide-x`.
+
+::component-code
+---
+prettier: true
+ignore:
+  - title
+props:
+  title: 'Drawer with close button'
+  close: true
+  closeIcon: 'i-lucide-arrow-right'
+slots:
+  default: |
+
+    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
+
+  body: |
+
+    <Placeholder class="h-48" />
+---
+
+:u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
+
+#body
+:placeholder{class="h-48"}
+::
+
 ### Direction
 
 Use the `direction` prop to control the direction of the Drawer. Defaults to `bottom`.

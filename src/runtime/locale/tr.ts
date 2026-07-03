@@ -82,6 +82,9 @@ export default defineLocale<Messages>({
       close: 'Kenar çubuğunu kapat',
       open: 'Kenar çubuğunu aç'
     },
+    drawer: {
+      close: 'Kapat'
+    },
     error: {
       clear: 'Ana sayfaya dön'
     },

@@ -37,7 +37,7 @@ export interface ChangelogVersionProps {
   indicator?: boolean
   to?: LinkProps['to']
   target?: LinkProps['target']
-  onClick?: (event: MouseEvent) => void | Promise<void>
+  onClick?: (event: MouseEvent) => void
   class?: any
   ui?: ChangelogVersion['slots']
 }

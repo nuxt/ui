@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { UIMessage } from 'ai'
-import { Chat } from '@ai-sdk/vue'
+import { useChat } from '@ai-sdk/vue'
 import theme from '#build/ui/sidebar'
 
 const variants = Object.keys(theme.variants.variant)
@@ -11,7 +11,7 @@ const openRight = ref(true)
 
 const variant = ref('sidebar' as keyof typeof theme.variants.variant)
 
-const messages: UIMessage[] = [{
+const initialMessages: UIMessage[] = [{
   id: '1',
   role: 'user',
   parts: [{ type: 'text', text: 'What is Nuxt UI?' }]
@@ -21,8 +21,8 @@ const messages: UIMessage[] = [{
   parts: [{ type: 'text', text: 'Nuxt UI is a Vue component library built on Reka UI, Tailwind CSS, and Tailwind Variants. It provides 125+ accessible components for building modern web apps.' }]
 }]
 
-const chat = new Chat({
-  messages,
+const { messages, status, error, sendMessage, regenerate, stop } = useChat({
+  messages: initialMessages,
   onError(error) {
     console.error(error)
   }
@@ -31,7 +31,7 @@ const chat = new Chat({
 function onSubmit() {
   if (!input.value.trim()) return
 
-  chat.sendMessage({ text: input.value })
+  sendMessage({ text: input.value })
 
   input.value = ''
 }
@@ -96,8 +96,8 @@ function onSubmit() {
       :style="{ '--sidebar-width': '20rem' }"
     >
       <UChatMessages
-        :messages="chat.messages"
-        :status="chat.status"
+        :messages="messages"
+        :status="status"
         compact
         class="px-0"
       />
@@ -105,13 +105,13 @@ function onSubmit() {
       <template #footer>
         <UChatPrompt
           v-model="input"
-          :error="chat.error"
+          :error="error"
           variant="subtle"
           size="sm"
           :ui="{ base: 'px-0' }"
           @submit="onSubmit"
         >
-          <UChatPromptSubmit size="sm" :status="chat.status" @stop="chat.stop()" @reload="chat.regenerate()" />
+          <UChatPromptSubmit size="sm" :status="status" @stop="stop()" @reload="regenerate()" />
         </UChatPrompt>
       </template>
     </USidebar>
