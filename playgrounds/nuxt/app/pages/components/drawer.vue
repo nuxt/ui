@@ -1,17 +1,15 @@
 <script setup lang="ts">
 const open = ref(false)
 const inset = ref(false)
-const close = ref(true)
 </script>
 
 <template>
   <Navbar>
     <USwitch v-model="inset" label="Inset" />
-    <USwitch v-model="close" label="Close" />
   </Navbar>
 
   <div class="flex flex-col gap-2 min-h-0">
-    <UDrawer v-model:open="open" title="Drawer with v-model" :inset="inset" :close="close">
+    <UDrawer v-model:open="open" title="Drawer with v-model" :inset="inset" close>
       <UButton color="neutral" variant="outline" label="Open with v-model" />
 
       <template #body>
@@ -24,7 +22,7 @@ const close = ref(true)
       </template>
     </UDrawer>
 
-    <UDrawer should-scale-background title="Drawer with `should-scale-background`" description="You need to add the `data-vaul-drawer-wrapper` directive to your content to make it work." :inset="inset" :close="close">
+    <UDrawer should-scale-background title="Drawer with `should-scale-background`" description="You need to add the `data-vaul-drawer-wrapper` directive to your content to make it work." :inset="inset" close>
       <UButton color="neutral" variant="outline" label="Open with scale" />
 
       <template #body>
@@ -32,11 +30,11 @@ const close = ref(true)
       </template>
     </UDrawer>
 
-    <UDrawer title="Drawer with nested" :inset="inset" :ui="{ content: 'h-full' }" should-scale-background :close="close">
+    <UDrawer title="Drawer with nested" :inset="inset" :ui="{ content: 'h-full' }" should-scale-background close>
       <UButton color="neutral" variant="outline" label="Open nested" />
 
       <template #footer>
-        <UDrawer :inset="inset" nested :ui="{ content: 'h-full' }">
+        <UDrawer :inset="inset" nested :ui="{ content: 'h-full' }" close>
           <UButton color="neutral" variant="outline" label="Open nested" />
 
           <template #content>
@@ -53,7 +51,7 @@ const close = ref(true)
       :modal="false"
       :overlay="false"
       :inset="inset"
-      :close="close"
+      close
     >
       <UButton label="Open unclosable" color="neutral" variant="outline" />
 
@@ -62,7 +60,7 @@ const close = ref(true)
       </template>
     </UDrawer>
 
-    <UDrawer title="Drawer with bottom direction" direction="bottom" :inset="inset" :close="close">
+    <UDrawer title="Drawer with bottom direction" direction="bottom" :inset="inset" close>
       <UButton color="neutral" variant="outline" label="Open on bottom" />
 
       <template #body>
@@ -70,7 +68,7 @@ const close = ref(true)
       </template>
     </UDrawer>
 
-    <UDrawer title="Drawer with left direction" direction="left" :inset="inset" :close="close">
+    <UDrawer title="Drawer with left direction" direction="left" :inset="inset" close>
       <UButton color="neutral" variant="outline" label="Open on left" />
 
       <template #body>
@@ -78,7 +76,7 @@ const close = ref(true)
       </template>
     </UDrawer>
 
-    <UDrawer title="Drawer with top direction" direction="top" :inset="inset" :close="close">
+    <UDrawer title="Drawer with top direction" direction="top" :inset="inset" close>
       <UButton color="neutral" variant="outline" label="Open on top" />
 
       <template #body>
@@ -86,7 +84,7 @@ const close = ref(true)
       </template>
     </UDrawer>
 
-    <UDrawer title="Drawer with right direction" description="A longer description to check how it wraps across the full width below the title and the close button." direction="right" :inset="inset" :close="close">
+    <UDrawer title="Drawer with right direction" description="This drawer opens from the right." direction="right" :inset="inset" close>
       <UButton color="neutral" variant="outline" label="Open on right" />
 
       <template #body>

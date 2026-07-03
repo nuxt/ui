@@ -173,38 +173,38 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.drawer || {}) })
             <div data-slot="container" :class="ui.container({ class: props.ui?.container })">
               <div v-if="!!slots.header || (props.title || !!slots.title) || (props.description || !!slots.description) || (props.close || !!slots.close) || !!slots.actions" data-slot="header" :class="ui.header({ class: props.ui?.header })">
                 <slot name="header">
-                  <div v-if="props.title || !!slots.title || props.close || !!slots.close || !!slots.actions" data-slot="wrapper" :class="ui.wrapper({ class: props.ui?.wrapper })">
+                  <div v-if="props.title || !!slots.title || props.description || !!slots.description" data-slot="wrapper" :class="ui.wrapper({ class: props.ui?.wrapper })">
                     <DrawerTitle v-if="props.title || !!slots.title" data-slot="title" :class="ui.title({ class: props.ui?.title })">
                       <slot name="title">
                         {{ props.title }}
                       </slot>
                     </DrawerTitle>
 
-                    <div v-if="!!slots.actions || props.close || !!slots.close" data-slot="actions" :class="ui.actions({ class: props.ui?.actions })">
-                      <slot name="actions" />
-
-                      <DrawerClose v-if="props.close || !!slots.close" as-child>
-                        <slot name="close" :ui="ui">
-                          <UButton
-                            v-if="props.close"
-                            :icon="props.closeIcon || appConfig.ui.icons.close"
-                            color="neutral"
-                            variant="ghost"
-                            :aria-label="t('drawer.close')"
-                            v-bind="(typeof props.close === 'object' ? props.close : {})"
-                            data-slot="close"
-                            :class="ui.close({ class: props.ui?.close })"
-                          />
-                        </slot>
-                      </DrawerClose>
-                    </div>
+                    <DrawerDescription v-if="props.description || !!slots.description" data-slot="description" :class="ui.description({ class: props.ui?.description })">
+                      <slot name="description">
+                        {{ props.description }}
+                      </slot>
+                    </DrawerDescription>
                   </div>
 
-                  <DrawerDescription v-if="props.description || !!slots.description" data-slot="description" :class="ui.description({ class: props.ui?.description })">
-                    <slot name="description">
-                      {{ props.description }}
-                    </slot>
-                  </DrawerDescription>
+                  <div v-if="!!slots.actions || props.close || !!slots.close" data-slot="actions" :class="ui.actions({ class: props.ui?.actions })">
+                    <slot name="actions" />
+
+                    <DrawerClose v-if="props.close || !!slots.close" as-child>
+                      <slot name="close" :ui="ui">
+                        <UButton
+                          v-if="props.close"
+                          :icon="props.closeIcon || appConfig.ui.icons.close"
+                          color="neutral"
+                          variant="ghost"
+                          :aria-label="t('drawer.close')"
+                          v-bind="(typeof props.close === 'object' ? props.close : {})"
+                          data-slot="close"
+                          :class="ui.close({ class: props.ui?.close })"
+                        />
+                      </slot>
+                    </DrawerClose>
+                  </div>
                 </slot>
               </div>
 
