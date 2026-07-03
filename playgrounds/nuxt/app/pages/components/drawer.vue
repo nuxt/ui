@@ -34,7 +34,7 @@ const inset = ref(false)
       <UButton color="neutral" variant="outline" label="Open nested" />
 
       <template #footer>
-        <UDrawer :inset="inset" nested :ui="{ content: 'h-full' }" close>
+        <UDrawer :inset="inset" nested :ui="{ content: 'h-full' }">
           <UButton color="neutral" variant="outline" label="Open nested" />
 
           <template #content>
@@ -84,7 +84,7 @@ const inset = ref(false)
       </template>
     </UDrawer>
 
-    <UDrawer title="Drawer with right direction" description="This drawer opens from the right." direction="right" :inset="inset" close>
+    <UDrawer title="Drawer with right direction" direction="right" :inset="inset" close>
       <UButton color="neutral" variant="outline" label="Open on right" />
 
       <template #body>

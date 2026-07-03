@@ -90,7 +90,7 @@ slots:
 :placeholder{class="h-48"}
 ::
 
-### Close
+### Close :badge{label="Soon" class="align-text-top"}
 
 Use the `close` prop to display a close button in the Drawer. Defaults to `false`.
 
@@ -125,7 +125,7 @@ slots:
 :placeholder{class="h-48"}
 ::
 
-### Close Icon
+### Close Icon :badge{label="Soon" class="align-text-top"}
 
 Use the `close-icon` prop to customize the close button [Icon](/docs/components/icon). Defaults to `i-lucide-x`.
 
