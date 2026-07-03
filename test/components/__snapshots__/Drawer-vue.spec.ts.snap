@@ -10,7 +10,7 @@ exports[`Drawer > renders with actions slot correctly 1`] = `
 <div data-dismissable-layer="" style="pointer-events: auto; --snap-point-height: 0;" tabindex="-1" data-vaul-drawer="" data-vaul-drawer-direction="bottom" data-vaul-delayed-snap-points="false" data-vaul-snap-points="false" data-slot="content" class="fixed bg-default ring ring-default flex focus:outline-none mt-24 flex-col h-auto max-h-[96%] inset-x-0 bottom-0 rounded-t-lg" id="" role="dialog" aria-describedby="reka-dialog-description-v-1" aria-labelledby="reka-dialog-title-v-0" data-state="open">
   <div data-vaul-drawer-visible="true" data-vaul-handle="" aria-hidden="true" data-slot="handle" class="shrink-0 !bg-accented transition-opacity mt-4 !w-12 !h-1.5 mx-auto"><span data-vaul-handle-hitarea="" aria-hidden="true"></span></div><span aria-hidden="true" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"><!--v-if--><p id="reka-dialog-description-v-1"></p></span>
   <div data-slot="container" class="w-full flex flex-col gap-4 p-4 overflow-y-auto">
-    <div data-slot="header" class="flex items-start gap-1.5">
+    <div data-slot="header" class="flex items-center gap-1.5">
       <div data-slot="wrapper" class="min-w-0 flex-1">
         <h2 id="reka-dialog-title-v-0" data-slot="title" class="text-highlighted font-semibold">Title</h2>
         <!--v-if-->
@@ -82,7 +82,7 @@ exports[`Drawer > renders with close correctly 1`] = `
   <div data-vaul-drawer-visible="true" data-vaul-handle="" aria-hidden="true" data-slot="handle" class="shrink-0 !bg-accented transition-opacity mt-4 !w-12 !h-1.5 mx-auto"><span data-vaul-handle-hitarea="" aria-hidden="true"></span></div>
   <!--v-if-->
   <div data-slot="container" class="w-full flex flex-col gap-4 p-4 overflow-y-auto">
-    <div data-slot="header" class="flex items-start gap-1.5">
+    <div data-slot="header" class="flex items-center gap-1.5">
       <div data-slot="wrapper" class="min-w-0 flex-1">
         <h2 id="reka-dialog-title-v-0" data-slot="title" class="text-highlighted font-semibold">Title</h2>
         <p id="reka-dialog-description-v-1" data-slot="description" class="mt-1 text-muted text-sm">Description</p>
@@ -112,7 +112,7 @@ exports[`Drawer > renders with close slot correctly 1`] = `
 <div data-dismissable-layer="" style="pointer-events: auto; --snap-point-height: 0;" tabindex="-1" data-vaul-drawer="" data-vaul-drawer-direction="bottom" data-vaul-delayed-snap-points="false" data-vaul-snap-points="false" data-slot="content" class="fixed bg-default ring ring-default flex focus:outline-none mt-24 flex-col h-auto max-h-[96%] inset-x-0 bottom-0 rounded-t-lg" id="" role="dialog" aria-describedby="reka-dialog-description-v-1" aria-labelledby="reka-dialog-title-v-0" data-state="open">
   <div data-vaul-drawer-visible="true" data-vaul-handle="" aria-hidden="true" data-slot="handle" class="shrink-0 !bg-accented transition-opacity mt-4 !w-12 !h-1.5 mx-auto"><span data-vaul-handle-hitarea="" aria-hidden="true"></span></div><span aria-hidden="true" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"><h2 id="reka-dialog-title-v-0"></h2><p id="reka-dialog-description-v-1"></p></span>
   <div data-slot="container" class="w-full flex flex-col gap-4 p-4 overflow-y-auto">
-    <div data-slot="header" class="flex items-start gap-1.5">
+    <div data-slot="header" class="flex items-center gap-1.5">
       <!--v-if-->
       <div data-slot="actions" class="flex items-center gap-1.5 shrink-0 ms-auto">Close slot</div>
     </div>
@@ -137,7 +137,7 @@ exports[`Drawer > renders with closeIcon correctly 1`] = `
   <div data-vaul-drawer-visible="true" data-vaul-handle="" aria-hidden="true" data-slot="handle" class="shrink-0 !bg-accented transition-opacity mt-4 !w-12 !h-1.5 mx-auto"><span data-vaul-handle-hitarea="" aria-hidden="true"></span></div>
   <!--v-if-->
   <div data-slot="container" class="w-full flex flex-col gap-4 p-4 overflow-y-auto">
-    <div data-slot="header" class="flex items-start gap-1.5">
+    <div data-slot="header" class="flex items-center gap-1.5">
       <div data-slot="wrapper" class="min-w-0 flex-1">
         <h2 id="reka-dialog-title-v-0" data-slot="title" class="text-highlighted font-semibold">Title</h2>
         <p id="reka-dialog-description-v-1" data-slot="description" class="mt-1 text-muted text-sm">Description</p>
@@ -205,7 +205,7 @@ exports[`Drawer > renders with description correctly 1`] = `
   <div data-vaul-drawer-visible="true" data-vaul-handle="" aria-hidden="true" data-slot="handle" class="shrink-0 !bg-accented transition-opacity mt-4 !w-12 !h-1.5 mx-auto"><span data-vaul-handle-hitarea="" aria-hidden="true"></span></div>
   <!--v-if-->
   <div data-slot="container" class="w-full flex flex-col gap-4 p-4 overflow-y-auto">
-    <div data-slot="header" class="flex items-start gap-1.5">
+    <div data-slot="header" class="flex items-center gap-1.5">
       <div data-slot="wrapper" class="min-w-0 flex-1">
         <h2 id="reka-dialog-title-v-0" data-slot="title" class="text-highlighted font-semibold">Title</h2>
         <p id="reka-dialog-description-v-1" data-slot="description" class="mt-1 text-muted text-sm">Description</p>
@@ -232,7 +232,7 @@ exports[`Drawer > renders with description slot correctly 1`] = `
 <div data-dismissable-layer="" style="pointer-events: auto; --snap-point-height: 0;" tabindex="-1" data-vaul-drawer="" data-vaul-drawer-direction="bottom" data-vaul-delayed-snap-points="false" data-vaul-snap-points="false" data-slot="content" class="fixed bg-default ring ring-default flex focus:outline-none mt-24 flex-col h-auto max-h-[96%] inset-x-0 bottom-0 rounded-t-lg" id="" role="dialog" aria-describedby="reka-dialog-description-v-1" aria-labelledby="reka-dialog-title-v-0" data-state="open">
   <div data-vaul-drawer-visible="true" data-vaul-handle="" aria-hidden="true" data-slot="handle" class="shrink-0 !bg-accented transition-opacity mt-4 !w-12 !h-1.5 mx-auto"><span data-vaul-handle-hitarea="" aria-hidden="true"></span></div><span aria-hidden="true" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"><h2 id="reka-dialog-title-v-0"></h2><!--v-if--></span>
   <div data-slot="container" class="w-full flex flex-col gap-4 p-4 overflow-y-auto">
-    <div data-slot="header" class="flex items-start gap-1.5">
+    <div data-slot="header" class="flex items-center gap-1.5">
       <div data-slot="wrapper" class="min-w-0 flex-1">
         <!--v-if-->
         <p id="reka-dialog-description-v-1" data-slot="description" class="mt-1 text-muted text-sm">Description slot</p>
@@ -260,7 +260,7 @@ exports[`Drawer > renders with direction bottom correctly 1`] = `
   <div data-vaul-drawer-visible="true" data-vaul-handle="" aria-hidden="true" data-slot="handle" class="shrink-0 !bg-accented transition-opacity mt-4 !w-12 !h-1.5 mx-auto"><span data-vaul-handle-hitarea="" aria-hidden="true"></span></div>
   <!--v-if-->
   <div data-slot="container" class="w-full flex flex-col gap-4 p-4 overflow-y-auto">
-    <div data-slot="header" class="flex items-start gap-1.5">
+    <div data-slot="header" class="flex items-center gap-1.5">
       <div data-slot="wrapper" class="min-w-0 flex-1">
         <h2 id="reka-dialog-title-v-0" data-slot="title" class="text-highlighted font-semibold">Title</h2>
         <p id="reka-dialog-description-v-1" data-slot="description" class="mt-1 text-muted text-sm">Description</p>
@@ -288,7 +288,7 @@ exports[`Drawer > renders with direction bottom inset correctly 1`] = `
   <div data-vaul-drawer-visible="true" data-vaul-handle="" aria-hidden="true" data-slot="handle" class="shrink-0 !bg-accented transition-opacity mt-4 !w-12 !h-1.5 mx-auto"><span data-vaul-handle-hitarea="" aria-hidden="true"></span></div>
   <!--v-if-->
   <div data-slot="container" class="w-full flex flex-col gap-4 p-4 overflow-y-auto">
-    <div data-slot="header" class="flex items-start gap-1.5">
+    <div data-slot="header" class="flex items-center gap-1.5">
       <div data-slot="wrapper" class="min-w-0 flex-1">
         <h2 id="reka-dialog-title-v-0" data-slot="title" class="text-highlighted font-semibold">Title</h2>
         <p id="reka-dialog-description-v-1" data-slot="description" class="mt-1 text-muted text-sm">Description</p>
@@ -316,7 +316,7 @@ exports[`Drawer > renders with direction left correctly 1`] = `
   <div data-vaul-drawer-visible="true" data-vaul-handle="" aria-hidden="true" data-slot="handle" class="shrink-0 !bg-accented transition-opacity !mr-4 !h-12 !w-1.5 mt-auto mb-auto"><span data-vaul-handle-hitarea="" aria-hidden="true"></span></div>
   <!--v-if-->
   <div data-slot="container" class="w-full flex flex-col gap-4 p-4 overflow-y-auto">
-    <div data-slot="header" class="flex items-start gap-1.5">
+    <div data-slot="header" class="flex items-center gap-1.5">
       <div data-slot="wrapper" class="min-w-0 flex-1">
         <h2 id="reka-dialog-title-v-0" data-slot="title" class="text-highlighted font-semibold">Title</h2>
         <p id="reka-dialog-description-v-1" data-slot="description" class="mt-1 text-muted text-sm">Description</p>
@@ -344,7 +344,7 @@ exports[`Drawer > renders with direction left inset correctly 1`] = `
   <div data-vaul-drawer-visible="true" data-vaul-handle="" aria-hidden="true" data-slot="handle" class="shrink-0 !bg-accented transition-opacity !mr-4 !h-12 !w-1.5 mt-auto mb-auto"><span data-vaul-handle-hitarea="" aria-hidden="true"></span></div>
   <!--v-if-->
   <div data-slot="container" class="w-full flex flex-col gap-4 p-4 overflow-y-auto">
-    <div data-slot="header" class="flex items-start gap-1.5">
+    <div data-slot="header" class="flex items-center gap-1.5">
       <div data-slot="wrapper" class="min-w-0 flex-1">
         <h2 id="reka-dialog-title-v-0" data-slot="title" class="text-highlighted font-semibold">Title</h2>
         <p id="reka-dialog-description-v-1" data-slot="description" class="mt-1 text-muted text-sm">Description</p>
@@ -372,7 +372,7 @@ exports[`Drawer > renders with direction right correctly 1`] = `
   <div data-vaul-drawer-visible="true" data-vaul-handle="" aria-hidden="true" data-slot="handle" class="shrink-0 !bg-accented transition-opacity !ml-4 !h-12 !w-1.5 mt-auto mb-auto"><span data-vaul-handle-hitarea="" aria-hidden="true"></span></div>
   <!--v-if-->
   <div data-slot="container" class="w-full flex flex-col gap-4 p-4 overflow-y-auto">
-    <div data-slot="header" class="flex items-start gap-1.5">
+    <div data-slot="header" class="flex items-center gap-1.5">
       <div data-slot="wrapper" class="min-w-0 flex-1">
         <h2 id="reka-dialog-title-v-0" data-slot="title" class="text-highlighted font-semibold">Title</h2>
         <p id="reka-dialog-description-v-1" data-slot="description" class="mt-1 text-muted text-sm">Description</p>
@@ -400,7 +400,7 @@ exports[`Drawer > renders with direction right inset correctly 1`] = `
   <div data-vaul-drawer-visible="true" data-vaul-handle="" aria-hidden="true" data-slot="handle" class="shrink-0 !bg-accented transition-opacity !ml-4 !h-12 !w-1.5 mt-auto mb-auto"><span data-vaul-handle-hitarea="" aria-hidden="true"></span></div>
   <!--v-if-->
   <div data-slot="container" class="w-full flex flex-col gap-4 p-4 overflow-y-auto">
-    <div data-slot="header" class="flex items-start gap-1.5">
+    <div data-slot="header" class="flex items-center gap-1.5">
       <div data-slot="wrapper" class="min-w-0 flex-1">
         <h2 id="reka-dialog-title-v-0" data-slot="title" class="text-highlighted font-semibold">Title</h2>
         <p id="reka-dialog-description-v-1" data-slot="description" class="mt-1 text-muted text-sm">Description</p>
@@ -428,7 +428,7 @@ exports[`Drawer > renders with direction top correctly 1`] = `
   <div data-vaul-drawer-visible="true" data-vaul-handle="" aria-hidden="true" data-slot="handle" class="shrink-0 !bg-accented transition-opacity mb-4 !w-12 !h-1.5 mx-auto"><span data-vaul-handle-hitarea="" aria-hidden="true"></span></div>
   <!--v-if-->
   <div data-slot="container" class="w-full flex flex-col gap-4 p-4 overflow-y-auto">
-    <div data-slot="header" class="flex items-start gap-1.5">
+    <div data-slot="header" class="flex items-center gap-1.5">
       <div data-slot="wrapper" class="min-w-0 flex-1">
         <h2 id="reka-dialog-title-v-0" data-slot="title" class="text-highlighted font-semibold">Title</h2>
         <p id="reka-dialog-description-v-1" data-slot="description" class="mt-1 text-muted text-sm">Description</p>
@@ -456,7 +456,7 @@ exports[`Drawer > renders with direction top inset correctly 1`] = `
   <div data-vaul-drawer-visible="true" data-vaul-handle="" aria-hidden="true" data-slot="handle" class="shrink-0 !bg-accented transition-opacity mb-4 !w-12 !h-1.5 mx-auto"><span data-vaul-handle-hitarea="" aria-hidden="true"></span></div>
   <!--v-if-->
   <div data-slot="container" class="w-full flex flex-col gap-4 p-4 overflow-y-auto">
-    <div data-slot="header" class="flex items-start gap-1.5">
+    <div data-slot="header" class="flex items-center gap-1.5">
       <div data-slot="wrapper" class="min-w-0 flex-1">
         <h2 id="reka-dialog-title-v-0" data-slot="title" class="text-highlighted font-semibold">Title</h2>
         <p id="reka-dialog-description-v-1" data-slot="description" class="mt-1 text-muted text-sm">Description</p>
@@ -504,7 +504,7 @@ exports[`Drawer > renders with header slot correctly 1`] = `
 <div data-dismissable-layer="" style="pointer-events: auto; --snap-point-height: 0;" tabindex="-1" data-vaul-drawer="" data-vaul-drawer-direction="bottom" data-vaul-delayed-snap-points="false" data-vaul-snap-points="false" data-slot="content" class="fixed bg-default ring ring-default flex focus:outline-none mt-24 flex-col h-auto max-h-[96%] inset-x-0 bottom-0 rounded-t-lg" id="" role="dialog" aria-describedby="reka-dialog-description-v-1" aria-labelledby="reka-dialog-title-v-0" data-state="open">
   <div data-vaul-drawer-visible="true" data-vaul-handle="" aria-hidden="true" data-slot="handle" class="shrink-0 !bg-accented transition-opacity mt-4 !w-12 !h-1.5 mx-auto"><span data-vaul-handle-hitarea="" aria-hidden="true"></span></div><span aria-hidden="true" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"><h2 id="reka-dialog-title-v-0"></h2><p id="reka-dialog-description-v-1"></p></span>
   <div data-slot="container" class="w-full flex flex-col gap-4 p-4 overflow-y-auto">
-    <div data-slot="header" class="flex items-start gap-1.5">Header slot</div>
+    <div data-slot="header" class="flex items-center gap-1.5">Header slot</div>
     <!--v-if-->
     <!--v-if-->
   </div>
@@ -525,7 +525,7 @@ exports[`Drawer > renders with title correctly 1`] = `
 <div data-dismissable-layer="" style="--snap-point-height: 0; pointer-events: auto;" tabindex="-1" data-vaul-drawer="" data-vaul-drawer-direction="bottom" data-vaul-delayed-snap-points="false" data-vaul-snap-points="false" data-slot="content" class="fixed bg-default ring ring-default flex focus:outline-none mt-24 flex-col h-auto max-h-[96%] inset-x-0 bottom-0 rounded-t-lg" id="" role="dialog" aria-describedby="reka-dialog-description-v-1" aria-labelledby="reka-dialog-title-v-0" data-state="open">
   <div data-vaul-drawer-visible="true" data-vaul-handle="" aria-hidden="true" data-slot="handle" class="shrink-0 !bg-accented transition-opacity mt-4 !w-12 !h-1.5 mx-auto"><span data-vaul-handle-hitarea="" aria-hidden="true"></span></div><span aria-hidden="true" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"><!--v-if--><p id="reka-dialog-description-v-1"></p></span>
   <div data-slot="container" class="w-full flex flex-col gap-4 p-4 overflow-y-auto">
-    <div data-slot="header" class="flex items-start gap-1.5">
+    <div data-slot="header" class="flex items-center gap-1.5">
       <div data-slot="wrapper" class="min-w-0 flex-1">
         <h2 id="reka-dialog-title-v-0" data-slot="title" class="text-highlighted font-semibold">Title</h2>
         <!--v-if-->
@@ -552,7 +552,7 @@ exports[`Drawer > renders with title slot correctly 1`] = `
 <div data-dismissable-layer="" style="pointer-events: auto; --snap-point-height: 0;" tabindex="-1" data-vaul-drawer="" data-vaul-drawer-direction="bottom" data-vaul-delayed-snap-points="false" data-vaul-snap-points="false" data-slot="content" class="fixed bg-default ring ring-default flex focus:outline-none mt-24 flex-col h-auto max-h-[96%] inset-x-0 bottom-0 rounded-t-lg" id="" role="dialog" aria-describedby="reka-dialog-description-v-1" aria-labelledby="reka-dialog-title-v-0" data-state="open">
   <div data-vaul-drawer-visible="true" data-vaul-handle="" aria-hidden="true" data-slot="handle" class="shrink-0 !bg-accented transition-opacity mt-4 !w-12 !h-1.5 mx-auto"><span data-vaul-handle-hitarea="" aria-hidden="true"></span></div><span aria-hidden="true" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"><!--v-if--><p id="reka-dialog-description-v-1"></p></span>
   <div data-slot="container" class="w-full flex flex-col gap-4 p-4 overflow-y-auto">
-    <div data-slot="header" class="flex items-start gap-1.5">
+    <div data-slot="header" class="flex items-center gap-1.5">
       <div data-slot="wrapper" class="min-w-0 flex-1">
         <h2 id="reka-dialog-title-v-0" data-slot="title" class="text-highlighted font-semibold">Title slot</h2>
         <!--v-if-->
@@ -601,7 +601,7 @@ exports[`Drawer > renders without handle correctly 1`] = `
   <!--v-if-->
   <!--v-if-->
   <div data-slot="container" class="w-full flex flex-col gap-4 p-4 overflow-y-auto">
-    <div data-slot="header" class="flex items-start gap-1.5">
+    <div data-slot="header" class="flex items-center gap-1.5">
       <div data-slot="wrapper" class="min-w-0 flex-1">
         <h2 id="reka-dialog-title-v-0" data-slot="title" class="text-highlighted font-semibold">Title</h2>
         <p id="reka-dialog-description-v-1" data-slot="description" class="mt-1 text-muted text-sm">Description</p>
@@ -629,7 +629,7 @@ exports[`Drawer > renders without overlay correctly 1`] = `
   <div data-vaul-drawer-visible="true" data-vaul-handle="" aria-hidden="true" data-slot="handle" class="shrink-0 !bg-accented transition-opacity mt-4 !w-12 !h-1.5 mx-auto"><span data-vaul-handle-hitarea="" aria-hidden="true"></span></div>
   <!--v-if-->
   <div data-slot="container" class="w-full flex flex-col gap-4 p-4 overflow-y-auto">
-    <div data-slot="header" class="flex items-start gap-1.5">
+    <div data-slot="header" class="flex items-center gap-1.5">
       <div data-slot="wrapper" class="min-w-0 flex-1">
         <h2 id="reka-dialog-title-v-0" data-slot="title" class="text-highlighted font-semibold">Title</h2>
         <p id="reka-dialog-description-v-1" data-slot="description" class="mt-1 text-muted text-sm">Description</p>

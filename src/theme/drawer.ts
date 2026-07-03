@@ -6,7 +6,7 @@ export default (options: Required<ModuleOptions>) => ({
     content: 'fixed bg-default ring ring-default flex focus:outline-none',
     handle: ['shrink-0 !bg-accented', options.theme.transitions && 'transition-opacity'],
     container: 'w-full flex flex-col gap-4 p-4 overflow-y-auto',
-    header: 'flex items-start gap-1.5',
+    header: 'flex items-center gap-1.5',
     wrapper: 'min-w-0 flex-1',
     title: 'text-highlighted font-semibold',
     description: 'mt-1 text-muted text-sm',
