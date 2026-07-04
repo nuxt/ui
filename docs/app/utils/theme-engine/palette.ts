@@ -25,39 +25,51 @@ export interface PaletteCurveParams {
 }
 
 export const CURVE_DEFAULTS = {
-  lightest: 0.985,
-  darkest: 0.13,
+  lightest: 0.977,
+  darkest: 0.27,
   vibrance: 1,
-  spread: 0.35,
+  spread: 0.5,
   hueDrift: 0
 } as const
 
 /**
- * Tailwind-like perceptual lightness targets per stop, used as the base
- * curve shape and rescaled piecewise so the anchor's own lightness lands
- * exactly on shade 500.
+ * Neutral ramps want a much deeper dark end than color ramps: tailwind's
+ * color palettes stop near L 0.27 (a near-black blue is useless), while the
+ * grays run to L 0.13 so dark-mode backgrounds stay genuinely dark.
+ */
+export const NEUTRAL_CURVE_DEFAULTS = {
+  ...CURVE_DEFAULTS,
+  darkest: 0.13
+} as const
+
+/**
+ * Lightness targets per stop averaged from tailwind v4's color ramps
+ * (blue/green/orange), used as the base curve shape and rescaled piecewise
+ * so the anchor's own lightness lands exactly on shade 500.
  */
 const BASE_LIGHTNESS: Record<Shade, number> = {
-  50: 0.985,
-  100: 0.967,
-  200: 0.928,
-  300: 0.872,
-  400: 0.707,
-  500: 0.551,
-  600: 0.446,
-  700: 0.373,
-  800: 0.278,
-  900: 0.21,
-  950: 0.13
+  50: 0.977,
+  100: 0.949,
+  200: 0.903,
+  300: 0.838,
+  400: 0.749,
+  500: 0.684,
+  600: 0.607,
+  700: 0.523,
+  800: 0.447,
+  900: 0.393,
+  950: 0.271
 }
 
 export function generatePalette(params: PaletteCurveParams): Record<Shade, string> {
   const { anchor } = params
   const anchorColor = hexToOklch(anchor)
 
-  // Keep the curve monotonic even for very light/dark anchors.
-  const lightest = Math.max(params.lightest ?? CURVE_DEFAULTS.lightest, anchorColor.l + 0.005)
-  const darkest = Math.min(params.darkest ?? CURVE_DEFAULTS.darkest, anchorColor.l - 0.005)
+  // Keep the curve monotonic even for very light/dark anchors — 0.04 of
+  // lightness spread is roughly the minimum that survives 8-bit rounding
+  // without adjacent stops collapsing into the same hex.
+  const lightest = Math.max(params.lightest ?? CURVE_DEFAULTS.lightest, Math.min(anchorColor.l + 0.04, 0.995))
+  const darkest = Math.min(params.darkest ?? CURVE_DEFAULTS.darkest, Math.max(anchorColor.l - 0.04, 0.005))
   const vibrance = params.vibrance ?? CURVE_DEFAULTS.vibrance
   const spread = params.spread ?? CURVE_DEFAULTS.spread
   const hueDrift = params.hueDrift ?? CURVE_DEFAULTS.hueDrift

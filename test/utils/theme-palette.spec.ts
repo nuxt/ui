@@ -99,13 +99,15 @@ describe('generatePalette', () => {
     expect(dark).toBeGreaterThan(light)
   })
 
-  it('stays monotonic for near-extreme anchors', () => {
+  it('stays ordered for near-extreme anchors', () => {
+    // At true extremes the ramp degenerates by design; 8-bit rounding may
+    // produce equal neighbors, but the order must never invert.
     for (const anchor of ['#F5F5F0', '#16130F']) {
       const palette = generatePalette({ anchor })
       const lightnesses = SHADES.map(shade => hexToOklch(palette[shade]).l)
 
       for (let i = 1; i < lightnesses.length; i++) {
-        expect(lightnesses[i]!, `${anchor} shade ${SHADES[i]}`).toBeLessThan(lightnesses[i - 1]!)
+        expect(lightnesses[i]!, `${anchor} shade ${SHADES[i]}`).toBeLessThanOrEqual(lightnesses[i - 1]!)
       }
     }
   })

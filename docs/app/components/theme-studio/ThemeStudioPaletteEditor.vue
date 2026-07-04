@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useDebounceFn } from '@vueuse/core'
-import { SHADES, CURVE_DEFAULTS, generatePalette, contrastRatio } from '../../utils/theme-engine'
+import { SHADES, CURVE_DEFAULTS, NEUTRAL_CURVE_DEFAULTS, generatePalette, contrastRatio } from '../../utils/theme-engine'
 import type { PaletteCurveParams } from '../../utils/theme-engine'
 
 const props = defineProps<{
@@ -19,7 +19,7 @@ const open = ref(false)
 
 const params = reactive<Required<PaletteCurveParams>>({
   anchor: DEFAULT_ANCHORS[props.alias],
-  ...CURVE_DEFAULTS,
+  ...(props.alias === 'neutral' ? NEUTRAL_CURVE_DEFAULTS : CURVE_DEFAULTS),
   ...paletteParams.value[props.alias]
 })
 
