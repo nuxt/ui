@@ -1,4 +1,5 @@
 import { describe, it, expect } from 'vitest'
+import { defineComponent, h, nextTick, ref, shallowRef, triggerRef } from 'vue'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { renderEach } from '../component-render'
@@ -74,6 +75,43 @@ describe('ChatMessages', () => {
       parts: messages[1]!.parts,
       message: messages[1]
     })
+  })
+
+  it('hides the streaming indicator once the assistant message produces parts', async () => {
+    // Reproduces the `@ai-sdk/vue` reactivity model: messages live in a `shallowRef`
+    // and grow via in-place mutation + `triggerRef`, so neither the array nor the
+    // message objects ever change identity. When the server assigns the assistant
+    // message id, an empty assistant message is flushed before any content, so the
+    // indicator must appear then disappear as soon as parts stream in.
+    const messages = shallowRef<any[]>([
+      { id: 'u1', role: 'user', parts: [{ type: 'text', text: 'hi' }] },
+      { id: 'a1', role: 'assistant', parts: [] }
+    ])
+    // A separate reactive value bound to a prop, used only to force ChatMessages to
+    // re-render on each tick, mimicking how streamed content forces re-renders in a
+    // real app (dynamic slots / non-static prop references).
+    const tick = ref(0)
+
+    const Parent = defineComponent({
+      setup() {
+        return () => h(ChatMessages, { messages: messages.value, status: 'streaming', spacingOffset: tick.value })
+      }
+    })
+
+    const wrapper = await mountSuspended(Parent)
+
+    // Empty assistant message -> indicator visible.
+    expect(wrapper.find('[data-slot="indicator"]').exists()).toBe(true)
+
+    // Stream the first part in place + triggerRef, and force a re-render.
+    messages.value[1]!.parts.push({ type: 'text', text: 'Hello' })
+    triggerRef(messages)
+    tick.value++
+    await nextTick()
+
+    // A cached `computed` would stay stuck on its first `streaming` result here;
+    // the indicator must now be gone.
+    expect(wrapper.find('[data-slot="indicator"]').exists()).toBe(false)
   })
 
   it('forwards `message` to the actions slot', async () => {
