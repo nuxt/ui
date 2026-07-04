@@ -1,6 +1,8 @@
 import { defu } from 'defu'
 import { useLocalStorage } from '@vueuse/core'
 import { themeIcons, cssVariableDefaults } from '../utils/theme'
+import { generateCSS, generateConfig, DEFAULT_COLORS, THEME_DEFAULTS } from '../utils/theme-engine'
+import type { ThemeDoc, ThemePalette } from '../utils/theme-engine'
 import { omit } from '#ui/utils'
 import colors from 'tailwindcss/colors'
 
@@ -56,10 +58,18 @@ export function useTheme() {
   const { track } = useAnalytics()
   const { framework } = useFrameworks()
 
-  const color = computed(() => colorMode.value === 'dark' ? (colors as any)[appConfig.ui.colors.neutral][900] : 'white')
-
   const aiThemeExtras = useState<Record<string, any>>('nuxt-ui-ai-theme', () => readLocalStorage('nuxt-ui-ai-theme', {}))
   const customColorsData = useState<Record<string, Record<string, string>>>('nuxt-ui-custom-colors', () => readLocalStorage('nuxt-ui-custom-colors', {}))
+
+  // The neutral may be a custom palette (AI themes, studio presets) with no entry in
+  // tailwindcss/colors — a throw here would abort the whole unhead flush, taking every
+  // other theme <style> down with it.
+  const color = computed(() => {
+    if (colorMode.value !== 'dark') return 'white'
+
+    const neutral = appConfig.ui.colors.neutral
+    return (colors as any)[neutral]?.[900] || customColorsData.value[neutral]?.[900] || (colors as any).slate[900]
+  })
   const cssVariablesData = useState<{ light?: Record<string, string>, dark?: Record<string, string> }>('nuxt-ui-css-variables', () => readLocalStorage('nuxt-ui-css-variables', {}))
   const _radius = useLocalStorage('nuxt-ui-radius', 0.25)
   const _font = useLocalStorage('nuxt-ui-font', 'Public Sans')
@@ -225,111 +235,62 @@ export function useTheme() {
       || !!aiThemeExtras.value.ui
   })
 
-  function exportCSS(): string {
-    track('Theme Exported', { type: 'CSS' })
+  /**
+   * Snapshot the live theme state as a sparse ThemeDoc — the single input
+   * for the theme-engine export generators and, eventually, the studio's
+   * source of truth.
+   */
+  function currentDoc(): ThemeDoc {
+    const doc: ThemeDoc = { version: 1 }
 
-    const lines = [
-      '@import "tailwindcss";',
-      '@import "@nuxt/ui";'
-    ]
-
-    if (_font.value !== 'Public Sans') {
-      lines.push('', '@theme {', `  --font-sans: '${_font.value}', sans-serif;`, '}')
+    const colorOverrides: Record<string, string> = {}
+    for (const [key, def] of Object.entries(DEFAULT_COLORS)) {
+      const value = (appConfig.ui.colors as any)[key]
+      if (value && value !== def) {
+        colorOverrides[key] = value
+      }
+    }
+    if (Object.keys(colorOverrides).length) {
+      doc.colors = colorOverrides
     }
 
-    const colorLines: string[] = []
-    for (const [name, shades] of Object.entries(customColorsData.value)) {
-      for (const [shade, hex] of Object.entries(shades)) {
-        colorLines.push(`  --color-${name}-${shade}: ${hex};`)
+    if (_blackAsPrimary.value) doc.blackAsPrimary = true
+    if (_radius.value !== THEME_DEFAULTS.radius) doc.radius = _radius.value
+    if (_font.value !== THEME_DEFAULTS.font) doc.font = { sans: _font.value }
+    if (_iconSet.value !== THEME_DEFAULTS.icons) doc.icons = _iconSet.value
+
+    const paletteEntries = Object.entries(customColorsData.value)
+    if (paletteEntries.length) {
+      doc.palettes = Object.fromEntries(paletteEntries.map(([name, shades]) => [name, { shades: shades as ThemePalette['shades'] }]))
+    }
+
+    const light = Object.fromEntries(Object.entries(cssVariablesData.value.light || {}).filter(([key, val]) => val !== cssVariableDefaults.light[key as keyof typeof cssVariableDefaults.light]))
+    const dark = Object.fromEntries(Object.entries(cssVariablesData.value.dark || {}).filter(([key, val]) => val !== cssVariableDefaults.dark[key as keyof typeof cssVariableDefaults.dark]))
+    if (Object.keys(light).length || Object.keys(dark).length) {
+      doc.tokens = {
+        ...(Object.keys(light).length ? { light } : {}),
+        ...(Object.keys(dark).length ? { dark } : {})
       }
     }
 
-    if (colorLines.length) {
-      lines.push('', '@theme static {', ...colorLines, '}')
+    const extras = aiThemeExtras.value
+    if (extras.ui && Object.keys(extras.ui).length) {
+      doc.components = extras.ui
     }
 
-    const lightOverrides = Object.entries(cssVariablesData.value.light || {}).filter(([key, val]) => val !== cssVariableDefaults.light[key as keyof typeof cssVariableDefaults.light])
-    const darkOverrides = Object.entries(cssVariablesData.value.dark || {}).filter(([key, val]) => val !== cssVariableDefaults.dark[key as keyof typeof cssVariableDefaults.dark])
+    return doc
+  }
 
-    const rootLines: string[] = []
-    if (_radius.value !== 0.25) {
-      rootLines.push(`  --ui-radius: ${_radius.value}rem;`)
-    }
-    if (_blackAsPrimary.value) {
-      rootLines.push('  --ui-primary: black;')
-    }
+  function exportCSS(): string {
+    track('Theme Exported', { type: 'CSS' })
 
-    if (rootLines.length) {
-      lines.push('', ':root {', ...rootLines, '}')
-    }
-
-    if (lightOverrides.length) {
-      lines.push('', ':root, .light {', ...lightOverrides.map(([key, val]) => `  ${key}: ${val};`), '}')
-    }
-
-    const darkLines: string[] = []
-    if (_blackAsPrimary.value) {
-      darkLines.push('  --ui-primary: white;')
-    }
-    if (darkOverrides.length) {
-      darkLines.push(...darkOverrides.map(([key, val]) => `  ${key}: ${val};`))
-    }
-
-    if (darkLines.length) {
-      lines.push('', '.dark {', ...darkLines, '}')
-    }
-
-    return lines.join('\n')
+    return generateCSS(currentDoc())
   }
 
   function exportConfig(): string {
     track('Theme Exported', { type: 'Config', framework: framework.value })
 
-    const config: Record<string, any> = {}
-
-    const defaultColors: Record<string, string> = { primary: 'green', neutral: 'slate', secondary: 'blue', success: 'green', info: 'blue', warning: 'yellow', error: 'red' }
-    const colorEntries = Object.entries(defaultColors).filter(([key, def]) => (appConfig.ui.colors as any)[key] !== def)
-    if (colorEntries.length) {
-      config.ui = { colors: Object.fromEntries(colorEntries.map(([key]) => [key, (appConfig.ui.colors as any)[key]])) }
-    }
-
-    if (_iconSet.value !== 'lucide') {
-      const iconMapping = themeIcons[_iconSet.value as keyof typeof themeIcons]
-      config.ui = config.ui || {}
-      config.ui.icons = iconMapping
-    }
-
-    const extras = aiThemeExtras.value
-    if (extras.ui) {
-      config.ui = config.ui || {}
-      Object.assign(config.ui, extras.ui)
-    }
-
-    const configString = JSON.stringify(config, null, 2)
-      .replace(/"([^"]+)":/g, '$1:')
-      .replace(/"/g, '\'')
-
-    if (framework.value === 'vue') {
-      const pluginConfig = config.ui
-        ? JSON.stringify({ ui: config.ui }, null, 2)
-            .replace(/"([^"]+)":/g, '$1:')
-            .replace(/"/g, '\'')
-        : '{}'
-      return [
-        'import { defineConfig } from \'vite\'',
-        'import vue from \'@vitejs/plugin-vue\'',
-        'import ui from \'@nuxt/ui/vite\'',
-        '',
-        `export default defineConfig({`,
-        '  plugins: [',
-        '    vue(),',
-        `    ui(${pluginConfig.split('\n').map((line, i) => i === 0 ? line : '    ' + line).join('\n')})`,
-        '  ]',
-        '})'
-      ].join('\n')
-    }
-
-    return `export default defineAppConfig(${configString})`
+    return generateConfig(currentDoc(), framework.value)
   }
 
   function injectCustomColors(customColors: Record<string, Record<string, string>>) {
@@ -358,7 +319,8 @@ export function useTheme() {
     }
 
     if (settings.primary && SAFE_NAME.test(settings.primary)) primary.value = settings.primary
-    if (settings.neutral && neutralColors.includes(settings.neutral)) neutral.value = settings.neutral
+    // Custom palettes (injected via customColors) are valid neutrals too, e.g. presets shipping their own ramp.
+    if (settings.neutral && SAFE_NAME.test(settings.neutral) && (neutralColors.includes(settings.neutral) || settings.customColors?.[settings.neutral])) neutral.value = settings.neutral
     if (settings.radius !== undefined && Number.isFinite(Number(settings.radius))) radius.value = Number(settings.radius)
     if (settings.font && SAFE_NAME.test(settings.font)) font.value = settings.font
     if (settings.icons && settings.icons in themeIcons) icon.value = settings.icons
@@ -455,6 +417,7 @@ export function useTheme() {
     hasCSSChanges,
     hasConfigChanges,
     configLabel: computed(() => framework.value === 'vue' ? 'vite.config.ts' : 'app.config.ts'),
+    currentDoc,
     exportCSS,
     exportConfig,
     applyThemeSettings,

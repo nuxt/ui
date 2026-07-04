@@ -18,38 +18,15 @@ if (import.meta.server) {
   })
 }
 
-const { track } = useAnalytics()
+const { presets, activePreset, applyPreset, shuffle, reset } = useThemeStudio()
 
-const {
-  primaryColors,
-  primary,
-  setBlackAsPrimary,
-  neutralColors,
-  neutral,
-  radiuses,
-  radius,
-  fonts,
-  font,
-  resetTheme
-} = useTheme()
-
-function pick<T>(items: readonly T[]): T {
-  return items[Math.floor(Math.random() * items.length)] as T
-}
-
-function shuffle() {
-  if (Math.random() < 0.125) {
-    setBlackAsPrimary(true)
-  } else {
-    primary.value = pick(primaryColors)
-  }
-
-  neutral.value = pick(neutralColors)
-  radius.value = pick(radiuses)
-  font.value = pick(fonts)
-
-  track('Theme Studio Shuffled')
-}
+const presetItems = computed(() => presets.map(preset => ({
+  label: preset.name,
+  icon: preset.icon,
+  type: 'checkbox' as const,
+  checked: activePreset.value === preset.id,
+  onSelect: () => applyPreset(preset)
+})))
 </script>
 
 <template>
@@ -67,6 +44,17 @@ function shuffle() {
         <UBadge label="v0" variant="subtle" size="sm" />
 
         <span class="flex-1" />
+
+        <UDropdownMenu :items="presetItems" :content="{ align: 'end' }">
+          <UButton
+            label="Presets"
+            icon="i-lucide-layout-grid"
+            trailing-icon="i-lucide-chevron-down"
+            color="neutral"
+            variant="outline"
+            size="sm"
+          />
+        </UDropdownMenu>
 
         <UTooltip text="Random theme">
           <UButton
@@ -88,7 +76,7 @@ function shuffle() {
             variant="outline"
             size="sm"
             aria-label="Reset theme"
-            @click="resetTheme"
+            @click="reset"
           />
         </UTooltip>
       </div>
