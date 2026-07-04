@@ -224,6 +224,18 @@ const {
         </div>
       </fieldset>
 
+      <UButton
+        to="/theme"
+        label="Open Theme Studio"
+        icon="i-lucide-swatch-book"
+        color="neutral"
+        variant="soft"
+        size="sm"
+        block
+        class="text-[11px] -mx-2 w-[calc(100%+1rem)]"
+        @click="open = false"
+      />
+
       <fieldset v-if="hasCSSChanges || hasConfigChanges">
         <legend class="text-[11px] leading-none font-semibold mb-2 select-none">
           Export
