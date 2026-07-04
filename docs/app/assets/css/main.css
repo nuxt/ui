@@ -54,3 +54,8 @@ html.dark .shiki span {
   -webkit-mask-image: var(--shiki-icon-url);
   mask-image: var(--shiki-icon-url);
 }
+
+/* Smooth color changes while dragging theme studio curves */
+html.theme-studio-dragging body *:not([data-curve-editor] *) {
+  transition: background-color 150ms ease-out, color 150ms ease-out, border-color 150ms ease-out;
+}

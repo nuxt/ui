@@ -12,6 +12,11 @@ const props = defineProps<{
 
 const curve = defineModel<ChannelCurve>({ required: true })
 
+const emit = defineEmits<{
+  dragStart: []
+  dragEnd: []
+}>()
+
 const W = 200
 const H = 120
 const PAD = 10
@@ -81,6 +86,7 @@ function onPointerDown(event: PointerEvent) {
     dragging.value = best.id
     svgRef.value!.setPointerCapture(event.pointerId)
     event.preventDefault()
+    emit('dragStart')
   }
 }
 
@@ -108,6 +114,7 @@ function onPointerUp(event: PointerEvent) {
   if (dragging.value) {
     dragging.value = null
     svgRef.value!.releasePointerCapture(event.pointerId)
+    emit('dragEnd')
   }
 }
 </script>
@@ -115,6 +122,7 @@ function onPointerUp(event: PointerEvent) {
 <template>
   <svg
     ref="svgRef"
+    data-curve-editor
     :viewBox="`0 0 ${W} ${H}`"
     class="w-full rounded-sm ring ring-default bg-elevated/30 touch-none select-none cursor-crosshair"
     @pointerdown="onPointerDown"

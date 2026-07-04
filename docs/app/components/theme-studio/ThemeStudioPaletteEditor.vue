@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useDebounceFn } from '@vueuse/core'
+import { useThrottleFn } from '@vueuse/core'
 import { SHADES, CURVE_DEFAULTS, NEUTRAL_CURVE_DEFAULTS, generatePalette, fitPalette, contrastRatio } from '../../utils/theme-engine'
 import type { PaletteCurveParams } from '../../utils/theme-engine'
 
@@ -69,13 +69,37 @@ function seed(values: PaletteCurveParams) {
   })
 }
 
-const debouncedApply = useDebounceFn(() => {
+// Throttled (not debounced) so the theme streams live while dragging a
+// curve — the trailing call catches the release position.
+const throttledApply = useThrottleFn(() => {
   setPaletteFromCurve(props.alias, structuredClone(toRaw(params)))
-}, 150)
+}, 60, true, true)
 
 watch(params, () => {
   if (!suppress) {
-    debouncedApply()
+    throttledApply()
+  }
+})
+
+// While dragging, a global class turns on short color transitions so the
+// page glides between throttle ticks instead of stepping.
+let dragEndTimeout: ReturnType<typeof setTimeout> | undefined
+
+function onDragStart() {
+  clearTimeout(dragEndTimeout)
+  document.documentElement.classList.add('theme-studio-dragging')
+}
+
+function onDragEnd() {
+  dragEndTimeout = setTimeout(() => {
+    document.documentElement.classList.remove('theme-studio-dragging')
+  }, 200)
+}
+
+onUnmounted(() => {
+  clearTimeout(dragEndTimeout)
+  if (import.meta.client) {
+    document.documentElement.classList.remove('theme-studio-dragging')
   }
 })
 
@@ -160,6 +184,8 @@ function remove() {
           :y-min="windows[tab].min"
           :y-max="windows[tab].max"
           :stop-colors="stopColors"
+          @drag-start="onDragStart"
+          @drag-end="onDragEnd"
         />
 
         <div class="flex items-center gap-2">

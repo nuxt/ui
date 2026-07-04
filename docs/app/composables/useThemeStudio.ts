@@ -13,6 +13,8 @@ export function useThemeStudio() {
   /** Curve params per alias, kept so the editor stays editable across reloads. */
   const paletteParams = useLocalStorage<Partial<Record<string, PaletteCurveParams>>>('nuxt-ui-palette-params', {})
 
+  let trackedAt: number | undefined
+
   function customPaletteName(alias: string) {
     return `custom-${alias}`
   }
@@ -90,7 +92,11 @@ export function useThemeStudio() {
     paletteParams.value = { ...paletteParams.value, [alias]: params }
     activePreset.value = undefined
 
-    track('Theme Custom Palette', { alias })
+    // Live drags call this at ~16Hz — one analytics event per burst is plenty.
+    if (!trackedAt || Date.now() - trackedAt > 2000) {
+      trackedAt = Date.now()
+      track('Theme Custom Palette', { alias })
+    }
   }
 
   /** Drop the custom ramp and return the alias to its default palette. */
