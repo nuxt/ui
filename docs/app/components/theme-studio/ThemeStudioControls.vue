@@ -56,6 +56,8 @@ const {
           @click="primary = color"
         />
       </div>
+
+      <ThemeStudioPaletteEditor alias="primary" />
     </fieldset>
 
     <fieldset>
@@ -83,6 +85,8 @@ const {
           @click="neutral = color"
         />
       </div>
+
+      <ThemeStudioPaletteEditor alias="neutral" />
     </fieldset>
 
     <fieldset>

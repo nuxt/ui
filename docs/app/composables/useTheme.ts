@@ -259,7 +259,10 @@ export function useTheme() {
     if (_font.value !== THEME_DEFAULTS.font) doc.font = { sans: _font.value }
     if (_iconSet.value !== THEME_DEFAULTS.icons) doc.icons = _iconSet.value
 
-    const paletteEntries = Object.entries(customColorsData.value)
+    // Only palettes actually referenced by an alias belong in the export —
+    // leftovers from a previous custom palette would bloat the @theme block.
+    const referenced = new Set(Object.values(colorOverrides))
+    const paletteEntries = Object.entries(customColorsData.value).filter(([name]) => referenced.has(name))
     if (paletteEntries.length) {
       doc.palettes = Object.fromEntries(paletteEntries.map(([name, shades]) => [name, { shades: shades as ThemePalette['shades'] }]))
     }
@@ -297,6 +300,16 @@ export function useTheme() {
     const merged = { ...customColorsData.value, ...customColors }
     customColorsData.value = merged
     window.localStorage.setItem('nuxt-ui-custom-colors', JSON.stringify(merged))
+  }
+
+  function removeCustomColors(names: string[]) {
+    const remaining = Object.fromEntries(Object.entries(customColorsData.value).filter(([name]) => !names.includes(name)))
+    customColorsData.value = remaining
+    if (Object.keys(remaining).length) {
+      window.localStorage.setItem('nuxt-ui-custom-colors', JSON.stringify(remaining))
+    } else {
+      window.localStorage.removeItem('nuxt-ui-custom-colors')
+    }
   }
 
   function injectCSSVariables(cssVariables: { light?: Record<string, string>, dark?: Record<string, string> }) {
@@ -418,6 +431,7 @@ export function useTheme() {
     hasConfigChanges,
     configLabel: computed(() => framework.value === 'vue' ? 'vite.config.ts' : 'app.config.ts'),
     currentDoc,
+    removeCustomColors,
     exportCSS,
     exportConfig,
     applyThemeSettings,

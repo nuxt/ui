@@ -8,6 +8,12 @@ export interface ThemePalette {
   /** Tailwind palette this one is based on, when only some shades differ */
   extends?: string
   shades: Partial<Record<Shade, string>>
+  /**
+   * Generator params the shades were materialized from (see palette.ts),
+   * kept so the palette stays editable in the studio. Purely metadata:
+   * exports and application always use the materialized `shades`.
+   */
+  curve?: import('./palette').PaletteCurveParams
 }
 
 /**
