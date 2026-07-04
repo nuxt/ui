@@ -1,7 +1,7 @@
 import { defu } from 'defu'
 import { useLocalStorage } from '@vueuse/core'
 import { themeIcons, cssVariableDefaults } from '../utils/theme'
-import { generateCSS, generateConfig, DEFAULT_COLORS, THEME_DEFAULTS } from '../utils/theme-engine'
+import { generateCSS, generateConfig, DEFAULT_COLORS, THEME_DEFAULTS, LIBRARY_TOKEN_DEFAULTS } from '../utils/theme-engine'
 import type { ThemeDoc, ThemePalette } from '../utils/theme-engine'
 import { omit } from '#ui/utils'
 import colors from 'tailwindcss/colors'
@@ -267,8 +267,10 @@ export function useTheme() {
       doc.palettes = Object.fromEntries(paletteEntries.map(([name, shades]) => [name, { shades: shades as ThemePalette['shades'] }]))
     }
 
-    const light = Object.fromEntries(Object.entries(cssVariablesData.value.light || {}).filter(([key, val]) => val !== cssVariableDefaults.light[key as keyof typeof cssVariableDefaults.light]))
-    const dark = Object.fromEntries(Object.entries(cssVariablesData.value.dark || {}).filter(([key, val]) => val !== cssVariableDefaults.dark[key as keyof typeof cssVariableDefaults.dark]))
+    // Diff against the LIBRARY defaults, not the docs baseline — the export
+    // must reproduce the preview on top of a stock @nuxt/ui install.
+    const light = Object.fromEntries(Object.entries(cssVariablesData.value.light || {}).filter(([key, val]) => val !== LIBRARY_TOKEN_DEFAULTS.light[key as keyof typeof LIBRARY_TOKEN_DEFAULTS.light]))
+    const dark = Object.fromEntries(Object.entries(cssVariablesData.value.dark || {}).filter(([key, val]) => val !== LIBRARY_TOKEN_DEFAULTS.dark[key as keyof typeof LIBRARY_TOKEN_DEFAULTS.dark]))
     if (Object.keys(light).length || Object.keys(dark).length) {
       doc.tokens = {
         ...(Object.keys(light).length ? { light } : {}),

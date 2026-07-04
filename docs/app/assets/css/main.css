@@ -55,7 +55,13 @@ html.dark .shiki span {
   mask-image: var(--shiki-icon-url);
 }
 
-/* Smooth color changes while dragging theme studio curves */
+/* Smooth color changes while dragging theme studio curves — matched to the 60ms apply throttle */
 html.theme-studio-dragging body *:not([data-curve-editor] *) {
-  transition: background-color 150ms ease-out, color 150ms ease-out, border-color 150ms ease-out;
+  transition: background-color 60ms linear, color 60ms linear, border-color 60ms linear;
+}
+
+/* Studio baseline: the app background follows the neutral ramp instead of
+   being hardcoded white, so tinted neutrals reach the page in light mode. */
+:root, .light {
+  --ui-bg: var(--ui-color-neutral-50);
 }

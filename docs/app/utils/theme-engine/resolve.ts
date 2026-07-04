@@ -1,9 +1,51 @@
 import colors from 'tailwindcss/colors'
-import { cssVariableDefaults } from '../theme'
 import type { ColorAlias, Shade, ThemeDoc } from './types'
 import { DEFAULT_COLORS } from './types'
 
 export type ColorMode = 'light' | 'dark'
+
+/**
+ * The semantic token defaults as @nuxt/ui ships them (src/runtime/index.css).
+ * Exports diff against THESE — the docs site's own baseline diverges (e.g.
+ * its light `--ui-bg` follows the neutral ramp), but an exported theme must
+ * reproduce the preview on top of a stock library install.
+ */
+export const LIBRARY_TOKEN_DEFAULTS = {
+  light: {
+    '--ui-text-dimmed': 'var(--ui-color-neutral-400)',
+    '--ui-text-muted': 'var(--ui-color-neutral-500)',
+    '--ui-text-toned': 'var(--ui-color-neutral-600)',
+    '--ui-text': 'var(--ui-color-neutral-700)',
+    '--ui-text-highlighted': 'var(--ui-color-neutral-900)',
+    '--ui-text-inverted': 'white',
+    '--ui-bg': 'white',
+    '--ui-bg-muted': 'var(--ui-color-neutral-50)',
+    '--ui-bg-elevated': 'var(--ui-color-neutral-100)',
+    '--ui-bg-accented': 'var(--ui-color-neutral-200)',
+    '--ui-bg-inverted': 'var(--ui-color-neutral-900)',
+    '--ui-border': 'var(--ui-color-neutral-200)',
+    '--ui-border-muted': 'var(--ui-color-neutral-200)',
+    '--ui-border-accented': 'var(--ui-color-neutral-300)',
+    '--ui-border-inverted': 'var(--ui-color-neutral-900)'
+  },
+  dark: {
+    '--ui-text-dimmed': 'var(--ui-color-neutral-500)',
+    '--ui-text-muted': 'var(--ui-color-neutral-400)',
+    '--ui-text-toned': 'var(--ui-color-neutral-300)',
+    '--ui-text': 'var(--ui-color-neutral-200)',
+    '--ui-text-highlighted': 'white',
+    '--ui-text-inverted': 'var(--ui-color-neutral-900)',
+    '--ui-bg': 'var(--ui-color-neutral-900)',
+    '--ui-bg-muted': 'var(--ui-color-neutral-800)',
+    '--ui-bg-elevated': 'var(--ui-color-neutral-800)',
+    '--ui-bg-accented': 'var(--ui-color-neutral-700)',
+    '--ui-bg-inverted': 'white',
+    '--ui-border': 'var(--ui-color-neutral-800)',
+    '--ui-border-muted': 'var(--ui-color-neutral-700)',
+    '--ui-border-accented': 'var(--ui-color-neutral-700)',
+    '--ui-border-inverted': 'white'
+  }
+} as const
 
 export interface ResolvedToken {
   token: string
@@ -42,7 +84,7 @@ export function resolveShade(doc: ThemeDoc, palette: string, shade: Shade): stri
 }
 
 export function resolveToken(doc: ThemeDoc, mode: ColorMode, token: string): ResolvedToken {
-  const defaults = cssVariableDefaults[mode] as Record<string, string>
+  const defaults = LIBRARY_TOKEN_DEFAULTS[mode] as Record<string, string>
   const override = doc.tokens?.[mode]?.[token]
   const raw = override ?? defaults[token] ?? ''
 
@@ -77,7 +119,7 @@ export function resolveToken(doc: ThemeDoc, mode: ColorMode, token: string): Res
 
 /** Resolve every semantic token for a mode, with provenance. */
 export function resolveTokens(doc: ThemeDoc, mode: ColorMode): Record<string, ResolvedToken> {
-  const defaults = cssVariableDefaults[mode] as Record<string, string>
+  const defaults = LIBRARY_TOKEN_DEFAULTS[mode] as Record<string, string>
   const tokens = new Set([...Object.keys(defaults), ...Object.keys(doc.tokens?.[mode] || {})])
 
   return Object.fromEntries([...tokens].map(token => [token, resolveToken(doc, mode, token)]))
