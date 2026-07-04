@@ -61,7 +61,9 @@ html.theme-studio-dragging body *:not([data-curve-editor] *) {
 }
 
 /* Studio baseline: the app background follows the neutral ramp instead of
-   being hardcoded white, so tinted neutrals reach the page in light mode. */
-:root, .light {
+   being hardcoded white, so tinted neutrals reach the page in light mode.
+   `:not(.dark)` keeps this from out-cascading the library's .dark value,
+   which shares :root's specificity. */
+:root:not(.dark), .light {
   --ui-bg: var(--ui-color-neutral-50);
 }
