@@ -1,5 +1,6 @@
 import { useLocalStorage } from '@vueuse/core'
-import { presets, docToSettings, isDefaultTheme, generatePalette, DEFAULT_COLORS } from '../utils/theme-engine'
+import colors from 'tailwindcss/colors'
+import { presets, docToSettings, isDefaultTheme, generatePalette, parseCssColor, DEFAULT_COLORS } from '../utils/theme-engine'
 import type { ThemeDoc, ThemePreset, PaletteCurveParams } from '../utils/theme-engine'
 
 export function useThemeStudio() {
@@ -18,6 +19,39 @@ export function useThemeStudio() {
 
   function isCustomPalette(alias: string) {
     return (appConfig.ui.colors as Record<string, string>)[alias] === customPaletteName(alias)
+  }
+
+  /** The 500 hex of a named palette — tailwind's JS values first, CSS variables as fallback. */
+  function anchorFromPalette(name: string): string | undefined {
+    const tailwind = (colors as Record<string, any>)[name]?.[500]
+    if (tailwind) return parseCssColor(tailwind)
+
+    if (import.meta.client) {
+      const cssValue = getComputedStyle(document.documentElement).getPropertyValue(`--color-${name === 'neutral' ? 'old-neutral' : name}-500`)
+      if (cssValue) return parseCssColor(cssValue)
+    }
+    return undefined
+  }
+
+  /**
+   * Swatch-click entry point. With a custom palette active the swatches act
+   * as anchor pickers — the custom ramp re-anchors to the chosen palette's
+   * color and keeps its curve. Otherwise it is a plain alias switch.
+   */
+  function selectPalette(alias: 'primary' | 'neutral', name: string) {
+    if (isCustomPalette(alias)) {
+      const anchor = anchorFromPalette(name)
+      if (anchor) {
+        setPaletteFromCurve(alias, { ...paletteParams.value[alias], anchor })
+        return
+      }
+    }
+
+    if (alias === 'primary') {
+      theme.primary.value = name
+    } else {
+      theme.neutral.value = name
+    }
   }
 
   /** Generate a ramp from curve params and point the alias at it. */
@@ -97,6 +131,8 @@ export function useThemeStudio() {
     activePreset,
     paletteParams,
     isCustomPalette,
+    anchorFromPalette,
+    selectPalette,
     setPaletteFromCurve,
     clearCustomPalette,
     applyDoc,

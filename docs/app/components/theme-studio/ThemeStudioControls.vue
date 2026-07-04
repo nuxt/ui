@@ -17,6 +17,8 @@ const {
   modes,
   mode
 } = useTheme()
+
+const { selectPalette } = useThemeStudio()
 </script>
 
 <template>
@@ -53,7 +55,7 @@ const {
           :label="color"
           :chip="color"
           :selected="!blackAsPrimary && primary === color"
-          @click="primary = color"
+          @click="selectPalette('primary', color)"
         />
       </div>
 
@@ -82,7 +84,7 @@ const {
           :label="color"
           :chip="color === 'neutral' ? 'old-neutral' : color"
           :selected="neutral === color"
-          @click="neutral = color"
+          @click="selectPalette('neutral', color)"
         />
       </div>
 

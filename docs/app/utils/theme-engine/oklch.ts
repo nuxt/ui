@@ -108,6 +108,31 @@ export function hexToOklch(hex: string): Oklch {
   return rgbToOklch(hexToRgb(hex))
 }
 
+/**
+ * Normalize a CSS color value to hex. Handles the forms the studio actually
+ * meets: hex, `oklch(…)` (tailwind v4's format) and `rgb(…)`.
+ */
+export function parseCssColor(value: string): string | undefined {
+  const input = value.trim()
+
+  if (input.startsWith('#')) {
+    return rgbToHex(hexToRgb(input))
+  }
+
+  const oklch = input.match(/^oklch\(\s*([\d.]+)(%?)\s+([\d.]+)\s+([\d.]+)/i)
+  if (oklch) {
+    const l = Number(oklch[1]) / (oklch[2] === '%' ? 100 : 1)
+    return oklchToHex({ l, c: Number(oklch[3]), h: Number(oklch[4]) })
+  }
+
+  const rgb = input.match(/^rgba?\(\s*(\d+)[\s,]+(\d+)[\s,]+(\d+)/i)
+  if (rgb) {
+    return rgbToHex([Number(rgb[1]) / 255, Number(rgb[2]) / 255, Number(rgb[3]) / 255])
+  }
+
+  return undefined
+}
+
 /** WCAG 2.x relative luminance. */
 function luminance(hex: string): number {
   const [r, g, b] = hexToRgb(hex).map(srgbToLinear) as [number, number, number]

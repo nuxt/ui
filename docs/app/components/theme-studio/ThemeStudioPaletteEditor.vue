@@ -7,7 +7,8 @@ const props = defineProps<{
   alias: 'primary' | 'neutral'
 }>()
 
-const { paletteParams, isCustomPalette, setPaletteFromCurve, clearCustomPalette } = useThemeStudio()
+const appConfig = useAppConfig()
+const { paletteParams, isCustomPalette, anchorFromPalette, setPaletteFromCurve, clearCustomPalette } = useThemeStudio()
 
 const DEFAULT_ANCHORS = {
   primary: '#00C16A',
@@ -29,27 +30,52 @@ const shades = computed(() => generatePalette(params))
 // White text on shade 500 is what solid buttons render — the pair worth watching.
 const contrast = computed(() => contrastRatio(shades.value[500]!, '#FFFFFF'))
 
-const apply = useDebounceFn(() => {
+// Programmatic writes into `params` (seeding, external sync) must not
+// live-apply — only user edits do.
+let suppress = false
+function seed(values: Partial<PaletteCurveParams>) {
+  suppress = true
+  Object.assign(params, values)
+  nextTick(() => {
+    suppress = false
+  })
+}
+
+const debouncedApply = useDebounceFn(() => {
   setPaletteFromCurve(props.alias, { ...params })
 }, 200)
 
-let touched = false
 watch(params, () => {
-  touched = true
-  apply()
-})
-
-// First expansion applies the initial ramp so the preview and page agree.
-watch(open, (isOpen) => {
-  if (isOpen && !active.value && !touched) {
-    apply()
+  if (!suppress) {
+    debouncedApply()
   }
 })
+
+// Swatch clicks while active re-anchor via the studio — reflect them here.
+watch(() => paletteParams.value[props.alias], (stored) => {
+  if (stored && stored.anchor !== params.anchor) {
+    seed(stored)
+  }
+})
+
+// While inactive, follow the selected palette so opening the editor starts
+// from the color already on screen instead of hijacking it.
+watch(() => (appConfig.ui.colors as Record<string, string>)[props.alias], (palette) => {
+  if (!active.value && palette) {
+    const anchor = anchorFromPalette(palette)
+    if (anchor) {
+      seed({ anchor })
+    }
+  }
+}, { immediate: true })
+
+function apply() {
+  setPaletteFromCurve(props.alias, { ...params })
+}
 
 function remove() {
   clearCustomPalette(props.alias)
   open.value = false
-  touched = false
 }
 
 const sliders = [
@@ -63,17 +89,31 @@ const sliders = [
 
 <template>
   <UCollapsible v-model:open="open" class="mt-1.5">
-    <UButton
-      :label="active ? 'Custom palette' : 'Create custom palette'"
-      :icon="active ? 'i-lucide-paintbrush' : 'i-lucide-wand-sparkles'"
-      color="neutral"
-      variant="ghost"
-      size="xs"
-      block
-      class="justify-start text-[11px]"
-      :ui="{ leadingIcon: active ? 'text-primary size-3.5' : 'size-3.5' }"
-      trailing-icon="i-lucide-chevron-down"
-    />
+    <div class="flex items-center gap-1">
+      <UButton
+        :label="active ? 'Custom palette' : 'Create custom palette'"
+        :icon="active ? 'i-lucide-paintbrush' : 'i-lucide-wand-sparkles'"
+        color="neutral"
+        variant="ghost"
+        size="xs"
+        block
+        class="justify-start text-[11px]"
+        :ui="{ leadingIcon: active ? 'text-primary size-3.5' : 'size-3.5' }"
+        trailing-icon="i-lucide-chevron-down"
+      />
+
+      <UTooltip v-if="active" text="Remove custom palette">
+        <UButton
+          icon="i-lucide-x"
+          color="neutral"
+          variant="ghost"
+          size="xs"
+          aria-label="Remove custom palette"
+          :ui="{ leadingIcon: 'size-3.5' }"
+          @click.stop="remove"
+        />
+      </UTooltip>
+    </div>
 
     <template #content>
       <div class="flex flex-col gap-3 pt-3 pb-1">
@@ -129,7 +169,18 @@ const sliders = [
         </div>
 
         <UButton
-          v-if="active"
+          v-if="!active"
+          label="Use this palette"
+          icon="i-lucide-check"
+          color="neutral"
+          variant="soft"
+          size="xs"
+          block
+          class="text-[11px]"
+          @click="apply"
+        />
+        <UButton
+          v-else
           label="Remove custom palette"
           icon="i-lucide-trash-2"
           color="neutral"
