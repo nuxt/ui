@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useDebounceFn } from '@vueuse/core'
-import { SHADES, CURVE_DEFAULTS, NEUTRAL_CURVE_DEFAULTS, generatePalette, contrastRatio } from '../../utils/theme-engine'
+import { SHADES, CURVE_DEFAULTS, NEUTRAL_CURVE_DEFAULTS, generatePalette, fitPalette, contrastRatio } from '../../utils/theme-engine'
 import type { PaletteCurveParams } from '../../utils/theme-engine'
 
 const props = defineProps<{
@@ -8,42 +8,70 @@ const props = defineProps<{
 }>()
 
 const appConfig = useAppConfig()
-const { paletteParams, isCustomPalette, anchorFromPalette, setPaletteFromCurve, clearCustomPalette } = useThemeStudio()
-
-const DEFAULT_ANCHORS = {
-  primary: '#00C16A',
-  neutral: '#71717A'
-}
+const { paletteParams, isCustomPalette, paletteShades, setPaletteFromCurve, clearCustomPalette } = useThemeStudio()
 
 const open = ref(false)
+const tab = ref<'lightness' | 'chroma' | 'hue'>('lightness')
 
-const params = reactive<Required<PaletteCurveParams>>({
-  anchor: DEFAULT_ANCHORS[props.alias],
-  ...(props.alias === 'neutral' ? NEUTRAL_CURVE_DEFAULTS : CURVE_DEFAULTS),
-  ...paletteParams.value[props.alias]
-})
+const tabs = [
+  { label: 'Lightness', value: 'lightness' as const },
+  { label: 'Chroma', value: 'chroma' as const },
+  { label: 'Hue', value: 'hue' as const }
+]
+
+function defaults(): PaletteCurveParams {
+  return structuredClone(props.alias === 'neutral' ? NEUTRAL_CURVE_DEFAULTS : CURVE_DEFAULTS)
+}
+
+const stored = paletteParams.value[props.alias]
+const params = reactive<PaletteCurveParams>(
+  // Older stored shapes (anchor/slider based) are simply refitted on open.
+  stored && 'lightness' in stored ? structuredClone(toRaw(stored)) as PaletteCurveParams : defaults()
+)
 
 const active = computed(() => isCustomPalette(props.alias))
 
 const shades = computed(() => generatePalette(params))
+const stopColors = computed(() => SHADES.map(shade => shades.value[shade]))
 
 // White text on shade 500 is what solid buttons render — the pair worth watching.
 const contrast = computed(() => contrastRatio(shades.value[500]!, '#FFFFFF'))
 
+/**
+ * The hue axis window floats around the curve (a full 0–360 axis would make
+ * drifts invisible); frozen while editing so the canvas doesn't chase the
+ * pointer. Lightness and chroma have fixed, comparable windows.
+ */
+const hueWindow = ref({ min: 0, max: 360 })
+
+function recenterHueWindow() {
+  const values = [params.hue.y0, params.hue.y1, params.hue.p1y, params.hue.p2y]
+  const center = (Math.min(...values) + Math.max(...values)) / 2
+  const span = Math.max(90, (Math.max(...values) - Math.min(...values)) + 40)
+  hueWindow.value = { min: center - span / 2, max: center + span / 2 }
+}
+
+const windows = computed(() => ({
+  lightness: { min: 0, max: 1 },
+  chroma: { min: 0, max: 0.35 },
+  hue: hueWindow.value
+}))
+
 // Programmatic writes into `params` (seeding, external sync) must not
 // live-apply — only user edits do.
 let suppress = false
-function seed(values: Partial<PaletteCurveParams>) {
+function seed(values: PaletteCurveParams) {
   suppress = true
-  Object.assign(params, values)
+  Object.assign(params, structuredClone(toRaw(values)))
+  recenterHueWindow()
   nextTick(() => {
     suppress = false
   })
 }
 
 const debouncedApply = useDebounceFn(() => {
-  setPaletteFromCurve(props.alias, { ...params })
-}, 200)
+  setPaletteFromCurve(props.alias, structuredClone(toRaw(params)))
+}, 150)
 
 watch(params, () => {
   if (!suppress) {
@@ -51,40 +79,40 @@ watch(params, () => {
   }
 })
 
-// Swatch clicks while active re-anchor via the studio — reflect them here.
-watch(() => paletteParams.value[props.alias], (stored) => {
-  if (stored && stored.anchor !== params.anchor) {
-    seed(stored)
+/** Fit curves from whatever palette the alias currently shows. */
+function seedFromCurrent() {
+  const name = (appConfig.ui.colors as Record<string, string>)[props.alias]
+  if (!name) return
+
+  const source = paletteShades(name)
+  if (source) {
+    seed(fitPalette(source))
+  }
+}
+
+// Swatch clicks while active refit via the studio — reflect them here.
+watch(() => paletteParams.value[props.alias], (value) => {
+  if (value && 'lightness' in value && JSON.stringify(value) !== JSON.stringify(toRaw(params))) {
+    seed(value as PaletteCurveParams)
   }
 })
 
 // While inactive, follow the selected palette so opening the editor starts
-// from the color already on screen instead of hijacking it.
-watch(() => (appConfig.ui.colors as Record<string, string>)[props.alias], (palette) => {
-  if (!active.value && palette) {
-    const anchor = anchorFromPalette(palette)
-    if (anchor) {
-      seed({ anchor })
-    }
+// from the curves of the color already on screen.
+watch([() => (appConfig.ui.colors as Record<string, string>)[props.alias], open], ([, isOpen]) => {
+  if (isOpen && !active.value) {
+    seedFromCurrent()
   }
-}, { immediate: true })
+})
 
 function apply() {
-  setPaletteFromCurve(props.alias, { ...params })
+  setPaletteFromCurve(props.alias, structuredClone(toRaw(params)))
 }
 
 function remove() {
   clearCustomPalette(props.alias)
   open.value = false
 }
-
-const sliders = [
-  { key: 'lightest', label: 'Light end', min: 0.9, max: 1, step: 0.005 },
-  { key: 'darkest', label: 'Dark end', min: 0.05, max: 0.35, step: 0.005 },
-  { key: 'vibrance', label: 'Vibrance', min: 0, max: 2, step: 0.05 },
-  { key: 'spread', label: 'Spread', min: 0.15, max: 0.8, step: 0.01 },
-  { key: 'hueDrift', label: 'Hue drift', min: -60, max: 60, step: 1 }
-] as const
 </script>
 
 <template>
@@ -116,27 +144,30 @@ const sliders = [
     </div>
 
     <template #content>
-      <div class="flex flex-col gap-3 pt-3 pb-1">
+      <div class="flex flex-col gap-2.5 pt-3 pb-1">
+        <UTabs
+          v-model="tab"
+          :items="tabs"
+          :content="false"
+          size="xs"
+          color="neutral"
+          :ui="{ trigger: 'text-[11px]' }"
+          @update:model-value="tab === 'hue' && recenterHueWindow()"
+        />
+
+        <ThemeStudioCurveEditor
+          v-model="params[tab]"
+          :y-min="windows[tab].min"
+          :y-max="windows[tab].max"
+          :stop-colors="stopColors"
+        />
+
         <div class="flex items-center gap-2">
-          <UPopover>
-            <button
-              type="button"
-              aria-label="Pick anchor color"
-              class="size-7 shrink-0 rounded-sm ring ring-default cursor-pointer"
-              :style="{ backgroundColor: params.anchor }"
-            />
-
-            <template #content>
-              <UColorPicker v-model="params.anchor" class="p-2" />
-            </template>
-          </UPopover>
-
-          <UInput
-            v-model="params.anchor"
-            size="sm"
-            class="flex-1 font-mono"
-            :ui="{ base: 'text-[11px]' }"
-          />
+          <div class="flex flex-1 rounded-sm overflow-hidden ring ring-default">
+            <UTooltip v-for="shade in SHADES" :key="shade" :text="`${shade} · ${shades[shade]}`">
+              <div class="h-5 flex-1" :style="{ backgroundColor: shades[shade] }" />
+            </UTooltip>
+          </div>
 
           <UTooltip :text="`White on 500: ${contrast.toFixed(1)}:1`">
             <UBadge
@@ -146,26 +177,6 @@ const sliders = [
               size="sm"
             />
           </UTooltip>
-        </div>
-
-        <div class="flex rounded-sm overflow-hidden ring ring-default">
-          <UTooltip v-for="shade in SHADES" :key="shade" :text="`${shade} · ${shades[shade]}`">
-            <div class="h-6 flex-1" :style="{ backgroundColor: shades[shade] }" />
-          </UTooltip>
-        </div>
-
-        <div v-for="slider in sliders" :key="slider.key" class="flex items-center gap-2">
-          <span class="text-[11px] text-muted w-16 shrink-0 select-none">{{ slider.label }}</span>
-
-          <USlider
-            v-model="params[slider.key]"
-            :min="slider.min"
-            :max="slider.max"
-            :step="slider.step"
-            size="xs"
-          />
-
-          <span class="text-[11px] text-dimmed font-mono w-10 text-right shrink-0">{{ params[slider.key] }}</span>
         </div>
 
         <UButton

@@ -1,13 +1,25 @@
 import { describe, it, expect } from 'vitest'
+import colors from 'tailwindcss/colors'
 import {
   hexToOklch,
   oklchToHex,
   inGamut,
   clampToGamut,
   contrastRatio,
+  parseCssColor,
   generatePalette,
+  fitCurve,
+  fitPalette,
+  sampleCurve,
+  CURVE_DEFAULTS,
+  NEUTRAL_CURVE_DEFAULTS,
   SHADES
 } from '../../docs/app/utils/theme-engine'
+import type { Shade } from '../../docs/app/utils/theme-engine'
+
+function tailwindShades(name: keyof typeof colors): Record<Shade, string> {
+  return Object.fromEntries(SHADES.map(shade => [shade, parseCssColor((colors[name] as Record<string, string>)[shade]!)!])) as Record<Shade, string>
+}
 
 describe('oklch', () => {
   it('matches reference values', () => {
@@ -54,61 +66,93 @@ describe('oklch', () => {
   })
 })
 
+describe('sampleCurve', () => {
+  it('hits the endpoints exactly', () => {
+    const curve = CURVE_DEFAULTS.lightness
+    expect(sampleCurve(0, curve)).toBeCloseTo(curve.y0, 5)
+    expect(sampleCurve(1, curve)).toBeCloseTo(curve.y1, 5)
+  })
+
+  it('interpolates a straight line when handles sit on it', () => {
+    const curve = { y0: 0, y1: 1, p1x: 0.33, p1y: 0.33, p2x: 0.66, p2y: 0.66 }
+    expect(sampleCurve(0.5, curve)).toBeCloseTo(0.5, 3)
+  })
+})
+
+describe('fitCurve', () => {
+  it('recovers a bezier from its own samples', () => {
+    const original = { y0: 1, y1: 0, p1x: 0.2, p1y: 0.9, p2x: 0.8, p2y: 0.2 }
+    const points = Array.from({ length: 11 }, (_, i) => {
+      const x = i / 10
+      return [x, sampleCurve(x, original)] as [number, number]
+    })
+
+    const fitted = fitCurve(points)
+    for (const [x, y] of points) {
+      expect(sampleCurve(x, fitted)).toBeCloseTo(y, 2)
+    }
+  })
+})
+
 describe('generatePalette', () => {
-  it('produces 11 valid hex shades with the anchor exact at 500', () => {
-    const palette = generatePalette({ anchor: '#1DB954' })
+  it('produces 11 valid hex shades', () => {
+    const palette = generatePalette(CURVE_DEFAULTS)
 
     expect(Object.keys(palette)).toHaveLength(SHADES.length)
-    expect(palette[500]).toBe('#1DB954')
     for (const shade of SHADES) {
       expect(palette[shade]).toMatch(/^#[0-9A-F]{6}$/)
     }
   })
 
-  it('keeps lightness monotonically decreasing from 50 to 950', () => {
-    for (const anchor of ['#1DB954', '#CC785C', '#3B82F6', '#8E8672']) {
-      const palette = generatePalette({ anchor })
+  it('keeps default ramps monotonically darkening', () => {
+    for (const hue of [30, 145, 250]) {
+      const flat = { ...CURVE_DEFAULTS.hue, y0: hue, y1: hue, p1y: hue, p2y: hue }
+      const palette = generatePalette({ ...CURVE_DEFAULTS, hue: flat })
       const lightnesses = SHADES.map(shade => hexToOklch(palette[shade]).l)
 
       for (let i = 1; i < lightnesses.length; i++) {
-        expect(lightnesses[i]!, `${anchor} shade ${SHADES[i]}`).toBeLessThan(lightnesses[i - 1]!)
+        expect(lightnesses[i]!, `hue ${hue} shade ${SHADES[i]}`).toBeLessThan(lightnesses[i - 1]!)
       }
     }
   })
 
-  it('honors the lightest/darkest endpoints', () => {
-    const palette = generatePalette({ anchor: '#8E8672', lightest: 0.94, darkest: 0.2 })
-
-    expect(hexToOklch(palette[50]).l).toBeCloseTo(0.94, 2)
-    expect(hexToOklch(palette[950]).l).toBeCloseTo(0.2, 2)
+  it('neutral defaults reach a deep dark end', () => {
+    const palette = generatePalette(NEUTRAL_CURVE_DEFAULTS)
+    expect(hexToOklch(palette[950]).l).toBeLessThan(0.16)
   })
+})
 
-  it('scales chroma with vibrance', () => {
-    const muted = generatePalette({ anchor: '#3B82F6', vibrance: 0.5 })
-    const vivid = generatePalette({ anchor: '#3B82F6', vibrance: 1.5 })
+describe('fitPalette (work backwards from real palettes)', () => {
+  it.each(['blue', 'green', 'orange', 'rose', 'zinc'] as const)('round-trips tailwind %s', (name) => {
+    const original = tailwindShades(name)
+    const regenerated = generatePalette(fitPalette(original))
 
-    // Compare a dark shade — very light shades gamut-clamp to the same ceiling.
-    expect(hexToOklch(muted[700]).c).toBeLessThan(hexToOklch(vivid[700]).c)
-  })
+    for (const shade of SHADES) {
+      const want = hexToOklch(original[shade])
+      const got = hexToOklch(regenerated[shade])
 
-  it('drifts hue across the ramp', () => {
-    const palette = generatePalette({ anchor: '#3B82F6', hueDrift: 40, vibrance: 1 })
-
-    const light = hexToOklch(palette[100]).h
-    const dark = hexToOklch(palette[900]).h
-    expect(dark).toBeGreaterThan(light)
-  })
-
-  it('stays ordered for near-extreme anchors', () => {
-    // At true extremes the ramp degenerates by design; 8-bit rounding may
-    // produce equal neighbors, but the order must never invert.
-    for (const anchor of ['#F5F5F0', '#16130F']) {
-      const palette = generatePalette({ anchor })
-      const lightnesses = SHADES.map(shade => hexToOklch(palette[shade]).l)
-
-      for (let i = 1; i < lightnesses.length; i++) {
-        expect(lightnesses[i]!, `${anchor} shade ${SHADES[i]}`).toBeLessThanOrEqual(lightnesses[i - 1]!)
-      }
+      // A single cubic can't hit every tailwind stop exactly — ~0.045 L is
+      // the model floor (worst case rose-900), well under a visible step.
+      expect(Math.abs(got.l - want.l), `${name}-${shade} lightness`).toBeLessThan(0.045)
+      expect(Math.abs(got.c - want.c), `${name}-${shade} chroma`).toBeLessThan(0.045)
     }
+  })
+
+  it('handles the hue wheel seam', () => {
+    // rose/red hues sit near 0/360 — fitting must not zigzag across the seam
+    const params = fitPalette(tailwindShades('rose'))
+    const sampled = SHADES.map((_, i) => sampleCurve(i / 10, params.hue))
+
+    for (let i = 1; i < sampled.length; i++) {
+      expect(Math.abs(sampled[i]! - sampled[i - 1]!), `step ${i}`).toBeLessThan(90)
+    }
+  })
+
+  it('keeps hue stable across near-gray stops', () => {
+    const params = fitPalette(tailwindShades('zinc'))
+    const hues = SHADES.map((_, i) => sampleCurve(i / 10, params.hue))
+    const spread = Math.max(...hues) - Math.min(...hues)
+
+    expect(spread).toBeLessThan(120)
   })
 })

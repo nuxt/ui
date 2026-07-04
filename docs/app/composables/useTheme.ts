@@ -302,6 +302,22 @@ export function useTheme() {
     window.localStorage.setItem('nuxt-ui-custom-colors', JSON.stringify(merged))
   }
 
+  function removeCSSVariables(keys: { light?: string[], dark?: string[] }) {
+    const next = {
+      light: Object.fromEntries(Object.entries(cssVariablesData.value.light || {}).filter(([key]) => !keys.light?.includes(key))),
+      dark: Object.fromEntries(Object.entries(cssVariablesData.value.dark || {}).filter(([key]) => !keys.dark?.includes(key)))
+    }
+    cssVariablesData.value = next
+    if (Object.keys(next.light).length || Object.keys(next.dark).length) {
+      window.localStorage.setItem('nuxt-ui-css-variables', JSON.stringify(next))
+    } else {
+      window.localStorage.removeItem('nuxt-ui-css-variables')
+      if (import.meta.client) {
+        document.getElementById('chat-css-variables')?.replaceChildren()
+      }
+    }
+  }
+
   function removeCustomColors(names: string[]) {
     const remaining = Object.fromEntries(Object.entries(customColorsData.value).filter(([name]) => !names.includes(name)))
     customColorsData.value = remaining
@@ -432,6 +448,7 @@ export function useTheme() {
     configLabel: computed(() => framework.value === 'vue' ? 'vite.config.ts' : 'app.config.ts'),
     currentDoc,
     removeCustomColors,
+    removeCSSVariables,
     exportCSS,
     exportConfig,
     applyThemeSettings,

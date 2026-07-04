@@ -1,7 +1,7 @@
 import { useLocalStorage } from '@vueuse/core'
 import colors from 'tailwindcss/colors'
-import { presets, docToSettings, isDefaultTheme, generatePalette, parseCssColor, DEFAULT_COLORS } from '../utils/theme-engine'
-import type { ThemeDoc, ThemePreset, PaletteCurveParams } from '../utils/theme-engine'
+import { presets, docToSettings, isDefaultTheme, generatePalette, fitPalette, parseCssColor, DEFAULT_COLORS, SHADES } from '../utils/theme-engine'
+import type { ThemeDoc, ThemePreset, PaletteCurveParams, Shade } from '../utils/theme-engine'
 
 export function useThemeStudio() {
   const theme = useTheme()
@@ -21,28 +21,37 @@ export function useThemeStudio() {
     return (appConfig.ui.colors as Record<string, string>)[alias] === customPaletteName(alias)
   }
 
-  /** The 500 hex of a named palette — tailwind's JS values first, CSS variables as fallback. */
-  function anchorFromPalette(name: string): string | undefined {
-    const tailwind = (colors as Record<string, any>)[name]?.[500]
-    if (tailwind) return parseCssColor(tailwind)
+  /** All 11 shade hexes of a named palette — tailwind's JS values first, CSS variables as fallback. */
+  function paletteShades(name: string): Partial<Record<Shade, string>> | undefined {
+    const tailwind = (colors as Record<string, any>)[name]
+    if (tailwind && typeof tailwind === 'object') {
+      return Object.fromEntries(SHADES.map(shade => [shade, parseCssColor(tailwind[shade])]).filter(([, hex]) => hex))
+    }
 
     if (import.meta.client) {
-      const cssValue = getComputedStyle(document.documentElement).getPropertyValue(`--color-${name === 'neutral' ? 'old-neutral' : name}-500`)
-      if (cssValue) return parseCssColor(cssValue)
+      const styles = getComputedStyle(document.documentElement)
+      const cssName = name === 'neutral' ? 'old-neutral' : name
+      const entries = SHADES
+        .map(shade => [shade, parseCssColor(styles.getPropertyValue(`--color-${cssName}-${shade}`))] as const)
+        .filter(([, hex]) => hex)
+      if (entries.length >= 2) {
+        return Object.fromEntries(entries)
+      }
     }
     return undefined
   }
 
   /**
    * Swatch-click entry point. With a custom palette active the swatches act
-   * as anchor pickers — the custom ramp re-anchors to the chosen palette's
-   * color and keeps its curve. Otherwise it is a plain alias switch.
+   * as curve seeds: the chosen palette is reverse-fitted so the editor shows
+   * the curves that reproduce it, replacing whatever was sculpted before.
+   * Otherwise it is a plain alias switch.
    */
   function selectPalette(alias: 'primary' | 'neutral', name: string) {
     if (isCustomPalette(alias)) {
-      const anchor = anchorFromPalette(name)
-      if (anchor) {
-        setPaletteFromCurve(alias, { ...paletteParams.value[alias], anchor })
+      const shades = paletteShades(name)
+      if (shades) {
+        setPaletteFromCurve(alias, fitPalette(shades))
         return
       }
     }
@@ -54,13 +63,29 @@ export function useThemeStudio() {
     }
   }
 
+  /**
+   * Light mode hardcodes `--ui-bg`/`--ui-text-inverted` to `white` (and dark
+   * `--ui-text-highlighted`), so a tinted neutral ramp would never reach the
+   * app background. A custom neutral re-routes them through the ramp.
+   */
+  const NEUTRAL_TOKEN_REMAPS = {
+    light: {
+      '--ui-bg': 'var(--ui-color-neutral-50)',
+      '--ui-text-inverted': 'var(--ui-color-neutral-50)'
+    },
+    dark: {
+      '--ui-text-highlighted': 'var(--ui-color-neutral-50)'
+    }
+  }
+
   /** Generate a ramp from curve params and point the alias at it. */
   function setPaletteFromCurve(alias: 'primary' | 'neutral', params: PaletteCurveParams) {
     const name = customPaletteName(alias)
 
     theme.applyThemeSettings({
       customColors: { [name]: generatePalette(params) },
-      [alias]: name
+      [alias]: name,
+      ...(alias === 'neutral' ? { cssVariables: NEUTRAL_TOKEN_REMAPS } : {})
     })
     paletteParams.value = { ...paletteParams.value, [alias]: params }
     activePreset.value = undefined
@@ -71,6 +96,12 @@ export function useThemeStudio() {
   /** Drop the custom ramp and return the alias to its default palette. */
   function clearCustomPalette(alias: 'primary' | 'neutral') {
     theme.removeCustomColors([customPaletteName(alias)])
+    if (alias === 'neutral') {
+      theme.removeCSSVariables({
+        light: Object.keys(NEUTRAL_TOKEN_REMAPS.light),
+        dark: Object.keys(NEUTRAL_TOKEN_REMAPS.dark)
+      })
+    }
     theme.applyThemeSettings({ [alias]: DEFAULT_COLORS[alias] })
 
     const { [alias]: _, ...rest } = paletteParams.value
@@ -131,7 +162,7 @@ export function useThemeStudio() {
     activePreset,
     paletteParams,
     isCustomPalette,
-    anchorFromPalette,
+    paletteShades,
     selectPalette,
     setPaletteFromCurve,
     clearCustomPalette,
