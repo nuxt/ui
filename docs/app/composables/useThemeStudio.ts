@@ -1,7 +1,16 @@
-import { useLocalStorage } from '@vueuse/core'
 import colors from 'tailwindcss/colors'
-import { presets, docToSettings, isDefaultTheme, generatePalette, fitPalette, parseCssColor, styleComponents, styleTokens, DEFAULT_COLORS, SHADES, STYLE_COMPONENT_KEYS, TOKEN_SHADE_TARGETS } from '../utils/theme-engine'
-import type { ThemeDoc, ThemePreset, PaletteCurveParams, Shade, StyleOptions } from '../utils/theme-engine'
+import { presets, docToSettings, isDefaultTheme, generatePalette, fitPalette, parseCssColor, parseUiColorRef, styleComponents, styleTokens, DEFAULT_COLORS, SHADES, TOKEN_SHADE_TARGETS } from '../utils/theme-engine'
+import type { ThemeDoc, ThemePreset, PaletteCurveParams, StyleOptions, Shade } from '../utils/theme-engine'
+
+function readLocalStorage<T>(key: string, fallback: T): T {
+  if (!import.meta.client) return fallback
+  try {
+    const raw = window.localStorage.getItem(key)
+    return raw ? JSON.parse(raw) : fallback
+  } catch {
+    return fallback
+  }
+}
 
 export function useThemeStudio() {
   const theme = useTheme()
@@ -10,32 +19,49 @@ export function useThemeStudio() {
 
   const activePreset = useState<string | undefined>('nuxt-ui-theme-preset', () => undefined)
 
-  /** Curve params per alias, kept so the editor stays editable across reloads. */
-  const paletteParams = useLocalStorage<Partial<Record<string, PaletteCurveParams>>>('nuxt-ui-palette-params', {})
+  /**
+   * Curve params per alias, kept so the editor stays editable across
+   * reloads. useState + explicit persistence (not useLocalStorage) so
+   * resetTheme() — reachable from the popover and chat, outside this
+   * composable — can clear the shared state, not just the storage key.
+   */
+  const paletteParams = useState<Partial<Record<string, PaletteCurveParams>>>('nuxt-ui-palette-params-state', () => readLocalStorage('nuxt-ui-palette-params', {}))
 
-  /** Shadow/border treatment; the expanded overrides live in the ai-theme extras. */
-  const style = useLocalStorage<StyleOptions>('nuxt-ui-style', {})
+  function setPaletteParams(value: Partial<Record<string, PaletteCurveParams>>) {
+    paletteParams.value = value
+    if (Object.keys(value).length) {
+      window.localStorage.setItem('nuxt-ui-palette-params', JSON.stringify(value))
+    } else {
+      window.localStorage.removeItem('nuxt-ui-palette-params')
+    }
+  }
+
+  /** Shadow/border/token-shade prefs; the expanded class bundle lives in the style-ui channel. */
+  const style = useState<StyleOptions>('nuxt-ui-style-prefs', () => readLocalStorage('nuxt-ui-style', {}))
 
   function setStyle(options: StyleOptions) {
-    const previous = styleTokens(style.value)
+    const previousStyle = style.value
+    const previous = styleTokens(previousStyle)
     style.value = { ...style.value, ...options }
+    window.localStorage.setItem('nuxt-ui-style', JSON.stringify(style.value))
 
-    // Clear the previous class bundle (defu merging can't unset classes) and
-    // only the tokens the PREVIOUS style emitted — never preset/doc-owned
-    // values like a preset's --ui-bg, which share the same variable names.
-    theme.resetComponentOverrides(STYLE_COMPONENT_KEYS)
+    // Remove only the tokens the PREVIOUS style emitted and the next one
+    // doesn't — never preset/doc-owned values sharing the same names.
     const tokens = styleTokens(style.value)
     theme.removeCSSVariables({
       light: Object.keys(previous.light).filter(key => !(key in tokens.light)),
       dark: Object.keys(previous.dark).filter(key => !(key in tokens.dark))
     })
 
+    // The class bundle lives in its own channel (never touches preset/AI
+    // overrides), and shade-only edits skip the component churn entirely.
     const components = styleComponents(style.value)
-    const settings: Record<string, any> = {}
-    if (Object.keys(components).length) settings.ui = components
-    if (Object.keys(tokens.light).length || Object.keys(tokens.dark).length) settings.cssVariables = tokens
-    if (Object.keys(settings).length) {
-      theme.applyThemeSettings(settings)
+    if (JSON.stringify(components) !== JSON.stringify(styleComponents(previousStyle))) {
+      theme.setStyleUi(components)
+    }
+
+    if (Object.keys(tokens.light).length || Object.keys(tokens.dark).length) {
+      theme.applyThemeSettings({ cssVariables: tokens }, { track: false })
     }
     activePreset.value = undefined
 
@@ -109,16 +135,35 @@ export function useThemeStudio() {
     }
   }
 
+  /** Remaps minus any token the user's shade sliders already own. */
+  function unownedNeutralRemaps() {
+    const owned = style.value.tokenShades || {}
+    const filter = (mode: 'light' | 'dark', vars: Record<string, string>) =>
+      Object.fromEntries(Object.entries(vars).filter(([token]) => owned[token]?.[mode] === undefined))
+    return {
+      light: filter('light', NEUTRAL_TOKEN_REMAPS.light),
+      dark: filter('dark', NEUTRAL_TOKEN_REMAPS.dark)
+    }
+  }
+
   /** Generate a ramp from curve params and point the alias at it. */
   function setPaletteFromCurve(alias: 'primary' | 'neutral', params: PaletteCurveParams) {
     const name = customPaletteName(alias)
 
+    // Remember what to restore when the custom palette is removed — the
+    // default alias would discard a preset's choice (e.g. Ghibli's stone).
+    if (!isCustomPalette(alias)) {
+      const prev = readLocalStorage<Record<string, string>>('nuxt-ui-palette-prev', {})
+      prev[alias] = (appConfig.ui.colors as Record<string, string>)[alias]!
+      window.localStorage.setItem('nuxt-ui-palette-prev', JSON.stringify(prev))
+    }
+
     theme.applyThemeSettings({
       customColors: { [name]: generatePalette(params) },
       [alias]: name,
-      ...(alias === 'neutral' ? { cssVariables: NEUTRAL_TOKEN_REMAPS } : {})
-    })
-    paletteParams.value = { ...paletteParams.value, [alias]: params }
+      ...(alias === 'neutral' ? { cssVariables: unownedNeutralRemaps() } : {})
+    }, { track: false })
+    setPaletteParams({ ...paletteParams.value, [alias]: params })
     activePreset.value = undefined
 
     // Live drags call this at ~16Hz — one analytics event per burst is plenty.
@@ -128,19 +173,24 @@ export function useThemeStudio() {
     }
   }
 
-  /** Drop the custom ramp and return the alias to its default palette. */
+  /** Drop the custom ramp and restore the palette that preceded it. */
   function clearCustomPalette(alias: 'primary' | 'neutral') {
     theme.removeCustomColors([customPaletteName(alias)])
     if (alias === 'neutral') {
+      const remaps = unownedNeutralRemaps()
       theme.removeCSSVariables({
-        light: Object.keys(NEUTRAL_TOKEN_REMAPS.light),
-        dark: Object.keys(NEUTRAL_TOKEN_REMAPS.dark)
+        light: Object.keys(remaps.light),
+        dark: Object.keys(remaps.dark)
       })
     }
-    theme.applyThemeSettings({ [alias]: DEFAULT_COLORS[alias] })
+
+    const prev = readLocalStorage<Record<string, string>>('nuxt-ui-palette-prev', {})
+    theme.applyThemeSettings({ [alias]: prev[alias] || DEFAULT_COLORS[alias] }, { track: false })
+    const { [alias]: _restored, ...remaining } = prev
+    window.localStorage.setItem('nuxt-ui-palette-prev', JSON.stringify(remaining))
 
     const { [alias]: _, ...rest } = paletteParams.value
-    paletteParams.value = rest
+    setPaletteParams(rest)
   }
 
   /**
@@ -152,19 +202,24 @@ export function useThemeStudio() {
   function deriveStyle(doc: ThemeDoc): StyleOptions {
     const derived: StyleOptions = { ...(doc.style || {}) }
 
-    const parse = (value?: string) => value?.match(/^var\(--ui-color-neutral-(\d+)\)$/)?.[1]
+    const parse = (value?: string) => {
+      const ref = parseUiColorRef(value)
+      return ref?.alias === 'neutral' ? ref.shade : undefined
+    }
 
     for (const target of TOKEN_SHADE_TARGETS) {
       if (derived.tokenShades?.[target.token]) continue
 
       const light = parse(doc.tokens?.light?.[target.token])
       const dark = parse(doc.tokens?.dark?.[target.token])
-      if (light || dark) {
+      if (light !== undefined || dark !== undefined) {
+        // Only modes the doc actually overrides — backfilling the other
+        // mode would turn a non-choice into an exported override.
         derived.tokenShades = {
           ...derived.tokenShades,
           [target.token]: {
-            light: light ? Number(light) : target.defaults.light,
-            dark: dark ? Number(dark) : target.defaults.dark
+            ...(light !== undefined ? { light } : {}),
+            ...(dark !== undefined ? { dark } : {})
           }
         }
       }
@@ -176,11 +231,17 @@ export function useThemeStudio() {
   /** Replace the current theme with a document: reset, then apply overrides. */
   function applyDoc(doc: ThemeDoc) {
     theme.resetTheme()
-    paletteParams.value = {}
     style.value = deriveStyle(doc)
+    if (Object.keys(style.value).length) {
+      window.localStorage.setItem('nuxt-ui-style', JSON.stringify(style.value))
+    }
 
     if (!isDefaultTheme(doc)) {
-      theme.applyThemeSettings(docToSettings(doc))
+      theme.applyThemeSettings(docToSettings(doc), { track: false })
+      const components = styleComponents(style.value)
+      if (Object.keys(components).length) {
+        theme.setStyleUi(components)
+      }
     }
   }
 
@@ -224,9 +285,6 @@ export function useThemeStudio() {
 
   function reset() {
     theme.resetTheme()
-    paletteParams.value = {}
-    style.value = {}
-    activePreset.value = undefined
   }
 
   return {

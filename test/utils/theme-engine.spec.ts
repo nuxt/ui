@@ -231,16 +231,29 @@ describe('styleComponents', () => {
     expect(components.card!.compoundVariants).toContainEqual({ variant: 'outline', class: { root: 'ring-2' } })
   })
 
-  it('expands doc.style in docToSettings with explicit components winning', async () => {
+  it('docToSettings keeps style out of the ui channel but carries its tokens', async () => {
     const { docToSettings } = await import('../../docs/app/utils/theme-engine')
     const settings = docToSettings({
       version: 1,
-      style: { shadow: 'soft' },
+      style: { shadow: 'hard', shadowColor: 'black' },
       components: { button: { slots: { base: 'rounded-full' } } }
     })
 
-    expect(settings.ui.card.slots.root).toBe('shadow-md')
-    expect(settings.ui.button.slots.base).toBe('rounded-full')
+    // components ride settings.ui; the style class bundle goes through the
+    // dedicated style-ui channel applied by the caller, so a later style
+    // change can never destroy doc components.
+    expect(settings.ui).toEqual({ button: { slots: { base: 'rounded-full' } } })
+    expect(settings.cssVariables.light['--ui-shadow-color']).toBe('black')
+  })
+
+  it('mergeUi concatenates slot classes and compound variants', async () => {
+    const { mergeUi, styleComponents } = await import('../../docs/app/utils/theme-engine')
+    const merged = mergeUi(styleComponents({ shadow: 'hard' }), { button: { slots: { base: 'rounded-full' } } })
+
+    // both the shadow classes and the explicit override survive, explicit last
+    expect(merged.button.slots.base).toContain('shadow-[3px_3px_0_0_var(--ui-shadow-color)]')
+    expect(merged.button.slots.base.endsWith('rounded-full')).toBe(true)
+    expect(merged.card.slots.root).toContain('shadow-[5px_5px_0_0_var(--ui-shadow-color)]')
   })
 })
 
@@ -284,15 +297,18 @@ describe('style colors', () => {
     expect(styleTokens({ shadowColor: 'shade' }).dark['--ui-shadow-color']).toBe('var(--ui-color-neutral-800)')
   })
 
-  it('styleTokens maps token shades and folds legacy bgShade', async () => {
+  it('styleTokens maps token shades per mode, only for modes present', async () => {
     const { styleTokens } = await import('../../docs/app/utils/theme-engine')
 
     expect(styleTokens({ tokenShades: { '--ui-text-muted': { light: 600, dark: 300 } } })).toEqual({
       light: { '--ui-text-muted': 'var(--ui-color-neutral-600)' },
       dark: { '--ui-text-muted': 'var(--ui-color-neutral-300)' }
     })
-    // legacy field still applies, explicit map wins over it
-    expect(styleTokens({ bgShade: { light: 100, dark: 800 } }).light['--ui-bg']).toBe('var(--ui-color-neutral-100)')
+    // a dark-only entry must NOT invent a light override (preset hydration)
+    expect(styleTokens({ tokenShades: { '--ui-bg': { dark: 950 } } })).toEqual({
+      light: {},
+      dark: { '--ui-bg': 'var(--ui-color-neutral-950)' }
+    })
     // non-whitelisted tokens are ignored
     expect(styleTokens({ tokenShades: { '--ui-evil': { light: 50, dark: 50 } } })).toEqual({ light: {}, dark: {} })
   })

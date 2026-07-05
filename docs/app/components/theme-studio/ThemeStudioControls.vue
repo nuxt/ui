@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { TOKEN_SHADE_TARGETS } from '../../utils/theme-engine'
+import { TOKEN_SHADE_TARGETS, SHADES, SHADOW_SHADE_DEFAULTS, BORDER_SHADE_DEFAULTS } from '../../utils/theme-engine'
 
 const colorMode = useColorMode()
 
@@ -21,7 +21,18 @@ const {
 
 const { selectPalette, isCustomPalette, style, setStyle } = useThemeStudio()
 
-const openSections = reactive<Record<string, boolean>>({ primary: true, neutral: true, radius: true, shadows: true, borders: true, font: true, icons: true, mode: true, bg: true, bginverted: false, texthighlighted: false, textmuted: false, textdimmed: false })
+const openSections = reactive<Record<string, boolean>>({
+  primary: true,
+  neutral: true,
+  radius: true,
+  shadows: true,
+  borders: true,
+  font: true,
+  icons: true,
+  mode: true,
+  // token sections keyed by token name; only the background starts open
+  ...Object.fromEntries(TOKEN_SHADE_TARGETS.map((target, index) => [target.token, index === 0]))
+})
 
 const primarySwatch = computed(() => {
   if (blackAsPrimary.value) {
@@ -71,43 +82,41 @@ const shadowColorItems = [
   { label: 'Neutral shade…', value: 'shade' }
 ]
 
-const SHADE_STEPS = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950]
-
-// Slider position (0–10) ↔ neutral ramp shade, per mode and style field.
-function shadeSlider(field: 'shadowShade' | 'borderShade' | 'bgShade', defaults: { light: number, dark: number }, target: 'light' | 'dark') {
+// Slider position ↔ SHADES index, per mode. shadow/border shades write both
+// modes on first touch (explicit 'shade' mode choice); token shades write
+// ONLY the touched mode so an untouched mode never becomes an override.
+function shadeSlider(field: 'shadowShade' | 'borderShade', defaults: { light: number, dark: number }, target: 'light' | 'dark') {
   return computed({
-    get: () => SHADE_STEPS.indexOf((style.value[field] || defaults)[target]),
+    get: () => SHADES.indexOf((style.value[field] || defaults)[target] as typeof SHADES[number]),
     set: (index: number) => {
       const current = { ...defaults, ...style.value[field] }
-      setStyle({ [field]: { ...current, [target]: SHADE_STEPS[index]! } })
+      setStyle({ [field]: { ...current, [target]: SHADES[index]! } })
     }
   })
 }
 
 const shadowShades = {
-  light: shadeSlider('shadowShade', { light: 950, dark: 800 }, 'light'),
-  dark: shadeSlider('shadowShade', { light: 950, dark: 800 }, 'dark')
+  light: shadeSlider('shadowShade', SHADOW_SHADE_DEFAULTS, 'light'),
+  dark: shadeSlider('shadowShade', SHADOW_SHADE_DEFAULTS, 'dark')
 }
 
 const borderShades = {
-  light: shadeSlider('borderShade', { light: 900, dark: 200 }, 'light'),
-  dark: shadeSlider('borderShade', { light: 900, dark: 200 }, 'dark')
+  light: shadeSlider('borderShade', BORDER_SHADE_DEFAULTS, 'light'),
+  dark: shadeSlider('borderShade', BORDER_SHADE_DEFAULTS, 'dark')
 }
 
 // Per-semantic-token shade sliders (Background, Inverted, Highlighted…).
 function tokenShadeSlider(token: string, defaults: { light: number, dark: number }, target: 'light' | 'dark') {
   return computed({
     get: () => {
-      const legacy = token === '--ui-bg' ? style.value.bgShade : undefined
-      return SHADE_STEPS.indexOf((style.value.tokenShades?.[token] || legacy || defaults)[target])
+      const value = style.value.tokenShades?.[token]?.[target] ?? defaults[target]
+      return SHADES.indexOf(value as typeof SHADES[number])
     },
     set: (index: number) => {
-      const legacy = token === '--ui-bg' ? style.value.bgShade : undefined
-      const current = { ...defaults, ...legacy, ...style.value.tokenShades?.[token] }
       setStyle({
         tokenShades: {
           ...style.value.tokenShades,
-          [token]: { ...current, [target]: SHADE_STEPS[index]! }
+          [token]: { ...style.value.tokenShades?.[token], [target]: SHADES[index]! }
         }
       })
     }
@@ -116,7 +125,6 @@ function tokenShadeSlider(token: string, defaults: { light: number, dark: number
 
 const tokenSections = TOKEN_SHADE_TARGETS.map(target => ({
   ...target,
-  key: target.token.replace(/^--ui-/, '').replace(/-/g, ''),
   sliders: {
     light: tokenShadeSlider(target.token, target.defaults, 'light'),
     dark: tokenShadeSlider(target.token, target.defaults, 'dark')
@@ -355,17 +363,13 @@ const shadowColor = computed({
           />
 
           <template v-if="shadowColor === 'shade'">
-            <div v-for="(slider, modeName) in shadowShades" :key="modeName" class="flex items-center gap-2">
-              <UIcon :name="modeName === 'light' ? 'i-lucide-sun' : 'i-lucide-moon'" class="size-3.5 text-muted shrink-0" />
-
-              <USlider v-model="slider.value" :min="0" :max="10" :step="1" size="sm" />
-
-              <span
-                class="size-4 shrink-0 rounded-sm ring ring-default"
-                :style="{ backgroundColor: `var(--color-${neutralChip}-${SHADE_STEPS[slider.value]})` }"
-              />
-              <span class="text-[11px] text-dimmed font-mono w-7 text-right shrink-0">{{ SHADE_STEPS[slider.value] }}</span>
-            </div>
+            <ThemeStudioShadeSlider
+              v-for="(slider, modeName) in shadowShades"
+              :key="modeName"
+              v-model="slider.value"
+              :mode="modeName"
+              :chip="neutralChip"
+            />
           </template>
         </div>
       </div>
@@ -404,17 +408,13 @@ const shadowColor = computed({
           />
 
           <template v-if="borderColor === 'shade'">
-            <div v-for="(slider, modeName) in borderShades" :key="modeName" class="flex items-center gap-2">
-              <UIcon :name="modeName === 'light' ? 'i-lucide-sun' : 'i-lucide-moon'" class="size-3.5 text-muted shrink-0" />
-
-              <USlider v-model="slider.value" :min="0" :max="10" :step="1" size="sm" />
-
-              <span
-                class="size-4 shrink-0 rounded-sm ring ring-default"
-                :style="{ backgroundColor: `var(--color-${neutralChip}-${SHADE_STEPS[slider.value]})` }"
-              />
-              <span class="text-[11px] text-dimmed font-mono w-7 text-right shrink-0">{{ SHADE_STEPS[slider.value] }}</span>
-            </div>
+            <ThemeStudioShadeSlider
+              v-for="(slider, modeName) in borderShades"
+              :key="modeName"
+              v-model="slider.value"
+              :mode="modeName"
+              :chip="neutralChip"
+            />
           </template>
         </div>
       </div>
@@ -422,25 +422,21 @@ const shadowColor = computed({
 
     <fieldset v-for="section in tokenSections" :key="section.token">
       <legend class="w-full text-xs leading-none font-semibold mb-2.5 select-none flex items-center gap-1 cursor-pointer">
-        <button type="button" class="flex items-center gap-1 flex-1 text-left cursor-pointer" @click="openSections[section.key] = !openSections[section.key]">
+        <button type="button" class="flex items-center gap-1 flex-1 text-left cursor-pointer" @click="openSections[section.token] = !openSections[section.token]">
           {{ section.label }}
 
-          <UIcon name="i-lucide-chevron-down" class="size-3 text-dimmed transition-transform duration-200" :class="{ '-rotate-90': !openSections[section.key] }" />
+          <UIcon name="i-lucide-chevron-down" class="size-3 text-dimmed transition-transform duration-200" :class="{ '-rotate-90': !openSections[section.token] }" />
         </button>
       </legend>
 
-      <div v-show="openSections[section.key]" class="flex flex-col gap-2">
-        <div v-for="(slider, modeName) in section.sliders" :key="modeName" class="flex items-center gap-2">
-          <UIcon :name="modeName === 'light' ? 'i-lucide-sun' : 'i-lucide-moon'" class="size-3.5 text-muted shrink-0" />
-
-          <USlider v-model="slider.value" :min="0" :max="10" :step="1" size="sm" />
-
-          <span
-            class="size-4 shrink-0 rounded-sm ring ring-default"
-            :style="{ backgroundColor: `var(--color-${neutralChip}-${SHADE_STEPS[slider.value]})` }"
-          />
-          <span class="text-[11px] text-dimmed font-mono w-7 text-right shrink-0">{{ SHADE_STEPS[slider.value] }}</span>
-        </div>
+      <div v-show="openSections[section.token]" class="flex flex-col gap-2">
+        <ThemeStudioShadeSlider
+          v-for="(slider, modeName) in section.sliders"
+          :key="modeName"
+          v-model="slider.value"
+          :mode="modeName"
+          :chip="neutralChip"
+        />
       </div>
     </fieldset>
 

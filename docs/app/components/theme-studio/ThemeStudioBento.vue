@@ -241,7 +241,15 @@ function showToast() {
             mikenewbon
           </p>
         </div>
-        <UButton label="Follow" size="xs" color="neutral" variant="subtle" class="ms-auto" />
+        <UButton
+          label="Follow"
+          to="https://github.com/mikenewbon"
+          target="_blank"
+          size="xs"
+          color="neutral"
+          variant="subtle"
+          class="ms-auto"
+        />
       </div>
 
       <USeparator />

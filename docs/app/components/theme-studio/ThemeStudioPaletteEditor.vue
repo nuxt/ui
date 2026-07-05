@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useThrottleFn } from '@vueuse/core'
+import { useThrottleFn, watchIgnorable } from '@vueuse/core'
 import { SHADES, CURVE_DEFAULTS, NEUTRAL_CURVE_DEFAULTS, generatePalette, fitPalette, contrastRatio } from '../../utils/theme-engine'
 import type { PaletteCurveParams } from '../../utils/theme-engine'
 
@@ -57,32 +57,38 @@ const windows = computed(() => ({
   hue: hueWindow.value
 }))
 
-// Programmatic writes into `params` (seeding, external sync) must not
-// live-apply — only user edits do.
-let suppress = false
+const styleOffset = ref('fitted')
+
 /** Fitted base the style offsets transform from, so they never compound. */
 let seedBase: PaletteCurveParams = structuredClone(toRaw(params))
-function seed(values: PaletteCurveParams) {
-  suppress = true
-  seedBase = structuredClone(toRaw(values))
-  Object.assign(params, structuredClone(toRaw(values)))
-  recenterHueWindow()
-  nextTick(() => {
-    suppress = false
-  })
-}
+
+// Set while OUR throttled apply writes paletteParams, so the echo watcher
+// below can tell self-originated updates from external ones (swatch clicks).
+let applying = false
 
 // Throttled (not debounced) so the theme streams live while dragging a
 // curve — the trailing call catches the release position.
 const throttledApply = useThrottleFn(() => {
+  applying = true
   setPaletteFromCurve(props.alias, structuredClone(toRaw(params)))
+  applying = false
 }, 60, true, true)
 
-watch(params, () => {
-  if (!suppress) {
-    throttledApply()
-  }
+// Programmatic writes into `params` (seeding, external sync) must not
+// live-apply — only user edits do. watchIgnorable scopes the suppression
+// to the seed's own writes instead of a whole tick.
+const { ignoreUpdates } = watchIgnorable(params, () => {
+  throttledApply()
 })
+
+function seed(values: PaletteCurveParams) {
+  seedBase = structuredClone(toRaw(values))
+  styleOffset.value = 'fitted'
+  ignoreUpdates(() => {
+    Object.assign(params, structuredClone(toRaw(values)))
+  })
+  recenterHueWindow()
+}
 
 // While dragging, a global class turns on short color transitions so the
 // page glides between throttle ticks instead of stepping.
@@ -118,8 +124,9 @@ function seedFromCurrent() {
 }
 
 // Swatch clicks while active refit via the studio — reflect them here.
+// Self-originated writes (our own throttled applies) are skipped outright.
 watch(() => paletteParams.value[props.alias], (value) => {
-  if (value && 'lightness' in value && JSON.stringify(value) !== JSON.stringify(toRaw(params))) {
+  if (!applying && value && 'lightness' in value && JSON.stringify(value) !== JSON.stringify(toRaw(params))) {
     seed(value as PaletteCurveParams)
   }
 })
@@ -131,8 +138,6 @@ watch([() => (appConfig.ui.colors as Record<string, string>)[props.alias], open]
     seedFromCurrent()
   }
 })
-
-const styleOffset = ref('fitted')
 
 const styleOffsetItems = [
   { label: 'Fitted', value: 'fitted' },

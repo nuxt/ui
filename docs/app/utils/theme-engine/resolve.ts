@@ -63,6 +63,12 @@ export interface ResolvedToken {
 
 const UI_COLOR_RE = /^var\(--ui-color-([a-z]+)-(\d{2,3})\)$/
 
+/** Parse a `var(--ui-color-<alias>-<shade>)` reference, the one format the studio emits. */
+export function parseUiColorRef(value?: string): { alias: string, shade: number } | undefined {
+  const match = value?.match(UI_COLOR_RE)
+  return match ? { alias: match[1]!, shade: Number(match[2]) } : undefined
+}
+
 export function resolveAlias(doc: ThemeDoc, alias: ColorAlias): string {
   return doc.colors?.[alias] || DEFAULT_COLORS[alias]
 }

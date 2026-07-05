@@ -1,7 +1,7 @@
 import { themeIcons } from '../theme'
 import type { ThemeDoc } from './types'
 import { DEFAULT_COLORS, THEME_DEFAULTS } from './types'
-import { styleComponents, styleTokens } from './styles'
+import { styleComponents, styleTokens, mergeUi } from './styles'
 
 /**
  * Generate the minimal `main.css`. The document only holds overrides, so
@@ -87,10 +87,9 @@ export function generateConfig(doc: ThemeDoc, framework: string = 'nuxt'): strin
     config.ui.icons = themeIcons[doc.icons as keyof typeof themeIcons]
   }
 
-  const componentOverrides = {
-    ...(doc.style ? styleComponents(doc.style) : {}),
-    ...(doc.components || {})
-  }
+  // Explicit components merge INTO the style expansion (classes concatenate,
+  // explicit last so it wins) — a spread would drop one side wholesale.
+  const componentOverrides = mergeUi(doc.style ? styleComponents(doc.style) : undefined, doc.components)
   if (Object.keys(componentOverrides).length) {
     config.ui = config.ui || {}
     Object.assign(config.ui, componentOverrides)
@@ -157,14 +156,11 @@ export function docToSettings(doc: ThemeDoc): Record<string, any> {
     }
   }
 
-  // Expand the shadow/border treatment into component overrides; explicit
-  // per-component overrides win over the expansion.
-  const ui = {
-    ...(doc.style ? styleComponents(doc.style) : {}),
-    ...(doc.components || {})
-  }
-  if (Object.keys(ui).length) {
-    settings.ui = ui
+  // Only the doc's explicit components ride the settings channel — the
+  // style expansion is applied through the dedicated style-ui channel by
+  // the caller (applyDoc), so a later style tweak can't destroy them.
+  if (doc.components && Object.keys(doc.components).length) {
+    settings.ui = doc.components
   }
 
   return settings

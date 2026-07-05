@@ -1,5 +1,6 @@
 import { defu } from 'defu'
 import { themeIcons, cssVariableDefaults } from '../utils/theme'
+import { mergeUi } from '../utils/theme-engine'
 
 export default defineNuxtPlugin({
   enforce: 'post',
@@ -29,6 +30,7 @@ export default defineNuxtPlugin({
       }
 
       restoreState('nuxt-ui-ai-theme')
+      restoreState('nuxt-ui-style-ui')
       restoreState('nuxt-ui-custom-colors')
       restoreState('nuxt-ui-css-variables')
 
@@ -39,9 +41,13 @@ export default defineNuxtPlugin({
             (appConfig.ui.colors as any)[key] = value
           }
         }
-        if (extras.ui) {
+        const styleUi = JSON.parse(localStorage.getItem('nuxt-ui-style-ui') || '{}')
+        if (extras.ui || Object.keys(styleUi).length) {
           onNuxtReady(() => {
-            for (const [key, value] of Object.entries(extras.ui)) {
+            // Same composition as the live path: style bundle first,
+            // preset/AI extras last so explicit overrides win the merge.
+            const merged = mergeUi(styleUi, extras.ui || {})
+            for (const [key, value] of Object.entries(merged)) {
               if (key === 'colors' || key === 'icons') continue
               (appConfig.ui as any)[key] = defu(value as Record<string, any>, (appConfig.ui as any)[key] || {})
             }

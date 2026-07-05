@@ -1,7 +1,7 @@
 import { defu } from 'defu'
 import { useLocalStorage } from '@vueuse/core'
 import { themeIcons, cssVariableDefaults } from '../utils/theme'
-import { generateCSS, generateConfig, DEFAULT_COLORS, THEME_DEFAULTS, LIBRARY_TOKEN_DEFAULTS } from '../utils/theme-engine'
+import { generateCSS, generateConfig, mergeUi, DEFAULT_COLORS, THEME_DEFAULTS, LIBRARY_TOKEN_DEFAULTS } from '../utils/theme-engine'
 import type { ThemeDoc, ThemePalette } from '../utils/theme-engine'
 import { omit } from '#ui/utils'
 import colors from 'tailwindcss/colors'
@@ -59,16 +59,21 @@ export function useTheme() {
   const { framework } = useFrameworks()
 
   const aiThemeExtras = useState<Record<string, any>>('nuxt-ui-ai-theme', () => readLocalStorage('nuxt-ui-ai-theme', {}))
+  // Style-treatment class bundles live in their OWN channel so restyling
+  // (which regenerates the whole bundle) can never destroy preset/AI
+  // component overrides that share the same component keys.
+  const styleUiData = useState<Record<string, any>>('nuxt-ui-style-ui', () => readLocalStorage('nuxt-ui-style-ui', {}))
   const customColorsData = useState<Record<string, Record<string, string>>>('nuxt-ui-custom-colors', () => readLocalStorage('nuxt-ui-custom-colors', {}))
 
   // The neutral may be a custom palette (AI themes, studio presets) with no entry in
   // tailwindcss/colors — a throw here would abort the whole unhead flush, taking every
   // other theme <style> down with it.
   const color = computed(() => {
-    if (colorMode.value !== 'dark') return 'white'
-
     const neutral = appConfig.ui.colors.neutral
-    return (colors as any)[neutral]?.[900] || customColorsData.value[neutral]?.[900] || (colors as any).slate[900]
+    // Match the page background in both modes (docs light baseline is
+    // neutral-50, not white) so browser chrome doesn't seam against the page.
+    const shade = colorMode.value === 'dark' ? 900 : 50
+    return (colors as any)[neutral]?.[shade] || customColorsData.value[neutral]?.[shade] || (colors as any).slate[shade]
   })
   const cssVariablesData = useState<{ light?: Record<string, string>, dark?: Record<string, string> }>('nuxt-ui-css-variables', () => readLocalStorage('nuxt-ui-css-variables', {}))
   const _radius = useLocalStorage('nuxt-ui-radius', 0.25)
@@ -261,7 +266,10 @@ export function useTheme() {
 
     // Only palettes actually referenced by an alias belong in the export —
     // leftovers from a previous custom palette would bloat the @theme block.
-    const referenced = new Set(Object.values(colorOverrides))
+    // Reference by the alias's CURRENT value, not just overrides: a custom
+    // palette can shadow a default name (AI retunes 'green' while primary
+    // stays 'green') and must still export.
+    const referenced = new Set(Object.values(appConfig.ui.colors as Record<string, string>))
     const paletteEntries = Object.entries(customColorsData.value).filter(([name]) => referenced.has(name))
     if (paletteEntries.length) {
       doc.palettes = Object.fromEntries(paletteEntries.map(([name, shades]) => [name, { shades: shades as ThemePalette['shades'] }]))
@@ -327,22 +335,31 @@ export function useTheme() {
     }
   }
 
-  /** Unset `ui.<component>` overrides previously applied via applyThemeSettings. */
-  function resetComponentOverrides(keys: string[]) {
-    const extras = { ...aiThemeExtras.value }
-    if (extras.ui) {
-      extras.ui = Object.fromEntries(Object.entries(extras.ui).filter(([key]) => !keys.includes(key)))
-      if (!Object.keys(extras.ui).length) delete extras.ui
-    }
+  /**
+   * Rebuild `appConfig.ui.<component>` for the given keys from the two
+   * override channels: the style bundle first, preset/AI extras last (so
+   * explicit overrides win the class merge).
+   */
+  function recomposeComponentOverrides(keys: Iterable<string>) {
     for (const key of keys) {
-      (appConfig.ui as any)[key] = undefined
+      const merged = mergeUi(
+        { [key]: styleUiData.value[key] },
+        { [key]: aiThemeExtras.value.ui?.[key] }
+      )[key]
+      ;(appConfig.ui as any)[key] = merged && Object.keys(merged).length ? merged : undefined
     }
-    aiThemeExtras.value = extras
-    if (Object.keys(extras).length) {
-      window.localStorage.setItem('nuxt-ui-ai-theme', JSON.stringify(extras))
+  }
+
+  /** Replace the style treatment's component bundle wholesale. */
+  function setStyleUi(ui: Record<string, any>) {
+    const touched = new Set([...Object.keys(styleUiData.value), ...Object.keys(ui)])
+    styleUiData.value = ui
+    if (Object.keys(ui).length) {
+      window.localStorage.setItem('nuxt-ui-style-ui', JSON.stringify(ui))
     } else {
-      window.localStorage.removeItem('nuxt-ui-ai-theme')
+      window.localStorage.removeItem('nuxt-ui-style-ui')
     }
+    recomposeComponentOverrides(touched)
   }
 
   function removeCustomColors(names: string[]) {
@@ -364,11 +381,13 @@ export function useTheme() {
     window.localStorage.setItem('nuxt-ui-css-variables', JSON.stringify(merged))
   }
 
-  function applyThemeSettings(settings: Record<string, any>) {
-    if (settings.customColors && typeof settings.customColors === 'object') {
-      const safeCustomColors = sanitizeCustomColors(settings.customColors)
-      if (Object.keys(safeCustomColors).length) injectCustomColors(safeCustomColors)
-    }
+  function applyThemeSettings(settings: Record<string, any>, options: { track?: boolean } = {}) {
+    // Sanitize once up front — later checks must consult the SANITIZED set,
+    // or a rejected palette could still be selected as an alias.
+    const safeCustomColors = settings.customColors && typeof settings.customColors === 'object'
+      ? sanitizeCustomColors(settings.customColors)
+      : {}
+    if (Object.keys(safeCustomColors).length) injectCustomColors(safeCustomColors)
 
     if (settings.cssVariables && typeof settings.cssVariables === 'object') {
       injectCSSVariables(sanitizeCSSVariables(settings.cssVariables))
@@ -376,7 +395,7 @@ export function useTheme() {
 
     if (settings.primary && SAFE_NAME.test(settings.primary)) primary.value = settings.primary
     // Custom palettes (injected via customColors) are valid neutrals too, e.g. presets shipping their own ramp.
-    if (settings.neutral && SAFE_NAME.test(settings.neutral) && (neutralColors.includes(settings.neutral) || settings.customColors?.[settings.neutral])) neutral.value = settings.neutral
+    if (settings.neutral && SAFE_NAME.test(settings.neutral) && (neutralColors.includes(settings.neutral) || (customColorsData.value[settings.neutral] || safeCustomColors[settings.neutral]))) neutral.value = settings.neutral
     if (settings.radius !== undefined && Number.isFinite(Number(settings.radius))) radius.value = Number(settings.radius)
     if (settings.font && SAFE_NAME.test(settings.font)) font.value = settings.font
     if (settings.icons && settings.icons in themeIcons) icon.value = settings.icons
@@ -399,16 +418,21 @@ export function useTheme() {
         // Skip `colors` (handled above) and prototype-chain keys that would pollute appConfig.ui when assigned.
         if (key === 'colors' || key === '__proto__' || key === 'constructor' || key === 'prototype') continue
 
-        const merged = defu(value as Record<string, any>, (appConfig.ui as any)[key] || {}, savedExtras.ui[key] || {})
-        ;(appConfig.ui as any)[key] = merged
-        savedExtras.ui[key] = merged
+        savedExtras.ui[key] = defu(value as Record<string, any>, savedExtras.ui[key] || {})
       }
     }
 
     aiThemeExtras.value = savedExtras
     window.localStorage.setItem('nuxt-ui-ai-theme', JSON.stringify(savedExtras))
+    if (settings.ui) {
+      recomposeComponentOverrides(Object.keys(savedExtras.ui || {}))
+    }
 
-    track('AI Theme Applied')
+    // Hot paths (style sliders, curve drags at ~16Hz) opt out; only real
+    // entry points (AI chat, presets) should emit an analytics event.
+    if (options.track !== false) {
+      track('AI Theme Applied')
+    }
   }
 
   function resetTheme() {
@@ -446,6 +470,16 @@ export function useTheme() {
     customColorsData.value = {}
     cssVariablesData.value = {}
 
+    // Studio-owned state must reset with the theme regardless of which
+    // reset button was pressed (popover, chat, or studio) — orphaned style
+    // prefs would silently resurrect on the next style click or export.
+    setStyleUi({})
+    window.localStorage.removeItem('nuxt-ui-style')
+    window.localStorage.removeItem('nuxt-ui-palette-params')
+    window.localStorage.removeItem('nuxt-ui-palette-prev')
+    useState<Record<string, any>>('nuxt-ui-style-prefs').value = {}
+    useState<string | undefined>('nuxt-ui-theme-preset').value = undefined
+
     if (import.meta.client) {
       document.getElementById('chat-css-variables')?.replaceChildren()
       document.getElementById('chat-custom-colors')?.replaceChildren()
@@ -476,7 +510,7 @@ export function useTheme() {
     currentDoc,
     removeCustomColors,
     removeCSSVariables,
-    resetComponentOverrides,
+    setStyleUi,
     exportCSS,
     exportConfig,
     applyThemeSettings,

@@ -41,42 +41,30 @@ export interface StyleOptions {
   /** Neutral ramp shade per mode, used when `borderColor` is 'shade' */
   borderShade?: { light: number, dark: number }
   /**
-   * App background as a neutral ramp shade per mode.
-   * @deprecated superseded by `tokenShades['--ui-bg']`; still read for
-   * persisted state from older sessions.
-   */
-  bgShade?: { light: number, dark: number }
-  /**
-   * Semantic token → neutral ramp shade per mode. Strictly a token
+   * Semantic token → neutral ramp shade, per mode. Strictly a token
    * shorthand parked on the style axis until the studio grows a full
-   * tokens editor. Keys are whitelisted in TOKEN_SHADE_TARGETS.
+   * tokens editor. Keys are whitelisted in TOKEN_SHADE_TARGETS. A mode
+   * is only an override when present — an absent mode stays inherited,
+   * so hydrating one mode from a preset never leaks a phantom override
+   * for the other into exports.
    */
-  tokenShades?: Record<string, { light: number, dark: number }>
+  tokenShades?: Record<string, { light?: number, dark?: number }>
 }
-
-export const SHADOW_STYLES: ShadowStyle[] = ['none', 'soft', 'hard']
-export const BORDER_STYLES: BorderStyle[] = ['default', 'bold', 'frame']
-export const BORDER_COLORS: BorderColor[] = ['default', 'inverted', 'black', 'white', 'primary', 'neutral', 'shade']
 
 /** Borders default opposite to the surface: dark ink on light, pale on dark. */
 export const BORDER_SHADE_DEFAULTS = { light: 900, dark: 200 }
-
-/** The docs baseline background shades. */
-export const BG_SHADE_DEFAULTS = { light: 50, dark: 900 }
 
 /**
  * Semantic tokens the studio exposes as per-mode shade sliders, with the
  * library/docs default shades. 'white' library values map to shade 50.
  */
 export const TOKEN_SHADE_TARGETS: Array<{ token: string, label: string, defaults: { light: number, dark: number } }> = [
-  { token: '--ui-bg', label: 'Background', defaults: BG_SHADE_DEFAULTS },
+  { token: '--ui-bg', label: 'Background', defaults: { light: 50, dark: 900 } },
   { token: '--ui-bg-inverted', label: 'Inverted', defaults: { light: 900, dark: 50 } },
   { token: '--ui-text-highlighted', label: 'Highlighted', defaults: { light: 900, dark: 50 } },
   { token: '--ui-text-muted', label: 'Muted', defaults: { light: 500, dark: 400 } },
   { token: '--ui-text-dimmed', label: 'Dimmed', defaults: { light: 400, dark: 500 } }
 ]
-export const SHADOW_COLORS: ShadowColor[] = ['default', 'black', 'inverted', 'primary', 'shade']
-
 export const SHADOW_SHADE_DEFAULTS = { light: 950, dark: 800 }
 
 interface ComponentFragment {
@@ -201,8 +189,6 @@ const SHADOW_COLOR_VALUES: Record<Exclude<ShadowColor, 'default' | 'shade'>, { l
   primary: { light: 'var(--ui-color-primary-500)', dark: 'var(--ui-color-primary-400)' }
 }
 
-export const STYLE_TOKEN_KEYS = ['--ui-frame-color', '--ui-shadow-color', '--ui-bg']
-
 /**
  * The CSS-variable side of a style: per-mode values for the frame and
  * shadow color choices. 'default' contributes nothing (the docs CSS /
@@ -221,15 +207,10 @@ export function styleTokens(style: StyleOptions): { light: Record<string, string
     light['--ui-frame-color'] = value.light
     dark['--ui-frame-color'] = value.dark
   }
-  // Legacy single-purpose field folds into the generic map.
-  const tokenShades = {
-    ...(style.bgShade ? { '--ui-bg': style.bgShade } : {}),
-    ...style.tokenShades
-  }
-  for (const [token, shade] of Object.entries(tokenShades)) {
+  for (const [token, shade] of Object.entries(style.tokenShades || {})) {
     if (TOKEN_SHADE_TARGETS.some(target => target.token === token)) {
-      light[token] = `var(--ui-color-neutral-${shade.light})`
-      dark[token] = `var(--ui-color-neutral-${shade.dark})`
+      if (shade.light !== undefined) light[token] = `var(--ui-color-neutral-${shade.light})`
+      if (shade.dark !== undefined) dark[token] = `var(--ui-color-neutral-${shade.dark})`
     }
   }
 
@@ -275,6 +256,54 @@ export function styleComponents(style: StyleOptions): Fragments {
     }
   }
 
+  return result
+}
+
+/**
+ * Merge two `ui.<component>` override fragments so both take effect: slot
+ * class strings concatenate (the explicit override last, so it wins the
+ * tailwind-merge), compoundVariants arrays append in the same order. Used
+ * wherever a doc's explicit `components` meet a style expansion — a spread
+ * would silently drop whichever side loses.
+ */
+export function mergeComponentOverrides(
+  base: Record<string, any> | undefined,
+  extra: Record<string, any> | undefined
+): Record<string, any> | undefined {
+  if (!base || !Object.keys(base).length) return extra
+  if (!extra || !Object.keys(extra).length) return base
+
+  const result: Record<string, any> = {}
+  for (const key of new Set([...Object.keys(base), ...Object.keys(extra)])) {
+    const a = base[key]
+    const b = extra[key]
+    if (a === undefined) {
+      result[key] = b
+    } else if (b === undefined) {
+      result[key] = a
+    } else if (key === 'compoundVariants' && Array.isArray(a) && Array.isArray(b)) {
+      result[key] = [...a, ...b]
+    } else if (typeof a === 'string' && typeof b === 'string') {
+      result[key] = `${a} ${b}`
+    } else if (typeof a === 'object' && typeof b === 'object' && !Array.isArray(a) && !Array.isArray(b)) {
+      result[key] = mergeComponentOverrides(a, b)
+    } else {
+      result[key] = b
+    }
+  }
+  return result
+}
+
+/** Merge two whole `ui` records component-wise. */
+export function mergeUi(
+  base: Record<string, any> | undefined,
+  extra: Record<string, any> | undefined
+): Record<string, any> {
+  const result: Record<string, any> = {}
+  for (const key of new Set([...Object.keys(base || {}), ...Object.keys(extra || {})])) {
+    const merged = mergeComponentOverrides(base?.[key], extra?.[key])
+    if (merged && Object.keys(merged).length) result[key] = merged
+  }
   return result
 }
 
