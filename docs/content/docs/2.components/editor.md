@@ -178,7 +178,7 @@ const editor = useEditor({
 ```
 
 ::note
-In this mode, the engine props (`starter-kit`, `image`, `mention`, `placeholder`, `markdown`, `content-type`, `model-value`, `extensions`) are **ignored** — the external editor owns its content and schema. You must keep full v-model control on your own editor instance, not UEditor component.
+In this mode, the engine props (`starter-kit`, `image`, `mention`, `placeholder`, `markdown`, `content-type`, `model-value`, `extensions`) are **ignored** — the external editor owns its content and schema. Manage `v-model` on your own editor instance instead of on the `UEditor` component.
 ::
 
 This is what enables editors backed by an extended starter kit, such as [comark-tiptap](https://github.com/sandros94/comark-tiptap), which provides a lossless markdown ↔ AST ↔ ProseMirror round-trip:
