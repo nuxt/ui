@@ -18,7 +18,18 @@ const {
   mode
 } = useTheme()
 
-const { selectPalette } = useThemeStudio()
+const { selectPalette, style, setStyle } = useThemeStudio()
+
+const shadowOptions = [
+  { label: 'None', value: 'none', icon: 'i-lucide-square' },
+  { label: 'Soft', value: 'soft', icon: 'i-lucide-square-stack' },
+  { label: 'Hard', value: 'hard', icon: 'i-lucide-squares-exclude' }
+] as const
+
+const borderOptions = [
+  { label: 'Thin', value: 'default' },
+  { label: 'Bold', value: 'bold' }
+] as const
 </script>
 
 <template>
@@ -114,6 +125,40 @@ const { selectPalette } = useThemeStudio()
           class="justify-center px-0"
           :selected="radius === r"
           @click="radius = r"
+        />
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend class="text-xs leading-none font-semibold mb-2.5 select-none flex items-center gap-1">
+        Shadows
+      </legend>
+
+      <div class="grid grid-cols-3 gap-1">
+        <ThemePickerButton
+          v-for="option in shadowOptions"
+          :key="option.value"
+          :label="option.label"
+          class="justify-center px-0"
+          :selected="(style.shadow || 'none') === option.value"
+          @click="setStyle({ shadow: option.value })"
+        />
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend class="text-xs leading-none font-semibold mb-2.5 select-none flex items-center gap-1">
+        Borders
+      </legend>
+
+      <div class="grid grid-cols-2 gap-1">
+        <ThemePickerButton
+          v-for="option in borderOptions"
+          :key="option.value"
+          :label="option.label"
+          class="justify-center px-0"
+          :selected="(style.border || 'default') === option.value"
+          @click="setStyle({ border: option.value })"
         />
       </div>
     </fieldset>

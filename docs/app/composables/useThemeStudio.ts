@@ -1,7 +1,7 @@
 import { useLocalStorage } from '@vueuse/core'
 import colors from 'tailwindcss/colors'
-import { presets, docToSettings, isDefaultTheme, generatePalette, fitPalette, parseCssColor, DEFAULT_COLORS, SHADES } from '../utils/theme-engine'
-import type { ThemeDoc, ThemePreset, PaletteCurveParams, Shade } from '../utils/theme-engine'
+import { presets, docToSettings, isDefaultTheme, generatePalette, fitPalette, parseCssColor, styleComponents, DEFAULT_COLORS, SHADES, STYLE_COMPONENT_KEYS } from '../utils/theme-engine'
+import type { ThemeDoc, ThemePreset, PaletteCurveParams, Shade, StyleOptions } from '../utils/theme-engine'
 
 export function useThemeStudio() {
   const theme = useTheme()
@@ -12,6 +12,24 @@ export function useThemeStudio() {
 
   /** Curve params per alias, kept so the editor stays editable across reloads. */
   const paletteParams = useLocalStorage<Partial<Record<string, PaletteCurveParams>>>('nuxt-ui-palette-params', {})
+
+  /** Shadow/border treatment; the expanded overrides live in the ai-theme extras. */
+  const style = useLocalStorage<StyleOptions>('nuxt-ui-style', {})
+
+  function setStyle(options: StyleOptions) {
+    style.value = { ...style.value, ...options }
+
+    // Clear the previous bundle first — defu merging can't unset classes.
+    theme.resetComponentOverrides(STYLE_COMPONENT_KEYS)
+
+    const components = styleComponents(style.value)
+    if (Object.keys(components).length) {
+      theme.applyThemeSettings({ ui: components })
+    }
+    activePreset.value = undefined
+
+    track('Theme Style Changed', { shadow: style.value.shadow || 'none', border: style.value.border || 'default' })
+  }
 
   let trackedAt: number | undefined
 
@@ -118,6 +136,7 @@ export function useThemeStudio() {
   function applyDoc(doc: ThemeDoc) {
     theme.resetTheme()
     paletteParams.value = {}
+    style.value = doc.style || {}
 
     if (!isDefaultTheme(doc)) {
       theme.applyThemeSettings(docToSettings(doc))
@@ -143,7 +162,12 @@ export function useThemeStudio() {
         neutral: pick(theme.neutralColors)
       },
       radius: pick(theme.radiuses),
-      font: { sans: pick(theme.fonts) }
+      font: { sans: pick(theme.fonts) },
+      // Weighted so most rolls stay clean, with the occasional loud one.
+      style: {
+        shadow: pick(['none', 'none', 'soft', 'hard'] as const),
+        border: pick(['default', 'default', 'bold'] as const)
+      }
     }
 
     if (Math.random() < 0.125) {
@@ -160,12 +184,15 @@ export function useThemeStudio() {
   function reset() {
     theme.resetTheme()
     paletteParams.value = {}
+    style.value = {}
     activePreset.value = undefined
   }
 
   return {
     presets,
     activePreset,
+    style,
+    setStyle,
     paletteParams,
     isCustomPalette,
     paletteShades,

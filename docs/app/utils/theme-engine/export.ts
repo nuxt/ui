@@ -1,6 +1,7 @@
 import { themeIcons } from '../theme'
 import type { ThemeDoc } from './types'
 import { DEFAULT_COLORS, THEME_DEFAULTS } from './types'
+import { styleComponents } from './styles'
 
 /**
  * Generate the minimal `main.css`. The document only holds overrides, so
@@ -71,9 +72,13 @@ export function generateConfig(doc: ThemeDoc, framework: string = 'nuxt'): strin
     config.ui.icons = themeIcons[doc.icons as keyof typeof themeIcons]
   }
 
-  if (doc.components) {
+  const componentOverrides = {
+    ...(doc.style ? styleComponents(doc.style) : {}),
+    ...(doc.components || {})
+  }
+  if (Object.keys(componentOverrides).length) {
     config.ui = config.ui || {}
-    Object.assign(config.ui, doc.components)
+    Object.assign(config.ui, componentOverrides)
   }
 
   const configString = JSON.stringify(config, null, 2)
@@ -130,8 +135,14 @@ export function docToSettings(doc: ThemeDoc): Record<string, any> {
     settings.cssVariables = doc.tokens
   }
 
-  if (doc.components) {
-    settings.ui = doc.components
+  // Expand the shadow/border treatment into component overrides; explicit
+  // per-component overrides win over the expansion.
+  const ui = {
+    ...(doc.style ? styleComponents(doc.style) : {}),
+    ...(doc.components || {})
+  }
+  if (Object.keys(ui).length) {
+    settings.ui = ui
   }
 
   return settings

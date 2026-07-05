@@ -209,3 +209,32 @@ describe('theme-engine', () => {
     })
   })
 })
+
+describe('styleComponents', () => {
+  it('returns nothing for the default treatment', async () => {
+    const { styleComponents } = await import('../../docs/app/utils/theme-engine')
+    expect(styleComponents({})).toEqual({})
+    expect(styleComponents({ shadow: 'none', border: 'default' })).toEqual({})
+  })
+
+  it('merges shadow and border fragments slot-wise', async () => {
+    const { styleComponents } = await import('../../docs/app/utils/theme-engine')
+    const components = styleComponents({ shadow: 'hard', border: 'bold' })
+
+    expect(components.button!.slots.base).toContain('shadow-[3px_3px_0_0_var(--ui-border-inverted)]')
+    expect(components.button!.slots.base).toContain('ring-2')
+    expect(components.card!.slots.root).toContain('shadow-[5px_5px_0_0_var(--ui-border-inverted)]')
+  })
+
+  it('expands doc.style in docToSettings with explicit components winning', async () => {
+    const { docToSettings } = await import('../../docs/app/utils/theme-engine')
+    const settings = docToSettings({
+      version: 1,
+      style: { shadow: 'soft' },
+      components: { button: { slots: { base: 'rounded-full' } } }
+    })
+
+    expect(settings.ui.card.slots.root).toBe('shadow-md')
+    expect(settings.ui.button.slots.base).toBe('rounded-full')
+  })
+})

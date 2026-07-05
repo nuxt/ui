@@ -45,6 +45,31 @@ export const presets: ThemePreset[] = [{
     }
   }
 }, {
+  id: 'neo-brutalist',
+  name: 'Neo-brutalist',
+  description: 'Hard offset shadows, bold borders, zero radius, loud yellow.',
+  icon: 'i-lucide-zap',
+  doc: {
+    version: 1,
+    meta: { name: 'Neo-brutalist', base: 'neo-brutalist' },
+    colors: {
+      primary: 'yellow',
+      neutral: 'neutral'
+    },
+    radius: 0,
+    font: { sans: 'Outfit' },
+    style: {
+      shadow: 'hard',
+      border: 'bold'
+    },
+    tokens: {
+      light: {
+        '--ui-border': 'var(--ui-color-neutral-900)',
+        '--ui-border-accented': 'var(--ui-color-neutral-900)'
+      }
+    }
+  }
+}, {
   id: 'anthropic',
   name: 'Anthropic',
   description: 'Warm parchment neutrals with a book-cloth clay primary.',

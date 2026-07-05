@@ -45,6 +45,11 @@ export interface ThemeDoc {
     sans?: string
   }
   icons?: string
+  /**
+   * Shadow/border treatment, expanded into per-component overrides on apply
+   * and export (no semantic shadow/border-width tokens in core yet).
+   */
+  style?: import('./styles').StyleOptions
   /** L4 — per-component overrides merged into `app.config ui.<component>` */
   components?: Record<string, Record<string, unknown>>
 }
@@ -73,4 +78,5 @@ export function createThemeDoc(): ThemeDoc {
 export function isDefaultTheme(doc: ThemeDoc): boolean {
   return !doc.palettes && !doc.colors && !doc.blackAsPrimary && !doc.tokens
     && doc.radius === undefined && !doc.font?.sans && !doc.icons && !doc.components
+    && !doc.style?.shadow && !doc.style?.border
 }

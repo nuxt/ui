@@ -320,6 +320,24 @@ export function useTheme() {
     }
   }
 
+  /** Unset `ui.<component>` overrides previously applied via applyThemeSettings. */
+  function resetComponentOverrides(keys: string[]) {
+    const extras = { ...aiThemeExtras.value }
+    if (extras.ui) {
+      extras.ui = Object.fromEntries(Object.entries(extras.ui).filter(([key]) => !keys.includes(key)))
+      if (!Object.keys(extras.ui).length) delete extras.ui
+    }
+    for (const key of keys) {
+      (appConfig.ui as any)[key] = undefined
+    }
+    aiThemeExtras.value = extras
+    if (Object.keys(extras).length) {
+      window.localStorage.setItem('nuxt-ui-ai-theme', JSON.stringify(extras))
+    } else {
+      window.localStorage.removeItem('nuxt-ui-ai-theme')
+    }
+  }
+
   function removeCustomColors(names: string[]) {
     const remaining = Object.fromEntries(Object.entries(customColorsData.value).filter(([name]) => !names.includes(name)))
     customColorsData.value = remaining
@@ -451,6 +469,7 @@ export function useTheme() {
     currentDoc,
     removeCustomColors,
     removeCSSVariables,
+    resetComponentOverrides,
     exportCSS,
     exportConfig,
     applyThemeSettings,
