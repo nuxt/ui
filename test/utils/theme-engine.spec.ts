@@ -336,6 +336,24 @@ describe('style colors', () => {
     expect(JSON.stringify(components.button!.compoundVariants)).not.toContain('"ghost"')
   })
 
+  it('soft shadows skip ghost/link buttons (hover-only for ghost) and surfaceless fields', async () => {
+    const { styleComponents } = await import('../../docs/app/utils/theme-engine')
+    const components = styleComponents({ shadow: 'soft' })
+
+    expect(components.button!.compoundVariants).toContainEqual({ variant: 'ghost', class: 'shadow-none hover:shadow-sm transition-shadow' })
+    expect(components.button!.compoundVariants).toContainEqual({ variant: 'link', class: 'shadow-none' })
+    expect(components.input!.compoundVariants).toContainEqual({ variant: 'ghost', class: 'shadow-none' })
+    expect(components.input!.compoundVariants).toContainEqual({ variant: 'none', class: 'shadow-none' })
+  })
+
+  it('hard shadows keep surfaceless field variants flat', async () => {
+    const { styleComponents } = await import('../../docs/app/utils/theme-engine')
+    const components = styleComponents({ shadow: 'hard' })
+
+    expect(components.select!.compoundVariants).toContainEqual({ variant: 'ghost', class: 'shadow-none' })
+    expect(components.textarea!.compoundVariants).toContainEqual({ variant: 'none', class: 'shadow-none' })
+  })
+
   it('borderColor appends recolor compounds after width ones', async () => {
     const { styleComponents } = await import('../../docs/app/utils/theme-engine')
     const compounds = styleComponents({ border: 'bold', borderColor: 'black' }).button!.compoundVariants!
@@ -397,6 +415,49 @@ describe('style colors', () => {
       dark: { '--ui-frame-color': 'var(--ui-color-primary-300)' }
     })
     expect(styleTokens({ shadowColor: 'primary-shade' }).light['--ui-shadow-color']).toBe('var(--ui-color-primary-950)')
+  })
+
+  it('semantic alias and bg/text/border tokens ride their own ramps', async () => {
+    const { styleTokens, TOKEN_SHADE_TARGETS } = await import('../../docs/app/utils/theme-engine')
+
+    // every semantic alias token references its own color scale
+    expect(styleTokens({ tokenShades: { '--ui-secondary': { light: 600 }, '--ui-error': { dark: 300 } } })).toEqual({
+      light: { '--ui-secondary': 'var(--ui-color-secondary-600)' },
+      dark: { '--ui-error': 'var(--ui-color-error-300)' }
+    })
+    // the expanded surface/text/border tokens stay on the neutral ramp
+    expect(styleTokens({ tokenShades: { '--ui-bg-elevated': { light: 200 }, '--ui-text-toned': { dark: 200 }, '--ui-border-accented': { light: 400 } } })).toEqual({
+      light: { '--ui-bg-elevated': 'var(--ui-color-neutral-200)', '--ui-border-accented': 'var(--ui-color-neutral-400)' },
+      dark: { '--ui-text-toned': 'var(--ui-color-neutral-200)' }
+    })
+
+    // the full sets the sidebar promises are all present
+    const tokens = TOKEN_SHADE_TARGETS.map(target => target.token)
+    for (const expected of [
+      '--ui-primary', '--ui-secondary', '--ui-success', '--ui-info', '--ui-warning', '--ui-error',
+      '--ui-bg', '--ui-bg-muted', '--ui-bg-elevated', '--ui-bg-accented', '--ui-bg-inverted',
+      '--ui-text-dimmed', '--ui-text-muted', '--ui-text-toned', '--ui-text', '--ui-text-highlighted', '--ui-text-inverted',
+      '--ui-border', '--ui-border-muted', '--ui-border-accented', '--ui-border-inverted'
+    ]) {
+      expect(tokens, expected).toContain(expected)
+    }
+  })
+
+  it('font size and spacing export as html rule and @theme override', async () => {
+    const { generateCSS, docToSettings, isDefaultTheme } = await import('../../docs/app/utils/theme-engine')
+
+    const css = generateCSS({ version: 1, fontSize: 15, spacing: 0.3 })
+    expect(css).toContain('html {\n  font-size: 15px;\n}')
+    expect(css).toContain('@theme {\n  --spacing: 0.3rem;\n}')
+
+    // defaults export nothing
+    const defaultCss = generateCSS({ version: 1, fontSize: 16, spacing: 0.25 })
+    expect(defaultCss).not.toContain('font-size')
+    expect(defaultCss).not.toContain('--spacing')
+
+    expect(docToSettings({ version: 1, fontSize: 15, spacing: 0.3 })).toEqual({ fontSize: 15, spacing: 0.3 })
+    expect(isDefaultTheme({ version: 1, fontSize: 15 })).toBe(false)
+    expect(isDefaultTheme({ version: 1, spacing: 0.3 })).toBe(false)
   })
 
   it('per-group default variants refine the app-wide value', async () => {

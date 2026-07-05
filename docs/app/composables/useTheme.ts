@@ -79,6 +79,8 @@ export function useTheme() {
   })
   const cssVariablesData = useState<{ light?: Record<string, string>, dark?: Record<string, string> }>('nuxt-ui-css-variables', () => readLocalStorage('nuxt-ui-css-variables', {}))
   const _radius = useLocalStorage('nuxt-ui-radius', 0.25)
+  const _fontSize = useLocalStorage('nuxt-ui-font-size', 16)
+  const _spacing = useLocalStorage('nuxt-ui-spacing', 0.25)
   const _font = useLocalStorage('nuxt-ui-font', 'Public Sans')
   const _iconSet = useLocalStorage('nuxt-ui-icons', 'lucide')
   const _blackAsPrimary = useLocalStorage('nuxt-ui-black-as-primary', false)
@@ -118,6 +120,26 @@ export function useTheme() {
     set(option) {
       _radius.value = option
       track('Theme Changed', { setting: 'radius', value: option })
+    }
+  })
+
+  const fontSize = computed({
+    get() {
+      return _fontSize.value
+    },
+    set(option) {
+      _fontSize.value = option
+      track('Theme Changed', { setting: 'fontSize', value: option })
+    }
+  })
+
+  const spacing = computed({
+    get() {
+      return _spacing.value
+    },
+    set(option) {
+      _spacing.value = option
+      track('Theme Changed', { setting: 'spacing', value: option })
     }
   })
 
@@ -185,6 +207,10 @@ export function useTheme() {
   const hasCSSVariables = computed(() => Object.keys(cssVariablesData.value.light || {}).length > 0 || Object.keys(cssVariablesData.value.dark || {}).length > 0)
 
   const radiusStyle = computed(() => `:root { --ui-radius: ${_radius.value}rem; }`)
+  // font-size scales every rem metric (UI scale); --spacing is tailwind v4's
+  // base unit behind all spacing utilities (density).
+  const fontSizeStyle = computed(() => _fontSize.value !== 16 ? `html { font-size: ${_fontSize.value}px; }` : 'html {}')
+  const spacingStyle = computed(() => _spacing.value !== 0.25 ? `:root { --spacing: ${_spacing.value}rem; }` : ':root {}')
   const blackAsPrimaryStyle = computed(() => _blackAsPrimary.value ? `:root { --ui-primary: black; } .dark { --ui-primary: white; }` : ':root {}')
   const fontStyle = computed(() => `:root { --font-sans: '${_font.value}', sans-serif; }`)
   const customColorsStyle = computed(() => {
@@ -221,6 +247,8 @@ export function useTheme() {
 
   const style = [
     { innerHTML: radiusStyle, id: 'nuxt-ui-radius', tagPriority: -2 },
+    { innerHTML: fontSizeStyle, id: 'nuxt-ui-font-size', tagPriority: -2 },
+    { innerHTML: spacingStyle, id: 'nuxt-ui-spacing', tagPriority: -2 },
     { innerHTML: blackAsPrimaryStyle, id: 'nuxt-ui-black-as-primary', tagPriority: -2 },
     { innerHTML: fontStyle, id: 'nuxt-ui-font', tagPriority: -2 },
     { innerHTML: customColorsStyle, id: 'chat-custom-colors', tagPriority: -2 },
@@ -229,6 +257,8 @@ export function useTheme() {
 
   const hasCSSChanges = computed(() => {
     return _radius.value !== 0.25
+      || _fontSize.value !== 16
+      || _spacing.value !== 0.25
       || _blackAsPrimary.value
       || _font.value !== 'Public Sans'
       || hasCustomColors.value
@@ -264,6 +294,8 @@ export function useTheme() {
 
     if (_blackAsPrimary.value) doc.blackAsPrimary = true
     if (_radius.value !== THEME_DEFAULTS.radius) doc.radius = _radius.value
+    if (_fontSize.value !== THEME_DEFAULTS.fontSize) doc.fontSize = _fontSize.value
+    if (_spacing.value !== THEME_DEFAULTS.spacing) doc.spacing = _spacing.value
     if (_font.value !== THEME_DEFAULTS.font) doc.font = { sans: _font.value }
     if (_iconSet.value !== THEME_DEFAULTS.icons) doc.icons = _iconSet.value
 
@@ -407,6 +439,9 @@ export function useTheme() {
     // Custom palettes (injected via customColors) are valid neutrals too, e.g. presets shipping their own ramp.
     if (settings.neutral && SAFE_NAME.test(settings.neutral) && (neutralColors.includes(settings.neutral) || (customColorsData.value[settings.neutral] || safeCustomColors[settings.neutral]))) neutral.value = settings.neutral
     if (settings.radius !== undefined && Number.isFinite(Number(settings.radius))) radius.value = Number(settings.radius)
+    // Clamped: these scale the whole page, so a wild value would wreck it.
+    if (settings.fontSize !== undefined && Number.isFinite(Number(settings.fontSize))) fontSize.value = Math.min(20, Math.max(12, Number(settings.fontSize)))
+    if (settings.spacing !== undefined && Number.isFinite(Number(settings.spacing))) spacing.value = Math.min(0.5, Math.max(0.125, Number(settings.spacing)))
     if (settings.font && SAFE_NAME.test(settings.font)) font.value = settings.font
     if (settings.icons && settings.icons in themeIcons) icon.value = settings.icons
     if (settings.blackAsPrimary !== undefined) setBlackAsPrimary(!!settings.blackAsPrimary)
@@ -455,6 +490,8 @@ export function useTheme() {
     window.localStorage.removeItem('nuxt-ui-neutral')
 
     _radius.value = 0.25
+    _fontSize.value = 16
+    _spacing.value = 0.25
     _font.value = 'Public Sans'
     _iconSet.value = 'lucide'
     appConfig.ui.icons = themeIcons.lucide as any
@@ -508,6 +545,8 @@ export function useTheme() {
     setBlackAsPrimary,
     radiuses,
     radius,
+    fontSize,
+    spacing,
     fonts,
     font,
     icon,

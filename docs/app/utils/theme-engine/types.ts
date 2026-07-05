@@ -41,6 +41,10 @@ export interface ThemeDoc {
     dark?: Record<string, string>
   }
   radius?: number
+  /** Root font size in px (`html { font-size }`) — scales every rem-based metric */
+  fontSize?: number
+  /** Tailwind v4 `--spacing` base unit in rem — the density knob behind all spacing utilities */
+  spacing?: number
   font?: {
     sans?: string
   }
@@ -66,6 +70,8 @@ export const DEFAULT_COLORS: Record<ColorAlias, string> = {
 
 export const THEME_DEFAULTS = {
   radius: 0.25,
+  fontSize: 16,
+  spacing: 0.25,
   font: 'Public Sans',
   icons: 'lucide'
 } as const
@@ -77,6 +83,7 @@ export function createThemeDoc(): ThemeDoc {
 /** A document with no overrides means "stock Nuxt UI". */
 export function isDefaultTheme(doc: ThemeDoc): boolean {
   return !doc.palettes && !doc.colors && !doc.blackAsPrimary && !doc.tokens
-    && doc.radius === undefined && !doc.font?.sans && !doc.icons && !doc.components
+    && doc.radius === undefined && doc.fontSize === undefined && doc.spacing === undefined
+    && !doc.font?.sans && !doc.icons && !doc.components
     && !Object.values(doc.style || {}).some(value => value && value !== 'none' && value !== 'default')
 }

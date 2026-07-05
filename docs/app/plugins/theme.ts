@@ -135,6 +135,21 @@ export default defineNuxtPlugin({
           tagPriority: -1
         }, {
           innerHTML: `
+            var fsRaw = localStorage.getItem('nuxt-ui-font-size');
+            if (fsRaw && fsRaw !== '16') {
+              var fsEl = document.querySelector('style#nuxt-ui-font-size');
+              if (fsEl) { fsEl.innerHTML = 'html { font-size: ' + fsRaw + 'px; }'; }
+            }
+            var spRaw = localStorage.getItem('nuxt-ui-spacing');
+            if (spRaw && spRaw !== '0.25') {
+              var spEl = document.querySelector('style#nuxt-ui-spacing');
+              if (spEl) { spEl.innerHTML = ':root { --spacing: ' + spRaw + 'rem; }'; }
+            }
+          `.replace(/\s+/g, ' '),
+          type: 'text/javascript',
+          tagPriority: -1
+        }, {
+          innerHTML: `
             var bapEl = document.querySelector('style#nuxt-ui-black-as-primary');
             if (bapEl) {
               if (localStorage.getItem('nuxt-ui-black-as-primary') === 'true') {

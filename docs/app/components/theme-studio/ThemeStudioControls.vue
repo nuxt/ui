@@ -1,6 +1,8 @@
 <script setup lang="ts">
-import { TOKEN_SHADE_TARGETS, SHADES, SHADOW_SHADE_DEFAULTS, BORDER_SHADE_DEFAULTS, SHADOW_GEOMETRY_DEFAULTS } from '../../utils/theme-engine'
-import type { VariantGroup } from '../../utils/theme-engine'
+import { TOKEN_SHADE_TARGETS, TOKEN_GROUPS, SHADES, SHADOW_SHADE_DEFAULTS, BORDER_SHADE_DEFAULTS, SHADOW_GEOMETRY_DEFAULTS } from '../../utils/theme-engine'
+import type { VariantGroup, TokenRamp } from '../../utils/theme-engine'
+
+const appConfig = useAppConfig()
 
 const {
   neutralColors,
@@ -10,6 +12,8 @@ const {
   blackAsPrimary,
   setBlackAsPrimary,
   radius,
+  fontSize,
+  spacing,
   fonts,
   font,
   icon,
@@ -24,14 +28,15 @@ const openSections = reactive<Record<string, boolean>>({
   primary: true,
   neutral: true,
   radius: true,
+  sizing: true,
   defaults: true,
   shadows: true,
   borders: true,
   font: true,
   icons: true,
   mode: true,
-  // token sections keyed by token name; only the background starts open
-  ...Object.fromEntries(TOKEN_SHADE_TARGETS.map((target, index) => [target.token, index === 0]))
+  // token groups keyed by group name; only the first starts open
+  ...Object.fromEntries(TOKEN_GROUPS.map((group, index) => [`tokens-${group.key}`, index === 0]))
 })
 
 const primarySwatch = computed(() => {
@@ -138,8 +143,21 @@ const tokenSections = TOKEN_SHADE_TARGETS.map(target => ({
   }
 }))
 
+const tokenGroups = TOKEN_GROUPS.map(group => ({
+  ...group,
+  sections: tokenSections.filter(section => section.group === group.key)
+}))
+
 const neutralChip = computed(() => neutral.value === 'neutral' ? 'old-neutral' : neutral.value)
 const primaryChip = computed(() => isCustomPalette('primary') ? 'custom-primary' : primary.value)
+
+/** Palette name coloring a token slider's swatch — the alias's current ramp. */
+function rampChip(ramp: TokenRamp): string {
+  if (ramp === 'primary') return primaryChip.value
+  if (ramp === 'neutral') return neutralChip.value
+  const name = (appConfig.ui.colors as Record<string, string>)[ramp] || ramp
+  return name === 'neutral' ? 'old-neutral' : name
+}
 
 const modeTabs = computed(() => modes.value.map(m => ({ label: m.label, icon: m.icon, value: m.label })))
 
@@ -445,6 +463,39 @@ const shadowColor = computed({
           <fieldset>
             <legend class="w-full text-xs leading-none font-semibold mb-2.5 select-none flex items-center gap-1 cursor-pointer">
               <UButton
+                label="Sizing"
+                color="neutral"
+                variant="ghost"
+                size="xs"
+                icon="i-lucide-chevron-down"
+                class="flex-1 justify-start -my-1 -ms-1.5 gap-1 text-xs font-semibold text-default"
+                :ui="{ leadingIcon: ['size-3 text-dimmed transition-transform duration-200', !openSections.sizing && '-rotate-90'] }"
+                @click="openSections.sizing = !openSections.sizing"
+              />
+            </legend>
+
+            <div v-show="openSections.sizing" class="flex flex-col gap-2">
+              <div class="flex items-center gap-2">
+                <span class="text-[11px] text-muted w-13 shrink-0 select-none">Text</span>
+
+                <USlider v-model="fontSize" :min="14" :max="18" :step="0.5" size="xs" />
+
+                <span class="text-[11px] text-dimmed font-mono w-10 text-right shrink-0">{{ fontSize }}px</span>
+              </div>
+
+              <div class="flex items-center gap-2">
+                <span class="text-[11px] text-muted w-13 shrink-0 select-none">Spacing</span>
+
+                <USlider v-model="spacing" :min="0.15" :max="0.35" :step="0.025" size="xs" />
+
+                <span class="text-[11px] text-dimmed font-mono w-10 text-right shrink-0">{{ spacing }}</span>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend class="w-full text-xs leading-none font-semibold mb-2.5 select-none flex items-center gap-1 cursor-pointer">
+              <UButton
                 label="Defaults"
                 color="neutral"
                 variant="ghost"
@@ -609,28 +660,32 @@ const shadowColor = computed({
 
       <template #tokens>
         <div class="flex flex-col gap-5 pt-1 pb-4">
-          <fieldset v-for="section in tokenSections" :key="section.token">
+          <fieldset v-for="group in tokenGroups" :key="group.key">
             <legend class="w-full text-xs leading-none font-semibold mb-2.5 select-none flex items-center gap-1 cursor-pointer">
               <UButton
-                :label="section.label"
+                :label="group.label"
                 color="neutral"
                 variant="ghost"
                 size="xs"
                 icon="i-lucide-chevron-down"
                 class="flex-1 justify-start -my-1 -ms-1.5 gap-1 text-xs font-semibold text-default"
-                :ui="{ leadingIcon: ['size-3 text-dimmed transition-transform duration-200', !openSections[section.token] && '-rotate-90'] }"
-                @click="openSections[section.token] = !openSections[section.token]"
+                :ui="{ leadingIcon: ['size-3 text-dimmed transition-transform duration-200', !openSections[`tokens-${group.key}`] && '-rotate-90'] }"
+                @click="openSections[`tokens-${group.key}`] = !openSections[`tokens-${group.key}`]"
               />
             </legend>
 
-            <div v-show="openSections[section.token]" class="flex flex-col gap-2">
-              <ThemeStudioShadeSlider
-                v-for="(slider, modeName) in section.sliders"
-                :key="modeName"
-                v-model="slider.value"
-                :mode="modeName"
-                :chip="section.ramp === 'primary' ? primaryChip : neutralChip"
-              />
+            <div v-show="openSections[`tokens-${group.key}`]" class="flex flex-col gap-3">
+              <div v-for="section in group.sections" :key="section.token" class="flex flex-col gap-1.5">
+                <span class="text-[11px] text-muted select-none">{{ section.label }}</span>
+
+                <ThemeStudioShadeSlider
+                  v-for="(slider, modeName) in section.sliders"
+                  :key="modeName"
+                  v-model="slider.value"
+                  :mode="modeName"
+                  :chip="rampChip(section.ramp)"
+                />
+              </div>
             </div>
           </fieldset>
         </div>

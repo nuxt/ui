@@ -13,8 +13,15 @@ export function generateCSS(doc: ThemeDoc): string {
     '@import "@nuxt/ui";'
   ]
 
+  const themeLines: string[] = []
   if (doc.font?.sans && doc.font.sans !== THEME_DEFAULTS.font) {
-    lines.push('', '@theme {', `  --font-sans: '${doc.font.sans}', sans-serif;`, '}')
+    themeLines.push(`  --font-sans: '${doc.font.sans}', sans-serif;`)
+  }
+  if (doc.spacing !== undefined && doc.spacing !== THEME_DEFAULTS.spacing) {
+    themeLines.push(`  --spacing: ${doc.spacing}rem;`)
+  }
+  if (themeLines.length) {
+    lines.push('', '@theme {', ...themeLines, '}')
   }
 
   const colorLines: string[] = []
@@ -26,6 +33,10 @@ export function generateCSS(doc: ThemeDoc): string {
 
   if (colorLines.length) {
     lines.push('', '@theme static {', ...colorLines, '}')
+  }
+
+  if (doc.fontSize !== undefined && doc.fontSize !== THEME_DEFAULTS.fontSize) {
+    lines.push('', 'html {', `  font-size: ${doc.fontSize}px;`, '}')
   }
 
   const rootLines: string[] = []
@@ -154,6 +165,8 @@ export function docToSettings(doc: ThemeDoc): Record<string, any> {
 
   if (doc.blackAsPrimary) settings.blackAsPrimary = true
   if (doc.radius !== undefined) settings.radius = doc.radius
+  if (doc.fontSize !== undefined) settings.fontSize = doc.fontSize
+  if (doc.spacing !== undefined) settings.spacing = doc.spacing
   if (doc.font?.sans) settings.font = doc.font.sans
   if (doc.icons) settings.icons = doc.icons
 
