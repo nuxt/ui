@@ -59,6 +59,12 @@ const windows = computed(() => ({
 
 const styleOffset = ref('fitted')
 
+/**
+ * Effect strength: 100% is the offset as designed, lower blends back toward
+ * the fitted base, above 100% extrapolates past it for a stronger take.
+ */
+const offsetAmount = ref(100)
+
 /** Fitted base the style offsets transform from, so they never compound. */
 let seedBase: PaletteCurveParams = structuredClone(toRaw(params))
 
@@ -84,6 +90,7 @@ const { ignoreUpdates } = watchIgnorable(params, () => {
 function seed(values: PaletteCurveParams) {
   seedBase = structuredClone(toRaw(values))
   styleOffset.value = 'fitted'
+  offsetAmount.value = 100
   ignoreUpdates(() => {
     Object.assign(params, structuredClone(toRaw(values)))
   })
@@ -166,23 +173,39 @@ function remapLightness(curve: PaletteCurveParams['lightness'], newY0: number, n
   curve.y1 = newY1
 }
 
+const CURVE_KEYS = ['y0', 'y1', 'p1x', 'p1y', 'p2x', 'p2y'] as const
+
+function lerpParams(base: PaletteCurveParams, target: PaletteCurveParams, t: number): PaletteCurveParams {
+  const result = structuredClone(target)
+  for (const channel of ['lightness', 'chroma', 'hue'] as const) {
+    for (const key of CURVE_KEYS) {
+      const value = base[channel][key] + (target[channel][key] - base[channel][key]) * t
+      // Extrapolated chroma can cross zero; keep it a real chroma.
+      result[channel][key] = channel === 'chroma' ? Math.max(0, value) : value
+    }
+  }
+  return result
+}
+
 /** Apply a taste offset ON TOP of the fitted base (idempotent, not cumulative). */
 function applyStyleOffset(name: string) {
-  const next = structuredClone(seedBase)
+  const target = structuredClone(seedBase)
 
   if (name === 'pastel') {
     // Candy pastels: compress the lightness range from BOTH ends (nothing
     // near-white, nothing dark) and push chroma UP so the softness stays
     // colorful — the gamut clamp keeps the very light stops in check.
-    remapLightness(next.lightness, Math.min(next.lightness.y0, 0.945), Math.max(next.lightness.y1, 0.52))
-    scaleChroma(next.chroma, 1.35)
+    remapLightness(target.lightness, Math.min(target.lightness.y0, 0.945), Math.max(target.lightness.y1, 0.52))
+    scaleChroma(target.chroma, 1.35)
   } else if (name === 'muted') {
-    scaleChroma(next.chroma, 0.55)
+    scaleChroma(target.chroma, 0.55)
   } else if (name === 'vivid') {
-    scaleChroma(next.chroma, 1.45)
+    scaleChroma(target.chroma, 1.45)
   } else if (name === 'dazzling') {
-    scaleChroma(next.chroma, 2)
+    scaleChroma(target.chroma, 2)
   }
+
+  const next = name === 'fitted' ? target : lerpParams(seedBase, target, offsetAmount.value / 100)
 
   // Not seed(): this IS a user edit, the watcher should live-apply it.
   Object.assign(params, next)
@@ -255,6 +278,21 @@ function remove() {
           @click="remove"
         />
       </UTooltip>
+    </div>
+
+    <div v-if="styleOffset !== 'fitted'" class="flex items-center gap-2">
+      <span class="text-[11px] text-muted shrink-0 w-10">Effect</span>
+      <USlider
+        v-model="offsetAmount"
+        :min="0"
+        :max="200"
+        :step="5"
+        size="sm"
+        color="neutral"
+        aria-label="Effect strength"
+        @update:model-value="applyStyleOffset(styleOffset)"
+      />
+      <span class="text-[11px] text-dimmed tabular-nums shrink-0 w-8 text-right">{{ offsetAmount }}%</span>
     </div>
   </div>
 </template>

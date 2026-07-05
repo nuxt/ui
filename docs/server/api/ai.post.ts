@@ -41,7 +41,7 @@ const applyTheme = {
     type: 'object' as const,
     properties: {
       primary: { type: 'string', description: 'Primary color name (e.g., green, blue, red, indigo)' },
-      neutral: { type: 'string', description: 'Neutral color name (slate, gray, zinc, neutral, stone, taupe, mauve, mist, olive)' },
+      neutral: { type: 'string', description: 'Neutral color name (slate, gray, zinc, neutral, stone, taupe, mauve, mist, olive, sand, sage, ash)' },
       secondary: { type: 'string', description: 'Secondary color name' },
       success: { type: 'string', description: 'Success color name' },
       info: { type: 'string', description: 'Info color name' },
@@ -206,6 +206,9 @@ For Nuxt, wrap in \`defineAppConfig({ ui: { ... } })\`. For Vue, pass as \`ui({ 
   - **mauve** — purple-tinted gray, elegant, creative
   - **mist** — soft blue-gray, airy, light
   - **olive** — green-tinted gray, natural, earthy
+  - **sand** — warm beige-gray, desert, organic
+  - **sage** — muted green-gray, calm, botanical
+  - **ash** — deep blue-gray, cool, technical
   For example: warm/cozy themes → stone or taupe, elegant/creative → mauve, tech/minimal → zinc, nature → olive, etc. ALWAYS change the neutral when creating a complete theme — don't leave it as the default slate unless it genuinely fits.
 - Custom: define all shades 50-950 in \`customColors\` of the \`applyTheme\` tool, then reference the name
 

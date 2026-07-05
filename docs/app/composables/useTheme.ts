@@ -1,7 +1,7 @@
 import { defu } from 'defu'
 import { useLocalStorage } from '@vueuse/core'
 import { themeIcons, cssVariableDefaults } from '../utils/theme'
-import { generateCSS, generateConfig, mergeUi, DEFAULT_COLORS, THEME_DEFAULTS, LIBRARY_TOKEN_DEFAULTS } from '../utils/theme-engine'
+import { generateCSS, generateConfig, mergeUi, DEFAULT_COLORS, THEME_DEFAULTS, LIBRARY_TOKEN_DEFAULTS, CUSTOM_PALETTES } from '../utils/theme-engine'
 import type { ThemeDoc, ThemePalette } from '../utils/theme-engine'
 import { omit } from '#ui/utils'
 import colors from 'tailwindcss/colors'
@@ -73,7 +73,7 @@ export function useTheme() {
     // Match the page background in both modes (docs light baseline is
     // neutral-50, not white) so browser chrome doesn't seam against the page.
     const shade = colorMode.value === 'dark' ? 900 : 50
-    return (colors as any)[neutral]?.[shade] || customColorsData.value[neutral]?.[shade] || (colors as any).slate[shade]
+    return (colors as any)[neutral]?.[shade] || customColorsData.value[neutral]?.[shade] || CUSTOM_PALETTES[neutral]?.[shade] || (colors as any).slate[shade]
   })
   const cssVariablesData = useState<{ light?: Record<string, string>, dark?: Record<string, string> }>('nuxt-ui-css-variables', () => readLocalStorage('nuxt-ui-css-variables', {}))
   const _radius = useLocalStorage('nuxt-ui-radius', 0.25)
@@ -81,7 +81,7 @@ export function useTheme() {
   const _iconSet = useLocalStorage('nuxt-ui-icons', 'lucide')
   const _blackAsPrimary = useLocalStorage('nuxt-ui-black-as-primary', false)
 
-  const neutralColors = ['slate', 'gray', 'zinc', 'neutral', 'stone', 'taupe', 'mauve', 'mist', 'olive']
+  const neutralColors = ['slate', 'gray', 'zinc', 'neutral', 'stone', 'taupe', 'mauve', 'mist', 'olive', 'sand', 'sage', 'ash']
   const neutral = computed({
     get() {
       return appConfig.ui.colors.neutral
@@ -94,7 +94,8 @@ export function useTheme() {
   })
 
   const colorsToOmit = ['inherit', 'current', 'transparent', 'black', 'white', ...neutralColors]
-  const primaryColors = Object.keys(omit(colors, colorsToOmit as any))
+  // Custom docs palettes (defined in main.css @theme static) extend tailwind's set.
+  const primaryColors = [...Object.keys(omit(colors, colorsToOmit as any)), 'cocoa', 'marine']
   const primary = computed({
     get() {
       return appConfig.ui.colors.primary
@@ -271,6 +272,13 @@ export function useTheme() {
     // stays 'green') and must still export.
     const referenced = new Set(Object.values(appConfig.ui.colors as Record<string, string>))
     const paletteEntries = Object.entries(customColorsData.value).filter(([name]) => referenced.has(name))
+    // Docs-only palettes (sand, cocoa, …) exist in main.css, not tailwind —
+    // a consumer's build can't resolve them, so inline their ramps too.
+    for (const name of referenced) {
+      if (CUSTOM_PALETTES[name] && !customColorsData.value[name]) {
+        paletteEntries.push([name, CUSTOM_PALETTES[name]])
+      }
+    }
     if (paletteEntries.length) {
       doc.palettes = Object.fromEntries(paletteEntries.map(([name, shades]) => [name, { shades: shades as ThemePalette['shades'] }]))
     }

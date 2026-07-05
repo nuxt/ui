@@ -6,6 +6,68 @@
 @theme static {
   --container-8xl: 90rem;
 
+  /* Studio extras: custom neutrals (sand, sage, ash) and primaries
+     (cocoa, marine) beyond the stock tailwind palettes. */
+  --color-sand-50: #FAF8F4;
+  --color-sand-100: #F3EFE7;
+  --color-sand-200: #E6DFD1;
+  --color-sand-300: #D4C9B4;
+  --color-sand-400: #B7A88D;
+  --color-sand-500: #9A8B6F;
+  --color-sand-600: #7E7059;
+  --color-sand-700: #665A48;
+  --color-sand-800: #52483A;
+  --color-sand-900: #443C31;
+  --color-sand-950: #26211A;
+
+  --color-sage-50: #F6F8F5;
+  --color-sage-100: #EBF0EA;
+  --color-sage-200: #D8E1D6;
+  --color-sage-300: #BCCBBA;
+  --color-sage-400: #97AB95;
+  --color-sage-500: #778C75;
+  --color-sage-600: #5F725E;
+  --color-sage-700: #4D5C4C;
+  --color-sage-800: #3F4B3E;
+  --color-sage-900: #343E34;
+  --color-sage-950: #1B221B;
+
+  --color-ash-50: #F5F6F8;
+  --color-ash-100: #E9EBEF;
+  --color-ash-200: #D3D7DF;
+  --color-ash-300: #B0B7C4;
+  --color-ash-400: #848EA1;
+  --color-ash-500: #646F84;
+  --color-ash-600: #4F586A;
+  --color-ash-700: #404755;
+  --color-ash-800: #363C47;
+  --color-ash-900: #2C313A;
+  --color-ash-950: #16181E;
+
+  --color-cocoa-50: #FAF6F2;
+  --color-cocoa-100: #F2E9E1;
+  --color-cocoa-200: #E3D2C2;
+  --color-cocoa-300: #CFB49D;
+  --color-cocoa-400: #B58F6F;
+  --color-cocoa-500: #966F4C;
+  --color-cocoa-600: #7C5A3C;
+  --color-cocoa-700: #654931;
+  --color-cocoa-800: #533C2A;
+  --color-cocoa-900: #453325;
+  --color-cocoa-950: #251A12;
+
+  --color-marine-50: #F2F6FB;
+  --color-marine-100: #E2ECF7;
+  --color-marine-200: #C6D9EF;
+  --color-marine-300: #9DBDE2;
+  --color-marine-400: #6C9AD0;
+  --color-marine-500: #467BBB;
+  --color-marine-600: #33619E;
+  --color-marine-700: #2B4F80;
+  --color-marine-800: #274268;
+  --color-marine-900: #243A57;
+  --color-marine-950: #182636;
+
   --font-sans: 'Public Sans', sans-serif;
 
   --color-green-50: #EFFDF5;

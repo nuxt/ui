@@ -283,8 +283,20 @@ export function useThemeStudio() {
       // Weighted so most rolls stay clean, with the occasional loud one.
       style: {
         shadow: pick(['none', 'none', 'soft', 'hard'] as const),
-        border: pick(['default', 'default', 'bold'] as const)
+        border: pick(['default', 'default', 'bold', 'frame'] as const)
       }
+    }
+
+    // Colored borders/shadows and app-wide variants are the loud rolls —
+    // sprinkle them in rarely enough that most shuffles stay tasteful.
+    if (doc.style!.border !== 'default' && Math.random() < 0.4) {
+      doc.style!.borderColor = pick(['inverted', 'primary', 'neutral'] as const)
+    }
+    if (doc.style!.shadow === 'hard' && Math.random() < 0.4) {
+      doc.style!.shadowColor = pick(['black', 'inverted', 'primary'] as const)
+    }
+    if (Math.random() < 0.25) {
+      doc.style!.defaults = { variant: pick(['solid', 'outline', 'soft', 'subtle'] as const) }
     }
 
     if (Math.random() < 0.125) {
