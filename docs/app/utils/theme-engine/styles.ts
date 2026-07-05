@@ -5,6 +5,12 @@
  * (a known core gap), so these ride the `app.config ui.<component>` override
  * path instead. The class strings must stay STATIC literals in this file —
  * tailwind compiles what it can see in source, not what appears at runtime.
+ *
+ * Ring overrides need two altitudes: slot-base classes cover variants
+ * without their own ring (solid/soft/ghost), while `outline`/`subtle` rings
+ * come from theme compoundVariants which render AFTER slot classes — so
+ * those are overridden with extension compoundVariants, which append later
+ * still and win the merge.
  */
 
 export type ShadowStyle = 'none' | 'soft' | 'hard'
@@ -18,43 +24,69 @@ export interface StyleOptions {
 export const SHADOW_STYLES: ShadowStyle[] = ['none', 'soft', 'hard']
 export const BORDER_STYLES: BorderStyle[] = ['default', 'bold']
 
-type SlotFragments = Record<string, Record<string, string>>
+interface ComponentFragment {
+  slots?: Record<string, string>
+  compoundVariants?: Array<Record<string, unknown>>
+}
 
-/** component → slot → classes appended to the theme's own. */
-const SHADOW_FRAGMENTS: Record<ShadowStyle, SlotFragments> = {
+type Fragments = Record<string, ComponentFragment>
+
+const BOLD_RING = 'ring-2 ring-(--ui-border-inverted)'
+
+const SHADOW_FRAGMENTS: Record<ShadowStyle, Fragments> = {
   none: {},
   soft: {
-    button: { base: 'shadow-sm' },
-    card: { root: 'shadow-md' },
-    input: { base: 'shadow-xs' },
-    select: { base: 'shadow-xs' },
-    textarea: { base: 'shadow-xs' },
-    alert: { root: 'shadow-md' },
-    badge: { base: 'shadow-xs' }
+    button: { slots: { base: 'shadow-sm' } },
+    card: { slots: { root: 'shadow-md' } },
+    input: { slots: { base: 'shadow-xs' } },
+    select: { slots: { base: 'shadow-xs' } },
+    textarea: { slots: { base: 'shadow-xs' } },
+    alert: { slots: { root: 'shadow-md' } },
+    badge: { slots: { base: 'shadow-xs' } }
   },
   hard: {
     button: {
-      base: 'shadow-[3px_3px_0_0_var(--ui-border-inverted)] hover:translate-x-[1.5px] hover:translate-y-[1.5px] hover:shadow-[1.5px_1.5px_0_0_var(--ui-border-inverted)] active:translate-x-[3px] active:translate-y-[3px] active:shadow-none transition-[box-shadow,translate,background-color]'
+      slots: {
+        base: 'shadow-[3px_3px_0_0_var(--ui-border-inverted)] hover:translate-x-[1.5px] hover:translate-y-[1.5px] hover:shadow-[1.5px_1.5px_0_0_var(--ui-border-inverted)] active:translate-x-[3px] active:translate-y-[3px] active:shadow-none transition-[box-shadow,translate,background-color]'
+      }
     },
-    card: { root: 'shadow-[5px_5px_0_0_var(--ui-border-inverted)]' },
-    input: { base: 'shadow-[3px_3px_0_0_var(--ui-border-inverted)]' },
-    select: { base: 'shadow-[3px_3px_0_0_var(--ui-border-inverted)]' },
-    textarea: { base: 'shadow-[3px_3px_0_0_var(--ui-border-inverted)]' },
-    alert: { root: 'shadow-[5px_5px_0_0_var(--ui-border-inverted)]' },
-    badge: { base: 'shadow-[2px_2px_0_0_var(--ui-border-inverted)]' }
+    card: { slots: { root: 'shadow-[5px_5px_0_0_var(--ui-border-inverted)]' } },
+    input: { slots: { base: 'shadow-[3px_3px_0_0_var(--ui-border-inverted)]' } },
+    select: { slots: { base: 'shadow-[3px_3px_0_0_var(--ui-border-inverted)]' } },
+    textarea: { slots: { base: 'shadow-[3px_3px_0_0_var(--ui-border-inverted)]' } },
+    alert: { slots: { root: 'shadow-[5px_5px_0_0_var(--ui-border-inverted)]' } },
+    badge: { slots: { base: 'shadow-[2px_2px_0_0_var(--ui-border-inverted)]' } }
   }
 }
 
-const BORDER_FRAGMENTS: Record<BorderStyle, SlotFragments> = {
+const BORDER_FRAGMENTS: Record<BorderStyle, Fragments> = {
   default: {},
   bold: {
-    card: { root: 'ring-2 ring-(--ui-border-inverted)' },
-    input: { base: 'ring-2 ring-(--ui-border-inverted)' },
-    select: { base: 'ring-2 ring-(--ui-border-inverted)' },
-    textarea: { base: 'ring-2 ring-(--ui-border-inverted)' },
-    alert: { root: 'ring-2 ring-(--ui-border-inverted)' },
-    button: { base: 'ring-2 ring-inset ring-(--ui-border-inverted)' },
-    badge: { base: 'ring-2 ring-inset ring-(--ui-border-inverted)' }
+    card: { slots: { root: BOLD_RING } },
+    input: { slots: { base: `${BOLD_RING} ring-inset` } },
+    select: { slots: { base: `${BOLD_RING} ring-inset` } },
+    textarea: { slots: { base: `${BOLD_RING} ring-inset` } },
+    alert: {
+      slots: { root: BOLD_RING },
+      compoundVariants: [
+        { variant: 'outline', class: { root: BOLD_RING } },
+        { variant: 'subtle', class: { root: BOLD_RING } }
+      ]
+    },
+    button: {
+      slots: { base: `${BOLD_RING} ring-inset` },
+      compoundVariants: [
+        { variant: 'outline', class: `${BOLD_RING} ring-inset` },
+        { variant: 'subtle', class: `${BOLD_RING} ring-inset` }
+      ]
+    },
+    badge: {
+      slots: { base: `${BOLD_RING} ring-inset` },
+      compoundVariants: [
+        { variant: 'outline', class: `${BOLD_RING} ring-inset` },
+        { variant: 'subtle', class: `${BOLD_RING} ring-inset` }
+      ]
+    }
   }
 }
 
@@ -62,14 +94,18 @@ const BORDER_FRAGMENTS: Record<BorderStyle, SlotFragments> = {
  * Expand style options into the `ui.<component>` override shape, merging the
  * shadow and border fragments slot-wise (both may touch the same slot).
  */
-export function styleComponents(style: StyleOptions): Record<string, { slots: Record<string, string> }> {
-  const result: Record<string, { slots: Record<string, string> }> = {}
+export function styleComponents(style: StyleOptions): Fragments {
+  const result: Fragments = {}
 
   for (const fragments of [SHADOW_FRAGMENTS[style.shadow ?? 'none'], BORDER_FRAGMENTS[style.border ?? 'default']]) {
-    for (const [component, slots] of Object.entries(fragments)) {
-      result[component] ||= { slots: {} }
-      for (const [slot, classes] of Object.entries(slots)) {
-        result[component]!.slots[slot] = [result[component]!.slots[slot], classes].filter(Boolean).join(' ')
+    for (const [component, fragment] of Object.entries(fragments)) {
+      const target = result[component] ||= {}
+      for (const [slot, classes] of Object.entries(fragment.slots || {})) {
+        target.slots ||= {}
+        target.slots[slot] = [target.slots[slot], classes].filter(Boolean).join(' ')
+      }
+      if (fragment.compoundVariants) {
+        target.compoundVariants = [...(target.compoundVariants || []), ...fragment.compoundVariants]
       }
     }
   }
