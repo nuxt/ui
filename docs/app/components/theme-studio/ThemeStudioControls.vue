@@ -8,7 +8,6 @@ const {
   primary,
   blackAsPrimary,
   setBlackAsPrimary,
-  radiuses,
   radius,
   fonts,
   font,
@@ -18,7 +17,25 @@ const {
   mode
 } = useTheme()
 
-const { selectPalette, style, setStyle } = useThemeStudio()
+const { selectPalette, isCustomPalette, style, setStyle } = useThemeStudio()
+
+const primarySwatch = computed(() => {
+  if (blackAsPrimary.value) {
+    return { label: 'Black', color: undefined }
+  }
+  if (isCustomPalette('primary')) {
+    return { label: 'Custom', color: 'var(--color-custom-primary-500)' }
+  }
+  return { label: primary.value, color: `var(--color-${primary.value}-500)` }
+})
+
+const neutralSwatch = computed(() => {
+  if (isCustomPalette('neutral')) {
+    return { label: 'Custom', color: 'var(--color-custom-neutral-500)' }
+  }
+  const chip = neutral.value === 'neutral' ? 'old-neutral' : neutral.value
+  return { label: neutral.value, color: `var(--color-${chip}-500)` }
+})
 
 const shadowOptions = [
   { label: 'None', value: 'none' },
@@ -62,7 +79,7 @@ const shadowColor = computed({
 </script>
 
 <template>
-  <div class="flex flex-col gap-6">
+  <div class="flex flex-col gap-5">
     <fieldset>
       <legend class="text-xs leading-none font-semibold mb-2.5 select-none flex items-center gap-1">
         Primary
@@ -78,26 +95,50 @@ const shadowColor = computed({
         />
       </legend>
 
-      <div class="grid grid-cols-3 gap-1">
-        <ThemePickerButton
-          label="Black"
-          :selected="blackAsPrimary"
-          @click="setBlackAsPrimary(true)"
+      <UPopover :content="{ side: 'bottom', align: 'start' }">
+        <UButton
+          color="neutral"
+          variant="outline"
+          size="sm"
+          block
+          trailing-icon="i-lucide-chevron-down"
+          class="justify-start capitalize ring-default rounded-sm text-[11px] hover:bg-elevated/50 data-[state=open]:bg-elevated/50"
+          :ui="{ trailingIcon: 'ms-auto size-4 group-data-[state=open]:rotate-180 transition-transform duration-200' }"
         >
           <template #leading>
-            <span class="inline-block size-2 rounded-full bg-black dark:bg-white" />
+            <span
+              class="inline-block size-3 rounded-full"
+              :class="{ 'bg-black dark:bg-white': blackAsPrimary }"
+              :style="primarySwatch.color ? { backgroundColor: primarySwatch.color } : undefined"
+            />
           </template>
-        </ThemePickerButton>
 
-        <ThemePickerButton
-          v-for="color in primaryColors"
-          :key="color"
-          :label="color"
-          :chip="color"
-          :selected="!blackAsPrimary && primary === color"
-          @click="selectPalette('primary', color)"
-        />
-      </div>
+          {{ primarySwatch.label }}
+        </UButton>
+
+        <template #content>
+          <div class="grid grid-cols-3 gap-1 w-72 p-2">
+            <ThemePickerButton
+              label="Black"
+              :selected="blackAsPrimary"
+              @click="setBlackAsPrimary(true)"
+            >
+              <template #leading>
+                <span class="inline-block size-2 rounded-full bg-black dark:bg-white" />
+              </template>
+            </ThemePickerButton>
+
+            <ThemePickerButton
+              v-for="color in primaryColors"
+              :key="color"
+              :label="color"
+              :chip="color"
+              :selected="!blackAsPrimary && primary === color"
+              @click="selectPalette('primary', color)"
+            />
+          </div>
+        </template>
+      </UPopover>
 
       <ThemeStudioPaletteEditor alias="primary" />
     </fieldset>
@@ -117,16 +158,39 @@ const shadowColor = computed({
         />
       </legend>
 
-      <div class="grid grid-cols-3 gap-1">
-        <ThemePickerButton
-          v-for="color in neutralColors"
-          :key="color"
-          :label="color"
-          :chip="color === 'neutral' ? 'old-neutral' : color"
-          :selected="neutral === color"
-          @click="selectPalette('neutral', color)"
-        />
-      </div>
+      <UPopover :content="{ side: 'bottom', align: 'start' }">
+        <UButton
+          color="neutral"
+          variant="outline"
+          size="sm"
+          block
+          trailing-icon="i-lucide-chevron-down"
+          class="justify-start capitalize ring-default rounded-sm text-[11px] hover:bg-elevated/50 data-[state=open]:bg-elevated/50"
+          :ui="{ trailingIcon: 'ms-auto size-4 group-data-[state=open]:rotate-180 transition-transform duration-200' }"
+        >
+          <template #leading>
+            <span
+              class="inline-block size-3 rounded-full"
+              :style="{ backgroundColor: neutralSwatch.color }"
+            />
+          </template>
+
+          {{ neutralSwatch.label }}
+        </UButton>
+
+        <template #content>
+          <div class="grid grid-cols-3 gap-1 w-72 p-2">
+            <ThemePickerButton
+              v-for="color in neutralColors"
+              :key="color"
+              :label="color"
+              :chip="color === 'neutral' ? 'old-neutral' : color"
+              :selected="neutral === color"
+              @click="selectPalette('neutral', color)"
+            />
+          </div>
+        </template>
+      </UPopover>
 
       <ThemeStudioPaletteEditor alias="neutral" />
     </fieldset>
@@ -146,15 +210,16 @@ const shadowColor = computed({
         />
       </legend>
 
-      <div class="grid grid-cols-5 gap-1">
-        <ThemePickerButton
-          v-for="r in radiuses"
-          :key="r"
-          :label="String(r)"
-          class="justify-center px-0"
-          :selected="radius === r"
-          @click="radius = r"
+      <div class="flex items-center gap-3">
+        <USlider
+          v-model="radius"
+          :min="0"
+          :max="0.5"
+          :step="0.125"
+          size="sm"
         />
+
+        <span class="text-[11px] font-mono text-muted tabular-nums shrink-0 w-14 text-right">{{ radius }}rem</span>
       </div>
     </fieldset>
 

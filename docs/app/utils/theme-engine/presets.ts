@@ -95,6 +95,121 @@ export const presets: ThemePreset[] = [{
     }
   }
 }, {
+  id: 'art-deco',
+  name: 'Art Deco',
+  description: 'Gilded amber lines on warm cream and charcoal.',
+  icon: 'i-lucide-landmark',
+  doc: {
+    version: 1,
+    meta: { name: 'Art Deco', base: 'art-deco' },
+    colors: {
+      primary: 'amber',
+      secondary: 'yellow',
+      neutral: 'stone'
+    },
+    radius: 0.5,
+    font: { sans: 'Raleway' },
+    tokens: {
+      light: {
+        '--ui-bg': 'var(--ui-color-primary-50)',
+        '--ui-border': 'var(--ui-color-primary-200)',
+        '--ui-border-accented': 'var(--ui-color-primary-300)'
+      },
+      dark: {
+        '--ui-border': 'var(--ui-color-primary-900)',
+        '--ui-border-accented': 'var(--ui-color-primary-800)'
+      }
+    },
+    style: {
+      border: 'bold',
+      borderColor: 'primary'
+    }
+  }
+}, {
+  id: 'marshmallow',
+  name: 'Marshmallow',
+  description: 'Pastel pink softness with mauve-tinted grays.',
+  icon: 'i-lucide-candy',
+  doc: {
+    version: 1,
+    meta: { name: 'Marshmallow', base: 'marshmallow' },
+    colors: {
+      primary: 'pink',
+      secondary: 'violet',
+      neutral: 'mauve'
+    },
+    radius: 0.5,
+    font: { sans: 'Poppins' },
+    style: {
+      shadow: 'soft'
+    }
+  }
+}, {
+  id: 'ghibli',
+  name: 'Ghibli',
+  description: 'Moss green and sun-warmed paper, gentle corners.',
+  icon: 'i-lucide-leaf',
+  doc: {
+    version: 1,
+    meta: { name: 'Ghibli', base: 'ghibli' },
+    palettes: {
+      moss: {
+        shades: {
+          50: '#F7F9EC',
+          100: '#EDF2D8',
+          200: '#DCE5B5',
+          300: '#C6D48E',
+          400: '#ADBE71',
+          500: '#96A65C',
+          600: '#7A894A',
+          700: '#62703C',
+          800: '#4C5730',
+          900: '#3D4628',
+          950: '#212614'
+        }
+      }
+    },
+    colors: {
+      primary: 'moss',
+      secondary: 'amber',
+      neutral: 'stone'
+    },
+    radius: 0.5,
+    font: { sans: 'Poppins' },
+    tokens: {
+      light: {
+        '--ui-bg': 'var(--ui-color-secondary-100)',
+        '--ui-bg-muted': 'var(--ui-color-secondary-50)',
+        '--ui-border': 'var(--ui-color-secondary-300)'
+      }
+    },
+    style: {
+      shadow: 'soft'
+    }
+  }
+}, {
+  id: 'marvel',
+  name: 'Marvel',
+  description: 'Comic-book red and blue with inked panel outlines.',
+  icon: 'i-lucide-book-open',
+  doc: {
+    version: 1,
+    meta: { name: 'Marvel', base: 'marvel' },
+    colors: {
+      primary: 'red',
+      secondary: 'blue',
+      neutral: 'zinc'
+    },
+    radius: 0.125,
+    font: { sans: 'Outfit' },
+    style: {
+      shadow: 'hard',
+      shadowColor: 'black',
+      border: 'frame',
+      borderColor: 'black'
+    }
+  }
+}, {
   id: 'anthropic',
   name: 'Anthropic',
   description: 'Warm parchment neutrals with a book-cloth clay primary.',
