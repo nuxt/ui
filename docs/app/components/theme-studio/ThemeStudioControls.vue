@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { TOKEN_SHADE_TARGETS, SHADES, SHADOW_SHADE_DEFAULTS, BORDER_SHADE_DEFAULTS, SHADOW_GEOMETRY_DEFAULTS } from '../../utils/theme-engine'
 
-const colorMode = useColorMode()
-
 const {
   neutralColors,
   neutral,
@@ -139,10 +137,12 @@ const tokenSections = TOKEN_SHADE_TARGETS.map(target => ({
 
 const neutralChip = computed(() => neutral.value === 'neutral' ? 'old-neutral' : neutral.value)
 
+const modeTabs = computed(() => modes.value.map(m => ({ label: m.label, icon: m.icon, value: m.label })))
+
 const primaryEditorOpen = ref(false)
 const neutralEditorOpen = ref(false)
 
-const openGroups = ref(['colors', 'style', 'tokens', 'general'])
+const openGroups = ref('colors')
 
 const groupItems = [
   { label: 'Colors', value: 'colors', slot: 'colors' as const },
@@ -207,461 +207,488 @@ const shadowColor = computed({
 </script>
 
 <template>
-  <UAccordion
-    v-model="openGroups"
-    default-value="colors"
-    :items="groupItems"
-    :unmount-on-hide="false"
-  >
-    <template #colors>
-      <div class="flex flex-col gap-5 pt-1 pb-4">
-        <fieldset>
-          <legend class="w-full text-xs leading-none font-semibold mb-2.5 select-none flex items-center gap-1 cursor-pointer">
-            <button type="button" class="flex items-center gap-1 flex-1 text-left cursor-pointer" @click="openSections.primary = !openSections.primary">
-              Primary
+  <div class="flex flex-col gap-3">
+    <UTabs
+      v-model="mode"
+      :items="modeTabs"
+      :content="false"
+      size="xs"
+      color="primary"
+      class="w-full"
+      :ui="{ trigger: 'text-[11px] capitalize' }"
+    />
 
-              <UIcon name="i-lucide-chevron-down" class="size-3 text-dimmed transition-transform duration-200" :class="{ '-rotate-90': !openSections.primary }" />
-            </button>
+    <UAccordion
+      v-model="openGroups"
 
-            <UButton
-              to="/docs/getting-started/theme/css-variables#colors"
-              size="xs"
-              color="neutral"
-              variant="link"
-              icon="i-lucide-help-circle"
-              class="p-0 -my-0.5"
-              :ui="{ leadingIcon: 'size-3' }"
-            />
-
-            <UButton
-              label="Custom"
-              :icon="isCustomPalette('primary') ? 'i-lucide-paintbrush' : 'i-lucide-wand-sparkles'"
-              color="neutral"
-              :variant="primaryEditorOpen ? 'soft' : 'ghost'"
-              size="xs"
-              class="-my-1 text-[11px]"
-              :ui="{ leadingIcon: isCustomPalette('primary') ? 'text-primary size-3' : 'size-3' }"
-              @click="primaryEditorOpen = !primaryEditorOpen"
-            />
-          </legend>
-
-          <div v-show="openSections.primary">
-            <UPopover :content="{ side: 'bottom', align: 'start' }">
+      :items="groupItems"
+      :unmount-on-hide="false"
+    >
+      <template #colors>
+        <div class="flex flex-col gap-5 pt-1 pb-4">
+          <fieldset>
+            <legend class="w-full text-xs leading-none font-semibold mb-2.5 select-none flex items-center gap-1 cursor-pointer">
               <UButton
+                label="Primary"
                 color="neutral"
-                variant="outline"
-                size="sm"
-                block
-                trailing-icon="i-lucide-chevron-down"
-                class="justify-start capitalize ring-default rounded-sm text-[11px] hover:bg-elevated/50 data-[state=open]:bg-elevated/50"
-                :ui="{ trailingIcon: 'ms-auto size-4 group-data-[state=open]:rotate-180 transition-transform duration-200' }"
-              >
-                <template #leading>
-                  <span
-                    class="inline-block size-3 rounded-full"
-                    :class="{ 'bg-black dark:bg-white': blackAsPrimary }"
-                    :style="primarySwatch.color ? { backgroundColor: primarySwatch.color } : undefined"
-                  />
-                </template>
-
-                {{ primarySwatch.label }}
-              </UButton>
-
-              <template #content>
-                <div class="grid grid-cols-3 gap-1 w-72 p-2">
-                  <ThemePickerButton
-                    label="Black"
-                    :selected="blackAsPrimary"
-                    @click="setBlackAsPrimary(true)"
-                  >
-                    <template #leading>
-                      <span class="inline-block size-2 rounded-full bg-black dark:bg-white" />
-                    </template>
-                  </ThemePickerButton>
-
-                  <ThemePickerButton
-                    v-for="color in primaryColors"
-                    :key="color"
-                    :label="color"
-                    :chip="color"
-                    :selected="!blackAsPrimary && primary === color"
-                    @click="selectPalette('primary', color)"
-                  />
-                </div>
-              </template>
-            </UPopover>
-
-            <ThemeStudioPaletteEditor v-model:open="primaryEditorOpen" alias="primary" />
-          </div>
-        </fieldset>
-
-        <fieldset>
-          <legend class="w-full text-xs leading-none font-semibold mb-2.5 select-none flex items-center gap-1 cursor-pointer">
-            <button type="button" class="flex items-center gap-1 flex-1 text-left cursor-pointer" @click="openSections.neutral = !openSections.neutral">
-              Neutral
-
-              <UIcon name="i-lucide-chevron-down" class="size-3 text-dimmed transition-transform duration-200" :class="{ '-rotate-90': !openSections.neutral }" />
-            </button>
-
-            <UButton
-              to="/docs/getting-started/theme/css-variables#text"
-              size="xs"
-              color="neutral"
-              variant="link"
-              icon="i-lucide-help-circle"
-              class="p-0 -my-0.5"
-              :ui="{ leadingIcon: 'size-3' }"
-            />
-
-            <UButton
-              label="Custom"
-              :icon="isCustomPalette('neutral') ? 'i-lucide-paintbrush' : 'i-lucide-wand-sparkles'"
-              color="neutral"
-              :variant="neutralEditorOpen ? 'soft' : 'ghost'"
-              size="xs"
-              class="-my-1 text-[11px]"
-              :ui="{ leadingIcon: isCustomPalette('neutral') ? 'text-primary size-3' : 'size-3' }"
-              @click="neutralEditorOpen = !neutralEditorOpen"
-            />
-          </legend>
-
-          <div v-show="openSections.neutral">
-            <UPopover :content="{ side: 'bottom', align: 'start' }">
-              <UButton
-                color="neutral"
-                variant="outline"
-                size="sm"
-                block
-                trailing-icon="i-lucide-chevron-down"
-                class="justify-start capitalize ring-default rounded-sm text-[11px] hover:bg-elevated/50 data-[state=open]:bg-elevated/50"
-                :ui="{ trailingIcon: 'ms-auto size-4 group-data-[state=open]:rotate-180 transition-transform duration-200' }"
-              >
-                <template #leading>
-                  <span
-                    class="inline-block size-3 rounded-full"
-                    :style="{ backgroundColor: neutralSwatch.color }"
-                  />
-                </template>
-
-                {{ neutralSwatch.label }}
-              </UButton>
-
-              <template #content>
-                <div class="grid grid-cols-3 gap-1 w-72 p-2">
-                  <ThemePickerButton
-                    v-for="color in neutralColors"
-                    :key="color"
-                    :label="color"
-                    :chip="color === 'neutral' ? 'old-neutral' : color"
-                    :selected="neutral === color"
-                    @click="selectPalette('neutral', color)"
-                  />
-                </div>
-              </template>
-            </UPopover>
-
-            <ThemeStudioPaletteEditor v-model:open="neutralEditorOpen" alias="neutral" />
-          </div>
-        </fieldset>
-      </div>
-    </template>
-
-    <template #style>
-      <div class="flex flex-col gap-5 pt-1 pb-4">
-        <fieldset>
-          <legend class="w-full text-xs leading-none font-semibold mb-2.5 select-none flex items-center gap-1 cursor-pointer">
-            <button type="button" class="flex items-center gap-1 flex-1 text-left cursor-pointer" @click="openSections.radius = !openSections.radius">
-              Radius
-
-              <UIcon name="i-lucide-chevron-down" class="size-3 text-dimmed transition-transform duration-200" :class="{ '-rotate-90': !openSections.radius }" />
-            </button>
-
-            <UButton
-              to="/docs/getting-started/theme/css-variables#radius"
-              size="xs"
-              color="neutral"
-              variant="link"
-              icon="i-lucide-help-circle"
-              class="p-0 -my-0.5"
-              :ui="{ leadingIcon: 'size-3' }"
-            />
-          </legend>
-
-          <div v-show="openSections.radius" class="flex items-center gap-3">
-            <USlider
-              v-model="radius"
-              :min="0"
-              :max="0.5"
-              :step="0.125"
-              size="sm"
-            />
-
-            <span class="text-[11px] font-mono text-muted tabular-nums shrink-0 w-14 text-right">{{ radius }}rem</span>
-          </div>
-        </fieldset>
-
-        <fieldset>
-          <legend class="w-full text-xs leading-none font-semibold mb-2.5 select-none flex items-center gap-1 cursor-pointer">
-            <button type="button" class="flex items-center gap-1 flex-1 text-left cursor-pointer" @click="openSections.defaults = !openSections.defaults">
-              Defaults
-
-              <UIcon name="i-lucide-chevron-down" class="size-3 text-dimmed transition-transform duration-200" :class="{ '-rotate-90': !openSections.defaults }" />
-            </button>
-          </legend>
-
-          <div v-show="openSections.defaults" class="grid grid-cols-2 gap-1.5">
-            <USelect
-              v-model="defaultVariant"
-              size="sm"
-              color="neutral"
-              icon="i-lucide-layers"
-              :items="defaultVariantItems"
-              class="ring-default rounded-sm hover:bg-elevated/50 text-xs data-[state=open]:bg-elevated/50"
-              :ui="{ item: 'text-xs', trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200' }"
-            />
-
-            <USelect
-              v-model="defaultSize"
-              size="sm"
-              color="neutral"
-              icon="i-lucide-proportions"
-              :items="defaultSizeItems"
-              class="ring-default rounded-sm hover:bg-elevated/50 text-xs data-[state=open]:bg-elevated/50"
-              :ui="{ item: 'text-xs', trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200' }"
-            />
-          </div>
-        </fieldset>
-
-        <fieldset>
-          <legend class="w-full text-xs leading-none font-semibold mb-2.5 select-none flex items-center gap-1 cursor-pointer">
-            <button type="button" class="flex items-center gap-1 flex-1 text-left cursor-pointer" @click="openSections.shadows = !openSections.shadows">
-              Shadows
-
-              <UIcon name="i-lucide-chevron-down" class="size-3 text-dimmed transition-transform duration-200" :class="{ '-rotate-90': !openSections.shadows }" />
-            </button>
-          </legend>
-
-          <div v-show="openSections.shadows">
-            <div class="grid grid-cols-3 gap-1">
-              <ThemePickerButton
-                v-for="option in shadowOptions"
-                :key="option.value"
-                :label="option.label"
-                class="justify-center px-0"
-                :selected="(style.shadow || 'none') === option.value"
-                @click="setStyle({ shadow: option.value })"
+                variant="ghost"
+                size="xs"
+                icon="i-lucide-chevron-down"
+                class="flex-1 justify-start -my-1 -ms-1.5 gap-1 text-xs font-semibold text-default"
+                :ui="{ leadingIcon: ['size-3 text-dimmed transition-transform duration-200', !openSections.primary && '-rotate-90'] }"
+                @click="openSections.primary = !openSections.primary"
               />
-            </div>
 
-            <div v-if="(style.shadow || 'none') !== 'none'" class="mt-1.5 flex flex-col gap-2">
+              <UButton
+                to="/docs/getting-started/theme/css-variables#colors"
+                size="xs"
+                color="neutral"
+                variant="link"
+                icon="i-lucide-help-circle"
+                class="p-0 -my-0.5"
+                :ui="{ leadingIcon: 'size-3' }"
+              />
+
+              <UButton
+                label="Custom"
+                :icon="isCustomPalette('primary') ? 'i-lucide-paintbrush' : 'i-lucide-wand-sparkles'"
+                color="neutral"
+                :variant="primaryEditorOpen ? 'soft' : 'ghost'"
+                size="xs"
+                class="-my-1 text-[11px]"
+                :ui="{ leadingIcon: isCustomPalette('primary') ? 'text-primary size-3' : 'size-3' }"
+                @click="primaryEditorOpen = !primaryEditorOpen"
+              />
+            </legend>
+
+            <div v-show="openSections.primary">
+              <UPopover :content="{ side: 'bottom', align: 'start' }">
+                <UButton
+                  color="neutral"
+                  variant="outline"
+                  size="sm"
+                  block
+                  trailing-icon="i-lucide-chevron-down"
+                  class="justify-start capitalize ring-default rounded-sm text-[11px] hover:bg-elevated/50 data-[state=open]:bg-elevated/50"
+                  :ui="{ trailingIcon: 'ms-auto size-4 group-data-[state=open]:rotate-180 transition-transform duration-200' }"
+                >
+                  <template #leading>
+                    <span
+                      class="inline-block size-3 rounded-full"
+                      :class="{ 'bg-black dark:bg-white': blackAsPrimary }"
+                      :style="primarySwatch.color ? { backgroundColor: primarySwatch.color } : undefined"
+                    />
+                  </template>
+
+                  {{ primarySwatch.label }}
+                </UButton>
+
+                <template #content>
+                  <div class="grid grid-cols-3 gap-1 w-72 p-2">
+                    <ThemePickerButton
+                      label="Black"
+                      :selected="blackAsPrimary"
+                      @click="setBlackAsPrimary(true)"
+                    >
+                      <template #leading>
+                        <span class="inline-block size-2 rounded-full bg-black dark:bg-white" />
+                      </template>
+                    </ThemePickerButton>
+
+                    <ThemePickerButton
+                      v-for="color in primaryColors"
+                      :key="color"
+                      :label="color"
+                      :chip="color"
+                      :selected="!blackAsPrimary && primary === color"
+                      @click="selectPalette('primary', color)"
+                    />
+                  </div>
+                </template>
+              </UPopover>
+
+              <ThemeStudioPaletteEditor v-model:open="primaryEditorOpen" alias="primary" />
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend class="w-full text-xs leading-none font-semibold mb-2.5 select-none flex items-center gap-1 cursor-pointer">
+              <UButton
+                label="Neutral"
+                color="neutral"
+                variant="ghost"
+                size="xs"
+                icon="i-lucide-chevron-down"
+                class="flex-1 justify-start -my-1 -ms-1.5 gap-1 text-xs font-semibold text-default"
+                :ui="{ leadingIcon: ['size-3 text-dimmed transition-transform duration-200', !openSections.neutral && '-rotate-90'] }"
+                @click="openSections.neutral = !openSections.neutral"
+              />
+
+              <UButton
+                to="/docs/getting-started/theme/css-variables#text"
+                size="xs"
+                color="neutral"
+                variant="link"
+                icon="i-lucide-help-circle"
+                class="p-0 -my-0.5"
+                :ui="{ leadingIcon: 'size-3' }"
+              />
+
+              <UButton
+                label="Custom"
+                :icon="isCustomPalette('neutral') ? 'i-lucide-paintbrush' : 'i-lucide-wand-sparkles'"
+                color="neutral"
+                :variant="neutralEditorOpen ? 'soft' : 'ghost'"
+                size="xs"
+                class="-my-1 text-[11px]"
+                :ui="{ leadingIcon: isCustomPalette('neutral') ? 'text-primary size-3' : 'size-3' }"
+                @click="neutralEditorOpen = !neutralEditorOpen"
+              />
+            </legend>
+
+            <div v-show="openSections.neutral">
+              <UPopover :content="{ side: 'bottom', align: 'start' }">
+                <UButton
+                  color="neutral"
+                  variant="outline"
+                  size="sm"
+                  block
+                  trailing-icon="i-lucide-chevron-down"
+                  class="justify-start capitalize ring-default rounded-sm text-[11px] hover:bg-elevated/50 data-[state=open]:bg-elevated/50"
+                  :ui="{ trailingIcon: 'ms-auto size-4 group-data-[state=open]:rotate-180 transition-transform duration-200' }"
+                >
+                  <template #leading>
+                    <span
+                      class="inline-block size-3 rounded-full"
+                      :style="{ backgroundColor: neutralSwatch.color }"
+                    />
+                  </template>
+
+                  {{ neutralSwatch.label }}
+                </UButton>
+
+                <template #content>
+                  <div class="grid grid-cols-3 gap-1 w-72 p-2">
+                    <ThemePickerButton
+                      v-for="color in neutralColors"
+                      :key="color"
+                      :label="color"
+                      :chip="color === 'neutral' ? 'old-neutral' : color"
+                      :selected="neutral === color"
+                      @click="selectPalette('neutral', color)"
+                    />
+                  </div>
+                </template>
+              </UPopover>
+
+              <ThemeStudioPaletteEditor v-model:open="neutralEditorOpen" alias="neutral" />
+            </div>
+          </fieldset>
+        </div>
+      </template>
+
+      <template #style>
+        <div class="flex flex-col gap-5 pt-1 pb-4">
+          <fieldset>
+            <legend class="w-full text-xs leading-none font-semibold mb-2.5 select-none flex items-center gap-1 cursor-pointer">
+              <UButton
+                label="Radius"
+                color="neutral"
+                variant="ghost"
+                size="xs"
+                icon="i-lucide-chevron-down"
+                class="flex-1 justify-start -my-1 -ms-1.5 gap-1 text-xs font-semibold text-default"
+                :ui="{ leadingIcon: ['size-3 text-dimmed transition-transform duration-200', !openSections.radius && '-rotate-90'] }"
+                @click="openSections.radius = !openSections.radius"
+              />
+
+              <UButton
+                to="/docs/getting-started/theme/css-variables#radius"
+                size="xs"
+                color="neutral"
+                variant="link"
+                icon="i-lucide-help-circle"
+                class="p-0 -my-0.5"
+                :ui="{ leadingIcon: 'size-3' }"
+              />
+            </legend>
+
+            <div v-show="openSections.radius" class="flex items-center gap-3">
+              <USlider
+                v-model="radius"
+                :min="0"
+                :max="0.5"
+                :step="0.125"
+                size="sm"
+              />
+
+              <span class="text-[11px] font-mono text-muted tabular-nums shrink-0 w-14 text-right">{{ radius }}rem</span>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend class="w-full text-xs leading-none font-semibold mb-2.5 select-none flex items-center gap-1 cursor-pointer">
+              <UButton
+                label="Defaults"
+                color="neutral"
+                variant="ghost"
+                size="xs"
+                icon="i-lucide-chevron-down"
+                class="flex-1 justify-start -my-1 -ms-1.5 gap-1 text-xs font-semibold text-default"
+                :ui="{ leadingIcon: ['size-3 text-dimmed transition-transform duration-200', !openSections.defaults && '-rotate-90'] }"
+                @click="openSections.defaults = !openSections.defaults"
+              />
+            </legend>
+
+            <div v-show="openSections.defaults" class="grid grid-cols-2 gap-1.5">
               <USelect
-                v-model="shadowColor"
+                v-model="defaultVariant"
                 size="sm"
                 color="neutral"
-                icon="i-lucide-paint-bucket"
-                :items="shadowColorItems"
-                class="w-full ring-default rounded-sm hover:bg-elevated/50 text-xs data-[state=open]:bg-elevated/50"
+                icon="i-lucide-layers"
+                :items="defaultVariantItems"
+                class="ring-default rounded-sm hover:bg-elevated/50 text-xs data-[state=open]:bg-elevated/50"
                 :ui="{ item: 'text-xs', trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200' }"
               />
 
-              <template v-if="shadowColor === 'shade'">
-                <ThemeStudioShadeSlider
-                  v-for="(slider, modeName) in shadowShades"
-                  :key="modeName"
-                  v-model="slider.value"
-                  :mode="modeName"
-                  :chip="neutralChip"
+              <USelect
+                v-model="defaultSize"
+                size="sm"
+                color="neutral"
+                icon="i-lucide-proportions"
+                :items="defaultSizeItems"
+                class="ring-default rounded-sm hover:bg-elevated/50 text-xs data-[state=open]:bg-elevated/50"
+                :ui="{ item: 'text-xs', trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200' }"
+              />
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend class="w-full text-xs leading-none font-semibold mb-2.5 select-none flex items-center gap-1 cursor-pointer">
+              <UButton
+                label="Shadows"
+                color="neutral"
+                variant="ghost"
+                size="xs"
+                icon="i-lucide-chevron-down"
+                class="flex-1 justify-start -my-1 -ms-1.5 gap-1 text-xs font-semibold text-default"
+                :ui="{ leadingIcon: ['size-3 text-dimmed transition-transform duration-200', !openSections.shadows && '-rotate-90'] }"
+                @click="openSections.shadows = !openSections.shadows"
+              />
+            </legend>
+
+            <div v-show="openSections.shadows">
+              <div class="grid grid-cols-3 gap-1">
+                <ThemePickerButton
+                  v-for="option in shadowOptions"
+                  :key="option.value"
+                  :label="option.label"
+                  class="justify-center px-0"
+                  :selected="(style.shadow || 'none') === option.value"
+                  @click="setStyle({ shadow: option.value })"
                 />
-              </template>
-
-              <div class="flex items-center gap-2">
-                <span class="text-[11px] text-muted w-13 shrink-0 select-none">Opacity</span>
-
-                <USlider v-model="shadowOpacity" :min="5" :max="100" :step="5" size="xs" />
-
-                <span class="text-[11px] text-dimmed font-mono w-8 text-right shrink-0">{{ shadowOpacity }}%</span>
               </div>
 
-              <template v-if="(style.shadow || 'none') === 'hard'">
-                <div v-for="field in geometryFields" :key="field.key" class="flex items-center gap-2">
-                  <span class="text-[11px] text-muted w-13 shrink-0 select-none">{{ field.label }}</span>
+              <div v-if="(style.shadow || 'none') !== 'none'" class="mt-1.5 flex flex-col gap-2">
+                <USelect
+                  v-model="shadowColor"
+                  size="sm"
+                  color="neutral"
+                  icon="i-lucide-paint-bucket"
+                  :items="shadowColorItems"
+                  class="w-full ring-default rounded-sm hover:bg-elevated/50 text-xs data-[state=open]:bg-elevated/50"
+                  :ui="{ item: 'text-xs', trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200' }"
+                />
 
-                  <USlider v-model="geometry[field.key].value" :min="field.min" :max="field.max" :step="1" size="xs" />
+                <template v-if="shadowColor === 'shade'">
+                  <ThemeStudioShadeSlider
+                    v-for="(slider, modeName) in shadowShades"
+                    :key="modeName"
+                    v-model="slider.value"
+                    :mode="modeName"
+                    :chip="neutralChip"
+                  />
+                </template>
 
-                  <span class="text-[11px] text-dimmed font-mono w-8 text-right shrink-0">{{ geometry[field.key].value }}px</span>
+                <div class="flex items-center gap-2">
+                  <span class="text-[11px] text-muted w-13 shrink-0 select-none">Opacity</span>
+
+                  <USlider v-model="shadowOpacity" :min="5" :max="100" :step="5" size="xs" />
+
+                  <span class="text-[11px] text-dimmed font-mono w-8 text-right shrink-0">{{ shadowOpacity }}%</span>
                 </div>
-              </template>
+
+                <template v-if="(style.shadow || 'none') === 'hard'">
+                  <div v-for="field in geometryFields" :key="field.key" class="flex items-center gap-2">
+                    <span class="text-[11px] text-muted w-13 shrink-0 select-none">{{ field.label }}</span>
+
+                    <USlider v-model="geometry[field.key].value" :min="field.min" :max="field.max" :step="1" size="xs" />
+
+                    <span class="text-[11px] text-dimmed font-mono w-8 text-right shrink-0">{{ geometry[field.key].value }}px</span>
+                  </div>
+                </template>
+              </div>
             </div>
-          </div>
-        </fieldset>
+          </fieldset>
 
-        <fieldset>
-          <legend class="w-full text-xs leading-none font-semibold mb-2.5 select-none flex items-center gap-1 cursor-pointer">
-            <button type="button" class="flex items-center gap-1 flex-1 text-left cursor-pointer" @click="openSections.borders = !openSections.borders">
-              Borders
+          <fieldset>
+            <legend class="w-full text-xs leading-none font-semibold mb-2.5 select-none flex items-center gap-1 cursor-pointer">
+              <UButton
+                label="Borders"
+                color="neutral"
+                variant="ghost"
+                size="xs"
+                icon="i-lucide-chevron-down"
+                class="flex-1 justify-start -my-1 -ms-1.5 gap-1 text-xs font-semibold text-default"
+                :ui="{ leadingIcon: ['size-3 text-dimmed transition-transform duration-200', !openSections.borders && '-rotate-90'] }"
+                @click="openSections.borders = !openSections.borders"
+              />
+            </legend>
 
-              <UIcon name="i-lucide-chevron-down" class="size-3 text-dimmed transition-transform duration-200" :class="{ '-rotate-90': !openSections.borders }" />
-            </button>
-          </legend>
+            <div v-show="openSections.borders">
+              <div class="grid grid-cols-3 gap-1">
+                <ThemePickerButton
+                  v-for="option in borderOptions"
+                  :key="option.value"
+                  :label="option.label"
+                  class="justify-center px-0"
+                  :selected="(style.border || 'default') === option.value"
+                  @click="setStyle({ border: option.value })"
+                />
+              </div>
 
-          <div v-show="openSections.borders">
-            <div class="grid grid-cols-3 gap-1">
-              <ThemePickerButton
-                v-for="option in borderOptions"
-                :key="option.value"
-                :label="option.label"
-                class="justify-center px-0"
-                :selected="(style.border || 'default') === option.value"
-                @click="setStyle({ border: option.value })"
+              <div class="mt-1.5 flex flex-col gap-2">
+                <USelect
+                  v-model="borderColor"
+                  size="sm"
+                  color="neutral"
+                  icon="i-lucide-paint-bucket"
+                  :items="borderColorItems"
+                  class="w-full ring-default rounded-sm hover:bg-elevated/50 text-xs data-[state=open]:bg-elevated/50"
+                  :ui="{ item: 'text-xs', trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200' }"
+                />
+
+                <template v-if="borderColor === 'shade'">
+                  <ThemeStudioShadeSlider
+                    v-for="(slider, modeName) in borderShades"
+                    :key="modeName"
+                    v-model="slider.value"
+                    :mode="modeName"
+                    :chip="neutralChip"
+                  />
+                </template>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+      </template>
+
+      <template #tokens>
+        <div class="flex flex-col gap-5 pt-1 pb-4">
+          <fieldset v-for="section in tokenSections" :key="section.token">
+            <legend class="w-full text-xs leading-none font-semibold mb-2.5 select-none flex items-center gap-1 cursor-pointer">
+              <UButton
+                :label="section.label"
+                color="neutral"
+                variant="ghost"
+                size="xs"
+                icon="i-lucide-chevron-down"
+                class="flex-1 justify-start -my-1 -ms-1.5 gap-1 text-xs font-semibold text-default"
+                :ui="{ leadingIcon: ['size-3 text-dimmed transition-transform duration-200', !openSections[section.token] && '-rotate-90'] }"
+                @click="openSections[section.token] = !openSections[section.token]"
+              />
+            </legend>
+
+            <div v-show="openSections[section.token]" class="flex flex-col gap-2">
+              <ThemeStudioShadeSlider
+                v-for="(slider, modeName) in section.sliders"
+                :key="modeName"
+                v-model="slider.value"
+                :mode="modeName"
+                :chip="neutralChip"
               />
             </div>
+          </fieldset>
+        </div>
+      </template>
 
-            <div class="mt-1.5 flex flex-col gap-2">
+      <template #general>
+        <div class="flex flex-col gap-5 pt-1 pb-4">
+          <fieldset>
+            <legend class="w-full text-xs leading-none font-semibold mb-2.5 select-none flex items-center gap-1 cursor-pointer">
+              <UButton
+                label="Font"
+                color="neutral"
+                variant="ghost"
+                size="xs"
+                icon="i-lucide-chevron-down"
+                class="flex-1 justify-start -my-1 -ms-1.5 gap-1 text-xs font-semibold text-default"
+                :ui="{ leadingIcon: ['size-3 text-dimmed transition-transform duration-200', !openSections.font && '-rotate-90'] }"
+                @click="openSections.font = !openSections.font"
+              />
+
+              <UButton
+                to="/docs/getting-started/integrations/fonts"
+                size="xs"
+                color="neutral"
+                variant="link"
+                icon="i-lucide-help-circle"
+                class="p-0 -my-0.5"
+                :ui="{ leadingIcon: 'size-3' }"
+              />
+            </legend>
+
+            <div v-show="openSections.font">
               <USelect
-                v-model="borderColor"
+                v-model="font"
                 size="sm"
                 color="neutral"
-                icon="i-lucide-paint-bucket"
-                :items="borderColorItems"
+                icon="i-lucide-type"
+                :items="fonts"
                 class="w-full ring-default rounded-sm hover:bg-elevated/50 text-xs data-[state=open]:bg-elevated/50"
-                :ui="{ item: 'text-xs', trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200' }"
+                :ui="{ trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200' }"
+              />
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend class="w-full text-xs leading-none font-semibold mb-2.5 select-none flex items-center gap-1 cursor-pointer">
+              <UButton
+                label="Icons"
+                color="neutral"
+                variant="ghost"
+                size="xs"
+                icon="i-lucide-chevron-down"
+                class="flex-1 justify-start -my-1 -ms-1.5 gap-1 text-xs font-semibold text-default"
+                :ui="{ leadingIcon: ['size-3 text-dimmed transition-transform duration-200', !openSections.icons && '-rotate-90'] }"
+                @click="openSections.icons = !openSections.icons"
               />
 
-              <template v-if="borderColor === 'shade'">
-                <ThemeStudioShadeSlider
-                  v-for="(slider, modeName) in borderShades"
-                  :key="modeName"
-                  v-model="slider.value"
-                  :mode="modeName"
-                  :chip="neutralChip"
-                />
-              </template>
+              <UButton
+                to="/docs/getting-started/integrations/icons"
+                size="xs"
+                color="neutral"
+                variant="link"
+                icon="i-lucide-help-circle"
+                class="p-0 -my-0.5"
+                :ui="{ leadingIcon: 'size-3' }"
+              />
+            </legend>
+
+            <div v-show="openSections.icons">
+              <USelect
+                v-model="icon"
+                size="sm"
+                color="neutral"
+                :icon="icons.find(i => i.value === icon)?.icon"
+                :items="icons"
+                class="w-full ring-default rounded-sm hover:bg-elevated/50 capitalize text-xs data-[state=open]:bg-elevated/50"
+                :ui="{ item: 'capitalize text-xs', trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200' }"
+              />
             </div>
-          </div>
-        </fieldset>
-      </div>
-    </template>
-
-    <template #tokens>
-      <div class="flex flex-col gap-5 pt-1 pb-4">
-        <fieldset v-for="section in tokenSections" :key="section.token">
-          <legend class="w-full text-xs leading-none font-semibold mb-2.5 select-none flex items-center gap-1 cursor-pointer">
-            <button type="button" class="flex items-center gap-1 flex-1 text-left cursor-pointer" @click="openSections[section.token] = !openSections[section.token]">
-              {{ section.label }}
-
-              <UIcon name="i-lucide-chevron-down" class="size-3 text-dimmed transition-transform duration-200" :class="{ '-rotate-90': !openSections[section.token] }" />
-            </button>
-          </legend>
-
-          <div v-show="openSections[section.token]" class="flex flex-col gap-2">
-            <ThemeStudioShadeSlider
-              v-for="(slider, modeName) in section.sliders"
-              :key="modeName"
-              v-model="slider.value"
-              :mode="modeName"
-              :chip="neutralChip"
-            />
-          </div>
-        </fieldset>
-      </div>
-    </template>
-
-    <template #general>
-      <div class="flex flex-col gap-5 pt-1 pb-4">
-        <fieldset>
-          <legend class="w-full text-xs leading-none font-semibold mb-2.5 select-none flex items-center gap-1 cursor-pointer">
-            <button type="button" class="flex items-center gap-1 flex-1 text-left cursor-pointer" @click="openSections.font = !openSections.font">
-              Font
-
-              <UIcon name="i-lucide-chevron-down" class="size-3 text-dimmed transition-transform duration-200" :class="{ '-rotate-90': !openSections.font }" />
-            </button>
-
-            <UButton
-              to="/docs/getting-started/integrations/fonts"
-              size="xs"
-              color="neutral"
-              variant="link"
-              icon="i-lucide-help-circle"
-              class="p-0 -my-0.5"
-              :ui="{ leadingIcon: 'size-3' }"
-            />
-          </legend>
-
-          <div v-show="openSections.font">
-            <USelect
-              v-model="font"
-              size="sm"
-              color="neutral"
-              icon="i-lucide-type"
-              :items="fonts"
-              class="w-full ring-default rounded-sm hover:bg-elevated/50 text-xs data-[state=open]:bg-elevated/50"
-              :ui="{ trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200' }"
-            />
-          </div>
-        </fieldset>
-
-        <fieldset>
-          <legend class="w-full text-xs leading-none font-semibold mb-2.5 select-none flex items-center gap-1 cursor-pointer">
-            <button type="button" class="flex items-center gap-1 flex-1 text-left cursor-pointer" @click="openSections.icons = !openSections.icons">
-              Icons
-
-              <UIcon name="i-lucide-chevron-down" class="size-3 text-dimmed transition-transform duration-200" :class="{ '-rotate-90': !openSections.icons }" />
-            </button>
-
-            <UButton
-              to="/docs/getting-started/integrations/icons"
-              size="xs"
-              color="neutral"
-              variant="link"
-              icon="i-lucide-help-circle"
-              class="p-0 -my-0.5"
-              :ui="{ leadingIcon: 'size-3' }"
-            />
-          </legend>
-
-          <div v-show="openSections.icons">
-            <USelect
-              v-model="icon"
-              size="sm"
-              color="neutral"
-              :icon="icons.find(i => i.value === icon)?.icon"
-              :items="icons"
-              class="w-full ring-default rounded-sm hover:bg-elevated/50 capitalize text-xs data-[state=open]:bg-elevated/50"
-              :ui="{ item: 'capitalize text-xs', trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200' }"
-            />
-          </div>
-        </fieldset>
-
-        <fieldset>
-          <legend class="w-full text-xs leading-none font-semibold mb-2.5 select-none flex items-center gap-1 cursor-pointer">
-            <button type="button" class="flex items-center gap-1 flex-1 text-left cursor-pointer" @click="openSections.mode = !openSections.mode">
-              Color Mode
-
-              <UIcon name="i-lucide-chevron-down" class="size-3 text-dimmed transition-transform duration-200" :class="{ '-rotate-90': !openSections.mode }" />
-            </button>
-
-            <UButton
-              to="/docs/getting-started/integrations/color-mode"
-              size="xs"
-              color="neutral"
-              variant="link"
-              icon="i-lucide-help-circle"
-              class="p-0 -my-0.5"
-              :ui="{ leadingIcon: 'size-3' }"
-            />
-          </legend>
-
-          <div v-show="openSections.mode" class="grid grid-cols-3 gap-1">
-            <ThemePickerButton
-              v-for="m in modes"
-              :key="m.label"
-              v-bind="m"
-              :selected="colorMode.preference === m.label"
-              @click="mode = m.label"
-            />
-          </div>
-        </fieldset>
-      </div>
-    </template>
-  </UAccordion>
+          </fieldset>
+        </div>
+      </template>
+    </UAccordion>
+  </div>
 </template>

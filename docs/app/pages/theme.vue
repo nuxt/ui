@@ -35,7 +35,7 @@ const presetItems = computed(() => presets.map(preset => ({
   <main class="flex flex-col lg:flex-row lg:h-[calc(100vh-var(--ui-header-height))]">
     <aside
       v-show="sidebarOpen"
-      class="shrink-0 lg:w-80 border-b lg:border-b-0 lg:border-r border-default lg:overflow-y-auto p-4"
+      class="shrink-0 lg:w-80 border-b lg:border-b-0 lg:border-r border-default lg:overflow-y-auto p-4 sm:px-6"
     >
       <ThemeStudioControls />
     </aside>
