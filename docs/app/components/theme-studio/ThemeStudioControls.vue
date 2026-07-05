@@ -55,7 +55,8 @@ const borderColorItems = [
   { label: 'Black', value: 'black' },
   { label: 'White', value: 'white' },
   { label: 'Primary', value: 'primary' },
-  { label: 'Neutral', value: 'neutral' }
+  { label: 'Neutral', value: 'neutral' },
+  { label: 'Neutral shade…', value: 'shade' }
 ]
 
 const shadowColorItems = [
@@ -68,19 +69,36 @@ const shadowColorItems = [
 
 const SHADE_STEPS = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950]
 
-// Slider position (0–10) ↔ neutral ramp shade, per mode.
-function shadeSlider(target: 'light' | 'dark') {
+// Slider position (0–10) ↔ neutral ramp shade, per mode and style field.
+function shadeSlider(field: 'shadowShade' | 'borderShade' | 'bgShade', defaults: { light: number, dark: number }, target: 'light' | 'dark') {
   return computed({
-    get: () => SHADE_STEPS.indexOf((style.value.shadowShade || { light: 950, dark: 800 })[target]),
+    get: () => SHADE_STEPS.indexOf((style.value[field] || defaults)[target]),
     set: (index: number) => {
-      const current = { light: 950, dark: 800, ...style.value.shadowShade }
-      setStyle({ shadowShade: { ...current, [target]: SHADE_STEPS[index]! } })
+      const current = { ...defaults, ...style.value[field] }
+      setStyle({ [field]: { ...current, [target]: SHADE_STEPS[index]! } })
     }
   })
 }
 
-const lightShade = shadeSlider('light')
-const darkShade = shadeSlider('dark')
+const shadowShades = {
+  light: shadeSlider('shadowShade', { light: 950, dark: 800 }, 'light'),
+  dark: shadeSlider('shadowShade', { light: 950, dark: 800 }, 'dark')
+}
+
+const borderShades = {
+  light: shadeSlider('borderShade', { light: 900, dark: 200 }, 'light'),
+  dark: shadeSlider('borderShade', { light: 900, dark: 200 }, 'dark')
+}
+
+const bgShades = {
+  light: shadeSlider('bgShade', { light: 50, dark: 900 }, 'light'),
+  dark: shadeSlider('bgShade', { light: 50, dark: 900 }, 'dark')
+}
+
+const neutralChip = computed(() => neutral.value === 'neutral' ? 'old-neutral' : neutral.value)
+
+const primaryEditorOpen = ref(false)
+const neutralEditorOpen = ref(false)
 
 const borderColor = computed({
   get: () => style.value.borderColor || 'default',
@@ -96,7 +114,7 @@ const shadowColor = computed({
 <template>
   <div class="flex flex-col gap-5">
     <fieldset>
-      <legend class="text-xs leading-none font-semibold mb-2.5 select-none flex items-center gap-1">
+      <legend class="w-full text-xs leading-none font-semibold mb-2.5 select-none flex items-center gap-1">
         Primary
 
         <UButton
@@ -107,6 +125,17 @@ const shadowColor = computed({
           icon="i-lucide-help-circle"
           class="p-0 -my-0.5"
           :ui="{ leadingIcon: 'size-3' }"
+        />
+
+        <UButton
+          label="Custom"
+          :icon="isCustomPalette('primary') ? 'i-lucide-paintbrush' : 'i-lucide-wand-sparkles'"
+          color="neutral"
+          :variant="primaryEditorOpen ? 'soft' : 'ghost'"
+          size="xs"
+          class="ms-auto -my-1 text-[11px]"
+          :ui="{ leadingIcon: isCustomPalette('primary') ? 'text-primary size-3' : 'size-3' }"
+          @click="primaryEditorOpen = !primaryEditorOpen"
         />
       </legend>
 
@@ -155,11 +184,11 @@ const shadowColor = computed({
         </template>
       </UPopover>
 
-      <ThemeStudioPaletteEditor alias="primary" />
+      <ThemeStudioPaletteEditor v-model:open="primaryEditorOpen" alias="primary" />
     </fieldset>
 
     <fieldset>
-      <legend class="text-xs leading-none font-semibold mb-2.5 select-none flex items-center gap-1">
+      <legend class="w-full text-xs leading-none font-semibold mb-2.5 select-none flex items-center gap-1">
         Neutral
 
         <UButton
@@ -170,6 +199,17 @@ const shadowColor = computed({
           icon="i-lucide-help-circle"
           class="p-0 -my-0.5"
           :ui="{ leadingIcon: 'size-3' }"
+        />
+
+        <UButton
+          label="Custom"
+          :icon="isCustomPalette('neutral') ? 'i-lucide-paintbrush' : 'i-lucide-wand-sparkles'"
+          color="neutral"
+          :variant="neutralEditorOpen ? 'soft' : 'ghost'"
+          size="xs"
+          class="ms-auto -my-1 text-[11px]"
+          :ui="{ leadingIcon: isCustomPalette('neutral') ? 'text-primary size-3' : 'size-3' }"
+          @click="neutralEditorOpen = !neutralEditorOpen"
         />
       </legend>
 
@@ -266,28 +306,16 @@ const shadowColor = computed({
         />
 
         <template v-if="shadowColor === 'shade'">
-          <div class="flex items-center gap-2">
-            <UIcon name="i-lucide-sun" class="size-3.5 text-muted shrink-0" />
+          <div v-for="(slider, modeName) in shadowShades" :key="modeName" class="flex items-center gap-2">
+            <UIcon :name="modeName === 'light' ? 'i-lucide-sun' : 'i-lucide-moon'" class="size-3.5 text-muted shrink-0" />
 
-            <USlider v-model="lightShade" :min="0" :max="10" :step="1" size="sm" />
-
-            <span
-              class="size-4 shrink-0 rounded-sm ring ring-default"
-              :style="{ backgroundColor: `var(--color-${neutral === 'neutral' ? 'old-neutral' : neutral}-${SHADE_STEPS[lightShade]})` }"
-            />
-            <span class="text-[11px] text-dimmed font-mono w-7 text-right shrink-0">{{ SHADE_STEPS[lightShade] }}</span>
-          </div>
-
-          <div class="flex items-center gap-2">
-            <UIcon name="i-lucide-moon" class="size-3.5 text-muted shrink-0" />
-
-            <USlider v-model="darkShade" :min="0" :max="10" :step="1" size="sm" />
+            <USlider v-model="slider.value" :min="0" :max="10" :step="1" size="sm" />
 
             <span
               class="size-4 shrink-0 rounded-sm ring ring-default"
-              :style="{ backgroundColor: `var(--color-${neutral === 'neutral' ? 'old-neutral' : neutral}-${SHADE_STEPS[darkShade]})` }"
+              :style="{ backgroundColor: `var(--color-${neutralChip}-${SHADE_STEPS[slider.value]})` }"
             />
-            <span class="text-[11px] text-dimmed font-mono w-7 text-right shrink-0">{{ SHADE_STEPS[darkShade] }}</span>
+            <span class="text-[11px] text-dimmed font-mono w-7 text-right shrink-0">{{ SHADE_STEPS[slider.value] }}</span>
           </div>
         </template>
       </div>
@@ -309,7 +337,7 @@ const shadowColor = computed({
         />
       </div>
 
-      <div class="mt-1.5">
+      <div class="mt-1.5 flex flex-col gap-2">
         <USelect
           v-model="borderColor"
           size="sm"
@@ -319,6 +347,40 @@ const shadowColor = computed({
           class="w-full ring-default rounded-sm hover:bg-elevated/50 text-xs data-[state=open]:bg-elevated/50"
           :ui="{ item: 'text-xs', trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200' }"
         />
+
+        <template v-if="borderColor === 'shade'">
+          <div v-for="(slider, modeName) in borderShades" :key="modeName" class="flex items-center gap-2">
+            <UIcon :name="modeName === 'light' ? 'i-lucide-sun' : 'i-lucide-moon'" class="size-3.5 text-muted shrink-0" />
+
+            <USlider v-model="slider.value" :min="0" :max="10" :step="1" size="sm" />
+
+            <span
+              class="size-4 shrink-0 rounded-sm ring ring-default"
+              :style="{ backgroundColor: `var(--color-${neutralChip}-${SHADE_STEPS[slider.value]})` }"
+            />
+            <span class="text-[11px] text-dimmed font-mono w-7 text-right shrink-0">{{ SHADE_STEPS[slider.value] }}</span>
+          </div>
+        </template>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend class="text-xs leading-none font-semibold mb-2.5 select-none flex items-center gap-1">
+        Background
+      </legend>
+
+      <div class="flex flex-col gap-2">
+        <div v-for="(slider, modeName) in bgShades" :key="modeName" class="flex items-center gap-2">
+          <UIcon :name="modeName === 'light' ? 'i-lucide-sun' : 'i-lucide-moon'" class="size-3.5 text-muted shrink-0" />
+
+          <USlider v-model="slider.value" :min="0" :max="10" :step="1" size="sm" />
+
+          <span
+            class="size-4 shrink-0 rounded-sm ring ring-default"
+            :style="{ backgroundColor: `var(--color-${neutralChip}-${SHADE_STEPS[slider.value]})` }"
+          />
+          <span class="text-[11px] text-dimmed font-mono w-7 text-right shrink-0">{{ SHADE_STEPS[slider.value] }}</span>
+        </div>
       </div>
     </fieldset>
 

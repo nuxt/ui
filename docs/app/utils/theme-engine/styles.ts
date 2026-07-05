@@ -28,7 +28,7 @@
 
 export type ShadowStyle = 'none' | 'soft' | 'hard'
 export type BorderStyle = 'default' | 'bold' | 'frame'
-export type BorderColor = 'default' | 'inverted' | 'black' | 'white' | 'primary' | 'neutral'
+export type BorderColor = 'default' | 'inverted' | 'black' | 'white' | 'primary' | 'neutral' | 'shade'
 export type ShadowColor = 'default' | 'black' | 'inverted' | 'primary' | 'shade'
 
 export interface StyleOptions {
@@ -38,11 +38,25 @@ export interface StyleOptions {
   shadowColor?: ShadowColor
   /** Neutral ramp shade per mode, used when `shadowColor` is 'shade' */
   shadowShade?: { light: number, dark: number }
+  /** Neutral ramp shade per mode, used when `borderColor` is 'shade' */
+  borderShade?: { light: number, dark: number }
+  /**
+   * App background as a neutral ramp shade per mode. Strictly a semantic
+   * token shorthand (--ui-bg), parked on the style axis until the studio
+   * grows a full tokens editor.
+   */
+  bgShade?: { light: number, dark: number }
 }
 
 export const SHADOW_STYLES: ShadowStyle[] = ['none', 'soft', 'hard']
 export const BORDER_STYLES: BorderStyle[] = ['default', 'bold', 'frame']
-export const BORDER_COLORS: BorderColor[] = ['default', 'inverted', 'black', 'white', 'primary', 'neutral']
+export const BORDER_COLORS: BorderColor[] = ['default', 'inverted', 'black', 'white', 'primary', 'neutral', 'shade']
+
+/** Borders default opposite to the surface: dark ink on light, pale on dark. */
+export const BORDER_SHADE_DEFAULTS = { light: 900, dark: 200 }
+
+/** The docs baseline background shades. */
+export const BG_SHADE_DEFAULTS = { light: 50, dark: 900 }
 export const SHADOW_COLORS: ShadowColor[] = ['default', 'black', 'inverted', 'primary', 'shade']
 
 export const SHADOW_SHADE_DEFAULTS = { light: 950, dark: 800 }
@@ -155,7 +169,7 @@ const FRAME_COLOR_FRAGMENTS: Fragments = {
 }
 
 /** Per-mode values behind the two color variables, per palette choice. */
-const FRAME_COLOR_VALUES: Record<Exclude<BorderColor, 'default'>, { light: string, dark: string }> = {
+const FRAME_COLOR_VALUES: Record<Exclude<BorderColor, 'default' | 'shade'>, { light: string, dark: string }> = {
   inverted: { light: 'var(--ui-color-neutral-950)', dark: 'white' },
   black: { light: 'black', dark: 'black' },
   white: { light: 'white', dark: 'white' },
@@ -169,7 +183,7 @@ const SHADOW_COLOR_VALUES: Record<Exclude<ShadowColor, 'default' | 'shade'>, { l
   primary: { light: 'var(--ui-color-primary-500)', dark: 'var(--ui-color-primary-400)' }
 }
 
-export const STYLE_TOKEN_KEYS = ['--ui-frame-color', '--ui-shadow-color']
+export const STYLE_TOKEN_KEYS = ['--ui-frame-color', '--ui-shadow-color', '--ui-bg']
 
 /**
  * The CSS-variable side of a style: per-mode values for the frame and
@@ -180,11 +194,20 @@ export function styleTokens(style: StyleOptions): { light: Record<string, string
   const light: Record<string, string> = {}
   const dark: Record<string, string> = {}
 
-  if (style.borderColor && style.borderColor !== 'default') {
+  if (style.borderColor === 'shade') {
+    const shade = { ...BORDER_SHADE_DEFAULTS, ...style.borderShade }
+    light['--ui-frame-color'] = `var(--ui-color-neutral-${shade.light})`
+    dark['--ui-frame-color'] = `var(--ui-color-neutral-${shade.dark})`
+  } else if (style.borderColor && style.borderColor !== 'default') {
     const value = FRAME_COLOR_VALUES[style.borderColor]
     light['--ui-frame-color'] = value.light
     dark['--ui-frame-color'] = value.dark
   }
+  if (style.bgShade) {
+    light['--ui-bg'] = `var(--ui-color-neutral-${style.bgShade.light})`
+    dark['--ui-bg'] = `var(--ui-color-neutral-${style.bgShade.dark})`
+  }
+
   if (style.shadowColor === 'shade') {
     // Per-mode neutral ramp shade — a graded gray shadow that darkens or
     // lightens independently of the scheme it sits on.

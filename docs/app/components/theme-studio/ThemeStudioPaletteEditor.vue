@@ -10,7 +10,7 @@ const props = defineProps<{
 const appConfig = useAppConfig()
 const { paletteParams, isCustomPalette, paletteShades, setPaletteFromCurve, clearCustomPalette } = useThemeStudio()
 
-const open = ref(false)
+const open = defineModel<boolean>('open', { default: false })
 const tab = ref<'lightness' | 'chroma' | 'hue'>('lightness')
 
 const tabs = [
@@ -60,8 +60,11 @@ const windows = computed(() => ({
 // Programmatic writes into `params` (seeding, external sync) must not
 // live-apply — only user edits do.
 let suppress = false
+/** Fitted base the style offsets transform from, so they never compound. */
+let seedBase: PaletteCurveParams = structuredClone(toRaw(params))
 function seed(values: PaletteCurveParams) {
   suppress = true
+  seedBase = structuredClone(toRaw(values))
   Object.assign(params, structuredClone(toRaw(values)))
   recenterHueWindow()
   nextTick(() => {
@@ -129,8 +132,44 @@ watch([() => (appConfig.ui.colors as Record<string, string>)[props.alias], open]
   }
 })
 
-function apply() {
-  setPaletteFromCurve(props.alias, structuredClone(toRaw(params)))
+const styleOffset = ref('fitted')
+
+const styleOffsetItems = [
+  { label: 'Fitted', value: 'fitted' },
+  { label: 'Pastel', value: 'pastel' },
+  { label: 'Muted', value: 'muted' },
+  { label: 'Vivid', value: 'vivid' },
+  { label: 'Dazzling', value: 'dazzling' }
+]
+
+function scaleChroma(curve: PaletteCurveParams['chroma'], factor: number) {
+  curve.y0 *= factor
+  curve.y1 *= factor
+  curve.p1y *= factor
+  curve.p2y *= factor
+}
+
+/** Apply a taste offset ON TOP of the fitted base (idempotent, not cumulative). */
+function applyStyleOffset(name: string) {
+  const next = structuredClone(seedBase)
+
+  if (name === 'pastel') {
+    scaleChroma(next.chroma, 0.45)
+    next.lightness.y0 = Math.max(next.lightness.y0, 0.985)
+    next.lightness.y1 = Math.max(next.lightness.y1, 0.32)
+    next.lightness.p1y = Math.min(next.lightness.p1y * 1.08, 1.1)
+  } else if (name === 'muted') {
+    scaleChroma(next.chroma, 0.6)
+  } else if (name === 'vivid') {
+    scaleChroma(next.chroma, 1.35)
+  } else if (name === 'dazzling') {
+    scaleChroma(next.chroma, 1.9)
+    next.lightness.p2y = next.lightness.p2y * 0.96
+  }
+
+  // Not seed(): this IS a user edit, the watcher should live-apply it.
+  Object.assign(params, next)
+  recenterHueWindow()
 }
 
 function remove() {
@@ -140,94 +179,65 @@ function remove() {
 </script>
 
 <template>
-  <UCollapsible v-model:open="open" class="mt-1.5">
-    <div class="flex items-center gap-1">
-      <UButton
-        :label="active ? 'Custom palette' : 'Create custom palette'"
-        :icon="active ? 'i-lucide-paintbrush' : 'i-lucide-wand-sparkles'"
-        color="neutral"
-        variant="ghost"
-        size="xs"
-        block
-        class="justify-start text-[11px]"
-        :ui="{ leadingIcon: active ? 'text-primary size-3.5' : 'size-3.5' }"
-        trailing-icon="i-lucide-chevron-down"
-      />
+  <div v-if="open" class="mt-1.5 flex flex-col gap-2.5 pb-1">
+    <UTabs
+      v-model="tab"
+      :items="tabs"
+      :content="false"
+      size="xs"
+      color="neutral"
+      :ui="{ trigger: 'text-[11px]' }"
+      @update:model-value="tab === 'hue' && recenterHueWindow()"
+    />
 
-      <UTooltip v-if="active" text="Remove custom palette">
-        <UButton
-          icon="i-lucide-x"
-          color="neutral"
-          variant="ghost"
-          size="xs"
-          aria-label="Remove custom palette"
-          :ui="{ leadingIcon: 'size-3.5' }"
-          @click.stop="remove"
+    <ThemeStudioCurveEditor
+      v-model="params[tab]"
+      :y-min="windows[tab].min"
+      :y-max="windows[tab].max"
+      :stop-colors="stopColors"
+      @drag-start="onDragStart"
+      @drag-end="onDragEnd"
+    />
+
+    <div class="flex items-center gap-2">
+      <div class="flex flex-1 rounded-sm overflow-hidden ring ring-default">
+        <UTooltip v-for="shade in SHADES" :key="shade" :text="`${shade} · ${shades[shade]}`">
+          <div class="h-5 flex-1" :style="{ backgroundColor: shades[shade] }" />
+        </UTooltip>
+      </div>
+
+      <UTooltip :text="`White on 500: ${contrast.toFixed(1)}:1`">
+        <UBadge
+          :label="contrast >= 4.5 ? 'AA' : contrast >= 3 ? 'AA18' : 'Low'"
+          :color="contrast >= 4.5 ? 'success' : contrast >= 3 ? 'warning' : 'error'"
+          variant="subtle"
+          size="sm"
         />
       </UTooltip>
     </div>
 
-    <template #content>
-      <div class="flex flex-col gap-2.5 pt-3 pb-1">
-        <UTabs
-          v-model="tab"
-          :items="tabs"
-          :content="false"
-          size="xs"
-          color="neutral"
-          :ui="{ trigger: 'text-[11px]' }"
-          @update:model-value="tab === 'hue' && recenterHueWindow()"
-        />
+    <div class="flex items-center gap-1.5">
+      <USelect
+        v-model="styleOffset"
+        size="sm"
+        color="neutral"
+        icon="i-lucide-sparkles"
+        :items="styleOffsetItems"
+        class="flex-1 ring-default rounded-sm hover:bg-elevated/50 text-xs data-[state=open]:bg-elevated/50"
+        :ui="{ item: 'text-xs', trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200' }"
+        @update:model-value="applyStyleOffset($event as string)"
+      />
 
-        <ThemeStudioCurveEditor
-          v-model="params[tab]"
-          :y-min="windows[tab].min"
-          :y-max="windows[tab].max"
-          :stop-colors="stopColors"
-          @drag-start="onDragStart"
-          @drag-end="onDragEnd"
-        />
-
-        <div class="flex items-center gap-2">
-          <div class="flex flex-1 rounded-sm overflow-hidden ring ring-default">
-            <UTooltip v-for="shade in SHADES" :key="shade" :text="`${shade} · ${shades[shade]}`">
-              <div class="h-5 flex-1" :style="{ backgroundColor: shades[shade] }" />
-            </UTooltip>
-          </div>
-
-          <UTooltip :text="`White on 500: ${contrast.toFixed(1)}:1`">
-            <UBadge
-              :label="contrast >= 4.5 ? 'AA' : contrast >= 3 ? 'AA18' : 'Low'"
-              :color="contrast >= 4.5 ? 'success' : contrast >= 3 ? 'warning' : 'error'"
-              variant="subtle"
-              size="sm"
-            />
-          </UTooltip>
-        </div>
-
+      <UTooltip v-if="active" text="Remove custom palette">
         <UButton
-          v-if="!active"
-          label="Use this palette"
-          icon="i-lucide-check"
-          color="neutral"
-          variant="soft"
-          size="xs"
-          block
-          class="text-[11px]"
-          @click="apply"
-        />
-        <UButton
-          v-else
-          label="Remove custom palette"
           icon="i-lucide-trash-2"
           color="neutral"
           variant="soft"
-          size="xs"
-          block
-          class="text-[11px]"
+          size="sm"
+          aria-label="Remove custom palette"
           @click="remove"
         />
-      </div>
-    </template>
-  </UCollapsible>
+      </UTooltip>
+    </div>
+  </div>
 </template>
