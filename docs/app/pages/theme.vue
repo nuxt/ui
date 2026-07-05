@@ -71,6 +71,8 @@ const viewTabs = [
 
         <span class="flex-1" />
 
+        <ThemeStudioImport />
+
         <ThemeStudioExport />
 
         <UTooltip text="Reset theme">

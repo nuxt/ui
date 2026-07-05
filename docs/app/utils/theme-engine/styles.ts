@@ -86,7 +86,7 @@ export const VARIANT_SUPPORT: Record<string, string[]> = {
   textarea: ['outline', 'soft', 'subtle', 'ghost', 'none']
 }
 
-const SIZE_SUPPORT = ['button', 'badge', 'input', 'select', 'textarea']
+export const SIZE_SUPPORT = ['button', 'badge', 'input', 'select', 'textarea']
 
 /** Component groups behind the per-group default-variant selects. */
 export const VARIANT_GROUPS: Record<VariantGroup, string[]> = {
@@ -273,7 +273,7 @@ const FRAME_COLOR_FRAGMENTS: Fragments = {
 }
 
 /** Per-mode values behind the two color variables, per palette choice. */
-const FRAME_COLOR_VALUES: Record<Exclude<BorderColor, 'default' | 'shade' | 'primary-shade'>, { light: string, dark: string }> = {
+export const FRAME_COLOR_VALUES: Record<Exclude<BorderColor, 'default' | 'shade' | 'primary-shade'>, { light: string, dark: string }> = {
   inverted: { light: 'var(--ui-color-neutral-950)', dark: 'white' },
   black: { light: 'black', dark: 'black' },
   white: { light: 'white', dark: 'white' },
@@ -281,7 +281,7 @@ const FRAME_COLOR_VALUES: Record<Exclude<BorderColor, 'default' | 'shade' | 'pri
   neutral: { light: 'var(--ui-color-neutral-900)', dark: 'var(--ui-color-neutral-100)' }
 }
 
-const SHADOW_COLOR_VALUES: Record<Exclude<ShadowColor, 'default' | 'shade' | 'primary-shade'>, { light: string, dark: string }> = {
+export const SHADOW_COLOR_VALUES: Record<Exclude<ShadowColor, 'default' | 'shade' | 'primary-shade'>, { light: string, dark: string }> = {
   black: { light: 'black', dark: 'black' },
   inverted: { light: 'var(--ui-color-neutral-950)', dark: 'white' },
   primary: { light: 'var(--ui-color-primary-500)', dark: 'var(--ui-color-primary-400)' }
