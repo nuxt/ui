@@ -436,8 +436,10 @@ export function useTheme() {
     }
 
     if (settings.primary && SAFE_NAME.test(settings.primary)) primary.value = settings.primary
-    // Custom palettes (injected via customColors) are valid neutrals too, e.g. presets shipping their own ramp.
-    if (settings.neutral && SAFE_NAME.test(settings.neutral) && (neutralColors.includes(settings.neutral) || (customColorsData.value[settings.neutral] || safeCustomColors[settings.neutral]))) neutral.value = settings.neutral
+    // Any known palette is a valid neutral (the studio suggests every ramp
+    // for either role); custom palettes (injected via customColors) count
+    // too, e.g. presets shipping their own ramp.
+    if (settings.neutral && SAFE_NAME.test(settings.neutral) && (neutralColors.includes(settings.neutral) || primaryColors.includes(settings.neutral) || (customColorsData.value[settings.neutral] || safeCustomColors[settings.neutral]))) neutral.value = settings.neutral
     if (settings.radius !== undefined && Number.isFinite(Number(settings.radius))) radius.value = Number(settings.radius)
     // Clamped: these scale the whole page, so a wild value would wreck it.
     if (settings.fontSize !== undefined && Number.isFinite(Number(settings.fontSize))) fontSize.value = Math.min(20, Math.max(12, Number(settings.fontSize)))

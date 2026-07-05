@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { TOKEN_SHADE_TARGETS, TOKEN_GROUPS, SHADES, SHADOW_SHADE_DEFAULTS, BORDER_SHADE_DEFAULTS, SHADOW_GEOMETRY_DEFAULTS } from '../../utils/theme-engine'
-import type { VariantGroup, TokenRamp } from '../../utils/theme-engine'
+import type { VariantGroup, TokenRamp, ColorAlias } from '../../utils/theme-engine'
 
 const appConfig = useAppConfig()
 
@@ -27,6 +27,7 @@ const { selectPalette, isCustomPalette, style, setStyle } = useThemeStudio()
 const openSections = reactive<Record<string, boolean>>({
   primary: true,
   neutral: true,
+  semantic: true,
   radius: true,
   sizing: true,
   defaults: true,
@@ -38,6 +39,20 @@ const openSections = reactive<Record<string, boolean>>({
   // token groups keyed by group name; only the first starts open
   ...Object.fromEntries(TOKEN_GROUPS.map((group, index) => [`tokens-${group.key}`, index === 0]))
 })
+
+// Every ramp is a suggestion for either role: colorful ones lead the
+// primary picker, neutrals lead the background picker.
+const primaryPickerColors = [...primaryColors, ...neutralColors]
+const backgroundPickerColors = [...neutralColors, ...primaryColors]
+
+const semanticAliases: ColorAlias[] = ['secondary', 'success', 'info', 'warning', 'error']
+
+const aliasValues = computed(() => appConfig.ui.colors as Record<string, string>)
+
+/** Palette name → the css var chip name (tailwind's neutral gray is remapped in docs). */
+function paletteChip(name: string) {
+  return name === 'neutral' ? 'old-neutral' : name
+}
 
 const primarySwatch = computed(() => {
   if (blackAsPrimary.value) {
@@ -259,9 +274,9 @@ const shadowColor = computed({
       :unmount-on-hide="false"
     >
       <template #colors>
-        <div class="flex flex-col gap-5 pt-1 pb-4">
-          <fieldset>
-            <legend class="w-full text-xs leading-none font-semibold mb-2.5 select-none flex items-center gap-1 cursor-pointer">
+        <div class="flex flex-col gap-2.5 pt-1 pb-4">
+          <fieldset class="rounded-md ring ring-default bg-default p-2.5">
+            <legend class="w-full text-xs leading-none font-semibold mb-2.5 select-none flex items-center gap-1 cursor-pointer bg-default">
               <UButton
                 label="Primary"
                 color="neutral"
@@ -330,10 +345,10 @@ const shadowColor = computed({
                     </ThemePickerButton>
 
                     <ThemePickerButton
-                      v-for="color in primaryColors"
+                      v-for="color in primaryPickerColors"
                       :key="color"
                       :label="color"
-                      :chip="color"
+                      :chip="paletteChip(color)"
                       :selected="!blackAsPrimary && primary === color"
                       @click="selectPalette('primary', color)"
                     />
@@ -345,10 +360,10 @@ const shadowColor = computed({
             </div>
           </fieldset>
 
-          <fieldset>
+          <fieldset class="rounded-md ring ring-default bg-default p-2.5">
             <legend class="w-full text-xs leading-none font-semibold mb-2.5 select-none flex items-center gap-1 cursor-pointer">
               <UButton
-                label="Neutral"
+                label="Background"
                 color="neutral"
                 variant="ghost"
                 size="xs"
@@ -404,10 +419,10 @@ const shadowColor = computed({
                 <template #content>
                   <div class="grid grid-cols-3 gap-1 w-72 p-2">
                     <ThemePickerButton
-                      v-for="color in neutralColors"
+                      v-for="color in backgroundPickerColors"
                       :key="color"
                       :label="color"
-                      :chip="color === 'neutral' ? 'old-neutral' : color"
+                      :chip="paletteChip(color)"
                       :selected="neutral === color"
                       @click="selectPalette('neutral', color)"
                     />
@@ -418,12 +433,77 @@ const shadowColor = computed({
               <ThemeStudioPaletteEditor v-model:open="neutralEditorOpen" alias="neutral" />
             </div>
           </fieldset>
+
+          <fieldset class="rounded-md ring ring-default bg-default p-2.5">
+            <legend class="w-full text-xs leading-none font-semibold mb-2.5 select-none flex items-center gap-1 cursor-pointer">
+              <UButton
+                label="Semantic"
+                color="neutral"
+                variant="ghost"
+                size="xs"
+                icon="i-lucide-chevron-down"
+                class="flex-1 justify-start -my-1 -ms-1.5 gap-1 text-xs font-semibold text-default"
+                :ui="{ leadingIcon: ['size-3 text-dimmed transition-transform duration-200', !openSections.semantic && '-rotate-90'] }"
+                @click="openSections.semantic = !openSections.semantic"
+              />
+
+              <UButton
+                to="/docs/getting-started/theme/colors"
+                size="xs"
+                color="neutral"
+                variant="link"
+                icon="i-lucide-help-circle"
+                class="p-0 -my-0.5"
+                :ui="{ leadingIcon: 'size-3' }"
+              />
+            </legend>
+
+            <div v-show="openSections.semantic" class="flex flex-col gap-1.5">
+              <div v-for="alias in semanticAliases" :key="alias" class="flex items-center gap-2">
+                <span class="text-[11px] text-muted w-13 shrink-0 capitalize select-none">{{ alias }}</span>
+
+                <UPopover :content="{ side: 'bottom', align: 'start' }" class="flex-1 min-w-0">
+                  <UButton
+                    color="neutral"
+                    variant="outline"
+                    size="sm"
+                    block
+                    trailing-icon="i-lucide-chevron-down"
+                    class="justify-start capitalize ring-default rounded-sm text-[11px] hover:bg-elevated/50 data-[state=open]:bg-elevated/50"
+                    :ui="{ trailingIcon: 'ms-auto size-4 group-data-[state=open]:rotate-180 transition-transform duration-200' }"
+                  >
+                    <template #leading>
+                      <span
+                        class="inline-block size-3 rounded-full"
+                        :style="{ backgroundColor: `var(--color-${paletteChip(aliasValues[alias] || alias)}-500)` }"
+                      />
+                    </template>
+
+                    {{ aliasValues[alias] }}
+                  </UButton>
+
+                  <template #content>
+                    <div class="grid grid-cols-3 gap-1 w-72 p-2">
+                      <ThemePickerButton
+                        v-for="color in primaryPickerColors"
+                        :key="color"
+                        :label="color"
+                        :chip="paletteChip(color)"
+                        :selected="aliasValues[alias] === color"
+                        @click="selectPalette(alias, color)"
+                      />
+                    </div>
+                  </template>
+                </UPopover>
+              </div>
+            </div>
+          </fieldset>
         </div>
       </template>
 
       <template #style>
-        <div class="flex flex-col gap-5 pt-1 pb-4">
-          <fieldset>
+        <div class="flex flex-col gap-2.5 pt-1 pb-4">
+          <fieldset class="rounded-md ring ring-default bg-default p-2.5">
             <legend class="w-full text-xs leading-none font-semibold mb-2.5 select-none flex items-center gap-1 cursor-pointer">
               <UButton
                 label="Radius"
@@ -460,7 +540,7 @@ const shadowColor = computed({
             </div>
           </fieldset>
 
-          <fieldset>
+          <fieldset class="rounded-md ring ring-default bg-default p-2.5">
             <legend class="w-full text-xs leading-none font-semibold mb-2.5 select-none flex items-center gap-1 cursor-pointer">
               <UButton
                 label="Sizing"
@@ -493,7 +573,7 @@ const shadowColor = computed({
             </div>
           </fieldset>
 
-          <fieldset>
+          <fieldset class="rounded-md ring ring-default bg-default p-2.5">
             <legend class="w-full text-xs leading-none font-semibold mb-2.5 select-none flex items-center gap-1 cursor-pointer">
               <UButton
                 label="Defaults"
@@ -538,7 +618,7 @@ const shadowColor = computed({
             </div>
           </fieldset>
 
-          <fieldset>
+          <fieldset class="rounded-md ring ring-default bg-default p-2.5">
             <legend class="w-full text-xs leading-none font-semibold mb-2.5 select-none flex items-center gap-1 cursor-pointer">
               <UButton
                 label="Shadows"
@@ -606,7 +686,7 @@ const shadowColor = computed({
             </div>
           </fieldset>
 
-          <fieldset>
+          <fieldset class="rounded-md ring ring-default bg-default p-2.5">
             <legend class="w-full text-xs leading-none font-semibold mb-2.5 select-none flex items-center gap-1 cursor-pointer">
               <UButton
                 label="Borders"
@@ -659,8 +739,8 @@ const shadowColor = computed({
       </template>
 
       <template #tokens>
-        <div class="flex flex-col gap-5 pt-1 pb-4">
-          <fieldset v-for="group in tokenGroups" :key="group.key">
+        <div class="flex flex-col gap-2.5 pt-1 pb-4">
+          <fieldset v-for="group in tokenGroups" :key="group.key" class="rounded-md ring ring-default bg-default p-2.5">
             <legend class="w-full text-xs leading-none font-semibold mb-2.5 select-none flex items-center gap-1 cursor-pointer">
               <UButton
                 :label="group.label"
@@ -692,8 +772,8 @@ const shadowColor = computed({
       </template>
 
       <template #general>
-        <div class="flex flex-col gap-5 pt-1 pb-4">
-          <fieldset>
+        <div class="flex flex-col gap-2.5 pt-1 pb-4">
+          <fieldset class="rounded-md ring ring-default bg-default p-2.5">
             <legend class="w-full text-xs leading-none font-semibold mb-2.5 select-none flex items-center gap-1 cursor-pointer">
               <UButton
                 label="Font"
@@ -730,7 +810,7 @@ const shadowColor = computed({
             </div>
           </fieldset>
 
-          <fieldset>
+          <fieldset class="rounded-md ring ring-default bg-default p-2.5">
             <legend class="w-full text-xs leading-none font-semibold mb-2.5 select-none flex items-center gap-1 cursor-pointer">
               <UButton
                 label="Icons"

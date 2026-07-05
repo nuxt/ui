@@ -1,6 +1,6 @@
 import colors from 'tailwindcss/colors'
 import { presets, docToSettings, isDefaultTheme, generatePalette, fitPalette, parseCssColor, parseUiColorRef, styleComponents, styleTokens, DEFAULT_COLORS, SHADES, TOKEN_SHADE_TARGETS } from '../utils/theme-engine'
-import type { ThemeDoc, ThemePreset, PaletteCurveParams, StyleOptions, Shade } from '../utils/theme-engine'
+import type { ThemeDoc, ThemePreset, PaletteCurveParams, StyleOptions, Shade, ColorAlias } from '../utils/theme-engine'
 
 function readLocalStorage<T>(key: string, fallback: T): T {
   if (!import.meta.client) return fallback
@@ -114,13 +114,15 @@ export function useThemeStudio() {
   }
 
   /**
-   * Swatch-click entry point. With a custom palette active the swatches act
-   * as curve seeds: the chosen palette is reverse-fitted so the editor shows
-   * the curves that reproduce it, replacing whatever was sculpted before.
-   * Otherwise it is a plain alias switch.
+   * Swatch-click entry point, for any color alias. With a custom palette
+   * active the primary/neutral swatches act as curve seeds: the chosen
+   * palette is reverse-fitted so the editor shows the curves that reproduce
+   * it, replacing whatever was sculpted before. Otherwise it is a plain
+   * alias switch; semantic aliases ride the same persistence channel the
+   * AI theme feature uses.
    */
-  function selectPalette(alias: 'primary' | 'neutral', name: string) {
-    if (isCustomPalette(alias)) {
+  function selectPalette(alias: ColorAlias, name: string) {
+    if ((alias === 'primary' || alias === 'neutral') && isCustomPalette(alias)) {
       const shades = paletteShades(name)
       if (shades) {
         setPaletteFromCurve(alias, fitPalette(shades))
@@ -130,8 +132,12 @@ export function useThemeStudio() {
 
     if (alias === 'primary') {
       theme.primary.value = name
-    } else {
+    } else if (alias === 'neutral') {
       theme.neutral.value = name
+    } else {
+      theme.applyThemeSettings({ [alias]: name }, { track: false })
+      activePreset.value = undefined
+      track('Theme Changed', { setting: alias, value: name })
     }
   }
 
