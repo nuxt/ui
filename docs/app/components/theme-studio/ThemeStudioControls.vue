@@ -191,9 +191,30 @@ function rampChip(ramp: TokenRamp): string {
   return name === 'neutral' ? 'old-neutral' : name
 }
 
-// No 'system' tab: the studio is about previewing a concrete mode, and the
-// resolved value still highlights the right tab for system-pref visitors.
+// No 'system' tab: the studio is about previewing a concrete mode. For
+// system-pref visitors the model can read 'system' before color-mode
+// resolves it — fall back to the scheme class the color-mode script has
+// already stamped on <html>, so a tab is always highlighted.
 const modeTabs = computed(() => modes.value.filter(m => m.label !== 'system').map(m => ({ label: m.label, icon: m.icon, value: m.label })))
+
+// Resolved AFTER mount on purpose: the server can't know a system-pref
+// visitor's scheme, and hydration adopts SSR attributes without patching —
+// a post-mount write is a real update, so the highlight always lands.
+const modeTab = ref<string | undefined>()
+
+onMounted(() => {
+  modeTab.value = mode.value === 'light' || mode.value === 'dark'
+    ? mode.value
+    : document.documentElement.classList.contains('dark') ? 'dark' : 'light'
+})
+
+watch(modeTab, (value) => {
+  if (value && value !== mode.value) mode.value = value
+})
+
+watch(mode, (value) => {
+  if (value === 'light' || value === 'dark') modeTab.value = value
+})
 
 // One curve editor per alias, toggled by the edit icon next to each select.
 const paletteEditors = reactive<Record<string, boolean>>({})
@@ -286,7 +307,7 @@ const shadowColor = computed({
 <template>
   <div class="flex flex-col gap-3">
     <UTabs
-      v-model="mode"
+      v-model="modeTab"
       :items="modeTabs"
       :content="false"
       size="xs"
