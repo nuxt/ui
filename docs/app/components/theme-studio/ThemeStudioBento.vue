@@ -118,7 +118,7 @@ function showToast() {
 </script>
 
 <template>
-  <div class="columns-1 md:columns-2 xl:columns-3 gap-4 space-y-4">
+  <div class="columns-1 md:columns-2 xl:columns-3 gap-4 space-y-4 p-4 sm:p-6">
     <UCard class="break-inside-avoid" :ui="{ body: 'flex flex-col gap-3' }">
       <p class="text-xs font-semibold text-muted uppercase tracking-wide">
         Buttons

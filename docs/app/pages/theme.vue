@@ -18,17 +18,18 @@ if (import.meta.server) {
   })
 }
 
-const { presets, activePreset, applyPreset, shuffle, reset } = useThemeStudio()
+const { reset } = useThemeStudio()
 
 const sidebarOpen = ref(true)
 
-const presetItems = computed(() => presets.map(preset => ({
-  label: preset.name,
-  icon: preset.icon,
-  type: 'checkbox' as const,
-  checked: activePreset.value === preset.id,
-  onSelect: () => applyPreset(preset)
-})))
+/** Preview views: the bento grid plus app-scale layouts from the real templates. */
+const view = ref('grid')
+
+const viewTabs = [
+  { label: 'Grid', icon: 'i-lucide-layout-grid', value: 'grid' },
+  { label: 'Dashboard', icon: 'i-lucide-layout-dashboard', value: 'dashboard' },
+  { label: 'Chat', icon: 'i-lucide-message-circle', value: 'chat' }
+]
 </script>
 
 <template>
@@ -57,31 +58,18 @@ const presetItems = computed(() => presets.map(preset => ({
           Theme Studio
         </h1>
 
-        <UBadge label="Concept" variant="subtle" size="sm" />
-
         <span class="flex-1" />
 
-        <UDropdownMenu :items="presetItems" :content="{ align: 'end' }">
-          <UButton
-            label="Presets"
-            icon="i-lucide-layout-grid"
-            trailing-icon="i-lucide-chevron-down"
-            color="neutral"
-            variant="outline"
-            size="sm"
-          />
-        </UDropdownMenu>
+        <UTabs
+          v-model="view"
+          :items="viewTabs"
+          :content="false"
+          size="xs"
+          color="neutral"
+          :ui="{ trigger: 'text-[11px]' }"
+        />
 
-        <UTooltip text="Random theme">
-          <UButton
-            label="Shuffle"
-            icon="i-lucide-dices"
-            color="neutral"
-            variant="outline"
-            size="sm"
-            @click="shuffle"
-          />
-        </UTooltip>
+        <span class="flex-1" />
 
         <ThemeStudioExport />
 
@@ -97,8 +85,15 @@ const presetItems = computed(() => presets.map(preset => ({
         </UTooltip>
       </div>
 
-      <div class="flex-1 lg:overflow-y-auto p-4 sm:p-6">
-        <ThemeStudioBento />
+      <!-- The grid scrolls as a page; the app-shell views own their height
+           and scroll internally, so the pane locks (bounded on mobile too). -->
+      <div
+        class="flex-1 min-h-0 p-0"
+        :class="view === 'grid' ? 'lg:overflow-y-auto' : 'overflow-hidden max-lg:h-[75vh]'"
+      >
+        <ThemeStudioBento v-if="view === 'grid'" />
+        <ThemeStudioViewDashboard v-else-if="view === 'dashboard'" />
+        <ThemeStudioViewChat v-else-if="view === 'chat'" />
       </div>
     </div>
   </main>

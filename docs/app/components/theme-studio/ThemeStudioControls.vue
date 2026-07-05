@@ -22,7 +22,17 @@ const {
   mode
 } = useTheme()
 
-const { selectPalette, isCustomPalette, style, setStyle } = useThemeStudio()
+const { selectPalette, isCustomPalette, style, setStyle, presets, activePreset, applyPreset, shuffle } = useThemeStudio()
+
+const presetItems = computed(() => presets.map(preset => ({
+  label: preset.name,
+  icon: preset.icon,
+  type: 'checkbox' as const,
+  checked: activePreset.value === preset.id,
+  onSelect: () => applyPreset(preset)
+})))
+
+const presetLabel = computed(() => presets.find(preset => preset.id === activePreset.value)?.name || 'Presets')
 
 const openSections = reactive<Record<string, boolean>>({
   primary: true,
@@ -174,7 +184,9 @@ function rampChip(ramp: TokenRamp): string {
   return name === 'neutral' ? 'old-neutral' : name
 }
 
-const modeTabs = computed(() => modes.value.map(m => ({ label: m.label, icon: m.icon, value: m.label })))
+// No 'system' tab: the studio is about previewing a concrete mode, and the
+// resolved value still highlights the right tab for system-pref visitors.
+const modeTabs = computed(() => modes.value.filter(m => m.label !== 'system').map(m => ({ label: m.label, icon: m.icon, value: m.label })))
 
 // One curve editor per alias, toggled by the edit icon next to each select.
 const paletteEditors = reactive<Record<string, boolean>>({})
@@ -275,6 +287,34 @@ const shadowColor = computed({
       class="w-full"
       :ui="{ trigger: 'text-[11px] capitalize' }"
     />
+
+    <UFieldGroup size="sm" class="flex w-full">
+      <UDropdownMenu :items="presetItems" :content="{ align: 'start' }" class="flex-1 min-w-0">
+        <UButton
+          :label="presetLabel"
+          icon="i-lucide-swatch-book"
+          trailing-icon="i-lucide-chevron-down"
+          color="neutral"
+          variant="outline"
+          size="sm"
+          block
+          class="justify-start ring-default rounded-sm text-[11px] hover:bg-elevated/50 data-[state=open]:bg-elevated/50"
+          :ui="{ trailingIcon: 'ms-auto size-4 group-data-[state=open]:rotate-180 transition-transform duration-200' }"
+        />
+      </UDropdownMenu>
+
+      <UTooltip text="Random theme">
+        <UButton
+          icon="i-lucide-dices"
+          color="neutral"
+          variant="outline"
+          size="sm"
+          aria-label="Random theme"
+          class="ring-default rounded-sm hover:bg-elevated/50"
+          @click="shuffle"
+        />
+      </UTooltip>
+    </UFieldGroup>
 
     <UAccordion
       v-model="openGroups"
