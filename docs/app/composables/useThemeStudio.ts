@@ -75,7 +75,12 @@ export function useThemeStudio() {
     }
     activePreset.value = undefined
 
-    track('Theme Style Changed', { ...style.value })
+    track('Theme Style Changed', {
+      shadow: style.value.shadow || 'none',
+      border: style.value.border || 'default',
+      borderColor: style.value.borderColor || 'default',
+      shadowColor: style.value.shadowColor || 'default'
+    })
   }
 
   let trackedAt: number | undefined
