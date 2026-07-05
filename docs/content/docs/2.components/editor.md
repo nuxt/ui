@@ -155,6 +155,69 @@ const value = ref('<h1>Hello World</h1>\n')
 Check out the image upload example for creating custom TipTap extensions.
 ::
 
+### External editor
+
+When you need full control over the editor — a custom schema, a different `StarterKit`, or a bespoke content lifecycle — you can create the TipTap editor yourself and pass it through the `editor` prop. The Editor then acts as a **shell**: it renders and styles the editor and wires it to the child components ([EditorToolbar](/docs/components/editor-toolbar), menus, …), but leaves the editor's extensions, content and lifecycle entirely to you.
+
+```vue
+<script setup lang="ts">
+import { useEditor } from '@tiptap/vue-3'
+import StarterKit from '@tiptap/starter-kit'
+
+const editor = useEditor({
+  content: '<h1>Hello World</h1>',
+  extensions: [StarterKit]
+})
+</script>
+
+<template>
+  <UEditor :editor="editor">
+    <UEditorToolbar :editor="editor" :items="items" />
+  </UEditor>
+</template>
+```
+
+::note
+In this mode, the engine props (`starter-kit`, `image`, `mention`, `placeholder`, `markdown`, `content-type`, `model-value`, `extensions`) are **ignored** — the external editor owns its content and schema. You must keep full v-model control on your own editor instance, not UEditor component.
+::
+
+This is what enables editors backed by an extended starter kit, such as [comark-tiptap](https://github.com/sandros94/comark-tiptap), which provides a lossless markdown ↔ AST ↔ ProseMirror round-trip:
+
+```vue
+<script setup lang="ts">
+import Mention from '@tiptap/extension-mention'
+import { useComarkEditor } from 'comark-tiptap/vue'
+
+const { editor } = useComarkEditor({
+  content: '# Hello World',
+  contentType: 'markdown',
+  // Your editor owns the schema, so register the extensions the feature
+  // components rely on here — e.g. `Mention` for `UEditorMentionMenu`.
+  extensions: [Mention]
+})
+</script>
+
+<template>
+  <UEditor :editor="editor">
+    <UEditorToolbar :editor="editor" :items="items" />
+
+    <template #fallback>
+      Loading editor…
+    </template>
+  </UEditor>
+</template>
+```
+
+The [EditorToolbar](/docs/components/editor-toolbar) and handlers adapt to your editor's schema, but the mention, emoji and suggestion menus — and `placeholder` — only work once their extensions are registered on your editor (like `Mention` above).
+
+::note
+Nuxt UI automatically injects its `editorProps` (including the theme's base classes) into your editor so it inherits the default styling. Set `:editor-props="false"` to opt out and manage the editor's `editorProps` yourself.
+::
+
+::tip
+Use the `#fallback` slot to render content while an editor that is created asynchronously is not yet available.
+::
+
 ### Placeholder
 
 Use the `placeholder` prop to set a placeholder text that shows in empty paragraphs.

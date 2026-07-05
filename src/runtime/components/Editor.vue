@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { VNode } from 'vue'
+import type { ShallowRef, VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { Editor as TiptapEditor, EditorOptions, Content } from '@tiptap/vue-3'
 import type { StarterKitOptions } from '@tiptap/starter-kit'
@@ -15,12 +15,21 @@ type Editor = ComponentConfig<typeof theme, AppConfig, 'editor'>
 
 export type EditorContentType = 'json' | 'html' | 'markdown'
 
-export interface EditorProps<T extends Content = Content, H extends EditorCustomHandlers = EditorCustomHandlers> extends Omit<Partial<EditorOptions>, 'content' | 'element'> {
+export interface EditorProps<T extends Content = Content, H extends EditorCustomHandlers = EditorCustomHandlers> extends Omit<Partial<EditorOptions>, 'content' | 'element' | 'editorProps'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
    */
   as?: any
+  /**
+   * Provide an externally created TipTap editor instance to use instead of the built-in one.
+   * When set, the component acts as a shell: it renders, styles and wires the editor to child
+   * components (toolbar, menus, …), but does not manage extensions nor `v-model`. The external
+   * editor owns its content, schema and lifecycle, so the engine props (`starterKit`, `image`,
+   * `mention`, `placeholder`, `markdown`, `contentType`, `modelValue`, `extensions`) are ignored.
+   * @see https://tiptap.dev/docs/editor/getting-started/install/vue3
+   */
+  editor?: TiptapEditor | ShallowRef<TiptapEditor | undefined>
   modelValue?: T
   /**
    * The content type the content is provided as.
@@ -67,6 +76,12 @@ export interface EditorProps<T extends Content = Content, H extends EditorCustom
    */
   mention?: boolean | Partial<Omit<MentionOptions, 'suggestion' | 'suggestions'>>
   /**
+   * The TipTap [`editorProps`](https://tiptap.dev/docs/editor/api/editor#editorprops) (e.g. `attributes`, `handleDOMEvents`).
+   * When using an external `editor`, set to `false` to opt out of Nuxt UI automatically injecting
+   * its `editorProps` (including the theme's base classes) into your editor instance.
+   */
+  editorProps?: EditorOptions['editorProps'] | false
+  /**
    * Custom item handlers to override or extend the default handlers.
    * These handlers are provided to all child components (toolbar, suggestion menu, etc.).
    */
@@ -80,12 +95,17 @@ export interface EditorEmits<T extends Content = Content> {
 }
 
 export interface EditorSlots<H extends EditorCustomHandlers = EditorCustomHandlers> {
-  default?(props: { editor: TiptapEditor, handlers: EditorHandlers<H> }): VNode[]
+  default?(props: { editor: TiptapEditor, handlers: EditorHandlers<H>, ui: Editor['ui'] }): VNode[]
+  /**
+   * Rendered while an external `editor` is not yet available (e.g. created asynchronously).
+   * Never rendered in the built-in mode, where the editor is ready synchronously.
+   */
+  fallback?(props: Record<string, never>): VNode[]
 }
 </script>
 
 <script setup lang="ts" generic="T extends Content, H extends EditorCustomHandlers">
-import { computed, provide, useAttrs, watch } from 'vue'
+import { computed, provide, unref, useAttrs, watch, watchEffect } from 'vue'
 import { defu } from 'defu'
 import { Primitive } from 'reka-ui'
 import { mergeAttributes } from '@tiptap/core'
@@ -99,7 +119,7 @@ import StarterKit from '@tiptap/starter-kit'
 import { useEditor, EditorContent } from '@tiptap/vue-3'
 import { reactiveOmit } from '@vueuse/core'
 import { useAppConfig } from '#imports'
-import { useComponentProps } from '../composables/useComponentProps'
+import { isPropBound, useComponentProps } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
 import { createHandlers } from '../utils/editor'
 import { tv } from '../utils/tv'
@@ -125,17 +145,21 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.editor || {}) })
   placeholderMode: typeof props.placeholder === 'object' ? props.placeholder.mode : undefined
 }))
 
-const rootProps = useForwardProps(reactiveOmit(props, 'starterKit', 'extensions', 'editorProps', 'contentType', 'class', 'placeholder', 'markdown', 'image', 'mention', 'handlers'))
+const rootProps = useForwardProps(reactiveOmit(props, 'editor', 'starterKit', 'extensions', 'editorProps', 'contentType', 'class', 'placeholder', 'markdown', 'image', 'mention', 'handlers'))
 
-const editorProps = computed(() => defu(props.editorProps, {
-  attributes: {
-    autocomplete: 'off',
-    autocorrect: 'off',
-    autocapitalize: 'off',
-    ...attrs,
-    class: ui.value.base({ class: props.ui?.base })
-  }
-} as EditorOptions['editorProps']))
+function baseEditorProps(originalClass?: unknown) {
+  return {
+    attributes: {
+      autocomplete: 'off',
+      autocorrect: 'off',
+      autocapitalize: 'off',
+      ...attrs,
+      class: ui.value.base({ class: [originalClass, props.ui?.base] })
+    }
+  } as EditorOptions['editorProps']
+}
+// eslint-disable-next-line vue/no-dupe-keys
+const editorProps = computed(() => defu(props.editorProps === false ? undefined : props.editorProps, baseEditorProps()))
 // eslint-disable-next-line vue/no-dupe-keys
 const contentType = computed(() => props.contentType || (typeof props.modelValue === 'string' ? 'html' : 'json'))
 // eslint-disable-next-line vue/no-dupe-keys
@@ -206,38 +230,99 @@ const extensions = computed(() => [
   ...(props.extensions || [])
 ].filter(extension => !!extension))
 
-const editor = useEditor({
-  ...rootProps.value,
-  content: props.modelValue,
-  contentType: contentType.value,
-  extensions: extensions.value,
-  editorProps: editorProps.value,
-  onCreate: ({ editor }) => {
-    // Force placeholder decorations to render immediately without needing focus
-    if (props.placeholder) {
-      editor.view.dispatch(editor.state.tr)
-    }
-  },
-  onUpdate: ({ editor }) => {
-    let value
-    try {
-      if (contentType.value === 'html') {
-        value = editor.getHTML()
-      } else if (contentType.value === 'json') {
-        value = editor.getJSON()
-      } else if (contentType.value === 'markdown') {
-        value = editor.getMarkdown()
+/**
+ * Detect external-editor mode from the *presence* of the `editor` prop (not its
+ * value), so the component behaves consistently even when the external editor is
+ * created asynchronously and starts out `undefined`.
+ */
+const isExternalEditor = isPropBound('editor')
+const externalEditor = computed(() => unref(props.editor) as TiptapEditor | undefined)
+
+if (import.meta.dev && isExternalEditor) {
+  const inertProps = (['modelValue', 'contentType', 'starterKit', 'image', 'mention', 'placeholder', 'markdown', 'extensions'] as const)
+    .filter(name => isPropBound(name))
+  if (inertProps.length) {
+    console.warn(`[@nuxt/ui] <UEditor> ignores [${inertProps.join(', ')}] when the \`editor\` prop is provided; the external editor owns its content, schema and lifecycle.`)
+  }
+}
+
+/**
+ * Built-in mode owns the editor instance and its `v-model` sync. External mode
+ * skips all of it — no `useEditor` (so no auto-destroy of an editor we don't own).
+ */
+const internalEditor = isExternalEditor
+  ? undefined
+  : useEditor({
+      ...rootProps.value,
+      content: props.modelValue,
+      contentType: contentType.value,
+      extensions: extensions.value,
+      editorProps: editorProps.value,
+      onCreate: ({ editor }) => {
+        // Force placeholder decorations to render immediately without needing focus
+        if (props.placeholder) {
+          editor.view.dispatch(editor.state.tr)
+        }
+      },
+      onUpdate: ({ editor }) => {
+        let value
+        try {
+          if (contentType.value === 'html') {
+            value = editor.getHTML()
+          } else if (contentType.value === 'json') {
+            value = editor.getJSON()
+          } else if (contentType.value === 'markdown') {
+            value = editor.getMarkdown()
+          }
+        } catch (error) {
+          value = editor.getText()
+        }
+
+        emits('update:modelValue', value as T)
       }
-    } catch (error) {
-      value = editor.getText()
+    })
+
+// eslint-disable-next-line vue/no-dupe-keys
+const editor = computed(() => isExternalEditor ? externalEditor.value : internalEditor?.value)
+
+/**
+ * In external mode, inject the component's `editorProps` (including the theme's
+ * base classes) into the user-owned editor so it inherits Nuxt UI's styling,
+ * unless the consumer opted out with `:editor-props="false"`.
+ *
+ * Two writers touch `editorProps` here: this component and the editor's owner.
+ * To coexist, we capture each editor's *pristine* `editorProps` once (WeakMap)
+ * and always merge our injection on top of that snapshot — never on top of a
+ * previous injection. That keeps re-runs idempotent and avoids reverting
+ * `editorProps` the owner sets after creation.
+ */
+if (isExternalEditor) {
+  const originalProps = new WeakMap<TiptapEditor, EditorOptions['editorProps']>()
+
+  watchEffect(() => {
+    const instance = externalEditor.value
+    if (!instance || props.editorProps === false) {
+      return
     }
 
-    emits('update:modelValue', value as T)
-  }
-})
+    if (!originalProps.has(instance)) {
+      originalProps.set(instance, instance.options.editorProps)
+    }
+    const original = originalProps.get(instance)
+
+    instance.setOptions({
+      editorProps: defu(
+        typeof props.editorProps === 'object' ? props.editorProps : undefined,
+        baseEditorProps((original as { attributes?: { class?: unknown } } | undefined)?.attributes?.class),
+        original || {}
+      ) as EditorOptions['editorProps']
+    })
+  })
+}
 
 watch(() => props.modelValue, (newVal) => {
-  if (!editor.value || newVal == null) {
+  // The external editor owns its content, so `v-model` is inert in that mode.
+  if (isExternalEditor || !editor.value || newVal == null) {
     return
   }
 
@@ -285,7 +370,7 @@ defineExpose({
 <template>
   <Primitive :as="props.as" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <template v-if="editor">
-      <slot :editor="editor" :handlers="handlers" />
+      <slot :editor="editor" :handlers="handlers" :ui="ui" />
 
       <EditorContent
         role="presentation"
@@ -294,5 +379,7 @@ defineExpose({
         :class="ui.content({ class: props.ui?.content })"
       />
     </template>
+
+    <slot v-else name="fallback" />
   </Primitive>
 </template>
