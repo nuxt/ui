@@ -313,6 +313,38 @@ describe('style colors', () => {
     expect(styleTokens({ tokenShades: { '--ui-evil': { light: 50, dark: 50 } } })).toEqual({ light: {}, dark: {} })
   })
 
+  it('styleTokens maps primary-ramp token shades and shade modes', async () => {
+    const { styleTokens } = await import('../../docs/app/utils/theme-engine')
+
+    // --ui-primary walks the PRIMARY ramp, not neutral
+    expect(styleTokens({ tokenShades: { '--ui-primary': { light: 600, dark: 300 } } })).toEqual({
+      light: { '--ui-primary': 'var(--ui-color-primary-600)' },
+      dark: { '--ui-primary': 'var(--ui-color-primary-300)' }
+    })
+    // primary-shade modes reroute the frame/shadow colors through the primary ramp
+    expect(styleTokens({ borderColor: 'primary-shade', borderShade: { light: 700, dark: 300 } })).toEqual({
+      light: { '--ui-frame-color': 'var(--ui-color-primary-700)' },
+      dark: { '--ui-frame-color': 'var(--ui-color-primary-300)' }
+    })
+    expect(styleTokens({ shadowColor: 'primary-shade' }).light['--ui-shadow-color']).toBe('var(--ui-color-primary-950)')
+  })
+
+  it('per-group default variants refine the app-wide value', async () => {
+    const { styleComponents } = await import('../../docs/app/utils/theme-engine')
+    const components = styleComponents({ defaults: { variant: 'solid', variants: { inputs: 'subtle', panels: 'outline' } } })
+
+    // untouched group keeps the app-wide value
+    expect(components.button!.defaultVariants).toEqual({ variant: 'solid' })
+    // group choices win for their components
+    expect(components.input!.defaultVariants).toEqual({ variant: 'subtle' })
+    expect(components.card!.defaultVariants).toEqual({ variant: 'outline' })
+    expect(components.alert!.defaultVariants).toEqual({ variant: 'outline' })
+    // group-only, no app-wide: other groups untouched
+    const only = styleComponents({ defaults: { variants: { buttons: 'soft' } } })
+    expect(only.badge!.defaultVariants).toEqual({ variant: 'soft' })
+    expect(only.input).toBeUndefined()
+  })
+
   it('expands app-wide defaults only where the component supports them', async () => {
     const { styleComponents } = await import('../../docs/app/utils/theme-engine')
     const components = styleComponents({ defaults: { variant: 'solid', size: 'lg' } })

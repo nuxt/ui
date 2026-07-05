@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { TOKEN_SHADE_TARGETS, SHADES, SHADOW_SHADE_DEFAULTS, BORDER_SHADE_DEFAULTS, SHADOW_GEOMETRY_DEFAULTS } from '../../utils/theme-engine'
+import type { VariantGroup } from '../../utils/theme-engine'
 
 const {
   neutralColors,
@@ -75,7 +76,8 @@ const borderColorItems = [
   { label: 'White', value: 'white' },
   { label: 'Primary', value: 'primary' },
   { label: 'Neutral', value: 'neutral' },
-  { label: 'Custom…', value: 'shade' }
+  { label: 'Custom…', value: 'shade' },
+  { label: 'Primary shade…', value: 'primary-shade' }
 ]
 
 const shadowColorItems = [
@@ -83,7 +85,8 @@ const shadowColorItems = [
   { label: 'Black', value: 'black' },
   { label: 'Inverted', value: 'inverted' },
   { label: 'Primary', value: 'primary' },
-  { label: 'Custom…', value: 'shade' }
+  { label: 'Custom…', value: 'shade' },
+  { label: 'Primary shade…', value: 'primary-shade' }
 ]
 
 // Slider position ↔ SHADES index, per mode. shadow/border shades write both
@@ -136,6 +139,7 @@ const tokenSections = TOKEN_SHADE_TARGETS.map(target => ({
 }))
 
 const neutralChip = computed(() => neutral.value === 'neutral' ? 'old-neutral' : neutral.value)
+const primaryChip = computed(() => isCustomPalette('primary') ? 'custom-primary' : primary.value)
 
 const modeTabs = computed(() => modes.value.map(m => ({ label: m.label, icon: m.icon, value: m.label })))
 
@@ -168,10 +172,22 @@ const defaultSizeItems = [
   { label: 'XL', value: 'xl' }
 ]
 
-const defaultVariant = computed({
-  get: () => style.value.defaults?.variant || 'default',
-  set: (value: any) => setStyle({ defaults: { ...style.value.defaults, variant: value } })
-})
+// Per-group default variants; the app-wide `variant` (presets, shuffle)
+// shows through as the fallback until a group makes its own choice.
+const variantGroupFields = [
+  { key: 'buttons' as const, label: 'Buttons' },
+  { key: 'panels' as const, label: 'Cards' },
+  { key: 'inputs' as const, label: 'Inputs' }
+]
+
+function groupVariantModel(group: VariantGroup) {
+  return computed({
+    get: () => style.value.defaults?.variants?.[group] || style.value.defaults?.variant || 'default',
+    set: (value: any) => setStyle({ defaults: { ...style.value.defaults, variants: { ...style.value.defaults?.variants, [group]: value } } })
+  })
+}
+
+const groupVariants = Object.fromEntries(variantGroupFields.map(field => [field.key, groupVariantModel(field.key)])) as Record<VariantGroup, ReturnType<typeof groupVariantModel>>
 
 const defaultSize = computed({
   get: () => style.value.defaults?.size || 'default',
@@ -440,26 +456,34 @@ const shadowColor = computed({
               />
             </legend>
 
-            <div v-show="openSections.defaults" class="grid grid-cols-2 gap-1.5">
-              <USelect
-                v-model="defaultVariant"
-                size="sm"
-                color="neutral"
-                icon="i-lucide-layers"
-                :items="defaultVariantItems"
-                class="ring-default rounded-sm hover:bg-elevated/50 text-xs data-[state=open]:bg-elevated/50"
-                :ui="{ item: 'text-xs', trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200' }"
-              />
+            <div v-show="openSections.defaults" class="flex flex-col gap-1.5">
+              <div v-for="field in variantGroupFields" :key="field.key" class="flex items-center gap-2">
+                <span class="text-[11px] text-muted w-13 shrink-0 select-none">{{ field.label }}</span>
 
-              <USelect
-                v-model="defaultSize"
-                size="sm"
-                color="neutral"
-                icon="i-lucide-proportions"
-                :items="defaultSizeItems"
-                class="ring-default rounded-sm hover:bg-elevated/50 text-xs data-[state=open]:bg-elevated/50"
-                :ui="{ item: 'text-xs', trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200' }"
-              />
+                <USelect
+                  v-model="groupVariants[field.key].value"
+                  size="sm"
+                  color="neutral"
+                  icon="i-lucide-layers"
+                  :items="defaultVariantItems"
+                  class="flex-1 ring-default rounded-sm hover:bg-elevated/50 text-xs data-[state=open]:bg-elevated/50"
+                  :ui="{ item: 'text-xs', trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200' }"
+                />
+              </div>
+
+              <div class="flex items-center gap-2">
+                <span class="text-[11px] text-muted w-13 shrink-0 select-none">Size</span>
+
+                <USelect
+                  v-model="defaultSize"
+                  size="sm"
+                  color="neutral"
+                  icon="i-lucide-proportions"
+                  :items="defaultSizeItems"
+                  class="flex-1 ring-default rounded-sm hover:bg-elevated/50 text-xs data-[state=open]:bg-elevated/50"
+                  :ui="{ item: 'text-xs', trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200' }"
+                />
+              </div>
             </div>
           </fieldset>
 
@@ -500,13 +524,13 @@ const shadowColor = computed({
                   :ui="{ item: 'text-xs', trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200' }"
                 />
 
-                <template v-if="shadowColor === 'shade'">
+                <template v-if="shadowColor === 'shade' || shadowColor === 'primary-shade'">
                   <ThemeStudioShadeSlider
                     v-for="(slider, modeName) in shadowShades"
                     :key="modeName"
                     v-model="slider.value"
                     :mode="modeName"
-                    :chip="neutralChip"
+                    :chip="shadowColor === 'primary-shade' ? primaryChip : neutralChip"
                   />
                 </template>
 
@@ -568,13 +592,13 @@ const shadowColor = computed({
                   :ui="{ item: 'text-xs', trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200' }"
                 />
 
-                <template v-if="borderColor === 'shade'">
+                <template v-if="borderColor === 'shade' || borderColor === 'primary-shade'">
                   <ThemeStudioShadeSlider
                     v-for="(slider, modeName) in borderShades"
                     :key="modeName"
                     v-model="slider.value"
                     :mode="modeName"
-                    :chip="neutralChip"
+                    :chip="borderColor === 'primary-shade' ? primaryChip : neutralChip"
                   />
                 </template>
               </div>
@@ -605,7 +629,7 @@ const shadowColor = computed({
                 :key="modeName"
                 v-model="slider.value"
                 :mode="modeName"
-                :chip="neutralChip"
+                :chip="section.ramp === 'primary' ? primaryChip : neutralChip"
               />
             </div>
           </fieldset>

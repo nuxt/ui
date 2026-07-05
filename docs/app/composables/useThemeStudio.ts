@@ -217,16 +217,16 @@ export function useThemeStudio() {
   function deriveStyle(doc: ThemeDoc): StyleOptions {
     const derived: StyleOptions = { ...(doc.style || {}) }
 
-    const parse = (value?: string) => {
+    const parse = (value: string | undefined, ramp: string) => {
       const ref = parseUiColorRef(value)
-      return ref?.alias === 'neutral' ? ref.shade : undefined
+      return ref?.alias === ramp ? ref.shade : undefined
     }
 
     for (const target of TOKEN_SHADE_TARGETS) {
       if (derived.tokenShades?.[target.token]) continue
 
-      const light = parse(doc.tokens?.light?.[target.token])
-      const dark = parse(doc.tokens?.dark?.[target.token])
+      const light = parse(doc.tokens?.light?.[target.token], target.ramp)
+      const dark = parse(doc.tokens?.dark?.[target.token], target.ramp)
       if (light !== undefined || dark !== undefined) {
         // Only modes the doc actually overrides — backfilling the other
         // mode would turn a non-choice into an exported override.

@@ -28,26 +28,28 @@
 
 export type ShadowStyle = 'none' | 'soft' | 'hard'
 export type BorderStyle = 'default' | 'bold' | 'frame'
-export type BorderColor = 'default' | 'inverted' | 'black' | 'white' | 'primary' | 'neutral' | 'shade'
-export type ShadowColor = 'default' | 'black' | 'inverted' | 'primary' | 'shade'
+export type BorderColor = 'default' | 'inverted' | 'black' | 'white' | 'primary' | 'neutral' | 'shade' | 'primary-shade'
+export type ShadowColor = 'default' | 'black' | 'inverted' | 'primary' | 'shade' | 'primary-shade'
 export type DefaultVariant = 'default' | 'solid' | 'outline' | 'soft' | 'subtle'
 export type DefaultSize = 'default' | 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+export type VariantGroup = 'buttons' | 'panels' | 'inputs'
 
 export interface StyleOptions {
   shadow?: ShadowStyle
   border?: BorderStyle
   borderColor?: BorderColor
   shadowColor?: ShadowColor
-  /** Neutral ramp shade per mode, used when `shadowColor` is 'shade' */
+  /** Ramp shade per mode — neutral for 'shade', primary for 'primary-shade' */
   shadowShade?: { light: number, dark: number }
-  /** Neutral ramp shade per mode, used when `borderColor` is 'shade' */
+  /** Ramp shade per mode — neutral for 'shade', primary for 'primary-shade' */
   borderShade?: { light: number, dark: number }
   /**
-   * App-wide default variant/size, expanded into per-component
-   * `defaultVariants` — the runtime override channel Nuxt UI already
-   * honors — only for components that actually support the chosen value.
+   * Default variant/size, expanded into per-component `defaultVariants` —
+   * the runtime override channel Nuxt UI already honors — only for
+   * components that actually support the chosen value. `variant` applies
+   * app-wide; `variants` refines it per component group and wins where set.
    */
-  defaults?: { variant?: DefaultVariant, size?: DefaultSize }
+  defaults?: { variant?: DefaultVariant, size?: DefaultSize, variants?: Partial<Record<VariantGroup, DefaultVariant>> }
   /**
    * Hard-shadow geometry in px, driving --ui-shadow-offset-x/y/blur/spread.
    * Only meaningful while `shadow` is 'hard'.
@@ -85,6 +87,13 @@ const VARIANT_SUPPORT: Record<string, string[]> = {
 
 const SIZE_SUPPORT = ['button', 'badge', 'input', 'select', 'textarea']
 
+/** Component groups behind the per-group default-variant selects. */
+export const VARIANT_GROUPS: Record<VariantGroup, string[]> = {
+  buttons: ['button', 'badge'],
+  panels: ['card', 'alert'],
+  inputs: ['input', 'select', 'textarea']
+}
+
 export const SHADOW_GEOMETRY_DEFAULTS = { x: 3, y: 3, blur: 0, spread: 0 }
 
 /** Borders default opposite to the surface: dark ink on light, pale on dark. */
@@ -93,13 +102,15 @@ export const BORDER_SHADE_DEFAULTS = { light: 900, dark: 200 }
 /**
  * Semantic tokens the studio exposes as per-mode shade sliders, with the
  * library/docs default shades. 'white' library values map to shade 50.
+ * `ramp` names the color scale the slider walks (and the token references).
  */
-export const TOKEN_SHADE_TARGETS: Array<{ token: string, label: string, defaults: { light: number, dark: number } }> = [
-  { token: '--ui-bg', label: 'Background', defaults: { light: 50, dark: 900 } },
-  { token: '--ui-bg-inverted', label: 'Inverted', defaults: { light: 900, dark: 50 } },
-  { token: '--ui-text-highlighted', label: 'Highlighted', defaults: { light: 900, dark: 50 } },
-  { token: '--ui-text-muted', label: 'Muted', defaults: { light: 500, dark: 400 } },
-  { token: '--ui-text-dimmed', label: 'Dimmed', defaults: { light: 400, dark: 500 } }
+export const TOKEN_SHADE_TARGETS: Array<{ token: string, label: string, ramp: 'neutral' | 'primary', defaults: { light: number, dark: number } }> = [
+  { token: '--ui-primary', label: 'Primary', ramp: 'primary', defaults: { light: 500, dark: 400 } },
+  { token: '--ui-bg', label: 'Background', ramp: 'neutral', defaults: { light: 50, dark: 900 } },
+  { token: '--ui-bg-inverted', label: 'Inverted', ramp: 'neutral', defaults: { light: 900, dark: 50 } },
+  { token: '--ui-text-highlighted', label: 'Highlighted', ramp: 'neutral', defaults: { light: 900, dark: 50 } },
+  { token: '--ui-text-muted', label: 'Muted', ramp: 'neutral', defaults: { light: 500, dark: 400 } },
+  { token: '--ui-text-dimmed', label: 'Dimmed', ramp: 'neutral', defaults: { light: 400, dark: 500 } }
 ]
 export const SHADOW_SHADE_DEFAULTS = { light: 950, dark: 800 }
 
@@ -217,7 +228,7 @@ const FRAME_COLOR_FRAGMENTS: Fragments = {
 }
 
 /** Per-mode values behind the two color variables, per palette choice. */
-const FRAME_COLOR_VALUES: Record<Exclude<BorderColor, 'default' | 'shade'>, { light: string, dark: string }> = {
+const FRAME_COLOR_VALUES: Record<Exclude<BorderColor, 'default' | 'shade' | 'primary-shade'>, { light: string, dark: string }> = {
   inverted: { light: 'var(--ui-color-neutral-950)', dark: 'white' },
   black: { light: 'black', dark: 'black' },
   white: { light: 'white', dark: 'white' },
@@ -225,7 +236,7 @@ const FRAME_COLOR_VALUES: Record<Exclude<BorderColor, 'default' | 'shade'>, { li
   neutral: { light: 'var(--ui-color-neutral-900)', dark: 'var(--ui-color-neutral-100)' }
 }
 
-const SHADOW_COLOR_VALUES: Record<Exclude<ShadowColor, 'default' | 'shade'>, { light: string, dark: string }> = {
+const SHADOW_COLOR_VALUES: Record<Exclude<ShadowColor, 'default' | 'shade' | 'primary-shade'>, { light: string, dark: string }> = {
   black: { light: 'black', dark: 'black' },
   inverted: { light: 'var(--ui-color-neutral-950)', dark: 'white' },
   primary: { light: 'var(--ui-color-primary-500)', dark: 'var(--ui-color-primary-400)' }
@@ -240,19 +251,21 @@ export function styleTokens(style: StyleOptions): { light: Record<string, string
   const light: Record<string, string> = {}
   const dark: Record<string, string> = {}
 
-  if (style.borderColor === 'shade') {
+  if (style.borderColor === 'shade' || style.borderColor === 'primary-shade') {
+    const ramp = style.borderColor === 'primary-shade' ? 'primary' : 'neutral'
     const shade = { ...BORDER_SHADE_DEFAULTS, ...style.borderShade }
-    light['--ui-frame-color'] = `var(--ui-color-neutral-${shade.light})`
-    dark['--ui-frame-color'] = `var(--ui-color-neutral-${shade.dark})`
+    light['--ui-frame-color'] = `var(--ui-color-${ramp}-${shade.light})`
+    dark['--ui-frame-color'] = `var(--ui-color-${ramp}-${shade.dark})`
   } else if (style.borderColor && style.borderColor !== 'default') {
     const value = FRAME_COLOR_VALUES[style.borderColor]
     light['--ui-frame-color'] = value.light
     dark['--ui-frame-color'] = value.dark
   }
   for (const [token, shade] of Object.entries(style.tokenShades || {})) {
-    if (TOKEN_SHADE_TARGETS.some(target => target.token === token)) {
-      if (shade.light !== undefined) light[token] = `var(--ui-color-neutral-${shade.light})`
-      if (shade.dark !== undefined) dark[token] = `var(--ui-color-neutral-${shade.dark})`
+    const target = TOKEN_SHADE_TARGETS.find(target => target.token === token)
+    if (target) {
+      if (shade.light !== undefined) light[token] = `var(--ui-color-${target.ramp}-${shade.light})`
+      if (shade.dark !== undefined) dark[token] = `var(--ui-color-${target.ramp}-${shade.dark})`
     }
   }
 
@@ -269,12 +282,13 @@ export function styleTokens(style: StyleOptions): { light: Record<string, string
     }
   }
 
-  if (style.shadowColor === 'shade') {
-    // Per-mode neutral ramp shade — a graded gray shadow that darkens or
-    // lightens independently of the scheme it sits on.
+  if (style.shadowColor === 'shade' || style.shadowColor === 'primary-shade') {
+    // Per-mode ramp shade — a graded shadow that darkens or lightens
+    // independently of the scheme it sits on; the primary ramp tints it.
+    const ramp = style.shadowColor === 'primary-shade' ? 'primary' : 'neutral'
     const shade = { ...SHADOW_SHADE_DEFAULTS, ...style.shadowShade }
-    light['--ui-shadow-color'] = `var(--ui-color-neutral-${shade.light})`
-    dark['--ui-shadow-color'] = `var(--ui-color-neutral-${shade.dark})`
+    light['--ui-shadow-color'] = `var(--ui-color-${ramp}-${shade.light})`
+    dark['--ui-shadow-color'] = `var(--ui-color-${ramp}-${shade.dark})`
   } else if (style.shadowColor && style.shadowColor !== 'default') {
     const value = SHADOW_COLOR_VALUES[style.shadowColor]
     light['--ui-shadow-color'] = value.light
@@ -300,6 +314,22 @@ export function styleComponents(style: StyleOptions): Fragments {
       }
     }
   }
+  // Group refinements land after the app-wide value, replacing it for the
+  // components they cover — unsupported values still fall through silently.
+  for (const [group, components] of Object.entries(VARIANT_GROUPS)) {
+    const groupVariant = style.defaults?.variants?.[group as VariantGroup]
+    if (groupVariant && groupVariant !== 'default') {
+      for (const component of components) {
+        if (VARIANT_SUPPORT[component]?.includes(groupVariant)) {
+          defaults[component] = {
+            ...defaults[component],
+            defaultVariants: { ...defaults[component]?.defaultVariants, variant: groupVariant }
+          }
+        }
+      }
+    }
+  }
+
   const size = style.defaults?.size
   if (size && size !== 'default') {
     for (const component of SIZE_SUPPORT) {
