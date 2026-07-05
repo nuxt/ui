@@ -28,7 +28,9 @@ const view = ref('grid')
 const viewTabs = [
   { label: 'Grid', icon: 'i-lucide-layout-grid', value: 'grid' },
   { label: 'Dashboard', icon: 'i-lucide-layout-dashboard', value: 'dashboard' },
-  { label: 'Chat', icon: 'i-lucide-message-circle', value: 'chat' }
+  { label: 'Chat', icon: 'i-lucide-message-circle', value: 'chat' },
+  { label: 'SaaS', icon: 'i-lucide-rocket', value: 'saas' },
+  { label: 'Landing', icon: 'i-lucide-panels-top-left', value: 'landing' }
 ]
 </script>
 
@@ -96,6 +98,8 @@ const viewTabs = [
         <ThemeStudioBento v-if="view === 'grid'" />
         <ThemeStudioViewDashboard v-else-if="view === 'dashboard'" />
         <ThemeStudioViewChat v-else-if="view === 'chat'" />
+        <ThemeStudioViewSaas v-else-if="view === 'saas'" />
+        <ThemeStudioViewLanding v-else-if="view === 'landing'" />
       </div>
     </div>
   </main>
