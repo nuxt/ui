@@ -101,8 +101,8 @@ const shadowOpacity = computed({
 })
 
 const borderOptions = [
-  { label: 'Default', value: 'default' },
   { label: 'None', value: 'none' },
+  { label: 'Default', value: 'default' },
   { label: 'Custom', value: 'custom' }
 ] as const
 
@@ -115,6 +115,12 @@ const borderStyle = computed(() => {
 const borderWidth = computed({
   get: () => style.value.borderWidth ?? BORDER_WIDTH_DEFAULT,
   set: (value: number) => setStyle({ borderWidth: value })
+})
+
+// Outline solid/soft surfaces too — the neobrutalist frame look.
+const frameSolids = computed({
+  get: () => !!style.value.frame || style.value.border === 'frame',
+  set: (value: boolean) => setStyle({ frame: value })
 })
 
 const borderColorItems = [
@@ -846,6 +852,14 @@ const shadowColor = computed({
                   <USlider v-model="borderWidth" :min="1" :max="4" :step="1" size="xs" />
 
                   <span class="text-[11px] text-dimmed font-mono w-8 text-right shrink-0">{{ borderWidth }}px</span>
+                </div>
+
+                <div class="flex items-center gap-2">
+                  <span class="text-[11px] text-muted w-13 shrink-0 select-none">Frame</span>
+
+                  <UTooltip text="Outline solid surfaces too — the neobrutalist look">
+                    <USwitch v-model="frameSolids" size="sm" aria-label="Frame solid surfaces" />
+                  </UTooltip>
                 </div>
 
                 <USelect

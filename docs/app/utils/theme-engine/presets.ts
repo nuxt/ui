@@ -92,6 +92,7 @@ export const presets: ThemePreset[] = [{
     style: {
       shadow: 'hard',
       border: 'custom',
+      frame: true,
       borderColor: 'inverted'
     }
   }
@@ -207,6 +208,7 @@ export const presets: ThemePreset[] = [{
       shadow: 'hard',
       shadowColor: 'black',
       border: 'custom',
+      frame: true,
       borderColor: 'black'
     }
   }

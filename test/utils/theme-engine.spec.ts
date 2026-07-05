@@ -343,8 +343,14 @@ describe('style colors', () => {
     expect(none.card!.compoundVariants).toContainEqual({ variant: 'outline', class: { root: 'ring-0' } })
     expect(none.dropdownMenu!.slots!.content).toBe('ring-0')
 
-    // legacy saved values keep working as custom at the default width
-    expect(styleComponents({ border: 'frame' }).button!.compoundVariants).toContainEqual({ variant: 'outline', class: 'ring-2' })
+    // the frame toggle outlines solid/soft surfaces at the chosen width
+    const framed = styleComponents({ border: 'custom', borderWidth: 3, frame: true })
+    expect(framed.button!.compoundVariants).toContainEqual({ variant: 'solid', class: 'ring-3 ring-inset ring-(--ui-border-accented)' })
+    expect(framed.card!.compoundVariants).toContainEqual({ variant: 'soft', class: { root: 'ring-3 ring-(--ui-border-accented)' } })
+    expect(JSON.stringify(framed.button!.compoundVariants)).not.toContain('"ghost"')
+
+    // legacy saved values keep working: bold = custom width, frame keeps outlines
+    expect(styleComponents({ border: 'frame' }).button!.compoundVariants).toContainEqual({ variant: 'solid', class: 'ring-2 ring-inset ring-(--ui-border-accented)' })
     expect(styleComponents({ border: 'bold' }).input!.compoundVariants).toContainEqual({ variant: 'subtle', class: 'ring-2' })
   })
 

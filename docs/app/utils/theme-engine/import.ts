@@ -364,7 +364,7 @@ function extractDefaults(components: Record<string, any>): StyleOptions['default
 }
 
 /** Border treatment lives only in the class bundles — read it back from them. */
-function detectBorder(components: Record<string, any>): Pick<StyleOptions, 'border' | 'borderWidth'> {
+function detectBorder(components: Record<string, any>): Pick<StyleOptions, 'border' | 'borderWidth' | 'frame'> {
   const classOf = (entry: Record<string, unknown>) => typeof entry.class === 'string' ? entry.class : Object.values(entry.class || {}).join(' ')
   const texts = Object.values(components).flatMap(component => [
     ...Object.values((component?.slots || {}) as Record<string, string>),
@@ -375,7 +375,19 @@ function detectBorder(components: Record<string, any>): Pick<StyleOptions, 'bord
   if (!widths.length) return {}
   const width = widths[0]!
   if (width === 0) return { border: 'none' }
-  return { border: 'custom', ...(width !== BORDER_WIDTH_DEFAULT ? { borderWidth: width } : {}) }
+
+  // Frame outlines live on solid-variant compounds referencing the accented border
+  const framed = Object.values(components).some(component =>
+    ((component?.compoundVariants || []) as Array<Record<string, unknown>>).some(entry =>
+      entry.variant === 'solid' && classOf(entry).includes('ring-(--ui-border-accented)')
+    )
+  )
+
+  return {
+    border: 'custom',
+    ...(width !== BORDER_WIDTH_DEFAULT ? { borderWidth: width } : {}),
+    ...(framed ? { frame: true } : {})
+  }
 }
 
 /** Shadow fallback when only a config was pasted (CSS normally decides). */
@@ -468,6 +480,7 @@ export function importTheme(input: { css?: string, config?: string }): ThemeImpo
   if (border.border) {
     style.border = border.border
     if (border.borderWidth !== undefined) style.borderWidth = border.borderWidth
+    if (border.frame) style.frame = true
   }
   const defaults = extractDefaults(components)
   if (defaults) style.defaults = defaults

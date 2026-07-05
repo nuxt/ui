@@ -47,6 +47,11 @@ export interface StyleOptions {
   /** Ring width in px (1–4) while `border` is 'custom'; 2 when unset. */
   borderWidth?: number
   /**
+   * Frame solid/soft surfaces too (the neobrutalist outline-everything
+   * look) — only meaningful while `border` is 'custom'.
+   */
+  frame?: boolean
+  /**
    * Default variant/size, expanded into per-component `defaultVariants` —
    * the runtime override channel Nuxt UI already honors — only for
    * components that actually support the chosen value. `variant` applies
@@ -291,15 +296,60 @@ function ringFragments(width: number): Fragments {
   }
 }
 
+/** Width-parametric frame outlines (whole literals for the scanner). */
+const FRAME_INSET_CLASSES: Record<number, string> = {
+  1: 'ring-1 ring-inset ring-(--ui-border-accented)',
+  2: 'ring-2 ring-inset ring-(--ui-border-accented)',
+  3: 'ring-3 ring-inset ring-(--ui-border-accented)',
+  4: 'ring-4 ring-inset ring-(--ui-border-accented)'
+}
+const FRAME_CLASSES: Record<number, string> = {
+  1: 'ring-1 ring-(--ui-border-accented)',
+  2: 'ring-2 ring-(--ui-border-accented)',
+  3: 'ring-3 ring-(--ui-border-accented)',
+  4: 'ring-4 ring-(--ui-border-accented)'
+}
+
+/** The frame toggle: outline solid/soft surfaces too, at the chosen width. */
+function frameFragments(width: number): Fragments {
+  const inset = FRAME_INSET_CLASSES[width] || FRAME_INSET_CLASSES[BORDER_WIDTH_DEFAULT]!
+  const outset = FRAME_CLASSES[width] || FRAME_CLASSES[BORDER_WIDTH_DEFAULT]!
+  const frame = (cls: string, slot?: string) =>
+    ['solid', 'soft'].map(variant => ({ variant, class: slot ? { [slot]: cls } : cls }))
+
+  return {
+    // card's own ring is non-inset; everything else frames inside its edge
+    card: { compoundVariants: frame(outset, 'root') },
+    empty: { compoundVariants: frame(outset, 'root') },
+    alert: { compoundVariants: frame(inset, 'root') },
+    button: { compoundVariants: frame(inset) },
+    badge: { compoundVariants: frame(inset) }
+  }
+}
+
 /**
- * 'none' zeroes every ring, 'custom' sets the chosen width. Legacy
- * 'bold'/'frame' (old exports and saved prefs) read as custom at the
- * default width — the frame treatment's solid-surface outlines retired.
+ * 'none' zeroes every ring, 'custom' sets the chosen width and optionally
+ * frames solid surfaces. Legacy 'bold'/'frame' (old exports and saved
+ * prefs) read as custom at the default width, 'frame' keeping its outlines.
  */
 function borderFragments(style: StyleOptions): Fragments {
   if (!style.border || style.border === 'default') return {}
   if (style.border === 'none') return ringFragments(0)
-  return ringFragments(style.borderWidth ?? BORDER_WIDTH_DEFAULT)
+
+  const width = style.borderWidth ?? BORDER_WIDTH_DEFAULT
+  const rings = ringFragments(width)
+  if (!style.frame && style.border !== 'frame') return rings
+
+  const framed = frameFragments(width)
+  return Object.fromEntries(
+    [...new Set([...Object.keys(rings), ...Object.keys(framed)])].map(key => [key, {
+      ...rings[key],
+      ...framed[key],
+      ...(rings[key]?.compoundVariants || framed[key]?.compoundVariants
+        ? { compoundVariants: [...(rings[key]?.compoundVariants || []), ...(framed[key]?.compoundVariants || [])] }
+        : {})
+    }])
+  )
 }
 
 /**
