@@ -21,6 +21,8 @@ function readLocalStorage<T>(key: string, fallback: T): T {
 // which keeps every downstream sink (live useHead styles and the FOUC inline scripts) safe.
 const SAFE_NAME = /^[\w -]{1,50}$/
 const SAFE_HEX = /^#[0-9a-f]{3,8}$/i
+// The engine's canonical shade format (tailwind v4 style): `oklch(62.3% 0.214 259.815)`.
+const SAFE_OKLCH = /^oklch\(\d{1,3}(?:\.\d+)?% \d(?:\.\d+)? \d{1,3}(?:\.\d+)?\)$/i
 const SAFE_CSS_VAR_KEY = /^--[\w-]+$/
 const SAFE_CSS_VAR_VALUE = /^(?:var\(--[\w-]+\)|#[0-9a-f]{3,8}|[a-z]+|-?\d{1,3}(?:\.\d+)?(?:px|%))$/i
 
@@ -29,9 +31,9 @@ function sanitizeCustomColors(input: Record<string, any>): Record<string, Record
   for (const [name, shades] of Object.entries(input)) {
     if (!SAFE_NAME.test(name) || typeof shades !== 'object' || !shades) continue
     const safeShades: Record<string, string> = {}
-    for (const [shade, hex] of Object.entries(shades as Record<string, unknown>)) {
-      if (/^\d{2,3}$/.test(shade) && typeof hex === 'string' && SAFE_HEX.test(hex)) {
-        safeShades[shade] = hex
+    for (const [shade, value] of Object.entries(shades as Record<string, unknown>)) {
+      if (/^\d{2,3}$/.test(shade) && typeof value === 'string' && (SAFE_OKLCH.test(value) || SAFE_HEX.test(value))) {
+        safeShades[shade] = value
       }
     }
     if (Object.keys(safeShades).length) result[name] = safeShades
@@ -189,7 +191,7 @@ export function useTheme() {
     const entries = Object.entries(customColorsData.value)
     if (!entries.length) return ''
     const vars = entries.flatMap(([name, shades]) =>
-      Object.entries(shades).map(([shade, hex]) => `--color-${name}-${shade}: ${hex};`)
+      Object.entries(shades).map(([shade, color]) => `--color-${name}-${shade}: ${color};`)
     )
     return `:root { ${vars.join(' ')} }`
   })

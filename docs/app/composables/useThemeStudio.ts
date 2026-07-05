@@ -93,11 +93,11 @@ export function useThemeStudio() {
     return (appConfig.ui.colors as Record<string, string>)[alias] === customPaletteName(alias)
   }
 
-  /** All 11 shade hexes of a named palette — tailwind's JS values first, CSS variables as fallback. */
+  /** All 11 shades of a named palette as oklch — tailwind's JS values first, CSS variables as fallback. */
   function paletteShades(name: string): Partial<Record<Shade, string>> | undefined {
     const tailwind = (colors as Record<string, any>)[name]
     if (tailwind && typeof tailwind === 'object') {
-      return Object.fromEntries(SHADES.map(shade => [shade, parseCssColor(tailwind[shade])]).filter(([, hex]) => hex))
+      return Object.fromEntries(SHADES.map(shade => [shade, parseCssColor(tailwind[shade])]).filter(([, color]) => color))
     }
 
     if (import.meta.client) {
@@ -105,7 +105,7 @@ export function useThemeStudio() {
       const cssName = name === 'neutral' ? 'old-neutral' : name
       const entries = SHADES
         .map(shade => [shade, parseCssColor(styles.getPropertyValue(`--color-${cssName}-${shade}`))] as const)
-        .filter(([, hex]) => hex)
+        .filter(([, color]) => color)
       if (entries.length >= 2) {
         return Object.fromEntries(entries)
       }

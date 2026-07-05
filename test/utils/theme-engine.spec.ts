@@ -7,7 +7,15 @@ import {
   docToSettings,
   resolveToken,
   resolveTokens,
-  presets
+  presets,
+  generatePalette,
+  fitPalette,
+  parseCssColor,
+  parseColor,
+  contrastRatio,
+  CURVE_DEFAULTS,
+  SHADES,
+  CUSTOM_PALETTES
 } from '../../docs/app/utils/theme-engine'
 import type { ThemeDoc } from '../../docs/app/utils/theme-engine'
 import colors from 'tailwindcss/colors'
@@ -76,11 +84,11 @@ describe('theme-engine', () => {
     it('emits custom palettes as @theme static shades', () => {
       const css = generateCSS({
         version: 1,
-        palettes: { clay: { shades: { 500: '#CC785C' } } }
+        palettes: { clay: { shades: { 500: 'oklch(65.8% 0.113 39.145)' } } }
       })
 
       expect(css).toContain('@theme static {')
-      expect(css).toContain('  --color-clay-500: #CC785C;')
+      expect(css).toContain('  --color-clay-500: oklch(65.8% 0.113 39.145);')
     })
   })
 
@@ -123,7 +131,7 @@ describe('theme-engine', () => {
       const settings = docToSettings({
         version: 1,
         colors: { primary: 'signal', neutral: 'ink' },
-        palettes: { signal: { shades: { 500: '#1DB954' } } },
+        palettes: { signal: { shades: { 500: 'oklch(68.9% 0.187 148.921)' } } },
         radius: 0.5,
         font: { sans: 'DM Sans' },
         tokens: { dark: { '--ui-bg': 'var(--ui-color-neutral-950)' } },
@@ -135,7 +143,7 @@ describe('theme-engine', () => {
         neutral: 'ink',
         radius: 0.5,
         font: 'DM Sans',
-        customColors: { signal: { 500: '#1DB954' } },
+        customColors: { signal: { 500: 'oklch(68.9% 0.187 148.921)' } },
         cssVariables: { dark: { '--ui-bg': 'var(--ui-color-neutral-950)' } },
         ui: { button: { slots: { base: 'rounded-full' } } }
       })
@@ -155,13 +163,13 @@ describe('theme-engine', () => {
       const doc: ThemeDoc = {
         version: 1,
         colors: { neutral: 'ink' },
-        palettes: { ink: { shades: { 200: '#DEDEDE' } } }
+        palettes: { ink: { shades: { 200: 'oklch(90.1% 0 0)' } } }
       }
 
       const resolved = resolveToken(doc, 'light', '--ui-border')
 
-      expect(resolved.chain).toEqual(['--ui-border', '--ui-color-neutral-200', '--color-ink-200', '#DEDEDE'])
-      expect(resolved.value).toBe('#DEDEDE')
+      expect(resolved.chain).toEqual(['--ui-border', '--ui-color-neutral-200', '--color-ink-200', 'oklch(90.1% 0 0)'])
+      expect(resolved.value).toBe('oklch(90.1% 0 0)')
     })
 
     it('marks token overrides and resolves their new target', () => {
@@ -203,6 +211,68 @@ describe('theme-engine', () => {
           const resolved = resolveTokens(preset.doc, mode)
           for (const token of Object.keys(preset.doc.tokens?.[mode] || {})) {
             expect(resolved[token]!.value, `${preset.id} ${mode} ${token}`).toMatch(/^#|^oklch\(|^white$|^black$/)
+          }
+        }
+      }
+    })
+  })
+
+  describe('palette colors', () => {
+    // Mirrors the SAFE_OKLCH write boundary in useTheme.ts — a shade that
+    // fails this would be silently dropped by sanitizeCustomColors.
+    const CANONICAL_OKLCH = /^oklch\(\d{1,3}(?:\.\d+)?% \d(?:\.\d+)? \d{1,3}(?:\.\d+)?\)$/
+
+    it('generatePalette emits canonical oklch strings', () => {
+      const shades = generatePalette(CURVE_DEFAULTS)
+      for (const shade of SHADES) {
+        expect(shades[shade]).toMatch(CANONICAL_OKLCH)
+      }
+    })
+
+    it('fitPalette accepts hex and oklch inputs equivalently', () => {
+      // The hex ramp CUSTOM_PALETTES.cocoa was converted from.
+      const cocoaHex = {
+        50: '#FAF6F2', 100: '#F2E9E1', 200: '#E3D2C2', 300: '#CFB49D',
+        400: '#B58F6F', 500: '#966F4C', 600: '#7C5A3C', 700: '#654931',
+        800: '#533C2A', 900: '#453325', 950: '#251A12'
+      } as const
+
+      const fromHex = generatePalette(fitPalette(cocoaHex))
+      const fromOklch = generatePalette(fitPalette(CUSTOM_PALETTES.cocoa!))
+
+      // The fit is a numeric optimization — rounded oklch inputs may land a
+      // hair off the full-precision hex fit, so compare channels, not strings.
+      for (const shade of SHADES) {
+        const a = parseColor(fromHex[shade])!
+        const b = parseColor(fromOklch[shade])!
+        expect(a.l, `L ${shade}`).toBeCloseTo(b.l, 2)
+        expect(a.c, `C ${shade}`).toBeCloseTo(b.c, 2)
+        expect(a.h, `H ${shade}`).toBeCloseTo(b.h, 0)
+      }
+    })
+
+    it('parseCssColor normalizes every supported form to oklch', () => {
+      expect(parseCssColor('#FFFFFF')).toBe('oklch(100% 0 0)')
+      expect(parseCssColor('rgb(255, 255, 255)')).toBe('oklch(100% 0 0)')
+      expect(parseCssColor('oklch(62.3% 0.214 259.815)')).toBe('oklch(62.3% 0.214 259.815)')
+      expect(parseCssColor('gibberish')).toBeUndefined()
+    })
+
+    it('contrastRatio handles oklch and hex inputs', () => {
+      expect(contrastRatio('oklch(100% 0 0)', 'oklch(0% 0 0)')).toBeCloseTo(21, 0)
+      expect(contrastRatio('#FFFFFF', 'oklch(100% 0 0)')).toBeCloseTo(1, 1)
+    })
+
+    it('studio and preset ramps are stored as canonical oklch', () => {
+      for (const [name, shades] of Object.entries(CUSTOM_PALETTES)) {
+        for (const [shade, value] of Object.entries(shades)) {
+          expect(value, `${name}-${shade}`).toMatch(CANONICAL_OKLCH)
+        }
+      }
+      for (const preset of presets) {
+        for (const [name, palette] of Object.entries(preset.doc.palettes || {})) {
+          for (const [shade, value] of Object.entries(palette.shades)) {
+            expect(value, `${preset.id} ${name}-${shade}`).toMatch(CANONICAL_OKLCH)
           }
         }
       }

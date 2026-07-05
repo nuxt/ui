@@ -19,8 +19,8 @@ export function generateCSS(doc: ThemeDoc): string {
 
   const colorLines: string[] = []
   for (const [name, palette] of Object.entries(doc.palettes || {})) {
-    for (const [shade, hex] of Object.entries(palette.shades)) {
-      colorLines.push(`  --color-${name}-${shade}: ${hex};`)
+    for (const [shade, color] of Object.entries(palette.shades)) {
+      colorLines.push(`  --color-${name}-${shade}: ${color};`)
     }
   }
 

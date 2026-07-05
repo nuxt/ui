@@ -1,6 +1,6 @@
 import type { Shade } from './types'
 import { SHADES } from './types'
-import { hexToOklch, oklchToHex } from './oklch'
+import { clampToGamut, formatOklch, parseColor } from './oklch'
 import type { Oklch } from './oklch'
 
 /**
@@ -83,11 +83,13 @@ export function generatePalette(params: PaletteCurveParams): Record<Shade, strin
   for (const [index, shade] of SHADES.entries()) {
     const x = index / (SHADES.length - 1)
 
-    result[shade] = oklchToHex({
+    // Clamp here, not in the serializer: sculpted curves can demand
+    // impossible chroma, and the swatches/contrast math assume sRGB.
+    result[shade] = formatOklch(clampToGamut({
       l: sampleCurve(x, params.lightness),
       c: Math.max(0, sampleCurve(x, params.chroma)),
       h: sampleCurve(x, params.hue)
-    })
+    }))
   }
 
   return result
@@ -175,9 +177,10 @@ export function fitCurve(points: Array<[number, number]>): ChannelCurve {
 export function fitPalette(shades: Partial<Record<Shade, string>>): PaletteCurveParams {
   const stops: Array<{ x: number, color: Oklch }> = []
   for (const [index, shade] of SHADES.entries()) {
-    const hex = shades[shade]
-    if (hex) {
-      stops.push({ x: index / (SHADES.length - 1), color: hexToOklch(hex) })
+    // Accept hex or oklch — older saved docs and pasted ramps are hex.
+    const color = shades[shade] ? parseColor(shades[shade]!) : undefined
+    if (color) {
+      stops.push({ x: index / (SHADES.length - 1), color })
     }
   }
 

@@ -59,7 +59,7 @@ export interface ResolvedToken {
   source: 'default' | 'override'
   /**
    * Inheritance breadcrumb, outermost first, e.g.
-   * `['--ui-border', '--ui-color-neutral-200', '--color-slate-200', '#e2e8f0']`
+   * `['--ui-border', '--ui-color-neutral-200', '--color-slate-200', 'oklch(92.9% 0.013 255.508)']`
    */
   chain: string[]
 }
@@ -76,12 +76,12 @@ export function resolveAlias(doc: ThemeDoc, alias: ColorAlias): string {
   return doc.colors?.[alias] || DEFAULT_COLORS[alias]
 }
 
-/** Hex for a palette shade: custom palette first, then its base, then tailwind. */
+/** Color of a palette shade: custom palette first, then its base, then tailwind. */
 export function resolveShade(doc: ThemeDoc, palette: string, shade: Shade): string | undefined {
   const custom = doc.palettes?.[palette]
   if (custom) {
-    const hex = custom.shades[shade]
-    if (hex) return hex
+    const value = custom.shades[shade]
+    if (value) return value
     if (custom.extends) return resolveShade(doc, custom.extends, shade)
     return undefined
   }
@@ -108,10 +108,10 @@ export function resolveToken(doc: ThemeDoc, mode: ColorMode, token: string): Res
     const palette = resolveAlias(doc, alias as ColorAlias)
     chain.push(`--color-${palette}-${shade}`)
 
-    const hex = resolveShade(doc, palette, Number(shade) as Shade)
-    if (hex) {
-      chain.push(hex)
-      value = hex
+    const color = resolveShade(doc, palette, Number(shade) as Shade)
+    if (color) {
+      chain.push(color)
+      value = color
     }
   } else if (raw) {
     chain.push(raw)
