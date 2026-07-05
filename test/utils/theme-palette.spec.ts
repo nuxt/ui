@@ -3,6 +3,7 @@ import colors from 'tailwindcss/colors'
 import {
   hexToOklch,
   oklchToHex,
+  parseColor,
   inGamut,
   clampToGamut,
   contrastRatio,
@@ -95,12 +96,12 @@ describe('fitCurve', () => {
 })
 
 describe('generatePalette', () => {
-  it('produces 11 valid hex shades', () => {
+  it('produces 11 canonical oklch shades', () => {
     const palette = generatePalette(CURVE_DEFAULTS)
 
     expect(Object.keys(palette)).toHaveLength(SHADES.length)
     for (const shade of SHADES) {
-      expect(palette[shade]).toMatch(/^#[0-9A-F]{6}$/)
+      expect(palette[shade]).toMatch(/^oklch\(\d{1,3}(\.\d+)?% \d(\.\d+)? \d{1,3}(\.\d+)?\)$/)
     }
   })
 
@@ -108,7 +109,7 @@ describe('generatePalette', () => {
     for (const hue of [30, 145, 250]) {
       const flat = { ...CURVE_DEFAULTS.hue, y0: hue, y1: hue, p1y: hue, p2y: hue }
       const palette = generatePalette({ ...CURVE_DEFAULTS, hue: flat })
-      const lightnesses = SHADES.map(shade => hexToOklch(palette[shade]).l)
+      const lightnesses = SHADES.map(shade => parseColor(palette[shade])!.l)
 
       for (let i = 1; i < lightnesses.length; i++) {
         expect(lightnesses[i]!, `hue ${hue} shade ${SHADES[i]}`).toBeLessThan(lightnesses[i - 1]!)
@@ -118,7 +119,7 @@ describe('generatePalette', () => {
 
   it('neutral defaults reach a deep dark end', () => {
     const palette = generatePalette(NEUTRAL_CURVE_DEFAULTS)
-    expect(hexToOklch(palette[950]).l).toBeLessThan(0.16)
+    expect(parseColor(palette[950])!.l).toBeLessThan(0.16)
   })
 })
 
@@ -128,8 +129,8 @@ describe('fitPalette (work backwards from real palettes)', () => {
     const regenerated = generatePalette(fitPalette(original))
 
     for (const shade of SHADES) {
-      const want = hexToOklch(original[shade])
-      const got = hexToOklch(regenerated[shade])
+      const want = parseColor(original[shade])!
+      const got = parseColor(regenerated[shade])!
 
       // A single cubic can't hit every tailwind stop exactly — ~0.045 L is
       // the model floor (worst case rose-900), well under a visible step.
