@@ -476,6 +476,25 @@ describe('style colors', () => {
     expect(only.input).toBeUndefined()
   })
 
+  it('component-specific variants apply only where supported', async () => {
+    const { styleComponents } = await import('../../docs/app/utils/theme-engine')
+
+    // ghost/link exist on buttons but not badges — the group skips badges
+    const ghost = styleComponents({ defaults: { variants: { buttons: 'ghost' } } })
+    expect(ghost.button!.defaultVariants).toEqual({ variant: 'ghost' })
+    expect(ghost.badge).toBeUndefined()
+    const link = styleComponents({ defaults: { variants: { buttons: 'link' } } })
+    expect(link.button!.defaultVariants).toEqual({ variant: 'link' })
+
+    // form fields support ghost and none
+    const none = styleComponents({ defaults: { variants: { inputs: 'none' } } })
+    expect(none.input!.defaultVariants).toEqual({ variant: 'none' })
+    expect(none.select!.defaultVariants).toEqual({ variant: 'none' })
+    expect(none.textarea!.defaultVariants).toEqual({ variant: 'none' })
+    const ghostFields = styleComponents({ defaults: { variants: { inputs: 'ghost' } } })
+    expect(ghostFields.input!.defaultVariants).toEqual({ variant: 'ghost' })
+  })
+
   it('expands app-wide defaults only where the component supports them', async () => {
     const { styleComponents } = await import('../../docs/app/utils/theme-engine')
     const components = styleComponents({ defaults: { variant: 'solid', size: 'lg' } })

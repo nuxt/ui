@@ -30,7 +30,7 @@ export type ShadowStyle = 'none' | 'soft' | 'hard'
 export type BorderStyle = 'default' | 'bold' | 'frame'
 export type BorderColor = 'default' | 'inverted' | 'black' | 'white' | 'primary' | 'neutral' | 'shade' | 'primary-shade'
 export type ShadowColor = 'default' | 'black' | 'inverted' | 'primary' | 'shade' | 'primary-shade'
-export type DefaultVariant = 'default' | 'solid' | 'outline' | 'soft' | 'subtle'
+export type DefaultVariant = 'default' | 'solid' | 'outline' | 'soft' | 'subtle' | 'ghost' | 'link' | 'none'
 export type DefaultSize = 'default' | 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 export type VariantGroup = 'buttons' | 'panels' | 'inputs'
 
@@ -72,17 +72,18 @@ export interface StyleOptions {
   tokenShades?: Record<string, { light?: number, dark?: number }>
 }
 
-/** Which components support which app-wide default variant values. */
-const VARIANT_SUPPORT: Record<string, string[]> = {
-  button: ['solid', 'outline', 'soft', 'subtle'],
+/** Which components support which default variant values. */
+export const VARIANT_SUPPORT: Record<string, string[]> = {
+  button: ['solid', 'outline', 'soft', 'subtle', 'ghost', 'link'],
   badge: ['solid', 'outline', 'soft', 'subtle'],
   alert: ['solid', 'outline', 'soft', 'subtle'],
   card: ['solid', 'outline', 'soft', 'subtle'],
-  // form fields have no solid variant — an unsupported value would
-  // silently unstyle them, so they keep their default instead
-  input: ['outline', 'soft', 'subtle'],
-  select: ['outline', 'soft', 'subtle'],
-  textarea: ['outline', 'soft', 'subtle']
+  // form fields have no solid variant (theirs run outline → none) — an
+  // unsupported value would silently unstyle them, so they keep their
+  // default instead
+  input: ['outline', 'soft', 'subtle', 'ghost', 'none'],
+  select: ['outline', 'soft', 'subtle', 'ghost', 'none'],
+  textarea: ['outline', 'soft', 'subtle', 'ghost', 'none']
 }
 
 const SIZE_SUPPORT = ['button', 'badge', 'input', 'select', 'textarea']

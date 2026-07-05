@@ -193,14 +193,6 @@ const groupItems = [
   { label: 'General', value: 'general', slot: 'general' as const }
 ]
 
-const defaultVariantItems = [
-  { label: 'Default', value: 'default' },
-  { label: 'Solid', value: 'solid' },
-  { label: 'Outline', value: 'outline' },
-  { label: 'Soft', value: 'soft' },
-  { label: 'Subtle', value: 'subtle' }
-]
-
 const defaultSizeItems = [
   { label: 'Default', value: 'default' },
   { label: 'XS', value: 'xs' },
@@ -210,17 +202,29 @@ const defaultSizeItems = [
   { label: 'XL', value: 'xl' }
 ]
 
-// Per-group default variants; the app-wide `variant` (presets, shuffle)
-// shows through as the fallback until a group makes its own choice.
+// Per-group default variants, each offering only what its components
+// actually support (buttons add ghost, form fields run outline → none);
+// the app-wide `variant` (presets, shuffle) shows through as the fallback
+// until a group makes its own choice.
+const variantItems = (values: string[]) => ['default', ...values].map(value => ({ label: value.charAt(0).toUpperCase() + value.slice(1), value }))
+
 const variantGroupFields = [
-  { key: 'buttons' as const, label: 'Buttons' },
-  { key: 'panels' as const, label: 'Cards' },
-  { key: 'inputs' as const, label: 'Inputs' }
+  { key: 'buttons' as const, label: 'Buttons', items: variantItems(['solid', 'outline', 'soft', 'subtle', 'ghost', 'link']) },
+  { key: 'panels' as const, label: 'Cards', items: variantItems(['solid', 'outline', 'soft', 'subtle']) },
+  { key: 'inputs' as const, label: 'Inputs', items: variantItems(['outline', 'soft', 'subtle', 'ghost', 'none']) }
 ]
 
 function groupVariantModel(group: VariantGroup) {
+  const supported = variantGroupFields.find(field => field.key === group)!.items.map(item => item.value)
   return computed({
-    get: () => style.value.defaults?.variants?.[group] || style.value.defaults?.variant || 'default',
+    get: () => {
+      const own = style.value.defaults?.variants?.[group]
+      if (own) return own
+      // An app-wide value this group can't express (e.g. solid inputs)
+      // truthfully reads as Default — the engine skips it there too.
+      const appWide = style.value.defaults?.variant
+      return appWide && supported.includes(appWide) ? appWide : 'default'
+    },
     set: (value: any) => setStyle({ defaults: { ...style.value.defaults, variants: { ...style.value.defaults?.variants, [group]: value } } })
   })
 }
@@ -617,7 +621,7 @@ const shadowColor = computed({
                   size="sm"
                   color="neutral"
                   icon="i-lucide-layers"
-                  :items="defaultVariantItems"
+                  :items="field.items"
                   class="flex-1 ring-default rounded-sm hover:bg-elevated/50 text-xs data-[state=open]:bg-elevated/50"
                   :ui="{ item: 'text-xs', trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200' }"
                 />
