@@ -8,17 +8,17 @@
 
   /* Studio extras: custom neutrals (sand, sage, ash) and primaries
      (cocoa, marine) beyond the stock tailwind palettes. */
-  --color-sand-50: oklch(98% 0.006 84.566);
-  --color-sand-100: oklch(95.3% 0.011 84.579);
-  --color-sand-200: oklch(90.5% 0.02 84.591);
-  --color-sand-300: oklch(83.9% 0.031 83.625);
-  --color-sand-400: oklch(73.7% 0.041 82.274);
-  --color-sand-500: oklch(64.3% 0.044 82.996);
-  --color-sand-600: oklch(55.2% 0.038 80.056);
-  --color-sand-700: oklch(47.4% 0.032 77.861);
-  --color-sand-800: oklch(40.7% 0.026 76.147);
-  --color-sand-900: oklch(36.1% 0.021 75.745);
-  --color-sand-950: oklch(25.1% 0.015 76.21);
+  --color-sand-50: oklch(98% 0.006 84.579);
+  --color-sand-100: oklch(92.7% 0.013 84.455);
+  --color-sand-200: oklch(85.6% 0.02 84.205);
+  --color-sand-300: oklch(75% 0.03 83.784);
+  --color-sand-400: oklch(62.5% 0.041 83.119);
+  --color-sand-500: oklch(52.6% 0.044 82.076);
+  --color-sand-600: oklch(45% 0.038 80.381);
+  --color-sand-700: oklch(38.8% 0.032 77.816);
+  --color-sand-800: oklch(33.4% 0.026 76.102);
+  --color-sand-900: oklch(28.5% 0.021 75.84);
+  --color-sand-950: oklch(24.1% 0.015 76.21);
 
   --color-sage-50: oklch(97.7% 0.004 134.849);
   --color-sage-100: oklch(95% 0.01 140.516);

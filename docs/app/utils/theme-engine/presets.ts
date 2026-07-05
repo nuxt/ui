@@ -359,14 +359,44 @@ export const presets: ThemePreset[] = [{
 }, {
   id: 'harbor',
   name: 'Harbor',
-  description: 'Marine blue on cool ash, bold borders, navy-tinted shadows.',
+  description: 'Sculpted harbor blues — subtle panels, fine borders, misty shadows.',
   icon: 'i-lucide-anchor',
   doc: {
     version: 1,
     meta: { name: 'Harbor', base: 'harbor' },
+    // Deeper, moodier takes on marine/ash sculpted in the curve editor —
+    // the light end starts well below white, so both modes feel overcast.
     palettes: {
-      marine: { shades: CUSTOM_PALETTES.marine! },
-      ash: { shades: CUSTOM_PALETTES.ash! }
+      marine: {
+        shades: {
+          50: 'oklch(97.2% 0.014 250.593)',
+          100: 'oklch(93.4% 0.033 250.984)',
+          200: 'oklch(88% 0.06 251.557)',
+          300: 'oklch(78.9% 0.11 252.327)',
+          400: 'oklch(67% 0.151 253.303)',
+          500: 'oklch(57.6% 0.143 254.468)',
+          600: 'oklch(49.9% 0.123 255.734)',
+          700: 'oklch(43.3% 0.1 256.821)',
+          800: 'oklch(37.2% 0.078 257.093)',
+          900: 'oklch(31.7% 0.057 255.71)',
+          950: 'oklch(26.4% 0.036 252.434)'
+        }
+      },
+      ash: {
+        shades: {
+          50: 'oklch(94% 0.029 264.505)',
+          100: 'oklch(89.3% 0.044 264.423)',
+          200: 'oklch(83.9% 0.042 264.302)',
+          300: 'oklch(74% 0.042 264.139)',
+          400: 'oklch(61.7% 0.042 263.933)',
+          500: 'oklch(52.7% 0.037 263.683)',
+          600: 'oklch(44.8% 0.032 263.395)',
+          700: 'oklch(37.6% 0.026 263.083)',
+          800: 'oklch(30.7% 0.021 262.799)',
+          900: 'oklch(24.1% 0.017 262.757)',
+          950: 'oklch(17.7% 0.012 270.771)'
+        }
+      }
     },
     colors: {
       primary: 'marine',
@@ -374,11 +404,32 @@ export const presets: ThemePreset[] = [{
     },
     radius: 0.125,
     font: { sans: 'Inter' },
+    tokens: {
+      light: {
+        '--ui-bg': 'var(--ui-color-neutral-50)',
+        '--ui-text-inverted': 'var(--ui-color-neutral-50)'
+      },
+      dark: {
+        '--ui-text-highlighted': 'var(--ui-color-neutral-50)',
+        '--ui-bg-inverted': 'var(--ui-color-neutral-50)',
+        '--ui-border-inverted': 'var(--ui-color-neutral-50)'
+      }
+    },
     style: {
       shadow: 'soft',
-      shadowColor: 'primary-shade',
+      shadowColor: 'shade',
+      shadowShade: { light: 400, dark: 950 },
+      shadowOpacity: 40,
       border: 'bold',
-      tokenShades: { '--ui-primary': { dark: 300 } }
+      borderColor: 'shade',
+      borderShade: { light: 200, dark: 700 },
+      defaults: { variants: { panels: 'subtle' } },
+      tokenShades: {
+        '--ui-primary': { dark: 300 },
+        '--ui-success': { light: 600, dark: 600 },
+        '--ui-warning': { light: 700, dark: 700 },
+        '--ui-error': { light: 700, dark: 400 }
+      }
     }
   }
 }, {
