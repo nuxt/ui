@@ -18,9 +18,27 @@ if (import.meta.server) {
   })
 }
 
-const { reset } = useThemeStudio()
+const { reset, style } = useThemeStudio()
 
 const sidebarOpen = ref(true)
+
+// The studio's own chrome follows the border treatment too — whole literal
+// class strings per width so tailwind's scanner sees them.
+const TOOLBAR_EDGE: Record<number, string> = { 0: 'border-b-0', 1: 'border-b', 2: 'border-b-2', 3: 'border-b-3', 4: 'border-b-4' }
+const SIDEBAR_EDGE: Record<number, string> = {
+  0: 'border-b-0 lg:border-r-0',
+  1: 'border-b lg:border-b-0 lg:border-r',
+  2: 'border-b-2 lg:border-b-0 lg:border-r-2',
+  3: 'border-b-3 lg:border-b-0 lg:border-r-3',
+  4: 'border-b-4 lg:border-b-0 lg:border-r-4'
+}
+
+const chromeWidth = computed(() => {
+  const border = style.value.border
+  if (!border || border === 'default') return 1
+  if (border === 'none') return 0
+  return style.value.borderWidth ?? 2
+})
 
 /** Preview views: the bento grid plus app-scale layouts from the real templates. */
 const view = ref('grid')
@@ -38,13 +56,17 @@ const viewTabs = [
   <main class="flex flex-col lg:flex-row lg:h-[calc(100vh-var(--ui-header-height))]">
     <aside
       v-show="sidebarOpen"
-      class="shrink-0 lg:w-80 border-b lg:border-b-0 lg:border-r border-default lg:overflow-y-auto p-4 sm:px-6"
+      class="shrink-0 lg:w-80 border-default lg:overflow-y-auto p-4 sm:px-6"
+      :class="SIDEBAR_EDGE[chromeWidth]"
     >
       <ThemeStudioControls />
     </aside>
 
     <div class="flex-1 flex flex-col min-w-0">
-      <div class="flex items-center gap-2 border-b border-default px-4 sm:px-6 py-3">
+      <div
+        class="flex items-center gap-2 border-default px-4 sm:px-6 py-3"
+        :class="TOOLBAR_EDGE[chromeWidth]"
+      >
         <UTooltip :text="sidebarOpen ? 'Hide settings' : 'Show settings'">
           <UButton
             :icon="sidebarOpen ? 'i-lucide-panel-left-close' : 'i-lucide-panel-left-open'"
