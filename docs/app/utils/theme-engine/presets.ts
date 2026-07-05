@@ -1,4 +1,5 @@
 import type { ThemeDoc } from './types'
+import { CUSTOM_PALETTES } from './custom-palettes'
 
 export interface ThemePreset {
   id: string
@@ -324,6 +325,60 @@ export const presets: ThemePreset[] = [{
           base: 'rounded-full'
         }
       }
+    }
+  }
+}, {
+  id: 'cabin',
+  name: 'Cabin',
+  description: 'Cocoa and sand — a warm, woody lodge with soft buttons.',
+  icon: 'i-lucide-trees',
+  doc: {
+    version: 1,
+    meta: { name: 'Cabin', base: 'cabin' },
+    // the studio's own ramps, inlined so exports are self-contained
+    palettes: {
+      cocoa: { shades: CUSTOM_PALETTES.cocoa! },
+      sand: { shades: CUSTOM_PALETTES.sand! }
+    },
+    colors: {
+      primary: 'cocoa',
+      neutral: 'sand'
+    },
+    radius: 0.375,
+    font: { sans: 'Raleway' },
+    tokens: {
+      light: {
+        '--ui-bg': 'var(--ui-color-neutral-50)'
+      }
+    },
+    style: {
+      shadow: 'soft',
+      defaults: { variants: { buttons: 'soft' } }
+    }
+  }
+}, {
+  id: 'harbor',
+  name: 'Harbor',
+  description: 'Marine blue on cool ash, bold borders, navy-tinted shadows.',
+  icon: 'i-lucide-anchor',
+  doc: {
+    version: 1,
+    meta: { name: 'Harbor', base: 'harbor' },
+    palettes: {
+      marine: { shades: CUSTOM_PALETTES.marine! },
+      ash: { shades: CUSTOM_PALETTES.ash! }
+    },
+    colors: {
+      primary: 'marine',
+      neutral: 'ash'
+    },
+    radius: 0.125,
+    font: { sans: 'Inter' },
+    style: {
+      shadow: 'soft',
+      shadowColor: 'primary-shade',
+      border: 'bold',
+      tokenShades: { '--ui-primary': { dark: 300 } }
     }
   }
 }]
