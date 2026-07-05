@@ -6,11 +6,15 @@
  * path instead. The class strings must stay STATIC literals in this file —
  * tailwind compiles what it can see in source, not what appears at runtime.
  *
- * Ring overrides need two altitudes: slot-base classes cover variants
- * without their own ring (solid/soft/ghost), while `outline`/`subtle` rings
- * come from theme compoundVariants which render AFTER slot classes — so
- * those are overridden with extension compoundVariants, which append later
- * still and win the merge.
+ * Semantics:
+ * - `border: bold` only THICKENS borders that already exist, keeping each
+ *   element's own ring color. Borderless variants (ghost, solid, soft) stay
+ *   borderless. outline/subtle rings come from theme compoundVariants which
+ *   render after slot classes, so their width overrides ship as extension
+ *   compoundVariants (appended later, they win the merge).
+ * - `shadow: hard` uses `--ui-shadow-color` (near-black in light, black in
+ *   dark — a shadow, not a glow) defined in the docs CSS and emitted by the
+ *   export when the treatment is active.
  */
 
 export type ShadowStyle = 'none' | 'soft' | 'hard'
@@ -31,8 +35,6 @@ interface ComponentFragment {
 
 type Fragments = Record<string, ComponentFragment>
 
-const BOLD_RING = 'ring-2 ring-(--ui-border-inverted)'
-
 const SHADOW_FRAGMENTS: Record<ShadowStyle, Fragments> = {
   none: {},
   soft: {
@@ -47,44 +49,49 @@ const SHADOW_FRAGMENTS: Record<ShadowStyle, Fragments> = {
   hard: {
     button: {
       slots: {
-        base: 'shadow-[3px_3px_0_0_var(--ui-border-inverted)] hover:translate-x-[1.5px] hover:translate-y-[1.5px] hover:shadow-[1.5px_1.5px_0_0_var(--ui-border-inverted)] active:translate-x-[3px] active:translate-y-[3px] active:shadow-none transition-[box-shadow,translate,background-color]'
-      }
+        base: 'shadow-[3px_3px_0_0_var(--ui-shadow-color)] hover:translate-x-[1.5px] hover:translate-y-[1.5px] hover:shadow-[1.5px_1.5px_0_0_var(--ui-shadow-color)] active:translate-x-[3px] active:translate-y-[3px] active:shadow-none transition-[box-shadow,translate,background-color]'
+      },
+      // A floating shadow under an invisible box reads as a glitch — ghost
+      // and link buttons stay flat, as in the reference neobrutalism kits.
+      compoundVariants: [
+        { variant: 'ghost', class: 'shadow-none hover:translate-x-0 hover:translate-y-0 hover:shadow-none active:translate-x-0 active:translate-y-0' },
+        { variant: 'link', class: 'shadow-none hover:translate-x-0 hover:translate-y-0 hover:shadow-none active:translate-x-0 active:translate-y-0' }
+      ]
     },
-    card: { slots: { root: 'shadow-[5px_5px_0_0_var(--ui-border-inverted)]' } },
-    input: { slots: { base: 'shadow-[3px_3px_0_0_var(--ui-border-inverted)]' } },
-    select: { slots: { base: 'shadow-[3px_3px_0_0_var(--ui-border-inverted)]' } },
-    textarea: { slots: { base: 'shadow-[3px_3px_0_0_var(--ui-border-inverted)]' } },
-    alert: { slots: { root: 'shadow-[5px_5px_0_0_var(--ui-border-inverted)]' } },
-    badge: { slots: { base: 'shadow-[2px_2px_0_0_var(--ui-border-inverted)]' } }
+    card: { slots: { root: 'shadow-[5px_5px_0_0_var(--ui-shadow-color)]' } },
+    input: { slots: { base: 'shadow-[3px_3px_0_0_var(--ui-shadow-color)]' } },
+    select: { slots: { base: 'shadow-[3px_3px_0_0_var(--ui-shadow-color)]' } },
+    textarea: { slots: { base: 'shadow-[3px_3px_0_0_var(--ui-shadow-color)]' } },
+    alert: { slots: { root: 'shadow-[5px_5px_0_0_var(--ui-shadow-color)]' } },
+    badge: { slots: { base: 'shadow-[2px_2px_0_0_var(--ui-shadow-color)]' } }
   }
 }
 
 const BORDER_FRAGMENTS: Record<BorderStyle, Fragments> = {
   default: {},
   bold: {
-    card: { slots: { root: BOLD_RING } },
-    input: { slots: { base: `${BOLD_RING} ring-inset` } },
-    select: { slots: { base: `${BOLD_RING} ring-inset` } },
-    textarea: { slots: { base: `${BOLD_RING} ring-inset` } },
+    // Width only — each element keeps its own ring color, and elements
+    // without a ring don't gain one.
+    card: { slots: { root: 'ring-2' } },
+    input: { slots: { base: 'ring-2' } },
+    select: { slots: { base: 'ring-2' } },
+    textarea: { slots: { base: 'ring-2' } },
     alert: {
-      slots: { root: BOLD_RING },
       compoundVariants: [
-        { variant: 'outline', class: { root: BOLD_RING } },
-        { variant: 'subtle', class: { root: BOLD_RING } }
+        { variant: 'outline', class: { root: 'ring-2' } },
+        { variant: 'subtle', class: { root: 'ring-2' } }
       ]
     },
     button: {
-      slots: { base: `${BOLD_RING} ring-inset` },
       compoundVariants: [
-        { variant: 'outline', class: `${BOLD_RING} ring-inset` },
-        { variant: 'subtle', class: `${BOLD_RING} ring-inset` }
+        { variant: 'outline', class: 'ring-2' },
+        { variant: 'subtle', class: 'ring-2' }
       ]
     },
     badge: {
-      slots: { base: `${BOLD_RING} ring-inset` },
       compoundVariants: [
-        { variant: 'outline', class: `${BOLD_RING} ring-inset` },
-        { variant: 'subtle', class: `${BOLD_RING} ring-inset` }
+        { variant: 'outline', class: 'ring-2' },
+        { variant: 'subtle', class: 'ring-2' }
       ]
     }
   }

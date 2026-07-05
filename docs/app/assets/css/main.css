@@ -67,3 +67,12 @@ html.theme-studio-dragging body *:not([data-curve-editor] *) {
 :root:not(.dark), .light {
   --ui-bg: var(--ui-color-neutral-50);
 }
+
+/* Shadow color for the studio's hard-shadow treatment — a shadow, not a
+   glow: near-black over light surfaces, pure black in dark mode. */
+:root, .light {
+  --ui-shadow-color: var(--ui-color-neutral-950);
+}
+.dark {
+  --ui-shadow-color: black;
+}

@@ -221,9 +221,14 @@ describe('styleComponents', () => {
     const { styleComponents } = await import('../../docs/app/utils/theme-engine')
     const components = styleComponents({ shadow: 'hard', border: 'bold' })
 
-    expect(components.button!.slots.base).toContain('shadow-[3px_3px_0_0_var(--ui-border-inverted)]')
-    expect(components.button!.slots.base).toContain('ring-2')
-    expect(components.card!.slots.root).toContain('shadow-[5px_5px_0_0_var(--ui-border-inverted)]')
+    expect(components.button!.slots!.base).toContain('shadow-[3px_3px_0_0_var(--ui-shadow-color)]')
+    // bold only thickens existing rings: buttons gain no base ring, the
+    // outline/subtle compound overrides carry width only
+    expect(components.button!.slots!.base).not.toContain('ring')
+    expect(components.button!.compoundVariants).toContainEqual({ variant: 'outline', class: 'ring-2' })
+    expect(components.card!.slots!.root).toContain('shadow-[5px_5px_0_0_var(--ui-shadow-color)]')
+    expect(components.card!.slots!.root).toContain('ring-2')
+    expect(components.card!.slots!.root).not.toContain('ring-(')
   })
 
   it('expands doc.style in docToSettings with explicit components winning', async () => {

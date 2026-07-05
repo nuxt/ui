@@ -40,6 +40,20 @@ export function generateCSS(doc: ThemeDoc): string {
     lines.push('', ':root {', ...rootLines, '}')
   }
 
+  // The hard-shadow component classes reference this variable.
+  if (doc.style?.shadow === 'hard') {
+    lines.push(
+      '',
+      ':root, .light {',
+      '  --ui-shadow-color: var(--ui-color-neutral-950);',
+      '}',
+      '',
+      '.dark {',
+      '  --ui-shadow-color: black;',
+      '}'
+    )
+  }
+
   const lightOverrides = Object.entries(doc.tokens?.light || {})
   if (lightOverrides.length) {
     lines.push('', ':root, .light {', ...lightOverrides.map(([key, val]) => `  ${key}: ${val};`), '}')

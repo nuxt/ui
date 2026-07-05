@@ -66,6 +66,51 @@ export const presets: ThemePreset[] = [{
       light: {
         '--ui-border': 'var(--ui-color-neutral-900)',
         '--ui-border-accented': 'var(--ui-color-neutral-900)'
+      },
+      dark: {
+        '--ui-border': 'var(--ui-color-neutral-100)',
+        '--ui-border-accented': 'var(--ui-color-neutral-100)'
+      }
+    },
+    // The uniform outlined look is this preset's identity, not the generic
+    // bold control's: solid/outline/subtle buttons and badges get the frame
+    // (ghost and link stay borderless, as in the reference neobrutalism kits).
+    components: {
+      button: {
+        compoundVariants: [
+          { variant: 'solid', class: 'ring-2 ring-inset ring-(--ui-border-accented)' },
+          { variant: 'outline', class: 'ring-2 ring-inset ring-(--ui-border-accented)' },
+          { variant: 'subtle', class: 'ring-2 ring-inset ring-(--ui-border-accented)' },
+          { variant: 'soft', class: 'ring-2 ring-inset ring-(--ui-border-accented)' }
+        ]
+      },
+      badge: {
+        compoundVariants: [
+          { variant: 'solid', class: 'ring-2 ring-inset ring-(--ui-border-accented)' },
+          { variant: 'outline', class: 'ring-2 ring-inset ring-(--ui-border-accented)' },
+          { variant: 'subtle', class: 'ring-2 ring-inset ring-(--ui-border-accented)' },
+          { variant: 'soft', class: 'ring-2 ring-inset ring-(--ui-border-accented)' }
+        ]
+      },
+      alert: {
+        compoundVariants: [
+          { variant: 'solid', class: { root: 'ring-2 ring-inset ring-(--ui-border-accented)' } },
+          { variant: 'outline', class: { root: 'ring-2 ring-inset ring-(--ui-border-accented)' } },
+          { variant: 'subtle', class: { root: 'ring-2 ring-inset ring-(--ui-border-accented)' } },
+          { variant: 'soft', class: { root: 'ring-2 ring-inset ring-(--ui-border-accented)' } }
+        ]
+      },
+      card: {
+        slots: { root: 'ring-2 ring-(--ui-border-accented)' }
+      },
+      input: {
+        slots: { base: 'ring-2 ring-inset ring-(--ui-border-accented)' }
+      },
+      select: {
+        slots: { base: 'ring-2 ring-inset ring-(--ui-border-accented)' }
+      },
+      textarea: {
+        slots: { base: 'ring-2 ring-inset ring-(--ui-border-accented)' }
       }
     }
   }
