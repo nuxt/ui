@@ -231,14 +231,14 @@ function showToast() {
 
       <div class="flex items-center gap-3">
         <UChip inset color="success">
-          <UAvatar src="https://github.com/benjamincanac.png" alt="Benjamin Canac" />
+          <UAvatar src="https://avatars.githubusercontent.com/u/22576486" alt="Mike Newbon" />
         </UChip>
         <div class="text-sm">
           <p class="font-medium text-highlighted">
-            Benjamin Canac
+            Mike Newbon
           </p>
           <p class="text-muted">
-            benjamincanac
+            mikenewbon
           </p>
         </div>
         <UButton label="Follow" size="xs" color="neutral" variant="subtle" class="ms-auto" />
