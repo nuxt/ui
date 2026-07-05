@@ -70,6 +70,18 @@ html.theme-studio-dragging body *:not([data-curve-editor] *) {
   /* hard-shadow treatment: a shadow, not a glow */
   --ui-shadow-color: var(--ui-color-neutral-950);
 }
+
+/* Hard-shadow geometry defaults; the studio's sliders override these.
+   The -final- colors fold the opacity slider into the shadow color with
+   per-treatment fallbacks (hard: solid, soft: 25%). */
+:where(:root) {
+  --ui-shadow-offset-x: 3px;
+  --ui-shadow-offset-y: 3px;
+  --ui-shadow-blur: 0px;
+  --ui-shadow-spread: 0px;
+  --ui-shadow-final-hard: color-mix(in oklab, var(--ui-shadow-color) var(--ui-shadow-opacity, 100%), transparent);
+  --ui-shadow-final-soft: color-mix(in oklab, var(--ui-shadow-color) var(--ui-shadow-opacity, 25%), transparent);
+}
 :where(.dark) {
   --ui-shadow-color: black;
 }

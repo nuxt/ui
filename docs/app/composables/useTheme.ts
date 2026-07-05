@@ -22,7 +22,7 @@ function readLocalStorage<T>(key: string, fallback: T): T {
 const SAFE_NAME = /^[\w -]{1,50}$/
 const SAFE_HEX = /^#[0-9a-f]{3,8}$/i
 const SAFE_CSS_VAR_KEY = /^--[\w-]+$/
-const SAFE_CSS_VAR_VALUE = /^(?:var\(--[\w-]+\)|#[0-9a-f]{3,8}|[a-z]+)$/i
+const SAFE_CSS_VAR_VALUE = /^(?:var\(--[\w-]+\)|#[0-9a-f]{3,8}|[a-z]+|-?\d{1,3}(?:\.\d+)?(?:px|%))$/i
 
 function sanitizeCustomColors(input: Record<string, any>): Record<string, Record<string, string>> {
   const result: Record<string, Record<string, string>> = {}

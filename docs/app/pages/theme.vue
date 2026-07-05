@@ -32,72 +32,72 @@ const presetItems = computed(() => presets.map(preset => ({
 </script>
 
 <template>
-  <main class="flex flex-col lg:h-[calc(100vh-var(--ui-header-height))]">
-    <div class="flex items-center gap-2 border-b border-default px-4 sm:px-6 py-3">
-      <UTooltip :text="sidebarOpen ? 'Hide settings' : 'Show settings'">
-        <UButton
-          :icon="sidebarOpen ? 'i-lucide-panel-left-close' : 'i-lucide-panel-left-open'"
-          color="neutral"
-          variant="ghost"
-          size="sm"
-          aria-label="Toggle settings panel"
-          @click="sidebarOpen = !sidebarOpen"
-        />
-      </UTooltip>
+  <main class="flex flex-col lg:flex-row lg:h-[calc(100vh-var(--ui-header-height))]">
+    <aside
+      v-show="sidebarOpen"
+      class="shrink-0 lg:w-80 border-b lg:border-b-0 lg:border-r border-default lg:overflow-y-auto p-4"
+    >
+      <ThemeStudioControls />
+    </aside>
 
-      <h1 class="text-sm font-semibold text-highlighted me-2">
-        Theme Studio
-      </h1>
+    <div class="flex-1 flex flex-col min-w-0">
+      <div class="flex items-center gap-2 border-b border-default px-4 sm:px-6 py-3">
+        <UTooltip :text="sidebarOpen ? 'Hide settings' : 'Show settings'">
+          <UButton
+            :icon="sidebarOpen ? 'i-lucide-panel-left-close' : 'i-lucide-panel-left-open'"
+            color="neutral"
+            variant="ghost"
+            size="sm"
+            aria-label="Toggle settings panel"
+            @click="sidebarOpen = !sidebarOpen"
+          />
+        </UTooltip>
 
-      <UBadge label="Concept" variant="subtle" size="sm" />
+        <h1 class="text-sm font-semibold text-highlighted me-2">
+          Theme Studio
+        </h1>
 
-      <span class="flex-1" />
+        <UBadge label="Concept" variant="subtle" size="sm" />
 
-      <UDropdownMenu :items="presetItems" :content="{ align: 'end' }">
-        <UButton
-          label="Presets"
-          icon="i-lucide-layout-grid"
-          trailing-icon="i-lucide-chevron-down"
-          color="neutral"
-          variant="outline"
-          size="sm"
-        />
-      </UDropdownMenu>
+        <span class="flex-1" />
 
-      <UTooltip text="Random theme">
-        <UButton
-          label="Shuffle"
-          icon="i-lucide-dices"
-          color="neutral"
-          variant="outline"
-          size="sm"
-          @click="shuffle"
-        />
-      </UTooltip>
+        <UDropdownMenu :items="presetItems" :content="{ align: 'end' }">
+          <UButton
+            label="Presets"
+            icon="i-lucide-layout-grid"
+            trailing-icon="i-lucide-chevron-down"
+            color="neutral"
+            variant="outline"
+            size="sm"
+          />
+        </UDropdownMenu>
 
-      <ThemeStudioExport />
+        <UTooltip text="Random theme">
+          <UButton
+            label="Shuffle"
+            icon="i-lucide-dices"
+            color="neutral"
+            variant="outline"
+            size="sm"
+            @click="shuffle"
+          />
+        </UTooltip>
 
-      <UTooltip text="Reset theme">
-        <UButton
-          icon="i-lucide-rotate-ccw"
-          color="neutral"
-          variant="outline"
-          size="sm"
-          aria-label="Reset theme"
-          @click="reset"
-        />
-      </UTooltip>
-    </div>
+        <ThemeStudioExport />
 
-    <div class="flex-1 flex flex-col lg:flex-row min-h-0">
-      <aside
-        v-show="sidebarOpen"
-        class="shrink-0 lg:w-80 border-b lg:border-b-0 lg:border-r border-default lg:overflow-y-auto p-4 sm:p-6"
-      >
-        <ThemeStudioControls />
-      </aside>
+        <UTooltip text="Reset theme">
+          <UButton
+            icon="i-lucide-rotate-ccw"
+            color="neutral"
+            variant="outline"
+            size="sm"
+            aria-label="Reset theme"
+            @click="reset"
+          />
+        </UTooltip>
+      </div>
 
-      <div class="flex-1 min-w-0 lg:overflow-y-auto p-4 sm:p-6">
+      <div class="flex-1 lg:overflow-y-auto p-4 sm:p-6">
         <ThemeStudioBento />
       </div>
     </div>

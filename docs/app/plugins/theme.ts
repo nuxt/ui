@@ -34,6 +34,21 @@ export default defineNuxtPlugin({
       restoreState('nuxt-ui-custom-colors')
       restoreState('nuxt-ui-css-variables')
 
+      // Studio prefs use useState keys that differ from their storage keys
+      // (state must be clearable by resetTheme outside the composable).
+      function restoreNamedState<T>(storageKey: string, stateKey: string) {
+        try {
+          const raw = localStorage.getItem(storageKey)
+          if (raw) {
+            useState<T>(stateKey).value = JSON.parse(raw)
+          }
+        } catch {
+          // ignore malformed localStorage
+        }
+      }
+      restoreNamedState('nuxt-ui-style', 'nuxt-ui-style-prefs')
+      restoreNamedState('nuxt-ui-palette-params', 'nuxt-ui-palette-params-state')
+
       try {
         const extras = JSON.parse(localStorage.getItem('nuxt-ui-ai-theme') || '{}')
         if (extras.colors) {

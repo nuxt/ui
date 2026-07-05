@@ -30,6 +30,8 @@ export type ShadowStyle = 'none' | 'soft' | 'hard'
 export type BorderStyle = 'default' | 'bold' | 'frame'
 export type BorderColor = 'default' | 'inverted' | 'black' | 'white' | 'primary' | 'neutral' | 'shade'
 export type ShadowColor = 'default' | 'black' | 'inverted' | 'primary' | 'shade'
+export type DefaultVariant = 'default' | 'solid' | 'outline' | 'soft' | 'subtle'
+export type DefaultSize = 'default' | 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 
 export interface StyleOptions {
   shadow?: ShadowStyle
@@ -41,6 +43,23 @@ export interface StyleOptions {
   /** Neutral ramp shade per mode, used when `borderColor` is 'shade' */
   borderShade?: { light: number, dark: number }
   /**
+   * App-wide default variant/size, expanded into per-component
+   * `defaultVariants` — the runtime override channel Nuxt UI already
+   * honors — only for components that actually support the chosen value.
+   */
+  defaults?: { variant?: DefaultVariant, size?: DefaultSize }
+  /**
+   * Hard-shadow geometry in px, driving --ui-shadow-offset-x/y/blur/spread.
+   * Only meaningful while `shadow` is 'hard'.
+   */
+  shadowGeometry?: { x?: number, y?: number, blur?: number, spread?: number }
+  /**
+   * Shadow opacity in percent, driving --ui-shadow-opacity. Applies to both
+   * treatments; unset falls back to 100% (hard) / 25% (soft) via the
+   * per-treatment color-mix fallbacks.
+   */
+  shadowOpacity?: number
+  /**
    * Semantic token → neutral ramp shade, per mode. Strictly a token
    * shorthand parked on the style axis until the studio grows a full
    * tokens editor. Keys are whitelisted in TOKEN_SHADE_TARGETS. A mode
@@ -50,6 +69,23 @@ export interface StyleOptions {
    */
   tokenShades?: Record<string, { light?: number, dark?: number }>
 }
+
+/** Which components support which app-wide default variant values. */
+const VARIANT_SUPPORT: Record<string, string[]> = {
+  button: ['solid', 'outline', 'soft', 'subtle'],
+  badge: ['solid', 'outline', 'soft', 'subtle'],
+  alert: ['solid', 'outline', 'soft', 'subtle'],
+  card: ['solid', 'outline', 'soft', 'subtle'],
+  // form fields have no solid variant — an unsupported value would
+  // silently unstyle them, so they keep their default instead
+  input: ['outline', 'soft', 'subtle'],
+  select: ['outline', 'soft', 'subtle'],
+  textarea: ['outline', 'soft', 'subtle']
+}
+
+const SIZE_SUPPORT = ['button', 'badge', 'input', 'select', 'textarea']
+
+export const SHADOW_GEOMETRY_DEFAULTS = { x: 3, y: 3, blur: 0, spread: 0 }
 
 /** Borders default opposite to the surface: dark ink on light, pale on dark. */
 export const BORDER_SHADE_DEFAULTS = { light: 900, dark: 200 }
@@ -70,6 +106,7 @@ export const SHADOW_SHADE_DEFAULTS = { light: 950, dark: 800 }
 interface ComponentFragment {
   slots?: Record<string, string>
   compoundVariants?: Array<Record<string, unknown>>
+  defaultVariants?: Record<string, string>
 }
 
 type Fragments = Record<string, ComponentFragment>
@@ -77,18 +114,23 @@ type Fragments = Record<string, ComponentFragment>
 const SHADOW_FRAGMENTS: Record<ShadowStyle, Fragments> = {
   none: {},
   soft: {
-    button: { slots: { base: 'shadow-sm' } },
-    card: { slots: { root: 'shadow-md' } },
-    input: { slots: { base: 'shadow-xs' } },
-    select: { slots: { base: 'shadow-xs' } },
-    textarea: { slots: { base: 'shadow-xs' } },
-    alert: { slots: { root: 'shadow-md' } },
-    badge: { slots: { base: 'shadow-xs' } }
+    // shadow-(color:--ui-shadow-final-soft) recolors the preset shadows through the
+    // same variable the hard treatment uses, so the color/shade options
+    // apply to soft shadows too (tailwind stock shadows are hardcoded black).
+    button: { slots: { base: 'shadow-sm shadow-(color:--ui-shadow-final-soft)' } },
+    card: { slots: { root: 'shadow-md shadow-(color:--ui-shadow-final-soft)' } },
+    input: { slots: { base: 'shadow-xs shadow-(color:--ui-shadow-final-soft)' } },
+    select: { slots: { base: 'shadow-xs shadow-(color:--ui-shadow-final-soft)' } },
+    textarea: { slots: { base: 'shadow-xs shadow-(color:--ui-shadow-final-soft)' } },
+    alert: { slots: { root: 'shadow-md shadow-(color:--ui-shadow-final-soft)' } },
+    badge: { slots: { base: 'shadow-xs shadow-(color:--ui-shadow-final-soft)' } }
   },
   hard: {
     button: {
       slots: {
-        base: 'shadow-[3px_3px_0_0_var(--ui-shadow-color)] hover:translate-x-[1.5px] hover:translate-y-[1.5px] hover:shadow-[1.5px_1.5px_0_0_var(--ui-shadow-color)] active:translate-x-[3px] active:translate-y-[3px] active:shadow-none transition-[box-shadow,translate,background-color]'
+        // Geometry rides CSS variables so the sliders are a variable swap;
+        // hover sinks halfway into the shadow via calc, active collapses it.
+        base: 'shadow-[var(--ui-shadow-offset-x)_var(--ui-shadow-offset-y)_var(--ui-shadow-blur)_var(--ui-shadow-spread)_var(--ui-shadow-final-hard)] hover:translate-x-[calc(var(--ui-shadow-offset-x)/2)] hover:translate-y-[calc(var(--ui-shadow-offset-y)/2)] hover:shadow-[calc(var(--ui-shadow-offset-x)/2)_calc(var(--ui-shadow-offset-y)/2)_var(--ui-shadow-blur)_var(--ui-shadow-spread)_var(--ui-shadow-final-hard)] active:translate-x-(--ui-shadow-offset-x) active:translate-y-(--ui-shadow-offset-y) active:shadow-none transition-[box-shadow,translate,background-color]'
       },
       // A floating shadow under an invisible box reads as a glitch — ghost
       // and link buttons stay flat, as in the reference neobrutalism kits.
@@ -97,12 +139,12 @@ const SHADOW_FRAGMENTS: Record<ShadowStyle, Fragments> = {
         { variant: 'link', class: 'shadow-none hover:translate-x-0 hover:translate-y-0 hover:shadow-none active:translate-x-0 active:translate-y-0' }
       ]
     },
-    card: { slots: { root: 'shadow-[5px_5px_0_0_var(--ui-shadow-color)]' } },
-    input: { slots: { base: 'shadow-[3px_3px_0_0_var(--ui-shadow-color)]' } },
-    select: { slots: { base: 'shadow-[3px_3px_0_0_var(--ui-shadow-color)]' } },
-    textarea: { slots: { base: 'shadow-[3px_3px_0_0_var(--ui-shadow-color)]' } },
-    alert: { slots: { root: 'shadow-[5px_5px_0_0_var(--ui-shadow-color)]' } },
-    badge: { slots: { base: 'shadow-[2px_2px_0_0_var(--ui-shadow-color)]' } }
+    card: { slots: { root: 'shadow-[calc(var(--ui-shadow-offset-x)*1.5)_calc(var(--ui-shadow-offset-y)*1.5)_var(--ui-shadow-blur)_var(--ui-shadow-spread)_var(--ui-shadow-final-hard)]' } },
+    input: { slots: { base: 'shadow-[var(--ui-shadow-offset-x)_var(--ui-shadow-offset-y)_var(--ui-shadow-blur)_var(--ui-shadow-spread)_var(--ui-shadow-final-hard)]' } },
+    select: { slots: { base: 'shadow-[var(--ui-shadow-offset-x)_var(--ui-shadow-offset-y)_var(--ui-shadow-blur)_var(--ui-shadow-spread)_var(--ui-shadow-final-hard)]' } },
+    textarea: { slots: { base: 'shadow-[var(--ui-shadow-offset-x)_var(--ui-shadow-offset-y)_var(--ui-shadow-blur)_var(--ui-shadow-spread)_var(--ui-shadow-final-hard)]' } },
+    alert: { slots: { root: 'shadow-[calc(var(--ui-shadow-offset-x)*1.5)_calc(var(--ui-shadow-offset-y)*1.5)_var(--ui-shadow-blur)_var(--ui-shadow-spread)_var(--ui-shadow-final-hard)]' } },
+    badge: { slots: { base: 'shadow-[calc(var(--ui-shadow-offset-x)*0.66)_calc(var(--ui-shadow-offset-y)*0.66)_var(--ui-shadow-blur)_var(--ui-shadow-spread)_var(--ui-shadow-final-hard)]' } }
   }
 }
 
@@ -214,6 +256,19 @@ export function styleTokens(style: StyleOptions): { light: Record<string, string
     }
   }
 
+  if (style.shadow && style.shadow !== 'none' && style.shadowOpacity !== undefined) {
+    light['--ui-shadow-opacity'] = `${style.shadowOpacity}%`
+    dark['--ui-shadow-opacity'] = `${style.shadowOpacity}%`
+  }
+
+  if (style.shadow === 'hard' && style.shadowGeometry) {
+    const geometry = { ...SHADOW_GEOMETRY_DEFAULTS, ...style.shadowGeometry }
+    for (const [axis, token] of [['x', '--ui-shadow-offset-x'], ['y', '--ui-shadow-offset-y'], ['blur', '--ui-shadow-blur'], ['spread', '--ui-shadow-spread']] as const) {
+      light[token] = `${geometry[axis]}px`
+      dark[token] = `${geometry[axis]}px`
+    }
+  }
+
   if (style.shadowColor === 'shade') {
     // Per-mode neutral ramp shade — a graded gray shadow that darkens or
     // lightens independently of the scheme it sits on.
@@ -235,7 +290,28 @@ export function styleTokens(style: StyleOptions): { light: Record<string, string
  * and win the tailwind-merge for ring color.
  */
 export function styleComponents(style: StyleOptions): Fragments {
+  // App-wide defaults, only where the component supports the chosen value.
+  const defaults: Fragments = {}
+  const variant = style.defaults?.variant
+  if (variant && variant !== 'default') {
+    for (const [component, supported] of Object.entries(VARIANT_SUPPORT)) {
+      if (supported.includes(variant)) {
+        defaults[component] = { defaultVariants: { variant } }
+      }
+    }
+  }
+  const size = style.defaults?.size
+  if (size && size !== 'default') {
+    for (const component of SIZE_SUPPORT) {
+      defaults[component] = {
+        ...defaults[component],
+        defaultVariants: { ...(defaults[component] as any)?.defaultVariants, size }
+      }
+    }
+  }
+
   const sources = [
+    defaults,
     SHADOW_FRAGMENTS[style.shadow ?? 'none'],
     BORDER_FRAGMENTS[style.border ?? 'default'],
     style.borderColor && style.borderColor !== 'default' ? FRAME_COLOR_FRAGMENTS : {}
@@ -252,6 +328,9 @@ export function styleComponents(style: StyleOptions): Fragments {
       }
       if (fragment.compoundVariants) {
         target.compoundVariants = [...(target.compoundVariants || []), ...fragment.compoundVariants]
+      }
+      if (fragment.defaultVariants) {
+        target.defaultVariants = { ...target.defaultVariants, ...fragment.defaultVariants }
       }
     }
   }
@@ -283,6 +362,9 @@ export function mergeComponentOverrides(
       result[key] = a
     } else if (key === 'compoundVariants' && Array.isArray(a) && Array.isArray(b)) {
       result[key] = [...a, ...b]
+    } else if (key === 'defaultVariants') {
+      // variant NAMES, not class strings — later value replaces per key
+      result[key] = { ...a, ...b }
     } else if (typeof a === 'string' && typeof b === 'string') {
       result[key] = `${a} ${b}`
     } else if (typeof a === 'object' && typeof b === 'object' && !Array.isArray(a) && !Array.isArray(b)) {

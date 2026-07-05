@@ -43,9 +43,27 @@ export function generateCSS(doc: ThemeDoc): string {
   // Color variables behind the style treatment. Hard shadows always need
   // --ui-shadow-color defined; explicit color choices override per mode.
   const style = styleTokens(doc.style || {})
-  if (doc.style?.shadow === 'hard' && !style.light['--ui-shadow-color']) {
-    style.light['--ui-shadow-color'] = 'var(--ui-color-neutral-950)'
-    style.dark['--ui-shadow-color'] = 'black'
+  if (doc.style?.shadow === 'hard') {
+    if (!style.light['--ui-shadow-color']) {
+      style.light['--ui-shadow-color'] = 'var(--ui-color-neutral-950)'
+      style.dark['--ui-shadow-color'] = 'black'
+    }
+    // The hard-shadow classes reference the geometry variables — a
+    // standalone export must define them even at default values.
+    if (!style.light['--ui-shadow-offset-x']) {
+      style.light['--ui-shadow-offset-x'] = '3px'
+      style.light['--ui-shadow-offset-y'] = '3px'
+      style.light['--ui-shadow-blur'] = '0px'
+      style.light['--ui-shadow-spread'] = '0px'
+    }
+  }
+  if (doc.style?.shadow && doc.style.shadow !== 'none') {
+    if (doc.style.shadow === 'soft' && !style.light['--ui-shadow-color']) {
+      style.light['--ui-shadow-color'] = 'var(--ui-color-neutral-950)'
+      style.dark['--ui-shadow-color'] = 'black'
+    }
+    style.light['--ui-shadow-final-hard'] = 'color-mix(in oklab, var(--ui-shadow-color) var(--ui-shadow-opacity, 100%), transparent)'
+    style.light['--ui-shadow-final-soft'] = 'color-mix(in oklab, var(--ui-shadow-color) var(--ui-shadow-opacity, 25%), transparent)'
   }
 
   if (Object.keys(style.light).length) {

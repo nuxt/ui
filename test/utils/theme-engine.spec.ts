@@ -221,13 +221,13 @@ describe('styleComponents', () => {
     const { styleComponents } = await import('../../docs/app/utils/theme-engine')
     const components = styleComponents({ shadow: 'hard', border: 'bold' })
 
-    expect(components.button!.slots!.base).toContain('shadow-[3px_3px_0_0_var(--ui-shadow-color)]')
+    expect(components.button!.slots!.base).toContain('shadow-[var(--ui-shadow-offset-x)_var(--ui-shadow-offset-y)_var(--ui-shadow-blur)_var(--ui-shadow-spread)_var(--ui-shadow-final-hard)]')
     // bold only thickens existing rings: buttons gain no base ring, the
     // outline/subtle compound overrides carry width only
     expect(components.button!.slots!.base).not.toContain('ring')
     expect(components.button!.compoundVariants).toContainEqual({ variant: 'outline', class: 'ring-2' })
     // card rings live at variant level, so bold ships compounds, not slots
-    expect(components.card!.slots?.root ?? '').toContain('shadow-[5px_5px_0_0_var(--ui-shadow-color)]')
+    expect(components.card!.slots?.root ?? '').toContain('var(--ui-shadow-final-hard)]')
     expect(components.card!.compoundVariants).toContainEqual({ variant: 'outline', class: { root: 'ring-2' } })
   })
 
@@ -251,9 +251,9 @@ describe('styleComponents', () => {
     const merged = mergeUi(styleComponents({ shadow: 'hard' }), { button: { slots: { base: 'rounded-full' } } })
 
     // both the shadow classes and the explicit override survive, explicit last
-    expect(merged.button.slots.base).toContain('shadow-[3px_3px_0_0_var(--ui-shadow-color)]')
+    expect(merged.button.slots.base).toContain('var(--ui-shadow-final-hard)]')
     expect(merged.button.slots.base.endsWith('rounded-full')).toBe(true)
-    expect(merged.card.slots.root).toContain('shadow-[5px_5px_0_0_var(--ui-shadow-color)]')
+    expect(merged.card.slots.root).toContain('var(--ui-shadow-final-hard)]')
   })
 })
 
@@ -311,6 +311,36 @@ describe('style colors', () => {
     })
     // non-whitelisted tokens are ignored
     expect(styleTokens({ tokenShades: { '--ui-evil': { light: 50, dark: 50 } } })).toEqual({ light: {}, dark: {} })
+  })
+
+  it('expands app-wide defaults only where the component supports them', async () => {
+    const { styleComponents } = await import('../../docs/app/utils/theme-engine')
+    const components = styleComponents({ defaults: { variant: 'solid', size: 'lg' } })
+
+    expect(components.button!.defaultVariants).toEqual({ variant: 'solid', size: 'lg' })
+    expect(components.card!.defaultVariants).toEqual({ variant: 'solid' })
+    // inputs have no solid variant: size applies, variant stays default
+    expect(components.input!.defaultVariants).toEqual({ size: 'lg' })
+    // subtle IS supported by inputs
+    expect(styleComponents({ defaults: { variant: 'subtle' } }).input!.defaultVariants).toEqual({ variant: 'subtle' })
+  })
+
+  it('emits hard-shadow geometry variables and keeps defaultVariants replace semantics', async () => {
+    const { styleTokens, mergeUi } = await import('../../docs/app/utils/theme-engine')
+
+    const tokens = styleTokens({ shadow: 'hard', shadowGeometry: { x: 6, blur: 4 } })
+    expect(tokens.light['--ui-shadow-offset-x']).toBe('6px')
+    expect(tokens.light['--ui-shadow-offset-y']).toBe('3px')
+    expect(tokens.light['--ui-shadow-blur']).toBe('4px')
+    // geometry is meaningless without hard shadows
+    expect(styleTokens({ shadowGeometry: { x: 6 } }).light).toEqual({})
+
+    // defaultVariants merge by replacement, not class concatenation
+    const merged = mergeUi(
+      { button: { defaultVariants: { variant: 'solid', size: 'md' } } },
+      { button: { defaultVariants: { variant: 'subtle' } } }
+    )
+    expect(merged.button.defaultVariants).toEqual({ variant: 'subtle', size: 'md' })
   })
 
   it('styleTokens supports per-mode border shades', async () => {

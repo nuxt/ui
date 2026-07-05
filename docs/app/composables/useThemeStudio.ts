@@ -39,6 +39,16 @@ export function useThemeStudio() {
   /** Shadow/border/token-shade prefs; the expanded class bundle lives in the style-ui channel. */
   const style = useState<StyleOptions>('nuxt-ui-style-prefs', () => readLocalStorage('nuxt-ui-style', {}))
 
+  // Self-heal: the persisted class bundle is an expansion of `style` frozen
+  // at write time — if the generator changed since (new fragment classes),
+  // regenerate it once so stale classes don't outlive their source.
+  if (import.meta.client) {
+    const expected = styleComponents(style.value)
+    if (JSON.stringify(expected) !== JSON.stringify(readLocalStorage('nuxt-ui-style-ui', {}))) {
+      onNuxtReady(() => theme.setStyleUi(expected))
+    }
+  }
+
   function setStyle(options: StyleOptions) {
     const previousStyle = style.value
     const previous = styleTokens(previousStyle)
