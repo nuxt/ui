@@ -354,6 +354,44 @@ describe('style colors', () => {
     expect(components.textarea!.compoundVariants).toContainEqual({ variant: 'none', class: 'shadow-none' })
   })
 
+  it('treatments reach overlay surfaces with the right placement', async () => {
+    const { styleComponents } = await import('../../docs/app/utils/theme-engine')
+
+    const soft = styleComponents({ shadow: 'soft' })
+    expect(soft.popover!.slots!.content).toBe('shadow-lg shadow-(color:--ui-shadow-final-soft)')
+    expect(soft.toast!.slots!.root).toContain('--ui-shadow-final-soft')
+    // modal's surface lives under the fullscreen variant — never slot classes
+    expect(soft.modal!.slots).toBeUndefined()
+    expect(soft.modal!.compoundVariants![0]).toMatchObject({ fullscreen: false })
+    // slideover is edge-to-edge on mobile — the shadow is sm-scoped
+    expect(soft.slideover!.slots!.content).toMatch(/^sm:shadow-lg /)
+
+    const bold = styleComponents({ border: 'bold' })
+    expect(bold.dropdownMenu!.slots!.content).toBe('ring-2')
+    expect(bold.selectMenu!.slots!.content).toBe('ring-2')
+    expect(bold.selectMenu!.compoundVariants).toContainEqual({ variant: 'outline', class: 'ring-2' })
+    expect(bold.checkbox!.slots!.base).toBe('ring-2')
+
+    const colored = styleComponents({ borderColor: 'inverted' })
+    expect(colored.tooltip!.slots!.content).toBe('ring-(--ui-frame-color)')
+    expect(colored.modal!.compoundVariants![0]).toEqual({ fullscreen: false, class: { content: 'ring-(--ui-frame-color)' } })
+  })
+
+  it('the whole input family follows the inputs group', async () => {
+    const { styleComponents } = await import('../../docs/app/utils/theme-engine')
+    const components = styleComponents({ defaults: { variants: { inputs: 'subtle' }, size: 'lg' } })
+
+    for (const component of ['input', 'select', 'textarea', 'selectMenu', 'inputMenu', 'inputNumber', 'inputTags', 'inputDate', 'inputTime', 'pinInput']) {
+      expect(components[component]!.defaultVariants!.variant, component).toBe('subtle')
+      expect(components[component]!.defaultVariants!.size, component).toBe('lg')
+    }
+    // size-only member gets size but never a variant
+    expect(components.inputRating!.defaultVariants).toEqual({ size: 'lg' })
+    // empty joins the panels group
+    const panels = styleComponents({ defaults: { variants: { panels: 'soft' } } })
+    expect(panels.empty!.defaultVariants).toEqual({ variant: 'soft' })
+  })
+
   it('border recoloring spares semantic outline rings but frames every solid', async () => {
     const { styleComponents } = await import('../../docs/app/utils/theme-engine')
     const compounds = styleComponents({ border: 'frame', borderColor: 'primary' }).button!.compoundVariants!

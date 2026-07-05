@@ -333,10 +333,11 @@ export function useTheme() {
       doc.components = extras.ui
     }
 
-    // The studio's shadow/border prefs — generateCSS needs style.shadow to
-    // emit the --ui-shadow-color definitions the component classes reference.
-    const style = readLocalStorage<{ shadow?: string, border?: string }>('nuxt-ui-style', {})
-    if (style.shadow || style.border) {
+    // The studio's style prefs. ANY set axis must ride along — a defaults-only
+    // or borderColor-only theme still needs its component expansion and the
+    // classes that reference --ui-frame-color in the export.
+    const style = readLocalStorage<Record<string, unknown>>('nuxt-ui-style', {})
+    if (Object.values(style).some(value => value && value !== 'none' && value !== 'default')) {
       doc.style = style as ThemeDoc['style']
     }
 

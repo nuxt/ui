@@ -134,6 +134,10 @@ export function useThemeStudio() {
       theme.primary.value = name
     } else if (alias === 'neutral') {
       theme.neutral.value = name
+      // Stock neutrals need the white-literal remaps too — without them the
+      // preview (docs baseline: neutral-50 bg) diverges from the export
+      // (library baseline: white bg) for every tinted ramp.
+      theme.applyThemeSettings({ cssVariables: unownedNeutralRemaps() }, { track: false })
     } else {
       theme.applyThemeSettings({ [alias]: name }, { track: false })
       activePreset.value = undefined
@@ -142,9 +146,12 @@ export function useThemeStudio() {
   }
 
   /**
-   * Light mode hardcodes `--ui-bg`/`--ui-text-inverted` to `white` (and dark
-   * `--ui-text-highlighted`), so a tinted neutral ramp would never reach the
-   * app background. A custom neutral re-routes them through the ramp.
+   * The library hardcodes five tokens to `white` (light `--ui-bg` and
+   * `--ui-text-inverted`; dark `--ui-text-highlighted`, `--ui-bg-inverted`
+   * and `--ui-border-inverted`), so a tinted neutral ramp would never reach
+   * them. Choosing a neutral re-routes all five through the ramp — which is
+   * also what makes the export reproduce the preview, since the docs
+   * baseline already shows neutral-50 as the page background.
    */
   const NEUTRAL_TOKEN_REMAPS = {
     light: {
@@ -152,7 +159,9 @@ export function useThemeStudio() {
       '--ui-text-inverted': 'var(--ui-color-neutral-50)'
     },
     dark: {
-      '--ui-text-highlighted': 'var(--ui-color-neutral-50)'
+      '--ui-text-highlighted': 'var(--ui-color-neutral-50)',
+      '--ui-bg-inverted': 'var(--ui-color-neutral-50)',
+      '--ui-border-inverted': 'var(--ui-color-neutral-50)'
     }
   }
 

@@ -72,27 +72,31 @@ export interface StyleOptions {
   tokenShades?: Record<string, { light?: number, dark?: number }>
 }
 
+/** The whole input family shares input's variant vocabulary (they extend it via defu). */
+const FIELD_VARIANTS = ['outline', 'soft', 'subtle', 'ghost', 'none']
+const FIELD_COMPONENTS = ['input', 'select', 'textarea', 'selectMenu', 'inputMenu', 'inputNumber', 'inputTags', 'inputDate', 'inputTime', 'pinInput']
+
 /** Which components support which default variant values. */
 export const VARIANT_SUPPORT: Record<string, string[]> = {
   button: ['solid', 'outline', 'soft', 'subtle', 'ghost', 'link'],
   badge: ['solid', 'outline', 'soft', 'subtle'],
   alert: ['solid', 'outline', 'soft', 'subtle'],
   card: ['solid', 'outline', 'soft', 'subtle'],
+  empty: ['solid', 'outline', 'soft', 'subtle'],
   // form fields have no solid variant (theirs run outline → none) — an
   // unsupported value would silently unstyle them, so they keep their
   // default instead
-  input: ['outline', 'soft', 'subtle', 'ghost', 'none'],
-  select: ['outline', 'soft', 'subtle', 'ghost', 'none'],
-  textarea: ['outline', 'soft', 'subtle', 'ghost', 'none']
+  ...Object.fromEntries(FIELD_COMPONENTS.map(component => [component, FIELD_VARIANTS]))
 }
 
-export const SIZE_SUPPORT = ['button', 'badge', 'input', 'select', 'textarea']
+// inputRating is size-only (no variant axis); everything here spans xs–xl exactly.
+export const SIZE_SUPPORT = ['button', 'badge', ...FIELD_COMPONENTS, 'inputRating']
 
 /** Component groups behind the per-group default-variant selects. */
 export const VARIANT_GROUPS: Record<VariantGroup, string[]> = {
   buttons: ['button', 'badge'],
-  panels: ['card', 'alert'],
-  inputs: ['input', 'select', 'textarea']
+  panels: ['card', 'alert', 'empty'],
+  inputs: FIELD_COMPONENTS
 }
 
 export const SHADOW_GEOMETRY_DEFAULTS = { x: 3, y: 3, blur: 0, spread: 0 }
@@ -159,6 +163,14 @@ const FLAT_FIELD_VARIANTS = [
   { variant: 'none', class: 'shadow-none' }
 ]
 
+// Reusable shadow class strings (whole literals so tailwind's scanner sees
+// them). Hard scales mirror the originals: base for field-size surfaces,
+// ×1.5 for panels/overlays, ×0.66 for badge-size ones.
+const SOFT_LG = 'shadow-lg shadow-(color:--ui-shadow-final-soft)'
+const HARD_BASE = 'shadow-[var(--ui-shadow-offset-x)_var(--ui-shadow-offset-y)_var(--ui-shadow-blur)_var(--ui-shadow-spread)_var(--ui-shadow-final-hard)]'
+const HARD_LG = 'shadow-[calc(var(--ui-shadow-offset-x)*1.5)_calc(var(--ui-shadow-offset-y)*1.5)_var(--ui-shadow-blur)_var(--ui-shadow-spread)_var(--ui-shadow-final-hard)]'
+const HARD_SM = 'shadow-[calc(var(--ui-shadow-offset-x)*0.66)_calc(var(--ui-shadow-offset-y)*0.66)_var(--ui-shadow-blur)_var(--ui-shadow-spread)_var(--ui-shadow-final-hard)]'
+
 const SHADOW_FRAGMENTS: Record<ShadowStyle, Fragments> = {
   none: {},
   soft: {
@@ -175,11 +187,27 @@ const SHADOW_FRAGMENTS: Record<ShadowStyle, Fragments> = {
       ]
     },
     card: { slots: { root: 'shadow-md shadow-(color:--ui-shadow-final-soft)' } },
+    empty: { slots: { root: 'shadow-md shadow-(color:--ui-shadow-final-soft)' } },
     input: { slots: { base: 'shadow-xs shadow-(color:--ui-shadow-final-soft)' }, compoundVariants: FLAT_FIELD_VARIANTS },
-    select: { slots: { base: 'shadow-xs shadow-(color:--ui-shadow-final-soft)' }, compoundVariants: FLAT_FIELD_VARIANTS },
+    select: { slots: { base: 'shadow-xs shadow-(color:--ui-shadow-final-soft)', content: SOFT_LG }, compoundVariants: FLAT_FIELD_VARIANTS },
+    selectMenu: { slots: { base: 'shadow-xs shadow-(color:--ui-shadow-final-soft)', content: SOFT_LG }, compoundVariants: FLAT_FIELD_VARIANTS },
+    inputMenu: { slots: { base: 'shadow-xs shadow-(color:--ui-shadow-final-soft)', content: SOFT_LG }, compoundVariants: FLAT_FIELD_VARIANTS },
     textarea: { slots: { base: 'shadow-xs shadow-(color:--ui-shadow-final-soft)' }, compoundVariants: FLAT_FIELD_VARIANTS },
     alert: { slots: { root: 'shadow-md shadow-(color:--ui-shadow-final-soft)' } },
-    badge: { slots: { base: 'shadow-xs shadow-(color:--ui-shadow-final-soft)' } }
+    badge: { slots: { base: 'shadow-xs shadow-(color:--ui-shadow-final-soft)' } },
+    // Overlay surfaces keep their stock shadow SIZE, recolored through the
+    // same variable so the shade/opacity options reach them too.
+    popover: { slots: { content: SOFT_LG } },
+    dropdownMenu: { slots: { content: SOFT_LG } },
+    contextMenu: { slots: { content: SOFT_LG } },
+    tooltip: { slots: { content: 'shadow-sm shadow-(color:--ui-shadow-final-soft)' } },
+    toast: { slots: { root: SOFT_LG } },
+    drawer: { slots: { content: SOFT_LG } },
+    // modal's surface classes live under the fullscreen:false variant — slot
+    // classes would lose the tailwind-merge, so this must be a compound.
+    modal: { compoundVariants: [{ fullscreen: false, class: { content: SOFT_LG } }] },
+    // slideover is edge-to-edge on mobile; only its sm+ panel casts a shadow.
+    slideover: { slots: { content: 'sm:shadow-lg shadow-(color:--ui-shadow-final-soft)' } }
   },
   hard: {
     button: {
@@ -195,12 +223,23 @@ const SHADOW_FRAGMENTS: Record<ShadowStyle, Fragments> = {
         { variant: 'link', class: 'shadow-none hover:translate-x-0 hover:translate-y-0 hover:shadow-none active:translate-x-0 active:translate-y-0' }
       ]
     },
-    card: { slots: { root: 'shadow-[calc(var(--ui-shadow-offset-x)*1.5)_calc(var(--ui-shadow-offset-y)*1.5)_var(--ui-shadow-blur)_var(--ui-shadow-spread)_var(--ui-shadow-final-hard)]' } },
-    input: { slots: { base: 'shadow-[var(--ui-shadow-offset-x)_var(--ui-shadow-offset-y)_var(--ui-shadow-blur)_var(--ui-shadow-spread)_var(--ui-shadow-final-hard)]' }, compoundVariants: FLAT_FIELD_VARIANTS },
-    select: { slots: { base: 'shadow-[var(--ui-shadow-offset-x)_var(--ui-shadow-offset-y)_var(--ui-shadow-blur)_var(--ui-shadow-spread)_var(--ui-shadow-final-hard)]' }, compoundVariants: FLAT_FIELD_VARIANTS },
-    textarea: { slots: { base: 'shadow-[var(--ui-shadow-offset-x)_var(--ui-shadow-offset-y)_var(--ui-shadow-blur)_var(--ui-shadow-spread)_var(--ui-shadow-final-hard)]' }, compoundVariants: FLAT_FIELD_VARIANTS },
-    alert: { slots: { root: 'shadow-[calc(var(--ui-shadow-offset-x)*1.5)_calc(var(--ui-shadow-offset-y)*1.5)_var(--ui-shadow-blur)_var(--ui-shadow-spread)_var(--ui-shadow-final-hard)]' } },
-    badge: { slots: { base: 'shadow-[calc(var(--ui-shadow-offset-x)*0.66)_calc(var(--ui-shadow-offset-y)*0.66)_var(--ui-shadow-blur)_var(--ui-shadow-spread)_var(--ui-shadow-final-hard)]' } }
+    card: { slots: { root: HARD_LG } },
+    empty: { slots: { root: HARD_LG } },
+    input: { slots: { base: HARD_BASE }, compoundVariants: FLAT_FIELD_VARIANTS },
+    select: { slots: { base: HARD_BASE, content: HARD_LG }, compoundVariants: FLAT_FIELD_VARIANTS },
+    selectMenu: { slots: { base: HARD_BASE, content: HARD_LG }, compoundVariants: FLAT_FIELD_VARIANTS },
+    inputMenu: { slots: { base: HARD_BASE, content: HARD_LG }, compoundVariants: FLAT_FIELD_VARIANTS },
+    textarea: { slots: { base: HARD_BASE }, compoundVariants: FLAT_FIELD_VARIANTS },
+    alert: { slots: { root: HARD_LG } },
+    badge: { slots: { base: HARD_SM } },
+    popover: { slots: { content: HARD_LG } },
+    dropdownMenu: { slots: { content: HARD_LG } },
+    contextMenu: { slots: { content: HARD_LG } },
+    tooltip: { slots: { content: HARD_SM } },
+    toast: { slots: { root: HARD_LG } },
+    drawer: { slots: { content: HARD_LG } },
+    modal: { compoundVariants: [{ fullscreen: false, class: { content: HARD_LG } }] },
+    slideover: { slots: { content: 'sm:shadow-[calc(var(--ui-shadow-offset-x)*1.5)_calc(var(--ui-shadow-offset-y)*1.5)_var(--ui-shadow-blur)_var(--ui-shadow-spread)_var(--ui-shadow-final-hard)]' } }
   }
 }
 
@@ -211,16 +250,44 @@ function widen(variants: string[], slot?: string): Array<Record<string, unknown>
 
 const FRAME = 'ring-2 ring-inset ring-(--ui-border-accented)'
 
+/**
+ * Surfaces whose ring lives at SLOT level (overlay content, toast, check
+ * controls) — width bumps ride slots there; both bold and frame apply them.
+ * modal is the exception (ring under the fullscreen:false variant) and
+ * slideover's panel ring is sm-scoped.
+ */
+const SLOT_RING_FRAGMENTS: Fragments = {
+  popover: { slots: { content: 'ring-2' } },
+  dropdownMenu: { slots: { content: 'ring-2' } },
+  contextMenu: { slots: { content: 'ring-2' } },
+  tooltip: { slots: { content: 'ring-2' } },
+  toast: { slots: { root: 'ring-2' } },
+  drawer: { slots: { content: 'ring-2' } },
+  modal: { compoundVariants: [{ fullscreen: false, class: { content: 'ring-2' } }] },
+  slideover: { slots: { content: 'sm:ring-2' } },
+  checkbox: { slots: { base: 'ring-2' } },
+  radioGroup: { slots: { base: 'ring-2' } }
+}
+
+/** The input family's trigger rings sit at variant level, like input's. */
+const FIELD_RING_FRAGMENTS: Fragments = Object.fromEntries(
+  FIELD_COMPONENTS.map(component => [component, { compoundVariants: widen(['outline', 'subtle']) }])
+)
+
 const BORDER_FRAGMENTS: Record<BorderStyle, Fragments> = {
   default: {},
   bold: {
     card: { compoundVariants: widen(['outline', 'subtle'], 'root') },
-    input: { compoundVariants: widen(['outline', 'subtle']) },
-    select: { compoundVariants: widen(['outline', 'subtle']) },
-    textarea: { compoundVariants: widen(['outline', 'subtle']) },
+    empty: { compoundVariants: widen(['outline', 'subtle'], 'root') },
     alert: { compoundVariants: widen(['outline', 'subtle'], 'root') },
     button: { compoundVariants: widen(['outline', 'subtle']) },
-    badge: { compoundVariants: widen(['outline', 'subtle']) }
+    badge: { compoundVariants: widen(['outline', 'subtle']) },
+    ...FIELD_RING_FRAGMENTS,
+    ...SLOT_RING_FRAGMENTS,
+    // menu-bearing fields widen trigger AND dropdown surface
+    select: { slots: { content: 'ring-2' }, compoundVariants: widen(['outline', 'subtle']) },
+    selectMenu: { slots: { content: 'ring-2' }, compoundVariants: widen(['outline', 'subtle']) },
+    inputMenu: { slots: { content: 'ring-2' }, compoundVariants: widen(['outline', 'subtle']) }
   },
   frame: {
     card: {
@@ -230,9 +297,13 @@ const BORDER_FRAGMENTS: Record<BorderStyle, Fragments> = {
         { variant: 'soft', class: { root: 'ring-2 ring-(--ui-border-accented)' } }
       ]
     },
-    input: { compoundVariants: widen(['outline', 'subtle']) },
-    select: { compoundVariants: widen(['outline', 'subtle']) },
-    textarea: { compoundVariants: widen(['outline', 'subtle']) },
+    empty: {
+      compoundVariants: [
+        ...widen(['outline', 'subtle'], 'root'),
+        { variant: 'solid', class: { root: 'ring-2 ring-(--ui-border-accented)' } },
+        { variant: 'soft', class: { root: 'ring-2 ring-(--ui-border-accented)' } }
+      ]
+    },
     alert: {
       compoundVariants: [
         ...widen(['outline', 'subtle'], 'root'),
@@ -253,7 +324,12 @@ const BORDER_FRAGMENTS: Record<BorderStyle, Fragments> = {
         { variant: 'solid', class: FRAME },
         { variant: 'soft', class: FRAME }
       ]
-    }
+    },
+    ...FIELD_RING_FRAGMENTS,
+    ...SLOT_RING_FRAGMENTS,
+    select: { slots: { content: 'ring-2' }, compoundVariants: widen(['outline', 'subtle']) },
+    selectMenu: { slots: { content: 'ring-2' }, compoundVariants: widen(['outline', 'subtle']) },
+    inputMenu: { slots: { content: 'ring-2' }, compoundVariants: widen(['outline', 'subtle']) }
   }
 }
 
@@ -279,9 +355,11 @@ const UNSIGNALED_COLORS = ['primary', 'neutral']
 const FRAME_COLOR_FRAGMENTS: Fragments = {
   // cards have no color variants; field rings are neutral for every color
   card: { compoundVariants: recolor(['outline', 'subtle', 'solid', 'soft'], 'root') },
-  input: { compoundVariants: recolor(['outline', 'subtle']) },
-  select: { compoundVariants: recolor(['outline', 'subtle']) },
-  textarea: { compoundVariants: recolor(['outline', 'subtle']) },
+  empty: { compoundVariants: recolor(['outline', 'subtle', 'solid', 'soft'], 'root') },
+  ...Object.fromEntries(FIELD_COMPONENTS.map(component => [component, { compoundVariants: recolor(['outline', 'subtle']) }])),
+  select: { slots: { content: 'ring-(--ui-frame-color)' }, compoundVariants: recolor(['outline', 'subtle']) },
+  selectMenu: { slots: { content: 'ring-(--ui-frame-color)' }, compoundVariants: recolor(['outline', 'subtle']) },
+  inputMenu: { slots: { content: 'ring-(--ui-frame-color)' }, compoundVariants: recolor(['outline', 'subtle']) },
   alert: {
     compoundVariants: [
       ...recolor(['outline', 'subtle'], 'root', UNSIGNALED_COLORS),
@@ -299,7 +377,19 @@ const FRAME_COLOR_FRAGMENTS: Fragments = {
       ...recolor(['outline', 'subtle'], undefined, UNSIGNALED_COLORS),
       ...recolor(['solid', 'soft'])
     ]
-  }
+  },
+  // slot-level rings recolor via slots; color utilities are inert without a
+  // ring width, so slideover's needs no sm: prefix
+  popover: { slots: { content: 'ring-(--ui-frame-color)' } },
+  dropdownMenu: { slots: { content: 'ring-(--ui-frame-color)' } },
+  contextMenu: { slots: { content: 'ring-(--ui-frame-color)' } },
+  tooltip: { slots: { content: 'ring-(--ui-frame-color)' } },
+  toast: { slots: { root: 'ring-(--ui-frame-color)' } },
+  drawer: { slots: { content: 'ring-(--ui-frame-color)' } },
+  modal: { compoundVariants: [{ fullscreen: false, class: { content: 'ring-(--ui-frame-color)' } }] },
+  slideover: { slots: { content: 'ring-(--ui-frame-color)' } },
+  checkbox: { slots: { base: 'ring-(--ui-frame-color)' } },
+  radioGroup: { slots: { base: 'ring-(--ui-frame-color)' } }
 }
 
 /** Per-mode values behind the two color variables, per palette choice. */
