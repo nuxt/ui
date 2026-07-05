@@ -1,7 +1,7 @@
 import { defu } from 'defu'
 import { useLocalStorage } from '@vueuse/core'
 import { themeIcons, cssVariableDefaults } from '../utils/theme'
-import { generateCSS, generateConfig, mergeUi, DEFAULT_COLORS, THEME_DEFAULTS, LIBRARY_TOKEN_DEFAULTS, CUSTOM_PALETTES } from '../utils/theme-engine'
+import { generateCSS, generateConfig, mergeUi, isDefaultStyle, DEFAULT_COLORS, THEME_DEFAULTS, LIBRARY_TOKEN_DEFAULTS, CUSTOM_PALETTES } from '../utils/theme-engine'
 import type { ThemeDoc, ThemePalette } from '../utils/theme-engine'
 import { omit } from '#ui/utils'
 import colors from 'tailwindcss/colors'
@@ -336,9 +336,9 @@ export function useTheme() {
     // The studio's style prefs. ANY set axis must ride along — a defaults-only
     // or borderColor-only theme still needs its component expansion and the
     // classes that reference --ui-frame-color in the export.
-    const style = readLocalStorage<Record<string, unknown>>('nuxt-ui-style', {})
-    if (Object.values(style).some(value => value && value !== 'none' && value !== 'default')) {
-      doc.style = style as ThemeDoc['style']
+    const style = readLocalStorage<ThemeDoc['style']>('nuxt-ui-style', {})
+    if (!isDefaultStyle(style)) {
+      doc.style = style
     }
 
     return doc

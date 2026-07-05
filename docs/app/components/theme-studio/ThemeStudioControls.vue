@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { TOKEN_SHADE_TARGETS, TOKEN_GROUPS, SHADES, SHADOW_SHADE_DEFAULTS, BORDER_SHADE_DEFAULTS, SHADOW_GEOMETRY_DEFAULTS } from '../../utils/theme-engine'
+import { TOKEN_SHADE_TARGETS, TOKEN_GROUPS, SHADES, SHADOW_SHADE_DEFAULTS, BORDER_SHADE_DEFAULTS, BORDER_WIDTH_DEFAULT, SHADOW_GEOMETRY_DEFAULTS } from '../../utils/theme-engine'
 import type { VariantGroup, TokenRamp, ColorAlias } from '../../utils/theme-engine'
 
 const appConfig = useAppConfig()
@@ -91,7 +91,7 @@ const neutralSwatch = computed(() => {
 
 const shadowOptions = [
   { label: 'None', value: 'none' },
-  { label: 'Soft', value: 'soft' },
+  { label: 'Default', value: 'soft' },
   { label: 'Custom', value: 'hard' }
 ] as const
 
@@ -101,10 +101,21 @@ const shadowOpacity = computed({
 })
 
 const borderOptions = [
-  { label: 'Thin', value: 'default' },
-  { label: 'Bold', value: 'bold' },
-  { label: 'Frame', value: 'frame' }
+  { label: 'Default', value: 'default' },
+  { label: 'None', value: 'none' },
+  { label: 'Custom', value: 'custom' }
 ] as const
+
+// Legacy saved prefs may still hold bold/frame — both read as custom.
+const borderStyle = computed(() => {
+  const value = style.value.border || 'default'
+  return value === 'bold' || value === 'frame' ? 'custom' : value
+})
+
+const borderWidth = computed({
+  get: () => style.value.borderWidth ?? BORDER_WIDTH_DEFAULT,
+  set: (value: number) => setStyle({ borderWidth: value })
+})
 
 const borderColorItems = [
   { label: 'Default', value: 'default' },
@@ -823,12 +834,20 @@ const shadowColor = computed({
                   :key="option.value"
                   :label="option.label"
                   class="justify-center px-0"
-                  :selected="(style.border || 'default') === option.value"
+                  :selected="borderStyle === option.value"
                   @click="setStyle({ border: option.value })"
                 />
               </div>
 
-              <div class="mt-1.5 flex flex-col gap-2">
+              <div v-if="borderStyle === 'custom'" class="mt-1.5 flex flex-col gap-2">
+                <div class="flex items-center gap-2">
+                  <span class="text-[11px] text-muted w-13 shrink-0 select-none">Width</span>
+
+                  <USlider v-model="borderWidth" :min="1" :max="4" :step="1" size="xs" />
+
+                  <span class="text-[11px] text-dimmed font-mono w-8 text-right shrink-0">{{ borderWidth }}px</span>
+                </div>
+
                 <USelect
                   v-model="borderColor"
                   size="sm"

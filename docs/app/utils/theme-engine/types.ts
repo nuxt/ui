@@ -1,3 +1,5 @@
+import { isDefaultStyle } from './styles'
+
 export const SHADES = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950] as const
 
 export type Shade = typeof SHADES[number]
@@ -85,5 +87,5 @@ export function isDefaultTheme(doc: ThemeDoc): boolean {
   return !doc.palettes && !doc.colors && !doc.blackAsPrimary && !doc.tokens
     && doc.radius === undefined && doc.fontSize === undefined && doc.spacing === undefined
     && !doc.font?.sans && !doc.icons && !doc.components
-    && !Object.values(doc.style || {}).some(value => value && value !== 'none' && value !== 'default')
+    && isDefaultStyle(doc.style)
 }

@@ -328,12 +328,32 @@ describe('styleComponents', () => {
 })
 
 describe('style colors', () => {
-  it('frame adds outlines to solid/soft but never ghost', async () => {
+  it('custom borders set the chosen ring width; none zeroes every ring', async () => {
     const { styleComponents } = await import('../../docs/app/utils/theme-engine')
-    const components = styleComponents({ border: 'frame' })
 
-    expect(components.button!.compoundVariants).toContainEqual({ variant: 'solid', class: 'ring-2 ring-inset ring-(--ui-border-accented)' })
-    expect(JSON.stringify(components.button!.compoundVariants)).not.toContain('"ghost"')
+    const wide = styleComponents({ border: 'custom', borderWidth: 3 })
+    expect(wide.button!.compoundVariants).toContainEqual({ variant: 'outline', class: 'ring-3' })
+    expect(wide.popover!.slots!.content).toBe('ring-3')
+    expect(wide.slideover!.slots!.content).toBe('sm:ring-3')
+    // width only touches existing rings — never adds outlines to solids
+    expect(JSON.stringify(wide.button!.compoundVariants)).not.toContain('"solid"')
+    expect(JSON.stringify(wide.button!.compoundVariants)).not.toContain('"ghost"')
+
+    const none = styleComponents({ border: 'none' })
+    expect(none.card!.compoundVariants).toContainEqual({ variant: 'outline', class: { root: 'ring-0' } })
+    expect(none.dropdownMenu!.slots!.content).toBe('ring-0')
+
+    // legacy saved values keep working as custom at the default width
+    expect(styleComponents({ border: 'frame' }).button!.compoundVariants).toContainEqual({ variant: 'outline', class: 'ring-2' })
+    expect(styleComponents({ border: 'bold' }).input!.compoundVariants).toContainEqual({ variant: 'subtle', class: 'ring-2' })
+  })
+
+  it('border none counts as a real style choice', async () => {
+    const { isDefaultStyle } = await import('../../docs/app/utils/theme-engine')
+    expect(isDefaultStyle({})).toBe(true)
+    expect(isDefaultStyle({ shadow: 'none', border: 'default' })).toBe(true)
+    expect(isDefaultStyle({ border: 'none' })).toBe(false)
+    expect(isDefaultStyle({ border: 'custom' })).toBe(false)
   })
 
   it('soft shadows skip ghost/link buttons (hover-only for ghost) and surfaceless fields', async () => {

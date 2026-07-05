@@ -6,6 +6,7 @@ import {
   FRAME_COLOR_VALUES,
   SHADOW_COLOR_VALUES,
   SHADOW_GEOMETRY_DEFAULTS,
+  BORDER_WIDTH_DEFAULT,
   VARIANT_GROUPS,
   VARIANT_SUPPORT,
   SIZE_SUPPORT
@@ -363,13 +364,18 @@ function extractDefaults(components: Record<string, any>): StyleOptions['default
 }
 
 /** Border treatment lives only in the class bundles — read it back from them. */
-function detectBorder(components: Record<string, any>): StyleOptions['border'] {
-  const compounds: Array<Record<string, unknown>> = Object.values(components).flatMap(component => component?.compoundVariants || [])
+function detectBorder(components: Record<string, any>): Pick<StyleOptions, 'border' | 'borderWidth'> {
   const classOf = (entry: Record<string, unknown>) => typeof entry.class === 'string' ? entry.class : Object.values(entry.class || {}).join(' ')
-  const widened = compounds.some(entry => classOf(entry).includes('ring-2'))
-  if (!widened) return undefined
-  const framed = compounds.some(entry => entry.variant === 'solid' && classOf(entry).includes('ring-2'))
-  return framed ? 'frame' : 'bold'
+  const texts = Object.values(components).flatMap(component => [
+    ...Object.values((component?.slots || {}) as Record<string, string>),
+    ...((component?.compoundVariants || []) as Array<Record<string, unknown>>).map(classOf)
+  ])
+
+  const widths = texts.flatMap(text => [...text.matchAll(/(?:^|\s)(?:sm:)?ring-(\d)(?:\s|$)/g)].map(match => Number(match[1])))
+  if (!widths.length) return {}
+  const width = widths[0]!
+  if (width === 0) return { border: 'none' }
+  return { border: 'custom', ...(width !== BORDER_WIDTH_DEFAULT ? { borderWidth: width } : {}) }
 }
 
 /** Shadow fallback when only a config was pasted (CSS normally decides). */
@@ -459,7 +465,10 @@ export function importTheme(input: { css?: string, config?: string }): ThemeImpo
   const style: StyleOptions = css ? extractStyle(css.light, css.dark) : {}
   style.shadow ||= detectShadow(components)
   const border = detectBorder(components)
-  if (border) style.border = border
+  if (border.border) {
+    style.border = border.border
+    if (border.borderWidth !== undefined) style.borderWidth = border.borderWidth
+  }
   const defaults = extractDefaults(components)
   if (defaults) style.defaults = defaults
 

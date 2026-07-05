@@ -91,7 +91,7 @@ export const presets: ThemePreset[] = [{
     // hard offset shadows.
     style: {
       shadow: 'hard',
-      border: 'frame',
+      border: 'custom',
       borderColor: 'inverted'
     }
   }
@@ -122,7 +122,7 @@ export const presets: ThemePreset[] = [{
       }
     },
     style: {
-      border: 'bold',
+      border: 'custom',
       borderColor: 'primary'
     }
   }
@@ -206,7 +206,7 @@ export const presets: ThemePreset[] = [{
     style: {
       shadow: 'hard',
       shadowColor: 'black',
-      border: 'frame',
+      border: 'custom',
       borderColor: 'black'
     }
   }
@@ -420,7 +420,7 @@ export const presets: ThemePreset[] = [{
       shadowColor: 'shade',
       shadowShade: { light: 400, dark: 950 },
       shadowOpacity: 40,
-      border: 'bold',
+      border: 'custom',
       borderColor: 'shade',
       borderShade: { light: 200, dark: 700 },
       defaults: { variants: { panels: 'subtle' } },

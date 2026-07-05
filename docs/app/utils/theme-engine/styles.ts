@@ -27,7 +27,8 @@
  */
 
 export type ShadowStyle = 'none' | 'soft' | 'hard'
-export type BorderStyle = 'default' | 'bold' | 'frame'
+/** 'bold'/'frame' are legacy values (old exports/saved state) treated as 'custom'. */
+export type BorderStyle = 'default' | 'none' | 'custom' | 'bold' | 'frame'
 export type BorderColor = 'default' | 'inverted' | 'black' | 'white' | 'primary' | 'neutral' | 'shade' | 'primary-shade'
 export type ShadowColor = 'default' | 'black' | 'inverted' | 'primary' | 'shade' | 'primary-shade'
 export type DefaultVariant = 'default' | 'solid' | 'outline' | 'soft' | 'subtle' | 'ghost' | 'link' | 'none'
@@ -43,6 +44,8 @@ export interface StyleOptions {
   shadowShade?: { light: number, dark: number }
   /** Ramp shade per mode — neutral for 'shade', primary for 'primary-shade' */
   borderShade?: { light: number, dark: number }
+  /** Ring width in px (1–4) while `border` is 'custom'; 2 when unset. */
+  borderWidth?: number
   /**
    * Default variant/size, expanded into per-component `defaultVariants` —
    * the runtime override channel Nuxt UI already honors — only for
@@ -243,94 +246,60 @@ const SHADOW_FRAGMENTS: Record<ShadowStyle, Fragments> = {
   }
 }
 
-/** compound entries thickening the rings a variant already has */
-function widen(variants: string[], slot?: string): Array<Record<string, unknown>> {
-  return variants.map(variant => ({ variant, class: slot ? { [slot]: 'ring-2' } : 'ring-2' }))
-}
-
-const FRAME = 'ring-2 ring-inset ring-(--ui-border-accented)'
+export const BORDER_WIDTH_DEFAULT = 2
 
 /**
- * Surfaces whose ring lives at SLOT level (overlay content, toast, check
- * controls) — width bumps ride slots there; both bold and frame apply them.
- * modal is the exception (ring under the fullscreen:false variant) and
- * slideover's panel ring is sm-scoped.
+ * Whole literal class strings per width so tailwind's scanner sees them —
+ * the slider swaps between these, never builds a class dynamically.
  */
-const SLOT_RING_FRAGMENTS: Fragments = {
-  popover: { slots: { content: 'ring-2' } },
-  dropdownMenu: { slots: { content: 'ring-2' } },
-  contextMenu: { slots: { content: 'ring-2' } },
-  tooltip: { slots: { content: 'ring-2' } },
-  toast: { slots: { root: 'ring-2' } },
-  drawer: { slots: { content: 'ring-2' } },
-  modal: { compoundVariants: [{ fullscreen: false, class: { content: 'ring-2' } }] },
-  slideover: { slots: { content: 'sm:ring-2' } },
-  checkbox: { slots: { base: 'ring-2' } },
-  radioGroup: { slots: { base: 'ring-2' } }
+const RING_WIDTH_CLASSES: Record<number, string> = { 0: 'ring-0', 1: 'ring-1', 2: 'ring-2', 3: 'ring-3', 4: 'ring-4' }
+const SM_RING_WIDTH_CLASSES: Record<number, string> = { 0: 'sm:ring-0', 1: 'sm:ring-1', 2: 'sm:ring-2', 3: 'sm:ring-3', 4: 'sm:ring-4' }
+
+/**
+ * Apply one ring-width class across every ring-bearing surface: variant-level
+ * rings (outline/subtle on buttons/panels/fields) via compounds, slot-level
+ * rings (overlay content, toast, check controls) via slots. modal is the
+ * exception (ring under the fullscreen:false variant) and slideover's panel
+ * ring is sm-scoped.
+ */
+function ringFragments(width: number): Fragments {
+  const cls = RING_WIDTH_CLASSES[width] || RING_WIDTH_CLASSES[BORDER_WIDTH_DEFAULT]!
+  const compound = (variants: string[], slot?: string) =>
+    variants.map(variant => ({ variant, class: slot ? { [slot]: cls } : cls }))
+
+  return {
+    card: { compoundVariants: compound(['outline', 'subtle'], 'root') },
+    empty: { compoundVariants: compound(['outline', 'subtle'], 'root') },
+    alert: { compoundVariants: compound(['outline', 'subtle'], 'root') },
+    button: { compoundVariants: compound(['outline', 'subtle']) },
+    badge: { compoundVariants: compound(['outline', 'subtle']) },
+    ...Object.fromEntries(FIELD_COMPONENTS.map(component => [component, { compoundVariants: compound(['outline', 'subtle']) }])),
+    // menu-bearing fields treat trigger AND dropdown surface
+    select: { slots: { content: cls }, compoundVariants: compound(['outline', 'subtle']) },
+    selectMenu: { slots: { content: cls }, compoundVariants: compound(['outline', 'subtle']) },
+    inputMenu: { slots: { content: cls }, compoundVariants: compound(['outline', 'subtle']) },
+    popover: { slots: { content: cls } },
+    dropdownMenu: { slots: { content: cls } },
+    contextMenu: { slots: { content: cls } },
+    tooltip: { slots: { content: cls } },
+    toast: { slots: { root: cls } },
+    drawer: { slots: { content: cls } },
+    modal: { compoundVariants: [{ fullscreen: false, class: { content: cls } }] },
+    slideover: { slots: { content: SM_RING_WIDTH_CLASSES[width] || SM_RING_WIDTH_CLASSES[BORDER_WIDTH_DEFAULT]! } },
+    checkbox: { slots: { base: cls } },
+    radioGroup: { slots: { base: cls } }
+  }
 }
 
-/** The input family's trigger rings sit at variant level, like input's. */
-const FIELD_RING_FRAGMENTS: Fragments = Object.fromEntries(
-  FIELD_COMPONENTS.map(component => [component, { compoundVariants: widen(['outline', 'subtle']) }])
-)
-
-const BORDER_FRAGMENTS: Record<BorderStyle, Fragments> = {
-  default: {},
-  bold: {
-    card: { compoundVariants: widen(['outline', 'subtle'], 'root') },
-    empty: { compoundVariants: widen(['outline', 'subtle'], 'root') },
-    alert: { compoundVariants: widen(['outline', 'subtle'], 'root') },
-    button: { compoundVariants: widen(['outline', 'subtle']) },
-    badge: { compoundVariants: widen(['outline', 'subtle']) },
-    ...FIELD_RING_FRAGMENTS,
-    ...SLOT_RING_FRAGMENTS,
-    // menu-bearing fields widen trigger AND dropdown surface
-    select: { slots: { content: 'ring-2' }, compoundVariants: widen(['outline', 'subtle']) },
-    selectMenu: { slots: { content: 'ring-2' }, compoundVariants: widen(['outline', 'subtle']) },
-    inputMenu: { slots: { content: 'ring-2' }, compoundVariants: widen(['outline', 'subtle']) }
-  },
-  frame: {
-    card: {
-      compoundVariants: [
-        ...widen(['outline', 'subtle'], 'root'),
-        { variant: 'solid', class: { root: 'ring-2 ring-(--ui-border-accented)' } },
-        { variant: 'soft', class: { root: 'ring-2 ring-(--ui-border-accented)' } }
-      ]
-    },
-    empty: {
-      compoundVariants: [
-        ...widen(['outline', 'subtle'], 'root'),
-        { variant: 'solid', class: { root: 'ring-2 ring-(--ui-border-accented)' } },
-        { variant: 'soft', class: { root: 'ring-2 ring-(--ui-border-accented)' } }
-      ]
-    },
-    alert: {
-      compoundVariants: [
-        ...widen(['outline', 'subtle'], 'root'),
-        { variant: 'solid', class: { root: 'ring-2 ring-inset ring-(--ui-border-accented)' } },
-        { variant: 'soft', class: { root: 'ring-2 ring-inset ring-(--ui-border-accented)' } }
-      ]
-    },
-    button: {
-      compoundVariants: [
-        ...widen(['outline', 'subtle']),
-        { variant: 'solid', class: FRAME },
-        { variant: 'soft', class: FRAME }
-      ]
-    },
-    badge: {
-      compoundVariants: [
-        ...widen(['outline', 'subtle']),
-        { variant: 'solid', class: FRAME },
-        { variant: 'soft', class: FRAME }
-      ]
-    },
-    ...FIELD_RING_FRAGMENTS,
-    ...SLOT_RING_FRAGMENTS,
-    select: { slots: { content: 'ring-2' }, compoundVariants: widen(['outline', 'subtle']) },
-    selectMenu: { slots: { content: 'ring-2' }, compoundVariants: widen(['outline', 'subtle']) },
-    inputMenu: { slots: { content: 'ring-2' }, compoundVariants: widen(['outline', 'subtle']) }
-  }
+/**
+ * 'none' zeroes every ring, 'custom' sets the chosen width. Legacy
+ * 'bold'/'frame' (old exports and saved prefs) read as custom at the
+ * default width — the frame treatment's solid-surface outlines retired.
+ */
+function borderFragments(style: StyleOptions): Fragments {
+  if (!style.border || style.border === 'default') return {}
+  if (style.border === 'none') return ringFragments(0)
+  return ringFragments(style.borderWidth ?? BORDER_WIDTH_DEFAULT)
 }
 
 /**
@@ -508,7 +477,7 @@ export function styleComponents(style: StyleOptions): Fragments {
   const sources = [
     defaults,
     SHADOW_FRAGMENTS[style.shadow ?? 'none'],
-    BORDER_FRAGMENTS[style.border ?? 'default'],
+    borderFragments(style),
     style.borderColor && style.borderColor !== 'default' ? FRAME_COLOR_FRAGMENTS : {}
   ]
 
@@ -587,6 +556,18 @@ export function mergeUi(
 /** Every component key a style bundle may touch — cleared before re-applying. */
 export const STYLE_COMPONENT_KEYS = [...new Set([
   ...Object.values(SHADOW_FRAGMENTS).flatMap(fragments => Object.keys(fragments)),
-  ...Object.values(BORDER_FRAGMENTS).flatMap(fragments => Object.keys(fragments)),
+  ...Object.keys(ringFragments(BORDER_WIDTH_DEFAULT)),
   ...Object.keys(FRAME_COLOR_FRAGMENTS)
 ])]
+
+/**
+ * The style axes that mean "leave it alone": no shadow (or 'none'), border
+ * 'default', and nothing else set. Border 'none' is a REAL choice (strip
+ * every ring), so the generic value-check can't be reused for it.
+ */
+export function isDefaultStyle(style: StyleOptions = {}): boolean {
+  const { shadow, border, ...rest } = style
+  return (!shadow || shadow === 'none')
+    && (!border || border === 'default')
+    && !Object.values(rest).some(value => value && value !== 'default')
+}
