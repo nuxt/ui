@@ -281,14 +281,14 @@ const shadowColor = computed({
       <template #colors>
         <div class="flex flex-col gap-2.5 pt-1 pb-4">
           <fieldset class="rounded-md ring ring-default bg-default p-2.5">
-            <legend class="w-full text-xs leading-none font-semibold mb-2.5 select-none flex items-center gap-1 cursor-pointer">
+            <legend class="bg-default text-xs leading-none font-semibold select-none flex items-center gap-1 cursor-pointer">
               <UButton
                 label="Primary"
                 color="neutral"
-                variant="outline"
+                variant="ghost"
                 size="xs"
                 icon="i-lucide-chevron-down"
-                class=" justify-start -my-1 gap-1 text-xs font-semibold text-default"
+
                 :ui="{ leadingIcon: ['size-3 text-dimmed transition-transform duration-200', !openSections.primary && '-rotate-90'] }"
                 @click="openSections.primary = !openSections.primary"
               />
@@ -297,15 +297,15 @@ const shadowColor = computed({
                 to="/docs/getting-started/theme/css-variables#colors"
                 size="xs"
                 color="neutral"
-                variant="link"
+                variant="ghost"
                 icon="i-lucide-help-circle"
-                class="p-0 -my-0.5"
+
                 :ui="{ leadingIcon: 'size-3' }"
               />
             </legend>
 
             <div v-show="openSections.primary">
-              <div class="flex items-center gap-1">
+              <UFieldGroup size="sm" class="flex w-full">
                 <UPopover :content="{ side: 'bottom', align: 'start' }" class="flex-1 min-w-0">
                   <UButton
                     color="neutral"
@@ -354,27 +354,28 @@ const shadowColor = computed({
                 <UButton
                   :icon="isCustomPalette('primary') ? 'i-lucide-paintbrush' : 'i-lucide-pencil'"
                   color="neutral"
-                  :variant="paletteEditors.primary ? 'soft' : 'ghost'"
+                  variant="outline"
                   size="sm"
                   aria-label="Edit primary palette"
+                  class="ring-default rounded-sm hover:bg-elevated/50"
+                  :class="{ 'bg-elevated/50': paletteEditors.primary }"
                   :ui="{ leadingIcon: isCustomPalette('primary') ? 'text-primary size-3.5' : 'size-3.5' }"
                   @click="paletteEditors.primary = !paletteEditors.primary"
                 />
-              </div>
+              </UFieldGroup>
 
               <ThemeStudioPaletteEditor v-model:open="paletteEditors.primary" alias="primary" />
             </div>
           </fieldset>
 
           <fieldset class="rounded-md ring ring-default bg-default p-2.5">
-            <legend class="w-full text-xs leading-none font-semibold mb-2.5 select-none flex items-center gap-1 cursor-pointer">
+            <legend class="bg-default text-xs leading-none font-semibold select-none flex items-center gap-1 cursor-pointer">
               <UButton
                 label="Background"
                 color="neutral"
                 variant="ghost"
                 size="xs"
                 icon="i-lucide-chevron-down"
-                class="flex-1 justify-start -my-1 -ms-1.5 gap-1 text-xs font-semibold text-default"
                 :ui="{ leadingIcon: ['size-3 text-dimmed transition-transform duration-200', !openSections.neutral && '-rotate-90'] }"
                 @click="openSections.neutral = !openSections.neutral"
               />
@@ -383,15 +384,14 @@ const shadowColor = computed({
                 to="/docs/getting-started/theme/css-variables#text"
                 size="xs"
                 color="neutral"
-                variant="link"
+                variant="ghost"
                 icon="i-lucide-help-circle"
-                class="p-0 -my-0.5"
                 :ui="{ leadingIcon: 'size-3' }"
               />
             </legend>
 
             <div v-show="openSections.neutral">
-              <div class="flex items-center gap-1">
+              <UFieldGroup size="sm" class="flex w-full">
                 <UPopover :content="{ side: 'bottom', align: 'start' }" class="flex-1 min-w-0">
                   <UButton
                     color="neutral"
@@ -429,27 +429,28 @@ const shadowColor = computed({
                 <UButton
                   :icon="isCustomPalette('neutral') ? 'i-lucide-paintbrush' : 'i-lucide-pencil'"
                   color="neutral"
-                  :variant="paletteEditors.neutral ? 'soft' : 'ghost'"
+                  variant="outline"
                   size="sm"
                   aria-label="Edit background palette"
+                  class="ring-default rounded-sm hover:bg-elevated/50"
+                  :class="{ 'bg-elevated/50': paletteEditors.neutral }"
                   :ui="{ leadingIcon: isCustomPalette('neutral') ? 'text-primary size-3.5' : 'size-3.5' }"
                   @click="paletteEditors.neutral = !paletteEditors.neutral"
                 />
-              </div>
+              </UFieldGroup>
 
               <ThemeStudioPaletteEditor v-model:open="paletteEditors.neutral" alias="neutral" />
             </div>
           </fieldset>
 
           <fieldset class="rounded-md ring ring-default bg-default p-2.5">
-            <legend class="w-full text-xs leading-none font-semibold mb-2.5 select-none flex items-center gap-1 cursor-pointer">
+            <legend class="bg-default text-xs leading-none font-semibold select-none flex items-center gap-1 cursor-pointer">
               <UButton
                 label="Semantic"
                 color="neutral"
                 variant="ghost"
                 size="xs"
                 icon="i-lucide-chevron-down"
-                class="flex-1 justify-start -my-1 -ms-1.5 gap-1 text-xs font-semibold text-default"
                 :ui="{ leadingIcon: ['size-3 text-dimmed transition-transform duration-200', !openSections.semantic && '-rotate-90'] }"
                 @click="openSections.semantic = !openSections.semantic"
               />
@@ -458,9 +459,8 @@ const shadowColor = computed({
                 to="/docs/getting-started/theme/colors"
                 size="xs"
                 color="neutral"
-                variant="link"
+                variant="ghost"
                 icon="i-lucide-help-circle"
-                class="p-0 -my-0.5"
                 :ui="{ leadingIcon: 'size-3' }"
               />
             </legend>
@@ -470,49 +470,53 @@ const shadowColor = computed({
                 <div class="flex items-center gap-2">
                   <span class="text-[11px] text-muted w-13 shrink-0 capitalize select-none">{{ alias }}</span>
 
-                  <UPopover :content="{ side: 'bottom', align: 'start' }" class="flex-1 min-w-0">
+                  <UFieldGroup size="sm" class="flex flex-1 min-w-0">
+                    <UPopover :content="{ side: 'bottom', align: 'start' }" class="flex-1 min-w-0">
+                      <UButton
+                        color="neutral"
+                        variant="outline"
+                        size="sm"
+                        block
+                        trailing-icon="i-lucide-chevron-down"
+                        class="justify-start capitalize ring-default rounded-sm text-[11px] hover:bg-elevated/50 data-[state=open]:bg-elevated/50"
+                        :ui="{ trailingIcon: 'ms-auto size-4 group-data-[state=open]:rotate-180 transition-transform duration-200' }"
+                      >
+                        <template #leading>
+                          <span
+                            class="inline-block size-3 rounded-full"
+                            :style="{ backgroundColor: `var(--color-${paletteChip(aliasValues[alias] || alias)}-500)` }"
+                          />
+                        </template>
+
+                        {{ aliasLabel(alias) }}
+                      </UButton>
+
+                      <template #content>
+                        <div class="grid grid-cols-3 gap-1 w-72 p-2">
+                          <ThemePickerButton
+                            v-for="color in primaryPickerColors"
+                            :key="color"
+                            :label="color"
+                            :chip="paletteChip(color)"
+                            :selected="aliasValues[alias] === color"
+                            @click="selectPalette(alias, color)"
+                          />
+                        </div>
+                      </template>
+                    </UPopover>
+
                     <UButton
+                      :icon="isCustomPalette(alias) ? 'i-lucide-paintbrush' : 'i-lucide-pencil'"
                       color="neutral"
                       variant="outline"
                       size="sm"
-                      block
-                      trailing-icon="i-lucide-chevron-down"
-                      class="justify-start capitalize ring-default rounded-sm text-[11px] hover:bg-elevated/50 data-[state=open]:bg-elevated/50"
-                      :ui="{ trailingIcon: 'ms-auto size-4 group-data-[state=open]:rotate-180 transition-transform duration-200' }"
-                    >
-                      <template #leading>
-                        <span
-                          class="inline-block size-3 rounded-full"
-                          :style="{ backgroundColor: `var(--color-${paletteChip(aliasValues[alias] || alias)}-500)` }"
-                        />
-                      </template>
-
-                      {{ aliasLabel(alias) }}
-                    </UButton>
-
-                    <template #content>
-                      <div class="grid grid-cols-3 gap-1 w-72 p-2">
-                        <ThemePickerButton
-                          v-for="color in primaryPickerColors"
-                          :key="color"
-                          :label="color"
-                          :chip="paletteChip(color)"
-                          :selected="aliasValues[alias] === color"
-                          @click="selectPalette(alias, color)"
-                        />
-                      </div>
-                    </template>
-                  </UPopover>
-
-                  <UButton
-                    :icon="isCustomPalette(alias) ? 'i-lucide-paintbrush' : 'i-lucide-pencil'"
-                    color="neutral"
-                    :variant="paletteEditors[alias] ? 'soft' : 'ghost'"
-                    size="sm"
-                    :aria-label="`Edit ${alias} palette`"
-                    :ui="{ leadingIcon: isCustomPalette(alias) ? 'text-primary size-3.5' : 'size-3.5' }"
-                    @click="paletteEditors[alias] = !paletteEditors[alias]"
-                  />
+                      :aria-label="`Edit ${alias} palette`"
+                      class="ring-default rounded-sm hover:bg-elevated/50"
+                      :class="{ 'bg-elevated/50': paletteEditors[alias] }"
+                      :ui="{ leadingIcon: isCustomPalette(alias) ? 'text-primary size-3.5' : 'size-3.5' }"
+                      @click="paletteEditors[alias] = !paletteEditors[alias]"
+                    />
+                  </UFieldGroup>
                 </div>
 
                 <ThemeStudioPaletteEditor v-model:open="paletteEditors[alias]" :alias="alias" />
@@ -525,14 +529,13 @@ const shadowColor = computed({
       <template #style>
         <div class="flex flex-col gap-2.5 pt-1 pb-4">
           <fieldset class="rounded-md ring ring-default bg-default p-2.5">
-            <legend class="w-full text-xs leading-none font-semibold mb-2.5 select-none flex items-center gap-1 cursor-pointer">
+            <legend class="bg-default text-xs leading-none font-semibold select-none flex items-center gap-1 cursor-pointer">
               <UButton
                 label="Radius"
                 color="neutral"
                 variant="ghost"
                 size="xs"
                 icon="i-lucide-chevron-down"
-                class="flex-1 justify-start -my-1 -ms-1.5 gap-1 text-xs font-semibold text-default"
                 :ui="{ leadingIcon: ['size-3 text-dimmed transition-transform duration-200', !openSections.radius && '-rotate-90'] }"
                 @click="openSections.radius = !openSections.radius"
               />
@@ -541,9 +544,8 @@ const shadowColor = computed({
                 to="/docs/getting-started/theme/css-variables#radius"
                 size="xs"
                 color="neutral"
-                variant="link"
+                variant="ghost"
                 icon="i-lucide-help-circle"
-                class="p-0 -my-0.5"
                 :ui="{ leadingIcon: 'size-3' }"
               />
             </legend>
@@ -562,14 +564,13 @@ const shadowColor = computed({
           </fieldset>
 
           <fieldset class="rounded-md ring ring-default bg-default p-2.5">
-            <legend class="w-full text-xs leading-none font-semibold mb-2.5 select-none flex items-center gap-1 cursor-pointer">
+            <legend class="bg-default text-xs leading-none font-semibold select-none flex items-center gap-1 cursor-pointer">
               <UButton
                 label="Sizing"
                 color="neutral"
                 variant="ghost"
                 size="xs"
                 icon="i-lucide-chevron-down"
-                class="flex-1 justify-start -my-1 -ms-1.5 gap-1 text-xs font-semibold text-default"
                 :ui="{ leadingIcon: ['size-3 text-dimmed transition-transform duration-200', !openSections.sizing && '-rotate-90'] }"
                 @click="openSections.sizing = !openSections.sizing"
               />
@@ -595,14 +596,13 @@ const shadowColor = computed({
           </fieldset>
 
           <fieldset class="rounded-md ring ring-default bg-default p-2.5">
-            <legend class="w-full text-xs leading-none font-semibold mb-2.5 select-none flex items-center gap-1 cursor-pointer">
+            <legend class="bg-default text-xs leading-none font-semibold select-none flex items-center gap-1 cursor-pointer">
               <UButton
                 label="Defaults"
                 color="neutral"
                 variant="ghost"
                 size="xs"
                 icon="i-lucide-chevron-down"
-                class="flex-1 justify-start -my-1 -ms-1.5 gap-1 text-xs font-semibold text-default"
                 :ui="{ leadingIcon: ['size-3 text-dimmed transition-transform duration-200', !openSections.defaults && '-rotate-90'] }"
                 @click="openSections.defaults = !openSections.defaults"
               />
@@ -640,14 +640,13 @@ const shadowColor = computed({
           </fieldset>
 
           <fieldset class="rounded-md ring ring-default bg-default p-2.5">
-            <legend class="w-full text-xs leading-none font-semibold mb-2.5 select-none flex items-center gap-1 cursor-pointer">
+            <legend class="bg-default text-xs leading-none font-semibold select-none flex items-center gap-1 cursor-pointer">
               <UButton
                 label="Shadows"
                 color="neutral"
                 variant="ghost"
                 size="xs"
                 icon="i-lucide-chevron-down"
-                class="flex-1 justify-start -my-1 -ms-1.5 gap-1 text-xs font-semibold text-default"
                 :ui="{ leadingIcon: ['size-3 text-dimmed transition-transform duration-200', !openSections.shadows && '-rotate-90'] }"
                 @click="openSections.shadows = !openSections.shadows"
               />
@@ -708,14 +707,13 @@ const shadowColor = computed({
           </fieldset>
 
           <fieldset class="rounded-md ring ring-default bg-default p-2.5">
-            <legend class="w-full text-xs leading-none font-semibold mb-2.5 select-none flex items-center gap-1 cursor-pointer">
+            <legend class="bg-default text-xs leading-none font-semibold select-none flex items-center gap-1 cursor-pointer">
               <UButton
                 label="Borders"
                 color="neutral"
                 variant="ghost"
                 size="xs"
                 icon="i-lucide-chevron-down"
-                class="flex-1 justify-start -my-1 -ms-1.5 gap-1 text-xs font-semibold text-default"
                 :ui="{ leadingIcon: ['size-3 text-dimmed transition-transform duration-200', !openSections.borders && '-rotate-90'] }"
                 @click="openSections.borders = !openSections.borders"
               />
@@ -762,14 +760,13 @@ const shadowColor = computed({
       <template #tokens>
         <div class="flex flex-col gap-2.5 pt-1 pb-4">
           <fieldset v-for="group in tokenGroups" :key="group.key" class="rounded-md ring ring-default bg-default p-2.5">
-            <legend class="w-full text-xs leading-none font-semibold mb-2.5 select-none flex items-center gap-1 cursor-pointer">
+            <legend class="bg-default text-xs leading-none font-semibold select-none flex items-center gap-1 cursor-pointer">
               <UButton
                 :label="group.label"
                 color="neutral"
                 variant="ghost"
                 size="xs"
                 icon="i-lucide-chevron-down"
-                class="flex-1 justify-start -my-1 -ms-1.5 gap-1 text-xs font-semibold text-default"
                 :ui="{ leadingIcon: ['size-3 text-dimmed transition-transform duration-200', !openSections[`tokens-${group.key}`] && '-rotate-90'] }"
                 @click="openSections[`tokens-${group.key}`] = !openSections[`tokens-${group.key}`]"
               />
@@ -795,14 +792,13 @@ const shadowColor = computed({
       <template #general>
         <div class="flex flex-col gap-2.5 pt-1 pb-4">
           <fieldset class="rounded-md ring ring-default bg-default p-2.5">
-            <legend class="w-full text-xs leading-none font-semibold mb-2.5 select-none flex items-center gap-1 cursor-pointer">
+            <legend class="bg-default text-xs leading-none font-semibold select-none flex items-center gap-1 cursor-pointer">
               <UButton
                 label="Font"
                 color="neutral"
                 variant="ghost"
                 size="xs"
                 icon="i-lucide-chevron-down"
-                class="flex-1 justify-start -my-1 -ms-1.5 gap-1 text-xs font-semibold text-default"
                 :ui="{ leadingIcon: ['size-3 text-dimmed transition-transform duration-200', !openSections.font && '-rotate-90'] }"
                 @click="openSections.font = !openSections.font"
               />
@@ -811,9 +807,8 @@ const shadowColor = computed({
                 to="/docs/getting-started/integrations/fonts"
                 size="xs"
                 color="neutral"
-                variant="link"
+                variant="ghost"
                 icon="i-lucide-help-circle"
-                class="p-0 -my-0.5"
                 :ui="{ leadingIcon: 'size-3' }"
               />
             </legend>
@@ -832,14 +827,13 @@ const shadowColor = computed({
           </fieldset>
 
           <fieldset class="rounded-md ring ring-default bg-default p-2.5">
-            <legend class="w-full text-xs leading-none font-semibold mb-2.5 select-none flex items-center gap-1 cursor-pointer">
+            <legend class="bg-default text-xs leading-none font-semibold select-none flex items-center gap-1 cursor-pointer">
               <UButton
                 label="Icons"
                 color="neutral"
                 variant="ghost"
                 size="xs"
                 icon="i-lucide-chevron-down"
-                class="flex-1 justify-start -my-1 -ms-1.5 gap-1 text-xs font-semibold text-default"
                 :ui="{ leadingIcon: ['size-3 text-dimmed transition-transform duration-200', !openSections.icons && '-rotate-90'] }"
                 @click="openSections.icons = !openSections.icons"
               />
@@ -848,9 +842,8 @@ const shadowColor = computed({
                 to="/docs/getting-started/integrations/icons"
                 size="xs"
                 color="neutral"
-                variant="link"
+                variant="ghost"
                 icon="i-lucide-help-circle"
-                class="p-0 -my-0.5"
                 :ui="{ leadingIcon: 'size-3' }"
               />
             </legend>
