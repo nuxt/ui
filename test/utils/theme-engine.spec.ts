@@ -354,6 +354,18 @@ describe('style colors', () => {
     expect(components.textarea!.compoundVariants).toContainEqual({ variant: 'none', class: 'shadow-none' })
   })
 
+  it('border recoloring spares semantic outline rings but frames every solid', async () => {
+    const { styleComponents } = await import('../../docs/app/utils/theme-engine')
+    const compounds = styleComponents({ border: 'frame', borderColor: 'primary' }).button!.compoundVariants!
+
+    // outline/subtle rings ARE the semantic signal — only primary/neutral repaint
+    expect(compounds).toContainEqual({ color: ['primary', 'neutral'], variant: 'outline', class: 'ring-(--ui-frame-color)' })
+    expect(compounds).toContainEqual({ color: ['primary', 'neutral'], variant: 'subtle', class: 'ring-(--ui-frame-color)' })
+    // frames around solid/soft surfaces repaint for every color
+    expect(compounds).toContainEqual({ variant: 'solid', class: 'ring-(--ui-frame-color)' })
+    expect(compounds).toContainEqual({ variant: 'soft', class: 'ring-(--ui-frame-color)' })
+  })
+
   it('borderColor appends recolor compounds after width ones', async () => {
     const { styleComponents } = await import('../../docs/app/utils/theme-engine')
     const compounds = styleComponents({ border: 'bold', borderColor: 'black' }).button!.compoundVariants!

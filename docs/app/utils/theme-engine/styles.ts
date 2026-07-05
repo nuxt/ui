@@ -257,19 +257,49 @@ const BORDER_FRAGMENTS: Record<BorderStyle, Fragments> = {
   }
 }
 
-/** compound entries recoloring whatever ring is present via the variable */
-function recolor(variants: string[], slot?: string): Array<Record<string, unknown>> {
-  return variants.map(variant => ({ variant, class: slot ? { [slot]: 'ring-(--ui-frame-color)' } : 'ring-(--ui-frame-color)' }))
+/**
+ * compound entries recoloring rings via the variable. With `colors` given,
+ * only those color variants are touched — on outline/subtle the ring IS the
+ * semantic signal (an error badge's ring must stay error-colored), so those
+ * only recolor for primary/neutral. Frames added around solid/soft surfaces
+ * are outlines by design and recolor for every color (comic-book black
+ * outlines a solid error button too).
+ */
+function recolor(variants: string[], slot?: string, colors?: string[]): Array<Record<string, unknown>> {
+  return variants.map(variant => ({
+    ...(colors ? { color: colors } : {}),
+    variant,
+    class: slot ? { [slot]: 'ring-(--ui-frame-color)' } : 'ring-(--ui-frame-color)'
+  }))
 }
 
+/** Colors whose rings carry no semantic meaning — safe to repaint. */
+const UNSIGNALED_COLORS = ['primary', 'neutral']
+
 const FRAME_COLOR_FRAGMENTS: Fragments = {
+  // cards have no color variants; field rings are neutral for every color
   card: { compoundVariants: recolor(['outline', 'subtle', 'solid', 'soft'], 'root') },
   input: { compoundVariants: recolor(['outline', 'subtle']) },
   select: { compoundVariants: recolor(['outline', 'subtle']) },
   textarea: { compoundVariants: recolor(['outline', 'subtle']) },
-  alert: { compoundVariants: recolor(['outline', 'subtle', 'solid', 'soft'], 'root') },
-  button: { compoundVariants: recolor(['outline', 'subtle', 'solid', 'soft']) },
-  badge: { compoundVariants: recolor(['outline', 'subtle', 'solid', 'soft']) }
+  alert: {
+    compoundVariants: [
+      ...recolor(['outline', 'subtle'], 'root', UNSIGNALED_COLORS),
+      ...recolor(['solid', 'soft'], 'root')
+    ]
+  },
+  button: {
+    compoundVariants: [
+      ...recolor(['outline', 'subtle'], undefined, UNSIGNALED_COLORS),
+      ...recolor(['solid', 'soft'])
+    ]
+  },
+  badge: {
+    compoundVariants: [
+      ...recolor(['outline', 'subtle'], undefined, UNSIGNALED_COLORS),
+      ...recolor(['solid', 'soft'])
+    ]
+  }
 }
 
 /** Per-mode values behind the two color variables, per palette choice. */
