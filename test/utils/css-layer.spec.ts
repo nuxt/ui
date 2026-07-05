@@ -119,4 +119,17 @@ describe('CSS cascade layers', () => {
     expect(output).toContain(':where(.light, .light *)')
     expect(output).toContain(':where(.dark, .dark *)')
   })
+
+  it('keeps Nuxt sources in the same Tailwind root as the base styles', async () => {
+    const splitSourcesCompiler = await compileNuxtUI('@import "@nuxt/ui/sources";')
+    splitSourcesCompiler.build(['light:bg-primary', 'dark:bg-primary'])
+
+    await expect(compileNuxtUI('@import "tailwindcss";\n@import "@nuxt/ui/base";')).rejects.toThrow('Cannot apply unknown utility class')
+
+    const compiler = await compileNuxtUI('@import "tailwindcss";\n@import "@nuxt/ui";')
+    const output = compiler.build(['light:bg-primary', 'dark:bg-primary'])
+
+    expect(output).toContain(':where(.light, .light *)')
+    expect(output).toContain(':where(.dark, .dark *)')
+  })
 })
