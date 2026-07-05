@@ -50,10 +50,17 @@ const openSections = reactive<Record<string, boolean>>({
   ...Object.fromEntries(TOKEN_GROUPS.map((group, index) => [`tokens-${group.key}`, index === 0]))
 })
 
-// Every ramp is a suggestion for either role: colorful ones lead the
-// primary picker, neutrals lead the background picker.
-const primaryPickerColors = [...primaryColors, ...neutralColors]
-const backgroundPickerColors = [...neutralColors, ...primaryColors]
+// Every ramp is a suggestion for either role, sectioned so the list stays
+// scannable: colorful ramps lead the primary/semantic pickers, neutrals
+// lead the background picker.
+const colorSections = [
+  { label: 'Colors', colors: primaryColors },
+  { label: 'Neutrals', colors: neutralColors }
+]
+const backgroundSections = [
+  { label: 'Neutrals', colors: neutralColors },
+  { label: 'Colors', colors: primaryColors }
+]
 
 const semanticAliases: ColorAlias[] = ['secondary', 'success', 'info', 'warning', 'error']
 
@@ -372,25 +379,34 @@ const shadowColor = computed({
                   </UButton>
 
                   <template #content>
-                    <div class="grid grid-cols-3 gap-1 w-72 p-2">
-                      <ThemePickerButton
-                        label="Black"
-                        :selected="blackAsPrimary"
-                        @click="setBlackAsPrimary(true)"
-                      >
-                        <template #leading>
-                          <span class="inline-block size-2 rounded-full bg-black dark:bg-white" />
-                        </template>
-                      </ThemePickerButton>
+                    <div class="flex flex-col gap-2 w-72 p-2">
+                      <div v-for="(section, index) in colorSections" :key="section.label">
+                        <p class="text-[11px] font-semibold text-muted px-1 mb-1 select-none">
+                          {{ section.label }}
+                        </p>
 
-                      <ThemePickerButton
-                        v-for="color in primaryPickerColors"
-                        :key="color"
-                        :label="color"
-                        :chip="paletteChip(color)"
-                        :selected="!blackAsPrimary && primary === color"
-                        @click="selectPalette('primary', color)"
-                      />
+                        <div class="grid grid-cols-3 gap-1">
+                          <ThemePickerButton
+                            v-if="index === 0"
+                            label="Black"
+                            :selected="blackAsPrimary"
+                            @click="setBlackAsPrimary(true)"
+                          >
+                            <template #leading>
+                              <span class="inline-block size-2 rounded-full bg-black dark:bg-white" />
+                            </template>
+                          </ThemePickerButton>
+
+                          <ThemePickerButton
+                            v-for="color in section.colors"
+                            :key="color"
+                            :label="color"
+                            :chip="paletteChip(color)"
+                            :selected="!blackAsPrimary && primary === color"
+                            @click="selectPalette('primary', color)"
+                          />
+                        </div>
+                      </div>
                     </div>
                   </template>
                 </UPopover>
@@ -457,15 +473,23 @@ const shadowColor = computed({
                   </UButton>
 
                   <template #content>
-                    <div class="grid grid-cols-3 gap-1 w-72 p-2">
-                      <ThemePickerButton
-                        v-for="color in backgroundPickerColors"
-                        :key="color"
-                        :label="color"
-                        :chip="paletteChip(color)"
-                        :selected="neutral === color"
-                        @click="selectPalette('neutral', color)"
-                      />
+                    <div class="flex flex-col gap-2 w-72 p-2">
+                      <div v-for="section in backgroundSections" :key="section.label">
+                        <p class="text-[11px] font-semibold text-muted px-1 mb-1 select-none">
+                          {{ section.label }}
+                        </p>
+
+                        <div class="grid grid-cols-3 gap-1">
+                          <ThemePickerButton
+                            v-for="color in section.colors"
+                            :key="color"
+                            :label="color"
+                            :chip="paletteChip(color)"
+                            :selected="neutral === color"
+                            @click="selectPalette('neutral', color)"
+                          />
+                        </div>
+                      </div>
                     </div>
                   </template>
                 </UPopover>
@@ -536,15 +560,23 @@ const shadowColor = computed({
                       </UButton>
 
                       <template #content>
-                        <div class="grid grid-cols-3 gap-1 w-72 p-2">
-                          <ThemePickerButton
-                            v-for="color in primaryPickerColors"
-                            :key="color"
-                            :label="color"
-                            :chip="paletteChip(color)"
-                            :selected="aliasValues[alias] === color"
-                            @click="selectPalette(alias, color)"
-                          />
+                        <div class="flex flex-col gap-2 w-72 p-2">
+                          <div v-for="section in colorSections" :key="section.label">
+                            <p class="text-[11px] font-semibold text-muted px-1 mb-1 select-none">
+                              {{ section.label }}
+                            </p>
+
+                            <div class="grid grid-cols-3 gap-1">
+                              <ThemePickerButton
+                                v-for="color in section.colors"
+                                :key="color"
+                                :label="color"
+                                :chip="paletteChip(color)"
+                                :selected="aliasValues[alias] === color"
+                                @click="selectPalette(alias, color)"
+                              />
+                            </div>
+                          </div>
                         </div>
                       </template>
                     </UPopover>
