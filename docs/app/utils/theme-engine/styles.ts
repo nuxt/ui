@@ -260,6 +260,23 @@ export const BORDER_WIDTH_DEFAULT = 2
 const RING_WIDTH_CLASSES: Record<number, string> = { 0: 'ring-0', 1: 'ring-1', 2: 'ring-2', 3: 'ring-3', 4: 'ring-4' }
 const SM_RING_WIDTH_CLASSES: Record<number, string> = { 0: 'sm:ring-0', 1: 'sm:ring-1', 2: 'sm:ring-2', 3: 'sm:ring-3', 4: 'sm:ring-4' }
 
+/** Same idea for the border-utility edges: separators, chrome, dividers. */
+const EDGE_CLASSES: Record<'t' | 'b' | 'e' | 's', Record<number, string>> = {
+  t: { 0: 'border-t-0', 1: 'border-t', 2: 'border-t-2', 3: 'border-t-3', 4: 'border-t-4' },
+  b: { 0: 'border-b-0', 1: 'border-b', 2: 'border-b-2', 3: 'border-b-3', 4: 'border-b-4' },
+  e: { 0: 'border-e-0', 1: 'border-e', 2: 'border-e-2', 3: 'border-e-3', 4: 'border-e-4' },
+  s: { 0: 'border-s-0', 1: 'border-s', 2: 'border-s-2', 3: 'border-s-3', 4: 'border-s-4' }
+}
+const DIVIDE_Y_CLASSES: Record<number, string> = { 0: 'divide-y-0', 1: 'divide-y', 2: 'divide-y-2', 3: 'divide-y-3', 4: 'divide-y-4' }
+// dashboard panels only draw their edge between siblings on lg — same scoping
+const PANEL_EDGE_CLASSES: Record<number, string> = {
+  0: 'lg:not-last:border-e-0',
+  1: 'lg:not-last:border-e',
+  2: 'lg:not-last:border-e-2',
+  3: 'lg:not-last:border-e-3',
+  4: 'lg:not-last:border-e-4'
+}
+
 /**
  * Apply one ring-width class across every ring-bearing surface: variant-level
  * rings (outline/subtle on buttons/panels/fields) via compounds, slot-level
@@ -272,12 +289,22 @@ function ringFragments(width: number): Fragments {
   const compound = (variants: string[], slot?: string) =>
     variants.map(variant => ({ variant, class: slot ? { [slot]: cls } : cls }))
 
+  const edge = (side: 't' | 'b' | 'e' | 's') => EDGE_CLASSES[side][width] || EDGE_CLASSES[side][BORDER_WIDTH_DEFAULT]!
+  const divide = DIVIDE_Y_CLASSES[width] || DIVIDE_Y_CLASSES[BORDER_WIDTH_DEFAULT]!
+
   return {
-    card: { compoundVariants: compound(['outline', 'subtle'], 'root') },
+    // card's section dividers scale with its ring
+    card: {
+      compoundVariants: [
+        ...['outline', 'subtle'].map(variant => ({ variant, class: { root: `${cls} ${divide}` } })),
+        ...['solid', 'soft'].map(variant => ({ variant, class: { root: divide } }))
+      ]
+    },
     empty: { compoundVariants: compound(['outline', 'subtle'], 'root') },
     alert: { compoundVariants: compound(['outline', 'subtle'], 'root') },
     button: { compoundVariants: compound(['outline', 'subtle']) },
     badge: { compoundVariants: compound(['outline', 'subtle']) },
+    chatMessage: { compoundVariants: compound(['outline', 'subtle'], 'content') },
     ...Object.fromEntries(FIELD_COMPONENTS.map(component => [component, { compoundVariants: compound(['outline', 'subtle']) }])),
     // menu-bearing fields treat trigger AND dropdown surface
     select: { slots: { content: cls }, compoundVariants: compound(['outline', 'subtle']) },
@@ -292,7 +319,22 @@ function ringFragments(width: number): Fragments {
     modal: { compoundVariants: [{ fullscreen: false, class: { content: cls } }] },
     slideover: { slots: { content: SM_RING_WIDTH_CLASSES[width] || SM_RING_WIDTH_CLASSES[BORDER_WIDTH_DEFAULT]! } },
     checkbox: { slots: { base: cls } },
-    radioGroup: { slots: { base: cls } }
+    radioGroup: { slots: { base: cls } },
+    // Border-utility edges: page/app chrome, separators and dividers
+    // follow the same width so the whole preview reads consistently.
+    separator: {
+      compoundVariants: [
+        { orientation: 'horizontal', class: { border: edge('t') } },
+        { orientation: 'vertical', class: { border: edge('s') } }
+      ]
+    },
+    header: { slots: { root: edge('b') } },
+    accordion: { slots: { item: edge('b') } },
+    table: { slots: { tbody: divide } },
+    dashboardSidebar: { slots: { root: edge('e') } },
+    dashboardNavbar: { slots: { root: edge('b') } },
+    dashboardToolbar: { slots: { root: edge('b') } },
+    dashboardPanel: { slots: { root: PANEL_EDGE_CLASSES[width] || PANEL_EDGE_CLASSES[BORDER_WIDTH_DEFAULT]! } }
   }
 }
 
@@ -323,7 +365,13 @@ function frameFragments(width: number): Fragments {
     empty: { compoundVariants: frame(outset, 'root') },
     alert: { compoundVariants: frame(inset, 'root') },
     button: { compoundVariants: frame(inset) },
-    badge: { compoundVariants: frame(inset) }
+    badge: { compoundVariants: frame(inset) },
+    chatMessage: { compoundVariants: frame(inset, 'content') },
+    // other solid surfaces: the pill tabs wrapper + its indicator, and the
+    // switch track (its checked color-ring loses the merge to ours — the
+    // frame look owns ring color by design, same as solid buttons)
+    tabs: { compoundVariants: [{ variant: 'pill', class: { list: inset, indicator: inset } }] },
+    switch: { slots: { base: inset } }
   }
 }
 
@@ -607,6 +655,7 @@ export function mergeUi(
 export const STYLE_COMPONENT_KEYS = [...new Set([
   ...Object.values(SHADOW_FRAGMENTS).flatMap(fragments => Object.keys(fragments)),
   ...Object.keys(ringFragments(BORDER_WIDTH_DEFAULT)),
+  ...Object.keys(frameFragments(BORDER_WIDTH_DEFAULT)),
   ...Object.keys(FRAME_COLOR_FRAGMENTS)
 ])]
 

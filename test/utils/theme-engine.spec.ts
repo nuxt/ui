@@ -298,7 +298,7 @@ describe('styleComponents', () => {
     expect(components.button!.compoundVariants).toContainEqual({ variant: 'outline', class: 'ring-2' })
     // card rings live at variant level, so bold ships compounds, not slots
     expect(components.card!.slots?.root ?? '').toContain('var(--ui-shadow-final-hard)]')
-    expect(components.card!.compoundVariants).toContainEqual({ variant: 'outline', class: { root: 'ring-2' } })
+    expect(components.card!.compoundVariants).toContainEqual({ variant: 'outline', class: { root: 'ring-2 divide-y-2' } })
   })
 
   it('docToSettings keeps style out of the ui channel but carries its tokens', async () => {
@@ -340,7 +340,7 @@ describe('style colors', () => {
     expect(JSON.stringify(wide.button!.compoundVariants)).not.toContain('"ghost"')
 
     const none = styleComponents({ border: 'none' })
-    expect(none.card!.compoundVariants).toContainEqual({ variant: 'outline', class: { root: 'ring-0' } })
+    expect(none.card!.compoundVariants).toContainEqual({ variant: 'outline', class: { root: 'ring-0 divide-y-0' } })
     expect(none.dropdownMenu!.slots!.content).toBe('ring-0')
 
     // the frame toggle outlines solid/soft surfaces at the chosen width
@@ -348,6 +348,19 @@ describe('style colors', () => {
     expect(framed.button!.compoundVariants).toContainEqual({ variant: 'solid', class: 'ring-3 ring-inset ring-(--ui-border-accented)' })
     expect(framed.card!.compoundVariants).toContainEqual({ variant: 'soft', class: { root: 'ring-3 ring-(--ui-border-accented)' } })
     expect(JSON.stringify(framed.button!.compoundVariants)).not.toContain('"ghost"')
+    // …and the other solid surfaces: pill tabs, chat bubbles, switch track
+    expect(framed.tabs!.compoundVariants).toContainEqual({ variant: 'pill', class: { list: 'ring-3 ring-inset ring-(--ui-border-accented)', indicator: 'ring-3 ring-inset ring-(--ui-border-accented)' } })
+    expect(framed.chatMessage!.compoundVariants).toContainEqual({ variant: 'solid', class: { content: 'ring-3 ring-inset ring-(--ui-border-accented)' } })
+    expect(framed.switch!.slots!.base).toBe('ring-3 ring-inset ring-(--ui-border-accented)')
+
+    // border-utility edges scale with the width: chrome, separators, dividers
+    expect(wide.header!.slots!.root).toBe('border-b-3')
+    expect(wide.dashboardSidebar!.slots!.root).toBe('border-e-3')
+    expect(wide.dashboardPanel!.slots!.root).toBe('lg:not-last:border-e-3')
+    expect(wide.separator!.compoundVariants).toContainEqual({ orientation: 'horizontal', class: { border: 'border-t-3' } })
+    expect(wide.table!.slots!.tbody).toBe('divide-y-3')
+    expect(wide.card!.compoundVariants).toContainEqual({ variant: 'outline', class: { root: 'ring-3 divide-y-3' } })
+    expect(none.header!.slots!.root).toBe('border-b-0')
 
     // legacy saved values keep working: bold = custom width, frame keeps outlines
     expect(styleComponents({ border: 'frame' }).button!.compoundVariants).toContainEqual({ variant: 'solid', class: 'ring-2 ring-inset ring-(--ui-border-accented)' })
