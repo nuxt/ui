@@ -284,6 +284,19 @@ describe('style colors', () => {
     expect(styleTokens({ shadowColor: 'shade' }).dark['--ui-shadow-color']).toBe('var(--ui-color-neutral-800)')
   })
 
+  it('styleTokens maps token shades and folds legacy bgShade', async () => {
+    const { styleTokens } = await import('../../docs/app/utils/theme-engine')
+
+    expect(styleTokens({ tokenShades: { '--ui-text-muted': { light: 600, dark: 300 } } })).toEqual({
+      light: { '--ui-text-muted': 'var(--ui-color-neutral-600)' },
+      dark: { '--ui-text-muted': 'var(--ui-color-neutral-300)' }
+    })
+    // legacy field still applies, explicit map wins over it
+    expect(styleTokens({ bgShade: { light: 100, dark: 800 } }).light['--ui-bg']).toBe('var(--ui-color-neutral-100)')
+    // non-whitelisted tokens are ignored
+    expect(styleTokens({ tokenShades: { '--ui-evil': { light: 50, dark: 50 } } })).toEqual({ light: {}, dark: {} })
+  })
+
   it('styleTokens supports per-mode border shades', async () => {
     const { styleTokens } = await import('../../docs/app/utils/theme-engine')
 

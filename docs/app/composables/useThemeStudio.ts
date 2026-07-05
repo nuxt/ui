@@ -1,6 +1,6 @@
 import { useLocalStorage } from '@vueuse/core'
 import colors from 'tailwindcss/colors'
-import { presets, docToSettings, isDefaultTheme, generatePalette, fitPalette, parseCssColor, styleComponents, styleTokens, DEFAULT_COLORS, SHADES, STYLE_COMPONENT_KEYS, BG_SHADE_DEFAULTS } from '../utils/theme-engine'
+import { presets, docToSettings, isDefaultTheme, generatePalette, fitPalette, parseCssColor, styleComponents, styleTokens, DEFAULT_COLORS, SHADES, STYLE_COMPONENT_KEYS, TOKEN_SHADE_TARGETS } from '../utils/theme-engine'
 import type { ThemeDoc, ThemePreset, PaletteCurveParams, Shade, StyleOptions } from '../utils/theme-engine'
 
 export function useThemeStudio() {
@@ -152,14 +152,20 @@ export function useThemeStudio() {
   function deriveStyle(doc: ThemeDoc): StyleOptions {
     const derived: StyleOptions = { ...(doc.style || {}) }
 
-    if (!derived.bgShade) {
-      const parse = (value?: string) => value?.match(/^var\(--ui-color-neutral-(\d+)\)$/)?.[1]
-      const light = parse(doc.tokens?.light?.['--ui-bg'])
-      const dark = parse(doc.tokens?.dark?.['--ui-bg'])
+    const parse = (value?: string) => value?.match(/^var\(--ui-color-neutral-(\d+)\)$/)?.[1]
+
+    for (const target of TOKEN_SHADE_TARGETS) {
+      if (derived.tokenShades?.[target.token]) continue
+
+      const light = parse(doc.tokens?.light?.[target.token])
+      const dark = parse(doc.tokens?.dark?.[target.token])
       if (light || dark) {
-        derived.bgShade = {
-          light: light ? Number(light) : BG_SHADE_DEFAULTS.light,
-          dark: dark ? Number(dark) : BG_SHADE_DEFAULTS.dark
+        derived.tokenShades = {
+          ...derived.tokenShades,
+          [target.token]: {
+            light: light ? Number(light) : target.defaults.light,
+            dark: dark ? Number(dark) : target.defaults.dark
+          }
         }
       }
     }

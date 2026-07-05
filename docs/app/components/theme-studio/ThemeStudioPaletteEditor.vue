@@ -149,22 +149,34 @@ function scaleChroma(curve: PaletteCurveParams['chroma'], factor: number) {
   curve.p2y *= factor
 }
 
+/** Linearly remap a lightness curve onto new endpoints, preserving its shape. */
+function remapLightness(curve: PaletteCurveParams['lightness'], newY0: number, newY1: number) {
+  const oldY0 = curve.y0
+  const oldY1 = curve.y1
+  const span = oldY0 - oldY1 || 1e-6
+  const map = (value: number) => newY1 + ((value - oldY1) / span) * (newY0 - newY1)
+  curve.p1y = map(curve.p1y)
+  curve.p2y = map(curve.p2y)
+  curve.y0 = newY0
+  curve.y1 = newY1
+}
+
 /** Apply a taste offset ON TOP of the fitted base (idempotent, not cumulative). */
 function applyStyleOffset(name: string) {
   const next = structuredClone(seedBase)
 
   if (name === 'pastel') {
-    scaleChroma(next.chroma, 0.45)
-    next.lightness.y0 = Math.max(next.lightness.y0, 0.985)
-    next.lightness.y1 = Math.max(next.lightness.y1, 0.32)
-    next.lightness.p1y = Math.min(next.lightness.p1y * 1.08, 1.1)
-  } else if (name === 'muted') {
-    scaleChroma(next.chroma, 0.6)
-  } else if (name === 'vivid') {
+    // Candy pastels: compress the lightness range from BOTH ends (nothing
+    // near-white, nothing dark) and push chroma UP so the softness stays
+    // colorful — the gamut clamp keeps the very light stops in check.
+    remapLightness(next.lightness, Math.min(next.lightness.y0, 0.945), Math.max(next.lightness.y1, 0.52))
     scaleChroma(next.chroma, 1.35)
+  } else if (name === 'muted') {
+    scaleChroma(next.chroma, 0.55)
+  } else if (name === 'vivid') {
+    scaleChroma(next.chroma, 1.45)
   } else if (name === 'dazzling') {
-    scaleChroma(next.chroma, 1.9)
-    next.lightness.p2y = next.lightness.p2y * 0.96
+    scaleChroma(next.chroma, 2)
   }
 
   // Not seed(): this IS a user edit, the watcher should live-apply it.

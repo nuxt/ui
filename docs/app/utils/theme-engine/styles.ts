@@ -41,11 +41,17 @@ export interface StyleOptions {
   /** Neutral ramp shade per mode, used when `borderColor` is 'shade' */
   borderShade?: { light: number, dark: number }
   /**
-   * App background as a neutral ramp shade per mode. Strictly a semantic
-   * token shorthand (--ui-bg), parked on the style axis until the studio
-   * grows a full tokens editor.
+   * App background as a neutral ramp shade per mode.
+   * @deprecated superseded by `tokenShades['--ui-bg']`; still read for
+   * persisted state from older sessions.
    */
   bgShade?: { light: number, dark: number }
+  /**
+   * Semantic token → neutral ramp shade per mode. Strictly a token
+   * shorthand parked on the style axis until the studio grows a full
+   * tokens editor. Keys are whitelisted in TOKEN_SHADE_TARGETS.
+   */
+  tokenShades?: Record<string, { light: number, dark: number }>
 }
 
 export const SHADOW_STYLES: ShadowStyle[] = ['none', 'soft', 'hard']
@@ -57,6 +63,18 @@ export const BORDER_SHADE_DEFAULTS = { light: 900, dark: 200 }
 
 /** The docs baseline background shades. */
 export const BG_SHADE_DEFAULTS = { light: 50, dark: 900 }
+
+/**
+ * Semantic tokens the studio exposes as per-mode shade sliders, with the
+ * library/docs default shades. 'white' library values map to shade 50.
+ */
+export const TOKEN_SHADE_TARGETS: Array<{ token: string, label: string, defaults: { light: number, dark: number } }> = [
+  { token: '--ui-bg', label: 'Background', defaults: BG_SHADE_DEFAULTS },
+  { token: '--ui-bg-inverted', label: 'Inverted', defaults: { light: 900, dark: 50 } },
+  { token: '--ui-text-highlighted', label: 'Highlighted', defaults: { light: 900, dark: 50 } },
+  { token: '--ui-text-muted', label: 'Muted', defaults: { light: 500, dark: 400 } },
+  { token: '--ui-text-dimmed', label: 'Dimmed', defaults: { light: 400, dark: 500 } }
+]
 export const SHADOW_COLORS: ShadowColor[] = ['default', 'black', 'inverted', 'primary', 'shade']
 
 export const SHADOW_SHADE_DEFAULTS = { light: 950, dark: 800 }
@@ -203,9 +221,16 @@ export function styleTokens(style: StyleOptions): { light: Record<string, string
     light['--ui-frame-color'] = value.light
     dark['--ui-frame-color'] = value.dark
   }
-  if (style.bgShade) {
-    light['--ui-bg'] = `var(--ui-color-neutral-${style.bgShade.light})`
-    dark['--ui-bg'] = `var(--ui-color-neutral-${style.bgShade.dark})`
+  // Legacy single-purpose field folds into the generic map.
+  const tokenShades = {
+    ...(style.bgShade ? { '--ui-bg': style.bgShade } : {}),
+    ...style.tokenShades
+  }
+  for (const [token, shade] of Object.entries(tokenShades)) {
+    if (TOKEN_SHADE_TARGETS.some(target => target.token === token)) {
+      light[token] = `var(--ui-color-neutral-${shade.light})`
+      dark[token] = `var(--ui-color-neutral-${shade.dark})`
+    }
   }
 
   if (style.shadowColor === 'shade') {
