@@ -201,6 +201,13 @@ const externalRel = computed(() => {
   return 'noopener noreferrer'
 })
 
+// NuxtLink only forwards `rel` to the underlying RouterLink when it is not
+// rendered with `custom`, so internal links must apply the prop themselves.
+const internalRel = computed(() => {
+  if (props.noRel) return null
+  return props.rel || null
+})
+
 function isLinkActive({ route: linkRoute, isActive, isExactActive }: any = {}) {
   if (props.active !== undefined) {
     return props.active
@@ -254,7 +261,7 @@ function resolveLinkClass({ route, isActive, isExactActive }: any = {}) {
           disabled,
           href,
           navigate,
-          rel: (rest as NuxtLinkDefaultSlotProps).rel,
+          rel: (rest as NuxtLinkDefaultSlotProps).rel ?? internalRel,
           target: (rest as NuxtLinkDefaultSlotProps).target,
           isExternal: (rest as NuxtLinkDefaultSlotProps).isExternal,
           active: isLinkActive({ route: linkRoute, isActive, isExactActive })
@@ -271,7 +278,7 @@ function resolveLinkClass({ route, isActive, isExactActive }: any = {}) {
         disabled,
         href,
         navigate,
-        rel: (rest as NuxtLinkDefaultSlotProps).rel,
+        rel: (rest as NuxtLinkDefaultSlotProps).rel ?? internalRel,
         target: (rest as NuxtLinkDefaultSlotProps).target,
         isExternal: (rest as NuxtLinkDefaultSlotProps).isExternal
       }"
