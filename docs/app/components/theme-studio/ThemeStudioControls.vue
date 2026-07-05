@@ -176,8 +176,13 @@ function rampChip(ramp: TokenRamp): string {
 
 const modeTabs = computed(() => modes.value.map(m => ({ label: m.label, icon: m.icon, value: m.label })))
 
-const primaryEditorOpen = ref(false)
-const neutralEditorOpen = ref(false)
+// One curve editor per alias, toggled by the edit icon next to each select.
+const paletteEditors = reactive<Record<string, boolean>>({})
+
+/** Display name for an alias's palette — custom ramps read as 'Custom'. */
+function aliasLabel(alias: ColorAlias) {
+  return isCustomPalette(alias) ? 'Custom' : aliasValues.value[alias]
+}
 
 const openGroups = ref('colors')
 
@@ -276,14 +281,14 @@ const shadowColor = computed({
       <template #colors>
         <div class="flex flex-col gap-2.5 pt-1 pb-4">
           <fieldset class="rounded-md ring ring-default bg-default p-2.5">
-            <legend class="w-full text-xs leading-none font-semibold mb-2.5 select-none flex items-center gap-1 cursor-pointer bg-default">
+            <legend class="w-full text-xs leading-none font-semibold mb-2.5 select-none flex items-center gap-1 cursor-pointer">
               <UButton
                 label="Primary"
                 color="neutral"
-                variant="ghost"
+                variant="outline"
                 size="xs"
                 icon="i-lucide-chevron-down"
-                class="flex-1 justify-start -my-1 -ms-1.5 gap-1 text-xs font-semibold text-default"
+                class=" justify-start -my-1 gap-1 text-xs font-semibold text-default"
                 :ui="{ leadingIcon: ['size-3 text-dimmed transition-transform duration-200', !openSections.primary && '-rotate-90'] }"
                 @click="openSections.primary = !openSections.primary"
               />
@@ -297,66 +302,67 @@ const shadowColor = computed({
                 class="p-0 -my-0.5"
                 :ui="{ leadingIcon: 'size-3' }"
               />
-
-              <UButton
-                label="Custom"
-                :icon="isCustomPalette('primary') ? 'i-lucide-paintbrush' : 'i-lucide-wand-sparkles'"
-                color="neutral"
-                :variant="primaryEditorOpen ? 'soft' : 'ghost'"
-                size="xs"
-                class="-my-1 text-[11px]"
-                :ui="{ leadingIcon: isCustomPalette('primary') ? 'text-primary size-3' : 'size-3' }"
-                @click="primaryEditorOpen = !primaryEditorOpen"
-              />
             </legend>
 
             <div v-show="openSections.primary">
-              <UPopover :content="{ side: 'bottom', align: 'start' }">
-                <UButton
-                  color="neutral"
-                  variant="outline"
-                  size="sm"
-                  block
-                  trailing-icon="i-lucide-chevron-down"
-                  class="justify-start capitalize ring-default rounded-sm text-[11px] hover:bg-elevated/50 data-[state=open]:bg-elevated/50"
-                  :ui="{ trailingIcon: 'ms-auto size-4 group-data-[state=open]:rotate-180 transition-transform duration-200' }"
-                >
-                  <template #leading>
-                    <span
-                      class="inline-block size-3 rounded-full"
-                      :class="{ 'bg-black dark:bg-white': blackAsPrimary }"
-                      :style="primarySwatch.color ? { backgroundColor: primarySwatch.color } : undefined"
-                    />
+              <div class="flex items-center gap-1">
+                <UPopover :content="{ side: 'bottom', align: 'start' }" class="flex-1 min-w-0">
+                  <UButton
+                    color="neutral"
+                    variant="outline"
+                    size="sm"
+                    block
+                    trailing-icon="i-lucide-chevron-down"
+                    class="justify-start capitalize ring-default rounded-sm text-[11px] hover:bg-elevated/50 data-[state=open]:bg-elevated/50"
+                    :ui="{ trailingIcon: 'ms-auto size-4 group-data-[state=open]:rotate-180 transition-transform duration-200' }"
+                  >
+                    <template #leading>
+                      <span
+                        class="inline-block size-3 rounded-full"
+                        :class="{ 'bg-black dark:bg-white': blackAsPrimary }"
+                        :style="primarySwatch.color ? { backgroundColor: primarySwatch.color } : undefined"
+                      />
+                    </template>
+
+                    {{ primarySwatch.label }}
+                  </UButton>
+
+                  <template #content>
+                    <div class="grid grid-cols-3 gap-1 w-72 p-2">
+                      <ThemePickerButton
+                        label="Black"
+                        :selected="blackAsPrimary"
+                        @click="setBlackAsPrimary(true)"
+                      >
+                        <template #leading>
+                          <span class="inline-block size-2 rounded-full bg-black dark:bg-white" />
+                        </template>
+                      </ThemePickerButton>
+
+                      <ThemePickerButton
+                        v-for="color in primaryPickerColors"
+                        :key="color"
+                        :label="color"
+                        :chip="paletteChip(color)"
+                        :selected="!blackAsPrimary && primary === color"
+                        @click="selectPalette('primary', color)"
+                      />
+                    </div>
                   </template>
+                </UPopover>
 
-                  {{ primarySwatch.label }}
-                </UButton>
+                <UButton
+                  :icon="isCustomPalette('primary') ? 'i-lucide-paintbrush' : 'i-lucide-pencil'"
+                  color="neutral"
+                  :variant="paletteEditors.primary ? 'soft' : 'ghost'"
+                  size="sm"
+                  aria-label="Edit primary palette"
+                  :ui="{ leadingIcon: isCustomPalette('primary') ? 'text-primary size-3.5' : 'size-3.5' }"
+                  @click="paletteEditors.primary = !paletteEditors.primary"
+                />
+              </div>
 
-                <template #content>
-                  <div class="grid grid-cols-3 gap-1 w-72 p-2">
-                    <ThemePickerButton
-                      label="Black"
-                      :selected="blackAsPrimary"
-                      @click="setBlackAsPrimary(true)"
-                    >
-                      <template #leading>
-                        <span class="inline-block size-2 rounded-full bg-black dark:bg-white" />
-                      </template>
-                    </ThemePickerButton>
-
-                    <ThemePickerButton
-                      v-for="color in primaryPickerColors"
-                      :key="color"
-                      :label="color"
-                      :chip="paletteChip(color)"
-                      :selected="!blackAsPrimary && primary === color"
-                      @click="selectPalette('primary', color)"
-                    />
-                  </div>
-                </template>
-              </UPopover>
-
-              <ThemeStudioPaletteEditor v-model:open="primaryEditorOpen" alias="primary" />
+              <ThemeStudioPaletteEditor v-model:open="paletteEditors.primary" alias="primary" />
             </div>
           </fieldset>
 
@@ -382,55 +388,56 @@ const shadowColor = computed({
                 class="p-0 -my-0.5"
                 :ui="{ leadingIcon: 'size-3' }"
               />
-
-              <UButton
-                label="Custom"
-                :icon="isCustomPalette('neutral') ? 'i-lucide-paintbrush' : 'i-lucide-wand-sparkles'"
-                color="neutral"
-                :variant="neutralEditorOpen ? 'soft' : 'ghost'"
-                size="xs"
-                class="-my-1 text-[11px]"
-                :ui="{ leadingIcon: isCustomPalette('neutral') ? 'text-primary size-3' : 'size-3' }"
-                @click="neutralEditorOpen = !neutralEditorOpen"
-              />
             </legend>
 
             <div v-show="openSections.neutral">
-              <UPopover :content="{ side: 'bottom', align: 'start' }">
-                <UButton
-                  color="neutral"
-                  variant="outline"
-                  size="sm"
-                  block
-                  trailing-icon="i-lucide-chevron-down"
-                  class="justify-start capitalize ring-default rounded-sm text-[11px] hover:bg-elevated/50 data-[state=open]:bg-elevated/50"
-                  :ui="{ trailingIcon: 'ms-auto size-4 group-data-[state=open]:rotate-180 transition-transform duration-200' }"
-                >
-                  <template #leading>
-                    <span
-                      class="inline-block size-3 rounded-full"
-                      :style="{ backgroundColor: neutralSwatch.color }"
-                    />
+              <div class="flex items-center gap-1">
+                <UPopover :content="{ side: 'bottom', align: 'start' }" class="flex-1 min-w-0">
+                  <UButton
+                    color="neutral"
+                    variant="outline"
+                    size="sm"
+                    block
+                    trailing-icon="i-lucide-chevron-down"
+                    class="justify-start capitalize ring-default rounded-sm text-[11px] hover:bg-elevated/50 data-[state=open]:bg-elevated/50"
+                    :ui="{ trailingIcon: 'ms-auto size-4 group-data-[state=open]:rotate-180 transition-transform duration-200' }"
+                  >
+                    <template #leading>
+                      <span
+                        class="inline-block size-3 rounded-full"
+                        :style="{ backgroundColor: neutralSwatch.color }"
+                      />
+                    </template>
+
+                    {{ neutralSwatch.label }}
+                  </UButton>
+
+                  <template #content>
+                    <div class="grid grid-cols-3 gap-1 w-72 p-2">
+                      <ThemePickerButton
+                        v-for="color in backgroundPickerColors"
+                        :key="color"
+                        :label="color"
+                        :chip="paletteChip(color)"
+                        :selected="neutral === color"
+                        @click="selectPalette('neutral', color)"
+                      />
+                    </div>
                   </template>
+                </UPopover>
 
-                  {{ neutralSwatch.label }}
-                </UButton>
+                <UButton
+                  :icon="isCustomPalette('neutral') ? 'i-lucide-paintbrush' : 'i-lucide-pencil'"
+                  color="neutral"
+                  :variant="paletteEditors.neutral ? 'soft' : 'ghost'"
+                  size="sm"
+                  aria-label="Edit background palette"
+                  :ui="{ leadingIcon: isCustomPalette('neutral') ? 'text-primary size-3.5' : 'size-3.5' }"
+                  @click="paletteEditors.neutral = !paletteEditors.neutral"
+                />
+              </div>
 
-                <template #content>
-                  <div class="grid grid-cols-3 gap-1 w-72 p-2">
-                    <ThemePickerButton
-                      v-for="color in backgroundPickerColors"
-                      :key="color"
-                      :label="color"
-                      :chip="paletteChip(color)"
-                      :selected="neutral === color"
-                      @click="selectPalette('neutral', color)"
-                    />
-                  </div>
-                </template>
-              </UPopover>
-
-              <ThemeStudioPaletteEditor v-model:open="neutralEditorOpen" alias="neutral" />
+              <ThemeStudioPaletteEditor v-model:open="paletteEditors.neutral" alias="neutral" />
             </div>
           </fieldset>
 
@@ -459,42 +466,56 @@ const shadowColor = computed({
             </legend>
 
             <div v-show="openSections.semantic" class="flex flex-col gap-1.5">
-              <div v-for="alias in semanticAliases" :key="alias" class="flex items-center gap-2">
-                <span class="text-[11px] text-muted w-13 shrink-0 capitalize select-none">{{ alias }}</span>
+              <div v-for="alias in semanticAliases" :key="alias">
+                <div class="flex items-center gap-2">
+                  <span class="text-[11px] text-muted w-13 shrink-0 capitalize select-none">{{ alias }}</span>
 
-                <UPopover :content="{ side: 'bottom', align: 'start' }" class="flex-1 min-w-0">
-                  <UButton
-                    color="neutral"
-                    variant="outline"
-                    size="sm"
-                    block
-                    trailing-icon="i-lucide-chevron-down"
-                    class="justify-start capitalize ring-default rounded-sm text-[11px] hover:bg-elevated/50 data-[state=open]:bg-elevated/50"
-                    :ui="{ trailingIcon: 'ms-auto size-4 group-data-[state=open]:rotate-180 transition-transform duration-200' }"
-                  >
-                    <template #leading>
-                      <span
-                        class="inline-block size-3 rounded-full"
-                        :style="{ backgroundColor: `var(--color-${paletteChip(aliasValues[alias] || alias)}-500)` }"
-                      />
+                  <UPopover :content="{ side: 'bottom', align: 'start' }" class="flex-1 min-w-0">
+                    <UButton
+                      color="neutral"
+                      variant="outline"
+                      size="sm"
+                      block
+                      trailing-icon="i-lucide-chevron-down"
+                      class="justify-start capitalize ring-default rounded-sm text-[11px] hover:bg-elevated/50 data-[state=open]:bg-elevated/50"
+                      :ui="{ trailingIcon: 'ms-auto size-4 group-data-[state=open]:rotate-180 transition-transform duration-200' }"
+                    >
+                      <template #leading>
+                        <span
+                          class="inline-block size-3 rounded-full"
+                          :style="{ backgroundColor: `var(--color-${paletteChip(aliasValues[alias] || alias)}-500)` }"
+                        />
+                      </template>
+
+                      {{ aliasLabel(alias) }}
+                    </UButton>
+
+                    <template #content>
+                      <div class="grid grid-cols-3 gap-1 w-72 p-2">
+                        <ThemePickerButton
+                          v-for="color in primaryPickerColors"
+                          :key="color"
+                          :label="color"
+                          :chip="paletteChip(color)"
+                          :selected="aliasValues[alias] === color"
+                          @click="selectPalette(alias, color)"
+                        />
+                      </div>
                     </template>
+                  </UPopover>
 
-                    {{ aliasValues[alias] }}
-                  </UButton>
+                  <UButton
+                    :icon="isCustomPalette(alias) ? 'i-lucide-paintbrush' : 'i-lucide-pencil'"
+                    color="neutral"
+                    :variant="paletteEditors[alias] ? 'soft' : 'ghost'"
+                    size="sm"
+                    :aria-label="`Edit ${alias} palette`"
+                    :ui="{ leadingIcon: isCustomPalette(alias) ? 'text-primary size-3.5' : 'size-3.5' }"
+                    @click="paletteEditors[alias] = !paletteEditors[alias]"
+                  />
+                </div>
 
-                  <template #content>
-                    <div class="grid grid-cols-3 gap-1 w-72 p-2">
-                      <ThemePickerButton
-                        v-for="color in primaryPickerColors"
-                        :key="color"
-                        :label="color"
-                        :chip="paletteChip(color)"
-                        :selected="aliasValues[alias] === color"
-                        @click="selectPalette(alias, color)"
-                      />
-                    </div>
-                  </template>
-                </UPopover>
+                <ThemeStudioPaletteEditor v-model:open="paletteEditors[alias]" :alias="alias" />
               </div>
             </div>
           </fieldset>

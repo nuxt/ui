@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { useThrottleFn, watchIgnorable } from '@vueuse/core'
 import { SHADES, CURVE_DEFAULTS, NEUTRAL_CURVE_DEFAULTS, generatePalette, fitPalette, contrastRatio } from '../../utils/theme-engine'
-import type { PaletteCurveParams } from '../../utils/theme-engine'
+import type { PaletteCurveParams, ColorAlias } from '../../utils/theme-engine'
 
 const props = defineProps<{
-  alias: 'primary' | 'neutral'
+  alias: ColorAlias
 }>()
 
 const appConfig = useAppConfig()

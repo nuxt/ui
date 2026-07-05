@@ -122,7 +122,7 @@ export function useThemeStudio() {
    * AI theme feature uses.
    */
   function selectPalette(alias: ColorAlias, name: string) {
-    if ((alias === 'primary' || alias === 'neutral') && isCustomPalette(alias)) {
+    if (isCustomPalette(alias)) {
       const shades = paletteShades(name)
       if (shades) {
         setPaletteFromCurve(alias, fitPalette(shades))
@@ -168,7 +168,7 @@ export function useThemeStudio() {
   }
 
   /** Generate a ramp from curve params and point the alias at it. */
-  function setPaletteFromCurve(alias: 'primary' | 'neutral', params: PaletteCurveParams) {
+  function setPaletteFromCurve(alias: ColorAlias, params: PaletteCurveParams) {
     const name = customPaletteName(alias)
 
     // Remember what to restore when the custom palette is removed — the
@@ -195,7 +195,7 @@ export function useThemeStudio() {
   }
 
   /** Drop the custom ramp and restore the palette that preceded it. */
-  function clearCustomPalette(alias: 'primary' | 'neutral') {
+  function clearCustomPalette(alias: ColorAlias) {
     theme.removeCustomColors([customPaletteName(alias)])
     if (alias === 'neutral') {
       const remaps = unownedNeutralRemaps()
