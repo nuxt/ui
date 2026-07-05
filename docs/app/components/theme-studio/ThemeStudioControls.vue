@@ -21,15 +21,44 @@ const {
 const { selectPalette, style, setStyle } = useThemeStudio()
 
 const shadowOptions = [
-  { label: 'None', value: 'none', icon: 'i-lucide-square' },
-  { label: 'Soft', value: 'soft', icon: 'i-lucide-square-stack' },
-  { label: 'Hard', value: 'hard', icon: 'i-lucide-squares-exclude' }
+  { label: 'None', value: 'none' },
+  { label: 'Soft', value: 'soft' },
+  { label: 'Hard', value: 'hard' }
 ] as const
 
 const borderOptions = [
   { label: 'Thin', value: 'default' },
-  { label: 'Bold', value: 'bold' }
+  { label: 'Bold', value: 'bold' },
+  { label: 'Frame', value: 'frame' }
 ] as const
+
+const borderColorItems = [
+  { label: 'Default', value: 'default' },
+  { label: 'Inverted', value: 'inverted' },
+  { label: 'Black', value: 'black' },
+  { label: 'White', value: 'white' },
+  { label: 'Primary', value: 'primary' },
+  { label: 'Neutral', value: 'neutral' }
+]
+
+const shadowColorItems = [
+  { label: 'Default (ink)', value: 'default' },
+  { label: 'Black', value: 'black' },
+  { label: 'Dark gray', value: 'dark' },
+  { label: 'Medium gray', value: 'medium' },
+  { label: 'Inverted', value: 'inverted' },
+  { label: 'Primary', value: 'primary' }
+]
+
+const borderColor = computed({
+  get: () => style.value.borderColor || 'default',
+  set: (value: any) => setStyle({ borderColor: value })
+})
+
+const shadowColor = computed({
+  get: () => style.value.shadowColor || 'default',
+  set: (value: any) => setStyle({ shadowColor: value })
+})
 </script>
 
 <template>
@@ -144,6 +173,18 @@ const borderOptions = [
           @click="setStyle({ shadow: option.value })"
         />
       </div>
+
+      <div v-if="(style.shadow || 'none') !== 'none'" class="mt-1.5">
+        <USelect
+          v-model="shadowColor"
+          size="sm"
+          color="neutral"
+          icon="i-lucide-paint-bucket"
+          :items="shadowColorItems"
+          class="w-full ring-default rounded-sm hover:bg-elevated/50 text-xs data-[state=open]:bg-elevated/50"
+          :ui="{ item: 'text-xs', trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200' }"
+        />
+      </div>
     </fieldset>
 
     <fieldset>
@@ -151,7 +192,7 @@ const borderOptions = [
         Borders
       </legend>
 
-      <div class="grid grid-cols-2 gap-1">
+      <div class="grid grid-cols-3 gap-1">
         <ThemePickerButton
           v-for="option in borderOptions"
           :key="option.value"
@@ -159,6 +200,18 @@ const borderOptions = [
           class="justify-center px-0"
           :selected="(style.border || 'default') === option.value"
           @click="setStyle({ border: option.value })"
+        />
+      </div>
+
+      <div class="mt-1.5">
+        <USelect
+          v-model="borderColor"
+          size="sm"
+          color="neutral"
+          icon="i-lucide-paint-bucket"
+          :items="borderColorItems"
+          class="w-full ring-default rounded-sm hover:bg-elevated/50 text-xs data-[state=open]:bg-elevated/50"
+          :ui="{ item: 'text-xs', trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200' }"
         />
       </div>
     </fieldset>

@@ -1,32 +1,47 @@
 /**
- * Shadow and border treatments, expressed as per-component class bundles.
+ * Shadow and border treatments, expressed as per-component class bundles
+ * plus two CSS variables for the colors.
  *
  * Nuxt UI has no semantic `--ui-shadow` / `--ui-border-width` tokens yet
- * (a known core gap), so these ride the `app.config ui.<component>` override
- * path instead. The class strings must stay STATIC literals in this file —
- * tailwind compiles what it can see in source, not what appears at runtime.
+ * (a known core gap), so structure rides the `app.config ui.<component>`
+ * override path with STATIC class literals (tailwind compiles what it can
+ * see in source), while the color choices are pure CSS variables:
+ *
+ * - `--ui-shadow-color` — referenced by every hard-shadow class
+ * - `--ui-frame-color`  — referenced by every border-color override class
+ *
+ * so any color configuration is a variable swap, not a new class bundle.
+ *
+ * Placement rule: every ring in Nuxt UI themes lives at variant or
+ * compoundVariant level (card/input variants, button/badge/alert compounds),
+ * all of which render after slot classes — so width/color overrides MUST be
+ * extension compoundVariants (appended after the theme's, they win the
+ * tailwind-merge). Only shadows, which no theme variant sets, ride slots.
  *
  * Semantics:
- * - `border: bold` only THICKENS borders that already exist, keeping each
- *   element's own ring color. Borderless variants (ghost, solid, soft) stay
- *   borderless. outline/subtle rings come from theme compoundVariants which
- *   render after slot classes, so their width overrides ship as extension
- *   compoundVariants (appended later, they win the merge).
- * - `shadow: hard` uses `--ui-shadow-color` (near-black in light, black in
- *   dark — a shadow, not a glow) defined in the docs CSS and emitted by the
- *   export when the treatment is active.
+ * - `border: bold` thickens borders that already exist, keeping ring colors.
+ * - `border: frame` additionally frames solid/soft surfaces — the
+ *   neobrutalist outline-everything look. Ghost/link stay flat.
+ * - `borderColor`/`shadowColor` recolor via the variables; 'default' leaves
+ *   each element's own ring color / the dark shadow color untouched.
  */
 
 export type ShadowStyle = 'none' | 'soft' | 'hard'
-export type BorderStyle = 'default' | 'bold'
+export type BorderStyle = 'default' | 'bold' | 'frame'
+export type BorderColor = 'default' | 'inverted' | 'black' | 'white' | 'primary' | 'neutral'
+export type ShadowColor = 'default' | 'black' | 'dark' | 'medium' | 'inverted' | 'primary'
 
 export interface StyleOptions {
   shadow?: ShadowStyle
   border?: BorderStyle
+  borderColor?: BorderColor
+  shadowColor?: ShadowColor
 }
 
 export const SHADOW_STYLES: ShadowStyle[] = ['none', 'soft', 'hard']
-export const BORDER_STYLES: BorderStyle[] = ['default', 'bold']
+export const BORDER_STYLES: BorderStyle[] = ['default', 'bold', 'frame']
+export const BORDER_COLORS: BorderColor[] = ['default', 'inverted', 'black', 'white', 'primary', 'neutral']
+export const SHADOW_COLORS: ShadowColor[] = ['default', 'black', 'dark', 'medium', 'inverted', 'primary']
 
 interface ComponentFragment {
   slots?: Record<string, string>
@@ -67,44 +82,136 @@ const SHADOW_FRAGMENTS: Record<ShadowStyle, Fragments> = {
   }
 }
 
+/** compound entries thickening the rings a variant already has */
+function widen(variants: string[], slot?: string): Array<Record<string, unknown>> {
+  return variants.map(variant => ({ variant, class: slot ? { [slot]: 'ring-2' } : 'ring-2' }))
+}
+
+const FRAME = 'ring-2 ring-inset ring-(--ui-border-accented)'
+
 const BORDER_FRAGMENTS: Record<BorderStyle, Fragments> = {
   default: {},
   bold: {
-    // Width only — each element keeps its own ring color, and elements
-    // without a ring don't gain one.
-    card: { slots: { root: 'ring-2' } },
-    input: { slots: { base: 'ring-2' } },
-    select: { slots: { base: 'ring-2' } },
-    textarea: { slots: { base: 'ring-2' } },
+    card: { compoundVariants: widen(['outline', 'subtle'], 'root') },
+    input: { compoundVariants: widen(['outline', 'subtle']) },
+    select: { compoundVariants: widen(['outline', 'subtle']) },
+    textarea: { compoundVariants: widen(['outline', 'subtle']) },
+    alert: { compoundVariants: widen(['outline', 'subtle'], 'root') },
+    button: { compoundVariants: widen(['outline', 'subtle']) },
+    badge: { compoundVariants: widen(['outline', 'subtle']) }
+  },
+  frame: {
+    card: {
+      compoundVariants: [
+        ...widen(['outline', 'subtle'], 'root'),
+        { variant: 'solid', class: { root: 'ring-2 ring-(--ui-border-accented)' } },
+        { variant: 'soft', class: { root: 'ring-2 ring-(--ui-border-accented)' } }
+      ]
+    },
+    input: { compoundVariants: widen(['outline', 'subtle']) },
+    select: { compoundVariants: widen(['outline', 'subtle']) },
+    textarea: { compoundVariants: widen(['outline', 'subtle']) },
     alert: {
       compoundVariants: [
-        { variant: 'outline', class: { root: 'ring-2' } },
-        { variant: 'subtle', class: { root: 'ring-2' } }
+        ...widen(['outline', 'subtle'], 'root'),
+        { variant: 'solid', class: { root: 'ring-2 ring-inset ring-(--ui-border-accented)' } },
+        { variant: 'soft', class: { root: 'ring-2 ring-inset ring-(--ui-border-accented)' } }
       ]
     },
     button: {
       compoundVariants: [
-        { variant: 'outline', class: 'ring-2' },
-        { variant: 'subtle', class: 'ring-2' }
+        ...widen(['outline', 'subtle']),
+        { variant: 'solid', class: FRAME },
+        { variant: 'soft', class: FRAME }
       ]
     },
     badge: {
       compoundVariants: [
-        { variant: 'outline', class: 'ring-2' },
-        { variant: 'subtle', class: 'ring-2' }
+        ...widen(['outline', 'subtle']),
+        { variant: 'solid', class: FRAME },
+        { variant: 'soft', class: FRAME }
       ]
     }
   }
 }
 
+/** compound entries recoloring whatever ring is present via the variable */
+function recolor(variants: string[], slot?: string): Array<Record<string, unknown>> {
+  return variants.map(variant => ({ variant, class: slot ? { [slot]: 'ring-(--ui-frame-color)' } : 'ring-(--ui-frame-color)' }))
+}
+
+const FRAME_COLOR_FRAGMENTS: Fragments = {
+  card: { compoundVariants: recolor(['outline', 'subtle', 'solid', 'soft'], 'root') },
+  input: { compoundVariants: recolor(['outline', 'subtle']) },
+  select: { compoundVariants: recolor(['outline', 'subtle']) },
+  textarea: { compoundVariants: recolor(['outline', 'subtle']) },
+  alert: { compoundVariants: recolor(['outline', 'subtle', 'solid', 'soft'], 'root') },
+  button: { compoundVariants: recolor(['outline', 'subtle', 'solid', 'soft']) },
+  badge: { compoundVariants: recolor(['outline', 'subtle', 'solid', 'soft']) }
+}
+
+/** Per-mode values behind the two color variables, per palette choice. */
+const FRAME_COLOR_VALUES: Record<Exclude<BorderColor, 'default'>, { light: string, dark: string }> = {
+  inverted: { light: 'var(--ui-color-neutral-950)', dark: 'white' },
+  black: { light: 'black', dark: 'black' },
+  white: { light: 'white', dark: 'white' },
+  primary: { light: 'var(--ui-color-primary-500)', dark: 'var(--ui-color-primary-400)' },
+  neutral: { light: 'var(--ui-color-neutral-900)', dark: 'var(--ui-color-neutral-100)' }
+}
+
 /**
- * Expand style options into the `ui.<component>` override shape, merging the
- * shadow and border fragments slot-wise (both may touch the same slot).
+ * Graded shades matter most in dark mode, where a pure-black shadow
+ * disappears against near-black surfaces — dark/medium grays read as
+ * physical offset blocks on both schemes.
+ */
+const SHADOW_COLOR_VALUES: Record<Exclude<ShadowColor, 'default'>, { light: string, dark: string }> = {
+  black: { light: 'black', dark: 'black' },
+  dark: { light: 'var(--ui-color-neutral-800)', dark: 'var(--ui-color-neutral-800)' },
+  medium: { light: 'var(--ui-color-neutral-600)', dark: 'var(--ui-color-neutral-600)' },
+  inverted: { light: 'var(--ui-color-neutral-950)', dark: 'white' },
+  primary: { light: 'var(--ui-color-primary-500)', dark: 'var(--ui-color-primary-400)' }
+}
+
+export const STYLE_TOKEN_KEYS = ['--ui-frame-color', '--ui-shadow-color']
+
+/**
+ * The CSS-variable side of a style: per-mode values for the frame and
+ * shadow color choices. 'default' contributes nothing (the docs CSS /
+ * export defaults apply).
+ */
+export function styleTokens(style: StyleOptions): { light: Record<string, string>, dark: Record<string, string> } {
+  const light: Record<string, string> = {}
+  const dark: Record<string, string> = {}
+
+  if (style.borderColor && style.borderColor !== 'default') {
+    const value = FRAME_COLOR_VALUES[style.borderColor]
+    light['--ui-frame-color'] = value.light
+    dark['--ui-frame-color'] = value.dark
+  }
+  if (style.shadowColor && style.shadowColor !== 'default') {
+    const value = SHADOW_COLOR_VALUES[style.shadowColor]
+    light['--ui-shadow-color'] = value.light
+    dark['--ui-shadow-color'] = value.dark
+  }
+
+  return { light, dark }
+}
+
+/**
+ * Expand style options into the `ui.<component>` override shape. Sources
+ * merge in shadow → width → color order, so the color compounds append last
+ * and win the tailwind-merge for ring color.
  */
 export function styleComponents(style: StyleOptions): Fragments {
+  const sources = [
+    SHADOW_FRAGMENTS[style.shadow ?? 'none'],
+    BORDER_FRAGMENTS[style.border ?? 'default'],
+    style.borderColor && style.borderColor !== 'default' ? FRAME_COLOR_FRAGMENTS : {}
+  ]
+
   const result: Fragments = {}
 
-  for (const fragments of [SHADOW_FRAGMENTS[style.shadow ?? 'none'], BORDER_FRAGMENTS[style.border ?? 'default']]) {
+  for (const fragments of sources) {
     for (const [component, fragment] of Object.entries(fragments)) {
       const target = result[component] ||= {}
       for (const [slot, classes] of Object.entries(fragment.slots || {})) {
@@ -123,5 +230,6 @@ export function styleComponents(style: StyleOptions): Fragments {
 /** Every component key a style bundle may touch — cleared before re-applying. */
 export const STYLE_COMPONENT_KEYS = [...new Set([
   ...Object.values(SHADOW_FRAGMENTS).flatMap(fragments => Object.keys(fragments)),
-  ...Object.values(BORDER_FRAGMENTS).flatMap(fragments => Object.keys(fragments))
+  ...Object.values(BORDER_FRAGMENTS).flatMap(fragments => Object.keys(fragments)),
+  ...Object.keys(FRAME_COLOR_FRAGMENTS)
 ])]

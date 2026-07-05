@@ -60,19 +60,16 @@ html.theme-studio-dragging body *:not([data-curve-editor] *) {
   transition: background-color 60ms linear, color 60ms linear, border-color 60ms linear;
 }
 
-/* Studio baseline: the app background follows the neutral ramp instead of
-   being hardcoded white, so tinted neutrals reach the page in light mode.
-   `:not(.dark)` keeps this from out-cascading the library's .dark value,
-   which shares :root's specificity. */
-:root:not(.dark), .light {
+/* Studio baselines. :where() keeps them at zero specificity: being
+   unlayered they still beat the library's @layer theme defaults, but any
+   user override from the theme studio (plain .light/.dark rules injected
+   via useHead) wins regardless of load order. */
+:where(:root:not(.dark), .light) {
+  /* the app background follows the neutral ramp instead of hardcoded white */
   --ui-bg: var(--ui-color-neutral-50);
-}
-
-/* Shadow color for the studio's hard-shadow treatment — a shadow, not a
-   glow: near-black over light surfaces, pure black in dark mode. */
-:root, .light {
+  /* hard-shadow treatment: a shadow, not a glow */
   --ui-shadow-color: var(--ui-color-neutral-950);
 }
-.dark {
+:where(.dark) {
   --ui-shadow-color: black;
 }

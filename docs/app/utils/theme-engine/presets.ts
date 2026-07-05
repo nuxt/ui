@@ -47,71 +47,51 @@ export const presets: ThemePreset[] = [{
 }, {
   id: 'neo-brutalist',
   name: 'Neo-brutalist',
-  description: 'Hard offset shadows, bold borders, zero radius, loud yellow.',
+  description: 'Hard black shadows, inked frames, zero radius, alarm red.',
   icon: 'i-lucide-zap',
   doc: {
     version: 1,
     meta: { name: 'Neo-brutalist', base: 'neo-brutalist' },
+    // Reference palette (tweakcn/shadcn studio): #FF3333 primary light,
+    // #FF6666 dark, yellow secondary, pure white/black surfaces.
+    palettes: {
+      brut: {
+        shades: {
+          50: '#FFECEC',
+          100: '#FFD6D6',
+          200: '#FFB3B3',
+          300: '#FF8F8F',
+          400: '#FF6666',
+          500: '#FF3333',
+          600: '#E61A1A',
+          700: '#C21212',
+          800: '#9E0E0E',
+          900: '#800C0C',
+          950: '#450505'
+        }
+      }
+    },
     colors: {
-      primary: 'yellow',
+      primary: 'brut',
+      secondary: 'yellow',
       neutral: 'neutral'
     },
     radius: 0,
     font: { sans: 'Outfit' },
-    style: {
-      shadow: 'hard',
-      border: 'bold'
-    },
     tokens: {
       light: {
-        '--ui-border': 'var(--ui-color-neutral-900)',
-        '--ui-border-accented': 'var(--ui-color-neutral-900)'
+        '--ui-bg': 'white'
       },
       dark: {
-        '--ui-border': 'var(--ui-color-neutral-100)',
-        '--ui-border-accented': 'var(--ui-color-neutral-100)'
+        '--ui-bg': 'black'
       }
     },
-    // The uniform outlined look is this preset's identity, not the generic
-    // bold control's: solid/outline/subtle buttons and badges get the frame
-    // (ghost and link stay borderless, as in the reference neobrutalism kits).
-    components: {
-      button: {
-        compoundVariants: [
-          { variant: 'solid', class: 'ring-2 ring-inset ring-(--ui-border-accented)' },
-          { variant: 'outline', class: 'ring-2 ring-inset ring-(--ui-border-accented)' },
-          { variant: 'subtle', class: 'ring-2 ring-inset ring-(--ui-border-accented)' },
-          { variant: 'soft', class: 'ring-2 ring-inset ring-(--ui-border-accented)' }
-        ]
-      },
-      badge: {
-        compoundVariants: [
-          { variant: 'solid', class: 'ring-2 ring-inset ring-(--ui-border-accented)' },
-          { variant: 'outline', class: 'ring-2 ring-inset ring-(--ui-border-accented)' },
-          { variant: 'subtle', class: 'ring-2 ring-inset ring-(--ui-border-accented)' },
-          { variant: 'soft', class: 'ring-2 ring-inset ring-(--ui-border-accented)' }
-        ]
-      },
-      alert: {
-        compoundVariants: [
-          { variant: 'solid', class: { root: 'ring-2 ring-inset ring-(--ui-border-accented)' } },
-          { variant: 'outline', class: { root: 'ring-2 ring-inset ring-(--ui-border-accented)' } },
-          { variant: 'subtle', class: { root: 'ring-2 ring-inset ring-(--ui-border-accented)' } },
-          { variant: 'soft', class: { root: 'ring-2 ring-inset ring-(--ui-border-accented)' } }
-        ]
-      },
-      card: {
-        slots: { root: 'ring-2 ring-(--ui-border-accented)' }
-      },
-      input: {
-        slots: { base: 'ring-2 ring-inset ring-(--ui-border-accented)' }
-      },
-      select: {
-        slots: { base: 'ring-2 ring-inset ring-(--ui-border-accented)' }
-      },
-      textarea: {
-        slots: { base: 'ring-2 ring-inset ring-(--ui-border-accented)' }
-      }
+    // The rest is plain configuration: outlined everything in inverted ink,
+    // hard offset shadows.
+    style: {
+      shadow: 'hard',
+      border: 'frame',
+      borderColor: 'inverted'
     }
   }
 }, {

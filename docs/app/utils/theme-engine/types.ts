@@ -78,5 +78,5 @@ export function createThemeDoc(): ThemeDoc {
 export function isDefaultTheme(doc: ThemeDoc): boolean {
   return !doc.palettes && !doc.colors && !doc.blackAsPrimary && !doc.tokens
     && doc.radius === undefined && !doc.font?.sans && !doc.icons && !doc.components
-    && !doc.style?.shadow && !doc.style?.border
+    && !Object.values(doc.style || {}).some(value => value && value !== 'none' && value !== 'default')
 }

@@ -1,5 +1,9 @@
 <script setup lang="ts">
+import { h, resolveComponent } from 'vue'
 import { CalendarDate } from '@internationalized/date'
+import type { TableColumn } from '@nuxt/ui'
+
+const UBadge = resolveComponent('UBadge')
 
 const toast = useToast()
 
@@ -32,6 +36,78 @@ const accordionItems = [
 const selectItems = ['Backlog', 'Todo', 'In Progress', 'Done']
 const selectValue = ref('Todo')
 
+type Invoice = {
+  id: string
+  customer: string
+  status: 'paid' | 'pending' | 'failed'
+  amount: number
+}
+
+const invoices: Invoice[] = [
+  { id: '3021', customer: 'Alex Turner', status: 'paid', amount: 594 },
+  { id: '3022', customer: 'Mia Chen', status: 'pending', amount: 276 },
+  { id: '3023', customer: 'Sam Ortiz', status: 'failed', amount: 315 },
+  { id: '3024', customer: 'Emma Davis', status: 'paid', amount: 529 }
+]
+
+const invoiceColumns: TableColumn<Invoice>[] = [{
+  accessorKey: 'id',
+  header: '#',
+  cell: ({ row }) => `#${row.getValue('id')}`
+}, {
+  accessorKey: 'customer',
+  header: 'Customer'
+}, {
+  accessorKey: 'status',
+  header: 'Status',
+  cell: ({ row }) => {
+    const color = ({
+      paid: 'success' as const,
+      pending: 'warning' as const,
+      failed: 'error' as const
+    })[row.getValue('status') as string]
+
+    return h(UBadge, { class: 'capitalize', variant: 'subtle', color }, () => row.getValue('status'))
+  }
+}, {
+  accessorKey: 'amount',
+  header: 'Amount',
+  meta: {
+    class: {
+      th: 'text-right',
+      td: 'text-right font-medium'
+    }
+  },
+  cell: ({ row }) => {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'EUR'
+    }).format(Number.parseFloat(row.getValue('amount')))
+  }
+}]
+
+const stats = [
+  { label: 'Revenue', value: '$45.2k', delta: '+12%', color: 'success' as const },
+  { label: 'Users', value: '2,350', delta: '+8%', color: 'success' as const },
+  { label: 'Churn', value: '1.9%', delta: '-4%', color: 'error' as const },
+  { label: 'Sessions', value: '12.4k', delta: '+23%', color: 'success' as const }
+]
+
+const chatMessage = ref('')
+
+const roleItems = ['Owner', 'Member', 'Viewer']
+const teamMembers = ref([
+  { name: 'Benjamin Canac', username: 'benjamincanac', role: 'Owner' },
+  { name: 'Sébastien Chopin', username: 'atinux', role: 'Member' },
+  { name: 'Daniel Roe', username: 'danielroe', role: 'Viewer' }
+])
+
+const notificationSettings = ref([
+  { label: 'Email digest', description: 'A weekly summary of activity.', enabled: true },
+  { label: 'Push notifications', description: 'Mentions, replies and reactions.', enabled: true },
+  { label: 'Marketing emails', description: 'Product news and tips.', enabled: false }
+])
+
 function showToast() {
   toast.add({
     title: 'Theme applied',
@@ -42,8 +118,8 @@ function showToast() {
 </script>
 
 <template>
-  <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 items-start">
-    <UCard :ui="{ body: 'flex flex-col gap-3' }">
+  <div class="columns-1 md:columns-2 xl:columns-3 gap-4 space-y-4">
+    <UCard class="break-inside-avoid" :ui="{ body: 'flex flex-col gap-3' }">
       <p class="text-xs font-semibold text-muted uppercase tracking-wide">
         Buttons
       </p>
@@ -75,7 +151,7 @@ function showToast() {
       </div>
     </UCard>
 
-    <UCard :ui="{ body: 'flex flex-col gap-4' }">
+    <UCard class="break-inside-avoid" :ui="{ body: 'flex flex-col gap-4' }">
       <p class="text-xs font-semibold text-muted uppercase tracking-wide">
         Form
       </p>
@@ -98,7 +174,7 @@ function showToast() {
       <UButton label="Submit" block />
     </UCard>
 
-    <UCard :ui="{ body: 'flex flex-col gap-3' }">
+    <UCard class="break-inside-avoid" :ui="{ body: 'flex flex-col gap-3' }">
       <p class="text-xs font-semibold text-muted uppercase tracking-wide">
         Feedback
       </p>
@@ -136,7 +212,7 @@ function showToast() {
       </div>
     </UCard>
 
-    <UCard :ui="{ body: 'flex flex-col gap-3' }">
+    <UCard class="break-inside-avoid" :ui="{ body: 'flex flex-col gap-3' }">
       <p class="text-xs font-semibold text-muted uppercase tracking-wide">
         Navigation
       </p>
@@ -148,7 +224,7 @@ function showToast() {
       <UPagination v-model:page="page" :total="50" size="sm" />
     </UCard>
 
-    <UCard :ui="{ body: 'flex flex-col gap-3' }">
+    <UCard class="break-inside-avoid" :ui="{ body: 'flex flex-col gap-3' }">
       <p class="text-xs font-semibold text-muted uppercase tracking-wide">
         Content
       </p>
@@ -182,7 +258,7 @@ function showToast() {
       </div>
     </UCard>
 
-    <UCard :ui="{ body: 'flex flex-col gap-3 items-center' }">
+    <UCard class="break-inside-avoid" :ui="{ body: 'flex flex-col gap-3 items-center' }">
       <p class="text-xs font-semibold text-muted uppercase tracking-wide self-start">
         Pickers
       </p>
@@ -190,6 +266,95 @@ function showToast() {
       <UCalendar v-model="calendarDate" size="sm" class="w-full" />
 
       <UPinInput v-model="pin" :length="4" placeholder="○" />
+    </UCard>
+
+    <UCard class="break-inside-avoid" :ui="{ body: 'flex flex-col gap-3' }">
+      <p class="text-xs font-semibold text-muted uppercase tracking-wide">
+        Table
+      </p>
+
+      <UTable :data="invoices" :columns="invoiceColumns" class="border border-default rounded-md" />
+    </UCard>
+
+    <UCard class="break-inside-avoid" :ui="{ body: 'flex flex-col gap-3' }">
+      <p class="text-xs font-semibold text-muted uppercase tracking-wide">
+        Stats
+      </p>
+
+      <div class="grid grid-cols-2 gap-3">
+        <div v-for="stat in stats" :key="stat.label" class="flex flex-col gap-1 p-3 rounded-lg bg-elevated/50">
+          <p class="text-xs text-muted">
+            {{ stat.label }}
+          </p>
+          <div class="flex items-center justify-between gap-2">
+            <p class="text-2xl font-bold text-highlighted">
+              {{ stat.value }}
+            </p>
+            <UBadge :label="stat.delta" :color="stat.color" variant="subtle" size="sm" />
+          </div>
+        </div>
+      </div>
+    </UCard>
+
+    <UCard class="break-inside-avoid" :ui="{ body: 'flex flex-col gap-3' }">
+      <p class="text-xs font-semibold text-muted uppercase tracking-wide">
+        Chat
+      </p>
+
+      <div class="text-sm bg-elevated rounded-lg px-3 py-2 me-8">
+        Hey! How does this bubble look with your primary color?
+      </div>
+      <div class="text-sm bg-primary text-inverted rounded-lg px-3 py-2 ms-auto max-w-[80%]">
+        Looking sharp, ship it.
+      </div>
+
+      <div class="flex items-center gap-2">
+        <UInput v-model="chatMessage" placeholder="Type a message..." class="flex-1" />
+        <UButton icon="i-lucide-send" square aria-label="Send message" />
+      </div>
+    </UCard>
+
+    <UCard class="break-inside-avoid" :ui="{ body: 'flex flex-col gap-3' }">
+      <p class="text-xs font-semibold text-muted uppercase tracking-wide">
+        Team
+      </p>
+
+      <div v-for="member in teamMembers" :key="member.username" class="flex items-center gap-3">
+        <UAvatar :src="`https://github.com/${member.username}.png`" :alt="member.name" />
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-medium text-highlighted truncate">
+            {{ member.name }}
+          </p>
+          <p class="text-xs text-muted truncate">
+            {{ member.role }}
+          </p>
+        </div>
+        <USelect v-model="member.role" :items="roleItems" size="sm" class="w-28" />
+      </div>
+
+      <UButton label="Invite member" icon="i-lucide-user-plus" variant="soft" block />
+    </UCard>
+
+    <UCard class="break-inside-avoid" :ui="{ body: 'flex flex-col gap-3' }">
+      <p class="text-xs font-semibold text-muted uppercase tracking-wide">
+        Notifications
+      </p>
+
+      <template v-for="(setting, index) in notificationSettings" :key="setting.label">
+        <USeparator v-if="index > 0" />
+
+        <div class="flex items-center justify-between gap-4">
+          <div>
+            <p class="text-sm text-highlighted">
+              {{ setting.label }}
+            </p>
+            <p class="text-xs text-muted">
+              {{ setting.description }}
+            </p>
+          </div>
+          <USwitch v-model="setting.enabled" />
+        </div>
+      </template>
     </UCard>
   </div>
 </template>

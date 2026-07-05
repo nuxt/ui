@@ -1,6 +1,6 @@
 import { useLocalStorage } from '@vueuse/core'
 import colors from 'tailwindcss/colors'
-import { presets, docToSettings, isDefaultTheme, generatePalette, fitPalette, parseCssColor, styleComponents, DEFAULT_COLORS, SHADES, STYLE_COMPONENT_KEYS } from '../utils/theme-engine'
+import { presets, docToSettings, isDefaultTheme, generatePalette, fitPalette, parseCssColor, styleComponents, styleTokens, DEFAULT_COLORS, SHADES, STYLE_COMPONENT_KEYS, STYLE_TOKEN_KEYS } from '../utils/theme-engine'
 import type { ThemeDoc, ThemePreset, PaletteCurveParams, Shade, StyleOptions } from '../utils/theme-engine'
 
 export function useThemeStudio() {
@@ -19,16 +19,22 @@ export function useThemeStudio() {
   function setStyle(options: StyleOptions) {
     style.value = { ...style.value, ...options }
 
-    // Clear the previous bundle first — defu merging can't unset classes.
+    // Clear the previous bundle and color variables first — defu merging
+    // can't unset classes, and a stale --ui-frame-color would leak.
     theme.resetComponentOverrides(STYLE_COMPONENT_KEYS)
+    theme.removeCSSVariables({ light: STYLE_TOKEN_KEYS, dark: STYLE_TOKEN_KEYS })
 
     const components = styleComponents(style.value)
-    if (Object.keys(components).length) {
-      theme.applyThemeSettings({ ui: components })
+    const tokens = styleTokens(style.value)
+    const settings: Record<string, any> = {}
+    if (Object.keys(components).length) settings.ui = components
+    if (Object.keys(tokens.light).length || Object.keys(tokens.dark).length) settings.cssVariables = tokens
+    if (Object.keys(settings).length) {
+      theme.applyThemeSettings(settings)
     }
     activePreset.value = undefined
 
-    track('Theme Style Changed', { shadow: style.value.shadow || 'none', border: style.value.border || 'default' })
+    track('Theme Style Changed', { ...style.value })
   }
 
   let trackedAt: number | undefined

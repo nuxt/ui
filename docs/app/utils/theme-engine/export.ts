@@ -1,7 +1,7 @@
 import { themeIcons } from '../theme'
 import type { ThemeDoc } from './types'
 import { DEFAULT_COLORS, THEME_DEFAULTS } from './types'
-import { styleComponents } from './styles'
+import { styleComponents, styleTokens } from './styles'
 
 /**
  * Generate the minimal `main.css`. The document only holds overrides, so
@@ -40,18 +40,19 @@ export function generateCSS(doc: ThemeDoc): string {
     lines.push('', ':root {', ...rootLines, '}')
   }
 
-  // The hard-shadow component classes reference this variable.
-  if (doc.style?.shadow === 'hard') {
-    lines.push(
-      '',
-      ':root, .light {',
-      '  --ui-shadow-color: var(--ui-color-neutral-950);',
-      '}',
-      '',
-      '.dark {',
-      '  --ui-shadow-color: black;',
-      '}'
-    )
+  // Color variables behind the style treatment. Hard shadows always need
+  // --ui-shadow-color defined; explicit color choices override per mode.
+  const style = styleTokens(doc.style || {})
+  if (doc.style?.shadow === 'hard' && !style.light['--ui-shadow-color']) {
+    style.light['--ui-shadow-color'] = 'var(--ui-color-neutral-950)'
+    style.dark['--ui-shadow-color'] = 'black'
+  }
+
+  if (Object.keys(style.light).length) {
+    lines.push('', ':root, .light {', ...Object.entries(style.light).map(([key, val]) => `  ${key}: ${val};`), '}')
+  }
+  if (Object.keys(style.dark).length) {
+    lines.push('', '.dark {', ...Object.entries(style.dark).map(([key, val]) => `  ${key}: ${val};`), '}')
   }
 
   const lightOverrides = Object.entries(doc.tokens?.light || {})
@@ -145,8 +146,15 @@ export function docToSettings(doc: ThemeDoc): Record<string, any> {
     )
   }
 
-  if (doc.tokens) {
-    settings.cssVariables = doc.tokens
+  // Token overrides plus the style treatment's color variables.
+  const style = doc.style ? styleTokens(doc.style) : { light: {}, dark: {} }
+  const light = { ...style.light, ...doc.tokens?.light }
+  const dark = { ...style.dark, ...doc.tokens?.dark }
+  if (Object.keys(light).length || Object.keys(dark).length) {
+    settings.cssVariables = {
+      ...(Object.keys(light).length ? { light } : {}),
+      ...(Object.keys(dark).length ? { dark } : {})
+    }
   }
 
   // Expand the shadow/border treatment into component overrides; explicit
