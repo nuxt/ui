@@ -1,6 +1,6 @@
 import { useLocalStorage } from '@vueuse/core'
 import colors from 'tailwindcss/colors'
-import { presets, docToSettings, isDefaultTheme, generatePalette, fitPalette, parseCssColor, styleComponents, styleTokens, DEFAULT_COLORS, SHADES, STYLE_COMPONENT_KEYS, STYLE_TOKEN_KEYS } from '../utils/theme-engine'
+import { presets, docToSettings, isDefaultTheme, generatePalette, fitPalette, parseCssColor, styleComponents, styleTokens, DEFAULT_COLORS, SHADES, STYLE_COMPONENT_KEYS, BG_SHADE_DEFAULTS } from '../utils/theme-engine'
 import type { ThemeDoc, ThemePreset, PaletteCurveParams, Shade, StyleOptions } from '../utils/theme-engine'
 
 export function useThemeStudio() {
@@ -17,15 +17,20 @@ export function useThemeStudio() {
   const style = useLocalStorage<StyleOptions>('nuxt-ui-style', {})
 
   function setStyle(options: StyleOptions) {
+    const previous = styleTokens(style.value)
     style.value = { ...style.value, ...options }
 
-    // Clear the previous bundle and color variables first — defu merging
-    // can't unset classes, and a stale --ui-frame-color would leak.
+    // Clear the previous class bundle (defu merging can't unset classes) and
+    // only the tokens the PREVIOUS style emitted — never preset/doc-owned
+    // values like a preset's --ui-bg, which share the same variable names.
     theme.resetComponentOverrides(STYLE_COMPONENT_KEYS)
-    theme.removeCSSVariables({ light: STYLE_TOKEN_KEYS, dark: STYLE_TOKEN_KEYS })
+    const tokens = styleTokens(style.value)
+    theme.removeCSSVariables({
+      light: Object.keys(previous.light).filter(key => !(key in tokens.light)),
+      dark: Object.keys(previous.dark).filter(key => !(key in tokens.dark))
+    })
 
     const components = styleComponents(style.value)
-    const tokens = styleTokens(style.value)
     const settings: Record<string, any> = {}
     if (Object.keys(components).length) settings.ui = components
     if (Object.keys(tokens.light).length || Object.keys(tokens.dark).length) settings.cssVariables = tokens
@@ -138,11 +143,35 @@ export function useThemeStudio() {
     paletteParams.value = rest
   }
 
+  /**
+   * Reflect a doc's token overrides back into the sidebar's shade settings
+   * where they are representable, so controls show the preset's reality
+   * instead of stale defaults. Only neutral-ramp refs map onto sliders;
+   * anything else (white/black literals, non-neutral refs) stays token-only.
+   */
+  function deriveStyle(doc: ThemeDoc): StyleOptions {
+    const derived: StyleOptions = { ...(doc.style || {}) }
+
+    if (!derived.bgShade) {
+      const parse = (value?: string) => value?.match(/^var\(--ui-color-neutral-(\d+)\)$/)?.[1]
+      const light = parse(doc.tokens?.light?.['--ui-bg'])
+      const dark = parse(doc.tokens?.dark?.['--ui-bg'])
+      if (light || dark) {
+        derived.bgShade = {
+          light: light ? Number(light) : BG_SHADE_DEFAULTS.light,
+          dark: dark ? Number(dark) : BG_SHADE_DEFAULTS.dark
+        }
+      }
+    }
+
+    return derived
+  }
+
   /** Replace the current theme with a document: reset, then apply overrides. */
   function applyDoc(doc: ThemeDoc) {
     theme.resetTheme()
     paletteParams.value = {}
-    style.value = doc.style || {}
+    style.value = deriveStyle(doc)
 
     if (!isDefaultTheme(doc)) {
       theme.applyThemeSettings(docToSettings(doc))
