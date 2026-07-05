@@ -29,19 +29,23 @@
 export type ShadowStyle = 'none' | 'soft' | 'hard'
 export type BorderStyle = 'default' | 'bold' | 'frame'
 export type BorderColor = 'default' | 'inverted' | 'black' | 'white' | 'primary' | 'neutral'
-export type ShadowColor = 'default' | 'black' | 'dark' | 'medium' | 'inverted' | 'primary'
+export type ShadowColor = 'default' | 'black' | 'inverted' | 'primary' | 'shade'
 
 export interface StyleOptions {
   shadow?: ShadowStyle
   border?: BorderStyle
   borderColor?: BorderColor
   shadowColor?: ShadowColor
+  /** Neutral ramp shade per mode, used when `shadowColor` is 'shade' */
+  shadowShade?: { light: number, dark: number }
 }
 
 export const SHADOW_STYLES: ShadowStyle[] = ['none', 'soft', 'hard']
 export const BORDER_STYLES: BorderStyle[] = ['default', 'bold', 'frame']
 export const BORDER_COLORS: BorderColor[] = ['default', 'inverted', 'black', 'white', 'primary', 'neutral']
-export const SHADOW_COLORS: ShadowColor[] = ['default', 'black', 'dark', 'medium', 'inverted', 'primary']
+export const SHADOW_COLORS: ShadowColor[] = ['default', 'black', 'inverted', 'primary', 'shade']
+
+export const SHADOW_SHADE_DEFAULTS = { light: 950, dark: 800 }
 
 interface ComponentFragment {
   slots?: Record<string, string>
@@ -159,15 +163,8 @@ const FRAME_COLOR_VALUES: Record<Exclude<BorderColor, 'default'>, { light: strin
   neutral: { light: 'var(--ui-color-neutral-900)', dark: 'var(--ui-color-neutral-100)' }
 }
 
-/**
- * Graded shades matter most in dark mode, where a pure-black shadow
- * disappears against near-black surfaces — dark/medium grays read as
- * physical offset blocks on both schemes.
- */
-const SHADOW_COLOR_VALUES: Record<Exclude<ShadowColor, 'default'>, { light: string, dark: string }> = {
+const SHADOW_COLOR_VALUES: Record<Exclude<ShadowColor, 'default' | 'shade'>, { light: string, dark: string }> = {
   black: { light: 'black', dark: 'black' },
-  dark: { light: 'var(--ui-color-neutral-800)', dark: 'var(--ui-color-neutral-800)' },
-  medium: { light: 'var(--ui-color-neutral-600)', dark: 'var(--ui-color-neutral-600)' },
   inverted: { light: 'var(--ui-color-neutral-950)', dark: 'white' },
   primary: { light: 'var(--ui-color-primary-500)', dark: 'var(--ui-color-primary-400)' }
 }
@@ -188,7 +185,13 @@ export function styleTokens(style: StyleOptions): { light: Record<string, string
     light['--ui-frame-color'] = value.light
     dark['--ui-frame-color'] = value.dark
   }
-  if (style.shadowColor && style.shadowColor !== 'default') {
+  if (style.shadowColor === 'shade') {
+    // Per-mode neutral ramp shade — a graded gray shadow that darkens or
+    // lightens independently of the scheme it sits on.
+    const shade = { ...SHADOW_SHADE_DEFAULTS, ...style.shadowShade }
+    light['--ui-shadow-color'] = `var(--ui-color-neutral-${shade.light})`
+    dark['--ui-shadow-color'] = `var(--ui-color-neutral-${shade.dark})`
+  } else if (style.shadowColor && style.shadowColor !== 'default') {
     const value = SHADOW_COLOR_VALUES[style.shadowColor]
     light['--ui-shadow-color'] = value.light
     dark['--ui-shadow-color'] = value.dark

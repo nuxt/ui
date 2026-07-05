@@ -61,11 +61,26 @@ const borderColorItems = [
 const shadowColorItems = [
   { label: 'Default (ink)', value: 'default' },
   { label: 'Black', value: 'black' },
-  { label: 'Dark gray', value: 'dark' },
-  { label: 'Medium gray', value: 'medium' },
   { label: 'Inverted', value: 'inverted' },
-  { label: 'Primary', value: 'primary' }
+  { label: 'Primary', value: 'primary' },
+  { label: 'Neutral shade…', value: 'shade' }
 ]
+
+const SHADE_STEPS = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950]
+
+// Slider position (0–10) ↔ neutral ramp shade, per mode.
+function shadeSlider(target: 'light' | 'dark') {
+  return computed({
+    get: () => SHADE_STEPS.indexOf((style.value.shadowShade || { light: 950, dark: 800 })[target]),
+    set: (index: number) => {
+      const current = { light: 950, dark: 800, ...style.value.shadowShade }
+      setStyle({ shadowShade: { ...current, [target]: SHADE_STEPS[index]! } })
+    }
+  })
+}
+
+const lightShade = shadeSlider('light')
+const darkShade = shadeSlider('dark')
 
 const borderColor = computed({
   get: () => style.value.borderColor || 'default',
@@ -239,7 +254,7 @@ const shadowColor = computed({
         />
       </div>
 
-      <div v-if="(style.shadow || 'none') !== 'none'" class="mt-1.5">
+      <div v-if="(style.shadow || 'none') !== 'none'" class="mt-1.5 flex flex-col gap-2">
         <USelect
           v-model="shadowColor"
           size="sm"
@@ -249,6 +264,32 @@ const shadowColor = computed({
           class="w-full ring-default rounded-sm hover:bg-elevated/50 text-xs data-[state=open]:bg-elevated/50"
           :ui="{ item: 'text-xs', trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200' }"
         />
+
+        <template v-if="shadowColor === 'shade'">
+          <div class="flex items-center gap-2">
+            <UIcon name="i-lucide-sun" class="size-3.5 text-muted shrink-0" />
+
+            <USlider v-model="lightShade" :min="0" :max="10" :step="1" size="sm" />
+
+            <span
+              class="size-4 shrink-0 rounded-sm ring ring-default"
+              :style="{ backgroundColor: `var(--color-${neutral === 'neutral' ? 'old-neutral' : neutral}-${SHADE_STEPS[lightShade]})` }"
+            />
+            <span class="text-[11px] text-dimmed font-mono w-7 text-right shrink-0">{{ SHADE_STEPS[lightShade] }}</span>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <UIcon name="i-lucide-moon" class="size-3.5 text-muted shrink-0" />
+
+            <USlider v-model="darkShade" :min="0" :max="10" :step="1" size="sm" />
+
+            <span
+              class="size-4 shrink-0 rounded-sm ring ring-default"
+              :style="{ backgroundColor: `var(--color-${neutral === 'neutral' ? 'old-neutral' : neutral}-${SHADE_STEPS[darkShade]})` }"
+            />
+            <span class="text-[11px] text-dimmed font-mono w-7 text-right shrink-0">{{ SHADE_STEPS[darkShade] }}</span>
+          </div>
+        </template>
       </div>
     </fieldset>
 

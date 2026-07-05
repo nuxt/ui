@@ -273,6 +273,17 @@ describe('style colors', () => {
     })
   })
 
+  it('styleTokens supports per-mode neutral shades', async () => {
+    const { styleTokens } = await import('../../docs/app/utils/theme-engine')
+
+    expect(styleTokens({ shadowColor: 'shade', shadowShade: { light: 700, dark: 300 } })).toEqual({
+      light: { '--ui-shadow-color': 'var(--ui-color-neutral-700)' },
+      dark: { '--ui-shadow-color': 'var(--ui-color-neutral-300)' }
+    })
+    // defaults apply when shades are unset
+    expect(styleTokens({ shadowColor: 'shade' }).dark['--ui-shadow-color']).toBe('var(--ui-color-neutral-800)')
+  })
+
   it('generateCSS emits style color variables', async () => {
     const { generateCSS } = await import('../../docs/app/utils/theme-engine')
     const css = generateCSS({ version: 1, style: { shadow: 'hard', border: 'frame', borderColor: 'inverted' } })
