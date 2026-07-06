@@ -347,8 +347,6 @@ const shadowColor = computed({
           color="neutral"
           variant="subtle"
           block
-          class="justify-start ring-default rounded-sm text-[11px] hover:bg-elevated/50 data-[state=open]:bg-elevated/50"
-          :ui="{ trailingIcon: 'ms-auto size-4 group-data-[state=open]:rotate-180 transition-transform duration-200' }"
         />
 
         <template #item-trailing="{ item }">
@@ -368,9 +366,7 @@ const shadowColor = computed({
           icon="i-lucide-dices"
           color="neutral"
           variant="subtle"
-
           aria-label="Random theme"
-          class="ring-default rounded-sm hover:bg-elevated/50"
           @click="shuffle"
         />
       </UTooltip>
@@ -403,7 +399,7 @@ const shadowColor = computed({
                 size="xs"
                 icon="i-lucide-chevron-down"
 
-                :ui="{ leadingIcon: ['size-3 text-dimmed transition-transform duration-200', !openSections.primary && '-rotate-90'] }"
+                :ui="{ leadingIcon: ['transition-transform duration-200', !openSections.primary && '-rotate-90'] }"
                 @click="openSections.primary = !openSections.primary"
               />
 
@@ -413,8 +409,6 @@ const shadowColor = computed({
                 color="neutral"
                 variant="ghost"
                 icon="i-lucide-help-circle"
-
-                :ui="{ leadingIcon: 'size-3' }"
               />
             </legend>
 
@@ -427,8 +421,7 @@ const shadowColor = computed({
                     size="sm"
                     block
                     trailing-icon="i-lucide-chevron-down"
-                    class="justify-start capitalize ring-default rounded-sm text-[11px] hover:bg-elevated/50 data-[state=open]:bg-elevated/50"
-                    :ui="{ trailingIcon: 'ms-auto size-4 group-data-[state=open]:rotate-180 transition-transform duration-200' }"
+                    class="capitalize"
                   >
                     <template #leading>
                       <span
@@ -482,8 +475,6 @@ const shadowColor = computed({
                   active-color="primary"
                   active-variant="subtle"
                   aria-label="Edit primary palette"
-                  class="rounded-sm"
-                  :ui="{ leadingIcon: 'size-3.5' }"
                   @click="paletteEditors.primary = !paletteEditors.primary"
                 />
               </UFieldGroup>
@@ -500,7 +491,7 @@ const shadowColor = computed({
                 variant="ghost"
                 size="xs"
                 icon="i-lucide-chevron-down"
-                :ui="{ leadingIcon: ['size-3 text-dimmed transition-transform duration-200', !openSections.neutral && '-rotate-90'] }"
+                :ui="{ leadingIcon: ['transition-transform duration-200', !openSections.neutral && '-rotate-90'] }"
                 @click="openSections.neutral = !openSections.neutral"
               />
 
@@ -510,7 +501,6 @@ const shadowColor = computed({
                 color="neutral"
                 variant="ghost"
                 icon="i-lucide-help-circle"
-                :ui="{ leadingIcon: 'size-3' }"
               />
             </legend>
 
@@ -523,8 +513,7 @@ const shadowColor = computed({
                     size="sm"
                     block
                     trailing-icon="i-lucide-chevron-down"
-                    class="justify-start capitalize ring-default rounded-sm text-[11px] hover:bg-elevated/50 data-[state=open]:bg-elevated/50"
-                    :ui="{ trailingIcon: 'ms-auto size-4 group-data-[state=open]:rotate-180 transition-transform duration-200' }"
+                    class="capitalize"
                   >
                     <template #leading>
                       <span
@@ -567,8 +556,6 @@ const shadowColor = computed({
                   active-color="primary"
                   active-variant="subtle"
                   aria-label="Edit background palette"
-                  class="rounded-sm"
-                  :ui="{ leadingIcon: 'size-3.5' }"
                   @click="paletteEditors.neutral = !paletteEditors.neutral"
                 />
               </UFieldGroup>
@@ -585,7 +572,7 @@ const shadowColor = computed({
                 variant="ghost"
                 size="xs"
                 icon="i-lucide-chevron-down"
-                :ui="{ leadingIcon: ['size-3 text-dimmed transition-transform duration-200', !openSections.semantic && '-rotate-90'] }"
+                :ui="{ leadingIcon: ['transition-transform duration-200', !openSections.semantic && '-rotate-90'] }"
                 @click="openSections.semantic = !openSections.semantic"
               />
 
@@ -595,7 +582,6 @@ const shadowColor = computed({
                 color="neutral"
                 variant="ghost"
                 icon="i-lucide-help-circle"
-                :ui="{ leadingIcon: 'size-3' }"
               />
             </legend>
 
@@ -612,8 +598,7 @@ const shadowColor = computed({
                         size="sm"
                         block
                         trailing-icon="i-lucide-chevron-down"
-                        class="justify-start capitalize ring-default rounded-sm text-[11px] hover:bg-elevated/50 data-[state=open]:bg-elevated/50"
-                        :ui="{ trailingIcon: 'ms-auto size-4 group-data-[state=open]:rotate-180 transition-transform duration-200' }"
+                        class="capitalize"
                       >
                         <template #leading>
                           <span
@@ -656,8 +641,6 @@ const shadowColor = computed({
                       active-color="primary"
                       active-variant="subtle"
                       :aria-label="`Edit ${alias} palette`"
-                      class="rounded-sm"
-                      :ui="{ leadingIcon: 'size-3.5' }"
                       @click="paletteEditors[alias] = !paletteEditors[alias]"
                     />
                   </UFieldGroup>
@@ -680,7 +663,7 @@ const shadowColor = computed({
                 variant="ghost"
                 size="xs"
                 icon="i-lucide-chevron-down"
-                :ui="{ leadingIcon: ['size-3 text-dimmed transition-transform duration-200', !openSections.radius && '-rotate-90'] }"
+                :ui="{ leadingIcon: ['transition-transform duration-200', !openSections.radius && '-rotate-90'] }"
                 @click="openSections.radius = !openSections.radius"
               />
 
@@ -690,7 +673,6 @@ const shadowColor = computed({
                 color="neutral"
                 variant="ghost"
                 icon="i-lucide-help-circle"
-                :ui="{ leadingIcon: 'size-3' }"
               />
             </legend>
 
@@ -715,7 +697,7 @@ const shadowColor = computed({
                 variant="ghost"
                 size="xs"
                 icon="i-lucide-chevron-down"
-                :ui="{ leadingIcon: ['size-3 text-dimmed transition-transform duration-200', !openSections.sizing && '-rotate-90'] }"
+                :ui="{ leadingIcon: ['transition-transform duration-200', !openSections.sizing && '-rotate-90'] }"
                 @click="openSections.sizing = !openSections.sizing"
               />
             </legend>
@@ -747,7 +729,7 @@ const shadowColor = computed({
                 variant="ghost"
                 size="xs"
                 icon="i-lucide-chevron-down"
-                :ui="{ leadingIcon: ['size-3 text-dimmed transition-transform duration-200', !openSections.defaults && '-rotate-90'] }"
+                :ui="{ leadingIcon: ['transition-transform duration-200', !openSections.defaults && '-rotate-90'] }"
                 @click="openSections.defaults = !openSections.defaults"
               />
             </legend>
@@ -762,8 +744,7 @@ const shadowColor = computed({
                   color="neutral"
                   icon="i-lucide-layers"
                   :items="field.items"
-                  class="flex-1 ring-default rounded-sm hover:bg-elevated/50 text-xs data-[state=open]:bg-elevated/50"
-                  :ui="{ item: 'text-xs', trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200' }"
+                  class="flex-1"
                 />
               </div>
 
@@ -776,8 +757,7 @@ const shadowColor = computed({
                   color="neutral"
                   icon="i-lucide-proportions"
                   :items="defaultSizeItems"
-                  class="flex-1 ring-default rounded-sm hover:bg-elevated/50 text-xs data-[state=open]:bg-elevated/50"
-                  :ui="{ item: 'text-xs', trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200' }"
+                  class="flex-1"
                 />
               </div>
             </div>
@@ -791,7 +771,7 @@ const shadowColor = computed({
                 variant="ghost"
                 size="xs"
                 icon="i-lucide-chevron-down"
-                :ui="{ leadingIcon: ['size-3 text-dimmed transition-transform duration-200', !openSections.shadows && '-rotate-90'] }"
+                :ui="{ leadingIcon: ['transition-transform duration-200', !openSections.shadows && '-rotate-90'] }"
                 @click="openSections.shadows = !openSections.shadows"
               />
             </legend>
@@ -802,7 +782,6 @@ const shadowColor = computed({
                   v-for="option in shadowOptions"
                   :key="option.value"
                   :label="option.label"
-                  class="justify-center px-0"
                   :selected="(style.shadow || 'none') === option.value"
                   @click="setStyle({ shadow: option.value })"
                 />
@@ -815,8 +794,7 @@ const shadowColor = computed({
                   color="neutral"
                   icon="i-lucide-paint-bucket"
                   :items="shadowColorItems"
-                  class="w-full ring-default rounded-sm hover:bg-elevated/50 text-xs data-[state=open]:bg-elevated/50"
-                  :ui="{ item: 'text-xs', trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200' }"
+                  class="w-full"
                 />
 
                 <template v-if="shadowColor === 'shade' || shadowColor === 'primary-shade'">
@@ -858,7 +836,7 @@ const shadowColor = computed({
                 variant="ghost"
                 size="xs"
                 icon="i-lucide-chevron-down"
-                :ui="{ leadingIcon: ['size-3 text-dimmed transition-transform duration-200', !openSections.borders && '-rotate-90'] }"
+                :ui="{ leadingIcon: ['transition-transform duration-200', !openSections.borders && '-rotate-90'] }"
                 @click="openSections.borders = !openSections.borders"
               />
             </legend>
@@ -869,7 +847,6 @@ const shadowColor = computed({
                   v-for="option in borderOptions"
                   :key="option.value"
                   :label="option.label"
-                  class="justify-center px-0"
                   :selected="borderStyle === option.value"
                   @click="setStyle({ border: option.value })"
                 />
@@ -898,8 +875,7 @@ const shadowColor = computed({
                   color="neutral"
                   icon="i-lucide-paint-bucket"
                   :items="borderColorItems"
-                  class="w-full ring-default rounded-sm hover:bg-elevated/50 text-xs data-[state=open]:bg-elevated/50"
-                  :ui="{ item: 'text-xs', trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200' }"
+                  class="w-full"
                 />
 
                 <template v-if="borderColor === 'shade' || borderColor === 'primary-shade'">
@@ -927,7 +903,7 @@ const shadowColor = computed({
                 variant="ghost"
                 size="xs"
                 icon="i-lucide-chevron-down"
-                :ui="{ leadingIcon: ['size-3 text-dimmed transition-transform duration-200', !openSections[`tokens-${group.key}`] && '-rotate-90'] }"
+                :ui="{ leadingIcon: ['transition-transform duration-200', !openSections[`tokens-${group.key}`] && '-rotate-90'] }"
                 @click="openSections[`tokens-${group.key}`] = !openSections[`tokens-${group.key}`]"
               />
             </legend>
@@ -959,7 +935,7 @@ const shadowColor = computed({
                 variant="ghost"
                 size="xs"
                 icon="i-lucide-chevron-down"
-                :ui="{ leadingIcon: ['size-3 text-dimmed transition-transform duration-200', !openSections.font && '-rotate-90'] }"
+                :ui="{ leadingIcon: ['transition-transform duration-200', !openSections.font && '-rotate-90'] }"
                 @click="openSections.font = !openSections.font"
               />
 
@@ -969,7 +945,6 @@ const shadowColor = computed({
                 color="neutral"
                 variant="ghost"
                 icon="i-lucide-help-circle"
-                :ui="{ leadingIcon: 'size-3' }"
               />
             </legend>
 
@@ -980,8 +955,7 @@ const shadowColor = computed({
                 color="neutral"
                 icon="i-lucide-type"
                 :items="fonts"
-                class="w-full ring-default rounded-sm hover:bg-elevated/50 text-xs data-[state=open]:bg-elevated/50"
-                :ui="{ trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200' }"
+                class="w-full"
               />
             </div>
           </fieldset>
@@ -994,7 +968,7 @@ const shadowColor = computed({
                 variant="ghost"
                 size="xs"
                 icon="i-lucide-chevron-down"
-                :ui="{ leadingIcon: ['size-3 text-dimmed transition-transform duration-200', !openSections.icons && '-rotate-90'] }"
+                :ui="{ leadingIcon: ['transition-transform duration-200', !openSections.icons && '-rotate-90'] }"
                 @click="openSections.icons = !openSections.icons"
               />
 
@@ -1004,7 +978,6 @@ const shadowColor = computed({
                 color="neutral"
                 variant="ghost"
                 icon="i-lucide-help-circle"
-                :ui="{ leadingIcon: 'size-3' }"
               />
             </legend>
 
@@ -1015,8 +988,8 @@ const shadowColor = computed({
                 color="neutral"
                 :icon="icons.find(i => i.value === icon)?.icon"
                 :items="icons"
-                class="w-full ring-default rounded-sm hover:bg-elevated/50 capitalize text-xs data-[state=open]:bg-elevated/50"
-                :ui="{ item: 'capitalize text-xs', trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200' }"
+                class="w-full capitalize"
+                :ui="{ item: 'capitalize' }"
               />
             </div>
           </fieldset>

@@ -15,11 +15,13 @@ const slots = defineSlots<{
   <UButton
     size="sm"
     color="neutral"
-    variant="outline"
+    variant="subtle"
+    :active="selected"
+    active-color="primary"
+    active-variant="subtle"
     :icon="icon"
     :label="label"
-    class="capitalize rounded-sm text-[11px]"
-    :class="[selected ? 'ring-primary bg-primary/10 text-highlighted' : 'ring-default hover:bg-elevated/50']"
+    class="capitalize"
   >
     <template v-if="chip || !!slots.leading" #leading>
       <slot name="leading">

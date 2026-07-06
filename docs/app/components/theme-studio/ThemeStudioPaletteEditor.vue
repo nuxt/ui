@@ -232,7 +232,6 @@ function remove() {
       :content="false"
       size="xs"
       color="neutral"
-      :ui="{ trigger: 'text-[11px]' }"
     />
 
     <ThemeStudioCurveEditor
@@ -268,8 +267,7 @@ function remove() {
         color="neutral"
         icon="i-lucide-sparkles"
         :items="styleOffsetItems"
-        class="flex-1 ring-default rounded-sm hover:bg-elevated/50 text-xs data-[state=open]:bg-elevated/50"
-        :ui="{ item: 'text-xs', trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200' }"
+        class="flex-1"
         @update:model-value="applyStyleOffset($event as string)"
       />
 
