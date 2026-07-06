@@ -50,6 +50,7 @@
     "prettier": "^3.9.4",
     "shiki": "^4.3.1",
     "shiki-transformer-color-highlight": "^1.1.0",
+    "shiki-transformer-icon-highlight": "^0.1.0",
     "simple-git": "^3.36.0",
     "sortablejs": "^1.15.7",
     "superstruct": "^2.0.2",
