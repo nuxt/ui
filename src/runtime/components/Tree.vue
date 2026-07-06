@@ -368,7 +368,8 @@ defineExpose({
   <TreeRoot
     ref="rootRef"
     v-slot="{ flattenItems }"
-    v-bind="{ 'data-slot': 'root', ...rootProps, ...$attrs }"
+    data-slot="root"
+    v-bind="{ ...rootProps, ...$attrs }"
     :as="as.root"
     :model-value="props.modelValue"
     :default-value="props.defaultValue"

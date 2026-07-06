@@ -518,8 +518,8 @@ function onLinkTrailingClick(e: Event, item: NavigationMenuItem) {
   </DefineItemTemplate>
 
   <NavigationMenuRoot
+    data-slot="root"
     v-bind="{
-      'data-slot': 'root',
       ...rootProps,
       ...(props.orientation === 'horizontal' ? {
         modelValue: props.modelValue as string,

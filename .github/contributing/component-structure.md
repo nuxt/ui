@@ -245,15 +245,15 @@ Parents label a child by passing `data-slot` (e.g. `<UIcon data-slot="leadingIco
 How you achieve it depends on how the root receives attributes:
 
 - **Single root, default `inheritAttrs`** (Badge, Card, …): nothing to do. Vue's attribute fallthrough already lets the caller's `data-slot` override the static one on the root. This only holds when the template root renders an element: `Button`'s root is a renderless `ULink custom` that hands `$attrs` back as slot props, so its `ULinkBase` needs the default placed before the spread (`<ULinkBase data-slot="base" v-bind="slotProps">`), same as the `$attrs` case below.
-- **`inheritAttrs: false`, `$attrs` spread on the root**: fallthrough is off, so a static `data-slot="root"` placed *after* `v-bind` would win over the caller. Put the default *before* the spread instead, so a caller value in `$attrs` overrides it:
+- **`inheritAttrs: false`, `$attrs` spread on the root**: fallthrough is off, so a static `data-slot="root"` placed *after* `v-bind` would win over the caller. Put the attribute *before* the `v-bind` instead, so a caller value in `$attrs` overrides it:
 
   ```vue
-  <!-- bare $attrs: data-slot before v-bind -->
   <Primitive :as="props.as" data-slot="root" v-bind="$attrs" :class="ui.root({ class: [props.ui?.root, props.class] })" />
 
-  <!-- object spread: fold the default in as the first key -->
-  <Separator v-bind="{ 'data-slot': 'root', ...rootProps, ...$attrs }" :class="ui.root({ class: [props.ui?.root, props.class] })" />
+  <Separator data-slot="root" v-bind="{ ...rootProps, ...$attrs }" :class="ui.root({ class: [props.ui?.root, props.class] })" />
   ```
+
+  Keep `:id`, `ref` and `v-slot` **before** `data-slot`: `vue/attributes-order` ranks them first, and its autofix moves `data-slot` past the `v-bind` (reverting the override) instead of moving them up. `test/components/DataSlot.spec.ts` catches this, but better not to trip it.
 
 - **`inheritAttrs: false`, `$attrs` forwarded to an inner element** (Avatar, Input, Checkbox, Switch, …): the root never receives `$attrs`, so read the caller's value on the root explicitly, and keep each inner element's own `data-slot` *after* its `$attrs` spread so the caller's value does not leak onto it:
 
@@ -319,7 +319,7 @@ Notes:
 | `useForwardProps(source, emits?)` (local) | Forward Reka UI props/emits without filtering theme defaults |
 | `withDefaults` | Runtime default values |
 | `defineOptions({ inheritAttrs: false })` | When spreading `$attrs` to inner element |
-| Caller `data-slot` wins on root | Fold default into the root `v-bind` before `...$attrs`, or read `$attrs['data-slot']` on the root — see [`data-slot` on the root](#data-slot-on-the-root) |
+| Caller `data-slot` wins on root | Place the default `data-slot` before the root `v-bind`, or read `$attrs['data-slot']` on the root — see [`data-slot` on the root](#data-slot-on-the-root) |
 | `reactivePick` | Pick keys off `props` (the proxy) before forwarding |
 | `createReusableTemplate` | Complex template reuse (Table, Modal) |
 | `useTemplateRef` | Template refs (Vue 3.5+) |
