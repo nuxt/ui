@@ -423,7 +423,7 @@ const shadowColor = computed({
                 <UPopover :content="{ side: 'bottom', align: 'start' }" class="flex-1 min-w-0">
                   <UButton
                     color="neutral"
-                    variant="outline"
+                    variant="subtle"
                     size="sm"
                     block
                     trailing-icon="i-lucide-chevron-down"
@@ -477,12 +477,13 @@ const shadowColor = computed({
                 <UButton
                   :icon="isCustomPalette('primary') ? 'i-lucide-paintbrush' : 'i-lucide-pencil'"
                   color="neutral"
-                  variant="outline"
-
+                  variant="subtle"
+                  :active="paletteEditors.primary || isCustomPalette('primary')"
+                  active-color="primary"
+                  active-variant="subtle"
                   aria-label="Edit primary palette"
-                  class="ring-default rounded-sm hover:bg-elevated/50"
-                  :class="{ 'bg-elevated/50': paletteEditors.primary }"
-                  :ui="{ leadingIcon: isCustomPalette('primary') ? 'text-primary size-3.5' : 'size-3.5' }"
+                  class="rounded-sm"
+                  :ui="{ leadingIcon: 'size-3.5' }"
                   @click="paletteEditors.primary = !paletteEditors.primary"
                 />
               </UFieldGroup>
@@ -518,7 +519,7 @@ const shadowColor = computed({
                 <UPopover :content="{ side: 'bottom', align: 'start' }" class="flex-1 min-w-0">
                   <UButton
                     color="neutral"
-                    variant="outline"
+                    variant="subtle"
                     size="sm"
                     block
                     trailing-icon="i-lucide-chevron-down"
@@ -560,12 +561,14 @@ const shadowColor = computed({
                 <UButton
                   :icon="isCustomPalette('neutral') ? 'i-lucide-paintbrush' : 'i-lucide-pencil'"
                   color="neutral"
-                  variant="outline"
+                  variant="subtle"
                   size="sm"
+                  :active="paletteEditors.neutral || isCustomPalette('neutral')"
+                  active-color="primary"
+                  active-variant="subtle"
                   aria-label="Edit background palette"
-                  class="ring-default rounded-sm hover:bg-elevated/50"
-                  :class="{ 'bg-elevated/50': paletteEditors.neutral }"
-                  :ui="{ leadingIcon: isCustomPalette('neutral') ? 'text-primary size-3.5' : 'size-3.5' }"
+                  class="rounded-sm"
+                  :ui="{ leadingIcon: 'size-3.5' }"
                   @click="paletteEditors.neutral = !paletteEditors.neutral"
                 />
               </UFieldGroup>
@@ -587,7 +590,7 @@ const shadowColor = computed({
               />
 
               <UButton
-                to="/docs/getting-started/theme/colors"
+                to="/docs/getting-started/theme/design-system"
                 size="xs"
                 color="neutral"
                 variant="ghost"
@@ -605,7 +608,7 @@ const shadowColor = computed({
                     <UPopover :content="{ side: 'bottom', align: 'start' }" class="flex-1 min-w-0">
                       <UButton
                         color="neutral"
-                        variant="outline"
+                        variant="subtle"
                         size="sm"
                         block
                         trailing-icon="i-lucide-chevron-down"
@@ -647,12 +650,14 @@ const shadowColor = computed({
                     <UButton
                       :icon="isCustomPalette(alias) ? 'i-lucide-paintbrush' : 'i-lucide-pencil'"
                       color="neutral"
-                      variant="outline"
+                      variant="subtle"
                       size="sm"
+                      :active="paletteEditors[alias] || isCustomPalette(alias)"
+                      active-color="primary"
+                      active-variant="subtle"
                       :aria-label="`Edit ${alias} palette`"
-                      class="ring-default rounded-sm hover:bg-elevated/50"
-                      :class="{ 'bg-elevated/50': paletteEditors[alias] }"
-                      :ui="{ leadingIcon: isCustomPalette(alias) ? 'text-primary size-3.5' : 'size-3.5' }"
+                      class="rounded-sm"
+                      :ui="{ leadingIcon: 'size-3.5' }"
                       @click="paletteEditors[alias] = !paletteEditors[alias]"
                     />
                   </UFieldGroup>
