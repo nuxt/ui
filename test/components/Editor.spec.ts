@@ -1,4 +1,5 @@
 import { describe, it, expect, vi, afterEach } from 'vitest'
+import { shallowRef } from 'vue'
 import { flushPromises } from '@vue/test-utils'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
@@ -30,6 +31,15 @@ describe('Editor', () => {
     wrapper.unmount()
   })
 
+  it('applies the prose classes on the content wrapper', async () => {
+    const wrapper = await mountSuspended(Editor, { props })
+
+    const content = wrapper.find('[data-slot="content"]')
+    expect(content.classes()).toContain('[&_:where(.ProseMirror_p)]:leading-7')
+
+    wrapper.unmount()
+  })
+
   describe('with an external editor', () => {
     const editors: TiptapEditor[] = []
     const createEditor = (content = '<p>External content</p>', options = {}) => {
@@ -52,25 +62,48 @@ describe('Editor', () => {
       wrapper.unmount()
     })
 
-    it('injects the theme base classes into the external editor', async () => {
-      const editor = createEditor()
+    it('never mutates the external editor options', async () => {
+      const editorProps = { attributes: { class: 'custom-class' } }
+      const editor = createEditor('<p>External content</p>', { editorProps })
+      // `options.element` is set by `EditorContent` when mounting the editor.
+      const { element: _, ...originalOptions } = { ...editor.options }
       const wrapper = await mountSuspended(Editor, { props: { editor } })
 
-      const injected = (editor.options.editorProps?.attributes as Record<string, string> | undefined)?.class
-      expect(injected).toContain('outline-none')
+      expect(editor.options.editorProps).toBe(editorProps)
+      const { element: __, ...currentOptions } = { ...editor.options }
+      expect(currentOptions).toEqual(originalOptions)
 
       wrapper.unmount()
     })
 
-    it('does not inject editorProps when opted out with `editor-props` false', async () => {
-      const editor = createEditor('<p>External content</p>', {
-        editorProps: { attributes: { class: 'custom-class' } }
-      })
-      const wrapper = await mountSuspended(Editor, { props: { editor, editorProps: false } })
+    it('applies the prose classes on the content wrapper', async () => {
+      const editor = createEditor()
+      const wrapper = await mountSuspended(Editor, { props: { editor } })
 
-      const injected = (editor.options.editorProps?.attributes as Record<string, string> | undefined)?.class
-      expect(injected).toBe('custom-class')
-      expect(injected).not.toContain('outline-none')
+      const content = wrapper.find('[data-slot="content"]')
+      expect(content.classes()).toContain('[&_:where(.ProseMirror_p)]:leading-7')
+
+      wrapper.unmount()
+    })
+
+    it('does not apply the prose classes with `prose` false', async () => {
+      const editor = createEditor()
+      const wrapper = await mountSuspended(Editor, { props: { editor, prose: false } })
+
+      const content = wrapper.find('[data-slot="content"]')
+      expect(content.classes()).not.toContain('[&_:where(.ProseMirror_p)]:leading-7')
+
+      wrapper.unmount()
+    })
+
+    it('applies fallthrough attributes on the content wrapper', async () => {
+      const editor = createEditor()
+      const wrapper = await mountSuspended(Editor, {
+        props: { editor },
+        attrs: { 'aria-label': 'Notes' }
+      })
+
+      expect(wrapper.find('[data-slot="content"]').attributes('aria-label')).toBe('Notes')
 
       wrapper.unmount()
     })
@@ -88,6 +121,25 @@ describe('Editor', () => {
       expect(wrapper.text()).not.toContain('ignored value')
 
       warn.mockRestore()
+      wrapper.unmount()
+    })
+
+    it('does not destroy the external editor on unmount', async () => {
+      const editor = createEditor()
+      const wrapper = await mountSuspended(Editor, { props: { editor } })
+
+      wrapper.unmount()
+
+      expect(editor.isDestroyed).toBe(false)
+    })
+
+    it('accepts the editor as a ref', async () => {
+      const editor = createEditor()
+      const wrapper = await mountSuspended(Editor, { props: { editor: shallowRef(editor) } })
+
+      expect(wrapper.find('.ProseMirror').exists()).toBe(true)
+      expect(wrapper.text()).toContain('External content')
+
       wrapper.unmount()
     })
 

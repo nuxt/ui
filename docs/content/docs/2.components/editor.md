@@ -178,7 +178,7 @@ const editor = useEditor({
 ```
 
 ::note
-In this mode, the engine props (`starter-kit`, `image`, `mention`, `placeholder`, `markdown`, `content-type`, `model-value`, `extensions`) are **ignored** — the external editor owns its content and schema. Manage `v-model` on your own editor instance instead of on the `UEditor` component.
+In this mode, the engine props (`starter-kit`, `image`, `mention`, `placeholder`, `markdown`, `content-type`, `model-value`, `extensions`, `editor-props`, …) are **ignored** — the external editor owns its content, schema and options. Manage `v-model` on your own editor instance instead of on the `UEditor` component.
 ::
 
 This is what enables editors backed by an extended starter kit, such as [comark-tiptap](https://github.com/sandros94/comark-tiptap), which provides a lossless markdown ↔ AST ↔ ProseMirror round-trip:
@@ -208,15 +208,42 @@ const { editor } = useComarkEditor({
 </template>
 ```
 
-The [EditorToolbar](/docs/components/editor-toolbar) and handlers adapt to your editor's schema, but the mention, emoji and suggestion menus — and `placeholder` — only work once their extensions are registered on your editor (like `Mention` above).
+The [EditorToolbar](/docs/components/editor-toolbar) items and handlers call your editor's commands directly, so only include items whose extensions are registered on your editor — same for the mention, emoji and suggestion menus (like `Mention` above). The theme's placeholder styling applies automatically once your editor registers the Placeholder extension.
 
 ::note
-Nuxt UI automatically injects its `editorProps` (including the theme's base classes) into your editor so it inherits the default styling. Set `:editor-props="false"` to opt out and manage the editor's `editorProps` yourself.
+The editor instance is never modified: the theme's [prose classes](#prose) style your content from a wrapper element, so an external editor inherits the default typography automatically. Attributes of the editable element itself remain yours — for parity with the built-in editor, set the theme's `base` slot classes at creation:
+
+```ts
+const editor = useEditor({
+  // ...
+  editorProps: {
+    attributes: {
+      autocomplete: 'off',
+      autocorrect: 'off',
+      autocapitalize: 'off',
+      class: 'w-full outline-none *:my-5 *:first:mt-0 *:last:mb-0 sm:px-8 selection:bg-primary/20'
+    }
+  }
+})
+```
+
 ::
 
 ::tip
-Use the `#fallback` slot to render content while an editor that is created asynchronously is not yet available.
+The `#fallback` slot renders while the editor is not yet available — during SSR and before mount, or while an asynchronously created external editor is still `undefined`.
 ::
+
+### Prose
+
+The editor content is styled with the theme's prose (typography) classes. Their targets are wrapped in `:where()` so each rule keeps the specificity of a single class: your own classes and any higher-specificity styling from extensions or stylesheets can always override them. Set the `prose` prop to `false` to disable them entirely, for example when the editor brings its own content styling:
+
+```vue
+<template>
+  <UEditor :editor="editor" :prose="false">
+    <UEditorToolbar :editor="editor" :items="items" />
+  </UEditor>
+</template>
+```
 
 ### Placeholder
 
