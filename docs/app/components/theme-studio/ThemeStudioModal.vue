@@ -13,13 +13,7 @@ const sidebarOpen = ref(true)
 // The studio's own chrome follows the border treatment too — whole literal
 // class strings per width so tailwind's scanner sees them.
 const TOOLBAR_EDGE: Record<number, string> = { 0: 'border-b-0', 1: 'border-b', 2: 'border-b-2', 3: 'border-b-3', 4: 'border-b-4' }
-const SIDEBAR_EDGE: Record<number, string> = {
-  0: 'border-b-0 lg:border-r-0',
-  1: 'border-b lg:border-b-0 lg:border-r',
-  2: 'border-b-2 lg:border-b-0 lg:border-r-2',
-  3: 'border-b-3 lg:border-b-0 lg:border-r-3',
-  4: 'border-b-4 lg:border-b-0 lg:border-r-4'
-}
+const SIDEBAR_EDGE: Record<number, string> = { 0: 'border-e-0', 1: 'border-e', 2: 'border-e-2', 3: 'border-e-3', 4: 'border-e-4' }
 
 const chromeWidth = computed(() => {
   const border = style.value.border
@@ -83,10 +77,6 @@ const viewTabs = [
 
           <span class="flex-1" />
 
-          <ThemeStudioImport />
-
-          <ThemeStudioExport />
-
           <UTooltip text="Reset theme">
             <UButton
               icon="i-lucide-rotate-ccw"
@@ -112,14 +102,25 @@ const viewTabs = [
           </UTooltip>
         </div>
 
-        <div class="flex-1 flex flex-col lg:flex-row min-h-0 overflow-y-auto lg:overflow-hidden">
-          <aside
-            v-show="sidebarOpen"
-            class="shrink-0 lg:w-80 border-default lg:overflow-y-auto"
-            :class="SIDEBAR_EDGE[chromeWidth]"
+        <div class="relative flex-1 flex flex-col lg:flex-row min-h-0 overflow-y-auto lg:overflow-hidden">
+          <!-- USidebar's container is viewport-fixed by design; anchored to
+               this row instead so it sits below the toolbar. -->
+          <USidebar
+            v-model:open="sidebarOpen"
+            :style="{ '--sidebar-width': '20rem' }"
+            :ui="{
+              container: ['absolute h-full', SIDEBAR_EDGE[chromeWidth]],
+              body: 'p-0 gap-0',
+              footer: 'border-t border-default gap-2'
+            }"
           >
             <ThemeStudioControls />
-          </aside>
+
+            <template #footer>
+              <ThemeStudioImport />
+              <ThemeStudioExport />
+            </template>
+          </USidebar>
 
           <!-- The grid scrolls as a page; the app-shell views own their height
                and scroll internally, so the pane locks (bounded on mobile too). -->
