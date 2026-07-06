@@ -1,4 +1,4 @@
-import type { Messages } from '../types'
+import type { Messages } from '../types/locale'
 import { defineLocale } from '../composables/defineLocale'
 
 export default defineLocale<Messages>({
@@ -81,6 +81,9 @@ export default defineLocale<Messages>({
     dashboardSidebarToggle: {
       close: 'Sulge külgriba',
       open: 'Ava külgriba'
+    },
+    drawer: {
+      close: 'Sulge'
     },
     error: {
       clear: 'Tagasi avalehele'

@@ -2,7 +2,7 @@
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/chat-prompt'
-import type { TextareaProps, TextareaSlots } from '../types'
+import type { TextareaProps, TextareaSlots } from './Textarea.vue'
 import type { ComponentConfig } from '../types/tv'
 
 type ChatPrompt = ComponentConfig<typeof theme, AppConfig, 'chatPrompt'>
@@ -81,7 +81,7 @@ const textareaProps = useForwardProps(reactivePick(props, 'rows', 'autofocus', '
 const getProxySlots = () => omit(slots, ['header', 'footer'])
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.chatPrompt || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.chatPrompt || {}) })({
   variant: props.variant
 }))
 

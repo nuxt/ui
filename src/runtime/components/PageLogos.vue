@@ -2,7 +2,7 @@
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/page-logos'
-import type { MarqueeProps } from '../types'
+import type { MarqueeProps } from './Marquee.vue'
 import type { ComponentConfig } from '../types/tv'
 
 type PageLogos = ComponentConfig<typeof theme, AppConfig, 'pageLogos'>
@@ -55,7 +55,7 @@ const props = useComponentProps('pageLogos', _props)
 const appConfig = useAppConfig() as PageLogos['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pageLogos || {}) })())
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.pageLogos || {}) })())
 </script>
 
 <template>

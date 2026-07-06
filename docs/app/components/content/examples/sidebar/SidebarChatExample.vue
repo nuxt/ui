@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { UIMessage } from 'ai'
 import { isTextUIPart } from 'ai'
-import { Chat } from '@ai-sdk/vue'
+import { useChat } from '@ai-sdk/vue'
 import { isPartStreaming } from '@nuxt/ui/utils/ai'
 import { Comark } from '@comark/vue'
 import highlight from '@comark/vue/plugins/highlight'
@@ -9,7 +9,7 @@ import highlight from '@comark/vue/plugins/highlight'
 const open = ref(true)
 const input = ref('')
 
-const messages: UIMessage[] = [{
+const initialMessages: UIMessage[] = [{
   id: '1',
   role: 'user',
   parts: [{ type: 'text', text: 'What is Nuxt UI?' }]
@@ -19,14 +19,14 @@ const messages: UIMessage[] = [{
   parts: [{ type: 'text', text: 'Nuxt UI is a Vue component library built on Reka UI, Tailwind CSS, and Tailwind Variants. It provides 125+ accessible components for building modern web apps.' }]
 }]
 
-const chat = new Chat({
-  messages
+const { messages, status, error, sendMessage, regenerate, stop } = useChat({
+  messages: initialMessages
 })
 
 function onSubmit() {
   if (!input.value.trim()) return
 
-  chat.sendMessage({ text: input.value })
+  sendMessage({ text: input.value })
 
   input.value = ''
 }
@@ -77,8 +77,8 @@ const ui = {
     >
       <UTheme :ui="ui">
         <UChatMessages
-          :messages="chat.messages"
-          :status="chat.status"
+          :messages="messages"
+          :status="status"
           compact
           class="px-0"
         >
@@ -104,7 +104,7 @@ const ui = {
       <template #footer>
         <UChatPrompt
           v-model="input"
-          :error="chat.error"
+          :error="error"
           :autofocus="false"
           variant="subtle"
           size="sm"
@@ -113,9 +113,9 @@ const ui = {
         >
           <UChatPromptSubmit
             size="sm"
-            :status="chat.status"
-            @stop="chat.stop()"
-            @reload="chat.regenerate()"
+            :status="status"
+            @stop="stop()"
+            @reload="regenerate()"
           />
         </UChatPrompt>
       </template>

@@ -3,7 +3,8 @@ import type { SeparatorProps as _SeparatorProps } from 'reka-ui'
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/separator'
-import type { AvatarProps, IconProps } from '../types'
+import type { AvatarProps } from './Avatar.vue'
+import type { IconProps } from './Icon.vue'
 import type { ComponentConfig } from '../types/tv'
 
 type Separator = ComponentConfig<typeof theme, AppConfig, 'separator'>
@@ -84,7 +85,7 @@ const [DefineContainer, ReuseContainer] = createReusableTemplate()
 const hasContent = computed(() => !!(props.label || props.icon || props.avatar || slots.default))
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.separator || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.separator || {}) })({
   color: props.color,
   orientation: props.orientation,
   size: props.size,

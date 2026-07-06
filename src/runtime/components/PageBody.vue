@@ -37,7 +37,7 @@ const props = useComponentProps('pageBody', _props)
 const appConfig = useAppConfig() as PageBody['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pageBody || {}) }))
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.pageBody || {}) }))
 </script>
 
 <template>

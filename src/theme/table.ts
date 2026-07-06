@@ -39,6 +39,11 @@ export default (options: Required<ModuleOptions>) => ({
         thead: 'after:absolute after:z-1 after:h-px'
       }
     },
+    externalScroll: {
+      true: {
+        root: 'overflow-visible'
+      }
+    },
     loadingAnimation: {
       'carousel': '',
       'carousel-inverse': '',

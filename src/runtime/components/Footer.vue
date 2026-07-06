@@ -43,7 +43,7 @@ const props = useComponentProps('footer', _props)
 const appConfig = useAppConfig() as Footer['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.footer || {}) })())
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.footer || {}) })())
 </script>
 
 <template>

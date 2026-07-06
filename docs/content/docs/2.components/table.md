@@ -688,6 +688,24 @@ class: '!p-0'
 A height constraint is required on the table for virtualization to work properly (e.g., `class="h-[400px]"`).
 ::
 
+### With external scroll element :badge{label="Soon" class="align-text-top"}
+
+Pass a `getScrollElement` function in the `virtualize` prop to virtualize against an ancestor scroll container instead of the table's own root. Set `scrollMargin` to the table's offset from the scroll element's start (e.g. the height of the content above it), so a header and the table body share a single scrollbar.
+
+::component-example
+---
+prettier: true
+collapse: true
+overflowHidden: true
+name: 'table-external-scroll-example'
+class: '!p-0'
+---
+::
+
+::note
+In this mode the table root's `overflow` is `visible` and the external container owns scrolling on both axes, so give it `overflow-auto` (not just `overflow-y-auto`) to keep wide tables horizontally scrollable. A `sticky` header then anchors to that container.
+::
+
 ### With tree data
 
 You can use the `get-sub-rows` prop to display hierarchical (tree) data in the table.

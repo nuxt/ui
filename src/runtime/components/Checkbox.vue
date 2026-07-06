@@ -3,7 +3,7 @@ import type { CheckboxRootProps, CheckboxRootEmits } from 'reka-ui'
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/checkbox'
-import type { IconProps } from '../types'
+import type { IconProps } from './Icon.vue'
 import type { ButtonHTMLAttributes } from '../types/html'
 import type { ComponentConfig } from '../types/tv'
 
@@ -96,7 +96,7 @@ const forwardedAttrs = computed(() => {
 })
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.checkbox || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.checkbox || {}) })({
   size: size.value ?? props.size,
   color: color.value ?? props.color,
   variant: props.variant,

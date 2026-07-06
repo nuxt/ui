@@ -69,7 +69,7 @@ const { size } = useAvatarGroup(_props)
 const appConfig = useAppConfig() as Chip['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.chip || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.chip || {}) })({
   color: props.color,
   size: size.value ?? props.size,
   position: props.position,

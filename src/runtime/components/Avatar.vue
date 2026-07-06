@@ -2,7 +2,8 @@
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/avatar'
-import type { ChipProps, IconProps } from '../types'
+import type { ChipProps } from './Chip.vue'
+import type { IconProps } from './Icon.vue'
 import type { ImgHTMLAttributes } from '../types/html'
 import type { ComponentConfig } from '../types/tv'
 
@@ -74,7 +75,7 @@ const appConfig = useAppConfig() as Avatar['AppConfig']
 const { size, color } = useAvatarGroup(_props)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.avatar || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.avatar || {}) })({
   size: size.value ?? props.size,
   color: color.value ?? props.color
 }))

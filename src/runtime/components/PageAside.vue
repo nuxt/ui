@@ -40,7 +40,7 @@ const props = useComponentProps('pageAside', _props)
 const appConfig = useAppConfig() as PageAside['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pageAside || {}) })())
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.pageAside || {}) })())
 </script>
 
 <template>

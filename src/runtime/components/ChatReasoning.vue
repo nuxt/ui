@@ -3,7 +3,7 @@ import type { CollapsibleRootProps } from 'reka-ui'
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/chat-reasoning'
-import type { IconProps } from '../types'
+import type { IconProps } from './Icon.vue'
 import type { ChatShimmerProps } from './ChatShimmer.vue'
 import type { ComponentConfig } from '../types/tv'
 
@@ -91,7 +91,7 @@ const { t, code } = useLocale()
 const appConfig = useAppConfig() as ChatReasoning['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.chatReasoning || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.chatReasoning || {}) })({
   chevron: props.chevron
 }))
 

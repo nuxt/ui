@@ -3,7 +3,7 @@ import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/input'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
-import type { AvatarProps } from '../types'
+import type { AvatarProps } from './Avatar.vue'
 import type { InputHTMLAttributes } from '../types/html'
 import type { ModelModifiers, ApplyModifiers } from '../types/input'
 import type { AcceptableValue } from '../types/utils'
@@ -103,7 +103,7 @@ const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponen
 const inputSize = computed(() => fieldGroupSize.value || formFieldSize.value)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.input || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.input || {}) })({
   type: props.type as Input['variants']['type'],
   color: color.value ?? props.color,
   variant: props.variant,

@@ -2,7 +2,8 @@
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/footer-columns'
-import type { IconProps, LinkProps } from '../types'
+import type { IconProps } from './Icon.vue'
+import type { LinkProps } from './Link.vue'
 import type { ComponentConfig } from '../types/tv'
 
 type FooterColumns = ComponentConfig<typeof theme, AppConfig, 'footerColumns'>
@@ -68,7 +69,7 @@ const props = useComponentProps<FooterColumnsProps<T>>('footerColumns', _props)
 const appConfig = useAppConfig() as FooterColumns['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.footerColumns || {}) })())
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.footerColumns || {}) })())
 </script>
 
 <template>

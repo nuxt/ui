@@ -52,7 +52,7 @@ const props = useComponentProps('prose.field', _props)
 const appConfig = useAppConfig() as ProseField['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.field || {}) })())
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.prose?.field || {}) })())
 </script>
 
 <template>
