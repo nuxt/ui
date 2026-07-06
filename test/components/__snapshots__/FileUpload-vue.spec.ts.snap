@@ -116,7 +116,7 @@ exports[`FileUpload > renders with description slot correctly 1`] = `
 
 exports[`FileUpload > renders with disabled correctly 1`] = `
 "<div data-slot="root" class="relative flex flex-col">
-  <div role="button" data-dragging="false" data-slot="base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 cursor-not-allowed opacity-75 outline-primary/25 focus-visible:outline-3 focus-visible:border-primary" tabindex="-1">
+  <div role="button" aria-disabled="true" data-dragging="false" data-slot="base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 cursor-not-allowed opacity-75 outline-primary/25 focus-visible:outline-3 focus-visible:border-primary" tabindex="-1">
     <!--v-if-->
     <div data-slot="wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 text-muted"></svg></span>
       <!--v-if-->
@@ -130,7 +130,7 @@ exports[`FileUpload > renders with disabled correctly 1`] = `
 
 exports[`FileUpload > renders with disabled correctly 2`] = `
 "<div data-slot="root" class="relative flex flex-col">
-  <div role="button" data-dragging="false" data-slot="base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 cursor-not-allowed opacity-75 outline-primary/25 focus-visible:outline-3 focus-visible:border-primary" tabindex="-1">
+  <div role="button" aria-disabled="true" data-dragging="false" data-slot="base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] p-4 text-sm border-dashed data-[dragging=true]:bg-elevated/25 cursor-not-allowed opacity-75 outline-primary/25 focus-visible:outline-3 focus-visible:border-primary" tabindex="-1">
     <!--v-if-->
     <div data-slot="wrapper" class="flex flex-col items-center justify-center text-center px-4 py-3"><span data-slot="avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 text-muted"></svg></span>
       <!--v-if-->
@@ -143,7 +143,7 @@ exports[`FileUpload > renders with disabled correctly 2`] = `
 `;
 
 exports[`FileUpload > renders with disabled variant button correctly 1`] = `
-"<div data-slot="root" class="relative flex flex-col"><button type="button" disabled="" aria-disabled="true" data-dragging="false" data-slot="base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] text-sm border-dashed data-[dragging=true]:bg-elevated/25 cursor-not-allowed opacity-75 outline-primary/25 focus-visible:outline-3 focus-visible:border-primary p-1.5" tabindex="-1">
+"<div data-slot="root" class="relative flex flex-col"><button type="button" disabled="" data-dragging="false" data-slot="base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] text-sm border-dashed data-[dragging=true]:bg-elevated/25 cursor-not-allowed opacity-75 outline-primary/25 focus-visible:outline-3 focus-visible:border-primary p-1.5" tabindex="-1">
     <!--v-if-->
     <div data-slot="wrapper" class="flex flex-col items-center justify-center text-center"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-5"></svg>
       <!--v-if-->
@@ -746,7 +746,7 @@ exports[`FileUpload > renders with size lg correctly 1`] = `
 `;
 
 exports[`FileUpload > renders with size lg variant button correctly 1`] = `
-"<div data-slot="root" class="relative flex flex-col"><button type="button" aria-disabled="false" data-dragging="false" data-slot="base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] text-sm border-dashed data-[dragging=true]:bg-elevated/25 outline-primary/25 focus-visible:outline-3 focus-visible:border-primary p-2 hover:bg-elevated/25" tabindex="0">
+"<div data-slot="root" class="relative flex flex-col"><button type="button" data-dragging="false" data-slot="base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] text-sm border-dashed data-[dragging=true]:bg-elevated/25 outline-primary/25 focus-visible:outline-3 focus-visible:border-primary p-2 hover:bg-elevated/25" tabindex="0">
     <!--v-if-->
     <div data-slot="wrapper" class="flex flex-col items-center justify-center text-center"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-5"></svg>
       <!--v-if-->
@@ -785,7 +785,7 @@ exports[`FileUpload > renders with size md correctly 1`] = `
 `;
 
 exports[`FileUpload > renders with size md variant button correctly 1`] = `
-"<div data-slot="root" class="relative flex flex-col"><button type="button" aria-disabled="false" data-dragging="false" data-slot="base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] text-sm border-dashed data-[dragging=true]:bg-elevated/25 outline-primary/25 focus-visible:outline-3 focus-visible:border-primary p-1.5 hover:bg-elevated/25" tabindex="0">
+"<div data-slot="root" class="relative flex flex-col"><button type="button" data-dragging="false" data-slot="base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] text-sm border-dashed data-[dragging=true]:bg-elevated/25 outline-primary/25 focus-visible:outline-3 focus-visible:border-primary p-1.5 hover:bg-elevated/25" tabindex="0">
     <!--v-if-->
     <div data-slot="wrapper" class="flex flex-col items-center justify-center text-center"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-5"></svg>
       <!--v-if-->
@@ -824,7 +824,7 @@ exports[`FileUpload > renders with size sm correctly 1`] = `
 `;
 
 exports[`FileUpload > renders with size sm variant button correctly 1`] = `
-"<div data-slot="root" class="relative flex flex-col"><button type="button" aria-disabled="false" data-dragging="false" data-slot="base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] text-xs border-dashed data-[dragging=true]:bg-elevated/25 outline-primary/25 focus-visible:outline-3 focus-visible:border-primary p-1.5 hover:bg-elevated/25" tabindex="0">
+"<div data-slot="root" class="relative flex flex-col"><button type="button" data-dragging="false" data-slot="base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] text-xs border-dashed data-[dragging=true]:bg-elevated/25 outline-primary/25 focus-visible:outline-3 focus-visible:border-primary p-1.5 hover:bg-elevated/25" tabindex="0">
     <!--v-if-->
     <div data-slot="wrapper" class="flex flex-col items-center justify-center text-center"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-4"></svg>
       <!--v-if-->
@@ -863,7 +863,7 @@ exports[`FileUpload > renders with size xl correctly 1`] = `
 `;
 
 exports[`FileUpload > renders with size xl variant button correctly 1`] = `
-"<div data-slot="root" class="relative flex flex-col"><button type="button" aria-disabled="false" data-dragging="false" data-slot="base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] text-base border-dashed data-[dragging=true]:bg-elevated/25 outline-primary/25 focus-visible:outline-3 focus-visible:border-primary p-2 hover:bg-elevated/25" tabindex="0">
+"<div data-slot="root" class="relative flex flex-col"><button type="button" data-dragging="false" data-slot="base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] text-base border-dashed data-[dragging=true]:bg-elevated/25 outline-primary/25 focus-visible:outline-3 focus-visible:border-primary p-2 hover:bg-elevated/25" tabindex="0">
     <!--v-if-->
     <div data-slot="wrapper" class="flex flex-col items-center justify-center text-center"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-6"></svg>
       <!--v-if-->
@@ -902,7 +902,7 @@ exports[`FileUpload > renders with size xs correctly 1`] = `
 `;
 
 exports[`FileUpload > renders with size xs variant button correctly 1`] = `
-"<div data-slot="root" class="relative flex flex-col"><button type="button" aria-disabled="false" data-dragging="false" data-slot="base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] text-xs border-dashed data-[dragging=true]:bg-elevated/25 outline-primary/25 focus-visible:outline-3 focus-visible:border-primary p-1 hover:bg-elevated/25" tabindex="0">
+"<div data-slot="root" class="relative flex flex-col"><button type="button" data-dragging="false" data-slot="base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] text-xs border-dashed data-[dragging=true]:bg-elevated/25 outline-primary/25 focus-visible:outline-3 focus-visible:border-primary p-1 hover:bg-elevated/25" tabindex="0">
     <!--v-if-->
     <div data-slot="wrapper" class="flex flex-col items-center justify-center text-center"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-4"></svg>
       <!--v-if-->
@@ -955,7 +955,7 @@ exports[`FileUpload > renders with variant area correctly 1`] = `
 `;
 
 exports[`FileUpload > renders with variant button correctly 1`] = `
-"<div data-slot="root" class="relative flex flex-col"><button type="button" aria-disabled="false" data-dragging="false" data-slot="base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] text-sm border-dashed data-[dragging=true]:bg-elevated/25 outline-primary/25 focus-visible:outline-3 focus-visible:border-primary p-1.5 hover:bg-elevated/25" tabindex="0">
+"<div data-slot="root" class="relative flex flex-col"><button type="button" data-dragging="false" data-slot="base" class="w-full flex-1 bg-default border border-default flex flex-col gap-2 items-stretch justify-center rounded-lg transition-[background] text-sm border-dashed data-[dragging=true]:bg-elevated/25 outline-primary/25 focus-visible:outline-3 focus-visible:border-primary p-1.5 hover:bg-elevated/25" tabindex="0">
     <!--v-if-->
     <div data-slot="wrapper" class="flex flex-col items-center justify-center text-center"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-5"></svg>
       <!--v-if-->

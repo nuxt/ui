@@ -365,7 +365,7 @@ defineExpose({
         :type="variant === 'button' ? 'button' : undefined"
         :role="variant === 'button' ? undefined : 'button'"
         :disabled="variant === 'button' ? disabled : undefined"
-        :aria-disabled="variant === 'button' ? disabled : undefined"
+        :aria-disabled="variant === 'button' ? undefined : (disabled || undefined)"
         :data-dragging="isDragging"
         data-slot="base"
         :class="ui.base({ class: props.ui?.base })"
