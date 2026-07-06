@@ -17,12 +17,6 @@ const { copy: copyCSS, copied: copiedCSS } = useClipboard()
 const { copy: copyConfig, copied: copiedConfig } = useClipboard()
 
 const {
-  neutralColors,
-  neutral,
-  primaryColors,
-  primary,
-  blackAsPrimary,
-  setBlackAsPrimary,
   radiuses,
   radius,
   modes,
@@ -35,7 +29,7 @@ const {
   resetTheme
 } = useTheme()
 
-const { presets, activePreset, applyPreset, shuffle, selectPalette, studioOpen } = useThemeStudio()
+const { presets, activePreset, applyPreset, shuffle, studioOpen } = useThemeStudio()
 
 /** The preset's primary + neutral at 500, straight from its own document. */
 function presetSwatches(doc: ThemeDoc): string[] {
@@ -54,33 +48,6 @@ const presetItems = computed(() => presets.map(preset => ({
 })))
 
 const presetLabel = computed(() => presets.find(preset => preset.id === activePreset.value)?.name || 'Presets')
-
-/** Current values may be preset/custom ramps that aren't in the stock lists. */
-const primaryItems = computed(() => [...new Set(['black', ...(blackAsPrimary.value ? [] : [primary.value]), ...primaryColors])])
-const neutralItems = computed(() => [...new Set([neutral.value, ...neutralColors])])
-
-const primaryModel = computed({
-  get: () => blackAsPrimary.value ? 'black' : primary.value,
-  set: (value: string) => {
-    if (value === 'black') {
-      setBlackAsPrimary(true)
-    } else {
-      setBlackAsPrimary(false)
-      selectPalette('primary', value)
-    }
-  }
-})
-
-const neutralModel = computed({
-  get: () => neutral.value,
-  set: (value: string) => selectPalette('neutral', value)
-})
-
-/** Palette name → the css var chip name (tailwind's neutral gray is remapped in docs). */
-function chipColor(name: string): string | undefined {
-  if (name === 'black') return undefined
-  return `var(--color-${name === 'neutral' ? 'old-neutral' : name}-500)`
-}
 
 function openStudio() {
   open.value = false
@@ -103,19 +70,19 @@ function openStudio() {
 
     <template #content>
       <div class="flex gap-1.5">
-        <UDropdownMenu :items="presetItems" :content="{ align: 'start' }" class="flex-1 min-w-0">
+        <UDropdownMenu :items="presetItems" :content="{ align: 'start' }" class="flex-1 min-w-0" :ui="{ itemTrailing: 'self-center', content: 'w-(--reka-dropdown-menu-trigger-width)' }">
           <UButton
             :label="presetLabel"
             icon="i-lucide-swatch-book"
             trailing-icon="i-lucide-chevron-down"
             color="neutral"
             variant="subtle"
-            size="sm"
+
             block
           />
 
           <template #item-trailing="{ item }">
-            <span class="inline-flex items-center gap-1">
+            <span class="inline-flex items-center gap-1 h-full">
               <span
                 v-for="(swatch, index) in item.swatches"
                 :key="index"
@@ -131,12 +98,22 @@ function openStudio() {
             icon="i-lucide-dices"
             color="neutral"
             variant="subtle"
-            size="sm"
+
             aria-label="Random theme"
             @click="shuffle"
           />
         </UTooltip>
       </div>
+
+      <UButton
+        label="Open Theme Studio"
+        icon="i-lucide-swatch-book"
+        color="neutral"
+        variant="subtle"
+
+        block
+        @click="openStudio"
+      />
 
       <fieldset>
         <legend class="text-[11px] leading-none font-semibold mb-2 select-none flex items-center gap-1">
@@ -153,31 +130,7 @@ function openStudio() {
           />
         </legend>
 
-        <USelect
-          v-model="primaryModel"
-          :items="primaryItems"
-          size="sm"
-          color="neutral"
-          variant="subtle"
-          class="w-full capitalize"
-          :ui="{ item: 'capitalize' }"
-        >
-          <template #leading>
-            <span
-              class="inline-block size-2 rounded-full"
-              :class="{ 'bg-black dark:bg-white': primaryModel === 'black' }"
-              :style="{ backgroundColor: chipColor(primaryModel) }"
-            />
-          </template>
-
-          <template #item-leading="{ item }">
-            <span
-              class="inline-block size-2 rounded-full"
-              :class="{ 'bg-black dark:bg-white': item === 'black' }"
-              :style="{ backgroundColor: chipColor(item as string) }"
-            />
-          </template>
-        </USelect>
+        <ThemePickerColorMenu alias="primary" class="w-full" />
       </fieldset>
 
       <fieldset>
@@ -195,29 +148,7 @@ function openStudio() {
           />
         </legend>
 
-        <USelect
-          v-model="neutralModel"
-          :items="neutralItems"
-          size="sm"
-          color="neutral"
-          variant="subtle"
-          class="w-full capitalize"
-          :ui="{ item: 'capitalize' }"
-        >
-          <template #leading>
-            <span
-              class="inline-block size-2 rounded-full"
-              :style="{ backgroundColor: chipColor(neutralModel) }"
-            />
-          </template>
-
-          <template #item-leading="{ item }">
-            <span
-              class="inline-block size-2 rounded-full"
-              :style="{ backgroundColor: chipColor(item as string) }"
-            />
-          </template>
-        </USelect>
+        <ThemePickerColorMenu alias="neutral" class="w-full" />
       </fieldset>
 
       <fieldset>
@@ -273,16 +204,6 @@ function openStudio() {
         </div>
       </fieldset>
 
-      <UButton
-        label="Open Theme Studio"
-        icon="i-lucide-swatch-book"
-        color="neutral"
-        variant="subtle"
-        size="sm"
-        block
-        @click="openStudio"
-      />
-
       <fieldset v-if="hasCSSChanges || hasConfigChanges">
         <legend class="text-[11px] leading-none font-semibold mb-2 select-none">
           Export
@@ -293,7 +214,7 @@ function openStudio() {
             v-if="hasCSSChanges"
             color="neutral"
             variant="subtle"
-            size="sm"
+
             label="main.css"
             class="flex-1 text-[11px]"
             :icon="copiedCSS ? 'i-lucide-copy-check' : 'i-lucide-copy'"
@@ -303,7 +224,7 @@ function openStudio() {
             v-if="hasConfigChanges"
             color="neutral"
             variant="subtle"
-            size="sm"
+
             :label="configLabel"
             :icon="copiedConfig ? 'i-lucide-copy-check' : 'i-lucide-copy'"
             class="flex-1 text-[11px]"
@@ -313,7 +234,7 @@ function openStudio() {
             <UButton
               color="neutral"
               variant="subtle"
-              size="sm"
+
               icon="i-lucide-rotate-ccw"
               class="ms-auto"
               @click="resetTheme"

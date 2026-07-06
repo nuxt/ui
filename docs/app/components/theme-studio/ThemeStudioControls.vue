@@ -5,12 +5,8 @@ import type { VariantGroup, TokenRamp, ColorAlias, ThemeDoc } from '../../utils/
 const appConfig = useAppConfig()
 
 const {
-  neutralColors,
   neutral,
-  primaryColors,
   primary,
-  blackAsPrimary,
-  setBlackAsPrimary,
   radius,
   fontSize,
   spacing,
@@ -20,7 +16,7 @@ const {
   icons
 } = useTheme()
 
-const { selectPalette, isCustomPalette, style, setStyle, presets, activePreset, applyPreset, shuffle } = useThemeStudio()
+const { isCustomPalette, style, setStyle, presets, activePreset, applyPreset, shuffle } = useThemeStudio()
 
 /** The preset's primary + neutral at 500, straight from its own document. */
 function presetSwatches(doc: ThemeDoc): string[] {
@@ -57,44 +53,7 @@ const openSections = reactive<Record<string, boolean>>({
   ...Object.fromEntries(TOKEN_GROUPS.map((group, index) => [`tokens-${group.key}`, index === 0]))
 })
 
-// Every ramp is a suggestion for either role, sectioned so the list stays
-// scannable: colorful ramps lead the primary/semantic pickers, neutrals
-// lead the background picker.
-const colorSections = [
-  { label: 'Colors', colors: primaryColors },
-  { label: 'Neutrals', colors: neutralColors }
-]
-const backgroundSections = [
-  { label: 'Neutrals', colors: neutralColors },
-  { label: 'Colors', colors: primaryColors }
-]
-
 const semanticAliases: ColorAlias[] = ['secondary', 'success', 'info', 'warning', 'error']
-
-const aliasValues = computed(() => appConfig.ui.colors as Record<string, string>)
-
-/** Palette name → the css var chip name (tailwind's neutral gray is remapped in docs). */
-function paletteChip(name: string) {
-  return name === 'neutral' ? 'old-neutral' : name
-}
-
-const primarySwatch = computed(() => {
-  if (blackAsPrimary.value) {
-    return { label: 'Black', color: undefined }
-  }
-  if (isCustomPalette('primary')) {
-    return { label: 'Custom', color: 'var(--color-custom-primary-500)' }
-  }
-  return { label: primary.value, color: `var(--color-${primary.value}-500)` }
-})
-
-const neutralSwatch = computed(() => {
-  if (isCustomPalette('neutral')) {
-    return { label: 'Custom', color: 'var(--color-custom-neutral-500)' }
-  }
-  const chip = neutral.value === 'neutral' ? 'old-neutral' : neutral.value
-  return { label: neutral.value, color: `var(--color-${chip}-500)` }
-})
 
 const shadowOptions = [
   { label: 'None', value: 'none' },
@@ -262,10 +221,6 @@ onMounted(() => {
 const paletteEditors = reactive<Record<string, boolean>>({})
 
 /** Display name for an alias's palette — custom ramps read as 'Custom'. */
-function aliasLabel(alias: ColorAlias) {
-  return isCustomPalette(alias) ? 'Custom' : aliasValues.value[alias]
-}
-
 const openGroups = ref('colors')
 
 const groupItems = [
@@ -418,58 +373,7 @@ const shadowColor = computed({
             <template #content>
               <div>
                 <UFieldGroup size="sm" class="flex w-full">
-                  <UPopover :content="{ side: 'bottom', align: 'start' }" class="flex-1 min-w-0">
-                    <UButton
-                      color="neutral"
-                      variant="subtle"
-                      size="sm"
-                      block
-                      trailing-icon="i-lucide-chevron-down"
-                      class="capitalize"
-                    >
-                      <template #leading>
-                        <span
-                          class="inline-block size-3 rounded-full"
-                          :class="{ 'bg-black dark:bg-white': blackAsPrimary }"
-                          :style="primarySwatch.color ? { backgroundColor: primarySwatch.color } : undefined"
-                        />
-                      </template>
-
-                      {{ primarySwatch.label }}
-                    </UButton>
-
-                    <template #content>
-                      <div class="flex flex-col gap-2 w-72 p-2">
-                        <div v-for="(section, index) in colorSections" :key="section.label">
-                          <p class="text-[11px] font-semibold text-muted px-1 mb-1 select-none">
-                            {{ section.label }}
-                          </p>
-
-                          <div class="grid grid-cols-3 gap-1">
-                            <ThemePickerButton
-                              v-if="index === 0"
-                              label="Black"
-                              :selected="blackAsPrimary"
-                              @click="setBlackAsPrimary(true)"
-                            >
-                              <template #leading>
-                                <span class="inline-block size-2 rounded-full bg-black dark:bg-white" />
-                              </template>
-                            </ThemePickerButton>
-
-                            <ThemePickerButton
-                              v-for="color in section.colors"
-                              :key="color"
-                              :label="color"
-                              :chip="paletteChip(color)"
-                              :selected="!blackAsPrimary && primary === color"
-                              @click="selectPalette('primary', color)"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </template>
-                  </UPopover>
+                  <ThemePickerColorMenu alias="primary" class="flex-1 min-w-0" />
 
                   <UButton
                     :icon="isCustomPalette('primary') ? 'i-lucide-paintbrush' : 'i-lucide-pencil'"
@@ -507,46 +411,7 @@ const shadowColor = computed({
             <template #content>
               <div>
                 <UFieldGroup size="sm" class="flex w-full">
-                  <UPopover :content="{ side: 'bottom', align: 'start' }" class="flex-1 min-w-0">
-                    <UButton
-                      color="neutral"
-                      variant="subtle"
-                      size="sm"
-                      block
-                      trailing-icon="i-lucide-chevron-down"
-                      class="capitalize"
-                    >
-                      <template #leading>
-                        <span
-                          class="inline-block size-3 rounded-full"
-                          :style="{ backgroundColor: neutralSwatch.color }"
-                        />
-                      </template>
-
-                      {{ neutralSwatch.label }}
-                    </UButton>
-
-                    <template #content>
-                      <div class="flex flex-col gap-2 w-72 p-2">
-                        <div v-for="section in backgroundSections" :key="section.label">
-                          <p class="text-[11px] font-semibold text-muted px-1 mb-1 select-none">
-                            {{ section.label }}
-                          </p>
-
-                          <div class="grid grid-cols-3 gap-1">
-                            <ThemePickerButton
-                              v-for="color in section.colors"
-                              :key="color"
-                              :label="color"
-                              :chip="paletteChip(color)"
-                              :selected="neutral === color"
-                              @click="selectPalette('neutral', color)"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </template>
-                  </UPopover>
+                  <ThemePickerColorMenu alias="neutral" class="flex-1 min-w-0" />
 
                   <UButton
                     :icon="isCustomPalette('neutral') ? 'i-lucide-paintbrush' : 'i-lucide-pencil'"
@@ -589,46 +454,7 @@ const shadowColor = computed({
                     <span class="text-[11px] text-muted w-13 shrink-0 capitalize select-none">{{ alias }}</span>
 
                     <UFieldGroup size="sm" class="flex flex-1 min-w-0">
-                      <UPopover :content="{ side: 'bottom', align: 'start' }" class="flex-1 min-w-0">
-                        <UButton
-                          color="neutral"
-                          variant="subtle"
-                          size="sm"
-                          block
-                          trailing-icon="i-lucide-chevron-down"
-                          class="capitalize"
-                        >
-                          <template #leading>
-                            <span
-                              class="inline-block size-3 rounded-full"
-                              :style="{ backgroundColor: `var(--color-${paletteChip(aliasValues[alias] || alias)}-500)` }"
-                            />
-                          </template>
-
-                          {{ aliasLabel(alias) }}
-                        </UButton>
-
-                        <template #content>
-                          <div class="flex flex-col gap-2 w-72 p-2">
-                            <div v-for="section in colorSections" :key="section.label">
-                              <p class="text-[11px] font-semibold text-muted px-1 mb-1 select-none">
-                                {{ section.label }}
-                              </p>
-
-                              <div class="grid grid-cols-3 gap-1">
-                                <ThemePickerButton
-                                  v-for="color in section.colors"
-                                  :key="color"
-                                  :label="color"
-                                  :chip="paletteChip(color)"
-                                  :selected="aliasValues[alias] === color"
-                                  @click="selectPalette(alias, color)"
-                                />
-                              </div>
-                            </div>
-                          </div>
-                        </template>
-                      </UPopover>
+                      <ThemePickerColorMenu :alias="alias" class="flex-1 min-w-0" />
 
                       <UButton
                         :icon="isCustomPalette(alias) ? 'i-lucide-paintbrush' : 'i-lucide-pencil'"

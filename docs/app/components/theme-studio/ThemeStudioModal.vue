@@ -51,7 +51,7 @@ const viewTabs = [
     description="Customize Nuxt UI live: colors, radius, fonts and icons — then export only what you changed."
   >
     <template #content>
-      <div class="flex flex-row w-full h-full bg-neutral-300 dark:bg-neutral-900">
+      <div class="flex flex-row w-full h-full bg-neutral-200 dark:bg-neutral-950">
         <USidebar
           v-model:open="sidebarOpen"
           variant="floating"
