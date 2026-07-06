@@ -83,7 +83,7 @@ export type SplitterSlots<T extends SplitterItem = SplitterItem> = {
   resize: (size: number) => void
   ui: Splitter['ui']
 }> & {
-  [key: string]: SlotProps<T>
+  [key: `panel-${number}`]: SlotProps<T>
 }
 
 </script>

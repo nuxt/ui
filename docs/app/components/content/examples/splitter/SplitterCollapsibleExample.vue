@@ -8,20 +8,22 @@ const items: SplitterItem[] = [
 </script>
 
 <template>
-  <USplitter :items="items" class="h-96">
-    <template #sidebar="{ collapsed, collapse, expand }">
-      <div class="flex-1 flex items-center justify-center p-4">
-        <UButton
-          :label="collapsed ? 'Expand' : 'Collapse'"
-          color="neutral"
-          variant="subtle"
-          @click="collapsed ? expand() : collapse()"
-        />
-      </div>
-    </template>
+  <div class="w-full h-96">
+    <USplitter :items="items">
+      <template #sidebar="{ collapsed, collapse, expand }">
+        <div class="flex-1 flex items-center justify-center p-4">
+          <UButton
+            :label="collapsed ? 'Expand' : 'Collapse'"
+            color="neutral"
+            variant="subtle"
+            @click="collapsed ? expand() : collapse()"
+          />
+        </div>
+      </template>
 
-    <template #main>
-      <Placeholder class="size-full" />
-    </template>
-  </USplitter>
+      <template #main>
+        <Placeholder class="size-full" />
+      </template>
+    </USplitter>
+  </div>
 </template>

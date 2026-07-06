@@ -13,21 +13,23 @@ const nested: SplitterItem[] = [
 </script>
 
 <template>
-  <USplitter :items="items" class="h-96">
-    <template #left>
-      <Placeholder class="size-full" />
-    </template>
+  <div class="w-full h-96">
+    <USplitter :items="items">
+      <template #left>
+        <Placeholder class="size-full" />
+      </template>
 
-    <template #right>
-      <USplitter orientation="vertical" :items="nested" class="size-full">
-        <template #top>
-          <Placeholder class="size-full" />
-        </template>
+      <template #right>
+        <USplitter orientation="vertical" :items="nested">
+          <template #top>
+            <Placeholder class="size-full" />
+          </template>
 
-        <template #bottom>
-          <Placeholder class="size-full" />
-        </template>
-      </USplitter>
-    </template>
-  </USplitter>
+          <template #bottom>
+            <Placeholder class="size-full" />
+          </template>
+        </USplitter>
+      </template>
+    </USplitter>
+  </div>
 </template>

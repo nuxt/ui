@@ -80,6 +80,7 @@ const components = [
   'skeleton',
   'slideover',
   'slider',
+  'splitter',
   'stepper',
   'switch',
   'table',

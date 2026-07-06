@@ -8,26 +8,26 @@ links:
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/Splitter.vue
+navigation.badge: Soon
 ---
 
 ## Usage
 
 The Splitter component renders a resizable panel for each entry in the `items` prop, inserting a draggable handle between them. Use the `slot` key of each item to fill its content.
 
+The Splitter fills its container, so make sure a parent element defines a height.
+
 ::component-code
 ---
+class: 'h-96'
 prettier: true
 ignore:
   - items
-  - class
 external:
   - items
 externalTypes:
   - SplitterItem[]
-hide:
-  - class
 props:
-  class: 'h-96'
   items:
     - slot: 'first'
       min: 20
@@ -56,19 +56,16 @@ Use the `orientation` prop to change the direction of the splitter. Defaults to 
 
 ::component-code
 ---
+class: 'h-96'
 prettier: true
 ignore:
   - items
-  - class
 external:
   - items
 externalTypes:
   - SplitterItem[]
-hide:
-  - class
 props:
   orientation: 'vertical'
-  class: 'h-96'
   items:
     - slot: 'first'
     - slot: 'second'
