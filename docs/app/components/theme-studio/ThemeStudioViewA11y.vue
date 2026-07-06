@@ -76,17 +76,26 @@ function compute() {
  */
 const colorMode = useColorMode()
 const appConfig = useAppConfig()
-const cssVariables = useState('nuxt-ui-css-variables', () => ({}))
-const customColors = useState('nuxt-ui-custom-colors', () => ({}))
+// the owning composable's refs — never re-seed these channels here
+const { cssVariablesData, customColorsData } = useTheme()
 
-let timeout: ReturnType<typeof setTimeout> | undefined
-watch([() => colorMode.value, () => ({ ...appConfig.ui.colors }), cssVariables, customColors], () => {
-  clearTimeout(timeout)
-  timeout = setTimeout(compute, 80)
-})
+// useHead swaps the style tags asynchronously: wait a tick for the vnodes,
+// then two frames so the new sheets are applied before reading computed
+// styles — deterministic, unlike a wall-clock delay.
+let pending = 0
+function scheduleCompute() {
+  cancelAnimationFrame(pending)
+  nextTick(() => {
+    pending = requestAnimationFrame(() => {
+      pending = requestAnimationFrame(compute)
+    })
+  })
+}
+
+watch([() => colorMode.value, () => ({ ...appConfig.ui.colors }), cssVariablesData, customColorsData], scheduleCompute)
 
 onMounted(compute)
-onUnmounted(() => clearTimeout(timeout))
+onUnmounted(() => cancelAnimationFrame(pending))
 
 function level(ratio: number): { label: string, color: 'success' | 'warning' | 'error' } {
   if (ratio >= 7) return { label: 'AAA', color: 'success' }

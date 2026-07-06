@@ -77,7 +77,7 @@ export default defineNuxtPlugin({
       // Inline scripts below intentionally duplicate logic from the client-side composable
       // (useTheme / injectCustomColors / injectCSSVariables) to restore persisted theme
       // settings on first paint and prevent a flash of unstyled content (FOUC).
-      // The script IDs (chat-custom-colors, chat-css-variables, nuxt-ui-radius, etc.)
+      // The script IDs (nuxt-ui-custom-colors, nuxt-ui-css-variables, nuxt-ui-radius, etc.)
       // correspond to the <style> elements managed by useTheme via useHead.
       useHead({
         script: [{
@@ -187,7 +187,7 @@ export default defineNuxtPlugin({
                     }
                   }
                   if (vars.length) {
-                    var el = document.getElementById('chat-custom-colors');
+                    var el = document.getElementById('nuxt-ui-custom-colors');
                     if (el) { el.textContent = ':root { ' + vars.join(' ') + ' }'; }
                   }
                 } catch(e) {}
@@ -218,7 +218,7 @@ export default defineNuxtPlugin({
                     parts.push('.dark { ' + merge(defaults.dark, cssVars.dark).join(' ') + ' }');
                   }
                   if (parts.length) {
-                    var el = document.getElementById('chat-css-variables');
+                    var el = document.getElementById('nuxt-ui-css-variables');
                     if (el) { el.textContent = parts.join(' '); }
                   }
                 } catch(e) {}

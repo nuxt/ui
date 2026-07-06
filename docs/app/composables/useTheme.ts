@@ -1,4 +1,5 @@
 import { defu } from 'defu'
+import { THEME_TAG_IDS, THEME_STATE_KEYS, THEME_STORAGE_KEYS } from '../utils/theme-keys'
 import { useLocalStorage } from '@vueuse/core'
 import { themeIcons, cssVariableDefaults, readLocalStorage } from '../utils/theme'
 import { generateCSS, generateConfig, mergeUi, isDefaultStyle, DEFAULT_COLORS, THEME_DEFAULTS, LIBRARY_TOKEN_DEFAULTS, CUSTOM_PALETTES } from '../utils/theme-engine'
@@ -79,7 +80,7 @@ export function useTheme() {
   })
   const cssVariablesData = useState<{ light?: Record<string, string>, dark?: Record<string, string> }>('nuxt-ui-css-variables', () => readLocalStorage('nuxt-ui-css-variables', {}))
   /** The studio's style axis (it owns writes); read here for currentDoc/export. */
-  const stylePrefs = useState<ThemeDoc['style']>('nuxt-ui-style-prefs', () => readLocalStorage('nuxt-ui-style', {}))
+  const stylePrefs = useState<ThemeDoc['style']>(THEME_STATE_KEYS.stylePrefs, () => readLocalStorage(THEME_STORAGE_KEYS.style, {}))
   const _radius = useLocalStorage('nuxt-ui-radius', 0.25)
   const _fontSize = useLocalStorage('nuxt-ui-font-size', 16)
   const _spacing = useLocalStorage('nuxt-ui-spacing', 0.25)
@@ -253,8 +254,8 @@ export function useTheme() {
     { innerHTML: spacingStyle, id: 'nuxt-ui-spacing', tagPriority: -2 },
     { innerHTML: blackAsPrimaryStyle, id: 'nuxt-ui-black-as-primary', tagPriority: -2 },
     { innerHTML: fontStyle, id: 'nuxt-ui-font', tagPriority: -2 },
-    { innerHTML: customColorsStyle, id: 'chat-custom-colors', tagPriority: -2 },
-    { innerHTML: cssVariablesStyle, id: 'chat-css-variables', tagPriority: -2 }
+    { innerHTML: customColorsStyle, id: THEME_TAG_IDS.customColors, tagPriority: -2 },
+    { innerHTML: cssVariablesStyle, id: THEME_TAG_IDS.cssVariables, tagPriority: -2 }
   ]
 
   const hasCSSChanges = computed(() => {
@@ -374,7 +375,7 @@ export function useTheme() {
     } else {
       window.localStorage.removeItem('nuxt-ui-css-variables')
       if (import.meta.client) {
-        document.getElementById('chat-css-variables')?.replaceChildren()
+        document.getElementById(THEME_TAG_IDS.cssVariables)?.replaceChildren()
       }
     }
   }
@@ -538,8 +539,8 @@ export function useTheme() {
     useState<string | undefined>('nuxt-ui-theme-preset').value = undefined
 
     if (import.meta.client) {
-      document.getElementById('chat-css-variables')?.replaceChildren()
-      document.getElementById('chat-custom-colors')?.replaceChildren()
+      document.getElementById(THEME_TAG_IDS.cssVariables)?.replaceChildren()
+      document.getElementById(THEME_TAG_IDS.customColors)?.replaceChildren()
     }
   }
 
@@ -567,6 +568,8 @@ export function useTheme() {
     hasConfigChanges,
     configLabel: computed(() => framework.value === 'vue' ? 'vite.config.ts' : 'app.config.ts'),
     currentDoc,
+    cssVariablesData,
+    customColorsData,
     removeCustomColors,
     removeCSSVariables,
     setStyleUi,

@@ -309,17 +309,32 @@ function showToast() {
         Chat
       </p>
 
-      <div class="text-sm bg-elevated rounded-lg px-3 py-2 me-8">
-        Hey! How does this bubble look with your primary color?
-      </div>
-      <div class="text-sm bg-primary text-inverted rounded-lg px-3 py-2 ms-auto max-w-[80%]">
-        Looking sharp, ship it.
-      </div>
+      <!-- real chat components so the frame/shadow treatments preview truthfully -->
+      <UChatMessage
+        id="bento-assistant"
+        role="assistant"
+        variant="soft"
+        compact
+        :parts="[{ type: 'text', text: 'Hey! How does this bubble look with your primary color?' }]"
+        class="me-8"
+      />
+      <UChatMessage
+        id="bento-user"
+        role="user"
+        variant="solid"
+        color="primary"
+        side="right"
+        compact
+        :parts="[{ type: 'text', text: 'Looking sharp, ship it.' }]"
+        class="ms-auto max-w-[80%]"
+      />
 
-      <div class="flex items-center gap-2">
-        <UInput v-model="chatMessage" placeholder="Type a message..." class="flex-1" />
-        <UButton icon="i-lucide-send" square aria-label="Send message" />
-      </div>
+      <UChatPrompt v-model="chatMessage" placeholder="Type a message..." :ui="{ base: 'text-sm' }">
+        <template #footer>
+          <span />
+          <UChatPromptSubmit status="ready" size="sm" />
+        </template>
+      </UChatPrompt>
     </UCard>
 
     <UCard class="break-inside-avoid" :ui="{ body: 'flex flex-col gap-3' }">

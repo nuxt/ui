@@ -1,4 +1,5 @@
 import colors from 'tailwindcss/colors'
+import { THEME_STATE_KEYS, THEME_STORAGE_KEYS } from '../utils/theme-keys'
 import { presets, docToSettings, isDefaultTheme, generatePalette, fitPalette, parseCssColor, parseUiColorRef, styleComponents, styleTokens, DEFAULT_COLORS, SHADES, TOKEN_SHADE_TARGETS } from '../utils/theme-engine'
 import type { ThemeDoc, ThemePreset, PaletteCurveParams, StyleOptions, Shade, ColorAlias } from '../utils/theme-engine'
 import { readLocalStorage } from '../utils/theme'
@@ -8,7 +9,7 @@ export function useThemeStudio() {
   const appConfig = useAppConfig()
   const { track } = useAnalytics()
 
-  const activePreset = useState<string | undefined>('nuxt-ui-theme-preset', () => undefined)
+  const activePreset = useState<string | undefined>(THEME_STATE_KEYS.themePreset, () => undefined)
 
   /** The studio modal — one instance mounted in the header, openable from anywhere. */
   const studioOpen = useState('nuxt-ui-studio-open', () => false)
@@ -19,19 +20,19 @@ export function useThemeStudio() {
    * resetTheme() — reachable from the popover and chat, outside this
    * composable — can clear the shared state, not just the storage key.
    */
-  const paletteParams = useState<Partial<Record<string, PaletteCurveParams>>>('nuxt-ui-palette-params-state', () => readLocalStorage('nuxt-ui-palette-params', {}))
+  const paletteParams = useState<Partial<Record<string, PaletteCurveParams>>>(THEME_STATE_KEYS.paletteParams, () => readLocalStorage(THEME_STORAGE_KEYS.paletteParams, {}))
 
   function setPaletteParams(value: Partial<Record<string, PaletteCurveParams>>) {
     paletteParams.value = value
     if (Object.keys(value).length) {
-      window.localStorage.setItem('nuxt-ui-palette-params', JSON.stringify(value))
+      window.localStorage.setItem(THEME_STORAGE_KEYS.paletteParams, JSON.stringify(value))
     } else {
-      window.localStorage.removeItem('nuxt-ui-palette-params')
+      window.localStorage.removeItem(THEME_STORAGE_KEYS.paletteParams)
     }
   }
 
   /** Shadow/border/token-shade prefs; the expanded class bundle lives in the style-ui channel. */
-  const style = useState<StyleOptions>('nuxt-ui-style-prefs', () => readLocalStorage('nuxt-ui-style', {}))
+  const style = useState<StyleOptions>(THEME_STATE_KEYS.stylePrefs, () => readLocalStorage(THEME_STORAGE_KEYS.style, {}))
 
   // Self-heal: the persisted class bundle is an expansion of `style` frozen
   // at write time — if the generator changed since (new fragment classes),
@@ -41,7 +42,7 @@ export function useThemeStudio() {
   if (import.meta.client && !healed.value) {
     healed.value = true
     const expected = styleComponents(style.value)
-    if (JSON.stringify(expected) !== JSON.stringify(readLocalStorage('nuxt-ui-style-ui', {}))) {
+    if (JSON.stringify(expected) !== JSON.stringify(readLocalStorage(THEME_STORAGE_KEYS.styleUi, {}))) {
       onNuxtReady(() => theme.setStyleUi(expected))
     }
   }
@@ -52,7 +53,7 @@ export function useThemeStudio() {
     const previousStyle = style.value
     const previous = styleTokens(previousStyle)
     style.value = { ...style.value, ...options }
-    window.localStorage.setItem('nuxt-ui-style', JSON.stringify(style.value))
+    window.localStorage.setItem(THEME_STORAGE_KEYS.style, JSON.stringify(style.value))
 
     // Remove only the tokens the PREVIOUS style emitted and the next one
     // doesn't — never preset/doc-owned values sharing the same names.
@@ -184,9 +185,9 @@ export function useThemeStudio() {
     // Remember what to restore when the custom palette is removed — the
     // default alias would discard a preset's choice (e.g. Ghibli's stone).
     if (!isCustomPalette(alias)) {
-      const prev = readLocalStorage<Record<string, string>>('nuxt-ui-palette-prev', {})
+      const prev = readLocalStorage<Record<string, string>>(THEME_STORAGE_KEYS.palettePrev, {})
       prev[alias] = (appConfig.ui.colors as Record<string, string>)[alias]!
-      window.localStorage.setItem('nuxt-ui-palette-prev', JSON.stringify(prev))
+      window.localStorage.setItem(THEME_STORAGE_KEYS.palettePrev, JSON.stringify(prev))
     }
 
     theme.applyThemeSettings({
@@ -215,10 +216,10 @@ export function useThemeStudio() {
       })
     }
 
-    const prev = readLocalStorage<Record<string, string>>('nuxt-ui-palette-prev', {})
+    const prev = readLocalStorage<Record<string, string>>(THEME_STORAGE_KEYS.palettePrev, {})
     theme.applyThemeSettings({ [alias]: prev[alias] || DEFAULT_COLORS[alias] }, { track: false })
     const { [alias]: _restored, ...remaining } = prev
-    window.localStorage.setItem('nuxt-ui-palette-prev', JSON.stringify(remaining))
+    window.localStorage.setItem(THEME_STORAGE_KEYS.palettePrev, JSON.stringify(remaining))
 
     const { [alias]: _, ...rest } = paletteParams.value
     setPaletteParams(rest)
@@ -264,7 +265,7 @@ export function useThemeStudio() {
     theme.resetTheme()
     style.value = deriveStyle(doc)
     if (Object.keys(style.value).length) {
-      window.localStorage.setItem('nuxt-ui-style', JSON.stringify(style.value))
+      window.localStorage.setItem(THEME_STORAGE_KEYS.style, JSON.stringify(style.value))
     }
 
     if (!isDefaultTheme(doc)) {

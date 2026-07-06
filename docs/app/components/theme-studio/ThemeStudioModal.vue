@@ -142,7 +142,7 @@ const viewTabs = [
           :ui="{ container: 'pe-0', header: 'bg-elevated/50 lg:rounded-t-lg', body: 'p-0 gap-0 bg-default', footer: 'bg-elevated/50 lg:rounded-b-lg', inner: [chromeShadow, 'bg-default'] }"
         >
           <template #header>
-            <Logo class="w-auto h-6 shrink-0 mr-auto" />
+            <Logo class="w-auto h-5 shrink-0 mr-auto" />
 
             <UTooltip v-for="m in modes" :key="m.label" :text="`${m.label} mode`" class="capitalize">
               <UButton
