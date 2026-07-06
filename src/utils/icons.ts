@@ -1,39 +1,53 @@
 import defaultIcons from '../theme/icons'
 
-const ICON_PREFIX = 'i-'
-
 /**
- * Convert a Nuxt UI icon class (`i-{collection}-{name}`) into the `{collection}:{name}`
- * form expected by `@nuxt/icon`'s `clientBundle.icons`, treating the first dash-delimited
- * segment as the collection.
+ * Split an icon (`i-{collection}-{name}`, `{collection}:{name}`, with or without the
+ * `i-`/`i:` prefix) into `[collection, name]`.
  *
- * This is only unambiguous for single-word collections (e.g. `lucide`); multi-word ones
- * (e.g. `material-symbols`) can't be split without `@nuxt/icon`'s collection list, so the
- * caller is responsible for restricting input to collections known to be single-word.
+ * The colon form is unambiguous and accepted for any collection. The dashed form is
+ * matched against `collections` longest-first, so multi-word collections (e.g.
+ * `material-symbols`) split correctly instead of on the first dash. When `fallback`
+ * is set, a dashed icon matching no collection is best-effort split on the first dash.
+ *
+ * This is the single parser for both the theme defaults (`getClientBundleIcons`) and
+ * the user's `icon.clientBundle.icons`, so the two paths can't drift apart.
  */
-function toBundleName(icon: unknown): string | undefined {
-  if (typeof icon !== 'string' || !icon.startsWith(ICON_PREFIX)) {
-    return
+export function parseIconName(icon: string, collections: Iterable<string> = [], fallback = false): [collection: string, name: string] | undefined {
+  const id = icon.replace(/^i[-:]/, '')
+
+  const colon = id.indexOf(':')
+  if (colon !== -1) {
+    return colon > 0 && colon < id.length - 1 ? [id.slice(0, colon), id.slice(colon + 1)] : undefined
   }
 
-  const id = icon.slice(ICON_PREFIX.length)
-  const dash = id.indexOf('-')
-  if (dash < 1 || dash === id.length - 1) {
-    return
+  let collection: string | undefined
+  for (const name of collections) {
+    if (id.startsWith(`${name}-`) && id.length > name.length + 1 && name.length > (collection?.length ?? 0)) {
+      collection = name
+    }
+  }
+  if (collection) {
+    return [collection, id.slice(collection.length + 1)]
   }
 
-  return `${id.slice(0, dash)}:${id.slice(dash + 1)}`
+  if (fallback) {
+    const dash = id.indexOf('-')
+    if (dash > 0 && dash < id.length - 1) {
+      return [id.slice(0, dash), id.slice(dash + 1)]
+    }
+  }
 }
 
 // Collections Nuxt UI ships its default icons in (currently just `lucide`). We only
 // auto-bundle icons from these collections because they convert unambiguously; icons
 // from other collections may use multi-word collection names that can't be split
 // reliably, so they're left to runtime loading rather than emit a wrong name `@nuxt/icon`
-// would drop and warn about. Derived from the defaults so it stays correct if they ever change.
+// would drop and warn about. Derived from the defaults (known to be single-word, hence
+// the first-dash fallback) so it stays correct if they ever change.
 const trustedCollections = new Set(
   Object.values(defaultIcons)
-    .map(icon => toBundleName(icon)?.split(':')[0])
-    .filter(Boolean) as string[]
+    .map(icon => parseIconName(icon, [], true)?.[0])
+    .filter((collection): collection is string => !!collection)
 )
 
 /**
@@ -52,14 +66,13 @@ export function getClientBundleIcons(icons: Record<string, string> = {}): string
   const names = new Set<string>()
 
   for (const icon of Object.values(icons)) {
-    const name = toBundleName(icon)
-    if (!name) {
+    if (typeof icon !== 'string') {
       continue
     }
 
-    const collection = name.slice(0, name.indexOf(':'))
-    if (trustedCollections.has(collection)) {
-      names.add(name)
+    const parsed = parseIconName(icon, trustedCollections)
+    if (parsed && trustedCollections.has(parsed[0])) {
+      names.add(`${parsed[0]}:${parsed[1]}`)
     }
   }
 

@@ -8,6 +8,17 @@ import type { Plugin } from 'vue'
 // and client, which is what lets the bundled icons render during SSR.
 export default {
   install() {
-    init(addIcon)
+    init((name, data) => {
+      // `@iconify/vue` splits a colon-less lookup on its FIRST dash, so a multi-word collection
+      // icon used as `i-material-symbols-menu` resolves to `material:symbols-menu` and would
+      // miss the bundled `material-symbols:menu`. Register those under the dashed alias too —
+      // it mis-splits the same way on both sides — so both forms find the bundled data.
+      const colon = name.indexOf(':')
+      if (colon !== -1 && name.slice(0, colon).includes('-')) {
+        addIcon(name.replace(':', '-'), data)
+      }
+
+      return addIcon(name, data)
+    })
   }
 } satisfies Plugin
