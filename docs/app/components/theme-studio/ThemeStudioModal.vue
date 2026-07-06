@@ -67,7 +67,7 @@ const viewTabs = [
           v-model:open="sidebarOpen"
           variant="floating"
           :style="{ '--sidebar-width': '21rem' }"
-          :ui="{ body: 'p-0 gap-0', inner: sidebarShadow }"
+          :ui="{ container: 'pe-0', body: 'p-0 gap-0', inner: sidebarShadow }"
         >
           <ThemeStudioControls />
 
@@ -138,7 +138,7 @@ const viewTabs = [
           <!-- The floating preview card: the grid scrolls inside it; the
                app-shell views own their height and scroll internally. -->
           <div
-            class="flex-1 min-w-0 min-h-0 border-default m-4 mt-1 lg:ms-0 rounded-lg"
+            class="flex-1 min-w-0 min-h-0 border-default m-4 mt-1 rounded-lg"
             :class="[PREVIEW_EDGE[chromeWidth], previewShadow, view === 'grid' ? 'overflow-y-auto' : 'overflow-hidden']"
           >
             <ThemeStudioBento v-if="view === 'grid'" />
