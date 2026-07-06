@@ -270,7 +270,9 @@ const salesColumns: TableColumn<Sale>[] = [{
       <template #body>
         <!-- The preview pane is far narrower than the real template's page —
              two-up until xl, and the joined-border look only when four fit. -->
-        <UPageGrid class="grid-cols-2 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-4 xl:gap-[var(--studio-border-width,1px)]">
+        <!-- shrink-0 everywhere: the panel body is a scrollable flex column,
+             and a shrinking child gets crushed into its own overflow-hidden -->
+        <UPageGrid class="shrink-0 grid-cols-2 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-4 xl:gap-[var(--studio-border-width,1px)]">
           <UPageCard
             v-for="stat in stats"
             :key="stat.title"
@@ -296,7 +298,7 @@ const salesColumns: TableColumn<Sale>[] = [{
           </UPageCard>
         </UPageGrid>
 
-        <UCard :ui="{ body: 'px-0! pt-0! pb-3!' }">
+        <UCard class="shrink-0" :ui="{ body: 'px-0! pt-0! pb-3!' }">
           <template #header>
             <div>
               <p class="text-xs text-muted uppercase mb-1.5">
