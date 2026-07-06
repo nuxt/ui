@@ -56,7 +56,7 @@ const viewTabs = [
   <main class="flex flex-col lg:flex-row lg:h-[calc(100vh-var(--ui-header-height))]">
     <aside
       v-show="sidebarOpen"
-      class="shrink-0 lg:w-80 border-default lg:overflow-y-auto p-4 sm:px-6"
+      class="shrink-0 lg:w-80 border-default lg:overflow-y-auto"
       :class="SIDEBAR_EDGE[chromeWidth]"
     >
       <ThemeStudioControls />

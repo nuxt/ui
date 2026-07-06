@@ -108,6 +108,68 @@ export const presets: ThemePreset[] = [{
     }
   }
 }, {
+  id: 'orchard',
+  name: 'Orchard',
+  description: 'Orange on deep sage greens — subtle surfaces, dropped hard shadows.',
+  icon: 'i-lucide-citrus',
+  doc: {
+    version: 1,
+    meta: { name: 'Orchard', base: 'orchard' },
+    // A sculpted green-tinted neutral (studio curve editor) whose light end
+    // starts far below white — the whole page sits on foliage.
+    palettes: {
+      grove: {
+        shades: {
+          50: 'oklch(91% 0.044 140.516)',
+          100: 'oklch(84.7% 0.045 140.375)',
+          200: 'oklch(78.6% 0.046 140.572)',
+          300: 'oklch(72.4% 0.046 141.493)',
+          400: 'oklch(65.8% 0.045 142.245)',
+          500: 'oklch(59% 0.039 142.85)',
+          600: 'oklch(52.1% 0.033 143.372)',
+          700: 'oklch(45.1% 0.028 143.839)',
+          800: 'oklch(38.2% 0.024 144.268)',
+          900: 'oklch(31.2% 0.02 144.666)',
+          950: 'oklch(24.2% 0.017 145.041)'
+        }
+      }
+    },
+    colors: {
+      primary: 'orange',
+      neutral: 'grove'
+    },
+    radius: 0.5,
+    font: { sans: 'DM Sans' },
+    tokens: {
+      light: {
+        '--ui-bg': 'var(--ui-color-neutral-50)',
+        '--ui-text-inverted': 'var(--ui-color-neutral-50)'
+      },
+      dark: {
+        '--ui-text-highlighted': 'var(--ui-color-neutral-50)'
+      }
+    },
+    // Exercises the newest axes together: straight-down hard shadow at 55%,
+    // app-wide subtle variants, and per-mode shades for the surface stack
+    // plus the success/error alias tokens.
+    style: {
+      shadow: 'hard',
+      shadowColor: 'shade',
+      shadowShade: { light: 950, dark: 950 },
+      shadowOpacity: 55,
+      shadowGeometry: { x: 0, y: 3, blur: 0, spread: 0 },
+      defaults: { variant: 'subtle' },
+      tokenShades: {
+        '--ui-bg-muted': { light: 100 },
+        '--ui-bg-elevated': { light: 200 },
+        '--ui-bg-accented': { light: 300 },
+        '--ui-border': { dark: 950 },
+        '--ui-success': { light: 600, dark: 300 },
+        '--ui-error': { light: 600, dark: 300 }
+      }
+    }
+  }
+}, {
   id: 'marshmallow',
   name: 'Marshmallow',
   description: 'Pastel pink softness with mauve-tinted grays.',
@@ -411,68 +473,6 @@ export const presets: ThemePreset[] = [{
         '--ui-success': { light: 600, dark: 600 },
         '--ui-warning': { light: 700, dark: 700 },
         '--ui-error': { light: 700, dark: 400 }
-      }
-    }
-  }
-}, {
-  id: 'orchard',
-  name: 'Orchard',
-  description: 'Orange on deep sage greens — subtle surfaces, dropped hard shadows.',
-  icon: 'i-lucide-citrus',
-  doc: {
-    version: 1,
-    meta: { name: 'Orchard', base: 'orchard' },
-    // A sculpted green-tinted neutral (studio curve editor) whose light end
-    // starts far below white — the whole page sits on foliage.
-    palettes: {
-      grove: {
-        shades: {
-          50: 'oklch(91% 0.044 140.516)',
-          100: 'oklch(84.7% 0.045 140.375)',
-          200: 'oklch(78.6% 0.046 140.572)',
-          300: 'oklch(72.4% 0.046 141.493)',
-          400: 'oklch(65.8% 0.045 142.245)',
-          500: 'oklch(59% 0.039 142.85)',
-          600: 'oklch(52.1% 0.033 143.372)',
-          700: 'oklch(45.1% 0.028 143.839)',
-          800: 'oklch(38.2% 0.024 144.268)',
-          900: 'oklch(31.2% 0.02 144.666)',
-          950: 'oklch(24.2% 0.017 145.041)'
-        }
-      }
-    },
-    colors: {
-      primary: 'orange',
-      neutral: 'grove'
-    },
-    radius: 0.5,
-    font: { sans: 'DM Sans' },
-    tokens: {
-      light: {
-        '--ui-bg': 'var(--ui-color-neutral-50)',
-        '--ui-text-inverted': 'var(--ui-color-neutral-50)'
-      },
-      dark: {
-        '--ui-text-highlighted': 'var(--ui-color-neutral-50)'
-      }
-    },
-    // Exercises the newest axes together: straight-down hard shadow at 55%,
-    // app-wide subtle variants, and per-mode shades for the surface stack
-    // plus the success/error alias tokens.
-    style: {
-      shadow: 'hard',
-      shadowColor: 'shade',
-      shadowShade: { light: 950, dark: 950 },
-      shadowOpacity: 55,
-      shadowGeometry: { x: 0, y: 3, blur: 0, spread: 0 },
-      defaults: { variant: 'subtle' },
-      tokenShades: {
-        '--ui-bg-muted': { light: 100 },
-        '--ui-bg-elevated': { light: 200 },
-        '--ui-bg-accented': { light: 300 },
-        '--ui-border': { dark: 950 },
-        '--ui-success': { light: 600, dark: 300 },
-        '--ui-error': { light: 600, dark: 300 }
       }
     }
   }

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { TOKEN_SHADE_TARGETS, TOKEN_GROUPS, SHADES, SHADOW_SHADE_DEFAULTS, BORDER_SHADE_DEFAULTS, BORDER_WIDTH_DEFAULT, SHADOW_GEOMETRY_DEFAULTS } from '../../utils/theme-engine'
-import type { VariantGroup, TokenRamp, ColorAlias } from '../../utils/theme-engine'
+import { TOKEN_SHADE_TARGETS, TOKEN_GROUPS, SHADES, SHADOW_SHADE_DEFAULTS, BORDER_SHADE_DEFAULTS, BORDER_WIDTH_DEFAULT, SHADOW_GEOMETRY_DEFAULTS, resolveAlias, resolveShade } from '../../utils/theme-engine'
+import type { VariantGroup, TokenRamp, ColorAlias, ThemeDoc } from '../../utils/theme-engine'
 
 const appConfig = useAppConfig()
 
@@ -24,11 +24,19 @@ const {
 
 const { selectPalette, isCustomPalette, style, setStyle, presets, activePreset, applyPreset, shuffle } = useThemeStudio()
 
+/** The preset's primary + neutral at 500, straight from its own document. */
+function presetSwatches(doc: ThemeDoc): string[] {
+  const primary = doc.blackAsPrimary ? 'black' : resolveShade(doc, resolveAlias(doc, 'primary'), 500)
+  const neutral = resolveShade(doc, resolveAlias(doc, 'neutral'), 500)
+  return [primary, neutral].filter((color): color is string => !!color)
+}
+
 const presetItems = computed(() => presets.map(preset => ({
   label: preset.name,
   icon: preset.icon,
   type: 'checkbox' as const,
   checked: activePreset.value === preset.id,
+  swatches: presetSwatches(preset.doc),
   onSelect: () => applyPreset(preset)
 })))
 
@@ -322,50 +330,67 @@ const shadowColor = computed({
 </script>
 
 <template>
-  <div class="flex flex-col gap-3">
-    <UTabs
-      v-model="modeTab"
-      :items="modeTabs"
-      :content="false"
-      size="xs"
-      color="primary"
-      class="w-full"
-      :ui="{ trigger: 'text-[11px] capitalize' }"
-    />
-
-    <UFieldGroup size="sm" class="flex w-full">
-      <UDropdownMenu :items="presetItems" :content="{ align: 'start' }" class="flex-1 min-w-0">
+  <div class="flex flex-col gap-4">
+    <div
+      class="flex gap-2 p-4 pb-0"
+    >
+      <UDropdownMenu
+        :items="presetItems"
+        :content="{ align: 'start' }"
+        class="flex-1 min-w-0"
+        :ui="{ itemTrailing: 'self-center', content: 'w-(--reka-dropdown-menu-trigger-width)' }"
+      >
         <UButton
           :label="presetLabel"
           icon="i-lucide-swatch-book"
           trailing-icon="i-lucide-chevron-down"
           color="neutral"
-          variant="outline"
-          size="sm"
+          variant="subtle"
           block
           class="justify-start ring-default rounded-sm text-[11px] hover:bg-elevated/50 data-[state=open]:bg-elevated/50"
           :ui="{ trailingIcon: 'ms-auto size-4 group-data-[state=open]:rotate-180 transition-transform duration-200' }"
         />
+
+        <template #item-trailing="{ item }">
+          <span class="inline-flex items-center gap-1 h-full">
+            <span
+              v-for="(swatch, index) in item.swatches"
+              :key="index"
+              class="size-2 rounded-full ring ring-default"
+              :style="{ backgroundColor: swatch }"
+            />
+          </span>
+        </template>
       </UDropdownMenu>
 
       <UTooltip text="Random theme">
         <UButton
           icon="i-lucide-dices"
           color="neutral"
-          variant="outline"
-          size="sm"
+          variant="subtle"
+
           aria-label="Random theme"
           class="ring-default rounded-sm hover:bg-elevated/50"
           @click="shuffle"
         />
       </UTooltip>
-    </UFieldGroup>
+    </div>
+    <UTabs
+      v-model="modeTab"
+      :items="modeTabs"
+      :content="false"
+      size="sm"
+      color="primary"
+      class="w-full px-4 "
+      :ui="{ trigger: ' capitalize' }"
+    />
 
     <UAccordion
       v-model="openGroups"
-
+      :ui="{ content: 'px-4', header: 'px-6' }"
       :items="groupItems"
       :unmount-on-hide="false"
+      class="border-y border-default"
     >
       <template #colors>
         <div class="flex flex-col gap-2.5 pt-1 pb-4">
@@ -453,7 +478,7 @@ const shadowColor = computed({
                   :icon="isCustomPalette('primary') ? 'i-lucide-paintbrush' : 'i-lucide-pencil'"
                   color="neutral"
                   variant="outline"
-                  size="sm"
+
                   aria-label="Edit primary palette"
                   class="ring-default rounded-sm hover:bg-elevated/50"
                   :class="{ 'bg-elevated/50': paletteEditors.primary }"
