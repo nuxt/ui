@@ -1,7 +1,9 @@
 <script setup lang="ts">
+import type { ThemeDoc } from '../../utils/theme-engine'
+
 const { track } = useAnalytics()
-const { reset, style, studioOpen: open } = useThemeStudio()
-const { modes, mode } = useTheme()
+const { reset, style, applyDoc, studioOpen: open } = useThemeStudio()
+const { modes, mode, currentDoc } = useTheme()
 const colorMode = useColorMode()
 
 const route = useRoute()
@@ -16,6 +18,71 @@ onMounted(() => {
   // ?studio survives reloads and makes an open studio linkable.
   if (route.query.studio !== undefined) {
     open.value = true
+  }
+})
+
+/**
+ * Undo/redo over whole theme documents — the same serialize/restore pair
+ * exports and presets already use, so one history entry is one applyDoc
+ * away. A debounced capture folds slider-drag bursts (and a reset) into
+ * single steps. Session-only by design.
+ */
+const past = ref<ThemeDoc[]>([])
+const future = ref<ThemeDoc[]>([])
+let lastSnapshot = ''
+let suppressUntil = 0
+
+onMounted(() => {
+  lastSnapshot = JSON.stringify(currentDoc())
+})
+
+let captureTimeout: ReturnType<typeof setTimeout> | undefined
+watch(() => mounted.value && JSON.stringify(currentDoc()), (snapshot) => {
+  if (!snapshot || snapshot === true) return
+  clearTimeout(captureTimeout)
+  captureTimeout = setTimeout(() => {
+    if (snapshot === lastSnapshot) return
+    if (Date.now() < suppressUntil) {
+      // our own undo/redo restore — realign without recording
+      lastSnapshot = snapshot
+      return
+    }
+    past.value.push(JSON.parse(lastSnapshot))
+    if (past.value.length > 50) past.value.shift()
+    future.value = []
+    lastSnapshot = snapshot
+  }, 350)
+})
+
+function restore(doc: ThemeDoc) {
+  suppressUntil = Date.now() + 800
+  applyDoc(doc)
+  lastSnapshot = JSON.stringify(doc)
+}
+
+function undo() {
+  const doc = past.value.pop()
+  if (!doc) return
+  future.value.push(JSON.parse(lastSnapshot))
+  restore(doc)
+}
+
+function redo() {
+  const doc = future.value.pop()
+  if (!doc) return
+  past.value.push(JSON.parse(lastSnapshot))
+  restore(doc)
+}
+
+defineShortcuts({
+  meta_z: () => {
+    if (open.value) undo()
+  },
+  meta_shift_z: () => {
+    if (open.value) redo()
+  },
+  ctrl_y: () => {
+    if (open.value) redo()
   }
 })
 
@@ -93,6 +160,30 @@ const viewTabs = [
           <ThemeStudioControls />
 
           <template #footer>
+            <UFieldGroup size="sm">
+              <UTooltip text="Undo" :kbds="['meta', 'Z']">
+                <UButton
+                  icon="i-lucide-undo-2"
+                  color="neutral"
+                  variant="outline"
+                  :disabled="!past.length"
+                  aria-label="Undo theme change"
+                  @click="undo"
+                />
+              </UTooltip>
+
+              <UTooltip text="Redo" :kbds="['meta', 'shift', 'Z']">
+                <UButton
+                  icon="i-lucide-redo-2"
+                  color="neutral"
+                  variant="outline"
+                  :disabled="!future.length"
+                  aria-label="Redo theme change"
+                  @click="redo"
+                />
+              </UTooltip>
+            </UFieldGroup>
+
             <div class="flex-1 min-w-0">
               <ThemeStudioImport />
             </div>
