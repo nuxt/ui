@@ -1,4 +1,4 @@
-import { streamText, convertToModelMessages, smoothStream, jsonSchema, stepCountIs } from 'ai'
+import { streamText, convertToModelMessages, smoothStream, jsonSchema, isStepCount, toUIMessageStream, createUIMessageStreamResponse } from 'ai'
 import type { AnthropicLanguageModelOptions } from '@ai-sdk/anthropic'
 import { gateway } from '@ai-sdk/gateway'
 import { z } from 'zod'
@@ -345,7 +345,7 @@ export default defineEventHandler(async (event) => {
   const abortController = new AbortController()
   event.node.req.on('close', () => abortController.abort())
 
-  const system = `You are a helpful assistant for Nuxt UI, a UI library for Nuxt and Vue. Nuxt UI includes \`@nuxt/fonts\` and \`@nuxt/icon\` as built-in dependencies — never tell users to install them separately. Use your knowledge base tools to search for relevant information before answering questions.
+  const instructions = `You are a helpful assistant for Nuxt UI, a UI library for Nuxt and Vue. Nuxt UI includes \`@nuxt/fonts\` and \`@nuxt/icon\` as built-in dependencies — never tell users to install them separately. Use your knowledge base tools to search for relevant information before answering questions.
 
 The user is using **${framework === 'vue' ? 'Vue' : 'Nuxt'}**. Tailor your answers accordingly — ${framework === 'vue' ? 'use the Vite plugin setup, Vue Router, and vite.config.ts instead of Nuxt-specific features like modules or app.config.ts. IMPORTANT: The Vite plugin auto-imports components and Nuxt UI composables, but Vue core APIs and VueUse must be explicitly imported — always include these in code examples (e.g. `import { ref, computed } from \'vue\'`, `import { useColorMode } from \'@vueuse/core\'`).' : 'use Nuxt modules, auto-imports, app.config.ts, and other Nuxt-specific features. Nuxt auto-imports Vue APIs (ref, computed, etc.), composables, and components — do not include these imports in code examples.'}
 ${safeCurrentPage ? `\nThe user is currently viewing the documentation page at \`${safeCurrentPage}\`. Use this context to provide more relevant answers (e.g. read that page first if the question seems related), but don't limit yourself to that page if the question is broader or unrelated.\n` : ''}
@@ -373,14 +373,15 @@ Guidelines:
 - Format responses in a conversational way, not as documentation sections.
     `
 
-  return streamText({
-    model: gateway('anthropic/claude-sonnet-4.6'),
+  const result = streamText({
+    model: gateway('anthropic/claude-sonnet-5'),
     maxOutputTokens: 8000,
     abortSignal: abortController.signal,
     providerOptions: {
       anthropic: {
         thinking: {
-          type: 'adaptive'
+          type: 'adaptive',
+          display: 'summarized'
         },
         effort: 'low'
       } satisfies AnthropicLanguageModelOptions,
@@ -388,10 +389,10 @@ Guidelines:
         caching: 'auto'
       }
     },
-    system,
+    instructions,
     messages: await convertToModelMessages(messages),
     experimental_transform: smoothStream(),
-    stopWhen: stepCountIs(6),
+    stopWhen: isStepCount(6),
     tools: {
       ...mcpTools,
       getThemeGuide,
@@ -402,5 +403,8 @@ Guidelines:
     onError: (error) => {
       console.error('streamText error:', error)
     }
-  }).toUIMessageStreamResponse()
+  })
+
+  const stream = toUIMessageStream({ stream: result.stream })
+  return createUIMessageStreamResponse({ stream })
 })

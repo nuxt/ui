@@ -4,6 +4,9 @@ import type { DrawerRootProps, DrawerRootEmits } from 'vaul-vue'
 import type { DialogContentProps, DialogContentEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/drawer'
+import type { ButtonProps } from './Button.vue'
+import type { IconProps } from './Icon.vue'
+import type { LinkPropsKeys } from './Link.vue'
 import type { EmitsToProps } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
@@ -44,6 +47,18 @@ export interface DrawerProps extends Pick<DrawerRootProps, 'activeSnapPoint' | '
    * @defaultValue false
    */
   nested?: boolean
+  /**
+   * Display a close button to dismiss the drawer.
+   * `{ size: 'md', color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
+   * @defaultValue false
+   */
+  close?: boolean | Omit<ButtonProps, LinkPropsKeys>
+  /**
+   * The icon displayed in the close button.
+   * @defaultValue appConfig.ui.icons.close
+   * @IconifyIcon
+   */
+  closeIcon?: IconProps['name']
   class?: any
   ui?: Drawer['slots']
 }
@@ -58,6 +73,8 @@ export interface DrawerSlots {
   header?(props?: {}): VNode[]
   title?(props?: {}): VNode[]
   description?(props?: {}): VNode[]
+  actions?(props?: {}): VNode[]
+  close?(props: { ui: Drawer['ui'] }): VNode[]
   body?(props?: {}): VNode[]
   footer?(props?: {}): VNode[]
 }
@@ -67,14 +84,16 @@ export interface DrawerSlots {
 import { computed, toRef } from 'vue'
 import { VisuallyHidden } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
-import { DrawerRoot, DrawerRootNested, DrawerTrigger, DrawerPortal, DrawerOverlay, DrawerContent, DrawerTitle, DrawerDescription, DrawerHandle } from 'vaul-vue'
+import { DrawerRoot, DrawerRootNested, DrawerTrigger, DrawerPortal, DrawerOverlay, DrawerContent, DrawerTitle, DrawerDescription, DrawerHandle, DrawerClose } from 'vaul-vue'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { FieldGroupReset } from '../composables/useFieldGroup'
+import { useLocale } from '../composables/useLocale'
 import { usePortal } from '../composables/usePortal'
 import { pointerDownOutside } from '../utils/overlay'
 import { tv } from '../utils/tv'
+import UButton from './Button.vue'
 
 const _props = withDefaults(defineProps<DrawerProps>(), {
   direction: 'bottom',
@@ -89,6 +108,7 @@ const slots = defineSlots<DrawerSlots>()
 
 const props = useComponentProps('drawer', _props)
 
+const { t } = useLocale()
 const appConfig = useAppConfig() as Drawer['AppConfig']
 
 const rootProps = useForwardProps(reactivePick(props, 'activeSnapPoint', 'closeThreshold', 'shouldScaleBackground', 'setBackgroundColorOnScale', 'scrollLockTimeout', 'fixed', 'dismissible', 'modal', 'open', 'defaultOpen', 'nested', 'direction', 'noBodyStyles', 'handleOnly', 'preventScrollRestoration', 'snapPoints'), emits)
@@ -113,7 +133,7 @@ const contentEvents = computed(() => {
 })
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.drawer || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.drawer || {}) })({
   direction: props.direction,
   inset: props.inset,
   snapPoints: props.snapPoints && props.snapPoints.length > 0
@@ -151,19 +171,40 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.drawer || {}
 
           <slot name="content">
             <div data-slot="container" :class="ui.container({ class: props.ui?.container })">
-              <div v-if="!!slots.header || (props.title || !!slots.title) || (props.description || !!slots.description)" data-slot="header" :class="ui.header({ class: props.ui?.header })">
+              <div v-if="!!slots.header || (props.title || !!slots.title) || (props.description || !!slots.description) || (props.close || !!slots.close) || !!slots.actions" data-slot="header" :class="ui.header({ class: props.ui?.header })">
                 <slot name="header">
-                  <DrawerTitle v-if="props.title || !!slots.title" data-slot="title" :class="ui.title({ class: props.ui?.title })">
-                    <slot name="title">
-                      {{ props.title }}
-                    </slot>
-                  </DrawerTitle>
+                  <div v-if="props.title || !!slots.title || props.description || !!slots.description" data-slot="wrapper" :class="ui.wrapper({ class: props.ui?.wrapper })">
+                    <DrawerTitle v-if="props.title || !!slots.title" data-slot="title" :class="ui.title({ class: props.ui?.title })">
+                      <slot name="title">
+                        {{ props.title }}
+                      </slot>
+                    </DrawerTitle>
 
-                  <DrawerDescription v-if="props.description || !!slots.description" data-slot="description" :class="ui.description({ class: props.ui?.description })">
-                    <slot name="description">
-                      {{ props.description }}
-                    </slot>
-                  </DrawerDescription>
+                    <DrawerDescription v-if="props.description || !!slots.description" data-slot="description" :class="ui.description({ class: props.ui?.description })">
+                      <slot name="description">
+                        {{ props.description }}
+                      </slot>
+                    </DrawerDescription>
+                  </div>
+
+                  <div v-if="!!slots.actions || props.close || !!slots.close" data-slot="actions" :class="ui.actions({ class: props.ui?.actions })">
+                    <slot name="actions" />
+
+                    <DrawerClose v-if="props.close || !!slots.close" as-child>
+                      <slot name="close" :ui="ui">
+                        <UButton
+                          v-if="props.close"
+                          :icon="props.closeIcon || appConfig.ui.icons.close"
+                          color="neutral"
+                          variant="ghost"
+                          :aria-label="t('drawer.close')"
+                          v-bind="(typeof props.close === 'object' ? props.close : {})"
+                          data-slot="close"
+                          :class="ui.close({ class: props.ui?.close })"
+                        />
+                      </slot>
+                    </DrawerClose>
+                  </div>
                 </slot>
               </div>
 

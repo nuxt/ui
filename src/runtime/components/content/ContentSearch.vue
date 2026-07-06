@@ -5,7 +5,12 @@ import type { ContentNavigationItem } from '@nuxt/content'
 import type { AppConfig } from '@nuxt/schema'
 import type { UseFuseOptions } from '@vueuse/integrations/useFuse'
 import theme from '#build/ui/content/content-search'
-import type { ButtonProps, LinkProps, ModalProps, CommandPaletteProps, CommandPaletteSlots, CommandPaletteGroup, CommandPaletteItem, IconProps, InputProps, LinkPropsKeys } from '../../types'
+import type { ButtonProps } from '../Button.vue'
+import type { LinkProps, LinkPropsKeys } from '../Link.vue'
+import type { ModalProps } from '../Modal.vue'
+import type { CommandPaletteProps, CommandPaletteSlots, CommandPaletteGroup, CommandPaletteItem } from '../CommandPalette.vue'
+import type { IconProps } from '../Icon.vue'
+import type { InputProps } from '../Input.vue'
 import type { ComponentConfig } from '../../types/tv'
 
 type ContentSearch = ComponentConfig<typeof theme, AppConfig, 'contentSearch'>
@@ -184,7 +189,7 @@ const fuse = computed(() => defu({}, props.fuse, {
 } as UseFuseOptions<T>))
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.contentSearch || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.contentSearch || {}) })({
   size: props.size,
   fullscreen: props.fullscreen
 }))

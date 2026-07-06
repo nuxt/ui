@@ -3,7 +3,7 @@
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/blog-posts'
-import type { BlogPostProps, BlogPostSlots } from '../types'
+import type { BlogPostProps, BlogPostSlots } from './BlogPost.vue'
 import type { ComponentConfig } from '../types/tv'
 
 type BlogPosts = ComponentConfig<typeof theme, AppConfig, 'blogPosts'>
@@ -58,7 +58,7 @@ const getProxySlots = () => omit(slots, ['default'])
 const appConfig = useAppConfig() as BlogPosts['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.blogPosts || {}) }))
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.blogPosts || {}) }))
 </script>
 
 <template>

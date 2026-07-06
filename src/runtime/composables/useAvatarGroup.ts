@@ -1,6 +1,6 @@
 import { inject, provide, computed } from 'vue'
 import type { ComputedRef, InjectionKey } from 'vue'
-import type { AvatarGroupProps } from '../types'
+import type { AvatarGroupProps } from '../components/AvatarGroup.vue'
 
 export const avatarGroupInjectionKey: InjectionKey<ComputedRef<{ size: AvatarGroupProps['size'], color: AvatarGroupProps['color'] }>> = Symbol('nuxt-ui.avatar-group')
 

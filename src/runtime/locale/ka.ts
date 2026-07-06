@@ -1,4 +1,4 @@
-import type { Messages } from '../types'
+import type { Messages } from '../types/locale'
 import { defineLocale } from '../composables/defineLocale'
 
 export default defineLocale<Messages>({
@@ -81,6 +81,9 @@ export default defineLocale<Messages>({
     dashboardSidebarToggle: {
       close: 'გვერდითი ზოლის დახურვა',
       open: 'გვერდითი ზოლის გახსნა'
+    },
+    drawer: {
+      close: 'დახურვა'
     },
     error: {
       // While "home" translates as "სახლი", I chose to use "მთავარი" (meaning "main") as contextually this sounds better.

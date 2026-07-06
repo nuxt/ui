@@ -2,7 +2,8 @@
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/page-links'
-import type { IconProps, LinkProps } from '../types'
+import type { IconProps } from './Icon.vue'
+import type { LinkProps } from './Link.vue'
 import type { ComponentConfig } from '../types/tv'
 
 type PageLinks = ComponentConfig<typeof theme, AppConfig, 'pageLinks'>
@@ -61,7 +62,7 @@ const props = useComponentProps<PageLinksProps<T>>('pageLinks', _props)
 const appConfig = useAppConfig() as PageLinks['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pageLinks || {}) })())
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.pageLinks || {}) })())
 </script>
 
 <template>

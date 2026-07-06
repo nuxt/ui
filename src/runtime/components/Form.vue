@@ -62,7 +62,7 @@ export type FormProps<S extends FormSchema, T extends boolean = true, N extends 
   loadingAuto?: boolean
   class?: any
   ui?: { base?: any }
-  onSubmit?: ((event: FormSubmitEvent<FormData<S, T>>) => void | Promise<void>) | (() => void | Promise<void>)
+  onSubmit?: ((event: FormSubmitEvent<FormData<S, T>>) => void) | (() => void)
 } & /** @vue-ignore */ Omit<FormHTMLAttributes, 'name'>
 
 export interface FormEmits<S extends FormSchema, T extends boolean = true> {
@@ -105,7 +105,7 @@ const props = useComponentProps<FormProps<S, T, N>>('form', _props)
 const appConfig = useAppConfig() as FormConfig['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.form || {}) }))
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.form || {}) }))
 
 const formId = props.id ?? useId() as string
 const formRef = useTemplateRef('formRef')

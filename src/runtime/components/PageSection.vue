@@ -2,7 +2,9 @@
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/page-section'
-import type { ButtonProps, IconProps, PageFeatureProps } from '../types'
+import type { ButtonProps } from './Button.vue'
+import type { IconProps } from './Icon.vue'
+import type { PageFeatureProps } from './PageFeature.vue'
 import type { ComponentConfig } from '../types/tv'
 
 type PageSection = ComponentConfig<typeof theme, AppConfig, 'pageSection'>
@@ -87,7 +89,7 @@ const appConfig = useAppConfig() as PageSection['AppConfig']
 const prefix = usePrefix()
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pageSection || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.pageSection || {}) })({
   orientation: props.orientation,
   reverse: props.reverse,
   title: !!props.title || !!slots.title,

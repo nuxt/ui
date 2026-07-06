@@ -353,7 +353,12 @@ export default defineNuxtConfig({
       dir: resolve('./app/assets/icons')
     }],
     clientBundle: {
-      scan: true,
+      scan: {
+        // `ts` is added because the default glob skips JS/TS for perf, but nav icons
+        // live in `app/composables/*.ts`. The explicit dot pattern is required because
+        // tinyglobby's `dot: false` makes `*.yml` skip `.navigation.yml`.
+        globInclude: ['**/*.{vue,jsx,tsx,md,mdc,mdx,yml,yaml,ts}', '**/.*.{yml,yaml}']
+      },
       includeCustomCollections: true
     }
   },

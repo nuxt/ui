@@ -3,7 +3,7 @@ import type { TooltipRootProps, TooltipRootEmits, TooltipContentProps, TooltipCo
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/tooltip'
-import type { KbdProps } from '../types'
+import type { KbdProps } from './Kbd.vue'
 import type { EmitsToProps } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
@@ -81,7 +81,7 @@ const contentProps = toRef(() => defu(props.content, providerContext.content.val
 const arrowProps = toRef(() => defu(props.arrow, { rounded: true }) as TooltipArrowProps)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.tooltip || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.tooltip || {}) })({
   side: contentProps.value.side
 }))
 </script>

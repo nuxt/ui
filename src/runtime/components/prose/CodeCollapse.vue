@@ -2,7 +2,7 @@
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/prose/code-collapse'
-import type { IconProps } from '../../types'
+import type { IconProps } from '../Icon.vue'
 import type { ComponentConfig } from '../../types/tv'
 
 type ProseCodeCollapse = ComponentConfig<typeof theme, AppConfig, 'codeCollapse', 'ui.prose'>
@@ -57,7 +57,7 @@ const { t } = useLocale()
 const appConfig = useAppConfig() as ProseCodeCollapse['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.codeCollapse || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.prose?.codeCollapse || {}) })({
   open: open.value
 }))
 </script>

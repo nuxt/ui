@@ -93,7 +93,7 @@ defineSlots<LinkSlots>()
 const appConfig = useAppConfig() as Link['AppConfig']
 
 const ui = computed(() => tv({
-  extend: tv(theme),
+  extend: theme,
   ...defu({
     variants: {
       active: {

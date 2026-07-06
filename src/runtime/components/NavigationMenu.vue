@@ -4,7 +4,13 @@ import type { NavigationMenuRootProps, NavigationMenuContentProps, NavigationMen
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/navigation-menu'
-import type { AvatarProps, BadgeProps, ChipProps, IconProps, LinkProps, PopoverProps, TooltipProps } from '../types'
+import type { AvatarProps } from './Avatar.vue'
+import type { BadgeProps } from './Badge.vue'
+import type { ChipProps } from './Chip.vue'
+import type { IconProps } from './Icon.vue'
+import type { LinkProps } from './Link.vue'
+import type { PopoverProps } from './Popover.vue'
+import type { TooltipProps } from './Tooltip.vue'
 import type { ArrayOrNested, DynamicSlots, GetItemKeys, MergeTypes, NestedItem, EmitsToProps } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
@@ -290,7 +296,7 @@ const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: N
 })
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.navigationMenu || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.navigationMenu || {}) })({
   orientation: props.orientation,
   contentOrientation: props.orientation === 'vertical' ? undefined : props.contentOrientation,
   collapsed: props.collapsed,
