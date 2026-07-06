@@ -1,7 +1,7 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`PricingPlan > renders with as correctly 1`] = `
-"<section data-orientation="vertical" data-slot="root" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+"<section data-slot="root" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
   <!--v-if-->
   <div data-slot="body" class="flex flex-col min-w-0">
     <div data-slot="titleWrapper" class="flex items-center gap-3">
@@ -22,7 +22,7 @@ exports[`PricingPlan > renders with as correctly 1`] = `
   </div>
   <div data-slot="footer" class="flex flex-col gap-6 items-center justify-end">
     <div data-slot="tagline" class="text-base font-semibold text-default">Tagline</div>
-    <!--v-if--><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
+    <!--v-if--><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
       <!--v-if--><span data-slot="label" class="truncate">Buy now</span>
       <!--v-if-->
     </button>
@@ -32,7 +32,7 @@ exports[`PricingPlan > renders with as correctly 1`] = `
 `;
 
 exports[`PricingPlan > renders with badge correctly 1`] = `
-"<div data-orientation="vertical" data-slot="root" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+"<div data-slot="root" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
   <!--v-if-->
   <div data-slot="body" class="flex flex-col min-w-0">
     <div data-slot="titleWrapper" class="flex items-center gap-3">
@@ -48,7 +48,7 @@ exports[`PricingPlan > renders with badge correctly 1`] = `
 `;
 
 exports[`PricingPlan > renders with badge object correctly 1`] = `
-"<div data-orientation="vertical" data-slot="root" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+"<div data-slot="root" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
   <!--v-if-->
   <div data-slot="body" class="flex flex-col min-w-0">
     <div data-slot="titleWrapper" class="flex items-center gap-3">
@@ -64,7 +64,7 @@ exports[`PricingPlan > renders with badge object correctly 1`] = `
 `;
 
 exports[`PricingPlan > renders with badge slot correctly 1`] = `
-"<div data-orientation="vertical" data-slot="root" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+"<div data-slot="root" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
   <!--v-if-->
   <div data-slot="body" class="flex flex-col min-w-0">
     <div data-slot="titleWrapper" class="flex items-center gap-3">
@@ -84,7 +84,7 @@ exports[`PricingPlan > renders with badge slot correctly 1`] = `
   </div>
   <div data-slot="footer" class="flex flex-col gap-6 items-center justify-end">
     <div data-slot="tagline" class="text-base font-semibold text-default">Tagline</div>
-    <!--v-if--><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
+    <!--v-if--><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
       <!--v-if--><span data-slot="label" class="truncate">Buy now</span>
       <!--v-if-->
     </button>
@@ -94,7 +94,7 @@ exports[`PricingPlan > renders with badge slot correctly 1`] = `
 `;
 
 exports[`PricingPlan > renders with billing cycle correctly 1`] = `
-"<div data-orientation="vertical" data-slot="root" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+"<div data-slot="root" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
   <!--v-if-->
   <div data-slot="body" class="flex flex-col min-w-0">
     <div data-slot="titleWrapper" class="flex items-center gap-3">
@@ -114,7 +114,7 @@ exports[`PricingPlan > renders with billing cycle correctly 1`] = `
 `;
 
 exports[`PricingPlan > renders with billing period correctly 1`] = `
-"<div data-orientation="vertical" data-slot="root" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+"<div data-slot="root" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
   <!--v-if-->
   <div data-slot="body" class="flex flex-col min-w-0">
     <div data-slot="titleWrapper" class="flex items-center gap-3">
@@ -136,7 +136,7 @@ exports[`PricingPlan > renders with billing period correctly 1`] = `
 `;
 
 exports[`PricingPlan > renders with billing slot correctly 1`] = `
-"<div data-orientation="vertical" data-slot="root" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+"<div data-slot="root" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
   <!--v-if-->
   <div data-slot="body" class="flex flex-col min-w-0">
     <div data-slot="titleWrapper" class="flex items-center gap-3">
@@ -157,7 +157,7 @@ exports[`PricingPlan > renders with billing slot correctly 1`] = `
   </div>
   <div data-slot="footer" class="flex flex-col gap-6 items-center justify-end">
     <div data-slot="tagline" class="text-base font-semibold text-default">Tagline</div>
-    <!--v-if--><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
+    <!--v-if--><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
       <!--v-if--><span data-slot="label" class="truncate">Buy now</span>
       <!--v-if-->
     </button>
@@ -167,12 +167,12 @@ exports[`PricingPlan > renders with billing slot correctly 1`] = `
 `;
 
 exports[`PricingPlan > renders with body slot correctly 1`] = `
-"<div data-orientation="vertical" data-slot="root" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+"<div data-slot="root" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
   <!--v-if-->
   <div data-slot="body" class="flex flex-col min-w-0">Body slot</div>
   <div data-slot="footer" class="flex flex-col gap-6 items-center justify-end">
     <div data-slot="tagline" class="text-base font-semibold text-default">Tagline</div>
-    <!--v-if--><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
+    <!--v-if--><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
       <!--v-if--><span data-slot="label" class="truncate">Buy now</span>
       <!--v-if-->
     </button>
@@ -182,7 +182,7 @@ exports[`PricingPlan > renders with body slot correctly 1`] = `
 `;
 
 exports[`PricingPlan > renders with button correctly 1`] = `
-"<div data-orientation="vertical" data-slot="root" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+"<div data-slot="root" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
   <!--v-if-->
   <div data-slot="body" class="flex flex-col min-w-0">
     <div data-slot="titleWrapper" class="flex items-center gap-3">
@@ -195,7 +195,7 @@ exports[`PricingPlan > renders with button correctly 1`] = `
   </div>
   <div data-slot="footer" class="flex flex-col gap-6 items-center justify-end">
     <!--v-if-->
-    <!--v-if--><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
+    <!--v-if--><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
       <!--v-if--><span data-slot="label" class="truncate">Buy now</span>
       <!--v-if-->
     </button>
@@ -205,7 +205,7 @@ exports[`PricingPlan > renders with button correctly 1`] = `
 `;
 
 exports[`PricingPlan > renders with button slot correctly 1`] = `
-"<div data-orientation="vertical" data-slot="root" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+"<div data-slot="root" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
   <!--v-if-->
   <div data-slot="body" class="flex flex-col min-w-0">
     <div data-slot="titleWrapper" class="flex items-center gap-3">
@@ -232,7 +232,7 @@ exports[`PricingPlan > renders with button slot correctly 1`] = `
 `;
 
 exports[`PricingPlan > renders with class correctly 1`] = `
-"<div data-orientation="vertical" data-slot="root" class="relative grid p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default rounded-xl">
+"<div data-slot="root" data-orientation="vertical" class="relative grid p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default rounded-xl">
   <!--v-if-->
   <div data-slot="body" class="flex flex-col min-w-0">
     <div data-slot="titleWrapper" class="flex items-center gap-3">
@@ -253,7 +253,7 @@ exports[`PricingPlan > renders with class correctly 1`] = `
   </div>
   <div data-slot="footer" class="flex flex-col gap-6 items-center justify-end">
     <div data-slot="tagline" class="text-base font-semibold text-default">Tagline</div>
-    <!--v-if--><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
+    <!--v-if--><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
       <!--v-if--><span data-slot="label" class="truncate">Buy now</span>
       <!--v-if-->
     </button>
@@ -263,7 +263,7 @@ exports[`PricingPlan > renders with class correctly 1`] = `
 `;
 
 exports[`PricingPlan > renders with description correctly 1`] = `
-"<div data-orientation="vertical" data-slot="root" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+"<div data-slot="root" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
   <!--v-if-->
   <div data-slot="body" class="flex flex-col min-w-0">
     <div data-slot="titleWrapper" class="flex items-center gap-3">
@@ -279,7 +279,7 @@ exports[`PricingPlan > renders with description correctly 1`] = `
 `;
 
 exports[`PricingPlan > renders with description slot correctly 1`] = `
-"<div data-orientation="vertical" data-slot="root" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+"<div data-slot="root" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
   <!--v-if-->
   <div data-slot="body" class="flex flex-col min-w-0">
     <div data-slot="titleWrapper" class="flex items-center gap-3">
@@ -300,7 +300,7 @@ exports[`PricingPlan > renders with description slot correctly 1`] = `
   </div>
   <div data-slot="footer" class="flex flex-col gap-6 items-center justify-end">
     <div data-slot="tagline" class="text-base font-semibold text-default">Tagline</div>
-    <!--v-if--><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
+    <!--v-if--><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
       <!--v-if--><span data-slot="label" class="truncate">Buy now</span>
       <!--v-if-->
     </button>
@@ -310,7 +310,7 @@ exports[`PricingPlan > renders with description slot correctly 1`] = `
 `;
 
 exports[`PricingPlan > renders with discount correctly 1`] = `
-"<div data-orientation="vertical" data-slot="root" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+"<div data-slot="root" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
   <!--v-if-->
   <div data-slot="body" class="flex flex-col min-w-0">
     <div data-slot="titleWrapper" class="flex items-center gap-3">
@@ -330,7 +330,7 @@ exports[`PricingPlan > renders with discount correctly 1`] = `
 `;
 
 exports[`PricingPlan > renders with discount slot correctly 1`] = `
-"<div data-orientation="vertical" data-slot="root" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+"<div data-slot="root" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
   <!--v-if-->
   <div data-slot="body" class="flex flex-col min-w-0">
     <div data-slot="titleWrapper" class="flex items-center gap-3">
@@ -351,7 +351,7 @@ exports[`PricingPlan > renders with discount slot correctly 1`] = `
   </div>
   <div data-slot="footer" class="flex flex-col gap-6 items-center justify-end">
     <div data-slot="tagline" class="text-base font-semibold text-default">Tagline</div>
-    <!--v-if--><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
+    <!--v-if--><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
       <!--v-if--><span data-slot="label" class="truncate">Buy now</span>
       <!--v-if-->
     </button>
@@ -361,7 +361,7 @@ exports[`PricingPlan > renders with discount slot correctly 1`] = `
 `;
 
 exports[`PricingPlan > renders with features correctly 1`] = `
-"<div data-orientation="vertical" data-slot="root" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+"<div data-slot="root" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
   <!--v-if-->
   <div data-slot="body" class="flex flex-col min-w-0">
     <div data-slot="titleWrapper" class="flex items-center gap-3">
@@ -381,7 +381,7 @@ exports[`PricingPlan > renders with features correctly 1`] = `
 `;
 
 exports[`PricingPlan > renders with features object correctly 1`] = `
-"<div data-orientation="vertical" data-slot="root" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+"<div data-slot="root" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
   <!--v-if-->
   <div data-slot="body" class="flex flex-col min-w-0">
     <div data-slot="titleWrapper" class="flex items-center gap-3">
@@ -401,7 +401,7 @@ exports[`PricingPlan > renders with features object correctly 1`] = `
 `;
 
 exports[`PricingPlan > renders with features slot correctly 1`] = `
-"<div data-orientation="vertical" data-slot="root" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+"<div data-slot="root" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
   <!--v-if-->
   <div data-slot="body" class="flex flex-col min-w-0">
     <div data-slot="titleWrapper" class="flex items-center gap-3">
@@ -418,7 +418,7 @@ exports[`PricingPlan > renders with features slot correctly 1`] = `
   </div>
   <div data-slot="footer" class="flex flex-col gap-6 items-center justify-end">
     <div data-slot="tagline" class="text-base font-semibold text-default">Tagline</div>
-    <!--v-if--><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
+    <!--v-if--><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
       <!--v-if--><span data-slot="label" class="truncate">Buy now</span>
       <!--v-if-->
     </button>
@@ -428,7 +428,7 @@ exports[`PricingPlan > renders with features slot correctly 1`] = `
 `;
 
 exports[`PricingPlan > renders with footer slot correctly 1`] = `
-"<div data-orientation="vertical" data-slot="root" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+"<div data-slot="root" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
   <!--v-if-->
   <div data-slot="body" class="flex flex-col min-w-0">
     <div data-slot="titleWrapper" class="flex items-center gap-3">
@@ -452,7 +452,7 @@ exports[`PricingPlan > renders with footer slot correctly 1`] = `
 `;
 
 exports[`PricingPlan > renders with header slot correctly 1`] = `
-"<div data-orientation="vertical" data-slot="root" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+"<div data-slot="root" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
   <div data-slot="header" class="">Header slot</div>
   <div data-slot="body" class="flex flex-col min-w-0">
     <div data-slot="titleWrapper" class="flex items-center gap-3">
@@ -473,7 +473,7 @@ exports[`PricingPlan > renders with header slot correctly 1`] = `
   </div>
   <div data-slot="footer" class="flex flex-col gap-6 items-center justify-end">
     <div data-slot="tagline" class="text-base font-semibold text-default">Tagline</div>
-    <!--v-if--><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
+    <!--v-if--><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
       <!--v-if--><span data-slot="label" class="truncate">Buy now</span>
       <!--v-if-->
     </button>
@@ -483,7 +483,7 @@ exports[`PricingPlan > renders with header slot correctly 1`] = `
 `;
 
 exports[`PricingPlan > renders with highlight correctly 1`] = `
-"<div data-orientation="vertical" data-slot="root" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring-2 ring-inset ring-primary">
+"<div data-slot="root" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring-2 ring-inset ring-primary">
   <!--v-if-->
   <div data-slot="body" class="flex flex-col min-w-0">
     <div data-slot="titleWrapper" class="flex items-center gap-3">
@@ -504,7 +504,7 @@ exports[`PricingPlan > renders with highlight correctly 1`] = `
   </div>
   <div data-slot="footer" class="flex flex-col gap-6 items-center justify-end">
     <div data-slot="tagline" class="text-base font-semibold text-default">Tagline</div>
-    <!--v-if--><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
+    <!--v-if--><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
       <!--v-if--><span data-slot="label" class="truncate">Buy now</span>
       <!--v-if-->
     </button>
@@ -514,7 +514,7 @@ exports[`PricingPlan > renders with highlight correctly 1`] = `
 `;
 
 exports[`PricingPlan > renders with orientation horizontal correctly 1`] = `
-"<div data-orientation="horizontal" data-slot="root" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 grid-cols-1 lg:grid-cols-3 justify-between divide-y lg:divide-y-0 lg:divide-x divide-default bg-default ring ring-default">
+"<div data-slot="root" data-orientation="horizontal" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 grid-cols-1 lg:grid-cols-3 justify-between divide-y lg:divide-y-0 lg:divide-x divide-default bg-default ring ring-default">
   <!--v-if-->
   <div data-slot="body" class="flex flex-col min-w-0 lg:col-span-2 pb-6 lg:pb-0 lg:pr-6 justify-center">
     <div data-slot="titleWrapper" class="flex items-center gap-3">
@@ -535,7 +535,7 @@ exports[`PricingPlan > renders with orientation horizontal correctly 1`] = `
       <div data-slot="discount" class="text-muted line-through text-xl sm:text-2xl">$249</div>
       <div data-slot="price" class="text-highlighted text-3xl sm:text-4xl font-semibold">$199</div>
       <div data-slot="billing" class="flex flex-col justify-between min-w-0"><span data-slot="billingPeriod" class="text-toned truncate text-xs font-medium">billed annually</span><span data-slot="billingCycle" class="text-muted truncate text-xs font-medium">/month</span></div>
-    </div><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
+    </div><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
       <!--v-if--><span data-slot="label" class="truncate">Buy now</span>
       <!--v-if-->
     </button>
@@ -545,7 +545,7 @@ exports[`PricingPlan > renders with orientation horizontal correctly 1`] = `
 `;
 
 exports[`PricingPlan > renders with orientation vertical correctly 1`] = `
-"<div data-orientation="vertical" data-slot="root" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+"<div data-slot="root" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
   <!--v-if-->
   <div data-slot="body" class="flex flex-col min-w-0">
     <div data-slot="titleWrapper" class="flex items-center gap-3">
@@ -566,7 +566,7 @@ exports[`PricingPlan > renders with orientation vertical correctly 1`] = `
   </div>
   <div data-slot="footer" class="flex flex-col gap-6 items-center justify-end">
     <div data-slot="tagline" class="text-base font-semibold text-default">Tagline</div>
-    <!--v-if--><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
+    <!--v-if--><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
       <!--v-if--><span data-slot="label" class="truncate">Buy now</span>
       <!--v-if-->
     </button>
@@ -576,7 +576,7 @@ exports[`PricingPlan > renders with orientation vertical correctly 1`] = `
 `;
 
 exports[`PricingPlan > renders with price correctly 1`] = `
-"<div data-orientation="vertical" data-slot="root" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+"<div data-slot="root" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
   <!--v-if-->
   <div data-slot="body" class="flex flex-col min-w-0">
     <div data-slot="titleWrapper" class="flex items-center gap-3">
@@ -596,7 +596,7 @@ exports[`PricingPlan > renders with price correctly 1`] = `
 `;
 
 exports[`PricingPlan > renders with price slot correctly 1`] = `
-"<div data-orientation="vertical" data-slot="root" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+"<div data-slot="root" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
   <!--v-if-->
   <div data-slot="body" class="flex flex-col min-w-0">
     <div data-slot="titleWrapper" class="flex items-center gap-3">
@@ -617,7 +617,7 @@ exports[`PricingPlan > renders with price slot correctly 1`] = `
   </div>
   <div data-slot="footer" class="flex flex-col gap-6 items-center justify-end">
     <div data-slot="tagline" class="text-base font-semibold text-default">Tagline</div>
-    <!--v-if--><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
+    <!--v-if--><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
       <!--v-if--><span data-slot="label" class="truncate">Buy now</span>
       <!--v-if-->
     </button>
@@ -627,7 +627,7 @@ exports[`PricingPlan > renders with price slot correctly 1`] = `
 `;
 
 exports[`PricingPlan > renders with scale correctly 1`] = `
-"<div data-orientation="vertical" data-slot="root" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default lg:scale-[1.1] lg:z-[1]">
+"<div data-slot="root" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default lg:scale-[1.1] lg:z-[1]">
   <!--v-if-->
   <div data-slot="body" class="flex flex-col min-w-0">
     <div data-slot="titleWrapper" class="flex items-center gap-3">
@@ -648,7 +648,7 @@ exports[`PricingPlan > renders with scale correctly 1`] = `
   </div>
   <div data-slot="footer" class="flex flex-col gap-6 items-center justify-end">
     <div data-slot="tagline" class="text-base font-semibold text-default">Tagline</div>
-    <!--v-if--><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
+    <!--v-if--><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
       <!--v-if--><span data-slot="label" class="truncate">Buy now</span>
       <!--v-if-->
     </button>
@@ -658,7 +658,7 @@ exports[`PricingPlan > renders with scale correctly 1`] = `
 `;
 
 exports[`PricingPlan > renders with tagline correctly 1`] = `
-"<div data-orientation="vertical" data-slot="root" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+"<div data-slot="root" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
   <!--v-if-->
   <div data-slot="body" class="flex flex-col min-w-0">
     <div data-slot="titleWrapper" class="flex items-center gap-3">
@@ -679,7 +679,7 @@ exports[`PricingPlan > renders with tagline correctly 1`] = `
 `;
 
 exports[`PricingPlan > renders with tagline slot correctly 1`] = `
-"<div data-orientation="vertical" data-slot="root" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+"<div data-slot="root" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
   <!--v-if-->
   <div data-slot="body" class="flex flex-col min-w-0">
     <div data-slot="titleWrapper" class="flex items-center gap-3">
@@ -700,7 +700,7 @@ exports[`PricingPlan > renders with tagline slot correctly 1`] = `
   </div>
   <div data-slot="footer" class="flex flex-col gap-6 items-center justify-end">
     <div data-slot="tagline" class="text-base font-semibold text-default">Tagline slot</div>
-    <!--v-if--><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
+    <!--v-if--><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
       <!--v-if--><span data-slot="label" class="truncate">Buy now</span>
       <!--v-if-->
     </button>
@@ -710,7 +710,7 @@ exports[`PricingPlan > renders with tagline slot correctly 1`] = `
 `;
 
 exports[`PricingPlan > renders with terms correctly 1`] = `
-"<div data-orientation="vertical" data-slot="root" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+"<div data-slot="root" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
   <!--v-if-->
   <div data-slot="body" class="flex flex-col min-w-0">
     <div data-slot="titleWrapper" class="flex items-center gap-3">
@@ -731,7 +731,7 @@ exports[`PricingPlan > renders with terms correctly 1`] = `
 `;
 
 exports[`PricingPlan > renders with terms slot correctly 1`] = `
-"<div data-orientation="vertical" data-slot="root" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+"<div data-slot="root" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
   <!--v-if-->
   <div data-slot="body" class="flex flex-col min-w-0">
     <div data-slot="titleWrapper" class="flex items-center gap-3">
@@ -752,7 +752,7 @@ exports[`PricingPlan > renders with terms slot correctly 1`] = `
   </div>
   <div data-slot="footer" class="flex flex-col gap-6 items-center justify-end">
     <div data-slot="tagline" class="text-base font-semibold text-default">Tagline</div>
-    <!--v-if--><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
+    <!--v-if--><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
       <!--v-if--><span data-slot="label" class="truncate">Buy now</span>
       <!--v-if-->
     </button>
@@ -762,7 +762,7 @@ exports[`PricingPlan > renders with terms slot correctly 1`] = `
 `;
 
 exports[`PricingPlan > renders with title correctly 1`] = `
-"<div data-orientation="vertical" data-slot="root" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+"<div data-slot="root" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
   <!--v-if-->
   <div data-slot="body" class="flex flex-col min-w-0">
     <div data-slot="titleWrapper" class="flex items-center gap-3">
@@ -778,7 +778,7 @@ exports[`PricingPlan > renders with title correctly 1`] = `
 `;
 
 exports[`PricingPlan > renders with title slot correctly 1`] = `
-"<div data-orientation="vertical" data-slot="root" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+"<div data-slot="root" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
   <!--v-if-->
   <div data-slot="body" class="flex flex-col min-w-0">
     <div data-slot="titleWrapper" class="flex items-center gap-3">
@@ -799,7 +799,7 @@ exports[`PricingPlan > renders with title slot correctly 1`] = `
   </div>
   <div data-slot="footer" class="flex flex-col gap-6 items-center justify-end">
     <div data-slot="tagline" class="text-base font-semibold text-default">Tagline</div>
-    <!--v-if--><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
+    <!--v-if--><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
       <!--v-if--><span data-slot="label" class="truncate">Buy now</span>
       <!--v-if-->
     </button>
@@ -809,7 +809,7 @@ exports[`PricingPlan > renders with title slot correctly 1`] = `
 `;
 
 exports[`PricingPlan > renders with ui correctly 1`] = `
-"<div data-orientation="vertical" data-slot="root" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+"<div data-slot="root" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
   <!--v-if-->
   <div data-slot="body" class="flex flex-col min-w-0">
     <div data-slot="titleWrapper" class="flex items-center gap-3">
@@ -830,7 +830,7 @@ exports[`PricingPlan > renders with ui correctly 1`] = `
   </div>
   <div data-slot="footer" class="flex flex-col items-center justify-end gap-12">
     <div data-slot="tagline" class="text-base font-semibold text-default">Tagline</div>
-    <!--v-if--><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
+    <!--v-if--><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
       <!--v-if--><span data-slot="label" class="truncate">Buy now</span>
       <!--v-if-->
     </button>
@@ -840,7 +840,7 @@ exports[`PricingPlan > renders with ui correctly 1`] = `
 `;
 
 exports[`PricingPlan > renders with variant outline correctly 1`] = `
-"<div data-orientation="vertical" data-slot="root" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
+"<div data-slot="root" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-default ring ring-default">
   <!--v-if-->
   <div data-slot="body" class="flex flex-col min-w-0">
     <div data-slot="titleWrapper" class="flex items-center gap-3">
@@ -861,7 +861,7 @@ exports[`PricingPlan > renders with variant outline correctly 1`] = `
   </div>
   <div data-slot="footer" class="flex flex-col gap-6 items-center justify-end">
     <div data-slot="tagline" class="text-base font-semibold text-default">Tagline</div>
-    <!--v-if--><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
+    <!--v-if--><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
       <!--v-if--><span data-slot="label" class="truncate">Buy now</span>
       <!--v-if-->
     </button>
@@ -871,7 +871,7 @@ exports[`PricingPlan > renders with variant outline correctly 1`] = `
 `;
 
 exports[`PricingPlan > renders with variant soft correctly 1`] = `
-"<div data-orientation="vertical" data-slot="root" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-elevated/50">
+"<div data-slot="root" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-elevated/50">
   <!--v-if-->
   <div data-slot="body" class="flex flex-col min-w-0">
     <div data-slot="titleWrapper" class="flex items-center gap-3">
@@ -892,7 +892,7 @@ exports[`PricingPlan > renders with variant soft correctly 1`] = `
   </div>
   <div data-slot="footer" class="flex flex-col gap-6 items-center justify-end">
     <div data-slot="tagline" class="text-base font-semibold text-default">Tagline</div>
-    <!--v-if--><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
+    <!--v-if--><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
       <!--v-if--><span data-slot="label" class="truncate">Buy now</span>
       <!--v-if-->
     </button>
@@ -902,7 +902,7 @@ exports[`PricingPlan > renders with variant soft correctly 1`] = `
 `;
 
 exports[`PricingPlan > renders with variant solid correctly 1`] = `
-"<div data-orientation="vertical" data-slot="root" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-inverted">
+"<div data-slot="root" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-inverted">
   <!--v-if-->
   <div data-slot="body" class="flex flex-col min-w-0">
     <div data-slot="titleWrapper" class="flex items-center gap-3">
@@ -923,7 +923,7 @@ exports[`PricingPlan > renders with variant solid correctly 1`] = `
   </div>
   <div data-slot="footer" class="flex flex-col gap-6 items-center justify-end">
     <div data-slot="tagline" class="text-base font-semibold text-default">Tagline</div>
-    <!--v-if--><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
+    <!--v-if--><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
       <!--v-if--><span data-slot="label" class="truncate">Buy now</span>
       <!--v-if-->
     </button>
@@ -933,7 +933,7 @@ exports[`PricingPlan > renders with variant solid correctly 1`] = `
 `;
 
 exports[`PricingPlan > renders with variant subtle correctly 1`] = `
-"<div data-orientation="vertical" data-slot="root" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-elevated/50 ring ring-default">
+"<div data-slot="root" data-orientation="vertical" class="relative grid rounded-lg p-6 lg:p-8 xl:p-10 gap-6 bg-elevated/50 ring ring-default">
   <!--v-if-->
   <div data-slot="body" class="flex flex-col min-w-0">
     <div data-slot="titleWrapper" class="flex items-center gap-3">
@@ -954,7 +954,7 @@ exports[`PricingPlan > renders with variant subtle correctly 1`] = `
   </div>
   <div data-slot="footer" class="flex flex-col gap-6 items-center justify-end">
     <div data-slot="tagline" class="text-base font-semibold text-default">Tagline</div>
-    <!--v-if--><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
+    <!--v-if--><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
       <!--v-if--><span data-slot="label" class="truncate">Buy now</span>
       <!--v-if-->
     </button>

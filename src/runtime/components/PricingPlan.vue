@@ -176,7 +176,7 @@ const features = computed(() => props.features?.map(feature => typeof feature ==
     </div>
   </DefinePriceTemplate>
 
-  <Primitive :as="props.as" v-bind="$attrs" :data-orientation="props.orientation" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <Primitive :as="props.as" data-slot="root" v-bind="$attrs" :data-orientation="props.orientation" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <div v-if="!!slots.header && props.orientation === 'vertical'" data-slot="header" :class="ui.header({ class: props.ui?.header })">
       <slot name="header" />
     </div>

@@ -101,6 +101,7 @@ import { reactiveOmit } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
+import { omit } from '../utils'
 import { createHandlers } from '../utils/editor'
 import { tv } from '../utils/tv'
 
@@ -132,7 +133,7 @@ const editorProps = computed(() => defu(props.editorProps, {
     autocomplete: 'off',
     autocorrect: 'off',
     autocapitalize: 'off',
-    ...attrs,
+    ...omit(attrs, ['data-slot']),
     class: ui.value.base({ class: props.ui?.base })
   }
 } as EditorOptions['editorProps']))
@@ -283,7 +284,7 @@ defineExpose({
 </script>
 
 <template>
-  <Primitive :as="props.as" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <Primitive :as="props.as" :data-slot="($attrs['data-slot'] as string | undefined) ?? 'root'" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <template v-if="editor">
       <slot :editor="editor" :handlers="handlers" />
 
