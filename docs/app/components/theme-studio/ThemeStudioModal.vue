@@ -4,11 +4,24 @@ const { reset, style, studioOpen: open } = useThemeStudio()
 const { modes, mode } = useTheme()
 const colorMode = useColorMode()
 
+const route = useRoute()
+const router = useRouter()
+
 // Resolved AFTER mount: the preference is client-only, and hydration adopts
 // SSR attributes without patching — a post-mount flip is a real update.
 const mounted = ref(false)
 onMounted(() => {
   mounted.value = true
+
+  // ?studio survives reloads and makes an open studio linkable.
+  if (route.query.studio !== undefined) {
+    open.value = true
+  }
+})
+
+watch(open, (isOpen) => {
+  const { studio: _studio, ...query } = route.query
+  router.replace({ query: isOpen ? { ...query, studio: null } : query })
 })
 
 watch(open, (isOpen) => {
