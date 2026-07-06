@@ -645,7 +645,7 @@ defineExpose({
     @update:model-value="onUpdate"
     @update:open="onUpdateOpen"
   >
-    <Component.Anchor :as-child="!props.multiple" data-slot="base" :class="ui.base({ class: props.ui?.base })">
+    <Component.Anchor :as-child="!props.multiple" :data-slot="!!props.multiple && !isAutocomplete ? (($attrs['data-slot'] as string | undefined) ?? 'base') : 'base'" :class="ui.base({ class: props.ui?.base })">
       <TagsInputRoot
         v-if="props.multiple && !isAutocomplete"
         v-slot="{ modelValue: tags }"
@@ -689,7 +689,8 @@ defineExpose({
         v-else
         :id="id"
         ref="inputRef"
-        v-bind="{ ...(!isAutocomplete ? { displayValue } : {}), ...$attrs, ...ariaAttrs, 'data-slot': undefined }"
+        v-bind="{ ...(!isAutocomplete ? { displayValue } : {}), ...$attrs, ...ariaAttrs }"
+        :data-slot="props.multiple ? undefined : 'base'"
         :type="props.type"
         :placeholder="props.placeholder"
         :required="props.required"

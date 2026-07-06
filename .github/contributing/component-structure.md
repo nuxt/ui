@@ -244,7 +244,7 @@ Parents label a child by passing `data-slot` (e.g. `<UIcon data-slot="leadingIco
 
 How you achieve it depends on how the root receives attributes:
 
-- **Single root, default `inheritAttrs`** (Button, Badge, Card, …): nothing to do. Vue's attribute fallthrough already lets the caller's `data-slot` override the static one on the root.
+- **Single root, default `inheritAttrs`** (Badge, Card, …): nothing to do. Vue's attribute fallthrough already lets the caller's `data-slot` override the static one on the root. This only holds when the template root renders an element: `Button`'s root is a renderless `ULink custom` that hands `$attrs` back as slot props, so its `ULinkBase` needs the default placed before the spread (`<ULinkBase data-slot="base" v-bind="slotProps">`), same as the `$attrs` case below.
 - **`inheritAttrs: false`, `$attrs` spread on the root**: fallthrough is off, so a static `data-slot="root"` placed *after* `v-bind` would win over the caller. Put the default *before* the spread instead, so a caller value in `$attrs` overrides it:
 
   ```vue
@@ -263,7 +263,9 @@ How you achieve it depends on how the root receives attributes:
   </Primitive>
   ```
 
-  For `<Slot>` forwards and inner elements that have no `data-slot` of their own, strip it from what you forward so it cannot leak: `v-bind="{ ...$attrs, 'data-slot': undefined }"`.
+  For `<Slot>` forwards and inner elements that have no `data-slot` of their own, strip it from what you forward so it cannot leak: `v-bind="{ ...$attrs, 'data-slot': undefined }"`. The same applies when attributes are forwarded from the script, like `Editor` spreading `useAttrs()` into tiptap's `editorProps.attributes`: use `omit(attrs, ['data-slot'])`.
+
+The rule is enforced by `test/components/DataSlot.spec.ts`, which mounts every component with a caller `data-slot` and asserts it lands exactly once, on the outermost rendered element.
 
 ## Components with Icons
 

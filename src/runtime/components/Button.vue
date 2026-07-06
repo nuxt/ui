@@ -128,8 +128,8 @@ const ui = computed(() => tv({
     custom
   >
     <ULinkBase
-      v-bind="slotProps"
       data-slot="base"
+      v-bind="slotProps"
       :class="ui.base({
         class: [props.ui?.base, props.class],
         active,
