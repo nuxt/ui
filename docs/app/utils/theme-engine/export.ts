@@ -158,7 +158,7 @@ export function generateConfig(doc: ThemeDoc, framework: string = 'nuxt'): strin
   // explicit last so it wins) — a spread would drop one side wholesale.
   // Width rides the @theme default-width variables in the exported CSS, so
   // the config only carries frame/color/shadow classes.
-  const componentOverrides = mergeUi(doc.style ? styleComponents(doc.style, { widthAsVariables: true }) : undefined, doc.components)
+  const componentOverrides = mergeUi(doc.style ? styleComponents(doc.style) : undefined, doc.components)
   if (Object.keys(componentOverrides).length) {
     config.ui = config.ui || {}
     Object.assign(config.ui, componentOverrides)

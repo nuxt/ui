@@ -312,137 +312,17 @@ function innerShadowFragments(classes: string): Fragments {
 export const BORDER_WIDTH_DEFAULT = 2
 
 /**
- * Whole literal class strings per width so tailwind's scanner sees them —
- * the slider swaps between these, never builds a class dynamically.
+ * Frame outlines at the DEFAULT ring width — the width itself flows through
+ * --default-ring-width (compiled to the studio variable live, a static
+ * @theme value in exports), so no per-width class enumeration is needed.
  */
-const RING_WIDTH_CLASSES: Record<number, string> = { 0: 'ring-0', 1: 'ring-1', 2: 'ring-2', 3: 'ring-3', 4: 'ring-4' }
-const SM_RING_WIDTH_CLASSES: Record<number, string> = { 0: 'sm:ring-0', 1: 'sm:ring-1', 2: 'sm:ring-2', 3: 'sm:ring-3', 4: 'sm:ring-4' }
+const FRAME_INSET = 'ring ring-inset ring-(--ui-border-accented)'
+const FRAME_OUTSET = 'ring ring-(--ui-border-accented)'
 
-/** Same idea for the border-utility edges: separators, chrome, dividers. */
-const EDGE_CLASSES: Record<'t' | 'b' | 'e' | 's', Record<number, string>> = {
-  t: { 0: 'border-t-0', 1: 'border-t', 2: 'border-t-2', 3: 'border-t-3', 4: 'border-t-4' },
-  b: { 0: 'border-b-0', 1: 'border-b', 2: 'border-b-2', 3: 'border-b-3', 4: 'border-b-4' },
-  e: { 0: 'border-e-0', 1: 'border-e', 2: 'border-e-2', 3: 'border-e-3', 4: 'border-e-4' },
-  s: { 0: 'border-s-0', 1: 'border-s', 2: 'border-s-2', 3: 'border-s-3', 4: 'border-s-4' }
-}
-const DIVIDE_Y_CLASSES: Record<number, string> = { 0: 'divide-y-0', 1: 'divide-y', 2: 'divide-y-2', 3: 'divide-y-3', 4: 'divide-y-4' }
-const BORDER_ALL_CLASSES: Record<number, string> = { 0: 'border-0', 1: 'border', 2: 'border-2', 3: 'border-3', 4: 'border-4' }
-// dashboard panels only draw their edge between siblings on lg — same scoping
-const PANEL_EDGE_CLASSES: Record<number, string> = {
-  0: 'lg:not-last:border-e-0',
-  1: 'lg:not-last:border-e',
-  2: 'lg:not-last:border-e-2',
-  3: 'lg:not-last:border-e-3',
-  4: 'lg:not-last:border-e-4'
-}
-
-/**
- * Apply one ring-width class across every ring-bearing surface: variant-level
- * rings (outline/subtle on buttons/panels/fields) via compounds, slot-level
- * rings (overlay content, toast, check controls) via slots. modal is the
- * exception (ring under the fullscreen:false variant) and slideover's panel
- * ring is sm-scoped.
- */
-function ringFragments(width: number): Fragments {
-  const cls = RING_WIDTH_CLASSES[width] || RING_WIDTH_CLASSES[BORDER_WIDTH_DEFAULT]!
-  const compound = (variants: string[], slot?: string) =>
-    variants.map(variant => ({ variant, class: slot ? { [slot]: cls } : cls }))
-
-  const edge = (side: 't' | 'b' | 'e' | 's') => EDGE_CLASSES[side][width] || EDGE_CLASSES[side][BORDER_WIDTH_DEFAULT]!
-  const divide = DIVIDE_Y_CLASSES[width] || DIVIDE_Y_CLASSES[BORDER_WIDTH_DEFAULT]!
-
-  return {
-    // card's section dividers scale with its ring
-    card: {
-      compoundVariants: [
-        ...['outline', 'subtle'].map(variant => ({ variant, class: { root: `${cls} ${divide}` } })),
-        ...['solid', 'soft'].map(variant => ({ variant, class: { root: divide } }))
-      ]
-    },
-    empty: { compoundVariants: compound(['outline', 'subtle'], 'root') },
-    alert: { compoundVariants: compound(['outline', 'subtle'], 'root') },
-    button: { compoundVariants: compound(['outline', 'subtle']) },
-    badge: { compoundVariants: compound(['outline', 'subtle']) },
-    chatMessage: { compoundVariants: compound(['outline', 'subtle'], 'content') },
-    ...Object.fromEntries(FIELD_COMPONENTS.map(component => [component, { compoundVariants: compound(['outline', 'subtle']) }])),
-    // menu-bearing fields treat trigger AND dropdown surface
-    select: { slots: { content: cls }, compoundVariants: compound(['outline', 'subtle']) },
-    selectMenu: { slots: { content: cls }, compoundVariants: compound(['outline', 'subtle']) },
-    inputMenu: { slots: { content: cls }, compoundVariants: compound(['outline', 'subtle']) },
-    popover: { slots: { content: cls } },
-    dropdownMenu: { slots: { content: cls } },
-    contextMenu: { slots: { content: cls } },
-    tooltip: { slots: { content: cls } },
-    toast: { slots: { root: cls } },
-    drawer: { slots: { content: cls } },
-    modal: { compoundVariants: [{ fullscreen: false, class: { content: cls } }] },
-    slideover: { slots: { content: SM_RING_WIDTH_CLASSES[width] || SM_RING_WIDTH_CLASSES[BORDER_WIDTH_DEFAULT]! } },
-    checkbox: { slots: { base: cls } },
-    radioGroup: { slots: { base: cls } },
-    // Border-utility edges: page/app chrome, separators and dividers
-    // follow the same width so the whole preview reads consistently.
-    separator: {
-      compoundVariants: [
-        { orientation: 'horizontal', class: { border: edge('t') } },
-        { orientation: 'vertical', class: { border: edge('s') } }
-      ]
-    },
-    header: { slots: { root: edge('b') } },
-    accordion: { slots: { item: edge('b') } },
-    table: { slots: { tbody: divide } },
-    // the sidebar's edge border lives in its side VARIANT, which tv applies
-    // after slot extensions — a compound is the only layer that lands on top
-    dashboardSidebar: { compoundVariants: [
-      { side: 'left', class: { root: edge('e') } },
-      { side: 'right', class: { root: edge('s') } }
-    ] },
-    dashboardNavbar: { slots: { root: edge('b') } },
-    dashboardToolbar: { slots: { root: edge('b') } },
-    dashboardPanel: { slots: { root: PANEL_EDGE_CLASSES[width] || PANEL_EDGE_CLASSES[BORDER_WIDTH_DEFAULT]! } },
-    // ring-bearing surfaces beyond the core set (page/pricing/chat/blog)
-    pageCard: { compoundVariants: compound(['outline', 'subtle'], 'root') },
-    pageCTA: { compoundVariants: compound(['outline', 'subtle'], 'root') },
-    blogPost: { compoundVariants: compound(['outline', 'subtle'], 'root') },
-    chatPrompt: { compoundVariants: compound(['outline', 'subtle'], 'root') },
-    pricingPlan: { compoundVariants: compound(['outline', 'subtle'], 'root') },
-    // and the remaining border-utility edges
-    navigationMenu: { slots: { childList: edge('s') } },
-    pageHeader: { slots: { root: edge('b') } },
-    chatPalette: { slots: { prompt: edge('t') } },
-    commandPalette: { slots: { root: divide } },
-    fileUpload: { slots: { file: BORDER_ALL_CLASSES[width] || BORDER_ALL_CLASSES[BORDER_WIDTH_DEFAULT]! } },
-    checkboxGroup: { compoundVariants: [{ variant: 'card', class: { item: BORDER_ALL_CLASSES[width] || BORDER_ALL_CLASSES[BORDER_WIDTH_DEFAULT]! } }] },
-    listbox: { slots: { input: edge('b') } },
-    tree: { slots: { listWithChildren: edge('s') } },
-    changelogVersion: { slots: { footer: edge('t') } },
-    pricingTable: {
-      slots: {
-        item: BORDER_ALL_CLASSES[width] || BORDER_ALL_CLASSES[BORDER_WIDTH_DEFAULT]!,
-        th: edge('b'),
-        td: edge('b')
-      }
-    }
-  }
-}
-
-/** Width-parametric frame outlines (whole literals for the scanner). */
-const FRAME_INSET_CLASSES: Record<number, string> = {
-  1: 'ring-1 ring-inset ring-(--ui-border-accented)',
-  2: 'ring-2 ring-inset ring-(--ui-border-accented)',
-  3: 'ring-3 ring-inset ring-(--ui-border-accented)',
-  4: 'ring-4 ring-inset ring-(--ui-border-accented)'
-}
-const FRAME_CLASSES: Record<number, string> = {
-  1: 'ring-1 ring-(--ui-border-accented)',
-  2: 'ring-2 ring-(--ui-border-accented)',
-  3: 'ring-3 ring-(--ui-border-accented)',
-  4: 'ring-4 ring-(--ui-border-accented)'
-}
-
-/** The frame toggle: outline solid/soft surfaces too, at the chosen width. */
-function frameFragments(width: number): Fragments {
-  const inset = FRAME_INSET_CLASSES[width] || FRAME_INSET_CLASSES[BORDER_WIDTH_DEFAULT]!
-  const outset = FRAME_CLASSES[width] || FRAME_CLASSES[BORDER_WIDTH_DEFAULT]!
+/** The frame toggle: outline solid/soft surfaces too. */
+const FRAME_FRAGMENTS: Fragments = (() => {
+  const inset = FRAME_INSET
+  const outset = FRAME_OUTSET
   const frame = (cls: string, slot?: string) =>
     ['solid', 'soft'].map(variant => ({ variant, class: slot ? { [slot]: cls } : cls }))
 
@@ -466,41 +346,19 @@ function frameFragments(width: number): Fragments {
     tabs: { compoundVariants: [{ variant: 'pill', class: { list: inset, indicator: inset } }] },
     switch: { slots: { base: inset } }
   }
-}
+})()
 
 /**
- * 'none' zeroes every ring, 'custom' sets the chosen width and optionally
- * frames solid surfaces. Legacy 'bold'/'frame' (old exports and saved
- * prefs) read as custom at the default width, 'frame' keeping its outlines.
+ * Every width flows through --default-border-width/--default-ring-width —
+ * compiled onto the studio variable in the docs' own build, emitted as a
+ * static @theme value in exports — so borders need no class fragments at
+ * all. Only the frame toggle adds classes: outlines on surfaces that have
+ * none. Legacy 'frame' (old saved prefs) implies the toggle.
  */
-function borderFragments(style: StyleOptions, widthAsVariables = false): Fragments {
-  if (!style.border || style.border === 'default') return {}
-
-  // Exports carry the width through tailwind's `--default-border-width` /
-  // `--default-ring-width` theme variables instead (the consumer's compile
-  // scales every bare border/divide/ring) — only the frame outlines remain
-  // as classes. The live preview can't do that: those variables are
-  // resolved at compile time, so it keeps the class fragments.
+function borderFragments(style: StyleOptions): Fragments {
   const framed = style.frame || style.border === 'frame'
-  const width = style.border === 'none' ? 0 : style.borderWidth ?? BORDER_WIDTH_DEFAULT
-
-  if (widthAsVariables) {
-    return framed && width > 0 ? frameFragments(width) : {}
-  }
-
-  const rings = ringFragments(width)
-  if (!framed || width === 0) return rings
-
-  const frames = frameFragments(width)
-  return Object.fromEntries(
-    [...new Set([...Object.keys(rings), ...Object.keys(frames)])].map(key => [key, {
-      ...rings[key],
-      ...frames[key],
-      ...(rings[key]?.compoundVariants || frames[key]?.compoundVariants
-        ? { compoundVariants: [...(rings[key]?.compoundVariants || []), ...(frames[key]?.compoundVariants || [])] }
-        : {})
-    }])
-  )
+  const zeroed = style.border === 'none'
+  return framed && !zeroed && style.border && style.border !== 'default' ? FRAME_FRAGMENTS : {}
 }
 
 /**
@@ -658,9 +516,11 @@ export function styleTokens(style: StyleOptions): { light: Record<string, string
     dark['--ui-inner-shadow-color'] = value.dark
   }
 
-  // Studio-only: hand-rolled preview markup scales its borders through this
-  // variable (`border-[length:var(--studio-border-width,1px)]`), since the
-  // component fragments can't reach plain divs. Stripped from exports.
+  // Studio-only: the docs build compiles --default-border-width and
+  // --default-ring-width onto this variable, so EVERY default-width
+  // border/ring/divide in the app follows it live (plain gap-px boundaries
+  // reference it directly). Stripped from exports, which carry a static
+  // @theme value instead.
   if (style.border && style.border !== 'default') {
     const width = style.border === 'none' ? 0 : style.borderWidth ?? BORDER_WIDTH_DEFAULT
     light['--studio-border-width'] = `${width}px`
@@ -675,7 +535,7 @@ export function styleTokens(style: StyleOptions): { light: Record<string, string
  * merge in shadow → width → color order, so the color compounds append last
  * and win the tailwind-merge for ring color.
  */
-export function styleComponents(style: StyleOptions, options: { widthAsVariables?: boolean } = {}): Fragments {
+export function styleComponents(style: StyleOptions): Fragments {
   // App-wide defaults, only where the component supports the chosen value.
   const defaults: Fragments = {}
   const variant = style.defaults?.variant
@@ -718,7 +578,7 @@ export function styleComponents(style: StyleOptions, options: { widthAsVariables
     style.innerShadow && style.innerShadow !== 'none'
       ? innerShadowFragments(style.innerShadow === 'hard' ? INNER_HARD : INNER_SOFT)
       : {},
-    borderFragments(style, options.widthAsVariables),
+    borderFragments(style),
     style.borderColor && style.borderColor !== 'default' ? FRAME_COLOR_FRAGMENTS : {}
   ]
 
@@ -795,11 +655,15 @@ export function mergeUi(
 }
 
 /** Every component key a style bundle may touch — cleared before re-applying. */
+// Components that only ever carried retired width fragments — kept in the
+// clearing set so overrides persisted by older sessions still get swept.
+const RETIRED_WIDTH_KEYS = ['separator', 'header', 'accordion', 'table', 'dashboardSidebar', 'dashboardNavbar', 'dashboardToolbar', 'dashboardPanel', 'navigationMenu', 'pageHeader', 'chatPalette', 'commandPalette', 'fileUpload', 'checkboxGroup', 'listbox', 'tree', 'changelogVersion', 'pricingTable', 'pricingPlan', 'checkbox', 'radioGroup']
+
 export const STYLE_COMPONENT_KEYS = [...new Set([
   ...Object.values(SHADOW_FRAGMENTS).flatMap(fragments => Object.keys(fragments)),
-  ...Object.keys(ringFragments(BORDER_WIDTH_DEFAULT)),
-  ...Object.keys(frameFragments(BORDER_WIDTH_DEFAULT)),
-  ...Object.keys(FRAME_COLOR_FRAGMENTS)
+  ...Object.keys(FRAME_FRAGMENTS),
+  ...Object.keys(FRAME_COLOR_FRAGMENTS),
+  ...RETIRED_WIDTH_KEYS
 ])]
 
 /**

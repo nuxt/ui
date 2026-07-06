@@ -162,7 +162,7 @@ const salesColumns: TableColumn<Sale>[] = [{
       collapsible
       resizable
       class="bg-elevated/25"
-      :ui="{ root: 'flex min-h-0', footer: 'border-t-[length:var(--studio-border-width,1px)] border-default' }"
+      :ui="{ root: 'flex min-h-0', footer: 'border-t border-default' }"
     >
       <template #header="{ collapsed }">
         <UDropdownMenu
@@ -339,8 +339,8 @@ const salesColumns: TableColumn<Sale>[] = [{
             base: 'table-fixed border-separate border-spacing-0',
             thead: '[&>tr]:bg-elevated/50 [&>tr]:after:content-none',
             tbody: '[&>tr]:last:[&>td]:border-b-0',
-            th: 'first:rounded-l-lg last:rounded-r-lg border-y-[length:var(--studio-border-width,1px)] border-default first:border-l-[length:var(--studio-border-width,1px)] last:border-r-[length:var(--studio-border-width,1px)]',
-            td: 'border-b-[length:var(--studio-border-width,1px)] border-default'
+            th: 'first:rounded-l-lg last:rounded-r-lg border-y border-default first:border-l-[length:var(--studio-border-width,1px)] last:border-r-[length:var(--studio-border-width,1px)]',
+            td: 'border-b border-default'
           }"
         />
       </template>

@@ -350,11 +350,11 @@ const shadowColor = computed({
       :ui="{ content: 'px-4', header: 'px-6' }"
       :items="groupItems"
       :unmount-on-hide="false"
-      class="border-y-[length:var(--studio-border-width,1px)] border-default"
+      class="border-y border-default"
     >
       <template #colors>
         <div class="flex flex-col gap-2.5 pt-1 pb-4">
-          <UCollapsible v-model:open="openSections.primary" as="fieldset" :unmount-on-hide="false" class="rounded-md ring-[length:var(--studio-border-width,1px)] ring-default bg-default p-2.5">
+          <UCollapsible v-model:open="openSections.primary" as="fieldset" :unmount-on-hide="false" class="rounded-md ring ring-default bg-default p-2.5">
             <template #default="{ open }">
               <legend class="bg-default text-xs leading-none font-semibold select-none flex items-center gap-1 cursor-pointer">
                 <UIcon name="i-lucide-chevron-down" class="size-3 text-dimmed transition-transform duration-200" :class="!open && '-rotate-90'" />
@@ -392,7 +392,7 @@ const shadowColor = computed({
             </template>
           </UCollapsible>
 
-          <UCollapsible v-model:open="openSections.neutral" as="fieldset" :unmount-on-hide="false" class="rounded-md ring-[length:var(--studio-border-width,1px)] ring-default bg-default p-2.5">
+          <UCollapsible v-model:open="openSections.neutral" as="fieldset" :unmount-on-hide="false" class="rounded-md ring ring-default bg-default p-2.5">
             <template #default="{ open }">
               <legend class="bg-default text-xs leading-none font-semibold select-none flex items-center gap-1 cursor-pointer">
                 <UIcon name="i-lucide-chevron-down" class="size-3 text-dimmed transition-transform duration-200" :class="!open && '-rotate-90'" />
@@ -431,7 +431,7 @@ const shadowColor = computed({
             </template>
           </UCollapsible>
 
-          <UCollapsible v-model:open="openSections.semantic" as="fieldset" :unmount-on-hide="false" class="rounded-md ring-[length:var(--studio-border-width,1px)] ring-default bg-default p-2.5">
+          <UCollapsible v-model:open="openSections.semantic" as="fieldset" :unmount-on-hide="false" class="rounded-md ring ring-default bg-default p-2.5">
             <template #default="{ open }">
               <legend class="bg-default text-xs leading-none font-semibold select-none flex items-center gap-1 cursor-pointer">
                 <UIcon name="i-lucide-chevron-down" class="size-3 text-dimmed transition-transform duration-200" :class="!open && '-rotate-90'" />
@@ -480,7 +480,7 @@ const shadowColor = computed({
 
       <template #style>
         <div class="flex flex-col gap-2.5 pt-1 pb-4">
-          <UCollapsible v-model:open="openSections.radius" as="fieldset" :unmount-on-hide="false" class="rounded-md ring-[length:var(--studio-border-width,1px)] ring-default bg-default p-2.5">
+          <UCollapsible v-model:open="openSections.radius" as="fieldset" :unmount-on-hide="false" class="rounded-md ring ring-default bg-default p-2.5">
             <template #default="{ open }">
               <legend class="bg-default text-xs leading-none font-semibold select-none flex items-center gap-1 cursor-pointer">
                 <UIcon name="i-lucide-chevron-down" class="size-3 text-dimmed transition-transform duration-200" :class="!open && '-rotate-90'" />
@@ -511,7 +511,7 @@ const shadowColor = computed({
             </template>
           </UCollapsible>
 
-          <UCollapsible v-model:open="openSections.sizing" as="fieldset" :unmount-on-hide="false" class="rounded-md ring-[length:var(--studio-border-width,1px)] ring-default bg-default p-2.5">
+          <UCollapsible v-model:open="openSections.sizing" as="fieldset" :unmount-on-hide="false" class="rounded-md ring ring-default bg-default p-2.5">
             <template #default="{ open }">
               <legend class="bg-default text-xs leading-none font-semibold select-none flex items-center gap-1 cursor-pointer">
                 <UIcon name="i-lucide-chevron-down" class="size-3 text-dimmed transition-transform duration-200" :class="!open && '-rotate-90'" />
@@ -539,7 +539,7 @@ const shadowColor = computed({
             </template>
           </UCollapsible>
 
-          <UCollapsible v-model:open="openSections.defaults" as="fieldset" :unmount-on-hide="false" class="rounded-md ring-[length:var(--studio-border-width,1px)] ring-default bg-default p-2.5">
+          <UCollapsible v-model:open="openSections.defaults" as="fieldset" :unmount-on-hide="false" class="rounded-md ring ring-default bg-default p-2.5">
             <template #default="{ open }">
               <legend class="bg-default text-xs leading-none font-semibold select-none flex items-center gap-1 cursor-pointer">
                 <UIcon name="i-lucide-chevron-down" class="size-3 text-dimmed transition-transform duration-200" :class="!open && '-rotate-90'" />
@@ -555,6 +555,7 @@ const shadowColor = computed({
                     v-model="groupVariants[field.key].value"
                     size="sm"
                     color="neutral"
+                    variant="subtle"
                     icon="i-lucide-layers"
                     :items="field.items"
                     class="flex-1"
@@ -568,6 +569,7 @@ const shadowColor = computed({
                     v-model="defaultSize"
                     size="sm"
                     color="neutral"
+                    variant="subtle"
                     icon="i-lucide-proportions"
                     :items="defaultSizeItems"
                     class="flex-1"
@@ -577,7 +579,7 @@ const shadowColor = computed({
             </template>
           </UCollapsible>
 
-          <UCollapsible v-model:open="openSections.shadows" as="fieldset" :unmount-on-hide="false" class="rounded-md ring-[length:var(--studio-border-width,1px)] ring-default bg-default p-2.5">
+          <UCollapsible v-model:open="openSections.shadows" as="fieldset" :unmount-on-hide="false" class="rounded-md ring ring-default bg-default p-2.5">
             <template #default="{ open }">
               <legend class="bg-default text-xs leading-none font-semibold select-none flex items-center gap-1 cursor-pointer">
                 <UIcon name="i-lucide-chevron-down" class="size-3 text-dimmed transition-transform duration-200" :class="!open && '-rotate-90'" />
@@ -638,7 +640,7 @@ const shadowColor = computed({
             </template>
           </UCollapsible>
 
-          <UCollapsible v-model:open="openSections.innerShadows" as="fieldset" :unmount-on-hide="false" class="rounded-md ring-[length:var(--studio-border-width,1px)] ring-default bg-default p-2.5">
+          <UCollapsible v-model:open="openSections.innerShadows" as="fieldset" :unmount-on-hide="false" class="rounded-md ring ring-default bg-default p-2.5">
             <template #default="{ open }">
               <legend class="bg-default text-xs leading-none font-semibold select-none flex items-center gap-1 cursor-pointer">
                 <UIcon name="i-lucide-chevron-down" class="size-3 text-dimmed transition-transform duration-200" :class="!open && '-rotate-90'" />
@@ -699,7 +701,7 @@ const shadowColor = computed({
             </template>
           </UCollapsible>
 
-          <UCollapsible v-model:open="openSections.borders" as="fieldset" :unmount-on-hide="false" class="rounded-md ring-[length:var(--studio-border-width,1px)] ring-default bg-default p-2.5">
+          <UCollapsible v-model:open="openSections.borders" as="fieldset" :unmount-on-hide="false" class="rounded-md ring ring-default bg-default p-2.5">
             <template #default="{ open }">
               <legend class="bg-default text-xs leading-none font-semibold select-none flex items-center gap-1 cursor-pointer">
                 <UIcon name="i-lucide-chevron-down" class="size-3 text-dimmed transition-transform duration-200" :class="!open && '-rotate-90'" />
@@ -768,7 +770,7 @@ const shadowColor = computed({
             v-model:open="openSections[`tokens-${group.key}`]"
             as="fieldset"
             :unmount-on-hide="false"
-            class="rounded-md ring-[length:var(--studio-border-width,1px)] ring-default bg-default p-2.5"
+            class="rounded-md ring ring-default bg-default p-2.5"
           >
             <template #default="{ open }">
               <legend class="bg-default text-xs leading-none font-semibold select-none flex items-center gap-1 cursor-pointer">
@@ -797,7 +799,7 @@ const shadowColor = computed({
 
       <template #general>
         <div class="flex flex-col gap-2.5 pt-1 pb-4">
-          <UCollapsible v-model:open="openSections.font" as="fieldset" :unmount-on-hide="false" class="rounded-md ring-[length:var(--studio-border-width,1px)] ring-default bg-default p-2.5">
+          <UCollapsible v-model:open="openSections.font" as="fieldset" :unmount-on-hide="false" class="rounded-md ring ring-default bg-default p-2.5">
             <template #default="{ open }">
               <legend class="bg-default text-xs leading-none font-semibold select-none flex items-center gap-1 cursor-pointer">
                 <UIcon name="i-lucide-chevron-down" class="size-3 text-dimmed transition-transform duration-200" :class="!open && '-rotate-90'" />
@@ -819,6 +821,7 @@ const shadowColor = computed({
                   v-model="font"
                   size="sm"
                   color="neutral"
+                  variant="subtle"
                   icon="i-lucide-type"
                   :items="fonts"
                   class="w-full"
@@ -827,7 +830,7 @@ const shadowColor = computed({
             </template>
           </UCollapsible>
 
-          <UCollapsible v-model:open="openSections.icons" as="fieldset" :unmount-on-hide="false" class="rounded-md ring-[length:var(--studio-border-width,1px)] ring-default bg-default p-2.5">
+          <UCollapsible v-model:open="openSections.icons" as="fieldset" :unmount-on-hide="false" class="rounded-md ring ring-default bg-default p-2.5">
             <template #default="{ open }">
               <legend class="bg-default text-xs leading-none font-semibold select-none flex items-center gap-1 cursor-pointer">
                 <UIcon name="i-lucide-chevron-down" class="size-3 text-dimmed transition-transform duration-200" :class="!open && '-rotate-90'" />
@@ -849,6 +852,7 @@ const shadowColor = computed({
                   v-model="icon"
                   size="sm"
                   color="neutral"
+                  variant="subtle"
                   :icon="icons.find(i => i.value === icon)?.icon"
                   :items="icons"
                   class="w-full capitalize"

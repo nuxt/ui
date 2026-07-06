@@ -474,8 +474,61 @@ function detectInnerShadow(components: Record<string, any>): StyleOptions['inner
  * Remove the fragments the reconstructed style regenerates, leaving only
  * genuinely explicit component overrides for doc.components.
  */
-function subtractStyleExpansion(components: Record<string, any>, style: StyleOptions, widthAsVariables = false): Record<string, any> {
-  const expected = styleComponents(style, { widthAsVariables })
+/**
+ * Old exports carried border widths as class fragments (ring-2, border-b-3,
+ * divide-y-2 …). Widths now live on the style axis, so those tokens are
+ * noise: drop them, and renormalize old frame literals (ring-N ring-inset …)
+ * to the default-width form so subtraction still recognizes them.
+ */
+function normalizeLegacyWidths(components: Record<string, any>) {
+  const WIDTH_TOKEN = /^(?:sm:)?(?:ring|divide-y|border(?:-[tbesxy])?)(?:-[0-4])?$|^lg:not-last:border-e(?:-[0-4])?$/
+  const scrub = (classes: unknown): string | undefined => {
+    if (typeof classes !== 'string') return undefined
+    const tokens = classes.split(/\s+/).flatMap((token) => {
+      if (/^(?:sm:)?ring-[1-4]$/.test(token)) {
+        // part of a frame literal → default-width ring; bare width → drop
+        return classes.includes('ring-(--ui-border-accented)') ? [token.replace(/ring-[1-4]$/, 'ring')] : []
+      }
+      return WIDTH_TOKEN.test(token) ? [] : [token]
+    })
+    return tokens.join(' ')
+  }
+
+  for (const [name, component] of Object.entries(components)) {
+    for (const [slot, classes] of Object.entries(component?.slots || {})) {
+      const cleaned = scrub(classes)
+      if (cleaned !== undefined) {
+        if (cleaned) component.slots[slot] = cleaned
+        else Reflect.deleteProperty(component.slots, slot)
+      }
+    }
+    if (component?.slots && !Object.keys(component.slots).length) Reflect.deleteProperty(component, 'slots')
+    if (Array.isArray(component?.compoundVariants)) {
+      component.compoundVariants = component.compoundVariants.filter((compound: any) => {
+        if (typeof compound.class === 'string') {
+          const cleaned = scrub(compound.class)!
+          if (!cleaned) return false
+          compound.class = cleaned
+        } else if (compound.class && typeof compound.class === 'object') {
+          for (const [slot, classes] of Object.entries(compound.class)) {
+            const cleaned = scrub(classes)
+            if (cleaned !== undefined) {
+              if (cleaned) compound.class[slot] = cleaned
+              else Reflect.deleteProperty(compound.class, slot)
+            }
+          }
+          if (!Object.keys(compound.class).length) return false
+        }
+        return true
+      })
+      if (!component.compoundVariants.length) Reflect.deleteProperty(component, 'compoundVariants')
+    }
+    if (component && !Object.keys(component).length) Reflect.deleteProperty(components, name)
+  }
+}
+
+function subtractStyleExpansion(components: Record<string, any>, style: StyleOptions): Record<string, any> {
+  const expected = styleComponents(style)
   const remaining: Record<string, any> = {}
 
   for (const [name, fragment] of Object.entries(components)) {
@@ -552,8 +605,7 @@ export function importTheme(input: { css?: string, config?: string }): ThemeImpo
 
   // New exports carry width through the @theme variables; older ones (and
   // config-only pastes) still declare it through ring-N classes.
-  const widthAsVariables = css?.borderWidth !== undefined
-  if (widthAsVariables) {
+  if (css?.borderWidth !== undefined) {
     style.border = css!.borderWidth === 0 ? 'none' : 'custom'
     if (css!.borderWidth !== 0 && css!.borderWidth !== BORDER_WIDTH_DEFAULT) style.borderWidth = css!.borderWidth
     if (detectFrame(components)) style.frame = true
@@ -564,11 +616,14 @@ export function importTheme(input: { css?: string, config?: string }): ThemeImpo
       if (border.borderWidth !== undefined) style.borderWidth = border.borderWidth
       if (border.frame) style.frame = true
     }
+    // only legacy pastes carry width tokens — new exports must keep their
+    // bare default-width `ring` frame literals untouched
+    normalizeLegacyWidths(components)
   }
   const defaults = extractDefaults(components)
   if (defaults) style.defaults = defaults
 
-  const explicit = subtractStyleExpansion(components, style, widthAsVariables)
+  const explicit = subtractStyleExpansion(components, style)
   if (Object.keys(explicit).length) doc.components = explicit
 
   if (Object.values(style).some(value => value !== undefined)) {

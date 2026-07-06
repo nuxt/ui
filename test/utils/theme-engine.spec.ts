@@ -311,18 +311,16 @@ describe('styleComponents', () => {
     expect(tokens.light['--ui-inner-shadow-opacity']).toBe('30%')
   })
 
-  it('merges shadow and border fragments slot-wise', async () => {
+  it('merges shadow and frame fragments slot-wise', async () => {
     const { styleComponents } = await import('../../docs/app/utils/theme-engine')
-    const components = styleComponents({ shadow: 'hard', border: 'bold' })
+    const components = styleComponents({ shadow: 'hard', border: 'custom', frame: true })
 
     expect(components.button!.slots!.base).toContain('shadow-(--ui-shadow-hard)')
-    // bold only thickens existing rings: buttons gain no base ring, the
-    // outline/subtle compound overrides carry width only
+    // widths ride the default-width variables — no ring-N classes anywhere
     expect(components.button!.slots!.base).not.toContain('ring')
-    expect(components.button!.compoundVariants).toContainEqual({ variant: 'outline', class: 'ring-2' })
-    // card rings live at variant level, so bold ships compounds, not slots
+    expect(components.button!.compoundVariants).toContainEqual({ variant: 'solid', class: 'ring ring-inset ring-(--ui-border-accented)' })
     expect(components.card!.slots?.root ?? '').toContain('shadow-(--ui-shadow-hard-lg)')
-    expect(components.card!.compoundVariants).toContainEqual({ variant: 'outline', class: { root: 'ring-2 divide-y-2' } })
+    expect(components.card!.compoundVariants).toContainEqual({ variant: 'soft', class: { root: 'ring ring-(--ui-border-accented)' } })
   })
 
   it('docToSettings keeps style out of the ui channel but carries its tokens', async () => {
@@ -352,44 +350,30 @@ describe('styleComponents', () => {
 })
 
 describe('style colors', () => {
-  it('custom borders set the chosen ring width; none zeroes every ring', async () => {
+  it('widths ride the default-width variables — only the frame toggle emits classes', async () => {
     const { styleComponents } = await import('../../docs/app/utils/theme-engine')
 
-    const wide = styleComponents({ border: 'custom', borderWidth: 3 })
-    expect(wide.button!.compoundVariants).toContainEqual({ variant: 'outline', class: 'ring-3' })
-    expect(wide.popover!.slots!.content).toBe('ring-3')
-    expect(wide.slideover!.slots!.content).toBe('sm:ring-3')
-    // width only touches existing rings — never adds outlines to solids
-    expect(JSON.stringify(wide.button!.compoundVariants)).not.toContain('"solid"')
-    expect(JSON.stringify(wide.button!.compoundVariants)).not.toContain('"ghost"')
+    // width and none alike produce ZERO class fragments: every default-width
+    // border/ring/divide follows --default-border/ring-width instead
+    expect(styleComponents({ border: 'custom', borderWidth: 3 })).toEqual({})
+    expect(styleComponents({ border: 'none' })).toEqual({})
 
-    const none = styleComponents({ border: 'none' })
-    expect(none.card!.compoundVariants).toContainEqual({ variant: 'outline', class: { root: 'ring-0 divide-y-0' } })
-    expect(none.dropdownMenu!.slots!.content).toBe('ring-0')
-
-    // the frame toggle outlines solid/soft surfaces at the chosen width
+    // the frame toggle outlines solid/soft surfaces at the default ring width
     const framed = styleComponents({ border: 'custom', borderWidth: 3, frame: true })
-    expect(framed.button!.compoundVariants).toContainEqual({ variant: 'solid', class: 'ring-3 ring-inset ring-(--ui-border-accented)' })
-    expect(framed.card!.compoundVariants).toContainEqual({ variant: 'soft', class: { root: 'ring-3 ring-(--ui-border-accented)' } })
+    expect(framed.button!.compoundVariants).toContainEqual({ variant: 'solid', class: 'ring ring-inset ring-(--ui-border-accented)' })
+    expect(framed.card!.compoundVariants).toContainEqual({ variant: 'soft', class: { root: 'ring ring-(--ui-border-accented)' } })
     expect(JSON.stringify(framed.button!.compoundVariants)).not.toContain('"ghost"')
     // …and the other solid surfaces: pill tabs, chat bubbles, switch track
-    expect(framed.tabs!.compoundVariants).toContainEqual({ variant: 'pill', class: { list: 'ring-3 ring-inset ring-(--ui-border-accented)', indicator: 'ring-3 ring-inset ring-(--ui-border-accented)' } })
-    expect(framed.chatMessage!.compoundVariants).toContainEqual({ variant: 'solid', class: { content: 'ring-3 ring-inset ring-(--ui-border-accented)' } })
-    expect(framed.switch!.slots!.base).toBe('ring-3 ring-inset ring-(--ui-border-accented)')
+    expect(framed.tabs!.compoundVariants).toContainEqual({ variant: 'pill', class: { list: 'ring ring-inset ring-(--ui-border-accented)', indicator: 'ring ring-inset ring-(--ui-border-accented)' } })
+    expect(framed.chatMessage!.compoundVariants).toContainEqual({ variant: 'solid', class: { content: 'ring ring-inset ring-(--ui-border-accented)' } })
+    expect(framed.switch!.slots!.base).toBe('ring ring-inset ring-(--ui-border-accented)')
 
-    // border-utility edges scale with the width: chrome, separators, dividers
-    expect(wide.header!.slots!.root).toBe('border-b-3')
-    // the sidebar edge rides a compound — its side variant would outrank a slot append
-    expect(wide.dashboardSidebar!.compoundVariants).toContainEqual({ side: 'left', class: { root: 'border-e-3' } })
-    expect(wide.dashboardPanel!.slots!.root).toBe('lg:not-last:border-e-3')
-    expect(wide.separator!.compoundVariants).toContainEqual({ orientation: 'horizontal', class: { border: 'border-t-3' } })
-    expect(wide.table!.slots!.tbody).toBe('divide-y-3')
-    expect(wide.card!.compoundVariants).toContainEqual({ variant: 'outline', class: { root: 'ring-3 divide-y-3' } })
-    expect(none.header!.slots!.root).toBe('border-b-0')
+    // frame off (or border none) → no outlines
+    expect(styleComponents({ border: 'none', frame: true })).toEqual({})
 
-    // legacy saved values keep working: bold = custom width, frame keeps outlines
-    expect(styleComponents({ border: 'frame' }).button!.compoundVariants).toContainEqual({ variant: 'solid', class: 'ring-2 ring-inset ring-(--ui-border-accented)' })
-    expect(styleComponents({ border: 'bold' }).input!.compoundVariants).toContainEqual({ variant: 'subtle', class: 'ring-2' })
+    // legacy saved 'frame' keeps its outlines; legacy 'bold' is width-only → nothing
+    expect(styleComponents({ border: 'frame' }).button!.compoundVariants).toContainEqual({ variant: 'solid', class: 'ring ring-inset ring-(--ui-border-accented)' })
+    expect(styleComponents({ border: 'bold' })).toEqual({})
   })
 
   it('exports carry width via tailwind default-width variables, not classes', async () => {
@@ -400,10 +384,10 @@ describe('style colors', () => {
     expect(css).toContain('--default-border-width: 3px;')
     expect(css).toContain('--default-ring-width: 3px;')
 
-    // config keeps the frame outlines but drops the per-component width classes
+    // config keeps the frame outlines (default-width rings) and nothing else
     const config = generateConfig(doc)
-    expect(config).toContain('ring-3 ring-inset ring-(--ui-border-accented)')
-    expect(config).not.toMatch(/class: 'ring-3'/)
+    expect(config).toContain('ring ring-inset ring-(--ui-border-accented)')
+    expect(config).not.toMatch(/ring-3/)
 
     // none exports as zero-width variables and nothing else
     const none = generateCSS({ version: 1, style: { border: 'none' } })
@@ -449,12 +433,6 @@ describe('style colors', () => {
     // slideover is edge-to-edge on mobile — the shadow is sm-scoped
     expect(soft.slideover!.slots!.content).toMatch(/^sm:shadow-lg /)
 
-    const bold = styleComponents({ border: 'bold' })
-    expect(bold.dropdownMenu!.slots!.content).toBe('ring-2')
-    expect(bold.selectMenu!.slots!.content).toBe('ring-2')
-    expect(bold.selectMenu!.compoundVariants).toContainEqual({ variant: 'outline', class: 'ring-2' })
-    expect(bold.checkbox!.slots!.base).toBe('ring-2')
-
     const colored = styleComponents({ borderColor: 'inverted' })
     expect(colored.tooltip!.slots!.content).toBe('ring-(--ui-frame-color)')
     expect(colored.modal!.compoundVariants![0]).toEqual({ fullscreen: false, class: { content: 'ring-(--ui-frame-color)' } })
@@ -488,14 +466,14 @@ describe('style colors', () => {
     expect(compounds).toContainEqual({ variant: 'soft', class: 'ring-(--ui-frame-color)' })
   })
 
-  it('borderColor appends recolor compounds after width ones', async () => {
+  it('borderColor appends recolor compounds after frame ones', async () => {
     const { styleComponents } = await import('../../docs/app/utils/theme-engine')
-    const compounds = styleComponents({ border: 'bold', borderColor: 'black' }).button!.compoundVariants!
+    const compounds = styleComponents({ border: 'custom', frame: true, borderColor: 'black' }).button!.compoundVariants!
 
-    const widthIndex = compounds.findIndex(entry => entry.class === 'ring-2')
+    const frameIndex = compounds.findIndex(entry => entry.class === 'ring ring-inset ring-(--ui-border-accented)')
     const colorIndex = compounds.findIndex(entry => entry.class === 'ring-(--ui-frame-color)')
-    expect(widthIndex).toBeGreaterThanOrEqual(0)
-    expect(colorIndex).toBeGreaterThan(widthIndex)
+    expect(frameIndex).toBeGreaterThanOrEqual(0)
+    expect(colorIndex).toBeGreaterThan(frameIndex)
   })
 
   it('styleTokens maps color choices per mode and default contributes nothing', async () => {
