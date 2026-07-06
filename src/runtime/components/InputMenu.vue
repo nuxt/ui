@@ -236,7 +236,7 @@ export interface InputMenuSlots<
 </script>
 
 <script setup lang="ts" generic="T extends ArrayOrNested<InputMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false, Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>, C extends boolean | object = false">
-import { computed, ref, useTemplateRef, toRef, onMounted, toRaw, nextTick, watch } from 'vue'
+import { computed, ref, useAttrs, useTemplateRef, toRef, onMounted, toRaw, nextTick, watch } from 'vue'
 import { TagsInputRoot, TagsInputItem, TagsInputItemText, TagsInputItemDelete, TagsInputInput } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
 import { Combobox, Autocomplete } from 'reka-ui/namespaced'
@@ -290,6 +290,17 @@ const rootPropsPick = reactivePick(props, 'as', 'modelValue', 'defaultValue', 'o
 const rootPropsOmitted = reactiveOmit(rootPropsPick, 'multiple', 'resetSearchTermOnSelect', 'resetModelValueOnClear', 'by')
 const rootProps = useForwardProps(computed(() => isAutocomplete.value ? rootPropsOmitted : rootPropsPick), emits)
 const Component = computed(() => isAutocomplete.value ? Autocomplete : Combobox)
+
+const attrs = useAttrs()
+
+// In multiple non-autocomplete mode `Root` is `as-child`: it renders no element and
+// merges its attributes onto `Anchor`, where the child's own `data-slot` wins the
+// merge. `Anchor` is then the effective root, so it reads the caller's `data-slot`
+// itself. In every other mode `Root` renders its own element (and receives the
+// caller's value through its own binding), so `Anchor` keeps its `base` label.
+const baseDataSlot = computed(() => props.multiple && !isAutocomplete.value
+  ? ((attrs['data-slot'] as string | undefined) ?? 'base')
+  : 'base')
 const portalProps = usePortal(toRef(() => props.portal))
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: 'popper' }) as ComboboxContentProps)
 const arrowProps = toRef(() => defu(props.arrow, { rounded: true }) as ComboboxArrowProps)
@@ -645,7 +656,7 @@ defineExpose({
     @update:model-value="onUpdate"
     @update:open="onUpdateOpen"
   >
-    <Component.Anchor :as-child="!props.multiple" :data-slot="!!props.multiple && !isAutocomplete ? (($attrs['data-slot'] as string | undefined) ?? 'base') : 'base'" :class="ui.base({ class: props.ui?.base })">
+    <Component.Anchor :as-child="!props.multiple" :data-slot="baseDataSlot" :class="ui.base({ class: props.ui?.base })">
       <TagsInputRoot
         v-if="props.multiple && !isAutocomplete"
         v-slot="{ modelValue: tags }"
