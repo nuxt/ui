@@ -432,7 +432,7 @@ export const presets: ThemePreset[] = [{
         '--ui-bg': 'var(--ui-color-neutral-50)'
       },
       dark: {
-        '--ui-bg': 'var(--ui-color-neutral-950)'
+        '--ui-bg': 'var(--ui-color-neutral-900)'
       }
     }
   }
