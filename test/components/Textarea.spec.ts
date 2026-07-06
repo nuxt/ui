@@ -99,6 +99,12 @@ describe('Textarea', () => {
     expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [['']] })
   })
 
+  test('uses top alignment to avoid baseline shifts in form layouts', () => {
+    const wrapper = mount(Textarea)
+
+    expect(wrapper.attributes('class')).toContain('align-top')
+  })
+
   describe('emits', () => {
     test('update:modelValue event', async () => {
       const wrapper = mount(Textarea)

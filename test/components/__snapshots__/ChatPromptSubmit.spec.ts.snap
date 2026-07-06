@@ -1,4 +1,4 @@
-// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+﻿// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`ChatPromptSubmit > renders with class correctly 1`] = `
 "<button type="submit" aria-label="Send prompt" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3 p-1.5"><span class="iconify i-lucide:arrow-up shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
