@@ -379,7 +379,8 @@ describe('style colors', () => {
 
     // border-utility edges scale with the width: chrome, separators, dividers
     expect(wide.header!.slots!.root).toBe('border-b-3')
-    expect(wide.dashboardSidebar!.slots!.root).toBe('border-e-3')
+    // the sidebar edge rides a compound — its side variant would outrank a slot append
+    expect(wide.dashboardSidebar!.compoundVariants).toContainEqual({ side: 'left', class: { root: 'border-e-3' } })
     expect(wide.dashboardPanel!.slots!.root).toBe('lg:not-last:border-e-3')
     expect(wide.separator!.compoundVariants).toContainEqual({ orientation: 'horizontal', class: { border: 'border-t-3' } })
     expect(wide.table!.slots!.tbody).toBe('divide-y-3')

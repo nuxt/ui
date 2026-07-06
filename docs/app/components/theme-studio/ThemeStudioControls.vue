@@ -395,7 +395,7 @@ const shadowColor = computed({
       :ui="{ content: 'px-4', header: 'px-6' }"
       :items="groupItems"
       :unmount-on-hide="false"
-      class="border-y border-default"
+      class="border-y-[length:var(--studio-border-width,1px)] border-default"
     >
       <template #colors>
         <div class="flex flex-col gap-2.5 pt-1 pb-4">

@@ -87,7 +87,7 @@ export const presets: ThemePreset[] = [{
       frame: true,
       borderColor: 'shade',
       borderShade: { light: 900, dark: 950 },
-      defaults: { variants: { inputs: 'soft' } },
+      defaults: { variants: { buttons: 'solid', panels: 'subtle', inputs: 'subtle' } },
       tokenShades: {
         '--ui-bg': { light: 100, dark: 800 },
         '--ui-bg-muted': { light: 300 },

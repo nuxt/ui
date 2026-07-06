@@ -390,7 +390,12 @@ function ringFragments(width: number): Fragments {
     header: { slots: { root: edge('b') } },
     accordion: { slots: { item: edge('b') } },
     table: { slots: { tbody: divide } },
-    dashboardSidebar: { slots: { root: edge('e') } },
+    // the sidebar's edge border lives in its side VARIANT, which tv applies
+    // after slot extensions — a compound is the only layer that lands on top
+    dashboardSidebar: { compoundVariants: [
+      { side: 'left', class: { root: edge('e') } },
+      { side: 'right', class: { root: edge('s') } }
+    ] },
     dashboardNavbar: { slots: { root: edge('b') } },
     dashboardToolbar: { slots: { root: edge('b') } },
     dashboardPanel: { slots: { root: PANEL_EDGE_CLASSES[width] || PANEL_EDGE_CLASSES[BORDER_WIDTH_DEFAULT]! } },

@@ -23,6 +23,7 @@ const sidebarOpen = ref(true)
 // class strings per width so tailwind's scanner sees them.
 const PREVIEW_EDGE: Record<number, string> = { 0: 'border-0', 1: 'border', 2: 'border-2', 3: 'border-3', 4: 'border-4' }
 const SIDEBAR_RING: Record<number, string> = { 0: 'ring-0', 1: 'ring-1', 2: 'ring-2', 3: 'ring-3', 4: 'ring-4' }
+const SIDEBAR_DIVIDE: Record<number, string> = { 0: 'divide-y-0', 1: 'divide-y', 2: 'divide-y-2', 3: 'divide-y-3', 4: 'divide-y-4' }
 
 const chromeWidth = computed(() => {
   const border = style.value.border
@@ -47,8 +48,8 @@ const previewShadow = computed(() => {
   const shadow = style.value.shadow
   if (shadow === 'none') return ''
   if (shadow === 'hard') return 'shadow-(--ui-shadow-hard-lg)'
-  if (shadow === 'soft') return 'shadow-xl shadow-(color:--ui-shadow-final-soft)'
-  return 'shadow-xl'
+  if (shadow === 'soft') return ' shadow-(color:--ui-shadow-final-soft)'
+  return ''
 })
 
 /** Preview views: the bento grid plus app-scale layouts from the real templates. */
@@ -72,12 +73,12 @@ const viewTabs = [
     description="Customize Nuxt UI live: colors, radius, fonts and icons — then export only what you changed."
   >
     <template #content>
-      <div class="flex flex-row w-full h-full bg-default">
+      <div class="flex flex-row w-full h-full bg-neutral-300 dark:bg-neutral-900">
         <USidebar
           v-model:open="sidebarOpen"
           variant="floating"
           :style="{ '--sidebar-width': '21rem' }"
-          :ui="{ container: 'pe-0', header: 'bg-elevated/25', body: 'p-0 gap-0', footer: 'bg-elevated/25', inner: [sidebarShadow, SIDEBAR_RING[chromeWidth]] }"
+          :ui="{ container: 'pe-0', header: 'bg-elevated/25', body: 'p-0 gap-0 bg-default', footer: 'bg-elevated/25', inner: [sidebarShadow, SIDEBAR_RING[chromeWidth], SIDEBAR_DIVIDE[chromeWidth], 'bg-default'] }"
         >
           <template #header>
             <Logo class="w-auto h-6 shrink-0 mr-auto" />
@@ -164,7 +165,7 @@ const viewTabs = [
           <!-- The floating preview card: the grid scrolls inside it; the
                app-shell views own their height and scroll internally. -->
           <div
-            class="flex-1 min-w-0 min-h-0 border-default m-4 mt-0 rounded-lg"
+            class="flex-1 min-w-0 min-h-0 border-default bg-default m-4 mt-0 rounded-lg"
             :class="[PREVIEW_EDGE[chromeWidth], previewShadow, view === 'grid' ? 'overflow-y-auto' : 'overflow-hidden']"
           >
             <ThemeStudioBento v-if="view === 'grid'" />
