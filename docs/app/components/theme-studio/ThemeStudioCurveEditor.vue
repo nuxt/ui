@@ -197,8 +197,23 @@ function onPointerUp(event: PointerEvent) {
     <circle :cx="toX(curve.p1x)" :cy="toHandleY(curve.p1y)" r="4" class="fill-(--ui-bg) stroke-(--ui-text-muted)" stroke-width="1.25" />
     <circle :cx="toX(curve.p2x)" :cy="toHandleY(curve.p2y)" r="4" class="fill-(--ui-bg) stroke-(--ui-text-muted)" stroke-width="1.25" />
 
-    <!-- endpoints -->
-    <circle :cx="toX(0)" :cy="toHandleY(curve.y0)" r="4.5" class="fill-(--ui-text-highlighted)" />
-    <circle :cx="toX(1)" :cy="toHandleY(curve.y1)" r="4.5" class="fill-(--ui-text-highlighted)" />
+    <!-- endpoints, filled with the ramp's 50 and 950 so the drag targets show
+         what they steer -->
+    <circle
+      :cx="toX(0)"
+      :cy="toHandleY(curve.y0)"
+      r="4.5"
+      :fill="stopColors?.[0] || 'currentColor'"
+      class="stroke-(--ui-text-highlighted)"
+      stroke-width="1.5"
+    />
+    <circle
+      :cx="toX(1)"
+      :cy="toHandleY(curve.y1)"
+      r="4.5"
+      :fill="stopColors?.[stopColors.length - 1] || 'currentColor'"
+      class="stroke-(--ui-text-highlighted)"
+      stroke-width="1.5"
+    />
   </svg>
 </template>
