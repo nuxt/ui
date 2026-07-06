@@ -17,9 +17,7 @@ const {
   fonts,
   font,
   icon,
-  icons,
-  modes,
-  mode
+  icons
 } = useTheme()
 
 const { selectPalette, isCustomPalette, style, setStyle, presets, activePreset, applyPreset, shuffle } = useThemeStudio()
@@ -245,12 +243,6 @@ function rampChip(ramp: TokenRamp): string {
   return name === 'neutral' ? 'old-neutral' : name
 }
 
-// No 'system' tab: the studio is about previewing a concrete mode. For
-// The mode preference lives client-side only — resolve the highlight AFTER
-// mount so hydration's adopt-without-patching never strands a stale state.
-const colorMode = useColorMode()
-const mounted = ref(false)
-
 /**
  * Same hydration-adoption problem for every control: SSR renders default
  * state (no localStorage), and persisted slider positions/selections looked
@@ -260,8 +252,6 @@ const mounted = ref(false)
 const hydrationKey = ref(0)
 
 onMounted(() => {
-  mounted.value = true
-
   const keys = ['nuxt-ui-style', 'nuxt-ui-css-variables', 'nuxt-ui-custom-colors', 'nuxt-ui-radius', 'nuxt-ui-font-size', 'nuxt-ui-spacing', 'nuxt-ui-ai-theme']
   if (keys.some(key => localStorage.getItem(key))) {
     hydrationKey.value = 1
@@ -400,16 +390,6 @@ const shadowColor = computed({
         />
       </UTooltip>
     </div>
-    <div class="grid grid-cols-3 gap-1 px-4">
-      <ThemePickerButton
-        v-for="m in modes"
-        :key="m.label"
-        v-bind="m"
-        :selected="mounted && colorMode.preference === m.label"
-        @click="mode = m.label"
-      />
-    </div>
-
     <UAccordion
       v-model="openGroups"
       :ui="{ content: 'px-4', header: 'px-6' }"

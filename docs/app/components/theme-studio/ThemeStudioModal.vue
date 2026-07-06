@@ -1,6 +1,15 @@
 <script setup lang="ts">
 const { track } = useAnalytics()
 const { reset, style, studioOpen: open } = useThemeStudio()
+const { modes, mode } = useTheme()
+const colorMode = useColorMode()
+
+// Resolved AFTER mount: the preference is client-only, and hydration adopts
+// SSR attributes without patching — a post-mount flip is a real update.
+const mounted = ref(false)
+onMounted(() => {
+  mounted.value = true
+})
 
 watch(open, (isOpen) => {
   if (isOpen) {
@@ -68,8 +77,27 @@ const viewTabs = [
           v-model:open="sidebarOpen"
           variant="floating"
           :style="{ '--sidebar-width': '21rem' }"
-          :ui="{ container: 'pe-0', body: 'p-0 gap-0', inner: [sidebarShadow, SIDEBAR_RING[chromeWidth]] }"
+          :ui="{ container: 'pe-0', header: 'bg-elevated/25', body: 'p-0 gap-0', footer: 'bg-elevated/25', inner: [sidebarShadow, SIDEBAR_RING[chromeWidth]] }"
         >
+          <template #header>
+            <Logo class="w-auto h-6 shrink-0 mr-auto" />
+
+            <UTooltip v-for="m in modes" :key="m.label" :text="`${m.label} mode`" class="capitalize">
+              <UButton
+                :icon="m.icon"
+                color="neutral"
+                variant="ghost"
+                size="xs"
+                square
+                :active="mounted && colorMode.preference === m.label"
+                active-color="primary"
+                active-variant="subtle"
+                :aria-label="`${m.label} mode`"
+                @click="mode = m.label"
+              />
+            </UTooltip>
+          </template>
+
           <ThemeStudioControls />
 
           <template #footer>
@@ -109,12 +137,6 @@ const viewTabs = [
               />
             </UTooltip>
 
-            <Logo class="w-auto h-4 shrink-0" />
-
-            <h2 class="text-sm font-semibold text-highlighted mt-1 me-2">
-              Theme Studio
-            </h2>
-
             <span class="flex-1" />
 
             <UTabs
@@ -142,7 +164,7 @@ const viewTabs = [
           <!-- The floating preview card: the grid scrolls inside it; the
                app-shell views own their height and scroll internally. -->
           <div
-            class="flex-1 min-w-0 min-h-0 border-default m-4 mt-1 rounded-lg"
+            class="flex-1 min-w-0 min-h-0 border-default m-4 mt-0 rounded-lg"
             :class="[PREVIEW_EDGE[chromeWidth], previewShadow, view === 'grid' ? 'overflow-y-auto' : 'overflow-hidden']"
           >
             <ThemeStudioBento v-if="view === 'grid'" />
