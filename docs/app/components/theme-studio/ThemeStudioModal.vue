@@ -12,14 +12,33 @@ const sidebarOpen = ref(true)
 
 // The studio's own chrome follows the border treatment too — whole literal
 // class strings per width so tailwind's scanner sees them.
-const TOOLBAR_EDGE: Record<number, string> = { 0: 'border-b-0', 1: 'border-b', 2: 'border-b-2', 3: 'border-b-3', 4: 'border-b-4' }
-const SIDEBAR_EDGE: Record<number, string> = { 0: 'border-e-0', 1: 'border-e', 2: 'border-e-2', 3: 'border-e-3', 4: 'border-e-4' }
+const PREVIEW_EDGE: Record<number, string> = { 0: 'border-0', 1: 'border', 2: 'border-2', 3: 'border-3', 4: 'border-4' }
 
 const chromeWidth = computed(() => {
   const border = style.value.border
   if (!border || border === 'default') return 1
   if (border === 'none') return 0
   return style.value.borderWidth ?? 2
+})
+
+// The studio's own floating panels cast theme-correct shadows too. The
+// sidebar override merges through tv (recoloring its stock shadow-lg is
+// enough); the preview card's plain :class doesn't merge, so it gets the
+// whole string.
+const sidebarShadow = computed(() => {
+  const shadow = style.value.shadow
+  if (shadow === 'none') return 'shadow-none'
+  if (shadow === 'hard') return 'shadow-(--ui-shadow-hard-lg)'
+  if (shadow === 'soft') return 'shadow-(color:--ui-shadow-final-soft)'
+  return ''
+})
+
+const previewShadow = computed(() => {
+  const shadow = style.value.shadow
+  if (shadow === 'none') return ''
+  if (shadow === 'hard') return 'shadow-(--ui-shadow-hard-lg)'
+  if (shadow === 'soft') return 'shadow-xl shadow-(color:--ui-shadow-final-soft)'
+  return 'shadow-xl'
 })
 
 /** Preview views: the bento grid plus app-scale layouts from the real templates. */
@@ -43,90 +62,84 @@ const viewTabs = [
     description="Customize Nuxt UI live: colors, radius, fonts and icons — then export only what you changed."
   >
     <template #content>
-      <div class="flex flex-col h-full bg-default">
-        <div
-          class="shrink-0 flex items-center gap-2 border-default px-4 sm:px-6 py-3"
-          :class="TOOLBAR_EDGE[chromeWidth]"
+      <div class="flex flex-row w-full h-full bg-default">
+        <USidebar
+          v-model:open="sidebarOpen"
+          variant="floating"
+          :style="{ '--sidebar-width': '21rem' }"
+          :ui="{ body: 'p-0 gap-0', inner: sidebarShadow }"
         >
-          <UTooltip :text="sidebarOpen ? 'Hide settings' : 'Show settings'">
-            <UButton
-              :icon="sidebarOpen ? 'i-lucide-panel-left-close' : 'i-lucide-panel-left-open'"
-              color="neutral"
-              variant="ghost"
-              size="sm"
-              aria-label="Toggle settings panel"
-              @click="sidebarOpen = !sidebarOpen"
-            />
-          </UTooltip>
+          <ThemeStudioControls />
 
-          <Logo class="w-auto h-4 shrink-0" />
+          <template #footer>
+            <ThemeStudioImport />
+            <ThemeStudioExport />
+          </template>
+        </USidebar>
 
-          <h2 class="text-sm font-semibold text-highlighted mt-1 me-2">
-            Theme Studio
-          </h2>
-
-          <span class="flex-1" />
-
-          <UTabs
-            v-model="view"
-            :items="viewTabs"
-            :content="false"
-            size="xs"
-            color="primary"
-          />
-
-          <span class="flex-1" />
-
-          <UTooltip text="Reset theme">
-            <UButton
-              icon="i-lucide-rotate-ccw"
-              color="neutral"
-              variant="outline"
-              size="sm"
-              aria-label="Reset theme"
-              @click="reset"
-            />
-          </UTooltip>
-
-          <USeparator orientation="vertical" class="h-5" />
-
-          <UTooltip text="Close">
-            <UButton
-              icon="i-lucide-x"
-              color="neutral"
-              variant="ghost"
-              size="sm"
-              aria-label="Close Theme Studio"
-              @click="open = false"
-            />
-          </UTooltip>
-        </div>
-
-        <div class="relative flex-1 flex flex-col lg:flex-row min-h-0 overflow-y-auto lg:overflow-hidden">
-          <!-- USidebar's container is viewport-fixed by design; anchored to
-               this row instead so it sits below the toolbar. -->
-          <USidebar
-            v-model:open="sidebarOpen"
-            :style="{ '--sidebar-width': '20rem' }"
-            :ui="{
-              container: ['absolute h-full', SIDEBAR_EDGE[chromeWidth]],
-              body: 'p-0 gap-0',
-              footer: 'border-t border-default gap-2'
-            }"
-          >
-            <ThemeStudioControls />
-
-            <template #footer>
-              <ThemeStudioImport />
-              <ThemeStudioExport />
-            </template>
-          </USidebar>
-
-          <!-- The grid scrolls as a page; the app-shell views own their height
-               and scroll internally, so the pane locks (bounded on mobile too). -->
+        <div class="flex-1 min-w-0 flex flex-col h-full">
           <div
-            class="flex-1 min-w-0 min-h-0 p-0"
-            :class="view === 'grid' ? 'lg:overflow-y-auto' : 'overflow-hidden max-lg:h-[75vh]'"
+            class="shrink-0 flex items-center gap-2 border-default px-4 sm:px-4 py-3"
+          >
+            <UTooltip :text="sidebarOpen ? 'Hide settings' : 'Show settings'">
+              <UButton
+                :icon="sidebarOpen ? 'i-lucide-panel-left-close' : 'i-lucide-panel-left-open'"
+                color="neutral"
+                variant="ghost"
+                size="sm"
+                aria-label="Toggle settings panel"
+                @click="sidebarOpen = !sidebarOpen"
+              />
+            </UTooltip>
+
+            <Logo class="w-auto h-4 shrink-0" />
+
+            <h2 class="text-sm font-semibold text-highlighted mt-1 me-2">
+              Theme Studio
+            </h2>
+
+            <span class="flex-1" />
+
+            <UTabs
+              v-model="view"
+              :items="viewTabs"
+              :content="false"
+              size="xs"
+              color="primary"
+            />
+
+            <span class="flex-1" />
+
+            <UTooltip text="Reset theme">
+              <UButton
+                icon="i-lucide-rotate-ccw"
+                color="neutral"
+                variant="outline"
+                size="sm"
+                aria-label="Reset theme"
+                @click="reset"
+              />
+            </UTooltip>
+
+            <USeparator orientation="vertical" class="h-5" />
+
+            <UTooltip text="Close">
+              <UButton
+                icon="i-lucide-x"
+                color="neutral"
+                variant="ghost"
+                size="sm"
+                aria-label="Close Theme Studio"
+                @click="open = false"
+              />
+            </UTooltip>
+          </div>
+
+          <!-- The floating preview card: the grid scrolls inside it; the
+               app-shell views own their height and scroll internally. -->
+          <div
+            class="flex-1 min-w-0 min-h-0 border-default m-4 mt-1 lg:ms-0 rounded-lg"
+            :class="[PREVIEW_EDGE[chromeWidth], previewShadow, view === 'grid' ? 'overflow-y-auto' : 'overflow-hidden']"
           >
             <ThemeStudioBento v-if="view === 'grid'" />
             <ThemeStudioViewDashboard v-else-if="view === 'dashboard'" />
