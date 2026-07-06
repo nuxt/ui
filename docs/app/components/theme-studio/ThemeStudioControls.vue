@@ -355,8 +355,17 @@ const shadowColor = computed({
         <div class="flex flex-col gap-2.5 pt-1 pb-4">
           <UCollapsible v-model:open="openSections.primary" as="fieldset" :unmount-on-hide="false" class="rounded-md ring ring-default bg-default p-2.5">
             <template #default="{ open }">
-              <legend class="bg-default text-xs leading-none font-semibold select-none flex items-center gap-1 cursor-pointer">
-                <span class="flex-1 text-start">Primary</span>
+              <legend class="bg-default select-none flex items-center gap-1 cursor-pointer">
+                <UButton
+                  label="Primary"
+                  color="neutral"
+                  variant="ghost"
+                  size="xs"
+                  trailing-icon="i-lucide-chevron-down"
+                  class="font-semibold"
+                  :ui="{ trailingIcon: ['size-3 text-dimmed transition-transform duration-200', !open && '-rotate-90'] }"
+                />
+
                 <UButton
                   to="/docs/getting-started/theme/css-variables#colors"
                   size="xs"
@@ -366,7 +375,6 @@ const shadowColor = computed({
                   :ui="{ leadingIcon: 'size-3' }"
                   @click.stop
                 />
-                <UIcon name="i-lucide-chevron-down" class="size-3 text-dimmed transition-transform duration-200" :class="!open && '-rotate-90'" />
               </legend>
             </template>
             <template #content>
@@ -393,8 +401,17 @@ const shadowColor = computed({
 
           <UCollapsible v-model:open="openSections.neutral" as="fieldset" :unmount-on-hide="false" class="rounded-md ring ring-default bg-default p-2.5">
             <template #default="{ open }">
-              <legend class="bg-default text-xs leading-none font-semibold select-none flex items-center gap-1 cursor-pointer">
-                <span class="flex-1 text-start">Neutral</span>
+              <legend class="bg-default select-none flex items-center gap-1 cursor-pointer">
+                <UButton
+                  label="Neutral"
+                  color="neutral"
+                  variant="ghost"
+                  size="xs"
+                  trailing-icon="i-lucide-chevron-down"
+                  class="font-semibold"
+                  :ui="{ trailingIcon: ['size-3 text-dimmed transition-transform duration-200', !open && '-rotate-90'] }"
+                />
+
                 <UButton
                   to="/docs/getting-started/theme/css-variables#text"
                   size="xs"
@@ -404,7 +421,6 @@ const shadowColor = computed({
                   :ui="{ leadingIcon: 'size-3' }"
                   @click.stop
                 />
-                <UIcon name="i-lucide-chevron-down" class="size-3 text-dimmed transition-transform duration-200" :class="!open && '-rotate-90'" />
               </legend>
             </template>
             <template #content>
@@ -432,8 +448,17 @@ const shadowColor = computed({
 
           <UCollapsible v-model:open="openSections.semantic" as="fieldset" :unmount-on-hide="false" class="rounded-md ring ring-default bg-default p-2.5">
             <template #default="{ open }">
-              <legend class="bg-default text-xs leading-none font-semibold select-none flex items-center gap-1 cursor-pointer">
-                <span class="flex-1 text-start">Semantic</span>
+              <legend class="bg-default select-none flex items-center gap-1 cursor-pointer">
+                <UButton
+                  label="Semantic"
+                  color="neutral"
+                  variant="ghost"
+                  size="xs"
+                  trailing-icon="i-lucide-chevron-down"
+                  class="font-semibold"
+                  :ui="{ trailingIcon: ['size-3 text-dimmed transition-transform duration-200', !open && '-rotate-90'] }"
+                />
+
                 <UButton
                   to="/docs/getting-started/theme/design-system"
                   size="xs"
@@ -443,7 +468,6 @@ const shadowColor = computed({
                   :ui="{ leadingIcon: 'size-3' }"
                   @click.stop
                 />
-                <UIcon name="i-lucide-chevron-down" class="size-3 text-dimmed transition-transform duration-200" :class="!open && '-rotate-90'" />
               </legend>
             </template>
             <template #content>
@@ -481,9 +505,16 @@ const shadowColor = computed({
         <div class="flex flex-col gap-2.5 pt-1 pb-4">
           <UCollapsible v-model:open="openSections.shadows" as="fieldset" :unmount-on-hide="false" class="rounded-md ring ring-default bg-default p-2.5">
             <template #default="{ open }">
-              <legend class="bg-default text-xs leading-none font-semibold select-none flex items-center gap-1 cursor-pointer">
-                <span class="flex-1 text-start">Shadow</span>
-                <UIcon name="i-lucide-chevron-down" class="size-3 text-dimmed transition-transform duration-200" :class="!open && '-rotate-90'" />
+              <legend class="bg-default select-none flex items-center gap-1 cursor-pointer">
+                <UButton
+                  label="Shadow"
+                  color="neutral"
+                  variant="ghost"
+                  size="xs"
+                  trailing-icon="i-lucide-chevron-down"
+                  class="font-semibold"
+                  :ui="{ trailingIcon: ['size-3 text-dimmed transition-transform duration-200', !open && '-rotate-90'] }"
+                />
               </legend>
             </template>
             <template #content>
@@ -542,9 +573,16 @@ const shadowColor = computed({
 
           <UCollapsible v-model:open="openSections.innerShadows" as="fieldset" :unmount-on-hide="false" class="rounded-md ring ring-default bg-default p-2.5">
             <template #default="{ open }">
-              <legend class="bg-default text-xs leading-none font-semibold select-none flex items-center gap-1 cursor-pointer">
-                <span class="flex-1 text-start">Inner shadow</span>
-                <UIcon name="i-lucide-chevron-down" class="size-3 text-dimmed transition-transform duration-200" :class="!open && '-rotate-90'" />
+              <legend class="bg-default select-none flex items-center gap-1 cursor-pointer">
+                <UButton
+                  label="Inner shadow"
+                  color="neutral"
+                  variant="ghost"
+                  size="xs"
+                  trailing-icon="i-lucide-chevron-down"
+                  class="font-semibold"
+                  :ui="{ trailingIcon: ['size-3 text-dimmed transition-transform duration-200', !open && '-rotate-90'] }"
+                />
               </legend>
             </template>
             <template #content>
@@ -603,9 +641,16 @@ const shadowColor = computed({
 
           <UCollapsible v-model:open="openSections.borders" as="fieldset" :unmount-on-hide="false" class="rounded-md ring ring-default bg-default p-2.5">
             <template #default="{ open }">
-              <legend class="bg-default text-xs leading-none font-semibold select-none flex items-center gap-1 cursor-pointer">
-                <span class="flex-1 text-start">Borders</span>
-                <UIcon name="i-lucide-chevron-down" class="size-3 text-dimmed transition-transform duration-200" :class="!open && '-rotate-90'" />
+              <legend class="bg-default select-none flex items-center gap-1 cursor-pointer">
+                <UButton
+                  label="Borders"
+                  color="neutral"
+                  variant="ghost"
+                  size="xs"
+                  trailing-icon="i-lucide-chevron-down"
+                  class="font-semibold"
+                  :ui="{ trailingIcon: ['size-3 text-dimmed transition-transform duration-200', !open && '-rotate-90'] }"
+                />
               </legend>
             </template>
             <template #content>
@@ -673,9 +718,16 @@ const shadowColor = computed({
             class="rounded-md ring ring-default bg-default p-2.5"
           >
             <template #default="{ open }">
-              <legend class="bg-default text-xs leading-none font-semibold select-none flex items-center gap-1 cursor-pointer">
-                <span class="flex-1 text-start">{{ group.label }}</span>
-                <UIcon name="i-lucide-chevron-down" class="size-3 text-dimmed transition-transform duration-200" :class="!open && '-rotate-90'" />
+              <legend class="bg-default select-none flex items-center gap-1 cursor-pointer">
+                <UButton
+                  :label="group.label"
+                  color="neutral"
+                  variant="ghost"
+                  size="xs"
+                  trailing-icon="i-lucide-chevron-down"
+                  class="font-semibold"
+                  :ui="{ trailingIcon: ['size-3 text-dimmed transition-transform duration-200', !open && '-rotate-90'] }"
+                />
               </legend>
             </template>
             <template #content>
@@ -701,8 +753,17 @@ const shadowColor = computed({
         <div class="flex flex-col gap-2.5 pt-1 pb-4">
           <UCollapsible v-model:open="openSections.font" as="fieldset" :unmount-on-hide="false" class="rounded-md ring ring-default bg-default p-2.5">
             <template #default="{ open }">
-              <legend class="bg-default text-xs leading-none font-semibold select-none flex items-center gap-1 cursor-pointer">
-                <span class="flex-1 text-start">Font</span>
+              <legend class="bg-default select-none flex items-center gap-1 cursor-pointer">
+                <UButton
+                  label="Font"
+                  color="neutral"
+                  variant="ghost"
+                  size="xs"
+                  trailing-icon="i-lucide-chevron-down"
+                  class="font-semibold"
+                  :ui="{ trailingIcon: ['size-3 text-dimmed transition-transform duration-200', !open && '-rotate-90'] }"
+                />
+
                 <UButton
                   to="/docs/getting-started/integrations/fonts"
                   size="xs"
@@ -712,7 +773,6 @@ const shadowColor = computed({
                   :ui="{ leadingIcon: 'size-3' }"
                   @click.stop
                 />
-                <UIcon name="i-lucide-chevron-down" class="size-3 text-dimmed transition-transform duration-200" :class="!open && '-rotate-90'" />
               </legend>
             </template>
             <template #content>
@@ -732,8 +792,17 @@ const shadowColor = computed({
 
           <UCollapsible v-model:open="openSections.icons" as="fieldset" :unmount-on-hide="false" class="rounded-md ring ring-default bg-default p-2.5">
             <template #default="{ open }">
-              <legend class="bg-default text-xs leading-none font-semibold select-none flex items-center gap-1 cursor-pointer">
-                <span class="flex-1 text-start">Icons</span>
+              <legend class="bg-default select-none flex items-center gap-1 cursor-pointer">
+                <UButton
+                  label="Icons"
+                  color="neutral"
+                  variant="ghost"
+                  size="xs"
+                  trailing-icon="i-lucide-chevron-down"
+                  class="font-semibold"
+                  :ui="{ trailingIcon: ['size-3 text-dimmed transition-transform duration-200', !open && '-rotate-90'] }"
+                />
+
                 <UButton
                   to="/docs/getting-started/integrations/icons"
                   size="xs"
@@ -743,7 +812,6 @@ const shadowColor = computed({
                   :ui="{ leadingIcon: 'size-3' }"
                   @click.stop
                 />
-                <UIcon name="i-lucide-chevron-down" class="size-3 text-dimmed transition-transform duration-200" :class="!open && '-rotate-90'" />
               </legend>
             </template>
             <template #content>
@@ -764,9 +832,16 @@ const shadowColor = computed({
 
           <UCollapsible v-model:open="openSections.scale" as="fieldset" :unmount-on-hide="false" class="rounded-md ring ring-default bg-default p-2.5">
             <template #default="{ open }">
-              <legend class="bg-default text-xs leading-none font-semibold select-none flex items-center gap-1 cursor-pointer">
-                <span class="flex-1 text-start">Scale</span>
-                <UIcon name="i-lucide-chevron-down" class="size-3 text-dimmed transition-transform duration-200" :class="!open && '-rotate-90'" />
+              <legend class="bg-default select-none flex items-center gap-1 cursor-pointer">
+                <UButton
+                  label="Scale"
+                  color="neutral"
+                  variant="ghost"
+                  size="xs"
+                  trailing-icon="i-lucide-chevron-down"
+                  class="font-semibold"
+                  :ui="{ trailingIcon: ['size-3 text-dimmed transition-transform duration-200', !open && '-rotate-90'] }"
+                />
               </legend>
             </template>
             <template #content>
@@ -806,9 +881,16 @@ const shadowColor = computed({
 
           <UCollapsible v-model:open="openSections.defaults" as="fieldset" :unmount-on-hide="false" class="rounded-md ring ring-default bg-default p-2.5">
             <template #default="{ open }">
-              <legend class="bg-default text-xs leading-none font-semibold select-none flex items-center gap-1 cursor-pointer">
-                <span class="flex-1 text-start">Components</span>
-                <UIcon name="i-lucide-chevron-down" class="size-3 text-dimmed transition-transform duration-200" :class="!open && '-rotate-90'" />
+              <legend class="bg-default select-none flex items-center gap-1 cursor-pointer">
+                <UButton
+                  label="Components"
+                  color="neutral"
+                  variant="ghost"
+                  size="xs"
+                  trailing-icon="i-lucide-chevron-down"
+                  class="font-semibold"
+                  :ui="{ trailingIcon: ['size-3 text-dimmed transition-transform duration-200', !open && '-rotate-90'] }"
+                />
               </legend>
             </template>
             <template #content>
