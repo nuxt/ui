@@ -82,6 +82,9 @@ export default defineLocale<Messages>({
       close: 'Yan paneli bağla',
       open: 'Yan paneli aç'
     },
+    drawer: {
+      close: 'Bağla'
+    },
     error: {
       clear: 'Ana səhifəyə qayıt'
     },

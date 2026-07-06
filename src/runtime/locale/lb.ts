@@ -82,6 +82,9 @@ export default defineLocale<Messages>({
       close: 'Sidebar zoumaachen',
       open: 'Sidebar opmaachen'
     },
+    drawer: {
+      close: 'Zoumaachen'
+    },
     error: {
       clear: 'Zréck op d\'Startsäit'
     },

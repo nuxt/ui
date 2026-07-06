@@ -83,6 +83,9 @@ export default defineLocale<Messages>({
       close: 'סגור סרגל צד',
       open: 'פתח סרגל צד'
     },
+    drawer: {
+      close: 'סגור'
+    },
     error: {
       clear: 'חזרה לדף הבית'
     },

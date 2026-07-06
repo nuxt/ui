@@ -82,6 +82,9 @@ export default defineLocale<Messages>({
       close: 'Zatvoriť bočný panel',
       open: 'Otvoriť bočný panel'
     },
+    drawer: {
+      close: 'Zatvoriť'
+    },
     error: {
       clear: 'Späť na domovskú stránku'
     },

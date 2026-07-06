@@ -82,6 +82,9 @@ export default defineLocale<Messages>({
       close: 'Loka hliðarstiku',
       open: 'Opna hliðarstiku'
     },
+    drawer: {
+      close: 'Loka'
+    },
     error: {
       clear: 'Til baka heim'
     },

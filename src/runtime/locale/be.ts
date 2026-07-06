@@ -82,6 +82,9 @@ export default defineLocale<Messages>({
       close: 'Закрыць бакавую панэль',
       open: 'Адкрыць бакавую панэль'
     },
+    drawer: {
+      close: 'Закрыць'
+    },
     error: {
       clear: 'Вярнуцца на галоўную'
     },

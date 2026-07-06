@@ -82,6 +82,9 @@ export default defineLocale<Messages>({
       close: '關閉側邊欄',
       open: '開啟側邊欄'
     },
+    drawer: {
+      close: '關閉'
+    },
     error: {
       clear: '返回首頁'
     },

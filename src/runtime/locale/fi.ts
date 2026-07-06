@@ -82,6 +82,9 @@ export default defineLocale<Messages>({
       close: 'Sulje sivupalkki',
       open: 'Avaa sivupalkki'
     },
+    drawer: {
+      close: 'Sulje'
+    },
     error: {
       clear: 'Takaisin etusivulle'
     },

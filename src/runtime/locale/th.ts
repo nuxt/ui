@@ -77,6 +77,9 @@ export default defineLocale<Messages>({
       close: 'ปิดแถบด้านข้าง',
       open: 'เปิดแถบด้านข้าง'
     },
+    drawer: {
+      close: 'ปิด'
+    },
     error: {
       clear: 'กลับไปยังหน้าหลัก'
     },

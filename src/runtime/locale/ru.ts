@@ -82,6 +82,9 @@ export default defineLocale<Messages>({
       close: 'Закрыть боковую панель',
       open: 'Открыть боковую панель'
     },
+    drawer: {
+      close: 'Закрыть'
+    },
     error: {
       clear: 'Вернуться на главную'
     },
