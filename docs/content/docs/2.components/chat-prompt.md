@@ -87,17 +87,17 @@ You can also use it as a starting point for a chat interface.
 
 ```vue [pages/index.vue] {2,4,8-15,24,26}
 <script setup lang="ts">
-import { Chat } from '@ai-sdk/vue'
+import { useChat } from '@ai-sdk/vue'
 
 const input = ref('')
 
-const chat = new Chat()
+const { messages, status, sendMessage } = useChat()
 
 async function onSubmit() {
-  chat.sendMessage({ text: input.value })
+  sendMessage({ text: input.value })
 
   // Navigate to chat page after first message
-  if (chat.messages.length === 1) {
+  if (messages.value.length === 1) {
     await navigateTo('/chat')
   }
 }
@@ -110,7 +110,7 @@ async function onSubmit() {
         <h1>How can I help you today?</h1>
 
         <UChatPrompt v-model="input" @submit="onSubmit">
-          <UChatPromptSubmit :status="chat.status" />
+          <UChatPromptSubmit :status="status" />
         </UChatPrompt>
       </UContainer>
     </template>

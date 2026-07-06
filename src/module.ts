@@ -4,6 +4,7 @@ import type { HookResult, ModuleDependencies } from '@nuxt/schema'
 import { addTemplates } from './templates'
 import { publicComposables } from './imports'
 import { defaultOptions, getDefaultConfig, resolveColors } from './utils/defaults'
+import { getClientBundleIcons } from './utils/icons'
 import { name, version } from '../package.json'
 
 export type * from './runtime/types'
@@ -220,6 +221,19 @@ export default defineNuxtModule<ModuleOptions>({
     nuxt.options.alias['#ui'] = resolve('./runtime')
 
     nuxt.options.appConfig.ui = defu(nuxt.options.appConfig.ui || {}, getDefaultConfig(options.theme)) as typeof nuxt.options.appConfig.ui
+
+    // Pre-bundle the icons Nuxt UI uses into `@nuxt/icon`'s client bundle so they're
+    // embedded at build time instead of fetched at runtime. Its `clientBundle.scan`
+    // skips `node_modules`, so it can't discover the icons baked into our components.
+    //
+    // `@nuxt/icon` drops any name it can't resolve (collection not installed, icon
+    // missing) and falls back to runtime loading instead of failing the build
+    // (nuxt/icon#504), so we add them all and let it sort out what's available.
+    nuxt.hook('icon:clientBundleIcons', (icons) => {
+      for (const name of getClientBundleIcons(nuxt.options.appConfig.ui?.icons)) {
+        icons.add(name)
+      }
+    })
 
     nuxt.options.build.transpile.push('reka-ui')
 

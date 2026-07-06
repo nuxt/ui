@@ -163,7 +163,7 @@ defineExpose({
     v-slot="{ modelValue: tags }"
     :model-value="props.modelValue"
     :default-value="props.defaultValue"
-    data-slot="root"
+    :data-slot="($attrs['data-slot'] as string | undefined) ?? 'root'"
     :class="ui.root({ class: [ui.base({ class: props.ui?.base }), props.ui?.root, props.class] })"
     v-bind="rootProps"
     :name="name"

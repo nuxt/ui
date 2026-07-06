@@ -82,6 +82,9 @@ export default defineLocale<Messages>({
       close: 'Փակել կողային վահանակը',
       open: 'Բացել կողային վահանակը'
     },
+    drawer: {
+      close: 'Փակել'
+    },
     error: {
       clear: 'Վերադառնալ գլխավոր էջ'
     },

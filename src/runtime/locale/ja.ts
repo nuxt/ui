@@ -82,6 +82,9 @@ export default defineLocale<Messages>({
       close: 'サイドバーを閉じる',
       open: 'サイドバーを開く'
     },
+    drawer: {
+      close: '閉じる'
+    },
     error: {
       clear: 'ホームに戻る'
     },

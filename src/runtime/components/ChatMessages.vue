@@ -108,13 +108,20 @@ const props = useComponentProps<ChatMessagesProps<T>>('chatMessages', _props)
 
 const getProxySlots = () => omit(slots, ['default', 'indicator', 'viewport'])
 
-const showIndicator = computed(() => {
+// This is intentionally a function (not a `computed`) so it is re-evaluated on
+// every render. `@ai-sdk/vue` stores messages in a `shallowRef` and grows them
+// via in-place mutation + `triggerRef`, so the array reference and the message
+// objects never change identity. A `computed` would cache its result on the
+// first `streaming` render (when the assistant message is still empty) and never
+// recompute as parts stream in, leaving the indicator stuck. Evaluating during
+// render ties the indicator to the same re-render that displays the streamed content.
+function showIndicator() {
   if (props.status === 'submitted') return true
   if (props.status !== 'streaming') return false
 
   const lastMessage = props.messages?.[props.messages.length - 1]
   return lastMessage?.role === 'assistant' && !lastMessage.parts?.length
-})
+}
 
 const appConfig = useAppConfig() as ChatMessages['AppConfig']
 
@@ -341,7 +348,7 @@ defineExpose({
     </slot>
 
     <UChatMessage
-      v-if="showIndicator"
+      v-if="showIndicator()"
       id="indicator"
       role="assistant"
       v-bind="{ ...assistantProps, actions: undefined, parts: [] }"

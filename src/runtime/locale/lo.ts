@@ -82,6 +82,9 @@ export default defineLocale<Messages>({
       close: 'ປິດແຖບດ້ານຂ້າງ',
       open: 'ເປີດແຖບດ້ານຂ້າງ'
     },
+    drawer: {
+      close: 'ປິດ'
+    },
     error: {
       clear: 'ກັບໄປໜ້າຫຼັກ'
     },

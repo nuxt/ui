@@ -12,13 +12,21 @@ exports[`Link > renders with disabled correctly 1`] = `"<button type="button" di
 
 exports[`Link > renders with external prop correctly 1`] = `"<a href="/api/download" rel="noopener noreferrer" class="outline-primary/25 focus-visible:outline-3 rounded-md text-muted hover:text-default transition-colors"></a>"`;
 
+exports[`Link > renders with external to and rel correctly 1`] = `"<a href="https://example.com" rel="nofollow" class="outline-primary/25 focus-visible:outline-3 rounded-md text-muted hover:text-default transition-colors"></a>"`;
+
 exports[`Link > renders with external to and target correctly 1`] = `"<a href="https://example.com" rel="noopener noreferrer" target="_blank" class="outline-primary/25 focus-visible:outline-3 rounded-md text-muted hover:text-default transition-colors"></a>"`;
 
 exports[`Link > renders with external to correctly 1`] = `"<a href="https://example.com" rel="noopener noreferrer" class="outline-primary/25 focus-visible:outline-3 rounded-md text-muted hover:text-default transition-colors"></a>"`;
 
 exports[`Link > renders with inactiveClass correctly 1`] = `"<button type="button" class="outline-primary/25 focus-visible:outline-3 rounded-md text-muted hover:text-default transition-colors"></button>"`;
 
+exports[`Link > renders with internal to and noRel correctly 1`] = `"<a href="/about" class="outline-primary/25 focus-visible:outline-3 rounded-md text-muted hover:text-default transition-colors"></a>"`;
+
+exports[`Link > renders with internal to and rel correctly 1`] = `"<a href="/about" rel="nofollow" class="outline-primary/25 focus-visible:outline-3 rounded-md text-muted hover:text-default transition-colors"></a>"`;
+
 exports[`Link > renders with internal to and target correctly 1`] = `"<a href="/about" rel="noopener noreferrer" target="_blank" class="outline-primary/25 focus-visible:outline-3 rounded-md text-muted hover:text-default transition-colors"></a>"`;
+
+exports[`Link > renders with internal to object and target correctly 1`] = `"<a href="/about" rel="noopener noreferrer" target="_blank" class="outline-primary/25 focus-visible:outline-3 rounded-md text-muted hover:text-default transition-colors"></a>"`;
 
 exports[`Link > renders with raw activeClass correctly 1`] = `"<button type="button" class="text-highlighted"></button>"`;
 

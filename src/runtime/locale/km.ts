@@ -82,6 +82,9 @@ export default defineLocale<Messages>({
       close: 'បិទបារចំហៀង',
       open: 'បើកបារចំហៀង'
     },
+    drawer: {
+      close: 'បិទ'
+    },
     error: {
       clear: 'ត្រឡប់ទៅទំព័រដើម'
     },

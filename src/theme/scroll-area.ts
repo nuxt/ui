@@ -16,6 +16,11 @@ export default {
         viewport: 'flex-row',
         item: ''
       }
+    },
+    externalScroll: {
+      true: {
+        root: 'overflow-visible'
+      }
     }
   }
 }

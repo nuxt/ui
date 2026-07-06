@@ -82,6 +82,9 @@ export default defineLocale<Messages>({
       close: 'Zamknij pasek boczny',
       open: 'Otwórz pasek boczny'
     },
+    drawer: {
+      close: 'Zamknij'
+    },
     error: {
       clear: 'Powrót do strony głównej'
     },

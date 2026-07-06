@@ -188,7 +188,7 @@ defineExpose({
     :min="props.min"
     :max="props.max"
     :step="props.step"
-    data-slot="root"
+    :data-slot="($attrs['data-slot'] as string | undefined) ?? 'root'"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     :name="name"
     :disabled="disabled"

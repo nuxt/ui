@@ -31,7 +31,7 @@ export interface ButtonProps extends UseComponentIconsProps, Omit<LinkProps, 'ra
   block?: boolean
   /** Set loading state automatically based on the `@click` promise state */
   loadingAuto?: boolean
-  onClick?: ((event: MouseEvent) => void | Promise<void>) | Array<((event: MouseEvent) => void | Promise<void>)>
+  onClick?: ((event: MouseEvent) => void) | Array<((event: MouseEvent) => void)>
   class?: any
   ui?: Button['slots']
 }
@@ -128,8 +128,8 @@ const ui = computed(() => tv({
     custom
   >
     <ULinkBase
-      v-bind="slotProps"
       data-slot="base"
+      v-bind="slotProps"
       :class="ui.base({
         class: [props.ui?.base, props.class],
         active,

@@ -77,6 +77,9 @@ export default defineLocale<Messages>({
       close: 'Close sidebar',
       open: 'Open sidebar'
     },
+    drawer: {
+      close: 'Close'
+    },
     error: {
       clear: 'Back to home'
     },

@@ -261,7 +261,7 @@ onUnmounted(() => {
     </slot>
   </DefineContentTemplate>
 
-  <CollapsibleRoot v-slot="{ open }" v-bind="{ ...rootProps, ...$attrs }" :default-open="props.defaultOpen" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <CollapsibleRoot v-slot="{ open }" data-slot="root" v-bind="{ ...rootProps, ...$attrs }" :default-open="props.defaultOpen" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <div data-slot="container" :class="ui.container({ class: props.ui?.container })">
       <div v-if="!!slots.top" data-slot="top" :class="ui.top({ class: props.ui?.top })">
         <slot name="top" :links="props.links" />
