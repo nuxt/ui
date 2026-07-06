@@ -31,4 +31,4 @@ allowBuilds:
   vue-demi: false
 
 minimumReleaseAgeExclude:
-  - '@nuxt/icon@2.2.5'
+  - shiki-transformer-icon-highlight@0.1.0
