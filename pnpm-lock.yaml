@@ -438,6 +438,9 @@ importers:
       shiki-transformer-color-highlight:
         specifier: ^1.1.0
         version: 1.1.0
+      shiki-transformer-icon-highlight:
+        specifier: ^0.1.0
+        version: 0.1.0
       simple-git:
         specifier: ^3.36.0
         version: 3.36.0
@@ -7833,6 +7836,9 @@ packages:
 
   shiki-transformer-color-highlight@1.1.0:
     resolution: {integrity: sha512-kjmJajroVi7llqSA7vsdMlOv5jmnYUs8O3Er4RfEIm8kd2g6ou9rEHxm5mNWbb6o2aXI4F/xhkq46Vyh/1bEVQ==}
+
+  shiki-transformer-icon-highlight@0.1.0:
+    resolution: {integrity: sha512-Yxhm7SCgcbtm0+5QJq/KeQmyWDr2o5s1+EZTkzt4oEXgmsHtCL9tWxOqOtQlCtj0fjSMRHjSij9qAn4JutomQw==}
 
   shiki@4.3.1:
     resolution: {integrity: sha512-oR+qDVi2OjX1tmDpyv+3KviX01KzO6Af+0NNnKnsp9491UEGz2YpxTuJboS/6VhYpTdqzmuJBuiTlrAWWJAssw==}
@@ -17486,6 +17492,10 @@ snapshots:
       '@shikijs/core': 3.23.0
       '@shikijs/types': 3.23.0
       colorjs.io: 0.6.1
+
+  shiki-transformer-icon-highlight@0.1.0:
+    dependencies:
+      '@shikijs/types': 4.3.1
 
   shiki@4.3.1:
     dependencies:
