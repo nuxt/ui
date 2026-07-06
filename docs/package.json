@@ -63,6 +63,7 @@
     "zod": "^4.4.3"
   },
   "devDependencies": {
+    "@shikijs/types": "^4.3.1",
     "@types/sortablejs": "^1.15.9"
   }
 }
