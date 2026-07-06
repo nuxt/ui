@@ -268,6 +268,7 @@ const EDGE_CLASSES: Record<'t' | 'b' | 'e' | 's', Record<number, string>> = {
   s: { 0: 'border-s-0', 1: 'border-s', 2: 'border-s-2', 3: 'border-s-3', 4: 'border-s-4' }
 }
 const DIVIDE_Y_CLASSES: Record<number, string> = { 0: 'divide-y-0', 1: 'divide-y', 2: 'divide-y-2', 3: 'divide-y-3', 4: 'divide-y-4' }
+const BORDER_ALL_CLASSES: Record<number, string> = { 0: 'border-0', 1: 'border', 2: 'border-2', 3: 'border-3', 4: 'border-4' }
 // dashboard panels only draw their edge between siblings on lg — same scoping
 const PANEL_EDGE_CLASSES: Record<number, string> = {
   0: 'lg:not-last:border-e-0',
@@ -334,7 +335,30 @@ function ringFragments(width: number): Fragments {
     dashboardSidebar: { slots: { root: edge('e') } },
     dashboardNavbar: { slots: { root: edge('b') } },
     dashboardToolbar: { slots: { root: edge('b') } },
-    dashboardPanel: { slots: { root: PANEL_EDGE_CLASSES[width] || PANEL_EDGE_CLASSES[BORDER_WIDTH_DEFAULT]! } }
+    dashboardPanel: { slots: { root: PANEL_EDGE_CLASSES[width] || PANEL_EDGE_CLASSES[BORDER_WIDTH_DEFAULT]! } },
+    // ring-bearing surfaces beyond the core set (page/pricing/chat/blog)
+    pageCard: { compoundVariants: compound(['outline', 'subtle'], 'root') },
+    pageCTA: { compoundVariants: compound(['outline', 'subtle'], 'root') },
+    blogPost: { compoundVariants: compound(['outline', 'subtle'], 'root') },
+    chatPrompt: { compoundVariants: compound(['outline', 'subtle'], 'root') },
+    pricingPlan: { compoundVariants: compound(['outline', 'subtle'], 'root') },
+    // and the remaining border-utility edges
+    navigationMenu: { slots: { childList: edge('s') } },
+    pageHeader: { slots: { root: edge('b') } },
+    chatPalette: { slots: { prompt: edge('t') } },
+    commandPalette: { slots: { root: divide } },
+    fileUpload: { slots: { file: BORDER_ALL_CLASSES[width] || BORDER_ALL_CLASSES[BORDER_WIDTH_DEFAULT]! } },
+    checkboxGroup: { compoundVariants: [{ variant: 'card', class: { item: BORDER_ALL_CLASSES[width] || BORDER_ALL_CLASSES[BORDER_WIDTH_DEFAULT]! } }] },
+    listbox: { slots: { input: edge('b') } },
+    tree: { slots: { listWithChildren: edge('s') } },
+    changelogVersion: { slots: { footer: edge('t') } },
+    pricingTable: {
+      slots: {
+        item: BORDER_ALL_CLASSES[width] || BORDER_ALL_CLASSES[BORDER_WIDTH_DEFAULT]!,
+        th: edge('b'),
+        td: edge('b')
+      }
+    }
   }
 }
 
@@ -367,6 +391,12 @@ function frameFragments(width: number): Fragments {
     button: { compoundVariants: frame(inset) },
     badge: { compoundVariants: frame(inset) },
     chatMessage: { compoundVariants: frame(inset, 'content') },
+    pageCard: { compoundVariants: frame(outset, 'root') },
+    pageCTA: { compoundVariants: frame(outset, 'root') },
+    blogPost: { compoundVariants: frame(outset, 'root') },
+    // fields have no solid variant — soft is their surface look
+    ...Object.fromEntries(FIELD_COMPONENTS.map(component => [component, { compoundVariants: [{ variant: 'soft', class: inset }] }])),
+    chatPrompt: { compoundVariants: [{ variant: 'soft', class: { root: outset } }] },
     // other solid surfaces: the pill tabs wrapper + its indicator, and the
     // switch track (its checked color-ring loses the merge to ours — the
     // frame look owns ring color by design, same as solid buttons)
@@ -380,21 +410,31 @@ function frameFragments(width: number): Fragments {
  * frames solid surfaces. Legacy 'bold'/'frame' (old exports and saved
  * prefs) read as custom at the default width, 'frame' keeping its outlines.
  */
-function borderFragments(style: StyleOptions): Fragments {
+function borderFragments(style: StyleOptions, widthAsVariables = false): Fragments {
   if (!style.border || style.border === 'default') return {}
-  if (style.border === 'none') return ringFragments(0)
 
-  const width = style.borderWidth ?? BORDER_WIDTH_DEFAULT
+  // Exports carry the width through tailwind's `--default-border-width` /
+  // `--default-ring-width` theme variables instead (the consumer's compile
+  // scales every bare border/divide/ring) — only the frame outlines remain
+  // as classes. The live preview can't do that: those variables are
+  // resolved at compile time, so it keeps the class fragments.
+  const framed = style.frame || style.border === 'frame'
+  const width = style.border === 'none' ? 0 : style.borderWidth ?? BORDER_WIDTH_DEFAULT
+
+  if (widthAsVariables) {
+    return framed && width > 0 ? frameFragments(width) : {}
+  }
+
   const rings = ringFragments(width)
-  if (!style.frame && style.border !== 'frame') return rings
+  if (!framed || width === 0) return rings
 
-  const framed = frameFragments(width)
+  const frames = frameFragments(width)
   return Object.fromEntries(
-    [...new Set([...Object.keys(rings), ...Object.keys(framed)])].map(key => [key, {
+    [...new Set([...Object.keys(rings), ...Object.keys(frames)])].map(key => [key, {
       ...rings[key],
-      ...framed[key],
-      ...(rings[key]?.compoundVariants || framed[key]?.compoundVariants
-        ? { compoundVariants: [...(rings[key]?.compoundVariants || []), ...(framed[key]?.compoundVariants || [])] }
+      ...frames[key],
+      ...(rings[key]?.compoundVariants || frames[key]?.compoundVariants
+        ? { compoundVariants: [...(rings[key]?.compoundVariants || []), ...(frames[key]?.compoundVariants || [])] }
         : {})
     }])
   )
@@ -416,8 +456,12 @@ function recolor(variants: string[], slot?: string, colors?: string[]): Array<Re
   }))
 }
 
-/** Colors whose rings carry no semantic meaning — safe to repaint. */
-const UNSIGNALED_COLORS = ['primary', 'neutral']
+/**
+ * Colors whose rings carry no meaning — safe to repaint. Only neutral: a
+ * primary ring is as deliberate a choice as an error one (a subtle primary
+ * button must keep its primary border under any border color).
+ */
+const UNSIGNALED_COLORS = ['neutral']
 
 const FRAME_COLOR_FRAGMENTS: Fragments = {
   // cards have no color variants; field rings are neutral for every color
@@ -535,7 +579,7 @@ export function styleTokens(style: StyleOptions): { light: Record<string, string
  * merge in shadow → width → color order, so the color compounds append last
  * and win the tailwind-merge for ring color.
  */
-export function styleComponents(style: StyleOptions): Fragments {
+export function styleComponents(style: StyleOptions, options: { widthAsVariables?: boolean } = {}): Fragments {
   // App-wide defaults, only where the component supports the chosen value.
   const defaults: Fragments = {}
   const variant = style.defaults?.variant
@@ -575,7 +619,7 @@ export function styleComponents(style: StyleOptions): Fragments {
   const sources = [
     defaults,
     SHADOW_FRAGMENTS[style.shadow ?? 'none'],
-    borderFragments(style),
+    borderFragments(style, options.widthAsVariables),
     style.borderColor && style.borderColor !== 'default' ? FRAME_COLOR_FRAGMENTS : {}
   ]
 

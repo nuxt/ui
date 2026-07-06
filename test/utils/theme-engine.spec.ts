@@ -367,6 +367,25 @@ describe('style colors', () => {
     expect(styleComponents({ border: 'bold' }).input!.compoundVariants).toContainEqual({ variant: 'subtle', class: 'ring-2' })
   })
 
+  it('exports carry width via tailwind default-width variables, not classes', async () => {
+    const { generateCSS, generateConfig } = await import('../../docs/app/utils/theme-engine')
+
+    const doc = { version: 1 as const, style: { border: 'custom' as const, borderWidth: 3, frame: true } }
+    const css = generateCSS(doc)
+    expect(css).toContain('--default-border-width: 3px;')
+    expect(css).toContain('--default-ring-width: 3px;')
+
+    // config keeps the frame outlines but drops the per-component width classes
+    const config = generateConfig(doc)
+    expect(config).toContain('ring-3 ring-inset ring-(--ui-border-accented)')
+    expect(config).not.toMatch(/class: 'ring-3'/)
+
+    // none exports as zero-width variables and nothing else
+    const none = generateCSS({ version: 1, style: { border: 'none' } })
+    expect(none).toContain('--default-border-width: 0px;')
+    expect(generateConfig({ version: 1, style: { border: 'none' } })).toBe('export default defineAppConfig({})')
+  })
+
   it('border none counts as a real style choice', async () => {
     const { isDefaultStyle } = await import('../../docs/app/utils/theme-engine')
     expect(isDefaultStyle({})).toBe(true)
@@ -435,9 +454,10 @@ describe('style colors', () => {
     const { styleComponents } = await import('../../docs/app/utils/theme-engine')
     const compounds = styleComponents({ border: 'frame', borderColor: 'primary' }).button!.compoundVariants!
 
-    // outline/subtle rings ARE the semantic signal — only primary/neutral repaint
-    expect(compounds).toContainEqual({ color: ['primary', 'neutral'], variant: 'outline', class: 'ring-(--ui-frame-color)' })
-    expect(compounds).toContainEqual({ color: ['primary', 'neutral'], variant: 'subtle', class: 'ring-(--ui-frame-color)' })
+    // outline/subtle rings ARE the color signal (a subtle primary button
+    // keeps its primary border) — only neutral rings repaint
+    expect(compounds).toContainEqual({ color: ['neutral'], variant: 'outline', class: 'ring-(--ui-frame-color)' })
+    expect(compounds).toContainEqual({ color: ['neutral'], variant: 'subtle', class: 'ring-(--ui-frame-color)' })
     // frames around solid/soft surfaces repaint for every color
     expect(compounds).toContainEqual({ variant: 'solid', class: 'ring-(--ui-frame-color)' })
     expect(compounds).toContainEqual({ variant: 'soft', class: 'ring-(--ui-frame-color)' })

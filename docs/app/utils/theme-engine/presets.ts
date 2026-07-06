@@ -48,52 +48,41 @@ export const presets: ThemePreset[] = [{
 }, {
   id: 'neo-brutalist',
   name: 'Neo-brutalist',
-  description: 'Hard black shadows, inked frames, zero radius, alarm red.',
+  description: 'Amber on zinc — everything framed in ink, dropped hard shadows.',
   icon: 'i-lucide-zap',
   doc: {
     version: 1,
     meta: { name: 'Neo-brutalist', base: 'neo-brutalist' },
-    // Reference palette (tweakcn/shadcn studio): #FF3333 primary light,
-    // #FF6666 dark, yellow secondary, pure white/black surfaces.
-    palettes: {
-      brut: {
-        shades: {
-          50: 'oklch(95.8% 0.021 17.519)',
-          100: 'oklch(91.1% 0.046 18.029)',
-          200: 'oklch(83.9% 0.089 19.107)',
-          300: 'oklch(77% 0.136 20.678)',
-          400: 'oklch(70.4% 0.187 23.186)',
-          500: 'oklch(64.9% 0.237 26.973)',
-          600: 'oklch(58.9% 0.23 28.239)',
-          700: 'oklch(51.7% 0.204 28.37)',
-          800: 'oklch(44.5% 0.174 28.254)',
-          900: 'oklch(38.3% 0.148 27.965)',
-          950: 'oklch(25.2% 0.094 27.421)'
-        }
-      }
-    },
     colors: {
-      primary: 'brut',
+      primary: 'amber',
       secondary: 'yellow',
-      neutral: 'neutral'
+      neutral: 'zinc'
     },
-    radius: 0,
+    radius: 0.5,
     font: { sans: 'Outfit' },
-    tokens: {
-      light: {
-        '--ui-bg': 'white'
-      },
-      dark: {
-        '--ui-bg': 'black'
-      }
-    },
-    // The rest is plain configuration: outlined everything in inverted ink,
-    // hard offset shadows.
+    // Framed everything in near-black ink, straight-down hard shadows, and
+    // a noir dark mode: surfaces lifted a step, every border crushed to 950.
     style: {
       shadow: 'hard',
+      shadowGeometry: { x: 0, y: 3, blur: 0, spread: 0 },
       border: 'custom',
       frame: true,
-      borderColor: 'inverted'
+      borderColor: 'shade',
+      borderShade: { light: 900, dark: 950 },
+      tokenShades: {
+        '--ui-bg': { light: 50, dark: 800 },
+        '--ui-bg-elevated': { dark: 700 },
+        '--ui-bg-accented': { dark: 600 },
+        '--ui-bg-inverted': { dark: 50 },
+        '--ui-text-inverted': { light: 50 },
+        '--ui-text-highlighted': { dark: 100 },
+        '--ui-text-dimmed': { dark: 400 },
+        '--ui-text-muted': { dark: 300 },
+        '--ui-border': { dark: 950 },
+        '--ui-border-muted': { dark: 950 },
+        '--ui-border-accented': { light: 400, dark: 950 },
+        '--ui-border-inverted': { dark: 50 }
+      }
     }
   }
 }, {

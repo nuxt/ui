@@ -36,6 +36,8 @@ interface ParsedCSS {
   fontSize?: number
   radius?: number
   blackAsPrimary?: boolean
+  /** From @theme --default-border-width — the export's width channel. */
+  borderWidth?: number
   light: Record<string, string>
   dark: Record<string, string>
   skipped: string[]
@@ -102,6 +104,14 @@ function parseDeclaration(result: ParsedCSS, selector: string, prop: string, val
     }
     if (prop === '--spacing' && value.endsWith('rem')) {
       result.spacing = Number.parseFloat(value)
+      return true
+    }
+    if (prop === '--default-border-width' && value.endsWith('px')) {
+      result.borderWidth = Number.parseFloat(value)
+      return true
+    }
+    if (prop === '--default-ring-width' && value.endsWith('px')) {
+      // always exported alongside --default-border-width with the same value
       return true
     }
     return false
@@ -376,18 +386,21 @@ function detectBorder(components: Record<string, any>): Pick<StyleOptions, 'bord
   const width = widths[0]!
   if (width === 0) return { border: 'none' }
 
-  // Frame outlines live on solid-variant compounds referencing the accented border
-  const framed = Object.values(components).some(component =>
+  return {
+    border: 'custom',
+    ...(width !== BORDER_WIDTH_DEFAULT ? { borderWidth: width } : {}),
+    ...(detectFrame(components) ? { frame: true } : {})
+  }
+}
+
+/** Frame outlines live on solid-variant compounds referencing the accented border. */
+function detectFrame(components: Record<string, any>): boolean {
+  const classOf = (entry: Record<string, unknown>) => typeof entry.class === 'string' ? entry.class : Object.values(entry.class || {}).join(' ')
+  return Object.values(components).some(component =>
     ((component?.compoundVariants || []) as Array<Record<string, unknown>>).some(entry =>
       entry.variant === 'solid' && classOf(entry).includes('ring-(--ui-border-accented)')
     )
   )
-
-  return {
-    border: 'custom',
-    ...(width !== BORDER_WIDTH_DEFAULT ? { borderWidth: width } : {}),
-    ...(framed ? { frame: true } : {})
-  }
 }
 
 /** Shadow fallback when only a config was pasted (CSS normally decides). */
@@ -402,8 +415,8 @@ function detectShadow(components: Record<string, any>): StyleOptions['shadow'] {
  * Remove the fragments the reconstructed style regenerates, leaving only
  * genuinely explicit component overrides for doc.components.
  */
-function subtractStyleExpansion(components: Record<string, any>, style: StyleOptions): Record<string, any> {
-  const expected = styleComponents(style)
+function subtractStyleExpansion(components: Record<string, any>, style: StyleOptions, widthAsVariables = false): Record<string, any> {
+  const expected = styleComponents(style, { widthAsVariables })
   const remaining: Record<string, any> = {}
 
   for (const [name, fragment] of Object.entries(components)) {
@@ -476,16 +489,26 @@ export function importTheme(input: { css?: string, config?: string }): ThemeImpo
   // config classes; either half alone still reconstructs what it can.
   const style: StyleOptions = css ? extractStyle(css.light, css.dark) : {}
   style.shadow ||= detectShadow(components)
-  const border = detectBorder(components)
-  if (border.border) {
-    style.border = border.border
-    if (border.borderWidth !== undefined) style.borderWidth = border.borderWidth
-    if (border.frame) style.frame = true
+
+  // New exports carry width through the @theme variables; older ones (and
+  // config-only pastes) still declare it through ring-N classes.
+  const widthAsVariables = css?.borderWidth !== undefined
+  if (widthAsVariables) {
+    style.border = css!.borderWidth === 0 ? 'none' : 'custom'
+    if (css!.borderWidth !== 0 && css!.borderWidth !== BORDER_WIDTH_DEFAULT) style.borderWidth = css!.borderWidth
+    if (detectFrame(components)) style.frame = true
+  } else {
+    const border = detectBorder(components)
+    if (border.border) {
+      style.border = border.border
+      if (border.borderWidth !== undefined) style.borderWidth = border.borderWidth
+      if (border.frame) style.frame = true
+    }
   }
   const defaults = extractDefaults(components)
   if (defaults) style.defaults = defaults
 
-  const explicit = subtractStyleExpansion(components, style)
+  const explicit = subtractStyleExpansion(components, style, widthAsVariables)
   if (Object.keys(explicit).length) doc.components = explicit
 
   if (Object.values(style).some(value => value !== undefined)) {

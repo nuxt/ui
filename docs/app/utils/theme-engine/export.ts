@@ -1,7 +1,7 @@
 import { themeIcons } from '../theme'
 import type { ThemeDoc } from './types'
 import { DEFAULT_COLORS, THEME_DEFAULTS } from './types'
-import { styleComponents, styleTokens, mergeUi } from './styles'
+import { styleComponents, styleTokens, mergeUi, BORDER_WIDTH_DEFAULT } from './styles'
 
 /**
  * Generate the minimal `main.css`. The document only holds overrides, so
@@ -19,6 +19,17 @@ export function generateCSS(doc: ThemeDoc): string {
   }
   if (doc.spacing !== undefined && doc.spacing !== THEME_DEFAULTS.spacing) {
     themeLines.push(`  --spacing: ${doc.spacing}rem;`)
+  }
+  // Border width exports as tailwind's default-width theme variables — the
+  // consumer's compile scales every bare border/divide/ring utility, far
+  // beyond what per-component classes could enumerate. (The live preview
+  // can't use this: the variables resolve at compile time.)
+  const borderWidth = doc.style?.border === 'none'
+    ? 0
+    : doc.style?.border && doc.style.border !== 'default' ? doc.style.borderWidth ?? BORDER_WIDTH_DEFAULT : undefined
+  if (borderWidth !== undefined && borderWidth !== 1) {
+    themeLines.push(`  --default-border-width: ${borderWidth}px;`)
+    themeLines.push(`  --default-ring-width: ${borderWidth}px;`)
   }
   if (themeLines.length) {
     lines.push('', '@theme {', ...themeLines, '}')
@@ -118,7 +129,9 @@ export function generateConfig(doc: ThemeDoc, framework: string = 'nuxt'): strin
 
   // Explicit components merge INTO the style expansion (classes concatenate,
   // explicit last so it wins) — a spread would drop one side wholesale.
-  const componentOverrides = mergeUi(doc.style ? styleComponents(doc.style) : undefined, doc.components)
+  // Width rides the @theme default-width variables in the exported CSS, so
+  // the config only carries frame/color/shadow classes.
+  const componentOverrides = mergeUi(doc.style ? styleComponents(doc.style, { widthAsVariables: true }) : undefined, doc.components)
   if (Object.keys(componentOverrides).length) {
     config.ui = config.ui || {}
     Object.assign(config.ui, componentOverrides)
