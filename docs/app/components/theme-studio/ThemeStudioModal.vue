@@ -69,7 +69,7 @@ const viewTabs = [
           v-model:open="sidebarOpen"
           variant="floating"
           :style="{ '--sidebar-width': '21rem' }"
-          :ui="{ container: 'pe-0', header: 'bg-elevated/50', body: 'p-0 gap-0 bg-default', footer: 'bg-elevated/50', inner: [chromeShadow, 'bg-default'] }"
+          :ui="{ container: 'pe-0', header: 'bg-elevated/50 rounded-t-lg', body: 'p-0 gap-0 bg-default', footer: 'bg-elevated/50 rounded-b-lg', inner: [chromeShadow, 'bg-default'] }"
         >
           <template #header>
             <Logo class="w-auto h-6 shrink-0 mr-auto" />

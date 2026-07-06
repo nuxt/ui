@@ -435,7 +435,9 @@ const vReveal = {
 
 /* Hero entrance — port of the template's enter motion (fade + rise, staggered). */
 .landing-enter {
-  animation: landing-enter 0.6s ease both;
+  /* backwards, not both: a retained transform (even identity) would form a
+     backdrop root and blind children's backdrop-blur after the entrance */
+  animation: landing-enter 0.6s ease backwards;
 }
 
 @keyframes landing-enter {
@@ -445,7 +447,7 @@ const vReveal = {
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: none;
   }
 }
 
