@@ -20,6 +20,7 @@ describe('Link', () => {
     ['with external to', { props: { to: 'https://example.com' } }],
     ['with external to and target', { props: { to: 'https://example.com', target: '_blank' } }],
     ['with internal to and target', { props: { to: '/about', target: '_blank' } }],
+    ['with internal to object and target', { props: { to: { path: '/about' }, target: '_blank' } }],
     ['with internal to and rel', { props: { to: '/about', rel: 'nofollow' } }],
     ['with internal to and noRel', { props: { to: '/about', rel: 'nofollow', noRel: true } }],
     ['with external to and rel', { props: { to: 'https://example.com', rel: 'nofollow' } }],

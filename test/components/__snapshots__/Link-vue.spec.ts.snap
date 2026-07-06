@@ -26,6 +26,8 @@ exports[`Link > renders with internal to and rel correctly 1`] = `"<a href="/abo
 
 exports[`Link > renders with internal to and target correctly 1`] = `"<a href="/about" rel="noopener noreferrer" target="_blank" class="outline-primary/25 focus-visible:outline-3 rounded-md text-muted hover:text-default transition-colors"></a>"`;
 
+exports[`Link > renders with internal to object and target correctly 1`] = `"<a href="/about" rel="noopener noreferrer" target="_blank" class="outline-primary/25 focus-visible:outline-3 rounded-md text-muted hover:text-default transition-colors"></a>"`;
+
 exports[`Link > renders with raw activeClass correctly 1`] = `"<button type="button" class="text-highlighted"></button>"`;
 
 exports[`Link > renders with raw correctly 1`] = `"<button type="button" class=""></button>"`;

@@ -208,8 +208,8 @@ const rel = computed(() => {
     return props.rel || null
   }
 
-  // Default to "noopener noreferrer" for external links
-  if (!isInternalLink.value) {
+  // Default to "noopener noreferrer" for external links or links with target
+  if (!isInternalLink.value || (props.target && props.target !== '_self')) {
     return 'noopener noreferrer'
   }
 
