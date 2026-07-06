@@ -157,7 +157,7 @@ const vReveal = {
             label="v2.0 — Now with predictive alerting"
             color="neutral"
             variant="soft"
-            class="rounded-full px-3 py-1.5 gap-1.5 bg-elevated/50 backdrop-blur"
+            class="rounded-full px-3 py-1.5 gap-1.5 bg-white/5 backdrop-blur"
           >
             <template #leading>
               <UChip inset standalone :ui="{ base: 'animate-pulse ring-0' }" />
@@ -182,7 +182,7 @@ const vReveal = {
 
       <template #links>
         <div class="landing-enter flex flex-wrap justify-center gap-3" style="animation-delay: 650ms">
-          <UButton label="Start for free" size="xl" class="landing-btn-glow" />
+          <UButton label="Start for free" variant="solid" size="xl" class="landing-btn-glow" />
           <UButton label="View demo" color="neutral" variant="soft" size="xl" />
         </div>
       </template>
@@ -225,7 +225,7 @@ const vReveal = {
       :ui="{
         root: 'py-24 sm:py-32',
         container: 'max-w-5xl',
-        headline: 'font-mono font-medium text-xs text-primary uppercase tracking-[0.12em]',
+        headline: 'text-center font-mono font-medium text-xs text-primary uppercase tracking-[0.12em]',
         title: 'max-w-lg mx-auto',
         description: 'max-w-md mx-auto text-dimmed'
       }"
@@ -267,7 +267,7 @@ const vReveal = {
       :ui="{
         root: 'py-24 sm:py-32',
         container: 'max-w-5xl',
-        headline: 'font-mono font-medium text-xs text-primary uppercase tracking-[0.12em]',
+        headline: 'text-center font-mono font-medium text-xs text-primary uppercase tracking-[0.12em]',
         title: 'max-w-lg mx-auto',
         description: 'max-w-md mx-auto text-dimmed'
       }"
@@ -328,7 +328,7 @@ const vReveal = {
 
       <template #links>
         <div v-reveal="200" class="flex flex-col items-center justify-center gap-6">
-          <UButton label="Start for free" size="xl" class="landing-btn-glow" />
+          <UButton label="Start for free" variant="solid" size="xl" class="landing-btn-glow" />
 
           <UButton
             label="npx telemetry init"
