@@ -83,7 +83,7 @@ let timeout: ReturnType<typeof setTimeout> | undefined
 watch([() => colorMode.value, () => ({ ...appConfig.ui.colors }), cssVariables, customColors], () => {
   clearTimeout(timeout)
   timeout = setTimeout(compute, 80)
-}, { deep: true })
+})
 
 onMounted(compute)
 onUnmounted(() => clearTimeout(timeout))

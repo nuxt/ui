@@ -1,6 +1,7 @@
 <script setup lang="ts">
 const { copy: copyCSS, copied: copiedCSS } = useClipboard()
 const { copy: copyConfig, copied: copiedConfig } = useClipboard()
+const { track } = useAnalytics()
 
 const { exportCSS, exportConfig, configLabel, hasCSSChanges, hasConfigChanges } = useTheme()
 
@@ -57,7 +58,7 @@ watch(open, (isOpen) => {
                 variant="ghost"
                 :icon="copiedCSS ? 'i-lucide-copy-check' : 'i-lucide-copy'"
                 aria-label="Copy CSS"
-                @click="copyCSS(css)"
+                @click="copyCSS(css); track('Theme Exported', { type: 'CSS' })"
               />
             </div>
 
@@ -76,7 +77,7 @@ watch(open, (isOpen) => {
                 variant="ghost"
                 :icon="copiedConfig ? 'i-lucide-copy-check' : 'i-lucide-copy'"
                 aria-label="Copy config"
-                @click="copyConfig(config)"
+                @click="copyConfig(config); track('Theme Exported', { type: 'Config' })"
               />
             </div>
 

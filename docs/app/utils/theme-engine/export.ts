@@ -71,11 +71,13 @@ export function generateCSS(doc: ThemeDoc): string {
       if (key.startsWith('--studio-')) Reflect.deleteProperty(style[mode], key)
     }
   }
+  // Any shadow treatment defaults the shared color when none was chosen.
+  const anyShadow = (doc.style?.shadow && doc.style.shadow !== 'none') || (doc.style?.innerShadow && doc.style.innerShadow !== 'none')
+  if (anyShadow && !style.light['--ui-shadow-color']) {
+    style.light['--ui-shadow-color'] = 'var(--ui-color-neutral-950)'
+    style.dark['--ui-shadow-color'] = 'black'
+  }
   if (doc.style?.shadow === 'hard') {
-    if (!style.light['--ui-shadow-color']) {
-      style.light['--ui-shadow-color'] = 'var(--ui-color-neutral-950)'
-      style.dark['--ui-shadow-color'] = 'black'
-    }
     // The hard-shadow classes reference the geometry variables — a
     // standalone export must define them even at default values.
     if (!style.light['--ui-shadow-offset-x']) {
@@ -91,18 +93,10 @@ export function generateCSS(doc: ThemeDoc): string {
     style.light['--ui-shadow-hard-half'] = 'calc(var(--ui-shadow-offset-x) / 2) calc(var(--ui-shadow-offset-y) / 2) var(--ui-shadow-blur) var(--ui-shadow-spread) var(--ui-shadow-final-hard)'
   }
   if (doc.style?.shadow && doc.style.shadow !== 'none') {
-    if (doc.style.shadow === 'soft' && !style.light['--ui-shadow-color']) {
-      style.light['--ui-shadow-color'] = 'var(--ui-color-neutral-950)'
-      style.dark['--ui-shadow-color'] = 'black'
-    }
     style.light['--ui-shadow-final-hard'] = 'color-mix(in oklab, var(--ui-shadow-color) var(--ui-shadow-opacity, 100%), transparent)'
     style.light['--ui-shadow-final-soft'] = 'color-mix(in oklab, var(--ui-shadow-color) var(--ui-shadow-opacity, 25%), transparent)'
   }
   if (doc.style?.innerShadow && doc.style.innerShadow !== 'none') {
-    if (!style.light['--ui-shadow-color']) {
-      style.light['--ui-shadow-color'] = 'var(--ui-color-neutral-950)'
-      style.dark['--ui-shadow-color'] = 'black'
-    }
     if (doc.style.innerShadow === 'hard') {
       if (!style.light['--ui-inner-shadow-offset-x']) {
         style.light['--ui-inner-shadow-offset-x'] = '0px'

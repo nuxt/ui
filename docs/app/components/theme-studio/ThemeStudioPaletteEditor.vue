@@ -71,16 +71,10 @@ const offsetAmount = ref(100)
 /** Fitted base the style offsets transform from, so they never compound. */
 let seedBase: PaletteCurveParams = structuredClone(toRaw(params))
 
-// Set while OUR throttled apply writes paletteParams, so the echo watcher
-// below can tell self-originated updates from external ones (swatch clicks).
-let applying = false
-
 // Throttled (not debounced) so the theme streams live while dragging a
 // curve — the trailing call catches the release position.
 const throttledApply = useThrottleFn(() => {
-  applying = true
   setPaletteFromCurve(props.alias, structuredClone(toRaw(params)))
-  applying = false
 }, 60, true, true)
 
 // Programmatic writes into `params` (seeding, external sync) must not
@@ -134,10 +128,11 @@ function seedFromCurrent() {
   }
 }
 
-// Swatch clicks while active refit via the studio — reflect them here.
-// Self-originated writes (our own throttled applies) are skipped outright.
+// Swatch clicks while active refit via the studio — reflect them here. The
+// snapshot comparison is what breaks the echo loop for our own throttled
+// applies (the callback runs queued, after any sync flag would have reset).
 watch(() => paletteParams.value[props.alias], (value) => {
-  if (!applying && value && 'lightness' in value && JSON.stringify(value) !== JSON.stringify(toRaw(params))) {
+  if (value && 'lightness' in value && JSON.stringify(value) !== JSON.stringify(toRaw(params))) {
     seed(value as PaletteCurveParams)
   }
 })

@@ -655,17 +655,6 @@ export function mergeUi(
 }
 
 /** Every component key a style bundle may touch — cleared before re-applying. */
-// Components that only ever carried retired width fragments — kept in the
-// clearing set so overrides persisted by older sessions still get swept.
-const RETIRED_WIDTH_KEYS = ['separator', 'header', 'accordion', 'table', 'dashboardSidebar', 'dashboardNavbar', 'dashboardToolbar', 'dashboardPanel', 'navigationMenu', 'pageHeader', 'chatPalette', 'commandPalette', 'fileUpload', 'checkboxGroup', 'listbox', 'tree', 'changelogVersion', 'pricingTable', 'pricingPlan', 'checkbox', 'radioGroup']
-
-export const STYLE_COMPONENT_KEYS = [...new Set([
-  ...Object.values(SHADOW_FRAGMENTS).flatMap(fragments => Object.keys(fragments)),
-  ...Object.keys(FRAME_FRAGMENTS),
-  ...Object.keys(FRAME_COLOR_FRAGMENTS),
-  ...RETIRED_WIDTH_KEYS
-])]
-
 /**
  * The style axes that mean "leave it alone": no shadow (or 'none'), border
  * 'default', and nothing else set. Border 'none' is a REAL choice (strip

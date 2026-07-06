@@ -159,6 +159,21 @@ function parseDeclaration(result: ParsedCSS, selector: string, prop: string, val
  * them) and work backwards to the StyleOptions that would emit them.
  * What remains in light/dark afterwards is plain token overrides.
  */
+/**
+ * Reconstruct a color choice (named value, or a per-mode neutral/primary
+ * ramp shade) from a pair of emitted per-mode values.
+ */
+function matchColorChoice(value: { light?: string, dark?: string }, table: Record<string, { light: string, dark: string }>): { color: string, shade?: { light: number, dark: number } } | undefined {
+  const named = Object.keys(table).find(key => table[key]!.light === value.light && table[key]!.dark === value.dark)
+  if (named) return { color: named }
+  const lightRef = parseUiColorRef(value.light)
+  const darkRef = parseUiColorRef(value.dark)
+  if (lightRef && darkRef && lightRef.alias === darkRef.alias && (lightRef.alias === 'neutral' || lightRef.alias === 'primary')) {
+    return { color: lightRef.alias === 'primary' ? 'primary-shade' : 'shade', shade: { light: lightRef.shade, dark: darkRef.shade } }
+  }
+  return undefined
+}
+
 function extractStyle(light: Record<string, string>, dark: Record<string, string>): StyleOptions {
   const style: StyleOptions = {}
 
@@ -239,43 +254,28 @@ function extractStyle(light: Record<string, string>, dark: Record<string, string
     // The export force-emits neutral-950/black when no color was chosen.
     const forced = shadowColor.light === 'var(--ui-color-neutral-950)' && shadowColor.dark === 'black'
     if (!forced) {
-      const named = (Object.keys(SHADOW_COLOR_VALUES) as Array<keyof typeof SHADOW_COLOR_VALUES>)
-        .find(key => SHADOW_COLOR_VALUES[key].light === shadowColor.light && SHADOW_COLOR_VALUES[key].dark === shadowColor.dark)
-      const lightRef = parseUiColorRef(shadowColor.light)
-      const darkRef = parseUiColorRef(shadowColor.dark)
-      if (named) {
-        style.shadowColor = named
-      } else if (lightRef && darkRef && lightRef.alias === darkRef.alias && (lightRef.alias === 'neutral' || lightRef.alias === 'primary')) {
-        style.shadowColor = lightRef.alias === 'primary' ? 'primary-shade' : 'shade'
-        style.shadowShade = { light: lightRef.shade, dark: darkRef.shade }
+      const match = matchColorChoice(shadowColor, SHADOW_COLOR_VALUES)
+      if (match) {
+        style.shadowColor = match.color as StyleOptions['shadowColor']
+        if (match.shade) style.shadowShade = match.shade
       }
     }
   }
 
   if (innerColor.light !== undefined || innerColor.dark !== undefined) {
     // Never force-emitted — any presence is a real choice.
-    const named = (Object.keys(SHADOW_COLOR_VALUES) as Array<keyof typeof SHADOW_COLOR_VALUES>)
-      .find(key => SHADOW_COLOR_VALUES[key].light === innerColor.light && SHADOW_COLOR_VALUES[key].dark === innerColor.dark)
-    const lightRef = parseUiColorRef(innerColor.light)
-    const darkRef = parseUiColorRef(innerColor.dark)
-    if (named) {
-      style.innerShadowColor = named
-    } else if (lightRef && darkRef && lightRef.alias === darkRef.alias && (lightRef.alias === 'neutral' || lightRef.alias === 'primary')) {
-      style.innerShadowColor = lightRef.alias === 'primary' ? 'primary-shade' : 'shade'
-      style.innerShadowShade = { light: lightRef.shade, dark: darkRef.shade }
+    const match = matchColorChoice(innerColor, SHADOW_COLOR_VALUES)
+    if (match) {
+      style.innerShadowColor = match.color as StyleOptions['innerShadowColor']
+      if (match.shade) style.innerShadowShade = match.shade
     }
   }
 
   if (frameColor.light !== undefined || frameColor.dark !== undefined) {
-    const named = (Object.keys(FRAME_COLOR_VALUES) as Array<keyof typeof FRAME_COLOR_VALUES>)
-      .find(key => FRAME_COLOR_VALUES[key].light === frameColor.light && FRAME_COLOR_VALUES[key].dark === frameColor.dark)
-    const lightRef = parseUiColorRef(frameColor.light)
-    const darkRef = parseUiColorRef(frameColor.dark)
-    if (named) {
-      style.borderColor = named
-    } else if (lightRef && darkRef && lightRef.alias === darkRef.alias && (lightRef.alias === 'neutral' || lightRef.alias === 'primary')) {
-      style.borderColor = lightRef.alias === 'primary' ? 'primary-shade' : 'shade'
-      style.borderShade = { light: lightRef.shade, dark: darkRef.shade }
+    const match = matchColorChoice(frameColor, FRAME_COLOR_VALUES)
+    if (match) {
+      style.borderColor = match.color as StyleOptions['borderColor']
+      if (match.shade) style.borderShade = match.shade
     }
   }
 

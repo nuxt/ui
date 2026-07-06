@@ -4,7 +4,6 @@ defineProps<{
   icon?: string
   chip?: string
   selected?: boolean
-  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | null
 }>()
 
 const slots = defineSlots<{
@@ -14,7 +13,7 @@ const slots = defineSlots<{
 
 <template>
   <UButton
-    :size="size ?? 'md'"
+    size="md"
     color="neutral"
     variant="subtle"
     :active="selected"

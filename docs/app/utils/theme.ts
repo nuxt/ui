@@ -1,5 +1,16 @@
 import lucide from '../../../src/theme/icons'
 
+/** Parse a persisted JSON value, falling back on SSR, absence or corruption. */
+export function readLocalStorage<T>(key: string, fallback: T): T {
+  if (!import.meta.client) return fallback
+  try {
+    const raw = window.localStorage.getItem(key)
+    return raw ? JSON.parse(raw) : fallback
+  } catch {
+    return fallback
+  }
+}
+
 export const themeIcons = {
   lucide,
   phosphor: {

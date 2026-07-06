@@ -1,7 +1,4 @@
 <script setup lang="ts">
-import { resolveAlias, resolveShade } from '../../utils/theme-engine'
-import type { ThemeDoc } from '../../utils/theme-engine'
-
 const colorMode = useColorMode()
 const { track } = useAnalytics()
 
@@ -29,25 +26,7 @@ const {
   resetTheme
 } = useTheme()
 
-const { presets, activePreset, applyPreset, shuffle, studioOpen } = useThemeStudio()
-
-/** The preset's primary + neutral at 500, straight from its own document. */
-function presetSwatches(doc: ThemeDoc): string[] {
-  const primaryColor = doc.blackAsPrimary ? 'black' : resolveShade(doc, resolveAlias(doc, 'primary'), 500)
-  const neutralColor = resolveShade(doc, resolveAlias(doc, 'neutral'), 500)
-  return [primaryColor, neutralColor].filter((color): color is string => !!color)
-}
-
-const presetItems = computed(() => presets.map(preset => ({
-  label: preset.name,
-  icon: preset.icon,
-  type: 'checkbox' as const,
-  checked: activePreset.value === preset.id,
-  swatches: presetSwatches(preset.doc),
-  onSelect: () => applyPreset(preset)
-})))
-
-const presetLabel = computed(() => presets.find(preset => preset.id === activePreset.value)?.name || 'Presets')
+const { studioOpen } = useThemeStudio()
 
 function openStudio() {
   open.value = false
@@ -69,41 +48,7 @@ function openStudio() {
     </template>
 
     <template #content>
-      <div class="flex gap-1.5">
-        <UDropdownMenu :items="presetItems" :content="{ align: 'start' }" class="flex-1 min-w-0" :ui="{ itemTrailing: 'self-center', content: 'w-(--reka-dropdown-menu-trigger-width)' }">
-          <UButton
-            :label="presetLabel"
-            icon="i-lucide-swatch-book"
-            trailing-icon="i-lucide-chevron-down"
-            color="neutral"
-            variant="subtle"
-
-            block
-          />
-
-          <template #item-trailing="{ item }">
-            <span class="inline-flex items-center gap-1 h-full">
-              <span
-                v-for="(swatch, index) in item.swatches"
-                :key="index"
-                class="size-2 rounded-full ring ring-default"
-                :style="{ backgroundColor: swatch }"
-              />
-            </span>
-          </template>
-        </UDropdownMenu>
-
-        <UTooltip text="Random theme">
-          <UButton
-            icon="i-lucide-dices"
-            color="neutral"
-            variant="subtle"
-
-            aria-label="Random theme"
-            @click="shuffle"
-          />
-        </UTooltip>
-      </div>
+      <ThemeStudioPresetMenu />
 
       <UButton
         label="Open Theme Studio"
@@ -130,7 +75,7 @@ function openStudio() {
           />
         </legend>
 
-        <ThemePickerColorMenu alias="primary" class="w-full" />
+        <ThemeStudioColorMenu alias="primary" class="w-full" />
       </fieldset>
 
       <fieldset>
@@ -148,7 +93,7 @@ function openStudio() {
           />
         </legend>
 
-        <ThemePickerColorMenu alias="neutral" class="w-full" />
+        <ThemeStudioColorMenu alias="neutral" class="w-full" />
       </fieldset>
 
       <fieldset>
@@ -167,7 +112,7 @@ function openStudio() {
         </legend>
 
         <UFieldGroup class="w-full">
-          <ThemePickerButton
+          <ThemeStudioPickerButton
             v-for="r in radiuses"
             :key="r"
             :label="String(r)"
@@ -194,7 +139,7 @@ function openStudio() {
         </legend>
 
         <div class="grid grid-cols-3 gap-1">
-          <ThemePickerButton
+          <ThemeStudioPickerButton
             v-for="m in modes"
             :key="m.label"
             v-bind="m"
@@ -218,7 +163,7 @@ function openStudio() {
             label="main.css"
             class="flex-1 text-[11px]"
             :icon="copiedCSS ? 'i-lucide-copy-check' : 'i-lucide-copy'"
-            @click="copyCSS(exportCSS())"
+            @click="copyCSS(exportCSS()); track('Theme Exported', { type: 'CSS' })"
           />
           <UButton
             v-if="hasConfigChanges"
@@ -228,7 +173,7 @@ function openStudio() {
             :label="configLabel"
             :icon="copiedConfig ? 'i-lucide-copy-check' : 'i-lucide-copy'"
             class="flex-1 text-[11px]"
-            @click="copyConfig(exportConfig())"
+            @click="copyConfig(exportConfig()); track('Theme Exported', { type: 'Config' })"
           />
           <UTooltip text="Reset theme">
             <UButton

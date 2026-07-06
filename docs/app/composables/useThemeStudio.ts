@@ -1,16 +1,7 @@
 import colors from 'tailwindcss/colors'
 import { presets, docToSettings, isDefaultTheme, generatePalette, fitPalette, parseCssColor, parseUiColorRef, styleComponents, styleTokens, DEFAULT_COLORS, SHADES, TOKEN_SHADE_TARGETS } from '../utils/theme-engine'
 import type { ThemeDoc, ThemePreset, PaletteCurveParams, StyleOptions, Shade, ColorAlias } from '../utils/theme-engine'
-
-function readLocalStorage<T>(key: string, fallback: T): T {
-  if (!import.meta.client) return fallback
-  try {
-    const raw = window.localStorage.getItem(key)
-    return raw ? JSON.parse(raw) : fallback
-  } catch {
-    return fallback
-  }
-}
+import { readLocalStorage } from '../utils/theme'
 
 export function useThemeStudio() {
   const theme = useTheme()
@@ -44,13 +35,18 @@ export function useThemeStudio() {
 
   // Self-heal: the persisted class bundle is an expansion of `style` frozen
   // at write time — if the generator changed since (new fragment classes),
-  // regenerate it once so stale classes don't outlive their source.
-  if (import.meta.client) {
+  // regenerate it once so stale classes don't outlive their source. Guarded
+  // so the dozens of components calling this composable check only once.
+  const healed = useState('nuxt-ui-style-healed', () => false)
+  if (import.meta.client && !healed.value) {
+    healed.value = true
     const expected = styleComponents(style.value)
     if (JSON.stringify(expected) !== JSON.stringify(readLocalStorage('nuxt-ui-style-ui', {}))) {
       onNuxtReady(() => theme.setStyleUi(expected))
     }
   }
+
+  let trackedAt: number | undefined
 
   function setStyle(options: StyleOptions) {
     const previousStyle = style.value
@@ -78,15 +74,17 @@ export function useThemeStudio() {
     }
     activePreset.value = undefined
 
-    track('Theme Style Changed', {
-      shadow: style.value.shadow || 'none',
-      border: style.value.border || 'default',
-      borderColor: style.value.borderColor || 'default',
-      shadowColor: style.value.shadowColor || 'default'
-    })
+    // Sliders stream through here at drag frequency — one event per burst.
+    if (!trackedAt || Date.now() - trackedAt > 2000) {
+      trackedAt = Date.now()
+      track('Theme Style Changed', {
+        shadow: style.value.shadow || 'none',
+        border: style.value.border || 'default',
+        borderColor: style.value.borderColor || 'default',
+        shadowColor: style.value.shadowColor || 'default'
+      })
+    }
   }
-
-  let trackedAt: number | undefined
 
   function customPaletteName(alias: string) {
     return `custom-${alias}`
@@ -328,10 +326,6 @@ export function useThemeStudio() {
     track('Theme Studio Shuffled')
   }
 
-  function reset() {
-    theme.resetTheme()
-  }
-
   return {
     presets,
     activePreset,
@@ -346,7 +340,6 @@ export function useThemeStudio() {
     clearCustomPalette,
     applyDoc,
     applyPreset,
-    shuffle,
-    reset
+    shuffle
   }
 }

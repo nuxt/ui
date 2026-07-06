@@ -1,20 +1,10 @@
 import { defu } from 'defu'
 import { useLocalStorage } from '@vueuse/core'
-import { themeIcons, cssVariableDefaults } from '../utils/theme'
+import { themeIcons, cssVariableDefaults, readLocalStorage } from '../utils/theme'
 import { generateCSS, generateConfig, mergeUi, isDefaultStyle, DEFAULT_COLORS, THEME_DEFAULTS, LIBRARY_TOKEN_DEFAULTS, CUSTOM_PALETTES } from '../utils/theme-engine'
 import type { ThemeDoc, ThemePalette } from '../utils/theme-engine'
 import { omit } from '#ui/utils'
 import colors from 'tailwindcss/colors'
-
-function readLocalStorage<T>(key: string, fallback: T): T {
-  if (!import.meta.client) return fallback
-  try {
-    const raw = window.localStorage.getItem(key)
-    return raw ? JSON.parse(raw) : fallback
-  } catch {
-    return fallback
-  }
-}
 
 // AI `applyTheme` output is untrusted and ends up concatenated into <style> rules, so
 // only persist values that are plain CSS-safe tokens. This is the single write boundary,
@@ -58,6 +48,16 @@ export function useTheme() {
   const appConfig = useAppConfig()
   const colorMode = useColorMode()
   const { track } = useAnalytics()
+
+  // The scale sliders stream through their setters at drag frequency —
+  // one analytics event per burst is plenty.
+  let trackedAt: number | undefined
+  function trackThrottled(...args: Parameters<typeof track>) {
+    if (!trackedAt || Date.now() - trackedAt > 2000) {
+      trackedAt = Date.now()
+      track(...args)
+    }
+  }
   const { framework } = useFrameworks()
 
   const aiThemeExtras = useState<Record<string, any>>('nuxt-ui-ai-theme', () => readLocalStorage('nuxt-ui-ai-theme', {}))
@@ -78,6 +78,8 @@ export function useTheme() {
     return (colors as any)[neutral]?.[shade] || customColorsData.value[neutral]?.[shade] || CUSTOM_PALETTES[neutral]?.[shade] || (colors as any).slate[shade]
   })
   const cssVariablesData = useState<{ light?: Record<string, string>, dark?: Record<string, string> }>('nuxt-ui-css-variables', () => readLocalStorage('nuxt-ui-css-variables', {}))
+  /** The studio's style axis (it owns writes); read here for currentDoc/export. */
+  const stylePrefs = useState<ThemeDoc['style']>('nuxt-ui-style-prefs', () => readLocalStorage('nuxt-ui-style', {}))
   const _radius = useLocalStorage('nuxt-ui-radius', 0.25)
   const _fontSize = useLocalStorage('nuxt-ui-font-size', 16)
   const _spacing = useLocalStorage('nuxt-ui-spacing', 0.25)
@@ -119,7 +121,7 @@ export function useTheme() {
     },
     set(option) {
       _radius.value = option
-      track('Theme Changed', { setting: 'radius', value: option })
+      trackThrottled('Theme Changed', { setting: 'radius', value: option })
     }
   })
 
@@ -129,7 +131,7 @@ export function useTheme() {
     },
     set(option) {
       _fontSize.value = option
-      track('Theme Changed', { setting: 'fontSize', value: option })
+      trackThrottled('Theme Changed', { setting: 'fontSize', value: option })
     }
   })
 
@@ -139,7 +141,7 @@ export function useTheme() {
     },
     set(option) {
       _spacing.value = option
-      track('Theme Changed', { setting: 'spacing', value: option })
+      trackThrottled('Theme Changed', { setting: 'spacing', value: option })
     }
   })
 
@@ -334,10 +336,10 @@ export function useTheme() {
       doc.components = extras.ui
     }
 
-    // The studio's style prefs. ANY set axis must ride along — a defaults-only
-    // or borderColor-only theme still needs its component expansion and the
-    // classes that reference --ui-frame-color in the export.
-    const style = readLocalStorage<ThemeDoc['style']>('nuxt-ui-style', {})
+    // The studio's style prefs, read from the shared reactive state (the
+    // studio owns writes) so callers watching currentDoc() re-run on style
+    // edits — a raw localStorage read here would be invisible to reactivity.
+    const style = stylePrefs.value
     if (!isDefaultStyle(style)) {
       doc.style = style
     }
@@ -345,15 +347,13 @@ export function useTheme() {
     return doc
   }
 
+  // Pure generation — callers track 'Theme Exported' on the actual copy,
+  // so opening the export modal doesn't inflate the metric.
   function exportCSS(): string {
-    track('Theme Exported', { type: 'CSS' })
-
     return generateCSS(currentDoc())
   }
 
   function exportConfig(): string {
-    track('Theme Exported', { type: 'Config', framework: framework.value })
-
     return generateConfig(currentDoc(), framework.value)
   }
 
@@ -471,8 +471,14 @@ export function useTheme() {
       }
     }
 
-    aiThemeExtras.value = savedExtras
-    window.localStorage.setItem('nuxt-ui-ai-theme', JSON.stringify(savedExtras))
+    // Only rewrite the channel when this call actually touched it — style
+    // sliders and curve drags stream through here and must not re-persist
+    // (or reactively wake) the AI extras every tick.
+    const touchedExtras = settings.ui || colorKeys.some(color => settings[color] && SAFE_NAME.test(settings[color]))
+    if (touchedExtras) {
+      aiThemeExtras.value = savedExtras
+      window.localStorage.setItem('nuxt-ui-ai-theme', JSON.stringify(savedExtras))
+    }
     if (settings.ui) {
       recomposeComponentOverrides(Object.keys(savedExtras.ui || {}))
     }

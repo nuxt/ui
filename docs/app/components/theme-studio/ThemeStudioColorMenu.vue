@@ -76,7 +76,7 @@ function isSelected(color: string) {
           </p>
 
           <div class="grid grid-cols-3 gap-1">
-            <ThemePickerButton
+            <ThemeStudioPickerButton
               v-if="alias === 'primary' && index === 0"
               label="Black"
               :selected="blackAsPrimary"
@@ -85,9 +85,9 @@ function isSelected(color: string) {
               <template #leading>
                 <span class="inline-block size-2 rounded-full bg-black dark:bg-white" />
               </template>
-            </ThemePickerButton>
+            </ThemeStudioPickerButton>
 
-            <ThemePickerButton
+            <ThemeStudioPickerButton
               v-for="color in section.colors"
               :key="color"
               :label="color"

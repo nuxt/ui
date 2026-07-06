@@ -1,6 +1,15 @@
 <script setup lang="ts">
 import type { NavigationMenuItem } from '@nuxt/ui'
 
+/** Shared rhythm for the centered content sections. */
+const sectionUi = {
+  root: 'py-24 sm:py-32',
+  container: 'max-w-5xl',
+  headline: 'text-center font-mono font-medium text-xs text-primary uppercase tracking-[0.12em]',
+  title: 'max-w-lg mx-auto',
+  description: 'max-w-md mx-auto text-dimmed'
+}
+
 const navItems: NavigationMenuItem[] = [
   { label: 'Features' },
   { label: 'Metrics' }
@@ -84,35 +93,28 @@ const metrics = [
 
 const footerLinks = ['Docs', 'GitHub', 'Twitter', 'Status', 'Privacy']
 
-const copied = ref(false)
-let copyTimeout: ReturnType<typeof setTimeout> | undefined
-
-function copyCommand() {
-  navigator.clipboard?.writeText('npx telemetry init')
-  copied.value = true
-  clearTimeout(copyTimeout)
-  copyTimeout = setTimeout(() => {
-    copied.value = false
-  }, 2000)
-}
-
-onUnmounted(() => clearTimeout(copyTimeout))
+const { copy: copyCommand, copied } = useClipboard()
 
 /** Fade-and-rise elements into view on scroll, like the template's `whileInView` motion. */
 const vReveal = {
-  mounted(el: HTMLElement, binding: { value?: number }) {
+  mounted(el: HTMLElement & { _reveal?: IntersectionObserver }, binding: { value?: number }) {
     el.classList.add('landing-reveal')
     if (binding.value) {
       el.style.transitionDelay = `${binding.value}ms`
     }
 
-    const observer = new IntersectionObserver(([entry]) => {
+    el._reveal = new IntersectionObserver(([entry]) => {
       if (entry?.isIntersecting) {
         el.classList.add('landing-revealed')
-        observer.disconnect()
+        el._reveal?.disconnect()
       }
     }, { threshold: 0.3 })
-    observer.observe(el)
+    el._reveal.observe(el)
+  },
+  // below-the-fold elements never intersect when the user switches views —
+  // without this their observers outlive the DOM
+  unmounted(el: HTMLElement & { _reveal?: IntersectionObserver }) {
+    el._reveal?.disconnect()
   }
 }
 </script>
@@ -222,13 +224,7 @@ const vReveal = {
 
     <!-- Features -->
     <UPageSection
-      :ui="{
-        root: 'py-24 sm:py-32',
-        container: 'max-w-5xl',
-        headline: 'text-center font-mono font-medium text-xs text-primary uppercase tracking-[0.12em]',
-        title: 'max-w-lg mx-auto',
-        description: 'max-w-md mx-auto text-dimmed'
-      }"
+      :ui="sectionUi"
     >
       <template #headline>
         <span v-reveal class="inline-block">Capabilities</span>
@@ -264,13 +260,7 @@ const vReveal = {
 
     <!-- Metrics -->
     <UPageSection
-      :ui="{
-        root: 'py-24 sm:py-32',
-        container: 'max-w-5xl',
-        headline: 'text-center font-mono font-medium text-xs text-primary uppercase tracking-[0.12em]',
-        title: 'max-w-lg mx-auto',
-        description: 'max-w-md mx-auto text-dimmed'
-      }"
+      :ui="sectionUi"
     >
       <template #headline>
         <span v-reveal class="inline-block">By the numbers</span>
@@ -338,7 +328,7 @@ const vReveal = {
             size="xl"
             class="font-mono font-light text-toned gap-4"
             :ui="{ trailingIcon: 'size-5' }"
-            @click="copyCommand"
+            @click="copyCommand('npx telemetry init')"
           />
         </div>
       </template>

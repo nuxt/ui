@@ -45,7 +45,7 @@ function toggleChat() {
         />
       </UTooltip>
 
-      <ThemePicker />
+      <ThemeStudioPicker />
 
       <ThemeStudioModal />
 

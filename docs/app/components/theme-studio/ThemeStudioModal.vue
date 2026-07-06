@@ -2,8 +2,8 @@
 import type { ThemeDoc } from '../../utils/theme-engine'
 
 const { track } = useAnalytics()
-const { reset, style, applyDoc, studioOpen: open } = useThemeStudio()
-const { modes, mode, currentDoc } = useTheme()
+const { style, applyDoc, studioOpen: open } = useThemeStudio()
+const { modes, mode, currentDoc, resetTheme } = useTheme()
 const colorMode = useColorMode()
 
 const route = useRoute()
@@ -30,7 +30,7 @@ onMounted(() => {
 const past = ref<ThemeDoc[]>([])
 const future = ref<ThemeDoc[]>([])
 let lastSnapshot = ''
-let suppressUntil = 0
+let pendingRestore = false
 
 onMounted(() => {
   lastSnapshot = JSON.stringify(currentDoc())
@@ -41,12 +41,14 @@ watch(() => (mounted.value ? JSON.stringify(currentDoc()) : undefined), (snapsho
   if (!snapshot) return
   clearTimeout(captureTimeout)
   captureTimeout = setTimeout(() => {
-    if (snapshot === lastSnapshot) return
-    if (Date.now() < suppressUntil) {
-      // our own undo/redo restore — realign without recording
+    if (pendingRestore) {
+      // the first settle after our own undo/redo restore — realign without
+      // recording, however long the flush took
+      pendingRestore = false
       lastSnapshot = snapshot
       return
     }
+    if (snapshot === lastSnapshot) return
     past.value.push(JSON.parse(lastSnapshot))
     if (past.value.length > 50) past.value.shift()
     future.value = []
@@ -55,9 +57,10 @@ watch(() => (mounted.value ? JSON.stringify(currentDoc()) : undefined), (snapsho
 })
 
 function restore(doc: ThemeDoc) {
-  suppressUntil = Date.now() + 800
+  pendingRestore = true
   applyDoc(doc)
-  lastSnapshot = JSON.stringify(doc)
+  // realignment happens on the next capture, from currentDoc() itself —
+  // the applied doc may re-serialize differently than it round-trips
 }
 
 function undo() {
@@ -199,7 +202,7 @@ const viewTabs = [
                 variant="outline"
                 size="sm"
                 aria-label="Reset theme"
-                @click="reset"
+                @click="resetTheme"
               />
             </UTooltip>
           </template>
