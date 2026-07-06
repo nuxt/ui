@@ -87,8 +87,7 @@ const viewTabs = [
               :items="viewTabs"
               :content="false"
               size="xs"
-              color="neutral"
-              :ui="{ trigger: 'text-[11px]' }"
+              color="primary"
             />
 
             <span class="flex-1" />
