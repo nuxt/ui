@@ -131,23 +131,23 @@ function showToast() {
           :color="color"
           :variant="variant"
           :label="variant"
-          size="sm"
+
           class="capitalize"
         />
       </div>
 
       <div class="flex flex-wrap items-center gap-2">
-        <UButton icon="i-lucide-plus" size="sm" label="New item" />
+        <UButton icon="i-lucide-plus" label="New item" />
         <UButton
           icon="i-lucide-settings"
-          size="sm"
+
           color="neutral"
           variant="outline"
           square
           aria-label="Settings"
         />
-        <UButton size="sm" color="neutral" variant="ghost" label="Cancel" />
-        <UButton size="sm" loading label="Saving" />
+        <UButton color="neutral" variant="ghost" label="Cancel" />
+        <UButton loading label="Saving" />
       </div>
     </UCard>
 

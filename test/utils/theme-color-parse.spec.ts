@@ -25,6 +25,11 @@ describe('parseCssColor', () => {
     expect(parseCssColor('rgb(29 185 84)')).toBe('oklch(68.9% 0.187 148.921)')
   })
 
+  it('understands the white/black keywords the library tokens use', () => {
+    expect(parseCssColor('white')).toBe('oklch(100% 0 0)')
+    expect(parseCssColor('black')).toBe('oklch(0% 0 0)')
+  })
+
   it('returns undefined for unknown formats', () => {
     expect(parseCssColor('hotpink')).toBeUndefined()
     expect(parseCssColor('var(--color-red-500)')).toBeUndefined()

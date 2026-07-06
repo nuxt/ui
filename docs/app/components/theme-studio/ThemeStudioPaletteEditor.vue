@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useThrottleFn, watchIgnorable } from '@vueuse/core'
-import { SHADES, CURVE_DEFAULTS, NEUTRAL_CURVE_DEFAULTS, generatePalette, fitPalette, contrastRatio } from '../../utils/theme-engine'
+import { SHADES, CURVE_DEFAULTS, NEUTRAL_CURVE_DEFAULTS, generatePalette, fitPalette } from '../../utils/theme-engine'
 import type { PaletteCurveParams, ColorAlias } from '../../utils/theme-engine'
 
 const props = defineProps<{
@@ -35,9 +35,6 @@ const active = computed(() => isCustomPalette(props.alias))
 
 const shades = computed(() => generatePalette(params))
 const stopColors = computed(() => SHADES.map(shade => shades.value[shade]))
-
-// White text on shade 500 is what solid buttons render — the pair worth watching.
-const contrast = computed(() => contrastRatio(shades.value[500]!, '#FFFFFF'))
 
 /**
  * Every axis is a fixed 1:1 window — the full physical range fits the
@@ -225,7 +222,7 @@ function remove() {
 </script>
 
 <template>
-  <div v-if="open" class="mt-1.5 flex flex-col gap-2.5 pb-1">
+  <div v-if="open" class=" flex flex-col gap-2.5 pb-1">
     <UTabs
       v-model="tab"
       :items="tabs"
@@ -234,30 +231,21 @@ function remove() {
       color="neutral"
     />
 
-    <ThemeStudioCurveEditor
-      v-model="params[tab]"
-      :y-min="windows[tab].min"
-      :y-max="windows[tab].max"
-      :stop-colors="stopColors"
-      @drag-start="onDragStart"
-      @drag-end="onDragEnd"
-    />
+    <div>
+      <ThemeStudioCurveEditor
+        v-model="params[tab]"
+        :y-min="windows[tab].min"
+        :y-max="windows[tab].max"
+        :stop-colors="stopColors"
+        @drag-start="onDragStart"
+        @drag-end="onDragEnd"
+      />
 
-    <div class="flex items-center gap-2">
-      <div class="flex flex-1 rounded-sm overflow-hidden ring ring-default">
+      <div class="flex rounded-b-sm overflow-hidden ring ring-default">
         <UTooltip v-for="shade in SHADES" :key="shade" :text="`${shade} · ${shades[shade]}`">
-          <div class="h-5 flex-1" :style="{ backgroundColor: shades[shade] }" />
+          <div class="aspect-square flex-1" :style="{ backgroundColor: shades[shade] }" />
         </UTooltip>
       </div>
-
-      <UTooltip :text="`White on 500: ${contrast.toFixed(1)}:1`">
-        <UBadge
-          :label="contrast >= 4.5 ? 'AA' : contrast >= 3 ? 'AA18' : 'Low'"
-          :color="contrast >= 4.5 ? 'success' : contrast >= 3 ? 'warning' : 'error'"
-          variant="subtle"
-          size="sm"
-        />
-      </UTooltip>
     </div>
 
     <div class="flex items-center gap-1.5">

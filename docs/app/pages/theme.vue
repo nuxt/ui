@@ -48,7 +48,8 @@ const viewTabs = [
   { label: 'Dashboard', icon: 'i-lucide-layout-dashboard', value: 'dashboard' },
   { label: 'Chat', icon: 'i-lucide-message-circle', value: 'chat' },
   { label: 'SaaS', icon: 'i-lucide-rocket', value: 'saas' },
-  { label: 'Landing', icon: 'i-lucide-panels-top-left', value: 'landing' }
+  { label: 'Landing', icon: 'i-lucide-panels-top-left', value: 'landing' },
+  { label: 'A11y', icon: 'i-lucide-accessibility', value: 'a11y' }
 ]
 </script>
 
@@ -122,6 +123,7 @@ const viewTabs = [
         <ThemeStudioViewChat v-else-if="view === 'chat'" />
         <ThemeStudioViewSaas v-else-if="view === 'saas'" />
         <ThemeStudioViewLanding v-else-if="view === 'landing'" />
+        <ThemeStudioViewA11y v-else-if="view === 'a11y'" />
       </div>
     </div>
   </main>

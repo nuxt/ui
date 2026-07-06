@@ -18,7 +18,7 @@ const emit = defineEmits<{
 }>()
 
 const W = 200
-const H = 120
+const H = 180
 const PAD = 10
 
 function toX(x: number) {
@@ -130,7 +130,7 @@ function onPointerUp(event: PointerEvent) {
     ref="svgRef"
     data-curve-editor
     :viewBox="`0 0 ${W} ${H}`"
-    class="w-full rounded-sm ring ring-default bg-elevated/30 touch-none select-none cursor-crosshair"
+    class="w-full rounded-t-sm ring ring-default bg-elevated/30 touch-none select-none cursor-crosshair"
     @pointerdown="onPointerDown"
     @pointermove="onPointerMove"
     @pointerup="onPointerUp"

@@ -127,6 +127,10 @@ export function formatOklch(color: Oklch): string {
 export function parseColor(value: string): Oklch | undefined {
   const input = value.trim()
 
+  // the two keywords the theme system actually uses (library token defaults)
+  if (input === 'white') return { l: 1, c: 0, h: 0 }
+  if (input === 'black') return { l: 0, c: 0, h: 0 }
+
   if (input.startsWith('#')) {
     return rgbToOklch(hexToRgb(input))
   }
