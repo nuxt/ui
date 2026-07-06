@@ -6,6 +6,13 @@
 @theme static {
   --container-8xl: 90rem;
 
+  /* Every default-width border/ring/divide utility in the app compiles to
+     this var — the studio's width slider repaints the whole site through
+     one custom property instead of per-component class fragments. Exports
+     do the same thing statically (@theme --default-border-width). */
+  --default-border-width: var(--studio-border-width, 1px);
+  --default-ring-width: var(--studio-border-width, 1px);
+
   /* Studio extras: custom neutrals (sand, sage, ash) and primaries
      (cocoa, marine) beyond the stock tailwind palettes. */
   --color-sand-50: oklch(98% 0.006 84.579);
