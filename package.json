@@ -162,7 +162,7 @@
     "@vueuse/core": "^14.3.0",
     "@vueuse/integrations": "^14.3.0",
     "@vueuse/shared": "^14.3.0",
-    "colortranslator": "^5.0.0",
+    "colortranslator": "^6.1.1",
     "consola": "^3.4.2",
     "defu": "^6.1.7",
     "embla-carousel-auto-height": "^8.6.0",

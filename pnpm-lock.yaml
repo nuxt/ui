@@ -129,8 +129,8 @@ importers:
         specifier: ^14.3.0
         version: 14.3.0(vue@3.5.39(typescript@6.0.3))
       colortranslator:
-        specifier: ^5.0.0
-        version: 5.0.0
+        specifier: ^6.1.1
+        version: 6.1.1
       consola:
         specifier: ^3.4.2
         version: 3.4.2
@@ -4579,8 +4579,8 @@ packages:
   colorjs.io@0.6.1:
     resolution: {integrity: sha512-8lyR2wHzuIykCpqHKgluGsqQi5iDm3/a2IgP2GBZrasn2sBRkE4NOGsglZxWLs/jZQoNkmA/KM/8NV16rLUdBg==}
 
-  colortranslator@5.0.0:
-    resolution: {integrity: sha512-Z3UPUKasUVDFCDYAjP2fmlVRf1jFHJv1izAmPjiOa0OCIw1W7iC8PZ2GsoDa8uZv+mKyWopxxStT9q05+27h7w==}
+  colortranslator@6.1.1:
+    resolution: {integrity: sha512-SVrXoxIgWm+KZrJgTuV486zKbmjpKX3mt9/mUVL2QV9I5Qw4ItwP0XR6c63EQU2ecHkSgDqJPVPnQSPrzDOteA==}
 
   comark@0.4.0:
     resolution: {integrity: sha512-s+wZc9FDgxJDxS3oLhDhthuc8EFggd7oEQaGKEFSw/UbECEwM3qMgW/T3dk6eoNTuy+PNSAyPQtjyKZJfudlbA==}
@@ -13046,7 +13046,7 @@ snapshots:
 
   colorjs.io@0.6.1: {}
 
-  colortranslator@5.0.0: {}
+  colortranslator@6.1.1: {}
 
   comark@0.4.0(shiki@4.3.0):
     dependencies:
