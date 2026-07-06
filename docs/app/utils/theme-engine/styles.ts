@@ -175,9 +175,9 @@ const FLAT_FIELD_VARIANTS = [
 // them). Hard scales mirror the originals: base for field-size surfaces,
 // ×1.5 for panels/overlays, ×0.66 for badge-size ones.
 const SOFT_LG = 'shadow-lg shadow-(color:--ui-shadow-final-soft)'
-const HARD_BASE = 'shadow-[var(--ui-shadow-offset-x)_var(--ui-shadow-offset-y)_var(--ui-shadow-blur)_var(--ui-shadow-spread)_var(--ui-shadow-final-hard)]'
-const HARD_LG = 'shadow-[calc(var(--ui-shadow-offset-x)*1.5)_calc(var(--ui-shadow-offset-y)*1.5)_var(--ui-shadow-blur)_var(--ui-shadow-spread)_var(--ui-shadow-final-hard)]'
-const HARD_SM = 'shadow-[calc(var(--ui-shadow-offset-x)*0.66)_calc(var(--ui-shadow-offset-y)*0.66)_var(--ui-shadow-blur)_var(--ui-shadow-spread)_var(--ui-shadow-final-hard)]'
+const HARD_BASE = 'shadow-(--ui-shadow-hard)'
+const HARD_LG = 'shadow-(--ui-shadow-hard-lg)'
+const HARD_SM = 'shadow-(--ui-shadow-hard-sm)'
 
 const SHADOW_FRAGMENTS: Record<ShadowStyle, Fragments> = {
   none: {},
@@ -222,7 +222,7 @@ const SHADOW_FRAGMENTS: Record<ShadowStyle, Fragments> = {
       slots: {
         // Geometry rides CSS variables so the sliders are a variable swap;
         // hover sinks halfway into the shadow via calc, active collapses it.
-        base: 'shadow-[var(--ui-shadow-offset-x)_var(--ui-shadow-offset-y)_var(--ui-shadow-blur)_var(--ui-shadow-spread)_var(--ui-shadow-final-hard)] hover:translate-x-[calc(var(--ui-shadow-offset-x)/2)] hover:translate-y-[calc(var(--ui-shadow-offset-y)/2)] hover:shadow-[calc(var(--ui-shadow-offset-x)/2)_calc(var(--ui-shadow-offset-y)/2)_var(--ui-shadow-blur)_var(--ui-shadow-spread)_var(--ui-shadow-final-hard)] active:translate-x-(--ui-shadow-offset-x) active:translate-y-(--ui-shadow-offset-y) active:shadow-none transition-[box-shadow,translate,background-color]'
+        base: 'shadow-(--ui-shadow-hard) hover:translate-x-[calc(var(--ui-shadow-offset-x)/2)] hover:translate-y-[calc(var(--ui-shadow-offset-y)/2)] hover:shadow-(--ui-shadow-hard-half) active:translate-x-(--ui-shadow-offset-x) active:translate-y-(--ui-shadow-offset-y) active:shadow-none transition-[box-shadow,translate,background-color]'
       },
       // A floating shadow under an invisible box reads as a glitch — ghost
       // and link buttons stay flat, as in the reference neobrutalism kits.
@@ -247,7 +247,7 @@ const SHADOW_FRAGMENTS: Record<ShadowStyle, Fragments> = {
     toast: { slots: { root: HARD_LG } },
     drawer: { slots: { content: HARD_LG } },
     modal: { compoundVariants: [{ fullscreen: false, class: { content: HARD_LG } }] },
-    slideover: { slots: { content: 'sm:shadow-[calc(var(--ui-shadow-offset-x)*1.5)_calc(var(--ui-shadow-offset-y)*1.5)_var(--ui-shadow-blur)_var(--ui-shadow-spread)_var(--ui-shadow-final-hard)]' } }
+    slideover: { slots: { content: 'sm:shadow-(--ui-shadow-hard-lg)' } }
   }
 }
 

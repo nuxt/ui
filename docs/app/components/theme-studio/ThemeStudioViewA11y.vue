@@ -164,7 +164,7 @@ function level(ratio: number): { label: string, color: 'success' | 'warning' | '
               <span class="text-xs tabular-nums font-mono opacity-80" :style="{ color: cell.fg }">
                 {{ cell.ratio.toFixed(1) }}
               </span>
-              <UBadge :label="level(cell.ratio).label" :color="level(cell.ratio).color" variant="subtle" size="sm" />
+              <UBadge :label="level(cell.ratio).label" :color="level(cell.ratio).color" variant="solid" size="sm" />
             </span>
           </div>
         </div>

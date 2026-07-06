@@ -291,13 +291,13 @@ describe('styleComponents', () => {
     const { styleComponents } = await import('../../docs/app/utils/theme-engine')
     const components = styleComponents({ shadow: 'hard', border: 'bold' })
 
-    expect(components.button!.slots!.base).toContain('shadow-[var(--ui-shadow-offset-x)_var(--ui-shadow-offset-y)_var(--ui-shadow-blur)_var(--ui-shadow-spread)_var(--ui-shadow-final-hard)]')
+    expect(components.button!.slots!.base).toContain('shadow-(--ui-shadow-hard)')
     // bold only thickens existing rings: buttons gain no base ring, the
     // outline/subtle compound overrides carry width only
     expect(components.button!.slots!.base).not.toContain('ring')
     expect(components.button!.compoundVariants).toContainEqual({ variant: 'outline', class: 'ring-2' })
     // card rings live at variant level, so bold ships compounds, not slots
-    expect(components.card!.slots?.root ?? '').toContain('var(--ui-shadow-final-hard)]')
+    expect(components.card!.slots?.root ?? '').toContain('shadow-(--ui-shadow-hard-lg)')
     expect(components.card!.compoundVariants).toContainEqual({ variant: 'outline', class: { root: 'ring-2 divide-y-2' } })
   })
 
@@ -321,9 +321,9 @@ describe('styleComponents', () => {
     const merged = mergeUi(styleComponents({ shadow: 'hard' }), { button: { slots: { base: 'rounded-full' } } })
 
     // both the shadow classes and the explicit override survive, explicit last
-    expect(merged.button.slots.base).toContain('var(--ui-shadow-final-hard)]')
+    expect(merged.button.slots.base).toContain('shadow-(--ui-shadow-hard)')
     expect(merged.button.slots.base.endsWith('rounded-full')).toBe(true)
-    expect(merged.card.slots.root).toContain('var(--ui-shadow-final-hard)]')
+    expect(merged.card.slots.root).toContain('shadow-(--ui-shadow-hard-lg)')
   })
 })
 

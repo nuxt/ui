@@ -9,9 +9,6 @@ export function useHeader() {
     label: 'Templates',
     to: '/templates'
   }, {
-    label: 'Theme',
-    to: '/theme'
-  }, {
     label: 'Resources',
     active: route.path.startsWith('/showcase') || route.path.startsWith('/community') || route.path.startsWith('/blog'),
     children: [{
@@ -68,10 +65,6 @@ export function useHeader() {
     label: 'Templates',
     icon: 'i-lucide-panels-top-left',
     to: '/templates'
-  }, {
-    label: 'Theme Studio',
-    icon: 'i-lucide-swatch-book',
-    to: '/theme'
   }, {
     label: 'Showcase',
     icon: 'i-lucide-presentation',

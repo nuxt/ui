@@ -47,6 +47,8 @@ function toggleChat() {
 
       <ThemePicker />
 
+      <ThemeStudioModal />
+
       <UTooltip text="Open on GitHub" class="hidden lg:flex">
         <UButton
           color="neutral"

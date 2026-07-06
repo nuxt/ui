@@ -19,6 +19,9 @@ export function useThemeStudio() {
 
   const activePreset = useState<string | undefined>('nuxt-ui-theme-preset', () => undefined)
 
+  /** The studio modal — one instance mounted in the header, openable from anywhere. */
+  const studioOpen = useState('nuxt-ui-studio-open', () => false)
+
   /**
    * Curve params per alias, kept so the editor stays editable across
    * reloads. useState + explicit persistence (not useLocalStorage) so
@@ -332,6 +335,7 @@ export function useThemeStudio() {
   return {
     presets,
     activePreset,
+    studioOpen,
     style,
     setStyle,
     paletteParams,

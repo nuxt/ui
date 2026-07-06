@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import { resolveAlias, resolveShade } from '../../utils/theme-engine'
+import type { ThemeDoc } from '../../utils/theme-engine'
+
 const colorMode = useColorMode()
 const { track } = useAnalytics()
 
@@ -22,10 +25,6 @@ const {
   setBlackAsPrimary,
   radiuses,
   radius,
-  fonts,
-  font,
-  icon,
-  icons,
   modes,
   mode,
   hasCSSChanges,
@@ -35,10 +34,62 @@ const {
   exportConfig,
   resetTheme
 } = useTheme()
+
+const { presets, activePreset, applyPreset, shuffle, selectPalette, studioOpen } = useThemeStudio()
+
+/** The preset's primary + neutral at 500, straight from its own document. */
+function presetSwatches(doc: ThemeDoc): string[] {
+  const primaryColor = doc.blackAsPrimary ? 'black' : resolveShade(doc, resolveAlias(doc, 'primary'), 500)
+  const neutralColor = resolveShade(doc, resolveAlias(doc, 'neutral'), 500)
+  return [primaryColor, neutralColor].filter((color): color is string => !!color)
+}
+
+const presetItems = computed(() => presets.map(preset => ({
+  label: preset.name,
+  icon: preset.icon,
+  type: 'checkbox' as const,
+  checked: activePreset.value === preset.id,
+  swatches: presetSwatches(preset.doc),
+  onSelect: () => applyPreset(preset)
+})))
+
+const presetLabel = computed(() => presets.find(preset => preset.id === activePreset.value)?.name || 'Presets')
+
+/** Current values may be preset/custom ramps that aren't in the stock lists. */
+const primaryItems = computed(() => [...new Set(['black', ...(blackAsPrimary.value ? [] : [primary.value]), ...primaryColors])])
+const neutralItems = computed(() => [...new Set([neutral.value, ...neutralColors])])
+
+const primaryModel = computed({
+  get: () => blackAsPrimary.value ? 'black' : primary.value,
+  set: (value: string) => {
+    if (value === 'black') {
+      setBlackAsPrimary(true)
+    } else {
+      setBlackAsPrimary(false)
+      selectPalette('primary', value)
+    }
+  }
+})
+
+const neutralModel = computed({
+  get: () => neutral.value,
+  set: (value: string) => selectPalette('neutral', value)
+})
+
+/** Palette name → the css var chip name (tailwind's neutral gray is remapped in docs). */
+function chipColor(name: string): string | undefined {
+  if (name === 'black') return undefined
+  return `var(--color-${name === 'neutral' ? 'old-neutral' : name}-500)`
+}
+
+function openStudio() {
+  open.value = false
+  studioOpen.value = true
+}
 </script>
 
 <template>
-  <UPopover v-model:open="open" :ui="{ content: 'w-72 px-6 py-4 flex flex-col gap-4 overflow-y-auto max-h-[calc(100vh-5rem)]' }">
+  <UPopover v-model:open="open" :ui="{ content: 'w-72 p-4 flex flex-col gap-4 overflow-y-auto max-h-[calc(100vh-5rem)]' }">
     <template #default>
       <UButton
         icon="i-lucide-swatch-book"
@@ -51,6 +102,42 @@ const {
     </template>
 
     <template #content>
+      <div class="flex gap-1.5">
+        <UDropdownMenu :items="presetItems" :content="{ align: 'start' }" class="flex-1 min-w-0">
+          <UButton
+            :label="presetLabel"
+            icon="i-lucide-swatch-book"
+            trailing-icon="i-lucide-chevron-down"
+            color="neutral"
+            variant="subtle"
+            size="sm"
+            block
+          />
+
+          <template #item-trailing="{ item }">
+            <span class="inline-flex items-center gap-1">
+              <span
+                v-for="(swatch, index) in item.swatches"
+                :key="index"
+                class="size-2 rounded-full ring ring-default"
+                :style="{ backgroundColor: swatch }"
+              />
+            </span>
+          </template>
+        </UDropdownMenu>
+
+        <UTooltip text="Random theme">
+          <UButton
+            icon="i-lucide-dices"
+            color="neutral"
+            variant="subtle"
+            size="sm"
+            aria-label="Random theme"
+            @click="shuffle"
+          />
+        </UTooltip>
+      </div>
+
       <fieldset>
         <legend class="text-[11px] leading-none font-semibold mb-2 select-none flex items-center gap-1">
           Primary
@@ -66,31 +153,36 @@ const {
           />
         </legend>
 
-        <div class="grid grid-cols-3 gap-1 -mx-2">
-          <ThemePickerButton
-            label="Black"
-            :selected="blackAsPrimary"
-            @click="setBlackAsPrimary(true)"
-          >
-            <template #leading>
-              <span class="inline-block size-2 rounded-full bg-black dark:bg-white" />
-            </template>
-          </ThemePickerButton>
+        <USelect
+          v-model="primaryModel"
+          :items="primaryItems"
+          size="sm"
+          color="neutral"
+          variant="subtle"
+          class="w-full capitalize"
+          :ui="{ item: 'capitalize' }"
+        >
+          <template #leading>
+            <span
+              class="inline-block size-2 rounded-full"
+              :class="{ 'bg-black dark:bg-white': primaryModel === 'black' }"
+              :style="{ backgroundColor: chipColor(primaryModel) }"
+            />
+          </template>
 
-          <ThemePickerButton
-            v-for="color in primaryColors"
-            :key="color"
-            :label="color"
-            :chip="color"
-            :selected="!blackAsPrimary && primary === color"
-            @click="primary = color"
-          />
-        </div>
+          <template #item-leading="{ item }">
+            <span
+              class="inline-block size-2 rounded-full"
+              :class="{ 'bg-black dark:bg-white': item === 'black' }"
+              :style="{ backgroundColor: chipColor(item as string) }"
+            />
+          </template>
+        </USelect>
       </fieldset>
 
       <fieldset>
         <legend class="text-[11px] leading-none font-semibold mb-2 select-none flex items-center gap-1">
-          Neutral
+          Background
 
           <UButton
             to="/docs/getting-started/theme/css-variables#text"
@@ -103,16 +195,29 @@ const {
           />
         </legend>
 
-        <div class="grid grid-cols-3 gap-1 -mx-2">
-          <ThemePickerButton
-            v-for="color in neutralColors"
-            :key="color"
-            :label="color"
-            :chip="color === 'neutral' ? 'old-neutral' : color"
-            :selected="neutral === color"
-            @click="neutral = color"
-          />
-        </div>
+        <USelect
+          v-model="neutralModel"
+          :items="neutralItems"
+          size="sm"
+          color="neutral"
+          variant="subtle"
+          class="w-full capitalize"
+          :ui="{ item: 'capitalize' }"
+        >
+          <template #leading>
+            <span
+              class="inline-block size-2 rounded-full"
+              :style="{ backgroundColor: chipColor(neutralModel) }"
+            />
+          </template>
+
+          <template #item-leading="{ item }">
+            <span
+              class="inline-block size-2 rounded-full"
+              :style="{ backgroundColor: chipColor(item as string) }"
+            />
+          </template>
+        </USelect>
       </fieldset>
 
       <fieldset>
@@ -130,72 +235,16 @@ const {
           />
         </legend>
 
-        <div class="grid grid-cols-5 gap-1 -mx-2">
+        <UFieldGroup class="w-full">
           <ThemePickerButton
             v-for="r in radiuses"
             :key="r"
             :label="String(r)"
-            class="justify-center px-0"
+            class="grow"
             :selected="radius === r"
             @click="radius = r"
           />
-        </div>
-      </fieldset>
-
-      <fieldset>
-        <legend class="text-[11px] leading-none font-semibold mb-2 select-none flex items-center gap-1">
-          Font
-
-          <UButton
-            to="/docs/getting-started/integrations/fonts"
-            size="xs"
-            color="neutral"
-            variant="link"
-            icon="i-lucide-help-circle"
-            class="p-0 -my-0.5"
-            :ui="{ leadingIcon: 'size-3' }"
-          />
-        </legend>
-
-        <div class="-mx-2">
-          <USelect
-            v-model="font"
-            size="sm"
-            color="neutral"
-            icon="i-lucide-type"
-            :items="fonts"
-            class="w-full ring-default rounded-sm hover:bg-elevated/50 text-[11px] data-[state=open]:bg-elevated/50"
-            :ui="{ trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200' }"
-          />
-        </div>
-      </fieldset>
-
-      <fieldset>
-        <legend class="text-[11px] leading-none font-semibold mb-2 select-none flex items-center gap-1">
-          Icons
-
-          <UButton
-            to="/docs/getting-started/integrations/icons"
-            size="xs"
-            color="neutral"
-            variant="link"
-            icon="i-lucide-help-circle"
-            class="p-0 -my-0.5"
-            :ui="{ leadingIcon: 'size-3' }"
-          />
-        </legend>
-
-        <div class="-mx-2">
-          <USelect
-            v-model="icon"
-            size="sm"
-            color="neutral"
-            :icon="icons.find(i => i.value === icon)?.icon"
-            :items="icons"
-            class="w-full ring-default rounded-sm hover:bg-elevated/50 capitalize text-[11px] data-[state=open]:bg-elevated/50"
-            :ui="{ item: 'capitalize text-[11px]', trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200' }"
-          />
-        </div>
+        </UFieldGroup>
       </fieldset>
 
       <fieldset>
@@ -213,7 +262,7 @@ const {
           />
         </legend>
 
-        <div class="grid grid-cols-3 gap-1 -mx-2">
+        <div class="grid grid-cols-3 gap-1">
           <ThemePickerButton
             v-for="m in modes"
             :key="m.label"
@@ -225,15 +274,13 @@ const {
       </fieldset>
 
       <UButton
-        to="/theme"
         label="Open Theme Studio"
         icon="i-lucide-swatch-book"
         color="neutral"
-        variant="soft"
+        variant="subtle"
         size="sm"
         block
-        class="text-[11px] -mx-2 w-[calc(100%+1rem)]"
-        @click="open = false"
+        @click="openStudio"
       />
 
       <fieldset v-if="hasCSSChanges || hasConfigChanges">
@@ -241,11 +288,11 @@ const {
           Export
         </legend>
 
-        <div class="flex items-center justify-between gap-1 -mx-2">
+        <div class="flex items-center justify-between gap-1">
           <UButton
             v-if="hasCSSChanges"
             color="neutral"
-            variant="soft"
+            variant="subtle"
             size="sm"
             label="main.css"
             class="flex-1 text-[11px]"
@@ -255,7 +302,7 @@ const {
           <UButton
             v-if="hasConfigChanges"
             color="neutral"
-            variant="soft"
+            variant="subtle"
             size="sm"
             :label="configLabel"
             :icon="copiedConfig ? 'i-lucide-copy-check' : 'i-lucide-copy'"
@@ -265,10 +312,10 @@ const {
           <UTooltip text="Reset theme">
             <UButton
               color="neutral"
-              variant="outline"
+              variant="subtle"
               size="sm"
               icon="i-lucide-rotate-ccw"
-              class="ms-auto ring-default hover:bg-elevated/50"
+              class="ms-auto"
               @click="resetTheme"
             />
           </UTooltip>

@@ -84,6 +84,11 @@ export function generateCSS(doc: ThemeDoc): string {
       style.light['--ui-shadow-blur'] = '0px'
       style.light['--ui-shadow-spread'] = '0px'
     }
+    // The shadow-(--ui-shadow-hard*) utilities read these compositions.
+    style.light['--ui-shadow-hard'] = 'var(--ui-shadow-offset-x) var(--ui-shadow-offset-y) var(--ui-shadow-blur) var(--ui-shadow-spread) var(--ui-shadow-final-hard)'
+    style.light['--ui-shadow-hard-lg'] = 'calc(var(--ui-shadow-offset-x) * 1.5) calc(var(--ui-shadow-offset-y) * 1.5) var(--ui-shadow-blur) var(--ui-shadow-spread) var(--ui-shadow-final-hard)'
+    style.light['--ui-shadow-hard-sm'] = 'calc(var(--ui-shadow-offset-x) * 0.66) calc(var(--ui-shadow-offset-y) * 0.66) var(--ui-shadow-blur) var(--ui-shadow-spread) var(--ui-shadow-final-hard)'
+    style.light['--ui-shadow-hard-half'] = 'calc(var(--ui-shadow-offset-x) / 2) calc(var(--ui-shadow-offset-y) / 2) var(--ui-shadow-blur) var(--ui-shadow-spread) var(--ui-shadow-final-hard)'
   }
   if (doc.style?.shadow && doc.style.shadow !== 'none') {
     if (doc.style.shadow === 'soft' && !style.light['--ui-shadow-color']) {

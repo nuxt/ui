@@ -176,6 +176,11 @@ function extractStyle(light: Record<string, string>, dark: Record<string, string
     spread: take('--ui-shadow-spread')
   }
   const finals = { hard: take('--ui-shadow-final-hard'), soft: take('--ui-shadow-final-soft') }
+  // Force-emitted compositions the shadow-(--ui-shadow-hard*) utilities read
+  // — never a choice of their own, so consume them silently.
+  for (const composed of ['--ui-shadow-hard', '--ui-shadow-hard-lg', '--ui-shadow-hard-sm', '--ui-shadow-hard-half']) {
+    take(composed)
+  }
   const shadowColor = take('--ui-shadow-color')
   const frameColor = take('--ui-frame-color')
 
@@ -407,7 +412,7 @@ function detectFrame(components: Record<string, any>): boolean {
 /** Shadow fallback when only a config was pasted (CSS normally decides). */
 function detectShadow(components: Record<string, any>): StyleOptions['shadow'] {
   const slots = Object.values(components).flatMap(component => Object.values(component?.slots || {})) as string[]
-  if (slots.some(classes => classes.includes('var(--ui-shadow-offset-x)'))) return 'hard'
+  if (slots.some(classes => classes.includes('--ui-shadow-hard') || classes.includes('var(--ui-shadow-offset-x)'))) return 'hard'
   if (slots.some(classes => classes.includes('--ui-shadow-final-soft'))) return 'soft'
   return undefined
 }
