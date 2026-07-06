@@ -47,7 +47,7 @@ const messages: UIMessage[] = [{
 
 <template>
   <div class="h-full flex bg-default overflow-hidden">
-    <aside class="hidden md:flex w-56 shrink-0 flex-col gap-2 border-e border-default bg-elevated/25 p-3 min-h-0">
+    <aside class="hidden md:flex w-56 shrink-0 flex-col gap-2 border-e-[length:var(--studio-border-width,1px)] border-default bg-elevated/25 p-3 min-h-0">
       <div class="flex items-center gap-1.5 px-1.5 py-1">
         <UIcon name="i-lucide-message-circle" class="size-5 text-primary shrink-0" />
         <span class="text-lg font-bold text-highlighted">Chat</span>
@@ -71,7 +71,7 @@ const messages: UIMessage[] = [{
     </aside>
 
     <div class="flex-1 flex flex-col min-w-0 min-h-0">
-      <div class="h-12 shrink-0 flex items-center justify-between gap-2 border-b border-default px-4">
+      <div class="h-12 shrink-0 flex items-center justify-between gap-2 border-b-[length:var(--studio-border-width,1px)] border-default px-4">
         <p class="text-sm font-medium text-highlighted truncate">
           Building a dashboard with Nuxt UI
         </p>

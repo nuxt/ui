@@ -369,7 +369,7 @@ const shadowColor = computed({
     >
       <template #colors>
         <div class="flex flex-col gap-2.5 pt-1 pb-4">
-          <fieldset class="rounded-md ring ring-default bg-default p-2.5">
+          <fieldset class="rounded-md ring-[length:var(--studio-border-width,1px)] ring-default bg-default p-2.5">
             <legend class="bg-default text-xs leading-none font-semibold select-none flex items-center gap-1 cursor-pointer">
               <UButton
                 label="Primary"
@@ -466,7 +466,7 @@ const shadowColor = computed({
             </div>
           </fieldset>
 
-          <fieldset class="rounded-md ring ring-default bg-default p-2.5">
+          <fieldset class="rounded-md ring-[length:var(--studio-border-width,1px)] ring-default bg-default p-2.5">
             <legend class="bg-default text-xs leading-none font-semibold select-none flex items-center gap-1 cursor-pointer">
               <UButton
                 label="Background"
@@ -549,7 +549,7 @@ const shadowColor = computed({
             </div>
           </fieldset>
 
-          <fieldset class="rounded-md ring ring-default bg-default p-2.5">
+          <fieldset class="rounded-md ring-[length:var(--studio-border-width,1px)] ring-default bg-default p-2.5">
             <legend class="bg-default text-xs leading-none font-semibold select-none flex items-center gap-1 cursor-pointer">
               <UButton
                 label="Semantic"
@@ -642,7 +642,7 @@ const shadowColor = computed({
 
       <template #style>
         <div class="flex flex-col gap-2.5 pt-1 pb-4">
-          <fieldset class="rounded-md ring ring-default bg-default p-2.5">
+          <fieldset class="rounded-md ring-[length:var(--studio-border-width,1px)] ring-default bg-default p-2.5">
             <legend class="bg-default text-xs leading-none font-semibold select-none flex items-center gap-1 cursor-pointer">
               <UButton
                 label="Radius"
@@ -677,7 +677,7 @@ const shadowColor = computed({
             </div>
           </fieldset>
 
-          <fieldset class="rounded-md ring ring-default bg-default p-2.5">
+          <fieldset class="rounded-md ring-[length:var(--studio-border-width,1px)] ring-default bg-default p-2.5">
             <legend class="bg-default text-xs leading-none font-semibold select-none flex items-center gap-1 cursor-pointer">
               <UButton
                 label="Sizing"
@@ -709,7 +709,7 @@ const shadowColor = computed({
             </div>
           </fieldset>
 
-          <fieldset class="rounded-md ring ring-default bg-default p-2.5">
+          <fieldset class="rounded-md ring-[length:var(--studio-border-width,1px)] ring-default bg-default p-2.5">
             <legend class="bg-default text-xs leading-none font-semibold select-none flex items-center gap-1 cursor-pointer">
               <UButton
                 label="Defaults"
@@ -753,7 +753,7 @@ const shadowColor = computed({
             </div>
           </fieldset>
 
-          <fieldset class="rounded-md ring ring-default bg-default p-2.5">
+          <fieldset class="rounded-md ring-[length:var(--studio-border-width,1px)] ring-default bg-default p-2.5">
             <legend class="bg-default text-xs leading-none font-semibold select-none flex items-center gap-1 cursor-pointer">
               <UButton
                 label="Shadows"
@@ -820,7 +820,7 @@ const shadowColor = computed({
             </div>
           </fieldset>
 
-          <fieldset class="rounded-md ring ring-default bg-default p-2.5">
+          <fieldset class="rounded-md ring-[length:var(--studio-border-width,1px)] ring-default bg-default p-2.5">
             <legend class="bg-default text-xs leading-none font-semibold select-none flex items-center gap-1 cursor-pointer">
               <UButton
                 label="Borders"
@@ -889,7 +889,7 @@ const shadowColor = computed({
 
       <template #tokens>
         <div class="flex flex-col gap-2.5 pt-1 pb-4">
-          <fieldset v-for="group in tokenGroups" :key="group.key" class="rounded-md ring ring-default bg-default p-2.5">
+          <fieldset v-for="group in tokenGroups" :key="group.key" class="rounded-md ring-[length:var(--studio-border-width,1px)] ring-default bg-default p-2.5">
             <legend class="bg-default text-xs leading-none font-semibold select-none flex items-center gap-1 cursor-pointer">
               <UButton
                 :label="group.label"
@@ -921,7 +921,7 @@ const shadowColor = computed({
 
       <template #general>
         <div class="flex flex-col gap-2.5 pt-1 pb-4">
-          <fieldset class="rounded-md ring ring-default bg-default p-2.5">
+          <fieldset class="rounded-md ring-[length:var(--studio-border-width,1px)] ring-default bg-default p-2.5">
             <legend class="bg-default text-xs leading-none font-semibold select-none flex items-center gap-1 cursor-pointer">
               <UButton
                 label="Font"
@@ -956,7 +956,7 @@ const shadowColor = computed({
             </div>
           </fieldset>
 
-          <fieldset class="rounded-md ring ring-default bg-default p-2.5">
+          <fieldset class="rounded-md ring-[length:var(--studio-border-width,1px)] ring-default bg-default p-2.5">
             <legend class="bg-default text-xs leading-none font-semibold select-none flex items-center gap-1 cursor-pointer">
               <UButton
                 label="Icons"

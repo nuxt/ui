@@ -319,8 +319,9 @@ export function useTheme() {
 
     // Diff against the LIBRARY defaults, not the docs baseline — the export
     // must reproduce the preview on top of a stock @nuxt/ui install.
-    const light = Object.fromEntries(Object.entries(cssVariablesData.value.light || {}).filter(([key, val]) => val !== LIBRARY_TOKEN_DEFAULTS.light[key as keyof typeof LIBRARY_TOKEN_DEFAULTS.light]))
-    const dark = Object.fromEntries(Object.entries(cssVariablesData.value.dark || {}).filter(([key, val]) => val !== LIBRARY_TOKEN_DEFAULTS.dark[key as keyof typeof LIBRARY_TOKEN_DEFAULTS.dark]))
+    // Studio-only vars (hand-rolled preview markup) stay out of exports.
+    const light = Object.fromEntries(Object.entries(cssVariablesData.value.light || {}).filter(([key, val]) => !key.startsWith('--studio-') && val !== LIBRARY_TOKEN_DEFAULTS.light[key as keyof typeof LIBRARY_TOKEN_DEFAULTS.light]))
+    const dark = Object.fromEntries(Object.entries(cssVariablesData.value.dark || {}).filter(([key, val]) => !key.startsWith('--studio-') && val !== LIBRARY_TOKEN_DEFAULTS.dark[key as keyof typeof LIBRARY_TOKEN_DEFAULTS.dark]))
     if (Object.keys(light).length || Object.keys(dark).length) {
       doc.tokens = {
         ...(Object.keys(light).length ? { light } : {}),

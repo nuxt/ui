@@ -139,11 +139,12 @@ function parseDeclaration(result: ParsedCSS, selector: string, prop: string, val
   }
 
   if (selector === ':root, .light' || selector === '.light') {
-    result.light[prop] = value
+    // studio-internal vars never carry theme meaning
+    if (!prop.startsWith('--studio-')) result.light[prop] = value
     return true
   }
   if (selector === '.dark') {
-    result.dark[prop] = value
+    if (!prop.startsWith('--studio-')) result.dark[prop] = value
     return true
   }
 

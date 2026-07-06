@@ -265,7 +265,7 @@ const email = ref('')
 
     <USeparator icon="i-lucide-rocket" class="h-px" />
 
-    <UFooter :ui="{ top: 'border-b border-default' }">
+    <UFooter :ui="{ top: 'border-b-[length:var(--studio-border-width,1px)] border-default' }">
       <template #top>
         <UContainer>
           <UFooterColumns :columns="footerColumns">

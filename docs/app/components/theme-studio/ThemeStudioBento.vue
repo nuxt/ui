@@ -281,7 +281,7 @@ function showToast() {
         Table
       </p>
 
-      <UTable :data="invoices" :columns="invoiceColumns" class="border border-default rounded-md" />
+      <UTable :data="invoices" :columns="invoiceColumns" class="border-[length:var(--studio-border-width,1px)] border-default rounded-md" />
     </UCard>
 
     <UCard class="break-inside-avoid" :ui="{ body: 'flex flex-col gap-3' }">

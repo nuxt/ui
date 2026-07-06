@@ -105,7 +105,7 @@ const footerLinks = ['Docs', 'GitHub', 'Twitter', 'Status', 'Privacy']
 <template>
   <div class="h-full overflow-y-auto bg-default">
     <!-- Header -->
-    <header class="sticky top-0 z-10 border-b border-default bg-default/75 backdrop-blur">
+    <header class="sticky top-0 z-10 border-b-[length:var(--studio-border-width,1px)] border-default bg-default/75 backdrop-blur">
       <div class="flex h-14 items-center justify-between gap-3 px-4 sm:px-6">
         <div class="flex items-center gap-1.5">
           <UIcon name="i-lucide-activity" class="size-5 text-primary shrink-0" />
@@ -150,8 +150,8 @@ const footerLinks = ['Docs', 'GitHub', 'Twitter', 'Status', 'Privacy']
       </template>
 
       <div class="max-w-2xl mx-auto w-full">
-        <div class="rounded-xl border border-default bg-elevated/50 overflow-hidden font-mono text-xs sm:text-sm">
-          <div class="flex items-center gap-1.5 border-b border-default px-4 py-2.5">
+        <div class="rounded-xl border-[length:var(--studio-border-width,1px)] border-default bg-elevated/50 overflow-hidden font-mono text-xs sm:text-sm">
+          <div class="flex items-center gap-1.5 border-b-[length:var(--studio-border-width,1px)] border-default px-4 py-2.5">
             <span class="size-2.5 rounded-full bg-error/60" />
             <span class="size-2.5 rounded-full bg-warning/60" />
             <span class="size-2.5 rounded-full bg-success/60" />
@@ -188,8 +188,8 @@ const footerLinks = ['Docs', 'GitHub', 'Twitter', 'Status', 'Privacy']
         description: 'text-dimmed'
       }"
     >
-      <div class="rounded-2xl border border-default bg-default overflow-hidden">
-        <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-px">
+      <div class="rounded-2xl border-[length:var(--studio-border-width,1px)] border-default bg-default overflow-hidden">
+        <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-[var(--studio-border-width,1px)]">
           <UPageCard
             v-for="feature in features"
             :key="feature.title"
@@ -218,8 +218,8 @@ const footerLinks = ['Docs', 'GitHub', 'Twitter', 'Status', 'Privacy']
         description: 'text-dimmed'
       }"
     >
-      <div class="rounded-2xl border border-default bg-default overflow-hidden">
-        <div class="grid grid-cols-2 xl:grid-cols-4 gap-px">
+      <div class="rounded-2xl border-[length:var(--studio-border-width,1px)] border-default bg-default overflow-hidden">
+        <div class="grid grid-cols-2 xl:grid-cols-4 gap-[var(--studio-border-width,1px)]">
           <UPageCard
             v-for="metric in metrics"
             :key="metric.label"
@@ -289,7 +289,7 @@ const footerLinks = ['Docs', 'GitHub', 'Twitter', 'Status', 'Privacy']
     </UPageCTA>
 
     <!-- Footer -->
-    <UFooter :ui="{ container: 'border-t border-default', right: 'gap-x-0 flex-wrap justify-end' }">
+    <UFooter :ui="{ container: 'border-t-[length:var(--studio-border-width,1px)] border-default', right: 'gap-x-0 flex-wrap justify-end' }">
       <template #left>
         <p class="text-sm text-dimmed">
           Built with Nuxt UI • © 2026

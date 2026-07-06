@@ -571,6 +571,15 @@ export function styleTokens(style: StyleOptions): { light: Record<string, string
     dark['--ui-shadow-color'] = value.dark
   }
 
+  // Studio-only: hand-rolled preview markup scales its borders through this
+  // variable (`border-[length:var(--studio-border-width,1px)]`), since the
+  // component fragments can't reach plain divs. Stripped from exports.
+  if (style.border && style.border !== 'default') {
+    const width = style.border === 'none' ? 0 : style.borderWidth ?? BORDER_WIDTH_DEFAULT
+    light['--studio-border-width'] = `${width}px`
+    dark['--studio-border-width'] = `${width}px`
+  }
+
   return { light, dark }
 }
 

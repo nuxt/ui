@@ -64,7 +64,13 @@ export function generateCSS(doc: ThemeDoc): string {
 
   // Color variables behind the style treatment. Hard shadows always need
   // --ui-shadow-color defined; explicit color choices override per mode.
+  // Studio-only variables (hand-rolled preview markup) never export.
   const style = styleTokens(doc.style || {})
+  for (const mode of ['light', 'dark'] as const) {
+    for (const key of Object.keys(style[mode])) {
+      if (key.startsWith('--studio-')) Reflect.deleteProperty(style[mode], key)
+    }
+  }
   if (doc.style?.shadow === 'hard') {
     if (!style.light['--ui-shadow-color']) {
       style.light['--ui-shadow-color'] = 'var(--ui-color-neutral-950)'
