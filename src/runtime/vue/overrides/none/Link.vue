@@ -122,6 +122,8 @@ const isExternal = computed(() => {
   return hasProtocol(href.value, { acceptRelative: true })
 })
 
+const hasTarget = computed(() => !!props.target && props.target !== '_self')
+
 const isLinkActive = computed(() => {
   if (props.active !== undefined) {
     return props.active
@@ -140,16 +142,19 @@ const linkClass = computed(() => {
   return ui.value({ class: props.class, active, disabled: props.disabled })
 })
 
-const linkRel = computed(() => {
+const rel = computed(() => {
+  // If noRel is explicitly set, return null
   if (props.noRel) {
     return null
   }
 
-  if (props.rel) {
-    return props.rel
+  // If rel is explicitly set, use it
+  if (props.rel !== undefined) {
+    return props.rel || null
   }
 
-  if (isExternal.value) {
+  // Default to "noopener noreferrer" for external links or links with target
+  if (isExternal.value || hasTarget.value) {
     return 'noopener noreferrer'
   }
 
@@ -179,7 +184,7 @@ const navigate = handleNavigation
         disabled,
         href,
         navigate,
-        rel: linkRel,
+        rel,
         target: target || (isExternal ? '_blank' : undefined),
         isExternal,
         active: isLinkActive
@@ -195,7 +200,7 @@ const navigate = handleNavigation
       disabled,
       href,
       navigate,
-      rel: linkRel,
+      rel,
       target: target || (isExternal ? '_blank' : undefined),
       isExternal
     }"
