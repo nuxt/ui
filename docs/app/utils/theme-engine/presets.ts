@@ -110,7 +110,7 @@ export const presets: ThemePreset[] = [{
 }, {
   id: 'orchard',
   name: 'Orchard',
-  description: 'Orange on deep sage greens — subtle surfaces, dropped hard shadows.',
+  description: 'Orange on deep sage greens — subtle surfaces, hard shadows dropped below and inset above.',
   icon: 'i-lucide-citrus',
   doc: {
     version: 1,
@@ -149,21 +149,28 @@ export const presets: ThemePreset[] = [{
         '--ui-text-highlighted': 'var(--ui-color-neutral-50)'
       }
     },
-    // Exercises the newest axes together: straight-down hard shadow at 55%,
-    // app-wide subtle variants, and per-mode shades for the surface stack
-    // plus the success/error alias tokens.
+    // Exercises the newest axes together: straight-down hard shadow at 55%
+    // paired with a bottom-lit hard INSET at 50% (drop below, light above —
+    // the pressed-clay look), app-wide subtle variants, and per-mode shades
+    // for the surface stack plus the success/error alias tokens.
     style: {
       shadow: 'hard',
       shadowColor: 'shade',
       shadowShade: { light: 950, dark: 950 },
       shadowOpacity: 55,
       shadowGeometry: { x: 0, y: 3, blur: 0, spread: 0 },
+      innerShadow: 'hard',
+      innerShadowGeometry: { x: 0, y: -3, blur: 0, spread: 0 },
+      innerShadowOpacity: 50,
+      innerShadowColor: 'shade',
+      innerShadowShade: { light: 500, dark: 950 },
       defaults: { variant: 'subtle' },
       tokenShades: {
         '--ui-bg-muted': { light: 100 },
         '--ui-bg-elevated': { light: 200 },
         '--ui-bg-accented': { light: 300 },
         '--ui-border': { dark: 950 },
+        '--ui-border-accented': { dark: 950 },
         '--ui-success': { light: 600, dark: 300 },
         '--ui-error': { light: 600, dark: 300 }
       }
