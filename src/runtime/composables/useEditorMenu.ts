@@ -9,6 +9,7 @@ import { VueRenderer } from '@tiptap/vue-3'
 import type { SuggestionOptions, SuggestionProps } from '@tiptap/suggestion'
 import Suggestion from '@tiptap/suggestion'
 import { PluginKey } from '@tiptap/pm/state'
+import type { Plugin } from '@tiptap/pm/state'
 import type { FloatingUIOptions } from '../types/editor'
 import { buildFloatingUIMiddleware } from '../utils/editor'
 import { get, isArrayOfArray } from '../utils'
@@ -494,7 +495,8 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
   }
 
   // Create the suggestion plugin
-  const plugin = Suggestion({
+  // Explicitly typed as `Plugin` since `SuggestionPluginState` is not exported by `@tiptap/suggestion`
+  const plugin: Plugin = Suggestion({
     ...(options.suggestion || {}),
     pluginKey: pluginKeyInstance,
     editor: options.editor,
