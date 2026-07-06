@@ -19,37 +19,15 @@ watch(open, (isOpen) => {
 
 const sidebarOpen = ref(true)
 
-// The studio's own chrome follows the border treatment too — whole literal
-// class strings per width so tailwind's scanner sees them.
-const PREVIEW_EDGE: Record<number, string> = { 0: 'border-0', 1: 'border', 2: 'border-2', 3: 'border-3', 4: 'border-4' }
-const SIDEBAR_RING: Record<number, string> = { 0: 'ring-0', 1: 'ring-1', 2: 'ring-2', 3: 'ring-3', 4: 'ring-4' }
-const SIDEBAR_DIVIDE: Record<number, string> = { 0: 'divide-y-0', 1: 'divide-y', 2: 'divide-y-2', 3: 'divide-y-3', 4: 'divide-y-4' }
-
-const chromeWidth = computed(() => {
-  const border = style.value.border
-  if (!border || border === 'default') return 1
-  if (border === 'none') return 0
-  return style.value.borderWidth ?? 2
-})
-
-// The studio's own floating panels cast theme-correct shadows too. The
-// sidebar override merges through tv (recoloring its stock shadow-lg is
-// enough); the preview card's plain :class doesn't merge, so it gets the
-// whole string.
-const sidebarShadow = computed(() => {
+// Both floating panels wear IDENTICAL chrome: ring edges (default-width
+// rings follow the studio width variable) and one shared shadow treatment,
+// so the sidebar and preview card always match.
+const chromeShadow = computed(() => {
   const shadow = style.value.shadow
   if (shadow === 'none') return 'shadow-none'
   if (shadow === 'hard') return 'shadow-(--ui-shadow-hard-lg)'
-  if (shadow === 'soft') return 'shadow-(color:--ui-shadow-final-soft)'
-  return ''
-})
-
-const previewShadow = computed(() => {
-  const shadow = style.value.shadow
-  if (shadow === 'none') return ''
-  if (shadow === 'hard') return 'shadow-(--ui-shadow-hard-lg)'
-  if (shadow === 'soft') return ' shadow-(color:--ui-shadow-final-soft)'
-  return ''
+  if (shadow === 'soft') return 'shadow-lg shadow-(color:--ui-shadow-final-soft)'
+  return 'shadow-lg'
 })
 
 /** Preview views: the bento grid plus app-scale layouts from the real templates. */
@@ -78,7 +56,7 @@ const viewTabs = [
           v-model:open="sidebarOpen"
           variant="floating"
           :style="{ '--sidebar-width': '21rem' }"
-          :ui="{ container: 'pe-0', header: 'bg-elevated/25', body: 'p-0 gap-0 bg-default', footer: 'bg-elevated/25', inner: [sidebarShadow, SIDEBAR_RING[chromeWidth], SIDEBAR_DIVIDE[chromeWidth], 'bg-default'] }"
+          :ui="{ container: 'pe-0', header: 'bg-elevated/50', body: 'p-0 gap-0 bg-default', footer: 'bg-elevated/50', inner: [chromeShadow, 'bg-default'] }"
         >
           <template #header>
             <Logo class="w-auto h-6 shrink-0 mr-auto" />
@@ -165,8 +143,8 @@ const viewTabs = [
           <!-- The floating preview card: the grid scrolls inside it; the
                app-shell views own their height and scroll internally. -->
           <div
-            class="flex-1 min-w-0 min-h-0 border-default bg-default m-4 mt-0 rounded-lg"
-            :class="[PREVIEW_EDGE[chromeWidth], previewShadow, view === 'grid' ? 'overflow-y-auto' : 'overflow-hidden']"
+            class="flex-1 min-w-0 min-h-0 ring ring-default bg-default m-4 mt-0 rounded-lg"
+            :class="[chromeShadow, view === 'grid' ? 'overflow-y-auto' : 'overflow-hidden']"
           >
             <ThemeStudioBento v-if="view === 'grid'" />
             <ThemeStudioViewDashboard v-else-if="view === 'dashboard'" />
