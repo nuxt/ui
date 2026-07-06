@@ -157,13 +157,13 @@ function onClose() {
     v-bind="!props.to ? $attrs : {}"
     class="banner"
     :data-banner-id="id"
-    data-slot="root"
+    :data-slot="($attrs['data-slot'] as string | undefined) ?? 'root'"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
   >
     <ULink
       v-if="props.to"
       :aria-label="props.title"
-      v-bind="{ to: props.to, target: props.target, ...$attrs }"
+      v-bind="{ 'to': props.to, 'target': props.target, ...$attrs, 'data-slot': undefined }"
       :class="prefix('focus:outline-none')"
       raw
     >

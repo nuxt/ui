@@ -240,7 +240,7 @@ const [DefineFeatureTemplate, ReuseFeatureTemplate] = createReusableTemplate<{ t
     <UIcon v-else :name="appConfig.ui.icons.minus" data-slot="tierFeatureIcon" :class="ui.tierFeatureIcon({ class: props.ui?.tierFeatureIcon })" />
   </DefineFeatureTemplate>
 
-  <Primitive :as="props.as" v-bind="$attrs" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <Primitive :as="props.as" data-slot="root" v-bind="$attrs" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <table data-slot="table" :class="ui.table({ class: props.ui?.table })">
       <caption v-if="props.caption || !!slots.caption" data-slot="caption" :class="ui.caption({ class: [props.ui?.caption] })">
         <slot name="caption">

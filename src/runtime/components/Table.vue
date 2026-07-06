@@ -717,7 +717,7 @@ defineExpose({
     </table>
   </DefineTableTemplate>
 
-  <Primitive ref="rootRef" :as="props.as" v-bind="$attrs" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <Primitive ref="rootRef" :as="props.as" data-slot="root" v-bind="$attrs" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <ReuseTableTemplate />
   </Primitive>
 </template>
