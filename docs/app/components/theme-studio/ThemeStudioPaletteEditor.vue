@@ -222,68 +222,73 @@ function remove() {
 </script>
 
 <template>
-  <div v-if="open" class=" flex flex-col gap-2.5 pb-1">
-    <UTabs
-      v-model="tab"
-      :items="tabs"
-      :content="false"
-      size="xs"
-      color="neutral"
-    />
-
-    <div>
-      <ThemeStudioCurveEditor
-        v-model="params[tab]"
-        :y-min="windows[tab].min"
-        :y-max="windows[tab].max"
-        :stop-colors="stopColors"
-        @drag-start="onDragStart"
-        @drag-end="onDragEnd"
-      />
-
-      <div class="flex rounded-b-sm overflow-hidden ring ring-default">
-        <UTooltip v-for="shade in SHADES" :key="shade" :text="`${shade} · ${shades[shade]}`">
-          <div class="aspect-square flex-1" :style="{ backgroundColor: shades[shade] }" />
-        </UTooltip>
-      </div>
-    </div>
-
-    <div class="flex items-center gap-1.5">
-      <USelect
-        v-model="styleOffset"
-        size="sm"
-        color="neutral"
-        icon="i-lucide-sparkles"
-        :items="styleOffsetItems"
-        class="flex-1"
-        @update:model-value="applyStyleOffset($event as string)"
-      />
-
-      <UTooltip v-if="active" text="Remove custom palette">
-        <UButton
-          icon="i-lucide-trash-2"
+  <!-- unmount-on-hide (the default) matches the old v-if: each open reseeds fresh -->
+  <UCollapsible :open="open">
+    <template #content>
+      <div class="mt-2.5 flex flex-col gap-2.5 pb-1">
+        <UTabs
+          v-model="tab"
+          :items="tabs"
+          :content="false"
+          size="xs"
           color="neutral"
-          variant="soft"
-          size="sm"
-          aria-label="Remove custom palette"
-          @click="remove"
         />
-      </UTooltip>
-    </div>
 
-    <div v-if="styleOffset !== 'fitted'" class="flex items-center gap-2">
-      <span class="text-[11px] text-muted shrink-0 w-10">Effect</span>
-      <USlider
-        v-model="offsetAmount"
-        :min="0"
-        :max="200"
-        :step="5"
-        size="sm"
-        color="neutral"
-        aria-label="Effect strength"
-        @update:model-value="applyStyleOffset(styleOffset)"
-      />
-      <span class="text-[11px] text-dimmed tabular-nums shrink-0 w-8 text-right">{{ offsetAmount }}%</span>
-    </div>
-  </div>
+        <div>
+          <ThemeStudioCurveEditor
+            v-model="params[tab]"
+            :y-min="windows[tab].min"
+            :y-max="windows[tab].max"
+            :stop-colors="stopColors"
+            @drag-start="onDragStart"
+            @drag-end="onDragEnd"
+          />
+
+          <div class="flex rounded-b-sm overflow-hidden ring ring-default">
+            <UTooltip v-for="shade in SHADES" :key="shade" :text="`${shade} · ${shades[shade]}`">
+              <div class="aspect-square flex-1" :style="{ backgroundColor: shades[shade] }" />
+            </UTooltip>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-1.5">
+          <USelect
+            v-model="styleOffset"
+            size="sm"
+            color="neutral"
+            icon="i-lucide-sparkles"
+            :items="styleOffsetItems"
+            class="flex-1"
+            @update:model-value="applyStyleOffset($event as string)"
+          />
+
+          <UTooltip v-if="active" text="Remove custom palette">
+            <UButton
+              icon="i-lucide-trash-2"
+              color="neutral"
+              variant="soft"
+              size="sm"
+              aria-label="Remove custom palette"
+              @click="remove"
+            />
+          </UTooltip>
+        </div>
+
+        <div v-if="styleOffset !== 'fitted'" class="flex items-center gap-2">
+          <span class="text-[11px] text-muted shrink-0 w-10">Effect</span>
+          <USlider
+            v-model="offsetAmount"
+            :min="0"
+            :max="200"
+            :step="5"
+            size="sm"
+            color="neutral"
+            aria-label="Effect strength"
+            @update:model-value="applyStyleOffset(styleOffset)"
+          />
+          <span class="text-[11px] text-dimmed tabular-nums shrink-0 w-8 text-right">{{ offsetAmount }}%</span>
+        </div>
+      </div>
+    </template>
+  </UCollapsible>
 </template>
