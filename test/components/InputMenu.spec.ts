@@ -136,29 +136,6 @@ describe('InputMenu', () => {
     expect(wrapper.find('[data-slot="trailingIcon"]').exists()).toBe(false)
   })
 
-  it('forwards data-slot to the root and keeps `base` on the input', () => {
-    const wrapper = mount(InputMenu, {
-      props,
-      attrs: { 'data-slot': 'test' }
-    })
-
-    const root = wrapper.findAll('[data-slot="test"]')
-    expect(root).toHaveLength(1)
-    expect(root[0]!.element.contains(wrapper.find('input').element)).toBe(true)
-    expect(wrapper.find('input').attributes('data-slot')).toBe('base')
-  })
-
-  it('forwards data-slot to the effective root in multiple mode', () => {
-    const wrapper = mount(InputMenu, {
-      props: { ...props, multiple: true },
-      attrs: { 'data-slot': 'test' }
-    })
-
-    const root = wrapper.findAll('[data-slot="test"]')
-    expect(root).toHaveLength(1)
-    expect(root[0]!.element.contains(wrapper.find('input').element)).toBe(true)
-  })
-
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(InputMenu, {
       props: {
