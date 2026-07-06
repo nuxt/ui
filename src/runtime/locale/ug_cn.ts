@@ -83,6 +83,9 @@ export default defineLocale<Messages>({
       close: 'تاقاش',
       open: 'ئېچىش'
     },
+    drawer: {
+      close: 'تاقاش'
+    },
     error: {
       clear: 'تازىلاش'
     },

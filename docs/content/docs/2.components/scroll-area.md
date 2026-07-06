@@ -164,6 +164,13 @@ collapse: true
 overflowHidden: true
 name: 'scroll-area-external-scroll-example'
 class: '!p-0'
+options:
+  - name: orientation
+    label: orientation
+    default: vertical
+    items:
+      - vertical
+      - horizontal
 ---
 ::
 

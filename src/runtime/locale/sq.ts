@@ -82,6 +82,9 @@ export default defineLocale<Messages>({
       close: 'Mbyll panelin anësor',
       open: 'Hap panelin anësor'
     },
+    drawer: {
+      close: 'Mbyll'
+    },
     error: {
       clear: 'Kthehu në kryefaqe'
     },

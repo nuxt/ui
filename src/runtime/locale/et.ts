@@ -82,6 +82,9 @@ export default defineLocale<Messages>({
       close: 'Sulge külgriba',
       open: 'Ava külgriba'
     },
+    drawer: {
+      close: 'Sulge'
+    },
     error: {
       clear: 'Tagasi avalehele'
     },

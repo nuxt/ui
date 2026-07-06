@@ -62,7 +62,7 @@ export type FormProps<S extends FormSchema, T extends boolean = true, N extends 
   loadingAuto?: boolean
   class?: any
   ui?: { base?: any }
-  onSubmit?: ((event: FormSubmitEvent<FormData<S, T>>) => void | Promise<void>) | (() => void | Promise<void>)
+  onSubmit?: ((event: FormSubmitEvent<FormData<S, T>>) => void) | (() => void)
 } & /** @vue-ignore */ Omit<FormHTMLAttributes, 'name'>
 
 export interface FormEmits<S extends FormSchema, T extends boolean = true> {

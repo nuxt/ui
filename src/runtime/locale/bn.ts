@@ -82,6 +82,9 @@ export default defineLocale<Messages>({
       close: 'সাইডবার বন্ধ করুন',
       open: 'সাইডবার খুলুন'
     },
+    drawer: {
+      close: 'বন্ধ করুন'
+    },
     error: {
       clear: 'হোম পেজে ফিরে যান'
     },

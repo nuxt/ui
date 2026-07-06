@@ -82,6 +82,9 @@ export default defineLocale<Messages>({
       close: 'Жабу',
       open: 'Ашу'
     },
+    drawer: {
+      close: 'Жабу'
+    },
     error: {
       clear: 'Тазалау'
     },

@@ -82,6 +82,9 @@ export default defineLocale<Messages>({
       close: 'Tancar barra lateral',
       open: 'Obrir barra lateral'
     },
+    drawer: {
+      close: 'Tancar'
+    },
     error: {
       clear: 'Tornar a l\'inici'
     },

@@ -82,6 +82,9 @@ export default defineLocale<Messages>({
       close: 'Каптал тилкесин жабуу',
       open: 'Каптал тилкесин ачуу'
     },
+    drawer: {
+      close: 'Жабуу'
+    },
     error: {
       clear: 'Башкы бетке кайтуу'
     },

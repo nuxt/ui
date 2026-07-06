@@ -82,6 +82,9 @@ export default defineLocale<Messages>({
       close: 'Uždaryti šoninę juostą',
       open: 'Atidaryti šoninę juostą'
     },
+    drawer: {
+      close: 'Uždaryti'
+    },
     error: {
       clear: 'Grįžti į pradžią'
     },

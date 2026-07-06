@@ -83,6 +83,9 @@ export default defineLocale<Messages>({
       close: 'بستن نوار کناری',
       open: 'باز کردن نوار کناری'
     },
+    drawer: {
+      close: 'بستن'
+    },
     error: {
       clear: 'بازگشت به صفحه اصلی'
     },
