@@ -28,6 +28,8 @@ const params = reactive<PaletteCurveParams>(
   // Older stored shapes (anchor/slider based) are simply refitted on open.
   stored && 'lightness' in stored ? structuredClone(toRaw(stored)) as PaletteCurveParams : defaults()
 )
+// Stored params may predate the fixed 0–360 axis (or carry unwrapped hues).
+normalizeHue(params)
 
 const active = computed(() => isCustomPalette(props.alias))
 
@@ -38,24 +40,28 @@ const stopColors = computed(() => SHADES.map(shade => shades.value[shade]))
 const contrast = computed(() => contrastRatio(shades.value[500]!, '#FFFFFF'))
 
 /**
- * The hue axis window floats around the curve (a full 0–360 axis would make
- * drifts invisible); frozen while editing so the canvas doesn't chase the
- * pointer. Lightness and chroma have fixed, comparable windows.
+ * Every axis is a fixed 1:1 window — the full physical range fits the
+ * canvas, so dragging never pans or rescales under the pointer. Hue params
+ * are normalized into 0–360 on seed instead (cyclic, so shifting by full
+ * turns is color-identical; fitPalette unwraps across the seam).
  */
-const hueWindow = ref({ min: 0, max: 360 })
-
-function recenterHueWindow() {
-  const values = [params.hue.y0, params.hue.y1, params.hue.p1y, params.hue.p2y]
-  const center = (Math.min(...values) + Math.max(...values)) / 2
-  const span = Math.max(90, (Math.max(...values) - Math.min(...values)) + 40)
-  hueWindow.value = { min: center - span / 2, max: center + span / 2 }
-}
-
-const windows = computed(() => ({
+const windows = {
   lightness: { min: 0, max: 1 },
   chroma: { min: 0, max: 0.35 },
-  hue: hueWindow.value
-}))
+  hue: { min: 0, max: 360 }
+}
+
+function normalizeHue(values: PaletteCurveParams) {
+  const points = [values.hue.y0, values.hue.y1, values.hue.p1y, values.hue.p2y]
+  const mean = points.reduce((sum, value) => sum + value, 0) / points.length
+  const shift = -360 * Math.floor(mean / 360)
+  if (shift !== 0) {
+    values.hue.y0 += shift
+    values.hue.y1 += shift
+    values.hue.p1y += shift
+    values.hue.p2y += shift
+  }
+}
 
 const styleOffset = ref('fitted')
 
@@ -88,13 +94,14 @@ const { ignoreUpdates } = watchIgnorable(params, () => {
 })
 
 function seed(values: PaletteCurveParams) {
-  seedBase = structuredClone(toRaw(values))
+  const next = structuredClone(toRaw(values))
+  normalizeHue(next)
+  seedBase = structuredClone(next)
   styleOffset.value = 'fitted'
   offsetAmount.value = 100
   ignoreUpdates(() => {
-    Object.assign(params, structuredClone(toRaw(values)))
+    Object.assign(params, next)
   })
-  recenterHueWindow()
 }
 
 // While dragging, a global class turns on short color transitions so the
@@ -209,7 +216,6 @@ function applyStyleOffset(name: string) {
 
   // Not seed(): this IS a user edit, the watcher should live-apply it.
   Object.assign(params, next)
-  recenterHueWindow()
 }
 
 function remove() {
@@ -227,7 +233,6 @@ function remove() {
       size="xs"
       color="neutral"
       :ui="{ trigger: 'text-[11px]' }"
-      @update:model-value="tab === 'hue' && recenterHueWindow()"
     />
 
     <ThemeStudioCurveEditor

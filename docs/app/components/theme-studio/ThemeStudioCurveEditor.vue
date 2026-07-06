@@ -29,6 +29,11 @@ function toY(value: number) {
   return PAD + (1 - (value - props.yMin) / (props.yMax - props.yMin)) * (H - 2 * PAD)
 }
 
+/** Handles stay grabbable even when a fitted param sits outside the window. */
+function toHandleY(value: number) {
+  return Math.min(H - PAD, Math.max(PAD, toY(value)))
+}
+
 function fromX(px: number) {
   return Math.min(1, Math.max(0, (px - PAD) / (W - 2 * PAD)))
 }
@@ -68,10 +73,10 @@ function onPointerDown(event: PointerEvent) {
   const c = curve.value
 
   const targets = [
-    { id: 'p1' as const, x: toX(c.p1x), y: toY(c.p1y) },
-    { id: 'p2' as const, x: toX(c.p2x), y: toY(c.p2y) },
-    { id: 'y0' as const, x: toX(0), y: toY(c.y0) },
-    { id: 'y1' as const, x: toX(1), y: toY(c.y1) }
+    { id: 'p1' as const, x: toX(c.p1x), y: toHandleY(c.p1y) },
+    { id: 'p2' as const, x: toX(c.p2x), y: toHandleY(c.p2y) },
+    { id: 'y0' as const, x: toX(0), y: toHandleY(c.y0) },
+    { id: 'y1' as const, x: toX(1), y: toHandleY(c.y1) }
   ]
 
   let best: { id: typeof dragging.value, distance: number } = { id: null, distance: 14 }
@@ -95,9 +100,10 @@ function onPointerMove(event: PointerEvent) {
 
   const point = svgPoint(event)
   const value = fromY(point.y)
-  // Allow moderate overshoot beyond the window, devtools-style.
-  const overshoot = (props.yMax - props.yMin) * 0.15
-  const clamped = Math.min(props.yMax + overshoot, Math.max(props.yMin - overshoot, value))
+  // Strictly window-clamped: an overshot handle would leave the canvas and
+  // become ungrabbable (and out-of-range lightness exports nonsense).
+  // Reaching further is the window's job — hue auto-pans at the edges.
+  const clamped = Math.min(props.yMax, Math.max(props.yMin, value))
 
   if (dragging.value === 'y0') {
     curve.value = { ...curve.value, y0: clamped }
@@ -155,18 +161,18 @@ function onPointerUp(event: PointerEvent) {
     <!-- handle connectors -->
     <line
       :x1="toX(0)"
-      :y1="toY(curve.y0)"
+      :y1="toHandleY(curve.y0)"
       :x2="toX(curve.p1x)"
-      :y2="toY(curve.p1y)"
+      :y2="toHandleY(curve.p1y)"
       class="stroke-(--ui-text-dimmed)"
       stroke-width="0.75"
       stroke-dasharray="2 2"
     />
     <line
       :x1="toX(1)"
-      :y1="toY(curve.y1)"
+      :y1="toHandleY(curve.y1)"
       :x2="toX(curve.p2x)"
-      :y2="toY(curve.p2y)"
+      :y2="toHandleY(curve.p2y)"
       class="stroke-(--ui-text-dimmed)"
       stroke-width="0.75"
       stroke-dasharray="2 2"
@@ -188,11 +194,11 @@ function onPointerUp(event: PointerEvent) {
     />
 
     <!-- handles -->
-    <circle :cx="toX(curve.p1x)" :cy="toY(curve.p1y)" r="4" class="fill-(--ui-bg) stroke-(--ui-text-muted)" stroke-width="1.25" />
-    <circle :cx="toX(curve.p2x)" :cy="toY(curve.p2y)" r="4" class="fill-(--ui-bg) stroke-(--ui-text-muted)" stroke-width="1.25" />
+    <circle :cx="toX(curve.p1x)" :cy="toHandleY(curve.p1y)" r="4" class="fill-(--ui-bg) stroke-(--ui-text-muted)" stroke-width="1.25" />
+    <circle :cx="toX(curve.p2x)" :cy="toHandleY(curve.p2y)" r="4" class="fill-(--ui-bg) stroke-(--ui-text-muted)" stroke-width="1.25" />
 
     <!-- endpoints -->
-    <circle :cx="toX(0)" :cy="toY(curve.y0)" r="4.5" class="fill-(--ui-text-highlighted)" />
-    <circle :cx="toX(1)" :cy="toY(curve.y1)" r="4.5" class="fill-(--ui-text-highlighted)" />
+    <circle :cx="toX(0)" :cy="toHandleY(curve.y0)" r="4.5" class="fill-(--ui-text-highlighted)" />
+    <circle :cx="toX(1)" :cy="toHandleY(curve.y1)" r="4.5" class="fill-(--ui-text-highlighted)" />
   </svg>
 </template>
