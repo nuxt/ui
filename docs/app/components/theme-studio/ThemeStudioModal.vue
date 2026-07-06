@@ -37,8 +37,8 @@ onMounted(() => {
 })
 
 let captureTimeout: ReturnType<typeof setTimeout> | undefined
-watch(() => mounted.value && JSON.stringify(currentDoc()), (snapshot) => {
-  if (!snapshot || snapshot === true) return
+watch(() => (mounted.value ? JSON.stringify(currentDoc()) : undefined), (snapshot) => {
+  if (!snapshot) return
   clearTimeout(captureTimeout)
   captureTimeout = setTimeout(() => {
     if (snapshot === lastSnapshot) return
