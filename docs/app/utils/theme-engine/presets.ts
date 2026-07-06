@@ -48,20 +48,38 @@ export const presets: ThemePreset[] = [{
 }, {
   id: 'neo-brutalist',
   name: 'Neo-brutalist',
-  description: 'Amber on zinc — everything framed in ink, dropped hard shadows.',
+  description: 'Amber on a warm carbon neutral — everything framed in ink, dropped hard shadows.',
   icon: 'i-lucide-zap',
   doc: {
     version: 1,
     meta: { name: 'Neo-brutalist', base: 'neo-brutalist' },
+    // A sculpted warm neutral running lilac-tinted paper into pure carbon.
+    palettes: {
+      carbon: {
+        shades: {
+          50: 'oklch(98.5% 0.017 447.457)',
+          100: 'oklch(95.9% 0.036 438.639)',
+          200: 'oklch(92.6% 0.054 428.8)',
+          300: 'oklch(87% 0.053 417.734)',
+          400: 'oklch(70.5% 0.032 405.184)',
+          500: 'oklch(55.3% 0.014 390.836)',
+          600: 'oklch(44.7% 0.001 374.343)',
+          700: 'oklch(35.9% 0 0)',
+          800: 'oklch(28% 0 0)',
+          900: 'oklch(20.8% 0 0)',
+          950: 'oklch(14.1% 0.005 285.805)'
+        }
+      }
+    },
     colors: {
       primary: 'amber',
       secondary: 'yellow',
-      neutral: 'zinc'
+      neutral: 'carbon'
     },
     radius: 0.5,
     font: { sans: 'Outfit' },
-    // Framed everything in near-black ink, straight-down hard shadows, and
-    // a noir dark mode: surfaces lifted a step, every border crushed to 950.
+    // Framed everything in near-black ink, straight-down hard shadows, soft
+    // inked inputs, and both modes retuned shade-by-shade toward carbon.
     style: {
       shadow: 'hard',
       shadowGeometry: { x: 0, y: 3, blur: 0, spread: 0 },
@@ -69,51 +87,24 @@ export const presets: ThemePreset[] = [{
       frame: true,
       borderColor: 'shade',
       borderShade: { light: 900, dark: 950 },
+      defaults: { variants: { inputs: 'soft' } },
       tokenShades: {
-        '--ui-bg': { light: 50, dark: 800 },
-        '--ui-bg-elevated': { dark: 700 },
-        '--ui-bg-accented': { dark: 600 },
-        '--ui-bg-inverted': { dark: 50 },
+        '--ui-bg': { light: 100, dark: 800 },
+        '--ui-bg-muted': { light: 300 },
+        '--ui-bg-elevated': { light: 300, dark: 700 },
+        '--ui-bg-accented': { light: 400, dark: 600 },
+        '--ui-bg-inverted': { light: 900, dark: 50 },
         '--ui-text-inverted': { light: 50 },
-        '--ui-text-highlighted': { dark: 100 },
-        '--ui-text-dimmed': { dark: 400 },
-        '--ui-text-muted': { dark: 300 },
-        '--ui-border': { dark: 950 },
-        '--ui-border-muted': { dark: 950 },
-        '--ui-border-accented': { light: 400, dark: 950 },
-        '--ui-border-inverted': { dark: 50 }
+        '--ui-text-dimmed': { light: 500, dark: 400 },
+        '--ui-text-muted': { light: 800, dark: 300 },
+        '--ui-text-toned': { light: 900 },
+        '--ui-text': { light: 900 },
+        '--ui-text-highlighted': { light: 950, dark: 100 },
+        '--ui-border': { light: 950, dark: 950 },
+        '--ui-border-muted': { light: 950, dark: 950 },
+        '--ui-border-accented': { light: 950, dark: 950 },
+        '--ui-border-inverted': { light: 500, dark: 50 }
       }
-    }
-  }
-}, {
-  id: 'art-deco',
-  name: 'Art Deco',
-  description: 'Gilded amber lines on warm cream and charcoal.',
-  icon: 'i-lucide-landmark',
-  doc: {
-    version: 1,
-    meta: { name: 'Art Deco', base: 'art-deco' },
-    colors: {
-      primary: 'amber',
-      secondary: 'yellow',
-      neutral: 'stone'
-    },
-    radius: 0.5,
-    font: { sans: 'Raleway' },
-    tokens: {
-      light: {
-        '--ui-bg': 'var(--ui-color-primary-50)',
-        '--ui-border': 'var(--ui-color-primary-200)',
-        '--ui-border-accented': 'var(--ui-color-primary-300)'
-      },
-      dark: {
-        '--ui-border': 'var(--ui-color-primary-900)',
-        '--ui-border-accented': 'var(--ui-color-primary-800)'
-      }
-    },
-    style: {
-      border: 'custom',
-      borderColor: 'primary'
     }
   }
 }, {
