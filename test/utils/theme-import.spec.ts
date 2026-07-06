@@ -69,7 +69,7 @@ describe('importTheme', () => {
   it('round-trips an inner-shadow style', () => {
     const original: ThemeDoc = {
       version: 1,
-      style: { innerShadow: 'hard', innerShadowGeometry: { x: 0, y: 4, blur: 8, spread: 0 }, innerShadowOpacity: 30 }
+      style: { innerShadow: 'hard', innerShadowGeometry: { x: 0, y: 4, blur: 8, spread: 0 }, innerShadowOpacity: 30, innerShadowColor: 'primary-shade', innerShadowShade: { light: 700, dark: 300 } }
     }
     const css = generateCSS(original)
     const config = generateConfig(original)
@@ -79,6 +79,8 @@ describe('importTheme', () => {
     expect(imported.style?.innerShadow).toBe('hard')
     expect(imported.style?.innerShadowGeometry).toEqual({ x: 0, y: 4, blur: 8, spread: 0 })
     expect(imported.style?.innerShadowOpacity).toBe(30)
+    expect(imported.style?.innerShadowColor).toBe('primary-shade')
+    expect(imported.style?.innerShadowShade).toEqual({ light: 700, dark: 300 })
     expect(generateConfig(imported)).toBe(config)
     expect(generateCSS(imported)).toBe(css)
   })

@@ -213,6 +213,7 @@ function extractStyle(light: Record<string, string>, dark: Record<string, string
     spread: take('--ui-inner-shadow-spread')
   }
   const innerFinal = take('--ui-shadow-final-inner')
+  const innerColor = take('--ui-inner-shadow-color')
   take('--ui-inner-shadow')
 
   if (innerGeometry.x.light !== undefined) {
@@ -248,6 +249,20 @@ function extractStyle(light: Record<string, string>, dark: Record<string, string
         style.shadowColor = lightRef.alias === 'primary' ? 'primary-shade' : 'shade'
         style.shadowShade = { light: lightRef.shade, dark: darkRef.shade }
       }
+    }
+  }
+
+  if (innerColor.light !== undefined || innerColor.dark !== undefined) {
+    // Never force-emitted — any presence is a real choice.
+    const named = (Object.keys(SHADOW_COLOR_VALUES) as Array<keyof typeof SHADOW_COLOR_VALUES>)
+      .find(key => SHADOW_COLOR_VALUES[key].light === innerColor.light && SHADOW_COLOR_VALUES[key].dark === innerColor.dark)
+    const lightRef = parseUiColorRef(innerColor.light)
+    const darkRef = parseUiColorRef(innerColor.dark)
+    if (named) {
+      style.innerShadowColor = named
+    } else if (lightRef && darkRef && lightRef.alias === darkRef.alias && (lightRef.alias === 'neutral' || lightRef.alias === 'primary')) {
+      style.innerShadowColor = lightRef.alias === 'primary' ? 'primary-shade' : 'shade'
+      style.innerShadowShade = { light: lightRef.shade, dark: darkRef.shade }
     }
   }
 

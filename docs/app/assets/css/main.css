@@ -156,7 +156,7 @@ html.theme-studio-dragging body *:not([data-curve-editor] *) {
   --ui-inner-shadow-offset-y: 2px;
   --ui-inner-shadow-blur: 4px;
   --ui-inner-shadow-spread: 0px;
-  --ui-shadow-final-inner: color-mix(in oklab, var(--ui-shadow-color) var(--ui-inner-shadow-opacity, 15%), transparent);
+  --ui-shadow-final-inner: color-mix(in oklab, var(--ui-inner-shadow-color, var(--ui-shadow-color)) var(--ui-inner-shadow-opacity, 15%), transparent);
   --ui-inner-shadow: var(--ui-inner-shadow-offset-x) var(--ui-inner-shadow-offset-y) var(--ui-inner-shadow-blur) var(--ui-inner-shadow-spread) var(--ui-shadow-final-inner);
 }
 :where(.dark) {

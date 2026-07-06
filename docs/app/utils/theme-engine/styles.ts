@@ -82,6 +82,10 @@ export interface StyleOptions {
   innerShadowGeometry?: { x?: number, y?: number, blur?: number, spread?: number }
   /** Inner-shadow opacity in percent; unset falls back to 15%. */
   innerShadowOpacity?: number
+  /** Inner-shadow color; unset inherits the drop shadow's color. */
+  innerShadowColor?: ShadowColor
+  /** Ramp shade per mode — neutral for 'shade', primary for 'primary-shade' */
+  innerShadowShade?: { light: number, dark: number }
   /**
    * Semantic token → neutral ramp shade, per mode. Strictly a token
    * shorthand parked on the style axis until the studio grows a full
@@ -636,6 +640,17 @@ export function styleTokens(style: StyleOptions): { light: Record<string, string
     const value = SHADOW_COLOR_VALUES[style.shadowColor]
     light['--ui-shadow-color'] = value.light
     dark['--ui-shadow-color'] = value.dark
+  }
+
+  if (style.innerShadowColor === 'shade' || style.innerShadowColor === 'primary-shade') {
+    const ramp = style.innerShadowColor === 'primary-shade' ? 'primary' : 'neutral'
+    const shade = { ...SHADOW_SHADE_DEFAULTS, ...style.innerShadowShade }
+    light['--ui-inner-shadow-color'] = `var(--ui-color-${ramp}-${shade.light})`
+    dark['--ui-inner-shadow-color'] = `var(--ui-color-${ramp}-${shade.dark})`
+  } else if (style.innerShadowColor && style.innerShadowColor !== 'default') {
+    const value = SHADOW_COLOR_VALUES[style.innerShadowColor]
+    light['--ui-inner-shadow-color'] = value.light
+    dark['--ui-inner-shadow-color'] = value.dark
   }
 
   // Studio-only: hand-rolled preview markup scales its borders through this

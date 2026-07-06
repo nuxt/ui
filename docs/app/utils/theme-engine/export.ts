@@ -112,7 +112,7 @@ export function generateCSS(doc: ThemeDoc): string {
       }
       style.light['--ui-inner-shadow'] = 'var(--ui-inner-shadow-offset-x) var(--ui-inner-shadow-offset-y) var(--ui-inner-shadow-blur) var(--ui-inner-shadow-spread) var(--ui-shadow-final-inner)'
     }
-    style.light['--ui-shadow-final-inner'] = 'color-mix(in oklab, var(--ui-shadow-color) var(--ui-inner-shadow-opacity, 15%), transparent)'
+    style.light['--ui-shadow-final-inner'] = 'color-mix(in oklab, var(--ui-inner-shadow-color, var(--ui-shadow-color)) var(--ui-inner-shadow-opacity, 15%), transparent)'
   }
 
   if (Object.keys(style.light).length) {

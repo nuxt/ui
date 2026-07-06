@@ -120,6 +120,11 @@ const innerShadowOpacity = computed({
   set: (value: number) => setStyle({ innerShadowOpacity: value })
 })
 
+const innerShadowColor = computed({
+  get: () => style.value.innerShadowColor || 'default',
+  set: (value: any) => setStyle({ innerShadowColor: value })
+})
+
 function innerGeometrySlider(key: 'x' | 'y' | 'blur' | 'spread') {
   return computed({
     get: () => ({ ...INNER_SHADOW_GEOMETRY_DEFAULTS, ...style.value.innerShadowGeometry })[key],
@@ -173,7 +178,7 @@ const shadowColorItems = [
 // Slider position ↔ SHADES index, per mode. shadow/border shades write both
 // modes on first touch (explicit 'shade' mode choice); token shades write
 // ONLY the touched mode so an untouched mode never becomes an override.
-function shadeSlider(field: 'shadowShade' | 'borderShade', defaults: { light: number, dark: number }, target: 'light' | 'dark') {
+function shadeSlider(field: 'shadowShade' | 'innerShadowShade' | 'borderShade', defaults: { light: number, dark: number }, target: 'light' | 'dark') {
   return computed({
     get: () => SHADES.indexOf((style.value[field] || defaults)[target] as typeof SHADES[number]),
     set: (index: number) => {
@@ -186,6 +191,11 @@ function shadeSlider(field: 'shadowShade' | 'borderShade', defaults: { light: nu
 const shadowShades = {
   light: shadeSlider('shadowShade', SHADOW_SHADE_DEFAULTS, 'light'),
   dark: shadeSlider('shadowShade', SHADOW_SHADE_DEFAULTS, 'dark')
+}
+
+const innerShadowShades = {
+  light: shadeSlider('innerShadowShade', SHADOW_SHADE_DEFAULTS, 'light'),
+  dark: shadeSlider('innerShadowShade', SHADOW_SHADE_DEFAULTS, 'dark')
 }
 
 const borderShades = {
@@ -842,6 +852,25 @@ const shadowColor = computed({
                 </div>
 
                 <div v-if="(style.innerShadow || 'none') !== 'none'" class="mt-1.5 flex flex-col gap-2">
+                  <USelect
+                    v-model="innerShadowColor"
+                    size="sm"
+                    color="neutral"
+                    icon="i-lucide-paint-bucket"
+                    :items="shadowColorItems"
+                    class="w-full"
+                  />
+
+                  <template v-if="innerShadowColor === 'shade' || innerShadowColor === 'primary-shade'">
+                    <ThemeStudioShadeSlider
+                      v-for="(slider, modeName) in innerShadowShades"
+                      :key="modeName"
+                      v-model="slider.value"
+                      :mode="modeName"
+                      :chip="innerShadowColor === 'primary-shade' ? primaryChip : neutralChip"
+                    />
+                  </template>
+
                   <div class="flex items-center gap-2">
                     <span class="text-[11px] text-muted w-13 shrink-0 select-none">Opacity</span>
 
