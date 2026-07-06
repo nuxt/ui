@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { TOKEN_SHADE_TARGETS, TOKEN_GROUPS, SHADES, SHADOW_SHADE_DEFAULTS, BORDER_SHADE_DEFAULTS, BORDER_WIDTH_DEFAULT, SHADOW_GEOMETRY_DEFAULTS, resolveAlias, resolveShade } from '../../utils/theme-engine'
+import { TOKEN_SHADE_TARGETS, TOKEN_GROUPS, SHADES, SHADOW_SHADE_DEFAULTS, BORDER_SHADE_DEFAULTS, BORDER_WIDTH_DEFAULT, SHADOW_GEOMETRY_DEFAULTS, INNER_SHADOW_GEOMETRY_DEFAULTS, resolveAlias, resolveShade } from '../../utils/theme-engine'
 import type { VariantGroup, TokenRamp, ColorAlias, ThemeDoc } from '../../utils/theme-engine'
 
 const appConfig = useAppConfig()
@@ -50,6 +50,7 @@ const openSections = reactive<Record<string, boolean>>({
   sizing: true,
   defaults: true,
   shadows: true,
+  innerShadows: true,
   borders: true,
   font: true,
   icons: true,
@@ -107,6 +108,24 @@ const shadowOpacity = computed({
   get: () => style.value.shadowOpacity ?? (style.value.shadow === 'hard' ? 100 : 25),
   set: (value: number) => setStyle({ shadowOpacity: value })
 })
+
+const innerShadowOptions = [
+  { label: 'None', value: 'none' },
+  { label: 'Default', value: 'soft' },
+  { label: 'Custom', value: 'hard' }
+] as const
+
+const innerShadowOpacity = computed({
+  get: () => style.value.innerShadowOpacity ?? 15,
+  set: (value: number) => setStyle({ innerShadowOpacity: value })
+})
+
+function innerGeometrySlider(key: 'x' | 'y' | 'blur' | 'spread') {
+  return computed({
+    get: () => ({ ...INNER_SHADOW_GEOMETRY_DEFAULTS, ...style.value.innerShadowGeometry })[key],
+    set: (value: number) => setStyle({ innerShadowGeometry: { ...INNER_SHADOW_GEOMETRY_DEFAULTS, ...style.value.innerShadowGeometry, [key]: value } })
+  })
+}
 
 const borderOptions = [
   { label: 'None', value: 'none' },
@@ -217,15 +236,10 @@ function rampChip(ramp: TokenRamp): string {
 }
 
 // No 'system' tab: the studio is about previewing a concrete mode. For
-// system-pref visitors the model can read 'system' before color-mode
-// resolves it — fall back to the scheme class the color-mode script has
-// already stamped on <html>, so a tab is always highlighted.
-const modeTabs = computed(() => modes.value.filter(m => m.label !== 'system').map(m => ({ label: m.label, icon: m.icon, value: m.label })))
-
-// Resolved AFTER mount on purpose: the server can't know a system-pref
-// visitor's scheme, and hydration adopts SSR attributes without patching —
-// a post-mount write is a real update, so the highlight always lands.
-const modeTab = ref<string | undefined>()
+// The mode preference lives client-side only — resolve the highlight AFTER
+// mount so hydration's adopt-without-patching never strands a stale state.
+const colorMode = useColorMode()
+const mounted = ref(false)
 
 /**
  * Same hydration-adoption problem for every control: SSR renders default
@@ -236,22 +250,12 @@ const modeTab = ref<string | undefined>()
 const hydrationKey = ref(0)
 
 onMounted(() => {
-  modeTab.value = mode.value === 'light' || mode.value === 'dark'
-    ? mode.value
-    : document.documentElement.classList.contains('dark') ? 'dark' : 'light'
+  mounted.value = true
 
   const keys = ['nuxt-ui-style', 'nuxt-ui-css-variables', 'nuxt-ui-custom-colors', 'nuxt-ui-radius', 'nuxt-ui-font-size', 'nuxt-ui-spacing', 'nuxt-ui-ai-theme']
   if (keys.some(key => localStorage.getItem(key))) {
     hydrationKey.value = 1
   }
-})
-
-watch(modeTab, (value) => {
-  if (value && value !== mode.value) mode.value = value
-})
-
-watch(mode, (value) => {
-  if (value === 'light' || value === 'dark') modeTab.value = value
 })
 
 // One curve editor per alias, toggled by the edit icon next to each select.
@@ -331,6 +335,8 @@ function geometrySlider(key: 'x' | 'y' | 'blur' | 'spread') {
 
 const geometry = Object.fromEntries(geometryFields.map(field => [field.key, geometrySlider(field.key)])) as Record<'x' | 'y' | 'blur' | 'spread', ReturnType<typeof geometrySlider>>
 
+const innerGeometry = Object.fromEntries(geometryFields.map(field => [field.key, innerGeometrySlider(field.key)])) as Record<'x' | 'y' | 'blur' | 'spread', ReturnType<typeof innerGeometrySlider>>
+
 const borderColor = computed({
   get: () => style.value.borderColor || 'default',
   set: (value: any) => setStyle({ borderColor: value })
@@ -384,15 +390,15 @@ const shadowColor = computed({
         />
       </UTooltip>
     </div>
-    <UTabs
-      v-model="modeTab"
-      :items="modeTabs"
-      :content="false"
-      size="sm"
-      color="primary"
-      class="w-full px-4 "
-      :ui="{ trigger: ' capitalize' }"
-    />
+    <div class="grid grid-cols-3 gap-1 px-4">
+      <ThemePickerButton
+        v-for="m in modes"
+        :key="m.label"
+        v-bind="m"
+        :selected="mounted && colorMode.preference === m.label"
+        @click="mode = m.label"
+      />
+    </div>
 
     <UAccordion
       v-model="openGroups"
@@ -414,6 +420,7 @@ const shadowColor = computed({
                   color="neutral"
                   variant="ghost"
                   icon="i-lucide-help-circle"
+                  :ui="{ leadingIcon: 'size-3' }"
                   @click.stop
                 />
               </legend>
@@ -502,6 +509,7 @@ const shadowColor = computed({
                   color="neutral"
                   variant="ghost"
                   icon="i-lucide-help-circle"
+                  :ui="{ leadingIcon: 'size-3' }"
                   @click.stop
                 />
               </legend>
@@ -579,6 +587,7 @@ const shadowColor = computed({
                   color="neutral"
                   variant="ghost"
                   icon="i-lucide-help-circle"
+                  :ui="{ leadingIcon: 'size-3' }"
                   @click.stop
                 />
               </legend>
@@ -666,6 +675,7 @@ const shadowColor = computed({
                   color="neutral"
                   variant="ghost"
                   icon="i-lucide-help-circle"
+                  :ui="{ leadingIcon: 'size-3' }"
                   @click.stop
                 />
               </legend>
@@ -755,7 +765,7 @@ const shadowColor = computed({
             <template #default="{ open }">
               <legend class="bg-default text-xs leading-none font-semibold select-none flex items-center gap-1 cursor-pointer">
                 <UIcon name="i-lucide-chevron-down" class="size-3 text-dimmed transition-transform duration-200" :class="!open && '-rotate-90'" />
-                <span class="flex-1 text-start">Shadows</span>
+                <span class="flex-1 text-start">Drop shadow</span>
               </legend>
             </template>
             <template #content>
@@ -805,6 +815,48 @@ const shadowColor = computed({
                       <USlider v-model="geometry[field.key].value" :min="field.min" :max="field.max" :step="1" size="xs" />
 
                       <span class="text-[11px] text-dimmed font-mono w-8 text-right shrink-0">{{ geometry[field.key].value }}px</span>
+                    </div>
+                  </template>
+                </div>
+              </div>
+            </template>
+          </UCollapsible>
+
+          <UCollapsible v-model:open="openSections.innerShadows" as="fieldset" :unmount-on-hide="false" class="rounded-md ring-[length:var(--studio-border-width,1px)] ring-default bg-default p-2.5">
+            <template #default="{ open }">
+              <legend class="bg-default text-xs leading-none font-semibold select-none flex items-center gap-1 cursor-pointer">
+                <UIcon name="i-lucide-chevron-down" class="size-3 text-dimmed transition-transform duration-200" :class="!open && '-rotate-90'" />
+                <span class="flex-1 text-start">Inner shadow</span>
+              </legend>
+            </template>
+            <template #content>
+              <div>
+                <div class="grid grid-cols-3 gap-1">
+                  <ThemePickerButton
+                    v-for="option in innerShadowOptions"
+                    :key="option.value"
+                    :label="option.label"
+                    :selected="(style.innerShadow || 'none') === option.value"
+                    @click="setStyle({ innerShadow: option.value })"
+                  />
+                </div>
+
+                <div v-if="(style.innerShadow || 'none') !== 'none'" class="mt-1.5 flex flex-col gap-2">
+                  <div class="flex items-center gap-2">
+                    <span class="text-[11px] text-muted w-13 shrink-0 select-none">Opacity</span>
+
+                    <USlider v-model="innerShadowOpacity" :min="5" :max="100" :step="5" size="xs" />
+
+                    <span class="text-[11px] text-dimmed font-mono w-8 text-right shrink-0">{{ innerShadowOpacity }}%</span>
+                  </div>
+
+                  <template v-if="style.innerShadow === 'hard'">
+                    <div v-for="field in geometryFields" :key="field.key" class="flex items-center gap-2">
+                      <span class="text-[11px] text-muted w-13 shrink-0 select-none">{{ field.label }}</span>
+
+                      <USlider v-model="innerGeometry[field.key].value" :min="field.min" :max="field.max" :step="1" size="xs" />
+
+                      <span class="text-[11px] text-dimmed font-mono w-8 text-right shrink-0">{{ innerGeometry[field.key].value }}px</span>
                     </div>
                   </template>
                 </div>
@@ -921,6 +973,7 @@ const shadowColor = computed({
                   color="neutral"
                   variant="ghost"
                   icon="i-lucide-help-circle"
+                  :ui="{ leadingIcon: 'size-3' }"
                   @click.stop
                 />
               </legend>
@@ -950,6 +1003,7 @@ const shadowColor = computed({
                   color="neutral"
                   variant="ghost"
                   icon="i-lucide-help-circle"
+                  :ui="{ leadingIcon: 'size-3' }"
                   @click.stop
                 />
               </legend>

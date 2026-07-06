@@ -70,6 +70,19 @@ export interface StyleOptions {
    */
   shadowOpacity?: number
   /**
+   * Inset shadow treatment, independent of the drop shadow — same
+   * vocabulary ('soft' recolors a stock inset, 'hard' rides the geometry
+   * sliders) and the same components.
+   */
+  innerShadow?: ShadowStyle
+  /**
+   * Inner-shadow geometry in px, driving --ui-inner-shadow-offset-x/y/…
+   * Only meaningful while `innerShadow` is 'hard'.
+   */
+  innerShadowGeometry?: { x?: number, y?: number, blur?: number, spread?: number }
+  /** Inner-shadow opacity in percent; unset falls back to 15%. */
+  innerShadowOpacity?: number
+  /**
    * Semantic token → neutral ramp shade, per mode. Strictly a token
    * shorthand parked on the style axis until the studio grows a full
    * tokens editor. Keys are whitelisted in TOKEN_SHADE_TARGETS. A mode
@@ -108,6 +121,7 @@ export const VARIANT_GROUPS: Record<VariantGroup, string[]> = {
 }
 
 export const SHADOW_GEOMETRY_DEFAULTS = { x: 3, y: 3, blur: 0, spread: 0 }
+export const INNER_SHADOW_GEOMETRY_DEFAULTS = { x: 0, y: 2, blur: 4, spread: 0 }
 
 /** Borders default opposite to the surface: dark ink on light, pale on dark. */
 export const BORDER_SHADE_DEFAULTS = { light: 900, dark: 200 }
@@ -248,6 +262,46 @@ const SHADOW_FRAGMENTS: Record<ShadowStyle, Fragments> = {
     drawer: { slots: { content: HARD_LG } },
     modal: { compoundVariants: [{ fullscreen: false, class: { content: HARD_LG } }] },
     slideover: { slots: { content: 'sm:shadow-(--ui-shadow-hard-lg)' } }
+  }
+}
+
+// Inset shadows use tailwind's separate inset-shadow group, so they merge
+// independently of (and coexist with) the drop treatment on every surface.
+const INNER_SOFT = 'inset-shadow-sm inset-shadow-(color:--ui-shadow-final-inner)'
+const INNER_HARD = 'inset-shadow-(--ui-inner-shadow)'
+
+const INNER_FLAT_FIELD_VARIANTS = [
+  { variant: 'ghost', class: 'inset-shadow-none' },
+  { variant: 'none', class: 'inset-shadow-none' }
+]
+
+/** The same surfaces the drop treatment covers, all at one scale. */
+function innerShadowFragments(classes: string): Fragments {
+  return {
+    button: {
+      slots: { base: classes },
+      compoundVariants: [
+        { variant: 'ghost', class: 'inset-shadow-none' },
+        { variant: 'link', class: 'inset-shadow-none' }
+      ]
+    },
+    card: { slots: { root: classes } },
+    empty: { slots: { root: classes } },
+    input: { slots: { base: classes }, compoundVariants: INNER_FLAT_FIELD_VARIANTS },
+    select: { slots: { base: classes, content: classes }, compoundVariants: INNER_FLAT_FIELD_VARIANTS },
+    selectMenu: { slots: { base: classes, content: classes }, compoundVariants: INNER_FLAT_FIELD_VARIANTS },
+    inputMenu: { slots: { base: classes, content: classes }, compoundVariants: INNER_FLAT_FIELD_VARIANTS },
+    textarea: { slots: { base: classes }, compoundVariants: INNER_FLAT_FIELD_VARIANTS },
+    alert: { slots: { root: classes } },
+    badge: { slots: { base: classes } },
+    popover: { slots: { content: classes } },
+    dropdownMenu: { slots: { content: classes } },
+    contextMenu: { slots: { content: classes } },
+    tooltip: { slots: { content: classes } },
+    toast: { slots: { root: classes } },
+    drawer: { slots: { content: classes } },
+    modal: { compoundVariants: [{ fullscreen: false, class: { content: classes } }] },
+    slideover: { slots: { content: classes } }
   }
 }
 
@@ -558,6 +612,19 @@ export function styleTokens(style: StyleOptions): { light: Record<string, string
     }
   }
 
+  if (style.innerShadow && style.innerShadow !== 'none' && style.innerShadowOpacity !== undefined) {
+    light['--ui-inner-shadow-opacity'] = `${style.innerShadowOpacity}%`
+    dark['--ui-inner-shadow-opacity'] = `${style.innerShadowOpacity}%`
+  }
+
+  if (style.innerShadow === 'hard' && style.innerShadowGeometry) {
+    const geometry = { ...INNER_SHADOW_GEOMETRY_DEFAULTS, ...style.innerShadowGeometry }
+    for (const [axis, token] of [['x', '--ui-inner-shadow-offset-x'], ['y', '--ui-inner-shadow-offset-y'], ['blur', '--ui-inner-shadow-blur'], ['spread', '--ui-inner-shadow-spread']] as const) {
+      light[token] = `${geometry[axis]}px`
+      dark[token] = `${geometry[axis]}px`
+    }
+  }
+
   if (style.shadowColor === 'shade' || style.shadowColor === 'primary-shade') {
     // Per-mode ramp shade — a graded shadow that darkens or lightens
     // independently of the scheme it sits on; the primary ramp tints it.
@@ -628,6 +695,9 @@ export function styleComponents(style: StyleOptions, options: { widthAsVariables
   const sources = [
     defaults,
     SHADOW_FRAGMENTS[style.shadow ?? 'none'],
+    style.innerShadow && style.innerShadow !== 'none'
+      ? innerShadowFragments(style.innerShadow === 'hard' ? INNER_HARD : INNER_SOFT)
+      : {},
     borderFragments(style, options.widthAsVariables),
     style.borderColor && style.borderColor !== 'default' ? FRAME_COLOR_FRAGMENTS : {}
   ]
@@ -718,8 +788,9 @@ export const STYLE_COMPONENT_KEYS = [...new Set([
  * every ring), so the generic value-check can't be reused for it.
  */
 export function isDefaultStyle(style: StyleOptions = {}): boolean {
-  const { shadow, border, ...rest } = style
+  const { shadow, innerShadow, border, ...rest } = style
   return (!shadow || shadow === 'none')
+    && (!innerShadow || innerShadow === 'none')
     && (!border || border === 'default')
     && !Object.values(rest).some(value => value && value !== 'default')
 }

@@ -98,6 +98,22 @@ export function generateCSS(doc: ThemeDoc): string {
     style.light['--ui-shadow-final-hard'] = 'color-mix(in oklab, var(--ui-shadow-color) var(--ui-shadow-opacity, 100%), transparent)'
     style.light['--ui-shadow-final-soft'] = 'color-mix(in oklab, var(--ui-shadow-color) var(--ui-shadow-opacity, 25%), transparent)'
   }
+  if (doc.style?.innerShadow && doc.style.innerShadow !== 'none') {
+    if (!style.light['--ui-shadow-color']) {
+      style.light['--ui-shadow-color'] = 'var(--ui-color-neutral-950)'
+      style.dark['--ui-shadow-color'] = 'black'
+    }
+    if (doc.style.innerShadow === 'hard') {
+      if (!style.light['--ui-inner-shadow-offset-x']) {
+        style.light['--ui-inner-shadow-offset-x'] = '0px'
+        style.light['--ui-inner-shadow-offset-y'] = '2px'
+        style.light['--ui-inner-shadow-blur'] = '4px'
+        style.light['--ui-inner-shadow-spread'] = '0px'
+      }
+      style.light['--ui-inner-shadow'] = 'var(--ui-inner-shadow-offset-x) var(--ui-inner-shadow-offset-y) var(--ui-inner-shadow-blur) var(--ui-inner-shadow-spread) var(--ui-shadow-final-inner)'
+    }
+    style.light['--ui-shadow-final-inner'] = 'color-mix(in oklab, var(--ui-shadow-color) var(--ui-inner-shadow-opacity, 15%), transparent)'
+  }
 
   if (Object.keys(style.light).length) {
     lines.push('', ':root, .light {', ...Object.entries(style.light).map(([key, val]) => `  ${key}: ${val};`), '}')

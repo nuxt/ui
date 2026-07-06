@@ -30,6 +30,7 @@ watch(open, (isOpen) => {
       color="neutral"
       variant="outline"
       size="sm"
+      block
     />
 
     <template #body>

@@ -6,6 +6,7 @@ import {
   FRAME_COLOR_VALUES,
   SHADOW_COLOR_VALUES,
   SHADOW_GEOMETRY_DEFAULTS,
+  INNER_SHADOW_GEOMETRY_DEFAULTS,
   BORDER_WIDTH_DEFAULT,
   VARIANT_GROUPS,
   VARIANT_SUPPORT,
@@ -202,6 +203,35 @@ function extractStyle(light: Record<string, string>, dark: Record<string, string
 
   if (opacity.light !== undefined) {
     style.shadowOpacity = Number.parseFloat(opacity.light)
+  }
+
+  const innerOpacity = take('--ui-inner-shadow-opacity')
+  const innerGeometry = {
+    x: take('--ui-inner-shadow-offset-x'),
+    y: take('--ui-inner-shadow-offset-y'),
+    blur: take('--ui-inner-shadow-blur'),
+    spread: take('--ui-inner-shadow-spread')
+  }
+  const innerFinal = take('--ui-shadow-final-inner')
+  take('--ui-inner-shadow')
+
+  if (innerGeometry.x.light !== undefined) {
+    style.innerShadow = 'hard'
+    const parsed = {
+      x: Number.parseFloat(innerGeometry.x.light),
+      y: Number.parseFloat(innerGeometry.y.light ?? '2'),
+      blur: Number.parseFloat(innerGeometry.blur.light ?? '4'),
+      spread: Number.parseFloat(innerGeometry.spread.light ?? '0')
+    }
+    if (JSON.stringify(parsed) !== JSON.stringify(INNER_SHADOW_GEOMETRY_DEFAULTS)) {
+      style.innerShadowGeometry = parsed
+    }
+  } else if (innerFinal.light !== undefined) {
+    style.innerShadow = 'soft'
+  }
+
+  if (innerOpacity.light !== undefined) {
+    style.innerShadowOpacity = Number.parseFloat(innerOpacity.light)
   }
 
   if (shadowColor.light !== undefined || shadowColor.dark !== undefined) {
@@ -417,6 +447,14 @@ function detectShadow(components: Record<string, any>): StyleOptions['shadow'] {
   return undefined
 }
 
+/** Inner-shadow fallback when only a config was pasted. */
+function detectInnerShadow(components: Record<string, any>): StyleOptions['innerShadow'] {
+  const slots = Object.values(components).flatMap(component => Object.values(component?.slots || {})) as string[]
+  if (slots.some(classes => classes.includes('(--ui-inner-shadow)'))) return 'hard'
+  if (slots.some(classes => classes.includes('--ui-shadow-final-inner'))) return 'soft'
+  return undefined
+}
+
 /**
  * Remove the fragments the reconstructed style regenerates, leaving only
  * genuinely explicit component overrides for doc.components.
@@ -495,6 +533,7 @@ export function importTheme(input: { css?: string, config?: string }): ThemeImpo
   // config classes; either half alone still reconstructs what it can.
   const style: StyleOptions = css ? extractStyle(css.light, css.dark) : {}
   style.shadow ||= detectShadow(components)
+  style.innerShadow ||= detectInnerShadow(components)
 
   // New exports carry width through the @theme variables; older ones (and
   // config-only pastes) still declare it through ring-N classes.

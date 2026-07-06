@@ -66,6 +66,23 @@ describe('importTheme', () => {
     })
   })
 
+  it('round-trips an inner-shadow style', () => {
+    const original: ThemeDoc = {
+      version: 1,
+      style: { innerShadow: 'hard', innerShadowGeometry: { x: 0, y: 4, blur: 8, spread: 0 }, innerShadowOpacity: 30 }
+    }
+    const css = generateCSS(original)
+    const config = generateConfig(original)
+    const { doc: imported, skipped } = importTheme({ css, config })
+
+    expect(skipped).toEqual([])
+    expect(imported.style?.innerShadow).toBe('hard')
+    expect(imported.style?.innerShadowGeometry).toEqual({ x: 0, y: 4, blur: 8, spread: 0 })
+    expect(imported.style?.innerShadowOpacity).toBe(30)
+    expect(generateConfig(imported)).toBe(config)
+    expect(generateCSS(imported)).toBe(css)
+  })
+
   it('parses sizing, font and radius from CSS alone', () => {
     const { doc, skipped } = importTheme({
       css: [

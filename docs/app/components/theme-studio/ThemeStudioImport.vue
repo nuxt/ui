@@ -48,6 +48,7 @@ function runImport() {
       color="neutral"
       variant="outline"
       size="sm"
+      block
     />
 
     <template #body>

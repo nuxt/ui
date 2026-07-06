@@ -150,6 +150,14 @@ html.theme-studio-dragging body *:not([data-curve-editor] *) {
   --ui-shadow-hard-lg: calc(var(--ui-shadow-offset-x) * 1.5) calc(var(--ui-shadow-offset-y) * 1.5) var(--ui-shadow-blur) var(--ui-shadow-spread) var(--ui-shadow-final-hard);
   --ui-shadow-hard-sm: calc(var(--ui-shadow-offset-x) * 0.66) calc(var(--ui-shadow-offset-y) * 0.66) var(--ui-shadow-blur) var(--ui-shadow-spread) var(--ui-shadow-final-hard);
   --ui-shadow-hard-half: calc(var(--ui-shadow-offset-x) / 2) calc(var(--ui-shadow-offset-y) / 2) var(--ui-shadow-blur) var(--ui-shadow-spread) var(--ui-shadow-final-hard);
+  /* Inner-shadow geometry defaults; shares --ui-shadow-color with the drop
+     treatment, with its own gentler opacity fallback. */
+  --ui-inner-shadow-offset-x: 0px;
+  --ui-inner-shadow-offset-y: 2px;
+  --ui-inner-shadow-blur: 4px;
+  --ui-inner-shadow-spread: 0px;
+  --ui-shadow-final-inner: color-mix(in oklab, var(--ui-shadow-color) var(--ui-inner-shadow-opacity, 15%), transparent);
+  --ui-inner-shadow: var(--ui-inner-shadow-offset-x) var(--ui-inner-shadow-offset-y) var(--ui-inner-shadow-blur) var(--ui-inner-shadow-spread) var(--ui-shadow-final-inner);
 }
 :where(.dark) {
   --ui-shadow-color: black;

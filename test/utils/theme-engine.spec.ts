@@ -287,6 +287,30 @@ describe('styleComponents', () => {
     expect(styleComponents({ shadow: 'none', border: 'default' })).toEqual({})
   })
 
+  it('inner shadow rides its own inset utilities on the same surfaces', async () => {
+    const { styleComponents, styleTokens } = await import('../../docs/app/utils/theme-engine')
+
+    const soft = styleComponents({ innerShadow: 'soft' })
+    expect(soft.button!.slots!.base).toContain('inset-shadow-sm inset-shadow-(color:--ui-shadow-final-inner)')
+    expect(soft.tooltip!.slots!.content).toContain('inset-shadow-(color:--ui-shadow-final-inner)')
+    // surfaceless variants stay flat, mirroring the drop treatment
+    expect(soft.button!.compoundVariants).toContainEqual({ variant: 'ghost', class: 'inset-shadow-none' })
+    expect(soft.input!.compoundVariants).toContainEqual({ variant: 'none', class: 'inset-shadow-none' })
+
+    const hard = styleComponents({ innerShadow: 'hard' })
+    expect(hard.card!.slots!.root).toContain('inset-shadow-(--ui-inner-shadow)')
+
+    // both treatments coexist on one surface — separate tailwind groups
+    const both = styleComponents({ shadow: 'hard', innerShadow: 'soft' })
+    expect(both.card!.slots!.root).toContain('shadow-(--ui-shadow-hard-lg)')
+    expect(both.card!.slots!.root).toContain('inset-shadow-sm')
+
+    const tokens = styleTokens({ innerShadow: 'hard', innerShadowGeometry: { y: 6 }, innerShadowOpacity: 30 })
+    expect(tokens.light['--ui-inner-shadow-offset-y']).toBe('6px')
+    expect(tokens.light['--ui-inner-shadow-offset-x']).toBe('0px')
+    expect(tokens.light['--ui-inner-shadow-opacity']).toBe('30%')
+  })
+
   it('merges shadow and border fragments slot-wise', async () => {
     const { styleComponents } = await import('../../docs/app/utils/theme-engine')
     const components = styleComponents({ shadow: 'hard', border: 'bold' })

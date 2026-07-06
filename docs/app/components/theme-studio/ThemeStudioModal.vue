@@ -13,6 +13,7 @@ const sidebarOpen = ref(true)
 // The studio's own chrome follows the border treatment too — whole literal
 // class strings per width so tailwind's scanner sees them.
 const PREVIEW_EDGE: Record<number, string> = { 0: 'border-0', 1: 'border', 2: 'border-2', 3: 'border-3', 4: 'border-4' }
+const SIDEBAR_RING: Record<number, string> = { 0: 'ring-0', 1: 'ring-1', 2: 'ring-2', 3: 'ring-3', 4: 'ring-4' }
 
 const chromeWidth = computed(() => {
   const border = style.value.border
@@ -67,13 +68,29 @@ const viewTabs = [
           v-model:open="sidebarOpen"
           variant="floating"
           :style="{ '--sidebar-width': '21rem' }"
-          :ui="{ container: 'pe-0', body: 'p-0 gap-0', inner: sidebarShadow }"
+          :ui="{ body: 'p-0 gap-0', inner: [sidebarShadow, SIDEBAR_RING[chromeWidth]] }"
         >
           <ThemeStudioControls />
 
           <template #footer>
-            <ThemeStudioImport />
-            <ThemeStudioExport />
+            <div class="flex-1 min-w-0">
+              <ThemeStudioImport />
+            </div>
+
+            <div class="flex-1 min-w-0">
+              <ThemeStudioExport />
+            </div>
+
+            <UTooltip text="Reset theme">
+              <UButton
+                icon="i-lucide-rotate-ccw"
+                color="neutral"
+                variant="outline"
+                size="sm"
+                aria-label="Reset theme"
+                @click="reset"
+              />
+            </UTooltip>
           </template>
         </USidebar>
 
@@ -110,19 +127,6 @@ const viewTabs = [
 
             <span class="flex-1" />
 
-            <UTooltip text="Reset theme">
-              <UButton
-                icon="i-lucide-rotate-ccw"
-                color="neutral"
-                variant="outline"
-                size="sm"
-                aria-label="Reset theme"
-                @click="reset"
-              />
-            </UTooltip>
-
-            <USeparator orientation="vertical" class="h-5" />
-
             <UTooltip text="Close">
               <UButton
                 icon="i-lucide-x"
@@ -138,7 +142,7 @@ const viewTabs = [
           <!-- The floating preview card: the grid scrolls inside it; the
                app-shell views own their height and scroll internally. -->
           <div
-            class="flex-1 min-w-0 min-h-0 border-default m-4 mt-1 rounded-lg"
+            class="flex-1 min-w-0 min-h-0 border-default m-4 mt-1 lg:ms-0 rounded-lg"
             :class="[PREVIEW_EDGE[chromeWidth], previewShadow, view === 'grid' ? 'overflow-y-auto' : 'overflow-hidden']"
           >
             <ThemeStudioBento v-if="view === 'grid'" />
