@@ -98,6 +98,12 @@ const viewTabs = [
 /** UI-hiding fullscreen: only the preview stays (not browser fullscreen). */
 const fullscreen = useState('theme-studio-fullscreen', () => false)
 
+// The state is app-level (the site header gates on it) — never let it
+// leak past the studio.
+onUnmounted(() => {
+  fullscreen.value = false
+})
+
 const settingGroups = [
   { label: 'Colors', value: 'colors' },
   { label: 'General', value: 'general' },
