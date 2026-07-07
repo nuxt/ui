@@ -55,7 +55,7 @@ function openStudio() {
         icon="i-lucide-swatch-book"
         color="neutral"
         variant="subtle"
-
+        size="sm"
         block
         @click="openStudio"
       />
@@ -144,6 +144,7 @@ function openStudio() {
             :key="m.label"
             v-bind="m"
             :selected="colorMode.preference === m.label"
+            size="sm"
             @click="mode = m.label"
           />
         </div>

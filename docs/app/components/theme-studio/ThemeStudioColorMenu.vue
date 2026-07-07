@@ -52,7 +52,7 @@ function isSelected(color: string) {
     <UButton
       color="neutral"
       variant="subtle"
-
+      size="sm"
       block
       trailing-icon="i-lucide-chevron-down"
       class="capitalize"
@@ -79,6 +79,7 @@ function isSelected(color: string) {
             <ThemeStudioPickerButton
               v-if="alias === 'primary' && index === 0"
               label="Black"
+              size="xs"
               :selected="blackAsPrimary"
               @click="setBlackAsPrimary(true)"
             >
@@ -91,6 +92,7 @@ function isSelected(color: string) {
               v-for="color in section.colors"
               :key="color"
               :label="color"
+              size="xs"
               :chip="paletteChip(color)"
               :selected="isSelected(color)"
               @click="selectPalette(alias, color)"
