@@ -88,7 +88,7 @@ export const presets: ThemePreset[] = [{
       borderShade: { light: 900, dark: 950 },
       defaults: { variants: { buttons: 'solid', panels: 'subtle', inputs: 'subtle' } },
       tokenShades: {
-        '--ui-bg': { light: 100, dark: 800 },
+        '--ui-bg': { light: 50, dark: 800 },
         '--ui-bg-muted': { light: 300 },
         '--ui-bg-elevated': { light: 300, dark: 700 },
         '--ui-bg-accented': { light: 400, dark: 600 },
@@ -155,14 +155,14 @@ export const presets: ThemePreset[] = [{
     style: {
       shadow: 'hard',
       shadowColor: 'shade',
-      shadowShade: { light: 950, dark: 950 },
+      shadowShade: { light: 200, dark: 950 },
       shadowOpacity: 55,
       shadowGeometry: { x: 0, y: 3, blur: 0, spread: 0 },
       innerShadow: 'hard',
       innerShadowGeometry: { x: 0, y: -3, blur: 0, spread: 0 },
       innerShadowOpacity: 50,
       innerShadowColor: 'shade',
-      innerShadowShade: { light: 200, dark: 950 },
+      innerShadowShade: { light: 500, dark: 950 },
       defaults: { variant: 'subtle' },
       tokenShades: {
         '--ui-bg-muted': { light: 100 },
@@ -298,15 +298,60 @@ export const presets: ThemePreset[] = [{
   doc: {
     version: 1,
     meta: { name: 'Marshmallow', base: 'marshmallow' },
+    // A sculpted pink-mauve neutral (chroma peaks mid-ramp) instead of the
+    // stock mauve.
+    palettes: {
+      'custom-neutral': {
+        shades: {
+          50: 'oklch(96.1% 0.021 325.68)',
+          100: 'oklch(92.4% 0.039 325.829)',
+          200: 'oklch(88% 0.057 325.83)',
+          300: 'oklch(81.2% 0.073 325.398)',
+          400: 'oklch(66.1% 0.084 323.292)',
+          500: 'oklch(52.4% 0.079 322.443)',
+          600: 'oklch(42.7% 0.064 322.128)',
+          700: 'oklch(34.6% 0.048 322.004)',
+          800: 'oklch(27.4% 0.034 321.983)',
+          900: 'oklch(20.7% 0.02 322.028)',
+          950: 'oklch(14.5% 0.008 322.12)'
+        }
+      }
+    },
     colors: {
       primary: 'pink',
       secondary: 'violet',
-      neutral: 'mauve'
+      neutral: 'custom-neutral'
     },
     radius: 0.5,
     font: { sans: 'Poppins' },
+    tokens: {
+      light: {
+        '--ui-bg': 'var(--ui-color-neutral-50)',
+        '--ui-text-inverted': 'var(--ui-color-neutral-50)'
+      },
+      dark: {
+        '--ui-text-highlighted': 'var(--ui-color-neutral-50)',
+        '--ui-bg-inverted': 'var(--ui-color-neutral-50)',
+        '--ui-border-inverted': 'var(--ui-color-neutral-50)'
+      }
+    },
+    // Soft pink-cast shadows (primary 700 light / 950 dark at 15%) over a
+    // top-lit blurred inset.
     style: {
-      shadow: 'soft'
+      shadow: 'soft',
+      shadowOpacity: 15,
+      innerShadow: 'hard',
+      innerShadowGeometry: {
+        x: 0,
+        y: -4,
+        blur: 4,
+        spread: 0
+      },
+      shadowColor: 'primary-shade',
+      shadowShade: {
+        light: 700,
+        dark: 950
+      }
     }
   }
 }, {
