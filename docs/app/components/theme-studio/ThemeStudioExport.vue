@@ -29,7 +29,7 @@ watch(open, (isOpen) => {
       label="Export"
       icon="i-lucide-download"
       color="neutral"
-      variant="outline"
+      variant="subtle"
       size="sm"
       block
     />

@@ -46,7 +46,7 @@ function runImport() {
       label="Import"
       icon="i-lucide-upload"
       color="neutral"
-      variant="outline"
+      variant="subtle"
       size="sm"
       block
     />

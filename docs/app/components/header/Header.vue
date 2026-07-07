@@ -45,7 +45,15 @@ function toggleChat() {
         />
       </UTooltip>
 
-      <ThemeStudioModal />
+      <UTooltip text="Theme Studio">
+        <UButton
+          icon="i-lucide-swatch-book"
+          color="neutral"
+          variant="ghost"
+          to="/theme"
+          aria-label="Open Theme Studio"
+        />
+      </UTooltip>
 
       <UTooltip text="Open on GitHub" class="hidden lg:flex">
         <UButton
