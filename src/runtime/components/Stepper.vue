@@ -4,7 +4,7 @@ import type { StepperRootProps, StepperRootEmits } from 'reka-ui'
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/stepper'
-import type { IconProps } from '../types'
+import type { IconProps } from './Icon.vue'
 import type { DynamicSlots, GetItemKeys } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
@@ -105,7 +105,7 @@ const appConfig = useAppConfig() as Stepper['AppConfig']
 const rootProps = useForwardProps(reactivePick(props, 'as', 'linear'))
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.stepper || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.stepper || {}) })({
   orientation: props.orientation,
   size: props.size,
   color: props.color

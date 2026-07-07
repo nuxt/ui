@@ -180,6 +180,7 @@ describe('Table', () => {
     ['with meta field on columns', { props: { ...props, columns: columns.map(c => ({ ...c, meta: { class: { th: 'custom-heading-class', td: 'custom-cell-class' }, style: { th: { backgroundColor: 'black' }, td: { backgroundColor: 'lightgray' } } } })) } }],
     ['with virtualize', { props: { ...props, virtualize: true } }],
     ['with virtualize and sticky', { props: { ...props, columns, virtualize: true, sticky: true } }],
+    ['with virtualize external scroll element', { props: { ...props, virtualize: { getScrollElement: () => document.body, scrollMargin: 20 } } }],
     ['with row pinning', { props: { ...props, rowPinning: { top: ['2'], bottom: ['3'] } } }],
     ['with row pinning and virtualization', { props: { ...props, virtualize: true, rowPinning: { top: ['2'], bottom: ['3'] } } }],
     ['with as', { props: { ...props, as: 'section' } }],

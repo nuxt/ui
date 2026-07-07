@@ -37,7 +37,7 @@ const props = useComponentProps('prose.fieldGroup', _props)
 const appConfig = useAppConfig() as ProseFieldGroup['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.fieldGroup || {}) }))
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.prose?.fieldGroup || {}) }))
 </script>
 
 <template>

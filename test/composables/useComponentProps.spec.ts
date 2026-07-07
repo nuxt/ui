@@ -1,6 +1,9 @@
-import { describe, expectTypeOf, test } from 'vitest'
+import { describe, expectTypeOf, it, expect, test, beforeAll, afterAll } from 'vitest'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { useAppConfig } from '#imports'
+import { UFormField } from '#components'
 import type * as ui from '#build/ui'
-import type { ThemeDefaults } from '../../src/runtime/composables/useComponentProps'
+import type { ThemeDefaults } from '../../src/runtime/types/theme'
 
 /**
  * Hand-maintained list of `#build/ui` exports that intentionally don't
@@ -36,5 +39,42 @@ describe('ThemeDefaults registry', () => {
 
   test('ThemeDefaults declares no entries beyond the `#build/ui` registry', () => {
     expectTypeOf<ExtraInThemeDefaults>().toBeNever()
+  })
+})
+
+// `app.config.ui.<name>.defaultVariants` must override a prop the component
+// pins in `withDefaults` (here `orientation`). Regression test for #6683.
+describe('app.config defaultVariants', () => {
+  let appConfig: { ui?: Record<string, any> }
+
+  beforeAll(() => {
+    appConfig = useAppConfig() as { ui?: Record<string, any> }
+    appConfig.ui ??= {}
+    appConfig.ui.formField = { defaultVariants: { orientation: 'horizontal' } }
+  })
+
+  afterAll(() => {
+    delete appConfig.ui!.formField
+  })
+
+  it('overrides the withDefaults fallback', async () => {
+    const wrapper = await mountSuspended(UFormField, {
+      props: { label: 'Label' }
+    })
+
+    const root = wrapper.find('[data-slot="root"]')
+    // Drives both the `data-orientation` attribute and the tv class resolution,
+    // even though `orientation` isn't set in the theme's `defaultVariants`.
+    expect(root.attributes('data-orientation')).toBe('horizontal')
+    expect(root.classes()).toContain('place-items-baseline')
+  })
+
+  it('still lets an explicit prop win', async () => {
+    const wrapper = await mountSuspended(UFormField, {
+      props: { label: 'Label', orientation: 'vertical' }
+    })
+
+    const root = wrapper.find('[data-slot="root"]')
+    expect(root.attributes('data-orientation')).toBe('vertical')
   })
 })

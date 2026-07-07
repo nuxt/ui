@@ -4,7 +4,7 @@ import type { VNode } from 'vue'
 import type { TocLink } from '@nuxt/content'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/content/content-toc'
-import type { IconProps } from '../../types'
+import type { IconProps } from '../Icon.vue'
 import type { ComponentConfig } from '../../types/tv'
 
 type ContentToc = ComponentConfig<typeof theme, AppConfig, 'contentToc'>
@@ -112,7 +112,7 @@ const [DefineTriggerTemplate, ReuseTriggerTemplate] = createReusableTemplate<{ o
 const [DefineContentTemplate, ReuseContentTemplate] = createReusableTemplate()
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.contentToc || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.contentToc || {}) })({
   color: props.color,
   highlight: props.highlight,
   highlightVariant: props.highlightVariant,
@@ -261,7 +261,7 @@ onUnmounted(() => {
     </slot>
   </DefineContentTemplate>
 
-  <CollapsibleRoot v-slot="{ open }" v-bind="{ ...rootProps, ...$attrs }" :default-open="props.defaultOpen" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <CollapsibleRoot v-slot="{ open }" data-slot="root" v-bind="{ ...rootProps, ...$attrs }" :default-open="props.defaultOpen" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <div data-slot="container" :class="ui.container({ class: props.ui?.container })">
       <div v-if="!!slots.top" data-slot="top" :class="ui.top({ class: props.ui?.top })">
         <slot name="top" :links="props.links" />

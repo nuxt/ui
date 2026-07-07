@@ -1,6 +1,7 @@
 name: "🐛 Bug report"
 description: Report a bug to help us improve the module.
-labels: ["triage", "bug"]
+type: Bug
+labels: ["triage"]
 body:
   - type: markdown
     attributes:

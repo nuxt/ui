@@ -14,7 +14,7 @@ overrides:
   '@nuxt/kit': ^4.4.8
   '@nuxt/test-utils': 4.0.2
   '@nuxt/ui': workspace:*
-  unplugin: ^3.0.0
+  unplugin: ^3.3.0
   c12: ^3.3.4
   h3: 1.15.11
   typescript: ^6.0.3
@@ -29,3 +29,6 @@ allowBuilds:
   esbuild: false
   unrs-resolver: false
   vue-demi: false
+
+minimumReleaseAgeExclude:
+  - shiki-transformer-icon-highlight@0.1.0

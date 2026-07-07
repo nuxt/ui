@@ -4,7 +4,12 @@ import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/select-menu'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
-import type { AvatarProps, ButtonProps, ChipProps, IconProps, InputProps, LinkPropsKeys } from '../types'
+import type { AvatarProps } from './Avatar.vue'
+import type { ButtonProps } from './Button.vue'
+import type { ChipProps } from './Chip.vue'
+import type { IconProps } from './Icon.vue'
+import type { InputProps } from './Input.vue'
+import type { LinkPropsKeys } from './Link.vue'
 import type { ModelModifiers, ApplyModifiers } from '../types/input'
 import type { ButtonHTMLAttributes } from '../types/html'
 import type { AcceptableValue, ArrayOrNested, GetItemKeys, GetItemValue, GetModelValue, NestedItem, EmitsToProps } from '../types/utils'
@@ -306,7 +311,7 @@ const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: S
 })
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.selectMenu || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.selectMenu || {}) })({
   color: color.value ?? props.color,
   variant: props.variant,
   size: selectSize?.value ?? props.size,
@@ -498,9 +503,11 @@ const comboboxRootRef = useTemplateRef('comboboxRootRef')
 // reka-ui only re-highlights the first item when the list goes from empty to non-empty.
 // With `create-item`, the create item is always registered so the count never drops to 0,
 // leaving the highlight stale when async `items` load. Re-highlight when items change while open.
+// Scoped to `create-item` only, otherwise this fires on infinite-scroll appends too and
+// scrolls the viewport back to the top.
 // Wait an extra tick so freshly mounted items are registered in reka-ui's collection before highlighting.
 watch(() => props.items, async () => {
-  if (!isOpen.value) {
+  if (!isOpen.value || !props.createItem) {
     return
   }
 

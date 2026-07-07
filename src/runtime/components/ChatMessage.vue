@@ -3,7 +3,9 @@ import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { UIDataTypes, UIMessage, UITools, FileUIPart, TextUIPart } from 'ai'
 import theme from '#build/ui/chat-message'
-import type { AvatarProps, ButtonProps, IconProps } from '../types'
+import type { AvatarProps } from './Avatar.vue'
+import type { ButtonProps } from './Button.vue'
+import type { IconProps } from './Icon.vue'
 import type { ComponentConfig } from '../types/tv'
 
 type ChatMessage = ComponentConfig<typeof theme, AppConfig, 'chatMessage'>
@@ -89,7 +91,7 @@ const textParts = computed(() => props.parts?.filter((part): part is TextUIPart 
 const messageProps = computed(() => omit(props, ['as', 'icon', 'avatar', 'variant', 'color', 'side', 'actions', 'compact', 'class', 'ui', 'content']))
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.chatMessage || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.chatMessage || {}) })({
   variant: props.variant,
   color: props.color,
   side: props.side,

@@ -33,7 +33,7 @@ const props = useComponentProps('prose.tabsItem', _props)
 const appConfig = useAppConfig() as ProseTabsItem['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.tabsItem || {}) }))
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.prose?.tabsItem || {}) }))
 </script>
 
 <template>

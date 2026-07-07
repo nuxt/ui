@@ -1,4 +1,4 @@
-import type { Messages } from '../types'
+import type { Messages } from '../types/locale'
 import { defineLocale } from '../composables/defineLocale'
 
 export default defineLocale<Messages>({
@@ -81,6 +81,9 @@ export default defineLocale<Messages>({
     dashboardSidebarToggle: {
       close: 'Zatvoriť bočný panel',
       open: 'Otvoriť bočný panel'
+    },
+    drawer: {
+      close: 'Zatvoriť'
     },
     error: {
       clear: 'Späť na domovskú stránku'

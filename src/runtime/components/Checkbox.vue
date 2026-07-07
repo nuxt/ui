@@ -3,7 +3,7 @@ import type { CheckboxRootProps, CheckboxRootEmits } from 'reka-ui'
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/checkbox'
-import type { IconProps } from '../types'
+import type { IconProps } from './Icon.vue'
 import type { ButtonHTMLAttributes } from '../types/html'
 import type { ComponentConfig } from '../types/tv'
 
@@ -96,7 +96,7 @@ const forwardedAttrs = computed(() => {
 })
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.checkbox || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.checkbox || {}) })({
   size: size.value ?? props.size,
   color: color.value ?? props.color,
   variant: props.variant,
@@ -117,7 +117,7 @@ function onUpdate(value: any) {
 
 <!-- eslint-disable vue/no-template-shadow -->
 <template>
-  <Primitive :as="(!props.variant || props.variant === 'list') ? props.as : Label" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <Primitive :as="(!props.variant || props.variant === 'list') ? props.as : Label" :data-slot="($attrs['data-slot'] as string | undefined) ?? 'root'" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <div data-slot="container" :class="ui.container({ class: props.ui?.container })">
       <CheckboxRoot
         :id="id"

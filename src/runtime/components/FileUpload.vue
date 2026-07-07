@@ -3,7 +3,9 @@ import type { VNode, MaybeRef } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { UseFileDialogReturn } from '@vueuse/core'
 import theme from '#build/ui/file-upload'
-import type { ButtonProps, IconProps, LinkPropsKeys } from '../types'
+import type { ButtonProps } from './Button.vue'
+import type { IconProps } from './Icon.vue'
+import type { LinkPropsKeys } from './Link.vue'
 import type { InputHTMLAttributes } from '../types/html'
 import type { ComponentConfig } from '../types/tv'
 
@@ -205,7 +207,7 @@ const position = computed(() => {
 })
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.fileUpload || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.fileUpload || {}) })({
   dropzone: props.dropzone,
   interactive: props.interactive,
   color: color.value ?? props.color,
@@ -355,7 +357,7 @@ defineExpose({
     </template>
   </DefineFilesTemplate>
 
-  <Primitive :as="props.as" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <Primitive :as="props.as" :data-slot="($attrs['data-slot'] as string | undefined) ?? 'root'" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <slot :open="open" :remove-file="removeFile" :ui="ui">
       <component
         :is="variant === 'button' ? 'button' : 'div'"
@@ -363,6 +365,7 @@ defineExpose({
         :type="variant === 'button' ? 'button' : undefined"
         :role="variant === 'button' ? undefined : 'button'"
         :disabled="variant === 'button' ? disabled : undefined"
+        :aria-disabled="variant === 'button' ? undefined : (disabled || undefined)"
         :data-dragging="isDragging"
         data-slot="base"
         :class="ui.base({ class: props.ui?.base })"
@@ -414,7 +417,7 @@ defineExpose({
       :multiple="(multiple as boolean)"
       :required="props.required"
       :disabled="disabled"
-      v-bind="{ ...$attrs, ...ariaAttrs }"
+      v-bind="{ ...$attrs, ...ariaAttrs, 'data-slot': undefined }"
     />
   </Primitive>
 </template>

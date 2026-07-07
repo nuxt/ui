@@ -6,7 +6,10 @@ import type { Editor } from '@tiptap/vue-3'
 import type { BubbleMenuPluginProps } from '@tiptap/extension-bubble-menu'
 import type { FloatingMenuPluginProps } from '@tiptap/extension-floating-menu'
 import theme from '#build/ui/editor-toolbar'
-import type { ButtonProps, DropdownMenuProps, DropdownMenuItem, TooltipProps, LinkPropsKeys } from '../types'
+import type { ButtonProps } from './Button.vue'
+import type { DropdownMenuProps, DropdownMenuItem } from './DropdownMenu.vue'
+import type { TooltipProps } from './Tooltip.vue'
+import type { LinkPropsKeys } from './Link.vue'
 import type { EditorItem, EditorCustomHandlers } from '../types/editor'
 import type { ArrayOrNested, DynamicSlots, MergeTypes, NestedItem } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
@@ -145,7 +148,7 @@ const options = computed(() => defu((props as any).options, {
 }))
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.editorToolbar || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.editorToolbar || {}) })({
   layout: props.layout
 }))
 

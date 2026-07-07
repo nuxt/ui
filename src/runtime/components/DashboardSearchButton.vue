@@ -1,7 +1,11 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/dashboard-search-button'
-import type { ButtonProps, ButtonSlots, IconProps, KbdProps, TooltipProps, LinkPropsKeys } from '../types'
+import type { ButtonProps, ButtonSlots } from './Button.vue'
+import type { IconProps } from './Icon.vue'
+import type { KbdProps } from './Kbd.vue'
+import type { TooltipProps } from './Tooltip.vue'
+import type { LinkPropsKeys } from './Link.vue'
 import type { ComponentConfig } from '../types/tv'
 
 type DashboardSearchButton = ComponentConfig<typeof theme, AppConfig, 'dashboardSearchButton'>
@@ -88,7 +92,7 @@ const appConfig = useAppConfig() as DashboardSearchButton['AppConfig']
 const { toggleSearch } = useDashboard({ toggleSearch: () => {} })
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.dashboardSearchButton || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.dashboardSearchButton || {}) })({
   collapsed: props.collapsed
 }))
 </script>

@@ -6,7 +6,9 @@ import type { DateValue } from '@internationalized/date'
 import { getLocalTimeZone, today } from '@internationalized/date'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/calendar'
-import type { ButtonProps, IconProps, LinkPropsKeys } from '../types'
+import type { ButtonProps } from './Button.vue'
+import type { IconProps } from './Icon.vue'
+import type { LinkPropsKeys } from './Link.vue'
 import type { ComponentConfig } from '../types/tv'
 
 type Calendar = ComponentConfig<typeof theme, AppConfig, 'calendar'>
@@ -293,7 +295,7 @@ const prevLabel = computed(() => view.value === 'day' ? t('calendar.prevMonth') 
 const nextLabel = computed(() => view.value === 'day' ? t('calendar.nextMonth') : t('calendar.nextYear'))
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.calendar || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.calendar || {}) })({
   color: props.color,
   size: props.size,
   variant: props.variant,

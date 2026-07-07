@@ -4,7 +4,7 @@ import type { ComponentPublicInstance, VNode } from 'vue'
 import type { TreeRootProps, TreeRootEmits, TreeItemSelectEvent, TreeItemToggleEvent } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/tree'
-import type { IconProps } from '../types'
+import type { IconProps } from './Icon.vue'
 import type { DynamicSlots, GetItemKeys } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
@@ -221,7 +221,7 @@ const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: T
 })
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.tree || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.tree || {}) })({
   color: props.color,
   size: props.size,
   virtualize: !!props.virtualize
@@ -368,11 +368,11 @@ defineExpose({
   <TreeRoot
     ref="rootRef"
     v-slot="{ flattenItems }"
+    data-slot="root"
     v-bind="{ ...rootProps, ...$attrs }"
     :as="as.root"
     :model-value="props.modelValue"
     :default-value="props.defaultValue"
-    data-slot="root"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     :get-key="getItemKey"
     :default-expanded="defaultExpanded"

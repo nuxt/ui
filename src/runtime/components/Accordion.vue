@@ -4,7 +4,7 @@ import type { AccordionRootProps, AccordionRootEmits } from 'reka-ui'
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/accordion'
-import type { IconProps } from '../types'
+import type { IconProps } from './Icon.vue'
 import type { DynamicSlots, GetItemKeys } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
@@ -104,7 +104,7 @@ const appConfig = useAppConfig() as Accordion['AppConfig']
 const rootProps = useForwardProps(reactivePick(props, 'as', 'collapsible', 'defaultValue', 'disabled', 'modelValue', 'unmountOnHide'), emits)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.accordion || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.accordion || {}) })({
   disabled: props.disabled
 }))
 </script>

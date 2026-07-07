@@ -1,4 +1,4 @@
-import type { Messages } from '../types'
+import type { Messages } from '../types/locale'
 import { defineLocale } from '../composables/defineLocale'
 
 export default defineLocale<Messages>({
@@ -76,6 +76,9 @@ export default defineLocale<Messages>({
     dashboardSidebarToggle: {
       close: 'Close sidebar',
       open: 'Open sidebar'
+    },
+    drawer: {
+      close: 'Close'
     },
     error: {
       clear: 'Back to home'

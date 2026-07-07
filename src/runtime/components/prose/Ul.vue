@@ -31,7 +31,7 @@ const props = useComponentProps('prose.ul', _props)
 const appConfig = useAppConfig() as ProseUl['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.ul || {}) }))
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.prose?.ul || {}) }))
 </script>
 
 <template>

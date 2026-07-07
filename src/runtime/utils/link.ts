@@ -1,6 +1,6 @@
 import { reactivePick } from '@vueuse/core'
 import { isEqual, diff } from 'ohash/utils'
-import type { LinkProps } from '../types'
+import type { LinkProps } from '../components/Link.vue'
 
 export const linkKeys = [
   'active',

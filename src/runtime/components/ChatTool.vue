@@ -3,7 +3,7 @@ import type { CollapsibleRootProps } from 'reka-ui'
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/chat-tool'
-import type { IconProps } from '../types'
+import type { IconProps } from './Icon.vue'
 import type { ChatShimmerProps } from './ChatShimmer.vue'
 import type { ComponentConfig } from '../types/tv'
 
@@ -97,7 +97,7 @@ const props = useComponentProps('chatTool', _props)
 const appConfig = useAppConfig() as ChatTool['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.chatTool || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.chatTool || {}) })({
   variant: props.variant,
   chevron: props.chevron,
   loading: props.loading

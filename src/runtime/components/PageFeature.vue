@@ -2,7 +2,8 @@
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/page-feature'
-import type { IconProps, LinkProps } from '../types'
+import type { IconProps } from './Icon.vue'
+import type { LinkProps } from './Link.vue'
 import type { ComponentConfig } from '../types/tv'
 
 type PageFeature = ComponentConfig<typeof theme, AppConfig, 'pageFeature'>
@@ -27,7 +28,7 @@ export interface PageFeatureProps {
   orientation?: PageFeature['variants']['orientation']
   to?: LinkProps['to']
   target?: LinkProps['target']
-  onClick?: (event: MouseEvent) => void | Promise<void>
+  onClick?: (event: MouseEvent) => void
   class?: any
   ui?: PageFeature['slots']
 }
@@ -64,7 +65,7 @@ const appConfig = useAppConfig() as PageFeature['AppConfig']
 const prefix = usePrefix()
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pageFeature || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.pageFeature || {}) })({
   orientation: props.orientation,
   title: !!props.title || !!slots.title,
   to: !!props.to || !!props.onClick
@@ -77,7 +78,14 @@ const ariaLabel = computed(() => {
 </script>
 
 <template>
-  <Primitive :as="props.as" :data-orientation="props.orientation" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })" @click="props.onClick">
+  <Primitive
+    :as="props.as"
+    v-bind="!props.to ? $attrs : {}"
+    :data-orientation="props.orientation"
+    :data-slot="($attrs['data-slot'] as string | undefined) ?? 'root'"
+    :class="ui.root({ class: [props.ui?.root, props.class] })"
+    @click="props.onClick"
+  >
     <div v-if="props.icon || !!slots.leading" data-slot="leading" :class="ui.leading({ class: props.ui?.leading })">
       <slot name="leading" :ui="ui">
         <UIcon v-if="props.icon" :name="props.icon" data-slot="leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
@@ -88,7 +96,7 @@ const ariaLabel = computed(() => {
       <ULink
         v-if="props.to"
         :aria-label="ariaLabel"
-        v-bind="{ to: props.to, target: props.target, ...$attrs }"
+        v-bind="{ 'to': props.to, 'target': props.target, ...$attrs, 'data-slot': undefined }"
         :class="prefix('focus:outline-none peer')"
         raw
       >

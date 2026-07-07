@@ -3,7 +3,8 @@ import type { Ref, VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/button'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
-import type { LinkProps, AvatarProps } from '../types'
+import type { LinkProps } from './Link.vue'
+import type { AvatarProps } from './Avatar.vue'
 import type { ComponentConfig } from '../types/tv'
 
 type Button = ComponentConfig<typeof theme, AppConfig, 'button'>
@@ -30,7 +31,7 @@ export interface ButtonProps extends UseComponentIconsProps, Omit<LinkProps, 'ra
   block?: boolean
   /** Set loading state automatically based on the `@click` promise state */
   loadingAuto?: boolean
-  onClick?: ((event: MouseEvent) => void | Promise<void>) | Array<((event: MouseEvent) => void | Promise<void>)>
+  onClick?: ((event: MouseEvent) => void) | Array<((event: MouseEvent) => void)>
   class?: any
   ui?: Button['slots']
 }
@@ -92,7 +93,7 @@ const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponen
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({
-  extend: tv(theme),
+  extend: theme,
   ...defu({
     variants: {
       active: {
@@ -127,8 +128,8 @@ const ui = computed(() => tv({
     custom
   >
     <ULinkBase
-      v-bind="slotProps"
       data-slot="base"
+      v-bind="slotProps"
       :class="ui.base({
         class: [props.ui?.base, props.class],
         active,
