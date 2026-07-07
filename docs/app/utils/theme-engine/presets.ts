@@ -428,14 +428,38 @@ export const presets: ThemePreset[] = [{
     },
     radius: 0.375,
     font: { sans: 'DM Sans' },
+    // Deep cream page over ivory surfaces in light; one flat 800 surface
+    // family in dark, with the brand clay held at 500.
     tokens: {
       light: {
-        '--ui-bg': 'var(--ui-color-neutral-50)'
+        '--ui-bg': 'var(--ui-color-neutral-200)',
+        '--ui-bg-elevated': 'var(--ui-color-neutral-50)'
       },
       dark: {
+        '--ui-primary': 'var(--ui-color-primary-500)',
         '--ui-bg': 'var(--ui-color-neutral-900)',
-        '--ui-primary': 'var(--ui-color-primary-500)'
+        '--ui-bg-muted': 'var(--ui-color-neutral-800)',
+        '--ui-bg-elevated': 'var(--ui-color-neutral-800)',
+        '--ui-bg-accented': 'var(--ui-color-neutral-800)'
       }
+    },
+    // Blurred warm-gray drop shadows (500 light / 950 dark at 25%) with
+    // subtle panels.
+    style: {
+      shadow: 'hard',
+      shadowGeometry: {
+        x: 0,
+        y: 2,
+        blur: 9,
+        spread: 0
+      },
+      shadowOpacity: 25,
+      shadowColor: 'shade',
+      shadowShade: {
+        light: 500,
+        dark: 950
+      },
+      defaults: { variants: { panels: 'subtle' } }
     }
   }
 }, {
