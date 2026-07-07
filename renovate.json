@@ -17,8 +17,7 @@
     {
       "groupName": "reka-ui",
       "matchPackageNames": [
-        "reka-ui",
-        "vaul-vue"
+        "reka-ui"
       ]
     },
     {

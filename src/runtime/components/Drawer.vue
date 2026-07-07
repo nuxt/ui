@@ -1,7 +1,6 @@
 <script lang="ts">
 import type { VNode } from 'vue'
-import type { DrawerRootProps, DrawerRootEmits } from 'vaul-vue'
-import type { DialogContentProps, DialogContentEmits } from 'reka-ui'
+import type { DrawerRootProps, DrawerRootEmits, DrawerOpenChangeDetails, DialogContentProps, DialogContentEmits } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/drawer'
 import type { ButtonProps } from './Button.vue'
@@ -12,7 +11,7 @@ import type { ComponentConfig } from '../types/tv'
 
 type Drawer = ComponentConfig<typeof theme, AppConfig, 'drawer'>
 
-export interface DrawerProps extends Pick<DrawerRootProps, 'activeSnapPoint' | 'closeThreshold' | 'shouldScaleBackground' | 'setBackgroundColorOnScale' | 'scrollLockTimeout' | 'fixed' | 'dismissible' | 'modal' | 'open' | 'defaultOpen' | 'nested' | 'direction' | 'noBodyStyles' | 'handleOnly' | 'preventScrollRestoration' | 'snapPoints'> {
+export interface DrawerProps extends Pick<DrawerRootProps, 'modal' | 'open' | 'defaultOpen' | 'snapPoints' | 'snapPoint' | 'defaultSnapPoint' | 'snapToSequentialPoints'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -20,6 +19,11 @@ export interface DrawerProps extends Pick<DrawerRootProps, 'activeSnapPoint' | '
   as?: any
   title?: string
   description?: string
+  /**
+   * The edge the drawer slides in from (and the direction it's swiped to dismiss).
+   * @defaultValue 'bottom'
+   */
+  direction?: 'top' | 'right' | 'bottom' | 'left'
   /**
    * Whether to inset the drawer from the edges.
    * @defaultValue false
@@ -43,11 +47,6 @@ export interface DrawerProps extends Pick<DrawerRootProps, 'activeSnapPoint' | '
    */
   portal?: boolean | string | HTMLElement
   /**
-   * Whether the drawer is nested in another drawer.
-   * @defaultValue false
-   */
-  nested?: boolean
-  /**
    * Display a close button to dismiss the drawer.
    * `{ size: 'md', color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
    * @defaultValue false
@@ -59,12 +58,17 @@ export interface DrawerProps extends Pick<DrawerRootProps, 'activeSnapPoint' | '
    * @IconifyIcon
    */
   closeIcon?: IconProps['name']
+  /**
+   * When `false`, the drawer will not close when clicking outside, pressing escape, or swiping.
+   * @defaultValue true
+   */
+  dismissible?: boolean
   class?: any
   ui?: Drawer['slots']
 }
 
 export interface DrawerEmits extends DrawerRootEmits {
-  (e: 'close:prevent'): void
+  'close:prevent': []
 }
 
 export interface DrawerSlots {
@@ -81,10 +85,9 @@ export interface DrawerSlots {
 </script>
 
 <script setup lang="ts">
-import { computed, toRef } from 'vue'
-import { VisuallyHidden } from 'reka-ui'
+import { computed, ref, toRef } from 'vue'
+import { DrawerRoot, DrawerTrigger, DrawerPortal, DrawerOverlay, DrawerContent, DrawerTitle, DrawerDescription, DrawerHandle, DrawerClose, VisuallyHidden } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
-import { DrawerRoot, DrawerRootNested, DrawerTrigger, DrawerPortal, DrawerOverlay, DrawerContent, DrawerTitle, DrawerDescription, DrawerHandle, DrawerClose } from 'vaul-vue'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
@@ -111,26 +114,61 @@ const props = useComponentProps('drawer', _props)
 const { t } = useLocale()
 const appConfig = useAppConfig() as Drawer['AppConfig']
 
-const rootProps = useForwardProps(reactivePick(props, 'activeSnapPoint', 'closeThreshold', 'shouldScaleBackground', 'setBackgroundColorOnScale', 'scrollLockTimeout', 'fixed', 'dismissible', 'modal', 'open', 'defaultOpen', 'nested', 'direction', 'noBodyStyles', 'handleOnly', 'preventScrollRestoration', 'snapPoints'), emits)
-const portalProps = usePortal(toRef(() => props.portal))
-const contentProps = toRef(() => props.content)
-const contentEvents = computed(() => {
-  if (!props.dismissible) {
-    const events = ['interactOutside', 'escapeKeyDown']
+// reka-ui's Drawer dismisses by swiping towards the edge the drawer slides in
+// from, so `direction` (which edge to anchor to) and `swipeDirection` (which
+// way a swipe-to-dismiss gesture travels) are always the same value — just
+// named differently between the two axes' vocabularies (top/bottom vs up/down).
+const SWIPE_DIRECTION = { top: 'up', bottom: 'down', left: 'left', right: 'right' } as const
+const swipeDirection = computed(() => SWIPE_DIRECTION[props.direction])
 
-    return events.reduce((acc, curr) => {
-      acc[curr] = (e: Event) => {
-        e.preventDefault()
-        emits('close:prevent')
-      }
-      return acc
-    }, {} as Record<typeof events[number], (e: Event) => void>)
-  }
-
-  return {
-    pointerDownOutside
+// reka-ui's Drawer can close for reasons that never pass through a DOM event
+// (e.g. `swipe`, or dragging past the last snap point), so `dismissible` is
+// enforced centrally on the open-change reason rather than by intercepting
+// individual outside-click/escape-key events like `Modal` does.
+const isControlled = computed(() => props.open !== undefined)
+const uncontrolledOpen = ref(props.defaultOpen ?? false)
+const openModel = computed({
+  get: () => isControlled.value ? !!props.open : uncontrolledOpen.value,
+  set: (value: boolean) => {
+    if (!isControlled.value) {
+      uncontrolledOpen.value = value
+    }
   }
 })
+
+const ALLOWED_CLOSE_REASONS = new Set(['close-press', 'cancel'])
+function onOpenChange(value: boolean, details?: DrawerOpenChangeDetails) {
+  if (!value && !props.dismissible && !ALLOWED_CLOSE_REASONS.has(details?.reason ?? '')) {
+    emits('close:prevent')
+    return
+  }
+
+  openModel.value = value
+  // eslint-disable-next-line vue/require-explicit-emits -- `update:open` is declared via `DrawerEmits extends DrawerRootEmits`, which the rule doesn't resolve through
+  emits('update:open', value, details)
+}
+
+// reka-ui's `useEmitAsProps` (used internally by `useForwardProps`) maps every
+// event declared on *this* component's own `defineEmits` into an `onXxx` prop —
+// regardless of which emit function is passed in — so `onUpdate:open` and
+// `onClose:prevent` end up in the result below. Both are omitted before
+// binding to `DrawerRoot`: `update:open` is wired explicitly via `onOpenChange`
+// so the `dismissible` gate isn't bypassed, and `close:prevent` isn't a
+// `DrawerRoot` prop at all (forwarding it just trips Vue's fallthrough-attrs
+// warning, since `DrawerRoot`'s template root is a `<slot>` fragment).
+const rawRootProps = useForwardProps(computed(() => ({
+  ...reactivePick(props, 'modal', 'snapPoints', 'snapPoint', 'defaultSnapPoint', 'snapToSequentialPoints'),
+  swipeDirection: swipeDirection.value
+})), emits)
+const rootProps = computed(() => {
+  const { 'onUpdate:open': _onUpdateOpen, 'onClose:prevent': _onClosePrevent, ...rest } = rawRootProps.value as Record<string, unknown>
+  return rest
+})
+const portalProps = usePortal(toRef(() => props.portal))
+const contentProps = toRef(() => props.content)
+const contentEvents = computed(() => ({
+  pointerDownOutside
+}))
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.drawer || {}) })({
@@ -141,7 +179,7 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.drawer || {}) })
 </script>
 
 <template>
-  <component :is="props.nested ? DrawerRootNested : DrawerRoot" v-bind="rootProps">
+  <DrawerRoot v-bind="rootProps" :open="openModel" @update:open="onOpenChange">
     <DrawerTrigger v-if="!!slots.default" as-child :class="props.class">
       <slot />
     </DrawerTrigger>
@@ -220,5 +258,5 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.drawer || {}) })
         </DrawerContent>
       </FieldGroupReset>
     </DrawerPortal>
-  </component>
+  </DrawerRoot>
 </template>
