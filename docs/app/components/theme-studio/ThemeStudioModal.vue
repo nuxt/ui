@@ -3,8 +3,7 @@ import type { ThemeDoc } from '../../utils/theme-engine'
 
 const { track } = useAnalytics()
 const { style, applyDoc, studioOpen: open } = useThemeStudio()
-const { modes, mode, currentDoc, resetTheme } = useTheme()
-const colorMode = useColorMode()
+const { currentDoc, resetTheme } = useTheme()
 
 const route = useRoute()
 const router = useRouter()
@@ -134,7 +133,7 @@ const viewTabs = [
     description="Customize Nuxt UI live: colors, radius, fonts and icons — then export only what you changed."
   >
     <template #content>
-      <div class="flex flex-row w-full h-full bg-neutral-200 dark:bg-neutral-950">
+      <div class="flex flex-row w-full h-full bg-neutral-100 dark:bg-neutral-900">
         <div class="flex-1 min-w-0 flex flex-col h-full">
           <div
             class="shrink-0 flex items-center gap-2 border-default px-4 sm:px-4 py-3"
@@ -143,9 +142,9 @@ const viewTabs = [
               v-model="view"
               :items="viewTabs"
               :icon="viewTabs.find(tab => tab.value === view)?.icon"
-              size="sm"
+
               color="neutral"
-              variant="subtle"
+              variant="ghost"
               class="w-44"
             />
 
@@ -156,7 +155,7 @@ const viewTabs = [
                 :icon="sidebarOpen ? 'i-lucide-panel-right-close' : 'i-lucide-panel-right-open'"
                 color="neutral"
                 variant="ghost"
-                size="sm"
+
                 aria-label="Toggle settings panel"
                 @click="sidebarOpen = !sidebarOpen"
               />
@@ -180,34 +179,20 @@ const viewTabs = [
         <USidebar
           v-model:open="sidebarOpen"
           side="right"
-          variant="floating"
+          variant="inset"
           :style="{ '--sidebar-width': '21rem' }"
-          :ui="{ container: 'ps-0', header: 'bg-elevated/50 lg:rounded-t-lg p-4 min-h-0', body: 'p-0 gap-0 bg-default', footer: 'bg-elevated/50 lg:rounded-b-lg', inner: [chromeShadow, 'bg-default'] }"
+          :ui="{ container: 'py-3', header: 'p-6 pt-0 pb-4 min-h-0 ps-4', footer: 'p-6 pb-2 ps-4 pt-4', body: 'py-0 px-6 ps-4' }"
         >
           <template #header>
             <Logo class="w-auto h-5 shrink-0 mr-auto" />
 
-            <UTooltip v-for="m in modes" :key="m.label" :text="`${m.label} mode`" class="capitalize">
-              <UButton
-                :icon="m.icon"
-                color="neutral"
-                variant="ghost"
-                size="xs"
-                square
-                :active="mounted && colorMode.preference === m.label"
-                active-color="primary"
-                active-variant="subtle"
-                :aria-label="`${m.label} mode`"
-                @click="mode = m.label"
-              />
-            </UTooltip>
+            <UColorModeSwitch />
 
             <UTooltip text="Close">
               <UButton
                 icon="i-lucide-x"
                 color="neutral"
                 variant="ghost"
-                size="xs"
                 square
                 aria-label="Close Theme Studio"
                 @click="open = false"
@@ -218,6 +203,13 @@ const viewTabs = [
           <ThemeStudioControls />
 
           <template #footer>
+            <div class="flex-1 min-w-0">
+              <ThemeStudioImport />
+            </div>
+
+            <div class="flex-1 min-w-0">
+              <ThemeStudioExport />
+            </div>
             <UFieldGroup size="sm">
               <UTooltip text="Undo" :kbds="['meta', 'Z']">
                 <UButton
@@ -241,14 +233,6 @@ const viewTabs = [
                 />
               </UTooltip>
             </UFieldGroup>
-
-            <div class="flex-1 min-w-0">
-              <ThemeStudioImport />
-            </div>
-
-            <div class="flex-1 min-w-0">
-              <ThemeStudioExport />
-            </div>
 
             <UTooltip text="Reset theme">
               <UButton

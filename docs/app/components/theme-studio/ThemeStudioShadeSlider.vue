@@ -21,7 +21,16 @@ const index = defineModel<number>({ required: true })
       />
     </span>
 
-    <USlider v-model="index" :min="0" :max="SHADES.length - 1" :step="1" size="sm" />
+    <!-- the fill wears the ramp color at the selected shade -->
+    <USlider
+      v-model="index"
+      :min="0"
+      :max="SHADES.length - 1"
+      :step="1"
+      size="sm"
+      :style="{ '--slider-color': `var(--color-${chip}-${SHADES[index]})` }"
+      :ui="{ range: 'bg-(--slider-color)', thumb: 'ring-(--slider-color)' }"
+    />
 
     <span class="text-[11px] text-dimmed font-mono w-7 text-right shrink-0">{{ SHADES[index] }}</span>
   </div>

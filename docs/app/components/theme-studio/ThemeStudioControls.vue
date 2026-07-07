@@ -4,6 +4,11 @@ import type { VariantGroup, TokenRamp, ColorAlias } from '../../utils/theme-engi
 
 const appConfig = useAppConfig()
 
+// The controls own their scroll (the sidebar body clips), so the edge
+// fades can signal overflow in both directions.
+const body = useTemplateRef('body')
+const { style: scrollShadowStyle } = useScrollShadow(body)
+
 const {
   neutral,
   primary,
@@ -17,21 +22,6 @@ const {
 } = useTheme()
 
 const { isCustomPalette, style, setStyle } = useThemeStudio()
-
-const openSections = reactive<Record<string, boolean>>({
-  primary: true,
-  neutral: true,
-  semantic: true,
-  scale: true,
-  defaults: true,
-  shadows: true,
-  innerShadows: true,
-  borders: true,
-  font: true,
-  icons: true,
-  // token groups keyed by group name — everything starts open
-  ...Object.fromEntries(TOKEN_GROUPS.map(group => [`tokens-${group.key}`, true]))
-})
 
 const semanticAliases: ColorAlias[] = ['secondary', 'success', 'info', 'warning', 'error']
 
@@ -279,18 +269,18 @@ const shadowColor = computed({
 </script>
 
 <template>
-  <div :key="hydrationKey" class="flex flex-col gap-4">
-    <ThemeStudioPresetMenu class="p-4 pb-0" />
+  <div ref="body" :key="hydrationKey" :style="scrollShadowStyle" class="flex flex-col gap-4 h-full overflow-y-auto">
+    <ThemeStudioPresetMenu class="py-3 pb-0" />
     <UAccordion
       v-model="openGroups"
-      :ui="{ content: 'px-4', header: 'px-6' }"
+      :ui="{ content: 'px-px', header: 'px-0', item: 'border-muted' }"
       :items="groupItems"
       :unmount-on-hide="false"
-      class="border-y border-default"
+      class="border-y border-muted"
     >
       <template #colors>
         <div class="flex flex-col gap-2.5 pt-1 pb-4">
-          <ThemeStudioSection v-model:open="openSections.primary" label="Primary" help-to="/docs/getting-started/theme/css-variables#colors">
+          <ThemeStudioSection label="Primary" help-to="/docs/getting-started/theme/css-variables#colors">
             <div>
               <UFieldGroup size="sm" class="flex w-full">
                 <ThemeStudioColorMenu alias="primary" class="flex-1 min-w-0" />
@@ -311,7 +301,9 @@ const shadowColor = computed({
             </div>
           </ThemeStudioSection>
 
-          <ThemeStudioSection v-model:open="openSections.neutral" label="Neutral" help-to="/docs/getting-started/theme/css-variables#text">
+          <USeparator />
+
+          <ThemeStudioSection label="Neutral" help-to="/docs/getting-started/theme/css-variables#text">
             <div>
               <UFieldGroup size="sm" class="flex w-full">
                 <ThemeStudioColorMenu alias="neutral" class="flex-1 min-w-0" />
@@ -333,7 +325,9 @@ const shadowColor = computed({
             </div>
           </ThemeStudioSection>
 
-          <ThemeStudioSection v-model:open="openSections.semantic" label="Semantic" help-to="/docs/getting-started/theme/design-system">
+          <USeparator />
+
+          <ThemeStudioSection label="Semantic" help-to="/docs/getting-started/theme/design-system">
             <div class="flex flex-col gap-1.5">
               <div v-for="alias in semanticAliases" :key="alias">
                 <div class="flex items-center gap-2">
@@ -365,7 +359,7 @@ const shadowColor = computed({
 
       <template #style>
         <div class="flex flex-col gap-2.5 pt-1 pb-4">
-          <ThemeStudioSection v-model:open="openSections.shadows" label="Shadow">
+          <ThemeStudioSection label="Shadow">
             <div>
               <div class="grid grid-cols-3 gap-1">
                 <ThemeStudioPickerButton
@@ -418,7 +412,9 @@ const shadowColor = computed({
             </div>
           </ThemeStudioSection>
 
-          <ThemeStudioSection v-model:open="openSections.innerShadows" label="Inner shadow">
+          <USeparator />
+
+          <ThemeStudioSection label="Inner shadow">
             <div>
               <div class="grid grid-cols-3 gap-1">
                 <ThemeStudioPickerButton
@@ -471,7 +467,9 @@ const shadowColor = computed({
             </div>
           </ThemeStudioSection>
 
-          <ThemeStudioSection v-model:open="openSections.borders" label="Borders">
+          <USeparator />
+
+          <ThemeStudioSection label="Borders">
             <div>
               <div class="grid grid-cols-3 gap-1">
                 <ThemeStudioPickerButton
@@ -526,32 +524,34 @@ const shadowColor = computed({
 
       <template #tokens>
         <div class="flex flex-col gap-2.5 pt-1 pb-4">
-          <ThemeStudioSection
-            v-for="group in tokenGroups"
-            :key="group.key"
-            v-model:open="openSections[`tokens-${group.key}`]"
-            :label="group.label"
-          >
-            <div class="flex flex-col gap-3">
-              <div v-for="section in group.sections" :key="section.token" class="flex flex-col gap-1.5">
-                <span class="text-[11px] text-muted select-none">{{ section.label }}</span>
+          <template v-for="(group, index) in tokenGroups" :key="group.key">
+            <USeparator v-if="index" />
 
-                <ThemeStudioShadeSlider
-                  v-for="(slider, modeName) in section.sliders"
-                  :key="modeName"
-                  v-model="slider.value"
-                  :mode="modeName"
-                  :chip="rampChip(section.ramp)"
-                />
+            <ThemeStudioSection
+
+              :label="group.label"
+            >
+              <div class="flex flex-col gap-3">
+                <div v-for="section in group.sections" :key="section.token" class="flex flex-col gap-1.5">
+                  <span class="text-[11px] text-muted select-none">{{ section.label }}</span>
+
+                  <ThemeStudioShadeSlider
+                    v-for="(slider, modeName) in section.sliders"
+                    :key="modeName"
+                    v-model="slider.value"
+                    :mode="modeName"
+                    :chip="rampChip(section.ramp)"
+                  />
+                </div>
               </div>
-            </div>
-          </ThemeStudioSection>
+            </ThemeStudioSection>
+          </template>
         </div>
       </template>
 
       <template #general>
         <div class="flex flex-col gap-2.5 pt-1 pb-4">
-          <ThemeStudioSection v-model:open="openSections.font" label="Font" help-to="/docs/getting-started/integrations/fonts">
+          <ThemeStudioSection label="Font" help-to="/docs/getting-started/integrations/fonts">
             <div>
               <USelect
                 v-model="font"
@@ -565,7 +565,9 @@ const shadowColor = computed({
             </div>
           </ThemeStudioSection>
 
-          <ThemeStudioSection v-model:open="openSections.icons" label="Icons" help-to="/docs/getting-started/integrations/icons">
+          <USeparator />
+
+          <ThemeStudioSection label="Icons" help-to="/docs/getting-started/integrations/icons">
             <div>
               <USelect
                 v-model="icon"
@@ -580,7 +582,9 @@ const shadowColor = computed({
             </div>
           </ThemeStudioSection>
 
-          <ThemeStudioSection v-model:open="openSections.scale" label="Scale">
+          <USeparator />
+
+          <ThemeStudioSection label="Scale">
             <div class="flex flex-col gap-2">
               <div class="flex items-center gap-2">
                 <span class="text-[11px] text-muted w-13 shrink-0 select-none">Radius</span>
@@ -614,7 +618,9 @@ const shadowColor = computed({
             </div>
           </ThemeStudioSection>
 
-          <ThemeStudioSection v-model:open="openSections.defaults" label="Components">
+          <USeparator />
+
+          <ThemeStudioSection label="Components">
             <div class="flex flex-col gap-1.5">
               <div v-for="field in variantGroupFields" :key="field.key" class="flex items-center gap-2">
                 <span class="text-[11px] text-muted w-13 shrink-0 select-none">{{ field.label }}</span>
