@@ -1,5 +1,4 @@
 import type { ThemeDoc } from './types'
-import { CUSTOM_PALETTES } from './custom-palettes'
 
 export interface ThemePreset {
   id: string
@@ -120,16 +119,16 @@ export const presets: ThemePreset[] = [{
     palettes: {
       grove: {
         shades: {
-          50: 'oklch(91% 0.044 140.516)',
-          100: 'oklch(84.7% 0.045 140.375)',
-          200: 'oklch(78.6% 0.046 140.572)',
-          300: 'oklch(72.4% 0.046 141.493)',
-          400: 'oklch(65.8% 0.045 142.245)',
-          500: 'oklch(59% 0.039 142.85)',
-          600: 'oklch(52.1% 0.033 143.372)',
-          700: 'oklch(45.1% 0.028 143.839)',
-          800: 'oklch(38.2% 0.024 144.268)',
-          900: 'oklch(31.2% 0.02 144.666)',
+          50: 'oklch(91% 0.036 140.516)',
+          100: 'oklch(84.9% 0.042 140.374)',
+          200: 'oklch(78.6% 0.048 140.574)',
+          300: 'oklch(72.3% 0.053 141.491)',
+          400: 'oklch(65.8% 0.057 142.244)',
+          500: 'oklch(59.1% 0.051 142.85)',
+          600: 'oklch(52.2% 0.042 143.373)',
+          700: 'oklch(45.2% 0.034 143.84)',
+          800: 'oklch(38.1% 0.028 144.268)',
+          900: 'oklch(31.1% 0.022 144.667)',
           950: 'oklch(24.2% 0.017 145.041)'
         }
       }
@@ -311,49 +310,6 @@ export const presets: ThemePreset[] = [{
     }
   }
 }, {
-  id: 'ghibli',
-  name: 'Ghibli',
-  description: 'Moss green and sun-warmed paper, gentle corners.',
-  icon: 'i-lucide-leaf',
-  doc: {
-    version: 1,
-    meta: { name: 'Ghibli', base: 'ghibli' },
-    palettes: {
-      moss: {
-        shades: {
-          50: 'oklch(97.7% 0.017 113.81)',
-          100: 'oklch(95% 0.035 115.901)',
-          200: 'oklch(90.3% 0.064 116.322)',
-          300: 'oklch(84.3% 0.093 117.644)',
-          400: 'oklch(77.1% 0.103 119.054)',
-          500: 'oklch(69.5% 0.1 119.088)',
-          600: 'oklch(60.3% 0.089 120.118)',
-          700: 'oklch(52% 0.077 121.459)',
-          800: 'oklch(43.7% 0.061 121.818)',
-          900: 'oklch(37.8% 0.049 122.375)',
-          950: 'oklch(25.8% 0.032 121.343)'
-        }
-      }
-    },
-    colors: {
-      primary: 'moss',
-      secondary: 'amber',
-      neutral: 'stone'
-    },
-    radius: 0.5,
-    font: { sans: 'Poppins' },
-    tokens: {
-      light: {
-        '--ui-bg': 'var(--ui-color-secondary-100)',
-        '--ui-bg-muted': 'var(--ui-color-secondary-50)',
-        '--ui-border': 'var(--ui-color-secondary-300)'
-      }
-    },
-    style: {
-      shadow: 'soft'
-    }
-  }
-}, {
   id: 'marvel',
   name: 'Marvel',
   description: 'Comic-book red and blue with inked panel outlines.',
@@ -496,111 +452,6 @@ export const presets: ThemePreset[] = [{
         slots: {
           base: 'rounded-full'
         }
-      }
-    }
-  }
-}, {
-  id: 'cabin',
-  name: 'Cabin',
-  description: 'Cocoa and sand — a warm, woody lodge with soft buttons.',
-  icon: 'i-lucide-trees',
-  doc: {
-    version: 1,
-    meta: { name: 'Cabin', base: 'cabin' },
-    // the studio's own ramps, inlined so exports are self-contained
-    palettes: {
-      cocoa: { shades: CUSTOM_PALETTES.cocoa! },
-      sand: { shades: CUSTOM_PALETTES.sand! }
-    },
-    colors: {
-      primary: 'cocoa',
-      neutral: 'sand'
-    },
-    radius: 0.375,
-    font: { sans: 'Raleway' },
-    tokens: {
-      light: {
-        '--ui-bg': 'var(--ui-color-neutral-50)'
-      }
-    },
-    style: {
-      shadow: 'soft',
-      defaults: { variants: { buttons: 'soft' } }
-    }
-  }
-}, {
-  id: 'harbor',
-  name: 'Harbor',
-  description: 'Sculpted harbor blues — subtle panels, fine borders, misty shadows.',
-  icon: 'i-lucide-anchor',
-  doc: {
-    version: 1,
-    meta: { name: 'Harbor', base: 'harbor' },
-    // Deeper, moodier takes on marine/ash sculpted in the curve editor —
-    // the light end starts well below white, so both modes feel overcast.
-    palettes: {
-      marine: {
-        shades: {
-          50: 'oklch(97.2% 0.014 250.593)',
-          100: 'oklch(93.4% 0.033 250.984)',
-          200: 'oklch(88% 0.06 251.557)',
-          300: 'oklch(78.9% 0.11 252.327)',
-          400: 'oklch(67% 0.151 253.303)',
-          500: 'oklch(57.6% 0.143 254.468)',
-          600: 'oklch(49.9% 0.123 255.734)',
-          700: 'oklch(43.3% 0.1 256.821)',
-          800: 'oklch(37.2% 0.078 257.093)',
-          900: 'oklch(31.7% 0.057 255.71)',
-          950: 'oklch(26.4% 0.036 252.434)'
-        }
-      },
-      ash: {
-        shades: {
-          50: 'oklch(94% 0.029 264.505)',
-          100: 'oklch(89.3% 0.044 264.423)',
-          200: 'oklch(83.9% 0.042 264.302)',
-          300: 'oklch(74% 0.042 264.139)',
-          400: 'oklch(61.7% 0.042 263.933)',
-          500: 'oklch(52.7% 0.037 263.683)',
-          600: 'oklch(44.8% 0.032 263.395)',
-          700: 'oklch(37.6% 0.026 263.083)',
-          800: 'oklch(30.7% 0.021 262.799)',
-          900: 'oklch(24.1% 0.017 262.757)',
-          950: 'oklch(17.7% 0.012 270.771)'
-        }
-      }
-    },
-    colors: {
-      primary: 'marine',
-      neutral: 'ash'
-    },
-    radius: 0.125,
-    font: { sans: 'Inter' },
-    tokens: {
-      light: {
-        '--ui-bg': 'var(--ui-color-neutral-50)',
-        '--ui-text-inverted': 'var(--ui-color-neutral-50)'
-      },
-      dark: {
-        '--ui-text-highlighted': 'var(--ui-color-neutral-50)',
-        '--ui-bg-inverted': 'var(--ui-color-neutral-50)',
-        '--ui-border-inverted': 'var(--ui-color-neutral-50)'
-      }
-    },
-    style: {
-      shadow: 'soft',
-      shadowColor: 'shade',
-      shadowShade: { light: 400, dark: 950 },
-      shadowOpacity: 40,
-      border: 'custom',
-      borderColor: 'shade',
-      borderShade: { light: 200, dark: 700 },
-      defaults: { variants: { panels: 'subtle' } },
-      tokenShades: {
-        '--ui-primary': { dark: 300 },
-        '--ui-success': { light: 600, dark: 600 },
-        '--ui-warning': { light: 700, dark: 700 },
-        '--ui-error': { light: 700, dark: 400 }
       }
     }
   }

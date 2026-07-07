@@ -135,11 +135,54 @@ const viewTabs = [
   >
     <template #content>
       <div class="flex flex-row w-full h-full bg-neutral-200 dark:bg-neutral-950">
+        <div class="flex-1 min-w-0 flex flex-col h-full">
+          <div
+            class="shrink-0 flex items-center gap-2 border-default px-4 sm:px-4 py-3"
+          >
+            <USelect
+              v-model="view"
+              :items="viewTabs"
+              :icon="viewTabs.find(tab => tab.value === view)?.icon"
+              size="sm"
+              color="neutral"
+              variant="subtle"
+              class="w-44"
+            />
+
+            <span class="flex-1" />
+
+            <UTooltip :text="sidebarOpen ? 'Hide settings' : 'Show settings'">
+              <UButton
+                :icon="sidebarOpen ? 'i-lucide-panel-right-close' : 'i-lucide-panel-right-open'"
+                color="neutral"
+                variant="ghost"
+                size="sm"
+                aria-label="Toggle settings panel"
+                @click="sidebarOpen = !sidebarOpen"
+              />
+            </UTooltip>
+          </div>
+
+          <!-- The floating preview card: the grid scrolls inside it; the
+               app-shell views own their height and scroll internally. -->
+          <div
+            class="flex-1 min-w-0 min-h-0 ring ring-default bg-default m-4 mt-0 rounded-lg"
+            :class="[chromeShadow, view === 'grid' ? 'overflow-y-auto' : 'overflow-hidden']"
+          >
+            <ThemeStudioBento v-if="view === 'grid'" />
+            <ThemeStudioViewDashboard v-else-if="view === 'dashboard'" />
+            <ThemeStudioViewChat v-else-if="view === 'chat'" />
+            <ThemeStudioViewSaas v-else-if="view === 'saas'" />
+            <ThemeStudioViewLanding v-else-if="view === 'landing'" />
+            <ThemeStudioViewA11y v-else-if="view === 'a11y'" />
+          </div>
+        </div>
         <USidebar
           v-model:open="sidebarOpen"
+          side="right"
           variant="floating"
           :style="{ '--sidebar-width': '21rem' }"
-          :ui="{ container: 'pe-0', header: 'bg-elevated/50 lg:rounded-t-lg p-4 min-h-0', body: 'p-0 gap-0 bg-default', footer: 'bg-elevated/50 lg:rounded-b-lg', inner: [chromeShadow, 'bg-default'] }"
+          :ui="{ container: 'ps-0', header: 'bg-elevated/50 lg:rounded-t-lg p-4 min-h-0', body: 'p-0 gap-0 bg-default', footer: 'bg-elevated/50 lg:rounded-b-lg', inner: [chromeShadow, 'bg-default'] }"
         >
           <template #header>
             <Logo class="w-auto h-5 shrink-0 mr-auto" />
@@ -156,6 +199,18 @@ const viewTabs = [
                 active-variant="subtle"
                 :aria-label="`${m.label} mode`"
                 @click="mode = m.label"
+              />
+            </UTooltip>
+
+            <UTooltip text="Close">
+              <UButton
+                icon="i-lucide-x"
+                color="neutral"
+                variant="ghost"
+                size="xs"
+                square
+                aria-label="Close Theme Studio"
+                @click="open = false"
               />
             </UTooltip>
           </template>
@@ -207,60 +262,6 @@ const viewTabs = [
             </UTooltip>
           </template>
         </USidebar>
-
-        <div class="flex-1 min-w-0 flex flex-col h-full">
-          <div
-            class="shrink-0 flex items-center gap-2 border-default px-4 sm:px-4 py-3"
-          >
-            <UTooltip :text="sidebarOpen ? 'Hide settings' : 'Show settings'">
-              <UButton
-                :icon="sidebarOpen ? 'i-lucide-panel-left-close' : 'i-lucide-panel-left-open'"
-                color="neutral"
-                variant="ghost"
-                size="sm"
-                aria-label="Toggle settings panel"
-                @click="sidebarOpen = !sidebarOpen"
-              />
-            </UTooltip>
-
-            <span class="flex-1" />
-
-            <UTabs
-              v-model="view"
-              :items="viewTabs"
-              :content="false"
-              size="xs"
-              color="primary"
-            />
-
-            <span class="flex-1" />
-
-            <UTooltip text="Close">
-              <UButton
-                icon="i-lucide-x"
-                color="neutral"
-                variant="ghost"
-                size="sm"
-                aria-label="Close Theme Studio"
-                @click="open = false"
-              />
-            </UTooltip>
-          </div>
-
-          <!-- The floating preview card: the grid scrolls inside it; the
-               app-shell views own their height and scroll internally. -->
-          <div
-            class="flex-1 min-w-0 min-h-0 ring ring-default bg-default m-4 mt-0 rounded-lg"
-            :class="[chromeShadow, view === 'grid' ? 'overflow-y-auto' : 'overflow-hidden']"
-          >
-            <ThemeStudioBento v-if="view === 'grid'" />
-            <ThemeStudioViewDashboard v-else-if="view === 'dashboard'" />
-            <ThemeStudioViewChat v-else-if="view === 'chat'" />
-            <ThemeStudioViewSaas v-else-if="view === 'saas'" />
-            <ThemeStudioViewLanding v-else-if="view === 'landing'" />
-            <ThemeStudioViewA11y v-else-if="view === 'a11y'" />
-          </div>
-        </div>
       </div>
     </template>
   </UModal>
