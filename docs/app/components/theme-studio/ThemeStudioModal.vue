@@ -134,7 +134,7 @@ const viewTabs = [
   <UDrawer
     v-model:open="open"
     v-model:active-snap-point="snap"
-    direction="left"
+    direction="right"
     :snap-points="[SETTINGS_SNAP, 1]"
     :handle="false"
     handle-only
@@ -155,69 +155,26 @@ const viewTabs = [
 
     <template #content>
       <div class="flex flex-row w-full h-full bg-neutral-100 dark:bg-neutral-900">
-        <div
-          class="flex-1 min-w-0 flex flex-col h-full transition-opacity duration-200"
-          :class="snap === 1 ? 'opacity-100' : 'opacity-0'"
-        >
-          <div
-            class="shrink-0 flex items-center gap-2 border-default px-4 sm:px-4 py-3"
-          >
-            <USelect
-              v-model="view"
-              :items="viewTabs"
-              :icon="viewTabs.find(tab => tab.value === view)?.icon"
-
-              color="neutral"
-              variant="subtle"
-              class="w-32"
-            />
-
-            <span class="flex-1" />
-
-            <UTooltip :text="sidebarOpen ? 'Hide settings' : 'Show settings'">
-              <UButton
-                :icon="sidebarOpen ? 'i-lucide-panel-right-close' : 'i-lucide-panel-right-open'"
-                color="neutral"
-                variant="ghost"
-
-                aria-label="Toggle settings panel"
-                @click="sidebarOpen = !sidebarOpen"
-              />
-            </UTooltip>
-          </div>
-
-          <!-- The floating preview card: the grid scrolls inside it; the
-               app-shell views own their height and scroll internally.
-               [&>*]:rounded-[inherit] + [contain:paint] put the radius and
-               hard paint containment on the views' own scrollers — Chromium
-               won't clip nested composited layers (sticky headers, filtered
-               glows) by an ancestor's radius or overflow alone. -->
-          <div
-            class="flex-1 min-w-0 min-h-0 ring ring-default bg-default m-4 mt-0 rounded-lg [&>*]:rounded-[inherit] [&>*]:[contain:paint]"
-            :class="[
-              view === 'grid' ? 'overflow-y-auto' : 'overflow-hidden',
-              // the open sidebar's own padding provides the gap; collapsed,
-              // the card needs its margin back
-              sidebarOpen ? 'me-0' : 'me-4'
-            ]"
-          >
-            <ThemeStudioBento v-if="view === 'grid'" />
-            <ThemeStudioViewDashboard v-else-if="view === 'dashboard'" />
-            <ThemeStudioViewChat v-else-if="view === 'chat'" />
-            <ThemeStudioViewSaas v-else-if="view === 'saas'" />
-            <ThemeStudioViewLanding v-else-if="view === 'landing'" />
-            <ThemeStudioViewA11y v-else-if="view === 'a11y'" />
-          </div>
-        </div>
         <USidebar
           v-model:open="sidebarOpen"
-          side="right"
+          side="left"
           variant="inset"
           :style="{ '--sidebar-width': '21rem' }"
           :ui="{ container: 'py-3 h-full', header: 'p-6 pt-0 pb-3 min-h-0 ', footer: 'p-6 pb-3 pt-3', body: 'py-0 px-6' }"
         >
           <template #header>
-            <Logo class="w-auto h-5 shrink-0 mr-auto" />
+            <UTooltip text="Close" class="mr-auto">
+              <UButton
+                icon="i-lucide-x"
+                color="neutral"
+                variant="ghost"
+                square
+                aria-label="Close Theme Studio"
+                @click="open = false"
+              />
+            </UTooltip>
+
+            <UColorModeSwitch />
 
             <UTooltip :text="snap === 1 ? 'Hide preview' : 'Show preview'">
               <UButton
@@ -227,19 +184,6 @@ const viewTabs = [
                 square
                 :aria-label="snap === 1 ? 'Hide preview' : 'Show preview'"
                 @click="snap = snap === 1 ? SETTINGS_SNAP : 1"
-              />
-            </UTooltip>
-
-            <UColorModeSwitch />
-
-            <UTooltip text="Close">
-              <UButton
-                icon="i-lucide-x"
-                color="neutral"
-                variant="ghost"
-                square
-                aria-label="Close Theme Studio"
-                @click="open = false"
               />
             </UTooltip>
           </template>
@@ -290,6 +234,58 @@ const viewTabs = [
             </UTooltip>
           </template>
         </USidebar>
+        <div
+          class="flex-1 min-w-0 flex flex-col h-full transition-opacity duration-200"
+          :class="snap === 1 ? 'opacity-100' : 'opacity-0'"
+        >
+          <div
+            class="shrink-0 flex items-center gap-2 border-default px-4 sm:px-4 py-3"
+          >
+            <UTooltip :text="sidebarOpen ? 'Hide settings' : 'Show settings'">
+              <UButton
+                :icon="sidebarOpen ? 'i-lucide-panel-left-close' : 'i-lucide-panel-left-open'"
+                color="neutral"
+                variant="ghost"
+                aria-label="Toggle settings panel"
+                @click="sidebarOpen = !sidebarOpen"
+              />
+            </UTooltip>
+
+            <USelect
+              v-model="view"
+              :items="viewTabs"
+              :icon="viewTabs.find(tab => tab.value === view)?.icon"
+              color="neutral"
+              variant="subtle"
+              class="w-32"
+            />
+
+            <span class="flex-1" />
+          </div>
+
+          <!-- The floating preview card: the grid scrolls inside it; the
+               app-shell views own their height and scroll internally.
+               [&>*]:rounded-[inherit] + [contain:paint] put the radius and
+               hard paint containment on the views' own scrollers — Chromium
+               won't clip nested composited layers (sticky headers, filtered
+               glows) by an ancestor's radius or overflow alone. -->
+          <div
+            class="flex-1 min-w-0 min-h-0 ring ring-default bg-default m-4 mt-0 rounded-lg [&>*]:rounded-[inherit] [&>*]:[contain:paint]"
+            :class="[
+              view === 'grid' ? 'overflow-y-auto' : 'overflow-hidden',
+              // the open sidebar's own padding provides the gap; collapsed,
+              // the card needs its margin back
+              sidebarOpen ? 'ms-0' : 'ms-4'
+            ]"
+          >
+            <ThemeStudioBento v-if="view === 'grid'" />
+            <ThemeStudioViewDashboard v-else-if="view === 'dashboard'" />
+            <ThemeStudioViewChat v-else-if="view === 'chat'" />
+            <ThemeStudioViewSaas v-else-if="view === 'saas'" />
+            <ThemeStudioViewLanding v-else-if="view === 'landing'" />
+            <ThemeStudioViewA11y v-else-if="view === 'a11y'" />
+          </div>
+        </div>
       </div>
     </template>
   </UDrawer>
