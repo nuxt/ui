@@ -145,6 +145,8 @@ const settingGroups = [
             class="w-36 shrink-0"
           />
 
+          <UColorModeButton size="sm" variant="subtle" />
+
           <UTooltip text="Fullscreen preview">
             <UButton
               icon="i-lucide-maximize"
