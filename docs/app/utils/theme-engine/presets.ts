@@ -176,121 +176,6 @@ export const presets: ThemePreset[] = [{
     }
   }
 }, {
-  id: 'forest',
-  name: 'Forest',
-  description: 'Sculpted evergreen on forest-green neutrals with a sage secondary — spread hard shadows over a fine inset.',
-  icon: 'i-lucide-trees',
-  doc: {
-    version: 1,
-    meta: { name: 'Forest', base: 'forest' },
-    // Both ramps were sculpted in the curve editor (hence the custom-* names:
-    // the editors reopen them as their own), plus a muted sage for secondary.
-    palettes: {
-      'custom-neutral': {
-        shades: {
-          50: 'oklch(93.7% 0.041 140.516)',
-          100: 'oklch(90.8% 0.053 140.375)',
-          200: 'oklch(85.5% 0.066 140.572)',
-          300: 'oklch(75% 0.079 141.493)',
-          400: 'oklch(61.8% 0.09 142.245)',
-          500: 'oklch(51.4% 0.095 142.85)',
-          600: 'oklch(43.4% 0.085 143.372)',
-          700: 'oklch(36.9% 0.067 143.839)',
-          800: 'oklch(31.3% 0.049 144.268)',
-          900: 'oklch(26.4% 0.033 144.666)',
-          950: 'oklch(22.1% 0.017 145.041)'
-        }
-      },
-      'custom-primary': {
-        shades: {
-          50: 'oklch(98.2% 0.03 144.679)',
-          100: 'oklch(96.7% 0.058 144.074)',
-          200: 'oklch(92.4% 0.124 143.449)',
-          300: 'oklch(86.5% 0.164 142.837)',
-          400: 'oklch(79.4% 0.221 142.544)',
-          500: 'oklch(71.6% 0.223 142.677)',
-          600: 'oklch(63.2% 0.196 142.818)',
-          700: 'oklch(54.4% 0.166 142.921)',
-          800: 'oklch(45.3% 0.137 142.994)',
-          900: 'oklch(36% 0.108 143.043)',
-          950: 'oklch(26.6% 0.079 143.072)'
-        }
-      },
-      'sage': {
-        shades: {
-          50: 'oklch(97.7% 0.004 134.849)',
-          100: 'oklch(95% 0.01 140.516)',
-          200: 'oklch(90% 0.018 140.022)',
-          300: 'oklch(82.6% 0.029 141.964)',
-          400: 'oklch(71.9% 0.038 142.667)',
-          500: 'oklch(61.7% 0.042 142.713)',
-          600: 'oklch(53% 0.038 143.698)',
-          700: 'oklch(45.7% 0.032 143.377)',
-          800: 'oklch(39.8% 0.026 142.997)',
-          900: 'oklch(35.1% 0.022 145.097)',
-          950: 'oklch(24.2% 0.017 145.041)'
-        }
-      }
-    },
-    colors: {
-      primary: 'custom-primary',
-      secondary: 'sage',
-      success: 'emerald',
-      info: 'cyan',
-      warning: 'amber',
-      neutral: 'custom-neutral'
-    },
-    font: { sans: 'Raleway' },
-    tokens: {
-      light: {
-        '--ui-bg': 'var(--ui-color-neutral-50)',
-        '--ui-text-inverted': 'var(--ui-color-neutral-50)'
-      },
-      dark: {
-        '--ui-text-highlighted': 'var(--ui-color-neutral-50)',
-        '--ui-bg-inverted': 'var(--ui-color-neutral-50)',
-        '--ui-border-inverted': 'var(--ui-color-neutral-50)'
-      }
-    },
-    // Spread-1 hard shadows in graded neutral shades, a 1px bottom inset at
-    // 25%, subtle surfaces with stock outline fields.
-    style: {
-      shadow: 'hard',
-      shadowGeometry: {
-        x: 0,
-        y: 3,
-        blur: 0,
-        spread: 1
-      },
-      shadowOpacity: 50,
-      innerShadow: 'hard',
-      innerShadowGeometry: {
-        x: 0,
-        y: 1,
-        blur: 0,
-        spread: 1
-      },
-      innerShadowOpacity: 25,
-      shadowColor: 'shade',
-      shadowShade: {
-        light: 500,
-        dark: 950
-      },
-      innerShadowColor: 'shade',
-      innerShadowShade: {
-        light: 950,
-        dark: 400
-      },
-      defaults: {
-        variants: {
-          buttons: 'subtle',
-          panels: 'subtle',
-          inputs: 'outline'
-        }
-      }
-    }
-  }
-}, {
   id: 'marshmallow',
   name: 'Marshmallow',
   description: 'Pastel pink softness with mauve-tinted grays.',
@@ -362,19 +247,59 @@ export const presets: ThemePreset[] = [{
   doc: {
     version: 1,
     meta: { name: 'Marvel', base: 'marvel' },
+    // A cool-violet sculpted neutral for the panel grays.
+    palettes: {
+      'custom-neutral': {
+        shades: {
+          50: 'oklch(97.3% 0.013 286.067)',
+          100: 'oklch(91.3% 0.023 286.073)',
+          200: 'oklch(84% 0.028 286.076)',
+          300: 'oklch(72.5% 0.032 286.073)',
+          400: 'oklch(60.1% 0.034 286.058)',
+          500: 'oklch(50.6% 0.033 285.932)',
+          600: 'oklch(42.3% 0.028 285.808)',
+          700: 'oklch(34.8% 0.021 285.795)',
+          800: 'oklch(27.6% 0.015 285.794)',
+          900: 'oklch(20.8% 0.01 285.798)',
+          950: 'oklch(14.1% 0.005 285.805)'
+        }
+      }
+    },
     colors: {
       primary: 'red',
-      secondary: 'blue',
-      neutral: 'zinc'
+      neutral: 'custom-neutral'
     },
     radius: 0.125,
     font: { sans: 'Outfit' },
+    // Inked page: near-black default borders over muted panel edges, deep
+    // red at 600 in light, flat 50s inversions in dark.
+    tokens: {
+      light: {
+        '--ui-bg': 'var(--ui-color-neutral-50)',
+        '--ui-text-inverted': 'var(--ui-color-neutral-50)',
+        '--ui-bg-muted': 'var(--ui-color-neutral-50)',
+        '--ui-border': 'var(--ui-color-neutral-950)',
+        '--ui-border-muted': 'var(--ui-color-neutral-300)',
+        '--ui-border-accented': 'var(--ui-color-neutral-400)',
+        '--ui-bg-elevated': 'var(--ui-color-neutral-100)',
+        '--ui-bg-accented': 'var(--ui-color-neutral-200)',
+        '--ui-primary': 'var(--ui-color-primary-600)'
+      },
+      dark: {
+        '--ui-bg': 'var(--ui-color-neutral-900)',
+        '--ui-bg-inverted': 'var(--ui-color-neutral-50)',
+        '--ui-text-highlighted': 'var(--ui-color-neutral-50)',
+        '--ui-border-inverted': 'var(--ui-color-neutral-50)',
+        '--ui-primary': 'var(--ui-color-primary-500)'
+      }
+    },
     style: {
       shadow: 'hard',
       shadowColor: 'black',
       border: 'custom',
       frame: true,
-      borderColor: 'black'
+      borderColor: 'black',
+      defaults: { variants: { panels: 'subtle' } }
     }
   }
 }, {
