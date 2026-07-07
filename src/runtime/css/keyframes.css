@@ -192,9 +192,14 @@
   }
 }
 
+/*
+ * `--initial-transform` lets a component travel further than its own size, so an
+ * inset panel clears the gap between its edge and the viewport instead of peeking
+ * through it while closed. Defaults to 100% for panels flush against the edge.
+ */
 @keyframes slide-in-from-top {
   from {
-    transform: translateY(-100%);
+    transform: translateY(calc(var(--initial-transform, 100%) * -1));
   }
 
   to {
@@ -208,13 +213,13 @@
   }
 
   to {
-    transform: translateY(-100%);
+    transform: translateY(calc(var(--initial-transform, 100%) * -1));
   }
 }
 
 @keyframes slide-in-from-right {
   from {
-    transform: translateX(100%);
+    transform: translateX(var(--initial-transform, 100%));
   }
 
   to {
@@ -228,13 +233,13 @@
   }
 
   to {
-    transform: translateX(100%);
+    transform: translateX(var(--initial-transform, 100%));
   }
 }
 
 @keyframes slide-in-from-bottom {
   from {
-    transform: translateY(100%);
+    transform: translateY(var(--initial-transform, 100%));
   }
 
   to {
@@ -248,13 +253,13 @@
   }
 
   to {
-    transform: translateY(100%);
+    transform: translateY(var(--initial-transform, 100%));
   }
 }
 
 @keyframes slide-in-from-left {
   from {
-    transform: translateX(-100%);
+    transform: translateX(calc(var(--initial-transform, 100%) * -1));
   }
 
   to {
@@ -268,7 +273,7 @@
   }
 
   to {
-    transform: translateX(-100%);
+    transform: translateX(calc(var(--initial-transform, 100%) * -1));
   }
 }
 
