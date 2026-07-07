@@ -190,7 +190,6 @@
     "unplugin": "^3.3.0",
     "unplugin-auto-import": "^21.0.0",
     "unplugin-vue-components": "^32.1.0",
-    "vaul-vue": "0.4.1",
     "vue-component-type-helpers": "^3.3.6"
   },
   "devDependencies": {
