@@ -2,7 +2,7 @@
 import type { ThemeDoc } from '../../utils/theme-engine'
 
 const { track } = useAnalytics()
-const { style, applyDoc, studioOpen: open } = useThemeStudio()
+const { applyDoc, studioOpen: open } = useThemeStudio()
 const { currentDoc, resetTheme } = useTheme()
 
 const route = useRoute()
@@ -14,9 +14,12 @@ const mounted = ref(false)
 onMounted(() => {
   mounted.value = true
 
-  // ?studio survives reloads and makes an open studio linkable.
+  // ?studio survives reloads and makes an open studio linkable. Vaul
+  // rejects an open set during its own mount — wait a frame.
   if (route.query.studio !== undefined) {
-    open.value = true
+    requestAnimationFrame(() => {
+      open.value = true
+    })
   }
 })
 
@@ -101,15 +104,17 @@ watch(open, (isOpen) => {
 
 const sidebarOpen = ref(true)
 
-// Both floating panels wear IDENTICAL chrome: ring edges (default-width
-// rings follow the studio width variable) and one shared shadow treatment,
-// so the sidebar and preview card always match.
-const chromeShadow = computed(() => {
-  const shadow = style.value.shadow
-  if (shadow === 'none') return 'shadow-none'
-  if (shadow === 'hard') return 'shadow-(--ui-shadow-hard-lg)'
-  if (shadow === 'soft') return 'shadow-lg shadow-(color:--ui-shadow-final-soft)'
-  return 'shadow-lg'
+/**
+ * Drawer snap points: the first exposes just the settings panel, a full
+ * pull reveals the preview beside it. Reset to settings on every open.
+ * Vaul measures px snaps against the window, and the drawer sits 1rem shy
+ * of full width — so settings-only exposure is the 21rem sidebar + 1rem.
+ */
+const SETTINGS_SNAP = '352px'
+const snap = ref<string | number>(SETTINGS_SNAP)
+
+watch(open, (isOpen) => {
+  if (isOpen) snap.value = SETTINGS_SNAP
 })
 
 /** Preview views: the bento grid plus app-scale layouts from the real templates. */
@@ -126,15 +131,34 @@ const viewTabs = [
 </script>
 
 <template>
-  <UModal
+  <UDrawer
     v-model:open="open"
-    fullscreen
+    v-model:active-snap-point="snap"
+    direction="left"
+    :snap-points="[SETTINGS_SNAP, 1]"
+    :handle="false"
+    handle-only
+    :modal="false"
+    inset
     title="Theme Studio"
     description="Customize Nuxt UI live: colors, radius, fonts and icons — then export only what you changed."
+    :ui="{ content: 'w-[calc(100vw-2rem)] rounded-xl max-w-none overflow-hidden' }"
   >
+    <UTooltip text="Theme Studio">
+      <UButton
+        icon="i-lucide-swatch-book"
+        color="neutral"
+        variant="ghost"
+        aria-label="Open Theme Studio"
+      />
+    </UTooltip>
+
     <template #content>
       <div class="flex flex-row w-full h-full bg-neutral-100 dark:bg-neutral-900">
-        <div class="flex-1 min-w-0 flex flex-col h-full">
+        <div
+          class="flex-1 min-w-0 flex flex-col h-full transition-opacity duration-200"
+          :class="snap === 1 ? 'opacity-100' : 'opacity-0'"
+        >
           <div
             class="shrink-0 flex items-center gap-2 border-default px-4 sm:px-4 py-3"
           >
@@ -144,8 +168,8 @@ const viewTabs = [
               :icon="viewTabs.find(tab => tab.value === view)?.icon"
 
               color="neutral"
-              variant="ghost"
-              class="w-44"
+              variant="subtle"
+              class="w-32"
             />
 
             <span class="flex-1" />
@@ -163,10 +187,19 @@ const viewTabs = [
           </div>
 
           <!-- The floating preview card: the grid scrolls inside it; the
-               app-shell views own their height and scroll internally. -->
+               app-shell views own their height and scroll internally.
+               [&>*]:rounded-[inherit] + [contain:paint] put the radius and
+               hard paint containment on the views' own scrollers — Chromium
+               won't clip nested composited layers (sticky headers, filtered
+               glows) by an ancestor's radius or overflow alone. -->
           <div
-            class="flex-1 min-w-0 min-h-0 ring ring-default bg-default m-4 mt-0 rounded-lg"
-            :class="[chromeShadow, view === 'grid' ? 'overflow-y-auto' : 'overflow-hidden']"
+            class="flex-1 min-w-0 min-h-0 ring ring-default bg-default m-4 mt-0 rounded-lg [&>*]:rounded-[inherit] [&>*]:[contain:paint]"
+            :class="[
+              view === 'grid' ? 'overflow-y-auto' : 'overflow-hidden',
+              // the open sidebar's own padding provides the gap; collapsed,
+              // the card needs its margin back
+              sidebarOpen ? 'me-0' : 'me-4'
+            ]"
           >
             <ThemeStudioBento v-if="view === 'grid'" />
             <ThemeStudioViewDashboard v-else-if="view === 'dashboard'" />
@@ -181,10 +214,21 @@ const viewTabs = [
           side="right"
           variant="inset"
           :style="{ '--sidebar-width': '21rem' }"
-          :ui="{ container: 'py-3', header: 'p-6 pt-0 pb-4 min-h-0 ps-4', footer: 'p-6 pb-2 ps-4 pt-4', body: 'py-0 px-6 ps-4' }"
+          :ui="{ container: 'py-3 h-full', header: 'p-6 pt-0 pb-3 min-h-0 ', footer: 'p-6 pb-3 pt-3', body: 'py-0 px-6' }"
         >
           <template #header>
             <Logo class="w-auto h-5 shrink-0 mr-auto" />
+
+            <UTooltip :text="snap === 1 ? 'Hide preview' : 'Show preview'">
+              <UButton
+                :icon="snap === 1 ? 'i-lucide-eye-off' : 'i-lucide-eye'"
+                color="neutral"
+                variant="ghost"
+                square
+                :aria-label="snap === 1 ? 'Hide preview' : 'Show preview'"
+                @click="snap = snap === 1 ? SETTINGS_SNAP : 1"
+              />
+            </UTooltip>
 
             <UColorModeSwitch />
 
@@ -248,5 +292,5 @@ const viewTabs = [
         </USidebar>
       </div>
     </template>
-  </UModal>
+  </UDrawer>
 </template>

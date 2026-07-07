@@ -122,7 +122,7 @@ const vReveal = {
 <template>
   <div class="h-full overflow-y-auto bg-default">
     <!-- Header -->
-    <header class="sticky top-0 z-10 border-b border-default bg-default/75 backdrop-blur">
+    <header class="sticky top-0 z-10 border-b border-default bg-default/75 backdrop-blur rounded-t-[inherit]">
       <div class="flex h-14 items-center justify-between gap-3 px-4 sm:px-6">
         <div class="flex items-center gap-1.5 sm:flex-1">
           <UIcon name="i-lucide-activity" class="size-5 text-primary shrink-0" />

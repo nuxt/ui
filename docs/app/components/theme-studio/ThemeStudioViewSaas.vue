@@ -199,7 +199,7 @@ const starLayers = [
 <template>
   <!-- A mini landing page: the pane is the scroll container, so the header sticks to it. -->
   <div class="h-full overflow-y-auto bg-default">
-    <UHeader :toggle="false">
+    <UHeader :toggle="false" class="rounded-t-[inherit]">
       <template #left>
         <div class="flex items-center gap-1.5">
           <UIcon name="i-lucide-rocket" class="size-6 text-primary shrink-0" />
