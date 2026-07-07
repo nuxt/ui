@@ -2,8 +2,8 @@ import type { ModuleOptions } from '../module'
 
 export default (options: Required<ModuleOptions>) => ({
   slots: {
-    overlay: 'fixed inset-0 bg-elevated/75',
-    content: 'fixed bg-default ring ring-default flex focus:outline-none',
+    overlay: ['fixed inset-0 bg-elevated/75', options.theme.transitions && 'data-[state=open]:animate-[fade-in_200ms_var(--ease-out)] data-[state=closed]:animate-[fade-out_200ms_var(--ease-out)]'],
+    content: ['fixed bg-default ring ring-default flex focus:outline-none', options.theme.transitions && 'will-change-transform transition-transform ease-out data-[swiping]:duration-0'],
     handle: ['shrink-0 !bg-accented', options.theme.transitions && 'transition-opacity ease-out'],
     container: 'w-full flex flex-col gap-4 p-4 overflow-y-auto',
     header: 'flex items-center gap-1.5 min-h-8',
@@ -18,19 +18,19 @@ export default (options: Required<ModuleOptions>) => ({
   variants: {
     direction: {
       top: {
-        content: 'mb-24 flex-col-reverse',
+        content: ['mb-24 flex-col-reverse translate-y-[calc(var(--drawer-swipe-movement-y,0px)+var(--drawer-snap-point-offset,0px))]', options.theme.transitions && 'data-[state=open]:animate-[slide-in-from-top_200ms_var(--ease-out)] data-[state=closed]:animate-[slide-out-to-top_200ms_var(--ease-out)]'],
         handle: 'mb-4'
       },
       right: {
-        content: 'flex-row rtl:flex-row-reverse',
+        content: ['flex-row rtl:flex-row-reverse translate-x-[calc(var(--drawer-swipe-movement-x,0px)+var(--drawer-snap-point-offset,0px))]', options.theme.transitions && 'data-[state=open]:animate-[slide-in-from-right_200ms_var(--ease-out)] data-[state=closed]:animate-[slide-out-to-right_200ms_var(--ease-out)]'],
         handle: '!ml-4'
       },
       bottom: {
-        content: 'mt-24 flex-col',
+        content: ['mt-24 flex-col translate-y-[calc(var(--drawer-swipe-movement-y,0px)+var(--drawer-snap-point-offset,0px))]', options.theme.transitions && 'data-[state=open]:animate-[slide-in-from-bottom_200ms_var(--ease-out)] data-[state=closed]:animate-[slide-out-to-bottom_200ms_var(--ease-out)]'],
         handle: 'mt-4'
       },
       left: {
-        content: 'flex-row-reverse rtl:flex-row',
+        content: ['flex-row-reverse rtl:flex-row translate-x-[calc(var(--drawer-swipe-movement-x,0px)+var(--drawer-snap-point-offset,0px))]', options.theme.transitions && 'data-[state=open]:animate-[slide-in-from-left_200ms_var(--ease-out)] data-[state=closed]:animate-[slide-out-to-left_200ms_var(--ease-out)]'],
         handle: '!mr-4'
       }
     },

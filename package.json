@@ -165,7 +165,6 @@
     "unplugin": "catalog:",
     "unplugin-auto-import": "catalog:",
     "unplugin-vue-components": "catalog:",
-    "vaul-vue": "catalog:",
     "vue-component-type-helpers": "catalog:"
   },
   "devDependencies": {

@@ -22,19 +22,11 @@ const inset = ref(false)
       </template>
     </UDrawer>
 
-    <UDrawer should-scale-background title="Drawer with `should-scale-background`" description="You need to add the `data-vaul-drawer-wrapper` directive to your content to make it work." :inset="inset" close>
-      <UButton color="neutral" variant="outline" label="Open with scale" />
-
-      <template #body>
-        <Placeholder class="h-screen w-full" />
-      </template>
-    </UDrawer>
-
-    <UDrawer title="Drawer with nested" :inset="inset" :ui="{ content: 'h-full' }" should-scale-background close>
+    <UDrawer title="Drawer with nested" :inset="inset" :ui="{ content: 'h-full' }" close>
       <UButton color="neutral" variant="outline" label="Open nested" />
 
       <template #footer>
-        <UDrawer :inset="inset" nested :ui="{ content: 'h-full' }">
+        <UDrawer :inset="inset" :ui="{ content: 'h-full' }">
           <UButton color="neutral" variant="outline" label="Open nested" />
 
           <template #content>
