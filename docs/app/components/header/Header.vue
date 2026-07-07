@@ -49,6 +49,8 @@ function toggleChat() {
         <UButton
           icon="i-lucide-swatch-book"
           color="neutral"
+          active-color="primary"
+          :active="route.path === '/theme'"
           variant="ghost"
           to="/theme"
           aria-label="Open Theme Studio"

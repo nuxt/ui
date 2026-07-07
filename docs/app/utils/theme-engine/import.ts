@@ -1,6 +1,6 @@
 import type { ThemeDoc, Shade } from './types'
 import { SHADES, DEFAULT_COLORS } from './types'
-import type { StyleOptions, DefaultVariant, DefaultSize, VariantGroup } from './styles'
+import type { StyleOptions, DefaultVariant, DefaultSize, DefaultColor, VariantGroup } from './styles'
 import {
   styleComponents,
   FRAME_COLOR_VALUES,
@@ -10,7 +10,8 @@ import {
   BORDER_WIDTH_DEFAULT,
   VARIANT_GROUPS,
   VARIANT_SUPPORT,
-  SIZE_SUPPORT
+  SIZE_SUPPORT,
+  COLOR_SUPPORT
 } from './styles'
 import { parseUiColorRef } from './resolve'
 import { themeIcons } from '../theme'
@@ -387,7 +388,19 @@ function parseConfig(config: string, skipped: string[]): Record<string, any> | u
 
 /** Rebuild `defaults` from per-component defaultVariants, group-wise. */
 function extractDefaults(components: Record<string, any>): StyleOptions['defaults'] {
-  const defaults: { size?: DefaultSize, variants?: Partial<Record<VariantGroup, DefaultVariant>> } = {}
+  const defaults: { size?: DefaultSize, variants?: Partial<Record<VariantGroup, DefaultVariant>>, colors?: Partial<Record<VariantGroup, DefaultColor>> } = {}
+
+  for (const [group, groupComponents] of Object.entries(VARIANT_GROUPS)) {
+    const colors = groupComponents.map(component => components[component]?.defaultVariants?.color)
+    const candidate = colors.find(Boolean)
+    if (!candidate) continue
+    const consistent = groupComponents.every((component, index) =>
+      COLOR_SUPPORT.includes(component) ? colors[index] === candidate : colors[index] === undefined
+    )
+    if (consistent) {
+      defaults.colors = { ...defaults.colors, [group]: candidate }
+    }
+  }
 
   const sizes = SIZE_SUPPORT.map(component => components[component]?.defaultVariants?.size)
   if (sizes[0] && sizes.every(size => size === sizes[0])) {
@@ -417,7 +430,7 @@ function extractDefaults(components: Record<string, any>): StyleOptions['default
       .filter(([, groupComponents]) => groupComponents.some(component => VARIANT_SUPPORT[component]?.includes(value)))
       .map(([group]) => group as VariantGroup)
     if (expressible.every(group => defaults.variants?.[group] === value)) {
-      return { variant: value, ...(defaults.size ? { size: defaults.size } : {}) }
+      return { variant: value, ...(defaults.size ? { size: defaults.size } : {}), ...(defaults.colors ? { colors: defaults.colors } : {}) }
     }
   }
 

@@ -33,6 +33,7 @@ export type BorderColor = 'default' | 'inverted' | 'black' | 'white' | 'primary'
 export type ShadowColor = 'default' | 'black' | 'inverted' | 'primary' | 'shade' | 'primary-shade'
 export type DefaultVariant = 'default' | 'solid' | 'outline' | 'soft' | 'subtle' | 'ghost' | 'link' | 'none'
 export type DefaultSize = 'default' | 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+export type DefaultColor = 'default' | 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'error' | 'neutral'
 export type VariantGroup = 'buttons' | 'panels' | 'inputs'
 
 export interface StyleOptions {
@@ -57,7 +58,7 @@ export interface StyleOptions {
    * components that actually support the chosen value. `variant` applies
    * app-wide; `variants` refines it per component group and wins where set.
    */
-  defaults?: { variant?: DefaultVariant, size?: DefaultSize, variants?: Partial<Record<VariantGroup, DefaultVariant>> }
+  defaults?: { variant?: DefaultVariant, size?: DefaultSize, variants?: Partial<Record<VariantGroup, DefaultVariant>>, colors?: Partial<Record<VariantGroup, DefaultColor>> }
   /**
    * Hard-shadow geometry in px, driving --ui-shadow-offset-x/y/blur/spread.
    * Only meaningful while `shadow` is 'hard'.
@@ -116,6 +117,9 @@ export const VARIANT_SUPPORT: Record<string, string[]> = {
 
 // inputRating is size-only (no variant axis); everything here spans xs–xl exactly.
 export const SIZE_SUPPORT = ['button', 'badge', ...FIELD_COMPONENTS, 'inputRating']
+
+/** Components with a color prop — the panels group has no color axis (card and empty lack one; a lone alert color stays a verbatim override). */
+export const COLOR_SUPPORT = ['button', 'badge', ...FIELD_COMPONENTS]
 
 /** Component groups behind the per-group default-variant selects. */
 export const VARIANT_GROUPS: Record<VariantGroup, string[]> = {
@@ -556,6 +560,21 @@ export function styleComponents(style: StyleOptions): Fragments {
           defaults[component] = {
             ...defaults[component],
             defaultVariants: { ...defaults[component]?.defaultVariants, variant: groupVariant }
+          }
+        }
+      }
+    }
+  }
+
+  // Per-group default colors, only on components with a color axis.
+  for (const [group, components] of Object.entries(VARIANT_GROUPS)) {
+    const groupColor = style.defaults?.colors?.[group as VariantGroup]
+    if (groupColor && groupColor !== 'default') {
+      for (const component of components) {
+        if (COLOR_SUPPORT.includes(component)) {
+          defaults[component] = {
+            ...defaults[component],
+            defaultVariants: { ...(defaults[component] as any)?.defaultVariants, color: groupColor }
           }
         }
       }

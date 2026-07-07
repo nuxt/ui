@@ -130,6 +130,17 @@ describe('importTheme', () => {
     expect(skipped).toEqual(['.made-up-selector { color: red }'])
   })
 
+  it('round-trips per-group default colors', () => {
+    const doc: ThemeDoc = {
+      version: 1,
+      style: {
+        defaults: { variants: { buttons: 'soft' }, colors: { buttons: 'secondary', inputs: 'neutral' } }
+      }
+    }
+    const { doc: imported } = importTheme({ config: generateConfig(doc) })
+    expect(imported.style?.defaults).toEqual(doc.style!.defaults)
+  })
+
   it('reads colors and defaults from a config alone', () => {
     const { doc, skipped } = importTheme({
       config: [

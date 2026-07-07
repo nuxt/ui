@@ -77,10 +77,11 @@ function redo() {
 defineShortcuts({
   meta_z: undo,
   meta_shift_z: redo,
-  ctrl_y: redo
+  ctrl_y: redo,
+  escape: () => {
+    if (fullscreen.value) fullscreen.value = false
+  }
 })
-
-const sidebarOpen = ref(true)
 
 /** Preview views: the bento grid plus app-scale layouts from the real templates. */
 const view = ref('grid')
@@ -93,118 +94,147 @@ const viewTabs = [
   { label: 'Landing', icon: 'i-lucide-panels-top-left', value: 'landing' },
   { label: 'A11y', icon: 'i-lucide-accessibility', value: 'a11y' }
 ]
+
+/** UI-hiding fullscreen: only the preview stays (not browser fullscreen). */
+const fullscreen = useState('theme-studio-fullscreen', () => false)
+
+const settingGroups = [
+  { label: 'Colors', value: 'colors' },
+  { label: 'General', value: 'general' },
+  { label: 'Style', value: 'style' },
+  { label: 'Shades', value: 'tokens' }
+] as const
 </script>
 
 <template>
-  <main>
-    <UContainer>
-      <!-- [contain:layout] keeps the sidebar's fixed container anchored to the
-           studio area instead of the viewport (the drawer's transform used to
-           do this implicitly). -->
-      <div class="flex flex-row w-full h-[calc(100dvh-var(--ui-header-height))] bg-neutral-100 dark:bg-neutral-900 [contain:layout]">
-        <div class="flex-1 min-w-0 flex flex-col h-full">
-          <div class="shrink-0 flex items-center gap-2 border-default py-3">
-            <USelect
-              v-model="view"
-              :items="viewTabs"
-              :icon="viewTabs.find(tab => tab.value === view)?.icon"
+  <main class="bg-neutral-100 dark:bg-neutral-900">
+    <UContainer :class="fullscreen && 'max-w-none px-0 sm:px-0 lg:px-0'">
+      <div class="flex flex-col w-full" :class="fullscreen ? 'h-dvh' : 'h-[calc(100dvh-var(--ui-header-height))]'">
+        <!-- One toolbar: presets and setting-group popovers on the left,
+             document actions on the right. -->
+        <div v-if="!fullscreen" class="shrink-0 flex items-center gap-2 py-3 overflow-x-auto">
+          <ThemeStudioPresetMenu class="w-56 shrink-0" />
+
+          <UPopover
+            v-for="settingGroup in settingGroups"
+            :key="settingGroup.value"
+            :content="{ align: 'start' }"
+          >
+            <UButton
+              :label="settingGroup.label"
               color="neutral"
               variant="subtle"
-              class="w-36"
+              size="sm"
+              trailing-icon="i-lucide-chevron-down"
             />
 
-            <span class="flex-1" />
-            <UColorModeSwitch />
+            <template #content>
+              <ThemeStudioControls :group="settingGroup.value" class="w-80 max-h-[70vh] overflow-y-auto p-4" />
+            </template>
+          </UPopover>
 
-            <UTooltip :text="sidebarOpen ? 'Hide settings' : 'Show settings'">
-              <UButton
-                :icon="sidebarOpen ? 'i-lucide-panel-right-close' : 'i-lucide-panel-right-open'"
-                color="neutral"
-                variant="ghost"
-                aria-label="Toggle settings panel"
-                @click="sidebarOpen = !sidebarOpen"
-              />
-            </UTooltip>
-          </div>
+          <span class="flex-1" />
 
-          <!-- The floating preview card: the grid scrolls inside it; the
-           app-shell views own their height and scroll internally.
-           [&>*]:rounded-[inherit] + [contain:paint] put the radius and
-           hard paint containment on the views' own scrollers — Chromium
-           won't clip nested composited layers (sticky headers, filtered
-           glows) by an ancestor's radius or overflow alone. -->
-          <div
-            class="flex-1 min-w-0 min-h-0 ring ring-default bg-default mb-4 rounded-lg [&>*]:rounded-[inherit] [&>*]:[contain:paint]"
-            :class="[
-              view === 'grid' ? 'overflow-y-auto' : 'overflow-hidden',
-              // the open sidebar's own padding provides the gap; collapsed,
-              // the card needs its margin back
-              sidebarOpen ? 'me-0' : 'me-4'
-            ]"
-          >
-            <ThemeStudioBento v-if="view === 'grid'" />
-            <ThemeStudioViewDashboard v-else-if="view === 'dashboard'" />
-            <ThemeStudioViewChat v-else-if="view === 'chat'" />
-            <ThemeStudioViewSaas v-else-if="view === 'saas'" />
-            <ThemeStudioViewLanding v-else-if="view === 'landing'" />
-            <ThemeStudioViewA11y v-else-if="view === 'a11y'" />
-          </div>
-        </div>
+          <USelect
+            v-model="view"
+            :items="viewTabs"
+            :icon="viewTabs.find(tab => tab.value === view)?.icon"
+            size="sm"
+            color="neutral"
+            variant="subtle"
+            class="w-36 shrink-0"
+          />
 
-        <USidebar
-          v-model:open="sidebarOpen"
-          side="right"
-          variant="inset"
-          :style="{ '--sidebar-width': '21rem' }"
-          :ui="{ container: 'py-3 ps-6 h-full', header: 'pb-3 px-0 min-h-0', footer: 'py-3 px-0', body: 'py-0 px-0' }"
-        >
-          <template #header>
-            <div class="flex-1 min-w-0">
+          <UTooltip text="Fullscreen preview">
+            <UButton
+              icon="i-lucide-maximize"
+              color="neutral"
+              variant="subtle"
+              size="sm"
+              aria-label="Fullscreen preview"
+              @click="fullscreen = true"
+            />
+          </UTooltip>
+
+          <div class="shrink-0">
+            <UFieldGroup>
               <ThemeStudioImport />
-            </div>
 
-            <div class="flex-1 min-w-0">
               <ThemeStudioExport />
-            </div>
-
-            <UFieldGroup size="sm">
-              <UTooltip text="Undo" :kbds="['meta', 'Z']">
-                <UButton
-                  icon="i-lucide-undo-2"
-                  color="neutral"
-                  variant="subtle"
-                  :disabled="!past.length"
-                  aria-label="Undo theme change"
-                  @click="undo"
-                />
-              </UTooltip>
-
-              <UTooltip text="Redo" :kbds="['meta', 'shift', 'Z']">
-                <UButton
-                  icon="i-lucide-redo-2"
-                  color="neutral"
-                  variant="subtle"
-                  :disabled="!future.length"
-                  aria-label="Redo theme change"
-                  @click="redo"
-                />
-              </UTooltip>
             </UFieldGroup>
+          </div>
 
-            <UTooltip text="Reset theme">
+          <UFieldGroup size="sm">
+            <UTooltip text="Undo" :kbds="['meta', 'Z']">
               <UButton
-                icon="i-lucide-rotate-ccw"
+                icon="i-lucide-undo-2"
                 color="neutral"
                 variant="subtle"
-                size="sm"
-                aria-label="Reset theme"
-                @click="resetTheme"
+                :disabled="!past.length"
+                aria-label="Undo theme change"
+                @click="undo"
               />
             </UTooltip>
-          </template>
 
-          <ThemeStudioControls />
-        </USidebar>
+            <UTooltip text="Redo" :kbds="['meta', 'shift', 'Z']">
+              <UButton
+                icon="i-lucide-redo-2"
+                color="neutral"
+                variant="subtle"
+                :disabled="!future.length"
+                aria-label="Redo theme change"
+                @click="redo"
+              />
+            </UTooltip>
+          </UFieldGroup>
+
+          <UTooltip text="Reset theme">
+            <UButton
+              icon="i-lucide-rotate-ccw"
+              color="neutral"
+              variant="subtle"
+              size="sm"
+              aria-label="Reset theme"
+              @click="resetTheme"
+            />
+          </UTooltip>
+        </div>
+
+        <!-- The floating preview card: the grid scrolls inside it; the
+             app-shell views own their height and scroll internally.
+             [&>*]:rounded-[inherit] + [contain:paint] put the radius and
+             hard paint containment on the views' own scrollers — Chromium
+             won't clip nested composited layers (sticky headers, filtered
+             glows) by an ancestor's radius or overflow alone. -->
+        <div
+          class="flex-1 min-w-0 min-h-0 bg-default [&>*]:rounded-[inherit] [&>*]:[contain:paint]"
+          :class="[
+            view === 'grid' ? 'overflow-y-auto' : 'overflow-hidden',
+            fullscreen ? 'rounded-none' : 'ring ring-default mb-4 rounded-lg'
+          ]"
+        >
+          <ThemeStudioBento v-if="view === 'grid'" />
+          <ThemeStudioViewDashboard v-else-if="view === 'dashboard'" />
+          <ThemeStudioViewChat v-else-if="view === 'chat'" />
+          <ThemeStudioViewSaas v-else-if="view === 'saas'" />
+          <ThemeStudioViewLanding v-else-if="view === 'landing'" />
+          <ThemeStudioViewA11y v-else-if="view === 'a11y'" />
+        </div>
+      </div>
+
+      <!-- Exit peeks a few pixels into the corner; nearing it slides the
+           button fully in (Esc always works). -->
+      <div v-if="fullscreen" class="group fixed top-0 right-0 z-50 flex justify-end items-start w-32 h-20 pt-2 pe-4 pointer-events-auto">
+        <UTooltip text="Exit fullscreen" :kbds="['Esc']">
+          <UButton
+            icon="i-lucide-minimize"
+            color="neutral"
+            variant="subtle"
+            class="translate-x-[calc(100%-6px)] group-hover:translate-x-0 transition-transform duration-200"
+            aria-label="Exit fullscreen preview"
+            @click="fullscreen = false"
+          />
+        </UTooltip>
       </div>
     </UContainer>
   </main>

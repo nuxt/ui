@@ -42,14 +42,16 @@ function runImport() {
     description="Paste an exported main.css and/or app.config.ts — the studio parses it back into editable settings."
     :ui="{ content: 'max-w-3xl' }"
   >
-    <UButton
-      label="Import"
-      icon="i-lucide-upload"
-      color="neutral"
-      variant="subtle"
-      size="sm"
-      block
-    />
+    <UTooltip text="Import theme">
+      <UButton
+        icon="i-lucide-upload"
+        color="neutral"
+        variant="subtle"
+        size="sm"
+        block
+        aria-label="Import theme"
+      />
+    </UTooltip>
 
     <template #body>
       <div class="flex flex-col gap-4">
