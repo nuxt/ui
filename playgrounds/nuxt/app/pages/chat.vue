@@ -47,6 +47,7 @@ function getEmailToolText(state: string): string {
   if (isToolApprovalPending({ state })) return 'Send this email?'
   if (state === 'output-available') return 'Email sent'
   if (state === 'output-denied') return 'Email cancelled'
+  if (state === 'output-error') return 'Email failed'
   return 'Preparing email'
 }
 

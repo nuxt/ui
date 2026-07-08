@@ -16,9 +16,9 @@ export default defineEventHandler(async (event) => {
       send_email: tool({
         description: 'Send an email to a recipient.',
         inputSchema: z.object({
-          to: z.string().describe('The recipient email address'),
-          subject: z.string().describe('The email subject'),
-          body: z.string().describe('The email body')
+          to: z.email().describe('The recipient email address'),
+          subject: z.string().min(1).describe('The email subject'),
+          body: z.string().min(1).describe('The email body')
         }),
         execute: async ({ to }) => ({ sent: true, to })
       })

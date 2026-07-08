@@ -41,6 +41,7 @@ function onDeny() {
 }
 
 function reset() {
+  clearTimeout(timer)
   state.value = 'approval-requested'
   result.value = ''
 }
