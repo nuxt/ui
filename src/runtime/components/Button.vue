@@ -3,7 +3,7 @@ import type { Ref, VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/button'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
-import type { LinkProps, AvatarProps } from '../types'
+import type { IconProps, LinkProps, AvatarProps } from '../types'
 import type { ComponentConfig } from '../types/tv'
 
 type Button = ComponentConfig<typeof theme, AppConfig, 'button'>
@@ -20,6 +20,13 @@ export interface ButtonProps extends UseComponentIconsProps, Omit<LinkProps, 'ra
    */
   variant?: Button['variants']['variant']
   activeVariant?: Button['variants']['variant']
+  /**
+   * The icon displayed when the item is an external link.
+   * Set to `false` to hide the external icon.
+   * @defaultValue appConfig.ui.icons.external
+   * @IconifyIcon
+   */
+  externalIcon?: boolean | IconProps['name']
   /**
    * @defaultValue 'md'
    */
@@ -142,10 +149,13 @@ const ui = computed(() => tv({
         <UAvatar v-else-if="!!props.avatar" :size="((props.ui?.leadingAvatarSize || ui.leadingAvatarSize()) as AvatarProps['size'])" v-bind="props.avatar" data-slot="leadingAvatar" :class="ui.leadingAvatar({ class: props.ui?.leadingAvatar, active })" />
       </slot>
 
-      <slot :ui="ui">
+      <slot :ui="ui" class="truncate">
         <span v-if="props.label !== undefined && props.label !== null" data-slot="label" :class="ui.label({ class: props.ui?.label, active })">
           {{ props.label }}
         </span>
+        <div v-if="props.target === '_blank' && props.externalIcon !== false" data-slot="externalIconContainer" :class="ui.externalIconContainer({ class: [props.ui?.externalIconContainer], active })">
+          <UIcon :name="typeof props.externalIcon === 'string' ? props.externalIcon : appConfig.ui.icons.external" data-slot="externalIcon" :class="ui.externalIcon({ class: [props.ui?.externalIcon], active })" />
+        </div>
       </slot>
 
       <slot name="trailing" :ui="ui">

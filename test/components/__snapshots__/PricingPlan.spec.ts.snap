@@ -25,6 +25,7 @@ exports[`PricingPlan > renders with as correctly 1`] = `
     <!--v-if--><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
       <!--v-if--><span data-slot="label" class="truncate">Buy now</span>
       <!--v-if-->
+      <!--v-if-->
     </button>
     <div data-slot="terms" class="text-xs/5 text-muted text-center text-balance">Terms</div>
   </div>
@@ -86,6 +87,7 @@ exports[`PricingPlan > renders with badge slot correctly 1`] = `
     <div data-slot="tagline" class="text-base font-semibold text-default">Tagline</div>
     <!--v-if--><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
       <!--v-if--><span data-slot="label" class="truncate">Buy now</span>
+      <!--v-if-->
       <!--v-if-->
     </button>
     <div data-slot="terms" class="text-xs/5 text-muted text-center text-balance">Terms</div>
@@ -160,6 +162,7 @@ exports[`PricingPlan > renders with billing slot correctly 1`] = `
     <!--v-if--><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
       <!--v-if--><span data-slot="label" class="truncate">Buy now</span>
       <!--v-if-->
+      <!--v-if-->
     </button>
     <div data-slot="terms" class="text-xs/5 text-muted text-center text-balance">Terms</div>
   </div>
@@ -174,6 +177,7 @@ exports[`PricingPlan > renders with body slot correctly 1`] = `
     <div data-slot="tagline" class="text-base font-semibold text-default">Tagline</div>
     <!--v-if--><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
       <!--v-if--><span data-slot="label" class="truncate">Buy now</span>
+      <!--v-if-->
       <!--v-if-->
     </button>
     <div data-slot="terms" class="text-xs/5 text-muted text-center text-balance">Terms</div>
@@ -197,6 +201,7 @@ exports[`PricingPlan > renders with button correctly 1`] = `
     <!--v-if-->
     <!--v-if--><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
       <!--v-if--><span data-slot="label" class="truncate">Buy now</span>
+      <!--v-if-->
       <!--v-if-->
     </button>
     <!--v-if-->
@@ -256,6 +261,7 @@ exports[`PricingPlan > renders with class correctly 1`] = `
     <!--v-if--><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
       <!--v-if--><span data-slot="label" class="truncate">Buy now</span>
       <!--v-if-->
+      <!--v-if-->
     </button>
     <div data-slot="terms" class="text-xs/5 text-muted text-center text-balance">Terms</div>
   </div>
@@ -302,6 +308,7 @@ exports[`PricingPlan > renders with description slot correctly 1`] = `
     <div data-slot="tagline" class="text-base font-semibold text-default">Tagline</div>
     <!--v-if--><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
       <!--v-if--><span data-slot="label" class="truncate">Buy now</span>
+      <!--v-if-->
       <!--v-if-->
     </button>
     <div data-slot="terms" class="text-xs/5 text-muted text-center text-balance">Terms</div>
@@ -353,6 +360,7 @@ exports[`PricingPlan > renders with discount slot correctly 1`] = `
     <div data-slot="tagline" class="text-base font-semibold text-default">Tagline</div>
     <!--v-if--><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
       <!--v-if--><span data-slot="label" class="truncate">Buy now</span>
+      <!--v-if-->
       <!--v-if-->
     </button>
     <div data-slot="terms" class="text-xs/5 text-muted text-center text-balance">Terms</div>
@@ -421,6 +429,7 @@ exports[`PricingPlan > renders with features slot correctly 1`] = `
     <!--v-if--><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
       <!--v-if--><span data-slot="label" class="truncate">Buy now</span>
       <!--v-if-->
+      <!--v-if-->
     </button>
     <div data-slot="terms" class="text-xs/5 text-muted text-center text-balance">Terms</div>
   </div>
@@ -476,6 +485,7 @@ exports[`PricingPlan > renders with header slot correctly 1`] = `
     <!--v-if--><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
       <!--v-if--><span data-slot="label" class="truncate">Buy now</span>
       <!--v-if-->
+      <!--v-if-->
     </button>
     <div data-slot="terms" class="text-xs/5 text-muted text-center text-balance">Terms</div>
   </div>
@@ -506,6 +516,7 @@ exports[`PricingPlan > renders with highlight correctly 1`] = `
     <div data-slot="tagline" class="text-base font-semibold text-default">Tagline</div>
     <!--v-if--><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
       <!--v-if--><span data-slot="label" class="truncate">Buy now</span>
+      <!--v-if-->
       <!--v-if-->
     </button>
     <div data-slot="terms" class="text-xs/5 text-muted text-center text-balance">Terms</div>
@@ -538,6 +549,7 @@ exports[`PricingPlan > renders with orientation horizontal correctly 1`] = `
     </div><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
       <!--v-if--><span data-slot="label" class="truncate">Buy now</span>
       <!--v-if-->
+      <!--v-if-->
     </button>
     <div data-slot="terms" class="text-xs/5 text-muted text-center text-balance">Terms</div>
   </div>
@@ -568,6 +580,7 @@ exports[`PricingPlan > renders with orientation vertical correctly 1`] = `
     <div data-slot="tagline" class="text-base font-semibold text-default">Tagline</div>
     <!--v-if--><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
       <!--v-if--><span data-slot="label" class="truncate">Buy now</span>
+      <!--v-if-->
       <!--v-if-->
     </button>
     <div data-slot="terms" class="text-xs/5 text-muted text-center text-balance">Terms</div>
@@ -620,6 +633,7 @@ exports[`PricingPlan > renders with price slot correctly 1`] = `
     <!--v-if--><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
       <!--v-if--><span data-slot="label" class="truncate">Buy now</span>
       <!--v-if-->
+      <!--v-if-->
     </button>
     <div data-slot="terms" class="text-xs/5 text-muted text-center text-balance">Terms</div>
   </div>
@@ -650,6 +664,7 @@ exports[`PricingPlan > renders with scale correctly 1`] = `
     <div data-slot="tagline" class="text-base font-semibold text-default">Tagline</div>
     <!--v-if--><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
       <!--v-if--><span data-slot="label" class="truncate">Buy now</span>
+      <!--v-if-->
       <!--v-if-->
     </button>
     <div data-slot="terms" class="text-xs/5 text-muted text-center text-balance">Terms</div>
@@ -703,6 +718,7 @@ exports[`PricingPlan > renders with tagline slot correctly 1`] = `
     <!--v-if--><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
       <!--v-if--><span data-slot="label" class="truncate">Buy now</span>
       <!--v-if-->
+      <!--v-if-->
     </button>
     <div data-slot="terms" class="text-xs/5 text-muted text-center text-balance">Terms</div>
   </div>
@@ -755,6 +771,7 @@ exports[`PricingPlan > renders with terms slot correctly 1`] = `
     <!--v-if--><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
       <!--v-if--><span data-slot="label" class="truncate">Buy now</span>
       <!--v-if-->
+      <!--v-if-->
     </button>
     <div data-slot="terms" class="text-xs/5 text-muted text-center text-balance">Terms slot</div>
   </div>
@@ -802,6 +819,7 @@ exports[`PricingPlan > renders with title slot correctly 1`] = `
     <!--v-if--><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
       <!--v-if--><span data-slot="label" class="truncate">Buy now</span>
       <!--v-if-->
+      <!--v-if-->
     </button>
     <div data-slot="terms" class="text-xs/5 text-muted text-center text-balance">Terms</div>
   </div>
@@ -832,6 +850,7 @@ exports[`PricingPlan > renders with ui correctly 1`] = `
     <div data-slot="tagline" class="text-base font-semibold text-default">Tagline</div>
     <!--v-if--><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
       <!--v-if--><span data-slot="label" class="truncate">Buy now</span>
+      <!--v-if-->
       <!--v-if-->
     </button>
     <div data-slot="terms" class="text-xs/5 text-muted text-center text-balance">Terms</div>
@@ -864,6 +883,7 @@ exports[`PricingPlan > renders with variant outline correctly 1`] = `
     <!--v-if--><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
       <!--v-if--><span data-slot="label" class="truncate">Buy now</span>
       <!--v-if-->
+      <!--v-if-->
     </button>
     <div data-slot="terms" class="text-xs/5 text-muted text-center text-balance">Terms</div>
   </div>
@@ -894,6 +914,7 @@ exports[`PricingPlan > renders with variant soft correctly 1`] = `
     <div data-slot="tagline" class="text-base font-semibold text-default">Tagline</div>
     <!--v-if--><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
       <!--v-if--><span data-slot="label" class="truncate">Buy now</span>
+      <!--v-if-->
       <!--v-if-->
     </button>
     <div data-slot="terms" class="text-xs/5 text-muted text-center text-balance">Terms</div>
@@ -926,6 +947,7 @@ exports[`PricingPlan > renders with variant solid correctly 1`] = `
     <!--v-if--><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
       <!--v-if--><span data-slot="label" class="truncate">Buy now</span>
       <!--v-if-->
+      <!--v-if-->
     </button>
     <div data-slot="terms" class="text-xs/5 text-muted text-center text-balance">Terms</div>
   </div>
@@ -956,6 +978,7 @@ exports[`PricingPlan > renders with variant subtle correctly 1`] = `
     <div data-slot="tagline" class="text-base font-semibold text-default">Tagline</div>
     <!--v-if--><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
       <!--v-if--><span data-slot="label" class="truncate">Buy now</span>
+      <!--v-if-->
       <!--v-if-->
     </button>
     <div data-slot="terms" class="text-xs/5 text-muted text-center text-balance">Terms</div>

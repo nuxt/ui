@@ -5,17 +5,22 @@ exports[`Calendar > renders with as correctly 1`] = `
   <div data-slot="header" class="flex items-center justify-between"><button type="button" aria-label="Previous year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevrons-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button><button type="button" aria-label="Previous month" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
     <div data-slot="heading" class="flex-1 min-w-0 text-center"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent">
         <!--v-if--><span data-slot="label" class="truncate">January 2025</span>
         <!--v-if-->
+        <!--v-if-->
       </button></div><button type="button" aria-label="Next month" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button><button type="button" aria-label="Next year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevrons-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -192,17 +197,22 @@ exports[`Calendar > renders with class correctly 1`] = `
   <div data-slot="header" class="flex items-center justify-between"><button type="button" aria-label="Previous year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevrons-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button><button type="button" aria-label="Previous month" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
     <div data-slot="heading" class="flex-1 min-w-0 text-center"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent">
         <!--v-if--><span data-slot="label" class="truncate">January 2025</span>
         <!--v-if-->
+        <!--v-if-->
       </button></div><button type="button" aria-label="Next month" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button><button type="button" aria-label="Next year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevrons-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -379,17 +389,22 @@ exports[`Calendar > renders with color neutral correctly 1`] = `
   <div data-slot="header" class="flex items-center justify-between"><button type="button" aria-label="Previous year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevrons-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button><button type="button" aria-label="Previous month" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
     <div data-slot="heading" class="flex-1 min-w-0 text-center"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent">
         <!--v-if--><span data-slot="label" class="truncate">January 2025</span>
         <!--v-if-->
+        <!--v-if-->
       </button></div><button type="button" aria-label="Next month" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button><button type="button" aria-label="Next year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevrons-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -566,17 +581,22 @@ exports[`Calendar > renders with day slot correctly 1`] = `
   <div data-slot="header" class="flex items-center justify-between"><button type="button" aria-label="Previous year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevrons-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button><button type="button" aria-label="Previous month" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
     <div data-slot="heading" class="flex-1 min-w-0 text-center"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent">
         <!--v-if--><span data-slot="label" class="truncate">January 2025</span>
         <!--v-if-->
+        <!--v-if-->
       </button></div><button type="button" aria-label="Next month" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button><button type="button" aria-label="Next year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevrons-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -753,17 +773,22 @@ exports[`Calendar > renders with default value correctly 1`] = `
   <div data-slot="header" class="flex items-center justify-between"><button type="button" aria-label="Previous year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevrons-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button><button type="button" aria-label="Previous month" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
     <div data-slot="heading" class="flex-1 min-w-0 text-center"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent">
         <!--v-if--><span data-slot="label" class="truncate">January 2025</span>
         <!--v-if-->
+        <!--v-if-->
       </button></div><button type="button" aria-label="Next month" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button><button type="button" aria-label="Next year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevrons-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -940,17 +965,22 @@ exports[`Calendar > renders with disabled correctly 1`] = `
   <div data-slot="header" class="flex items-center justify-between"><button type="button" disabled="" aria-label="Previous year" aria-disabled="true" data-disabled="true" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevrons-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button><button type="button" disabled="" aria-label="Previous month" aria-disabled="true" data-disabled="true" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
     <div data-disabled="" data-slot="heading" class="flex-1 min-w-0 text-center"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent">
         <!--v-if--><span data-slot="label" class="truncate">January 2025</span>
         <!--v-if-->
+        <!--v-if-->
       </button></div><button type="button" disabled="" aria-label="Next month" aria-disabled="true" data-disabled="true" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button><button type="button" disabled="" aria-label="Next year" aria-disabled="true" data-disabled="true" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevrons-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -1127,14 +1157,18 @@ exports[`Calendar > renders with heading slot correctly 1`] = `
   <div data-slot="header" class="flex items-center justify-between"><button type="button" aria-label="Previous year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevrons-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button><button type="button" aria-label="Previous month" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
     <div data-slot="heading" class="flex-1 min-w-0 text-center">Heading</div><button type="button" aria-label="Next month" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button><button type="button" aria-label="Next year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevrons-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -1311,17 +1345,22 @@ exports[`Calendar > renders with isDateDisabled correctly 1`] = `
   <div data-slot="header" class="flex items-center justify-between"><button type="button" aria-label="Previous year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevrons-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button><button type="button" aria-label="Previous month" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
     <div data-slot="heading" class="flex-1 min-w-0 text-center"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent">
         <!--v-if--><span data-slot="label" class="truncate">January 2025</span>
         <!--v-if-->
+        <!--v-if-->
       </button></div><button type="button" aria-label="Next month" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button><button type="button" aria-label="Next year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevrons-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -1498,17 +1537,22 @@ exports[`Calendar > renders with isDateUnavailable correctly 1`] = `
   <div data-slot="header" class="flex items-center justify-between"><button type="button" aria-label="Previous year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevrons-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button><button type="button" aria-label="Previous month" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
     <div data-slot="heading" class="flex-1 min-w-0 text-center"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent">
         <!--v-if--><span data-slot="label" class="truncate">January 2025</span>
         <!--v-if-->
+        <!--v-if-->
       </button></div><button type="button" aria-label="Next month" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button><button type="button" aria-label="Next year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevrons-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -1685,17 +1729,22 @@ exports[`Calendar > renders with modelValue correctly 1`] = `
   <div data-slot="header" class="flex items-center justify-between"><button type="button" aria-label="Previous year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevrons-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button><button type="button" aria-label="Previous month" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
     <div data-slot="heading" class="flex-1 min-w-0 text-center"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent">
         <!--v-if--><span data-slot="label" class="truncate">January 2025</span>
         <!--v-if-->
+        <!--v-if-->
       </button></div><button type="button" aria-label="Next month" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button><button type="button" aria-label="Next year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevrons-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -1873,11 +1922,14 @@ exports[`Calendar > renders with month-cell slot correctly 1`] = `
     <!--v-if--><button type="button" aria-label="Previous year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button>
     <div id="reka-month-picker-heading-v-0-0-0" role="heading" aria-level="2" data-slot="heading" class="flex-1 min-w-0 text-center"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent">
         <!--v-if--><span data-slot="label" class="truncate">2025</span>
         <!--v-if-->
+        <!--v-if-->
       </button></div><button type="button" aria-label="Next year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -1946,17 +1998,22 @@ exports[`Calendar > renders with multiple correctly 1`] = `
   <div data-slot="header" class="flex items-center justify-between"><button type="button" aria-label="Previous year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevrons-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button><button type="button" aria-label="Previous month" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
     <div data-slot="heading" class="flex-1 min-w-0 text-center"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent">
         <!--v-if--><span data-slot="label" class="truncate">January 2025</span>
         <!--v-if-->
+        <!--v-if-->
       </button></div><button type="button" aria-label="Next month" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button><button type="button" aria-label="Next year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevrons-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -2133,17 +2190,22 @@ exports[`Calendar > renders with nextMonth correctly 1`] = `
   <div data-slot="header" class="flex items-center justify-between"><button type="button" aria-label="Previous year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevrons-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button><button type="button" aria-label="Previous month" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
     <div data-slot="heading" class="flex-1 min-w-0 text-center"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent">
         <!--v-if--><span data-slot="label" class="truncate">January 2025</span>
         <!--v-if-->
+        <!--v-if-->
       </button></div><button type="button" aria-label="Next month" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-2 text-primary hover:bg-primary/10 active:bg-primary/10 outline-primary/25 focus-visible:outline-3 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent p-2"><span class="iconify i-lucide:chevron-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button><button type="button" aria-label="Next year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevrons-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -2320,17 +2382,22 @@ exports[`Calendar > renders with nextYear correctly 1`] = `
   <div data-slot="header" class="flex items-center justify-between"><button type="button" aria-label="Previous year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevrons-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button><button type="button" aria-label="Previous month" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
     <div data-slot="heading" class="flex-1 min-w-0 text-center"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent">
         <!--v-if--><span data-slot="label" class="truncate">January 2025</span>
         <!--v-if-->
+        <!--v-if-->
       </button></div><button type="button" aria-label="Next month" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button><button type="button" aria-label="Next year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-2 text-primary hover:bg-primary/10 active:bg-primary/10 outline-primary/25 focus-visible:outline-3 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent p-2"><span class="iconify i-lucide:chevrons-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -2507,17 +2574,22 @@ exports[`Calendar > renders with numberOfMonths correctly 1`] = `
   <div data-slot="header" class="flex items-center justify-between"><button type="button" aria-label="Previous year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevrons-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button><button type="button" aria-label="Previous month" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
     <div data-slot="heading" class="flex-1 min-w-0 text-center"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent">
         <!--v-if--><span data-slot="label" class="truncate">January - February 2025</span>
         <!--v-if-->
+        <!--v-if-->
       </button></div><button type="button" aria-label="Next month" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button><button type="button" aria-label="Next year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevrons-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -2853,17 +2925,22 @@ exports[`Calendar > renders with prevMonth correctly 1`] = `
   <div data-slot="header" class="flex items-center justify-between"><button type="button" aria-label="Previous year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevrons-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button><button type="button" aria-label="Previous month" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-2 text-primary hover:bg-primary/10 active:bg-primary/10 outline-primary/25 focus-visible:outline-3 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent p-2"><span class="iconify i-lucide:chevron-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
     <div data-slot="heading" class="flex-1 min-w-0 text-center"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent">
         <!--v-if--><span data-slot="label" class="truncate">January 2025</span>
         <!--v-if-->
+        <!--v-if-->
       </button></div><button type="button" aria-label="Next month" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button><button type="button" aria-label="Next year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevrons-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -3040,17 +3117,22 @@ exports[`Calendar > renders with prevYear correctly 1`] = `
   <div data-slot="header" class="flex items-center justify-between"><button type="button" aria-label="Previous year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-2 text-primary hover:bg-primary/10 active:bg-primary/10 outline-primary/25 focus-visible:outline-3 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent p-2"><span class="iconify i-lucide:chevrons-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button><button type="button" aria-label="Previous month" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
     <div data-slot="heading" class="flex-1 min-w-0 text-center"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent">
         <!--v-if--><span data-slot="label" class="truncate">January 2025</span>
         <!--v-if-->
+        <!--v-if-->
       </button></div><button type="button" aria-label="Next month" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button><button type="button" aria-label="Next year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevrons-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -3230,17 +3312,22 @@ exports[`Calendar > renders with range and defaultValue correctly 1`] = `
   <div data-slot="header" class="flex items-center justify-between"><button type="button" aria-label="Previous year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevrons-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button><button type="button" aria-label="Previous month" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
     <div data-slot="heading" class="flex-1 min-w-0 text-center"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent">
         <!--v-if--><span data-slot="label" class="truncate">January 2025</span>
         <!--v-if-->
+        <!--v-if-->
       </button></div><button type="button" aria-label="Next month" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button><button type="button" aria-label="Next year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevrons-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -3417,17 +3504,22 @@ exports[`Calendar > renders with range and modelValue correctly 1`] = `
   <div data-slot="header" class="flex items-center justify-between"><button type="button" aria-label="Previous year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevrons-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button><button type="button" aria-label="Previous month" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
     <div data-slot="heading" class="flex-1 min-w-0 text-center"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent">
         <!--v-if--><span data-slot="label" class="truncate">January 2025</span>
         <!--v-if-->
+        <!--v-if-->
       </button></div><button type="button" aria-label="Next month" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button><button type="button" aria-label="Next year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevrons-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -3604,17 +3696,22 @@ exports[`Calendar > renders with range correctly 1`] = `
   <div data-slot="header" class="flex items-center justify-between"><button type="button" aria-label="Previous year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevrons-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button><button type="button" aria-label="Previous month" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
     <div data-slot="heading" class="flex-1 min-w-0 text-center"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent">
         <!--v-if--><span data-slot="label" class="truncate">January 2025</span>
         <!--v-if-->
+        <!--v-if-->
       </button></div><button type="button" aria-label="Next month" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button><button type="button" aria-label="Next year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevrons-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -3788,17 +3885,22 @@ exports[`Calendar > renders with readonly correctly 1`] = `
   <div data-slot="header" class="flex items-center justify-between"><button type="button" aria-label="Previous year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevrons-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button><button type="button" aria-label="Previous month" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
     <div data-slot="heading" class="flex-1 min-w-0 text-center"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent">
         <!--v-if--><span data-slot="label" class="truncate">January 2025</span>
         <!--v-if-->
+        <!--v-if-->
       </button></div><button type="button" aria-label="Next month" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button><button type="button" aria-label="Next year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevrons-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -3975,17 +4077,22 @@ exports[`Calendar > renders with size lg correctly 1`] = `
   <div data-slot="header" class="flex items-center justify-between"><button type="button" aria-label="Previous year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-2 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-2"><span class="iconify i-lucide:chevrons-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button><button type="button" aria-label="Previous month" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-2 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-2"><span class="iconify i-lucide:chevron-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
     <div data-slot="heading" class="flex-1 min-w-0 text-center"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 w-full justify-center text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent">
         <!--v-if--><span data-slot="label" class="truncate">January 2025</span>
         <!--v-if-->
+        <!--v-if-->
       </button></div><button type="button" aria-label="Next month" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-2 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-2"><span class="iconify i-lucide:chevron-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button><button type="button" aria-label="Next year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-2 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-2"><span class="iconify i-lucide:chevrons-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -4162,17 +4269,22 @@ exports[`Calendar > renders with size md correctly 1`] = `
   <div data-slot="header" class="flex items-center justify-between"><button type="button" aria-label="Previous year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevrons-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button><button type="button" aria-label="Previous month" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
     <div data-slot="heading" class="flex-1 min-w-0 text-center"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent">
         <!--v-if--><span data-slot="label" class="truncate">January 2025</span>
         <!--v-if-->
+        <!--v-if-->
       </button></div><button type="button" aria-label="Next month" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button><button type="button" aria-label="Next year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevrons-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -4349,17 +4461,22 @@ exports[`Calendar > renders with size sm correctly 1`] = `
   <div data-slot="header" class="flex items-center justify-between"><button type="button" aria-label="Previous year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevrons-left shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button><button type="button" aria-label="Previous month" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-left shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
     <div data-slot="heading" class="flex-1 min-w-0 text-center"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-xs gap-1.5 w-full justify-center text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent">
         <!--v-if--><span data-slot="label" class="truncate">January 2025</span>
         <!--v-if-->
+        <!--v-if-->
       </button></div><button type="button" aria-label="Next month" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-right shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button><button type="button" aria-label="Next year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevrons-right shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -4536,17 +4653,22 @@ exports[`Calendar > renders with size xl correctly 1`] = `
   <div data-slot="header" class="flex items-center justify-between"><button type="button" aria-label="Previous year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-base gap-2 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-2"><span class="iconify i-lucide:chevrons-left shrink-0 size-6" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button><button type="button" aria-label="Previous month" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-base gap-2 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-2"><span class="iconify i-lucide:chevron-left shrink-0 size-6" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
     <div data-slot="heading" class="flex-1 min-w-0 text-center"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-base gap-2 w-full justify-center text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent">
         <!--v-if--><span data-slot="label" class="truncate">January 2025</span>
         <!--v-if-->
+        <!--v-if-->
       </button></div><button type="button" aria-label="Next month" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-base gap-2 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-2"><span class="iconify i-lucide:chevron-right shrink-0 size-6" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button><button type="button" aria-label="Next year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-base gap-2 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-2"><span class="iconify i-lucide:chevrons-right shrink-0 size-6" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -4723,17 +4845,22 @@ exports[`Calendar > renders with size xs correctly 1`] = `
   <div data-slot="header" class="flex items-center justify-between"><button type="button" aria-label="Previous year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1"><span class="iconify i-lucide:chevrons-left shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button><button type="button" aria-label="Previous month" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1"><span class="iconify i-lucide:chevron-left shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
     <div data-slot="heading" class="flex-1 min-w-0 text-center"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2 py-1 text-xs gap-1 w-full justify-center text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent">
         <!--v-if--><span data-slot="label" class="truncate">January 2025</span>
         <!--v-if-->
+        <!--v-if-->
       </button></div><button type="button" aria-label="Next month" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1"><span class="iconify i-lucide:chevron-right shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button><button type="button" aria-label="Next year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1"><span class="iconify i-lucide:chevrons-right shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -4911,11 +5038,14 @@ exports[`Calendar > renders with type month and isMonthDisabled correctly 1`] = 
     <!--v-if--><button type="button" aria-label="Previous year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button>
     <div id="reka-month-picker-heading-v-0-0-0" role="heading" aria-level="2" data-slot="heading" class="flex-1 min-w-0 text-center"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent">
         <!--v-if--><span data-slot="label" class="truncate">2025</span>
         <!--v-if-->
+        <!--v-if-->
       </button></div><button type="button" aria-label="Next year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -4985,11 +5115,14 @@ exports[`Calendar > renders with type month and isMonthUnavailable correctly 1`]
     <!--v-if--><button type="button" aria-label="Previous year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button>
     <div id="reka-month-picker-heading-v-0-0-0" role="heading" aria-level="2" data-slot="heading" class="flex-1 min-w-0 text-center"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent">
         <!--v-if--><span data-slot="label" class="truncate">2025</span>
         <!--v-if-->
+        <!--v-if-->
       </button></div><button type="button" aria-label="Next year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -5059,11 +5192,14 @@ exports[`Calendar > renders with type month and modelValue correctly 1`] = `
     <!--v-if--><button type="button" aria-label="Previous year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button>
     <div id="reka-month-picker-heading-v-0-0-0" role="heading" aria-level="2" data-slot="heading" class="flex-1 min-w-0 text-center"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent">
         <!--v-if--><span data-slot="label" class="truncate">2025</span>
         <!--v-if-->
+        <!--v-if-->
       </button></div><button type="button" aria-label="Next year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -5136,11 +5272,14 @@ exports[`Calendar > renders with type month and range correctly 1`] = `
     <!--v-if--><button type="button" aria-label="Previous year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button>
     <div id="reka-month-range-picker-heading-v-0-0-0" role="heading" aria-level="2" data-slot="heading" class="flex-1 min-w-0 text-center"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent">
         <!--v-if--><span data-slot="label" class="truncate">2025</span>
         <!--v-if-->
+        <!--v-if-->
       </button></div><button type="button" aria-label="Next year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -5207,11 +5346,14 @@ exports[`Calendar > renders with type month correctly 1`] = `
     <!--v-if--><button type="button" aria-label="Previous year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button>
     <div id="reka-month-picker-heading-v-0-0-0" role="heading" aria-level="2" data-slot="heading" class="flex-1 min-w-0 text-center"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent">
         <!--v-if--><span data-slot="label" class="truncate">2025</span>
         <!--v-if-->
+        <!--v-if-->
       </button></div><button type="button" aria-label="Next year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -5281,8 +5423,10 @@ exports[`Calendar > renders with type year and isYearDisabled correctly 1`] = `
     <!--v-if--><button type="button" aria-label="Previous year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button>
     <div id="reka-year-picker-heading-v-0-0-0" role="heading" aria-level="2" data-slot="heading" class="flex-1 min-w-0 text-center"><span data-slot="headingLabel" class="font-medium block truncate p-1.5 text-sm">2020 - 2031</span></div><button type="button" aria-label="Next year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -5352,8 +5496,10 @@ exports[`Calendar > renders with type year and isYearUnavailable correctly 1`] =
     <!--v-if--><button type="button" aria-label="Previous year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button>
     <div id="reka-year-picker-heading-v-0-0-0" role="heading" aria-level="2" data-slot="heading" class="flex-1 min-w-0 text-center"><span data-slot="headingLabel" class="font-medium block truncate p-1.5 text-sm">2020 - 2031</span></div><button type="button" aria-label="Next year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -5423,8 +5569,10 @@ exports[`Calendar > renders with type year and modelValue correctly 1`] = `
     <!--v-if--><button type="button" aria-label="Previous year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button>
     <div id="reka-year-picker-heading-v-0-0-0" role="heading" aria-level="2" data-slot="heading" class="flex-1 min-w-0 text-center"><span data-slot="headingLabel" class="font-medium block truncate p-1.5 text-sm">2020 - 2031</span></div><button type="button" aria-label="Next year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -5497,8 +5645,10 @@ exports[`Calendar > renders with type year and range correctly 1`] = `
     <!--v-if--><button type="button" aria-label="Previous year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button>
     <div id="reka-year-range-picker-heading-v-0-0-0" role="heading" aria-level="2" data-slot="heading" class="flex-1 min-w-0 text-center"><span data-slot="headingLabel" class="font-medium block truncate p-1.5 text-sm">2020 - 2031</span></div><button type="button" aria-label="Next year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -5565,8 +5715,10 @@ exports[`Calendar > renders with type year correctly 1`] = `
     <!--v-if--><button type="button" aria-label="Previous year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button>
     <div id="reka-year-picker-heading-v-0-0-0" role="heading" aria-level="2" data-slot="heading" class="flex-1 min-w-0 text-center"><span data-slot="headingLabel" class="font-medium block truncate p-1.5 text-sm">2020 - 2031</span></div><button type="button" aria-label="Next year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -5635,17 +5787,22 @@ exports[`Calendar > renders with ui correctly 1`] = `
   <div data-slot="header" class="flex items-center justify-between gap-4"><button type="button" aria-label="Previous year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevrons-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button><button type="button" aria-label="Previous month" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
     <div data-slot="heading" class="flex-1 min-w-0 text-center"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent">
         <!--v-if--><span data-slot="label" class="truncate">January 2025</span>
         <!--v-if-->
+        <!--v-if-->
       </button></div><button type="button" aria-label="Next month" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button><button type="button" aria-label="Next year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevrons-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -5822,17 +5979,22 @@ exports[`Calendar > renders with variant outline correctly 1`] = `
   <div data-slot="header" class="flex items-center justify-between"><button type="button" aria-label="Previous year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevrons-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button><button type="button" aria-label="Previous month" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
     <div data-slot="heading" class="flex-1 min-w-0 text-center"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent">
         <!--v-if--><span data-slot="label" class="truncate">January 2025</span>
         <!--v-if-->
+        <!--v-if-->
       </button></div><button type="button" aria-label="Next month" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button><button type="button" aria-label="Next year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevrons-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -6009,17 +6171,22 @@ exports[`Calendar > renders with variant soft correctly 1`] = `
   <div data-slot="header" class="flex items-center justify-between"><button type="button" aria-label="Previous year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevrons-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button><button type="button" aria-label="Previous month" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
     <div data-slot="heading" class="flex-1 min-w-0 text-center"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent">
         <!--v-if--><span data-slot="label" class="truncate">January 2025</span>
         <!--v-if-->
+        <!--v-if-->
       </button></div><button type="button" aria-label="Next month" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button><button type="button" aria-label="Next year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevrons-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -6196,17 +6363,22 @@ exports[`Calendar > renders with variant solid correctly 1`] = `
   <div data-slot="header" class="flex items-center justify-between"><button type="button" aria-label="Previous year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevrons-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button><button type="button" aria-label="Previous month" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
     <div data-slot="heading" class="flex-1 min-w-0 text-center"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent">
         <!--v-if--><span data-slot="label" class="truncate">January 2025</span>
         <!--v-if-->
+        <!--v-if-->
       </button></div><button type="button" aria-label="Next month" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button><button type="button" aria-label="Next year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevrons-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -6383,17 +6555,22 @@ exports[`Calendar > renders with variant subtle correctly 1`] = `
   <div data-slot="header" class="flex items-center justify-between"><button type="button" aria-label="Previous year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevrons-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button><button type="button" aria-label="Previous month" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
     <div data-slot="heading" class="flex-1 min-w-0 text-center"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent">
         <!--v-if--><span data-slot="label" class="truncate">January 2025</span>
         <!--v-if-->
+        <!--v-if-->
       </button></div><button type="button" aria-label="Next month" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button><button type="button" aria-label="Next year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevrons-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -6570,17 +6747,22 @@ exports[`Calendar > renders with viewControl correctly 1`] = `
   <div data-slot="header" class="flex items-center justify-between"><button type="button" aria-label="Previous year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevrons-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button><button type="button" aria-label="Previous month" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
     <div data-slot="heading" class="flex-1 min-w-0 text-center"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center text-primary bg-primary/10 hover:bg-primary/15 active:bg-primary/15 outline-primary/25 focus-visible:outline-3 disabled:bg-primary/10 aria-disabled:bg-primary/10">
         <!--v-if--><span data-slot="label" class="truncate">January 2025</span>
         <!--v-if-->
+        <!--v-if-->
       </button></div><button type="button" aria-label="Next month" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button><button type="button" aria-label="Next year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevrons-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -6757,17 +6939,22 @@ exports[`Calendar > renders with week-day slot correctly 1`] = `
   <div data-slot="header" class="flex items-center justify-between"><button type="button" aria-label="Previous year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevrons-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button><button type="button" aria-label="Previous month" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
     <div data-slot="heading" class="flex-1 min-w-0 text-center"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent">
         <!--v-if--><span data-slot="label" class="truncate">January 2025</span>
         <!--v-if-->
+        <!--v-if-->
       </button></div><button type="button" aria-label="Next month" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button><button type="button" aria-label="Next year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevrons-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -6944,17 +7131,22 @@ exports[`Calendar > renders with weekNumbers correctly 1`] = `
   <div data-slot="header" class="flex items-center justify-between"><button type="button" aria-label="Previous year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevrons-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button><button type="button" aria-label="Previous month" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
     <div data-slot="heading" class="flex-1 min-w-0 text-center"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent">
         <!--v-if--><span data-slot="label" class="truncate">January 2025</span>
         <!--v-if-->
+        <!--v-if-->
       </button></div><button type="button" aria-label="Next month" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button><button type="button" aria-label="Next year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevrons-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -7131,17 +7323,22 @@ exports[`Calendar > renders with weekStartsOn correctly 1`] = `
   <div data-slot="header" class="flex items-center justify-between"><button type="button" aria-label="Previous year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevrons-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button><button type="button" aria-label="Previous month" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
     <div data-slot="heading" class="flex-1 min-w-0 text-center"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent">
         <!--v-if--><span data-slot="label" class="truncate">January 2025</span>
         <!--v-if-->
+        <!--v-if-->
       </button></div><button type="button" aria-label="Next month" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button><button type="button" aria-label="Next year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevrons-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -7318,17 +7515,22 @@ exports[`Calendar > renders with weekdayFormat correctly 1`] = `
   <div data-slot="header" class="flex items-center justify-between"><button type="button" aria-label="Previous year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevrons-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button><button type="button" aria-label="Previous month" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
     <div data-slot="heading" class="flex-1 min-w-0 text-center"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent">
         <!--v-if--><span data-slot="label" class="truncate">January 2025</span>
         <!--v-if-->
+        <!--v-if-->
       </button></div><button type="button" aria-label="Next month" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button><button type="button" aria-label="Next year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevrons-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -7506,8 +7708,10 @@ exports[`Calendar > renders with year-cell slot correctly 1`] = `
     <!--v-if--><button type="button" aria-label="Previous year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button>
     <div id="reka-year-picker-heading-v-0-0-0" role="heading" aria-level="2" data-slot="heading" class="flex-1 min-w-0 text-center"><span data-slot="headingLabel" class="font-medium block truncate p-1.5 text-sm">2020 - 2031</span></div><button type="button" aria-label="Next year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -7576,17 +7780,22 @@ exports[`Calendar > renders without fixedWeeks correctly 1`] = `
   <div data-slot="header" class="flex items-center justify-between"><button type="button" aria-label="Previous year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevrons-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button><button type="button" aria-label="Previous month" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
     <div data-slot="heading" class="flex-1 min-w-0 text-center"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent">
         <!--v-if--><span data-slot="label" class="truncate">January 2025</span>
         <!--v-if-->
+        <!--v-if-->
       </button></div><button type="button" aria-label="Next month" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button><button type="button" aria-label="Next year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevrons-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -7739,13 +7948,16 @@ exports[`Calendar > renders without monthControls correctly 1`] = `
   <div data-slot="header" class="flex items-center justify-between"><button type="button" aria-label="Previous year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevrons-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button>
     <!--v-if-->
     <div data-slot="heading" class="flex-1 min-w-0 text-center"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent">
         <!--v-if--><span data-slot="label" class="truncate">January 2025</span>
         <!--v-if-->
+        <!--v-if-->
       </button></div>
     <!--v-if--><button type="button" aria-label="Next year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevrons-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -7922,14 +8134,18 @@ exports[`Calendar > renders without viewControl correctly 1`] = `
   <div data-slot="header" class="flex items-center justify-between"><button type="button" aria-label="Previous year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevrons-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button><button type="button" aria-label="Previous month" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
     <div data-slot="heading" class="flex-1 min-w-0 text-center"><span data-slot="headingLabel" class="font-medium block truncate p-1.5 text-sm">January 2025</span></div><button type="button" aria-label="Next month" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button><button type="button" aria-label="Next year" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevrons-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -8107,11 +8323,14 @@ exports[`Calendar > renders without yearControls correctly 1`] = `
     <!--v-if--><button type="button" aria-label="Previous month" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
+      <!--v-if-->
     </button>
     <div data-slot="heading" class="flex-1 min-w-0 text-center"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent">
         <!--v-if--><span data-slot="label" class="truncate">January 2025</span>
         <!--v-if-->
+        <!--v-if-->
       </button></div><button type="button" aria-label="Next month" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5"><span class="iconify i-lucide:chevron-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </button>
