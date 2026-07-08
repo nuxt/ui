@@ -26,6 +26,7 @@ function onClick() {
   <Matrix v-slot="props" :attrs="attrs">
     <UButton label="Button" v-bind="props" />
     <UButton label="Link" to="/" v-bind="props" />
+    <UButton label="Link with external icon" external-icon target="_blank" to="https://nuxt.com" v-bind="props" />
     <UButton label="Disabled" disabled v-bind="props" />
     <UButton label="Disabled link" to="#" disabled v-bind="props" />
     <UButton label="Loading" loading v-bind="props" />

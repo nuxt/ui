@@ -16,7 +16,13 @@ exports[`Carousel > renders with arrows correctly 1`] = `
     <div data-slot="arrows" class=""><button type="button" disabled="" data-slot="prev" aria-label="Prev" class="font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 ring ring-inset ring-accented text-default bg-default hover:bg-elevated active:bg-elevated disabled:bg-default aria-disabled:bg-default outline-inverted/25 focus-visible:outline-3 focus-visible:ring-inverted p-1.5 absolute rounded-full start-4 sm:-start-12 top-1/2 -translate-y-1/2"><span class="iconify i-lucide:arrow-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
         <!--v-if-->
         <!--v-if-->
+<<<<<<< HEAD
       </button><button type="button" disabled="" data-slot="next" aria-label="Next" class="font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 ring ring-inset ring-accented text-default bg-default hover:bg-elevated active:bg-elevated disabled:bg-default aria-disabled:bg-default outline-inverted/25 focus-visible:outline-3 focus-visible:ring-inverted p-1.5 absolute rounded-full end-4 sm:-end-12 top-1/2 -translate-y-1/2"><span class="iconify i-lucide:arrow-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+=======
+        <!--v-if-->
+      </button><button type="button" disabled="" aria-label="Next" data-slot="base" class="font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 ring ring-inset ring-accented text-default bg-default hover:bg-elevated active:bg-elevated disabled:bg-default aria-disabled:bg-default outline-inverted/25 focus-visible:outline-3 focus-visible:ring-inverted p-1.5 absolute rounded-full end-4 sm:-end-12 top-1/2 -translate-y-1/2"><span class="iconify i-lucide:arrow-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+>>>>>>> 9ec21fed (feat(Button): add externalIcon prop)
+        <!--v-if-->
         <!--v-if-->
         <!--v-if-->
       </button></div>
@@ -108,7 +114,13 @@ exports[`Carousel > renders with next correctly 1`] = `
     <div data-slot="arrows" class=""><button type="button" disabled="" data-slot="prev" aria-label="Prev" class="font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 ring ring-inset ring-accented text-default bg-default hover:bg-elevated active:bg-elevated disabled:bg-default aria-disabled:bg-default outline-inverted/25 focus-visible:outline-3 focus-visible:ring-inverted p-1.5 absolute rounded-full start-4 sm:-start-12 top-1/2 -translate-y-1/2"><span class="iconify i-lucide:arrow-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
         <!--v-if-->
         <!--v-if-->
+<<<<<<< HEAD
       </button><button type="button" disabled="" data-slot="next" aria-label="Next" class="font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 ring ring-inset ring-primary/50 text-primary hover:bg-primary/10 active:bg-primary/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary p-1.5 absolute rounded-full end-4 sm:-end-12 top-1/2 -translate-y-1/2"><span class="iconify i-lucide:arrow-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+=======
+        <!--v-if-->
+      </button><button type="button" disabled="" aria-label="Next" data-slot="base" class="font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 ring ring-inset ring-primary/50 text-primary hover:bg-primary/10 active:bg-primary/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary p-1.5 absolute rounded-full end-4 sm:-end-12 top-1/2 -translate-y-1/2"><span class="iconify i-lucide:arrow-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+>>>>>>> 9ec21fed (feat(Button): add externalIcon prop)
+        <!--v-if-->
         <!--v-if-->
         <!--v-if-->
       </button></div>
@@ -133,7 +145,13 @@ exports[`Carousel > renders with nextIcon correctly 1`] = `
     <div data-slot="arrows" class=""><button type="button" disabled="" data-slot="prev" aria-label="Prev" class="font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 ring ring-inset ring-accented text-default bg-default hover:bg-elevated active:bg-elevated disabled:bg-default aria-disabled:bg-default outline-inverted/25 focus-visible:outline-3 focus-visible:ring-inverted p-1.5 absolute rounded-full start-4 sm:-start-12 top-1/2 -translate-y-1/2"><span class="iconify i-lucide:arrow-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
         <!--v-if-->
         <!--v-if-->
+<<<<<<< HEAD
       </button><button type="button" disabled="" data-slot="next" aria-label="Next" class="font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 ring ring-inset ring-accented text-default bg-default hover:bg-elevated active:bg-elevated disabled:bg-default aria-disabled:bg-default outline-inverted/25 focus-visible:outline-3 focus-visible:ring-inverted p-1.5 absolute rounded-full end-4 sm:-end-12 top-1/2 -translate-y-1/2"><span class="iconify i-lucide:arrow-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+=======
+        <!--v-if-->
+      </button><button type="button" disabled="" aria-label="Next" data-slot="base" class="font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 ring ring-inset ring-accented text-default bg-default hover:bg-elevated active:bg-elevated disabled:bg-default aria-disabled:bg-default outline-inverted/25 focus-visible:outline-3 focus-visible:ring-inverted p-1.5 absolute rounded-full end-4 sm:-end-12 top-1/2 -translate-y-1/2"><span class="iconify i-lucide:arrow-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+>>>>>>> 9ec21fed (feat(Button): add externalIcon prop)
+        <!--v-if-->
         <!--v-if-->
         <!--v-if-->
       </button></div>
@@ -174,7 +192,13 @@ exports[`Carousel > renders with prev correctly 1`] = `
     <div data-slot="arrows" class=""><button type="button" disabled="" data-slot="prev" aria-label="Prev" class="font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 ring ring-inset ring-primary/50 text-primary hover:bg-primary/10 active:bg-primary/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary p-1.5 absolute rounded-full start-4 sm:-start-12 top-1/2 -translate-y-1/2"><span class="iconify i-lucide:arrow-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
         <!--v-if-->
         <!--v-if-->
+<<<<<<< HEAD
       </button><button type="button" disabled="" data-slot="next" aria-label="Next" class="font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 ring ring-inset ring-accented text-default bg-default hover:bg-elevated active:bg-elevated disabled:bg-default aria-disabled:bg-default outline-inverted/25 focus-visible:outline-3 focus-visible:ring-inverted p-1.5 absolute rounded-full end-4 sm:-end-12 top-1/2 -translate-y-1/2"><span class="iconify i-lucide:arrow-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+=======
+        <!--v-if-->
+      </button><button type="button" disabled="" aria-label="Next" data-slot="base" class="font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 ring ring-inset ring-accented text-default bg-default hover:bg-elevated active:bg-elevated disabled:bg-default aria-disabled:bg-default outline-inverted/25 focus-visible:outline-3 focus-visible:ring-inverted p-1.5 absolute rounded-full end-4 sm:-end-12 top-1/2 -translate-y-1/2"><span class="iconify i-lucide:arrow-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+>>>>>>> 9ec21fed (feat(Button): add externalIcon prop)
+        <!--v-if-->
         <!--v-if-->
         <!--v-if-->
       </button></div>
@@ -199,7 +223,13 @@ exports[`Carousel > renders with prevIcon correctly 1`] = `
     <div data-slot="arrows" class=""><button type="button" disabled="" data-slot="prev" aria-label="Prev" class="font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 ring ring-inset ring-accented text-default bg-default hover:bg-elevated active:bg-elevated disabled:bg-default aria-disabled:bg-default outline-inverted/25 focus-visible:outline-3 focus-visible:ring-inverted p-1.5 absolute rounded-full start-4 sm:-start-12 top-1/2 -translate-y-1/2"><span class="iconify i-lucide:arrow-left shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
         <!--v-if-->
         <!--v-if-->
+<<<<<<< HEAD
       </button><button type="button" disabled="" data-slot="next" aria-label="Next" class="font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 ring ring-inset ring-accented text-default bg-default hover:bg-elevated active:bg-elevated disabled:bg-default aria-disabled:bg-default outline-inverted/25 focus-visible:outline-3 focus-visible:ring-inverted p-1.5 absolute rounded-full end-4 sm:-end-12 top-1/2 -translate-y-1/2"><span class="iconify i-lucide:arrow-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+=======
+        <!--v-if-->
+      </button><button type="button" disabled="" aria-label="Next" data-slot="base" class="font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 ring ring-inset ring-accented text-default bg-default hover:bg-elevated active:bg-elevated disabled:bg-default aria-disabled:bg-default outline-inverted/25 focus-visible:outline-3 focus-visible:ring-inverted p-1.5 absolute rounded-full end-4 sm:-end-12 top-1/2 -translate-y-1/2"><span class="iconify i-lucide:arrow-right shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+>>>>>>> 9ec21fed (feat(Button): add externalIcon prop)
+        <!--v-if-->
         <!--v-if-->
         <!--v-if-->
       </button></div>
