@@ -21,9 +21,9 @@ export interface ButtonProps extends UseComponentIconsProps, Omit<LinkProps, 'ra
   variant?: Button['variants']['variant']
   activeVariant?: Button['variants']['variant']
   /**
-   * The icon displayed when the item is an external link.
-   * Set to `false` to hide the external icon.
-   * @defaultValue appConfig.ui.icons.external
+   * The icon displayed when the button is an external link.
+   * Set to `true` to show the external icon.
+   * @defaultValue false
    * @IconifyIcon
    */
   externalIcon?: boolean | IconProps['name']
@@ -66,7 +66,9 @@ import UAvatar from './Avatar.vue'
 import ULink from './Link.vue'
 import ULinkBase from './LinkBase.vue'
 
-const _props = defineProps<ButtonProps>()
+const _props = withDefaults(defineProps<ButtonProps>(), {
+  externalIcon: false
+})
 const slots = defineSlots<ButtonSlots>()
 
 const props = useComponentProps('button', _props)

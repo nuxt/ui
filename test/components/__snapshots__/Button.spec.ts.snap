@@ -107,6 +107,7 @@ exports[`Button > renders with default slot correctly 1`] = `
 "<button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
   <!--v-if-->Default slot
   <!--v-if-->
+  <!--v-if-->
 </button>"
 `;
 
@@ -129,7 +130,7 @@ exports[`Button > renders with disabled correctly 1`] = `
 exports[`Button > renders with externalIcon correctly 1`] = `
 "<a href="https://nuxt.com" rel="noopener noreferrer" target="_blank" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
   <!--v-if--><span data-slot="label" class="truncate">Button</span>
-  <div data-slot="externalIconContainer" class="h-full -ms-1"><span class="iconify i-lucide:arrow-up-right inline-block align-top size-3" aria-hidden="true" data-slot="externalIcon"></span></div>
+  <!--v-if-->
   <!--v-if-->
 </a>"
 `;
