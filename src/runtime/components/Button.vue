@@ -151,14 +151,15 @@ const ui = computed(() => tv({
         <UAvatar v-else-if="!!props.avatar" :size="((props.ui?.leadingAvatarSize || ui.leadingAvatarSize()) as AvatarProps['size'])" v-bind="props.avatar" data-slot="leadingAvatar" :class="ui.leadingAvatar({ class: props.ui?.leadingAvatar, active })" />
       </slot>
 
-      <slot :ui="ui" class="truncate">
+      <slot :ui="ui">
         <span v-if="props.label !== undefined && props.label !== null" data-slot="label" :class="ui.label({ class: props.ui?.label, active })">
           {{ props.label }}
         </span>
-        <div v-if="props.target === '_blank' && props.externalIcon !== false" data-slot="externalIconContainer" :class="ui.externalIconContainer({ class: [props.ui?.externalIconContainer], active })">
-          <UIcon :name="typeof props.externalIcon === 'string' ? props.externalIcon : appConfig.ui.icons.external" data-slot="externalIcon" :class="ui.externalIcon({ class: [props.ui?.externalIcon], active })" />
-        </div>
       </slot>
+
+      <div v-if="props.target === '_blank' && props.externalIcon !== false" data-slot="externalIconContainer" :class="ui.externalIconContainer({ class: [props.ui?.externalIconContainer], active })">
+        <UIcon :name="typeof props.externalIcon === 'string' ? props.externalIcon : appConfig.ui.icons.external" data-slot="externalIcon" :class="ui.externalIcon({ class: [props.ui?.externalIcon], active })" />
+      </div>
 
       <slot name="trailing" :ui="ui">
         <UIcon v-if="isTrailing && trailingIconName" :name="trailingIconName" data-slot="trailingIcon" :class="ui.trailingIcon({ class: props.ui?.trailingIcon, active })" />
