@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { isReasoningUIPart, isTextUIPart, isToolUIPart, getToolName } from 'ai'
+import { isReasoningUIPart, isTextUIPart, isToolUIPart, getToolName, lastAssistantMessageIsCompleteWithApprovalResponses } from 'ai'
 import { useChat } from '@ai-sdk/vue'
-import { isPartStreaming, isToolStreaming } from '@nuxt/ui/utils/ai'
+import { isPartStreaming, isToolStreaming, isToolApprovalPending } from '@nuxt/ui/utils/ai'
 import { Comark } from '@comark/vue'
 import highlight from '@comark/vue/plugins/highlight'
 
@@ -9,7 +9,8 @@ const toast = useToast()
 
 const input = ref('')
 
-const { messages, status, error, sendMessage, regenerate, stop } = useChat({
+const { messages, status, error, sendMessage, regenerate, stop, addToolApprovalResponse } = useChat({
+  sendAutomaticallyWhen: lastAssistantMessageIsCompleteWithApprovalResponses,
   onError(error) {
     let message = error.message
     try {
@@ -40,6 +41,13 @@ function clearMessages() {
     stop()
   }
   messages.value = []
+}
+
+function getEmailToolText(state: string): string {
+  if (isToolApprovalPending({ state })) return 'Send this email?'
+  if (state === 'output-available') return 'Email sent'
+  if (state === 'output-denied') return 'Email cancelled'
+  return 'Preparing email'
 }
 
 function getDomain(url: string): string {
@@ -159,6 +167,22 @@ function generateMessages() {
                 <span class="text-xs text-dimmed ms-auto shrink-0">{{ getDomain(source.url) }}</span>
               </a>
             </div>
+          </UChatTool>
+
+          <UChatTool
+            v-else-if="isToolUIPart(part) && getToolName(part) === 'send_email'"
+            :text="getEmailToolText(part.state)"
+            :suffix="(part.input as { to?: string })?.to"
+            icon="i-lucide-mail"
+            chevron="leading"
+            variant="card"
+            :streaming="isToolStreaming(part)"
+            :actions="part.state === 'approval-requested' ? [
+              { label: 'Approve', color: 'neutral', onClick: () => addToolApprovalResponse({ id: part.approval!.id, approved: true }) },
+              { label: 'Deny', color: 'neutral', variant: 'soft', onClick: () => addToolApprovalResponse({ id: part.approval!.id, approved: false }) }
+            ] : undefined"
+          >
+            <pre class="text-xs whitespace-pre-wrap">{{ JSON.stringify(part.input, null, 2) }}</pre>
           </UChatTool>
         </template>
       </template>

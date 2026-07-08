@@ -72,7 +72,7 @@ props:
 ::
 
 ::tip
-Use the `isToolStreaming` utility from `@nuxt/ui/utils/ai` to determine if a tool part is still running.
+Use the `isToolStreaming` utility from `@nuxt/ui/utils/ai` to determine if a tool part is still running. It returns `false` when the tool is waiting for a user approval.
 ::
 
 ### Shimmer
@@ -246,10 +246,80 @@ slots:
 ---
 ::
 
+### Actions
+
+Use the `actions` prop to display a list of [Button](/docs/components/button) below the trigger, useful for tools that require a user confirmation before running.
+
+::component-code
+---
+prettier: true
+hide:
+  - class
+ignore:
+  - text
+  - icon
+  - variant
+  - actions
+props:
+  actions:
+    - label: 'Approve'
+    - label: 'Deny'
+      color: neutral
+      variant: soft
+  text: 'Run terminal command'
+  variant: card
+  icon: i-lucide-terminal
+  class: 'w-60'
+slots:
+  default: |
+
+    $ pnpm run lint
+---
+::
+
 ## Examples
 
 ::tip{to="/docs/components/chat"}
 Check the **Chat** overview page for installation instructions, server setup and usage examples.
+::
+
+### With approval flow
+
+Use the `actions` prop to build a tool approval flow with the [AI SDK](https://ai-sdk.dev/docs/agents/tool-approvals). When a tool part is in the `approval-requested` state, display the approve and deny actions and respond with `addToolApprovalResponse`.
+
+::component-example
+---
+collapse: true
+prettier: true
+name: 'chat-tool-approval-example'
+---
+::
+
+::tip
+Use the `isToolApprovalPending` utility from `@nuxt/ui/utils/ai` to detect a pending approval, `isToolStreaming` returns `false` in this state.
+
+```vue
+<script setup lang="ts">
+import { useChat } from '@ai-sdk/vue'
+import { lastAssistantMessageIsCompleteWithApprovalResponses } from 'ai'
+
+const { messages, addToolApprovalResponse } = useChat({
+  sendAutomaticallyWhen: lastAssistantMessageIsCompleteWithApprovalResponses
+})
+</script>
+
+<template>
+  <UChatTool
+    v-if="isToolUIPart(part)"
+    :text="getToolName(part)"
+    :streaming="isToolStreaming(part)"
+    :actions="part.state === 'approval-requested' ? [
+      { label: 'Approve', onClick: () => addToolApprovalResponse({ id: part.approval.id, approved: true }) },
+      { label: 'Deny', color: 'neutral', variant: 'ghost', onClick: () => addToolApprovalResponse({ id: part.approval.id, approved: false }) }
+    ] : undefined"
+  />
+</template>
+```
 ::
 
 ## API
