@@ -38,7 +38,7 @@ interface Shortcut {
 const chainedShortcutRegex = /^[^-]+.*-.*[^-]+$/
 const combinedShortcutRegex = /^[^_]+.*_.*[^_]+$/
 // keyboard keys which can be combined with Shift modifier (in addition to alphabet keys)
-const shiftableKeys = ['arrowleft', 'arrowright', 'arrowup', 'arrowright', 'tab', 'escape', 'enter', 'backspace']
+const shiftableKeys = ['arrowleft', 'arrowright', 'arrowup', 'arrowdown', 'tab', 'escape', 'enter', 'backspace']
 
 // Simple key to code conversion for layout independence
 function convertKeyToCode(key: string): string {

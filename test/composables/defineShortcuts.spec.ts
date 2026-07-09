@@ -302,6 +302,22 @@ describe('defineShortcuts', () => {
       fireKeydown('Escape', { shiftKey: true })
       expect(handler).toHaveBeenCalledOnce()
     })
+
+    it('shift_arrowdown triggers with Shift+ArrowDown', async () => {
+      const handler = vi.fn()
+      await registerShortcuts({ shift_arrowdown: handler })
+
+      fireKeydown('ArrowDown', { shiftKey: true })
+      expect(handler).toHaveBeenCalledOnce()
+    })
+
+    it('arrowdown does NOT trigger with Shift+ArrowDown', async () => {
+      const handler = vi.fn()
+      await registerShortcuts({ arrowdown: handler })
+
+      fireKeydown('ArrowDown', { shiftKey: true })
+      expect(handler).not.toHaveBeenCalled()
+    })
   })
 
   describe('chained shortcuts', () => {
