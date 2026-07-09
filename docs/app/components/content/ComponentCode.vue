@@ -462,7 +462,7 @@ const { data: ast } = useAsyncData(codeKey, async () => {
         <component :is="component" v-bind="{ ...componentProps, ...componentEvents }">
           <template v-for="slot in Object.keys(slots || {})" :key="slot" #[slot]>
             <slot :name="slot" mdc-unwrap="p">
-              {{ slots?.[slot] }}
+              {{ typeof slots?.[slot] === 'string' ? slots[slot].trim() : slots?.[slot] }}
             </slot>
           </template>
         </component>
