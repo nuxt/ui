@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, afterEach } from 'vitest'
 import { ref, nextTick } from 'vue'
 import { useResizable } from '../../src/runtime/composables/useResizable'
 
@@ -23,6 +23,17 @@ function mockEl(width = 100, parentWidth = 200): HTMLElement {
 }
 
 describe('useResizable', () => {
+  afterEach(() => {
+    // The corrupted-storage tests write real localStorage/cookies; keep them out of other suites.
+    localStorage.clear()
+    for (const cookie of document.cookie.split(';')) {
+      const name = cookie.split('=')[0]!.trim()
+      if (name) {
+        document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/`
+      }
+    }
+  })
+
   describe('defaults', () => {
     it('exposes sensible defaults', () => {
       const r = useResizable('def', { persistent: false })

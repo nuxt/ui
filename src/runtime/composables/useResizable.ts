@@ -127,7 +127,7 @@ export function useResizable(key: string, options: Ref<UseResizableProps> | UseR
   }
 
   const isCollapsed = computed({
-    get: () => storageData.value?.collapsed ?? false,
+    get: () => storageData.value?.collapsed ?? defaultStorageValue.collapsed,
     set: (value: boolean) => {
       if (!opts.value.collapsible) {
         return
