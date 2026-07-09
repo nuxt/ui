@@ -70,7 +70,7 @@ const settingGroups = [
             fullscreen ? 'rounded-none' : 'ring ring-default mt-4 rounded-lg'
           ]"
         >
-          <ThemeStudioBento v-if="view === 'grid'" />
+          <Playground v-if="view === 'grid'" class="py-4" />
           <ThemeStudioViewDashboard v-else-if="view === 'dashboard'" />
           <ThemeStudioViewChat v-else-if="view === 'chat'" />
           <ThemeStudioViewSaas v-else-if="view === 'saas'" />
