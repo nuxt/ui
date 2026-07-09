@@ -124,17 +124,7 @@ const studioMenuLinks = [{
         />
       </UTooltip>
 
-      <UTooltip text="Theme Studio">
-        <UButton
-          icon="i-lucide-swatch-book"
-          color="neutral"
-          active-color="primary"
-          :active="route.path === '/theme'"
-          variant="ghost"
-          to="/theme"
-          aria-label="Open Theme Studio"
-        />
-      </UTooltip>
+      <ThemeStudioPicker />
 
       <UTooltip text="Open on GitHub" class="hidden lg:flex">
         <UButton
