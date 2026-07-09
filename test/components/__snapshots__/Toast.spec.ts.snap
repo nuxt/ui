@@ -25,7 +25,6 @@ exports[`Toast > renders with actions correctly 1`] = `
           <!--v-if-->
           <!--v-if-->
           <!--v-if-->
-          <!--v-if-->
         </button>
       </div>
       <div data-orientation="horizontal" data-slot="progress" class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
@@ -61,7 +60,6 @@ exports[`Toast > renders with as correctly 1`] = `
       </div>
       <div data-slot="actions" class="flex gap-1.5 shrink-0 items-center">
         <!--v-if--><button type="button" data-slot="close" data-reka-toast-announce-exclude="" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted outline-inverted/25 focus-visible:outline-3 p-0"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
-          <!--v-if-->
           <!--v-if-->
           <!--v-if-->
           <!--v-if-->
@@ -102,7 +100,6 @@ exports[`Toast > renders with avatar correctly 1`] = `
           <!--v-if-->
           <!--v-if-->
           <!--v-if-->
-          <!--v-if-->
         </button>
       </div>
       <div data-orientation="horizontal" data-slot="progress" class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
@@ -138,7 +135,6 @@ exports[`Toast > renders with class correctly 1`] = `
       </div>
       <div data-slot="actions" class="flex gap-1.5 shrink-0 items-center">
         <!--v-if--><button type="button" data-slot="close" data-reka-toast-announce-exclude="" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted outline-inverted/25 focus-visible:outline-3 p-0"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
-          <!--v-if-->
           <!--v-if-->
           <!--v-if-->
           <!--v-if-->
@@ -214,7 +210,6 @@ exports[`Toast > renders with closeIcon correctly 1`] = `
           <!--v-if-->
           <!--v-if-->
           <!--v-if-->
-          <!--v-if-->
         </button>
       </div>
       <div data-orientation="horizontal" data-slot="progress" class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
@@ -250,7 +245,6 @@ exports[`Toast > renders with color neutral correctly 1`] = `
       </div>
       <div data-slot="actions" class="flex gap-1.5 shrink-0 items-center">
         <!--v-if--><button type="button" data-slot="close" data-reka-toast-announce-exclude="" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted outline-inverted/25 focus-visible:outline-3 p-0"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
-          <!--v-if-->
           <!--v-if-->
           <!--v-if-->
           <!--v-if-->
@@ -292,7 +286,6 @@ exports[`Toast > renders with description correctly 1`] = `
           <!--v-if-->
           <!--v-if-->
           <!--v-if-->
-          <!--v-if-->
         </button>
       </div>
       <div data-orientation="horizontal" data-slot="progress" class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
@@ -328,7 +321,6 @@ exports[`Toast > renders with description slot correctly 1`] = `
       </div>
       <div data-slot="actions" class="flex gap-1.5 shrink-0 items-center">
         <!--v-if--><button type="button" data-slot="close" data-reka-toast-announce-exclude="" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted outline-inverted/25 focus-visible:outline-3 p-0"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
-          <!--v-if-->
           <!--v-if-->
           <!--v-if-->
           <!--v-if-->
@@ -369,7 +361,6 @@ exports[`Toast > renders with icon correctly 1`] = `
           <!--v-if-->
           <!--v-if-->
           <!--v-if-->
-          <!--v-if-->
         </button>
       </div>
       <div data-orientation="horizontal" data-slot="progress" class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
@@ -403,7 +394,6 @@ exports[`Toast > renders with leading slot correctly 1`] = `
       </div>
       <div data-slot="actions" class="flex gap-1.5 shrink-0 items-center">
         <!--v-if--><button type="button" data-slot="close" data-reka-toast-announce-exclude="" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted outline-inverted/25 focus-visible:outline-3 p-0"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
-          <!--v-if-->
           <!--v-if-->
           <!--v-if-->
           <!--v-if-->
@@ -442,16 +432,8 @@ exports[`Toast > renders with orientation horizontal correctly 1`] = `
       <div data-slot="actions" class="flex gap-1.5 shrink-0 items-center"><button type="button" data-slot="base" data-reka-toast-announce-exclude="" data-reka-toast-announce-alt="Action" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2 py-1 text-xs gap-1 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
           <!--v-if--><span data-slot="label" class="truncate">Action</span>
           <!--v-if-->
-<<<<<<< HEAD
-<<<<<<< HEAD
+          <!--v-if-->
         </button><button type="button" data-slot="close" data-reka-toast-announce-exclude="" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted outline-inverted/25 focus-visible:outline-3 p-0"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
-=======
-=======
->>>>>>> origin/feat/button-external-icon
-          <!--v-if-->
-        </button><button type="button" data-reka-toast-announce-exclude="" aria-label="Close" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted outline-inverted/25 focus-visible:outline-3 p-0"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
->>>>>>> 9ec21fed (feat(Button): add externalIcon prop)
-          <!--v-if-->
           <!--v-if-->
           <!--v-if-->
           <!--v-if-->
@@ -495,7 +477,6 @@ exports[`Toast > renders with orientation vertical correctly 1`] = `
           <!--v-if-->
           <!--v-if-->
           <!--v-if-->
-          <!--v-if-->
         </button>
       </div>
       <div data-orientation="horizontal" data-slot="progress" class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
@@ -531,7 +512,6 @@ exports[`Toast > renders with title correctly 1`] = `
       </div>
       <div data-slot="actions" class="flex gap-1.5 shrink-0 items-center">
         <!--v-if--><button type="button" data-slot="close" data-reka-toast-announce-exclude="" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted outline-inverted/25 focus-visible:outline-3 p-0"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
-          <!--v-if-->
           <!--v-if-->
           <!--v-if-->
           <!--v-if-->
@@ -573,7 +553,6 @@ exports[`Toast > renders with title slot correctly 1`] = `
           <!--v-if-->
           <!--v-if-->
           <!--v-if-->
-          <!--v-if-->
         </button>
       </div>
       <div data-orientation="horizontal" data-slot="progress" class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
@@ -612,7 +591,6 @@ exports[`Toast > renders with type correctly 1`] = `
           <!--v-if-->
           <!--v-if-->
           <!--v-if-->
-          <!--v-if-->
         </button>
       </div>
       <div data-orientation="horizontal" data-slot="progress" class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
@@ -648,7 +626,6 @@ exports[`Toast > renders with ui correctly 1`] = `
       </div>
       <div data-slot="actions" class="flex gap-1.5 shrink-0 items-center">
         <!--v-if--><button type="button" data-slot="close" data-reka-toast-announce-exclude="" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted outline-inverted/25 focus-visible:outline-3 p-0"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
-          <!--v-if-->
           <!--v-if-->
           <!--v-if-->
           <!--v-if-->

@@ -6,10 +6,8 @@ exports[`InputNumber > renders with .optional modifier correctly 1`] = `
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
-      <!--v-if-->
     </button></div>
   <div data-slot="decrement" class="absolute flex items-center inset-y-0 start-0 ps-1"><button type="button" data-slot="base" tabindex="-1" aria-label="Decrement" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-primary hover:text-primary/75 active:text-primary/75 disabled:text-primary aria-disabled:text-primary outline-primary/25 focus-visible:outline-3 p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="leadingIcon" class="shrink-0 size-5"></svg>
-      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
@@ -24,10 +22,8 @@ exports[`InputNumber > renders with ariaLabel correctly 1`] = `
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
-      <!--v-if-->
     </button></div>
   <div data-slot="decrement" class="absolute flex items-center inset-y-0 start-0 ps-1"><button type="button" data-slot="base" tabindex="-1" aria-label="Decrement" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-primary hover:text-primary/75 active:text-primary/75 disabled:text-primary aria-disabled:text-primary outline-primary/25 focus-visible:outline-3 p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="leadingIcon" class="shrink-0 size-5"></svg>
-      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
@@ -42,10 +38,8 @@ exports[`InputNumber > renders with as correctly 1`] = `
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
-      <!--v-if-->
     </button></div>
   <div data-slot="decrement" class="absolute flex items-center inset-y-0 start-0 ps-1"><button type="button" data-slot="base" tabindex="-1" aria-label="Decrement" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-primary hover:text-primary/75 active:text-primary/75 disabled:text-primary aria-disabled:text-primary outline-primary/25 focus-visible:outline-3 p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="leadingIcon" class="shrink-0 size-5"></svg>
-      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
@@ -60,10 +54,8 @@ exports[`InputNumber > renders with class correctly 1`] = `
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
-      <!--v-if-->
     </button></div>
   <div data-slot="decrement" class="absolute flex items-center inset-y-0 start-0 ps-1"><button type="button" data-slot="base" tabindex="-1" aria-label="Decrement" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-primary hover:text-primary/75 active:text-primary/75 disabled:text-primary aria-disabled:text-primary outline-primary/25 focus-visible:outline-3 p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="leadingIcon" class="shrink-0 size-5"></svg>
-      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
@@ -75,7 +67,6 @@ exports[`InputNumber > renders with class correctly 1`] = `
 exports[`InputNumber > renders with decrement slot correctly 1`] = `
 "<div data-slot="root" class="relative inline-flex items-center" role="group"><input role="spinbutton" type="text" tabindex="0" inputmode="decimal" autocomplete="off" autocorrect="off" spellcheck="false" aria-roledescription="Number field" data-slot="base" class="w-full rounded-md border-0 placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default ring ring-inset ring-accented text-center outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary ps-9 pe-9 md:text-sm" value="">
   <div data-slot="increment" class="absolute flex items-center inset-y-0 end-0 pe-1"><button type="button" data-slot="base" tabindex="-1" aria-label="Increment" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-primary hover:text-primary/75 active:text-primary/75 disabled:text-primary aria-disabled:text-primary outline-primary/25 focus-visible:outline-3 p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="leadingIcon" class="shrink-0 size-5"></svg>
-      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
@@ -91,10 +82,8 @@ exports[`InputNumber > renders with decrementIcon correctly 1`] = `
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
-      <!--v-if-->
     </button></div>
   <div data-slot="decrement" class="absolute flex items-center inset-y-0 start-0 ps-1"><button type="button" data-slot="base" tabindex="-1" aria-label="Decrement" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-primary hover:text-primary/75 active:text-primary/75 disabled:text-primary aria-disabled:text-primary outline-primary/25 focus-visible:outline-3 p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="leadingIcon" class="shrink-0 size-5"></svg>
-      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
@@ -109,10 +98,8 @@ exports[`InputNumber > renders with disabled correctly 1`] = `
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
-      <!--v-if-->
     </button></div>
   <div data-slot="decrement" class="absolute flex items-center inset-y-0 start-0 ps-1"><button type="button" disabled="" data-slot="base" tabindex="-1" aria-label="Decrement" data-disabled="" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-primary hover:text-primary/75 active:text-primary/75 disabled:text-primary aria-disabled:text-primary outline-primary/25 focus-visible:outline-3 p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="leadingIcon" class="shrink-0 size-5"></svg>
-      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
@@ -128,7 +115,6 @@ exports[`InputNumber > renders with increment slot correctly 1`] = `
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
-      <!--v-if-->
     </button></div>
   <!--v-if-->
 </div>"
@@ -140,10 +126,8 @@ exports[`InputNumber > renders with incrementIcon correctly 1`] = `
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
-      <!--v-if-->
     </button></div>
   <div data-slot="decrement" class="absolute flex items-center inset-y-0 start-0 ps-1"><button type="button" data-slot="base" tabindex="-1" aria-label="Decrement" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-primary hover:text-primary/75 active:text-primary/75 disabled:text-primary aria-disabled:text-primary outline-primary/25 focus-visible:outline-3 p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="leadingIcon" class="shrink-0 size-5"></svg>
-      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
@@ -158,10 +142,8 @@ exports[`InputNumber > renders with name correctly 1`] = `
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
-      <!--v-if-->
     </button></div>
   <div data-slot="decrement" class="absolute flex items-center inset-y-0 start-0 ps-1"><button type="button" data-slot="base" tabindex="-1" aria-label="Decrement" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-primary hover:text-primary/75 active:text-primary/75 disabled:text-primary aria-disabled:text-primary outline-primary/25 focus-visible:outline-3 p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="leadingIcon" class="shrink-0 size-5"></svg>
-      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
@@ -176,10 +158,8 @@ exports[`InputNumber > renders with neutral variant ghost correctly 1`] = `
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
-      <!--v-if-->
     </button></div>
   <div data-slot="decrement" class="absolute flex items-center inset-y-0 start-0 ps-1"><button type="button" data-slot="base" tabindex="-1" aria-label="Decrement" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted outline-inverted/25 focus-visible:outline-3 p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="leadingIcon" class="shrink-0 size-5"></svg>
-      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
@@ -194,10 +174,8 @@ exports[`InputNumber > renders with neutral variant ghost highlight correctly 1`
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
-      <!--v-if-->
     </button></div>
   <div data-slot="decrement" class="absolute flex items-center inset-y-0 start-0 ps-1"><button type="button" data-slot="base" tabindex="-1" aria-label="Decrement" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted outline-inverted/25 focus-visible:outline-3 p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="leadingIcon" class="shrink-0 size-5"></svg>
-      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
@@ -212,10 +190,8 @@ exports[`InputNumber > renders with neutral variant none correctly 1`] = `
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
-      <!--v-if-->
     </button></div>
   <div data-slot="decrement" class="absolute flex items-center inset-y-0 start-0 ps-1"><button type="button" data-slot="base" tabindex="-1" aria-label="Decrement" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted outline-inverted/25 focus-visible:outline-3 p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="leadingIcon" class="shrink-0 size-5"></svg>
-      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
@@ -230,10 +206,8 @@ exports[`InputNumber > renders with neutral variant none highlight correctly 1`]
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
-      <!--v-if-->
     </button></div>
   <div data-slot="decrement" class="absolute flex items-center inset-y-0 start-0 ps-1"><button type="button" data-slot="base" tabindex="-1" aria-label="Decrement" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted outline-inverted/25 focus-visible:outline-3 p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="leadingIcon" class="shrink-0 size-5"></svg>
-      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
@@ -248,10 +222,8 @@ exports[`InputNumber > renders with neutral variant outline correctly 1`] = `
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
-      <!--v-if-->
     </button></div>
   <div data-slot="decrement" class="absolute flex items-center inset-y-0 start-0 ps-1"><button type="button" data-slot="base" tabindex="-1" aria-label="Decrement" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted outline-inverted/25 focus-visible:outline-3 p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="leadingIcon" class="shrink-0 size-5"></svg>
-      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
@@ -266,10 +238,8 @@ exports[`InputNumber > renders with neutral variant outline highlight correctly 
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
-      <!--v-if-->
     </button></div>
   <div data-slot="decrement" class="absolute flex items-center inset-y-0 start-0 ps-1"><button type="button" data-slot="base" tabindex="-1" aria-label="Decrement" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted outline-inverted/25 focus-visible:outline-3 p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="leadingIcon" class="shrink-0 size-5"></svg>
-      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
@@ -284,10 +254,8 @@ exports[`InputNumber > renders with neutral variant soft correctly 1`] = `
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
-      <!--v-if-->
     </button></div>
   <div data-slot="decrement" class="absolute flex items-center inset-y-0 start-0 ps-1"><button type="button" data-slot="base" tabindex="-1" aria-label="Decrement" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted outline-inverted/25 focus-visible:outline-3 p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="leadingIcon" class="shrink-0 size-5"></svg>
-      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
@@ -302,10 +270,8 @@ exports[`InputNumber > renders with neutral variant soft highlight correctly 1`]
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
-      <!--v-if-->
     </button></div>
   <div data-slot="decrement" class="absolute flex items-center inset-y-0 start-0 ps-1"><button type="button" data-slot="base" tabindex="-1" aria-label="Decrement" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted outline-inverted/25 focus-visible:outline-3 p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="leadingIcon" class="shrink-0 size-5"></svg>
-      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
@@ -320,10 +286,8 @@ exports[`InputNumber > renders with neutral variant subtle correctly 1`] = `
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
-      <!--v-if-->
     </button></div>
   <div data-slot="decrement" class="absolute flex items-center inset-y-0 start-0 ps-1"><button type="button" data-slot="base" tabindex="-1" aria-label="Decrement" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted outline-inverted/25 focus-visible:outline-3 p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="leadingIcon" class="shrink-0 size-5"></svg>
-      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
@@ -338,10 +302,8 @@ exports[`InputNumber > renders with neutral variant subtle highlight correctly 1
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
-      <!--v-if-->
     </button></div>
   <div data-slot="decrement" class="absolute flex items-center inset-y-0 start-0 ps-1"><button type="button" data-slot="base" tabindex="-1" aria-label="Decrement" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted outline-inverted/25 focus-visible:outline-3 p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="leadingIcon" class="shrink-0 size-5"></svg>
-      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
@@ -356,10 +318,8 @@ exports[`InputNumber > renders with orientation vertical correctly 1`] = `
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
-      <!--v-if-->
     </button></div>
   <div data-slot="decrement" class="absolute flex items-center bottom-0 end-0 pe-1 [&amp;>button]:py-0 scale-80"><button type="button" data-slot="base" tabindex="-1" aria-label="Decrement" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-primary hover:text-primary/75 active:text-primary/75 disabled:text-primary aria-disabled:text-primary outline-primary/25 focus-visible:outline-3 p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="leadingIcon" class="shrink-0 size-5"></svg>
-      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
@@ -374,10 +334,8 @@ exports[`InputNumber > renders with placeholder correctly 1`] = `
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
-      <!--v-if-->
     </button></div>
   <div data-slot="decrement" class="absolute flex items-center inset-y-0 start-0 ps-1"><button type="button" data-slot="base" tabindex="-1" aria-label="Decrement" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-primary hover:text-primary/75 active:text-primary/75 disabled:text-primary aria-disabled:text-primary outline-primary/25 focus-visible:outline-3 p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="leadingIcon" class="shrink-0 size-5"></svg>
-      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
@@ -392,10 +350,8 @@ exports[`InputNumber > renders with primary variant ghost correctly 1`] = `
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
-      <!--v-if-->
     </button></div>
   <div data-slot="decrement" class="absolute flex items-center inset-y-0 start-0 ps-1"><button type="button" data-slot="base" tabindex="-1" aria-label="Decrement" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-primary hover:text-primary/75 active:text-primary/75 disabled:text-primary aria-disabled:text-primary outline-primary/25 focus-visible:outline-3 p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="leadingIcon" class="shrink-0 size-5"></svg>
-      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
@@ -410,10 +366,8 @@ exports[`InputNumber > renders with primary variant ghost highlight correctly 1`
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
-      <!--v-if-->
     </button></div>
   <div data-slot="decrement" class="absolute flex items-center inset-y-0 start-0 ps-1"><button type="button" data-slot="base" tabindex="-1" aria-label="Decrement" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-primary hover:text-primary/75 active:text-primary/75 disabled:text-primary aria-disabled:text-primary outline-primary/25 focus-visible:outline-3 p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="leadingIcon" class="shrink-0 size-5"></svg>
-      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
@@ -428,10 +382,8 @@ exports[`InputNumber > renders with primary variant none correctly 1`] = `
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
-      <!--v-if-->
     </button></div>
   <div data-slot="decrement" class="absolute flex items-center inset-y-0 start-0 ps-1"><button type="button" data-slot="base" tabindex="-1" aria-label="Decrement" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-primary hover:text-primary/75 active:text-primary/75 disabled:text-primary aria-disabled:text-primary outline-primary/25 focus-visible:outline-3 p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="leadingIcon" class="shrink-0 size-5"></svg>
-      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
@@ -446,10 +398,8 @@ exports[`InputNumber > renders with primary variant none highlight correctly 1`]
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
-      <!--v-if-->
     </button></div>
   <div data-slot="decrement" class="absolute flex items-center inset-y-0 start-0 ps-1"><button type="button" data-slot="base" tabindex="-1" aria-label="Decrement" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-primary hover:text-primary/75 active:text-primary/75 disabled:text-primary aria-disabled:text-primary outline-primary/25 focus-visible:outline-3 p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="leadingIcon" class="shrink-0 size-5"></svg>
-      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
@@ -464,10 +414,8 @@ exports[`InputNumber > renders with primary variant outline correctly 1`] = `
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
-      <!--v-if-->
     </button></div>
   <div data-slot="decrement" class="absolute flex items-center inset-y-0 start-0 ps-1"><button type="button" data-slot="base" tabindex="-1" aria-label="Decrement" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-primary hover:text-primary/75 active:text-primary/75 disabled:text-primary aria-disabled:text-primary outline-primary/25 focus-visible:outline-3 p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="leadingIcon" class="shrink-0 size-5"></svg>
-      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
@@ -482,10 +430,8 @@ exports[`InputNumber > renders with primary variant outline highlight correctly 
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
-      <!--v-if-->
     </button></div>
   <div data-slot="decrement" class="absolute flex items-center inset-y-0 start-0 ps-1"><button type="button" data-slot="base" tabindex="-1" aria-label="Decrement" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-primary hover:text-primary/75 active:text-primary/75 disabled:text-primary aria-disabled:text-primary outline-primary/25 focus-visible:outline-3 p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="leadingIcon" class="shrink-0 size-5"></svg>
-      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
@@ -500,10 +446,8 @@ exports[`InputNumber > renders with primary variant soft correctly 1`] = `
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
-      <!--v-if-->
     </button></div>
   <div data-slot="decrement" class="absolute flex items-center inset-y-0 start-0 ps-1"><button type="button" data-slot="base" tabindex="-1" aria-label="Decrement" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-primary hover:text-primary/75 active:text-primary/75 disabled:text-primary aria-disabled:text-primary outline-primary/25 focus-visible:outline-3 p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="leadingIcon" class="shrink-0 size-5"></svg>
-      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
@@ -518,10 +462,8 @@ exports[`InputNumber > renders with primary variant soft highlight correctly 1`]
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
-      <!--v-if-->
     </button></div>
   <div data-slot="decrement" class="absolute flex items-center inset-y-0 start-0 ps-1"><button type="button" data-slot="base" tabindex="-1" aria-label="Decrement" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-primary hover:text-primary/75 active:text-primary/75 disabled:text-primary aria-disabled:text-primary outline-primary/25 focus-visible:outline-3 p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="leadingIcon" class="shrink-0 size-5"></svg>
-      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
@@ -536,10 +478,8 @@ exports[`InputNumber > renders with primary variant subtle correctly 1`] = `
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
-      <!--v-if-->
     </button></div>
   <div data-slot="decrement" class="absolute flex items-center inset-y-0 start-0 ps-1"><button type="button" data-slot="base" tabindex="-1" aria-label="Decrement" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-primary hover:text-primary/75 active:text-primary/75 disabled:text-primary aria-disabled:text-primary outline-primary/25 focus-visible:outline-3 p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="leadingIcon" class="shrink-0 size-5"></svg>
-      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
@@ -554,10 +494,8 @@ exports[`InputNumber > renders with primary variant subtle highlight correctly 1
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
-      <!--v-if-->
     </button></div>
   <div data-slot="decrement" class="absolute flex items-center inset-y-0 start-0 ps-1"><button type="button" data-slot="base" tabindex="-1" aria-label="Decrement" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-primary hover:text-primary/75 active:text-primary/75 disabled:text-primary aria-disabled:text-primary outline-primary/25 focus-visible:outline-3 p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="leadingIcon" class="shrink-0 size-5"></svg>
-      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
@@ -572,10 +510,8 @@ exports[`InputNumber > renders with required correctly 1`] = `
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
-      <!--v-if-->
     </button></div>
   <div data-slot="decrement" class="absolute flex items-center inset-y-0 start-0 ps-1"><button type="button" data-slot="base" tabindex="-1" aria-label="Decrement" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-primary hover:text-primary/75 active:text-primary/75 disabled:text-primary aria-disabled:text-primary outline-primary/25 focus-visible:outline-3 p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="leadingIcon" class="shrink-0 size-5"></svg>
-      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
@@ -590,10 +526,8 @@ exports[`InputNumber > renders with size lg correctly 1`] = `
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
-      <!--v-if-->
     </button></div>
   <div data-slot="decrement" class="absolute flex items-center inset-y-0 start-0 ps-1"><button type="button" data-slot="base" tabindex="-1" aria-label="Decrement" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-2 text-primary hover:text-primary/75 active:text-primary/75 disabled:text-primary aria-disabled:text-primary outline-primary/25 focus-visible:outline-3 p-2"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="leadingIcon" class="shrink-0 size-5"></svg>
-      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
@@ -608,10 +542,8 @@ exports[`InputNumber > renders with size md correctly 1`] = `
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
-      <!--v-if-->
     </button></div>
   <div data-slot="decrement" class="absolute flex items-center inset-y-0 start-0 ps-1"><button type="button" data-slot="base" tabindex="-1" aria-label="Decrement" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-primary hover:text-primary/75 active:text-primary/75 disabled:text-primary aria-disabled:text-primary outline-primary/25 focus-visible:outline-3 p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="leadingIcon" class="shrink-0 size-5"></svg>
-      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
@@ -626,10 +558,8 @@ exports[`InputNumber > renders with size sm correctly 1`] = `
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
-      <!--v-if-->
     </button></div>
   <div data-slot="decrement" class="absolute flex items-center inset-y-0 start-0 ps-1"><button type="button" data-slot="base" tabindex="-1" aria-label="Decrement" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-primary hover:text-primary/75 active:text-primary/75 disabled:text-primary aria-disabled:text-primary outline-primary/25 focus-visible:outline-3 p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="leadingIcon" class="shrink-0 size-4"></svg>
-      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
@@ -644,10 +574,8 @@ exports[`InputNumber > renders with size xl correctly 1`] = `
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
-      <!--v-if-->
     </button></div>
   <div data-slot="decrement" class="absolute flex items-center inset-y-0 start-0 ps-1"><button type="button" data-slot="base" tabindex="-1" aria-label="Decrement" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-base gap-2 text-primary hover:text-primary/75 active:text-primary/75 disabled:text-primary aria-disabled:text-primary outline-primary/25 focus-visible:outline-3 p-2"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="leadingIcon" class="shrink-0 size-6"></svg>
-      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
@@ -662,10 +590,8 @@ exports[`InputNumber > renders with size xs correctly 1`] = `
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
-      <!--v-if-->
     </button></div>
   <div data-slot="decrement" class="absolute flex items-center inset-y-0 start-0 ps-1"><button type="button" data-slot="base" tabindex="-1" aria-label="Decrement" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1 text-primary hover:text-primary/75 active:text-primary/75 disabled:text-primary aria-disabled:text-primary outline-primary/25 focus-visible:outline-3 p-1"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="leadingIcon" class="shrink-0 size-4"></svg>
-      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
@@ -680,10 +606,8 @@ exports[`InputNumber > renders with ui correctly 1`] = `
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
-      <!--v-if-->
     </button></div>
   <div data-slot="decrement" class="absolute flex items-center inset-y-0 start-0 ps-1"><button type="button" data-slot="base" tabindex="-1" aria-label="Decrement" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-primary hover:text-primary/75 active:text-primary/75 disabled:text-primary aria-disabled:text-primary outline-primary/25 focus-visible:outline-3 p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="leadingIcon" class="shrink-0 size-5"></svg>
-      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
@@ -698,7 +622,6 @@ exports[`InputNumber > renders without decrement correctly 1`] = `
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
-      <!--v-if-->
     </button></div>
   <!--v-if-->
   <!--v-if-->
@@ -708,7 +631,6 @@ exports[`InputNumber > renders without decrement correctly 1`] = `
 exports[`InputNumber > renders without decrement vertical correctly 1`] = `
 "<div data-slot="root" class="relative inline-flex items-center" role="group"><input role="spinbutton" type="text" tabindex="0" inputmode="decimal" autocomplete="off" autocorrect="off" spellcheck="false" aria-roledescription="Number field" data-slot="base" class="w-full rounded-md border-0 placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default ring ring-inset ring-accented outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary pe-9 md:text-sm" value="">
   <div data-slot="increment" class="absolute flex items-center top-0 end-0 pe-1 [&amp;>button]:py-0 scale-80"><button type="button" data-slot="base" tabindex="-1" aria-label="Increment" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-primary hover:text-primary/75 active:text-primary/75 disabled:text-primary aria-disabled:text-primary outline-primary/25 focus-visible:outline-3 p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="leadingIcon" class="shrink-0 size-5"></svg>
-      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
@@ -741,7 +663,6 @@ exports[`InputNumber > renders without increment correctly 1`] = `
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
-      <!--v-if-->
     </button></div>
   <!--v-if-->
 </div>"
@@ -751,7 +672,6 @@ exports[`InputNumber > renders without increment vertical correctly 1`] = `
 "<div data-slot="root" class="relative inline-flex items-center" role="group"><input role="spinbutton" type="text" tabindex="0" inputmode="decimal" autocomplete="off" autocorrect="off" spellcheck="false" aria-roledescription="Number field" data-slot="base" class="w-full rounded-md border-0 placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default ring ring-inset ring-accented outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary pe-9 md:text-sm" value="">
   <!--v-if-->
   <div data-slot="decrement" class="absolute flex items-center bottom-0 end-0 pe-1 [&amp;>button]:py-0 scale-80"><button type="button" data-slot="base" tabindex="-1" aria-label="Decrement" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-primary hover:text-primary/75 active:text-primary/75 disabled:text-primary aria-disabled:text-primary outline-primary/25 focus-visible:outline-3 p-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="leadingIcon" class="shrink-0 size-5"></svg>
-      <!--v-if-->
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->

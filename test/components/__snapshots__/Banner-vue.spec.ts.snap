@@ -84,7 +84,6 @@ exports[`Banner > renders with close correctly 1`] = `
         <!--v-if-->
         <!--v-if-->
         <!--v-if-->
-        <!--v-if-->
       </button></div>
   </div>
 </div>"

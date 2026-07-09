@@ -60,7 +60,6 @@ exports[`Sidebar > renders with close correctly 1`] = `
             <!--v-if-->
             <!--v-if-->
             <!--v-if-->
-            <!--v-if-->
           </button></div>
       </div>
       <div data-slot="body" class="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto p-4 group-data-[state=collapsed]/sidebar:overflow-hidden"></div>
