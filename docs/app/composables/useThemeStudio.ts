@@ -50,13 +50,21 @@ export function useThemeStudio() {
   const healed = useState('nuxt-ui-style-healed', () => false)
   if (import.meta.client && !healed.value) {
     healed.value = true
-    const expected = styleComponents(style.value)
-    if (JSON.stringify(expected) !== JSON.stringify(readLocalStorage(THEME_STORAGE_KEYS.styleUi, {}))) {
-      onNuxtReady(() => theme.setStyleUi(expected))
+    try {
+      const expected = styleComponents(style.value)
+      if (JSON.stringify(expected) !== JSON.stringify(readLocalStorage(THEME_STORAGE_KEYS.styleUi, {}))) {
+        onNuxtReady(() => theme.setStyleUi(expected))
+      }
+    } catch {
+      // A throwing expansion (corrupt persisted style) shouldn't permanently
+      // disable healing — retry on the next load.
+      healed.value = false
     }
   }
 
-  let trackedAt: number | undefined
+  // Shared across composable instances so the analytics throttle holds no
+  // matter which component fires the event.
+  const trackedAt = useState<number | undefined>('nuxt-ui-style-tracked-at', () => undefined)
 
   function setStyle(options: StyleOptions) {
     const previousStyle = style.value
@@ -85,8 +93,8 @@ export function useThemeStudio() {
     setActivePreset(undefined)
 
     // Sliders stream through here at drag frequency — one event per burst.
-    if (!trackedAt || Date.now() - trackedAt > 2000) {
-      trackedAt = Date.now()
+    if (!trackedAt.value || Date.now() - trackedAt.value > 2000) {
+      trackedAt.value = Date.now()
       track('Theme Style Changed', {
         shadow: style.value.shadow || 'none',
         border: style.value.border || 'default',
@@ -210,8 +218,8 @@ export function useThemeStudio() {
     setActivePreset(undefined)
 
     // Live drags call this at ~16Hz — one analytics event per burst is plenty.
-    if (!trackedAt || Date.now() - trackedAt > 2000) {
-      trackedAt = Date.now()
+    if (!trackedAt.value || Date.now() - trackedAt.value > 2000) {
+      trackedAt.value = Date.now()
       track('Theme Custom Palette', { alias })
     }
   }

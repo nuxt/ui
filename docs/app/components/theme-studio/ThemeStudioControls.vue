@@ -73,7 +73,12 @@ const borderWidth = computed({
 // Outline solid/soft surfaces too — the neobrutalist frame look.
 const frameSolids = computed({
   get: () => !!style.value.frame || style.value.border === 'frame',
-  set: (value: boolean) => setStyle({ frame: value })
+  // Migrate the legacy border: 'frame' encoding on write — otherwise the
+  // getter keeps reading true and the switch can never turn off.
+  set: (value: boolean) => setStyle({
+    frame: value,
+    border: style.value.border === 'frame' ? 'custom' : style.value.border
+  })
 })
 
 const borderColorItems = [

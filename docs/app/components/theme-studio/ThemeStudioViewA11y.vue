@@ -83,9 +83,16 @@ const { cssVariablesData, customColorsData } = useTheme()
 // then two frames so the new sheets are applied before reading computed
 // styles — deterministic, unlike a wall-clock delay.
 let pending = 0
+let queued = false
 function scheduleCompute() {
   cancelAnimationFrame(pending)
+  // One queued tick at a time — rapid changes (curve drags) would otherwise
+  // stack nextTick callbacks, each spawning its own rAF chain into the
+  // layout-reading compute().
+  if (queued) return
+  queued = true
   nextTick(() => {
+    queued = false
     pending = requestAnimationFrame(() => {
       pending = requestAnimationFrame(compute)
     })

@@ -40,9 +40,11 @@ defineShortcuts({
 })
 
 // The fullscreen state is app-level (the site header gates on it) — never
-// let it leak past the studio.
+// let it leak past the studio. The pending capture dies with the page too,
+// or it would record against a baseline the next mount is about to reset.
 onUnmounted(() => {
   fullscreen.value = false
+  clearTimeout(captureTimeout)
 })
 
 const settingGroups = [

@@ -184,6 +184,12 @@ export function fitPalette(shades: Partial<Record<Shade, string>>): PaletteCurve
     }
   }
 
+  // Nothing parseable to fit — fall back to the stock curves rather than
+  // letting fitCurve([]) throw.
+  if (!stops.length) {
+    return structuredClone(CURVE_DEFAULTS)
+  }
+
   // Hue is noise below ~0.01 chroma — borrow the nearest chromatic stop.
   const chromatic = stops.filter(stop => stop.color.c >= 0.01)
   const hues = stops.map((stop) => {

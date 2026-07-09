@@ -123,7 +123,7 @@ full viewport; the docs chrome (aside, toc) doesn't apply.
 
 **Layout** — three zones:
 
-```
+```text
 ┌──────────────────────────────────────────────────────────────┐
 │ Presets ▾   🎲 Shuffle   [locks]        Share ⧉  Export ⬇  ↺ │
 ├───────────────┬──────────────────────────────────────────────┤
@@ -256,7 +256,7 @@ Routing table (each ThemeDoc field has exactly one export medium):
 
 ## 6. Architecture & repo layout
 
-```
+```text
 docs/app/
   utils/theme-engine/          # pure TS, unit-tested (vitest)
     schema.ts                  # ThemeDoc types + zod-ish validation + version migration

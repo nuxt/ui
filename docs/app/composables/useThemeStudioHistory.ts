@@ -30,6 +30,12 @@ export function useThemeStudioHistory() {
       return
     }
     if (snapshot === lastSnapshot.value) return
+    // No baseline yet (capture before the page's mount align) — adopt
+    // rather than record: JSON.parse('') would throw.
+    if (!lastSnapshot.value) {
+      lastSnapshot.value = snapshot
+      return
+    }
     past.value.push(JSON.parse(lastSnapshot.value))
     if (past.value.length > 50) past.value.shift()
     future.value = []

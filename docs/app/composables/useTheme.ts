@@ -532,12 +532,12 @@ export function useTheme() {
     // reset button was pressed (popover, chat, or studio) — orphaned style
     // prefs would silently resurrect on the next style click or export.
     setStyleUi({})
-    window.localStorage.removeItem('nuxt-ui-preset')
-    window.localStorage.removeItem('nuxt-ui-style')
-    window.localStorage.removeItem('nuxt-ui-palette-params')
-    window.localStorage.removeItem('nuxt-ui-palette-prev')
-    useState<Record<string, any>>('nuxt-ui-style-prefs').value = {}
-    useState<string | undefined>('nuxt-ui-theme-preset').value = undefined
+    window.localStorage.removeItem(THEME_STORAGE_KEYS.preset)
+    window.localStorage.removeItem(THEME_STORAGE_KEYS.style)
+    window.localStorage.removeItem(THEME_STORAGE_KEYS.paletteParams)
+    window.localStorage.removeItem(THEME_STORAGE_KEYS.palettePrev)
+    useState<Record<string, any>>(THEME_STATE_KEYS.stylePrefs).value = {}
+    useState<string | undefined>(THEME_STATE_KEYS.themePreset).value = undefined
 
     if (import.meta.client) {
       document.getElementById(THEME_TAG_IDS.cssVariables)?.replaceChildren()
