@@ -532,6 +532,7 @@ export function useTheme() {
     // reset button was pressed (popover, chat, or studio) — orphaned style
     // prefs would silently resurrect on the next style click or export.
     setStyleUi({})
+    window.localStorage.removeItem('nuxt-ui-preset')
     window.localStorage.removeItem('nuxt-ui-style')
     window.localStorage.removeItem('nuxt-ui-palette-params')
     window.localStorage.removeItem('nuxt-ui-palette-prev')

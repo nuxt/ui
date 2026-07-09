@@ -4,6 +4,14 @@ import type { ThemeDoc } from '../../utils/theme-engine'
 
 /** The presets dropdown (with per-preset color swatches) plus the shuffle die. */
 const { presets, activePreset, applyPreset, shuffle } = useThemeStudio()
+const { hasCSSChanges, hasConfigChanges } = useTheme()
+
+// The persisted preset (and any persisted edits) are client-only — resolve
+// the label after mount so hydration matches the server's fallback.
+const mounted = ref(false)
+onMounted(() => {
+  mounted.value = true
+})
 
 /** The preset's primary + neutral at 500, straight from its own document. */
 function presetSwatches(doc: ThemeDoc): string[] {
@@ -21,7 +29,13 @@ const presetItems = computed(() => presets.map(preset => ({
   onSelect: () => applyPreset(preset)
 })))
 
-const presetLabel = computed(() => presets.find(preset => preset.id === activePreset.value)?.name || 'Presets')
+/** The applied preset's name; 'Custom' once edits diverge from it. */
+const presetLabel = computed(() => {
+  if (!mounted.value) return 'Presets'
+  const active = presets.find(preset => preset.id === activePreset.value)
+  if (active) return active.name
+  return (hasCSSChanges.value || hasConfigChanges.value) ? 'Custom' : 'Presets'
+})
 </script>
 
 <template>

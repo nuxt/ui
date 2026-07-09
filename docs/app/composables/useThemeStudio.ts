@@ -9,7 +9,17 @@ export function useThemeStudio() {
   const appConfig = useAppConfig()
   const { track } = useAnalytics()
 
-  const activePreset = useState<string | undefined>(THEME_STATE_KEYS.themePreset, () => undefined)
+  /** Persisted so the preset menu still names the applied preset after a reload. */
+  const activePreset = useState<string | undefined>(THEME_STATE_KEYS.themePreset, () => readLocalStorage(THEME_STORAGE_KEYS.preset, undefined))
+
+  function setActivePreset(id: string | undefined) {
+    activePreset.value = id
+    if (id) {
+      window.localStorage.setItem(THEME_STORAGE_KEYS.preset, JSON.stringify(id))
+    } else {
+      window.localStorage.removeItem(THEME_STORAGE_KEYS.preset)
+    }
+  }
 
   /** The studio modal — one instance mounted in the header, openable from anywhere. */
 
@@ -72,7 +82,7 @@ export function useThemeStudio() {
     if (Object.keys(tokens.light).length || Object.keys(tokens.dark).length) {
       theme.applyThemeSettings({ cssVariables: tokens }, { track: false })
     }
-    activePreset.value = undefined
+    setActivePreset(undefined)
 
     // Sliders stream through here at drag frequency — one event per burst.
     if (!trackedAt || Date.now() - trackedAt > 2000) {
@@ -133,15 +143,17 @@ export function useThemeStudio() {
 
     if (alias === 'primary') {
       theme.primary.value = name
+      setActivePreset(undefined)
     } else if (alias === 'neutral') {
       theme.neutral.value = name
       // Stock neutrals need the white-literal remaps too — without them the
       // preview (docs baseline: neutral-50 bg) diverges from the export
       // (library baseline: white bg) for every tinted ramp.
       theme.applyThemeSettings({ cssVariables: unownedNeutralRemaps() }, { track: false })
+      setActivePreset(undefined)
     } else {
       theme.applyThemeSettings({ [alias]: name }, { track: false })
-      activePreset.value = undefined
+      setActivePreset(undefined)
       track('Theme Changed', { setting: alias, value: name })
     }
   }
@@ -195,7 +207,7 @@ export function useThemeStudio() {
       ...(alias === 'neutral' ? { cssVariables: unownedNeutralRemaps() } : {})
     }, { track: false })
     setPaletteParams({ ...paletteParams.value, [alias]: params })
-    activePreset.value = undefined
+    setActivePreset(undefined)
 
     // Live drags call this at ~16Hz — one analytics event per burst is plenty.
     if (!trackedAt || Date.now() - trackedAt > 2000) {
@@ -278,7 +290,7 @@ export function useThemeStudio() {
 
   function applyPreset(preset: ThemePreset) {
     applyDoc(preset.doc)
-    activePreset.value = preset.id
+    setActivePreset(preset.id)
 
     track('Theme Preset Applied', { preset: preset.id })
   }
@@ -321,7 +333,7 @@ export function useThemeStudio() {
     }
 
     applyDoc(doc)
-    activePreset.value = undefined
+    setActivePreset(undefined)
 
     track('Theme Studio Shuffled')
   }

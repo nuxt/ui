@@ -6,6 +6,7 @@
 
 /** localStorage keys the studio writes and useTheme/resetTheme also touch. */
 export const THEME_STORAGE_KEYS = {
+  preset: 'nuxt-ui-preset',
   style: 'nuxt-ui-style',
   styleUi: 'nuxt-ui-style-ui',
   paletteParams: 'nuxt-ui-palette-params',
