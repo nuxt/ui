@@ -96,6 +96,7 @@ function onSubmit() {
     variant="naked"
     :rows="3"
     autoresize
+    :autofocus="false"
     placeholder="Paste a doc, an email, or a question to get started"
     :ui="{ root: 'rounded-none p-2.5', footer: 'pt-1' }"
     @submit="onSubmit"
