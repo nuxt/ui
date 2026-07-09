@@ -112,8 +112,15 @@ export function defineShortcuts(config: MaybeRef<ShortcutsConfig>, options: Shor
   const runPendingShortcut = () => {
     const pending = pendingShortcut
     cancelPendingShortcut()
-    if (pending?.shortcut.enabled) {
-      pending.shortcut.handler(pending.event)
+    if (!pending) {
+      return
+    }
+
+    // Re-resolve instead of trusting the held snapshot: `enabled` may have changed in the
+    // meantime (e.g. focus moved into an input), and the pending shortcut is always unmodified.
+    const shortcut = standardShortcuts.value.find(s => s.key === pending.shortcut.key && !s.metaKey && !s.ctrlKey && !s.altKey && !s.shiftKey)
+    if (shortcut?.enabled) {
+      shortcut.handler(pending.event)
     }
   }
   const pendingTimer = useTimeoutFn(() => {
@@ -150,12 +157,15 @@ export function defineShortcuts(config: MaybeRef<ShortcutsConfig>, options: Shor
           continue
         }
 
-        // The chain completed, so the held-back standalone from its first key must not fire.
-        cancelPendingShortcut()
-
         if (shortcut.enabled) {
+          // The chain completed, so the held-back standalone from its first key must not fire.
+          cancelPendingShortcut()
+
           e.preventDefault()
           shortcut.handler(e)
+        } else {
+          // A disabled chain must not swallow the held-back standalone.
+          runPendingShortcut()
         }
         clearChainedInput()
         return

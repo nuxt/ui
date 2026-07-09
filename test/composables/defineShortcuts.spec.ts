@@ -19,6 +19,8 @@ describe('defineShortcuts', () => {
 
   afterEach(() => {
     wrapper?.unmount()
+    // Failure-safe teardown for tests that focus an input, so a thrown assertion can't leak focus.
+    document.body.innerHTML = ''
   })
 
   async function registerShortcuts(config: ShortcutsConfig, options?: ShortcutsOptions) {
@@ -383,6 +385,39 @@ describe('defineShortcuts', () => {
       expect(x).toHaveBeenCalledOnce()
       expect(f).toHaveBeenCalledBefore(x)
       expect(fh).not.toHaveBeenCalled()
+    })
+
+    it('fires the held standalone when the completing chain is disabled', async () => {
+      const f = vi.fn()
+      const fh = vi.fn()
+      // The standalone stays enabled inside inputs, the chain does not.
+      await registerShortcuts({ 'f': { handler: f, usingInput: true }, 'f-h': fh }, { chainDelay: 50 })
+
+      const input = document.createElement('input')
+      document.body.appendChild(input)
+      input.focus()
+
+      fireKeydown('f')
+      fireKeydown('h')
+
+      expect(f).toHaveBeenCalledOnce()
+      expect(fh).not.toHaveBeenCalled()
+    })
+
+    it('does not fire a held standalone that got disabled before the delay elapsed', async () => {
+      const f = vi.fn()
+      await registerShortcuts({ f, 'f-h': vi.fn() }, { chainDelay: 50 })
+
+      fireKeydown('f')
+
+      // Moving focus into an input disables the shortcut while it's still held back.
+      const input = document.createElement('input')
+      document.body.appendChild(input)
+      input.focus()
+
+      await new Promise(resolve => setTimeout(resolve, 80))
+
+      expect(f).not.toHaveBeenCalled()
     })
   })
 
