@@ -146,7 +146,12 @@ function onPointerMove(event: PointerEvent) {
 function onPointerUp(event: PointerEvent) {
   if (dragging.value) {
     dragging.value = null
-    svgRef.value!.releasePointerCapture(event.pointerId)
+    // After a pointercancel the capture is already gone and release throws
+    // NotFoundError — which would skip dragEnd and leave the page-wide
+    // dragging class stuck on <html>.
+    if (svgRef.value?.hasPointerCapture(event.pointerId)) {
+      svgRef.value.releasePointerCapture(event.pointerId)
+    }
     emit('dragEnd')
   }
 }

@@ -106,7 +106,10 @@ const shadowColorItems = [
 // ONLY the touched mode so an untouched mode never becomes an override.
 function shadeSlider(field: 'shadowShade' | 'innerShadowShade' | 'borderShade', defaults: { light: number, dark: number }, target: 'light' | 'dark') {
   return computed({
-    get: () => SHADES.indexOf((style.value[field] || defaults)[target] as typeof SHADES[number]),
+    // Per-key fallback: an imported doc can carry a single-mode shade
+    // object ({ light: 400 }) — indexOf(undefined) would park the slider
+    // at -1 and the chip at var(--color-…-undefined).
+    get: () => SHADES.indexOf((style.value[field]?.[target] ?? defaults[target]) as typeof SHADES[number]),
     set: (index: number) => {
       const current = { ...defaults, ...style.value[field] }
       setStyle({ [field]: { ...current, [target]: SHADES[index]! } })
@@ -219,13 +222,37 @@ function groupVariantModel(group: VariantGroup) {
   return computed({
     get: () => {
       const own = style.value.defaults?.variants?.[group]
-      if (own) return own
+      if (own && own !== 'default') return own
       // An app-wide value this group can't express (e.g. solid inputs)
       // truthfully reads as Default — the engine skips it there too.
       const appWide = style.value.defaults?.variant
       return appWide && supported.includes(appWide) ? appWide : 'default'
     },
-    set: (value: any) => setStyle({ defaults: { ...style.value.defaults, variants: { ...style.value.defaults?.variants, [group]: value } } })
+    set: (value: any) => {
+      const defaults = style.value.defaults || {}
+
+      // Picking Default under an app-wide variant must actually win: the
+      // engine skips 'default' entries, so the app-wide value explodes
+      // into the OTHER groups (where they support it) and disappears.
+      if (value === 'default' && defaults.variant) {
+        const variants: Record<string, any> = {}
+        for (const field of variantGroupFields) {
+          if (field.key === group) continue
+          const existing = defaults.variants?.[field.key]
+          if (existing && existing !== 'default') {
+            variants[field.key] = existing
+          } else if (field.items.some(item => item.value === defaults.variant)) {
+            variants[field.key] = defaults.variant
+          }
+        }
+        const next = { ...defaults, variants }
+        delete next.variant
+        setStyle({ defaults: next })
+        return
+      }
+
+      setStyle({ defaults: { ...defaults, variants: { ...defaults.variants, [group]: value } } })
+    }
   })
 }
 

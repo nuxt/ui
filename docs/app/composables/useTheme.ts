@@ -538,6 +538,9 @@ export function useTheme() {
     window.localStorage.removeItem(THEME_STORAGE_KEYS.palettePrev)
     useState<Record<string, any>>(THEME_STATE_KEYS.stylePrefs).value = {}
     useState<string | undefined>(THEME_STATE_KEYS.themePreset).value = undefined
+    // The in-memory curve params too — the storage key alone leaves the
+    // palette editor showing (and re-persisting) supposedly-reset curves.
+    useState<Record<string, any>>(THEME_STATE_KEYS.paletteParams).value = {}
 
     if (import.meta.client) {
       document.getElementById(THEME_TAG_IDS.cssVariables)?.replaceChildren()

@@ -15,8 +15,19 @@ export function useThemeStudioHistory() {
   const lastSnapshot = useState('theme-studio-history-snapshot', () => '')
   const pendingRestore = useState('theme-studio-history-pending', () => false)
 
-  /** Realign the baseline without recording (page mount). */
+  /**
+   * Realign the baseline without recording (page mount). If the theme
+   * changed while no watcher was mounted (preset from the header picker on
+   * another page), the stacks describe a document lineage that no longer
+   * exists — undo/redo against them would clobber the off-page change, so
+   * they reset.
+   */
   function align(snapshot: string) {
+    if (lastSnapshot.value && snapshot !== lastSnapshot.value) {
+      past.value = []
+      future.value = []
+    }
+    pendingRestore.value = false
     lastSnapshot.value = snapshot
   }
 
@@ -44,9 +55,13 @@ export function useThemeStudioHistory() {
 
   function restore(doc: ThemeDoc) {
     pendingRestore.value = true
+    // The baseline moves NOW, not at the debounced settle — a second
+    // undo/redo inside the debounce window must push this doc, not the
+    // pre-restore state (which would drop a step and duplicate another).
+    lastSnapshot.value = JSON.stringify(doc)
     applyDoc(doc)
-    // realignment happens on the next capture, from currentDoc() itself —
-    // the applied doc may re-serialize differently than it round-trips
+    // the settle still realigns from currentDoc() itself — the applied doc
+    // may re-serialize differently than it round-trips
   }
 
   function undo() {

@@ -130,6 +130,27 @@ describe('importTheme', () => {
     expect(skipped).toEqual(['.made-up-selector { color: red }'])
   })
 
+  it('keeps style variables it cannot express as plain tokens', () => {
+    const { doc, skipped } = importTheme({
+      css: [
+        ':root, .light {',
+        '  --ui-frame-color: #ff0000;',
+        '}',
+        '',
+        '.dark {',
+        '  --ui-frame-color: #ff0000;',
+        '}'
+      ].join('\n')
+    })
+
+    // A literal the border-color table can't name is not a style choice —
+    // but it must survive somewhere, not silently vanish.
+    expect(skipped).toEqual([])
+    expect(doc.style?.borderColor).toBeUndefined()
+    expect(doc.tokens?.light?.['--ui-frame-color']).toBe('#ff0000')
+    expect(doc.tokens?.dark?.['--ui-frame-color']).toBe('#ff0000')
+  })
+
   it('round-trips per-group default colors', () => {
     const doc: ThemeDoc = {
       version: 1,

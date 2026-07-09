@@ -14,6 +14,7 @@ export function useThemeStudio() {
 
   function setActivePreset(id: string | undefined) {
     activePreset.value = id
+    if (!import.meta.client) return
     if (id) {
       window.localStorage.setItem(THEME_STORAGE_KEYS.preset, JSON.stringify(id))
     } else {

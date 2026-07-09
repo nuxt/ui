@@ -39,13 +39,20 @@ const stopColors = computed(() => SHADES.map(shade => shades.value[shade]))
 /**
  * Every axis is a fixed 1:1 window — the full physical range fits the
  * canvas, so dragging never pans or rescales under the pointer. Hue params
- * are normalized into 0–360 on seed instead (cyclic, so shifting by full
- * turns is color-identical; fitPalette unwraps across the seam).
+ * are normalized into 0–360 on seed (cyclic, so shifting by full turns is
+ * color-identical; fitPalette unwraps across the seam), but a seam-crossing
+ * fit legitimately leaves individual points outside [0, 360] — the window
+ * stretches once, at seed, to include them, or the drag clamp would snap a
+ * merely-grabbed handle back into range and shift the color uninvited.
  */
+const seedHues = [params.hue.y0, params.hue.y1, params.hue.p1y, params.hue.p2y]
 const windows = {
   lightness: { min: 0, max: 1 },
   chroma: { min: 0, max: 0.35 },
-  hue: { min: 0, max: 360 }
+  hue: {
+    min: Math.min(0, Math.floor(Math.min(...seedHues) / 10) * 10),
+    max: Math.max(360, Math.ceil(Math.max(...seedHues) / 10) * 10)
+  }
 }
 
 /**

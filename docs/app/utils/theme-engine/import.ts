@@ -185,6 +185,14 @@ function extractStyle(light: Record<string, string>, dark: Record<string, string
     return value
   }
 
+  // A consumed variable the style axis can't express (unknown color value,
+  // single-mode declaration) goes back into the residual maps — it then
+  // survives as a plain token override instead of silently vanishing.
+  const putBack = (prop: string, value: { light?: string, dark?: string }) => {
+    if (value.light !== undefined) light[prop] = value.light
+    if (value.dark !== undefined) dark[prop] = value.dark
+  }
+
   const opacity = take('--ui-shadow-opacity')
   const geometry = {
     x: take('--ui-shadow-offset-x'),
@@ -217,8 +225,20 @@ function extractStyle(light: Record<string, string>, dark: Record<string, string
     style.shadow = 'soft'
   }
 
-  if (opacity.light !== undefined) {
+  if (style.shadow !== 'hard') {
+    // dark-only geometry can't seed a hard shadow — keep it as tokens
+    putBack('--ui-shadow-offset-x', geometry.x)
+    putBack('--ui-shadow-offset-y', geometry.y)
+    putBack('--ui-shadow-blur', geometry.blur)
+    putBack('--ui-shadow-spread', geometry.spread)
+  }
+
+  if (opacity.light !== undefined && style.shadow) {
     style.shadowOpacity = Number.parseFloat(opacity.light)
+  } else {
+    // without a shadow the option would never re-emit (styleTokens gates
+    // opacity on shadow) — as a token it at least round-trips
+    putBack('--ui-shadow-opacity', opacity)
   }
 
   const innerOpacity = take('--ui-inner-shadow-opacity')
@@ -247,8 +267,17 @@ function extractStyle(light: Record<string, string>, dark: Record<string, string
     style.innerShadow = 'soft'
   }
 
-  if (innerOpacity.light !== undefined) {
+  if (style.innerShadow !== 'hard') {
+    putBack('--ui-inner-shadow-offset-x', innerGeometry.x)
+    putBack('--ui-inner-shadow-offset-y', innerGeometry.y)
+    putBack('--ui-inner-shadow-blur', innerGeometry.blur)
+    putBack('--ui-inner-shadow-spread', innerGeometry.spread)
+  }
+
+  if (innerOpacity.light !== undefined && style.innerShadow) {
     style.innerShadowOpacity = Number.parseFloat(innerOpacity.light)
+  } else {
+    putBack('--ui-inner-shadow-opacity', innerOpacity)
   }
 
   if (shadowColor.light !== undefined || shadowColor.dark !== undefined) {
@@ -259,6 +288,8 @@ function extractStyle(light: Record<string, string>, dark: Record<string, string
       if (match) {
         style.shadowColor = match.color as StyleOptions['shadowColor']
         if (match.shade) style.shadowShade = match.shade
+      } else {
+        putBack('--ui-shadow-color', shadowColor)
       }
     }
   }
@@ -269,6 +300,8 @@ function extractStyle(light: Record<string, string>, dark: Record<string, string
     if (match) {
       style.innerShadowColor = match.color as StyleOptions['innerShadowColor']
       if (match.shade) style.innerShadowShade = match.shade
+    } else {
+      putBack('--ui-inner-shadow-color', innerColor)
     }
   }
 
@@ -277,6 +310,8 @@ function extractStyle(light: Record<string, string>, dark: Record<string, string
     if (match) {
       style.borderColor = match.color as StyleOptions['borderColor']
       if (match.shade) style.borderShade = match.shade
+    } else {
+      putBack('--ui-frame-color', frameColor)
     }
   }
 

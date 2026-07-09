@@ -85,8 +85,11 @@ export function generatePalette(params: PaletteCurveParams): Record<Shade, strin
 
     // Clamp here, not in the serializer: sculpted curves can demand
     // impossible chroma, and the swatches/contrast math assume sRGB.
+    // Lightness clamps too — clampToGamut only searches chroma, so an
+    // overshooting curve (handles may exceed the window) would otherwise
+    // emit oklch(112% …) verbatim into exports and contrast math.
     result[shade] = formatOklch(clampToGamut({
-      l: sampleCurve(x, params.lightness),
+      l: Math.min(1, Math.max(0, sampleCurve(x, params.lightness))),
       c: Math.max(0, sampleCurve(x, params.chroma)),
       h: sampleCurve(x, params.hue)
     }))
@@ -102,6 +105,10 @@ export function generatePalette(params: PaletteCurveParams): Record<Shade, strin
  * every palette selection.
  */
 export function fitCurve(points: Array<[number, number]>): ChannelCurve {
+  // Nothing to fit — a flat zero curve beats a TypeError.
+  if (!points.length) {
+    return { y0: 0, p1x: 0.33, p1y: 0, p2x: 0.66, p2y: 0, y1: 0 }
+  }
   const y0 = points[0]![1]
   const y1 = points[points.length - 1]![1]
   const span = Math.max(Math.abs(y1 - y0), 1e-6)

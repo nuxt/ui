@@ -4,6 +4,9 @@ import type { ThemeDoc } from '../../utils/theme-engine'
 
 /** The presets dropdown (with per-preset color swatches) plus the shuffle die. */
 const { presets, activePreset, applyPreset, shuffle } = useThemeStudio()
+
+/** Exposed so hosts (the fullscreen toolbar) can pin themselves while open. */
+const open = defineModel<boolean>('open', { default: false })
 const { hasCSSChanges, hasConfigChanges } = useTheme()
 
 // The persisted preset (and any persisted edits) are client-only — resolve
@@ -41,6 +44,7 @@ const presetLabel = computed(() => {
 <template>
   <div class="flex gap-2">
     <UDropdownMenu
+      v-model:open="open"
       :items="presetItems"
       :content="{ align: 'start' }"
       class="flex-1 min-w-0"

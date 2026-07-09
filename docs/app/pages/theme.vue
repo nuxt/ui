@@ -33,18 +33,34 @@ watch(() => (mounted.value ? JSON.stringify(currentDoc()) : undefined), (snapsho
 defineShortcuts({
   meta_z: undo,
   meta_shift_z: redo,
-  ctrl_y: redo,
-  escape: () => {
-    if (fullscreen.value) fullscreen.value = false
-  }
+  ctrl_y: redo
 })
 
+// Esc exits fullscreen — but NOT through defineShortcuts, which
+// preventDefaults every matched key and would stop Reka's dismissable
+// layers from ever seeing Escape (no popover on /theme could close). A
+// plain listener defers whenever a layer is open, so Esc closes the
+// popover first and exits fullscreen on the next press.
+function onEscape(event: KeyboardEvent) {
+  if (event.key !== 'Escape' || !fullscreen.value || event.defaultPrevented) return
+  // Only VISIBLE layers defer — pre-mounted closed overlays (the search
+  // palette) keep their layer marker in the DOM.
+  const layers = document.querySelectorAll('[data-dismissable-layer]')
+  if ([...layers].some(layer => layer.getClientRects().length)) return
+  fullscreen.value = false
+}
+onMounted(() => window.addEventListener('keydown', onEscape))
+
 // The fullscreen state is app-level (the site header gates on it) — never
-// let it leak past the studio. The pending capture dies with the page too,
-// or it would record against a baseline the next mount is about to reset.
+// let it leak past the studio. The pending capture flushes rather than
+// dies: an edit made inside the debounce window would otherwise vanish
+// from history, and a pending post-restore realign would stay armed and
+// swallow the next edit after remount.
 onUnmounted(() => {
+  window.removeEventListener('keydown', onEscape)
   fullscreen.value = false
   clearTimeout(captureTimeout)
+  capture(JSON.stringify(currentDoc()))
 })
 
 const settingGroups = [
@@ -52,6 +68,30 @@ const settingGroups = [
   { label: 'General', value: 'general' },
   { label: 'Style', value: 'style' }
 ] as const
+
+/**
+ * Fullscreen toolbar reveal. Pointer proximity is tracked with a mousemove
+ * listener instead of an invisible hover overlay — an overlay would eat
+ * clicks on the preview's bottom edge. The bar also pins open while any of
+ * its panels is open: their content portals to <body>, so hover/focus-within
+ * alone would retract the bar underneath its own popovers.
+ */
+const nearBottom = ref(false)
+function onPointerNear(event: MouseEvent) {
+  nearBottom.value = window.innerHeight - event.clientY <= 96
+}
+watch(fullscreen, (on) => {
+  if (on) {
+    window.addEventListener('mousemove', onPointerNear)
+  } else {
+    window.removeEventListener('mousemove', onPointerNear)
+    nearBottom.value = false
+  }
+})
+onUnmounted(() => window.removeEventListener('mousemove', onPointerNear))
+
+const openPanels = reactive({ presets: false, colors: false, general: false, style: false, view: false })
+const toolbarPinned = computed(() => nearBottom.value || Object.values(openPanels).some(Boolean))
 </script>
 
 <template>
@@ -86,11 +126,15 @@ const settingGroups = [
              nears the bottom (Esc still exits); only that strip catches
              the pointer so the preview stays clickable. -->
         <div :class="fullscreen ? 'group fixed bottom-0 inset-x-0 z-50 pointer-events-none' : 'shrink-0'">
-          <div v-if="fullscreen" class="absolute bottom-0 inset-x-0 h-8 pointer-events-auto" />
+          <!-- thin touch affordance only — mouse reveal is proximity-driven -->
+          <div v-if="fullscreen" class="absolute bottom-0 inset-x-0 h-2 pointer-events-auto" />
 
           <div
             class="flex items-center gap-2 py-3 overflow-x-auto"
-            :class="fullscreen && 'my-4 mx-auto w-[calc(100%-2rem)] max-w-(--ui-container) px-4 rounded-lg bg-default ring ring-default shadow-lg pointer-events-auto translate-y-[calc(100%+6px)] group-hover:translate-y-0 group-focus-within:translate-y-0 transition-transform duration-200'"
+            :class="fullscreen && [
+              'my-4 mx-auto w-[calc(100%-2rem)] max-w-(--ui-container) px-4 rounded-lg bg-default ring ring-default shadow-lg pointer-events-auto transition-transform duration-200',
+              toolbarPinned ? 'translate-y-0' : 'translate-y-[calc(100%+6px)] group-hover:translate-y-0 group-focus-within:translate-y-0'
+            ]"
           >
             <UFieldGroup size="sm">
               <UTooltip text="Undo" :kbds="['meta', 'Z']">
@@ -127,11 +171,12 @@ const settingGroups = [
               />
             </UTooltip>
 
-            <ThemeStudioPresetMenu class="w-56 shrink-0" />
+            <ThemeStudioPresetMenu v-model:open="openPanels.presets" class="w-56 shrink-0" />
 
             <UPopover
               v-for="settingGroup in settingGroups"
               :key="settingGroup.value"
+              v-model:open="openPanels[settingGroup.value]"
               :content="{ align: 'start' }"
             >
               <UButton
@@ -154,6 +199,7 @@ const settingGroups = [
                the header is hidden. -->
             <USelect
               v-model="view"
+              v-model:open="openPanels.view"
               :items="views"
               :icon="views.find(tab => tab.value === view)?.icon"
               size="sm"
