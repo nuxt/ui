@@ -78,25 +78,26 @@ const studioMenu = [
       <VersionMenu />
     </template>
 
-    <div v-if="isStudio" class="flex items-center gap-1">
-      <UTabs
-        v-model="view"
-        :items="views"
-        :content="false"
-        color="primary"
-        size="sm"
-      />
-
-      <!-- A single trigger makes the menu root (and so the default
-           popover viewport) only as wide as the button — size the
-           popover explicitly. -->
-      <UNavigationMenu
-        :items="studioMenu"
-        variant="link"
-        content-orientation="vertical"
-        :ui="{ viewportWrapper: 'w-[25rem]', content: 'w-[25rem]' }"
-      />
-    </div>
+    <!-- The popover is sized explicitly: with a single trigger the
+         default viewport wrapper tracks the root's width, not the
+         content's. -->
+    <UNavigationMenu
+      v-if="isStudio"
+      :items="studioMenu"
+      variant="link"
+      content-orientation="vertical"
+      :ui="{ viewportWrapper: 'w-[16rem]', content: 'w-[16rem]' }"
+    >
+      <template #list-leading>
+        <UTabs
+          v-model="view"
+          :items="views"
+          :content="false"
+          color="primary"
+          size="sm"
+        />
+      </template>
+    </UNavigationMenu>
     <UNavigationMenu v-else :items="desktopLinks" variant="link" content-orientation="vertical" />
 
     <template #right>
