@@ -1,9 +1,12 @@
 <script setup lang="ts">
-import type { ThemeDoc } from '../utils/theme-engine'
-
 const { track } = useAnalytics()
-const { applyDoc } = useThemeStudio()
 const { currentDoc, resetTheme } = useTheme()
+
+// View, fullscreen and undo/redo history are app-level state: the site
+// header hosts the view switcher and undo/redo/reset while on /theme
+// (the toolbar keeps lg:hidden fallbacks for mobile).
+const { view, fullscreen, views } = useThemeStudioView()
+const { past, future, align, capture, undo, redo } = useThemeStudioHistory()
 
 useSeoMeta({
   title: 'Theme Studio',
@@ -16,63 +19,17 @@ const mounted = ref(false)
 onMounted(() => {
   mounted.value = true
   track('Theme Studio Opened')
+  align(JSON.stringify(currentDoc()))
 })
 
-/**
- * Undo/redo over whole theme documents — the same serialize/restore pair
- * exports and presets already use, so one history entry is one applyDoc
- * away. A debounced capture folds slider-drag bursts (and a reset) into
- * single steps. Session-only by design.
- */
-const past = ref<ThemeDoc[]>([])
-const future = ref<ThemeDoc[]>([])
-let lastSnapshot = ''
-let pendingRestore = false
-
-onMounted(() => {
-  lastSnapshot = JSON.stringify(currentDoc())
-})
-
+// A debounced capture folds slider-drag bursts (and a reset) into single
+// history steps.
 let captureTimeout: ReturnType<typeof setTimeout> | undefined
 watch(() => (mounted.value ? JSON.stringify(currentDoc()) : undefined), (snapshot) => {
   if (!snapshot) return
   clearTimeout(captureTimeout)
-  captureTimeout = setTimeout(() => {
-    if (pendingRestore) {
-      // the first settle after our own undo/redo restore — realign without
-      // recording, however long the flush took
-      pendingRestore = false
-      lastSnapshot = snapshot
-      return
-    }
-    if (snapshot === lastSnapshot) return
-    past.value.push(JSON.parse(lastSnapshot))
-    if (past.value.length > 50) past.value.shift()
-    future.value = []
-    lastSnapshot = snapshot
-  }, 350)
+  captureTimeout = setTimeout(() => capture(snapshot), 350)
 })
-
-function restore(doc: ThemeDoc) {
-  pendingRestore = true
-  applyDoc(doc)
-  // realignment happens on the next capture, from currentDoc() itself —
-  // the applied doc may re-serialize differently than it round-trips
-}
-
-function undo() {
-  const doc = past.value.pop()
-  if (!doc) return
-  future.value.push(JSON.parse(lastSnapshot))
-  restore(doc)
-}
-
-function redo() {
-  const doc = future.value.pop()
-  if (!doc) return
-  past.value.push(JSON.parse(lastSnapshot))
-  restore(doc)
-}
 
 defineShortcuts({
   meta_z: undo,
@@ -83,23 +40,8 @@ defineShortcuts({
   }
 })
 
-/** Preview views: the bento grid plus app-scale layouts from the real templates. */
-const view = ref('grid')
-
-const viewTabs = [
-  { label: 'Grid', icon: 'i-lucide-layout-grid', value: 'grid' },
-  { label: 'Dashboard', icon: 'i-lucide-layout-dashboard', value: 'dashboard' },
-  { label: 'Chat', icon: 'i-lucide-message-circle', value: 'chat' },
-  { label: 'SaaS', icon: 'i-lucide-rocket', value: 'saas' },
-  { label: 'Landing', icon: 'i-lucide-panels-top-left', value: 'landing' },
-  { label: 'A11y', icon: 'i-lucide-accessibility', value: 'a11y' }
-]
-
-/** UI-hiding fullscreen: only the preview stays (not browser fullscreen). */
-const fullscreen = useState('theme-studio-fullscreen', () => false)
-
-// The state is app-level (the site header gates on it) — never let it
-// leak past the studio.
+// The fullscreen state is app-level (the site header gates on it) — never
+// let it leak past the studio.
 onUnmounted(() => {
   fullscreen.value = false
 })
@@ -141,15 +83,45 @@ const settingGroups = [
 
           <span class="flex-1" />
 
+          <!-- The header center hosts the view switcher on desktop; below
+               lg it collapses, so the toolbar keeps a select as fallback. -->
           <USelect
             v-model="view"
-            :items="viewTabs"
-            :icon="viewTabs.find(tab => tab.value === view)?.icon"
+            :items="views"
+            :icon="views.find(tab => tab.value === view)?.icon"
             size="sm"
             color="neutral"
             variant="subtle"
-            class="w-36 shrink-0"
+            class="w-36 shrink-0 lg:hidden"
           />
+
+          <UFieldGroup size="sm" class="lg:hidden">
+            <UButton
+              icon="i-lucide-undo-2"
+              color="neutral"
+              variant="subtle"
+              :disabled="!past.length"
+              aria-label="Undo theme change"
+              @click="undo"
+            />
+
+            <UButton
+              icon="i-lucide-redo-2"
+              color="neutral"
+              variant="subtle"
+              :disabled="!future.length"
+              aria-label="Redo theme change"
+              @click="redo"
+            />
+
+            <UButton
+              icon="i-lucide-rotate-ccw"
+              color="neutral"
+              variant="subtle"
+              aria-label="Reset theme"
+              @click="resetTheme"
+            />
+          </UFieldGroup>
 
           <UColorModeButton size="sm" variant="subtle" />
 
@@ -171,41 +143,6 @@ const settingGroups = [
               <ThemeStudioExport />
             </UFieldGroup>
           </div>
-
-          <UFieldGroup size="sm">
-            <UTooltip text="Undo" :kbds="['meta', 'Z']">
-              <UButton
-                icon="i-lucide-undo-2"
-                color="neutral"
-                variant="subtle"
-                :disabled="!past.length"
-                aria-label="Undo theme change"
-                @click="undo"
-              />
-            </UTooltip>
-
-            <UTooltip text="Redo" :kbds="['meta', 'shift', 'Z']">
-              <UButton
-                icon="i-lucide-redo-2"
-                color="neutral"
-                variant="subtle"
-                :disabled="!future.length"
-                aria-label="Redo theme change"
-                @click="redo"
-              />
-            </UTooltip>
-          </UFieldGroup>
-
-          <UTooltip text="Reset theme">
-            <UButton
-              icon="i-lucide-rotate-ccw"
-              color="neutral"
-              variant="subtle"
-              size="sm"
-              aria-label="Reset theme"
-              @click="resetTheme"
-            />
-          </UTooltip>
         </div>
 
         <!-- The floating preview card: the grid scrolls inside it; the

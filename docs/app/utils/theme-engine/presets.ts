@@ -207,21 +207,23 @@ export const presets: ThemePreset[] = [{
       secondary: 'violet',
       neutral: 'custom-neutral'
     },
-    radius: 0.5,
+    radius: 0.375,
     font: { sans: 'Poppins' },
     tokens: {
       light: {
         '--ui-bg': 'var(--ui-color-neutral-50)',
-        '--ui-text-inverted': 'var(--ui-color-neutral-50)'
+        '--ui-text-inverted': 'var(--ui-color-neutral-50)',
+        '--ui-bg-muted': 'var(--ui-color-neutral-100)'
       },
       dark: {
-        '--ui-text-highlighted': 'var(--ui-color-neutral-50)',
         '--ui-bg-inverted': 'var(--ui-color-neutral-50)',
-        '--ui-border-inverted': 'var(--ui-color-neutral-50)'
+        '--ui-text-highlighted': 'var(--ui-color-neutral-50)',
+        '--ui-border-inverted': 'var(--ui-color-neutral-50)',
+        '--ui-primary': 'var(--ui-color-primary-400)'
       }
     },
     // Soft pink-cast shadows (primary 700 light / 950 dark at 15%) over a
-    // top-lit blurred inset.
+    // top-lit blurred inset in its own lighter shade (500 light / 900 dark).
     style: {
       shadow: 'soft',
       shadowOpacity: 15,
@@ -236,6 +238,11 @@ export const presets: ThemePreset[] = [{
       shadowShade: {
         light: 700,
         dark: 950
+      },
+      innerShadowColor: 'primary-shade',
+      innerShadowShade: {
+        light: 500,
+        dark: 900
       }
     }
   }
