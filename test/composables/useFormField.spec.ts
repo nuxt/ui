@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from 'vitest'
+import { describe, it, expect, vi, afterEach } from 'vitest'
 import { defineComponent, h, provide, computed, ref } from 'vue'
 import { useEventBus } from '@vueuse/core'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
@@ -30,10 +30,16 @@ interface Context {
   inputId?: string
 }
 
+const teardowns: Array<() => void> = []
+
+afterEach(() => {
+  teardowns.splice(0).forEach(fn => fn())
+})
+
 async function mountField(props?: FieldProps, opts?: FieldOpts, ctx: Context = {}) {
   const events: FormEvent<any>[] = []
   const bus = useEventBus<FormEvent<any>>(Symbol('test-form'))
-  bus.on(event => events.push(event))
+  const off = bus.on(event => events.push(event))
 
   const inputIdRef = ref<string | undefined>(ctx.inputId)
 
@@ -60,6 +66,7 @@ async function mountField(props?: FieldProps, opts?: FieldOpts, ctx: Context = {
   })
 
   const wrapper = await mountSuspended(Parent)
+  teardowns.push(off, () => wrapper.unmount())
   return { api, events, inputIdRef, wrapper }
 }
 
