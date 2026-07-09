@@ -15,43 +15,11 @@ links:
 
 The ChatPrompt component renders a `<form>` element and extends the [Textarea](/docs/components/textarea) component so you can pass any property such as `icon`, `placeholder`, `autofocus`, etc.
 
-::code-preview
-
-:::u-chat-prompt
+::component-example
 ---
-variant: 'subtle'
+collapse: true
+name: 'chat-prompt-example'
 ---
-
-#default
-::::u-chat-prompt-submit
----
-color: 'neutral'
-class: 'rounded-full'
----
-::::
-
-#footer
-::::u-select
----
-placeholder: 'Select a model'
-variant: 'ghost'
-icon: 'i-simple-icons-anthropic'
-modelValue: 'claude-opus-4.6'
-items:
-  - label: 'Claude Opus 4.6'
-    value: 'claude-opus-4.6'
-    icon: 'i-simple-icons-anthropic'
-  - label: 'Gemini 3 Pro'
-    value: 'gemini-3-pro'
-    icon: 'i-simple-icons-googlegemini'
-  - label: 'GPT-5'
-    value: 'gpt-5'
-    icon: 'i-simple-icons-openai'
----
-::::
-
-:::
-
 ::
 
 ::note
@@ -81,9 +49,24 @@ props:
 Check the **Chat** overview page for installation instructions, server setup and usage examples.
 ::
 
-### As a starting point
+### With an Editor :badge{label="Soon" class="align-text-top"}
 
-You can also use it as a starting point for a chat interface.
+Compose the `#header`, `#body` and `#footer` slots to build a rich prompt: file attachments, an [Editor](/docs/components/editor) with `@` mentions and `/` commands through [EditorMentionMenu](/docs/components/editor-mention-menu), and a mode selector.
+
+::component-example
+---
+name: 'chat-prompt-editor-example'
+class: 'justify-center'
+---
+::
+
+::note
+The `#body` slot replaces the internal textarea and exposes `submit` and `close` handlers, so you can wire the editor's keyboard shortcuts to the form. When a mention menu is open, pressing :kbd{value="enter"} selects the highlighted item instead of submitting.
+::
+
+### As home page
+
+You can also use it in your chat interface home page.
 
 ```vue [pages/index.vue] {2,4,8-15,24,26}
 <script setup lang="ts">
