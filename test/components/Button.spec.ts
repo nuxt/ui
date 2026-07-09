@@ -24,7 +24,7 @@ describe('Button', () => {
     ['with leadingIcon', { props: { leadingIcon: 'i-lucide-arrow-left' } }],
     ['with trailing and icon', { props: { trailing: true, icon: 'i-lucide-arrow-right' } }],
     ['with trailingIcon', { props: { trailingIcon: 'i-lucide-arrow-right' } }],
-    ['with externalIcon', { props: { label: 'Button', to: 'https://nuxt.com', target: '_blank' } }],
+    ['with externalIcon', { props: { label: 'Button', to: 'https://nuxt.com', target: '_blank', externalIcon: true } }],
     ['with externalIcon false', { props: { label: 'Button', to: 'https://nuxt.com', target: '_blank', externalIcon: false } }],
     ['with externalIcon custom', { props: { label: 'Button', to: 'https://nuxt.com', target: '_blank', externalIcon: 'i-lucide-external-link' } }],
     ['with avatar', { props: { avatar: { src: 'https://github.com/benjamincanac.png' } } }],
