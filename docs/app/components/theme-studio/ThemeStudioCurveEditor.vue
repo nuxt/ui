@@ -57,6 +57,23 @@ const path = computed(() => {
   return `M ${toX(0)} ${toY(c.y0)} C ${toX(c.p1x)} ${toY(c.p1y)}, ${toX(c.p2x)} ${toY(c.p2y)}, ${toX(1)} ${toY(c.y1)}`
 })
 
+/**
+ * Fence-post layout: column i is sampled at ramp x = i/(n-1) and drawn
+ * centered on that plot position, so the endpoint colors sit directly
+ * under the endpoint controls. The outer columns extend to the canvas
+ * edges (overhanging off-canvas so the blur has solid color to sample).
+ */
+const fieldRects = computed(() => {
+  if (!props.field?.length) return []
+  const n = props.field.length
+  const base = (W - 2 * PAD) / (n - 1)
+  return props.field.map((_, index) => {
+    const start = index === 0 ? -8 : PAD + (index - 0.5) * base
+    const end = index === n - 1 ? W + 8 : PAD + (index + 0.5) * base
+    return { x: start, width: end - start + 0.5 }
+  })
+})
+
 const stops = computed(() => SHADES.map((shade, index) => {
   const x = index / (SHADES.length - 1)
   return {
@@ -182,11 +199,11 @@ function onPointerUp(event: PointerEvent) {
 
       <g opacity="0.75" :filter="`url(#${gradientId}-smooth)`">
         <rect
-          v-for="(column, columnIndex) in field"
+          v-for="(rect, columnIndex) in fieldRects"
           :key="`column-${columnIndex}`"
-          :x="columnIndex === 0 ? -8 : PAD + (columnIndex / field.length) * (W - 2 * PAD)"
+          :x="rect.x"
           :y="0"
-          :width="(W - 2 * PAD) / field.length + 0.5 + (columnIndex === 0 || columnIndex === field.length - 1 ? PAD + 8 : 0)"
+          :width="rect.width"
           :height="H"
           :fill="`url(#${gradientId}-${columnIndex})`"
         />

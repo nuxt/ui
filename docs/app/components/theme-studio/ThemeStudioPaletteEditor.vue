@@ -62,8 +62,11 @@ const field = computed(() => {
   const channel = tab.value
   const { min, max } = windows[channel]
 
+  // Fence-post: column i is sampled AT ramp position i/(n-1) — the editor
+  // draws each column centered on that plot x, endpoints under the
+  // endpoint controls.
   return Array.from({ length: FIELD_COLUMNS }, (_, columnIndex) => {
-    const x = (columnIndex + 0.5) / FIELD_COLUMNS
+    const x = columnIndex / (FIELD_COLUMNS - 1)
     const base = {
       l: sampleCurve(x, params.lightness),
       c: Math.max(0, sampleCurve(x, params.chroma)),
