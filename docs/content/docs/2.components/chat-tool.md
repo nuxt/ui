@@ -246,7 +246,7 @@ slots:
 ---
 ::
 
-### Actions
+### Actions :badge{label="Soon" class="align-text-top"}
 
 Use the `actions` prop to display a list of [Button](/docs/components/button) below the trigger, useful for tools that require a user confirmation before running.
 
@@ -283,7 +283,7 @@ slots:
 Check the **Chat** overview page for installation instructions, server setup and usage examples.
 ::
 
-### With approval flow
+### With approval flow :badge{label="Soon" class="align-text-top"}
 
 Use the `actions` prop to build a tool approval flow with the [AI SDK](https://ai-sdk.dev/docs/agents/tool-approvals). When a tool part is in the `approval-requested` state, display the approve and deny actions and respond with `addToolApprovalResponse`.
 
