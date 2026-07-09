@@ -29,6 +29,7 @@ exports[`FileUpload > renders with actions slot correctly 1`] = `
       <div data-slot="fileWrapper" class="flex-col min-w-0 hidden"><span data-slot="fileName" class="text-default truncate">file.txt</span><span data-slot="fileSize" class="text-muted truncate">0B</span></div><button type="button" data-slot="fileTrailingButton" aria-label="Remove file.txt" class="font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1 text-inverted bg-inverted hover:bg-inverted/90 active:bg-inverted/90 disabled:bg-inverted aria-disabled:bg-inverted outline-inverted/25 focus-visible:outline-3 absolute -top-1.5 -end-1.5 p-0 rounded-full border-2 border-bg">
         <!--v-if-->
         <!--v-if-->
+        <!--v-if-->
         <!--v-if--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="trailingIcon" class="shrink-0 size-4"></svg>
       </button>
     </div>
@@ -109,6 +110,7 @@ exports[`FileUpload > renders with description slot correctly 1`] = `
       <div data-slot="fileWrapper" class="flex-col min-w-0 hidden"><span data-slot="fileName" class="text-default truncate">file.txt</span><span data-slot="fileSize" class="text-muted truncate">0B</span></div><button type="button" data-slot="fileTrailingButton" aria-label="Remove file.txt" class="font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1 text-inverted bg-inverted hover:bg-inverted/90 active:bg-inverted/90 disabled:bg-inverted aria-disabled:bg-inverted outline-inverted/25 focus-visible:outline-3 absolute -top-1.5 -end-1.5 p-0 rounded-full border-2 border-bg">
         <!--v-if-->
         <!--v-if-->
+        <!--v-if-->
         <!--v-if--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="trailingIcon" class="shrink-0 size-4"></svg>
       </button>
     </div>
@@ -185,6 +187,7 @@ exports[`FileUpload > renders with file-leading slot correctly 1`] = `
     <div data-slot="file" class="text-xs gap-1.5 absolute inset-0 p-0">File leading slot<div data-slot="fileWrapper" class="flex-col min-w-0 hidden"><span data-slot="fileName" class="text-default truncate">file.txt</span><span data-slot="fileSize" class="text-muted truncate">0B</span></div><button type="button" data-slot="fileTrailingButton" aria-label="Remove file.txt" class="font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1 text-inverted bg-inverted hover:bg-inverted/90 active:bg-inverted/90 disabled:bg-inverted aria-disabled:bg-inverted outline-inverted/25 focus-visible:outline-3 absolute -top-1.5 -end-1.5 p-0 rounded-full border-2 border-bg">
         <!--v-if-->
         <!--v-if-->
+        <!--v-if-->
         <!--v-if--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="trailingIcon" class="shrink-0 size-4"></svg>
       </button></div>
   </div><input aria-hidden="true" data-hidden="" tabindex="-1" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;" type="file" accept="*">
@@ -204,6 +207,7 @@ exports[`FileUpload > renders with file-name slot correctly 1`] = `
   <div data-slot="files" class="">
     <div data-slot="file" class="text-xs gap-1.5 absolute inset-0 p-0"><span data-slot="fileLeadingAvatar" class="inline-flex items-center justify-center select-none align-middle bg-elevated text-base shrink-0 size-full rounded-lg"><img src="blob:mock-url-file.txt" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span>
       <div data-slot="fileWrapper" class="flex-col min-w-0 hidden"><span data-slot="fileName" class="text-default truncate">File name slot</span><span data-slot="fileSize" class="text-muted truncate">0B</span></div><button type="button" data-slot="fileTrailingButton" aria-label="Remove file.txt" class="font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1 text-inverted bg-inverted hover:bg-inverted/90 active:bg-inverted/90 disabled:bg-inverted aria-disabled:bg-inverted outline-inverted/25 focus-visible:outline-3 absolute -top-1.5 -end-1.5 p-0 rounded-full border-2 border-bg">
+        <!--v-if-->
         <!--v-if-->
         <!--v-if-->
         <!--v-if--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="trailingIcon" class="shrink-0 size-4"></svg>
@@ -226,6 +230,7 @@ exports[`FileUpload > renders with file-size slot correctly 1`] = `
   <div data-slot="files" class="">
     <div data-slot="file" class="text-xs gap-1.5 absolute inset-0 p-0"><span data-slot="fileLeadingAvatar" class="inline-flex items-center justify-center select-none align-middle bg-elevated text-base shrink-0 size-full rounded-lg"><img src="blob:mock-url-file.txt" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span>
       <div data-slot="fileWrapper" class="flex-col min-w-0 hidden"><span data-slot="fileName" class="text-default truncate">file.txt</span><span data-slot="fileSize" class="text-muted truncate">File size slot</span></div><button type="button" data-slot="fileTrailingButton" aria-label="Remove file.txt" class="font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1 text-inverted bg-inverted hover:bg-inverted/90 active:bg-inverted/90 disabled:bg-inverted aria-disabled:bg-inverted outline-inverted/25 focus-visible:outline-3 absolute -top-1.5 -end-1.5 p-0 rounded-full border-2 border-bg">
+        <!--v-if-->
         <!--v-if-->
         <!--v-if-->
         <!--v-if--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="trailingIcon" class="shrink-0 size-4"></svg>
@@ -268,6 +273,7 @@ exports[`FileUpload > renders with fileDelete correctly 1`] = `
       <div data-slot="fileWrapper" class="flex-col min-w-0 hidden"><span data-slot="fileName" class="text-default truncate">file.txt</span><span data-slot="fileSize" class="text-muted truncate">0B</span></div><button type="button" data-slot="fileTrailingButton" aria-label="Remove file.txt" class="font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3 absolute -top-1.5 -end-1.5 p-0 rounded-full border-2 border-bg">
         <!--v-if-->
         <!--v-if-->
+        <!--v-if-->
         <!--v-if--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="trailingIcon" class="shrink-0 size-4"></svg>
       </button>
     </div>
@@ -290,6 +296,7 @@ exports[`FileUpload > renders with fileDeleteIcon correctly 1`] = `
       <div data-slot="fileWrapper" class="flex-col min-w-0 hidden"><span data-slot="fileName" class="text-default truncate">file.txt</span><span data-slot="fileSize" class="text-muted truncate">0B</span></div><button type="button" data-slot="fileTrailingButton" aria-label="Remove file.txt" class="font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1 text-inverted bg-inverted hover:bg-inverted/90 active:bg-inverted/90 disabled:bg-inverted aria-disabled:bg-inverted outline-inverted/25 focus-visible:outline-3 absolute -top-1.5 -end-1.5 p-0 rounded-full border-2 border-bg">
         <!--v-if-->
         <!--v-if-->
+        <!--v-if-->
         <!--v-if--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="trailingIcon" class="shrink-0 size-4"></svg>
       </button>
     </div>
@@ -310,6 +317,7 @@ exports[`FileUpload > renders with fileIcon correctly 1`] = `
   <div data-slot="files" class="">
     <div data-slot="file" class="text-xs gap-1.5 absolute inset-0 p-0"><span data-slot="fileLeadingAvatar" class="inline-flex items-center justify-center select-none align-middle bg-elevated text-base shrink-0 size-full rounded-lg"><img src="blob:mock-url-file.txt" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span>
       <div data-slot="fileWrapper" class="flex-col min-w-0 hidden"><span data-slot="fileName" class="text-default truncate">file.txt</span><span data-slot="fileSize" class="text-muted truncate">0B</span></div><button type="button" data-slot="fileTrailingButton" aria-label="Remove file.txt" class="font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1 text-inverted bg-inverted hover:bg-inverted/90 active:bg-inverted/90 disabled:bg-inverted aria-disabled:bg-inverted outline-inverted/25 focus-visible:outline-3 absolute -top-1.5 -end-1.5 p-0 rounded-full border-2 border-bg">
+        <!--v-if-->
         <!--v-if-->
         <!--v-if-->
         <!--v-if--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="trailingIcon" class="shrink-0 size-4"></svg>
@@ -348,6 +356,7 @@ exports[`FileUpload > renders with files-bottom slot correctly 1`] = `
       <div data-slot="fileWrapper" class="flex-col min-w-0 hidden"><span data-slot="fileName" class="text-default truncate">file.txt</span><span data-slot="fileSize" class="text-muted truncate">0B</span></div><button type="button" data-slot="fileTrailingButton" aria-label="Remove file.txt" class="font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1 text-inverted bg-inverted hover:bg-inverted/90 active:bg-inverted/90 disabled:bg-inverted aria-disabled:bg-inverted outline-inverted/25 focus-visible:outline-3 absolute -top-1.5 -end-1.5 p-0 rounded-full border-2 border-bg">
         <!--v-if-->
         <!--v-if-->
+        <!--v-if-->
         <!--v-if--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="trailingIcon" class="shrink-0 size-4"></svg>
       </button>
     </div>
@@ -367,6 +376,7 @@ exports[`FileUpload > renders with files-top slot correctly 1`] = `
   </div>Files top slot<div data-slot="files" class="">
     <div data-slot="file" class="text-xs gap-1.5 absolute inset-0 p-0"><span data-slot="fileLeadingAvatar" class="inline-flex items-center justify-center select-none align-middle bg-elevated text-base shrink-0 size-full rounded-lg"><img src="blob:mock-url-file.txt" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span>
       <div data-slot="fileWrapper" class="flex-col min-w-0 hidden"><span data-slot="fileName" class="text-default truncate">file.txt</span><span data-slot="fileSize" class="text-muted truncate">0B</span></div><button type="button" data-slot="fileTrailingButton" aria-label="Remove file.txt" class="font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1 text-inverted bg-inverted hover:bg-inverted/90 active:bg-inverted/90 disabled:bg-inverted aria-disabled:bg-inverted outline-inverted/25 focus-visible:outline-3 absolute -top-1.5 -end-1.5 p-0 rounded-full border-2 border-bg">
+        <!--v-if-->
         <!--v-if-->
         <!--v-if-->
         <!--v-if--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="trailingIcon" class="shrink-0 size-4"></svg>
@@ -461,6 +471,7 @@ exports[`FileUpload > renders with label slot correctly 1`] = `
       <div data-slot="fileWrapper" class="flex-col min-w-0 hidden"><span data-slot="fileName" class="text-default truncate">file.txt</span><span data-slot="fileSize" class="text-muted truncate">0B</span></div><button type="button" data-slot="fileTrailingButton" aria-label="Remove file.txt" class="font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1 text-inverted bg-inverted hover:bg-inverted/90 active:bg-inverted/90 disabled:bg-inverted aria-disabled:bg-inverted outline-inverted/25 focus-visible:outline-3 absolute -top-1.5 -end-1.5 p-0 rounded-full border-2 border-bg">
         <!--v-if-->
         <!--v-if-->
+        <!--v-if-->
         <!--v-if--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="trailingIcon" class="shrink-0 size-4"></svg>
       </button>
     </div>
@@ -483,6 +494,7 @@ exports[`FileUpload > renders with layout grid correctly 1`] = `
       <div data-slot="fileWrapper" class="flex-col min-w-0 hidden"><span data-slot="fileName" class="text-default truncate">file.txt</span><span data-slot="fileSize" class="text-muted truncate">0B</span></div><button type="button" data-slot="fileTrailingButton" aria-label="Remove file.txt" class="font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1 text-inverted bg-inverted hover:bg-inverted/90 active:bg-inverted/90 disabled:bg-inverted aria-disabled:bg-inverted outline-inverted/25 focus-visible:outline-3 absolute -top-1.5 -end-1.5 p-0 rounded-full border-2 border-bg">
         <!--v-if-->
         <!--v-if-->
+        <!--v-if-->
         <!--v-if--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="trailingIcon" class="shrink-0 size-4"></svg>
       </button>
     </div>
@@ -496,6 +508,7 @@ exports[`FileUpload > renders with layout grid multiple correctly 1`] = `
     <div data-slot="files" class="grid grid-cols-2 md:grid-cols-3 gap-4 w-full">
       <div data-slot="file" class="relative text-xs gap-1.5 p-0 aspect-square"><span data-slot="fileLeadingAvatar" class="inline-flex items-center justify-center select-none align-middle bg-elevated text-base shrink-0 size-full rounded-lg"><img src="blob:mock-url-file.txt" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span>
         <div data-slot="fileWrapper" class="flex-col min-w-0 hidden"><span data-slot="fileName" class="text-default truncate">file.txt</span><span data-slot="fileSize" class="text-muted truncate">0B</span></div><button type="button" data-slot="fileTrailingButton" aria-label="Remove file.txt" class="font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1 text-inverted bg-inverted hover:bg-inverted/90 active:bg-inverted/90 disabled:bg-inverted aria-disabled:bg-inverted outline-inverted/25 focus-visible:outline-3 absolute -top-1.5 -end-1.5 p-0 rounded-full border-2 border-bg">
+          <!--v-if-->
           <!--v-if-->
           <!--v-if-->
           <!--v-if--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="trailingIcon" class="shrink-0 size-4"></svg>
@@ -523,6 +536,7 @@ exports[`FileUpload > renders with layout list correctly 1`] = `
       <div data-slot="fileWrapper" class="flex flex-col min-w-0"><span data-slot="fileName" class="text-default truncate">file.txt</span><span data-slot="fileSize" class="text-muted truncate">0B</span></div><button type="button" data-slot="fileTrailingButton" aria-label="Remove file.txt" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted outline-inverted/25 focus-visible:outline-3 p-1.5 ms-auto -me-1.5">
         <!--v-if-->
         <!--v-if-->
+        <!--v-if-->
         <!--v-if--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="trailingIcon" class="shrink-0 size-5"></svg>
       </button>
     </div>
@@ -543,6 +557,7 @@ exports[`FileUpload > renders with layout list multiple correctly 1`] = `
   <div data-slot="files" class="flex flex-col w-full gap-2">
     <div data-slot="file" class="relative text-xs px-2.5 py-1.5 gap-1.5 min-w-0 flex items-center border border-default rounded-md w-full"><span data-slot="fileLeadingAvatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-8 text-base shrink-0"><img src="blob:mock-url-file.txt" width="32" height="32" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span>
       <div data-slot="fileWrapper" class="flex flex-col min-w-0"><span data-slot="fileName" class="text-default truncate">file.txt</span><span data-slot="fileSize" class="text-muted truncate">0B</span></div><button type="button" data-slot="fileTrailingButton" aria-label="Remove file.txt" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted outline-inverted/25 focus-visible:outline-3 p-1.5 ms-auto -me-1.5">
+        <!--v-if-->
         <!--v-if-->
         <!--v-if-->
         <!--v-if--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="trailingIcon" class="shrink-0 size-5"></svg>
@@ -567,6 +582,7 @@ exports[`FileUpload > renders with leading slot correctly 1`] = `
       <div data-slot="fileWrapper" class="flex-col min-w-0 hidden"><span data-slot="fileName" class="text-default truncate">file.txt</span><span data-slot="fileSize" class="text-muted truncate">0B</span></div><button type="button" data-slot="fileTrailingButton" aria-label="Remove file.txt" class="font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1 text-inverted bg-inverted hover:bg-inverted/90 active:bg-inverted/90 disabled:bg-inverted aria-disabled:bg-inverted outline-inverted/25 focus-visible:outline-3 absolute -top-1.5 -end-1.5 p-0 rounded-full border-2 border-bg">
         <!--v-if-->
         <!--v-if-->
+        <!--v-if-->
         <!--v-if--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="trailingIcon" class="shrink-0 size-4"></svg>
       </button>
     </div>
@@ -589,6 +605,7 @@ exports[`FileUpload > renders with modelValue correctly 1`] = `
       <div data-slot="fileWrapper" class="flex-col min-w-0 hidden"><span data-slot="fileName" class="text-default truncate">file.txt</span><span data-slot="fileSize" class="text-muted truncate">0B</span></div><button type="button" data-slot="fileTrailingButton" aria-label="Remove file.txt" class="font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1 text-inverted bg-inverted hover:bg-inverted/90 active:bg-inverted/90 disabled:bg-inverted aria-disabled:bg-inverted outline-inverted/25 focus-visible:outline-3 absolute -top-1.5 -end-1.5 p-0 rounded-full border-2 border-bg">
         <!--v-if-->
         <!--v-if-->
+        <!--v-if-->
         <!--v-if--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="trailingIcon" class="shrink-0 size-4"></svg>
       </button>
     </div>
@@ -602,6 +619,7 @@ exports[`FileUpload > renders with multiple correctly 1`] = `
     <div data-slot="files" class="grid grid-cols-2 md:grid-cols-3 gap-4 w-full">
       <div data-slot="file" class="relative text-xs gap-1.5 p-0 aspect-square"><span data-slot="fileLeadingAvatar" class="inline-flex items-center justify-center select-none align-middle bg-elevated text-base shrink-0 size-full rounded-lg"><img src="blob:mock-url-file.txt" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span>
         <div data-slot="fileWrapper" class="flex-col min-w-0 hidden"><span data-slot="fileName" class="text-default truncate">file.txt</span><span data-slot="fileSize" class="text-muted truncate">0B</span></div><button type="button" data-slot="fileTrailingButton" aria-label="Remove file.txt" class="font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1 text-inverted bg-inverted hover:bg-inverted/90 active:bg-inverted/90 disabled:bg-inverted aria-disabled:bg-inverted outline-inverted/25 focus-visible:outline-3 absolute -top-1.5 -end-1.5 p-0 rounded-full border-2 border-bg">
+          <!--v-if-->
           <!--v-if-->
           <!--v-if-->
           <!--v-if--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="trailingIcon" class="shrink-0 size-4"></svg>
@@ -650,6 +668,7 @@ exports[`FileUpload > renders with position inside correctly 1`] = `
         <div data-slot="fileWrapper" class="flex-col min-w-0 hidden"><span data-slot="fileName" class="text-default truncate">file.txt</span><span data-slot="fileSize" class="text-muted truncate">0B</span></div><button type="button" data-slot="fileTrailingButton" aria-label="Remove file.txt" class="font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1 text-inverted bg-inverted hover:bg-inverted/90 active:bg-inverted/90 disabled:bg-inverted aria-disabled:bg-inverted outline-inverted/25 focus-visible:outline-3 absolute -top-1.5 -end-1.5 p-0 rounded-full border-2 border-bg">
           <!--v-if-->
           <!--v-if-->
+          <!--v-if-->
           <!--v-if--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="trailingIcon" class="shrink-0 size-4"></svg>
         </button>
       </div>
@@ -666,6 +685,7 @@ exports[`FileUpload > renders with position inside multiple correctly 1`] = `
     <div data-slot="files" class="grid grid-cols-2 md:grid-cols-3 gap-4 w-full">
       <div data-slot="file" class="relative text-xs gap-1.5 p-0 aspect-square"><span data-slot="fileLeadingAvatar" class="inline-flex items-center justify-center select-none align-middle bg-elevated text-base shrink-0 size-full rounded-lg"><img src="blob:mock-url-file.txt" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span>
         <div data-slot="fileWrapper" class="flex-col min-w-0 hidden"><span data-slot="fileName" class="text-default truncate">file.txt</span><span data-slot="fileSize" class="text-muted truncate">0B</span></div><button type="button" data-slot="fileTrailingButton" aria-label="Remove file.txt" class="font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1 text-inverted bg-inverted hover:bg-inverted/90 active:bg-inverted/90 disabled:bg-inverted aria-disabled:bg-inverted outline-inverted/25 focus-visible:outline-3 absolute -top-1.5 -end-1.5 p-0 rounded-full border-2 border-bg">
+          <!--v-if-->
           <!--v-if-->
           <!--v-if-->
           <!--v-if--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="trailingIcon" class="shrink-0 size-4"></svg>
@@ -693,6 +713,7 @@ exports[`FileUpload > renders with position outside correctly 1`] = `
       <div data-slot="fileWrapper" class="flex-col min-w-0 hidden"><span data-slot="fileName" class="text-default truncate">file.txt</span><span data-slot="fileSize" class="text-muted truncate">0B</span></div><button type="button" data-slot="fileTrailingButton" aria-label="Remove file.txt" class="font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1 text-inverted bg-inverted hover:bg-inverted/90 active:bg-inverted/90 disabled:bg-inverted aria-disabled:bg-inverted outline-inverted/25 focus-visible:outline-3 absolute -top-1.5 -end-1.5 p-0 rounded-full border-2 border-bg">
         <!--v-if-->
         <!--v-if-->
+        <!--v-if-->
         <!--v-if--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="trailingIcon" class="shrink-0 size-4"></svg>
       </button>
     </div>
@@ -706,6 +727,7 @@ exports[`FileUpload > renders with position outside multiple correctly 1`] = `
     <div data-slot="files" class="grid grid-cols-2 md:grid-cols-3 gap-4 w-full">
       <div data-slot="file" class="relative text-xs gap-1.5 p-0 aspect-square"><span data-slot="fileLeadingAvatar" class="inline-flex items-center justify-center select-none align-middle bg-elevated text-base shrink-0 size-full rounded-lg"><img src="blob:mock-url-file.txt" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span>
         <div data-slot="fileWrapper" class="flex-col min-w-0 hidden"><span data-slot="fileName" class="text-default truncate">file.txt</span><span data-slot="fileSize" class="text-muted truncate">0B</span></div><button type="button" data-slot="fileTrailingButton" aria-label="Remove file.txt" class="font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1 text-inverted bg-inverted hover:bg-inverted/90 active:bg-inverted/90 disabled:bg-inverted aria-disabled:bg-inverted outline-inverted/25 focus-visible:outline-3 absolute -top-1.5 -end-1.5 p-0 rounded-full border-2 border-bg">
+          <!--v-if-->
           <!--v-if-->
           <!--v-if-->
           <!--v-if--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="trailingIcon" class="shrink-0 size-4"></svg>
@@ -761,6 +783,7 @@ exports[`FileUpload > renders with size lg correctly 1`] = `
       <div data-slot="fileWrapper" class="flex-col min-w-0 hidden"><span data-slot="fileName" class="text-default truncate">file.txt</span><span data-slot="fileSize" class="text-muted truncate text-xs">0B</span></div><button type="button" data-slot="fileTrailingButton" aria-label="Remove file.txt" class="font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1 text-inverted bg-inverted hover:bg-inverted/90 active:bg-inverted/90 disabled:bg-inverted aria-disabled:bg-inverted outline-inverted/25 focus-visible:outline-3 absolute -top-1.5 -end-1.5 p-0 rounded-full border-2 border-bg">
         <!--v-if-->
         <!--v-if-->
+        <!--v-if-->
         <!--v-if--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="trailingIcon" class="shrink-0 size-4"></svg>
       </button>
     </div>
@@ -778,6 +801,7 @@ exports[`FileUpload > renders with size lg variant button correctly 1`] = `
   <div data-slot="files" class="">
     <div data-slot="file" class="text-sm gap-2 absolute inset-0 p-0"><span data-slot="fileLeadingAvatar" class="inline-flex items-center justify-center select-none align-middle bg-elevated text-lg shrink-0 size-full rounded-lg"><img src="blob:mock-url-file.txt" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span>
       <div data-slot="fileWrapper" class="flex-col min-w-0 hidden"><span data-slot="fileName" class="text-default truncate">file.txt</span><span data-slot="fileSize" class="text-muted truncate text-xs">0B</span></div><button type="button" data-slot="fileTrailingButton" aria-label="Remove file.txt" class="font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1 text-inverted bg-inverted hover:bg-inverted/90 active:bg-inverted/90 disabled:bg-inverted aria-disabled:bg-inverted outline-inverted/25 focus-visible:outline-3 absolute -top-1.5 -end-1.5 p-0 rounded-full border-2 border-bg">
+        <!--v-if-->
         <!--v-if-->
         <!--v-if-->
         <!--v-if--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="trailingIcon" class="shrink-0 size-4"></svg>
@@ -802,6 +826,7 @@ exports[`FileUpload > renders with size md correctly 1`] = `
       <div data-slot="fileWrapper" class="flex-col min-w-0 hidden"><span data-slot="fileName" class="text-default truncate">file.txt</span><span data-slot="fileSize" class="text-muted truncate">0B</span></div><button type="button" data-slot="fileTrailingButton" aria-label="Remove file.txt" class="font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1 text-inverted bg-inverted hover:bg-inverted/90 active:bg-inverted/90 disabled:bg-inverted aria-disabled:bg-inverted outline-inverted/25 focus-visible:outline-3 absolute -top-1.5 -end-1.5 p-0 rounded-full border-2 border-bg">
         <!--v-if-->
         <!--v-if-->
+        <!--v-if-->
         <!--v-if--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="trailingIcon" class="shrink-0 size-4"></svg>
       </button>
     </div>
@@ -819,6 +844,7 @@ exports[`FileUpload > renders with size md variant button correctly 1`] = `
   <div data-slot="files" class="">
     <div data-slot="file" class="text-xs gap-1.5 absolute inset-0 p-0"><span data-slot="fileLeadingAvatar" class="inline-flex items-center justify-center select-none align-middle bg-elevated text-base shrink-0 size-full rounded-lg"><img src="blob:mock-url-file.txt" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span>
       <div data-slot="fileWrapper" class="flex-col min-w-0 hidden"><span data-slot="fileName" class="text-default truncate">file.txt</span><span data-slot="fileSize" class="text-muted truncate">0B</span></div><button type="button" data-slot="fileTrailingButton" aria-label="Remove file.txt" class="font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1 text-inverted bg-inverted hover:bg-inverted/90 active:bg-inverted/90 disabled:bg-inverted aria-disabled:bg-inverted outline-inverted/25 focus-visible:outline-3 absolute -top-1.5 -end-1.5 p-0 rounded-full border-2 border-bg">
+        <!--v-if-->
         <!--v-if-->
         <!--v-if-->
         <!--v-if--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="trailingIcon" class="shrink-0 size-4"></svg>
@@ -843,6 +869,7 @@ exports[`FileUpload > renders with size sm correctly 1`] = `
       <div data-slot="fileWrapper" class="min-w-0 flex-row gap-1 hidden"><span data-slot="fileName" class="text-default truncate">file.txt</span><span data-slot="fileSize" class="text-muted truncate">0B</span></div><button type="button" data-slot="fileTrailingButton" aria-label="Remove file.txt" class="font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1 text-inverted bg-inverted hover:bg-inverted/90 active:bg-inverted/90 disabled:bg-inverted aria-disabled:bg-inverted outline-inverted/25 focus-visible:outline-3 absolute -top-1.5 -end-1.5 p-0 rounded-full border-2 border-bg">
         <!--v-if-->
         <!--v-if-->
+        <!--v-if-->
         <!--v-if--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="trailingIcon" class="shrink-0 size-4"></svg>
       </button>
     </div>
@@ -860,6 +887,7 @@ exports[`FileUpload > renders with size sm variant button correctly 1`] = `
   <div data-slot="files" class="">
     <div data-slot="file" class="text-xs gap-1.5 absolute inset-0 p-0"><span data-slot="fileLeadingAvatar" class="inline-flex items-center justify-center select-none align-middle bg-elevated text-sm shrink-0 size-full rounded-lg"><img src="blob:mock-url-file.txt" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span>
       <div data-slot="fileWrapper" class="min-w-0 flex-row gap-1 hidden"><span data-slot="fileName" class="text-default truncate">file.txt</span><span data-slot="fileSize" class="text-muted truncate">0B</span></div><button type="button" data-slot="fileTrailingButton" aria-label="Remove file.txt" class="font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1 text-inverted bg-inverted hover:bg-inverted/90 active:bg-inverted/90 disabled:bg-inverted aria-disabled:bg-inverted outline-inverted/25 focus-visible:outline-3 absolute -top-1.5 -end-1.5 p-0 rounded-full border-2 border-bg">
+        <!--v-if-->
         <!--v-if-->
         <!--v-if-->
         <!--v-if--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="trailingIcon" class="shrink-0 size-4"></svg>
@@ -884,6 +912,7 @@ exports[`FileUpload > renders with size xl correctly 1`] = `
       <div data-slot="fileWrapper" class="flex-col min-w-0 hidden"><span data-slot="fileName" class="text-default truncate">file.txt</span><span data-slot="fileSize" class="text-muted truncate">0B</span></div><button type="button" data-slot="fileTrailingButton" aria-label="Remove file.txt" class="font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1 text-inverted bg-inverted hover:bg-inverted/90 active:bg-inverted/90 disabled:bg-inverted aria-disabled:bg-inverted outline-inverted/25 focus-visible:outline-3 absolute -top-1.5 -end-1.5 p-0 rounded-full border-2 border-bg">
         <!--v-if-->
         <!--v-if-->
+        <!--v-if-->
         <!--v-if--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="trailingIcon" class="shrink-0 size-4"></svg>
       </button>
     </div>
@@ -901,6 +930,7 @@ exports[`FileUpload > renders with size xl variant button correctly 1`] = `
   <div data-slot="files" class="">
     <div data-slot="file" class="text-sm gap-2 absolute inset-0 p-0"><span data-slot="fileLeadingAvatar" class="inline-flex items-center justify-center select-none align-middle bg-elevated text-xl shrink-0 size-full rounded-lg"><img src="blob:mock-url-file.txt" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span>
       <div data-slot="fileWrapper" class="flex-col min-w-0 hidden"><span data-slot="fileName" class="text-default truncate">file.txt</span><span data-slot="fileSize" class="text-muted truncate">0B</span></div><button type="button" data-slot="fileTrailingButton" aria-label="Remove file.txt" class="font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1 text-inverted bg-inverted hover:bg-inverted/90 active:bg-inverted/90 disabled:bg-inverted aria-disabled:bg-inverted outline-inverted/25 focus-visible:outline-3 absolute -top-1.5 -end-1.5 p-0 rounded-full border-2 border-bg">
+        <!--v-if-->
         <!--v-if-->
         <!--v-if-->
         <!--v-if--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="trailingIcon" class="shrink-0 size-4"></svg>
@@ -925,6 +955,7 @@ exports[`FileUpload > renders with size xs correctly 1`] = `
       <div data-slot="fileWrapper" class="min-w-0 flex-row gap-1 hidden"><span data-slot="fileName" class="text-default truncate">file.txt</span><span data-slot="fileSize" class="text-muted truncate">0B</span></div><button type="button" data-slot="fileTrailingButton" aria-label="Remove file.txt" class="font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1 text-inverted bg-inverted hover:bg-inverted/90 active:bg-inverted/90 disabled:bg-inverted aria-disabled:bg-inverted outline-inverted/25 focus-visible:outline-3 absolute -top-1.5 -end-1.5 p-0 rounded-full border-2 border-bg">
         <!--v-if-->
         <!--v-if-->
+        <!--v-if-->
         <!--v-if--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="trailingIcon" class="shrink-0 size-4"></svg>
       </button>
     </div>
@@ -942,6 +973,7 @@ exports[`FileUpload > renders with size xs variant button correctly 1`] = `
   <div data-slot="files" class="">
     <div data-slot="file" class="text-xs gap-1 absolute inset-0 p-0"><span data-slot="fileLeadingAvatar" class="inline-flex items-center justify-center select-none align-middle bg-elevated text-xs shrink-0 size-full rounded-lg"><img src="blob:mock-url-file.txt" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span>
       <div data-slot="fileWrapper" class="min-w-0 flex-row gap-1 hidden"><span data-slot="fileName" class="text-default truncate">file.txt</span><span data-slot="fileSize" class="text-muted truncate">0B</span></div><button type="button" data-slot="fileTrailingButton" aria-label="Remove file.txt" class="font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1 text-inverted bg-inverted hover:bg-inverted/90 active:bg-inverted/90 disabled:bg-inverted aria-disabled:bg-inverted outline-inverted/25 focus-visible:outline-3 absolute -top-1.5 -end-1.5 p-0 rounded-full border-2 border-bg">
+        <!--v-if-->
         <!--v-if-->
         <!--v-if-->
         <!--v-if--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="trailingIcon" class="shrink-0 size-4"></svg>
@@ -980,6 +1012,7 @@ exports[`FileUpload > renders with variant area correctly 1`] = `
       <div data-slot="fileWrapper" class="flex-col min-w-0 hidden"><span data-slot="fileName" class="text-default truncate">file.txt</span><span data-slot="fileSize" class="text-muted truncate">0B</span></div><button type="button" data-slot="fileTrailingButton" aria-label="Remove file.txt" class="font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1 text-inverted bg-inverted hover:bg-inverted/90 active:bg-inverted/90 disabled:bg-inverted aria-disabled:bg-inverted outline-inverted/25 focus-visible:outline-3 absolute -top-1.5 -end-1.5 p-0 rounded-full border-2 border-bg">
         <!--v-if-->
         <!--v-if-->
+        <!--v-if-->
         <!--v-if--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="trailingIcon" class="shrink-0 size-4"></svg>
       </button>
     </div>
@@ -997,6 +1030,7 @@ exports[`FileUpload > renders with variant button correctly 1`] = `
   <div data-slot="files" class="">
     <div data-slot="file" class="text-xs gap-1.5 absolute inset-0 p-0"><span data-slot="fileLeadingAvatar" class="inline-flex items-center justify-center select-none align-middle bg-elevated text-base shrink-0 size-full rounded-lg"><img src="blob:mock-url-file.txt" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span>
       <div data-slot="fileWrapper" class="flex-col min-w-0 hidden"><span data-slot="fileName" class="text-default truncate">file.txt</span><span data-slot="fileSize" class="text-muted truncate">0B</span></div><button type="button" data-slot="fileTrailingButton" aria-label="Remove file.txt" class="font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1 text-inverted bg-inverted hover:bg-inverted/90 active:bg-inverted/90 disabled:bg-inverted aria-disabled:bg-inverted outline-inverted/25 focus-visible:outline-3 absolute -top-1.5 -end-1.5 p-0 rounded-full border-2 border-bg">
+        <!--v-if-->
         <!--v-if-->
         <!--v-if-->
         <!--v-if--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="trailingIcon" class="shrink-0 size-4"></svg>

@@ -364,6 +364,7 @@ exports[`InputMenu > renders with clear and clearIcon correctly 1`] = `
   <!--v-if--><button type="button" tabindex="-1" aria-label="Show popup" aria-haspopup="listbox" aria-expanded="true" aria-controls="" data-state="open" aria-disabled="false" data-slot="trailing" class="group absolute inset-y-0 end-0 flex items-center disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none pe-2.5"><span data-slot="trailingClear" tabindex="-1" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted outline-inverted/25 focus-visible:outline-3 p-0"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
     <!--v-if-->
     <!--v-if-->
+    <!--v-if-->
     <!--v-if--></span>
   </button>
   <!--teleport start-->
@@ -402,6 +403,7 @@ exports[`InputMenu > renders with clear and clearIcon correctly 1`] = `
 exports[`InputMenu > renders with clear correctly 1`] = `
 "<div dir="ltr" data-slot="root" class="relative inline-flex items-center" style="pointer-events: auto;"><input aria-disabled="false" type="text" aria-expanded="true" aria-controls="" aria-autocomplete="list" role="combobox" autocomplete="off" data-slot="base" class="rounded-md transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default ring ring-inset ring-accented w-full border-0 placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary pe-9 md:text-sm" value="Backlog" aria-activedescendant="reka-combobox-item-v-0-0-3">
   <!--v-if--><button type="button" tabindex="-1" aria-label="Show popup" aria-haspopup="listbox" aria-expanded="true" aria-controls="" data-state="open" aria-disabled="false" data-slot="trailing" class="group absolute inset-y-0 end-0 flex items-center disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none pe-2.5"><span data-slot="trailingClear" tabindex="-1" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted outline-inverted/25 focus-visible:outline-3 p-0"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+    <!--v-if-->
     <!--v-if-->
     <!--v-if-->
     <!--v-if--></span>

@@ -11,6 +11,7 @@ exports[`Header > renders with as correctly 1`] = `
         <!--v-if-->
         <!--v-if-->
         <!--v-if-->
+        <!--v-if-->
       </button></div>
   </div>
 </section>
@@ -27,6 +28,7 @@ exports[`Header > renders with body slot correctly 1`] = `
     </div>
     <div data-slot="center" class="hidden lg:flex"></div>
     <div data-slot="right" class="flex items-center justify-end lg:flex-1 gap-1.5"><button type="button" data-slot="toggle" aria-label="Open menu" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 lg:hidden -me-1.5"><span class="iconify i-lucide:menu shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+        <!--v-if-->
         <!--v-if-->
         <!--v-if-->
         <!--v-if-->
@@ -49,6 +51,7 @@ exports[`Header > renders with bottom slot correctly 1`] = `
         <!--v-if-->
         <!--v-if-->
         <!--v-if-->
+        <!--v-if-->
       </button></div>
   </div>Bottom slot
 </header>
@@ -65,6 +68,7 @@ exports[`Header > renders with class correctly 1`] = `
     </div>
     <div data-slot="center" class="hidden lg:flex"></div>
     <div data-slot="right" class="flex items-center justify-end lg:flex-1 gap-1.5"><button type="button" data-slot="toggle" aria-label="Open menu" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 lg:hidden -me-1.5"><span class="iconify i-lucide:menu shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+        <!--v-if-->
         <!--v-if-->
         <!--v-if-->
         <!--v-if-->
@@ -87,6 +91,7 @@ exports[`Header > renders with content slot correctly 1`] = `
         <!--v-if-->
         <!--v-if-->
         <!--v-if-->
+        <!--v-if-->
       </button></div>
   </div>
 </header>
@@ -103,6 +108,7 @@ exports[`Header > renders with default slot correctly 1`] = `
     </div>
     <div data-slot="center" class="hidden lg:flex">Default slot</div>
     <div data-slot="right" class="flex items-center justify-end lg:flex-1 gap-1.5"><button type="button" data-slot="toggle" aria-label="Open menu" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 lg:hidden -me-1.5"><span class="iconify i-lucide:menu shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+        <!--v-if-->
         <!--v-if-->
         <!--v-if-->
         <!--v-if-->
@@ -125,6 +131,7 @@ exports[`Header > renders with left slot correctly 1`] = `
         <!--v-if-->
         <!--v-if-->
         <!--v-if-->
+        <!--v-if-->
       </button></div>
   </div>
 </header>
@@ -141,6 +148,7 @@ exports[`Header > renders with mode drawer correctly 1`] = `
     </div>
     <div data-slot="center" class="hidden lg:flex"></div>
     <div data-slot="right" class="flex items-center justify-end lg:flex-1 gap-1.5"><button type="button" data-slot="toggle" aria-label="Close menu" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 lg:hidden -me-1.5"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+        <!--v-if-->
         <!--v-if-->
         <!--v-if-->
         <!--v-if-->
@@ -175,6 +183,7 @@ exports[`Header > renders with mode modal correctly 1`] = `
         <!--v-if-->
         <!--v-if-->
         <!--v-if-->
+        <!--v-if-->
       </button></div>
   </div>
 </header>
@@ -191,6 +200,7 @@ exports[`Header > renders with mode modal correctly 1`] = `
       <!--v-if--><a href="/" aria-label="Nuxt UI" data-slot="title" class="outline-primary/25 focus-visible:outline-3 rounded-md hover:text-default transition-colors shrink-0 font-bold text-xl text-highlighted flex items-end gap-1.5">Nuxt UI</a>
     </div>
     <div data-slot="right" class="flex items-center justify-end lg:flex-1 gap-1.5"><button type="button" data-slot="toggle" aria-label="Close menu" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 lg:hidden -me-1.5"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+        <!--v-if-->
         <!--v-if-->
         <!--v-if-->
         <!--v-if-->
@@ -216,6 +226,7 @@ exports[`Header > renders with mode slideover correctly 1`] = `
         <!--v-if-->
         <!--v-if-->
         <!--v-if-->
+        <!--v-if-->
       </button></div>
   </div>
 </header>
@@ -231,6 +242,7 @@ exports[`Header > renders with mode slideover correctly 1`] = `
       <!--v-if--><a href="/" aria-label="Nuxt UI" data-slot="title" class="outline-primary/25 focus-visible:outline-3 rounded-md hover:text-default transition-colors shrink-0 font-bold text-xl text-highlighted flex items-end gap-1.5">Nuxt UI</a>
     </div>
     <div data-slot="right" class="flex items-center justify-end lg:flex-1 gap-1.5"><button type="button" data-slot="toggle" aria-label="Close menu" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 lg:hidden -me-1.5"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+        <!--v-if-->
         <!--v-if-->
         <!--v-if-->
         <!--v-if-->
@@ -255,6 +267,7 @@ exports[`Header > renders with right slot correctly 1`] = `
         <!--v-if-->
         <!--v-if-->
         <!--v-if-->
+        <!--v-if-->
       </button></div>
   </div>
 </header>
@@ -271,6 +284,7 @@ exports[`Header > renders with title correctly 1`] = `
     </div>
     <div data-slot="center" class="hidden lg:flex"></div>
     <div data-slot="right" class="flex items-center justify-end lg:flex-1 gap-1.5"><button type="button" data-slot="toggle" aria-label="Open menu" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 lg:hidden -me-1.5"><span class="iconify i-lucide:menu shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+        <!--v-if-->
         <!--v-if-->
         <!--v-if-->
         <!--v-if-->
@@ -293,6 +307,7 @@ exports[`Header > renders with title slot correctly 1`] = `
         <!--v-if-->
         <!--v-if-->
         <!--v-if-->
+        <!--v-if-->
       </button></div>
   </div>
 </header>
@@ -312,6 +327,7 @@ exports[`Header > renders with to correctly 1`] = `
         <!--v-if-->
         <!--v-if-->
         <!--v-if-->
+        <!--v-if-->
       </button></div>
   </div>
 </header>
@@ -328,6 +344,7 @@ exports[`Header > renders with toggle correctly 1`] = `
     </div>
     <div data-slot="center" class="hidden lg:flex"></div>
     <div data-slot="right" class="flex items-center justify-end lg:flex-1 gap-1.5"><button type="button" data-slot="toggle" aria-label="Open menu" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3 p-1.5 lg:hidden -me-1.5"><span class="iconify i-lucide:menu shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+        <!--v-if-->
         <!--v-if-->
         <!--v-if-->
         <!--v-if-->
@@ -361,6 +378,7 @@ exports[`Header > renders with toggleSide correctly 1`] = `
         <!--v-if-->
         <!--v-if-->
         <!--v-if-->
+        <!--v-if-->
       </button><a href="/" aria-label="Nuxt UI" data-slot="title" class="outline-primary/25 focus-visible:outline-3 rounded-md hover:text-default transition-colors shrink-0 font-bold text-xl text-highlighted flex items-end gap-1.5">Nuxt UI</a></div>
     <div data-slot="center" class="hidden lg:flex"></div>
     <div data-slot="right" class="flex items-center justify-end lg:flex-1 gap-1.5">
@@ -383,6 +401,7 @@ exports[`Header > renders with top slot correctly 1`] = `
         <!--v-if-->
         <!--v-if-->
         <!--v-if-->
+        <!--v-if-->
       </button></div>
   </div>
 </header>
@@ -399,6 +418,7 @@ exports[`Header > renders with ui correctly 1`] = `
     </div>
     <div data-slot="center" class="hidden lg:flex"></div>
     <div data-slot="right" class="flex items-center justify-end lg:flex-1 gap-1.5"><button type="button" data-slot="toggle" aria-label="Open menu" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 lg:hidden -me-1.5"><span class="iconify i-lucide:menu shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+        <!--v-if-->
         <!--v-if-->
         <!--v-if-->
         <!--v-if-->
