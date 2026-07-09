@@ -45,7 +45,9 @@ export function useToast() {
       const toast = queue.shift()!
       const maxValue = max?.value ?? 5
       if (maxValue <= 0) {
-        toasts.value = []
+        if (toasts.value.length) {
+          toasts.value = []
+        }
         continue
       }
 
