@@ -381,6 +381,7 @@ describe('defineShortcuts', () => {
 
       expect(f).toHaveBeenCalledOnce()
       expect(x).toHaveBeenCalledOnce()
+      expect(f).toHaveBeenCalledBefore(x)
       expect(fh).not.toHaveBeenCalled()
     })
   })
