@@ -6,7 +6,7 @@ const appConfig = useAppConfig()
 
 /** Which settings group this instance renders — one popover per group. */
 defineProps<{
-  group: 'colors' | 'general' | 'style' | 'tokens'
+  group: 'colors' | 'general' | 'style'
 }>()
 
 const {
@@ -185,6 +185,9 @@ onMounted(() => {
 // One curve editor per alias, toggled by the edit icon next to each select.
 const paletteEditors = reactive<Record<string, boolean>>({})
 
+/** The Shades fold in the Colors group — advanced, so closed by default. */
+const shadesOpen = ref(false)
+
 const defaultSizeItems = [
   { label: 'Default', value: 'default' },
   { label: 'XS', value: 'xs' },
@@ -352,6 +355,46 @@ const shadowColor = computed({
             </div>
           </div>
         </ThemeStudioSection>
+
+        <USeparator />
+
+        <!-- Advanced per-token shade remapping — folded away so the common
+             color pickers stay front and center. -->
+        <UCollapsible v-model:open="shadesOpen">
+          <UButton
+            label="Shades"
+            color="neutral"
+            variant="ghost"
+            size="sm"
+            block
+            class="justify-between"
+            :trailing-icon="shadesOpen ? 'i-lucide-chevron-up' : 'i-lucide-chevron-down'"
+          />
+
+          <template #content>
+            <div class="flex flex-col gap-2.5 pt-2.5">
+              <template v-for="(tokenGroup, index) in tokenGroups" :key="tokenGroup.key">
+                <USeparator v-if="index" />
+
+                <ThemeStudioSection :label="tokenGroup.label">
+                  <div class="flex flex-col gap-3">
+                    <div v-for="section in tokenGroup.sections" :key="section.token" class="flex flex-col gap-1.5">
+                      <span class="text-[11px] text-muted select-none">{{ section.label }}</span>
+
+                      <ThemeStudioShadeSlider
+                        v-for="(slider, modeName) in section.sliders"
+                        :key="modeName"
+                        v-model="slider.value"
+                        :mode="modeName"
+                        :chip="rampChip(section.ramp)"
+                      />
+                    </div>
+                  </div>
+                </ThemeStudioSection>
+              </template>
+            </div>
+          </template>
+        </UCollapsible>
       </div>
     </template>
 
@@ -517,30 +560,6 @@ const shadowColor = computed({
             </div>
           </div>
         </ThemeStudioSection>
-      </div>
-    </template>
-
-    <template v-else-if="group === 'tokens'">
-      <div class="flex flex-col gap-2.5">
-        <template v-for="(tokenGroup, index) in tokenGroups" :key="tokenGroup.key">
-          <USeparator v-if="index" />
-
-          <ThemeStudioSection :label="tokenGroup.label">
-            <div class="flex flex-col gap-3">
-              <div v-for="section in tokenGroup.sections" :key="section.token" class="flex flex-col gap-1.5">
-                <span class="text-[11px] text-muted select-none">{{ section.label }}</span>
-
-                <ThemeStudioShadeSlider
-                  v-for="(slider, modeName) in section.sliders"
-                  :key="modeName"
-                  v-model="slider.value"
-                  :mode="modeName"
-                  :chip="rampChip(section.ramp)"
-                />
-              </div>
-            </div>
-          </ThemeStudioSection>
-        </template>
       </div>
     </template>
 

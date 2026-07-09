@@ -48,8 +48,7 @@ onUnmounted(() => {
 const settingGroups = [
   { label: 'Colors', value: 'colors' },
   { label: 'General', value: 'general' },
-  { label: 'Style', value: 'style' },
-  { label: 'Shades', value: 'tokens' }
+  { label: 'Style', value: 'style' }
 ] as const
 </script>
 
