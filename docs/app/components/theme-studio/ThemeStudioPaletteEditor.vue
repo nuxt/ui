@@ -54,7 +54,7 @@ const windows = {
  * other two channels track the live curves — each point shows the color
  * that dragging the curve there would produce, gamut clamp included.
  */
-const FIELD_COLUMNS = 16
+const FIELD_COLUMNS = 24
 const FIELD_ROWS = 12
 const CHANNEL_KEYS = { lightness: 'l', chroma: 'c', hue: 'h' } as const
 

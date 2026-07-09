@@ -171,42 +171,27 @@ function onPointerUp(event: PointerEvent) {
             :stop-color="color"
           />
         </linearGradient>
+
+        <!-- horizontal-only blur smooths the column steps (the vertical
+             axis is already a true gradient); the edge columns overhang
+             the canvas so the blur has solid color to sample there -->
+        <filter :id="`${gradientId}-smooth`" x="-5%" y="-5%" width="110%" height="110%">
+          <feGaussianBlur stdDeviation="3 0" />
+        </filter>
       </defs>
 
-      <g opacity="0.75">
+      <g opacity="0.75" :filter="`url(#${gradientId}-smooth)`">
         <rect
           v-for="(column, columnIndex) in field"
           :key="`column-${columnIndex}`"
-          :x="columnIndex === 0 ? 0 : PAD + (columnIndex / field.length) * (W - 2 * PAD)"
+          :x="columnIndex === 0 ? -8 : PAD + (columnIndex / field.length) * (W - 2 * PAD)"
           :y="0"
-          :width="(W - 2 * PAD) / field.length + 0.5 + (columnIndex === 0 || columnIndex === field.length - 1 ? PAD : 0)"
+          :width="(W - 2 * PAD) / field.length + 0.5 + (columnIndex === 0 || columnIndex === field.length - 1 ? PAD + 8 : 0)"
           :height="H"
           :fill="`url(#${gradientId}-${columnIndex})`"
         />
       </g>
     </template>
-
-    <!-- grid -->
-    <line
-      v-for="fraction in [0.25, 0.5, 0.75]"
-      :key="`v${fraction}`"
-      :x1="toX(fraction)"
-      :x2="toX(fraction)"
-      :y1="PAD"
-      :y2="H - PAD"
-      class="stroke-(--ui-border) opacity-40"
-      stroke-width="0.5"
-    />
-    <line
-      v-for="fraction in [0.25, 0.5, 0.75]"
-      :key="`h${fraction}`"
-      :x1="PAD"
-      :x2="W - PAD"
-      :y1="PAD + fraction * (H - 2 * PAD)"
-      :y2="PAD + fraction * (H - 2 * PAD)"
-      class="stroke-(--ui-border) opacity-40"
-      stroke-width="0.5"
-    />
 
     <!-- handle connectors -->
     <line
