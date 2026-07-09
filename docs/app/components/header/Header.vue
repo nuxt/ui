@@ -13,24 +13,13 @@ function toggleChat() {
 
 /**
  * On /theme the header center becomes the studio's view switcher, with the
- * regular pages folded into a single Menu popover; undo/redo/reset take the
- * version menu's spot on the left.
+ * regular pages folded into a single Menu popover.
  */
 const isStudio = computed(() => route.path === '/theme')
 
 const { view, views } = useThemeStudioView()
-const { past, future, undo, redo } = useThemeStudioHistory()
-const { resetTheme } = useTheme()
 
-const studioLinks = computed(() => [
-  ...views.map(tab => ({
-    label: tab.label,
-    icon: tab.icon,
-    active: view.value === tab.value,
-    onSelect: () => {
-      view.value = tab.value
-    }
-  })),
+const studioMenu = [
   {
     label: 'Menu',
     children: [{
@@ -70,7 +59,7 @@ const studioLinks = computed(() => [
       to: '/releases'
     }]
   }
-])
+]
 </script>
 
 <!-- eslint-disable vue/no-template-shadow -->
@@ -86,46 +75,28 @@ const studioLinks = computed(() => [
     <template #left>
       <HeaderLogo />
 
-      <VersionMenu v-if="!isStudio" />
-
-      <template v-if="isStudio">
-        <UFieldGroup class="hidden lg:flex">
-          <UTooltip text="Undo" :kbds="['meta', 'Z']">
-            <UButton
-              icon="i-lucide-undo-2"
-              color="neutral"
-              variant="ghost"
-              :disabled="!past.length"
-              aria-label="Undo theme change"
-              @click="undo"
-            />
-          </UTooltip>
-
-          <UTooltip text="Redo" :kbds="['meta', 'shift', 'Z']">
-            <UButton
-              icon="i-lucide-redo-2"
-              color="neutral"
-              variant="ghost"
-              :disabled="!future.length"
-              aria-label="Redo theme change"
-              @click="redo"
-            />
-          </UTooltip>
-        </UFieldGroup>
-
-        <UTooltip text="Reset theme" class="hidden lg:flex">
-          <UButton
-            icon="i-lucide-rotate-ccw"
-            color="neutral"
-            variant="ghost"
-            aria-label="Reset theme"
-            @click="resetTheme"
-          />
-        </UTooltip>
-      </template>
+      <VersionMenu />
     </template>
 
-    <UNavigationMenu v-if="isStudio" :items="studioLinks" variant="link" content-orientation="vertical" />
+    <div v-if="isStudio" class="flex items-center gap-1">
+      <UTabs
+        v-model="view"
+        :items="views"
+        :content="false"
+        color="primary"
+        size="sm"
+      />
+
+      <!-- A single trigger makes the menu root (and so the default
+           popover viewport) only as wide as the button — size the
+           popover explicitly. -->
+      <UNavigationMenu
+        :items="studioMenu"
+        variant="link"
+        content-orientation="vertical"
+        :ui="{ viewportWrapper: 'w-[25rem]', content: 'w-[25rem]' }"
+      />
+    </div>
     <UNavigationMenu v-else :items="desktopLinks" variant="link" content-orientation="vertical" />
 
     <template #right>
