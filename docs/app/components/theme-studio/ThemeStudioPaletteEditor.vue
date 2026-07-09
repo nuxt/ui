@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useThrottleFn, watchIgnorable } from '@vueuse/core'
-import { SHADES, CURVE_DEFAULTS, NEUTRAL_CURVE_DEFAULTS, generatePalette, fitPalette } from '../../utils/theme-engine'
+import { SHADES, CURVE_DEFAULTS, NEUTRAL_CURVE_DEFAULTS, generatePalette, fitPalette, sampleCurve, clampToGamut, formatOklch } from '../../utils/theme-engine'
 import type { PaletteCurveParams, ColorAlias } from '../../utils/theme-engine'
 
 const props = defineProps<{
@@ -47,6 +47,35 @@ const windows = {
   chroma: { min: 0, max: 0.35 },
   hue: { min: 0, max: 360 }
 }
+
+/**
+ * The color field behind the active tab's curve: columns follow the ramp,
+ * rows sweep the edited channel across its window (top = max) while the
+ * other two channels track the live curves — each point shows the color
+ * that dragging the curve there would produce, gamut clamp included.
+ */
+const FIELD_COLUMNS = 16
+const FIELD_ROWS = 12
+const CHANNEL_KEYS = { lightness: 'l', chroma: 'c', hue: 'h' } as const
+
+const field = computed(() => {
+  const channel = tab.value
+  const { min, max } = windows[channel]
+
+  return Array.from({ length: FIELD_COLUMNS }, (_, columnIndex) => {
+    const x = (columnIndex + 0.5) / FIELD_COLUMNS
+    const base = {
+      l: sampleCurve(x, params.lightness),
+      c: Math.max(0, sampleCurve(x, params.chroma)),
+      h: sampleCurve(x, params.hue)
+    }
+
+    return Array.from({ length: FIELD_ROWS }, (_, rowIndex) => {
+      const value = max - (rowIndex / (FIELD_ROWS - 1)) * (max - min)
+      return formatOklch(clampToGamut({ ...base, [CHANNEL_KEYS[channel]]: value }))
+    })
+  })
+})
 
 function normalizeHue(values: PaletteCurveParams) {
   const points = [values.hue.y0, values.hue.y1, values.hue.p1y, values.hue.p2y]
@@ -235,6 +264,7 @@ function remove() {
             :y-min="windows[tab].min"
             :y-max="windows[tab].max"
             :stop-colors="stopColors"
+            :field="field"
             @drag-start="onDragStart"
             @drag-end="onDragEnd"
           />

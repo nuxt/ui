@@ -8,6 +8,13 @@ const props = defineProps<{
   yMax: number
   /** Fill colors for the 11 stop dots along the curve */
   stopColors?: string[]
+  /**
+   * 2D color field behind the plot: one entry per column (ramp position),
+   * each an array of colors sampled top (yMax) to bottom (yMin). SVG can't
+   * do two-axis gradients, but a vertical gradient per column tiles into
+   * one — showing exactly what dragging the curve at that x would produce.
+   */
+  field?: string[][]
 }>()
 
 const curve = defineModel<ChannelCurve>({ required: true })
@@ -20,6 +27,9 @@ const emit = defineEmits<{
 const W = 200
 const H = 180
 const PAD = 10
+
+/** Unique per instance — primary and neutral editors can be open at once. */
+const gradientId = useId()
 
 function toX(x: number) {
   return PAD + x * (W - 2 * PAD)
@@ -136,6 +146,46 @@ function onPointerUp(event: PointerEvent) {
     @pointerup="onPointerUp"
     @pointercancel="onPointerUp"
   >
+    <!-- the channel's reachable colors behind the plot: the curve sits on
+         the exact color each (position, value) point would produce. The
+         field bleeds to the canvas edges, but its value mapping stays
+         pinned to the padded plot (userSpaceOnUse + pad spread), so the
+         curve/color correspondence is exact. -->
+    <template v-if="field?.length">
+      <defs>
+        <linearGradient
+          v-for="(column, columnIndex) in field"
+          :id="`${gradientId}-${columnIndex}`"
+          :key="columnIndex"
+          gradientUnits="userSpaceOnUse"
+          :x1="0"
+          :y1="PAD"
+          :x2="0"
+          :y2="H - PAD"
+          spreadMethod="pad"
+        >
+          <stop
+            v-for="(color, rowIndex) in column"
+            :key="rowIndex"
+            :offset="`${(rowIndex / (column.length - 1)) * 100}%`"
+            :stop-color="color"
+          />
+        </linearGradient>
+      </defs>
+
+      <g opacity="0.75">
+        <rect
+          v-for="(column, columnIndex) in field"
+          :key="`column-${columnIndex}`"
+          :x="columnIndex === 0 ? 0 : PAD + (columnIndex / field.length) * (W - 2 * PAD)"
+          :y="0"
+          :width="(W - 2 * PAD) / field.length + 0.5 + (columnIndex === 0 || columnIndex === field.length - 1 ? PAD : 0)"
+          :height="H"
+          :fill="`url(#${gradientId}-${columnIndex})`"
+        />
+      </g>
+    </template>
+
     <!-- grid -->
     <line
       v-for="fraction in [0.25, 0.5, 0.75]"
