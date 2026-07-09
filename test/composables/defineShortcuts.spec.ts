@@ -340,6 +340,51 @@ describe('defineShortcuts', () => {
     })
   })
 
+  describe('chained shortcut sharing a prefix with a standalone (#5654)', () => {
+    it('fires the chain, not the standalone, when the sequence completes', async () => {
+      const f = vi.fn()
+      const fh = vi.fn()
+      const h = vi.fn()
+      await registerShortcuts({ f, 'f-h': fh, h })
+
+      fireKeydown('f')
+      fireKeydown('h')
+
+      expect(fh).toHaveBeenCalledOnce()
+      expect(f).not.toHaveBeenCalled()
+      expect(h).not.toHaveBeenCalled()
+    })
+
+    it('fires the standalone alone once the chain delay elapses', async () => {
+      const f = vi.fn()
+      const fh = vi.fn()
+      await registerShortcuts({ f, 'f-h': fh }, { chainDelay: 50 })
+
+      fireKeydown('f')
+      // Deferred: the standalone waits in case a chain follows.
+      expect(f).not.toHaveBeenCalled()
+
+      await new Promise(resolve => setTimeout(resolve, 80))
+
+      expect(f).toHaveBeenCalledOnce()
+      expect(fh).not.toHaveBeenCalled()
+    })
+
+    it('fires the pending standalone then the next key when the sequence does not complete', async () => {
+      const f = vi.fn()
+      const fh = vi.fn()
+      const x = vi.fn()
+      await registerShortcuts({ f, 'f-h': fh, x }, { chainDelay: 50 })
+
+      fireKeydown('f')
+      fireKeydown('x')
+
+      expect(f).toHaveBeenCalledOnce()
+      expect(x).toHaveBeenCalledOnce()
+      expect(fh).not.toHaveBeenCalled()
+    })
+  })
+
   describe('shortcut config object', () => {
     it('supports handler in config object', async () => {
       const handler = vi.fn()
