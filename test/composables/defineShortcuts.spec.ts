@@ -406,7 +406,8 @@ describe('defineShortcuts', () => {
 
     it('does not fire a held standalone that got disabled before the delay elapsed', async () => {
       const f = vi.fn()
-      await registerShortcuts({ f, 'f-h': vi.fn() }, { chainDelay: 50 })
+      const fh = vi.fn()
+      await registerShortcuts({ f, 'f-h': fh }, { chainDelay: 50 })
 
       fireKeydown('f')
 
