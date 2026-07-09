@@ -19,47 +19,48 @@ const isStudio = computed(() => route.path === '/theme')
 
 const { view, views } = useThemeStudioView()
 
-const studioMenu = [
-  {
-    label: 'Menu',
-    children: [{
-      label: 'Docs',
-      description: 'Learn how to build with Nuxt UI.',
-      icon: 'i-lucide-book-open',
-      to: '/docs'
-    }, {
-      label: 'Templates',
-      description: 'Start from a ready-made template.',
-      icon: 'i-lucide-panels-top-left',
-      to: '/templates'
-    }, {
-      label: 'Showcase',
-      description: 'Discover websites built with Nuxt UI.',
-      icon: 'i-lucide-presentation',
-      to: '/showcase'
-    }, {
-      label: 'Community',
-      description: 'Explore projects built around Nuxt UI.',
-      icon: 'i-lucide-globe',
-      to: '/community'
-    }, {
-      label: 'Blog',
-      description: 'Read the latest news and updates.',
-      icon: 'i-lucide-newspaper',
-      to: '/blog'
-    }, {
-      label: 'Figma',
-      description: 'Design with the official Figma kit.',
-      icon: 'i-simple-icons-figma',
-      to: '/figma'
-    }, {
-      label: 'Releases',
-      description: 'Follow what ships in each release.',
-      icon: 'i-lucide-rocket',
-      to: '/releases'
-    }]
-  }
-]
+// The popover body is a vertical menu so Resources can nest as a
+// collapsed group — horizontal popover child lists only render one level.
+const studioMenu = [{ label: 'Menu', slot: 'pages' as const }]
+
+const studioMenuLinks = [{
+  label: 'Docs',
+  icon: 'i-lucide-book-open',
+  to: '/docs'
+}, {
+  label: 'Templates',
+  icon: 'i-lucide-panels-top-left',
+  to: '/templates'
+}, {
+  label: 'Figma',
+  icon: 'i-simple-icons-figma',
+  to: '/figma'
+}, {
+  label: 'Releases',
+  icon: 'i-lucide-rocket',
+  to: '/releases'
+}, {
+  label: 'Resources',
+  icon: 'i-lucide-library',
+  children: [{
+    label: 'Showcase',
+    icon: 'i-lucide-presentation',
+    to: '/showcase'
+  }, {
+    label: 'Community',
+    icon: 'i-lucide-globe',
+    to: '/community'
+  }, {
+    label: 'Playground',
+    icon: 'i-lucide-square-terminal',
+    to: '/play',
+    target: '_blank'
+  }, {
+    label: 'Blog',
+    icon: 'i-lucide-newspaper',
+    to: '/blog'
+  }]
+}]
 </script>
 
 <!-- eslint-disable vue/no-template-shadow -->
@@ -95,6 +96,14 @@ const studioMenu = [
           :content="false"
           color="primary"
           size="sm"
+        />
+      </template>
+
+      <template #pages-content>
+        <UNavigationMenu
+          orientation="vertical"
+          :items="studioMenuLinks"
+          class="p-2"
         />
       </template>
     </UNavigationMenu>
