@@ -2,7 +2,7 @@
 /* eslint-disable regexp/no-super-linear-backtracking */
 import { ref, computed, toValue } from 'vue'
 import type { MaybeRef } from 'vue'
-import { useEventListener, useActiveElement, useDebounceFn } from '@vueuse/core'
+import { useEventListener, useActiveElement, useDebounceFn, useTimeoutFn } from '@vueuse/core'
 import { useKbd } from './useKbd'
 
 type Handler = (e?: any) => void
@@ -94,11 +94,39 @@ export function extractShortcuts(items: any[] | any[][], separator: '_' | '-' = 
 }
 
 export function defineShortcuts(config: MaybeRef<ShortcutsConfig>, options: ShortcutsOptions = {}) {
+  const chainDelay = options.chainDelay ?? 800
   const chainedInputs = ref<string[]>([])
   const clearChainedInput = () => {
     chainedInputs.value.splice(0, chainedInputs.value.length)
   }
-  const debouncedClearChainedInput = useDebounceFn(clearChainedInput, options.chainDelay ?? 800)
+  const debouncedClearChainedInput = useDebounceFn(clearChainedInput, chainDelay)
+
+  // A standalone shortcut that is also the first key of a chained shortcut (e.g. `f` and `f-h`)
+  // is held back until the chain either completes or the delay elapses, so pressing `f` doesn't
+  // fire the standalone and swallow the chain (#5654). Its `preventDefault` already ran on keydown.
+  let pendingShortcut: { shortcut: Shortcut, event: KeyboardEvent } | undefined
+  const cancelPendingShortcut = () => {
+    pendingShortcut = undefined
+    pendingTimer.stop()
+  }
+  const runPendingShortcut = () => {
+    const pending = pendingShortcut
+    cancelPendingShortcut()
+    if (!pending) {
+      return
+    }
+
+    // Re-resolve instead of trusting the held snapshot: `enabled` may have changed in the
+    // meantime (e.g. focus moved into an input), and the pending shortcut is always unmodified.
+    const shortcut = standardShortcuts.value.find(s => s.key === pending.shortcut.key && !s.metaKey && !s.ctrlKey && !s.altKey && !s.shiftKey)
+    if (shortcut?.enabled) {
+      shortcut.handler(pending.event)
+    }
+  }
+  const pendingTimer = useTimeoutFn(() => {
+    runPendingShortcut()
+    clearChainedInput()
+  }, chainDelay, { immediate: false })
 
   const { macOS } = useKbd()
   const activeElement = useActiveElement()
@@ -124,22 +152,31 @@ export function defineShortcuts(config: MaybeRef<ShortcutsConfig>, options: Shor
     if (chainedInputs.value.length >= 2) {
       chainedKey = chainedInputs.value.slice(-2).join('-')
 
-      for (const shortcut of shortcuts.value.filter(s => s.chained)) {
+      for (const shortcut of chainedShortcuts.value) {
         if (shortcut.key !== chainedKey) {
           continue
         }
 
         if (shortcut.enabled) {
+          // The chain completed, so the held-back standalone from its first key must not fire.
+          cancelPendingShortcut()
+
           e.preventDefault()
           shortcut.handler(e)
+        } else {
+          // A disabled chain must not swallow the held-back standalone.
+          runPendingShortcut()
         }
         clearChainedInput()
         return
       }
     }
 
+    // This key didn't complete a chain, so honor any standalone held back by the previous key.
+    runPendingShortcut()
+
     // try matching a standard shortcut
-    for (const shortcut of shortcuts.value.filter(s => !s.chained)) {
+    for (const shortcut of standardShortcuts.value) {
       if (layoutIndependent) {
         // compare by code
         if (e.code !== shortcut.key) {
@@ -170,6 +207,18 @@ export function defineShortcuts(config: MaybeRef<ShortcutsConfig>, options: Shor
       // Without meta/ctrl, shift changes the key itself (e.g. / -> ?) so the check is skipped.
       if ((alphabetKey || shiftableKey || shortcut.shiftKey || (e.shiftKey && (e.metaKey || e.ctrlKey))) && e.shiftKey !== shortcut.shiftKey) {
         continue
+      }
+
+      // If this key also starts a chained shortcut, hold it back until the chain can complete.
+      const isUnmodified = !shortcut.metaKey && !shortcut.ctrlKey && !shortcut.altKey && !shortcut.shiftKey
+      if (isUnmodified && chainPrefixes.value.has(shortcut.key)) {
+        if (shortcut.enabled) {
+          // Must run now: preventDefault is a no-op once the event finished dispatching.
+          e.preventDefault()
+        }
+        pendingShortcut = { shortcut, event: e }
+        pendingTimer.start()
+        return
       }
 
       if (shortcut.enabled) {
@@ -280,6 +329,12 @@ export function defineShortcuts(config: MaybeRef<ShortcutsConfig>, options: Shor
       return shortcut
     }).filter(Boolean) as Shortcut[]
   })
+
+  // Cached so each keydown doesn't re-filter (and re-allocate) the shortcuts list.
+  const chainedShortcuts = computed(() => shortcuts.value.filter(s => s.chained))
+  const standardShortcuts = computed(() => shortcuts.value.filter(s => !s.chained))
+  // First key of every chained shortcut, used to hold back a matching standalone shortcut.
+  const chainPrefixes = computed(() => new Set(chainedShortcuts.value.map(s => s.key.split('-')[0])))
 
   return useEventListener('keydown', onKeyDown)
 }
