@@ -87,7 +87,7 @@ const studioMenuLinks = [{
       :items="studioMenu"
       variant="link"
       content-orientation="vertical"
-      :ui="{ viewportWrapper: 'w-[16rem]', content: 'w-[16rem]' }"
+      :ui="{ viewportWrapper: 'w-[12rem]', content: 'w-[12rem]' }"
     >
       <template #list-leading>
         <UTabs
