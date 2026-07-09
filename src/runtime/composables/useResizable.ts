@@ -116,8 +116,18 @@ export function useResizable(key: string, options: Ref<UseResizableProps> | UseR
       : useStorage<StorageType>(key, defaultStorageValue, undefined, opts.value.storageOptions)
     : ref(defaultStorageValue)
 
+  // A persisted `null` (corrupted cookie/localStorage or cookie removed at runtime) bypasses
+  // the storage defaults and would crash every access, so guard reads and heal on write (#6517).
+  const writeStorage = (patch: Partial<StorageType>) => {
+    if (storageData.value) {
+      Object.assign(storageData.value, patch)
+    } else {
+      storageData.value = { ...defaultStorageValue, ...patch }
+    }
+  }
+
   const isCollapsed = computed({
-    get: () => storageData.value.collapsed,
+    get: () => storageData.value?.collapsed ?? defaultStorageValue.collapsed,
     set: (value: boolean) => {
       if (!opts.value.collapsible) {
         return
@@ -126,15 +136,17 @@ export function useResizable(key: string, options: Ref<UseResizableProps> | UseR
       if (isRef(collapsed)) {
         collapsed.value = value
       }
-      storageData.value.collapsed = value
+      writeStorage({ collapsed: value })
     }
   })
 
   const previousSize = ref(opts.value.defaultSize)
 
   const size = computed({
-    get: () => storageData.value.size,
-    set: (value) => { storageData.value.size = value }
+    get: () => storageData.value?.size ?? opts.value.defaultSize,
+    set: (value) => {
+      writeStorage({ size: value })
+    }
   })
 
   const currentSize = computed(() => isCollapsed.value ? opts.value.collapsedSize : size.value)
@@ -287,7 +299,7 @@ export function useResizable(key: string, options: Ref<UseResizableProps> | UseR
   }
 
   // Initial sync of storage value to external collapsed ref
-  if (isRef(collapsed) && storageData.value.collapsed) {
+  if (isRef(collapsed) && storageData.value?.collapsed) {
     collapsed.value = storageData.value.collapsed
   }
 
@@ -298,8 +310,8 @@ export function useResizable(key: string, options: Ref<UseResizableProps> | UseR
         return
       }
 
-      if (storageData.value.collapsed !== value) {
-        storageData.value.collapsed = value
+      if (storageData.value?.collapsed !== value) {
+        isCollapsed.value = value
       }
     })
   }
