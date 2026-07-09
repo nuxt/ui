@@ -80,15 +80,16 @@ const settingGroups = [
 
         <!-- One toolbar at the bottom: history leftmost, presets and
              setting-group popovers, document actions on the right. In
-             fullscreen it floats over the bottom edge, peeking a few
-             pixels until hovered (Esc still exits); only a thin strip
-             catches the pointer so the preview stays clickable. -->
+             fullscreen it floats over the bottom edge at the normal
+             container width, peeking a few pixels until the pointer
+             nears the bottom (Esc still exits); only that strip catches
+             the pointer so the preview stays clickable. -->
         <div :class="fullscreen ? 'group fixed bottom-0 inset-x-0 z-50 pointer-events-none' : 'shrink-0'">
-          <div v-if="fullscreen" class="absolute bottom-0 inset-x-0 h-2.5 pointer-events-auto" />
+          <div v-if="fullscreen" class="absolute bottom-0 inset-x-0 h-8 pointer-events-auto" />
 
           <div
             class="flex items-center gap-2 py-3 overflow-x-auto"
-            :class="fullscreen && 'm-4 px-4 rounded-lg bg-default ring ring-default shadow-lg pointer-events-auto translate-y-[calc(100%+6px)] group-hover:translate-y-0 group-focus-within:translate-y-0 transition-transform duration-200'"
+            :class="fullscreen && 'my-4 mx-auto w-[calc(100%-2rem)] max-w-(--ui-container) px-4 rounded-lg bg-default ring ring-default shadow-lg pointer-events-auto translate-y-[calc(100%+6px)] group-hover:translate-y-0 group-focus-within:translate-y-0 transition-transform duration-200'"
           >
             <UFieldGroup size="sm">
               <UTooltip text="Undo" :kbds="['meta', 'Z']">
