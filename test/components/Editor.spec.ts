@@ -31,11 +31,15 @@ describe('Editor', () => {
     wrapper.unmount()
   })
 
-  it('applies the prose classes on the content wrapper', async () => {
+  it('styles the built-in editor via the editable element, not the content wrapper', async () => {
     const wrapper = await mountSuspended(Editor, { props })
 
-    const content = wrapper.find('[data-slot="content"]')
-    expect(content.classes()).toContain('[&_:where(.ProseMirror_p)]:leading-7')
+    // Typography is injected on the editable element via `editorProps`; the content wrapper
+    // stays free of the re-scoped copies (they would be redundant on the built-in editor).
+    expect(wrapper.find('.ProseMirror').classes()).toContain('[&_p]:leading-7')
+
+    const scopedOnWrapper = wrapper.find('[data-slot="content"]').classes().some(c => c.includes(':where(.ProseMirror'))
+    expect(scopedOnWrapper).toBe(false)
 
     wrapper.unmount()
   })
@@ -76,12 +80,15 @@ describe('Editor', () => {
       wrapper.unmount()
     })
 
-    it('applies the prose classes on the content wrapper', async () => {
+    it('applies the prose and placeholder classes on the content wrapper', async () => {
       const editor = createEditor()
       const wrapper = await mountSuspended(Editor, { props: { editor } })
 
       const content = wrapper.find('[data-slot="content"]')
       expect(content.classes()).toContain('[&_:where(.ProseMirror_p)]:leading-7')
+
+      const hasScopedPlaceholder = content.classes().some(c => c.includes(':where(.ProseMirror_:is(p,h1,h2,h3,h4,h5,h6).is-empty)'))
+      expect(hasScopedPlaceholder).toBe(true)
 
       wrapper.unmount()
     })

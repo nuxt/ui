@@ -77,9 +77,10 @@ export interface EditorProps<T extends Content = Content, H extends EditorCustom
    */
   mention?: boolean | Partial<Omit<MentionOptions, 'suggestion' | 'suggestions'>>
   /**
-   * Apply the theme's prose (typography) classes to the editor content.
-   * They use `:where()` selectors, so your own styling takes precedence over them.
+   * Apply the theme's typography to the editor content wrapper, so external editors are styled too.
+   * Uses `:where()` selectors, so your own (or an extension's) styling always takes precedence.
    * Set to `false` when the editor brings its own content styling.
+   * The built-in editor is always styled through the `base` slot (override `ui.base` to change it).
    * @defaultValue true
    */
   prose?: boolean
@@ -142,9 +143,15 @@ const attrs = useAttrs()
 
 const appConfig = useAppConfig() as Editor['AppConfig']
 
+// External mode is detected from the presence of the `editor` prop, not its value,
+// so an editor created asynchronously (`undefined` on first render) is still recognized.
+const isExternalEditor = isPropBound('editor')
+
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.editor || {}) })({
-  prose: props.prose,
+  // Built-in editors are styled via `editorProps` on the editable element; only external editors
+  // need the content-wrapper copy, so the variant is disabled otherwise.
+  prose: isExternalEditor ? props.prose : false,
   placeholderMode: typeof props.placeholder === 'object' ? props.placeholder.mode : undefined
 }))
 
@@ -229,9 +236,6 @@ const extensions = computed(() => [
   ...(props.extensions || [])
 ].filter(extension => !!extension))
 
-// External mode is detected from the presence of the `editor` prop, not its value,
-// so an editor created asynchronously (`undefined` on first render) is still recognized.
-const isExternalEditor = isPropBound('editor')
 const externalEditor = computed(() => unref(props.editor) as TiptapEditor | undefined)
 
 if (import.meta.dev) {
@@ -347,7 +351,7 @@ defineExpose({
         role="presentation"
         :editor="editor"
         data-slot="content"
-        :class="[ui.content({ class: props.ui?.content }), ui.prose({ class: props.ui?.prose })]"
+        :class="ui.content({ class: props.ui?.content })"
         v-bind="isExternalEditor ? $attrs : undefined"
       />
     </template>
