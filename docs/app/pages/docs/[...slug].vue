@@ -187,7 +187,7 @@ const links = computed(() => [{
     </UPageBody>
 
     <template v-if="page?.body?.toc?.links?.length" #right>
-      <UContentToc :links="page.body.toc.links" class="z-2">
+      <UContentToc :links="page.body.toc.links" class="z-2" highlight highlight-variant="circuit">
         <template #bottom>
           <USeparator v-if="page.body?.toc?.links?.length" type="dashed" />
 

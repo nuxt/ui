@@ -325,6 +325,40 @@ export default defineEventHandler(async (event) => {
 })
 ```
 
+### Tool Approval
+
+Require a user confirmation before a tool runs with the [`toolApproval`](https://ai-sdk.dev/docs/agents/tool-approvals) option. The tool part pauses in the `approval-requested` state until the user responds:
+
+```ts [server/api/chat.post.ts]
+import { streamText, convertToModelMessages, toUIMessageStream, createUIMessageStreamResponse, tool } from 'ai'
+import { gateway } from '@ai-sdk/gateway'
+import { z } from 'zod'
+
+export default defineEventHandler(async (event) => {
+  const { messages } = await readBody(event)
+
+  const result = streamText({
+    model: gateway('anthropic/claude-sonnet-5'),
+    maxOutputTokens: 10000,
+    instructions: 'You are a helpful assistant.',
+    messages: await convertToModelMessages(messages),
+    tools: {
+      deleteFile: tool({
+        description: 'Delete a file from the project',
+        inputSchema: z.object({ path: z.string() }),
+        execute: async ({ path }) => ({ deleted: path })
+      })
+    },
+    toolApproval: {
+      deleteFile: 'user-approval'
+    }
+  })
+
+  const stream = toUIMessageStream({ stream: result.stream })
+  return createUIMessageStreamResponse({ stream })
+})
+```
+
 ## Client Setup
 
 Use the `useChat` composable from `@ai-sdk/vue` to manage chat state and connect to your server endpoint:
@@ -333,14 +367,15 @@ Use the `useChat` composable from `@ai-sdk/vue` to manage chat state and connect
 #nuxt
 ```vue
 <script setup lang="ts">
-import { isReasoningUIPart, isTextUIPart, isToolUIPart, getToolName } from 'ai'
+import { isReasoningUIPart, isTextUIPart, isToolUIPart, getToolName, lastAssistantMessageIsCompleteWithApprovalResponses } from 'ai'
 import { useChat } from '@ai-sdk/vue'
 import { isPartStreaming, isToolStreaming } from '@nuxt/ui/utils/ai'
 import highlight from '@comark/nuxt/plugins/highlight'
 
 const input = ref('')
 
-const { messages, status, error, sendMessage, regenerate, stop } = useChat({
+const { messages, status, error, sendMessage, regenerate, stop, addToolApprovalResponse } = useChat({
+  sendAutomaticallyWhen: lastAssistantMessageIsCompleteWithApprovalResponses,
   onError(error) {
     console.error(error)
   }
@@ -380,6 +415,10 @@ function onSubmit() {
           v-else-if="isToolUIPart(part)"
           :text="getToolName(part)"
           :streaming="isToolStreaming(part)"
+          :actions="part.state === 'approval-requested' ? [
+            { label: 'Approve', onClick: () => addToolApprovalResponse({ id: part.approval.id, approved: true }) },
+            { label: 'Deny', color: 'neutral', variant: 'ghost', onClick: () => addToolApprovalResponse({ id: part.approval.id, approved: false }) }
+          ] : undefined"
         />
 
         <template v-else-if="isTextUIPart(part)">
@@ -416,7 +455,7 @@ function onSubmit() {
 ```vue
 <script setup lang="ts">
 import { ref } from 'vue'
-import { isReasoningUIPart, isTextUIPart, isToolUIPart, getToolName } from 'ai'
+import { isReasoningUIPart, isTextUIPart, isToolUIPart, getToolName, lastAssistantMessageIsCompleteWithApprovalResponses } from 'ai'
 import { useChat } from '@ai-sdk/vue'
 import { isPartStreaming, isToolStreaming } from '@nuxt/ui/utils/ai'
 import { Comark } from '@comark/vue'
@@ -424,7 +463,8 @@ import highlight from '@comark/vue/plugins/highlight'
 
 const input = ref('')
 
-const { messages, status, error, sendMessage, regenerate, stop } = useChat({
+const { messages, status, error, sendMessage, regenerate, stop, addToolApprovalResponse } = useChat({
+  sendAutomaticallyWhen: lastAssistantMessageIsCompleteWithApprovalResponses,
   onError(error) {
     console.error(error)
   }
@@ -464,6 +504,10 @@ function onSubmit() {
           v-else-if="isToolUIPart(part)"
           :text="getToolName(part)"
           :streaming="isToolStreaming(part)"
+          :actions="part.state === 'approval-requested' ? [
+            { label: 'Approve', onClick: () => addToolApprovalResponse({ id: part.approval.id, approved: true }) },
+            { label: 'Deny', color: 'neutral', variant: 'ghost', onClick: () => addToolApprovalResponse({ id: part.approval.id, approved: false }) }
+          ] : undefined"
         />
 
         <template v-else-if="isTextUIPart(part)">

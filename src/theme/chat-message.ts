@@ -81,6 +81,7 @@ export default (options: Required<ModuleOptions>) => ({
     variant: 'naked',
     side: 'left',
     class: {
+      body: 'w-full',
       content: 'w-full'
     }
   }, ...(options.theme.colors || []).map((color: string) => ({

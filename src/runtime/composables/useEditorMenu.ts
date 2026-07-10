@@ -572,11 +572,6 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
 
       const handlers = {
         onStart: (suggestionProps: SuggestionProps) => {
-          // When ignoreFilter is true, always use fresh items from the reactive source
-          filteredItems.value = options.ignoreFilter
-            ? items.value.slice(0, limit)
-            : suggestionProps.items as T[]
-
           // Start at first selectable item (index 0 in selectableItems)
           selectedIndex.value = 0
 
@@ -586,6 +581,17 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
           // Store the trigger position (where the `/`, `@`, or `:` is)
           triggerClientRect = suggestionProps.clientRect as () => DOMRect | null
 
+          // The suggestion plugin emits a loading pass with placeholder (empty) items
+          // before the resolved items arrive; skip it to avoid opening with no items.
+          if (suggestionProps.loading) {
+            return
+          }
+
+          // When ignoreFilter is true, always use fresh items from the reactive source
+          filteredItems.value = options.ignoreFilter
+            ? items.value.slice(0, limit)
+            : suggestionProps.items as T[]
+
           // Only show menu if there are items
           if (!filteredItems.value.length) {
             return
@@ -594,13 +600,19 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
           showMenu()
         },
         onUpdate: (suggestionProps: SuggestionProps) => {
+          // Update the command function
+          commandFn = (item: T) => suggestionProps.command(item)
+
+          // Skip the loading pass (placeholder items) so the menu stays mounted while the
+          // resolved items are fetched, otherwise it is destroyed and recreated on every keystroke.
+          if (suggestionProps.loading) {
+            return
+          }
+
           // When ignoreFilter is true, always use fresh items from the reactive source
           filteredItems.value = options.ignoreFilter
             ? items.value.slice(0, limit)
             : suggestionProps.items as T[]
-
-          // Update the command function
-          commandFn = (item: T) => suggestionProps.command(item)
 
           // Reset selected index if out of bounds (comparing against selectableItems)
           if (selectedIndex.value >= selectableItems.value.length) {
