@@ -33,6 +33,7 @@ export default defineNuxtPlugin({
       restoreState('nuxt-ui-style-ui')
       restoreState('nuxt-ui-custom-colors')
       restoreState('nuxt-ui-css-variables')
+      restoreState('nuxt-ui-font-prefs')
 
       // Studio prefs use useState keys that differ from their storage keys
       // (state must be clearable by resetTheme outside the composable).
@@ -161,17 +162,48 @@ export default defineNuxtPlugin({
           `.replace(/\s+/g, ' ')
         }, {
           innerHTML: [
-            `if (localStorage.getItem('nuxt-ui-font')) {`,
-            `var font = localStorage.getItem('nuxt-ui-font');`,
+            `(function() {`,
+            `var font = localStorage.getItem('nuxt-ui-font') || 'Public Sans';`,
+            `var prefs = {};`,
+            `try { prefs = JSON.parse(localStorage.getItem('nuxt-ui-font-prefs') || '{}'); } catch(e) {}`,
+            `var css = ':root { --font-sans: \\'' + font + '\\', sans-serif; }';`,
+            `var w = prefs.weights || {};`,
+            `var wVars = Object.keys(w).map(function(s) { return '--font-weight-' + s + ': ' + w[s] + ';'; }).join(' ');`,
+            `if (wVars) { css += ' :root { ' + wVars + ' }'; }`,
+            `var bodyRules = '';`,
+            `if (w.normal) { bodyRules += 'font-weight: ' + w.normal + '; '; }`,
+            `if (prefs.uppercase) { bodyRules += 'text-transform: uppercase; '; }`,
+            `if (prefs.italic) { bodyRules += 'font-style: italic; '; }`,
+            `if (prefs.letterSpacing) { bodyRules += 'letter-spacing: ' + prefs.letterSpacing + 'em; '; }`,
+            `if (prefs.lineHeight) { bodyRules += 'line-height: ' + prefs.lineHeight + '; '; }`,
+            `if (bodyRules) { css += ' body { ' + bodyRules + '}'; }`,
+            `var h = prefs.heading || {};`,
+            `if (h.font || h.weight || h.uppercase || h.italic || h.underline || h.letterSpacing || h.lineHeight) {`,
+            `var rules = '';`,
+            `if (h.font) { rules += 'font-family: \\'' + h.font + '\\', sans-serif; '; }`,
+            `if (h.weight) { rules += 'font-weight: ' + h.weight + '; '; }`,
+            `if (h.uppercase) { rules += 'text-transform: uppercase; '; }`,
+            `if (h.italic) { rules += 'font-style: italic; '; }`,
+            `if (h.underline) { rules += 'text-decoration: underline; '; }`,
+            `if (h.letterSpacing) { rules += 'letter-spacing: ' + h.letterSpacing + 'em; '; }`,
+            `if (h.lineHeight) { rules += 'line-height: ' + h.lineHeight + '; '; }`,
+            `css += ' h1, h2, h3, h4, h5, h6 { ' + rules + '}';`,
+            `}`,
+            `if (localStorage.getItem('nuxt-ui-font') || Object.keys(prefs).length) {`,
             `var fontEl = document.querySelector('style#nuxt-ui-font');`,
-            `if (fontEl) { fontEl.innerHTML = ':root { --font-sans: \\'' + font + '\\', sans-serif; }'; }`,
-            `if (font !== 'Public Sans') {`,
+            `if (fontEl) { fontEl.innerHTML = css; }`,
+            `}`,
+            `[font, h.font].forEach(function(name) {`,
+            `if (!name || name === 'Public Sans') return;`,
+            `var id = 'font-' + name.toLowerCase().replace(/\\s+/g, '-');`,
+            `if (document.getElementById(id)) return;`,
             `var lnk = document.createElement('link');`,
             `lnk.rel = 'stylesheet';`,
-            `lnk.href = 'https://fonts.googleapis.com/css2?family=' + encodeURIComponent(font) + ':wght@400;500;600;700&display=swap';`,
-            `lnk.id = 'font-' + font.toLowerCase().replace(/\\s+/g, '-');`,
+            `lnk.href = 'https://fonts.googleapis.com/css2?family=' + encodeURIComponent(name) + ':wght@300;400;500;600;700;800&display=swap';`,
+            `lnk.id = id;`,
             `document.head.appendChild(lnk);`,
-            `}}`
+            `});`,
+            `})();`
           ].join(' ')
         }, {
           innerHTML: `

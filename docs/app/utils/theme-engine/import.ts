@@ -37,6 +37,9 @@ interface ParsedCSS {
   spacing?: number
   fontSize?: number
   radius?: number
+  fontWeights?: { normal?: number, medium?: number, semibold?: number, bold?: number }
+  body?: { weight?: number, uppercase?: boolean, italic?: boolean, letterSpacing?: number, lineHeight?: number }
+  heading?: { font?: string, weight?: number, uppercase?: boolean, italic?: boolean, underline?: boolean, letterSpacing?: number, lineHeight?: number }
   blackAsPrimary?: boolean
   /** From @theme --default-border-width — the export's width channel. */
   borderWidth?: number
@@ -104,6 +107,11 @@ function parseDeclaration(result: ParsedCSS, selector: string, prop: string, val
         return true
       }
     }
+    const weightStep = prop.match(/^--font-weight-(normal|medium|semibold|bold)$/)
+    if (weightStep && /^\d+$/.test(value)) {
+      result.fontWeights = { ...result.fontWeights, [weightStep[1]!]: Number(value) }
+      return true
+    }
     if (prop === '--spacing' && value.endsWith('rem')) {
       result.spacing = Number.parseFloat(value)
       return true
@@ -122,6 +130,68 @@ function parseDeclaration(result: ParsedCSS, selector: string, prop: string, val
   if (selector === 'html' && prop === 'font-size' && value.endsWith('px')) {
     result.fontSize = Number.parseFloat(value)
     return true
+  }
+
+  if (selector === 'body') {
+    const body = result.body ||= {}
+    if (prop === 'font-weight' && /^\d+$/.test(value)) {
+      // generated alongside the normal-weight step, not a separate choice
+      body.weight = Number(value)
+      return true
+    }
+    if (prop === 'text-transform' && value === 'uppercase') {
+      body.uppercase = true
+      return true
+    }
+    if (prop === 'font-style' && value === 'italic') {
+      body.italic = true
+      return true
+    }
+    if (prop === 'letter-spacing' && value.endsWith('em')) {
+      body.letterSpacing = Number.parseFloat(value)
+      return true
+    }
+    if (prop === 'line-height' && /^\d+(?:\.\d+)?$/.test(value)) {
+      body.lineHeight = Number(value)
+      return true
+    }
+    return false
+  }
+
+  if (selector === 'h1, h2, h3, h4, h5, h6') {
+    const heading = result.heading ||= {}
+    if (prop === 'font-family') {
+      const family = value.match(/^'([^']+)'/) || value.match(/^"([^"]+)"/)
+      if (family) {
+        heading.font = family[1]
+        return true
+      }
+    }
+    if (prop === 'font-weight' && /^\d+$/.test(value)) {
+      heading.weight = Number(value)
+      return true
+    }
+    if (prop === 'text-transform' && value === 'uppercase') {
+      heading.uppercase = true
+      return true
+    }
+    if (prop === 'font-style' && value === 'italic') {
+      heading.italic = true
+      return true
+    }
+    if (prop === 'text-decoration' && value === 'underline') {
+      heading.underline = true
+      return true
+    }
+    if (prop === 'letter-spacing' && value.endsWith('em')) {
+      heading.letterSpacing = Number.parseFloat(value)
+      return true
+    }
+    if (prop === 'line-height' && /^\d+(?:\.\d+)?$/.test(value)) {
+      heading.lineHeight = Number(value)
+      return true
+    }
+    return false
   }
 
   if (selector === ':root') {
@@ -684,7 +754,19 @@ export function importTheme(input: { css?: string, config?: string }): ThemeImpo
     if (Object.keys(css.palettes).length) {
       doc.palettes = Object.fromEntries(Object.entries(css.palettes).map(([name, shades]) => [name, { shades }]))
     }
-    if (css.font) doc.font = { sans: css.font }
+    // A body weight without theme steps (older exports) reads as normal.
+    const weights = css.fontWeights || (css.body?.weight !== undefined ? { normal: css.body.weight } : undefined)
+    if (css.font || weights || css.body || css.heading) {
+      doc.font = {
+        ...(css.font ? { sans: css.font } : {}),
+        ...(weights ? { weights } : {}),
+        ...(css.body?.uppercase ? { uppercase: true } : {}),
+        ...(css.body?.italic ? { italic: true } : {}),
+        ...(css.body?.letterSpacing !== undefined ? { letterSpacing: css.body.letterSpacing } : {}),
+        ...(css.body?.lineHeight !== undefined ? { lineHeight: css.body.lineHeight } : {}),
+        ...(css.heading ? { heading: css.heading } : {})
+      }
+    }
     if (css.spacing !== undefined) doc.spacing = css.spacing
     if (css.fontSize !== undefined) doc.fontSize = css.fontSize
     if (css.radius !== undefined) doc.radius = css.radius

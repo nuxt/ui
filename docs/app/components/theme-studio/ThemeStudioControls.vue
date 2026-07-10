@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { SHADES, SHADOW_SHADE_DEFAULTS, BORDER_SHADE_DEFAULTS, BORDER_WIDTH_DEFAULT, SHADOW_GEOMETRY_DEFAULTS, INNER_SHADOW_GEOMETRY_DEFAULTS } from '../../utils/theme-engine'
+import { themeIcons, FONT_WEIGHT_DEFAULTS } from '../../utils/theme'
 import type { VariantGroup, ColorAlias } from '../../utils/theme-engine'
 
 /** Which settings group this instance renders — one popover per group. */
@@ -13,11 +14,130 @@ const {
   spacing,
   fonts,
   font,
+  fontPrefs,
+  setFontPrefs,
   icon,
   icons
 } = useTheme()
 
 const { style, setStyle, primaryChip, neutralChip } = useThemeStudio()
+
+/* ------------------------------------------------------------ typography -- */
+
+/** Every listed family, loaded once so the pickers can preview themselves. */
+onMounted(() => {
+  if (document.getElementById('font-previews')) return
+  const families = fonts.filter(name => name !== 'Public Sans')
+    .map(name => `family=${encodeURIComponent(name)}:wght@400;700`).join('&')
+  const link = document.createElement('link')
+  link.rel = 'stylesheet'
+  link.id = 'font-previews'
+  link.href = `https://fonts.googleapis.com/css2?${families}&display=swap`
+  document.head.appendChild(link)
+})
+
+// One writable model per tailwind weight step — the knobs components
+// actually dereference at runtime.
+function weightStepModel(step: keyof typeof FONT_WEIGHT_DEFAULTS) {
+  return computed({
+    get: () => fontPrefs.value.weights?.[step] ?? FONT_WEIGHT_DEFAULTS[step],
+    set: (value: number) => setFontPrefs({ ...fontPrefs.value, weights: { ...fontPrefs.value.weights, [step]: value } })
+  })
+}
+
+const WEIGHT_STEPS = ['normal', 'medium', 'semibold', 'bold'] as const
+const weightSteps = Object.fromEntries(WEIGHT_STEPS.map(step => [step, weightStepModel(step)])) as Record<typeof WEIGHT_STEPS[number], ReturnType<typeof weightStepModel>>
+const weightsDirty = computed(() => !!fontPrefs.value.weights)
+
+const INHERIT_FONT = { label: 'Inherit base', value: 'inherit' }
+const headingFontItems = computed(() => [INHERIT_FONT, ...fonts.map(name => ({ label: name, value: name }))])
+
+function setHeading(patch: Record<string, unknown>) {
+  setFontPrefs({ ...fontPrefs.value, heading: { ...fontPrefs.value.heading, ...patch } })
+}
+
+const headingFont = computed({
+  get: () => fontPrefs.value.heading?.font ?? 'inherit',
+  set: (value: string) => setHeading({ font: value === 'inherit' ? undefined : value })
+})
+
+const headingWeight = computed({
+  get: () => fontPrefs.value.heading?.weight ?? 700,
+  set: (value: number) => setHeading({ weight: value })
+})
+
+const headingUppercase = computed({
+  get: () => !!fontPrefs.value.heading?.uppercase,
+  set: (value: boolean) => setHeading({ uppercase: value })
+})
+
+const headingItalic = computed({
+  get: () => !!fontPrefs.value.heading?.italic,
+  set: (value: boolean) => setHeading({ italic: value })
+})
+
+const baseUppercase = computed({
+  get: () => !!fontPrefs.value.uppercase,
+  set: (value: boolean) => setFontPrefs({ ...fontPrefs.value, uppercase: value })
+})
+
+const baseItalic = computed({
+  get: () => !!fontPrefs.value.italic,
+  set: (value: boolean) => setFontPrefs({ ...fontPrefs.value, italic: value })
+})
+
+const headingUnderline = computed({
+  get: () => !!fontPrefs.value.heading?.underline,
+  set: (value: boolean) => setHeading({ underline: value })
+})
+
+const baseLetterSpacing = computed({
+  get: () => fontPrefs.value.letterSpacing ?? 0,
+  set: (value: number) => setFontPrefs({ ...fontPrefs.value, letterSpacing: value })
+})
+
+const baseLineHeight = computed({
+  get: () => fontPrefs.value.lineHeight ?? 1.5,
+  set: (value: number) => setFontPrefs({ ...fontPrefs.value, lineHeight: value })
+})
+
+const headingLetterSpacing = computed({
+  get: () => fontPrefs.value.heading?.letterSpacing ?? 0,
+  set: (value: number) => setHeading({ letterSpacing: value })
+})
+
+const headingLineHeight = computed({
+  get: () => fontPrefs.value.heading?.lineHeight ?? 1.5,
+  set: (value: number) => setHeading({ lineHeight: value })
+})
+
+/** Live specimen: a heading line in the heading treatment over a body line. */
+const headingSampleStyle = computed(() => ({
+  fontFamily: `'${fontPrefs.value.heading?.font ?? font.value}', sans-serif`,
+  fontWeight: fontPrefs.value.heading?.weight ?? 700,
+  textTransform: (fontPrefs.value.heading?.uppercase || fontPrefs.value.uppercase) ? 'uppercase' as const : undefined,
+  fontStyle: (fontPrefs.value.heading?.italic || fontPrefs.value.italic) ? 'italic' as const : undefined,
+  textDecoration: fontPrefs.value.heading?.underline ? 'underline' as const : undefined,
+  letterSpacing: `${fontPrefs.value.heading?.letterSpacing ?? fontPrefs.value.letterSpacing ?? 0}em`,
+  lineHeight: fontPrefs.value.heading?.lineHeight ?? 1.25
+}))
+const bodySampleStyle = computed(() => ({
+  fontFamily: `'${font.value}', sans-serif`,
+  fontWeight: fontPrefs.value.weights?.normal ?? 400,
+  textTransform: fontPrefs.value.uppercase ? 'uppercase' as const : undefined,
+  fontStyle: fontPrefs.value.italic ? 'italic' as const : undefined,
+  letterSpacing: `${fontPrefs.value.letterSpacing ?? 0}em`,
+  lineHeight: fontPrefs.value.lineHeight ?? 1.5
+}))
+
+/* ---------------------------------------------------------------- icons -- */
+
+/** A representative spread from the selected set for the preview grid. */
+const SAMPLE_ICON_KEYS = ['search', 'check', 'close', 'warning', 'error', 'info', 'tip', 'light', 'dark', 'external', 'plus', 'minus', 'loading', 'copy', 'file', 'folder', 'eye', 'star', 'upload', 'menu', 'ellipsis', 'reload', 'arrowRight', 'chevronDown']
+const iconPreviews = computed(() => {
+  const set = (themeIcons as Record<string, Record<string, string>>)[icon.value] || {}
+  return SAMPLE_ICON_KEYS.map(key => set[key]).filter((name): name is string => !!name).slice(0, 20)
+})
 
 const semanticAliases: ColorAlias[] = ['secondary', 'success', 'info', 'warning', 'error']
 
@@ -480,7 +600,19 @@ const shadowColor = computed({
     <template v-else-if="group === 'general'">
       <div class="flex flex-col gap-4">
         <ThemeStudioSection label="Font" help-to="/docs/getting-started/integrations/fonts">
-          <div>
+          <div class="flex flex-col gap-2">
+            <!-- live specimen: the heading treatment over the base body -->
+            <div class="rounded-md ring ring-default bg-elevated/50 px-3 py-2 select-none">
+              <p class="text-sm text-highlighted truncate" :style="headingSampleStyle">
+                Grumpy wizards make toxic brew
+              </p>
+              <p class="text-xs text-muted truncate" :style="bodySampleStyle">
+                The quick brown fox jumps over the lazy dog 0123456789
+              </p>
+            </div>
+
+            <span class="text-xs font-semibold text-muted select-none">Base</span>
+
             <USelect
               v-model="font"
               size="sm"
@@ -489,14 +621,280 @@ const shadowColor = computed({
               icon="i-lucide-type"
               :items="fonts"
               class="w-full"
-            />
+            >
+              <template #item-label="{ item }">
+                <span :style="{ fontFamily: `'${item}', sans-serif` }">{{ item }}</span>
+              </template>
+            </USelect>
+
+            <div class="flex items-center gap-1.5">
+              <!-- face -->
+              <UFieldGroup size="sm">
+                <UPopover :content="{ align: 'start' }">
+                  <UTooltip text="Weights">
+                    <UButton
+                      icon="i-lucide-bold"
+                      color="neutral"
+                      variant="subtle"
+                      :active="weightsDirty"
+                      active-color="primary"
+                      active-variant="subtle"
+                      aria-label="Font weights"
+                    />
+                  </UTooltip>
+
+                  <template #content>
+                    <div class="w-64 p-3 flex flex-col gap-1.5">
+                      <ThemeStudioSliderRow
+                        v-for="step in WEIGHT_STEPS"
+                        :key="step"
+                        v-model="weightSteps[step].value"
+                        :label="step.charAt(0).toUpperCase() + step.slice(1)"
+                        :min="100"
+                        :max="900"
+                        :step="25"
+                      />
+                    </div>
+                  </template>
+                </UPopover>
+
+                <UTooltip text="Italic">
+                  <UButton
+                    icon="i-lucide-italic"
+                    color="neutral"
+                    variant="subtle"
+                    :active="baseItalic"
+                    active-color="primary"
+                    active-variant="subtle"
+                    aria-label="Italic text"
+                    @click="baseItalic = !baseItalic"
+                  />
+                </UTooltip>
+              </UFieldGroup>
+
+              <!-- glyph treatment -->
+              <UFieldGroup size="sm">
+                <UTooltip text="Uppercase">
+                  <UButton
+                    icon="i-lucide-case-upper"
+                    color="neutral"
+                    variant="subtle"
+                    :active="baseUppercase"
+                    active-color="primary"
+                    active-variant="subtle"
+                    aria-label="Uppercase text"
+                    @click="baseUppercase = !baseUppercase"
+                  />
+                </UTooltip>
+              </UFieldGroup>
+
+              <!-- rhythm -->
+              <UFieldGroup size="sm">
+                <UPopover :content="{ align: 'start' }">
+                  <UTooltip text="Letter spacing">
+                    <UButton
+                      icon="i-lucide-move-horizontal"
+                      color="neutral"
+                      variant="subtle"
+                      :active="baseLetterSpacing !== 0"
+                      active-color="primary"
+                      active-variant="subtle"
+                      aria-label="Letter spacing"
+                    />
+                  </UTooltip>
+
+                  <template #content>
+                    <ThemeStudioSliderRow
+                      v-model="baseLetterSpacing"
+                      label="Spacing"
+                      :min="-0.05"
+                      :max="0.25"
+                      :step="0.005"
+                      unit="em"
+                      class="w-64 p-3"
+                    />
+                  </template>
+                </UPopover>
+
+                <UPopover :content="{ align: 'start' }">
+                  <UTooltip text="Line height">
+                    <UButton
+                      icon="i-lucide-move-vertical"
+                      color="neutral"
+                      variant="subtle"
+                      :active="baseLineHeight !== 1.5"
+                      active-color="primary"
+                      active-variant="subtle"
+                      aria-label="Line height"
+                    />
+                  </UTooltip>
+
+                  <template #content>
+                    <ThemeStudioSliderRow
+                      v-model="baseLineHeight"
+                      label="Height"
+                      :min="1"
+                      :max="2"
+                      :step="0.05"
+                      class="w-64 p-3"
+                    />
+                  </template>
+                </UPopover>
+              </UFieldGroup>
+            </div>
+
+            <span class="text-xs font-semibold text-muted select-none pt-1">Headings (Prose)</span>
+
+            <USelect
+              v-model="headingFont"
+              size="sm"
+              color="neutral"
+              variant="subtle"
+              icon="i-lucide-heading"
+              :items="headingFontItems"
+              class="w-full"
+            >
+              <template #item-label="{ item }">
+                <span :style="item.value === 'inherit' ? undefined : { fontFamily: `'${item.value}', sans-serif` }">{{ item.label }}</span>
+              </template>
+            </USelect>
+
+            <div class="flex items-center gap-1.5">
+              <!-- face -->
+              <UFieldGroup size="sm">
+                <UPopover :content="{ align: 'start' }">
+                  <UTooltip text="Weight">
+                    <UButton
+                      icon="i-lucide-bold"
+                      color="neutral"
+                      variant="subtle"
+                      :active="fontPrefs.heading?.weight !== undefined"
+                      active-color="primary"
+                      active-variant="subtle"
+                      aria-label="Heading weight"
+                    />
+                  </UTooltip>
+
+                  <template #content>
+                    <ThemeStudioSliderRow
+                      v-model="headingWeight"
+                      label="Weight"
+                      :min="100"
+                      :max="900"
+                      :step="25"
+                      class="w-64 p-3"
+                    />
+                  </template>
+                </UPopover>
+
+                <UTooltip text="Italic">
+                  <UButton
+                    icon="i-lucide-italic"
+                    color="neutral"
+                    variant="subtle"
+                    :active="headingItalic"
+                    active-color="primary"
+                    active-variant="subtle"
+                    aria-label="Italic headings"
+                    @click="headingItalic = !headingItalic"
+                  />
+                </UTooltip>
+
+                <UTooltip text="Underline">
+                  <UButton
+                    icon="i-lucide-underline"
+                    color="neutral"
+                    variant="subtle"
+                    :active="headingUnderline"
+                    active-color="primary"
+                    active-variant="subtle"
+                    aria-label="Underline headings"
+                    @click="headingUnderline = !headingUnderline"
+                  />
+                </UTooltip>
+              </UFieldGroup>
+
+              <!-- glyph treatment -->
+              <UTooltip text="Uppercase">
+                <UButton
+                  icon="i-lucide-case-upper"
+                  color="neutral"
+                  variant="subtle"
+                  size="sm"
+                  :active="headingUppercase"
+                  active-color="primary"
+                  active-variant="subtle"
+                  aria-label="Uppercase headings"
+                  @click="headingUppercase = !headingUppercase"
+                />
+              </UTooltip>
+
+              <!-- rhythm -->
+              <UFieldGroup size="sm">
+                <UPopover :content="{ align: 'start' }">
+                  <UTooltip text="Letter spacing">
+                    <UButton
+                      icon="i-lucide-move-horizontal"
+                      color="neutral"
+                      variant="subtle"
+                      :active="headingLetterSpacing !== 0"
+                      active-color="primary"
+                      active-variant="subtle"
+                      aria-label="Heading letter spacing"
+                    />
+                  </UTooltip>
+
+                  <template #content>
+                    <ThemeStudioSliderRow
+                      v-model="headingLetterSpacing"
+                      label="Spacing"
+                      :min="-0.05"
+                      :max="0.25"
+                      :step="0.005"
+                      unit="em"
+                      class="w-64 p-3"
+                    />
+                  </template>
+                </UPopover>
+
+                <UPopover :content="{ align: 'start' }">
+                  <UTooltip text="Line height">
+                    <UButton
+                      icon="i-lucide-move-vertical"
+                      color="neutral"
+                      variant="subtle"
+                      :active="headingLineHeight !== 1.5"
+                      active-color="primary"
+                      active-variant="subtle"
+                      aria-label="Heading line height"
+                    />
+                  </UTooltip>
+
+                  <template #content>
+                    <ThemeStudioSliderRow
+                      v-model="headingLineHeight"
+                      label="Height"
+                      :min="1"
+                      :max="2"
+                      :step="0.05"
+                      class="w-64 p-3"
+                    />
+                  </template>
+                </UPopover>
+              </UFieldGroup>
+            </div>
           </div>
         </ThemeStudioSection>
 
         <USeparator />
 
         <ThemeStudioSection label="Icons" help-to="/docs/getting-started/integrations/icons">
-          <div>
+          <div class="flex flex-col gap-2">
+            <!-- a spread of the selected set -->
+            <div class="rounded-md ring ring-default bg-elevated/50 px-3 py-2 flex flex-wrap justify-center gap-2.5">
+              <UIcon v-for="name in iconPreviews" :key="name" :name="name" class="size-4 text-muted" />
+            </div>
+
             <USelect
               v-model="icon"
               size="sm"

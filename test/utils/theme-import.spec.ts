@@ -151,6 +151,19 @@ describe('importTheme', () => {
     expect(doc.tokens?.dark?.['--ui-frame-color']).toBe('#ff0000')
   })
 
+  it('round-trips base weight and heading typography', () => {
+    const original: ThemeDoc = {
+      version: 1,
+      font: { sans: 'Comic Neue', weights: { normal: 450, medium: 550, semibold: 650 }, uppercase: true, italic: true, letterSpacing: 0.05, lineHeight: 1.6, heading: { font: 'Outfit', weight: 800, uppercase: true, italic: true, underline: true, letterSpacing: -0.02, lineHeight: 1.2 } }
+    }
+    const css = generateCSS(original)
+    const { doc: imported, skipped } = importTheme({ css })
+
+    expect(skipped).toEqual([])
+    expect(imported.font).toEqual(original.font)
+    expect(generateCSS(imported)).toBe(css)
+  })
+
   it('round-trips the flat shadow treatment without color defaults', () => {
     const original: ThemeDoc = { version: 1, style: { shadow: 'flat' } }
     const css = generateCSS(original)

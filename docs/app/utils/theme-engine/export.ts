@@ -17,6 +17,15 @@ export function generateCSS(doc: ThemeDoc): string {
   if (doc.font?.sans && doc.font.sans !== THEME_DEFAULTS.font) {
     themeLines.push(`  --font-sans: '${doc.font.sans}', sans-serif;`)
   }
+  // Weight steps are live variables in tailwind v4 — font-medium compiles
+  // to font-weight: var(--font-weight-medium) — so remapping them reaches
+  // every component, not just inherited text.
+  for (const step of ['normal', 'medium', 'semibold', 'bold'] as const) {
+    const weight = doc.font?.weights?.[step]
+    if (weight !== undefined) {
+      themeLines.push(`  --font-weight-${step}: ${weight};`)
+    }
+  }
   if (doc.spacing !== undefined && doc.spacing !== THEME_DEFAULTS.spacing) {
     themeLines.push(`  --spacing: ${doc.spacing}rem;`)
   }
@@ -48,6 +57,32 @@ export function generateCSS(doc: ThemeDoc): string {
 
   if (doc.fontSize !== undefined && doc.fontSize !== THEME_DEFAULTS.fontSize) {
     lines.push('', 'html {', `  font-size: ${doc.fontSize}px;`, '}')
+  }
+
+  // Body-level treatment: classless text has no utility to dereference the
+  // weight variable, and case/tracking/leading are inherited properties.
+  const bodyLines: string[] = []
+  if (doc.font?.weights?.normal !== undefined) bodyLines.push(`  font-weight: ${doc.font.weights.normal};`)
+  if (doc.font?.uppercase) bodyLines.push('  text-transform: uppercase;')
+  if (doc.font?.italic) bodyLines.push('  font-style: italic;')
+  if (doc.font?.letterSpacing !== undefined) bodyLines.push(`  letter-spacing: ${doc.font.letterSpacing}em;`)
+  if (doc.font?.lineHeight !== undefined) bodyLines.push(`  line-height: ${doc.font.lineHeight};`)
+  if (bodyLines.length) {
+    lines.push('', 'body {', ...bodyLines, '}')
+  }
+
+  // Headings ride one h1–h6 rule; unset fields inherit the base treatment.
+  const heading = doc.font?.heading
+  if (heading && Object.keys(heading).length) {
+    const headingLines: string[] = []
+    if (heading.font) headingLines.push(`  font-family: '${heading.font}', sans-serif;`)
+    if (heading.weight !== undefined) headingLines.push(`  font-weight: ${heading.weight};`)
+    if (heading.uppercase) headingLines.push('  text-transform: uppercase;')
+    if (heading.italic) headingLines.push('  font-style: italic;')
+    if (heading.underline) headingLines.push('  text-decoration: underline;')
+    if (heading.letterSpacing !== undefined) headingLines.push(`  letter-spacing: ${heading.letterSpacing}em;`)
+    if (heading.lineHeight !== undefined) headingLines.push(`  line-height: ${heading.lineHeight};`)
+    if (headingLines.length) lines.push('', 'h1, h2, h3, h4, h5, h6 {', ...headingLines, '}')
   }
 
   const rootLines: string[] = []
@@ -203,6 +238,11 @@ export function docToSettings(doc: ThemeDoc): Record<string, any> {
   if (doc.fontSize !== undefined) settings.fontSize = doc.fontSize
   if (doc.spacing !== undefined) settings.spacing = doc.spacing
   if (doc.font?.sans) settings.font = doc.font.sans
+  if (doc.font?.weights) settings.fontWeights = doc.font.weights
+  if (doc.font?.uppercase || doc.font?.italic || doc.font?.letterSpacing !== undefined || doc.font?.lineHeight !== undefined) {
+    settings.fontBody = { uppercase: doc.font.uppercase, italic: doc.font.italic, letterSpacing: doc.font.letterSpacing, lineHeight: doc.font.lineHeight }
+  }
+  if (doc.font?.heading) settings.fontHeading = doc.font.heading
   if (doc.icons) settings.icons = doc.icons
 
   if (doc.palettes) {

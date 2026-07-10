@@ -1,7 +1,7 @@
 import { defu } from 'defu'
 import { THEME_TAG_IDS, THEME_STATE_KEYS, THEME_STORAGE_KEYS } from '../utils/theme-keys'
 import { useLocalStorage } from '@vueuse/core'
-import { themeIcons, cssVariableDefaults, readLocalStorage } from '../utils/theme'
+import { themeIcons, cssVariableDefaults, readLocalStorage, FONT_WEIGHT_DEFAULTS } from '../utils/theme'
 import { generateCSS, generateConfig, mergeUi, isDefaultStyle, DEFAULT_COLORS, THEME_DEFAULTS, LIBRARY_TOKEN_DEFAULTS } from '../utils/theme-engine'
 import type { ThemeDoc, ThemePalette } from '../utils/theme-engine'
 import { omit } from '#ui/utils'
@@ -43,6 +43,17 @@ function sanitizeCSSVariables(input: { light?: Record<string, any>, dark?: Recor
     return result
   }
   return { light: clean(input.light), dark: clean(input.dark) }
+}
+
+export interface FontPrefs {
+  weights?: { normal?: number, medium?: number, semibold?: number, bold?: number }
+  uppercase?: boolean
+  italic?: boolean
+  /** Tracking in em. */
+  letterSpacing?: number
+  /** Unitless line height — 1.5 is the tailwind preflight default. */
+  lineHeight?: number
+  heading?: { font?: string, weight?: number, uppercase?: boolean, italic?: boolean, underline?: boolean, letterSpacing?: number, lineHeight?: number }
 }
 
 export function useTheme() {
@@ -87,6 +98,48 @@ export function useTheme() {
   const _font = useLocalStorage('nuxt-ui-font', 'Public Sans')
   const _iconSet = useLocalStorage('nuxt-ui-icons', 'lucide')
   const _blackAsPrimary = useLocalStorage('nuxt-ui-black-as-primary', false)
+
+  /**
+   * Typography beyond the base family: body weight plus the heading
+   * treatment. One JSON channel (state + storage under the same key) so
+   * resetTheme and the FOUC script share it.
+   */
+  const fontPrefs = useState<FontPrefs>('nuxt-ui-font-prefs', () => readLocalStorage('nuxt-ui-font-prefs', {}))
+
+  function setFontPrefs(next: FontPrefs) {
+    // Normalize: defaults are absences, so hasCSSChanges/export stay clean.
+    const clean: FontPrefs = {}
+    const weights: NonNullable<FontPrefs['weights']> = {}
+    for (const step of ['normal', 'medium', 'semibold', 'bold'] as const) {
+      const weight = next.weights?.[step]
+      if (weight !== undefined && weight !== FONT_WEIGHT_DEFAULTS[step]) weights[step] = weight
+    }
+    if (Object.keys(weights).length) clean.weights = weights
+    if (next.uppercase) clean.uppercase = true
+    if (next.italic) clean.italic = true
+    if (next.letterSpacing !== undefined && next.letterSpacing !== 0) clean.letterSpacing = next.letterSpacing
+    if (next.lineHeight !== undefined && next.lineHeight !== 1.5) clean.lineHeight = next.lineHeight
+    const heading = next.heading || {}
+    const cleanHeading: NonNullable<FontPrefs['heading']> = {}
+    if (heading.font && heading.font !== _font.value) cleanHeading.font = heading.font
+    // 700 is the heading resting point (the slider's default position) —
+    // storing it would pin the toolbar's B active and pollute exports.
+    if (heading.weight !== undefined && heading.weight !== 700) cleanHeading.weight = heading.weight
+    if (heading.uppercase) cleanHeading.uppercase = true
+    if (heading.italic) cleanHeading.italic = true
+    if (heading.underline) cleanHeading.underline = true
+    if (heading.letterSpacing !== undefined && heading.letterSpacing !== 0) cleanHeading.letterSpacing = heading.letterSpacing
+    if (heading.lineHeight !== undefined && heading.lineHeight !== 1.5) cleanHeading.lineHeight = heading.lineHeight
+    if (Object.keys(cleanHeading).length) clean.heading = cleanHeading
+
+    fontPrefs.value = clean
+    if (Object.keys(clean).length) {
+      window.localStorage.setItem('nuxt-ui-font-prefs', JSON.stringify(clean))
+    } else {
+      window.localStorage.removeItem('nuxt-ui-font-prefs')
+    }
+    trackThrottled('Theme Changed', { setting: 'fontPrefs' })
+  }
 
   // taupe/mauve/mist/olive ship with tailwind v4's theme.css but not (yet)
   // the tailwindcss/colors JS export — swatches and fits resolve them from
@@ -148,7 +201,7 @@ export function useTheme() {
     }
   })
 
-  const fonts = ['Public Sans', 'DM Sans', 'Geist', 'Inter', 'Poppins', 'Outfit', 'Raleway']
+  const fonts = ['Public Sans', 'Comic Neue', 'DM Sans', 'Geist', 'Inter', 'Poppins', 'Outfit', 'Raleway']
 
   const font = computed({
     get() {
@@ -217,7 +270,38 @@ export function useTheme() {
   const fontSizeStyle = computed(() => _fontSize.value !== 16 ? `html { font-size: ${_fontSize.value}px; }` : 'html {}')
   const spacingStyle = computed(() => _spacing.value !== 0.25 ? `:root { --spacing: ${_spacing.value}rem; }` : ':root {}')
   const blackAsPrimaryStyle = computed(() => _blackAsPrimary.value ? `:root { --ui-primary: black; } .dark { --ui-primary: white; }` : ':root {}')
-  const fontStyle = computed(() => `:root { --font-sans: '${_font.value}', sans-serif; }`)
+  const fontStyle = computed(() => {
+    const parts = [`:root { --font-sans: '${_font.value}', sans-serif; }`]
+    const prefs = fontPrefs.value
+    const weights = prefs.weights || {}
+    const weightVars = (Object.keys(weights) as Array<keyof typeof weights>)
+      .map(step => `--font-weight-${step}: ${weights[step]};`)
+    if (weightVars.length) {
+      parts.push(`:root { ${weightVars.join(' ')} }`)
+    }
+    const bodyRules: string[] = []
+    if (weights.normal !== undefined) bodyRules.push(`font-weight: ${weights.normal};`)
+    if (prefs.uppercase) bodyRules.push('text-transform: uppercase;')
+    if (prefs.italic) bodyRules.push('font-style: italic;')
+    if (prefs.letterSpacing !== undefined) bodyRules.push(`letter-spacing: ${prefs.letterSpacing}em;`)
+    if (prefs.lineHeight !== undefined) bodyRules.push(`line-height: ${prefs.lineHeight};`)
+    if (bodyRules.length) {
+      parts.push(`body { ${bodyRules.join(' ')} }`)
+    }
+    const heading = prefs.heading
+    if (heading && Object.keys(heading).length) {
+      const rules: string[] = []
+      if (heading.font) rules.push(`font-family: '${heading.font}', sans-serif;`)
+      if (heading.weight !== undefined) rules.push(`font-weight: ${heading.weight};`)
+      if (heading.uppercase) rules.push('text-transform: uppercase;')
+      if (heading.italic) rules.push('font-style: italic;')
+      if (heading.underline) rules.push('text-decoration: underline;')
+      if (heading.letterSpacing !== undefined) rules.push(`letter-spacing: ${heading.letterSpacing}em;`)
+      if (heading.lineHeight !== undefined) rules.push(`line-height: ${heading.lineHeight};`)
+      parts.push(`h1, h2, h3, h4, h5, h6 { ${rules.join(' ')} }`)
+    }
+    return parts.join(' ')
+  })
   const customColorsStyle = computed(() => {
     const entries = Object.entries(customColorsData.value)
     if (!entries.length) return ''
@@ -240,14 +324,18 @@ export function useTheme() {
     return parts.join(' ')
   })
 
-  const link = computed(() => {
-    const name = _font.value
-    if (name === 'Public Sans') return []
-    return [{
+  /** Google Fonts stylesheet link for a family (Public Sans is bundled). */
+  function fontLink(name: string) {
+    return {
       rel: 'stylesheet' as const,
-      href: `https://fonts.googleapis.com/css2?family=${encodeURIComponent(name)}:wght@400;500;600;700&display=swap`,
+      href: `https://fonts.googleapis.com/css2?family=${encodeURIComponent(name)}:wght@300;400;500;600;700;800&display=swap`,
       id: `font-${name.toLowerCase().replace(/\s+/g, '-')}`
-    }]
+    }
+  }
+
+  const link = computed(() => {
+    const names = new Set([_font.value, fontPrefs.value.heading?.font].filter((name): name is string => !!name && name !== 'Public Sans'))
+    return [...names].map(fontLink)
   })
 
   const style = [
@@ -266,6 +354,7 @@ export function useTheme() {
       || _spacing.value !== 0.25
       || _blackAsPrimary.value
       || _font.value !== 'Public Sans'
+      || Object.keys(fontPrefs.value).length > 0
       || hasCustomColors.value
       || hasCSSVariables.value
   })
@@ -301,7 +390,16 @@ export function useTheme() {
     if (_radius.value !== THEME_DEFAULTS.radius) doc.radius = _radius.value
     if (_fontSize.value !== THEME_DEFAULTS.fontSize) doc.fontSize = _fontSize.value
     if (_spacing.value !== THEME_DEFAULTS.spacing) doc.spacing = _spacing.value
-    if (_font.value !== THEME_DEFAULTS.font) doc.font = { sans: _font.value }
+    const fontDoc: ThemeDoc['font'] = {
+      ...(_font.value !== THEME_DEFAULTS.font ? { sans: _font.value } : {}),
+      ...(fontPrefs.value.weights ? { weights: { ...fontPrefs.value.weights } } : {}),
+      ...(fontPrefs.value.uppercase ? { uppercase: true } : {}),
+      ...(fontPrefs.value.italic ? { italic: true } : {}),
+      ...(fontPrefs.value.letterSpacing !== undefined ? { letterSpacing: fontPrefs.value.letterSpacing } : {}),
+      ...(fontPrefs.value.lineHeight !== undefined ? { lineHeight: fontPrefs.value.lineHeight } : {}),
+      ...(fontPrefs.value.heading ? { heading: { ...fontPrefs.value.heading } } : {})
+    }
+    if (Object.keys(fontDoc).length) doc.font = fontDoc
     if (_iconSet.value !== THEME_DEFAULTS.icons) doc.icons = _iconSet.value
 
     // Only palettes actually referenced by an alias belong in the export —
@@ -443,6 +541,34 @@ export function useTheme() {
     if (settings.fontSize !== undefined && Number.isFinite(Number(settings.fontSize))) fontSize.value = Math.min(20, Math.max(12, Number(settings.fontSize)))
     if (settings.spacing !== undefined && Number.isFinite(Number(settings.spacing))) spacing.value = Math.min(0.5, Math.max(0.125, Number(settings.spacing)))
     if (settings.font && SAFE_NAME.test(settings.font)) font.value = settings.font
+    if (settings.fontWeights !== undefined || settings.fontBody !== undefined || settings.fontHeading !== undefined) {
+      const heading = settings.fontHeading && typeof settings.fontHeading === 'object' ? settings.fontHeading : {}
+      const rawWeights = settings.fontWeights && typeof settings.fontWeights === 'object' ? settings.fontWeights : fontPrefs.value.weights || {}
+      const weights: NonNullable<FontPrefs['weights']> = {}
+      for (const step of ['normal', 'medium', 'semibold', 'bold'] as const) {
+        const weight = Number(rawWeights[step])
+        if (Number.isFinite(weight)) weights[step] = Math.min(900, Math.max(100, weight))
+      }
+      const body = settings.fontBody && typeof settings.fontBody === 'object' ? settings.fontBody : {}
+      const em = (value: unknown) => Number.isFinite(Number(value)) ? Math.min(1, Math.max(-0.2, Number(value))) : undefined
+      const leading = (value: unknown) => Number.isFinite(Number(value)) ? Math.min(3, Math.max(0.8, Number(value))) : undefined
+      setFontPrefs({
+        weights,
+        uppercase: !!body.uppercase,
+        italic: !!body.italic,
+        letterSpacing: em(body.letterSpacing),
+        lineHeight: leading(body.lineHeight),
+        heading: {
+          font: heading.font && SAFE_NAME.test(heading.font) ? heading.font : undefined,
+          weight: Number.isFinite(Number(heading.weight)) ? Math.min(900, Math.max(100, Number(heading.weight))) : undefined,
+          uppercase: !!heading.uppercase,
+          italic: !!heading.italic,
+          underline: !!heading.underline,
+          letterSpacing: em(heading.letterSpacing),
+          lineHeight: leading(heading.lineHeight)
+        }
+      })
+    }
     if (settings.icons && settings.icons in themeIcons) icon.value = settings.icons
     if (settings.blackAsPrimary !== undefined) setBlackAsPrimary(!!settings.blackAsPrimary)
 
@@ -499,6 +625,8 @@ export function useTheme() {
     _fontSize.value = 16
     _spacing.value = 0.25
     _font.value = 'Public Sans'
+    fontPrefs.value = {}
+    window.localStorage.removeItem('nuxt-ui-font-prefs')
     _iconSet.value = 'lucide'
     appConfig.ui.icons = themeIcons.lucide as any
     _blackAsPrimary.value = false
@@ -558,6 +686,8 @@ export function useTheme() {
     spacing,
     fonts,
     font,
+    fontPrefs,
+    setFontPrefs,
     icon,
     icons,
     modes,

@@ -274,8 +274,6 @@ function resetEffects() {
               variant="ghost"
               size="sm"
               block
-              :active="modifiersOpen"
-              active-variant="subtle"
               class="justify-start"
             />
 

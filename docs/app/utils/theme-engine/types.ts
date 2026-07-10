@@ -49,6 +49,29 @@ export interface ThemeDoc {
   spacing?: number
   font?: {
     sans?: string
+    /**
+     * Overrides for tailwind's weight steps — the knobs components
+     * actually dereference (`font-medium` compiles to
+     * `font-weight: var(--font-weight-medium)`). Sparse: only set steps
+     * are emitted. normal also drives classless body text.
+     */
+    weights?: { normal?: number, medium?: number, semibold?: number, bold?: number }
+    uppercase?: boolean
+    italic?: boolean
+    /** Tracking in em. */
+    letterSpacing?: number
+    /** Unitless line height (browser/tailwind default is 1.5). */
+    lineHeight?: number
+    /** Heading treatment (h1–h6); every field falls back to the base. */
+    heading?: {
+      font?: string
+      weight?: number
+      uppercase?: boolean
+      italic?: boolean
+      underline?: boolean
+      letterSpacing?: number
+      lineHeight?: number
+    }
   }
   icons?: string
   /**
@@ -86,6 +109,9 @@ export function createThemeDoc(): ThemeDoc {
 export function isDefaultTheme(doc: ThemeDoc): boolean {
   return !doc.palettes && !doc.colors && !doc.blackAsPrimary && !doc.tokens
     && doc.radius === undefined && doc.fontSize === undefined && doc.spacing === undefined
-    && !doc.font?.sans && !doc.icons && !doc.components
+    && !doc.font?.sans && !doc.font?.weights && !doc.font?.heading
+    && !doc.font?.uppercase && !doc.font?.italic
+    && doc.font?.letterSpacing === undefined && doc.font?.lineHeight === undefined
+    && !doc.icons && !doc.components
     && isDefaultStyle(doc.style)
 }

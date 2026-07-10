@@ -80,6 +80,7 @@ const display = computed(() => shade.value
       :min="min"
       :max="max"
       :step="step"
+      color="neutral"
       size="xs"
       :aria-label="label ?? mode"
       :ui="sliderColor ? {

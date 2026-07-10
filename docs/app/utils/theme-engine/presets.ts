@@ -247,13 +247,13 @@ export const presets: ThemePreset[] = [{
     }
   }
 }, {
-  id: 'marvel',
-  name: 'Marvel',
+  id: 'comicbook',
+  name: 'Comicbook',
   description: 'Comic-book red and blue with inked panel outlines.',
   icon: 'i-lucide-book-open',
   doc: {
     version: 1,
-    meta: { name: 'Marvel', base: 'marvel' },
+    meta: { name: 'Comicbook', base: 'comicbook' },
     // A cool-violet sculpted neutral for the panel grays.
     palettes: {
       'custom-neutral': {
@@ -277,27 +277,30 @@ export const presets: ThemePreset[] = [{
       neutral: 'custom-neutral'
     },
     radius: 0.125,
-    font: { sans: 'Outfit' },
-    // Inked page: near-black default borders over muted panel edges, deep
-    // red at 600 in light, flat 50s inversions in dark.
+    font: { sans: 'Comic Neue' },
+    // Inked page: near-black default AND accented borders over muted panel
+    // edges, deep red at 600 in light, flat 50s inversions in dark.
     tokens: {
       light: {
+        '--ui-primary': 'var(--ui-color-primary-600)',
         '--ui-bg': 'var(--ui-color-neutral-50)',
+        '--ui-bg-muted': 'var(--ui-color-neutral-100)',
+        '--ui-bg-elevated': 'var(--ui-color-neutral-200)',
+        '--ui-bg-accented': 'var(--ui-color-neutral-200)',
         '--ui-text-inverted': 'var(--ui-color-neutral-50)',
-        '--ui-bg-muted': 'var(--ui-color-neutral-50)',
         '--ui-border': 'var(--ui-color-neutral-950)',
         '--ui-border-muted': 'var(--ui-color-neutral-300)',
-        '--ui-border-accented': 'var(--ui-color-neutral-400)',
-        '--ui-bg-elevated': 'var(--ui-color-neutral-100)',
-        '--ui-bg-accented': 'var(--ui-color-neutral-200)',
-        '--ui-primary': 'var(--ui-color-primary-600)'
+        '--ui-border-accented': 'var(--ui-color-neutral-950)'
       },
       dark: {
+        '--ui-primary': 'var(--ui-color-primary-500)',
         '--ui-bg': 'var(--ui-color-neutral-900)',
         '--ui-bg-inverted': 'var(--ui-color-neutral-50)',
         '--ui-text-highlighted': 'var(--ui-color-neutral-50)',
-        '--ui-border-inverted': 'var(--ui-color-neutral-50)',
-        '--ui-primary': 'var(--ui-color-primary-500)'
+        '--ui-border': 'var(--ui-color-neutral-950)',
+        '--ui-border-muted': 'var(--ui-color-neutral-700)',
+        '--ui-border-accented': 'var(--ui-color-neutral-950)',
+        '--ui-border-inverted': 'var(--ui-color-neutral-50)'
       }
     },
     style: {
@@ -360,12 +363,19 @@ export const presets: ThemePreset[] = [{
     },
     radius: 0.375,
     font: { sans: 'DM Sans' },
-    // Deep cream page over ivory surfaces in light; one flat 800 surface
+    // Deep cream page over ivory surfaces in light, with the border family
+    // stepped one deeper to hold on the tinted page; one flat 800 surface
     // family in dark, with the brand clay held at 500.
     tokens: {
       light: {
         '--ui-bg': 'var(--ui-color-neutral-200)',
-        '--ui-bg-elevated': 'var(--ui-color-neutral-50)'
+        '--ui-bg-muted': 'var(--ui-color-neutral-50)',
+        '--ui-bg-elevated': 'var(--ui-color-neutral-50)',
+        '--ui-bg-accented': 'var(--ui-color-neutral-300)',
+        '--ui-border': 'var(--ui-color-neutral-300)',
+        '--ui-border-muted': 'var(--ui-color-neutral-200)',
+        '--ui-border-accented': 'var(--ui-color-neutral-400)',
+        '--ui-bg-inverted': 'var(--ui-color-neutral-900)'
       },
       dark: {
         '--ui-primary': 'var(--ui-color-primary-500)',
