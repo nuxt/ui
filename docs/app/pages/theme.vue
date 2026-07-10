@@ -138,9 +138,9 @@ const shareMode = ref<'import' | 'export'>('export')
           <div v-if="fullscreen" class="absolute bottom-0 inset-x-0 h-2 pointer-events-auto" />
 
           <div
-            class="flex items-center gap-2 py-3 overflow-x-auto"
+            class="flex items-center gap-2 p-3 overflow-x-auto"
             :class="fullscreen && [
-              'mt-4 px-4 rounded-t-lg bg-default/75 backdrop-blur ring ring-default shadow-lg pointer-events-auto transition-transform duration-200',
+              'mt-4 rounded-t-lg bg-default/75 backdrop-blur ring ring-default shadow-lg pointer-events-auto transition-transform duration-200',
               toolbarPinned ? 'translate-y-0' : 'translate-y-[calc(100%+6px)] group-hover:translate-y-0 group-focus-within:translate-y-0'
             ]"
           >
