@@ -342,8 +342,6 @@ export function useTheme() {
     if (settings.radius !== undefined && Number.isFinite(Number(settings.radius))) radius.value = Number(settings.radius)
     if (settings.font && SAFE_NAME.test(settings.font)) font.value = settings.font
     if (settings.icons && settings.icons in themeIcons) icon.value = settings.icons
-    // Legacy `blackAsPrimary` flag now maps to a `neutral` primary.
-    if (settings.blackAsPrimary) primary.value = 'neutral'
 
     const colorKeys = ['secondary', 'success', 'info', 'warning', 'error'] as const
     const savedExtras: Record<string, any> = { ...aiThemeExtras.value }
@@ -387,7 +385,6 @@ export function useTheme() {
     _font.value = 'Public Sans'
     _iconSet.value = 'lucide'
     appConfig.ui.icons = themeIcons.lucide as any
-    window.localStorage.removeItem('nuxt-ui-black-as-primary')
 
     const defaultColors: Record<string, string> = { secondary: 'blue', success: 'green', info: 'blue', warning: 'yellow', error: 'red' }
     const extras = aiThemeExtras.value

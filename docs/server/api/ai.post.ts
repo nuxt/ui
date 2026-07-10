@@ -40,7 +40,7 @@ const applyTheme = {
   inputSchema: jsonSchema<Record<string, any>>({
     type: 'object' as const,
     properties: {
-      primary: { type: 'string', description: 'Primary color name (e.g., green, blue, red, indigo)' },
+      primary: { type: 'string', description: 'Primary color name (e.g., green, blue, red, indigo), or neutral for a monochrome black/white look' },
       neutral: { type: 'string', description: 'Neutral color name (slate, gray, zinc, neutral, stone, taupe, mauve, mist, olive)' },
       secondary: { type: 'string', description: 'Secondary color name' },
       success: { type: 'string', description: 'Success color name' },
@@ -49,7 +49,6 @@ const applyTheme = {
       error: { type: 'string', description: 'Error color name' },
       radius: { type: 'number', description: 'Border radius in rem: 0, 0.125, 0.25, 0.375, 0.5' },
       font: { type: 'string', description: 'Font family name — any Google Font works (e.g. Public Sans, DM Sans, Geist, Inter, Poppins, Outfit, Raleway, Playfair Display, Nunito, JetBrains Mono, etc.)' },
-      blackAsPrimary: { type: 'boolean', description: 'Use solid black/white as primary color for a monochrome look' },
       icons: { type: 'string', description: 'Icon set for live preview: lucide (default), phosphor, or tabler. For exported code, any Iconify icon set can be suggested.' },
       customColors: {
         type: 'object',
@@ -107,7 +106,7 @@ When users ask for a complete theme, to change "all colors", or describe a broad
 - Pick a **primary** that embodies the theme's identity. If no standard Tailwind color fits, use \`customColors\` to define a bespoke palette with all shades 50-950 as hex values — this is encouraged for creative/unique themes.
 - Pick a **secondary** that complements the primary (analogous or contrasting on the color wheel). Can also be a custom palette.
 - Pick **success/info/warning/error** that feel harmonious with the palette while staying semantically meaningful (success = green-ish, error = red-ish, warning = amber/yellow-ish, info = blue/cyan-ish). You can shift hues — e.g. \`lime\` for success in a nature theme, \`rose\` for error in a warm theme — but keep them recognizable.
-- For monochrome/black-and-white themes, keep semantic colors meaningful. Only primary, secondary, and neutral should go monochrome. Use \`blackAsPrimary: true\` for monochrome primary.
+- For monochrome/black-and-white themes, keep semantic colors meaningful. Only primary, secondary, and neutral should go monochrome. Use \`primary: 'neutral'\` for monochrome primary.
 
 When users ask to reset, revert, or restore the default theme, use the \`resetTheme\` tool. This resets primary to green, neutral to slate, radius to 0.25rem, font to Public Sans, and removes any custom colors.
 
@@ -296,7 +295,7 @@ export default defineConfig({
 })
 \`\`\`
 
-NEVER recommend \`appConfig.theme.*\` properties (like \`blackAsPrimary\`, \`radius\`, \`font\`) — those are internal to the docs site. Users should use CSS variables in main.css for radius, fonts, and monochrome primary.`
+NEVER recommend \`appConfig.theme.*\` properties (like \`radius\`, \`font\`) — those are internal to the docs site. Users should use CSS variables in main.css for radius and fonts, and \`primary: 'neutral'\` in their config for a monochrome primary.`
   })
 }
 

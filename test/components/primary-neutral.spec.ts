@@ -1,14 +1,14 @@
 import { describe, it, expect, afterEach } from 'vitest'
-import { nextTick, reactive } from 'vue'
+import { reactive } from 'vue'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import appConfig from '#build/app.config'
 import Button from '../../src/runtime/components/Button.vue'
 
-// `colors: { primary: 'neutral' }` must make `color="primary"` resolve to the `neutral` *variant*
-// (the `bg-inverted`/`bg-elevated` class set), not just recolor `bg-primary`. The substitution lives
-// in the `tv()` wrapper (src/runtime/utils/tv.ts), which reads the merged app config through the same
-// `reactive()` proxy `useAppConfig()` returns — so mutating it here the way the docs theme picker does
-// reproduces both the baked `app.config.ts` value and the live-update scenario.
+// `colors: { primary: 'neutral' }` is a pure CSS concern handled by the colors plugin
+// (src/runtime/plugins/colors.ts): the alias shades mirror the resolved neutral scale and
+// `--ui-primary` points at `--ui-bg-inverted`. Components keep rendering their regular
+// `bg-primary` classes — the variant key is never remapped, so user overrides targeting
+// `color: 'primary'` keep matching.
 describe('primary: neutral', () => {
   const colors = reactive(appConfig as { ui: { colors: Record<string, string> } }).ui.colors
   const originalPrimary = colors.primary as string
@@ -17,18 +17,56 @@ describe('primary: neutral', () => {
     colors.primary = originalPrimary
   })
 
-  it('resolves the default (primary) color to the neutral variant', async () => {
+  // The colors plugin emits its stylesheet through unhead, which flushes DOM updates
+  // asynchronously — poll instead of racing it with a single tick.
+  async function getColorsStyle(): Promise<string> {
+    for (let i = 0; i < 50; i++) {
+      const el = document.head.querySelector('style#nuxt-ui-colors')
+      if (el?.innerHTML) {
+        return el.innerHTML
+      }
+      await new Promise(resolve => setTimeout(resolve, 10))
+    }
+    throw new Error('style#nuxt-ui-colors not found in document.head')
+  }
+
+  async function waitForStyle(predicate: (css: string) => boolean): Promise<string> {
+    let css = ''
+    for (let i = 0; i < 50; i++) {
+      css = await getColorsStyle()
+      if (predicate(css)) {
+        return css
+      }
+      await new Promise(resolve => setTimeout(resolve, 10))
+    }
+    return css
+  }
+
+  it('mirrors the neutral scale and points the alias at bg-inverted', async () => {
     colors.primary = 'neutral'
 
-    const wrapper = await mountSuspended(Button, { props: { label: 'Button' } })
-    const html = wrapper.html()
+    const css = await waitForStyle(css => css.includes('--ui-primary: var(--ui-bg-inverted);'))
 
-    expect(html).toContain('bg-inverted')
-    expect(html).not.toContain('bg-primary')
+    expect(css).toContain('--ui-color-primary-500: var(--ui-color-neutral-500);')
+    expect(css).toContain('--ui-color-primary-950: var(--ui-color-neutral-950);')
+    expect(css).toContain('--ui-primary: var(--ui-bg-inverted);')
+    // No dark redefinition: the `:root` declaration carries over and `--ui-bg-inverted` flips itself.
+    expect(css).not.toContain('--ui-primary: var(--ui-color-primary-400);')
   })
 
-  it('leaves a normally configured primary untouched', async () => {
+  it('keeps a normally configured primary on its shade scale', async () => {
     colors.primary = 'green'
+
+    const css = await waitForStyle(css => css.includes('--ui-primary: var(--ui-color-primary-500);'))
+
+    expect(css).toContain('--ui-color-primary-500: var(--color-green-500,')
+    expect(css).toContain('--ui-primary: var(--ui-color-primary-500);')
+    expect(css).toContain('--ui-primary: var(--ui-color-primary-400);')
+    expect(css).not.toContain('--ui-bg-inverted')
+  })
+
+  it('does not remap the color variant, so overrides keyed on primary keep matching', async () => {
+    colors.primary = 'neutral'
 
     const wrapper = await mountSuspended(Button, { props: { label: 'Button' } })
     const html = wrapper.html()
@@ -37,23 +75,13 @@ describe('primary: neutral', () => {
     expect(html).not.toContain('bg-inverted')
   })
 
-  it('does not remap an alias that is not configured as neutral', async () => {
-    colors.primary = 'neutral'
-
-    const wrapper = await mountSuspended(Button, { props: { label: 'Button', color: 'error' } })
-
-    expect(wrapper.html()).toContain('bg-error')
-  })
-
-  it('reactively switches to the neutral variant when the alias is toggled live', async () => {
+  it('reactively updates the stylesheet when the alias is toggled live', async () => {
     colors.primary = 'green'
-
-    const wrapper = await mountSuspended(Button, { props: { label: 'Button' } })
-    expect(wrapper.html()).toContain('bg-primary')
+    await waitForStyle(css => css.includes('--ui-primary: var(--ui-color-primary-500);'))
 
     colors.primary = 'neutral'
-    await nextTick()
+    const css = await waitForStyle(css => css.includes('--ui-primary: var(--ui-bg-inverted);'))
 
-    expect(wrapper.html()).toContain('bg-inverted')
+    expect(css).toContain('--ui-primary: var(--ui-bg-inverted);')
   })
 })

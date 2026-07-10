@@ -1,4 +1,3 @@
-import { computed, reactive } from 'vue'
 import { createTV, cnMerge } from 'tailwind-variants'
 import type { ClassValue, TVVariants, TVCompoundVariants, TVDefaultVariants, TVReturnType, defaultConfig } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
@@ -56,72 +55,6 @@ const appConfigTv = appConfig as AppConfig & { ui: { tv: typeof defaultConfig } 
 const config = appConfigTv.ui?.tv
 
 const baseTv = /* @__PURE__ */ createTV(config)
-
-// On the client `reactive()` is cached per raw target, so this is the same proxy `useAppConfig()`
-// returns — runtime mutations (e.g. the docs theme picker) are tracked by the remap below and
-// re-render live. On the server `app.config` is the baked, read-only config, so the values are correct
-// regardless (it isn't mutated at runtime there).
-const reactiveAppConfig = reactive(appConfig) as AppConfig & { ui?: { colors?: Record<string, string> } }
-
-// Variant keys whose value is a color and whose variant always defines a `neutral` entry.
-// Only `color` strictly needs remapping — its `neutral` variant is a distinct class set
-// (`bg-inverted`, `bg-elevated`, …, with different hover opacities) that a CSS-variable swap can't
-// reproduce. The others currently resolve to the same `--ui-bg-inverted` through the colors plugin,
-// but are remapped too so they stay correct if their `neutral` variant ever diverges.
-const COLOR_KEYS = ['color', 'highlightColor', 'loadingColor', 'spotlightColor'] as const
-
-// A stable, value-compared signature of which aliases are configured as `'neutral'` (e.g. the sorted
-// `'primary'`). The remap depends on THIS, not on individual color values, so a `tv()` call only
-// re-renders when the set of `neutral` aliases changes — not on every unrelated color change, which
-// would re-render every component (recoloring is handled purely by CSS variables in the colors
-// plugin and needs no re-render). Sorted so the same set always yields the same key. In a normal app
-// `app.config` never mutates, so this never fires.
-const neutralAliasesKey = computed(() => {
-  const colors = reactiveAppConfig.ui?.colors
-  if (!colors) {
-    return ''
-  }
-  const aliases: string[] = []
-  for (const alias in colors) {
-    if (alias !== 'neutral' && colors[alias] === 'neutral') {
-      aliases.push(alias)
-    }
-  }
-  return aliases.sort().join(',')
-})
-
-// Derived from the value-compared key above, so its identity (and thus any `tv()` re-render) only
-// changes when the set itself changes — an unrelated color change leaves the key untouched, so this
-// computed is not re-evaluated and dependents are not notified.
-const neutralAliases = computed(() => {
-  const key = neutralAliasesKey.value
-  return new Set(key ? key.split(',') : [])
-})
-
-/**
- * Map a color-bearing variant value to the `neutral` variant when its alias is configured as
- * `'neutral'` in `app.config` (e.g. `colors: { primary: 'neutral' }`). The `neutral` variant is a
- * distinct class set (`bg-inverted`, `bg-elevated`, …) that a CSS-variable swap can't reproduce, so
- * the substitution has to happen on the `tv()` variant key. `defaultVariants` (read off the resolved
- * `tv` component, `extend` included) supplies the fallback for the common case where the color isn't
- * passed explicitly — e.g. a default Button whose `'primary'` comes from the theme. Returns the
- * original object untouched when nothing matches, so the common path allocates nothing.
- */
-function remapNeutralColors(props: Record<string, any>, defaultVariants?: Record<string, any>): Record<string, any> {
-  const aliases = neutralAliases.value
-  if (!aliases.size) {
-    return props
-  }
-
-  let out: Record<string, any> | undefined
-  for (const key of COLOR_KEYS) {
-    const value = props[key] ?? defaultVariants?.[key]
-    if (typeof value === 'string' && value !== 'neutral' && aliases.has(value)) {
-      (out ??= { ...props })[key] = 'neutral'
-    }
-  }
-  return out ?? props
-}
 
 /**
  * Find a class **replacer** — a function `(defaults) => classes` that replaces a
@@ -245,12 +178,6 @@ export const tv = ((componentConfig?: any) => {
 
   return new Proxy(component, {
     apply(target, thisArg, args) {
-      // Substitute the `neutral` variant for any color alias configured as `'neutral'` before
-      // resolving classes (e.g. `color: 'primary'` → `color: 'neutral'` when `primary: 'neutral'`).
-      if (args[0] && typeof args[0] === 'object') {
-        args = [remapNeutralColors(args[0] as Record<string, any>, (target as { defaultVariants?: Record<string, any> }).defaultVariants), ...args.slice(1)]
-      }
-
       const result = Reflect.apply(target, thisArg, args)
       if (result && typeof result === 'object') {
         return wrapSlots(result, directives)
