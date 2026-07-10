@@ -37,6 +37,6 @@ const index = defineModel<number>({ required: true })
       }"
     />
 
-    <span class="text-[11px] text-dimmed font-mono w-7 text-right shrink-0">{{ SHADES[index] }}</span>
+    <span class="text-xs text-dimmed font-mono w-7 text-right shrink-0 truncate" :title="String(SHADES[index])">{{ SHADES[index] }}</span>
   </div>
 </template>

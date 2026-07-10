@@ -268,7 +268,7 @@ const shadowColor = computed({
 
         <USeparator />
 
-        <ThemeStudioSection label="Semantic" help-to="/docs/getting-started/theme/design-system">
+        <ThemeStudioSection label="Semantic" help-to="/docs/getting-started/theme/design-system" :default-open="false">
           <div class="flex flex-col gap-3 pt-1">
             <ThemeStudioColorSection v-for="alias in semanticAliases" :key="alias" :alias="alias" />
           </div>
@@ -277,7 +277,7 @@ const shadowColor = computed({
     </template>
 
     <template v-else-if="group === 'style'">
-      <div class="flex flex-col gap-2.5">
+      <div class="flex flex-col gap-4">
         <ThemeStudioSection label="Shadow">
           <div>
             <div class="grid grid-cols-3 gap-1">
@@ -295,6 +295,7 @@ const shadowColor = computed({
                 v-model="shadowColor"
                 size="sm"
                 color="neutral"
+                variant="subtle"
                 icon="i-lucide-paint-bucket"
                 :items="shadowColorItems"
                 class="w-full"
@@ -354,6 +355,7 @@ const shadowColor = computed({
                 v-model="innerShadowColor"
                 size="sm"
                 color="neutral"
+                variant="ghost"
                 icon="i-lucide-paint-bucket"
                 :items="shadowColorItems"
                 class="w-full"
@@ -419,7 +421,7 @@ const shadowColor = computed({
               />
 
               <div class="flex items-center gap-2">
-                <span class="text-[11px] text-muted w-13 shrink-0 select-none">Frame</span>
+                <span class="text-xs text-muted w-13 shrink-0 select-none">Frame</span>
 
                 <UTooltip text="Outline solid surfaces too — the neobrutalist look">
                   <USwitch v-model="frameSolids" size="sm" aria-label="Frame solid surfaces" />
@@ -430,6 +432,7 @@ const shadowColor = computed({
                 v-model="borderColor"
                 size="sm"
                 color="neutral"
+                variant="subtle"
                 icon="i-lucide-paint-bucket"
                 :items="borderColorItems"
                 class="w-full"
@@ -451,7 +454,7 @@ const shadowColor = computed({
     </template>
 
     <template v-else-if="group === 'general'">
-      <div class="flex flex-col gap-2.5">
+      <div class="flex flex-col gap-4">
         <ThemeStudioSection label="Font" help-to="/docs/getting-started/integrations/fonts">
           <div>
             <USelect
@@ -508,7 +511,7 @@ const shadowColor = computed({
             <ThemeStudioSliderRow v-model="spacing" label="Spacing" :min="0.15" :max="0.35" :step="0.025" />
 
             <div class="flex items-center gap-2">
-              <span class="text-[11px] text-muted w-13 shrink-0 select-none">Size</span>
+              <span class="text-xs text-muted w-13 shrink-0 select-none">Size</span>
 
               <USelect
                 v-model="defaultSize"
@@ -529,7 +532,7 @@ const shadowColor = computed({
           <ThemeStudioSection :label="field.label">
             <div class="flex flex-col gap-1.5">
               <div class="flex items-center gap-2">
-                <span class="text-[11px] text-muted w-13 shrink-0 select-none">Variant</span>
+                <span class="text-xs text-muted w-13 shrink-0 select-none">Variant</span>
 
                 <USelect
                   v-model="groupVariants[field.key].value"
@@ -543,7 +546,7 @@ const shadowColor = computed({
               </div>
 
               <div v-if="field.hasColor" class="flex items-center gap-2">
-                <span class="text-[11px] text-muted w-13 shrink-0 select-none">Color</span>
+                <span class="text-xs text-muted w-13 shrink-0 select-none">Color</span>
 
                 <USelect
                   v-model="groupColors[field.key].value"

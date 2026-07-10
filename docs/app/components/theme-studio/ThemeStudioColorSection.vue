@@ -15,7 +15,7 @@ const props = defineProps<{
   helpTo?: string
 }>()
 
-const { isCustomPalette, style, setStyle, rampChip } = useThemeStudio()
+const { style, setStyle, rampChip } = useThemeStudio()
 
 const title = computed(() => props.label ?? props.alias.charAt(0).toUpperCase() + props.alias.slice(1))
 
@@ -62,17 +62,19 @@ const openGroups = reactive<Record<string, boolean>>({})
 <template>
   <ThemeStudioSection :label="title" :help-to="helpTo">
     <template #actions>
-      <UButton
-        :icon="isCustomPalette(alias) ? 'i-lucide-paintbrush' : 'i-lucide-pencil'"
-        color="neutral"
-        variant="ghost"
-        size="xs"
-        :active="paletteEditor || isCustomPalette(alias)"
-        active-color="primary"
-        active-variant="subtle"
-        :aria-label="`Edit ${alias} palette`"
-        @click="paletteEditor = !paletteEditor"
-      />
+      <UTooltip text="Edit palette">
+        <UButton
+          icon="i-lucide-pencil"
+          color="neutral"
+          variant="ghost"
+          size="xs"
+          :active="paletteEditor"
+          active-color="primary"
+          active-variant="subtle"
+          :aria-label="`Edit ${alias} palette`"
+          @click="paletteEditor = !paletteEditor"
+        />
+      </UTooltip>
 
       <UTooltip text="Adjust shades">
         <UButton
@@ -110,18 +112,18 @@ const openGroups = reactive<Record<string, boolean>>({})
         <UCollapsible v-for="tokenGroup in tokenGroups" :key="tokenGroup.key" v-model:open="openGroups[tokenGroup.key]">
           <UButton
             :label="tokenGroup.label"
+            :icon="openGroups[tokenGroup.key] ? 'i-lucide-chevron-down' : 'i-lucide-chevron-right'"
             color="neutral"
             variant="ghost"
             size="sm"
             block
-            class="justify-between"
-            :trailing-icon="openGroups[tokenGroup.key] ? 'i-lucide-chevron-up' : 'i-lucide-chevron-down'"
+            class="justify-start"
           />
 
           <template #content>
             <div class="flex flex-col gap-3 pt-2 pb-1 px-1">
               <div v-for="section in tokenGroup.sections" :key="section.token" class="flex flex-col gap-1.5">
-                <span class="text-[11px] text-muted select-none">{{ section.label }}</span>
+                <span class="text-xs text-muted select-none">{{ section.label }}</span>
 
                 <ThemeStudioShadeSlider
                   v-for="(slider, modeName) in section.sliders"

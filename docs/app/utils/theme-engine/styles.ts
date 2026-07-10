@@ -116,7 +116,17 @@ export const VARIANT_SUPPORT: Record<string, string[]> = {
 }
 
 // inputRating is size-only (no variant axis); everything here spans xs–xl exactly.
-export const SIZE_SUPPORT = ['button', 'badge', ...FIELD_COMPONENTS, 'inputRating']
+/**
+ * Every component the app-wide Size default scales — those with the full
+ * xs–xl size axis and a user-facing footprint. Components on other scales
+ * (avatar/chip/timeline's 3xs–3xl, kbd's sm–lg) stay out.
+ */
+export const SIZE_SUPPORT = [
+  'button', 'badge', ...FIELD_COMPONENTS, 'inputRating',
+  'tabs', 'checkbox', 'checkboxGroup', 'radioGroup', 'switch', 'slider', 'stepper',
+  'calendar', 'colorPicker', 'fileUpload', 'formField', 'fieldGroup',
+  'dropdownMenu', 'contextMenu', 'commandPalette', 'listbox'
+]
 
 /** Components with a color prop — the panels group has no color axis (card and empty lack one; a lone alert color stays a verbatim override). */
 export const COLOR_SUPPORT = ['button', 'badge', ...FIELD_COMPONENTS]

@@ -95,7 +95,6 @@ const studioMenuLinks = [{
           :items="views"
           :content="false"
           color="primary"
-          size="sm"
         />
       </template>
 

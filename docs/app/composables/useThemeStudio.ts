@@ -1,6 +1,6 @@
 import colors from 'tailwindcss/colors'
 import { THEME_STATE_KEYS, THEME_STORAGE_KEYS } from '../utils/theme-keys'
-import { presets, docToSettings, isDefaultTheme, generatePalette, fitPalette, parseCssColor, parseUiColorRef, styleComponents, styleTokens, DEFAULT_COLORS, SHADES, TOKEN_SHADE_TARGETS } from '../utils/theme-engine'
+import { presets, docToSettings, isDefaultTheme, generatePalette, parseCssColor, parseUiColorRef, styleComponents, styleTokens, DEFAULT_COLORS, SHADES, TOKEN_SHADE_TARGETS } from '../utils/theme-engine'
 import type { ThemeDoc, ThemePreset, PaletteCurveParams, StyleOptions, Shade, ColorAlias, TokenRamp } from '../utils/theme-engine'
 import { readLocalStorage } from '../utils/theme'
 
@@ -134,32 +134,21 @@ export function useThemeStudio() {
   }
 
   /**
-   * Swatch-click entry point, for any color alias. With a custom palette
-   * active the primary/neutral swatches act as curve seeds: the chosen
-   * palette is reverse-fitted so the editor shows the curves that reproduce
-   * it, replacing whatever was sculpted before. Otherwise it is a plain
-   * alias switch; semantic aliases ride the same persistence channel the
-   * AI theme feature uses.
+   * Swatch-click entry point, for any color alias — always a real alias
+   * switch. A custom palette in place is dropped first (its curves and
+   * modifiers included), so the menu names the selection instead of a
+   * stale Custom; an open editor refits from the new color by itself.
    */
   function selectPalette(alias: ColorAlias, name: string) {
-    // 'neutral' on primary means the neutral ALIAS, not tailwind's gray ramp
-    // — always a plain alias switch, never a curve seed (fitting from the
-    // gray ramp would silently turn "follow neutral" into a frozen copy).
+    if (isCustomPalette(alias)) {
+      clearCustomPalette(alias)
+    }
+
+    // 'neutral' on primary means the neutral ALIAS, not tailwind's gray ramp.
     if (alias === 'primary' && name === 'neutral') {
-      if (isCustomPalette(alias)) {
-        clearCustomPalette(alias)
-      }
       theme.primary.value = 'neutral'
       setActivePreset(undefined)
       return
-    }
-
-    if (isCustomPalette(alias)) {
-      const shades = paletteShades(name)
-      if (shades) {
-        setPaletteFromCurve(alias, fitPalette(shades))
-        return
-      }
     }
 
     if (alias === 'primary') {

@@ -8,7 +8,7 @@ const props = defineProps<{
 }>()
 
 const appConfig = useAppConfig()
-const { paletteParams, isCustomPalette, paletteShades, setPaletteFromCurve, clearCustomPalette } = useThemeStudio()
+const { paletteParams, isCustomPalette, paletteShades, setPaletteFromCurve } = useThemeStudio()
 
 const open = defineModel<boolean>('open', { default: false })
 const tab = ref<'lightness' | 'chroma' | 'hue'>('lightness')
@@ -99,15 +99,7 @@ function normalizeHue(values: PaletteCurveParams) {
   }
 }
 
-const styleOffset = ref('fitted')
-
-/**
- * Effect strength: 100% is the offset as designed, lower blends back toward
- * the fitted base, above 100% extrapolates past it for a stronger take.
- */
-const offsetAmount = ref(100)
-
-/** Fitted base the style offsets transform from, so they never compound. */
+/** Fitted base the modifiers transform from, so they never compound. */
 let seedBase: PaletteCurveParams = structuredClone(toRaw(params))
 
 // Throttled (not debounced) so the theme streams live while dragging a
@@ -127,10 +119,8 @@ function seed(values: PaletteCurveParams) {
   const next = structuredClone(toRaw(values))
   normalizeHue(next)
   seedBase = structuredClone(next)
-  styleOffset.value = 'fitted'
-  offsetAmount.value = 100
-  lastPreset = 'fitted'
   Object.assign(effects, EFFECT_DEFAULTS)
+  effectAmount.value = 100
   ignoreUpdates(() => {
     Object.assign(params, next)
   })
@@ -191,17 +181,8 @@ watch([() => (appConfig.ui.colors as Record<string, string>)[props.alias], open]
   }
 })
 
-const styleOffsetItems = [
-  { label: 'Fitted', value: 'fitted' },
-  { label: 'Pastel', value: 'pastel' },
-  { label: 'Muted', value: 'muted' },
-  { label: 'Vivid', value: 'vivid' },
-  { label: 'Dazzling', value: 'dazzling' },
-  { label: 'Custom', value: 'custom' }
-]
-
 // Scale AND offset: a pure multiply barely moves low-chroma (gray) ramps,
-// so the boosting presets add a flat chroma floor that registers there too.
+// so a flat chroma term registers there too.
 function scaleChroma(curve: PaletteCurveParams['chroma'], factor: number, offset = 0) {
   curve.y0 = Math.max(0, curve.y0 * factor + offset)
   curve.y1 = Math.max(0, curve.y1 * factor + offset)
@@ -209,133 +190,75 @@ function scaleChroma(curve: PaletteCurveParams['chroma'], factor: number, offset
   curve.p2y = Math.max(0, curve.p2y * factor + offset)
 }
 
-/** Linearly remap a lightness curve onto new endpoints, preserving its shape. */
-function remapLightness(curve: PaletteCurveParams['lightness'], newY0: number, newY1: number) {
-  const oldY0 = curve.y0
-  const oldY1 = curve.y1
-  const span = oldY0 - oldY1 || 1e-6
-  const map = (value: number) => newY1 + ((value - oldY1) / span) * (newY0 - newY1)
-  curve.p1y = map(curve.p1y)
-  curve.p2y = map(curve.p2y)
-  curve.y0 = newY0
-  curve.y1 = newY1
-}
-
-const CURVE_KEYS = ['y0', 'y1', 'p1x', 'p1y', 'p2x', 'p2y'] as const
-
-function lerpParams(base: PaletteCurveParams, target: PaletteCurveParams, t: number): PaletteCurveParams {
-  const result = structuredClone(target)
-  for (const channel of ['lightness', 'chroma', 'hue'] as const) {
-    for (const key of CURVE_KEYS) {
-      const value = base[channel][key] + (target[channel][key] - base[channel][key]) * t
-      // Extrapolated chroma can cross zero; keep it a real chroma.
-      result[channel][key] = channel === 'chroma' ? Math.max(0, value) : value
-    }
-  }
-  return result
-}
-
-/** Apply a taste offset ON TOP of the fitted base (idempotent, not cumulative). */
-function applyStyleOffset(name: string) {
-  const target = structuredClone(seedBase)
-
-  if (name === 'pastel') {
-    // Candy pastels: compress the lightness range from BOTH ends (nothing
-    // near-white, nothing dark) and push chroma UP so the softness stays
-    // colorful — the gamut clamp keeps the very light stops in check.
-    remapLightness(target.lightness, Math.min(target.lightness.y0, 0.945), Math.max(target.lightness.y1, 0.52))
-    scaleChroma(target.chroma, 1.35, 0.01)
-  } else if (name === 'muted') {
-    scaleChroma(target.chroma, 0.55)
-  } else if (name === 'vivid') {
-    scaleChroma(target.chroma, 1.45, 0.015)
-  } else if (name === 'dazzling') {
-    scaleChroma(target.chroma, 2, 0.03)
-  }
-
-  const next = name === 'fitted' ? target : lerpParams(seedBase, target, offsetAmount.value / 100)
-
-  // Not seed(): this IS a user edit, the watcher should live-apply it.
-  Object.assign(params, next)
-}
-
 /* ------------------------------------------------------ custom effects -- */
 
 /**
- * The Custom modifier: independent effects layered on top of the fitted
- * base — lightness shift, contrast about the ramp's own midpoint, chroma
- * scale AND flat offset (the offset is what moves gray ramps), hue
- * rotation. Idempotent like the presets: always recomputed from seedBase.
+ * Modifiers: the photo-editing quartet layered on top of the fitted base —
+ * lightness shift, contrast about the ramp's own midpoint, saturation
+ * (multiplicative with an additive floor, so gray ramps respond too) and
+ * hue rotation. Idempotent: always recomputed from seedBase, never
+ * compounding.
  */
-const EFFECT_DEFAULTS = { lightness: 0, contrast: 0, chromaScale: 100, chromaOffset: 0, hueShift: 0 }
+const EFFECT_DEFAULTS = { lightness: 0, contrast: 0, saturation: 0, hueShift: 0 }
 const effects = reactive({ ...EFFECT_DEFAULTS })
+
+/**
+ * Overall strength: 100% applies the sliders as set, lower blends back
+ * toward the fitted base, above 100% extrapolates past them.
+ */
+const effectAmount = ref(100)
+
+/** The modifiers fold — closed by default like the other advanced panels. */
+const modifiersOpen = ref(false)
 
 const effectRows = [
   { key: 'lightness', label: 'Lightness', min: -30, max: 30, step: 1, unit: '%' },
   { key: 'contrast', label: 'Contrast', min: -50, max: 50, step: 1, unit: '%' },
-  { key: 'chromaScale', label: 'Saturation', min: 0, max: 300, step: 5, unit: '%' },
-  { key: 'chromaOffset', label: 'Chroma +', min: -100, max: 100, step: 5, unit: '' },
+  { key: 'saturation', label: 'Saturation', min: -100, max: 200, step: 5, unit: '%' },
   { key: 'hueShift', label: 'Hue', min: -180, max: 180, step: 5, unit: '°' }
 ] as const
 
-/** Where each preset lands in effect terms — Custom picks up from the active preset. */
-const PRESET_EFFECTS: Record<string, Partial<typeof EFFECT_DEFAULTS>> = {
-  muted: { chromaScale: 55 },
-  vivid: { chromaScale: 145, chromaOffset: 15 },
-  dazzling: { chromaScale: 200, chromaOffset: 30 },
-  // Approximation — the real pastel remaps lightness to absolute endpoints.
-  pastel: { lightness: 8, contrast: -30, chromaScale: 135, chromaOffset: 10 }
-}
-
-function seedEffects(preset: string, amount: number) {
-  const target = { ...EFFECT_DEFAULTS, ...PRESET_EFFECTS[preset] }
-  for (const key of Object.keys(EFFECT_DEFAULTS) as Array<keyof typeof EFFECT_DEFAULTS>) {
-    effects[key] = Math.round(EFFECT_DEFAULTS[key] + (target[key] - EFFECT_DEFAULTS[key]) * amount)
-  }
-}
-
 function applyEffects() {
   const target = structuredClone(seedBase)
+
+  // The strength slider scales every effect's distance from its default.
+  const amount = effectAmount.value / 100
+  const effective = (key: keyof typeof EFFECT_DEFAULTS) =>
+    EFFECT_DEFAULTS[key] + (effects[key] - EFFECT_DEFAULTS[key]) * amount
 
   // Lightness: contrast expands/compresses about the curve's own midpoint,
   // then the shift slides the whole ramp.
   const lightness = target.lightness
   const mid = (lightness.y0 + lightness.y1) / 2
-  const span = 1 + effects.contrast / 100
-  const shift = effects.lightness / 100
+  const span = 1 + effective('contrast') / 100
+  const shift = effective('lightness') / 100
   const mapLightness = (value: number) => mid + (value - mid) * span + shift
   lightness.y0 = mapLightness(lightness.y0)
   lightness.y1 = mapLightness(lightness.y1)
   lightness.p1y = mapLightness(lightness.p1y)
   lightness.p2y = mapLightness(lightness.p2y)
 
-  scaleChroma(target.chroma, effects.chromaScale / 100, effects.chromaOffset / 1000)
+  // Saturation: scale for colorful ramps, plus a small additive floor when
+  // boosting so near-gray ramps (where a multiply is a no-op) respond too.
+  const saturation = effective('saturation') / 100
+  scaleChroma(target.chroma, 1 + saturation, Math.max(0, saturation) * 0.02)
 
-  target.hue.y0 += effects.hueShift
-  target.hue.y1 += effects.hueShift
-  target.hue.p1y += effects.hueShift
-  target.hue.p2y += effects.hueShift
+  const hueShift = effective('hueShift')
+  target.hue.y0 += hueShift
+  target.hue.y1 += hueShift
+  target.hue.p1y += hueShift
+  target.hue.p2y += hueShift
 
-  // A user edit, like the presets — the watcher live-applies it.
+  // A user edit — the watcher live-applies it.
   Object.assign(params, target)
 }
 
-/** The last non-custom choice, so Custom starts from the look on screen. */
-let lastPreset = 'fitted'
+const effectsDirty = computed(() => effectAmount.value !== 100 || effectRows.some(row => effects[row.key] !== EFFECT_DEFAULTS[row.key]))
 
-function onOffsetSelect(name: string) {
-  if (name === 'custom') {
-    seedEffects(lastPreset, offsetAmount.value / 100)
-    applyEffects()
-  } else {
-    lastPreset = name
-    applyStyleOffset(name)
-  }
-}
-
-function remove() {
-  clearCustomPalette(props.alias)
-  open.value = false
+function resetEffects() {
+  Object.assign(effects, EFFECT_DEFAULTS)
+  effectAmount.value = 100
+  applyEffects()
 }
 </script>
 
@@ -370,54 +293,61 @@ function remove() {
           </div>
         </div>
 
-        <div class="flex items-center gap-1.5">
-          <USelect
-            v-model="styleOffset"
-            size="sm"
-            color="neutral"
-            icon="i-lucide-sparkles"
-            :items="styleOffsetItems"
-            class="flex-1"
-            @update:model-value="onOffsetSelect($event as string)"
-          />
-
-          <UTooltip v-if="active" text="Remove custom palette">
+        <!-- Layered modifiers, each recomputed from the fitted base. The
+             whole trigger group toggles the fold; the reset stops the click
+             so it only resets. -->
+        <UCollapsible v-model:open="modifiersOpen">
+          <div class="flex items-center gap-1">
             <UButton
-              icon="i-lucide-trash-2"
+              label="Modifiers"
+              :icon="modifiersOpen ? 'i-lucide-chevron-down' : 'i-lucide-chevron-right'"
               color="neutral"
-              variant="soft"
+              variant="ghost"
               size="sm"
-              aria-label="Remove custom palette"
-              @click="remove"
+              block
+              class="justify-start"
             />
-          </UTooltip>
-        </div>
 
-        <ThemeStudioSliderRow
-          v-if="styleOffset !== 'fitted' && styleOffset !== 'custom'"
-          v-model="offsetAmount"
-          label="Effect"
-          :min="0"
-          :max="200"
-          :step="5"
-          unit="%"
-          @update:model-value="applyStyleOffset(styleOffset)"
-        />
+            <UTooltip text="Reset modifiers">
+              <UButton
+                icon="i-lucide-rotate-ccw"
+                color="neutral"
+                variant="subtle"
+                size="sm"
+                :disabled="!effectsDirty"
+                aria-label="Reset modifiers"
+                @click.stop="resetEffects"
+              />
+            </UTooltip>
+          </div>
 
-        <!-- Layered custom effects, each recomputed from the fitted base. -->
-        <div v-else-if="styleOffset === 'custom'" class="flex flex-col gap-1.5">
-          <ThemeStudioSliderRow
-            v-for="row in effectRows"
-            :key="row.key"
-            v-model="effects[row.key]"
-            :label="row.label"
-            :min="row.min"
-            :max="row.max"
-            :step="row.step"
-            :unit="row.unit"
-            @update:model-value="applyEffects()"
-          />
-        </div>
+          <template #content>
+            <div class="flex flex-col gap-1.5 pt-2 px-1">
+              <ThemeStudioSliderRow
+                v-model="effectAmount"
+                label="Effect"
+                icon="i-lucide-eye"
+                :min="0"
+                :max="200"
+                :step="5"
+                unit="%"
+                @update:model-value="applyEffects()"
+              />
+
+              <ThemeStudioSliderRow
+                v-for="row in effectRows"
+                :key="row.key"
+                v-model="effects[row.key]"
+                :label="row.label"
+                :min="row.min"
+                :max="row.max"
+                :step="row.step"
+                :unit="row.unit"
+                @update:model-value="applyEffects()"
+              />
+            </div>
+          </template>
+        </UCollapsible>
       </div>
     </template>
   </UCollapsible>

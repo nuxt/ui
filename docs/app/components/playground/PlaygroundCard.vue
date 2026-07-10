@@ -1,5 +1,11 @@
 <template>
-  <div class="relative isolate break-inside-avoid mb-4 rounded-xl ring ring-default bg-default shadow-sm overflow-hidden">
+  <!-- A real UCard (no explicit variant) so the studio's panel defaults
+       and style treatments apply to the grid tiles too. Tiles bring their
+       own padding — the body slot contributes none. -->
+  <UCard
+    class="relative isolate break-inside-avoid mb-4 rounded-xl shadow-sm overflow-hidden"
+    :ui="{ body: 'p-0 sm:p-0' }"
+  >
     <slot />
-  </div>
+  </UCard>
 </template>

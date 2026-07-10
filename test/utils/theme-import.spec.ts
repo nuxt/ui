@@ -185,6 +185,17 @@ describe('importTheme', () => {
     expect(doc.tokens?.light?.['--ui-color-primary-500']).toBe('var(--ui-color-neutral-500)')
   })
 
+  it('round-trips the app-wide default size across every sized component', () => {
+    const original: ThemeDoc = { version: 1, style: { defaults: { size: 'lg' } } }
+    const config = generateConfig(original)
+    const { doc: imported, skipped } = importTheme({ config })
+
+    expect(skipped).toEqual([])
+    expect(imported.style?.defaults?.size).toBe('lg')
+    expect(imported.components).toBeUndefined()
+    expect(generateConfig(imported)).toBe(config)
+  })
+
   it('round-trips per-group default colors', () => {
     const doc: ThemeDoc = {
       version: 1,

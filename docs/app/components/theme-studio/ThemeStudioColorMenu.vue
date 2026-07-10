@@ -20,7 +20,7 @@ const sections = computed(() => {
   if (props.alias === 'neutral') {
     return [
       { label: 'Neutrals', colors: neutralColors },
-      { label: 'Colors', colors: primaryColors, hint: 'These may need some adjustment for comfortable use, try the modifiers in the palette editor.' }
+      { label: 'Colors', colors: primaryColors, hint: 'These may need some adjustment, try the modifiers in the editor' }
     ]
   }
   if (props.alias === 'primary') return [{ label: 'Colors', colors: primaryColors }]
@@ -101,11 +101,11 @@ function isSelected(color: string) {
         </ThemeStudioPickerButton>
 
         <div v-for="(section, index) in sections" :key="section.label">
-          <p class="text-[11px] font-semibold text-muted px-1 mb-0.5 select-none">
+          <p class="text-sm font-semibold text-highlighted px-1 mb-2 select-none">
             {{ section.label }}
           </p>
 
-          <p v-if="section.hint" class="text-[10px] text-muted px-1 mb-1 select-none">
+          <p v-if="section.hint" class="text-xs text-muted px-1 mb-2 -mt-1.5 select-none">
             {{ section.hint }}
           </p>
 

@@ -136,7 +136,45 @@ const toolbarPinned = computed(() => nearBottom.value || Object.values(openPanel
               toolbarPinned ? 'translate-y-0' : 'translate-y-[calc(100%+6px)] group-hover:translate-y-0 group-focus-within:translate-y-0'
             ]"
           >
-            <UFieldGroup>
+            <ThemeStudioPresetMenu v-model:open="openPanels.presets" class="w-56 shrink-0" />
+
+            <UPopover
+              v-for="settingGroup in settingGroups"
+              :key="settingGroup.value"
+              v-model:open="openPanels[settingGroup.value]"
+              :content="{ align: 'start' }"
+            >
+              <UButton
+                :label="settingGroup.label"
+                color="neutral"
+                variant="subtle"
+                trailing-icon="i-lucide-chevron-down"
+              />
+
+              <template #content>
+                <ThemeStudioControls :group="settingGroup.value" class="w-80 max-h-[70vh] overflow-y-auto p-4" />
+              </template>
+            </UPopover>
+
+            <UColorModeSwitch class="shrink-0" />
+
+            <span class="flex-1" />
+
+            <!-- The header center hosts the view switcher on desktop; the
+               toolbar keeps a select for mobile and for fullscreen, where
+               the header is hidden. -->
+            <USelect
+              v-model="view"
+              v-model:open="openPanels.view"
+              :items="views"
+              :icon="views.find(tab => tab.value === view)?.icon"
+              color="neutral"
+              variant="subtle"
+              class="w-36 shrink-0"
+              :class="!fullscreen && 'lg:hidden'"
+            />
+
+            <UFieldGroup class="shrink-0">
               <UTooltip text="Undo" :kbds="['meta', 'Z']">
                 <UButton
                   icon="i-lucide-undo-2"
@@ -170,43 +208,13 @@ const toolbarPinned = computed(() => nearBottom.value || Object.values(openPanel
               />
             </UTooltip>
 
-            <ThemeStudioPresetMenu v-model:open="openPanels.presets" class="w-56 shrink-0" />
+            <div class="shrink-0">
+              <UFieldGroup>
+                <ThemeStudioImport />
 
-            <UPopover
-              v-for="settingGroup in settingGroups"
-              :key="settingGroup.value"
-              v-model:open="openPanels[settingGroup.value]"
-              :content="{ align: 'start' }"
-            >
-              <UButton
-                :label="settingGroup.label"
-                color="neutral"
-                variant="subtle"
-                trailing-icon="i-lucide-chevron-down"
-              />
-
-              <template #content>
-                <ThemeStudioControls :group="settingGroup.value" class="w-80 max-h-[70vh] overflow-y-auto p-4" />
-              </template>
-            </UPopover>
-
-            <span class="flex-1" />
-
-            <!-- The header center hosts the view switcher on desktop; the
-               toolbar keeps a select for mobile and for fullscreen, where
-               the header is hidden. -->
-            <USelect
-              v-model="view"
-              v-model:open="openPanels.view"
-              :items="views"
-              :icon="views.find(tab => tab.value === view)?.icon"
-              color="neutral"
-              variant="subtle"
-              class="w-36 shrink-0"
-              :class="!fullscreen && 'lg:hidden'"
-            />
-
-            <UColorModeButton variant="subtle" />
+                <ThemeStudioExport />
+              </UFieldGroup>
+            </div>
 
             <UTooltip :text="fullscreen ? 'Exit fullscreen' : 'Fullscreen preview'" :kbds="fullscreen ? ['Esc'] : undefined">
               <UButton
@@ -217,14 +225,6 @@ const toolbarPinned = computed(() => nearBottom.value || Object.values(openPanel
                 @click="fullscreen = !fullscreen"
               />
             </UTooltip>
-
-            <div class="shrink-0">
-              <UFieldGroup>
-                <ThemeStudioImport />
-
-                <ThemeStudioExport />
-              </UFieldGroup>
-            </div>
           </div>
         </div>
       </div>
