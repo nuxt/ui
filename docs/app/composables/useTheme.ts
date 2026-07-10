@@ -530,7 +530,6 @@ export function useTheme() {
     window.localStorage.removeItem(THEME_STORAGE_KEYS.preset)
     window.localStorage.removeItem(THEME_STORAGE_KEYS.style)
     window.localStorage.removeItem(THEME_STORAGE_KEYS.paletteParams)
-    window.localStorage.removeItem(THEME_STORAGE_KEYS.palettePrev)
     useState<Record<string, any>>(THEME_STATE_KEYS.stylePrefs).value = {}
     useState<string | undefined>(THEME_STATE_KEYS.themePreset).value = undefined
     // The in-memory curve params too — the storage key alone leaves the

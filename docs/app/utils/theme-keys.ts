@@ -9,8 +9,7 @@ export const THEME_STORAGE_KEYS = {
   preset: 'nuxt-ui-preset',
   style: 'nuxt-ui-style',
   styleUi: 'nuxt-ui-style-ui',
-  paletteParams: 'nuxt-ui-palette-params',
-  palettePrev: 'nuxt-ui-palette-prev'
+  paletteParams: 'nuxt-ui-palette-params'
 } as const
 
 /** useState keys shared across composables. */

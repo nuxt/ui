@@ -21,20 +21,34 @@ const { style, setStyle, primaryChip, neutralChip } = useThemeStudio()
 
 const semanticAliases: ColorAlias[] = ['secondary', 'success', 'info', 'warning', 'error']
 
+// Inherit leaves the library's own shadows alone, None strips them, Custom
+// is the studio treatment. The engine still understands 'soft' (presets,
+// imports) — it simply reads as Custom here.
 const SHADOW_STYLE_OPTIONS = [
+  { label: 'Inherit', value: 'inherit' },
   { label: 'None', value: 'none' },
-  { label: 'Default', value: 'soft' },
-  { label: 'Custom', value: 'hard' }
+  { label: 'Custom', value: 'custom' }
 ]
 
 const shadowStyle = computed({
-  get: () => style.value.shadow || 'none',
-  set: (value: any) => setStyle({ shadow: value })
+  get: () => {
+    const shadow = style.value.shadow
+    if (!shadow || shadow === 'none') return 'inherit'
+    return shadow === 'flat' ? 'none' : 'custom'
+  },
+  set: (value: any) => setStyle({ shadow: value === 'custom' ? 'hard' : value === 'none' ? 'flat' : 'none' })
 })
 
+// Nothing in the library casts an inner shadow, so None and Inherit are
+// the same thing — two options suffice.
+const INNER_SHADOW_OPTIONS = [
+  { label: 'None', value: 'none' },
+  { label: 'Custom', value: 'custom' }
+]
+
 const innerShadowStyle = computed({
-  get: () => style.value.innerShadow || 'none',
-  set: (value: any) => setStyle({ innerShadow: value })
+  get: () => (!style.value.innerShadow || style.value.innerShadow === 'none') ? 'none' : 'custom',
+  set: (value: any) => setStyle({ innerShadow: value === 'custom' ? 'hard' : 'none' })
 })
 
 const shadowOpacity = computed({
@@ -60,8 +74,8 @@ function innerGeometrySlider(key: 'x' | 'y' | 'blur' | 'spread') {
 }
 
 const borderOptions = [
+  { label: 'Inherit', value: 'default' },
   { label: 'None', value: 'none' },
-  { label: 'Default', value: 'default' },
   { label: 'Custom', value: 'custom' }
 ]
 
@@ -302,7 +316,7 @@ const shadowColor = computed({
               class="w-full"
             />
 
-            <div v-if="(style.shadow || 'none') !== 'none'" class="mt-1.5 flex flex-col gap-2">
+            <div v-if="shadowStyle === 'custom'" class="mt-1.5 flex flex-col gap-2">
               <USelect
                 v-model="shadowColor"
                 size="sm"
@@ -354,19 +368,19 @@ const shadowColor = computed({
           <div>
             <UTabs
               v-model="innerShadowStyle"
-              :items="SHADOW_STYLE_OPTIONS"
+              :items="INNER_SHADOW_OPTIONS"
               :content="false"
               size="xs"
               color="neutral"
               class="w-full"
             />
 
-            <div v-if="(style.innerShadow || 'none') !== 'none'" class="mt-1.5 flex flex-col gap-2">
+            <div v-if="innerShadowStyle === 'custom'" class="mt-1.5 flex flex-col gap-2">
               <USelect
                 v-model="innerShadowColor"
                 size="sm"
                 color="neutral"
-                variant="ghost"
+                variant="subtle"
                 icon="i-lucide-paint-bucket"
                 :items="shadowColorItems"
                 class="w-full"

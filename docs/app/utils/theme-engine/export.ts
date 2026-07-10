@@ -72,7 +72,8 @@ export function generateCSS(doc: ThemeDoc): string {
     }
   }
   // Any shadow treatment defaults the shared color when none was chosen.
-  const anyShadow = (doc.style?.shadow && doc.style.shadow !== 'none') || (doc.style?.innerShadow && doc.style.innerShadow !== 'none')
+  const castsShadow = (value?: string) => !!value && value !== 'none' && value !== 'flat'
+  const anyShadow = castsShadow(doc.style?.shadow) || castsShadow(doc.style?.innerShadow)
   if (anyShadow && !style.light['--ui-shadow-color']) {
     style.light['--ui-shadow-color'] = 'var(--ui-color-neutral-950)'
     style.dark['--ui-shadow-color'] = 'black'
@@ -92,7 +93,7 @@ export function generateCSS(doc: ThemeDoc): string {
     style.light['--ui-shadow-hard-sm'] = 'calc(var(--ui-shadow-offset-x) * 0.66) calc(var(--ui-shadow-offset-y) * 0.66) var(--ui-shadow-blur) var(--ui-shadow-spread) var(--ui-shadow-final-hard)'
     style.light['--ui-shadow-hard-half'] = 'calc(var(--ui-shadow-offset-x) / 2) calc(var(--ui-shadow-offset-y) / 2) var(--ui-shadow-blur) var(--ui-shadow-spread) var(--ui-shadow-final-hard)'
   }
-  if (doc.style?.shadow && doc.style.shadow !== 'none') {
+  if (castsShadow(doc.style?.shadow)) {
     style.light['--ui-shadow-final-hard'] = 'color-mix(in oklab, var(--ui-shadow-color) var(--ui-shadow-opacity, 100%), transparent)'
     style.light['--ui-shadow-final-soft'] = 'color-mix(in oklab, var(--ui-shadow-color) var(--ui-shadow-opacity, 25%), transparent)'
   }

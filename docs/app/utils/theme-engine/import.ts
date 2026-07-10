@@ -507,6 +507,8 @@ function detectShadow(components: Record<string, any>): StyleOptions['shadow'] {
   const slots = Object.values(components).flatMap(component => Object.values(component?.slots || {})) as string[]
   if (slots.some(classes => classes.includes('--ui-shadow-hard') || classes.includes('var(--ui-shadow-offset-x)'))) return 'hard'
   if (slots.some(classes => classes.includes('--ui-shadow-final-soft'))) return 'soft'
+  // the flat treatment is bare shadow-none on the overlay surfaces
+  if (components.popover?.slots?.content?.includes('shadow-none') && components.toast?.slots?.root?.includes('shadow-none')) return 'flat'
   return undefined
 }
 

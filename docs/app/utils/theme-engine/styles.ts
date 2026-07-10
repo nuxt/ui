@@ -26,7 +26,7 @@
  *   each element's own ring color / the dark shadow color untouched.
  */
 
-export type ShadowStyle = 'none' | 'soft' | 'hard'
+export type ShadowStyle = 'none' | 'flat' | 'soft' | 'hard'
 /** 'bold'/'frame' are legacy values (old exports/saved state) treated as 'custom'. */
 export type BorderStyle = 'default' | 'none' | 'custom' | 'bold' | 'frame'
 export type BorderColor = 'default' | 'inverted' | 'black' | 'white' | 'primary' | 'neutral' | 'shade' | 'primary-shade'
@@ -213,6 +213,21 @@ const HARD_SM = 'shadow-(--ui-shadow-hard-sm)'
 
 const SHADOW_FRAGMENTS: Record<ShadowStyle, Fragments> = {
   none: {},
+  // Strip the stock shadows the library ships on overlay surfaces — the
+  // studio's None, distinct from Inherit (no treatment at all).
+  flat: {
+    popover: { slots: { content: 'shadow-none' } },
+    dropdownMenu: { slots: { content: 'shadow-none' } },
+    contextMenu: { slots: { content: 'shadow-none' } },
+    select: { slots: { content: 'shadow-none' } },
+    selectMenu: { slots: { content: 'shadow-none' } },
+    inputMenu: { slots: { content: 'shadow-none' } },
+    tooltip: { slots: { content: 'shadow-none' } },
+    toast: { slots: { root: 'shadow-none' } },
+    drawer: { slots: { content: 'shadow-none' } },
+    modal: { compoundVariants: [{ fullscreen: false, class: { content: 'shadow-none' } }] },
+    slideover: { slots: { content: 'sm:shadow-none' } }
+  },
   soft: {
     // shadow-(color:--ui-shadow-final-soft) recolors the preset shadows through the
     // same variable the hard treatment uses, so the color/shade options
@@ -480,7 +495,7 @@ export function styleTokens(style: StyleOptions): { light: Record<string, string
     }
   }
 
-  if (style.shadow && style.shadow !== 'none' && style.shadowOpacity !== undefined) {
+  if (style.shadow && style.shadow !== 'none' && style.shadow !== 'flat' && style.shadowOpacity !== undefined) {
     light['--ui-shadow-opacity'] = `${style.shadowOpacity}%`
     dark['--ui-shadow-opacity'] = `${style.shadowOpacity}%`
   }

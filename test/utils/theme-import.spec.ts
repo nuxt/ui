@@ -151,6 +151,20 @@ describe('importTheme', () => {
     expect(doc.tokens?.dark?.['--ui-frame-color']).toBe('#ff0000')
   })
 
+  it('round-trips the flat shadow treatment without color defaults', () => {
+    const original: ThemeDoc = { version: 1, style: { shadow: 'flat' } }
+    const css = generateCSS(original)
+    const config = generateConfig(original)
+    const { doc: imported, skipped } = importTheme({ css, config })
+
+    // flat strips shadows — no shadow color belongs in its export
+    expect(css).not.toContain('--ui-shadow-color')
+    expect(skipped).toEqual([])
+    expect(imported.style?.shadow).toBe('flat')
+    expect(generateConfig(imported)).toBe(config)
+    expect(generateCSS(imported)).toBe(css)
+  })
+
   it('round-trips the app-wide default size across every sized component', () => {
     const original: ThemeDoc = { version: 1, style: { defaults: { size: 'lg' } } }
     const config = generateConfig(original)

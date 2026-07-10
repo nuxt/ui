@@ -200,14 +200,6 @@ export function useThemeStudio() {
   function setPaletteFromCurve(alias: ColorAlias, base: PaletteCurveParams, effects?: PaletteEffects, amount = 100) {
     const name = customPaletteName(alias)
 
-    // Remember what to restore when the custom palette is removed — the
-    // default alias would discard a preset's choice (e.g. Ghibli's stone).
-    if (!isCustomPalette(alias)) {
-      const prev = readLocalStorage<Record<string, string>>(THEME_STORAGE_KEYS.palettePrev, {})
-      prev[alias] = (appConfig.ui.colors as Record<string, string>)[alias]!
-      window.localStorage.setItem(THEME_STORAGE_KEYS.palettePrev, JSON.stringify(prev))
-    }
-
     theme.applyThemeSettings({
       customColors: { [name]: generatePalette(applyPaletteEffects(base, effects, amount)) },
       [alias]: name,
@@ -226,7 +218,11 @@ export function useThemeStudio() {
     }
   }
 
-  /** Drop the custom ramp and restore the palette that preceded it. */
+  /**
+   * Drop the custom ramp and its curve params. Callers (swatch selection)
+   * always set the alias right after, so no restore dance is needed — the
+   * default is just a safety net for a clear without a follow-up pick.
+   */
   function clearCustomPalette(alias: ColorAlias) {
     theme.removeCustomColors([customPaletteName(alias)])
     if (alias === 'neutral') {
@@ -237,10 +233,7 @@ export function useThemeStudio() {
       })
     }
 
-    const prev = readLocalStorage<Record<string, string>>(THEME_STORAGE_KEYS.palettePrev, {})
-    theme.applyThemeSettings({ [alias]: prev[alias] || DEFAULT_COLORS[alias] }, { track: false })
-    const { [alias]: _restored, ...remaining } = prev
-    window.localStorage.setItem(THEME_STORAGE_KEYS.palettePrev, JSON.stringify(remaining))
+    theme.applyThemeSettings({ [alias]: DEFAULT_COLORS[alias] }, { track: false })
 
     const { [alias]: _, ...rest } = paletteParams.value
     setPaletteParams(rest)
