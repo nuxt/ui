@@ -353,7 +353,6 @@ defineShortcuts({
         variant="naked"
         size="sm"
         autofocus
-        :ui="{ base: 'px-0' }"
         class="px-4"
         @submit="onSubmit"
       >
