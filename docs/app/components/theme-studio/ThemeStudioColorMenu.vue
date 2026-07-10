@@ -86,7 +86,7 @@ function isSelected(color: string) {
             v-for="color in colors"
             :key="color"
             :label="color"
-            size="xs"
+            size="sm"
             :chip="paletteChip(color)"
             :selected="isSelected(color)"
             @click="selectPalette(alias, color)"

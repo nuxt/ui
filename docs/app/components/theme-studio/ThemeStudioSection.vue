@@ -36,7 +36,6 @@ const open = ref(props.defaultOpen)
         variant="ghost"
         size="sm"
         block
-        :active="open"
         active-variant="subtle"
         class="justify-start flex-1"
       />
