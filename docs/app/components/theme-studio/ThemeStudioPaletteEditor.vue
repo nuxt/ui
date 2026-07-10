@@ -309,7 +309,7 @@ function resetEffects() {
               <UButton
                 icon="i-lucide-rotate-ccw"
                 color="neutral"
-                variant="subtle"
+                variant="ghost"
                 size="sm"
                 :disabled="!effectsDirty"
                 aria-label="Reset modifiers"
