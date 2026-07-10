@@ -144,13 +144,6 @@ export function useThemeStudio() {
       clearCustomPalette(alias)
     }
 
-    // 'neutral' on primary means the neutral ALIAS, not tailwind's gray ramp.
-    if (alias === 'primary' && name === 'neutral') {
-      theme.primary.value = 'neutral'
-      setActivePreset(undefined)
-      return
-    }
-
     if (alias === 'primary') {
       theme.primary.value = name
       setActivePreset(undefined)

@@ -1,6 +1,6 @@
 import { defu } from 'defu'
 import { themeIcons, cssVariableDefaults } from '../utils/theme'
-import { mergeUi, NEUTRAL_PRIMARY_ROOT } from '../utils/theme-engine'
+import { mergeUi } from '../utils/theme-engine'
 
 export default defineNuxtPlugin({
   enforce: 'post',
@@ -88,7 +88,7 @@ export default defineNuxtPlugin({
               if (!primaryColor && !neutralColor) return;
               function swapColors(el) {
                 var html = el.innerHTML;
-                if (primaryColor && primaryColor !== 'black' && primaryColor !== 'neutral') {
+                if (primaryColor && primaryColor !== 'black') {
                   html = html.replace(
                     /(--ui-color-primary-\\d{2,3}:\\s*var\\(--color-)${appConfig.ui.colors.primary}(-\\d{2,3}.*?\\))/g,
                     \`$1\${primaryColor}$2\`
@@ -148,17 +148,6 @@ export default defineNuxtPlugin({
           `.replace(/\s+/g, ' '),
           type: 'text/javascript',
           tagPriority: -1
-        }, {
-          innerHTML: `
-            var napEl = document.querySelector('style#nuxt-ui-neutral-as-primary');
-            if (napEl) {
-              if (localStorage.getItem('nuxt-ui-primary') === 'neutral' && localStorage.getItem('nuxt-ui-black-as-primary') !== 'true') {
-                napEl.innerHTML = ':root { ${NEUTRAL_PRIMARY_ROOT.join(' ')} }';
-              } else {
-                napEl.innerHTML = '';
-              }
-            }
-          `.replace(/\s+/g, ' ')
         }, {
           innerHTML: `
             var bapEl = document.querySelector('style#nuxt-ui-black-as-primary');

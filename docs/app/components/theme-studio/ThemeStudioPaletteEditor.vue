@@ -150,12 +150,7 @@ onUnmounted(() => {
 
 /** Fit curves from whatever palette the alias currently shows. */
 function seedFromCurrent() {
-  let name = (appConfig.ui.colors as Record<string, string>)[props.alias]
-  // primary: 'neutral' follows the neutral ALIAS — seed from the ramp it
-  // resolves to, not tailwind's gray that happens to share the name.
-  if (props.alias === 'primary' && name === 'neutral') {
-    name = (appConfig.ui.colors as Record<string, string>).neutral
-  }
+  const name = (appConfig.ui.colors as Record<string, string>)[props.alias]
   if (!name) return
 
   const source = paletteShades(name)
@@ -305,6 +300,8 @@ function resetEffects() {
               variant="ghost"
               size="sm"
               block
+              :active="modifiersOpen"
+              active-variant="subtle"
               class="justify-start"
             />
 

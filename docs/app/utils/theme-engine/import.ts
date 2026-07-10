@@ -38,13 +38,6 @@ interface ParsedCSS {
   fontSize?: number
   radius?: number
   blackAsPrimary?: boolean
-  /**
-   * `--ui-color-primary-N: var(--ui-color-neutral-N)` mirror lines. A
-   * complete set is the neutral-as-primary recipe (folded back into
-   * `colors.primary = 'neutral'`); anything partial is hand-written and
-   * survives as plain token overrides.
-   */
-  primaryMirror: Record<string, string>
   /** From @theme --default-border-width — the export's width channel. */
   borderWidth?: number
   light: Record<string, string>
@@ -53,7 +46,7 @@ interface ParsedCSS {
 }
 
 function parseCSS(css: string): ParsedCSS {
-  const result: ParsedCSS = { palettes: {}, primaryMirror: {}, light: {}, dark: {}, skipped: [] }
+  const result: ParsedCSS = { palettes: {}, light: {}, dark: {}, skipped: [] }
   const clean = css.replace(/\/\*[\s\S]*?\*\//g, '')
 
   const blockRe = /([^{}]+)\{([^{}]*)\}/g
@@ -138,11 +131,6 @@ function parseDeclaration(result: ParsedCSS, selector: string, prop: string, val
     }
     if (prop === '--ui-primary' && value === 'black') {
       result.blackAsPrimary = true
-      return true
-    }
-    const mirror = prop.match(/^--ui-color-primary-(\d{2,3})$/)
-    if (mirror && value === `var(--ui-color-neutral-${mirror[1]})`) {
-      result.primaryMirror[prop] = value
       return true
     }
     if (prop === '--spacing' && value.endsWith('rem')) {
@@ -702,14 +690,6 @@ export function importTheme(input: { css?: string, config?: string }): ThemeImpo
       doc.blackAsPrimary = true
       // its .dark counterpart is generated, not a token choice
       if (css.dark['--ui-primary'] === 'white') delete css.dark['--ui-primary']
-    }
-    if (SHADES.every(shade => css.primaryMirror[`--ui-color-primary-${shade}`])) {
-      // the complete mirror is the neutral-as-primary recipe — a choice,
-      // not eleven token overrides
-      doc.colors = { ...doc.colors, primary: 'neutral' }
-    } else if (Object.keys(css.primaryMirror).length) {
-      // a partial mirror is deliberate hand-written overrides
-      Object.assign(css.light, css.primaryMirror)
     }
     if (Object.keys(css.light).length || Object.keys(css.dark).length) {
       doc.tokens = {

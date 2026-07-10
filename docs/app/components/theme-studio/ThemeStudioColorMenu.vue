@@ -2,9 +2,9 @@
 import type { ColorAlias } from '../../utils/theme-engine'
 
 /**
- * The shared color picker: a swatch-labelled trigger opening the sectioned
- * palette grid. Everything derives from the alias, so the studio sidebar
- * and the header popover render the exact same picker.
+ * The shared color picker: a swatch-labelled trigger opening the palette
+ * grid. Everything derives from the alias, so the studio sidebar and the
+ * header popover render the exact same picker.
  */
 const props = defineProps<{ alias: ColorAlias }>()
 
@@ -12,20 +12,10 @@ const appConfig = useAppConfig()
 const { neutralColors, primaryColors, primary, neutral, blackAsPrimary, setBlackAsPrimary } = useTheme()
 const { selectPalette, isCustomPalette } = useThemeStudio()
 
-// Colorful ramps lead for color roles, neutrals lead for the background.
-// Primary offers no gray ramps at all: a gray through the chromatic shade
-// recipe is a washed-out accent, so the single Neutral entry (mapping to
-// the neutral alias) replaces them.
-const sections = computed(() => {
-  if (props.alias === 'neutral') {
-    return [
-      { label: 'Neutrals', colors: neutralColors },
-      { label: 'Colors', colors: primaryColors, hint: 'These may need some adjustment, try the modifiers in the editor' }
-    ]
-  }
-  if (props.alias === 'primary') return [{ label: 'Colors', colors: primaryColors }]
-  return [{ label: 'Colors', colors: primaryColors }, { label: 'Neutrals', colors: neutralColors }]
-})
+// Strictly separated for v4: color roles offer only chromatic ramps, the
+// neutral role only gray ramps — the module's shade recipes differ per
+// role, so a ramp can't cross over faithfully until v5.
+const colors = computed(() => props.alias === 'neutral' ? neutralColors : primaryColors)
 
 const value = computed(() => {
   if (props.alias === 'primary') return blackAsPrimary.value ? 'black' : primary.value
@@ -45,14 +35,9 @@ function paletteChip(name: string) {
 
 const swatchColor = computed(() => {
   if (props.alias === 'primary' && blackAsPrimary.value) return undefined
-  // primary set to the neutral alias mirrors the selected neutral ramp
-  if (props.alias === 'primary' && value.value === 'neutral') return 'var(--ui-color-neutral-500)'
   if (isCustomPalette(props.alias)) return `var(--color-custom-${props.alias}-500)`
   return `var(--color-${paletteChip(value.value)}-500)`
 })
-
-/** What the primary menu's Neutral row resolves to right now. */
-const neutralName = computed(() => isCustomPalette('neutral') ? 'Custom' : neutral.value)
 
 function isSelected(color: string) {
   if (props.alias === 'primary') return !blackAsPrimary.value && primary.value === color
@@ -83,55 +68,29 @@ function isSelected(color: string) {
     </UButton>
 
     <template #content>
-      <div class="flex flex-col gap-3 w-72 p-2">
-        <!-- Not a ramp swatch: primary follows whatever the neutral alias
-             resolves to, so it gets a distinct full-width row. -->
-        <ThemeStudioPickerButton
-          v-if="alias === 'primary'"
-          size="xs"
-          :selected="!blackAsPrimary && primary === 'neutral'"
-          class="w-full"
-          @click="selectPalette(alias, 'neutral')"
-        >
-          <template #leading>
-            <span class="inline-block size-2 rounded-full" :style="{ backgroundColor: 'var(--ui-color-neutral-500)' }" />
-          </template>
+      <div class="w-72 p-2">
+        <div class="grid grid-cols-3 gap-1">
+          <ThemeStudioPickerButton
+            v-if="alias === 'primary'"
+            label="Black"
+            size="xs"
+            :selected="blackAsPrimary"
+            @click="setBlackAsPrimary(true)"
+          >
+            <template #leading>
+              <span class="inline-block size-2 rounded-full bg-black dark:bg-white" />
+            </template>
+          </ThemeStudioPickerButton>
 
-          Neutral <span class="text-muted">({{ neutralName }})</span>
-        </ThemeStudioPickerButton>
-
-        <div v-for="(section, index) in sections" :key="section.label">
-          <p class="text-sm font-semibold text-highlighted px-1 mb-2 select-none">
-            {{ section.label }}
-          </p>
-
-          <p v-if="section.hint" class="text-xs text-muted px-1 mb-2 -mt-1.5 select-none">
-            {{ section.hint }}
-          </p>
-
-          <div class="grid grid-cols-3 gap-1">
-            <ThemeStudioPickerButton
-              v-if="alias === 'primary' && index === 0"
-              label="Black"
-              size="xs"
-              :selected="blackAsPrimary"
-              @click="setBlackAsPrimary(true)"
-            >
-              <template #leading>
-                <span class="inline-block size-2 rounded-full bg-black dark:bg-white" />
-              </template>
-            </ThemeStudioPickerButton>
-
-            <ThemeStudioPickerButton
-              v-for="color in section.colors"
-              :key="color"
-              :label="color"
-              size="xs"
-              :chip="paletteChip(color)"
-              :selected="isSelected(color)"
-              @click="selectPalette(alias, color)"
-            />
-          </div>
+          <ThemeStudioPickerButton
+            v-for="color in colors"
+            :key="color"
+            :label="color"
+            size="xs"
+            :chip="paletteChip(color)"
+            :selected="isSelected(color)"
+            @click="selectPalette(alias, color)"
+          />
         </div>
       </div>
     </template>

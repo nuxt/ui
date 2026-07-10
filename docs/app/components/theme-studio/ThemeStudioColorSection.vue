@@ -117,6 +117,8 @@ const openGroups = reactive<Record<string, boolean>>({})
             variant="ghost"
             size="sm"
             block
+            :active="openGroups[tokenGroup.key]"
+            active-variant="subtle"
             class="justify-start"
           />
 

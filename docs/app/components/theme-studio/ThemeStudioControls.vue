@@ -529,7 +529,7 @@ const shadowColor = computed({
         <USeparator />
 
         <template v-for="field in variantGroupFields" :key="field.key">
-          <ThemeStudioSection :label="field.label">
+          <ThemeStudioSection :label="field.label" :default-open="false">
             <div class="flex flex-col gap-1.5">
               <div class="flex items-center gap-2">
                 <span class="text-xs text-muted w-13 shrink-0 select-none">Variant</span>

@@ -2,7 +2,7 @@ import { defu } from 'defu'
 import { THEME_TAG_IDS, THEME_STATE_KEYS, THEME_STORAGE_KEYS } from '../utils/theme-keys'
 import { useLocalStorage } from '@vueuse/core'
 import { themeIcons, cssVariableDefaults, readLocalStorage } from '../utils/theme'
-import { generateCSS, generateConfig, mergeUi, isDefaultStyle, DEFAULT_COLORS, THEME_DEFAULTS, LIBRARY_TOKEN_DEFAULTS, NEUTRAL_PRIMARY_ROOT } from '../utils/theme-engine'
+import { generateCSS, generateConfig, mergeUi, isDefaultStyle, DEFAULT_COLORS, THEME_DEFAULTS, LIBRARY_TOKEN_DEFAULTS } from '../utils/theme-engine'
 import type { ThemeDoc, ThemePalette } from '../utils/theme-engine'
 import { omit } from '#ui/utils'
 import colors from 'tailwindcss/colors'
@@ -217,13 +217,6 @@ export function useTheme() {
   const fontSizeStyle = computed(() => _fontSize.value !== 16 ? `html { font-size: ${_fontSize.value}px; }` : 'html {}')
   const spacingStyle = computed(() => _spacing.value !== 0.25 ? `:root { --spacing: ${_spacing.value}rem; }` : ':root {}')
   const blackAsPrimaryStyle = computed(() => _blackAsPrimary.value ? `:root { --ui-primary: black; } .dark { --ui-primary: white; }` : ':root {}')
-  // primary === 'neutral' means the neutral ALIAS (#6608 semantics), which
-  // the module would render as tailwind's gray — the same mirror the export
-  // emits keeps the preview honest. Black wins when both are set (parity
-  // with the export, which drops the recipe under blackAsPrimary).
-  const neutralAsPrimaryStyle = computed(() => appConfig.ui.colors.primary === 'neutral' && !_blackAsPrimary.value
-    ? `:root { ${NEUTRAL_PRIMARY_ROOT.join(' ')} }`
-    : ':root {}')
   const fontStyle = computed(() => `:root { --font-sans: '${_font.value}', sans-serif; }`)
   const customColorsStyle = computed(() => {
     const entries = Object.entries(customColorsData.value)
@@ -261,7 +254,6 @@ export function useTheme() {
     { innerHTML: radiusStyle, id: 'nuxt-ui-radius', tagPriority: -2 },
     { innerHTML: fontSizeStyle, id: 'nuxt-ui-font-size', tagPriority: -2 },
     { innerHTML: spacingStyle, id: 'nuxt-ui-spacing', tagPriority: -2 },
-    { innerHTML: neutralAsPrimaryStyle, id: 'nuxt-ui-neutral-as-primary', tagPriority: -2 },
     { innerHTML: blackAsPrimaryStyle, id: 'nuxt-ui-black-as-primary', tagPriority: -2 },
     { innerHTML: fontStyle, id: 'nuxt-ui-font', tagPriority: -2 },
     { innerHTML: customColorsStyle, id: THEME_TAG_IDS.customColors, tagPriority: -2 },
