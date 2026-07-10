@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { Extension } from '@tiptap/core'
-import type { StarterKitOptions } from '@tiptap/starter-kit'
 import type { EditorMentionMenuItem, SelectItem } from '@nuxt/ui'
 
 const input = ref('')
@@ -33,21 +32,6 @@ const modes = [
   { label: 'Auto mode', value: 'auto', icon: 'i-lucide-zap' }
 ] satisfies SelectItem[]
 
-// Disable rich-text formatting so the prompt stays plain text (no bold, headings, lists, code, etc.)
-const starterKit: Partial<StarterKitOptions> = {
-  bold: false,
-  italic: false,
-  strike: false,
-  code: false,
-  underline: false,
-  heading: false,
-  blockquote: false,
-  bulletList: false,
-  orderedList: false,
-  listItem: false,
-  codeBlock: false
-}
-
 // SSR-safe target so the menus aren't clipped by overflow
 const appendToBody = import.meta.client ? () => document.body : undefined
 
@@ -63,6 +47,8 @@ function onFilesChange(event: Event) {
 }
 
 function onSubmit() {
+  console.log('submit', input.value)
+
   input.value = ''
   attachments.value = []
 }
@@ -100,7 +86,7 @@ function onSubmit() {
         v-slot="{ editor }"
         v-model="input"
         content-type="markdown"
-        :starter-kit="starterKit"
+        :starter-kit="false"
         :placeholder="placeholder"
         class="w-full min-h-12"
         :ui="{ base: 'p-2.5! [&_.mention]:bg-primary/5 [&_.mention]:rounded-sm [&_.mention]:px-0.5 [&_.mention]:py-0.25' }"
@@ -139,7 +125,7 @@ function onSubmit() {
           square
         />
 
-        <UChatPromptSubmit size="sm" />
+        <UChatPromptSubmit size="sm" :disabled="!input.trim()" />
       </div>
     </template>
   </UChatPrompt>

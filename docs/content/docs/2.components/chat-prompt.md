@@ -55,6 +55,7 @@ Compose the `#header`, `#body` and `#footer` slots to build a rich prompt: file 
 
 ::component-example
 ---
+collapse: true
 name: 'chat-prompt-editor-example'
 class: 'justify-center'
 ---
