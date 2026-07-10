@@ -77,6 +77,12 @@ function oklchToLinearRgb({ l: L, c, h }: Oklch): [number, number, number] {
   ]
 }
 
+/** Gamut-clipped sRGB channels (0–1) — for showing hex/rgb equivalents. */
+export function oklchToRgb(color: Oklch): [number, number, number] {
+  return oklchToLinearRgb(color).map(channel =>
+    Math.min(1, Math.max(0, linearToSrgb(channel)))) as [number, number, number]
+}
+
 const GAMUT_EPSILON = 0.000005
 
 export function inGamut(color: Oklch): boolean {

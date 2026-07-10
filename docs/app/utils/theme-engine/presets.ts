@@ -277,7 +277,9 @@ export const presets: ThemePreset[] = [{
       neutral: 'custom-neutral'
     },
     radius: 0.125,
-    font: { sans: 'Comic Neue' },
+    // One flat 600 across every weight step — comic lettering has a single
+    // stroke width, and Comic Neue's 400 reads too thin for the look.
+    font: { sans: 'Comic Neue', weights: { normal: 600, medium: 600, semibold: 600, bold: 600 } },
     // Inked page: near-black default AND accented borders over muted panel
     // edges, deep red at 600 in light, flat 50s inversions in dark.
     tokens: {

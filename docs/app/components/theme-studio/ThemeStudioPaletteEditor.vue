@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useThrottleFn, watchIgnorable } from '@vueuse/core'
-import { SHADES, CURVE_DEFAULTS, NEUTRAL_CURVE_DEFAULTS, PALETTE_EFFECT_DEFAULTS, generatePalette, fitPalette, applyPaletteEffects, isDefaultEffects, sampleCurve, clampToGamut, formatOklch } from '../../utils/theme-engine'
+import { SHADES, CURVE_DEFAULTS, NEUTRAL_CURVE_DEFAULTS, PALETTE_EFFECT_DEFAULTS, generatePalette, fitPalette, applyPaletteEffects, isDefaultEffects, sampleCurve, clampToGamut, formatOklch, parseColor, oklchToRgb, rgbToHex } from '../../utils/theme-engine'
 import type { PaletteCurveParams, PaletteEffects, StoredPaletteParams, ColorAlias } from '../../utils/theme-engine'
 
 const props = defineProps<{
@@ -47,6 +47,46 @@ const active = computed(() => isCustomPalette(props.alias))
 
 const shades = computed(() => generatePalette(params))
 const stopColors = computed(() => SHADES.map(shade => shades.value[shade]))
+
+/** Every swatch with its hex/rgb equivalents for the tooltip. */
+const swatchInfo = computed(() => SHADES.map((shade) => {
+  const oklch = shades.value[shade]!
+  const parsed = parseColor(oklch)
+  const rgb = parsed ? oklchToRgb(parsed) : undefined
+  return {
+    shade,
+    oklch,
+    hex: rgb ? rgbToHex(rgb) : '',
+    rgb: rgb ? `rgb(${rgb.map(channel => Math.round(channel * 255)).join(', ')})` : ''
+  }
+}))
+
+const { copy: copyShade } = useClipboard()
+const copiedShade = ref<number>()
+let copiedTimeout: ReturnType<typeof setTimeout> | undefined
+
+function copySwatch(info: { shade: number, oklch: string }) {
+  copyShade(info.oklch)
+  copiedShade.value = info.shade
+  clearTimeout(copiedTimeout)
+  copiedTimeout = setTimeout(() => {
+    copiedShade.value = undefined
+  }, 1500)
+}
+onUnmounted(() => clearTimeout(copiedTimeout))
+
+/**
+ * A pinned swatch tooltip stays open for reading/copying at leisure. Reka
+ * locks controlled-vs-uncontrolled at mount, so the tooltips are always
+ * controlled: hover intent lands in `hoveredTips` and a pin overrides it.
+ */
+const pinnedShade = ref<number>()
+const hoveredTips = reactive<Partial<Record<number, boolean>>>({})
+
+/** One pin at a time — pinning a swatch unpins any other. */
+function togglePin(shade: number) {
+  pinnedShade.value = pinnedShade.value === shade ? undefined : shade
+}
 
 /**
  * Every axis is a fixed 1:1 window — the full physical range fits the
@@ -256,8 +296,64 @@ function resetEffects() {
           />
 
           <div class="flex rounded-b-sm overflow-hidden ring ring-default">
-            <UTooltip v-for="shade in SHADES" :key="shade" :text="`${shade} · ${shades[shade]}`">
-              <div class="aspect-square flex-1" :style="{ backgroundColor: shades[shade] }" />
+            <UTooltip
+              v-for="info in swatchInfo"
+              :key="info.shade"
+              disable-closing-trigger
+              :open="pinnedShade === info.shade || (hoveredTips[info.shade] ?? false)"
+              :content="{ side: 'right' }"
+              :ui="{ content: 'h-auto' }"
+              @update:open="hoveredTips[info.shade] = $event"
+            >
+              <button
+                type="button"
+                class="aspect-square flex-1"
+                :style="{ backgroundColor: info.oklch }"
+                :aria-label="`Shade ${info.shade}: ${info.oklch}`"
+                :aria-pressed="pinnedShade === info.shade"
+                @click="togglePin(info.shade)"
+              />
+
+              <template #content>
+                <div class="px-1 py-1 text-xs font-mono flex flex-col gap-0.5">
+                  <div class="flex items-center justify-between gap-3">
+                    <span class="font-semibold">{{ info.shade }}</span>
+
+                    <div class="flex items-center">
+                      <UTooltip text="Copy Oklch">
+                        <UButton
+                          size="xs"
+                          color="neutral"
+                          square
+                          variant="ghost"
+                          :ui="{ leadingIcon: 'size-3' }"
+                          :icon="copiedShade === info.shade ? 'i-lucide-copy-check' : 'i-lucide-copy'"
+                          :aria-label="`Copy ${info.oklch}`"
+                          @click="copySwatch(info)"
+                        />
+                      </UTooltip>
+
+                      <UTooltip :text="pinnedShade === info.shade ? 'Unpin' : 'Pin open'">
+                        <UButton
+                          size="xs"
+                          color="neutral"
+                          square
+                          variant="ghost"
+                          active-color="primary"
+                          active-variant="ghost"
+                          :active="pinnedShade === info.shade"
+                          :ui="{ leadingIcon: 'size-3' }"
+                          :icon="pinnedShade === info.shade ? 'i-lucide-pin-off' : 'i-lucide-pin'"
+                          :aria-label="pinnedShade === info.shade ? 'Unpin tooltip' : 'Pin tooltip open'"
+                          @click="togglePin(info.shade)"
+                        />
+                      </UTooltip>
+                    </div>
+                  </div>
+                  <span>{{ info.oklch }}</span>
+                  <span class="text-muted">{{ info.hex }} · {{ info.rgb }}</span>
+                </div>
+              </template>
             </UTooltip>
           </div>
         </div>
