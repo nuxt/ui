@@ -151,6 +151,40 @@ describe('importTheme', () => {
     expect(doc.tokens?.dark?.['--ui-frame-color']).toBe('#ff0000')
   })
 
+  it('round-trips neutral as primary', () => {
+    const original: ThemeDoc = { version: 1, colors: { primary: 'neutral' } }
+    const css = generateCSS(original)
+    const config = generateConfig(original)
+    const { doc: imported, skipped } = importTheme({ css, config })
+
+    // The recipe (primary scale mirroring neutral + the inverted accent) is
+    // generated from the choice, not a set of token overrides.
+    expect(skipped).toEqual([])
+    expect(imported.colors?.primary).toBe('neutral')
+    expect(imported.tokens).toBeUndefined()
+    expect(generateCSS(imported)).toBe(css)
+    expect(generateConfig(imported)).toBe(config)
+  })
+
+  it('reads neutral as primary from CSS alone', () => {
+    const { doc, skipped } = importTheme({ css: generateCSS({ version: 1, colors: { primary: 'neutral' } }) })
+
+    expect(skipped).toEqual([])
+    expect(doc.colors?.primary).toBe('neutral')
+  })
+
+  it('keeps a lone primary mirror line as a token override', () => {
+    const { doc, skipped } = importTheme({
+      css: ':root {\n  --ui-color-primary-500: var(--ui-color-neutral-500);\n}'
+    })
+
+    // Without the accent marker this is a deliberate hand-written override,
+    // not the neutral-as-primary recipe — it must survive, not vanish.
+    expect(skipped).toEqual([])
+    expect(doc.colors?.primary).toBeUndefined()
+    expect(doc.tokens?.light?.['--ui-color-primary-500']).toBe('var(--ui-color-neutral-500)')
+  })
+
   it('round-trips per-group default colors', () => {
     const doc: ThemeDoc = {
       version: 1,

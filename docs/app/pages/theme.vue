@@ -136,7 +136,7 @@ const toolbarPinned = computed(() => nearBottom.value || Object.values(openPanel
               toolbarPinned ? 'translate-y-0' : 'translate-y-[calc(100%+6px)] group-hover:translate-y-0 group-focus-within:translate-y-0'
             ]"
           >
-            <UFieldGroup size="sm">
+            <UFieldGroup>
               <UTooltip text="Undo" :kbds="['meta', 'Z']">
                 <UButton
                   icon="i-lucide-undo-2"
@@ -165,7 +165,6 @@ const toolbarPinned = computed(() => nearBottom.value || Object.values(openPanel
                 icon="i-lucide-rotate-ccw"
                 color="neutral"
                 variant="subtle"
-                size="sm"
                 aria-label="Reset theme"
                 @click="resetTheme"
               />
@@ -183,7 +182,6 @@ const toolbarPinned = computed(() => nearBottom.value || Object.values(openPanel
                 :label="settingGroup.label"
                 color="neutral"
                 variant="subtle"
-                size="sm"
                 trailing-icon="i-lucide-chevron-down"
               />
 
@@ -202,21 +200,19 @@ const toolbarPinned = computed(() => nearBottom.value || Object.values(openPanel
               v-model:open="openPanels.view"
               :items="views"
               :icon="views.find(tab => tab.value === view)?.icon"
-              size="sm"
               color="neutral"
               variant="subtle"
               class="w-36 shrink-0"
               :class="!fullscreen && 'lg:hidden'"
             />
 
-            <UColorModeButton size="sm" variant="subtle" />
+            <UColorModeButton variant="subtle" />
 
             <UTooltip :text="fullscreen ? 'Exit fullscreen' : 'Fullscreen preview'" :kbds="fullscreen ? ['Esc'] : undefined">
               <UButton
                 :icon="fullscreen ? 'i-lucide-minimize' : 'i-lucide-maximize'"
                 color="neutral"
                 variant="subtle"
-                size="sm"
                 :aria-label="fullscreen ? 'Exit fullscreen preview' : 'Fullscreen preview'"
                 @click="fullscreen = !fullscreen"
               />

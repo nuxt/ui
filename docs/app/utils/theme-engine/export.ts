@@ -1,7 +1,17 @@
 import { themeIcons } from '../theme'
 import type { ThemeDoc } from './types'
-import { DEFAULT_COLORS, THEME_DEFAULTS } from './types'
+import { DEFAULT_COLORS, THEME_DEFAULTS, SHADES } from './types'
 import { styleComponents, styleTokens, mergeUi, BORDER_WIDTH_DEFAULT } from './styles'
+
+/**
+ * The CSS recipe behind `primary: 'neutral'` — the neutral ALIAS, not
+ * tailwind's gray ramp. The primary scale mirrors whatever neutral
+ * resolves to (stock, tinted or custom), so primary IS the selected
+ * neutral palette; the accent stays on the standard 500/400 recipe,
+ * which the mirror redirects — a deliberate monochrome accent, distinct
+ * from black-as-primary.
+ */
+export const NEUTRAL_PRIMARY_ROOT = SHADES.map(shade => `--ui-color-primary-${shade}: var(--ui-color-neutral-${shade});`)
 
 /**
  * Generate the minimal `main.css`. The document only holds overrides, so
@@ -56,6 +66,8 @@ export function generateCSS(doc: ThemeDoc): string {
   }
   if (doc.blackAsPrimary) {
     rootLines.push('  --ui-primary: black;')
+  } else if (doc.colors?.primary === 'neutral') {
+    rootLines.push(...NEUTRAL_PRIMARY_ROOT.map(line => `  ${line}`))
   }
 
   if (rootLines.length) {

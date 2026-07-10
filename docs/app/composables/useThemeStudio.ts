@@ -1,7 +1,7 @@
 import colors from 'tailwindcss/colors'
 import { THEME_STATE_KEYS, THEME_STORAGE_KEYS } from '../utils/theme-keys'
 import { presets, docToSettings, isDefaultTheme, generatePalette, fitPalette, parseCssColor, parseUiColorRef, styleComponents, styleTokens, DEFAULT_COLORS, SHADES, TOKEN_SHADE_TARGETS } from '../utils/theme-engine'
-import type { ThemeDoc, ThemePreset, PaletteCurveParams, StyleOptions, Shade, ColorAlias } from '../utils/theme-engine'
+import type { ThemeDoc, ThemePreset, PaletteCurveParams, StyleOptions, Shade, ColorAlias, TokenRamp } from '../utils/theme-engine'
 import { readLocalStorage } from '../utils/theme'
 
 export function useThemeStudio() {
@@ -142,6 +142,18 @@ export function useThemeStudio() {
    * AI theme feature uses.
    */
   function selectPalette(alias: ColorAlias, name: string) {
+    // 'neutral' on primary means the neutral ALIAS, not tailwind's gray ramp
+    // — always a plain alias switch, never a curve seed (fitting from the
+    // gray ramp would silently turn "follow neutral" into a frozen copy).
+    if (alias === 'primary' && name === 'neutral') {
+      if (isCustomPalette(alias)) {
+        clearCustomPalette(alias)
+      }
+      theme.primary.value = 'neutral'
+      setActivePreset(undefined)
+      return
+    }
+
     if (isCustomPalette(alias)) {
       const shades = paletteShades(name)
       if (shades) {
@@ -347,6 +359,17 @@ export function useThemeStudio() {
     track('Theme Studio Shuffled')
   }
 
+  /** Palette-name chips coloring shade-slider swatches — each alias's current ramp. */
+  const neutralChip = computed(() => theme.neutral.value === 'neutral' ? 'old-neutral' : theme.neutral.value)
+  const primaryChip = computed(() => isCustomPalette('primary') ? 'custom-primary' : theme.primary.value)
+
+  function rampChip(ramp: TokenRamp): string {
+    if (ramp === 'primary') return primaryChip.value
+    if (ramp === 'neutral') return neutralChip.value
+    const name = (appConfig.ui.colors as Record<string, string>)[ramp] || ramp
+    return name === 'neutral' ? 'old-neutral' : name
+  }
+
   return {
     presets,
     activePreset,
@@ -360,6 +383,9 @@ export function useThemeStudio() {
     clearCustomPalette,
     applyDoc,
     applyPreset,
-    shuffle
+    shuffle,
+    neutralChip,
+    primaryChip,
+    rampChip
   }
 }

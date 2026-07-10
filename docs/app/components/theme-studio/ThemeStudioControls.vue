@@ -1,8 +1,6 @@
 <script setup lang="ts">
-import { TOKEN_SHADE_TARGETS, TOKEN_GROUPS, SHADES, SHADOW_SHADE_DEFAULTS, BORDER_SHADE_DEFAULTS, BORDER_WIDTH_DEFAULT, SHADOW_GEOMETRY_DEFAULTS, INNER_SHADOW_GEOMETRY_DEFAULTS } from '../../utils/theme-engine'
-import type { VariantGroup, TokenRamp, ColorAlias } from '../../utils/theme-engine'
-
-const appConfig = useAppConfig()
+import { SHADES, SHADOW_SHADE_DEFAULTS, BORDER_SHADE_DEFAULTS, BORDER_WIDTH_DEFAULT, SHADOW_GEOMETRY_DEFAULTS, INNER_SHADOW_GEOMETRY_DEFAULTS } from '../../utils/theme-engine'
+import type { VariantGroup, ColorAlias } from '../../utils/theme-engine'
 
 /** Which settings group this instance renders — one popover per group. */
 defineProps<{
@@ -10,8 +8,6 @@ defineProps<{
 }>()
 
 const {
-  neutral,
-  primary,
   radius,
   fontSize,
   spacing,
@@ -21,7 +17,7 @@ const {
   icons
 } = useTheme()
 
-const { isCustomPalette, style, setStyle } = useThemeStudio()
+const { style, setStyle, primaryChip, neutralChip } = useThemeStudio()
 
 const semanticAliases: ColorAlias[] = ['secondary', 'success', 'info', 'warning', 'error']
 
@@ -132,48 +128,6 @@ const borderShades = {
   dark: shadeSlider('borderShade', BORDER_SHADE_DEFAULTS, 'dark')
 }
 
-// Per-semantic-token shade sliders (Background, Inverted, Highlighted…).
-function tokenShadeSlider(token: string, defaults: { light: number, dark: number }, target: 'light' | 'dark') {
-  return computed({
-    get: () => {
-      const value = style.value.tokenShades?.[token]?.[target] ?? defaults[target]
-      return SHADES.indexOf(value as typeof SHADES[number])
-    },
-    set: (index: number) => {
-      setStyle({
-        tokenShades: {
-          ...style.value.tokenShades,
-          [token]: { ...style.value.tokenShades?.[token], [target]: SHADES[index]! }
-        }
-      })
-    }
-  })
-}
-
-const tokenSections = TOKEN_SHADE_TARGETS.map(target => ({
-  ...target,
-  sliders: {
-    light: tokenShadeSlider(target.token, target.defaults, 'light'),
-    dark: tokenShadeSlider(target.token, target.defaults, 'dark')
-  }
-}))
-
-const tokenGroups = TOKEN_GROUPS.map(group => ({
-  ...group,
-  sections: tokenSections.filter(section => section.group === group.key)
-}))
-
-const neutralChip = computed(() => neutral.value === 'neutral' ? 'old-neutral' : neutral.value)
-const primaryChip = computed(() => isCustomPalette('primary') ? 'custom-primary' : primary.value)
-
-/** Palette name coloring a token slider's swatch — the alias's current ramp. */
-function rampChip(ramp: TokenRamp): string {
-  if (ramp === 'primary') return primaryChip.value
-  if (ramp === 'neutral') return neutralChip.value
-  const name = (appConfig.ui.colors as Record<string, string>)[ramp] || ramp
-  return name === 'neutral' ? 'old-neutral' : name
-}
-
 /**
  * Same hydration-adoption problem for every control: SSR renders default
  * state (no localStorage), and persisted slider positions/selections looked
@@ -189,12 +143,6 @@ onMounted(() => {
     hydrationKey.value = 1
   }
 })
-
-// One curve editor per alias, toggled by the edit icon next to each select.
-const paletteEditors = reactive<Record<string, boolean>>({})
-
-/** The Shades fold in the Colors group — advanced, so closed by default. */
-const shadesOpen = ref(false)
 
 const defaultSizeItems = [
   { label: 'Default', value: 'default' },
@@ -311,122 +259,20 @@ const shadowColor = computed({
 <template>
   <div :key="hydrationKey">
     <template v-if="group === 'colors'">
-      <div class="flex flex-col gap-2.5">
-        <ThemeStudioSection label="Primary" help-to="/docs/getting-started/theme/css-variables#colors">
-          <div>
-            <div class="flex w-full items-center gap-1.5">
-              <ThemeStudioColorMenu alias="primary" class="flex-1 min-w-0" />
-
-              <UButton
-                :icon="isCustomPalette('primary') ? 'i-lucide-paintbrush' : 'i-lucide-pencil'"
-                color="neutral"
-                variant="ghost"
-                size="sm"
-                :active="paletteEditors.primary || isCustomPalette('primary')"
-                active-color="primary"
-                active-variant="subtle"
-                aria-label="Edit primary palette"
-                @click="paletteEditors.primary = !paletteEditors.primary"
-              />
-            </div>
-
-            <ThemeStudioPaletteEditor v-model:open="paletteEditors.primary" alias="primary" />
-          </div>
-        </ThemeStudioSection>
+      <div class="flex flex-col gap-4">
+        <ThemeStudioColorSection alias="primary" help-to="/docs/getting-started/theme/css-variables#colors" />
 
         <USeparator />
 
-        <ThemeStudioSection label="Neutral" help-to="/docs/getting-started/theme/css-variables#text">
-          <div>
-            <div class="flex w-full items-center gap-1.5">
-              <ThemeStudioColorMenu alias="neutral" class="flex-1 min-w-0" />
-
-              <UButton
-                :icon="isCustomPalette('neutral') ? 'i-lucide-paintbrush' : 'i-lucide-pencil'"
-                color="neutral"
-                variant="ghost"
-                size="sm"
-                :active="paletteEditors.neutral || isCustomPalette('neutral')"
-                active-color="primary"
-                active-variant="subtle"
-                aria-label="Edit background palette"
-                @click="paletteEditors.neutral = !paletteEditors.neutral"
-              />
-            </div>
-
-            <ThemeStudioPaletteEditor v-model:open="paletteEditors.neutral" alias="neutral" />
-          </div>
-        </ThemeStudioSection>
+        <ThemeStudioColorSection alias="neutral" help-to="/docs/getting-started/theme/css-variables#text" />
 
         <USeparator />
 
         <ThemeStudioSection label="Semantic" help-to="/docs/getting-started/theme/design-system">
-          <div class="flex flex-col gap-1.5">
-            <div v-for="alias in semanticAliases" :key="alias">
-              <div class="flex items-center gap-2">
-                <span class="text-[11px] text-muted w-13 shrink-0 capitalize select-none">{{ alias }}</span>
-
-                <div class="flex flex-1 min-w-0 items-center gap-1.5">
-                  <ThemeStudioColorMenu :alias="alias" class="flex-1 min-w-0" />
-
-                  <UButton
-                    :icon="isCustomPalette(alias) ? 'i-lucide-paintbrush' : 'i-lucide-pencil'"
-                    color="neutral"
-                    variant="ghost"
-                    size="sm"
-                    :active="paletteEditors[alias] || isCustomPalette(alias)"
-                    active-color="primary"
-                    active-variant="subtle"
-                    :aria-label="`Edit ${alias} palette`"
-                    @click="paletteEditors[alias] = !paletteEditors[alias]"
-                  />
-                </div>
-              </div>
-
-              <ThemeStudioPaletteEditor v-model:open="paletteEditors[alias]" :alias="alias" />
-            </div>
+          <div class="flex flex-col gap-3 pt-1">
+            <ThemeStudioColorSection v-for="alias in semanticAliases" :key="alias" :alias="alias" />
           </div>
         </ThemeStudioSection>
-
-        <USeparator />
-
-        <!-- Advanced per-token shade remapping — folded away so the common
-             color pickers stay front and center. -->
-        <UCollapsible v-model:open="shadesOpen">
-          <UButton
-            label="Shades"
-            color="neutral"
-            variant="ghost"
-            size="sm"
-            block
-            class="justify-between"
-            :trailing-icon="shadesOpen ? 'i-lucide-chevron-up' : 'i-lucide-chevron-down'"
-          />
-
-          <template #content>
-            <div class="flex flex-col gap-2.5 pt-2.5">
-              <template v-for="(tokenGroup, index) in tokenGroups" :key="tokenGroup.key">
-                <USeparator v-if="index" />
-
-                <ThemeStudioSection :label="tokenGroup.label">
-                  <div class="flex flex-col gap-3">
-                    <div v-for="section in tokenGroup.sections" :key="section.token" class="flex flex-col gap-1.5">
-                      <span class="text-[11px] text-muted select-none">{{ section.label }}</span>
-
-                      <ThemeStudioShadeSlider
-                        v-for="(slider, modeName) in section.sliders"
-                        :key="modeName"
-                        v-model="slider.value"
-                        :mode="modeName"
-                        :chip="rampChip(section.ramp)"
-                      />
-                    </div>
-                  </div>
-                </ThemeStudioSection>
-              </template>
-            </div>
-          </template>
-        </UCollapsible>
       </div>
     </template>
 
@@ -464,22 +310,26 @@ const shadowColor = computed({
                 />
               </template>
 
-              <div class="flex items-center gap-2">
-                <span class="text-[11px] text-muted w-13 shrink-0 select-none">Opacity</span>
-
-                <USlider v-model="shadowOpacity" :min="5" :max="100" :step="5" size="xs" />
-
-                <span class="text-[11px] text-dimmed font-mono w-8 text-right shrink-0">{{ shadowOpacity }}%</span>
-              </div>
+              <ThemeStudioSliderRow
+                v-model="shadowOpacity"
+                label="Opacity"
+                :min="5"
+                :max="100"
+                :step="5"
+                unit="%"
+              />
 
               <template v-if="(style.shadow || 'none') === 'hard'">
-                <div v-for="field in geometryFields" :key="field.key" class="flex items-center gap-2">
-                  <span class="text-[11px] text-muted w-13 shrink-0 select-none">{{ field.label }}</span>
-
-                  <USlider v-model="geometry[field.key].value" :min="field.min" :max="field.max" :step="1" size="xs" />
-
-                  <span class="text-[11px] text-dimmed font-mono w-8 text-right shrink-0">{{ geometry[field.key].value }}px</span>
-                </div>
+                <ThemeStudioSliderRow
+                  v-for="field in geometryFields"
+                  :key="field.key"
+                  v-model="geometry[field.key].value"
+                  :label="field.label"
+                  :min="field.min"
+                  :max="field.max"
+                  :step="1"
+                  unit="px"
+                />
               </template>
             </div>
           </div>
@@ -519,22 +369,26 @@ const shadowColor = computed({
                 />
               </template>
 
-              <div class="flex items-center gap-2">
-                <span class="text-[11px] text-muted w-13 shrink-0 select-none">Opacity</span>
-
-                <USlider v-model="innerShadowOpacity" :min="5" :max="100" :step="5" size="xs" />
-
-                <span class="text-[11px] text-dimmed font-mono w-8 text-right shrink-0">{{ innerShadowOpacity }}%</span>
-              </div>
+              <ThemeStudioSliderRow
+                v-model="innerShadowOpacity"
+                label="Opacity"
+                :min="5"
+                :max="100"
+                :step="5"
+                unit="%"
+              />
 
               <template v-if="style.innerShadow === 'hard'">
-                <div v-for="field in geometryFields" :key="field.key" class="flex items-center gap-2">
-                  <span class="text-[11px] text-muted w-13 shrink-0 select-none">{{ field.label }}</span>
-
-                  <USlider v-model="innerGeometry[field.key].value" :min="field.min" :max="field.max" :step="1" size="xs" />
-
-                  <span class="text-[11px] text-dimmed font-mono w-8 text-right shrink-0">{{ innerGeometry[field.key].value }}px</span>
-                </div>
+                <ThemeStudioSliderRow
+                  v-for="field in geometryFields"
+                  :key="field.key"
+                  v-model="innerGeometry[field.key].value"
+                  :label="field.label"
+                  :min="field.min"
+                  :max="field.max"
+                  :step="1"
+                  unit="px"
+                />
               </template>
             </div>
           </div>
@@ -555,13 +409,14 @@ const shadowColor = computed({
             </div>
 
             <div v-if="borderStyle === 'custom'" class="mt-1.5 flex flex-col gap-2">
-              <div class="flex items-center gap-2">
-                <span class="text-[11px] text-muted w-13 shrink-0 select-none">Width</span>
-
-                <USlider v-model="borderWidth" :min="1" :max="4" :step="1" size="xs" />
-
-                <span class="text-[11px] text-dimmed font-mono w-8 text-right shrink-0">{{ borderWidth }}px</span>
-              </div>
+              <ThemeStudioSliderRow
+                v-model="borderWidth"
+                label="Width"
+                :min="1"
+                :max="4"
+                :step="1"
+                unit="px"
+              />
 
               <div class="flex items-center gap-2">
                 <span class="text-[11px] text-muted w-13 shrink-0 select-none">Frame</span>
@@ -632,35 +487,25 @@ const shadowColor = computed({
 
         <ThemeStudioSection label="Scale">
           <div class="flex flex-col gap-2">
-            <div class="flex items-center gap-2">
-              <span class="text-[11px] text-muted w-13 shrink-0 select-none">Radius</span>
+            <ThemeStudioSliderRow
+              v-model="radius"
+              label="Radius"
+              :min="0"
+              :max="0.5"
+              :step="0.125"
+              unit="rem"
+            />
 
-              <USlider
-                v-model="radius"
-                :min="0"
-                :max="0.5"
-                :step="0.125"
-                size="xs"
-              />
+            <ThemeStudioSliderRow
+              v-model="fontSize"
+              label="Text"
+              :min="14"
+              :max="18"
+              :step="0.5"
+              unit="px"
+            />
 
-              <span class="text-[11px] text-dimmed font-mono w-10 text-right shrink-0">{{ radius }}rem</span>
-            </div>
-
-            <div class="flex items-center gap-2">
-              <span class="text-[11px] text-muted w-13 shrink-0 select-none">Text</span>
-
-              <USlider v-model="fontSize" :min="14" :max="18" :step="0.5" size="xs" />
-
-              <span class="text-[11px] text-dimmed font-mono w-10 text-right shrink-0">{{ fontSize }}px</span>
-            </div>
-
-            <div class="flex items-center gap-2">
-              <span class="text-[11px] text-muted w-13 shrink-0 select-none">Spacing</span>
-
-              <USlider v-model="spacing" :min="0.15" :max="0.35" :step="0.025" size="xs" />
-
-              <span class="text-[11px] text-dimmed font-mono w-10 text-right shrink-0">{{ spacing }}</span>
-            </div>
+            <ThemeStudioSliderRow v-model="spacing" label="Spacing" :min="0.15" :max="0.35" :step="0.025" />
 
             <div class="flex items-center gap-2">
               <span class="text-[11px] text-muted w-13 shrink-0 select-none">Size</span>

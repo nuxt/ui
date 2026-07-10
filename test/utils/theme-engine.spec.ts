@@ -14,8 +14,7 @@ import {
   parseColor,
   contrastRatio,
   CURVE_DEFAULTS,
-  SHADES,
-  CUSTOM_PALETTES
+  SHADES
 } from '../../docs/app/utils/theme-engine'
 import type { ThemeDoc } from '../../docs/app/utils/theme-engine'
 import colors from 'tailwindcss/colors'
@@ -230,15 +229,23 @@ describe('theme-engine', () => {
     })
 
     it('fitPalette accepts hex and oklch inputs equivalently', () => {
-      // The hex ramp CUSTOM_PALETTES.cocoa was converted from.
       const cocoaHex = {
         50: '#FAF6F2', 100: '#F2E9E1', 200: '#E3D2C2', 300: '#CFB49D',
         400: '#B58F6F', 500: '#966F4C', 600: '#7C5A3C', 700: '#654931',
         800: '#533C2A', 900: '#453325', 950: '#251A12'
       } as const
+      // The same ramp converted to oklch.
+      const cocoaOklch = {
+        50: 'oklch(97.5% 0.007 67.745)', 100: 'oklch(93.9% 0.015 64.338)',
+        200: 'oklch(87.3% 0.029 65.727)', 300: 'oklch(78.7% 0.044 62.544)',
+        400: 'oklch(67.8% 0.064 61.516)', 500: 'oklch(57.3% 0.07 62.619)',
+        600: 'oklch(49.6% 0.063 62.025)', 700: 'oklch(43% 0.053 61.313)',
+        800: 'oklch(37.7% 0.043 59.008)', 900: 'oklch(33.7% 0.035 59.102)',
+        950: 'oklch(22.9% 0.023 57.319)'
+      } as const
 
       const fromHex = generatePalette(fitPalette(cocoaHex))
-      const fromOklch = generatePalette(fitPalette(CUSTOM_PALETTES.cocoa!))
+      const fromOklch = generatePalette(fitPalette(cocoaOklch))
 
       // The fit is a numeric optimization — rounded oklch inputs may land a
       // hair off the full-precision hex fit, so compare channels, not strings.
@@ -263,12 +270,7 @@ describe('theme-engine', () => {
       expect(contrastRatio('#FFFFFF', 'oklch(100% 0 0)')).toBeCloseTo(1, 1)
     })
 
-    it('studio and preset ramps are stored as canonical oklch', () => {
-      for (const [name, shades] of Object.entries(CUSTOM_PALETTES)) {
-        for (const [shade, value] of Object.entries(shades)) {
-          expect(value, `${name}-${shade}`).toMatch(CANONICAL_OKLCH)
-        }
-      }
+    it('preset ramps are stored as canonical oklch', () => {
       for (const preset of presets) {
         for (const [name, palette] of Object.entries(preset.doc.palettes || {})) {
           for (const [shade, value] of Object.entries(palette.shades)) {

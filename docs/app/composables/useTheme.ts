@@ -2,7 +2,7 @@ import { defu } from 'defu'
 import { THEME_TAG_IDS, THEME_STATE_KEYS, THEME_STORAGE_KEYS } from '../utils/theme-keys'
 import { useLocalStorage } from '@vueuse/core'
 import { themeIcons, cssVariableDefaults, readLocalStorage } from '../utils/theme'
-import { generateCSS, generateConfig, mergeUi, isDefaultStyle, DEFAULT_COLORS, THEME_DEFAULTS, LIBRARY_TOKEN_DEFAULTS, CUSTOM_PALETTES } from '../utils/theme-engine'
+import { generateCSS, generateConfig, mergeUi, isDefaultStyle, DEFAULT_COLORS, THEME_DEFAULTS, LIBRARY_TOKEN_DEFAULTS, NEUTRAL_PRIMARY_ROOT } from '../utils/theme-engine'
 import type { ThemeDoc, ThemePalette } from '../utils/theme-engine'
 import { omit } from '#ui/utils'
 import colors from 'tailwindcss/colors'
@@ -76,7 +76,7 @@ export function useTheme() {
     // Match the page background in both modes (docs light baseline is
     // neutral-50, not white) so browser chrome doesn't seam against the page.
     const shade = colorMode.value === 'dark' ? 900 : 50
-    return (colors as any)[neutral]?.[shade] || customColorsData.value[neutral]?.[shade] || CUSTOM_PALETTES[neutral]?.[shade] || (colors as any).slate[shade]
+    return (colors as any)[neutral]?.[shade] || customColorsData.value[neutral]?.[shade] || (colors as any).slate[shade]
   })
   const cssVariablesData = useState<{ light?: Record<string, string>, dark?: Record<string, string> }>('nuxt-ui-css-variables', () => readLocalStorage('nuxt-ui-css-variables', {}))
   /** The studio's style axis (it owns writes); read here for currentDoc/export. */
@@ -88,7 +88,10 @@ export function useTheme() {
   const _iconSet = useLocalStorage('nuxt-ui-icons', 'lucide')
   const _blackAsPrimary = useLocalStorage('nuxt-ui-black-as-primary', false)
 
-  const neutralColors = ['slate', 'gray', 'zinc', 'neutral', 'stone', 'taupe', 'mauve', 'mist', 'olive', 'sand', 'sage', 'ash']
+  // taupe/mauve/mist/olive ship with tailwind v4's theme.css but not (yet)
+  // the tailwindcss/colors JS export — swatches and fits resolve them from
+  // the CSS variables instead.
+  const neutralColors = ['slate', 'gray', 'zinc', 'neutral', 'stone', 'taupe', 'mauve', 'mist', 'olive']
   const neutral = computed({
     get() {
       return appConfig.ui.colors.neutral
@@ -101,8 +104,7 @@ export function useTheme() {
   })
 
   const colorsToOmit = ['inherit', 'current', 'transparent', 'black', 'white', ...neutralColors]
-  // Custom docs palettes (defined in main.css @theme static) extend tailwind's set.
-  const primaryColors = [...Object.keys(omit(colors, colorsToOmit as any)), 'cocoa', 'marine']
+  const primaryColors = Object.keys(omit(colors, colorsToOmit as any))
   const primary = computed({
     get() {
       return appConfig.ui.colors.primary
@@ -215,6 +217,13 @@ export function useTheme() {
   const fontSizeStyle = computed(() => _fontSize.value !== 16 ? `html { font-size: ${_fontSize.value}px; }` : 'html {}')
   const spacingStyle = computed(() => _spacing.value !== 0.25 ? `:root { --spacing: ${_spacing.value}rem; }` : ':root {}')
   const blackAsPrimaryStyle = computed(() => _blackAsPrimary.value ? `:root { --ui-primary: black; } .dark { --ui-primary: white; }` : ':root {}')
+  // primary === 'neutral' means the neutral ALIAS (#6608 semantics), which
+  // the module would render as tailwind's gray — the same mirror the export
+  // emits keeps the preview honest. Black wins when both are set (parity
+  // with the export, which drops the recipe under blackAsPrimary).
+  const neutralAsPrimaryStyle = computed(() => appConfig.ui.colors.primary === 'neutral' && !_blackAsPrimary.value
+    ? `:root { ${NEUTRAL_PRIMARY_ROOT.join(' ')} }`
+    : ':root {}')
   const fontStyle = computed(() => `:root { --font-sans: '${_font.value}', sans-serif; }`)
   const customColorsStyle = computed(() => {
     const entries = Object.entries(customColorsData.value)
@@ -252,6 +261,7 @@ export function useTheme() {
     { innerHTML: radiusStyle, id: 'nuxt-ui-radius', tagPriority: -2 },
     { innerHTML: fontSizeStyle, id: 'nuxt-ui-font-size', tagPriority: -2 },
     { innerHTML: spacingStyle, id: 'nuxt-ui-spacing', tagPriority: -2 },
+    { innerHTML: neutralAsPrimaryStyle, id: 'nuxt-ui-neutral-as-primary', tagPriority: -2 },
     { innerHTML: blackAsPrimaryStyle, id: 'nuxt-ui-black-as-primary', tagPriority: -2 },
     { innerHTML: fontStyle, id: 'nuxt-ui-font', tagPriority: -2 },
     { innerHTML: customColorsStyle, id: THEME_TAG_IDS.customColors, tagPriority: -2 },
@@ -309,13 +319,6 @@ export function useTheme() {
     // stays 'green') and must still export.
     const referenced = new Set(Object.values(appConfig.ui.colors as Record<string, string>))
     const paletteEntries = Object.entries(customColorsData.value).filter(([name]) => referenced.has(name))
-    // Docs-only palettes (sand, cocoa, …) exist in main.css, not tailwind —
-    // a consumer's build can't resolve them, so inline their ramps too.
-    for (const name of referenced) {
-      if (CUSTOM_PALETTES[name] && !customColorsData.value[name]) {
-        paletteEntries.push([name, CUSTOM_PALETTES[name]])
-      }
-    }
     if (paletteEntries.length) {
       doc.palettes = Object.fromEntries(paletteEntries.map(([name, shades]) => [name, { shades: shades as ThemePalette['shades'] }]))
     }

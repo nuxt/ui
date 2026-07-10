@@ -5,6 +5,12 @@ defineProps<{
   /** Docs page the header's help icon links to */
   helpTo?: string
 }>()
+
+const slots = defineSlots<{
+  default: () => any
+  /** Right-aligned controls in the header row (edit/adjust toggles). */
+  actions: () => any
+}>()
 </script>
 
 <template>
@@ -21,6 +27,10 @@ defineProps<{
         icon="i-lucide-help-circle"
         :ui="{ leadingIcon: 'size-3' }"
       />
+
+      <div v-if="!!slots.actions" class="ms-auto flex items-center gap-1.5">
+        <slot name="actions" />
+      </div>
     </div>
 
     <slot />

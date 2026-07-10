@@ -21,7 +21,9 @@ const index = defineModel<number>({ required: true })
       />
     </span>
 
-    <!-- the fill wears the ramp color at the selected shade -->
+    <!-- The fill wears the ramp color at the selected shade. Hairline inset
+         rings keep the fill and thumb visible when that color melts into
+         the panel background (light shades in light mode and vice versa). -->
     <USlider
       v-model="index"
       :min="0"
@@ -29,7 +31,10 @@ const index = defineModel<number>({ required: true })
       :step="1"
       size="sm"
       :style="{ '--slider-color': `var(--color-${chip}-${SHADES[index]})` }"
-      :ui="{ range: 'bg-(--slider-color)', thumb: 'ring-(--slider-color)' }"
+      :ui="{
+        range: 'bg-(--slider-color) inset-ring inset-ring-accented',
+        thumb: 'ring-(--slider-color) inset-ring inset-ring-accented shadow-sm'
+      }"
     />
 
     <span class="text-[11px] text-dimmed font-mono w-7 text-right shrink-0">{{ SHADES[index] }}</span>

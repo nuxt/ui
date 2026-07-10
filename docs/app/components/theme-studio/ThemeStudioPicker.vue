@@ -41,7 +41,7 @@ const aliases = [
         <UColorModeSwitch />
       </div>
 
-      <ThemeStudioPresetMenu />
+      <ThemeStudioPresetMenu size="sm" />
 
       <div class="flex flex-col gap-2">
         <div v-for="{ alias, label } in aliases" :key="alias" class="flex items-center gap-2">

@@ -47,7 +47,6 @@ function runImport() {
         icon="i-lucide-upload"
         color="neutral"
         variant="subtle"
-        size="sm"
         block
         aria-label="Import theme"
       />

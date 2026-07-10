@@ -129,6 +129,8 @@ function seed(values: PaletteCurveParams) {
   seedBase = structuredClone(next)
   styleOffset.value = 'fitted'
   offsetAmount.value = 100
+  lastPreset = 'fitted'
+  Object.assign(effects, EFFECT_DEFAULTS)
   ignoreUpdates(() => {
     Object.assign(params, next)
   })
@@ -158,7 +160,12 @@ onUnmounted(() => {
 
 /** Fit curves from whatever palette the alias currently shows. */
 function seedFromCurrent() {
-  const name = (appConfig.ui.colors as Record<string, string>)[props.alias]
+  let name = (appConfig.ui.colors as Record<string, string>)[props.alias]
+  // primary: 'neutral' follows the neutral ALIAS — seed from the ramp it
+  // resolves to, not tailwind's gray that happens to share the name.
+  if (props.alias === 'primary' && name === 'neutral') {
+    name = (appConfig.ui.colors as Record<string, string>).neutral
+  }
   if (!name) return
 
   const source = paletteShades(name)
@@ -189,14 +196,17 @@ const styleOffsetItems = [
   { label: 'Pastel', value: 'pastel' },
   { label: 'Muted', value: 'muted' },
   { label: 'Vivid', value: 'vivid' },
-  { label: 'Dazzling', value: 'dazzling' }
+  { label: 'Dazzling', value: 'dazzling' },
+  { label: 'Custom', value: 'custom' }
 ]
 
-function scaleChroma(curve: PaletteCurveParams['chroma'], factor: number) {
-  curve.y0 *= factor
-  curve.y1 *= factor
-  curve.p1y *= factor
-  curve.p2y *= factor
+// Scale AND offset: a pure multiply barely moves low-chroma (gray) ramps,
+// so the boosting presets add a flat chroma floor that registers there too.
+function scaleChroma(curve: PaletteCurveParams['chroma'], factor: number, offset = 0) {
+  curve.y0 = Math.max(0, curve.y0 * factor + offset)
+  curve.y1 = Math.max(0, curve.y1 * factor + offset)
+  curve.p1y = Math.max(0, curve.p1y * factor + offset)
+  curve.p2y = Math.max(0, curve.p2y * factor + offset)
 }
 
 /** Linearly remap a lightness curve onto new endpoints, preserving its shape. */
@@ -234,19 +244,93 @@ function applyStyleOffset(name: string) {
     // near-white, nothing dark) and push chroma UP so the softness stays
     // colorful — the gamut clamp keeps the very light stops in check.
     remapLightness(target.lightness, Math.min(target.lightness.y0, 0.945), Math.max(target.lightness.y1, 0.52))
-    scaleChroma(target.chroma, 1.35)
+    scaleChroma(target.chroma, 1.35, 0.01)
   } else if (name === 'muted') {
     scaleChroma(target.chroma, 0.55)
   } else if (name === 'vivid') {
-    scaleChroma(target.chroma, 1.45)
+    scaleChroma(target.chroma, 1.45, 0.015)
   } else if (name === 'dazzling') {
-    scaleChroma(target.chroma, 2)
+    scaleChroma(target.chroma, 2, 0.03)
   }
 
   const next = name === 'fitted' ? target : lerpParams(seedBase, target, offsetAmount.value / 100)
 
   // Not seed(): this IS a user edit, the watcher should live-apply it.
   Object.assign(params, next)
+}
+
+/* ------------------------------------------------------ custom effects -- */
+
+/**
+ * The Custom modifier: independent effects layered on top of the fitted
+ * base — lightness shift, contrast about the ramp's own midpoint, chroma
+ * scale AND flat offset (the offset is what moves gray ramps), hue
+ * rotation. Idempotent like the presets: always recomputed from seedBase.
+ */
+const EFFECT_DEFAULTS = { lightness: 0, contrast: 0, chromaScale: 100, chromaOffset: 0, hueShift: 0 }
+const effects = reactive({ ...EFFECT_DEFAULTS })
+
+const effectRows = [
+  { key: 'lightness', label: 'Lightness', min: -30, max: 30, step: 1, unit: '%' },
+  { key: 'contrast', label: 'Contrast', min: -50, max: 50, step: 1, unit: '%' },
+  { key: 'chromaScale', label: 'Saturation', min: 0, max: 300, step: 5, unit: '%' },
+  { key: 'chromaOffset', label: 'Chroma +', min: -100, max: 100, step: 5, unit: '' },
+  { key: 'hueShift', label: 'Hue', min: -180, max: 180, step: 5, unit: '°' }
+] as const
+
+/** Where each preset lands in effect terms — Custom picks up from the active preset. */
+const PRESET_EFFECTS: Record<string, Partial<typeof EFFECT_DEFAULTS>> = {
+  muted: { chromaScale: 55 },
+  vivid: { chromaScale: 145, chromaOffset: 15 },
+  dazzling: { chromaScale: 200, chromaOffset: 30 },
+  // Approximation — the real pastel remaps lightness to absolute endpoints.
+  pastel: { lightness: 8, contrast: -30, chromaScale: 135, chromaOffset: 10 }
+}
+
+function seedEffects(preset: string, amount: number) {
+  const target = { ...EFFECT_DEFAULTS, ...PRESET_EFFECTS[preset] }
+  for (const key of Object.keys(EFFECT_DEFAULTS) as Array<keyof typeof EFFECT_DEFAULTS>) {
+    effects[key] = Math.round(EFFECT_DEFAULTS[key] + (target[key] - EFFECT_DEFAULTS[key]) * amount)
+  }
+}
+
+function applyEffects() {
+  const target = structuredClone(seedBase)
+
+  // Lightness: contrast expands/compresses about the curve's own midpoint,
+  // then the shift slides the whole ramp.
+  const lightness = target.lightness
+  const mid = (lightness.y0 + lightness.y1) / 2
+  const span = 1 + effects.contrast / 100
+  const shift = effects.lightness / 100
+  const mapLightness = (value: number) => mid + (value - mid) * span + shift
+  lightness.y0 = mapLightness(lightness.y0)
+  lightness.y1 = mapLightness(lightness.y1)
+  lightness.p1y = mapLightness(lightness.p1y)
+  lightness.p2y = mapLightness(lightness.p2y)
+
+  scaleChroma(target.chroma, effects.chromaScale / 100, effects.chromaOffset / 1000)
+
+  target.hue.y0 += effects.hueShift
+  target.hue.y1 += effects.hueShift
+  target.hue.p1y += effects.hueShift
+  target.hue.p2y += effects.hueShift
+
+  // A user edit, like the presets — the watcher live-applies it.
+  Object.assign(params, target)
+}
+
+/** The last non-custom choice, so Custom starts from the look on screen. */
+let lastPreset = 'fitted'
+
+function onOffsetSelect(name: string) {
+  if (name === 'custom') {
+    seedEffects(lastPreset, offsetAmount.value / 100)
+    applyEffects()
+  } else {
+    lastPreset = name
+    applyStyleOffset(name)
+  }
 }
 
 function remove() {
@@ -294,7 +378,7 @@ function remove() {
             icon="i-lucide-sparkles"
             :items="styleOffsetItems"
             class="flex-1"
-            @update:model-value="applyStyleOffset($event as string)"
+            @update:model-value="onOffsetSelect($event as string)"
           />
 
           <UTooltip v-if="active" text="Remove custom palette">
@@ -309,19 +393,30 @@ function remove() {
           </UTooltip>
         </div>
 
-        <div v-if="styleOffset !== 'fitted'" class="flex items-center gap-2">
-          <span class="text-[11px] text-muted shrink-0 w-10">Effect</span>
-          <USlider
-            v-model="offsetAmount"
-            :min="0"
-            :max="200"
-            :step="5"
-            size="sm"
-            color="neutral"
-            aria-label="Effect strength"
-            @update:model-value="applyStyleOffset(styleOffset)"
+        <ThemeStudioSliderRow
+          v-if="styleOffset !== 'fitted' && styleOffset !== 'custom'"
+          v-model="offsetAmount"
+          label="Effect"
+          :min="0"
+          :max="200"
+          :step="5"
+          unit="%"
+          @update:model-value="applyStyleOffset(styleOffset)"
+        />
+
+        <!-- Layered custom effects, each recomputed from the fitted base. -->
+        <div v-else-if="styleOffset === 'custom'" class="flex flex-col gap-1.5">
+          <ThemeStudioSliderRow
+            v-for="row in effectRows"
+            :key="row.key"
+            v-model="effects[row.key]"
+            :label="row.label"
+            :min="row.min"
+            :max="row.max"
+            :step="row.step"
+            :unit="row.unit"
+            @update:model-value="applyEffects()"
           />
-          <span class="text-[11px] text-dimmed tabular-nums shrink-0 w-8 text-right">{{ offsetAmount }}%</span>
         </div>
       </div>
     </template>

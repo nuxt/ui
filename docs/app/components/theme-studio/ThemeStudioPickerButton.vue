@@ -1,6 +1,6 @@
 <script setup lang="ts">
 defineProps<{
-  label: string
+  label?: string
   icon?: string
   chip?: string
   selected?: boolean
@@ -9,6 +9,7 @@ defineProps<{
 
 const slots = defineSlots<{
   leading: () => any
+  default: () => any
 }>()
 </script>
 
@@ -24,6 +25,10 @@ const slots = defineSlots<{
     :label="label"
     class="capitalize"
   >
+    <template v-if="!!slots.default" #default>
+      <slot />
+    </template>
+
     <template v-if="chip || !!slots.leading" #leading>
       <slot name="leading">
         <span

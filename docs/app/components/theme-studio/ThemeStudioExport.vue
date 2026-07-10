@@ -30,7 +30,6 @@ watch(open, (isOpen) => {
       icon="i-lucide-download"
       color="neutral"
       variant="subtle"
-      size="sm"
       block
     />
 

@@ -3,6 +3,11 @@ import { resolveAlias, resolveShade } from '../../utils/theme-engine'
 import type { ThemeDoc } from '../../utils/theme-engine'
 
 /** The presets dropdown (with per-preset color swatches) plus the shuffle die. */
+defineProps<{
+  /** Button size — the toolbar uses the default, the header picker slims down. */
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+}>()
+
 const { presets, activePreset, applyPreset, shuffle } = useThemeStudio()
 
 /** Exposed so hosts (the fullscreen toolbar) can pin themselves while open. */
@@ -56,7 +61,7 @@ const presetLabel = computed(() => {
         trailing-icon="i-lucide-chevron-down"
         color="neutral"
         variant="subtle"
-        size="sm"
+        :size="size"
         block
       />
 
@@ -77,7 +82,7 @@ const presetLabel = computed(() => {
         icon="i-lucide-dices"
         color="neutral"
         variant="subtle"
-        size="sm"
+        :size="size"
         aria-label="Random theme"
         @click="shuffle"
       />
