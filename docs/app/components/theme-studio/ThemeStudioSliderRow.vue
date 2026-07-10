@@ -1,39 +1,81 @@
 <script setup lang="ts">
-/** The studio's standard control row: tiny label, slider, monospace readout. */
-const props = defineProps<{
-  /** Names the slider (aria) — shown unless an icon replaces it. */
-  label: string
+import { SHADES } from '../../utils/theme-engine'
+
+/**
+ * The studio's control row — a horizontal UFormField: tiny label (or icon),
+ * slider, monospace readout. With `chip` + `mode` it becomes a shade
+ * slider: the fill and swatch wear the ramp color at the selected shade,
+ * and the readout names the shade.
+ */
+const props = withDefaults(defineProps<{
+  /** Names the slider (aria) — shown unless an icon or chip replaces it. */
+  label?: string
   /** Rendered in place of the label text. */
   icon?: string
-  min: number
-  max: number
-  step: number
+  min?: number
+  max?: number
+  step?: number
   /** Readout suffix (%, px, rem, °). */
   unit?: string
-}>()
+  /** Palette chip name — turns the row into a shade slider… */
+  chip?: string
+  /** …for this color mode. */
+  mode?: 'light' | 'dark'
+}>(), {
+  min: 0,
+  max: SHADES.length - 1,
+  step: 1
+})
 
+/** Plain rows: the value itself. Shade rows: an index into SHADES. */
 const value = defineModel<number>({ required: true })
 
+const shade = computed(() => !!props.chip && !!props.mode)
+const sliderColor = computed(() => shade.value ? `var(--color-${props.chip}-${SHADES[value.value]})` : undefined)
+
 /** `0.25rem` reads as `.25rem` — the leading zero is noise at this width. */
-const display = computed(() => `${String(value.value).replace(/^(-?)0\./, '$1.')}${props.unit ?? ''}`)
+const display = computed(() => shade.value
+  ? String(SHADES[value.value])
+  : `${String(value.value).replace(/^(-?)0\./, '$1.')}${props.unit ?? ''}`)
 </script>
 
 <template>
-  <div class="flex items-center gap-2">
-    <span class="text-xs text-muted w-13 shrink-0 select-none flex items-center">
-      <UIcon v-if="icon" :name="icon" class="size-3.5" />
-      <template v-else>{{ label }}</template>
-    </span>
+  <UFormField
+    :label="icon || shade ? undefined : label"
+    orientation="horizontal"
+    size="xs"
+    :ui="{
+      root: 'flex items-center gap-2',
+      wrapper: 'w-13 shrink-0',
+      label: 'text-muted select-none truncate',
+      container: 'flex-1 flex items-center gap-2 mt-0'
+    }"
+  >
+    <template v-if="icon || shade" #label>
+      <UIcon v-if="icon" :name="icon" class="size-3.5 text-muted" />
 
+      <span v-else class="flex items-center gap-1.5 w-full grow">
+        <UIcon :name="mode === 'light' ? 'i-lucide-sun' : 'i-lucide-moon'" class="size-3.5 text-muted shrink-0" />
+        <span class="h-3 w-6 grow rounded-sm ring ring-default me-px" :style="{ backgroundColor: sliderColor }" />
+      </span>
+    </template>
+
+    <!-- Shade fills keep a hairline inset ring so a color matching the
+         panel background never makes the slider vanish. -->
     <USlider
       v-model="value"
       :min="min"
       :max="max"
       :step="step"
       size="xs"
-      :aria-label="label"
+      :aria-label="label ?? mode"
+      :style="sliderColor ? { '--slider-color': sliderColor } : undefined"
+      :ui="sliderColor ? {
+        range: 'bg-(--slider-color) inset-ring inset-ring-accented',
+        thumb: 'ring-(--slider-color) inset-ring inset-ring-accented shadow-sm'
+      } : undefined"
     />
 
     <span class="text-xs text-dimmed font-mono w-10 text-right shrink-0 truncate" :title="display">{{ display }}</span>
-  </div>
+  </UFormField>
 </template>

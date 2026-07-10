@@ -92,6 +92,10 @@ onUnmounted(() => window.removeEventListener('mousemove', onPointerNear))
 
 const openPanels = reactive({ presets: false, colors: false, general: false, style: false, view: false })
 const toolbarPinned = computed(() => nearBottom.value || Object.values(openPanels).some(Boolean))
+
+/** The shared import/export modal — the two toolbar buttons pick its mode. */
+const shareOpen = ref(false)
+const shareMode = ref<'import' | 'export'>('export')
 </script>
 
 <template>
@@ -210,9 +214,23 @@ const toolbarPinned = computed(() => nearBottom.value || Object.values(openPanel
 
             <div class="shrink-0">
               <UFieldGroup>
-                <ThemeStudioImport />
+                <UTooltip text="Import theme">
+                  <UButton
+                    icon="i-lucide-upload"
+                    color="neutral"
+                    variant="subtle"
+                    aria-label="Import theme"
+                    @click="shareMode = 'import'; shareOpen = true"
+                  />
+                </UTooltip>
 
-                <ThemeStudioExport />
+                <UButton
+                  label="Export"
+                  icon="i-lucide-download"
+                  color="neutral"
+                  variant="subtle"
+                  @click="shareMode = 'export'; shareOpen = true"
+                />
               </UFieldGroup>
             </div>
 
@@ -229,5 +247,7 @@ const toolbarPinned = computed(() => nearBottom.value || Object.values(openPanel
         </div>
       </div>
     </UContainer>
+
+    <ThemeStudioShareModal v-model:open="shareOpen" v-model:mode="shareMode" />
   </main>
 </template>

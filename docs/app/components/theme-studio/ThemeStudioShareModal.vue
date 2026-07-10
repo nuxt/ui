@@ -1,24 +1,33 @@
 <script setup lang="ts">
 import { importTheme, isDefaultTheme } from '../../utils/theme-engine'
 
-const { applyDoc } = useThemeStudio()
-const { track } = useAnalytics()
+/**
+ * The shared import/export modal — plain toolbar buttons open it in either
+ * mode. Export shows the generated files with copy buttons; import parses
+ * a paste of the same two files back into editable settings.
+ */
+const open = defineModel<boolean>('open', { default: false })
+const mode = defineModel<'import' | 'export'>('mode', { default: 'export' })
 
-const open = ref(false)
+const { applyDoc } = useThemeStudio()
+const { exportCSS, exportConfig, configLabel, hasCSSChanges, hasConfigChanges } = useTheme()
+const { track } = useAnalytics()
+const { copy: copyCSS, copied: copiedCSS } = useClipboard()
+const { copy: copyConfig, copied: copiedConfig } = useClipboard()
 
 const css = ref('')
 const config = ref('')
-
 const skipped = ref<string[]>([])
 const imported = ref(false)
 const empty = ref(false)
 
-watch(open, () => {
-  css.value = ''
-  config.value = ''
+watch([open, mode], () => {
   skipped.value = []
   imported.value = false
   empty.value = false
+  // Export fills the panes with the generated files; import starts blank.
+  css.value = mode.value === 'export' && open.value ? exportCSS() : ''
+  config.value = mode.value === 'export' && open.value ? exportConfig() : ''
 })
 
 function runImport() {
@@ -38,43 +47,56 @@ function runImport() {
 <template>
   <UModal
     v-model:open="open"
-    title="Import theme"
-    description="Paste an exported main.css and/or app.config.ts — the studio parses it back into editable settings."
+    :title="mode === 'export' ? 'Export theme' : 'Import theme'"
+    :description="mode === 'export'
+      ? 'Copy only what you changed — everything else stays inherited from Nuxt UI defaults.'
+      : 'Paste an exported main.css and/or app.config.ts — the studio parses it back into editable settings.'"
     :ui="{ content: 'max-w-3xl' }"
   >
-    <UTooltip text="Import theme">
-      <UButton
-        icon="i-lucide-upload"
-        color="neutral"
-        variant="subtle"
-        block
-        aria-label="Import theme"
-      />
-    </UTooltip>
-
     <template #body>
       <div class="flex flex-col gap-4">
+        <UAlert
+          v-if="mode === 'export' && !hasCSSChanges && !hasConfigChanges"
+          title="No changes yet"
+          description="You are on the default theme. Tweak something and come back."
+          icon="i-lucide-info"
+          color="neutral"
+          variant="subtle"
+        />
+
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-          <div class="flex flex-col gap-2 min-w-0">
-            <p class="text-xs font-semibold text-muted font-mono">
-              main.css
-            </p>
+          <div v-for="pane in (['css', 'config'] as const)" :key="pane" class="flex flex-col gap-2 min-w-0">
+            <div class="flex items-center justify-between gap-2">
+              <p class="text-xs font-semibold text-muted font-mono">
+                {{ pane === 'css' ? 'main.css' : configLabel }}
+              </p>
+
+              <UButton
+                v-if="mode === 'export'"
+                size="xs"
+                color="neutral"
+                variant="ghost"
+                :icon="(pane === 'css' ? copiedCSS : copiedConfig) ? 'i-lucide-copy-check' : 'i-lucide-copy'"
+                :aria-label="pane === 'css' ? 'Copy CSS' : 'Copy config'"
+                @click="pane === 'css'
+                  ? (copyCSS(css), track('Theme Exported', { type: 'CSS' }))
+                  : (copyConfig(config), track('Theme Exported', { type: 'Config' }))"
+              />
+            </div>
+
+            <pre v-if="mode === 'export'" class="text-xs font-mono bg-muted rounded-md p-3 overflow-x-auto max-h-96 whitespace-pre">{{ pane === 'css' ? css : config }}</pre>
 
             <UTextarea
+              v-else-if="pane === 'css'"
               v-model="css"
               :rows="10"
               placeholder="@import &quot;tailwindcss&quot;;&#10;@import &quot;@nuxt/ui&quot;;&#10;…"
               class="w-full font-mono"
               :ui="{ base: 'text-xs' }"
             />
-          </div>
-
-          <div class="flex flex-col gap-2 min-w-0">
-            <p class="text-xs font-semibold text-muted font-mono">
-              app.config.ts
-            </p>
 
             <UTextarea
+              v-else
               v-model="config"
               :rows="10"
               placeholder="export default defineAppConfig({&#10;  ui: { … }&#10;})"
@@ -111,7 +133,7 @@ function runImport() {
       </div>
     </template>
 
-    <template #footer>
+    <template v-if="mode === 'import'" #footer>
       <div class="flex justify-end gap-2 w-full">
         <UButton
           label="Cancel"

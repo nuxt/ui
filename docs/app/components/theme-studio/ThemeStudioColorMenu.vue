@@ -70,27 +70,46 @@ function isSelected(color: string) {
     <template #content>
       <div class="w-72 p-2">
         <div class="grid grid-cols-3 gap-1">
-          <ThemeStudioPickerButton
+          <UButton
             v-if="alias === 'primary'"
             label="Black"
-            size="xs"
-            :selected="blackAsPrimary"
+            size="sm"
+            color="neutral"
+            variant="subtle"
+            :active="blackAsPrimary"
+            active-color="primary"
+            active-variant="subtle"
+            class="capitalize"
             @click="setBlackAsPrimary(true)"
           >
             <template #leading>
               <span class="inline-block size-2 rounded-full bg-black dark:bg-white" />
             </template>
-          </ThemeStudioPickerButton>
+          </UButton>
 
-          <ThemeStudioPickerButton
+          <UButton
             v-for="color in colors"
             :key="color"
             :label="color"
             size="sm"
-            :chip="paletteChip(color)"
-            :selected="isSelected(color)"
+            color="neutral"
+            variant="subtle"
+            :active="isSelected(color)"
+            active-color="primary"
+            active-variant="subtle"
+            class="capitalize"
             @click="selectPalette(alias, color)"
-          />
+          >
+            <template #leading>
+              <span
+                class="inline-block size-2 rounded-full bg-(--color-light) dark:bg-(--color-dark)"
+                :style="{
+                  '--color-light': `var(--color-${paletteChip(color)}-500)`,
+                  '--color-dark': `var(--color-${paletteChip(color)}-400)`
+                }"
+              />
+            </template>
+          </UButton>
         </div>
       </div>
     </template>

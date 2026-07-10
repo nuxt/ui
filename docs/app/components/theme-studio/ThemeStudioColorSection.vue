@@ -98,7 +98,7 @@ const openGroups = reactive<Record<string, boolean>>({})
 
       <!-- The accent pair for color aliases. -->
       <div v-if="shadeEditor && alias !== 'neutral'" class="flex flex-col gap-1.5 pt-2">
-        <ThemeStudioShadeSlider
+        <ThemeStudioSliderRow
           v-for="(slider, modeName) in sections[0]!.sliders"
           :key="modeName"
           v-model="slider.value"
@@ -127,7 +127,7 @@ const openGroups = reactive<Record<string, boolean>>({})
               <div v-for="section in tokenGroup.sections" :key="section.token" class="flex flex-col gap-1.5">
                 <span class="text-xs text-muted select-none">{{ section.label }}</span>
 
-                <ThemeStudioShadeSlider
+                <ThemeStudioSliderRow
                   v-for="(slider, modeName) in section.sliders"
                   :key="modeName"
                   v-model="slider.value"

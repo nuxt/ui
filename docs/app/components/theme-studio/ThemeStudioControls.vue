@@ -25,7 +25,17 @@ const SHADOW_STYLE_OPTIONS = [
   { label: 'None', value: 'none' },
   { label: 'Default', value: 'soft' },
   { label: 'Custom', value: 'hard' }
-] as const
+]
+
+const shadowStyle = computed({
+  get: () => style.value.shadow || 'none',
+  set: (value: any) => setStyle({ shadow: value })
+})
+
+const innerShadowStyle = computed({
+  get: () => style.value.innerShadow || 'none',
+  set: (value: any) => setStyle({ innerShadow: value })
+})
 
 const shadowOpacity = computed({
   get: () => style.value.shadowOpacity ?? (style.value.shadow === 'hard' ? 100 : 25),
@@ -53,12 +63,15 @@ const borderOptions = [
   { label: 'None', value: 'none' },
   { label: 'Default', value: 'default' },
   { label: 'Custom', value: 'custom' }
-] as const
+]
 
 // Legacy saved prefs may still hold bold/frame — both read as custom.
-const borderStyle = computed(() => {
-  const value = style.value.border || 'default'
-  return value === 'bold' || value === 'frame' ? 'custom' : value
+const borderStyle = computed({
+  get: () => {
+    const value = style.value.border || 'default'
+    return value === 'bold' || value === 'frame' ? 'custom' : value
+  },
+  set: (value: any) => setStyle({ border: value })
 })
 
 const borderWidth = computed({
@@ -280,15 +293,14 @@ const shadowColor = computed({
       <div class="flex flex-col gap-4">
         <ThemeStudioSection label="Shadow">
           <div>
-            <div class="grid grid-cols-3 gap-1">
-              <ThemeStudioPickerButton
-                v-for="option in SHADOW_STYLE_OPTIONS"
-                :key="option.value"
-                :label="option.label"
-                :selected="(style.shadow || 'none') === option.value"
-                @click="setStyle({ shadow: option.value })"
-              />
-            </div>
+            <UTabs
+              v-model="shadowStyle"
+              :items="SHADOW_STYLE_OPTIONS"
+              :content="false"
+              size="xs"
+              color="neutral"
+              class="w-full"
+            />
 
             <div v-if="(style.shadow || 'none') !== 'none'" class="mt-1.5 flex flex-col gap-2">
               <USelect
@@ -302,7 +314,7 @@ const shadowColor = computed({
               />
 
               <template v-if="shadowColor === 'shade' || shadowColor === 'primary-shade'">
-                <ThemeStudioShadeSlider
+                <ThemeStudioSliderRow
                   v-for="(slider, modeName) in shadowShades"
                   :key="modeName"
                   v-model="slider.value"
@@ -340,15 +352,14 @@ const shadowColor = computed({
 
         <ThemeStudioSection label="Inner shadow">
           <div>
-            <div class="grid grid-cols-3 gap-1">
-              <ThemeStudioPickerButton
-                v-for="option in SHADOW_STYLE_OPTIONS"
-                :key="option.value"
-                :label="option.label"
-                :selected="(style.innerShadow || 'none') === option.value"
-                @click="setStyle({ innerShadow: option.value })"
-              />
-            </div>
+            <UTabs
+              v-model="innerShadowStyle"
+              :items="SHADOW_STYLE_OPTIONS"
+              :content="false"
+              size="xs"
+              color="neutral"
+              class="w-full"
+            />
 
             <div v-if="(style.innerShadow || 'none') !== 'none'" class="mt-1.5 flex flex-col gap-2">
               <USelect
@@ -362,7 +373,7 @@ const shadowColor = computed({
               />
 
               <template v-if="innerShadowColor === 'shade' || innerShadowColor === 'primary-shade'">
-                <ThemeStudioShadeSlider
+                <ThemeStudioSliderRow
                   v-for="(slider, modeName) in innerShadowShades"
                   :key="modeName"
                   v-model="slider.value"
@@ -400,15 +411,14 @@ const shadowColor = computed({
 
         <ThemeStudioSection label="Borders">
           <div>
-            <div class="grid grid-cols-3 gap-1">
-              <ThemeStudioPickerButton
-                v-for="option in borderOptions"
-                :key="option.value"
-                :label="option.label"
-                :selected="borderStyle === option.value"
-                @click="setStyle({ border: option.value })"
-              />
-            </div>
+            <UTabs
+              v-model="borderStyle"
+              :items="borderOptions"
+              :content="false"
+              size="xs"
+              color="neutral"
+              class="w-full"
+            />
 
             <div v-if="borderStyle === 'custom'" class="mt-1.5 flex flex-col gap-2">
               <ThemeStudioSliderRow
@@ -439,7 +449,7 @@ const shadowColor = computed({
               />
 
               <template v-if="borderColor === 'shade' || borderColor === 'primary-shade'">
-                <ThemeStudioShadeSlider
+                <ThemeStudioSliderRow
                   v-for="(slider, modeName) in borderShades"
                   :key="modeName"
                   v-model="slider.value"
