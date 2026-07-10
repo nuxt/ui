@@ -72,8 +72,6 @@ html.theme-studio-dragging body *:not([data-curve-editor] *) {
    user override from the theme studio (plain .light/.dark rules injected
    via useHead) wins regardless of load order. */
 :where(:root:not(.dark), .light) {
-  /* the app background follows the neutral ramp instead of hardcoded white */
-  --ui-bg: var(--ui-color-neutral-50);
   /* hard-shadow treatment: a shadow, not a glow */
   --ui-shadow-color: var(--ui-color-neutral-950);
 }

@@ -49,6 +49,89 @@ export const NEUTRAL_CURVE_DEFAULTS: PaletteCurveParams = {
   hue: CURVE_DEFAULTS.hue
 }
 
+/**
+ * The editor's modifier lens: independent effects layered on top of base
+ * curves — lightness shift, contrast about the ramp's own midpoint,
+ * saturation (multiplicative with an additive floor, so gray ramps respond
+ * too) and hue rotation, all scaled by an overall amount. Pure: always
+ * derives fresh curves from the base, never compounding.
+ */
+export interface PaletteEffects {
+  lightness: number
+  contrast: number
+  saturation: number
+  hueShift: number
+}
+
+export const PALETTE_EFFECT_DEFAULTS: PaletteEffects = { lightness: 0, contrast: 0, saturation: 0, hueShift: 0 }
+
+/** A persisted palette: the base curves plus the modifier lens over them. */
+export type StoredPaletteParams = PaletteCurveParams & { effects?: PaletteEffects, amount?: number }
+
+export function isDefaultEffects(effects?: PaletteEffects, amount = 100): boolean {
+  if (amount !== 100) return false
+  if (!effects) return true
+  return (Object.keys(PALETTE_EFFECT_DEFAULTS) as Array<keyof PaletteEffects>)
+    .every(key => effects[key] === PALETTE_EFFECT_DEFAULTS[key])
+}
+
+export function applyPaletteEffects(base: PaletteCurveParams, effects?: PaletteEffects, amount = 100): PaletteCurveParams {
+  const target = structuredClone(base)
+  if (isDefaultEffects(effects, amount)) return target
+
+  // The strength scales every effect's distance from its default: 100% as
+  // set, lower blends back toward the base, higher extrapolates past.
+  const strength = amount / 100
+  const effective = (key: keyof PaletteEffects) =>
+    PALETTE_EFFECT_DEFAULTS[key] + ((effects?.[key] ?? PALETTE_EFFECT_DEFAULTS[key]) - PALETTE_EFFECT_DEFAULTS[key]) * strength
+
+  // Lightness: contrast expands/compresses about the curve's own midpoint,
+  // then the shift slides the whole ramp. Every point clamps to the
+  // physical [0, 1] window, exactly like a drag stopping at the edge.
+  const lightness = target.lightness
+  const mid = (lightness.y0 + lightness.y1) / 2
+  const span = 1 + effective('contrast') / 100
+  const shift = effective('lightness') / 100
+  const mapLightness = (value: number) => Math.min(1, Math.max(0, mid + (value - mid) * span + shift))
+  lightness.y0 = mapLightness(lightness.y0)
+  lightness.y1 = mapLightness(lightness.y1)
+  lightness.p1y = mapLightness(lightness.p1y)
+  lightness.p2y = mapLightness(lightness.p2y)
+
+  // Saturation: scale for colorful ramps, plus a small additive floor when
+  // boosting so near-gray ramps (where a multiply is a no-op) respond too.
+  // Clamped to the editor's chroma window (sRGB tops out around 0.37).
+  const saturation = effective('saturation') / 100
+  const factor = 1 + saturation
+  const floor = Math.max(0, saturation) * 0.02
+  const mapChroma = (value: number) => Math.min(0.4, Math.max(0, value * factor + floor))
+  const chroma = target.chroma
+  chroma.y0 = mapChroma(chroma.y0)
+  chroma.y1 = mapChroma(chroma.y1)
+  chroma.p1y = mapChroma(chroma.p1y)
+  chroma.p2y = mapChroma(chroma.p2y)
+
+  // Hue shifts the whole curve, then re-centers by full turns so the mean
+  // stays in [0, 360) — a uniform shift keeps the curve continuous, and
+  // hue is cyclic so the colors are identical.
+  const hueShift = effective('hueShift')
+  const hue = target.hue
+  hue.y0 += hueShift
+  hue.y1 += hueShift
+  hue.p1y += hueShift
+  hue.p2y += hueShift
+  const mean = (hue.y0 + hue.y1 + hue.p1y + hue.p2y) / 4
+  const turns = -360 * Math.floor(mean / 360)
+  if (turns !== 0) {
+    hue.y0 += turns
+    hue.y1 += turns
+    hue.p1y += turns
+    hue.p2y += turns
+  }
+
+  return target
+}
+
 function cubicBezier(t: number, a: number, b: number, c: number, d: number): number {
   const u = 1 - t
   return u * u * u * a + 3 * u * u * t * b + 3 * u * t * t * c + t * t * t * d
@@ -87,11 +170,13 @@ export function generatePalette(params: PaletteCurveParams): Record<Shade, strin
     // impossible chroma, and the swatches/contrast math assume sRGB.
     // Lightness clamps too — clampToGamut only searches chroma, so an
     // overshooting curve (handles may exceed the window) would otherwise
-    // emit oklch(112% …) verbatim into exports and contrast math.
+    // emit oklch(112% …) verbatim into exports and contrast math. Hue
+    // wraps into [0, 360): a negative or 4-digit hue would fail the
+    // sanitizer's canonical-oklch check and silently DROP the shade.
     result[shade] = formatOklch(clampToGamut({
       l: Math.min(1, Math.max(0, sampleCurve(x, params.lightness))),
       c: Math.max(0, sampleCurve(x, params.chroma)),
-      h: sampleCurve(x, params.hue)
+      h: ((sampleCurve(x, params.hue) % 360) + 360) % 360
     }))
   }
 

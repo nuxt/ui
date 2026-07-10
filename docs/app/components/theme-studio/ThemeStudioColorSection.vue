@@ -62,20 +62,6 @@ const openGroups = reactive<Record<string, boolean>>({})
 <template>
   <ThemeStudioSection :label="title" :help-to="helpTo">
     <template #actions>
-      <UTooltip text="Edit palette">
-        <UButton
-          icon="i-lucide-pencil"
-          color="neutral"
-          variant="ghost"
-          size="xs"
-          :active="paletteEditor"
-          active-color="primary"
-          active-variant="subtle"
-          :aria-label="`Edit ${alias} palette`"
-          @click="paletteEditor = !paletteEditor"
-        />
-      </UTooltip>
-
       <UTooltip text="Adjust shades">
         <UButton
           icon="i-lucide-sliders-horizontal"
@@ -87,6 +73,19 @@ const openGroups = reactive<Record<string, boolean>>({})
           active-variant="subtle"
           :aria-label="`Adjust ${alias} shades`"
           @click="shadeEditor = !shadeEditor"
+        />
+      </UTooltip>
+      <UTooltip text="Edit palette">
+        <UButton
+          icon="i-lucide-pencil"
+          color="neutral"
+          variant="ghost"
+          size="xs"
+          :active="paletteEditor"
+          active-color="primary"
+          active-variant="subtle"
+          :aria-label="`Edit ${alias} palette`"
+          @click="paletteEditor = !paletteEditor"
         />
       </UTooltip>
     </template>

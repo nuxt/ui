@@ -33,6 +33,16 @@ const value = defineModel<number>({ required: true })
 const shade = computed(() => !!props.chip && !!props.mode)
 const sliderColor = computed(() => shade.value ? `var(--color-${props.chip}-${SHADES[value.value]})` : undefined)
 
+/**
+ * A border that always contrasts with the fill, derived FROM the fill:
+ * relative color syntax steps lightness to near-black on light fills and
+ * near-white on dark ones (the ×1000 turns the difference into a hard
+ * switch the clamp bounds).
+ */
+const contrastColor = computed(() => shade.value
+  ? `oklch(from ${sliderColor.value} clamp(0.12, (0.66 - l) * 1000, 0.95) 0 h / 0.65)`
+  : undefined)
+
 /** `0.25rem` reads as `.25rem` — the leading zero is noise at this width. */
 const display = computed(() => shade.value
   ? String(SHADES[value.value])
@@ -44,10 +54,13 @@ const display = computed(() => shade.value
     :label="icon || shade ? undefined : label"
     orientation="horizontal"
     size="xs"
+    :style="sliderColor ? { '--slider-color': sliderColor, '--slider-contrast': contrastColor } : undefined"
     :ui="{
       root: 'flex items-center gap-2',
       wrapper: 'w-13 shrink-0',
-      label: 'text-muted select-none truncate',
+      /* truncate only text labels — its overflow:hidden would clip the
+         shade chip's ring once thick-border themes inflate it */
+      label: `w-full text-muted select-none${icon || shade ? '' : ' truncate'}`,
       container: 'flex-1 flex items-center gap-2 mt-0'
     }"
   >
@@ -56,7 +69,7 @@ const display = computed(() => shade.value
 
       <span v-else class="flex items-center gap-1.5 w-full grow">
         <UIcon :name="mode === 'light' ? 'i-lucide-sun' : 'i-lucide-moon'" class="size-3.5 text-muted shrink-0" />
-        <span class="h-3 w-6 grow rounded-sm ring ring-default me-px" :style="{ backgroundColor: sliderColor }" />
+        <span class="h-3 w-6 grow rounded-sm bg-(--slider-color) ring ring-1 ring-(--slider-contrast) me-px" />
       </span>
     </template>
 
@@ -69,13 +82,12 @@ const display = computed(() => shade.value
       :step="step"
       size="xs"
       :aria-label="label ?? mode"
-      :style="sliderColor ? { '--slider-color': sliderColor } : undefined"
       :ui="sliderColor ? {
-        range: 'bg-(--slider-color) inset-ring inset-ring-accented',
-        thumb: 'ring-(--slider-color) inset-ring inset-ring-accented shadow-sm'
+        range: 'bg-(--slider-color) inset-ring inset-ring-(--slider-contrast)',
+        thumb: 'bg-(--slider-color) ring-1 ring-(--slider-contrast) shadow-sm'
       } : undefined"
     />
 
-    <span class="text-xs text-dimmed font-mono w-10 text-right shrink-0 truncate" :title="display">{{ display }}</span>
+    <span class="text-xs text-dimmed font-mono w-12 text-right shrink-0 truncate" :title="display">{{ display }}</span>
   </UFormField>
 </template>

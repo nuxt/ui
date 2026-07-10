@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useThrottleFn, watchIgnorable } from '@vueuse/core'
-import { SHADES, CURVE_DEFAULTS, NEUTRAL_CURVE_DEFAULTS, generatePalette, fitPalette, sampleCurve, clampToGamut, formatOklch } from '../../utils/theme-engine'
-import type { PaletteCurveParams, ColorAlias } from '../../utils/theme-engine'
+import { SHADES, CURVE_DEFAULTS, NEUTRAL_CURVE_DEFAULTS, PALETTE_EFFECT_DEFAULTS, generatePalette, fitPalette, applyPaletteEffects, isDefaultEffects, sampleCurve, clampToGamut, formatOklch } from '../../utils/theme-engine'
+import type { PaletteCurveParams, PaletteEffects, StoredPaletteParams, ColorAlias } from '../../utils/theme-engine'
 
 const props = defineProps<{
   alias: ColorAlias
@@ -23,13 +23,25 @@ function defaults(): PaletteCurveParams {
   return structuredClone(props.alias === 'neutral' ? NEUTRAL_CURVE_DEFAULTS : CURVE_DEFAULTS)
 }
 
+/** The stored entry's base curves, without the lens. */
+function pickCurves(value: StoredPaletteParams): PaletteCurveParams {
+  return structuredClone({ lightness: toRaw(value.lightness), chroma: toRaw(value.chroma), hue: toRaw(value.hue) })
+}
+
+// The modifier lens, restored alongside the base so a reload lands exactly
+// where the session left off instead of silently baking the sliders in.
 const stored = paletteParams.value[props.alias]
-const params = reactive<PaletteCurveParams>(
-  // Older stored shapes (anchor/slider based) are simply refitted on open.
-  stored && 'lightness' in stored ? structuredClone(toRaw(stored)) as PaletteCurveParams : defaults()
-)
+const effects = reactive<PaletteEffects>({ ...PALETTE_EFFECT_DEFAULTS, ...(stored?.effects ?? {}) })
+const effectAmount = ref(stored?.amount ?? 100)
+
+/** Base curves the modifiers transform from, so they never compound. */
+let seedBase: PaletteCurveParams
+  = stored && 'lightness' in stored ? pickCurves(stored) : defaults()
 // Stored params may predate the fixed 0–360 axis (or carry unwrapped hues).
-normalizeHue(params)
+normalizeHue(seedBase)
+
+/** The DISPLAYED curves: base with the lens applied — what generates the ramp. */
+const params = reactive<PaletteCurveParams>(applyPaletteEffects(seedBase, effects, effectAmount.value))
 
 const active = computed(() => isCustomPalette(props.alias))
 
@@ -99,13 +111,14 @@ function normalizeHue(values: PaletteCurveParams) {
   }
 }
 
-/** Fitted base the modifiers transform from, so they never compound. */
-let seedBase: PaletteCurveParams = structuredClone(toRaw(params))
-
 // Throttled (not debounced) so the theme streams live while dragging a
-// curve — the trailing call catches the release position.
+// curve — the trailing call catches the release position. With a neutral
+// lens the base simply tracks the edited curves.
 const throttledApply = useThrottleFn(() => {
-  setPaletteFromCurve(props.alias, structuredClone(toRaw(params)))
+  if (!effectsDirty.value) {
+    seedBase = structuredClone(toRaw(params))
+  }
+  setPaletteFromCurve(props.alias, structuredClone(seedBase), { ...effects }, effectAmount.value)
 }, 60, true, true)
 
 // Programmatic writes into `params` (seeding, external sync) must not
@@ -119,7 +132,7 @@ function seed(values: PaletteCurveParams) {
   const next = structuredClone(toRaw(values))
   normalizeHue(next)
   seedBase = structuredClone(next)
-  Object.assign(effects, EFFECT_DEFAULTS)
+  Object.assign(effects, PALETTE_EFFECT_DEFAULTS)
   effectAmount.value = 100
   ignoreUpdates(() => {
     Object.assign(params, next)
@@ -131,6 +144,14 @@ function seed(values: PaletteCurveParams) {
 let dragEndTimeout: ReturnType<typeof setTimeout> | undefined
 
 function onDragStart() {
+  // Editing a curve commits the lens: the base becomes the curves on
+  // screen (the look doesn't change) and the modifier sliders reset, so
+  // a later modifier edit can never throw the drag away.
+  if (effectsDirty.value) {
+    seedBase = structuredClone(toRaw(params))
+    Object.assign(effects, PALETTE_EFFECT_DEFAULTS)
+    effectAmount.value = 100
+  }
   clearTimeout(dragEndTimeout)
   document.documentElement.classList.add('theme-studio-dragging')
 }
@@ -159,13 +180,21 @@ function seedFromCurrent() {
   }
 }
 
-// Swatch clicks while active refit via the studio — reflect them here. The
-// snapshot comparison is what breaks the echo loop for our own throttled
-// applies (the callback runs queued, after any sync flag would have reset).
+// External writes to the stored entry — reflect them here, lens included.
+// The effective-curve comparison is what breaks the echo loop for our own
+// throttled applies (the callback runs queued, after any sync flag reset).
 watch(() => paletteParams.value[props.alias], (value) => {
-  if (value && 'lightness' in value && JSON.stringify(value) !== JSON.stringify(toRaw(params))) {
-    seed(value as PaletteCurveParams)
-  }
+  if (!value || !('lightness' in value)) return
+  const effective = applyPaletteEffects(pickCurves(value), value.effects, value.amount)
+  if (JSON.stringify(effective) === JSON.stringify(toRaw(params))) return
+
+  seedBase = pickCurves(value)
+  normalizeHue(seedBase)
+  Object.assign(effects, PALETTE_EFFECT_DEFAULTS, value.effects ?? {})
+  effectAmount.value = value.amount ?? 100
+  ignoreUpdates(() => {
+    Object.assign(params, applyPaletteEffects(seedBase, effects, effectAmount.value))
+  })
 })
 
 // While inactive, follow the selected palette so opening the editor starts
@@ -176,32 +205,7 @@ watch([() => (appConfig.ui.colors as Record<string, string>)[props.alias], open]
   }
 })
 
-// Scale AND offset: a pure multiply barely moves low-chroma (gray) ramps,
-// so a flat chroma term registers there too.
-function scaleChroma(curve: PaletteCurveParams['chroma'], factor: number, offset = 0) {
-  curve.y0 = Math.max(0, curve.y0 * factor + offset)
-  curve.y1 = Math.max(0, curve.y1 * factor + offset)
-  curve.p1y = Math.max(0, curve.p1y * factor + offset)
-  curve.p2y = Math.max(0, curve.p2y * factor + offset)
-}
-
-/* ------------------------------------------------------ custom effects -- */
-
-/**
- * Modifiers: the photo-editing quartet layered on top of the fitted base —
- * lightness shift, contrast about the ramp's own midpoint, saturation
- * (multiplicative with an additive floor, so gray ramps respond too) and
- * hue rotation. Idempotent: always recomputed from seedBase, never
- * compounding.
- */
-const EFFECT_DEFAULTS = { lightness: 0, contrast: 0, saturation: 0, hueShift: 0 }
-const effects = reactive({ ...EFFECT_DEFAULTS })
-
-/**
- * Overall strength: 100% applies the sliders as set, lower blends back
- * toward the fitted base, above 100% extrapolates past them.
- */
-const effectAmount = ref(100)
+/* ---------------------------------------------------------- modifiers -- */
 
 /** The modifiers fold — closed by default like the other advanced panels. */
 const modifiersOpen = ref(false)
@@ -213,45 +217,15 @@ const effectRows = [
   { key: 'hueShift', label: 'Hue', min: -180, max: 180, step: 5, unit: '°' }
 ] as const
 
+/** Re-derive the displayed curves from the base — a user edit, live-applied. */
 function applyEffects() {
-  const target = structuredClone(seedBase)
-
-  // The strength slider scales every effect's distance from its default.
-  const amount = effectAmount.value / 100
-  const effective = (key: keyof typeof EFFECT_DEFAULTS) =>
-    EFFECT_DEFAULTS[key] + (effects[key] - EFFECT_DEFAULTS[key]) * amount
-
-  // Lightness: contrast expands/compresses about the curve's own midpoint,
-  // then the shift slides the whole ramp.
-  const lightness = target.lightness
-  const mid = (lightness.y0 + lightness.y1) / 2
-  const span = 1 + effective('contrast') / 100
-  const shift = effective('lightness') / 100
-  const mapLightness = (value: number) => mid + (value - mid) * span + shift
-  lightness.y0 = mapLightness(lightness.y0)
-  lightness.y1 = mapLightness(lightness.y1)
-  lightness.p1y = mapLightness(lightness.p1y)
-  lightness.p2y = mapLightness(lightness.p2y)
-
-  // Saturation: scale for colorful ramps, plus a small additive floor when
-  // boosting so near-gray ramps (where a multiply is a no-op) respond too.
-  const saturation = effective('saturation') / 100
-  scaleChroma(target.chroma, 1 + saturation, Math.max(0, saturation) * 0.02)
-
-  const hueShift = effective('hueShift')
-  target.hue.y0 += hueShift
-  target.hue.y1 += hueShift
-  target.hue.p1y += hueShift
-  target.hue.p2y += hueShift
-
-  // A user edit — the watcher live-applies it.
-  Object.assign(params, target)
+  Object.assign(params, applyPaletteEffects(seedBase, effects, effectAmount.value))
 }
 
-const effectsDirty = computed(() => effectAmount.value !== 100 || effectRows.some(row => effects[row.key] !== EFFECT_DEFAULTS[row.key]))
+const effectsDirty = computed(() => !isDefaultEffects(effects, effectAmount.value))
 
 function resetEffects() {
-  Object.assign(effects, EFFECT_DEFAULTS)
+  Object.assign(effects, PALETTE_EFFECT_DEFAULTS)
   effectAmount.value = 100
   applyEffects()
 }

@@ -99,7 +99,9 @@ const shareMode = ref<'import' | 'export'>('export')
 </script>
 
 <template>
-  <main class="bg-neutral-100 dark:bg-neutral-900">
+  <!-- The app root (#__nuxt) paints bg-default via nuxt.config rootAttrs —
+       the page tint composites on top of it. -->
+  <main class="bg-elevated/25">
     <UContainer :class="fullscreen && 'max-w-none px-0 sm:px-0 lg:px-0'">
       <div class="flex flex-col w-full" :class="fullscreen ? 'h-dvh' : 'h-[calc(100dvh-var(--ui-header-height))]'">
         <!-- The floating preview card: the grid scrolls inside it; the
@@ -129,14 +131,16 @@ const shareMode = ref<'import' | 'export'>('export')
              container width, peeking a few pixels until the pointer
              nears the bottom (Esc still exits); only that strip catches
              the pointer so the preview stays clickable. -->
-        <div :class="fullscreen ? 'group fixed bottom-0 inset-x-0 z-50 pointer-events-none' : 'shrink-0'">
+        <!-- UContainer's own recipe, so the floating bar's edges line up
+             with every other page's content. -->
+        <div :class="fullscreen ? 'group fixed bottom-0 inset-x-0 z-50 pointer-events-none w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8' : 'shrink-0'">
           <!-- thin touch affordance only — mouse reveal is proximity-driven -->
           <div v-if="fullscreen" class="absolute bottom-0 inset-x-0 h-2 pointer-events-auto" />
 
           <div
             class="flex items-center gap-2 py-3 overflow-x-auto"
             :class="fullscreen && [
-              'my-4 mx-auto w-[calc(100%-2rem)] max-w-(--ui-container) px-4 rounded-lg bg-default ring ring-default shadow-lg pointer-events-auto transition-transform duration-200',
+              'mt-4 px-4 rounded-t-lg bg-default/75 backdrop-blur ring ring-default shadow-lg pointer-events-auto transition-transform duration-200',
               toolbarPinned ? 'translate-y-0' : 'translate-y-[calc(100%+6px)] group-hover:translate-y-0 group-focus-within:translate-y-0'
             ]"
           >

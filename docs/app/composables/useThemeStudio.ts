@@ -1,7 +1,7 @@
 import colors from 'tailwindcss/colors'
 import { THEME_STATE_KEYS, THEME_STORAGE_KEYS } from '../utils/theme-keys'
-import { presets, docToSettings, isDefaultTheme, generatePalette, parseCssColor, parseUiColorRef, styleComponents, styleTokens, DEFAULT_COLORS, SHADES, TOKEN_SHADE_TARGETS } from '../utils/theme-engine'
-import type { ThemeDoc, ThemePreset, PaletteCurveParams, StyleOptions, Shade, ColorAlias, TokenRamp } from '../utils/theme-engine'
+import { presets, docToSettings, isDefaultTheme, generatePalette, applyPaletteEffects, isDefaultEffects, parseCssColor, parseUiColorRef, styleComponents, styleTokens, DEFAULT_COLORS, SHADES, TOKEN_SHADE_TARGETS } from '../utils/theme-engine'
+import type { ThemeDoc, ThemePreset, PaletteCurveParams, PaletteEffects, StoredPaletteParams, StyleOptions, Shade, ColorAlias, TokenRamp } from '../utils/theme-engine'
 import { readLocalStorage } from '../utils/theme'
 
 export function useThemeStudio() {
@@ -30,9 +30,9 @@ export function useThemeStudio() {
    * resetTheme() — reachable from the popover and chat, outside this
    * composable — can clear the shared state, not just the storage key.
    */
-  const paletteParams = useState<Partial<Record<string, PaletteCurveParams>>>(THEME_STATE_KEYS.paletteParams, () => readLocalStorage(THEME_STORAGE_KEYS.paletteParams, {}))
+  const paletteParams = useState<Partial<Record<string, StoredPaletteParams>>>(THEME_STATE_KEYS.paletteParams, () => readLocalStorage(THEME_STORAGE_KEYS.paletteParams, {}))
 
-  function setPaletteParams(value: Partial<Record<string, PaletteCurveParams>>) {
+  function setPaletteParams(value: Partial<Record<string, StoredPaletteParams>>) {
     paletteParams.value = value
     if (Object.keys(value).length) {
       window.localStorage.setItem(THEME_STORAGE_KEYS.paletteParams, JSON.stringify(value))
@@ -192,8 +192,12 @@ export function useThemeStudio() {
     }
   }
 
-  /** Generate a ramp from curve params and point the alias at it. */
-  function setPaletteFromCurve(alias: ColorAlias, params: PaletteCurveParams) {
+  /**
+   * Generate a ramp and point the alias at it. The base curves and the
+   * modifier lens persist separately, so a reload restores the editor's
+   * sliders instead of silently baking them into the curves.
+   */
+  function setPaletteFromCurve(alias: ColorAlias, base: PaletteCurveParams, effects?: PaletteEffects, amount = 100) {
     const name = customPaletteName(alias)
 
     // Remember what to restore when the custom palette is removed — the
@@ -205,11 +209,14 @@ export function useThemeStudio() {
     }
 
     theme.applyThemeSettings({
-      customColors: { [name]: generatePalette(params) },
+      customColors: { [name]: generatePalette(applyPaletteEffects(base, effects, amount)) },
       [alias]: name,
       ...(alias === 'neutral' ? { cssVariables: unownedNeutralRemaps() } : {})
     }, { track: false })
-    setPaletteParams({ ...paletteParams.value, [alias]: params })
+    const entry: StoredPaletteParams = isDefaultEffects(effects, amount)
+      ? { ...base }
+      : { ...base, effects, amount }
+    setPaletteParams({ ...paletteParams.value, [alias]: entry })
     setActivePreset(undefined)
 
     // Live drags call this at ~16Hz — one analytics event per burst is plenty.
