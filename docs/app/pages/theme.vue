@@ -30,11 +30,12 @@ watch(() => (mounted.value ? JSON.stringify(currentDoc()) : undefined), (snapsho
   captureTimeout = setTimeout(() => capture(snapshot), 350)
 })
 
-// ⌘⇧D flips the mode without a click, so open panels survive the switch.
-// The chord threads three needles: bare Shift+D is a screen-reader
-// landmark-navigation key (and a WCAG 2.1.4 character shortcut), macOS
-// ships its Search-with-Google Service on ⌘⇧L so pages never receive it,
-// and ⌘⇧D only shadows Chrome's obscure, non-reserved "bookmark all tabs".
+// ⌃⇧D flips the mode without a click, so open panels survive the switch.
+// The chord threads several needles: bare Shift+D is a screen-reader
+// landmark key (and a WCAG 2.1.4 character shortcut); macOS eats ⌘⇧L
+// (Search-with-Google Service) and fires ⌘⇧D's menu binding (bookmark all
+// tabs) at the NSMenu level where pages can't block it. Control chords
+// have no macOS menu bindings, and Windows accelerators are preventable.
 const colorMode = useColorMode()
 function toggleColorMode() {
   colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'
@@ -44,7 +45,7 @@ defineShortcuts({
   meta_z: undo,
   meta_shift_z: redo,
   ctrl_y: redo,
-  meta_shift_d: toggleColorMode
+  ctrl_shift_d: toggleColorMode
 })
 
 // Esc exits fullscreen — but NOT through defineShortcuts, which
@@ -174,7 +175,7 @@ const shareMode = ref<'import' | 'export'>('export')
               </template>
             </UPopover>
 
-            <UTooltip text="Color mode" :kbds="['meta', 'shift', 'D']">
+            <UTooltip text="Color mode" :kbds="['ctrl', 'shift', 'D']">
               <UColorModeSwitch data-keep-panels class="shrink-0" />
             </UTooltip>
 
