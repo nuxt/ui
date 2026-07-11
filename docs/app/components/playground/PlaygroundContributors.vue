@@ -37,9 +37,14 @@ const usernames = [
     <USeparator />
 
     <div class="flex items-start justify-between">
-      <p class="font-semibold text-highlighted">
-        Un-contributors
-      </p>
+      <div>
+        <p class="font-semibold text-highlighted">
+          Un-contributors
+        </p>
+        <p class="text-sm text-muted">
+          Making a mess.
+        </p>
+      </div>
       <UBadge color="neutral" variant="subtle">
         -1
       </UBadge>
