@@ -50,7 +50,16 @@ interface ParsedCSS {
 
 function parseCSS(css: string): ParsedCSS {
   const result: ParsedCSS = { palettes: {}, light: {}, dark: {}, skipped: [] }
-  const clean = css.replace(/\/\*[\s\S]*?\*\//g, '')
+  let clean = css.replace(/\/\*[\s\S]*?\*\//g, '')
+
+  // The flat block scanner below can't see nesting, so a conditional
+  // at-rule's inner blocks would import as GLOBAL tokens (a dark-scheme
+  // @media pasted from someone's main.css silently overriding light).
+  // Lift each whole nested at-rule out into `skipped` instead.
+  clean = clean.replace(/@(?:media|supports|container|layer|scope)[^{}]*\{(?:[^{}]*\{[^{}]*\})*[^{}]*\}/g, (block) => {
+    result.skipped.push(block.trim().replace(/\s+/g, ' '))
+    return ''
+  })
 
   const blockRe = /([^{}]+)\{([^{}]*)\}/g
   let cursor = 0
@@ -210,12 +219,17 @@ function parseDeclaration(result: ParsedCSS, selector: string, prop: string, val
     return false
   }
 
+  // Only custom properties are theme tokens — a plain declaration
+  // (background, font-family) must surface in `skipped`, not ride the token
+  // channel into the re-export.
   if (selector === ':root, .light' || selector === '.light') {
+    if (!prop.startsWith('--')) return false
     // studio-internal vars never carry theme meaning
     if (!prop.startsWith('--studio-')) result.light[prop] = value
     return true
   }
   if (selector === '.dark') {
+    if (!prop.startsWith('--')) return false
     if (!prop.startsWith('--studio-')) result.dark[prop] = value
     return true
   }
@@ -225,11 +239,6 @@ function parseDeclaration(result: ParsedCSS, selector: string, prop: string, val
 
 /* ------------------------------------------------- style reconstruction -- */
 
-/**
- * Pull the style-owned variables out of the per-mode records (consuming
- * them) and work backwards to the StyleOptions that would emit them.
- * What remains in light/dark afterwards is plain token overrides.
- */
 /**
  * Reconstruct a color choice (named value, or a per-mode neutral/primary
  * ramp shade) from a pair of emitted per-mode values.
@@ -245,6 +254,11 @@ function matchColorChoice(value: { light?: string, dark?: string }, table: Recor
   return undefined
 }
 
+/**
+ * Pull the style-owned variables out of the per-mode records (consuming
+ * them) and work backwards to the StyleOptions that would emit them.
+ * What remains in light/dark afterwards is plain token overrides.
+ */
 function extractStyle(light: Record<string, string>, dark: Record<string, string>): StyleOptions {
   const style: StyleOptions = {}
 
@@ -591,10 +605,6 @@ function detectInnerShadow(components: Record<string, any>): StyleOptions['inner
 }
 
 /**
- * Remove the fragments the reconstructed style regenerates, leaving only
- * genuinely explicit component overrides for doc.components.
- */
-/**
  * Old exports carried border widths as class fragments (ring-2, border-b-3,
  * divide-y-2 …). Widths now live on the style axis, so those tokens are
  * noise: drop them, and renormalize old frame literals (ring-N ring-inset …)
@@ -647,6 +657,10 @@ function normalizeLegacyWidths(components: Record<string, any>) {
   }
 }
 
+/**
+ * Remove the fragments the reconstructed style regenerates, leaving only
+ * genuinely explicit component overrides for doc.components.
+ */
 function subtractStyleExpansion(components: Record<string, any>, style: StyleOptions): Record<string, any> {
   const expected = styleComponents(style)
   const remaining: Record<string, any> = {}
@@ -735,10 +749,11 @@ export function importTheme(input: { css?: string, config?: string }): ThemeImpo
       style.border = border.border
       if (border.borderWidth !== undefined) style.borderWidth = border.borderWidth
       if (border.frame) style.frame = true
+      // Only pastes that actually carry legacy ring-N width tokens get
+      // scrubbed — running unconditionally would eat genuine user classes
+      // (border-2, divide-y) out of config-only pastes.
+      normalizeLegacyWidths(components)
     }
-    // only legacy pastes carry width tokens — new exports must keep their
-    // bare default-width `ring` frame literals untouched
-    normalizeLegacyWidths(components)
   }
   const defaults = extractDefaults(components)
   if (defaults) style.defaults = defaults

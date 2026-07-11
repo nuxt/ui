@@ -91,7 +91,7 @@ const openGroups = reactive<Record<string, boolean>>({})
     </template>
 
     <div>
-      <ThemeStudioColorMenu :alias="alias" class="w-full" />
+      <ThemeStudioColorMenu :alias="alias" />
 
       <ThemeStudioPaletteEditor v-model:open="paletteEditor" :alias="alias" />
 

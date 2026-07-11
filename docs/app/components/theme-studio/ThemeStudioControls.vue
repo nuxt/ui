@@ -91,10 +91,44 @@ const headingLetterSpacing = computed({
   set: (value: number) => setHeading({ letterSpacing: value })
 })
 
+// Headings natively lead at ~1.25 (the specimen agrees) — 1.5 here would
+// show a value the page isn't actually rendering.
 const headingLineHeight = computed({
-  get: () => fontPrefs.value.heading?.lineHeight ?? 1.5,
+  get: () => fontPrefs.value.heading?.lineHeight ?? 1.25,
   set: (value: number) => setHeading({ lineHeight: value })
 })
+
+// The Base and Headings rows are the same toolbar over different models —
+// one config each, one template. Base tunes the four tailwind weight steps;
+// headings have a single weight.
+const capitalize = (value: string) => value.charAt(0).toUpperCase() + value.slice(1)
+const fontRows = [{
+  key: 'base',
+  label: 'Base',
+  selectIcon: 'i-lucide-type',
+  items: computed(() => fonts.map(name => ({ label: name, value: name }))),
+  font,
+  weights: WEIGHT_STEPS.map(step => ({ label: capitalize(step), model: weightSteps[step]!, min: 100, max: 900 })),
+  weightsActive: weightsDirty,
+  uppercase: baseUppercase,
+  letterSpacing: baseLetterSpacing,
+  lineHeight: baseLineHeight,
+  lineHeightDefault: 1.5,
+  aria: { weights: 'Font weights', uppercase: 'Uppercase text', spacing: 'Letter spacing', height: 'Line height' }
+}, {
+  key: 'heading',
+  label: 'Headings (Prose)',
+  selectIcon: 'i-lucide-heading',
+  items: headingFontItems,
+  font: headingFont,
+  weights: [{ label: 'Weight', model: headingWeight, min: 100, max: 900 }],
+  weightsActive: computed(() => fontPrefs.value.heading?.weight !== undefined),
+  uppercase: headingUppercase,
+  letterSpacing: headingLetterSpacing,
+  lineHeight: headingLineHeight,
+  lineHeightDefault: 1.25,
+  aria: { weights: 'Heading weight', uppercase: 'Uppercase headings', spacing: 'Heading letter spacing', height: 'Heading line height' }
+}]
 
 /** Live specimen: a heading line in the heading treatment over a body line. */
 const headingSampleStyle = computed(() => ({
@@ -141,7 +175,13 @@ const shadowStyle = computed({
     if (!shadow || shadow === 'none') return 'inherit'
     return shadow === 'flat' ? 'none' : 'custom'
   },
-  set: (value: any) => setStyle({ shadow: value === 'custom' ? 'hard' : value === 'none' ? 'flat' : 'none' })
+  // Custom starts where the library already is: geometry and weight
+  // approximating the stock shadow-lg, so entering Custom isn't a jump.
+  set: (value: any) => setStyle({
+    shadow: value === 'custom' ? 'hard' : value === 'none' ? 'flat' : 'none',
+    ...(value === 'custom' && style.value.shadowGeometry === undefined ? { shadowGeometry: { x: 0, y: 6, blur: 12, spread: 0 } } : {}),
+    ...(value === 'custom' && style.value.shadowOpacity === undefined ? { shadowOpacity: 10 } : {})
+  })
 })
 
 // Nothing in the library casts an inner shadow, so None and Inherit are
@@ -170,13 +210,6 @@ const innerShadowColor = computed({
   get: () => style.value.innerShadowColor || 'default',
   set: (value: any) => setStyle({ innerShadowColor: value })
 })
-
-function innerGeometrySlider(key: 'x' | 'y' | 'blur' | 'spread') {
-  return computed({
-    get: () => ({ ...INNER_SHADOW_GEOMETRY_DEFAULTS, ...style.value.innerShadowGeometry })[key],
-    set: (value: number) => setStyle({ innerShadowGeometry: { ...INNER_SHADOW_GEOMETRY_DEFAULTS, ...style.value.innerShadowGeometry, [key]: value } })
-  })
-}
 
 const borderOptions = [
   { label: 'Inherit', value: 'default' },
@@ -259,22 +292,6 @@ const borderShades = {
   light: shadeSlider('borderShade', BORDER_SHADE_DEFAULTS, 'light'),
   dark: shadeSlider('borderShade', BORDER_SHADE_DEFAULTS, 'dark')
 }
-
-/**
- * Same hydration-adoption problem for every control: SSR renders default
- * state (no localStorage), and persisted slider positions/selections looked
- * stale until touched. One post-mount re-render — only when saved state
- * exists — puts everything on client truth.
- */
-const hydrationKey = ref(0)
-
-onMounted(() => {
-  // ANY persisted theme state means the SSR markup rendered defaults —
-  // fonts, icon sets and palette picks included, not just the studio axes.
-  if (Object.keys(localStorage).some(key => key.startsWith('nuxt-ui-'))) {
-    hydrationKey.value = 1
-  }
-})
 
 const defaultSizeItems = [
   { label: 'Default', value: 'default' },
@@ -366,16 +383,13 @@ const geometryFields = [
   { key: 'spread', label: 'Spread', min: 0, max: 8 }
 ] as const
 
-function geometrySlider(key: 'x' | 'y' | 'blur' | 'spread') {
-  return computed({
-    get: () => ({ ...SHADOW_GEOMETRY_DEFAULTS, ...style.value.shadowGeometry })[key],
-    set: (value: number) => setStyle({ shadowGeometry: { ...SHADOW_GEOMETRY_DEFAULTS, ...style.value.shadowGeometry, [key]: value } })
+function geometrySliders(field: 'shadowGeometry' | 'innerShadowGeometry', defaults: typeof SHADOW_GEOMETRY_DEFAULTS) {
+  const slider = (key: 'x' | 'y' | 'blur' | 'spread') => computed({
+    get: () => ({ ...defaults, ...style.value[field] })[key],
+    set: (value: number) => setStyle({ [field]: { ...defaults, ...style.value[field], [key]: value } })
   })
+  return Object.fromEntries(geometryFields.map(({ key }) => [key, slider(key)])) as Record<'x' | 'y' | 'blur' | 'spread', ReturnType<typeof slider>>
 }
-
-const geometry = Object.fromEntries(geometryFields.map(field => [field.key, geometrySlider(field.key)])) as Record<'x' | 'y' | 'blur' | 'spread', ReturnType<typeof geometrySlider>>
-
-const innerGeometry = Object.fromEntries(geometryFields.map(field => [field.key, innerGeometrySlider(field.key)])) as Record<'x' | 'y' | 'blur' | 'spread', ReturnType<typeof innerGeometrySlider>>
 
 const borderColor = computed({
   get: () => style.value.borderColor || 'default',
@@ -386,10 +400,32 @@ const shadowColor = computed({
   get: () => style.value.shadowColor || 'default',
   set: (value: any) => setStyle({ shadowColor: value })
 })
+
+// The two shadow sections are the same panel pointed at different style
+// fields — one config each, one template.
+const shadowSections = [{
+  label: 'Shadow',
+  model: shadowStyle,
+  options: SHADOW_STYLE_OPTIONS,
+  color: shadowColor,
+  shades: shadowShades,
+  opacity: shadowOpacity,
+  geometry: geometrySliders('shadowGeometry', SHADOW_GEOMETRY_DEFAULTS),
+  hard: computed(() => (style.value.shadow || 'none') === 'hard')
+}, {
+  label: 'Inner shadow',
+  model: innerShadowStyle,
+  options: INNER_SHADOW_OPTIONS,
+  color: innerShadowColor,
+  shades: innerShadowShades,
+  opacity: innerShadowOpacity,
+  geometry: geometrySliders('innerShadowGeometry', INNER_SHADOW_GEOMETRY_DEFAULTS),
+  hard: computed(() => style.value.innerShadow === 'hard')
+}]
 </script>
 
 <template>
-  <div :key="hydrationKey">
+  <div>
     <template v-if="group === 'colors'">
       <!-- Sections own their padding so the separators run edge to edge. -->
       <div class="flex flex-col">
@@ -411,123 +447,66 @@ const shadowColor = computed({
 
     <template v-else-if="group === 'style'">
       <div class="flex flex-col">
-        <ThemeStudioSection label="Shadow" class="p-4">
-          <div>
-            <UTabs
-              v-model="shadowStyle"
-              :items="SHADOW_STYLE_OPTIONS"
-              :content="false"
-              size="xs"
-              color="neutral"
-              class="w-full"
-            />
-
-            <div v-if="shadowStyle === 'custom'" class="mt-1.5 flex flex-col gap-2">
-              <USelect
-                v-model="shadowColor"
-                size="sm"
+        <template v-for="section in shadowSections" :key="section.label">
+          <ThemeStudioSection :label="section.label" class="p-4">
+            <div>
+              <UTabs
+                v-model="section.model.value"
+                :items="section.options"
+                :content="false"
+                size="xs"
                 color="neutral"
-                variant="subtle"
-                icon="i-lucide-paint-bucket"
-                :items="shadowColorItems"
                 class="w-full"
               />
 
-              <template v-if="shadowColor === 'shade' || shadowColor === 'primary-shade'">
-                <ThemeStudioSliderRow
-                  v-for="(slider, modeName) in shadowShades"
-                  :key="modeName"
-                  v-model="slider.value"
-                  :mode="modeName"
-                  :chip="shadowColor === 'primary-shade' ? primaryChip : neutralChip"
+              <div v-if="section.model.value === 'custom'" class="mt-1.5 flex flex-col gap-2">
+                <USelect
+                  v-model="section.color.value"
+                  size="sm"
+                  color="neutral"
+                  variant="subtle"
+                  icon="i-lucide-paint-bucket"
+                  :items="shadowColorItems"
+                  class="w-full"
                 />
-              </template>
 
-              <ThemeStudioSliderRow
-                v-model="shadowOpacity"
-                label="Opacity"
-                :min="5"
-                :max="100"
-                :step="5"
-                unit="%"
-              />
+                <template v-if="section.color.value === 'shade' || section.color.value === 'primary-shade'">
+                  <ThemeStudioSliderRow
+                    v-for="(slider, modeName) in section.shades"
+                    :key="modeName"
+                    v-model="slider.value"
+                    :mode="modeName"
+                    :chip="section.color.value === 'primary-shade' ? primaryChip : neutralChip"
+                  />
+                </template>
 
-              <template v-if="(style.shadow || 'none') === 'hard'">
                 <ThemeStudioSliderRow
-                  v-for="field in geometryFields"
-                  :key="field.key"
-                  v-model="geometry[field.key].value"
-                  :label="field.label"
-                  :min="field.min"
-                  :max="field.max"
-                  :step="1"
-                  unit="px"
+                  v-model="section.opacity.value"
+                  label="Opacity"
+                  :min="5"
+                  :max="100"
+                  :step="5"
+                  unit="%"
                 />
-              </template>
+
+                <template v-if="section.hard.value">
+                  <ThemeStudioSliderRow
+                    v-for="field in geometryFields"
+                    :key="field.key"
+                    v-model="section.geometry[field.key].value"
+                    :label="field.label"
+                    :min="field.min"
+                    :max="field.max"
+                    :step="1"
+                    unit="px"
+                  />
+                </template>
+              </div>
             </div>
-          </div>
-        </ThemeStudioSection>
+          </ThemeStudioSection>
 
-        <USeparator />
-
-        <ThemeStudioSection label="Inner shadow" class="p-4">
-          <div>
-            <UTabs
-              v-model="innerShadowStyle"
-              :items="INNER_SHADOW_OPTIONS"
-              :content="false"
-              size="xs"
-              color="neutral"
-              class="w-full"
-            />
-
-            <div v-if="innerShadowStyle === 'custom'" class="mt-1.5 flex flex-col gap-2">
-              <USelect
-                v-model="innerShadowColor"
-                size="sm"
-                color="neutral"
-                variant="subtle"
-                icon="i-lucide-paint-bucket"
-                :items="shadowColorItems"
-                class="w-full"
-              />
-
-              <template v-if="innerShadowColor === 'shade' || innerShadowColor === 'primary-shade'">
-                <ThemeStudioSliderRow
-                  v-for="(slider, modeName) in innerShadowShades"
-                  :key="modeName"
-                  v-model="slider.value"
-                  :mode="modeName"
-                  :chip="innerShadowColor === 'primary-shade' ? primaryChip : neutralChip"
-                />
-              </template>
-
-              <ThemeStudioSliderRow
-                v-model="innerShadowOpacity"
-                label="Opacity"
-                :min="5"
-                :max="100"
-                :step="5"
-                unit="%"
-              />
-
-              <template v-if="style.innerShadow === 'hard'">
-                <ThemeStudioSliderRow
-                  v-for="field in geometryFields"
-                  :key="field.key"
-                  v-model="innerGeometry[field.key].value"
-                  :label="field.label"
-                  :min="field.min"
-                  :max="field.max"
-                  :step="1"
-                  unit="px"
-                />
-              </template>
-            </div>
-          </div>
-        </ThemeStudioSection>
-
-        <USeparator />
+          <USeparator />
+        </template>
 
         <ThemeStudioSection label="Borders" class="p-4">
           <div>
@@ -597,224 +576,119 @@ const shadowColor = computed({
               </p>
             </div>
 
-            <span class="text-xs font-semibold text-muted select-none">Base</span>
+            <template v-for="row in fontRows" :key="row.key">
+              <span class="text-xs font-semibold text-muted select-none" :class="row.key === 'heading' && 'pt-1'">{{ row.label }}</span>
 
-            <div class="flex items-center gap-1.5">
-              <USelect
-                v-model="font"
-                size="sm"
-                color="neutral"
-                variant="subtle"
-                icon="i-lucide-type"
-                :items="fonts"
-                class="flex-1 min-w-0"
-              >
-                <template #item-label="{ item }">
-                  <span :style="{ fontFamily: `'${item}', sans-serif` }">{{ item }}</span>
-                </template>
-              </USelect>
+              <div class="flex items-center gap-1.5">
+                <USelect
+                  v-model="row.font.value"
+                  size="sm"
+                  color="neutral"
+                  variant="subtle"
+                  :icon="row.selectIcon"
+                  :items="row.items.value"
+                  class="flex-1 min-w-0"
+                >
+                  <template #item-label="{ item }">
+                    <span :style="item.value === 'inherit' ? undefined : { fontFamily: `'${item.value}', sans-serif` }">{{ item.label }}</span>
+                  </template>
+                </USelect>
 
-              <UFieldGroup size="sm">
-                <UPopover :content="{ align: 'start' }">
-                  <UTooltip text="Weights">
-                    <UButton
-                      icon="i-lucide-bold"
-                      color="neutral"
-                      variant="subtle"
-                      :active="weightsDirty"
-                      active-color="primary"
-                      active-variant="subtle"
-                      aria-label="Font weights"
-                    />
-                  </UTooltip>
-
-                  <template #content>
-                    <div class="w-64 p-3 flex flex-col gap-1.5">
-                      <ThemeStudioSliderRow
-                        v-for="step in WEIGHT_STEPS"
-                        :key="step"
-                        v-model="weightSteps[step].value"
-                        :label="step.charAt(0).toUpperCase() + step.slice(1)"
-                        :min="100"
-                        :max="900"
-                        :step="25"
+                <UFieldGroup size="sm">
+                  <UPopover :content="{ align: 'start' }">
+                    <UTooltip :text="row.weights.length > 1 ? 'Weights' : 'Weight'">
+                      <UButton
+                        icon="i-lucide-bold"
+                        color="neutral"
+                        variant="subtle"
+                        :active="row.weightsActive.value"
+                        active-color="primary"
+                        active-variant="subtle"
+                        :aria-label="row.aria.weights"
                       />
-                    </div>
-                  </template>
-                </UPopover>
+                    </UTooltip>
 
-                <UTooltip text="Uppercase">
-                  <UButton
-                    icon="i-lucide-case-upper"
-                    color="neutral"
-                    variant="subtle"
-                    :active="baseUppercase"
-                    active-color="primary"
-                    active-variant="subtle"
-                    aria-label="Uppercase text"
-                    @click="baseUppercase = !baseUppercase"
-                  />
-                </UTooltip>
-                <UPopover :content="{ align: 'start' }">
-                  <UTooltip text="Letter spacing">
+                    <template #content>
+                      <div class="w-64 p-3 flex flex-col gap-1.5">
+                        <ThemeStudioSliderRow
+                          v-for="weight in row.weights"
+                          :key="weight.label"
+                          v-model="weight.model.value"
+                          :label="weight.label"
+                          :min="weight.min"
+                          :max="weight.max"
+                          :step="25"
+                        />
+                      </div>
+                    </template>
+                  </UPopover>
+
+                  <UTooltip text="Uppercase">
                     <UButton
-                      icon="i-lucide-move-horizontal"
+                      icon="i-lucide-case-upper"
                       color="neutral"
                       variant="subtle"
-                      :active="baseLetterSpacing !== 0"
+                      :active="row.uppercase.value"
                       active-color="primary"
                       active-variant="subtle"
-                      aria-label="Letter spacing"
+                      :aria-label="row.aria.uppercase"
+                      @click="row.uppercase.value = !row.uppercase.value"
                     />
                   </UTooltip>
 
-                  <template #content>
-                    <ThemeStudioSliderRow
-                      v-model="baseLetterSpacing"
-                      label="Spacing"
-                      :min="-0.05"
-                      :max="0.25"
-                      :step="0.005"
-                      unit="em"
-                      class="w-64 p-3"
-                    />
-                  </template>
-                </UPopover>
+                  <UPopover :content="{ align: 'start' }">
+                    <UTooltip text="Letter spacing">
+                      <UButton
+                        icon="i-lucide-move-horizontal"
+                        color="neutral"
+                        variant="subtle"
+                        :active="row.letterSpacing.value !== 0"
+                        active-color="primary"
+                        active-variant="subtle"
+                        :aria-label="row.aria.spacing"
+                      />
+                    </UTooltip>
 
-                <UPopover :content="{ align: 'start' }">
-                  <UTooltip text="Line height">
-                    <UButton
-                      icon="i-lucide-move-vertical"
-                      color="neutral"
-                      variant="subtle"
-                      :active="baseLineHeight !== 1.5"
-                      active-color="primary"
-                      active-variant="subtle"
-                      aria-label="Line height"
-                    />
-                  </UTooltip>
+                    <template #content>
+                      <ThemeStudioSliderRow
+                        v-model="row.letterSpacing.value"
+                        label="Spacing"
+                        :min="-0.05"
+                        :max="0.25"
+                        :step="0.005"
+                        unit="em"
+                        class="w-64 p-3"
+                      />
+                    </template>
+                  </UPopover>
 
-                  <template #content>
-                    <ThemeStudioSliderRow
-                      v-model="baseLineHeight"
-                      label="Height"
-                      :min="1"
-                      :max="2"
-                      :step="0.05"
-                      class="w-64 p-3"
-                    />
-                  </template>
-                </UPopover>
-              </UFieldGroup>
-            </div>
+                  <UPopover :content="{ align: 'start' }">
+                    <UTooltip text="Line height">
+                      <UButton
+                        icon="i-lucide-move-vertical"
+                        color="neutral"
+                        variant="subtle"
+                        :active="row.lineHeight.value !== row.lineHeightDefault"
+                        active-color="primary"
+                        active-variant="subtle"
+                        :aria-label="row.aria.height"
+                      />
+                    </UTooltip>
 
-            <span class="text-xs font-semibold text-muted select-none pt-1">Headings (Prose)</span>
-
-            <div class="flex items-center gap-1.5">
-              <USelect
-                v-model="headingFont"
-                size="sm"
-                color="neutral"
-                variant="subtle"
-                icon="i-lucide-heading"
-                :items="headingFontItems"
-                class="flex-1 min-w-0"
-              >
-                <template #item-label="{ item }">
-                  <span :style="item.value === 'inherit' ? undefined : { fontFamily: `'${item.value}', sans-serif` }">{{ item.label }}</span>
-                </template>
-              </USelect>
-
-              <UFieldGroup size="sm">
-                <UPopover :content="{ align: 'start' }">
-                  <UTooltip text="Weight">
-                    <UButton
-                      icon="i-lucide-bold"
-                      color="neutral"
-                      variant="subtle"
-                      :active="fontPrefs.heading?.weight !== undefined"
-                      active-color="primary"
-                      active-variant="subtle"
-                      aria-label="Heading weight"
-                    />
-                  </UTooltip>
-
-                  <template #content>
-                    <ThemeStudioSliderRow
-                      v-model="headingWeight"
-                      label="Weight"
-                      :min="100"
-                      :max="900"
-                      :step="25"
-                      class="w-64 p-3"
-                    />
-                  </template>
-                </UPopover>
-
-                <UTooltip text="Uppercase">
-                  <UButton
-                    icon="i-lucide-case-upper"
-                    color="neutral"
-                    variant="subtle"
-                    :active="headingUppercase"
-                    active-color="primary"
-                    active-variant="subtle"
-                    aria-label="Uppercase headings"
-                    @click="headingUppercase = !headingUppercase"
-                  />
-                </UTooltip>
-                <UPopover :content="{ align: 'start' }">
-                  <UTooltip text="Letter spacing">
-                    <UButton
-                      icon="i-lucide-move-horizontal"
-                      color="neutral"
-                      variant="subtle"
-                      :active="headingLetterSpacing !== 0"
-                      active-color="primary"
-                      active-variant="subtle"
-                      aria-label="Heading letter spacing"
-                    />
-                  </UTooltip>
-
-                  <template #content>
-                    <ThemeStudioSliderRow
-                      v-model="headingLetterSpacing"
-                      label="Spacing"
-                      :min="-0.05"
-                      :max="0.25"
-                      :step="0.005"
-                      unit="em"
-                      class="w-64 p-3"
-                    />
-                  </template>
-                </UPopover>
-
-                <UPopover :content="{ align: 'start' }">
-                  <UTooltip text="Line height">
-                    <UButton
-                      icon="i-lucide-move-vertical"
-                      color="neutral"
-                      variant="subtle"
-                      :active="headingLineHeight !== 1.5"
-                      active-color="primary"
-                      active-variant="subtle"
-                      aria-label="Heading line height"
-                    />
-                  </UTooltip>
-
-                  <template #content>
-                    <ThemeStudioSliderRow
-                      v-model="headingLineHeight"
-                      label="Height"
-                      :min="1"
-                      :max="2"
-                      :step="0.05"
-                      class="w-64 p-3"
-                    />
-                  </template>
-                </UPopover>
-              </UFieldGroup>
-            </div>
+                    <template #content>
+                      <ThemeStudioSliderRow
+                        v-model="row.lineHeight.value"
+                        label="Height"
+                        :min="1"
+                        :max="2"
+                        :step="0.05"
+                        class="w-64 p-3"
+                      />
+                    </template>
+                  </UPopover>
+                </UFieldGroup>
+              </div>
+            </template>
           </div>
         </ThemeStudioSection>
 

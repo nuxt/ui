@@ -22,8 +22,6 @@ export function useThemeStudio() {
     }
   }
 
-  /** The studio modal — one instance mounted in the header, openable from anywhere. */
-
   /**
    * Curve params per alias, kept so the editor stays editable across
    * reloads. useState + explicit persistence (not useLocalStorage) so
@@ -276,7 +274,7 @@ export function useThemeStudio() {
 
   /** Replace the current theme with a document: reset, then apply overrides. */
   function applyDoc(doc: ThemeDoc) {
-    theme.resetTheme()
+    theme.resetTheme({ track: false })
     style.value = deriveStyle(doc)
     if (Object.keys(style.value).length) {
       window.localStorage.setItem(THEME_STORAGE_KEYS.style, JSON.stringify(style.value))
@@ -336,6 +334,10 @@ export function useThemeStudio() {
     }
 
     applyDoc(doc)
+    // applyDoc routes neutral through the plain setter — the shuffled
+    // neutral needs the same white-literal remaps selectPalette applies,
+    // or the preview diverges from the export for every tinted ramp.
+    theme.applyThemeSettings({ cssVariables: unownedNeutralRemaps() }, { track: false })
     setActivePreset(undefined)
 
     track('Theme Studio Shuffled')
@@ -362,7 +364,6 @@ export function useThemeStudio() {
     paletteShades,
     selectPalette,
     setPaletteFromCurve,
-    clearCustomPalette,
     applyDoc,
     applyPreset,
     shuffle,

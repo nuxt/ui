@@ -242,7 +242,7 @@ defineShortcuts({
           icon="i-lucide-rotate-ccw"
           color="neutral"
           variant="ghost"
-          @click="resetTheme"
+          @click="resetTheme()"
         />
       </UTooltip>
 

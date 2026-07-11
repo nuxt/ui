@@ -31,14 +31,7 @@ const BACKGROUNDS = [
 ]
 
 /** Solid surfaces (buttons, badges) render --ui-text-inverted on the alias. */
-const SOLIDS = [
-  { token: '--ui-primary', label: 'Primary' },
-  { token: '--ui-secondary', label: 'Secondary' },
-  { token: '--ui-success', label: 'Success' },
-  { token: '--ui-info', label: 'Info' },
-  { token: '--ui-warning', label: 'Warning' },
-  { token: '--ui-error', label: 'Error' }
-]
+const SOLIDS = FOREGROUNDS.slice(5)
 
 interface Cell {
   fg: string

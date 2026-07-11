@@ -14,6 +14,16 @@ export function readLocalStorage<T>(key: string, fallback: T): T {
 /** Tailwind's stock weight ladder — set steps are absences at these values. */
 export const FONT_WEIGHT_DEFAULTS = { normal: 400, medium: 500, semibold: 600, bold: 700 } as const
 
+/**
+ * interact-outside handler: clicks on studio chrome marked data-keep-panels
+ * (the color-mode switch) must not dismiss an open panel.
+ */
+export function keepPanels(event: Event) {
+  if ((event.target as HTMLElement | null)?.closest?.('[data-keep-panels]')) {
+    event.preventDefault()
+  }
+}
+
 // Picking a set replaces appConfig.ui.icons wholesale, so every set must
 // map the full key list from src/theme/icons — a missing key would blank
 // that icon across the whole app. Names are validated against the Iconify
@@ -125,7 +135,7 @@ export const themeIcons = {
     chevronUp: 'i-iconoir-nav-arrow-up',
     close: 'i-iconoir-xmark',
     copy: 'i-iconoir-copy',
-    copyCheck: 'i-iconoir-multiple-pages-plus',
+    copyCheck: 'i-iconoir-clipboard-check',
     dark: 'i-iconoir-half-moon',
     drag: 'i-iconoir-menu',
     ellipsis: 'i-iconoir-more-horiz',
@@ -135,7 +145,9 @@ export const themeIcons = {
     eyeOff: 'i-iconoir-eye-closed',
     file: 'i-iconoir-page',
     folder: 'i-iconoir-folder',
-    folderOpen: 'i-iconoir-open-book',
+    // iconoir has no open-folder glyph — repeat the closed folder rather
+    // than show a book on expanded tree nodes
+    folderOpen: 'i-iconoir-folder',
     hash: 'i-iconoir-hashtag',
     info: 'i-iconoir-info-circle',
     light: 'i-iconoir-sun-light',

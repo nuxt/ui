@@ -92,6 +92,11 @@ export function useTheme() {
   const cssVariablesData = useState<{ light?: Record<string, string>, dark?: Record<string, string> }>('nuxt-ui-css-variables', () => readLocalStorage('nuxt-ui-css-variables', {}))
   /** The studio's style axis (it owns writes); read here for currentDoc/export. */
   const stylePrefs = useState<ThemeDoc['style']>(THEME_STATE_KEYS.stylePrefs, () => readLocalStorage(THEME_STORAGE_KEYS.style, {}))
+  // The storage listener doubles as the SAME-TAB sync channel: useTheme is
+  // not a shared composable, so the preset menu's ref and the style
+  // renderer's ref only converge through vueuse's storage events. (It also
+  // half-syncs across tabs — colors/tokens don't follow — a wart, but
+  // disabling it here breaks live updates within one tab.)
   const _radius = useLocalStorage('nuxt-ui-radius', 0.25)
   const _fontSize = useLocalStorage('nuxt-ui-font-size', 16)
   const _spacing = useLocalStorage('nuxt-ui-spacing', 0.25)
@@ -129,7 +134,8 @@ export function useTheme() {
     if (heading.italic) cleanHeading.italic = true
     if (heading.underline) cleanHeading.underline = true
     if (heading.letterSpacing !== undefined && heading.letterSpacing !== 0) cleanHeading.letterSpacing = heading.letterSpacing
-    if (heading.lineHeight !== undefined && heading.lineHeight !== 1.5) cleanHeading.lineHeight = heading.lineHeight
+    // headings natively lead at ~1.25, not the body's 1.5
+    if (heading.lineHeight !== undefined && heading.lineHeight !== 1.25) cleanHeading.lineHeight = heading.lineHeight
     if (Object.keys(cleanHeading).length) clean.heading = cleanHeading
 
     fontPrefs.value = clean
@@ -606,8 +612,10 @@ export function useTheme() {
     if (settings.ui) {
       savedExtras.ui = savedExtras.ui || {}
       for (const [key, value] of Object.entries(settings.ui)) {
-        // Skip `colors` (handled above) and prototype-chain keys that would pollute appConfig.ui when assigned.
-        if (key === 'colors' || key === '__proto__' || key === 'constructor' || key === 'prototype') continue
+        // Skip `colors` (handled above), `icons` (the reload path skips it
+        // too — a partial map would blank icons app-wide) and
+        // prototype-chain keys that would pollute appConfig.ui when assigned.
+        if (key === 'colors' || key === 'icons' || key === '__proto__' || key === 'constructor' || key === 'prototype') continue
 
         savedExtras.ui[key] = defu(value as Record<string, any>, savedExtras.ui[key] || {})
       }
@@ -632,8 +640,12 @@ export function useTheme() {
     }
   }
 
-  function resetTheme() {
-    track('Theme Reset')
+  // applyDoc resets before applying — without the opt-out every preset,
+  // import, shuffle and undo/redo would count as a "Theme Reset".
+  function resetTheme(options: { track?: boolean } = {}) {
+    if (options.track !== false) {
+      track('Theme Reset')
+    }
 
     appConfig.ui.colors.primary = 'green'
     window.localStorage.removeItem('nuxt-ui-primary')

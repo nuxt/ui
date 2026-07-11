@@ -230,6 +230,47 @@ describe('importTheme', () => {
     expect(doc.components).toBeUndefined()
   })
 
+  it('keeps genuine width classes in config-only pastes', () => {
+    // The legacy ring-N scrubber must only run when legacy tokens were
+    // actually detected — not eat a user's own border-2 out of a paste.
+    const { doc } = importTheme({
+      config: 'export default defineAppConfig({ ui: { card: { slots: { root: \'border-2 border-dashed\' } } } })'
+    })
+
+    expect(doc.components?.card?.slots?.root).toBe('border-2 border-dashed')
+  })
+
+  it('round-trips a default-width custom border with frame', () => {
+    const original: ThemeDoc = { version: 1, style: { border: 'custom', borderWidth: 1, frame: true } }
+    const css = generateCSS(original)
+    const config = generateConfig(original)
+    const { doc: imported, skipped } = importTheme({ css, config })
+
+    expect(skipped).toEqual([])
+    // width 1 elides the @theme width channel, so the frame literals come
+    // back as explicit components — the re-export must still be identical.
+    expect(generateCSS(imported)).toBe(css)
+    expect(generateConfig(imported)).toBe(config)
+  })
+
+  it('skips plain declarations under token selectors instead of importing them', () => {
+    const { doc, skipped } = importTheme({
+      css: ':root, .light {\n  background: red;\n  --ui-bg: black;\n}'
+    })
+
+    expect(doc.tokens?.light?.['--ui-bg']).toBe('black')
+    expect(skipped).toEqual([':root, .light { background: red }'])
+  })
+
+  it('skips nested at-rule blocks instead of importing them as global', () => {
+    const { doc, skipped } = importTheme({
+      css: '@media (prefers-color-scheme: dark) {\n  :root {\n    --ui-radius: 2rem;\n  }\n}'
+    })
+
+    expect(doc.radius).toBeUndefined()
+    expect(skipped).toEqual(['@media (prefers-color-scheme: dark) { :root { --ui-radius: 2rem; } }'])
+  })
+
   it('keeps explicit component overrides that no style expansion explains', () => {
     const { doc } = importTheme({
       config: 'export default defineAppConfig({ ui: { button: { slots: { base: \'rounded-full\' } } } })'

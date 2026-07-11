@@ -698,7 +698,6 @@ export function mergeUi(
   return result
 }
 
-/** Every component key a style bundle may touch — cleared before re-applying. */
 /**
  * The style axes that mean "leave it alone": no shadow (or 'none'), border
  * 'default', and nothing else set. Border 'none' is a REAL choice (strip

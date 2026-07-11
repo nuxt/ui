@@ -27,7 +27,7 @@ import {
   PlaygroundPrompt
 } from '#components'
 
-// Live, interactive component showcase rendered in the landing page hero, laid
+// Live, interactive component showcase — the Theme Studio's grid view, laid
 // out as a masonry of content-sized cards à la shadcn/HeroUI. Each tile is a
 // self-contained, product-like block (header + body + footer action). Overlays
 // are only shown embedded in richer examples (command palette, dashboard
@@ -65,7 +65,7 @@ const columnsClass = 'columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-4'
 </script>
 
 <template>
-  <div class="w-full max-w-7xl mx-auto px-4 sm:px-6">
+  <div class="w-full mx-auto px-4 sm:px-6">
     <div :class="columnsClass">
       <PlaygroundCard v-for="tile in tiles" :key="tile.name" :class="tile.class">
         <component :is="tile.component" />

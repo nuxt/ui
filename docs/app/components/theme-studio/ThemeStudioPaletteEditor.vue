@@ -76,16 +76,37 @@ function copySwatch(info: { shade: number, oklch: string }) {
 onUnmounted(() => clearTimeout(copiedTimeout))
 
 /**
- * A pinned swatch tooltip stays open for reading/copying at leisure. Reka
- * locks controlled-vs-uncontrolled at mount, so the tooltips are always
- * controlled: hover intent lands in `hoveredTips` and a pin overrides it.
+ * Swatch details live in a popover, not a tooltip: the copy/pin buttons
+ * inside must be keyboard-reachable, and popover content can take focus.
+ * Hover previews it (hand-rolled, with a grace gap so the pointer can cross
+ * onto the content); click or Enter pins it open — one pin at a time.
  */
 const pinnedShade = ref<number>()
-const hoveredTips = reactive<Partial<Record<number, boolean>>>({})
+const hoveredShade = ref<number>()
+let hoverLeaveTimeout: ReturnType<typeof setTimeout> | undefined
+
+function onSwatchEnter(shade: number) {
+  clearTimeout(hoverLeaveTimeout)
+  hoveredShade.value = shade
+}
+
+function onSwatchLeave() {
+  clearTimeout(hoverLeaveTimeout)
+  hoverLeaveTimeout = setTimeout(() => (hoveredShade.value = undefined), 150)
+}
+
+onUnmounted(() => clearTimeout(hoverLeaveTimeout))
 
 /** One pin at a time — pinning a swatch unpins any other. */
 function togglePin(shade: number) {
   pinnedShade.value = pinnedShade.value === shade ? undefined : shade
+}
+
+/** Reka-side dismissals (Esc, outside click) clear pin and hover both. */
+function onSwatchOpenUpdate(shade: number, open: boolean) {
+  if (open) return
+  if (pinnedShade.value === shade) pinnedShade.value = undefined
+  if (hoveredShade.value === shade) hoveredShade.value = undefined
 }
 
 /**
@@ -238,8 +259,12 @@ watch(() => paletteParams.value[props.alias], (value) => {
 })
 
 // While inactive, follow the selected palette so opening the editor starts
-// from the curves of the color already on screen.
+// from the curves of the color already on screen. Pin/hover tooltip state
+// resets with it: the swatch strip unmounts with the fold, so a stale pin
+// would pop a tooltip for a palette the user never pinned.
 watch([() => (appConfig.ui.colors as Record<string, string>)[props.alias], open], ([, isOpen]) => {
+  pinnedShade.value = undefined
+  hoveredShade.value = undefined
   if (isOpen && !active.value) {
     seedFromCurrent()
   }
@@ -296,14 +321,21 @@ function resetEffects() {
           />
 
           <div class="flex rounded-b-sm overflow-hidden ring ring-default">
-            <UTooltip
+            <UPopover
               v-for="info in swatchInfo"
               :key="info.shade"
-              disable-closing-trigger
-              :open="pinnedShade === info.shade || (hoveredTips[info.shade] ?? false)"
-              :content="{ side: 'right' }"
-              :ui="{ content: 'h-auto' }"
-              @update:open="hoveredTips[info.shade] = $event"
+              :open="pinnedShade === info.shade || hoveredShade === info.shade"
+              :content="{
+                side: 'right',
+                // hover-opened popovers must not steal focus; a pinned one
+                // takes it so Tab lands on the copy/pin buttons
+                onOpenAutoFocus: pinnedShade === info.shade ? undefined : (event: Event) => event.preventDefault(),
+                // pinning means pinned: clicks elsewhere (curve drags,
+                // sliders) must not dismiss — only Esc, unpin or another pin
+                onInteractOutside: pinnedShade === info.shade ? (event: Event) => event.preventDefault() : undefined,
+                onFocusOutside: pinnedShade === info.shade ? (event: Event) => event.preventDefault() : undefined
+              }"
+              @update:open="onSwatchOpenUpdate(info.shade, $event)"
             >
               <button
                 type="button"
@@ -312,10 +344,16 @@ function resetEffects() {
                 :aria-label="`Shade ${info.shade}: ${info.oklch}`"
                 :aria-pressed="pinnedShade === info.shade"
                 @click="togglePin(info.shade)"
+                @mouseenter="onSwatchEnter(info.shade)"
+                @mouseleave="onSwatchLeave"
               />
 
               <template #content>
-                <div class="px-1 py-1 text-xs font-mono flex flex-col gap-0.5">
+                <div
+                  class="px-2 py-1.5 text-xs font-mono flex flex-col gap-0.5"
+                  @mouseenter="onSwatchEnter(info.shade)"
+                  @mouseleave="onSwatchLeave"
+                >
                   <div class="flex items-center justify-between gap-3">
                     <span class="font-semibold">{{ info.shade }}</span>
 
@@ -344,7 +382,7 @@ function resetEffects() {
                           :active="pinnedShade === info.shade"
                           :ui="{ leadingIcon: 'size-3' }"
                           :icon="pinnedShade === info.shade ? 'i-lucide-pin-off' : 'i-lucide-pin'"
-                          :aria-label="pinnedShade === info.shade ? 'Unpin tooltip' : 'Pin tooltip open'"
+                          :aria-label="pinnedShade === info.shade ? 'Unpin details' : 'Pin details open'"
                           @click="togglePin(info.shade)"
                         />
                       </UTooltip>
@@ -354,7 +392,7 @@ function resetEffects() {
                   <span class="text-muted">{{ info.hex }} · {{ info.rgb }}</span>
                 </div>
               </template>
-            </UTooltip>
+            </UPopover>
           </div>
         </div>
 

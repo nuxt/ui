@@ -137,7 +137,9 @@ export function parseColor(value: string): Oklch | undefined {
   if (input === 'white') return { l: 1, c: 0, h: 0 }
   if (input === 'black') return { l: 0, c: 0, h: 0 }
 
-  if (input.startsWith('#')) {
+  // Only 3/6-digit hex converts cleanly — a truncated or alpha hex would
+  // feed NaN channels into the curve fitter, which returns undefined ramps.
+  if (/^#(?:[0-9a-f]{3}|[0-9a-f]{6})$/i.test(input)) {
     return rgbToOklch(hexToRgb(input))
   }
 

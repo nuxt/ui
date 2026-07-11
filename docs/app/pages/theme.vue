@@ -30,8 +30,9 @@ watch(() => (mounted.value ? JSON.stringify(currentDoc()) : undefined), (snapsho
   captureTimeout = setTimeout(() => capture(snapshot), 350)
 })
 
-// Shift+D flips the mode without a click, so open panels survive the
-// switch (defineShortcuts already defers while an input has focus).
+// ⌘⇧L flips the mode without a click, so open panels survive the switch
+// (the Notion/Obsidian dark-mode convention; a modifier chord also sidesteps
+// WCAG 2.1.4 on character-key shortcuts).
 const colorMode = useColorMode()
 function toggleColorMode() {
   colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'
@@ -41,19 +42,8 @@ defineShortcuts({
   meta_z: undo,
   meta_shift_z: redo,
   ctrl_y: redo,
-  shift_d: toggleColorMode
+  meta_shift_l: toggleColorMode
 })
-
-/**
- * Clicking toolbar chrome marked data-keep-panels (the color-mode switch)
- * must not dismiss an open panel — flipping the mode while tuning colors is
- * the studio's core loop.
- */
-function keepPanels(event: Event) {
-  if ((event.target as HTMLElement | null)?.closest?.('[data-keep-panels]')) {
-    event.preventDefault()
-  }
-}
 
 // Esc exits fullscreen — but NOT through defineShortcuts, which
 // preventDefaults every matched key and would stop Reka's dismissable
@@ -125,17 +115,17 @@ const shareMode = ref<'import' | 'export'>('export')
       <!-- Structured borders (like /releases and /templates): border-x rails
            run from the header's bottom border to the viewport bottom at the
            container's padding edge — no floating card. -->
-      <div class="flex flex-col w-full" :class="fullscreen ? 'h-dvh' : 'h-[calc(100dvh-var(--ui-header-height))] border-x border-default bg-default'">
+      <div class="flex flex-col w-full bg-default" :class="fullscreen ? 'h-dvh' : 'h-[calc(100dvh-var(--ui-header-height))] border-x border-default'">
         <!-- The preview: the grid scrolls inside it; the app-shell views own
              their height and scroll internally. [contain:paint] puts hard
              paint containment on the views' own scrollers — Chromium won't
              clip nested composited layers (sticky headers, filtered glows)
              by an ancestor's overflow alone. -->
         <div
-          class="flex-1 min-w-0 min-h-0 bg-default [&>*]:[contain:paint]"
+          class="flex-1 min-h-0 [&>*]:[contain:paint]"
           :class="view === 'grid' ? 'overflow-y-auto' : 'overflow-hidden'"
         >
-          <Playground v-if="view === 'grid'" class="py-4" />
+          <Playground v-if="view === 'grid'" class="py-4 sm:py-6" />
           <ThemeStudioViewDashboard v-else-if="view === 'dashboard'" />
           <ThemeStudioViewChat v-else-if="view === 'chat'" />
           <ThemeStudioViewSaas v-else-if="view === 'saas'" />
@@ -162,7 +152,7 @@ const shareMode = ref<'import' | 'export'>('export')
               toolbarPinned ? 'translate-y-0' : 'translate-y-[calc(100%+6px)] group-hover:translate-y-0 group-focus-within:translate-y-0'
             ] : 'border-t border-default'"
           >
-            <ThemeStudioPresetMenu v-model:open="openPanels.presets" class="w-56 shrink-0" />
+            <ThemeStudioPresetMenu v-model:open="openPanels.presets" keep-panels class="w-56 shrink-0" />
 
             <UPopover
               v-for="settingGroup in settingGroups"
@@ -182,7 +172,7 @@ const shareMode = ref<'import' | 'export'>('export')
               </template>
             </UPopover>
 
-            <UTooltip text="Color mode" :kbds="['shift', 'D']">
+            <UTooltip text="Color mode" :kbds="['meta', 'shift', 'L']">
               <UColorModeSwitch data-keep-panels class="shrink-0" />
             </UTooltip>
 
@@ -232,7 +222,7 @@ const shareMode = ref<'import' | 'export'>('export')
                 color="neutral"
                 variant="subtle"
                 aria-label="Reset theme"
-                @click="resetTheme"
+                @click="resetTheme()"
               />
             </UTooltip>
 

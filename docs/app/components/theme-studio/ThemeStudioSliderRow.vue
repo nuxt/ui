@@ -67,9 +67,9 @@ const display = computed(() => shade.value
     <template v-if="icon || shade" #label>
       <UIcon v-if="icon" :name="icon" class="size-3.5 text-muted" />
 
-      <span v-else class="flex items-center gap-1.5 w-full grow">
+      <span v-else class="flex items-center gap-1.5 w-full">
         <UIcon :name="mode === 'light' ? 'i-lucide-sun' : 'i-lucide-moon'" class="size-3.5 text-muted shrink-0" />
-        <span class="h-3 w-6 grow rounded-sm bg-(--slider-color) ring ring-1 ring-(--slider-contrast) me-px" />
+        <span class="h-3 w-6 grow rounded-sm bg-(--slider-color) ring ring-(--slider-contrast) me-px" />
       </span>
     </template>
 

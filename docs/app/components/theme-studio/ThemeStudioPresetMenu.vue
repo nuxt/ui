@@ -3,9 +3,15 @@ import { resolveAlias, resolveShade } from '../../utils/theme-engine'
 import type { ThemeDoc } from '../../utils/theme-engine'
 
 /** The presets dropdown (with per-preset color swatches) plus the shuffle die. */
-defineProps<{
+const props = defineProps<{
   /** Button size — the toolbar uses the default, the header picker slims down. */
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+  /**
+   * The studio toolbar opts out of the modal overlay so its color-mode
+   * switch stays clickable (with keepPanels holding the menu open); other
+   * hosts keep the stock dismiss behavior.
+   */
+  keepPanels?: boolean
 }>()
 
 const { presets, activePreset, applyPreset, shuffle } = useThemeStudio()
@@ -37,15 +43,8 @@ const presetItems = computed(() => presets.map(preset => ({
   onSelect: () => applyPreset(preset)
 })))
 
-/**
- * Toolbar chrome marked data-keep-panels (the color-mode switch) must stay
- * clickable and non-dismissing while the menu is open — hence non-modal.
- */
-function keepPanels(event: Event) {
-  if ((event.target as HTMLElement | null)?.closest?.('[data-keep-panels]')) {
-    event.preventDefault()
-  }
-}
+// the boolean prop shadows the util in template scope — alias the handler
+const onKeepPanels = keepPanels
 
 /** The applied preset's name; 'Custom' once edits diverge from it. */
 const presetLabel = computed(() => {
@@ -61,8 +60,8 @@ const presetLabel = computed(() => {
     <UDropdownMenu
       v-model:open="open"
       :items="presetItems"
-      :modal="false"
-      :content="{ align: 'start', onInteractOutside: keepPanels }"
+      :modal="!props.keepPanels"
+      :content="props.keepPanels ? { align: 'start', onInteractOutside: onKeepPanels } : { align: 'start' }"
       class="flex-1 min-w-0"
       :ui="{ itemTrailing: 'self-center', content: 'w-(--reka-dropdown-menu-trigger-width)' }"
     >

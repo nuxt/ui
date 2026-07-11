@@ -159,7 +159,7 @@ const vReveal = {
             label="v2.0 — Now with predictive alerting"
             color="neutral"
             variant="soft"
-            class="rounded-full px-3 py-1.5 gap-1.5 bg-white/5 backdrop-blur"
+            class="rounded-full px-3 py-1.5 gap-1.5 bg-inverted/5 backdrop-blur"
           >
             <template #leading>
               <UChip inset standalone :ui="{ base: 'animate-pulse ring-0' }" />

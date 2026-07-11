@@ -14,7 +14,8 @@ import {
   parseColor,
   contrastRatio,
   CURVE_DEFAULTS,
-  SHADES
+  SHADES,
+  LIBRARY_TOKEN_DEFAULTS
 } from '../../docs/app/utils/theme-engine'
 import type { ThemeDoc } from '../../docs/app/utils/theme-engine'
 import colors from 'tailwindcss/colors'
@@ -263,6 +264,16 @@ describe('theme-engine', () => {
       expect(parseCssColor('rgb(255, 255, 255)')).toBe('oklch(100% 0 0)')
       expect(parseCssColor('oklch(62.3% 0.214 259.815)')).toBe('oklch(62.3% 0.214 259.815)')
       expect(parseCssColor('gibberish')).toBeUndefined()
+      // truncated/alpha hex would feed NaN channels into the curve fitter
+      expect(parseCssColor('#12')).toBeUndefined()
+      expect(parseCssColor('#1234')).toBeUndefined()
+    })
+
+    it('fitPalette survives unparseable shades', () => {
+      // a lone bad hex must fall back to stock curves, not fit NaN stops
+      const params = fitPalette({ 500: '#12' })
+      expect(params.lightness).toBeDefined()
+      expect(generatePalette(params)[500]).toMatch(/^oklch\(/)
     })
 
     it('contrastRatio handles oklch and hex inputs', () => {
@@ -275,6 +286,31 @@ describe('theme-engine', () => {
         for (const [name, palette] of Object.entries(preset.doc.palettes || {})) {
           for (const [shade, value] of Object.entries(palette.shades)) {
             expect(value, `${preset.id} ${name}-${shade}`).toMatch(CANONICAL_OKLCH)
+          }
+        }
+      }
+    })
+
+    it('preset ramps get darker from 50 to 950', () => {
+      // Catches transposed or copy-pasted stops (a near-white 950 once
+      // shipped) without demanding perfectly monotonic lightness.
+      for (const preset of presets) {
+        for (const [name, palette] of Object.entries(preset.doc.palettes || {})) {
+          const light = parseColor(palette.shades[50]!)!
+          const dark = parseColor(palette.shades[950]!)!
+          expect(dark.l, `${preset.id} ${name} 950 vs 50`).toBeLessThan(light.l - 0.3)
+        }
+      }
+    })
+
+    it('preset tokens all differ from the library defaults', () => {
+      // A token equal to the default is dead weight the export ships anyway
+      // ("export only what you changed") — presets must not carry them.
+      for (const preset of presets) {
+        for (const mode of ['light', 'dark'] as const) {
+          const defaults = LIBRARY_TOKEN_DEFAULTS[mode] as Record<string, string>
+          for (const [token, value] of Object.entries(preset.doc.tokens?.[mode] ?? {})) {
+            expect(value, `${preset.id} ${mode} ${token}`).not.toBe(defaults[token])
           }
         }
       }

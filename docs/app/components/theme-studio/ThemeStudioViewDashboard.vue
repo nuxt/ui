@@ -272,7 +272,7 @@ const salesColumns: TableColumn<Sale>[] = [{
              two-up until xl, and the joined-border look only when four fit. -->
         <!-- shrink-0 everywhere: the panel body is a scrollable flex column,
              and a shrinking child gets crushed into its own overflow-hidden -->
-        <UPageGrid class="shrink-0 grid-cols-2 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-4 xl:gap-[var(--studio-border-width,1px)]">
+        <UPageGrid class="shrink-0 grid-cols-2 xl:grid-cols-4 gap-4 xl:gap-[var(--studio-border-width,1px)]">
           <UPageCard
             v-for="stat in stats"
             :key="stat.title"

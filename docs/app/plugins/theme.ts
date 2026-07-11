@@ -1,5 +1,6 @@
 import { defu } from 'defu'
 import { themeIcons, cssVariableDefaults } from '../utils/theme'
+import { THEME_STORAGE_KEYS, THEME_STATE_KEYS } from '../utils/theme-keys'
 import { mergeUi } from '../utils/theme-engine'
 
 export default defineNuxtPlugin({
@@ -47,8 +48,8 @@ export default defineNuxtPlugin({
           // ignore malformed localStorage
         }
       }
-      restoreNamedState('nuxt-ui-style', 'nuxt-ui-style-prefs')
-      restoreNamedState('nuxt-ui-palette-params', 'nuxt-ui-palette-params-state')
+      restoreNamedState(THEME_STORAGE_KEYS.style, THEME_STATE_KEYS.stylePrefs)
+      restoreNamedState(THEME_STORAGE_KEYS.paletteParams, THEME_STATE_KEYS.paletteParams)
 
       try {
         const extras = JSON.parse(localStorage.getItem('nuxt-ui-ai-theme') || '{}')
@@ -159,7 +160,9 @@ export default defineNuxtPlugin({
                 bapEl.innerHTML = '';
               }
             }
-          `.replace(/\s+/g, ' ')
+          `.replace(/\s+/g, ' '),
+          type: 'text/javascript',
+          tagPriority: -1
         }, {
           innerHTML: [
             `(function() {`,

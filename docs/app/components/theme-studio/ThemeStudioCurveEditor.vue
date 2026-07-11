@@ -96,6 +96,9 @@ function svgPoint(event: PointerEvent): { x: number, y: number } {
 }
 
 function onPointerDown(event: PointerEvent) {
+  // right/middle clicks must not start a drag (the context menu would
+  // strand the page-wide dragging state)
+  if (event.button !== 0) return
   const point = svgPoint(event)
   const c = curve.value
 

@@ -165,14 +165,18 @@ const email = ref('')
 const heroAppear = ref(false)
 const heroAppeared = ref(false)
 
+// The zero delay pushes the class flip past first paint so the fade-in
+// transition actually runs.
+let appearTimeout: ReturnType<typeof setTimeout> | undefined
 onMounted(() => {
-  setTimeout(() => {
+  appearTimeout = setTimeout(() => {
     heroAppear.value = true
-    setTimeout(() => {
+    appearTimeout = setTimeout(() => {
       heroAppeared.value = true
     }, 1000)
   }, 0)
 })
+onUnmounted(() => clearTimeout(appearTimeout))
 
 // Rising stars behind the CTA, ported from the template's StarsBg.
 interface Star {

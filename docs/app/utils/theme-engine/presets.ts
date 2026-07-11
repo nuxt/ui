@@ -217,8 +217,7 @@ export const presets: ThemePreset[] = [{
       dark: {
         '--ui-bg-inverted': 'var(--ui-color-neutral-50)',
         '--ui-text-highlighted': 'var(--ui-color-neutral-50)',
-        '--ui-border-inverted': 'var(--ui-color-neutral-50)',
-        '--ui-primary': 'var(--ui-color-primary-400)'
+        '--ui-border-inverted': 'var(--ui-color-neutral-50)'
       }
     },
     // Soft pink-cast shadows (primary 700 light / 950 dark at 15%) over a
@@ -287,7 +286,6 @@ export const presets: ThemePreset[] = [{
         '--ui-bg': 'var(--ui-color-neutral-50)',
         '--ui-bg-muted': 'var(--ui-color-neutral-100)',
         '--ui-bg-elevated': 'var(--ui-color-neutral-200)',
-        '--ui-bg-accented': 'var(--ui-color-neutral-200)',
         '--ui-text-inverted': 'var(--ui-color-neutral-50)',
         '--ui-border': 'var(--ui-color-neutral-950)',
         '--ui-border-muted': 'var(--ui-color-neutral-300)',
@@ -295,11 +293,9 @@ export const presets: ThemePreset[] = [{
       },
       dark: {
         '--ui-primary': 'var(--ui-color-primary-500)',
-        '--ui-bg': 'var(--ui-color-neutral-900)',
         '--ui-bg-inverted': 'var(--ui-color-neutral-50)',
         '--ui-text-highlighted': 'var(--ui-color-neutral-50)',
         '--ui-border': 'var(--ui-color-neutral-950)',
-        '--ui-border-muted': 'var(--ui-color-neutral-700)',
         '--ui-border-accented': 'var(--ui-color-neutral-950)',
         '--ui-border-inverted': 'var(--ui-color-neutral-50)'
       }
@@ -370,19 +366,13 @@ export const presets: ThemePreset[] = [{
     tokens: {
       light: {
         '--ui-bg': 'var(--ui-color-neutral-200)',
-        '--ui-bg-muted': 'var(--ui-color-neutral-50)',
         '--ui-bg-elevated': 'var(--ui-color-neutral-50)',
         '--ui-bg-accented': 'var(--ui-color-neutral-300)',
         '--ui-border': 'var(--ui-color-neutral-300)',
-        '--ui-border-muted': 'var(--ui-color-neutral-200)',
-        '--ui-border-accented': 'var(--ui-color-neutral-400)',
-        '--ui-bg-inverted': 'var(--ui-color-neutral-900)'
+        '--ui-border-accented': 'var(--ui-color-neutral-400)'
       },
       dark: {
         '--ui-primary': 'var(--ui-color-primary-500)',
-        '--ui-bg': 'var(--ui-color-neutral-900)',
-        '--ui-bg-muted': 'var(--ui-color-neutral-800)',
-        '--ui-bg-elevated': 'var(--ui-color-neutral-800)',
         '--ui-bg-accented': 'var(--ui-color-neutral-800)'
       }
     },
@@ -454,9 +444,7 @@ export const presets: ThemePreset[] = [{
     tokens: {
       dark: {
         '--ui-bg': 'var(--ui-color-neutral-950)',
-        '--ui-bg-muted': 'var(--ui-color-neutral-900)',
-        '--ui-bg-elevated': 'var(--ui-color-neutral-800)',
-        '--ui-border': 'var(--ui-color-neutral-800)'
+        '--ui-bg-muted': 'var(--ui-color-neutral-900)'
       }
     },
     components: {
@@ -477,10 +465,11 @@ export const presets: ThemePreset[] = [{
     meta: { name: 'Bootstrap', base: 'bootstrap' },
     // The real 5.3 scales: 100–400 are tint-color() (mix with white at
     // 80/60/40/20%), 600–900 are shade-color() (mix with black), extended
-    // to 50/950 with the same math. The names deliberately shadow the
-    // tailwind ramps — inside this theme, blue IS Bootstrap blue.
+    // to 50/950 with the same math. Prefixed names: palettes named plainly
+    // 'blue'/'gray' would override the tailwind ramps of the same name
+    // across the whole app while the preset is active.
     palettes: {
-      blue: {
+      'bs-blue': {
         shades: {
           50: 'oklch(95.3% 0.022 260.723)',
           100: 'oklch(90.8% 0.045 258.763)',
@@ -492,11 +481,11 @@ export const presets: ThemePreset[] = [{
           700: 'oklch(40.2% 0.152 259.656)',
           800: 'oklch(30.7% 0.109 258.934)',
           900: 'oklch(20.4% 0.063 257.52)',
-          950: 'oklch(95.3% 0.022 260.723)'
+          950: 'oklch(14.7% 0.037 249.929)'
         }
       },
       // $gray-100…$gray-900 verbatim, with 50/950 extrapolated.
-      gray: {
+      'bs-gray': {
         shades: {
           50: 'oklch(99.1% 0 0)',
           100: 'oklch(98.2% 0.002 247.839)',
@@ -508,10 +497,10 @@ export const presets: ThemePreset[] = [{
           700: 'oklch(42.8% 0.015 248.172)',
           800: 'oklch(34.5% 0.013 248.212)',
           900: 'oklch(26.2% 0.009 248.19)',
-          950: 'oklch(99.1% 0 0)'
+          950: 'oklch(20.7% 0.008 248.192)'
         }
       },
-      green: {
+      'bs-green': {
         shades: {
           50: 'oklch(95.5% 0.013 167.173)',
           100: 'oklch(90.9% 0.027 166.725)',
@@ -523,10 +512,10 @@ export const presets: ThemePreset[] = [{
           700: 'oklch(38.6% 0.083 157.541)',
           800: 'oklch(29.7% 0.06 159.192)',
           900: 'oklch(20% 0.035 161.761)',
-          950: 'oklch(95.5% 0.013 167.173)'
+          950: 'oklch(14.4% 0.023 167.139)'
         }
       },
-      red: {
+      'bs-red': {
         shades: {
           50: 'oklch(95.4% 0.019 13.379)',
           100: 'oklch(90.7% 0.037 11.626)',
@@ -538,10 +527,10 @@ export const presets: ThemePreset[] = [{
           700: 'oklch(41% 0.134 20.765)',
           800: 'oklch(31.2% 0.097 19.17)',
           900: 'oklch(20.7% 0.055 17.828)',
-          950: 'oklch(95.4% 0.019 13.379)'
+          950: 'oklch(14.7% 0.033 12.672)'
         }
       },
-      yellow: {
+      'bs-yellow': {
         shades: {
           50: 'oklch(98.2% 0.026 92.389)',
           100: 'oklch(96.4% 0.051 92.554)',
@@ -553,10 +542,10 @@ export const presets: ThemePreset[] = [{
           700: 'oklch(58% 0.118 86.024)',
           800: 'oklch(43.5% 0.088 86.646)',
           900: 'oklch(27.9% 0.056 90.569)',
-          950: 'oklch(98.2% 0.026 92.389)'
+          950: 'oklch(18.9% 0.036 93.534)'
         }
       },
-      cyan: {
+      'bs-cyan': {
         shades: {
           50: 'oklch(97.2% 0.021 211.758)',
           100: 'oklch(94.3% 0.04 212.228)',
@@ -568,31 +557,31 @@ export const presets: ThemePreset[] = [{
           700: 'oklch(53.2% 0.094 217.564)',
           800: 'oklch(40.1% 0.07 216.209)',
           900: 'oklch(25.6% 0.043 215.657)',
-          950: 'oklch(97.2% 0.021 211.758)'
+          950: 'oklch(17.6% 0.029 211.647)'
         }
       }
     },
     // $primary/$secondary/$success/$info/$warning/$danger — secondary is
     // literally $gray-600, so the gray ramp serves both roles.
     colors: {
-      primary: 'blue',
-      secondary: 'gray',
-      success: 'green',
-      info: 'cyan',
-      warning: 'yellow',
-      error: 'red',
-      neutral: 'gray'
+      primary: 'bs-blue',
+      secondary: 'bs-gray',
+      success: 'bs-green',
+      info: 'bs-cyan',
+      warning: 'bs-yellow',
+      error: 'bs-red',
+      neutral: 'bs-gray'
     },
-    radius: 0.375,
-    // system-ui stack in the sources; Roboto is its named web fallback.
-    // $headings-font-weight: 500.
+    radius: 0.125,
+    // Bootstrap ships the platform's own face (system-ui stack); Roboto is
+    // the stack's named Android fallback and the closest loadable stand-in.
     font: { sans: 'Roboto', heading: { weight: 500 } },
     icons: 'bootstrap',
     // Light rides the gray ramp one step deeper than stock (page on gray-100,
     // surfaces stepped 200/300) with a single strong border family.
     tokens: {
       light: {
-        '--ui-success': 'var(--ui-color-success-400)',
+        '--ui-secondary': 'var(--ui-color-secondary-600)',
         '--ui-bg-muted': 'var(--ui-color-neutral-200)',
         '--ui-text': 'var(--ui-color-neutral-800)',
         '--ui-border': 'var(--ui-color-neutral-400)',
@@ -605,7 +594,8 @@ export const presets: ThemePreset[] = [{
         '--ui-bg-accented': 'var(--ui-color-neutral-300)'
       },
       // Dark mode keeps the very same brand colors (--bs-primary stays
-      // #0d6efd); $body-color-dark: $gray-300, $border-color-dark: $gray-700.
+      // #0d6efd); $body-color-dark: $gray-300. The library's own dark
+      // defaults already land on the right gray stops for bg and borders.
       dark: {
         '--ui-primary': 'var(--ui-color-primary-500)',
         '--ui-secondary': 'var(--ui-color-secondary-500)',
@@ -614,15 +604,10 @@ export const presets: ThemePreset[] = [{
         '--ui-warning': 'var(--ui-color-warning-500)',
         '--ui-error': 'var(--ui-color-error-500)',
         '--ui-bg-muted': 'var(--ui-color-neutral-700)',
-        '--ui-text': 'var(--ui-color-neutral-300)',
-        '--ui-border': 'var(--ui-color-neutral-800)',
-        '--ui-bg': 'var(--ui-color-neutral-900)',
-        '--ui-bg-elevated': 'var(--ui-color-neutral-800)',
-        '--ui-bg-accented': 'var(--ui-color-neutral-700)'
+        '--ui-text': 'var(--ui-color-neutral-300)'
       }
     },
-    // Bootstrap is famously flat: borders, not shadows; subtle cards and
-    // explicit outline inputs.
+    // Bootstrap is famously flat: borders, not shadows.
     style: { shadow: 'flat', defaults: { variants: { panels: 'subtle', inputs: 'outline' } } }
   }
 }]
