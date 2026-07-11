@@ -124,11 +124,8 @@ const shareMode = ref<'import' | 'export'>('export')
              paint containment on the views' own scrollers — Chromium won't
              clip nested composited layers (sticky headers, filtered glows)
              by an ancestor's overflow alone. -->
-        <div
-          class="flex-1 min-h-0 [&>*]:[contain:paint]"
-          :class="view === 'grid' ? 'overflow-y-auto' : 'overflow-hidden'"
-        >
-          <Playground v-if="view === 'grid'" class="py-4 sm:py-6" />
+        <div class="flex-1 min-h-0 overflow-hidden [&>*]:[contain:paint]">
+          <Playground v-if="view === 'grid'" />
           <ThemeStudioViewDashboard v-else-if="view === 'dashboard'" />
           <ThemeStudioViewChat v-else-if="view === 'chat'" />
           <ThemeStudioViewSaas v-else-if="view === 'saas'" />
