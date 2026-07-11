@@ -237,7 +237,7 @@ describe('importTheme', () => {
       config: 'export default defineAppConfig({ ui: { card: { slots: { root: \'border-2 border-dashed\' } } } })'
     })
 
-    expect(doc.components?.card?.slots?.root).toBe('border-2 border-dashed')
+    expect(doc.components?.card?.slots).toEqual({ root: 'border-2 border-dashed' })
   })
 
   it('round-trips a default-width custom border with frame', () => {

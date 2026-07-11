@@ -30,9 +30,11 @@ watch(() => (mounted.value ? JSON.stringify(currentDoc()) : undefined), (snapsho
   captureTimeout = setTimeout(() => capture(snapshot), 350)
 })
 
-// ⌘⇧L flips the mode without a click, so open panels survive the switch
-// (the Notion/Obsidian dark-mode convention; a modifier chord also sidesteps
-// WCAG 2.1.4 on character-key shortcuts).
+// ⌘⇧D flips the mode without a click, so open panels survive the switch.
+// The chord threads three needles: bare Shift+D is a screen-reader
+// landmark-navigation key (and a WCAG 2.1.4 character shortcut), macOS
+// ships its Search-with-Google Service on ⌘⇧L so pages never receive it,
+// and ⌘⇧D only shadows Chrome's obscure, non-reserved "bookmark all tabs".
 const colorMode = useColorMode()
 function toggleColorMode() {
   colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'
@@ -42,7 +44,7 @@ defineShortcuts({
   meta_z: undo,
   meta_shift_z: redo,
   ctrl_y: redo,
-  meta_shift_l: toggleColorMode
+  meta_shift_d: toggleColorMode
 })
 
 // Esc exits fullscreen — but NOT through defineShortcuts, which
@@ -172,7 +174,7 @@ const shareMode = ref<'import' | 'export'>('export')
               </template>
             </UPopover>
 
-            <UTooltip text="Color mode" :kbds="['meta', 'shift', 'L']">
+            <UTooltip text="Color mode" :kbds="['meta', 'shift', 'D']">
               <UColorModeSwitch data-keep-panels class="shrink-0" />
             </UTooltip>
 
