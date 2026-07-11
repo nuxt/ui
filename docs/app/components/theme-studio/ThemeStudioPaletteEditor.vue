@@ -86,6 +86,9 @@ const hoveredShade = ref<number>()
 let hoverLeaveTimeout: ReturnType<typeof setTimeout> | undefined
 
 function onSwatchEnter(shade: number) {
+  // a pin means "I'm reading this one" — other swatches don't hover-open
+  // until it's released (clicking another still migrates the pin)
+  if (pinnedShade.value !== undefined && pinnedShade.value !== shade) return
   clearTimeout(hoverLeaveTimeout)
   hoveredShade.value = shade
 }
@@ -327,6 +330,7 @@ function resetEffects() {
               :open="pinnedShade === info.shade || hoveredShade === info.shade"
               :content="{
                 side: 'right',
+                sideOffset: 0,
                 // hover-opened popovers must not steal focus; a pinned one
                 // takes it so Tab lands on the copy/pin buttons
                 onOpenAutoFocus: pinnedShade === info.shade ? undefined : (event: Event) => event.preventDefault(),

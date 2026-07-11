@@ -56,11 +56,11 @@ const display = computed(() => shade.value
     size="xs"
     :style="sliderColor ? { '--slider-color': sliderColor, '--slider-contrast': contrastColor } : undefined"
     :ui="{
-      root: 'flex items-center gap-2 px-1',
+      root: 'flex items-center gap-2',
       wrapper: 'w-13 shrink-0',
       /* truncate only text labels — its overflow:hidden would clip the
          shade chip's ring once thick-border themes inflate it */
-      label: `w-full text-muted select-none${icon || shade ? '' : ' truncate'}`,
+      label: `w-full text-muted font-normal select-none${icon || shade ? '' : ' truncate'}`,
       container: 'flex-1 flex items-center gap-2 mt-0'
     }"
   >
@@ -80,7 +80,7 @@ const display = computed(() => shade.value
       :min="min"
       :max="max"
       :step="step"
-      color="neutral"
+      color="primary"
       size="xs"
       :aria-label="label ?? mode"
       :ui="sliderColor ? {

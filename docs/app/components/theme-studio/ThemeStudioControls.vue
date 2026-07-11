@@ -95,6 +95,7 @@ const capitalize = (value: string) => value.charAt(0).toUpperCase() + value.slic
 const fontRows = [{
   key: 'base',
   label: 'Base',
+  defaultValue: 'Public Sans',
   selectIcon: 'i-lucide-type',
   items: computed(() => fonts.map(name => ({ label: name, value: name }))),
   font,
@@ -108,6 +109,7 @@ const fontRows = [{
 }, {
   key: 'heading',
   label: 'Headings (Prose)',
+  defaultValue: 'inherit',
   selectIcon: 'i-lucide-heading',
   items: headingFontItems,
   font: headingFont,
@@ -298,25 +300,33 @@ const borderShades = {
   dark: shadeSlider('borderShade', BORDER_SHADE_DEFAULTS, 'dark')
 }
 
+// MD is the stock default — one deduped entry storing 'default'
 const defaultSizeItems = [
-  { label: 'Default', value: 'default' },
-  { label: 'XS', value: 'xs' },
-  { label: 'SM', value: 'sm' },
-  { label: 'MD', value: 'md' },
-  { label: 'LG', value: 'lg' },
-  { label: 'XL', value: 'xl' }
+  { label: 'XS', value: 'xs', defaultTag: false },
+  { label: 'SM', value: 'sm', defaultTag: false },
+  { label: 'MD', value: 'default', defaultTag: true },
+  { label: 'LG', value: 'lg', defaultTag: false },
+  { label: 'XL', value: 'xl', defaultTag: false }
 ]
 
 // Per-group default variants, each offering only what its components
 // actually support (buttons add ghost, form fields run outline → none);
 // the app-wide `variant` (presets, shuffle) shows through as the fallback
 // until a group makes its own choice.
-const variantItems = (values: string[]) => ['default', ...values].map(value => ({ label: value.charAt(0).toUpperCase() + value.slice(1), value }))
+const variantItems = (values: string[]) => values.map(value => ({ label: value.charAt(0).toUpperCase() + value.slice(1), value }))
 
+/** Variant names UButton can render itself — the rest (none) fall back. */
+const RENDERABLE_VARIANTS = ['solid', 'outline', 'soft', 'subtle', 'ghost', 'link']
+
+/** Variant grid popovers close on pick — one open flag per group. */
+const variantGridOpen = reactive<Record<string, boolean>>({ buttons: false, panels: false, inputs: false })
+
+// `stock` is the library's own default variant — its cell wears the
+// "(Default)" tag and picking it clears the override instead of pinning.
 const variantGroupFields = [
-  { key: 'buttons' as const, label: 'Button Defaults', hasColor: true, items: variantItems(['solid', 'outline', 'soft', 'subtle', 'ghost', 'link']) },
-  { key: 'panels' as const, label: 'Card Defaults', hasColor: false, items: variantItems(['solid', 'outline', 'soft', 'subtle']) },
-  { key: 'inputs' as const, label: 'Input Defaults', hasColor: true, items: variantItems(['outline', 'soft', 'subtle', 'ghost', 'none']) }
+  { key: 'buttons' as const, label: 'Button Defaults', hasColor: true, stock: 'solid', items: variantItems(['solid', 'outline', 'soft', 'subtle', 'ghost', 'link']) },
+  { key: 'panels' as const, label: 'Card Defaults', hasColor: false, stock: 'outline', items: variantItems(['solid', 'outline', 'soft', 'subtle']) },
+  { key: 'inputs' as const, label: 'Input Defaults', hasColor: true, stock: 'outline', items: variantItems(['outline', 'soft', 'subtle', 'ghost', 'none']) }
 ]
 
 function groupVariantModel(group: VariantGroup) {
@@ -360,11 +370,17 @@ function groupVariantModel(group: VariantGroup) {
 
 const groupVariants = Object.fromEntries(variantGroupFields.map(field => [field.key, groupVariantModel(field.key)])) as Record<VariantGroup, ReturnType<typeof groupVariantModel>>
 
-const defaultColorItems = ['default', 'primary', 'secondary', 'success', 'info', 'warning', 'error', 'neutral'].map(value => ({
-  label: value.charAt(0).toUpperCase() + value.slice(1),
-  value,
-  chip: value === 'default' ? undefined : { color: value as any }
-}))
+// Primary IS the stock default — one entry, tagged, storing 'default'
+// (an explicit 'primary' would export a no-op override).
+const defaultColorItems = [
+  { label: 'Primary', value: 'default', chip: { color: 'primary' as any }, defaultTag: true },
+  ...['secondary', 'success', 'info', 'warning', 'error', 'neutral'].map(value => ({
+    label: value.charAt(0).toUpperCase() + value.slice(1),
+    value,
+    chip: { color: value as any },
+    defaultTag: false
+  }))
+]
 
 function groupColorModel(group: VariantGroup) {
   return computed({
@@ -376,7 +392,11 @@ function groupColorModel(group: VariantGroup) {
 const groupColors = Object.fromEntries(variantGroupFields.map(field => [field.key, groupColorModel(field.key)])) as Record<VariantGroup, ReturnType<typeof groupColorModel>>
 
 const defaultSize = computed({
-  get: () => style.value.defaults?.size || 'default',
+  // legacy saved prefs may still pin 'md' explicitly — it IS the default
+  get: () => {
+    const size = style.value.defaults?.size || 'default'
+    return size === 'md' ? 'default' : size
+  },
   set: (value: any) => setStyle({ defaults: { ...style.value.defaults, size: value } })
 })
 
@@ -582,7 +602,7 @@ const shadowSections = [{
             </div>
 
             <template v-for="row in fontRows" :key="row.key">
-              <span class="text-xs font-semibold text-muted select-none" :class="row.key === 'heading' && 'pt-1'">{{ row.label }}</span>
+              <span class="text-xs font-medium text-muted select-none" :class="row.key === 'heading' && 'pt-1'">{{ row.label }}</span>
 
               <div class="flex items-center gap-1.5">
                 <UPopover v-model:open="fontListOpen[row.key]" :content="{ align: 'start' }" class="flex-1 min-w-0">
@@ -599,7 +619,7 @@ const shadowSections = [{
                     <span
                       class="truncate"
                       :style="row.font.value === 'inherit' ? undefined : { fontFamily: `'${row.font.value}', sans-serif` }"
-                    >{{ row.items.value.find(item => item.value === row.font.value)?.label ?? row.font.value }}</span>
+                    >{{ row.items.value.find(item => item.value === row.font.value)?.label ?? row.font.value }}<span v-if="row.font.value === row.defaultValue" class="text-dimmed font-normal">&nbsp;(Default)</span></span>
                   </UButton>
 
                   <template #content>
@@ -608,11 +628,12 @@ const shadowSections = [{
                       v-model="row.font.value"
                       :items="row.items.value"
                       value-key="value"
-                      class="w-72 max-h-80 overflow-y-auto"
+                      class="w-72"
+                      :ui="{ root: 'ring-0 rounded-md', content: 'max-h-80' }"
                       @update:model-value="fontListOpen[row.key] = false"
                     >
                       <template #item-label="{ item }">
-                        <span :style="item.value === 'inherit' ? undefined : { fontFamily: `'${item.value}', sans-serif` }">{{ item.label }}</span>
+                        <span :style="item.value === 'inherit' ? undefined : { fontFamily: `'${item.value}', sans-serif` }">{{ item.label }}</span><span v-if="item.value === row.defaultValue" class="text-dimmed">&nbsp;(Default)</span>
                       </template>
 
                       <template #item-description="{ item }">
@@ -752,7 +773,8 @@ const shadowSections = [{
                   v-model="icon"
                   :items="icons"
                   value-key="value"
-                  class="w-72 max-h-80 overflow-y-auto"
+                  class="w-72"
+                  :ui="{ root: 'ring-0 rounded-md', content: 'max-h-80' }"
                   @update:model-value="iconListOpen = false"
                 >
                   <template #item-description="{ item }">
@@ -806,7 +828,15 @@ const shadowSections = [{
                 icon="i-lucide-proportions"
                 :items="defaultSizeItems"
                 class="flex-1"
-              />
+              >
+                <template #default>
+                  {{ defaultSizeItems.find(item => item.value === defaultSize)?.label }}<span v-if="defaultSize === 'default'" class="text-dimmed">&nbsp;(Default)</span>
+                </template>
+
+                <template #item-label="{ item }">
+                  {{ item.label }}<span v-if="item.defaultTag" class="text-dimmed">&nbsp;(Default)</span>
+                </template>
+              </USelect>
             </div>
           </div>
         </ThemeStudioSection>
@@ -819,15 +849,39 @@ const shadowSections = [{
               <div class="flex items-center gap-2">
                 <span class="text-xs text-muted w-13 shrink-0 select-none">Variant</span>
 
-                <USelect
-                  v-model="groupVariants[field.key].value"
-                  size="sm"
-                  color="neutral"
-                  variant="subtle"
-                  icon="i-lucide-layers"
-                  :items="field.items"
-                  class="flex-1"
-                />
+                <UPopover v-model:open="variantGridOpen[field.key]" :content="{ side: 'bottom', align: 'start' }" class="flex-1">
+                  <UButton
+                    size="sm"
+                    color="neutral"
+                    variant="subtle"
+                    block
+                    icon="i-lucide-layers"
+                    trailing-icon="i-lucide-chevron-down"
+                    :ui="{ label: 'flex-1 text-left' }"
+                    :aria-label="`${field.label} variant`"
+                  >
+                    {{ field.items.find(item => item.value === (groupVariants[field.key].value === 'default' ? field.stock : groupVariants[field.key].value))?.label }}<span v-if="groupVariants[field.key].value === 'default'" class="text-dimmed font-normal">&nbsp;(Default)</span>
+                  </UButton>
+
+                  <template #content>
+                    <!-- each cell renders IN the variant it picks -->
+                    <div class="w-64 p-2 grid grid-cols-2 gap-1">
+                      <UButton
+                        v-for="item in field.items"
+                        :key="item.value"
+                        size="sm"
+                        block
+                        :color="(groupVariants[field.key].value === item.value || (groupVariants[field.key].value === 'default' && item.value === field.stock)) ? 'primary' : 'neutral'"
+                        :variant="RENDERABLE_VARIANTS.includes(item.value) ? (item.value as any) : 'subtle'"
+                        :class="[item.value === 'none' && 'opacity-60', 'min-w-0']"
+                        @click="groupVariants[field.key].value = (item.value === field.stock ? 'default' : item.value); variantGridOpen[field.key] = false"
+                      >
+                        <!-- opacity, not a color: text-dimmed would fight the variant's own text color -->
+                        <span class="truncate">{{ item.label }}<span v-if="item.value === field.stock" class="opacity-70 font-normal">&nbsp;(Default)</span></span>
+                      </UButton>
+                    </div>
+                  </template>
+                </UPopover>
               </div>
 
               <div v-if="field.hasColor" class="flex items-center gap-2">
@@ -843,12 +897,18 @@ const shadowSections = [{
                 >
                   <template #leading>
                     <UChip
-                      v-if="groupColors[field.key].value !== 'default'"
-                      :color="groupColors[field.key].value as any"
+                      :color="(groupColors[field.key].value === 'default' ? 'primary' : groupColors[field.key].value) as any"
                       inset
                       standalone
                     />
-                    <UIcon v-else name="i-lucide-palette" class="size-4 shrink-0 text-dimmed" />
+                  </template>
+
+                  <template #default>
+                    {{ defaultColorItems.find(item => item.value === groupColors[field.key].value)?.label }}<span v-if="groupColors[field.key].value === 'default'" class="text-dimmed">&nbsp;(Default)</span>
+                  </template>
+
+                  <template #item-label="{ item }">
+                    {{ item.label }}<span v-if="item.defaultTag" class="text-dimmed">&nbsp;(Default)</span>
                   </template>
                 </USelect>
               </div>

@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { resolveAlias, resolveShade, SHADES } from '../../utils/theme-engine'
+import { resolveAlias, resolveShade } from '../../utils/theme-engine'
 import type { ThemeDoc, Shade } from '../../utils/theme-engine'
+import { themeIcons } from '../../utils/theme'
 
 /** The presets listbox (theme chips, fonts and ramps) plus the shuffle die. */
 const props = defineProps<{
@@ -42,10 +43,12 @@ function themeChip(doc: ThemeDoc) {
   }
 }
 
-/** The doc's working ramp — primary, or the neutral when black leads. */
-function rampStops(doc: ThemeDoc): string[] {
-  const alias = doc.blackAsPrimary ? 'neutral' : 'primary'
-  return SHADES.map(shade => resolveShade(doc, resolveAlias(doc, alias), shade)).filter((color): color is string => !!color)
+/** A taste of the doc's icon set (its own, or the default lucide). */
+function iconSamples(doc: ThemeDoc): string[] {
+  const sets = themeIcons as Record<string, Record<string, string>>
+  const set = sets[doc.icons ?? 'lucide'] ?? sets.lucide!
+  // upload, search and folder vary the most between the sets
+  return ['upload', 'search', 'folder'].map(key => set[key]!)
 }
 
 const presetItems = computed(() => presets.map(preset => ({
@@ -54,7 +57,7 @@ const presetItems = computed(() => presets.map(preset => ({
   chipIcon: preset.icon,
   themeChip: themeChip(preset.doc),
   font: preset.doc.font?.sans ?? 'Public Sans',
-  ramp: rampStops(preset.doc)
+  iconSamples: iconSamples(preset.doc)
 })))
 
 // the rows render their own font names — load the faces once
@@ -106,25 +109,29 @@ const presetLabel = computed(() => {
           value-key="id"
           class="w-80"
           :ui="{
+            root: 'ring-0 rounded-md',
+            content: 'max-h-96',
             item: 'gap-3'
           }"
         >
           <template #item-leading="{ item }">
             <span
-              class="flex items-center justify-center size-9 rounded-md ring ring-default shrink-0 bg-[image:var(--chip-bg-light)] dark:bg-[image:var(--chip-bg-dark)]"
+              class="flex items-center justify-center size-10 rounded-md ring ring-default shrink-0 bg-[image:var(--chip-bg-light)] dark:bg-[image:var(--chip-bg-dark)]"
               :style="item.themeChip"
             >
               <UIcon :name="item.chipIcon" class="size-4 text-(--chip-icon-light) dark:text-(--chip-icon-dark)" />
             </span>
           </template>
 
-          <!-- the doc's font in its own face beside its working ramp -->
+          <!-- the doc's font in its own face and a taste of its icon set -->
           <template #item-description="{ item }">
             <span class="flex items-center gap-2 pt-0.5">
-              <span class="text-xs text-muted truncate" :style="{ fontFamily: `'${item.font}', sans-serif` }">{{ item.font }}</span>
+              <span class="shrink-0 text-xs text-muted truncate" :style="{ fontFamily: `'${item.font}', sans-serif` }">{{ item.font }}</span>
 
-              <span class="flex flex-1 h-1.5 rounded-full overflow-hidden ring ring-default min-w-0">
-                <span v-for="(stop, index) in item.ramp" :key="index" class="flex-1" :style="{ backgroundColor: stop }" />
+              <span class="text-dimmed select-none">·</span>
+
+              <span class="flex items-center gap-1 shrink-0">
+                <UIcon v-for="name in item.iconSamples" :key="name" :name="name" class="size-3 text-dimmed" />
               </span>
             </span>
           </template>

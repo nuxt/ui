@@ -77,6 +77,7 @@ export const presets: ThemePreset[] = [{
     },
     radius: 0.5,
     font: { sans: 'Outfit' },
+    icons: 'tabler',
     // Framed everything in near-black ink, straight-down hard shadows, soft
     // inked inputs, and both modes retuned shade-by-shade toward carbon.
     style: {
@@ -89,7 +90,7 @@ export const presets: ThemePreset[] = [{
       defaults: { variants: { buttons: 'solid', panels: 'subtle', inputs: 'subtle' } },
       tokenShades: {
         '--ui-bg': { light: 50, dark: 800 },
-        '--ui-bg-muted': { light: 300 },
+        '--ui-bg-muted': { light: 300, dark: 700 },
         '--ui-bg-elevated': { light: 300, dark: 700 },
         '--ui-bg-accented': { light: 400, dark: 600 },
         '--ui-bg-inverted': { light: 900, dark: 50 },
@@ -138,6 +139,7 @@ export const presets: ThemePreset[] = [{
       neutral: 'grove'
     },
     font: { sans: 'DM Sans' },
+    icons: 'remix',
     tokens: {
       light: {
         '--ui-bg': 'var(--ui-color-neutral-50)',
@@ -208,6 +210,7 @@ export const presets: ThemePreset[] = [{
     },
     radius: 0.375,
     font: { sans: 'Poppins' },
+    icons: 'phosphor',
     tokens: {
       light: {
         '--ui-bg': 'var(--ui-color-neutral-50)',
@@ -278,6 +281,7 @@ export const presets: ThemePreset[] = [{
     // One flat 600 across every weight step — comic lettering has a single
     // stroke width, and Comic Neue's 400 reads too thin for the look.
     font: { sans: 'Comic Neue', weights: { normal: 600, medium: 600, semibold: 600, bold: 600 } },
+    icons: 'iconoir',
     // Inked page: near-black default AND accented borders over muted panel
     // edges, deep red at 600 in light, flat 50s inversions in dark.
     tokens: {
@@ -360,6 +364,7 @@ export const presets: ThemePreset[] = [{
     },
     radius: 0.375,
     font: { sans: 'DM Sans' },
+    icons: 'heroicons',
     // Deep cream page over ivory surfaces in light, with the border family
     // stepped one deeper to hold on the tinted page; one flat 800 surface
     // family in dark, with the brand clay held at 500.
@@ -441,6 +446,7 @@ export const presets: ThemePreset[] = [{
     },
     radius: 0.5,
     font: { sans: 'DM Sans' },
+    icons: 'material',
     tokens: {
       dark: {
         '--ui-bg': 'var(--ui-color-neutral-950)',
