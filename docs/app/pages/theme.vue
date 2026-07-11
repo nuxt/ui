@@ -209,7 +209,7 @@ const shareMode = ref<'import' | 'export'>('export')
                 color="primary"
                 class="shrink-0"
                 :ui="{
-                  list: 'ring ring-accented ring-inset'
+                  list: 'ring ring-accented ring-inset rounded-md'
                 }"
               />
               <span v-else class="shrink-0 w-17" />

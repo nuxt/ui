@@ -103,6 +103,7 @@ const openGroups = reactive<Record<string, boolean>>({})
           v-model="slider.value"
           :mode="modeName"
           :chip="rampChip(alias)"
+          :default-value="SHADES.indexOf(sections[0]!.defaults[modeName] as typeof SHADES[number])"
         />
       </div>
 
@@ -132,6 +133,7 @@ const openGroups = reactive<Record<string, boolean>>({})
                   v-model="slider.value"
                   :mode="modeName"
                   :chip="rampChip(section.ramp)"
+                  :default-value="SHADES.indexOf(section.defaults[modeName] as typeof SHADES[number])"
                 />
               </div>
             </div>

@@ -480,7 +480,7 @@ const shadowSections = [{
                 :items="section.options"
                 :content="false"
                 size="xs"
-                color="neutral"
+                color="primary"
                 class="w-full"
               />
 
@@ -502,6 +502,7 @@ const shadowSections = [{
                     v-model="slider.value"
                     :mode="modeName"
                     :chip="section.color.value === 'primary-shade' ? primaryChip : neutralChip"
+                    :default-value="SHADES.indexOf(SHADOW_SHADE_DEFAULTS[modeName] as typeof SHADES[number])"
                   />
                 </template>
 
@@ -540,7 +541,7 @@ const shadowSections = [{
               :items="borderOptions"
               :content="false"
               size="xs"
-              color="neutral"
+              color="primary"
               class="w-full"
             />
 
@@ -579,6 +580,7 @@ const shadowSections = [{
                   v-model="slider.value"
                   :mode="modeName"
                   :chip="borderColor === 'primary-shade' ? primaryChip : neutralChip"
+                  :default-value="SHADES.indexOf(BORDER_SHADE_DEFAULTS[modeName] as typeof SHADES[number])"
                 />
               </template>
             </div>

@@ -21,6 +21,8 @@ const props = withDefaults(defineProps<{
   chip?: string
   /** …for this color mode. */
   mode?: 'light' | 'dark'
+  /** Resting value — the readout says "Default" while the slider sits on it. */
+  defaultValue?: number
 }>(), {
   min: 0,
   max: SHADES.length - 1,
@@ -43,10 +45,20 @@ const contrastColor = computed(() => shade.value
   ? `oklch(from ${sliderColor.value} clamp(0.12, (0.66 - l) * 1000, 0.95) 0 h / 0.65)`
   : undefined)
 
+const atDefault = computed(() => props.defaultValue !== undefined && value.value === props.defaultValue)
+
 /** `0.25rem` reads as `.25rem` — the leading zero is noise at this width. */
-const display = computed(() => shade.value
-  ? String(SHADES[value.value])
-  : `${String(value.value).replace(/^(-?)0\./, '$1.')}${props.unit ?? ''}`)
+const display = computed(() => {
+  if (atDefault.value) return 'Default'
+  return shade.value
+    ? String(SHADES[value.value])
+    : `${String(value.value).replace(/^(-?)0\./, '$1.')}${props.unit ?? ''}`
+})
+
+/** The tooltip keeps naming the real value while the readout says Default. */
+const displayTitle = computed(() => atDefault.value
+  ? `${shade.value ? SHADES[value.value] : value.value} (default)`
+  : display.value)
 </script>
 
 <template>
@@ -89,6 +101,6 @@ const display = computed(() => shade.value
       } : undefined"
     />
 
-    <span class="text-xs text-dimmed font-mono w-12 text-right shrink-0 truncate" :title="display">{{ display }}</span>
+    <span class="text-xs text-dimmed font-mono w-12 text-right shrink-0 truncate" :title="displayTitle">{{ display }}</span>
   </UFormField>
 </template>
