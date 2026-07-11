@@ -42,13 +42,27 @@ function toggleColorMode() {
 }
 
 const appConfig = useAppConfig()
-const { style, groupDirty } = useThemeStudio()
+const { style, groupDirty, presets, activePreset, applyPreset } = useThemeStudio()
 
 /** "Changed from preset" dot per settings tab. */
 const groupDirtyFlags = {
   colors: groupDirty('colors'),
   general: groupDirty('general'),
   style: groupDirty('style')
+}
+
+/**
+ * The toolbar reset matches the section resets: back to the BASELINE —
+ * the active preset when one is set, stock otherwise. Disabled while
+ * nothing diverges from it.
+ */
+const anyDirty = computed(() => Object.values(groupDirtyFlags).some(flag => flag.value))
+const baselinePreset = computed(() => presets.find(preset => preset.id === activePreset.value))
+const resetLabel = computed(() => baselinePreset.value ? `Reset to ${baselinePreset.value.name}` : 'Reset theme')
+
+function resetToBaseline() {
+  if (baselinePreset.value) applyPreset(baselinePreset.value)
+  else resetTheme()
 }
 
 /**
@@ -264,13 +278,14 @@ const shareMode = ref<'import' | 'export'>('export')
               </UTooltip>
             </UFieldGroup>
 
-            <UTooltip text="Reset theme">
+            <UTooltip :text="resetLabel">
               <UButton
                 icon="i-lucide-rotate-ccw"
                 color="neutral"
                 variant="subtle"
-                aria-label="Reset theme"
-                @click="resetTheme()"
+                :disabled="!anyDirty"
+                :aria-label="resetLabel"
+                @click="resetToBaseline"
               />
             </UTooltip>
 
