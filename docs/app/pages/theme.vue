@@ -41,6 +41,30 @@ function toggleColorMode() {
   colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'
 }
 
+const appConfig = useAppConfig()
+const { style } = useThemeStudio()
+
+/**
+ * The mode tabs follow the app-wide default size setting like every other
+ * toolbar control — but one step down: tabs at the default size read a
+ * size too big next to the buttons.
+ */
+const SIZE_LADDER = ['xs', 'sm', 'md', 'lg', 'xl'] as const
+const modeTabsSize = computed(() => {
+  const base = style.value.defaults?.size
+  const index = SIZE_LADDER.indexOf((!base || base === 'default' ? 'md' : base) as typeof SIZE_LADDER[number])
+  return SIZE_LADDER[Math.max(0, index - 2)]
+})
+
+const modeTabItems = computed(() => [
+  { value: 'light', icon: appConfig.ui.icons.light },
+  { value: 'dark', icon: appConfig.ui.icons.dark }
+])
+const modeTab = computed({
+  get: () => (colorMode.value === 'dark' ? 'dark' : 'light'),
+  set: (value: string) => (colorMode.preference = value)
+})
+
 defineShortcuts({
   meta_z: undo,
   meta_shift_z: redo,
@@ -173,7 +197,22 @@ const shareMode = ref<'import' | 'export'>('export')
             </UPopover>
 
             <UTooltip text="Color mode" :kbds="['ctrl', 'shift', 'D']">
-              <UColorModeSwitch data-keep-panels class="shrink-0" />
+              <!-- mounted-gated: the preference is client-only and tabs
+                   would hydrate on the server's fallback -->
+              <UTabs
+                v-if="mounted"
+                v-model="modeTab"
+                data-keep-panels
+                :items="modeTabItems"
+                :content="false"
+                :size="modeTabsSize"
+                color="primary"
+                class="shrink-0"
+                :ui="{
+                  list: 'ring ring-accented ring-inset'
+                }"
+              />
+              <span v-else class="shrink-0 w-17" />
             </UTooltip>
 
             <span class="flex-1" />

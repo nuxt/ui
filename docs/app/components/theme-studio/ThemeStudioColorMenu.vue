@@ -101,11 +101,11 @@ function isSelected(color: string) {
             @click="selectPalette(alias, color)"
           >
             <template #leading>
+              <!-- a mini 400→600 ramp says more about a palette than one dot -->
               <span
-                class="inline-block size-2 rounded-full bg-(--color-light) dark:bg-(--color-dark)"
+                class="inline-block h-2 w-4 rounded-full"
                 :style="{
-                  '--color-light': `var(--color-${paletteChip(color)}-500)`,
-                  '--color-dark': `var(--color-${paletteChip(color)}-400)`
+                  background: `linear-gradient(to right, var(--color-${paletteChip(color)}-400), var(--color-${paletteChip(color)}-500), var(--color-${paletteChip(color)}-600))`
                 }"
               />
             </template>

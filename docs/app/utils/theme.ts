@@ -15,6 +15,22 @@ export function readLocalStorage<T>(key: string, fallback: T): T {
 export const FONT_WEIGHT_DEFAULTS = { normal: 400, medium: 500, semibold: 600, bold: 700 } as const
 
 /**
+ * Load every listed family once (Google Fonts) so pickers can render
+ * themselves in the faces they offer. Shared by the controls and the
+ * preset menu — whichever mounts first wins.
+ */
+export function loadFontPreviews(fonts: readonly string[]) {
+  if (!import.meta.client || document.getElementById('font-previews')) return
+  const families = fonts.filter(name => name !== 'Public Sans')
+    .map(name => `family=${encodeURIComponent(name)}:wght@400;700`).join('&')
+  const link = document.createElement('link')
+  link.rel = 'stylesheet'
+  link.id = 'font-previews'
+  link.href = `https://fonts.googleapis.com/css2?${families}&display=swap`
+  document.head.appendChild(link)
+}
+
+/**
  * interact-outside handler: clicks on studio chrome marked data-keep-panels
  * (the color-mode switch) must not dismiss an open panel.
  */

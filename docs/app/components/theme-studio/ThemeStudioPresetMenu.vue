@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { resolveAlias, resolveShade } from '../../utils/theme-engine'
-import type { ThemeDoc } from '../../utils/theme-engine'
+import { resolveAlias, resolveShade, SHADES } from '../../utils/theme-engine'
+import type { ThemeDoc, Shade } from '../../utils/theme-engine'
 
-/** The presets dropdown (with per-preset color swatches) plus the shuffle die. */
+/** The presets listbox (theme chips, fonts and ramps) plus the shuffle die. */
 const props = defineProps<{
   /** Button size — the toolbar uses the default, the header picker slims down. */
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
   /**
-   * The studio toolbar opts out of the modal overlay so its color-mode
-   * switch stays clickable (with keepPanels holding the menu open); other
-   * hosts keep the stock dismiss behavior.
+   * The studio toolbar opts out of dismissing on its own chrome so the
+   * color-mode switch stays usable while the list is open; other hosts
+   * keep the stock dismiss behavior.
    */
   keepPanels?: boolean
 }>()
@@ -27,21 +27,48 @@ onMounted(() => {
   mounted.value = true
 })
 
-/** The preset's primary + neutral at 500, straight from its own document. */
-function presetSwatches(doc: ThemeDoc): string[] {
-  const primaryColor = doc.blackAsPrimary ? 'black' : resolveShade(doc, resolveAlias(doc, 'primary'), 500)
-  const neutralColor = resolveShade(doc, resolveAlias(doc, 'neutral'), 500)
-  return [primaryColor, neutralColor].filter((color): color is string => !!color)
+/**
+ * Each row leads with a mini theme chip: the doc's neutral ramp as the
+ * page, its own icon in its primary — the theme in one glance, following
+ * the current color mode (light 50→200 / dark 900→800, primary 500/400).
+ */
+function themeChip(doc: ThemeDoc) {
+  const shade = (alias: 'primary' | 'neutral', step: Shade) => resolveShade(doc, resolveAlias(doc, alias), step)
+  return {
+    '--chip-bg-light': `linear-gradient(135deg, ${shade('neutral', 50)}, ${shade('neutral', 200)})`,
+    '--chip-bg-dark': `linear-gradient(135deg, ${shade('neutral', 900)}, ${shade('neutral', 800)})`,
+    '--chip-icon-light': doc.blackAsPrimary ? 'black' : shade('primary', 500),
+    '--chip-icon-dark': doc.blackAsPrimary ? 'white' : shade('primary', 400)
+  }
+}
+
+/** The doc's working ramp — primary, or the neutral when black leads. */
+function rampStops(doc: ThemeDoc): string[] {
+  const alias = doc.blackAsPrimary ? 'neutral' : 'primary'
+  return SHADES.map(shade => resolveShade(doc, resolveAlias(doc, alias), shade)).filter((color): color is string => !!color)
 }
 
 const presetItems = computed(() => presets.map(preset => ({
+  id: preset.id,
   label: preset.name,
-  icon: preset.icon,
-  type: 'checkbox' as const,
-  checked: activePreset.value === preset.id,
-  swatches: presetSwatches(preset.doc),
-  onSelect: () => applyPreset(preset)
+  chipIcon: preset.icon,
+  themeChip: themeChip(preset.doc),
+  font: preset.doc.font?.sans ?? 'Public Sans',
+  ramp: rampStops(preset.doc)
 })))
+
+// the rows render their own font names — load the faces once
+const { fonts } = useTheme()
+onMounted(() => loadFontPreviews(fonts))
+
+const selected = computed({
+  get: () => activePreset.value,
+  set: (id: string | undefined) => {
+    const preset = presets.find(entry => entry.id === id)
+    if (preset) applyPreset(preset)
+    open.value = false
+  }
+})
 
 // the boolean prop shadows the util in template scope — alias the handler
 const onKeepPanels = keepPanels
@@ -57,13 +84,10 @@ const presetLabel = computed(() => {
 
 <template>
   <div class="flex gap-2">
-    <UDropdownMenu
+    <UPopover
       v-model:open="open"
-      :items="presetItems"
-      :modal="!props.keepPanels"
       :content="props.keepPanels ? { align: 'start', onInteractOutside: onKeepPanels } : { align: 'start' }"
       class="flex-1 min-w-0"
-      :ui="{ itemTrailing: 'self-center', content: 'w-(--reka-dropdown-menu-trigger-width)' }"
     >
       <UButton
         :label="presetLabel"
@@ -75,17 +99,38 @@ const presetLabel = computed(() => {
         block
       />
 
-      <template #item-trailing="{ item }">
-        <span class="inline-flex items-center gap-1 h-full">
-          <span
-            v-for="(swatch, index) in item.swatches"
-            :key="index"
-            class="size-2 rounded-full ring ring-default"
-            :style="{ backgroundColor: swatch }"
-          />
-        </span>
+      <template #content>
+        <UListbox
+          v-model="selected"
+          :items="presetItems"
+          value-key="id"
+          class="w-80"
+          :ui="{
+            item: 'gap-3'
+          }"
+        >
+          <template #item-leading="{ item }">
+            <span
+              class="flex items-center justify-center size-9 rounded-md ring ring-default shrink-0 bg-[image:var(--chip-bg-light)] dark:bg-[image:var(--chip-bg-dark)]"
+              :style="item.themeChip"
+            >
+              <UIcon :name="item.chipIcon" class="size-4 text-(--chip-icon-light) dark:text-(--chip-icon-dark)" />
+            </span>
+          </template>
+
+          <!-- the doc's font in its own face beside its working ramp -->
+          <template #item-description="{ item }">
+            <span class="flex items-center gap-2 pt-0.5">
+              <span class="text-xs text-muted truncate" :style="{ fontFamily: `'${item.font}', sans-serif` }">{{ item.font }}</span>
+
+              <span class="flex flex-1 h-1.5 rounded-full overflow-hidden ring ring-default min-w-0">
+                <span v-for="(stop, index) in item.ramp" :key="index" class="flex-1" :style="{ backgroundColor: stop }" />
+              </span>
+            </span>
+          </template>
+        </UListbox>
       </template>
-    </UDropdownMenu>
+    </UPopover>
 
     <UTooltip text="Random theme">
       <UButton

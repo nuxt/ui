@@ -24,17 +24,7 @@ const { style, setStyle, primaryChip, neutralChip } = useThemeStudio()
 
 /* ------------------------------------------------------------ typography -- */
 
-/** Every listed family, loaded once so the pickers can preview themselves. */
-onMounted(() => {
-  if (document.getElementById('font-previews')) return
-  const families = fonts.filter(name => name !== 'Public Sans')
-    .map(name => `family=${encodeURIComponent(name)}:wght@400;700`).join('&')
-  const link = document.createElement('link')
-  link.rel = 'stylesheet'
-  link.id = 'font-previews'
-  link.href = `https://fonts.googleapis.com/css2?${families}&display=swap`
-  document.head.appendChild(link)
-})
+onMounted(() => loadFontPreviews(fonts))
 
 // One writable model per tailwind weight step — the knobs components
 // actually dereference at runtime.
@@ -130,6 +120,9 @@ const fontRows = [{
   aria: { weights: 'Heading weight', uppercase: 'Uppercase headings', spacing: 'Heading letter spacing', height: 'Heading line height' }
 }]
 
+/** Font listbox popovers close on pick — one open flag per row. */
+const fontListOpen = reactive<Record<string, boolean>>({ base: false, heading: false })
+
 /** Live specimen: a heading line in the heading treatment over a body line. */
 const headingSampleStyle = computed(() => ({
   fontFamily: `'${fontPrefs.value.heading?.font ?? font.value}', sans-serif`,
@@ -157,6 +150,14 @@ const iconPreviews = computed(() => {
   const set = (themeIcons as Record<string, Record<string, string>>)[icon.value] || {}
   return SAMPLE_ICON_KEYS.map(key => set[key]).filter((name): name is string => !!name).slice(0, 20)
 })
+
+/** A short strip of a set's own glyphs for its listbox row. */
+function iconSetSamples(setName: string): string[] {
+  const set = (themeIcons as Record<string, Record<string, string>>)[setName] || {}
+  return ['search', 'check', 'warning', 'light', 'dark', 'star', 'folder', 'upload'].map(key => set[key]).filter((name): name is string => !!name)
+}
+
+const iconListOpen = ref(false)
 
 const semanticAliases: ColorAlias[] = ['secondary', 'success', 'info', 'warning', 'error']
 
@@ -584,19 +585,46 @@ const shadowSections = [{
               <span class="text-xs font-semibold text-muted select-none" :class="row.key === 'heading' && 'pt-1'">{{ row.label }}</span>
 
               <div class="flex items-center gap-1.5">
-                <USelect
-                  v-model="row.font.value"
-                  size="sm"
-                  color="neutral"
-                  variant="subtle"
-                  :icon="row.selectIcon"
-                  :items="row.items.value"
-                  class="flex-1 min-w-0"
-                >
-                  <template #item-label="{ item }">
-                    <span :style="item.value === 'inherit' ? undefined : { fontFamily: `'${item.value}', sans-serif` }">{{ item.label }}</span>
+                <UPopover v-model:open="fontListOpen[row.key]" :content="{ align: 'start' }" class="flex-1 min-w-0">
+                  <UButton
+                    color="neutral"
+                    variant="subtle"
+                    size="sm"
+                    block
+                    :icon="row.selectIcon"
+                    trailing-icon="i-lucide-chevron-down"
+                    :ui="{ label: 'flex-1 text-left truncate' }"
+                    :aria-label="`${row.label} font`"
+                  >
+                    <span
+                      class="truncate"
+                      :style="row.font.value === 'inherit' ? undefined : { fontFamily: `'${row.font.value}', sans-serif` }"
+                    >{{ row.items.value.find(item => item.value === row.font.value)?.label ?? row.font.value }}</span>
+                  </UButton>
+
+                  <template #content>
+                    <!-- each family renders itself over a live specimen line -->
+                    <UListbox
+                      v-model="row.font.value"
+                      :items="row.items.value"
+                      value-key="value"
+                      class="w-72 max-h-80 overflow-y-auto"
+                      @update:model-value="fontListOpen[row.key] = false"
+                    >
+                      <template #item-label="{ item }">
+                        <span :style="item.value === 'inherit' ? undefined : { fontFamily: `'${item.value}', sans-serif` }">{{ item.label }}</span>
+                      </template>
+
+                      <template #item-description="{ item }">
+                        <span
+                          v-if="item.value !== 'inherit'"
+                          class="text-xs text-muted truncate"
+                          :style="{ fontFamily: `'${item.value}', sans-serif` }"
+                        >Grumpy wizards make toxic brew</span>
+                      </template>
+                    </UListbox>
                   </template>
-                </USelect>
+                </UPopover>
 
                 <UFieldGroup size="sm">
                   <UPopover :content="{ align: 'start' }">
@@ -705,16 +733,41 @@ const shadowSections = [{
               <UIcon v-for="name in iconPreviews" :key="name" :name="name" class="size-4 text-muted" />
             </div>
 
-            <USelect
-              v-model="icon"
-              size="sm"
-              color="neutral"
-              variant="subtle"
-              :icon="icons.find(i => i.value === icon)?.icon"
-              :items="icons"
-              class="w-full capitalize"
-              :ui="{ item: 'capitalize' }"
-            />
+            <UPopover v-model:open="iconListOpen" :content="{ align: 'start' }">
+              <UButton
+                color="neutral"
+                variant="subtle"
+                size="sm"
+                block
+                :icon="icons.find(i => i.value === icon)?.icon"
+                trailing-icon="i-lucide-chevron-down"
+                :label="icons.find(i => i.value === icon)?.label"
+                :ui="{ label: 'flex-1 text-left' }"
+                aria-label="Icon set"
+              />
+
+              <template #content>
+                <!-- every set previews a strip of its own glyphs -->
+                <UListbox
+                  v-model="icon"
+                  :items="icons"
+                  value-key="value"
+                  class="w-72 max-h-80 overflow-y-auto"
+                  @update:model-value="iconListOpen = false"
+                >
+                  <template #item-description="{ item }">
+                    <span class="flex items-center gap-1.5 pt-0.5">
+                      <UIcon
+                        v-for="name in iconSetSamples(item.value)"
+                        :key="name"
+                        :name="name"
+                        class="size-3.5 text-muted"
+                      />
+                    </span>
+                  </template>
+                </UListbox>
+              </template>
+            </UPopover>
           </div>
         </ThemeStudioSection>
 
