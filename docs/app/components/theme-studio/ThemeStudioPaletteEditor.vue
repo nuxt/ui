@@ -105,12 +105,39 @@ function togglePin(shade: number) {
   pinnedShade.value = pinnedShade.value === shade ? undefined : shade
 }
 
-/** Reka-side dismissals (Esc, outside click) clear pin and hover both. */
+/**
+ * Reka emits update:open(false) for trigger clicks as well as dismissals —
+ * clearing the pin here would race togglePin into re-pinning. Only hover
+ * intent clears; the pin is released by togglePin or Esc alone.
+ */
 function onSwatchOpenUpdate(shade: number, open: boolean) {
   if (open) return
-  if (pinnedShade.value === shade) pinnedShade.value = undefined
   if (hoveredShade.value === shade) hoveredShade.value = undefined
 }
+
+function onSwatchEscape(shade: number) {
+  if (pinnedShade.value === shade) pinnedShade.value = undefined
+}
+
+/**
+ * A closing hover-popover would return focus to its trigger tile — Reka
+ * treats that focusin as focus-outside on the popover that just opened and
+ * dismisses it (hover A→B closed B). Only keyboard flows (focus actually
+ * inside the closing content) keep the focus return.
+ */
+function onSwatchCloseAutoFocus(event: Event) {
+  // "inside a popper wrapper" is not enough — the whole palette editor
+  // lives in the Colors panel's wrapper. Only a swatch DETAIL popover
+  // (recognizable by its copy button) marks a keyboard flow.
+  const wrapper = document.activeElement?.closest('[data-reka-popper-content-wrapper]')
+  if (!wrapper?.querySelector('[aria-label^="Copy oklch"]')) {
+    event.preventDefault()
+  }
+}
+
+/** The strip element — every swatch popover anchors to it, not its tile. */
+const stripRef = useTemplateRef<HTMLElement>('stripRef')
+const stripEl = computed(() => stripRef.value ?? undefined)
 
 /**
  * Every axis is a fixed 1:1 window — the full physical range fits the
@@ -323,13 +350,17 @@ function resetEffects() {
             @drag-end="onDragEnd"
           />
 
-          <div class="flex rounded-b-sm overflow-hidden ring ring-default">
+          <div ref="stripRef" class="flex rounded-b-sm overflow-hidden ring ring-default">
             <UPopover
               v-for="info in swatchInfo"
               :key="info.shade"
+              arrow
               :open="pinnedShade === info.shade || hoveredShade === info.shade"
+              :reference="stripEl"
               :content="{
-                side: 'right',
+                side: 'top',
+                onEscapeKeyDown: () => onSwatchEscape(info.shade),
+                onCloseAutoFocus: onSwatchCloseAutoFocus,
                 sideOffset: 0,
                 // hover-opened popovers must not steal focus; a pinned one
                 // takes it so Tab lands on the copy/pin buttons

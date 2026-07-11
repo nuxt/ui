@@ -33,5 +33,36 @@ const usernames = [
         +300
       </div>
     </div>
+
+    <USeparator />
+
+    <div class="flex items-start justify-between">
+      <p class="font-semibold text-highlighted">
+        Un-contributors
+      </p>
+      <UBadge color="neutral" variant="subtle">
+        -1
+      </UBadge>
+    </div>
+
+    <!-- easter egg: the studio's builder -->
+    <div class="flex items-center justify-between gap-3">
+      <UUser
+        name="Mike Newbon"
+        description="@mikenewbon"
+        :avatar="{ src: 'https://github.com/mikenewbon.png', alt: 'mikenewbon' }"
+        size="sm"
+      />
+
+      <UButton
+        icon="i-simple-icons-github"
+        color="neutral"
+        variant="outline"
+        size="xs"
+        to="https://github.com/mikenewbon"
+        target="_blank"
+        aria-label="Find Mike Newbon on GitHub"
+      />
+    </div>
   </div>
 </template>
