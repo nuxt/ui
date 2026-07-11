@@ -37,6 +37,16 @@ const presetItems = computed(() => presets.map(preset => ({
   onSelect: () => applyPreset(preset)
 })))
 
+/**
+ * Toolbar chrome marked data-keep-panels (the color-mode switch) must stay
+ * clickable and non-dismissing while the menu is open — hence non-modal.
+ */
+function keepPanels(event: Event) {
+  if ((event.target as HTMLElement | null)?.closest?.('[data-keep-panels]')) {
+    event.preventDefault()
+  }
+}
+
 /** The applied preset's name; 'Custom' once edits diverge from it. */
 const presetLabel = computed(() => {
   if (!mounted.value) return 'Presets'
@@ -51,7 +61,8 @@ const presetLabel = computed(() => {
     <UDropdownMenu
       v-model:open="open"
       :items="presetItems"
-      :content="{ align: 'start' }"
+      :modal="false"
+      :content="{ align: 'start', onInteractOutside: keepPanels }"
       class="flex-1 min-w-0"
       :ui="{ itemTrailing: 'self-center', content: 'w-(--reka-dropdown-menu-trigger-width)' }"
     >

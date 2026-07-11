@@ -56,7 +56,7 @@ const display = computed(() => shade.value
     size="xs"
     :style="sliderColor ? { '--slider-color': sliderColor, '--slider-contrast': contrastColor } : undefined"
     :ui="{
-      root: 'flex items-center gap-2',
+      root: 'flex items-center gap-2 px-1',
       wrapper: 'w-13 shrink-0',
       /* truncate only text labels — its overflow:hidden would clip the
          shade chip's ring once thick-border themes inflate it */

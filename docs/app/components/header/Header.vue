@@ -94,6 +94,7 @@ const studioMenuLinks = [{
           v-model="view"
           :items="views"
           :content="false"
+          size="sm"
           color="primary"
         />
       </template>
@@ -101,6 +102,7 @@ const studioMenuLinks = [{
       <template #pages-content>
         <UNavigationMenu
           orientation="vertical"
+          size="sm"
           :items="studioMenuLinks"
           class="p-2"
         />

@@ -30,11 +30,30 @@ watch(() => (mounted.value ? JSON.stringify(currentDoc()) : undefined), (snapsho
   captureTimeout = setTimeout(() => capture(snapshot), 350)
 })
 
+// Shift+D flips the mode without a click, so open panels survive the
+// switch (defineShortcuts already defers while an input has focus).
+const colorMode = useColorMode()
+function toggleColorMode() {
+  colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'
+}
+
 defineShortcuts({
   meta_z: undo,
   meta_shift_z: redo,
-  ctrl_y: redo
+  ctrl_y: redo,
+  shift_d: toggleColorMode
 })
+
+/**
+ * Clicking toolbar chrome marked data-keep-panels (the color-mode switch)
+ * must not dismiss an open panel — flipping the mode while tuning colors is
+ * the studio's core loop.
+ */
+function keepPanels(event: Event) {
+  if ((event.target as HTMLElement | null)?.closest?.('[data-keep-panels]')) {
+    event.preventDefault()
+  }
+}
 
 // Esc exits fullscreen — but NOT through defineShortcuts, which
 // preventDefaults every matched key and would stop Reka's dismissable
@@ -103,19 +122,18 @@ const shareMode = ref<'import' | 'export'>('export')
        the page tint composites on top of it. -->
   <main class="bg-elevated/25">
     <UContainer :class="fullscreen && 'max-w-none px-0 sm:px-0 lg:px-0'">
-      <div class="flex flex-col w-full" :class="fullscreen ? 'h-dvh' : 'h-[calc(100dvh-var(--ui-header-height))]'">
-        <!-- The floating preview card: the grid scrolls inside it; the
-             app-shell views own their height and scroll internally.
-             [&>*]:rounded-[inherit] + [contain:paint] put the radius and
-             hard paint containment on the views' own scrollers — Chromium
-             won't clip nested composited layers (sticky headers, filtered
-             glows) by an ancestor's radius or overflow alone. -->
+      <!-- Structured borders (like /releases and /templates): border-x rails
+           run from the header's bottom border to the viewport bottom at the
+           container's padding edge — no floating card. -->
+      <div class="flex flex-col w-full" :class="fullscreen ? 'h-dvh' : 'h-[calc(100dvh-var(--ui-header-height))] border-x border-default bg-default'">
+        <!-- The preview: the grid scrolls inside it; the app-shell views own
+             their height and scroll internally. [contain:paint] puts hard
+             paint containment on the views' own scrollers — Chromium won't
+             clip nested composited layers (sticky headers, filtered glows)
+             by an ancestor's overflow alone. -->
         <div
-          class="flex-1 min-w-0 min-h-0 bg-default [&>*]:rounded-[inherit] [&>*]:[contain:paint]"
-          :class="[
-            view === 'grid' ? 'overflow-y-auto' : 'overflow-hidden',
-            fullscreen ? 'rounded-none' : 'ring ring-default mt-4 rounded-lg'
-          ]"
+          class="flex-1 min-w-0 min-h-0 bg-default [&>*]:[contain:paint]"
+          :class="view === 'grid' ? 'overflow-y-auto' : 'overflow-hidden'"
         >
           <Playground v-if="view === 'grid'" class="py-4" />
           <ThemeStudioViewDashboard v-else-if="view === 'dashboard'" />
@@ -139,10 +157,10 @@ const shareMode = ref<'import' | 'export'>('export')
 
           <div
             class="flex items-center gap-2 p-3 overflow-x-auto"
-            :class="fullscreen && [
+            :class="fullscreen ? [
               'mt-4 rounded-t-lg bg-default/75 backdrop-blur ring ring-default shadow-lg pointer-events-auto transition-transform duration-200',
               toolbarPinned ? 'translate-y-0' : 'translate-y-[calc(100%+6px)] group-hover:translate-y-0 group-focus-within:translate-y-0'
-            ]"
+            ] : 'border-t border-default'"
           >
             <ThemeStudioPresetMenu v-model:open="openPanels.presets" class="w-56 shrink-0" />
 
@@ -150,7 +168,7 @@ const shareMode = ref<'import' | 'export'>('export')
               v-for="settingGroup in settingGroups"
               :key="settingGroup.value"
               v-model:open="openPanels[settingGroup.value]"
-              :content="{ align: 'start' }"
+              :content="{ align: 'start', onInteractOutside: keepPanels }"
             >
               <UButton
                 :label="settingGroup.label"
@@ -160,11 +178,13 @@ const shareMode = ref<'import' | 'export'>('export')
               />
 
               <template #content>
-                <ThemeStudioControls :group="settingGroup.value" class="w-80 max-h-[70vh] overflow-y-auto p-4" />
+                <ThemeStudioControls :group="settingGroup.value" class="w-80 max-h-[70vh] overflow-y-auto" />
               </template>
             </UPopover>
 
-            <UColorModeSwitch class="shrink-0" />
+            <UTooltip text="Color mode" :kbds="['shift', 'D']">
+              <UColorModeSwitch data-keep-panels class="shrink-0" />
+            </UTooltip>
 
             <span class="flex-1" />
 

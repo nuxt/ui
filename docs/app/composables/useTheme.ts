@@ -201,7 +201,7 @@ export function useTheme() {
     }
   })
 
-  const fonts = ['Public Sans', 'Comic Neue', 'DM Sans', 'Geist', 'Inter', 'Poppins', 'Outfit', 'Raleway']
+  const fonts = ['Public Sans', 'Comic Neue', 'DM Sans', 'Geist', 'Inter', 'Poppins', 'Outfit', 'Raleway', 'Roboto']
 
   const font = computed({
     get() {
@@ -218,9 +218,29 @@ export function useTheme() {
     icon: 'i-lucide-feather',
     value: 'lucide'
   }, {
+    label: 'Bootstrap',
+    icon: 'i-bi-bootstrap',
+    value: 'bootstrap'
+  }, {
+    label: 'Heroicons',
+    icon: 'i-simple-icons-tailwindcss',
+    value: 'heroicons'
+  }, {
+    label: 'Iconoir',
+    icon: 'i-iconoir-iconoir',
+    value: 'iconoir'
+  }, {
+    label: 'Material Symbols',
+    icon: 'i-simple-icons-materialdesign',
+    value: 'material'
+  }, {
     label: 'Phosphor',
     icon: 'i-ph-phosphor-logo',
     value: 'phosphor'
+  }, {
+    label: 'Remix',
+    icon: 'i-ri-remixicon-line',
+    value: 'remix'
   }, {
     label: 'Tabler',
     icon: 'i-tabler-brand-tabler',

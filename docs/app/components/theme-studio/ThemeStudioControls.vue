@@ -71,24 +71,9 @@ const headingUppercase = computed({
   set: (value: boolean) => setHeading({ uppercase: value })
 })
 
-const headingItalic = computed({
-  get: () => !!fontPrefs.value.heading?.italic,
-  set: (value: boolean) => setHeading({ italic: value })
-})
-
 const baseUppercase = computed({
   get: () => !!fontPrefs.value.uppercase,
   set: (value: boolean) => setFontPrefs({ ...fontPrefs.value, uppercase: value })
-})
-
-const baseItalic = computed({
-  get: () => !!fontPrefs.value.italic,
-  set: (value: boolean) => setFontPrefs({ ...fontPrefs.value, italic: value })
-})
-
-const headingUnderline = computed({
-  get: () => !!fontPrefs.value.heading?.underline,
-  set: (value: boolean) => setHeading({ underline: value })
 })
 
 const baseLetterSpacing = computed({
@@ -406,16 +391,17 @@ const shadowColor = computed({
 <template>
   <div :key="hydrationKey">
     <template v-if="group === 'colors'">
-      <div class="flex flex-col gap-4">
-        <ThemeStudioColorSection alias="primary" help-to="/docs/getting-started/theme/css-variables#colors" />
+      <!-- Sections own their padding so the separators run edge to edge. -->
+      <div class="flex flex-col">
+        <ThemeStudioColorSection alias="primary" help-to="/docs/getting-started/theme/css-variables#colors" class="p-4" />
 
         <USeparator />
 
-        <ThemeStudioColorSection alias="neutral" help-to="/docs/getting-started/theme/css-variables#text" />
+        <ThemeStudioColorSection alias="neutral" help-to="/docs/getting-started/theme/css-variables#text" class="p-4" />
 
         <USeparator />
 
-        <ThemeStudioSection label="Semantic" help-to="/docs/getting-started/theme/design-system" :default-open="false">
+        <ThemeStudioSection label="Semantic" help-to="/docs/getting-started/theme/design-system" :default-open="false" class="p-4">
           <div class="flex flex-col gap-3 pt-1">
             <ThemeStudioColorSection v-for="alias in semanticAliases" :key="alias" :alias="alias" />
           </div>
@@ -424,8 +410,8 @@ const shadowColor = computed({
     </template>
 
     <template v-else-if="group === 'style'">
-      <div class="flex flex-col gap-4">
-        <ThemeStudioSection label="Shadow">
+      <div class="flex flex-col">
+        <ThemeStudioSection label="Shadow" class="p-4">
           <div>
             <UTabs
               v-model="shadowStyle"
@@ -484,7 +470,7 @@ const shadowColor = computed({
 
         <USeparator />
 
-        <ThemeStudioSection label="Inner shadow">
+        <ThemeStudioSection label="Inner shadow" class="p-4">
           <div>
             <UTabs
               v-model="innerShadowStyle"
@@ -543,7 +529,7 @@ const shadowColor = computed({
 
         <USeparator />
 
-        <ThemeStudioSection label="Borders">
+        <ThemeStudioSection label="Borders" class="p-4">
           <div>
             <UTabs
               v-model="borderStyle"
@@ -598,8 +584,8 @@ const shadowColor = computed({
     </template>
 
     <template v-else-if="group === 'general'">
-      <div class="flex flex-col gap-4">
-        <ThemeStudioSection label="Font" help-to="/docs/getting-started/integrations/fonts">
+      <div class="flex flex-col">
+        <ThemeStudioSection label="Font" help-to="/docs/getting-started/integrations/fonts" class="p-4">
           <div class="flex flex-col gap-2">
             <!-- live specimen: the heading treatment over the base body -->
             <div class="rounded-md ring ring-default bg-elevated/50 px-3 py-2 select-none">
@@ -613,22 +599,21 @@ const shadowColor = computed({
 
             <span class="text-xs font-semibold text-muted select-none">Base</span>
 
-            <USelect
-              v-model="font"
-              size="sm"
-              color="neutral"
-              variant="subtle"
-              icon="i-lucide-type"
-              :items="fonts"
-              class="w-full"
-            >
-              <template #item-label="{ item }">
-                <span :style="{ fontFamily: `'${item}', sans-serif` }">{{ item }}</span>
-              </template>
-            </USelect>
-
             <div class="flex items-center gap-1.5">
-              <!-- face -->
+              <USelect
+                v-model="font"
+                size="sm"
+                color="neutral"
+                variant="subtle"
+                icon="i-lucide-type"
+                :items="fonts"
+                class="flex-1 min-w-0"
+              >
+                <template #item-label="{ item }">
+                  <span :style="{ fontFamily: `'${item}', sans-serif` }">{{ item }}</span>
+                </template>
+              </USelect>
+
               <UFieldGroup size="sm">
                 <UPopover :content="{ align: 'start' }">
                   <UTooltip text="Weights">
@@ -658,22 +643,6 @@ const shadowColor = computed({
                   </template>
                 </UPopover>
 
-                <UTooltip text="Italic">
-                  <UButton
-                    icon="i-lucide-italic"
-                    color="neutral"
-                    variant="subtle"
-                    :active="baseItalic"
-                    active-color="primary"
-                    active-variant="subtle"
-                    aria-label="Italic text"
-                    @click="baseItalic = !baseItalic"
-                  />
-                </UTooltip>
-              </UFieldGroup>
-
-              <!-- glyph treatment -->
-              <UFieldGroup size="sm">
                 <UTooltip text="Uppercase">
                   <UButton
                     icon="i-lucide-case-upper"
@@ -686,10 +655,6 @@ const shadowColor = computed({
                     @click="baseUppercase = !baseUppercase"
                   />
                 </UTooltip>
-              </UFieldGroup>
-
-              <!-- rhythm -->
-              <UFieldGroup size="sm">
                 <UPopover :content="{ align: 'start' }">
                   <UTooltip text="Letter spacing">
                     <UButton
@@ -745,22 +710,21 @@ const shadowColor = computed({
 
             <span class="text-xs font-semibold text-muted select-none pt-1">Headings (Prose)</span>
 
-            <USelect
-              v-model="headingFont"
-              size="sm"
-              color="neutral"
-              variant="subtle"
-              icon="i-lucide-heading"
-              :items="headingFontItems"
-              class="w-full"
-            >
-              <template #item-label="{ item }">
-                <span :style="item.value === 'inherit' ? undefined : { fontFamily: `'${item.value}', sans-serif` }">{{ item.label }}</span>
-              </template>
-            </USelect>
-
             <div class="flex items-center gap-1.5">
-              <!-- face -->
+              <USelect
+                v-model="headingFont"
+                size="sm"
+                color="neutral"
+                variant="subtle"
+                icon="i-lucide-heading"
+                :items="headingFontItems"
+                class="flex-1 min-w-0"
+              >
+                <template #item-label="{ item }">
+                  <span :style="item.value === 'inherit' ? undefined : { fontFamily: `'${item.value}', sans-serif` }">{{ item.label }}</span>
+                </template>
+              </USelect>
+
               <UFieldGroup size="sm">
                 <UPopover :content="{ align: 'start' }">
                   <UTooltip text="Weight">
@@ -787,50 +751,18 @@ const shadowColor = computed({
                   </template>
                 </UPopover>
 
-                <UTooltip text="Italic">
+                <UTooltip text="Uppercase">
                   <UButton
-                    icon="i-lucide-italic"
+                    icon="i-lucide-case-upper"
                     color="neutral"
                     variant="subtle"
-                    :active="headingItalic"
+                    :active="headingUppercase"
                     active-color="primary"
                     active-variant="subtle"
-                    aria-label="Italic headings"
-                    @click="headingItalic = !headingItalic"
+                    aria-label="Uppercase headings"
+                    @click="headingUppercase = !headingUppercase"
                   />
                 </UTooltip>
-
-                <UTooltip text="Underline">
-                  <UButton
-                    icon="i-lucide-underline"
-                    color="neutral"
-                    variant="subtle"
-                    :active="headingUnderline"
-                    active-color="primary"
-                    active-variant="subtle"
-                    aria-label="Underline headings"
-                    @click="headingUnderline = !headingUnderline"
-                  />
-                </UTooltip>
-              </UFieldGroup>
-
-              <!-- glyph treatment -->
-              <UTooltip text="Uppercase">
-                <UButton
-                  icon="i-lucide-case-upper"
-                  color="neutral"
-                  variant="subtle"
-                  size="sm"
-                  :active="headingUppercase"
-                  active-color="primary"
-                  active-variant="subtle"
-                  aria-label="Uppercase headings"
-                  @click="headingUppercase = !headingUppercase"
-                />
-              </UTooltip>
-
-              <!-- rhythm -->
-              <UFieldGroup size="sm">
                 <UPopover :content="{ align: 'start' }">
                   <UTooltip text="Letter spacing">
                     <UButton
@@ -888,7 +820,7 @@ const shadowColor = computed({
 
         <USeparator />
 
-        <ThemeStudioSection label="Icons" help-to="/docs/getting-started/integrations/icons">
+        <ThemeStudioSection label="Icons" help-to="/docs/getting-started/integrations/icons" class="p-4">
           <div class="flex flex-col gap-2">
             <!-- a spread of the selected set -->
             <div class="rounded-md ring ring-default bg-elevated/50 px-3 py-2 flex flex-wrap justify-center gap-2.5">
@@ -910,7 +842,7 @@ const shadowColor = computed({
 
         <USeparator />
 
-        <ThemeStudioSection label="Scale">
+        <ThemeStudioSection label="Scale" class="p-4">
           <div class="flex flex-col gap-2">
             <ThemeStudioSliderRow
               v-model="radius"
@@ -951,7 +883,7 @@ const shadowColor = computed({
         <USeparator />
 
         <template v-for="field in variantGroupFields" :key="field.key">
-          <ThemeStudioSection :label="field.label" :default-open="false">
+          <ThemeStudioSection :label="field.label" :default-open="false" class="p-4">
             <div class="flex flex-col gap-1.5">
               <div class="flex items-center gap-2">
                 <span class="text-xs text-muted w-13 shrink-0 select-none">Variant</span>

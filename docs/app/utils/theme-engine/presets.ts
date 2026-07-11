@@ -137,7 +137,6 @@ export const presets: ThemePreset[] = [{
       primary: 'orange',
       neutral: 'grove'
     },
-    radius: 0.5,
     font: { sans: 'DM Sans' },
     tokens: {
       light: {
@@ -467,5 +466,163 @@ export const presets: ThemePreset[] = [{
         }
       }
     }
+  }
+}, {
+  id: 'bootstrap',
+  name: 'Bootstrap',
+  description: 'The Bootstrap 5 look — its blue, its grays, .375rem corners, flat bordered surfaces.',
+  icon: 'i-simple-icons-bootstrap',
+  doc: {
+    version: 1,
+    meta: { name: 'Bootstrap', base: 'bootstrap' },
+    // The real 5.3 scales: 100–400 are tint-color() (mix with white at
+    // 80/60/40/20%), 600–900 are shade-color() (mix with black), extended
+    // to 50/950 with the same math. The names deliberately shadow the
+    // tailwind ramps — inside this theme, blue IS Bootstrap blue.
+    palettes: {
+      blue: {
+        shades: {
+          50: 'oklch(95.3% 0.022 260.723)',
+          100: 'oklch(90.8% 0.045 258.763)',
+          200: 'oklch(81.6% 0.091 257.776)',
+          300: 'oklch(72.9% 0.14 258.068)',
+          400: 'oklch(64.7% 0.186 258.256)',
+          500: 'oklch(57.8% 0.228 260.025)',
+          600: 'oklch(49.2% 0.19 259.799)',
+          700: 'oklch(40.2% 0.152 259.656)',
+          800: 'oklch(30.7% 0.109 258.934)',
+          900: 'oklch(20.4% 0.063 257.52)',
+          950: 'oklch(95.3% 0.022 260.723)'
+        }
+      },
+      // $gray-100…$gray-900 verbatim, with 50/950 extrapolated.
+      gray: {
+        shades: {
+          50: 'oklch(99.1% 0 0)',
+          100: 'oklch(98.2% 0.002 247.839)',
+          200: 'oklch(94.2% 0.005 247.879)',
+          300: 'oklch(91.1% 0.007 247.901)',
+          400: 'oklch(86.7% 0.011 247.949)',
+          500: 'oklch(76.9% 0.015 248.017)',
+          600: 'oklch(55.8% 0.016 244.893)',
+          700: 'oklch(42.8% 0.015 248.172)',
+          800: 'oklch(34.5% 0.013 248.212)',
+          900: 'oklch(26.2% 0.009 248.19)',
+          950: 'oklch(99.1% 0 0)'
+        }
+      },
+      green: {
+        shades: {
+          50: 'oklch(95.5% 0.013 167.173)',
+          100: 'oklch(90.9% 0.027 166.725)',
+          200: 'oklch(81.7% 0.054 165.592)',
+          300: 'oklch(72.6% 0.082 163.174)',
+          400: 'oklch(63.7% 0.106 160.921)',
+          500: 'oklch(55.2% 0.123 157.012)',
+          600: 'oklch(47.1% 0.104 157.226)',
+          700: 'oklch(38.6% 0.083 157.541)',
+          800: 'oklch(29.7% 0.06 159.192)',
+          900: 'oklch(20% 0.035 161.761)',
+          950: 'oklch(95.5% 0.013 167.173)'
+        }
+      },
+      red: {
+        shades: {
+          50: 'oklch(95.4% 0.019 13.379)',
+          100: 'oklch(90.7% 0.037 11.626)',
+          200: 'oklch(81.5% 0.079 12.026)',
+          300: 'oklch(73% 0.123 14.804)',
+          400: 'oklch(65.2% 0.167 17.173)',
+          500: 'oklch(59.2% 0.202 21.239)',
+          600: 'oklch(50.2% 0.17 20.933)',
+          700: 'oklch(41% 0.134 20.765)',
+          800: 'oklch(31.2% 0.097 19.17)',
+          900: 'oklch(20.7% 0.055 17.828)',
+          950: 'oklch(95.4% 0.019 13.379)'
+        }
+      },
+      yellow: {
+        shades: {
+          50: 'oklch(98.2% 0.026 92.389)',
+          100: 'oklch(96.4% 0.051 92.554)',
+          200: 'oklch(92.9% 0.097 91.534)',
+          300: 'oklch(89.8% 0.137 91.178)',
+          400: 'oklch(86.9% 0.162 88.789)',
+          500: 'oklch(84.4% 0.172 84.934)',
+          600: 'oklch(71.4% 0.145 85.028)',
+          700: 'oklch(58% 0.118 86.024)',
+          800: 'oklch(43.5% 0.088 86.646)',
+          900: 'oklch(27.9% 0.056 90.569)',
+          950: 'oklch(98.2% 0.026 92.389)'
+        }
+      },
+      cyan: {
+        shades: {
+          50: 'oklch(97.2% 0.021 211.758)',
+          100: 'oklch(94.3% 0.04 212.228)',
+          200: 'oklch(89.3% 0.077 211.321)',
+          300: 'oklch(84.6% 0.107 212.793)',
+          400: 'oklch(80.8% 0.129 214.292)',
+          500: 'oklch(77.5% 0.138 218.055)',
+          600: 'oklch(65.8% 0.116 217.451)',
+          700: 'oklch(53.2% 0.094 217.564)',
+          800: 'oklch(40.1% 0.07 216.209)',
+          900: 'oklch(25.6% 0.043 215.657)',
+          950: 'oklch(97.2% 0.021 211.758)'
+        }
+      }
+    },
+    // $primary/$secondary/$success/$info/$warning/$danger — secondary is
+    // literally $gray-600, so the gray ramp serves both roles.
+    colors: {
+      primary: 'blue',
+      secondary: 'gray',
+      success: 'green',
+      info: 'cyan',
+      warning: 'yellow',
+      error: 'red',
+      neutral: 'gray'
+    },
+    radius: 0.375,
+    // system-ui stack in the sources; Roboto is its named web fallback.
+    // $headings-font-weight: 500.
+    font: { sans: 'Roboto', heading: { weight: 500 } },
+    icons: 'bootstrap',
+    // Light rides the gray ramp one step deeper than stock (page on gray-100,
+    // surfaces stepped 200/300) with a single strong border family.
+    tokens: {
+      light: {
+        '--ui-success': 'var(--ui-color-success-400)',
+        '--ui-bg-muted': 'var(--ui-color-neutral-200)',
+        '--ui-text': 'var(--ui-color-neutral-800)',
+        '--ui-border': 'var(--ui-color-neutral-400)',
+        '--ui-border-muted': 'var(--ui-color-neutral-300)',
+        '--ui-bg': 'var(--ui-color-neutral-100)',
+        '--ui-text-toned': 'var(--ui-color-neutral-700)',
+        '--ui-text-muted': 'var(--ui-color-neutral-600)',
+        '--ui-text-dimmed': 'var(--ui-color-neutral-600)',
+        '--ui-bg-elevated': 'var(--ui-color-neutral-200)',
+        '--ui-bg-accented': 'var(--ui-color-neutral-300)'
+      },
+      // Dark mode keeps the very same brand colors (--bs-primary stays
+      // #0d6efd); $body-color-dark: $gray-300, $border-color-dark: $gray-700.
+      dark: {
+        '--ui-primary': 'var(--ui-color-primary-500)',
+        '--ui-secondary': 'var(--ui-color-secondary-500)',
+        '--ui-success': 'var(--ui-color-success-500)',
+        '--ui-info': 'var(--ui-color-info-500)',
+        '--ui-warning': 'var(--ui-color-warning-500)',
+        '--ui-error': 'var(--ui-color-error-500)',
+        '--ui-bg-muted': 'var(--ui-color-neutral-700)',
+        '--ui-text': 'var(--ui-color-neutral-300)',
+        '--ui-border': 'var(--ui-color-neutral-800)',
+        '--ui-bg': 'var(--ui-color-neutral-900)',
+        '--ui-bg-elevated': 'var(--ui-color-neutral-800)',
+        '--ui-bg-accented': 'var(--ui-color-neutral-700)'
+      }
+    },
+    // Bootstrap is famously flat: borders, not shadows; subtle cards and
+    // explicit outline inputs.
+    style: { shadow: 'flat', defaults: { variants: { panels: 'subtle', inputs: 'outline' } } }
   }
 }]
