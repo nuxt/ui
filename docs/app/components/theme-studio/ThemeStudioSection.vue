@@ -11,9 +11,17 @@ const props = withDefaults(defineProps<{
   /** Docs page the header's help icon links to */
   helpTo?: string
   defaultOpen?: boolean
+  /**
+   * Shows a reset button that's enabled while the section differs from the
+   * active preset (dirty). Emits `reset` — the host owns the semantics.
+   */
+  resettable?: boolean
+  dirty?: boolean
 }>(), {
   defaultOpen: true
 })
+
+const emit = defineEmits<{ reset: [] }>()
 
 const slots = defineSlots<{
   default: () => any
@@ -38,6 +46,18 @@ const open = ref(props.defaultOpen)
         block
         class="justify-start flex-1"
       />
+
+      <UTooltip v-if="resettable" :text="dirty ? 'Reset to preset' : 'Matches the preset'">
+        <UButton
+          size="sm"
+          :color="dirty ? 'primary' : 'neutral'"
+          variant="ghost"
+          icon="i-lucide-rotate-ccw"
+          :disabled="!dirty"
+          :aria-label="`Reset ${label} to preset`"
+          @click.stop="emit('reset')"
+        />
+      </UTooltip>
 
       <UButton
         v-if="helpTo"

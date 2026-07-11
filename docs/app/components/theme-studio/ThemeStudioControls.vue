@@ -20,7 +20,13 @@ const {
   icons
 } = useTheme()
 
-const { style, setStyle, primaryChip, neutralChip } = useThemeStudio()
+const { style, setStyle, primaryChip, neutralChip, sectionDirty, resetSection } = useThemeStudio()
+
+// one dirty flag per section, measured against the active preset
+const dirty = Object.fromEntries(
+  (['primary', 'neutral', 'semantic', 'font', 'icons', 'scale', 'buttons', 'panels', 'inputs', 'shadow', 'innerShadow', 'borders'] as const)
+    .map(key => [key, sectionDirty(key)])
+) as Record<string, ComputedRef<boolean>>
 
 /* ------------------------------------------------------------ typography -- */
 
@@ -430,6 +436,7 @@ const shadowColor = computed({
 // fields — one config each, one template.
 const shadowSections = [{
   label: 'Shadow',
+  dirtyKey: 'shadow' as const,
   model: shadowStyle,
   options: SHADOW_STYLE_OPTIONS,
   color: shadowColor,
@@ -439,6 +446,7 @@ const shadowSections = [{
   hard: computed(() => (style.value.shadow || 'none') === 'hard')
 }, {
   label: 'Inner shadow',
+  dirtyKey: 'innerShadow' as const,
   model: innerShadowStyle,
   options: INNER_SHADOW_OPTIONS,
   color: innerShadowColor,
@@ -454,15 +462,37 @@ const shadowSections = [{
     <template v-if="group === 'colors'">
       <!-- Sections own their padding so the separators run edge to edge. -->
       <div class="flex flex-col">
-        <ThemeStudioColorSection alias="primary" help-to="/docs/getting-started/theme/css-variables#colors" class="p-4" />
+        <ThemeStudioColorSection
+          alias="primary"
+          help-to="/docs/getting-started/theme/css-variables#colors"
+          class="p-4"
+          resettable
+          :dirty="dirty.primary!.value"
+          @reset="resetSection('primary')"
+        />
 
         <USeparator />
 
-        <ThemeStudioColorSection alias="neutral" help-to="/docs/getting-started/theme/css-variables#text" class="p-4" />
+        <ThemeStudioColorSection
+          alias="neutral"
+          help-to="/docs/getting-started/theme/css-variables#text"
+          class="p-4"
+          resettable
+          :dirty="dirty.neutral!.value"
+          @reset="resetSection('neutral')"
+        />
 
         <USeparator />
 
-        <ThemeStudioSection label="Semantic" help-to="/docs/getting-started/theme/design-system" :default-open="false" class="p-4">
+        <ThemeStudioSection
+          label="Semantic"
+          help-to="/docs/getting-started/theme/design-system"
+          :default-open="false"
+          class="p-4"
+          resettable
+          :dirty="dirty.semantic!.value"
+          @reset="resetSection('semantic')"
+        >
           <div class="flex flex-col gap-3 pt-1">
             <ThemeStudioColorSection v-for="alias in semanticAliases" :key="alias" :alias="alias" />
           </div>
@@ -473,7 +503,7 @@ const shadowSections = [{
     <template v-else-if="group === 'style'">
       <div class="flex flex-col">
         <template v-for="section in shadowSections" :key="section.label">
-          <ThemeStudioSection :label="section.label" class="p-4">
+          <ThemeStudioSection :label="section.label" class="p-4" resettable :dirty="dirty[section.dirtyKey]!.value" @reset="resetSection(section.dirtyKey)">
             <div>
               <UTabs
                 v-model="section.model.value"
@@ -534,7 +564,7 @@ const shadowSections = [{
           <USeparator />
         </template>
 
-        <ThemeStudioSection label="Borders" class="p-4">
+        <ThemeStudioSection label="Borders" class="p-4" resettable :dirty="dirty.borders!.value" @reset="resetSection('borders')">
           <div>
             <UTabs
               v-model="borderStyle"
@@ -591,7 +621,14 @@ const shadowSections = [{
 
     <template v-else-if="group === 'general'">
       <div class="flex flex-col">
-        <ThemeStudioSection label="Font" help-to="/docs/getting-started/integrations/fonts" class="p-4">
+        <ThemeStudioSection
+          label="Font"
+          help-to="/docs/getting-started/integrations/fonts"
+          class="p-4"
+          resettable
+          :dirty="dirty.font!.value"
+          @reset="resetSection('font')"
+        >
           <div class="flex flex-col gap-2">
             <!-- live specimen: the heading treatment over the base body -->
             <div class="rounded-md ring ring-default bg-elevated/50 px-3 py-2 select-none">
@@ -749,7 +786,14 @@ const shadowSections = [{
 
         <USeparator />
 
-        <ThemeStudioSection label="Icons" help-to="/docs/getting-started/integrations/icons" class="p-4">
+        <ThemeStudioSection
+          label="Icons"
+          help-to="/docs/getting-started/integrations/icons"
+          class="p-4"
+          resettable
+          :dirty="dirty.icons!.value"
+          @reset="resetSection('icons')"
+        >
           <div class="flex flex-col gap-2">
             <!-- a spread of the selected set -->
             <div class="rounded-md ring ring-default bg-elevated/50 px-3 py-2 flex flex-wrap justify-center gap-2.5">
@@ -797,7 +841,7 @@ const shadowSections = [{
 
         <USeparator />
 
-        <ThemeStudioSection label="Scale" class="p-4">
+        <ThemeStudioSection label="Scale" class="p-4" resettable :dirty="dirty.scale!.value" @reset="resetSection('scale')">
           <div class="flex flex-col gap-2">
             <ThemeStudioSliderRow
               v-model="radius"
@@ -846,7 +890,14 @@ const shadowSections = [{
         <USeparator />
 
         <template v-for="field in variantGroupFields" :key="field.key">
-          <ThemeStudioSection :label="field.label" :default-open="false" class="p-4">
+          <ThemeStudioSection
+            :label="field.label"
+            :default-open="false"
+            class="p-4"
+            resettable
+            :dirty="dirty[field.key]!.value"
+            @reset="resetSection(field.key)"
+          >
             <div class="flex flex-col gap-1.5">
               <div class="flex items-center gap-2">
                 <span class="text-xs text-muted w-13 shrink-0 select-none">Variant</span>

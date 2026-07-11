@@ -1,7 +1,7 @@
 import colors from 'tailwindcss/colors'
 import { THEME_STATE_KEYS, THEME_STORAGE_KEYS } from '../utils/theme-keys'
-import { presets, docToSettings, isDefaultTheme, generatePalette, applyPaletteEffects, isDefaultEffects, parseCssColor, parseUiColorRef, styleComponents, styleTokens, DEFAULT_COLORS, SHADES, TOKEN_SHADE_TARGETS } from '../utils/theme-engine'
-import type { ThemeDoc, ThemePreset, PaletteCurveParams, PaletteEffects, StoredPaletteParams, StyleOptions, Shade, ColorAlias, TokenRamp } from '../utils/theme-engine'
+import { presets, docToSettings, isDefaultTheme, generatePalette, applyPaletteEffects, isDefaultEffects, parseCssColor, parseUiColorRef, styleComponents, styleTokens, sectionFingerprint, mergeSection, SECTION_GROUPS, DEFAULT_COLORS, SHADES, TOKEN_SHADE_TARGETS } from '../utils/theme-engine'
+import type { SectionKey, ThemeDoc, ThemePreset, PaletteCurveParams, PaletteEffects, StoredPaletteParams, StyleOptions, Shade, ColorAlias, TokenRamp } from '../utils/theme-engine'
 import { readLocalStorage } from '../utils/theme'
 
 export function useThemeStudio() {
@@ -9,7 +9,12 @@ export function useThemeStudio() {
   const appConfig = useAppConfig()
   const { track } = useAnalytics()
 
-  /** Persisted so the preset menu still names the applied preset after a reload. */
+  /**
+   * The BASELINE preset: stays set through ordinary edits (per-section
+   * dirty/reset measures against it) and is only replaced by another
+   * preset, a shuffle, an import or a full reset. Persisted so the menu
+   * still names it after a reload.
+   */
   const activePreset = useState<string | undefined>(THEME_STATE_KEYS.themePreset, () => readLocalStorage(THEME_STORAGE_KEYS.preset, undefined))
 
   function setActivePreset(id: string | undefined) {
@@ -89,7 +94,6 @@ export function useThemeStudio() {
     if (Object.keys(tokens.light).length || Object.keys(tokens.dark).length) {
       theme.applyThemeSettings({ cssVariables: tokens }, { track: false })
     }
-    setActivePreset(undefined)
 
     // Sliders stream through here at drag frequency — one event per burst.
     if (!trackedAt.value || Date.now() - trackedAt.value > 2000) {
@@ -144,17 +148,14 @@ export function useThemeStudio() {
 
     if (alias === 'primary') {
       theme.primary.value = name
-      setActivePreset(undefined)
     } else if (alias === 'neutral') {
       theme.neutral.value = name
       // Stock neutrals need the white-literal remaps too — without them the
       // preview (docs baseline: neutral-50 bg) diverges from the export
       // (library baseline: white bg) for every tinted ramp.
       theme.applyThemeSettings({ cssVariables: unownedNeutralRemaps() }, { track: false })
-      setActivePreset(undefined)
     } else {
       theme.applyThemeSettings({ [alias]: name }, { track: false })
-      setActivePreset(undefined)
       track('Theme Changed', { setting: alias, value: name })
     }
   }
@@ -207,7 +208,6 @@ export function useThemeStudio() {
       ? { ...base }
       : { ...base, effects, amount }
     setPaletteParams({ ...paletteParams.value, [alias]: entry })
-    setActivePreset(undefined)
 
     // Live drags call this at ~16Hz — one analytics event per burst is plenty.
     if (!trackedAt.value || Date.now() - trackedAt.value > 2000) {
@@ -354,9 +354,50 @@ export function useThemeStudio() {
     return name === 'neutral' ? 'old-neutral' : name
   }
 
+  /* ----------------------------------------------- section reset/delta -- */
+
+  /**
+   * Dirty and reset are measured against the ACTIVE PRESET's doc (stock
+   * when none): "what did I touch since applying the preset". Reset splices
+   * the baseline's slice into the current doc and rides the same applyDoc
+   * path history restores use.
+   */
+  const baselineDoc = computed(() => presets.find(preset => preset.id === activePreset.value)?.doc ?? { version: 1 as const })
+
+  function sectionDirty(key: SectionKey) {
+    return computed(() => sectionFingerprint(theme.currentDoc(), key) !== sectionFingerprint(baselineDoc.value, key))
+  }
+
+  function groupDirty(group: keyof typeof SECTION_GROUPS) {
+    return computed(() => SECTION_GROUPS[group].some(key =>
+      sectionFingerprint(theme.currentDoc(), key) !== sectionFingerprint(baselineDoc.value, key)
+    ))
+  }
+
+  function resetSection(key: SectionKey) {
+    // currentDoc embeds reactive slices — structuredClone chokes on Vue
+    // proxies, so round-trip to plain JSON first (history does the same)
+    const plain = JSON.parse(JSON.stringify(theme.currentDoc())) as ThemeDoc
+    // applyDoc resets everything first, which clears the persisted preset —
+    // but a section reset moves TOWARD the baseline; keep it
+    const preserved = activePreset.value
+    applyDoc(mergeSection(plain, baselineDoc.value, key))
+    setActivePreset(preserved)
+    track('Theme Section Reset', { section: key })
+  }
+
+  /** For flows that replace the whole doc outside a preset (imports). */
+  function clearActivePreset() {
+    setActivePreset(undefined)
+  }
+
   return {
     presets,
     activePreset,
+    clearActivePreset,
+    sectionDirty,
+    groupDirty,
+    resetSection,
     style,
     setStyle,
     paletteParams,

@@ -13,7 +13,12 @@ const props = defineProps<{
   /** Header text — defaults to the capitalized alias. */
   label?: string
   helpTo?: string
+  /** Passed through to the section header's reset affordance. */
+  resettable?: boolean
+  dirty?: boolean
 }>()
+
+const emit = defineEmits<{ reset: [] }>()
 
 const { style, setStyle, rampChip } = useThemeStudio()
 
@@ -60,7 +65,7 @@ const openGroups = reactive<Record<string, boolean>>({})
 </script>
 
 <template>
-  <ThemeStudioSection :label="title" :help-to="helpTo">
+  <ThemeStudioSection :label="title" :help-to="helpTo" :resettable="resettable" :dirty="dirty" @reset="emit('reset')">
     <template #actions>
       <UTooltip text="Adjust shades">
         <UButton

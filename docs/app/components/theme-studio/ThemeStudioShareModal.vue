@@ -9,7 +9,7 @@ import { importTheme, isDefaultTheme } from '../../utils/theme-engine'
 const open = defineModel<boolean>('open', { default: false })
 const mode = defineModel<'import' | 'export'>('mode', { default: 'export' })
 
-const { applyDoc } = useThemeStudio()
+const { applyDoc, clearActivePreset } = useThemeStudio()
 const { exportCSS, exportConfig, configLabel, hasCSSChanges, hasConfigChanges } = useTheme()
 const { track } = useAnalytics()
 const { copy: copyCSS, copied: copiedCSS } = useClipboard()
@@ -38,6 +38,9 @@ function runImport() {
 
   if (!empty.value) {
     applyDoc(result.doc)
+    // an imported doc replaces the whole theme — the old preset is no
+    // longer the baseline the dirty indicators should measure against
+    clearActivePreset()
     imported.value = true
     track('Theme Imported', { skipped: result.skipped.length })
   }

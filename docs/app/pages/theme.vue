@@ -42,7 +42,14 @@ function toggleColorMode() {
 }
 
 const appConfig = useAppConfig()
-const { style } = useThemeStudio()
+const { style, groupDirty } = useThemeStudio()
+
+/** "Changed from preset" dot per settings tab. */
+const groupDirtyFlags = {
+  colors: groupDirty('colors'),
+  general: groupDirty('general'),
+  style: groupDirty('style')
+}
 
 /**
  * The mode tabs follow the app-wide default size setting like every other
@@ -184,12 +191,14 @@ const shareMode = ref<'import' | 'export'>('export')
               v-model:open="openPanels[settingGroup.value]"
               :content="{ align: 'start', onInteractOutside: keepPanels }"
             >
-              <UButton
-                :label="settingGroup.label"
-                color="neutral"
-                variant="subtle"
-                trailing-icon="i-lucide-chevron-down"
-              />
+              <UChip :show="groupDirtyFlags[settingGroup.value].value" color="primary" size="sm">
+                <UButton
+                  :label="settingGroup.label"
+                  color="neutral"
+                  variant="subtle"
+                  trailing-icon="i-lucide-chevron-down"
+                />
+              </UChip>
 
               <template #content>
                 <ThemeStudioControls :group="settingGroup.value" class="w-80 max-h-[70vh] overflow-y-auto" />
