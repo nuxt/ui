@@ -175,13 +175,17 @@ const shadowStyle = computed({
     if (!shadow || shadow === 'none') return 'inherit'
     return shadow === 'flat' ? 'none' : 'custom'
   },
-  // Custom starts where the library already is: geometry and weight
-  // approximating the stock shadow-lg, so entering Custom isn't a jump.
-  set: (value: any) => setStyle({
-    shadow: value === 'custom' ? 'hard' : value === 'none' ? 'flat' : 'none',
-    ...(value === 'custom' && style.value.shadowGeometry === undefined ? { shadowGeometry: { x: 0, y: 6, blur: 12, spread: 0 } } : {}),
-    ...(value === 'custom' && style.value.shadowOpacity === undefined ? { shadowOpacity: 10 } : {})
-  })
+  // Custom starts where the library already is: geometry approximating the
+  // stock shadow-lg, so entering Custom isn't a jump (20% ≈ shadow-lg's two
+  // stacked 10% layers flattened into one). Leaving Custom clears the knobs
+  // — Inherit means a clean slate, and the next Custom reseeds fresh.
+  set: (value: any) => setStyle(value === 'custom'
+    ? {
+        shadow: 'hard',
+        ...(style.value.shadowGeometry === undefined ? { shadowGeometry: { x: 0, y: 6, blur: 12, spread: 0 } } : {}),
+        ...(style.value.shadowOpacity === undefined ? { shadowOpacity: 20 } : {})
+      }
+    : { shadow: value === 'none' ? 'flat' : 'none', shadowGeometry: undefined, shadowOpacity: undefined, shadowColor: undefined, shadowShade: undefined })
 })
 
 // Nothing in the library casts an inner shadow, so None and Inherit are
