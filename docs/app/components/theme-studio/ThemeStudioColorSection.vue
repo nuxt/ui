@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { TOKEN_SHADE_TARGETS, TOKEN_GROUPS, SHADES } from '../../utils/theme-engine'
+import { TOKEN_SHADE_TARGETS, TOKEN_GROUPS, SHADES, canonicalTokenShades } from '../../utils/theme-engine'
 import type { ColorAlias } from '../../utils/theme-engine'
 
 /**
@@ -20,7 +20,10 @@ const props = defineProps<{
 
 const emit = defineEmits<{ reset: [] }>()
 
-const { style, setStyle, rampChip } = useThemeStudio()
+const { style, setStyle, rampChip, baselineDoc } = useThemeStudio()
+
+/** The active preset's own shade choices — what a row reset restores. */
+const baselineShades = computed(() => canonicalTokenShades(baselineDoc.value))
 
 const title = computed(() => props.label ?? props.alias.charAt(0).toUpperCase() + props.alias.slice(1))
 
@@ -28,9 +31,14 @@ const paletteEditor = ref(false)
 const shadeEditor = ref(false)
 
 // Per-token shade sliders, one light/dark pair. Only the touched mode is
-// written so an untouched mode never becomes an override.
-function tokenShadeSlider(token: string, defaults: { light: number, dark: number }, target: 'light' | 'dark') {
-  return computed({
+// written so an untouched mode never becomes an override. Dirty and reset
+// measure against the BASELINE preset's own choice for the token: reset
+// restores the preset's shade, or deletes the override entirely when the
+// preset made no choice (the token's real default may not sit on the ramp
+// at all — --ui-bg is literally `white` — so writing a "default shade"
+// would pin a lookalike override over it).
+function tokenShadeControl(token: string, defaults: { light: number, dark: number }, target: 'light' | 'dark') {
+  const model = computed({
     get: () => {
       const value = style.value.tokenShades?.[token]?.[target] ?? defaults[target]
       return SHADES.indexOf(value as typeof SHADES[number])
@@ -44,6 +52,18 @@ function tokenShadeSlider(token: string, defaults: { light: number, dark: number
       })
     }
   })
+  const baseline = computed(() => baselineShades.value[token]?.[target])
+  const dirty = computed(() => style.value.tokenShades?.[token]?.[target] !== baseline.value)
+  function reset() {
+    const entry = { ...style.value.tokenShades?.[token] }
+    if (baseline.value !== undefined) entry[target] = baseline.value
+    else Reflect.deleteProperty(entry, target)
+    const tokenShades = { ...style.value.tokenShades }
+    if (Object.keys(entry).length) tokenShades[token] = entry
+    else Reflect.deleteProperty(tokenShades, token)
+    setStyle({ tokenShades })
+  }
+  return { model, dirty, reset }
 }
 
 const sections = TOKEN_SHADE_TARGETS
@@ -51,8 +71,8 @@ const sections = TOKEN_SHADE_TARGETS
   .map(target => ({
     ...target,
     sliders: {
-      light: tokenShadeSlider(target.token, target.defaults, 'light'),
-      dark: tokenShadeSlider(target.token, target.defaults, 'dark')
+      light: tokenShadeControl(target.token, target.defaults, 'light'),
+      dark: tokenShadeControl(target.token, target.defaults, 'dark')
     }
   }))
 
@@ -105,10 +125,12 @@ const openGroups = reactive<Record<string, boolean>>({})
         <ThemeStudioSliderRow
           v-for="(slider, modeName) in sections[0]!.sliders"
           :key="modeName"
-          v-model="slider.value"
+          v-model="slider.model.value"
           :mode="modeName"
           :chip="rampChip(alias)"
-          :default-value="SHADES.indexOf(sections[0]!.defaults[modeName] as typeof SHADES[number])"
+          resettable
+          :dirty="slider.dirty.value"
+          @reset="slider.reset()"
         />
       </div>
 
@@ -135,10 +157,12 @@ const openGroups = reactive<Record<string, boolean>>({})
                 <ThemeStudioSliderRow
                   v-for="(slider, modeName) in section.sliders"
                   :key="modeName"
-                  v-model="slider.value"
+                  v-model="slider.model.value"
                   :mode="modeName"
                   :chip="rampChip(section.ramp)"
-                  :default-value="SHADES.indexOf(section.defaults[modeName] as typeof SHADES[number])"
+                  resettable
+                  :dirty="slider.dirty.value"
+                  @reset="slider.reset()"
                 />
               </div>
             </div>

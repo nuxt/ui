@@ -42,7 +42,7 @@ function tokenSection(token: string): 'primary' | 'semantic' | 'neutral' {
  * SAME choice in different slots. Both sides are compared canonicalized:
  * promotable tokens count as shades, never as raw tokens.
  */
-function promotedShades(doc: ThemeDoc): Record<string, { light?: number, dark?: number }> {
+export function promotedShades(doc: ThemeDoc): Record<string, { light?: number, dark?: number }> {
   const promoted: Record<string, { light?: number, dark?: number }> = {}
   const parse = (value: string | undefined, ramp: string) => {
     const ref = parseUiColorRef(value)
@@ -174,6 +174,16 @@ export function sectionFingerprint(doc: ThemeDoc, key: SectionKey): string {
     return value
   }
   return JSON.stringify(sort(pickSection(doc, key)))
+}
+
+/**
+ * A doc's effective per-token shade choices: explicit style.tokenShades
+ * plus ramp-shaped token overrides (the two representations applyDoc
+ * interconverts). The per-row shade resets restore THESE — the baseline's
+ * choice, not stock.
+ */
+export function canonicalTokenShades(doc: ThemeDoc): Record<string, { light?: number, dark?: number }> {
+  return { ...promotedShades(doc), ...doc.style?.tokenShades }
 }
 
 /* --------------------------------------------------------------- merge -- */

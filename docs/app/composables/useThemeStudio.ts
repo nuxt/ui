@@ -394,6 +394,7 @@ export function useThemeStudio() {
   return {
     presets,
     activePreset,
+    baselineDoc,
     clearActivePreset,
     sectionDirty,
     groupDirty,

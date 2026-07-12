@@ -150,10 +150,10 @@ export type TokenRamp = 'neutral' | 'primary' | 'secondary' | 'success' | 'info'
 export type TokenGroup = 'colors' | 'background' | 'text' | 'border'
 
 export const TOKEN_GROUPS: Array<{ key: TokenGroup, label: string }> = [
-  { key: 'colors', label: 'Colors' },
-  { key: 'background', label: 'Background' },
-  { key: 'text', label: 'Text' },
-  { key: 'border', label: 'Borders' }
+  { key: 'colors', label: 'Color shades' },
+  { key: 'background', label: 'Background shades' },
+  { key: 'text', label: 'Text shades' },
+  { key: 'border', label: 'Border shades' }
 ]
 
 /**

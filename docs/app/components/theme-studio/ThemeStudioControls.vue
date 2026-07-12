@@ -20,7 +20,7 @@ const {
   icons
 } = useTheme()
 
-const { style, setStyle, primaryChip, neutralChip, sectionDirty, resetSection } = useThemeStudio()
+const { style, setStyle, primaryChip, neutralChip, sectionDirty, resetSection, baselineDoc } = useThemeStudio()
 
 // one dirty flag per section, measured against the active preset
 const dirty = Object.fromEntries(
@@ -278,8 +278,10 @@ const shadowColorItems = [
 // Slider position ↔ SHADES index, per mode. shadow/border shades write both
 // modes on first touch (explicit 'shade' mode choice); token shades write
 // ONLY the touched mode so an untouched mode never becomes an override.
-function shadeSlider(field: 'shadowShade' | 'innerShadowShade' | 'borderShade', defaults: { light: number, dark: number }, target: 'light' | 'dark') {
-  return computed({
+// Dirty/reset measure against the BASELINE preset's choice: reset restores
+// it, or deletes the entry when the preset made none.
+function shadeControl(field: 'shadowShade' | 'innerShadowShade' | 'borderShade', defaults: { light: number, dark: number }, target: 'light' | 'dark') {
+  const model = computed({
     // Per-key fallback: an imported doc can carry a single-mode shade
     // object ({ light: 400 }) — indexOf(undefined) would park the slider
     // at -1 and the chip at var(--color-…-undefined).
@@ -289,21 +291,30 @@ function shadeSlider(field: 'shadowShade' | 'innerShadowShade' | 'borderShade', 
       setStyle({ [field]: { ...current, [target]: SHADES[index]! } })
     }
   })
+  const baseline = computed(() => baselineDoc.value.style?.[field]?.[target])
+  const dirty = computed(() => style.value[field]?.[target] !== baseline.value)
+  function reset() {
+    const entry: { light?: number, dark?: number } = { ...style.value[field] }
+    if (baseline.value !== undefined) entry[target] = baseline.value
+    else Reflect.deleteProperty(entry, target)
+    setStyle({ [field]: Object.keys(entry).length ? entry : undefined })
+  }
+  return { model, dirty, reset }
 }
 
 const shadowShades = {
-  light: shadeSlider('shadowShade', SHADOW_SHADE_DEFAULTS, 'light'),
-  dark: shadeSlider('shadowShade', SHADOW_SHADE_DEFAULTS, 'dark')
+  light: shadeControl('shadowShade', SHADOW_SHADE_DEFAULTS, 'light'),
+  dark: shadeControl('shadowShade', SHADOW_SHADE_DEFAULTS, 'dark')
 }
 
 const innerShadowShades = {
-  light: shadeSlider('innerShadowShade', SHADOW_SHADE_DEFAULTS, 'light'),
-  dark: shadeSlider('innerShadowShade', SHADOW_SHADE_DEFAULTS, 'dark')
+  light: shadeControl('innerShadowShade', SHADOW_SHADE_DEFAULTS, 'light'),
+  dark: shadeControl('innerShadowShade', SHADOW_SHADE_DEFAULTS, 'dark')
 }
 
 const borderShades = {
-  light: shadeSlider('borderShade', BORDER_SHADE_DEFAULTS, 'light'),
-  dark: shadeSlider('borderShade', BORDER_SHADE_DEFAULTS, 'dark')
+  light: shadeControl('borderShade', BORDER_SHADE_DEFAULTS, 'light'),
+  dark: shadeControl('borderShade', BORDER_SHADE_DEFAULTS, 'dark')
 }
 
 // MD is the stock default — one deduped entry storing 'default'
@@ -529,10 +540,12 @@ const shadowSections = [{
                   <ThemeStudioSliderRow
                     v-for="(slider, modeName) in section.shades"
                     :key="modeName"
-                    v-model="slider.value"
+                    v-model="slider.model.value"
                     :mode="modeName"
                     :chip="section.color.value === 'primary-shade' ? primaryChip : neutralChip"
-                    :default-value="SHADES.indexOf(SHADOW_SHADE_DEFAULTS[modeName] as typeof SHADES[number])"
+                    resettable
+                    :dirty="slider.dirty.value"
+                    @reset="slider.reset()"
                   />
                 </template>
 
@@ -607,10 +620,12 @@ const shadowSections = [{
                 <ThemeStudioSliderRow
                   v-for="(slider, modeName) in borderShades"
                   :key="modeName"
-                  v-model="slider.value"
+                  v-model="slider.model.value"
                   :mode="modeName"
                   :chip="borderColor === 'primary-shade' ? primaryChip : neutralChip"
-                  :default-value="SHADES.indexOf(BORDER_SHADE_DEFAULTS[modeName] as typeof SHADES[number])"
+                  resettable
+                  :dirty="slider.dirty.value"
+                  @reset="slider.reset()"
                 />
               </template>
             </div>
@@ -849,7 +864,6 @@ const shadowSections = [{
               :min="0"
               :max="0.5"
               :step="0.125"
-              unit="rem"
             />
 
             <ThemeStudioSliderRow
