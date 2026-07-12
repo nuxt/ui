@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { SHADES } from '../../utils/theme-engine'
+import { SHADE_LADDER } from '../../utils/theme-engine'
 
 /**
  * The studio's control row — a horizontal UFormField: tiny label (or icon),
@@ -30,7 +30,7 @@ const props = withDefaults(defineProps<{
   dirty?: boolean
 }>(), {
   min: 0,
-  max: SHADES.length - 1,
+  max: SHADE_LADDER.length - 1,
   step: 1
 })
 
@@ -38,7 +38,12 @@ const props = withDefaults(defineProps<{
 const value = defineModel<number>({ required: true })
 
 const shade = computed(() => !!props.chip && !!props.mode)
-const sliderColor = computed(() => shade.value ? `var(--color-${props.chip}-${SHADES[value.value]})` : undefined)
+const stop = computed(() => SHADE_LADDER[value.value])
+const sliderColor = computed(() => {
+  if (!shade.value) return undefined
+  // the ladder's ends are literals no ramp variable can express
+  return stop.value === 'white' || stop.value === 'black' ? stop.value : `var(--color-${props.chip}-${stop.value})`
+})
 
 /**
  * A border that always contrasts with the fill, derived FROM the fill:
@@ -54,7 +59,7 @@ const emit = defineEmits<{ reset: [] }>()
 
 /** `0.25rem` reads as `.25rem` — the leading zero is noise at this width. */
 const display = computed(() => shade.value
-  ? String(SHADES[value.value])
+  ? String(stop.value)
   : `${String(value.value).replace(/^(-?)0\./, '$1.')}${props.unit ?? ''}`)
 </script>
 

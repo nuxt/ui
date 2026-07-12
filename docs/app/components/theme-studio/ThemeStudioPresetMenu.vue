@@ -24,9 +24,6 @@ const { hasCSSChanges, hasConfigChanges } = useTheme()
 // The persisted preset (and any persisted edits) are client-only — resolve
 // the label after mount so hydration matches the server's fallback.
 const mounted = ref(false)
-onMounted(() => {
-  mounted.value = true
-})
 
 /**
  * Each row leads with a mini theme chip: the doc's neutral ramp as the
@@ -62,7 +59,10 @@ const presetItems = computed(() => presets.map(preset => ({
 
 // the rows render their own font names — load the faces once
 const { fonts } = useTheme()
-onMounted(() => loadFontPreviews(fonts))
+onMounted(() => {
+  mounted.value = true
+  loadFontPreviews(fonts)
+})
 
 const selected = computed({
   get: () => activePreset.value,
@@ -133,7 +133,11 @@ function onRollEnd(event?: AnimationEvent) {
 
 onUnmounted(clearRollTimers)
 
-/** The applied preset's name; 'Custom' once edits diverge from it. */
+/**
+ * The baseline preset's name — edits deliberately don't clear it (the
+ * dirty dots carry divergence); 'Custom' only when no preset is set but
+ * the theme differs from stock.
+ */
 const presetLabel = computed(() => {
   if (!mounted.value) return 'Presets'
   const active = presets.find(preset => preset.id === activePreset.value)

@@ -6,22 +6,25 @@
  * never toggle the fold; actions force it open instead, so what they
  * reveal is visible.
  */
+import type { SectionKey } from '../../utils/theme-engine'
+
 const props = withDefaults(defineProps<{
   label: string
   /** Docs page the header's help icon links to */
   helpTo?: string
   defaultOpen?: boolean
   /**
-   * Shows a reset button that's enabled while the section differs from the
-   * active preset (dirty). Emits `reset` — the host owns the semantics.
+   * Names the ThemeDoc section this fold owns — the header then carries a
+   * reset button enabled while the section diverges from the baseline
+   * preset, wired straight to the studio's sectionDirty/resetSection.
    */
-  resettable?: boolean
-  dirty?: boolean
+  sectionKey?: SectionKey
 }>(), {
   defaultOpen: true
 })
 
-const emit = defineEmits<{ reset: [] }>()
+const { sectionDirty, resetSection } = useThemeStudio()
+const dirty = computed(() => (props.sectionKey ? sectionDirty(props.sectionKey).value : false))
 
 const slots = defineSlots<{
   default: () => any
@@ -47,7 +50,7 @@ const open = ref(props.defaultOpen)
         class="justify-start flex-1"
       />
 
-      <UTooltip v-if="resettable" :text="dirty ? 'Reset to preset' : 'Matches the preset'">
+      <UTooltip v-if="sectionKey" :text="dirty ? 'Reset to preset' : 'Matches the preset'">
         <UButton
           size="sm"
           :color="dirty ? 'primary' : 'neutral'"
@@ -55,7 +58,7 @@ const open = ref(props.defaultOpen)
           icon="i-lucide-rotate-ccw"
           :disabled="!dirty"
           :aria-label="`Reset ${label} to preset`"
-          @click.stop="emit('reset')"
+          @click.stop="resetSection(sectionKey!)"
         />
       </UTooltip>
 

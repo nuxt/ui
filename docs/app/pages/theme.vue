@@ -175,6 +175,10 @@ const shareMode = ref<'import' | 'export'>('export')
           <ThemeStudioViewChat v-else-if="view === 'chat'" />
           <ThemeStudioViewSaas v-else-if="view === 'saas'" />
           <ThemeStudioViewLanding v-else-if="view === 'landing'" />
+          <ThemeStudioViewDocs v-else-if="view === 'docs'" />
+          <ThemeStudioViewPortfolio v-else-if="view === 'portfolio'" />
+          <ThemeStudioViewChangelog v-else-if="view === 'changelog'" />
+          <ThemeStudioViewEditor v-else-if="view === 'editor'" />
           <ThemeStudioViewA11y v-else-if="view === 'a11y'" />
         </div>
 

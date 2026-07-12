@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { TOKEN_SHADE_TARGETS, TOKEN_GROUPS, SHADES, canonicalTokenShades } from '../../utils/theme-engine'
-import type { ColorAlias } from '../../utils/theme-engine'
+import { TOKEN_SHADE_TARGETS, TOKEN_GROUPS, SHADE_LADDER, canonicalTokenShades } from '../../utils/theme-engine'
+import type { ColorAlias, SectionKey, ShadeStop } from '../../utils/theme-engine'
 
 /**
  * One color alias in the Colors panel: a section header carrying the edit
@@ -14,18 +14,15 @@ const props = defineProps<{
   label?: string
   helpTo?: string
   /** Passed through to the section header's reset affordance. */
-  resettable?: boolean
-  dirty?: boolean
+  sectionKey?: SectionKey
 }>()
-
-const emit = defineEmits<{ reset: [] }>()
 
 const { style, setStyle, rampChip, baselineDoc } = useThemeStudio()
 
 /** The active preset's own shade choices — what a row reset restores. */
 const baselineShades = computed(() => canonicalTokenShades(baselineDoc.value))
 
-const title = computed(() => props.label ?? props.alias.charAt(0).toUpperCase() + props.alias.slice(1))
+const title = computed(() => props.label ?? capitalize(props.alias))
 
 const paletteEditor = ref(false)
 const shadeEditor = ref(false)
@@ -37,17 +34,17 @@ const shadeEditor = ref(false)
 // preset made no choice (the token's real default may not sit on the ramp
 // at all — --ui-bg is literally `white` — so writing a "default shade"
 // would pin a lookalike override over it).
-function tokenShadeControl(token: string, defaults: { light: number, dark: number }, target: 'light' | 'dark') {
+function tokenShadeControl(token: string, defaults: { light: ShadeStop, dark: ShadeStop }, target: 'light' | 'dark') {
   const model = computed({
     get: () => {
       const value = style.value.tokenShades?.[token]?.[target] ?? defaults[target]
-      return SHADES.indexOf(value as typeof SHADES[number])
+      return SHADE_LADDER.indexOf(value as typeof SHADE_LADDER[number])
     },
     set: (index: number) => {
       setStyle({
         tokenShades: {
           ...style.value.tokenShades,
-          [token]: { ...style.value.tokenShades?.[token], [target]: SHADES[index]! }
+          [token]: { ...style.value.tokenShades?.[token], [target]: SHADE_LADDER[index]! }
         }
       })
     }
@@ -55,7 +52,7 @@ function tokenShadeControl(token: string, defaults: { light: number, dark: numbe
   const baseline = computed(() => baselineShades.value[token]?.[target])
   const dirty = computed(() => style.value.tokenShades?.[token]?.[target] !== baseline.value)
   function reset() {
-    const entry = { ...style.value.tokenShades?.[token] }
+    const entry: { light?: ShadeStop, dark?: ShadeStop } = { ...style.value.tokenShades?.[token] }
     if (baseline.value !== undefined) entry[target] = baseline.value
     else Reflect.deleteProperty(entry, target)
     const tokenShades = { ...style.value.tokenShades }
@@ -85,7 +82,7 @@ const openGroups = reactive<Record<string, boolean>>({})
 </script>
 
 <template>
-  <ThemeStudioSection :label="title" :help-to="helpTo" :resettable="resettable" :dirty="dirty" @reset="emit('reset')">
+  <ThemeStudioSection :label="title" :help-to="helpTo" :section-key="sectionKey">
     <template #actions>
       <UTooltip text="Adjust shades">
         <UButton
