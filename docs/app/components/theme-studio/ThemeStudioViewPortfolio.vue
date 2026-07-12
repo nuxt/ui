@@ -34,7 +34,8 @@ const heroImages = [
 
 const about = {
   title: 'About Me',
-  description: 'I\'m an English designer and front-end developer based in Amsterdam. I work across design systems, UX and the front-end that ships them - staying involved on both sides keeps the design and the implementation from drifting out of sync.'
+  // \n renders as a real break via whitespace-pre-line on the description slot
+  description: 'I\'m an English designer and developer based in Amsterdam. I sit right between design and engineering, which means both teams assume I\'m the other team\'s problem.'
 }
 
 const experience = [{
@@ -49,6 +50,10 @@ const experience = [{
   date: '2019 - 2021',
   position: 'Web Developer at',
   company: { name: 'Blender', logo: 'i-simple-icons-blender' }
+}, {
+  date: '1995 - Present',
+  position: 'Human person on',
+  company: { name: 'Earth', logo: 'i-lucide-globe' }
 }]
 
 const posts = [{
@@ -220,7 +225,7 @@ onUnmounted(() => clearTimeout(appearTimeout))
           :ui="{
             container: 'p-0!',
             title: 'text-left text-xl sm:text-xl lg:text-2xl font-medium',
-            description: 'text-left mt-3 text-sm sm:text-md lg:text-sm text-muted'
+            description: 'text-left mt-3 text-sm sm:text-md lg:text-sm text-muted whitespace-pre-line'
           }"
         />
 
@@ -246,7 +251,7 @@ onUnmounted(() => clearTimeout(appearTimeout))
                 <span class="flex items-center gap-1">
                   <span class="text-sm">{{ item.position }}</span>
                   <span class="inline-flex items-center gap-1 text-highlighted">
-                    <span class="font-medium">{{ item.company.name }}</span>
+                    <span class="font-medium text-sm">{{ item.company.name }}</span>
                     <UIcon :name="item.company.logo" />
                   </span>
                 </span>

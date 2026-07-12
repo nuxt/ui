@@ -91,8 +91,6 @@ const studioMenuLinks = [{
       :ui="{ viewportWrapper: 'w-[12rem]', content: 'w-[12rem]' }"
     >
       <template #list-leading>
-        <!-- ten previews outgrew tabs — a rich listbox names and describes
-             each one (blurbs from /templates) -->
         <UPopover v-model:open="viewListOpen" :content="{ align: 'center' }">
           <UButton
             :icon="views.find(tab => tab.value === view)?.icon"
@@ -100,7 +98,7 @@ const studioMenuLinks = [{
             trailing-icon="i-lucide-chevron-down"
             color="neutral"
             variant="subtle"
-            size="sm"
+
             aria-label="Preview page"
           />
 
@@ -120,7 +118,7 @@ const studioMenuLinks = [{
       <template #pages-content>
         <UNavigationMenu
           orientation="vertical"
-          size="sm"
+
           :items="studioMenuLinks"
           class="p-2"
         />

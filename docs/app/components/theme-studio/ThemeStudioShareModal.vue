@@ -95,6 +95,7 @@ function runImport() {
               :rows="10"
               placeholder="@import &quot;tailwindcss&quot;;&#10;@import &quot;@nuxt/ui&quot;;&#10;…"
               class="w-full font-mono"
+              variant="subtle"
               :ui="{ base: 'text-xs' }"
             />
 
@@ -102,6 +103,7 @@ function runImport() {
               v-else
               v-model="config"
               :rows="10"
+              variant="subtle"
               placeholder="export default defineAppConfig({&#10;  ui: { … }&#10;})"
               class="w-full font-mono"
               :ui="{ base: 'text-xs' }"
