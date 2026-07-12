@@ -66,6 +66,32 @@ describe('importTheme', () => {
     })
   })
 
+  it('round-trips white/black ladder stops in shades and token shades', () => {
+    const original: ThemeDoc = {
+      version: 1,
+      style: {
+        shadow: 'hard',
+        shadowColor: 'shade',
+        // literal ladder ends mixed with a ramp stop (NOT the stock
+        // 950/black pair, which the importer rightly reads as no-choice)
+        shadowShade: { light: 900, dark: 'black' },
+        tokenShades: { '--ui-bg': { light: 'white' } }
+      }
+    }
+    const css = generateCSS(original)
+    expect(css).toContain('--ui-shadow-color: black')
+    expect(css).toContain('--ui-bg: white')
+
+    const { doc: imported, skipped } = importTheme({ css, config: generateConfig(original) })
+    expect(skipped).toEqual([])
+    // the literals survive semantically (representation may re-slot between
+    // the style axis and plain tokens) and the round-trip reaches a fixed point
+    expect(effectiveVars(imported)).toEqual(effectiveVars(original))
+    const second = importTheme({ css: generateCSS(imported), config: generateConfig(imported) })
+    expect(second.skipped).toEqual([])
+    expect(generateCSS(second.doc)).toBe(generateCSS(imported))
+  })
+
   it('round-trips an inner-shadow style', () => {
     const original: ThemeDoc = {
       version: 1,

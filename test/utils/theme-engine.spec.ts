@@ -1,12 +1,9 @@
 import { describe, it, expect } from 'vitest'
 import {
-  createThemeDoc,
   isDefaultTheme,
   generateCSS,
   generateConfig,
   docToSettings,
-  resolveToken,
-  resolveTokens,
   presets,
   generatePalette,
   fitPalette,
@@ -15,15 +12,17 @@ import {
   contrastRatio,
   CURVE_DEFAULTS,
   SHADES,
-  LIBRARY_TOKEN_DEFAULTS
+  LIBRARY_TOKEN_DEFAULTS,
+  parseUiColorRef,
+  resolveAlias,
+  resolveShade
 } from '../../docs/app/utils/theme-engine'
 import type { ThemeDoc } from '../../docs/app/utils/theme-engine'
-import colors from 'tailwindcss/colors'
 
 describe('theme-engine', () => {
   describe('isDefaultTheme', () => {
     it('treats an empty doc as default', () => {
-      expect(isDefaultTheme(createThemeDoc())).toBe(true)
+      expect(isDefaultTheme({ version: 1 as const })).toBe(true)
     })
 
     it('treats any override as non-default', () => {
@@ -35,7 +34,7 @@ describe('theme-engine', () => {
 
   describe('generateCSS', () => {
     it('emits only the imports for a default doc', () => {
-      expect(generateCSS(createThemeDoc())).toBe('@import "tailwindcss";\n@import "@nuxt/ui";')
+      expect(generateCSS({ version: 1 as const })).toBe('@import "tailwindcss";\n@import "@nuxt/ui";')
     })
 
     it('emits only what the doc overrides', () => {
@@ -94,7 +93,7 @@ describe('theme-engine', () => {
 
   describe('generateConfig', () => {
     it('emits an empty app config for a default doc', () => {
-      expect(generateConfig(createThemeDoc())).toBe('export default defineAppConfig({})')
+      expect(generateConfig({ version: 1 as const })).toBe('export default defineAppConfig({})')
     })
 
     it('only includes color aliases that differ from the defaults', () => {
@@ -150,48 +149,6 @@ describe('theme-engine', () => {
     })
   })
 
-  describe('resolveToken', () => {
-    it('resolves a default token through the alias chain with provenance', () => {
-      const resolved = resolveToken(createThemeDoc(), 'light', '--ui-border')
-
-      expect(resolved.source).toBe('default')
-      expect(resolved.chain).toEqual(['--ui-border', '--ui-color-neutral-200', '--color-slate-200', colors.slate[200]])
-      expect(resolved.value).toBe(colors.slate[200])
-    })
-
-    it('follows alias remaps into custom palettes', () => {
-      const doc: ThemeDoc = {
-        version: 1,
-        colors: { neutral: 'ink' },
-        palettes: { ink: { shades: { 200: 'oklch(90.1% 0 0)' } } }
-      }
-
-      const resolved = resolveToken(doc, 'light', '--ui-border')
-
-      expect(resolved.chain).toEqual(['--ui-border', '--ui-color-neutral-200', '--color-ink-200', 'oklch(90.1% 0 0)'])
-      expect(resolved.value).toBe('oklch(90.1% 0 0)')
-    })
-
-    it('marks token overrides and resolves their new target', () => {
-      const doc: ThemeDoc = {
-        version: 1,
-        tokens: { dark: { '--ui-bg': 'var(--ui-color-neutral-950)' } }
-      }
-
-      const resolved = resolveToken(doc, 'dark', '--ui-bg')
-
-      expect(resolved.source).toBe('override')
-      expect(resolved.chain).toEqual(['--ui-bg', '--ui-color-neutral-950', '--color-slate-950', colors.slate[950]])
-    })
-
-    it('keeps literals as-is', () => {
-      const resolved = resolveToken(createThemeDoc(), 'light', '--ui-bg')
-
-      expect(resolved.value).toBe('white')
-      expect(resolved.chain).toEqual(['--ui-bg', 'white'])
-    })
-  })
-
   describe('presets', () => {
     it.each(presets.map(preset => [preset.id, preset] as const))('%s generates valid exports', (_id, preset) => {
       const css = generateCSS(preset.doc)
@@ -208,9 +165,12 @@ describe('theme-engine', () => {
     it('every token override in presets resolves to a color', () => {
       for (const preset of presets) {
         for (const mode of ['light', 'dark'] as const) {
-          const resolved = resolveTokens(preset.doc, mode)
-          for (const token of Object.keys(preset.doc.tokens?.[mode] || {})) {
-            expect(resolved[token]!.value, `${preset.id} ${mode} ${token}`).toMatch(/^#|^oklch\(|^white$|^black$/)
+          for (const [token, value] of Object.entries(preset.doc.tokens?.[mode] || {})) {
+            const ref = parseUiColorRef(value)
+            const resolved = ref
+              ? resolveShade(preset.doc, resolveAlias(preset.doc, ref.alias as any), ref.shade as any)
+              : value
+            expect(resolved, `${preset.id} ${mode} ${token}`).toMatch(/^#|^oklch\(|^white$|^black$/)
           }
         }
       }
@@ -531,8 +491,8 @@ describe('style colors', () => {
       light: { '--ui-shadow-color': 'var(--ui-color-neutral-700)' },
       dark: { '--ui-shadow-color': 'var(--ui-color-neutral-300)' }
     })
-    // defaults apply when shades are unset
-    expect(styleTokens({ shadowColor: 'shade' }).dark['--ui-shadow-color']).toBe('var(--ui-color-neutral-800)')
+    // defaults apply when shades are unset — dark rests on stock literal black
+    expect(styleTokens({ shadowColor: 'shade' }).dark['--ui-shadow-color']).toBe('black')
   })
 
   it('styleTokens maps token shades per mode, only for modes present', async () => {

@@ -243,13 +243,13 @@ function parseDeclaration(result: ParsedCSS, selector: string, prop: string, val
  * Reconstruct a color choice (named value, or a per-mode neutral/primary
  * ramp shade) from a pair of emitted per-mode values.
  */
-function matchColorChoice(value: { light?: string, dark?: string }, table: Record<string, { light: string, dark: string }>): { color: string, shade?: { light: number, dark: number } } | undefined {
+function matchColorChoice(value: { light?: string, dark?: string }, table: Record<string, { light: string, dark: string }>): { color: string, shade?: { light: Shade, dark: Shade } } | undefined {
   const named = Object.keys(table).find(key => table[key]!.light === value.light && table[key]!.dark === value.dark)
   if (named) return { color: named }
   const lightRef = parseUiColorRef(value.light)
   const darkRef = parseUiColorRef(value.dark)
   if (lightRef && darkRef && lightRef.alias === darkRef.alias && (lightRef.alias === 'neutral' || lightRef.alias === 'primary')) {
-    return { color: lightRef.alias === 'primary' ? 'primary-shade' : 'shade', shade: { light: lightRef.shade, dark: darkRef.shade } }
+    return { color: lightRef.alias === 'primary' ? 'primary-shade' : 'shade', shade: { light: lightRef.shade as Shade, dark: darkRef.shade as Shade } }
   }
   return undefined
 }
@@ -557,8 +557,10 @@ function extractDefaults(components: Record<string, any>): StyleOptions['default
 }
 
 /** Border treatment lives only in the class bundles — read it back from them. */
+/** A compound entry's classes, whether written as a string or a slot map. */
+const classOf = (entry: Record<string, unknown>) => typeof entry.class === 'string' ? entry.class : Object.values(entry.class || {}).join(' ')
+
 function detectBorder(components: Record<string, any>): Pick<StyleOptions, 'border' | 'borderWidth' | 'frame'> {
-  const classOf = (entry: Record<string, unknown>) => typeof entry.class === 'string' ? entry.class : Object.values(entry.class || {}).join(' ')
   const texts = Object.values(components).flatMap(component => [
     ...Object.values((component?.slots || {}) as Record<string, string>),
     ...((component?.compoundVariants || []) as Array<Record<string, unknown>>).map(classOf)
@@ -578,7 +580,6 @@ function detectBorder(components: Record<string, any>): Pick<StyleOptions, 'bord
 
 /** Frame outlines live on solid-variant compounds referencing the accented border. */
 function detectFrame(components: Record<string, any>): boolean {
-  const classOf = (entry: Record<string, unknown>) => typeof entry.class === 'string' ? entry.class : Object.values(entry.class || {}).join(' ')
   return Object.values(components).some(component =>
     ((component?.compoundVariants || []) as Array<Record<string, unknown>>).some(entry =>
       entry.variant === 'solid' && classOf(entry).includes('ring-(--ui-border-accented)')

@@ -1,5 +1,5 @@
-import type { ThemeDoc } from './types'
-import { DEFAULT_COLORS, THEME_DEFAULTS } from './types'
+import type { ThemeDoc, ShadeStop } from './types'
+import { DEFAULT_COLORS, THEME_DEFAULTS, SEMANTIC_ALIASES } from './types'
 import type { StyleOptions } from './styles'
 import { styleTokens, TOKEN_SHADE_TARGETS } from './styles'
 import { parseUiColorRef } from './resolve'
@@ -27,8 +27,6 @@ export const SECTION_GROUPS: Record<'colors' | 'general' | 'style', SectionKey[]
   style: ['shadow', 'innerShadow', 'borders']
 }
 
-const SEMANTIC_ALIASES = ['secondary', 'success', 'info', 'warning', 'error'] as const
-
 /** Which color section a semantic token (or token shade) belongs to. */
 function tokenSection(token: string): 'primary' | 'semantic' | 'neutral' {
   if (token === '--ui-primary' || token.startsWith('--ui-color-primary')) return 'primary'
@@ -42,11 +40,11 @@ function tokenSection(token: string): 'primary' | 'semantic' | 'neutral' {
  * SAME choice in different slots. Both sides are compared canonicalized:
  * promotable tokens count as shades, never as raw tokens.
  */
-export function promotedShades(doc: ThemeDoc): Record<string, { light?: number, dark?: number }> {
-  const promoted: Record<string, { light?: number, dark?: number }> = {}
+export function promotedShades(doc: ThemeDoc): Record<string, { light?: ShadeStop, dark?: ShadeStop }> {
+  const promoted: Record<string, { light?: ShadeStop, dark?: ShadeStop }> = {}
   const parse = (value: string | undefined, ramp: string) => {
     const ref = parseUiColorRef(value)
-    return ref?.alias === ramp ? ref.shade : undefined
+    return ref?.alias === ramp ? ref.shade as ShadeStop : undefined
   }
   for (const target of TOKEN_SHADE_TARGETS) {
     if (doc.style?.tokenShades?.[target.token]) continue
@@ -74,8 +72,7 @@ function ownedTokens(doc: ThemeDoc, section: 'primary' | 'semantic' | 'neutral')
 }
 
 function ownedTokenShades(doc: ThemeDoc, section: 'primary' | 'semantic' | 'neutral') {
-  const merged = { ...promotedShades(doc), ...doc.style?.tokenShades }
-  return Object.fromEntries(Object.entries(merged).filter(([token]) => tokenSection(token) === section))
+  return Object.fromEntries(Object.entries(canonicalTokenShades(doc)).filter(([token]) => tokenSection(token) === section))
 }
 
 function alias(doc: ThemeDoc, name: keyof typeof DEFAULT_COLORS): string {
@@ -137,14 +134,18 @@ export function pickSection(doc: ThemeDoc, key: SectionKey): unknown {
     case 'panels':
     case 'inputs':
       return groupPick(doc, key)
-    case 'shadow':
+    case 'shadow': {
+      // 'shade' with no explicit stops emits exactly the stock shadow
+      // colors (neutral-950 / black) — a non-choice, same as absent
+      const color = style.shadowColor === 'default' ? null : style.shadowColor ?? null
       return {
         shadow: style.shadow ?? 'none',
-        color: style.shadowColor ?? null,
+        color: color === 'shade' && !style.shadowShade ? null : color,
         shade: style.shadowShade ?? null,
         opacity: style.shadowOpacity ?? null,
         geometry: style.shadowGeometry ?? null
       }
+    }
     case 'innerShadow':
       return {
         shadow: style.innerShadow ?? 'none',
@@ -182,7 +183,7 @@ export function sectionFingerprint(doc: ThemeDoc, key: SectionKey): string {
  * interconverts). The per-row shade resets restore THESE — the baseline's
  * choice, not stock.
  */
-export function canonicalTokenShades(doc: ThemeDoc): Record<string, { light?: number, dark?: number }> {
+export function canonicalTokenShades(doc: ThemeDoc): Record<string, { light?: ShadeStop, dark?: ShadeStop }> {
   return { ...promotedShades(doc), ...doc.style?.tokenShades }
 }
 

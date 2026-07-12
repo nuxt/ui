@@ -2,7 +2,7 @@ import { defu } from 'defu'
 import { THEME_TAG_IDS, THEME_STATE_KEYS, THEME_STORAGE_KEYS } from '../utils/theme-keys'
 import { useLocalStorage } from '@vueuse/core'
 import { themeIcons, cssVariableDefaults, readLocalStorage, FONT_WEIGHT_DEFAULTS } from '../utils/theme'
-import { generateCSS, generateConfig, mergeUi, isDefaultStyle, DEFAULT_COLORS, THEME_DEFAULTS, LIBRARY_TOKEN_DEFAULTS } from '../utils/theme-engine'
+import { generateCSS, generateConfig, mergeUi, isDefaultStyle, DEFAULT_COLORS, THEME_DEFAULTS, SEMANTIC_ALIASES, LIBRARY_TOKEN_DEFAULTS } from '../utils/theme-engine'
 import type { ThemeDoc, ThemePalette } from '../utils/theme-engine'
 import { omit } from '#ui/utils'
 import colors from 'tailwindcss/colors'
@@ -598,7 +598,7 @@ export function useTheme() {
     if (settings.icons && settings.icons in themeIcons) icon.value = settings.icons
     if (settings.blackAsPrimary !== undefined) setBlackAsPrimary(!!settings.blackAsPrimary)
 
-    const colorKeys = ['secondary', 'success', 'info', 'warning', 'error'] as const
+    const colorKeys = SEMANTIC_ALIASES
     const savedExtras: Record<string, any> = { ...aiThemeExtras.value }
 
     for (const color of colorKeys) {

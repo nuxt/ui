@@ -19,8 +19,7 @@ export const presets: ThemePreset[] = [{
   description: 'The stock theme — everything inherited.',
   icon: 'i-simple-icons-nuxt',
   doc: {
-    version: 1,
-    meta: { name: 'Nuxt UI' }
+    version: 1
   }
 }, {
   id: 'shadcn',
@@ -29,7 +28,6 @@ export const presets: ThemePreset[] = [{
   icon: 'i-simple-icons-shadcnui',
   doc: {
     version: 1,
-    meta: { name: 'Shadcn', base: 'shadcn' },
     blackAsPrimary: true,
     colors: {
       neutral: 'zinc'
@@ -51,7 +49,6 @@ export const presets: ThemePreset[] = [{
   icon: 'i-lucide-zap',
   doc: {
     version: 1,
-    meta: { name: 'Neo-brutalist', base: 'neo-brutalist' },
     // A sculpted warm neutral running lilac-tinted paper into pure carbon.
     palettes: {
       carbon: {
@@ -114,7 +111,6 @@ export const presets: ThemePreset[] = [{
   icon: 'i-lucide-citrus',
   doc: {
     version: 1,
-    meta: { name: 'Orchard', base: 'orchard' },
     // A sculpted green-tinted neutral (studio curve editor) whose light end
     // starts far below white — the whole page sits on foliage.
     palettes: {
@@ -183,7 +179,6 @@ export const presets: ThemePreset[] = [{
   icon: 'i-lucide-candy',
   doc: {
     version: 1,
-    meta: { name: 'Marshmallow', base: 'marshmallow' },
     // A sculpted pink-mauve neutral (chroma peaks mid-ramp) instead of the
     // stock mauve.
     palettes: {
@@ -254,7 +249,6 @@ export const presets: ThemePreset[] = [{
   icon: 'i-lucide-book-open',
   doc: {
     version: 1,
-    meta: { name: 'Comicbook', base: 'comicbook' },
     // A cool-violet sculpted neutral for the panel grays.
     palettes: {
       'custom-neutral': {
@@ -320,7 +314,6 @@ export const presets: ThemePreset[] = [{
   icon: 'i-simple-icons-anthropic',
   doc: {
     version: 1,
-    meta: { name: 'Anthropic', base: 'anthropic' },
     palettes: {
       // Anchored on the real brand clay — hsl(14.8 63.1% 59.6%) — at 500,
       // with the ramp's hue and chroma re-fit around it.
@@ -407,7 +400,6 @@ export const presets: ThemePreset[] = [{
   icon: 'i-simple-icons-spotify',
   doc: {
     version: 1,
-    meta: { name: 'Spotify', base: 'spotify' },
     palettes: {
       signal: {
         shades: {
@@ -468,7 +460,6 @@ export const presets: ThemePreset[] = [{
   icon: 'i-simple-icons-bootstrap',
   doc: {
     version: 1,
-    meta: { name: 'Bootstrap', base: 'bootstrap' },
     // The real 5.3 scales: 100–400 are tint-color() (mix with white at
     // 80/60/40/20%), 600–900 are shade-color() (mix with black), extended
     // to 50/950 with the same math. Prefixed names: palettes named plainly

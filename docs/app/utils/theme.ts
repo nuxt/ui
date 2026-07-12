@@ -11,6 +11,11 @@ export function readLocalStorage<T>(key: string, fallback: T): T {
   }
 }
 
+/** Uppercase the first letter — labels from config values. */
+export function capitalize(value: string) {
+  return value.charAt(0).toUpperCase() + value.slice(1)
+}
+
 /** Tailwind's stock weight ladder — set steps are absences at these values. */
 export const FONT_WEIGHT_DEFAULTS = { normal: 400, medium: 500, semibold: 600, bold: 700 } as const
 

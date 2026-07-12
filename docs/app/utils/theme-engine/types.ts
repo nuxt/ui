@@ -4,18 +4,20 @@ export const SHADES = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950] as 
 
 export type Shade = typeof SHADES[number]
 
+/**
+ * The shade sliders' full travel: the ramp plus literal white/black ends.
+ * The ends matter because several stock defaults are literals the ramp
+ * can't express (--ui-bg is `white`, the stock dark shadow is `black`) —
+ * without them the sliders could only pin lookalike ramp overrides.
+ */
+export const SHADE_LADDER = ['white', ...SHADES, 'black'] as const
+
+export type ShadeStop = typeof SHADE_LADDER[number]
+
 export type ColorAlias = 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'error' | 'neutral'
 
 export interface ThemePalette {
-  /** Tailwind palette this one is based on, when only some shades differ */
-  extends?: string
   shades: Partial<Record<Shade, string>>
-  /**
-   * Generator params the shades were materialized from (see palette.ts),
-   * kept so the palette stays editable in the studio. Purely metadata:
-   * exports and application always use the materialized `shades`.
-   */
-  curve?: import('./palette').PaletteCurveParams
 }
 
 /**
@@ -25,13 +27,6 @@ export interface ThemePalette {
  */
 export interface ThemeDoc {
   version: 1
-  meta?: {
-    name?: string
-    /** Preset id this document was forked from */
-    base?: string
-    /** Seed used by shuffle, kept for reproducible rolls */
-    seed?: number
-  }
   /** L0 — custom palettes, injected as `--color-{name}-{shade}` */
   palettes?: Record<string, ThemePalette>
   /** L1 — alias → palette name (tailwind or a key of `palettes`) */
@@ -93,6 +88,9 @@ export const DEFAULT_COLORS: Record<ColorAlias, string> = {
   neutral: 'slate'
 }
 
+/** Every color alias that isn't primary or neutral. */
+export const SEMANTIC_ALIASES = ['secondary', 'success', 'info', 'warning', 'error'] as const
+
 export const THEME_DEFAULTS = {
   radius: 0.25,
   fontSize: 16,
@@ -100,10 +98,6 @@ export const THEME_DEFAULTS = {
   font: 'Public Sans',
   icons: 'lucide'
 } as const
-
-export function createThemeDoc(): ThemeDoc {
-  return { version: 1 }
-}
 
 /** A document with no overrides means "stock Nuxt UI". */
 export function isDefaultTheme(doc: ThemeDoc): boolean {

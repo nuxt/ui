@@ -1,6 +1,6 @@
 import colors from 'tailwindcss/colors'
 import { THEME_STATE_KEYS, THEME_STORAGE_KEYS } from '../utils/theme-keys'
-import { presets, docToSettings, isDefaultTheme, generatePalette, applyPaletteEffects, isDefaultEffects, parseCssColor, parseUiColorRef, styleComponents, styleTokens, sectionFingerprint, mergeSection, SECTION_GROUPS, DEFAULT_COLORS, SHADES, TOKEN_SHADE_TARGETS } from '../utils/theme-engine'
+import { presets, docToSettings, isDefaultTheme, generatePalette, applyPaletteEffects, isDefaultEffects, parseCssColor, styleComponents, styleTokens, sectionFingerprint, mergeSection, canonicalTokenShades, SECTION_GROUPS, DEFAULT_COLORS, SHADES } from '../utils/theme-engine'
 import type { SectionKey, ThemeDoc, ThemePreset, PaletteCurveParams, PaletteEffects, StoredPaletteParams, StyleOptions, Shade, ColorAlias, TokenRamp } from '../utils/theme-engine'
 import { readLocalStorage } from '../utils/theme'
 
@@ -70,6 +70,15 @@ export function useThemeStudio() {
   // matter which component fires the event.
   const trackedAt = useState<number | undefined>('nuxt-ui-style-tracked-at', () => undefined)
 
+  // Style and palette edits share one clock deliberately: a drag session
+  // is one gesture, not two metrics.
+  function trackThrottled(...args: Parameters<typeof track>) {
+    if (!trackedAt.value || Date.now() - trackedAt.value > 2000) {
+      trackedAt.value = Date.now()
+      track(...args)
+    }
+  }
+
   function setStyle(options: StyleOptions) {
     const previousStyle = style.value
     const previous = styleTokens(previousStyle)
@@ -96,15 +105,12 @@ export function useThemeStudio() {
     }
 
     // Sliders stream through here at drag frequency — one event per burst.
-    if (!trackedAt.value || Date.now() - trackedAt.value > 2000) {
-      trackedAt.value = Date.now()
-      track('Theme Style Changed', {
-        shadow: style.value.shadow || 'none',
-        border: style.value.border || 'default',
-        borderColor: style.value.borderColor || 'default',
-        shadowColor: style.value.shadowColor || 'default'
-      })
-    }
+    trackThrottled('Theme Style Changed', {
+      shadow: style.value.shadow || 'none',
+      border: style.value.border || 'default',
+      borderColor: style.value.borderColor || 'default',
+      shadowColor: style.value.shadowColor || 'default'
+    })
   }
 
   function customPaletteName(alias: string) {
@@ -210,10 +216,7 @@ export function useThemeStudio() {
     setPaletteParams({ ...paletteParams.value, [alias]: entry })
 
     // Live drags call this at ~16Hz — one analytics event per burst is plenty.
-    if (!trackedAt.value || Date.now() - trackedAt.value > 2000) {
-      trackedAt.value = Date.now()
-      track('Theme Custom Palette', { alias })
-    }
+    trackThrottled('Theme Custom Palette', { alias })
   }
 
   /**
@@ -243,32 +246,17 @@ export function useThemeStudio() {
    * instead of stale defaults. Only neutral-ramp refs map onto sliders;
    * anything else (white/black literals, non-neutral refs) stays token-only.
    */
+  /**
+   * The style axis a doc implies: its explicit style plus ramp-shaped token
+   * overrides promoted into tokenShades (canonicalTokenShades — shared with
+   * the section dirty/reset comparisons, which depend on this promotion
+   * being identical on both sides).
+   */
   function deriveStyle(doc: ThemeDoc): StyleOptions {
     const derived: StyleOptions = { ...(doc.style || {}) }
-
-    const parse = (value: string | undefined, ramp: string) => {
-      const ref = parseUiColorRef(value)
-      return ref?.alias === ramp ? ref.shade : undefined
-    }
-
-    for (const target of TOKEN_SHADE_TARGETS) {
-      if (derived.tokenShades?.[target.token]) continue
-
-      const light = parse(doc.tokens?.light?.[target.token], target.ramp)
-      const dark = parse(doc.tokens?.dark?.[target.token], target.ramp)
-      if (light !== undefined || dark !== undefined) {
-        // Only modes the doc actually overrides — backfilling the other
-        // mode would turn a non-choice into an exported override.
-        derived.tokenShades = {
-          ...derived.tokenShades,
-          [target.token]: {
-            ...(light !== undefined ? { light } : {}),
-            ...(dark !== undefined ? { dark } : {})
-          }
-        }
-      }
-    }
-
+    const shades = canonicalTokenShades(doc)
+    // guard: an empty tokenShades object would flip isDefaultStyle
+    if (Object.keys(shades).length) derived.tokenShades = shades
     return derived
   }
 
