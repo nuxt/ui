@@ -50,6 +50,17 @@ const open = ref(props.defaultOpen)
         class="justify-start flex-1"
       />
 
+      <UButton
+        v-if="helpTo"
+        :to="helpTo"
+        size="sm"
+        color="neutral"
+        variant="ghost"
+        icon="i-lucide-help-circle"
+        aria-label="About this setting"
+        @click.stop
+      />
+
       <UTooltip v-if="sectionKey" :text="dirty ? 'Reset to preset' : 'Matches the preset'">
         <UButton
           size="sm"
@@ -61,17 +72,6 @@ const open = ref(props.defaultOpen)
           @click.stop="resetSection(sectionKey!)"
         />
       </UTooltip>
-
-      <UButton
-        v-if="helpTo"
-        :to="helpTo"
-        size="sm"
-        color="neutral"
-        variant="ghost"
-        icon="i-lucide-help-circle"
-        aria-label="About this setting"
-        @click.stop
-      />
 
       <div v-if="!!slots.actions" class="flex items-center gap-1" @click.stop="open = true">
         <slot name="actions" />

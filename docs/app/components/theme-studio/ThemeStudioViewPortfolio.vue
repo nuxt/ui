@@ -39,8 +39,8 @@ const about = {
 
 const experience = [{
   date: '2025 - Present',
-  position: 'Public Contributor at',
-  company: { name: 'Nuxt', logo: 'i-simple-icons-nuxtdotjs' }
+  position: 'Public Contributor for',
+  company: { name: 'Nuxt UI', logo: 'i-simple-icons-nuxtdotjs' }
 }, {
   date: '2024 - Present',
   position: 'Founder of',
@@ -52,62 +52,64 @@ const experience = [{
 }]
 
 const posts = [{
-  title: 'From Mockup to Market: My End-to-End Product Design Process',
-  description: 'A walkthrough of the iterative loop I run on every project, from the first research call to the final engineering handoff.',
+  title: 'Twelve Identical Greys: A Field Guide to Choosing Your Neutral',
+  description: 'They are not identical and I will die on this hill. Slate is cool, stone is warm, zinc is for when you can\'t commit - a practical taxonomy.',
   date: 'Apr 23, 2025'
 }, {
-  title: 'The Psychology of Color in UI Design',
-  description: 'How deliberate color decisions steer attention, set tone and quietly shape the way people move through a product.',
+  title: 'I Nudged a Border Radius by 0.125rem and Felt Something',
+  description: 'A meditation on the space between rounded-md and rounded-lg, and why nobody else at the review could see the difference. They saw it. They\'re being polite.',
   date: 'Mar 15, 2025'
 }, {
-  title: 'How I Built My Design System from Scratch',
-  description: 'Auditing years of accumulated UI, distilling it into tokens and components, and the mistakes I would skip next time.',
+  title: 'My Design System Now Has Its Own Design System',
+  description: 'The tokens have tokens. The naming convention has a naming convention. At some point I will ship a button - a retrospective.',
   date: 'Mar 5, 2025'
 }]
 
+// Obviously-fake reviews: the testimonial carousel demos better with famous
+// dead Dutch masters than with invented product directors.
 const testimonials = [{
-  quote: 'Mike reshaped how our product feels end to end. He balances polished visuals with ruthless simplicity, and the redesign cut our support tickets by 40% while lifting conversion on every key flow.',
-  author: { name: 'Sarah Chen', description: 'Product Director at Bloom Finance' }
+  quote: 'At last, a man who treats the grid as a moral position. I did notice his palette editor permits more than three colors — I have chosen to forgive this.',
+  author: { name: 'Piet Mondrian', description: 'Painter & grid enthusiast, 1872–1944' }
 }, {
-  quote: 'Bringing Mike in was the best call we made. He challenged our assumptions, ran real user research, and because he writes the front-end himself the handoff to engineering was completely painless.',
-  author: { name: 'Michael Rodriguez', description: 'Co-founder of Wavelength Music' }
+  quote: 'I asked for a simple staircase component. The popovers opened into popovers, which opened into further popovers. Honestly, I have never felt more at home.',
+  author: { name: 'M.C. Escher', description: 'Staircase guy, 1898–1972' }
 }, {
-  quote: 'Mike has a rare talent for turning dense sustainability data into interfaces people actually enjoy. EcoTrack changed how our users engage with their impact, and he got there with equal parts craft and rigor.',
-  author: { name: 'Dr. Aisha Johnson', description: 'Chief Innovation Officer at GreenTech Solutions' }
+  quote: 'I set the primary color to chrome yellow and wept at the shades it produced. Five stars. Would have commissioned him, but our schedules never aligned.',
+  author: { name: 'Vincent van Gogh', description: 'Colorist, freelance, 1853–1890' }
 }]
 
 const faqCategories = [{
   label: 'Services & Process',
   questions: [{
     label: 'What services do you offer?',
-    content: 'Design systems, UX/UI design and front-end development - designed in Figma, built in Vue and Nuxt. I also cover the surrounding craft: branding, print, photography, video and animation.'
+    content: 'Design systems, UX/UI design and front-end development - designed in Figma, built in Nuxt. I also cover the surrounding craft: branding, print, photography, video and animation.'
   }, {
     label: 'What is your design process like?',
-    content: 'Collaborative and iterative: discovery and research, ideation and prototyping, user testing, visual design, then close pairing with engineers during implementation. The shape flexes to fit each project.'
+    content: 'Iterative: sketch, build, squint at it in dark mode, nudge a slider by 0.125rem, declare it the final tweak. Repeat until shipped, or until someone gently takes the slider away.'
   }, {
     label: 'Do you work with startups?',
-    content: 'Absolutely. I enjoy shaping a product vision from the ground up and can adapt my process to a fast-moving startup cadence.'
+    content: 'Absolutely - I run one. The daily standup is me and a wall of post-it notes, and the post-its are consistently flaking.'
   }]
 }, {
   label: 'Pricing & Timelines',
   questions: [{
     label: 'How much does a project typically cost?',
-    content: 'It depends on scope and complexity. Full design-and-build engagements usually start around €5,000, with most landing between €8,000 and €25,000. My consulting day rate is €700.'
+    content: 'This theme editor is free and takes payment in GitHub stars. For anything else: it depends - an answer that has never once been wrong.'
   }, {
     label: 'What are your payment terms?',
-    content: 'A 40% deposit reserves the project slot, with the remaining 60% due on delivery. I accept bank transfer and Stripe.'
+    content: 'Stroopwafels, baked beans, or sincere compliments about my border-radius choices. Bank transfer is also, grudgingly, accepted.'
   }, {
     label: 'How long does a typical project take?',
-    content: 'Smaller projects run three to four weeks; larger builds range from two to four months. You get a detailed estimate after discovery.'
+    content: 'Somewhere between one focused afternoon and "I rebuilt the design system twice, it\'s better now, please don\'t ask." Discovery narrows this down considerably.'
   }]
 }, {
   label: 'About Me',
   questions: [{
     label: 'What do you enjoy most about your work?',
-    content: 'Watching someone use a thing I built and find it genuinely effortless. Bridging user needs and technical constraints is the puzzle that keeps me here.'
+    content: 'Watching someone use a thing I built and say "oh, I found a bug". Bridging user needs and technical constraints is the puzzle that keeps me here while the users scare me away.'
   }, {
     label: 'What are your hobbies outside of work?',
-    content: 'Cycling the Dutch coast, film photography, hunting down good coffee in Amsterdam and contributing to open-source design tooling.'
+    content: 'Arts and crafts, film photography, hunting down good curry in Amsterdam and contributing to open-source UI tooling.'
   }]
 }]
 
@@ -156,8 +158,8 @@ onUnmounted(() => clearTimeout(appearTimeout))
         :ui="{
           container: 'py-18 sm:py-24 lg:py-32',
           headline: 'flex items-center justify-center',
-          title: 'text-shadow-md max-w-lg mx-auto text-pretty text-3xl sm:text-4xl lg:text-5xl',
-          description: 'mt-2 text-md mx-auto max-w-2xl text-pretty sm:text-md text-muted',
+          title: 'text-shadow-md max-w-lg mx-auto text-balance text-3xl sm:text-4xl lg:text-5xl',
+          description: 'mt-2 text-md mx-auto max-w-2xl text-balance sm:text-md text-muted',
           links: 'mt-4 flex-col justify-center items-center'
         }"
       >
