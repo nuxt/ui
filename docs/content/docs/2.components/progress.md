@@ -95,6 +95,10 @@ props:
 ---
 ::
 
+::tip
+The animation is automatically disabled when the user prefers reduced motion, the indeterminate bar is displayed as a full width pulse instead.
+::
+
 ### Orientation
 
 Use the `orientation` prop to change the orientation of the Progress. Defaults to `horizontal`.
