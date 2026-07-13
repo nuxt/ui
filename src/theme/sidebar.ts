@@ -26,11 +26,11 @@ export default (options: Required<ModuleOptions>) => ({
     },
     side: {
       left: {
-        container: 'left-0 border-e border-default',
+        container: 'start-0 border-e border-default',
         rail: 'end-0 translate-x-1/2'
       },
       right: {
-        container: 'right-0 border-s border-default',
+        container: 'end-0 border-s border-default',
         rail: '-start-px -translate-x-1/2'
       }
     },
@@ -92,13 +92,13 @@ export default (options: Required<ModuleOptions>) => ({
     side: 'left',
     collapsible: 'offcanvas',
     class: {
-      container: 'data-[state=collapsed]:-left-(--sidebar-width)'
+      container: 'data-[state=collapsed]:-start-(--sidebar-width)'
     }
   }, {
     side: 'right',
     collapsible: 'offcanvas',
     class: {
-      container: 'data-[state=collapsed]:-right-(--sidebar-width)'
+      container: 'data-[state=collapsed]:-end-(--sidebar-width)'
     }
   }, {
     variant: 'floating',
