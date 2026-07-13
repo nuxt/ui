@@ -19,7 +19,7 @@ export type RadioGroupItem = RadioGroupValue | {
    * The icon displayed next to the label.
    * @IconifyIcon
    */
-  icon?: string
+  icon?: IconProps['name']
   class?: any
   ui?: Pick<RadioGroup['slots'], 'item' | 'container' | 'base' | 'indicator' | 'wrapper' | 'label' | 'leadingIcon' | 'description'>
   [key: string]: any
@@ -105,6 +105,7 @@ import { useForwardProps } from '../composables/useForwardProps'
 import { useFormField } from '../composables/useFormField'
 import { get } from '../utils'
 import { tv } from '../utils/tv'
+import type { IconProps } from './Icon.vue'
 import UIcon from './Icon.vue'
 
 const _props = withDefaults(defineProps<RadioGroupProps<T, VK>>(), {

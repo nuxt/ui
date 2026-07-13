@@ -20,7 +20,7 @@ export type CheckboxGroupItem = CheckboxGroupValue | {
    * The icon displayed next to the label.
    * @IconifyIcon
    */
-  icon?: string
+  icon?: IconProps['name']
   class?: any
   ui?: Pick<CheckboxGroup['slots'], 'item'> & Omit<Required<CheckboxProps>['ui'], 'root'>
   [key: string]: any
@@ -94,6 +94,7 @@ import { useFormField } from '../composables/useFormField'
 import { get, omit } from '../utils'
 import { tv } from '../utils/tv'
 import UCheckbox from './Checkbox.vue'
+import type { IconProps } from './Icon.vue'
 
 const _props = withDefaults(defineProps<CheckboxGroupProps<T, VK>>(), {
   labelKey: 'label',
@@ -192,7 +193,7 @@ function onUpdate(value: any) {
       <UCheckbox
         v-for="item in normalizedItems"
         :key="item.value"
-        v-bind="({ ...omit(item, ['icon']), ...checkboxProps } as any)"
+        v-bind="{ ...item, ...checkboxProps }"
         :leading-icon="item.icon"
         :color="color"
         :highlight="highlight"
