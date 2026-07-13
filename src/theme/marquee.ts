@@ -32,7 +32,7 @@ export default {
     orientation: 'horizontal',
     class: {
       root: 'flex-row',
-      content: 'flex-row animate-[marquee_var(--duration)_linear_infinite] rtl:animate-[marquee-rtl_var(--duration)_linear_infinite] backface-hidden'
+      content: 'flex-row motion-safe:animate-[marquee_var(--duration)_linear_infinite] motion-safe:rtl:animate-[marquee-rtl_var(--duration)_linear_infinite] backface-hidden'
     }
   }, {
     orientation: 'horizontal',
@@ -44,7 +44,7 @@ export default {
     orientation: 'vertical',
     class: {
       root: 'flex-col',
-      content: 'flex-col animate-[marquee-vertical_var(--duration)_linear_infinite] rtl:animate-[marquee-vertical-rtl_var(--duration)_linear_infinite] h-[fit-content] backface-hidden'
+      content: 'flex-col motion-safe:animate-[marquee-vertical_var(--duration)_linear_infinite] motion-safe:rtl:animate-[marquee-vertical-rtl_var(--duration)_linear_infinite] h-[fit-content] backface-hidden'
     }
   }, {
     orientation: 'vertical',

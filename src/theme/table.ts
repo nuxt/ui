@@ -36,7 +36,7 @@ export default (options: Required<ModuleOptions>) => ({
     },
     loading: {
       true: {
-        thead: 'after:absolute after:z-1 after:h-px'
+        thead: 'after:absolute after:z-1 after:h-px motion-reduce:after:inset-x-0 motion-reduce:after:animate-pulse'
       }
     },
     externalScroll: {
@@ -71,25 +71,25 @@ export default (options: Required<ModuleOptions>) => ({
     loading: true,
     loadingAnimation: 'carousel',
     class: {
-      thead: 'after:animate-[carousel_2s_ease-in-out_infinite] rtl:after:animate-[carousel-rtl_2s_ease-in-out_infinite]'
+      thead: 'motion-safe:after:animate-[carousel_2s_ease-in-out_infinite] motion-safe:rtl:after:animate-[carousel-rtl_2s_ease-in-out_infinite]'
     }
   }, {
     loading: true,
     loadingAnimation: 'carousel-inverse',
     class: {
-      thead: 'after:animate-[carousel-inverse_2s_ease-in-out_infinite] rtl:after:animate-[carousel-inverse-rtl_2s_ease-in-out_infinite]'
+      thead: 'motion-safe:after:animate-[carousel-inverse_2s_ease-in-out_infinite] motion-safe:rtl:after:animate-[carousel-inverse-rtl_2s_ease-in-out_infinite]'
     }
   }, {
     loading: true,
     loadingAnimation: 'swing',
     class: {
-      thead: 'after:animate-[swing_2s_ease-in-out_infinite]'
+      thead: 'motion-safe:after:animate-[swing_2s_ease-in-out_infinite]'
     }
   }, {
     loading: true,
     loadingAnimation: 'elastic',
     class: {
-      thead: 'after:animate-[elastic_2s_ease-in-out_infinite]'
+      thead: 'motion-safe:after:animate-[elastic_2s_ease-in-out_infinite]'
     }
   }],
   defaultVariants: {
