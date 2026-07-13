@@ -58,12 +58,16 @@ const columns: TableColumn<Row>[] = [
   { accessorKey: 'status', header: 'Status' }
 ]
 
+// `mountSuspended` doesn't infer the Table's row generic, so the mounted prop
+// expects `TableColumn<unknown, unknown>[]` — cast the checked columns at use.
+const tableProps = (data: Row[]) => ({ data, columns: columns as unknown as TableColumn<unknown, unknown>[] })
+
 // The per-cell `ui.td()` path at scale (200 rows x 5 columns = 1000 cells).
 describe('Table mount (200 x 5)', () => {
   const data = makeData(200)
 
   bench('mount', async () => {
-    const wrapper = await mountSuspended(Table, { props: { data, columns } })
+    const wrapper = await mountSuspended(Table, { props: tableProps(data) })
     wrapper.unmount()
   })
 })
@@ -75,7 +79,7 @@ describe('Table re-render (new data identity)', () => {
     await wrapper.setProps({ data: makeData(200) })
   }, {
     async setup() {
-      wrapper = await mountSuspended(Table, { props: { data: makeData(200), columns } })
+      wrapper = await mountSuspended(Table, { props: tableProps(makeData(200)) })
     },
     teardown() {
       wrapper?.unmount()

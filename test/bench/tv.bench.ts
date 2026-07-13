@@ -15,14 +15,14 @@ const buttonProps = {
   square: false,
   leading: false,
   trailing: false
-}
+} as const
 const tableProps = {
   sticky: false,
   loading: false,
   loadingColor: 'primary',
   loadingAnimation: 'carousel',
   externalScroll: false
-}
+} as const
 
 // Building the factory is the expensive step (deep-merges the whole variant
 // matrix, joins every slot, flattens compound variants). Today it happens inside
