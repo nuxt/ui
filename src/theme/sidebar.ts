@@ -68,13 +68,13 @@ export default (options: Required<ModuleOptions>) => ({
     side: 'left',
     collapsible: ['offcanvas', 'icon'],
     class: {
-      rail: 'cursor-w-resize data-[state=collapsed]:cursor-e-resize'
+      rail: 'cursor-w-resize rtl:cursor-e-resize data-[state=collapsed]:cursor-e-resize data-[state=collapsed]:rtl:cursor-w-resize'
     }
   }, {
     side: 'right',
     collapsible: ['offcanvas', 'icon'],
     class: {
-      rail: 'cursor-e-resize data-[state=collapsed]:cursor-w-resize'
+      rail: 'cursor-e-resize rtl:cursor-w-resize data-[state=collapsed]:cursor-w-resize data-[state=collapsed]:rtl:cursor-e-resize'
     }
   }, {
     side: 'left',
