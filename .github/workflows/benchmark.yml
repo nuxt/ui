@@ -1,0 +1,47 @@
+name: benchmark
+
+on:
+  push:
+    branches:
+      - v4
+  pull_request:
+    branches:
+      - v4
+  workflow_dispatch:
+
+jobs:
+  benchmark:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      # OIDC token for tokenless CodSpeed uploads (public repo, no secret needed).
+      id-token: write
+
+    env:
+      NUXT_GITHUB_TOKEN: ${{ secrets.NUXT_GITHUB_TOKEN }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v6
+
+      - name: Install node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Prepare
+        run: pnpm run dev:prepare
+
+      - name: Run benchmarks
+        uses: CodSpeedHQ/action@v4
+        with:
+          mode: simulation
+          run: pnpm bench

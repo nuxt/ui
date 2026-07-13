@@ -2,6 +2,7 @@ import { fileURLToPath } from 'node:url'
 import { defineVitestProject } from '@nuxt/test-utils/config'
 import { defineConfig } from 'vitest/config'
 import vue from '@vitejs/plugin-vue'
+import codspeedPlugin from '@codspeed/vitest-plugin'
 import ui from './src/vite'
 import { glob } from 'tinyglobby'
 
@@ -28,6 +29,9 @@ export default defineConfig({
           name: 'nuxt',
           dir: './test',
           include: ['components/**/**.spec.ts', 'composables/**.spec.ts', 'utils/**/**.spec.ts'],
+          // Benchmarks run in the `vue` project only (happy-dom, faster); keep them
+          // out of the nuxt project so a bare `vitest bench` doesn't double-run them.
+          benchmark: { include: [] },
           environment: 'nuxt',
           environmentOptions: {
             nuxt: {
@@ -44,11 +48,14 @@ export default defineConfig({
           environment: 'happy-dom',
           dir: './test',
           include: ['components/**.spec.ts', 'composables/**.spec.ts', 'utils/**/**.spec.ts'],
+          benchmark: { include: ['bench/**/*.bench.ts'] },
           setupFiles: ['./test/utils/setup.ts']
         },
         plugins: [
           vue(),
           ui({ dts: false }),
+          // No-ops locally; only instruments under `CodSpeedHQ/action` in CI.
+          codspeedPlugin(),
           {
             name: 'nuxt-ui-test:components',
             enforce: 'pre',

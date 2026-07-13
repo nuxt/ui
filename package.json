@@ -124,6 +124,7 @@
     "test": "vitest",
     "test:vue": "vitest --project vue",
     "test:nuxt": "vitest --project nuxt",
+    "bench": "vitest bench --project vue",
     "release": "release-it"
   },
   "dependencies": {
@@ -194,6 +195,7 @@
     "vue-component-type-helpers": "^3.3.6"
   },
   "devDependencies": {
+    "@codspeed/vitest-plugin": "^5.7.1",
     "@nuxt/eslint-config": "^1.16.0",
     "@nuxt/module-builder": "^1.0.2",
     "@nuxt/test-utils": "^4.0.2",
