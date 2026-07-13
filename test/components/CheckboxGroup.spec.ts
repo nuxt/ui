@@ -1,6 +1,6 @@
 import { describe, it, expect, test } from 'vitest'
 import { axe } from 'vitest-axe'
-import { flushPromises, mount, VueWrapper } from '@vue/test-utils'
+import { flushPromises, mount, type VueWrapper } from '@vue/test-utils'
 import CheckboxGroup from '../../src/runtime/components/CheckboxGroup.vue'
 import Checkbox from '../../src/runtime/components/Checkbox.vue'
 import type { FormInputEvents } from '../../src/module'
