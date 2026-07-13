@@ -11,6 +11,7 @@ export default (options: Required<ModuleOptions>) => ({
     indicator: 'flex items-center justify-center size-full after:bg-default after:rounded-full',
     wrapper: 'w-full',
     label: 'block font-medium text-default',
+    leadingIcon: 'inline-block align-middle shrink-0 me-1.5',
     description: 'text-muted'
   },
   variants: {
@@ -64,7 +65,8 @@ export default (options: Required<ModuleOptions>) => ({
         base: 'size-3',
         item: 'text-xs',
         container: 'h-4',
-        indicator: 'after:size-1'
+        indicator: 'after:size-1',
+        leadingIcon: 'size-3'
       },
       sm: {
         fieldset: 'gap-y-0.5',
@@ -72,7 +74,8 @@ export default (options: Required<ModuleOptions>) => ({
         base: 'size-3.5',
         item: 'text-xs',
         container: 'h-4',
-        indicator: 'after:size-1'
+        indicator: 'after:size-1',
+        leadingIcon: 'size-3.5'
       },
       md: {
         fieldset: 'gap-y-1',
@@ -80,7 +83,8 @@ export default (options: Required<ModuleOptions>) => ({
         base: 'size-4',
         item: 'text-sm',
         container: 'h-5',
-        indicator: 'after:size-1.5'
+        indicator: 'after:size-1.5',
+        leadingIcon: 'size-4'
       },
       lg: {
         fieldset: 'gap-y-1',
@@ -88,7 +92,8 @@ export default (options: Required<ModuleOptions>) => ({
         base: 'size-4.5',
         item: 'text-sm',
         container: 'h-5',
-        indicator: 'after:size-1.5'
+        indicator: 'after:size-1.5',
+        leadingIcon: 'size-4.5'
       },
       xl: {
         fieldset: 'gap-y-1.5',
@@ -96,7 +101,8 @@ export default (options: Required<ModuleOptions>) => ({
         base: 'size-5',
         item: 'text-base',
         container: 'h-6',
-        indicator: 'after:size-2'
+        indicator: 'after:size-2',
+        leadingIcon: 'size-5'
       }
     },
     highlight: {

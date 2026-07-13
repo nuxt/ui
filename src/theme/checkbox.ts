@@ -9,6 +9,7 @@ export default (options: Required<ModuleOptions>) => ({
     icon: 'shrink-0 size-full',
     wrapper: 'w-full',
     label: 'block font-medium text-default',
+    leadingIcon: 'inline-block align-middle shrink-0 me-1.5',
     description: 'text-muted'
   },
   variants: {
@@ -48,27 +49,32 @@ export default (options: Required<ModuleOptions>) => ({
       xs: {
         base: 'size-3',
         container: 'h-4',
-        wrapper: 'text-xs'
+        wrapper: 'text-xs',
+        leadingIcon: 'size-3'
       },
       sm: {
         base: 'size-3.5',
         container: 'h-4',
-        wrapper: 'text-xs'
+        wrapper: 'text-xs',
+        leadingIcon: 'size-3.5'
       },
       md: {
         base: 'size-4',
         container: 'h-5',
-        wrapper: 'text-sm'
+        wrapper: 'text-sm',
+        leadingIcon: 'size-4'
       },
       lg: {
         base: 'size-4.5',
         container: 'h-5',
-        wrapper: 'text-sm'
+        wrapper: 'text-sm',
+        leadingIcon: 'size-4.5'
       },
       xl: {
         base: 'size-5',
         container: 'h-6',
-        wrapper: 'text-base'
+        wrapper: 'text-base',
+        leadingIcon: 'size-5'
       }
     },
     required: {

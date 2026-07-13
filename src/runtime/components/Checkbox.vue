@@ -48,6 +48,11 @@ export interface CheckboxProps<T = boolean> extends Pick<CheckboxRootProps<T>, '
    * @IconifyIcon
    */
   indeterminateIcon?: IconProps['name']
+  /**
+   * The icon displayed next to the label.
+   * @IconifyIcon
+   */
+  leadingIcon?: IconProps['name']
   class?: any
   ui?: Checkbox['slots']
 }
@@ -139,6 +144,7 @@ function onUpdate(value: any) {
 
     <div v-if="(props.label || !!slots.label) || (props.description || !!slots.description)" data-slot="wrapper" :class="ui.wrapper({ class: props.ui?.wrapper })">
       <component :is="(!props.variant || props.variant === 'list') ? Label : 'p'" v-if="props.label || !!slots.label" :for="id" data-slot="label" :class="ui.label({ class: props.ui?.label })">
+        <UIcon v-if="props.leadingIcon" :name="props.leadingIcon" data-slot="leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
         <slot name="label" :label="props.label">
           {{ props.label }}
         </slot>

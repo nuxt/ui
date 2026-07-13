@@ -16,6 +16,11 @@ export type CheckboxGroupItem = CheckboxGroupValue | {
   description?: string
   disabled?: boolean
   value?: string
+  /**
+   * The icon displayed next to the label.
+   * @IconifyIcon
+   */
+  icon?: string
   class?: any
   ui?: Pick<CheckboxGroup['slots'], 'item'> & Omit<Required<CheckboxProps>['ui'], 'root'>
   [key: string]: any
@@ -187,7 +192,8 @@ function onUpdate(value: any) {
       <UCheckbox
         v-for="item in normalizedItems"
         :key="item.value"
-        v-bind="{ ...item, ...checkboxProps }"
+        v-bind="({ ...omit(item, ['icon']), ...checkboxProps } as any)"
+        :leading-icon="item.icon"
         :color="color"
         :highlight="highlight"
         :size="size"

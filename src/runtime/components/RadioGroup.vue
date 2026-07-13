@@ -15,8 +15,13 @@ export type RadioGroupItem = RadioGroupValue | {
   description?: string
   disabled?: boolean
   value?: RadioGroupValue
+  /**
+   * The icon displayed next to the label.
+   * @IconifyIcon
+   */
+  icon?: string
   class?: any
-  ui?: Pick<RadioGroup['slots'], 'item' | 'container' | 'base' | 'indicator' | 'wrapper' | 'label' | 'description'>
+  ui?: Pick<RadioGroup['slots'], 'item' | 'container' | 'base' | 'indicator' | 'wrapper' | 'label' | 'leadingIcon' | 'description'>
   [key: string]: any
 }
 
@@ -100,6 +105,7 @@ import { useForwardProps } from '../composables/useForwardProps'
 import { useFormField } from '../composables/useFormField'
 import { get } from '../utils'
 import { tv } from '../utils/tv'
+import UIcon from './Icon.vue'
 
 const _props = withDefaults(defineProps<RadioGroupProps<T, VK>>(), {
   valueKey: 'value' as never,
@@ -213,6 +219,7 @@ function onUpdate(value: any) {
 
         <div v-if="(item.label || !!slots.label) || (item.description || !!slots.description)" data-slot="wrapper" :class="ui.wrapper({ class: [props.ui?.wrapper, item.ui?.wrapper] })">
           <component :is="(!props.variant || props.variant === 'list') ? Label : 'p'" v-if="item.label || !!slots.label" :for="item.id" data-slot="label" :class="ui.label({ class: [props.ui?.label, item.ui?.label], disabled: item.disabled || disabled })">
+            <UIcon v-if="item.icon" :name="item.icon" data-slot="leadingIcon" :class="ui.leadingIcon({ class: [props.ui?.leadingIcon, item.ui?.leadingIcon] })" />
             <slot name="label" :item="item" :model-value="(props.modelValue as RadioGroupValue)">
               {{ item.label }}
             </slot>
