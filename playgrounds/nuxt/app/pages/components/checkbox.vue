@@ -29,6 +29,7 @@ const value = ref(true)
     <UCheckbox label="Default value" v-bind="props" :default-value="true" />
     <UCheckbox label="Indeterminate" v-bind="props" default-value="indeterminate" />
     <UCheckbox label="Icon" icon="i-lucide-heart" v-bind="props" :model-value="true" />
+    <UCheckbox label="Leading icon" leading-icon="i-lucide-tag" v-bind="props" />
     <UCheckbox label="Required" v-bind="props" required />
     <UCheckbox label="Disabled" v-bind="props" disabled />
     <UCheckbox label="Description" description="This is a description" v-bind="props" />

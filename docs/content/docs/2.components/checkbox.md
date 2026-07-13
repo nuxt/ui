@@ -140,6 +140,20 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.ch
 :::
 ::
 
+### Leading Icon
+
+Use the `leading-icon` prop to display an icon next to the label of the Checkbox.
+
+::component-code
+---
+ignore:
+  - label
+props:
+  leadingIcon: 'i-lucide-tag'
+  label: Check me
+---
+::
+
 ### Color
 
 Use the `color` prop to change the color of the Checkbox.

@@ -61,8 +61,9 @@ You can also pass an array of objects with the following properties:
 - `description?: string`{lang="ts-type"}
 - [`value?: string`{lang="ts-type"}](#value-key)
 - `disabled?: boolean`{lang="ts-type"}
+- `icon?: string`{lang="ts-type"}
 - `class?: any`{lang="ts-type"}
-- `ui?: { item?: ClassNameValue, container?: ClassNameValue, base?: ClassNameValue, 'indicator'?: ClassNameValue, wrapper?: ClassNameValue, label?: ClassNameValue, description?: ClassNameValue }`{lang="ts-type"}
+- `ui?: { item?: ClassNameValue, container?: ClassNameValue, base?: ClassNameValue, 'indicator'?: ClassNameValue, wrapper?: ClassNameValue, label?: ClassNameValue, leadingIcon?: ClassNameValue, description?: ClassNameValue }`{lang="ts-type"}
 
 ::component-code
 ---
@@ -121,6 +122,35 @@ props:
     - label: 'Dark'
       description: 'This is the third option.'
       id: 'dark'
+---
+::
+
+### Icon
+
+Use the `icon` property in the items to display an icon next to the label.
+
+::component-code
+---
+ignore:
+  - modelValue
+  - items
+external:
+  - items
+  - modelValue
+externalTypes:
+  - RadioGroupItem[]
+props:
+  modelValue: 'system'
+  items:
+    - label: 'System'
+      icon: 'i-lucide-monitor'
+      value: 'system'
+    - label: 'Light'
+      icon: 'i-lucide-sun'
+      value: 'light'
+    - label: 'Dark'
+      icon: 'i-lucide-moon'
+      value: 'dark'
 ---
 ::
 
