@@ -70,7 +70,7 @@ export default (options: Required<ModuleOptions>) => ({
     class: {
       list: 'ms-2.5 ps-4 border-s border-default',
       item: '-ms-px',
-      indicator: 'absolute ms-2.5 start-0 transition-[translate,height] duration-200 h-(--indicator-size) translate-y-(--indicator-position) w-px rounded-full',
+      indicator: 'absolute ms-2.5 transition-[translate,height] duration-200 h-(--indicator-size) translate-y-(--indicator-position) w-px rounded-full',
       indicatorLine: 'hidden',
       indicatorActive: 'w-full h-full'
     }
