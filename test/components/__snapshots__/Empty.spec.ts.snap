@@ -151,6 +151,39 @@ exports[`Empty > renders with leading slot correctly 1`] = `
 </div>"
 `;
 
+exports[`Empty > renders with loading correctly 1`] = `
+"<div aria-busy="true" data-slot="root" class="relative flex flex-col items-center justify-center gap-4 rounded-lg p-4 sm:p-6 lg:p-8 min-w-0 bg-default ring ring-default">
+  <div data-slot="header" class="flex flex-col items-center gap-2 max-w-sm text-center"><span data-slot="avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated shrink-0 mb-2 size-10 text-xl [&amp;>[data-slot=icon]]:animate-spin"><span class="iconify i-lucide:loader-circle shrink-0 text-muted" aria-hidden="true" data-slot="icon"></span></span>
+    <h2 data-slot="title" class="text-highlighted text-pretty font-medium text-base">Title</h2>
+    <!--v-if-->
+  </div>
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Empty > renders with loading without icon correctly 1`] = `
+"<div aria-busy="true" data-slot="root" class="relative flex flex-col items-center justify-center gap-4 rounded-lg p-4 sm:p-6 lg:p-8 min-w-0 bg-default ring ring-default">
+  <div data-slot="header" class="flex flex-col items-center gap-2 max-w-sm text-center"><span data-slot="avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated shrink-0 mb-2 size-10 text-xl [&amp;>[data-slot=icon]]:animate-spin"><span class="iconify i-lucide:loader-circle shrink-0 text-muted" aria-hidden="true" data-slot="icon"></span></span>
+    <h2 data-slot="title" class="text-highlighted text-pretty font-medium text-base">Title</h2>
+    <!--v-if-->
+  </div>
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Empty > renders with loadingIcon correctly 1`] = `
+"<div aria-busy="true" data-slot="root" class="relative flex flex-col items-center justify-center gap-4 rounded-lg p-4 sm:p-6 lg:p-8 min-w-0 bg-default ring ring-default">
+  <div data-slot="header" class="flex flex-col items-center gap-2 max-w-sm text-center"><span data-slot="avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated shrink-0 mb-2 size-10 text-xl [&amp;>[data-slot=icon]]:animate-spin"><span class="iconify i-lucide:loader shrink-0 text-muted" aria-hidden="true" data-slot="icon"></span></span>
+    <h2 data-slot="title" class="text-highlighted text-pretty font-medium text-base">Title</h2>
+    <!--v-if-->
+  </div>
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
 exports[`Empty > renders with primary variant naked correctly 1`] = `
 "<div data-slot="root" class="relative flex flex-col items-center justify-center gap-4 rounded-lg p-4 sm:p-6 lg:p-8 min-w-0">
   <div data-slot="header" class="flex flex-col items-center gap-2 max-w-sm text-center"><span data-slot="avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated shrink-0 mb-2 size-10 text-xl"><span class="iconify i-lucide:file shrink-0 text-muted" aria-hidden="true" data-slot="icon"></span></span>
