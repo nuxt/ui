@@ -20,18 +20,18 @@ export default (options: Required<ModuleOptions>) => ({
     transition: {
       true: {
         gap: 'transition-[width] duration-200 ease-out',
-        container: 'transition-[left,right,width] duration-200 ease-out',
+        container: 'transition-[inset-inline-start,inset-inline-end,width] duration-200 ease-out',
         rail: 'transition-all ease-out'
       }
     },
     side: {
       left: {
         container: 'start-0 border-e border-default',
-        rail: 'end-0 translate-x-1/2'
+        rail: 'end-0 translate-x-1/2 rtl:-translate-x-1/2'
       },
       right: {
         container: 'end-0 border-s border-default',
-        rail: '-start-px -translate-x-1/2'
+        rail: '-start-px -translate-x-1/2 rtl:translate-x-1/2'
       }
     },
     collapsible: {
