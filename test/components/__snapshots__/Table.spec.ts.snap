@@ -397,7 +397,9 @@ exports[`Table > renders with columns correctly 1`] = `
               </button>
               <!--v-if-->
             </div>
-            <div data-slot="wrapper" class="w-full ms-2 text-sm"><label for="v-0-0-0" data-slot="label" class="block font-medium text-default">Select all</label>
+            <div data-slot="wrapper" class="w-full ms-2 text-sm"><label for="v-0-0-0" data-slot="label" class="block font-medium text-default">
+                <!--v-if-->Select all
+              </label>
               <!--v-if-->
             </div>
           </div>
@@ -661,7 +663,9 @@ exports[`Table > renders with empty slot correctly 1`] = `
               </button>
               <!--v-if-->
             </div>
-            <div data-slot="wrapper" class="w-full ms-2 text-sm"><label for="v-0-0-0" data-slot="label" class="block font-medium text-default">Select all</label>
+            <div data-slot="wrapper" class="w-full ms-2 text-sm"><label for="v-0-0-0" data-slot="label" class="block font-medium text-default">
+                <!--v-if-->Select all
+              </label>
               <!--v-if-->
             </div>
           </div>
@@ -1495,7 +1499,9 @@ exports[`Table > renders with loading slot correctly 1`] = `
               </button>
               <!--v-if-->
             </div>
-            <div data-slot="wrapper" class="w-full ms-2 text-sm"><label for="v-0-0-0" data-slot="label" class="block font-medium text-default">Select all</label>
+            <div data-slot="wrapper" class="w-full ms-2 text-sm"><label for="v-0-0-0" data-slot="label" class="block font-medium text-default">
+                <!--v-if-->Select all
+              </label>
               <!--v-if-->
             </div>
           </div>
@@ -1559,7 +1565,9 @@ exports[`Table > renders with meta field on columns correctly 1`] = `
               </button>
               <!--v-if-->
             </div>
-            <div data-slot="wrapper" class="w-full ms-2 text-sm"><label for="v-0-0-0" data-slot="label" class="block font-medium text-default">Select all</label>
+            <div data-slot="wrapper" class="w-full ms-2 text-sm"><label for="v-0-0-0" data-slot="label" class="block font-medium text-default">
+                <!--v-if-->Select all
+              </label>
               <!--v-if-->
             </div>
           </div>
@@ -1992,7 +2000,9 @@ exports[`Table > renders with virtualize and sticky correctly 1`] = `
               </button>
               <!--v-if-->
             </div>
-            <div data-slot="wrapper" class="w-full ms-2 text-sm"><label for="v-0-0-0" data-slot="label" class="block font-medium text-default">Select all</label>
+            <div data-slot="wrapper" class="w-full ms-2 text-sm"><label for="v-0-0-0" data-slot="label" class="block font-medium text-default">
+                <!--v-if-->Select all
+              </label>
               <!--v-if-->
             </div>
           </div>

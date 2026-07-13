@@ -49,7 +49,9 @@ exports[`Checkbox > renders with description correctly 1`] = `
     </button>
     <!--v-if-->
   </div>
-  <div data-slot="wrapper" class="w-full ms-2 text-sm"><label for="v-0-0" data-slot="label" class="block font-medium text-default">Label</label>
+  <div data-slot="wrapper" class="w-full ms-2 text-sm"><label for="v-0-0" data-slot="label" class="block font-medium text-default">
+      <!--v-if-->Label
+    </label>
     <p data-slot="description" class="text-muted">Description</p>
   </div>
 </div>"
@@ -62,7 +64,9 @@ exports[`Checkbox > renders with description slot correctly 1`] = `
     </button>
     <!--v-if-->
   </div>
-  <div data-slot="wrapper" class="w-full ms-2 text-sm"><label for="v-0-0" data-slot="label" class="block font-medium text-default">Description slot</label>
+  <div data-slot="wrapper" class="w-full ms-2 text-sm"><label for="v-0-0" data-slot="label" class="block font-medium text-default">
+      <!--v-if-->Description slot
+    </label>
     <!--v-if-->
   </div>
 </div>"
@@ -153,7 +157,9 @@ exports[`Checkbox > renders with label correctly 1`] = `
     </button>
     <!--v-if-->
   </div>
-  <div data-slot="wrapper" class="w-full ms-2 text-sm"><label for="v-0-0" data-slot="label" class="block font-medium text-default">Label</label>
+  <div data-slot="wrapper" class="w-full ms-2 text-sm"><label for="v-0-0" data-slot="label" class="block font-medium text-default">
+      <!--v-if-->Label
+    </label>
     <!--v-if-->
   </div>
 </div>"
@@ -166,7 +172,9 @@ exports[`Checkbox > renders with label slot correctly 1`] = `
     </button>
     <!--v-if-->
   </div>
-  <div data-slot="wrapper" class="w-full ms-2 text-sm"><label for="v-0-0" data-slot="label" class="block font-medium text-default">Label slot</label>
+  <div data-slot="wrapper" class="w-full ms-2 text-sm"><label for="v-0-0" data-slot="label" class="block font-medium text-default">
+      <!--v-if-->Label slot
+    </label>
     <!--v-if-->
   </div>
 </div>"
@@ -271,7 +279,9 @@ exports[`Checkbox > renders with required correctly 1`] = `
     </button>
     <!--v-if-->
   </div>
-  <div data-slot="wrapper" class="w-full ms-2 text-sm"><label for="v-0-0" data-slot="label" class="block font-medium text-default after:content-['*'] after:ms-0.5 after:text-error">Label</label>
+  <div data-slot="wrapper" class="w-full ms-2 text-sm"><label for="v-0-0" data-slot="label" class="block font-medium text-default after:content-['*'] after:ms-0.5 after:text-error">
+      <!--v-if-->Label
+    </label>
     <!--v-if-->
   </div>
 </div>"
