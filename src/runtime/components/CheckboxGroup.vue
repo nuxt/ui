@@ -193,7 +193,7 @@ function onUpdate(value: any) {
       <UCheckbox
         v-for="item in normalizedItems"
         :key="item.value"
-        v-bind="{ ...item, ...checkboxProps }"
+        v-bind="({ ...omit(item, ['icon']), ...checkboxProps } as any)"
         :leading-icon="item.icon"
         :color="color"
         :highlight="highlight"

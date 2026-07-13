@@ -1,7 +1,8 @@
 import { describe, it, expect, test } from 'vitest'
 import { axe } from 'vitest-axe'
-import { flushPromises, mount } from '@vue/test-utils'
+import { flushPromises, mount, VueWrapper } from '@vue/test-utils'
 import CheckboxGroup from '../../src/runtime/components/CheckboxGroup.vue'
+import Checkbox from '../../src/runtime/components/Checkbox.vue'
 import type { FormInputEvents } from '../../src/module'
 import { renderForm } from '../utils/form'
 import theme from '#build/ui/checkbox-group'
@@ -63,6 +64,15 @@ describe('CheckboxGroup', () => {
     })
 
     expect(await axe(wrapper.element)).toHaveNoViolations()
+  })
+
+  it('maps an item icon to the leading icon, not the checkbox indicator icon', async () => {
+    const wrapper = await mountSuspended(CheckboxGroup, {
+      props: { items: [{ value: '1', label: 'Option 1', icon: 'i-lucide-rocket' }] }
+    })
+    const checkbox = wrapper.findComponent(Checkbox) as unknown as VueWrapper<any>
+    expect(checkbox.props('leadingIcon')).toBe('i-lucide-rocket')
+    expect(checkbox.props('icon')).toBeUndefined()
   })
 
   describe('emits', () => {
