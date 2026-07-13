@@ -1,6 +1,6 @@
 import { fileURLToPath } from 'node:url'
 
-import { normalize } from 'pathe'
+import { join, normalize } from 'pathe'
 import type { UnpluginOptions } from 'unplugin'
 import { createUnplugin } from 'unplugin'
 import type { Options as AutoImportOptions } from 'unplugin-auto-import/types'
@@ -36,7 +36,7 @@ type AppConfigUI = {
   prefix?: string
 } & TVConfig<typeof ui>
 
-export interface NuxtUIOptions extends Omit<ModuleOptions, 'fonts' | 'colorMode' | 'content' | 'experimental'> {
+export interface NuxtUIOptions extends Omit<ModuleOptions, 'fonts' | 'colorMode' | 'content'> {
   /** Whether to generate declaration files for auto-imported components. */
   dts?: boolean
   ui?: AppConfigUI
@@ -115,7 +115,7 @@ export const NuxtUIPlugin = createUnplugin<NuxtUIOptions | undefined>((_options 
     tailwind(),
     IconsPlugin(options, appConfig),
     PluginsPlugin(options),
-    TemplatePlugin(options, appConfig),
+    TemplatePlugin(options, appConfig, join(runtimeDir, 'components')),
     AppConfigPlugin(options, appConfig),
     <UnpluginOptions>{
       name: 'nuxt:ui:plugins-duplication-detection',

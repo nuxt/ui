@@ -12,7 +12,7 @@ import * as theme from './theme'
 import * as themeProse from './theme/prose'
 import * as themeContent from './theme/content'
 
-export function getTemplates(options: ModuleOptions, uiConfig: Record<string, any>, nuxt?: Nuxt, resolve?: Resolver['resolve']) {
+export function getTemplates(options: ModuleOptions, uiConfig: Record<string, any>, nuxt?: Nuxt, resolve?: Resolver['resolve'], vue?: { root?: () => string | undefined, componentDir?: string }) {
   const templates: NuxtTemplate[] = []
 
   let hasProse = false
@@ -116,37 +116,43 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
   writeThemeTemplate(theme)
 
   async function generateSources() {
-    if (!nuxt) {
-      return '@source "./ui";'
-    }
-
     const sources: string[] = []
-    const layers = getLayerDirectories(nuxt).map(layer => layer.app)
 
-    // Add layer sources
-    for (const layer of layers) {
-      sources.push(`@source "${layer}**/*";`)
-    }
+    // Layer + inline sources are Nuxt-only; the Vue integration relies on the
+    // user's own Vite/Tailwind setup to scan their source.
+    const layers = nuxt ? getLayerDirectories(nuxt).map(layer => layer.app) : []
 
-    // Add inline sources from Nuxt config (classes defined in config)
-    const inlineConfigs = [
-      nuxt.options.app?.rootAttrs?.class,
-      nuxt.options.app?.head?.htmlAttrs?.class,
-      nuxt.options.app?.head?.bodyAttrs?.class
-    ]
+    if (nuxt) {
+      // Add layer sources
+      for (const layer of layers) {
+        sources.push(`@source "${layer}**/*";`)
+      }
 
-    for (const value of inlineConfigs) {
-      if (value && typeof value === 'string') {
-        sources.push(`@source inline(${JSON.stringify(value)});`)
+      // Add inline sources from Nuxt config (classes defined in config)
+      const inlineConfigs = [
+        nuxt.options.app?.rootAttrs?.class,
+        nuxt.options.app?.head?.htmlAttrs?.class,
+        nuxt.options.app?.head?.bodyAttrs?.class
+      ]
+
+      for (const value of inlineConfigs) {
+        if (value && typeof value === 'string') {
+          sources.push(`@source inline(${JSON.stringify(value)});`)
+        }
       }
     }
 
-    // Add theme sources (component detection or all)
-    if (resolve && options.experimental?.componentDetection) {
+    // Add theme sources (component detection or all). Detection works for both
+    // integrations: Nuxt scans its layers and resolves the component dir via
+    // `resolve`; the Vue plugin scans the Vite root with the component dir threaded in.
+    const componentDir = resolve ? resolve('./runtime/components') : vue?.componentDir
+    const scanDirs = nuxt ? layers : (vue?.root?.() ? [vue.root()!] : [])
+
+    if (options.experimental?.componentDetection && componentDir && scanDirs.length) {
       const detectedComponents = await detectUsedComponents(
-        layers,
+        scanDirs,
         options.prefix!,
-        resolve('./runtime/components'),
+        componentDir,
         Array.isArray(options.experimental.componentDetection) ? options.experimental.componentDetection : undefined
       )
 
