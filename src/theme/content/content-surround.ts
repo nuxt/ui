@@ -12,11 +12,11 @@ export default (options: Required<ModuleOptions>) => ({
   variants: {
     direction: {
       left: {
-        linkLeadingIcon: [options.theme.transitions && 'group-active:-translate-x-0.5 rtl:group-active:translate-x-0.5']
+        linkLeadingIcon: 'group-active:-translate-x-0.5 rtl:group-active:translate-x-0.5'
       },
       right: {
         link: 'text-end',
-        linkLeadingIcon: [options.theme.transitions && 'group-active:translate-x-0.5 rtl:group-active:-translate-x-0.5']
+        linkLeadingIcon: 'group-active:translate-x-0.5 rtl:group-active:-translate-x-0.5'
       }
     }
   }
