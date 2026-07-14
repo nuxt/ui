@@ -33,9 +33,6 @@ const WEIGHT_STEPS = ['normal', 'medium', 'semibold', 'bold'] as const
 const weightSteps = Object.fromEntries(WEIGHT_STEPS.map(step => [step, weightStepModel(step)])) as Record<typeof WEIGHT_STEPS[number], ReturnType<typeof weightStepModel>>
 const weightsActive = computed(() => !!fontPrefs.value.weights)
 
-const INHERIT_FONT = { label: 'Inherit base', value: 'inherit' }
-const headingFontItems = computed(() => [INHERIT_FONT, ...fonts.map(name => ({ label: name, value: name }))])
-
 function setHeading(patch: Record<string, unknown>) {
   setFontPrefs({ ...fontPrefs.value, heading: { ...fontPrefs.value.heading, ...patch } })
 }
@@ -90,7 +87,6 @@ const fontRows = [{
   label: 'Base',
   defaultValue: 'Public Sans',
   selectIcon: 'i-lucide-type',
-  items: computed(() => fonts.map(name => ({ label: name, value: name }))),
   font,
   weights: WEIGHT_STEPS.map(step => ({ label: capitalize(step), model: weightSteps[step]!, min: 100, max: 900 })),
   weightsActive,
@@ -104,7 +100,6 @@ const fontRows = [{
   label: 'Headings (Prose)',
   defaultValue: 'inherit',
   selectIcon: 'i-lucide-heading',
-  items: headingFontItems,
   font: headingFont,
   weights: [{ label: 'Weight', model: headingWeight, min: 100, max: 900 }],
   weightsActive: computed(() => fontPrefs.value.heading?.weight !== undefined),
@@ -275,33 +270,17 @@ const defaultSize = computed({
           <span class="text-xs font-medium text-muted select-none" :class="row.key === 'heading' && 'pt-1'">{{ row.label }}</span>
 
           <div class="flex items-center gap-1.5">
-            <!-- each family renders itself over a live specimen line -->
-            <ThemeStudioListPicker
+            <!-- each family renders itself over a live specimen line;
+                 searching reaches the full Google Fonts catalog -->
+            <ThemeStudioFontPicker
               v-model="row.font.value"
-              :items="row.items.value"
+              :curated="fonts"
+              :default-value="row.defaultValue"
+              :inherit="row.key === 'heading'"
               :icon="row.selectIcon"
               :aria-label="`${row.label} font`"
               class="flex-1 min-w-0"
-            >
-              <template #trigger>
-                <span
-                  class="truncate"
-                  :style="row.font.value === 'inherit' ? undefined : { fontFamily: `'${row.font.value}', sans-serif` }"
-                >{{ row.items.value.find(item => item.value === row.font.value)?.label ?? row.font.value }}<span v-if="row.font.value === row.defaultValue" class="text-dimmed font-normal">&nbsp;(Default)</span></span>
-              </template>
-
-              <template #item-label="{ item }">
-                <span :style="item.value === 'inherit' ? undefined : { fontFamily: `'${item.value}', sans-serif` }">{{ item.label }}</span><span v-if="item.value === row.defaultValue" class="text-dimmed">&nbsp;(Default)</span>
-              </template>
-
-              <template #item-description="{ item }">
-                <span
-                  v-if="item.value !== 'inherit'"
-                  class="text-xs text-muted truncate"
-                  :style="{ fontFamily: `'${item.value}', sans-serif` }"
-                >Grumpy wizards make toxic brew</span>
-              </template>
-            </ThemeStudioListPicker>
+            />
 
             <UFieldGroup size="sm">
               <UPopover :content="{ align: 'start' }">

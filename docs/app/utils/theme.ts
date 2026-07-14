@@ -19,19 +19,25 @@ export function capitalize(value: string) {
 /** Tailwind's stock weight ladder — set steps are absences at these values. */
 export const FONT_WEIGHT_DEFAULTS = { normal: 400, medium: 500, semibold: 600, bold: 700 } as const
 
+// Families whose preview faces are already requested — Public Sans is
+// bundled. Module-level so the controls, the preset menu and every search
+// batch share one ledger and no family is fetched twice.
+const loadedFontPreviews = new Set<string>(['Public Sans'])
+
 /**
- * Load every listed family once (Google Fonts) so pickers can render
- * themselves in the faces they offer. Shared by the controls and the
- * preset menu — whichever mounts first wins.
+ * Load the listed families (Google Fonts, 400/700 only) so pickers can
+ * render themselves in the faces they offer. Incremental: each call adds
+ * one stylesheet covering only the families not yet requested — the font
+ * search feeds result batches through here as the user types.
  */
 export function loadFontPreviews(fonts: readonly string[]) {
-  if (!import.meta.client || document.getElementById('font-previews')) return
-  const families = fonts.filter(name => name !== 'Public Sans')
-    .map(name => `family=${encodeURIComponent(name)}:wght@400;700`).join('&')
+  if (!import.meta.client) return
+  const families = fonts.filter(name => !loadedFontPreviews.has(name))
+  if (!families.length) return
+  families.forEach(name => loadedFontPreviews.add(name))
   const link = document.createElement('link')
   link.rel = 'stylesheet'
-  link.id = 'font-previews'
-  link.href = `https://fonts.googleapis.com/css2?${families}&display=swap`
+  link.href = `https://fonts.googleapis.com/css2?${families.map(name => `family=${encodeURIComponent(name)}:wght@400;700`).join('&')}&display=swap`
   document.head.appendChild(link)
 }
 
