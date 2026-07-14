@@ -39,6 +39,7 @@ describe('Tree', () => {
     ['with expanded', { props: { ...props, expanded: [items[0]] } }],
     ['with defaultExpanded', { props: { ...props, defaultExpanded: [items[0]] } }],
     // Key mapping
+    ['with valueKey', { props: { ...props, valueKey: 'id' } }],
     ['with labelKey', { props: { ...props, labelKey: 'id' } }],
     ['with getKey', { props: { ...props, getKey: (item: TreeItem) => item.id } }],
     // Multiple
@@ -84,26 +85,27 @@ describe('Tree', () => {
     expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 
-  it('uses item value as the default expansion key before falling back to label', async () => {
+  it('uses valueKey as the default expansion key before falling back to label', async () => {
     const wrapper = await mountSuspended(Tree, {
       props: {
+        valueKey: 'path',
         items: [
           {
             label: 'references',
-            value: 'root-references',
+            path: 'root-references',
             defaultExpanded: true,
-            children: [{ label: 'nuxt.md', value: 'root-references/nuxt.md' }]
+            children: [{ label: 'nuxt.md', path: 'root-references/nuxt.md' }]
           },
           {
             label: 'module',
-            value: 'module',
+            path: 'module',
             defaultExpanded: true,
             children: [
               {
                 label: 'references',
-                value: 'module/references',
+                path: 'module/references',
                 defaultExpanded: true,
-                children: [{ label: 'querying.md', value: 'module/references/querying.md' }]
+                children: [{ label: 'querying.md', path: 'module/references/querying.md' }]
               }
             ]
           }
