@@ -19,15 +19,15 @@ describe('Button mount', () => {
   })
 })
 
-// Toggling a variant prop re-runs the component's `ui` computed. Today that
-// rebuilds the whole tv factory; after PR 2 it only re-invokes it.
+// Toggling a variant prop re-runs the component's `ui` computed and re-renders
+// its subtree. Each iteration performs a full on/off cycle so the work measured
+// is deterministic and always ends back in the initial `false` state.
 describe('Button re-render (variant prop change)', () => {
   let wrapper: Awaited<ReturnType<typeof mountSuspended>>
-  let loading = false
 
   bench('toggle loading', async () => {
-    loading = !loading
-    await wrapper.setProps({ loading })
+    await wrapper.setProps({ loading: true })
+    await wrapper.setProps({ loading: false })
   }, {
     async setup() {
       wrapper = await mountSuspended(Button, { props: { label: 'Button' } })

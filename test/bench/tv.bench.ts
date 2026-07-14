@@ -56,9 +56,9 @@ describe('invocation (prebuilt factory)', () => {
   })
 })
 
-// The current per-recompute cost: build + invoke fused, as every component does
-// today. The gap between this and "invocation (prebuilt factory)" is what PR 2
-// removes for variant-prop changes.
+// Build and invoke fused in one call, as every component does today. The gap
+// between this and "invocation (prebuilt factory)" is the overhead saved by
+// hoisting factory construction out of the per-variant-prop recomputation.
 describe('build + invoke (current fused pattern)', () => {
   bench('button', () => {
     tv({ extend: buttonTheme })(buttonProps)
@@ -70,8 +70,8 @@ describe('build + invoke (current fused pattern)', () => {
 })
 
 // Table renders call `ui.td(...)` once per cell through the `wrapSlots` proxy.
-// This models a 100-cell render (the wrapper closure allocation + findReplacer
-// scan PR 3 targets).
+// This models a 100-cell render, exercising the per-access wrapper-closure
+// allocation and the replacer scan on every slot call.
 describe('slot invocation', () => {
   const tableUi = tv({ extend: tableTheme })(tableProps)
 
