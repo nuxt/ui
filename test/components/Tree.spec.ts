@@ -85,7 +85,7 @@ describe('Tree', () => {
     expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 
-  it('uses valueKey as the default expansion key before falling back to label', async () => {
+  it('uses valueKey to keep duplicate labels independent', async () => {
     const wrapper = await mountSuspended(Tree, {
       props: {
         valueKey: 'path',
@@ -125,6 +125,23 @@ describe('Tree', () => {
 
     expect(rootReferences?.attributes('aria-expanded')).toBe('true')
     expect(reopenedNestedReferences?.attributes('aria-expanded')).toBe('false')
+  })
+
+  it('keeps label keys when valueKey is not provided', async () => {
+    const wrapper = await mountSuspended(Tree, {
+      props: {
+        expanded: ['references'],
+        items: [
+          {
+            label: 'references',
+            value: 'root-references',
+            children: [{ label: 'nuxt.md', value: 'root-references/nuxt.md' }]
+          }
+        ]
+      }
+    })
+
+    expect(wrapper.get('[role="treeitem"]').attributes('aria-expanded')).toBe('true')
   })
 
   test('should have the correct types', () => {
