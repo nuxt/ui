@@ -98,6 +98,9 @@
   },
   "style": "./dist/runtime/index.css",
   "main": "./dist/module.mjs",
+  "sideEffects": [
+    "**/*.css"
+  ],
   "files": [
     ".nuxt/ui.static.css",
     "dist",
