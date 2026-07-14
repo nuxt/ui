@@ -272,6 +272,91 @@
   }
 }
 
+/*
+ * Inset drawer variants slide the same distance plus a fixed buffer so the
+ * floating, rounded-corner drawer fully clears the viewport edge instead of
+ * peeking through the inset gap while closed.
+ */
+@keyframes drawer-slide-in-from-top-inset {
+  from {
+    transform: translateY(calc(-100% - 1.5rem));
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes drawer-slide-out-to-top-inset {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(calc(-100% - 1.5rem));
+  }
+}
+
+@keyframes drawer-slide-in-from-right-inset {
+  from {
+    transform: translateX(calc(100% + 1.5rem));
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes drawer-slide-out-to-right-inset {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(calc(100% + 1.5rem));
+  }
+}
+
+@keyframes drawer-slide-in-from-bottom-inset {
+  from {
+    transform: translateY(calc(100% + 1.5rem));
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes drawer-slide-out-to-bottom-inset {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(calc(100% + 1.5rem));
+  }
+}
+
+@keyframes drawer-slide-in-from-left-inset {
+  from {
+    transform: translateX(calc(-100% - 1.5rem));
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes drawer-slide-out-to-left-inset {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(calc(-100% - 1.5rem));
+  }
+}
+
 @keyframes slide-in-from-top-and-fade {
   from {
     opacity: 0;

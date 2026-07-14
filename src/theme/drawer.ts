@@ -2,8 +2,8 @@ import type { ModuleOptions } from '../module'
 
 export default (options: Required<ModuleOptions>) => ({
   slots: {
-    overlay: 'fixed inset-0 bg-elevated/75',
-    content: 'fixed bg-default ring ring-default flex focus:outline-none',
+    overlay: ['fixed inset-0 bg-elevated/75', options.theme.transitions && 'data-[state=open]:animate-[fade-in_200ms_ease-out] data-[state=closed]:animate-[fade-out_200ms_ease-in]'],
+    content: ['fixed bg-default ring ring-default flex focus:outline-none', options.theme.transitions && 'will-change-transform transition-transform data-[swiping]:duration-0'],
     handle: ['shrink-0 !bg-accented', options.theme.transitions && 'transition-opacity'],
     container: 'w-full flex flex-col gap-4 p-4 overflow-y-auto',
     header: 'flex items-center gap-1.5 min-h-8',
@@ -18,25 +18,25 @@ export default (options: Required<ModuleOptions>) => ({
   variants: {
     direction: {
       top: {
-        content: 'mb-24 flex-col-reverse',
+        content: 'mb-24 flex-col-reverse translate-y-[calc(var(--drawer-swipe-movement-y,0px)+var(--drawer-snap-point-offset,0px))]',
         handle: 'mb-4'
       },
       right: {
-        content: 'flex-row rtl:flex-row-reverse',
+        content: 'flex-row rtl:flex-row-reverse translate-x-[calc(var(--drawer-swipe-movement-x,0px)+var(--drawer-snap-point-offset,0px))]',
         handle: '!ml-4'
       },
       bottom: {
-        content: 'mt-24 flex-col',
+        content: 'mt-24 flex-col translate-y-[calc(var(--drawer-swipe-movement-y,0px)+var(--drawer-snap-point-offset,0px))]',
         handle: 'mt-4'
       },
       left: {
-        content: 'flex-row-reverse rtl:flex-row',
+        content: 'flex-row-reverse rtl:flex-row translate-x-[calc(var(--drawer-swipe-movement-x,0px)+var(--drawer-snap-point-offset,0px))]',
         handle: '!mr-4'
       }
     },
     inset: {
       true: {
-        content: 'rounded-lg after:hidden overflow-hidden [--initial-transform:calc(100%+1.5rem)]'
+        content: 'rounded-lg after:hidden overflow-hidden'
       }
     },
     snapPoints: {
@@ -115,6 +115,57 @@ export default (options: Required<ModuleOptions>) => ({
     inset: false,
     class: {
       content: 'inset-y-0 right-0 rounded-l-lg'
+    }
+  },
+  // Enter/exit slide animations, keyed by direction and whether the drawer is inset
+  // (inset variants travel an extra 1.5rem so the floating drawer fully clears the gap).
+  {
+    direction: 'top',
+    inset: false,
+    class: {
+      content: options.theme.transitions ? 'data-[state=open]:animate-[slide-in-from-top_200ms_ease-in-out] data-[state=closed]:animate-[slide-out-to-top_200ms_ease-in-out]' : ''
+    }
+  }, {
+    direction: 'top',
+    inset: true,
+    class: {
+      content: options.theme.transitions ? 'data-[state=open]:animate-[drawer-slide-in-from-top-inset_200ms_ease-in-out] data-[state=closed]:animate-[drawer-slide-out-to-top-inset_200ms_ease-in-out]' : ''
+    }
+  }, {
+    direction: 'bottom',
+    inset: false,
+    class: {
+      content: options.theme.transitions ? 'data-[state=open]:animate-[slide-in-from-bottom_200ms_ease-in-out] data-[state=closed]:animate-[slide-out-to-bottom_200ms_ease-in-out]' : ''
+    }
+  }, {
+    direction: 'bottom',
+    inset: true,
+    class: {
+      content: options.theme.transitions ? 'data-[state=open]:animate-[drawer-slide-in-from-bottom-inset_200ms_ease-in-out] data-[state=closed]:animate-[drawer-slide-out-to-bottom-inset_200ms_ease-in-out]' : ''
+    }
+  }, {
+    direction: 'left',
+    inset: false,
+    class: {
+      content: options.theme.transitions ? 'data-[state=open]:animate-[slide-in-from-left_200ms_ease-in-out] data-[state=closed]:animate-[slide-out-to-left_200ms_ease-in-out]' : ''
+    }
+  }, {
+    direction: 'left',
+    inset: true,
+    class: {
+      content: options.theme.transitions ? 'data-[state=open]:animate-[drawer-slide-in-from-left-inset_200ms_ease-in-out] data-[state=closed]:animate-[drawer-slide-out-to-left-inset_200ms_ease-in-out]' : ''
+    }
+  }, {
+    direction: 'right',
+    inset: false,
+    class: {
+      content: options.theme.transitions ? 'data-[state=open]:animate-[slide-in-from-right_200ms_ease-in-out] data-[state=closed]:animate-[slide-out-to-right_200ms_ease-in-out]' : ''
+    }
+  }, {
+    direction: 'right',
+    inset: true,
+    class: {
+      content: options.theme.transitions ? 'data-[state=open]:animate-[drawer-slide-in-from-right-inset_200ms_ease-in-out] data-[state=closed]:animate-[drawer-slide-out-to-right-inset_200ms_ease-in-out]' : ''
     }
   }]
 })
