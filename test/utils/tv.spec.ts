@@ -159,7 +159,7 @@ describe('tv slot memoization', () => {
     expect(ui.base({ active: undefined, class: 'p-2' })).toBe(ui.base({ class: 'p-2' }))
   })
 
-  it('is insensitive to key order', () => {
+  it('returns identical output for reordered keys (a cache miss, not a shared entry)', () => {
     const ui = build()
     expect(ui.base({ active: true, class: 'p-2' })).toBe(ui.base({ class: 'p-2', active: true }))
   })
