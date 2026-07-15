@@ -27,7 +27,7 @@ export default (options: Required<ModuleOptions>) => ({
     childLinkLabelExternalIcon: 'inline-block size-3 align-top text-dimmed',
     childLinkDescription: 'text-muted',
     separator: 'px-2 h-px bg-border',
-    viewportWrapper: 'absolute top-full left-0 flex w-full',
+    viewportWrapper: 'absolute top-full start-0 flex w-full',
     viewport: 'relative overflow-hidden bg-default shadow-lg rounded-md ring ring-default h-(--reka-navigation-menu-viewport-height) w-full transition-[width,height,left,right] duration-200 origin-[top_center] data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] z-1',
     content: '',
     indicator: 'absolute left-0 data-[state=visible]:animate-[fade-in_100ms_ease-out] data-[state=hidden]:animate-[fade-out_100ms_ease-in] data-[state=hidden]:opacity-0 bottom-0 z-2 w-(--reka-navigation-menu-indicator-size) translate-x-(--reka-navigation-menu-indicator-position) flex h-2.5 items-end justify-center overflow-hidden transition-[translate,width] duration-200',
@@ -61,7 +61,7 @@ export default (options: Required<ModuleOptions>) => ({
         childList: 'grid p-2',
         childLink: 'px-3 py-2 gap-2 before:inset-x-px before:inset-y-0',
         childLinkLabel: 'font-medium',
-        content: 'absolute top-0 left-0 w-full max-h-[70vh] overflow-y-auto'
+        content: 'absolute top-0 start-0 w-full max-h-[70vh] overflow-y-auto'
       },
       vertical: {
         root: 'flex-col',

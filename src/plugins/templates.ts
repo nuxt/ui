@@ -38,7 +38,15 @@ export default function TemplatePlugin(options: NuxtUIOptions, appConfig: Record
       const contents = await template.getContents!({} as any)
       // Skip rewriting identical files so we don't churn mtimes on every config
       // resolve, which needlessly invalidates watchers and Tailwind's source scan.
-      if (!fs.existsSync(filePath) || fs.readFileSync(filePath, 'utf8') !== contents) {
+      let existing: string | null = null
+      try {
+        existing = fs.readFileSync(filePath, 'utf8')
+      } catch (error: any) {
+        if (error.code !== 'ENOENT') {
+          throw error
+        }
+      }
+      if (existing !== contents) {
         fs.writeFileSync(filePath, contents)
       }
 

@@ -63,7 +63,7 @@ export default (options: Required<ModuleOptions>) => ({
     highlight: true,
     level: true,
     class: {
-      link: ['after:absolute after:-left-1.5 after:inset-y-0.5 after:block after:w-px after:rounded-full', options.theme.transitions && 'after:transition-colors']
+      link: ['after:absolute after:-start-1.5 after:inset-y-0.5 after:block after:w-px after:rounded-full', options.theme.transitions && 'after:transition-colors']
     }
   }, {
     disabled: false,
