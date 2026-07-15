@@ -105,12 +105,49 @@ function applyReplacer(replacer: SlotClassReplacer, slotProps: Record<string, an
 }
 
 /**
+ * A slot invocation is memoizable only when its output is fully determined by a
+ * serializable key: primitives and arrays of primitives. Objects (clsx-style
+ * class maps) and functions (replacers) bail to the uncached path.
+ */
+function isMemoizable(value: unknown): boolean {
+  if (value === undefined || value === null) {
+    return true
+  }
+  const type = typeof value
+  if (type === 'string' || type === 'number' || type === 'boolean') {
+    return true
+  }
+  if (Array.isArray(value)) {
+    return value.every(isMemoizable)
+  }
+  return false
+}
+
+function memoKey(slotProps: Record<string, any>): string | undefined {
+  for (const key in slotProps) {
+    if (!isMemoizable(slotProps[key])) {
+      return undefined
+    }
+  }
+  // `JSON.stringify` drops `undefined`-valued keys, matching tv's semantics
+  // (an undefined variant is the same as an absent one).
+  return JSON.stringify(slotProps)
+}
+
+/**
  * Wrap the slot functions returned by `tv()` so a replacer (from `:ui` / `class`
  * at call time, or from `app.config.ui` at construction time) drops the slot's
  * baked-in default chain and returns only its replacement. Without a replacer the
  * original slot function runs untouched, so the common merge path is unaffected.
+ *
+ * Repeated invocations with identical simple args (re-renders, table cells) are
+ * memoized per slot: variant resolution + twMerge only run once per distinct
+ * input. The cache lives on the invocation result, so a factory rebuild (e.g.
+ * `app.config.ui` change) or variant-prop recompute starts fresh.
  */
 function wrapSlots(slots: Record<string, any>, directives?: Record<string, SlotClassReplacer>) {
+  const memo = new Map<string, Map<string, string>>()
+
   return new Proxy(slots, {
     get(target, key: string) {
       const slot = target[key]
@@ -121,7 +158,27 @@ function wrapSlots(slots: Record<string, any>, directives?: Record<string, SlotC
       return (slotProps: Record<string, any> = {}) => {
         const replacer = findReplacer(slotProps.class) ?? findReplacer(slotProps.className) ?? directives?.[key]
         if (!replacer) {
-          return slot(slotProps)
+          const cacheKey = memoKey(slotProps)
+          if (cacheKey === undefined) {
+            return slot(slotProps)
+          }
+
+          let cache = memo.get(key)
+          if (!cache) {
+            cache = new Map()
+            memo.set(key, cache)
+          } else if (cache.size > 500) {
+            // Pathological dynamic inputs (e.g. per-row generated classes):
+            // reset rather than grow unbounded.
+            cache.clear()
+          }
+
+          let result = cache.get(cacheKey)
+          if (result === undefined) {
+            result = slot(slotProps) as string
+            cache.set(cacheKey, result)
+          }
+          return result
         }
         return applyReplacer(replacer, slotProps, () => slot({ ...slotProps, class: undefined, className: undefined }))
       }
