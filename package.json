@@ -195,7 +195,6 @@
     "vue-component-type-helpers": "^3.3.6"
   },
   "devDependencies": {
-    "@codspeed/vitest-plugin": "^5.7.1",
     "@nuxt/eslint-config": "^1.16.0",
     "@nuxt/module-builder": "^1.0.2",
     "@nuxt/test-utils": "^4.0.2",

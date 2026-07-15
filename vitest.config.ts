@@ -2,7 +2,6 @@ import { fileURLToPath } from 'node:url'
 import { defineVitestProject } from '@nuxt/test-utils/config'
 import { defineConfig } from 'vitest/config'
 import vue from '@vitejs/plugin-vue'
-import codspeedPlugin from '@codspeed/vitest-plugin'
 import ui from './src/vite'
 import { glob } from 'tinyglobby'
 
@@ -54,8 +53,6 @@ export default defineConfig({
         plugins: [
           vue(),
           ui({ dts: false }),
-          // No-ops locally; only instruments under `CodSpeedHQ/action` in CI.
-          codspeedPlugin(),
           {
             name: 'nuxt-ui-test:components',
             enforce: 'pre',
