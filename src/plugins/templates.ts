@@ -9,13 +9,10 @@ import { getTemplates } from '../templates'
  * making them available to the Vue build.
  */
 export default function TemplatePlugin(options: NuxtUIOptions, appConfig: Record<string, any>, componentDir?: string) {
-  // Resolved lazily in `vite.config` (below), before the `ui.css` template's
-  // `getContents` runs — so `experimental.componentDetection` can scan the app.
-  let resolvedRoot: string | undefined
-  const templates = getTemplates(options, appConfig.ui, undefined, undefined, {
-    root: () => resolvedRoot,
-    componentDir
-  })
+  // `root` is assigned in the `vite.config` hook (below), before the `ui.css`
+  // template's `getContents` runs — so `experimental.componentDetection` can scan the app.
+  const vue: { root?: string, componentDir?: string } = { componentDir }
+  const templates = getTemplates(options, appConfig.ui, undefined, undefined, vue)
   const templateKeys = new Set(templates.map(t => `#build/${t.filename}`))
 
   async function writeTemplates(root: string) {
@@ -67,8 +64,8 @@ export default function TemplatePlugin(options: NuxtUIOptions, appConfig: Record
         // every theme class from the generated CSS.
         // `options.root` lets setups like `electron-vite` override the location
         // when `config.root` points to a sub-directory Tailwind doesn't scan.
-        resolvedRoot = path.resolve(options.root || config.root || '.')
-        const alias = await writeTemplates(resolvedRoot)
+        vue.root = path.resolve(options.root || config.root || '.')
+        const alias = await writeTemplates(vue.root)
 
         return {
           resolve: {

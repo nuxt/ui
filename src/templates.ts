@@ -12,7 +12,7 @@ import * as theme from './theme'
 import * as themeProse from './theme/prose'
 import * as themeContent from './theme/content'
 
-export function getTemplates(options: ModuleOptions, uiConfig: Record<string, any>, nuxt?: Nuxt, resolve?: Resolver['resolve'], vue?: { root?: () => string | undefined, componentDir?: string }) {
+export function getTemplates(options: ModuleOptions, uiConfig: Record<string, any>, nuxt?: Nuxt, resolve?: Resolver['resolve'], vue?: { root?: string, componentDir?: string }) {
   const templates: NuxtTemplate[] = []
 
   let hasProse = false
@@ -146,8 +146,7 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
     // integrations: Nuxt scans its layers and resolves the component dir via
     // `resolve`; the Vue plugin scans the Vite root with the component dir threaded in.
     const componentDir = resolve ? resolve('./runtime/components') : vue?.componentDir
-    const root = vue?.root?.()
-    const scanDirs = nuxt ? layers : (root ? [root] : [])
+    const scanDirs = nuxt ? layers : (vue?.root ? [vue.root] : [])
 
     if (options.experimental?.componentDetection && componentDir && scanDirs.length) {
       const detectedComponents = await detectUsedComponents(
