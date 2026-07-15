@@ -15,15 +15,34 @@ export default function TemplatePlugin(options: NuxtUIOptions, appConfig: Record
   async function writeTemplates(root: string) {
     const map: Record<string, string> = {}
     const dir = path.join(root, 'node_modules', '.nuxt-ui')
+    const createdDirs = new Set<string>()
     for (const template of templates) {
       if (!template.write || !template.filename) {
         continue
       }
       const filePath = path.join(dir, template.filename)
-      if (!fs.existsSync(path.dirname(filePath))) {
-        fs.mkdirSync(path.dirname(filePath), { recursive: true })
+      const fileDir = path.dirname(filePath)
+      if (!createdDirs.has(fileDir)) {
+        if (!fs.existsSync(fileDir)) {
+          fs.mkdirSync(fileDir, { recursive: true })
+        }
+        createdDirs.add(fileDir)
       }
-      fs.writeFileSync(filePath, await template.getContents!({} as any))
+
+      const contents = await template.getContents!({} as any)
+      // Skip rewriting identical files so we don't churn mtimes on every config
+      // resolve, which needlessly invalidates watchers and Tailwind's source scan.
+      let existing: string | null = null
+      try {
+        existing = fs.readFileSync(filePath, 'utf8')
+      } catch (error: any) {
+        if (error.code !== 'ENOENT') {
+          throw error
+        }
+      }
+      if (existing !== contents) {
+        fs.writeFileSync(filePath, contents)
+      }
 
       map[`#build/${template.filename}`] = filePath
     }
