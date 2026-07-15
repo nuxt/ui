@@ -26,7 +26,7 @@ export default {
     orientation: {
       horizontal: {
         root: 'grid-cols-1 lg:grid-cols-3 justify-between divide-y lg:divide-y-0 lg:divide-x divide-default',
-        body: 'lg:col-span-2 pb-6 lg:pb-0 lg:pr-6 justify-center',
+        body: 'lg:col-span-2 pb-6 lg:pb-0 lg:pe-6 justify-center',
         footer: 'lg:justify-center lg:items-center lg:p-6 lg:max-w-xs lg:w-full lg:mx-auto',
         features: 'lg:grid lg:grid-cols-2 lg:mt-12'
       },
