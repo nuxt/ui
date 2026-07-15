@@ -35,10 +35,14 @@ const appConfig = useAppConfig() as ProseA['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.prose?.a || {}) }))
+
+const shouldReplace = computed(() => {
+  return typeof props.href === 'string' && props.href.startsWith('#')
+})
 </script>
 
 <template>
-  <ULink :href="props.href" :target="props.target" :class="ui({ class: [props.ui?.base, props.class] })" raw>
+  <ULink :href="props.href" :target="props.target" :replace="shouldReplace" :class="ui({ class: [props.ui?.base, props.class] })" raw>
     <slot />
   </ULink>
 </template>
