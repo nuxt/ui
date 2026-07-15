@@ -17,7 +17,6 @@ function toggleChat() {
  */
 const isStudio = computed(() => route.path === '/theme')
 
-const { view, views } = useThemeStudioView()
 const viewListOpen = ref(false)
 
 // The popover body is a vertical menu so Resources can nest as a
@@ -91,55 +90,7 @@ const studioMenuLinks = [{
       :ui="{ viewportWrapper: 'w-[12rem]', content: 'w-[12rem]' }"
     >
       <template #list-leading>
-        <UPopover v-model:open="viewListOpen" :content="{ align: 'center' }">
-          <UButton
-            :icon="views.find(tab => tab.value === view)?.icon"
-            :label="views.find(tab => tab.value === view)?.label"
-            trailing-icon="i-lucide-chevron-down"
-            color="neutral"
-            variant="subtle"
-
-            aria-label="Preview page"
-          />
-
-          <template #content>
-            <!-- a 2-column card grid: each view is its /templates screenshot
-                 over label + blurb; the studio-only views (grid, a11y) get an
-                 icon tile, and the selected card wears a primary ring. -->
-            <UListbox
-              v-model="view"
-              :items="views"
-              value-key="value"
-              class="w-96"
-              :ui="{
-                root: 'ring-0 rounded-md',
-                content: 'max-h-[70vh]',
-                group: 'p-1.5 grid grid-cols-2 gap-1',
-                item: 'flex-col rounded-md ring-inset data-[state=checked]:bg-elevated/50',
-                itemDescription: 'whitespace-normal line-clamp-2 text-xs',
-                itemTrailing: 'hidden',
-                itemWrapper: 'p-1'
-              }"
-              @update:model-value="viewListOpen = false"
-            >
-              <template #item-leading="{ item }">
-                <UColorModeImage
-                  v-if="item.image"
-                  :light="`${item.image}-light.png`"
-                  :dark="`${item.image}-dark.png`"
-                  :alt="`${item.label} preview`"
-                  width="654"
-                  height="368"
-                  loading="lazy"
-                  class="w-full aspect-video rounded-sm ring ring-default"
-                />
-                <span v-else class="w-full aspect-video rounded-sm ring ring-default bg-elevated/50 flex items-center justify-center">
-                  <UIcon :name="item.icon" class="size-6 text-muted" />
-                </span>
-              </template>
-            </UListbox>
-          </template>
-        </UPopover>
+        <ThemeStudioViewSwitcher v-model:open="viewListOpen" />
       </template>
 
       <template #pages-content>

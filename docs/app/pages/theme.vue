@@ -4,7 +4,7 @@ const { currentDoc, resetTheme } = useTheme()
 
 // View and fullscreen are app-level state: the site header hosts the view
 // switcher while on /theme and hides itself in fullscreen.
-const { view, fullscreen, views } = useThemeStudioView()
+const { view, fullscreen } = useThemeStudioView()
 const { past, future, align, capture, undo, redo } = useThemeStudioHistory()
 
 useSeoMeta({
@@ -245,16 +245,12 @@ const shareMode = ref<'import' | 'export'>('export')
             <span class="flex-1" />
 
             <!-- The header center hosts the view switcher on desktop; the
-               toolbar keeps a select for mobile and for fullscreen, where
-               the header is hidden. -->
-            <USelect
-              v-model="view"
+               toolbar keeps one for mobile and for fullscreen, where the
+               header is hidden. -->
+            <ThemeStudioViewSwitcher
               v-model:open="openPanels.view"
-              :items="views"
-              :icon="views.find(tab => tab.value === view)?.icon"
-              color="neutral"
-              variant="subtle"
-              class="w-36 shrink-0"
+              :content="{ align: 'end' }"
+              class="shrink-0"
               :class="!fullscreen && 'lg:hidden'"
             />
 
