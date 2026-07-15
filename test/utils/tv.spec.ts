@@ -122,3 +122,69 @@ describe('tv class replace (slotless component)', () => {
     expect(ui()).toBe('block')
   })
 })
+
+describe('tv slot memoization', () => {
+  const theme = {
+    slots: { base: 'inline-flex text-sm', label: 'truncate' },
+    variants: {
+      active: {
+        true: { base: 'font-bold' },
+        false: { base: 'font-light' }
+      }
+    }
+  }
+
+  const build = () => tvt({ extend: tvt(theme) })()
+
+  it('returns correct output for repeated identical args', () => {
+    const ui = build()
+    const first = ui.base({ active: true, class: 'p-2' })
+    expect(ui.base({ active: true, class: 'p-2' })).toBe(first)
+    expect(first).toContain('font-bold')
+    expect(first).toContain('p-2')
+  })
+
+  it('never shares entries across distinct args', () => {
+    const ui = build()
+    expect(ui.base({ active: true })).toContain('font-bold')
+    expect(ui.base({ active: false })).toContain('font-light')
+    expect(ui.base({ active: true, class: 'p-2' })).toContain('p-2')
+    expect(ui.base({ active: true })).not.toContain('p-2')
+    // String and array class forms resolve to the same output independently.
+    expect(ui.base({ class: ['p-2', undefined] })).toContain('p-2')
+  })
+
+  it('treats an `undefined`-valued key the same as an absent one', () => {
+    const ui = build()
+    expect(ui.base({ active: undefined, class: 'p-2' })).toBe(ui.base({ class: 'p-2' }))
+  })
+
+  it('is insensitive to key order', () => {
+    const ui = build()
+    expect(ui.base({ active: true, class: 'p-2' })).toBe(ui.base({ class: 'p-2', active: true }))
+  })
+
+  it('does not poison the cache through clsx object classes', () => {
+    const ui = build()
+    // Object classes bail out of the memo but still resolve...
+    expect(ui.label({ class: { 'font-bold': true, 'opacity-50': false } })).toBe('truncate font-bold')
+    // ...and cached plain calls before/after stay independent.
+    expect(ui.label({})).toBe('truncate')
+    expect(ui.label({ class: { 'font-bold': false } })).toBe('truncate')
+  })
+
+  it('does not poison the cache through replacers', () => {
+    const ui = build()
+    expect(ui.label({ class: 'p-2' })).toBe('truncate p-2')
+    expect(ui.label({ class: () => 'block' })).toBe('block')
+    expect(ui.label({ class: 'p-2' })).toBe('truncate p-2')
+  })
+
+  it('does not key inputs carrying inherited enumerable props as plain ones', () => {
+    const ui = build()
+    // Inherited `class` is read by tv but invisible to `JSON.stringify`: without
+    // the plain-object guard this would cache a `font-bold` result under `{}`.
+    expect(ui.label(Object.create({ class: 'font-bold' }))).toBe('truncate font-bold')
+    expect(ui.label({})).toBe('truncate')
+  })
+})

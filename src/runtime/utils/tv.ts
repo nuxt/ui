@@ -124,7 +124,17 @@ function isMemoizable(value: unknown): boolean {
 }
 
 function memoKey(slotProps: Record<string, any>): string | undefined {
-  for (const key in slotProps) {
+  // Only plain objects: an exotic prototype could carry inherited enumerable
+  // props that tv would read but `JSON.stringify` would drop from the key,
+  // making two different inputs share one cache entry.
+  const proto = Object.getPrototypeOf(slotProps)
+  if (proto !== Object.prototype && proto !== null) {
+    return undefined
+  }
+
+  // `Object.keys` matches exactly what `JSON.stringify` serializes (own
+  // enumerable keys), so everything the key omits is also never inspected here.
+  for (const key of Object.keys(slotProps)) {
     if (!isMemoizable(slotProps[key])) {
       return undefined
     }
