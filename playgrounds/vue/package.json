@@ -19,10 +19,10 @@
     "zod": "^4.4.3"
   },
   "devDependencies": {
-    "@iconify-json/lucide": "^1.2.114",
+    "@iconify-json/lucide": "^1.2.117",
     "@vitejs/plugin-vue": "^6.0.7",
     "typescript": "^6.0.3",
     "vite": "^7.3.6",
-    "vue-tsc": "^3.3.6"
+    "vue-tsc": "^3.3.7"
   }
 }
