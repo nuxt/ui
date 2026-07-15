@@ -20,7 +20,7 @@ const CASES: [string, (cls: string) => any][] = [
   ['Primitive', cls => h(Primitive, { as: 'button', class: cls }, () => 'x')],
   ['ULinkBase', cls => h(LinkBase, { class: cls }, () => 'x')],
   ['ULink (default slot)', cls => h(Link, { class: cls }, () => 'x')],
-  ['ULink custom + ULinkBase', cls => h(Link, { custom: true }, ({ active: _active, ...slotProps }: any) => h(LinkBase, { ...slotProps, class: cls }, () => 'x'))],
+  ['ULink custom + ULinkBase', cls => h(Link, { custom: true }, { default: ({ active: _active, ...slotProps }: any) => h(LinkBase, { ...slotProps, class: cls }, () => 'x') })],
   ['UButton', cls => h(Button, { label: 'x', class: cls })]
 ]
 
