@@ -1,5 +1,5 @@
-import { describe, it, expect } from 'vitest'
-import { mkdtempSync, writeFileSync } from 'node:fs'
+import { describe, it, expect, afterAll } from 'vitest'
+import { mkdtempSync, mkdirSync, writeFileSync, rmSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { defu } from 'defu'
@@ -17,7 +17,7 @@ function buildOptions(componentDetection: boolean | string[]) {
 
 // Drive the real `generateSources` through the Vue integration path (no `nuxt`,
 // component dir + scan root threaded in) and return the emitted `@source` lines.
-async function sources(componentDetection: boolean, root: string) {
+async function sources(componentDetection: boolean | string[], root: string) {
   const options = buildOptions(componentDetection)
   const ui = getDefaultConfig(options.theme)
   const templates = getTemplates(options, ui, undefined, undefined, { root: () => root, componentDir })
@@ -25,11 +25,20 @@ async function sources(componentDetection: boolean, root: string) {
   return css.split('\n').filter(line => line.trim().startsWith('@source'))
 }
 
+const fixtureDirs: string[] = []
+
 function fixtureUsing(markup: string) {
   const dir = mkdtempSync(join(tmpdir(), 'nuxt-ui-cd-'))
+  fixtureDirs.push(dir)
   writeFileSync(join(dir, 'App.vue'), `<template>${markup}</template>\n`)
   return dir
 }
+
+afterAll(() => {
+  for (const dir of fixtureDirs) {
+    rmSync(dir, { recursive: true, force: true })
+  }
+})
 
 describe('vue componentDetection', () => {
   it('scans every theme file when disabled (default)', async () => {
@@ -44,6 +53,31 @@ describe('vue componentDetection', () => {
     expect(emitted).toContain('@source "./ui/link.ts";')
     expect(emitted).not.toContain('@source "./ui";')
     expect(emitted.length).toBeLessThan(10)
+  })
+
+  it('always includes components listed in the array form', async () => {
+    // Nothing detected in the app, but `Modal` is guaranteed by the option.
+    const emitted = await sources(['Modal'], fixtureUsing('<div>no nuxt ui here</div>'))
+
+    expect(emitted).toContain('@source "./ui/modal.ts";')
+    expect(emitted).toContain('@source "./ui/button.ts";')
+    expect(emitted).not.toContain('@source "./ui";')
+  })
+
+  it('skips files in nested node_modules and dist directories', async () => {
+    const dir = fixtureUsing('<UButton label="x" />')
+    const nested = join(dir, 'packages', 'foo', 'node_modules', 'pkg')
+    const dist = join(dir, 'packages', 'foo', 'dist')
+    mkdirSync(nested, { recursive: true })
+    mkdirSync(dist, { recursive: true })
+    writeFileSync(join(nested, 'index.js'), 'export const UAlert = 1\n')
+    writeFileSync(join(dist, 'out.js'), 'export const UTable = 1\n')
+
+    const emitted = await sources(true, dir)
+
+    expect(emitted).toContain('@source "./ui/button.ts";')
+    expect(emitted).not.toContain('@source "./ui/alert.ts";')
+    expect(emitted).not.toContain('@source "./ui/table.ts";')
   })
 
   it('falls back to scanning everything when no component is detected', async () => {

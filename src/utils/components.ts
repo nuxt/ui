@@ -90,7 +90,9 @@ export async function detectUsedComponents(
   for (const dir of dirs) {
     const appFiles = globSync(['**/*.{vue,ts,js,tsx,jsx}'], {
       cwd: dir,
-      ignore: ['node_modules/**', '.nuxt/**', 'dist/**']
+      // `**/` prefixes so nested dirs are skipped too: the Vue integration
+      // scans the whole Vite root, not just Nuxt layer `app/` directories.
+      ignore: ['**/node_modules/**', '**/.nuxt/**', '**/dist/**']
     })
 
     for (const file of appFiles) {
