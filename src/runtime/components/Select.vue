@@ -192,7 +192,19 @@ const arrowProps = toRef(() => defu(props.arrow, { rounded: true }) as SelectArr
 
 const { emitFormChange, emitFormInput, emitFormBlur, emitFormFocus, size: formFieldSize, color, id, name, highlight, disabled, ariaAttrs } = useFormField<InputProps>(_props)
 const { orientation, size: fieldGroupSize } = useFieldGroup<InputProps>(_props)
-const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(toRef(() => defu(props, { trailingIcon: appConfig.ui.icons.chevronDown })))
+// Pass only the props the composable reads: `defu(props, ...)` copied every prop
+// through the `useComponentProps` proxy and subscribed this computed (and `ui`,
+// which reads `isLeading`/`isTrailing`) to all of them, re-running the whole tv
+// pipeline on unrelated prop changes.
+const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(computed(() => ({
+  icon: props.icon,
+  leading: props.leading,
+  leadingIcon: props.leadingIcon,
+  trailing: props.trailing,
+  trailingIcon: props.trailingIcon !== undefined ? props.trailingIcon : appConfig.ui.icons.chevronDown,
+  loading: props.loading,
+  loadingIcon: props.loadingIcon
+})))
 
 const selectSize = computed(() => fieldGroupSize.value || formFieldSize.value)
 
