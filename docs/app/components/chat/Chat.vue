@@ -269,6 +269,14 @@ defineShortcuts({
     </template>
 
     <UTheme
+      :props="{
+        prose: {
+          h1: { anchor: false },
+          h2: { anchor: false },
+          h3: { anchor: false },
+          h4: { anchor: false }
+        }
+      }"
       :ui="{
         prose: {
           p: { base: 'my-2 text-sm/6' },
