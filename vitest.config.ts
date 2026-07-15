@@ -28,6 +28,9 @@ export default defineConfig({
           name: 'nuxt',
           dir: './test',
           include: ['components/**/**.spec.ts', 'composables/**.spec.ts', 'utils/**/**.spec.ts'],
+          // Benchmarks run in the `vue` project only (happy-dom, faster); keep them
+          // out of the nuxt project so a bare `vitest bench` doesn't double-run them.
+          benchmark: { include: [] },
           environment: 'nuxt',
           environmentOptions: {
             nuxt: {
@@ -44,6 +47,7 @@ export default defineConfig({
           environment: 'happy-dom',
           dir: './test',
           include: ['components/**.spec.ts', 'composables/**.spec.ts', 'utils/**/**.spec.ts'],
+          benchmark: { include: ['bench/**/*.bench.ts'] },
           setupFiles: ['./test/utils/setup.ts']
         },
         plugins: [
