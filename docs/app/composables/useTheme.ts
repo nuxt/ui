@@ -2,7 +2,7 @@ import { defu } from 'defu'
 import { THEME_TAG_IDS, THEME_STATE_KEYS, THEME_STORAGE_KEYS } from '../utils/theme-keys'
 import { useLocalStorage } from '@vueuse/core'
 import { themeIcons, cssVariableDefaults, readLocalStorage, FONT_WEIGHT_DEFAULTS } from '../utils/theme'
-import { generateCSS, generateConfig, mergeUi, isDefaultStyle, DEFAULT_COLORS, THEME_DEFAULTS, SEMANTIC_ALIASES, LIBRARY_TOKEN_DEFAULTS } from '../utils/theme-engine'
+import { generateCSS, generateConfig, mergeUi, isDefaultStyle, styleTokens, DEFAULT_COLORS, THEME_DEFAULTS, SEMANTIC_ALIASES, LIBRARY_TOKEN_DEFAULTS } from '../utils/theme-engine'
 import type { ThemeDoc, ThemePalette } from '../utils/theme-engine'
 import { omit } from '#ui/utils'
 import colors from 'tailwindcss/colors'
@@ -439,11 +439,24 @@ export function useTheme() {
       doc.palettes = Object.fromEntries(paletteEntries.map(([name, shades]) => [name, { shades: shades as ThemePalette['shades'] }]))
     }
 
+    // The studio's style prefs, read from the shared reactive state (the
+    // studio owns writes) so callers watching currentDoc() re-run on style
+    // edits — a raw localStorage read here would be invisible to reactivity.
+    const style = stylePrefs.value
+    if (!isDefaultStyle(style)) {
+      doc.style = style
+    }
+
     // Diff against the LIBRARY defaults, not the docs baseline — the export
     // must reproduce the preview on top of a stock @nuxt/ui install.
     // Studio-only vars (hand-rolled preview markup) stay out of exports.
-    const light = Object.fromEntries(Object.entries(cssVariablesData.value.light || {}).filter(([key, val]) => !key.startsWith('--studio-') && val !== LIBRARY_TOKEN_DEFAULTS.light[key as keyof typeof LIBRARY_TOKEN_DEFAULTS.light]))
-    const dark = Object.fromEntries(Object.entries(cssVariablesData.value.dark || {}).filter(([key, val]) => !key.startsWith('--studio-') && val !== LIBRARY_TOKEN_DEFAULTS.dark[key as keyof typeof LIBRARY_TOKEN_DEFAULTS.dark]))
+    // The style treatment's variables live in this channel too (the studio
+    // applies them there for the live preview) — but doc.style already
+    // accounts for them, so tokens only keep values that DIVERGE from the
+    // style expansion.
+    const styleVars = doc.style ? styleTokens(doc.style) : { light: {}, dark: {} }
+    const light = Object.fromEntries(Object.entries(cssVariablesData.value.light || {}).filter(([key, val]) => !key.startsWith('--studio-') && val !== LIBRARY_TOKEN_DEFAULTS.light[key as keyof typeof LIBRARY_TOKEN_DEFAULTS.light] && val !== (styleVars.light as Record<string, string>)[key]))
+    const dark = Object.fromEntries(Object.entries(cssVariablesData.value.dark || {}).filter(([key, val]) => !key.startsWith('--studio-') && val !== LIBRARY_TOKEN_DEFAULTS.dark[key as keyof typeof LIBRARY_TOKEN_DEFAULTS.dark] && val !== (styleVars.dark as Record<string, string>)[key]))
     if (Object.keys(light).length || Object.keys(dark).length) {
       doc.tokens = {
         ...(Object.keys(light).length ? { light } : {}),
@@ -454,14 +467,6 @@ export function useTheme() {
     const extras = aiThemeExtras.value
     if (extras.ui && Object.keys(extras.ui).length) {
       doc.components = extras.ui
-    }
-
-    // The studio's style prefs, read from the shared reactive state (the
-    // studio owns writes) so callers watching currentDoc() re-run on style
-    // edits — a raw localStorage read here would be invisible to reactivity.
-    const style = stylePrefs.value
-    if (!isDefaultStyle(style)) {
-      doc.style = style
     }
 
     return doc

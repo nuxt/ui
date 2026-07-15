@@ -145,26 +145,22 @@ export function generateCSS(doc: ThemeDoc): string {
     style.light['--ui-shadow-final-inner'] = 'color-mix(in oklab, var(--ui-inner-shadow-color, var(--ui-shadow-color)) var(--ui-inner-shadow-opacity, 15%), transparent)'
   }
 
-  if (Object.keys(style.light).length) {
-    lines.push('', ':root, .light {', ...Object.entries(style.light).map(([key, val]) => `  ${key}: ${val};`), '}')
-  }
-  if (Object.keys(style.dark).length) {
-    lines.push('', '.dark {', ...Object.entries(style.dark).map(([key, val]) => `  ${key}: ${val};`), '}')
-  }
-
-  const lightOverrides = Object.entries(doc.tokens?.light || {})
-  if (lightOverrides.length) {
-    lines.push('', ':root, .light {', ...lightOverrides.map(([key, val]) => `  ${key}: ${val};`), '}')
+  // One block per mode: the style expansion and the doc's explicit token
+  // overrides merge, explicit values last so they win — a doc whose tokens
+  // duplicate the style expansion (older exports round-tripped through
+  // import) collapses instead of printing every variable twice.
+  const light = { ...style.light, ...doc.tokens?.light }
+  if (Object.keys(light).length) {
+    lines.push('', ':root, .light {', ...Object.entries(light).map(([key, val]) => `  ${key}: ${val};`), '}')
   }
 
-  const darkLines: string[] = []
-  if (doc.blackAsPrimary) {
-    darkLines.push('  --ui-primary: white;')
+  const dark = {
+    ...style.dark,
+    ...(doc.blackAsPrimary ? { '--ui-primary': 'white' } : {}),
+    ...doc.tokens?.dark
   }
-  darkLines.push(...Object.entries(doc.tokens?.dark || {}).map(([key, val]) => `  ${key}: ${val};`))
-
-  if (darkLines.length) {
-    lines.push('', '.dark {', ...darkLines, '}')
+  if (Object.keys(dark).length) {
+    lines.push('', '.dark {', ...Object.entries(dark).map(([key, val]) => `  ${key}: ${val};`), '}')
   }
 
   return lines.join('\n')
