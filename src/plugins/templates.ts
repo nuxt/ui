@@ -3,6 +3,7 @@ import path from 'node:path'
 import type { UnpluginOptions } from 'unplugin'
 import type { NuxtUIOptions } from '../unplugin'
 import { getTemplates } from '../templates'
+import { resolveExtraScanDirs } from '../utils/components'
 
 /**
  * This plugin is responsible for getting the generated virtual templates and
@@ -11,7 +12,7 @@ import { getTemplates } from '../templates'
 export default function TemplatePlugin(options: NuxtUIOptions, appConfig: Record<string, any>, componentDir?: string) {
   // `root` is assigned in the `vite.config` hook (below), before the `ui.css`
   // template's `getContents` runs — so `experimental.componentDetection` can scan the app.
-  const vue: { root?: string, componentDir?: string } = { componentDir }
+  const vue: { root?: string, dirs?: string[], componentDir?: string } = { componentDir }
   const templates = getTemplates(options, appConfig.ui, undefined, undefined, vue)
   const templateKeys = new Set(templates.map(t => `#build/${t.filename}`))
 
@@ -65,6 +66,12 @@ export default function TemplatePlugin(options: NuxtUIOptions, appConfig: Record
         // `options.root` lets setups like `electron-vite` override the location
         // when `config.root` points to a sub-directory Tailwind doesn't scan.
         vue.root = path.resolve(options.root || config.root || '.')
+        if (options.experimental?.componentDetection) {
+          // `scanPackages` packages resolve Nuxt UI components from `node_modules`
+          // and user component dirs can sit outside the root: detection has to
+          // scan both or their components lose their theme CSS.
+          vue.dirs = resolveExtraScanDirs(vue.root, options.scanPackages, options.components ? options.components.dirs : undefined)
+        }
         const alias = await writeTemplates(vue.root)
 
         return {

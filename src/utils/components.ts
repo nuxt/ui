@@ -1,7 +1,9 @@
+import { existsSync } from 'node:fs'
 import { readFile } from 'node:fs/promises'
-import { join } from 'pathe'
+import { dirname, join, normalize, resolve } from 'pathe'
 import { globSync } from 'tinyglobby'
 import { pascalCase } from 'scule'
+import { resolvePathSync } from 'mlly'
 
 /**
  * Build a dependency graph of components by scanning their source files
@@ -59,6 +61,41 @@ function resolveComponentDependencies(
   }
 
   return resolved
+}
+
+/**
+ * Resolve additional directories component detection should scan besides the root:
+ * packages from `scanPackages` (they live in `node_modules`, which the root scan
+ * skips) and user component dirs pointing outside the root.
+ */
+export function resolveExtraScanDirs(root: string, scanPackages?: string[], componentDirs?: string | string[]): string[] {
+  const dirs = new Set<string>()
+
+  for (const pkg of scanPackages || []) {
+    try {
+      const entry = normalize(resolvePathSync(pkg, { url: join(root, '_index.mjs') }))
+      // Slice at the last `node_modules/<pkg>/` so pnpm's `.pnpm` layout resolves
+      // to the package directory, not its entry file.
+      const marker = `node_modules/${pkg}`
+      const index = entry.lastIndexOf(`${marker}/`)
+      dirs.add(index === -1 ? dirname(entry) : entry.slice(0, index + marker.length))
+    } catch {
+      // Not resolvable from the root: nothing to scan.
+    }
+  }
+
+  const rootDir = normalize(root)
+  const userDirs = Array.isArray(componentDirs) ? componentDirs : componentDirs ? [componentDirs] : []
+  for (const dir of userDirs) {
+    // `dirs` entries can be globs: scan from the static prefix.
+    const resolved = resolve(root, dir.split(/[*{]/)[0]!)
+    // Dirs inside the root are already covered by the root scan.
+    if (resolved !== rootDir && !resolved.startsWith(`${rootDir}/`) && existsSync(resolved)) {
+      dirs.add(resolved)
+    }
+  }
+
+  return [...dirs]
 }
 
 /**
