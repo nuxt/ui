@@ -238,10 +238,12 @@ async function loadPlugins() {
   plugins.value = emblaPlugins
 }
 
-watch(() => [props.autoplay, props.autoScroll, props.autoHeight, props.classNames, props.fade, props.wheelGestures], async () => {
-  await loadPlugins()
-  emblaApi.value?.reInit(options.value, plugins.value)
-}, { immediate: true })
+// Rebuild the plugins array whenever a plugin prop changes. `useEmblaCarousel`
+// watches the `plugins` ref and reinitializes through its own `arePluginsEqual`
+// guard, so we must not reinitialize here: plugin props passed as inline objects
+// (e.g. `:autoplay="{ delay: 5000 }"`) get a new reference on every parent render,
+// which would otherwise reinitialize the carousel and reset it to the first slide.
+watch(() => [props.autoplay, props.autoScroll, props.autoHeight, props.classNames, props.fade, props.wheelGestures], loadPlugins, { immediate: true })
 
 const [emblaRef, emblaApi] = useEmblaCarousel(options, plugins)
 

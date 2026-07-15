@@ -108,7 +108,7 @@ export default (options: Required<ModuleOptions>) => ({
     to: true,
     orientation: 'horizontal',
     class: {
-      header: 'group-hover/blog-post:rounded-r-none'
+      header: 'group-hover/blog-post:rounded-e-none'
     }
   }, {
     orientation: 'vertical',
