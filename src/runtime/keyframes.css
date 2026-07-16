@@ -624,3 +624,122 @@
     background-position: 100% center;
   }
 }
+
+/*
+ * Reduced motion: keep the fade for comprehension, drop scale/slide movement
+ * on enter/exit presence animations. Redefining the keyframes here covers every
+ * component that references them, in one place. Height reveals (accordion,
+ * collapsible), toast stacking transforms, and decorative loops (already
+ * `motion-safe:` gated at the usage site) are intentionally left untouched.
+ */
+@media (prefers-reduced-motion: reduce) {
+  @keyframes scale-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes scale-out {
+    from { opacity: 1; }
+    to { opacity: 0; }
+  }
+
+  @keyframes slide-in-from-top {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes slide-out-to-top {
+    from { opacity: 1; }
+    to { opacity: 0; }
+  }
+
+  @keyframes slide-in-from-right {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes slide-out-to-right {
+    from { opacity: 1; }
+    to { opacity: 0; }
+  }
+
+  @keyframes slide-in-from-bottom {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes slide-out-to-bottom {
+    from { opacity: 1; }
+    to { opacity: 0; }
+  }
+
+  @keyframes slide-in-from-left {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes slide-out-to-left {
+    from { opacity: 1; }
+    to { opacity: 0; }
+  }
+
+  @keyframes slide-in-from-top-and-fade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes slide-out-to-top-and-fade {
+    from { opacity: 1; }
+    to { opacity: 0; }
+  }
+
+  @keyframes slide-in-from-right-and-fade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes slide-out-to-right-and-fade {
+    from { opacity: 1; }
+    to { opacity: 0; }
+  }
+
+  @keyframes slide-in-from-bottom-and-fade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes slide-out-to-bottom-and-fade {
+    from { opacity: 1; }
+    to { opacity: 0; }
+  }
+
+  @keyframes slide-in-from-left-and-fade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes slide-out-to-left-and-fade {
+    from { opacity: 1; }
+    to { opacity: 0; }
+  }
+
+  @keyframes enter-from-right {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes enter-from-left {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes exit-to-right {
+    from { opacity: 1; }
+    to { opacity: 0; }
+  }
+
+  @keyframes exit-to-left {
+    from { opacity: 1; }
+    to { opacity: 0; }
+  }
+}
