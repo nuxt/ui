@@ -52,16 +52,25 @@ const groupDirtyFlags = {
 }
 
 /**
- * The toolbar reset matches the section resets: back to the BASELINE —
- * the active preset when one is set, stock otherwise. Disabled while
- * nothing diverges from it.
+ * The toolbar reset is two-stage: edits on top of a preset reset back to
+ * the preset (matching the section resets' baseline), and a second press —
+ * already clean at the preset — clears the preset back to stock Nuxt UI.
+ * Disabled only once nothing diverges from stock.
  */
-const anyDirty = computed(() => Object.values(groupDirtyFlags).some(flag => flag.value))
-const baselinePreset = computed(() => presets.find(preset => preset.id === activePreset.value))
-const resetLabel = computed(() => baselinePreset.value ? `Reset to ${baselinePreset.value.name}` : 'Reset theme')
+// Gated on `mounted`: the persisted theme is client-only, and a state that
+// diverges from the SSR render would leave stale hydration-adopted
+// attributes (a disabled= that never lifts) on the button.
+const anyDirty = computed(() => mounted.value && Object.values(groupDirtyFlags).some(flag => flag.value))
+const baselinePreset = computed(() => mounted.value ? presets.find(preset => preset.id === activePreset.value) : undefined)
+const resetsToPreset = computed(() => Boolean(baselinePreset.value) && anyDirty.value)
+const canReset = computed(() => anyDirty.value || Boolean(baselinePreset.value))
+const resetLabel = computed(() => {
+  if (resetsToPreset.value) return `Reset to ${baselinePreset.value!.name}`
+  return baselinePreset.value ? 'Reset to Nuxt UI theme' : 'Reset theme'
+})
 
 function resetToBaseline() {
-  if (baselinePreset.value) applyPreset(baselinePreset.value)
+  if (resetsToPreset.value) applyPreset(baselinePreset.value!)
   else resetTheme()
 }
 
@@ -283,7 +292,7 @@ const shareMode = ref<'import' | 'export'>('export')
                 icon="i-lucide-rotate-ccw"
                 color="neutral"
                 variant="subtle"
-                :disabled="!anyDirty"
+                :disabled="!canReset"
                 :aria-label="resetLabel"
                 @click="resetToBaseline"
               />
