@@ -55,6 +55,51 @@ describe('RadioGroup', () => {
     expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 
+  it('renders a custom slot for the matching item', async () => {
+    const wrapper = await mountSuspended(RadioGroup, {
+      props: {
+        items: [
+          { value: '1', label: 'Option 1', slot: 'custom' },
+          { value: '2', label: 'Option 2' }
+        ]
+      },
+      slots: {
+        custom: ({ item }) => `Custom ${item.label}`
+      }
+    })
+
+    expect(wrapper.text()).toContain('Custom Option 1')
+    expect(wrapper.text()).toContain('Option 2')
+    expect(wrapper.find('[data-slot="content"]').text()).toBe('Custom Option 1')
+    expect(wrapper.findAll('[data-slot="label"]')).toHaveLength(1)
+  })
+
+  it('renders the content slot for items without a custom slot', async () => {
+    const wrapper = await mountSuspended(RadioGroup, {
+      props,
+      slots: {
+        content: ({ item }) => `Custom: ${item.label}`
+      }
+    })
+
+    expect(wrapper.findAll('[data-slot="content"]')).toHaveLength(items.length)
+    expect(wrapper.text()).toContain('Custom: Option 1')
+    expect(wrapper.text()).toContain('Custom: Option 3')
+    expect(wrapper.findAll('[data-slot="label"]')).toHaveLength(0)
+  })
+
+  it('falls back to label and description when a custom slot is not provided', async () => {
+    const wrapper = await mountSuspended(RadioGroup, {
+      props: {
+        items: [{ value: '1', label: 'Option 1', description: 'Description 1', slot: 'custom' }]
+      }
+    })
+
+    expect(wrapper.text()).toContain('Option 1')
+    expect(wrapper.text()).toContain('Description 1')
+    expect(wrapper.find('[data-slot="content"]').exists()).toBe(false)
+  })
+
   describe('emits', () => {
     test('update:modelValue event', async () => {
       const wrapper = mount(RadioGroup, { props: { items: ['Option 1', 'Option 2'] } })
