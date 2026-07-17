@@ -2,6 +2,7 @@ import { themeIcons } from '../theme'
 import type { ThemeDoc } from './types'
 import { DEFAULT_COLORS, THEME_DEFAULTS } from './types'
 import { styleComponents, styleTokens, mergeUi, BORDER_WIDTH_DEFAULT } from './styles'
+import { LIBRARY_TOKEN_DEFAULTS } from './resolve'
 
 /**
  * Generate the minimal `main.css`. The document only holds overrides, so
@@ -150,15 +151,28 @@ export function generateCSS(doc: ThemeDoc): string {
   // duplicate the style expansion (older exports round-tripped through
   // import) collapses instead of printing every variable twice.
   const light = { ...style.light, ...doc.tokens?.light }
-  if (Object.keys(light).length) {
-    lines.push('', ':root, .light {', ...Object.entries(light).map(([key, val]) => `  ${key}: ${val};`), '}')
-  }
 
-  const dark = {
+  const dark: Record<string, string> = {
     ...style.dark,
     ...(doc.blackAsPrimary ? { '--ui-primary': 'white' } : {}),
     ...doc.tokens?.dark
   }
+  // The `:root, .light` block matches `<html class="dark">` too (`:root` is
+  // unconditional) and lands after the library's `.dark` block, so a token
+  // overridden for light only would win the source-order tie in dark mode.
+  // Restate the library's dark value so the `.dark` block below wins it back.
+  for (const [key, value] of Object.entries(light)) {
+    if (key in dark) continue
+    const fallback = (LIBRARY_TOKEN_DEFAULTS.dark as Record<string, string>)[key]
+    if (fallback && fallback !== value) {
+      dark[key] = fallback
+    }
+  }
+
+  if (Object.keys(light).length) {
+    lines.push('', ':root, .light {', ...Object.entries(light).map(([key, val]) => `  ${key}: ${val};`), '}')
+  }
+
   if (Object.keys(dark).length) {
     lines.push('', '.dark {', ...Object.entries(dark).map(([key, val]) => `  ${key}: ${val};`), '}')
   }

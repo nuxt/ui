@@ -13,7 +13,7 @@ import {
   SIZE_SUPPORT,
   COLOR_SUPPORT
 } from './styles'
-import { parseUiColorRef } from './resolve'
+import { parseUiColorRef, LIBRARY_TOKEN_DEFAULTS } from './resolve'
 import { themeIcons } from '../theme'
 
 /**
@@ -790,6 +790,15 @@ export function importTheme(input: { css?: string, config?: string }): ThemeImpo
       doc.blackAsPrimary = true
       // its .dark counterpart is generated, not a token choice
       if (css.dark['--ui-primary'] === 'white') delete css.dark['--ui-primary']
+    }
+    // The export restates the library's dark default under `.dark` for any
+    // token overridden in light only (the `:root, .light` block would win
+    // the source-order tie in dark mode otherwise). Generated, not a choice
+    // — drop it so the round-trip doesn't grow explicit tokens.
+    for (const [key, value] of Object.entries(css.dark)) {
+      if (key in css.light && value === (LIBRARY_TOKEN_DEFAULTS.dark as Record<string, string>)[key]) {
+        Reflect.deleteProperty(css.dark, key)
+      }
     }
     if (Object.keys(css.light).length || Object.keys(css.dark).length) {
       doc.tokens = {

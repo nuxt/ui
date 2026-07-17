@@ -73,6 +73,41 @@ describe('theme-engine', () => {
       ].join('\n'))
     })
 
+    it('restates library dark defaults for tokens overridden in light only', () => {
+      // `:root, .light` matches html.dark too and lands after the library's
+      // `.dark` block — without a dark restatement the light value wins the
+      // source-order tie and dark mode renders light.
+      const css = generateCSS({
+        version: 1,
+        tokens: {
+          light: {
+            '--ui-bg': 'var(--ui-color-neutral-50)',
+            '--ui-text-inverted': 'var(--ui-color-neutral-50)'
+          }
+        }
+      })
+
+      expect(css).toContain([
+        '.dark {',
+        '  --ui-bg: var(--ui-color-neutral-900);',
+        '  --ui-text-inverted: var(--ui-color-neutral-900);',
+        '}'
+      ].join('\n'))
+    })
+
+    it('does not restate a dark default the doc already overrides', () => {
+      const css = generateCSS({
+        version: 1,
+        tokens: {
+          light: { '--ui-bg': 'var(--ui-color-neutral-50)' },
+          dark: { '--ui-bg': 'var(--ui-color-neutral-950)' }
+        }
+      })
+
+      expect(css).toContain('.dark {\n  --ui-bg: var(--ui-color-neutral-950);\n}')
+      expect(css).not.toContain('neutral-900')
+    })
+
     it('does not emit values matching the defaults', () => {
       const css = generateCSS({ version: 1, radius: 0.25, font: { sans: 'Public Sans' } })
 
