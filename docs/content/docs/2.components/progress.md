@@ -71,6 +71,21 @@ props:
 ---
 ::
 
+### Variant
+
+Use the `variant` prop to change the style of the progress. May be `linear` (default) or `circular`
+
+::component-code
+---
+external:
+  - modelValue
+  - variant
+props:
+  modelValue: 50
+  variant: 'linear'
+---
+::
+
 ### Indeterminate
 
 When no `v-model` is set or the value is `null`, the Progress becomes _indeterminate_. The progress bar is animated as a `carousel`, but you can change it using the [`animation`](#animation) prop.

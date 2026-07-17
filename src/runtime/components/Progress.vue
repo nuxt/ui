@@ -38,6 +38,12 @@ export interface ProgressProps extends Pick<ProgressRootProps, 'getValueLabel' |
    * @defaultValue 'carousel'
    */
   animation?: Progress['variants']['animation']
+  /**
+   * The progress bar variant
+   * @defaultValue 'linear'
+   */
+  variant?: Progress['variants']['variant']
+  thickness?: 'auto' | number
   class?: any
   ui?: Progress['slots']
 }
@@ -45,6 +51,7 @@ export interface ProgressProps extends Pick<ProgressRootProps, 'getValueLabel' |
 export interface ProgressEmits extends ProgressRootEmits {}
 
 export type ProgressSlots = {
+  default?(props: { value?: number, max?: number, percent?: number }): VNode[]
   status?(props: { percent?: number }): VNode[]
 } & {
   [key: string]: (props: { step: number }) => VNode[]
@@ -65,7 +72,9 @@ import { tv } from '../utils/tv'
 const _props = withDefaults(defineProps<ProgressProps>(), {
   inverted: false,
   modelValue: null,
-  orientation: 'horizontal'
+  orientation: 'horizontal',
+  variant: 'linear',
+  thickness: 'auto'
 })
 const emits = defineEmits<ProgressEmits>()
 const slots = defineSlots<ProgressSlots>()
@@ -109,24 +118,44 @@ const indicatorStyle = computed(() => {
     return
   }
 
-  if (props.orientation === 'vertical') {
-    return {
-      transform: `translateY(${props.inverted ? '' : '-'}${100 - percent.value}%)`
-    }
-  } else {
-    if (dir.value === 'rtl') {
+  if (props.variant === 'linear') {
+    if (props.orientation === 'vertical') {
       return {
-        transform: `translateX(${props.inverted ? '-' : ''}${100 - percent.value}%)`
+        transform: `translateY(${props.inverted ? '' : '-'}${100 - percent.value}%)`
       }
     } else {
-      return {
-        transform: `translateX(${props.inverted ? '' : '-'}${100 - percent.value}%)`
+      if (dir.value === 'rtl') {
+        return {
+          transform: `translateX(${props.inverted ? '-' : ''}${100 - percent.value}%)`
+        }
+      } else {
+        return {
+          transform: `translateX(${props.inverted ? '' : '-'}${100 - percent.value}%)`
+        }
       }
+    }
+  } else {
+    const strokeDasharray = `${percent.value ?? 25}, 100`
+
+    return {
+      'stroke-dasharray': strokeDasharray
     }
   }
 })
 
+const thicknessStyle = computed(() => {
+  if (props.variant === 'linear') return
+
+  if (props.thickness === 'auto') return
+
+  return {
+    '--ui-progress-thickness': `${props.thickness}px`
+  }
+})
+
 const statusStyle = computed(() => {
+  if (props.variant === 'circular') return undefined
+
   const value = `${Math.max(percent.value ?? 0, 0)}%`
   return props.orientation === 'vertical' ? { height: value } : { width: value }
 })
@@ -167,20 +196,35 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.progress || {}) 
   size: props.size,
   color: props.color,
   orientation: props.orientation,
-  inverted: props.inverted
+  inverted: props.inverted,
+  variant: props.variant
 }))
 </script>
 
 <template>
   <Primitive :as="props.as" :data-orientation="props.orientation" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <div v-if="!isIndeterminate && (props.status || !!slots.status)" data-slot="status" :class="ui.status({ class: props.ui?.status })" :style="statusStyle">
+    <div v-if="!isIndeterminate && (props.status || !!slots.status) && props.variant === 'linear'" data-slot="status" :class="ui.status({ class: props.ui?.status })" :style="statusStyle">
       <slot name="status" :percent="percent">
         {{ percent }}%
       </slot>
     </div>
 
-    <ProgressRoot v-bind="rootProps" :max="realMax" data-slot="base" :class="ui.base({ class: props.ui?.base })" style="transform: translateZ(0)">
-      <ProgressIndicator data-slot="indicator" :class="ui.indicator({ class: props.ui?.indicator })" :style="indicatorStyle" />
+    <ProgressRoot v-bind="rootProps" :max="realMax" data-slot="base" :class="ui.base({ class: props.ui?.base })" :style="['transform: translateZ(0)', thicknessStyle]">
+      <template v-if="props.variant === 'circular'">
+        <svg viewBox="0 0 100 100">
+          <circle cx="50" cy="50" data-slot="track" :class="ui.track({ class: props.ui?.track })" />
+          <ProgressIndicator as-child>
+            <circle cx="50" cy="50" pathLength="100" :class="ui.indicator({ class: props.ui?.indicator })" :style="indicatorStyle" />
+          </ProgressIndicator>
+        </svg>
+        <div v-if="!isIndeterminate && (props.status || !!slots.status)" data-slot="status" :class="ui.status({ class: props.ui?.status })" :style="statusStyle">
+          <slot name="status" :percent="percent">
+            {{ percent }}%
+          </slot>
+        </div>
+      </template>
+
+      <ProgressIndicator v-else-if="props.variant === 'linear'" data-slot="indicator" :class="ui.indicator({ class: props.ui?.indicator })" :style="indicatorStyle" />
     </ProgressRoot>
 
     <div v-if="hasSteps" data-slot="steps" :class="ui.steps({ class: props.ui?.steps })">
