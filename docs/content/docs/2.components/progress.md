@@ -73,7 +73,8 @@ props:
 
 ### Variant
 
-Use the `variant` prop to change the style of the progress. May be `linear` (default) or `circular`
+WIP
+Use the `variant` prop to change the style of the progress. May be `linear` (default) or `circular`.
 
 ::component-code
 ---
@@ -82,7 +83,7 @@ external:
   - variant
 props:
   modelValue: 50
-  variant: 'linear'
+  variant: 'circular'
 ---
 ::
 
