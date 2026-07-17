@@ -293,7 +293,7 @@ props:
 
 ## Examples
 
-### With custom slot
+### With custom slot :badge{label="Soon" class="align-text-top"}
 
 Use the `slot` property to replace the label and description of a specific item with custom content.
 
