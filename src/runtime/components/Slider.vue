@@ -111,7 +111,7 @@ function onChange(value: any) {
 
 <template>
   <SliderRoot
-    v-bind="{ ...rootProps, ...ariaAttrs }"
+    v-bind="{ ...rootProps }"
     :id="id"
     v-model="sliderValue"
     :name="name"
@@ -133,9 +133,9 @@ function onChange(value: any) {
         disable-closing-trigger
         v-bind="(typeof props.tooltip === 'object' ? props.tooltip : {})"
       >
-        <SliderThumb data-slot="thumb" :class="ui.thumb({ class: props.ui?.thumb })" :aria-label="thumbs === 1 ? 'Thumb' : `Thumb ${thumb} of ${thumbs}`" />
+        <SliderThumb data-slot="thumb" :class="ui.thumb({ class: props.ui?.thumb })" v-bind="{ 'aria-label': thumbs === 1 ? 'Thumb' : `Thumb ${thumb} of ${thumbs}`, ...ariaAttrs }" />
       </UTooltip>
-      <SliderThumb v-else data-slot="thumb" :class="ui.thumb({ class: props.ui?.thumb })" :aria-label="thumbs === 1 ? 'Thumb' : `Thumb ${thumb} of ${thumbs}`" />
+      <SliderThumb v-else data-slot="thumb" :class="ui.thumb({ class: props.ui?.thumb })" v-bind="{ 'aria-label': thumbs === 1 ? 'Thumb' : `Thumb ${thumb} of ${thumbs}`, ...ariaAttrs }" />
     </template>
   </SliderRoot>
 </template>
