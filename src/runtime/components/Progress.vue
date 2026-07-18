@@ -43,6 +43,11 @@ export interface ProgressProps extends Pick<ProgressRootProps, 'getValueLabel' |
    * @defaultValue 'linear'
    */
   variant?: Progress['variants']['variant']
+  /**
+   * The thickness of the circular progress stroke in pixels, `auto` derives it from the `size` prop.
+   * Only applies to the `circular` variant.
+   * @defaultValue 'auto'
+   */
   thickness?: 'auto' | number
   class?: any
   ui?: Progress['slots']
@@ -196,7 +201,8 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.progress || {}) 
   color: props.color,
   orientation: props.orientation,
   inverted: props.inverted,
-  variant: props.variant
+  variant: props.variant,
+  thickness: props.thickness === 'auto' ? 'auto' : undefined
 }))
 </script>
 

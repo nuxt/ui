@@ -6,7 +6,7 @@ export default (options: Required<ModuleOptions>) => ({
     base: 'relative',
     track: 'fill-none stroke-(--ui-bg-accented)',
     indicator: 'rounded-full size-full transition-transform duration-200 ease-out [stroke-linecap:round] motion-reduce:data-[state=indeterminate]:animate-pulse',
-    status: 'flex text-dimmed ',
+    status: 'flex text-dimmed',
     steps: 'grid items-end',
     step: 'truncate text-end row-start-1 col-start-1 transition-opacity'
   },
@@ -96,6 +96,9 @@ export default (options: Required<ModuleOptions>) => ({
         indicator: 'fill-none origin-center -rotate-90 [stroke-width:var(--ui-progress-thickness)] [r:calc(50px-var(--ui-progress-thickness)/2)] transition-[stroke-dasharray,opacity] duration-700 data-[value=\'0\']:opacity-0',
         status: 'absolute inset-0 items-center justify-center'
       }
+    },
+    thickness: {
+      auto: ''
     }
   },
   compoundVariants: [{
@@ -362,7 +365,6 @@ export default (options: Required<ModuleOptions>) => ({
     animation: 'carousel',
     color: 'primary',
     size: 'md',
-    variant: 'linear',
-    thickness: 'auto'
+    variant: 'linear'
   }
 })
