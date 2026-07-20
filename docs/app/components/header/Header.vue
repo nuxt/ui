@@ -3,6 +3,9 @@ const route = useRoute()
 const { desktopLinks } = useHeader()
 const { open } = useChat()
 const { track } = useAnalytics()
+// The Ask-AI button skins to the applied icon pack, like the rest of the
+// studio chrome (the theme applies site-wide, so this stays consistent).
+const studioIcons = useStudioIcons()
 
 function toggleChat() {
   if (!open.value) {
@@ -45,7 +48,7 @@ const viewListOpen = ref(false)
         <UButton
           color="neutral"
           variant="ghost"
-          icon="i-lucide-bot-message-square"
+          :icon="studioIcons.assistant"
           aria-label="Ask AI for help"
           @click="toggleChat"
         />
@@ -59,7 +62,7 @@ const viewListOpen = ref(false)
           variant="ghost"
           to="https://github.com/nuxt/ui"
           target="_blank"
-          icon="i-simple-icons-github"
+          :icon="studioIcons.github"
           aria-label="GitHub"
         />
       </UTooltip>

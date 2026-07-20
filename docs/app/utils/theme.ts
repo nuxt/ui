@@ -375,10 +375,232 @@ export const themeIcons = {
     tip: 'i-tabler-bulb',
     upload: 'i-tabler-upload',
     warning: 'i-tabler-alert-triangle'
+  },
+  // 8-bit pixel-art set for the Comic preset. Pixelarticons is a functional
+  // UI pack (unlike streamline-pixel, which has no arrows/chevrons), but it
+  // still lacks a few glyphs — noted inline where a substitute stands in.
+  pixelarticons: {
+    arrowDown: 'i-pixelarticons-arrow-down',
+    arrowLeft: 'i-pixelarticons-arrow-left',
+    arrowRight: 'i-pixelarticons-arrow-right',
+    arrowUp: 'i-pixelarticons-arrow-up',
+    caution: 'i-pixelarticons-square-alert',
+    check: 'i-pixelarticons-check',
+    // No double-chevron glyph — single directional chevrons keep prev/next
+    // (pagination first/last, calendar year nav) pointing the right way.
+    chevronDoubleLeft: 'i-pixelarticons-chevron-left',
+    chevronDoubleRight: 'i-pixelarticons-chevron-right',
+    chevronDown: 'i-pixelarticons-chevron-down',
+    chevronLeft: 'i-pixelarticons-chevron-left',
+    chevronRight: 'i-pixelarticons-chevron-right',
+    chevronUp: 'i-pixelarticons-chevron-up',
+    close: 'i-pixelarticons-close',
+    copy: 'i-pixelarticons-clipboard',
+    copyCheck: 'i-pixelarticons-clipboard-note',
+    dark: 'i-pixelarticons-moon',
+    // No grip/drag handle — vertical dots read as a draggable affordance.
+    drag: 'i-pixelarticons-more-vertical',
+    ellipsis: 'i-pixelarticons-more-horizontal',
+    error: 'i-pixelarticons-letter-x-circle',
+    external: 'i-pixelarticons-external-link',
+    eye: 'i-pixelarticons-eye',
+    eyeOff: 'i-pixelarticons-eye-off',
+    file: 'i-pixelarticons-file',
+    // No open-folder glyph — repeat the closed folder (as iconoir does).
+    folder: 'i-pixelarticons-folder',
+    folderOpen: 'i-pixelarticons-folder',
+    hash: 'i-pixelarticons-hash',
+    info: 'i-pixelarticons-info-box',
+    light: 'i-pixelarticons-sun',
+    loading: 'i-pixelarticons-loader',
+    menu: 'i-pixelarticons-menu',
+    minus: 'i-pixelarticons-minus',
+    panelClose: 'i-pixelarticons-chevron-left',
+    panelOpen: 'i-pixelarticons-chevron-right',
+    plus: 'i-pixelarticons-plus',
+    reload: 'i-pixelarticons-reload',
+    search: 'i-pixelarticons-search',
+    // No dedicated stop glyph — a filled square is the universal stop mark.
+    stop: 'i-pixelarticons-square',
+    star: 'i-pixelarticons-star',
+    success: 'i-pixelarticons-check',
+    system: 'i-pixelarticons-monitor',
+    tip: 'i-pixelarticons-lightbulb',
+    upload: 'i-pixelarticons-upload',
+    warning: 'i-pixelarticons-warning-diamond'
   }
 }
 
 export type ThemeIcons = keyof typeof themeIcons
+
+/**
+ * Glyphs for the studio's own chrome (toolbar controls, the header Ask-AI
+ * button, the theme-picker/preset button), per icon pack, so the chrome skins
+ * to match the applied theme. Kept OUT of `themeIcons` on purpose: these are
+ * studio-only and must never ride the export's icon config. `reset` is its own
+ * circular-arrow glyph rather than reusing the `reload` semantic key — in
+ * several packs `reload` is a back-arrow that would collide with `undo`.
+ * Import and the group-picker chevron reuse the standard `upload`/`chevronDown`
+ * keys (present in every pack), so they aren't repeated here.
+ */
+export const studioIcons: Record<ThemeIcons, {
+  undo: string
+  redo: string
+  reset: string
+  export: string
+  fullscreen: string
+  exitFullscreen: string
+  /** Header "Ask AI" button. */
+  assistant: string
+  /** Theme-picker + preset-menu button. */
+  themes: string
+  /**
+   * Header GitHub link. Packs without a native brand glyph fall back to
+   * simple-icons, which every install already ships for the logo set.
+   */
+  github: string
+  /** Preset-menu randomize die. Packs without a die use their shuffle glyph. */
+  dice: string
+}> = {
+  lucide: { undo: 'i-lucide-undo-2', redo: 'i-lucide-redo-2', reset: 'i-lucide-rotate-ccw', export: 'i-lucide-download', fullscreen: 'i-lucide-maximize', exitFullscreen: 'i-lucide-minimize', assistant: 'i-lucide-bot-message-square', themes: 'i-lucide-swatch-book', github: 'i-lucide-github', dice: 'i-lucide-dices' },
+  bootstrap: { undo: 'i-bi-arrow-90deg-left', redo: 'i-bi-arrow-90deg-right', reset: 'i-bi-arrow-counterclockwise', export: 'i-bi-download', fullscreen: 'i-bi-fullscreen', exitFullscreen: 'i-bi-fullscreen-exit', assistant: 'i-bi-robot', themes: 'i-bi-palette', github: 'i-bi-github', dice: 'i-bi-dice-5' },
+  heroicons: { undo: 'i-heroicons-arrow-uturn-left', redo: 'i-heroicons-arrow-uturn-right', reset: 'i-heroicons-arrow-path', export: 'i-heroicons-arrow-down-tray', fullscreen: 'i-heroicons-arrows-pointing-out', exitFullscreen: 'i-heroicons-arrows-pointing-in', assistant: 'i-heroicons-sparkles', themes: 'i-heroicons-swatch', github: 'i-simple-icons-github', dice: 'i-heroicons-arrows-right-left' },
+  iconoir: { undo: 'i-iconoir-undo', redo: 'i-iconoir-redo', reset: 'i-iconoir-refresh-double', export: 'i-iconoir-download', fullscreen: 'i-iconoir-expand', exitFullscreen: 'i-iconoir-collapse', assistant: 'i-iconoir-magic-wand', themes: 'i-iconoir-palette', github: 'i-iconoir-github', dice: 'i-iconoir-shuffle' },
+  material: { undo: 'i-material-symbols-undo', redo: 'i-material-symbols-redo', reset: 'i-material-symbols-refresh', export: 'i-material-symbols-download', fullscreen: 'i-material-symbols-fullscreen', exitFullscreen: 'i-material-symbols-fullscreen-exit', assistant: 'i-material-symbols-robot', themes: 'i-material-symbols-palette', github: 'i-simple-icons-github', dice: 'i-material-symbols-shuffle' },
+  phosphor: { undo: 'i-ph-arrow-arc-left', redo: 'i-ph-arrow-arc-right', reset: 'i-ph-arrow-counter-clockwise', export: 'i-ph-download', fullscreen: 'i-ph-arrows-out', exitFullscreen: 'i-ph-arrows-in', assistant: 'i-ph-robot', themes: 'i-ph-palette', github: 'i-ph-github-logo', dice: 'i-ph-shuffle' },
+  remix: { undo: 'i-ri-arrow-go-back-line', redo: 'i-ri-arrow-go-forward-line', reset: 'i-ri-restart-line', export: 'i-ri-download-line', fullscreen: 'i-ri-fullscreen-line', exitFullscreen: 'i-ri-fullscreen-exit-line', assistant: 'i-ri-robot-2-line', themes: 'i-ri-palette-line', github: 'i-ri-github-fill', dice: 'i-ri-dice-line' },
+  tabler: { undo: 'i-tabler-arrow-back-up', redo: 'i-tabler-arrow-forward-up', reset: 'i-tabler-refresh', export: 'i-tabler-download', fullscreen: 'i-tabler-maximize', exitFullscreen: 'i-tabler-minimize', assistant: 'i-tabler-robot', themes: 'i-tabler-palette', github: 'i-tabler-brand-github', dice: 'i-tabler-dice' },
+  // Pixel pack has no `themes`/`palette` glyph, so `colors-swatch` stands in
+  // for the swatch-book.
+  pixelarticons: { undo: 'i-pixelarticons-undo', redo: 'i-pixelarticons-redo', reset: 'i-pixelarticons-reload', export: 'i-pixelarticons-download', fullscreen: 'i-pixelarticons-viewport-wide', exitFullscreen: 'i-pixelarticons-viewport-narrow', assistant: 'i-pixelarticons-robot', themes: 'i-pixelarticons-colors-swatch', github: 'i-pixelarticons-github', dice: 'i-pixelarticons-dice' }
+}
+
+/**
+ * Functional icons the preview demos use beyond the 43 semantic keys (dashboard
+ * nav, account menus, etc.). These are NOT part of any theme — they only skin
+ * the studio's demo content to the applied pack, so they stay out of themeIcons
+ * (and exports). The Lucide names ARE the defaults each demo already hardcodes;
+ * `studioExtraOverrides` supplies a pack's glyph where it differs, falling back
+ * to the Lucide default for any pack/key with no entry.
+ */
+export const STUDIO_EXTRA_DEFAULTS = {
+  bell: 'i-lucide-bell',
+  calendar: 'i-lucide-calendar',
+  settings: 'i-lucide-settings',
+  home: 'i-lucide-house',
+  inbox: 'i-lucide-inbox',
+  logout: 'i-lucide-log-out',
+  trash: 'i-lucide-trash',
+  user: 'i-lucide-user',
+  users: 'i-lucide-users',
+  userPlus: 'i-lucide-user-plus',
+  send: 'i-lucide-send',
+  reply: 'i-lucide-reply',
+  paperclip: 'i-lucide-paperclip',
+  messageCircle: 'i-lucide-message-circle',
+  creditCard: 'i-lucide-credit-card',
+  dollar: 'i-lucide-circle-dollar-sign',
+  cart: 'i-lucide-shopping-cart',
+  chart: 'i-lucide-chart-pie',
+  list: 'i-lucide-list',
+  sort: 'i-lucide-chevrons-up-down',
+  mail: 'i-lucide-mail',
+  heart: 'i-lucide-heart',
+  github: 'i-lucide-github',
+  trendingUp: 'i-lucide-trending-up',
+  trendingDown: 'i-lucide-trending-down',
+  tag: 'i-lucide-tag',
+  filePlus: 'i-lucide-file-plus',
+  folderPlus: 'i-lucide-folder-plus',
+  movie: 'i-lucide-clapperboard',
+  clock: 'i-lucide-clock',
+  coffee: 'i-lucide-coffee',
+  globe: 'i-lucide-globe',
+  share: 'i-lucide-share',
+  link: 'i-lucide-link',
+  lock: 'i-lucide-lock',
+  filter: 'i-lucide-filter',
+  image: 'i-lucide-image',
+  camera: 'i-lucide-camera',
+  play: 'i-lucide-play',
+  terminal: 'i-lucide-terminal',
+  shield: 'i-lucide-shield',
+  sparkles: 'i-lucide-sparkles',
+  zap: 'i-lucide-zap',
+  package: 'i-lucide-package',
+  pin: 'i-lucide-pin',
+  palette: 'i-lucide-palette',
+  paintBucket: 'i-lucide-paint-bucket',
+  mic: 'i-lucide-mic',
+  heading: 'i-lucide-heading',
+  briefcase: 'i-lucide-briefcase',
+  bookOpen: 'i-lucide-book-open',
+  pencil: 'i-lucide-pencil',
+  undo: 'i-lucide-undo',
+  redo: 'i-lucide-redo'
+} as const
+
+export const studioExtraOverrides: Partial<Record<ThemeIcons, Partial<Record<keyof typeof STUDIO_EXTRA_DEFAULTS, string>>>> = {
+  // Pixel has no settings/cog (sliders stands in), no pie chart (generic
+  // chart) and no up-down chevron (sort). Everything else is a native match.
+  pixelarticons: {
+    bell: 'i-pixelarticons-bell',
+    calendar: 'i-pixelarticons-calendar',
+    settings: 'i-pixelarticons-sliders',
+    home: 'i-pixelarticons-home',
+    inbox: 'i-pixelarticons-inbox',
+    logout: 'i-pixelarticons-logout',
+    trash: 'i-pixelarticons-trash',
+    user: 'i-pixelarticons-user',
+    users: 'i-pixelarticons-users',
+    userPlus: 'i-pixelarticons-user-plus',
+    send: 'i-pixelarticons-send',
+    reply: 'i-pixelarticons-reply',
+    paperclip: 'i-pixelarticons-paperclip',
+    messageCircle: 'i-pixelarticons-message',
+    creditCard: 'i-pixelarticons-credit-card',
+    dollar: 'i-pixelarticons-dollar',
+    cart: 'i-pixelarticons-shopping-cart',
+    chart: 'i-pixelarticons-chart',
+    list: 'i-pixelarticons-list',
+    sort: 'i-pixelarticons-sort',
+    mail: 'i-pixelarticons-mail',
+    heart: 'i-pixelarticons-heart',
+    github: 'i-pixelarticons-github',
+    trendingUp: 'i-pixelarticons-trending-up',
+    trendingDown: 'i-pixelarticons-trending-down',
+    tag: 'i-pixelarticons-label',
+    filePlus: 'i-pixelarticons-file-plus',
+    folderPlus: 'i-pixelarticons-folder-plus',
+    movie: 'i-pixelarticons-movie',
+    clock: 'i-pixelarticons-clock',
+    coffee: 'i-pixelarticons-coffee',
+    globe: 'i-pixelarticons-globe',
+    share: 'i-pixelarticons-share',
+    link: 'i-pixelarticons-link',
+    lock: 'i-pixelarticons-lock',
+    filter: 'i-pixelarticons-filter',
+    image: 'i-pixelarticons-image',
+    camera: 'i-pixelarticons-camera',
+    play: 'i-pixelarticons-play',
+    terminal: 'i-pixelarticons-terminal',
+    shield: 'i-pixelarticons-shield',
+    sparkles: 'i-pixelarticons-sparkles',
+    zap: 'i-pixelarticons-zap',
+    package: 'i-pixelarticons-package',
+    pin: 'i-pixelarticons-pin',
+    // Pixel has no palette glyph — colors-swatch stands in.
+    palette: 'i-pixelarticons-colors-swatch',
+    paintBucket: 'i-pixelarticons-paint-bucket',
+    mic: 'i-pixelarticons-mic',
+    heading: 'i-pixelarticons-heading',
+    briefcase: 'i-pixelarticons-briefcase',
+    bookOpen: 'i-pixelarticons-book-open',
+    pencil: 'i-pixelarticons-pencil',
+    undo: 'i-pixelarticons-undo',
+    redo: 'i-pixelarticons-redo'
+  }
+}
 
 // The docs' own render baseline. It intentionally diverges from the library
 // defaults in one place: light `--ui-bg` follows the neutral ramp (set in

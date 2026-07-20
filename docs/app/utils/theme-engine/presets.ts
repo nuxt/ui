@@ -275,7 +275,7 @@ export const presets: ThemePreset[] = [{
     // One flat 600 across every weight step — comic lettering has a single
     // stroke width, and Comic Neue's 400 reads too thin for the look.
     font: { sans: 'Comic Neue', weights: { normal: 600, medium: 600, semibold: 600, bold: 600 } },
-    icons: 'iconoir',
+    icons: 'pixelarticons',
     // Inked page: near-black default AND accented borders over muted panel
     // edges, deep red at 600 in light, flat 50s inversions in dark.
     tokens: {
@@ -356,7 +356,7 @@ export const presets: ThemePreset[] = [{
       neutral: 'parchment'
     },
     radius: 0.375,
-    font: { sans: 'DM Sans' },
+    font: { sans: 'DM Sans', heading: { font: 'Source Serif 4', weight: 400 } },
     icons: 'heroicons',
     // Deep cream page over ivory surfaces in light, with the border family
     // stepped one deeper to hold on the tinted page; one flat 800 surface

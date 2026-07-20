@@ -1,3 +1,5 @@
+import type { ThemeIcons } from '../utils/theme'
+
 export type ThemeStudioView = 'grid' | 'dashboard' | 'chat' | 'saas' | 'landing' | 'docs' | 'portfolio' | 'changelog' | 'editor' | 'a11y'
 
 export interface ThemeStudioViewTab {
@@ -14,7 +16,7 @@ const templateImage = (name: string) => `/assets/templates/nuxt/${name}`
 
 export const THEME_STUDIO_VIEWS: ThemeStudioViewTab[] = [
   { label: 'Grid', icon: 'i-lucide-layout-grid', value: 'grid', description: 'Every themed component at a glance — the component wall.' },
-  { label: 'Dashboard', icon: 'i-lucide-layout-dashboard', value: 'dashboard', description: 'Multi-column admin interface with inbox, customers and settings.', image: templateImage('dashboard') },
+  { label: 'Dashboard', icon: 'i-lucide-layout-dashboard', value: 'dashboard', description: 'Multi-column admin interface with multiple views.', image: templateImage('dashboard') },
   { label: 'Chat', icon: 'i-lucide-message-circle', value: 'chat', description: 'An AI chatbot with sidebar history and streaming replies.', image: templateImage('chat') },
   { label: 'SaaS', icon: 'i-lucide-rocket', value: 'saas', description: 'A SaaS home with hero, pricing and feature sections.', image: templateImage('saas') },
   { label: 'Landing', icon: 'i-lucide-panels-top-left', value: 'landing', description: 'A modern marketing landing page.', image: templateImage('landing') },
@@ -26,6 +28,29 @@ export const THEME_STUDIO_VIEWS: ThemeStudioViewTab[] = [
 ]
 
 /**
+ * Per-pack overrides for the view-switcher glyphs, so the switcher skins to
+ * the applied theme like the rest of the studio chrome. A view falls back to
+ * its Lucide default (THEME_STUDIO_VIEWS) wherever the active pack has no
+ * entry. Only pixelarticons is curated today; other packs keep Lucide until
+ * filled in. Pixel has no rocket/panels/newspaper/accessibility glyphs, so
+ * SaaS→zap, Landing→layout, Changelog→article and A11y→human stand in.
+ */
+const studioViewIcons: Partial<Record<ThemeIcons, Partial<Record<ThemeStudioView, string>>>> = {
+  pixelarticons: {
+    grid: 'i-pixelarticons-dashboard',
+    dashboard: 'i-pixelarticons-dashboard',
+    chat: 'i-pixelarticons-message',
+    saas: 'i-pixelarticons-zap',
+    landing: 'i-pixelarticons-layout',
+    docs: 'i-pixelarticons-book-open',
+    portfolio: 'i-pixelarticons-user',
+    changelog: 'i-pixelarticons-article',
+    editor: 'i-pixelarticons-edit-box',
+    a11y: 'i-pixelarticons-human'
+  }
+}
+
+/**
  * The studio's preview state lives at app level: while on /theme the site
  * header hosts the view switcher and fullscreen gates the chrome, so both
  * the page and the header read the same state.
@@ -35,4 +60,15 @@ export function useThemeStudioView() {
   const fullscreen = useState('theme-studio-fullscreen', () => false)
 
   return { view, fullscreen, views: THEME_STUDIO_VIEWS }
+}
+
+/** The view glyphs resolved for the active icon pack (override ?? Lucide). */
+export function useStudioViewIcons() {
+  const { icon } = useTheme()
+  return computed(() => {
+    const overrides = studioViewIcons[icon.value as ThemeIcons] ?? {}
+    return Object.fromEntries(
+      THEME_STUDIO_VIEWS.map(tab => [tab.value, overrides[tab.value] ?? tab.icon])
+    ) as Record<ThemeStudioView, string>
+  })
 }

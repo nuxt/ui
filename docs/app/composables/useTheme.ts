@@ -244,6 +244,10 @@ export function useTheme() {
     icon: 'i-ph-phosphor-logo',
     value: 'phosphor'
   }, {
+    label: 'Pixelart',
+    icon: 'i-pixelarticons-pixelarticons',
+    value: 'pixelarticons'
+  }, {
     label: 'Remix',
     icon: 'i-ri-remixicon-line',
     value: 'remix'

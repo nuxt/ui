@@ -2,15 +2,17 @@
 import type { DropdownMenuItem } from '@nuxt/ui'
 
 const toast = useToast()
+const appConfig = useAppConfig()
+const extra = useStudioExtraIcons()
 
 const items: DropdownMenuItem[][] = [
   [
-    { label: 'View report', icon: 'i-lucide-eye', onSelect: () => toast.add({ title: 'View report' }) },
+    { label: 'View report', icon: appConfig.ui.icons.eye, onSelect: () => toast.add({ title: 'View report' }) },
     { label: 'Export as CSV', icon: 'i-lucide-download', onSelect: () => toast.add({ title: 'Exporting…' }) },
-    { label: 'Refresh', icon: 'i-lucide-refresh-cw', onSelect: () => toast.add({ title: 'Refreshed' }) }
+    { label: 'Refresh', icon: appConfig.ui.icons.reload, onSelect: () => toast.add({ title: 'Refreshed' }) }
   ],
   [
-    { label: 'Delete', icon: 'i-lucide-trash', color: 'error', onSelect: () => toast.add({ title: 'Deleted', color: 'error' }) }
+    { label: 'Delete', icon: extra.trash, color: 'error', onSelect: () => toast.add({ title: 'Deleted', color: 'error' }) }
   ]
 ]
 
@@ -30,13 +32,13 @@ const progress = ref(75)
       </div>
 
       <div class="flex items-center gap-2">
-        <UBadge color="success" variant="subtle" size="sm" icon="i-lucide-trending-up">
+        <UBadge color="success" variant="subtle" size="sm" :icon="extra.trendingUp">
           +12.5%
         </UBadge>
 
         <UDropdownMenu :items="items" :ui="{ content: 'w-44' }">
           <UButton
-            icon="i-lucide-ellipsis-vertical"
+            :icon="appConfig.ui.icons.ellipsis"
             color="neutral"
             variant="ghost"
             size="sm"

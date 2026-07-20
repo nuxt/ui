@@ -1,4 +1,5 @@
 <script setup lang="ts">
+const appConfig = useAppConfig()
 const toast = useToast()
 </script>
 
@@ -24,7 +25,7 @@ const toast = useToast()
         label="Learn more"
         color="neutral"
         variant="subtle"
-        trailing-icon="i-lucide-arrow-right"
+        :trailing-icon="appConfig.ui.icons.arrowRight"
         @click="toast.add({ title: 'Observability Plus' })"
       />
     </div>

@@ -1,3 +1,8 @@
+<script setup lang="ts">
+const appConfig = useAppConfig()
+const extra = useStudioExtraIcons()
+</script>
+
 <template>
   <div class="flex flex-col gap-3 p-4">
     <div class="flex flex-wrap gap-2">
@@ -9,10 +14,10 @@
     </div>
 
     <div class="flex flex-wrap items-center gap-2">
-      <UBadge color="success" variant="soft" icon="i-lucide-circle-check">
+      <UBadge color="success" variant="soft" :icon="appConfig.ui.icons.success">
         Shipped
       </UBadge>
-      <UBadge color="warning" variant="soft" icon="i-lucide-clock">
+      <UBadge color="warning" variant="soft" :icon="extra.clock">
         Pending
       </UBadge>
       <UBadge color="neutral" variant="soft" size="lg">

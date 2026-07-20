@@ -2,11 +2,14 @@
 import type { UIMessage } from 'ai'
 import type { NavigationMenuItem } from '@nuxt/ui'
 
+const appConfig = useAppConfig()
+const extra = useStudioExtraIcons()
+
 const input = ref('')
 
 const menuItems: NavigationMenuItem[] = [
-  { label: 'New chat', icon: 'i-lucide-circle-plus' },
-  { label: 'Search', icon: 'i-lucide-search' }
+  { label: 'New chat', icon: appConfig.ui.icons.plus },
+  { label: 'Search', icon: appConfig.ui.icons.search }
 ]
 
 const historyItems: NavigationMenuItem[] = [
@@ -49,7 +52,7 @@ const messages: UIMessage[] = [{
   <div class="h-full flex bg-default overflow-hidden">
     <aside class="hidden md:flex w-56 shrink-0 flex-col gap-2 border-e border-default bg-elevated/25 p-3 min-h-0">
       <div class="flex items-center gap-1.5 px-1.5 py-1">
-        <UIcon name="i-lucide-message-circle" class="size-5 text-primary shrink-0" />
+        <UIcon :name="extra.messageCircle" class="size-5 text-primary shrink-0" />
         <span class="text-lg font-bold text-highlighted">Chat</span>
       </div>
 
@@ -62,7 +65,7 @@ const messages: UIMessage[] = [{
       <UButton
         label="Anna Cooper"
         :avatar="{ alt: 'Anna Cooper' }"
-        trailing-icon="i-lucide-chevrons-up-down"
+        :trailing-icon="extra.sort"
         color="neutral"
         variant="ghost"
         class="w-full"
@@ -79,14 +82,14 @@ const messages: UIMessage[] = [{
         <div class="flex items-center gap-1">
           <UButton
             label="Private"
-            icon="i-lucide-lock"
-            trailing-icon="i-lucide-chevron-down"
+            :icon="extra.lock"
+            :trailing-icon="appConfig.ui.icons.chevronDown"
             color="neutral"
             variant="ghost"
             size="sm"
           />
           <UButton
-            icon="i-lucide-share"
+            :icon="extra.share"
             color="neutral"
             variant="ghost"
             size="sm"
@@ -111,7 +114,7 @@ const messages: UIMessage[] = [{
           <template #footer>
             <div class="flex items-center gap-1">
               <UButton
-                icon="i-lucide-paperclip"
+                :icon="extra.paperclip"
                 color="neutral"
                 variant="ghost"
                 size="sm"
@@ -120,7 +123,7 @@ const messages: UIMessage[] = [{
               />
               <UButton
                 label="gpt-4o"
-                trailing-icon="i-lucide-chevron-down"
+                :trailing-icon="appConfig.ui.icons.chevronDown"
                 color="neutral"
                 variant="ghost"
                 size="sm"

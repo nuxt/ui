@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const toast = useToast()
+const extra = useStudioExtraIcons()
 
 const severities = [
   { label: 'Low', value: 'low' },
@@ -50,7 +51,7 @@ const steps = ref('')
     </div>
 
     <div class="flex items-center justify-between border-t border-default p-3">
-      <UButton label="Attach file" icon="i-lucide-paperclip" color="neutral" variant="ghost" />
+      <UButton label="Attach file" :icon="extra.paperclip" color="neutral" variant="ghost" />
       <UButton label="Submit bug" @click="toast.add({ title: 'Bug reported' })" />
     </div>
   </div>

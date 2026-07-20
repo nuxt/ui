@@ -1,4 +1,5 @@
 <script setup lang="ts">
+const appConfig = useAppConfig()
 const toast = useToast()
 
 const roles = [
@@ -38,7 +39,7 @@ const link = 'https://app.nuxt.com/invite/x8f2k'
       <UInput :model-value="link" readonly class="w-full">
         <template #trailing>
           <UButton
-            icon="i-lucide-copy"
+            :icon="appConfig.ui.icons.copy"
             color="neutral"
             variant="link"
             size="xs"

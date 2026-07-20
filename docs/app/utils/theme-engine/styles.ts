@@ -221,6 +221,12 @@ const HARD_BASE = 'shadow-(--ui-shadow-hard)'
 const HARD_LG = 'shadow-(--ui-shadow-hard-lg)'
 const HARD_SM = 'shadow-(--ui-shadow-hard-sm)'
 
+// The pill tabs' stock trigger shadow is the pre-hydration active-tab fallback
+// (shown before reka mounts its indicator), emitted through the library's
+// `ssr()` helper with this exact modifier chain. A bare `before:shadow-none`
+// won't tailwind-merge against it — the override must carry the same chain.
+const TABS_SSR_SHADOW_NONE = 'in-[[data-slot=list]:not(:has([data-slot=indicator]))]:data-[state=active]:before:shadow-none'
+
 const SHADOW_FRAGMENTS: Record<ShadowStyle, Fragments> = {
   none: {},
   // Strip the stock shadows the library ships on overlay surfaces — the
@@ -236,7 +242,10 @@ const SHADOW_FRAGMENTS: Record<ShadowStyle, Fragments> = {
     toast: { slots: { root: 'shadow-none' } },
     drawer: { slots: { content: 'shadow-none' } },
     modal: { compoundVariants: [{ fullscreen: false, class: { content: 'shadow-none' } }] },
-    slideover: { slots: { content: 'sm:shadow-none' } }
+    slideover: { slots: { content: 'sm:shadow-none' } },
+    // The pill tabs ship a stock shadow-xs on the indicator and trigger
+    // pseudo — strip both so None reads flat like every other surface.
+    tabs: { compoundVariants: [{ variant: 'pill', class: { list: 'shadow-none', indicator: 'shadow-none', trigger: TABS_SSR_SHADOW_NONE } }] }
   },
   soft: {
     // shadow-(color:--ui-shadow-final-soft) recolors the preset shadows through the
@@ -272,7 +281,11 @@ const SHADOW_FRAGMENTS: Record<ShadowStyle, Fragments> = {
     // classes would lose the tailwind-merge, so this must be a compound.
     modal: { compoundVariants: [{ fullscreen: false, class: { content: SOFT_LG } }] },
     // slideover is edge-to-edge on mobile; only its sm+ panel casts a shadow.
-    slideover: { slots: { content: 'sm:shadow-lg shadow-(color:--ui-shadow-final-soft)' } }
+    slideover: { slots: { content: 'sm:shadow-lg shadow-(color:--ui-shadow-final-soft)' } },
+    // The whole pill bar is the raised surface — the list casts the shadow
+    // like a control; the indicator/trigger stock shadows drop so it doesn't
+    // double up inside.
+    tabs: { compoundVariants: [{ variant: 'pill', class: { list: 'shadow-sm shadow-(color:--ui-shadow-final-soft)', indicator: 'shadow-none', trigger: TABS_SSR_SHADOW_NONE } }] }
   },
   hard: {
     button: {
@@ -304,7 +317,10 @@ const SHADOW_FRAGMENTS: Record<ShadowStyle, Fragments> = {
     toast: { slots: { root: HARD_LG } },
     drawer: { slots: { content: HARD_LG } },
     modal: { compoundVariants: [{ fullscreen: false, class: { content: HARD_LG } }] },
-    slideover: { slots: { content: 'sm:shadow-(--ui-shadow-hard-lg)' } }
+    slideover: { slots: { content: 'sm:shadow-(--ui-shadow-hard-lg)' } },
+    // The whole pill bar takes the hard drop like a control; the
+    // indicator/trigger stock shadows drop so only the bar casts.
+    tabs: { compoundVariants: [{ variant: 'pill', class: { list: HARD_BASE, indicator: 'shadow-none', trigger: TABS_SSR_SHADOW_NONE } }] }
   }
 }
 

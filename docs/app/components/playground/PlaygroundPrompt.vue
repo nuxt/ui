@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import type { DropdownMenuItem } from '@nuxt/ui'
 
+const appConfig = useAppConfig()
+const extra = useStudioExtraIcons()
+
 const toast = useToast()
 
 const input = ref('')
@@ -10,13 +13,13 @@ const webSearch = ref(true)
 
 const items = computed<DropdownMenuItem[][]>(() => [
   [
-    { label: 'Add files or photos', icon: 'i-lucide-paperclip', kbds: ['meta', 'U'] },
+    { label: 'Add files or photos', icon: extra.paperclip, kbds: ['meta', 'U'] },
     {
       label: 'Add to project',
-      icon: 'i-lucide-folder',
+      icon: appConfig.ui.icons.folder,
       children: [
-        { label: 'New project', icon: 'i-lucide-plus' },
-        { label: 'Nuxt UI', icon: 'i-lucide-folder' }
+        { label: 'New project', icon: appConfig.ui.icons.plus },
+        { label: 'Nuxt UI', icon: appConfig.ui.icons.folder }
       ]
     }
   ],
@@ -25,9 +28,9 @@ const items = computed<DropdownMenuItem[][]>(() => [
       label: 'Skills',
       icon: 'i-lucide-shapes',
       children: [
-        { label: 'Canvas design', icon: 'i-lucide-palette' },
+        { label: 'Canvas design', icon: extra.palette },
         { label: 'Slides', icon: 'i-lucide-presentation' },
-        { label: 'PDF', icon: 'i-lucide-file-text' }
+        { label: 'PDF', icon: appConfig.ui.icons.file }
       ]
     },
     {
@@ -35,8 +38,8 @@ const items = computed<DropdownMenuItem[][]>(() => [
       icon: 'i-lucide-blocks',
       children: [
         [
-          { label: 'Add connector', icon: 'i-lucide-plus' },
-          { label: 'Manage connectors', icon: 'i-lucide-briefcase' }
+          { label: 'Add connector', icon: appConfig.ui.icons.plus },
+          { label: 'Manage connectors', icon: extra.briefcase }
         ],
         [
           {
@@ -61,7 +64,7 @@ const items = computed<DropdownMenuItem[][]>(() => [
           }
         ],
         [
-          { label: 'Tool access', icon: 'i-lucide-search' }
+          { label: 'Tool access', icon: appConfig.ui.icons.search }
         ]
       ]
     },
@@ -72,7 +75,7 @@ const items = computed<DropdownMenuItem[][]>(() => [
     { label: 'Research', icon: 'i-lucide-activity' },
     {
       label: 'Web search',
-      icon: 'i-lucide-globe',
+      icon: extra.globe,
       type: 'checkbox',
       checked: webSearch.value,
       onUpdateChecked(checked: boolean) {
@@ -106,7 +109,7 @@ function onSubmit() {
         <div class="flex items-center gap-1">
           <UDropdownMenu :items="items" :content="{ align: 'start', side: 'top' }" :ui="{ content: 'w-60' }">
             <UButton
-              icon="i-lucide-plus"
+              :icon="appConfig.ui.icons.plus"
               color="neutral"
               variant="ghost"
               size="sm"
@@ -119,14 +122,14 @@ function onSubmit() {
             </template>
           </UDropdownMenu>
 
-          <UButton color="neutral" variant="ghost" size="sm" trailing-icon="i-lucide-chevron-down">
+          <UButton color="neutral" variant="ghost" size="sm" :trailing-icon="appConfig.ui.icons.chevronDown">
             Opus 4.8 <span class="text-dimmed">High</span>
           </UButton>
         </div>
 
         <div class="flex items-center gap-1">
           <UButton
-            icon="i-lucide-mic"
+            :icon="extra.mic"
             color="neutral"
             variant="ghost"
             size="sm"
@@ -142,7 +145,7 @@ function onSubmit() {
             aria-label="Voice mode"
           />
           <UButton
-            icon="i-lucide-arrow-up"
+            :icon="appConfig.ui.icons.arrowUp"
             color="primary"
             size="sm"
             square

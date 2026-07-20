@@ -66,6 +66,44 @@ export function useThemeStudio() {
     }
   }
 
+  // Self-heal custom palettes. A custom ramp lives in three stores that
+  // restore independently on reload: the editor curves (paletteParams), the
+  // derived ramp (custom-colors) and the alias mapping. The derived stores
+  // ride useState, which hydrates from an empty SSR payload — so a lost
+  // restore race can leave the preview on a stale/absent ramp while the
+  // editor still shows the curves (and their modifiers). The curves are the
+  // source of truth: re-derive each persisted palette once on load, after the
+  // plugin restore, so the preview is rebuilt from them and always matches
+  // the editor. Re-deriving is idempotent, so healing a correct load is a
+  // harmless no-op write — cheaper than trusting a possibly-stale render.
+  const palettesHealed = useState('nuxt-ui-palettes-healed', () => false)
+  if (import.meta.client && !palettesHealed.value) {
+    palettesHealed.value = true
+    onNuxtReady(() => {
+      for (const [alias, reactiveEntry] of Object.entries(paletteParams.value)) {
+        if (!reactiveEntry || !('lightness' in reactiveEntry)) continue
+        // Deep-unwrap the reactive useState proxy to a plain object — the curve
+        // params flow into applyPaletteEffects, which structuredClones them,
+        // and a reactive proxy can't be cloned. Curves are pure numbers, so a
+        // JSON round-trip is a lossless plain copy.
+        const entry = JSON.parse(JSON.stringify(reactiveEntry)) as StoredPaletteParams
+        // The modifier lens bakes into the ramp here exactly as it did at edit
+        // time, so restoring the curves restores the modifiers' effect too.
+        const ramp = generatePalette(applyPaletteEffects(
+          { lightness: entry.lightness, chroma: entry.chroma, hue: entry.hue },
+          entry.effects,
+          entry.amount
+        ))
+        const name = customPaletteName(alias)
+        theme.applyThemeSettings({
+          customColors: { [name]: ramp },
+          [alias]: name,
+          ...(alias === 'neutral' ? { cssVariables: unownedNeutralRemaps() } : {})
+        }, { track: false })
+      }
+    })
+  }
+
   // Shared across composable instances so the analytics throttle holds no
   // matter which component fires the event.
   const trackedAt = useState<number | undefined>('nuxt-ui-style-tracked-at', () => undefined)

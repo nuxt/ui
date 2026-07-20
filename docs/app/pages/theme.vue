@@ -1,6 +1,12 @@
 <script setup lang="ts">
 const { track } = useAnalytics()
-const { currentDoc, resetTheme } = useTheme()
+const { currentDoc, resetTheme, icon: iconSet } = useTheme()
+
+// The studio toolbar skins to the applied pack: undo/redo/reset/export/
+// fullscreen come from the pack's studio glyphs, while import and the group
+// picker's chevron reuse the standard `upload`/`chevronDown` semantic keys
+// (read off appConfig.ui.icons, already the active pack's resolved map).
+const studioIcons = useStudioIcons()
 
 // View and fullscreen are app-level state: the site header hosts the view
 // switcher while on /theme and hides itself in fullscreen.
@@ -181,7 +187,11 @@ const shareMode = ref<'import' | 'export'>('export')
              paint containment on the views' own scrollers — Chromium won't
              clip nested composited layers (sticky headers, filtered glows)
              by an ancestor's overflow alone. -->
-        <div class="flex-1 min-h-0 overflow-hidden [&>*]:[contain:paint]">
+        <!-- Keyed on the icon pack: the demo views resolve icons into plain
+             data arrays at setup, so they can't react to a live pack swap in
+             place — remounting on the (infrequent) swap re-resolves them,
+             which is far cheaper than making every demo's data computed. -->
+        <div :key="iconSet" class="flex-1 min-h-0 overflow-hidden [&>*]:[contain:paint]">
           <Playground v-if="view === 'grid'" />
           <ThemeStudioViewDashboard v-else-if="view === 'dashboard'" />
           <ThemeStudioViewChat v-else-if="view === 'chat'" />
@@ -226,7 +236,7 @@ const shareMode = ref<'import' | 'export'>('export')
                   :label="settingGroup.label"
                   color="neutral"
                   variant="subtle"
-                  trailing-icon="i-lucide-chevron-down"
+                  :trailing-icon="appConfig.ui.icons.chevronDown"
                 />
               </UChip>
 
@@ -269,7 +279,7 @@ const shareMode = ref<'import' | 'export'>('export')
             <UFieldGroup class="shrink-0">
               <UTooltip text="Undo" :kbds="['meta', 'Z']">
                 <UButton
-                  icon="i-lucide-undo-2"
+                  :icon="studioIcons.undo"
                   color="neutral"
                   variant="subtle"
                   :disabled="!past.length"
@@ -280,7 +290,7 @@ const shareMode = ref<'import' | 'export'>('export')
 
               <UTooltip text="Redo" :kbds="['meta', 'shift', 'Z']">
                 <UButton
-                  icon="i-lucide-redo-2"
+                  :icon="studioIcons.redo"
                   color="neutral"
                   variant="subtle"
                   :disabled="!future.length"
@@ -292,7 +302,7 @@ const shareMode = ref<'import' | 'export'>('export')
 
             <UTooltip :text="resetLabel">
               <UButton
-                icon="i-lucide-rotate-ccw"
+                :icon="studioIcons.reset"
                 color="neutral"
                 variant="subtle"
                 :disabled="!canReset"
@@ -305,7 +315,7 @@ const shareMode = ref<'import' | 'export'>('export')
               <UFieldGroup>
                 <UTooltip text="Import theme">
                   <UButton
-                    icon="i-lucide-upload"
+                    :icon="appConfig.ui.icons.upload"
                     color="neutral"
                     variant="subtle"
                     aria-label="Import theme"
@@ -315,7 +325,7 @@ const shareMode = ref<'import' | 'export'>('export')
 
                 <UButton
                   label="Export"
-                  icon="i-lucide-download"
+                  :icon="studioIcons.export"
                   color="neutral"
                   variant="subtle"
                   @click="shareMode = 'export'; shareOpen = true"
@@ -325,7 +335,7 @@ const shareMode = ref<'import' | 'export'>('export')
 
             <UTooltip :text="fullscreen ? 'Exit fullscreen' : 'Fullscreen preview'" :kbds="fullscreen ? ['Esc'] : ['F']">
               <UButton
-                :icon="fullscreen ? 'i-lucide-minimize' : 'i-lucide-maximize'"
+                :icon="fullscreen ? studioIcons.exitFullscreen : studioIcons.fullscreen"
                 color="neutral"
                 variant="subtle"
                 :aria-label="fullscreen ? 'Exit fullscreen preview' : 'Fullscreen preview'"

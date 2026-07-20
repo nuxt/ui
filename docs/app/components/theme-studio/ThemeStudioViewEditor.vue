@@ -4,6 +4,9 @@ import type { Editor, JSONContent } from '@tiptap/vue-3'
 import { upperFirst } from 'scule'
 import { mapEditorItems } from '@nuxt/ui/utils/editor'
 
+const appConfig = useAppConfig()
+const extra = useStudioExtraIcons()
+
 /**
  * Self-contained replica of the official Nuxt UI Editor template
  * (github.com/nuxt-ui-templates/editor): header chrome with a fixed
@@ -73,7 +76,7 @@ const headingItems = [1, 2, 3, 4].map(level => ({
 const blockItems = [{
   kind: 'bulletList' as const,
   label: 'Bullet List',
-  icon: 'i-lucide-list'
+  icon: extra.list
 }, {
   kind: 'orderedList' as const,
   label: 'Ordered List',
@@ -117,14 +120,14 @@ const markItems = [{
 
 const toolbarItems: EditorToolbarItem[][] = [[{
   kind: 'undo',
-  icon: 'i-lucide-undo',
+  icon: extra.undo,
   tooltip: { text: 'Undo' }
 }, {
   kind: 'redo',
-  icon: 'i-lucide-redo',
+  icon: extra.redo,
   tooltip: { text: 'Redo' }
 }], [{
-  icon: 'i-lucide-heading',
+  icon: extra.heading,
   tooltip: { text: 'Headings' },
   content: { align: 'start' },
   items: headingItems
@@ -132,7 +135,7 @@ const toolbarItems: EditorToolbarItem[][] = [[{
 
 const bubbleToolbarItems: EditorToolbarItem[][] = [[{
   label: 'Turn into',
-  trailingIcon: 'i-lucide-chevron-down',
+  trailingIcon: appConfig.ui.icons.chevronDown,
   activeColor: 'neutral',
   activeVariant: 'ghost',
   tooltip: { text: 'Turn into' },
@@ -184,22 +187,22 @@ function dragHandleItems(editor: Editor): DropdownMenuItem[][] {
     kind: 'duplicate',
     pos,
     label: 'Duplicate',
-    icon: 'i-lucide-copy'
+    icon: appConfig.ui.icons.copy
   }, {
     kind: 'moveUp',
     pos,
     label: 'Move up',
-    icon: 'i-lucide-arrow-up'
+    icon: appConfig.ui.icons.arrowUp
   }, {
     kind: 'moveDown',
     pos,
     label: 'Move down',
-    icon: 'i-lucide-arrow-down'
+    icon: appConfig.ui.icons.arrowDown
   }], [{
     kind: 'delete',
     pos,
     label: 'Delete',
-    icon: 'i-lucide-trash'
+    icon: extra.trash
   }]]) as DropdownMenuItem[][]
 }
 </script>
@@ -235,7 +238,7 @@ function dragHandleItems(editor: Editor): DropdownMenuItem[][] {
 
             <UButton
               label="Share"
-              icon="i-lucide-users"
+              :icon="extra.users"
               color="neutral"
               variant="outline"
               size="sm"
@@ -255,7 +258,7 @@ function dragHandleItems(editor: Editor): DropdownMenuItem[][] {
 
         <UEditorDragHandle v-slot="{ ui, onClick }" :editor="editor" @node-change="selectedNode = $event">
           <UButton
-            icon="i-lucide-plus"
+            :icon="appConfig.ui.icons.plus"
             color="neutral"
             variant="ghost"
             size="sm"
@@ -280,7 +283,7 @@ function dragHandleItems(editor: Editor): DropdownMenuItem[][] {
               variant="ghost"
               active-variant="soft"
               size="sm"
-              icon="i-lucide-grip-vertical"
+              :icon="appConfig.ui.icons.drag"
               :active="open"
               :class="ui.handle()"
             />

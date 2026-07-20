@@ -1,33 +1,36 @@
 <script setup lang="ts">
 import type { NavigationMenuItem } from '@nuxt/ui'
 
+const appConfig = useAppConfig()
+const extra = useStudioExtraIcons()
+
 // Replicates the Nuxt UI Portfolio template home page: floating pill nav,
 // avatar hero with polaroid marquee, about + work experience columns,
 // blog list, testimonial carousel, FAQ tabs and footer.
 const navItems: NavigationMenuItem[] = [
-  { label: 'Home', icon: 'i-lucide-home', active: true },
-  { label: 'Projects', icon: 'i-lucide-folder' },
-  { label: 'Blog', icon: 'i-lucide-file-text' },
-  { label: 'Speaking', icon: 'i-lucide-mic' },
-  { label: 'About', icon: 'i-lucide-user' }
+  { label: 'Home', icon: extra.home, active: true },
+  { label: 'Projects', icon: appConfig.ui.icons.folder },
+  { label: 'Blog', icon: appConfig.ui.icons.file },
+  { label: 'Speaking', icon: extra.mic },
+  { label: 'About', icon: extra.user }
 ]
 
 const socialLinks = [
   { 'icon': 'i-simple-icons-discord', 'aria-label': 'Discord' },
   { 'icon': 'i-simple-icons-x', 'aria-label': 'X' },
-  { 'icon': 'i-simple-icons-github', 'aria-label': 'GitHub' }
+  { 'icon': extra.github, 'aria-label': 'GitHub' }
 ]
 
 // The template scrolls travel photos in a marquee; we stand in gradient
 // polaroids since the studio previews stay image-free.
 const heroImages = [
   { icon: 'i-lucide-mountain', label: 'Alps, 2024' },
-  { icon: 'i-lucide-coffee', label: 'Café sketching' },
+  { icon: extra.coffee, label: 'Café sketching' },
   { icon: 'i-lucide-bike', label: 'Canal ride' },
-  { icon: 'i-lucide-camera', label: 'Street photos' },
+  { icon: extra.camera, label: 'Street photos' },
   { icon: 'i-lucide-laptop', label: 'Studio desk' },
   { icon: 'i-lucide-trees', label: 'Veluwe hike' },
-  { icon: 'i-lucide-palette', label: 'Color studies' },
+  { icon: extra.palette, label: 'Color studies' },
   { icon: 'i-lucide-ferris-wheel', label: 'Rotterdam fair' },
   { icon: 'i-lucide-waves', label: 'North Sea' }
 ]
@@ -53,7 +56,7 @@ const experience = [{
 }, {
   date: '1995 - Present',
   position: 'Human person on',
-  company: { name: 'Earth', logo: 'i-lucide-globe' }
+  company: { name: 'Earth', logo: extra.globe }
 }]
 
 const posts = [{
@@ -180,7 +183,7 @@ onUnmounted(() => clearTimeout(appearTimeout))
 
         <template #links>
           <div class="flex items-center gap-2">
-            <UButton icon="i-lucide-github" label="View Github" color="neutral" to="https://github.com/mikenewbon/" target="_blank" />
+            <UButton :icon="extra.github" label="View Github" color="neutral" to="https://github.com/mikenewbon/" target="_blank" />
             <UButton color="success" variant="ghost" class="gap-2" label="Always online">
               <template #leading>
                 <span class="relative flex size-2">
@@ -288,7 +291,7 @@ onUnmounted(() => clearTimeout(appearTimeout))
               <UButton size="xs" variant="link" class="px-0 gap-0" label="Read Article">
                 <template #trailing>
                   <UIcon
-                    name="i-lucide-arrow-right"
+                    :name="appConfig.ui.icons.arrowRight"
                     class="size-4 text-primary transition-all opacity-0 group-hover:translate-x-1 group-hover:opacity-100"
                   />
                 </template>
@@ -348,7 +351,7 @@ onUnmounted(() => clearTimeout(appearTimeout))
         >
           <template #content="{ item }">
             <UAccordion
-              trailing-icon="i-lucide-plus"
+              :trailing-icon="appConfig.ui.icons.plus"
               :items="item.questions"
               :unmount-on-hide="false"
               :ui="{

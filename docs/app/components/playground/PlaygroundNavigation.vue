@@ -1,16 +1,19 @@
 <script setup lang="ts">
 import type { NavigationMenuItem } from '@nuxt/ui'
 
+const appConfig = useAppConfig()
+const extra = useStudioExtraIcons()
+
 const items: NavigationMenuItem[][] = [
   [
     { label: 'Dashboard', icon: 'i-lucide-layout-dashboard', active: true },
-    { label: 'Inbox', icon: 'i-lucide-inbox', badge: '4' },
-    { label: 'Projects', icon: 'i-lucide-folder' },
-    { label: 'Calendar', icon: 'i-lucide-calendar' }
+    { label: 'Inbox', icon: extra.inbox, badge: '4' },
+    { label: 'Projects', icon: appConfig.ui.icons.folder },
+    { label: 'Calendar', icon: extra.calendar }
   ],
   [
-    { label: 'Settings', icon: 'i-lucide-settings' },
-    { label: 'Help', icon: 'i-lucide-circle-help' }
+    { label: 'Settings', icon: extra.settings },
+    { label: 'Help', icon: appConfig.ui.icons.info }
   ]
 ]
 </script>

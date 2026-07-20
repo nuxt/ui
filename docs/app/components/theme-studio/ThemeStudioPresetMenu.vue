@@ -16,6 +16,9 @@ const props = defineProps<{
 }>()
 
 const { presets, activePreset, applyPreset, shuffle } = useThemeStudio()
+const { icon: iconSet } = useTheme()
+const appConfig = useAppConfig()
+const studioIcons = useStudioIcons()
 
 /** Exposed so hosts (the fullscreen toolbar) can pin themselves while open. */
 const open = defineModel<boolean>('open', { default: false })
@@ -82,8 +85,14 @@ const onKeepPanels = keepPanels
  * Reduced-motion users get the plain shuffle.
  */
 const DICE_FACES = ['i-lucide-dice-1', 'i-lucide-dice-2', 'i-lucide-dice-3', 'i-lucide-dice-4', 'i-lucide-dice-5', 'i-lucide-dice-6']
-const diceFace = ref('i-lucide-dices')
+const diceFace = ref(studioIcons.dice)
 const rolling = ref(false)
+
+// Rest on the active pack's die; only Lucide ships the numbered faces the
+// roll cycles through, so other packs just spin their single die/shuffle.
+watch(() => studioIcons.dice, (die) => {
+  if (!rolling.value) diceFace.value = die
+})
 
 // keep in sync with the dice-roll keyframes: total duration and the
 // percentage stops where the die hits an edge — each impact flips the face.
@@ -94,6 +103,7 @@ const HIT_FRACTIONS = [0.064, 0.147, 0.255, 0.395, 0.578, 0.815]
 let rollTimers: Array<ReturnType<typeof setTimeout>> = []
 
 function randomFace() {
+  if (iconSet.value !== 'lucide') return studioIcons.dice
   return DICE_FACES[Math.floor(Math.random() * DICE_FACES.length)]!
 }
 
@@ -155,8 +165,8 @@ const presetLabel = computed(() => {
     >
       <UButton
         :label="presetLabel"
-        icon="i-lucide-swatch-book"
-        trailing-icon="i-lucide-chevron-down"
+        :icon="studioIcons.themes"
+        :trailing-icon="appConfig.ui.icons.chevronDown"
         color="neutral"
         variant="subtle"
         :size="size"

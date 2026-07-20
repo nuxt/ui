@@ -8,6 +8,7 @@ defineProps<{
 const emit = defineEmits<{ select: [] }>()
 
 const { view } = useThemeStudioView()
+const viewIcons = useStudioViewIcons()
 </script>
 
 <template>
@@ -42,7 +43,7 @@ const { view } = useThemeStudioView()
         class="w-full aspect-video rounded-sm ring ring-default"
       />
       <span v-else class="w-full aspect-video rounded-sm ring ring-default bg-elevated/50 flex items-center justify-center">
-        <UIcon :name="item.icon" class="size-6 text-muted" />
+        <UIcon :name="viewIcons[item.value]" class="size-6 text-muted" />
       </span>
     </template>
   </UListbox>

@@ -8,6 +8,9 @@ const UButton = resolveComponent('UButton')
 const UCheckbox = resolveComponent('UCheckbox')
 const UDropdownMenu = resolveComponent('UDropdownMenu')
 
+const appConfig = useAppConfig()
+const extra = useStudioExtraIcons()
+
 type Page = 'home' | 'inbox' | 'customers' | 'settings'
 const page = ref<Page>('home')
 const settingsSection = ref<'general' | 'notifications'>('general')
@@ -22,30 +25,30 @@ const selectedTeam = ref(teams[0]!)
 const teamItems = computed<DropdownMenuItem[][]>(() => [
   teams.map(team => ({ ...team, onSelect: () => { selectedTeam.value = team } })),
   [
-    { label: 'Create team', icon: 'i-lucide-circle-plus' },
-    { label: 'Manage teams', icon: 'i-lucide-cog' }
+    { label: 'Create team', icon: appConfig.ui.icons.plus },
+    { label: 'Manage teams', icon: extra.settings }
   ]
 ])
 
 const links = computed<NavigationMenuItem[][]>(() => [[{
   label: 'Home',
-  icon: 'i-lucide-house',
+  icon: extra.home,
   active: page.value === 'home',
   onSelect: () => { page.value = 'home' }
 }, {
   label: 'Inbox',
-  icon: 'i-lucide-inbox',
+  icon: extra.inbox,
   badge: String(unreadCount),
   active: page.value === 'inbox',
   onSelect: () => { page.value = 'inbox' }
 }, {
   label: 'Customers',
-  icon: 'i-lucide-users',
+  icon: extra.users,
   active: page.value === 'customers',
   onSelect: () => { page.value = 'customers' }
 }, {
   label: 'Settings',
-  icon: 'i-lucide-settings',
+  icon: extra.settings,
   defaultOpen: true,
   type: 'trigger',
   active: page.value === 'settings',
@@ -66,10 +69,10 @@ const links = computed<NavigationMenuItem[][]>(() => [[{
   }]
 }], [{
   label: 'Feedback',
-  icon: 'i-lucide-message-circle'
+  icon: extra.messageCircle
 }, {
   label: 'Help & Support',
-  icon: 'i-lucide-info'
+  icon: appConfig.ui.icons.info
 }]])
 
 const user = {
@@ -82,26 +85,26 @@ const userItems: DropdownMenuItem[][] = [[{
   label: user.name,
   avatar: user.avatar
 }], [
-  { label: 'Profile', icon: 'i-lucide-user' },
-  { label: 'Billing', icon: 'i-lucide-credit-card' },
-  { label: 'Settings', icon: 'i-lucide-settings' }
+  { label: 'Profile', icon: extra.user },
+  { label: 'Billing', icon: extra.creditCard },
+  { label: 'Settings', icon: extra.settings }
 ], [
-  { label: 'Log out', icon: 'i-lucide-log-out' }
+  { label: 'Log out', icon: extra.logout }
 ]]
 
 const newItems: DropdownMenuItem[][] = [[
-  { label: 'New mail', icon: 'i-lucide-send' },
-  { label: 'New customer', icon: 'i-lucide-user-plus' }
+  { label: 'New mail', icon: extra.send },
+  { label: 'New customer', icon: extra.userPlus }
 ]]
 
 const periodItems = ['Daily', 'Weekly', 'Monthly']
 const period = ref('Daily')
 
 const stats = [
-  { title: 'Customers', icon: 'i-lucide-users', value: '892', variation: 14 },
-  { title: 'Conversions', icon: 'i-lucide-chart-pie', value: '1,436', variation: 8 },
-  { title: 'Revenue', icon: 'i-lucide-circle-dollar-sign', value: '$312,540', variation: 23 },
-  { title: 'Orders', icon: 'i-lucide-shopping-cart', value: '254', variation: -5 }
+  { title: 'Customers', icon: extra.users, value: '892', variation: 14 },
+  { title: 'Conversions', icon: extra.chart, value: '1,436', variation: 8 },
+  { title: 'Revenue', icon: extra.dollar, value: '$312,540', variation: 23 },
+  { title: 'Orders', icon: extra.cart, value: '254', variation: -5 }
 ]
 
 const revenue = [6200, 7400, 6800, 9100, 8600, 10400, 9800, 11900, 11200, 13000, 12400, 14100, 13600, 15200]
@@ -244,10 +247,10 @@ watch(filteredMails, () => {
 })
 
 const mailDropdownItems: DropdownMenuItem[][] = [[
-  { label: 'Mark as unread', icon: 'i-lucide-check-circle' },
-  { label: 'Mark as important', icon: 'i-lucide-triangle-alert' }
+  { label: 'Mark as unread', icon: appConfig.ui.icons.success },
+  { label: 'Mark as important', icon: appConfig.ui.icons.warning }
 ], [
-  { label: 'Star thread', icon: 'i-lucide-star' }
+  { label: 'Star thread', icon: appConfig.ui.icons.star }
 ]]
 
 const reply = ref('')
@@ -296,11 +299,11 @@ const customerStatusItems = [
 
 const customerRowItems: DropdownMenuItem[] = [
   { type: 'label', label: 'Actions' },
-  { label: 'Copy customer ID', icon: 'i-lucide-copy' },
+  { label: 'Copy customer ID', icon: appConfig.ui.icons.copy },
   { type: 'separator' },
-  { label: 'View customer details', icon: 'i-lucide-list' },
+  { label: 'View customer details', icon: extra.list },
   { type: 'separator' },
-  { label: 'Delete customer', icon: 'i-lucide-trash', color: 'error' }
+  { label: 'Delete customer', icon: extra.trash, color: 'error' }
 ]
 
 const customerColumns: TableColumn<Customer>[] = [{
@@ -354,7 +357,7 @@ const customerColumns: TableColumn<Customer>[] = [{
     return h('div', { class: 'text-right' }, h(
       UDropdownMenu,
       { content: { align: 'end' }, items: customerRowItems },
-      () => h(UButton, { icon: 'i-lucide-ellipsis-vertical', color: 'neutral', variant: 'ghost', class: 'ml-auto' })
+      () => h(UButton, { icon: appConfig.ui.icons.ellipsis, color: 'neutral', variant: 'ghost', class: 'ml-auto' })
     ))
   }
 }]
@@ -363,12 +366,12 @@ const customerColumns: TableColumn<Customer>[] = [{
 // trimmed to two sections without zod/UForm validation.
 const settingsLinks = computed<NavigationMenuItem[][]>(() => [[{
   label: 'General',
-  icon: 'i-lucide-user',
+  icon: extra.user,
   active: settingsSection.value === 'general',
   onSelect: () => { settingsSection.value = 'general' }
 }, {
   label: 'Notifications',
-  icon: 'i-lucide-bell',
+  icon: extra.bell,
   active: settingsSection.value === 'notifications',
   onSelect: () => { settingsSection.value = 'notifications' }
 }]])
@@ -454,7 +457,7 @@ const pageTitles: Record<Page, string> = {
             v-bind="{
               ...selectedTeam,
               label: collapsed ? undefined : selectedTeam.label,
-              trailingIcon: collapsed ? undefined : 'i-lucide-chevrons-up-down'
+              trailingIcon: collapsed ? undefined : extra.sort
             }"
             color="neutral"
             variant="ghost"
@@ -497,7 +500,7 @@ const pageTitles: Record<Page, string> = {
             v-bind="{
               ...user,
               label: collapsed ? undefined : user.name,
-              trailingIcon: collapsed ? undefined : 'i-lucide-chevrons-up-down'
+              trailingIcon: collapsed ? undefined : extra.sort
             }"
             color="neutral"
             variant="ghost"
@@ -574,7 +577,7 @@ const pageTitles: Record<Page, string> = {
         <UDashboardNavbar :title="selectedMail.subject" :toggle="false">
           <template #leading>
             <UButton
-              icon="i-lucide-x"
+              :icon="appConfig.ui.icons.close"
               color="neutral"
               variant="ghost"
               class="-ms-1.5"
@@ -584,15 +587,15 @@ const pageTitles: Record<Page, string> = {
 
           <template #right>
             <UTooltip text="Archive">
-              <UButton icon="i-lucide-inbox" color="neutral" variant="ghost" />
+              <UButton :icon="extra.inbox" color="neutral" variant="ghost" />
             </UTooltip>
 
             <UTooltip text="Reply">
-              <UButton icon="i-lucide-reply" color="neutral" variant="ghost" />
+              <UButton :icon="extra.reply" color="neutral" variant="ghost" />
             </UTooltip>
 
             <UDropdownMenu :items="mailDropdownItems">
-              <UButton icon="i-lucide-ellipsis-vertical" color="neutral" variant="ghost" />
+              <UButton :icon="appConfig.ui.icons.ellipsis" color="neutral" variant="ghost" />
             </UDropdownMenu>
           </template>
         </UDashboardNavbar>
@@ -625,7 +628,7 @@ const pageTitles: Record<Page, string> = {
         <div class="pb-4 px-4 sm:px-6 shrink-0">
           <UCard variant="subtle" class="mt-auto" :ui="{ header: 'flex items-center gap-1.5 text-dimmed' }">
             <template #header>
-              <UIcon name="i-lucide-reply" class="size-5" />
+              <UIcon :name="extra.reply" class="size-5" />
 
               <span class="text-sm truncate">
                 Reply to {{ selectedMail.from.name }} ({{ selectedMail.from.email }})
@@ -645,16 +648,16 @@ const pageTitles: Record<Page, string> = {
               />
 
               <div class="flex items-center justify-between">
-                <UButton color="neutral" variant="ghost" icon="i-lucide-paperclip" aria-label="Attach file" />
+                <UButton color="neutral" variant="ghost" :icon="extra.paperclip" aria-label="Attach file" />
 
-                <UButton type="submit" color="neutral" label="Send" icon="i-lucide-send" />
+                <UButton type="submit" color="neutral" label="Send" :icon="extra.send" />
               </div>
             </form>
           </UCard>
         </div>
       </UDashboardPanel>
       <div v-else class="flex-1 hidden lg:flex items-center justify-center">
-        <UIcon name="i-lucide-inbox" class="size-32 text-dimmed" />
+        <UIcon :name="extra.inbox" class="size-32 text-dimmed" />
       </div>
     </template>
 
@@ -669,7 +672,7 @@ const pageTitles: Record<Page, string> = {
             <UTooltip text="Notifications" :shortcuts="['N']">
               <UButton color="neutral" variant="ghost" square aria-label="Notifications">
                 <UChip color="error" inset>
-                  <UIcon name="i-lucide-bell" class="size-5 shrink-0" />
+                  <UIcon :name="extra.bell" class="size-5 shrink-0" />
                 </UChip>
               </UButton>
             </UTooltip>
@@ -677,10 +680,10 @@ const pageTitles: Record<Page, string> = {
             <UButton
               v-if="page === 'customers'"
               label="New customer"
-              icon="i-lucide-plus"
+              :icon="appConfig.ui.icons.plus"
             />
             <UDropdownMenu v-else :items="newItems">
-              <UButton icon="i-lucide-plus" class="rounded-full" aria-label="New" />
+              <UButton :icon="appConfig.ui.icons.plus" class="rounded-full" aria-label="New" />
             </UDropdownMenu>
           </template>
         </UDashboardNavbar>
@@ -690,7 +693,7 @@ const pageTitles: Record<Page, string> = {
             <UButton
               color="neutral"
               variant="ghost"
-              icon="i-lucide-calendar"
+              :icon="extra.calendar"
               label="Jun 22 - Jul 6, 2026"
               class="-ms-1"
             />
@@ -788,7 +791,7 @@ const pageTitles: Record<Page, string> = {
             <UInput
               v-model="customerEmailFilter"
               class="max-w-sm"
-              icon="i-lucide-search"
+              :icon="appConfig.ui.icons.search"
               placeholder="Filter emails..."
             />
 
@@ -798,7 +801,7 @@ const pageTitles: Record<Page, string> = {
                 label="Delete"
                 color="error"
                 variant="subtle"
-                icon="i-lucide-trash"
+                :icon="extra.trash"
               >
                 <template #trailing>
                   <UKbd>{{ selectedCustomersCount }}</UKbd>

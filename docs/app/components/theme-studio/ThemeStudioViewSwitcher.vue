@@ -12,6 +12,8 @@ const props = withDefaults(defineProps<{
 const open = defineModel<boolean>('open', { default: false })
 
 const { view, views } = useThemeStudioView()
+const viewIcons = useStudioViewIcons()
+const appConfig = useAppConfig()
 
 const activeView = computed(() => views.find(tab => tab.value === view.value))
 
@@ -24,9 +26,9 @@ const templateViews = views.filter(tab => tab.image)
 <template>
   <UPopover v-model:open="open" :content="props.content">
     <UButton
-      :icon="activeView?.icon"
+      :icon="viewIcons[view]"
       :label="activeView?.label"
-      trailing-icon="i-lucide-chevron-down"
+      :trailing-icon="appConfig.ui.icons.chevronDown"
       color="neutral"
       variant="subtle"
       aria-label="Preview page"

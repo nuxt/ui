@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import type { NavigationMenuItem } from '@nuxt/ui'
 
+const appConfig = useAppConfig()
+const extra = useStudioExtraIcons()
+
 /** Shared rhythm for the centered content sections. */
 const sectionUi = {
   root: 'py-24 sm:py-32',
@@ -52,14 +55,14 @@ const terminalLines: TerminalSegment[][] = [
 
 const logos = [
   'i-simple-icons-vercel',
-  'i-simple-icons-github',
+  extra.github,
   'i-simple-icons-linear',
   'i-simple-icons-supabase',
   'i-simple-icons-stripe'
 ]
 
 const features = [{
-  icon: 'i-lucide-zap',
+  icon: extra.zap,
   title: 'Predictive Alerts',
   description: 'ML models trained on your baselines detect anomalies 4 minutes before they hit your SLOs.'
 }, {
@@ -75,7 +78,7 @@ const features = [{
   title: 'Deploy Tracking',
   description: 'Every deploy is automatically correlated with performance changes. Know which commit caused the regression.'
 }, {
-  icon: 'i-lucide-filter',
+  icon: extra.filter,
   title: 'Smart Sampling',
   description: 'AI-driven sampling retains interesting traces and drops noise. Cut storage costs 10× without losing signal.'
 }, {
@@ -322,7 +325,7 @@ const vReveal = {
 
           <UButton
             label="npx telemetry init"
-            :trailing-icon="copied ? 'i-lucide-copy-check' : 'i-lucide-copy'"
+            :trailing-icon="copied ? appConfig.ui.icons.copyCheck : appConfig.ui.icons.copy"
             color="neutral"
             variant="subtle"
             size="xl"

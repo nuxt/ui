@@ -5,6 +5,7 @@
  */
 const route = useRoute()
 const { track } = useAnalytics()
+const studioIcons = useStudioIcons()
 
 const open = ref(false)
 
@@ -24,7 +25,7 @@ const aliases = [
   <UPopover v-model:open="open" :ui="{ content: 'w-64 p-3 flex flex-col gap-3' }">
     <UTooltip text="Theme">
       <UButton
-        icon="i-lucide-swatch-book"
+        :icon="studioIcons.themes"
         color="neutral"
         active-color="primary"
         :active="route.path === '/theme'"
@@ -56,7 +57,7 @@ const aliases = [
 
         <UButton
           label="Open Theme Studio"
-          icon="i-lucide-swatch-book"
+          :icon="studioIcons.themes"
           trailing-icon="i-lucide-arrow-right"
           color="neutral"
           variant="subtle"

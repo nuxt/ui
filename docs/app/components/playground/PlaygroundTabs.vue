@@ -1,13 +1,15 @@
 <script setup lang="ts">
+const extra = useStudioExtraIcons()
+
 const items = [
   {
     label: 'Account',
-    icon: 'i-lucide-user',
+    icon: extra.user,
     slot: 'account'
   },
   {
     label: 'Password',
-    icon: 'i-lucide-lock',
+    icon: extra.lock,
     slot: 'password'
   }
 ]

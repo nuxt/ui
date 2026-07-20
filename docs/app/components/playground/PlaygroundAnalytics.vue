@@ -1,4 +1,5 @@
 <script setup lang="ts">
+const extra = useStudioExtraIcons()
 const bars = [40, 65, 52, 80, 60, 95, 72]
 const days = ['M', 'T', 'W', 'T', 'F', 'S', 'S']
 </script>
@@ -14,7 +15,7 @@ const days = ['M', 'T', 'W', 'T', 'F', 'S', 'S']
           418.2K
         </p>
       </div>
-      <UBadge color="success" variant="subtle" size="sm" icon="i-lucide-trending-up">
+      <UBadge color="success" variant="subtle" size="sm" :icon="extra.trendingUp">
         +10%
       </UBadge>
     </div>

@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import type { DropdownMenuItem, NavigationMenuItem, PageLink } from '@nuxt/ui'
 
+const appConfig = useAppConfig()
+const extra = useStudioExtraIcons()
+
 // Left aside: the template renders UContentNavigation from @nuxt/content —
 // content-coupled, so the same tree is faked with a vertical UNavigationMenu.
 const navLinks: NavigationMenuItem[] = [{
@@ -8,19 +11,19 @@ const navLinks: NavigationMenuItem[] = [{
   type: 'trigger',
   defaultOpen: true,
   children: [
-    { label: 'Introduction', icon: 'i-lucide-house' },
+    { label: 'Introduction', icon: extra.home },
     { label: 'Installation', icon: 'i-lucide-download' },
-    { label: 'Usage', icon: 'i-lucide-sliders', active: true }
+    { label: 'Usage', icon: extra.settings, active: true }
   ]
 }, {
   label: 'Essentials',
   type: 'trigger',
   defaultOpen: true,
   children: [
-    { label: 'Markdown Syntax', icon: 'i-lucide-heading' },
+    { label: 'Markdown Syntax', icon: extra.heading },
     { label: 'Code Blocks', icon: 'i-lucide-code' },
     { label: 'Prose Components', icon: 'i-lucide-component' },
-    { label: 'Images & Embeds', icon: 'i-lucide-image' }
+    { label: 'Images & Embeds', icon: extra.image }
   ]
 }, {
   label: 'AI',
@@ -28,13 +31,13 @@ const navLinks: NavigationMenuItem[] = [{
   defaultOpen: true,
   children: [
     { label: 'MCP Server', icon: 'i-lucide-bot' },
-    { label: 'LLMs.txt', icon: 'i-lucide-file-text' }
+    { label: 'LLMs.txt', icon: appConfig.ui.icons.file }
   ]
 }]
 
 // PageHeaderLinks dropdown, minus the real clipboard / external navigations.
 const copyItems: DropdownMenuItem[] = [
-  { label: 'Copy Markdown link', icon: 'i-lucide-link' },
+  { label: 'Copy Markdown link', icon: extra.link },
   { label: 'View as Markdown', icon: 'i-simple-icons:markdown' },
   { label: 'Open in ChatGPT', icon: 'i-simple-icons:openai' },
   { label: 'Open in Claude', icon: 'i-simple-icons:anthropic' }
@@ -55,8 +58,8 @@ const tocLinks = [
 ]
 
 const communityLinks: PageLink[] = [
-  { label: 'Edit this page', icon: 'i-lucide-external-link' },
-  { label: 'Star on GitHub', icon: 'i-lucide-star' },
+  { label: 'Edit this page', icon: appConfig.ui.icons.external },
+  { label: 'Star on GitHub', icon: appConfig.ui.icons.star },
   { label: 'Releases', icon: 'i-lucide-rocket' }
 ]
 
@@ -90,14 +93,14 @@ const appConfigCode = `export default defineAppConfig({
     <UHeader :toggle="false" class="rounded-t-[inherit]" :ui="{ center: 'flex-1' }">
       <template #left>
         <div class="flex items-center gap-1.5">
-          <UIcon name="i-lucide-book-open" class="size-6 text-primary shrink-0" />
+          <UIcon :name="extra.bookOpen" class="size-6 text-primary shrink-0" />
           <span class="text-xl font-bold text-highlighted">Docs</span>
         </div>
       </template>
 
       <!-- UContentSearchButton opens the content search modal: fake the expanded look. -->
       <UButton
-        icon="i-lucide-search"
+        :icon="appConfig.ui.icons.search"
         label="Search documentation..."
         color="neutral"
         variant="outline"
@@ -114,7 +117,7 @@ const appConfigCode = `export default defineAppConfig({
 
       <template #right>
         <UButton icon="i-lucide-sun-moon" aria-label="Color mode" color="neutral" variant="ghost" />
-        <UButton icon="i-simple-icons-github" aria-label="GitHub" color="neutral" variant="ghost" />
+        <UButton :icon="extra.github" aria-label="GitHub" color="neutral" variant="ghost" />
       </template>
     </UHeader>
 
@@ -141,7 +144,7 @@ const appConfigCode = `export default defineAppConfig({
               <UFieldGroup>
                 <UButton
                   label="Copy page"
-                  icon="i-lucide-copy"
+                  :icon="appConfig.ui.icons.copy"
                   color="neutral"
                   variant="outline"
                   :ui="{ leadingIcon: 'text-neutral size-3.5' }"
@@ -152,7 +155,7 @@ const appConfigCode = `export default defineAppConfig({
                   :ui="{ content: 'w-48' }"
                 >
                   <UButton
-                    icon="i-lucide-chevron-down"
+                    :icon="appConfig.ui.icons.chevronDown"
                     size="sm"
                     color="neutral"
                     variant="outline"
@@ -227,7 +230,7 @@ const appConfigCode = `export default defineAppConfig({
               Header
             </ProseH3>
 
-            <ProsePre filename="app.config.ts" icon="i-lucide-settings" :code="appConfigCode">
+            <ProsePre filename="app.config.ts" :icon="extra.settings" :code="appConfigCode">
               {{ appConfigCode }}
             </ProsePre>
 
@@ -245,14 +248,14 @@ const appConfigCode = `export default defineAppConfig({
             <!-- UContentSurround is content-coupled: same prev/next look with a UPageCard pair. -->
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
               <UPageCard
-                icon="i-lucide-arrow-left"
+                :icon="appConfig.ui.icons.arrowLeft"
                 title="Installation"
                 description="Get started with the documentation template in a few steps."
                 variant="outline"
                 :ui="{ leadingIcon: 'text-muted group-hover:text-primary transition-colors' }"
               />
               <UPageCard
-                icon="i-lucide-arrow-right"
+                :icon="appConfig.ui.icons.arrowRight"
                 title="Markdown Syntax"
                 description="Headings, lists, links and everything Markdown supports."
                 variant="outline"
@@ -312,7 +315,7 @@ const appConfigCode = `export default defineAppConfig({
       <template #right>
         <UButton icon="i-simple-icons-discord" aria-label="Discord" color="neutral" variant="ghost" />
         <UButton icon="i-simple-icons-x" aria-label="X" color="neutral" variant="ghost" />
-        <UButton icon="i-simple-icons-github" aria-label="GitHub" color="neutral" variant="ghost" />
+        <UButton :icon="extra.github" aria-label="GitHub" color="neutral" variant="ghost" />
       </template>
     </UFooter>
   </div>

@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import type { NavigationMenuItem } from '@nuxt/ui'
 
+const appConfig = useAppConfig()
+const extra = useStudioExtraIcons()
+
 const navItems: NavigationMenuItem[] = [
   { label: 'Docs', active: true },
   { label: 'Pricing' },
@@ -10,11 +13,11 @@ const navItems: NavigationMenuItem[] = [
 
 const heroLinks = [{
   label: 'Get started',
-  trailingIcon: 'i-lucide-arrow-right',
+  trailingIcon: appConfig.ui.icons.arrowRight,
   size: 'xl' as const
 }, {
   label: 'Use this template',
-  icon: 'i-lucide-github',
+  icon: extra.github,
   size: 'xl' as const,
   color: 'neutral' as const,
   variant: 'subtle' as const
@@ -27,11 +30,11 @@ const sections = [{
   features: [{
     title: '100+ UI components',
     description: 'From buttons to modals, data tables to forms - all styled with Tailwind CSS and accessible out of the box.',
-    icon: 'i-lucide-package'
+    icon: extra.package
   }, {
     title: 'Authentication ready',
     description: 'Pre-built login, signup and password reset flows. Just connect your backend and start onboarding users.',
-    icon: 'i-lucide-shield'
+    icon: extra.shield
   }, {
     title: 'TypeScript first',
     description: 'Full TypeScript support with auto-completion, type safety and IntelliSense for every component.',
@@ -44,22 +47,22 @@ const sections = [{
   features: [{
     title: 'Edge performance',
     description: 'Optimized for Core Web Vitals with automatic code splitting, lazy loading and SSR/SSG support.',
-    icon: 'i-lucide-zap'
+    icon: extra.zap
   }, {
     title: 'Dark mode ready',
     description: 'Automatic theme switching with smooth transitions. Respects system preferences and remembers user choice.',
-    icon: 'i-lucide-moon'
+    icon: appConfig.ui.icons.dark
   }, {
     title: 'Global ready',
     description: 'Built-in i18n support for 50+ languages with RTL/LTR layouts and font optimization.',
-    icon: 'i-lucide-globe'
+    icon: extra.globe
   }]
 }]
 
 const features = [{
   title: 'Beautiful design system',
   description: 'Semantic color aliases, comprehensive design tokens and Tailwind Variants for consistent styling.',
-  icon: 'i-lucide-palette'
+  icon: extra.palette
 }, {
   title: 'Accessible by default',
   description: 'Built on Reka UI for robust accessibility. WCAG compliant components that work for everyone.',
@@ -67,19 +70,19 @@ const features = [{
 }, {
   title: 'Developer experience',
   description: 'Auto-imports, hot module replacement and comprehensive documentation. Build faster with less friction.',
-  icon: 'i-lucide-terminal'
+  icon: extra.terminal
 }, {
   title: 'SEO optimized',
   description: 'Server-side rendering, automatic meta tags, sitemap generation and Open Graph images out of the box.',
-  icon: 'i-lucide-search'
+  icon: appConfig.ui.icons.search
 }, {
   title: 'Production ready',
   description: 'Error handling, loading states, form validation and security best practices built into every component.',
-  icon: 'i-lucide-circle-check'
+  icon: appConfig.ui.icons.success
 }, {
   title: 'Infinitely customizable',
   description: 'Override any style with the ui prop, customize globally with AppConfig, or use Tailwind classes directly.',
-  icon: 'i-lucide-settings'
+  icon: extra.settings
 }]
 
 const plans = [{
@@ -126,10 +129,10 @@ const testimonials = [{
 
 const ctaLinks = [{
   label: 'Start building',
-  trailingIcon: 'i-lucide-arrow-right'
+  trailingIcon: appConfig.ui.icons.arrowRight
 }, {
   label: 'View on GitHub',
-  icon: 'i-lucide-github',
+  icon: extra.github,
   variant: 'subtle' as const
 }]
 
@@ -216,7 +219,7 @@ const starLayers = [
       <template #right>
         <UButton icon="i-lucide-sun-moon" aria-label="Color mode" color="neutral" variant="ghost" />
         <UButton label="Sign in" color="neutral" variant="outline" class="hidden lg:inline-flex" />
-        <UButton label="Sign up" color="neutral" trailing-icon="i-lucide-arrow-right" />
+        <UButton label="Sign up" color="neutral" :trailing-icon="appConfig.ui.icons.arrowRight" />
       </template>
     </UHeader>
 
@@ -269,7 +272,7 @@ const starLayers = [
       </template>
 
       <template #headline>
-        <UBadge variant="subtle" icon="i-lucide-sparkles">
+        <UBadge variant="subtle" :icon="extra.sparkles">
           Nuxt UI v4 is out
         </UBadge>
       </template>
@@ -283,7 +286,7 @@ const starLayers = [
         <div class="relative aspect-video w-full rounded-xl overflow-hidden bg-elevated flex items-center justify-center">
           <div class="absolute inset-0" style="background: radial-gradient(ellipse at 50% 0%, color-mix(in srgb, var(--ui-primary) 15%, transparent), transparent 70%)" />
           <UButton
-            icon="i-lucide-play"
+            :icon="extra.play"
             size="xl"
             color="neutral"
             variant="outline"
@@ -460,7 +463,7 @@ const starLayers = [
       </template>
 
       <template #right>
-        <UButton icon="i-lucide-github" aria-label="GitHub" color="neutral" variant="ghost" />
+        <UButton :icon="extra.github" aria-label="GitHub" color="neutral" variant="ghost" />
         <UButton icon="i-lucide-twitter" aria-label="X" color="neutral" variant="ghost" />
       </template>
     </UFooter>
