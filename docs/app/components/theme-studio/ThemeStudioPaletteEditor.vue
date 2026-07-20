@@ -308,8 +308,8 @@ const modifiersOpen = ref(false)
 const effectRows = [
   { key: 'lightness', label: 'Lightness', min: -30, max: 30, step: 1, unit: '%' },
   { key: 'contrast', label: 'Contrast', min: -50, max: 50, step: 1, unit: '%' },
-  { key: 'saturation', label: 'Saturation', min: -100, max: 200, step: 5, unit: '%' },
-  { key: 'hueShift', label: 'Hue', min: -180, max: 180, step: 5, unit: '°' }
+  { key: 'saturation', label: 'Saturation', min: -100, max: 200, step: 1, unit: '%' },
+  { key: 'hueShift', label: 'Hue', min: -180, max: 180, step: 1, unit: '°' }
 ] as const
 
 /** Re-derive the displayed curves from the base — a user edit, live-applied. */
@@ -446,10 +446,13 @@ function resetEffects() {
               class="justify-start"
             />
 
-            <UTooltip text="Reset modifiers">
+            <!-- Modifiers live outside the doc (presets land with them
+                 zeroed), so resetting to defaults IS resetting to the
+                 preset — only the dirty styling mirrors the section resets. -->
+            <UTooltip :text="effectsDirty ? 'Reset modifiers' : 'No modifiers active'">
               <UButton
                 icon="i-lucide-rotate-ccw"
-                color="neutral"
+                :color="effectsDirty ? 'primary' : 'neutral'"
                 variant="ghost"
                 size="sm"
                 :disabled="!effectsDirty"
@@ -467,7 +470,7 @@ function resetEffects() {
                 icon="i-lucide-eye"
                 :min="0"
                 :max="200"
-                :step="5"
+                :step="1"
                 unit="%"
                 @update:model-value="applyEffects()"
               />

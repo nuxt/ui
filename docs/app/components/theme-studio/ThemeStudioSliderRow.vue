@@ -61,6 +61,39 @@ const emit = defineEmits<{ reset: [] }>()
 const display = computed(() => shade.value
   ? String(stop.value)
   : `${String(value.value).replace(/^(-?)0\./, '$1.')}${props.unit ?? ''}`)
+
+/** Decimal places the step carries — keyboard nudges stay on its grid. */
+const stepDecimals = computed(() => (String(props.step).split('.')[1] || '').length)
+
+function snap(raw: number): number {
+  const stepped = props.min + Math.round((raw - props.min) / props.step) * props.step
+  return Number(Math.min(props.max, Math.max(props.min, stepped)).toFixed(stepDecimals.value))
+}
+
+/**
+ * The numeric readout doubles as an input: type a value, or nudge with
+ * ArrowUp/ArrowDown (Shift for ×10 steps) without reaching for the slider.
+ */
+function onReadoutKeydown(event: KeyboardEvent) {
+  if (event.key === 'Enter') {
+    (event.target as HTMLInputElement).blur()
+    return
+  }
+  if (event.key !== 'ArrowUp' && event.key !== 'ArrowDown') return
+  event.preventDefault()
+  const steps = (event.key === 'ArrowUp' ? 1 : -1) * (event.shiftKey ? 10 : 1)
+  value.value = snap(value.value + steps * props.step)
+}
+
+function commitReadout(event: Event) {
+  const input = event.target as HTMLInputElement
+  const parsed = Number.parseFloat(input.value)
+  if (!Number.isNaN(parsed)) {
+    value.value = snap(parsed)
+  }
+  // A rejected or same-value commit doesn't re-render — restate the text.
+  input.value = display.value
+}
 </script>
 
 <template>
@@ -103,7 +136,23 @@ const display = computed(() => shade.value
       } : undefined"
     />
 
-    <span class="text-xs text-dimmed font-mono w-8 text-right shrink-0 truncate" :title="display">{{ display }}</span>
+    <!-- No v-model: partial keystrokes must not live-apply — the value
+         commits on change/Enter, arrows nudge through the keydown handler. -->
+    <UInput
+      v-if="!shade"
+      :model-value="display"
+      type="text"
+      inputmode="decimal"
+      autocomplete="off"
+      variant="none"
+      size="xs"
+      class="w-8 shrink-0"
+      :ui="{ base: 'p-0 text-xs text-right font-mono text-dimmed focus:text-default' }"
+      :aria-label="`${label ?? 'Value'} (arrow keys to adjust, Shift for ×10)`"
+      @keydown="onReadoutKeydown"
+      @change="commitReadout"
+    />
+    <span v-else class="text-xs text-dimmed font-mono w-8 text-right shrink-0 truncate" :title="display">{{ display }}</span>
 
     <UButton
       v-if="resettable"
