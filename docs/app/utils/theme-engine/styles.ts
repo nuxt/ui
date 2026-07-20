@@ -212,9 +212,22 @@ const FLAT_FIELD_VARIANTS = [
 // ×1.5 for panels/overlays, ×0.66 for badge-size ones.
 const SOFT_LG = 'shadow-lg shadow-(color:--ui-shadow-final-soft)'
 
-/** A ramp shade reference — or the literal when the stop is white/black. */
+/**
+ * A ramp shade reference — or the literal when the stop is white/black.
+ * Standard stops go through the `--ui-color-<ramp>-<stop>` indirection so a
+ * token follows whatever colour the ramp is assigned. The 100-step midpoints
+ * (150…850) have NO such indirection — the runtime colours plugin only
+ * generates the 11 standard stops — so they reference the custom ramp's
+ * `--color-*` directly. That's sound because a midpoint can only exist on a
+ * fine-stops custom palette (named `custom-<ramp>`), whose `@theme static`
+ * block defines those variables in both the preview and the export.
+ */
 function shadeRef(ramp: string, stop: ShadeStop | number): string {
-  return stop === 'white' || stop === 'black' ? stop : `var(--ui-color-${ramp}-${stop})`
+  if (stop === 'white' || stop === 'black') return stop
+  if (typeof stop === 'number' && stop % 100 === 50 && stop > 100 && stop < 900) {
+    return `var(--color-custom-${ramp}-${stop})`
+  }
+  return `var(--ui-color-${ramp}-${stop})`
 }
 
 const HARD_BASE = 'shadow-(--ui-shadow-hard)'

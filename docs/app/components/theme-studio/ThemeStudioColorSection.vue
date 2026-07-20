@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { TOKEN_SHADE_TARGETS, TOKEN_GROUPS, SHADE_LADDER, canonicalTokenShades } from '../../utils/theme-engine'
+import { TOKEN_SHADE_TARGETS, TOKEN_GROUPS, SHADE_LADDER, SHADE_LADDER_FINE, canonicalTokenShades } from '../../utils/theme-engine'
 import type { ColorAlias, SectionKey, ShadeStop } from '../../utils/theme-engine'
 
 /**
@@ -17,10 +17,17 @@ const props = defineProps<{
   sectionKey?: SectionKey
 }>()
 
-const { style, setStyle, rampChip, baselineDoc } = useThemeStudio()
+const { style, setStyle, rampChip, baselineDoc, isCustomPalette, paletteParams } = useThemeStudio()
 
 /** The active preset's own shade choices — what a row reset restores. */
 const baselineShades = computed(() => canonicalTokenShades(baselineDoc.value))
+
+// When this alias is a fine-stops custom palette, its tokens can pick the
+// 100-step midpoints too — the sliders (and their model mapping) span the
+// wider ladder. Stock ramps have no midpoints, so they stay on the standard 11.
+const shadeLadder = computed<readonly ShadeStop[]>(() => (isCustomPalette(props.alias) && paletteParams.value[props.alias]?.fineStops
+  ? SHADE_LADDER_FINE
+  : SHADE_LADDER))
 
 const title = computed(() => props.label ?? capitalize(props.alias))
 
@@ -38,13 +45,15 @@ function tokenShadeControl(token: string, defaults: { light: ShadeStop, dark: Sh
   const model = computed({
     get: () => {
       const value = style.value.tokenShades?.[token]?.[target] ?? defaults[target]
-      return SHADE_LADDER.indexOf(value as typeof SHADE_LADDER[number])
+      // A midpoint set while fine, then narrowed back, no longer sits on the
+      // ladder (indexOf -1) — clamp to 0 so the slider stays grabbable.
+      return Math.max(0, shadeLadder.value.indexOf(value as ShadeStop))
     },
     set: (index: number) => {
       setStyle({
         tokenShades: {
           ...style.value.tokenShades,
-          [token]: { ...style.value.tokenShades?.[token], [target]: SHADE_LADDER[index]! }
+          [token]: { ...style.value.tokenShades?.[token], [target]: shadeLadder.value[index]! }
         }
       })
     }
@@ -125,6 +134,7 @@ const openGroups = reactive<Record<string, boolean>>({})
           v-model="slider.model.value"
           :mode="modeName"
           :chip="rampChip(alias)"
+          :ladder="shadeLadder"
           resettable
           :dirty="slider.dirty.value"
           @reset="slider.reset()"
@@ -157,6 +167,7 @@ const openGroups = reactive<Record<string, boolean>>({})
                   v-model="slider.model.value"
                   :mode="modeName"
                   :chip="rampChip(section.ramp)"
+                  :ladder="shadeLadder"
                   resettable
                   :dirty="slider.dirty.value"
                   @reset="slider.reset()"

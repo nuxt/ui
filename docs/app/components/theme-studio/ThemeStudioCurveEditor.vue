@@ -1,13 +1,19 @@
 <script setup lang="ts">
-import { sampleCurve, SHADES } from '../../utils/theme-engine'
+import { sampleCurve, SHADES, shadeX } from '../../utils/theme-engine'
 import type { ChannelCurve } from '../../utils/theme-engine'
 
 const props = defineProps<{
   /** Display window for the channel value axis */
   yMin: number
   yMax: number
-  /** Fill colors for the 11 stop dots along the curve */
+  /** Fill colors for the stop dots along the curve, one per stop. */
   stopColors?: string[]
+  /**
+   * Curve x-position (0–1) for each stop, aligned with `stopColors`. Omit for
+   * the standard 11 stops (evenly ranked); a fine ramp passes 19 with the
+   * midpoints at their true positions (150 → 0.15, not an even 19th).
+   */
+  stopXs?: number[]
   /**
    * 2D color field behind the plot: one entry per column (ramp position),
    * each an array of colors sampled top (yMax) to bottom (yMin). SVG can't
@@ -74,10 +80,10 @@ const fieldRects = computed(() => {
   })
 })
 
-const stops = computed(() => SHADES.map((shade, index) => {
-  const x = index / (SHADES.length - 1)
+const stopXs = computed(() => props.stopXs ?? SHADES.map(shadeX))
+const stops = computed(() => stopXs.value.map((x, index) => {
   return {
-    shade,
+    key: index,
     cx: toX(x),
     cy: toY(sampleCurve(x, curve.value)),
     fill: props.stopColors?.[index] || 'currentColor'
@@ -244,7 +250,7 @@ function onPointerUp(event: PointerEvent) {
     <!-- shade stops on the curve -->
     <circle
       v-for="stop in stops"
-      :key="stop.shade"
+      :key="stop.key"
       :cx="stop.cx"
       :cy="stop.cy"
       r="2.25"

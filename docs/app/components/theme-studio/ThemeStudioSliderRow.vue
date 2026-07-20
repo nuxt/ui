@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { SHADE_LADDER } from '../../utils/theme-engine'
+import type { ShadeStop } from '../../utils/theme-engine'
 
 /**
  * The studio's control row — a horizontal UFormField: tiny label (or icon),
@@ -28,17 +29,21 @@ const props = withDefaults(defineProps<{
    */
   resettable?: boolean
   dirty?: boolean
+  /** Shade-row ladder — the fine ramp swaps in the wider 21-stop ladder. */
+  ladder?: readonly ShadeStop[]
 }>(), {
   min: 0,
-  max: SHADE_LADDER.length - 1,
-  step: 1
+  step: 1,
+  ladder: () => SHADE_LADDER
 })
 
-/** Plain rows: the value itself. Shade rows: an index into SHADES. */
+/** Plain rows: the value itself. Shade rows: an index into the ladder. */
 const value = defineModel<number>({ required: true })
 
 const shade = computed(() => !!props.chip && !!props.mode)
-const stop = computed(() => SHADE_LADDER[value.value])
+// Shade rows span the ladder; plain rows use the caller's max (default 0).
+const sliderMax = computed(() => (shade.value ? props.ladder.length - 1 : props.max ?? SHADE_LADDER.length - 1))
+const stop = computed(() => props.ladder[value.value])
 const sliderColor = computed(() => {
   if (!shade.value) return undefined
   // the ladder's ends are literals no ramp variable can express
@@ -68,7 +73,7 @@ const display = computed(() => shade.value
  * numbers). The toFixed sweeps float noise from step arithmetic.
  */
 function clamp(raw: number): number {
-  return Number(Math.min(props.max, Math.max(props.min, raw)).toFixed(4))
+  return Number(Math.min(sliderMax.value, Math.max(props.min, raw)).toFixed(4))
 }
 
 /**
@@ -126,7 +131,7 @@ function commitReadout(event: Event) {
     <USlider
       v-model="value"
       :min="min"
-      :max="max"
+      :max="sliderMax"
       :step="step"
       color="primary"
       size="xs"

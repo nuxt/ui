@@ -1,5 +1,5 @@
 import type { Shade } from './types'
-import { SHADES } from './types'
+import { SHADES, SHADES_FINE } from './types'
 import { clampToGamut, formatOklch, parseColor } from './oklch'
 import type { Oklch } from './oklch'
 
@@ -66,7 +66,7 @@ export interface PaletteEffects {
 export const PALETTE_EFFECT_DEFAULTS: PaletteEffects = { lightness: 0, contrast: 0, saturation: 0, hueShift: 0 }
 
 /** A persisted palette: the base curves plus the modifier lens over them. */
-export type StoredPaletteParams = PaletteCurveParams & { effects?: PaletteEffects, amount?: number }
+export type StoredPaletteParams = PaletteCurveParams & { effects?: PaletteEffects, amount?: number, fineStops?: boolean }
 
 export function isDefaultEffects(effects?: PaletteEffects, amount = 100): boolean {
   if (amount !== 100) return false
@@ -160,11 +160,23 @@ export function sampleCurve(x: number, curve: ChannelCurve): number {
   return cubicBezier(t, curve.y0, curve.p1y, curve.p2y, curve.y1)
 }
 
-export function generatePalette(params: PaletteCurveParams): Record<Shade, string> {
+/**
+ * A shade's fixed position along the curve (x: 0 = shade 50 … 1 = shade 950),
+ * keyed by VALUE not array index — so the standard 11 stops keep their exact
+ * position (and colour) whether or not the fine midpoints are generated, and
+ * a midpoint like 150 lands halfway between 100 (0.1) and 200 (0.2).
+ */
+export function shadeX(shade: Shade): number {
+  if (shade === 50) return 0
+  if (shade === 950) return 1
+  return shade / 1000
+}
+
+export function generatePalette(params: PaletteCurveParams, fine = false): Record<Shade, string> {
   const result = {} as Record<Shade, string>
 
-  for (const [index, shade] of SHADES.entries()) {
-    const x = index / (SHADES.length - 1)
+  for (const shade of fine ? SHADES_FINE : SHADES) {
+    const x = shadeX(shade)
 
     // Clamp here, not in the serializer: sculpted curves can demand
     // impossible chroma, and the swatches/contrast math assume sRGB.

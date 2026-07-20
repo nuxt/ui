@@ -2,17 +2,28 @@ import { isDefaultStyle } from './styles'
 
 export const SHADES = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950] as const
 
-export type Shade = typeof SHADES[number]
+/**
+ * The optional "fine" ramp: the standard stops plus the 100-step midpoints
+ * (150…850). A palette opts in via its `fineStops` flag; generation and the
+ * shade sliders then span these 19 stops. `Shade` is the union of the fine
+ * set, so every fine stop is a valid shade — the standard 11 are a subset,
+ * and a non-fine palette simply never emits the extras.
+ */
+export const SHADES_FINE = [50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700, 750, 800, 850, 900, 950] as const
+
+export type Shade = typeof SHADES_FINE[number]
 
 /**
  * The shade sliders' full travel: the ramp plus literal white/black ends.
  * The ends matter because several stock defaults are literals the ramp
  * can't express (--ui-bg is `white`, the stock dark shadow is `black`) —
  * without them the sliders could only pin lookalike ramp overrides.
+ * `SHADE_LADDER_FINE` is the same with the midpoints, for fine-stops ramps.
  */
 export const SHADE_LADDER = ['white', ...SHADES, 'black'] as const
+export const SHADE_LADDER_FINE = ['white', ...SHADES_FINE, 'black'] as const
 
-export type ShadeStop = typeof SHADE_LADDER[number]
+export type ShadeStop = typeof SHADE_LADDER_FINE[number]
 
 export type ColorAlias = 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'error' | 'neutral'
 

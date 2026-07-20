@@ -12,6 +12,7 @@ import {
   contrastRatio,
   CURVE_DEFAULTS,
   SHADES,
+  SHADES_FINE,
   LIBRARY_TOKEN_DEFAULTS,
   parseUiColorRef,
   resolveAlias,
@@ -222,6 +223,26 @@ describe('theme-engine', () => {
       for (const shade of SHADES) {
         expect(shades[shade]).toMatch(CANONICAL_OKLCH)
       }
+    })
+
+    it('fine stops add the midpoints without shifting the standard stops', () => {
+      const standard = generatePalette(CURVE_DEFAULTS)
+      const fine = generatePalette(CURVE_DEFAULTS, true)
+
+      // 19 stops incl. every 100-step midpoint, all canonical
+      expect(Object.keys(fine).map(Number).sort((a, b) => a - b)).toEqual(SHADES_FINE as unknown as number[])
+      for (const shade of SHADES_FINE) {
+        expect(fine[shade], `${shade}`).toMatch(CANONICAL_OKLCH)
+      }
+      // The standard stops are byte-identical — enabling fine stops must not
+      // change any existing colour (positions are keyed by value, not index).
+      for (const shade of SHADES) {
+        expect(fine[shade], `${shade}`).toBe(standard[shade])
+      }
+      // A midpoint sits between its neighbours in lightness (curve is monotonic).
+      const l = (s: number) => parseColor(fine[s as never])!.l
+      expect(l(150)).toBeLessThan(l(100))
+      expect(l(150)).toBeGreaterThan(l(200))
     })
 
     it('fitPalette accepts hex and oklch inputs equivalently', () => {

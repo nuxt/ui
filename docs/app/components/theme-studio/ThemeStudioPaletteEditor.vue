@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useThrottleFn, watchIgnorable } from '@vueuse/core'
-import { SHADES, CURVE_DEFAULTS, NEUTRAL_CURVE_DEFAULTS, PALETTE_EFFECT_DEFAULTS, generatePalette, fitPalette, applyPaletteEffects, isDefaultEffects, sampleCurve, clampToGamut, formatOklch, parseColor, oklchToRgb, rgbToHex } from '../../utils/theme-engine'
+import { SHADES, SHADES_FINE, CURVE_DEFAULTS, NEUTRAL_CURVE_DEFAULTS, PALETTE_EFFECT_DEFAULTS, generatePalette, fitPalette, applyPaletteEffects, isDefaultEffects, sampleCurve, shadeX, clampToGamut, formatOklch, parseColor, oklchToRgb, rgbToHex } from '../../utils/theme-engine'
 import type { PaletteCurveParams, PaletteEffects, StoredPaletteParams, ColorAlias } from '../../utils/theme-engine'
 
 const props = defineProps<{
@@ -34,6 +34,21 @@ const stored = paletteParams.value[props.alias]
 const effects = reactive<PaletteEffects>({ ...PALETTE_EFFECT_DEFAULTS, ...(stored?.effects ?? {}) })
 const effectAmount = ref(stored?.amount ?? 100)
 
+// Opt-in to the 100-step midpoints (150…850). Off keeps the standard 11
+// Tailwind stops; on generates 19 and exposes them to the shade sliders.
+const fineStops = ref(stored?.fineStops ?? false)
+const stopSet = computed(() => (fineStops.value ? SHADES_FINE : SHADES))
+
+/** The stop-count dropdown — numeric so USelect never has to bind a falsy value. */
+const stopItems = [
+  { label: '11 shades', value: SHADES.length },
+  { label: '19 shades', value: SHADES_FINE.length }
+]
+const stopCount = computed({
+  get: () => (fineStops.value ? SHADES_FINE.length : SHADES.length),
+  set: value => (fineStops.value = value === SHADES_FINE.length)
+})
+
 /** Base curves the modifiers transform from, so they never compound. */
 let seedBase: PaletteCurveParams
   = stored && 'lightness' in stored ? pickCurves(stored) : defaults()
@@ -45,11 +60,12 @@ const params = reactive<PaletteCurveParams>(applyPaletteEffects(seedBase, effect
 
 const active = computed(() => isCustomPalette(props.alias))
 
-const shades = computed(() => generatePalette(params))
-const stopColors = computed(() => SHADES.map(shade => shades.value[shade]))
+const shades = computed(() => generatePalette(params, fineStops.value))
+const stopColors = computed(() => stopSet.value.map(shade => shades.value[shade]))
+const stopXs = computed(() => stopSet.value.map(shadeX))
 
 /** Every swatch with its hex/rgb equivalents for the tooltip. */
-const swatchInfo = computed(() => SHADES.map((shade) => {
+const swatchInfo = computed(() => stopSet.value.map((shade) => {
   const oklch = shades.value[shade]!
   const parsed = parseColor(oklch)
   const rgb = parsed ? oklchToRgb(parsed) : undefined
@@ -209,8 +225,12 @@ const throttledApply = useThrottleFn(() => {
   if (!effectsDirty.value) {
     seedBase = structuredClone(toRaw(params))
   }
-  setPaletteFromCurve(props.alias, structuredClone(seedBase), { ...effects }, effectAmount.value)
+  setPaletteFromCurve(props.alias, structuredClone(seedBase), { ...effects }, effectAmount.value, fineStops.value)
 }, 60, true, true)
+
+// Toggling the stop set isn't a curve edit, so drive an apply directly to
+// regenerate the ramp (and persist the choice) at the new granularity.
+watch(fineStops, () => throttledApply())
 
 // Programmatic writes into `params` (seeding, external sync) must not
 // live-apply — only user edits do. watchIgnorable scopes the suppression
@@ -225,6 +245,8 @@ function seed(values: PaletteCurveParams) {
   seedBase = structuredClone(next)
   Object.assign(effects, PALETTE_EFFECT_DEFAULTS)
   effectAmount.value = 100
+  // A fresh fit is 11-stop; seedFromCurrent re-detects midpoints after.
+  fineStops.value = false
   ignoreUpdates(() => {
     Object.assign(params, next)
   })
@@ -268,6 +290,9 @@ function seedFromCurrent() {
   const source = paletteShades(name)
   if (source) {
     seed(fitPalette(source))
+    // A ramp that already carries midpoints (an imported fine palette) keeps
+    // them, so opening the editor doesn't silently narrow it back to 11.
+    if (source[150] !== undefined) fineStops.value = true
   }
 }
 
@@ -283,6 +308,7 @@ watch(() => paletteParams.value[props.alias], (value) => {
   normalizeHue(seedBase)
   Object.assign(effects, PALETTE_EFFECT_DEFAULTS, value.effects ?? {})
   effectAmount.value = value.amount ?? 100
+  fineStops.value = value.fineStops ?? false
   ignoreUpdates(() => {
     Object.assign(params, applyPaletteEffects(seedBase, effects, effectAmount.value))
   })
@@ -340,15 +366,30 @@ function resetEffects() {
         />
 
         <div>
-          <ThemeStudioCurveEditor
-            v-model="params[tab]"
-            :y-min="windows[tab].min"
-            :y-max="windows[tab].max"
-            :stop-colors="stopColors"
-            :field="field"
-            @drag-start="onDragStart"
-            @drag-end="onDragEnd"
-          />
+          <div class="relative">
+            <ThemeStudioCurveEditor
+              v-model="params[tab]"
+              :y-min="windows[tab].min"
+              :y-max="windows[tab].max"
+              :stop-colors="stopColors"
+              :stop-xs="stopXs"
+              :field="field"
+              @drag-start="onDragStart"
+              @drag-end="onDragEnd"
+            />
+
+            <!-- Stop-count picker, tucked into the gradient's bottom-left. -->
+            <UTooltip text="Shade stops">
+              <USelect
+                v-model="stopCount"
+                :items="stopItems"
+                size="xs"
+                variant="soft"
+                class="absolute bottom-1.5 left-1.5 z-10 w-24 bg-default/70 backdrop-blur-sm"
+                :ui="{ base: 'ring ring-default' }"
+              />
+            </UTooltip>
+          </div>
 
           <div ref="stripRef" class="flex rounded-b-sm overflow-hidden ring ring-default">
             <UPopover
