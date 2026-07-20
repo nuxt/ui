@@ -41,8 +41,8 @@ const stopSet = computed(() => (fineStops.value ? SHADES_FINE : SHADES))
 
 /** The stop-count dropdown — numeric so USelect never has to bind a falsy value. */
 const stopItems = [
-  { label: '11 shades', value: SHADES.length },
-  { label: '19 shades', value: SHADES_FINE.length }
+  { label: '11 stops', value: SHADES.length },
+  { label: '19 stops', value: SHADES_FINE.length }
 ]
 const stopCount = computed({
   get: () => (fineStops.value ? SHADES_FINE.length : SHADES.length),
@@ -366,30 +366,16 @@ function resetEffects() {
         />
 
         <div>
-          <div class="relative">
-            <ThemeStudioCurveEditor
-              v-model="params[tab]"
-              :y-min="windows[tab].min"
-              :y-max="windows[tab].max"
-              :stop-colors="stopColors"
-              :stop-xs="stopXs"
-              :field="field"
-              @drag-start="onDragStart"
-              @drag-end="onDragEnd"
-            />
-
-            <!-- Stop-count picker, tucked into the gradient's bottom-left. -->
-            <UTooltip text="Shade stops">
-              <USelect
-                v-model="stopCount"
-                :items="stopItems"
-                size="xs"
-                variant="soft"
-                class="absolute bottom-1.5 left-1.5 z-10 w-24 bg-default/70 backdrop-blur-sm"
-                :ui="{ base: 'ring ring-default' }"
-              />
-            </UTooltip>
-          </div>
+          <ThemeStudioCurveEditor
+            v-model="params[tab]"
+            :y-min="windows[tab].min"
+            :y-max="windows[tab].max"
+            :stop-colors="stopColors"
+            :stop-xs="stopXs"
+            :field="field"
+            @drag-start="onDragStart"
+            @drag-end="onDragEnd"
+          />
 
           <div ref="stripRef" class="flex rounded-b-sm overflow-hidden ring ring-default">
             <UPopover
@@ -484,9 +470,22 @@ function resetEffects() {
               variant="ghost"
               size="sm"
               block
-              class="justify-start"
+              class="flex-1 justify-start"
             />
+            <!-- Stop-count picker rides the Modifiers row so it never
+                 overlaps the curve handles or swatches above. Its own click
+                 must not toggle the fold. -->
+            <UTooltip text="Shade stops">
+              <USelect
+                v-model="stopCount"
+                :items="stopItems"
+                size="sm"
+                variant="ghost"
+                class="shrink-0"
 
+                @click.stop
+              />
+            </UTooltip>
             <!-- Modifiers live outside the doc (presets land with them
                  zeroed), so resetting to defaults IS resetting to the
                  preset — only the dirty styling mirrors the section resets. -->

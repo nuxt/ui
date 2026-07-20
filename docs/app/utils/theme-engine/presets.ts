@@ -243,27 +243,28 @@ export const presets: ThemePreset[] = [{
     }
   }
 }, {
-  id: 'comicbook',
-  name: 'Comicbook',
-  description: 'Comic-book red and blue with inked panel outlines.',
-  icon: 'i-lucide-book-open',
+  id: '8bit',
+  name: '8-bit',
+  description: 'Arcade red with pixel type and hard inked edges.',
+  icon: 'i-mdi-space-invaders',
   doc: {
     version: 1,
-    // A cool-violet sculpted neutral for the panel grays.
+    // A teal-washed neutral: the light end never reaches white, so the whole
+    // page sits on a dim LCD panel instead of paper.
     palettes: {
       'custom-neutral': {
         shades: {
-          50: 'oklch(97.3% 0.013 286.067)',
-          100: 'oklch(91.3% 0.023 286.073)',
-          200: 'oklch(84% 0.028 286.076)',
-          300: 'oklch(72.5% 0.032 286.073)',
-          400: 'oklch(60.1% 0.034 286.058)',
-          500: 'oklch(50.6% 0.033 285.932)',
-          600: 'oklch(42.3% 0.028 285.808)',
-          700: 'oklch(34.8% 0.021 285.795)',
-          800: 'oklch(27.6% 0.015 285.794)',
-          900: 'oklch(20.8% 0.01 285.798)',
-          950: 'oklch(14.1% 0.005 285.805)'
+          50: 'oklch(89.7% 0.031 183.464)',
+          100: 'oklch(89.1% 0.038 184.16)',
+          200: 'oklch(87.1% 0.046 184.932)',
+          300: 'oklch(78.8% 0.056 185.807)',
+          400: 'oklch(64.9% 0.068 186.838)',
+          500: 'oklch(53.7% 0.066 188.136)',
+          600: 'oklch(44.3% 0.053 190.06)',
+          700: 'oklch(36.1% 0.04 193.492)',
+          800: 'oklch(28.5% 0.027 194.529)',
+          900: 'oklch(21.5% 0.015 194.814)',
+          950: 'oklch(14.8% 0.004 194.9)'
         }
       }
     },
@@ -271,10 +272,8 @@ export const presets: ThemePreset[] = [{
       primary: 'red',
       neutral: 'custom-neutral'
     },
-    radius: 0.125,
-    // One flat 600 across every weight step — comic lettering has a single
-    // stroke width, and Comic Neue's 400 reads too thin for the look.
-    font: { sans: 'Comic Neue', weights: { normal: 600, medium: 600, semibold: 600, bold: 600 } },
+    radius: 0,
+    font: { sans: 'Pixelify Sans', weights: { normal: 400, medium: 500, semibold: 600, bold: 700 } },
     icons: 'pixelarticons',
     // Inked page: near-black default AND accented borders over muted panel
     // edges, deep red at 600 in light, flat 50s inversions in dark.
