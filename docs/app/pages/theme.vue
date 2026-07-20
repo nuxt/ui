@@ -99,7 +99,10 @@ defineShortcuts({
   meta_z: undo,
   meta_shift_z: redo,
   ctrl_y: redo,
-  ctrl_shift_d: toggleColorMode
+  ctrl_shift_d: toggleColorMode,
+  // Enters fullscreen and toggles back out; Esc also exits (below). Auto-
+  // suppressed while an input is focused, so it never eats a typed 'f'.
+  f: () => (fullscreen.value = !fullscreen.value)
 })
 
 // Esc exits fullscreen — but NOT through defineShortcuts, which
@@ -320,7 +323,7 @@ const shareMode = ref<'import' | 'export'>('export')
               </UFieldGroup>
             </div>
 
-            <UTooltip :text="fullscreen ? 'Exit fullscreen' : 'Fullscreen preview'" :kbds="fullscreen ? ['Esc'] : undefined">
+            <UTooltip :text="fullscreen ? 'Exit fullscreen' : 'Fullscreen preview'" :kbds="fullscreen ? ['Esc'] : ['F']">
               <UButton
                 :icon="fullscreen ? 'i-lucide-minimize' : 'i-lucide-maximize'"
                 color="neutral"

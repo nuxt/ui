@@ -62,12 +62,13 @@ const display = computed(() => shade.value
   ? String(stop.value)
   : `${String(value.value).replace(/^(-?)0\./, '$1.')}${props.unit ?? ''}`)
 
-/** Decimal places the step carries — keyboard nudges stay on its grid. */
-const stepDecimals = computed(() => (String(props.step).split('.')[1] || '').length)
-
-function snap(raw: number): number {
-  const stepped = props.min + Math.round((raw - props.min) / props.step) * props.step
-  return Number(Math.min(props.max, Math.max(props.min, stepped)).toFixed(stepDecimals.value))
+/**
+ * Typed values keep their precision — a value between step stops is a
+ * deliberate choice, so only the range clamps it (which also caps runaway
+ * numbers). The toFixed sweeps float noise from step arithmetic.
+ */
+function clamp(raw: number): number {
+  return Number(Math.min(props.max, Math.max(props.min, raw)).toFixed(4))
 }
 
 /**
@@ -82,14 +83,14 @@ function onReadoutKeydown(event: KeyboardEvent) {
   if (event.key !== 'ArrowUp' && event.key !== 'ArrowDown') return
   event.preventDefault()
   const steps = (event.key === 'ArrowUp' ? 1 : -1) * (event.shiftKey ? 10 : 1)
-  value.value = snap(value.value + steps * props.step)
+  value.value = clamp(value.value + steps * props.step)
 }
 
 function commitReadout(event: Event) {
   const input = event.target as HTMLInputElement
   const parsed = Number.parseFloat(input.value)
   if (!Number.isNaN(parsed)) {
-    value.value = snap(parsed)
+    value.value = clamp(parsed)
   }
   // A rejected or same-value commit doesn't re-render — restate the text.
   input.value = display.value
