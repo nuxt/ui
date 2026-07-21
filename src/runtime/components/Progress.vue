@@ -216,10 +216,17 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.progress || {}) 
 
     <ProgressRoot v-bind="rootProps" :max="realMax" data-slot="base" :class="ui.base({ class: props.ui?.base })" :style="['transform: translateZ(0)', thicknessStyle]">
       <template v-if="props.variant === 'circular'">
-        <svg viewBox="0 0 100 100">
+        <svg viewBox="0 0 100 100" data-slot="circle" :class="ui.circle({ class: props.ui?.circle })">
           <circle cx="50" cy="50" data-slot="track" :class="ui.track({ class: props.ui?.track })" />
           <ProgressIndicator as-child>
-            <circle cx="50" cy="50" pathLength="100" :class="ui.indicator({ class: props.ui?.indicator })" :style="indicatorStyle" />
+            <circle
+              cx="50"
+              cy="50"
+              pathLength="100"
+              data-slot="indicator"
+              :class="ui.indicator({ class: props.ui?.indicator })"
+              :style="indicatorStyle"
+            />
           </ProgressIndicator>
         </svg>
         <div v-if="!isIndeterminate && (props.status || !!slots.status)" data-slot="status" :class="ui.status({ class: props.ui?.status })" :style="statusStyle">

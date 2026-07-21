@@ -4,6 +4,7 @@ export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: 'gap-2',
     base: 'relative',
+    circle: 'block size-full',
     track: 'fill-none stroke-(--ui-bg-accented)',
     indicator: 'rounded-full size-full transition-transform duration-200 ease-out [stroke-linecap:round] motion-reduce:data-[state=indeterminate]:animate-pulse',
     status: 'flex text-dimmed',
