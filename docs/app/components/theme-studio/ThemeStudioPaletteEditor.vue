@@ -64,18 +64,12 @@ const shades = computed(() => generatePalette(params, fineStops.value))
 const stopColors = computed(() => stopSet.value.map(shade => shades.value[shade]))
 const stopXs = computed(() => stopSet.value.map(shadeX))
 
-/** Every swatch with its hex/rgb equivalents for the tooltip. */
-const swatchInfo = computed(() => stopSet.value.map((shade) => {
-  const oklch = shades.value[shade]!
-  const parsed = parseColor(oklch)
-  const rgb = parsed ? oklchToRgb(parsed) : undefined
-  return {
-    shade,
-    oklch,
-    hex: rgb ? rgbToHex(rgb) : '',
-    rgb: rgb ? `rgb(${rgb.map(channel => Math.round(channel * 255)).join(', ')})` : ''
-  }
-}))
+/**
+ * The strip tiles — just shade + live color. Kept deliberately light (no
+ * hex/rgb parse) because it recomputes on every drag frame across all 19
+ * stops; the costly parse is deferred to the single open swatch below.
+ */
+const swatches = computed(() => stopSet.value.map(shade => ({ shade, oklch: shades.value[shade]! })))
 
 const { copy: copyShade } = useClipboard()
 const copiedShade = ref<number>()
@@ -100,6 +94,36 @@ onUnmounted(() => clearTimeout(copiedTimeout))
 const pinnedShade = ref<number>()
 const hoveredShade = ref<number>()
 let hoverLeaveTimeout: ReturnType<typeof setTimeout> | undefined
+
+// One popover serves the whole strip (all tiles anchor to it anyway), driven
+// by whichever swatch is active — a pin wins over a hover. Rendering a single
+// Reka popover instead of one per stop is the bulk of the 19-stop speedup.
+const activeShade = computed(() => pinnedShade.value ?? hoveredShade.value)
+
+/**
+ * Full detail for the ONE open swatch — the oklch→rgb→hex parse runs here,
+ * not across all 19 tiles every frame. Undefined when nothing is open.
+ */
+const activeSwatch = computed(() => {
+  const shade = activeShade.value
+  if (shade === undefined) return undefined
+  const oklch = (shades.value as Record<number, string>)[shade]
+  if (!oklch) return undefined
+  const parsed = parseColor(oklch)
+  const rgb = parsed ? oklchToRgb(parsed) : undefined
+  return {
+    shade,
+    oklch,
+    hex: rgb ? rgbToHex(rgb) : '',
+    rgb: rgb ? `rgb(${rgb.map(channel => Math.round(channel * 255)).join(', ')})` : ''
+  }
+})
+
+// The single popover stays mounted and toggles via `:open` (cheap — one Reka
+// instance, not 19). This always-defined mirror lets the slot template read
+// details without tripping undefined-narrowing in Vue's slot scope; its
+// placeholder is never shown because the popover is closed when inactive.
+const swatchDetail = computed(() => activeSwatch.value ?? { shade: -1, oklch: '', hex: '', rgb: '' })
 
 function onSwatchEnter(shade: number) {
   // a pin means "I'm reading this one" — other swatches don't hover-open
@@ -184,9 +208,20 @@ const FIELD_COLUMNS = 24
 const FIELD_ROWS = 12
 const CHANNEL_KEYS = { lightness: 'l', chroma: 'c', hue: 'h' } as const
 
+// The field's 288 gamut-mapped cells are the editor's single biggest chunk of
+// per-frame work. It's a background aid, so feed it a throttled snapshot of
+// the curves: it repaints a few times a second while dragging and settles
+// exactly on release, while the curve line and stops track the pointer live.
+const fieldCurves = ref<PaletteCurveParams>(structuredClone(toRaw(params)))
+const syncFieldCurves = useThrottleFn(() => {
+  fieldCurves.value = structuredClone(toRaw(params))
+}, 110, true, true)
+watch(params, () => syncFieldCurves(), { deep: true })
+
 const field = computed(() => {
   const channel = tab.value
   const { min, max } = windows[channel]
+  const curves = fieldCurves.value
 
   // Fence-post: column i is sampled AT ramp position i/(n-1) — the editor
   // draws each column centered on that plot x, endpoints under the
@@ -194,9 +229,9 @@ const field = computed(() => {
   return Array.from({ length: FIELD_COLUMNS }, (_, columnIndex) => {
     const x = columnIndex / (FIELD_COLUMNS - 1)
     const base = {
-      l: sampleCurve(x, params.lightness),
-      c: Math.max(0, sampleCurve(x, params.chroma)),
-      h: sampleCurve(x, params.hue)
+      l: sampleCurve(x, curves.lightness),
+      c: Math.max(0, sampleCurve(x, curves.chroma)),
+      h: sampleCurve(x, curves.hue)
     }
 
     return Array.from({ length: FIELD_ROWS }, (_, rowIndex) => {
@@ -377,85 +412,88 @@ function resetEffects() {
             @drag-end="onDragEnd"
           />
 
+          <!-- Plain tiles recolor live every frame (cheap); a single popover,
+               anchored to the strip and driven by the active swatch, carries
+               the details — 1 Reka instance instead of 19. -->
           <div ref="stripRef" class="flex rounded-b-sm overflow-hidden ring ring-default">
-            <UPopover
-              v-for="info in swatchInfo"
+            <button
+              v-for="info in swatches"
               :key="info.shade"
-              arrow
-              :open="pinnedShade === info.shade || hoveredShade === info.shade"
-              :reference="stripEl"
-              :content="{
-                side: 'top',
-                onEscapeKeyDown: () => onSwatchEscape(info.shade),
-                onCloseAutoFocus: onSwatchCloseAutoFocus,
-                sideOffset: 0,
-                // hover-opened popovers must not steal focus; a pinned one
-                // takes it so Tab lands on the copy/pin buttons
-                onOpenAutoFocus: pinnedShade === info.shade ? undefined : (event: Event) => event.preventDefault(),
-                // pinning means pinned: clicks elsewhere (curve drags,
-                // sliders) must not dismiss — only Esc, unpin or another pin
-                onInteractOutside: pinnedShade === info.shade ? (event: Event) => event.preventDefault() : undefined,
-                onFocusOutside: pinnedShade === info.shade ? (event: Event) => event.preventDefault() : undefined
-              }"
-              @update:open="onSwatchOpenUpdate(info.shade, $event)"
-            >
-              <button
-                type="button"
-                class="aspect-square flex-1"
-                :style="{ backgroundColor: info.oklch }"
-                :aria-label="`Shade ${info.shade}: ${info.oklch}`"
-                :aria-pressed="pinnedShade === info.shade"
-                @click="togglePin(info.shade)"
-                @mouseenter="onSwatchEnter(info.shade)"
-                @mouseleave="onSwatchLeave"
-              />
-
-              <template #content>
-                <div
-                  class="px-2 py-1.5 text-xs font-mono flex flex-col gap-0.5"
-                  @mouseenter="onSwatchEnter(info.shade)"
-                  @mouseleave="onSwatchLeave"
-                >
-                  <div class="flex items-center justify-between gap-3">
-                    <span class="font-semibold">{{ info.shade }}</span>
-
-                    <div class="flex items-center">
-                      <UTooltip text="Copy Oklch">
-                        <UButton
-                          size="xs"
-                          color="neutral"
-                          square
-                          variant="ghost"
-                          :ui="{ leadingIcon: 'size-3' }"
-                          :icon="copiedShade === info.shade ? 'i-lucide-copy-check' : 'i-lucide-copy'"
-                          :aria-label="`Copy ${info.oklch}`"
-                          @click="copySwatch(info)"
-                        />
-                      </UTooltip>
-
-                      <UTooltip :text="pinnedShade === info.shade ? 'Unpin' : 'Pin open'">
-                        <UButton
-                          size="xs"
-                          color="neutral"
-                          square
-                          variant="ghost"
-                          active-color="primary"
-                          active-variant="ghost"
-                          :active="pinnedShade === info.shade"
-                          :ui="{ leadingIcon: 'size-3' }"
-                          :icon="pinnedShade === info.shade ? 'i-lucide-pin-off' : 'i-lucide-pin'"
-                          :aria-label="pinnedShade === info.shade ? 'Unpin details' : 'Pin details open'"
-                          @click="togglePin(info.shade)"
-                        />
-                      </UTooltip>
-                    </div>
-                  </div>
-                  <span>{{ info.oklch }}</span>
-                  <span class="text-muted">{{ info.hex }} · {{ info.rgb }}</span>
-                </div>
-              </template>
-            </UPopover>
+              type="button"
+              class="aspect-square flex-1"
+              :style="{ backgroundColor: info.oklch }"
+              :aria-label="`Shade ${info.shade}: ${info.oklch}`"
+              :aria-pressed="pinnedShade === info.shade"
+              @click="togglePin(info.shade)"
+              @mouseenter="onSwatchEnter(info.shade)"
+              @mouseleave="onSwatchLeave"
+            />
           </div>
+
+          <UPopover
+            arrow
+            :open="!!activeSwatch"
+            :reference="stripEl"
+            :content="{
+              side: 'top',
+              onEscapeKeyDown: () => onSwatchEscape(swatchDetail.shade),
+              onCloseAutoFocus: onSwatchCloseAutoFocus,
+              sideOffset: 0,
+              // hover-opened popovers must not steal focus; a pinned one
+              // takes it so Tab lands on the copy/pin buttons
+              onOpenAutoFocus: pinnedShade === swatchDetail.shade ? undefined : (event: Event) => event.preventDefault(),
+              // pinning means pinned: clicks elsewhere (curve drags,
+              // sliders) must not dismiss — only Esc, unpin or another pin
+              onInteractOutside: pinnedShade === swatchDetail.shade ? (event: Event) => event.preventDefault() : undefined,
+              onFocusOutside: pinnedShade === swatchDetail.shade ? (event: Event) => event.preventDefault() : undefined
+            }"
+            @update:open="onSwatchOpenUpdate(swatchDetail.shade, $event)"
+          >
+            <template #content>
+              <div
+                class="px-2 py-1.5 text-xs font-mono flex flex-col gap-0.5"
+                @mouseenter="onSwatchEnter(swatchDetail.shade)"
+                @mouseleave="onSwatchLeave"
+              >
+                <div class="flex items-center justify-between gap-3">
+                  <span class="font-semibold">{{ swatchDetail.shade }}</span>
+
+                  <div class="flex items-center">
+                    <UTooltip text="Copy Oklch">
+                      <UButton
+                        size="xs"
+                        color="neutral"
+                        square
+                        variant="ghost"
+                        :ui="{ leadingIcon: 'size-3' }"
+                        :icon="copiedShade === swatchDetail.shade ? 'i-lucide-copy-check' : 'i-lucide-copy'"
+                        :aria-label="`Copy ${swatchDetail.oklch}`"
+                        @click="copySwatch(swatchDetail)"
+                      />
+                    </UTooltip>
+
+                    <UTooltip :text="pinnedShade === swatchDetail.shade ? 'Unpin' : 'Pin open'">
+                      <UButton
+                        size="xs"
+                        color="neutral"
+                        square
+                        variant="ghost"
+                        active-color="primary"
+                        active-variant="ghost"
+                        :active="pinnedShade === swatchDetail.shade"
+                        :ui="{ leadingIcon: 'size-3' }"
+                        :icon="pinnedShade === swatchDetail.shade ? 'i-lucide-pin-off' : 'i-lucide-pin'"
+                        :aria-label="pinnedShade === swatchDetail.shade ? 'Unpin details' : 'Pin details open'"
+                        @click="togglePin(swatchDetail.shade)"
+                      />
+                    </UTooltip>
+                  </div>
+                </div>
+                <span>{{ swatchDetail.oklch }}</span>
+                <span class="text-muted">{{ swatchDetail.hex }} · {{ swatchDetail.rgb }}</span>
+              </div>
+            </template>
+          </UPopover>
         </div>
 
         <!-- Layered modifiers, each recomputed from the fitted base. The

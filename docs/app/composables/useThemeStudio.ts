@@ -274,11 +274,19 @@ export function useThemeStudio() {
    */
   function setPaletteFromCurve(alias: ColorAlias, base: PaletteCurveParams, effects?: PaletteEffects, amount = 100, fine = false) {
     const name = customPaletteName(alias)
+    // The alias only needs pointing once. Live drags call this at ~16Hz; re-
+    // sending it every tick makes applyThemeSettings re-persist the AI-extras
+    // channel (a JSON.stringify + localStorage write) on every frame. Send it
+    // only when it actually changes.
+    const aliasAlreadySet = (appConfig.ui.colors as Record<string, string>)[alias] === name
 
     theme.applyThemeSettings({
       customColors: { [name]: generatePalette(applyPaletteEffects(base, effects, amount), fine) },
-      [alias]: name,
-      ...(alias === 'neutral' ? { cssVariables: unownedNeutralRemaps() } : {})
+      ...(aliasAlreadySet ? {} : { [alias]: name }),
+      // The remaps are var() references, not ramp colours, and are kept in
+      // sync with the shade sliders elsewhere — so they only need (re)sending
+      // when this call first points the alias at the ramp, not every tick.
+      ...(alias === 'neutral' && !aliasAlreadySet ? { cssVariables: unownedNeutralRemaps() } : {})
     }, { track: false })
     const entry: StoredPaletteParams = {
       ...base,
