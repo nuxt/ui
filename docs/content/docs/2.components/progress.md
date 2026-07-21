@@ -23,6 +23,46 @@ props:
 ---
 ::
 
+### Variant
+
+Use the `variant` prop to change the style of the Progress. Defaults to `linear`.
+
+::component-code
+---
+ignore:
+  - class
+external:
+  - modelValue
+props:
+  modelValue: 50
+  variant: circular
+  class: 'justify-center'
+---
+::
+
+::note
+The `circular` variant is rendered as an SVG, so the `track` slot is used for the background circle instead of the `base` background.
+::
+
+### Thickness
+
+Use the `thickness` prop to change the stroke width of the `circular` variant, in pixels. Defaults to `auto`, which derives the thickness from the [`size`](#size) prop.
+
+::component-code
+---
+ignore:
+  - class
+  - variant
+external:
+  - modelValue
+props:
+  modelValue: 50
+  variant: circular
+  thickness: 4
+  class: 'justify-center'
+---
+::
+
 ### Max
 
 Use the `max` prop to set the maximum value of the Progress.
@@ -60,59 +100,70 @@ props:
 ### Status
 
 Use the `status` prop to display the current Progress value above the bar.
+With the `circular` variant, the status is displayed in the center of the circle instead.
 
 ::component-code
 ---
+ignore:
+  - class
 external:
   - modelValue
 props:
   modelValue: 50
+  variant: linear
   status: true
+  class: 'justify-center'
 ---
 ::
 
-### Variant
+Use the `#status` slot to customize the content, it receives the current `percent` value.
 
-WIP
-Use the `variant` prop to change the style of the progress. May be `linear` (default) or `circular`.
-
-::component-code
----
-external:
-  - modelValue
-  - variant
-props:
-  modelValue: 50
-  variant: 'circular'
----
-::
+```vue
+<template>
+  <UProgress v-model="value" variant="circular">
+    <template #status="{ percent }">
+      <span class="text-lg font-semibold text-highlighted">{{ percent }}%</span>
+    </template>
+  </UProgress>
+</template>
+```
 
 ### Indeterminate
 
-When no `v-model` is set or the value is `null`, the Progress becomes _indeterminate_. The progress bar is animated as a `carousel`, but you can change it using the [`animation`](#animation) prop.
+When no `v-model` is set or the value is `null`, the Progress becomes _indeterminate_. The progress bar is animated as a `carousel`, but you can change it using the [`animation`](#animation) prop. \
+The `circular` variant is indeterminate under the same conditions, which makes it suitable as a loading spinner.
 
 ::component-code
 ---
+ignore:
+  - class
 external:
   - modelValue
 props:
   modelValue: null
+  variant: linear
+  class: 'justify-center'
 ---
 ::
 
 ### Animation
 
-Use the `animation` prop to change the animation of the Progress to an inverse carousel, a swinging bar or an elastic bar. Defaults to `carousel`.
+Use the `animation` prop to change the animation of the Progress to an inverse carousel, a swinging bar or an elastic bar. Defaults to `carousel`. \
+Each animation has a `circular` equivalent.
 
 ::component-code
 ---
+ignore:
+  - class
 props:
   animation: swing
+  variant: linear
+  class: 'justify-center'
 ---
 ::
 
 ::tip
-The animation is automatically disabled when the user prefers reduced motion, the indeterminate bar is displayed as a full width pulse instead.
+With the `linear` variant, the animation is automatically disabled when the user prefers reduced motion, the indeterminate bar is displayed as a full width pulse instead.
 ::
 
 ### Orientation
@@ -129,37 +180,50 @@ props:
 ---
 ::
 
+::note
+The `circular` variant is always a circle, so the `orientation` prop only controls the axis along which the [steps](#max) are laid out next to it.
+::
+
 ### Color
 
-Use the `color` prop to change the color of the Slider.
+Use the `color` prop to change the color of the Progress.
 
 ::component-code
 ---
 props:
   color: neutral
+  variant: linear
 ---
 ::
 
 ### Size
 
-Use the `size` prop to change the size of the Slider.
+Use the `size` prop to change the size of the Progress. With the `circular` variant, the `size` prop controls the diameter of the circle and the default stroke width, which you can override with the [`thickness`](#thickness) prop.
 
 ::component-code
 ---
+ignore:
+  - class
 props:
   size: xl
+  variant: linear
+  class: 'justify-center'
 ---
 ::
 
 ### Inverted
 
-Use the `inverted` prop to visually invert the Progress.
+Use the `inverted` prop to visually invert the Progress. With the `circular` variant, this reverses the direction in which the circle is filled.
 
 ::component-code
 ---
+ignore:
+  - class
 props:
   inverted: true
+  variant: linear
   modelValue: 25
+  class: 'justify-center'
 ---
 ::
 

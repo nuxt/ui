@@ -29,7 +29,7 @@ export interface ProgressProps extends Pick<ProgressRootProps, 'getValueLabel' |
    */
   color?: Progress['variants']['color']
   /**
-   * The orientation of the progress bar.
+   * The orientation of the progress bar. When `circular` variant is enabled, controls the axis along which the steps are lait out next to it
    * @defaultValue 'horizontal'
    */
   orientation?: Progress['variants']['orientation']
