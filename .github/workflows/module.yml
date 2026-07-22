@@ -176,11 +176,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Prepare
-        run: pnpx nuxt prepare
+      - name: Build
+        run: pnpm run build
 
       - name: Typecheck
         run: pnpm run typecheck
-
-      - name: Build
-        run: pnpm run build
