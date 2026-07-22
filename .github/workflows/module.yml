@@ -8,6 +8,10 @@ on:
     branches:
       - v4
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.event.number || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build:
     runs-on: ${{ matrix.os }}
@@ -27,6 +31,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v7
+        with:
+          persist-credentials: false
 
       - name: Install pnpm
         uses: pnpm/action-setup@v6
@@ -43,23 +49,22 @@ jobs:
       - name: Prepare
         run: pnpm run dev:prepare
 
-      - name: Lint
-        run: pnpm run lint
-
-      - name: Typecheck
-        run: pnpm run typecheck
-
-      - name: Test
-        run: pnpm run test run
+      - parallel:
+          - name: Lint
+            run: pnpm run lint
+          - name: Typecheck
+            run: pnpm run typecheck
+          - name: Test
+            run: pnpm run test run
 
       - name: Build
         run: pnpm run build
 
-      - name: Build Nuxt playground
-        run: pnpm run dev:build
-
-      - name: Build Vue playground
-        run: pnpm run dev:vue:build
+      - parallel:
+          - name: Build Nuxt playground
+            run: pnpm run dev:build
+          - name: Build Vue playground
+            run: pnpm run dev:vue:build
 
       - name: Publish
         # Only publish preview package on ubuntu, and skip forks of the repo (pkg-pr-new still runs on fork PRs against nuxt/ui)
@@ -91,6 +96,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v7
+        with:
+          persist-credentials: false
 
       - name: Store commit SHA
         run: |
@@ -135,6 +142,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v7
         with:
+          persist-credentials: false
           repository: nuxt-ui-templates/starter
 
       - name: Store commit SHA
@@ -156,11 +164,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Typecheck
-        run: pnpm run typecheck
-
-      - name: Build
-        run: pnpm run build
+      - parallel:
+          - name: Typecheck
+            run: pnpm run typecheck
+          - name: Build
+            run: pnpm run build
 
   starter-vue:
     needs: build
@@ -180,6 +188,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v7
         with:
+          persist-credentials: false
           repository: nuxt-ui-templates/starter-vue
 
       - name: Store commit SHA
@@ -201,11 +210,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Build
-        run: pnpm run build
-
-      - name: Typecheck
-        run: pnpm run typecheck
+      - parallel:
+          - name: Build
+            run: pnpm run build
+          - name: Typecheck
+            run: pnpm run typecheck
 
   landing:
     needs: build
@@ -225,6 +234,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v7
         with:
+          persist-credentials: false
           repository: nuxt-ui-templates/landing
 
       - name: Store commit SHA
@@ -246,11 +256,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Typecheck
-        run: pnpm run typecheck
-
-      - name: Build
-        run: pnpm run build
+      - parallel:
+          - name: Typecheck
+            run: pnpm run typecheck
+          - name: Build
+            run: pnpm run build
 
   docs:
     needs: build
@@ -270,6 +280,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v7
         with:
+          persist-credentials: false
           repository: nuxt-ui-templates/docs
 
       - name: Store commit SHA
@@ -291,11 +302,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Typecheck
-        run: pnpm run typecheck
-
-      - name: Build
-        run: pnpm run build
+      - parallel:
+          - name: Typecheck
+            run: pnpm run typecheck
+          - name: Build
+            run: pnpm run build
 
   saas:
     needs: build
@@ -315,6 +326,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v7
         with:
+          persist-credentials: false
           repository: nuxt-ui-templates/saas
 
       - name: Store commit SHA
@@ -336,11 +348,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Typecheck
-        run: pnpm run typecheck
-
-      - name: Build
-        run: pnpm run build
+      - parallel:
+          - name: Typecheck
+            run: pnpm run typecheck
+          - name: Build
+            run: pnpm run build
 
   dashboard:
     needs: build
@@ -360,6 +372,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v7
         with:
+          persist-credentials: false
           repository: nuxt-ui-templates/dashboard
 
       - name: Store commit SHA
@@ -381,11 +394,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Typecheck
-        run: pnpm run typecheck
-
-      - name: Build
-        run: pnpm run build
+      - parallel:
+          - name: Typecheck
+            run: pnpm run typecheck
+          - name: Build
+            run: pnpm run build
 
   dashboard-vue:
     needs: build
@@ -405,6 +418,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v7
         with:
+          persist-credentials: false
           repository: nuxt-ui-templates/dashboard-vue
 
       - name: Store commit SHA
@@ -426,11 +440,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Build
-        run: pnpm run build
-
-      - name: Typecheck
-        run: pnpm run typecheck
+      - parallel:
+          - name: Build
+            run: pnpm run build
+          - name: Typecheck
+            run: pnpm run typecheck
 
   chat:
     needs: build
@@ -450,6 +464,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v7
         with:
+          persist-credentials: false
           repository: nuxt-ui-templates/chat
 
       - name: Store commit SHA
@@ -471,11 +486,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Typecheck
-        run: pnpm run typecheck
-
-      - name: Build
-        run: pnpm run build
+      - parallel:
+          - name: Typecheck
+            run: pnpm run typecheck
+          - name: Build
+            run: pnpm run build
 
   portfolio:
     needs: build
@@ -495,6 +510,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v7
         with:
+          persist-credentials: false
           repository: nuxt-ui-templates/portfolio
 
       - name: Store commit SHA
@@ -516,11 +532,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Typecheck
-        run: pnpm run typecheck
-
-      - name: Build
-        run: pnpm run build
+      - parallel:
+          - name: Typecheck
+            run: pnpm run typecheck
+          - name: Build
+            run: pnpm run build
 
   changelog:
     needs: build
@@ -540,6 +556,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v7
         with:
+          persist-credentials: false
           repository: nuxt-ui-templates/changelog
 
       - name: Store commit SHA
@@ -561,11 +578,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Typecheck
-        run: pnpm run typecheck
-
-      - name: Build
-        run: pnpm run build
+      - parallel:
+          - name: Typecheck
+            run: pnpm run typecheck
+          - name: Build
+            run: pnpm run build
 
   editor:
     needs: build
@@ -585,6 +602,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v7
         with:
+          persist-credentials: false
           repository: nuxt-ui-templates/editor
 
       - name: Store commit SHA
@@ -606,8 +624,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Typecheck
-        run: pnpm run typecheck
-
-      - name: Build
-        run: pnpm run build
+      - parallel:
+          - name: Typecheck
+            run: pnpm run typecheck
+          - name: Build
+            run: pnpm run build
