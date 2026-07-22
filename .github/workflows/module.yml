@@ -177,7 +177,7 @@ jobs:
         run: pnpm install
 
       - name: Prepare
-        run: pnpm nuxt prepare
+        run: pnpx nuxt prepare
 
       - name: Typecheck
         run: pnpm run typecheck
