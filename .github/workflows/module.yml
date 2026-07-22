@@ -164,11 +164,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - parallel:
-          - name: Typecheck
-            run: pnpm run typecheck
-          - name: Build
-            run: pnpm run build
+      - name: Typecheck
+        run: pnpm run typecheck
+
+      - name: Build
+        run: pnpm run build
 
   starter-vue:
     needs: build
@@ -210,11 +210,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - parallel:
-          - name: Build
-            run: pnpm run build
-          - name: Typecheck
-            run: pnpm run typecheck
+      - name: Build
+        run: pnpm run build
+
+      - name: Typecheck
+        run: pnpm run typecheck
 
   landing:
     needs: build
@@ -256,11 +256,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - parallel:
-          - name: Typecheck
-            run: pnpm run typecheck
-          - name: Build
-            run: pnpm run build
+      - name: Typecheck
+        run: pnpm run typecheck
+
+      - name: Build
+        run: pnpm run build
 
   docs:
     needs: build
@@ -302,11 +302,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - parallel:
-          - name: Typecheck
-            run: pnpm run typecheck
-          - name: Build
-            run: pnpm run build
+      - name: Typecheck
+        run: pnpm run typecheck
+
+      - name: Build
+        run: pnpm run build
 
   saas:
     needs: build
@@ -348,11 +348,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - parallel:
-          - name: Typecheck
-            run: pnpm run typecheck
-          - name: Build
-            run: pnpm run build
+      - name: Typecheck
+        run: pnpm run typecheck
+
+      - name: Build
+        run: pnpm run build
 
   dashboard:
     needs: build
@@ -394,11 +394,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - parallel:
-          - name: Typecheck
-            run: pnpm run typecheck
-          - name: Build
-            run: pnpm run build
+      - name: Typecheck
+        run: pnpm run typecheck
+
+      - name: Build
+        run: pnpm run build
 
   dashboard-vue:
     needs: build
@@ -440,11 +440,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - parallel:
-          - name: Build
-            run: pnpm run build
-          - name: Typecheck
-            run: pnpm run typecheck
+      - name: Build
+        run: pnpm run build
+
+      - name: Typecheck
+        run: pnpm run typecheck
 
   chat:
     needs: build
@@ -486,11 +486,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - parallel:
-          - name: Typecheck
-            run: pnpm run typecheck
-          - name: Build
-            run: pnpm run build
+      - name: Typecheck
+        run: pnpm run typecheck
+
+      - name: Build
+        run: pnpm run build
 
   portfolio:
     needs: build
@@ -532,11 +532,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - parallel:
-          - name: Typecheck
-            run: pnpm run typecheck
-          - name: Build
-            run: pnpm run build
+      - name: Typecheck
+        run: pnpm run typecheck
+
+      - name: Build
+        run: pnpm run build
 
   changelog:
     needs: build
@@ -578,11 +578,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - parallel:
-          - name: Typecheck
-            run: pnpm run typecheck
-          - name: Build
-            run: pnpm run build
+      - name: Typecheck
+        run: pnpm run typecheck
+
+      - name: Build
+        run: pnpm run build
 
   editor:
     needs: build
@@ -624,8 +624,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - parallel:
-          - name: Typecheck
-            run: pnpm run typecheck
-          - name: Build
-            run: pnpm run build
+      - name: Typecheck
+        run: pnpm run typecheck
+
+      - name: Build
+        run: pnpm run build
