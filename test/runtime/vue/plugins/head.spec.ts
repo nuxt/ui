@@ -1,25 +1,20 @@
 import { createApp } from 'vue'
 import { createHead } from '@unhead/vue/client'
-import { injectHead, useHead } from '@unhead/vue'
+import { injectHead } from '@unhead/vue'
 import { describe, it, expect } from 'vitest'
-import headPlugin from '../../../../src/runtime/vue/plugins/head'
+import ui from '@nuxt/ui/vue-plugin'
 
-describe('Vue head plugin', () => {
-  it('installs a working Unhead instance', async () => {
+describe('Vue plugin head integration', () => {
+  it('installs Unhead and renders Nuxt UI colors', async () => {
     const app = createApp({})
 
-    app.use(headPlugin)
+    app.use(ui)
 
     const head = app.runWithContext(() => injectHead())
     expect(head).toBeDefined()
 
-    const entry = app.runWithContext(() => useHead({ title: 'Nuxt UI' }))
-
-    expect(entry).toEqual(expect.objectContaining({
-      patch: expect.any(Function),
-      dispose: expect.any(Function)
-    }))
-    await expect.poll(() => document.title).toBe('Nuxt UI')
+    await expect.poll(() => document.querySelector<HTMLStyleElement>('style#nuxt-ui-colors')?.textContent)
+      .toContain('--ui-primary')
   })
 
   it('preserves an existing Unhead instance', () => {
@@ -27,7 +22,7 @@ describe('Vue head plugin', () => {
     const head = createHead()
 
     app.use(head)
-    app.use(headPlugin)
+    app.use(ui)
 
     expect(app.runWithContext(() => injectHead())).toBe(head)
   })

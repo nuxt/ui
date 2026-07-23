@@ -23,7 +23,8 @@ const unheadTestProjects = unheadProjects.map(([name, unhead]) => ({
   },
   resolve: {
     alias: [{ find: /^@unhead\/vue(?=\/|$)/, replacement: unhead }]
-  }
+  },
+  plugins: [ui({ dts: false })]
 }))
 
 export default defineConfig({
