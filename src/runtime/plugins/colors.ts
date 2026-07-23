@@ -1,6 +1,5 @@
 import { computed } from 'vue'
 import colors from 'tailwindcss/colors'
-import type { UseHeadInput } from '@unhead/vue/types'
 import { defineNuxtPlugin, injectHead, useAppConfig, useNuxtApp, useHead } from '#imports'
 
 const shades = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950] as const
@@ -46,13 +45,13 @@ export default defineNuxtPlugin(() => {
   })
 
   // Head
-  const headData: UseHeadInput = {
+  const headData = {
     style: [{
       innerHTML: root,
       tagPriority: 'critical',
       id: 'nuxt-ui-colors'
     }]
-  }
+  } satisfies Parameters<typeof useHead>[0]
 
   // SPA mode
   if (import.meta.client && nuxtApp.isHydrating && !nuxtApp.payload.serverRendered) {
