@@ -8,6 +8,23 @@ import { glob } from 'tinyglobby'
 const components = await glob('./src/runtime/components/*.vue', { absolute: true })
 const vueComponents = await glob('./src/runtime/vue/components/*.vue', { absolute: true })
 const vueRouterOverrides = await glob('./src/runtime/vue/overrides/vue-router/*.vue', { absolute: true })
+const unheadProjects = [
+  ['unhead-v2', '@unhead/vue-v2'],
+  ['unhead-v3', '@unhead/vue-v3']
+] as const
+
+const unheadTestProjects = unheadProjects.map(([name, unhead]) => ({
+  extends: true as const,
+  test: {
+    name,
+    environment: 'happy-dom',
+    dir: './test',
+    include: ['runtime/vue/plugins/head.spec.ts']
+  },
+  resolve: {
+    alias: [{ find: /^@unhead\/vue(?=\/|$)/, replacement: unhead }]
+  }
+}))
 
 export default defineConfig({
   test: {
@@ -86,7 +103,8 @@ export default defineConfig({
             }
           }
         ]
-      }
+      },
+      ...unheadTestProjects
     ]
   }
 })

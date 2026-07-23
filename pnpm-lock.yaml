@@ -255,6 +255,12 @@ importers:
       '@unhead/vue':
         specifier: ^3.1.8
         version: 3.1.8(@modelcontextprotocol/sdk@1.29.0(zod@4.4.3))(esbuild@0.28.0)(lightningcss@1.32.0)(rollup@4.60.4)(typescript@6.0.3)(vite@7.3.6(@types/node@25.9.0)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.47.1)(yaml@2.9.0))(vue@3.5.39(typescript@6.0.3))
+      '@unhead/vue-v2':
+        specifier: npm:@unhead/vue@2.1.15
+        version: '@unhead/vue@2.1.15(vue@3.5.39(typescript@6.0.3))'
+      '@unhead/vue-v3':
+        specifier: npm:@unhead/vue@3.1.8
+        version: '@unhead/vue@3.1.8(@modelcontextprotocol/sdk@1.29.0(zod@4.4.3))(esbuild@0.28.0)(lightningcss@1.32.0)(rollup@4.60.4)(typescript@6.0.3)(vite@7.3.6(@types/node@25.9.0)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.47.1)(yaml@2.9.0))(vue@3.5.39(typescript@6.0.3))'
       '@vitejs/plugin-vue':
         specifier: ^6.0.7
         version: 6.0.7(vite@7.3.6(@types/node@25.9.0)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.47.1)(yaml@2.9.0))(vue@3.5.39(typescript@6.0.3))

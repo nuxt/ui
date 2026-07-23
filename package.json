@@ -203,6 +203,8 @@
     "@release-it/conventional-changelog": "^11.0.1",
     "@tanstack/table-core": "^8.21.3",
     "@unhead/vue": "^3.1.8",
+    "@unhead/vue-v2": "npm:@unhead/vue@2.1.15",
+    "@unhead/vue-v3": "npm:@unhead/vue@3.1.8",
     "@vitejs/plugin-vue": "^6.0.7",
     "@vue/test-utils": "^2.4.11",
     "ai": "^7.0.26",
