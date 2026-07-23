@@ -13,6 +13,7 @@
     "@nuxt/ui": "workspace:*",
     "@tiptap/extension-emoji": "^3.27.3",
     "@tiptap/extension-text-align": "^3.27.3",
+    "@unhead/vue": "^3.1.8",
     "tailwindcss": "^4.3.2",
     "vue": "^3.5.39",
     "vue-router": "^5.1.0",

@@ -264,6 +264,9 @@
     "@nuxt/content": {
       "optional": true
     },
+    "@unhead/vue": {
+      "optional": true
+    },
     "ai": {
       "optional": true
     },
