@@ -105,6 +105,15 @@ export default defineConfig({
           }
         ]
       },
+      {
+        extends: true,
+        test: {
+          name: 'vite-plugin',
+          environment: 'node',
+          dir: './test',
+          include: ['plugins/**.spec.ts']
+        }
+      },
       ...unheadTestProjects
     ]
   }

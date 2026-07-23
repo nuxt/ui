@@ -23,6 +23,7 @@ import ComponentImportPlugin from './plugins/components'
 import NuxtEnvironmentPlugin from './plugins/nuxt-environment'
 import AutoImportPlugin from './plugins/auto-import'
 import IconsPlugin from './plugins/icons'
+import UnheadPlugin from './plugins/unhead'
 
 import type { TVConfig } from './runtime/types/tv'
 
@@ -114,6 +115,7 @@ export const NuxtUIPlugin = createUnplugin<NuxtUIOptions | undefined>((_options 
     AutoImportPlugin(options, meta),
     tailwind(),
     IconsPlugin(options, appConfig),
+    UnheadPlugin(),
     PluginsPlugin(options),
     TemplatePlugin(options, appConfig),
     AppConfigPlugin(options, appConfig),
