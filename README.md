@@ -74,8 +74,6 @@ Learn more in the [installation guide](https://ui.nuxt.com/docs/getting-started/
 
 ### Vue
 
-Vue projects also need `@unhead/vue` as a direct dependency.
-
 1. Add the Nuxt UI Vite plugin in your `vite.config.ts`:
 
 ```ts [vite.config.ts]
