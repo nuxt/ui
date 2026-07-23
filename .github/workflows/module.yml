@@ -55,6 +55,10 @@ jobs:
       - name: Build
         run: pnpm run build
 
+      - name: Test Unhead peer resolution
+        if: matrix.os == 'ubuntu-latest'
+        run: pnpm run test:unhead
+
       - name: Build Nuxt playground
         run: pnpm run dev:build
 
