@@ -117,7 +117,13 @@ const modelValue = useVModel<InputNumberProps<T, Mod>, 'modelValue', 'update:mod
 const { t } = useLocale()
 const appConfig = useAppConfig() as InputNumber['AppConfig']
 
-const rootProps = useForwardProps(reactivePick(props, 'as', 'stepSnapping', 'formatOptions', 'disableWheelChange', 'invertWheelChange', 'required', 'readonly', 'focusOnChange', 'locale'), emits)
+// `update:modelValue` is normalized in `onUpdate()` instead of being forwarded as-is
+const forwardedEmits = ((event: any, ...args: any[]) => {
+  if (event !== 'update:modelValue') {
+    (emits as any)(event, ...args)
+  }
+}) as typeof emits
+const rootProps = useForwardProps(reactivePick(props, 'as', 'stepSnapping', 'formatOptions', 'disableWheelChange', 'invertWheelChange', 'required', 'readonly', 'focusOnChange', 'locale'), forwardedEmits)
 
 const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, id, color, size: formFieldSize, name, highlight, disabled, ariaAttrs } = useFormField<InputNumberProps<T, Mod>>(_props)
 const { orientation, size: fieldGroupSize } = useFieldGroup<InputNumberProps<T, Mod>>(_props)
@@ -145,9 +151,16 @@ const decrementIcon = computed(() => props.decrementIcon || (props.orientation =
 const inputRef = useTemplateRef('inputRef')
 
 function onUpdate(value: ApplyModifiers<T, Mod> | undefined) {
-  if (props.modelModifiers?.optional) {
-    modelValue.value = value = value ?? undefined
+  // `undefined` covers both a cleared input and unparseable text ("." / "-")
+  if (value === undefined && inputRef.value?.$el?.value) {
+    return // non-empty text = unparseable; the controlled root restores the previous value
   }
+
+  if (props.modelModifiers?.optional) {
+    value = value ?? undefined
+  }
+
+  modelValue.value = value
 
   // @ts-expect-error - 'target' does not exist in type 'EventInit'
   const event = new Event('change', { target: { value } })
