@@ -151,13 +151,13 @@ const decrementIcon = computed(() => props.decrementIcon || (props.orientation =
 const inputRef = useTemplateRef('inputRef')
 
 function onUpdate(value: ApplyModifiers<T, Mod> | undefined) {
-  // `undefined` covers both a cleared input and unparseable text ("." / "-")
-  if (value === undefined && inputRef.value?.$el?.value) {
-    return // non-empty text = unparseable; the controlled root restores the previous value
-  }
+  if (value === undefined) {
+    // `undefined` covers both a cleared input and unparseable text ("." / "-")
+    if (inputRef.value?.$el?.value) {
+      return // non-empty text = unparseable; the controlled root restores the previous value
+    }
 
-  if (props.modelModifiers?.optional) {
-    value = value ?? undefined
+    value = (props.modelModifiers?.optional ? undefined : null) as ApplyModifiers<T, Mod>
   }
 
   modelValue.value = value
