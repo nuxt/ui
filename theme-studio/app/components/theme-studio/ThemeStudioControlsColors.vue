@@ -2,6 +2,7 @@
 import type { ColorAlias } from '../../utils/theme-engine'
 
 const semanticAliases: ColorAlias[] = ['secondary', 'success', 'info', 'warning', 'error']
+const features = useStudioFeatures()
 </script>
 
 <template>
@@ -23,9 +24,10 @@ const semanticAliases: ColorAlias[] = ['secondary', 'success', 'info', 'warning'
       section-key="neutral"
     />
 
-    <USeparator />
+    <USeparator v-if="features.semantic" />
 
     <ThemeStudioSection
+      v-if="features.semantic"
       label="Semantic"
       help-to="/docs/getting-started/theme/design-system"
       :default-open="false"

@@ -18,6 +18,7 @@ const props = defineProps<{
 }>()
 
 const { style, setStyle, rampChip, baselineDoc, isCustomPalette, paletteParams } = useThemeStudio()
+const features = useStudioFeatures()
 
 /** The active preset's own shade choices — what a row reset restores. */
 const baselineShades = computed(() => canonicalTokenShades(baselineDoc.value))
@@ -86,7 +87,7 @@ const sections = TOKEN_SHADE_TARGETS
 <template>
   <ThemeStudioSection :label="title" :help-to="helpTo" :section-key="sectionKey">
     <template #actions>
-      <UTooltip text="Adjust shades">
+      <UTooltip v-if="features.shades" text="Adjust shades">
         <UButton
           icon="i-lucide-settings-2"
           color="neutral"
@@ -99,7 +100,7 @@ const sections = TOKEN_SHADE_TARGETS
           @click="shadeEditor = !shadeEditor"
         />
       </UTooltip>
-      <UTooltip text="Edit palette">
+      <UTooltip v-if="features.palette" text="Edit palette">
         <UButton
           icon="i-lucide-tangent"
           color="neutral"
@@ -117,7 +118,7 @@ const sections = TOKEN_SHADE_TARGETS
     <div>
       <ThemeStudioColorMenu :alias="alias" />
 
-      <ThemeStudioPaletteEditor v-model:open="paletteEditor" :alias="alias" />
+      <ThemeStudioPaletteEditor v-if="features.palette" v-model:open="paletteEditor" :alias="alias" />
 
       <!-- The accent pair for color aliases. -->
       <div v-if="shadeEditor && alias !== 'neutral'" class="flex flex-col gap-1.5 pt-2">

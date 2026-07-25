@@ -229,6 +229,7 @@ const shadowSections = [{
 // independently.
 const shadeEditors = reactive<Record<string, boolean>>({})
 const borderShadeEditor = ref(false)
+const features = useStudioFeatures()
 const isShadeColor = (color?: string) => color === 'shade' || color === 'primary-shade'
 </script>
 
@@ -237,7 +238,7 @@ const isShadeColor = (color?: string) => color === 'shade' || color === 'primary
   <div class="flex flex-col">
     <template v-for="section in shadowSections" :key="section.label">
       <ThemeStudioSection :label="section.label" class="p-4" :section-key="section.dirtyKey">
-        <template v-if="section.model.value === 'custom'" #actions>
+        <template v-if="section.model.value === 'custom' && features.shades" #actions>
           <UTooltip text="Colour & shades">
             <UButton
               icon="i-lucide-settings-2"
@@ -317,7 +318,7 @@ const isShadeColor = (color?: string) => color === 'shade' || color === 'primary
     </template>
 
     <ThemeStudioSection label="Borders" class="p-4" section-key="borders">
-      <template v-if="borderStyle === 'custom'" #actions>
+      <template v-if="borderStyle === 'custom' && features.shades" #actions>
         <UTooltip text="Colour & shades">
           <UButton
             icon="i-lucide-settings-2"

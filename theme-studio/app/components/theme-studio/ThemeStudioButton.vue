@@ -10,23 +10,50 @@ import type { ThemePreset } from '../../utils/theme-engine'
  * entry, which carries the shadow/border machinery the controls drive.
  */
 const props = withDefaults(defineProps<{
+  /**
+   * Who the editor is for. `dev` (the default) exposes the full studio —
+   * palette curves, per-token shades, semantic aliases, import/export.
+   * `user` curates it down to what an end user personalizing a product
+   * needs: presets and plain pickers. Every individual prop below
+   * overrides its mode default.
+   */
+  mode?: 'dev' | 'user'
   /** Show the Presets panel — `false` hides it, an id list restricts it. */
   presets?: boolean | string[]
   /** Extra presets appended after the stock list. */
   customPresets?: ThemePreset[]
   /** Which control panels to offer, in order. */
   sections?: ('colors' | 'general' | 'style')[]
-  /** Offer theme import/export. */
+  /** Offer theme import/export. Mode default: dev on, user off. */
   share?: boolean
   /** Offer the reset-to-stock control. */
   reset?: boolean
+  /** The palette curve editor on each color. Mode default: dev on, user off. */
+  palette?: boolean
+  /** Per-token shade sliders. Mode default: dev on, user off. */
+  shades?: boolean
+  /** The Semantic alias section in Colors. Mode default: dev on, user off. */
+  semantic?: boolean
+  /** Section-header links into the Nuxt UI docs. Off by default — they point at ui.nuxt.com paths. */
+  help?: boolean
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 }>(), {
+  mode: 'dev',
   presets: true,
   sections: () => ['colors', 'general', 'style'],
-  share: true,
-  reset: true
+  reset: true,
+  help: false
 })
+
+const dev = computed(() => props.mode !== 'user')
+const share = computed(() => props.share ?? dev.value)
+
+provideStudioFeatures(() => ({
+  palette: props.palette ?? dev.value,
+  shades: props.shades ?? dev.value,
+  semantic: props.semantic ?? dev.value,
+  help: props.help
+}))
 
 const { resetTheme, hasCSSChanges, hasConfigChanges } = useTheme()
 const studioIcons = useStudioIcons()

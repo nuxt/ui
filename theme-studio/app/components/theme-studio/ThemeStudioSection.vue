@@ -24,6 +24,7 @@ const props = withDefaults(defineProps<{
 })
 
 const { sectionDirty, resetSection } = useThemeStudio()
+const features = useStudioFeatures()
 const dirty = computed(() => (props.sectionKey ? sectionDirty(props.sectionKey).value : false))
 
 const slots = defineSlots<{
@@ -52,7 +53,7 @@ const open = ref(props.defaultOpen)
 
       <UTooltip text="Docs">
         <UButton
-          v-if="helpTo"
+          v-if="helpTo && features.help"
           :to="helpTo"
           size="sm"
           color="neutral"
