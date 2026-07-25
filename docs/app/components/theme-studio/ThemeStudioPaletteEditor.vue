@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useThrottleFn, watchIgnorable } from '@vueuse/core'
-import { SHADES, SHADES_FINE, CURVE_DEFAULTS, NEUTRAL_CURVE_DEFAULTS, PALETTE_EFFECT_DEFAULTS, generatePalette, buildRampSampler, fitPalette, applyPaletteEffects, isDefaultEffects, sampleCurve, shadeX, clampToGamut, formatOklch, parseColor, oklchToRgb, rgbToHex } from '../../utils/theme-engine'
-import type { PaletteCurveParams, PaletteEffects, StoredPaletteParams, PalettePin, Shade, ColorAlias } from '../../utils/theme-engine'
+import { SHADES_ALL, SHADE_STEPS, SHADE_SETS, CURVE_DEFAULTS, NEUTRAL_CURVE_DEFAULTS, PALETTE_EFFECT_DEFAULTS, generatePalette, buildRampSampler, fitPalette, applyPaletteEffects, isDefaultEffects, sampleCurve, shadeX, storedStopStep, detectStopStep, clampToGamut, formatOklch, parseColor, oklchToRgb, rgbToHex } from '../../utils/theme-engine'
+import type { PaletteCurveParams, PaletteEffects, StoredPaletteParams, PalettePin, Shade, ShadeStep, ColorAlias } from '../../utils/theme-engine'
 
 const props = defineProps<{
   alias: ColorAlias
@@ -45,26 +45,41 @@ const stored = paletteParams.value[props.alias]
 const effects = reactive<PaletteEffects>({ ...PALETTE_EFFECT_DEFAULTS, ...(stored?.effects ?? {}) })
 const effectAmount = ref(stored?.amount ?? 100)
 
-// Opt-in to the 100-step midpoints (150…850). Off keeps the standard 11
-// Tailwind stops; on generates 19 and exposes them to the shade sliders.
-const fineStops = ref(stored?.fineStops ?? false)
-const stopSet = computed(() => (fineStops.value ? SHADES_FINE : SHADES))
+// Stop density: 100 is the standard 11 Tailwind stops, finer steps subdivide
+// them into 19, 37 or 91 and expose every one to the shade sliders.
+const stopStep = ref<ShadeStep>(storedStopStep(stored))
+const stopSet = computed(() => SHADE_SETS[stopStep.value])
 
-/** The stop-count dropdown — numeric so USelect never has to bind a falsy value. */
-const stopItems = [
-  { label: '11 stops', value: SHADES.length },
-  { label: '19 stops', value: SHADES_FINE.length }
-]
-const stopCount = computed({
-  get: () => (fineStops.value ? SHADES_FINE.length : SHADES.length),
-  set: value => (fineStops.value = value === SHADES_FINE.length)
-})
+/** The density dropdown — the step itself, so it reads like the shade names. */
+const stopItems = SHADE_STEPS.map(step => ({ label: `${step}`, value: step }))
 
 // Stops locked to an exact colour — the curves bend to pass through them.
 // Keyed edits go through setPin/removePin so the array stays a plain, cloneable
 // value (it's persisted and fed to generatePalette on every apply).
 const pins = ref<PalettePin[]>(stored?.pins ? plainPins(stored.pins) : [])
-const pinnedShades = computed(() => new Set(pins.value.map(pin => pin.shade)))
+// Keyed by shade, valued by the pin's lightness: `has` still answers "pinned?"
+// while the strip's badge reads the lightness to pick a contrasting colour.
+const pinnedShades = computed(() => new Map(pins.value.map(pin => [pin.shade, pin.l])))
+
+// OKLCH L above which a stop reads as light and takes the dark badge (sRGB
+// mid-gray sits at ~0.6). Whole class strings, since tailwind's scanner only
+// sees literals — never build these by concatenation.
+const LIGHT_STOP_L = 0.62
+const PIN_BADGE_CLASS = {
+  text: { onLight: 'text-(--ui-color-neutral-950)', onDark: 'text-(--ui-color-neutral-50)' },
+  bg: { onLight: 'bg-(--ui-color-neutral-950)', onDark: 'bg-(--ui-color-neutral-50)' }
+} as const
+
+/**
+ * The badge colour for a pinned stop — the neutral end that contrasts with the
+ * stop's own colour. A blend mode can't do this: `difference` against white
+ * lands back on the stop's colour at mid lightness (badge vanishes) and inverts
+ * the hue on saturated stops.
+ */
+function pinBadgeClass(shade: number, property: 'text' | 'bg') {
+  const lightness = pinnedShades.value.get(shade as Shade) ?? 0
+  return PIN_BADGE_CLASS[property][lightness > LIGHT_STOP_L ? 'onLight' : 'onDark']
+}
 
 function setPin(shade: number, oklch: string) {
   const parsed = parseColor(oklch)
@@ -96,7 +111,7 @@ const params = reactive<PaletteCurveParams>(applyPaletteEffects(seedBase, effect
 
 const active = computed(() => isCustomPalette(props.alias))
 
-const shades = computed(() => generatePalette(params, fineStops.value, pins.value))
+const shades = computed(() => generatePalette(params, stopStep.value, pins.value))
 const stopColors = computed(() => stopSet.value.map(shade => shades.value[shade]))
 const stopXs = computed(() => stopSet.value.map(shadeX))
 const stopPinned = computed(() => stopSet.value.map(shade => pinnedShades.value.has(shade)))
@@ -124,8 +139,8 @@ const actualCurve = computed(() => {
 
 /**
  * The strip tiles — just shade + live color. Kept deliberately light (no
- * hex/rgb parse) because it recomputes on every drag frame across all 19
- * stops; the costly parse is deferred to the single open swatch below.
+ * hex/rgb parse) because it recomputes on every drag frame across every
+ * stop (up to 91); the costly parse is deferred to the single open swatch.
  */
 const swatches = computed(() => stopSet.value.map(shade => ({ shade, oklch: shades.value[shade]! })))
 
@@ -356,7 +371,7 @@ const isDragging = ref(false)
 const customName = computed(() => `custom-${props.alias}`)
 
 function applyReactive() {
-  setPaletteFromCurve(props.alias, structuredClone(seedBase), { ...effects }, effectAmount.value, fineStops.value, plainPins(pins.value))
+  setPaletteFromCurve(props.alias, structuredClone(seedBase), { ...effects }, effectAmount.value, stopStep.value, plainPins(pins.value))
   clearCssomPreview()
 }
 
@@ -373,10 +388,12 @@ function previewViaCssom() {
   for (const shade of stopSet.value) root.setProperty(`--color-${customName.value}-${shade}`, ramp[shade]!)
 }
 
+// Sweeps every stop any density can emit, not just the current set — the
+// density may have changed since the preview was written.
 function clearCssomPreview() {
   if (!import.meta.client) return
   const root = document.documentElement.style
-  for (const shade of SHADES_FINE) root.removeProperty(`--color-${customName.value}-${shade}`)
+  for (const shade of SHADES_ALL) root.removeProperty(`--color-${customName.value}-${shade}`)
 }
 
 // Throttled (not debounced) so the theme streams live while dragging a
@@ -393,27 +410,28 @@ const throttledApply = useThrottleFn(() => {
   }
 }, 60, true, true)
 
-// Narrowing to 11 stops drops midpoint pins that no longer have a tile (they'd
-// otherwise keep bending the ramp invisibly; their x still lies between
-// standard stops, so it just relaxes back to the curve there). This is a real
-// user toggle, and only reassigns pins when it actually removes one — the
-// combined watcher below covers the fineStops change and the resulting apply.
-watch(fineStops, (fine, previous) => {
-  if (fine || !previous) return
-  const kept = pins.value.filter(pin => SHADES.includes(pin.shade as typeof SHADES[number]))
+// A density change re-tiles the strip, so pins on stops the new set doesn't
+// emit lose their tile — drop them rather than let them keep bending the ramp
+// invisibly (their x still lies between stops, so it relaxes back to the curve
+// there). Note the 25 and 10 sets are siblings, not nested: moving between them
+// drops pins either way. Only reassigns when it actually removes one — the
+// combined watcher below covers the density change and the resulting apply.
+watch(stopStep, (step) => {
+  const stops = SHADE_SETS[step] as readonly number[]
+  const kept = pins.value.filter(pin => stops.includes(pin.shade))
   if (kept.length !== pins.value.length) pins.value = kept
-  // A stuck/hovered midpoint tile is gone once we narrow — drop the popover
-  // state so it can't dangle over a stop that no longer renders.
-  if (stuckShade.value !== undefined && !SHADES.includes(stuckShade.value as typeof SHADES[number])) stuckShade.value = undefined
-  if (hoveredShade.value !== undefined && !SHADES.includes(hoveredShade.value as typeof SHADES[number])) hoveredShade.value = undefined
+  // A stuck/hovered tile can be gone too — drop the popover state so it can't
+  // dangle over a stop that no longer renders.
+  if (stuckShade.value !== undefined && !stops.includes(stuckShade.value)) stuckShade.value = undefined
+  if (hoveredShade.value !== undefined && !stops.includes(hoveredShade.value)) hoveredShade.value = undefined
 })
 
-// params, pins and fineStops all reshape the ramp, so any of them changing
+// params, pins and the density all reshape the ramp, so any of them changing
 // re-applies. Programmatic writes (seeding, external sync — e.g. an undo/redo
 // restore) wrap ALL of these in ignoreUpdates so restoring state never fires a
 // spurious apply that regenerates and clobbers it; only genuine user edits
 // reach throttledApply.
-const { ignoreUpdates } = watchIgnorable([() => params, pins, fineStops], () => {
+const { ignoreUpdates } = watchIgnorable([() => params, pins, stopStep], () => {
   throttledApply()
 }, { deep: true })
 
@@ -427,8 +445,8 @@ function seed(values: PaletteCurveParams) {
   ignoreUpdates(() => {
     Object.assign(effects, PALETTE_EFFECT_DEFAULTS)
     effectAmount.value = 100
-    // A fresh fit is 11-stop; seedFromCurrent re-detects midpoints after.
-    fineStops.value = false
+    // A fresh fit is 11-stop; seedFromCurrent re-detects the density after.
+    stopStep.value = 100
     // Fresh curves own no pins — a reseed starts from the raw ramp.
     pins.value = []
     Object.assign(params, next)
@@ -494,10 +512,11 @@ function seedFromCurrent() {
   const source = paletteShades(name)
   if (source) {
     seed(fitPalette(source))
-    // A ramp that already carries midpoints (an imported fine palette) keeps
-    // them, so opening the editor doesn't silently narrow it back to 11.
-    // Ignored like the rest of the seed — following a palette must not apply.
-    if (source[150] !== undefined) ignoreUpdates(() => (fineStops.value = true))
+    // A ramp that already carries a finer density keeps it, so opening the
+    // editor doesn't silently narrow it back to 11. Ignored like the rest of
+    // the seed — following a palette must not apply.
+    const step = detectStopStep(source)
+    if (step !== 100) ignoreUpdates(() => (stopStep.value = step))
   }
 }
 
@@ -508,13 +527,13 @@ watch(() => paletteParams.value[props.alias], (value) => {
   if (!value || !('lightness' in value)) return
   // Echo guard: skip only when curves AND pins AND stop density all already
   // match. Comparing curves alone would swallow an external change that moved
-  // just a pin or toggled fine stops (undo/redo of a pin-only edit), leaving
+  // just a pin or changed the density (undo/redo of a pin-only edit), leaving
   // the editor showing stale pins over correct curves.
   const effective = applyPaletteEffects(pickCurves(value), value.effects, value.amount)
   const curvesMatch = JSON.stringify(effective) === JSON.stringify(toRaw(params))
   const pinsMatch = JSON.stringify(value.pins ?? []) === JSON.stringify(toRaw(pins.value))
-  const fineMatch = (value.fineStops ?? false) === fineStops.value
-  if (curvesMatch && pinsMatch && fineMatch) return
+  const stepMatch = storedStopStep(value) === stopStep.value
+  if (curvesMatch && pinsMatch && stepMatch) return
 
   seedBase = pickCurves(value)
   normalizeHue(seedBase)
@@ -525,7 +544,7 @@ watch(() => paletteParams.value[props.alias], (value) => {
     Object.assign(effects, PALETTE_EFFECT_DEFAULTS, value.effects ?? {})
     effectAmount.value = value.amount ?? 100
     pins.value = value.pins ? plainPins(value.pins) : []
-    fineStops.value = value.fineStops ?? false
+    stopStep.value = storedStopStep(value)
     Object.assign(params, applyPaletteEffects(seedBase, effects, effectAmount.value))
   })
   // A restored curve can cross the hue seam elsewhere — refit the window too.
@@ -604,14 +623,17 @@ function resetEffects() {
 
           <!-- Plain tiles recolor live every frame (cheap); a single popover,
                anchored to the strip and driven by the active swatch, carries
-               the details — 1 Reka instance instead of 19. A pin badge (blended
-               so it shows on any colour) marks stops locked to an exact value. -->
-          <div ref="stripRef" class="flex rounded-b-sm overflow-hidden ring ring-default">
+               the details — 1 Reka instance instead of one per stop. A pin
+               badge, in whichever neutral end contrasts with the stop, marks
+               stops locked to an exact value. The strip keeps the height it has
+               at 11 stops (hence the 11:1 ratio rather than square tiles), so a
+               denser ramp only makes the tiles narrower. -->
+          <div ref="stripRef" class="flex aspect-11/1 rounded-b-sm overflow-hidden ring ring-default">
             <button
               v-for="info in swatches"
               :key="info.shade"
               type="button"
-              class="relative aspect-square flex-1"
+              class="relative flex-1"
               :style="{ backgroundColor: info.oklch }"
               :aria-label="`Shade ${info.shade}: ${info.oklch}`"
               :aria-pressed="stuckShade === info.shade"
@@ -619,11 +641,21 @@ function resetEffects() {
               @mouseenter="onSwatchEnter(info.shade)"
               @mouseleave="onSwatchLeave"
             >
-              <UIcon
-                v-if="pinnedShades.has(info.shade)"
-                name="i-lucide-pin"
-                class="absolute inset-0 m-auto size-2.5 text-white mix-blend-difference pointer-events-none"
-              />
+              <!-- Past 19 stops a tile is narrower than the icon, so the badge
+                   becomes a full-height hairline instead. -->
+              <template v-if="pinnedShades.has(info.shade)">
+                <UIcon
+                  v-if="stopStep >= 50"
+                  name="i-lucide-pin"
+                  class="absolute inset-0 m-auto size-2.5 pointer-events-none"
+                  :class="pinBadgeClass(info.shade, 'text')"
+                />
+                <span
+                  v-else
+                  class="absolute inset-0 mx-auto w-px pointer-events-none"
+                  :class="pinBadgeClass(info.shade, 'bg')"
+                />
+              </template>
             </button>
           </div>
 
@@ -752,17 +784,16 @@ function resetEffects() {
               block
               class="flex-1 justify-start"
             />
-            <!-- Stop-count picker rides the Modifiers row so it never
-                 overlaps the curve handles or swatches above. Its own click
-                 must not toggle the fold. -->
-            <UTooltip text="Shade stops">
+            <!-- Density picker rides the Modifiers row so it never overlaps
+                 the curve handles or swatches above. Its own click must not
+                 toggle the fold. -->
+            <UTooltip text="Shade interval">
               <USelect
-                v-model="stopCount"
+                v-model="stopStep"
                 :items="stopItems"
                 size="sm"
                 variant="ghost"
                 class="shrink-0"
-
                 @click.stop
               />
             </UTooltip>

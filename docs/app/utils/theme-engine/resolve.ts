@@ -58,12 +58,12 @@ export const LIBRARY_TOKEN_DEFAULTS = {
   }
 } as const
 
-// Standard stops ride the `--ui-color-<alias>-<shade>` indirection; the
-// 100-step midpoints (150…850) have none — the runtime colours plugin only
-// generates the 11 standard stops — so shadeRef emits them against the custom
-// ramp's `--color-custom-<alias>-<mid>` variable instead. Both forms name the
-// same ramp in the same capture position, so a single alternation parses both
-// and midpoints promote back to governed shades exactly like standard stops.
+// Standard stops ride the `--ui-color-<alias>-<shade>` indirection; the stops
+// between them have none — the runtime colours plugin only generates the 11
+// standard stops — so shadeRef emits them against the custom ramp's
+// `--color-custom-<alias>-<stop>` variable instead. Both forms name the same
+// ramp in the same capture position, so a single alternation parses both and
+// in-between stops promote back to governed shades like standard ones.
 const UI_COLOR_RE = /^var\(--(?:ui-color|color-custom)-([a-z]+)-(\d{2,3})\)$/
 
 /**

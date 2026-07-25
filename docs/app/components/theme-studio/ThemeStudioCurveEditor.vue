@@ -10,8 +10,8 @@ const props = defineProps<{
   stopColors?: string[]
   /**
    * Curve x-position (0–1) for each stop, aligned with `stopColors`. Omit for
-   * the standard 11 stops (evenly ranked); a fine ramp passes 19 with the
-   * midpoints at their true positions (150 → 0.15, not an even 19th).
+   * the standard 11 stops (evenly ranked); a denser ramp passes its stops at
+   * their true positions (150 → 0.15, not an even 19th).
    */
   stopXs?: number[]
   /** Which stops are pinned to an exact colour, aligned with `stopXs`. */
@@ -163,6 +163,10 @@ const stops = computed(() => stopXs.value.map((x, index) => {
     pinned: props.stopPinned?.[index] ?? false
   }
 }))
+
+// Dots track the stop spacing, or a dense ramp draws them as one fat band.
+// Capped at the radius the standard 11 stops have always used.
+const stopRadius = computed(() => Math.min(2.25, Math.max(0.9, (W - 2 * PAD) / (stops.value.length * 2.4))))
 
 const svgRef = ref<SVGSVGElement>()
 const dragging = ref<'y0' | 'y1' | 'p1' | 'p2' | null>(null)
@@ -319,7 +323,7 @@ onUnmounted(() => {
           v-if="stop.pinned"
           :cx="stop.cx"
           :cy="stop.cy"
-          r="4"
+          :r="stopRadius + 1.75"
           fill="none"
           class="stroke-(--ui-primary)"
           stroke-width="1.25"
@@ -327,7 +331,7 @@ onUnmounted(() => {
         <circle
           :cx="stop.cx"
           :cy="stop.cy"
-          :r="stop.pinned ? 2.5 : 2.25"
+          :r="stop.pinned ? stopRadius + 0.25 : stopRadius"
           :fill="stop.fill"
           class="stroke-(--ui-bg)"
           stroke-width="0.5"

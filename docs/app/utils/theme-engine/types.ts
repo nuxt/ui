@@ -3,27 +3,53 @@ import { isDefaultStyle } from './styles'
 export const SHADES = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950] as const
 
 /**
- * The optional "fine" ramp: the standard stops plus the 100-step midpoints
- * (150…850). A palette opts in via its `fineStops` flag; generation and the
- * shade sliders then span these 19 stops. `Shade` is the union of the fine
- * set, so every fine stop is a valid shade — the standard 11 are a subset,
- * and a non-fine palette simply never emits the extras.
+ * Every stop any density can emit: the 10-step ladder plus the odd 25-step
+ * quarters (75, 125…). `Shade` is that whole union, so each density's set is a
+ * subset of it and a stop stays a valid shade whichever density produced it.
  */
-export const SHADES_FINE = [50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700, 750, 800, 850, 900, 950] as const
+export const SHADES_ALL = [50, 60, 70, 75, 80, 90, 100, 110, 120, 125, 130, 140, 150, 160, 170, 175, 180, 190, 200, 210, 220, 225, 230, 240, 250, 260, 270, 275, 280, 290, 300, 310, 320, 325, 330, 340, 350, 360, 370, 375, 380, 390, 400, 410, 420, 425, 430, 440, 450, 460, 470, 475, 480, 490, 500, 510, 520, 525, 530, 540, 550, 560, 570, 575, 580, 590, 600, 610, 620, 625, 630, 640, 650, 660, 670, 675, 680, 690, 700, 710, 720, 725, 730, 740, 750, 760, 770, 775, 780, 790, 800, 810, 820, 825, 830, 840, 850, 860, 870, 875, 880, 890, 900, 910, 920, 925, 930, 940, 950] as const
 
-export type Shade = typeof SHADES_FINE[number]
+export type Shade = typeof SHADES_ALL[number]
 
 /**
- * The shade sliders' full travel: the ramp plus literal white/black ends.
- * The ends matter because several stock defaults are literals the ramp
+ * Stop density, as the gap between stops. A palette carries one in its
+ * `stopStep`; generation and the shade sliders then span that set. Ordered
+ * coarse → fine, which `detectStopStep` reads back in order.
+ */
+export const SHADE_STEPS = [100, 50, 25, 10] as const
+
+export type ShadeStep = typeof SHADE_STEPS[number]
+
+/** The stops each density emits: 11, 19, 37 and 91. */
+export const SHADE_SETS: Record<ShadeStep, readonly Shade[]> = {
+  // The standard ramp is the only irregular one — 50 and 950 are half-steps
+  // at the ends. Every finer density is just the multiples of its step, which
+  // already include both ends.
+  100: SHADES,
+  50: SHADES_ALL.filter(shade => shade % 50 === 0),
+  25: SHADES_ALL.filter(shade => shade % 25 === 0),
+  10: SHADES_ALL.filter(shade => shade % 10 === 0)
+}
+
+export type ShadeStop = 'white' | Shade | 'black'
+
+/**
+ * The shade sliders' full travel: a density's stops plus literal white/black
+ * ends. The ends matter because several stock defaults are literals the ramp
  * can't express (--ui-bg is `white`, the stock dark shadow is `black`) —
  * without them the sliders could only pin lookalike ramp overrides.
- * `SHADE_LADDER_FINE` is the same with the midpoints, for fine-stops ramps.
  */
-export const SHADE_LADDER = ['white', ...SHADES, 'black'] as const
-export const SHADE_LADDER_FINE = ['white', ...SHADES_FINE, 'black'] as const
+const ladder = (step: ShadeStep): readonly ShadeStop[] => ['white', ...SHADE_SETS[step], 'black']
 
-export type ShadeStop = typeof SHADE_LADDER_FINE[number]
+export const SHADE_LADDERS: Record<ShadeStep, readonly ShadeStop[]> = {
+  100: ladder(100),
+  50: ladder(50),
+  25: ladder(25),
+  10: ladder(10)
+}
+
+/** The standard ladder — what stock ramps (and plain rows) travel. */
+export const SHADE_LADDER = SHADE_LADDERS[100]
 
 export type ColorAlias = 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'error' | 'neutral'
 

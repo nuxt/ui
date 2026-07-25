@@ -1,5 +1,5 @@
-import type { Shade } from './types'
-import { SHADES, SHADES_FINE } from './types'
+import type { Shade, ShadeStep } from './types'
+import { SHADES, SHADE_SETS, SHADE_STEPS } from './types'
 import { clampToGamut, formatOklch, parseColor } from './oklch'
 import type { Oklch } from './oklch'
 
@@ -77,8 +77,33 @@ export interface PalettePin {
   h: number
 }
 
-/** A persisted palette: the base curves plus the modifier lens over them. */
-export type StoredPaletteParams = PaletteCurveParams & { effects?: PaletteEffects, amount?: number, fineStops?: boolean, pins?: PalettePin[] }
+/**
+ * A persisted palette: the base curves plus the modifier lens over them.
+ * `fineStops` predates the density model — it's read (never written) so
+ * palettes saved before it keep their 19 stops.
+ */
+export type StoredPaletteParams = PaletteCurveParams & { effects?: PaletteEffects, amount?: number, stopStep?: ShadeStep, fineStops?: boolean, pins?: PalettePin[] }
+
+/** The density a persisted palette generates at. */
+export function storedStopStep(stored?: { stopStep?: ShadeStep, fineStops?: boolean }): ShadeStep {
+  return stored?.stopStep ?? (stored?.fineStops ? 50 : 100)
+}
+
+/**
+ * The density a ramp was generated at, read back from the stops it carries:
+ * the coarsest set that covers every stop present. A ramp mixing stops no
+ * single density emits (a hand-edited import) falls to the finest set, which
+ * covers the most of it.
+ */
+export function detectStopStep(shades: Partial<Record<Shade, string>>): ShadeStep {
+  const present = Object.keys(shades).map(Number) as Shade[]
+  return SHADE_STEPS.find(step => present.every(shade => SHADE_SETS[step].includes(shade))) ?? 10
+}
+
+/** The stop closest to a value — where an orphaned shade reference lands. */
+export function nearestShade(value: number, stops: readonly Shade[]): Shade {
+  return stops.reduce((best, stop) => Math.abs(stop - value) < Math.abs(best - value) ? stop : best)
+}
 
 // Width (in ramp x, 0–1) of each pin's influence. A pinned stop is hit exactly;
 // neighbours bend smoothly toward it and the effect decays to ~0 by ~2σ away.
@@ -309,7 +334,7 @@ export function buildRampSampler(params: PaletteCurveParams, pins: PalettePin[] 
   }
 }
 
-export function generatePalette(params: PaletteCurveParams, fine = false, pins: PalettePin[] = []): Record<Shade, string> {
+export function generatePalette(params: PaletteCurveParams, step: ShadeStep = 100, pins: PalettePin[] = []): Record<Shade, string> {
   const result = {} as Record<Shade, string>
 
   const base = (x: number) => ({
@@ -321,7 +346,7 @@ export function generatePalette(params: PaletteCurveParams, fine = false, pins: 
   // pinned stop lands on its target exactly whenever that target is in gamut.
   const correct = pins.length ? pinField(pins, base) : undefined
 
-  for (const shade of fine ? SHADES_FINE : SHADES) {
+  for (const shade of SHADE_SETS[step]) {
     const x = shadeX(shade)
     const b = base(x)
     const d = correct ? correct(x) : { dl: 0, dc: 0, dh: 0 }

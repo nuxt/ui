@@ -1,7 +1,7 @@
 import colors from 'tailwindcss/colors'
 import { THEME_STATE_KEYS, THEME_STORAGE_KEYS } from '../utils/theme-keys'
-import { presets, docToSettings, isDefaultTheme, generatePalette, applyPaletteEffects, isDefaultEffects, parseCssColor, styleComponents, styleTokens, sectionFingerprint, mergeSection, canonicalTokenShades, TOKEN_SHADE_TARGETS, SECTION_GROUPS, DEFAULT_COLORS, SHADES_FINE } from '../utils/theme-engine'
-import type { SectionKey, ThemeDoc, ThemePreset, PaletteCurveParams, PaletteEffects, StoredPaletteParams, PalettePin, StyleOptions, Shade, ShadeStop, ColorAlias, TokenRamp } from '../utils/theme-engine'
+import { presets, docToSettings, isDefaultTheme, generatePalette, applyPaletteEffects, isDefaultEffects, parseCssColor, styleComponents, styleTokens, sectionFingerprint, mergeSection, canonicalTokenShades, storedStopStep, nearestShade, TOKEN_SHADE_TARGETS, SECTION_GROUPS, DEFAULT_COLORS, SHADES, SHADES_ALL, SHADE_SETS } from '../utils/theme-engine'
+import type { SectionKey, ThemeDoc, ThemePreset, PaletteCurveParams, PaletteEffects, StoredPaletteParams, PalettePin, StyleOptions, Shade, ShadeStep, ShadeStop, ColorAlias, TokenRamp } from '../utils/theme-engine'
 import { readLocalStorage } from '../utils/theme'
 
 export function useThemeStudio() {
@@ -93,7 +93,7 @@ export function useThemeStudio() {
           { lightness: entry.lightness, chroma: entry.chroma, hue: entry.hue },
           entry.effects,
           entry.amount
-        ), entry.fineStops, entry.pins)
+        ), storedStopStep(entry), entry.pins)
         const name = customPaletteName(alias)
         // The alias mapping and neutral remaps usually survive the reload
         // intact — only the derived ramp (customColors) loses its restore
@@ -168,19 +168,19 @@ export function useThemeStudio() {
 
   /**
    * Every defined shade of a named palette as oklch — tailwind's JS values
-   * first, CSS variables as fallback. Sampled across the fine stop set so an
-   * imported ramp that carries midpoints (150–850) is read whole; a standard
-   * 11-stop ramp simply has no midpoint vars and those drop out. The editor
-   * uses the midpoints' presence to re-detect fine stops on seed.
+   * first, CSS variables as fallback. Sampled across every stop any density
+   * can emit, so a ramp generated at a finer density is read whole; a standard
+   * 11-stop ramp simply has no in-between vars and those drop out. The editor
+   * reads the density back from which stops came through.
    */
   function paletteShades(name: string): Partial<Record<Shade, string>> | undefined {
     const tailwind = (colors as Record<string, any>)[name]
     if (tailwind && typeof tailwind === 'object') {
-      // A stock tailwind ramp has only the 11 standard stops — its midpoints
-      // (150…850) are undefined, and parseCssColor would throw on those. Skip
-      // absent shades so a fine-set sweep degrades cleanly to the 11 present.
+      // A stock tailwind ramp has only the 11 standard stops — the rest are
+      // undefined, and parseCssColor would throw on those. Skip absent shades
+      // so a full sweep degrades cleanly to the 11 present.
       return Object.fromEntries(
-        SHADES_FINE
+        SHADES_ALL
           .filter(shade => tailwind[shade] != null)
           .map(shade => [shade, parseCssColor(tailwind[shade])])
           .filter(([, color]) => color)
@@ -190,7 +190,7 @@ export function useThemeStudio() {
     if (import.meta.client) {
       const styles = getComputedStyle(document.documentElement)
       const cssName = name === 'neutral' ? 'old-neutral' : name
-      const entries = SHADES_FINE
+      const entries = SHADES_ALL
         .map(shade => [shade, parseCssColor(styles.getPropertyValue(`--color-${cssName}-${shade}`))] as const)
         .filter(([, color]) => color)
       if (entries.length >= 2) {
@@ -256,12 +256,17 @@ export function useThemeStudio() {
     }
   }
 
+  /** The stops a ramp actually emits — its density when custom, else the standard 11. */
+  function rampStops(ramp?: string): readonly Shade[] {
+    return ramp && isCustomPalette(ramp) ? SHADE_SETS[storedStopStep(paletteParams.value[ramp])] : SHADES
+  }
+
   /**
-   * A token shade pinned to a midpoint (150…850) only resolves while its ramp
-   * is a fine-stops custom palette — that's the only thing defining
-   * `--color-custom-<ramp>-<mid>`. When a ramp narrows to 11 stops, or is
-   * cleared / switched to a stock colour, that variable disappears, so snap any
-   * now-orphaned midpoint token back to the nearest standard stop rather than
+   * A token shade pinned to an in-between stop only resolves while its ramp is
+   * a custom palette generating that stop — that's the only thing defining
+   * `--color-custom-<ramp>-<stop>`. When a ramp changes density, or is cleared
+   * / switched to a stock colour, that variable disappears, so snap any
+   * now-orphaned token to the nearest stop the ramp does emit rather than
    * leaving a dangling reference (which renders transparent).
    */
   function sanitizeTokenShades() {
@@ -270,14 +275,13 @@ export function useThemeStudio() {
     let changed = false
     const next: NonNullable<StyleOptions['tokenShades']> = {}
     for (const [token, modes] of Object.entries(shades)) {
-      const ramp = TOKEN_SHADE_TARGETS.find(target => target.token === token)?.ramp
-      const rampFine = !!ramp && isCustomPalette(ramp) && !!paletteParams.value[ramp]?.fineStops
+      const stops = rampStops(TOKEN_SHADE_TARGETS.find(target => target.token === token)?.ramp)
       const fixed: { light?: ShadeStop, dark?: ShadeStop } = {}
       for (const mode of ['light', 'dark'] as const) {
         const value = modes[mode]
         if (value === undefined) continue
-        if (!rampFine && typeof value === 'number' && value % 100 === 50 && value > 100 && value < 900) {
-          fixed[mode] = (Math.round(value / 100) * 100) as ShadeStop
+        if (typeof value === 'number' && !stops.includes(value)) {
+          fixed[mode] = nearestShade(value, stops)
           changed = true
         } else {
           fixed[mode] = value
@@ -293,7 +297,7 @@ export function useThemeStudio() {
    * modifier lens persist separately, so a reload restores the editor's
    * sliders instead of silently baking them into the curves.
    */
-  function setPaletteFromCurve(alias: ColorAlias, base: PaletteCurveParams, effects?: PaletteEffects, amount = 100, fine = false, pins: PalettePin[] = []) {
+  function setPaletteFromCurve(alias: ColorAlias, base: PaletteCurveParams, effects?: PaletteEffects, amount = 100, step: ShadeStep = 100, pins: PalettePin[] = []) {
     const name = customPaletteName(alias)
     // The alias only needs pointing once. Live drags call this at ~16Hz; re-
     // sending it every tick makes applyThemeSettings re-persist the AI-extras
@@ -302,7 +306,7 @@ export function useThemeStudio() {
     const aliasAlreadySet = (appConfig.ui.colors as Record<string, string>)[alias] === name
 
     theme.applyThemeSettings({
-      customColors: { [name]: generatePalette(applyPaletteEffects(base, effects, amount), fine, pins) },
+      customColors: { [name]: generatePalette(applyPaletteEffects(base, effects, amount), step, pins) },
       ...(aliasAlreadySet ? {} : { [alias]: name }),
       // The remaps are var() references, not ramp colours, and are kept in
       // sync with the shade sliders elsewhere — so they only need (re)sending
@@ -312,13 +316,14 @@ export function useThemeStudio() {
     const entry: StoredPaletteParams = {
       ...base,
       ...(isDefaultEffects(effects, amount) ? {} : { effects, amount }),
-      ...(fine ? { fineStops: true } : {}),
+      ...(step !== 100 ? { stopStep: step } : {}),
       ...(pins.length ? { pins } : {})
     }
     setPaletteParams({ ...paletteParams.value, [alias]: entry })
 
-    // Narrowing to 11 stops orphans any midpoint token pinned to this ramp.
-    if (!fine) sanitizeTokenShades()
+    // A coarser density orphans any token pinned to a stop it no longer emits.
+    // Only writes when something actually moved, so the drag path is a no-op.
+    sanitizeTokenShades()
 
     // Live drags call this at ~16Hz — one analytics event per burst is plenty.
     trackThrottled('Theme Custom Palette', { alias })
@@ -344,7 +349,7 @@ export function useThemeStudio() {
     const { [alias]: _, ...rest } = paletteParams.value
     setPaletteParams(rest)
 
-    // A stock ramp has no midpoints — snap any token that was pinned to one.
+    // A stock ramp emits only the standard 11 — snap any token off the rest.
     sanitizeTokenShades()
   }
 

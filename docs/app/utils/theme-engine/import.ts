@@ -1,5 +1,5 @@
 import type { ThemeDoc, Shade } from './types'
-import { SHADES_FINE, DEFAULT_COLORS } from './types'
+import { SHADES_ALL, DEFAULT_COLORS } from './types'
 import type { StyleOptions, DefaultVariant, DefaultSize, DefaultColor, VariantGroup } from './styles'
 import {
   styleComponents,
@@ -27,7 +27,7 @@ export interface ThemeImportResult {
   skipped: string[]
 }
 
-const SHADE_SET = new Set<number>(SHADES_FINE)
+const SHADE_SET = new Set<number>(SHADES_ALL)
 
 /* ---------------------------------------------------------------- CSS -- */
 

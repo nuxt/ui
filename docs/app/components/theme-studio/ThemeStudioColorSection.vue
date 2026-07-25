@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { TOKEN_SHADE_TARGETS, TOKEN_GROUPS, SHADE_LADDER, SHADE_LADDER_FINE, canonicalTokenShades } from '../../utils/theme-engine'
+import { TOKEN_SHADE_TARGETS, TOKEN_GROUPS, SHADE_LADDER, SHADE_LADDERS, storedStopStep, canonicalTokenShades } from '../../utils/theme-engine'
 import type { ColorAlias, SectionKey, ShadeStop } from '../../utils/theme-engine'
 
 /**
@@ -22,11 +22,11 @@ const { style, setStyle, rampChip, baselineDoc, isCustomPalette, paletteParams }
 /** The active preset's own shade choices — what a row reset restores. */
 const baselineShades = computed(() => canonicalTokenShades(baselineDoc.value))
 
-// When this alias is a fine-stops custom palette, its tokens can pick the
-// 100-step midpoints too — the sliders (and their model mapping) span the
-// wider ladder. Stock ramps have no midpoints, so they stay on the standard 11.
-const shadeLadder = computed<readonly ShadeStop[]>(() => (isCustomPalette(props.alias) && paletteParams.value[props.alias]?.fineStops
-  ? SHADE_LADDER_FINE
+// A custom palette's tokens can pick every stop its density emits — the
+// sliders (and their model mapping) span that ladder, up to 91 stops. Stock
+// ramps only define the standard 11, so they stay on the short ladder.
+const shadeLadder = computed<readonly ShadeStop[]>(() => (isCustomPalette(props.alias)
+  ? SHADE_LADDERS[storedStopStep(paletteParams.value[props.alias])]
   : SHADE_LADDER))
 
 const title = computed(() => props.label ?? capitalize(props.alias))
@@ -45,8 +45,8 @@ function tokenShadeControl(token: string, defaults: { light: ShadeStop, dark: Sh
   const model = computed({
     get: () => {
       const value = style.value.tokenShades?.[token]?.[target] ?? defaults[target]
-      // A midpoint set while fine, then narrowed back, no longer sits on the
-      // ladder (indexOf -1) — clamp to 0 so the slider stays grabbable.
+      // A stop chosen at a finer density, then coarsened away, no longer sits
+      // on the ladder (indexOf -1) — clamp to 0 so the slider stays grabbable.
       return Math.max(0, shadeLadder.value.indexOf(value as ShadeStop))
     },
     set: (index: number) => {

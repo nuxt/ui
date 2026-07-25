@@ -26,6 +26,7 @@
  *   each element's own ring color / the dark shadow color untouched.
  */
 import type { ShadeStop } from './types'
+import { SHADES } from './types'
 
 export type ShadowStyle = 'none' | 'flat' | 'soft' | 'hard'
 /** 'bold'/'frame' are legacy values (old exports/saved state) treated as 'custom'. */
@@ -215,16 +216,16 @@ const SOFT_LG = 'shadow-lg shadow-(color:--ui-shadow-final-soft)'
 /**
  * A ramp shade reference — or the literal when the stop is white/black.
  * Standard stops go through the `--ui-color-<ramp>-<stop>` indirection so a
- * token follows whatever colour the ramp is assigned. The 100-step midpoints
- * (150…850) have NO such indirection — the runtime colours plugin only
- * generates the 11 standard stops — so they reference the custom ramp's
- * `--color-*` directly. That's sound because a midpoint can only exist on a
- * fine-stops custom palette (named `custom-<ramp>`), whose `@theme static`
- * block defines those variables in both the preview and the export.
+ * token follows whatever colour the ramp is assigned. Stops between them (any
+ * density finer than 100) have NO such indirection — the runtime colours
+ * plugin only generates the 11 standard stops — so they reference the custom
+ * ramp's `--color-*` directly. That's sound because an in-between stop can
+ * only exist on a custom palette (named `custom-<ramp>`), whose `@theme
+ * static` block defines those variables in both the preview and the export.
  */
 function shadeRef(ramp: string, stop: ShadeStop | number): string {
   if (stop === 'white' || stop === 'black') return stop
-  if (typeof stop === 'number' && stop % 100 === 50 && stop > 100 && stop < 900) {
+  if (typeof stop === 'number' && !(SHADES as readonly number[]).includes(stop)) {
     return `var(--color-custom-${ramp}-${stop})`
   }
   return `var(--ui-color-${ramp}-${stop})`
