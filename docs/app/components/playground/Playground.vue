@@ -82,9 +82,10 @@ const visibleTiles = computed(() => tiles.slice(0, REVEAL_COUNTS[lanes.value - 1
       estimateSize: 360,
       paddingStart: 24,
       paddingEnd: 24,
+      overscan: 0,
       getItemKey: (index: number) => visibleTiles[index]!.name
     }"
-    class="h-full px-4 sm:px-6"
+    class="playground-grid h-full px-4 sm:px-6"
   >
     <template #default="{ item }">
       <PlaygroundCard>

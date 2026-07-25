@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useThrottleFn, watchIgnorable } from '@vueuse/core'
-import { SHADES, SHADES_FINE, CURVE_DEFAULTS, NEUTRAL_CURVE_DEFAULTS, PALETTE_EFFECT_DEFAULTS, generatePalette, fitPalette, applyPaletteEffects, isDefaultEffects, sampleCurve, shadeX, clampToGamut, formatOklch, parseColor, oklchToRgb, rgbToHex } from '../../utils/theme-engine'
-import type { PaletteCurveParams, PaletteEffects, StoredPaletteParams, ColorAlias } from '../../utils/theme-engine'
+import { SHADES, SHADES_FINE, CURVE_DEFAULTS, NEUTRAL_CURVE_DEFAULTS, PALETTE_EFFECT_DEFAULTS, generatePalette, buildRampSampler, fitPalette, applyPaletteEffects, isDefaultEffects, sampleCurve, shadeX, clampToGamut, formatOklch, parseColor, oklchToRgb, rgbToHex } from '../../utils/theme-engine'
+import type { PaletteCurveParams, PaletteEffects, StoredPaletteParams, PalettePin, Shade, ColorAlias } from '../../utils/theme-engine'
 
 const props = defineProps<{
   alias: ColorAlias
@@ -49,6 +49,31 @@ const stopCount = computed({
   set: value => (fineStops.value = value === SHADES_FINE.length)
 })
 
+// Stops locked to an exact colour — the curves bend to pass through them.
+// Keyed edits go through setPin/removePin so the array stays a plain, cloneable
+// value (it's persisted and fed to generatePalette on every apply).
+const pins = ref<PalettePin[]>(stored?.pins ? structuredClone(toRaw(stored.pins)) : [])
+const pinnedShades = computed(() => new Set(pins.value.map(pin => pin.shade)))
+
+function setPin(shade: number, oklch: string) {
+  const parsed = parseColor(oklch)
+  if (!parsed) return false
+  const next = pins.value.filter(pin => pin.shade !== shade)
+  next.push({ shade: shade as Shade, l: parsed.l, c: parsed.c, h: parsed.h })
+  pins.value = next
+  return true
+}
+
+function removePin(shade: number) {
+  pins.value = pins.value.filter(pin => pin.shade !== shade)
+}
+
+/** Toggle a lock; pinning grabs whatever colour the stop currently shows. */
+function togglePinExact(shade: number) {
+  if (pinnedShades.value.has(shade as Shade)) removePin(shade)
+  else setPin(shade, shades.value[shade as Shade] ?? '')
+}
+
 /** Base curves the modifiers transform from, so they never compound. */
 let seedBase: PaletteCurveParams
   = stored && 'lightness' in stored ? pickCurves(stored) : defaults()
@@ -60,9 +85,31 @@ const params = reactive<PaletteCurveParams>(applyPaletteEffects(seedBase, effect
 
 const active = computed(() => isCustomPalette(props.alias))
 
-const shades = computed(() => generatePalette(params, fineStops.value))
+const shades = computed(() => generatePalette(params, fineStops.value, pins.value))
 const stopColors = computed(() => stopSet.value.map(shade => shades.value[shade]))
 const stopXs = computed(() => stopSet.value.map(shadeX))
+const stopPinned = computed(() => stopSet.value.map(shade => pinnedShades.value.has(shade)))
+// The active channel's pin-corrected value at each stop and as a dense
+// polyline: the curve editor draws the polyline (so the line bends THROUGH
+// pinned stops and shows their pull on neighbours) and sits every dot on it.
+// The sampler is built with the REACTIVE params (not a toRaw snapshot) so
+// sampling inside these computeds tracks curve edits — a handle drag redraws.
+const CHANNEL_KEY = { lightness: 'l', chroma: 'c', hue: 'h' } as const
+const stopValues = computed(() => {
+  const key = CHANNEL_KEY[tab.value]
+  const sample = buildRampSampler(params, pins.value)
+  return stopSet.value.map(shade => sample(shadeX(shade))[key])
+})
+const actualCurve = computed(() => {
+  // No pins → no correction, so let the editor draw the exact bézier.
+  if (!pins.value.length) return undefined
+  const key = CHANNEL_KEY[tab.value]
+  const sample = buildRampSampler(params, pins.value)
+  return Array.from({ length: 48 }, (_, i) => {
+    const x = i / 47
+    return { x, v: sample(x)[key] }
+  })
+})
 
 /**
  * The strip tiles — just shade + live color. Kept deliberately light (no
@@ -86,19 +133,21 @@ function copySwatch(info: { shade: number, oklch: string }) {
 onUnmounted(() => clearTimeout(copiedTimeout))
 
 /**
- * Swatch details live in a popover, not a tooltip: the copy/pin buttons
- * inside must be keyboard-reachable, and popover content can take focus.
- * Hover previews it (hand-rolled, with a grace gap so the pointer can cross
- * onto the content); click or Enter pins it open — one pin at a time.
+ * Swatch details live in a popover, not a tooltip: the copy button and the
+ * editable colour inputs inside must be keyboard-reachable, and popover
+ * content can take focus. Hover previews it (hand-rolled, with a grace gap so
+ * the pointer can cross onto the content); clicking a swatch STICKS it open so
+ * you can type into the inputs. Sticking-open is separate from pinning: a stuck
+ * popover is just "kept visible", while a pin locks the stop's exact colour.
  */
-const pinnedShade = ref<number>()
+const stuckShade = ref<number>()
 const hoveredShade = ref<number>()
 let hoverLeaveTimeout: ReturnType<typeof setTimeout> | undefined
 
 // One popover serves the whole strip (all tiles anchor to it anyway), driven
-// by whichever swatch is active — a pin wins over a hover. Rendering a single
-// Reka popover instead of one per stop is the bulk of the 19-stop speedup.
-const activeShade = computed(() => pinnedShade.value ?? hoveredShade.value)
+// by whichever swatch is active — a stuck one wins over a hover. Rendering a
+// single Reka popover instead of one per stop is the bulk of the 19-stop speedup.
+const activeShade = computed(() => stuckShade.value ?? hoveredShade.value)
 
 /**
  * Full detail for the ONE open swatch — the oklch→rgb→hex parse runs here,
@@ -115,7 +164,8 @@ const activeSwatch = computed(() => {
     shade,
     oklch,
     hex: rgb ? rgbToHex(rgb) : '',
-    rgb: rgb ? `rgb(${rgb.map(channel => Math.round(channel * 255)).join(', ')})` : ''
+    rgb: rgb ? `rgb(${rgb.map(channel => Math.round(channel * 255)).join(', ')})` : '',
+    pinned: pinnedShades.value.has(shade as Shade)
   }
 })
 
@@ -123,12 +173,12 @@ const activeSwatch = computed(() => {
 // instance, not 19). This always-defined mirror lets the slot template read
 // details without tripping undefined-narrowing in Vue's slot scope; its
 // placeholder is never shown because the popover is closed when inactive.
-const swatchDetail = computed(() => activeSwatch.value ?? { shade: -1, oklch: '', hex: '', rgb: '' })
+const swatchDetail = computed(() => activeSwatch.value ?? { shade: -1, oklch: '', hex: '', rgb: '', pinned: false })
 
 function onSwatchEnter(shade: number) {
-  // a pin means "I'm reading this one" — other swatches don't hover-open
-  // until it's released (clicking another still migrates the pin)
-  if (pinnedShade.value !== undefined && pinnedShade.value !== shade) return
+  // a stuck swatch means "I'm reading/editing this one" — other swatches don't
+  // hover-open until it's released (clicking another still migrates the stick)
+  if (stuckShade.value !== undefined && stuckShade.value !== shade) return
   clearTimeout(hoverLeaveTimeout)
   hoveredShade.value = shade
 }
@@ -140,15 +190,38 @@ function onSwatchLeave() {
 
 onUnmounted(() => clearTimeout(hoverLeaveTimeout))
 
-/** One pin at a time — pinning a swatch unpins any other. */
-function togglePin(shade: number) {
-  pinnedShade.value = pinnedShade.value === shade ? undefined : shade
+/** Click a swatch to keep its popover open (for editing); click again to release. */
+function toggleStuck(shade: number) {
+  stuckShade.value = stuckShade.value === shade ? undefined : shade
+}
+
+/**
+ * Commit an edited readout: parse whatever format was typed (hex/rgb/oklch),
+ * pin the stop to it, and keep the popover stuck open so further edits land.
+ * A rejected value leaves the pin untouched — the input restates the old text.
+ */
+function commitSwatchColor(shade: number, value: string): boolean {
+  const ok = setPin(shade as Shade, value)
+  if (ok) stuckShade.value = shade
+  return ok
+}
+
+/**
+ * Commit an edited colour input. A parseable value (any format) pins the stop;
+ * a rejected one leaves the pin untouched and the field restates its own
+ * canonical text so the box never shows an unparseable string.
+ */
+function onColorCommit(shade: number, field: 'oklch' | 'hex' | 'rgb', event: Event) {
+  const input = event.target as HTMLInputElement
+  if (!commitSwatchColor(shade, input.value)) {
+    input.value = swatchDetail.value[field]
+  }
 }
 
 /**
  * Reka emits update:open(false) for trigger clicks as well as dismissals —
- * clearing the pin here would race togglePin into re-pinning. Only hover
- * intent clears; the pin is released by togglePin or Esc alone.
+ * clearing the stick here would race toggleStuck into re-sticking. Only hover
+ * intent clears; the stick is released by toggleStuck or Esc alone.
  */
 function onSwatchOpenUpdate(shade: number, open: boolean) {
   if (open) return
@@ -156,7 +229,7 @@ function onSwatchOpenUpdate(shade: number, open: boolean) {
 }
 
 function onSwatchEscape(shade: number) {
-  if (pinnedShade.value === shade) pinnedShade.value = undefined
+  if (stuckShade.value === shade) stuckShade.value = undefined
 }
 
 /**
@@ -253,6 +326,38 @@ function normalizeHue(values: PaletteCurveParams) {
   }
 }
 
+// The reactive apply: regenerate the ramp, inject it (rebuilding the custom-
+// colours <style>), and persist. This reparses the whole stylesheet and churns
+// Vue state + localStorage — fine once, but ~16×/sec during a drag it's the
+// dominant cost, so a live drag routes through the CSSOM fast path below and
+// only lands here on the first edit and on release.
+const isDragging = ref(false)
+const customName = computed(() => `custom-${props.alias}`)
+
+function applyReactive() {
+  setPaletteFromCurve(props.alias, structuredClone(seedBase), { ...effects }, effectAmount.value, fineStops.value, structuredClone(toRaw(pins.value)))
+  clearCssomPreview()
+}
+
+// Fast path: write the ramp's vars straight onto :root. Inline custom
+// properties outrank the <style>'s `:root {}` rule, so the preview updates
+// with only the unavoidable restyle — no stylesheet reparse, no reactive
+// re-inject, no localStorage write. Only valid once the alias already resolves
+// through --color-custom-* (an active ramp); the first edit takes the reactive
+// path to create it. Reconciled + cleared by applyReactive on release.
+function previewViaCssom() {
+  if (!import.meta.client) return
+  const root = document.documentElement.style
+  const ramp = shades.value
+  for (const shade of stopSet.value) root.setProperty(`--color-${customName.value}-${shade}`, ramp[shade]!)
+}
+
+function clearCssomPreview() {
+  if (!import.meta.client) return
+  const root = document.documentElement.style
+  for (const shade of SHADES_FINE) root.removeProperty(`--color-${customName.value}-${shade}`)
+}
+
 // Throttled (not debounced) so the theme streams live while dragging a
 // curve — the trailing call catches the release position. With a neutral
 // lens the base simply tracks the edited curves.
@@ -260,29 +365,47 @@ const throttledApply = useThrottleFn(() => {
   if (!effectsDirty.value) {
     seedBase = structuredClone(toRaw(params))
   }
-  setPaletteFromCurve(props.alias, structuredClone(seedBase), { ...effects }, effectAmount.value, fineStops.value)
+  if (isDragging.value && active.value) {
+    previewViaCssom()
+  } else {
+    applyReactive()
+  }
 }, 60, true, true)
 
-// Toggling the stop set isn't a curve edit, so drive an apply directly to
-// regenerate the ramp (and persist the choice) at the new granularity.
-watch(fineStops, () => throttledApply())
-
-// Programmatic writes into `params` (seeding, external sync) must not
-// live-apply — only user edits do. watchIgnorable scopes the suppression
-// to the seed's own writes instead of a whole tick.
-const { ignoreUpdates } = watchIgnorable(params, () => {
-  throttledApply()
+// Narrowing to 11 stops drops midpoint pins that no longer have a tile (they'd
+// otherwise keep bending the ramp invisibly; their x still lies between
+// standard stops, so it just relaxes back to the curve there). This is a real
+// user toggle, and only reassigns pins when it actually removes one — the
+// combined watcher below covers the fineStops change and the resulting apply.
+watch(fineStops, (fine, previous) => {
+  if (fine || !previous) return
+  const kept = pins.value.filter(pin => SHADES.includes(pin.shade as typeof SHADES[number]))
+  if (kept.length !== pins.value.length) pins.value = kept
 })
+
+// params, pins and fineStops all reshape the ramp, so any of them changing
+// re-applies. Programmatic writes (seeding, external sync — e.g. an undo/redo
+// restore) wrap ALL of these in ignoreUpdates so restoring state never fires a
+// spurious apply that regenerates and clobbers it; only genuine user edits
+// reach throttledApply.
+const { ignoreUpdates } = watchIgnorable([() => params, pins, fineStops], () => {
+  throttledApply()
+}, { deep: true })
 
 function seed(values: PaletteCurveParams) {
   const next = structuredClone(toRaw(values))
   normalizeHue(next)
   seedBase = structuredClone(next)
-  Object.assign(effects, PALETTE_EFFECT_DEFAULTS)
-  effectAmount.value = 100
-  // A fresh fit is 11-stop; seedFromCurrent re-detects midpoints after.
-  fineStops.value = false
+  // All apply-triggering writes go through ignoreUpdates together: a seed is
+  // never a user edit, so it must not re-apply (which would, e.g., turn a stock
+  // ramp custom the instant the editor opens, or clobber an undo/redo restore).
   ignoreUpdates(() => {
+    Object.assign(effects, PALETTE_EFFECT_DEFAULTS)
+    effectAmount.value = 100
+    // A fresh fit is 11-stop; seedFromCurrent re-detects midpoints after.
+    fineStops.value = false
+    // Fresh curves own no pins — a reseed starts from the raw ramp.
+    pins.value = []
     Object.assign(params, next)
   })
 }
@@ -300,6 +423,7 @@ function onDragStart() {
     Object.assign(effects, PALETTE_EFFECT_DEFAULTS)
     effectAmount.value = 100
   }
+  isDragging.value = true
   clearTimeout(dragEndTimeout)
   document.documentElement.classList.add('theme-studio-dragging')
 }
@@ -308,12 +432,24 @@ function onDragEnd() {
   dragEndTimeout = setTimeout(() => {
     document.documentElement.classList.remove('theme-studio-dragging')
   }, 200)
+  isDragging.value = false
+  // Land the drag on the reactive path once: persist and hand the vars back to
+  // the <style> (a pending trailing throttle can't be relied on to fire after
+  // release). applyReactive clears the inline preview so there's no double
+  // definition left behind.
+  if (!effectsDirty.value) {
+    seedBase = structuredClone(toRaw(params))
+  }
+  if (active.value) applyReactive()
 }
 
 onUnmounted(() => {
   clearTimeout(dragEndTimeout)
   if (import.meta.client) {
     document.documentElement.classList.remove('theme-studio-dragging')
+    // The fold can unmount mid-drag — don't strand inline preview vars that
+    // would then shadow the reactive <style> for this ramp.
+    clearCssomPreview()
   }
 })
 
@@ -327,7 +463,8 @@ function seedFromCurrent() {
     seed(fitPalette(source))
     // A ramp that already carries midpoints (an imported fine palette) keeps
     // them, so opening the editor doesn't silently narrow it back to 11.
-    if (source[150] !== undefined) fineStops.value = true
+    // Ignored like the rest of the seed — following a palette must not apply.
+    if (source[150] !== undefined) ignoreUpdates(() => (fineStops.value = true))
   }
 }
 
@@ -341,22 +478,30 @@ watch(() => paletteParams.value[props.alias], (value) => {
 
   seedBase = pickCurves(value)
   normalizeHue(seedBase)
-  Object.assign(effects, PALETTE_EFFECT_DEFAULTS, value.effects ?? {})
-  effectAmount.value = value.amount ?? 100
-  fineStops.value = value.fineStops ?? false
+  // One ignoreUpdates around every apply-triggering write: reflecting an
+  // external change (undo/redo restore, AI edit) must not echo back into an
+  // apply that re-persists and clobbers the very state being restored.
   ignoreUpdates(() => {
+    Object.assign(effects, PALETTE_EFFECT_DEFAULTS, value.effects ?? {})
+    effectAmount.value = value.amount ?? 100
+    pins.value = value.pins ? structuredClone(toRaw(value.pins)) : []
+    fineStops.value = value.fineStops ?? false
     Object.assign(params, applyPaletteEffects(seedBase, effects, effectAmount.value))
   })
 })
 
-// While inactive, follow the selected palette so opening the editor starts
-// from the curves of the color already on screen. Pin/hover tooltip state
-// resets with it: the swatch strip unmounts with the fold, so a stale pin
-// would pop a tooltip for a palette the user never pinned.
+// Follow the selected palette so opening the editor starts from the curves of
+// the colour already on screen. We fit from the applied shades unless the
+// editor already OWNS curves for this alias (a ramp it built, in paletteParams)
+// — a preset's custom ramp is active but has no stored curves, so it must still
+// be fitted rather than showing the blank defaults. Stuck/hover popover state
+// resets too: the swatch strip unmounts with the fold, so a stale stick would
+// pop a popover for a palette the user never opened.
 watch([() => (appConfig.ui.colors as Record<string, string>)[props.alias], open], ([, isOpen]) => {
-  pinnedShade.value = undefined
+  stuckShade.value = undefined
   hoveredShade.value = undefined
-  if (isOpen && !active.value) {
+  const owned = paletteParams.value[props.alias]
+  if (isOpen && !(owned && 'lightness' in owned)) {
     seedFromCurrent()
   }
 })
@@ -407,6 +552,9 @@ function resetEffects() {
             :y-max="windows[tab].max"
             :stop-colors="stopColors"
             :stop-xs="stopXs"
+            :stop-pinned="stopPinned"
+            :stop-values="stopValues"
+            :actual-curve="actualCurve"
             :field="field"
             @drag-start="onDragStart"
             @drag-end="onDragEnd"
@@ -414,20 +562,27 @@ function resetEffects() {
 
           <!-- Plain tiles recolor live every frame (cheap); a single popover,
                anchored to the strip and driven by the active swatch, carries
-               the details — 1 Reka instance instead of 19. -->
+               the details — 1 Reka instance instead of 19. A pin badge (blended
+               so it shows on any colour) marks stops locked to an exact value. -->
           <div ref="stripRef" class="flex rounded-b-sm overflow-hidden ring ring-default">
             <button
               v-for="info in swatches"
               :key="info.shade"
               type="button"
-              class="aspect-square flex-1"
+              class="relative aspect-square flex-1"
               :style="{ backgroundColor: info.oklch }"
               :aria-label="`Shade ${info.shade}: ${info.oklch}`"
-              :aria-pressed="pinnedShade === info.shade"
-              @click="togglePin(info.shade)"
+              :aria-pressed="stuckShade === info.shade"
+              @click="toggleStuck(info.shade)"
               @mouseenter="onSwatchEnter(info.shade)"
               @mouseleave="onSwatchLeave"
-            />
+            >
+              <UIcon
+                v-if="pinnedShades.has(info.shade)"
+                name="i-lucide-pin"
+                class="absolute inset-0 m-auto size-2.5 text-white mix-blend-difference pointer-events-none"
+              />
+            </button>
           </div>
 
           <UPopover
@@ -435,31 +590,34 @@ function resetEffects() {
             :open="!!activeSwatch"
             :reference="stripEl"
             :content="{
-              side: 'top',
+              side: 'right',
               onEscapeKeyDown: () => onSwatchEscape(swatchDetail.shade),
               onCloseAutoFocus: onSwatchCloseAutoFocus,
               sideOffset: 0,
-              // hover-opened popovers must not steal focus; a pinned one
-              // takes it so Tab lands on the copy/pin buttons
-              onOpenAutoFocus: pinnedShade === swatchDetail.shade ? undefined : (event: Event) => event.preventDefault(),
-              // pinning means pinned: clicks elsewhere (curve drags,
-              // sliders) must not dismiss — only Esc, unpin or another pin
-              onInteractOutside: pinnedShade === swatchDetail.shade ? (event: Event) => event.preventDefault() : undefined,
-              onFocusOutside: pinnedShade === swatchDetail.shade ? (event: Event) => event.preventDefault() : undefined
+              // hover-opened popovers must not steal focus; a stuck one takes
+              // it so Tab lands on the copy button and colour inputs
+              onOpenAutoFocus: stuckShade === swatchDetail.shade ? undefined : (event: Event) => event.preventDefault(),
+              // stuck means kept-open: clicks elsewhere (curve drags, sliders)
+              // must not dismiss — only Esc, unstick or another stick
+              onInteractOutside: stuckShade === swatchDetail.shade ? (event: Event) => event.preventDefault() : undefined,
+              onFocusOutside: stuckShade === swatchDetail.shade ? (event: Event) => event.preventDefault() : undefined
             }"
             @update:open="onSwatchOpenUpdate(swatchDetail.shade, $event)"
           >
             <template #content>
               <div
-                class="px-2 py-1.5 text-xs font-mono flex flex-col gap-0.5"
+                class="p-2 text-xs font-mono flex flex-col gap-1.5 w-60"
                 @mouseenter="onSwatchEnter(swatchDetail.shade)"
                 @mouseleave="onSwatchLeave"
               >
-                <div class="flex items-center justify-between gap-3">
-                  <span class="font-semibold">{{ swatchDetail.shade }}</span>
+                <div class="flex items-center justify-between gap-3 ps-2">
+                  <span class="font-semibold flex items-center gap-1.5">
+                    {{ swatchDetail.shade }}
+                    <span v-if="swatchDetail.pinned" class="text-[10px] font-normal text-primary">pinned</span>
+                  </span>
 
                   <div class="flex items-center">
-                    <UTooltip text="Copy Oklch">
+                    <UTooltip text="Copy oklch">
                       <UButton
                         size="xs"
                         color="neutral"
@@ -467,12 +625,12 @@ function resetEffects() {
                         variant="ghost"
                         :ui="{ leadingIcon: 'size-3' }"
                         :icon="copiedShade === swatchDetail.shade ? 'i-lucide-copy-check' : 'i-lucide-copy'"
-                        :aria-label="`Copy ${swatchDetail.oklch}`"
+                        :aria-label="`Copy oklch ${swatchDetail.oklch}`"
                         @click="copySwatch(swatchDetail)"
                       />
                     </UTooltip>
 
-                    <UTooltip :text="pinnedShade === swatchDetail.shade ? 'Unpin' : 'Pin open'">
+                    <UTooltip :text="swatchDetail.pinned ? 'Unpin colour' : 'Pin this colour exactly'">
                       <UButton
                         size="xs"
                         color="neutral"
@@ -480,17 +638,59 @@ function resetEffects() {
                         variant="ghost"
                         active-color="primary"
                         active-variant="ghost"
-                        :active="pinnedShade === swatchDetail.shade"
+                        :active="swatchDetail.pinned"
                         :ui="{ leadingIcon: 'size-3' }"
-                        :icon="pinnedShade === swatchDetail.shade ? 'i-lucide-pin-off' : 'i-lucide-pin'"
-                        :aria-label="pinnedShade === swatchDetail.shade ? 'Unpin details' : 'Pin details open'"
-                        @click="togglePin(swatchDetail.shade)"
+                        :icon="swatchDetail.pinned ? 'i-lucide-pin-off' : 'i-lucide-pin'"
+                        :aria-label="swatchDetail.pinned ? 'Unpin this colour' : 'Pin this colour exactly'"
+                        @click="togglePinExact(swatchDetail.shade)"
                       />
                     </UTooltip>
                   </div>
                 </div>
-                <span>{{ swatchDetail.oklch }}</span>
-                <span class="text-muted">{{ swatchDetail.hex }} · {{ swatchDetail.rgb }}</span>
+
+                <!-- Paste any format (hex / rgb / oklch) into any field: it
+                     parses, pins the stop to that colour, and the ramp bends to
+                     pass through it. All three fields restate on commit. -->
+                <UInput
+                  :model-value="swatchDetail.oklch"
+                  size="xs"
+                  variant="ghost"
+                  autocomplete="off"
+                  spellcheck="false"
+                  aria-label="OKLCH value"
+                  :ui="{ base: 'font-mono' }"
+                  @focus="stuckShade = swatchDetail.shade"
+                  @change="onColorCommit(swatchDetail.shade, 'oklch', $event)"
+                  @keydown.enter="($event.target as HTMLInputElement).blur()"
+                />
+                <div class="flex gap-1.5">
+                  <UInput
+                    :model-value="swatchDetail.hex"
+                    size="xs"
+                    variant="ghost"
+                    autocomplete="off"
+                    spellcheck="false"
+                    aria-label="Hex value"
+                    class="w-18"
+                    :ui="{ base: 'font-mono' }"
+                    @focus="stuckShade = swatchDetail.shade"
+                    @change="onColorCommit(swatchDetail.shade, 'hex', $event)"
+                    @keydown.enter="($event.target as HTMLInputElement).blur()"
+                  />
+                  <UInput
+                    :model-value="swatchDetail.rgb"
+                    size="xs"
+                    variant="ghost"
+                    autocomplete="off"
+                    spellcheck="false"
+                    aria-label="RGB value"
+                    class="flex-1"
+                    :ui="{ base: 'font-mono' }"
+                    @focus="stuckShade = swatchDetail.shade"
+                    @change="onColorCommit(swatchDetail.shade, 'rgb', $event)"
+                    @keydown.enter="($event.target as HTMLInputElement).blur()"
+                  />
+                </div>
               </div>
             </template>
           </UPopover>

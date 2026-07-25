@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { sampleCurve, SHADES, shadeX } from '../../utils/theme-engine'
+import { sampleCurve, SHADES, shadeX, parseColor, oklchToRgb } from '../../utils/theme-engine'
 import type { ChannelCurve } from '../../utils/theme-engine'
 
 const props = defineProps<{
@@ -14,11 +14,24 @@ const props = defineProps<{
    * midpoints at their true positions (150 → 0.15, not an even 19th).
    */
   stopXs?: number[]
+  /** Which stops are pinned to an exact colour, aligned with `stopXs`. */
+  stopPinned?: boolean[]
   /**
-   * 2D color field behind the plot: one entry per column (ramp position),
-   * each an array of colors sampled top (yMax) to bottom (yMin). SVG can't
-   * do two-axis gradients, but a vertical gradient per column tiles into
-   * one — showing exactly what dragging the curve at that x would produce.
+   * The actual channel value each stop resolves to (pin-corrected), aligned
+   * with `stopXs`, so every dot sits on the colour it really produces.
+   */
+  stopValues?: number[]
+  /**
+   * The pin-corrected curve as a dense `{ x, v }` polyline. When present it's
+   * the line the editor draws — bending through pinned stops and showing the
+   * pull on their neighbours — in place of the raw bézier.
+   */
+  actualCurve?: { x: number, v: number }[]
+  /**
+   * 2D colour field behind the plot: one entry per column (ramp position),
+   * each an array of oklch colours sampled top (yMax) to bottom (yMin). Drawn
+   * as a small bitmap scaled up on the canvas, so it shows exactly what
+   * dragging the curve at each (x, value) point would produce.
    */
   field?: string[][]
 }>()
@@ -33,9 +46,6 @@ const emit = defineEmits<{
 const W = 200
 const H = 180
 const PAD = 10
-
-/** Unique per instance — primary and neutral editors can be open at once. */
-const gradientId = useId()
 
 function toX(x: number) {
   return PAD + x * (W - 2 * PAD)
@@ -59,34 +69,85 @@ function fromY(py: number) {
 }
 
 const path = computed(() => {
+  // With pins active the parent passes the corrected curve; draw that so the
+  // line rides through the pinned stops. Otherwise it's exactly the bézier.
+  if (props.actualCurve?.length) {
+    return props.actualCurve.map((p, i) => `${i ? 'L' : 'M'} ${toX(p.x).toFixed(2)} ${toY(p.v).toFixed(2)}`).join(' ')
+  }
   const c = curve.value
   return `M ${toX(0)} ${toY(c.y0)} C ${toX(c.p1x)} ${toY(c.p1y)}, ${toX(c.p2x)} ${toY(c.p2y)}, ${toX(1)} ${toY(c.y1)}`
 })
 
 /**
- * Fence-post layout: column i is sampled at ramp x = i/(n-1) and drawn
- * centered on that plot position, so the endpoint colors sit directly
- * under the endpoint controls. The outer columns extend to the canvas
- * edges (overhanging off-canvas so the blur has solid color to sample).
+ * Paint the colour field: parse the oklch grid into a `columns × rows` bitmap
+ * once, then let the canvas scale it up with bilinear smoothing — which does
+ * the vertical gradient AND the horizontal smoothing the SVG needed a blur
+ * filter for. The backing store is small and fixed (the field is soft anyway);
+ * the element stretches to fill via CSS. Drawing is ~0.1ms and, unlike the old
+ * SVG filter, never re-rasterises during unrelated page restyles.
  */
-const fieldRects = computed(() => {
-  if (!props.field?.length) return []
-  const n = props.field.length
-  const base = (W - 2 * PAD) / (n - 1)
-  return props.field.map((_, index) => {
-    const start = index === 0 ? -8 : PAD + (index - 0.5) * base
-    const end = index === n - 1 ? W + 8 : PAD + (index + 0.5) * base
-    return { x: start, width: end - start + 0.5 }
-  })
-})
+const fieldCanvas = useTemplateRef<HTMLCanvasElement>('fieldCanvas')
+// The small source bitmap, reused across redraws (the grid size is fixed).
+let sourceCanvas: HTMLCanvasElement | undefined
+
+function drawField() {
+  const canvas = fieldCanvas.value
+  const columns = props.field
+  if (!canvas || !columns?.length) return
+  const nCol = columns.length
+  const nRow = columns[0]!.length
+  if (!nRow) return
+
+  // Fixed, modest backing store — the field is a soft gradient, so a low-res
+  // bitmap stretched by CSS is indistinguishable and keeps redraws cheap.
+  if (canvas.width !== W * 3) {
+    canvas.width = W * 3
+    canvas.height = H * 3
+  }
+
+  const grid = new ImageData(nCol, nRow)
+  for (let col = 0; col < nCol; col++) {
+    const column = columns[col]!
+    for (let row = 0; row < nRow; row++) {
+      const parsed = parseColor(column[row]!)
+      const [r, g, b] = parsed ? oklchToRgb(parsed) : [0, 0, 0]
+      const i = (row * nCol + col) * 4
+      grid.data[i] = Math.round(r * 255)
+      grid.data[i + 1] = Math.round(g * 255)
+      grid.data[i + 2] = Math.round(b * 255)
+      grid.data[i + 3] = 255
+    }
+  }
+
+  if (!sourceCanvas) sourceCanvas = document.createElement('canvas')
+  sourceCanvas.width = nCol
+  sourceCanvas.height = nRow
+  sourceCanvas.getContext('2d')!.putImageData(grid, 0, 0)
+
+  const ctx = canvas.getContext('2d')!
+  ctx.imageSmoothingEnabled = true
+  ctx.imageSmoothingQuality = 'high'
+  ctx.clearRect(0, 0, canvas.width, canvas.height)
+  ctx.drawImage(sourceCanvas, 0, 0, nCol, nRow, 0, 0, canvas.width, canvas.height)
+}
+
+// Watch both sources explicitly (not via read-tracking, which the early return
+// on a not-yet-mounted canvas would miss): draw once the canvas exists and
+// redraw on every field change — a drag, a tab switch, or a preset reseed.
+watch([() => props.field, fieldCanvas], drawField, { immediate: true, flush: 'post' })
 
 const stopXs = computed(() => props.stopXs ?? SHADES.map(shadeX))
 const stops = computed(() => stopXs.value.map((x, index) => {
+  // Sit each dot on the value its colour actually resolves to (pin-corrected),
+  // so they ride the drawn line; fall back to the bézier sample when the parent
+  // sends no corrected values (no pins).
+  const value = props.stopValues?.[index] ?? sampleCurve(x, curve.value)
   return {
     key: index,
     cx: toX(x),
-    cy: toY(sampleCurve(x, curve.value)),
-    fill: props.stopColors?.[index] || 'currentColor'
+    cy: toY(value),
+    fill: props.stopColors?.[index] || 'currentColor',
+    pinned: props.stopPinned?.[index] ?? false
   }
 }))
 
@@ -141,10 +202,18 @@ function onPointerMove(event: PointerEvent) {
   // Reaching further is the window's job — hue auto-pans at the edges.
   const clamped = Math.min(props.yMax, Math.max(props.yMin, value))
 
+  // Dragging an endpoint carries its own control handle by the same vertical
+  // delta, so the tangent that leaves the endpoint is preserved instead of the
+  // handle staying put and kinking the curve. The handle stays window-clamped
+  // (as a direct handle drag would), so near an edge the offset compresses.
   if (dragging.value === 'y0') {
-    curve.value = { ...curve.value, y0: clamped }
+    const delta = clamped - curve.value.y0
+    const p1y = Math.min(props.yMax, Math.max(props.yMin, curve.value.p1y + delta))
+    curve.value = { ...curve.value, y0: clamped, p1y }
   } else if (dragging.value === 'y1') {
-    curve.value = { ...curve.value, y1: clamped }
+    const delta = clamped - curve.value.y1
+    const p2y = Math.min(props.yMax, Math.max(props.yMin, curve.value.p2y + delta))
+    curve.value = { ...curve.value, y1: clamped, p2y }
   } else if (dragging.value === 'p1') {
     curve.value = { ...curve.value, p1x: fromX(point.x), p1y: clamped }
   } else {
@@ -167,119 +236,92 @@ function onPointerUp(event: PointerEvent) {
 </script>
 
 <template>
-  <svg
-    ref="svgRef"
-    data-curve-editor
-    :viewBox="`0 0 ${W} ${H}`"
-    class="w-full rounded-t-sm ring ring-default bg-elevated/30 touch-none select-none cursor-crosshair"
-    @pointerdown="onPointerDown"
-    @pointermove="onPointerMove"
-    @pointerup="onPointerUp"
-    @pointercancel="onPointerUp"
-  >
-    <!-- the channel's reachable colors behind the plot: the curve sits on
-         the exact color each (position, value) point would produce. The
-         field bleeds to the canvas edges, but its value mapping stays
-         pinned to the padded plot (userSpaceOnUse + pad spread), so the
-         curve/color correspondence is exact. -->
-    <template v-if="field?.length">
-      <defs>
-        <linearGradient
-          v-for="(column, columnIndex) in field"
-          :id="`${gradientId}-${columnIndex}`"
-          :key="columnIndex"
-          gradientUnits="userSpaceOnUse"
-          :x1="0"
-          :y1="PAD"
-          :x2="0"
-          :y2="H - PAD"
-          spreadMethod="pad"
-        >
-          <stop
-            v-for="(color, rowIndex) in column"
-            :key="rowIndex"
-            :offset="`${(rowIndex / (column.length - 1)) * 100}%`"
-            :stop-color="color"
-          />
-        </linearGradient>
+  <div class="relative w-full rounded-t-sm ring ring-default bg-elevated/30 overflow-hidden">
+    <!-- The reachable-colours field behind the plot: a small colour grid drawn
+         on a canvas and scaled up with bilinear smoothing. It replaces 24 SVG
+         gradients behind a Gaussian blur — that filter was re-rasterised on
+         every page restyle (~7ms per apply during a drag); a canvas is a bitmap
+         leaf that stays out of style recalc entirely. -->
+    <canvas
+      ref="fieldCanvas"
+      class="absolute inset-0 size-full opacity-75 pointer-events-none"
+    />
+    <svg
+      ref="svgRef"
+      data-curve-editor
+      :viewBox="`0 0 ${W} ${H}`"
+      class="relative block w-full touch-none select-none cursor-crosshair"
+      @pointerdown="onPointerDown"
+      @pointermove="onPointerMove"
+      @pointerup="onPointerUp"
+      @pointercancel="onPointerUp"
+    >
+      <!-- handle connectors -->
+      <line
+        :x1="toX(0)"
+        :y1="toHandleY(curve.y0)"
+        :x2="toX(curve.p1x)"
+        :y2="toHandleY(curve.p1y)"
+        class="stroke-(--ui-text-dimmed)"
+        stroke-width="0.75"
+        stroke-dasharray="2 2"
+      />
+      <line
+        :x1="toX(1)"
+        :y1="toHandleY(curve.y1)"
+        :x2="toX(curve.p2x)"
+        :y2="toHandleY(curve.p2y)"
+        class="stroke-(--ui-text-dimmed)"
+        stroke-width="0.75"
+        stroke-dasharray="2 2"
+      />
 
-        <!-- horizontal-only blur smooths the column steps (the vertical
-             axis is already a true gradient); the edge columns overhang
-             the canvas so the blur has solid color to sample there -->
-        <filter :id="`${gradientId}-smooth`" x="-5%" y="-5%" width="110%" height="110%">
-          <feGaussianBlur stdDeviation="3 0" />
-        </filter>
-      </defs>
+      <!-- curve -->
+      <path :d="path" fill="none" class="stroke-(--ui-primary)" stroke-width="1.5" />
 
-      <g opacity="0.75" :filter="`url(#${gradientId}-smooth)`">
-        <rect
-          v-for="(rect, columnIndex) in fieldRects"
-          :key="`column-${columnIndex}`"
-          :x="rect.x"
-          :y="0"
-          :width="rect.width"
-          :height="H"
-          :fill="`url(#${gradientId}-${columnIndex})`"
+      <!-- shade stops on the curve; a pinned stop wears a larger primary ring -->
+      <template v-for="stop in stops" :key="stop.key">
+        <circle
+          v-if="stop.pinned"
+          :cx="stop.cx"
+          :cy="stop.cy"
+          r="4"
+          fill="none"
+          class="stroke-(--ui-primary)"
+          stroke-width="1.25"
         />
-      </g>
-    </template>
+        <circle
+          :cx="stop.cx"
+          :cy="stop.cy"
+          :r="stop.pinned ? 2.5 : 2.25"
+          :fill="stop.fill"
+          class="stroke-(--ui-bg)"
+          stroke-width="0.5"
+        />
+      </template>
 
-    <!-- handle connectors -->
-    <line
-      :x1="toX(0)"
-      :y1="toHandleY(curve.y0)"
-      :x2="toX(curve.p1x)"
-      :y2="toHandleY(curve.p1y)"
-      class="stroke-(--ui-text-dimmed)"
-      stroke-width="0.75"
-      stroke-dasharray="2 2"
-    />
-    <line
-      :x1="toX(1)"
-      :y1="toHandleY(curve.y1)"
-      :x2="toX(curve.p2x)"
-      :y2="toHandleY(curve.p2y)"
-      class="stroke-(--ui-text-dimmed)"
-      stroke-width="0.75"
-      stroke-dasharray="2 2"
-    />
+      <!-- handles -->
+      <circle :cx="toX(curve.p1x)" :cy="toHandleY(curve.p1y)" r="4" class="fill-(--ui-bg) stroke-(--ui-text-muted)" stroke-width="1.25" />
+      <circle :cx="toX(curve.p2x)" :cy="toHandleY(curve.p2y)" r="4" class="fill-(--ui-bg) stroke-(--ui-text-muted)" stroke-width="1.25" />
 
-    <!-- curve -->
-    <path :d="path" fill="none" class="stroke-(--ui-primary)" stroke-width="1.5" />
-
-    <!-- shade stops on the curve -->
-    <circle
-      v-for="stop in stops"
-      :key="stop.key"
-      :cx="stop.cx"
-      :cy="stop.cy"
-      r="2.25"
-      :fill="stop.fill"
-      class="stroke-(--ui-bg)"
-      stroke-width="0.5"
-    />
-
-    <!-- handles -->
-    <circle :cx="toX(curve.p1x)" :cy="toHandleY(curve.p1y)" r="4" class="fill-(--ui-bg) stroke-(--ui-text-muted)" stroke-width="1.25" />
-    <circle :cx="toX(curve.p2x)" :cy="toHandleY(curve.p2y)" r="4" class="fill-(--ui-bg) stroke-(--ui-text-muted)" stroke-width="1.25" />
-
-    <!-- endpoints, filled with the ramp's 50 and 950 so the drag targets show
+      <!-- endpoints, filled with the ramp's 50 and 950 so the drag targets show
          what they steer -->
-    <circle
-      :cx="toX(0)"
-      :cy="toHandleY(curve.y0)"
-      r="4.5"
-      :fill="stopColors?.[0] || 'currentColor'"
-      class="stroke-(--ui-text-highlighted)"
-      stroke-width="1.5"
-    />
-    <circle
-      :cx="toX(1)"
-      :cy="toHandleY(curve.y1)"
-      r="4.5"
-      :fill="stopColors?.[stopColors.length - 1] || 'currentColor'"
-      class="stroke-(--ui-text-highlighted)"
-      stroke-width="1.5"
-    />
-  </svg>
+      <circle
+        :cx="toX(0)"
+        :cy="toHandleY(curve.y0)"
+        r="4.5"
+        :fill="stopColors?.[0] || 'currentColor'"
+        class="stroke-(--ui-text-highlighted)"
+        stroke-width="1.5"
+      />
+      <circle
+        :cx="toX(1)"
+        :cy="toHandleY(curve.y1)"
+        r="4.5"
+        :fill="stopColors?.[stopColors.length - 1] || 'currentColor'"
+        class="stroke-(--ui-text-highlighted)"
+        stroke-width="1.5"
+      />
+    </svg>
+  </div>
 </template>

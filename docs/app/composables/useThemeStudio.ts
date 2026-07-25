@@ -1,7 +1,7 @@
 import colors from 'tailwindcss/colors'
 import { THEME_STATE_KEYS, THEME_STORAGE_KEYS } from '../utils/theme-keys'
 import { presets, docToSettings, isDefaultTheme, generatePalette, applyPaletteEffects, isDefaultEffects, parseCssColor, styleComponents, styleTokens, sectionFingerprint, mergeSection, canonicalTokenShades, TOKEN_SHADE_TARGETS, SECTION_GROUPS, DEFAULT_COLORS, SHADES } from '../utils/theme-engine'
-import type { SectionKey, ThemeDoc, ThemePreset, PaletteCurveParams, PaletteEffects, StoredPaletteParams, StyleOptions, Shade, ShadeStop, ColorAlias, TokenRamp } from '../utils/theme-engine'
+import type { SectionKey, ThemeDoc, ThemePreset, PaletteCurveParams, PaletteEffects, StoredPaletteParams, PalettePin, StyleOptions, Shade, ShadeStop, ColorAlias, TokenRamp } from '../utils/theme-engine'
 import { readLocalStorage } from '../utils/theme'
 
 export function useThemeStudio() {
@@ -93,7 +93,7 @@ export function useThemeStudio() {
           { lightness: entry.lightness, chroma: entry.chroma, hue: entry.hue },
           entry.effects,
           entry.amount
-        ), entry.fineStops)
+        ), entry.fineStops, entry.pins)
         const name = customPaletteName(alias)
         theme.applyThemeSettings({
           customColors: { [name]: ramp },
@@ -272,7 +272,7 @@ export function useThemeStudio() {
    * modifier lens persist separately, so a reload restores the editor's
    * sliders instead of silently baking them into the curves.
    */
-  function setPaletteFromCurve(alias: ColorAlias, base: PaletteCurveParams, effects?: PaletteEffects, amount = 100, fine = false) {
+  function setPaletteFromCurve(alias: ColorAlias, base: PaletteCurveParams, effects?: PaletteEffects, amount = 100, fine = false, pins: PalettePin[] = []) {
     const name = customPaletteName(alias)
     // The alias only needs pointing once. Live drags call this at ~16Hz; re-
     // sending it every tick makes applyThemeSettings re-persist the AI-extras
@@ -281,7 +281,7 @@ export function useThemeStudio() {
     const aliasAlreadySet = (appConfig.ui.colors as Record<string, string>)[alias] === name
 
     theme.applyThemeSettings({
-      customColors: { [name]: generatePalette(applyPaletteEffects(base, effects, amount), fine) },
+      customColors: { [name]: generatePalette(applyPaletteEffects(base, effects, amount), fine, pins) },
       ...(aliasAlreadySet ? {} : { [alias]: name }),
       // The remaps are var() references, not ramp colours, and are kept in
       // sync with the shade sliders elsewhere — so they only need (re)sending
@@ -291,7 +291,8 @@ export function useThemeStudio() {
     const entry: StoredPaletteParams = {
       ...base,
       ...(isDefaultEffects(effects, amount) ? {} : { effects, amount }),
-      ...(fine ? { fineStops: true } : {})
+      ...(fine ? { fineStops: true } : {}),
+      ...(pins.length ? { pins } : {})
     }
     setPaletteParams({ ...paletteParams.value, [alias]: entry })
 
@@ -348,7 +349,10 @@ export function useThemeStudio() {
 
   /** Replace the current theme with a document: reset, then apply overrides. */
   function applyDoc(doc: ThemeDoc) {
-    theme.resetTheme({ track: false })
+    // immediate: false — this reset is followed by the doc's own styles in the
+    // same call, so let the reactive tags swap atomically rather than clearing
+    // to the default theme for a frame (a white flash between presets).
+    theme.resetTheme({ track: false, immediate: false })
     style.value = deriveStyle(doc)
     if (Object.keys(style.value).length) {
       window.localStorage.setItem(THEME_STORAGE_KEYS.style, JSON.stringify(style.value))
@@ -476,6 +480,7 @@ export function useThemeStudio() {
     style,
     setStyle,
     paletteParams,
+    setPaletteParams,
     isCustomPalette,
     paletteShades,
     selectPalette,

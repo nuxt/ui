@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const { track } = useAnalytics()
-const { currentDoc, resetTheme, icon: iconSet } = useTheme()
+const { resetTheme, icon: iconSet } = useTheme()
 
 // The studio toolbar skins to the applied pack: undo/redo/reset/export/
 // fullscreen come from the pack's studio glyphs, while import and the group
@@ -11,7 +11,7 @@ const studioIcons = useStudioIcons()
 // View and fullscreen are app-level state: the site header hosts the view
 // switcher while on /theme and hides itself in fullscreen.
 const { view, fullscreen } = useThemeStudioView()
-const { past, future, align, capture, undo, redo } = useThemeStudioHistory()
+const { past, future, snapshot, align, capture, undo, redo } = useThemeStudioHistory()
 
 useSeoMeta({
   title: 'Theme Studio',
@@ -24,16 +24,17 @@ const mounted = ref(false)
 onMounted(() => {
   mounted.value = true
   track('Theme Studio Opened')
-  align(JSON.stringify(currentDoc()))
+  align(snapshot())
 })
 
 // A debounced capture folds slider-drag bursts (and a reset) into single
-// history steps.
+// history steps. The snapshot spans the doc AND the editor's curve/pin params,
+// so undo restores the palette editor's state, not just the visible colours.
 let captureTimeout: ReturnType<typeof setTimeout> | undefined
-watch(() => (mounted.value ? JSON.stringify(currentDoc()) : undefined), (snapshot) => {
-  if (!snapshot) return
+watch(() => (mounted.value ? snapshot() : undefined), (snap) => {
+  if (!snap) return
   clearTimeout(captureTimeout)
-  captureTimeout = setTimeout(() => capture(snapshot), 350)
+  captureTimeout = setTimeout(() => capture(snap), 350)
 })
 
 // ⌃⇧D flips the mode without a click, so open panels survive the switch.
@@ -135,7 +136,7 @@ onUnmounted(() => {
   window.removeEventListener('keydown', onEscape)
   fullscreen.value = false
   clearTimeout(captureTimeout)
-  capture(JSON.stringify(currentDoc()))
+  capture(snapshot())
 })
 
 const settingGroups = [

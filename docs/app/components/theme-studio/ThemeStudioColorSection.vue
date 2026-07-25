@@ -95,7 +95,7 @@ const openGroups = reactive<Record<string, boolean>>({})
     <template #actions>
       <UTooltip text="Adjust shades">
         <UButton
-          icon="i-lucide-sliders-horizontal"
+          icon="i-lucide-settings-2"
           color="neutral"
           variant="ghost"
           size="xs"
@@ -108,7 +108,7 @@ const openGroups = reactive<Record<string, boolean>>({})
       </UTooltip>
       <UTooltip text="Edit palette">
         <UButton
-          icon="i-lucide-pencil"
+          icon="i-lucide-tangent"
           color="neutral"
           variant="ghost"
           size="xs"

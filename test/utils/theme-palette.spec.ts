@@ -6,6 +6,7 @@ import {
   parseColor,
   inGamut,
   clampToGamut,
+  formatOklch,
   contrastRatio,
   parseCssColor,
   generatePalette,
@@ -120,6 +121,37 @@ describe('generatePalette', () => {
   it('neutral defaults reach a deep dark end', () => {
     const palette = generatePalette(NEUTRAL_CURVE_DEFAULTS)
     expect(parseColor(palette[950])!.l).toBeLessThan(0.16)
+  })
+
+  it('no pins leaves the ramp byte-identical', () => {
+    const bare = generatePalette(CURVE_DEFAULTS)
+    const empty = generatePalette(CURVE_DEFAULTS, false, [])
+    for (const shade of SHADES) expect(empty[shade]).toBe(bare[shade])
+  })
+
+  it('renders a pinned stop as its exact (gamut-clamped) target', () => {
+    const target = parseColor('oklch(75.42% 0.1077 118.763)')!
+    const palette = generatePalette(CURVE_DEFAULTS, false, [{ shade: 500, ...target }])
+    expect(palette[500]).toBe(formatOklch(clampToGamut(target)))
+  })
+
+  it('keeps a pin local — the far end barely moves', () => {
+    const target = parseColor('oklch(75.42% 0.1077 118.763)')!
+    const bare = generatePalette(CURVE_DEFAULTS)
+    const pinned = generatePalette(CURVE_DEFAULTS, false, [{ shade: 500, ...target }])
+    // 50 is ~0.5 in x away from the pin — the Gaussian has decayed to nearly nothing.
+    expect(parseColor(pinned[50])!.l).toBeCloseTo(parseColor(bare[50])!.l, 2)
+  })
+
+  it('hits every stop of a multi-pin set exactly', () => {
+    const a = parseColor('oklch(75.42% 0.1077 118.763)')!
+    const b = parseColor('oklch(45% 0.09 250)')!
+    const palette = generatePalette(CURVE_DEFAULTS, false, [
+      { shade: 300, ...a },
+      { shade: 700, ...b }
+    ])
+    expect(palette[300]).toBe(formatOklch(clampToGamut(a)))
+    expect(palette[700]).toBe(formatOklch(clampToGamut(b)))
   })
 })
 

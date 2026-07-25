@@ -651,7 +651,7 @@ export function useTheme() {
 
   // applyDoc resets before applying — without the opt-out every preset,
   // import, shuffle and undo/redo would count as a "Theme Reset".
-  function resetTheme(options: { track?: boolean } = {}) {
+  function resetTheme(options: { track?: boolean, immediate?: boolean } = {}) {
     if (options.track !== false) {
       track('Theme Reset')
     }
@@ -705,7 +705,13 @@ export function useTheme() {
     // palette editor showing (and re-persisting) supposedly-reset curves.
     useState<Record<string, any>>(THEME_STATE_KEYS.paletteParams).value = {}
 
-    if (import.meta.client) {
+    // Clearing the live <style> tags imperatively makes a bare reset take
+    // effect on the same frame. But when a reset is immediately followed by a
+    // re-apply (applyDoc: preset swap, undo/redo), that cleared frame paints as
+    // the default theme first — a white flash. Those callers pass immediate:
+    // false so the reactive customColors/cssVariables state ({} → new value in
+    // one tick) swaps the tags atomically with no intermediate paint.
+    if (import.meta.client && options.immediate !== false) {
       document.getElementById(THEME_TAG_IDS.cssVariables)?.replaceChildren()
       document.getElementById(THEME_TAG_IDS.customColors)?.replaceChildren()
     }

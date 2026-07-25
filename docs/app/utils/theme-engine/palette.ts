@@ -65,8 +65,92 @@ export interface PaletteEffects {
 
 export const PALETTE_EFFECT_DEFAULTS: PaletteEffects = { lightness: 0, contrast: 0, saturation: 0, hueShift: 0 }
 
+/**
+ * A stop locked to an exact OKLCH the curves must pass through — "pin this
+ * brand colour, edit around it". Stored as the absolute target; the ramp is
+ * bent to hit it (see `pinField`), so it survives curve drags and modifiers.
+ */
+export interface PalettePin {
+  shade: Shade
+  l: number
+  c: number
+  h: number
+}
+
 /** A persisted palette: the base curves plus the modifier lens over them. */
-export type StoredPaletteParams = PaletteCurveParams & { effects?: PaletteEffects, amount?: number, fineStops?: boolean }
+export type StoredPaletteParams = PaletteCurveParams & { effects?: PaletteEffects, amount?: number, fineStops?: boolean, pins?: PalettePin[] }
+
+// Width (in ramp x, 0–1) of each pin's influence. A pinned stop is hit
+// exactly; neighbours bend smoothly toward it and the effect decays to ~0 by
+// ~2σ away, so distant stops keep following the base curve. Narrow enough to
+// feel local, wide enough that the ramp stays smooth (no kink at the pin).
+const PIN_KERNEL_SIGMA = 0.2
+
+function pinKernel(distance: number): number {
+  const t = distance / PIN_KERNEL_SIGMA
+  return Math.exp(-t * t)
+}
+
+/**
+ * Solve `A·x = b` for a small dense symmetric system (Gauss–Jordan with
+ * partial pivoting). Pins are ≤19, so this is trivially fast; a near-singular
+ * pivot (coincident stops) collapses that weight to 0 rather than exploding.
+ */
+function solveLinear(a: number[][], b: number[]): number[] {
+  const n = b.length
+  const m = a.map((row, i) => [...row, b[i]!])
+  for (let col = 0; col < n; col++) {
+    let pivot = col
+    for (let row = col + 1; row < n; row++) {
+      if (Math.abs(m[row]![col]!) > Math.abs(m[pivot]![col]!)) pivot = row
+    }
+    ;[m[col], m[pivot]] = [m[pivot]!, m[col]!]
+    const diag = m[col]![col]!
+    if (Math.abs(diag) < 1e-12) continue
+    for (let row = 0; row < n; row++) {
+      if (row === col) continue
+      const factor = m[row]![col]! / diag
+      for (let k = col; k <= n; k++) m[row]![k]! -= factor * m[col]![k]!
+    }
+  }
+  return m.map((row, i) => (Math.abs(row[i]!) < 1e-12 ? 0 : row[n]! / row[i]!))
+}
+
+/**
+ * Build the additive correction field that locks the pins. Each channel's
+ * correction is a radial-basis interpolation of the pin deltas (target minus
+ * the base curve at the pin), so at a pinned x it equals the delta exactly —
+ * `base + correction` renders the target — and decays smoothly elsewhere.
+ * Hue deltas take the short way round the circle.
+ */
+function pinField(pins: PalettePin[], base: (x: number) => { l: number, c: number, h: number }) {
+  const xs = pins.map(pin => shadeX(pin.shade))
+  const matrix = xs.map(xi => xs.map(xj => pinKernel(Math.abs(xi - xj))))
+  const deltaL: number[] = []
+  const deltaC: number[] = []
+  const deltaH: number[] = []
+  pins.forEach((pin, i) => {
+    const b = base(xs[i]!)
+    deltaL.push(pin.l - b.l)
+    deltaC.push(pin.c - b.c)
+    deltaH.push(((((pin.h - b.h) % 360) + 540) % 360) - 180)
+  })
+  const wl = solveLinear(matrix, deltaL)
+  const wc = solveLinear(matrix, deltaC)
+  const wh = solveLinear(matrix, deltaH)
+  return (x: number) => {
+    let dl = 0
+    let dc = 0
+    let dh = 0
+    for (let j = 0; j < xs.length; j++) {
+      const k = pinKernel(Math.abs(x - xs[j]!))
+      dl += wl[j]! * k
+      dc += wc[j]! * k
+      dh += wh[j]! * k
+    }
+    return { dl, dc, dh }
+  }
+}
 
 export function isDefaultEffects(effects?: PaletteEffects, amount = 100): boolean {
   if (amount !== 100) return false
@@ -172,11 +256,43 @@ export function shadeX(shade: Shade): number {
   return shade / 1000
 }
 
-export function generatePalette(params: PaletteCurveParams, fine = false): Record<Shade, string> {
+/**
+ * A reusable sampler for the pin-corrected ramp: solves the pin field once,
+ * then returns the raw channel values at any x — hue unwrapped, no gamut clamp
+ * — so a curve drawn through them stays continuous and bends through pinned
+ * stops (which `generatePalette` then clamps per stop for the actual colours).
+ */
+export function buildRampSampler(params: PaletteCurveParams, pins: PalettePin[] = []): (x: number) => { l: number, c: number, h: number } {
+  const base = (x: number) => ({
+    l: sampleCurve(x, params.lightness),
+    c: sampleCurve(x, params.chroma),
+    h: sampleCurve(x, params.hue)
+  })
+  const correct = pins.length ? pinField(pins, base) : undefined
+  return (x: number) => {
+    const b = base(x)
+    if (!correct) return b
+    const d = correct(x)
+    return { l: b.l + d.dl, c: b.c + d.dc, h: b.h + d.dh }
+  }
+}
+
+export function generatePalette(params: PaletteCurveParams, fine = false, pins: PalettePin[] = []): Record<Shade, string> {
   const result = {} as Record<Shade, string>
+
+  const base = (x: number) => ({
+    l: sampleCurve(x, params.lightness),
+    c: sampleCurve(x, params.chroma),
+    h: sampleCurve(x, params.hue)
+  })
+  // The pin correction is added to the raw curve sample (pre-clamp), so a
+  // pinned stop lands on its target exactly whenever that target is in gamut.
+  const correct = pins.length ? pinField(pins, base) : undefined
 
   for (const shade of fine ? SHADES_FINE : SHADES) {
     const x = shadeX(shade)
+    const b = base(x)
+    const d = correct ? correct(x) : { dl: 0, dc: 0, dh: 0 }
 
     // Clamp here, not in the serializer: sculpted curves can demand
     // impossible chroma, and the swatches/contrast math assume sRGB.
@@ -186,9 +302,9 @@ export function generatePalette(params: PaletteCurveParams, fine = false): Recor
     // wraps into [0, 360): a negative or 4-digit hue would fail the
     // sanitizer's canonical-oklch check and silently DROP the shade.
     result[shade] = formatOklch(clampToGamut({
-      l: Math.min(1, Math.max(0, sampleCurve(x, params.lightness))),
-      c: Math.max(0, sampleCurve(x, params.chroma)),
-      h: ((sampleCurve(x, params.hue) % 360) + 360) % 360
+      l: Math.min(1, Math.max(0, b.l + d.dl)),
+      c: Math.max(0, b.c + d.dc),
+      h: ((((b.h + d.dh) % 360) + 360) % 360)
     }))
   }
 
