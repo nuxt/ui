@@ -301,7 +301,12 @@ export function useTheme() {
   const spacingStyle = computed(() => _spacing.value !== 0.25 ? `:root { --spacing: ${_spacing.value}rem; }` : ':root {}')
   const blackAsPrimaryStyle = computed(() => _blackAsPrimary.value ? `:root { --ui-primary: black; } .dark { --ui-primary: white; }` : ':root {}')
   const fontStyle = computed(() => {
-    const parts = [`:root { --font-sans: '${_font.value}', sans-serif; }`]
+    // _font/heading.font hydrate straight from localStorage (useLocalStorage,
+    // no read-time validation) and land in this <style> innerHTML — re-assert
+    // SAFE_NAME at the sink so a tampered name can't break out of the quoted
+    // string, exactly as the SSR FOUC scripts do.
+    const safeFont = SAFE_NAME.test(_font.value) ? _font.value : 'Public Sans'
+    const parts = [`:root { --font-sans: '${safeFont}', sans-serif; }`]
     const prefs = fontPrefs.value
     const weights = prefs.weights || {}
     const weightVars = (Object.keys(weights) as Array<keyof typeof weights>)
@@ -321,7 +326,7 @@ export function useTheme() {
     const heading = prefs.heading
     if (heading && Object.keys(heading).length) {
       const rules: string[] = []
-      if (heading.font) rules.push(`font-family: '${heading.font}', sans-serif;`)
+      if (heading.font && SAFE_NAME.test(heading.font)) rules.push(`font-family: '${heading.font}', sans-serif;`)
       if (heading.weight !== undefined) rules.push(`font-weight: ${heading.weight};`)
       if (heading.uppercase) rules.push('text-transform: uppercase;')
       if (heading.italic) rules.push('font-style: italic;')

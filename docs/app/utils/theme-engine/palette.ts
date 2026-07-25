@@ -80,14 +80,19 @@ export interface PalettePin {
 /** A persisted palette: the base curves plus the modifier lens over them. */
 export type StoredPaletteParams = PaletteCurveParams & { effects?: PaletteEffects, amount?: number, fineStops?: boolean, pins?: PalettePin[] }
 
-// Width (in ramp x, 0–1) of each pin's influence. A pinned stop is hit
-// exactly; neighbours bend smoothly toward it and the effect decays to ~0 by
-// ~2σ away, so distant stops keep following the base curve. Narrow enough to
-// feel local, wide enough that the ramp stays smooth (no kink at the pin).
-const PIN_KERNEL_SIGMA = 0.2
+// Width (in ramp x, 0–1) of each pin's influence. A pinned stop is hit exactly;
+// neighbours bend smoothly toward it and the effect decays to ~0 by ~2σ away.
+// SIGMA_MAX is the widest, smoothest kernel (single or well-separated pins).
+// But a kernel much wider than the gap between two pins makes the exact-
+// interpolation solve ill-conditioned: the weights blow up and the correction
+// overshoots — with pins a fine stop apart it swings whole neighbouring stops
+// to white. So the kernel is narrowed to the closest pin spacing (floored so it
+// never degenerates to a spike), keeping the solve well-conditioned and local.
+const PIN_KERNEL_SIGMA_MAX = 0.2
+const PIN_KERNEL_SIGMA_MIN = 0.04
 
-function pinKernel(distance: number): number {
-  const t = distance / PIN_KERNEL_SIGMA
+function pinKernel(distance: number, sigma: number): number {
+  const t = distance / sigma
   return Math.exp(-t * t)
 }
 
@@ -125,7 +130,34 @@ function solveLinear(a: number[][], b: number[]): number[] {
  */
 function pinField(pins: PalettePin[], base: (x: number) => { l: number, c: number, h: number }) {
   const xs = pins.map(pin => shadeX(pin.shade))
-  const matrix = xs.map(xi => xs.map(xj => pinKernel(Math.abs(xi - xj))))
+
+  // Kernel width: the closest pin pair, clamped. Infinity (a single pin) → MAX.
+  let minSpacing = Infinity
+  for (let i = 0; i < xs.length; i++) {
+    for (let j = i + 1; j < xs.length; j++) {
+      minSpacing = Math.min(minSpacing, Math.abs(xs[i]! - xs[j]!))
+    }
+  }
+  const sigma = Math.min(PIN_KERNEL_SIGMA_MAX, Math.max(PIN_KERNEL_SIGMA_MIN, minSpacing))
+
+  const matrix = xs.map(xi => xs.map(xj => pinKernel(Math.abs(xi - xj), sigma)))
+
+  // Hue is cyclic. Unwrapping each target independently to the base's nearest
+  // arc flips direction for pins near the base's antipode, sending the ramp the
+  // long way round. Instead chain-unwrap the targets in x order (each within
+  // ±180° of the previous), anchored to the base hue at the first pin, so a run
+  // of pins takes the short way *between themselves*.
+  const order = xs.map((_, i) => i).sort((i, j) => xs[i]! - xs[j]!)
+  const hueTarget: number[] = Array.from({ length: pins.length })
+  let prevHue = base(xs[order[0]!]!).h
+  for (const i of order) {
+    let h = pins[i]!.h
+    while (h - prevHue > 180) h -= 360
+    while (h - prevHue < -180) h += 360
+    hueTarget[i] = h
+    prevHue = h
+  }
+
   const deltaL: number[] = []
   const deltaC: number[] = []
   const deltaH: number[] = []
@@ -133,7 +165,7 @@ function pinField(pins: PalettePin[], base: (x: number) => { l: number, c: numbe
     const b = base(xs[i]!)
     deltaL.push(pin.l - b.l)
     deltaC.push(pin.c - b.c)
-    deltaH.push(((((pin.h - b.h) % 360) + 540) % 360) - 180)
+    deltaH.push(hueTarget[i]! - b.h)
   })
   const wl = solveLinear(matrix, deltaL)
   const wc = solveLinear(matrix, deltaC)
@@ -143,7 +175,7 @@ function pinField(pins: PalettePin[], base: (x: number) => { l: number, c: numbe
     let dc = 0
     let dh = 0
     for (let j = 0; j < xs.length; j++) {
-      const k = pinKernel(Math.abs(x - xs[j]!))
+      const k = pinKernel(Math.abs(x - xs[j]!), sigma)
       dl += wl[j]! * k
       dc += wc[j]! * k
       dh += wh[j]! * k

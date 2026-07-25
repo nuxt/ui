@@ -128,9 +128,13 @@ export default defineNuxtPlugin({
           tagPriority: -1
         }, {
           innerHTML: `
-            if (localStorage.getItem('nuxt-ui-radius')) {
-              var el = document.querySelector('style#nuxt-ui-radius');
-              if (el) { el.innerHTML = ':root { --ui-radius: ' + localStorage.getItem('nuxt-ui-radius') + 'rem; }'; }
+            var rRaw = localStorage.getItem('nuxt-ui-radius');
+            if (rRaw) {
+              var rNum = parseFloat(rRaw);
+              if (isFinite(rNum) && rNum >= 0) {
+                var el = document.querySelector('style#nuxt-ui-radius');
+                if (el) { el.textContent = ':root { --ui-radius: ' + rNum + 'rem; }'; }
+              }
             }
           `.replace(/\s+/g, ' '),
           type: 'text/javascript',
@@ -139,13 +143,21 @@ export default defineNuxtPlugin({
           innerHTML: `
             var fsRaw = localStorage.getItem('nuxt-ui-font-size');
             if (fsRaw && fsRaw !== '16') {
-              var fsEl = document.querySelector('style#nuxt-ui-font-size');
-              if (fsEl) { fsEl.innerHTML = 'html { font-size: ' + fsRaw + 'px; }'; }
+              var fsNum = parseFloat(fsRaw);
+              if (isFinite(fsNum)) {
+                fsNum = Math.min(20, Math.max(12, fsNum));
+                var fsEl = document.querySelector('style#nuxt-ui-font-size');
+                if (fsEl) { fsEl.textContent = 'html { font-size: ' + fsNum + 'px; }'; }
+              }
             }
             var spRaw = localStorage.getItem('nuxt-ui-spacing');
             if (spRaw && spRaw !== '0.25') {
-              var spEl = document.querySelector('style#nuxt-ui-spacing');
-              if (spEl) { spEl.innerHTML = ':root { --spacing: ' + spRaw + 'rem; }'; }
+              var spNum = parseFloat(spRaw);
+              if (isFinite(spNum)) {
+                spNum = Math.min(0.5, Math.max(0.125, spNum));
+                var spEl = document.querySelector('style#nuxt-ui-spacing');
+                if (spEl) { spEl.textContent = ':root { --spacing: ' + spNum + 'rem; }'; }
+              }
             }
           `.replace(/\s+/g, ' '),
           type: 'text/javascript',
@@ -166,37 +178,47 @@ export default defineNuxtPlugin({
         }, {
           innerHTML: [
             `(function() {`,
-            `var font = localStorage.getItem('nuxt-ui-font') || 'Public Sans';`,
+            `var SAFE = /^[\\w -]{1,50}$/;`,
+            `function num(v, lo, hi) { var n = parseFloat(v); return isFinite(n) ? Math.min(hi, Math.max(lo, n)) : undefined; }`,
+            `var fontRaw = localStorage.getItem('nuxt-ui-font') || 'Public Sans';`,
+            `var font = SAFE.test(fontRaw) ? fontRaw : 'Public Sans';`,
             `var prefs = {};`,
             `try { prefs = JSON.parse(localStorage.getItem('nuxt-ui-font-prefs') || '{}'); } catch(e) {}`,
             `var css = ':root { --font-sans: \\'' + font + '\\', sans-serif; }';`,
             `var w = prefs.weights || {};`,
-            `var wVars = Object.keys(w).map(function(s) { return '--font-weight-' + s + ': ' + w[s] + ';'; }).join(' ');`,
+            `var wVars = Object.keys(w).map(function(s) { var n = num(w[s], 100, 900); return (SAFE.test(s) && n !== undefined) ? '--font-weight-' + s + ': ' + n + ';' : ''; }).filter(Boolean).join(' ');`,
             `if (wVars) { css += ' :root { ' + wVars + ' }'; }`,
             `var bodyRules = '';`,
-            `if (w.normal) { bodyRules += 'font-weight: ' + w.normal + '; '; }`,
+            `var wn = num(w.normal, 100, 900);`,
+            `if (wn !== undefined) { bodyRules += 'font-weight: ' + wn + '; '; }`,
             `if (prefs.uppercase) { bodyRules += 'text-transform: uppercase; '; }`,
             `if (prefs.italic) { bodyRules += 'font-style: italic; '; }`,
-            `if (prefs.letterSpacing) { bodyRules += 'letter-spacing: ' + prefs.letterSpacing + 'em; '; }`,
-            `if (prefs.lineHeight) { bodyRules += 'line-height: ' + prefs.lineHeight + '; '; }`,
+            `var ls = num(prefs.letterSpacing, -0.2, 1);`,
+            `if (ls !== undefined && ls !== 0) { bodyRules += 'letter-spacing: ' + ls + 'em; '; }`,
+            `var lh = num(prefs.lineHeight, 0.8, 3);`,
+            `if (lh !== undefined) { bodyRules += 'line-height: ' + lh + '; '; }`,
             `if (bodyRules) { css += ' body { ' + bodyRules + '}'; }`,
             `var h = prefs.heading || {};`,
-            `if (h.font || h.weight || h.uppercase || h.italic || h.underline || h.letterSpacing || h.lineHeight) {`,
+            `var hFont = (h.font && SAFE.test(h.font)) ? h.font : undefined;`,
+            `var hWeight = num(h.weight, 100, 900);`,
+            `var hLs = num(h.letterSpacing, -0.2, 1);`,
+            `var hLh = num(h.lineHeight, 0.8, 3);`,
+            `if (hFont || hWeight !== undefined || h.uppercase || h.italic || h.underline || (hLs !== undefined && hLs !== 0) || hLh !== undefined) {`,
             `var rules = '';`,
-            `if (h.font) { rules += 'font-family: \\'' + h.font + '\\', sans-serif; '; }`,
-            `if (h.weight) { rules += 'font-weight: ' + h.weight + '; '; }`,
+            `if (hFont) { rules += 'font-family: \\'' + hFont + '\\', sans-serif; '; }`,
+            `if (hWeight !== undefined) { rules += 'font-weight: ' + hWeight + '; '; }`,
             `if (h.uppercase) { rules += 'text-transform: uppercase; '; }`,
             `if (h.italic) { rules += 'font-style: italic; '; }`,
             `if (h.underline) { rules += 'text-decoration: underline; '; }`,
-            `if (h.letterSpacing) { rules += 'letter-spacing: ' + h.letterSpacing + 'em; '; }`,
-            `if (h.lineHeight) { rules += 'line-height: ' + h.lineHeight + '; '; }`,
+            `if (hLs !== undefined && hLs !== 0) { rules += 'letter-spacing: ' + hLs + 'em; '; }`,
+            `if (hLh !== undefined) { rules += 'line-height: ' + hLh + '; '; }`,
             `css += ' h1, h2, h3, h4, h5, h6 { ' + rules + '}';`,
             `}`,
             `if (localStorage.getItem('nuxt-ui-font') || Object.keys(prefs).length) {`,
             `var fontEl = document.querySelector('style#nuxt-ui-font');`,
-            `if (fontEl) { fontEl.innerHTML = css; }`,
+            `if (fontEl) { fontEl.textContent = css; }`,
             `}`,
-            `[font, h.font].forEach(function(name) {`,
+            `[font, hFont].forEach(function(name) {`,
             `if (!name || name === 'Public Sans') return;`,
             `var id = 'font-' + name.toLowerCase().replace(/\\s+/g, '-');`,
             `if (document.getElementById(id)) return;`,

@@ -153,6 +153,50 @@ describe('generatePalette', () => {
     expect(palette[300]).toBe(formatOklch(clampToGamut(a)))
     expect(palette[700]).toBe(formatOklch(clampToGamut(b)))
   })
+
+  it('keeps clustered opposing pins from overshooting neighbours', () => {
+    // Two adjacent fine stops pulled in opposite directions used to blow the
+    // Gaussian weights up so the unpinned neighbours swung ~0.10 L. The
+    // spacing-adaptive sigma must keep each pin's influence local.
+    const bare = generatePalette(CURVE_DEFAULTS, true)
+    const l500 = parseColor(bare[500])!.l
+    const l550 = parseColor(bare[550])!.l
+    const pinned = generatePalette(CURVE_DEFAULTS, true, [
+      { shade: 500, l: l500 + 0.03, c: 0.05, h: 150 },
+      { shade: 550, l: l550 - 0.03, c: 0.05, h: 150 }
+    ])
+    // Neighbours a stop away should barely budge (was ~0.10 before the fix).
+    expect(Math.abs(parseColor(pinned[350])!.l - parseColor(bare[350])!.l)).toBeLessThan(0.02)
+    expect(Math.abs(parseColor(pinned[650])!.l - parseColor(bare[650])!.l)).toBeLessThan(0.02)
+  })
+
+  it('never collapses a clustered pin set to white', () => {
+    // Five alternating ±0.02 pins across 450–650 used to drive 13 of 19 stops
+    // to oklch(100% 0 0). No stop may reach full white.
+    const bare = generatePalette(CURVE_DEFAULTS, true)
+    const pins = [450, 500, 550, 600, 650].map((shade, i) => ({
+      shade: shade as Shade,
+      l: parseColor(bare[shade as Shade])!.l + (i % 2 ? -0.02 : 0.02),
+      c: 0.05,
+      h: 150
+    }))
+    const palette = generatePalette(CURVE_DEFAULTS, true, pins)
+    for (const value of Object.values(palette)) {
+      expect(value, `blown to white: ${value}`).not.toMatch(/oklch\(100(\.0+)?%/)
+    }
+  })
+
+  it('takes the short hue arc between pins on the far side of the wheel', () => {
+    // Base hue 250 with pins at hue 60 and 80 must not sweep ~340° the long
+    // way round; the unwrapped targets keep the interpolation monotonic.
+    const flatHue = { ...CURVE_DEFAULTS, hue: { y0: 250, y1: 250, p1x: 0.33, p1y: 250, p2x: 0.66, p2y: 250 } }
+    const palette = generatePalette(flatHue, false, [
+      { shade: 200, l: 0.8, c: 0.1, h: 60 },
+      { shade: 800, l: 0.4, c: 0.1, h: 80 }
+    ])
+    expect(parseColor(palette[200])!.h).toBeCloseTo(60, 0)
+    expect(parseColor(palette[800])!.h).toBeCloseTo(80, 0)
+  })
 })
 
 describe('fitPalette (work backwards from real palettes)', () => {

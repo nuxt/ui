@@ -58,9 +58,21 @@ export const LIBRARY_TOKEN_DEFAULTS = {
   }
 } as const
 
-const UI_COLOR_RE = /^var\(--ui-color-([a-z]+)-(\d{2,3})\)$/
+// Standard stops ride the `--ui-color-<alias>-<shade>` indirection; the
+// 100-step midpoints (150…850) have none — the runtime colours plugin only
+// generates the 11 standard stops — so shadeRef emits them against the custom
+// ramp's `--color-custom-<alias>-<mid>` variable instead. Both forms name the
+// same ramp in the same capture position, so a single alternation parses both
+// and midpoints promote back to governed shades exactly like standard stops.
+const UI_COLOR_RE = /^var\(--(?:ui-color|color-custom)-([a-z]+)-(\d{2,3})\)$/
 
-/** Parse a `var(--ui-color-<alias>-<shade>)` reference, the one format the studio emits. */
+/**
+ * Parse a shade reference the studio emits — both the standard-stop
+ * `var(--ui-color-<alias>-<shade>)` form and the midpoint
+ * `var(--color-custom-<alias>-<mid>)` form — to `{ alias, shade }`. The alias
+ * is the ramp name in either case; callers apply their own ownership check
+ * against it, so a ref on a foreign ramp is parsed but not adopted.
+ */
 export function parseUiColorRef(value?: string): { alias: string, shade: number } | undefined {
   const match = value?.match(UI_COLOR_RE)
   return match ? { alias: match[1]!, shade: Number(match[2]) } : undefined

@@ -168,10 +168,17 @@ function luminance(color: Oklch): number {
   return 0.2126 * r + 0.7152 * g + 0.0722 * b
 }
 
-/** WCAG 2.x contrast ratio between two CSS colors (hex or oklch), 1–21. */
-export function contrastRatio(colorA: string, colorB: string): number {
-  const la = luminance(parseColor(colorA) || { l: 0, c: 0, h: 0 })
-  const lb = luminance(parseColor(colorB) || { l: 0, c: 0, h: 0 })
+/**
+ * WCAG 2.x contrast ratio between two CSS colors (hex or oklch), 1–21.
+ * Returns `null` when either input is unparseable, so callers can signal an
+ * unknown/unmeasurable result rather than a fabricated ratio.
+ */
+export function contrastRatio(colorA: string, colorB: string): number | null {
+  const a = parseColor(colorA)
+  const b = parseColor(colorB)
+  if (!a || !b) return null
+  const la = luminance(a)
+  const lb = luminance(b)
   const [lighter, darker] = la > lb ? [la, lb] : [lb, la]
   return (lighter + 0.05) / (darker + 0.05)
 }

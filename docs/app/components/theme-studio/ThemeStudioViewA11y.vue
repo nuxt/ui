@@ -36,7 +36,7 @@ const SOLIDS = FOREGROUNDS.slice(5)
 interface Cell {
   fg: string
   bg: string
-  ratio: number
+  ratio: number | null
 }
 
 const matrix = ref<Cell[][]>([])
@@ -97,11 +97,18 @@ watch([() => colorMode.value, () => ({ ...appConfig.ui.colors }), cssVariablesDa
 onMounted(compute)
 onUnmounted(() => cancelAnimationFrame(pending))
 
-function level(ratio: number): { label: string, color: 'success' | 'warning' | 'error' } {
+function level(ratio: number | null): { label: string, color: 'success' | 'warning' | 'error' | 'neutral' } {
+  // Unparseable color — signal unknown rather than a fabricated pass/fail.
+  if (ratio === null) return { label: 'Unknown', color: 'neutral' }
   if (ratio >= 7) return { label: 'AAA', color: 'success' }
   if (ratio >= 4.5) return { label: 'AA', color: 'success' }
   if (ratio >= 3) return { label: 'AA18', color: 'warning' }
   return { label: 'Fail', color: 'error' }
+}
+
+/** Ratio display: numeric to 1 decimal, or an em dash when unmeasurable. */
+function formatRatio(ratio: number | null): string {
+  return ratio === null ? '—' : ratio.toFixed(1)
 }
 </script>
 
@@ -141,7 +148,7 @@ function level(ratio: number): { label: string, color: 'success' | 'warning' | '
                     <span class="font-semibold" :style="{ color: matrix[row][col].fg }">Aa</span>
                     <span class="flex items-center gap-1.5">
                       <span class="tabular-nums font-mono opacity-80" :style="{ color: matrix[row][col].fg }">
-                        {{ matrix[row][col].ratio.toFixed(1) }}
+                        {{ formatRatio(matrix[row][col].ratio) }}
                       </span>
                       <UBadge :label="level(matrix[row][col].ratio).label" :color="level(matrix[row][col].ratio).color" variant="subtle" size="sm" />
                     </span>
@@ -171,7 +178,7 @@ function level(ratio: number): { label: string, color: 'success' | 'warning' | '
             <span class="text-xs font-semibold" :style="{ color: cell.fg }">{{ SOLIDS[index]!.label }}</span>
             <span class="flex items-center gap-1.5">
               <span class="text-xs tabular-nums font-mono opacity-80" :style="{ color: cell.fg }">
-                {{ cell.ratio.toFixed(1) }}
+                {{ formatRatio(cell.ratio) }}
               </span>
               <UBadge :label="level(cell.ratio).label" :color="level(cell.ratio).color" variant="solid" size="sm" />
             </span>

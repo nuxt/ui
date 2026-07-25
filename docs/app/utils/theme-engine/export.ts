@@ -180,6 +180,23 @@ export function generateCSS(doc: ThemeDoc): string {
   return lines.join('\n')
 }
 
+/**
+ * Serialize a plain object to JS/TS object-literal source: unquote only keys
+ * that are valid identifiers (so dashed keys like `ui-radius` stay quoted and
+ * valid), and prefer single-quoted strings — but keep double quotes on any
+ * string containing an apostrophe, so a value like `Cooper's` isn't corrupted.
+ */
+function toObjectSource(value: Record<string, any>): string {
+  return JSON.stringify(value, null, 2)
+    // Only identifier-safe keys may drop their quotes.
+    .replace(/"([a-z_$][\w$]*)":/gi, '$1:')
+    // Convert the remaining double-quoted strings (values, dashed keys) to
+    // single quotes, but leave any that contain a single quote untouched —
+    // double quotes are valid JS and don't need escaping there.
+    .replace(/"((?:[^"\\]|\\.)*)"/g, (match, body: string) =>
+      body.includes('\'') ? match : `'${body}'`)
+}
+
 /** The `app.config.ts` / `vite.config.ts` side of the export. */
 export function generateConfig(doc: ThemeDoc, framework: string = 'nuxt'): string {
   const config: Record<string, any> = {}
@@ -204,15 +221,11 @@ export function generateConfig(doc: ThemeDoc, framework: string = 'nuxt'): strin
     Object.assign(config.ui, componentOverrides)
   }
 
-  const configString = JSON.stringify(config, null, 2)
-    .replace(/"([^"]+)":/g, '$1:')
-    .replace(/"/g, '\'')
+  const configString = toObjectSource(config)
 
   if (framework === 'vue') {
     const pluginConfig = config.ui
-      ? JSON.stringify({ ui: config.ui }, null, 2)
-          .replace(/"([^"]+)":/g, '$1:')
-          .replace(/"/g, '\'')
+      ? toObjectSource({ ui: config.ui })
       : '{}'
     return [
       'import { defineConfig } from \'vite\'',

@@ -1,6 +1,6 @@
 import colors from 'tailwindcss/colors'
 import { THEME_STATE_KEYS, THEME_STORAGE_KEYS } from '../utils/theme-keys'
-import { presets, docToSettings, isDefaultTheme, generatePalette, applyPaletteEffects, isDefaultEffects, parseCssColor, styleComponents, styleTokens, sectionFingerprint, mergeSection, canonicalTokenShades, TOKEN_SHADE_TARGETS, SECTION_GROUPS, DEFAULT_COLORS, SHADES } from '../utils/theme-engine'
+import { presets, docToSettings, isDefaultTheme, generatePalette, applyPaletteEffects, isDefaultEffects, parseCssColor, styleComponents, styleTokens, sectionFingerprint, mergeSection, canonicalTokenShades, TOKEN_SHADE_TARGETS, SECTION_GROUPS, DEFAULT_COLORS, SHADES_FINE } from '../utils/theme-engine'
 import type { SectionKey, ThemeDoc, ThemePreset, PaletteCurveParams, PaletteEffects, StoredPaletteParams, PalettePin, StyleOptions, Shade, ShadeStop, ColorAlias, TokenRamp } from '../utils/theme-engine'
 import { readLocalStorage } from '../utils/theme'
 
@@ -95,10 +95,17 @@ export function useThemeStudio() {
           entry.amount
         ), entry.fineStops, entry.pins)
         const name = customPaletteName(alias)
+        // The alias mapping and neutral remaps usually survive the reload
+        // intact — only the derived ramp (customColors) loses its restore
+        // race. Re-sending an alias that's already correct routes through the
+        // primary/neutral computed setters, which reset black-as-primary,
+        // rewrite localStorage and fire a spurious "Theme Changed" event every
+        // single load. Heal the ramp always; touch the alias only if it drifted.
+        const aliasAlreadySet = (appConfig.ui.colors as Record<string, string>)[alias] === name
         theme.applyThemeSettings({
           customColors: { [name]: ramp },
-          [alias]: name,
-          ...(alias === 'neutral' ? { cssVariables: unownedNeutralRemaps() } : {})
+          ...(aliasAlreadySet ? {} : { [alias]: name }),
+          ...(alias === 'neutral' && !aliasAlreadySet ? { cssVariables: unownedNeutralRemaps() } : {})
         }, { track: false })
       }
     })
@@ -159,17 +166,23 @@ export function useThemeStudio() {
     return (appConfig.ui.colors as Record<string, string>)[alias] === customPaletteName(alias)
   }
 
-  /** All 11 shades of a named palette as oklch — tailwind's JS values first, CSS variables as fallback. */
+  /**
+   * Every defined shade of a named palette as oklch — tailwind's JS values
+   * first, CSS variables as fallback. Sampled across the fine stop set so an
+   * imported ramp that carries midpoints (150–850) is read whole; a standard
+   * 11-stop ramp simply has no midpoint vars and those drop out. The editor
+   * uses the midpoints' presence to re-detect fine stops on seed.
+   */
   function paletteShades(name: string): Partial<Record<Shade, string>> | undefined {
     const tailwind = (colors as Record<string, any>)[name]
     if (tailwind && typeof tailwind === 'object') {
-      return Object.fromEntries(SHADES.map(shade => [shade, parseCssColor(tailwind[shade])]).filter(([, color]) => color))
+      return Object.fromEntries(SHADES_FINE.map(shade => [shade, parseCssColor(tailwind[shade])]).filter(([, color]) => color))
     }
 
     if (import.meta.client) {
       const styles = getComputedStyle(document.documentElement)
       const cssName = name === 'neutral' ? 'old-neutral' : name
-      const entries = SHADES
+      const entries = SHADES_FINE
         .map(shade => [shade, parseCssColor(styles.getPropertyValue(`--color-${cssName}-${shade}`))] as const)
         .filter(([, color]) => color)
       if (entries.length >= 2) {
@@ -459,7 +472,18 @@ export function useThemeStudio() {
     // applyDoc resets everything first, which clears the persisted preset —
     // but a section reset moves TOWARD the baseline; keep it
     const preserved = activePreset.value
+    // applyDoc → resetTheme also wipes the editor curves (paletteParams), but a
+    // section reset only touches its own slice: resetting typography must not
+    // discard the curves behind an untouched custom colour ramp (the baked
+    // shades survive in the doc, so the curves have to as well, or the editor
+    // silently refits an approximation). Snapshot now, then restore the curves
+    // for every alias whose custom ramp outlived the reset (a reset colour
+    // section drops back to a stock name, so isCustomPalette filters it out).
+    const preservedPp = JSON.parse(JSON.stringify(paletteParams.value)) as typeof paletteParams.value
     applyDoc(mergeSection(plain, baselineDoc.value, key))
+    setPaletteParams(Object.fromEntries(
+      Object.entries(preservedPp).filter(([alias]) => isCustomPalette(alias))
+    ))
     setActivePreset(preserved)
     track('Theme Section Reset', { section: key })
   }

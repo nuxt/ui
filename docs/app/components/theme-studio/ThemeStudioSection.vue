@@ -50,16 +50,18 @@ const open = ref(props.defaultOpen)
         class="justify-start flex-1"
       />
 
-      <UButton
-        v-if="helpTo"
-        :to="helpTo"
-        size="sm"
-        color="neutral"
-        variant="ghost"
-        icon="i-lucide-help-circle"
-        aria-label="About this setting"
-        @click.stop
-      />
+      <UTooltip text="Docs">
+        <UButton
+          v-if="helpTo"
+          :to="helpTo"
+          size="sm"
+          color="neutral"
+          variant="ghost"
+          icon="i-lucide-help-circle"
+          aria-label="Documentation for this setting"
+          @click.stop
+        />
+      </UTooltip>
 
       <UTooltip v-if="sectionKey" :text="dirty ? 'Reset to preset' : 'Matches the preset'">
         <UButton

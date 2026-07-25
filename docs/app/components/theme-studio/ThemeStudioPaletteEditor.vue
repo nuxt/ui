@@ -28,6 +28,17 @@ function pickCurves(value: StoredPaletteParams): PaletteCurveParams {
   return structuredClone({ lightness: toRaw(value.lightness), chroma: toRaw(value.chroma), hue: toRaw(value.hue) })
 }
 
+/**
+ * A plain, clone-safe copy of a pin list. `pins` is a deeply-reactive ref, so
+ * reading an element (via filter/index) hands back a Vue Proxy that `toRaw`
+ * does NOT unwrap — only the outer array. structuredClone then throws
+ * DataCloneError on the proxied element. Rebuilding each pin from its scalar
+ * fields sidesteps the proxy entirely, so the result always persists.
+ */
+function plainPins(pins: readonly PalettePin[]): PalettePin[] {
+  return pins.map(pin => ({ shade: pin.shade, l: pin.l, c: pin.c, h: pin.h }))
+}
+
 // The modifier lens, restored alongside the base so a reload lands exactly
 // where the session left off instead of silently baking the sliders in.
 const stored = paletteParams.value[props.alias]
@@ -52,7 +63,7 @@ const stopCount = computed({
 // Stops locked to an exact colour — the curves bend to pass through them.
 // Keyed edits go through setPin/removePin so the array stays a plain, cloneable
 // value (it's persisted and fed to generatePalette on every apply).
-const pins = ref<PalettePin[]>(stored?.pins ? structuredClone(toRaw(stored.pins)) : [])
+const pins = ref<PalettePin[]>(stored?.pins ? plainPins(stored.pins) : [])
 const pinnedShades = computed(() => new Set(pins.value.map(pin => pin.shade)))
 
 function setPin(shade: number, oklch: string) {
@@ -261,15 +272,22 @@ const stripEl = computed(() => stripRef.value ?? undefined)
  * stretches once, at seed, to include them, or the drag clamp would snap a
  * merely-grabbed handle back into range and shift the color uninvited.
  */
-const seedHues = [params.hue.y0, params.hue.y1, params.hue.p1y, params.hue.p2y]
-const windows = {
-  lightness: { min: 0, max: 1 },
-  chroma: { min: 0, max: 0.35 },
-  hue: {
-    min: Math.min(0, Math.floor(Math.min(...seedHues) / 10) * 10),
-    max: Math.max(360, Math.ceil(Math.max(...seedHues) / 10) * 10)
+function hueWindow(hue: PaletteCurveParams['hue']) {
+  const points = [hue.y0, hue.y1, hue.p1y, hue.p2y]
+  return {
+    min: Math.min(0, Math.floor(Math.min(...points) / 10) * 10),
+    max: Math.max(360, Math.ceil(Math.max(...points) / 10) * 10)
   }
 }
+// The hue window must stretch to fit each freshly-seeded curve (a later palette
+// can cross the seam elsewhere), so it's a ref reseeded alongside params — but
+// only on seed, never mid-drag, or a grabbed handle would rescale under the
+// pointer. Lightness/chroma are fixed physical ranges.
+const windows = ref({
+  lightness: { min: 0, max: 1 },
+  chroma: { min: 0, max: 0.35 },
+  hue: hueWindow(params.hue)
+})
 
 /**
  * The color field behind the active tab's curve: columns follow the ramp,
@@ -293,7 +311,7 @@ watch(params, () => syncFieldCurves(), { deep: true })
 
 const field = computed(() => {
   const channel = tab.value
-  const { min, max } = windows[channel]
+  const { min, max } = windows.value[channel]
   const curves = fieldCurves.value
 
   // Fence-post: column i is sampled AT ramp position i/(n-1) — the editor
@@ -335,7 +353,7 @@ const isDragging = ref(false)
 const customName = computed(() => `custom-${props.alias}`)
 
 function applyReactive() {
-  setPaletteFromCurve(props.alias, structuredClone(seedBase), { ...effects }, effectAmount.value, fineStops.value, structuredClone(toRaw(pins.value)))
+  setPaletteFromCurve(props.alias, structuredClone(seedBase), { ...effects }, effectAmount.value, fineStops.value, plainPins(pins.value))
   clearCssomPreview()
 }
 
@@ -381,6 +399,10 @@ watch(fineStops, (fine, previous) => {
   if (fine || !previous) return
   const kept = pins.value.filter(pin => SHADES.includes(pin.shade as typeof SHADES[number]))
   if (kept.length !== pins.value.length) pins.value = kept
+  // A stuck/hovered midpoint tile is gone once we narrow — drop the popover
+  // state so it can't dangle over a stop that no longer renders.
+  if (stuckShade.value !== undefined && !SHADES.includes(stuckShade.value as typeof SHADES[number])) stuckShade.value = undefined
+  if (hoveredShade.value !== undefined && !SHADES.includes(hoveredShade.value as typeof SHADES[number])) hoveredShade.value = undefined
 })
 
 // params, pins and fineStops all reshape the ramp, so any of them changing
@@ -408,6 +430,9 @@ function seed(values: PaletteCurveParams) {
     pins.value = []
     Object.assign(params, next)
   })
+  // Restretch the hue window to this seed (may cross the seam differently than
+  // the palette the editor first opened on).
+  windows.value.hue = hueWindow(next.hue)
 }
 
 // While dragging, a global class turns on short color transitions so the
@@ -440,7 +465,12 @@ function onDragEnd() {
   if (!effectsDirty.value) {
     seedBase = structuredClone(toRaw(params))
   }
+  // applyReactive reconciles AND clears the inline preview vars, but only the
+  // active ramp takes that path — an inactive alias (edited before its first
+  // apply) still set preview vars during the drag, so clear them directly or
+  // they shadow the reactive <style> for this ramp.
   if (active.value) applyReactive()
+  else clearCssomPreview()
 }
 
 onUnmounted(() => {
@@ -473,8 +503,15 @@ function seedFromCurrent() {
 // throttled applies (the callback runs queued, after any sync flag reset).
 watch(() => paletteParams.value[props.alias], (value) => {
   if (!value || !('lightness' in value)) return
+  // Echo guard: skip only when curves AND pins AND stop density all already
+  // match. Comparing curves alone would swallow an external change that moved
+  // just a pin or toggled fine stops (undo/redo of a pin-only edit), leaving
+  // the editor showing stale pins over correct curves.
   const effective = applyPaletteEffects(pickCurves(value), value.effects, value.amount)
-  if (JSON.stringify(effective) === JSON.stringify(toRaw(params))) return
+  const curvesMatch = JSON.stringify(effective) === JSON.stringify(toRaw(params))
+  const pinsMatch = JSON.stringify(value.pins ?? []) === JSON.stringify(toRaw(pins.value))
+  const fineMatch = (value.fineStops ?? false) === fineStops.value
+  if (curvesMatch && pinsMatch && fineMatch) return
 
   seedBase = pickCurves(value)
   normalizeHue(seedBase)
@@ -484,10 +521,12 @@ watch(() => paletteParams.value[props.alias], (value) => {
   ignoreUpdates(() => {
     Object.assign(effects, PALETTE_EFFECT_DEFAULTS, value.effects ?? {})
     effectAmount.value = value.amount ?? 100
-    pins.value = value.pins ? structuredClone(toRaw(value.pins)) : []
+    pins.value = value.pins ? plainPins(value.pins) : []
     fineStops.value = value.fineStops ?? false
     Object.assign(params, applyPaletteEffects(seedBase, effects, effectAmount.value))
   })
+  // A restored curve can cross the hue seam elsewhere — refit the window too.
+  windows.value.hue = hueWindow(toRaw(params).hue)
 })
 
 // Follow the selected palette so opening the editor starts from the curves of

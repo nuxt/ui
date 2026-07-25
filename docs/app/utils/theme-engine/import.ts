@@ -437,7 +437,16 @@ function parseObjectLiteral(source: string, start: number): { value: any, end: n
         ws()
         if (source[i] !== ':') throw new Error(`Expected ':' at ${i}`)
         i++
-        obj[key] = parseValue()
+        // Define rather than assign: a pasted key named `__proto__`,
+        // `constructor`, or `prototype` must land as an own data property,
+        // not walk the setter and mutate the prototype (same intent as the
+        // apply-path guards elsewhere).
+        Object.defineProperty(obj, key, {
+          value: parseValue(),
+          writable: true,
+          enumerable: true,
+          configurable: true
+        })
         ws()
       }
       i++
@@ -473,7 +482,12 @@ function parseObjectLiteral(source: string, start: number): { value: any, end: n
     i++
     let out = ''
     while (i < source.length && source[i] !== quote) {
-      if (source[i] === '\\') i++
+      if (source[i] === '\\') {
+        i++
+        // A backslash at EOF has nothing to escape — stop before appending
+        // the out-of-range `source[i]` (which stringifies to "undefined").
+        if (i >= source.length) break
+      }
       out += source[i]
       i++
     }
@@ -568,7 +582,13 @@ function detectBorder(components: Record<string, any>): Pick<StyleOptions, 'bord
 
   const widths = texts.flatMap(text => [...text.matchAll(/(?:^|\s)(?:sm:)?ring-(\d)(?:\s|$)/g)].map(match => Number(match[1])))
   if (!widths.length) return {}
-  const width = widths[0]!
+  // A mixed-width paste (ring-1 here, ring-3 there) has no single correct
+  // answer, and picking the first by object-iteration order makes the result
+  // arbitrary. Pick the most common width — the dominant treatment — and
+  // break ties toward the larger width, so the choice is deterministic.
+  const counts = new Map<number, number>()
+  for (const value of widths) counts.set(value, (counts.get(value) ?? 0) + 1)
+  const width = [...counts.entries()].sort((a, b) => b[1] - a[1] || b[0] - a[0])[0]![0]
   if (width === 0) return { border: 'none' }
 
   return {
@@ -612,7 +632,12 @@ function detectInnerShadow(components: Record<string, any>): StyleOptions['inner
  * to the default-width form so subtraction still recognizes them.
  */
 function normalizeLegacyWidths(components: Record<string, any>) {
-  const WIDTH_TOKEN = /^(?:sm:)?(?:ring|divide-y|border(?:-[tbesxy])?)(?:-[0-4])?$|^lg:not-last:border-e(?:-[0-4])?$/
+  // Only width-bearing legacy fragments are noise (ring-2, border-b-3,
+  // divide-y-2 …); the width digit is REQUIRED. A bare presence token
+  // (`border`, `ring`, `divide-y`, `lg:not-last:border-e`) is a real class —
+  // the new style axis never regenerates it — so scrubbing it would corrupt a
+  // genuine divider/border rather than just strip a migrated width.
+  const WIDTH_TOKEN = /^(?:sm:)?(?:ring|divide-y|border(?:-[tbesxy])?)-[0-4]$|^lg:not-last:border-e-[0-4]$/
   const scrub = (classes: unknown): string | undefined => {
     if (typeof classes !== 'string') return undefined
     const tokens = classes.split(/\s+/).flatMap((token) => {
