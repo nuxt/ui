@@ -133,6 +133,12 @@ function parseDeclaration(result: ParsedCSS, selector: string, prop: string, val
       // always exported alongside --default-border-width with the same value
       return true
     }
+    if (/^--shadow-(?:2xs|xs|sm|md|lg|xl|2xl)$/.test(prop)) {
+      // Derived shadow ramp — regenerated from the shadow style on export
+      // (scaled config, or transparent under None), so it carries no
+      // independent data to import; the treatment is read from the classes.
+      return true
+    }
     return false
   }
 
@@ -294,7 +300,7 @@ function extractStyle(light: Record<string, string>, dark: Record<string, string
   const frameColor = take('--ui-frame-color')
 
   if (geometry.x.light !== undefined) {
-    style.shadow = 'hard'
+    style.shadow = 'custom'
     const parsed = {
       x: Number.parseFloat(geometry.x.light),
       y: Number.parseFloat(geometry.y.light ?? '3'),
@@ -306,10 +312,10 @@ function extractStyle(light: Record<string, string>, dark: Record<string, string
       style.shadowGeometry = parsed
     }
   } else if (finals.hard.light !== undefined || finals.soft.light !== undefined) {
-    style.shadow = 'soft'
+    style.shadow = 'custom'
   }
 
-  if (style.shadow !== 'hard') {
+  if (style.shadow !== 'custom') {
     // dark-only geometry can't seed a hard shadow — keep it as tokens
     putBack('--ui-shadow-offset-x', geometry.x)
     putBack('--ui-shadow-offset-y', geometry.y)
@@ -337,7 +343,7 @@ function extractStyle(light: Record<string, string>, dark: Record<string, string
   take('--ui-inner-shadow')
 
   if (innerGeometry.x.light !== undefined) {
-    style.innerShadow = 'hard'
+    style.innerShadow = 'custom'
     const parsed = {
       x: Number.parseFloat(innerGeometry.x.light),
       y: Number.parseFloat(innerGeometry.y.light ?? '2'),
@@ -348,10 +354,10 @@ function extractStyle(light: Record<string, string>, dark: Record<string, string
       style.innerShadowGeometry = parsed
     }
   } else if (innerFinal.light !== undefined) {
-    style.innerShadow = 'soft'
+    style.innerShadow = 'custom'
   }
 
-  if (style.innerShadow !== 'hard') {
+  if (style.innerShadow !== 'custom') {
     putBack('--ui-inner-shadow-offset-x', innerGeometry.x)
     putBack('--ui-inner-shadow-offset-y', innerGeometry.y)
     putBack('--ui-inner-shadow-blur', innerGeometry.blur)
@@ -610,8 +616,8 @@ function detectFrame(components: Record<string, any>): boolean {
 /** Shadow fallback when only a config was pasted (CSS normally decides). */
 function detectShadow(components: Record<string, any>): StyleOptions['shadow'] {
   const slots = Object.values(components).flatMap(component => Object.values(component?.slots || {})) as string[]
-  if (slots.some(classes => classes.includes('--ui-shadow-hard') || classes.includes('var(--ui-shadow-offset-x)'))) return 'hard'
-  if (slots.some(classes => classes.includes('--ui-shadow-final-soft'))) return 'soft'
+  if (slots.some(classes => classes.includes('--ui-shadow-hard') || classes.includes('var(--ui-shadow-offset-x)'))) return 'custom'
+  if (slots.some(classes => classes.includes('--ui-shadow-final-soft'))) return 'custom'
   // the flat treatment is bare shadow-none on the overlay surfaces
   if (components.popover?.slots?.content?.includes('shadow-none') && components.toast?.slots?.root?.includes('shadow-none')) return 'flat'
   return undefined
@@ -620,8 +626,8 @@ function detectShadow(components: Record<string, any>): StyleOptions['shadow'] {
 /** Inner-shadow fallback when only a config was pasted. */
 function detectInnerShadow(components: Record<string, any>): StyleOptions['innerShadow'] {
   const slots = Object.values(components).flatMap(component => Object.values(component?.slots || {})) as string[]
-  if (slots.some(classes => classes.includes('(--ui-inner-shadow)'))) return 'hard'
-  if (slots.some(classes => classes.includes('--ui-shadow-final-inner'))) return 'soft'
+  if (slots.some(classes => classes.includes('(--ui-inner-shadow)'))) return 'custom'
+  if (slots.some(classes => classes.includes('--ui-shadow-final-inner'))) return 'custom'
   return undefined
 }
 

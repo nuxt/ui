@@ -1,7 +1,7 @@
 import { themeIcons } from '../theme'
 import type { ThemeDoc } from './types'
 import { DEFAULT_COLORS, THEME_DEFAULTS } from './types'
-import { styleComponents, styleTokens, mergeUi, BORDER_WIDTH_DEFAULT } from './styles'
+import { styleComponents, styleTokens, mergeUi, isCustomShadow, BORDER_WIDTH_DEFAULT } from './styles'
 import { LIBRARY_TOKEN_DEFAULTS } from './resolve'
 
 /**
@@ -40,6 +40,31 @@ export function generateCSS(doc: ThemeDoc): string {
   if (borderWidth !== undefined && borderWidth !== 1) {
     themeLines.push(`  --default-border-width: ${borderWidth}px;`)
     themeLines.push(`  --default-ring-width: ${borderWidth}px;`)
+  }
+  // Redefine the whole shadow ramp as @theme tokens so the consumer's compile
+  // rewrites every bare shadow-* utility — the same reach the docs get from
+  // gating --shadow-* in main.css, but unconditional here since an export is
+  // one fixed theme (no Inherit/Custom toggle to switch between). Custom scales
+  // the single config per size (mirrors main.css's .shadow-custom block); None
+  // flattens content the way the component fragments already flatten widgets;
+  // Inherit emits nothing and leaves Tailwind's native shadows untouched.
+  // The per-size geometry scale below must stay in step with main.css. Alpha is
+  // uniform (the opacity slider read literally), so size shows through geometry.
+  const SHADOW_RAMP = [
+    { size: '2xs', s: 0.15 },
+    { size: 'xs', s: 0.25 },
+    { size: 'sm', s: 0.4 },
+    { size: 'md', s: 0.65 },
+    { size: 'lg', s: 1 },
+    { size: 'xl', s: 1.5 },
+    { size: '2xl', s: 2.2 }
+  ]
+  if (isCustomShadow(doc.style?.shadow)) {
+    for (const { size, s } of SHADOW_RAMP) {
+      themeLines.push(`  --shadow-${size}: calc(var(--ui-shadow-offset-x) * ${s}) calc(var(--ui-shadow-offset-y) * ${s}) calc(var(--ui-shadow-blur) * ${s}) calc(var(--ui-shadow-spread) * ${s}) color-mix(in oklab, var(--ui-shadow-color) var(--ui-shadow-opacity, 25%), transparent);`)
+    }
+  } else if (doc.style?.shadow === 'flat') {
+    for (const { size } of SHADOW_RAMP) themeLines.push(`  --shadow-${size}: 0 0 transparent;`)
   }
   if (themeLines.length) {
     lines.push('', '@theme {', ...themeLines, '}')
@@ -114,8 +139,8 @@ export function generateCSS(doc: ThemeDoc): string {
     style.light['--ui-shadow-color'] = 'var(--ui-color-neutral-950)'
     style.dark['--ui-shadow-color'] = 'black'
   }
-  if (doc.style?.shadow === 'hard') {
-    // The hard-shadow classes reference the geometry variables — a
+  if (isCustomShadow(doc.style?.shadow)) {
+    // The custom-shadow classes reference the geometry variables — a
     // standalone export must define them even at default values.
     if (!style.light['--ui-shadow-offset-x']) {
       style.light['--ui-shadow-offset-x'] = '3px'
@@ -134,7 +159,7 @@ export function generateCSS(doc: ThemeDoc): string {
     style.light['--ui-shadow-final-soft'] = 'color-mix(in oklab, var(--ui-shadow-color) var(--ui-shadow-opacity, 25%), transparent)'
   }
   if (doc.style?.innerShadow && doc.style.innerShadow !== 'none') {
-    if (doc.style.innerShadow === 'hard') {
+    if (isCustomShadow(doc.style.innerShadow)) {
       if (!style.light['--ui-inner-shadow-offset-x']) {
         style.light['--ui-inner-shadow-offset-x'] = '0px'
         style.light['--ui-inner-shadow-offset-y'] = '2px'

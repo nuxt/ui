@@ -127,6 +127,8 @@ export function useThemeStudio() {
     const previous = styleTokens(previousStyle)
     style.value = { ...style.value, ...options }
     window.localStorage.setItem(THEME_STORAGE_KEYS.style, JSON.stringify(style.value))
+    // The .shadow-custom root flag is kept in sync by a watcher in plugins/theme.ts
+    // (covers presets via applyDoc too), so no per-path toggle is needed here.
 
     // Remove only the tokens the PREVIOUS style emitted and the next one
     // doesn't — never preset/doc-owned values sharing the same names.
@@ -413,7 +415,7 @@ export function useThemeStudio() {
       font: { sans: pick(theme.fonts) },
       // Weighted so most rolls stay clean, with the occasional loud one.
       style: {
-        shadow: pick(['none', 'none', 'soft', 'hard'] as const),
+        shadow: pick(['none', 'none', 'custom', 'custom'] as const),
         border: pick(['default', 'default', 'custom', 'none'] as const)
       }
     }
@@ -423,8 +425,13 @@ export function useThemeStudio() {
     if (doc.style!.border === 'custom' && Math.random() < 0.4) {
       doc.style!.borderColor = pick(['inverted', 'primary', 'neutral'] as const)
     }
-    if (doc.style!.shadow === 'hard' && Math.random() < 0.4) {
-      doc.style!.shadowColor = pick(['black', 'inverted', 'primary'] as const)
+    if (doc.style!.shadow === 'custom') {
+      // One config shadow: roll its geometry between a crisp offset (hard) and a
+      // soft blur, plus an occasional coloured cast.
+      const crisp = Math.random() < 0.5
+      doc.style!.shadowGeometry = crisp ? { x: 3, y: 3, blur: 0, spread: 0 } : { x: 0, y: 6, blur: 12, spread: 0 }
+      doc.style!.shadowOpacity = crisp ? 100 : 25
+      if (Math.random() < 0.4) doc.style!.shadowColor = pick(['black', 'inverted', 'primary'] as const)
     }
     if (Math.random() < 0.25) {
       doc.style!.defaults = { variant: pick(['solid', 'outline', 'soft', 'subtle'] as const) }

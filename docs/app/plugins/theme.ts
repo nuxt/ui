@@ -51,6 +51,37 @@ export default defineNuxtPlugin({
       restoreNamedState(THEME_STORAGE_KEYS.style, THEME_STATE_KEYS.stylePrefs)
       restoreNamedState(THEME_STORAGE_KEYS.paletteParams, THEME_STATE_KEYS.paletteParams)
 
+      // Migrate legacy persisted shadows onto the one 'custom' config. Both
+      // aliases still read as Custom everywhere, but canonicalising here means
+      // the next save writes 'custom' — and a bare 'soft' predates explicit
+      // geometry, so hand it the blurred default it used to imply.
+      const persisted = useState<any>(THEME_STATE_KEYS.stylePrefs)
+      if (persisted.value && typeof persisted.value === 'object') {
+        const next = { ...persisted.value }
+        if (next.shadow === 'soft' && next.shadowGeometry === undefined) {
+          next.shadowGeometry = { x: 0, y: 6, blur: 12, spread: 0 }
+        }
+        if (next.shadow === 'soft' || next.shadow === 'hard') next.shadow = 'custom'
+        if (next.innerShadow === 'soft' || next.innerShadow === 'hard') next.innerShadow = 'custom'
+        persisted.value = next
+      }
+
+      // Keep the .shadow-custom root flag in lockstep with the shadow treatment
+      // on EVERY path: setStyle (sliders) and applyDoc (presets, which set
+      // style.value directly and bypass setStyle) both flow through this one
+      // watcher, so gated shadows update without a reload. One persistent
+      // watcher here beats per-composable toggles scattered across call sites.
+      const stylePrefs = useState<{ shadow?: string }>(THEME_STATE_KEYS.stylePrefs)
+      watch(() => stylePrefs.value?.shadow, (shadow) => {
+        const flags = document.documentElement.classList
+        // Custom swaps the default ramp for the config-driven scale; None strips
+        // it to nothing; Inherit leaves the native Tailwind ramp. ('soft'/'hard'
+        // are legacy aliases of the one config shadow.)
+        const custom = shadow === 'custom' || shadow === 'soft' || shadow === 'hard'
+        flags.toggle('shadow-custom', custom)
+        flags.toggle('shadow-none', shadow === 'flat')
+      }, { immediate: true })
+
       try {
         const extras = JSON.parse(localStorage.getItem('nuxt-ui-ai-theme') || '{}')
         if (extras.colors) {
@@ -159,6 +190,17 @@ export default defineNuxtPlugin({
                 if (spEl) { spEl.textContent = ':root { --spacing: ' + spNum + 'rem; }'; }
               }
             }
+          `.replace(/\s+/g, ' '),
+          type: 'text/javascript',
+          tagPriority: -1
+        }, {
+          innerHTML: `
+            try {
+              var st = JSON.parse(localStorage.getItem('nuxt-ui-style') || '{}');
+              var sh = st && st.shadow;
+              if (sh === 'custom' || sh === 'soft' || sh === 'hard') document.documentElement.classList.add('shadow-custom');
+              else if (sh === 'flat') document.documentElement.classList.add('shadow-none');
+            } catch (e) {}
           `.replace(/\s+/g, ' '),
           type: 'text/javascript',
           tagPriority: -1

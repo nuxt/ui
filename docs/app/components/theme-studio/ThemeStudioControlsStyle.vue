@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { SHADE_LADDER, SHADOW_SHADE_DEFAULTS, BORDER_SHADE_DEFAULTS, BORDER_WIDTH_DEFAULT, SHADOW_GEOMETRY_DEFAULTS, INNER_SHADOW_GEOMETRY_DEFAULTS } from '../../utils/theme-engine'
+import { SHADE_LADDER, SHADOW_SHADE_DEFAULTS, BORDER_SHADE_DEFAULTS, BORDER_WIDTH_DEFAULT, SHADOW_GEOMETRY_DEFAULTS, INNER_SHADOW_GEOMETRY_DEFAULTS, isCustomShadow } from '../../utils/theme-engine'
 import type { ShadeStop } from '../../utils/theme-engine'
 
 const { style, setStyle, primaryChip, neutralChip, baselineDoc } = useThemeStudio()
@@ -25,7 +25,7 @@ const shadowStyle = computed({
   // — Inherit means a clean slate, and the next Custom reseeds fresh.
   set: (value: any) => setStyle(value === 'custom'
     ? {
-        shadow: 'hard',
+        shadow: 'custom',
         ...(style.value.shadowGeometry === undefined ? { shadowGeometry: { x: 0, y: 6, blur: 12, spread: 0 } } : {}),
         ...(style.value.shadowOpacity === undefined ? { shadowOpacity: 20 } : {})
       }
@@ -41,11 +41,11 @@ const INNER_SHADOW_OPTIONS = [
 
 const innerShadowStyle = computed({
   get: () => (!style.value.innerShadow || style.value.innerShadow === 'none') ? 'none' : 'custom',
-  set: (value: any) => setStyle({ innerShadow: value === 'custom' ? 'hard' : 'none' })
+  set: (value: any) => setStyle({ innerShadow: value === 'custom' ? 'custom' : 'none' })
 })
 
 const shadowOpacity = computed({
-  get: () => style.value.shadowOpacity ?? (style.value.shadow === 'hard' ? 100 : 25),
+  get: () => style.value.shadowOpacity ?? 25,
   set: (value: number) => setStyle({ shadowOpacity: value })
 })
 
@@ -209,7 +209,7 @@ const shadowSections = [{
   shades: shadowShades,
   opacity: shadowOpacity,
   geometry: geometrySliders('shadowGeometry', SHADOW_GEOMETRY_DEFAULTS),
-  hard: computed(() => (style.value.shadow || 'none') === 'hard')
+  hard: computed(() => isCustomShadow(style.value.shadow))
 }, {
   label: 'Inner shadow',
   dirtyKey: 'innerShadow' as const,
@@ -220,8 +220,16 @@ const shadowSections = [{
   shades: innerShadowShades,
   opacity: innerShadowOpacity,
   geometry: geometrySliders('innerShadowGeometry', INNER_SHADOW_GEOMETRY_DEFAULTS),
-  hard: computed(() => style.value.innerShadow === 'hard')
+  hard: computed(() => isCustomShadow(style.value.innerShadow))
 }]
+
+// Per-section fold-out for the shade fine-tuning, mirroring the Colors panel's
+// "Adjust shades" affordance — the per-mode shade sliders stay out of the main
+// shadow flow until asked for. Keyed by dirtyKey so the two sections toggle
+// independently.
+const shadeEditors = reactive<Record<string, boolean>>({})
+const borderShadeEditor = ref(false)
+const isShadeColor = (color?: string) => color === 'shade' || color === 'primary-shade'
 </script>
 
 <template>
@@ -229,6 +237,22 @@ const shadowSections = [{
   <div class="flex flex-col">
     <template v-for="section in shadowSections" :key="section.label">
       <ThemeStudioSection :label="section.label" class="p-4" :section-key="section.dirtyKey">
+        <template v-if="section.model.value === 'custom'" #actions>
+          <UTooltip text="Colour & shades">
+            <UButton
+              icon="i-lucide-settings-2"
+              color="neutral"
+              variant="ghost"
+              size="xs"
+              :active="shadeEditors[section.dirtyKey]"
+              active-color="primary"
+              active-variant="subtle"
+              :aria-label="`${section.label} colour and shades`"
+              @click="shadeEditors[section.dirtyKey] = !shadeEditors[section.dirtyKey]"
+            />
+          </UTooltip>
+        </template>
+
         <div>
           <UTabs
             v-model="section.model.value"
@@ -240,27 +264,6 @@ const shadowSections = [{
           />
 
           <div v-if="section.model.value === 'custom'" class="mt-1.5 flex flex-col gap-2">
-            <ThemeStudioDefaultSelect
-              v-model="section.color.value"
-              :items="section.colorItems"
-              icon="i-lucide-paint-bucket"
-              class="w-full"
-              :aria-label="`${section.label} color`"
-            />
-
-            <template v-if="section.color.value === 'shade' || section.color.value === 'primary-shade'">
-              <ThemeStudioSliderRow
-                v-for="(slider, modeName) in section.shades"
-                :key="modeName"
-                v-model="slider.model.value"
-                :mode="modeName"
-                :chip="section.color.value === 'primary-shade' ? primaryChip : neutralChip"
-                resettable
-                :dirty="slider.dirty.value"
-                @reset="slider.reset()"
-              />
-            </template>
-
             <ThemeStudioSliderRow
               v-model="section.opacity.value"
               label="Opacity"
@@ -282,6 +285,30 @@ const shadowSections = [{
                 unit="px"
               />
             </template>
+
+            <!-- Colour and its per-mode shade sliders fold out from the header
+                 toggle and sit last, keeping the main flow to opacity/geometry. -->
+            <template v-if="shadeEditors[section.dirtyKey]">
+              <ThemeStudioDefaultSelect
+                v-model="section.color.value"
+                :items="section.colorItems"
+                icon="i-lucide-paint-bucket"
+                class="w-full"
+                :aria-label="`${section.label} color`"
+              />
+
+              <ThemeStudioSliderRow
+                v-for="(slider, modeName) in section.shades"
+                v-show="isShadeColor(section.color.value)"
+                :key="modeName"
+                v-model="slider.model.value"
+                :mode="modeName"
+                :chip="section.color.value === 'primary-shade' ? primaryChip : neutralChip"
+                resettable
+                :dirty="slider.dirty.value"
+                @reset="slider.reset()"
+              />
+            </template>
           </div>
         </div>
       </ThemeStudioSection>
@@ -290,6 +317,22 @@ const shadowSections = [{
     </template>
 
     <ThemeStudioSection label="Borders" class="p-4" section-key="borders">
+      <template v-if="borderStyle === 'custom'" #actions>
+        <UTooltip text="Colour & shades">
+          <UButton
+            icon="i-lucide-settings-2"
+            color="neutral"
+            variant="ghost"
+            size="xs"
+            :active="borderShadeEditor"
+            active-color="primary"
+            active-variant="subtle"
+            aria-label="Border colour and shades"
+            @click="borderShadeEditor = !borderShadeEditor"
+          />
+        </UTooltip>
+      </template>
+
       <div>
         <UTabs
           v-model="borderStyle"
@@ -318,17 +361,21 @@ const shadowSections = [{
             </UTooltip>
           </div>
 
-          <ThemeStudioDefaultSelect
-            v-model="borderColor"
-            :items="borderColorItems"
-            icon="i-lucide-paint-bucket"
-            class="w-full"
-            aria-label="Border color"
-          />
+          <!-- Frame colour, its shade sliders, and the neutral border tokens
+               (relocated from the Colors panel) fold out from the header toggle
+               and sit last, mirroring the shadow sections. -->
+          <template v-if="borderShadeEditor">
+            <ThemeStudioDefaultSelect
+              v-model="borderColor"
+              :items="borderColorItems"
+              icon="i-lucide-paint-bucket"
+              class="w-full"
+              aria-label="Border color"
+            />
 
-          <template v-if="borderColor === 'shade' || borderColor === 'primary-shade'">
             <ThemeStudioSliderRow
               v-for="(slider, modeName) in borderShades"
+              v-show="borderColor === 'shade' || borderColor === 'primary-shade'"
               :key="modeName"
               v-model="slider.model.value"
               :mode="modeName"
@@ -337,6 +384,8 @@ const shadowSections = [{
               :dirty="slider.dirty.value"
               @reset="slider.reset()"
             />
+
+            <ThemeStudioTokenShades :alias="'neutral'" :groups="['border']" />
           </template>
         </div>
       </div>

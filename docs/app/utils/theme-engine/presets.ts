@@ -78,8 +78,9 @@ export const presets: ThemePreset[] = [{
     // Framed everything in near-black ink, straight-down hard shadows, soft
     // inked inputs, and both modes retuned shade-by-shade toward carbon.
     style: {
-      shadow: 'hard',
+      shadow: 'custom',
       shadowGeometry: { x: 0, y: 3, blur: 0, spread: 0 },
+      shadowOpacity: 100,
       border: 'custom',
       frame: true,
       borderColor: 'shade',
@@ -150,12 +151,12 @@ export const presets: ThemePreset[] = [{
     // the pressed-clay look), app-wide subtle variants, and per-mode shades
     // for the surface stack plus the success/error alias tokens.
     style: {
-      shadow: 'hard',
+      shadow: 'custom',
       shadowColor: 'shade',
       shadowShade: { light: 200, dark: 950 },
       shadowOpacity: 55,
       shadowGeometry: { x: 0, y: 3, blur: 0, spread: 0 },
-      innerShadow: 'hard',
+      innerShadow: 'custom',
       innerShadowGeometry: { x: 0, y: -3, blur: 0, spread: 0 },
       innerShadowOpacity: 50,
       innerShadowColor: 'shade',
@@ -221,9 +222,10 @@ export const presets: ThemePreset[] = [{
     // Soft pink-cast shadows (primary 700 light / 950 dark at 15%) over a
     // top-lit blurred inset in its own lighter shade (500 light / 900 dark).
     style: {
-      shadow: 'soft',
+      shadow: 'custom',
+      shadowGeometry: { x: 0, y: 6, blur: 12, spread: 0 },
       shadowOpacity: 15,
-      innerShadow: 'hard',
+      innerShadow: 'custom',
       innerShadowGeometry: {
         x: 0,
         y: -4,
@@ -298,8 +300,9 @@ export const presets: ThemePreset[] = [{
       }
     },
     style: {
-      shadow: 'hard',
+      shadow: 'custom',
       shadowColor: 'black',
+      shadowOpacity: 100,
       border: 'custom',
       frame: true,
       borderColor: 'black',
@@ -376,7 +379,7 @@ export const presets: ThemePreset[] = [{
     // Blurred warm-gray drop shadows (500 light / 950 dark at 25%) with
     // subtle panels.
     style: {
-      shadow: 'hard',
+      shadow: 'custom',
       shadowGeometry: {
         x: 0,
         y: 2,

@@ -28,7 +28,17 @@
 import type { ShadeStop } from './types'
 import { SHADES } from './types'
 
-export type ShadowStyle = 'none' | 'flat' | 'soft' | 'hard'
+/**
+ * 'soft'/'hard' are legacy values (old exports/saved state) treated as 'custom'
+ * — the one config-driven shadow whose geometry is a slider, not a mode.
+ */
+export type ShadowStyle = 'none' | 'flat' | 'custom' | 'soft' | 'hard'
+
+/** A config-driven ("Custom") drop or inner shadow, including its legacy aliases. */
+export function isCustomShadow(shadow?: ShadowStyle): boolean {
+  return shadow === 'custom' || shadow === 'soft' || shadow === 'hard'
+}
+
 /** 'bold'/'frame' are legacy values (old exports/saved state) treated as 'custom'. */
 export type BorderStyle = 'default' | 'none' | 'custom' | 'bold' | 'frame'
 export type BorderColor = 'default' | 'inverted' | 'black' | 'white' | 'primary' | 'neutral' | 'shade' | 'primary-shade'
@@ -208,11 +218,6 @@ const FLAT_FIELD_VARIANTS = [
   { variant: 'none', class: 'shadow-none' }
 ]
 
-// Reusable shadow class strings (whole literals so tailwind's scanner sees
-// them). Hard scales mirror the originals: base for field-size surfaces,
-// ×1.5 for panels/overlays, ×0.66 for badge-size ones.
-const SOFT_LG = 'shadow-lg shadow-(color:--ui-shadow-final-soft)'
-
 /**
  * A ramp shade reference — or the literal when the stop is white/black.
  * Standard stops go through the `--ui-color-<ramp>-<stop>` indirection so a
@@ -231,20 +236,17 @@ function shadeRef(ramp: string, stop: ShadeStop | number): string {
   return `var(--ui-color-${ramp}-${stop})`
 }
 
-const HARD_BASE = 'shadow-(--ui-shadow-hard)'
-const HARD_LG = 'shadow-(--ui-shadow-hard-lg)'
-const HARD_SM = 'shadow-(--ui-shadow-hard-sm)'
-
 // The pill tabs' stock trigger shadow is the pre-hydration active-tab fallback
 // (shown before reka mounts its indicator), emitted through the library's
 // `ssr()` helper with this exact modifier chain. A bare `before:shadow-none`
 // won't tailwind-merge against it — the override must carry the same chain.
 const TABS_SSR_SHADOW_NONE = 'in-[[data-slot=list]:not(:has([data-slot=indicator]))]:data-[state=active]:before:shadow-none'
 
-const SHADOW_FRAGMENTS: Record<ShadowStyle, Fragments> = {
+const SHADOW_FRAGMENTS: Record<'none' | 'flat' | 'custom', Fragments> = {
   none: {},
   // Strip the stock shadows the library ships on overlay surfaces — the
-  // studio's None, distinct from Inherit (no treatment at all).
+  // studio's None, distinct from Inherit (no treatment at all). The generalised
+  // ramp is also blanked for raw content via the .shadow-none root flag.
   flat: {
     popover: { slots: { content: 'shadow-none' } },
     dropdownMenu: { slots: { content: 'shadow-none' } },
@@ -261,86 +263,44 @@ const SHADOW_FRAGMENTS: Record<ShadowStyle, Fragments> = {
     // pseudo — strip both so None reads flat like every other surface.
     tabs: { compoundVariants: [{ variant: 'pill', class: { list: 'shadow-none', indicator: 'shadow-none', trigger: TABS_SSR_SHADOW_NONE } }] }
   },
-  soft: {
-    // shadow-(color:--ui-shadow-final-soft) recolors the preset shadows through the
-    // same variable the hard treatment uses, so the color/shade options
-    // apply to soft shadows too (tailwind stock shadows are hardcoded black).
-    button: {
-      slots: { base: 'shadow-sm shadow-(color:--ui-shadow-final-soft)' },
-      // A shadow under an invisible surface reads as a glitch — ghost only
-      // casts one once hover paints its background; link stays flat (it's text).
-      compoundVariants: [
-        { variant: 'ghost', class: 'shadow-none hover:shadow-sm transition-shadow' },
-        { variant: 'link', class: 'shadow-none' }
-      ]
-    },
-    card: { slots: { root: 'shadow-md shadow-(color:--ui-shadow-final-soft)' } },
-    empty: { slots: { root: 'shadow-md shadow-(color:--ui-shadow-final-soft)' } },
-    input: { slots: { base: 'shadow-xs shadow-(color:--ui-shadow-final-soft)' }, compoundVariants: FLAT_FIELD_VARIANTS },
-    select: { slots: { base: 'shadow-xs shadow-(color:--ui-shadow-final-soft)', content: SOFT_LG }, compoundVariants: FLAT_FIELD_VARIANTS },
-    selectMenu: { slots: { base: 'shadow-xs shadow-(color:--ui-shadow-final-soft)', content: SOFT_LG }, compoundVariants: FLAT_FIELD_VARIANTS },
-    inputMenu: { slots: { base: 'shadow-xs shadow-(color:--ui-shadow-final-soft)', content: SOFT_LG }, compoundVariants: FLAT_FIELD_VARIANTS },
-    textarea: { slots: { base: 'shadow-xs shadow-(color:--ui-shadow-final-soft)' }, compoundVariants: FLAT_FIELD_VARIANTS },
-    alert: { slots: { root: 'shadow-md shadow-(color:--ui-shadow-final-soft)' } },
-    badge: { slots: { base: 'shadow-xs shadow-(color:--ui-shadow-final-soft)' } },
-    // Overlay surfaces keep their stock shadow SIZE, recolored through the
-    // same variable so the shade/opacity options reach them too.
-    popover: { slots: { content: SOFT_LG } },
-    dropdownMenu: { slots: { content: SOFT_LG } },
-    contextMenu: { slots: { content: SOFT_LG } },
-    tooltip: { slots: { content: 'shadow-sm shadow-(color:--ui-shadow-final-soft)' } },
-    toast: { slots: { root: SOFT_LG } },
-    drawer: { slots: { content: SOFT_LG } },
-    // modal's surface classes live under the fullscreen:false variant — slot
-    // classes would lose the tailwind-merge, so this must be a compound.
-    modal: { compoundVariants: [{ fullscreen: false, class: { content: SOFT_LG } }] },
-    // slideover is edge-to-edge on mobile; only its sm+ panel casts a shadow.
-    slideover: { slots: { content: 'sm:shadow-lg shadow-(color:--ui-shadow-final-soft)' } },
-    // The whole pill bar is the raised surface — the list casts the shadow
-    // like a control; the indicator/trigger stock shadows drop so it doesn't
-    // double up inside.
-    tabs: { compoundVariants: [{ variant: 'pill', class: { list: 'shadow-sm shadow-(color:--ui-shadow-final-soft)', indicator: 'shadow-none', trigger: TABS_SSR_SHADOW_NONE } }] }
-  },
-  hard: {
+  // The one config-driven shadow. Colour/opacity/geometry come from the
+  // generalised --shadow-* ramp (active under .shadow-custom), so plain size
+  // classes are all these fragments need: overlays keep their stock shadow-lg
+  // and ride the ramp untouched; flat surfaces get a size added.
+  custom: {
     button: {
       slots: {
-        // Geometry rides CSS variables so the sliders are a variable swap;
-        // hover sinks halfway into the shadow via calc, active collapses it.
+        // The base rides the ramp; the press-effect translates by the shadow
+        // offset (0 for a soft/blur config → no visible press) and collapses the
+        // shadow on active, so brutalist geometry gets the neobrutalism press.
         base: 'shadow-(--ui-shadow-hard) hover:translate-x-[calc(var(--ui-shadow-offset-x)/2)] hover:translate-y-[calc(var(--ui-shadow-offset-y)/2)] hover:shadow-(--ui-shadow-hard-half) active:translate-x-(--ui-shadow-offset-x) active:translate-y-(--ui-shadow-offset-y) active:shadow-none transition-[box-shadow,translate,background-color]'
       },
-      // A floating shadow under an invisible box reads as a glitch — ghost
-      // and link buttons stay flat, as in the reference neobrutalism kits.
+      // A floating shadow under an invisible box reads as a glitch — ghost and
+      // link buttons stay flat, as in the reference neobrutalism kits.
       compoundVariants: [
         { variant: 'ghost', class: 'shadow-none hover:translate-x-0 hover:translate-y-0 hover:shadow-none active:translate-x-0 active:translate-y-0' },
         { variant: 'link', class: 'shadow-none hover:translate-x-0 hover:translate-y-0 hover:shadow-none active:translate-x-0 active:translate-y-0' }
       ]
     },
-    card: { slots: { root: HARD_LG } },
-    empty: { slots: { root: HARD_LG } },
-    input: { slots: { base: HARD_BASE }, compoundVariants: FLAT_FIELD_VARIANTS },
-    select: { slots: { base: HARD_BASE, content: HARD_LG }, compoundVariants: FLAT_FIELD_VARIANTS },
-    selectMenu: { slots: { base: HARD_BASE, content: HARD_LG }, compoundVariants: FLAT_FIELD_VARIANTS },
-    inputMenu: { slots: { base: HARD_BASE, content: HARD_LG }, compoundVariants: FLAT_FIELD_VARIANTS },
-    textarea: { slots: { base: HARD_BASE }, compoundVariants: FLAT_FIELD_VARIANTS },
-    alert: { slots: { root: HARD_LG } },
-    badge: { slots: { base: HARD_SM } },
-    popover: { slots: { content: HARD_LG } },
-    dropdownMenu: { slots: { content: HARD_LG } },
-    contextMenu: { slots: { content: HARD_LG } },
-    tooltip: { slots: { content: HARD_SM } },
-    toast: { slots: { root: HARD_LG } },
-    drawer: { slots: { content: HARD_LG } },
-    modal: { compoundVariants: [{ fullscreen: false, class: { content: HARD_LG } }] },
-    slideover: { slots: { content: 'sm:shadow-(--ui-shadow-hard-lg)' } },
-    // The whole pill bar takes the hard drop like a control; the
-    // indicator/trigger stock shadows drop so only the bar casts.
-    tabs: { compoundVariants: [{ variant: 'pill', class: { list: HARD_BASE, indicator: 'shadow-none', trigger: TABS_SSR_SHADOW_NONE } }] }
+    card: { slots: { root: 'shadow-lg' } },
+    empty: { slots: { root: 'shadow-lg' } },
+    input: { slots: { base: 'shadow-xs' }, compoundVariants: FLAT_FIELD_VARIANTS },
+    select: { slots: { base: 'shadow-xs' }, compoundVariants: FLAT_FIELD_VARIANTS },
+    selectMenu: { slots: { base: 'shadow-xs' }, compoundVariants: FLAT_FIELD_VARIANTS },
+    inputMenu: { slots: { base: 'shadow-xs' }, compoundVariants: FLAT_FIELD_VARIANTS },
+    textarea: { slots: { base: 'shadow-xs' }, compoundVariants: FLAT_FIELD_VARIANTS },
+    alert: { slots: { root: 'shadow-lg' } },
+    badge: { slots: { base: 'shadow-xs' } },
+    // slideover is edge-to-edge on mobile; only its sm+ panel casts a shadow.
+    slideover: { slots: { content: 'shadow-none sm:shadow-lg' } },
+    // The pill bar is the raised surface — the list casts, the stock
+    // indicator/trigger shadows drop so it doesn't double up inside.
+    tabs: { compoundVariants: [{ variant: 'pill', class: { list: 'shadow-sm', indicator: 'shadow-none', trigger: TABS_SSR_SHADOW_NONE } }] }
   }
 }
 
 // Inset shadows use tailwind's separate inset-shadow group, so they merge
 // independently of (and coexist with) the drop treatment on every surface.
-const INNER_SOFT = 'inset-shadow-sm inset-shadow-(color:--ui-shadow-final-inner)'
 const INNER_HARD = 'inset-shadow-(--ui-inner-shadow)'
 
 const INNER_FLAT_FIELD_VARIANTS = [
@@ -540,7 +500,7 @@ export function styleTokens(style: StyleOptions): { light: Record<string, string
     dark['--ui-shadow-opacity'] = `${style.shadowOpacity}%`
   }
 
-  if (style.shadow === 'hard' && style.shadowGeometry) {
+  if (isCustomShadow(style.shadow)) {
     const geometry = { ...SHADOW_GEOMETRY_DEFAULTS, ...style.shadowGeometry }
     for (const [axis, token] of [['x', '--ui-shadow-offset-x'], ['y', '--ui-shadow-offset-y'], ['blur', '--ui-shadow-blur'], ['spread', '--ui-shadow-spread']] as const) {
       light[token] = `${geometry[axis]}px`
@@ -553,7 +513,7 @@ export function styleTokens(style: StyleOptions): { light: Record<string, string
     dark['--ui-inner-shadow-opacity'] = `${style.innerShadowOpacity}%`
   }
 
-  if (style.innerShadow === 'hard' && style.innerShadowGeometry) {
+  if (isCustomShadow(style.innerShadow)) {
     const geometry = { ...INNER_SHADOW_GEOMETRY_DEFAULTS, ...style.innerShadowGeometry }
     for (const [axis, token] of [['x', '--ui-inner-shadow-offset-x'], ['y', '--ui-inner-shadow-offset-y'], ['blur', '--ui-inner-shadow-blur'], ['spread', '--ui-inner-shadow-spread']] as const) {
       light[token] = `${geometry[axis]}px`
@@ -561,11 +521,11 @@ export function styleTokens(style: StyleOptions): { light: Record<string, string
     }
   }
 
-  // An unset shadowColor is the 'shade' default, but only a hard shadow paints
-  // one — so the shade slider works in custom mode without first touching the
-  // colour dropdown, while a pristine theme emits nothing.
+  // An unset shadowColor is the 'shade' default, but only a custom shadow paints
+  // one — so the shade slider works without first touching the colour dropdown,
+  // while a pristine theme emits nothing.
   const shadowColorMode = (!style.shadowColor || style.shadowColor === 'default')
-    ? (style.shadow === 'hard' ? 'shade' : undefined)
+    ? (isCustomShadow(style.shadow) ? 'shade' : undefined)
     : style.shadowColor
   if (shadowColorMode === 'shade' || shadowColorMode === 'primary-shade') {
     // Per-mode ramp shade — a graded shadow that darkens or lightens
@@ -664,9 +624,9 @@ export function styleComponents(style: StyleOptions): Fragments {
 
   const sources = [
     defaults,
-    SHADOW_FRAGMENTS[style.shadow ?? 'none'],
-    style.innerShadow && style.innerShadow !== 'none'
-      ? innerShadowFragments(style.innerShadow === 'hard' ? INNER_HARD : INNER_SOFT)
+    SHADOW_FRAGMENTS[isCustomShadow(style.shadow) ? 'custom' : (style.shadow === 'flat' ? 'flat' : 'none')],
+    isCustomShadow(style.innerShadow)
+      ? innerShadowFragments(INNER_HARD)
       : {},
     borderFragments(style),
     style.borderColor && style.borderColor !== 'default' ? FRAME_COLOR_FRAGMENTS : {}

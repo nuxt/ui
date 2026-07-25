@@ -344,22 +344,24 @@ describe('styleComponents', () => {
   it('inner shadow rides its own inset utilities on the same surfaces', async () => {
     const { styleComponents, styleTokens } = await import('../../docs/app/utils/theme-engine')
 
-    const soft = styleComponents({ innerShadow: 'soft' })
-    expect(soft.button!.slots!.base).toContain('inset-shadow-sm inset-shadow-(color:--ui-shadow-final-inner)')
-    expect(soft.tooltip!.slots!.content).toContain('inset-shadow-(color:--ui-shadow-final-inner)')
+    const inner = styleComponents({ innerShadow: 'custom' })
+    expect(inner.button!.slots!.base).toContain('inset-shadow-(--ui-inner-shadow)')
+    expect(inner.tooltip!.slots!.content).toContain('inset-shadow-(--ui-inner-shadow)')
     // surfaceless variants stay flat, mirroring the drop treatment
-    expect(soft.button!.compoundVariants).toContainEqual({ variant: 'ghost', class: 'inset-shadow-none' })
-    expect(soft.input!.compoundVariants).toContainEqual({ variant: 'none', class: 'inset-shadow-none' })
+    expect(inner.button!.compoundVariants).toContainEqual({ variant: 'ghost', class: 'inset-shadow-none' })
+    expect(inner.input!.compoundVariants).toContainEqual({ variant: 'none', class: 'inset-shadow-none' })
+    expect(inner.card!.slots!.root).toContain('inset-shadow-(--ui-inner-shadow)')
 
-    const hard = styleComponents({ innerShadow: 'hard' })
-    expect(hard.card!.slots!.root).toContain('inset-shadow-(--ui-inner-shadow)')
+    // legacy 'soft'/'hard' fold into the same one inset treatment
+    expect(styleComponents({ innerShadow: 'soft' }).card!.slots!.root).toContain('inset-shadow-(--ui-inner-shadow)')
+    expect(styleComponents({ innerShadow: 'hard' }).card!.slots!.root).toContain('inset-shadow-(--ui-inner-shadow)')
 
-    // both treatments coexist on one surface — separate tailwind groups
-    const both = styleComponents({ shadow: 'hard', innerShadow: 'soft' })
-    expect(both.card!.slots!.root).toContain('shadow-(--ui-shadow-hard-lg)')
-    expect(both.card!.slots!.root).toContain('inset-shadow-sm')
+    // drop and inner coexist on one surface — separate tailwind groups
+    const both = styleComponents({ shadow: 'custom', innerShadow: 'custom' })
+    expect(both.card!.slots!.root).toContain('shadow-lg')
+    expect(both.card!.slots!.root).toContain('inset-shadow-(--ui-inner-shadow)')
 
-    const tokens = styleTokens({ innerShadow: 'hard', innerShadowGeometry: { y: 6 }, innerShadowOpacity: 30 })
+    const tokens = styleTokens({ innerShadow: 'custom', innerShadowGeometry: { y: 6 }, innerShadowOpacity: 30 })
     expect(tokens.light['--ui-inner-shadow-offset-y']).toBe('6px')
     expect(tokens.light['--ui-inner-shadow-offset-x']).toBe('0px')
     expect(tokens.light['--ui-inner-shadow-opacity']).toBe('30%')
@@ -367,13 +369,13 @@ describe('styleComponents', () => {
 
   it('merges shadow and frame fragments slot-wise', async () => {
     const { styleComponents } = await import('../../docs/app/utils/theme-engine')
-    const components = styleComponents({ shadow: 'hard', border: 'custom', frame: true })
+    const components = styleComponents({ shadow: 'custom', border: 'custom', frame: true })
 
     expect(components.button!.slots!.base).toContain('shadow-(--ui-shadow-hard)')
     // widths ride the default-width variables — no ring-N classes anywhere
     expect(components.button!.slots!.base).not.toContain('ring')
     expect(components.button!.compoundVariants).toContainEqual({ variant: 'solid', class: 'ring ring-inset ring-(--ui-border-accented)' })
-    expect(components.card!.slots?.root ?? '').toContain('shadow-(--ui-shadow-hard-lg)')
+    expect(components.card!.slots?.root ?? '').toContain('shadow-lg')
     expect(components.card!.compoundVariants).toContainEqual({ variant: 'soft', class: { root: 'ring ring-(--ui-border-accented)' } })
   })
 
@@ -394,12 +396,12 @@ describe('styleComponents', () => {
 
   it('mergeUi concatenates slot classes and compound variants', async () => {
     const { mergeUi, styleComponents } = await import('../../docs/app/utils/theme-engine')
-    const merged = mergeUi(styleComponents({ shadow: 'hard' }), { button: { slots: { base: 'rounded-full' } } })
+    const merged = mergeUi(styleComponents({ shadow: 'custom' }), { button: { slots: { base: 'rounded-full' } } })
 
     // both the shadow classes and the explicit override survive, explicit last
     expect(merged.button.slots.base).toContain('shadow-(--ui-shadow-hard)')
     expect(merged.button.slots.base.endsWith('rounded-full')).toBe(true)
-    expect(merged.card.slots.root).toContain('shadow-(--ui-shadow-hard-lg)')
+    expect(merged.card.slots.root).toContain('shadow-lg')
   })
 })
 
@@ -457,19 +459,21 @@ describe('style colors', () => {
     expect(isDefaultStyle({ border: 'custom' })).toBe(false)
   })
 
-  it('soft shadows skip ghost/link buttons (hover-only for ghost) and surfaceless fields', async () => {
+  it('custom shadows keep ghost/link buttons and surfaceless fields flat', async () => {
     const { styleComponents } = await import('../../docs/app/utils/theme-engine')
-    const components = styleComponents({ shadow: 'soft' })
+    const components = styleComponents({ shadow: 'custom' })
 
-    expect(components.button!.compoundVariants).toContainEqual({ variant: 'ghost', class: 'shadow-none hover:shadow-sm transition-shadow' })
-    expect(components.button!.compoundVariants).toContainEqual({ variant: 'link', class: 'shadow-none' })
+    // a floating shadow under an invisible box reads as a glitch — ghost/link
+    // buttons drop the shadow AND the press-effect translate
+    expect(components.button!.compoundVariants).toContainEqual({ variant: 'ghost', class: 'shadow-none hover:translate-x-0 hover:translate-y-0 hover:shadow-none active:translate-x-0 active:translate-y-0' })
+    expect(components.button!.compoundVariants).toContainEqual({ variant: 'link', class: 'shadow-none hover:translate-x-0 hover:translate-y-0 hover:shadow-none active:translate-x-0 active:translate-y-0' })
     expect(components.input!.compoundVariants).toContainEqual({ variant: 'ghost', class: 'shadow-none' })
     expect(components.input!.compoundVariants).toContainEqual({ variant: 'none', class: 'shadow-none' })
   })
 
   it('hard shadows keep surfaceless field variants flat', async () => {
     const { styleComponents } = await import('../../docs/app/utils/theme-engine')
-    const components = styleComponents({ shadow: 'hard' })
+    const components = styleComponents({ shadow: 'custom' })
 
     expect(components.select!.compoundVariants).toContainEqual({ variant: 'ghost', class: 'shadow-none' })
     expect(components.textarea!.compoundVariants).toContainEqual({ variant: 'none', class: 'shadow-none' })
@@ -478,14 +482,21 @@ describe('style colors', () => {
   it('treatments reach overlay surfaces with the right placement', async () => {
     const { styleComponents } = await import('../../docs/app/utils/theme-engine')
 
-    const soft = styleComponents({ shadow: 'soft' })
-    expect(soft.popover!.slots!.content).toBe('shadow-lg shadow-(color:--ui-shadow-final-soft)')
-    expect(soft.toast!.slots!.root).toContain('--ui-shadow-final-soft')
-    // modal's surface lives under the fullscreen variant — never slot classes
-    expect(soft.modal!.slots).toBeUndefined()
-    expect(soft.modal!.compoundVariants![0]).toMatchObject({ fullscreen: false })
+    // Custom themes overlay shadows through the generalised --shadow-* ramp, so
+    // the fragments leave the stock shadow-lg on those surfaces untouched.
+    const custom = styleComponents({ shadow: 'custom' })
+    expect(custom.popover).toBeUndefined()
+    expect(custom.toast).toBeUndefined()
+    expect(custom.modal).toBeUndefined()
     // slideover is edge-to-edge on mobile — the shadow is sm-scoped
-    expect(soft.slideover!.slots!.content).toMatch(/^sm:shadow-lg /)
+    expect(custom.slideover!.slots!.content).toBe('shadow-none sm:shadow-lg')
+
+    // None strips the stock overlay shadows outright.
+    const none = styleComponents({ shadow: 'flat' })
+    expect(none.popover!.slots!.content).toBe('shadow-none')
+    expect(none.toast!.slots!.root).toBe('shadow-none')
+    expect(none.modal!.compoundVariants![0]).toMatchObject({ fullscreen: false })
+    expect(none.slideover!.slots!.content).toBe('sm:shadow-none')
 
     const colored = styleComponents({ borderColor: 'inverted' })
     expect(colored.tooltip!.slots!.content).toBe('ring-(--ui-frame-color)')
@@ -708,5 +719,22 @@ describe('style colors', () => {
     expect(css).toContain('--ui-frame-color: var(--ui-color-neutral-950);')
     expect(css).toContain('--ui-shadow-color: var(--ui-color-neutral-950);')
     expect(css).toContain('--ui-shadow-color: black;')
+  })
+
+  it('generateCSS redefines the whole shadow ramp as @theme tokens for content', async () => {
+    const { generateCSS } = await import('../../docs/app/utils/theme-engine')
+
+    // Custom scales the one config per size so a consumer's compile rewrites
+    // every bare shadow-* utility (content images included), not just widgets.
+    const custom = generateCSS({ version: 1, style: { shadow: 'custom' } })
+    expect(custom).toMatch(/@theme \{[^}]*--shadow-lg: calc\(var\(--ui-shadow-offset-x\) \* 1\)/)
+    // alpha is the opacity slider read literally — no per-size scaling factor
+    expect(custom).toContain('color-mix(in oklab, var(--ui-shadow-color) var(--ui-shadow-opacity, 25%), transparent)')
+    expect(custom).toContain('--shadow-2xl:')
+    expect(custom).toContain('--shadow-2xs:')
+
+    // None flattens the ramp; Inherit leaves Tailwind's native shadows alone.
+    expect(generateCSS({ version: 1, style: { shadow: 'flat' } })).toContain('--shadow-lg: 0 0 transparent;')
+    expect(generateCSS({ version: 1, style: { shadow: 'none' } })).not.toContain('--shadow-lg:')
   })
 })

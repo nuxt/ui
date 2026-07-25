@@ -165,6 +165,22 @@ export function parseCssColor(value: string): string | undefined {
   return color ? formatOklch(color) : undefined
 }
 
+/**
+ * Composite `color` at `alpha` over `backdrop` — what the browser actually
+ * paints for `bg-primary/10`. Blending happens in gamma-encoded sRGB, not
+ * linear, so the result matches the rendered pixel. Returns a hex string, or
+ * undefined when either input is unparseable.
+ */
+export function blendColors(color: string, backdrop: string, alpha: number): string | undefined {
+  const fg = parseColor(color)
+  const bg = parseColor(backdrop)
+  if (!fg || !bg) return undefined
+
+  const top = oklchToRgb(clampToGamut(fg))
+  const under = oklchToRgb(clampToGamut(bg))
+  return rgbToHex(top.map((channel, i) => channel * alpha + under[i]! * (1 - alpha)) as [number, number, number])
+}
+
 /** WCAG 2.x relative luminance — linear RGB is exactly what the formula wants. */
 function luminance(color: Oklch): number {
   const [r, g, b] = oklchToLinearRgb(clampToGamut(color)).map(channel => Math.min(1, Math.max(0, channel))) as [number, number, number]
