@@ -131,6 +131,10 @@ export function formatOklch(color: Oklch): string {
  * meets: hex, `oklch(…)` (tailwind v4's format) and `rgb(…)`.
  */
 export function parseColor(value: string): Oklch | undefined {
+  // Callers pass raw ramp lookups (a missing tailwind midpoint, an unset CSS
+  // var) that can be undefined — treat any non-string as simply unparseable
+  // rather than throwing on .trim().
+  if (typeof value !== 'string') return undefined
   const input = value.trim()
 
   // the two keywords the theme system actually uses (library token defaults)

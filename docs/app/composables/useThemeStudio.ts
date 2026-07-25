@@ -176,7 +176,15 @@ export function useThemeStudio() {
   function paletteShades(name: string): Partial<Record<Shade, string>> | undefined {
     const tailwind = (colors as Record<string, any>)[name]
     if (tailwind && typeof tailwind === 'object') {
-      return Object.fromEntries(SHADES_FINE.map(shade => [shade, parseCssColor(tailwind[shade])]).filter(([, color]) => color))
+      // A stock tailwind ramp has only the 11 standard stops — its midpoints
+      // (150…850) are undefined, and parseCssColor would throw on those. Skip
+      // absent shades so a fine-set sweep degrades cleanly to the 11 present.
+      return Object.fromEntries(
+        SHADES_FINE
+          .filter(shade => tailwind[shade] != null)
+          .map(shade => [shade, parseCssColor(tailwind[shade])])
+          .filter(([, color]) => color)
+      )
     }
 
     if (import.meta.client) {

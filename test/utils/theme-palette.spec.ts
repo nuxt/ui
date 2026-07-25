@@ -64,7 +64,16 @@ describe('oklch', () => {
     expect(contrastRatio('#000000', '#ffffff')).toBeCloseTo(21, 1)
     expect(contrastRatio('#ffffff', '#ffffff')).toBeCloseTo(1, 2)
     // symmetric
-    expect(contrastRatio('#1DB954', '#ffffff')).toBeCloseTo(contrastRatio('#ffffff', '#1DB954'), 5)
+    expect(contrastRatio('#1DB954', '#ffffff')).toBeCloseTo(contrastRatio('#ffffff', '#1DB954')!, 5)
+  })
+
+  it('treats unparseable input as undefined instead of throwing', () => {
+    // Ramp lookups feed raw values in — a missing tailwind midpoint or unset
+    // CSS var is undefined, and must degrade to undefined, never throw.
+    expect(() => parseColor(undefined as unknown as string)).not.toThrow()
+    expect(parseColor(undefined as unknown as string)).toBeUndefined()
+    expect(parseColor('not a color')).toBeUndefined()
+    expect(parseCssColor(undefined as unknown as string)).toBeUndefined()
   })
 })
 
