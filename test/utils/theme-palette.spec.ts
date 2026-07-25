@@ -134,20 +134,20 @@ describe('generatePalette', () => {
 
   it('no pins leaves the ramp byte-identical', () => {
     const bare = generatePalette(CURVE_DEFAULTS)
-    const empty = generatePalette(CURVE_DEFAULTS, false, [])
+    const empty = generatePalette(CURVE_DEFAULTS, 100, [])
     for (const shade of SHADES) expect(empty[shade]).toBe(bare[shade])
   })
 
   it('renders a pinned stop as its exact (gamut-clamped) target', () => {
     const target = parseColor('oklch(75.42% 0.1077 118.763)')!
-    const palette = generatePalette(CURVE_DEFAULTS, false, [{ shade: 500, ...target }])
+    const palette = generatePalette(CURVE_DEFAULTS, 100, [{ shade: 500, ...target }])
     expect(palette[500]).toBe(formatOklch(clampToGamut(target)))
   })
 
   it('keeps a pin local — the far end barely moves', () => {
     const target = parseColor('oklch(75.42% 0.1077 118.763)')!
     const bare = generatePalette(CURVE_DEFAULTS)
-    const pinned = generatePalette(CURVE_DEFAULTS, false, [{ shade: 500, ...target }])
+    const pinned = generatePalette(CURVE_DEFAULTS, 100, [{ shade: 500, ...target }])
     // 50 is ~0.5 in x away from the pin — the Gaussian has decayed to nearly nothing.
     expect(parseColor(pinned[50])!.l).toBeCloseTo(parseColor(bare[50])!.l, 2)
   })
@@ -155,7 +155,7 @@ describe('generatePalette', () => {
   it('hits every stop of a multi-pin set exactly', () => {
     const a = parseColor('oklch(75.42% 0.1077 118.763)')!
     const b = parseColor('oklch(45% 0.09 250)')!
-    const palette = generatePalette(CURVE_DEFAULTS, false, [
+    const palette = generatePalette(CURVE_DEFAULTS, 100, [
       { shade: 300, ...a },
       { shade: 700, ...b }
     ])
@@ -167,10 +167,10 @@ describe('generatePalette', () => {
     // Two adjacent fine stops pulled in opposite directions used to blow the
     // Gaussian weights up so the unpinned neighbours swung ~0.10 L. The
     // spacing-adaptive sigma must keep each pin's influence local.
-    const bare = generatePalette(CURVE_DEFAULTS, true)
+    const bare = generatePalette(CURVE_DEFAULTS, 50)
     const l500 = parseColor(bare[500])!.l
     const l550 = parseColor(bare[550])!.l
-    const pinned = generatePalette(CURVE_DEFAULTS, true, [
+    const pinned = generatePalette(CURVE_DEFAULTS, 50, [
       { shade: 500, l: l500 + 0.03, c: 0.05, h: 150 },
       { shade: 550, l: l550 - 0.03, c: 0.05, h: 150 }
     ])
@@ -182,14 +182,14 @@ describe('generatePalette', () => {
   it('never collapses a clustered pin set to white', () => {
     // Five alternating ±0.02 pins across 450–650 used to drive 13 of 19 stops
     // to oklch(100% 0 0). No stop may reach full white.
-    const bare = generatePalette(CURVE_DEFAULTS, true)
+    const bare = generatePalette(CURVE_DEFAULTS, 50)
     const pins = [450, 500, 550, 600, 650].map((shade, i) => ({
       shade: shade as Shade,
       l: parseColor(bare[shade as Shade])!.l + (i % 2 ? -0.02 : 0.02),
       c: 0.05,
       h: 150
     }))
-    const palette = generatePalette(CURVE_DEFAULTS, true, pins)
+    const palette = generatePalette(CURVE_DEFAULTS, 50, pins)
     for (const value of Object.values(palette)) {
       expect(value, `blown to white: ${value}`).not.toMatch(/oklch\(100(\.0+)?%/)
     }
@@ -199,7 +199,7 @@ describe('generatePalette', () => {
     // Base hue 250 with pins at hue 60 and 80 must not sweep ~340° the long
     // way round; the unwrapped targets keep the interpolation monotonic.
     const flatHue = { ...CURVE_DEFAULTS, hue: { y0: 250, y1: 250, p1x: 0.33, p1y: 250, p2x: 0.66, p2y: 250 } }
-    const palette = generatePalette(flatHue, false, [
+    const palette = generatePalette(flatHue, 100, [
       { shade: 200, l: 0.8, c: 0.1, h: 60 },
       { shade: 800, l: 0.4, c: 0.1, h: 80 }
     ])

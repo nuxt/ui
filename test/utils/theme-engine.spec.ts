@@ -12,13 +12,13 @@ import {
   contrastRatio,
   CURVE_DEFAULTS,
   SHADES,
-  SHADES_FINE,
+  SHADE_SETS,
   LIBRARY_TOKEN_DEFAULTS,
   parseUiColorRef,
   resolveAlias,
   resolveShade
 } from '../../docs/app/utils/theme-engine'
-import type { ThemeDoc } from '../../docs/app/utils/theme-engine'
+import type { Shade, ThemeDoc } from '../../docs/app/utils/theme-engine'
 
 describe('theme-engine', () => {
   describe('isDefaultTheme', () => {
@@ -227,11 +227,11 @@ describe('theme-engine', () => {
 
     it('fine stops add the midpoints without shifting the standard stops', () => {
       const standard = generatePalette(CURVE_DEFAULTS)
-      const fine = generatePalette(CURVE_DEFAULTS, true)
+      const fine = generatePalette(CURVE_DEFAULTS, 50)
 
       // 19 stops incl. every 100-step midpoint, all canonical
-      expect(Object.keys(fine).map(Number).sort((a, b) => a - b)).toEqual(SHADES_FINE as unknown as number[])
-      for (const shade of SHADES_FINE) {
+      expect(Object.keys(fine).map(Number).sort((a, b) => a - b)).toEqual(SHADE_SETS[50] as unknown as number[])
+      for (const shade of SHADE_SETS[50]) {
         expect(fine[shade], `${shade}`).toMatch(CANONICAL_OKLCH)
       }
       // The standard stops are byte-identical — enabling fine stops must not
@@ -240,7 +240,7 @@ describe('theme-engine', () => {
         expect(fine[shade], `${shade}`).toBe(standard[shade])
       }
       // A midpoint sits between its neighbours in lightness (curve is monotonic).
-      const l = (s: number) => parseColor(fine[s as never])!.l
+      const l = (s: Shade) => parseColor(fine[s])!.l
       expect(l(150)).toBeLessThan(l(100))
       expect(l(150)).toBeGreaterThan(l(200))
     })
