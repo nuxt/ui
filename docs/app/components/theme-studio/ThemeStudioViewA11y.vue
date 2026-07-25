@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { contrastRatio } from '../../utils/theme-engine'
+import type { ButtonProps } from '@nuxt/ui'
+import { blendColors, contrastRatio } from '../../utils/theme-engine'
 
 /**
  * WCAG contrast matrix for the CURRENT theme: every text-role token against
@@ -33,6 +34,23 @@ const BACKGROUNDS = [
 /** Solid surfaces (buttons, badges) render --ui-text-inverted on the alias. */
 const SOLIDS = FOREGROUNDS.slice(5)
 
+/**
+ * The color/variant grid buttons and badges actually paint. Tinted variants
+ * use an alpha of the alias over the page background, so the measured pair is
+ * the composited pixel — not the alias against a surface it never touches.
+ */
+const VARIANTS = ['solid', 'outline', 'soft', 'subtle', 'ghost', 'link'] as const
+
+const VARIANT_COLORS: Array<{ key: NonNullable<ButtonProps['color']>, label: string, icon: string }> = [
+  { key: 'primary', label: 'Primary', icon: 'i-lucide-rocket' },
+  { key: 'secondary', label: 'Secondary', icon: 'i-lucide-sparkles' },
+  { key: 'success', label: 'Success', icon: 'i-lucide-circle-check' },
+  { key: 'info', label: 'Info', icon: 'i-lucide-info' },
+  { key: 'warning', label: 'Warning', icon: 'i-lucide-triangle-alert' },
+  { key: 'error', label: 'Error', icon: 'i-lucide-circle-x' },
+  { key: 'neutral', label: 'Neutral', icon: 'i-lucide-settings' }
+]
+
 interface Cell {
   fg: string
   bg: string
@@ -41,6 +59,7 @@ interface Cell {
 
 const matrix = ref<Cell[][]>([])
 const solidRow = ref<Cell[]>([])
+const variantMatrix = ref<Cell[][]>([])
 
 function resolveToken(styles: CSSStyleDeclaration, token: string): string {
   return styles.getPropertyValue(token).trim()
@@ -61,6 +80,52 @@ function compute() {
     const bgColor = resolveToken(styles, solid.token)
     return { fg: inverted, bg: bgColor, ratio: contrastRatio(inverted, bgColor) }
   })
+
+  const page = resolveToken(styles, '--ui-bg')
+  // Alpha of a token over the page background — `bg-primary/10` as a pixel.
+  const tint = (token: string, alpha: number) => blendColors(resolveToken(styles, token), page, alpha) ?? ''
+
+  variantMatrix.value = VARIANT_COLORS.map(({ key }) => {
+    const specs = key === 'neutral'
+      ? neutralSpecs(styles, page, inverted)
+      : semanticSpecs(styles, `--ui-${key}`, page, inverted, tint)
+
+    return specs.map(spec => ({ ...spec, ratio: contrastRatio(spec.fg, spec.bg) }))
+  })
+}
+
+/** Per-variant fg/bg for a semantic alias, in VARIANTS order. */
+function semanticSpecs(
+  styles: CSSStyleDeclaration,
+  token: string,
+  page: string,
+  inverted: string,
+  tint: (token: string, alpha: number) => string
+): Array<Omit<Cell, 'ratio'>> {
+  const color = resolveToken(styles, token)
+  const tinted = tint(token, 0.1)
+  return [
+    { fg: inverted, bg: color },
+    { fg: color, bg: page },
+    { fg: color, bg: tinted },
+    { fg: color, bg: tinted },
+    { fg: color, bg: page },
+    { fg: color, bg: page }
+  ]
+}
+
+/** Neutral resolves to surface/text tokens rather than a semantic alias. */
+function neutralSpecs(styles: CSSStyleDeclaration, page: string, inverted: string): Array<Omit<Cell, 'ratio'>> {
+  const text = resolveToken(styles, '--ui-text')
+  const elevated = resolveToken(styles, '--ui-bg-elevated')
+  return [
+    { fg: inverted, bg: resolveToken(styles, '--ui-bg-inverted') },
+    { fg: text, bg: page },
+    { fg: text, bg: elevated },
+    { fg: text, bg: elevated },
+    { fg: text, bg: page },
+    { fg: resolveToken(styles, '--ui-text-muted'), bg: page }
+  ]
 }
 
 /**
@@ -150,7 +215,7 @@ function formatRatio(ratio: number | null): string {
                       <span class="tabular-nums font-mono opacity-80" :style="{ color: matrix[row][col].fg }">
                         {{ formatRatio(matrix[row][col].ratio) }}
                       </span>
-                      <UBadge :label="level(matrix[row][col].ratio).label" :color="level(matrix[row][col].ratio).color" variant="subtle" size="sm" />
+                      <UBadge :label="level(matrix[row][col].ratio).label" :color="level(matrix[row][col].ratio).color" variant="solid" size="sm" />
                     </span>
                   </div>
                 </td>
@@ -183,6 +248,58 @@ function formatRatio(ratio: number | null): string {
               <UBadge :label="level(cell.ratio).label" :color="level(cell.ratio).color" variant="solid" size="sm" />
             </span>
           </div>
+        </div>
+      </div>
+
+      <div>
+        <h2 class="text-sm font-semibold text-highlighted mb-1">
+          Button &amp; badge variants
+        </h2>
+        <p class="text-xs text-muted mb-4">
+          Every color × variant as it paints on the page background — tinted variants are measured against the
+          composited pixel, not the raw alias.
+        </p>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-xs">
+            <thead>
+              <tr>
+                <th class="text-left font-medium text-muted p-2" />
+                <th v-for="variant in VARIANTS" :key="variant" class="text-left font-medium text-muted p-2 capitalize">
+                  {{ variant }}
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="(color, row) in VARIANT_COLORS" :key="color.key">
+                <th class="text-left font-medium text-muted p-2 whitespace-nowrap">
+                  {{ color.label }}
+                </th>
+                <td v-for="(variant, col) in VARIANTS" :key="variant" class="p-1 align-top">
+                  <UButton
+                    v-if="variantMatrix[row]?.[col]"
+                    as="span"
+                    :color="color.key"
+                    :variant="variant"
+                    :icon="color.icon"
+                    block
+                    :label="formatRatio(variantMatrix[row][col].ratio)"
+                    size="sm"
+                    :ui="{ label: 'font-mono tabular-nums' }"
+                  >
+                    <template #trailing>
+                      <UBadge
+                        :label="level(variantMatrix[row][col].ratio).label"
+                        :color="level(variantMatrix[row][col].ratio).color"
+                        variant="solid"
+                        size="sm"
+                      />
+                    </template>
+                  </UButton>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
