@@ -301,10 +301,9 @@ export function useTheme() {
   const spacingStyle = computed(() => _spacing.value !== 0.25 ? `:root { --spacing: ${_spacing.value}rem; }` : ':root {}')
   const blackAsPrimaryStyle = computed(() => _blackAsPrimary.value ? `:root { --ui-primary: black; } .dark { --ui-primary: white; }` : ':root {}')
   const fontStyle = computed(() => {
-    // _font/heading.font hydrate straight from localStorage (useLocalStorage,
-    // no read-time validation) and land in this <style> innerHTML — re-assert
-    // SAFE_NAME at the sink so a tampered name can't break out of the quoted
-    // string, exactly as the SSR FOUC scripts do.
+    // _font/heading.font hydrate unvalidated from localStorage into this <style>
+    // innerHTML — re-assert SAFE_NAME at the sink so a tampered name can't break
+    // out of the quoted string.
     const safeFont = SAFE_NAME.test(_font.value) ? _font.value : 'Public Sans'
     const parts = [`:root { --font-sans: '${safeFont}', sans-serif; }`]
     const prefs = fontPrefs.value

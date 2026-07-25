@@ -561,15 +561,21 @@ export function styleTokens(style: StyleOptions): { light: Record<string, string
     }
   }
 
-  if (style.shadowColor === 'shade' || style.shadowColor === 'primary-shade') {
+  // An unset shadowColor is the 'shade' default, but only a hard shadow paints
+  // one — so the shade slider works in custom mode without first touching the
+  // colour dropdown, while a pristine theme emits nothing.
+  const shadowColorMode = (!style.shadowColor || style.shadowColor === 'default')
+    ? (style.shadow === 'hard' ? 'shade' : undefined)
+    : style.shadowColor
+  if (shadowColorMode === 'shade' || shadowColorMode === 'primary-shade') {
     // Per-mode ramp shade — a graded shadow that darkens or lightens
     // independently of the scheme it sits on; the primary ramp tints it.
-    const ramp = style.shadowColor === 'primary-shade' ? 'primary' : 'neutral'
+    const ramp = shadowColorMode === 'primary-shade' ? 'primary' : 'neutral'
     const shade = { ...SHADOW_SHADE_DEFAULTS, ...style.shadowShade }
     light['--ui-shadow-color'] = shadeRef(ramp, shade.light)
     dark['--ui-shadow-color'] = shadeRef(ramp, shade.dark)
-  } else if (style.shadowColor && style.shadowColor !== 'default') {
-    const value = SHADOW_COLOR_VALUES[style.shadowColor]
+  } else if (shadowColorMode) {
+    const value = SHADOW_COLOR_VALUES[shadowColorMode]
     light['--ui-shadow-color'] = value.light
     dark['--ui-shadow-color'] = value.dark
   }

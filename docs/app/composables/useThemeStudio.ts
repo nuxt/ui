@@ -95,12 +95,10 @@ export function useThemeStudio() {
           entry.amount
         ), storedStopStep(entry), entry.pins)
         const name = customPaletteName(alias)
-        // The alias mapping and neutral remaps usually survive the reload
-        // intact — only the derived ramp (customColors) loses its restore
-        // race. Re-sending an alias that's already correct routes through the
-        // primary/neutral computed setters, which reset black-as-primary,
-        // rewrite localStorage and fire a spurious "Theme Changed" event every
-        // single load. Heal the ramp always; touch the alias only if it drifted.
+        // Only the derived ramp (customColors) loses its restore race. Re-sending
+        // an already-correct alias routes through the primary/neutral setters,
+        // which reset black-as-primary and fire a spurious event every load — so
+        // heal the ramp always, touch the alias only if it drifted.
         const aliasAlreadySet = (appConfig.ui.colors as Record<string, string>)[alias] === name
         theme.applyThemeSettings({
           customColors: { [name]: ramp },
@@ -485,13 +483,10 @@ export function useThemeStudio() {
     // applyDoc resets everything first, which clears the persisted preset —
     // but a section reset moves TOWARD the baseline; keep it
     const preserved = activePreset.value
-    // applyDoc → resetTheme also wipes the editor curves (paletteParams), but a
-    // section reset only touches its own slice: resetting typography must not
-    // discard the curves behind an untouched custom colour ramp (the baked
-    // shades survive in the doc, so the curves have to as well, or the editor
-    // silently refits an approximation). Snapshot now, then restore the curves
-    // for every alias whose custom ramp outlived the reset (a reset colour
-    // section drops back to a stock name, so isCustomPalette filters it out).
+    // applyDoc wipes the editor curves too, but a section reset only touches its
+    // own slice — restore curves for any alias whose custom ramp outlived it
+    // (a reset colour section drops to a stock name, so isCustomPalette filters
+    // it out) or the editor would silently refit the untouched ramp.
     const preservedPp = JSON.parse(JSON.stringify(paletteParams.value)) as typeof paletteParams.value
     applyDoc(mergeSection(plain, baselineDoc.value, key))
     setPaletteParams(Object.fromEntries(

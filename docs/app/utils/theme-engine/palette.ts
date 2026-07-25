@@ -105,14 +105,10 @@ export function nearestShade(value: number, stops: readonly Shade[]): Shade {
   return stops.reduce((best, stop) => Math.abs(stop - value) < Math.abs(best - value) ? stop : best)
 }
 
-// Width (in ramp x, 0–1) of each pin's influence. A pinned stop is hit exactly;
-// neighbours bend smoothly toward it and the effect decays to ~0 by ~2σ away.
-// SIGMA_MAX is the widest, smoothest kernel (single or well-separated pins).
-// But a kernel much wider than the gap between two pins makes the exact-
-// interpolation solve ill-conditioned: the weights blow up and the correction
-// overshoots — with pins a fine stop apart it swings whole neighbouring stops
-// to white. So the kernel is narrowed to the closest pin spacing (floored so it
-// never degenerates to a spike), keeping the solve well-conditioned and local.
+// Width (ramp x) of each pin's influence. MAX is the widest, smoothest kernel
+// (single/well-separated pins); but wider than the gap between two pins the
+// exact-interpolation solve goes ill-conditioned and overshoots (clustered pins
+// blow neighbours to white), so it's narrowed to the closest spacing, floored.
 const PIN_KERNEL_SIGMA_MAX = 0.2
 const PIN_KERNEL_SIGMA_MIN = 0.04
 
@@ -167,11 +163,10 @@ function pinField(pins: PalettePin[], base: (x: number) => { l: number, c: numbe
 
   const matrix = xs.map(xi => xs.map(xj => pinKernel(Math.abs(xi - xj), sigma)))
 
-  // Hue is cyclic. Unwrapping each target independently to the base's nearest
-  // arc flips direction for pins near the base's antipode, sending the ramp the
-  // long way round. Instead chain-unwrap the targets in x order (each within
-  // ±180° of the previous), anchored to the base hue at the first pin, so a run
-  // of pins takes the short way *between themselves*.
+  // Hue is cyclic: unwrapping each target to the base's nearest arc sends pins
+  // near the antipode the long way round. Chain-unwrap in x order instead (each
+  // within ±180° of the previous, anchored to the base at the first pin) so a
+  // run of pins takes the short way between themselves.
   const order = xs.map((_, i) => i).sort((i, j) => xs[i]! - xs[j]!)
   const hueTarget: number[] = Array.from({ length: pins.length })
   let prevHue = base(xs[order[0]!]!).h

@@ -28,13 +28,9 @@ function pickCurves(value: StoredPaletteParams): PaletteCurveParams {
   return structuredClone({ lightness: toRaw(value.lightness), chroma: toRaw(value.chroma), hue: toRaw(value.hue) })
 }
 
-/**
- * A plain, clone-safe copy of a pin list. `pins` is a deeply-reactive ref, so
- * reading an element (via filter/index) hands back a Vue Proxy that `toRaw`
- * does NOT unwrap — only the outer array. structuredClone then throws
- * DataCloneError on the proxied element. Rebuilding each pin from its scalar
- * fields sidesteps the proxy entirely, so the result always persists.
- */
+// Clone-safe copy of the pins: reading elements off the reactive ref yields Vue
+// Proxies that toRaw doesn't unwrap, so structuredClone would throw. Rebuilding
+// from scalar fields sidesteps the proxy.
 function plainPins(pins: readonly PalettePin[]): PalettePin[] {
   return pins.map(pin => ({ shade: pin.shade, l: pin.l, c: pin.c, h: pin.h }))
 }
@@ -297,9 +293,8 @@ function hueWindow(hue: PaletteCurveParams['hue']) {
     max: Math.max(360, Math.ceil(Math.max(...points) / 10) * 10)
   }
 }
-// The hue window must stretch to fit each freshly-seeded curve (a later palette
-// can cross the seam elsewhere), so it's a ref reseeded alongside params — but
-// only on seed, never mid-drag, or a grabbed handle would rescale under the
+// Hue window stretches to fit each seed (a later palette can cross the seam
+// elsewhere) but never mid-drag, or a grabbed handle would rescale under the
 // pointer. Lightness/chroma are fixed physical ranges.
 const windows = ref({
   lightness: { min: 0, max: 1 },
@@ -451,8 +446,7 @@ function seed(values: PaletteCurveParams) {
     pins.value = []
     Object.assign(params, next)
   })
-  // Restretch the hue window to this seed (may cross the seam differently than
-  // the palette the editor first opened on).
+  // Restretch the hue window — this seed may cross the seam differently.
   windows.value.hue = hueWindow(next.hue)
 }
 
@@ -486,10 +480,8 @@ function onDragEnd() {
   if (!effectsDirty.value) {
     seedBase = structuredClone(toRaw(params))
   }
-  // applyReactive reconciles AND clears the inline preview vars, but only the
-  // active ramp takes that path — an inactive alias (edited before its first
-  // apply) still set preview vars during the drag, so clear them directly or
-  // they shadow the reactive <style> for this ramp.
+  // Only the active ramp reconciles via applyReactive; an inactive alias still
+  // set preview vars during the drag, so clear them directly.
   if (active.value) applyReactive()
   else clearCssomPreview()
 }
@@ -525,10 +517,9 @@ function seedFromCurrent() {
 // throttled applies (the callback runs queued, after any sync flag reset).
 watch(() => paletteParams.value[props.alias], (value) => {
   if (!value || !('lightness' in value)) return
-  // Echo guard: skip only when curves AND pins AND stop density all already
-  // match. Comparing curves alone would swallow an external change that moved
-  // just a pin or changed the density (undo/redo of a pin-only edit), leaving
-  // the editor showing stale pins over correct curves.
+  // Echo guard: skip only when curves, pins AND density all match — comparing
+  // curves alone would swallow a pin-only or density-only external change (e.g.
+  // undo/redo) and leave stale pins over correct curves.
   const effective = applyPaletteEffects(pickCurves(value), value.effects, value.amount)
   const curvesMatch = JSON.stringify(effective) === JSON.stringify(toRaw(params))
   const pinsMatch = JSON.stringify(value.pins ?? []) === JSON.stringify(toRaw(pins.value))
@@ -537,9 +528,8 @@ watch(() => paletteParams.value[props.alias], (value) => {
 
   seedBase = pickCurves(value)
   normalizeHue(seedBase)
-  // One ignoreUpdates around every apply-triggering write: reflecting an
-  // external change (undo/redo restore, AI edit) must not echo back into an
-  // apply that re-persists and clobbers the very state being restored.
+  // Wrap every apply-triggering write: reflecting an external change must not
+  // echo back into an apply that re-persists and clobbers what's being restored.
   ignoreUpdates(() => {
     Object.assign(effects, PALETTE_EFFECT_DEFAULTS, value.effects ?? {})
     effectAmount.value = value.amount ?? 100

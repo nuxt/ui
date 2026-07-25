@@ -136,13 +136,9 @@ function drawField() {
 // redraw on every field change — a drag, a tab switch, or a preset reseed.
 watch([() => props.field, fieldCanvas], drawField, { immediate: true, flush: 'post' })
 
-// The raw bézier control (y0/y1) is NOT where the curve actually ends once pins
-// are in play: a pin near the edge (e.g. 900) pulls the corrected line away from
-// the raw endpoint, and a pin ON the endpoint overrides it outright. Always sit
-// the endpoint handle on the corrected value (stopValues) so it rides the drawn
-// line instead of floating off it. With no pins the corrected value equals the
-// bézier endpoint, so nothing moves. A pinned endpoint is additionally locked
-// from dragging (the pin owns it — edit it through the swatch popover).
+// Sit the endpoint handle on the corrected value, not the raw bézier control,
+// so it rides the drawn line when a pin pulls the edge (equal when unpinned). A
+// pinned endpoint is also locked from dragging — the pin owns it.
 const lastStop = computed(() => (props.stopValues?.length ?? 1) - 1)
 const startPinned = computed(() => props.stopPinned?.[0] ?? false)
 const endPinned = computed(() => props.stopPinned?.[lastStop.value] ?? false)
@@ -189,9 +185,7 @@ function onPointerDown(event: PointerEvent) {
   const targets = [
     { id: 'p1' as const, x: toX(c.p1x), y: toHandleY(c.p1y) },
     { id: 'p2' as const, x: toX(c.p2x), y: toHandleY(c.p2y) },
-    // A pinned endpoint is locked to its pin — don't offer it as a drag target,
-    // or the endpoint-carries-its-handle delta would fight the pin correction.
-    // Grab the others at their DRAWN (corrected) spot, not the raw control.
+    // Skip a pinned endpoint (locked); grab the rest at their drawn spot.
     ...(startPinned.value ? [] : [{ id: 'y0' as const, x: toX(0), y: toHandleY(startY.value) }]),
     ...(endPinned.value ? [] : [{ id: 'y1' as const, x: toX(1), y: toHandleY(endY.value) }])
   ]
@@ -222,15 +216,10 @@ function onPointerMove(event: PointerEvent) {
   // Reaching further is the window's job — hue auto-pans at the edges.
   const clamped = Math.min(props.yMax, Math.max(props.yMin, value))
 
-  // Dragging an endpoint carries its own control handle by the same vertical
-  // delta, so the tangent that leaves the endpoint is preserved instead of the
-  // handle staying put and kinking the curve. The handle stays window-clamped
-  // (as a direct handle drag would), so near an edge the offset compresses.
-  //
-  // The handle is drawn on the CORRECTED curve, but we steer the RAW control
-  // (y0/y1): back out the pin pull at the edge (corrected − raw) so the visible
-  // endpoint tracks the pointer instead of lagging by the correction. With no
-  // pin reaching the edge the offset is zero and this is the plain drag.
+  // An endpoint drag carries its control handle by the same delta so the tangent
+  // is preserved. The handle sits on the corrected curve but we steer the raw
+  // control, so back out the pin pull (corrected − raw) to track the pointer;
+  // with no pin at the edge the offset is zero and it's a plain drag.
   if (dragging.value === 'y0') {
     const raw = Math.min(props.yMax, Math.max(props.yMin, clamped - (startY.value - curve.value.y0)))
     const delta = raw - curve.value.y0
@@ -261,10 +250,8 @@ function onPointerUp(event: PointerEvent) {
   }
 }
 
-// The collapsible unmounts its content on close (default), so closing the fold
-// mid-drag tears down this SVG without a pointerup. Emit the close-out so the
-// parent still runs onDragEnd — otherwise its isDragging, the page-wide
-// dragging class and the inline preview vars all stay stranded.
+// Closing the fold mid-drag unmounts the SVG without a pointerup — emit dragEnd
+// so the parent isn't left with isDragging and stranded preview vars.
 onUnmounted(() => {
   if (dragging.value) {
     dragging.value = null
