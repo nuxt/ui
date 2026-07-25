@@ -21,6 +21,5 @@ const brand: ThemePreset[] = [{
     mode="user"
     :presets="['nuxt-ui', 'shadcn', 'neo-brutalist']"
     :custom-presets="brand"
-    :sections="['colors', 'general']"
   />
 </template>

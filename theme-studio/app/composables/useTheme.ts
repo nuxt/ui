@@ -1,7 +1,7 @@
 import { defu } from 'defu'
 import { THEME_TAG_IDS, THEME_STATE_KEYS, THEME_STORAGE_KEYS } from '../utils/theme-keys'
 import { useLocalStorage } from '@vueuse/core'
-import { themeIcons, cssVariableDefaults, readLocalStorage, FONT_WEIGHT_DEFAULTS } from '../utils/theme'
+import { themeIcons, cssVariableDefaults, readLocalStorage, themeCssBaseline, FONT_WEIGHT_DEFAULTS } from '../utils/theme'
 import { generateCSS, generateConfig, mergeUi, isDefaultStyle, styleTokens, DEFAULT_COLORS, THEME_DEFAULTS, SEMANTIC_ALIASES, LIBRARY_TOKEN_DEFAULTS } from '../utils/theme-engine'
 import type { ThemeDoc, ThemePalette } from '../utils/theme-engine'
 import { omit } from '#ui/utils'
@@ -97,10 +97,20 @@ export function useTheme() {
   // renderer's ref only converge through vueuse's storage events. (It also
   // half-syncs across tabs — colors/tokens don't follow — a wart, but
   // disabling it here breaks live updates within one tab.)
-  const _radius = useLocalStorage('nuxt-ui-radius', 0.25)
-  const _fontSize = useLocalStorage('nuxt-ui-font-size', 16)
-  const _spacing = useLocalStorage('nuxt-ui-spacing', 0.25)
-  const _font = useLocalStorage('nuxt-ui-font', 'Public Sans')
+  // The host app's resting theme is the studio's zero point: CSS-side knobs
+  // read from the live styles, config-side from app.config before the
+  // persisted-state restore mutates it (the plugin calls useTheme first, and
+  // useState carries the server's pristine capture past the client restore).
+  const cssBaseline = themeCssBaseline()
+  const configBaseline = useState('nuxt-ui-config-baseline', () => ({
+    primary: appConfig.ui.colors.primary,
+    neutral: appConfig.ui.colors.neutral
+  }))
+
+  const _radius = useLocalStorage('nuxt-ui-radius', cssBaseline.radius)
+  const _fontSize = useLocalStorage('nuxt-ui-font-size', cssBaseline.fontSize)
+  const _spacing = useLocalStorage('nuxt-ui-spacing', cssBaseline.spacing)
+  const _font = useLocalStorage('nuxt-ui-font', cssBaseline.font)
   const _iconSet = useLocalStorage('nuxt-ui-icons', 'lucide')
   const _blackAsPrimary = useLocalStorage('nuxt-ui-black-as-primary', false)
 
@@ -294,18 +304,20 @@ export function useTheme() {
   const hasCustomColors = computed(() => Object.keys(customColorsData.value).length > 0)
   const hasCSSVariables = computed(() => Object.keys(cssVariablesData.value.light || {}).length > 0 || Object.keys(cssVariablesData.value.dark || {}).length > 0)
 
-  const radiusStyle = computed(() => `:root { --ui-radius: ${_radius.value}rem; }`)
+  // Untouched knobs emit no override so the host app's own CSS shows through
+  // — the studio only pins a value once it diverges from the baseline.
+  const radiusStyle = computed(() => _radius.value !== cssBaseline.radius ? `:root { --ui-radius: ${_radius.value}rem; }` : ':root {}')
   // font-size scales every rem metric (UI scale); --spacing is tailwind v4's
   // base unit behind all spacing utilities (density).
-  const fontSizeStyle = computed(() => _fontSize.value !== 16 ? `html { font-size: ${_fontSize.value}px; }` : 'html {}')
-  const spacingStyle = computed(() => _spacing.value !== 0.25 ? `:root { --spacing: ${_spacing.value}rem; }` : ':root {}')
+  const fontSizeStyle = computed(() => _fontSize.value !== cssBaseline.fontSize ? `html { font-size: ${_fontSize.value}px; }` : 'html {}')
+  const spacingStyle = computed(() => _spacing.value !== cssBaseline.spacing ? `:root { --spacing: ${_spacing.value}rem; }` : ':root {}')
   const blackAsPrimaryStyle = computed(() => _blackAsPrimary.value ? `:root { --ui-primary: black; } .dark { --ui-primary: white; }` : ':root {}')
   const fontStyle = computed(() => {
     // _font/heading.font hydrate unvalidated from localStorage into this <style>
     // innerHTML — re-assert SAFE_NAME at the sink so a tampered name can't break
     // out of the quoted string.
-    const safeFont = SAFE_NAME.test(_font.value) ? _font.value : 'Public Sans'
-    const parts = [`:root { --font-sans: '${safeFont}', sans-serif; }`]
+    const safeFont = SAFE_NAME.test(_font.value) ? _font.value : cssBaseline.font
+    const parts = safeFont !== cssBaseline.font ? [`:root { --font-sans: '${safeFont}', sans-serif; }`] : []
     const prefs = fontPrefs.value
     const weights = prefs.weights || {}
     const weightVars = (Object.keys(weights) as Array<keyof typeof weights>)
@@ -383,19 +395,19 @@ export function useTheme() {
   ]
 
   const hasCSSChanges = computed(() => {
-    return _radius.value !== 0.25
-      || _fontSize.value !== 16
-      || _spacing.value !== 0.25
+    return _radius.value !== cssBaseline.radius
+      || _fontSize.value !== cssBaseline.fontSize
+      || _spacing.value !== cssBaseline.spacing
       || _blackAsPrimary.value
-      || _font.value !== 'Public Sans'
+      || _font.value !== cssBaseline.font
       || Object.keys(fontPrefs.value).length > 0
       || hasCustomColors.value
       || hasCSSVariables.value
   })
 
   const hasConfigChanges = computed(() => {
-    return appConfig.ui.colors.primary !== 'green'
-      || appConfig.ui.colors.neutral !== 'slate'
+    return appConfig.ui.colors.primary !== configBaseline.value.primary
+      || appConfig.ui.colors.neutral !== configBaseline.value.neutral
       || _iconSet.value !== 'lucide'
       || !!aiThemeExtras.value.colors
       || !!aiThemeExtras.value.ui
@@ -479,6 +491,14 @@ export function useTheme() {
 
     return doc
   }
+
+  /**
+   * The live theme as a reactive ThemeDoc — the host-facing change feed.
+   * Watch it to persist edits wherever they belong (account data, a
+   * backend); feed a saved doc back through useThemeStudio().applyDoc()
+   * to restore. ThemeStudioButton re-emits this as its `change` event.
+   */
+  const themeDoc = computed(() => currentDoc())
 
   // Pure generation — callers track 'Theme Exported' on the actual copy,
   // so opening the export modal doesn't inflate the metric.
@@ -660,16 +680,16 @@ export function useTheme() {
       track('Theme Reset')
     }
 
-    appConfig.ui.colors.primary = 'green'
+    appConfig.ui.colors.primary = configBaseline.value.primary
     window.localStorage.removeItem('nuxt-ui-primary')
 
-    appConfig.ui.colors.neutral = 'slate'
+    appConfig.ui.colors.neutral = configBaseline.value.neutral
     window.localStorage.removeItem('nuxt-ui-neutral')
 
-    _radius.value = 0.25
-    _fontSize.value = 16
-    _spacing.value = 0.25
-    _font.value = 'Public Sans'
+    _radius.value = cssBaseline.radius
+    _fontSize.value = cssBaseline.fontSize
+    _spacing.value = cssBaseline.spacing
+    _font.value = cssBaseline.font
     fontPrefs.value = {}
     window.localStorage.removeItem('nuxt-ui-font-prefs')
     _iconSet.value = 'lucide'
@@ -747,6 +767,7 @@ export function useTheme() {
     hasConfigChanges,
     configLabel: computed(() => framework.value === 'vue' ? 'vite.config.ts' : 'app.config.ts'),
     currentDoc,
+    themeDoc,
     cssVariablesData,
     customColorsData,
     removeCustomColors,

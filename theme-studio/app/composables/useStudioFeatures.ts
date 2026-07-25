@@ -13,6 +13,10 @@ export interface StudioFeatures {
   shades: boolean
   /** The Semantic section remapping secondary/success/info/warning/error. */
   semantic: boolean
+  /** The Button/Card/Input Defaults sections (per-component variant and color). */
+  components: boolean
+  /** The sizing knobs: base font size, spacing density and default component size. Radius always stays. */
+  scale: boolean
   /** Section-header help links into the Nuxt UI docs. */
   help: boolean
 }
@@ -21,6 +25,8 @@ export const STUDIO_FEATURE_DEFAULTS: StudioFeatures = {
   palette: true,
   shades: true,
   semantic: true,
+  components: true,
+  scale: true,
   help: true
 }
 

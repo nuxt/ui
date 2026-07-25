@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { ThemePreset } from '../../utils/theme-engine'
+import type { ThemeDoc, ThemePreset } from '../../utils/theme-engine'
 
 /**
  * The drop-in theme studio: one button opening the full editor in a
@@ -22,7 +22,7 @@ const props = withDefaults(defineProps<{
   presets?: boolean | string[]
   /** Extra presets appended after the stock list. */
   customPresets?: ThemePreset[]
-  /** Which control panels to offer, in order. */
+  /** Which control panels to offer, in order. Mode default: dev all three, user colors + general. */
   sections?: ('colors' | 'general' | 'style')[]
   /** Offer theme import/export. Mode default: dev on, user off. */
   share?: boolean
@@ -34,28 +34,57 @@ const props = withDefaults(defineProps<{
   shades?: boolean
   /** The Semantic alias section in Colors. Mode default: dev on, user off. */
   semantic?: boolean
+  /** The Button/Card/Input Defaults sections. Mode default: dev on, user off. */
+  components?: boolean
+  /** Base font size, spacing density and default size — radius always stays. Mode default: dev on, user off. */
+  scale?: boolean
   /** Section-header links into the Nuxt UI docs. Off by default — they point at ui.nuxt.com paths. */
   help?: boolean
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 }>(), {
   mode: 'dev',
   presets: true,
-  sections: () => ['colors', 'general', 'style'],
   reset: true,
-  help: false
+  help: false,
+  // absent optional booleans cast to false — pin these to undefined so the
+  // mode defaults below can actually see "not provided"
+  share: undefined,
+  palette: undefined,
+  shades: undefined,
+  semantic: undefined,
+  components: undefined,
+  scale: undefined
 })
 
 const dev = computed(() => props.mode !== 'user')
 const share = computed(() => props.share ?? dev.value)
+// the Style panel (shadows/borders) is a design tool, not a preference
+const sections = computed(() => props.sections ?? (dev.value ? ['colors', 'general', 'style'] as const : ['colors', 'general'] as const))
 
 provideStudioFeatures(() => ({
   palette: props.palette ?? dev.value,
   shades: props.shades ?? dev.value,
   semantic: props.semantic ?? dev.value,
+  components: props.components ?? dev.value,
+  scale: props.scale ?? dev.value,
   help: props.help
 }))
 
-const { resetTheme, hasCSSChanges, hasConfigChanges } = useTheme()
+const emit = defineEmits<{
+  /**
+   * Fires with the full ThemeDoc on every edit — persist it to account
+   * data and restore later with useThemeStudio().applyDoc().
+   */
+  change: [doc: ThemeDoc]
+}>()
+
+const { resetTheme, hasCSSChanges, hasConfigChanges, themeDoc } = useTheme()
+
+// client-only watch: the doc reads persisted state that never exists on
+// the server, and hosts only care about edits the user actually makes
+onMounted(() => {
+  watch(themeDoc, doc => emit('change', doc))
+})
 const studioIcons = useStudioIcons()
 const appConfig = useAppConfig()
 
@@ -67,7 +96,7 @@ const SECTION_LABELS = { colors: 'Colors', general: 'General', style: 'Style' } 
 
 const tabs = computed(() => [
   ...props.presets ? [{ label: 'Presets', value: 'presets' }] : [],
-  ...props.sections.map(section => ({ label: SECTION_LABELS[section], value: section }))
+  ...sections.value.map(section => ({ label: SECTION_LABELS[section], value: section }))
 ])
 const tab = ref<string>()
 watchEffect(() => {
@@ -89,7 +118,7 @@ function openShare(mode: 'import' | 'export') {
 </script>
 
 <template>
-  <UPopover v-model:open="open" :content="{ align: 'end' }">
+  <UPopover v-model:open="open" :content="{ align: 'end', collisionPadding: 8 }">
     <slot :open="open" :dirty="dirty">
       <UChip :show="dirty" color="primary" size="sm">
         <UButton
@@ -103,8 +132,11 @@ function openShare(mode: 'import' | 'export') {
     </slot>
 
     <template #content>
-      <div class="w-80 flex flex-col">
-        <div v-if="tabs.length > 1" class="p-2 pb-0">
+      <!-- Capped to the popover's collision-aware available height so a
+           mid-page trigger with a long panel scrolls instead of running
+           off the viewport. -->
+      <div class="w-80 flex flex-col max-h-[min(70vh,var(--reka-popover-content-available-height))]">
+        <div v-if="tabs.length > 1" class="p-2 pb-0 shrink-0">
           <UTabs
             v-model="tab"
             :items="tabs"
@@ -115,7 +147,7 @@ function openShare(mode: 'import' | 'export') {
           />
         </div>
 
-        <div class="max-h-[60vh] overflow-y-auto overscroll-contain">
+        <div class="flex-1 min-h-0 overflow-y-auto overscroll-contain">
           <ThemeStudioPresetList
             v-if="tab === 'presets'"
             :include="Array.isArray(presets) ? presets : undefined"
@@ -125,7 +157,7 @@ function openShare(mode: 'import' | 'export') {
           <ThemeStudioControls v-else-if="controlsGroup" :group="controlsGroup" />
         </div>
 
-        <div v-if="share || reset" class="flex items-center gap-1 p-2 border-t border-default">
+        <div v-if="share || reset" class="shrink-0 flex items-center gap-1 p-2 border-t border-default">
           <UTooltip v-if="reset" text="Reset theme">
             <UButton
               :icon="studioIcons.reset"

@@ -642,3 +642,46 @@ export const cssVariableDefaults = {
     '--ui-border-inverted': 'white'
   }
 } as const
+
+/**
+ * The host app's own resting theme — what "untouched" and "reset" mean when
+ * the studio is embedded outside the docs. CSS-side knobs are read from the
+ * live computed styles once, with the studio's own override tags muted so
+ * they can't report their own values back as the app's.
+ */
+export interface CssBaseline {
+  radius: number
+  fontSize: number
+  spacing: number
+  font: string
+}
+
+export const CSS_BASELINE_FALLBACK: CssBaseline = { radius: 0.25, fontSize: 16, spacing: 0.25, font: 'Public Sans' }
+
+let cssBaseline: CssBaseline | undefined
+
+export function themeCssBaseline(): CssBaseline {
+  if (!import.meta.client) return CSS_BASELINE_FALLBACK
+  if (cssBaseline) return cssBaseline
+  const tags = ['nuxt-ui-radius', 'nuxt-ui-font-size', 'nuxt-ui-spacing', 'nuxt-ui-font']
+    .map(id => document.getElementById(id))
+    .filter((el): el is HTMLStyleElement => el instanceof HTMLStyleElement)
+  tags.forEach(el => (el.disabled = true))
+  try {
+    const styles = getComputedStyle(document.documentElement)
+    const num = (value: string, fallback: number) => {
+      const parsed = Number.parseFloat(value)
+      return Number.isFinite(parsed) ? parsed : fallback
+    }
+    const family = styles.getPropertyValue('--font-sans').split(',')[0]?.trim().replace(/^['"]|['"]$/g, '')
+    cssBaseline = {
+      radius: num(styles.getPropertyValue('--ui-radius'), CSS_BASELINE_FALLBACK.radius),
+      fontSize: num(styles.fontSize, CSS_BASELINE_FALLBACK.fontSize),
+      spacing: num(styles.getPropertyValue('--spacing'), CSS_BASELINE_FALLBACK.spacing),
+      font: family || CSS_BASELINE_FALLBACK.font
+    }
+  } finally {
+    tags.forEach(el => (el.disabled = false))
+  }
+  return cssBaseline
+}

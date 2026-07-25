@@ -15,6 +15,7 @@ const {
 } = useTheme()
 
 const { style, setStyle } = useThemeStudio()
+const features = useStudioFeatures()
 
 /* ------------------------------------------------------------ typography -- */
 
@@ -417,7 +418,9 @@ const defaultSize = computed({
 
     <USeparator />
 
-    <ThemeStudioSection label="Scale" class="p-4" section-key="scale">
+    <!-- Radius survives every feature set — with the sizing knobs gated
+         away the section IS just radius, so it says so. -->
+    <ThemeStudioSection :label="features.scale ? 'Scale' : 'Radius'" class="p-4" section-key="scale">
       <div class="flex flex-col gap-2">
         <ThemeStudioSliderRow
           v-model="radius"
@@ -427,34 +430,36 @@ const defaultSize = computed({
           :step="0.125"
         />
 
-        <ThemeStudioSliderRow
-          v-model="fontSize"
-          label="Text"
-          :min="14"
-          :max="18"
-          :step="0.5"
-          unit="px"
-        />
-
-        <ThemeStudioSliderRow v-model="spacing" label="Spacing" :min="0.15" :max="0.35" :step="0.025" />
-
-        <div class="flex items-center gap-2">
-          <span class="text-xs text-muted w-13 shrink-0 select-none">Size</span>
-
-          <ThemeStudioDefaultSelect
-            v-model="defaultSize"
-            :items="defaultSizeItems"
-            icon="i-lucide-proportions"
-            class="flex-1"
-            aria-label="Default size"
+        <template v-if="features.scale">
+          <ThemeStudioSliderRow
+            v-model="fontSize"
+            label="Text"
+            :min="14"
+            :max="18"
+            :step="0.5"
+            unit="px"
           />
-        </div>
+
+          <ThemeStudioSliderRow v-model="spacing" label="Spacing" :min="0.15" :max="0.35" :step="0.025" />
+
+          <div class="flex items-center gap-2">
+            <span class="text-xs text-muted w-13 shrink-0 select-none">Size</span>
+
+            <ThemeStudioDefaultSelect
+              v-model="defaultSize"
+              :items="defaultSizeItems"
+              icon="i-lucide-proportions"
+              class="flex-1"
+              aria-label="Default size"
+            />
+          </div>
+        </template>
       </div>
     </ThemeStudioSection>
 
-    <USeparator />
+    <USeparator v-if="features.components" />
 
-    <template v-for="field in variantGroupFields" :key="field.key">
+    <template v-for="field in features.components ? variantGroupFields : []" :key="field.key">
       <ThemeStudioSection
         :label="field.label"
         :default-open="false"

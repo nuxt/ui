@@ -1,5 +1,10 @@
 <script setup lang="ts">
-import type { ThemePreset } from '@nuxt/ui-theme-studio/engine'
+import type { ThemeDoc, ThemePreset } from '@nuxt/ui-theme-studio/engine'
+
+// where an app would persist to account data
+function onChange(doc: ThemeDoc) {
+  console.log('[theme-studio] change', JSON.stringify(doc))
+}
 
 const brand: ThemePreset[] = [{
   id: 'acme',
@@ -23,7 +28,7 @@ const brand: ThemePreset[] = [{
       <p class="text-sm font-medium text-muted">
         Default — full editor
       </p>
-      <ThemeStudioButton />
+      <ThemeStudioButton @change="onChange" />
     </div>
 
     <div class="flex flex-col items-center gap-2">
@@ -37,7 +42,7 @@ const brand: ThemePreset[] = [{
       <p class="text-sm font-medium text-muted">
         User mode — curated presets, plain pickers
       </p>
-      <ThemeStudioButton mode="user" :presets="['nuxt-ui', 'shadcn', 'neo-brutalist']" :sections="['colors', 'general']" />
+      <ThemeStudioButton mode="user" :presets="['nuxt-ui', 'shadcn', 'neo-brutalist']" />
     </div>
 
     <div class="flex flex-col items-center gap-2">
