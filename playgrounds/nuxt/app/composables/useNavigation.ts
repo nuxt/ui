@@ -87,6 +87,7 @@ const components = [
   'tabs',
   'textarea',
   'theme',
+  'theme-studio',
   'timeline',
   'toast',
   'tooltip',
