@@ -4,17 +4,13 @@ const route = useRoute()
 /** The theme studio's UI-hiding fullscreen also hides the site chrome. */
 const studioFullscreen = useState('theme-studio-fullscreen', () => false)
 const appConfig = useAppConfig()
-const { style, link, color } = useTheme()
-
 const { data: navigation } = await useFetch('/api/navigation.json')
 
+// theme style/link/theme-color head entries come from the theme-studio layer's plugin
 useHead({
   meta: [
-    { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-    { key: 'theme-color', name: 'theme-color', content: color }
-  ],
-  link,
-  style
+    { name: 'viewport', content: 'width=device-width, initial-scale=1' }
+  ]
 })
 
 if (import.meta.server) {

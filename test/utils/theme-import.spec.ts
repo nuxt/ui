@@ -6,8 +6,8 @@ import {
   styleTokens,
   presets,
   DEFAULT_COLORS
-} from '../../docs/app/utils/theme-engine'
-import type { ThemeDoc } from '../../docs/app/utils/theme-engine'
+} from '../../theme-studio/app/utils/theme-engine'
+import type { ThemeDoc } from '../../theme-studio/app/utils/theme-engine'
 
 /**
  * The merged per-mode variable maps a doc produces — the semantic ground

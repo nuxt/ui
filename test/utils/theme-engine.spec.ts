@@ -17,8 +17,8 @@ import {
   parseUiColorRef,
   resolveAlias,
   resolveShade
-} from '../../docs/app/utils/theme-engine'
-import type { Shade, ThemeDoc } from '../../docs/app/utils/theme-engine'
+} from '../../theme-studio/app/utils/theme-engine'
+import type { Shade, ThemeDoc } from '../../theme-studio/app/utils/theme-engine'
 
 describe('theme-engine', () => {
   describe('isDefaultTheme', () => {
@@ -336,13 +336,13 @@ describe('theme-engine', () => {
 
 describe('styleComponents', () => {
   it('returns nothing for the default treatment', async () => {
-    const { styleComponents } = await import('../../docs/app/utils/theme-engine')
+    const { styleComponents } = await import('../../theme-studio/app/utils/theme-engine')
     expect(styleComponents({})).toEqual({})
     expect(styleComponents({ shadow: 'none', border: 'default' })).toEqual({})
   })
 
   it('inner shadow rides its own inset utilities on the same surfaces', async () => {
-    const { styleComponents, styleTokens } = await import('../../docs/app/utils/theme-engine')
+    const { styleComponents, styleTokens } = await import('../../theme-studio/app/utils/theme-engine')
 
     const inner = styleComponents({ innerShadow: 'custom' })
     expect(inner.button!.slots!.base).toContain('inset-shadow-(--ui-inner-shadow)')
@@ -368,7 +368,7 @@ describe('styleComponents', () => {
   })
 
   it('merges shadow and frame fragments slot-wise', async () => {
-    const { styleComponents } = await import('../../docs/app/utils/theme-engine')
+    const { styleComponents } = await import('../../theme-studio/app/utils/theme-engine')
     const components = styleComponents({ shadow: 'custom', border: 'custom', frame: true })
 
     expect(components.button!.slots!.base).toContain('shadow-(--ui-shadow-hard)')
@@ -380,7 +380,7 @@ describe('styleComponents', () => {
   })
 
   it('docToSettings keeps style out of the ui channel but carries its tokens', async () => {
-    const { docToSettings } = await import('../../docs/app/utils/theme-engine')
+    const { docToSettings } = await import('../../theme-studio/app/utils/theme-engine')
     const settings = docToSettings({
       version: 1,
       style: { shadow: 'hard', shadowColor: 'black' },
@@ -395,7 +395,7 @@ describe('styleComponents', () => {
   })
 
   it('mergeUi concatenates slot classes and compound variants', async () => {
-    const { mergeUi, styleComponents } = await import('../../docs/app/utils/theme-engine')
+    const { mergeUi, styleComponents } = await import('../../theme-studio/app/utils/theme-engine')
     const merged = mergeUi(styleComponents({ shadow: 'custom' }), { button: { slots: { base: 'rounded-full' } } })
 
     // both the shadow classes and the explicit override survive, explicit last
@@ -407,7 +407,7 @@ describe('styleComponents', () => {
 
 describe('style colors', () => {
   it('widths ride the default-width variables — only the frame toggle emits classes', async () => {
-    const { styleComponents } = await import('../../docs/app/utils/theme-engine')
+    const { styleComponents } = await import('../../theme-studio/app/utils/theme-engine')
 
     // width and none alike produce ZERO class fragments: every default-width
     // border/ring/divide follows --default-border/ring-width instead
@@ -433,7 +433,7 @@ describe('style colors', () => {
   })
 
   it('exports carry width via tailwind default-width variables, not classes', async () => {
-    const { generateCSS, generateConfig } = await import('../../docs/app/utils/theme-engine')
+    const { generateCSS, generateConfig } = await import('../../theme-studio/app/utils/theme-engine')
 
     const doc = { version: 1 as const, style: { border: 'custom' as const, borderWidth: 3, frame: true } }
     const css = generateCSS(doc)
@@ -452,7 +452,7 @@ describe('style colors', () => {
   })
 
   it('border none counts as a real style choice', async () => {
-    const { isDefaultStyle } = await import('../../docs/app/utils/theme-engine')
+    const { isDefaultStyle } = await import('../../theme-studio/app/utils/theme-engine')
     expect(isDefaultStyle({})).toBe(true)
     expect(isDefaultStyle({ shadow: 'none', border: 'default' })).toBe(true)
     expect(isDefaultStyle({ border: 'none' })).toBe(false)
@@ -460,7 +460,7 @@ describe('style colors', () => {
   })
 
   it('custom shadows keep ghost/link buttons and surfaceless fields flat', async () => {
-    const { styleComponents } = await import('../../docs/app/utils/theme-engine')
+    const { styleComponents } = await import('../../theme-studio/app/utils/theme-engine')
     const components = styleComponents({ shadow: 'custom' })
 
     // a floating shadow under an invisible box reads as a glitch — ghost/link
@@ -472,7 +472,7 @@ describe('style colors', () => {
   })
 
   it('hard shadows keep surfaceless field variants flat', async () => {
-    const { styleComponents } = await import('../../docs/app/utils/theme-engine')
+    const { styleComponents } = await import('../../theme-studio/app/utils/theme-engine')
     const components = styleComponents({ shadow: 'custom' })
 
     expect(components.select!.compoundVariants).toContainEqual({ variant: 'ghost', class: 'shadow-none' })
@@ -480,7 +480,7 @@ describe('style colors', () => {
   })
 
   it('treatments reach overlay surfaces with the right placement', async () => {
-    const { styleComponents } = await import('../../docs/app/utils/theme-engine')
+    const { styleComponents } = await import('../../theme-studio/app/utils/theme-engine')
 
     // Custom themes overlay shadows through the generalised --shadow-* ramp, so
     // the fragments leave the stock shadow-lg on those surfaces untouched.
@@ -504,7 +504,7 @@ describe('style colors', () => {
   })
 
   it('the whole input family follows the inputs group', async () => {
-    const { styleComponents } = await import('../../docs/app/utils/theme-engine')
+    const { styleComponents } = await import('../../theme-studio/app/utils/theme-engine')
     const components = styleComponents({ defaults: { variants: { inputs: 'subtle' }, size: 'lg' } })
 
     for (const component of ['input', 'select', 'textarea', 'selectMenu', 'inputMenu', 'inputNumber', 'inputTags', 'inputDate', 'inputTime', 'pinInput']) {
@@ -519,7 +519,7 @@ describe('style colors', () => {
   })
 
   it('border recoloring spares semantic outline rings but frames every solid', async () => {
-    const { styleComponents } = await import('../../docs/app/utils/theme-engine')
+    const { styleComponents } = await import('../../theme-studio/app/utils/theme-engine')
     const compounds = styleComponents({ border: 'frame', borderColor: 'primary' }).button!.compoundVariants!
 
     // outline/subtle rings ARE the color signal (a subtle primary button
@@ -532,7 +532,7 @@ describe('style colors', () => {
   })
 
   it('borderColor appends recolor compounds after frame ones', async () => {
-    const { styleComponents } = await import('../../docs/app/utils/theme-engine')
+    const { styleComponents } = await import('../../theme-studio/app/utils/theme-engine')
     const compounds = styleComponents({ border: 'custom', frame: true, borderColor: 'black' }).button!.compoundVariants!
 
     const frameIndex = compounds.findIndex(entry => entry.class === 'ring ring-inset ring-(--ui-border-accented)')
@@ -542,7 +542,7 @@ describe('style colors', () => {
   })
 
   it('styleTokens maps color choices per mode and default contributes nothing', async () => {
-    const { styleTokens } = await import('../../docs/app/utils/theme-engine')
+    const { styleTokens } = await import('../../theme-studio/app/utils/theme-engine')
 
     expect(styleTokens({})).toEqual({ light: {}, dark: {} })
     expect(styleTokens({ borderColor: 'inverted', shadowColor: 'black' })).toEqual({
@@ -552,7 +552,7 @@ describe('style colors', () => {
   })
 
   it('styleTokens supports per-mode neutral shades', async () => {
-    const { styleTokens } = await import('../../docs/app/utils/theme-engine')
+    const { styleTokens } = await import('../../theme-studio/app/utils/theme-engine')
 
     expect(styleTokens({ shadowColor: 'shade', shadowShade: { light: 700, dark: 300 } })).toEqual({
       light: { '--ui-shadow-color': 'var(--ui-color-neutral-700)' },
@@ -563,7 +563,7 @@ describe('style colors', () => {
   })
 
   it('styleTokens maps token shades per mode, only for modes present', async () => {
-    const { styleTokens } = await import('../../docs/app/utils/theme-engine')
+    const { styleTokens } = await import('../../theme-studio/app/utils/theme-engine')
 
     expect(styleTokens({ tokenShades: { '--ui-text-muted': { light: 600, dark: 300 } } })).toEqual({
       light: { '--ui-text-muted': 'var(--ui-color-neutral-600)' },
@@ -579,7 +579,7 @@ describe('style colors', () => {
   })
 
   it('styleTokens maps primary-ramp token shades and shade modes', async () => {
-    const { styleTokens } = await import('../../docs/app/utils/theme-engine')
+    const { styleTokens } = await import('../../theme-studio/app/utils/theme-engine')
 
     // --ui-primary walks the PRIMARY ramp, not neutral
     expect(styleTokens({ tokenShades: { '--ui-primary': { light: 600, dark: 300 } } })).toEqual({
@@ -595,7 +595,7 @@ describe('style colors', () => {
   })
 
   it('semantic alias and bg/text/border tokens ride their own ramps', async () => {
-    const { styleTokens, TOKEN_SHADE_TARGETS } = await import('../../docs/app/utils/theme-engine')
+    const { styleTokens, TOKEN_SHADE_TARGETS } = await import('../../theme-studio/app/utils/theme-engine')
 
     // every semantic alias token references its own color scale
     expect(styleTokens({ tokenShades: { '--ui-secondary': { light: 600 }, '--ui-error': { dark: 300 } } })).toEqual({
@@ -621,7 +621,7 @@ describe('style colors', () => {
   })
 
   it('font size and spacing export as html rule and @theme override', async () => {
-    const { generateCSS, docToSettings, isDefaultTheme } = await import('../../docs/app/utils/theme-engine')
+    const { generateCSS, docToSettings, isDefaultTheme } = await import('../../theme-studio/app/utils/theme-engine')
 
     const css = generateCSS({ version: 1, fontSize: 15, spacing: 0.3 })
     expect(css).toContain('html {\n  font-size: 15px;\n}')
@@ -638,7 +638,7 @@ describe('style colors', () => {
   })
 
   it('per-group default variants refine the app-wide value', async () => {
-    const { styleComponents } = await import('../../docs/app/utils/theme-engine')
+    const { styleComponents } = await import('../../theme-studio/app/utils/theme-engine')
     const components = styleComponents({ defaults: { variant: 'solid', variants: { inputs: 'subtle', panels: 'outline' } } })
 
     // untouched group keeps the app-wide value
@@ -654,7 +654,7 @@ describe('style colors', () => {
   })
 
   it('component-specific variants apply only where supported', async () => {
-    const { styleComponents } = await import('../../docs/app/utils/theme-engine')
+    const { styleComponents } = await import('../../theme-studio/app/utils/theme-engine')
 
     // ghost/link exist on buttons but not badges — the group skips badges
     const ghost = styleComponents({ defaults: { variants: { buttons: 'ghost' } } })
@@ -673,7 +673,7 @@ describe('style colors', () => {
   })
 
   it('expands app-wide defaults only where the component supports them', async () => {
-    const { styleComponents } = await import('../../docs/app/utils/theme-engine')
+    const { styleComponents } = await import('../../theme-studio/app/utils/theme-engine')
     const components = styleComponents({ defaults: { variant: 'solid', size: 'lg' } })
 
     expect(components.button!.defaultVariants).toEqual({ variant: 'solid', size: 'lg' })
@@ -685,7 +685,7 @@ describe('style colors', () => {
   })
 
   it('emits hard-shadow geometry variables and keeps defaultVariants replace semantics', async () => {
-    const { styleTokens, mergeUi } = await import('../../docs/app/utils/theme-engine')
+    const { styleTokens, mergeUi } = await import('../../theme-studio/app/utils/theme-engine')
 
     const tokens = styleTokens({ shadow: 'hard', shadowGeometry: { x: 6, blur: 4 } })
     expect(tokens.light['--ui-shadow-offset-x']).toBe('6px')
@@ -703,7 +703,7 @@ describe('style colors', () => {
   })
 
   it('styleTokens supports per-mode border shades', async () => {
-    const { styleTokens } = await import('../../docs/app/utils/theme-engine')
+    const { styleTokens } = await import('../../theme-studio/app/utils/theme-engine')
 
     expect(styleTokens({ borderColor: 'shade', borderShade: { light: 700, dark: 100 } })).toEqual({
       light: { '--ui-frame-color': 'var(--ui-color-neutral-700)' },
@@ -713,7 +713,7 @@ describe('style colors', () => {
   })
 
   it('generateCSS emits style color variables', async () => {
-    const { generateCSS } = await import('../../docs/app/utils/theme-engine')
+    const { generateCSS } = await import('../../theme-studio/app/utils/theme-engine')
     const css = generateCSS({ version: 1, style: { shadow: 'hard', border: 'frame', borderColor: 'inverted' } })
 
     expect(css).toContain('--ui-frame-color: var(--ui-color-neutral-950);')
@@ -722,7 +722,7 @@ describe('style colors', () => {
   })
 
   it('generateCSS redefines the whole shadow ramp as @theme tokens for content', async () => {
-    const { generateCSS } = await import('../../docs/app/utils/theme-engine')
+    const { generateCSS } = await import('../../theme-studio/app/utils/theme-engine')
 
     // Custom scales the one config per size so a consumer's compile rewrites
     // every bare shadow-* utility (content images included), not just widgets.

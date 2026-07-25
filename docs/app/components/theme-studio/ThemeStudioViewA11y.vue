@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { ButtonProps } from '@nuxt/ui'
-import { blendColors, contrastRatio } from '../../utils/theme-engine'
+import { blendColors, contrastRatio } from '@nuxt/ui-theme-studio/engine'
 
 /**
  * WCAG contrast matrix for the CURRENT theme: every text-role token against

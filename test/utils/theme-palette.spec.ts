@@ -16,8 +16,8 @@ import {
   CURVE_DEFAULTS,
   NEUTRAL_CURVE_DEFAULTS,
   SHADES
-} from '../../docs/app/utils/theme-engine'
-import type { Shade } from '../../docs/app/utils/theme-engine'
+} from '../../theme-studio/app/utils/theme-engine'
+import type { Shade } from '../../theme-studio/app/utils/theme-engine'
 
 function tailwindShades(name: keyof typeof colors): Record<Shade, string> {
   return Object.fromEntries(SHADES.map(shade => [shade, parseCssColor((colors[name] as Record<string, string>)[shade]!)!])) as Record<Shade, string>

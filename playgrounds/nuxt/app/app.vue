@@ -36,6 +36,8 @@ provide('components', components)
           <div v-if="!collapsed" class="flex items-center ms-auto">
             <ThemeDropdown />
 
+            <ThemeStudioButton />
+
             <UColorModeButton />
           </div>
         </template>

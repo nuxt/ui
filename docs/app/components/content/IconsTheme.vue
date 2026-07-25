@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import json5 from 'json5'
-import { themeIcons } from '../../utils/theme'
+import { themeIcons } from '@nuxt/ui-theme-studio/theme'
 
 const { icon: iconSet } = useTheme()
 

@@ -21,6 +21,7 @@
     "@nuxt/content": "^3.15.0",
     "@nuxt/image": "^2.0.0",
     "@nuxt/ui": "workspace:*",
+    "@nuxt/ui-theme-studio": "workspace:*",
     "@nuxtjs/mcp-toolkit": "^0.18.0",
     "@nuxtjs/mdc": "^0.22.1",
     "@octokit/rest": "^22.0.1",

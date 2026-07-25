@@ -8,6 +8,16 @@ export default defineNuxtPlugin({
   setup() {
     const appConfig = useAppConfig()
 
+    // The applied theme's <style>/<link> head entries live here, not in the
+    // consuming app's app.vue — extending the layer is all the wiring an app
+    // needs. The FOUC scripts below patch these very tags by id on first paint.
+    const { style, link, color } = useTheme()
+    useHead({
+      meta: [{ key: 'theme-color', name: 'theme-color', content: color }],
+      link,
+      style
+    })
+
     if (import.meta.client) {
       const primary = localStorage.getItem('nuxt-ui-primary')
       if (primary) appConfig.ui.colors.primary = primary

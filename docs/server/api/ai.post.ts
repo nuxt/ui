@@ -3,7 +3,7 @@ import type { AnthropicLanguageModelOptions } from '@ai-sdk/anthropic'
 import { gateway } from '@ai-sdk/gateway'
 import { z } from 'zod'
 import { tools as mcpToolDefinitions } from '#nuxt-mcp-toolkit/tools.mjs'
-import { themeIcons, cssVariableDefaults } from '../../app/utils/theme'
+import { themeIcons, cssVariableDefaults } from '@nuxt/ui-theme-studio/theme'
 
 function mcpToolsToAiTools() {
   const aiTools: Record<string, { description: string, inputSchema: ReturnType<typeof jsonSchema>, execute: (args: any) => Promise<any> }> = {}

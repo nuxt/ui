@@ -4,6 +4,8 @@ import pkg from '../package.json'
 const { resolve } = createResolver(import.meta.url)
 
 export default defineNuxtConfig({
+  extends: ['@nuxt/ui-theme-studio'],
+
   modules: [
     '../src/module',
     '@nuxt/content',

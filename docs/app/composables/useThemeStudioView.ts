@@ -1,4 +1,4 @@
-import type { ThemeIcons } from '../utils/theme'
+import type { ThemeIcons } from '@nuxt/ui-theme-studio/theme'
 
 export type ThemeStudioView = 'grid' | 'dashboard' | 'chat' | 'saas' | 'landing' | 'docs' | 'portfolio' | 'changelog' | 'editor' | 'a11y'
 
