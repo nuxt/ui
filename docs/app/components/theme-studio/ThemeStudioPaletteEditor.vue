@@ -180,11 +180,14 @@ const activeSwatch = computed(() => {
   }
 })
 
-// The single popover stays mounted and toggles via `:open` (cheap — one Reka
-// instance, not 19). This always-defined mirror lets the slot template read
-// details without tripping undefined-narrowing in Vue's slot scope; its
-// placeholder is never shown because the popover is closed when inactive.
-const swatchDetail = computed(() => activeSwatch.value ?? { shade: -1, oklch: '', hex: '', rgb: '', pinned: false })
+// Always-defined mirror for the slot template (avoids undefined-narrowing).
+// Holds the last real detail after the swatch goes inactive so the content
+// doesn't flash the placeholder while the popover animates closed.
+const lastDetail = ref({ shade: -1, oklch: '', hex: '', rgb: '', pinned: false })
+watch(activeSwatch, (value) => {
+  if (value) lastDetail.value = value
+})
+const swatchDetail = computed(() => activeSwatch.value ?? lastDetail.value)
 
 function onSwatchEnter(shade: number) {
   // a stuck swatch means "I'm reading/editing this one" — other swatches don't
