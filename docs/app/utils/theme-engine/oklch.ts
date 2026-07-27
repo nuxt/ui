@@ -146,9 +146,12 @@ export function parseColor(value: string): Oklch | undefined {
     return rgbToOklch(hexToRgb(input))
   }
 
-  const oklch = input.match(/^oklch\(\s*([\d.]+)(%?)\s+([\d.]+)\s+([\d.]+)/i)
+  // `none` is CSS Color 4's missing-component keyword — tailwind ≥4.3.3
+  // emits it for achromatic hues (`oklch(98.5% 0 none)`); it reads as 0 here.
+  const oklch = input.match(/^oklch\(\s*([\d.]+)(%?)\s+([\d.]+|none)\s+([\d.]+|none)/i)
   if (oklch) {
-    return { l: Number(oklch[1]) / (oklch[2] === '%' ? 100 : 1), c: Number(oklch[3]), h: Number(oklch[4]) }
+    const channel = (value: string) => value.toLowerCase() === 'none' ? 0 : Number(value)
+    return { l: Number(oklch[1]) / (oklch[2] === '%' ? 100 : 1), c: channel(oklch[3]!), h: channel(oklch[4]!) }
   }
 
   const rgb = input.match(/^rgba?\(\s*(\d+)[\s,]+(\d+)[\s,]+(\d+)/i)
