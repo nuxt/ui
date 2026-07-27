@@ -11,7 +11,7 @@ ignoreWorkspaceRootCheck: true
 linkWorkspacePackages: true
 
 overrides:
-  '@nuxt/kit': ^4.4.8
+  '@nuxt/kit': ^4.5.1
   '@nuxt/test-utils': 4.0.2
   '@nuxt/ui': workspace:*
   unplugin: ^3.3.0
