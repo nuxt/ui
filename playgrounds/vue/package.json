@@ -22,7 +22,7 @@
     "@iconify-json/lucide": "^1.2.120",
     "@vitejs/plugin-vue": "^6.0.8",
     "typescript": "^6.0.3",
-    "vite": "^7.3.6",
+    "vite": "^8.1.5",
     "vue-tsc": "^3.3.8"
   }
 }
