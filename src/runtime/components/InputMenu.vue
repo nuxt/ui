@@ -548,6 +548,17 @@ function onClear() {
   emits('clear')
 }
 
+function onTagInputKeydown(e: KeyboardEvent) {
+  if (e.key !== 'Enter') return
+
+  // reka-ui's TagsInputRoot adds the raw search text as a tag on Enter regardless of
+  // whether it matches a real item or createItem is enabled. Block that so
+  // we never render a chip that isn't reflected in modelValue.
+  if (!props.createItem) {
+    e.preventDefault()
+  }
+}
+
 const viewportRef = useTemplateRef('viewportRef')
 
 const comboboxRootRef = useTemplateRef('comboboxRootRef')
@@ -694,6 +705,7 @@ defineExpose({
             data-slot="tagsInput"
             :class="ui.tagsInput({ class: props.ui?.tagsInput })"
             @change.stop
+            @keydown.enter="onTagInputKeydown"
           />
         </Component.Input>
       </TagsInputRoot>
