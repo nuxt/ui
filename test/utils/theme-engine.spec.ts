@@ -409,9 +409,11 @@ describe('style colors', () => {
   it('widths ride the default-width variables — only the frame toggle emits classes', async () => {
     const { styleComponents } = await import('../../docs/app/utils/theme-engine')
 
-    // width and none alike produce ZERO class fragments: every default-width
-    // border/ring/divide follows --default-border/ring-width instead
-    expect(styleComponents({ border: 'custom', borderWidth: 3 })).toEqual({})
+    // width alone produces class fragments ONLY for the ringless tabs list:
+    // every default-width border/ring/divide follows --default-border/ring-width
+    const unframed = styleComponents({ border: 'custom', borderWidth: 3 })
+    expect(Object.keys(unframed)).toEqual(['tabs'])
+    expect(unframed.tabs!.compoundVariants).toContainEqual({ variant: 'pill', class: { list: 'ring ring-inset ring-(--ui-border-accented)' } })
     expect(styleComponents({ border: 'none' })).toEqual({})
 
     // the frame toggle outlines solid/soft surfaces at the default ring width
@@ -420,16 +422,18 @@ describe('style colors', () => {
     expect(framed.card!.compoundVariants).toContainEqual({ variant: 'soft', class: { root: 'ring ring-(--ui-border-accented)' } })
     expect(JSON.stringify(framed.button!.compoundVariants)).not.toContain('"ghost"')
     // …and the other solid surfaces: pill tabs, chat bubbles, switch track
-    expect(framed.tabs!.compoundVariants).toContainEqual({ variant: 'pill', class: { list: 'ring ring-inset ring-(--ui-border-accented)', indicator: 'ring ring-inset ring-(--ui-border-accented)' } })
+    // list only — an indicator ring inside the outlined list would double up
+    expect(framed.tabs!.compoundVariants).toContainEqual({ variant: 'pill', class: { list: 'ring ring-inset ring-(--ui-border-accented)' } })
     expect(framed.chatMessage!.compoundVariants).toContainEqual({ variant: 'solid', class: { content: 'ring ring-inset ring-(--ui-border-accented)' } })
     expect(framed.switch!.slots!.base).toBe('ring ring-inset ring-(--ui-border-accented)')
 
     // frame off (or border none) → no outlines
     expect(styleComponents({ border: 'none', frame: true })).toEqual({})
 
-    // legacy saved 'frame' keeps its outlines; legacy 'bold' is width-only → nothing
+    // legacy saved 'frame' keeps its outlines; legacy 'bold' is width-only →
+    // just the tabs-list outline, like unframed custom
     expect(styleComponents({ border: 'frame' }).button!.compoundVariants).toContainEqual({ variant: 'solid', class: 'ring ring-inset ring-(--ui-border-accented)' })
-    expect(styleComponents({ border: 'bold' })).toEqual({})
+    expect(Object.keys(styleComponents({ border: 'bold' }))).toEqual(['tabs'])
   })
 
   it('exports carry width via tailwind default-width variables, not classes', async () => {

@@ -197,6 +197,13 @@ const shadowColor = computed({
   set: (value: any) => setStyle({ shadowColor: value })
 })
 
+// The press choreography (buttons sinking onto their shadow) rides the
+// shadow offset — optional, so soft blurred configs can keep buttons still.
+const shadowPress = computed({
+  get: () => style.value.shadowPress !== false,
+  set: (value: boolean) => setStyle({ shadowPress: value ? undefined : false })
+})
+
 // The two shadow sections are the same panel pointed at different style
 // fields — one config each, one template.
 const shadowSections = [{
@@ -209,7 +216,8 @@ const shadowSections = [{
   shades: shadowShades,
   opacity: shadowOpacity,
   geometry: geometrySliders('shadowGeometry', SHADOW_GEOMETRY_DEFAULTS),
-  hard: computed(() => isCustomShadow(style.value.shadow))
+  hard: computed(() => isCustomShadow(style.value.shadow)),
+  press: shadowPress as typeof shadowPress | undefined
 }, {
   label: 'Inner shadow',
   dirtyKey: 'innerShadow' as const,
@@ -220,7 +228,8 @@ const shadowSections = [{
   shades: innerShadowShades,
   opacity: innerShadowOpacity,
   geometry: geometrySliders('innerShadowGeometry', INNER_SHADOW_GEOMETRY_DEFAULTS),
-  hard: computed(() => isCustomShadow(style.value.innerShadow))
+  hard: computed(() => isCustomShadow(style.value.innerShadow)),
+  press: undefined
 }]
 
 // Per-section fold-out for the shade fine-tuning, mirroring the Colors panel's
@@ -284,6 +293,14 @@ const isShadeColor = (color?: string) => color === 'shade' || color === 'primary
                 :step="1"
                 unit="px"
               />
+
+              <div v-if="section.press" class="flex items-center justify-between gap-2">
+                <span class="text-xs text-muted select-none">Button press effect</span>
+
+                <UTooltip text="Buttons sink onto their shadow on hover and press">
+                  <USwitch v-model="section.press.value" size="sm" aria-label="Button press effect" />
+                </UTooltip>
+              </div>
             </template>
 
             <!-- Colour and its per-mode shade sliders fold out from the header

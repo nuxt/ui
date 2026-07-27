@@ -3,6 +3,7 @@ import { SHADES_ALL, DEFAULT_COLORS } from './types'
 import type { StyleOptions, DefaultVariant, DefaultSize, DefaultColor, VariantGroup } from './styles'
 import {
   styleComponents,
+  isCustomShadow,
   FRAME_COLOR_VALUES,
   SHADOW_COLOR_VALUES,
   SHADOW_GEOMETRY_DEFAULTS,
@@ -789,6 +790,13 @@ export function importTheme(input: { css?: string, config?: string }): ThemeImpo
   }
   const defaults = extractDefaults(components)
   if (defaults) style.defaults = defaults
+
+  // Press-off exports keep the button's resting shadow but drop the
+  // hover/active choreography — detect it so the expansion subtracts cleanly.
+  if (isCustomShadow(style.shadow)) {
+    const base = String(components.button?.slots?.base ?? '')
+    if (base.includes('--ui-shadow-hard') && !base.includes('hover:translate')) style.shadowPress = false
+  }
 
   const explicit = subtractStyleExpansion(components, style)
   if (Object.keys(explicit).length) doc.components = explicit

@@ -259,7 +259,10 @@ const shareMode = ref<'import' | 'export'>('export')
                 color="primary"
                 class="shrink-0"
                 :ui="{
-                  list: 'ring ring-accented ring-inset rounded-md'
+                  /* match the toolbar's subtle buttons — their ring is the
+                     stock variant, not themed, so the pill needs its own */
+                  list: 'ring ring-accented ring-inset rounded-md',
+                  indicator: 'rounded-sm'
                 }"
               />
               <span v-else class="shrink-0 w-17" />

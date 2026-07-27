@@ -83,6 +83,12 @@ export interface StyleOptions {
    */
   shadowOpacity?: number
   /**
+   * Buttons sink onto their shadow on hover/active — the press choreography
+   * driven by the shadow offset. On by default; off keeps the resting
+   * shadow static (soft blurred configs have nothing crisp to sink onto).
+   */
+  shadowPress?: boolean
+  /**
    * Inset shadow treatment, independent of the drop shadow — same
    * vocabulary ('soft' recolors a stock inset, 'hard' rides the geometry
    * sliders) and the same components.
@@ -293,10 +299,23 @@ const SHADOW_FRAGMENTS: Record<'none' | 'flat' | 'custom', Fragments> = {
     badge: { slots: { base: 'shadow-xs' } },
     // slideover is edge-to-edge on mobile; only its sm+ panel casts a shadow.
     slideover: { slots: { content: 'shadow-none sm:shadow-lg' } },
-    // The pill bar is the raised surface — the list casts, the stock
+    // The pill bar is the raised surface — it casts the same full-size
+    // composition as buttons (it sits next to them in toolbars); the stock
     // indicator/trigger shadows drop so it doesn't double up inside.
-    tabs: { compoundVariants: [{ variant: 'pill', class: { list: 'shadow-sm', indicator: 'shadow-none', trigger: TABS_SSR_SHADOW_NONE } }] }
+    tabs: { compoundVariants: [{ variant: 'pill', class: { list: 'shadow-(--ui-shadow-hard)', indicator: 'shadow-none', trigger: TABS_SSR_SHADOW_NONE } }] },
+    // The thumb's stock shadow-lg is a subtle native lift — riding the ramp
+    // would cast a full-size shadow inside the track.
+    switch: { slots: { thumb: 'shadow-none' } }
   }
+}
+
+/** shadowPress: false — the resting shadow without the press choreography. */
+const PRESSLESS_BUTTON: Fragments[string] = {
+  slots: { base: 'shadow-(--ui-shadow-hard)' },
+  compoundVariants: [
+    { variant: 'ghost', class: 'shadow-none' },
+    { variant: 'link', class: 'shadow-none' }
+  ]
 }
 
 // Inset shadows use tailwind's separate inset-shadow group, so they merge
@@ -334,7 +353,9 @@ function innerShadowFragments(classes: string): Fragments {
     toast: { slots: { root: classes } },
     drawer: { slots: { content: classes } },
     modal: { compoundVariants: [{ fullscreen: false, class: { content: classes } }] },
-    slideover: { slots: { content: classes } }
+    slideover: { slots: { content: classes } },
+    // The pill track reads as a recessed well; the raised indicator stays clean.
+    tabs: { compoundVariants: [{ variant: 'pill', class: { list: classes } }] }
   }
 }
 
@@ -369,25 +390,38 @@ const FRAME_FRAGMENTS: Fragments = (() => {
     // fields have no solid variant — soft is their surface look
     ...Object.fromEntries(FIELD_COMPONENTS.map(component => [component, { compoundVariants: [{ variant: 'soft', class: inset }] }])),
     chatPrompt: { compoundVariants: [{ variant: 'soft', class: { root: outset } }] },
-    // other solid surfaces: the pill tabs wrapper + its indicator, and the
-    // switch track (its checked color-ring loses the merge to ours — the
-    // frame look owns ring color by design, same as solid buttons)
-    tabs: { compoundVariants: [{ variant: 'pill', class: { list: inset, indicator: inset } }] },
+    // other solid surfaces: the pill tabs wrapper (the list ring only — the
+    // indicator already sits inside the outlined list, so ringing it too
+    // reads as a double outline) and the switch track (its checked
+    // color-ring loses the merge to ours — the frame look owns ring color
+    // by design, same as solid buttons)
+    tabs: { compoundVariants: [{ variant: 'pill', class: { list: inset } }] },
     switch: { slots: { base: inset } }
   }
 })()
+
+/**
+ * The pill tabs list has no stock ring, so a border treatment that only
+ * retunes existing rings would leave it bare next to outlined fields —
+ * any active treatment outlines it, frame toggle or not.
+ */
+const TABS_BORDER_FRAGMENTS: Fragments = {
+  tabs: { compoundVariants: [{ variant: 'pill', class: { list: FRAME_INSET } }] }
+}
 
 /**
  * Every width flows through --default-border-width/--default-ring-width —
  * compiled onto the studio variable in the docs' own build, emitted as a
  * static @theme value in exports — so borders need no class fragments at
  * all. Only the frame toggle adds classes: outlines on surfaces that have
- * none. Legacy 'frame' (old saved prefs) implies the toggle.
+ * none (plus the ringless tabs list, outlined by any active treatment).
+ * Legacy 'frame' (old saved prefs) implies the toggle.
  */
 function borderFragments(style: StyleOptions): Fragments {
   const framed = style.frame || style.border === 'frame'
   const zeroed = style.border === 'none'
-  return framed && !zeroed && style.border && style.border !== 'default' ? FRAME_FRAGMENTS : {}
+  if (zeroed || !style.border || style.border === 'default') return {}
+  return framed ? FRAME_FRAGMENTS : TABS_BORDER_FRAGMENTS
 }
 
 /**
@@ -450,7 +484,9 @@ const FRAME_COLOR_FRAGMENTS: Fragments = {
   modal: { compoundVariants: [{ fullscreen: false, class: { content: 'ring-(--ui-frame-color)' } }] },
   slideover: { slots: { content: 'ring-(--ui-frame-color)' } },
   checkbox: { slots: { base: 'ring-(--ui-frame-color)' } },
-  radioGroup: { slots: { base: 'ring-(--ui-frame-color)' } }
+  radioGroup: { slots: { base: 'ring-(--ui-frame-color)' } },
+  // inert until a border treatment gives the list its ring
+  tabs: { compoundVariants: [{ variant: 'pill', class: { list: 'ring-(--ui-frame-color)' } }] }
 }
 
 /** Per-mode values behind the two color variables, per palette choice. */
@@ -624,7 +660,9 @@ export function styleComponents(style: StyleOptions): Fragments {
 
   const sources = [
     defaults,
-    SHADOW_FRAGMENTS[isCustomShadow(style.shadow) ? 'custom' : (style.shadow === 'flat' ? 'flat' : 'none')],
+    isCustomShadow(style.shadow)
+      ? (style.shadowPress === false ? { ...SHADOW_FRAGMENTS.custom, button: PRESSLESS_BUTTON } : SHADOW_FRAGMENTS.custom)
+      : SHADOW_FRAGMENTS[style.shadow === 'flat' ? 'flat' : 'none'],
     isCustomShadow(style.innerShadow)
       ? innerShadowFragments(INNER_HARD)
       : {},

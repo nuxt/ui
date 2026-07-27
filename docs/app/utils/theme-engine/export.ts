@@ -37,7 +37,9 @@ export function generateCSS(doc: ThemeDoc): string {
   const borderWidth = doc.style?.border === 'none'
     ? 0
     : doc.style?.border && doc.style.border !== 'default' ? doc.style.borderWidth ?? BORDER_WIDTH_DEFAULT : undefined
-  if (borderWidth !== undefined && borderWidth !== 1) {
+  // 1px matches tailwind's stock width but still exports: the treatment is an
+  // explicit choice, and the variable is what lets an import reconstruct it.
+  if (borderWidth !== undefined) {
     themeLines.push(`  --default-border-width: ${borderWidth}px;`)
     themeLines.push(`  --default-ring-width: ${borderWidth}px;`)
   }
@@ -148,15 +150,10 @@ export function generateCSS(doc: ThemeDoc): string {
       style.light['--ui-shadow-blur'] = '0px'
       style.light['--ui-shadow-spread'] = '0px'
     }
-    // The shadow-(--ui-shadow-hard*) utilities read these compositions.
+    // The button press-effect's shadow-(--ui-shadow-hard*) utilities read these.
     style.light['--ui-shadow-hard'] = 'var(--ui-shadow-offset-x) var(--ui-shadow-offset-y) var(--ui-shadow-blur) var(--ui-shadow-spread) var(--ui-shadow-final-hard)'
-    style.light['--ui-shadow-hard-lg'] = 'calc(var(--ui-shadow-offset-x) * 1.5) calc(var(--ui-shadow-offset-y) * 1.5) var(--ui-shadow-blur) var(--ui-shadow-spread) var(--ui-shadow-final-hard)'
-    style.light['--ui-shadow-hard-sm'] = 'calc(var(--ui-shadow-offset-x) * 0.66) calc(var(--ui-shadow-offset-y) * 0.66) var(--ui-shadow-blur) var(--ui-shadow-spread) var(--ui-shadow-final-hard)'
     style.light['--ui-shadow-hard-half'] = 'calc(var(--ui-shadow-offset-x) / 2) calc(var(--ui-shadow-offset-y) / 2) var(--ui-shadow-blur) var(--ui-shadow-spread) var(--ui-shadow-final-hard)'
-  }
-  if (castsShadow(doc.style?.shadow)) {
     style.light['--ui-shadow-final-hard'] = 'color-mix(in oklab, var(--ui-shadow-color) var(--ui-shadow-opacity, 100%), transparent)'
-    style.light['--ui-shadow-final-soft'] = 'color-mix(in oklab, var(--ui-shadow-color) var(--ui-shadow-opacity, 25%), transparent)'
   }
   if (doc.style?.innerShadow && doc.style.innerShadow !== 'none') {
     if (isCustomShadow(doc.style.innerShadow)) {

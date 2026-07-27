@@ -161,6 +161,8 @@ export const presets: ThemePreset[] = [{
       innerShadowOpacity: 50,
       innerShadowColor: 'shade',
       innerShadowShade: { light: 500, dark: 950 },
+      border: 'custom',
+      borderWidth: 1,
       defaults: { variant: 'subtle' },
       tokenShades: {
         '--ui-bg-muted': { light: 100 },
@@ -225,6 +227,7 @@ export const presets: ThemePreset[] = [{
       shadow: 'custom',
       shadowGeometry: { x: 0, y: 6, blur: 12, spread: 0 },
       shadowOpacity: 15,
+      shadowPress: false,
       innerShadow: 'custom',
       innerShadowGeometry: {
         x: 0,
@@ -241,7 +244,9 @@ export const presets: ThemePreset[] = [{
       innerShadowShade: {
         light: 500,
         dark: 900
-      }
+      },
+      border: 'custom',
+      borderWidth: 1
     }
   }
 }, {

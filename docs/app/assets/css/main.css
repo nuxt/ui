@@ -94,7 +94,6 @@ html.dark .shiki span {
   --ui-shadow-blur: 0px;
   --ui-shadow-spread: 0px;
   --ui-shadow-final-hard: color-mix(in oklab, var(--ui-shadow-color) var(--ui-shadow-opacity, 100%), transparent);
-  --ui-shadow-final-soft: color-mix(in oklab, var(--ui-shadow-color) var(--ui-shadow-opacity, 25%), transparent);
   /* The generalised ramp's alpha IS the opacity slider — uniform across sizes so
      the slider reads true (100% is solid everywhere, for a neobrutalist theme;
      low is subtle). Size is expressed through geometry (--ui-shadow-s-*), not by
@@ -110,12 +109,11 @@ html.dark .shiki span {
   --ui-shadow-s-lg: 1;
   --ui-shadow-s-xl: 1.5;
   --ui-shadow-s-2xl: 2.2;
-  /* Composed hard shadows, used as shadow-(--ui-shadow-hard*) so
-     tailwind-merge can dedupe them against stock shadow-sm/lg classes
-     (it can't parse a full shadow-[calc(...)_...] arbitrary value). */
+  /* Composed press-effect shadows (button rests at 1×, hover sinks to ½×),
+     used as shadow-(--ui-shadow-hard*) so tailwind-merge can dedupe them
+     against stock shadow-sm/lg classes (it can't parse a full
+     shadow-[calc(...)_...] arbitrary value). */
   --ui-shadow-hard: var(--ui-shadow-offset-x) var(--ui-shadow-offset-y) var(--ui-shadow-blur) var(--ui-shadow-spread) var(--ui-shadow-final-hard);
-  --ui-shadow-hard-lg: calc(var(--ui-shadow-offset-x) * 1.5) calc(var(--ui-shadow-offset-y) * 1.5) var(--ui-shadow-blur) var(--ui-shadow-spread) var(--ui-shadow-final-hard);
-  --ui-shadow-hard-sm: calc(var(--ui-shadow-offset-x) * 0.66) calc(var(--ui-shadow-offset-y) * 0.66) var(--ui-shadow-blur) var(--ui-shadow-spread) var(--ui-shadow-final-hard);
   --ui-shadow-hard-half: calc(var(--ui-shadow-offset-x) / 2) calc(var(--ui-shadow-offset-y) / 2) var(--ui-shadow-blur) var(--ui-shadow-spread) var(--ui-shadow-final-hard);
   /* Inner-shadow geometry defaults; shares --ui-shadow-color with the drop
      treatment, with its own gentler opacity fallback. */

@@ -338,7 +338,9 @@ export function useTheme() {
   })
   const customColorsStyle = computed(() => {
     const entries = Object.entries(customColorsData.value)
-    if (!entries.length) return ''
+    // non-empty sentinel: unhead won't patch an emptied innerHTML, leaving
+    // the FOUC-written tag stale after a reactive-only reset (immediate: false)
+    if (!entries.length) return ':root {}'
     const vars = entries.flatMap(([name, shades]) =>
       Object.entries(shades).map(([shade, color]) => `--color-${name}-${shade}: ${color};`)
     )
@@ -355,7 +357,8 @@ export function useTheme() {
       const full = { ...cssVariableDefaults.dark, ...data.dark }
       parts.push(`.dark { ${Object.entries(full).map(([k, v]) => `${k}: ${v};`).join(' ')} }`)
     }
-    return parts.join(' ')
+    // same sentinel rationale as customColorsStyle
+    return parts.length ? parts.join(' ') : ':root {}'
   })
 
   /** Google Fonts stylesheet link for a family (Public Sans is bundled). */

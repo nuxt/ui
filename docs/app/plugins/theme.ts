@@ -1,7 +1,7 @@
 import { defu } from 'defu'
 import { themeIcons, cssVariableDefaults } from '../utils/theme'
 import { THEME_STORAGE_KEYS, THEME_STATE_KEYS } from '../utils/theme-keys'
-import { mergeUi } from '../utils/theme-engine'
+import { mergeUi, styleComponents } from '../utils/theme-engine'
 
 export default defineNuxtPlugin({
   enforce: 'post',
@@ -64,6 +64,20 @@ export default defineNuxtPlugin({
         if (next.shadow === 'soft' || next.shadow === 'hard') next.shadow = 'custom'
         if (next.innerShadow === 'soft' || next.innerShadow === 'hard') next.innerShadow = 'custom'
         persisted.value = next
+      }
+
+      // The persisted style-ui bundle is DERIVED from the style prefs, but the
+      // live path only rewrites it on a style edit — recompute it here so
+      // fragment changes shipped in code reach already-persisted themes on
+      // reload instead of serving a stale bundle until the next edit.
+      if (persisted.value && Object.keys(persisted.value).length) {
+        const bundle = styleComponents(persisted.value)
+        useState<Record<string, any>>('nuxt-ui-style-ui').value = bundle
+        if (Object.keys(bundle).length) {
+          localStorage.setItem('nuxt-ui-style-ui', JSON.stringify(bundle))
+        } else {
+          localStorage.removeItem('nuxt-ui-style-ui')
+        }
       }
 
       // Keep the .shadow-custom root flag in lockstep with the shadow treatment
