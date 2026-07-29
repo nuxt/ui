@@ -338,7 +338,7 @@ describe('styleComponents', () => {
   it('returns nothing for the default treatment', async () => {
     const { styleComponents } = await import('../../docs/app/utils/theme-engine')
     expect(styleComponents({})).toEqual({})
-    expect(styleComponents({ shadow: 'none', border: 'default' })).toEqual({})
+    expect(styleComponents({ border: 'default' })).toEqual({})
   })
 
   it('inner shadow rides its own inset utilities on the same surfaces', async () => {
@@ -518,7 +518,7 @@ describe('style colors', () => {
 
   it('border recoloring spares semantic outline rings but frames every solid', async () => {
     const { styleComponents } = await import('../../docs/app/utils/theme-engine')
-    const compounds = styleComponents({ border: 'frame', borderColor: 'primary' }).button!.compoundVariants!
+    const compounds = styleComponents({ border: 'custom', frame: true, borderColor: 'primary' }).button!.compoundVariants!
 
     // outline/subtle rings ARE the color signal (a subtle primary button
     // keeps its primary border) — only neutral rings repaint
@@ -733,6 +733,6 @@ describe('style colors', () => {
 
     // None flattens the ramp; Inherit leaves Tailwind's native shadows alone.
     expect(generateCSS({ version: 1, style: { shadow: 'flat' } })).toContain('--shadow-lg: 0 0 transparent;')
-    expect(generateCSS({ version: 1, style: { shadow: 'none' } })).not.toContain('--shadow-lg:')
+    expect(generateCSS({ version: 1, style: {} })).not.toContain('--shadow-lg:')
   })
 })

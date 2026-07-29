@@ -51,7 +51,7 @@ describe('importTheme', () => {
       expect(imported.fontSize).toBe(original.fontSize)
       expect(imported.spacing).toBe(original.spacing)
       expect(!!imported.blackAsPrimary).toBe(!!original.blackAsPrimary)
-      expect(imported.style?.shadow ?? 'none').toBe(original.style?.shadow ?? 'none')
+      expect(imported.style?.shadow).toBe(original.style?.shadow)
       expect(imported.style?.border ?? 'default').toBe(original.style?.border ?? 'default')
     })
 
