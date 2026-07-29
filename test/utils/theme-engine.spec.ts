@@ -519,24 +519,31 @@ describe('style colors', () => {
   it('border recoloring spares semantic outline rings but frames every solid', async () => {
     const { styleComponents } = await import('../../docs/app/utils/theme-engine')
     const compounds = styleComponents({ border: 'custom', frame: true, borderColor: 'primary' }).button!.compoundVariants!
+    const classesFor = (variant: string, colored: boolean) =>
+      compounds.find(entry => entry.variant === variant && !!entry.color === colored)?.class as string | undefined
 
     // outline/subtle rings ARE the color signal (a subtle primary button
     // keeps its primary border) — only neutral rings repaint
-    expect(compounds).toContainEqual({ color: ['neutral'], variant: 'outline', class: 'ring-(--ui-border-color)' })
-    expect(compounds).toContainEqual({ color: ['neutral'], variant: 'subtle', class: 'ring-(--ui-border-color)' })
+    expect(classesFor('outline', true)).toContain('ring-(--ui-border-color)')
+    expect(classesFor('subtle', true)).toContain('ring-(--ui-border-color)')
+    expect(classesFor('outline', false)).toBeUndefined()
     // frames around solid/soft surfaces repaint for every color
-    expect(compounds).toContainEqual({ variant: 'solid', class: 'ring-(--ui-border-color)' })
-    expect(compounds).toContainEqual({ variant: 'soft', class: 'ring-(--ui-border-color)' })
+    expect(classesFor('solid', false)).toContain('ring-(--ui-border-color)')
+    expect(classesFor('soft', false)).toContain('ring-(--ui-border-color)')
   })
 
-  it('borderColor appends recolor compounds after frame ones', async () => {
+  it('folds a frame and its recolor into one compound, colour last', async () => {
     const { styleComponents } = await import('../../docs/app/utils/theme-engine')
     const compounds = styleComponents({ border: 'custom', frame: true, borderColor: 'black' }).button!.compoundVariants!
 
-    const frameIndex = compounds.findIndex(entry => entry.class === 'ring ring-inset ring-(--ui-border-accented)')
-    const colorIndex = compounds.findIndex(entry => entry.class === 'ring-(--ui-border-color)')
-    expect(frameIndex).toBeGreaterThanOrEqual(0)
-    expect(colorIndex).toBeGreaterThan(frameIndex)
+    // one entry per selector, not one per treatment
+    const solid = compounds.filter(entry => entry.variant === 'solid' && !entry.color)
+    expect(solid).toHaveLength(1)
+
+    // the frame supplies the ring, the recolor overrides it — order wins the merge
+    const classes = solid[0]!.class as string
+    expect(classes).toContain('ring ring-inset')
+    expect(classes.indexOf('ring-(--ui-border-color)')).toBeGreaterThan(classes.indexOf('ring-(--ui-border-accented)'))
   })
 
   it('styleTokens maps color choices per mode and default contributes nothing', async () => {

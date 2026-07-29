@@ -589,7 +589,55 @@ export function styleComponents(style: StyleOptions): Fragments {
     }
   }
 
+  for (const fragment of Object.values(result)) {
+    if (fragment.compoundVariants) {
+      fragment.compoundVariants = collapseCompoundVariants(fragment.compoundVariants)
+    }
+  }
+
   return result
+}
+
+/** Concatenate two compound entries' classes, string or per-slot map. */
+function joinCompoundClass(a: unknown, b: unknown): unknown | undefined {
+  if (typeof a === 'string' && typeof b === 'string') return `${a} ${b}`
+  if (a && b && typeof a === 'object' && typeof b === 'object' && !Array.isArray(a) && !Array.isArray(b)) {
+    const merged: Record<string, string> = { ...a as Record<string, string> }
+    for (const [slot, classes] of Object.entries(b as Record<string, string>)) {
+      merged[slot] = merged[slot] ? `${merged[slot]} ${classes}` : classes
+    }
+    return merged
+  }
+  // a string meeting a slot map has no single right target — leave both entries
+  return undefined
+}
+
+/**
+ * Fold compound entries that select the same variants into one. Successive
+ * treatments (a frame's ring, then a border colour) target the same
+ * variant/slot, and tailwind-variants appends their classes in order — so
+ * one entry carrying both renders identically while halving what an export
+ * prints.
+ */
+function collapseCompoundVariants(entries: Array<Record<string, unknown>>): Array<Record<string, unknown>> {
+  const collapsed: Array<Record<string, unknown>> = []
+  const bySelector = new Map<string, Record<string, unknown>>()
+
+  for (const entry of entries) {
+    const { class: classes, ...selector } = entry
+    const key = JSON.stringify(Object.keys(selector).sort().map(name => [name, selector[name]]))
+    const existing = bySelector.get(key)
+    const joined = existing && joinCompoundClass(existing.class, classes)
+    if (joined === undefined) {
+      const copy = { ...entry }
+      bySelector.set(key, copy)
+      collapsed.push(copy)
+      continue
+    }
+    existing!.class = joined
+  }
+
+  return collapsed
 }
 
 /**
