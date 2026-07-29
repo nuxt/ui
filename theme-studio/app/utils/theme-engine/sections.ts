@@ -1,20 +1,17 @@
 import type { ThemeDoc, ShadeStop } from './types'
 import { DEFAULT_COLORS, THEME_DEFAULTS, SEMANTIC_ALIASES } from './types'
+import { FONT_WEIGHT_DEFAULTS } from '../theme'
 import type { StyleOptions } from './styles'
 import { styleTokens, TOKEN_SHADE_TARGETS } from './styles'
 import { parseUiColorRef } from './resolve'
 
 /**
  * The studio's setting sections, each owning a slice of the ThemeDoc.
- * `pickSection` extracts a section's normalized state (defaults filled, so
- * "absent" and "explicitly stock" compare equal) and `mergeSection` splices
- * one doc's slice into another — which is all a per-section reset is:
- * merge the baseline's slice into the current doc and re-apply.
- *
- * The baseline is the ACTIVE PRESET's doc (stock when none): dirty means
- * "you touched this after applying the preset", per the exchange that
- * motivated it — not "differs from stock Nuxt UI" (the export already
- * answers that).
+ * `pickSection` extracts a section's normalized state ("absent" and
+ * "explicitly stock" compare equal); `mergeSection` splices one doc's slice
+ * into another, which is all a per-section reset is. The baseline is the
+ * ACTIVE PRESET's doc: dirty means "touched after applying the preset", not
+ * "differs from stock".
  */
 export type SectionKey
   = | 'primary' | 'neutral' | 'semantic'
@@ -35,10 +32,9 @@ function tokenSection(token: string): 'primary' | 'semantic' | 'neutral' {
 }
 
 /**
- * applyDoc promotes ramp-shaped token overrides into style.tokenShades
- * (deriveStyle), so a live doc and the preset doc it came from express the
- * SAME choice in different slots. Both sides are compared canonicalized:
- * promotable tokens count as shades, never as raw tokens.
+ * applyDoc promotes ramp-shaped token overrides into style.tokenShades, so a
+ * live doc and its preset express the SAME choice in different slots — both
+ * sides compare canonicalized: promotable tokens count as shades.
  */
 export function promotedShades(doc: ThemeDoc): Record<string, { light?: ShadeStop, dark?: ShadeStop }> {
   const promoted: Record<string, { light?: ShadeStop, dark?: ShadeStop }> = {}
@@ -58,9 +54,8 @@ export function promotedShades(doc: ThemeDoc): Record<string, { light?: ShadeSto
 }
 
 function ownedTokens(doc: ThemeDoc, section: 'primary' | 'semantic' | 'neutral') {
-  // tokens the doc's own style treatment emits are DERIVED — they're
-  // compared through the style fields, and a live doc always carries them
-  // merged into tokens while a preset doc never does
+  // tokens the doc's own style treatment emits are DERIVED — a live doc
+  // carries them merged into tokens, a preset doc never does
   const derived = styleTokens(doc.style ?? {})
   const promoted = promotedShades(doc)
   const pickMode = (mode: 'light' | 'dark') =>
@@ -119,8 +114,27 @@ export function pickSection(doc: ThemeDoc, key: SectionKey): unknown {
         tokens: ownedTokens(doc, 'semantic'),
         shades: ownedTokenShades(doc, 'semantic')
       }
-    case 'font':
-      return doc.font ?? {}
+    case 'font': {
+      // Explicit stock values count as absent: setFontPrefs strips them on
+      // apply while a preset doc may spell them out (8-bit) — raw comparison
+      // would read dirty forever, jamming the toolbar reset.
+      const font = { ...(doc.font ?? {}) }
+      const weights = Object.fromEntries(Object.entries(font.weights ?? {})
+        .filter(([step, weight]) => weight !== FONT_WEIGHT_DEFAULTS[step as keyof typeof FONT_WEIGHT_DEFAULTS]))
+      if (Object.keys(weights).length) font.weights = weights as typeof font.weights
+      else delete font.weights
+      if (font.letterSpacing === 0) delete font.letterSpacing
+      if (font.lineHeight === 1.5) delete font.lineHeight
+      if (font.heading) {
+        const heading = { ...font.heading }
+        if (heading.weight === 700) delete heading.weight
+        if (heading.letterSpacing === 0) delete heading.letterSpacing
+        if (heading.lineHeight === 1.25) delete heading.lineHeight
+        if (Object.keys(heading).length) font.heading = heading
+        else delete font.heading
+      }
+      return font
+    }
     case 'icons':
       return doc.icons ?? THEME_DEFAULTS.icons
     case 'scale':
@@ -139,16 +153,18 @@ export function pickSection(doc: ThemeDoc, key: SectionKey): unknown {
       // colors (neutral-950 / black) — a non-choice, same as absent
       const color = style.shadowColor === 'default' ? null : style.shadowColor ?? null
       return {
-        shadow: style.shadow ?? 'none',
+        shadow: style.shadow ?? null,
         color: color === 'shade' && !style.shadowShade ? null : color,
         shade: style.shadowShade ?? null,
         opacity: style.shadowOpacity ?? null,
-        geometry: style.shadowGeometry ?? null
+        geometry: style.shadowGeometry ?? null,
+        // explicit true equals absent (press is the default)
+        press: style.shadowPress === false ? false : null
       }
     }
     case 'innerShadow':
       return {
-        shadow: style.innerShadow ?? 'none',
+        shadow: style.innerShadow ?? null,
         color: style.innerShadowColor ?? null,
         shade: style.innerShadowShade ?? null,
         opacity: style.innerShadowOpacity ?? null,
@@ -178,10 +194,8 @@ export function sectionFingerprint(doc: ThemeDoc, key: SectionKey): string {
 }
 
 /**
- * A doc's effective per-token shade choices: explicit style.tokenShades
- * plus ramp-shaped token overrides (the two representations applyDoc
- * interconverts). The per-row shade resets restore THESE — the baseline's
- * choice, not stock.
+ * A doc's effective per-token shade choices: explicit style.tokenShades plus
+ * ramp-shaped token overrides. Per-row shade resets restore THESE.
  */
 export function canonicalTokenShades(doc: ThemeDoc): Record<string, { light?: ShadeStop, dark?: ShadeStop }> {
   return { ...promotedShades(doc), ...doc.style?.tokenShades }
@@ -310,6 +324,7 @@ export function mergeSection(current: ThemeDoc, base: ThemeDoc, key: SectionKey)
       setOrDelete(doc.style, 'shadowShade', baseStyle.shadowShade ? structuredClone(baseStyle.shadowShade) : undefined)
       setOrDelete(doc.style, 'shadowOpacity', baseStyle.shadowOpacity)
       setOrDelete(doc.style, 'shadowGeometry', baseStyle.shadowGeometry ? structuredClone(baseStyle.shadowGeometry) : undefined)
+      setOrDelete(doc.style, 'shadowPress', baseStyle.shadowPress)
       break
     case 'innerShadow':
       doc.style ??= {}

@@ -49,7 +49,7 @@ export const presets: ThemePreset[] = [{
   icon: 'i-lucide-zap',
   doc: {
     version: 1,
-    // A sculpted warm neutral running lilac-tinted paper into pure carbon.
+    // Sculpted warm neutral: lilac-tinted paper into pure carbon.
     palettes: {
       carbon: {
         shades: {
@@ -75,8 +75,6 @@ export const presets: ThemePreset[] = [{
     radius: 0.5,
     font: { sans: 'Outfit' },
     icons: 'tabler',
-    // Framed everything in near-black ink, straight-down hard shadows, soft
-    // inked inputs, and both modes retuned shade-by-shade toward carbon.
     style: {
       shadow: 'custom',
       shadowGeometry: { x: 0, y: 3, blur: 0, spread: 0 },
@@ -112,8 +110,8 @@ export const presets: ThemePreset[] = [{
   icon: 'i-lucide-citrus',
   doc: {
     version: 1,
-    // A sculpted green-tinted neutral (studio curve editor) whose light end
-    // starts far below white — the whole page sits on foliage.
+    // Green-tinted neutral whose light end starts far below white — the
+    // whole page sits on foliage.
     palettes: {
       grove: {
         shades: {
@@ -146,10 +144,7 @@ export const presets: ThemePreset[] = [{
         '--ui-text-highlighted': 'var(--ui-color-neutral-50)'
       }
     },
-    // Exercises the newest axes together: straight-down hard shadow at 55%
-    // paired with a bottom-lit hard INSET at 50% (drop below, light above —
-    // the pressed-clay look), app-wide subtle variants, and per-mode shades
-    // for the surface stack plus the success/error alias tokens.
+    // Drop shadow below plus a bottom-lit hard INSET above — pressed clay.
     style: {
       shadow: 'custom',
       shadowColor: 'shade',
@@ -161,6 +156,8 @@ export const presets: ThemePreset[] = [{
       innerShadowOpacity: 50,
       innerShadowColor: 'shade',
       innerShadowShade: { light: 500, dark: 950 },
+      border: 'custom',
+      borderWidth: 1,
       defaults: { variant: 'subtle' },
       tokenShades: {
         '--ui-bg-muted': { light: 100 },
@@ -180,8 +177,7 @@ export const presets: ThemePreset[] = [{
   icon: 'i-lucide-candy',
   doc: {
     version: 1,
-    // A sculpted pink-mauve neutral (chroma peaks mid-ramp) instead of the
-    // stock mauve.
+    // Sculpted pink-mauve neutral — chroma peaks mid-ramp.
     palettes: {
       'custom-neutral': {
         shades: {
@@ -219,12 +215,11 @@ export const presets: ThemePreset[] = [{
         '--ui-border-inverted': 'var(--ui-color-neutral-50)'
       }
     },
-    // Soft pink-cast shadows (primary 700 light / 950 dark at 15%) over a
-    // top-lit blurred inset in its own lighter shade (500 light / 900 dark).
     style: {
       shadow: 'custom',
       shadowGeometry: { x: 0, y: 6, blur: 12, spread: 0 },
       shadowOpacity: 15,
+      shadowPress: false,
       innerShadow: 'custom',
       innerShadowGeometry: {
         x: 0,
@@ -241,7 +236,9 @@ export const presets: ThemePreset[] = [{
       innerShadowShade: {
         light: 500,
         dark: 900
-      }
+      },
+      border: 'custom',
+      borderWidth: 1
     }
   }
 }, {
@@ -251,8 +248,8 @@ export const presets: ThemePreset[] = [{
   icon: 'i-mdi-space-invaders',
   doc: {
     version: 1,
-    // A teal-washed neutral: the light end never reaches white, so the whole
-    // page sits on a dim LCD panel instead of paper.
+    // Teal-washed neutral: the light end never reaches white — a dim LCD
+    // panel instead of paper.
     palettes: {
       'custom-neutral': {
         shades: {
@@ -277,8 +274,6 @@ export const presets: ThemePreset[] = [{
     radius: 0,
     font: { sans: 'Pixelify Sans', weights: { normal: 400, medium: 500, semibold: 600, bold: 700 } },
     icons: 'pixelarticons',
-    // Inked page: near-black default AND accented borders over muted panel
-    // edges, deep red at 600 in light, flat 50s inversions in dark.
     tokens: {
       light: {
         '--ui-primary': 'var(--ui-color-primary-600)',
@@ -317,8 +312,7 @@ export const presets: ThemePreset[] = [{
   doc: {
     version: 1,
     palettes: {
-      // Anchored on the real brand clay — hsl(14.8 63.1% 59.6%) — at 500,
-      // with the ramp's hue and chroma re-fit around it.
+      // Anchored on the real brand clay — hsl(14.8 63.1% 59.6%) — at 500.
       clay: {
         shades: {
           50: 'oklch(97.4% 0.009 48.308)',
@@ -334,9 +328,8 @@ export const presets: ThemePreset[] = [{
           950: 'oklch(25.9% 0.054 38.197)'
         }
       },
-      // The real warm-gray scale (their --_gray-* HSL stops mapped onto the
-      // tailwind ladder: 20/40/70/150/300/450/600/650/750/830/900), so the
-      // 50 IS the signature cream background.
+      // Their real --_gray-* stops mapped onto the tailwind ladder — the 50
+      // IS the signature cream background.
       parchment: {
         shades: {
           50: 'oklch(98% 0.003 106.451)',
@@ -360,9 +353,7 @@ export const presets: ThemePreset[] = [{
     radius: 0.375,
     font: { sans: 'DM Sans', heading: { font: 'Source Serif 4', weight: 400 } },
     icons: 'heroicons',
-    // Deep cream page over ivory surfaces in light, with the border family
-    // stepped one deeper to hold on the tinted page; one flat 800 surface
-    // family in dark, with the brand clay held at 500.
+    // Border family stepped one deeper to hold on the tinted cream page.
     tokens: {
       light: {
         '--ui-bg': 'var(--ui-color-neutral-200)',
@@ -376,8 +367,6 @@ export const presets: ThemePreset[] = [{
         '--ui-bg-accented': 'var(--ui-color-neutral-800)'
       }
     },
-    // Blurred warm-gray drop shadows (500 light / 950 dark at 25%) with
-    // subtle panels.
     style: {
       shadow: 'custom',
       shadowGeometry: {
@@ -462,11 +451,9 @@ export const presets: ThemePreset[] = [{
   icon: 'i-simple-icons-bootstrap',
   doc: {
     version: 1,
-    // The real 5.3 scales: 100–400 are tint-color() (mix with white at
-    // 80/60/40/20%), 600–900 are shade-color() (mix with black), extended
-    // to 50/950 with the same math. Prefixed names: palettes named plainly
-    // 'blue'/'gray' would override the tailwind ramps of the same name
-    // across the whole app while the preset is active.
+    // The real 5.3 tint/shade-color() scales, extended to 50/950 with the
+    // same math. Prefixed names: a palette named plainly 'blue'/'gray' would
+    // override the same-named tailwind ramp app-wide while active.
     palettes: {
       'bs-blue': {
         shades: {
@@ -560,8 +547,7 @@ export const presets: ThemePreset[] = [{
         }
       }
     },
-    // $primary/$secondary/$success/$info/$warning/$danger — secondary is
-    // literally $gray-600, so the gray ramp serves both roles.
+    // secondary is literally $gray-600, so the gray ramp serves both roles.
     colors: {
       primary: 'bs-blue',
       secondary: 'bs-gray',
@@ -572,12 +558,11 @@ export const presets: ThemePreset[] = [{
       neutral: 'bs-gray'
     },
     radius: 0.125,
-    // Bootstrap ships the platform's own face (system-ui stack); Roboto is
-    // the stack's named Android fallback and the closest loadable stand-in.
+    // Bootstrap ships the system-ui stack; Roboto is its named Android
+    // fallback and the closest loadable stand-in.
     font: { sans: 'Roboto', heading: { weight: 500 } },
     icons: 'bootstrap',
-    // Light rides the gray ramp one step deeper than stock (page on gray-100,
-    // surfaces stepped 200/300) with a single strong border family.
+    // Light rides the gray ramp one step deeper than stock.
     tokens: {
       light: {
         '--ui-secondary': 'var(--ui-color-secondary-600)',
@@ -592,9 +577,8 @@ export const presets: ThemePreset[] = [{
         '--ui-bg-elevated': 'var(--ui-color-neutral-200)',
         '--ui-bg-accented': 'var(--ui-color-neutral-300)'
       },
-      // Dark mode keeps the very same brand colors (--bs-primary stays
-      // #0d6efd); $body-color-dark: $gray-300. The library's own dark
-      // defaults already land on the right gray stops for bg and borders.
+      // Dark keeps the same brand colors (--bs-primary stays #0d6efd);
+      // $body-color-dark: $gray-300.
       dark: {
         '--ui-primary': 'var(--ui-color-primary-500)',
         '--ui-secondary': 'var(--ui-color-secondary-500)',

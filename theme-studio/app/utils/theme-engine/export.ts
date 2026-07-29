@@ -1,13 +1,10 @@
 import { themeIcons } from '../theme'
 import type { ThemeDoc } from './types'
 import { DEFAULT_COLORS, THEME_DEFAULTS } from './types'
-import { styleComponents, styleTokens, mergeUi, isCustomShadow, BORDER_WIDTH_DEFAULT } from './styles'
+import { styleComponents, styleTokens, mergeUi, BORDER_WIDTH_DEFAULT } from './styles'
 import { LIBRARY_TOKEN_DEFAULTS } from './resolve'
 
-/**
- * Generate the minimal `main.css`. The document only holds overrides, so
- * everything present is emitted and nothing else.
- */
+/** Generate the minimal `main.css` — the doc only holds overrides, so everything present is emitted. */
 export function generateCSS(doc: ThemeDoc): string {
   const lines = [
     '@import "tailwindcss";',
@@ -18,9 +15,8 @@ export function generateCSS(doc: ThemeDoc): string {
   if (doc.font?.sans && doc.font.sans !== THEME_DEFAULTS.font) {
     themeLines.push(`  --font-sans: '${doc.font.sans}', sans-serif;`)
   }
-  // Weight steps are live variables in tailwind v4 — font-medium compiles
-  // to font-weight: var(--font-weight-medium) — so remapping them reaches
-  // every component, not just inherited text.
+  // Weight steps are live variables in tailwind v4, so remapping them
+  // reaches every component, not just inherited text.
   for (const step of ['normal', 'medium', 'semibold', 'bold'] as const) {
     const weight = doc.font?.weights?.[step]
     if (weight !== undefined) {
@@ -30,26 +26,22 @@ export function generateCSS(doc: ThemeDoc): string {
   if (doc.spacing !== undefined && doc.spacing !== THEME_DEFAULTS.spacing) {
     themeLines.push(`  --spacing: ${doc.spacing}rem;`)
   }
-  // Border width exports as tailwind's default-width theme variables — the
-  // consumer's compile scales every bare border/divide/ring utility, far
-  // beyond what per-component classes could enumerate. (The live preview
-  // can't use this: the variables resolve at compile time.)
+  // Width rides tailwind's default-width theme variables: the consumer's
+  // compile scales every bare border/divide/ring utility. (The live preview
+  // can't use this — the variables resolve at compile time.)
   const borderWidth = doc.style?.border === 'none'
     ? 0
     : doc.style?.border && doc.style.border !== 'default' ? doc.style.borderWidth ?? BORDER_WIDTH_DEFAULT : undefined
-  if (borderWidth !== undefined && borderWidth !== 1) {
+  // 1px matches tailwind's stock width but still exports: the treatment is an
+  // explicit choice, and the variable is what lets an import reconstruct it.
+  if (borderWidth !== undefined) {
     themeLines.push(`  --default-border-width: ${borderWidth}px;`)
     themeLines.push(`  --default-ring-width: ${borderWidth}px;`)
   }
-  // Redefine the whole shadow ramp as @theme tokens so the consumer's compile
-  // rewrites every bare shadow-* utility — the same reach the docs get from
-  // gating --shadow-* in main.css, but unconditional here since an export is
-  // one fixed theme (no Inherit/Custom toggle to switch between). Custom scales
-  // the single config per size (mirrors main.css's .shadow-custom block); None
-  // flattens content the way the component fragments already flatten widgets;
-  // Inherit emits nothing and leaves Tailwind's native shadows untouched.
-  // The per-size geometry scale below must stay in step with main.css. Alpha is
-  // uniform (the opacity slider read literally), so size shows through geometry.
+  // Redefine the shadow ramp as @theme tokens so the consumer's compile
+  // rewrites every bare shadow-* utility — unconditional here, since an
+  // export is one fixed theme (no Inherit/Custom toggle). The per-size
+  // geometry scale must stay in step with main.css; alpha is uniform.
   const SHADOW_RAMP = [
     { size: '2xs', s: 0.15 },
     { size: 'xs', s: 0.25 },
@@ -59,7 +51,7 @@ export function generateCSS(doc: ThemeDoc): string {
     { size: 'xl', s: 1.5 },
     { size: '2xl', s: 2.2 }
   ]
-  if (isCustomShadow(doc.style?.shadow)) {
+  if (doc.style?.shadow === 'custom') {
     for (const { size, s } of SHADOW_RAMP) {
       themeLines.push(`  --shadow-${size}: calc(var(--ui-shadow-offset-x) * ${s}) calc(var(--ui-shadow-offset-y) * ${s}) calc(var(--ui-shadow-blur) * ${s}) calc(var(--ui-shadow-spread) * ${s}) color-mix(in oklab, var(--ui-shadow-color) var(--ui-shadow-opacity, 25%), transparent);`)
     }
@@ -85,8 +77,8 @@ export function generateCSS(doc: ThemeDoc): string {
     lines.push('', 'html {', `  font-size: ${doc.fontSize}px;`, '}')
   }
 
-  // Body-level treatment: classless text has no utility to dereference the
-  // weight variable, and case/tracking/leading are inherited properties.
+  // Classless text has no utility to dereference the weight variable, and
+  // case/tracking/leading are inherited properties.
   const bodyLines: string[] = []
   if (doc.font?.weights?.normal !== undefined) bodyLines.push(`  font-weight: ${doc.font.weights.normal};`)
   if (doc.font?.uppercase) bodyLines.push('  text-transform: uppercase;')
@@ -123,9 +115,8 @@ export function generateCSS(doc: ThemeDoc): string {
     lines.push('', ':root {', ...rootLines, '}')
   }
 
-  // Color variables behind the style treatment. Hard shadows always need
-  // --ui-shadow-color defined; explicit color choices override per mode.
-  // Studio-only variables (hand-rolled preview markup) never export.
+  // Color variables behind the style treatment. Studio-only variables
+  // (hand-rolled preview markup) never export.
   const style = styleTokens(doc.style || {})
   for (const mode of ['light', 'dark'] as const) {
     for (const key of Object.keys(style[mode])) {
@@ -133,13 +124,12 @@ export function generateCSS(doc: ThemeDoc): string {
     }
   }
   // Any shadow treatment defaults the shared color when none was chosen.
-  const castsShadow = (value?: string) => !!value && value !== 'none' && value !== 'flat'
-  const anyShadow = castsShadow(doc.style?.shadow) || castsShadow(doc.style?.innerShadow)
+  const anyShadow = doc.style?.shadow === 'custom' || doc.style?.innerShadow === 'custom'
   if (anyShadow && !style.light['--ui-shadow-color']) {
     style.light['--ui-shadow-color'] = 'var(--ui-color-neutral-950)'
     style.dark['--ui-shadow-color'] = 'black'
   }
-  if (isCustomShadow(doc.style?.shadow)) {
+  if (doc.style?.shadow === 'custom') {
     // The custom-shadow classes reference the geometry variables — a
     // standalone export must define them even at default values.
     if (!style.light['--ui-shadow-offset-x']) {
@@ -148,33 +138,24 @@ export function generateCSS(doc: ThemeDoc): string {
       style.light['--ui-shadow-blur'] = '0px'
       style.light['--ui-shadow-spread'] = '0px'
     }
-    // The shadow-(--ui-shadow-hard*) utilities read these compositions.
-    style.light['--ui-shadow-hard'] = 'var(--ui-shadow-offset-x) var(--ui-shadow-offset-y) var(--ui-shadow-blur) var(--ui-shadow-spread) var(--ui-shadow-final-hard)'
-    style.light['--ui-shadow-hard-lg'] = 'calc(var(--ui-shadow-offset-x) * 1.5) calc(var(--ui-shadow-offset-y) * 1.5) var(--ui-shadow-blur) var(--ui-shadow-spread) var(--ui-shadow-final-hard)'
-    style.light['--ui-shadow-hard-sm'] = 'calc(var(--ui-shadow-offset-x) * 0.66) calc(var(--ui-shadow-offset-y) * 0.66) var(--ui-shadow-blur) var(--ui-shadow-spread) var(--ui-shadow-final-hard)'
-    style.light['--ui-shadow-hard-half'] = 'calc(var(--ui-shadow-offset-x) / 2) calc(var(--ui-shadow-offset-y) / 2) var(--ui-shadow-blur) var(--ui-shadow-spread) var(--ui-shadow-final-hard)'
+    // The button press-effect's shadow-(--ui-shadow-press*) utilities read these.
+    style.light['--ui-shadow-press'] = 'var(--ui-shadow-offset-x) var(--ui-shadow-offset-y) var(--ui-shadow-blur) var(--ui-shadow-spread) var(--ui-shadow-press-color)'
+    style.light['--ui-shadow-press-half'] = 'calc(var(--ui-shadow-offset-x) / 2) calc(var(--ui-shadow-offset-y) / 2) var(--ui-shadow-blur) var(--ui-shadow-spread) var(--ui-shadow-press-color)'
+    style.light['--ui-shadow-press-color'] = 'color-mix(in oklab, var(--ui-shadow-color) var(--ui-shadow-opacity, 100%), transparent)'
   }
-  if (castsShadow(doc.style?.shadow)) {
-    style.light['--ui-shadow-final-hard'] = 'color-mix(in oklab, var(--ui-shadow-color) var(--ui-shadow-opacity, 100%), transparent)'
-    style.light['--ui-shadow-final-soft'] = 'color-mix(in oklab, var(--ui-shadow-color) var(--ui-shadow-opacity, 25%), transparent)'
-  }
-  if (doc.style?.innerShadow && doc.style.innerShadow !== 'none') {
-    if (isCustomShadow(doc.style.innerShadow)) {
-      if (!style.light['--ui-inner-shadow-offset-x']) {
-        style.light['--ui-inner-shadow-offset-x'] = '0px'
-        style.light['--ui-inner-shadow-offset-y'] = '2px'
-        style.light['--ui-inner-shadow-blur'] = '4px'
-        style.light['--ui-inner-shadow-spread'] = '0px'
-      }
-      style.light['--ui-inner-shadow'] = 'var(--ui-inner-shadow-offset-x) var(--ui-inner-shadow-offset-y) var(--ui-inner-shadow-blur) var(--ui-inner-shadow-spread) var(--ui-shadow-final-inner)'
+  if (doc.style?.innerShadow === 'custom') {
+    if (!style.light['--ui-inner-shadow-offset-x']) {
+      style.light['--ui-inner-shadow-offset-x'] = '0px'
+      style.light['--ui-inner-shadow-offset-y'] = '2px'
+      style.light['--ui-inner-shadow-blur'] = '4px'
+      style.light['--ui-inner-shadow-spread'] = '0px'
     }
-    style.light['--ui-shadow-final-inner'] = 'color-mix(in oklab, var(--ui-inner-shadow-color, var(--ui-shadow-color)) var(--ui-inner-shadow-opacity, 15%), transparent)'
+    style.light['--ui-inner-shadow'] = 'var(--ui-inner-shadow-offset-x) var(--ui-inner-shadow-offset-y) var(--ui-inner-shadow-blur) var(--ui-inner-shadow-spread) var(--ui-inner-shadow-mix)'
+    style.light['--ui-inner-shadow-mix'] = 'color-mix(in oklab, var(--ui-inner-shadow-color, var(--ui-shadow-color)) var(--ui-inner-shadow-opacity, 15%), transparent)'
   }
 
-  // One block per mode: the style expansion and the doc's explicit token
-  // overrides merge, explicit values last so they win — a doc whose tokens
-  // duplicate the style expansion (older exports round-tripped through
-  // import) collapses instead of printing every variable twice.
+  // Style expansion and explicit token overrides merge, explicit last so a
+  // round-tripped doc collapses instead of printing every variable twice.
   const light = { ...style.light, ...doc.tokens?.light }
 
   const dark: Record<string, string> = {
@@ -182,10 +163,9 @@ export function generateCSS(doc: ThemeDoc): string {
     ...(doc.blackAsPrimary ? { '--ui-primary': 'white' } : {}),
     ...doc.tokens?.dark
   }
-  // The `:root, .light` block matches `<html class="dark">` too (`:root` is
-  // unconditional) and lands after the library's `.dark` block, so a token
-  // overridden for light only would win the source-order tie in dark mode.
-  // Restate the library's dark value so the `.dark` block below wins it back.
+  // `:root, .light` matches `<html class="dark">` too and lands after the
+  // library's `.dark` block, so a light-only override would win in dark mode.
+  // Restate the library's dark value so the `.dark` block wins it back.
   for (const [key, value] of Object.entries(light)) {
     if (key in dark) continue
     const fallback = (LIBRARY_TOKEN_DEFAULTS.dark as Record<string, string>)[key]
@@ -206,18 +186,12 @@ export function generateCSS(doc: ThemeDoc): string {
 }
 
 /**
- * Serialize a plain object to JS/TS object-literal source: unquote only keys
- * that are valid identifiers (so dashed keys like `ui-radius` stay quoted and
- * valid), and prefer single-quoted strings — but keep double quotes on any
- * string containing an apostrophe, so a value like `Cooper's` isn't corrupted.
+ * Serialize to JS object-literal source: unquote only identifier-safe keys,
+ * prefer single-quoted strings, keep double quotes around apostrophes.
  */
 function toObjectSource(value: Record<string, any>): string {
   return JSON.stringify(value, null, 2)
-    // Only identifier-safe keys may drop their quotes.
     .replace(/"([a-z_$][\w$]*)":/gi, '$1:')
-    // Convert the remaining double-quoted strings (values, dashed keys) to
-    // single quotes, but leave any that contain a single quote untouched —
-    // double quotes are valid JS and don't need escaping there.
     .replace(/"((?:[^"\\]|\\.)*)"/g, (match, body: string) =>
       body.includes('\'') ? match : `'${body}'`)
 }
@@ -237,9 +211,7 @@ export function generateConfig(doc: ThemeDoc, framework: string = 'nuxt'): strin
   }
 
   // Explicit components merge INTO the style expansion (classes concatenate,
-  // explicit last so it wins) — a spread would drop one side wholesale.
-  // Width rides the @theme default-width variables in the exported CSS, so
-  // the config only carries frame/color/shadow classes.
+  // explicit last) — a spread would drop one side wholesale.
   const componentOverrides = mergeUi(doc.style ? styleComponents(doc.style) : undefined, doc.components)
   if (Object.keys(componentOverrides).length) {
     config.ui = config.ui || {}
@@ -270,9 +242,8 @@ export function generateConfig(doc: ThemeDoc, framework: string = 'nuxt'): strin
 }
 
 /**
- * Translate a document into the shape `useTheme().applyThemeSettings()`
- * accepts — the sanitized write path shared with the AI theme feature, which
- * also persists everything to the localStorage keys the FOUC scripts restore.
+ * Translate a document into the shape `applyThemeSettings()` accepts — the
+ * sanitized write path shared with the AI theme feature.
  */
 export function docToSettings(doc: ThemeDoc): Record<string, any> {
   const settings: Record<string, any> = {}
@@ -310,9 +281,8 @@ export function docToSettings(doc: ThemeDoc): Record<string, any> {
     }
   }
 
-  // Only the doc's explicit components ride the settings channel — the
-  // style expansion is applied through the dedicated style-ui channel by
-  // the caller (applyDoc), so a later style tweak can't destroy them.
+  // Only explicit components ride the settings channel — the style expansion
+  // goes through the dedicated style-ui channel (applyDoc).
   if (doc.components && Object.keys(doc.components).length) {
     settings.ui = doc.components
   }

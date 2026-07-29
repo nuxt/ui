@@ -1,7 +1,7 @@
 import { defu } from 'defu'
 import { themeIcons, cssVariableDefaults } from '../utils/theme'
 import { THEME_STORAGE_KEYS, THEME_STATE_KEYS } from '../utils/theme-keys'
-import { mergeUi } from '../utils/theme-engine'
+import { mergeUi, styleComponents } from '../utils/theme-engine'
 
 export default defineNuxtPlugin({
   enforce: 'post',
@@ -61,34 +61,27 @@ export default defineNuxtPlugin({
       restoreNamedState(THEME_STORAGE_KEYS.style, THEME_STATE_KEYS.stylePrefs)
       restoreNamedState(THEME_STORAGE_KEYS.paletteParams, THEME_STATE_KEYS.paletteParams)
 
-      // Migrate legacy persisted shadows onto the one 'custom' config. Both
-      // aliases still read as Custom everywhere, but canonicalising here means
-      // the next save writes 'custom' — and a bare 'soft' predates explicit
-      // geometry, so hand it the blurred default it used to imply.
+      // The persisted style-ui bundle is DERIVED from the style prefs —
+      // recompute it on load so fragment changes shipped in code reach
+      // already-persisted themes instead of serving a stale bundle.
       const persisted = useState<any>(THEME_STATE_KEYS.stylePrefs)
-      if (persisted.value && typeof persisted.value === 'object') {
-        const next = { ...persisted.value }
-        if (next.shadow === 'soft' && next.shadowGeometry === undefined) {
-          next.shadowGeometry = { x: 0, y: 6, blur: 12, spread: 0 }
+      if (persisted.value && Object.keys(persisted.value).length) {
+        const bundle = styleComponents(persisted.value)
+        useState<Record<string, any>>('nuxt-ui-style-ui').value = bundle
+        if (Object.keys(bundle).length) {
+          localStorage.setItem('nuxt-ui-style-ui', JSON.stringify(bundle))
+        } else {
+          localStorage.removeItem('nuxt-ui-style-ui')
         }
-        if (next.shadow === 'soft' || next.shadow === 'hard') next.shadow = 'custom'
-        if (next.innerShadow === 'soft' || next.innerShadow === 'hard') next.innerShadow = 'custom'
-        persisted.value = next
       }
 
-      // Keep the .shadow-custom root flag in lockstep with the shadow treatment
-      // on EVERY path: setStyle (sliders) and applyDoc (presets, which set
-      // style.value directly and bypass setStyle) both flow through this one
-      // watcher, so gated shadows update without a reload. One persistent
-      // watcher here beats per-composable toggles scattered across call sites.
+      // One persistent watcher keeps the shadow root flags in lockstep on
+      // every path — applyDoc (presets) bypasses setStyle, so per-call-site
+      // toggles would miss it.
       const stylePrefs = useState<{ shadow?: string }>(THEME_STATE_KEYS.stylePrefs)
       watch(() => stylePrefs.value?.shadow, (shadow) => {
         const flags = document.documentElement.classList
-        // Custom swaps the default ramp for the config-driven scale; None strips
-        // it to nothing; Inherit leaves the native Tailwind ramp. ('soft'/'hard'
-        // are legacy aliases of the one config shadow.)
-        const custom = shadow === 'custom' || shadow === 'soft' || shadow === 'hard'
-        flags.toggle('shadow-custom', custom)
+        flags.toggle('shadow-custom', shadow === 'custom')
         flags.toggle('shadow-none', shadow === 'flat')
       }, { immediate: true })
 
@@ -102,8 +95,7 @@ export default defineNuxtPlugin({
         const styleUi = JSON.parse(localStorage.getItem('nuxt-ui-style-ui') || '{}')
         if (extras.ui || Object.keys(styleUi).length) {
           onNuxtReady(() => {
-            // Same composition as the live path: style bundle first,
-            // preset/AI extras last so explicit overrides win the merge.
+            // same order as the live path: style bundle first, extras win
             const merged = mergeUi(styleUi, extras.ui || {})
             for (const [key, value] of Object.entries(merged)) {
               if (key === 'colors' || key === 'icons') continue
@@ -117,11 +109,8 @@ export default defineNuxtPlugin({
     }
 
     if (import.meta.server) {
-      // Inline scripts below intentionally duplicate logic from the client-side composable
-      // (useTheme / injectCustomColors / injectCSSVariables) to restore persisted theme
-      // settings on first paint and prevent a flash of unstyled content (FOUC).
-      // The script IDs (nuxt-ui-custom-colors, nuxt-ui-css-variables, nuxt-ui-radius, etc.)
-      // correspond to the <style> elements managed by useTheme via useHead.
+      // FOUC scripts: intentionally duplicate useTheme's logic to restore
+      // persisted settings on first paint, targeting the same <style> ids.
       useHead({
         script: [{
           innerHTML: `
@@ -208,7 +197,7 @@ export default defineNuxtPlugin({
             try {
               var st = JSON.parse(localStorage.getItem('nuxt-ui-style') || '{}');
               var sh = st && st.shadow;
-              if (sh === 'custom' || sh === 'soft' || sh === 'hard') document.documentElement.classList.add('shadow-custom');
+              if (sh === 'custom') document.documentElement.classList.add('shadow-custom');
               else if (sh === 'flat') document.documentElement.classList.add('shadow-none');
             } catch (e) {}
           `.replace(/\s+/g, ' '),

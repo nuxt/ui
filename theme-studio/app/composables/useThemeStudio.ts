@@ -415,7 +415,7 @@ export function useThemeStudio() {
       font: { sans: pick(theme.fonts) },
       // Weighted so most rolls stay clean, with the occasional loud one.
       style: {
-        shadow: pick(['none', 'none', 'custom', 'custom'] as const),
+        ...(Math.random() < 0.5 ? { shadow: 'custom' as const } : {}),
         border: pick(['default', 'default', 'custom', 'none'] as const)
       }
     }

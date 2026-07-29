@@ -75,6 +75,13 @@ describe('oklch', () => {
     expect(parseColor('not a color')).toBeUndefined()
     expect(parseCssColor(undefined as unknown as string)).toBeUndefined()
   })
+
+  it('reads the none keyword as 0', () => {
+    // CSS Color 4 missing components — tailwind ≥4.3.3 emits them for
+    // achromatic stops (zinc-50 is `oklch(98.5% 0 none)`).
+    expect(parseColor('oklch(98.5% 0 none)')).toEqual({ l: 0.985, c: 0, h: 0 })
+    expect(parseColor('oklch(50% none none)')).toEqual({ l: 0.5, c: 0, h: 0 })
+  })
 })
 
 describe('sampleCurve', () => {

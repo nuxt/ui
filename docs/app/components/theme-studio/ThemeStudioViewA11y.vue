@@ -3,11 +3,8 @@ import type { ButtonProps } from '@nuxt/ui'
 import { blendColors, contrastRatio } from '@nuxt/ui-theme-studio/engine'
 
 /**
- * WCAG contrast matrix for the CURRENT theme: every text-role token against
- * every surface token, plus inverted text on the solid semantic surfaces
- * (what buttons render). Colors are read from the live computed custom
- * properties, so the matrix is the resolved ground truth — custom palettes,
- * shade sliders and mode switches included.
+ * WCAG contrast matrix for the current theme, read from the live computed
+ * custom properties — the resolved ground truth.
  */
 const FOREGROUNDS = [
   { token: '--ui-text-highlighted', label: 'Highlighted' },
@@ -34,11 +31,8 @@ const BACKGROUNDS = [
 /** Solid surfaces (buttons, badges) render --ui-text-inverted on the alias. */
 const SOLIDS = FOREGROUNDS.slice(5)
 
-/**
- * The color/variant grid buttons and badges actually paint. Tinted variants
- * use an alpha of the alias over the page background, so the measured pair is
- * the composited pixel — not the alias against a surface it never touches.
- */
+// Tinted variants measure the composited pixel (alias alpha over the page),
+// not the alias against a surface it never touches.
 const VARIANTS = ['solid', 'outline', 'soft', 'subtle', 'ghost', 'link'] as const
 
 const VARIANT_COLORS: Array<{ key: NonNullable<ButtonProps['color']>, label: string, icon: string }> = [
@@ -128,10 +122,8 @@ function neutralSpecs(styles: CSSStyleDeclaration, page: string, inverted: strin
   ]
 }
 
-/**
- * The theme applies through <style> tags useHead swaps asynchronously —
- * recompute a beat after any state that feeds them changes.
- */
+// The theme applies through <style> tags useHead swaps asynchronously —
+// recompute a beat after any state that feeds them changes.
 const colorMode = useColorMode()
 const appConfig = useAppConfig()
 // the owning composable's refs — never re-seed these channels here
@@ -144,9 +136,8 @@ let pending = 0
 let queued = false
 function scheduleCompute() {
   cancelAnimationFrame(pending)
-  // One queued tick at a time — rapid changes (curve drags) would otherwise
-  // stack nextTick callbacks, each spawning its own rAF chain into the
-  // layout-reading compute().
+  // one queued tick at a time — curve drags would otherwise stack nextTick
+  // callbacks, each spawning its own rAF chain
   if (queued) return
   queued = true
   nextTick(() => {

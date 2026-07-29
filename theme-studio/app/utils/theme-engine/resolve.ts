@@ -4,9 +4,8 @@ import { DEFAULT_COLORS } from './types'
 
 /**
  * The semantic token defaults as @nuxt/ui ships them (src/runtime/index.css).
- * Exports diff against THESE — the docs site's own baseline diverges (e.g.
- * its light `--ui-bg` follows the neutral ramp), but an exported theme must
- * reproduce the preview on top of a stock library install.
+ * Exports diff against THESE, not the docs site's diverging baseline — an
+ * exported theme must reproduce the preview on a stock library install.
  */
 export const LIBRARY_TOKEN_DEFAULTS = {
   light: {
@@ -58,20 +57,16 @@ export const LIBRARY_TOKEN_DEFAULTS = {
   }
 } as const
 
-// Standard stops ride the `--ui-color-<alias>-<shade>` indirection; the stops
-// between them have none — the runtime colours plugin only generates the 11
-// standard stops — so shadeRef emits them against the custom ramp's
-// `--color-custom-<alias>-<stop>` variable instead. Both forms name the same
-// ramp in the same capture position, so a single alternation parses both and
-// in-between stops promote back to governed shades like standard ones.
+// Standard stops ride the `--ui-color-<alias>-<shade>` indirection; midpoints
+// have none (the runtime colours plugin only generates the 11 standard stops)
+// so they emit against `--color-custom-<alias>-<stop>` instead. One
+// alternation parses both forms with the ramp in the same capture position.
 const UI_COLOR_RE = /^var\(--(?:ui-color|color-custom)-([a-z]+)-(\d{2,3})\)$/
 
 /**
- * Parse a shade reference the studio emits — both the standard-stop
- * `var(--ui-color-<alias>-<shade>)` form and the midpoint
- * `var(--color-custom-<alias>-<mid>)` form — to `{ alias, shade }`. The alias
- * is the ramp name in either case; callers apply their own ownership check
- * against it, so a ref on a foreign ramp is parsed but not adopted.
+ * Parse a shade reference the studio emits (either form) to `{ alias, shade }`.
+ * Callers apply their own ownership check — a foreign-ramp ref is parsed but
+ * not adopted.
  */
 export function parseUiColorRef(value?: string): { alias: string, shade: number } | undefined {
   const match = value?.match(UI_COLOR_RE)

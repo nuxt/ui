@@ -32,7 +32,7 @@ jobs:
         uses: pnpm/action-setup@v6
 
       - name: Install node
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: ${{ matrix.node }}
           cache: pnpm
@@ -100,7 +100,7 @@ jobs:
         uses: pnpm/action-setup@v6
 
       - name: Install node
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: ${{ matrix.node }}
           cache: pnpm
@@ -145,7 +145,7 @@ jobs:
         uses: pnpm/action-setup@v6
 
       - name: Install node
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: ${{ matrix.node }}
           cache: pnpm
@@ -190,7 +190,7 @@ jobs:
         uses: pnpm/action-setup@v6
 
       - name: Install node
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: ${{ matrix.node }}
           cache: pnpm
@@ -235,7 +235,7 @@ jobs:
         uses: pnpm/action-setup@v6
 
       - name: Install node
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: ${{ matrix.node }}
           cache: pnpm
@@ -280,7 +280,7 @@ jobs:
         uses: pnpm/action-setup@v6
 
       - name: Install node
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: ${{ matrix.node }}
           cache: pnpm
@@ -325,7 +325,7 @@ jobs:
         uses: pnpm/action-setup@v6
 
       - name: Install node
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: ${{ matrix.node }}
           cache: pnpm
@@ -370,7 +370,7 @@ jobs:
         uses: pnpm/action-setup@v6
 
       - name: Install node
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: ${{ matrix.node }}
           cache: pnpm
@@ -415,7 +415,7 @@ jobs:
         uses: pnpm/action-setup@v6
 
       - name: Install node
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: ${{ matrix.node }}
           cache: pnpm
@@ -460,7 +460,7 @@ jobs:
         uses: pnpm/action-setup@v6
 
       - name: Install node
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: ${{ matrix.node }}
           cache: pnpm
@@ -505,7 +505,7 @@ jobs:
         uses: pnpm/action-setup@v6
 
       - name: Install node
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: ${{ matrix.node }}
           cache: pnpm
@@ -550,7 +550,7 @@ jobs:
         uses: pnpm/action-setup@v6
 
       - name: Install node
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: ${{ matrix.node }}
           cache: pnpm
@@ -595,7 +595,7 @@ jobs:
         uses: pnpm/action-setup@v6
 
       - name: Install node
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: ${{ matrix.node }}
           cache: pnpm

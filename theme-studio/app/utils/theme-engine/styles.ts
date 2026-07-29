@@ -1,46 +1,22 @@
 /**
- * Shadow and border treatments, expressed as per-component class bundles
- * plus two CSS variables for the colors.
+ * Shadow and border treatments as per-component class bundles, plus two CSS
+ * variables (`--ui-shadow-color`, `--ui-border-color`) so recoloring is a
+ * variable swap, not a new bundle. Nuxt UI has no semantic shadow/border
+ * tokens yet, so structure rides `app.config ui.<component>` with STATIC
+ * class literals.
  *
- * Nuxt UI has no semantic `--ui-shadow` / `--ui-border-width` tokens yet
- * (a known core gap), so structure rides the `app.config ui.<component>`
- * override path with STATIC class literals (tailwind compiles what it can
- * see in source), while the color choices are pure CSS variables:
- *
- * - `--ui-shadow-color` — referenced by every hard-shadow class
- * - `--ui-frame-color`  — referenced by every border-color override class
- *
- * so any color configuration is a variable swap, not a new class bundle.
- *
- * Placement rule: every ring in Nuxt UI themes lives at variant or
- * compoundVariant level (card/input variants, button/badge/alert compounds),
- * all of which render after slot classes — so width/color overrides MUST be
- * extension compoundVariants (appended after the theme's, they win the
+ * Placement rule: every ring in the library's themes lives at variant or
+ * compoundVariant level, which renders after slot classes — so ring
+ * overrides MUST be extension compoundVariants (appended last, they win the
  * tailwind-merge). Only shadows, which no theme variant sets, ride slots.
- *
- * Semantics:
- * - `border: bold` thickens borders that already exist, keeping ring colors.
- * - `border: frame` additionally frames solid/soft surfaces — the
- *   neobrutalist outline-everything look. Ghost/link stay flat.
- * - `borderColor`/`shadowColor` recolor via the variables; 'default' leaves
- *   each element's own ring color / the dark shadow color untouched.
  */
 import type { ShadeStop } from './types'
 import { SHADES } from './types'
 
-/**
- * 'soft'/'hard' are legacy values (old exports/saved state) treated as 'custom'
- * — the one config-driven shadow whose geometry is a slider, not a mode.
- */
-export type ShadowStyle = 'none' | 'flat' | 'custom' | 'soft' | 'hard'
+/** Absent = inherit the library shadows; 'flat' strips them; 'custom' is the config-driven shadow. */
+export type ShadowStyle = 'flat' | 'custom'
 
-/** A config-driven ("Custom") drop or inner shadow, including its legacy aliases. */
-export function isCustomShadow(shadow?: ShadowStyle): boolean {
-  return shadow === 'custom' || shadow === 'soft' || shadow === 'hard'
-}
-
-/** 'bold'/'frame' are legacy values (old exports/saved state) treated as 'custom'. */
-export type BorderStyle = 'default' | 'none' | 'custom' | 'bold' | 'frame'
+export type BorderStyle = 'default' | 'none' | 'custom'
 export type BorderColor = 'default' | 'inverted' | 'black' | 'white' | 'primary' | 'neutral' | 'shade' | 'primary-shade'
 export type ShadowColor = 'default' | 'black' | 'inverted' | 'primary' | 'shade' | 'primary-shade'
 export type DefaultVariant = 'default' | 'solid' | 'outline' | 'soft' | 'subtle' | 'ghost' | 'link' | 'none'
@@ -59,39 +35,26 @@ export interface StyleOptions {
   borderShade?: { light?: ShadeStop, dark?: ShadeStop }
   /** Ring width in px (1–4) while `border` is 'custom'; 2 when unset. */
   borderWidth?: number
-  /**
-   * Frame solid/soft surfaces too (the neobrutalist outline-everything
-   * look) — only meaningful while `border` is 'custom'.
-   */
+  /** Frame solid/soft surfaces too — the neobrutalist outline-everything look. */
   frame?: boolean
   /**
-   * Default variant/size, expanded into per-component `defaultVariants` —
-   * the runtime override channel Nuxt UI already honors — only for
-   * components that actually support the chosen value. `variant` applies
-   * app-wide; `variants` refines it per component group and wins where set.
+   * Default variant/size/color, expanded into per-component `defaultVariants`
+   * only where the component supports the value. `variant` is app-wide;
+   * `variants`/`colors` refine per group and win where set.
    */
   defaults?: { variant?: DefaultVariant, size?: DefaultSize, variants?: Partial<Record<VariantGroup, DefaultVariant>>, colors?: Partial<Record<VariantGroup, DefaultColor>> }
-  /**
-   * Hard-shadow geometry in px, driving --ui-shadow-offset-x/y/blur/spread.
-   * Only meaningful while `shadow` is 'hard'.
-   */
+  /** Shadow geometry in px, driving --ui-shadow-offset-x/y/blur/spread. */
   shadowGeometry?: { x?: number, y?: number, blur?: number, spread?: number }
-  /**
-   * Shadow opacity in percent, driving --ui-shadow-opacity. Applies to both
-   * treatments; unset falls back to 100% (hard) / 25% (soft) via the
-   * per-treatment color-mix fallbacks.
-   */
+  /** Shadow opacity in percent; unset rides the color-mix fallbacks. */
   shadowOpacity?: number
   /**
-   * Inset shadow treatment, independent of the drop shadow — same
-   * vocabulary ('soft' recolors a stock inset, 'hard' rides the geometry
-   * sliders) and the same components.
+   * Buttons sink onto their shadow on hover/active. On by default; off keeps
+   * the resting shadow static (a blurred config has nothing crisp to sink onto).
    */
+  shadowPress?: boolean
+  /** Inset shadow treatment, independent of the drop shadow. */
   innerShadow?: ShadowStyle
-  /**
-   * Inner-shadow geometry in px, driving --ui-inner-shadow-offset-x/y/…
-   * Only meaningful while `innerShadow` is 'hard'.
-   */
+  /** Inner-shadow geometry in px, driving --ui-inner-shadow-offset-x/y/… */
   innerShadowGeometry?: { x?: number, y?: number, blur?: number, spread?: number }
   /** Inner-shadow opacity in percent; unset falls back to 15%. */
   innerShadowOpacity?: number
@@ -100,12 +63,9 @@ export interface StyleOptions {
   /** Ramp shade per mode — neutral for 'shade', primary for 'primary-shade' */
   innerShadowShade?: { light?: ShadeStop, dark?: ShadeStop }
   /**
-   * Semantic token → neutral ramp shade, per mode. Strictly a token
-   * shorthand parked on the style axis until the studio grows a full
-   * tokens editor. Keys are whitelisted in TOKEN_SHADE_TARGETS. A mode
-   * is only an override when present — an absent mode stays inherited,
-   * so hydrating one mode from a preset never leaks a phantom override
-   * for the other into exports.
+   * Semantic token → ramp shade, keys whitelisted in TOKEN_SHADE_TARGETS.
+   * An absent mode stays inherited — presets hydrating one mode must not
+   * leak a phantom override for the other into exports.
    */
   tokenShades?: Record<string, { light?: ShadeStop, dark?: ShadeStop }>
 }
@@ -121,17 +81,13 @@ export const VARIANT_SUPPORT: Record<string, string[]> = {
   alert: ['solid', 'outline', 'soft', 'subtle'],
   card: ['solid', 'outline', 'soft', 'subtle'],
   empty: ['solid', 'outline', 'soft', 'subtle'],
-  // form fields have no solid variant (theirs run outline → none) — an
-  // unsupported value would silently unstyle them, so they keep their
-  // default instead
+  // fields have no solid variant — an unsupported value would silently unstyle them
   ...Object.fromEntries(FIELD_COMPONENTS.map(component => [component, FIELD_VARIANTS]))
 }
 
-// inputRating is size-only (no variant axis); everything here spans xs–xl exactly.
 /**
- * Every component the app-wide Size default scales — those with the full
- * xs–xl size axis and a user-facing footprint. Components on other scales
- * (avatar/chip/timeline's 3xs–3xl, kbd's sm–lg) stay out.
+ * Components the app-wide Size default scales — exactly the xs–xl axis.
+ * Components on other scales (avatar's 3xs–3xl, kbd's sm–lg) stay out.
  */
 export const SIZE_SUPPORT = [
   'button', 'badge', ...FIELD_COMPONENTS, 'inputRating',
@@ -140,7 +96,7 @@ export const SIZE_SUPPORT = [
   'dropdownMenu', 'contextMenu', 'commandPalette', 'listbox'
 ]
 
-/** Components with a color prop — the panels group has no color axis (card and empty lack one; a lone alert color stays a verbatim override). */
+/** Components with a color prop — the panels group has no color axis. */
 export const COLOR_SUPPORT = ['button', 'badge', ...FIELD_COMPONENTS]
 
 /** Component groups behind the per-group default-variant selects. */
@@ -169,14 +125,10 @@ export const TOKEN_GROUPS: Array<{ key: TokenGroup, label: string }> = [
 ]
 
 /**
- * Semantic tokens the studio exposes as per-mode shade sliders, with the
- * library/docs default shades. 'white' library values map to shade 50.
- * `ramp` names the color scale the slider walks (and the token references);
- * the semantic aliases ride their own ramps (--ui-secondary follows the
- * secondary palette, etc. — all generated by the runtime colors plugin).
+ * Semantic tokens exposed as per-mode shade sliders. `defaults` are the
+ * LIBRARY's real resting values — some are the literal ladder ends (light
+ * --ui-bg is `white`, not a ramp stop); `ramp` names the scale the slider walks.
  */
-// defaults are the LIBRARY's real resting values — several are the
-// literal ladder ends (light --ui-bg is `white`, not a ramp stop)
 export const TOKEN_SHADE_TARGETS: Array<{ token: string, label: string, ramp: TokenRamp, group: TokenGroup, defaults: { light: ShadeStop, dark: ShadeStop } }> = [
   { token: '--ui-primary', label: 'Primary', ramp: 'primary', group: 'colors', defaults: { light: 500, dark: 400 } },
   { token: '--ui-secondary', label: 'Secondary', ramp: 'secondary', group: 'colors', defaults: { light: 500, dark: 400 } },
@@ -211,22 +163,18 @@ interface ComponentFragment {
 
 type Fragments = Record<string, ComponentFragment>
 
-// Form fields also come in surfaceless variants (ghost/none) — those stay
-// flat under both shadow treatments.
+// surfaceless field variants stay flat under every shadow treatment
 const FLAT_FIELD_VARIANTS = [
   { variant: 'ghost', class: 'shadow-none' },
   { variant: 'none', class: 'shadow-none' }
 ]
 
 /**
- * A ramp shade reference — or the literal when the stop is white/black.
- * Standard stops go through the `--ui-color-<ramp>-<stop>` indirection so a
- * token follows whatever colour the ramp is assigned. Stops between them (any
- * density finer than 100) have NO such indirection — the runtime colours
- * plugin only generates the 11 standard stops — so they reference the custom
- * ramp's `--color-*` directly. That's sound because an in-between stop can
- * only exist on a custom palette (named `custom-<ramp>`), whose `@theme
- * static` block defines those variables in both the preview and the export.
+ * A ramp shade reference, or the literal for white/black. In-between stops
+ * (finer than 100) have no `--ui-color-*` indirection — the runtime colors
+ * plugin only generates the 11 standard stops — so they hit the custom
+ * ramp's `--color-*` directly; such stops only exist on custom palettes,
+ * whose @theme block defines those vars in both preview and export.
  */
 function shadeRef(ramp: string, stop: ShadeStop | number): string {
   if (stop === 'white' || stop === 'black') return stop
@@ -236,17 +184,13 @@ function shadeRef(ramp: string, stop: ShadeStop | number): string {
   return `var(--ui-color-${ramp}-${stop})`
 }
 
-// The pill tabs' stock trigger shadow is the pre-hydration active-tab fallback
-// (shown before reka mounts its indicator), emitted through the library's
-// `ssr()` helper with this exact modifier chain. A bare `before:shadow-none`
-// won't tailwind-merge against it — the override must carry the same chain.
+// The tabs' pre-hydration active-trigger shadow ships with this exact modifier
+// chain; a bare `before:shadow-none` won't tailwind-merge against it.
 const TABS_SSR_SHADOW_NONE = 'in-[[data-slot=list]:not(:has([data-slot=indicator]))]:data-[state=active]:before:shadow-none'
 
-const SHADOW_FRAGMENTS: Record<'none' | 'flat' | 'custom', Fragments> = {
-  none: {},
-  // Strip the stock shadows the library ships on overlay surfaces — the
-  // studio's None, distinct from Inherit (no treatment at all). The generalised
-  // ramp is also blanked for raw content via the .shadow-none root flag.
+const SHADOW_FRAGMENTS: Record<'flat' | 'custom', Fragments> = {
+  // None: strip the library's stock overlay shadows (Inherit touches nothing);
+  // the ramp itself is blanked via the .shadow-none root flag.
   flat: {
     popover: { slots: { content: 'shadow-none' } },
     dropdownMenu: { slots: { content: 'shadow-none' } },
@@ -259,24 +203,18 @@ const SHADOW_FRAGMENTS: Record<'none' | 'flat' | 'custom', Fragments> = {
     drawer: { slots: { content: 'shadow-none' } },
     modal: { compoundVariants: [{ fullscreen: false, class: { content: 'shadow-none' } }] },
     slideover: { slots: { content: 'sm:shadow-none' } },
-    // The pill tabs ship a stock shadow-xs on the indicator and trigger
-    // pseudo — strip both so None reads flat like every other surface.
     tabs: { compoundVariants: [{ variant: 'pill', class: { list: 'shadow-none', indicator: 'shadow-none', trigger: TABS_SSR_SHADOW_NONE } }] }
   },
-  // The one config-driven shadow. Colour/opacity/geometry come from the
-  // generalised --shadow-* ramp (active under .shadow-custom), so plain size
-  // classes are all these fragments need: overlays keep their stock shadow-lg
-  // and ride the ramp untouched; flat surfaces get a size added.
+  // Custom: the ramp (active under .shadow-custom) carries color/opacity/
+  // geometry, so plain size classes suffice — overlays keep their stock
+  // shadow-lg untouched; flat surfaces get a size added.
   custom: {
     button: {
       slots: {
-        // The base rides the ramp; the press-effect translates by the shadow
-        // offset (0 for a soft/blur config → no visible press) and collapses the
-        // shadow on active, so brutalist geometry gets the neobrutalism press.
-        base: 'shadow-(--ui-shadow-hard) hover:translate-x-[calc(var(--ui-shadow-offset-x)/2)] hover:translate-y-[calc(var(--ui-shadow-offset-y)/2)] hover:shadow-(--ui-shadow-hard-half) active:translate-x-(--ui-shadow-offset-x) active:translate-y-(--ui-shadow-offset-y) active:shadow-none transition-[box-shadow,translate,background-color]'
+        // press effect: translate by the shadow offset, collapse the shadow on active
+        base: 'shadow-(--ui-shadow-press) hover:translate-x-[calc(var(--ui-shadow-offset-x)/2)] hover:translate-y-[calc(var(--ui-shadow-offset-y)/2)] hover:shadow-(--ui-shadow-press-half) active:translate-x-(--ui-shadow-offset-x) active:translate-y-(--ui-shadow-offset-y) active:shadow-none transition-[box-shadow,translate,background-color]'
       },
-      // A floating shadow under an invisible box reads as a glitch — ghost and
-      // link buttons stay flat, as in the reference neobrutalism kits.
+      // a floating shadow under an invisible box reads as a glitch
       compoundVariants: [
         { variant: 'ghost', class: 'shadow-none hover:translate-x-0 hover:translate-y-0 hover:shadow-none active:translate-x-0 active:translate-y-0' },
         { variant: 'link', class: 'shadow-none hover:translate-x-0 hover:translate-y-0 hover:shadow-none active:translate-x-0 active:translate-y-0' }
@@ -291,16 +229,26 @@ const SHADOW_FRAGMENTS: Record<'none' | 'flat' | 'custom', Fragments> = {
     textarea: { slots: { base: 'shadow-xs' }, compoundVariants: FLAT_FIELD_VARIANTS },
     alert: { slots: { root: 'shadow-lg' } },
     badge: { slots: { base: 'shadow-xs' } },
-    // slideover is edge-to-edge on mobile; only its sm+ panel casts a shadow.
+    // edge-to-edge on mobile; only the sm+ panel casts a shadow
     slideover: { slots: { content: 'shadow-none sm:shadow-lg' } },
-    // The pill bar is the raised surface — the list casts, the stock
-    // indicator/trigger shadows drop so it doesn't double up inside.
-    tabs: { compoundVariants: [{ variant: 'pill', class: { list: 'shadow-sm', indicator: 'shadow-none', trigger: TABS_SSR_SHADOW_NONE } }] }
+    // the pill list is the raised surface (full size, matching toolbar
+    // buttons); the stock indicator/trigger shadows drop so it doesn't double up
+    tabs: { compoundVariants: [{ variant: 'pill', class: { list: 'shadow-(--ui-shadow-press)', indicator: 'shadow-none', trigger: TABS_SSR_SHADOW_NONE } }] },
+    // riding the ramp would cast a full-size shadow inside the track
+    switch: { slots: { thumb: 'shadow-none' } }
   }
 }
 
-// Inset shadows use tailwind's separate inset-shadow group, so they merge
-// independently of (and coexist with) the drop treatment on every surface.
+/** shadowPress: false — the resting shadow without the press choreography. */
+const PRESSLESS_BUTTON: Fragments[string] = {
+  slots: { base: 'shadow-(--ui-shadow-press)' },
+  compoundVariants: [
+    { variant: 'ghost', class: 'shadow-none' },
+    { variant: 'link', class: 'shadow-none' }
+  ]
+}
+
+// tailwind's separate inset-shadow group merges independently of the drop treatment
 const INNER_HARD = 'inset-shadow-(--ui-inner-shadow)'
 
 const INNER_FLAT_FIELD_VARIANTS = [
@@ -334,17 +282,15 @@ function innerShadowFragments(classes: string): Fragments {
     toast: { slots: { root: classes } },
     drawer: { slots: { content: classes } },
     modal: { compoundVariants: [{ fullscreen: false, class: { content: classes } }] },
-    slideover: { slots: { content: classes } }
+    slideover: { slots: { content: classes } },
+    // the pill track reads as a recessed well; the indicator stays clean
+    tabs: { compoundVariants: [{ variant: 'pill', class: { list: classes } }] }
   }
 }
 
 export const BORDER_WIDTH_DEFAULT = 2
 
-/**
- * Frame outlines at the DEFAULT ring width — the width itself flows through
- * --default-ring-width (compiled to the studio variable live, a static
- * @theme value in exports), so no per-width class enumeration is needed.
- */
+// default-width rings — the width itself flows through --default-ring-width
 const FRAME_INSET = 'ring ring-inset ring-(--ui-border-accented)'
 const FRAME_OUTSET = 'ring ring-(--ui-border-accented)'
 
@@ -369,58 +315,55 @@ const FRAME_FRAGMENTS: Fragments = (() => {
     // fields have no solid variant — soft is their surface look
     ...Object.fromEntries(FIELD_COMPONENTS.map(component => [component, { compoundVariants: [{ variant: 'soft', class: inset }] }])),
     chatPrompt: { compoundVariants: [{ variant: 'soft', class: { root: outset } }] },
-    // other solid surfaces: the pill tabs wrapper + its indicator, and the
-    // switch track (its checked color-ring loses the merge to ours — the
-    // frame look owns ring color by design, same as solid buttons)
-    tabs: { compoundVariants: [{ variant: 'pill', class: { list: inset, indicator: inset } }] },
+    // list ring only — ringing the indicator inside it reads as a double outline
+    tabs: { compoundVariants: [{ variant: 'pill', class: { list: inset } }] },
     switch: { slots: { base: inset } }
   }
 })()
 
 /**
- * Every width flows through --default-border-width/--default-ring-width —
- * compiled onto the studio variable in the docs' own build, emitted as a
- * static @theme value in exports — so borders need no class fragments at
- * all. Only the frame toggle adds classes: outlines on surfaces that have
- * none. Legacy 'frame' (old saved prefs) implies the toggle.
+ * The pill tabs list has no stock ring, so any active border treatment
+ * outlines it, frame toggle or not — else it sits bare next to outlined fields.
+ */
+const TABS_BORDER_FRAGMENTS: Fragments = {
+  tabs: { compoundVariants: [{ variant: 'pill', class: { list: FRAME_INSET } }] }
+}
+
+/**
+ * Widths flow through --default-border-width/--default-ring-width, so borders
+ * need no class fragments — only the frame toggle adds outlines on surfaces
+ * that have none.
  */
 function borderFragments(style: StyleOptions): Fragments {
-  const framed = style.frame || style.border === 'frame'
-  const zeroed = style.border === 'none'
-  return framed && !zeroed && style.border && style.border !== 'default' ? FRAME_FRAGMENTS : {}
+  if (style.border !== 'custom') return {}
+  return style.frame ? FRAME_FRAGMENTS : TABS_BORDER_FRAGMENTS
 }
 
 /**
  * compound entries recoloring rings via the variable. With `colors` given,
- * only those color variants are touched — on outline/subtle the ring IS the
- * semantic signal (an error badge's ring must stay error-colored), so those
- * only recolor for primary/neutral. Frames added around solid/soft surfaces
- * are outlines by design and recolor for every color (comic-book black
- * outlines a solid error button too).
+ * only those variants repaint — on outline/subtle the ring IS the semantic
+ * signal (an error badge's ring stays error-colored); frames around
+ * solid/soft are outlines by design and recolor for every color.
  */
 function recolor(variants: string[], slot?: string, colors?: string[]): Array<Record<string, unknown>> {
   return variants.map(variant => ({
     ...(colors ? { color: colors } : {}),
     variant,
-    class: slot ? { [slot]: 'ring-(--ui-frame-color)' } : 'ring-(--ui-frame-color)'
+    class: slot ? { [slot]: 'ring-(--ui-border-color)' } : 'ring-(--ui-border-color)'
   }))
 }
 
-/**
- * Colors whose rings carry no meaning — safe to repaint. Only neutral: a
- * primary ring is as deliberate a choice as an error one (a subtle primary
- * button must keep its primary border under any border color).
- */
+// only neutral rings carry no meaning — a primary ring is as deliberate as an error one
 const UNSIGNALED_COLORS = ['neutral']
 
-const FRAME_COLOR_FRAGMENTS: Fragments = {
+const BORDER_COLOR_FRAGMENTS: Fragments = {
   // cards have no color variants; field rings are neutral for every color
   card: { compoundVariants: recolor(['outline', 'subtle', 'solid', 'soft'], 'root') },
   empty: { compoundVariants: recolor(['outline', 'subtle', 'solid', 'soft'], 'root') },
   ...Object.fromEntries(FIELD_COMPONENTS.map(component => [component, { compoundVariants: recolor(['outline', 'subtle']) }])),
-  select: { slots: { content: 'ring-(--ui-frame-color)' }, compoundVariants: recolor(['outline', 'subtle']) },
-  selectMenu: { slots: { content: 'ring-(--ui-frame-color)' }, compoundVariants: recolor(['outline', 'subtle']) },
-  inputMenu: { slots: { content: 'ring-(--ui-frame-color)' }, compoundVariants: recolor(['outline', 'subtle']) },
+  select: { slots: { content: 'ring-(--ui-border-color)' }, compoundVariants: recolor(['outline', 'subtle']) },
+  selectMenu: { slots: { content: 'ring-(--ui-border-color)' }, compoundVariants: recolor(['outline', 'subtle']) },
+  inputMenu: { slots: { content: 'ring-(--ui-border-color)' }, compoundVariants: recolor(['outline', 'subtle']) },
   alert: {
     compoundVariants: [
       ...recolor(['outline', 'subtle'], 'root', UNSIGNALED_COLORS),
@@ -439,22 +382,23 @@ const FRAME_COLOR_FRAGMENTS: Fragments = {
       ...recolor(['solid', 'soft'])
     ]
   },
-  // slot-level rings recolor via slots; color utilities are inert without a
-  // ring width, so slideover's needs no sm: prefix
-  popover: { slots: { content: 'ring-(--ui-frame-color)' } },
-  dropdownMenu: { slots: { content: 'ring-(--ui-frame-color)' } },
-  contextMenu: { slots: { content: 'ring-(--ui-frame-color)' } },
-  tooltip: { slots: { content: 'ring-(--ui-frame-color)' } },
-  toast: { slots: { root: 'ring-(--ui-frame-color)' } },
-  drawer: { slots: { content: 'ring-(--ui-frame-color)' } },
-  modal: { compoundVariants: [{ fullscreen: false, class: { content: 'ring-(--ui-frame-color)' } }] },
-  slideover: { slots: { content: 'ring-(--ui-frame-color)' } },
-  checkbox: { slots: { base: 'ring-(--ui-frame-color)' } },
-  radioGroup: { slots: { base: 'ring-(--ui-frame-color)' } }
+  // ring color utilities are inert without a ring width, so no sm: prefixes needed
+  popover: { slots: { content: 'ring-(--ui-border-color)' } },
+  dropdownMenu: { slots: { content: 'ring-(--ui-border-color)' } },
+  contextMenu: { slots: { content: 'ring-(--ui-border-color)' } },
+  tooltip: { slots: { content: 'ring-(--ui-border-color)' } },
+  toast: { slots: { root: 'ring-(--ui-border-color)' } },
+  drawer: { slots: { content: 'ring-(--ui-border-color)' } },
+  modal: { compoundVariants: [{ fullscreen: false, class: { content: 'ring-(--ui-border-color)' } }] },
+  slideover: { slots: { content: 'ring-(--ui-border-color)' } },
+  checkbox: { slots: { base: 'ring-(--ui-border-color)' } },
+  radioGroup: { slots: { base: 'ring-(--ui-border-color)' } },
+  // inert until a border treatment gives the list its ring
+  tabs: { compoundVariants: [{ variant: 'pill', class: { list: 'ring-(--ui-border-color)' } }] }
 }
 
 /** Per-mode values behind the two color variables, per palette choice. */
-export const FRAME_COLOR_VALUES: Record<Exclude<BorderColor, 'default' | 'shade' | 'primary-shade'>, { light: string, dark: string }> = {
+export const BORDER_COLOR_VALUES: Record<Exclude<BorderColor, 'default' | 'shade' | 'primary-shade'>, { light: string, dark: string }> = {
   inverted: { light: 'var(--ui-color-neutral-950)', dark: 'white' },
   black: { light: 'black', dark: 'black' },
   white: { light: 'white', dark: 'white' },
@@ -480,12 +424,12 @@ export function styleTokens(style: StyleOptions): { light: Record<string, string
   if (style.borderColor === 'shade' || style.borderColor === 'primary-shade') {
     const ramp = style.borderColor === 'primary-shade' ? 'primary' : 'neutral'
     const shade = { ...BORDER_SHADE_DEFAULTS, ...style.borderShade }
-    light['--ui-frame-color'] = shadeRef(ramp, shade.light)
-    dark['--ui-frame-color'] = shadeRef(ramp, shade.dark)
+    light['--ui-border-color'] = shadeRef(ramp, shade.light)
+    dark['--ui-border-color'] = shadeRef(ramp, shade.dark)
   } else if (style.borderColor && style.borderColor !== 'default') {
-    const value = FRAME_COLOR_VALUES[style.borderColor]
-    light['--ui-frame-color'] = value.light
-    dark['--ui-frame-color'] = value.dark
+    const value = BORDER_COLOR_VALUES[style.borderColor]
+    light['--ui-border-color'] = value.light
+    dark['--ui-border-color'] = value.dark
   }
   for (const [token, shade] of Object.entries(style.tokenShades || {})) {
     const target = TOKEN_SHADE_TARGETS.find(target => target.token === token)
@@ -495,12 +439,12 @@ export function styleTokens(style: StyleOptions): { light: Record<string, string
     }
   }
 
-  if (style.shadow && style.shadow !== 'none' && style.shadow !== 'flat' && style.shadowOpacity !== undefined) {
+  if (style.shadow === 'custom' && style.shadowOpacity !== undefined) {
     light['--ui-shadow-opacity'] = `${style.shadowOpacity}%`
     dark['--ui-shadow-opacity'] = `${style.shadowOpacity}%`
   }
 
-  if (isCustomShadow(style.shadow)) {
+  if (style.shadow === 'custom') {
     const geometry = { ...SHADOW_GEOMETRY_DEFAULTS, ...style.shadowGeometry }
     for (const [axis, token] of [['x', '--ui-shadow-offset-x'], ['y', '--ui-shadow-offset-y'], ['blur', '--ui-shadow-blur'], ['spread', '--ui-shadow-spread']] as const) {
       light[token] = `${geometry[axis]}px`
@@ -508,12 +452,12 @@ export function styleTokens(style: StyleOptions): { light: Record<string, string
     }
   }
 
-  if (style.innerShadow && style.innerShadow !== 'none' && style.innerShadowOpacity !== undefined) {
+  if (style.innerShadow === 'custom' && style.innerShadowOpacity !== undefined) {
     light['--ui-inner-shadow-opacity'] = `${style.innerShadowOpacity}%`
     dark['--ui-inner-shadow-opacity'] = `${style.innerShadowOpacity}%`
   }
 
-  if (isCustomShadow(style.innerShadow)) {
+  if (style.innerShadow === 'custom') {
     const geometry = { ...INNER_SHADOW_GEOMETRY_DEFAULTS, ...style.innerShadowGeometry }
     for (const [axis, token] of [['x', '--ui-inner-shadow-offset-x'], ['y', '--ui-inner-shadow-offset-y'], ['blur', '--ui-inner-shadow-blur'], ['spread', '--ui-inner-shadow-spread']] as const) {
       light[token] = `${geometry[axis]}px`
@@ -521,15 +465,12 @@ export function styleTokens(style: StyleOptions): { light: Record<string, string
     }
   }
 
-  // An unset shadowColor is the 'shade' default, but only a custom shadow paints
-  // one — so the shade slider works without first touching the colour dropdown,
-  // while a pristine theme emits nothing.
+  // unset shadowColor defaults to 'shade' — but only under a custom shadow,
+  // so a pristine theme emits nothing
   const shadowColorMode = (!style.shadowColor || style.shadowColor === 'default')
-    ? (isCustomShadow(style.shadow) ? 'shade' : undefined)
+    ? (style.shadow === 'custom' ? 'shade' : undefined)
     : style.shadowColor
   if (shadowColorMode === 'shade' || shadowColorMode === 'primary-shade') {
-    // Per-mode ramp shade — a graded shadow that darkens or lightens
-    // independently of the scheme it sits on; the primary ramp tints it.
     const ramp = shadowColorMode === 'primary-shade' ? 'primary' : 'neutral'
     const shade = { ...SHADOW_SHADE_DEFAULTS, ...style.shadowShade }
     light['--ui-shadow-color'] = shadeRef(ramp, shade.light)
@@ -551,11 +492,8 @@ export function styleTokens(style: StyleOptions): { light: Record<string, string
     dark['--ui-inner-shadow-color'] = value.dark
   }
 
-  // Studio-only: the docs build compiles --default-border-width and
-  // --default-ring-width onto this variable, so EVERY default-width
-  // border/ring/divide in the app follows it live (plain gap-px boundaries
-  // reference it directly). Stripped from exports, which carry a static
-  // @theme value instead.
+  // Studio-only: every default-width border/ring/divide compiles onto this
+  // var live. Stripped from exports, which carry a static @theme value.
   if (style.border && style.border !== 'default') {
     const width = style.border === 'none' ? 0 : style.borderWidth ?? BORDER_WIDTH_DEFAULT
     light['--studio-border-width'] = `${width}px`
@@ -581,8 +519,7 @@ export function styleComponents(style: StyleOptions): Fragments {
       }
     }
   }
-  // Group refinements land after the app-wide value, replacing it for the
-  // components they cover — unsupported values still fall through silently.
+  // group refinements replace the app-wide value for the components they cover
   for (const [group, components] of Object.entries(VARIANT_GROUPS)) {
     const groupVariant = style.defaults?.variants?.[group as VariantGroup]
     if (groupVariant && groupVariant !== 'default') {
@@ -624,12 +561,14 @@ export function styleComponents(style: StyleOptions): Fragments {
 
   const sources = [
     defaults,
-    SHADOW_FRAGMENTS[isCustomShadow(style.shadow) ? 'custom' : (style.shadow === 'flat' ? 'flat' : 'none')],
-    isCustomShadow(style.innerShadow)
+    style.shadow === 'custom'
+      ? (style.shadowPress === false ? { ...SHADOW_FRAGMENTS.custom, button: PRESSLESS_BUTTON } : SHADOW_FRAGMENTS.custom)
+      : style.shadow === 'flat' ? SHADOW_FRAGMENTS.flat : {},
+    style.innerShadow === 'custom'
       ? innerShadowFragments(INNER_HARD)
       : {},
     borderFragments(style),
-    style.borderColor && style.borderColor !== 'default' ? FRAME_COLOR_FRAGMENTS : {}
+    style.borderColor && style.borderColor !== 'default' ? BORDER_COLOR_FRAGMENTS : {}
   ]
 
   const result: Fragments = {}
@@ -650,15 +589,62 @@ export function styleComponents(style: StyleOptions): Fragments {
     }
   }
 
+  for (const fragment of Object.values(result)) {
+    if (fragment.compoundVariants) {
+      fragment.compoundVariants = collapseCompoundVariants(fragment.compoundVariants)
+    }
+  }
+
   return result
+}
+
+/** Concatenate two compound entries' classes, string or per-slot map. */
+function joinCompoundClass(a: unknown, b: unknown): unknown | undefined {
+  if (typeof a === 'string' && typeof b === 'string') return `${a} ${b}`
+  if (a && b && typeof a === 'object' && typeof b === 'object' && !Array.isArray(a) && !Array.isArray(b)) {
+    const merged: Record<string, string> = { ...a as Record<string, string> }
+    for (const [slot, classes] of Object.entries(b as Record<string, string>)) {
+      merged[slot] = merged[slot] ? `${merged[slot]} ${classes}` : classes
+    }
+    return merged
+  }
+  // a string meeting a slot map has no single right target — leave both entries
+  return undefined
+}
+
+/**
+ * Fold compound entries that select the same variants into one. Successive
+ * treatments (a frame's ring, then a border colour) target the same
+ * variant/slot, and tailwind-variants appends their classes in order — so
+ * one entry carrying both renders identically while halving what an export
+ * prints.
+ */
+function collapseCompoundVariants(entries: Array<Record<string, unknown>>): Array<Record<string, unknown>> {
+  const collapsed: Array<Record<string, unknown>> = []
+  const bySelector = new Map<string, Record<string, unknown>>()
+
+  for (const entry of entries) {
+    const { class: classes, ...selector } = entry
+    const key = JSON.stringify(Object.keys(selector).sort().map(name => [name, selector[name]]))
+    const existing = bySelector.get(key)
+    const joined = existing && joinCompoundClass(existing.class, classes)
+    if (joined === undefined) {
+      const copy = { ...entry }
+      bySelector.set(key, copy)
+      collapsed.push(copy)
+      continue
+    }
+    existing!.class = joined
+  }
+
+  return collapsed
 }
 
 /**
  * Merge two `ui.<component>` override fragments so both take effect: slot
- * class strings concatenate (the explicit override last, so it wins the
- * tailwind-merge), compoundVariants arrays append in the same order. Used
- * wherever a doc's explicit `components` meet a style expansion — a spread
- * would silently drop whichever side loses.
+ * class strings concatenate (extra last, winning the tailwind-merge),
+ * compoundVariants append in the same order. A spread would silently drop
+ * whichever side loses.
  */
 export function mergeComponentOverrides(
   base: Record<string, any> | undefined,
@@ -705,14 +691,13 @@ export function mergeUi(
 }
 
 /**
- * The style axes that mean "leave it alone": no shadow (or 'none'), border
- * 'default', and nothing else set. Border 'none' is a REAL choice (strip
- * every ring), so the generic value-check can't be reused for it.
+ * Nothing set that changes rendering. Border 'none' is a REAL choice (strip
+ * every ring), so the generic value-check can't cover it.
  */
 export function isDefaultStyle(style: StyleOptions = {}): boolean {
   const { shadow, innerShadow, border, ...rest } = style
-  return (!shadow || shadow === 'none')
-    && (!innerShadow || innerShadow === 'none')
+  return !shadow
+    && !innerShadow
     && (!border || border === 'default')
     && !Object.values(rest).some(value => value && value !== 'default')
 }

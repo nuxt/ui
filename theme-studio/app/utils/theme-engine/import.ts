@@ -3,7 +3,7 @@ import { SHADES_ALL, DEFAULT_COLORS } from './types'
 import type { StyleOptions, DefaultVariant, DefaultSize, DefaultColor, VariantGroup } from './styles'
 import {
   styleComponents,
-  FRAME_COLOR_VALUES,
+  BORDER_COLOR_VALUES,
   SHADOW_COLOR_VALUES,
   SHADOW_GEOMETRY_DEFAULTS,
   INNER_SHADOW_GEOMETRY_DEFAULTS,
@@ -17,10 +17,9 @@ import { parseUiColorRef, LIBRARY_TOKEN_DEFAULTS } from './resolve'
 import { themeIcons } from '../theme'
 
 /**
- * The inverse of generateCSS/generateConfig: parse an exported (or
- * export-shaped) theme back into a ThemeDoc, so pasting a theme is as
- * first-class as copying one out. Anything outside the export grammar is
- * collected in `skipped` and surfaced — never silently dropped.
+ * The inverse of generateCSS/generateConfig: parse an exported theme back
+ * into a ThemeDoc. Anything outside the export grammar is collected in
+ * `skipped` and surfaced — never silently dropped.
  */
 export interface ThemeImportResult {
   doc: ThemeDoc
@@ -52,10 +51,8 @@ function parseCSS(css: string): ParsedCSS {
   const result: ParsedCSS = { palettes: {}, light: {}, dark: {}, skipped: [] }
   let clean = css.replace(/\/\*[\s\S]*?\*\//g, '')
 
-  // The flat block scanner below can't see nesting, so a conditional
-  // at-rule's inner blocks would import as GLOBAL tokens (a dark-scheme
-  // @media pasted from someone's main.css silently overriding light).
-  // Lift each whole nested at-rule out into `skipped` instead.
+  // The flat block scanner can't see nesting — a nested at-rule's inner
+  // blocks would import as GLOBAL tokens. Lift each whole one into `skipped`.
   clean = clean.replace(/@(?:media|supports|container|layer|scope)[^{}]*\{(?:[^{}]*\{[^{}]*\})*[^{}]*\}/g, (block) => {
     result.skipped.push(block.trim().replace(/\s+/g, ' '))
     return ''
@@ -77,8 +74,7 @@ function parseCSS(css: string): ParsedCSS {
   while ((match = blockRe.exec(clean))) {
     cursor = match.index + match[0].length
 
-    // Everything before the selector's own line (@import lines, stray text)
-    // is preamble — the selector is what follows the last ';'.
+    // The selector is what follows the last ';'; the rest is preamble.
     const segments = match[1]!.split(';')
     outside(segments.slice(0, -1).join('\n'))
     const selector = segments[segments.length - 1]!.trim().replace(/\s+/g, ' ')
@@ -134,9 +130,7 @@ function parseDeclaration(result: ParsedCSS, selector: string, prop: string, val
       return true
     }
     if (/^--shadow-(?:2xs|xs|sm|md|lg|xl|2xl)$/.test(prop)) {
-      // Derived shadow ramp — regenerated from the shadow style on export
-      // (scaled config, or transparent under None), so it carries no
-      // independent data to import; the treatment is read from the classes.
+      // Derived ramp, regenerated on export — carries no independent data.
       return true
     }
     return false
@@ -225,9 +219,8 @@ function parseDeclaration(result: ParsedCSS, selector: string, prop: string, val
     return false
   }
 
-  // Only custom properties are theme tokens — a plain declaration
-  // (background, font-family) must surface in `skipped`, not ride the token
-  // channel into the re-export.
+  // Only custom properties are theme tokens — a plain declaration must
+  // surface in `skipped`, not ride the token channel into the re-export.
   if (selector === ':root, .light' || selector === '.light') {
     if (!prop.startsWith('--')) return false
     // studio-internal vars never carry theme meaning
@@ -245,10 +238,7 @@ function parseDeclaration(result: ParsedCSS, selector: string, prop: string, val
 
 /* ------------------------------------------------- style reconstruction -- */
 
-/**
- * Reconstruct a color choice (named value, or a per-mode neutral/primary
- * ramp shade) from a pair of emitted per-mode values.
- */
+/** Reconstruct a color choice (named, or a per-mode ramp shade) from emitted per-mode values. */
 function matchColorChoice(value: { light?: string, dark?: string }, table: Record<string, { light: string, dark: string }>): { color: string, shade?: { light: Shade, dark: Shade } } | undefined {
   const named = Object.keys(table).find(key => table[key]!.light === value.light && table[key]!.dark === value.dark)
   if (named) return { color: named }
@@ -261,9 +251,9 @@ function matchColorChoice(value: { light?: string, dark?: string }, table: Recor
 }
 
 /**
- * Pull the style-owned variables out of the per-mode records (consuming
- * them) and work backwards to the StyleOptions that would emit them.
- * What remains in light/dark afterwards is plain token overrides.
+ * Consume the style-owned variables out of the per-mode records and work
+ * backwards to the StyleOptions that would emit them; what remains is plain
+ * token overrides.
  */
 function extractStyle(light: Record<string, string>, dark: Record<string, string>): StyleOptions {
   const style: StyleOptions = {}
@@ -275,8 +265,7 @@ function extractStyle(light: Record<string, string>, dark: Record<string, string
     return value
   }
 
-  // A consumed variable the style axis can't express (unknown color value,
-  // single-mode declaration) goes back into the residual maps — it then
+  // What the style axis can't express goes back into the residual maps and
   // survives as a plain token override instead of silently vanishing.
   const putBack = (prop: string, value: { light?: string, dark?: string }) => {
     if (value.light !== undefined) light[prop] = value.light
@@ -290,14 +279,12 @@ function extractStyle(light: Record<string, string>, dark: Record<string, string
     blur: take('--ui-shadow-blur'),
     spread: take('--ui-shadow-spread')
   }
-  const finals = { hard: take('--ui-shadow-final-hard'), soft: take('--ui-shadow-final-soft') }
-  // Force-emitted compositions the shadow-(--ui-shadow-hard*) utilities read
-  // — never a choice of their own, so consume them silently.
-  for (const composed of ['--ui-shadow-hard', '--ui-shadow-hard-lg', '--ui-shadow-hard-sm', '--ui-shadow-hard-half']) {
-    take(composed)
-  }
+  const pressColor = take('--ui-shadow-press-color')
+  // force-emitted compositions — never a choice of their own, consume silently
+  take('--ui-shadow-press')
+  take('--ui-shadow-press-half')
   const shadowColor = take('--ui-shadow-color')
-  const frameColor = take('--ui-frame-color')
+  const frameColor = take('--ui-border-color')
 
   if (geometry.x.light !== undefined) {
     style.shadow = 'custom'
@@ -311,7 +298,7 @@ function extractStyle(light: Record<string, string>, dark: Record<string, string
     if (JSON.stringify(parsed) !== JSON.stringify(SHADOW_GEOMETRY_DEFAULTS)) {
       style.shadowGeometry = parsed
     }
-  } else if (finals.hard.light !== undefined || finals.soft.light !== undefined) {
+  } else if (pressColor.light !== undefined) {
     style.shadow = 'custom'
   }
 
@@ -326,8 +313,7 @@ function extractStyle(light: Record<string, string>, dark: Record<string, string
   if (opacity.light !== undefined && style.shadow) {
     style.shadowOpacity = Number.parseFloat(opacity.light)
   } else {
-    // without a shadow the option would never re-emit (styleTokens gates
-    // opacity on shadow) — as a token it at least round-trips
+    // without a shadow the option would never re-emit; as a token it round-trips
     putBack('--ui-shadow-opacity', opacity)
   }
 
@@ -338,7 +324,7 @@ function extractStyle(light: Record<string, string>, dark: Record<string, string
     blur: take('--ui-inner-shadow-blur'),
     spread: take('--ui-inner-shadow-spread')
   }
-  const innerFinal = take('--ui-shadow-final-inner')
+  const innerFinal = take('--ui-inner-shadow-mix')
   const innerColor = take('--ui-inner-shadow-color')
   take('--ui-inner-shadow')
 
@@ -396,12 +382,12 @@ function extractStyle(light: Record<string, string>, dark: Record<string, string
   }
 
   if (frameColor.light !== undefined || frameColor.dark !== undefined) {
-    const match = matchColorChoice(frameColor, FRAME_COLOR_VALUES)
+    const match = matchColorChoice(frameColor, BORDER_COLOR_VALUES)
     if (match) {
       style.borderColor = match.color as StyleOptions['borderColor']
       if (match.shade) style.borderShade = match.shade
     } else {
-      putBack('--ui-frame-color', frameColor)
+      putBack('--ui-border-color', frameColor)
     }
   }
 
@@ -411,9 +397,8 @@ function extractStyle(light: Record<string, string>, dark: Record<string, string
 /* ------------------------------------------------------------- config -- */
 
 /**
- * Parser for the restricted object-literal grammar generateConfig emits
- * (unquoted keys, single-quoted strings, numbers, booleans, arrays) — a
- * tokenizer, not eval, so pasted content can't execute anything.
+ * Parser for the restricted object-literal grammar generateConfig emits —
+ * a tokenizer, not eval, so pasted content can't execute anything.
  */
 function parseObjectLiteral(source: string, start: number): { value: any, end: number } {
   let i = start
@@ -443,10 +428,8 @@ function parseObjectLiteral(source: string, start: number): { value: any, end: n
         ws()
         if (source[i] !== ':') throw new Error(`Expected ':' at ${i}`)
         i++
-        // Define rather than assign: a pasted key named `__proto__`,
-        // `constructor`, or `prototype` must land as an own data property,
-        // not walk the setter and mutate the prototype (same intent as the
-        // apply-path guards elsewhere).
+        // Define, not assign: a pasted `__proto__`/`constructor` key must
+        // land as an own property, not walk the setter.
         Object.defineProperty(obj, key, {
           value: parseValue(),
           writable: true,
@@ -490,8 +473,7 @@ function parseObjectLiteral(source: string, start: number): { value: any, end: n
     while (i < source.length && source[i] !== quote) {
       if (source[i] === '\\') {
         i++
-        // A backslash at EOF has nothing to escape — stop before appending
-        // the out-of-range `source[i]` (which stringifies to "undefined").
+        // backslash at EOF — don't append out-of-range source[i] ("undefined")
         if (i >= source.length) break
       }
       out += source[i]
@@ -576,7 +558,6 @@ function extractDefaults(components: Record<string, any>): StyleOptions['default
   return Object.keys(defaults).length ? defaults : undefined
 }
 
-/** Border treatment lives only in the class bundles — read it back from them. */
 /** A compound entry's classes, whether written as a string or a slot map. */
 const classOf = (entry: Record<string, unknown>) => typeof entry.class === 'string' ? entry.class : Object.values(entry.class || {}).join(' ')
 
@@ -588,10 +569,8 @@ function detectBorder(components: Record<string, any>): Pick<StyleOptions, 'bord
 
   const widths = texts.flatMap(text => [...text.matchAll(/(?:^|\s)(?:sm:)?ring-(\d)(?:\s|$)/g)].map(match => Number(match[1])))
   if (!widths.length) return {}
-  // A mixed-width paste (ring-1 here, ring-3 there) has no single correct
-  // answer, and picking the first by object-iteration order makes the result
-  // arbitrary. Pick the most common width — the dominant treatment — and
-  // break ties toward the larger width, so the choice is deterministic.
+  // A mixed-width paste has no single right answer — take the most common
+  // width, ties toward the larger, so the choice is deterministic.
   const counts = new Map<number, number>()
   for (const value of widths) counts.set(value, (counts.get(value) ?? 0) + 1)
   const width = [...counts.entries()].sort((a, b) => b[1] - a[1] || b[0] - a[0])[0]![0]
@@ -616,8 +595,7 @@ function detectFrame(components: Record<string, any>): boolean {
 /** Shadow fallback when only a config was pasted (CSS normally decides). */
 function detectShadow(components: Record<string, any>): StyleOptions['shadow'] {
   const slots = Object.values(components).flatMap(component => Object.values(component?.slots || {})) as string[]
-  if (slots.some(classes => classes.includes('--ui-shadow-hard') || classes.includes('var(--ui-shadow-offset-x)'))) return 'custom'
-  if (slots.some(classes => classes.includes('--ui-shadow-final-soft'))) return 'custom'
+  if (slots.some(classes => classes.includes('--ui-shadow-press') || classes.includes('var(--ui-shadow-offset-x)'))) return 'custom'
   // the flat treatment is bare shadow-none on the overlay surfaces
   if (components.popover?.slots?.content?.includes('shadow-none') && components.toast?.slots?.root?.includes('shadow-none')) return 'flat'
   return undefined
@@ -627,22 +605,19 @@ function detectShadow(components: Record<string, any>): StyleOptions['shadow'] {
 function detectInnerShadow(components: Record<string, any>): StyleOptions['innerShadow'] {
   const slots = Object.values(components).flatMap(component => Object.values(component?.slots || {})) as string[]
   if (slots.some(classes => classes.includes('(--ui-inner-shadow)'))) return 'custom'
-  if (slots.some(classes => classes.includes('--ui-shadow-final-inner'))) return 'custom'
+  if (slots.some(classes => classes.includes('--ui-inner-shadow-mix'))) return 'custom'
   return undefined
 }
 
 /**
- * Old exports carried border widths as class fragments (ring-2, border-b-3,
- * divide-y-2 …). Widths now live on the style axis, so those tokens are
- * noise: drop them, and renormalize old frame literals (ring-N ring-inset …)
- * to the default-width form so subtraction still recognizes them.
+ * Old exports carried border widths as class fragments (ring-2, divide-y-2
+ * …); widths now live on the style axis. Drop them, and renormalize old
+ * frame literals to the default-width form so subtraction recognizes them.
  */
 function normalizeLegacyWidths(components: Record<string, any>) {
-  // Only width-bearing legacy fragments are noise (ring-2, border-b-3,
-  // divide-y-2 …); the width digit is REQUIRED. A bare presence token
-  // (`border`, `ring`, `divide-y`, `lg:not-last:border-e`) is a real class —
-  // the new style axis never regenerates it — so scrubbing it would corrupt a
-  // genuine divider/border rather than just strip a migrated width.
+  // The width digit is REQUIRED: a bare presence token (`border`, `divide-y`)
+  // is a real class the style axis never regenerates — scrubbing it would
+  // corrupt a genuine divider rather than strip a migrated width.
   const WIDTH_TOKEN = /^(?:sm:)?(?:ring|divide-y|border(?:-[tbesxy])?)-[0-4]$|^lg:not-last:border-e-[0-4]$/
   const scrub = (classes: unknown): string | undefined => {
     if (typeof classes !== 'string') return undefined
@@ -689,10 +664,7 @@ function normalizeLegacyWidths(components: Record<string, any>) {
   }
 }
 
-/**
- * Remove the fragments the reconstructed style regenerates, leaving only
- * genuinely explicit component overrides for doc.components.
- */
+/** Remove the fragments the reconstructed style regenerates — only genuinely explicit overrides remain. */
 function subtractStyleExpansion(components: Record<string, any>, style: StyleOptions): Record<string, any> {
   const expected = styleComponents(style)
   const remaining: Record<string, any> = {}
@@ -781,14 +753,20 @@ export function importTheme(input: { css?: string, config?: string }): ThemeImpo
       style.border = border.border
       if (border.borderWidth !== undefined) style.borderWidth = border.borderWidth
       if (border.frame) style.frame = true
-      // Only pastes that actually carry legacy ring-N width tokens get
-      // scrubbed — running unconditionally would eat genuine user classes
-      // (border-2, divide-y) out of config-only pastes.
+      // Scrub only pastes that carry legacy ring-N tokens — unconditionally
+      // it would eat genuine user classes out of config-only pastes.
       normalizeLegacyWidths(components)
     }
   }
   const defaults = extractDefaults(components)
   if (defaults) style.defaults = defaults
+
+  // Press-off exports keep the button's resting shadow but drop the
+  // hover/active choreography — detect it so the expansion subtracts cleanly.
+  if (style.shadow === 'custom') {
+    const base = String(components.button?.slots?.base ?? '')
+    if (base.includes('--ui-shadow-press') && !base.includes('hover:translate')) style.shadowPress = false
+  }
 
   const explicit = subtractStyleExpansion(components, style)
   if (Object.keys(explicit).length) doc.components = explicit
@@ -822,10 +800,9 @@ export function importTheme(input: { css?: string, config?: string }): ThemeImpo
       // its .dark counterpart is generated, not a token choice
       if (css.dark['--ui-primary'] === 'white') delete css.dark['--ui-primary']
     }
-    // The export restates the library's dark default under `.dark` for any
-    // token overridden in light only (the `:root, .light` block would win
-    // the source-order tie in dark mode otherwise). Generated, not a choice
-    // — drop it so the round-trip doesn't grow explicit tokens.
+    // The export restates the library's dark default for light-only
+    // overrides (source-order tie) — generated, not a choice; drop it so the
+    // round-trip doesn't grow explicit tokens.
     for (const [key, value] of Object.entries(css.dark)) {
       if (key in css.light && value === (LIBRARY_TOKEN_DEFAULTS.dark as Record<string, string>)[key]) {
         Reflect.deleteProperty(css.dark, key)

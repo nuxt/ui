@@ -2,14 +2,11 @@
 const { track } = useAnalytics()
 const { resetTheme, icon: iconSet } = useTheme()
 
-// The studio toolbar skins to the applied pack: undo/redo/reset/export/
-// fullscreen come from the pack's studio glyphs, while import and the group
-// picker's chevron reuse the standard `upload`/`chevronDown` semantic keys
-// (read off appConfig.ui.icons, already the active pack's resolved map).
+// Toolbar skins to the applied icon pack; import/chevron reuse the standard
+// semantic keys off appConfig.ui.icons.
 const studioIcons = useStudioIcons()
 
-// View and fullscreen are app-level state: the site header hosts the view
-// switcher while on /theme and hides itself in fullscreen.
+// App-level: the site header hosts the view switcher and hides in fullscreen.
 const { view, fullscreen } = useThemeStudioView()
 const { past, future, snapshot, align, capture, undo, redo } = useThemeStudioHistory()
 
@@ -27,9 +24,8 @@ onMounted(() => {
   align(snapshot())
 })
 
-// A debounced capture folds slider-drag bursts (and a reset) into single
-// history steps. The snapshot spans the doc AND the editor's curve/pin params,
-// so undo restores the palette editor's state, not just the visible colours.
+// Debounced capture folds slider-drag bursts into single history steps; the
+// snapshot spans the doc AND the editor's curve/pin params.
 let captureTimeout: ReturnType<typeof setTimeout> | undefined
 watch(() => (mounted.value ? snapshot() : undefined), (snap) => {
   if (!snap) return
@@ -37,12 +33,9 @@ watch(() => (mounted.value ? snapshot() : undefined), (snap) => {
   captureTimeout = setTimeout(() => capture(snap), 350)
 })
 
-// ⌃⇧D flips the mode without a click, so open panels survive the switch.
-// The chord threads several needles: bare Shift+D is a screen-reader
-// landmark key (and a WCAG 2.1.4 character shortcut); macOS eats ⌘⇧L
-// (Search-with-Google Service) and fires ⌘⇧D's menu binding (bookmark all
-// tabs) at the NSMenu level where pages can't block it. Control chords
-// have no macOS menu bindings, and Windows accelerators are preventable.
+// ⌃⇧D: bare Shift+D is a screen-reader landmark key, and macOS fires ⌘⇧D/⌘⇧L
+// menu bindings at the NSMenu level where pages can't block them — control
+// chords are the safe zone.
 const colorMode = useColorMode()
 function toggleColorMode() {
   colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'
@@ -58,15 +51,9 @@ const groupDirtyFlags = {
   style: groupDirty('style')
 }
 
-/**
- * The toolbar reset is two-stage: edits on top of a preset reset back to
- * the preset (matching the section resets' baseline), and a second press —
- * already clean at the preset — clears the preset back to stock Nuxt UI.
- * Disabled only once nothing diverges from stock.
- */
-// Gated on `mounted`: the persisted theme is client-only, and a state that
-// diverges from the SSR render would leave stale hydration-adopted
-// attributes (a disabled= that never lifts) on the button.
+// Two-stage reset: edits reset back to the preset, a second press clears the
+// preset back to stock. Gated on `mounted` — the persisted theme is client-only
+// and hydration would adopt a disabled= that never lifts.
 const anyDirty = computed(() => mounted.value && Object.values(groupDirtyFlags).some(flag => flag.value))
 const baselinePreset = computed(() => mounted.value ? presets.find(preset => preset.id === activePreset.value) : undefined)
 const resetsToPreset = computed(() => Boolean(baselinePreset.value) && anyDirty.value)
@@ -81,11 +68,8 @@ function resetToBaseline() {
   else resetTheme()
 }
 
-/**
- * The mode tabs follow the app-wide default size setting like every other
- * toolbar control — but one step down: tabs at the default size read a
- * size too big next to the buttons.
- */
+// Mode tabs follow the default size setting, one step down — full size reads
+// too big next to the buttons.
 const SIZE_LADDER = ['xs', 'sm', 'md', 'lg', 'xl'] as const
 const modeTabsSize = computed(() => {
   const base = style.value.defaults?.size
@@ -112,26 +96,20 @@ defineShortcuts({
   f: () => (fullscreen.value = !fullscreen.value)
 })
 
-// Esc exits fullscreen — but NOT through defineShortcuts, which
-// preventDefaults every matched key and would stop Reka's dismissable
-// layers from ever seeing Escape (no popover on /theme could close). A
-// plain listener defers whenever a layer is open, so Esc closes the
-// popover first and exits fullscreen on the next press.
+// Esc exits fullscreen — not via defineShortcuts, whose preventDefault would
+// stop Reka's dismissable layers from ever seeing Escape. A plain listener
+// defers while a layer is open, so Esc closes the popover first.
 function onEscape(event: KeyboardEvent) {
   if (event.key !== 'Escape' || !fullscreen.value || event.defaultPrevented) return
-  // Only VISIBLE layers defer — pre-mounted closed overlays (the search
-  // palette) keep their layer marker in the DOM.
+  // only VISIBLE layers defer — closed overlays keep their marker in the DOM
   const layers = document.querySelectorAll('[data-dismissable-layer]')
   if ([...layers].some(layer => layer.getClientRects().length)) return
   fullscreen.value = false
 }
 onMounted(() => window.addEventListener('keydown', onEscape))
 
-// The fullscreen state is app-level (the site header gates on it) — never
-// let it leak past the studio. The pending capture flushes rather than
-// dies: an edit made inside the debounce window would otherwise vanish
-// from history, and a pending post-restore realign would stay armed and
-// swallow the next edit after remount.
+// Fullscreen must not leak past the studio. The pending capture flushes rather
+// than dies — an edit inside the debounce window would vanish from history.
 onUnmounted(() => {
   window.removeEventListener('keydown', onEscape)
   fullscreen.value = false
@@ -145,13 +123,9 @@ const settingGroups = [
   { label: 'Style', value: 'style' }
 ] as const
 
-/**
- * Fullscreen toolbar reveal. Pointer proximity is tracked with a mousemove
- * listener instead of an invisible hover overlay — an overlay would eat
- * clicks on the preview's bottom edge. The bar also pins open while any of
- * its panels is open: their content portals to <body>, so hover/focus-within
- * alone would retract the bar underneath its own popovers.
- */
+// Fullscreen reveal via mousemove, not a hover overlay (it would eat clicks on
+// the preview's bottom edge). The bar pins open while a panel is open — panel
+// content portals to <body>, so hover alone would retract it under its popovers.
 const nearBottom = ref(false)
 function onPointerNear(event: MouseEvent) {
   nearBottom.value = window.innerHeight - event.clientY <= 96
@@ -175,44 +149,30 @@ const shareMode = ref<'import' | 'export'>('export')
 </script>
 
 <template>
-  <!-- The app root (#__nuxt) paints bg-default via nuxt.config rootAttrs —
-       the page tint composites on top of it. -->
+  <!-- page tint composites on the app root's bg-default (nuxt.config rootAttrs) -->
   <main class="bg-elevated/25">
     <UContainer :class="fullscreen && 'max-w-none px-0 sm:px-0 lg:px-0'">
-      <!-- Structured borders (like /releases and /templates): border-x rails
-           run from the header's bottom border to the viewport bottom at the
-           container's padding edge — no floating card. -->
+      <!-- structured borders like /releases: border-x rails, no floating card -->
       <div class="flex flex-col w-full bg-default" :class="fullscreen ? 'h-dvh' : 'h-[calc(100dvh-var(--ui-header-height))] border-x border-default'">
-        <!-- The preview: the grid scrolls inside it; the app-shell views own
-             their height and scroll internally. [contain:paint] puts hard
-             paint containment on the views' own scrollers — Chromium won't
-             clip nested composited layers (sticky headers, filtered glows)
-             by an ancestor's overflow alone. -->
-        <!-- Keyed on the icon pack: the demo views resolve icons into plain
-             data arrays at setup, so they can't react to a live pack swap in
-             place — remounting on the (infrequent) swap re-resolves them,
-             which is far cheaper than making every demo's data computed. -->
+        <!-- [contain:paint]: Chromium won't clip nested composited layers by
+             an ancestor's overflow alone. Keyed on the icon pack: demo views
+             resolve icons at setup, so a pack swap remounts to re-resolve. -->
         <div :key="iconSet" class="flex-1 min-h-0 overflow-hidden [&>*]:[contain:paint]">
           <Playground v-if="view === 'grid'" />
-          <ThemeStudioViewDashboard v-else-if="view === 'dashboard'" />
-          <ThemeStudioViewChat v-else-if="view === 'chat'" />
-          <ThemeStudioViewSaas v-else-if="view === 'saas'" />
-          <ThemeStudioViewLanding v-else-if="view === 'landing'" />
-          <ThemeStudioViewDocs v-else-if="view === 'docs'" />
-          <ThemeStudioViewPortfolio v-else-if="view === 'portfolio'" />
-          <ThemeStudioViewChangelog v-else-if="view === 'changelog'" />
-          <ThemeStudioViewEditor v-else-if="view === 'editor'" />
-          <ThemeStudioViewA11y v-else-if="view === 'a11y'" />
+          <LazyThemeStudioViewDashboard v-else-if="view === 'dashboard'" />
+          <LazyThemeStudioViewChat v-else-if="view === 'chat'" />
+          <LazyThemeStudioViewSaas v-else-if="view === 'saas'" />
+          <LazyThemeStudioViewLanding v-else-if="view === 'landing'" />
+          <LazyThemeStudioViewDocs v-else-if="view === 'docs'" />
+          <LazyThemeStudioViewPortfolio v-else-if="view === 'portfolio'" />
+          <LazyThemeStudioViewChangelog v-else-if="view === 'changelog'" />
+          <LazyThemeStudioViewEditor v-else-if="view === 'editor'" />
+          <LazyThemeStudioViewA11y v-else-if="view === 'a11y'" />
         </div>
 
-        <!-- One toolbar at the bottom: history leftmost, presets and
-             setting-group popovers, document actions on the right. In
-             fullscreen it floats over the bottom edge at the normal
-             container width, peeking a few pixels until the pointer
-             nears the bottom (Esc still exits); only that strip catches
-             the pointer so the preview stays clickable. -->
-        <!-- UContainer's own recipe, so the floating bar's edges line up
-             with every other page's content. -->
+        <!-- In fullscreen the toolbar floats over the bottom edge at
+             UContainer's own recipe (edges line up with other pages); only
+             the strip catches the pointer so the preview stays clickable. -->
         <div :class="fullscreen ? 'group fixed bottom-0 inset-x-0 z-50 pointer-events-none w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8' : 'shrink-0'">
           <!-- thin touch affordance only — mouse reveal is proximity-driven -->
           <div v-if="fullscreen" class="absolute bottom-0 inset-x-0 h-2 pointer-events-auto" />
@@ -259,7 +219,10 @@ const shareMode = ref<'import' | 'export'>('export')
                 color="primary"
                 class="shrink-0"
                 :ui="{
-                  list: 'ring ring-accented ring-inset rounded-md'
+                  /* match the toolbar's subtle buttons — their ring is the
+                     stock variant, not themed, so the pill needs its own */
+                  list: 'ring ring-accented ring-inset rounded-md',
+                  indicator: 'rounded-sm'
                 }"
               />
               <span v-else class="shrink-0 w-17" />
@@ -267,9 +230,8 @@ const shareMode = ref<'import' | 'export'>('export')
 
             <span class="flex-1" />
 
-            <!-- The header center hosts the view switcher on desktop; the
-               toolbar keeps one for mobile and for fullscreen, where the
-               header is hidden. -->
+            <!-- desktop's switcher lives in the header; this one covers
+                 mobile and fullscreen -->
             <ThemeStudioViewSwitcher
               v-model:open="openPanels.view"
               :content="{ align: 'end' }"
