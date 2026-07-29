@@ -57,6 +57,7 @@ Use the `items` prop as an array of objects with the following properties:
 
 - `icon?: string`{lang="ts-type"}
 - `label?: string`{lang="ts-type"}
+- `value?: string | number`{lang="ts-type"}
 - `trailingIcon?: string`{lang="ts-type"}
 - `defaultExpanded?: boolean`{lang="ts-type"}
 - `disabled?: boolean`{lang="ts-type"}
@@ -68,7 +69,7 @@ Use the `items` prop as an array of objects with the following properties:
 - `ui?: { item?: ClassNameValue, itemWithChildren?: ClassNameValue, link?: ClassNameValue, linkLeadingIcon?: ClassNameValue, linkLabel?: ClassNameValue, linkTrailing?: ClassNameValue, linkTrailingIcon?: ClassNameValue, listWithChildren?: ClassNameValue }`{lang="ts-type"}
 
 ::note
-A unique identifier is required for each item. The component will use the `label` prop as identifier if no `get-key` is provided. Ideally you should provide a `get-key` function prop to return a unique identifier. Alternatively, you can use the `labelKey` prop to specify which property to use as the unique identifier.
+A unique identifier is required for each item. By default, the component uses the `value` property and falls back to `label` when no value is provided. Use the `valueKey` prop to specify a different property, or `getKey` to compute a unique identifier. The `labelKey` prop only changes which property is displayed as the label.
 ::
 
 ::component-code

@@ -85,7 +85,7 @@ describe('Tree', () => {
     expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 
-  it('uses valueKey to keep duplicate labels independent', async () => {
+  it('uses a custom valueKey to keep duplicate labels independent', async () => {
     const wrapper = await mountSuspended(Tree, {
       props: {
         valueKey: 'path',
@@ -113,29 +113,45 @@ describe('Tree', () => {
       }
     })
 
-    const items = wrapper.findAll('[role="treeitem"]')
-    const nestedReferences = items.find(item => item.text() === 'references' && item.attributes('aria-level') === '2')
+    const foundItems = wrapper.findAll('[role="treeitem"]')
+    const nestedReferences = foundItems.find(item => item.text() === 'references' && item.attributes('aria-level') === '2')
 
     expect(nestedReferences).toBeDefined()
     await nestedReferences!.trigger('click')
 
-    const updatedItems = wrapper.findAll('[role="treeitem"]')
-    const rootReferences = updatedItems.find(item => item.text() === 'references' && item.attributes('aria-level') === '1')
-    const reopenedNestedReferences = updatedItems.find(item => item.text() === 'references' && item.attributes('aria-level') === '2')
+    const updatedFoundItems = wrapper.findAll('[role="treeitem"]')
+    const rootReferences = updatedFoundItems.find(item => item.text() === 'references' && item.attributes('aria-level') === '1')
+    const reopenedNestedReferences = updatedFoundItems.find(item => item.text() === 'references' && item.attributes('aria-level') === '2')
 
     expect(rootReferences?.attributes('aria-expanded')).toBe('true')
     expect(reopenedNestedReferences?.attributes('aria-expanded')).toBe('false')
   })
 
-  it('keeps label keys when valueKey is not provided', async () => {
+  it('uses value as the default item key', async () => {
+    const wrapper = await mountSuspended(Tree, {
+      props: {
+        expanded: ['root-references'],
+        items: [
+          {
+            label: 'references',
+            value: 'root-references',
+            children: [{ label: 'nuxt.md', value: 'root-references/nuxt.md' }]
+          }
+        ]
+      }
+    })
+
+    expect(wrapper.get('[role="treeitem"]').attributes('aria-expanded')).toBe('true')
+  })
+
+  it('falls back to label when value is not provided', async () => {
     const wrapper = await mountSuspended(Tree, {
       props: {
         expanded: ['references'],
         items: [
           {
             label: 'references',
-            value: 'root-references',
-            children: [{ label: 'nuxt.md', value: 'root-references/nuxt.md' }]
+            children: [{ label: 'nuxt.md' }]
           }
         ]
       }
