@@ -130,6 +130,37 @@ describe('NavigationMenu', () => {
     expect(await axe(wrapper.element)).toHaveNoViolations()
   })
 
+  // Regression: in `vertical` orientation the Accordion drives roving arrow-key
+  // navigation over every `[data-reka-collection-item]`. Each candidate must be a
+  // natively focusable element (`a`/`button`) — a non-focusable `<span>` trigger
+  // (the previous trailing chevron) traps focus and breaks keyboard navigation.
+  it('keeps every keyboard navigation target focusable in vertical orientation', async () => {
+    const wrapper = await mountSuspended(NavigationMenu, {
+      props: {
+        orientation: 'vertical',
+        // open every section so nested children are rendered too
+        type: 'multiple',
+        defaultValue: ['item-0', 'item-1'],
+        items: [[
+          { label: 'Trigger', icon: 'i-lucide-box', children: [{ label: 'Child', to: '/child' }] },
+          // link + children (no `type: 'trigger'`) must also be a focusable trigger
+          { label: 'Link with children', to: '/parent', children: [{ label: 'Nested', to: '/nested' }] },
+          { label: 'Plain link', to: '/plain' }
+        ]]
+      }
+    })
+
+    const candidates = [...wrapper.element.querySelectorAll('[data-reka-collection-item]')]
+    expect(candidates.length).toBeGreaterThan(0)
+
+    for (const el of candidates) {
+      // only natively focusable elements may be roving-focus targets
+      expect(['A', 'BUTTON']).toContain(el.tagName)
+      // and they must not nest another interactive control (invalid + double stop)
+      expect(el.querySelectorAll('a, button, [tabindex]')).toHaveLength(0)
+    }
+  })
+
   test('should have the correct types', () => {
     // normal
     expectSlotProps('item', () => NavigationMenu({

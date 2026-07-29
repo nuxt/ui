@@ -57,7 +57,7 @@ export interface NavigationMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'cu
   /**
    * The type of the item.
    * The `label` type is only displayed in `vertical` orientation.
-   * The `trigger` type is used to force the item to be collapsible when its a link in `vertical` orientation.
+   * In `vertical` orientation, items with `children` are always rendered as collapsible accordion triggers; the `trigger` type is kept for backward compatibility.
    * @defaultValue 'link'
    */
   type?: 'label' | 'trigger' | 'link'
@@ -335,11 +335,12 @@ function onLinkTrailingClick(e: Event, item: NavigationMenuItem) {
     return
   }
 
+  // In `horizontal` orientation the trailing area lives inside the link/trigger,
+  // so prevent navigation to let the trigger toggle the menu instead.
+  // In `vertical` orientation the whole row is an `AccordionTrigger`, so the
+  // click must bubble up to toggle the accordion (no `stopPropagation`).
   if (props.orientation === 'horizontal') {
     e.preventDefault()
-  } else if (props.orientation === 'vertical' && !props.collapsed) {
-    e.preventDefault()
-    e.stopPropagation()
   }
 }
 </script>
@@ -373,10 +374,8 @@ function onLinkTrailingClick(e: Event, item: NavigationMenuItem) {
         <UIcon v-if="item.target === '_blank' && props.externalIcon !== false" :name="typeof props.externalIcon === 'string' ? props.externalIcon : appConfig.ui.icons.external" data-slot="linkLabelExternalIcon" :class="ui.linkLabelExternalIcon({ class: [props.ui?.linkLabelExternalIcon, item.ui?.linkLabelExternalIcon], active })" />
       </span>
 
-      <component
-        :is="props.orientation === 'vertical' && item.children?.length && !props.collapsed ? AccordionTrigger : 'span'"
+      <span
         v-if="(item.badge || item.badge === 0) || (props.orientation === 'horizontal' && (item.children?.length || !!slots[(item.slot ? `${item.slot}-content` : 'item-content') as keyof NavigationMenuSlots<T>])) || (props.orientation === 'vertical' && item.children?.length) || item.trailingIcon || !!slots[(item.slot ? `${item.slot}-trailing` : 'item-trailing') as keyof NavigationMenuSlots<T>]"
-        :as="props.orientation === 'vertical' && item.children?.length && !props.collapsed ? 'span' : undefined"
         data-slot="linkTrailing"
         :class="ui.linkTrailing({ class: [props.ui?.linkTrailing, item.ui?.linkTrailing] })"
         @click="(e: Event) => onLinkTrailingClick(e, item)"
@@ -395,7 +394,7 @@ function onLinkTrailingClick(e: Event, item: NavigationMenuItem) {
           <UIcon v-if="(props.orientation === 'horizontal' && (item.children?.length || !!slots[(item.slot ? `${item.slot}-content` : 'item-content') as keyof NavigationMenuSlots<T>])) || (props.orientation === 'vertical' && item.children?.length)" :name="item.trailingIcon || props.trailingIcon || appConfig.ui.icons.chevronDown" data-slot="linkTrailingIcon" :class="ui.linkTrailingIcon({ class: [props.ui?.linkTrailingIcon, item.ui?.linkTrailingIcon], active })" />
           <UIcon v-else-if="item.trailingIcon" :name="item.trailingIcon" data-slot="linkTrailingIcon" :class="ui.linkTrailingIcon({ class: [props.ui?.linkTrailingIcon, item.ui?.linkTrailingIcon], active })" />
         </slot>
-      </component>
+      </span>
     </slot>
   </DefineLinkTemplate>
 
@@ -409,9 +408,9 @@ function onLinkTrailingClick(e: Event, item: NavigationMenuItem) {
       <div v-if="props.orientation === 'vertical' && item.type === 'label' && !props.collapsed" data-slot="label" :class="ui.label({ class: [props.ui?.label, item.ui?.label, item.class] })">
         <ReuseLinkTemplate :item="item" :index="index" />
       </div>
-      <ULink v-else-if="item.type !== 'label'" v-slot="{ active, ...slotProps }" v-bind="(props.orientation === 'vertical' && item.children?.length && !props.collapsed && item.type === 'trigger') ? {} : pickLinkProps(item as Omit<NavigationMenuItem, 'type'>)" custom>
+      <ULink v-else-if="item.type !== 'label'" v-slot="{ active, ...slotProps }" v-bind="(props.orientation === 'vertical' && item.children?.length && !props.collapsed) ? {} : pickLinkProps(item as Omit<NavigationMenuItem, 'type'>)" custom>
         <component
-          :is="(props.orientation === 'horizontal' && (item.children?.length || !!slots[(item.slot ? `${item.slot}-content` : 'item-content') as keyof NavigationMenuSlots<T>])) ? NavigationMenuTrigger : ((props.orientation === 'vertical' && item.children?.length && !props.collapsed && !(slotProps as any).href) ? AccordionTrigger : NavigationMenuLink)"
+          :is="(props.orientation === 'horizontal' && (item.children?.length || !!slots[(item.slot ? `${item.slot}-content` : 'item-content') as keyof NavigationMenuSlots<T>])) ? NavigationMenuTrigger : ((props.orientation === 'vertical' && item.children?.length && !props.collapsed) ? AccordionTrigger : NavigationMenuLink)"
           as-child
           :active="active || item.active"
           :disabled="item.disabled"
