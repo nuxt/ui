@@ -376,10 +376,6 @@ function seed(values: PaletteCurveParams) {
   windows.value.hue = hueWindow(next.hue)
 }
 
-// While dragging, a global class enables short colour transitions so the page
-// glides between throttle ticks.
-let dragEndTimeout: ReturnType<typeof setTimeout> | undefined
-
 function onDragStart() {
   // Editing a curve commits the lens (look unchanged, sliders reset) so a
   // later modifier edit can't throw the drag away.
@@ -389,14 +385,9 @@ function onDragStart() {
     effectAmount.value = 100
   }
   isDragging.value = true
-  clearTimeout(dragEndTimeout)
-  document.documentElement.classList.add('theme-studio-dragging')
 }
 
 function onDragEnd() {
-  dragEndTimeout = setTimeout(() => {
-    document.documentElement.classList.remove('theme-studio-dragging')
-  }, 200)
   isDragging.value = false
   // Land once on the reactive path — a pending trailing throttle can't be
   // relied on to fire after release; applyReactive clears the inline preview.
@@ -409,12 +400,8 @@ function onDragEnd() {
 }
 
 onUnmounted(() => {
-  clearTimeout(dragEndTimeout)
-  if (import.meta.client) {
-    document.documentElement.classList.remove('theme-studio-dragging')
-    // the fold can unmount mid-drag — don't strand inline preview vars
-    clearCssomPreview()
-  }
+  // the fold can unmount mid-drag — don't strand inline preview vars
+  if (import.meta.client) clearCssomPreview()
 })
 
 /** Fit curves from whatever palette the alias currently shows. */
@@ -509,6 +496,7 @@ function resetEffects() {
         <div>
           <ThemeStudioCurveEditor
             v-model="params[tab]"
+            :label="tabs.find(({ value }) => value === tab)!.label"
             :y-min="windows[tab].min"
             :y-max="windows[tab].max"
             :stop-colors="stopColors"

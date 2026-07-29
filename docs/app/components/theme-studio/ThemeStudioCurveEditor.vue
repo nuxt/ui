@@ -3,6 +3,8 @@ import { sampleCurve, SHADES, shadeX, parseColor, oklchToRgb } from '../../utils
 import type { ChannelCurve } from '../../utils/theme-engine'
 
 const props = defineProps<{
+  /** Channel name, for the handles' accessible labels. */
+  label: string
   /** Display window for the channel value axis */
   yMin: number
   yMax: number
@@ -218,11 +220,91 @@ function onPointerUp(event: PointerEvent) {
   }
 }
 
+type Handle = 'y0' | 'p1' | 'p2' | 'y1'
+
+const keyEditing = ref(false)
+let keyEndTimeout: ReturnType<typeof setTimeout> | undefined
+
+// A run of keypresses is one edit: dragEnd settles after a pause so the
+// parent commits once, as it does for a pointer drag.
+function beginKeyEdit() {
+  if (!keyEditing.value) {
+    keyEditing.value = true
+    emit('dragStart')
+  }
+  clearTimeout(keyEndTimeout)
+  keyEndTimeout = setTimeout(() => {
+    keyEditing.value = false
+    emit('dragEnd')
+  }, 300)
+}
+
+function nudge(handle: Handle, axis: 'x' | 'y', direction: number, coarse: boolean) {
+  const c = curve.value
+  if (axis === 'y') {
+    const step = (props.yMax - props.yMin) / (coarse ? 10 : 100) * direction
+    const clamp = (value: number) => Math.min(props.yMax, Math.max(props.yMin, value))
+    // endpoints carry their control handle, matching the pointer drag
+    if (handle === 'y0') curve.value = { ...c, y0: clamp(c.y0 + step), p1y: clamp(c.p1y + step) }
+    else if (handle === 'y1') curve.value = { ...c, y1: clamp(c.y1 + step), p2y: clamp(c.p2y + step) }
+    else if (handle === 'p1') curve.value = { ...c, p1y: clamp(c.p1y + step) }
+    else curve.value = { ...c, p2y: clamp(c.p2y + step) }
+    return
+  }
+  const step = (coarse ? 0.1 : 0.01) * direction
+  const clamp = (value: number) => Math.min(1, Math.max(0, value))
+  if (handle === 'p1') curve.value = { ...c, p1x: clamp(c.p1x + step) }
+  else if (handle === 'p2') curve.value = { ...c, p2x: clamp(c.p2x + step) }
+}
+
+function jump(handle: Handle, to: 'min' | 'max') {
+  const c = curve.value
+  const value = to === 'min' ? props.yMin : props.yMax
+  if (handle === 'y0') curve.value = { ...c, y0: value }
+  else if (handle === 'y1') curve.value = { ...c, y1: value }
+  else if (handle === 'p1') curve.value = { ...c, p1y: value }
+  else curve.value = { ...c, p2y: value }
+}
+
+function onKeydown(handle: Handle, event: KeyboardEvent) {
+  // a pin owns its endpoint — same lock the pointer path applies
+  if ((handle === 'y0' && startPinned.value) || (handle === 'y1' && endPinned.value)) return
+
+  const steps: Record<string, () => void> = {
+    ArrowUp: () => nudge(handle, 'y', 1, event.shiftKey),
+    ArrowDown: () => nudge(handle, 'y', -1, event.shiftKey),
+    ArrowRight: () => nudge(handle, 'x', 1, event.shiftKey),
+    ArrowLeft: () => nudge(handle, 'x', -1, event.shiftKey),
+    Home: () => jump(handle, 'min'),
+    End: () => jump(handle, 'max')
+  }
+  const step = steps[event.key]
+  if (!step) return
+
+  step()
+  event.preventDefault()
+  beginKeyEdit()
+}
+
+/** Rounded for `aria-valuenow` — hue reads in degrees, the rest need decimals. */
+function readout(value: number) {
+  return props.yMax - props.yMin > 10 ? Math.round(value) : Number(value.toFixed(3))
+}
+
+const handles = computed(() => [
+  { id: 'y0' as const, label: `${props.label} start`, cx: toX(0), cy: toHandleY(startY.value), value: startY.value, locked: startPinned.value },
+  { id: 'p1' as const, label: `${props.label} control point 1`, cx: toX(curve.value.p1x), cy: toHandleY(curve.value.p1y), value: curve.value.p1y, locked: false },
+  { id: 'p2' as const, label: `${props.label} control point 2`, cx: toX(curve.value.p2x), cy: toHandleY(curve.value.p2y), value: curve.value.p2y, locked: false },
+  { id: 'y1' as const, label: `${props.label} end`, cx: toX(1), cy: toHandleY(endY.value), value: endY.value, locked: endPinned.value }
+])
+
 // Closing the fold mid-drag unmounts the SVG without a pointerup — emit dragEnd
 // so the parent isn't left with isDragging and stranded preview vars.
 onUnmounted(() => {
-  if (dragging.value) {
+  clearTimeout(keyEndTimeout)
+  if (dragging.value || keyEditing.value) {
     dragging.value = null
+    keyEditing.value = false
     emit('dragEnd')
   }
 })
@@ -311,6 +393,28 @@ onUnmounted(() => {
         :fill="stopColors?.[stopColors.length - 1] || 'currentColor'"
         class="stroke-(--ui-text-highlighted)"
         stroke-width="1.5"
+      />
+
+      <!-- Focus layer over the decorative handles. Transparent fill still
+           hit-tests (`none` would not), so drags keep bubbling to the svg. -->
+      <circle
+        v-for="handle in handles"
+        :key="handle.id"
+        :cx="handle.cx"
+        :cy="handle.cy"
+        r="6"
+        fill="transparent"
+        stroke="transparent"
+        stroke-width="1.5"
+        :tabindex="handle.locked ? -1 : 0"
+        role="slider"
+        :aria-label="handle.label"
+        :aria-valuemin="yMin"
+        :aria-valuemax="yMax"
+        :aria-valuenow="readout(handle.value)"
+        :aria-disabled="handle.locked || undefined"
+        class="cursor-grab focus:outline-none focus-visible:stroke-(--ui-primary)"
+        @keydown="onKeydown(handle.id, $event)"
       />
     </svg>
   </div>

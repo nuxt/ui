@@ -8,11 +8,22 @@ describe('parseCssColor', () => {
     expect(parseCssColor(' #F00 ')).toBe('oklch(62.8% 0.258 29.234)')
   })
 
-  it('passes tailwind v4 oklch values through losslessly', () => {
-    // Tailwind's palette strings already use the canonical shape — the
-    // round trip must not clamp or reformat them (some exceed sRGB).
-    expect(parseCssColor(colors.blue[500])).toBe(colors.blue[500])
-    expect(parseCssColor(colors.slate[50])).toBe(colors.slate[50])
+  it('passes canonical oklch through losslessly, including out of sRGB', () => {
+    // wide-gamut values must survive unclamped — tailwind ships several
+    expect(parseCssColor('oklch(62.3% 0.214 259.815)')).toBe('oklch(62.3% 0.214 259.815)')
+    expect(parseCssColor('oklch(70% 0.35 150)')).toBe('oklch(70% 0.35 150)')
+  })
+
+  it('is idempotent over the real tailwind palette', () => {
+    // Idempotence, not equality with the vendor string: a tailwind bump that
+    // changes formatting (4.3.3 started emitting `none`) must not red CI.
+    for (const ramp of [colors.blue, colors.slate, colors.zinc]) {
+      for (const value of Object.values(ramp)) {
+        const once = parseCssColor(value)
+        expect(once, value).toBeDefined()
+        expect(parseCssColor(once!)).toBe(once)
+      }
+    }
   })
 
   it('normalizes fractional lightness to percentage', () => {

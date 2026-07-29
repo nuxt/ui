@@ -159,15 +159,15 @@ const shareMode = ref<'import' | 'export'>('export')
              resolve icons at setup, so a pack swap remounts to re-resolve. -->
         <div :key="iconSet" class="flex-1 min-h-0 overflow-hidden [&>*]:[contain:paint]">
           <Playground v-if="view === 'grid'" />
-          <ThemeStudioViewDashboard v-else-if="view === 'dashboard'" />
-          <ThemeStudioViewChat v-else-if="view === 'chat'" />
-          <ThemeStudioViewSaas v-else-if="view === 'saas'" />
-          <ThemeStudioViewLanding v-else-if="view === 'landing'" />
-          <ThemeStudioViewDocs v-else-if="view === 'docs'" />
-          <ThemeStudioViewPortfolio v-else-if="view === 'portfolio'" />
-          <ThemeStudioViewChangelog v-else-if="view === 'changelog'" />
-          <ThemeStudioViewEditor v-else-if="view === 'editor'" />
-          <ThemeStudioViewA11y v-else-if="view === 'a11y'" />
+          <LazyThemeStudioViewDashboard v-else-if="view === 'dashboard'" />
+          <LazyThemeStudioViewChat v-else-if="view === 'chat'" />
+          <LazyThemeStudioViewSaas v-else-if="view === 'saas'" />
+          <LazyThemeStudioViewLanding v-else-if="view === 'landing'" />
+          <LazyThemeStudioViewDocs v-else-if="view === 'docs'" />
+          <LazyThemeStudioViewPortfolio v-else-if="view === 'portfolio'" />
+          <LazyThemeStudioViewChangelog v-else-if="view === 'changelog'" />
+          <LazyThemeStudioViewEditor v-else-if="view === 'editor'" />
+          <LazyThemeStudioViewA11y v-else-if="view === 'a11y'" />
         </div>
 
         <!-- In fullscreen the toolbar floats over the bottom edge at
