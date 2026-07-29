@@ -19,5 +19,12 @@ export default defineNuxtConfig({
         storageKey: 'nuxt-ui'
       }
     }
+  },
+
+  // The `./engine` and `./theme` subpath exports are raw TypeScript. Installed
+  // from node_modules they'd otherwise be externalised and handed to Node,
+  // which can't parse TS — so a consumer's value import would fail on SSR.
+  build: {
+    transpile: ['@nuxt/ui-theme-studio']
   }
 })

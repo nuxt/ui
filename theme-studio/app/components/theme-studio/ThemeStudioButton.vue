@@ -65,6 +65,8 @@ provideStudioFeatures(() => ({
   components: dev.value,
   scale: dev.value,
   help: false,
+  // a host's own routes don't serve /docs/* — send help links to the real site
+  helpBase: 'https://ui.nuxt.com',
   // the prop is the ergonomic front door; `features` still wins if both are set
   reset: props.reset,
   ...props.features

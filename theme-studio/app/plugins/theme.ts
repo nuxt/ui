@@ -28,8 +28,17 @@ export default defineNuxtPlugin({
       const neutral = localStorage.getItem(storageKeys.neutral)
       if (neutral) appConfig.ui.colors.neutral = neutral
 
+      // A pack fills in the library's defaults but must not wipe the host's
+      // own app.config icons — anything already diverging from the stock
+      // (lucide) map is a deliberate choice, so it outranks the pack.
       const icons = localStorage.getItem(storageKeys.icons)
-      if (icons) appConfig.ui.icons = themeIcons[icons as keyof typeof themeIcons] as any
+      const pack = icons ? themeIcons[icons as keyof typeof themeIcons] : undefined
+      if (pack) {
+        const stock = themeIcons.lucide as Record<string, string>
+        const current = appConfig.ui.icons as Record<string, string>
+        const hostOwned = Object.fromEntries(Object.entries(current).filter(([key, value]) => value !== stock[key]))
+        appConfig.ui.icons = { ...pack, ...hostOwned } as any
+      }
 
       // Storage keys are app-namespaced, useState keys aren't — every restore
       // names both sides explicitly (state must also be clearable by
@@ -164,7 +173,7 @@ export default defineNuxtPlugin({
         }, {
           innerHTML: `
             var fsRaw = localStorage.getItem('${storageKeys.fontSize}');
-            if (fsRaw && fsRaw !== '16') {
+            if (fsRaw) {
               var fsNum = parseFloat(fsRaw);
               if (isFinite(fsNum)) {
                 fsNum = Math.min(20, Math.max(12, fsNum));
@@ -173,7 +182,7 @@ export default defineNuxtPlugin({
               }
             }
             var spRaw = localStorage.getItem('${storageKeys.spacing}');
-            if (spRaw && spRaw !== '0.25') {
+            if (spRaw) {
               var spNum = parseFloat(spRaw);
               if (isFinite(spNum)) {
                 spNum = Math.min(0.5, Math.max(0.125, spNum));
@@ -213,11 +222,14 @@ export default defineNuxtPlugin({
             `(function() {`,
             `var SAFE = /^[\\w -]{1,50}$/;`,
             `function num(v, lo, hi) { var n = parseFloat(v); return isFinite(n) ? Math.min(hi, Math.max(lo, n)) : undefined; }`,
-            `var fontRaw = localStorage.getItem('${storageKeys.font}') || 'Public Sans';`,
-            `var font = SAFE.test(fontRaw) ? fontRaw : 'Public Sans';`,
+            // No stored family means the host app's own --font-sans stands: a
+            // fallback here would repaint a consumer's brand font on first
+            // paint whenever any unrelated typography pref exists.
+            `var fontRaw = localStorage.getItem('${storageKeys.font}');`,
+            `var font = (fontRaw && SAFE.test(fontRaw)) ? fontRaw : undefined;`,
             `var prefs = {};`,
             `try { prefs = JSON.parse(localStorage.getItem('${storageKeys.fontPrefs}') || '{}'); } catch(e) {}`,
-            `var css = ':root { --font-sans: \\'' + font + '\\', sans-serif; }';`,
+            `var css = font ? ':root { --font-sans: \\'' + font + '\\', sans-serif; }' : '';`,
             `var w = prefs.weights || {};`,
             `var wVars = Object.keys(w).map(function(s) { var n = num(w[s], 100, 900); return (SAFE.test(s) && n !== undefined) ? '--font-weight-' + s + ': ' + n + ';' : ''; }).filter(Boolean).join(' ');`,
             `if (wVars) { css += ' :root { ' + wVars + ' }'; }`,
@@ -247,12 +259,14 @@ export default defineNuxtPlugin({
             `if (hLh !== undefined) { rules += 'line-height: ' + hLh + '; '; }`,
             `css += ' h1, h2, h3, h4, h5, h6 { ' + rules + '}';`,
             `}`,
-            `if (localStorage.getItem('${storageKeys.font}') || Object.keys(prefs).length) {`,
+            `if (css) {`,
             `var fontEl = document.querySelector('style#nuxt-ui-font');`,
             `if (fontEl) { fontEl.textContent = css; }`,
             `}`,
+            // only families the user actually picked — the host's own baseline
+            // font is its business to load
             `[font, hFont].forEach(function(name) {`,
-            `if (!name || name === 'Public Sans') return;`,
+            `if (!name) return;`,
             `var id = 'font-' + name.toLowerCase().replace(/\\s+/g, '-');`,
             `if (document.getElementById(id)) return;`,
             `var lnk = document.createElement('link');`,

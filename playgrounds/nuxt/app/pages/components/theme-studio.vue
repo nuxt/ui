@@ -42,7 +42,7 @@ const brand: ThemePreset[] = [{
       <p class="text-sm font-medium text-muted">
         User mode — curated presets, plain pickers
       </p>
-      <ThemeStudioButton mode="user" :presets="['nuxt-ui', 'shadcn', 'neo-brutalist']" />
+      <ThemeStudioButton mode="user" :presets="['nuxt-ui', 'shadcn', 'neo-brutalist', '8bit']" />
     </div>
 
     <div class="flex flex-col items-center gap-2">

@@ -26,6 +26,12 @@ export interface StudioFeatures {
   /** Section-header help links into the Nuxt UI docs. */
   help: boolean
   /**
+   * Origin the help links resolve against. Empty keeps them site-relative
+   * (the docs, which own those paths); a host must point them at the real
+   * docs site or they 404 against its own routes.
+   */
+  helpBase: string
+  /**
    * Reset affordances — the header button AND every section's reset-to-preset.
    * Set through ThemeStudioButton's `reset` prop; here so nested sections see it.
    */
@@ -40,6 +46,7 @@ export const STUDIO_FEATURE_DEFAULTS: StudioFeatures = {
   components: true,
   scale: true,
   help: true,
+  helpBase: '',
   reset: true
 }
 

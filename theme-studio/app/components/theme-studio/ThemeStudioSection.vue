@@ -27,6 +27,11 @@ const { sectionDirty, resetSection } = useThemeStudio()
 const features = useStudioFeatures()
 const dirty = computed(() => (props.sectionKey ? sectionDirty(props.sectionKey).value : false))
 
+/** Site-relative in the docs, absolute (and external) under a host. */
+const helpLink = computed(() => (props.helpTo && features.value.helpBase
+  ? `${features.value.helpBase}${props.helpTo}`
+  : props.helpTo))
+
 const slots = defineSlots<{
   default: () => any
   /** Controls beside the trigger (edit/adjust toggles). */
@@ -54,7 +59,8 @@ const open = ref(props.defaultOpen)
       <UTooltip text="Docs">
         <UButton
           v-if="helpTo && features.help"
-          :to="helpTo"
+          :to="helpLink"
+          :target="features.helpBase ? '_blank' : undefined"
           size="sm"
           color="neutral"
           variant="ghost"
