@@ -482,7 +482,9 @@ This lets you expand or collapse a parent item without selecting it.
 
 ### Control expanded items
 
-You can control the expanded items by using the `default-expanded` prop or the `v-model` directive.
+You can control the expanded items by using the `default-expanded` prop or the `v-model:expanded` directive.
+
+`default-expanded` and `v-model:expanded` both contain string item keys. The Tree uses `getKey(item)` when provided, otherwise it uses the string form of `item[valueKey]` (`item.value` by default), falling back to the label. If your items already define `value`, replace label entries in controlled expanded arrays with their corresponding value strings.
 
 ::component-example
 ---

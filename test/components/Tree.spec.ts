@@ -160,6 +160,27 @@ describe('Tree', () => {
     expect(wrapper.get('[role="treeitem"]').attributes('aria-expanded')).toBe('true')
   })
 
+  it('emits getKey values for expanded state', async () => {
+    const wrapper = await mountSuspended(Tree, {
+      props: {
+        valueKey: 'value',
+        getKey: item => item.id,
+        items: [
+          {
+            id: 'custom-key',
+            label: 'label-key',
+            value: 'value-key',
+            children: [{ id: 'child-key', label: 'child-label', value: 'child-value' }]
+          }
+        ]
+      }
+    })
+
+    await wrapper.get('[role="treeitem"]').trigger('click')
+
+    expect(wrapper.emitted('update:expanded')).toEqual([[['custom-key']]])
+  })
+
   test('should have the correct types', () => {
     expectEmitPayloadType('update:modelValue', () => Tree({
       items: [{ label: 'foo' }, { label: 'baz' }]
