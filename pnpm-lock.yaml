@@ -515,7 +515,7 @@ importers:
         specifier: workspace:*
         version: link:../..
       '@nuxt/ui-theme-studio':
-        specifier: workspace:*
+        specifier: link:../../theme-studio
         version: link:../../theme-studio
       '@tiptap/extension-emoji':
         specifier: ^3.29.0

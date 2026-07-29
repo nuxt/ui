@@ -18,7 +18,7 @@
     "@internationalized/date": "^3.12.2",
     "@nuxt/content": "^3.15.2",
     "@nuxt/ui": "workspace:*",
-    "@nuxt/ui-theme-studio": "workspace:*",
+    "@nuxt/ui-theme-studio": "link:../../theme-studio",
     "@tiptap/extension-emoji": "^3.29.0",
     "@tiptap/extension-text-align": "^3.29.0",
     "ai": "^7.0.37",
