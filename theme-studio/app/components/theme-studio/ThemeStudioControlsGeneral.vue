@@ -280,7 +280,7 @@ const defaultSize = computed({
               class="flex-1 min-w-0"
             />
 
-            <UFieldGroup size="sm">
+            <UFieldGroup v-if="features.typography" size="sm">
               <UPopover :content="{ align: 'start' }">
                 <UTooltip :text="row.weights.length > 1 ? 'Weights' : 'Weight'">
                   <UButton

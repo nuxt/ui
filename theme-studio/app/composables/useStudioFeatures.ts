@@ -13,21 +13,34 @@ export interface StudioFeatures {
   shades: boolean
   /** The Semantic section remapping secondary/success/info/warning/error. */
   semantic: boolean
+  /**
+   * Weight, case, tracking and leading beside each font picker. Off leaves
+   * the family pickers — enough to personalise, not enough to wreck the
+   * product's typography.
+   */
+  typography: boolean
   /** The Button/Card/Input Defaults sections (per-component variant and color). */
   components: boolean
   /** The sizing knobs: base font size, spacing density and default component size. Radius always stays. */
   scale: boolean
   /** Section-header help links into the Nuxt UI docs. */
   help: boolean
+  /**
+   * Reset affordances — the header button AND every section's reset-to-preset.
+   * Set through ThemeStudioButton's `reset` prop; here so nested sections see it.
+   */
+  reset: boolean
 }
 
 export const STUDIO_FEATURE_DEFAULTS: StudioFeatures = {
   palette: true,
   shades: true,
   semantic: true,
+  typography: true,
   components: true,
   scale: true,
-  help: true
+  help: true,
+  reset: true
 }
 
 const studioFeaturesKey: InjectionKey<ComputedRef<StudioFeatures>> = Symbol('theme-studio-features')

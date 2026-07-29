@@ -61,9 +61,12 @@ provideStudioFeatures(() => ({
   palette: dev.value,
   shades: dev.value,
   semantic: dev.value,
+  typography: dev.value,
   components: dev.value,
   scale: dev.value,
   help: false,
+  // the prop is the ergonomic front door; `features` still wins if both are set
+  reset: props.reset,
   ...props.features
 }))
 

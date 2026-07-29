@@ -64,7 +64,7 @@ const open = ref(props.defaultOpen)
         />
       </UTooltip>
 
-      <UTooltip v-if="sectionKey" :text="dirty ? 'Reset to preset' : 'Matches the preset'">
+      <UTooltip v-if="sectionKey && features.reset" :text="dirty ? 'Reset to preset' : 'Matches the preset'">
         <UButton
           size="sm"
           :color="dirty ? 'primary' : 'neutral'"
