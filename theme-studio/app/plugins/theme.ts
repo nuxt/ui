@@ -1,12 +1,15 @@
 import { defu } from 'defu'
 import { themeIcons, cssVariableDefaults } from '../utils/theme'
-import { THEME_STORAGE_KEYS, THEME_STATE_KEYS } from '../utils/theme-keys'
+import { themeStorageKeys, THEME_STATE_KEYS } from '../utils/theme-keys'
 import { mergeUi, styleComponents } from '../utils/theme-engine'
 
 export default defineNuxtPlugin({
   enforce: 'post',
   setup() {
     const appConfig = useAppConfig()
+    // The FOUC scripts below are generated JS SOURCE — they must read the
+    // very keys useTheme writes, so both sides resolve them from here.
+    const storageKeys = themeStorageKeys()
 
     // The applied theme's <style>/<link> head entries live here, not in the
     // consuming app's app.vue — extending the layer is all the wiring an app
@@ -19,36 +22,19 @@ export default defineNuxtPlugin({
     })
 
     if (import.meta.client) {
-      const primary = localStorage.getItem('nuxt-ui-primary')
+      const primary = localStorage.getItem(storageKeys.primary)
       if (primary) appConfig.ui.colors.primary = primary
 
-      const neutral = localStorage.getItem('nuxt-ui-neutral')
+      const neutral = localStorage.getItem(storageKeys.neutral)
       if (neutral) appConfig.ui.colors.neutral = neutral
 
-      const icons = localStorage.getItem('nuxt-ui-icons')
+      const icons = localStorage.getItem(storageKeys.icons)
       if (icons) appConfig.ui.icons = themeIcons[icons as keyof typeof themeIcons] as any
 
-      function restoreState<T>(key: string) {
-        try {
-          const raw = localStorage.getItem(key)
-          if (raw) {
-            const state = useState<T>(key)
-            state.value = JSON.parse(raw)
-          }
-        } catch {
-          // ignore malformed localStorage
-        }
-      }
-
-      restoreState('nuxt-ui-ai-theme')
-      restoreState('nuxt-ui-style-ui')
-      restoreState('nuxt-ui-custom-colors')
-      restoreState('nuxt-ui-css-variables')
-      restoreState('nuxt-ui-font-prefs')
-
-      // Studio prefs use useState keys that differ from their storage keys
-      // (state must be clearable by resetTheme outside the composable).
-      function restoreNamedState<T>(storageKey: string, stateKey: string) {
+      // Storage keys are app-namespaced, useState keys aren't — every restore
+      // names both sides explicitly (state must also be clearable by
+      // resetTheme, outside the composable that owns it).
+      function restoreState<T>(storageKey: string, stateKey: string) {
         try {
           const raw = localStorage.getItem(storageKey)
           if (raw) {
@@ -58,8 +44,14 @@ export default defineNuxtPlugin({
           // ignore malformed localStorage
         }
       }
-      restoreNamedState(THEME_STORAGE_KEYS.style, THEME_STATE_KEYS.stylePrefs)
-      restoreNamedState(THEME_STORAGE_KEYS.paletteParams, THEME_STATE_KEYS.paletteParams)
+
+      restoreState(storageKeys.aiTheme, THEME_STATE_KEYS.aiTheme)
+      restoreState(storageKeys.styleUi, THEME_STATE_KEYS.styleUi)
+      restoreState(storageKeys.customColors, THEME_STATE_KEYS.customColors)
+      restoreState(storageKeys.cssVariables, THEME_STATE_KEYS.cssVariables)
+      restoreState(storageKeys.fontPrefs, THEME_STATE_KEYS.fontPrefs)
+      restoreState(storageKeys.style, THEME_STATE_KEYS.stylePrefs)
+      restoreState(storageKeys.paletteParams, THEME_STATE_KEYS.paletteParams)
 
       // The persisted style-ui bundle is DERIVED from the style prefs —
       // recompute it on load so fragment changes shipped in code reach
@@ -67,11 +59,11 @@ export default defineNuxtPlugin({
       const persisted = useState<any>(THEME_STATE_KEYS.stylePrefs)
       if (persisted.value && Object.keys(persisted.value).length) {
         const bundle = styleComponents(persisted.value)
-        useState<Record<string, any>>('nuxt-ui-style-ui').value = bundle
+        useState<Record<string, any>>(THEME_STATE_KEYS.styleUi).value = bundle
         if (Object.keys(bundle).length) {
-          localStorage.setItem('nuxt-ui-style-ui', JSON.stringify(bundle))
+          localStorage.setItem(storageKeys.styleUi, JSON.stringify(bundle))
         } else {
-          localStorage.removeItem('nuxt-ui-style-ui')
+          localStorage.removeItem(storageKeys.styleUi)
         }
       }
 
@@ -86,13 +78,13 @@ export default defineNuxtPlugin({
       }, { immediate: true })
 
       try {
-        const extras = JSON.parse(localStorage.getItem('nuxt-ui-ai-theme') || '{}')
+        const extras = JSON.parse(localStorage.getItem(storageKeys.aiTheme) || '{}')
         if (extras.colors) {
           for (const [key, value] of Object.entries(extras.colors)) {
             (appConfig.ui.colors as any)[key] = value
           }
         }
-        const styleUi = JSON.parse(localStorage.getItem('nuxt-ui-style-ui') || '{}')
+        const styleUi = JSON.parse(localStorage.getItem(storageKeys.styleUi) || '{}')
         if (extras.ui || Object.keys(styleUi).length) {
           onNuxtReady(() => {
             // same order as the live path: style bundle first, extras win
@@ -115,8 +107,8 @@ export default defineNuxtPlugin({
         script: [{
           innerHTML: `
             (function() {
-              var primaryColor = localStorage.getItem('nuxt-ui-primary');
-              var neutralColor = localStorage.getItem('nuxt-ui-neutral');
+              var primaryColor = localStorage.getItem('${storageKeys.primary}');
+              var neutralColor = localStorage.getItem('${storageKeys.neutral}');
               if (!primaryColor && !neutralColor) return;
               function swapColors(el) {
                 var html = el.innerHTML;
@@ -158,7 +150,7 @@ export default defineNuxtPlugin({
           tagPriority: -1
         }, {
           innerHTML: `
-            var rRaw = localStorage.getItem('nuxt-ui-radius');
+            var rRaw = localStorage.getItem('${storageKeys.radius}');
             if (rRaw) {
               var rNum = parseFloat(rRaw);
               if (isFinite(rNum) && rNum >= 0) {
@@ -171,7 +163,7 @@ export default defineNuxtPlugin({
           tagPriority: -1
         }, {
           innerHTML: `
-            var fsRaw = localStorage.getItem('nuxt-ui-font-size');
+            var fsRaw = localStorage.getItem('${storageKeys.fontSize}');
             if (fsRaw && fsRaw !== '16') {
               var fsNum = parseFloat(fsRaw);
               if (isFinite(fsNum)) {
@@ -180,7 +172,7 @@ export default defineNuxtPlugin({
                 if (fsEl) { fsEl.textContent = 'html { font-size: ' + fsNum + 'px; }'; }
               }
             }
-            var spRaw = localStorage.getItem('nuxt-ui-spacing');
+            var spRaw = localStorage.getItem('${storageKeys.spacing}');
             if (spRaw && spRaw !== '0.25') {
               var spNum = parseFloat(spRaw);
               if (isFinite(spNum)) {
@@ -195,7 +187,7 @@ export default defineNuxtPlugin({
         }, {
           innerHTML: `
             try {
-              var st = JSON.parse(localStorage.getItem('nuxt-ui-style') || '{}');
+              var st = JSON.parse(localStorage.getItem('${storageKeys.style}') || '{}');
               var sh = st && st.shadow;
               if (sh === 'custom') document.documentElement.classList.add('shadow-custom');
               else if (sh === 'flat') document.documentElement.classList.add('shadow-none');
@@ -207,7 +199,7 @@ export default defineNuxtPlugin({
           innerHTML: `
             var bapEl = document.querySelector('style#nuxt-ui-black-as-primary');
             if (bapEl) {
-              if (localStorage.getItem('nuxt-ui-black-as-primary') === 'true') {
+              if (localStorage.getItem('${storageKeys.blackAsPrimary}') === 'true') {
                 bapEl.innerHTML = ':root { --ui-primary: black; } .dark { --ui-primary: white; }';
               } else {
                 bapEl.innerHTML = '';
@@ -221,10 +213,10 @@ export default defineNuxtPlugin({
             `(function() {`,
             `var SAFE = /^[\\w -]{1,50}$/;`,
             `function num(v, lo, hi) { var n = parseFloat(v); return isFinite(n) ? Math.min(hi, Math.max(lo, n)) : undefined; }`,
-            `var fontRaw = localStorage.getItem('nuxt-ui-font') || 'Public Sans';`,
+            `var fontRaw = localStorage.getItem('${storageKeys.font}') || 'Public Sans';`,
             `var font = SAFE.test(fontRaw) ? fontRaw : 'Public Sans';`,
             `var prefs = {};`,
-            `try { prefs = JSON.parse(localStorage.getItem('nuxt-ui-font-prefs') || '{}'); } catch(e) {}`,
+            `try { prefs = JSON.parse(localStorage.getItem('${storageKeys.fontPrefs}') || '{}'); } catch(e) {}`,
             `var css = ':root { --font-sans: \\'' + font + '\\', sans-serif; }';`,
             `var w = prefs.weights || {};`,
             `var wVars = Object.keys(w).map(function(s) { var n = num(w[s], 100, 900); return (SAFE.test(s) && n !== undefined) ? '--font-weight-' + s + ': ' + n + ';' : ''; }).filter(Boolean).join(' ');`,
@@ -255,7 +247,7 @@ export default defineNuxtPlugin({
             `if (hLh !== undefined) { rules += 'line-height: ' + hLh + '; '; }`,
             `css += ' h1, h2, h3, h4, h5, h6 { ' + rules + '}';`,
             `}`,
-            `if (localStorage.getItem('nuxt-ui-font') || Object.keys(prefs).length) {`,
+            `if (localStorage.getItem('${storageKeys.font}') || Object.keys(prefs).length) {`,
             `var fontEl = document.querySelector('style#nuxt-ui-font');`,
             `if (fontEl) { fontEl.textContent = css; }`,
             `}`,
@@ -274,7 +266,7 @@ export default defineNuxtPlugin({
         }, {
           innerHTML: `
             (function() {
-              var raw = localStorage.getItem('nuxt-ui-custom-colors');
+              var raw = localStorage.getItem('${storageKeys.customColors}');
               if (raw) {
                 try {
                   var colors = JSON.parse(raw);
@@ -297,7 +289,7 @@ export default defineNuxtPlugin({
         }, {
           innerHTML: `
             (function() {
-              var raw = localStorage.getItem('nuxt-ui-css-variables');
+              var raw = localStorage.getItem('${storageKeys.cssVariables}');
               if (raw) {
                 try {
                   var cssVars = JSON.parse(raw);

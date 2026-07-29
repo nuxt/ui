@@ -19,6 +19,7 @@ const brand: ThemePreset[] = [{
 <template>
   <ThemeStudioButton
     mode="user"
+    title="Customise Theme"
     :presets="['nuxt-ui', 'shadcn', 'neo-brutalist']"
     :custom-presets="brand"
   />

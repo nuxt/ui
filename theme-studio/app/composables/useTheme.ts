@@ -1,5 +1,5 @@
 import { defu } from 'defu'
-import { THEME_TAG_IDS, THEME_STATE_KEYS, THEME_STORAGE_KEYS } from '../utils/theme-keys'
+import { THEME_TAG_IDS, THEME_STATE_KEYS, themeStorageKeys } from '../utils/theme-keys'
 import { useLocalStorage } from '@vueuse/core'
 import { themeIcons, cssVariableDefaults, readLocalStorage, themeCssBaseline, FONT_WEIGHT_DEFAULTS } from '../utils/theme'
 import { generateCSS, generateConfig, mergeUi, isDefaultStyle, styleTokens, DEFAULT_COLORS, THEME_DEFAULTS, SEMANTIC_ALIASES, LIBRARY_TOKEN_DEFAULTS } from '../utils/theme-engine'
@@ -70,11 +70,14 @@ export function useTheme() {
   }
   const { framework } = useFrameworks()
 
-  const aiThemeExtras = useState<Record<string, any>>('nuxt-ui-ai-theme', () => readLocalStorage('nuxt-ui-ai-theme', {}))
+  // the consuming app's localStorage namespace (state keys stay per-app)
+  const storageKeys = themeStorageKeys()
+
+  const aiThemeExtras = useState<Record<string, any>>(THEME_STATE_KEYS.aiTheme, () => readLocalStorage(storageKeys.aiTheme, {}))
   // style-treatment bundles live in their OWN channel so restyling can never
   // destroy preset/AI overrides sharing the same component keys
-  const styleUiData = useState<Record<string, any>>('nuxt-ui-style-ui', () => readLocalStorage('nuxt-ui-style-ui', {}))
-  const customColorsData = useState<Record<string, Record<string, string>>>('nuxt-ui-custom-colors', () => readLocalStorage('nuxt-ui-custom-colors', {}))
+  const styleUiData = useState<Record<string, any>>(THEME_STATE_KEYS.styleUi, () => readLocalStorage(storageKeys.styleUi, {}))
+  const customColorsData = useState<Record<string, Record<string, string>>>(THEME_STATE_KEYS.customColors, () => readLocalStorage(storageKeys.customColors, {}))
 
   // The neutral may be a custom palette with no tailwindcss/colors entry —
   // a throw here would abort the whole unhead flush.
@@ -84,9 +87,9 @@ export function useTheme() {
     const shade = colorMode.value === 'dark' ? 900 : 50
     return (colors as any)[neutral]?.[shade] || customColorsData.value[neutral]?.[shade] || (colors as any).slate[shade]
   })
-  const cssVariablesData = useState<{ light?: Record<string, string>, dark?: Record<string, string> }>('nuxt-ui-css-variables', () => readLocalStorage('nuxt-ui-css-variables', {}))
+  const cssVariablesData = useState<{ light?: Record<string, string>, dark?: Record<string, string> }>(THEME_STATE_KEYS.cssVariables, () => readLocalStorage(storageKeys.cssVariables, {}))
   /** The studio's style axis (it owns writes); read here for currentDoc/export. */
-  const stylePrefs = useState<ThemeDoc['style']>(THEME_STATE_KEYS.stylePrefs, () => readLocalStorage(THEME_STORAGE_KEYS.style, {}))
+  const stylePrefs = useState<ThemeDoc['style']>(THEME_STATE_KEYS.stylePrefs, () => readLocalStorage(storageKeys.style, {}))
   // The host app's resting theme is the studio's zero point: CSS knobs read
   // from the live styles, config from app.config before the persisted restore
   // mutates it (useState carries the server's pristine capture across).
@@ -98,15 +101,15 @@ export function useTheme() {
 
   // useTheme is not a shared composable — separate instances of these refs
   // only converge through vueuse's storage events, so the listener stays on
-  const _radius = useLocalStorage('nuxt-ui-radius', cssBaseline.radius)
-  const _fontSize = useLocalStorage('nuxt-ui-font-size', cssBaseline.fontSize)
-  const _spacing = useLocalStorage('nuxt-ui-spacing', cssBaseline.spacing)
-  const _font = useLocalStorage('nuxt-ui-font', cssBaseline.font)
-  const _iconSet = useLocalStorage('nuxt-ui-icons', 'lucide')
-  const _blackAsPrimary = useLocalStorage('nuxt-ui-black-as-primary', false)
+  const _radius = useLocalStorage(storageKeys.radius, cssBaseline.radius)
+  const _fontSize = useLocalStorage(storageKeys.fontSize, cssBaseline.fontSize)
+  const _spacing = useLocalStorage(storageKeys.spacing, cssBaseline.spacing)
+  const _font = useLocalStorage(storageKeys.font, cssBaseline.font)
+  const _iconSet = useLocalStorage(storageKeys.icons, 'lucide')
+  const _blackAsPrimary = useLocalStorage(storageKeys.blackAsPrimary, false)
 
   /** Typography beyond the base family — one JSON channel shared with the FOUC script. */
-  const fontPrefs = useState<FontPrefs>('nuxt-ui-font-prefs', () => readLocalStorage('nuxt-ui-font-prefs', {}))
+  const fontPrefs = useState<FontPrefs>(THEME_STATE_KEYS.fontPrefs, () => readLocalStorage(storageKeys.fontPrefs, {}))
 
   function setFontPrefs(next: FontPrefs) {
     // Normalize: defaults are absences, so hasCSSChanges/export stay clean.
@@ -136,9 +139,9 @@ export function useTheme() {
 
     fontPrefs.value = clean
     if (Object.keys(clean).length) {
-      window.localStorage.setItem('nuxt-ui-font-prefs', JSON.stringify(clean))
+      window.localStorage.setItem(storageKeys.fontPrefs, JSON.stringify(clean))
     } else {
-      window.localStorage.removeItem('nuxt-ui-font-prefs')
+      window.localStorage.removeItem(storageKeys.fontPrefs)
     }
     trackThrottled('Theme Changed', { setting: 'fontPrefs' })
   }
@@ -152,7 +155,7 @@ export function useTheme() {
     },
     set(option) {
       appConfig.ui.colors.neutral = option
-      window.localStorage.setItem('nuxt-ui-neutral', appConfig.ui.colors.neutral)
+      window.localStorage.setItem(storageKeys.neutral, appConfig.ui.colors.neutral)
       track('Theme Changed', { setting: 'neutral', value: option })
     }
   })
@@ -165,7 +168,7 @@ export function useTheme() {
     },
     set(option) {
       appConfig.ui.colors.primary = option
-      window.localStorage.setItem('nuxt-ui-primary', appConfig.ui.colors.primary)
+      window.localStorage.setItem(storageKeys.primary, appConfig.ui.colors.primary)
       setBlackAsPrimary(false)
       track('Theme Changed', { setting: 'primary', value: option })
     }
@@ -484,7 +487,7 @@ export function useTheme() {
   function injectCustomColors(customColors: Record<string, Record<string, string>>) {
     const merged = { ...customColorsData.value, ...customColors }
     customColorsData.value = merged
-    window.localStorage.setItem('nuxt-ui-custom-colors', JSON.stringify(merged))
+    window.localStorage.setItem(storageKeys.customColors, JSON.stringify(merged))
   }
 
   function removeCSSVariables(keys: { light?: string[], dark?: string[] }) {
@@ -494,9 +497,9 @@ export function useTheme() {
     }
     cssVariablesData.value = next
     if (Object.keys(next.light).length || Object.keys(next.dark).length) {
-      window.localStorage.setItem('nuxt-ui-css-variables', JSON.stringify(next))
+      window.localStorage.setItem(storageKeys.cssVariables, JSON.stringify(next))
     } else {
-      window.localStorage.removeItem('nuxt-ui-css-variables')
+      window.localStorage.removeItem(storageKeys.cssVariables)
       if (import.meta.client) {
         document.getElementById(THEME_TAG_IDS.cssVariables)?.replaceChildren()
       }
@@ -522,9 +525,9 @@ export function useTheme() {
     const touched = new Set([...Object.keys(styleUiData.value), ...Object.keys(ui)])
     styleUiData.value = ui
     if (Object.keys(ui).length) {
-      window.localStorage.setItem('nuxt-ui-style-ui', JSON.stringify(ui))
+      window.localStorage.setItem(storageKeys.styleUi, JSON.stringify(ui))
     } else {
-      window.localStorage.removeItem('nuxt-ui-style-ui')
+      window.localStorage.removeItem(storageKeys.styleUi)
     }
     recomposeComponentOverrides(touched)
   }
@@ -533,9 +536,9 @@ export function useTheme() {
     const remaining = Object.fromEntries(Object.entries(customColorsData.value).filter(([name]) => !names.includes(name)))
     customColorsData.value = remaining
     if (Object.keys(remaining).length) {
-      window.localStorage.setItem('nuxt-ui-custom-colors', JSON.stringify(remaining))
+      window.localStorage.setItem(storageKeys.customColors, JSON.stringify(remaining))
     } else {
-      window.localStorage.removeItem('nuxt-ui-custom-colors')
+      window.localStorage.removeItem(storageKeys.customColors)
     }
   }
 
@@ -545,7 +548,7 @@ export function useTheme() {
       dark: { ...cssVariablesData.value.dark, ...cssVariables.dark }
     }
     cssVariablesData.value = merged
-    window.localStorage.setItem('nuxt-ui-css-variables', JSON.stringify(merged))
+    window.localStorage.setItem(storageKeys.cssVariables, JSON.stringify(merged))
   }
 
   function applyThemeSettings(settings: Record<string, any>, options: { track?: boolean } = {}) {
@@ -625,7 +628,7 @@ export function useTheme() {
     const touchedExtras = settings.ui || colorKeys.some(color => settings[color] && SAFE_NAME.test(settings[color]))
     if (touchedExtras) {
       aiThemeExtras.value = savedExtras
-      window.localStorage.setItem('nuxt-ui-ai-theme', JSON.stringify(savedExtras))
+      window.localStorage.setItem(storageKeys.aiTheme, JSON.stringify(savedExtras))
     }
     if (settings.ui) {
       recomposeComponentOverrides(Object.keys(savedExtras.ui || {}))
@@ -645,17 +648,17 @@ export function useTheme() {
     }
 
     appConfig.ui.colors.primary = configBaseline.value.primary
-    window.localStorage.removeItem('nuxt-ui-primary')
+    window.localStorage.removeItem(storageKeys.primary)
 
     appConfig.ui.colors.neutral = configBaseline.value.neutral
-    window.localStorage.removeItem('nuxt-ui-neutral')
+    window.localStorage.removeItem(storageKeys.neutral)
 
     _radius.value = cssBaseline.radius
     _fontSize.value = cssBaseline.fontSize
     _spacing.value = cssBaseline.spacing
     _font.value = cssBaseline.font
     fontPrefs.value = {}
-    window.localStorage.removeItem('nuxt-ui-font-prefs')
+    window.localStorage.removeItem(storageKeys.fontPrefs)
     _iconSet.value = 'lucide'
     appConfig.ui.icons = themeIcons.lucide as any
     _blackAsPrimary.value = false
@@ -673,9 +676,9 @@ export function useTheme() {
         (appConfig.ui as any)[key] = undefined
       }
     }
-    window.localStorage.removeItem('nuxt-ui-ai-theme')
-    window.localStorage.removeItem('nuxt-ui-custom-colors')
-    window.localStorage.removeItem('nuxt-ui-css-variables')
+    window.localStorage.removeItem(storageKeys.aiTheme)
+    window.localStorage.removeItem(storageKeys.customColors)
+    window.localStorage.removeItem(storageKeys.cssVariables)
     aiThemeExtras.value = {}
     customColorsData.value = {}
     cssVariablesData.value = {}
@@ -683,9 +686,9 @@ export function useTheme() {
     // studio-owned state resets too — orphaned style prefs would silently
     // resurrect on the next style click or export
     setStyleUi({})
-    window.localStorage.removeItem(THEME_STORAGE_KEYS.preset)
-    window.localStorage.removeItem(THEME_STORAGE_KEYS.style)
-    window.localStorage.removeItem(THEME_STORAGE_KEYS.paletteParams)
+    window.localStorage.removeItem(storageKeys.preset)
+    window.localStorage.removeItem(storageKeys.style)
+    window.localStorage.removeItem(storageKeys.paletteParams)
     useState<Record<string, any>>(THEME_STATE_KEYS.stylePrefs).value = {}
     useState<string | undefined>(THEME_STATE_KEYS.themePreset).value = undefined
     // in-memory curve params too, or the palette editor re-persists them

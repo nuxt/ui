@@ -1,5 +1,5 @@
 import colors from 'tailwindcss/colors'
-import { THEME_STATE_KEYS, THEME_STORAGE_KEYS } from '../utils/theme-keys'
+import { THEME_STATE_KEYS, themeStorageKeys } from '../utils/theme-keys'
 import { presets, docToSettings, isDefaultTheme, generatePalette, applyPaletteEffects, isDefaultEffects, parseCssColor, styleComponents, styleTokens, sectionFingerprint, mergeSection, canonicalTokenShades, storedStopStep, nearestShade, TOKEN_SHADE_TARGETS, SECTION_GROUPS, DEFAULT_COLORS, SHADES, SHADES_ALL, SHADE_SETS } from '../utils/theme-engine'
 import type { SectionKey, ThemeDoc, ThemePreset, PaletteCurveParams, PaletteEffects, StoredPaletteParams, PalettePin, StyleOptions, Shade, ShadeStep, ShadeStop, ColorAlias, TokenRamp } from '../utils/theme-engine'
 import { readLocalStorage } from '../utils/theme'
@@ -8,6 +8,7 @@ export function useThemeStudio() {
   const theme = useTheme()
   const appConfig = useAppConfig()
   const { track } = useAnalytics()
+  const storageKeys = themeStorageKeys()
 
   /**
    * The BASELINE preset: stays set through ordinary edits (per-section
@@ -15,15 +16,15 @@ export function useThemeStudio() {
    * preset, a shuffle, an import or a full reset. Persisted so the menu
    * still names it after a reload.
    */
-  const activePreset = useState<string | undefined>(THEME_STATE_KEYS.themePreset, () => readLocalStorage(THEME_STORAGE_KEYS.preset, undefined))
+  const activePreset = useState<string | undefined>(THEME_STATE_KEYS.themePreset, () => readLocalStorage(storageKeys.preset, undefined))
 
   function setActivePreset(id: string | undefined) {
     activePreset.value = id
     if (!import.meta.client) return
     if (id) {
-      window.localStorage.setItem(THEME_STORAGE_KEYS.preset, JSON.stringify(id))
+      window.localStorage.setItem(storageKeys.preset, JSON.stringify(id))
     } else {
-      window.localStorage.removeItem(THEME_STORAGE_KEYS.preset)
+      window.localStorage.removeItem(storageKeys.preset)
     }
   }
 
@@ -33,19 +34,19 @@ export function useThemeStudio() {
    * resetTheme() — reachable from the popover and chat, outside this
    * composable — can clear the shared state, not just the storage key.
    */
-  const paletteParams = useState<Partial<Record<string, StoredPaletteParams>>>(THEME_STATE_KEYS.paletteParams, () => readLocalStorage(THEME_STORAGE_KEYS.paletteParams, {}))
+  const paletteParams = useState<Partial<Record<string, StoredPaletteParams>>>(THEME_STATE_KEYS.paletteParams, () => readLocalStorage(storageKeys.paletteParams, {}))
 
   function setPaletteParams(value: Partial<Record<string, StoredPaletteParams>>) {
     paletteParams.value = value
     if (Object.keys(value).length) {
-      window.localStorage.setItem(THEME_STORAGE_KEYS.paletteParams, JSON.stringify(value))
+      window.localStorage.setItem(storageKeys.paletteParams, JSON.stringify(value))
     } else {
-      window.localStorage.removeItem(THEME_STORAGE_KEYS.paletteParams)
+      window.localStorage.removeItem(storageKeys.paletteParams)
     }
   }
 
   /** Shadow/border/token-shade prefs; the expanded class bundle lives in the style-ui channel. */
-  const style = useState<StyleOptions>(THEME_STATE_KEYS.stylePrefs, () => readLocalStorage(THEME_STORAGE_KEYS.style, {}))
+  const style = useState<StyleOptions>(THEME_STATE_KEYS.stylePrefs, () => readLocalStorage(storageKeys.style, {}))
 
   // Self-heal: the persisted class bundle is an expansion of `style` frozen
   // at write time — if the generator changed since (new fragment classes),
@@ -56,7 +57,7 @@ export function useThemeStudio() {
     healed.value = true
     try {
       const expected = styleComponents(style.value)
-      if (JSON.stringify(expected) !== JSON.stringify(readLocalStorage(THEME_STORAGE_KEYS.styleUi, {}))) {
+      if (JSON.stringify(expected) !== JSON.stringify(readLocalStorage(storageKeys.styleUi, {}))) {
         onNuxtReady(() => theme.setStyleUi(expected))
       }
     } catch {
@@ -126,7 +127,7 @@ export function useThemeStudio() {
     const previousStyle = style.value
     const previous = styleTokens(previousStyle)
     style.value = { ...style.value, ...options }
-    window.localStorage.setItem(THEME_STORAGE_KEYS.style, JSON.stringify(style.value))
+    window.localStorage.setItem(storageKeys.style, JSON.stringify(style.value))
     // The .shadow-custom root flag is kept in sync by a watcher in plugins/theme.ts
     // (covers presets via applyDoc too), so no per-path toggle is needed here.
 
@@ -381,7 +382,7 @@ export function useThemeStudio() {
     theme.resetTheme({ track: false, immediate: false })
     style.value = deriveStyle(doc)
     if (Object.keys(style.value).length) {
-      window.localStorage.setItem(THEME_STORAGE_KEYS.style, JSON.stringify(style.value))
+      window.localStorage.setItem(storageKeys.style, JSON.stringify(style.value))
     }
 
     if (!isDefaultTheme(doc)) {

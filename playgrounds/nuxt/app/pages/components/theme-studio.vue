@@ -49,7 +49,7 @@ const brand: ThemePreset[] = [{
       <p class="text-sm font-medium text-muted">
         No presets, colors only, no share
       </p>
-      <ThemeStudioButton :presets="false" :sections="['colors']" :share="false" />
+      <ThemeStudioButton :presets="false" :panels="['colors']" :share="false" />
     </div>
 
     <div class="flex flex-col items-center gap-2">
