@@ -3,10 +3,8 @@ import { SHADE_LADDER } from '../../utils/theme-engine'
 import type { ShadeStop } from '../../utils/theme-engine'
 
 /**
- * The studio's control row — a horizontal UFormField: tiny label (or icon),
- * slider, monospace readout. With `chip` + `mode` it becomes a shade
- * slider: the fill and swatch wear the ramp color at the selected shade,
- * and the readout names the shade.
+ * The studio's control row: tiny label (or icon), slider, monospace readout.
+ * With `chip` + `mode` it becomes a shade slider wearing the ramp colour.
  */
 const props = withDefaults(defineProps<{
   /** Names the slider (aria) — shown unless an icon or chip replaces it. */
@@ -23,9 +21,8 @@ const props = withDefaults(defineProps<{
   /** …for this color mode. */
   mode?: 'light' | 'dark'
   /**
-   * Shows a per-row reset button, enabled while an override exists.
-   * Emits `reset` — the host deletes its override (true absence, not
-   * "write the default value", which would pin a lookalike override).
+   * Per-row reset button; `reset` means the host deletes its override —
+   * writing the default value would pin a lookalike override.
    */
   resettable?: boolean
   dirty?: boolean
@@ -50,12 +47,8 @@ const sliderColor = computed(() => {
   return stop.value === 'white' || stop.value === 'black' ? stop.value : `var(--color-${props.chip}-${stop.value})`
 })
 
-/**
- * A border that always contrasts with the fill, derived FROM the fill:
- * relative color syntax steps lightness to near-black on light fills and
- * near-white on dark ones (the ×1000 turns the difference into a hard
- * switch the clamp bounds).
- */
+// Border derived FROM the fill via relative colour syntax — the ×1000 turns
+// the lightness difference into a hard near-black/near-white switch.
 const contrastColor = computed(() => shade.value
   ? `oklch(from ${sliderColor.value} clamp(0.12, (0.66 - l) * 1000, 0.95) 0 h / 0.65)`
   : undefined)
@@ -67,19 +60,13 @@ const display = computed(() => shade.value
   ? String(stop.value)
   : `${String(value.value).replace(/^(-?)0\./, '$1.')}${props.unit ?? ''}`)
 
-/**
- * Typed values keep their precision — a value between step stops is a
- * deliberate choice, so only the range clamps it (which also caps runaway
- * numbers). The toFixed sweeps float noise from step arithmetic.
- */
+// Typed values keep their precision (between-step values are deliberate); only
+// the range clamps. toFixed sweeps float noise from step arithmetic.
 function clamp(raw: number): number {
   return Number(Math.min(sliderMax.value, Math.max(props.min, raw)).toFixed(4))
 }
 
-/**
- * The numeric readout doubles as an input: type a value, or nudge with
- * ArrowUp/ArrowDown (Shift for ×10 steps) without reaching for the slider.
- */
+// The readout doubles as an input: type, or nudge with arrows (Shift ×10).
 function onReadoutKeydown(event: KeyboardEvent) {
   if (event.key === 'Enter') {
     (event.target as HTMLInputElement).blur()

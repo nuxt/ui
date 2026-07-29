@@ -79,9 +79,8 @@ const headingLineHeight = computed({
   set: (value: number) => setHeading({ lineHeight: value })
 })
 
-// The Base and Headings rows are the same toolbar over different models —
-// one config each, one template. Base tunes the four tailwind weight steps;
-// headings have a single weight.
+// Base and Headings are one template over different models; base tunes the
+// four tailwind weight steps, headings a single weight.
 const fontRows = [{
   key: 'base',
   label: 'Base',
@@ -155,10 +154,8 @@ const defaultSizeItems = [
   { label: 'XL', value: 'xl' }
 ]
 
-// Per-group default variants, each offering only what its components
-// actually support (buttons add ghost, form fields run outline → none);
-// the app-wide `variant` (presets, shuffle) shows through as the fallback
-// until a group makes its own choice.
+// Per-group default variants, each offering only what its components support;
+// the app-wide `variant` shows through as the fallback.
 const variantItems = (values: string[]) => values.map(value => ({ label: capitalize(value), value }))
 
 /** Variant names UButton can render itself — the rest (none) fall back. */

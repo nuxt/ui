@@ -4,12 +4,9 @@ import { clampToGamut, formatOklch, parseColor } from './oklch'
 import type { Oklch } from './oklch'
 
 /**
- * A palette is three transition curves — lightness, chroma and hue — sampled
- * across the 11 shade stops (x: 0 = shade 50 … 1 = shade 950). Each channel
- * is a cubic bezier in the devtools-easing sense: endpoints pinned to the
- * left/right edges with adjustable y, plus two free control handles.
- * All y values are in channel units (L 0–1, C 0–0.4, H degrees); handles may
- * overshoot the endpoints.
+ * One channel of a palette (L, C or H) as a devtools-style cubic bezier
+ * sampled across the shade stops (x: 0 = shade 50 … 1 = shade 950).
+ * y values are in channel units; handles may overshoot the endpoints.
  */
 export interface ChannelCurve {
   /** Channel value at shade 50 */
@@ -28,21 +25,14 @@ export interface PaletteCurveParams {
   hue: ChannelCurve
 }
 
-/**
- * Fallback curves fitted to tailwind v4's color ramps. In practice params
- * come from `fitPalette()` over a real palette, so these only seed empty
- * states.
- */
+/** Fitted to tailwind v4's ramps — only seeds empty states; real params come from fitPalette(). */
 export const CURVE_DEFAULTS: PaletteCurveParams = {
   lightness: { y0: 0.977, y1: 0.27, p1x: 0.1, p1y: 1.012, p2x: 0.925, p2y: 0.376 },
   chroma: { y0: 0.016, y1: 0.08, p1x: 0.4, p1y: 0.3, p2x: 0.6, p2y: 0.25 },
   hue: { y0: 250, y1: 250, p1x: 0.33, p1y: 250, p2x: 0.66, p2y: 250 }
 }
 
-/**
- * Neutral ramps want a much deeper dark end than color ramps: tailwind's
- * grays run to L 0.13 so dark-mode backgrounds stay genuinely dark.
- */
+/** Neutrals run to L 0.13 like tailwind's grays, so dark-mode backgrounds stay genuinely dark. */
 export const NEUTRAL_CURVE_DEFAULTS: PaletteCurveParams = {
   lightness: { ...CURVE_DEFAULTS.lightness, y1: 0.13 },
   chroma: { y0: 0.005, y1: 0.01, p1x: 0.4, p1y: 0.01, p2x: 0.6, p2y: 0.01 },
@@ -50,11 +40,8 @@ export const NEUTRAL_CURVE_DEFAULTS: PaletteCurveParams = {
 }
 
 /**
- * The editor's modifier lens: independent effects layered on top of base
- * curves — lightness shift, contrast about the ramp's own midpoint,
- * saturation (multiplicative with an additive floor, so gray ramps respond
- * too) and hue rotation, all scaled by an overall amount. Pure: always
- * derives fresh curves from the base, never compounding.
+ * The editor's modifier lens over base curves, scaled by an overall amount.
+ * Pure: always derived fresh from the base, never compounding.
  */
 export interface PaletteEffects {
   lightness: number
@@ -66,9 +53,8 @@ export interface PaletteEffects {
 export const PALETTE_EFFECT_DEFAULTS: PaletteEffects = { lightness: 0, contrast: 0, saturation: 0, hueShift: 0 }
 
 /**
- * A stop locked to an exact OKLCH the curves must pass through — "pin this
- * brand colour, edit around it". Stored as the absolute target; the ramp is
- * bent to hit it (see `pinField`), so it survives curve drags and modifiers.
+ * A stop locked to an exact OKLCH — "pin this brand colour, edit around it".
+ * Stored absolute so it survives curve drags and modifiers (see pinField).
  */
 export interface PalettePin {
   shade: Shade
@@ -77,11 +63,7 @@ export interface PalettePin {
   h: number
 }
 
-/**
- * A persisted palette: the base curves plus the modifier lens over them.
- * `fineStops` predates the density model — it's read (never written) so
- * palettes saved before it keep their 19 stops.
- */
+/** A persisted palette. `fineStops` predates the density model — read, never written. */
 export type StoredPaletteParams = PaletteCurveParams & { effects?: PaletteEffects, amount?: number, stopStep?: ShadeStep, fineStops?: boolean, pins?: PalettePin[] }
 
 /** The density a persisted palette generates at. */
@@ -90,10 +72,8 @@ export function storedStopStep(stored?: { stopStep?: ShadeStep, fineStops?: bool
 }
 
 /**
- * The density a ramp was generated at, read back from the stops it carries:
- * the coarsest set that covers every stop present. A ramp mixing stops no
- * single density emits (a hand-edited import) falls to the finest set, which
- * covers the most of it.
+ * Density read back from a ramp's stops: the coarsest set covering all of
+ * them; a hand-edited mix no density emits falls to the finest.
  */
 export function detectStopStep(shades: Partial<Record<Shade, string>>): ShadeStep {
   const present = Object.keys(shades).map(Number) as Shade[]
@@ -105,10 +85,9 @@ export function nearestShade(value: number, stops: readonly Shade[]): Shade {
   return stops.reduce((best, stop) => Math.abs(stop - value) < Math.abs(best - value) ? stop : best)
 }
 
-// Width (ramp x) of each pin's influence. MAX is the widest, smoothest kernel
-// (single/well-separated pins); but wider than the gap between two pins the
-// exact-interpolation solve goes ill-conditioned and overshoots (clustered pins
-// blow neighbours to white), so it's narrowed to the closest spacing, floored.
+// Pin influence width (ramp x). Wider than the closest pin spacing the solve
+// goes ill-conditioned (clustered pins blow neighbours to white), so sigma
+// narrows to that spacing, floored.
 const PIN_KERNEL_SIGMA_MAX = 0.2
 const PIN_KERNEL_SIGMA_MIN = 0.04
 
@@ -118,9 +97,8 @@ function pinKernel(distance: number, sigma: number): number {
 }
 
 /**
- * Solve `A·x = b` for a small dense symmetric system (Gauss–Jordan with
- * partial pivoting). Pins are ≤19, so this is trivially fast; a near-singular
- * pivot (coincident stops) collapses that weight to 0 rather than exploding.
+ * Gauss–Jordan with partial pivoting (≤19 pins, trivially fast). A
+ * near-singular pivot collapses that weight to 0 rather than exploding.
  */
 function solveLinear(a: number[][], b: number[]): number[] {
   const n = b.length
@@ -143,11 +121,8 @@ function solveLinear(a: number[][], b: number[]): number[] {
 }
 
 /**
- * Build the additive correction field that locks the pins. Each channel's
- * correction is a radial-basis interpolation of the pin deltas (target minus
- * the base curve at the pin), so at a pinned x it equals the delta exactly —
- * `base + correction` renders the target — and decays smoothly elsewhere.
- * Hue deltas take the short way round the circle.
+ * Additive correction field locking the pins: radial-basis interpolation of
+ * the pin deltas — exact at a pinned x, decaying smoothly elsewhere.
  */
 function pinField(pins: PalettePin[], base: (x: number) => { l: number, c: number, h: number }) {
   const xs = pins.map(pin => shadeX(pin.shade))
@@ -163,10 +138,8 @@ function pinField(pins: PalettePin[], base: (x: number) => { l: number, c: numbe
 
   const matrix = xs.map(xi => xs.map(xj => pinKernel(Math.abs(xi - xj), sigma)))
 
-  // Hue is cyclic: unwrapping each target to the base's nearest arc sends pins
-  // near the antipode the long way round. Chain-unwrap in x order instead (each
-  // within ±180° of the previous, anchored to the base at the first pin) so a
-  // run of pins takes the short way between themselves.
+  // Hue is cyclic: chain-unwrap targets in x order (each within ±180° of the
+  // previous, anchored to the base) so runs of pins take the short arc.
   const order = xs.map((_, i) => i).sort((i, j) => xs[i]! - xs[j]!)
   const hueTarget: number[] = Array.from({ length: pins.length })
   let prevHue = base(xs[order[0]!]!).h
@@ -215,15 +188,13 @@ export function applyPaletteEffects(base: PaletteCurveParams, effects?: PaletteE
   const target = structuredClone(base)
   if (isDefaultEffects(effects, amount)) return target
 
-  // The strength scales every effect's distance from its default: 100% as
-  // set, lower blends back toward the base, higher extrapolates past.
+  // 100% applies as set; lower blends toward the base, higher extrapolates.
   const strength = amount / 100
   const effective = (key: keyof PaletteEffects) =>
     PALETTE_EFFECT_DEFAULTS[key] + ((effects?.[key] ?? PALETTE_EFFECT_DEFAULTS[key]) - PALETTE_EFFECT_DEFAULTS[key]) * strength
 
-  // Lightness: contrast expands/compresses about the curve's own midpoint,
-  // then the shift slides the whole ramp. Every point clamps to the
-  // physical [0, 1] window, exactly like a drag stopping at the edge.
+  // Contrast expands about the curve's own midpoint, then the shift slides
+  // the whole ramp; every point clamps to the physical [0, 1] window.
   const lightness = target.lightness
   const mid = (lightness.y0 + lightness.y1) / 2
   const span = 1 + effective('contrast') / 100
@@ -234,9 +205,8 @@ export function applyPaletteEffects(base: PaletteCurveParams, effects?: PaletteE
   lightness.p1y = mapLightness(lightness.p1y)
   lightness.p2y = mapLightness(lightness.p2y)
 
-  // Saturation: scale for colorful ramps, plus a small additive floor when
-  // boosting so near-gray ramps (where a multiply is a no-op) respond too.
-  // Clamped to the editor's chroma window (sRGB tops out around 0.37).
+  // Multiplicative, plus a small additive floor when boosting so near-gray
+  // ramps (where a multiply is a no-op) respond too.
   const saturation = effective('saturation') / 100
   const factor = 1 + saturation
   const floor = Math.max(0, saturation) * 0.02
@@ -247,9 +217,8 @@ export function applyPaletteEffects(base: PaletteCurveParams, effects?: PaletteE
   chroma.p1y = mapChroma(chroma.p1y)
   chroma.p2y = mapChroma(chroma.p2y)
 
-  // Hue shifts the whole curve, then re-centers by full turns so the mean
-  // stays in [0, 360) — a uniform shift keeps the curve continuous, and
-  // hue is cyclic so the colors are identical.
+  // A uniform shift keeps the curve continuous; re-center by full turns so
+  // the mean stays in [0, 360).
   const hueShift = effective('hueShift')
   const hue = target.hue
   hue.y0 += hueShift
@@ -274,8 +243,8 @@ function cubicBezier(t: number, a: number, b: number, c: number, d: number): num
 }
 
 /**
- * Sample a channel curve at ramp position `x` (0–1). Control x values are
- * clamped into [0, 1], keeping x(t) monotonic so the solve is well-defined.
+ * Sample a channel curve at ramp position `x` (0–1). Control x clamps into
+ * [0, 1], keeping x(t) monotonic so the bisection is well-defined.
  */
 export function sampleCurve(x: number, curve: ChannelCurve): number {
   const p1x = Math.min(1, Math.max(0, curve.p1x))
@@ -297,10 +266,9 @@ export function sampleCurve(x: number, curve: ChannelCurve): number {
 }
 
 /**
- * A shade's fixed position along the curve (x: 0 = shade 50 … 1 = shade 950),
- * keyed by VALUE not array index — so the standard 11 stops keep their exact
- * position (and colour) whether or not the fine midpoints are generated, and
- * a midpoint like 150 lands halfway between 100 (0.1) and 200 (0.2).
+ * A shade's position along the curve, keyed by VALUE not array index — so
+ * stops keep their exact colour across densities and midpoints land between
+ * their neighbours.
  */
 export function shadeX(shade: Shade): number {
   if (shade === 50) return 0
@@ -309,10 +277,8 @@ export function shadeX(shade: Shade): number {
 }
 
 /**
- * A reusable sampler for the pin-corrected ramp: solves the pin field once,
- * then returns the raw channel values at any x — hue unwrapped, no gamut clamp
- * — so a curve drawn through them stays continuous and bends through pinned
- * stops (which `generatePalette` then clamps per stop for the actual colours).
+ * Sampler for the pin-corrected ramp: raw channel values at any x — hue
+ * unwrapped, no gamut clamp — so a curve drawn through them stays continuous.
  */
 export function buildRampSampler(params: PaletteCurveParams, pins: PalettePin[] = []): (x: number) => { l: number, c: number, h: number } {
   const base = (x: number) => ({
@@ -337,8 +303,7 @@ export function generatePalette(params: PaletteCurveParams, step: ShadeStep = 10
     c: sampleCurve(x, params.chroma),
     h: sampleCurve(x, params.hue)
   })
-  // The pin correction is added to the raw curve sample (pre-clamp), so a
-  // pinned stop lands on its target exactly whenever that target is in gamut.
+  // Correction applies pre-clamp, so an in-gamut pin target is hit exactly.
   const correct = pins.length ? pinField(pins, base) : undefined
 
   for (const shade of SHADE_SETS[step]) {
@@ -346,13 +311,10 @@ export function generatePalette(params: PaletteCurveParams, step: ShadeStep = 10
     const b = base(x)
     const d = correct ? correct(x) : { dl: 0, dc: 0, dh: 0 }
 
-    // Clamp here, not in the serializer: sculpted curves can demand
-    // impossible chroma, and the swatches/contrast math assume sRGB.
-    // Lightness clamps too — clampToGamut only searches chroma, so an
-    // overshooting curve (handles may exceed the window) would otherwise
-    // emit oklch(112% …) verbatim into exports and contrast math. Hue
-    // wraps into [0, 360): a negative or 4-digit hue would fail the
-    // sanitizer's canonical-oklch check and silently DROP the shade.
+    // Clamp here, not in the serializer: clampToGamut only searches chroma,
+    // so an overshooting curve would emit oklch(112% …) verbatim; and a
+    // negative or 4-digit hue fails the sanitizer's canonical-oklch check
+    // and silently DROPS the shade.
     result[shade] = formatOklch(clampToGamut({
       l: Math.min(1, Math.max(0, b.l + d.dl)),
       c: Math.max(0, b.c + d.dc),
@@ -364,10 +326,9 @@ export function generatePalette(params: PaletteCurveParams, step: ShadeStep = 10
 }
 
 /**
- * Fit a channel curve to sampled points (x ascending, 0 and 1 included).
- * Endpoints are pinned to the first/last values; the two handles are found
- * by coordinate descent — small, deterministic and fast enough to run on
- * every palette selection.
+ * Fit a channel curve to sampled points (x ascending, 0 and 1 included):
+ * endpoints pinned, handles by coordinate descent — deterministic and fast
+ * enough per palette selection.
  */
 export function fitCurve(points: Array<[number, number]>): ChannelCurve {
   // Nothing to fit — a flat zero curve beats a TypeError.
@@ -391,8 +352,7 @@ export function fitCurve(points: Array<[number, number]>): ChannelCurve {
 
   const keys = ['p1x', 'p1y', 'p2x', 'p2y'] as const
 
-  // Coordinate descent with per-parameter line search, from a few handle
-  // placements so a bad basin doesn't trap the fit.
+  // Several starting handle placements so a bad basin doesn't trap the fit.
   let winner: ChannelCurve | undefined
   let winnerError = Infinity
 
@@ -408,7 +368,6 @@ export function fitCurve(points: Array<[number, number]>): ChannelCurve {
         const isX = key === 'p1x' || key === 'p2x'
         const step = isX ? stepX : stepY
         for (const direction of [1, -1]) {
-          // Walk while it keeps improving.
           for (;;) {
             const previous = curve[key]
             const next = previous + direction * step
@@ -443,8 +402,6 @@ export function fitCurve(points: Array<[number, number]>): ChannelCurve {
 /**
  * Work backwards from an existing palette (e.g. a tailwind ramp) to curve
  * params that reproduce it — so editing always starts from the real thing.
- * Hue needs care: it is unwrapped around the color wheel and meaningless on
- * near-gray stops, where it borrows the nearest chromatic neighbor.
  */
 export function fitPalette(shades: Partial<Record<Shade, string>>): PaletteCurveParams {
   const stops: Array<{ x: number, color: Oklch }> = []
@@ -456,8 +413,7 @@ export function fitPalette(shades: Partial<Record<Shade, string>>): PaletteCurve
     }
   }
 
-  // Nothing parseable to fit — fall back to the stock curves rather than
-  // letting fitCurve([]) throw.
+  // Nothing parseable — stock curves beat letting fitCurve([]) throw.
   if (!stops.length) {
     return structuredClone(CURVE_DEFAULTS)
   }

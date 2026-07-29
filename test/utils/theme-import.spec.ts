@@ -70,7 +70,7 @@ describe('importTheme', () => {
     const original: ThemeDoc = {
       version: 1,
       style: {
-        shadow: 'hard',
+        shadow: 'custom',
         shadowColor: 'shade',
         // literal ladder ends mixed with a ramp stop (NOT the stock
         // 950/black pair, which the importer rightly reads as no-choice)
@@ -160,11 +160,11 @@ describe('importTheme', () => {
     const { doc, skipped } = importTheme({
       css: [
         ':root, .light {',
-        '  --ui-frame-color: #ff0000;',
+        '  --ui-border-color: #ff0000;',
         '}',
         '',
         '.dark {',
-        '  --ui-frame-color: #ff0000;',
+        '  --ui-border-color: #ff0000;',
         '}'
       ].join('\n')
     })
@@ -173,8 +173,8 @@ describe('importTheme', () => {
     // but it must survive somewhere, not silently vanish.
     expect(skipped).toEqual([])
     expect(doc.style?.borderColor).toBeUndefined()
-    expect(doc.tokens?.light?.['--ui-frame-color']).toBe('#ff0000')
-    expect(doc.tokens?.dark?.['--ui-frame-color']).toBe('#ff0000')
+    expect(doc.tokens?.light?.['--ui-border-color']).toBe('#ff0000')
+    expect(doc.tokens?.dark?.['--ui-border-color']).toBe('#ff0000')
   })
 
   it('round-trips base weight and heading typography', () => {

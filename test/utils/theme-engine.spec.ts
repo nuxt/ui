@@ -352,10 +352,6 @@ describe('styleComponents', () => {
     expect(inner.input!.compoundVariants).toContainEqual({ variant: 'none', class: 'inset-shadow-none' })
     expect(inner.card!.slots!.root).toContain('inset-shadow-(--ui-inner-shadow)')
 
-    // legacy 'soft'/'hard' fold into the same one inset treatment
-    expect(styleComponents({ innerShadow: 'soft' }).card!.slots!.root).toContain('inset-shadow-(--ui-inner-shadow)')
-    expect(styleComponents({ innerShadow: 'hard' }).card!.slots!.root).toContain('inset-shadow-(--ui-inner-shadow)')
-
     // drop and inner coexist on one surface — separate tailwind groups
     const both = styleComponents({ shadow: 'custom', innerShadow: 'custom' })
     expect(both.card!.slots!.root).toContain('shadow-lg')
@@ -371,7 +367,7 @@ describe('styleComponents', () => {
     const { styleComponents } = await import('../../docs/app/utils/theme-engine')
     const components = styleComponents({ shadow: 'custom', border: 'custom', frame: true })
 
-    expect(components.button!.slots!.base).toContain('shadow-(--ui-shadow-hard)')
+    expect(components.button!.slots!.base).toContain('shadow-(--ui-shadow-press)')
     // widths ride the default-width variables — no ring-N classes anywhere
     expect(components.button!.slots!.base).not.toContain('ring')
     expect(components.button!.compoundVariants).toContainEqual({ variant: 'solid', class: 'ring ring-inset ring-(--ui-border-accented)' })
@@ -383,7 +379,7 @@ describe('styleComponents', () => {
     const { docToSettings } = await import('../../docs/app/utils/theme-engine')
     const settings = docToSettings({
       version: 1,
-      style: { shadow: 'hard', shadowColor: 'black' },
+      style: { shadow: 'custom', shadowColor: 'black' },
       components: { button: { slots: { base: 'rounded-full' } } }
     })
 
@@ -399,7 +395,7 @@ describe('styleComponents', () => {
     const merged = mergeUi(styleComponents({ shadow: 'custom' }), { button: { slots: { base: 'rounded-full' } } })
 
     // both the shadow classes and the explicit override survive, explicit last
-    expect(merged.button.slots.base).toContain('shadow-(--ui-shadow-hard)')
+    expect(merged.button.slots.base).toContain('shadow-(--ui-shadow-press)')
     expect(merged.button.slots.base.endsWith('rounded-full')).toBe(true)
     expect(merged.card.slots.root).toContain('shadow-lg')
   })
@@ -430,10 +426,8 @@ describe('style colors', () => {
     // frame off (or border none) → no outlines
     expect(styleComponents({ border: 'none', frame: true })).toEqual({})
 
-    // legacy saved 'frame' keeps its outlines; legacy 'bold' is width-only →
-    // just the tabs-list outline, like unframed custom
-    expect(styleComponents({ border: 'frame' }).button!.compoundVariants).toContainEqual({ variant: 'solid', class: 'ring ring-inset ring-(--ui-border-accented)' })
-    expect(Object.keys(styleComponents({ border: 'bold' }))).toEqual(['tabs'])
+    // width-only custom border → just the tabs-list outline
+    expect(Object.keys(styleComponents({ border: 'custom' }))).toEqual(['tabs'])
   })
 
   it('exports carry width via tailwind default-width variables, not classes', async () => {
@@ -458,7 +452,7 @@ describe('style colors', () => {
   it('border none counts as a real style choice', async () => {
     const { isDefaultStyle } = await import('../../docs/app/utils/theme-engine')
     expect(isDefaultStyle({})).toBe(true)
-    expect(isDefaultStyle({ shadow: 'none', border: 'default' })).toBe(true)
+    expect(isDefaultStyle({ border: 'default' })).toBe(true)
     expect(isDefaultStyle({ border: 'none' })).toBe(false)
     expect(isDefaultStyle({ border: 'custom' })).toBe(false)
   })
@@ -503,8 +497,8 @@ describe('style colors', () => {
     expect(none.slideover!.slots!.content).toBe('sm:shadow-none')
 
     const colored = styleComponents({ borderColor: 'inverted' })
-    expect(colored.tooltip!.slots!.content).toBe('ring-(--ui-frame-color)')
-    expect(colored.modal!.compoundVariants![0]).toEqual({ fullscreen: false, class: { content: 'ring-(--ui-frame-color)' } })
+    expect(colored.tooltip!.slots!.content).toBe('ring-(--ui-border-color)')
+    expect(colored.modal!.compoundVariants![0]).toEqual({ fullscreen: false, class: { content: 'ring-(--ui-border-color)' } })
   })
 
   it('the whole input family follows the inputs group', async () => {
@@ -528,11 +522,11 @@ describe('style colors', () => {
 
     // outline/subtle rings ARE the color signal (a subtle primary button
     // keeps its primary border) — only neutral rings repaint
-    expect(compounds).toContainEqual({ color: ['neutral'], variant: 'outline', class: 'ring-(--ui-frame-color)' })
-    expect(compounds).toContainEqual({ color: ['neutral'], variant: 'subtle', class: 'ring-(--ui-frame-color)' })
+    expect(compounds).toContainEqual({ color: ['neutral'], variant: 'outline', class: 'ring-(--ui-border-color)' })
+    expect(compounds).toContainEqual({ color: ['neutral'], variant: 'subtle', class: 'ring-(--ui-border-color)' })
     // frames around solid/soft surfaces repaint for every color
-    expect(compounds).toContainEqual({ variant: 'solid', class: 'ring-(--ui-frame-color)' })
-    expect(compounds).toContainEqual({ variant: 'soft', class: 'ring-(--ui-frame-color)' })
+    expect(compounds).toContainEqual({ variant: 'solid', class: 'ring-(--ui-border-color)' })
+    expect(compounds).toContainEqual({ variant: 'soft', class: 'ring-(--ui-border-color)' })
   })
 
   it('borderColor appends recolor compounds after frame ones', async () => {
@@ -540,7 +534,7 @@ describe('style colors', () => {
     const compounds = styleComponents({ border: 'custom', frame: true, borderColor: 'black' }).button!.compoundVariants!
 
     const frameIndex = compounds.findIndex(entry => entry.class === 'ring ring-inset ring-(--ui-border-accented)')
-    const colorIndex = compounds.findIndex(entry => entry.class === 'ring-(--ui-frame-color)')
+    const colorIndex = compounds.findIndex(entry => entry.class === 'ring-(--ui-border-color)')
     expect(frameIndex).toBeGreaterThanOrEqual(0)
     expect(colorIndex).toBeGreaterThan(frameIndex)
   })
@@ -550,8 +544,8 @@ describe('style colors', () => {
 
     expect(styleTokens({})).toEqual({ light: {}, dark: {} })
     expect(styleTokens({ borderColor: 'inverted', shadowColor: 'black' })).toEqual({
-      light: { '--ui-frame-color': 'var(--ui-color-neutral-950)', '--ui-shadow-color': 'black' },
-      dark: { '--ui-frame-color': 'white', '--ui-shadow-color': 'black' }
+      light: { '--ui-border-color': 'var(--ui-color-neutral-950)', '--ui-shadow-color': 'black' },
+      dark: { '--ui-border-color': 'white', '--ui-shadow-color': 'black' }
     })
   })
 
@@ -592,8 +586,8 @@ describe('style colors', () => {
     })
     // primary-shade modes reroute the frame/shadow colors through the primary ramp
     expect(styleTokens({ borderColor: 'primary-shade', borderShade: { light: 700, dark: 300 } })).toEqual({
-      light: { '--ui-frame-color': 'var(--ui-color-primary-700)' },
-      dark: { '--ui-frame-color': 'var(--ui-color-primary-300)' }
+      light: { '--ui-border-color': 'var(--ui-color-primary-700)' },
+      dark: { '--ui-border-color': 'var(--ui-color-primary-300)' }
     })
     expect(styleTokens({ shadowColor: 'primary-shade' }).light['--ui-shadow-color']).toBe('var(--ui-color-primary-950)')
   })
@@ -691,7 +685,7 @@ describe('style colors', () => {
   it('emits hard-shadow geometry variables and keeps defaultVariants replace semantics', async () => {
     const { styleTokens, mergeUi } = await import('../../docs/app/utils/theme-engine')
 
-    const tokens = styleTokens({ shadow: 'hard', shadowGeometry: { x: 6, blur: 4 } })
+    const tokens = styleTokens({ shadow: 'custom', shadowGeometry: { x: 6, blur: 4 } })
     expect(tokens.light['--ui-shadow-offset-x']).toBe('6px')
     expect(tokens.light['--ui-shadow-offset-y']).toBe('3px')
     expect(tokens.light['--ui-shadow-blur']).toBe('4px')
@@ -710,17 +704,17 @@ describe('style colors', () => {
     const { styleTokens } = await import('../../docs/app/utils/theme-engine')
 
     expect(styleTokens({ borderColor: 'shade', borderShade: { light: 700, dark: 100 } })).toEqual({
-      light: { '--ui-frame-color': 'var(--ui-color-neutral-700)' },
-      dark: { '--ui-frame-color': 'var(--ui-color-neutral-100)' }
+      light: { '--ui-border-color': 'var(--ui-color-neutral-700)' },
+      dark: { '--ui-border-color': 'var(--ui-color-neutral-100)' }
     })
-    expect(styleTokens({ borderColor: 'shade' }).dark['--ui-frame-color']).toBe('var(--ui-color-neutral-200)')
+    expect(styleTokens({ borderColor: 'shade' }).dark['--ui-border-color']).toBe('var(--ui-color-neutral-200)')
   })
 
   it('generateCSS emits style color variables', async () => {
     const { generateCSS } = await import('../../docs/app/utils/theme-engine')
-    const css = generateCSS({ version: 1, style: { shadow: 'hard', border: 'frame', borderColor: 'inverted' } })
+    const css = generateCSS({ version: 1, style: { shadow: 'custom', border: 'custom', frame: true, borderColor: 'inverted' } })
 
-    expect(css).toContain('--ui-frame-color: var(--ui-color-neutral-950);')
+    expect(css).toContain('--ui-border-color: var(--ui-color-neutral-950);')
     expect(css).toContain('--ui-shadow-color: var(--ui-color-neutral-950);')
     expect(css).toContain('--ui-shadow-color: black;')
   })

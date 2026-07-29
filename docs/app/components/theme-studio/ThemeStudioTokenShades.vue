@@ -26,19 +26,16 @@ const shadeLadder = computed<readonly ShadeStop[]>(() => (isCustomPalette(props.
   ? SHADE_LADDERS[storedStopStep(paletteParams.value[props.alias])]
   : SHADE_LADDER))
 
-// Per-token shade sliders, one light/dark pair. Only the touched mode is
-// written so an untouched mode never becomes an override. Dirty and reset
-// measure against the BASELINE preset's own choice for the token: reset
-// restores the preset's shade, or deletes the override entirely when the
-// preset made no choice (the token's real default may not sit on the ramp
-// at all — --ui-bg is literally `white` — so writing a "default shade"
-// would pin a lookalike override over it).
+// Only the touched mode is written, so an untouched mode never becomes an
+// override. Reset restores the BASELINE preset's shade, or deletes the entry
+// when the preset made no choice — a token's real default may not sit on the
+// ramp at all (--ui-bg is literally `white`).
 function tokenShadeControl(token: string, defaults: { light: ShadeStop, dark: ShadeStop }, target: 'light' | 'dark') {
   const model = computed({
     get: () => {
       const value = style.value.tokenShades?.[token]?.[target] ?? defaults[target]
-      // A stop chosen at a finer density, then coarsened away, no longer sits
-      // on the ladder (indexOf -1) — clamp to 0 so the slider stays grabbable.
+      // a stop coarsened off the ladder reads indexOf -1 — clamp so the
+      // slider stays grabbable
       return Math.max(0, shadeLadder.value.indexOf(value as ShadeStop))
     },
     set: (index: number) => {

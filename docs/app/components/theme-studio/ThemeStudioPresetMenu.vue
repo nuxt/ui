@@ -7,11 +7,7 @@ import { themeIcons } from '../../utils/theme'
 const props = defineProps<{
   /** Button size — the toolbar uses the default, the header picker slims down. */
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
-  /**
-   * The studio toolbar opts out of dismissing on its own chrome so the
-   * color-mode switch stays usable while the list is open; other hosts
-   * keep the stock dismiss behavior.
-   */
+  /** Toolbar opts out of dismissing on its own chrome; other hosts keep stock dismiss. */
   keepPanels?: boolean
 }>()
 
@@ -28,11 +24,8 @@ const { hasCSSChanges, hasConfigChanges } = useTheme()
 // the label after mount so hydration matches the server's fallback.
 const mounted = ref(false)
 
-/**
- * Each row leads with a mini theme chip: the doc's neutral ramp as the
- * page, its own icon in its primary — the theme in one glance, following
- * the current color mode (light 50→200 / dark 900→800, primary 500/400).
- */
+// Mini theme chip: the doc's neutral ramp as the page, its icon in its
+// primary, per colour mode.
 function themeChip(doc: ThemeDoc) {
   const shade = (alias: 'primary' | 'neutral', step: Shade) => resolveShade(doc, resolveAlias(doc, alias), step)
   return {
@@ -79,25 +72,18 @@ const selected = computed({
 // the boolean prop shadows the util in template scope — alias the handler
 const onKeepPanels = keepPanels
 
-/**
- * The shuffle die rolls: the icon spins once while cycling faces, then
- * settles on a random face that sticks around until the next roll.
- * Reduced-motion users get the plain shuffle.
- */
+// The shuffle die spins while cycling faces, then settles on a random face.
 const DICE_FACES = ['i-lucide-dice-1', 'i-lucide-dice-2', 'i-lucide-dice-3', 'i-lucide-dice-4', 'i-lucide-dice-5', 'i-lucide-dice-6']
 const diceFace = ref(studioIcons.dice)
 const rolling = ref(false)
 
-// Rest on the active pack's die; only Lucide ships the numbered faces the
-// roll cycles through, so other packs just spin their single die/shuffle.
+// Only Lucide ships numbered faces; other packs spin their single die.
 watch(() => studioIcons.dice, (die) => {
   if (!rolling.value) diceFace.value = die
 })
 
-// keep in sync with the dice-roll keyframes: total duration and the
-// percentage stops where the die hits an edge — each impact flips the face.
-// Tuned on the bench: 6 wall hits, constant travel, 1.3× slowdown per
-// crossing, 1.5 turns with 0.8× spin decay, 12% squash, 12% button bump.
+// Keep in sync with the dice-roll keyframes: the stops are where the die hits
+// an edge — each impact flips the face.
 const ROLL_MS = 675
 const HIT_FRACTIONS = [0.064, 0.147, 0.255, 0.395, 0.578, 0.815]
 let rollTimers: Array<ReturnType<typeof setTimeout>> = []
@@ -124,15 +110,12 @@ async function rollDice() {
   await nextTick()
   rolling.value = true
   rollTimers = HIT_FRACTIONS.map(fraction => setTimeout(() => (diceFace.value = randomFace()), ROLL_MS * fraction))
-  // animationend settles the roll; this is only a safety net for
-  // environments that never fire it
+  // safety net for environments that never fire animationend
   rollTimers.push(setTimeout(onRollEnd, ROLL_MS + 400))
 }
 
-/**
- * The animation clock decides the end — a JS timer would race it and
- *  snap the tumble back a few frames early.
- */
+// The animation clock decides the end — a JS timer would race it and snap the
+// tumble back a few frames early.
 function onRollEnd(event?: AnimationEvent) {
   if (event && !event.animationName.includes('dice-roll')) return
   if (!rolling.value) return
@@ -143,11 +126,8 @@ function onRollEnd(event?: AnimationEvent) {
 
 onUnmounted(clearRollTimers)
 
-/**
- * The baseline preset's name — edits deliberately don't clear it (the
- * dirty dots carry divergence); 'Custom' only when no preset is set but
- * the theme differs from stock.
- */
+// Edits deliberately don't clear the preset name (the dirty dots carry
+// divergence); 'Custom' only when preset-less but diverged from stock.
 const presetLabel = computed(() => {
   if (!mounted.value) return 'Presets'
   const active = presets.find(preset => preset.id === activePreset.value)
@@ -227,11 +207,8 @@ const presetLabel = computed(() => {
 </template>
 
 <style scoped>
-/* Bench-tuned (dice tuner artifact): a die in a fixed box — constant
-   wall-to-wall travel, each crossing 1.3× slower than the last, spin
-   decaying 0.8× per hit, 12% squash on impact, held ~10ms. Impact stops
-   mirror HIT_FRACTIONS; the rotation ends on -540° (pips are 180°-
-   symmetric, so the settled face still reads upright). */
+/* Impact stops mirror HIT_FRACTIONS; rotation ends on -540° (pips are
+   180°-symmetric, so the settled face reads upright). */
 @keyframes dice-roll {
   0% { transform: translate(0px, 0px) rotate(0deg) scale(1); }
   6.4% { transform: translate(-8px, 6px) rotate(-73deg) scale(0.88); }

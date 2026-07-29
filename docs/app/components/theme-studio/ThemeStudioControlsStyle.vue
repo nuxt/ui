@@ -1,12 +1,11 @@
 <script setup lang="ts">
-import { SHADE_LADDER, SHADOW_SHADE_DEFAULTS, BORDER_SHADE_DEFAULTS, BORDER_WIDTH_DEFAULT, SHADOW_GEOMETRY_DEFAULTS, INNER_SHADOW_GEOMETRY_DEFAULTS, isCustomShadow } from '../../utils/theme-engine'
+import { SHADE_LADDER, SHADOW_SHADE_DEFAULTS, BORDER_SHADE_DEFAULTS, BORDER_WIDTH_DEFAULT, SHADOW_GEOMETRY_DEFAULTS, INNER_SHADOW_GEOMETRY_DEFAULTS } from '../../utils/theme-engine'
 import type { ShadeStop } from '../../utils/theme-engine'
 
 const { style, setStyle, primaryChip, neutralChip, baselineDoc } = useThemeStudio()
 
-// Inherit leaves the library's own shadows alone, None strips them, Custom
-// is the studio treatment. The engine still understands 'soft' (presets,
-// imports) — it simply reads as Custom here.
+// Inherit leaves the library's shadows alone, None strips them ('flat' in
+// the persisted vocabulary), Custom is the studio treatment.
 const SHADOW_STYLE_OPTIONS = [
   { label: 'Inherit', value: 'inherit' },
   { label: 'None', value: 'none' },
@@ -16,32 +15,29 @@ const SHADOW_STYLE_OPTIONS = [
 const shadowStyle = computed({
   get: () => {
     const shadow = style.value.shadow
-    if (!shadow || shadow === 'none') return 'inherit'
+    if (!shadow) return 'inherit'
     return shadow === 'flat' ? 'none' : 'custom'
   },
-  // Custom starts where the library already is: geometry approximating the
-  // stock shadow-lg, so entering Custom isn't a jump (20% ≈ shadow-lg's two
-  // stacked 10% layers flattened into one). Leaving Custom clears the knobs
-  // — Inherit means a clean slate, and the next Custom reseeds fresh.
+  // Custom seeds at ≈ the stock shadow-lg (20% ≈ its two stacked 10% layers)
+  // so entering isn't a jump; leaving Custom clears the knobs.
   set: (value: any) => setStyle(value === 'custom'
     ? {
         shadow: 'custom',
         ...(style.value.shadowGeometry === undefined ? { shadowGeometry: { x: 0, y: 6, blur: 12, spread: 0 } } : {}),
         ...(style.value.shadowOpacity === undefined ? { shadowOpacity: 20 } : {})
       }
-    : { shadow: value === 'none' ? 'flat' : 'none', shadowGeometry: undefined, shadowOpacity: undefined, shadowColor: undefined, shadowShade: undefined })
+    : { shadow: value === 'none' ? 'flat' : undefined, shadowGeometry: undefined, shadowOpacity: undefined, shadowColor: undefined, shadowShade: undefined })
 })
 
-// Nothing in the library casts an inner shadow, so None and Inherit are
-// the same thing — two options suffice.
+// Nothing in the library casts an inner shadow, so None and Inherit coincide.
 const INNER_SHADOW_OPTIONS = [
   { label: 'None', value: 'none' },
   { label: 'Custom', value: 'custom' }
 ]
 
 const innerShadowStyle = computed({
-  get: () => (!style.value.innerShadow || style.value.innerShadow === 'none') ? 'none' : 'custom',
-  set: (value: any) => setStyle({ innerShadow: value === 'custom' ? 'custom' : 'none' })
+  get: () => style.value.innerShadow === 'custom' ? 'custom' : 'none',
+  set: (value: any) => setStyle({ innerShadow: value === 'custom' ? 'custom' : undefined })
 })
 
 const shadowOpacity = computed({
@@ -65,12 +61,8 @@ const borderOptions = [
   { label: 'Custom', value: 'custom' }
 ]
 
-// Legacy saved prefs may still hold bold/frame — both read as custom.
 const borderStyle = computed({
-  get: () => {
-    const value = style.value.border || 'default'
-    return value === 'bold' || value === 'frame' ? 'custom' : value
-  },
+  get: () => style.value.border || 'default',
   set: (value: any) => setStyle({ border: value })
 })
 
@@ -81,13 +73,8 @@ const borderWidth = computed({
 
 // Outline solid/soft surfaces too — the neobrutalist frame look.
 const frameSolids = computed({
-  get: () => !!style.value.frame || style.value.border === 'frame',
-  // Migrate the legacy border: 'frame' encoding on write — otherwise the
-  // getter keeps reading true and the switch can never turn off.
-  set: (value: boolean) => setStyle({
-    frame: value,
-    border: style.value.border === 'frame' ? 'custom' : style.value.border
-  })
+  get: () => !!style.value.frame,
+  set: (value: boolean) => setStyle({ frame: value })
 })
 
 // Default recolors nothing — every ring keeps its own per-element color —
@@ -103,9 +90,8 @@ const borderColorItems = [
   { label: 'Primary shade', value: 'primary-shade' }
 ]
 
-// The drop shadow's stock color IS the neutral shade at its resting stops
-// (neutral-950 light / literal black dark), so Default merges into a
-// tagged 'Neutral shade' — the ladder's black end made this expressible.
+// The stock shadow colour IS the neutral shade at its resting stops, so
+// Default merges into a tagged 'Neutral shade'.
 const shadowColorItems = [
   { label: 'Neutral shade', value: 'shade', defaultTag: true },
   { label: 'Black', value: 'black' },
@@ -125,16 +111,12 @@ const innerShadowColorItems = [
   { label: 'Primary shade', value: 'primary-shade' }
 ]
 
-// Slider position ↔ SHADES index, per mode. shadow/border shades write both
-// modes on first touch (explicit 'shade' mode choice); token shades write
-// ONLY the touched mode so an untouched mode never becomes an override.
-// Dirty/reset measure against the BASELINE preset's choice: reset restores
-// it, or deletes the entry when the preset made none.
+// Slider position ↔ SHADES index, per mode. Dirty/reset measure against the
+// BASELINE preset's choice: reset restores it, or deletes the entry.
 function shadeControl(field: 'shadowShade' | 'innerShadowShade' | 'borderShade', defaults: { light: ShadeStop, dark: ShadeStop }, target: 'light' | 'dark') {
   const model = computed({
-    // Per-key fallback: an imported doc can carry a single-mode shade
-    // object ({ light: 400 }) — indexOf(undefined) would park the slider
-    // at -1 and the chip at var(--color-…-undefined).
+    // per-key fallback: an imported doc can carry a single-mode shade object —
+    // indexOf(undefined) would park the slider at -1
     get: () => SHADE_LADDER.indexOf((style.value[field]?.[target] ?? defaults[target]) as typeof SHADE_LADDER[number]),
     set: (index: number) => {
       const current = { ...defaults, ...style.value[field] }
@@ -204,8 +186,7 @@ const shadowPress = computed({
   set: (value: boolean) => setStyle({ shadowPress: value ? undefined : false })
 })
 
-// The two shadow sections are the same panel pointed at different style
-// fields — one config each, one template.
+// The two shadow sections are one template pointed at different style fields.
 const shadowSections = [{
   label: 'Shadow',
   dirtyKey: 'shadow' as const,
@@ -216,7 +197,7 @@ const shadowSections = [{
   shades: shadowShades,
   opacity: shadowOpacity,
   geometry: geometrySliders('shadowGeometry', SHADOW_GEOMETRY_DEFAULTS),
-  hard: computed(() => isCustomShadow(style.value.shadow)),
+  hard: computed(() => style.value.shadow === 'custom'),
   press: shadowPress as typeof shadowPress | undefined
 }, {
   label: 'Inner shadow',
@@ -228,14 +209,12 @@ const shadowSections = [{
   shades: innerShadowShades,
   opacity: innerShadowOpacity,
   geometry: geometrySliders('innerShadowGeometry', INNER_SHADOW_GEOMETRY_DEFAULTS),
-  hard: computed(() => isCustomShadow(style.value.innerShadow)),
+  hard: computed(() => style.value.innerShadow === 'custom'),
   press: undefined
 }]
 
-// Per-section fold-out for the shade fine-tuning, mirroring the Colors panel's
-// "Adjust shades" affordance — the per-mode shade sliders stay out of the main
-// shadow flow until asked for. Keyed by dirtyKey so the two sections toggle
-// independently.
+// Per-section fold-out for shade fine-tuning, mirroring the Colors panel's
+// "Adjust shades"; keyed by dirtyKey so the sections toggle independently.
 const shadeEditors = reactive<Record<string, boolean>>({})
 const borderShadeEditor = ref(false)
 const isShadeColor = (color?: string) => color === 'shade' || color === 'primary-shade'
@@ -295,16 +274,13 @@ const isShadeColor = (color?: string) => color === 'shade' || color === 'primary
               />
 
               <div v-if="section.press" class="flex items-center justify-between gap-2">
-                <span class="text-xs text-muted select-none">Button press effect</span>
+                <span class="text-xs text-muted select-none">Buttons sink on press</span>
 
-                <UTooltip text="Buttons sink onto their shadow on hover and press">
-                  <USwitch v-model="section.press.value" size="sm" aria-label="Button press effect" />
-                </UTooltip>
+                <USwitch v-model="section.press.value" size="sm" aria-label="Buttons sink on press" />
               </div>
             </template>
 
-            <!-- Colour and its per-mode shade sliders fold out from the header
-                 toggle and sit last, keeping the main flow to opacity/geometry. -->
+            <!-- colour + shade sliders sit last, behind the header toggle -->
             <template v-if="shadeEditors[section.dirtyKey]">
               <ThemeStudioDefaultSelect
                 v-model="section.color.value"
@@ -370,17 +346,14 @@ const isShadeColor = (color?: string) => color === 'shade' || color === 'primary
             unit="px"
           />
 
-          <div class="flex items-center gap-2">
-            <span class="text-xs text-muted w-13 shrink-0 select-none">Frame</span>
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-xs text-muted select-none">Frame solid surfaces</span>
 
-            <UTooltip text="Outline solid surfaces too — the neobrutalist look">
-              <USwitch v-model="frameSolids" size="sm" aria-label="Frame solid surfaces" />
-            </UTooltip>
+            <USwitch v-model="frameSolids" size="sm" aria-label="Frame solid surfaces" />
           </div>
 
-          <!-- Frame colour, its shade sliders, and the neutral border tokens
-               (relocated from the Colors panel) fold out from the header toggle
-               and sit last, mirroring the shadow sections. -->
+          <!-- colour, shades and the neutral border tokens (relocated from the
+               Colors panel), behind the header toggle -->
           <template v-if="borderShadeEditor">
             <ThemeStudioDefaultSelect
               v-model="borderColor"

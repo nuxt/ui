@@ -8,31 +8,15 @@ const props = defineProps<{
   yMax: number
   /** Fill colors for the stop dots along the curve, one per stop. */
   stopColors?: string[]
-  /**
-   * Curve x-position (0–1) for each stop, aligned with `stopColors`. Omit for
-   * the standard 11 stops (evenly ranked); a denser ramp passes its stops at
-   * their true positions (150 → 0.15, not an even 19th).
-   */
+  /** Curve x (0–1) per stop; omit for the standard 11 evenly-ranked stops. */
   stopXs?: number[]
   /** Which stops are pinned to an exact colour, aligned with `stopXs`. */
   stopPinned?: boolean[]
-  /**
-   * The actual channel value each stop resolves to (pin-corrected), aligned
-   * with `stopXs`, so every dot sits on the colour it really produces.
-   */
+  /** Pin-corrected value per stop, so every dot sits on the colour it produces. */
   stopValues?: number[]
-  /**
-   * The pin-corrected curve as a dense `{ x, v }` polyline. When present it's
-   * the line the editor draws — bending through pinned stops and showing the
-   * pull on their neighbours — in place of the raw bézier.
-   */
+  /** Pin-corrected curve as a dense polyline — drawn in place of the raw bézier. */
   actualCurve?: { x: number, v: number }[]
-  /**
-   * 2D colour field behind the plot: one entry per column (ramp position),
-   * each an array of oklch colours sampled top (yMax) to bottom (yMin). Drawn
-   * as a small bitmap scaled up on the canvas, so it shows exactly what
-   * dragging the curve at each (x, value) point would produce.
-   */
+  /** Colour field behind the plot: columns of oklch samples, top (yMax) to bottom. */
   field?: string[][]
 }>()
 
@@ -69,8 +53,7 @@ function fromY(py: number) {
 }
 
 const path = computed(() => {
-  // With pins active the parent passes the corrected curve; draw that so the
-  // line rides through the pinned stops. Otherwise it's exactly the bézier.
+  // with pins the parent passes the corrected curve — draw it through the stops
   if (props.actualCurve?.length) {
     return props.actualCurve.map((p, i) => `${i ? 'L' : 'M'} ${toX(p.x).toFixed(2)} ${toY(p.v).toFixed(2)}`).join(' ')
   }
@@ -78,16 +61,10 @@ const path = computed(() => {
   return `M ${toX(0)} ${toY(c.y0)} C ${toX(c.p1x)} ${toY(c.p1y)}, ${toX(c.p2x)} ${toY(c.p2y)}, ${toX(1)} ${toY(c.y1)}`
 })
 
-/**
- * Paint the colour field: parse the oklch grid into a `columns × rows` bitmap
- * once, then let the canvas scale it up with bilinear smoothing — which does
- * the vertical gradient AND the horizontal smoothing the SVG needed a blur
- * filter for. The backing store is small and fixed (the field is soft anyway);
- * the element stretches to fill via CSS. Drawing is ~0.1ms and, unlike the old
- * SVG filter, never re-rasterises during unrelated page restyles.
- */
+// Paint the field as a small bitmap the canvas scales up with bilinear
+// smoothing — does what the SVG needed a blur filter for, without the filter
+// re-rasterising on every page restyle.
 const fieldCanvas = useTemplateRef<HTMLCanvasElement>('fieldCanvas')
-// The small source bitmap, reused across redraws (the grid size is fixed).
 let sourceCanvas: HTMLCanvasElement | undefined
 
 function drawField() {
@@ -98,8 +75,7 @@ function drawField() {
   const nRow = columns[0]!.length
   if (!nRow) return
 
-  // Fixed, modest backing store — the field is a soft gradient, so a low-res
-  // bitmap stretched by CSS is indistinguishable and keeps redraws cheap.
+  // low-res backing store stretched by CSS — indistinguishable for a soft gradient
   if (canvas.width !== W * 3) {
     canvas.width = W * 3
     canvas.height = H * 3
@@ -131,14 +107,12 @@ function drawField() {
   ctx.drawImage(sourceCanvas, 0, 0, nCol, nRow, 0, 0, canvas.width, canvas.height)
 }
 
-// Watch both sources explicitly (not via read-tracking, which the early return
-// on a not-yet-mounted canvas would miss): draw once the canvas exists and
-// redraw on every field change — a drag, a tab switch, or a preset reseed.
+// Watch both explicitly — read-tracking would miss props.field behind the
+// early return while the canvas isn't mounted yet.
 watch([() => props.field, fieldCanvas], drawField, { immediate: true, flush: 'post' })
 
-// Sit the endpoint handle on the corrected value, not the raw bézier control,
-// so it rides the drawn line when a pin pulls the edge (equal when unpinned). A
-// pinned endpoint is also locked from dragging — the pin owns it.
+// Endpoint handles ride the corrected line when a pin pulls the edge; a pinned
+// endpoint is locked from dragging — the pin owns it.
 const lastStop = computed(() => (props.stopValues?.length ?? 1) - 1)
 const startPinned = computed(() => props.stopPinned?.[0] ?? false)
 const endPinned = computed(() => props.stopPinned?.[lastStop.value] ?? false)
@@ -147,9 +121,7 @@ const endY = computed(() => props.stopValues?.[lastStop.value] ?? curve.value.y1
 
 const stopXs = computed(() => props.stopXs ?? SHADES.map(shadeX))
 const stops = computed(() => stopXs.value.map((x, index) => {
-  // Sit each dot on the value its colour actually resolves to (pin-corrected),
-  // so they ride the drawn line; fall back to the bézier sample when the parent
-  // sends no corrected values (no pins).
+  // dots ride the drawn (pin-corrected) line; bézier sample when no pins
   const value = props.stopValues?.[index] ?? sampleCurve(x, curve.value)
   return {
     key: index,
@@ -161,7 +133,6 @@ const stops = computed(() => stopXs.value.map((x, index) => {
 }))
 
 // Dots track the stop spacing, or a dense ramp draws them as one fat band.
-// Capped at the radius the standard 11 stops have always used.
 const stopRadius = computed(() => Math.min(2.25, Math.max(0.9, (W - 2 * PAD) / (stops.value.length * 2.4))))
 
 const svgRef = ref<SVGSVGElement>()
@@ -185,7 +156,7 @@ function onPointerDown(event: PointerEvent) {
   const targets = [
     { id: 'p1' as const, x: toX(c.p1x), y: toHandleY(c.p1y) },
     { id: 'p2' as const, x: toX(c.p2x), y: toHandleY(c.p2y) },
-    // Skip a pinned endpoint (locked); grab the rest at their drawn spot.
+    // a pinned endpoint is locked
     ...(startPinned.value ? [] : [{ id: 'y0' as const, x: toX(0), y: toHandleY(startY.value) }]),
     ...(endPinned.value ? [] : [{ id: 'y1' as const, x: toX(1), y: toHandleY(endY.value) }])
   ]
@@ -211,15 +182,13 @@ function onPointerMove(event: PointerEvent) {
 
   const point = svgPoint(event)
   const value = fromY(point.y)
-  // Strictly window-clamped: an overshot handle would leave the canvas and
-  // become ungrabbable (and out-of-range lightness exports nonsense).
-  // Reaching further is the window's job — hue auto-pans at the edges.
+  // window-clamped: an overshot handle would leave the canvas and become
+  // ungrabbable (and out-of-range lightness exports nonsense)
   const clamped = Math.min(props.yMax, Math.max(props.yMin, value))
 
-  // An endpoint drag carries its control handle by the same delta so the tangent
-  // is preserved. The handle sits on the corrected curve but we steer the raw
-  // control, so back out the pin pull (corrected − raw) to track the pointer;
-  // with no pin at the edge the offset is zero and it's a plain drag.
+  // An endpoint drag carries its control handle by the same delta (tangent
+  // preserved). The handle sits on the corrected curve but steers the raw
+  // control — back out the pin pull (corrected − raw) to track the pointer.
   if (dragging.value === 'y0') {
     const raw = Math.min(props.yMax, Math.max(props.yMin, clamped - (startY.value - curve.value.y0)))
     const delta = raw - curve.value.y0
@@ -240,9 +209,8 @@ function onPointerMove(event: PointerEvent) {
 function onPointerUp(event: PointerEvent) {
   if (dragging.value) {
     dragging.value = null
-    // After a pointercancel the capture is already gone and release throws
-    // NotFoundError — which would skip dragEnd and leave the page-wide
-    // dragging class stuck on <html>.
+    // after a pointercancel the capture is gone and release throws — which
+    // would skip dragEnd and strand the page-wide dragging class
     if (svgRef.value?.hasPointerCapture(event.pointerId)) {
       svgRef.value.releasePointerCapture(event.pointerId)
     }
@@ -262,11 +230,8 @@ onUnmounted(() => {
 
 <template>
   <div class="relative w-full rounded-t-sm ring ring-default bg-elevated/30 overflow-hidden">
-    <!-- The reachable-colours field behind the plot: a small colour grid drawn
-         on a canvas and scaled up with bilinear smoothing. It replaces 24 SVG
-         gradients behind a Gaussian blur — that filter was re-rasterised on
-         every page restyle (~7ms per apply during a drag); a canvas is a bitmap
-         leaf that stays out of style recalc entirely. -->
+    <!-- canvas, not SVG gradients + blur: the filter re-rasterised on every
+         page restyle (~7ms per apply during a drag) -->
     <canvas
       ref="fieldCanvas"
       class="absolute inset-0 size-full opacity-75 pointer-events-none"

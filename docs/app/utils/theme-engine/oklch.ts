@@ -1,9 +1,7 @@
 /**
- * Minimal sRGB ↔ OKLCH conversion (Björn Ottosson's OKLab), kept
- * dependency-free so the engine stays portable. Only what the palette
- * generator needs: parse any CSS color the studio meets, move through
- * OKLCH space, come back out as a gamut-safe `oklch(…)` string —
- * tailwind v4's native color format.
+ * Minimal sRGB ↔ OKLCH conversion (Björn Ottosson's OKLab), dependency-free
+ * so the engine stays portable: parse any CSS color the studio meets, move
+ * through OKLCH, come back out as a gamut-safe `oklch(…)` string.
  */
 
 export interface Oklch {
@@ -116,23 +114,18 @@ export function hexToOklch(hex: string): Oklch {
 }
 
 /**
- * Serialize to an `oklch(…)` string in tailwind v4's shape:
- * `oklch(62.3% 0.214 259.815)`. Pure formatting — no gamut clamp, so
- * wider-than-sRGB values (tailwind's own ramps have them) survive a
- * round-trip. Achromatic hue is atan2 noise — zero it.
+ * Serialize to tailwind v4's `oklch(62.3% 0.214 259.815)` shape. No gamut
+ * clamp, so wider-than-sRGB values (tailwind's own ramps have them) survive
+ * a round-trip. Achromatic hue is atan2 noise — zero it.
  */
 export function formatOklch(color: Oklch): string {
   const c = +color.c.toFixed(3)
   return `oklch(${+(color.l * 100).toFixed(1)}% ${c} ${c === 0 ? 0 : +color.h.toFixed(3)})`
 }
 
-/**
- * Parse a CSS color into OKLCH. Handles the forms the studio actually
- * meets: hex, `oklch(…)` (tailwind v4's format) and `rgb(…)`.
- */
+/** Parse a CSS color into OKLCH — the forms the studio meets: hex, `oklch(…)`, `rgb(…)`. */
 export function parseColor(value: string): Oklch | undefined {
-  // Ramp lookups can pass undefined (missing midpoint, unset var) — treat any
-  // non-string as unparseable rather than throwing on .trim().
+  // Ramp lookups can pass undefined — unparseable, not a .trim() throw.
   if (typeof value !== 'string') return undefined
   const input = value.trim()
 
@@ -140,8 +133,7 @@ export function parseColor(value: string): Oklch | undefined {
   if (input === 'white') return { l: 1, c: 0, h: 0 }
   if (input === 'black') return { l: 0, c: 0, h: 0 }
 
-  // Only 3/6-digit hex converts cleanly — a truncated or alpha hex would
-  // feed NaN channels into the curve fitter, which returns undefined ramps.
+  // Only 3/6-digit hex — truncated/alpha hex would feed NaN into the fitter.
   if (/^#(?:[0-9a-f]{3}|[0-9a-f]{6})$/i.test(input)) {
     return rgbToOklch(hexToRgb(input))
   }
@@ -169,10 +161,9 @@ export function parseCssColor(value: string): string | undefined {
 }
 
 /**
- * Composite `color` at `alpha` over `backdrop` — what the browser actually
- * paints for `bg-primary/10`. Blending happens in gamma-encoded sRGB, not
- * linear, so the result matches the rendered pixel. Returns a hex string, or
- * undefined when either input is unparseable.
+ * Composite `color` at `alpha` over `backdrop` — what the browser paints for
+ * `bg-primary/10`. Blends in gamma-encoded sRGB (not linear) to match the
+ * rendered pixel. Undefined when either input is unparseable.
  */
 export function blendColors(color: string, backdrop: string, alpha: number): string | undefined {
   const fg = parseColor(color)
@@ -191,9 +182,8 @@ function luminance(color: Oklch): number {
 }
 
 /**
- * WCAG 2.x contrast ratio between two CSS colors (hex or oklch), 1–21.
- * Returns `null` when either input is unparseable, so callers can signal an
- * unknown/unmeasurable result rather than a fabricated ratio.
+ * WCAG 2.x contrast ratio between two CSS colors, 1–21. `null` when either
+ * input is unparseable — unknown, not a fabricated ratio.
  */
 export function contrastRatio(colorA: string, colorB: string): number | null {
   const a = parseColor(colorA)
