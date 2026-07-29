@@ -1,0 +1,31 @@
+{
+  "private": true,
+  "name": "@nuxt/ui-theme-studio",
+  "description": "Theme Studio for Nuxt UI — live theme editing engine, controls and presets, as an extendable Nuxt layer.",
+  "version": "0.0.1",
+  "type": "module",
+  "main": "./nuxt.config.ts",
+  "exports": {
+    ".": "./nuxt.config.ts",
+    "./engine": "./app/utils/theme-engine/index.ts",
+    "./theme": "./app/utils/theme.ts",
+    "./theme.css": "./theme.css",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "app",
+    "server",
+    "nuxt.config.ts",
+    "theme.css"
+  ],
+  "peerDependencies": {
+    "@nuxt/ui": "workspace:*",
+    "tailwindcss": "^4.3.2"
+  },
+  "dependencies": {
+    "@vueuse/core": "^14.3.0",
+    "@vueuse/nuxt": "^14.3.0",
+    "defu": "^6.1.4",
+    "scule": "^1.3.0"
+  }
+}

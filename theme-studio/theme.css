@@ -1,0 +1,87 @@
+/* Theme Studio machinery. Import from the app's Tailwind entry CSS (after
+   `@import "tailwindcss"` and `@import "@nuxt/ui"`) — the @theme tokens here
+   must be seen by the Tailwind build, so this cannot be injected at runtime.
+   The @source pulls the layer's own components into class scanning for
+   consumers whose source root doesn't already cover this directory. */
+@source "./app";
+
+@theme static {
+  /* every default-width border/ring/divide utility compiles to this var,
+     so the studio's width slider repaints the whole site through it */
+  --default-border-width: var(--studio-border-width, 1px);
+  --default-ring-width: var(--studio-border-width, 1px);
+
+  /* each fallback is the Tailwind-native value — Inherit stays untouched;
+     --ui-shadow-c-* only exist under .shadow-custom / .shadow-none */
+  --shadow-2xs: var(--ui-shadow-c-2xs, 0 1px rgb(0 0 0 / 0.05));
+  --shadow-xs: var(--ui-shadow-c-xs, 0 1px 2px 0 rgb(0 0 0 / 0.05));
+  --shadow-sm: var(--ui-shadow-c-sm, 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1));
+  --shadow-md: var(--ui-shadow-c-md, 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1));
+  --shadow-lg: var(--ui-shadow-c-lg, 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1));
+  --shadow-xl: var(--ui-shadow-c-xl, 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1));
+  --shadow-2xl: var(--ui-shadow-c-2xl, 0 25px 50px -12px rgb(0 0 0 / 0.25));
+}
+
+/* Studio baselines. :where() = zero specificity: unlayered, they beat the
+   library's @layer defaults but lose to the studio's injected rules. */
+:where(:root:not(.dark), .light) {
+  --ui-shadow-color: var(--ui-color-neutral-950);
+}
+
+/* The one shadow config the whole scale derives from; studio sliders and
+   presets override these vars. */
+:where(:root) {
+  --ui-shadow-offset-x: 3px;
+  --ui-shadow-offset-y: 3px;
+  --ui-shadow-blur: 0px;
+  --ui-shadow-spread: 0px;
+  --ui-shadow-press-color: color-mix(in oklab, var(--ui-shadow-color) var(--ui-shadow-opacity, 100%), transparent);
+  /* alpha is uniform across sizes so the opacity slider reads true (100% =
+     solid everywhere); size is expressed through geometry only */
+  --ui-shadow-alpha: var(--ui-shadow-opacity, 25%);
+  /* per-size geometry scale — lg is the config's 1× reference */
+  --ui-shadow-s-2xs: 0.15;
+  --ui-shadow-s-xs: 0.25;
+  --ui-shadow-s-sm: 0.4;
+  --ui-shadow-s-md: 0.65;
+  --ui-shadow-s-lg: 1;
+  --ui-shadow-s-xl: 1.5;
+  --ui-shadow-s-2xl: 2.2;
+  /* press-effect shadows (rest 1×, hover ½×) as vars so tailwind-merge can
+     dedupe shadow-(--var) — it can't parse a shadow-[calc(...)] value */
+  --ui-shadow-press: var(--ui-shadow-offset-x) var(--ui-shadow-offset-y) var(--ui-shadow-blur) var(--ui-shadow-spread) var(--ui-shadow-press-color);
+  --ui-shadow-press-half: calc(var(--ui-shadow-offset-x) / 2) calc(var(--ui-shadow-offset-y) / 2) var(--ui-shadow-blur) var(--ui-shadow-spread) var(--ui-shadow-press-color);
+  /* inner-shadow defaults; shares --ui-shadow-color, gentler opacity fallback */
+  --ui-inner-shadow-offset-x: 0px;
+  --ui-inner-shadow-offset-y: 2px;
+  --ui-inner-shadow-blur: 4px;
+  --ui-inner-shadow-spread: 0px;
+  --ui-inner-shadow-mix: color-mix(in oklab, var(--ui-inner-shadow-color, var(--ui-shadow-color)) var(--ui-inner-shadow-opacity, 15%), transparent);
+  --ui-inner-shadow: var(--ui-inner-shadow-offset-x) var(--ui-inner-shadow-offset-y) var(--ui-inner-shadow-blur) var(--ui-inner-shadow-spread) var(--ui-inner-shadow-mix);
+}
+
+/* Custom: the one config scaled per size into the ramp's override slots. */
+:root:where(.shadow-custom) {
+  --ui-shadow-c-2xs: calc(var(--ui-shadow-offset-x) * var(--ui-shadow-s-2xs)) calc(var(--ui-shadow-offset-y) * var(--ui-shadow-s-2xs)) calc(var(--ui-shadow-blur) * var(--ui-shadow-s-2xs)) calc(var(--ui-shadow-spread) * var(--ui-shadow-s-2xs)) color-mix(in oklab, var(--ui-shadow-color) var(--ui-shadow-alpha), transparent);
+  --ui-shadow-c-xs: calc(var(--ui-shadow-offset-x) * var(--ui-shadow-s-xs)) calc(var(--ui-shadow-offset-y) * var(--ui-shadow-s-xs)) calc(var(--ui-shadow-blur) * var(--ui-shadow-s-xs)) calc(var(--ui-shadow-spread) * var(--ui-shadow-s-xs)) color-mix(in oklab, var(--ui-shadow-color) var(--ui-shadow-alpha), transparent);
+  --ui-shadow-c-sm: calc(var(--ui-shadow-offset-x) * var(--ui-shadow-s-sm)) calc(var(--ui-shadow-offset-y) * var(--ui-shadow-s-sm)) calc(var(--ui-shadow-blur) * var(--ui-shadow-s-sm)) calc(var(--ui-shadow-spread) * var(--ui-shadow-s-sm)) color-mix(in oklab, var(--ui-shadow-color) var(--ui-shadow-alpha), transparent);
+  --ui-shadow-c-md: calc(var(--ui-shadow-offset-x) * var(--ui-shadow-s-md)) calc(var(--ui-shadow-offset-y) * var(--ui-shadow-s-md)) calc(var(--ui-shadow-blur) * var(--ui-shadow-s-md)) calc(var(--ui-shadow-spread) * var(--ui-shadow-s-md)) color-mix(in oklab, var(--ui-shadow-color) var(--ui-shadow-alpha), transparent);
+  --ui-shadow-c-lg: calc(var(--ui-shadow-offset-x) * var(--ui-shadow-s-lg)) calc(var(--ui-shadow-offset-y) * var(--ui-shadow-s-lg)) calc(var(--ui-shadow-blur) * var(--ui-shadow-s-lg)) calc(var(--ui-shadow-spread) * var(--ui-shadow-s-lg)) color-mix(in oklab, var(--ui-shadow-color) var(--ui-shadow-alpha), transparent);
+  --ui-shadow-c-xl: calc(var(--ui-shadow-offset-x) * var(--ui-shadow-s-xl)) calc(var(--ui-shadow-offset-y) * var(--ui-shadow-s-xl)) calc(var(--ui-shadow-blur) * var(--ui-shadow-s-xl)) calc(var(--ui-shadow-spread) * var(--ui-shadow-s-xl)) color-mix(in oklab, var(--ui-shadow-color) var(--ui-shadow-alpha), transparent);
+  --ui-shadow-c-2xl: calc(var(--ui-shadow-offset-x) * var(--ui-shadow-s-2xl)) calc(var(--ui-shadow-offset-y) * var(--ui-shadow-s-2xl)) calc(var(--ui-shadow-blur) * var(--ui-shadow-s-2xl)) calc(var(--ui-shadow-spread) * var(--ui-shadow-s-2xl)) color-mix(in oklab, var(--ui-shadow-color) var(--ui-shadow-alpha), transparent);
+}
+
+/* None: strip the ramp so raw content (screenshots) goes flat too. */
+:root:where(.shadow-none) {
+  --ui-shadow-c-2xs: 0 0 transparent;
+  --ui-shadow-c-xs: 0 0 transparent;
+  --ui-shadow-c-sm: 0 0 transparent;
+  --ui-shadow-c-md: 0 0 transparent;
+  --ui-shadow-c-lg: 0 0 transparent;
+  --ui-shadow-c-xl: 0 0 transparent;
+  --ui-shadow-c-2xl: 0 0 transparent;
+}
+
+:where(.dark) {
+  --ui-shadow-color: black;
+}

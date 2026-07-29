@@ -1,0 +1,820 @@
+import type { ThemeDoc, Shade } from './types'
+import { SHADES_ALL, DEFAULT_COLORS } from './types'
+import type { StyleOptions, DefaultVariant, DefaultSize, DefaultColor, VariantGroup } from './styles'
+import {
+  styleComponents,
+  BORDER_COLOR_VALUES,
+  SHADOW_COLOR_VALUES,
+  SHADOW_GEOMETRY_DEFAULTS,
+  INNER_SHADOW_GEOMETRY_DEFAULTS,
+  BORDER_WIDTH_DEFAULT,
+  VARIANT_GROUPS,
+  VARIANT_SUPPORT,
+  SIZE_SUPPORT,
+  COLOR_SUPPORT
+} from './styles'
+import { parseUiColorRef, LIBRARY_TOKEN_DEFAULTS } from './resolve'
+import { themeIcons } from '../theme'
+
+/**
+ * The inverse of generateCSS/generateConfig: parse an exported theme back
+ * into a ThemeDoc. Anything outside the export grammar is collected in
+ * `skipped` and surfaced — never silently dropped.
+ */
+export interface ThemeImportResult {
+  doc: ThemeDoc
+  skipped: string[]
+}
+
+const SHADE_SET = new Set<number>(SHADES_ALL)
+
+/* ---------------------------------------------------------------- CSS -- */
+
+interface ParsedCSS {
+  palettes: Record<string, Partial<Record<Shade, string>>>
+  font?: string
+  spacing?: number
+  fontSize?: number
+  radius?: number
+  fontWeights?: { normal?: number, medium?: number, semibold?: number, bold?: number }
+  body?: { weight?: number, uppercase?: boolean, italic?: boolean, letterSpacing?: number, lineHeight?: number }
+  heading?: { font?: string, weight?: number, uppercase?: boolean, italic?: boolean, underline?: boolean, letterSpacing?: number, lineHeight?: number }
+  blackAsPrimary?: boolean
+  /** From @theme --default-border-width — the export's width channel. */
+  borderWidth?: number
+  light: Record<string, string>
+  dark: Record<string, string>
+  skipped: string[]
+}
+
+function parseCSS(css: string): ParsedCSS {
+  const result: ParsedCSS = { palettes: {}, light: {}, dark: {}, skipped: [] }
+  let clean = css.replace(/\/\*[\s\S]*?\*\//g, '')
+
+  // The flat block scanner can't see nesting — a nested at-rule's inner
+  // blocks would import as GLOBAL tokens. Lift each whole one into `skipped`.
+  clean = clean.replace(/@(?:media|supports|container|layer|scope)[^{}]*\{(?:[^{}]*\{[^{}]*\})*[^{}]*\}/g, (block) => {
+    result.skipped.push(block.trim().replace(/\s+/g, ' '))
+    return ''
+  })
+
+  const blockRe = /([^{}]+)\{([^{}]*)\}/g
+  let cursor = 0
+  let match: RegExpExecArray | null
+
+  const outside = (text: string) => {
+    for (const line of text.split('\n')) {
+      const trimmed = line.trim()
+      if (trimmed && !trimmed.startsWith('@import') && !trimmed.startsWith('@source')) {
+        result.skipped.push(trimmed)
+      }
+    }
+  }
+
+  while ((match = blockRe.exec(clean))) {
+    cursor = match.index + match[0].length
+
+    // The selector is what follows the last ';'; the rest is preamble.
+    const segments = match[1]!.split(';')
+    outside(segments.slice(0, -1).join('\n'))
+    const selector = segments[segments.length - 1]!.trim().replace(/\s+/g, ' ')
+    const declarations = match[2]!.split(';')
+      .map(declaration => declaration.trim())
+      .filter(Boolean)
+      .map((declaration) => {
+        const colon = declaration.indexOf(':')
+        return [declaration.slice(0, colon).trim(), declaration.slice(colon + 1).trim()] as const
+      })
+
+    for (const [prop, value] of declarations) {
+      if (!parseDeclaration(result, selector, prop, value)) {
+        result.skipped.push(`${selector} { ${prop}: ${value} }`)
+      }
+    }
+  }
+  outside(clean.slice(cursor))
+
+  return result
+}
+
+function parseDeclaration(result: ParsedCSS, selector: string, prop: string, value: string): boolean {
+  if (selector === '@theme static' || selector === '@theme') {
+    const shade = prop.match(/^--color-(.+)-(\d{2,3})$/)
+    if (shade && SHADE_SET.has(Number(shade[2]))) {
+      const palette = result.palettes[shade[1]!] ||= {}
+      palette[Number(shade[2]) as Shade] = value
+      return true
+    }
+    if (prop === '--font-sans') {
+      const family = value.match(/^'([^']+)'/) || value.match(/^"([^"]+)"/)
+      if (family) {
+        result.font = family[1]
+        return true
+      }
+    }
+    const weightStep = prop.match(/^--font-weight-(normal|medium|semibold|bold)$/)
+    if (weightStep && /^\d+$/.test(value)) {
+      result.fontWeights = { ...result.fontWeights, [weightStep[1]!]: Number(value) }
+      return true
+    }
+    if (prop === '--spacing' && value.endsWith('rem')) {
+      result.spacing = Number.parseFloat(value)
+      return true
+    }
+    if (prop === '--default-border-width' && value.endsWith('px')) {
+      result.borderWidth = Number.parseFloat(value)
+      return true
+    }
+    if (prop === '--default-ring-width' && value.endsWith('px')) {
+      // always exported alongside --default-border-width with the same value
+      return true
+    }
+    if (/^--shadow-(?:2xs|xs|sm|md|lg|xl|2xl)$/.test(prop)) {
+      // Derived ramp, regenerated on export — carries no independent data.
+      return true
+    }
+    return false
+  }
+
+  if (selector === 'html' && prop === 'font-size' && value.endsWith('px')) {
+    result.fontSize = Number.parseFloat(value)
+    return true
+  }
+
+  if (selector === 'body') {
+    const body = result.body ||= {}
+    if (prop === 'font-weight' && /^\d+$/.test(value)) {
+      // generated alongside the normal-weight step, not a separate choice
+      body.weight = Number(value)
+      return true
+    }
+    if (prop === 'text-transform' && value === 'uppercase') {
+      body.uppercase = true
+      return true
+    }
+    if (prop === 'font-style' && value === 'italic') {
+      body.italic = true
+      return true
+    }
+    if (prop === 'letter-spacing' && value.endsWith('em')) {
+      body.letterSpacing = Number.parseFloat(value)
+      return true
+    }
+    if (prop === 'line-height' && /^\d+(?:\.\d+)?$/.test(value)) {
+      body.lineHeight = Number(value)
+      return true
+    }
+    return false
+  }
+
+  if (selector === 'h1, h2, h3, h4, h5, h6') {
+    const heading = result.heading ||= {}
+    if (prop === 'font-family') {
+      const family = value.match(/^'([^']+)'/) || value.match(/^"([^"]+)"/)
+      if (family) {
+        heading.font = family[1]
+        return true
+      }
+    }
+    if (prop === 'font-weight' && /^\d+$/.test(value)) {
+      heading.weight = Number(value)
+      return true
+    }
+    if (prop === 'text-transform' && value === 'uppercase') {
+      heading.uppercase = true
+      return true
+    }
+    if (prop === 'font-style' && value === 'italic') {
+      heading.italic = true
+      return true
+    }
+    if (prop === 'text-decoration' && value === 'underline') {
+      heading.underline = true
+      return true
+    }
+    if (prop === 'letter-spacing' && value.endsWith('em')) {
+      heading.letterSpacing = Number.parseFloat(value)
+      return true
+    }
+    if (prop === 'line-height' && /^\d+(?:\.\d+)?$/.test(value)) {
+      heading.lineHeight = Number(value)
+      return true
+    }
+    return false
+  }
+
+  if (selector === ':root') {
+    if (prop === '--ui-radius' && value.endsWith('rem')) {
+      result.radius = Number.parseFloat(value)
+      return true
+    }
+    if (prop === '--ui-primary' && value === 'black') {
+      result.blackAsPrimary = true
+      return true
+    }
+    if (prop === '--spacing' && value.endsWith('rem')) {
+      result.spacing = Number.parseFloat(value)
+      return true
+    }
+    return false
+  }
+
+  // Only custom properties are theme tokens — a plain declaration must
+  // surface in `skipped`, not ride the token channel into the re-export.
+  if (selector === ':root, .light' || selector === '.light') {
+    if (!prop.startsWith('--')) return false
+    // studio-internal vars never carry theme meaning
+    if (!prop.startsWith('--studio-')) result.light[prop] = value
+    return true
+  }
+  if (selector === '.dark') {
+    if (!prop.startsWith('--')) return false
+    if (!prop.startsWith('--studio-')) result.dark[prop] = value
+    return true
+  }
+
+  return false
+}
+
+/* ------------------------------------------------- style reconstruction -- */
+
+/** Reconstruct a color choice (named, or a per-mode ramp shade) from emitted per-mode values. */
+function matchColorChoice(value: { light?: string, dark?: string }, table: Record<string, { light: string, dark: string }>): { color: string, shade?: { light: Shade, dark: Shade } } | undefined {
+  const named = Object.keys(table).find(key => table[key]!.light === value.light && table[key]!.dark === value.dark)
+  if (named) return { color: named }
+  const lightRef = parseUiColorRef(value.light)
+  const darkRef = parseUiColorRef(value.dark)
+  if (lightRef && darkRef && lightRef.alias === darkRef.alias && (lightRef.alias === 'neutral' || lightRef.alias === 'primary')) {
+    return { color: lightRef.alias === 'primary' ? 'primary-shade' : 'shade', shade: { light: lightRef.shade as Shade, dark: darkRef.shade as Shade } }
+  }
+  return undefined
+}
+
+/**
+ * Consume the style-owned variables out of the per-mode records and work
+ * backwards to the StyleOptions that would emit them; what remains is plain
+ * token overrides.
+ */
+function extractStyle(light: Record<string, string>, dark: Record<string, string>): StyleOptions {
+  const style: StyleOptions = {}
+
+  const take = (prop: string): { light?: string, dark?: string } => {
+    const value = { light: light[prop], dark: dark[prop] }
+    Reflect.deleteProperty(light, prop)
+    Reflect.deleteProperty(dark, prop)
+    return value
+  }
+
+  // What the style axis can't express goes back into the residual maps and
+  // survives as a plain token override instead of silently vanishing.
+  const putBack = (prop: string, value: { light?: string, dark?: string }) => {
+    if (value.light !== undefined) light[prop] = value.light
+    if (value.dark !== undefined) dark[prop] = value.dark
+  }
+
+  const opacity = take('--ui-shadow-opacity')
+  const geometry = {
+    x: take('--ui-shadow-offset-x'),
+    y: take('--ui-shadow-offset-y'),
+    blur: take('--ui-shadow-blur'),
+    spread: take('--ui-shadow-spread')
+  }
+  const pressColor = take('--ui-shadow-press-color')
+  // force-emitted compositions — never a choice of their own, consume silently
+  take('--ui-shadow-press')
+  take('--ui-shadow-press-half')
+  const shadowColor = take('--ui-shadow-color')
+  const frameColor = take('--ui-border-color')
+
+  if (geometry.x.light !== undefined) {
+    style.shadow = 'custom'
+    const parsed = {
+      x: Number.parseFloat(geometry.x.light),
+      y: Number.parseFloat(geometry.y.light ?? '3'),
+      blur: Number.parseFloat(geometry.blur.light ?? '0'),
+      spread: Number.parseFloat(geometry.spread.light ?? '0')
+    }
+    // The export force-emits default geometry — only a real change is a choice.
+    if (JSON.stringify(parsed) !== JSON.stringify(SHADOW_GEOMETRY_DEFAULTS)) {
+      style.shadowGeometry = parsed
+    }
+  } else if (pressColor.light !== undefined) {
+    style.shadow = 'custom'
+  }
+
+  if (style.shadow !== 'custom') {
+    // dark-only geometry can't seed a hard shadow — keep it as tokens
+    putBack('--ui-shadow-offset-x', geometry.x)
+    putBack('--ui-shadow-offset-y', geometry.y)
+    putBack('--ui-shadow-blur', geometry.blur)
+    putBack('--ui-shadow-spread', geometry.spread)
+  }
+
+  if (opacity.light !== undefined && style.shadow) {
+    style.shadowOpacity = Number.parseFloat(opacity.light)
+  } else {
+    // without a shadow the option would never re-emit; as a token it round-trips
+    putBack('--ui-shadow-opacity', opacity)
+  }
+
+  const innerOpacity = take('--ui-inner-shadow-opacity')
+  const innerGeometry = {
+    x: take('--ui-inner-shadow-offset-x'),
+    y: take('--ui-inner-shadow-offset-y'),
+    blur: take('--ui-inner-shadow-blur'),
+    spread: take('--ui-inner-shadow-spread')
+  }
+  const innerFinal = take('--ui-inner-shadow-mix')
+  const innerColor = take('--ui-inner-shadow-color')
+  take('--ui-inner-shadow')
+
+  if (innerGeometry.x.light !== undefined) {
+    style.innerShadow = 'custom'
+    const parsed = {
+      x: Number.parseFloat(innerGeometry.x.light),
+      y: Number.parseFloat(innerGeometry.y.light ?? '2'),
+      blur: Number.parseFloat(innerGeometry.blur.light ?? '4'),
+      spread: Number.parseFloat(innerGeometry.spread.light ?? '0')
+    }
+    if (JSON.stringify(parsed) !== JSON.stringify(INNER_SHADOW_GEOMETRY_DEFAULTS)) {
+      style.innerShadowGeometry = parsed
+    }
+  } else if (innerFinal.light !== undefined) {
+    style.innerShadow = 'custom'
+  }
+
+  if (style.innerShadow !== 'custom') {
+    putBack('--ui-inner-shadow-offset-x', innerGeometry.x)
+    putBack('--ui-inner-shadow-offset-y', innerGeometry.y)
+    putBack('--ui-inner-shadow-blur', innerGeometry.blur)
+    putBack('--ui-inner-shadow-spread', innerGeometry.spread)
+  }
+
+  if (innerOpacity.light !== undefined && style.innerShadow) {
+    style.innerShadowOpacity = Number.parseFloat(innerOpacity.light)
+  } else {
+    putBack('--ui-inner-shadow-opacity', innerOpacity)
+  }
+
+  if (shadowColor.light !== undefined || shadowColor.dark !== undefined) {
+    // The export force-emits neutral-950/black when no color was chosen.
+    const forced = shadowColor.light === 'var(--ui-color-neutral-950)' && shadowColor.dark === 'black'
+    if (!forced) {
+      const match = matchColorChoice(shadowColor, SHADOW_COLOR_VALUES)
+      if (match) {
+        style.shadowColor = match.color as StyleOptions['shadowColor']
+        if (match.shade) style.shadowShade = match.shade
+      } else {
+        putBack('--ui-shadow-color', shadowColor)
+      }
+    }
+  }
+
+  if (innerColor.light !== undefined || innerColor.dark !== undefined) {
+    // Never force-emitted — any presence is a real choice.
+    const match = matchColorChoice(innerColor, SHADOW_COLOR_VALUES)
+    if (match) {
+      style.innerShadowColor = match.color as StyleOptions['innerShadowColor']
+      if (match.shade) style.innerShadowShade = match.shade
+    } else {
+      putBack('--ui-inner-shadow-color', innerColor)
+    }
+  }
+
+  if (frameColor.light !== undefined || frameColor.dark !== undefined) {
+    const match = matchColorChoice(frameColor, BORDER_COLOR_VALUES)
+    if (match) {
+      style.borderColor = match.color as StyleOptions['borderColor']
+      if (match.shade) style.borderShade = match.shade
+    } else {
+      putBack('--ui-border-color', frameColor)
+    }
+  }
+
+  return style
+}
+
+/* ------------------------------------------------------------- config -- */
+
+/**
+ * Parser for the restricted object-literal grammar generateConfig emits —
+ * a tokenizer, not eval, so pasted content can't execute anything.
+ */
+function parseObjectLiteral(source: string, start: number): { value: any, end: number } {
+  let i = start
+
+  const ws = () => {
+    while (i < source.length && /[\s,]/.test(source[i]!)) i++
+  }
+
+  const parseValue = (): any => {
+    ws()
+    const ch = source[i]
+    if (ch === '{') {
+      i++
+      const obj: Record<string, any> = {}
+      ws()
+      while (source[i] !== '}') {
+        ws()
+        let key: string
+        if (source[i] === '\'' || source[i] === '"') {
+          key = parseString()
+        } else {
+          const match = source.slice(i).match(/^[\w$-]+/)
+          if (!match) throw new Error(`Unexpected character at ${i}`)
+          key = match[0]
+          i += key.length
+        }
+        ws()
+        if (source[i] !== ':') throw new Error(`Expected ':' at ${i}`)
+        i++
+        // Define, not assign: a pasted `__proto__`/`constructor` key must
+        // land as an own property, not walk the setter.
+        Object.defineProperty(obj, key, {
+          value: parseValue(),
+          writable: true,
+          enumerable: true,
+          configurable: true
+        })
+        ws()
+      }
+      i++
+      return obj
+    }
+    if (ch === '[') {
+      i++
+      const array: any[] = []
+      ws()
+      while (source[i] !== ']') {
+        array.push(parseValue())
+        ws()
+      }
+      i++
+      return array
+    }
+    if (ch === '\'' || ch === '"') {
+      return parseString()
+    }
+    const literal = source.slice(i).match(/^(true|false|null|-?\d+(?:\.\d+)?)/)
+    if (literal) {
+      i += literal[0].length
+      if (literal[0] === 'true') return true
+      if (literal[0] === 'false') return false
+      if (literal[0] === 'null') return null
+      return Number(literal[0])
+    }
+    throw new Error(`Unexpected character '${ch}' at ${i}`)
+  }
+
+  const parseString = (): string => {
+    const quote = source[i]!
+    i++
+    let out = ''
+    while (i < source.length && source[i] !== quote) {
+      if (source[i] === '\\') {
+        i++
+        // backslash at EOF — don't append out-of-range source[i] ("undefined")
+        if (i >= source.length) break
+      }
+      out += source[i]
+      i++
+    }
+    i++
+    return out
+  }
+
+  const value = parseValue()
+  return { value, end: i }
+}
+
+function parseConfig(config: string, skipped: string[]): Record<string, any> | undefined {
+  const anchor = config.includes('defineAppConfig(')
+    ? config.indexOf('defineAppConfig(') + 'defineAppConfig('.length
+    : config.includes('ui(') ? config.indexOf('ui(') + 'ui('.length : -1
+  if (anchor === -1) {
+    skipped.push('config: no defineAppConfig(…) or ui(…) call found')
+    return undefined
+  }
+
+  const start = config.indexOf('{', anchor)
+  if (start === -1) return {}
+
+  try {
+    return parseObjectLiteral(config, start).value
+  } catch {
+    skipped.push('config: could not parse the object literal')
+    return undefined
+  }
+}
+
+/** Rebuild `defaults` from per-component defaultVariants, group-wise. */
+function extractDefaults(components: Record<string, any>): StyleOptions['defaults'] {
+  const defaults: { size?: DefaultSize, variants?: Partial<Record<VariantGroup, DefaultVariant>>, colors?: Partial<Record<VariantGroup, DefaultColor>> } = {}
+
+  for (const [group, groupComponents] of Object.entries(VARIANT_GROUPS)) {
+    const colors = groupComponents.map(component => components[component]?.defaultVariants?.color)
+    const candidate = colors.find(Boolean)
+    if (!candidate) continue
+    const consistent = groupComponents.every((component, index) =>
+      COLOR_SUPPORT.includes(component) ? colors[index] === candidate : colors[index] === undefined
+    )
+    if (consistent) {
+      defaults.colors = { ...defaults.colors, [group]: candidate }
+    }
+  }
+
+  const sizes = SIZE_SUPPORT.map(component => components[component]?.defaultVariants?.size)
+  if (sizes[0] && sizes.every(size => size === sizes[0])) {
+    defaults.size = sizes[0]
+  }
+
+  for (const [group, groupComponents] of Object.entries(VARIANT_GROUPS)) {
+    const variants = groupComponents.map(component => components[component]?.defaultVariants?.variant)
+    const candidate = variants.find(Boolean)
+    if (!candidate) continue
+    // Every component that supports the candidate must carry it; ones that
+    // can't express it must carry nothing (that's how the expansion skips).
+    const consistent = groupComponents.every((component, index) =>
+      VARIANT_SUPPORT[component]?.includes(candidate) ? variants[index] === candidate : variants[index] === undefined
+    )
+    if (consistent) {
+      defaults.variants = { ...defaults.variants, [group]: candidate }
+    }
+  }
+
+  // A value carried by every group that could express it is an app-wide
+  // choice — collapsing keeps re-exports byte-identical to the original.
+  const groupValues = new Set(Object.values(defaults.variants || {}))
+  if (groupValues.size === 1) {
+    const [value] = [...groupValues] as [DefaultVariant]
+    const expressible = Object.entries(VARIANT_GROUPS)
+      .filter(([, groupComponents]) => groupComponents.some(component => VARIANT_SUPPORT[component]?.includes(value)))
+      .map(([group]) => group as VariantGroup)
+    if (expressible.every(group => defaults.variants?.[group] === value)) {
+      return { variant: value, ...(defaults.size ? { size: defaults.size } : {}), ...(defaults.colors ? { colors: defaults.colors } : {}) }
+    }
+  }
+
+  return Object.keys(defaults).length ? defaults : undefined
+}
+
+/** A compound entry's classes, whether written as a string or a slot map. */
+const classOf = (entry: Record<string, unknown>) => typeof entry.class === 'string' ? entry.class : Object.values(entry.class || {}).join(' ')
+
+function detectBorder(components: Record<string, any>): Pick<StyleOptions, 'border' | 'borderWidth' | 'frame'> {
+  const texts = Object.values(components).flatMap(component => [
+    ...Object.values((component?.slots || {}) as Record<string, string>),
+    ...((component?.compoundVariants || []) as Array<Record<string, unknown>>).map(classOf)
+  ])
+
+  const widths = texts.flatMap(text => [...text.matchAll(/(?:^|\s)(?:sm:)?ring-(\d)(?:\s|$)/g)].map(match => Number(match[1])))
+  if (!widths.length) return {}
+  // A mixed-width paste has no single right answer — take the most common
+  // width, ties toward the larger, so the choice is deterministic.
+  const counts = new Map<number, number>()
+  for (const value of widths) counts.set(value, (counts.get(value) ?? 0) + 1)
+  const width = [...counts.entries()].sort((a, b) => b[1] - a[1] || b[0] - a[0])[0]![0]
+  if (width === 0) return { border: 'none' }
+
+  return {
+    border: 'custom',
+    ...(width !== BORDER_WIDTH_DEFAULT ? { borderWidth: width } : {}),
+    ...(detectFrame(components) ? { frame: true } : {})
+  }
+}
+
+/** Frame outlines live on solid-variant compounds referencing the accented border. */
+function detectFrame(components: Record<string, any>): boolean {
+  return Object.values(components).some(component =>
+    ((component?.compoundVariants || []) as Array<Record<string, unknown>>).some(entry =>
+      entry.variant === 'solid' && classOf(entry).includes('ring-(--ui-border-accented)')
+    )
+  )
+}
+
+/** Shadow fallback when only a config was pasted (CSS normally decides). */
+function detectShadow(components: Record<string, any>): StyleOptions['shadow'] {
+  const slots = Object.values(components).flatMap(component => Object.values(component?.slots || {})) as string[]
+  if (slots.some(classes => classes.includes('--ui-shadow-press') || classes.includes('var(--ui-shadow-offset-x)'))) return 'custom'
+  // the flat treatment is bare shadow-none on the overlay surfaces
+  if (components.popover?.slots?.content?.includes('shadow-none') && components.toast?.slots?.root?.includes('shadow-none')) return 'flat'
+  return undefined
+}
+
+/** Inner-shadow fallback when only a config was pasted. */
+function detectInnerShadow(components: Record<string, any>): StyleOptions['innerShadow'] {
+  const slots = Object.values(components).flatMap(component => Object.values(component?.slots || {})) as string[]
+  if (slots.some(classes => classes.includes('(--ui-inner-shadow)'))) return 'custom'
+  if (slots.some(classes => classes.includes('--ui-inner-shadow-mix'))) return 'custom'
+  return undefined
+}
+
+/**
+ * Old exports carried border widths as class fragments (ring-2, divide-y-2
+ * …); widths now live on the style axis. Drop them, and renormalize old
+ * frame literals to the default-width form so subtraction recognizes them.
+ */
+function normalizeLegacyWidths(components: Record<string, any>) {
+  // The width digit is REQUIRED: a bare presence token (`border`, `divide-y`)
+  // is a real class the style axis never regenerates — scrubbing it would
+  // corrupt a genuine divider rather than strip a migrated width.
+  const WIDTH_TOKEN = /^(?:sm:)?(?:ring|divide-y|border(?:-[tbesxy])?)-[0-4]$|^lg:not-last:border-e-[0-4]$/
+  const scrub = (classes: unknown): string | undefined => {
+    if (typeof classes !== 'string') return undefined
+    const tokens = classes.split(/\s+/).flatMap((token) => {
+      if (/^(?:sm:)?ring-[1-4]$/.test(token)) {
+        // part of a frame literal → default-width ring; bare width → drop
+        return classes.includes('ring-(--ui-border-accented)') ? [token.replace(/ring-[1-4]$/, 'ring')] : []
+      }
+      return WIDTH_TOKEN.test(token) ? [] : [token]
+    })
+    return tokens.join(' ')
+  }
+
+  for (const [name, component] of Object.entries(components)) {
+    for (const [slot, classes] of Object.entries(component?.slots || {})) {
+      const cleaned = scrub(classes)
+      if (cleaned !== undefined) {
+        if (cleaned) component.slots[slot] = cleaned
+        else Reflect.deleteProperty(component.slots, slot)
+      }
+    }
+    if (component?.slots && !Object.keys(component.slots).length) Reflect.deleteProperty(component, 'slots')
+    if (Array.isArray(component?.compoundVariants)) {
+      component.compoundVariants = component.compoundVariants.filter((compound: any) => {
+        if (typeof compound.class === 'string') {
+          const cleaned = scrub(compound.class)!
+          if (!cleaned) return false
+          compound.class = cleaned
+        } else if (compound.class && typeof compound.class === 'object') {
+          for (const [slot, classes] of Object.entries(compound.class)) {
+            const cleaned = scrub(classes)
+            if (cleaned !== undefined) {
+              if (cleaned) compound.class[slot] = cleaned
+              else Reflect.deleteProperty(compound.class, slot)
+            }
+          }
+          if (!Object.keys(compound.class).length) return false
+        }
+        return true
+      })
+      if (!component.compoundVariants.length) Reflect.deleteProperty(component, 'compoundVariants')
+    }
+    if (component && !Object.keys(component).length) Reflect.deleteProperty(components, name)
+  }
+}
+
+/** Remove the fragments the reconstructed style regenerates — only genuinely explicit overrides remain. */
+function subtractStyleExpansion(components: Record<string, any>, style: StyleOptions): Record<string, any> {
+  const expected = styleComponents(style)
+  const remaining: Record<string, any> = {}
+
+  for (const [name, fragment] of Object.entries(components)) {
+    const expectedFragment = expected[name] || {}
+    const leftover: Record<string, any> = {}
+
+    for (const [slot, classes] of Object.entries((fragment.slots || {}) as Record<string, string>)) {
+      const expectedClasses = expectedFragment.slots?.[slot]
+      if (expectedClasses === classes) continue
+      if (expectedClasses && classes.startsWith(`${expectedClasses} `)) {
+        leftover.slots = { ...leftover.slots, [slot]: classes.slice(expectedClasses.length + 1) }
+      } else {
+        leftover.slots = { ...leftover.slots, [slot]: classes }
+      }
+    }
+
+    const expectedCompounds = [...(expectedFragment.compoundVariants || [])]
+    const compounds = ((fragment.compoundVariants || []) as Array<Record<string, unknown>>).filter((entry) => {
+      const index = expectedCompounds.findIndex(candidate => JSON.stringify(candidate) === JSON.stringify(entry))
+      if (index === -1) return true
+      expectedCompounds.splice(index, 1)
+      return false
+    })
+    if (compounds.length) leftover.compoundVariants = compounds
+
+    const defaultVariants = Object.fromEntries(
+      Object.entries((fragment.defaultVariants || {}) as Record<string, string>)
+        .filter(([key, value]) => expectedFragment.defaultVariants?.[key] !== value)
+    )
+    if (Object.keys(defaultVariants).length) leftover.defaultVariants = defaultVariants
+
+    if (Object.keys(leftover).length) remaining[name] = leftover
+  }
+
+  return remaining
+}
+
+/* -------------------------------------------------------------- entry -- */
+
+export function importTheme(input: { css?: string, config?: string }): ThemeImportResult {
+  const skipped: string[] = []
+  const doc: ThemeDoc = { version: 1 }
+
+  const css = input.css?.trim() ? parseCSS(input.css) : undefined
+  if (css) skipped.push(...css.skipped)
+
+  const parsedConfig = input.config?.trim() ? parseConfig(input.config, skipped) : undefined
+  const ui = parsedConfig?.ui && typeof parsedConfig.ui === 'object' ? parsedConfig.ui : {}
+
+  if (ui.colors && typeof ui.colors === 'object') {
+    const entries = Object.entries(ui.colors as Record<string, unknown>)
+      .filter(([alias, name]) => alias in DEFAULT_COLORS && typeof name === 'string')
+    if (entries.length) doc.colors = Object.fromEntries(entries) as ThemeDoc['colors']
+  }
+
+  if (ui.icons && typeof ui.icons === 'object') {
+    const known = Object.entries(themeIcons).find(([, icons]) => JSON.stringify(icons) === JSON.stringify(ui.icons))
+    if (known) {
+      doc.icons = known[0]
+    } else {
+      skipped.push('config: unrecognized icons object')
+    }
+  }
+
+  const components: Record<string, any> = Object.fromEntries(
+    Object.entries(ui).filter(([key]) => key !== 'colors' && key !== 'icons')
+  )
+
+  // Style: color/geometry variables come from the CSS, structure from the
+  // config classes; either half alone still reconstructs what it can.
+  const style: StyleOptions = css ? extractStyle(css.light, css.dark) : {}
+  style.shadow ||= detectShadow(components)
+  style.innerShadow ||= detectInnerShadow(components)
+
+  // New exports carry width through the @theme variables; older ones (and
+  // config-only pastes) still declare it through ring-N classes.
+  if (css?.borderWidth !== undefined) {
+    style.border = css!.borderWidth === 0 ? 'none' : 'custom'
+    if (css!.borderWidth !== 0 && css!.borderWidth !== BORDER_WIDTH_DEFAULT) style.borderWidth = css!.borderWidth
+    if (detectFrame(components)) style.frame = true
+  } else {
+    const border = detectBorder(components)
+    if (border.border) {
+      style.border = border.border
+      if (border.borderWidth !== undefined) style.borderWidth = border.borderWidth
+      if (border.frame) style.frame = true
+      // Scrub only pastes that carry legacy ring-N tokens — unconditionally
+      // it would eat genuine user classes out of config-only pastes.
+      normalizeLegacyWidths(components)
+    }
+  }
+  const defaults = extractDefaults(components)
+  if (defaults) style.defaults = defaults
+
+  // Press-off exports keep the button's resting shadow but drop the
+  // hover/active choreography — detect it so the expansion subtracts cleanly.
+  if (style.shadow === 'custom') {
+    const base = String(components.button?.slots?.base ?? '')
+    if (base.includes('--ui-shadow-press') && !base.includes('hover:translate')) style.shadowPress = false
+  }
+
+  const explicit = subtractStyleExpansion(components, style)
+  if (Object.keys(explicit).length) doc.components = explicit
+
+  if (Object.values(style).some(value => value !== undefined)) {
+    doc.style = style
+  }
+
+  if (css) {
+    if (Object.keys(css.palettes).length) {
+      doc.palettes = Object.fromEntries(Object.entries(css.palettes).map(([name, shades]) => [name, { shades }]))
+    }
+    // A body weight without theme steps (older exports) reads as normal.
+    const weights = css.fontWeights || (css.body?.weight !== undefined ? { normal: css.body.weight } : undefined)
+    if (css.font || weights || css.body || css.heading) {
+      doc.font = {
+        ...(css.font ? { sans: css.font } : {}),
+        ...(weights ? { weights } : {}),
+        ...(css.body?.uppercase ? { uppercase: true } : {}),
+        ...(css.body?.italic ? { italic: true } : {}),
+        ...(css.body?.letterSpacing !== undefined ? { letterSpacing: css.body.letterSpacing } : {}),
+        ...(css.body?.lineHeight !== undefined ? { lineHeight: css.body.lineHeight } : {}),
+        ...(css.heading ? { heading: css.heading } : {})
+      }
+    }
+    if (css.spacing !== undefined) doc.spacing = css.spacing
+    if (css.fontSize !== undefined) doc.fontSize = css.fontSize
+    if (css.radius !== undefined) doc.radius = css.radius
+    if (css.blackAsPrimary) {
+      doc.blackAsPrimary = true
+      // its .dark counterpart is generated, not a token choice
+      if (css.dark['--ui-primary'] === 'white') delete css.dark['--ui-primary']
+    }
+    // The export restates the library's dark default for light-only
+    // overrides (source-order tie) — generated, not a choice; drop it so the
+    // round-trip doesn't grow explicit tokens.
+    for (const [key, value] of Object.entries(css.dark)) {
+      if (key in css.light && value === (LIBRARY_TOKEN_DEFAULTS.dark as Record<string, string>)[key]) {
+        Reflect.deleteProperty(css.dark, key)
+      }
+    }
+    if (Object.keys(css.light).length || Object.keys(css.dark).length) {
+      doc.tokens = {
+        ...(Object.keys(css.light).length ? { light: css.light } : {}),
+        ...(Object.keys(css.dark).length ? { dark: css.dark } : {})
+      }
+    }
+  }
+
+  return { doc, skipped }
+}

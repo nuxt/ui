@@ -1,4 +1,6 @@
 export default defineNuxtConfig({
+  extends: ['@nuxt/ui-theme-studio'],
+
   modules: [
     '@nuxt/ui'
   ],

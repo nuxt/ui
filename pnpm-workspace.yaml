@@ -2,6 +2,7 @@ packages:
   - ./
   - cli
   - docs
+  - theme-studio
   - playgrounds/nuxt
   - playgrounds/vue
   - playgrounds/repl

@@ -3,6 +3,11 @@ export function useSearch() {
   const { frameworks } = useFrameworks()
   const { track } = useAnalytics()
   const { open, messages } = useChat()
+  // The ⌘K link glyphs follow the applied pack where an equivalent exists;
+  // the docs-nav-specific ones (square-play/-code/-function, panels, etc.)
+  // have no pack glyph and stay Lucide.
+  const studioIcons = useStudioIcons()
+  const extra = useStudioExtraIcons()
 
   const searchTerm = ref('')
 
@@ -22,7 +27,7 @@ export function useSearch() {
 
   const links = computed(() => [{
     label: 'Ask AI',
-    icon: 'i-lucide-bot-message-square',
+    icon: studioIcons.assistant,
     kbds: ['meta', 'i'],
     ui: {
       itemLeadingIcon: 'group-data-highlighted:not-group-data-disabled:text-primary'
@@ -65,7 +70,7 @@ export function useSearch() {
   }, {
     label: 'Community',
     description: 'Explore community projects and resources.',
-    icon: 'i-lucide-globe',
+    icon: extra.globe,
     to: '/community'
   }, {
     label: 'Playground',
@@ -87,7 +92,7 @@ export function useSearch() {
   }, {
     label: 'Team',
     description: 'Meet the team behind the project.',
-    icon: 'i-lucide-users',
+    icon: extra.users,
     to: '/team'
   }, {
     label: 'Releases',
@@ -97,7 +102,7 @@ export function useSearch() {
   }, {
     label: 'GitHub',
     description: 'Check out the repository on GitHub.',
-    icon: 'i-simple-icons-github',
+    icon: extra.github,
     to: 'https://github.com/nuxt/ui/releases',
     target: '_blank'
   }])
@@ -119,7 +124,7 @@ export function useSearch() {
     },
     items: [{
       label: 'Ask AI',
-      icon: 'i-lucide-bot-message-square',
+      icon: studioIcons.assistant,
       ui: {
         itemLeadingIcon: 'group-data-highlighted:not-group-data-disabled:text-primary'
       },

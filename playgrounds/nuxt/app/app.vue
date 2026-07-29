@@ -34,7 +34,7 @@ provide('components', components)
           </NuxtLink>
 
           <div v-if="!collapsed" class="flex items-center ms-auto">
-            <ThemeDropdown />
+            <ThemeStudioButton />
 
             <UColorModeButton />
           </div>

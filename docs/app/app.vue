@@ -1,17 +1,16 @@
 <script setup lang="ts">
 const route = useRoute()
-const appConfig = useAppConfig()
-const { style, link, color } = useTheme()
 
+/** The theme studio's UI-hiding fullscreen also hides the site chrome. */
+const studioFullscreen = useState('theme-studio-fullscreen', () => false)
+const appConfig = useAppConfig()
 const { data: navigation } = await useFetch('/api/navigation.json')
 
+// theme style/link/theme-color head entries come from the theme-studio layer's plugin
 useHead({
   meta: [
-    { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-    { key: 'theme-color', name: 'theme-color', content: color }
-  ],
-  link,
-  style
+    { name: 'viewport', content: 'width=device-width, initial-scale=1' }
+  ]
 })
 
 if (import.meta.server) {
@@ -40,7 +39,7 @@ provide('navigation', rootNavigation)
 
     <div class="flex">
       <div class="flex-1 min-w-0" :class="[route.path.startsWith('/docs/') && 'root']">
-        <template v-if="!route.path.startsWith('/examples')">
+        <template v-if="!route.path.startsWith('/examples') && !(route.path === '/theme' && studioFullscreen)">
           <!-- <Banner /> -->
 
           <Header />
@@ -50,9 +49,10 @@ provide('navigation', rootNavigation)
           <NuxtPage />
         </NuxtLayout>
 
-        <template v-if="!route.path.startsWith('/examples')">
+        <template v-if="!route.path.startsWith('/examples') && route.path !== '/theme'">
           <Footer />
         </template>
+        <!-- footer stays off /theme: the studio is a fixed-height app page -->
       </div>
 
       <template v-if="!route.path.startsWith('/examples')">

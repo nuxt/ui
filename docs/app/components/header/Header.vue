@@ -3,6 +3,9 @@ const route = useRoute()
 const { desktopLinks } = useHeader()
 const { open } = useChat()
 const { track } = useAnalytics()
+// The Ask-AI button skins to the applied icon pack, like the rest of the
+// studio chrome (the theme applies site-wide, so this stays consistent).
+const studioIcons = useStudioIcons()
 
 function toggleChat() {
   if (!open.value) {
@@ -10,6 +13,11 @@ function toggleChat() {
   }
   open.value = !open.value
 }
+
+// On /theme the header center becomes the studio's view switcher.
+const isStudio = computed(() => route.path === '/theme')
+
+const viewListOpen = ref(false)
 </script>
 
 <!-- eslint-disable vue/no-template-shadow -->
@@ -28,7 +36,8 @@ function toggleChat() {
       <VersionMenu />
     </template>
 
-    <UNavigationMenu :items="desktopLinks" variant="link" content-orientation="vertical" />
+    <ThemeStudioViewSwitcher v-if="isStudio" v-model:open="viewListOpen" />
+    <UNavigationMenu v-else :items="desktopLinks" variant="link" content-orientation="vertical" />
 
     <template #right>
       <UTooltip text="Search" :kbds="['meta', 'K']" ignore-non-keyboard-focus>
@@ -39,13 +48,13 @@ function toggleChat() {
         <UButton
           color="neutral"
           variant="ghost"
-          icon="i-lucide-bot-message-square"
+          :icon="studioIcons.assistant"
           aria-label="Ask AI for help"
           @click="toggleChat"
         />
       </UTooltip>
 
-      <ThemePicker />
+      <ThemeStudioPicker />
 
       <UTooltip text="Open on GitHub" class="hidden lg:flex">
         <UButton
@@ -53,7 +62,7 @@ function toggleChat() {
           variant="ghost"
           to="https://github.com/nuxt/ui"
           target="_blank"
-          icon="i-simple-icons-github"
+          :icon="studioIcons.github"
           aria-label="GitHub"
         />
       </UTooltip>

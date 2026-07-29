@@ -3,7 +3,7 @@ import type { AnthropicLanguageModelOptions } from '@ai-sdk/anthropic'
 import { gateway } from '@ai-sdk/gateway'
 import { z } from 'zod'
 import { tools as mcpToolDefinitions } from '#nuxt-mcp-toolkit/tools.mjs'
-import { themeIcons, cssVariableDefaults } from '../../app/utils/theme'
+import { themeIcons, cssVariableDefaults } from '@nuxt/ui-theme-studio/theme'
 
 function mcpToolsToAiTools() {
   const aiTools: Record<string, { description: string, inputSchema: ReturnType<typeof jsonSchema>, execute: (args: any) => Promise<any> }> = {}
@@ -53,7 +53,7 @@ const applyTheme = {
       icons: { type: 'string', description: 'Icon set for live preview: lucide (default), phosphor, or tabler. For exported code, any Iconify icon set can be suggested.' },
       customColors: {
         type: 'object',
-        description: 'Custom color palettes with shades 50-950 as hex values',
+        description: 'Custom color palettes with shades 50-950 as oklch(L% C H) values (e.g. oklch(62.3% 0.214 259.815)); hex also accepted',
         additionalProperties: {
           type: 'object',
           additionalProperties: { type: 'string' }
@@ -104,7 +104,7 @@ const getThemeGuide = {
     guide: `When users ask to change the theme, customize colors, or modify the appearance, use the \`applyTheme\` tool to apply changes live on this docs site. Only include properties that changed.
 
 When users ask for a complete theme, to change "all colors", or describe a broad aesthetic (e.g. "sakura-inspired theme"), you MUST set ALL of: primary, neutral, secondary, success, info, warning, error, radius, and font. You can change the icon set (lucide, phosphor, or tabler) if it really enhances the theme, but prefer keeping lucide as the default — it works well with most themes. You can optionally include component-level \`ui\` overrides for a more polished result — if you do, look up the component theme first with \`getComponentTheme\` and prefer \`defaultVariants\` (e.g. button size or variant) over slot class overrides. Create a cohesive design system, not just random colors:
-- Pick a **primary** that embodies the theme's identity. If no standard Tailwind color fits, use \`customColors\` to define a bespoke palette with all shades 50-950 as hex values — this is encouraged for creative/unique themes.
+- Pick a **primary** that embodies the theme's identity. If no standard Tailwind color fits, use \`customColors\` to define a bespoke palette with all shades 50-950 as \`oklch(L% C H)\` values — tailwind v4's native format, e.g. \`oklch(62.3% 0.214 259.815)\`. This is encouraged for creative/unique themes.
 - Pick a **secondary** that complements the primary (analogous or contrasting on the color wheel). Can also be a custom palette.
 - Pick **success/info/warning/error** that feel harmonious with the palette while staying semantically meaningful (success = green-ish, error = red-ish, warning = amber/yellow-ish, info = blue/cyan-ish). You can shift hues — e.g. \`lime\` for success in a nature theme, \`rose\` for error in a warm theme — but keep them recognizable.
 - For monochrome/black-and-white themes, keep semantic colors meaningful. Only primary, secondary, and neutral should go monochrome. Use \`blackAsPrimary: true\` for monochrome primary.

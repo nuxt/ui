@@ -351,6 +351,9 @@ importers:
       '@nuxt/ui':
         specifier: workspace:*
         version: link:..
+      '@nuxt/ui-theme-studio':
+        specifier: workspace:*
+        version: link:../theme-studio
       '@nuxtjs/mcp-toolkit':
         specifier: ^0.18.0
         version: 0.18.0(@vue/compiler-sfc@3.5.40)(h3@1.15.11)(magic-string@1.1.0)(magicast@0.5.3)(oxc-parser@0.140.0)(rolldown@1.2.0)(rollup@4.60.4)(supports-color@10.2.2)(unplugin@3.3.0(esbuild@0.28.0)(rolldown@1.2.0)(rollup@4.60.4)(vite@8.1.5(@types/node@25.9.0)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.47.1)(yaml@2.9.0)))(vite@8.1.5(@types/node@25.9.0)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.47.1)(yaml@2.9.0))(vue@3.5.40(typescript@6.0.3))(zod@4.4.3)
@@ -511,6 +514,9 @@ importers:
       '@nuxt/ui':
         specifier: workspace:*
         version: link:../..
+      '@nuxt/ui-theme-studio':
+        specifier: link:../../theme-studio
+        version: link:../../theme-studio
       '@tiptap/extension-emoji':
         specifier: ^3.29.0
         version: 3.29.0(@tiptap/core@3.29.0(@tiptap/pm@3.29.0))(@tiptap/pm@3.29.0)(@tiptap/suggestion@3.29.0(@floating-ui/dom@1.8.0)(@tiptap/core@3.29.0(@tiptap/pm@3.29.0))(@tiptap/pm@3.29.0))(emojibase@17.0.0)
@@ -598,6 +604,27 @@ importers:
       vue-tsc:
         specifier: ^3.3.8
         version: 3.3.8(typescript@6.0.3)
+
+  theme-studio:
+    dependencies:
+      '@nuxt/ui':
+        specifier: workspace:*
+        version: link:..
+      '@vueuse/core':
+        specifier: ^14.3.0
+        version: 14.3.0(vue@3.5.40(typescript@6.0.3))
+      '@vueuse/nuxt':
+        specifier: ^14.3.0
+        version: 14.3.0(9552aa5b84030b376195d1193cc0364f)
+      defu:
+        specifier: ^6.1.4
+        version: 6.1.7
+      scule:
+        specifier: ^1.3.0
+        version: 1.3.0
+      tailwindcss:
+        specifier: ^4.3.2
+        version: 4.3.3
 
 packages:
 
