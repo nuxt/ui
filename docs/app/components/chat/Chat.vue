@@ -3,7 +3,7 @@ import type { ToolUIPart, DynamicToolUIPart } from 'ai'
 import { DefaultChatTransport, isToolUIPart, isReasoningUIPart, isTextUIPart, getToolName } from 'ai'
 import { useChat as useAIChat } from '@ai-sdk/vue'
 import { isPartStreaming, isToolStreaming } from '@nuxt/ui/utils/ai'
-import * as theme from '#build/ui'
+import type { DocsChatMessage, DocsChatTools } from '~~/server/api/ai.post'
 
 const input = ref('')
 
@@ -31,7 +31,7 @@ function processThemeToolCalls() {
       const name = getToolName(part)
       if (name === 'applyTheme' && part.input) {
         _themeApplied.add(part.toolCallId)
-        applyThemeSettings(part.input)
+        applyThemeSettings(part.input as DocsChatTools['applyTheme']['input'])
       } else if (name === 'resetTheme') {
         _themeApplied.add(part.toolCallId)
         resetTheme()
@@ -40,11 +40,11 @@ function processThemeToolCalls() {
   }
 }
 
-const { messages: chatMessages, status, error, sendMessage, regenerate, stop } = useAIChat({
+const { messages: chatMessages, status, error, sendMessage, regenerate, stop } = useAIChat<DocsChatMessage>({
   messages: messages.value,
-  transport: new DefaultChatTransport({
+  transport: new DefaultChatTransport<DocsChatMessage>({
     api: '/api/ai',
-    body: () => ({ theme, framework: framework.value, currentPage: route.path.startsWith('/docs/') ? route.path : null })
+    body: () => ({ framework: framework.value, currentPage: route.path.startsWith('/docs/') ? route.path : null })
   }),
   onError: (error) => {
     let message = error.message
