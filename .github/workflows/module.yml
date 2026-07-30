@@ -9,8 +9,9 @@ on:
       - v4
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.event.number || github.ref }}
-  # Only cancel superseded pull request runs, since each push on v4 also covers windows and publishes its own preview package
+  # Group pull request runs per number so a new push cancels the previous one, and give every push on v4
+  # its own group since each of them also covers windows and publishes its own preview package
+  group: ${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.event.number || github.run_id }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
