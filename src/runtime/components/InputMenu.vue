@@ -324,7 +324,7 @@ const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponen
   leading: props.leading,
   leadingIcon: props.leadingIcon,
   trailing: props.trailing,
-  trailingIcon: props.trailingIcon !== undefined ? props.trailingIcon : appConfig.ui.icons.chevronDown,
+  trailingIcon: props.trailingIcon ?? appConfig.ui.icons.chevronDown,
   loading: props.loading,
   loadingIcon: props.loadingIcon
 })))
