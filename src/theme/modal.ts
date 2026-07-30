@@ -13,8 +13,8 @@ export default {
   variants: {
     transition: {
       true: {
-        overlay: 'data-[state=open]:animate-[fade-in_200ms_var(--ui-ease-out)] data-[state=closed]:animate-[fade-out_200ms_var(--ui-ease-out)]',
-        content: 'data-[state=open]:animate-[scale-in_200ms_var(--ui-ease-out)] data-[state=closed]:animate-[scale-out_200ms_var(--ui-ease-out)]'
+        overlay: 'data-[state=open]:animate-[fade-in_200ms_var(--ease-out)] data-[state=closed]:animate-[fade-out_200ms_var(--ease-out)]',
+        content: 'data-[state=open]:animate-[scale-in_200ms_var(--ease-out)] data-[state=closed]:animate-[scale-out_200ms_var(--ease-out)]'
       }
     },
     fullscreen: {

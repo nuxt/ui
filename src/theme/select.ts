@@ -95,7 +95,7 @@ export default (options: Required<ModuleOptions>) => {
       },
       position: {
         'popper': {
-          content: 'data-[state=open]:animate-[scale-in_100ms_var(--ui-ease-out)] data-[state=closed]:animate-[scale-out_100ms_var(--ui-ease-out)]'
+          content: 'data-[state=open]:animate-[scale-in_100ms_var(--ease-out)] data-[state=closed]:animate-[scale-out_100ms_var(--ease-out)]'
         },
         'item-aligned': {
           content: ''

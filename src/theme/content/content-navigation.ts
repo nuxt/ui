@@ -3,7 +3,7 @@ import type { ModuleOptions } from '../../module'
 export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: '',
-    content: 'data-[state=open]:animate-[accordion-down_200ms_ease-out] data-[state=closed]:animate-[accordion-up_200ms_ease-out] data-[state=closed]:overflow-hidden focus:outline-none',
+    content: 'data-[state=open]:animate-[accordion-down_200ms_var(--ease-out)] data-[state=closed]:animate-[accordion-up_200ms_var(--ease-out)] data-[state=closed]:overflow-hidden focus:outline-none',
     list: 'isolate -mx-2.5 -mt-1.5',
     item: '',
     listWithChildren: 'ms-5 border-s border-default',

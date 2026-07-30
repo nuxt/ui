@@ -37,7 +37,7 @@ exports[`NavigationMenu > renders with arrow correctly 1`] = `
         <!--v-if-->
       </li>
     </ul>
-    <div aria-hidden="true" data-state="visible" data-orientation="horizontal" data-slot="indicator" class="absolute left-0 data-[state=visible]:animate-[fade-in_100ms_ease-out] data-[state=hidden]:animate-[fade-out_100ms_ease-in] data-[state=hidden]:opacity-0 bottom-0 z-2 w-(--reka-navigation-menu-indicator-size) translate-x-(--reka-navigation-menu-indicator-position) flex h-2.5 items-end justify-center overflow-hidden transition-[translate,width] duration-200">
+    <div aria-hidden="true" data-state="visible" data-orientation="horizontal" data-slot="indicator" class="absolute left-0 data-[state=visible]:animate-[fade-in_100ms_var(--ease-out)] data-[state=hidden]:animate-[fade-out_100ms_var(--ease-out)] data-[state=hidden]:opacity-0 bottom-0 z-2 w-(--reka-navigation-menu-indicator-size) translate-x-(--reka-navigation-menu-indicator-position) flex h-2.5 items-end justify-center overflow-hidden transition-[translate,width] duration-200">
       <div data-slot="arrow" class="relative top-[50%] size-2.5 rotate-45 border border-default bg-default z-1 rounded-xs"></div>
     </div>
   </div>
@@ -45,7 +45,7 @@ exports[`NavigationMenu > renders with arrow correctly 1`] = `
   <div data-slot="viewportWrapper" class="absolute top-full start-0 flex w-full justify-center">
     <!--teleport start-->
     <!--teleport end-->
-    <div data-slot="viewport" class="relative overflow-hidden bg-default shadow-lg rounded-md ring ring-default h-(--reka-navigation-menu-viewport-height) w-full transition-[width,height,left,right] duration-200 origin-[top_center] data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] z-1" data-state="open" data-orientation="horizontal">
+    <div data-slot="viewport" class="relative overflow-hidden bg-default shadow-lg rounded-md ring ring-default h-(--reka-navigation-menu-viewport-height) w-full transition-[width,height,left,right] duration-200 origin-[top_center] data-[state=open]:animate-[scale-in_100ms_var(--ease-out)] data-[state=closed]:animate-[scale-out_100ms_var(--ease-out)] z-1" data-state="open" data-orientation="horizontal">
       <!---->
       <!---->
     </div>
@@ -218,7 +218,7 @@ exports[`NavigationMenu > renders with content orientation vertical correctly 1`
   <!--v-if-->
   <div data-slot="viewportWrapper" class="absolute top-full start-0 flex w-full">
     <!--v-if-->
-    <div data-slot="viewport" class="relative overflow-hidden bg-default shadow-lg rounded-md ring ring-default h-(--reka-navigation-menu-viewport-height) w-full transition-[width,height,left,right] duration-200 origin-[top_center] data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] z-1 sm:w-(--reka-navigation-menu-viewport-width) left-(--reka-navigation-menu-viewport-left) rtl:left-auto rtl:right-[calc(100%-var(--reka-navigation-menu-viewport-left)-var(--reka-navigation-menu-viewport-width))]" data-state="open" data-orientation="horizontal">
+    <div data-slot="viewport" class="relative overflow-hidden bg-default shadow-lg rounded-md ring ring-default h-(--reka-navigation-menu-viewport-height) w-full transition-[width,height,left,right] duration-200 origin-[top_center] data-[state=open]:animate-[scale-in_100ms_var(--ease-out)] data-[state=closed]:animate-[scale-out_100ms_var(--ease-out)] z-1 sm:w-(--reka-navigation-menu-viewport-width) left-(--reka-navigation-menu-viewport-left) rtl:left-auto rtl:right-[calc(100%-var(--reka-navigation-menu-viewport-left)-var(--reka-navigation-menu-viewport-width))]" data-state="open" data-orientation="horizontal">
       <!---->
       <!---->
     </div>
@@ -315,7 +315,7 @@ exports[`NavigationMenu > renders with defaultValue correctly 1`] = `
   <!--v-if-->
   <div data-slot="viewportWrapper" class="absolute top-full start-0 flex w-full justify-center">
     <!--v-if-->
-    <div data-slot="viewport" class="relative overflow-hidden bg-default shadow-lg rounded-md ring ring-default h-(--reka-navigation-menu-viewport-height) w-full transition-[width,height,left,right] duration-200 origin-[top_center] data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] z-1" data-state="open" data-orientation="horizontal">
+    <div data-slot="viewport" class="relative overflow-hidden bg-default shadow-lg rounded-md ring ring-default h-(--reka-navigation-menu-viewport-height) w-full transition-[width,height,left,right] duration-200 origin-[top_center] data-[state=open]:animate-[scale-in_100ms_var(--ease-out)] data-[state=closed]:animate-[scale-out_100ms_var(--ease-out)] z-1" data-state="open" data-orientation="horizontal">
       <!---->
       <!---->
     </div>
@@ -688,7 +688,7 @@ exports[`NavigationMenu > renders with modelValue correctly 1`] = `
   <!--v-if-->
   <div data-slot="viewportWrapper" class="absolute top-full start-0 flex w-full justify-center">
     <!--v-if-->
-    <div data-slot="viewport" class="relative overflow-hidden bg-default shadow-lg rounded-md ring ring-default h-(--reka-navigation-menu-viewport-height) w-full transition-[width,height,left,right] duration-200 origin-[top_center] data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] z-1" data-state="open" data-orientation="horizontal">
+    <div data-slot="viewport" class="relative overflow-hidden bg-default shadow-lg rounded-md ring ring-default h-(--reka-navigation-menu-viewport-height) w-full transition-[width,height,left,right] duration-200 origin-[top_center] data-[state=open]:animate-[scale-in_100ms_var(--ease-out)] data-[state=closed]:animate-[scale-out_100ms_var(--ease-out)] z-1" data-state="open" data-orientation="horizontal">
       <!---->
       <!---->
     </div>
@@ -1033,13 +1033,13 @@ exports[`NavigationMenu > renders with orientation vertical correctly 1`] = `
         <!--v-if--></span><span class="iconify i-lucide:chevron-down size-5 transform shrink-0 group-data-[state=open]:rotate-180 transition-transform duration-200" aria-hidden="true" data-slot="linkTrailingIcon"></span></span>
       </button>
       <!--v-if-->
-      <div role="region" aria-labelledby="reka-accordion-trigger-v-0-0-1" data-state="closed" data-orientation="vertical" style="--reka-accordion-content-width: var(--reka-collapsible-content-width); --reka-accordion-content-height: var(--reka-collapsible-content-height); --reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;" data-slot="content" class="data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] data-[state=closed]:overflow-hidden" id="reka-collapsible-content-v-0-0-2" hidden="">
+      <div role="region" aria-labelledby="reka-accordion-trigger-v-0-0-1" data-state="closed" data-orientation="vertical" style="--reka-accordion-content-width: var(--reka-collapsible-content-width); --reka-accordion-content-height: var(--reka-collapsible-content-height); --reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;" data-slot="content" class="data-[state=open]:animate-[collapsible-down_200ms_var(--ease-out)] data-[state=closed]:animate-[collapsible-up_200ms_var(--ease-out)] data-[state=closed]:overflow-hidden" id="reka-collapsible-content-v-0-0-2" hidden="">
         <!--v-if-->
       </div>
     </li>
     <li data-state="closed" data-orientation="vertical" data-slot="item" class="min-w-0"><button type="button" aria-controls="" aria-expanded="false" data-state="closed" id="reka-accordion-trigger-v-0-0-3" data-reka-collection-item="" data-orientation="vertical" data-slot="link" class="group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none focus-visible:before:outline-3 before:outline-primary/25 flex-row px-2.5 py-1.5 before:inset-y-px before:inset-x-0 text-primary before:bg-elevated"><span class="iconify i-lucide:box shrink-0 size-5 text-primary group-data-[state=open]:text-primary" aria-hidden="true" data-slot="linkLeadingIcon"></span><span data-slot="linkLabel" class="truncate">Components<!--v-if--></span><span aria-controls="" aria-expanded="false" data-state="closed" disabled="false" id="reka-accordion-trigger-v-0-0-3" data-reka-collection-item="" data-orientation="vertical" data-slot="linkTrailing" class="group ms-auto inline-flex gap-1.5 items-center"><!--v-if--><span class="iconify i-lucide:chevron-down size-5 transform shrink-0 group-data-[state=open]:rotate-180 transition-transform duration-200" aria-hidden="true" data-slot="linkTrailingIcon"></span></span></button>
       <!--v-if-->
-      <div role="region" aria-labelledby="reka-accordion-trigger-v-0-0-3" data-state="closed" data-orientation="vertical" style="--reka-accordion-content-width: var(--reka-collapsible-content-width); --reka-accordion-content-height: var(--reka-collapsible-content-height); --reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;" data-slot="content" class="data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] data-[state=closed]:overflow-hidden" id="reka-collapsible-content-v-0-0-4" hidden="">
+      <div role="region" aria-labelledby="reka-accordion-trigger-v-0-0-3" data-state="closed" data-orientation="vertical" style="--reka-accordion-content-width: var(--reka-collapsible-content-width); --reka-accordion-content-height: var(--reka-collapsible-content-height); --reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;" data-slot="content" class="data-[state=open]:animate-[collapsible-down_200ms_var(--ease-out)] data-[state=closed]:animate-[collapsible-up_200ms_var(--ease-out)] data-[state=closed]:overflow-hidden" id="reka-collapsible-content-v-0-0-4" hidden="">
         <!--v-if-->
       </div>
     </li>
@@ -1393,8 +1393,8 @@ exports[`NavigationMenu > renders with unmountOnHide correctly 1`] = `
   <!--v-if-->
   <div data-slot="viewportWrapper" class="absolute top-full start-0 flex w-full justify-center">
     <!--v-if-->
-    <div data-slot="viewport" class="relative overflow-hidden bg-default shadow-lg rounded-md ring ring-default h-(--reka-navigation-menu-viewport-height) w-full transition-[width,height,left,right] duration-200 origin-[top_center] data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] z-1" data-state="closed" data-orientation="horizontal" style="pointer-events: none;" hidden="">
-      <div data-dismissable-layer="" style="pointer-events: none;" id="reka-navigation-menu-v-0-0-0-content-group-0-item-1" aria-labelledby="reka-navigation-menu-v-0-0-0-trigger-group-0-item-1" data-state="closed" data-orientation="horizontal" data-slot="content" class="absolute top-0 start-0 w-full max-h-[70vh] overflow-y-auto data-[motion=from-start]:animate-[enter-from-left_200ms_ease] data-[motion=from-end]:animate-[enter-from-right_200ms_ease] data-[motion=to-start]:animate-[exit-to-left_200ms_ease] data-[motion=to-end]:animate-[exit-to-right_200ms_ease]" hidden="">
+    <div data-slot="viewport" class="relative overflow-hidden bg-default shadow-lg rounded-md ring ring-default h-(--reka-navigation-menu-viewport-height) w-full transition-[width,height,left,right] duration-200 origin-[top_center] data-[state=open]:animate-[scale-in_100ms_var(--ease-out)] data-[state=closed]:animate-[scale-out_100ms_var(--ease-out)] z-1" data-state="closed" data-orientation="horizontal" style="pointer-events: none;" hidden="">
+      <div data-dismissable-layer="" style="pointer-events: none;" id="reka-navigation-menu-v-0-0-0-content-group-0-item-1" aria-labelledby="reka-navigation-menu-v-0-0-0-trigger-group-0-item-1" data-state="closed" data-orientation="horizontal" data-slot="content" class="absolute top-0 start-0 w-full max-h-[70vh] overflow-y-auto data-[motion=from-start]:animate-[enter-from-left_200ms_var(--ease-out)] data-[motion=from-end]:animate-[enter-from-right_200ms_var(--ease-out)] data-[motion=to-start]:animate-[exit-to-left_200ms_var(--ease-out)] data-[motion=to-end]:animate-[exit-to-right_200ms_var(--ease-out)]" hidden="">
         <ul data-slot="childList" class="isolate grid p-2 grid-cols-2 gap-2">
           <li data-slot="childItem" class=""><button type="button" data-reka-collection-item="" data-slot="childLink" class="group relative size-full flex items-start text-start text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none focus-visible:before:outline-3 before:outline-primary/25 px-3 py-2 gap-2 before:inset-x-px before:inset-y-0 hover:before:bg-elevated/50 text-default hover:text-highlighted transition-colors before:transition-colors"><span class="iconify i-lucide:house size-5 shrink-0 text-dimmed group-hover:text-default transition-colors" aria-hidden="true" data-slot="childLinkIcon"></span>
               <div data-slot="childLinkWrapper" class="min-w-0">
@@ -1430,7 +1430,7 @@ exports[`NavigationMenu > renders with unmountOnHide correctly 1`] = `
             </button></li>
         </ul>
       </div>
-      <div data-dismissable-layer="" style="pointer-events: none;" id="reka-navigation-menu-v-0-0-0-content-group-0-item-2" aria-labelledby="reka-navigation-menu-v-0-0-0-trigger-group-0-item-2" data-state="closed" data-orientation="horizontal" data-slot="content" class="absolute top-0 start-0 w-full max-h-[70vh] overflow-y-auto data-[motion=from-start]:animate-[enter-from-left_200ms_ease] data-[motion=from-end]:animate-[enter-from-right_200ms_ease] data-[motion=to-start]:animate-[exit-to-left_200ms_ease] data-[motion=to-end]:animate-[exit-to-right_200ms_ease]" hidden="">
+      <div data-dismissable-layer="" style="pointer-events: none;" id="reka-navigation-menu-v-0-0-0-content-group-0-item-2" aria-labelledby="reka-navigation-menu-v-0-0-0-trigger-group-0-item-2" data-state="closed" data-orientation="horizontal" data-slot="content" class="absolute top-0 start-0 w-full max-h-[70vh] overflow-y-auto data-[motion=from-start]:animate-[enter-from-left_200ms_var(--ease-out)] data-[motion=from-end]:animate-[enter-from-right_200ms_var(--ease-out)] data-[motion=to-start]:animate-[exit-to-left_200ms_var(--ease-out)] data-[motion=to-end]:animate-[exit-to-right_200ms_var(--ease-out)]" hidden="">
         <ul data-slot="childList" class="isolate grid p-2 grid-cols-2 gap-2">
           <li data-slot="childItem" class=""><a href="/components/link" data-reka-collection-item="" data-slot="childLink" class="group relative size-full flex items-start text-start text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none focus-visible:before:outline-3 before:outline-primary/25 px-3 py-2 gap-2 before:inset-x-px before:inset-y-0 hover:before:bg-elevated/50 text-default hover:text-highlighted transition-colors before:transition-colors"><span class="iconify i-lucide:file size-5 shrink-0 text-dimmed group-hover:text-default transition-colors" aria-hidden="true" data-slot="childLinkIcon"></span>
               <div data-slot="childLinkWrapper" class="min-w-0">
@@ -1527,8 +1527,8 @@ exports[`NavigationMenu > renders with valueKey correctly 1`] = `
   <!--v-if-->
   <div data-slot="viewportWrapper" class="absolute top-full start-0 flex w-full justify-center">
     <!--v-if-->
-    <div data-slot="viewport" class="relative overflow-hidden bg-default shadow-lg rounded-md ring ring-default h-(--reka-navigation-menu-viewport-height) w-full transition-[width,height,left,right] duration-200 origin-[top_center] data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] z-1" data-state="open" data-orientation="horizontal">
-      <div data-dismissable-layer="" id="reka-navigation-menu-v-0-0-0-content-Documentation" aria-labelledby="reka-navigation-menu-v-0-0-0-trigger-Documentation" data-state="open" data-orientation="horizontal" data-slot="content" class="absolute top-0 start-0 w-full max-h-[70vh] overflow-y-auto data-[motion=from-start]:animate-[enter-from-left_200ms_ease] data-[motion=from-end]:animate-[enter-from-right_200ms_ease] data-[motion=to-start]:animate-[exit-to-left_200ms_ease] data-[motion=to-end]:animate-[exit-to-right_200ms_ease]">
+    <div data-slot="viewport" class="relative overflow-hidden bg-default shadow-lg rounded-md ring ring-default h-(--reka-navigation-menu-viewport-height) w-full transition-[width,height,left,right] duration-200 origin-[top_center] data-[state=open]:animate-[scale-in_100ms_var(--ease-out)] data-[state=closed]:animate-[scale-out_100ms_var(--ease-out)] z-1" data-state="open" data-orientation="horizontal">
+      <div data-dismissable-layer="" id="reka-navigation-menu-v-0-0-0-content-Documentation" aria-labelledby="reka-navigation-menu-v-0-0-0-trigger-Documentation" data-state="open" data-orientation="horizontal" data-slot="content" class="absolute top-0 start-0 w-full max-h-[70vh] overflow-y-auto data-[motion=from-start]:animate-[enter-from-left_200ms_var(--ease-out)] data-[motion=from-end]:animate-[enter-from-right_200ms_var(--ease-out)] data-[motion=to-start]:animate-[exit-to-left_200ms_var(--ease-out)] data-[motion=to-end]:animate-[exit-to-right_200ms_var(--ease-out)]">
         <ul data-slot="childList" class="isolate grid p-2 grid-cols-2 gap-2">
           <li data-slot="childItem" class=""><button type="button" data-reka-collection-item="" data-slot="childLink" class="group relative size-full flex items-start text-start text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none focus-visible:before:outline-3 before:outline-primary/25 px-3 py-2 gap-2 before:inset-x-px before:inset-y-0 hover:before:bg-elevated/50 text-default hover:text-highlighted transition-colors before:transition-colors"><span class="iconify i-lucide:house size-5 shrink-0 text-dimmed group-hover:text-default transition-colors" aria-hidden="true" data-slot="childLinkIcon"></span>
               <div data-slot="childLinkWrapper" class="min-w-0">
