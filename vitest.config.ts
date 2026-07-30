@@ -67,11 +67,15 @@ export default defineConfig({
             enforce: 'pre',
             resolveId(id) {
               if (id === '#components') {
-                return '#components'
+                // Resolve to a `\0`-prefixed virtual id so Vite treats it as a
+                // virtual module and doesn't reparse the `#` as a URL fragment.
+                // Vite 8 turns a returned `#components` into `?import#components`
+                // (empty pathname), which its builtin resolver then rejects.
+                return '\0virtual:nuxt-ui-components'
               }
             },
             load(id) {
-              if (id === '#components' || id === '?import#components') {
+              if (id === '\0virtual:nuxt-ui-components') {
                 const resolvedComponents = [...vueRouterOverrides, ...vueComponents, ...components]
                 const renderedComponents = new Set<string>()
                 return resolvedComponents.map((file) => {
