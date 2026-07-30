@@ -164,6 +164,14 @@ describe('tv slot memoization', () => {
     expect(ui.base({ active: true, class: 'p-2' })).toBe(ui.base({ class: 'p-2', active: true }))
   })
 
+  it('does not share entries between NaN and null variant values', () => {
+    const ui = tvt({ extend: tvt(theme), defaultVariants: { active: true } })()
+    // Both serialize to `"null"`, but tv resolves `null` to the default variant
+    // while NaN falls through the `key || "false"` lookup.
+    expect(ui.base({ active: Number.NaN })).toContain('font-light')
+    expect(ui.base({ active: null })).toContain('font-bold')
+  })
+
   it('does not poison the cache through clsx object classes', () => {
     const ui = build()
     // Object classes bail out of the memo but still resolve...

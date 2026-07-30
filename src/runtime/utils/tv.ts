@@ -114,8 +114,13 @@ function isMemoizable(value: unknown): boolean {
     return true
   }
   const type = typeof value
-  if (type === 'string' || type === 'number' || type === 'boolean') {
+  if (type === 'string' || type === 'boolean') {
     return true
+  }
+  // `JSON.stringify` turns NaN/Infinity into `null`, colliding with real `null`
+  // keys that tv resolves differently (default variant vs `key || "false"` lookup).
+  if (type === 'number') {
+    return Number.isFinite(value)
   }
   if (Array.isArray(value)) {
     return value.every(isMemoizable)
