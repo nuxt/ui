@@ -331,7 +331,7 @@ export default defineConfig({
 
 NEVER recommend \`appConfig.theme.*\` properties (like \`blackAsPrimary\`, \`radius\`, \`font\`) — those are internal to the docs site. Users should use CSS variables in main.css for radius, fonts, and monochrome primary.`
   })
-}) satisfies Tool
+})
 
 const tools = {
   ...mcpToolsToAiTools(),
@@ -452,9 +452,17 @@ export default defineEventHandler(async (event) => {
     experimental_transform: smoothStream(),
     consumeSseStream: consumeStream,
     onError: (error) => {
-      console.error('[api/ai] stream error:', error)
+      // Provider errors carry the outgoing prompt in `requestBodyValues` and the raw
+      // `responseBody`, so log identifying fields only and keep chat content out of the logs.
+      const statusCode = APICallError.isInstance(error) ? error.statusCode : undefined
 
-      if (APICallError.isInstance(error) && error.statusCode === 429) {
+      console.error('[api/ai] stream error:', {
+        name: error instanceof Error ? error.name : 'UnknownError',
+        message: error instanceof Error ? error.message : String(error),
+        statusCode
+      })
+
+      if (statusCode === 429) {
         return 'You have reached the message limit for now. Please try again later.'
       }
 
