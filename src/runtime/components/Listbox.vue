@@ -210,7 +210,7 @@ const virtualizerProps = toRef(() => {
 })
 const inputProps = toRef(() => defu(typeof props.filter === 'object' ? props.filter : {}, { placeholder: t('listbox.search'), variant: 'none' }) as Omit<InputProps, 'modelValue' | 'defaultValue'>)
 
-const { emitFormChange, emitFormInput, name, size, color, id, highlight, disabled, ariaAttrs } = useFormField<InputProps>(_props, { bind: false })
+const { emitFormChange, emitFormInput, name, size, color, id, highlight, disabled, ariaAttrs } = useFormField<InputProps>(_props)
 
 const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: ListboxItem, index: number }>({
   props: {
@@ -375,7 +375,7 @@ const filteredItems = computed(() => filteredGroups.value.flatMap(group => group
       />
     </ListboxFilter>
 
-    <ListboxContent data-slot="content" :class="ui.content({ class: props.ui?.content })">
+    <ListboxContent data-slot="content" :class="ui.content({ class: props.ui?.content })" :aria-labelledby="id !== undefined ? `${id}-label` : undefined">
       <div v-if="props.loading" data-slot="loading" :class="ui.loading({ class: props.ui?.loading })">
         <slot name="loading">
           <UIcon :name="props.loadingIcon || appConfig.ui.icons.loading" data-slot="loadingIcon" :class="ui.loadingIcon({ class: props.ui?.loadingIcon })" />
