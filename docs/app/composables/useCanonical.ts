@@ -1,3 +1,4 @@
+import type { Link } from '@unhead/vue'
 import { joinURL } from 'ufo'
 import type { MaybeRefOrGetter } from 'vue'
 import { toValue } from 'vue'
@@ -8,7 +9,7 @@ export function useCanonical(markdownAlternate?: MaybeRefOrGetter<string | undef
 
   useHead({
     link: computed(() => {
-      const links: Array<{ rel: string, href: string, type?: string }> = [
+      const links: Link[] = [
         { rel: 'canonical', href: joinURL(site.url, route.path) }
       ]
 
