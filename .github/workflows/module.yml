@@ -150,9 +150,14 @@ jobs:
           - dashboard
           - dashboard-vue
           - chat
+          - chat-vue
           - portfolio
           - changelog
           - editor
+        include:
+          # Build with vite directly since the `build` script also runs the database migrations
+          - template: chat-vue
+            build: pnpm vite build
 
     steps:
       - name: Checkout
@@ -181,7 +186,7 @@ jobs:
         run: pnpm install
 
       - name: Build
-        run: pnpm run build
+        run: ${{ matrix.build || 'pnpm run build' }}
 
       - name: Typecheck
         run: pnpm run typecheck
