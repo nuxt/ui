@@ -19,8 +19,8 @@ export default (options: Required<ModuleOptions>) => ({
   variants: {
     transition: {
       true: {
-        gap: 'transition-[width] duration-200 ease-out',
-        container: 'transition-[inset-inline-start,inset-inline-end,width] duration-200 ease-out',
+        gap: 'transition-[width] duration-200 ease-out motion-reduce:transition-none',
+        container: 'transition-[inset-inline-start,inset-inline-end,width] duration-200 ease-out motion-reduce:transition-none',
         rail: 'transition-all ease-out'
       }
     },
