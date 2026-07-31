@@ -240,12 +240,28 @@ describe('tv slot memoization', () => {
 
   it('keeps each slot cache bounded', () => {
     const ui = build()
+    const counter = { reads: 0 }
+    const props = (i: number) => ({
+      class: `w-[${i}px]`,
+      get active() {
+        counter.reads++
+        return true
+      }
+    })
+
     for (let i = 0; i < 600; i++) {
-      ui.base({ class: `w-[${i}px]` })
+      ui.base(props(i))
     }
-    // Entry 501 resets rather than growing, and lookups still resolve after it.
-    expect(ui.base({ class: 'w-[599px]' })).toContain('w-[599px]')
-    expect(ui.base({ class: 'w-[0px]' })).toContain('w-[0px]')
+
+    // The 501st distinct key resets the cache, so it now holds 500 onwards.
+    counter.reads = 0
+    expect(ui.base(props(599))).toContain('w-[599px]')
+    const hit = counter.reads
+
+    // Entry 0 went with the reset and has to be resolved again.
+    counter.reads = 0
+    expect(ui.base(props(0))).toContain('w-[0px]')
+    expect(counter.reads).toBeGreaterThan(hit)
   })
 
   it('does not key inputs carrying inherited enumerable props as plain ones', () => {
