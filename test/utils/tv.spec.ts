@@ -136,6 +136,47 @@ describe('tv slot memoization', () => {
 
   const build = () => tvt({ extend: tvt(theme) })()
 
+  // Counts how often the `active` variant is read. Building the cache key reads
+  // it a fixed number of times per call, so a call served from the cache reads
+  // it strictly fewer times than one that runs the slot, without either test
+  // having to pin the exact counts.
+  function countingProps(active: boolean) {
+    const counter = { reads: 0 }
+    const props = {
+      get active() {
+        counter.reads++
+        return active
+      }
+    }
+    return [props, counter] as const
+  }
+
+  it('runs the slot once for repeated identical args', () => {
+    const ui = build()
+    const [props, counter] = countingProps(true)
+
+    expect(ui.base(props)).toContain('font-bold')
+    const miss = counter.reads
+
+    counter.reads = 0
+    expect(ui.base(props)).toContain('font-bold')
+    expect(counter.reads).toBeLessThan(miss)
+  })
+
+  it('caches a slot whose chain resolves to no classes', () => {
+    // `tv` returns `undefined` for such a slot rather than `''`, so it can't
+    // double as the "not cached yet" sentinel (`navigation-menu` has two).
+    const ui = tvt({ extend: tvt({ slots: { base: '' }, variants: { active: { true: {}, false: {} } } }) })()
+    const [props, counter] = countingProps(true)
+
+    expect(ui.base(props)).toBeUndefined()
+    const miss = counter.reads
+
+    counter.reads = 0
+    expect(ui.base(props)).toBeUndefined()
+    expect(counter.reads).toBeLessThan(miss)
+  })
+
   it('returns correct output for repeated identical args', () => {
     const ui = build()
     const first = ui.base({ active: true, class: 'p-2' })

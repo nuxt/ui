@@ -161,7 +161,9 @@ function memoKey(slotProps: Record<string, any>): string | undefined {
  * `app.config.ui` change) or variant-prop recompute starts fresh.
  */
 function wrapSlots(slots: Record<string, any>, directives?: Record<string, SlotClassReplacer>) {
-  const memo = new Map<string, Map<string, string>>()
+  // `undefined` is a real slot result: `tv` returns it (not `''`) for a slot
+  // whose chain resolves to no classes, so it can't double as a miss sentinel.
+  const memo = new Map<string, Map<string, string | undefined>>()
 
   return new Proxy(slots, {
     get(target, key: string) {
@@ -189,7 +191,9 @@ function wrapSlots(slots: Record<string, any>, directives?: Record<string, SlotC
           }
 
           let result = cache.get(cacheKey)
-          if (result === undefined) {
+          // The extra `has` only runs for the rare slot that resolves to no
+          // classes, so the hot path stays a single lookup.
+          if (result === undefined && !cache.has(cacheKey)) {
             result = slot(slotProps) as string
             cache.set(cacheKey, result)
           }
