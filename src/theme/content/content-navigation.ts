@@ -14,7 +14,7 @@ export default (options: Required<ModuleOptions>) => ({
     linkTrailing: 'ms-auto inline-flex gap-1.5 items-center',
     linkTrailingBadge: 'shrink-0',
     linkTrailingBadgeSize: 'sm',
-    linkTrailingIcon: 'size-5 transform transition-transform duration-200 shrink-0 group-data-[state=open]:rotate-180',
+    linkTrailingIcon: 'size-5 transform transition-transform duration-200 ease-out shrink-0 group-data-[state=open]:rotate-180',
     linkTitle: 'truncate',
     linkTitleExternalIcon: 'size-3 align-top text-dimmed'
   },

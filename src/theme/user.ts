@@ -22,7 +22,7 @@ export default (options: Required<ModuleOptions>) => ({
         root: ['rounded-md outline-primary/25 has-focus-visible:outline-3', options.theme.transitions && 'transition'],
         name: ['text-default peer-hover:text-highlighted peer-focus-visible:text-highlighted', options.theme.transitions && 'transition-colors'],
         description: ['peer-hover:text-toned peer-focus-visible:text-toned', options.theme.transitions && 'transition-colors'],
-        avatar: 'transform transition-transform duration-200 group-hover/user:scale-115 group-has-focus-visible/user:scale-115'
+        avatar: 'transform transition-transform duration-200 ease-out group-hover/user:scale-115 group-has-focus-visible/user:scale-115'
       },
       false: {
         name: 'text-highlighted',

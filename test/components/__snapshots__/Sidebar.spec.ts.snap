@@ -327,7 +327,7 @@ exports[`Sidebar > renders with rail correctly 1`] = `
       <!--v-if-->
       <div data-slot="body" class="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto p-4 group-data-[state=collapsed]/sidebar:overflow-hidden"></div>
       <!--v-if-->
-    </div><button data-slot="rail" data-state="expanded" aria-label="Toggle" tabindex="-1" class="absolute inset-y-0 z-20 hidden w-4 after:absolute after:inset-y-0 after:left-1/2 after:w-px lg:flex hover:after:bg-(--ui-border-accented) after:transition-colors transition-all ease-out end-0 translate-x-1/2 rtl:-translate-x-1/2 cursor-w-resize rtl:cursor-e-resize data-[state=collapsed]:cursor-e-resize data-[state=collapsed]:rtl:cursor-w-resize"></button>
+    </div><button data-slot="rail" data-state="expanded" aria-label="Toggle" tabindex="-1" class="absolute inset-y-0 z-20 hidden w-4 after:absolute after:inset-y-0 after:left-1/2 after:w-px lg:flex hover:after:bg-(--ui-border-accented) after:transition-colors transition-[inset-inline-start,inset-inline-end,translate] duration-200 ease-out motion-reduce:transition-none end-0 translate-x-1/2 rtl:-translate-x-1/2 cursor-w-resize rtl:cursor-e-resize data-[state=collapsed]:cursor-e-resize data-[state=collapsed]:rtl:cursor-w-resize"></button>
   </div>
 </aside>
 <!-- Mobile menu -->
