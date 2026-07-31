@@ -12,7 +12,7 @@ import * as theme from './theme'
 import * as themeProse from './theme/prose'
 import * as themeContent from './theme/content'
 
-export function getTemplates(options: ModuleOptions, uiConfig: Record<string, any>, nuxt?: Nuxt, resolve?: Resolver['resolve'], vue?: { root?: string, dirs?: string[], componentDir?: string }) {
+export function getTemplates(options: ModuleOptions, uiConfig: Record<string, any>, nuxt?: Nuxt, resolve?: Resolver['resolve'], vue?: { detectedComponents?: Set<string> }) {
   const templates: NuxtTemplate[] = []
 
   let hasProse = false
@@ -30,10 +30,18 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
           const template = (theme as any)[component]
           let result = typeof template === 'function' ? template(options) : template
 
+          // With `experimental.componentDetection` (Vue integration), a component
+          // detection didn't find keeps its theme file — the `#build/ui` aliases
+          // and type imports rely on it existing — but with every class blanked
+          // (like `theme.unstyled`), so the `@source "./ui";` scan yields no CSS
+          // for it. Prose has no detection and stays styled.
+          const unused = path !== 'prose' && !!vue?.detectedComponents?.size
+            && !Array.from(vue.detectedComponents).some(detected => camelCase(detected) === component)
+
           // Override default variants from nuxt.config.ts
           result = applyDefaultVariants(result, options.theme?.defaultVariants)
           // Strip default theme classes if `unstyled` is enabled
-          result = applyUnstyled(result, options.theme?.unstyled)
+          result = applyUnstyled(result, options.theme?.unstyled || unused)
           // Apply Tailwind prefix if configured
           result = applyPrefixToObject(result, options.theme?.prefix)
 
@@ -67,7 +75,7 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
             const themeUtilsPath = fileURLToPath(new URL('./utils/theme', import.meta.url))
             const defaultVariantsJson = JSON.stringify(options.theme?.defaultVariants) ?? 'undefined'
             const prefixJson = JSON.stringify(options.theme?.prefix) ?? 'undefined'
-            const unstyledJson = JSON.stringify(options.theme?.unstyled) ?? 'undefined'
+            const unstyledJson = JSON.stringify(options.theme?.unstyled || unused) ?? 'undefined'
 
             return [
               `import template from ${JSON.stringify(templatePath)}`,
@@ -142,16 +150,18 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
       }
     }
 
-    // Add theme sources (component detection or all). Detection works for both
-    // integrations: Nuxt scans its layers and resolves the component dir via
-    // `resolve`; the Vue plugin scans the Vite root plus any extra dirs
-    // (`scanPackages` packages, component dirs outside the root).
-    const componentDir = resolve ? resolve('./runtime/components') : vue?.componentDir
-    const scanDirs = nuxt ? layers : [...(vue?.root ? [vue.root] : []), ...(vue?.dirs || [])]
+    // Add theme sources. With `experimental.componentDetection`, Nuxt narrows
+    // these to the detected components' files. The Vue plugin can't: its
+    // templates live inside `node_modules`, where Tailwind widens a file
+    // `@source` to a scan of its whole parent directory, so a narrowed list
+    // wouldn't narrow the CSS. It sources the whole directory instead and
+    // blanks the theme of unused components at write time (see
+    // `writeThemeTemplate`), which needs no extra directive.
+    const componentDir = resolve ? resolve('./runtime/components') : undefined
 
-    if (options.experimental?.componentDetection && componentDir && scanDirs.length) {
+    if (options.experimental?.componentDetection && nuxt && componentDir && layers.length) {
       const detectedComponents = await detectUsedComponents(
-        scanDirs,
+        layers,
         options.prefix!,
         componentDir,
         Array.isArray(options.experimental.componentDetection) ? options.experimental.componentDetection : undefined
