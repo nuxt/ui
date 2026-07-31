@@ -162,49 +162,49 @@ export default (options: Required<ModuleOptions>) => ({
     orientation: 'horizontal',
     animation: 'carousel',
     class: {
-      indicator: 'motion-safe:data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]'
+      indicator: 'motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]'
     }
   }, {
     orientation: 'vertical',
     animation: 'carousel',
     class: {
-      indicator: 'motion-safe:data-[state=indeterminate]:animate-[carousel-vertical_2s_ease-in-out_infinite]'
+      indicator: 'motion-safe:data-[state=indeterminate]:animate-[carousel-vertical_2s_linear_infinite]'
     }
   }, {
     orientation: 'horizontal',
     animation: 'carousel-inverse',
     class: {
-      indicator: 'motion-safe:data-[state=indeterminate]:animate-[carousel-inverse_2s_ease-in-out_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-inverse-rtl_2s_ease-in-out_infinite]'
+      indicator: 'motion-safe:data-[state=indeterminate]:animate-[carousel-inverse_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-inverse-rtl_2s_linear_infinite]'
     }
   }, {
     orientation: 'vertical',
     animation: 'carousel-inverse',
     class: {
-      indicator: 'motion-safe:data-[state=indeterminate]:animate-[carousel-inverse-vertical_2s_ease-in-out_infinite]'
+      indicator: 'motion-safe:data-[state=indeterminate]:animate-[carousel-inverse-vertical_2s_linear_infinite]'
     }
   }, {
     orientation: 'horizontal',
     animation: 'swing',
     class: {
-      indicator: 'motion-safe:data-[state=indeterminate]:animate-[swing_2s_ease-in-out_infinite]'
+      indicator: 'motion-safe:data-[state=indeterminate]:animate-[swing_2s_var(--ease-in-out)_infinite]'
     }
   }, {
     orientation: 'vertical',
     animation: 'swing',
     class: {
-      indicator: 'motion-safe:data-[state=indeterminate]:animate-[swing-vertical_2s_ease-in-out_infinite]'
+      indicator: 'motion-safe:data-[state=indeterminate]:animate-[swing-vertical_2s_var(--ease-in-out)_infinite]'
     }
   }, {
     orientation: 'horizontal',
     animation: 'elastic',
     class: {
-      indicator: 'motion-safe:data-[state=indeterminate]:animate-[elastic_2s_ease-in-out_infinite]'
+      indicator: 'motion-safe:data-[state=indeterminate]:animate-[elastic_2s_var(--ease-in-out)_infinite]'
     }
   }, {
     orientation: 'vertical',
     animation: 'elastic',
     class: {
-      indicator: 'motion-safe:data-[state=indeterminate]:animate-[elastic-vertical_2s_ease-in-out_infinite]'
+      indicator: 'motion-safe:data-[state=indeterminate]:animate-[elastic-vertical_2s_var(--ease-in-out)_infinite]'
     }
   }],
   defaultVariants: {
