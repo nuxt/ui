@@ -20,8 +20,7 @@ export default (options: Required<ModuleOptions>) => ({
     transition: {
       true: {
         gap: 'transition-[width] duration-200 ease-out motion-reduce:transition-none',
-        container: 'transition-[inset-inline-start,inset-inline-end,width] duration-200 ease-out motion-reduce:transition-none',
-        rail: 'transition-[inset-inline-start,inset-inline-end,translate] duration-200 ease-out motion-reduce:transition-none'
+        container: 'transition-[inset-inline-start,inset-inline-end,width] duration-200 ease-out motion-reduce:transition-none'
       }
     },
     side: {
