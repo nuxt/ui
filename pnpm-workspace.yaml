@@ -11,6 +11,11 @@ ignoreWorkspaceRootCheck: true
 linkWorkspacePackages: true
 
 overrides:
+  # `@codspeed/vitest-plugin` caps its `vite` peer at ^7 while the repo resolves
+  # vite 8 for the Nuxt modules; without widening it, pnpm's peer dedupe re-keys
+  # the whole vite peer group down to vitest's vite 7. The plugin only ever runs
+  # inside vitest's own vite, so the wider range is bookkeeping, not runtime.
+  "@codspeed/vitest-plugin>vite": ^7.0.0 || ^8.0.0
   "@nuxt/kit": ^4.5.1
   "@nuxt/ui": workspace:*
   unplugin: ^3.3.0
