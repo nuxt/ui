@@ -45,18 +45,14 @@ describe('mount', () => {
 describe('re-render', () => {
   for (const [name, render] of CASES) {
     describe(name, () => {
-      let wrapper: Awaited<ReturnType<typeof mountSuspended>>
+      let wrapper: Awaited<ReturnType<typeof mountSuspended>> | undefined
 
+      // Mounted lazily on the first call: CodSpeed's analysis runner invokes the
+      // bench function without tinybench's `setup`/`teardown` options.
       bench(name, async () => {
+        wrapper ??= await mountSuspended(makeParent(render), { props: { cls: 'p-2' } })
         await wrapper.setProps({ cls: 'p-3' })
         await wrapper.setProps({ cls: 'p-2' })
-      }, {
-        async setup() {
-          wrapper = await mountSuspended(makeParent(render), { props: { cls: 'p-2' } })
-        },
-        teardown() {
-          wrapper?.unmount()
-        }
       })
     })
   }
