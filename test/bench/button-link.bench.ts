@@ -33,18 +33,14 @@ describe('mount', () => {
 // ends in the initial state), re-rendering the whole subtree.
 function reRenderBench(name: string, comp: any, props: Record<string, any> = {}) {
   describe(`re-render: ${name}`, () => {
-    let wrapper: Awaited<ReturnType<typeof mountSuspended>>
+    let wrapper: Awaited<ReturnType<typeof mountSuspended>> | undefined
 
+    // Mounted lazily on the first call: CodSpeed's analysis runner invokes the
+    // bench function without tinybench's `setup`/`teardown` options.
     bench(name, async () => {
+      wrapper ??= await mountSuspended(comp, { props })
       await wrapper.setProps({ loading: true })
       await wrapper.setProps({ loading: false })
-    }, {
-      async setup() {
-        wrapper = await mountSuspended(comp, { props })
-      },
-      teardown() {
-        wrapper?.unmount()
-      }
     })
   })
 }
