@@ -4,8 +4,8 @@ export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: 'gap-2',
     base: 'relative overflow-hidden rounded-full bg-accented',
-    indicator: 'relative rounded-full size-full transition-transform duration-200 ease-out motion-reduce:data-[state=indeterminate]:animate-pulse',
-    status: 'flex text-dimmed transition-[width] duration-200 ease-out',
+    indicator: 'rounded-full size-full transition-transform duration-200 ease-out motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse',
+    status: 'flex text-dimmed transition-[width] duration-200 ease-out motion-reduce:transition-none',
     steps: 'grid items-end',
     step: 'truncate text-end row-start-1 col-start-1 transition-opacity ease-out'
   },
@@ -198,13 +198,13 @@ export default (options: Required<ModuleOptions>) => ({
     orientation: 'horizontal',
     animation: 'elastic',
     class: {
-      indicator: 'motion-safe:data-[state=indeterminate]:animate-[elastic_2s_var(--ease-in-out)_infinite]'
+      indicator: 'relative motion-safe:data-[state=indeterminate]:animate-[elastic_2s_var(--ease-in-out)_infinite]'
     }
   }, {
     orientation: 'vertical',
     animation: 'elastic',
     class: {
-      indicator: 'motion-safe:data-[state=indeterminate]:animate-[elastic-vertical_2s_var(--ease-in-out)_infinite]'
+      indicator: 'relative motion-safe:data-[state=indeterminate]:animate-[elastic-vertical_2s_var(--ease-in-out)_infinite]'
     }
   }],
   defaultVariants: {
