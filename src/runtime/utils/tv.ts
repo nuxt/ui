@@ -105,12 +105,77 @@ function applyReplacer(replacer: SlotClassReplacer, slotProps: Record<string, an
 }
 
 /**
+ * A slot invocation is memoizable only when its output is fully determined by a
+ * serializable key: primitives and arrays of primitives. Objects (clsx-style
+ * class maps) and functions (replacers) bail to the uncached path.
+ */
+function isMemoizable(value: unknown, depth = 0): boolean {
+  if (value === undefined || value === null) {
+    return true
+  }
+  const type = typeof value
+  if (type === 'string' || type === 'boolean') {
+    return true
+  }
+  // `JSON.stringify` turns NaN/Infinity into `null`, colliding with real `null`
+  // keys that tv resolves differently (default variant vs `key || "false"` lookup).
+  if (type === 'number') {
+    return Number.isFinite(value)
+  }
+  if (Array.isArray(value)) {
+    // Stop a few levels down rather than recurse without bound: a cyclic array
+    // reaching a variant would blow the stack, where tv itself resolves it. The
+    // arrays components pass (`[props.ui?.td, ...]`) are one or two deep.
+    if (depth >= 4) {
+      return false
+    }
+    for (const item of value) {
+      if (!isMemoizable(item, depth + 1)) {
+        return false
+      }
+    }
+    return true
+  }
+  return false
+}
+
+function memoKey(slotProps: Record<string, any>): string | undefined {
+  // Only plain objects: an exotic prototype could carry inherited enumerable
+  // props that tv would read but `JSON.stringify` would drop from the key,
+  // making two different inputs share one cache entry.
+  const proto = Object.getPrototypeOf(slotProps)
+  if (proto !== Object.prototype && proto !== null) {
+    return undefined
+  }
+
+  // `Object.keys` matches exactly what `JSON.stringify` serializes (own
+  // enumerable keys), so everything the key omits is also never inspected here.
+  for (const key of Object.keys(slotProps)) {
+    if (!isMemoizable(slotProps[key])) {
+      return undefined
+    }
+  }
+  // `JSON.stringify` drops `undefined`-valued keys, matching tv's semantics
+  // (an undefined variant is the same as an absent one).
+  return JSON.stringify(slotProps)
+}
+
+/**
  * Wrap the slot functions returned by `tv()` so a replacer (from `:ui` / `class`
  * at call time, or from `app.config.ui` at construction time) drops the slot's
  * baked-in default chain and returns only its replacement. Without a replacer the
  * original slot function runs untouched, so the common merge path is unaffected.
+ *
+ * Repeated invocations with identical simple args (re-renders, table cells) are
+ * memoized per slot: variant resolution + twMerge only run once per distinct
+ * input. The cache lives on the invocation result, so a factory rebuild (e.g.
+ * `app.config.ui` change) or variant-prop recompute starts fresh.
  */
 function wrapSlots(slots: Record<string, any>, directives?: Record<string, SlotClassReplacer>) {
+  // `undefined` is a real slot result: `tv` returns it (not `''`) for a slot
+  // whose chain resolves to no classes, so it can't double as a miss sentinel.
+  const memo = new Map<string, Map<string, string | undefined>>()
+
   return new Proxy(slots, {
     get(target, key: string) {
       const slot = target[key]
@@ -121,7 +186,30 @@ function wrapSlots(slots: Record<string, any>, directives?: Record<string, SlotC
       return (slotProps: Record<string, any> = {}) => {
         const replacer = findReplacer(slotProps.class) ?? findReplacer(slotProps.className) ?? directives?.[key]
         if (!replacer) {
-          return slot(slotProps)
+          const cacheKey = memoKey(slotProps)
+          if (cacheKey === undefined) {
+            return slot(slotProps)
+          }
+
+          let cache = memo.get(key)
+          if (!cache) {
+            cache = new Map()
+            memo.set(key, cache)
+          }
+
+          let result = cache.get(cacheKey)
+          // The extra `has` only runs for the rare slot that resolves to no
+          // classes, so the hot path stays a single lookup.
+          if (result === undefined && !cache.has(cacheKey)) {
+            if (cache.size >= 500) {
+              // Pathological dynamic inputs (e.g. per-row generated classes):
+              // reset rather than grow unbounded.
+              cache.clear()
+            }
+            result = slot(slotProps) as string
+            cache.set(cacheKey, result)
+          }
+          return result
         }
         return applyReplacer(replacer, slotProps, () => slot({ ...slotProps, class: undefined, className: undefined }))
       }
