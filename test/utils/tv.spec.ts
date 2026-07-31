@@ -229,6 +229,25 @@ describe('tv slot memoization', () => {
     expect(ui.label({ class: 'p-2' })).toBe('truncate p-2')
   })
 
+  it('falls back to the uncached path for a cyclic array', () => {
+    const ui = build()
+    const cyclic: any[] = ['p-2']
+    cyclic.push(cyclic)
+    // tv resolves this to the default variant (`String(cyclic)` matches no key),
+    // so keying it must stop recursing rather than blow the stack.
+    expect(() => ui.base({ active: cyclic })).not.toThrow()
+  })
+
+  it('keeps each slot cache bounded', () => {
+    const ui = build()
+    for (let i = 0; i < 600; i++) {
+      ui.base({ class: `w-[${i}px]` })
+    }
+    // Entry 501 resets rather than growing, and lookups still resolve after it.
+    expect(ui.base({ class: 'w-[599px]' })).toContain('w-[599px]')
+    expect(ui.base({ class: 'w-[0px]' })).toContain('w-[0px]')
+  })
+
   it('does not key inputs carrying inherited enumerable props as plain ones', () => {
     const ui = build()
     // Inherited `class` is read by tv but invisible to `JSON.stringify`: without

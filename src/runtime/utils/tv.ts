@@ -109,7 +109,7 @@ function applyReplacer(replacer: SlotClassReplacer, slotProps: Record<string, an
  * serializable key: primitives and arrays of primitives. Objects (clsx-style
  * class maps) and functions (replacers) bail to the uncached path.
  */
-function isMemoizable(value: unknown): boolean {
+function isMemoizable(value: unknown, depth = 0): boolean {
   if (value === undefined || value === null) {
     return true
   }
@@ -123,7 +123,18 @@ function isMemoizable(value: unknown): boolean {
     return Number.isFinite(value)
   }
   if (Array.isArray(value)) {
-    return value.every(isMemoizable)
+    // Stop a few levels down rather than recurse without bound: a cyclic array
+    // reaching a variant would blow the stack, where tv itself resolves it. The
+    // arrays components pass (`[props.ui?.td, ...]`) are one or two deep.
+    if (depth >= 4) {
+      return false
+    }
+    for (const item of value) {
+      if (!isMemoizable(item, depth + 1)) {
+        return false
+      }
+    }
+    return true
   }
   return false
 }
@@ -184,16 +195,17 @@ function wrapSlots(slots: Record<string, any>, directives?: Record<string, SlotC
           if (!cache) {
             cache = new Map()
             memo.set(key, cache)
-          } else if (cache.size > 500) {
-            // Pathological dynamic inputs (e.g. per-row generated classes):
-            // reset rather than grow unbounded.
-            cache.clear()
           }
 
           let result = cache.get(cacheKey)
           // The extra `has` only runs for the rare slot that resolves to no
           // classes, so the hot path stays a single lookup.
           if (result === undefined && !cache.has(cacheKey)) {
+            if (cache.size >= 500) {
+              // Pathological dynamic inputs (e.g. per-row generated classes):
+              // reset rather than grow unbounded.
+              cache.clear()
+            }
             result = slot(slotProps) as string
             cache.set(cacheKey, result)
           }
