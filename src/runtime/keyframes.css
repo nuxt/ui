@@ -539,16 +539,15 @@
 }
 
 @keyframes elastic {
-  /* Firefox doesn't do "margin: 0 auto", we have to play with margin-left */
   0%,
   100% {
     width: 50%;
-    margin-left: 25%;
+    left: 25%;
   }
 
   50% {
-    width: 90%;
-    margin-left: 5%;
+    width: 100%;
+    left: 0;
   }
 }
 
@@ -556,12 +555,12 @@
   0%,
   100% {
     height: 50%;
-    margin-top: 25%;
+    top: 25%;
   }
 
   50% {
-    height: 90%;
-    margin-top: 5%;
+    height: 100%;
+    top: 0;
   }
 }
 
