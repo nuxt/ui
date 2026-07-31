@@ -194,6 +194,9 @@ jobs:
   benchmarks:
     runs-on: ubuntu-latest
 
+    # Skip forks of the repo, they can't authenticate with CodSpeed
+    if: github.repository_owner == 'nuxt'
+
     permissions:
       contents: read
       id-token: write # for OpenID Connect authentication with CodSpeed
