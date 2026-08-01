@@ -8,6 +8,9 @@ export interface ThemePreset {
   doc: ThemeDoc
 }
 
+/** The stock preset — what an untouched theme already is. */
+export const DEFAULT_PRESET_ID = 'nuxt-ui'
+
 /**
  * Presets are plain ThemeDocs: applying one replaces the current document.
  * Each deliberately exercises a different engine capability, so they double
@@ -15,7 +18,7 @@ export interface ThemePreset {
  */
 export const presets: ThemePreset[] = [{
   id: 'nuxt-ui',
-  name: 'Nuxt UI',
+  name: 'Default',
   description: 'The stock theme — everything inherited.',
   icon: 'i-simple-icons-nuxt',
   doc: {

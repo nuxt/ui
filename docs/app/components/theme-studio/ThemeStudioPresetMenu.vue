@@ -7,14 +7,13 @@ const props = defineProps<{
   keepPanels?: boolean
 }>()
 
-const { presets, activePreset, shuffle } = useThemeStudio()
+const { presets, selectedPreset, shuffle } = useThemeStudio()
 const { icon: iconSet } = useTheme()
 const appConfig = useAppConfig()
 const studioIcons = useStudioIcons()
 
 /** Exposed so hosts (the fullscreen toolbar) can pin themselves while open. */
 const open = defineModel<boolean>('open', { default: false })
-const { hasCSSChanges, hasConfigChanges } = useTheme()
 
 // The persisted preset (and any persisted edits) are client-only — resolve
 // the label after mount so hydration matches the server's fallback.
@@ -82,9 +81,8 @@ onUnmounted(clearRollTimers)
 // divergence); 'Custom' only when preset-less but diverged from stock.
 const presetLabel = computed(() => {
   if (!mounted.value) return 'Presets'
-  const active = presets.find(preset => preset.id === activePreset.value)
-  if (active) return active.name
-  return (hasCSSChanges.value || hasConfigChanges.value) ? 'Custom' : 'Presets'
+  const active = presets.find(preset => preset.id === selectedPreset.value)
+  return active ? active.name : 'Custom'
 })
 </script>
 

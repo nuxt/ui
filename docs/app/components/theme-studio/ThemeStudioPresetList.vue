@@ -10,7 +10,7 @@ import { themeIcons } from '../../utils/theme'
  */
 const emit = defineEmits<{ select: [id: string] }>()
 
-const { presets, activePreset, applyPreset } = useThemeStudio()
+const { presets, selectedPreset, applyPreset } = useThemeStudio()
 
 // The persisted preset (and any persisted edits) are client-only — resolve
 // the selection after mount so hydration matches the server's fallback.
@@ -55,7 +55,7 @@ onMounted(() => {
 })
 
 const selected = computed({
-  get: () => mounted.value ? activePreset.value : undefined,
+  get: () => mounted.value ? selectedPreset.value : undefined,
   set: (id: string | undefined) => {
     const preset = presets.find(entry => entry.id === id)
     if (preset) {

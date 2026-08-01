@@ -1,6 +1,6 @@
 import colors from 'tailwindcss/colors'
 import { THEME_STATE_KEYS, THEME_STORAGE_KEYS } from '../utils/theme-keys'
-import { presets, docToSettings, isDefaultTheme, generatePalette, applyPaletteEffects, isDefaultEffects, parseCssColor, styleComponents, styleTokens, sectionFingerprint, mergeSection, canonicalTokenShades, storedStopStep, nearestShade, TOKEN_SHADE_TARGETS, SECTION_GROUPS, DEFAULT_COLORS, SHADES, SHADES_ALL, SHADE_SETS } from '../utils/theme-engine'
+import { presets, DEFAULT_PRESET_ID, docToSettings, isDefaultTheme, generatePalette, applyPaletteEffects, isDefaultEffects, parseCssColor, styleComponents, styleTokens, sectionFingerprint, mergeSection, canonicalTokenShades, storedStopStep, nearestShade, TOKEN_SHADE_TARGETS, SECTION_GROUPS, DEFAULT_COLORS, SHADES, SHADES_ALL, SHADE_SETS } from '../utils/theme-engine'
 import type { SectionKey, ThemeDoc, ThemePreset, PaletteCurveParams, PaletteEffects, StoredPaletteParams, PalettePin, StyleOptions, Shade, ShadeStep, ShadeStop, ColorAlias, TokenRamp } from '../utils/theme-engine'
 import { readLocalStorage } from '../utils/theme'
 
@@ -508,9 +508,21 @@ export function useThemeStudio() {
     setActivePreset(undefined)
   }
 
+  /**
+   * The preset the pickers show as selected. An untouched theme IS the stock
+   * preset, so it reads as Default rather than as nothing selected; once
+   * edits diverge with no preset behind them there's nothing to point at
+   * (the menu calls that 'Custom').
+   */
+  const selectedPreset = computed(() => {
+    if (activePreset.value) return activePreset.value
+    return (theme.hasCSSChanges.value || theme.hasConfigChanges.value) ? undefined : DEFAULT_PRESET_ID
+  })
+
   return {
     presets,
     activePreset,
+    selectedPreset,
     baselineDoc,
     clearActivePreset,
     sectionDirty,

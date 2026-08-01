@@ -56,13 +56,17 @@ const viewListOpen = ref(false)
 
       <ThemeStudioPicker />
 
+      <UTooltip text="Color mode">
+        <UColorModeButton />
+      </UTooltip>
+
       <UTooltip text="Open on GitHub" class="hidden lg:flex">
         <UButton
           color="neutral"
           variant="ghost"
           to="https://github.com/nuxt/ui"
           target="_blank"
-          :icon="studioIcons.github"
+          icon="i-simple-icons-github"
           aria-label="GitHub"
         />
       </UTooltip>

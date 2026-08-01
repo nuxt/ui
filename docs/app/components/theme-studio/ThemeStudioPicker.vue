@@ -36,15 +36,17 @@ const aliases = [
     </UTooltip>
 
     <template #content>
-      <div class="flex items-center justify-between gap-2">
-        <span class="text-xs font-semibold text-muted">Theme</span>
+      <span class="text-xs font-semibold text-muted">Theme</span>
 
-        <UColorModeSwitch />
-      </div>
-
-      <ThemeStudioPresetMenu size="sm" />
-
+      <!-- Preset leads its row like the colors below it, so all three
+           controls share one left edge. -->
       <div class="flex flex-col gap-2">
+        <div class="flex items-center gap-2">
+          <span class="text-xs text-muted w-14 shrink-0">Preset</span>
+
+          <ThemeStudioPresetMenu size="sm" class="flex-1 min-w-0" />
+        </div>
+
         <div v-for="{ alias, label } in aliases" :key="alias" class="flex items-center gap-2">
           <span class="text-xs text-muted w-14 shrink-0">{{ label }}</span>
 
@@ -56,11 +58,12 @@ const aliases = [
         <USeparator />
 
         <UButton
-          label="Open Theme Studio"
+          label="Edit theme"
           :icon="studioIcons.themes"
           trailing-icon="i-lucide-arrow-right"
           color="neutral"
           variant="subtle"
+          size="sm"
           block
           to="/theme"
           @click="open = false"
