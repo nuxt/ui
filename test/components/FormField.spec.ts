@@ -118,6 +118,18 @@ describe('FormField', () => {
         const label = wrapper.find('label[for=v-0-0]')
         expect(label.exists()).toBe(false)
       })
+    } else {
+      test('binds label for', async () => {
+        const wrapper = await renderFormField({
+          props: { label: 'Label' },
+          inputComponent
+        })
+        const label = wrapper.find('label[for=v-0-0]')
+        expect(label.exists()).toBe(true)
+
+        const input = wrapper.find('[id=v-0-0]')
+        expect(input.exists()).toBe(true)
+      })
     }
 
     if (name === 'Slider') {
@@ -131,20 +143,6 @@ describe('FormField', () => {
         expect(invalid).toHaveLength(1)
         expect(invalid[0]!.attributes('role')).toBe('slider')
         expect(invalid[0]!.attributes('aria-describedby')).toBe('v-0-0-error')
-      })
-    }
-
-    if (name !== 'RadioGroup') {
-      test('binds label for', async () => {
-        const wrapper = await renderFormField({
-          props: { label: 'Label' },
-          inputComponent
-        })
-        const label = wrapper.find('label[for=v-0-0]')
-        expect(label.exists()).toBe(true)
-
-        const input = wrapper.find('[id=v-0-0]')
-        expect(input.exists()).toBe(true)
       })
     }
 
