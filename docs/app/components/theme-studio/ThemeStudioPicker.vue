@@ -32,7 +32,7 @@ const presetTiles = computed(() => presets.map(preset => ({
   id: preset.id,
   label: preset.name,
   icon: preset.icon,
-  chip: themeChipStyle(preset.doc)
+  themeChip: themeChipStyle(preset.doc)
 })))
 
 // the applied preset is client-only — no selection until mount, or hydration
@@ -110,7 +110,7 @@ function openExport() {
           <template #item-leading="{ item }">
             <span
               class="flex items-center justify-center h-12 w-full rounded-md ring ring-default bg-[image:var(--chip-bg-light)] dark:bg-[image:var(--chip-bg-dark)]"
-              :style="item.chip"
+              :style="item.themeChip"
             >
               <UIcon :name="item.icon" class="size-5 text-(--chip-icon-light) dark:text-(--chip-icon-dark)" />
             </span>
