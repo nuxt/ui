@@ -31,25 +31,15 @@ const tokenGroups = TOKEN_GROUPS
       :key="tokenGroup.key"
       :label="tokenGroups.length > 1 ? tokenGroup.label : undefined"
     >
-      <ThemeStudioSection
+      <ThemeStudioShadeGroup
         v-for="section in tokenGroup.sections"
         :key="section.token"
         :label="`${tokenGroup.label.replace(/ shades$/, '')} ${section.label.toLowerCase()}`"
         separator
-        resettable
-        :reset-dirty="Object.values(section.sliders).some(slider => slider.dirty.value)"
-        @reset="Object.values(section.sliders).forEach(slider => slider.reset())"
-      >
-        <ThemeStudioRow
-          v-for="(slider, modeName) in section.sliders"
-          :key="modeName"
-          v-model="slider.model.value"
-          control="shade"
-          :mode="modeName"
-          :chip="rampChip(section.ramp)"
-          :ladder="shadeLadder"
-        />
-      </ThemeStudioSection>
+        :sliders="section.sliders"
+        :chip="rampChip(section.ramp)"
+        :ladder="shadeLadder"
+      />
     </ThemeStudioSection>
   </div>
 </template>

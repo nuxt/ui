@@ -61,23 +61,13 @@ const shadeEditor = ref(false)
 
       <UCollapsible v-model:open="shadeEditor">
         <template #content>
-          <ThemeStudioSection
+          <ThemeStudioShadeGroup
             v-if="alias !== 'neutral'"
             :label="`${title} shades`"
-            resettable
-            :reset-dirty="Object.values(sections[0]!.sliders).some(slider => slider.dirty.value)"
-            @reset="Object.values(sections[0]!.sliders).forEach(slider => slider.reset())"
-          >
-            <ThemeStudioRow
-              v-for="(slider, modeName) in sections[0]!.sliders"
-              :key="modeName"
-              v-model="slider.model.value"
-              control="shade"
-              :mode="modeName"
-              :chip="rampChip(alias)"
-              :ladder="shadeLadder"
-            />
-          </ThemeStudioSection>
+            :sliders="sections[0]!.sliders"
+            :chip="rampChip(alias)"
+            :ladder="shadeLadder"
+          />
 
           <!-- borders live in the Style panel's Borders section -->
           <ThemeStudioTokenShades v-else :alias="alias" :groups="['background', 'text']" />
