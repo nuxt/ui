@@ -77,12 +77,14 @@ const emptyLabel = computed(() => {
       block
       :icon="icon"
       trailing-icon="i-lucide-chevron-down"
-      :ui="{ label: 'flex-1 min-w-0 text-left truncate' }"
+      :ui="{ leadingIcon: 'text-primary' }"
       :aria-label="ariaLabel"
     >
-      <!-- no inline family: the page already renders in the picked font, so
+      <!-- Classes here rather than `ui.label` — UButton only applies that to
+           the span it renders for the `label` PROP, never a default slot.
+           No inline family: the page already renders in the picked font, so
            the trigger inherits it. The rows below still set their own. -->
-      <span class="truncate">{{ model === 'inherit' ? 'Inherit base' : model }}</span>
+      <span class="flex-1 min-w-0 text-left truncate">{{ model === 'inherit' ? 'Inherit base' : model }}</span>
     </UButton>
 
     <template #content>

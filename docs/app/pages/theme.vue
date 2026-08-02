@@ -112,9 +112,11 @@ onUnmounted(() => {
   capture(snapshot())
 })
 
+// `style` stays the doc/section key; the label is what people read, and
+// "Options" is honest about a panel holding type, scale and defaults too.
 const settingGroups = [
   { label: 'Colors', value: 'colors' },
-  { label: 'Style', value: 'style' }
+  { label: 'Options', value: 'style' }
 ] as const
 
 // Fullscreen reveal via mousemove, not a hover overlay (it would eat clicks on
@@ -178,7 +180,7 @@ const shareMode = ref<'import' | 'export'>('export')
               toolbarPinned ? 'translate-y-0' : 'translate-y-[calc(100%+6px)] group-hover:translate-y-0 group-focus-within:translate-y-0'
             ] : 'border-t border-default'"
           >
-            <ThemeStudioPresetMenu v-model:open="openPanels.presets" keep-panels class="w-56 shrink-0" />
+            <ThemeStudioPresetMenu v-model:open="openPanels.presets" keep-panels class="w-52 shrink-0" />
 
             <UPopover
               v-for="settingGroup in settingGroups"
@@ -191,12 +193,15 @@ const shareMode = ref<'import' | 'export'>('export')
                   :label="settingGroup.label"
                   color="neutral"
                   variant="subtle"
+                  :icon="settingGroup.value === 'colors' ? undefined : studioIcons.options"
                   :trailing-icon="appConfig.ui.icons.chevronDown"
+                  :ui="{ leadingIcon: 'text-primary' }"
                 >
+                  <!-- Colors leads with its own swatches instead of a glyph -->
                   <template v-if="settingGroup.value === 'colors'" #leading>
                     <!-- overlapped like an avatar stack; the ring is the
                          button's own surface, so it cuts rather than outlines -->
-                    <span class="flex items-center -space-x-1">
+                    <span class="flex items-center -space-x-0.5">
                       <!-- black-as-primary has no ramp variable to point at -->
                       <span
                         v-for="(dot, index) in colorDots"
@@ -219,7 +224,7 @@ const shareMode = ref<'import' | 'export'>('export')
                  the two people reach for most, and the pickers preview
                  themselves, so seeing them costs no clicks. The wrappers
                  carry the width — UPopover's root renders no element. -->
-            <div class="w-48 shrink-0" data-keep-panels>
+            <div class="w-40 shrink-0" data-keep-panels>
               <ThemeStudioFontPicker
                 v-model="font"
                 :curated="fonts"
@@ -230,7 +235,7 @@ const shareMode = ref<'import' | 'export'>('export')
               />
             </div>
 
-            <div class="w-40 shrink-0" data-keep-panels>
+            <div class="w-32 shrink-0" data-keep-panels>
               <ThemeStudioListPicker
                 v-model="iconSet"
                 :items="icons"

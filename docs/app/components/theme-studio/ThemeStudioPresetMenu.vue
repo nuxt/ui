@@ -109,6 +109,7 @@ const presetLabel = computed(() => {
         variant="subtle"
         :size="size"
         block
+        :ui="{ leadingIcon: 'text-primary' }"
       />
 
       <template #content>

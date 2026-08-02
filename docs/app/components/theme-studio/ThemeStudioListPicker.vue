@@ -35,12 +35,15 @@ const selected = computed(() => props.items.find(item => item.value === model.va
       block
       :icon="icon"
       trailing-icon="i-lucide-chevron-down"
-      :ui="{ label: 'flex-1 min-w-0 text-left truncate' }"
+      :ui="{ leadingIcon: 'text-primary' }"
       :aria-label="ariaLabel"
     >
-      <slot name="trigger" :selected="selected">
-        {{ selected?.label }}
-      </slot>
+      <!-- The classes live on this span, not `ui.label`: UButton only applies
+           that to the span it renders for the `label` PROP, so a default-slot
+           trigger never sees it and a long name wraps instead of clipping. -->
+      <span class="flex-1 min-w-0 text-left truncate">
+        <slot name="trigger" :selected="selected">{{ selected?.label }}</slot>
+      </span>
     </UButton>
 
     <template #content>
