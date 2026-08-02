@@ -97,9 +97,14 @@ const groupColors = Object.fromEntries(variantGroupFields.map(field => [field.ke
     :section-key="variantGroupFields.map(field => field.key)"
   >
     <div class="flex flex-col gap-3">
-      <div v-for="field in variantGroupFields" :key="field.key" class="flex flex-col gap-1.5">
-        <span class="text-xs font-medium text-muted select-none">{{ field.label }}</span>
-
+      <!-- Static sections, like the aliases nested under Semantic — same
+           primitive, so the group labels indent and space identically. -->
+      <ThemeStudioSection
+        v-for="field in variantGroupFields"
+        :key="field.key"
+        :label="field.label"
+        :collapsible="false"
+      >
         <div class="flex flex-col gap-1.5">
           <div class="flex items-center gap-2">
             <span class="text-xs text-muted w-13 shrink-0 select-none">Variant</span>
@@ -160,7 +165,7 @@ const groupColors = Object.fromEntries(variantGroupFields.map(field => [field.ke
             </ThemeStudioDefaultSelect>
           </div>
         </div>
-      </div>
+      </ThemeStudioSection>
     </div>
   </ThemeStudioSection>
 </template>

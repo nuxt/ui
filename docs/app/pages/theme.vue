@@ -165,7 +165,7 @@ const shareMode = ref<'import' | 'export'>('export')
         <!-- In fullscreen the toolbar floats over the bottom edge at
              UContainer's own recipe (edges line up with other pages); only
              the strip catches the pointer so the preview stays clickable. -->
-        <div :class="fullscreen ? 'group fixed bottom-0 inset-x-0 z-50 pointer-events-none w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8' : 'shrink-0'">
+        <div :class="fullscreen ? 'group fixed bottom-0 inset-x-0 z-50 pointer-events-none w-full max-w-(--ui-container) mx-auto ' : 'shrink-0'">
           <!-- thin touch affordance only — mouse reveal is proximity-driven -->
           <div v-if="fullscreen" class="absolute bottom-0 inset-x-0 h-2 pointer-events-auto" />
 
