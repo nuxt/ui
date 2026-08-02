@@ -40,11 +40,8 @@ watch(open, (value) => {
 
 const results = computed(() => open.value ? search(query.value) : [])
 
-interface FontItem {
-  label: string
-  value: string
-  category?: string
-}
+// a type, not an interface — the picker's item type wants an index signature
+type FontItem = { label: string, value: string, category?: string }
 
 const items = computed<FontItem[]>(() => {
   if (query.value.trim()) {
@@ -69,62 +66,45 @@ const emptyLabel = computed(() => {
 </script>
 
 <template>
-  <UPopover v-model:open="open" :content="{ align: 'start' }">
-    <UButton
-      color="neutral"
-      variant="subtle"
-      :size="size"
-      block
-      :icon="icon"
-      trailing-icon="i-lucide-chevron-down"
-      :aria-label="ariaLabel"
-    >
-      <!-- Classes here rather than `ui.label` — UButton only applies that to
-           the span it renders for the `label` PROP, never a default slot.
-           No inline family: the page already renders in the picked font, so
-           the trigger inherits it. The rows below still set their own. -->
-      <span class="flex-1 min-w-0 text-left truncate">{{ model === 'inherit' ? 'Inherit base' : model }}</span>
-    </UButton>
-
-    <template #content>
-      <div class="w-72 flex flex-col">
-        <UInput
-          v-model="query"
-          icon="i-lucide-search"
-          placeholder="Search Google Fonts…"
-          variant="none"
-          autofocus
-          class="border-b border-default"
-          aria-label="Search Google Fonts"
-        />
-
-        <UListbox
-          v-if="items.length"
-          v-model="model"
-          :items="items"
-          value-key="value"
-          :ui="{ root: 'ring-0 rounded-md', content: 'max-h-80' }"
-          @update:model-value="open = false"
-        >
-          <template #item-label="{ item }">
-            <span :style="item.value === 'inherit' ? undefined : { fontFamily: `'${item.value}', sans-serif` }">{{ item.label }}</span><span v-if="item.value === defaultValue" class="text-dimmed">&nbsp;(Default)</span>
-          </template>
-
-          <template #item-description="{ item }">
-            <span v-if="item.value !== 'inherit'" class="flex items-center gap-2 min-w-0">
-              <span
-                class="text-xs text-muted truncate"
-                :style="{ fontFamily: `'${item.value}', sans-serif` }"
-              >Grumpy wizards make toxic brew</span>
-              <span v-if="item.category" class="text-xs text-dimmed shrink-0 ms-auto">{{ item.category }}</span>
-            </span>
-          </template>
-        </UListbox>
-
-        <p v-else class="px-3 py-6 text-xs text-muted text-center select-none">
-          {{ emptyLabel }}
-        </p>
-      </div>
+  <ThemeStudioListPicker
+    v-model="model"
+    v-model:open="open"
+    :items="items"
+    :icon="icon"
+    :size="size"
+    :aria-label="ariaLabel"
+    :empty="emptyLabel"
+  >
+    <!-- No inline family on the trigger: the page already renders in the
+         picked font, so it inherits. The rows below set their own. -->
+    <template #trigger>
+      {{ model === 'inherit' ? 'Inherit base' : model }}
     </template>
-  </UPopover>
+
+    <template #header>
+      <UInput
+        v-model="query"
+        icon="i-lucide-search"
+        placeholder="Search Google Fonts…"
+        variant="none"
+        autofocus
+        class="border-b border-default"
+        aria-label="Search Google Fonts"
+      />
+    </template>
+
+    <template #item-label="{ item }">
+      <span :style="item.value === 'inherit' ? undefined : { fontFamily: `'${item.value}', sans-serif` }">{{ item.label }}</span><span v-if="item.value === defaultValue" class="text-dimmed">&nbsp;(Default)</span>
+    </template>
+
+    <template #item-description="{ item }">
+      <span v-if="item.value !== 'inherit'" class="flex items-center gap-2 min-w-0">
+        <span
+          class="text-xs text-muted truncate"
+          :style="{ fontFamily: `'${item.value}', sans-serif` }"
+        >Grumpy wizards make toxic brew</span>
+        <span v-if="item.category" class="text-xs text-dimmed shrink-0 ms-auto">{{ item.category }}</span>
+      </span>
+    </template>
+  </ThemeStudioListPicker>
 </template>

@@ -14,6 +14,8 @@ const props = withDefaults(defineProps<{
   items: ListPickerItem[]
   icon?: string
   ariaLabel?: string
+  /** Stands in for the listbox when nothing matches. */
+  empty?: string
   /** Panels use the default; the toolbar matches the controls beside it. */
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 }>(), {
@@ -21,8 +23,8 @@ const props = withDefaults(defineProps<{
 })
 
 const model = defineModel<string>({ required: true })
+const open = defineModel<boolean>('open', { default: false })
 
-const open = ref(false)
 const selected = computed(() => props.items.find(item => item.value === model.value))
 </script>
 
@@ -46,22 +48,30 @@ const selected = computed(() => props.items.find(item => item.value === model.va
     </UButton>
 
     <template #content>
-      <UListbox
-        v-model="model"
-        :items="items"
-        value-key="value"
-        class="w-72"
-        :ui="{ root: 'ring-0 rounded-md', content: 'max-h-80' }"
-        @update:model-value="open = false"
-      >
-        <template v-if="$slots['item-label']" #item-label="scope">
-          <slot name="item-label" v-bind="scope" />
-        </template>
+      <div class="w-72 flex flex-col">
+        <slot name="header" />
 
-        <template v-if="$slots['item-description']" #item-description="scope">
-          <slot name="item-description" v-bind="scope" />
-        </template>
-      </UListbox>
+        <UListbox
+          v-if="items.length"
+          v-model="model"
+          :items="items"
+          value-key="value"
+          :ui="{ root: 'ring-0 rounded-md', content: 'max-h-80' }"
+          @update:model-value="open = false"
+        >
+          <template v-if="$slots['item-label']" #item-label="scope">
+            <slot name="item-label" v-bind="scope" />
+          </template>
+
+          <template v-if="$slots['item-description']" #item-description="scope">
+            <slot name="item-description" v-bind="scope" />
+          </template>
+        </UListbox>
+
+        <p v-else-if="empty" class="px-3 py-6 text-xs text-muted text-center select-none">
+          {{ empty }}
+        </p>
+      </div>
     </template>
   </UPopover>
 </template>
