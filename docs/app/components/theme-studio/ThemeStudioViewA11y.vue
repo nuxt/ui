@@ -7,25 +7,25 @@ import { blendColors, contrastRatio } from '../../utils/theme-engine'
  * custom properties, the resolved ground truth.
  */
 const FOREGROUNDS = [
-  { token: '--ui-text-highlighted', label: 'Highlighted' },
-  { token: '--ui-text', label: 'Text' },
-  { token: '--ui-text-toned', label: 'Toned' },
-  { token: '--ui-text-muted', label: 'Muted' },
-  { token: '--ui-text-dimmed', label: 'Dimmed' },
-  { token: '--ui-primary', label: 'Primary' },
-  { token: '--ui-secondary', label: 'Secondary' },
-  { token: '--ui-success', label: 'Success' },
-  { token: '--ui-info', label: 'Info' },
-  { token: '--ui-warning', label: 'Warning' },
-  { token: '--ui-error', label: 'Error' }
+  { token: '--ui-text-highlighted', label: 'Highlighted', class: 'text-highlighted' },
+  { token: '--ui-text', label: 'Text', class: 'text-default' },
+  { token: '--ui-text-toned', label: 'Toned', class: 'text-toned' },
+  { token: '--ui-text-muted', label: 'Muted', class: 'text-muted' },
+  { token: '--ui-text-dimmed', label: 'Dimmed', class: 'text-dimmed' },
+  { token: '--ui-primary', label: 'Primary', class: 'text-primary' },
+  { token: '--ui-secondary', label: 'Secondary', class: 'text-secondary' },
+  { token: '--ui-success', label: 'Success', class: 'text-success' },
+  { token: '--ui-info', label: 'Info', class: 'text-info' },
+  { token: '--ui-warning', label: 'Warning', class: 'text-warning' },
+  { token: '--ui-error', label: 'Error', class: 'text-error' }
 ]
 
 const BACKGROUNDS = [
-  { token: '--ui-bg', label: 'Default' },
-  { token: '--ui-bg-muted', label: 'Muted' },
-  { token: '--ui-bg-elevated', label: 'Elevated' },
-  { token: '--ui-bg-accented', label: 'Accented' },
-  { token: '--ui-bg-inverted', label: 'Inverted' }
+  { token: '--ui-bg', label: 'Default', class: 'bg-default' },
+  { token: '--ui-bg-muted', label: 'Muted', class: 'bg-muted' },
+  { token: '--ui-bg-elevated', label: 'Elevated', class: 'bg-elevated' },
+  { token: '--ui-bg-accented', label: 'Accented', class: 'bg-accented' },
+  { token: '--ui-bg-inverted', label: 'Inverted', class: 'bg-inverted' }
 ]
 
 /** Solid surfaces (buttons, badges) render --ui-text-inverted on the alias. */
@@ -150,8 +150,21 @@ function scheduleCompute() {
 
 watch([() => colorMode.value, () => ({ ...appConfig.ui.colors }), cssVariablesData, customColorsData], scheduleCompute)
 
-onMounted(compute)
-onUnmounted(() => cancelAnimationFrame(pending))
+// The theme lands as <style> tags useHead swaps, and the view remounts on an
+// icon-pack change (the preview is keyed on it), so it can mount BEFORE the
+// sheet it should read. Watching the head covers every path into a new theme,
+// whichever order the two arrive in.
+let observer: MutationObserver | undefined
+onMounted(() => {
+  scheduleCompute()
+  observer = new MutationObserver(scheduleCompute)
+  observer.observe(document.head, { childList: true, subtree: true, characterData: true })
+})
+
+onUnmounted(() => {
+  observer?.disconnect()
+  cancelAnimationFrame(pending)
+})
 
 function level(ratio: number | null): { label: string, color: 'success' | 'warning' | 'error' | 'neutral' } {
   // Unparseable color, signal unknown rather than a fabricated pass/fail.
@@ -197,16 +210,15 @@ function formatRatio(ratio: number | null): string {
                 </th>
                 <td v-for="(bg, col) in BACKGROUNDS" :key="bg.token" class="p-1">
                   <div
-                    v-if="matrix[row]?.[col]"
                     class="rounded-md px-2.5 py-2 flex items-center justify-between gap-2 ring ring-default"
-                    :style="{ backgroundColor: matrix[row][col].bg }"
+                    :class="[bg.class, fg.class]"
                   >
-                    <span class="font-semibold" :style="{ color: matrix[row][col].fg }">Aa</span>
+                    <span class="font-semibold">Aa</span>
                     <span class="flex items-center gap-1.5">
-                      <span class="tabular-nums font-mono opacity-80" :style="{ color: matrix[row][col].fg }">
-                        {{ formatRatio(matrix[row][col].ratio) }}
+                      <span class="tabular-nums font-mono opacity-80">
+                        {{ formatRatio(matrix[row]?.[col]?.ratio ?? null) }}
                       </span>
-                      <UBadge :label="level(matrix[row][col].ratio).label" :color="level(matrix[row][col].ratio).color" variant="solid" size="sm" />
+                      <UBadge :label="level(matrix[row]?.[col]?.ratio ?? null).label" :color="level(matrix[row]?.[col]?.ratio ?? null).color" variant="solid" size="sm" />
                     </span>
                   </div>
                 </td>
