@@ -63,6 +63,8 @@ const colorChips = computed(() => [{
   label: paletteName('neutral', neutral.value)
 }])
 
+const colorLabel = computed(() => colorChips.value.map(chip => chip.label).join(', '))
+
 /** "Changed from preset" dot per settings tab. */
 const groupDirtyFlags = {
   colors: groupDirty('colors'),
@@ -197,25 +199,27 @@ const shareMode = ref<'import' | 'export'>('export')
               <UPopover v-model:open="openPanels.colors" :content="{ align: 'start', onInteractOutside: keepPanels }">
                 <UChip :show="groupDirtyFlags.colors.value" color="primary" size="sm">
                   <UButton
+                    :label="colorLabel"
                     color="neutral"
                     variant="subtle"
                     :trailing-icon="appConfig.ui.icons.chevronDown"
                     class="w-38"
-                    :ui="{ label: 'flex-1 min-w-0' }"
+                    :ui="{ label: 'flex-1 min-w-0 text-left truncate' }"
                     aria-label="Colors"
                   >
-                    <!-- each colour beside its own name -->
-                    <span class="flex items-center gap-2 min-w-0">
-                      <span v-for="chip in colorChips" :key="chip.label" class="flex items-center gap-1 min-w-0">
-                        <!-- black-as-primary has no ramp variable to point at -->
+                    <template #leading>
+                      <span class="flex items-center -space-x-0.5">
+                        <!-- primary stacks on top; black-as-primary has no ramp
+                             variable to point at -->
                         <span
-                          class="size-3 rounded-full shrink-0"
+                          v-for="(chip, index) in colorChips"
+                          :key="chip.label"
+                          class="relative size-3 rounded-full ring-2 ring-(--ui-bg-elevated)"
                           :class="!chip.dot && 'bg-black dark:bg-white'"
-                          :style="chip.dot ? { backgroundColor: chip.dot } : undefined"
+                          :style="{ ...(chip.dot ? { backgroundColor: chip.dot } : {}), zIndex: colorChips.length - index }"
                         />
-                        <span class="truncate">{{ chip.label }}</span>
                       </span>
-                    </span>
+                    </template>
                   </UButton>
                 </UChip>
 
