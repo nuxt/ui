@@ -85,7 +85,7 @@ const selected = computed({
           :icon="presetIcon"
           :trailing-icon="appConfig.ui.icons.chevronDown"
           color="neutral"
-          variant="ghost"
+          variant="outline"
           block
           :ui="{ leadingIcon: 'text-primary' }"
         />

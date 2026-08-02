@@ -35,10 +35,15 @@ const presetTiles = computed(() => presets.map(preset => ({
   chip: themeChipStyle(preset.doc)
 })))
 
-function pickPreset(id: string) {
-  const preset = presets.find(entry => entry.id === id)
-  if (preset) applyPreset(preset)
-}
+// the applied preset is client-only — no selection until mount, or hydration
+// would adopt a checked row the server never rendered
+const selected = computed({
+  get: () => (mounted.value ? selectedPreset.value : undefined),
+  set: (id: string | undefined) => {
+    const preset = presets.find(entry => entry.id === id)
+    if (preset) applyPreset(preset)
+  }
+})
 
 function openExport() {
   open.value = false
@@ -86,32 +91,31 @@ function openExport() {
           </div>
         </template>
 
-        <!-- Each tile paints itself in the preset it applies. -->
-        <div class="grid grid-cols-3 gap-2">
-          <UButton
-            v-for="tile in presetTiles"
-            :key="tile.id"
-            color="neutral"
-            variant="ghost"
-            block
-            class="rounded-lg"
-            :active="mounted && selectedPreset === tile.id"
-            active-color="primary"
-            active-variant="subtle"
-            :ui="{ base: 'flex-col gap-1 p-1' }"
-            :aria-label="tile.label"
-            @click="pickPreset(tile.id)"
-          >
+        <!-- Each tile paints itself in the preset it applies; the same
+             listbox the view switcher uses, three across. -->
+        <UListbox
+          v-model="selected"
+          :items="presetTiles"
+          value-key="id"
+          :ui="{
+            root: 'ring-0 rounded-none overflow-visible',
+            content: 'max-h-none overflow-visible',
+            group: 'p-0 grid grid-cols-3 gap-1',
+            item: 'flex-col rounded-lg ring-inset data-[state=checked]:bg-elevated/50',
+            itemLabel: 'w-full text-[11px] leading-tight text-center truncate',
+            itemTrailing: 'hidden',
+            itemWrapper: 'p-1 min-w-0'
+          }"
+        >
+          <template #item-leading="{ item }">
             <span
               class="flex items-center justify-center h-12 w-full rounded-md ring ring-default bg-[image:var(--chip-bg-light)] dark:bg-[image:var(--chip-bg-dark)]"
-              :style="tile.chip"
+              :style="item.chip"
             >
-              <UIcon :name="tile.icon" class="size-5 text-(--chip-icon-light) dark:text-(--chip-icon-dark)" />
+              <UIcon :name="item.icon" class="size-5 text-(--chip-icon-light) dark:text-(--chip-icon-dark)" />
             </span>
-
-            <span class="text-[11px] px-1 font-normal leading-tight text-center truncate w-full">{{ tile.label }}</span>
-          </UButton>
-        </div>
+          </template>
+        </UListbox>
 
         <!-- v-if on the template itself: an empty footer would still draw its
              rule and padding -->

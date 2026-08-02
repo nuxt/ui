@@ -138,7 +138,7 @@ const shareMode = ref<'import' | 'export'>('export')
             <!-- desktop's switcher lives in the header; this one covers
                  mobile and fullscreen -->
             <ThemeStudioToolbarField v-slot="{ tooltip }" label="Preview" :class="!fullscreen && 'lg:hidden'">
-              <ThemeStudioViewSwitcher v-model:open="openPanels.view" :content="{ align: 'end' }" :tooltip="tooltip" />
+              <ThemeStudioViewSwitcher v-model:open="openPanels.view" :content="{ align: 'end' }" :tooltip="tooltip" variant="outline" />
             </ThemeStudioToolbarField>
 
             <!-- fullscreen hides the header, and with it the only way to
