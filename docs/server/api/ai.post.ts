@@ -1,12 +1,16 @@
-import { streamText, convertToModelMessages, smoothStream, jsonSchema, isStepCount, toUIMessageStream, createUIMessageStreamResponse } from 'ai'
+import type { UIMessage, InferUITools, Tool } from 'ai'
+import { ToolLoopAgent, createAgentUIStreamResponse, tool, dynamicTool, jsonSchema, smoothStream, isStepCount, consumeStream, APICallError } from 'ai'
 import type { AnthropicLanguageModelOptions } from '@ai-sdk/anthropic'
-import { gateway } from '@ai-sdk/gateway'
+import type { GatewayProviderOptions } from '@ai-sdk/gateway'
 import { z } from 'zod'
 import { tools as mcpToolDefinitions } from '#nuxt-mcp-toolkit/tools.mjs'
+import * as theme from '../../.nuxt/ui'
 import { themeIcons, cssVariableDefaults } from '../../app/utils/theme'
 
+const componentNames = Object.keys(theme)
+
 function mcpToolsToAiTools() {
-  const aiTools: Record<string, { description: string, inputSchema: ReturnType<typeof jsonSchema>, execute: (args: any) => Promise<any> }> = {}
+  const aiTools: Record<string, Tool> = {}
 
   for (const def of mcpToolDefinitions as any[]) {
     const filename = def._meta?.filename as string | undefined
@@ -19,7 +23,7 @@ function mcpToolsToAiTools() {
       ? z.toJSONSchema(z.object(def.inputSchema)) as Record<string, unknown>
       : { type: 'object' as const, properties: {} }
 
-    aiTools[name] = {
+    aiTools[name] = dynamicTool({
       description: def.description || '',
       inputSchema: jsonSchema(schema),
       execute: async (args: any) => {
@@ -29,15 +33,36 @@ function mcpToolsToAiTools() {
           return { error: error.statusCode ? `[${error.statusCode}] ${error.message}` : error.message || String(error) }
         }
       }
-    }
+    })
   }
 
   return aiTools
 }
 
-const applyTheme = {
+export interface ApplyThemeSettings {
+  primary?: string
+  neutral?: string
+  secondary?: string
+  success?: string
+  info?: string
+  warning?: string
+  error?: string
+  radius?: number
+  font?: string
+  blackAsPrimary?: boolean
+  icons?: string
+  customColors?: Record<string, Record<string, string>>
+  cssVariables?: { light?: Record<string, string>, dark?: Record<string, string> }
+  ui?: Record<string, any>
+}
+
+// Written as a raw JSON Schema rather than zod on purpose: the SDK's zod conversion rewrites
+// `additionalProperties` to `false` on every object, which strips the value schema off
+// `z.record()` and would tell the model that `customColors`, `cssVariables` and `ui` accept
+// no keys at all. The `jsonSchema<T>()` generic still gives us the input type.
+const applyTheme = tool({
   description: 'Apply theme settings live on the docs site. Call this when users ask to change colors, radius, font, or other theme properties. Only include properties that changed.',
-  inputSchema: jsonSchema<Record<string, any>>({
+  inputSchema: jsonSchema<ApplyThemeSettings>({
     type: 'object' as const,
     properties: {
       primary: { type: 'string', description: 'Primary color name (e.g., green, blue, red, indigo)' },
@@ -82,24 +107,32 @@ const applyTheme = {
       }
     }
   }),
-  execute: async (settings: Record<string, any>) => ({ applied: true, ...settings })
-}
+  execute: async settings => ({ applied: true, ...settings })
+})
 
-const resetTheme = {
+const resetTheme = tool({
   description: 'Reset the theme back to defaults (primary: green, neutral: slate, radius: 0.25rem, font: Public Sans). Call this when users ask to reset, revert, or restore the default theme.',
-  inputSchema: jsonSchema<Record<string, never>>({
-    type: 'object' as const,
-    properties: {}
-  }),
+  inputSchema: z.object({}),
   execute: async () => ({ reset: true })
-}
+})
 
-const getThemeGuide = {
-  description: 'Get detailed instructions for applying live theme changes. Call this ONLY when you are about to use applyTheme (e.g. user says "make it blue", "create a dark theme"). Do NOT call for documentation questions about theming — search docs instead.',
-  inputSchema: jsonSchema<Record<string, never>>({
-    type: 'object' as const,
-    properties: {}
+const getComponentTheme = tool({
+  description: 'Get the theme definition (slots, variants, compoundVariants, defaultVariants) for a specific Nuxt UI component. Call this when you need to know the available slots and customization options to suggest component-level theming.',
+  inputSchema: z.object({
+    componentName: z.string().describe(`Component name in camelCase. Available: ${componentNames.join(', ')}`)
   }),
+  execute: async ({ componentName }) => {
+    const componentTheme = (theme as Record<string, unknown>)[componentName]
+    if (!componentTheme) {
+      return { error: `Component "${componentName}" not found`, availableComponents: componentNames }
+    }
+    return { componentName, theme: componentTheme }
+  }
+})
+
+const getThemeGuide = tool({
+  description: 'Get detailed instructions for applying live theme changes. Call this ONLY when you are about to use applyTheme (e.g. user says "make it blue", "create a dark theme"). Do NOT call for documentation questions about theming — search docs instead.',
+  inputSchema: z.object({}),
   execute: async () => ({
     guide: `When users ask to change the theme, customize colors, or modify the appearance, use the \`applyTheme\` tool to apply changes live on this docs site. Only include properties that changed.
 
@@ -298,57 +331,24 @@ export default defineConfig({
 
 NEVER recommend \`appConfig.theme.*\` properties (like \`blackAsPrimary\`, \`radius\`, \`font\`) — those are internal to the docs site. Users should use CSS variables in main.css for radius, fonts, and monochrome primary.`
   })
+})
+
+const tools = {
+  ...mcpToolsToAiTools(),
+  getThemeGuide,
+  applyTheme,
+  resetTheme,
+  getComponentTheme
 }
 
-export default defineEventHandler(async (event) => {
-  const { messages, theme, framework, currentPage } = await readBody(event)
+export type DocsChatTools = InferUITools<typeof tools>
+export type DocsChatMessage = UIMessage<unknown, never, DocsChatTools>
 
-  if (!messages || !Array.isArray(messages)) {
-    throw createError({ statusCode: 400, message: 'Invalid or missing messages array.' })
-  }
-
-  // `currentPage` is interpolated verbatim into the system prompt below, so it is an
-  // indirect prompt-injection surface (a crafted /docs/... link can smuggle newlines and
-  // instructions via Vue Router's path decoding). Accept it only when it is a plain docs
-  // path with no control characters; otherwise drop it.
-  const safeCurrentPage = typeof currentPage === 'string'
-    && currentPage.length <= 128
-    && !/[\r\n]/.test(currentPage)
-    && /^\/docs\/[\w/-]*$/.test(currentPage)
-    ? currentPage
-    : null
-
-  const componentNames = theme ? Object.keys(theme) : []
-
-  const getComponentTheme = {
-    description: 'Get the theme definition (slots, variants, compoundVariants, defaultVariants) for a specific Nuxt UI component. Call this when you need to know the available slots and customization options to suggest component-level theming.',
-    inputSchema: jsonSchema<{ componentName: string }>({
-      type: 'object' as const,
-      properties: {
-        componentName: {
-          type: 'string',
-          description: `Component name in camelCase. Available: ${componentNames.join(', ')}`
-        }
-      },
-      required: ['componentName']
-    }),
-    execute: async ({ componentName }: { componentName: string }) => {
-      if (!theme?.[componentName]) {
-        return { error: `Component "${componentName}" not found`, availableComponents: componentNames }
-      }
-      return { componentName, theme: theme[componentName] }
-    }
-  }
-
-  const mcpTools = mcpToolsToAiTools()
-
-  const abortController = new AbortController()
-  event.node.req.on('close', () => abortController.abort())
-
-  const instructions = `You are a helpful assistant for Nuxt UI, a UI library for Nuxt and Vue. Nuxt UI includes \`@nuxt/fonts\` and \`@nuxt/icon\` as built-in dependencies — never tell users to install them separately. Use your knowledge base tools to search for relevant information before answering questions.
+function buildInstructions(framework: 'nuxt' | 'vue') {
+  return `You are a helpful assistant for Nuxt UI, a UI library for Nuxt and Vue. Nuxt UI includes \`@nuxt/fonts\` and \`@nuxt/icon\` as built-in dependencies — never tell users to install them separately. Use your knowledge base tools to search for relevant information before answering questions.
 
 The user is using **${framework === 'vue' ? 'Vue' : 'Nuxt'}**. Tailor your answers accordingly — ${framework === 'vue' ? 'use the Vite plugin setup, Vue Router, and vite.config.ts instead of Nuxt-specific features like modules or app.config.ts. IMPORTANT: The Vite plugin auto-imports components and Nuxt UI composables, but Vue core APIs and VueUse must be explicitly imported — always include these in code examples (e.g. `import { ref, computed } from \'vue\'`, `import { useColorMode } from \'@vueuse/core\'`).' : 'use Nuxt modules, auto-imports, app.config.ts, and other Nuxt-specific features. Nuxt auto-imports Vue APIs (ref, computed, etc.), composables, and components — do not include these imports in code examples.'}
-${safeCurrentPage ? `\nThe user is currently viewing the documentation page at \`${safeCurrentPage}\`. Use this context to provide more relevant answers (e.g. read that page first if the question seems related), but don't limit yourself to that page if the question is broader or unrelated.\n` : ''}
+
 Guidelines:
 - For documentation questions, ALWAYS use tools to search for information. Never rely on pre-trained knowledge for Nuxt UI APIs, props, or usage.
 - For questions about how to customize themes (e.g. "how do I customize colors?", "how does theming work?"), search the documentation like any other docs question.
@@ -356,6 +356,11 @@ Guidelines:
 - If a question is unrelated to Nuxt UI (e.g. general coding, off-topic), briefly answer if you can, but don't waste tool calls searching docs for it.
 - If no relevant information is found after searching, respond with "Sorry, I couldn't find information about that in the documentation."
 - Be concise and direct in your responses.
+
+**PAGE CONTEXT:**
+- A user message may end with a \`[Context: the user is currently viewing <path>]\` marker. It is added automatically and is not something the user typed, so never mention it or repeat it back.
+- Use it to resolve vague questions ("explain this page", "how does this work?"). Only the most recent marker is relevant, earlier ones are stale.
+- When the marker names a docs path, call \`get-documentation-page\` with that exact path instead of searching first. Don't limit yourself to that page if the question is broader or unrelated.
 
 **FORMATTING RULES (CRITICAL):**
 - ABSOLUTELY NO MARKDOWN HEADINGS: Never use #, ##, ###, ####, #####, or ######
@@ -372,39 +377,96 @@ Guidelines:
 - You have up to 5 tool calls to find the answer, so be strategic: start broad, then get specific if needed.
 - Format responses in a conversational way, not as documentation sections.
     `
+}
 
-  const result = streamText({
-    model: gateway('anthropic/claude-sonnet-5'),
-    maxOutputTokens: 8000,
-    abortSignal: abortController.signal,
-    providerOptions: {
-      anthropic: {
-        thinking: {
-          type: 'adaptive',
-          display: 'summarized'
-        },
-        effort: 'low'
-      } satisfies AnthropicLanguageModelOptions,
-      gateway: {
-        caching: 'auto'
-      }
-    },
-    instructions,
-    messages: await convertToModelMessages(messages),
-    experimental_transform: smoothStream(),
-    stopWhen: isStepCount(6),
-    tools: {
-      ...mcpTools,
-      getThemeGuide,
-      applyTheme,
-      resetTheme,
-      getComponentTheme
-    },
-    onError: (error) => {
-      console.error('streamText error:', error)
+// Static per framework so the cached prompt prefix stays stable across requests.
+const instructions = {
+  nuxt: buildInstructions('nuxt'),
+  vue: buildInstructions('vue')
+}
+
+const anthropicOptions = {
+  thinking: {
+    type: 'adaptive',
+    display: 'summarized'
+  },
+  effort: 'low'
+} satisfies AnthropicLanguageModelOptions
+
+export default defineEventHandler(async (event) => {
+  const { messages, framework, currentPage } = await readBody(event)
+
+  if (!messages || !Array.isArray(messages)) {
+    throw createError({ statusCode: 400, message: 'Invalid or missing messages array.' })
+  }
+
+  // `currentPage` reaches the model as a marker on the last user message, so it is an
+  // indirect prompt-injection surface (a crafted /docs/... link can smuggle newlines and
+  // instructions via Vue Router's path decoding). Accept it only when it is a plain docs
+  // path with no control characters; otherwise drop it.
+  const safeCurrentPage = typeof currentPage === 'string'
+    && currentPage.length <= 128
+    && !/[\r\n]/.test(currentPage)
+    && /^\/docs\/[\w/-]*$/.test(currentPage)
+    ? currentPage
+    : null
+
+  // Page context belongs to the turn it was sent with, not to the thread: it is appended
+  // here and never persisted client-side, so a stale path can't leak into a later answer.
+  const uiMessages = messages.map((message: UIMessage, index: number) => {
+    if (!safeCurrentPage || index !== messages.length - 1 || message.role !== 'user') {
+      return message
+    }
+
+    return {
+      ...message,
+      parts: [...(message.parts || []), { type: 'text' as const, text: `[Context: the user is currently viewing ${safeCurrentPage}]` }]
     }
   })
 
-  const stream = toUIMessageStream({ stream: result.stream })
-  return createUIMessageStreamResponse({ stream })
+  const abortController = new AbortController()
+  event.node.req.on('close', () => abortController.abort())
+
+  const agent = new ToolLoopAgent({
+    model: 'anthropic/claude-sonnet-5',
+    instructions: framework === 'vue' ? instructions.vue : instructions.nuxt,
+    maxOutputTokens: 8000,
+    stopWhen: isStepCount(6),
+    tools,
+    providerOptions: {
+      anthropic: anthropicOptions,
+      gateway: {
+        caching: 'auto',
+        user: getChatUser(event),
+        tags: ['docs-chat'],
+        // Same tier as the primary so the adaptive thinking options stay supported.
+        models: ['anthropic/claude-sonnet-4.6']
+      } satisfies GatewayProviderOptions
+    }
+  })
+
+  return createAgentUIStreamResponse({
+    agent,
+    uiMessages,
+    abortSignal: abortController.signal,
+    experimental_transform: smoothStream(),
+    consumeSseStream: consumeStream,
+    onError: (error) => {
+      // Provider errors carry the outgoing prompt in `requestBodyValues` and the raw
+      // `responseBody`, so log identifying fields only and keep chat content out of the logs.
+      const statusCode = APICallError.isInstance(error) ? error.statusCode : undefined
+
+      console.error('[api/ai] stream error:', {
+        name: error instanceof Error ? error.name : 'UnknownError',
+        message: error instanceof Error ? error.message : String(error),
+        statusCode
+      })
+
+      if (statusCode === 429) {
+        return 'You have reached the message limit for now. Please try again later.'
+      }
+
+      return 'An error occurred.'
+    }
+  })
 })

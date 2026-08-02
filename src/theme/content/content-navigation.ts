@@ -3,7 +3,7 @@ import type { ModuleOptions } from '../../module'
 export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: '',
-    content: 'data-[state=open]:animate-[accordion-down_200ms_ease-out] data-[state=closed]:animate-[accordion-up_200ms_ease-out] data-[state=closed]:overflow-hidden focus:outline-none',
+    content: 'data-[state=open]:animate-[accordion-down_200ms_var(--ease-out)] data-[state=closed]:animate-[accordion-up_200ms_var(--ease-out)] data-[state=closed]:overflow-hidden focus:outline-none',
     list: 'isolate -mx-2.5 -mt-1.5',
     item: '',
     listWithChildren: 'ms-5 border-s border-default',
@@ -14,7 +14,7 @@ export default (options: Required<ModuleOptions>) => ({
     linkTrailing: 'ms-auto inline-flex gap-1.5 items-center',
     linkTrailingBadge: 'shrink-0',
     linkTrailingBadgeSize: 'sm',
-    linkTrailingIcon: 'size-5 transform transition-transform duration-200 shrink-0 group-data-[state=open]:rotate-180',
+    linkTrailingIcon: 'size-5 transform transition-transform duration-200 ease-out shrink-0 group-data-[state=open]:rotate-180',
     linkTitle: 'truncate',
     linkTitleExternalIcon: 'size-3 align-top text-dimmed'
   },

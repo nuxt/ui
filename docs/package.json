@@ -11,7 +11,6 @@
   "dependencies": {
     "@ai-sdk/anthropic": "^4.0.21",
     "@ai-sdk/gateway": "^4.0.28",
-    "@ai-sdk/mcp": "^2.0.16",
     "@ai-sdk/vue": "^4.0.37",
     "@comark/vue": "^0.5.1",
     "@iconify-json/logos": "^1.2.11",
