@@ -242,9 +242,18 @@ export function useTheme() {
     icon: 'i-tabler-brand-tabler',
     value: 'tabler'
   }]
+  // The saved pack is client-only, so anything rendered FROM it — the studio
+  // chrome, a picker's own brand glyph — would differ from the server on the
+  // first client render, and Vue only warns about a mismatched class, it never
+  // patches it. Reporting the stock pack until mounted keeps that first render
+  // honest; the flip afterwards is an ordinary update, which does repaint.
+  // Writes are unaffected, and `_iconSet` stays ungated for dirty checks.
+  const iconMounted = ref(false)
+  onMounted(() => (iconMounted.value = true))
+
   const icon = computed({
     get() {
-      return _iconSet.value
+      return iconMounted.value ? _iconSet.value : 'lucide'
     },
     set(option) {
       _iconSet.value = option

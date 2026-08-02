@@ -9,18 +9,10 @@ import { studioIcons, STUDIO_EXTRA_DEFAULTS, studioExtraOverrides } from '../uti
  * directly in both script and templates.
  */
 export function useStudioIcons() {
+  // `icon` already reports the stock pack until mounted (see useTheme), so the
+  // chrome inherits that hydration-safety for free.
   const { icon } = useTheme()
-  // The pack is client-only state, so rendering it straight away puts the
-  // FIRST client render at odds with the server's lucide — and Vue only warns
-  // about a mismatched class, it doesn't patch it. The chrome would then keep
-  // the server's glyphs until something else forced a re-render, which is why
-  // a persisted pack survived a reload everywhere except here. Resolving after
-  // mount agrees with SSR first, so the swap is a real update.
-  const mounted = ref(false)
-  onMounted(() => (mounted.value = true))
-  return toReactive(computed(() => (mounted.value
-    ? studioIcons[icon.value as keyof typeof studioIcons] ?? studioIcons.lucide
-    : studioIcons.lucide)))
+  return toReactive(computed(() => studioIcons[icon.value as keyof typeof studioIcons] ?? studioIcons.lucide))
 }
 
 /**

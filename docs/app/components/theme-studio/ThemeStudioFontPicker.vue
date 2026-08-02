@@ -80,10 +80,9 @@ const emptyLabel = computed(() => {
       :ui="{ label: 'flex-1 min-w-0 text-left truncate' }"
       :aria-label="ariaLabel"
     >
-      <span
-        class="truncate"
-        :style="model === 'inherit' ? undefined : { fontFamily: `'${model}', sans-serif` }"
-      >{{ model === 'inherit' ? 'Inherit base' : model }}</span>
+      <!-- no inline family: the page already renders in the picked font, so
+           the trigger inherits it. The rows below still set their own. -->
+      <span class="truncate">{{ model === 'inherit' ? 'Inherit base' : model }}</span>
     </UButton>
 
     <template #content>

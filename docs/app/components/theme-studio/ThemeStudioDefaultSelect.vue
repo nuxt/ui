@@ -2,9 +2,10 @@
 import type { ChipProps } from '@nuxt/ui'
 
 /**
- * A USelect whose stock choice is deduped into a single tagged entry —
- * the item carrying `defaultTag` renders a muted "(Default)" suffix in
- * both the trigger and the list.
+ * A USelect whose stock choice is deduped into a single tagged entry — the
+ * item carrying `defaultTag` renders a muted "(Default)" suffix in the LIST,
+ * where it tells you which option is the stock one. The trigger shows the
+ * plain label: there it only lengthens the value you already picked.
  */
 export interface DefaultSelectItem {
   label: string
@@ -44,7 +45,7 @@ function asItem(item: unknown) {
     </template>
 
     <template #default>
-      {{ selected?.label }}<span v-if="selected?.defaultTag" class="text-dimmed">&nbsp;(Default)</span>
+      {{ selected?.label }}
     </template>
 
     <template #item-label="{ item }">

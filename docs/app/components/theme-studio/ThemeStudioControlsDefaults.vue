@@ -115,7 +115,9 @@ const groupColors = Object.fromEntries(variantGroupFields.map(field => [field.ke
                 :ui="{ label: 'flex-1 text-left' }"
                 :aria-label="`${field.label} variant`"
               >
-                {{ field.items.find(item => item.value === (groupVariants[field.key].value === 'default' ? field.stock : groupVariants[field.key].value))?.label }}<span v-if="groupVariants[field.key].value === 'default'" class="text-dimmed font-normal">&nbsp;(Default)</span>
+                <!-- the tag stays in the grid below, where it names the stock
+                     option; here it only pads the value you picked -->
+                {{ field.items.find(item => item.value === (groupVariants[field.key].value === 'default' ? field.stock : groupVariants[field.key].value))?.label }}
               </UButton>
 
               <template #content>
