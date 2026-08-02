@@ -9,6 +9,8 @@ const props = withDefaults(defineProps<{
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
   /** Toolbar opts out of dismissing on its own chrome; other hosts keep stock dismiss. */
   keepPanels?: boolean
+  /** Set where the trigger carries no visible label of its own. */
+  tooltip?: string
 }>(), {})
 
 const { presets, selectedPreset, applyPreset } = useThemeStudio()
@@ -81,16 +83,18 @@ const selected = computed({
       :content="props.keepPanels ? { align: 'start', onInteractOutside: onKeepPanels } : { align: 'start' }"
       class="flex-1 min-w-0"
     >
-      <UButton
-        :label="presetLabel"
-        :icon="presetIcon"
-        :trailing-icon="appConfig.ui.icons.chevronDown"
-        color="neutral"
-        variant="subtle"
-        :size="size"
-        block
-        :ui="{ leadingIcon: 'text-primary' }"
-      />
+      <UTooltip :text="tooltip" :disabled="!tooltip">
+        <UButton
+          :label="presetLabel"
+          :icon="presetIcon"
+          :trailing-icon="appConfig.ui.icons.chevronDown"
+          color="neutral"
+          variant="subtle"
+          :size="size"
+          block
+          :ui="{ leadingIcon: 'text-primary' }"
+        />
+      </UTooltip>
 
       <template #content>
         <UListbox

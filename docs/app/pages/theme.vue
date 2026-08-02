@@ -139,12 +139,6 @@ watch(fullscreen, (on) => {
 })
 onUnmounted(() => window.removeEventListener('mousemove', onPointerNear))
 
-// The labels only earn their space in fullscreen, where the bar floats free —
-// and the container's gap for the label has to go with them.
-const fieldUi = computed(() => (fullscreen.value
-  ? { root: 'shrink-0', label: 'text-dimmed' }
-  : { root: 'shrink-0', label: 'hidden', container: 'mt-0' }))
-
 const openPanels = reactive({ presets: false, colors: false, style: false, view: false })
 const toolbarPinned = computed(() => nearBottom.value || Object.values(openPanels).some(Boolean))
 
@@ -189,116 +183,61 @@ const shareMode = ref<'import' | 'export'>('export')
               toolbarPinned ? 'translate-y-0' : 'translate-y-[calc(100%+6px)] group-hover:translate-y-0 group-focus-within:translate-y-0'
             ] : 'border-t border-default'"
           >
-            <UFormField label="Preset" size="xs" :ui="fieldUi">
-              <ThemeStudioPresetMenu v-model:open="openPanels.presets" keep-panels class="w-38" />
-            </UFormField>
+            <ThemeStudioToolbarField v-slot="{ tooltip }" label="Preset">
+              <ThemeStudioPresetMenu v-model:open="openPanels.presets" keep-panels :tooltip="tooltip" class="w-38" />
+            </ThemeStudioToolbarField>
 
             <ThemeStudioShuffleButton />
 
-            <UFormField label="Colors" size="xs" :ui="fieldUi">
-              <UPopover v-model:open="openPanels.colors" :content="{ align: 'start', onInteractOutside: keepPanels }">
-                <UChip :show="groupDirtyFlags.colors.value" color="primary" size="sm">
-                  <UButton
-                    :label="colorLabel"
-                    color="neutral"
-                    variant="subtle"
-                    :trailing-icon="appConfig.ui.icons.chevronDown"
-                    class="w-38"
-                    :ui="{ label: 'flex-1 min-w-0 text-left truncate' }"
-                    aria-label="Colors"
-                  >
-                    <template #leading>
-                      <span class="flex items-center -space-x-0.5">
-                        <!-- primary stacks on top; black-as-primary has no ramp
-                             variable to point at -->
-                        <span
-                          v-for="(chip, index) in colorChips"
-                          :key="chip.label"
-                          class="relative size-3 rounded-full ring-2 ring-(--ui-bg-elevated)"
-                          :class="!chip.dot && 'bg-black dark:bg-white'"
-                          :style="{ ...(chip.dot ? { backgroundColor: chip.dot } : {}), zIndex: colorChips.length - index }"
-                        />
-                      </span>
-                    </template>
-                  </UButton>
-                </UChip>
+            <ThemeStudioToolbarPopover
+              v-model:open="openPanels.colors"
+              label="Colors"
+              :value="colorLabel"
+              :dirty="groupDirtyFlags.colors.value"
+            >
+              <template #leading>
+                <span class="flex items-center -space-x-0.5">
+                  <!-- primary stacks on top; black-as-primary has no ramp
+                       variable to point at -->
+                  <span
+                    v-for="(chip, index) in colorChips"
+                    :key="chip.label"
+                    class="relative size-3 rounded-full ring-2 ring-(--ui-bg-elevated)"
+                    :class="!chip.dot && 'bg-black dark:bg-white'"
+                    :style="{ ...(chip.dot ? { backgroundColor: chip.dot } : {}), zIndex: colorChips.length - index }"
+                  />
+                </span>
+              </template>
 
-                <template #content>
-                  <ThemeStudioControls group="colors" class="w-80 max-h-[70vh] overflow-y-auto" />
-                </template>
-              </UPopover>
-            </UFormField>
+              <ThemeStudioControls group="colors" class="w-80 max-h-[70vh] overflow-y-auto" />
+            </ThemeStudioToolbarPopover>
 
             <!-- the value names the control; the popover holds the section
                  that used to sit in the Options panel -->
-            <UFormField label="Font" size="xs" :ui="fieldUi">
-              <UPopover :content="{ align: 'start', onInteractOutside: keepPanels }">
-                <UButton
-                  :label="font"
-                  icon="i-lucide-type"
-                  :trailing-icon="appConfig.ui.icons.chevronDown"
-                  color="neutral"
-                  variant="subtle"
-                  class="w-38"
-                  :ui="{ label: 'flex-1 min-w-0 text-left truncate' }"
-                  aria-label="Font"
-                />
+            <ThemeStudioToolbarPopover label="Font" icon="i-lucide-type" :value="font">
+              <ThemeStudioFontOptions class="w-80 p-4" />
+            </ThemeStudioToolbarPopover>
 
-                <template #content>
-                  <ThemeStudioFontOptions class="w-80 p-4" />
-                </template>
-              </UPopover>
-            </UFormField>
+            <ThemeStudioToolbarPopover label="Icons" :icon="iconSetItem?.icon" :value="iconSetItem?.label">
+              <ThemeStudioIconOptions class="w-80 p-4" />
+            </ThemeStudioToolbarPopover>
 
-            <UFormField label="Icons" size="xs" :ui="fieldUi">
-              <UPopover :content="{ align: 'start', onInteractOutside: keepPanels }">
-                <UButton
-                  :label="iconSetItem?.label"
-                  :icon="iconSetItem?.icon"
-                  :trailing-icon="appConfig.ui.icons.chevronDown"
-                  color="neutral"
-                  variant="subtle"
-                  class="w-38"
-                  :ui="{ label: 'flex-1 min-w-0 text-left truncate' }"
-                  aria-label="Icon set"
-                />
-
-                <template #content>
-                  <ThemeStudioIconOptions class="w-80 p-4" />
-                </template>
-              </UPopover>
-            </UFormField>
-
-            <UFormField label="Options" size="xs" :ui="fieldUi">
-              <UPopover v-model:open="openPanels.style" :content="{ align: 'start', onInteractOutside: keepPanels }">
-                <UChip :show="groupDirtyFlags.style.value" color="primary" size="sm">
-                  <UButton
-                    color="neutral"
-                    variant="subtle"
-                    :icon="studioIcons.options"
-                    :trailing-icon="appConfig.ui.icons.chevronDown"
-                    aria-label="Options"
-                  />
-                </UChip>
-
-                <template #content>
-                  <ThemeStudioControls group="style" class="w-80 max-h-[70vh] overflow-y-auto" />
-                </template>
-              </UPopover>
-            </UFormField>
+            <ThemeStudioToolbarPopover
+              v-model:open="openPanels.style"
+              label="Options"
+              :icon="studioIcons.options"
+              :dirty="groupDirtyFlags.style.value"
+            >
+              <ThemeStudioControls group="style" class="w-80 max-h-[70vh] overflow-y-auto" />
+            </ThemeStudioToolbarPopover>
 
             <span class="flex-1" />
 
             <!-- desktop's switcher lives in the header; this one covers
                  mobile and fullscreen -->
-            <UFormField
-              label="Preview"
-              size="xs"
-              :ui="fieldUi"
-              :class="!fullscreen && 'lg:hidden'"
-            >
-              <ThemeStudioViewSwitcher v-model:open="openPanels.view" :content="{ align: 'end' }" />
-            </UFormField>
+            <ThemeStudioToolbarField v-slot="{ tooltip }" label="Preview" :class="!fullscreen && 'lg:hidden'">
+              <ThemeStudioViewSwitcher v-model:open="openPanels.view" :content="{ align: 'end' }" :tooltip="tooltip" />
+            </ThemeStudioToolbarField>
 
             <!-- fullscreen hides the header, and with it the only way to
                  flip the mode a theme is being judged in -->

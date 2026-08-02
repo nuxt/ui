@@ -5,6 +5,8 @@ defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<{
   content?: PopoverProps['content']
+  /** Set where the trigger carries no visible label of its own. */
+  tooltip?: string
 }>(), {
   content: () => ({ align: 'center' })
 })
@@ -25,15 +27,17 @@ const templateViews = views.filter(tab => tab.image)
 
 <template>
   <UPopover v-model:open="open" :content="props.content">
-    <UButton
-      :icon="viewIcons[view]"
-      :label="activeView?.label"
-      :trailing-icon="appConfig.ui.icons.chevronDown"
-      color="neutral"
-      variant="subtle"
-      aria-label="Preview page"
-      v-bind="$attrs"
-    />
+    <UTooltip :text="props.tooltip" :disabled="!props.tooltip">
+      <UButton
+        :icon="viewIcons[view]"
+        :label="activeView?.label"
+        :trailing-icon="appConfig.ui.icons.chevronDown"
+        color="neutral"
+        variant="subtle"
+        aria-label="Preview page"
+        v-bind="$attrs"
+      />
+    </UTooltip>
 
     <template #content>
       <div class="w-96 max-h-[70vh] overflow-y-auto p-1.5 overflow-x-hidden">
