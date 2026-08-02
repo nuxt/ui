@@ -7,7 +7,7 @@
  */
 import { watchDebounced } from '@vueuse/core'
 
-const props = withDefaults(defineProps<{
+const props = defineProps<{
   /** The curated families offered before the user searches. */
   curated: readonly string[]
   /** The value that wears the (Default) tag. */
@@ -16,11 +16,7 @@ const props = withDefaults(defineProps<{
   inherit?: boolean
   icon?: string
   ariaLabel?: string
-  /** Trigger size — panels use the default, the studio toolbar goes bigger. */
-  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
-}>(), {
-  size: 'sm'
-})
+}>()
 
 const model = defineModel<string>({ required: true })
 
@@ -73,11 +69,10 @@ const emptyLabel = computed(() => {
     <UButton
       color="neutral"
       variant="subtle"
-      :size="size"
+      size="sm"
       block
       :icon="icon"
       trailing-icon="i-lucide-chevron-down"
-      :ui="{ leadingIcon: 'text-primary' }"
       :aria-label="ariaLabel"
     >
       <!-- Classes here rather than `ui.label` — UButton only applies that to

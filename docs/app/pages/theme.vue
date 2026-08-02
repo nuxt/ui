@@ -1,8 +1,6 @@
 <script setup lang="ts">
-import { iconSetSamples } from '../utils/theme'
-
 const { track } = useAnalytics()
-const { resetTheme, icon: iconSet, fonts, font, icons, blackAsPrimary } = useTheme()
+const { resetTheme, icon: iconSet, blackAsPrimary } = useTheme()
 
 // Toolbar skins to the applied icon pack; import/chevron reuse the standard
 // semantic keys off appConfig.ui.icons.
@@ -24,8 +22,6 @@ onMounted(() => {
   mounted.value = true
   track('Theme Studio Opened')
   align(snapshot())
-  // the toolbar's font rows render in their own faces
-  loadFontPreviews(fonts)
 })
 
 // Debounced capture folds slider-drag bursts into single history steps; the
@@ -195,7 +191,6 @@ const shareMode = ref<'import' | 'export'>('export')
                   variant="subtle"
                   :icon="settingGroup.value === 'colors' ? undefined : studioIcons.options"
                   :trailing-icon="appConfig.ui.icons.chevronDown"
-                  :ui="{ leadingIcon: 'text-primary' }"
                 >
                   <!-- Colors leads with its own swatches instead of a glyph -->
                   <template v-if="settingGroup.value === 'colors'" #leading>
@@ -219,43 +214,6 @@ const shareMode = ref<'import' | 'export'>('export')
                 <ThemeStudioControls :group="settingGroup.value" class="w-80 max-h-[70vh] overflow-y-auto" />
               </template>
             </UPopover>
-
-            <!-- Type and icons ride the toolbar rather than a panel: they're
-                 the two people reach for most, and the pickers preview
-                 themselves, so seeing them costs no clicks. The wrappers
-                 carry the width — UPopover's root renders no element. -->
-            <div class="w-40 shrink-0" data-keep-panels>
-              <ThemeStudioFontPicker
-                v-model="font"
-                :curated="fonts"
-                default-value="Public Sans"
-                icon="i-lucide-type"
-                size="md"
-                aria-label="Font"
-              />
-            </div>
-
-            <div class="w-32 shrink-0" data-keep-panels>
-              <ThemeStudioListPicker
-                v-model="iconSet"
-                :items="icons"
-                :icon="icons.find(entry => entry.value === iconSet)?.icon"
-                size="md"
-                aria-label="Icon set"
-              >
-                <!-- every set previews a strip of its own glyphs -->
-                <template #item-description="{ item }">
-                  <span class="flex items-center gap-1.5 pt-0.5">
-                    <UIcon
-                      v-for="name in iconSetSamples(item.value)"
-                      :key="name"
-                      :name="name"
-                      class="size-3.5 text-muted"
-                    />
-                  </span>
-                </template>
-              </ThemeStudioListPicker>
-            </div>
 
             <span class="flex-1" />
 

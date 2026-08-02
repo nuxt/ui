@@ -87,11 +87,20 @@ onUnmounted(clearRollTimers)
 
 // Edits deliberately don't clear the preset name (the dirty dots carry
 // divergence); 'Custom' only when preset-less but diverged from stock.
+const activeEntry = computed(() => (mounted.value
+  ? presets.find(preset => preset.id === selectedPreset.value)
+  : undefined))
+
 const presetLabel = computed(() => {
   if (!mounted.value) return 'Presets'
-  const active = presets.find(preset => preset.id === selectedPreset.value)
-  return active ? active.name : 'Custom'
+  return activeEntry.value ? activeEntry.value.name : 'Custom'
 })
+
+/**
+ * The same glyph its row wears in the listbox; the swatch book stands in for
+ * a theme with no preset behind it (and before mount).
+ */
+const presetIcon = computed(() => activeEntry.value?.icon ?? studioIcons.themes)
 </script>
 
 <template>
@@ -103,7 +112,7 @@ const presetLabel = computed(() => {
     >
       <UButton
         :label="presetLabel"
-        :icon="studioIcons.themes"
+        :icon="presetIcon"
         :trailing-icon="appConfig.ui.icons.chevronDown"
         color="neutral"
         variant="subtle"
