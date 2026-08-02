@@ -2,7 +2,7 @@
 import { DEFAULT_PRESET_ID } from '../utils/theme-engine'
 
 const { track } = useAnalytics()
-const { resetTheme, icon: iconSet, blackAsPrimary } = useTheme()
+const { resetTheme, icon: iconSet, fonts, font, icons, blackAsPrimary } = useTheme()
 
 // Toolbar skins to the applied icon pack; import/chevron reuse the standard
 // semantic keys off appConfig.ui.icons.
@@ -44,7 +44,9 @@ function toggleColorMode() {
 }
 
 const appConfig = useAppConfig()
-const { groupDirty, presets, activePreset, applyPreset, primaryChip, neutralChip } = useThemeStudio()
+const { groupDirty, presets, activePreset, applyPreset, primaryChip, neutralChip, rampChip } = useThemeStudio()
+
+const SEMANTIC_ALIASES = ['secondary', 'success', 'info', 'warning', 'error'] as const
 
 /**
  * The Colors trigger wears the two colours it owns, so the toolbar reports
@@ -53,7 +55,8 @@ const { groupDirty, presets, activePreset, applyPreset, primaryChip, neutralChip
  */
 const colorDots = computed(() => [
   blackAsPrimary.value ? undefined : `var(--color-${primaryChip.value}-500)`,
-  `var(--color-${neutralChip.value}-500)`
+  `var(--color-${neutralChip.value}-500)`,
+  ...SEMANTIC_ALIASES.map(alias => `var(--color-${rampChip(alias)}-500)`)
 ])
 
 /** "Changed from preset" dot per settings tab. */
@@ -113,13 +116,6 @@ onUnmounted(() => {
   capture(snapshot())
 })
 
-// `style` stays the doc/section key; the label is what people read, and
-// "Options" is honest about a panel holding type, scale and defaults too.
-const settingGroups = [
-  { label: 'Colors', value: 'colors' },
-  { label: 'Options', value: 'style' }
-] as const
-
 // Fullscreen reveal via mousemove, not a hover overlay (it would eat clicks on
 // the preview's bottom edge). The bar pins open while a panel is open — panel
 // content portals to <body>, so hover alone would retract it under its popovers.
@@ -136,6 +132,12 @@ watch(fullscreen, (on) => {
   }
 })
 onUnmounted(() => window.removeEventListener('mousemove', onPointerNear))
+
+// The labels only earn their space in fullscreen, where the bar floats free —
+// and the container's gap for the label has to go with them.
+const fieldUi = computed(() => (fullscreen.value
+  ? { root: 'shrink-0', label: 'text-dimmed' }
+  : { root: 'shrink-0', label: 'hidden', container: 'mt-0' }))
 
 const openPanels = reactive({ presets: false, colors: false, style: false, view: false })
 const toolbarPinned = computed(() => nearBottom.value || Object.values(openPanels).some(Boolean))
@@ -175,61 +177,131 @@ const shareMode = ref<'import' | 'export'>('export')
           <div v-if="fullscreen" class="absolute bottom-0 inset-x-0 h-2 pointer-events-auto" />
 
           <div
-            class="flex items-center gap-2 p-3 overflow-x-auto"
+            class="flex items-end gap-2 p-3 overflow-x-auto"
             :class="fullscreen ? [
               'mt-4 rounded-t-lg bg-default/75 backdrop-blur ring ring-default shadow-lg pointer-events-auto transition-transform duration-200',
               toolbarPinned ? 'translate-y-0' : 'translate-y-[calc(100%+6px)] group-hover:translate-y-0 group-focus-within:translate-y-0'
             ] : 'border-t border-default'"
           >
-            <ThemeStudioPresetMenu v-model:open="openPanels.presets" keep-panels class="w-52 shrink-0" />
+            <UFormField label="Preset" size="xs" :ui="fieldUi">
+              <ThemeStudioPresetMenu v-model:open="openPanels.presets" keep-panels class="w-52" />
+            </UFormField>
 
-            <UPopover
-              v-for="settingGroup in settingGroups"
-              :key="settingGroup.value"
-              v-model:open="openPanels[settingGroup.value]"
-              :content="{ align: 'start', onInteractOutside: keepPanels }"
-            >
-              <UChip :show="groupDirtyFlags[settingGroup.value].value" color="primary" size="sm">
-                <UButton
-                  :label="settingGroup.label"
-                  color="neutral"
-                  variant="subtle"
-                  :icon="settingGroup.value === 'colors' ? undefined : studioIcons.options"
-                  :trailing-icon="appConfig.ui.icons.chevronDown"
-                >
-                  <!-- Colors leads with its own swatches instead of a glyph -->
-                  <template v-if="settingGroup.value === 'colors'" #leading>
-                    <!-- overlapped like an avatar stack; the ring is the
-                         button's own surface, so it cuts rather than outlines -->
-                    <span class="flex items-center -space-x-0.5">
-                      <!-- black-as-primary has no ramp variable to point at -->
-                      <span
-                        v-for="(dot, index) in colorDots"
-                        :key="index"
-                        class="inline-block size-3 rounded-full ring-2 ring-(--ui-bg-elevated)"
-                        :class="!dot && 'bg-black dark:bg-white'"
-                        :style="dot ? { backgroundColor: dot } : undefined"
-                      />
-                    </span>
+            <UFormField label="Colors" size="xs" :ui="fieldUi">
+              <UPopover v-model:open="openPanels.colors" :content="{ align: 'start', onInteractOutside: keepPanels }">
+                <UChip :show="groupDirtyFlags.colors.value" color="primary" size="sm">
+                  <UButton
+                    color="neutral"
+                    variant="subtle"
+                    :trailing-icon="appConfig.ui.icons.chevronDown"
+                    aria-label="Colors"
+                  >
+                    <!-- every colour it owns, so the bar reports them unopened -->
+                    <template #leading>
+                      <span class="flex items-center -space-x-0.5">
+                        <!-- primary stacks on top; black-as-primary has no ramp
+                             variable to point at -->
+                        <span
+                          v-for="(dot, index) in colorDots"
+                          :key="index"
+                          class="relative inline-block size-3 rounded-full ring-2 ring-(--ui-bg-elevated)"
+                          :class="!dot && 'bg-black dark:bg-white'"
+                          :style="{ ...(dot ? { backgroundColor: dot } : {}), zIndex: colorDots.length - index }"
+                        />
+                      </span>
+                    </template>
+                  </UButton>
+                </UChip>
+
+                <template #content>
+                  <ThemeStudioControls group="colors" class="w-80 max-h-[70vh] overflow-y-auto" />
+                </template>
+              </UPopover>
+            </UFormField>
+
+            <!-- the family is the shortcut; everything else about type lives
+                 behind the ellipsis, as the panel section did -->
+            <UFormField label="Font" size="xs" :ui="fieldUi">
+              <UFieldGroup data-keep-panels>
+                <ThemeStudioFontPicker
+                  v-model="font"
+                  :curated="fonts"
+                  default-value="Public Sans"
+                  icon="i-lucide-type"
+                  aria-label="Font"
+                  class="w-34"
+                />
+
+                <UPopover :content="{ align: 'end', onInteractOutside: keepPanels }">
+                  <UButton
+                    icon="i-lucide-ellipsis"
+                    color="neutral"
+                    variant="subtle"
+                    aria-label="Font options"
+                  />
+
+                  <template #content>
+                    <ThemeStudioFontOptions class="w-80 p-4" />
                   </template>
-                </UButton>
-              </UChip>
+                </UPopover>
+              </UFieldGroup>
+            </UFormField>
 
-              <template #content>
-                <ThemeStudioControls :group="settingGroup.value" class="w-80 max-h-[70vh] overflow-y-auto" />
-              </template>
-            </UPopover>
+            <UFormField label="Icons" size="xs" :ui="fieldUi">
+              <UFieldGroup data-keep-panels>
+                <ThemeStudioListPicker
+                  v-model="iconSet"
+                  :items="icons"
+                  :icon="icons.find(entry => entry.value === iconSet)?.icon"
+                  aria-label="Icon set"
+                  class="w-32"
+                />
+
+                <UPopover :content="{ align: 'end', onInteractOutside: keepPanels }">
+                  <UButton
+                    icon="i-lucide-ellipsis"
+                    color="neutral"
+                    variant="subtle"
+                    aria-label="Icon options"
+                  />
+
+                  <template #content>
+                    <ThemeStudioIconOptions class="w-80 p-4" />
+                  </template>
+                </UPopover>
+              </UFieldGroup>
+            </UFormField>
+
+            <UFormField label="Options" size="xs" :ui="fieldUi">
+              <UPopover v-model:open="openPanels.style" :content="{ align: 'start', onInteractOutside: keepPanels }">
+                <UChip :show="groupDirtyFlags.style.value" color="primary" size="sm">
+                  <UButton
+                    color="neutral"
+                    variant="subtle"
+                    :icon="studioIcons.options"
+                    :trailing-icon="appConfig.ui.icons.chevronDown"
+                    aria-label="Options"
+                  />
+                </UChip>
+
+                <template #content>
+                  <ThemeStudioControls group="style" class="w-80 max-h-[70vh] overflow-y-auto" />
+                </template>
+              </UPopover>
+            </UFormField>
 
             <span class="flex-1" />
 
             <!-- desktop's switcher lives in the header; this one covers
                  mobile and fullscreen -->
-            <ThemeStudioViewSwitcher
-              v-model:open="openPanels.view"
-              :content="{ align: 'end' }"
-              class="shrink-0"
+            <UFormField
+              label="Preview"
+              size="xs"
+              :ui="fieldUi"
               :class="!fullscreen && 'lg:hidden'"
-            />
+            >
+              <ThemeStudioViewSwitcher v-model:open="openPanels.view" :content="{ align: 'end' }" />
+            </UFormField>
 
             <UFieldGroup class="shrink-0">
               <UTooltip text="Undo" :kbds="['meta', 'Z']">
