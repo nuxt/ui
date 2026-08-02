@@ -7,14 +7,18 @@ import type { ColorAlias, SectionKey } from '../../utils/theme-engine'
  * shade sliders folding out underneath. Color aliases expose their accent
  * pair; neutral carries every neutral-ramped token group.
  */
-const props = defineProps<{
+const props = withDefaults(defineProps<{
   alias: ColorAlias
   /** Header text — defaults to the capitalized alias. */
   label?: string
   helpTo?: string
   /** Passed through to the section header's reset affordance. */
   sectionKey?: SectionKey
-}>()
+  /** Off for the aliases nested under Semantic — only top level folds. */
+  collapsible?: boolean
+}>(), {
+  collapsible: true
+})
 
 const { rampChip } = useThemeStudio()
 const { shadeLadder, sections } = useTokenShades(props.alias)
@@ -26,7 +30,7 @@ const shadeEditor = ref(false)
 </script>
 
 <template>
-  <ThemeStudioSection :label="title" :help-to="helpTo" :section-key="sectionKey">
+  <ThemeStudioSection :label="title" :help-to="helpTo" :section-key="sectionKey" :collapsible="collapsible">
     <template #actions>
       <UTooltip text="Adjust shades">
         <UButton

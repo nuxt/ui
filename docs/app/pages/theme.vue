@@ -1,6 +1,8 @@
 <script setup lang="ts">
+import { iconSetSamples } from '../utils/theme'
+
 const { track } = useAnalytics()
-const { resetTheme, icon: iconSet } = useTheme()
+const { resetTheme, icon: iconSet, fonts, font, icons, blackAsPrimary } = useTheme()
 
 // Toolbar skins to the applied icon pack; import/chevron reuse the standard
 // semantic keys off appConfig.ui.icons.
@@ -22,6 +24,8 @@ onMounted(() => {
   mounted.value = true
   track('Theme Studio Opened')
   align(snapshot())
+  // the toolbar's font rows render in their own faces
+  loadFontPreviews(fonts)
 })
 
 // Debounced capture folds slider-drag bursts into single history steps; the
@@ -42,12 +46,21 @@ function toggleColorMode() {
 }
 
 const appConfig = useAppConfig()
-const { style, groupDirty, presets, activePreset, applyPreset } = useThemeStudio()
+const { groupDirty, presets, activePreset, applyPreset, primaryChip, neutralChip } = useThemeStudio()
+
+/**
+ * The Colors trigger wears the two colours it owns, so the toolbar reports
+ * the current primary and neutral without being opened — the same job the
+ * font and icon pickers do by showing their values.
+ */
+const colorDots = computed(() => [
+  blackAsPrimary.value ? undefined : `var(--color-${primaryChip.value}-500)`,
+  `var(--color-${neutralChip.value}-500)`
+])
 
 /** "Changed from preset" dot per settings tab. */
 const groupDirtyFlags = {
   colors: groupDirty('colors'),
-  general: groupDirty('general'),
   style: groupDirty('style')
 }
 
@@ -67,24 +80,6 @@ function resetToBaseline() {
   if (resetsToPreset.value) applyPreset(baselinePreset.value!)
   else resetTheme()
 }
-
-// Mode tabs follow the default size setting, one step down — full size reads
-// too big next to the buttons.
-const SIZE_LADDER = ['xs', 'sm', 'md', 'lg', 'xl'] as const
-const modeTabsSize = computed(() => {
-  const base = style.value.defaults?.size
-  const index = SIZE_LADDER.indexOf((!base || base === 'default' ? 'md' : base) as typeof SIZE_LADDER[number])
-  return SIZE_LADDER[Math.max(0, index - 2)]
-})
-
-const modeTabItems = computed(() => [
-  { value: 'light', icon: appConfig.ui.icons.light },
-  { value: 'dark', icon: appConfig.ui.icons.dark }
-])
-const modeTab = computed({
-  get: () => (colorMode.value === 'dark' ? 'dark' : 'light'),
-  set: (value: string) => (colorMode.preference = value)
-})
 
 defineShortcuts({
   meta_z: undo,
@@ -119,7 +114,6 @@ onUnmounted(() => {
 
 const settingGroups = [
   { label: 'Colors', value: 'colors' },
-  { label: 'General', value: 'general' },
   { label: 'Style', value: 'style' }
 ] as const
 
@@ -140,7 +134,7 @@ watch(fullscreen, (on) => {
 })
 onUnmounted(() => window.removeEventListener('mousemove', onPointerNear))
 
-const openPanels = reactive({ presets: false, colors: false, general: false, style: false, view: false })
+const openPanels = reactive({ presets: false, colors: false, style: false, view: false })
 const toolbarPinned = computed(() => nearBottom.value || Object.values(openPanels).some(Boolean))
 
 /** The shared import/export modal — the two toolbar buttons pick its mode. */
@@ -198,7 +192,22 @@ const shareMode = ref<'import' | 'export'>('export')
                   color="neutral"
                   variant="subtle"
                   :trailing-icon="appConfig.ui.icons.chevronDown"
-                />
+                >
+                  <template v-if="settingGroup.value === 'colors'" #leading>
+                    <!-- overlapped like an avatar stack; the ring is the
+                         button's own surface, so it cuts rather than outlines -->
+                    <span class="flex items-center -space-x-1">
+                      <!-- black-as-primary has no ramp variable to point at -->
+                      <span
+                        v-for="(dot, index) in colorDots"
+                        :key="index"
+                        class="inline-block size-3 rounded-full ring-2 ring-(--ui-bg-elevated)"
+                        :class="!dot && 'bg-black dark:bg-white'"
+                        :style="dot ? { backgroundColor: dot } : undefined"
+                      />
+                    </span>
+                  </template>
+                </UButton>
               </UChip>
 
               <template #content>
@@ -206,27 +215,42 @@ const shareMode = ref<'import' | 'export'>('export')
               </template>
             </UPopover>
 
-            <UTooltip text="Color mode" :kbds="['ctrl', 'shift', 'D']">
-              <!-- mounted-gated: the preference is client-only and tabs
-                   would hydrate on the server's fallback -->
-              <UTabs
-                v-if="mounted"
-                v-model="modeTab"
-                data-keep-panels
-                :items="modeTabItems"
-                :content="false"
-                :size="modeTabsSize"
-                color="primary"
-                class="shrink-0"
-                :ui="{
-                  /* match the toolbar's subtle buttons — their ring is the
-                     stock variant, not themed, so the pill needs its own */
-                  list: 'ring ring-accented ring-inset rounded-md',
-                  indicator: 'rounded-sm'
-                }"
+            <!-- Type and icons ride the toolbar rather than a panel: they're
+                 the two people reach for most, and the pickers preview
+                 themselves, so seeing them costs no clicks. The wrappers
+                 carry the width — UPopover's root renders no element. -->
+            <div class="w-48 shrink-0" data-keep-panels>
+              <ThemeStudioFontPicker
+                v-model="font"
+                :curated="fonts"
+                default-value="Public Sans"
+                icon="i-lucide-type"
+                size="md"
+                aria-label="Font"
               />
-              <span v-else class="shrink-0 w-17" />
-            </UTooltip>
+            </div>
+
+            <div class="w-40 shrink-0" data-keep-panels>
+              <ThemeStudioListPicker
+                v-model="iconSet"
+                :items="icons"
+                :icon="icons.find(entry => entry.value === iconSet)?.icon"
+                size="md"
+                aria-label="Icon set"
+              >
+                <!-- every set previews a strip of its own glyphs -->
+                <template #item-description="{ item }">
+                  <span class="flex items-center gap-1.5 pt-0.5">
+                    <UIcon
+                      v-for="name in iconSetSamples(item.value)"
+                      :key="name"
+                      :name="name"
+                      class="size-3.5 text-muted"
+                    />
+                  </span>
+                </template>
+              </ThemeStudioListPicker>
+            </div>
 
             <span class="flex-1" />
 

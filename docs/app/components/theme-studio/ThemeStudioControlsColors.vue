@@ -33,7 +33,12 @@ const semanticAliases: ColorAlias[] = ['secondary', 'success', 'info', 'warning'
       section-key="semantic"
     >
       <div class="flex flex-col gap-3 pt-1">
-        <ThemeStudioColorSection v-for="alias in semanticAliases" :key="alias" :alias="alias" />
+        <ThemeStudioColorSection
+          v-for="alias in semanticAliases"
+          :key="alias"
+          :alias="alias"
+          :collapsible="false"
+        />
       </div>
     </ThemeStudioSection>
   </div>

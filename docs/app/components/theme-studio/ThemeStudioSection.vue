@@ -14,13 +14,20 @@ const props = withDefaults(defineProps<{
   helpTo?: string
   defaultOpen?: boolean
   /**
-   * Names the ThemeDoc section this fold owns — the header then carries a
-   * reset button enabled while the section diverges from the baseline
+   * Names the ThemeDoc section(s) this fold owns — the header then carries a
+   * reset button enabled while any of them diverges from the baseline
    * preset, wired straight to the studio's sectionDirty/resetSection.
    */
-  sectionKey?: SectionKey
+  sectionKey?: SectionKey | SectionKey[]
+  /**
+   * Off renders the header and content without the fold. Only the panel's
+   * top-level sections collapse; a fold inside a fold hides content behind
+   * two clicks and reads as a menu that keeps going.
+   */
+  collapsible?: boolean
 }>(), {
-  defaultOpen: true
+  defaultOpen: true,
+  collapsible: true
 })
 
 const { sectionDirty, resetSection } = useThemeStudio()
@@ -32,15 +39,20 @@ const slots = defineSlots<{
   actions: () => any
 }>()
 
-const open = ref(props.defaultOpen)
+// Static sections are always open — the fold is what `collapsible` removes.
+const open = ref(props.collapsible ? props.defaultOpen : true)
 </script>
 
 <template>
-  <UCollapsible v-model:open="open">
+  <!-- Static sections keep the same shell, disabled and pinned open, so the
+       header/content markup below has one shape. -->
+  <UCollapsible v-model:open="open" :disabled="!collapsible">
     <div class="flex items-center gap-1">
       <!-- Leading chevron: the disclosure cue that tells a fold trigger
-           apart from a select (whose chevron trails). -->
+           apart from a select (whose chevron trails). Static sections get a
+           plain label — nothing to disclose. -->
       <UButton
+        v-if="collapsible"
         :label="label"
         :icon="open ? 'i-lucide-chevron-down' : 'i-lucide-chevron-right'"
         color="neutral"
@@ -49,6 +61,8 @@ const open = ref(props.defaultOpen)
         block
         class="justify-start flex-1"
       />
+
+      <span v-else class="flex-1 text-xs font-medium text-muted select-none px-2">{{ label }}</span>
 
       <UTooltip text="Docs">
         <UButton

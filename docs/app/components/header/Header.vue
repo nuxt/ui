@@ -56,8 +56,10 @@ const viewListOpen = ref(false)
 
       <ThemeStudioPicker />
 
+      <!-- data-keep-panels: flipping the mode is how you check a theme in
+           both, so it must not dismiss the open theme popover beside it -->
       <UTooltip text="Color mode">
-        <UColorModeButton />
+        <UColorModeButton data-keep-panels />
       </UTooltip>
 
       <UTooltip text="Open on GitHub" class="hidden lg:flex">

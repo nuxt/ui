@@ -434,6 +434,17 @@ export const themeIcons = {
 export type ThemeIcons = keyof typeof themeIcons
 
 /**
+ * A short strip of a set's own glyphs, for previewing it in a picker row —
+ * these eight differ enough between packs to tell them apart at a glance.
+ */
+export function iconSetSamples(setName: string): string[] {
+  const set = (themeIcons as Record<string, Record<string, string>>)[setName] || {}
+  return ['search', 'check', 'warning', 'light', 'dark', 'star', 'folder', 'upload']
+    .map(key => set[key])
+    .filter((name): name is string => !!name)
+}
+
+/**
  * Glyphs for the studio's own chrome (toolbar controls, the header Ask-AI
  * button, the theme-picker/preset button), per icon pack, so the chrome skins
  * to match the applied theme. Kept OUT of `themeIcons` on purpose: these are

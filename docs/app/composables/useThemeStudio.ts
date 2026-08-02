@@ -473,8 +473,12 @@ export function useThemeStudio() {
    */
   const baselineDoc = computed(() => presets.find(preset => preset.id === activePreset.value)?.doc ?? { version: 1 as const })
 
-  function sectionDirty(key: SectionKey) {
-    return computed(() => sectionFingerprint(theme.currentDoc(), key) !== sectionFingerprint(baselineDoc.value, key))
+  /** One key, or several when a fold owns more than one slice (Defaults). */
+  function sectionDirty(key: SectionKey | SectionKey[]) {
+    const keys = Array.isArray(key) ? key : [key]
+    return computed(() => keys.some(entry =>
+      sectionFingerprint(theme.currentDoc(), entry) !== sectionFingerprint(baselineDoc.value, entry)
+    ))
   }
 
   function groupDirty(group: keyof typeof SECTION_GROUPS) {
@@ -483,7 +487,10 @@ export function useThemeStudio() {
     ))
   }
 
-  function resetSection(key: SectionKey) {
+  function resetSection(key: SectionKey | SectionKey[]) {
+    // several slices splice in one pass — one applyDoc, so a multi-key fold
+    // costs one history entry rather than one per slice
+    const keys = Array.isArray(key) ? key : [key]
     // currentDoc embeds reactive slices — structuredClone chokes on Vue
     // proxies, so round-trip to plain JSON first (history does the same)
     const plain = JSON.parse(JSON.stringify(theme.currentDoc())) as ThemeDoc
@@ -495,12 +502,12 @@ export function useThemeStudio() {
     // (a reset colour section drops to a stock name, so isCustomPalette filters
     // it out) or the editor would silently refit the untouched ramp.
     const preservedPp = JSON.parse(JSON.stringify(paletteParams.value)) as typeof paletteParams.value
-    applyDoc(mergeSection(plain, baselineDoc.value, key))
+    applyDoc(keys.reduce((doc, entry) => mergeSection(doc, baselineDoc.value, entry), plain))
     setPaletteParams(Object.fromEntries(
       Object.entries(preservedPp).filter(([alias]) => isCustomPalette(alias))
     ))
     setActivePreset(preserved)
-    track('Theme Section Reset', { section: key })
+    track('Theme Section Reset', { section: keys.join(',') })
   }
 
   /** For flows that replace the whole doc outside a preset (imports). */

@@ -18,10 +18,12 @@ export type SectionKey
     | 'font' | 'icons' | 'scale' | 'buttons' | 'panels' | 'inputs'
     | 'shadow' | 'innerShadow' | 'borders'
 
-export const SECTION_GROUPS: Record<'colors' | 'general' | 'style', SectionKey[]> = {
+export const SECTION_GROUPS: Record<'colors' | 'style', SectionKey[]> = {
   colors: ['primary', 'neutral', 'semantic'],
-  general: ['font', 'icons', 'scale', 'buttons', 'panels', 'inputs'],
-  style: ['shadow', 'innerShadow', 'borders']
+  // Everything that isn't colour: type, icons, scale, per-component defaults
+  // and the shadow/border treatments. One group — the General/Style split
+  // only ever chopped a long list in half.
+  style: ['font', 'icons', 'scale', 'shadow', 'innerShadow', 'borders', 'buttons', 'panels', 'inputs']
 }
 
 /** Which color section a semantic token (or token shade) belongs to. */

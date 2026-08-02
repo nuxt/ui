@@ -1,18 +1,24 @@
 <script setup lang="ts">
-import { ThemeStudioControlsColors, ThemeStudioControlsGeneral, ThemeStudioControlsStyle } from '#components'
-
 /** Which settings group this instance renders — one popover per group. */
 defineProps<{
-  group: 'colors' | 'general' | 'style'
+  group: 'colors' | 'style'
 }>()
-
-const groups = {
-  colors: ThemeStudioControlsColors,
-  general: ThemeStudioControlsGeneral,
-  style: ThemeStudioControlsStyle
-}
 </script>
 
 <template>
-  <component :is="groups[group]" />
+  <ThemeStudioControlsColors v-if="group === 'colors'" />
+
+  <!-- Style is type, icons and scale, then the shadow/border treatments,
+       with the per-component defaults trailing behind, collapsed. -->
+  <div v-else class="flex flex-col">
+    <ThemeStudioControlsGeneral />
+
+    <USeparator />
+
+    <ThemeStudioControlsStyle />
+
+    <USeparator />
+
+    <ThemeStudioControlsDefaults />
+  </div>
 </template>
