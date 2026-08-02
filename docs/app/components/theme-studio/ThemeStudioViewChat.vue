@@ -40,7 +40,7 @@ const messages: UIMessage[] = [{
 }, {
   id: '4',
   role: 'assistant',
-  parts: [{ type: 'text', text: 'Define your palette once in @theme and map it to the primary and neutral aliases in app.config.ts. Every component reads from those semantic tokens, so buttons, badges, inputs and even this chat pick up your brand automatically — exactly what this preview is showing you right now.' }]
+  parts: [{ type: 'text', text: 'Define your palette once in @theme and map it to the primary and neutral aliases in app.config.ts. Every component reads from those semantic tokens, so buttons, badges, inputs and even this chat pick up your brand automatically, exactly what this preview is showing you right now.' }]
 }, {
   id: '5',
   role: 'user',

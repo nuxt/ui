@@ -176,7 +176,7 @@ const salesColumns: TableColumn<Sale>[] = [{
   }
 }]
 
-// Inbox — mirrors app/pages/inbox.vue + InboxList/InboxMail from the template,
+// Inbox, mirrors app/pages/inbox.vue + InboxList/InboxMail from the template,
 // with dates pre-formatted as strings instead of pulling in date-fns.
 type Mail = {
   id: number
@@ -255,7 +255,7 @@ const mailDropdownItems: DropdownMenuItem[][] = [[
 
 const reply = ref('')
 
-// Customers — mirrors app/pages/customers.vue from the template.
+// Customers, mirrors app/pages/customers.vue from the template.
 type Customer = {
   id: number
   name: string
@@ -362,7 +362,7 @@ const customerColumns: TableColumn<Customer>[] = [{
   }
 }]
 
-// Settings — mirrors app/pages/settings.vue + settings/index.vue + settings/notifications.vue,
+// Settings, mirrors app/pages/settings.vue + settings/index.vue + settings/notifications.vue,
 // trimmed to two sections without zod/UForm validation.
 const settingsLinks = computed<NavigationMenuItem[][]>(() => [[{
   label: 'General',
@@ -708,7 +708,7 @@ const pageTitles: Record<Page, string> = {
       </template>
 
       <template #body>
-        <!-- The preview pane is far narrower than the real template's page —
+        <!-- The preview pane is far narrower than the real template's page,
              two-up until xl, and the joined-border look only when four fit. -->
         <!-- shrink-0 everywhere: the panel body is a scrollable flex column,
              and a shrinking child gets crushed into its own overflow-hidden -->

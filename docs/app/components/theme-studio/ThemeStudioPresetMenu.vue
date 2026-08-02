@@ -17,12 +17,12 @@ const studioIcons = useStudioIcons()
 /** Exposed so hosts (the fullscreen toolbar) can pin themselves while open. */
 const open = defineModel<boolean>('open', { default: false })
 
-// The persisted preset (and any persisted edits) are client-only — resolve
+// The persisted preset (and any persisted edits) are client-only, resolve
 // the label after mount so hydration matches the server's fallback.
 const mounted = ref(false)
 onMounted(() => {
   mounted.value = true
-  // the rows render their own font names — load the faces once
+  // the rows render their own font names, load the faces once
   loadFontPreviews(fonts)
 })
 

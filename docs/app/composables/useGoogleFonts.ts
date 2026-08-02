@@ -5,7 +5,7 @@ export interface GoogleFont {
 
 /**
  * The full Google Fonts catalog (family + category, popularity-ordered),
- * served by /api/fonts.json — the metadata endpoint itself has no CORS
+ * served by /api/fonts.json, the metadata endpoint itself has no CORS
  * headers. Fetched lazily the first time a font picker opens and shared
  * through useState so every picker searches the same copy.
  */

@@ -16,7 +16,7 @@ const props = defineProps<{
   stopPinned?: boolean[]
   /** Pin-corrected value per stop, so every dot sits on the colour it produces. */
   stopValues?: number[]
-  /** Pin-corrected curve as a dense polyline — drawn in place of the raw bézier. */
+  /** Pin-corrected curve as a dense polyline, drawn in place of the raw bézier. */
   actualCurve?: { x: number, v: number }[]
   /** Colour field behind the plot: columns of oklch samples, top (yMax) to bottom. */
   field?: string[][]
@@ -55,7 +55,7 @@ function fromY(py: number) {
 }
 
 const path = computed(() => {
-  // with pins the parent passes the corrected curve — draw it through the stops
+  // with pins the parent passes the corrected curve, draw it through the stops
   if (props.actualCurve?.length) {
     return props.actualCurve.map((p, i) => `${i ? 'L' : 'M'} ${toX(p.x).toFixed(2)} ${toY(p.v).toFixed(2)}`).join(' ')
   }
@@ -64,7 +64,7 @@ const path = computed(() => {
 })
 
 // Paint the field as a small bitmap the canvas scales up with bilinear
-// smoothing — does what the SVG needed a blur filter for, without the filter
+// smoothing, does what the SVG needed a blur filter for, without the filter
 // re-rasterising on every page restyle.
 const fieldCanvas = useTemplateRef<HTMLCanvasElement>('fieldCanvas')
 let sourceCanvas: HTMLCanvasElement | undefined
@@ -77,7 +77,7 @@ function drawField() {
   const nRow = columns[0]!.length
   if (!nRow) return
 
-  // low-res backing store stretched by CSS — indistinguishable for a soft gradient
+  // low-res backing store stretched by CSS, indistinguishable for a soft gradient
   if (canvas.width !== W * 3) {
     canvas.width = W * 3
     canvas.height = H * 3
@@ -109,12 +109,12 @@ function drawField() {
   ctx.drawImage(sourceCanvas, 0, 0, nCol, nRow, 0, 0, canvas.width, canvas.height)
 }
 
-// Watch both explicitly — read-tracking would miss props.field behind the
+// Watch both explicitly, read-tracking would miss props.field behind the
 // early return while the canvas isn't mounted yet.
 watch([() => props.field, fieldCanvas], drawField, { immediate: true, flush: 'post' })
 
 // Endpoint handles ride the corrected line when a pin pulls the edge; a pinned
-// endpoint is locked from dragging — the pin owns it.
+// endpoint is locked from dragging, the pin owns it.
 const lastStop = computed(() => (props.stopValues?.length ?? 1) - 1)
 const startPinned = computed(() => props.stopPinned?.[0] ?? false)
 const endPinned = computed(() => props.stopPinned?.[lastStop.value] ?? false)
@@ -190,7 +190,7 @@ function onPointerMove(event: PointerEvent) {
 
   // An endpoint drag carries its control handle by the same delta (tangent
   // preserved). The handle sits on the corrected curve but steers the raw
-  // control — back out the pin pull (corrected − raw) to track the pointer.
+  // control, back out the pin pull (corrected − raw) to track the pointer.
   if (dragging.value === 'y0') {
     const raw = Math.min(props.yMax, Math.max(props.yMin, clamped - (startY.value - curve.value.y0)))
     const delta = raw - curve.value.y0
@@ -211,7 +211,7 @@ function onPointerMove(event: PointerEvent) {
 function onPointerUp(event: PointerEvent) {
   if (dragging.value) {
     dragging.value = null
-    // after a pointercancel the capture is gone and release throws — which
+    // after a pointercancel the capture is gone and release throws, which
     // would skip dragEnd and strand the page-wide dragging class
     if (svgRef.value?.hasPointerCapture(event.pointerId)) {
       svgRef.value.releasePointerCapture(event.pointerId)
@@ -267,7 +267,7 @@ function jump(handle: Handle, to: 'min' | 'max') {
 }
 
 function onKeydown(handle: Handle, event: KeyboardEvent) {
-  // a pin owns its endpoint — same lock the pointer path applies
+  // a pin owns its endpoint, same lock the pointer path applies
   if ((handle === 'y0' && startPinned.value) || (handle === 'y1' && endPinned.value)) return
 
   const steps: Record<string, () => void> = {
@@ -286,7 +286,7 @@ function onKeydown(handle: Handle, event: KeyboardEvent) {
   beginKeyEdit()
 }
 
-/** Rounded for `aria-valuenow` — hue reads in degrees, the rest need decimals. */
+/** Rounded for `aria-valuenow`, hue reads in degrees, the rest need decimals. */
 function readout(value: number) {
   return props.yMax - props.yMin > 10 ? Math.round(value) : Number(value.toFixed(3))
 }
@@ -298,7 +298,7 @@ const handles = computed(() => [
   { id: 'y1' as const, label: `${props.label} end`, cx: toX(1), cy: toHandleY(endY.value), value: endY.value, locked: endPinned.value }
 ])
 
-// Closing the fold mid-drag unmounts the SVG without a pointerup — emit dragEnd
+// Closing the fold mid-drag unmounts the SVG without a pointerup, emit dragEnd
 // so the parent isn't left with isDragging and stranded preview vars.
 onUnmounted(() => {
   clearTimeout(keyEndTimeout)

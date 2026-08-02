@@ -24,12 +24,12 @@ const tokenGroups = TOKEN_GROUPS
 
 <template>
   <div class="flex flex-col gap-2">
-    <!-- One group's name would just repeat the section above it, so it goes
-         label-less and draws no header; its tokens still nest inside. -->
+    <!-- Every group keeps its name: a headerless section can't fold, and its
+         tokens would spill out flat wherever it's dropped. -->
     <ThemeStudioSection
       v-for="tokenGroup in tokenGroups"
       :key="tokenGroup.key"
-      :label="tokenGroups.length > 1 ? tokenGroup.label : undefined"
+      :label="tokenGroup.label"
     >
       <ThemeStudioShadeGroup
         v-for="section in tokenGroup.sections"

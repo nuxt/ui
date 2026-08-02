@@ -12,13 +12,13 @@ const extra = useStudioExtraIcons()
  * (github.com/nuxt-ui-templates/editor): header chrome with a fixed
  * toolbar, a bubble toolbar on selection, slash commands and a drag
  * handle over a markdown document. Collaboration, AI completions,
- * image upload, tables and task lists are omitted — they need server
+ * image upload, tables and task lists are omitted, they need server
  * routes or extensions the docs app doesn't ship.
  */
 
 const content = ref(`# Nuxt Editor Template
 
-A Notion-like WYSIWYG editor built with [Vue](https://vuejs.org/) & [Nuxt](https://nuxt.com/) — and themed live by this studio.
+A Notion-like WYSIWYG editor built with [Vue](https://vuejs.org/) & [Nuxt](https://nuxt.com/), and themed live by this studio.
 
 > Select some text to reveal the bubble toolbar, or type \`/\` on an empty line for quick commands.
 

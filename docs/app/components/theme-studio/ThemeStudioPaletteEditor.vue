@@ -28,7 +28,7 @@ function pickCurves(value: StoredPaletteParams): PaletteCurveParams {
   return structuredClone({ lightness: toRaw(value.lightness), chroma: toRaw(value.chroma), hue: toRaw(value.hue) })
 }
 
-// Elements read off the reactive ref are Vue Proxies toRaw doesn't unwrap —
+// Elements read off the reactive ref are Vue Proxies toRaw doesn't unwrap,
 // structuredClone would throw. Rebuild from scalars.
 function plainPins(pins: readonly PalettePin[]): PalettePin[] {
   return pins.map(pin => ({ shade: pin.shade, l: pin.l, c: pin.c, h: pin.h }))
@@ -45,13 +45,13 @@ const stopSet = computed(() => SHADE_SETS[stopStep.value])
 
 const stopItems = SHADE_STEPS.map(step => ({ label: `${step}`, value: step }))
 
-// Stops locked to an exact colour — the curves bend to pass through them.
+// Stops locked to an exact colour, the curves bend to pass through them.
 // Kept a plain cloneable array (persisted, fed to generatePalette).
 const pins = ref<PalettePin[]>(stored?.pins ? plainPins(stored.pins) : [])
 // shade → pin lightness: `has` answers "pinned?", the badge reads L for contrast
 const pinnedShades = computed(() => new Map(pins.value.map(pin => [pin.shade, pin.l])))
 
-// L above which a stop takes the dark badge. Whole class strings — tailwind's
+// L above which a stop takes the dark badge. Whole class strings, tailwind's
 // scanner only sees literals.
 const LIGHT_STOP_L = 0.62
 const PIN_BADGE_CLASS = {
@@ -59,7 +59,7 @@ const PIN_BADGE_CLASS = {
   bg: { onLight: 'bg-(--ui-color-neutral-950)', onDark: 'bg-(--ui-color-neutral-50)' }
 } as const
 
-// The neutral end that contrasts with the stop — a `difference` blend vanishes
+// The neutral end that contrasts with the stop, a `difference` blend vanishes
 // at mid lightness and inverts saturated hues.
 function pinBadgeClass(shade: number, property: 'text' | 'bg') {
   const lightness = pinnedShades.value.get(shade as Shade) ?? 0
@@ -91,7 +91,7 @@ let seedBase: PaletteCurveParams
 // Stored params may predate the fixed 0–360 axis (or carry unwrapped hues).
 normalizeHue(seedBase)
 
-/** The DISPLAYED curves: base with the lens applied — what generates the ramp. */
+/** The DISPLAYED curves: base with the lens applied, what generates the ramp. */
 const params = reactive<PaletteCurveParams>(applyPaletteEffects(seedBase, effects, effectAmount.value))
 
 const active = computed(() => isCustomPalette(props.alias))
@@ -119,7 +119,7 @@ const actualCurve = computed(() => {
   })
 })
 
-// Kept light (no hex/rgb parse) — recomputes every drag frame across up to 91
+// Kept light (no hex/rgb parse), recomputes every drag frame across up to 91
 // stops; the parse is deferred to the single open swatch.
 const swatches = computed(() => stopSet.value.map(shade => ({ shade, oklch: shades.value[shade]! })))
 
@@ -144,11 +144,11 @@ const stuckShade = ref<number>()
 const hoveredShade = ref<number>()
 let hoverLeaveTimeout: ReturnType<typeof setTimeout> | undefined
 
-// One popover serves the whole strip (stuck wins over hover) — a single Reka
+// One popover serves the whole strip (stuck wins over hover), a single Reka
 // instance instead of one per stop is the bulk of the 19-stop speedup.
 const activeShade = computed(() => stuckShade.value ?? hoveredShade.value)
 
-// Full detail for the ONE open swatch — the oklch→rgb→hex parse runs here only.
+// Full detail for the ONE open swatch, the oklch→rgb→hex parse runs here only.
 const activeSwatch = computed(() => {
   const shade = activeShade.value
   if (shade === undefined) return undefined
@@ -199,7 +199,7 @@ function commitSwatchColor(shade: number, value: string): boolean {
   return ok
 }
 
-// A rejected value restates the field's canonical text — the box never shows
+// A rejected value restates the field's canonical text, the box never shows
 // an unparseable string.
 function onColorCommit(shade: number, field: 'oklch' | 'hex' | 'rgb', event: Event) {
   const input = event.target as HTMLInputElement
@@ -208,7 +208,7 @@ function onColorCommit(shade: number, field: 'oklch' | 'hex' | 'rgb', event: Eve
   }
 }
 
-// Reka emits update:open(false) for trigger clicks too — clearing the stick
+// Reka emits update:open(false) for trigger clicks too, clearing the stick
 // here would race toggleStuck. Only hover clears; toggleStuck/Esc release.
 function onSwatchOpenUpdate(shade: number, open: boolean) {
   if (open) return
@@ -219,11 +219,11 @@ function onSwatchEscape(shade: number) {
   if (stuckShade.value === shade) stuckShade.value = undefined
 }
 
-// A closing hover-popover returns focus to its trigger tile — Reka reads that
+// A closing hover-popover returns focus to its trigger tile, Reka reads that
 // focusin as focus-outside on the newly-opened one and dismisses it (hover A→B
 // closed B). Keep the focus return only for keyboard flows.
 function onSwatchCloseAutoFocus(event: Event) {
-  // the whole editor sits in the Colors panel's popper wrapper — only a swatch
+  // the whole editor sits in the Colors panel's popper wrapper, only a swatch
   // detail popover (has a copy button) marks a keyboard flow
   const wrapper = document.activeElement?.closest('[data-reka-popper-content-wrapper]')
   if (!wrapper?.querySelector('[aria-label^="Copy oklch"]')) {
@@ -231,12 +231,12 @@ function onSwatchCloseAutoFocus(event: Event) {
   }
 }
 
-/** The strip element — every swatch popover anchors to it, not its tile. */
+/** The strip element, every swatch popover anchors to it, not its tile. */
 const stripRef = useTemplateRef<HTMLElement>('stripRef')
 const stripEl = computed(() => stripRef.value ?? undefined)
 
 // Hue normalizes to 0–360 at seed, but a seam-crossing fit can leave points
-// outside — stretch the window once, at seed, or the drag clamp would snap a
+// outside, stretch the window once, at seed, or the drag clamp would snap a
 // merely-grabbed handle back into range.
 function hueWindow(hue: PaletteCurveParams['hue']) {
   const points = [hue.y0, hue.y1, hue.p1y, hue.p2y]
@@ -245,7 +245,7 @@ function hueWindow(hue: PaletteCurveParams['hue']) {
     max: Math.max(360, Math.ceil(Math.max(...points) / 10) * 10)
   }
 }
-// Fixed 1:1 windows — dragging never pans or rescales under the pointer.
+// Fixed 1:1 windows, dragging never pans or rescales under the pointer.
 const windows = ref({
   lightness: { min: 0, max: 1 },
   chroma: { min: 0, max: 0.35 },
@@ -253,12 +253,12 @@ const windows = ref({
 })
 
 // The colour field behind the curve: columns follow the ramp, rows sweep the
-// edited channel (top = max) — each cell is the colour dragging there would give.
+// edited channel (top = max), each cell is the colour dragging there would give.
 const FIELD_COLUMNS = 24
 const FIELD_ROWS = 12
 const CHANNEL_KEYS = { lightness: 'l', chroma: 'c', hue: 'h' } as const
 
-// The 288 gamut-mapped cells are the biggest per-frame cost — feed a throttled
+// The 288 gamut-mapped cells are the biggest per-frame cost, feed a throttled
 // snapshot; the curve and stops track the pointer live, the field settles on release.
 const fieldCurves = ref<PaletteCurveParams>(structuredClone(toRaw(params)))
 const syncFieldCurves = useThrottleFn(() => {
@@ -299,8 +299,8 @@ function normalizeHue(values: PaletteCurveParams) {
   }
 }
 
-// The reactive apply reparses the custom-colours <style> and persists — fine
-// once, dominant at drag rate — so live drags ride the CSSOM fast path below
+// The reactive apply reparses the custom-colours <style> and persists, fine
+// once, dominant at drag rate, so live drags ride the CSSOM fast path below
 // and only land here on the first edit and on release.
 const isDragging = ref(false)
 const customName = computed(() => `custom-${props.alias}`)
@@ -310,7 +310,7 @@ function applyReactive() {
   clearCssomPreview()
 }
 
-// Fast path: inline :root custom properties outrank the <style> rule — no
+// Fast path: inline :root custom properties outrank the <style> rule, no
 // reparse, no persist. Only valid once the alias already resolves through
 // --color-custom-* (the first edit takes the reactive path to create it).
 function previewViaCssom() {
@@ -320,7 +320,7 @@ function previewViaCssom() {
   for (const shade of stopSet.value) root.setProperty(`--color-${customName.value}-${shade}`, ramp[shade]!)
 }
 
-// Sweeps every density's stops — the density may have changed since the
+// Sweeps every density's stops, the density may have changed since the
 // preview was written.
 function clearCssomPreview() {
   if (!import.meta.client) return
@@ -341,7 +341,7 @@ const throttledApply = useThrottleFn(() => {
   }
 }, 60, true, true)
 
-// A density change drops pins on stops the new set doesn't emit — otherwise
+// A density change drops pins on stops the new set doesn't emit, otherwise
 // they keep bending the ramp with no tile (25 and 10 are siblings, not nested).
 watch(stopStep, (step) => {
   const stops = SHADE_SETS[step] as readonly number[]
@@ -362,7 +362,7 @@ function seed(values: PaletteCurveParams) {
   const next = structuredClone(toRaw(values))
   normalizeHue(next)
   seedBase = structuredClone(next)
-  // A seed is never a user edit — an apply here would e.g. turn a stock ramp
+  // A seed is never a user edit, an apply here would e.g. turn a stock ramp
   // custom the instant the editor opens.
   ignoreUpdates(() => {
     Object.assign(effects, PALETTE_EFFECT_DEFAULTS)
@@ -389,18 +389,18 @@ function onDragStart() {
 
 function onDragEnd() {
   isDragging.value = false
-  // Land once on the reactive path — a pending trailing throttle can't be
+  // Land once on the reactive path, a pending trailing throttle can't be
   // relied on to fire after release; applyReactive clears the inline preview.
   if (!effectsDirty.value) {
     seedBase = structuredClone(toRaw(params))
   }
-  // an inactive alias still wrote preview vars during the drag — clear directly
+  // an inactive alias still wrote preview vars during the drag, clear directly
   if (active.value) applyReactive()
   else clearCssomPreview()
 }
 
 onUnmounted(() => {
-  // the fold can unmount mid-drag — don't strand inline preview vars
+  // the fold can unmount mid-drag, don't strand inline preview vars
   if (import.meta.client) clearCssomPreview()
 })
 
@@ -418,10 +418,10 @@ function seedFromCurrent() {
   }
 }
 
-// External writes to the stored entry — reflect them here, lens included.
+// External writes to the stored entry, reflect them here, lens included.
 watch(() => paletteParams.value[props.alias], (value) => {
   if (!value || !('lightness' in value)) return
-  // Echo guard: skip only when curves, pins AND density all match — curves
+  // Echo guard: skip only when curves, pins AND density all match, curves
   // alone would swallow a pin- or density-only undo/redo.
   const effective = applyPaletteEffects(pickCurves(value), value.effects, value.amount)
   const curvesMatch = JSON.stringify(effective) === JSON.stringify(toRaw(params))
@@ -444,7 +444,7 @@ watch(() => paletteParams.value[props.alias], (value) => {
 })
 
 // Open from the curves of the colour on screen, unless the editor already OWNS
-// curves for this alias — a preset's custom ramp is active but unowned, so it
+// curves for this alias, a preset's custom ramp is active but unowned, so it
 // still gets fitted. Popover state resets: the strip unmounts with the fold.
 watch([() => (appConfig.ui.colors as Record<string, string>)[props.alias], open], ([, isOpen]) => {
   stuckShade.value = undefined
@@ -466,7 +466,7 @@ const effectRows = [
   { key: 'hueShift', label: 'Hue', min: -180, max: 180, step: 1, unit: '°' }
 ] as const
 
-/** Re-derive the displayed curves from the base — a user edit, live-applied. */
+/** Re-derive the displayed curves from the base, a user edit, live-applied. */
 function applyEffects() {
   Object.assign(params, applyPaletteEffects(seedBase, effects, effectAmount.value))
 }
@@ -524,7 +524,7 @@ function resetEffects() {
               @mouseenter="onSwatchEnter(info.shade)"
               @mouseleave="onSwatchLeave"
             >
-              <!-- past 19 stops a tile is narrower than the icon — use a hairline -->
+              <!-- past 19 stops a tile is narrower than the icon, use a hairline -->
               <template v-if="pinnedShades.has(info.shade)">
                 <UIcon
                   v-if="stopStep >= 50"
@@ -554,7 +554,7 @@ function resetEffects() {
               // it so Tab lands on the copy button and colour inputs
               onOpenAutoFocus: stuckShade === swatchDetail.shade ? undefined : (event: Event) => event.preventDefault(),
               // stuck means kept-open: clicks elsewhere (curve drags, sliders)
-              // must not dismiss — only Esc, unstick or another stick
+              // must not dismiss, only Esc, unstick or another stick
               onInteractOutside: stuckShade === swatchDetail.shade ? (event: Event) => event.preventDefault() : undefined,
               onFocusOutside: stuckShade === swatchDetail.shade ? (event: Event) => event.preventDefault() : undefined
             }"

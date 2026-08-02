@@ -2,7 +2,7 @@
 /**
  * A popover + listbox picker: subtle trigger button, rich rows (slots can
  * restyle labels or add description strips), closes on pick. The listbox
- * root drops its own ring — it would double the popover's chrome.
+ * root drops its own ring, it would double the popover's chrome.
  */
 export interface ListPickerItem {
   label: string

@@ -27,7 +27,7 @@ import {
   PlaygroundPrompt
 } from '#components'
 
-// Live, interactive component showcase — the Theme Studio's grid view, laid
+// Live, interactive component showcase, the Theme Studio's grid view, laid
 // out as a virtualized masonry (UScrollArea lanes) of content-sized cards à
 // la shadcn/HeroUI. Each tile is a self-contained, product-like block
 // (header + body + footer action). Overlays are only shown embedded in
@@ -61,7 +61,7 @@ const tiles = [
   { name: 'prompt', component: PlaygroundPrompt }
 ]
 
-// Lanes follow the CONTAINER, not the viewport — the preview pane changes
+// Lanes follow the CONTAINER, not the viewport, the preview pane changes
 // width with fullscreen. Tile count follows lanes (the old per-breakpoint
 // reveal) so narrow layouts aren't one endless column.
 const scrollArea = useTemplateRef('scrollArea')

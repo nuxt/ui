@@ -2,7 +2,7 @@
 import type { ChipProps } from '@nuxt/ui'
 
 /**
- * A USelect whose stock choice is deduped into a single tagged entry — the
+ * A USelect whose stock choice is deduped into a single tagged entry, the
  * item carrying `defaultTag` renders a muted "(Default)" suffix in the LIST,
  * where it tells you which option is the stock one. The trigger shows the
  * plain label: there it only lengthens the value you already picked.
@@ -24,7 +24,7 @@ const model = defineModel<string>({ required: true })
 
 const selected = computed(() => props.items.find(item => item.value === model.value))
 
-/** The slot scope types items as the broad SelectItem union — narrow it. */
+/** The slot scope types items as the broad SelectItem union, narrow it. */
 function asItem(item: unknown) {
   return item as DefaultSelectItem
 }

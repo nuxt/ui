@@ -9,7 +9,7 @@ describe('parseCssColor', () => {
   })
 
   it('passes canonical oklch through losslessly, including out of sRGB', () => {
-    // wide-gamut values must survive unclamped — tailwind ships several
+    // wide-gamut values must survive unclamped, tailwind ships several
     expect(parseCssColor('oklch(62.3% 0.214 259.815)')).toBe('oklch(62.3% 0.214 259.815)')
     expect(parseCssColor('oklch(70% 0.35 150)')).toBe('oklch(70% 0.35 150)')
   })

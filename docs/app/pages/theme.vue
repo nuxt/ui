@@ -17,7 +17,7 @@ useThemeStudioRecorder()
 
 useSeoMeta({
   title: 'Theme Studio',
-  description: 'Customize Nuxt UI live: colors, radius, fonts and icons — then export only what you changed.'
+  description: 'Customize Nuxt UI live: colors, radius, fonts and icons, then export only what you changed.'
 })
 
 onMounted(() => track('Theme Studio Opened'))
@@ -25,7 +25,7 @@ onMounted(() => track('Theme Studio Opened'))
 const iconSetItem = computed(() => icons.find(entry => entry.value === iconSet.value))
 
 // ⌃⇧D: bare Shift+D is a screen-reader landmark key, and macOS fires ⌘⇧D/⌘⇧L
-// menu bindings at the NSMenu level where pages can't block them — control
+// menu bindings at the NSMenu level where pages can't block them, control
 // chords are the safe zone.
 const colorMode = useColorMode()
 
@@ -39,12 +39,12 @@ defineShortcuts({
   f: () => (fullscreen.value = !fullscreen.value)
 })
 
-// The bar pins open while a panel is open — panel content portals to <body>,
+// The bar pins open while a panel is open, panel content portals to <body>,
 // so hover alone would retract it under its own popovers.
 const openPanels = reactive({ presets: false, colors: false, font: false, icons: false, style: false, view: false })
 const toolbarPinned = computed(() => nearBottom.value || Object.values(openPanels).some(Boolean))
 
-/** The shared import/export modal — the two toolbar buttons pick its mode. */
+/** The shared import/export modal, the two toolbar buttons pick its mode. */
 const shareOpen = ref(false)
 const shareMode = ref<'import' | 'export'>('export')
 </script>
@@ -75,7 +75,7 @@ const shareMode = ref<'import' | 'export'>('export')
              UContainer's own recipe (edges line up with other pages); only
              the strip catches the pointer so the preview stays clickable. -->
         <div :class="fullscreen ? 'group fixed bottom-0 inset-x-0 z-50 pointer-events-none w-full max-w-(--ui-container) mx-auto' : 'shrink-0'">
-          <!-- thin touch affordance only — mouse reveal is proximity-driven -->
+          <!-- thin touch affordance only, mouse reveal is proximity-driven -->
           <div v-if="fullscreen" class="absolute bottom-0 inset-x-0 h-2 pointer-events-auto" />
 
           <div

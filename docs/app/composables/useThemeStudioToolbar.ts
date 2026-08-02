@@ -3,7 +3,7 @@ import { paletteLabel } from '../utils/theme'
 
 /**
  * What the toolbar reports and what its reset does. The persisted theme is
- * client-only, so everything derived from it is gated on mount — hydration
+ * client-only, so everything derived from it is gated on mount, hydration
  * adopts SSR attributes without patching, and a disabled= adopted at hydration
  * would never lift.
  */
@@ -14,7 +14,7 @@ export function useThemeStudioToolbar() {
   const mounted = ref(false)
   onMounted(() => (mounted.value = true))
 
-  // A custom ramp has no name worth reading — the picker calls it Custom too.
+  // A custom ramp has no name worth reading, the picker calls it Custom too.
   function paletteName(alias: 'primary' | 'neutral', value: string) {
     return isCustomPalette(alias) ? 'Custom' : capitalize(paletteLabel(value))
   }

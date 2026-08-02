@@ -3,7 +3,7 @@ import type { VariantGroup } from '../../utils/theme-engine'
 
 /**
  * The variant and colour Buttons, Cards and Inputs start from. One fold over
- * all three, collapsed and last — it's the least-reached-for control.
+ * all three, collapsed and last, it's the least-reached-for control.
  */
 const { style, setStyle } = useThemeStudio()
 
@@ -11,13 +11,13 @@ const { style, setStyle } = useThemeStudio()
 // `variant` shows through as the fallback.
 const variantItems = (values: string[]) => values.map(value => ({ label: capitalize(value), value }))
 
-/** Variant names UButton can render itself — the rest (none) fall back. */
+/** Variant names UButton can render itself, the rest (none) fall back. */
 const RENDERABLE_VARIANTS = ['solid', 'outline', 'soft', 'subtle', 'ghost', 'link']
 
-/** Variant grid popovers close on pick — one open flag per group. */
+/** Variant grid popovers close on pick, one open flag per group. */
 const variantGridOpen = reactive<Record<string, boolean>>({ buttons: false, panels: false, inputs: false })
 
-// `stock` is the library's own default — picking it clears the override.
+// `stock` is the library's own default, picking it clears the override.
 const variantGroupFields = [
   { key: 'buttons' as const, label: 'Button Defaults', hasColor: true, stock: 'solid', items: variantItems(['solid', 'outline', 'soft', 'subtle', 'ghost', 'link']) },
   { key: 'panels' as const, label: 'Card Defaults', hasColor: false, stock: 'outline', items: variantItems(['solid', 'outline', 'soft', 'subtle']) },
@@ -31,7 +31,7 @@ function groupVariantModel(group: VariantGroup) {
       const own = style.value.defaults?.variants?.[group]
       if (own && own !== 'default') return own
       // An app-wide value this group can't express (e.g. solid inputs)
-      // truthfully reads as Default — the engine skips it there too.
+      // truthfully reads as Default, the engine skips it there too.
       const appWide = style.value.defaults?.variant
       return appWide && supported.includes(appWide) ? appWide : 'default'
     },
@@ -65,7 +65,7 @@ function groupVariantModel(group: VariantGroup) {
 
 const groupVariants = Object.fromEntries(variantGroupFields.map(field => [field.key, groupVariantModel(field.key)])) as Record<VariantGroup, ReturnType<typeof groupVariantModel>>
 
-// Primary IS the stock default — one entry, tagged, storing 'default'
+// Primary IS the stock default, one entry, tagged, storing 'default'
 // (an explicit 'primary' would export a no-op override).
 const defaultColorItems = [
   { label: 'Primary', value: 'default', chip: { color: 'primary' as any }, defaultTag: true },

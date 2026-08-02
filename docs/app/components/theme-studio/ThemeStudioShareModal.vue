@@ -2,7 +2,7 @@
 import { importTheme, isDefaultTheme } from '../../utils/theme-engine'
 
 /**
- * The shared import/export modal — plain toolbar buttons open it in either
+ * The shared import/export modal, plain toolbar buttons open it in either
  * mode. Export shows the generated files with copy buttons; import parses
  * a paste of the same two files back into editable settings.
  */
@@ -38,7 +38,7 @@ function runImport() {
 
   if (!empty.value) {
     applyDoc(result.doc)
-    // an imported doc replaces the whole theme — the old preset is no
+    // an imported doc replaces the whole theme, the old preset is no
     // longer the baseline the dirty indicators should measure against
     clearActivePreset()
     imported.value = true
@@ -52,8 +52,8 @@ function runImport() {
     v-model:open="open"
     :title="mode === 'export' ? 'Export theme' : 'Import theme'"
     :description="mode === 'export'
-      ? 'Copy only what you changed — everything else stays inherited from Nuxt UI defaults.'
-      : 'Paste an exported main.css and/or app.config.ts — the studio parses it back into editable settings.'"
+      ? 'Copy only what you changed, everything else stays inherited from Nuxt UI defaults.'
+      : 'Paste an exported main.css and/or app.config.ts, the studio parses it back into editable settings.'"
     :ui="{ content: 'max-w-3xl' }"
   >
     <template #body>
@@ -114,7 +114,7 @@ function runImport() {
         <UAlert
           v-if="imported"
           title="Theme imported"
-          :description="skipped.length ? 'Applied — a few lines were outside the theme schema and were skipped (listed below).' : 'Applied. Every line was understood.'"
+          :description="skipped.length ? 'Applied, a few lines were outside the theme schema and were skipped (listed below).' : 'Applied. Every line was understood.'"
           icon="i-lucide-check"
           color="success"
           variant="subtle"

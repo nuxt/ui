@@ -3,7 +3,7 @@ import { SHADE_LADDER } from '../../utils/theme-engine'
 import type { ShadeStop } from '../../utils/theme-engine'
 
 /**
- * A section of per-mode shade sliders that reset as one group — the sliders
+ * A section of per-mode shade sliders that reset as one group, the sliders
  * carry their own dirty state, so no call site has to fold it by hand.
  */
 export interface ShadeSlider {

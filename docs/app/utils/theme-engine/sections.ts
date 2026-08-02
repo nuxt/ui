@@ -21,7 +21,7 @@ export type SectionKey
 export const SECTION_GROUPS: Record<'colors' | 'style', SectionKey[]> = {
   colors: ['primary', 'neutral', 'semantic'],
   // Everything that isn't colour: type, icons, scale, per-component defaults
-  // and the shadow/border treatments. One group — the General/Style split
+  // and the shadow/border treatments. One group, the General/Style split
   // only ever chopped a long list in half.
   style: ['font', 'icons', 'scale', 'shadow', 'innerShadow', 'borders', 'buttons', 'panels', 'inputs']
 }
@@ -35,7 +35,7 @@ function tokenSection(token: string): 'primary' | 'semantic' | 'neutral' {
 
 /**
  * applyDoc promotes ramp-shaped token overrides into style.tokenShades, so a
- * live doc and its preset express the SAME choice in different slots — both
+ * live doc and its preset express the SAME choice in different slots, both
  * sides compare canonicalized: promotable tokens count as shades.
  */
 export function promotedShades(doc: ThemeDoc): Record<string, { light?: ShadeStop, dark?: ShadeStop }> {
@@ -56,7 +56,7 @@ export function promotedShades(doc: ThemeDoc): Record<string, { light?: ShadeSto
 }
 
 function ownedTokens(doc: ThemeDoc, section: 'primary' | 'semantic' | 'neutral') {
-  // tokens the doc's own style treatment emits are DERIVED — a live doc
+  // tokens the doc's own style treatment emits are DERIVED, a live doc
   // carries them merged into tokens, a preset doc never does
   const derived = styleTokens(doc.style ?? {})
   const promoted = promotedShades(doc)
@@ -118,7 +118,7 @@ export function pickSection(doc: ThemeDoc, key: SectionKey): unknown {
       }
     case 'font': {
       // Explicit stock values count as absent: setFontPrefs strips them on
-      // apply while a preset doc may spell them out (8-bit) — raw comparison
+      // apply while a preset doc may spell them out (8-bit), raw comparison
       // would read dirty forever, jamming the toolbar reset.
       const font = { ...(doc.font ?? {}) }
       const weights = Object.fromEntries(Object.entries(font.weights ?? {})
@@ -152,7 +152,7 @@ export function pickSection(doc: ThemeDoc, key: SectionKey): unknown {
       return groupPick(doc, key)
     case 'shadow': {
       // 'shade' with no explicit stops emits exactly the stock shadow
-      // colors (neutral-950 / black) — a non-choice, same as absent
+      // colors (neutral-950 / black), a non-choice, same as absent
       const color = style.shadowColor === 'default' ? null : style.shadowColor ?? null
       return {
         shadow: style.shadow ?? null,
@@ -270,7 +270,7 @@ function mergeColorExtras(doc: ThemeDoc, base: ThemeDoc, section: 'primary' | 's
 
 /**
  * A new doc with `key`'s slice taken from `base` and everything else from
- * `current` — apply it and the section is reset to the baseline.
+ * `current`, apply it and the section is reset to the baseline.
  */
 export function mergeSection(current: ThemeDoc, base: ThemeDoc, key: SectionKey): ThemeDoc {
   const doc = structuredClone(current)

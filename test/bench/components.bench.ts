@@ -5,7 +5,7 @@ import Table from '../../src/runtime/components/Table.vue'
 import type { TableColumn } from '../../src/runtime/components/Table.vue'
 
 // A toolbar of many buttons (the #6293 shape): each Button builds its own tv
-// factory on mount, and re-renders on every editor transaction. Labels only —
+// factory on mount, and re-renders on every editor transaction. Labels only,
 // icons resolve via an async fetch that's orthogonal to the tv cost measured here.
 const Toolbar = {
   components: { UButton: Button },
@@ -56,7 +56,7 @@ const columns: TableColumn<Row>[] = [
 ]
 
 // `mountSuspended` doesn't infer the Table's row generic, so the mounted prop
-// expects `TableColumn<unknown, unknown>[]` — cast the checked columns at use.
+// expects `TableColumn<unknown, unknown>[]`, cast the checked columns at use.
 const tableProps = (data: Row[]) => ({ data, columns: columns as unknown as TableColumn<unknown, unknown>[] })
 
 // The per-cell `ui.td()` path at scale (200 rows x 5 columns = 1000 cells).

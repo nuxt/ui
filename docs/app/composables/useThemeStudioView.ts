@@ -6,7 +6,7 @@ export interface ThemeStudioViewTab {
   label: string
   icon: string
   value: ThemeStudioView
-  /** One-liner for the rich switcher — template blurbs from /templates. */
+  /** One-liner for the rich switcher, template blurbs from /templates. */
   description: string
   /** /templates screenshot base path (`-light.png`/`-dark.png` appended); grid and a11y are studio-only and have none. */
   image?: string
@@ -15,12 +15,12 @@ export interface ThemeStudioViewTab {
 const templateImage = (name: string) => `/assets/templates/nuxt/${name}`
 
 export const THEME_STUDIO_VIEWS: ThemeStudioViewTab[] = [
-  { label: 'Grid', icon: 'i-lucide-layout-grid', value: 'grid', description: 'Every themed component at a glance — the component wall.' },
+  { label: 'Grid', icon: 'i-lucide-layout-grid', value: 'grid', description: 'Every themed component at a glance, the component wall.' },
   { label: 'Dashboard', icon: 'i-lucide-layout-dashboard', value: 'dashboard', description: 'Multi-column admin interface with multiple views.', image: templateImage('dashboard') },
   { label: 'Chat', icon: 'i-lucide-message-circle', value: 'chat', description: 'An AI chatbot with sidebar history and streaming replies.', image: templateImage('chat') },
   { label: 'SaaS', icon: 'i-lucide-rocket', value: 'saas', description: 'A SaaS home with hero, pricing and feature sections.', image: templateImage('saas') },
   { label: 'Landing', icon: 'i-lucide-panels-top-left', value: 'landing', description: 'A modern marketing landing page.', image: templateImage('landing') },
-  { label: 'Docs', icon: 'i-lucide-book-open', value: 'docs', description: 'A documentation site: navigation, prose, code and TOC.', image: templateImage('docs') },
+  { label: 'Docs', icon: 'i-lucide-book-open', value: 'docs', description: 'Navigation, prose, code and TOC.', image: templateImage('docs') },
   { label: 'Portfolio', icon: 'i-lucide-user-round', value: 'portfolio', description: 'A personal portfolio with work, blog and testimonials.', image: templateImage('portfolio') },
   { label: 'Changelog', icon: 'i-lucide-newspaper', value: 'changelog', description: 'Release notes with sticky intro and version timeline.', image: templateImage('changelog') },
   { label: 'Editor', icon: 'i-lucide-file-pen-line', value: 'editor', description: 'A rich text editor with toolbar, slash menu and drag handles.', image: templateImage('editor') },
@@ -80,7 +80,7 @@ export function useStudioViewIcons() {
 export function useThemeStudioFullscreen() {
   const { fullscreen } = useThemeStudioView()
 
-  // Reveal by proximity, not a hover overlay — an overlay would eat clicks on
+  // Reveal by proximity, not a hover overlay, an overlay would eat clicks on
   // the preview's bottom edge.
   const nearBottom = ref(false)
   function onPointerNear(event: MouseEvent) {
@@ -92,7 +92,7 @@ export function useThemeStudioFullscreen() {
   // a layer is open, so Esc closes the popover first.
   function onEscape(event: KeyboardEvent) {
     if (event.key !== 'Escape' || !fullscreen.value || event.defaultPrevented) return
-    // only VISIBLE layers defer — closed overlays keep their marker in the DOM
+    // only VISIBLE layers defer, closed overlays keep their marker in the DOM
     const layers = document.querySelectorAll('[data-dismissable-layer]')
     if ([...layers].some(layer => layer.getClientRects().length)) return
     fullscreen.value = false
@@ -109,7 +109,7 @@ export function useThemeStudioFullscreen() {
 
   onMounted(() => window.addEventListener('keydown', onEscape))
 
-  // fullscreen is app-level state — it must not leak past the studio
+  // fullscreen is app-level state, it must not leak past the studio
   onUnmounted(() => {
     window.removeEventListener('keydown', onEscape)
     window.removeEventListener('mousemove', onPointerNear)

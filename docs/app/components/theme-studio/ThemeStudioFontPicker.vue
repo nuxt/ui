@@ -2,7 +2,7 @@
 /**
  * The font family picker: the curated families up front, with a search box
  * over the full Google Fonts catalog (fetched lazily on first open). Rows
- * render themselves in their own face — each result batch loads its preview
+ * render themselves in their own face, each result batch loads its preview
  * faces, debounced so keystrokes don't fan out into stylesheet requests.
  */
 import { watchDebounced } from '@vueuse/core'
@@ -40,7 +40,7 @@ watch(open, (value) => {
 
 const results = computed(() => open.value ? search(query.value) : [])
 
-// a type, not an interface — the picker's item type wants an index signature
+// a type, not an interface, the picker's item type wants an index signature
 type FontItem = { label: string, value: string, category?: string }
 
 const items = computed<FontItem[]>(() => {
@@ -48,7 +48,7 @@ const items = computed<FontItem[]>(() => {
     return results.value.map(font => ({ label: font.name, value: font.name, category: font.category }))
   }
   const curated: FontItem[] = props.curated.map(name => ({ label: name, value: name }))
-  // A searched pick isn't in the curated list — pin it on top so the
+  // A searched pick isn't in the curated list, pin it on top so the
   // selection stays visible (and deselectable) on reopen.
   if (model.value !== 'inherit' && !props.curated.includes(model.value)) {
     curated.unshift({ label: model.value, value: model.value })

@@ -18,7 +18,7 @@ watch(() => studioIcons.dice, (die) => {
 })
 
 // Keep in sync with the dice-roll keyframes: the stops are where the die hits
-// an edge — each impact flips the face.
+// an edge, each impact flips the face.
 const ROLL_MS = 675
 const HIT_FRACTIONS = [0.064, 0.147, 0.255, 0.395, 0.578, 0.815]
 let rollTimers: Array<ReturnType<typeof setTimeout>> = []
@@ -49,7 +49,7 @@ async function rollDice() {
   rollTimers.push(setTimeout(onRollEnd, ROLL_MS + 400))
 }
 
-// The animation clock decides the end — a JS timer would race it and snap the
+// The animation clock decides the end, a JS timer would race it and snap the
 // tumble back a few frames early.
 function onRollEnd(event?: AnimationEvent) {
   if (event && !event.animationName.includes('dice-roll')) return
@@ -122,7 +122,7 @@ onUnmounted(clearRollTimers)
   100% { transform: scale(1); }
 }
 
-/* the icon span renders inside UButton — scoped rules need :deep() */
+/* the icon span renders inside UButton, scoped rules need :deep() */
 :deep(.dice-rolling) {
   animation: dice-roll 675ms linear forwards;
 }

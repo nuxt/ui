@@ -41,7 +41,7 @@ describe('factory build', () => {
   })
 })
 
-// Invoking a prebuilt factory is the cheap step — this is all a variant-prop
+// Invoking a prebuilt factory is the cheap step, this is all a variant-prop
 // change should cost once the build is hoisted out of the invocation computed.
 describe('invocation (prebuilt factory)', () => {
   const buttonFactory = tv({ extend: buttonTheme })

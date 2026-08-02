@@ -17,7 +17,7 @@ export default defineNuxtPlugin({
 
       // Deferred past hydration on purpose. Icon names compile into element
       // CLASSES, and Vue only warns about a class that disagrees with the
-      // server — it never patches it. Assigning here (pre-hydration) makes the
+      // server, it never patches it. Assigning here (pre-hydration) makes the
       // first client render disagree with the server's stock pack, so the
       // saved pack was silently dropped on every reload. After hydration it's
       // an ordinary reactive update, which does repaint. Colors don't need
@@ -59,7 +59,7 @@ export default defineNuxtPlugin({
       restoreNamedState(THEME_STORAGE_KEYS.style, THEME_STATE_KEYS.stylePrefs)
       restoreNamedState(THEME_STORAGE_KEYS.paletteParams, THEME_STATE_KEYS.paletteParams)
 
-      // The persisted style-ui bundle is DERIVED from the style prefs —
+      // The persisted style-ui bundle is DERIVED from the style prefs,
       // recompute it on load so fragment changes shipped in code reach
       // already-persisted themes instead of serving a stale bundle.
       const persisted = useState<any>(THEME_STATE_KEYS.stylePrefs)
@@ -74,7 +74,7 @@ export default defineNuxtPlugin({
       }
 
       // One persistent watcher keeps the shadow root flags in lockstep on
-      // every path — applyDoc (presets) bypasses setStyle, so per-call-site
+      // every path, applyDoc (presets) bypasses setStyle, so per-call-site
       // toggles would miss it.
       const stylePrefs = useState<{ shadow?: string }>(THEME_STATE_KEYS.stylePrefs)
       watch(() => stylePrefs.value?.shadow, (shadow) => {

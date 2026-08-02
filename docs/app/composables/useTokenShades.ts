@@ -2,17 +2,17 @@ import { TOKEN_SHADE_TARGETS, SHADE_LADDER, SHADE_LADDERS, storedStopStep, canon
 import type { ColorAlias, ShadeStop } from '../utils/theme-engine'
 
 /**
- * Per-mode shade sliders for the semantic tokens riding one ramp — the accent
+ * Per-mode shade sliders for the semantic tokens riding one ramp, the accent
  * pair for a color alias, every neutral-ramped token for neutral. Shared by
  * the Colors panel section and the folded token groups.
  */
 export function useTokenShades(alias: ColorAlias) {
   const { style, setStyle, baselineDoc, isCustomPalette, paletteParams } = useThemeStudio()
 
-  /** The active preset's own shade choices — what a row reset restores. */
+  /** The active preset's own shade choices, what a row reset restores. */
   const baselineShades = computed(() => canonicalTokenShades(baselineDoc.value))
 
-  // A custom palette's tokens can pick every stop its density emits — the
+  // A custom palette's tokens can pick every stop its density emits, the
   // sliders (and their model mapping) span that ladder, up to 91 stops. Stock
   // ramps only define the standard 11, so they stay on the short ladder.
   const shadeLadder = computed<readonly ShadeStop[]>(() => (isCustomPalette(alias)
@@ -21,13 +21,13 @@ export function useTokenShades(alias: ColorAlias) {
 
   // Only the touched mode is written, so an untouched mode never becomes an
   // override. Reset restores the BASELINE preset's shade, or deletes the entry
-  // when the preset made no choice — a token's real default may not sit on the
+  // when the preset made no choice, a token's real default may not sit on the
   // ramp at all (--ui-bg is literally `white`).
   function control(token: string, defaults: { light: ShadeStop, dark: ShadeStop }, target: 'light' | 'dark') {
     const model = computed({
       get: () => {
         const value = style.value.tokenShades?.[token]?.[target] ?? defaults[target]
-        // a stop coarsened off the ladder reads indexOf -1 — clamp so the
+        // a stop coarsened off the ladder reads indexOf -1, clamp so the
         // slider stays grabbable
         return Math.max(0, shadeLadder.value.indexOf(value as ShadeStop))
       },

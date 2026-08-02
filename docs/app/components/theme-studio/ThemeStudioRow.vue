@@ -30,7 +30,7 @@ const props = withDefaults(defineProps<{
   mode?: 'light' | 'dark'
   /** Fine ramps swap in the wider 21-stop ladder. */
   ladder?: readonly ShadeStop[]
-  /** `reset` deletes the override — writing the default would pin a lookalike. */
+  /** `reset` deletes the override, writing the default would pin a lookalike. */
   resettable?: boolean
   dirty?: boolean
   items?: RowSelectItem[]
@@ -76,10 +76,10 @@ const stopModel = computed({
   set: (value: string) => (model.value = Number(value))
 })
 
-/** `0.25rem` reads as `.25rem` — the leading zero is noise at this width. */
+/** `0.25rem` reads as `.25rem`, the leading zero is noise at this width. */
 const display = computed(() => `${String(model.value).replace(/^(-?)0\./, '$1.')}${props.unit ?? ''}`)
 
-// Only the range clamps — typed between-step values are deliberate.
+// Only the range clamps, typed between-step values are deliberate.
 function clamp(raw: number): number {
   return Number(Math.min(sliderMax.value, Math.max(props.min, raw)).toFixed(4))
 }
@@ -102,7 +102,7 @@ function commitReadout(event: Event) {
   if (!Number.isNaN(parsed)) {
     model.value = clamp(parsed)
   }
-  // A rejected or same-value commit doesn't re-render — restate the text.
+  // A rejected or same-value commit doesn't re-render, restate the text.
   input.value = display.value
 }
 
@@ -122,7 +122,7 @@ const showTextLabel = computed(() => !props.icon && !shade.value)
       /* the row contract: 28px, matching a size-sm button */
       root: 'flex items-center gap-2 min-h-7',
       wrapper: spread ? 'shrink-0' : 'w-13 shrink-0',
-      /* truncate text labels only — it would clip the shade chip's ring */
+      /* truncate text labels only, it would clip the shade chip's ring */
       label: `w-full text-muted font-normal select-none${showTextLabel && !spread ? ' truncate' : ''}`,
       container: `flex-1 flex items-center gap-2 mt-0${spread ? ' justify-end' : ''}`
     }"

@@ -76,7 +76,7 @@ const posts = [{
 // Obviously-fake reviews: the testimonial carousel demos better with famous
 // dead Dutch masters than with invented product directors.
 const testimonials = [{
-  quote: 'At last, a man who treats the grid as a moral position. I did notice his palette editor permits more than three colors — I have chosen to forgive this.',
+  quote: 'At last, a man who treats the grid as a moral position. I did notice his palette editor permits more than three colors, I have chosen to forgive this.',
   author: { name: 'Piet Mondrian', description: 'Painter & grid enthusiast, 1872–1944' }
 }, {
   quote: 'I asked for a simple staircase component. The popovers opened into popovers, which opened into further popovers. Honestly, I have never felt more at home.',

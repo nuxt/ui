@@ -4,7 +4,7 @@ import { DEFAULT_COLORS, THEME_DEFAULTS } from './types'
 import { styleComponents, styleTokens, mergeUi, BORDER_WIDTH_DEFAULT } from './styles'
 import { LIBRARY_TOKEN_DEFAULTS } from './resolve'
 
-/** Generate the minimal `main.css` — the doc only holds overrides, so everything present is emitted. */
+/** Generate the minimal `main.css`, the doc only holds overrides, so everything present is emitted. */
 export function generateCSS(doc: ThemeDoc): string {
   const lines = [
     '@import "tailwindcss";',
@@ -28,7 +28,7 @@ export function generateCSS(doc: ThemeDoc): string {
   }
   // Width rides tailwind's default-width theme variables: the consumer's
   // compile scales every bare border/divide/ring utility. (The live preview
-  // can't use this — the variables resolve at compile time.)
+  // can't use this, the variables resolve at compile time.)
   const borderWidth = doc.style?.border === 'none'
     ? 0
     : doc.style?.border && doc.style.border !== 'default' ? doc.style.borderWidth ?? BORDER_WIDTH_DEFAULT : undefined
@@ -39,7 +39,7 @@ export function generateCSS(doc: ThemeDoc): string {
     themeLines.push(`  --default-ring-width: ${borderWidth}px;`)
   }
   // Redefine the shadow ramp as @theme tokens so the consumer's compile
-  // rewrites every bare shadow-* utility — unconditional here, since an
+  // rewrites every bare shadow-* utility, unconditional here, since an
   // export is one fixed theme (no Inherit/Custom toggle). The per-size
   // geometry scale must stay in step with main.css; alpha is uniform.
   const SHADOW_RAMP = [
@@ -130,7 +130,7 @@ export function generateCSS(doc: ThemeDoc): string {
     style.dark['--ui-shadow-color'] = 'black'
   }
   if (doc.style?.shadow === 'custom') {
-    // The custom-shadow classes reference the geometry variables — a
+    // The custom-shadow classes reference the geometry variables, a
     // standalone export must define them even at default values.
     if (!style.light['--ui-shadow-offset-x']) {
       style.light['--ui-shadow-offset-x'] = '3px'
@@ -211,7 +211,7 @@ export function generateConfig(doc: ThemeDoc, framework: string = 'nuxt'): strin
   }
 
   // Explicit components merge INTO the style expansion (classes concatenate,
-  // explicit last) — a spread would drop one side wholesale.
+  // explicit last), a spread would drop one side wholesale.
   const componentOverrides = mergeUi(doc.style ? styleComponents(doc.style) : undefined, doc.components)
   if (Object.keys(componentOverrides).length) {
     config.ui = config.ui || {}
@@ -242,7 +242,7 @@ export function generateConfig(doc: ThemeDoc, framework: string = 'nuxt'): strin
 }
 
 /**
- * Translate a document into the shape `applyThemeSettings()` accepts — the
+ * Translate a document into the shape `applyThemeSettings()` accepts, the
  * sanitized write path shared with the AI theme feature.
  */
 export function docToSettings(doc: ThemeDoc): Record<string, any> {
@@ -281,7 +281,7 @@ export function docToSettings(doc: ThemeDoc): Record<string, any> {
     }
   }
 
-  // Only explicit components ride the settings channel — the style expansion
+  // Only explicit components ride the settings channel, the style expansion
   // goes through the dedicated style-ui channel (applyDoc).
   if (doc.components && Object.keys(doc.components).length) {
     settings.ui = doc.components

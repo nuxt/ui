@@ -7,12 +7,12 @@ import type { ColorAlias, SectionKey } from '../../utils/theme-engine'
  */
 const props = withDefaults(defineProps<{
   alias: ColorAlias
-  /** Header text — defaults to the capitalized alias. */
+  /** Header text, defaults to the capitalized alias. */
   label?: string
   helpTo?: string
   /** Passed through to the section header's reset affordance. */
   sectionKey?: SectionKey
-  /** Nested under a fold already — see ThemeStudioSection. */
+  /** Nested under a fold already, see ThemeStudioSection. */
   collapsible?: boolean
 }>(), {
   // absent must stay undefined so the section's depth rule still decides

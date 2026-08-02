@@ -14,7 +14,7 @@ const { neutralColors, primaryColors, primary, neutral, blackAsPrimary, setBlack
 const { selectPalette, isCustomPalette } = useThemeStudio()
 
 // Strictly separated for v4: color roles offer only chromatic ramps, the
-// neutral role only gray ramps — the module's shade recipes differ per
+// neutral role only gray ramps, the module's shade recipes differ per
 // role, so a ramp can't cross over faithfully until v5.
 const colors = computed(() => props.alias === 'neutral' ? neutralColors : primaryColors)
 

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 /**
  * A labelled toolbar button opening its panel. The trigger reports the value
- * it holds — and a chip when that value has drifted from the preset.
+ * it holds, and a chip when that value has drifted from the preset.
  */
 defineProps<{
   label: string
@@ -20,7 +20,7 @@ const { fullscreen } = useThemeStudioView()
 <template>
   <ThemeStudioToolbarField :label="label">
     <UPopover v-model:open="open" :content="{ align: 'start', onInteractOutside: keepPanels }">
-      <!-- Reka binds a tooltip to its ONE child element — a popover root
+      <!-- Reka binds a tooltip to its ONE child element, a popover root
            renders nothing, so the tooltip has to sit on the button. -->
       <UTooltip :text="label" :disabled="fullscreen">
         <UChip :show="!!dirty" color="primary" size="sm">

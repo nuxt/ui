@@ -4,7 +4,7 @@ import { DEFAULT_COLORS } from './types'
 
 /**
  * The semantic token defaults as @nuxt/ui ships them (src/runtime/index.css).
- * Exports diff against THESE, not the docs site's diverging baseline — an
+ * Exports diff against THESE, not the docs site's diverging baseline, an
  * exported theme must reproduce the preview on a stock library install.
  */
 export const LIBRARY_TOKEN_DEFAULTS = {
@@ -65,7 +65,7 @@ const UI_COLOR_RE = /^var\(--(?:ui-color|color-custom)-([a-z]+)-(\d{2,3})\)$/
 
 /**
  * Parse a shade reference the studio emits (either form) to `{ alias, shade }`.
- * Callers apply their own ownership check — a foreign-ramp ref is parsed but
+ * Callers apply their own ownership check, a foreign-ramp ref is parsed but
  * not adopted.
  */
 export function parseUiColorRef(value?: string): { alias: string, shade: number } | undefined {

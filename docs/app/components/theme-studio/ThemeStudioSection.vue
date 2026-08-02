@@ -4,16 +4,16 @@ import type { SectionKey } from '../../utils/theme-engine'
 import { SECTION_DEPTH } from '../../utils/theme-section'
 
 const props = withDefaults(defineProps<{
-  /** Omit on a static section for a bare group — no header drawn. */
+  /** Omit on a static section for a bare group, no header drawn. */
   label?: string
   /** Docs page the header's help icon links to */
   helpTo?: string
   /** The ThemeDoc slice(s) this fold owns; drives its reset button. */
   sectionKey?: SectionKey | SectionKey[]
-  /** Reset a section the doc has no slice for — the caller says when it's dirty. */
+  /** Reset a section the doc has no slice for, the caller says when it's dirty. */
   resettable?: boolean
   resetDirty?: boolean
-  /* These three default from depth — pass one only to override it. */
+  /* These three default from depth, pass one only to override it. */
   defaultOpen?: boolean
   collapsible?: boolean
   separator?: boolean
@@ -49,7 +49,7 @@ const slots = defineSlots<{
 const depth = inject(SECTION_DEPTH, 0)
 provide(SECTION_DEPTH, depth + 1)
 
-// Nothing in the header means it's a bare group — a chevron with no label
+// Nothing in the header means it's a bare group, a chevron with no label
 // beside it is a trigger for nothing.
 const hasHeader = computed(() => !!(props.label || props.helpTo || showReset.value || slots.actions))
 const collapsible = computed(() => props.collapsible ?? (depth < 2 && hasHeader.value))
@@ -57,7 +57,7 @@ const separator = computed(() => props.separator ?? depth < 2)
 
 const open = ref(collapsible.value ? (props.defaultOpen ?? depth === 0) : true)
 
-// A first nested section sits right under the header — nothing above it to
+// A first nested section sits right under the header, nothing above it to
 // separate from. Scoped to sections: any other first child keeps its padding.
 // Padding rides an inner box, never the animated one: padding can't collapse
 // below itself, so a fold with its own padding animates down to that padding

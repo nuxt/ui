@@ -4,7 +4,7 @@ import type { DropdownMenuItem, NavigationMenuItem, PageLink } from '@nuxt/ui'
 const appConfig = useAppConfig()
 const extra = useStudioExtraIcons()
 
-// Left aside: the template renders UContentNavigation from @nuxt/content —
+// Left aside: the template renders UContentNavigation from @nuxt/content,
 // content-coupled, so the same tree is faked with a vertical UNavigationMenu.
 const navLinks: NavigationMenuItem[] = [{
   label: 'Getting Started',

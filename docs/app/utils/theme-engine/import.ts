@@ -19,7 +19,7 @@ import { themeIcons } from '../theme'
 /**
  * The inverse of generateCSS/generateConfig: parse an exported theme back
  * into a ThemeDoc. Anything outside the export grammar is collected in
- * `skipped` and surfaced — never silently dropped.
+ * `skipped` and surfaced, never silently dropped.
  */
 export interface ThemeImportResult {
   doc: ThemeDoc
@@ -40,7 +40,7 @@ interface ParsedCSS {
   body?: { weight?: number, uppercase?: boolean, italic?: boolean, letterSpacing?: number, lineHeight?: number }
   heading?: { font?: string, weight?: number, uppercase?: boolean, italic?: boolean, underline?: boolean, letterSpacing?: number, lineHeight?: number }
   blackAsPrimary?: boolean
-  /** From @theme --default-border-width — the export's width channel. */
+  /** From @theme --default-border-width, the export's width channel. */
   borderWidth?: number
   light: Record<string, string>
   dark: Record<string, string>
@@ -51,7 +51,7 @@ function parseCSS(css: string): ParsedCSS {
   const result: ParsedCSS = { palettes: {}, light: {}, dark: {}, skipped: [] }
   let clean = css.replace(/\/\*[\s\S]*?\*\//g, '')
 
-  // The flat block scanner can't see nesting — a nested at-rule's inner
+  // The flat block scanner can't see nesting, a nested at-rule's inner
   // blocks would import as GLOBAL tokens. Lift each whole one into `skipped`.
   clean = clean.replace(/@(?:media|supports|container|layer|scope)[^{}]*\{(?:[^{}]*\{[^{}]*\})*[^{}]*\}/g, (block) => {
     result.skipped.push(block.trim().replace(/\s+/g, ' '))
@@ -130,7 +130,7 @@ function parseDeclaration(result: ParsedCSS, selector: string, prop: string, val
       return true
     }
     if (/^--shadow-(?:2xs|xs|sm|md|lg|xl|2xl)$/.test(prop)) {
-      // Derived ramp, regenerated on export — carries no independent data.
+      // Derived ramp, regenerated on export, carries no independent data.
       return true
     }
     return false
@@ -219,7 +219,7 @@ function parseDeclaration(result: ParsedCSS, selector: string, prop: string, val
     return false
   }
 
-  // Only custom properties are theme tokens — a plain declaration must
+  // Only custom properties are theme tokens, a plain declaration must
   // surface in `skipped`, not ride the token channel into the re-export.
   if (selector === ':root, .light' || selector === '.light') {
     if (!prop.startsWith('--')) return false
@@ -280,7 +280,7 @@ function extractStyle(light: Record<string, string>, dark: Record<string, string
     spread: take('--ui-shadow-spread')
   }
   const pressColor = take('--ui-shadow-press-color')
-  // force-emitted compositions — never a choice of their own, consume silently
+  // force-emitted compositions, never a choice of their own, consume silently
   take('--ui-shadow-press')
   take('--ui-shadow-press-half')
   const shadowColor = take('--ui-shadow-color')
@@ -294,7 +294,7 @@ function extractStyle(light: Record<string, string>, dark: Record<string, string
       blur: Number.parseFloat(geometry.blur.light ?? '0'),
       spread: Number.parseFloat(geometry.spread.light ?? '0')
     }
-    // The export force-emits default geometry — only a real change is a choice.
+    // The export force-emits default geometry, only a real change is a choice.
     if (JSON.stringify(parsed) !== JSON.stringify(SHADOW_GEOMETRY_DEFAULTS)) {
       style.shadowGeometry = parsed
     }
@@ -303,7 +303,7 @@ function extractStyle(light: Record<string, string>, dark: Record<string, string
   }
 
   if (style.shadow !== 'custom') {
-    // dark-only geometry can't seed a hard shadow — keep it as tokens
+    // dark-only geometry can't seed a hard shadow, keep it as tokens
     putBack('--ui-shadow-offset-x', geometry.x)
     putBack('--ui-shadow-offset-y', geometry.y)
     putBack('--ui-shadow-blur', geometry.blur)
@@ -371,7 +371,7 @@ function extractStyle(light: Record<string, string>, dark: Record<string, string
   }
 
   if (innerColor.light !== undefined || innerColor.dark !== undefined) {
-    // Never force-emitted — any presence is a real choice.
+    // Never force-emitted, any presence is a real choice.
     const match = matchColorChoice(innerColor, SHADOW_COLOR_VALUES)
     if (match) {
       style.innerShadowColor = match.color as StyleOptions['innerShadowColor']
@@ -397,7 +397,7 @@ function extractStyle(light: Record<string, string>, dark: Record<string, string
 /* ------------------------------------------------------------- config -- */
 
 /**
- * Parser for the restricted object-literal grammar generateConfig emits —
+ * Parser for the restricted object-literal grammar generateConfig emits,
  * a tokenizer, not eval, so pasted content can't execute anything.
  */
 function parseObjectLiteral(source: string, start: number): { value: any, end: number } {
@@ -473,7 +473,7 @@ function parseObjectLiteral(source: string, start: number): { value: any, end: n
     while (i < source.length && source[i] !== quote) {
       if (source[i] === '\\') {
         i++
-        // backslash at EOF — don't append out-of-range source[i] ("undefined")
+        // backslash at EOF, don't append out-of-range source[i] ("undefined")
         if (i >= source.length) break
       }
       out += source[i]
@@ -543,7 +543,7 @@ function extractDefaults(components: Record<string, any>): StyleOptions['default
   }
 
   // A value carried by every group that could express it is an app-wide
-  // choice — collapsing keeps re-exports byte-identical to the original.
+  // choice, collapsing keeps re-exports byte-identical to the original.
   const groupValues = new Set(Object.values(defaults.variants || {}))
   if (groupValues.size === 1) {
     const [value] = [...groupValues] as [DefaultVariant]
@@ -569,7 +569,7 @@ function detectBorder(components: Record<string, any>): Pick<StyleOptions, 'bord
 
   const widths = texts.flatMap(text => [...text.matchAll(/(?:^|\s)(?:sm:)?ring-(\d)(?:\s|$)/g)].map(match => Number(match[1])))
   if (!widths.length) return {}
-  // A mixed-width paste has no single right answer — take the most common
+  // A mixed-width paste has no single right answer, take the most common
   // width, ties toward the larger, so the choice is deterministic.
   const counts = new Map<number, number>()
   for (const value of widths) counts.set(value, (counts.get(value) ?? 0) + 1)
@@ -616,7 +616,7 @@ function detectInnerShadow(components: Record<string, any>): StyleOptions['inner
  */
 function normalizeLegacyWidths(components: Record<string, any>) {
   // The width digit is REQUIRED: a bare presence token (`border`, `divide-y`)
-  // is a real class the style axis never regenerates — scrubbing it would
+  // is a real class the style axis never regenerates, scrubbing it would
   // corrupt a genuine divider rather than strip a migrated width.
   const WIDTH_TOKEN = /^(?:sm:)?(?:ring|divide-y|border(?:-[tbesxy])?)-[0-4]$|^lg:not-last:border-e-[0-4]$/
   const scrub = (classes: unknown): string | undefined => {
@@ -664,7 +664,7 @@ function normalizeLegacyWidths(components: Record<string, any>) {
   }
 }
 
-/** Remove the fragments the reconstructed style regenerates — only genuinely explicit overrides remain. */
+/** Remove the fragments the reconstructed style regenerates, only genuinely explicit overrides remain. */
 function subtractStyleExpansion(components: Record<string, any>, style: StyleOptions): Record<string, any> {
   const expected = styleComponents(style)
   const remaining: Record<string, any> = {}
@@ -753,7 +753,7 @@ export function importTheme(input: { css?: string, config?: string }): ThemeImpo
       style.border = border.border
       if (border.borderWidth !== undefined) style.borderWidth = border.borderWidth
       if (border.frame) style.frame = true
-      // Scrub only pastes that carry legacy ring-N tokens — unconditionally
+      // Scrub only pastes that carry legacy ring-N tokens, unconditionally
       // it would eat genuine user classes out of config-only pastes.
       normalizeLegacyWidths(components)
     }
@@ -762,7 +762,7 @@ export function importTheme(input: { css?: string, config?: string }): ThemeImpo
   if (defaults) style.defaults = defaults
 
   // Press-off exports keep the button's resting shadow but drop the
-  // hover/active choreography — detect it so the expansion subtracts cleanly.
+  // hover/active choreography, detect it so the expansion subtracts cleanly.
   if (style.shadow === 'custom') {
     const base = String(components.button?.slots?.base ?? '')
     if (base.includes('--ui-shadow-press') && !base.includes('hover:translate')) style.shadowPress = false
@@ -801,7 +801,7 @@ export function importTheme(input: { css?: string, config?: string }): ThemeImpo
       if (css.dark['--ui-primary'] === 'white') delete css.dark['--ui-primary']
     }
     // The export restates the library's dark default for light-only
-    // overrides (source-order tie) — generated, not a choice; drop it so the
+    // overrides (source-order tie), generated, not a choice; drop it so the
     // round-trip doesn't grow explicit tokens.
     for (const [key, value] of Object.entries(css.dark)) {
       if (key in css.light && value === (LIBRARY_TOKEN_DEFAULTS.dark as Record<string, string>)[key]) {

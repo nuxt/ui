@@ -7,7 +7,7 @@ import type { ThemeDoc, ThemePalette } from '../utils/theme-engine'
 import { omit } from '#ui/utils'
 import colors from 'tailwindcss/colors'
 
-// AI `applyTheme` output is untrusted and gets concatenated into <style> rules —
+// AI `applyTheme` output is untrusted and gets concatenated into <style> rules,
 // this is the single write boundary, so only CSS-safe tokens may persist.
 const SAFE_NAME = /^[\w -]{1,50}$/
 const SAFE_HEX = /^#[0-9a-f]{3,8}$/i
@@ -50,7 +50,7 @@ export interface FontPrefs {
   italic?: boolean
   /** Tracking in em. */
   letterSpacing?: number
-  /** Unitless line height — 1.5 is the tailwind preflight default. */
+  /** Unitless line height, 1.5 is the tailwind preflight default. */
   lineHeight?: number
   heading?: { font?: string, weight?: number, uppercase?: boolean, italic?: boolean, underline?: boolean, letterSpacing?: number, lineHeight?: number }
 }
@@ -60,7 +60,7 @@ export function useTheme() {
   const colorMode = useColorMode()
   const { track } = useAnalytics()
 
-  // sliders stream through setters at drag frequency — one event per burst
+  // sliders stream through setters at drag frequency, one event per burst
   let trackedAt: number | undefined
   function trackThrottled(...args: Parameters<typeof track>) {
     if (!trackedAt || Date.now() - trackedAt > 2000) {
@@ -76,7 +76,7 @@ export function useTheme() {
   const styleUiData = useState<Record<string, any>>('nuxt-ui-style-ui', () => readLocalStorage('nuxt-ui-style-ui', {}))
   const customColorsData = useState<Record<string, Record<string, string>>>('nuxt-ui-custom-colors', () => readLocalStorage('nuxt-ui-custom-colors', {}))
 
-  // The neutral may be a custom palette with no tailwindcss/colors entry —
+  // The neutral may be a custom palette with no tailwindcss/colors entry,
   // a throw here would abort the whole unhead flush.
   const color = computed(() => {
     const neutral = appConfig.ui.colors.neutral
@@ -87,7 +87,7 @@ export function useTheme() {
   const cssVariablesData = useState<{ light?: Record<string, string>, dark?: Record<string, string> }>('nuxt-ui-css-variables', () => readLocalStorage('nuxt-ui-css-variables', {}))
   /** The studio's style axis (it owns writes); read here for currentDoc/export. */
   const stylePrefs = useState<ThemeDoc['style']>(THEME_STATE_KEYS.stylePrefs, () => readLocalStorage(THEME_STORAGE_KEYS.style, {}))
-  // useTheme is not a shared composable — separate instances of these refs
+  // useTheme is not a shared composable, separate instances of these refs
   // only converge through vueuse's storage events, so the listener stays on
   const _radius = useLocalStorage('nuxt-ui-radius', 0.25)
   const _fontSize = useLocalStorage('nuxt-ui-font-size', 16)
@@ -96,7 +96,7 @@ export function useTheme() {
   const _iconSet = useLocalStorage('nuxt-ui-icons', 'lucide')
   const _blackAsPrimary = useLocalStorage('nuxt-ui-black-as-primary', false)
 
-  /** Typography beyond the base family — one JSON channel shared with the FOUC script. */
+  /** Typography beyond the base family, one JSON channel shared with the FOUC script. */
   const fontPrefs = useState<FontPrefs>('nuxt-ui-font-prefs', () => readLocalStorage('nuxt-ui-font-prefs', {}))
 
   function setFontPrefs(next: FontPrefs) {
@@ -115,7 +115,7 @@ export function useTheme() {
     const heading = next.heading || {}
     const cleanHeading: NonNullable<FontPrefs['heading']> = {}
     if (heading.font && heading.font !== _font.value) cleanHeading.font = heading.font
-    // 700 is the heading resting point — storing it would pollute exports
+    // 700 is the heading resting point, storing it would pollute exports
     if (heading.weight !== undefined && heading.weight !== 700) cleanHeading.weight = heading.weight
     if (heading.uppercase) cleanHeading.uppercase = true
     if (heading.italic) cleanHeading.italic = true
@@ -135,7 +135,7 @@ export function useTheme() {
   }
 
   // taupe/mauve/mist/olive ship in tailwind's theme.css but not (yet) the
-  // tailwindcss/colors JS export — swatches resolve them from CSS variables
+  // tailwindcss/colors JS export, swatches resolve them from CSS variables
   const neutralColors = ['slate', 'gray', 'zinc', 'neutral', 'stone', 'taupe', 'mauve', 'mist', 'olive']
   const neutral = computed({
     get() {
@@ -242,8 +242,8 @@ export function useTheme() {
     icon: 'i-tabler-brand-tabler',
     value: 'tabler'
   }]
-  // The saved pack is client-only, so anything rendered FROM it — the studio
-  // chrome, a picker's own brand glyph — would differ from the server on the
+  // The saved pack is client-only, so anything rendered FROM it, the studio
+  // chrome, a picker's own brand glyph, would differ from the server on the
   // first client render, and Vue only warns about a mismatched class, it never
   // patches it. Reporting the stock pack until mounted keeps that first render
   // honest; the flip afterwards is an ordinary update, which does repaint.
@@ -295,7 +295,7 @@ export function useTheme() {
   const spacingStyle = computed(() => _spacing.value !== 0.25 ? `:root { --spacing: ${_spacing.value}rem; }` : ':root {}')
   const blackAsPrimaryStyle = computed(() => _blackAsPrimary.value ? `:root { --ui-primary: black; } .dark { --ui-primary: white; }` : ':root {}')
   const fontStyle = computed(() => {
-    // fonts hydrate unvalidated from localStorage — re-assert SAFE_NAME at
+    // fonts hydrate unvalidated from localStorage, re-assert SAFE_NAME at
     // the sink so a tampered name can't break out of the quoted string
     const safeFont = SAFE_NAME.test(_font.value) ? _font.value : 'Public Sans'
     const parts = [`:root { --font-sans: '${safeFont}', sans-serif; }`]
@@ -397,7 +397,7 @@ export function useTheme() {
       || !!aiThemeExtras.value.ui
   })
 
-  /** Snapshot the live theme state as a sparse ThemeDoc — the export generators' input. */
+  /** Snapshot the live theme state as a sparse ThemeDoc, the export generators' input. */
   function currentDoc(): ThemeDoc {
     const doc: ThemeDoc = { version: 1 }
 
@@ -429,7 +429,7 @@ export function useTheme() {
     if (_iconSet.value !== THEME_DEFAULTS.icons) doc.icons = _iconSet.value
 
     // Only alias-referenced palettes export. Reference by CURRENT value, not
-    // overrides — a custom palette can shadow a default name and must still export.
+    // overrides, a custom palette can shadow a default name and must still export.
     const referenced = new Set(Object.values(appConfig.ui.colors as Record<string, string>))
     const paletteEntries = Object.entries(customColorsData.value).filter(([name]) => referenced.has(name))
     if (paletteEntries.length) {
@@ -444,7 +444,7 @@ export function useTheme() {
 
     // Diff against LIBRARY defaults (exports sit on a stock install), drop
     // studio-only vars, and keep only values that diverge from the style
-    // expansion — doc.style already accounts for the rest.
+    // expansion, doc.style already accounts for the rest.
     const styleVars = doc.style ? styleTokens(doc.style) : { light: {}, dark: {} }
     const light = Object.fromEntries(Object.entries(cssVariablesData.value.light || {}).filter(([key, val]) => !key.startsWith('--studio-') && val !== LIBRARY_TOKEN_DEFAULTS.light[key as keyof typeof LIBRARY_TOKEN_DEFAULTS.light] && val !== (styleVars.light as Record<string, string>)[key]))
     const dark = Object.fromEntries(Object.entries(cssVariablesData.value.dark || {}).filter(([key, val]) => !key.startsWith('--studio-') && val !== LIBRARY_TOKEN_DEFAULTS.dark[key as keyof typeof LIBRARY_TOKEN_DEFAULTS.dark] && val !== (styleVars.dark as Record<string, string>)[key]))
@@ -463,7 +463,7 @@ export function useTheme() {
     return doc
   }
 
-  // pure generation — callers track 'Theme Exported' on the actual copy
+  // pure generation, callers track 'Theme Exported' on the actual copy
   function exportCSS(): string {
     return generateCSS(currentDoc())
   }
@@ -540,7 +540,7 @@ export function useTheme() {
   }
 
   function applyThemeSettings(settings: Record<string, any>, options: { track?: boolean } = {}) {
-    // sanitize up front — later checks must consult the SANITIZED set
+    // sanitize up front, later checks must consult the SANITIZED set
     const safeCustomColors = settings.customColors && typeof settings.customColors === 'object'
       ? sanitizeCustomColors(settings.customColors)
       : {}
@@ -611,7 +611,7 @@ export function useTheme() {
       }
     }
 
-    // only rewrite the channel when touched — slider/curve drags stream
+    // only rewrite the channel when touched, slider/curve drags stream
     // through here and must not reactively wake the AI extras every tick
     const touchedExtras = settings.ui || colorKeys.some(color => settings[color] && SAFE_NAME.test(settings[color]))
     if (touchedExtras) {
@@ -628,7 +628,7 @@ export function useTheme() {
     }
   }
 
-  // track opt-out: applyDoc resets before applying — every preset swap and
+  // track opt-out: applyDoc resets before applying, every preset swap and
   // undo/redo would otherwise count as a "Theme Reset"
   function resetTheme(options: { track?: boolean, immediate?: boolean } = {}) {
     if (options.track !== false) {
@@ -671,7 +671,7 @@ export function useTheme() {
     customColorsData.value = {}
     cssVariablesData.value = {}
 
-    // studio-owned state resets too — orphaned style prefs would silently
+    // studio-owned state resets too, orphaned style prefs would silently
     // resurrect on the next style click or export
     setStyleUi({})
     window.localStorage.removeItem(THEME_STORAGE_KEYS.preset)
@@ -682,7 +682,7 @@ export function useTheme() {
     // in-memory curve params too, or the palette editor re-persists them
     useState<Record<string, any>>(THEME_STATE_KEYS.paletteParams).value = {}
 
-    // Imperative clearing makes a bare reset land the same frame — but a
+    // Imperative clearing makes a bare reset land the same frame, but a
     // reset-then-reapply (preset swap, undo/redo) would flash the default
     // theme, so those callers pass immediate: false and let reactivity swap
     // the tags atomically.

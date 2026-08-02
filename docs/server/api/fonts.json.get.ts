@@ -6,7 +6,7 @@ type GoogleFont = {
 /**
  * The Google Fonts catalog, slimmed to what the theme studio's font picker
  * needs (family name + category, popularity-ordered). Proxied because the
- * metadata endpoint sends no CORS headers, and cached — the catalog moves
+ * metadata endpoint sends no CORS headers, and cached, the catalog moves
  * a few families a month at most.
  */
 export default defineCachedEventHandler(async (): Promise<GoogleFont[]> => {

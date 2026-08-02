@@ -25,7 +25,7 @@ export interface PaletteCurveParams {
   hue: ChannelCurve
 }
 
-/** Fitted to tailwind v4's ramps — only seeds empty states; real params come from fitPalette(). */
+/** Fitted to tailwind v4's ramps, only seeds empty states; real params come from fitPalette(). */
 export const CURVE_DEFAULTS: PaletteCurveParams = {
   lightness: { y0: 0.977, y1: 0.27, p1x: 0.1, p1y: 1.012, p2x: 0.925, p2y: 0.376 },
   chroma: { y0: 0.016, y1: 0.08, p1x: 0.4, p1y: 0.3, p2x: 0.6, p2y: 0.25 },
@@ -53,7 +53,7 @@ export interface PaletteEffects {
 export const PALETTE_EFFECT_DEFAULTS: PaletteEffects = { lightness: 0, contrast: 0, saturation: 0, hueShift: 0 }
 
 /**
- * A stop locked to an exact OKLCH — "pin this brand colour, edit around it".
+ * A stop locked to an exact OKLCH, "pin this brand colour, edit around it".
  * Stored absolute so it survives curve drags and modifiers (see pinField).
  */
 export interface PalettePin {
@@ -63,7 +63,7 @@ export interface PalettePin {
   h: number
 }
 
-/** A persisted palette. `fineStops` predates the density model — read, never written. */
+/** A persisted palette. `fineStops` predates the density model, read, never written. */
 export type StoredPaletteParams = PaletteCurveParams & { effects?: PaletteEffects, amount?: number, stopStep?: ShadeStep, fineStops?: boolean, pins?: PalettePin[] }
 
 /** The density a persisted palette generates at. */
@@ -80,7 +80,7 @@ export function detectStopStep(shades: Partial<Record<Shade, string>>): ShadeSte
   return SHADE_STEPS.find(step => present.every(shade => SHADE_SETS[step].includes(shade))) ?? 10
 }
 
-/** The stop closest to a value — where an orphaned shade reference lands. */
+/** The stop closest to a value, where an orphaned shade reference lands. */
 export function nearestShade(value: number, stops: readonly Shade[]): Shade {
   return stops.reduce((best, stop) => Math.abs(stop - value) < Math.abs(best - value) ? stop : best)
 }
@@ -122,7 +122,7 @@ function solveLinear(a: number[][], b: number[]): number[] {
 
 /**
  * Additive correction field locking the pins: radial-basis interpolation of
- * the pin deltas — exact at a pinned x, decaying smoothly elsewhere.
+ * the pin deltas, exact at a pinned x, decaying smoothly elsewhere.
  */
 function pinField(pins: PalettePin[], base: (x: number) => { l: number, c: number, h: number }) {
   const xs = pins.map(pin => shadeX(pin.shade))
@@ -266,7 +266,7 @@ export function sampleCurve(x: number, curve: ChannelCurve): number {
 }
 
 /**
- * A shade's position along the curve, keyed by VALUE not array index — so
+ * A shade's position along the curve, keyed by VALUE not array index, so
  * stops keep their exact colour across densities and midpoints land between
  * their neighbours.
  */
@@ -277,8 +277,8 @@ export function shadeX(shade: Shade): number {
 }
 
 /**
- * Sampler for the pin-corrected ramp: raw channel values at any x — hue
- * unwrapped, no gamut clamp — so a curve drawn through them stays continuous.
+ * Sampler for the pin-corrected ramp: raw channel values at any x, hue
+ * unwrapped, no gamut clamp, so a curve drawn through them stays continuous.
  */
 export function buildRampSampler(params: PaletteCurveParams, pins: PalettePin[] = []): (x: number) => { l: number, c: number, h: number } {
   const base = (x: number) => ({
@@ -327,11 +327,11 @@ export function generatePalette(params: PaletteCurveParams, step: ShadeStep = 10
 
 /**
  * Fit a channel curve to sampled points (x ascending, 0 and 1 included):
- * endpoints pinned, handles by coordinate descent — deterministic and fast
+ * endpoints pinned, handles by coordinate descent, deterministic and fast
  * enough per palette selection.
  */
 export function fitCurve(points: Array<[number, number]>): ChannelCurve {
-  // Nothing to fit — a flat zero curve beats a TypeError.
+  // Nothing to fit, a flat zero curve beats a TypeError.
   if (!points.length) {
     return { y0: 0, p1x: 0.33, p1y: 0, p2x: 0.66, p2y: 0, y1: 0 }
   }
@@ -401,24 +401,24 @@ export function fitCurve(points: Array<[number, number]>): ChannelCurve {
 
 /**
  * Work backwards from an existing palette (e.g. a tailwind ramp) to curve
- * params that reproduce it — so editing always starts from the real thing.
+ * params that reproduce it, so editing always starts from the real thing.
  */
 export function fitPalette(shades: Partial<Record<Shade, string>>): PaletteCurveParams {
   const stops: Array<{ x: number, color: Oklch }> = []
   for (const [index, shade] of SHADES.entries()) {
-    // Accept hex or oklch — older saved docs and pasted ramps are hex.
+    // Accept hex or oklch, older saved docs and pasted ramps are hex.
     const color = shades[shade] ? parseColor(shades[shade]!) : undefined
     if (color) {
       stops.push({ x: index / (SHADES.length - 1), color })
     }
   }
 
-  // Nothing parseable — stock curves beat letting fitCurve([]) throw.
+  // Nothing parseable, stock curves beat letting fitCurve([]) throw.
   if (!stops.length) {
     return structuredClone(CURVE_DEFAULTS)
   }
 
-  // Hue is noise below ~0.01 chroma — borrow the nearest chromatic stop.
+  // Hue is noise below ~0.01 chroma, borrow the nearest chromatic stop.
   const chromatic = stops.filter(stop => stop.color.c >= 0.01)
   const hues = stops.map((stop) => {
     if (stop.color.c >= 0.01 || !chromatic.length) return stop.color.h

@@ -4,7 +4,7 @@ defineProps<{ label: string }>()
 
 const { fullscreen } = useThemeStudioView()
 
-// The labels only earn their space in fullscreen, where the bar floats free —
+// The labels only earn their space in fullscreen, where the bar floats free,
 // and the container's gap for the label has to go with them.
 const ui = computed(() => (fullscreen.value
   ? { root: 'shrink-0', label: 'text-dimmed' }

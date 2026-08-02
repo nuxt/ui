@@ -58,7 +58,7 @@ export function rgbToOklch([r, g, b]: [number, number, number]): Oklch {
   return { l: L, c, h }
 }
 
-/** Raw conversion — channels may fall outside [0, 1] when out of gamut. */
+/** Raw conversion, channels may fall outside [0, 1] when out of gamut. */
 function oklchToLinearRgb({ l: L, c, h }: Oklch): [number, number, number] {
   const hr = h * Math.PI / 180
   const a = Math.cos(hr) * c
@@ -75,7 +75,7 @@ function oklchToLinearRgb({ l: L, c, h }: Oklch): [number, number, number] {
   ]
 }
 
-/** Gamut-clipped sRGB channels (0–1) — for showing hex/rgb equivalents. */
+/** Gamut-clipped sRGB channels (0–1), for showing hex/rgb equivalents. */
 export function oklchToRgb(color: Oklch): [number, number, number] {
   return oklchToLinearRgb(color).map(channel =>
     Math.min(1, Math.max(0, linearToSrgb(channel)))) as [number, number, number]
@@ -116,16 +116,16 @@ export function hexToOklch(hex: string): Oklch {
 /**
  * Serialize to tailwind v4's `oklch(62.3% 0.214 259.815)` shape. No gamut
  * clamp, so wider-than-sRGB values (tailwind's own ramps have them) survive
- * a round-trip. Achromatic hue is atan2 noise — zero it.
+ * a round-trip. Achromatic hue is atan2 noise, zero it.
  */
 export function formatOklch(color: Oklch): string {
   const c = +color.c.toFixed(3)
   return `oklch(${+(color.l * 100).toFixed(1)}% ${c} ${c === 0 ? 0 : +color.h.toFixed(3)})`
 }
 
-/** Parse a CSS color into OKLCH — the forms the studio meets: hex, `oklch(…)`, `rgb(…)`. */
+/** Parse a CSS color into OKLCH, the forms the studio meets: hex, `oklch(…)`, `rgb(…)`. */
 export function parseColor(value: string): Oklch | undefined {
-  // Ramp lookups can pass undefined — unparseable, not a .trim() throw.
+  // Ramp lookups can pass undefined, unparseable, not a .trim() throw.
   if (typeof value !== 'string') return undefined
   const input = value.trim()
 
@@ -133,12 +133,12 @@ export function parseColor(value: string): Oklch | undefined {
   if (input === 'white') return { l: 1, c: 0, h: 0 }
   if (input === 'black') return { l: 0, c: 0, h: 0 }
 
-  // Only 3/6-digit hex — truncated/alpha hex would feed NaN into the fitter.
+  // Only 3/6-digit hex, truncated/alpha hex would feed NaN into the fitter.
   if (/^#(?:[0-9a-f]{3}|[0-9a-f]{6})$/i.test(input)) {
     return rgbToOklch(hexToRgb(input))
   }
 
-  // `none` is CSS Color 4's missing-component keyword — tailwind ≥4.3.3
+  // `none` is CSS Color 4's missing-component keyword, tailwind ≥4.3.3
   // emits it for achromatic hues (`oklch(98.5% 0 none)`); it reads as 0 here.
   const oklch = input.match(/^oklch\(\s*([\d.]+)(%?)\s+([\d.]+|none)\s+([\d.]+|none)/i)
   if (oklch) {
@@ -161,7 +161,7 @@ export function parseCssColor(value: string): string | undefined {
 }
 
 /**
- * Composite `color` at `alpha` over `backdrop` — what the browser paints for
+ * Composite `color` at `alpha` over `backdrop`, what the browser paints for
  * `bg-primary/10`. Blends in gamma-encoded sRGB (not linear) to match the
  * rendered pixel. Undefined when either input is unparseable.
  */
@@ -175,7 +175,7 @@ export function blendColors(color: string, backdrop: string, alpha: number): str
   return rgbToHex(top.map((channel, i) => channel * alpha + under[i]! * (1 - alpha)) as [number, number, number])
 }
 
-/** WCAG 2.x relative luminance — linear RGB is exactly what the formula wants. */
+/** WCAG 2.x relative luminance, linear RGB is exactly what the formula wants. */
 function luminance(color: Oklch): number {
   const [r, g, b] = oklchToLinearRgb(clampToGamut(color)).map(channel => Math.min(1, Math.max(0, channel))) as [number, number, number]
   return 0.2126 * r + 0.7152 * g + 0.0722 * b
@@ -183,7 +183,7 @@ function luminance(color: Oklch): number {
 
 /**
  * WCAG 2.x contrast ratio between two CSS colors, 1–21. `null` when either
- * input is unparseable — unknown, not a fabricated ratio.
+ * input is unparseable, unknown, not a fabricated ratio.
  */
 export function contrastRatio(colorA: string, colorB: string): number | null {
   const a = parseColor(colorA)

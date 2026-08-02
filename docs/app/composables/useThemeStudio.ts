@@ -30,8 +30,8 @@ export function useThemeStudio() {
   /**
    * Curve params per alias, kept so the editor stays editable across
    * reloads. useState + explicit persistence (not useLocalStorage) so
-   * resetTheme() — reachable from the popover and chat, outside this
-   * composable — can clear the shared state, not just the storage key.
+   * resetTheme(), reachable from the popover and chat, outside this
+   * composable, can clear the shared state, not just the storage key.
    */
   const paletteParams = useState<Partial<Record<string, StoredPaletteParams>>>(THEME_STATE_KEYS.paletteParams, () => readLocalStorage(THEME_STORAGE_KEYS.paletteParams, {}))
 
@@ -48,7 +48,7 @@ export function useThemeStudio() {
   const style = useState<StyleOptions>(THEME_STATE_KEYS.stylePrefs, () => readLocalStorage(THEME_STORAGE_KEYS.style, {}))
 
   // Self-heal: the persisted class bundle is an expansion of `style` frozen
-  // at write time — if the generator changed since (new fragment classes),
+  // at write time, if the generator changed since (new fragment classes),
   // regenerate it once so stale classes don't outlive their source. Guarded
   // so the dozens of components calling this composable check only once.
   const healed = useState('nuxt-ui-style-healed', () => false)
@@ -61,7 +61,7 @@ export function useThemeStudio() {
       }
     } catch {
       // A throwing expansion (corrupt persisted style) shouldn't permanently
-      // disable healing — retry on the next load.
+      // disable healing, retry on the next load.
       healed.value = false
     }
   }
@@ -69,20 +69,20 @@ export function useThemeStudio() {
   // Self-heal custom palettes. A custom ramp lives in three stores that
   // restore independently on reload: the editor curves (paletteParams), the
   // derived ramp (custom-colors) and the alias mapping. The derived stores
-  // ride useState, which hydrates from an empty SSR payload — so a lost
+  // ride useState, which hydrates from an empty SSR payload, so a lost
   // restore race can leave the preview on a stale/absent ramp while the
   // editor still shows the curves (and their modifiers). The curves are the
   // source of truth: re-derive each persisted palette once on load, after the
   // plugin restore, so the preview is rebuilt from them and always matches
   // the editor. Re-deriving is idempotent, so healing a correct load is a
-  // harmless no-op write — cheaper than trusting a possibly-stale render.
+  // harmless no-op write, cheaper than trusting a possibly-stale render.
   const palettesHealed = useState('nuxt-ui-palettes-healed', () => false)
   if (import.meta.client && !palettesHealed.value) {
     palettesHealed.value = true
     onNuxtReady(() => {
       for (const [alias, reactiveEntry] of Object.entries(paletteParams.value)) {
         if (!reactiveEntry || !('lightness' in reactiveEntry)) continue
-        // Deep-unwrap the reactive useState proxy to a plain object — the curve
+        // Deep-unwrap the reactive useState proxy to a plain object, the curve
         // params flow into applyPaletteEffects, which structuredClones them,
         // and a reactive proxy can't be cloned. Curves are pure numbers, so a
         // JSON round-trip is a lossless plain copy.
@@ -97,7 +97,7 @@ export function useThemeStudio() {
         const name = customPaletteName(alias)
         // Only the derived ramp (customColors) loses its restore race. Re-sending
         // an already-correct alias routes through the primary/neutral setters,
-        // which reset black-as-primary and fire a spurious event every load — so
+        // which reset black-as-primary and fire a spurious event every load, so
         // heal the ramp always, touch the alias only if it drifted.
         const aliasAlreadySet = (appConfig.ui.colors as Record<string, string>)[alias] === name
         theme.applyThemeSettings({
@@ -131,7 +131,7 @@ export function useThemeStudio() {
     // (covers presets via applyDoc too), so no per-path toggle is needed here.
 
     // Remove only the tokens the PREVIOUS style emitted and the next one
-    // doesn't — never preset/doc-owned values sharing the same names.
+    // doesn't, never preset/doc-owned values sharing the same names.
     const tokens = styleTokens(style.value)
     theme.removeCSSVariables({
       light: Object.keys(previous.light).filter(key => !(key in tokens.light)),
@@ -149,7 +149,7 @@ export function useThemeStudio() {
       theme.applyThemeSettings({ cssVariables: tokens }, { track: false })
     }
 
-    // Sliders stream through here at drag frequency — one event per burst.
+    // Sliders stream through here at drag frequency, one event per burst.
     trackThrottled('Theme Style Changed', {
       shadow: style.value.shadow || 'none',
       border: style.value.border || 'default',
@@ -167,7 +167,7 @@ export function useThemeStudio() {
   }
 
   /**
-   * Every defined shade of a named palette as oklch — tailwind's JS values
+   * Every defined shade of a named palette as oklch, tailwind's JS values
    * first, CSS variables as fallback. Sampled across every stop any density
    * can emit, so a ramp generated at a finer density is read whole; a standard
    * 11-stop ramp simply has no in-between vars and those drop out. The editor
@@ -176,7 +176,7 @@ export function useThemeStudio() {
   function paletteShades(name: string): Partial<Record<Shade, string>> | undefined {
     const tailwind = (colors as Record<string, any>)[name]
     if (tailwind && typeof tailwind === 'object') {
-      // A stock tailwind ramp has only the 11 standard stops — the rest are
+      // A stock tailwind ramp has only the 11 standard stops, the rest are
       // undefined, and parseCssColor would throw on those. Skip absent shades
       // so a full sweep degrades cleanly to the 11 present.
       return Object.fromEntries(
@@ -201,7 +201,7 @@ export function useThemeStudio() {
   }
 
   /**
-   * Swatch-click entry point, for any color alias — always a real alias
+   * Swatch-click entry point, for any color alias, always a real alias
    * switch. A custom palette in place is dropped first (its curves and
    * modifiers included), so the menu names the selection instead of a
    * stale Custom; an open editor refits from the new color by itself.
@@ -215,7 +215,7 @@ export function useThemeStudio() {
       theme.primary.value = name
     } else if (alias === 'neutral') {
       theme.neutral.value = name
-      // Stock neutrals need the white-literal remaps too — without them the
+      // Stock neutrals need the white-literal remaps too, without them the
       // preview (docs baseline: neutral-50 bg) diverges from the export
       // (library baseline: white bg) for every tinted ramp.
       theme.applyThemeSettings({ cssVariables: unownedNeutralRemaps() }, { track: false })
@@ -229,7 +229,7 @@ export function useThemeStudio() {
    * The library hardcodes five tokens to `white` (light `--ui-bg` and
    * `--ui-text-inverted`; dark `--ui-text-highlighted`, `--ui-bg-inverted`
    * and `--ui-border-inverted`), so a tinted neutral ramp would never reach
-   * them. Choosing a neutral re-routes all five through the ramp — which is
+   * them. Choosing a neutral re-routes all five through the ramp, which is
    * also what makes the export reproduce the preview, since the docs
    * baseline already shows neutral-50 as the page background.
    */
@@ -256,14 +256,14 @@ export function useThemeStudio() {
     }
   }
 
-  /** The stops a ramp actually emits — its density when custom, else the standard 11. */
+  /** The stops a ramp actually emits, its density when custom, else the standard 11. */
   function rampStops(ramp?: string): readonly Shade[] {
     return ramp && isCustomPalette(ramp) ? SHADE_SETS[storedStopStep(paletteParams.value[ramp])] : SHADES
   }
 
   /**
    * A token shade pinned to an in-between stop only resolves while its ramp is
-   * a custom palette generating that stop — that's the only thing defining
+   * a custom palette generating that stop, that's the only thing defining
    * `--color-custom-<ramp>-<stop>`. When a ramp changes density, or is cleared
    * / switched to a stock colour, that variable disappears, so snap any
    * now-orphaned token to the nearest stop the ramp does emit rather than
@@ -309,7 +309,7 @@ export function useThemeStudio() {
       customColors: { [name]: generatePalette(applyPaletteEffects(base, effects, amount), step, pins) },
       ...(aliasAlreadySet ? {} : { [alias]: name }),
       // The remaps are var() references, not ramp colours, and are kept in
-      // sync with the shade sliders elsewhere — so they only need (re)sending
+      // sync with the shade sliders elsewhere, so they only need (re)sending
       // when this call first points the alias at the ramp, not every tick.
       ...(alias === 'neutral' && !aliasAlreadySet ? { cssVariables: unownedNeutralRemaps() } : {})
     }, { track: false })
@@ -325,13 +325,13 @@ export function useThemeStudio() {
     // Only writes when something actually moved, so the drag path is a no-op.
     sanitizeTokenShades()
 
-    // Live drags call this at ~16Hz — one analytics event per burst is plenty.
+    // Live drags call this at ~16Hz, one analytics event per burst is plenty.
     trackThrottled('Theme Custom Palette', { alias })
   }
 
   /**
    * Drop the custom ramp and its curve params. Callers (swatch selection)
-   * always set the alias right after, so no restore dance is needed — the
+   * always set the alias right after, so no restore dance is needed, the
    * default is just a safety net for a clear without a follow-up pick.
    */
   function clearCustomPalette(alias: ColorAlias) {
@@ -349,7 +349,7 @@ export function useThemeStudio() {
     const { [alias]: _, ...rest } = paletteParams.value
     setPaletteParams(rest)
 
-    // A stock ramp emits only the standard 11 — snap any token off the rest.
+    // A stock ramp emits only the standard 11, snap any token off the rest.
     sanitizeTokenShades()
   }
 
@@ -361,7 +361,7 @@ export function useThemeStudio() {
    */
   /**
    * The style axis a doc implies: its explicit style plus ramp-shaped token
-   * overrides promoted into tokenShades (canonicalTokenShades — shared with
+   * overrides promoted into tokenShades (canonicalTokenShades, shared with
    * the section dirty/reset comparisons, which depend on this promotion
    * being identical on both sides).
    */
@@ -375,7 +375,7 @@ export function useThemeStudio() {
 
   /** Replace the current theme with a document: reset, then apply overrides. */
   function applyDoc(doc: ThemeDoc) {
-    // immediate: false — this reset is followed by the doc's own styles in the
+    // immediate: false, this reset is followed by the doc's own styles in the
     // same call, so let the reactive tags swap atomically rather than clearing
     // to the default theme for a frame (a white flash between presets).
     theme.resetTheme({ track: false, immediate: false })
@@ -420,7 +420,7 @@ export function useThemeStudio() {
       }
     }
 
-    // Colored borders/shadows and app-wide variants are the loud rolls —
+    // Colored borders/shadows and app-wide variants are the loud rolls,
     // sprinkle them in rarely enough that most shuffles stay tasteful.
     if (doc.style!.border === 'custom' && Math.random() < 0.4) {
       doc.style!.borderColor = pick(['inverted', 'primary', 'neutral'] as const)
@@ -443,7 +443,7 @@ export function useThemeStudio() {
     }
 
     applyDoc(doc)
-    // applyDoc routes neutral through the plain setter — the shuffled
+    // applyDoc routes neutral through the plain setter, the shuffled
     // neutral needs the same white-literal remaps selectPalette applies,
     // or the preview diverges from the export for every tinted ramp.
     theme.applyThemeSettings({ cssVariables: unownedNeutralRemaps() }, { track: false })
@@ -452,7 +452,7 @@ export function useThemeStudio() {
     track('Theme Studio Shuffled')
   }
 
-  /** Palette-name chips coloring shade-slider swatches — each alias's current ramp. */
+  /** Palette-name chips coloring shade-slider swatches, each alias's current ramp. */
   const neutralChip = computed(() => theme.neutral.value === 'neutral' ? 'old-neutral' : theme.neutral.value)
   const primaryChip = computed(() => isCustomPalette('primary') ? 'custom-primary' : theme.primary.value)
 
@@ -488,17 +488,17 @@ export function useThemeStudio() {
   }
 
   function resetSection(key: SectionKey | SectionKey[]) {
-    // several slices splice in one pass — one applyDoc, so a multi-key fold
+    // several slices splice in one pass, one applyDoc, so a multi-key fold
     // costs one history entry rather than one per slice
     const keys = Array.isArray(key) ? key : [key]
-    // currentDoc embeds reactive slices — structuredClone chokes on Vue
+    // currentDoc embeds reactive slices, structuredClone chokes on Vue
     // proxies, so round-trip to plain JSON first (history does the same)
     const plain = JSON.parse(JSON.stringify(theme.currentDoc())) as ThemeDoc
-    // applyDoc resets everything first, which clears the persisted preset —
+    // applyDoc resets everything first, which clears the persisted preset,
     // but a section reset moves TOWARD the baseline; keep it
     const preserved = activePreset.value
     // applyDoc wipes the editor curves too, but a section reset only touches its
-    // own slice — restore curves for any alias whose custom ramp outlived it
+    // own slice, restore curves for any alias whose custom ramp outlived it
     // (a reset colour section drops to a stock name, so isCustomPalette filters
     // it out) or the editor would silently refit the untouched ramp.
     const preservedPp = JSON.parse(JSON.stringify(paletteParams.value)) as typeof paletteParams.value

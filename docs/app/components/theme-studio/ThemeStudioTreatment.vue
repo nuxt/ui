@@ -5,7 +5,7 @@ import type { DefaultSelectItem } from './ThemeStudioDefaultSelect.vue'
 
 /**
  * Shadow, inner shadow and borders are one shape: pick inherit / none /
- * custom, then tune. The knobs are the caller's — everything around them
+ * custom, then tune. The knobs are the caller's, everything around them
  * (the fold-out, the colour source and its shades) is the same every time.
  */
 defineProps<{
@@ -26,7 +26,7 @@ const { primaryChip, neutralChip } = useThemeStudio()
 
 const shadeEditor = ref(false)
 
-// Only a shade source rides a ramp — every other colour is a literal.
+// Only a shade source rides a ramp, every other colour is a literal.
 const onShade = computed(() => color.value === 'shade' || color.value === 'primary-shade')
 const chip = computed(() => (color.value === 'primary-shade' ? primaryChip.value : neutralChip.value))
 </script>
@@ -58,7 +58,7 @@ const chip = computed(() => (color.value === 'primary-shade' ? primaryChip.value
 
       <!-- Outside the knobs' gap: a closed fold is still a flex child, and its
            gap would hang off the bottom of the panel. The space above the rule
-           is the fold's own padding — a margin sits outside the animated box
+           is the fold's own padding, a margin sits outside the animated box
            and would pop in before the height caught up. -->
       <UCollapsible v-if="model === 'custom'" v-model:open="shadeEditor" :ui="{ content: 'overflow-hidden' }">
         <template #content>

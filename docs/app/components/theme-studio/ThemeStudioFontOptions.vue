@@ -6,7 +6,7 @@ const { fonts, font, fontPrefs, setFontPrefs } = useTheme()
 
 onMounted(() => loadFontPreviews(fonts))
 
-// One writable model per tailwind weight step — the knobs components
+// One writable model per tailwind weight step, the knobs components
 // actually dereference at runtime.
 function weightStepModel(step: keyof typeof FONT_WEIGHT_DEFAULTS) {
   return computed({
@@ -58,7 +58,7 @@ const headingLetterSpacing = computed({
   set: (value: number) => setHeading({ letterSpacing: value })
 })
 
-// Headings natively lead at ~1.25 (the specimen agrees) — 1.5 here would
+// Headings natively lead at ~1.25 (the specimen agrees), 1.5 here would
 // show a value the page isn't actually rendering.
 const headingLineHeight = computed({
   get: () => fontPrefs.value.heading?.lineHeight ?? 1.25,

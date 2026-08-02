@@ -76,7 +76,7 @@ describe('theme-engine', () => {
 
     it('restates library dark defaults for tokens overridden in light only', () => {
       // `:root, .light` matches html.dark too and lands after the library's
-      // `.dark` block — without a dark restatement the light value wins the
+      // `.dark` block, without a dark restatement the light value wins the
       // source-order tie and dark mode renders light.
       const css = generateCSS({
         version: 1,
@@ -214,7 +214,7 @@ describe('theme-engine', () => {
   })
 
   describe('palette colors', () => {
-    // Mirrors the SAFE_OKLCH write boundary in useTheme.ts — a shade that
+    // Mirrors the SAFE_OKLCH write boundary in useTheme.ts, a shade that
     // fails this would be silently dropped by sanitizeCustomColors.
     const CANONICAL_OKLCH = /^oklch\(\d{1,3}(?:\.\d+)?% \d(?:\.\d+)? \d{1,3}(?:\.\d+)?\)$/
 
@@ -234,7 +234,7 @@ describe('theme-engine', () => {
       for (const shade of SHADE_SETS[50]) {
         expect(fine[shade], `${shade}`).toMatch(CANONICAL_OKLCH)
       }
-      // The standard stops are byte-identical — enabling fine stops must not
+      // The standard stops are byte-identical, enabling fine stops must not
       // change any existing colour (positions are keyed by value, not index).
       for (const shade of SHADES) {
         expect(fine[shade], `${shade}`).toBe(standard[shade])
@@ -264,7 +264,7 @@ describe('theme-engine', () => {
       const fromHex = generatePalette(fitPalette(cocoaHex))
       const fromOklch = generatePalette(fitPalette(cocoaOklch))
 
-      // The fit is a numeric optimization — rounded oklch inputs may land a
+      // The fit is a numeric optimization, rounded oklch inputs may land a
       // hair off the full-precision hex fit, so compare channels, not strings.
       for (const shade of SHADES) {
         const a = parseColor(fromHex[shade])!
@@ -321,7 +321,7 @@ describe('theme-engine', () => {
 
     it('preset tokens all differ from the library defaults', () => {
       // A token equal to the default is dead weight the export ships anyway
-      // ("export only what you changed") — presets must not carry them.
+      // ("export only what you changed"), presets must not carry them.
       for (const preset of presets) {
         for (const mode of ['light', 'dark'] as const) {
           const defaults = LIBRARY_TOKEN_DEFAULTS[mode] as Record<string, string>
@@ -352,7 +352,7 @@ describe('styleComponents', () => {
     expect(inner.input!.compoundVariants).toContainEqual({ variant: 'none', class: 'inset-shadow-none' })
     expect(inner.card!.slots!.root).toContain('inset-shadow-(--ui-inner-shadow)')
 
-    // drop and inner coexist on one surface — separate tailwind groups
+    // drop and inner coexist on one surface, separate tailwind groups
     const both = styleComponents({ shadow: 'custom', innerShadow: 'custom' })
     expect(both.card!.slots!.root).toContain('shadow-lg')
     expect(both.card!.slots!.root).toContain('inset-shadow-(--ui-inner-shadow)')
@@ -368,7 +368,7 @@ describe('styleComponents', () => {
     const components = styleComponents({ shadow: 'custom', border: 'custom', frame: true })
 
     expect(components.button!.slots!.base).toContain('shadow-(--ui-shadow-press)')
-    // widths ride the default-width variables — no ring-N classes anywhere
+    // widths ride the default-width variables, no ring-N classes anywhere
     expect(components.button!.slots!.base).not.toContain('ring')
     expect(components.button!.compoundVariants).toContainEqual({ variant: 'solid', class: 'ring ring-inset ring-(--ui-border-accented)' })
     expect(components.card!.slots?.root ?? '').toContain('shadow-lg')
@@ -402,7 +402,7 @@ describe('styleComponents', () => {
 })
 
 describe('style colors', () => {
-  it('widths ride the default-width variables — only the frame toggle emits classes', async () => {
+  it('widths ride the default-width variables, only the frame toggle emits classes', async () => {
     const { styleComponents } = await import('../../docs/app/utils/theme-engine')
 
     // width alone produces class fragments ONLY for the ringless tabs list:
@@ -418,7 +418,7 @@ describe('style colors', () => {
     expect(framed.card!.compoundVariants).toContainEqual({ variant: 'soft', class: { root: 'ring ring-(--ui-border-accented)' } })
     expect(JSON.stringify(framed.button!.compoundVariants)).not.toContain('"ghost"')
     // …and the other solid surfaces: pill tabs, chat bubbles, switch track
-    // list only — an indicator ring inside the outlined list would double up
+    // list only, an indicator ring inside the outlined list would double up
     expect(framed.tabs!.compoundVariants).toContainEqual({ variant: 'pill', class: { list: 'ring ring-inset ring-(--ui-border-accented)' } })
     expect(framed.chatMessage!.compoundVariants).toContainEqual({ variant: 'solid', class: { content: 'ring ring-inset ring-(--ui-border-accented)' } })
     expect(framed.switch!.slots!.base).toBe('ring ring-inset ring-(--ui-border-accented)')
@@ -461,7 +461,7 @@ describe('style colors', () => {
     const { styleComponents } = await import('../../docs/app/utils/theme-engine')
     const components = styleComponents({ shadow: 'custom' })
 
-    // a floating shadow under an invisible box reads as a glitch — ghost/link
+    // a floating shadow under an invisible box reads as a glitch, ghost/link
     // buttons drop the shadow AND the press-effect translate
     expect(components.button!.compoundVariants).toContainEqual({ variant: 'ghost', class: 'shadow-none hover:translate-x-0 hover:translate-y-0 hover:shadow-none active:translate-x-0 active:translate-y-0' })
     expect(components.button!.compoundVariants).toContainEqual({ variant: 'link', class: 'shadow-none hover:translate-x-0 hover:translate-y-0 hover:shadow-none active:translate-x-0 active:translate-y-0' })
@@ -486,7 +486,7 @@ describe('style colors', () => {
     expect(custom.popover).toBeUndefined()
     expect(custom.toast).toBeUndefined()
     expect(custom.modal).toBeUndefined()
-    // slideover is edge-to-edge on mobile — the shadow is sm-scoped
+    // slideover is edge-to-edge on mobile, the shadow is sm-scoped
     expect(custom.slideover!.slots!.content).toBe('shadow-none sm:shadow-lg')
 
     // None strips the stock overlay shadows outright.
@@ -523,7 +523,7 @@ describe('style colors', () => {
       compounds.find(entry => entry.variant === variant && !!entry.color === colored)?.class as string | undefined
 
     // outline/subtle rings ARE the color signal (a subtle primary button
-    // keeps its primary border) — only neutral rings repaint
+    // keeps its primary border), only neutral rings repaint
     expect(classesFor('outline', true)).toContain('ring-(--ui-border-color)')
     expect(classesFor('subtle', true)).toContain('ring-(--ui-border-color)')
     expect(classesFor('outline', false)).toBeUndefined()
@@ -540,7 +540,7 @@ describe('style colors', () => {
     const solid = compounds.filter(entry => entry.variant === 'solid' && !entry.color)
     expect(solid).toHaveLength(1)
 
-    // the frame supplies the ring, the recolor overrides it — order wins the merge
+    // the frame supplies the ring, the recolor overrides it, order wins the merge
     const classes = solid[0]!.class as string
     expect(classes).toContain('ring ring-inset')
     expect(classes.indexOf('ring-(--ui-border-color)')).toBeGreaterThan(classes.indexOf('ring-(--ui-border-accented)'))
@@ -563,7 +563,7 @@ describe('style colors', () => {
       light: { '--ui-shadow-color': 'var(--ui-color-neutral-700)' },
       dark: { '--ui-shadow-color': 'var(--ui-color-neutral-300)' }
     })
-    // defaults apply when shades are unset — dark rests on stock literal black
+    // defaults apply when shades are unset, dark rests on stock literal black
     expect(styleTokens({ shadowColor: 'shade' }).dark['--ui-shadow-color']).toBe('black')
   })
 
@@ -661,7 +661,7 @@ describe('style colors', () => {
   it('component-specific variants apply only where supported', async () => {
     const { styleComponents } = await import('../../docs/app/utils/theme-engine')
 
-    // ghost/link exist on buttons but not badges — the group skips badges
+    // ghost/link exist on buttons but not badges, the group skips badges
     const ghost = styleComponents({ defaults: { variants: { buttons: 'ghost' } } })
     expect(ghost.button!.defaultVariants).toEqual({ variant: 'ghost' })
     expect(ghost.badge).toBeUndefined()
@@ -733,7 +733,7 @@ describe('style colors', () => {
     // every bare shadow-* utility (content images included), not just widgets.
     const custom = generateCSS({ version: 1, style: { shadow: 'custom' } })
     expect(custom).toMatch(/@theme \{[^}]*--shadow-lg: calc\(var\(--ui-shadow-offset-x\) \* 1\)/)
-    // alpha is the opacity slider read literally — no per-size scaling factor
+    // alpha is the opacity slider read literally, no per-size scaling factor
     expect(custom).toContain('color-mix(in oklab, var(--ui-shadow-color) var(--ui-shadow-opacity, 25%), transparent)')
     expect(custom).toContain('--shadow-2xl:')
     expect(custom).toContain('--shadow-2xs:')

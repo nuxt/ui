@@ -114,7 +114,7 @@ const vReveal = {
     }, { threshold: 0.3 })
     el._reveal.observe(el)
   },
-  // below-the-fold elements never intersect when the user switches views —
+  // below-the-fold elements never intersect when the user switches views,
   // without this their observers outlive the DOM
   unmounted(el: HTMLElement & { _reveal?: IntersectionObserver }) {
     el._reveal?.disconnect()
@@ -159,7 +159,7 @@ const vReveal = {
       <template #headline>
         <div class="landing-enter" style="animation-delay: 200ms">
           <UBadge
-            label="v2.0 — Now with predictive alerting"
+            label="v2.0, Now with predictive alerting"
             color="neutral"
             variant="soft"
             class="rounded-full px-3 py-1.5 gap-1.5 bg-inverted/5 backdrop-blur"
@@ -361,7 +361,7 @@ const vReveal = {
 </template>
 
 <style scoped>
-/* Pixelated plasma backdrop — CSS stand-in for the template's HeroShaders (Plasma + Pixelate). */
+/* Pixelated plasma backdrop, CSS stand-in for the template's HeroShaders (Plasma + Pixelate). */
 .landing-pixels {
   pointer-events: none;
   background-image:
@@ -385,7 +385,7 @@ const vReveal = {
   }
 }
 
-/* Radial primary glow — port of the template's GradientGlow component. */
+/* Radial primary glow, port of the template's GradientGlow component. */
 .landing-glow {
   pointer-events: none;
   background: radial-gradient(ellipse at center, color-mix(in oklch, var(--ui-primary) 6%, transparent) 0%, transparent 70%);
@@ -411,7 +411,7 @@ const vReveal = {
   }
 }
 
-/* Glowing primary buttons — port of the template's app.config button compoundVariant. */
+/* Glowing primary buttons, port of the template's app.config button compoundVariant. */
 .landing-btn-glow {
   box-shadow: 0 0 20px color-mix(in oklch, var(--ui-primary) 25%, transparent);
   transition: all 0.2s;
@@ -426,7 +426,7 @@ const vReveal = {
   transform: translateY(0);
 }
 
-/* Hero entrance — port of the template's enter motion (fade + rise, staggered). */
+/* Hero entrance, port of the template's enter motion (fade + rise, staggered). */
 .landing-enter {
   /* backwards, not both: a retained transform (even identity) would form a
      backdrop root and blind children's backdrop-blur after the entrance */
@@ -460,7 +460,7 @@ const vReveal = {
   }
 }
 
-/* Scroll reveal — classes applied by the v-reveal directive. */
+/* Scroll reveal, classes applied by the v-reveal directive. */
 .landing-reveal {
   opacity: 0;
   transform: translateY(16px);

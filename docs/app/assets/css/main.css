@@ -11,7 +11,7 @@
   --default-border-width: var(--studio-border-width, 1px);
   --default-ring-width: var(--studio-border-width, 1px);
 
-  /* each fallback is the Tailwind-native value — Inherit stays untouched;
+  /* each fallback is the Tailwind-native value, Inherit stays untouched;
      --ui-shadow-c-* only exist under .shadow-custom / .shadow-none */
   --shadow-2xs: var(--ui-shadow-c-2xs, 0 1px rgb(0 0 0 / 0.05));
   --shadow-xs: var(--ui-shadow-c-xs, 0 1px 2px 0 rgb(0 0 0 / 0.05));
@@ -87,7 +87,7 @@ html.dark .shiki span {
   /* alpha is uniform across sizes so the opacity slider reads true (100% =
      solid everywhere); size is expressed through geometry only */
   --ui-shadow-alpha: var(--ui-shadow-opacity, 25%);
-  /* per-size geometry scale — lg is the config's 1× reference */
+  /* per-size geometry scale, lg is the config's 1× reference */
   --ui-shadow-s-2xs: 0.15;
   --ui-shadow-s-xs: 0.25;
   --ui-shadow-s-sm: 0.4;
@@ -96,7 +96,7 @@ html.dark .shiki span {
   --ui-shadow-s-xl: 1.5;
   --ui-shadow-s-2xl: 2.2;
   /* press-effect shadows (rest 1×, hover ½×) as vars so tailwind-merge can
-     dedupe shadow-(--var) — it can't parse a shadow-[calc(...)] value */
+     dedupe shadow-(--var), it can't parse a shadow-[calc(...)] value */
   --ui-shadow-press: var(--ui-shadow-offset-x) var(--ui-shadow-offset-y) var(--ui-shadow-blur) var(--ui-shadow-spread) var(--ui-shadow-press-color);
   --ui-shadow-press-half: calc(var(--ui-shadow-offset-x) / 2) calc(var(--ui-shadow-offset-y) / 2) var(--ui-shadow-blur) var(--ui-shadow-spread) var(--ui-shadow-press-color);
   /* inner-shadow defaults; shares --ui-shadow-color, gentler opacity fallback */

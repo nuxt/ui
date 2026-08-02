@@ -8,7 +8,7 @@ export interface ThemePreset {
   doc: ThemeDoc
 }
 
-/** The stock preset — what an untouched theme already is. */
+/** The stock preset, what an untouched theme already is. */
 export const DEFAULT_PRESET_ID = 'nuxt-ui'
 
 /**
@@ -19,7 +19,7 @@ export const DEFAULT_PRESET_ID = 'nuxt-ui'
 export const presets: ThemePreset[] = [{
   id: 'nuxt-ui',
   name: 'Default',
-  description: 'The stock theme — everything inherited.',
+  description: 'The stock theme, everything inherited.',
   icon: 'i-simple-icons-nuxt',
   doc: {
     version: 1
@@ -48,7 +48,7 @@ export const presets: ThemePreset[] = [{
 }, {
   id: 'neo-brutalist',
   name: 'Neo-brutalist',
-  description: 'Amber on a warm carbon neutral — everything framed in ink, dropped hard shadows.',
+  description: 'Amber on a warm carbon neutral, everything framed in ink, dropped hard shadows.',
   icon: 'i-lucide-zap',
   doc: {
     version: 1,
@@ -109,11 +109,11 @@ export const presets: ThemePreset[] = [{
 }, {
   id: 'orchard',
   name: 'Orchard',
-  description: 'Orange on deep sage greens — subtle surfaces, hard shadows dropped below and inset above.',
+  description: 'Orange on deep sage greens, subtle surfaces, hard shadows dropped below and inset above.',
   icon: 'i-lucide-citrus',
   doc: {
     version: 1,
-    // Green-tinted neutral whose light end starts far below white — the
+    // Green-tinted neutral whose light end starts far below white, the
     // whole page sits on foliage.
     palettes: {
       grove: {
@@ -147,7 +147,7 @@ export const presets: ThemePreset[] = [{
         '--ui-text-highlighted': 'var(--ui-color-neutral-50)'
       }
     },
-    // Drop shadow below plus a bottom-lit hard INSET above — pressed clay.
+    // Drop shadow below plus a bottom-lit hard INSET above, pressed clay.
     style: {
       shadow: 'custom',
       shadowColor: 'shade',
@@ -180,7 +180,7 @@ export const presets: ThemePreset[] = [{
   icon: 'i-lucide-candy',
   doc: {
     version: 1,
-    // Sculpted pink-mauve neutral — chroma peaks mid-ramp.
+    // Sculpted pink-mauve neutral, chroma peaks mid-ramp.
     palettes: {
       'saturated-mauve': {
         shades: {
@@ -251,7 +251,7 @@ export const presets: ThemePreset[] = [{
   icon: 'i-mdi-space-invaders',
   doc: {
     version: 1,
-    // Teal-washed neutral: the light end never reaches white — a dim LCD
+    // Teal-washed neutral: the light end never reaches white, a dim LCD
     // panel instead of paper.
     palettes: {
       crt: {
@@ -318,7 +318,7 @@ export const presets: ThemePreset[] = [{
   doc: {
     version: 1,
     palettes: {
-      // Anchored on the real brand clay — hsl(14.8 63.1% 59.6%) — at 500.
+      // Anchored on the real brand clay, hsl(14.8 63.1% 59.6%), at 500.
       clay: {
         shades: {
           50: 'oklch(97.4% 0.009 48.308)',
@@ -334,7 +334,7 @@ export const presets: ThemePreset[] = [{
           950: 'oklch(25.9% 0.054 38.197)'
         }
       },
-      // Their real --_gray-* stops mapped onto the tailwind ladder — the 50
+      // Their real --_gray-* stops mapped onto the tailwind ladder, the 50
       // IS the signature cream background.
       parchment: {
         shades: {
@@ -453,7 +453,7 @@ export const presets: ThemePreset[] = [{
 }, {
   id: 'bootstrap',
   name: 'Bootstrap',
-  description: 'The Bootstrap 5 look — its blue, its grays, .375rem corners, flat bordered surfaces.',
+  description: 'The Bootstrap 5 look, its blue, its grays, .375rem corners, flat bordered surfaces.',
   icon: 'i-simple-icons-bootstrap',
   doc: {
     version: 1,

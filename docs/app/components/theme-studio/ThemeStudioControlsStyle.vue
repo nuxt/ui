@@ -6,7 +6,7 @@ const { style, setStyle, baselineDoc } = useThemeStudio()
 
 const { radius, fontSize, spacing } = useTheme()
 
-// MD is the stock default — one deduped entry storing 'default'
+// MD is the stock default, one deduped entry storing 'default'
 const defaultSizeItems = [
   { label: 'XS', value: 'xs' },
   { label: 'SM', value: 'sm' },
@@ -16,7 +16,7 @@ const defaultSizeItems = [
 ]
 
 const defaultSize = computed({
-  // legacy saved prefs may still pin 'md' explicitly — it IS the default
+  // legacy saved prefs may still pin 'md' explicitly, it IS the default
   get: () => {
     const size = style.value.defaults?.size || 'default'
     return size === 'md' ? 'default' : size
@@ -91,19 +91,17 @@ const borderWidth = computed({
   set: (value: number) => setStyle({ borderWidth: value })
 })
 
-// Outline solid/soft surfaces too — the neobrutalist frame look.
+// Outline solid/soft surfaces too, the neobrutalist frame look.
 const frameSolids = computed({
   get: () => !!style.value.frame,
   set: (value: boolean) => setStyle({ frame: value })
 })
 
-// Default recolors nothing — every ring keeps its own per-element color —
+// Default recolors nothing, every ring keeps its own per-element color,
 // so it reads "Per element" rather than pretending to be a paint choice.
 const borderColorItems = [
   { label: 'Per element', value: 'default', defaultTag: true },
   { label: 'Inverted', value: 'inverted' },
-  { label: 'Primary', value: 'primary' },
-  { label: 'Neutral', value: 'neutral' },
   { label: 'Neutral shade', value: 'shade' },
   { label: 'Primary shade', value: 'primary-shade' }
 ]
@@ -113,16 +111,14 @@ const borderColorItems = [
 const shadowColorItems = [
   { label: 'Neutral shade', value: 'shade', defaultTag: true },
   { label: 'Inverted', value: 'inverted' },
-  { label: 'Primary', value: 'primary' },
   { label: 'Primary shade', value: 'primary-shade' }
 ]
 
-// The inner shadow's default is a live link — inherit whatever
-// --ui-shadow-color currently resolves to — not a pinnable shade.
+// The inner shadow's default is a live link, inherit whatever
+// --ui-shadow-color currently resolves to, not a pinnable shade.
 const innerShadowColorItems = [
   { label: 'Inherit shadow', value: 'default', defaultTag: true },
   { label: 'Inverted', value: 'inverted' },
-  { label: 'Primary', value: 'primary' },
   { label: 'Neutral shade', value: 'shade' },
   { label: 'Primary shade', value: 'primary-shade' }
 ]
@@ -131,7 +127,7 @@ const innerShadowColorItems = [
 // BASELINE preset's choice: reset restores it, or deletes the entry.
 function shadeControl(field: 'shadowShade' | 'innerShadowShade' | 'borderShade', defaults: { light: ShadeStop, dark: ShadeStop }, target: 'light' | 'dark') {
   const model = computed({
-    // per-key fallback: an imported doc can carry a single-mode shade object —
+    // per-key fallback: an imported doc can carry a single-mode shade object,
     // indexOf(undefined) would park the slider at -1
     get: () => SHADE_LADDER.indexOf((style.value[field]?.[target] ?? defaults[target]) as typeof SHADE_LADDER[number]),
     set: (index: number) => {
@@ -196,7 +192,7 @@ const shadowColor = computed({
 })
 
 // The press choreography (buttons sinking onto their shadow) rides the
-// shadow offset — optional, so soft blurred configs can keep buttons still.
+// shadow offset, optional, so soft blurred configs can keep buttons still.
 const shadowPress = computed({
   get: () => style.value.shadowPress !== false,
   set: (value: boolean) => setStyle({ shadowPress: value ? undefined : false })

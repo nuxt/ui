@@ -1,6 +1,6 @@
 /**
  * The theme system's cross-file identifiers, in one place. Only names
- * referenced from MORE than one module live here — single-file keys stay
+ * referenced from MORE than one module live here, single-file keys stay
  * local, where their context is.
  */
 

@@ -3,7 +3,7 @@ import { isDefaultStyle } from './styles'
 export const SHADES = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950] as const
 
 /**
- * Every stop any density can emit — a stop stays a valid `Shade` whichever
+ * Every stop any density can emit, a stop stays a valid `Shade` whichever
  * density produced it.
  */
 export const SHADES_ALL = [50, 60, 70, 75, 80, 90, 100, 110, 120, 125, 130, 140, 150, 160, 170, 175, 180, 190, 200, 210, 220, 225, 230, 240, 250, 260, 270, 275, 280, 290, 300, 310, 320, 325, 330, 340, 350, 360, 370, 375, 380, 390, 400, 410, 420, 425, 430, 440, 450, 460, 470, 475, 480, 490, 500, 510, 520, 525, 530, 540, 550, 560, 570, 575, 580, 590, 600, 610, 620, 625, 630, 640, 650, 660, 670, 675, 680, 690, 700, 710, 720, 725, 730, 740, 750, 760, 770, 775, 780, 790, 800, 810, 820, 825, 830, 840, 850, 860, 870, 875, 880, 890, 900, 910, 920, 925, 930, 940, 950] as const
@@ -17,7 +17,7 @@ export type ShadeStep = typeof SHADE_STEPS[number]
 
 /** The stops each density emits: 11, 19, 37 and 91. */
 export const SHADE_SETS: Record<ShadeStep, readonly Shade[]> = {
-  // 100 is the only irregular set — 50/950 are half-steps at the ends.
+  // 100 is the only irregular set, 50/950 are half-steps at the ends.
   100: SHADES,
   50: SHADES_ALL.filter(shade => shade % 50 === 0),
   25: SHADES_ALL.filter(shade => shade % 25 === 0),
@@ -28,7 +28,7 @@ export type ShadeStop = 'white' | Shade | 'black'
 
 /**
  * The shade sliders' travel: a density's stops plus literal white/black ends
- * — several stock defaults are literals the ramp can't express (--ui-bg is
+ *, several stock defaults are literals the ramp can't express (--ui-bg is
  * `white`).
  */
 const ladder = (step: ShadeStep): readonly ShadeStop[] => ['white', ...SHADE_SETS[step], 'black']
@@ -40,7 +40,7 @@ export const SHADE_LADDERS: Record<ShadeStep, readonly ShadeStop[]> = {
   10: ladder(10)
 }
 
-/** The standard ladder — what stock ramps (and plain rows) travel. */
+/** The standard ladder, what stock ramps (and plain rows) travel. */
 export const SHADE_LADDER = SHADE_LADDERS[100]
 
 export type ColorAlias = 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'error' | 'neutral'
@@ -50,25 +50,25 @@ export interface ThemePalette {
 }
 
 /**
- * A theme is a sparse document — only explicit overrides, everything absent
- * inherits Nuxt UI defaults — so serializing it *is* the minimal export.
+ * A theme is a sparse document, only explicit overrides, everything absent
+ * inherits Nuxt UI defaults, so serializing it *is* the minimal export.
  */
 export interface ThemeDoc {
   version: 1
-  /** L0 — custom palettes, injected as `--color-{name}-{shade}` */
+  /** L0, custom palettes, injected as `--color-{name}-{shade}` */
   palettes?: Record<string, ThemePalette>
-  /** L1 — alias → palette name (tailwind or a key of `palettes`) */
+  /** L1, alias → palette name (tailwind or a key of `palettes`) */
   colors?: Partial<Record<ColorAlias, string>>
   blackAsPrimary?: boolean
-  /** L2 — semantic `--ui-*` token overrides per mode */
+  /** L2, semantic `--ui-*` token overrides per mode */
   tokens?: {
     light?: Record<string, string>
     dark?: Record<string, string>
   }
   radius?: number
-  /** Root font size in px (`html { font-size }`) — scales every rem-based metric */
+  /** Root font size in px (`html { font-size }`), scales every rem-based metric */
   fontSize?: number
-  /** Tailwind v4 `--spacing` base unit in rem — the density knob behind all spacing utilities */
+  /** Tailwind v4 `--spacing` base unit in rem, the density knob behind all spacing utilities */
   spacing?: number
   font?: {
     sans?: string
@@ -97,7 +97,7 @@ export interface ThemeDoc {
   icons?: string
   /** Shadow/border treatment, expanded into per-component overrides (no semantic tokens in core yet). */
   style?: import('./styles').StyleOptions
-  /** L4 — per-component overrides merged into `app.config ui.<component>` */
+  /** L4, per-component overrides merged into `app.config ui.<component>` */
   components?: Record<string, Record<string, unknown>>
 }
 

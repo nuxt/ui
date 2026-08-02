@@ -3,10 +3,10 @@ import { mountSuspended } from '@nuxt/test-utils/runtime'
 import Button from '../../src/runtime/components/Button.vue'
 
 // Where does a Button's render cost come from? Three rungs isolate it:
-//   1. plain <button>         — baseline DOM/reactivity cost of a trivial element
-//   2. UButton (no link)      — adds the Button + ULink component stack (ULink
+//   1. plain <button>        , baseline DOM/reactivity cost of a trivial element
+//   2. UButton (no link)     , adds the Button + ULink component stack (ULink
 //                               renders a plain <button> when there's no `to`)
-//   3. UButton (link, `to`)   — adds the router-link path (route resolution, RouterLink)
+//   3. UButton (link, `to`)  , adds the router-link path (route resolution, RouterLink)
 // (2) − (1) = the Nuxt UI component-stack overhead; (3) − (2) = the routing overhead.
 
 // Declares `loading` so the re-render benches can toggle a prop on it too.

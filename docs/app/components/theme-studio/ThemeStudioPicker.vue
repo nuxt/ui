@@ -13,7 +13,7 @@ const { hasCSSChanges, hasConfigChanges, resetTheme } = useTheme()
 const open = ref(false)
 const shareOpen = ref(false)
 
-// The persisted theme is client-only — gate the dirty-driven affordances on
+// The persisted theme is client-only, gate the dirty-driven affordances on
 // mount so hydration doesn't adopt a disabled= that never lifts.
 const mounted = ref(false)
 onMounted(() => (mounted.value = true))
@@ -35,7 +35,7 @@ const presetTiles = computed(() => presets.map(preset => ({
   themeChip: themeChipStyle(preset.doc)
 })))
 
-// the applied preset is client-only — no selection until mount, or hydration
+// the applied preset is client-only, no selection until mount, or hydration
 // would adopt a checked row the server never rendered
 const selected = computed({
   get: () => (mounted.value ? selectedPreset.value : undefined),
@@ -82,9 +82,8 @@ function openExport() {
                 :icon="studioIcons.reset"
                 size="xs"
                 color="neutral"
-                variant="ghost"
+                variant="outline"
                 :active="dirty"
-                active-variant="outline"
                 :disabled="!dirty"
                 aria-label="Reset theme"
                 @click="resetTheme()"
@@ -103,7 +102,7 @@ function openExport() {
             root: 'ring-0',
             content: 'max-h-none',
             group: 'p-0 grid grid-cols-3',
-            item: 'flex-col rounded-lg data-[state=checked]:bg-elevated/50',
+            item: 'flex-col rounded-lg before:rounded-lg data-[state=checked]:before:bg-elevated/50',
             itemWrapper: 'min-w-0 w-full text-center',
             itemLabel: 'w-full truncate text-xs',
             itemTrailing: 'hidden'

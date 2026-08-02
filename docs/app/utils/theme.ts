@@ -11,15 +11,15 @@ export function readLocalStorage<T>(key: string, fallback: T): T {
   }
 }
 
-/** Uppercase the first letter — labels from config values. */
+/** Uppercase the first letter, labels from config values. */
 export function capitalize(value: string) {
   return value.charAt(0).toUpperCase() + value.slice(1)
 }
 
-/** Tailwind's stock weight ladder — set steps are absences at these values. */
+/** Tailwind's stock weight ladder, set steps are absences at these values. */
 export const FONT_WEIGHT_DEFAULTS = { normal: 400, medium: 500, semibold: 600, bold: 700 } as const
 
-// Families whose preview faces are already requested — Public Sans is
+// Families whose preview faces are already requested, Public Sans is
 // bundled. Module-level so the controls, the preset menu and every search
 // batch share one ledger and no family is fetched twice.
 const loadedFontPreviews = new Set<string>(['Public Sans'])
@@ -27,7 +27,7 @@ const loadedFontPreviews = new Set<string>(['Public Sans'])
 /**
  * Load the listed families (Google Fonts, 400/700 only) so pickers can
  * render themselves in the faces they offer. Incremental: each call adds
- * one stylesheet covering only the families not yet requested — the font
+ * one stylesheet covering only the families not yet requested, the font
  * search feeds result batches through here as the user types.
  */
 export function loadFontPreviews(fonts: readonly string[]) {
@@ -52,7 +52,7 @@ export function keepPanels(event: Event) {
 }
 
 // Picking a set replaces appConfig.ui.icons wholesale, so every set must
-// map the full key list from src/theme/icons — a missing key would blank
+// map the full key list from src/theme/icons, a missing key would blank
 // that icon across the whole app. Names are validated against the Iconify
 // API (sets beyond lucide resolve through @nuxt/icon's API fallback).
 export const themeIcons = {
@@ -172,7 +172,7 @@ export const themeIcons = {
     eyeOff: 'i-iconoir-eye-closed',
     file: 'i-iconoir-page',
     folder: 'i-iconoir-folder',
-    // iconoir has no open-folder glyph — repeat the closed folder rather
+    // iconoir has no open-folder glyph, repeat the closed folder rather
     // than show a book on expanded tree nodes
     folderOpen: 'i-iconoir-folder',
     hash: 'i-iconoir-hashtag',
@@ -378,7 +378,7 @@ export const themeIcons = {
   },
   // 8-bit pixel-art set for the Comic preset. Pixelarticons is a functional
   // UI pack (unlike streamline-pixel, which has no arrows/chevrons), but it
-  // still lacks a few glyphs — noted inline where a substitute stands in.
+  // still lacks a few glyphs, noted inline where a substitute stands in.
   pixelarticons: {
     arrowDown: 'i-pixelarticons-arrow-down',
     arrowLeft: 'i-pixelarticons-arrow-left',
@@ -386,7 +386,7 @@ export const themeIcons = {
     arrowUp: 'i-pixelarticons-arrow-up',
     caution: 'i-pixelarticons-square-alert',
     check: 'i-pixelarticons-check',
-    // No double-chevron glyph — single directional chevrons keep prev/next
+    // No double-chevron glyph, single directional chevrons keep prev/next
     // (pagination first/last, calendar year nav) pointing the right way.
     chevronDoubleLeft: 'i-pixelarticons-chevron-left',
     chevronDoubleRight: 'i-pixelarticons-chevron-right',
@@ -398,7 +398,7 @@ export const themeIcons = {
     copy: 'i-pixelarticons-clipboard',
     copyCheck: 'i-pixelarticons-clipboard-note',
     dark: 'i-pixelarticons-moon',
-    // No grip/drag handle — vertical dots read as a draggable affordance.
+    // No grip/drag handle, vertical dots read as a draggable affordance.
     drag: 'i-pixelarticons-more-vertical',
     ellipsis: 'i-pixelarticons-more-horizontal',
     error: 'i-pixelarticons-letter-x-circle',
@@ -406,7 +406,7 @@ export const themeIcons = {
     eye: 'i-pixelarticons-eye',
     eyeOff: 'i-pixelarticons-eye-off',
     file: 'i-pixelarticons-file',
-    // No open-folder glyph — repeat the closed folder (as iconoir does).
+    // No open-folder glyph, repeat the closed folder (as iconoir does).
     folder: 'i-pixelarticons-folder',
     folderOpen: 'i-pixelarticons-folder',
     hash: 'i-pixelarticons-hash',
@@ -420,7 +420,7 @@ export const themeIcons = {
     plus: 'i-pixelarticons-plus',
     reload: 'i-pixelarticons-reload',
     search: 'i-pixelarticons-search',
-    // No dedicated stop glyph — a filled square is the universal stop mark.
+    // No dedicated stop glyph, a filled square is the universal stop mark.
     stop: 'i-pixelarticons-square',
     star: 'i-pixelarticons-star',
     success: 'i-pixelarticons-check',
@@ -433,13 +433,13 @@ export const themeIcons = {
 
 export type ThemeIcons = keyof typeof themeIcons
 
-/** Palette names are ids — hyphens are word breaks, not part of the name. */
+/** Palette names are ids, hyphens are word breaks, not part of the name. */
 export function paletteLabel(name: string): string {
   return name.replace(/-/g, ' ')
 }
 
 /**
- * A short strip of a set's own glyphs, for previewing it in a picker row —
+ * A short strip of a set's own glyphs, for previewing it in a picker row,
  * these eight differ enough between packs to tell them apart at a glance.
  */
 export function iconSetSamples(setName: string): string[] {
@@ -454,7 +454,7 @@ export function iconSetSamples(setName: string): string[] {
  * button, the theme-picker/preset button), per icon pack, so the chrome skins
  * to match the applied theme. Kept OUT of `themeIcons` on purpose: these are
  * studio-only and must never ride the export's icon config. `reset` is its own
- * circular-arrow glyph rather than reusing the `reload` semantic key — in
+ * circular-arrow glyph rather than reusing the `reload` semantic key, in
  * several packs `reload` is a back-arrow that would collide with `undo`.
  * Import and the group-picker chevron reuse the standard `upload`/`chevronDown`
  * keys (present in every pack), so they aren't repeated here.
@@ -490,7 +490,7 @@ export const studioIcons: Record<ThemeIcons, {
 
 /**
  * Functional icons the preview demos use beyond the 43 semantic keys (dashboard
- * nav, account menus, etc.). These are NOT part of any theme — they only skin
+ * nav, account menus, etc.). These are NOT part of any theme, they only skin
  * the studio's demo content to the applied pack, so they stay out of themeIcons
  * (and exports). The Lucide names ARE the defaults each demo already hardcodes;
  * `studioExtraOverrides` supplies a pack's glyph where it differs, falling back
@@ -602,7 +602,7 @@ export const studioExtraOverrides: Partial<Record<ThemeIcons, Partial<Record<key
     zap: 'i-pixelarticons-zap',
     package: 'i-pixelarticons-package',
     pin: 'i-pixelarticons-pin',
-    // Pixel has no palette glyph — colors-swatch stands in.
+    // Pixel has no palette glyph, colors-swatch stands in.
     palette: 'i-pixelarticons-colors-swatch',
     paintBucket: 'i-pixelarticons-paint-bucket',
     mic: 'i-pixelarticons-mic',

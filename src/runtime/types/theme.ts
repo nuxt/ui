@@ -131,7 +131,7 @@ export interface ThemeDefaults {
    * (mirrors `app.config.ui.prose` and `useComponentProps('prose.<tag>', …)`).
    * Set prop defaults per element to scope behavior for a subtree, e.g.
    * `{ prose: { h2: { anchor: true }, img: { zoom: false } } }`. Class-only
-   * elements (`p`, `li`, `table`, `em`, …) are omitted — restyle them via `:ui`.
+   * elements (`p`, `li`, `table`, `em`, …) are omitted, restyle them via `:ui`.
    */
   prose?: {
     a?: Partial<ComponentTypes.ProseAProps>

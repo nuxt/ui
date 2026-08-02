@@ -4,7 +4,7 @@ import { blendColors, contrastRatio } from '../../utils/theme-engine'
 
 /**
  * WCAG contrast matrix for the current theme, read from the live computed
- * custom properties — the resolved ground truth.
+ * custom properties, the resolved ground truth.
  */
 const FOREGROUNDS = [
   { token: '--ui-text-highlighted', label: 'Highlighted' },
@@ -76,7 +76,7 @@ function compute() {
   })
 
   const page = resolveToken(styles, '--ui-bg')
-  // Alpha of a token over the page background — `bg-primary/10` as a pixel.
+  // Alpha of a token over the page background, `bg-primary/10` as a pixel.
   const tint = (token: string, alpha: number) => blendColors(resolveToken(styles, token), page, alpha) ?? ''
 
   variantMatrix.value = VARIANT_COLORS.map(({ key }) => {
@@ -122,21 +122,21 @@ function neutralSpecs(styles: CSSStyleDeclaration, page: string, inverted: strin
   ]
 }
 
-// The theme applies through <style> tags useHead swaps asynchronously —
+// The theme applies through <style> tags useHead swaps asynchronously,
 // recompute a beat after any state that feeds them changes.
 const colorMode = useColorMode()
 const appConfig = useAppConfig()
-// the owning composable's refs — never re-seed these channels here
+// the owning composable's refs, never re-seed these channels here
 const { cssVariablesData, customColorsData } = useTheme()
 
 // useHead swaps the style tags asynchronously: wait a tick for the vnodes,
 // then two frames so the new sheets are applied before reading computed
-// styles — deterministic, unlike a wall-clock delay.
+// styles, deterministic, unlike a wall-clock delay.
 let pending = 0
 let queued = false
 function scheduleCompute() {
   cancelAnimationFrame(pending)
-  // one queued tick at a time — curve drags would otherwise stack nextTick
+  // one queued tick at a time, curve drags would otherwise stack nextTick
   // callbacks, each spawning its own rAF chain
   if (queued) return
   queued = true
@@ -154,7 +154,7 @@ onMounted(compute)
 onUnmounted(() => cancelAnimationFrame(pending))
 
 function level(ratio: number | null): { label: string, color: 'success' | 'warning' | 'error' | 'neutral' } {
-  // Unparseable color — signal unknown rather than a fabricated pass/fail.
+  // Unparseable color, signal unknown rather than a fabricated pass/fail.
   if (ratio === null) return { label: 'Unknown', color: 'neutral' }
   if (ratio >= 7) return { label: 'AAA', color: 'success' }
   if (ratio >= 4.5) return { label: 'AA', color: 'success' }
@@ -164,7 +164,7 @@ function level(ratio: number | null): { label: string, color: 'success' | 'warni
 
 /** Ratio display: numeric to 1 decimal, or an em dash when unmeasurable. */
 function formatRatio(ratio: number | null): string {
-  return ratio === null ? '—' : ratio.toFixed(1)
+  return ratio === null ? '-' : ratio.toFixed(1)
 }
 </script>
 
@@ -247,7 +247,7 @@ function formatRatio(ratio: number | null): string {
           Button &amp; badge variants
         </h2>
         <p class="text-xs text-muted mb-4">
-          Every color × variant as it paints on the page background — tinted variants are measured against the
+          Every color × variant as it paints on the page background, tinted variants are measured against the
           composited pixel, not the raw alias.
         </p>
 

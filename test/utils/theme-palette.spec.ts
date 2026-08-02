@@ -68,7 +68,7 @@ describe('oklch', () => {
   })
 
   it('treats unparseable input as undefined instead of throwing', () => {
-    // Ramp lookups feed raw values in — a missing tailwind midpoint or unset
+    // Ramp lookups feed raw values in, a missing tailwind midpoint or unset
     // CSS var is undefined, and must degrade to undefined, never throw.
     expect(() => parseColor(undefined as unknown as string)).not.toThrow()
     expect(parseColor(undefined as unknown as string)).toBeUndefined()
@@ -77,7 +77,7 @@ describe('oklch', () => {
   })
 
   it('reads the none keyword as 0', () => {
-    // CSS Color 4 missing components — tailwind ≥4.3.3 emits them for
+    // CSS Color 4 missing components, tailwind ≥4.3.3 emits them for
     // achromatic stops (zinc-50 is `oklch(98.5% 0 none)`).
     expect(parseColor('oklch(98.5% 0 none)')).toEqual({ l: 0.985, c: 0, h: 0 })
     expect(parseColor('oklch(50% none none)')).toEqual({ l: 0.5, c: 0, h: 0 })
@@ -151,11 +151,11 @@ describe('generatePalette', () => {
     expect(palette[500]).toBe(formatOklch(clampToGamut(target)))
   })
 
-  it('keeps a pin local — the far end barely moves', () => {
+  it('keeps a pin local, the far end barely moves', () => {
     const target = parseColor('oklch(75.42% 0.1077 118.763)')!
     const bare = generatePalette(CURVE_DEFAULTS)
     const pinned = generatePalette(CURVE_DEFAULTS, 100, [{ shade: 500, ...target }])
-    // 50 is ~0.5 in x away from the pin — the Gaussian has decayed to nearly nothing.
+    // 50 is ~0.5 in x away from the pin, the Gaussian has decayed to nearly nothing.
     expect(parseColor(pinned[50])!.l).toBeCloseTo(parseColor(bare[50])!.l, 2)
   })
 
@@ -224,7 +224,7 @@ describe('fitPalette (work backwards from real palettes)', () => {
       const want = parseColor(original[shade])!
       const got = parseColor(regenerated[shade])!
 
-      // A single cubic can't hit every tailwind stop exactly — ~0.045 L is
+      // A single cubic can't hit every tailwind stop exactly, ~0.045 L is
       // the model floor (worst case rose-900), well under a visible step.
       expect(Math.abs(got.l - want.l), `${name}-${shade} lightness`).toBeLessThan(0.045)
       expect(Math.abs(got.c - want.c), `${name}-${shade} chroma`).toBeLessThan(0.045)
@@ -232,7 +232,7 @@ describe('fitPalette (work backwards from real palettes)', () => {
   })
 
   it('handles the hue wheel seam', () => {
-    // rose/red hues sit near 0/360 — fitting must not zigzag across the seam
+    // rose/red hues sit near 0/360, fitting must not zigzag across the seam
     const params = fitPalette(tailwindShades('rose'))
     const sampled = SHADES.map((_, i) => sampleCurve(i / 10, params.hue))
 

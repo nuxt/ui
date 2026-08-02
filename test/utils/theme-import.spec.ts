@@ -10,7 +10,7 @@ import {
 import type { ThemeDoc } from '../../docs/app/utils/theme-engine'
 
 /**
- * The merged per-mode variable maps a doc produces — the semantic ground
+ * The merged per-mode variable maps a doc produces, the semantic ground
  * truth for CSS round-trips. Import may move a var between the style axis
  * and plain tokens (both render identically), so docs are compared here,
  * not field-by-field.
@@ -39,7 +39,7 @@ describe('importTheme', () => {
 
     it('reproduces the effective CSS variables', () => {
       expect(effectiveVars(imported)).toEqual(effectiveVars(original))
-      // Aliases set to their defaults are no-ops the export rightly drops —
+      // Aliases set to their defaults are no-ops the export rightly drops,
       // compare the choices that actually change anything.
       const overrides = (doc: ThemeDoc) => Object.fromEntries(
         Object.entries(doc.colors ?? {}).filter(([alias, name]) => DEFAULT_COLORS[alias as keyof typeof DEFAULT_COLORS] !== name)
@@ -169,7 +169,7 @@ describe('importTheme', () => {
       ].join('\n')
     })
 
-    // A literal the border-color table can't name is not a style choice —
+    // A literal the border-color table can't name is not a style choice,
     // but it must survive somewhere, not silently vanish.
     expect(skipped).toEqual([])
     expect(doc.style?.borderColor).toBeUndefined()
@@ -196,7 +196,7 @@ describe('importTheme', () => {
     const config = generateConfig(original)
     const { doc: imported, skipped } = importTheme({ css, config })
 
-    // flat strips shadows — no shadow color belongs in its export
+    // flat strips shadows, no shadow color belongs in its export
     expect(css).not.toContain('--ui-shadow-color')
     expect(skipped).toEqual([])
     expect(imported.style?.shadow).toBe('flat')
@@ -258,7 +258,7 @@ describe('importTheme', () => {
 
   it('keeps genuine width classes in config-only pastes', () => {
     // The legacy ring-N scrubber must only run when legacy tokens were
-    // actually detected — not eat a user's own border-2 out of a paste.
+    // actually detected, not eat a user's own border-2 out of a paste.
     const { doc } = importTheme({
       config: 'export default defineAppConfig({ ui: { card: { slots: { root: \'border-2 border-dashed\' } } } })'
     })
@@ -274,7 +274,7 @@ describe('importTheme', () => {
 
     expect(skipped).toEqual([])
     // width 1 elides the @theme width channel, so the frame literals come
-    // back as explicit components — the re-export must still be identical.
+    // back as explicit components, the re-export must still be identical.
     expect(generateCSS(imported)).toBe(css)
     expect(generateConfig(imported)).toBe(config)
   })

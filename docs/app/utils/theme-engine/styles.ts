@@ -6,7 +6,7 @@
  * class literals.
  *
  * Placement rule: every ring in the library's themes lives at variant or
- * compoundVariant level, which renders after slot classes — so ring
+ * compoundVariant level, which renders after slot classes, so ring
  * overrides MUST be extension compoundVariants (appended last, they win the
  * tailwind-merge). Only shadows, which no theme variant sets, ride slots.
  */
@@ -29,13 +29,13 @@ export interface StyleOptions {
   border?: BorderStyle
   borderColor?: BorderColor
   shadowColor?: ShadowColor
-  /** Ramp shade per mode — neutral for 'shade', primary for 'primary-shade' */
+  /** Ramp shade per mode, neutral for 'shade', primary for 'primary-shade' */
   shadowShade?: { light?: ShadeStop, dark?: ShadeStop }
-  /** Ramp shade per mode — neutral for 'shade', primary for 'primary-shade' */
+  /** Ramp shade per mode, neutral for 'shade', primary for 'primary-shade' */
   borderShade?: { light?: ShadeStop, dark?: ShadeStop }
   /** Ring width in px (1–4) while `border` is 'custom'; 2 when unset. */
   borderWidth?: number
-  /** Frame solid/soft surfaces too — the neobrutalist outline-everything look. */
+  /** Frame solid/soft surfaces too, the neobrutalist outline-everything look. */
   frame?: boolean
   /**
    * Default variant/size/color, expanded into per-component `defaultVariants`
@@ -60,11 +60,11 @@ export interface StyleOptions {
   innerShadowOpacity?: number
   /** Inner-shadow color; unset inherits the drop shadow's color. */
   innerShadowColor?: ShadowColor
-  /** Ramp shade per mode — neutral for 'shade', primary for 'primary-shade' */
+  /** Ramp shade per mode, neutral for 'shade', primary for 'primary-shade' */
   innerShadowShade?: { light?: ShadeStop, dark?: ShadeStop }
   /**
    * Semantic token → ramp shade, keys whitelisted in TOKEN_SHADE_TARGETS.
-   * An absent mode stays inherited — presets hydrating one mode must not
+   * An absent mode stays inherited, presets hydrating one mode must not
    * leak a phantom override for the other into exports.
    */
   tokenShades?: Record<string, { light?: ShadeStop, dark?: ShadeStop }>
@@ -81,12 +81,12 @@ export const VARIANT_SUPPORT: Record<string, string[]> = {
   alert: ['solid', 'outline', 'soft', 'subtle'],
   card: ['solid', 'outline', 'soft', 'subtle'],
   empty: ['solid', 'outline', 'soft', 'subtle'],
-  // fields have no solid variant — an unsupported value would silently unstyle them
+  // fields have no solid variant, an unsupported value would silently unstyle them
   ...Object.fromEntries(FIELD_COMPONENTS.map(component => [component, FIELD_VARIANTS]))
 }
 
 /**
- * Components the app-wide Size default scales — exactly the xs–xl axis.
+ * Components the app-wide Size default scales, exactly the xs–xl axis.
  * Components on other scales (avatar's 3xs–3xl, kbd's sm–lg) stay out.
  */
 export const SIZE_SUPPORT = [
@@ -96,7 +96,7 @@ export const SIZE_SUPPORT = [
   'dropdownMenu', 'contextMenu', 'commandPalette', 'listbox'
 ]
 
-/** Components with a color prop — the panels group has no color axis. */
+/** Components with a color prop, the panels group has no color axis. */
 export const COLOR_SUPPORT = ['button', 'badge', ...FIELD_COMPONENTS]
 
 /** Component groups behind the per-group default-variant selects. */
@@ -112,7 +112,7 @@ export const INNER_SHADOW_GEOMETRY_DEFAULTS = { x: 0, y: 2, blur: 4, spread: 0 }
 /** Borders default opposite to the surface: dark ink on light, pale on dark. */
 export const BORDER_SHADE_DEFAULTS: { light: ShadeStop, dark: ShadeStop } = { light: 900, dark: 200 }
 
-/** Color scale a token slider walks — neutral, or any semantic alias's ramp. */
+/** Color scale a token slider walks, neutral, or any semantic alias's ramp. */
 export type TokenRamp = 'neutral' | 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'error'
 
 export type TokenGroup = 'colors' | 'background' | 'text' | 'border'
@@ -126,7 +126,7 @@ export const TOKEN_GROUPS: Array<{ key: TokenGroup, label: string }> = [
 
 /**
  * Semantic tokens exposed as per-mode shade sliders. `defaults` are the
- * LIBRARY's real resting values — some are the literal ladder ends (light
+ * LIBRARY's real resting values, some are the literal ladder ends (light
  * --ui-bg is `white`, not a ramp stop); `ramp` names the scale the slider walks.
  */
 export const TOKEN_SHADE_TARGETS: Array<{ token: string, label: string, ramp: TokenRamp, group: TokenGroup, defaults: { light: ShadeStop, dark: ShadeStop } }> = [
@@ -171,8 +171,8 @@ const FLAT_FIELD_VARIANTS = [
 
 /**
  * A ramp shade reference, or the literal for white/black. In-between stops
- * (finer than 100) have no `--ui-color-*` indirection — the runtime colors
- * plugin only generates the 11 standard stops — so they hit the custom
+ * (finer than 100) have no `--ui-color-*` indirection, the runtime colors
+ * plugin only generates the 11 standard stops, so they hit the custom
  * ramp's `--color-*` directly; such stops only exist on custom palettes,
  * whose @theme block defines those vars in both preview and export.
  */
@@ -206,7 +206,7 @@ const SHADOW_FRAGMENTS: Record<'flat' | 'custom', Fragments> = {
     tabs: { compoundVariants: [{ variant: 'pill', class: { list: 'shadow-none', indicator: 'shadow-none', trigger: TABS_SSR_SHADOW_NONE } }] }
   },
   // Custom: the ramp (active under .shadow-custom) carries color/opacity/
-  // geometry, so plain size classes suffice — overlays keep their stock
+  // geometry, so plain size classes suffice, overlays keep their stock
   // shadow-lg untouched; flat surfaces get a size added.
   custom: {
     button: {
@@ -239,7 +239,7 @@ const SHADOW_FRAGMENTS: Record<'flat' | 'custom', Fragments> = {
   }
 }
 
-/** shadowPress: false — the resting shadow without the press choreography. */
+/** shadowPress: false, the resting shadow without the press choreography. */
 const PRESSLESS_BUTTON: Fragments[string] = {
   slots: { base: 'shadow-(--ui-shadow-press)' },
   compoundVariants: [
@@ -290,7 +290,7 @@ function innerShadowFragments(classes: string): Fragments {
 
 export const BORDER_WIDTH_DEFAULT = 2
 
-// default-width rings — the width itself flows through --default-ring-width
+// default-width rings, the width itself flows through --default-ring-width
 const FRAME_INSET = 'ring ring-inset ring-(--ui-border-accented)'
 const FRAME_OUTSET = 'ring ring-(--ui-border-accented)'
 
@@ -312,10 +312,10 @@ const FRAME_FRAGMENTS: Fragments = (() => {
     pageCard: { compoundVariants: frame(outset, 'root') },
     pageCTA: { compoundVariants: frame(outset, 'root') },
     blogPost: { compoundVariants: frame(outset, 'root') },
-    // fields have no solid variant — soft is their surface look
+    // fields have no solid variant, soft is their surface look
     ...Object.fromEntries(FIELD_COMPONENTS.map(component => [component, { compoundVariants: [{ variant: 'soft', class: inset }] }])),
     chatPrompt: { compoundVariants: [{ variant: 'soft', class: { root: outset } }] },
-    // list ring only — ringing the indicator inside it reads as a double outline
+    // list ring only, ringing the indicator inside it reads as a double outline
     tabs: { compoundVariants: [{ variant: 'pill', class: { list: inset } }] },
     switch: { slots: { base: inset } }
   }
@@ -323,7 +323,7 @@ const FRAME_FRAGMENTS: Fragments = (() => {
 
 /**
  * The pill tabs list has no stock ring, so any active border treatment
- * outlines it, frame toggle or not — else it sits bare next to outlined fields.
+ * outlines it, frame toggle or not, else it sits bare next to outlined fields.
  */
 const TABS_BORDER_FRAGMENTS: Fragments = {
   tabs: { compoundVariants: [{ variant: 'pill', class: { list: FRAME_INSET } }] }
@@ -331,7 +331,7 @@ const TABS_BORDER_FRAGMENTS: Fragments = {
 
 /**
  * Widths flow through --default-border-width/--default-ring-width, so borders
- * need no class fragments — only the frame toggle adds outlines on surfaces
+ * need no class fragments, only the frame toggle adds outlines on surfaces
  * that have none.
  */
 function borderFragments(style: StyleOptions): Fragments {
@@ -341,7 +341,7 @@ function borderFragments(style: StyleOptions): Fragments {
 
 /**
  * compound entries recoloring rings via the variable. With `colors` given,
- * only those variants repaint — on outline/subtle the ring IS the semantic
+ * only those variants repaint, on outline/subtle the ring IS the semantic
  * signal (an error badge's ring stays error-colored); frames around
  * solid/soft are outlines by design and recolor for every color.
  */
@@ -353,7 +353,7 @@ function recolor(variants: string[], slot?: string, colors?: string[]): Array<Re
   }))
 }
 
-// only neutral rings carry no meaning — a primary ring is as deliberate as an error one
+// only neutral rings carry no meaning, a primary ring is as deliberate as an error one
 const UNSIGNALED_COLORS = ['neutral']
 
 const BORDER_COLOR_FRAGMENTS: Fragments = {
@@ -465,7 +465,7 @@ export function styleTokens(style: StyleOptions): { light: Record<string, string
     }
   }
 
-  // unset shadowColor defaults to 'shade' — but only under a custom shadow,
+  // unset shadowColor defaults to 'shade', but only under a custom shadow,
   // so a pristine theme emits nothing
   const shadowColorMode = (!style.shadowColor || style.shadowColor === 'default')
     ? (style.shadow === 'custom' ? 'shade' : undefined)
@@ -608,14 +608,14 @@ function joinCompoundClass(a: unknown, b: unknown): unknown | undefined {
     }
     return merged
   }
-  // a string meeting a slot map has no single right target — leave both entries
+  // a string meeting a slot map has no single right target, leave both entries
   return undefined
 }
 
 /**
  * Fold compound entries that select the same variants into one. Successive
  * treatments (a frame's ring, then a border colour) target the same
- * variant/slot, and tailwind-variants appends their classes in order — so
+ * variant/slot, and tailwind-variants appends their classes in order, so
  * one entry carrying both renders identically while halving what an export
  * prints.
  */
@@ -664,7 +664,7 @@ export function mergeComponentOverrides(
     } else if (key === 'compoundVariants' && Array.isArray(a) && Array.isArray(b)) {
       result[key] = [...a, ...b]
     } else if (key === 'defaultVariants') {
-      // variant NAMES, not class strings — later value replaces per key
+      // variant NAMES, not class strings, later value replaces per key
       result[key] = { ...a, ...b }
     } else if (typeof a === 'string' && typeof b === 'string') {
       result[key] = `${a} ${b}`
