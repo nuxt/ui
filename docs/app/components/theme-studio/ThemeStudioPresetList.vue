@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { resolveAlias, resolveShade } from '../../utils/theme-engine'
-import type { ThemeDoc, Shade } from '../../utils/theme-engine'
+import type { ThemeDoc } from '../../utils/theme-engine'
 import { themeIcons } from '../../utils/theme'
+import { themeChipStyle } from '../../utils/theme-section'
 
 /**
  * The presets listbox on its own — theme chips, fonts and icon tastes — so it
@@ -16,20 +16,6 @@ const { presets, selectedPreset, applyPreset } = useThemeStudio()
 // the selection after mount so hydration matches the server's fallback.
 const mounted = ref(false)
 
-/**
- * Mini theme chip: the doc's neutral ramp as the page, its icon in its
- * primary, per colour mode.
- */
-function themeChip(doc: ThemeDoc) {
-  const shade = (alias: 'primary' | 'neutral', step: Shade) => resolveShade(doc, resolveAlias(doc, alias), step)
-  return {
-    '--chip-bg-light': `linear-gradient(135deg, ${shade('neutral', 50)}, ${shade('neutral', 200)})`,
-    '--chip-bg-dark': `linear-gradient(135deg, ${shade('neutral', 900)}, ${shade('neutral', 800)})`,
-    '--chip-icon-light': doc.blackAsPrimary ? 'black' : shade('primary', 500),
-    '--chip-icon-dark': doc.blackAsPrimary ? 'white' : shade('primary', 400)
-  }
-}
-
 /** A taste of the doc's icon set (its own, or the default lucide). */
 function iconSamples(doc: ThemeDoc): string[] {
   const sets = themeIcons as Record<string, Record<string, string>>
@@ -42,7 +28,7 @@ const presetItems = computed(() => presets.map(preset => ({
   id: preset.id,
   label: preset.name,
   chipIcon: preset.icon,
-  themeChip: themeChip(preset.doc),
+  themeChip: themeChipStyle(preset.doc),
   font: preset.doc.font?.sans ?? 'Public Sans',
   iconSamples: iconSamples(preset.doc)
 })))

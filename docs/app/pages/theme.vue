@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { DEFAULT_PRESET_ID } from '../utils/theme-engine'
+
 const { track } = useAnalytics()
 const { resetTheme, icon: iconSet, blackAsPrimary } = useTheme()
 
@@ -67,9 +69,12 @@ const anyDirty = computed(() => mounted.value && Object.values(groupDirtyFlags).
 const baselinePreset = computed(() => mounted.value ? presets.find(preset => preset.id === activePreset.value) : undefined)
 const resetsToPreset = computed(() => Boolean(baselinePreset.value) && anyDirty.value)
 const canReset = computed(() => anyDirty.value || Boolean(baselinePreset.value))
+// named from the preset itself, so a rename can't leave this behind
+const stockPreset = computed(() => presets.find(preset => preset.id === DEFAULT_PRESET_ID))
+
 const resetLabel = computed(() => {
   if (resetsToPreset.value) return `Reset to ${baselinePreset.value!.name}`
-  return baselinePreset.value ? 'Reset to Nuxt UI theme' : 'Reset theme'
+  return baselinePreset.value ? `Reset to ${stockPreset.value?.name ?? 'stock'} theme` : 'Reset theme'
 })
 
 function resetToBaseline() {
@@ -165,7 +170,7 @@ const shareMode = ref<'import' | 'export'>('export')
         <!-- In fullscreen the toolbar floats over the bottom edge at
              UContainer's own recipe (edges line up with other pages); only
              the strip catches the pointer so the preview stays clickable. -->
-        <div :class="fullscreen ? 'group fixed bottom-0 inset-x-0 z-50 pointer-events-none w-full max-w-(--ui-container) mx-auto ' : 'shrink-0'">
+        <div :class="fullscreen ? 'group fixed bottom-0 inset-x-0 z-50 pointer-events-none w-full max-w-(--ui-container) mx-auto' : 'shrink-0'">
           <!-- thin touch affordance only — mouse reveal is proximity-driven -->
           <div v-if="fullscreen" class="absolute bottom-0 inset-x-0 h-2 pointer-events-auto" />
 

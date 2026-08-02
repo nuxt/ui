@@ -2,10 +2,8 @@
 import type { ColorAlias, SectionKey } from '../../utils/theme-engine'
 
 /**
- * One color alias in the Colors panel: a section header carrying the edit
- * and adjust-shades toggles, the picker below, and the palette editor /
- * shade sliders folding out underneath. Color aliases expose their accent
- * pair; neutral carries every neutral-ramped token group.
+ * One color alias: its picker, with the palette and shade editors folding out
+ * under it. Aliases expose their accent pair; neutral its every token group.
  */
 const props = defineProps<{
   alias: ColorAlias
@@ -61,11 +59,8 @@ const shadeEditor = ref(false)
 
       <ThemeStudioPaletteEditor v-model:open="paletteEditor" :alias="alias" />
 
-      <!-- Folds like the palette editor above it, rather than popping in. -->
       <UCollapsible v-model:open="shadeEditor">
         <template #content>
-          <!-- The accent pair for color aliases, in a section of its own so
-               it carries the same header and reset as the neutral groups. -->
           <ThemeStudioSection
             v-if="alias !== 'neutral'"
             :label="`${title} shades`"
@@ -84,8 +79,7 @@ const shadeEditor = ref(false)
             />
           </ThemeStudioSection>
 
-          <!-- Every neutral-ramped semantic token — background and text;
-               borders moved to the Style panel's Borders section. -->
+          <!-- borders live in the Style panel's Borders section -->
           <ThemeStudioTokenShades v-else :alias="alias" :groups="['background', 'text']" />
         </template>
       </UCollapsible>

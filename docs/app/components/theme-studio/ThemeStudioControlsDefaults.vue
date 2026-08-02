@@ -7,8 +7,8 @@ import type { VariantGroup } from '../../utils/theme-engine'
  */
 const { style, setStyle } = useThemeStudio()
 
-// Per-group default variants, each offering only what its components support;
-// the app-wide `variant` shows through as the fallback.
+// Each group offers only what its components support; the app-wide
+// `variant` shows through as the fallback.
 const variantItems = (values: string[]) => values.map(value => ({ label: capitalize(value), value }))
 
 /** Variant names UButton can render itself — the rest (none) fall back. */
@@ -17,8 +17,7 @@ const RENDERABLE_VARIANTS = ['solid', 'outline', 'soft', 'subtle', 'ghost', 'lin
 /** Variant grid popovers close on pick — one open flag per group. */
 const variantGridOpen = reactive<Record<string, boolean>>({ buttons: false, panels: false, inputs: false })
 
-// `stock` is the library's own default variant — its cell wears the
-// "(Default)" tag and picking it clears the override instead of pinning.
+// `stock` is the library's own default — picking it clears the override.
 const variantGroupFields = [
   { key: 'buttons' as const, label: 'Button Defaults', hasColor: true, stock: 'solid', items: variantItems(['solid', 'outline', 'soft', 'subtle', 'ghost', 'link']) },
   { key: 'panels' as const, label: 'Card Defaults', hasColor: false, stock: 'outline', items: variantItems(['solid', 'outline', 'soft', 'subtle']) },
@@ -91,7 +90,6 @@ const groupColors = Object.fromEntries(variantGroupFields.map(field => [field.ke
   <ThemeStudioSection
     label="Defaults"
     :default-open="false"
-
     :section-key="variantGroupFields.map(field => field.key)"
   >
     <ThemeStudioSection

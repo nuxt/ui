@@ -1,16 +1,14 @@
 <script setup lang="ts">
 /**
- * The header's slim theme popover: the settings reached for constantly —
- * preset, colors, font, icons, radius — for fast theming from any page,
- * with reset and export beside them and the full studio one click away.
+ * The header's theme popover: a grid of presets, with reset and export
+ * beside them and the full studio one click away.
  */
-import { resolveAlias, resolveShade } from '../../utils/theme-engine'
-import type { ThemeDoc, Shade } from '../../utils/theme-engine'
+import { themeChipStyle } from '../../utils/theme-section'
 
 const route = useRoute()
 const { track } = useAnalytics()
 const studioIcons = useStudioIcons()
-const { fonts, hasCSSChanges, hasConfigChanges, resetTheme } = useTheme()
+const { hasCSSChanges, hasConfigChanges, resetTheme } = useTheme()
 
 const open = ref(false)
 const shareOpen = ref(false)
@@ -28,34 +26,13 @@ watch(open, (isOpen) => {
   }
 })
 
-// the font rows render in their own faces — load them when the popover
-// first opens rather than on every page load
-const fontsLoaded = ref(false)
-watch(open, (isOpen) => {
-  if (isOpen && !fontsLoaded.value) {
-    fontsLoaded.value = true
-    loadFontPreviews(fonts)
-  }
-})
-
 const { presets, selectedPreset, applyPreset } = useThemeStudio()
-
-/** The preset's own neutral ramp, with its icon in its primary. */
-function tileChip(doc: ThemeDoc) {
-  const shade = (alias: 'primary' | 'neutral', step: Shade) => resolveShade(doc, resolveAlias(doc, alias), step)
-  return {
-    '--chip-bg-light': `linear-gradient(135deg, ${shade('neutral', 50)}, ${shade('neutral', 200)})`,
-    '--chip-bg-dark': `linear-gradient(135deg, ${shade('neutral', 900)}, ${shade('neutral', 800)})`,
-    '--chip-icon-light': doc.blackAsPrimary ? 'black' : shade('primary', 500),
-    '--chip-icon-dark': doc.blackAsPrimary ? 'white' : shade('primary', 400)
-  }
-}
 
 const presetTiles = computed(() => presets.map(preset => ({
   id: preset.id,
   label: preset.name,
   icon: preset.icon,
-  chip: tileChip(preset.doc)
+  chip: themeChipStyle(preset.doc)
 })))
 
 function pickPreset(id: string) {

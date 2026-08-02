@@ -1,8 +1,5 @@
 <script setup lang="ts">
-/**
- * One settings section. Help and action buttons stop the click so they never
- * toggle the fold; actions force it open, so what they reveal is visible.
- */
+/** One settings section. Header buttons stop the click so they never fold it. */
 import type { SectionKey } from '../../utils/theme-engine'
 import { SECTION_DEPTH } from '../../utils/theme-section'
 
@@ -48,17 +45,13 @@ const slots = defineSlots<{
   actions: () => any
 }>()
 
-/**
- * Depth decides how a section behaves, so no caller has to: the top level
- * folds open, the layer under it folds shut, and the leaves are plain groups.
- */
+// Top level folds open, the layer under it folds shut, leaves are plain groups.
 const depth = inject(SECTION_DEPTH, 0)
 provide(SECTION_DEPTH, depth + 1)
 
 const collapsible = computed(() => props.collapsible ?? depth < 2)
 const separator = computed(() => props.separator ?? depth < 2)
 
-// Static sections are always open.
 const open = ref(collapsible.value ? (props.defaultOpen ?? depth === 0) : true)
 
 // A first child sits right under the header — nothing above it to separate from.
@@ -66,23 +59,18 @@ const contentClass = 'pt-2 flex flex-col gap-2 [&>*:first-child]:border-t-0 [&>*
 </script>
 
 <template>
-  <!-- Owns its own padding, gap and rule, so no caller sets spacing. -->
   <UCollapsible
     v-model:open="open"
     :disabled="!collapsible"
     :class="[
-      /* Only the first layer insets from the panel edge; nested sections line
-         up with the content they sit in. Space above a rule comes from the
-         parent's gap, below it from this padding — setting both would double. */
+      /* Space above a rule is the parent's gap, below it this padding. */
       depth === 0 ? 'p-4' : (separator ? 'pt-2' : ''),
       separator && 'border-t border-default'
     ]"
     :ui="{ content: contentClass }"
   >
-    <!-- Nothing to put in the header means it's just a group. -->
     <div v-if="collapsible || label || helpTo || showReset || !!slots.actions" class="flex items-center gap-1">
-      <!-- One button either way, so padding and type come from one place.
-           The leading chevron tells a fold apart from a select. -->
+      <!-- The leading chevron tells a fold apart from a select. -->
       <UButton
         :label="label"
         :icon="collapsible ? (open ? 'i-lucide-chevron-down' : 'i-lucide-chevron-right') : undefined"
@@ -95,15 +83,13 @@ const contentClass = 'pt-2 flex flex-col gap-2 [&>*:first-child]:border-t-0 [&>*
         :class="{ 'px-0': !collapsible }"
         :tabindex="collapsible ? undefined : -1"
         :ui="collapsible ? undefined : {
-          /* a heading shouldn't tint on hover, press or open, and its button
-             padding would double the section's own */
+          /* a heading shouldn't tint on hover, press or open */
           base: 'cursor-default select-none hover:bg-transparent active:bg-transparent data-[state=open]:bg-transparent focus:outline-none focus-visible:outline-none focus-visible:ring-0'
         }"
       />
 
-      <UTooltip text="Docs">
+      <UTooltip v-if="helpTo" text="Docs">
         <UButton
-          v-if="helpTo"
           :to="helpTo"
           size="sm"
           color="neutral"
@@ -121,7 +107,7 @@ const contentClass = 'pt-2 flex flex-col gap-2 [&>*:first-child]:border-t-0 [&>*
           variant="ghost"
           icon="i-lucide-rotate-ccw"
           :disabled="!dirty"
-          :aria-label="`Reset ${label} to preset`"
+          :aria-label="label ? `Reset ${label} to preset` : 'Reset to preset'"
           @click.stop="reset"
         />
       </UTooltip>
