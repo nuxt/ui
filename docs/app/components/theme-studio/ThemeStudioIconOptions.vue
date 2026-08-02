@@ -17,7 +17,7 @@ const iconPreviews = computed(() => {
     <ThemeStudioIconPicker />
 
     <!-- a spread of the selected set -->
-    <div class="rounded-md ring ring-default bg-elevated/50 px-3 py-2 flex flex-wrap justify-center gap-2.5">
+    <div class="rounded-md ring ring-default bg-elevated/50 px-3 py-2 mt-2 flex flex-wrap justify-center gap-2.5">
       <UIcon v-for="name in iconPreviews" :key="name" :name="name" class="size-4 text-muted" />
     </div>
   </div>

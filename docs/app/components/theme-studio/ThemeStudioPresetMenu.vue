@@ -1,22 +1,13 @@
 <script setup lang="ts">
-/** The presets trigger (label + popover listbox), optionally with the die. */
+/** The presets trigger: its label names the applied preset. */
 const props = withDefaults(defineProps<{
   /** Button size — the toolbar uses the default, the header picker slims down. */
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
   /** Toolbar opts out of dismissing on its own chrome; other hosts keep stock dismiss. */
   keepPanels?: boolean
-  /**
-   * The shuffle die beside the trigger. Off in the header picker, where the
-   * row aligns with the colour selects below it and has no width to spare.
-   */
-  random?: boolean
-}>(), {
-  // absent optional booleans cast to false — pin the default so it survives
-  random: true
-})
+}>(), {})
 
-const { presets, selectedPreset, shuffle } = useThemeStudio()
-const { icon: iconSet } = useTheme()
+const { presets, selectedPreset } = useThemeStudio()
 const appConfig = useAppConfig()
 const studioIcons = useStudioIcons()
 
@@ -30,60 +21,6 @@ onMounted(() => (mounted.value = true))
 
 // the boolean prop shadows the util in template scope — alias the handler
 const onKeepPanels = keepPanels
-
-// The shuffle die spins while cycling faces, then settles on a random face.
-const DICE_FACES = ['i-lucide-dice-1', 'i-lucide-dice-2', 'i-lucide-dice-3', 'i-lucide-dice-4', 'i-lucide-dice-5', 'i-lucide-dice-6']
-const diceFace = ref(studioIcons.dice)
-const rolling = ref(false)
-
-// Only Lucide ships numbered faces; other packs spin their single die.
-watch(() => studioIcons.dice, (die) => {
-  if (!rolling.value) diceFace.value = die
-})
-
-// Keep in sync with the dice-roll keyframes: the stops are where the die hits
-// an edge — each impact flips the face.
-const ROLL_MS = 675
-const HIT_FRACTIONS = [0.064, 0.147, 0.255, 0.395, 0.578, 0.815]
-let rollTimers: Array<ReturnType<typeof setTimeout>> = []
-
-function randomFace() {
-  if (iconSet.value !== 'lucide') return studioIcons.dice
-  return DICE_FACES[Math.floor(Math.random() * DICE_FACES.length)]!
-}
-
-function clearRollTimers() {
-  rollTimers.forEach(timer => clearTimeout(timer))
-  rollTimers = []
-}
-
-async function rollDice() {
-  shuffle()
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    diceFace.value = randomFace()
-    return
-  }
-  // drop the class for a tick so a mid-roll re-click restarts the animation
-  clearRollTimers()
-  rolling.value = false
-  await nextTick()
-  rolling.value = true
-  rollTimers = HIT_FRACTIONS.map(fraction => setTimeout(() => (diceFace.value = randomFace()), ROLL_MS * fraction))
-  // safety net for environments that never fire animationend
-  rollTimers.push(setTimeout(onRollEnd, ROLL_MS + 400))
-}
-
-// The animation clock decides the end — a JS timer would race it and snap the
-// tumble back a few frames early.
-function onRollEnd(event?: AnimationEvent) {
-  if (event && !event.animationName.includes('dice-roll')) return
-  if (!rolling.value) return
-  clearRollTimers()
-  rolling.value = false
-  // no swap here: the face thrown on the last bounce IS the result
-}
-
-onUnmounted(clearRollTimers)
 
 // Edits deliberately don't clear the preset name (the dirty dots carry
 // divergence); 'Custom' only when preset-less but diverged from stock.
@@ -125,73 +62,5 @@ const presetIcon = computed(() => activeEntry.value?.icon ?? studioIcons.themes)
         <ThemeStudioPresetList @select="open = false" />
       </template>
     </UPopover>
-
-    <UTooltip v-if="random" text="Random theme">
-      <UButton
-        :icon="diceFace"
-        color="neutral"
-        variant="subtle"
-        :size="size"
-        aria-label="Random theme"
-        :class="rolling && 'dice-bumping'"
-        :ui="{ leadingIcon: rolling ? 'dice-rolling' : undefined }"
-        @click="rollDice"
-        @animationend="onRollEnd"
-      />
-    </UTooltip>
   </div>
 </template>
-
-<style scoped>
-/* Impact stops mirror HIT_FRACTIONS; rotation ends on -540° (pips are
-   180°-symmetric, so the settled face reads upright). */
-@keyframes dice-roll {
-  0% { transform: translate(0px, 0px) rotate(0deg) scale(1); }
-  6.4% { transform: translate(-8px, 6px) rotate(-73deg) scale(0.88); }
-  7.9% { transform: translate(-8px, 6px) rotate(-73deg) scale(1); }
-  14.7% { transform: translate(7.2px, -5.6px) rotate(-149deg) scale(0.88); }
-  16.2% { transform: translate(7.2px, -5.6px) rotate(-149deg) scale(1); }
-  25.5% { transform: translate(-6px, -6.8px) rotate(-228deg) scale(0.88); }
-  27% { transform: translate(-6px, -6.8px) rotate(-228deg) scale(1); }
-  39.5% { transform: translate(6.8px, 4.8px) rotate(-310deg) scale(0.88); }
-  41% { transform: translate(6.8px, 4.8px) rotate(-310deg) scale(1); }
-  57.8% { transform: translate(-7.2px, 2.8px) rotate(-396deg) scale(0.88); }
-  59.3% { transform: translate(-7.2px, 2.8px) rotate(-396deg) scale(1); }
-  81.5% { transform: translate(5.6px, -6.4px) rotate(-485deg) scale(0.88); }
-  83% { transform: translate(5.6px, -6.4px) rotate(-485deg) scale(1); }
-  100% { transform: translate(0px, 0px) rotate(-540deg) scale(1); }
-}
-
-/* the container pops with every hit, fading as the die loses energy */
-@keyframes dice-bump {
-  0% { transform: scale(1); }
-  2.9% { transform: scale(1); }
-  6.4% { transform: scale(1.12); }
-  9.9% { transform: scale(1); }
-  11.2% { transform: scale(1); }
-  14.7% { transform: scale(1.096); }
-  18.2% { transform: scale(1); }
-  22% { transform: scale(1); }
-  25.5% { transform: scale(1.077); }
-  29% { transform: scale(1); }
-  36% { transform: scale(1); }
-  39.5% { transform: scale(1.061); }
-  43% { transform: scale(1); }
-  54.3% { transform: scale(1); }
-  57.8% { transform: scale(1.049); }
-  61.3% { transform: scale(1); }
-  78% { transform: scale(1); }
-  81.5% { transform: scale(1.039); }
-  85% { transform: scale(1); }
-  100% { transform: scale(1); }
-}
-
-/* the icon span renders inside UButton — scoped rules need :deep() */
-:deep(.dice-rolling) {
-  animation: dice-roll 675ms linear forwards;
-}
-
-.dice-bumping {
-  animation: dice-bump 675ms linear forwards;
-}
-</style>

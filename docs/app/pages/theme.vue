@@ -2,7 +2,7 @@
 import { DEFAULT_PRESET_ID } from '../utils/theme-engine'
 
 const { track } = useAnalytics()
-const { resetTheme, icon: iconSet, font, icons, blackAsPrimary } = useTheme()
+const { resetTheme, icon: iconSet, font, icons, primary, neutral, blackAsPrimary } = useTheme()
 
 // Toolbar skins to the applied icon pack; import/chevron reuse the standard
 // semantic keys off appConfig.ui.icons.
@@ -44,9 +44,7 @@ function toggleColorMode() {
 }
 
 const appConfig = useAppConfig()
-const { groupDirty, presets, activePreset, applyPreset, primaryChip, neutralChip, rampChip } = useThemeStudio()
-
-const SEMANTIC_ALIASES = ['secondary', 'success', 'info', 'warning', 'error'] as const
+const { groupDirty, presets, activePreset, applyPreset, primaryChip, neutralChip, isCustomPalette } = useThemeStudio()
 
 const iconSetItem = computed(() => icons.find(entry => entry.value === iconSet.value))
 
@@ -55,11 +53,18 @@ const iconSetItem = computed(() => icons.find(entry => entry.value === iconSet.v
  * the current primary and neutral without being opened — the same job the
  * font and icon pickers do by showing their values.
  */
-const colorDots = computed(() => [
-  blackAsPrimary.value ? undefined : `var(--color-${primaryChip.value}-500)`,
-  `var(--color-${neutralChip.value}-500)`,
-  ...SEMANTIC_ALIASES.map(alias => `var(--color-${rampChip(alias)}-500)`)
-])
+// A custom ramp has no name worth reading — the picker calls it Custom too.
+function paletteName(alias: 'primary' | 'neutral', value: string) {
+  return isCustomPalette(alias) ? 'Custom' : capitalize(value)
+}
+
+const colorChips = computed(() => [{
+  dot: blackAsPrimary.value ? undefined : `var(--color-${primaryChip.value}-500)`,
+  label: blackAsPrimary.value ? 'Black' : paletteName('primary', primary.value)
+}, {
+  dot: `var(--color-${neutralChip.value}-500)`,
+  label: paletteName('neutral', neutral.value)
+}])
 
 /** "Changed from preset" dot per settings tab. */
 const groupDirtyFlags = {
@@ -186,8 +191,10 @@ const shareMode = ref<'import' | 'export'>('export')
             ] : 'border-t border-default'"
           >
             <UFormField label="Preset" size="xs" :ui="fieldUi">
-              <ThemeStudioPresetMenu v-model:open="openPanels.presets" keep-panels class="w-52" />
+              <ThemeStudioPresetMenu v-model:open="openPanels.presets" keep-panels class="w-38" />
             </UFormField>
+
+            <ThemeStudioShuffleButton />
 
             <UFormField label="Colors" size="xs" :ui="fieldUi">
               <UPopover v-model:open="openPanels.colors" :content="{ align: 'start', onInteractOutside: keepPanels }">
@@ -196,22 +203,22 @@ const shareMode = ref<'import' | 'export'>('export')
                     color="neutral"
                     variant="subtle"
                     :trailing-icon="appConfig.ui.icons.chevronDown"
+
+                    :ui="{ label: 'flex-1 min-w-0' }"
                     aria-label="Colors"
                   >
-                    <!-- every colour it owns, so the bar reports them unopened -->
-                    <template #leading>
-                      <span class="flex items-center -space-x-0.5">
-                        <!-- primary stacks on top; black-as-primary has no ramp
-                             variable to point at -->
+                    <!-- each colour beside its own name -->
+                    <span class="flex items-center gap-2 min-w-0">
+                      <span v-for="chip in colorChips" :key="chip.label" class="flex items-center gap-1 min-w-0">
+                        <!-- black-as-primary has no ramp variable to point at -->
                         <span
-                          v-for="(dot, index) in colorDots"
-                          :key="index"
-                          class="relative inline-block size-3 rounded-full ring-2 ring-(--ui-bg-elevated)"
-                          :class="!dot && 'bg-black dark:bg-white'"
-                          :style="{ ...(dot ? { backgroundColor: dot } : {}), zIndex: colorDots.length - index }"
+                          class="size-3 rounded-full shrink-0"
+                          :class="!chip.dot && 'bg-black dark:bg-white'"
+                          :style="chip.dot ? { backgroundColor: chip.dot } : undefined"
                         />
+                        <span class="truncate">{{ chip.label }}</span>
                       </span>
-                    </template>
+                    </span>
                   </UButton>
                 </UChip>
 
@@ -231,7 +238,7 @@ const shareMode = ref<'import' | 'export'>('export')
                   :trailing-icon="appConfig.ui.icons.chevronDown"
                   color="neutral"
                   variant="subtle"
-                  class="w-44"
+                  class="w-38"
                   :ui="{ label: 'flex-1 min-w-0 text-left truncate' }"
                   aria-label="Font"
                 />
@@ -250,7 +257,7 @@ const shareMode = ref<'import' | 'export'>('export')
                   :trailing-icon="appConfig.ui.icons.chevronDown"
                   color="neutral"
                   variant="subtle"
-                  class="w-36"
+                  class="w-38"
                   :ui="{ label: 'flex-1 min-w-0 text-left truncate' }"
                   aria-label="Icon set"
                 />
