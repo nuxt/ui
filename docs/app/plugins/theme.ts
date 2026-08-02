@@ -15,8 +15,16 @@ export default defineNuxtPlugin({
       const neutral = localStorage.getItem('nuxt-ui-neutral')
       if (neutral) appConfig.ui.colors.neutral = neutral
 
+      // Deferred past hydration on purpose. Icon names compile into element
+      // CLASSES, and Vue only warns about a class that disagrees with the
+      // server — it never patches it. Assigning here (pre-hydration) makes the
+      // first client render disagree with the server's stock pack, so the
+      // saved pack was silently dropped on every reload. After hydration it's
+      // an ordinary reactive update, which does repaint. Colors don't need
+      // this: their FOUC scripts rewrite the style tags before first paint.
       const icons = localStorage.getItem('nuxt-ui-icons')
-      if (icons) appConfig.ui.icons = themeIcons[icons as keyof typeof themeIcons] as any
+      const pack = icons ? themeIcons[icons as keyof typeof themeIcons] : undefined
+      if (pack) onNuxtReady(() => (appConfig.ui.icons = pack as any))
 
       function restoreState<T>(key: string) {
         try {
