@@ -8,7 +8,6 @@ const { shuffle } = useThemeStudio()
 const { icon: iconSet } = useTheme()
 const studioIcons = useStudioIcons()
 
-// The shuffle die spins while cycling faces, then settles on a random face.
 const DICE_FACES = ['i-lucide-dice-1', 'i-lucide-dice-2', 'i-lucide-dice-3', 'i-lucide-dice-4', 'i-lucide-dice-5', 'i-lucide-dice-6']
 const diceFace = ref(studioIcons.dice)
 const rolling = ref(false)

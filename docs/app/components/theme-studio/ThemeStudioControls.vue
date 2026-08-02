@@ -14,8 +14,6 @@ defineProps<{
     <ThemeStudioControlsColors v-if="group === 'colors'" />
 
     <template v-else>
-      <ThemeStudioControlsGeneral />
-
       <ThemeStudioControlsStyle />
 
       <ThemeStudioControlsDefaults />

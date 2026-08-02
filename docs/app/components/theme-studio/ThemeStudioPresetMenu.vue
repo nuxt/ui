@@ -1,5 +1,9 @@
 <script setup lang="ts">
-/** The presets trigger: its label names the applied preset. */
+import type { ThemeDoc } from '../../utils/theme-engine'
+import { themeIcons } from '../../utils/theme'
+import { themeChipStyle } from '../../utils/theme-section'
+
+/** The presets trigger and its listbox: the label names the applied preset. */
 const props = withDefaults(defineProps<{
   /** Button size — the toolbar uses the default, the header picker slims down. */
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
@@ -7,7 +11,8 @@ const props = withDefaults(defineProps<{
   keepPanels?: boolean
 }>(), {})
 
-const { presets, selectedPreset } = useThemeStudio()
+const { presets, selectedPreset, applyPreset } = useThemeStudio()
+const { fonts } = useTheme()
 const appConfig = useAppConfig()
 const studioIcons = useStudioIcons()
 
@@ -17,7 +22,11 @@ const open = defineModel<boolean>('open', { default: false })
 // The persisted preset (and any persisted edits) are client-only — resolve
 // the label after mount so hydration matches the server's fallback.
 const mounted = ref(false)
-onMounted(() => (mounted.value = true))
+onMounted(() => {
+  mounted.value = true
+  // the rows render their own font names — load the faces once
+  loadFontPreviews(fonts)
+})
 
 // the boolean prop shadows the util in template scope — alias the handler
 const onKeepPanels = keepPanels
@@ -33,11 +42,36 @@ const presetLabel = computed(() => {
   return activeEntry.value ? activeEntry.value.name : 'Custom'
 })
 
-/**
- * The same glyph its row wears in the listbox; the swatch book stands in for
- * a theme with no preset behind it (and before mount).
- */
+/** Its row's own glyph; the swatch book stands in when no preset is behind it. */
 const presetIcon = computed(() => activeEntry.value?.icon ?? studioIcons.themes)
+
+/** A taste of the doc's icon set (its own, or the default lucide). */
+function iconSamples(doc: ThemeDoc): string[] {
+  const sets = themeIcons as Record<string, Record<string, string>>
+  const set = sets[doc.icons ?? 'lucide'] ?? sets.lucide!
+  // upload, search and folder vary the most between the sets
+  return ['upload', 'search', 'folder'].map(key => set[key]!)
+}
+
+const presetItems = computed(() => presets.map(preset => ({
+  id: preset.id,
+  label: preset.name,
+  chipIcon: preset.icon,
+  themeChip: themeChipStyle(preset.doc),
+  font: preset.doc.font?.sans ?? 'Public Sans',
+  iconSamples: iconSamples(preset.doc)
+})))
+
+const selected = computed({
+  get: () => mounted.value ? selectedPreset.value : undefined,
+  set: (id: string | undefined) => {
+    const preset = presets.find(entry => entry.id === id)
+    if (preset) {
+      applyPreset(preset)
+      open.value = false
+    }
+  }
+})
 </script>
 
 <template>
@@ -59,7 +93,39 @@ const presetIcon = computed(() => activeEntry.value?.icon ?? studioIcons.themes)
       />
 
       <template #content>
-        <ThemeStudioPresetList @select="open = false" />
+        <UListbox
+          v-model="selected"
+          :items="presetItems"
+          value-key="id"
+          class="w-80"
+          :ui="{
+            root: 'ring-0 rounded-md',
+            content: 'max-h-96',
+            item: 'gap-3'
+          }"
+        >
+          <template #item-leading="{ item }">
+            <span
+              class="flex items-center justify-center size-10 rounded-md ring ring-default shrink-0 bg-[image:var(--chip-bg-light)] dark:bg-[image:var(--chip-bg-dark)]"
+              :style="item.themeChip"
+            >
+              <UIcon :name="item.chipIcon" class="size-4 text-(--chip-icon-light) dark:text-(--chip-icon-dark)" />
+            </span>
+          </template>
+
+          <!-- the doc's font in its own face and a taste of its icon set -->
+          <template #item-description="{ item }">
+            <span class="flex items-center gap-2 pt-0.5">
+              <span class="shrink-0 text-xs text-muted truncate" :style="{ fontFamily: `'${item.font}', sans-serif` }">{{ item.font }}</span>
+
+              <span class="text-dimmed select-none">·</span>
+
+              <span class="flex items-center gap-1 shrink-0">
+                <UIcon v-for="name in item.iconSamples" :key="name" :name="name" class="size-3 text-dimmed" />
+              </span>
+            </span>
+          </template>
+        </UListbox>
       </template>
     </UPopover>
   </div>
