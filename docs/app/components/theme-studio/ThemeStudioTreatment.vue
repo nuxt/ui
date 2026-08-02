@@ -37,8 +37,8 @@ const chip = computed(() => (color.value === 'primary-shade' ? primaryChip.value
       <ThemeStudioActionToggle
         v-model="shadeEditor"
         icon="i-lucide-settings-2"
-        tooltip="Colour & shades"
-        :aria-label="`${label} colour and shades`"
+        tooltip="Adjust shades"
+        :aria-label="`Adjust ${label} shades`"
       />
     </template>
 
@@ -52,10 +52,13 @@ const chip = computed(() => (color.value === 'primary-shade' ? primaryChip.value
         class="w-full"
       />
 
-      <div v-if="model === 'custom'" class="mt-2 flex flex-col gap-2">
-        <slot />
+      <template v-if="model === 'custom'">
+        <div class="mt-2 flex flex-col gap-2">
+          <slot />
+        </div>
 
-        <!-- colour and shades sit last, behind the header toggle -->
+        <!-- Outside the gap: a closed collapsible is still a flex child, and
+             its gap would hang off the bottom of the panel. -->
         <UCollapsible v-model:open="shadeEditor">
           <template #content>
             <ThemeStudioShadeGroup
@@ -76,7 +79,7 @@ const chip = computed(() => (color.value === 'primary-shade' ? primaryChip.value
             <slot name="shades" />
           </template>
         </UCollapsible>
-      </div>
+      </template>
     </div>
   </ThemeStudioSection>
 </template>

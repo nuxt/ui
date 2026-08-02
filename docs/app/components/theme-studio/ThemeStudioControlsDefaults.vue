@@ -96,6 +96,7 @@ const groupColors = Object.fromEntries(variantGroupFields.map(field => [field.ke
       v-for="field in variantGroupFields"
       :key="field.key"
       :label="field.label"
+      :collapsible="false"
     >
       <div class="flex flex-col gap-1.5">
         <ThemeStudioRow control="custom" label="Variant">

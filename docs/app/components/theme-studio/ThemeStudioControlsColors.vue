@@ -28,6 +28,7 @@ const semanticAliases: ColorAlias[] = ['secondary', 'success', 'info', 'warning'
       v-for="alias in semanticAliases"
       :key="alias"
       :alias="alias"
+      :collapsible="false"
     />
   </ThemeStudioSection>
 </template>

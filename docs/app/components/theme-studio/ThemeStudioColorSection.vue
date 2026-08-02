@@ -5,14 +5,19 @@ import type { ColorAlias, SectionKey } from '../../utils/theme-engine'
  * One color alias: its picker, with the palette and shade editors folding out
  * under it. Aliases expose their accent pair; neutral its every token group.
  */
-const props = defineProps<{
+const props = withDefaults(defineProps<{
   alias: ColorAlias
   /** Header text — defaults to the capitalized alias. */
   label?: string
   helpTo?: string
   /** Passed through to the section header's reset affordance. */
   sectionKey?: SectionKey
-}>()
+  /** Nested under a fold already — see ThemeStudioSection. */
+  collapsible?: boolean
+}>(), {
+  // absent must stay undefined so the section's depth rule still decides
+  collapsible: undefined
+})
 
 const { rampChip } = useThemeStudio()
 const { shadeLadder, sections } = useTokenShades(props.alias)
@@ -24,7 +29,7 @@ const shadeEditor = ref(false)
 </script>
 
 <template>
-  <ThemeStudioSection :label="title" :help-to="helpTo" :section-key="sectionKey">
+  <ThemeStudioSection :label="title" :help-to="helpTo" :section-key="sectionKey" :collapsible="collapsible">
     <template #actions>
       <ThemeStudioActionToggle
         v-model="shadeEditor"

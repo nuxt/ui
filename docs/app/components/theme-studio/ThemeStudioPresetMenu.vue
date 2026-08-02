@@ -4,14 +4,10 @@ import { themeIcons } from '../../utils/theme'
 import { themeChipStyle } from '../../utils/theme-section'
 
 /** The presets trigger and its listbox: the label names the applied preset. */
-const props = withDefaults(defineProps<{
-  /** Button size — the toolbar uses the default, the header picker slims down. */
-  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
-  /** Toolbar opts out of dismissing on its own chrome; other hosts keep stock dismiss. */
-  keepPanels?: boolean
+defineProps<{
   /** Set where the trigger carries no visible label of its own. */
   tooltip?: string
-}>(), {})
+}>()
 
 const { presets, selectedPreset, applyPreset } = useThemeStudio()
 const { fonts } = useTheme()
@@ -30,7 +26,7 @@ onMounted(() => {
   loadFontPreviews(fonts)
 })
 
-// the boolean prop shadows the util in template scope — alias the handler
+// the toolbar stays open when a click lands on its own chrome
 const onKeepPanels = keepPanels
 
 // Edits deliberately don't clear the preset name (the dirty dots carry
@@ -80,7 +76,7 @@ const selected = computed({
   <div class="flex gap-2">
     <UPopover
       v-model:open="open"
-      :content="props.keepPanels ? { align: 'start', onInteractOutside: onKeepPanels } : { align: 'start' }"
+      :content="{ align: 'start', onInteractOutside: onKeepPanels }"
       class="flex-1 min-w-0"
     >
       <UTooltip :text="tooltip" :disabled="!tooltip">
@@ -90,7 +86,6 @@ const selected = computed({
           :trailing-icon="appConfig.ui.icons.chevronDown"
           color="neutral"
           variant="subtle"
-          :size="size"
           block
           :ui="{ leadingIcon: 'text-primary' }"
         />
