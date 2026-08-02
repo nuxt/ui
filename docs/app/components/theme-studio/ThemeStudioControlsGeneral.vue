@@ -167,16 +167,6 @@ const defaultSize = computed({
       section-key="font"
     >
       <div class="flex flex-col gap-2">
-        <!-- live specimen: the heading treatment over the base body -->
-        <div class="rounded-md ring ring-default bg-elevated/50 px-3 py-2 select-none">
-          <p class="text-sm text-highlighted truncate" :style="headingSampleStyle">
-            Grumpy wizards make toxic brew
-          </p>
-          <p class="text-xs text-muted truncate" :style="bodySampleStyle">
-            The quick brown fox jumps over the lazy dog 0123456789
-          </p>
-        </div>
-
         <template v-for="row in fontRows" :key="row.key">
           <span class="text-xs font-medium text-muted select-none" :class="row.key === 'heading' && 'pt-1'">{{ row.label }}</span>
 
@@ -291,6 +281,16 @@ const defaultSize = computed({
             </UFieldGroup>
           </div>
         </template>
+
+        <!-- live specimen: the heading treatment over the base body -->
+        <div class="rounded-md ring ring-default bg-elevated/50 px-3 py-2 select-none">
+          <p class="text-sm text-highlighted truncate" :style="headingSampleStyle">
+            Grumpy wizards make toxic brew
+          </p>
+          <p class="text-xs text-muted truncate" :style="bodySampleStyle">
+            The quick brown fox jumps over the lazy dog 0123456789
+          </p>
+        </div>
       </div>
     </ThemeStudioSection>
 
@@ -303,11 +303,6 @@ const defaultSize = computed({
       section-key="icons"
     >
       <div class="flex flex-col gap-2">
-        <!-- a spread of the selected set -->
-        <div class="rounded-md ring ring-default bg-elevated/50 px-3 py-2 flex flex-wrap justify-center gap-2.5">
-          <UIcon v-for="name in iconPreviews" :key="name" :name="name" class="size-4 text-muted" />
-        </div>
-
         <!-- every set previews a strip of its own glyphs -->
         <ThemeStudioListPicker
           v-model="icon"
@@ -326,6 +321,11 @@ const defaultSize = computed({
             </span>
           </template>
         </ThemeStudioListPicker>
+
+        <!-- a spread of the selected set -->
+        <div class="rounded-md ring ring-default bg-elevated/50 px-3 py-2 flex flex-wrap justify-center gap-2.5">
+          <UIcon v-for="name in iconPreviews" :key="name" :name="name" class="size-4 text-muted" />
+        </div>
       </div>
     </ThemeStudioSection>
 

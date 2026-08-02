@@ -298,7 +298,7 @@ const isShadeColor = (color?: string) => color === 'shade' || color === 'primary
                 v-show="isShadeColor(section.color.value)"
                 :key="modeName"
                 v-model="slider.model.value"
-                control="slider"
+                control="shade"
                 :mode="modeName"
                 :chip="section.color.value === 'primary-shade' ? primaryChip : neutralChip"
                 resettable
@@ -373,7 +373,7 @@ const isShadeColor = (color?: string) => color === 'shade' || color === 'primary
               v-show="borderColor === 'shade' || borderColor === 'primary-shade'"
               :key="modeName"
               v-model="slider.model.value"
-              control="slider"
+              control="shade"
               :mode="modeName"
               :chip="borderColor === 'primary-shade' ? primaryChip : neutralChip"
               resettable

@@ -9,7 +9,8 @@
 import type { SectionKey } from '../../utils/theme-engine'
 
 const props = withDefaults(defineProps<{
-  label: string
+  /** Omit on a static section to get a bare group — no header drawn. */
+  label?: string
   /** Docs page the header's help icon links to */
   helpTo?: string
   defaultOpen?: boolean
@@ -47,7 +48,9 @@ const open = ref(props.collapsible ? props.defaultOpen : true)
   <!-- Static sections keep the same shell, disabled and pinned open, so the
        header/content markup below has one shape. -->
   <UCollapsible v-model:open="open" :disabled="!collapsible">
-    <div class="flex items-center gap-1">
+    <!-- A static section with nothing to put in its header is just a group:
+         it draws no header rather than an empty row. -->
+    <div v-if="collapsible || label || helpTo || sectionKey || !!slots.actions" class="flex items-center gap-1">
       <!-- One button either way, so padding, size and type come from one
            place. Leading chevron: the disclosure cue that tells a fold
            trigger apart from a select (whose chevron trails). A static
@@ -63,7 +66,12 @@ const open = ref(props.collapsible ? props.defaultOpen : true)
         block
         class="justify-start flex-1"
         :class="{ 'px-0': !collapsible }"
-        :ui="collapsible ? undefined : { base: 'hover:bg-transparent cursor-default select-none' }"
+        :tabindex="collapsible ? undefined : -1"
+        :ui="collapsible ? undefined : {
+          /* inert in EVERY state, not just hover — the ghost variant tints on
+             hover, press and open, and a heading should do none of those */
+          base: 'cursor-default select-none hover:bg-transparent active:bg-transparent data-[state=open]:bg-transparent focus:outline-none focus-visible:outline-none focus-visible:ring-0'
+        }"
       />
 
       <UTooltip text="Docs">
@@ -97,9 +105,7 @@ const open = ref(props.collapsible ? props.defaultOpen : true)
     </div>
 
     <template #content>
-      <div class="pt-2">
-        <slot />
-      </div>
+      <slot class="pt-2" />
     </template>
   </UCollapsible>
 </template>

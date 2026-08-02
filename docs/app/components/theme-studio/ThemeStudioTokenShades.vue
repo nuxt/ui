@@ -28,18 +28,29 @@ const tokenGroups = TOKEN_GROUPS
 
 <template>
   <div class="flex flex-col gap-3 pt-2">
-    <div v-for="tokenGroup in tokenGroups" :key="tokenGroup.key" class="flex flex-col gap-2">
-      <!-- group heading only when there's more than one to tell apart -->
-      <span v-if="tokenGroups.length > 1" class="text-xs font-medium text-muted select-none">{{ tokenGroup.label }}</span>
-
-      <div v-for="section in tokenGroup.sections" :key="section.token" class="flex flex-col gap-1.5 px-1">
-        <span class="text-xs text-muted select-none">{{ section.label }}</span>
-
+    <!-- Static sections all the way down, like every other nested group in
+         the panels — no bare heading spans re-guessing the treatment.
+         The group OWNS its tokens. With only one group its name would just
+         repeat the section above it, so it goes label-less and draws no
+         header — the tokens still nest inside it. -->
+    <ThemeStudioSection
+      v-for="tokenGroup in tokenGroups"
+      :key="tokenGroup.key"
+      :label="tokenGroups.length > 1 ? tokenGroup.label : undefined"
+      :collapsible="false"
+      class="flex flex-col gap-2"
+    >
+      <ThemeStudioSection
+        v-for="section in tokenGroup.sections"
+        :key="section.token"
+        :label="section.label"
+        :collapsible="false"
+      >
         <ThemeStudioRow
           v-for="(slider, modeName) in section.sliders"
           :key="modeName"
           v-model="slider.model.value"
-          control="slider"
+          control="shade"
           :mode="modeName"
           :chip="rampChip(section.ramp)"
           :ladder="shadeLadder"
@@ -47,7 +58,7 @@ const tokenGroups = TOKEN_GROUPS
           :dirty="slider.dirty.value"
           @reset="slider.reset()"
         />
-      </div>
-    </div>
+      </ThemeStudioSection>
+    </ThemeStudioSection>
   </div>
 </template>

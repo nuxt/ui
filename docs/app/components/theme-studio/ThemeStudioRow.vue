@@ -10,6 +10,8 @@ import type { ChipProps } from '@nuxt/ui'
  *
  * `control` picks what sits in the row:
  *  - slider  a value slider with a typeable readout and optional reset
+ *  - shade   a slider over a ramp's stops, reading out as a stop picker,
+ *            labelled by its mode and a swatch of the colour it lands on
  *  - switch  a toggle, pushed to the far end (its label reads as a sentence)
  *  - select  a ThemeStudioDefaultSelect over `items`
  *  - custom  whatever the default slot provides (variant grids, pickers)
@@ -22,7 +24,7 @@ export interface RowSelectItem {
 }
 
 const props = withDefaults(defineProps<{
-  control?: 'slider' | 'switch' | 'select' | 'custom'
+  control?: 'slider' | 'shade' | 'switch' | 'select' | 'custom'
   /** Names the row (and the control, for aria) — shown unless an icon or chip replaces it. */
   label?: string
   /** Rendered in the label column, in place of the label text. */
@@ -37,9 +39,10 @@ const props = withDefaults(defineProps<{
   step?: number
   /** Readout suffix (%, px, rem, °). */
   unit?: string
-  /** Palette chip name — turns the row into a shade slider… */
+  /* shade */
+  /** Palette chip name the stops resolve against. */
   chip?: string
-  /** …for this color mode. */
+  /** Which color mode this row edits — names the row, with the swatch. */
   mode?: 'light' | 'dark'
   /** Shade-row ladder — the fine ramp swaps in the wider 21-stop ladder. */
   ladder?: readonly ShadeStop[]
@@ -73,7 +76,7 @@ const slots = defineSlots<{
 
 /* ---------------------------------------------------------------- slider -- */
 
-const shade = computed(() => !!props.chip && !!props.mode)
+const shade = computed(() => props.control === 'shade')
 // Shade rows span the ladder; plain rows use the caller's max (default 0).
 const sliderMax = computed(() => (shade.value ? props.ladder.length - 1 : props.max ?? SHADE_LADDER.length - 1))
 const stop = computed(() => props.ladder[model.value as number])
@@ -89,10 +92,17 @@ const contrastColor = computed(() => shade.value
   ? `oklch(from ${sliderColor.value} clamp(0.12, (0.66 - l) * 1000, 0.95) 0 h / 0.65)`
   : undefined)
 
+/** The stops themselves, so the readout is a pick rather than a number. */
+const stopItems = computed(() => props.ladder.map((entry, index) => ({ label: String(entry), value: String(index) })))
+
+// USelect speaks strings; the row's value is an index into the ladder.
+const stopModel = computed({
+  get: () => String(model.value ?? 0),
+  set: (value: string) => (model.value = Number(value))
+})
+
 /** `0.25rem` reads as `.25rem` — the leading zero is noise at this width. */
-const display = computed(() => shade.value
-  ? String(stop.value)
-  : `${String(model.value).replace(/^(-?)0\./, '$1.')}${props.unit ?? ''}`)
+const display = computed(() => `${String(model.value).replace(/^(-?)0\./, '$1.')}${props.unit ?? ''}`)
 
 // Typed values keep their precision (between-step values are deliberate); only
 // the range clamps. toFixed sweeps float noise from step arithmetic.
@@ -155,13 +165,13 @@ const showTextLabel = computed(() => !props.icon && !shade.value)
 
       <span v-else class="flex items-center gap-1.5 w-full">
         <UIcon :name="mode === 'light' ? 'i-lucide-sun' : 'i-lucide-moon'" class="size-3.5 text-muted shrink-0" />
-        <span class="h-3 w-6 grow rounded-sm bg-(--slider-color) ring ring-(--slider-contrast) me-px" />
+        <span class="h-4.5 w-7 rounded bg-(--slider-color) ring ring-(--slider-contrast) me-px" />
       </span>
     </template>
 
-    <template v-if="control === 'slider'">
-      <!-- Shade fills keep a hairline inset ring so a color matching the
-           panel background never makes the slider vanish. -->
+    <template v-if="control === 'slider' || control === 'shade'">
+      <!-- Shade rows ride the stock slider like every other row; the swatch
+           in the label carries the colour, so the track doesn't need to. -->
       <USlider
         v-model="model"
         :min="min"
@@ -170,10 +180,32 @@ const showTextLabel = computed(() => !props.icon && !shade.value)
         color="primary"
         size="xs"
         :aria-label="ariaLabel ?? label ?? mode"
-        :ui="sliderColor ? {
-          range: 'bg-(--slider-color) inset-ring inset-ring-(--slider-contrast)',
-          thumb: 'bg-(--slider-color) ring-1 ring-(--slider-contrast) shadow-sm'
-        } : undefined"
+      />
+
+      <!-- A shade is one of a fixed set of stops, so its readout picks from
+           them rather than asking anyone to type a ladder index. -->
+      <USelect
+        v-if="shade"
+        v-model="stopModel"
+        :items="stopItems"
+        size="xs"
+        color="neutral"
+        variant="none"
+        class="w-10 shrink-0"
+        :ui="{
+          /* the readout's own treatment: bare until you reach for it, when a
+             ring says it's editable. No chevron — the ring is the affordance */
+          /* pe-1 explicitly: the trigger reserves pe-7 for a chevron this row
+             hides, and `pe-*` outranks `px-*` in tailwind's cascade */
+          base: 'px-1 pe-1 text-xs text-right font-mono text-dimmed focus:text-default focus:ring-1 transition-all focus:ring-default hover:ring-1 ring-default',
+          value: 'truncate',
+          trailing: 'hidden',
+          /* the menu defaults to the trigger's width, and the trigger is a
+             10-wide readout — let the stops set their own width instead */
+          content: 'w-auto min-w-20',
+          item: 'text-xs font-mono'
+        }"
+        :aria-label="`${label ?? mode} shade`"
       />
 
       <!-- No v-model: partial keystrokes must not live-apply — the value
@@ -184,15 +216,14 @@ const showTextLabel = computed(() => !props.icon && !shade.value)
         type="text"
         inputmode="decimal"
         autocomplete="off"
-        variant="outline"
+        variant="none"
         size="xs"
-        class="w-8 shrink-0 hover:ring-1 ring-default"
-        :ui="{ base: 'text-xs text-right font-mono text-dimmed focus:text-default' }"
+        class="w-10 shrink-0"
+        :ui="{ base: 'px-1 text-xs text-right font-mono text-dimmed focus:text-default focus:ring-1 transition-all focus:ring-default hover:ring-1 ring-default' }"
         :aria-label="`${label ?? 'Value'} (arrow keys to adjust, Shift for ×10)`"
         @keydown="onReadoutKeydown"
         @change="commitReadout"
       />
-      <span v-else class="text-xs text-dimmed font-mono w-8 text-right shrink-0 truncate" :title="display">{{ display }}</span>
 
       <UButton
         v-if="resettable"
