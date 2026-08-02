@@ -26,10 +26,6 @@ const { primaryChip, neutralChip } = useThemeStudio()
 
 const shadeEditor = ref(false)
 
-// Colour rides the token, not the treatment: an inherited shadow or border
-// takes a tint too. Only 'none' has nothing left to colour.
-const colorable = computed(() => model.value !== 'none')
-
 // Only a shade source rides a ramp — every other colour is a literal.
 const onShade = computed(() => color.value === 'shade' || color.value === 'primary-shade')
 const chip = computed(() => (color.value === 'primary-shade' ? primaryChip.value : neutralChip.value))
@@ -37,7 +33,7 @@ const chip = computed(() => (color.value === 'primary-shade' ? primaryChip.value
 
 <template>
   <ThemeStudioSection :label="label" :section-key="sectionKey">
-    <template v-if="colorable" #actions>
+    <template v-if="model === 'custom'" #actions>
       <ThemeStudioActionToggle
         v-model="shadeEditor"
         icon="i-lucide-settings-2"
@@ -64,7 +60,7 @@ const chip = computed(() => (color.value === 'primary-shade' ? primaryChip.value
            gap would hang off the bottom of the panel. The space above the rule
            is the fold's own padding — a margin sits outside the animated box
            and would pop in before the height caught up. -->
-      <UCollapsible v-if="colorable" v-model:open="shadeEditor" :ui="{ content: 'overflow-hidden pt-2' }">
+      <UCollapsible v-if="model === 'custom'" v-model:open="shadeEditor" :ui="{ content: 'overflow-hidden pt-2' }">
         <template #content>
           <ThemeStudioShadeGroup
             :label="colorLabel ?? `${label} colour`"
