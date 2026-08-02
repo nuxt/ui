@@ -10,11 +10,15 @@ export interface ListPickerItem {
   [key: string]: unknown
 }
 
-const props = defineProps<{
+const props = withDefaults(defineProps<{
   items: ListPickerItem[]
   icon?: string
   ariaLabel?: string
-}>()
+  /** Panels use the default; the toolbar matches the controls beside it. */
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+}>(), {
+  size: 'sm'
+})
 
 const model = defineModel<string>({ required: true })
 
@@ -27,7 +31,7 @@ const selected = computed(() => props.items.find(item => item.value === model.va
     <UButton
       color="neutral"
       variant="subtle"
-      size="sm"
+      :size="size"
       block
       :icon="icon"
       trailing-icon="i-lucide-chevron-down"

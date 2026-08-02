@@ -2,7 +2,7 @@
 import { DEFAULT_PRESET_ID } from '../utils/theme-engine'
 
 const { track } = useAnalytics()
-const { resetTheme, icon: iconSet, fonts, font, icons, blackAsPrimary } = useTheme()
+const { resetTheme, icon: iconSet, font, icons, blackAsPrimary } = useTheme()
 
 // Toolbar skins to the applied icon pack; import/chevron reuse the standard
 // semantic keys off appConfig.ui.icons.
@@ -47,6 +47,8 @@ const appConfig = useAppConfig()
 const { groupDirty, presets, activePreset, applyPreset, primaryChip, neutralChip, rampChip } = useThemeStudio()
 
 const SEMANTIC_ALIASES = ['secondary', 'success', 'info', 'warning', 'error'] as const
+
+const iconSetItem = computed(() => icons.find(entry => entry.value === iconSet.value))
 
 /**
  * The Colors trigger wears the two colours it owns, so the toolbar reports
@@ -219,57 +221,44 @@ const shareMode = ref<'import' | 'export'>('export')
               </UPopover>
             </UFormField>
 
-            <!-- the family is the shortcut; everything else about type lives
-                 behind the ellipsis, as the panel section did -->
+            <!-- the value names the control; the popover holds the section
+                 that used to sit in the Options panel -->
             <UFormField label="Font" size="xs" :ui="fieldUi">
-              <UFieldGroup data-keep-panels>
-                <ThemeStudioFontPicker
-                  v-model="font"
-                  :curated="fonts"
-                  default-value="Public Sans"
+              <UPopover :content="{ align: 'start', onInteractOutside: keepPanels }">
+                <UButton
+                  :label="font"
                   icon="i-lucide-type"
+                  :trailing-icon="appConfig.ui.icons.chevronDown"
+                  color="neutral"
+                  variant="subtle"
+                  class="w-44"
+                  :ui="{ label: 'flex-1 min-w-0 text-left truncate' }"
                   aria-label="Font"
-                  class="w-34"
                 />
 
-                <UPopover :content="{ align: 'end', onInteractOutside: keepPanels }">
-                  <UButton
-                    icon="i-lucide-ellipsis"
-                    color="neutral"
-                    variant="subtle"
-                    aria-label="Font options"
-                  />
-
-                  <template #content>
-                    <ThemeStudioFontOptions class="w-80 p-4" />
-                  </template>
-                </UPopover>
-              </UFieldGroup>
+                <template #content>
+                  <ThemeStudioFontOptions class="w-80 p-4" />
+                </template>
+              </UPopover>
             </UFormField>
 
             <UFormField label="Icons" size="xs" :ui="fieldUi">
-              <UFieldGroup data-keep-panels>
-                <ThemeStudioListPicker
-                  v-model="iconSet"
-                  :items="icons"
-                  :icon="icons.find(entry => entry.value === iconSet)?.icon"
+              <UPopover :content="{ align: 'start', onInteractOutside: keepPanels }">
+                <UButton
+                  :label="iconSetItem?.label"
+                  :icon="iconSetItem?.icon"
+                  :trailing-icon="appConfig.ui.icons.chevronDown"
+                  color="neutral"
+                  variant="subtle"
+                  class="w-36"
+                  :ui="{ label: 'flex-1 min-w-0 text-left truncate' }"
                   aria-label="Icon set"
-                  class="w-32"
                 />
 
-                <UPopover :content="{ align: 'end', onInteractOutside: keepPanels }">
-                  <UButton
-                    icon="i-lucide-ellipsis"
-                    color="neutral"
-                    variant="subtle"
-                    aria-label="Icon options"
-                  />
-
-                  <template #content>
-                    <ThemeStudioIconOptions class="w-80 p-4" />
-                  </template>
-                </UPopover>
-              </UFieldGroup>
+                <template #content>
+                  <ThemeStudioIconOptions class="w-80 p-4" />
+                </template>
+              </UPopover>
             </UFormField>
 
             <UFormField label="Options" size="xs" :ui="fieldUi">

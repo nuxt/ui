@@ -233,7 +233,7 @@ const bodySampleStyle = computed(() => ({
     </template>
 
     <!-- live specimen: the heading treatment over the base body -->
-    <div class="rounded-md ring ring-default bg-elevated/50 px-3 py-2 select-none">
+    <div class="rounded-md ring ring-default bg-elevated/50 px-3 py-2 mt-2 select-none">
       <p class="text-sm text-highlighted truncate" :style="headingSampleStyle">
         Grumpy wizards make toxic brew
       </p>
