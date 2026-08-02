@@ -143,7 +143,7 @@ const shareMode = ref<'import' | 'export'>('export')
 <template>
   <!-- page tint composites on the app root's bg-default (nuxt.config rootAttrs) -->
   <main class="bg-elevated/25">
-    <UContainer :class="fullscreen && 'max-w-none px-0 sm:px-0 lg:px-0'">
+    <UContainer :class="fullscreen && 'max-w-none'" class="px-0 sm:px-0 lg:px-0">
       <!-- structured borders like /releases: border-x rails, no floating card -->
       <div class="flex flex-col w-full bg-default" :class="fullscreen ? 'h-dvh' : 'h-[calc(100dvh-var(--ui-header-height))] border-x border-default'">
         <!-- [contain:paint]: Chromium won't clip nested composited layers by
