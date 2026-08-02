@@ -28,10 +28,13 @@ const props = withDefaults(defineProps<{
   ladder: () => SHADE_LADDER
 })
 
-const dirty = computed(() => Object.values(props.sliders ?? {}).some(slider => slider.dirty.value))
+// `?? {}` inline in the v-for widens the item to never: keep the shape here
+const rows = computed<Partial<Record<'light' | 'dark', ShadeSlider>>>(() => props.sliders ?? {})
+
+const dirty = computed(() => Object.values(rows.value).some(slider => slider.dirty.value))
 
 function reset() {
-  Object.values(props.sliders ?? {}).forEach(slider => slider.reset())
+  Object.values(rows.value).forEach(slider => slider.reset())
 }
 </script>
 
@@ -47,7 +50,7 @@ function reset() {
     <slot />
 
     <ThemeStudioRow
-      v-for="(slider, mode) in sliders ?? {}"
+      v-for="(slider, mode) in rows"
       v-show="showRows"
       :key="mode"
       v-model="slider.model.value"
