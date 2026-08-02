@@ -50,7 +50,7 @@ function openExport() {
   <UPopover
     v-model:open="open"
     :content="{ onInteractOutside: keepPanels }"
-    :ui="{ content: 'w-72 p-3 flex flex-col gap-3' }"
+    :ui="{ content: 'w-72' }"
   >
     <UTooltip text="Theme">
       <UButton
@@ -65,81 +65,87 @@ function openExport() {
     </UTooltip>
 
     <template #content>
-      <div class="flex items-center justify-between gap-2">
-        <span class="text-xs font-semibold text-muted">Theme</span>
+      <!-- the card brings the rules and the padding; the popover already has
+           the surface, so its root drops its own ring and background -->
+      <UCard :ui="{ root: 'ring-0 bg-transparent', header: 'p-3 sm:px-3', body: 'p-3 sm:p-3', footer: 'p-3 sm:px-3' }">
+        <template #header>
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-xs font-semibold text-muted">Theme</span>
 
-        <UTooltip :text="dirty ? 'Reset theme' : 'Nothing to reset'">
+            <UTooltip :text="dirty ? 'Reset theme' : 'Nothing to reset'">
+              <UButton
+                :icon="studioIcons.reset"
+                size="xs"
+                :color="dirty ? 'primary' : 'neutral'"
+                variant="ghost"
+                :disabled="!dirty"
+                aria-label="Reset theme"
+                @click="resetTheme()"
+              />
+            </UTooltip>
+          </div>
+        </template>
+
+        <!-- Each tile paints itself in the preset it applies. -->
+        <div class="grid grid-cols-3 gap-2">
           <UButton
-            :icon="studioIcons.reset"
-            size="xs"
-            :color="dirty ? 'primary' : 'neutral'"
+            v-for="tile in presetTiles"
+            :key="tile.id"
+            color="neutral"
             variant="ghost"
-            :disabled="!dirty"
-            aria-label="Reset theme"
-            @click="resetTheme()"
-          />
-        </UTooltip>
-      </div>
-
-      <!-- Each tile paints itself in the preset it applies. -->
-      <div class="grid grid-cols-3 gap-2">
-        <UButton
-          v-for="tile in presetTiles"
-          :key="tile.id"
-          color="neutral"
-          variant="ghost"
-          block
-          class="rounded-lg"
-          :active="mounted && selectedPreset === tile.id"
-          active-color="primary"
-          active-variant="subtle"
-          :ui="{ base: 'flex-col gap-1 p-1' }"
-          :aria-label="tile.label"
-          @click="pickPreset(tile.id)"
-        >
-          <span
-            class="flex items-center justify-center h-12 w-full rounded-md ring ring-default bg-[image:var(--chip-bg-light)] dark:bg-[image:var(--chip-bg-dark)]"
-            :style="tile.chip"
+            block
+            class="rounded-lg"
+            :active="mounted && selectedPreset === tile.id"
+            active-color="primary"
+            active-variant="subtle"
+            :ui="{ base: 'flex-col gap-1 p-1' }"
+            :aria-label="tile.label"
+            @click="pickPreset(tile.id)"
           >
-            <UIcon :name="tile.icon" class="size-5 text-(--chip-icon-light) dark:text-(--chip-icon-dark)" />
-          </span>
+            <span
+              class="flex items-center justify-center h-12 w-full rounded-md ring ring-default bg-[image:var(--chip-bg-light)] dark:bg-[image:var(--chip-bg-dark)]"
+              :style="tile.chip"
+            >
+              <UIcon :name="tile.icon" class="size-5 text-(--chip-icon-light) dark:text-(--chip-icon-dark)" />
+            </span>
 
-          <span class="text-[11px] px-1 font-normal leading-tight text-center truncate w-full">{{ tile.label }}</span>
-        </UButton>
-      </div>
-
-      <template v-if="dirty || route.path !== '/theme'">
-        <USeparator />
-
-        <div class="flex items-center gap-2">
-          <!-- Export only once there's something to export. -->
-          <UButton
-            v-if="dirty"
-            label="Export"
-            :icon="studioIcons.export"
-            color="neutral"
-            variant="subtle"
-            size="sm"
-            :block="route.path === '/theme'"
-            :class="route.path !== '/theme' && 'flex-1 min-w-0'"
-            @click="openExport"
-          />
-
-          <UButton
-            v-if="route.path !== '/theme'"
-            label="Edit theme"
-            :icon="studioIcons.themes"
-            trailing-icon="i-lucide-arrow-right"
-            color="neutral"
-            variant="subtle"
-            size="sm"
-            :block="!dirty"
-            :class="dirty && 'flex-1 min-w-0'"
-            to="/theme"
-            @click="open = false"
-          />
+            <span class="text-[11px] px-1 font-normal leading-tight text-center truncate w-full">{{ tile.label }}</span>
+          </UButton>
         </div>
-      </template>
+
+        <!-- v-if on the template itself: an empty footer would still draw its
+             rule and padding -->
+        <template v-if="dirty || route.path !== '/theme'" #footer>
+          <div class="flex items-center gap-2">
+            <!-- Export only once there's something to export. -->
+            <UButton
+              v-if="dirty"
+              label="Export"
+              :icon="studioIcons.export"
+              color="neutral"
+              variant="subtle"
+              size="sm"
+              :block="route.path === '/theme'"
+              :class="route.path !== '/theme' && 'flex-1 min-w-0'"
+              @click="openExport"
+            />
+
+            <UButton
+              v-if="route.path !== '/theme'"
+              label="Edit theme"
+              :icon="studioIcons.themes"
+              trailing-icon="i-lucide-arrow-right"
+              color="neutral"
+              variant="subtle"
+              size="sm"
+              :block="!dirty"
+              :class="dirty && 'flex-1 min-w-0'"
+              to="/theme"
+              @click="open = false"
+            />
+          </div>
+        </template>
+      </UCard>
     </template>
   </UPopover>
 
