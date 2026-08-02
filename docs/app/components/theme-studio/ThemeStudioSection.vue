@@ -59,9 +59,10 @@ const open = ref(collapsible.value ? (props.defaultOpen ?? depth === 0) : true)
 
 // A first nested section sits right under the header — nothing above it to
 // separate from. Scoped to sections: any other first child keeps its padding.
-// overflow-hidden: the stock class only clips a CLOSED fold, so an opening
-// one paints full-size over what's below until the height catches up
-const contentClass = 'overflow-hidden pt-2 flex flex-col gap-2 [&>[data-studio-section]:first-child]:border-t-0 [&>[data-studio-section]:first-child]:mt-0 [&>[data-studio-section]:first-child]:pt-0'
+// Padding rides an inner box, never the animated one: padding can't collapse
+// below itself, so a fold with its own padding animates down to that padding
+// and then drops it in one frame when it unmounts.
+const contentClass = 'pt-2 flex flex-col gap-2 [&>[data-studio-section]:first-child]:border-t-0 [&>[data-studio-section]:first-child]:mt-0 [&>[data-studio-section]:first-child]:pt-0'
 </script>
 
 <template>
@@ -74,7 +75,7 @@ const contentClass = 'overflow-hidden pt-2 flex flex-col gap-2 [&>[data-studio-s
       depth === 0 ? 'p-4' : (separator ? 'pt-2' : ''),
       separator && 'border-t border-default'
     ]"
-    :ui="{ content: contentClass }"
+    :ui="{ content: 'overflow-hidden' }"
   >
     <div v-if="hasHeader" class="flex items-center gap-1">
       <!-- The leading chevron tells a fold apart from a select. -->
@@ -125,7 +126,9 @@ const contentClass = 'overflow-hidden pt-2 flex flex-col gap-2 [&>[data-studio-s
     </div>
 
     <template #content>
-      <slot />
+      <div :class="contentClass">
+        <slot />
+      </div>
     </template>
   </UCollapsible>
 </template>

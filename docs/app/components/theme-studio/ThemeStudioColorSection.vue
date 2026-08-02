@@ -52,18 +52,21 @@ const shadeEditor = ref(false)
       <ThemeStudioPaletteEditor v-model:open="paletteEditor" :alias="alias" />
 
       <!-- padding, not a margin: it has to sit inside the animated box -->
-      <UCollapsible v-model:open="shadeEditor" :ui="{ content: 'overflow-hidden pt-2' }">
+      <UCollapsible v-model:open="shadeEditor" :ui="{ content: 'overflow-hidden' }">
         <template #content>
-          <ThemeStudioShadeGroup
-            v-if="alias !== 'neutral'"
-            :label="`${title} shades`"
-            :sliders="sections[0]!.sliders"
-            :chip="rampChip(alias)"
-            :ladder="shadeLadder"
-          />
+          <!-- the padding sits inside the animated box, not on it -->
+          <div class="pt-2">
+            <ThemeStudioShadeGroup
+              v-if="alias !== 'neutral'"
+              :label="`${title} shades`"
+              :sliders="sections[0]!.sliders"
+              :chip="rampChip(alias)"
+              :ladder="shadeLadder"
+            />
 
-          <!-- borders live in the Style panel's Borders section -->
-          <ThemeStudioTokenShades v-else :alias="alias" :groups="['background', 'text']" />
+            <!-- borders live in the Style panel's Borders section -->
+            <ThemeStudioTokenShades v-else :alias="alias" :groups="['background', 'text']" />
+          </div>
         </template>
       </UCollapsible>
     </div>

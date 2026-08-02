@@ -60,24 +60,27 @@ const chip = computed(() => (color.value === 'primary-shade' ? primaryChip.value
            gap would hang off the bottom of the panel. The space above the rule
            is the fold's own padding — a margin sits outside the animated box
            and would pop in before the height caught up. -->
-      <UCollapsible v-if="model === 'custom'" v-model:open="shadeEditor" :ui="{ content: 'overflow-hidden pt-2' }">
+      <UCollapsible v-if="model === 'custom'" v-model:open="shadeEditor" :ui="{ content: 'overflow-hidden' }">
         <template #content>
-          <ThemeStudioShadeGroup
-            :label="colorLabel ?? `${label} colour`"
-            :sliders="shades"
-            :chip="chip"
-            :show-rows="onShade"
-          >
-            <ThemeStudioDefaultSelect
-              v-model="color"
-              :items="colorItems"
-              icon="i-lucide-paint-bucket"
-              class="w-full"
-              :aria-label="`${label} color`"
-            />
-          </ThemeStudioShadeGroup>
+          <!-- the padding sits inside the animated box, not on it -->
+          <div class="pt-2">
+            <ThemeStudioShadeGroup
+              :label="colorLabel ?? `${label} colour`"
+              :sliders="shades"
+              :chip="chip"
+              :show-rows="onShade"
+            >
+              <ThemeStudioDefaultSelect
+                v-model="color"
+                :items="colorItems"
+                icon="i-lucide-paint-bucket"
+                class="w-full"
+                :aria-label="`${label} color`"
+              />
+            </ThemeStudioShadeGroup>
 
-          <slot name="shades" />
+            <slot name="shades" />
+          </div>
         </template>
       </UCollapsible>
     </div>
