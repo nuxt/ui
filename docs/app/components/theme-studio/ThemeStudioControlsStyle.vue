@@ -102,7 +102,6 @@ const frameSolids = computed({
 const borderColorItems = [
   { label: 'Per element', value: 'default', defaultTag: true },
   { label: 'Inverted', value: 'inverted' },
-  { label: 'White', value: 'white' },
   { label: 'Primary', value: 'primary' },
   { label: 'Neutral', value: 'neutral' },
   { label: 'Neutral shade', value: 'shade' },
