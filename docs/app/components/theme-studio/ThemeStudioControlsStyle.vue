@@ -285,26 +285,31 @@ const isShadeColor = (color?: string) => color === 'shade' || color === 'primary
           <!-- colour + shade sliders sit last, behind the header toggle -->
           <UCollapsible v-model:open="shadeEditors[section.dirtyKey]">
             <template #content>
-              <ThemeStudioDefaultSelect
-                v-model="section.color.value"
-                :items="section.colorItems"
-                icon="i-lucide-paint-bucket"
-                class="w-full"
-                :aria-label="`${section.label} color`"
-              />
-
-              <ThemeStudioRow
-                v-for="(slider, modeName) in section.shades"
-                v-show="isShadeColor(section.color.value)"
-                :key="modeName"
-                v-model="slider.model.value"
-                control="shade"
-                :mode="modeName"
-                :chip="section.color.value === 'primary-shade' ? primaryChip : neutralChip"
+              <ThemeStudioSection
+                :label="`${section.label} colour`"
                 resettable
-                :dirty="slider.dirty.value"
-                @reset="slider.reset()"
-              />
+                :reset-dirty="Object.values(section.shades).some(slider => slider.dirty.value)"
+                @reset="Object.values(section.shades).forEach(slider => slider.reset())"
+              >
+                <ThemeStudioDefaultSelect
+                  v-model="section.color.value"
+                  :items="section.colorItems"
+                  icon="i-lucide-paint-bucket"
+                  class="w-full"
+                  :aria-label="`${section.label} color`"
+                />
+
+                <!-- only a shade source has shades to pick -->
+                <ThemeStudioRow
+                  v-for="(slider, modeName) in section.shades"
+                  v-show="isShadeColor(section.color.value)"
+                  :key="modeName"
+                  v-model="slider.model.value"
+                  control="shade"
+                  :mode="modeName"
+                  :chip="section.color.value === 'primary-shade' ? primaryChip : neutralChip"
+                />
+              </ThemeStudioSection>
             </template>
           </UCollapsible>
         </div>
@@ -360,26 +365,30 @@ const isShadeColor = (color?: string) => color === 'shade' || color === 'primary
                Colors panel), behind the header toggle -->
         <UCollapsible v-model:open="borderShadeEditor">
           <template #content>
-            <ThemeStudioDefaultSelect
-              v-model="borderColor"
-              :items="borderColorItems"
-              icon="i-lucide-paint-bucket"
-              class="w-full"
-              aria-label="Border color"
-            />
-
-            <ThemeStudioRow
-              v-for="(slider, modeName) in borderShades"
-              v-show="borderColor === 'shade' || borderColor === 'primary-shade'"
-              :key="modeName"
-              v-model="slider.model.value"
-              control="shade"
-              :mode="modeName"
-              :chip="borderColor === 'primary-shade' ? primaryChip : neutralChip"
+            <ThemeStudioSection
+              label="Border colour"
               resettable
-              :dirty="slider.dirty.value"
-              @reset="slider.reset()"
-            />
+              :reset-dirty="Object.values(borderShades).some(slider => slider.dirty.value)"
+              @reset="Object.values(borderShades).forEach(slider => slider.reset())"
+            >
+              <ThemeStudioDefaultSelect
+                v-model="borderColor"
+                :items="borderColorItems"
+                icon="i-lucide-paint-bucket"
+                class="w-full"
+                aria-label="Border color"
+              />
+
+              <ThemeStudioRow
+                v-for="(slider, modeName) in borderShades"
+                v-show="isShadeColor(borderColor)"
+                :key="modeName"
+                v-model="slider.model.value"
+                control="shade"
+                :mode="modeName"
+                :chip="borderColor === 'primary-shade' ? primaryChip : neutralChip"
+              />
+            </ThemeStudioSection>
 
             <ThemeStudioTokenShades :alias="'neutral'" :groups="['border']" />
           </template>

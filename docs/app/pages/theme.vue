@@ -357,6 +357,12 @@ const shareMode = ref<'import' | 'export'>('export')
               </UFieldGroup>
             </div>
 
+            <!-- fullscreen hides the header, and with it the only way to
+                 flip the mode a theme is being judged in -->
+            <UTooltip v-if="fullscreen" text="Color mode" :kbds="['ctrl', 'shift', 'D']">
+              <UColorModeButton color="neutral" variant="subtle" data-keep-panels class="shrink-0" />
+            </UTooltip>
+
             <UTooltip :text="fullscreen ? 'Exit fullscreen' : 'Fullscreen preview'" :kbds="fullscreen ? ['Esc'] : ['F']">
               <UButton
                 :icon="fullscreen ? studioIcons.exitFullscreen : studioIcons.fullscreen"

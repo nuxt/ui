@@ -49,18 +49,23 @@ const slots = defineSlots<{
 const depth = inject(SECTION_DEPTH, 0)
 provide(SECTION_DEPTH, depth + 1)
 
-const collapsible = computed(() => props.collapsible ?? depth < 2)
+// Nothing in the header means it's a bare group — a chevron with no label
+// beside it is a trigger for nothing.
+const hasHeader = computed(() => !!(props.label || props.helpTo || showReset.value || slots.actions))
+const collapsible = computed(() => props.collapsible ?? (depth < 2 && hasHeader.value))
 const separator = computed(() => props.separator ?? depth < 2)
 
 const open = ref(collapsible.value ? (props.defaultOpen ?? depth === 0) : true)
 
-// A first child sits right under the header — nothing above it to separate from.
-const contentClass = 'pt-2 flex flex-col gap-2 [&>*:first-child]:border-t-0 [&>*:first-child]:mt-0 [&>*:first-child]:pt-0'
+// A first nested section sits right under the header — nothing above it to
+// separate from. Scoped to sections: any other first child keeps its padding.
+const contentClass = 'pt-2 flex flex-col gap-2 [&>[data-studio-section]:first-child]:border-t-0 [&>[data-studio-section]:first-child]:mt-0 [&>[data-studio-section]:first-child]:pt-0'
 </script>
 
 <template>
   <UCollapsible
     v-model:open="open"
+    data-studio-section
     :disabled="!collapsible"
     :class="[
       /* Space above a rule is the parent's gap, below it this padding. */
@@ -69,7 +74,7 @@ const contentClass = 'pt-2 flex flex-col gap-2 [&>*:first-child]:border-t-0 [&>*
     ]"
     :ui="{ content: contentClass }"
   >
-    <div v-if="collapsible || label || helpTo || showReset || !!slots.actions" class="flex items-center gap-1">
+    <div v-if="hasHeader" class="flex items-center gap-1">
       <!-- The leading chevron tells a fold apart from a select. -->
       <UButton
         :label="label"
