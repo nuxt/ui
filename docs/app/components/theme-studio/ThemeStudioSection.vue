@@ -59,7 +59,9 @@ const open = ref(collapsible.value ? (props.defaultOpen ?? depth === 0) : true)
 
 // A first nested section sits right under the header — nothing above it to
 // separate from. Scoped to sections: any other first child keeps its padding.
-const contentClass = 'pt-2 flex flex-col gap-2 [&>[data-studio-section]:first-child]:border-t-0 [&>[data-studio-section]:first-child]:mt-0 [&>[data-studio-section]:first-child]:pt-0'
+// overflow-hidden: the stock class only clips a CLOSED fold, so an opening
+// one paints full-size over what's below until the height catches up
+const contentClass = 'overflow-hidden pt-2 flex flex-col gap-2 [&>[data-studio-section]:first-child]:border-t-0 [&>[data-studio-section]:first-child]:mt-0 [&>[data-studio-section]:first-child]:pt-0'
 </script>
 
 <template>
