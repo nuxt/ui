@@ -123,8 +123,10 @@ const groupColors = Object.fromEntries(variantGroupFields.map(field => [field.ke
                   :key="item.value"
                   size="sm"
                   block
-                  :color="(groupVariants[field.key].value === item.value || (groupVariants[field.key].value === 'default' && item.value === field.stock)) ? 'primary' : 'neutral'"
+                  color="neutral"
                   :variant="RENDERABLE_VARIANTS.includes(item.value) ? (item.value as any) : 'subtle'"
+                  :active="groupVariants[field.key].value === item.value || (groupVariants[field.key].value === 'default' && item.value === field.stock)"
+                  active-color="primary"
                   :class="[item.value === 'none' && 'opacity-60', 'min-w-0']"
                   @click="groupVariants[field.key].value = (item.value === field.stock ? 'default' : item.value); variantGridOpen[field.key] = false"
                 >

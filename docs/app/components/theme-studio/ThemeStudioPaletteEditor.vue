@@ -680,8 +680,10 @@ function resetEffects() {
             <UTooltip :text="effectsDirty ? 'Reset modifiers' : 'No modifiers active'">
               <UButton
                 icon="i-lucide-rotate-ccw"
-                :color="effectsDirty ? 'primary' : 'neutral'"
+                color="neutral"
                 variant="ghost"
+                :active="effectsDirty"
+                active-variant="outline"
                 size="sm"
                 :disabled="!effectsDirty"
                 aria-label="Reset modifiers"

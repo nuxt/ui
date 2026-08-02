@@ -111,8 +111,10 @@ const contentClass = 'pt-2 flex flex-col gap-2 [&>[data-studio-section]:first-ch
       <UTooltip v-if="showReset" :text="dirty ? 'Reset to preset' : 'Matches the preset'">
         <UButton
           size="sm"
-          :color="dirty ? 'primary' : 'neutral'"
+          color="neutral"
           variant="ghost"
+          :active="dirty"
+          active-variant="outline"
           icon="i-lucide-rotate-ccw"
           :disabled="!dirty"
           :aria-label="label ? `Reset ${label} to preset` : 'Reset to preset'"

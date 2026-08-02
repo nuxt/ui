@@ -72,17 +72,19 @@ function openExport() {
     <template #content>
       <!-- the card brings the rules and the padding; the popover already has
            the surface, so its root drops its own ring and background -->
-      <UCard :ui="{ root: 'ring-0 bg-transparent', header: 'p-3 sm:px-3', body: 'p-3 sm:p-3', footer: 'p-3 sm:px-3' }">
+      <UCard :ui="{ root: 'ring-0 bg-transparent', header: 'p-3 sm:px-3', body: 'p-2 sm:p-2', footer: 'p-3 sm:px-3' }">
         <template #header>
           <div class="flex items-center justify-between gap-2">
-            <span class="text-xs font-semibold text-muted">Theme</span>
+            <span class="text-sm font-semibold text-highlighted">Theme</span>
 
             <UTooltip :text="dirty ? 'Reset theme' : 'Nothing to reset'">
               <UButton
                 :icon="studioIcons.reset"
                 size="xs"
-                :color="dirty ? 'primary' : 'neutral'"
+                color="neutral"
                 variant="ghost"
+                :active="dirty"
+                active-variant="outline"
                 :disabled="!dirty"
                 aria-label="Reset theme"
                 @click="resetTheme()"
@@ -98,13 +100,13 @@ function openExport() {
           :items="presetTiles"
           value-key="id"
           :ui="{
-            root: 'ring-0 rounded-none overflow-visible',
-            content: 'max-h-none overflow-visible',
-            group: 'p-0 grid grid-cols-3 gap-1',
-            item: 'flex-col rounded-lg ring-inset data-[state=checked]:bg-elevated/50',
-            itemLabel: 'w-full text-[11px] leading-tight text-center truncate',
-            itemTrailing: 'hidden',
-            itemWrapper: 'p-1 min-w-0'
+            root: 'ring-0',
+            content: 'max-h-none',
+            group: 'p-0 grid grid-cols-3',
+            item: 'flex-col rounded-lg data-[state=checked]:bg-elevated/50',
+            itemWrapper: 'min-w-0 w-full text-center',
+            itemLabel: 'w-full truncate text-xs',
+            itemTrailing: 'hidden'
           }"
         >
           <template #item-leading="{ item }">
@@ -127,7 +129,7 @@ function openExport() {
               label="Export"
               :icon="studioIcons.export"
               color="neutral"
-              variant="subtle"
+              variant="outline"
               size="sm"
               :block="route.path === '/theme'"
               :class="route.path !== '/theme' && 'flex-1 min-w-0'"
@@ -140,7 +142,7 @@ function openExport() {
               :icon="studioIcons.themes"
               trailing-icon="i-lucide-arrow-right"
               color="neutral"
-              variant="subtle"
+              variant="outline"
               size="sm"
               :block="!dirty"
               :class="dirty && 'flex-1 min-w-0'"
