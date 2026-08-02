@@ -6,19 +6,19 @@ defineProps<{
 </script>
 
 <template>
-  <ThemeStudioControlsColors v-if="group === 'colors'" />
+  <!-- One root either way: the panels render as fragments, so a class on the
+       component would fall through to nothing. Sections stay siblings here,
+       which is what lets each draw its own rule — the panel drops the leading
+       one, since there's nothing above it to separate from. -->
+  <div class="flex flex-col [&>*:first-child]:border-t-0">
+    <ThemeStudioControlsColors v-if="group === 'colors'" />
 
-  <!-- Style is type, icons and scale, then the shadow/border treatments,
-       with the per-component defaults trailing behind, collapsed. -->
-  <div v-else class="flex flex-col">
-    <ThemeStudioControlsGeneral />
+    <template v-else>
+      <ThemeStudioControlsGeneral />
 
-    <USeparator />
+      <ThemeStudioControlsStyle />
 
-    <ThemeStudioControlsStyle />
-
-    <USeparator />
-
-    <ThemeStudioControlsDefaults />
+      <ThemeStudioControlsDefaults />
+    </template>
   </div>
 </template>

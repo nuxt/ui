@@ -4,12 +4,13 @@
  * preset, colors, font, icons, radius — for fast theming from any page,
  * with reset and export beside them and the full studio one click away.
  */
-import { iconSetSamples } from '../../utils/theme'
+import { resolveAlias, resolveShade } from '../../utils/theme-engine'
+import type { ThemeDoc, Shade } from '../../utils/theme-engine'
 
 const route = useRoute()
 const { track } = useAnalytics()
 const studioIcons = useStudioIcons()
-const { fonts, font, icon, icons, radius, hasCSSChanges, hasConfigChanges, resetTheme } = useTheme()
+const { fonts, hasCSSChanges, hasConfigChanges, resetTheme } = useTheme()
 
 const open = ref(false)
 const shareOpen = ref(false)
@@ -37,10 +38,30 @@ watch(open, (isOpen) => {
   }
 })
 
-const aliases = [
-  { alias: 'primary', label: 'Primary' },
-  { alias: 'neutral', label: 'Neutral' }
-] as const
+const { presets, selectedPreset, applyPreset } = useThemeStudio()
+
+/** The preset's own neutral ramp, with its icon in its primary. */
+function tileChip(doc: ThemeDoc) {
+  const shade = (alias: 'primary' | 'neutral', step: Shade) => resolveShade(doc, resolveAlias(doc, alias), step)
+  return {
+    '--chip-bg-light': `linear-gradient(135deg, ${shade('neutral', 50)}, ${shade('neutral', 200)})`,
+    '--chip-bg-dark': `linear-gradient(135deg, ${shade('neutral', 900)}, ${shade('neutral', 800)})`,
+    '--chip-icon-light': doc.blackAsPrimary ? 'black' : shade('primary', 500),
+    '--chip-icon-dark': doc.blackAsPrimary ? 'white' : shade('primary', 400)
+  }
+}
+
+const presetTiles = computed(() => presets.map(preset => ({
+  id: preset.id,
+  label: preset.name,
+  icon: preset.icon,
+  chip: tileChip(preset.doc)
+})))
+
+function pickPreset(id: string) {
+  const preset = presets.find(entry => entry.id === id)
+  if (preset) applyPreset(preset)
+}
 
 function openExport() {
   open.value = false
@@ -83,65 +104,28 @@ function openExport() {
         </UTooltip>
       </div>
 
-      <!-- Every row leads with a w-13 label — the same column the studio's
-           slider rows use, so Radius lines up with the pickers above it. -->
-      <div class="flex flex-col gap-2">
-        <div class="flex items-center gap-2">
-          <span class="text-xs text-muted w-13 shrink-0 select-none">Preset</span>
-
-          <ThemeStudioPresetMenu size="sm" :random="false" class="flex-1 min-w-0" />
-        </div>
-
-        <div v-for="{ alias, label } in aliases" :key="alias" class="flex items-center gap-2">
-          <span class="text-xs text-muted w-13 shrink-0 select-none">{{ label }}</span>
-
-          <ThemeStudioColorMenu :alias="alias" class="flex-1 min-w-0" />
-        </div>
-
-        <div class="flex items-center gap-2">
-          <span class="text-xs text-muted w-13 shrink-0 select-none">Font</span>
-
-          <ThemeStudioFontPicker
-            v-model="font"
-            :curated="fonts"
-            default-value="Public Sans"
-            icon="i-lucide-type"
-            aria-label="Font"
-            class="flex-1 min-w-0"
-          />
-        </div>
-
-        <div class="flex items-center gap-2">
-          <span class="text-xs text-muted w-13 shrink-0 select-none">Icons</span>
-
-          <ThemeStudioListPicker
-            v-model="icon"
-            :items="icons"
-            :icon="icons.find(entry => entry.value === icon)?.icon"
-            aria-label="Icon set"
-            class="flex-1 min-w-0"
+      <!-- Each tile paints itself in the preset it applies. -->
+      <div class="grid grid-cols-3 gap-2">
+        <button
+          v-for="tile in presetTiles"
+          :key="tile.id"
+          type="button"
+          class="group flex flex-col gap-1 rounded-md p-1 text-left transition-colors hover:bg-elevated/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+          @click="pickPreset(tile.id)"
+        >
+          <span
+            class="flex items-center justify-center h-12 w-full rounded-md ring bg-[image:var(--chip-bg-light)] dark:bg-[image:var(--chip-bg-dark)]"
+            :class="mounted && selectedPreset === tile.id ? 'ring-2 ring-primary' : 'ring-default'"
+            :style="tile.chip"
           >
-            <!-- every set previews a strip of its own glyphs -->
-            <template #item-description="{ item }">
-              <span class="flex items-center gap-1.5 pt-0.5">
-                <UIcon
-                  v-for="name in iconSetSamples(item.value)"
-                  :key="name"
-                  :name="name"
-                  class="size-3.5 text-muted"
-                />
-              </span>
-            </template>
-          </ThemeStudioListPicker>
-        </div>
+            <UIcon :name="tile.icon" class="size-5 text-(--chip-icon-light) dark:text-(--chip-icon-dark)" />
+          </span>
 
-        <ThemeStudioSliderRow
-          v-model="radius"
-          label="Radius"
-          :min="0"
-          :max="0.5"
-          :step="0.125"
-        />
+          <span
+            class="text-[11px] leading-tight truncate w-full"
+            :class="mounted && selectedPreset === tile.id ? 'text-highlighted font-medium' : 'text-muted'"
+          >{{ tile.label }}</span>
+        </button>
       </div>
 
       <template v-if="dirty || route.path !== '/theme'">

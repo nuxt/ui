@@ -3,19 +3,7 @@ import { SHADE_LADDER } from '../../utils/theme-engine'
 import type { ShadeStop } from '../../utils/theme-engine'
 import type { ChipProps } from '@nuxt/ui'
 
-/**
- * The studio's control row. Every settings row in every panel is this
- * component: a tiny label (or icon, or shade chip), then the control, all on
- * one 28px line so a row of sliders, switches and selects share a baseline.
- *
- * `control` picks what sits in the row:
- *  - slider  a value slider with a typeable readout and optional reset
- *  - shade   a slider over a ramp's stops, reading out as a stop picker,
- *            labelled by its mode and a swatch of the colour it lands on
- *  - switch  a toggle, pushed to the far end (its label reads as a sentence)
- *  - select  a ThemeStudioDefaultSelect over `items`
- *  - custom  whatever the default slot provides (variant grids, pickers)
- */
+/** Every settings row in every panel: label, then the control, on one 28px line. */
 export interface RowSelectItem {
   label: string
   value: string
@@ -25,35 +13,26 @@ export interface RowSelectItem {
 
 const props = withDefaults(defineProps<{
   control?: 'slider' | 'shade' | 'switch' | 'select' | 'custom'
-  /** Names the row (and the control, for aria) — shown unless an icon or chip replaces it. */
   label?: string
-  /** Rendered in the label column, in place of the label text. */
+  /** Replaces the label text in the column. */
   icon?: string
-  /** The control's OWN icon (a select's leading glyph) — not the label's. */
+  /** The control's own glyph, not the label's. */
   controlIcon?: string
   ariaLabel?: string
 
-  /* slider */
   min?: number
   max?: number
   step?: number
   /** Readout suffix (%, px, rem, °). */
   unit?: string
-  /* shade */
-  /** Palette chip name the stops resolve against. */
+  /** Palette the shade stops resolve against. */
   chip?: string
-  /** Which color mode this row edits — names the row, with the swatch. */
   mode?: 'light' | 'dark'
-  /** Shade-row ladder — the fine ramp swaps in the wider 21-stop ladder. */
+  /** Fine ramps swap in the wider 21-stop ladder. */
   ladder?: readonly ShadeStop[]
-  /**
-   * Per-row reset button; `reset` means the host deletes its override —
-   * writing the default value would pin a lookalike override.
-   */
+  /** `reset` deletes the override — writing the default would pin a lookalike. */
   resettable?: boolean
   dirty?: boolean
-
-  /* select */
   items?: RowSelectItem[]
 }>(), {
   control: 'slider',
@@ -62,22 +41,20 @@ const props = withDefaults(defineProps<{
   ladder: () => SHADE_LADDER
 })
 
-// Optional: a `custom` row owns no value — its slot brings its own control.
+// Optional: a `custom` row's slot brings its own control.
 const model = defineModel<any>()
 
 const emit = defineEmits<{ reset: [] }>()
 
 const slots = defineSlots<{
-  /** `control="custom"` — the whole control area. */
+  /** The control area, for `custom`. */
   default: () => any
-  /** `control="select"` — leading content in the select trigger (a chip). */
+  /** Leading content in a `select` trigger. */
   leading: () => any
 }>()
 
-/* ---------------------------------------------------------------- slider -- */
-
 const shade = computed(() => props.control === 'shade')
-// Shade rows span the ladder; plain rows use the caller's max (default 0).
+// Shade rows span the ladder; plain rows use the caller's max.
 const sliderMax = computed(() => (shade.value ? props.ladder.length - 1 : props.max ?? SHADE_LADDER.length - 1))
 const stop = computed(() => props.ladder[model.value as number])
 const sliderColor = computed(() => {
@@ -86,16 +63,14 @@ const sliderColor = computed(() => {
   return stop.value === 'white' || stop.value === 'black' ? stop.value : `var(--color-${props.chip}-${stop.value})`
 })
 
-// Border derived FROM the fill via relative colour syntax — the ×1000 turns
-// the lightness difference into a hard near-black/near-white switch.
+// ×1000 turns the lightness difference into a hard black/white switch.
 const contrastColor = computed(() => shade.value
   ? `oklch(from ${sliderColor.value} clamp(0.12, (0.66 - l) * 1000, 0.95) 0 h / 0.65)`
   : undefined)
 
-/** The stops themselves, so the readout is a pick rather than a number. */
 const stopItems = computed(() => props.ladder.map((entry, index) => ({ label: String(entry), value: String(index) })))
 
-// USelect speaks strings; the row's value is an index into the ladder.
+// USelect speaks strings; the value is an index into the ladder.
 const stopModel = computed({
   get: () => String(model.value ?? 0),
   set: (value: string) => (model.value = Number(value))
@@ -104,8 +79,7 @@ const stopModel = computed({
 /** `0.25rem` reads as `.25rem` — the leading zero is noise at this width. */
 const display = computed(() => `${String(model.value).replace(/^(-?)0\./, '$1.')}${props.unit ?? ''}`)
 
-// Typed values keep their precision (between-step values are deliberate); only
-// the range clamps. toFixed sweeps float noise from step arithmetic.
+// Only the range clamps — typed between-step values are deliberate.
 function clamp(raw: number): number {
   return Number(Math.min(sliderMax.value, Math.max(props.min, raw)).toFixed(4))
 }
@@ -132,12 +106,7 @@ function commitReadout(event: Event) {
   input.value = display.value
 }
 
-/* ----------------------------------------------------------------- shell -- */
-
-/**
- * Switch labels read as sentences, so they take their natural width and
- *  push the toggle to the far end; everything else shares the label column.
- */
+// Switch labels read as sentences: natural width, toggle pushed to the end.
 const spread = computed(() => props.control === 'switch')
 
 const showTextLabel = computed(() => !props.icon && !shade.value)
@@ -150,12 +119,10 @@ const showTextLabel = computed(() => !props.icon && !shade.value)
     size="xs"
     :style="sliderColor ? { '--slider-color': sliderColor, '--slider-contrast': contrastColor } : undefined"
     :ui="{
-      /* min-h-7 is the row contract: a 28px line, matching a size-sm button,
-         whatever the control's own height happens to be */
+      /* the row contract: 28px, matching a size-sm button */
       root: 'flex items-center gap-2 min-h-7',
       wrapper: spread ? 'shrink-0' : 'w-13 shrink-0',
-      /* truncate only text labels in the column — overflow:hidden would clip
-         the shade chip's ring once thick-border themes inflate it */
+      /* truncate text labels only — it would clip the shade chip's ring */
       label: `w-full text-muted font-normal select-none${showTextLabel && !spread ? ' truncate' : ''}`,
       container: `flex-1 flex items-center gap-2 mt-0${spread ? ' justify-end' : ''}`
     }"
@@ -163,15 +130,13 @@ const showTextLabel = computed(() => !props.icon && !shade.value)
     <template v-if="icon || shade" #label>
       <UIcon v-if="icon" :name="icon" class="size-3.5 text-muted" />
 
-      <span v-else class="flex items-center gap-1.5 w-full">
+      <span v-else class="flex items-center gap-2 w-full">
         <UIcon :name="mode === 'light' ? 'i-lucide-sun' : 'i-lucide-moon'" class="size-3.5 text-muted shrink-0" />
-        <span class="h-4.5 w-7 rounded bg-(--slider-color) ring ring-(--slider-contrast) me-px" />
+        <span class="size-3.5 grow rounded-full bg-(--slider-color) ring ring-(--slider-contrast) me-px" />
       </span>
     </template>
 
     <template v-if="control === 'slider' || control === 'shade'">
-      <!-- Shade rows ride the stock slider like every other row; the swatch
-           in the label carries the colour, so the track doesn't need to. -->
       <USlider
         v-model="model"
         :min="min"
@@ -182,8 +147,7 @@ const showTextLabel = computed(() => !props.icon && !shade.value)
         :aria-label="ariaLabel ?? label ?? mode"
       />
 
-      <!-- A shade is one of a fixed set of stops, so its readout picks from
-           them rather than asking anyone to type a ladder index. -->
+      <!-- Fixed set of stops, so the readout picks rather than types. -->
       <USelect
         v-if="shade"
         v-model="stopModel"
@@ -193,23 +157,19 @@ const showTextLabel = computed(() => !props.icon && !shade.value)
         variant="none"
         class="w-10 shrink-0"
         :ui="{
-          /* the readout's own treatment: bare until you reach for it, when a
-             ring says it's editable. No chevron — the ring is the affordance */
-          /* pe-1 explicitly: the trigger reserves pe-7 for a chevron this row
-             hides, and `pe-*` outranks `px-*` in tailwind's cascade */
-          base: 'px-1 pe-1 text-xs text-right font-mono text-dimmed focus:text-default focus:ring-1 transition-all focus:ring-default hover:ring-1 ring-default',
+          /* bare until hovered, when a ring says it's editable */
+          /* pe-7 is reserved for a chevron we hide, and outranks px-* */
+          base: 'px-1 pe-1 text-xs justify-end font-mono text-dimmed focus:text-default focus:ring-1 transition-all focus:ring-default hover:ring-1 ring-default',
           value: 'truncate',
           trailing: 'hidden',
-          /* the menu defaults to the trigger's width, and the trigger is a
-             10-wide readout — let the stops set their own width instead */
+          /* the menu would inherit the readout's 10-wide trigger */
           content: 'w-auto min-w-20',
           item: 'text-xs font-mono'
         }"
         :aria-label="`${label ?? mode} shade`"
       />
 
-      <!-- No v-model: partial keystrokes must not live-apply — the value
-           commits on change/Enter, arrows nudge through the keydown handler. -->
+      <!-- No v-model: partial keystrokes must not live-apply. -->
       <UInput
         v-if="!shade"
         :model-value="display"

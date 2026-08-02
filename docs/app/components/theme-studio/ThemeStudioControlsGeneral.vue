@@ -159,217 +159,209 @@ const defaultSize = computed({
 
 <template>
   <!-- Sections own their padding so the separators run edge to edge. -->
-  <div class="flex flex-col">
-    <ThemeStudioSection
-      label="Font"
-      help-to="/docs/getting-started/integrations/fonts"
-      class="p-4"
-      section-key="font"
-    >
-      <div class="flex flex-col gap-2">
-        <template v-for="row in fontRows" :key="row.key">
-          <span class="text-xs font-medium text-muted select-none" :class="row.key === 'heading' && 'pt-1'">{{ row.label }}</span>
+  <ThemeStudioSection
+    label="Font"
+    help-to="/docs/getting-started/integrations/fonts"
+    section-key="font"
+  >
+    <div class="flex flex-col gap-2">
+      <template v-for="row in fontRows" :key="row.key">
+        <span class="text-xs font-medium text-muted select-none" :class="row.key === 'heading' && 'pt-1'">{{ row.label }}</span>
 
-          <div class="flex items-center gap-1.5">
-            <!-- each family renders itself over a live specimen line;
-                 searching reaches the full Google Fonts catalog -->
-            <ThemeStudioFontPicker
-              v-model="row.font.value"
-              :curated="fonts"
-              :default-value="row.defaultValue"
-              :inherit="row.key === 'heading'"
-              :icon="row.selectIcon"
-              :aria-label="`${row.label} font`"
-              class="flex-1 min-w-0"
-            />
+        <div class="flex items-center gap-1.5">
+          <!-- each family renders itself over a live specimen line;
+               searching reaches the full Google Fonts catalog -->
+          <ThemeStudioFontPicker
+            v-model="row.font.value"
+            :curated="fonts"
+            :default-value="row.defaultValue"
+            :inherit="row.key === 'heading'"
+            :icon="row.selectIcon"
+            :aria-label="`${row.label} font`"
+            class="flex-1 min-w-0"
+          />
 
-            <UFieldGroup size="sm">
-              <UPopover :content="{ align: 'start' }">
-                <UTooltip :text="row.weights.length > 1 ? 'Weights' : 'Weight'">
-                  <UButton
-                    icon="i-lucide-bold"
-                    color="neutral"
-                    variant="subtle"
-                    :active="row.weightsActive.value"
-                    active-color="primary"
-                    active-variant="subtle"
-                    :aria-label="row.aria.weights"
-                  />
-                </UTooltip>
-
-                <template #content>
-                  <div class="w-64 p-3 flex flex-col gap-1.5">
-                    <ThemeStudioRow
-                      v-for="weight in row.weights"
-                      :key="weight.label"
-                      v-model="weight.model.value"
-                      control="slider"
-                      :label="weight.label"
-                      :min="weight.min"
-                      :max="weight.max"
-                      :step="25"
-                    />
-                  </div>
-                </template>
-              </UPopover>
-
-              <UTooltip text="Uppercase">
+          <UFieldGroup size="sm">
+            <UPopover :content="{ align: 'start' }">
+              <UTooltip :text="row.weights.length > 1 ? 'Weights' : 'Weight'">
                 <UButton
-                  icon="i-lucide-case-upper"
+                  icon="i-lucide-bold"
                   color="neutral"
                   variant="subtle"
-                  :active="row.uppercase.value"
+                  :active="row.weightsActive.value"
                   active-color="primary"
                   active-variant="subtle"
-                  :aria-label="row.aria.uppercase"
-                  @click="row.uppercase.value = !row.uppercase.value"
+                  :aria-label="row.aria.weights"
                 />
               </UTooltip>
 
-              <UPopover :content="{ align: 'start' }">
-                <UTooltip text="Letter spacing">
-                  <UButton
-                    icon="i-lucide-move-horizontal"
-                    color="neutral"
-                    variant="subtle"
-                    :active="row.letterSpacing.value !== 0"
-                    active-color="primary"
-                    active-variant="subtle"
-                    :aria-label="row.aria.spacing"
-                  />
-                </UTooltip>
-
-                <template #content>
+              <template #content>
+                <div class="w-64 p-3 flex flex-col gap-1.5">
                   <ThemeStudioRow
-                    v-model="row.letterSpacing.value"
+                    v-for="weight in row.weights"
+                    :key="weight.label"
+                    v-model="weight.model.value"
                     control="slider"
-                    label="Spacing"
-                    :min="-0.05"
-                    :max="0.25"
-                    :step="0.005"
-                    unit="em"
-                    class="w-64 p-3"
+                    :label="weight.label"
+                    :min="weight.min"
+                    :max="weight.max"
+                    :step="25"
                   />
-                </template>
-              </UPopover>
+                </div>
+              </template>
+            </UPopover>
 
-              <UPopover :content="{ align: 'start' }">
-                <UTooltip text="Line height">
-                  <UButton
-                    icon="i-lucide-move-vertical"
-                    color="neutral"
-                    variant="subtle"
-                    :active="row.lineHeight.value !== row.lineHeightDefault"
-                    active-color="primary"
-                    active-variant="subtle"
-                    :aria-label="row.aria.height"
-                  />
-                </UTooltip>
-
-                <template #content>
-                  <ThemeStudioRow
-                    v-model="row.lineHeight.value"
-                    control="slider"
-                    label="Height"
-                    :min="1"
-                    :max="2"
-                    :step="0.05"
-                    class="w-64 p-3"
-                  />
-                </template>
-              </UPopover>
-            </UFieldGroup>
-          </div>
-        </template>
-
-        <!-- live specimen: the heading treatment over the base body -->
-        <div class="rounded-md ring ring-default bg-elevated/50 px-3 py-2 select-none">
-          <p class="text-sm text-highlighted truncate" :style="headingSampleStyle">
-            Grumpy wizards make toxic brew
-          </p>
-          <p class="text-xs text-muted truncate" :style="bodySampleStyle">
-            The quick brown fox jumps over the lazy dog 0123456789
-          </p>
-        </div>
-      </div>
-    </ThemeStudioSection>
-
-    <USeparator />
-
-    <ThemeStudioSection
-      label="Icons"
-      help-to="/docs/getting-started/integrations/icons"
-      class="p-4"
-      section-key="icons"
-    >
-      <div class="flex flex-col gap-2">
-        <!-- every set previews a strip of its own glyphs -->
-        <ThemeStudioListPicker
-          v-model="icon"
-          :items="icons"
-          :icon="icons.find(i => i.value === icon)?.icon"
-          aria-label="Icon set"
-        >
-          <template #item-description="{ item }">
-            <span class="flex items-center gap-1.5 pt-0.5">
-              <UIcon
-                v-for="name in iconSetSamples(item.value)"
-                :key="name"
-                :name="name"
-                class="size-3.5 text-muted"
+            <UTooltip text="Uppercase">
+              <UButton
+                icon="i-lucide-case-upper"
+                color="neutral"
+                variant="subtle"
+                :active="row.uppercase.value"
+                active-color="primary"
+                active-variant="subtle"
+                :aria-label="row.aria.uppercase"
+                @click="row.uppercase.value = !row.uppercase.value"
               />
-            </span>
-          </template>
-        </ThemeStudioListPicker>
+            </UTooltip>
 
-        <!-- a spread of the selected set -->
-        <div class="rounded-md ring ring-default bg-elevated/50 px-3 py-2 flex flex-wrap justify-center gap-2.5">
-          <UIcon v-for="name in iconPreviews" :key="name" :name="name" class="size-4 text-muted" />
+            <UPopover :content="{ align: 'start' }">
+              <UTooltip text="Letter spacing">
+                <UButton
+                  icon="i-lucide-move-horizontal"
+                  color="neutral"
+                  variant="subtle"
+                  :active="row.letterSpacing.value !== 0"
+                  active-color="primary"
+                  active-variant="subtle"
+                  :aria-label="row.aria.spacing"
+                />
+              </UTooltip>
+
+              <template #content>
+                <ThemeStudioRow
+                  v-model="row.letterSpacing.value"
+                  control="slider"
+                  label="Spacing"
+                  :min="-0.05"
+                  :max="0.25"
+                  :step="0.005"
+                  unit="em"
+                  class="w-64 p-3"
+                />
+              </template>
+            </UPopover>
+
+            <UPopover :content="{ align: 'start' }">
+              <UTooltip text="Line height">
+                <UButton
+                  icon="i-lucide-move-vertical"
+                  color="neutral"
+                  variant="subtle"
+                  :active="row.lineHeight.value !== row.lineHeightDefault"
+                  active-color="primary"
+                  active-variant="subtle"
+                  :aria-label="row.aria.height"
+                />
+              </UTooltip>
+
+              <template #content>
+                <ThemeStudioRow
+                  v-model="row.lineHeight.value"
+                  control="slider"
+                  label="Height"
+                  :min="1"
+                  :max="2"
+                  :step="0.05"
+                  class="w-64 p-3"
+                />
+              </template>
+            </UPopover>
+          </UFieldGroup>
         </div>
+      </template>
+
+      <!-- live specimen: the heading treatment over the base body -->
+      <div class="rounded-md ring ring-default bg-elevated/50 px-3 py-2 select-none">
+        <p class="text-sm text-highlighted truncate" :style="headingSampleStyle">
+          Grumpy wizards make toxic brew
+        </p>
+        <p class="text-xs text-muted truncate" :style="bodySampleStyle">
+          The quick brown fox jumps over the lazy dog 0123456789
+        </p>
       </div>
-    </ThemeStudioSection>
+    </div>
+  </ThemeStudioSection>
 
-    <USeparator />
+  <ThemeStudioSection
+    label="Icons"
+    help-to="/docs/getting-started/integrations/icons"
+    section-key="icons"
+  >
+    <div class="flex flex-col gap-2">
+      <!-- every set previews a strip of its own glyphs -->
+      <ThemeStudioListPicker
+        v-model="icon"
+        :items="icons"
+        :icon="icons.find(i => i.value === icon)?.icon"
+        aria-label="Icon set"
+      >
+        <template #item-description="{ item }">
+          <span class="flex items-center gap-1.5 pt-0.5">
+            <UIcon
+              v-for="name in iconSetSamples(item.value)"
+              :key="name"
+              :name="name"
+              class="size-3.5 text-muted"
+            />
+          </span>
+        </template>
+      </ThemeStudioListPicker>
 
-    <ThemeStudioSection label="Scale" class="p-4" section-key="scale">
-      <div class="flex flex-col gap-2">
-        <ThemeStudioRow
-          v-model="radius"
-          control="slider"
-          label="Radius"
-          :min="0"
-          :max="0.5"
-          :step="0.125"
-        />
-
-        <ThemeStudioRow
-          v-model="fontSize"
-          control="slider"
-          label="Text"
-          :min="14"
-          :max="18"
-          :step="0.5"
-          unit="px"
-        />
-
-        <ThemeStudioRow
-          v-model="spacing"
-          control="slider"
-          label="Spacing"
-          :min="0.15"
-          :max="0.35"
-          :step="0.025"
-        />
-
-        <ThemeStudioRow
-          v-model="defaultSize"
-          control="select"
-          label="Size"
-          control-icon="i-lucide-proportions"
-          :items="defaultSizeItems"
-          aria-label="Default size"
-        />
+      <!-- a spread of the selected set -->
+      <div class="rounded-md ring ring-default bg-elevated/50 px-3 py-2 flex flex-wrap justify-center gap-2.5">
+        <UIcon v-for="name in iconPreviews" :key="name" :name="name" class="size-4 text-muted" />
       </div>
-    </ThemeStudioSection>
-  </div>
+    </div>
+  </ThemeStudioSection>
+
+  <ThemeStudioSection label="Scale" section-key="scale">
+    <div class="flex flex-col gap-2">
+      <ThemeStudioRow
+        v-model="radius"
+        control="slider"
+        label="Radius"
+        :min="0"
+        :max="0.5"
+        :step="0.125"
+      />
+
+      <ThemeStudioRow
+        v-model="fontSize"
+        control="slider"
+        label="Text"
+        :min="14"
+        :max="18"
+        :step="0.5"
+        unit="px"
+      />
+
+      <ThemeStudioRow
+        v-model="spacing"
+        control="slider"
+        label="Spacing"
+        :min="0.15"
+        :max="0.35"
+        :step="0.025"
+      />
+
+      <ThemeStudioRow
+        v-model="defaultSize"
+        control="select"
+        label="Size"
+        control-icon="i-lucide-proportions"
+        :items="defaultSizeItems"
+        aria-label="Default size"
+      />
+    </div>
+  </ThemeStudioSection>
 </template>

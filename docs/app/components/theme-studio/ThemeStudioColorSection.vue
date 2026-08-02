@@ -7,18 +7,14 @@ import type { ColorAlias, SectionKey } from '../../utils/theme-engine'
  * shade sliders folding out underneath. Color aliases expose their accent
  * pair; neutral carries every neutral-ramped token group.
  */
-const props = withDefaults(defineProps<{
+const props = defineProps<{
   alias: ColorAlias
   /** Header text — defaults to the capitalized alias. */
   label?: string
   helpTo?: string
   /** Passed through to the section header's reset affordance. */
   sectionKey?: SectionKey
-  /** Off for the aliases nested under Semantic — only top level folds. */
-  collapsible?: boolean
-}>(), {
-  collapsible: true
-})
+}>()
 
 const { rampChip } = useThemeStudio()
 const { shadeLadder, sections } = useTokenShades(props.alias)
@@ -30,14 +26,14 @@ const shadeEditor = ref(false)
 </script>
 
 <template>
-  <ThemeStudioSection :label="title" :help-to="helpTo" :section-key="sectionKey" :collapsible="collapsible">
+  <ThemeStudioSection :label="title" :help-to="helpTo" :section-key="sectionKey">
     <template #actions>
       <UTooltip text="Adjust shades">
         <UButton
           icon="i-lucide-settings-2"
           color="neutral"
           variant="ghost"
-          size="xs"
+          size="sm"
           :active="shadeEditor"
           active-color="primary"
           active-variant="subtle"
@@ -50,7 +46,7 @@ const shadeEditor = ref(false)
           icon="i-lucide-tangent"
           color="neutral"
           variant="ghost"
-          size="xs"
+          size="sm"
           :active="paletteEditor"
           active-color="primary"
           active-variant="subtle"
@@ -65,25 +61,34 @@ const shadeEditor = ref(false)
 
       <ThemeStudioPaletteEditor v-model:open="paletteEditor" :alias="alias" />
 
-      <!-- The accent pair for color aliases. -->
-      <div v-if="shadeEditor && alias !== 'neutral'" class="flex flex-col gap-1.5 pt-2">
-        <ThemeStudioRow
-          v-for="(slider, modeName) in sections[0]!.sliders"
-          :key="modeName"
-          v-model="slider.model.value"
-          control="shade"
-          :mode="modeName"
-          :chip="rampChip(alias)"
-          :ladder="shadeLadder"
-          resettable
-          :dirty="slider.dirty.value"
-          @reset="slider.reset()"
-        />
-      </div>
+      <!-- Folds like the palette editor above it, rather than popping in. -->
+      <UCollapsible v-model:open="shadeEditor">
+        <template #content>
+          <!-- The accent pair for color aliases, in a section of its own so
+               it carries the same header and reset as the neutral groups. -->
+          <ThemeStudioSection
+            v-if="alias !== 'neutral'"
+            :label="`${title} shades`"
+            resettable
+            :reset-dirty="Object.values(sections[0]!.sliders).some(slider => slider.dirty.value)"
+            @reset="Object.values(sections[0]!.sliders).forEach(slider => slider.reset())"
+          >
+            <ThemeStudioRow
+              v-for="(slider, modeName) in sections[0]!.sliders"
+              :key="modeName"
+              v-model="slider.model.value"
+              control="shade"
+              :mode="modeName"
+              :chip="rampChip(alias)"
+              :ladder="shadeLadder"
+            />
+          </ThemeStudioSection>
 
-      <!-- Every neutral-ramped semantic token — background and text; borders
-           moved to the Style panel's Borders section. -->
-      <ThemeStudioTokenShades v-else-if="shadeEditor" :alias="alias" :groups="['background', 'text']" />
+          <!-- Every neutral-ramped semantic token — background and text;
+               borders moved to the Style panel's Borders section. -->
+          <ThemeStudioTokenShades v-else :alias="alias" :groups="['background', 'text']" />
+        </template>
+      </UCollapsible>
     </div>
   </ThemeStudioSection>
 </template>
