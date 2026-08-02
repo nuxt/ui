@@ -23,11 +23,11 @@ const viewIcons = useStudioViewIcons()
     :ui="{
       root: 'ring-0 rounded-none overflow-visible',
       content: 'max-h-none overflow-visible',
-      group: 'p-0 grid grid-cols-2 gap-1',
-      item: 'flex-col rounded-lg ring-inset data-[state=checked]:bg-elevated/50',
+      group: 'p-0 grid grid-cols-2 gap-2',
+      item: 'flex-col p-2 rounded-lg ring-inset data-[state=checked]:bg-elevated/50',
       itemDescription: 'whitespace-normal line-clamp-2 text-xs',
       itemTrailing: 'hidden',
-      itemWrapper: 'p-1'
+      itemWrapper: 'p-1.5'
     }"
     @update:model-value="emit('select')"
   >
