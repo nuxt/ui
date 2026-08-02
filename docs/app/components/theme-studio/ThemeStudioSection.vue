@@ -48,21 +48,23 @@ const open = ref(props.collapsible ? props.defaultOpen : true)
        header/content markup below has one shape. -->
   <UCollapsible v-model:open="open" :disabled="!collapsible">
     <div class="flex items-center gap-1">
-      <!-- Leading chevron: the disclosure cue that tells a fold trigger
-           apart from a select (whose chevron trails). Static sections get a
-           plain label — nothing to disclose. -->
+      <!-- One button either way, so padding, size and type come from one
+           place. Leading chevron: the disclosure cue that tells a fold
+           trigger apart from a select (whose chevron trails). A static
+           section renders as a span with no chevron and no hover — nothing
+           to disclose, nothing to click. -->
       <UButton
-        v-if="collapsible"
         :label="label"
-        :icon="open ? 'i-lucide-chevron-down' : 'i-lucide-chevron-right'"
+        :icon="collapsible ? (open ? 'i-lucide-chevron-down' : 'i-lucide-chevron-right') : undefined"
+        :as="collapsible ? undefined : 'span'"
         color="neutral"
         variant="ghost"
         size="sm"
         block
         class="justify-start flex-1"
+        :class="{ 'px-0': !collapsible }"
+        :ui="collapsible ? undefined : { base: 'hover:bg-transparent cursor-default select-none' }"
       />
-
-      <span v-else class="flex-1 text-xs font-medium text-muted select-none px-2">{{ label }}</span>
 
       <UTooltip text="Docs">
         <UButton

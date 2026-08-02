@@ -106,9 +106,7 @@ const groupColors = Object.fromEntries(variantGroupFields.map(field => [field.ke
         :collapsible="false"
       >
         <div class="flex flex-col gap-1.5">
-          <div class="flex items-center gap-2">
-            <span class="text-xs text-muted w-13 shrink-0 select-none">Variant</span>
-
+          <ThemeStudioRow control="custom" label="Variant">
             <UPopover v-model:open="variantGridOpen[field.key]" :content="{ side: 'bottom', align: 'start' }" class="flex-1">
               <UButton
                 size="sm"
@@ -144,26 +142,24 @@ const groupColors = Object.fromEntries(variantGroupFields.map(field => [field.ke
                 </div>
               </template>
             </UPopover>
-          </div>
+          </ThemeStudioRow>
 
-          <div v-if="field.hasColor" class="flex items-center gap-2">
-            <span class="text-xs text-muted w-13 shrink-0 select-none">Color</span>
-
-            <ThemeStudioDefaultSelect
-              v-model="groupColors[field.key].value"
-              :items="defaultColorItems"
-              class="flex-1"
-              :aria-label="`${field.label} color`"
-            >
-              <template #leading>
-                <UChip
-                  :color="(groupColors[field.key].value === 'default' ? 'primary' : groupColors[field.key].value) as any"
-                  inset
-                  standalone
-                />
-              </template>
-            </ThemeStudioDefaultSelect>
-          </div>
+          <ThemeStudioRow
+            v-if="field.hasColor"
+            v-model="groupColors[field.key].value"
+            control="select"
+            label="Color"
+            :items="defaultColorItems"
+            :aria-label="`${field.label} color`"
+          >
+            <template #leading>
+              <UChip
+                :color="(groupColors[field.key].value === 'default' ? 'primary' : groupColors[field.key].value) as any"
+                inset
+                standalone
+              />
+            </template>
+          </ThemeStudioRow>
         </div>
       </ThemeStudioSection>
     </div>

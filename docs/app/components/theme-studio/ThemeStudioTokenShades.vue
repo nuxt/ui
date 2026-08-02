@@ -35,10 +35,11 @@ const tokenGroups = TOKEN_GROUPS
       <div v-for="section in tokenGroup.sections" :key="section.token" class="flex flex-col gap-1.5 px-1">
         <span class="text-xs text-muted select-none">{{ section.label }}</span>
 
-        <ThemeStudioSliderRow
+        <ThemeStudioRow
           v-for="(slider, modeName) in section.sliders"
           :key="modeName"
           v-model="slider.model.value"
+          control="slider"
           :mode="modeName"
           :chip="rampChip(section.ramp)"
           :ladder="shadeLadder"

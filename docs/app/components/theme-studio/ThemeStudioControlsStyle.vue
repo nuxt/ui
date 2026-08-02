@@ -251,9 +251,10 @@ const isShadeColor = (color?: string) => color === 'shade' || color === 'primary
             class="w-full"
           />
 
-          <div v-if="section.model.value === 'custom'" class="mt-1.5 flex flex-col gap-2">
-            <ThemeStudioSliderRow
+          <div v-if="section.model.value === 'custom'" class="mt-2 flex flex-col gap-2">
+            <ThemeStudioRow
               v-model="section.opacity.value"
+              control="slider"
               label="Opacity"
               :min="5"
               :max="100"
@@ -262,10 +263,11 @@ const isShadeColor = (color?: string) => color === 'shade' || color === 'primary
             />
 
             <template v-if="section.hard.value">
-              <ThemeStudioSliderRow
+              <ThemeStudioRow
                 v-for="field in geometryFields"
                 :key="field.key"
                 v-model="section.geometry[field.key].value"
+                control="slider"
                 :label="field.label"
                 :min="field.min"
                 :max="field.max"
@@ -273,11 +275,12 @@ const isShadeColor = (color?: string) => color === 'shade' || color === 'primary
                 unit="px"
               />
 
-              <div v-if="section.press" class="flex items-center justify-between gap-2">
-                <span class="text-xs text-muted select-none">Buttons sink on press</span>
-
-                <USwitch v-model="section.press.value" size="sm" aria-label="Buttons sink on press" />
-              </div>
+              <ThemeStudioRow
+                v-if="section.press"
+                v-model="section.press.value"
+                control="switch"
+                label="Buttons sink on press"
+              />
             </template>
 
             <!-- colour + shade sliders sit last, behind the header toggle -->
@@ -290,11 +293,12 @@ const isShadeColor = (color?: string) => color === 'shade' || color === 'primary
                 :aria-label="`${section.label} color`"
               />
 
-              <ThemeStudioSliderRow
+              <ThemeStudioRow
                 v-for="(slider, modeName) in section.shades"
                 v-show="isShadeColor(section.color.value)"
                 :key="modeName"
                 v-model="slider.model.value"
+                control="slider"
                 :mode="modeName"
                 :chip="section.color.value === 'primary-shade' ? primaryChip : neutralChip"
                 resettable
@@ -337,8 +341,9 @@ const isShadeColor = (color?: string) => color === 'shade' || color === 'primary
         />
 
         <div v-if="borderStyle === 'custom'" class="mt-1.5 flex flex-col gap-2">
-          <ThemeStudioSliderRow
+          <ThemeStudioRow
             v-model="borderWidth"
+            control="slider"
             label="Width"
             :min="1"
             :max="4"
@@ -346,11 +351,11 @@ const isShadeColor = (color?: string) => color === 'shade' || color === 'primary
             unit="px"
           />
 
-          <div class="flex items-center justify-between gap-2">
-            <span class="text-xs text-muted select-none">Frame solid surfaces</span>
-
-            <USwitch v-model="frameSolids" size="sm" aria-label="Frame solid surfaces" />
-          </div>
+          <ThemeStudioRow
+            v-model="frameSolids"
+            control="switch"
+            label="Frame solid surfaces"
+          />
 
           <!-- colour, shades and the neutral border tokens (relocated from the
                Colors panel), behind the header toggle -->
@@ -363,11 +368,12 @@ const isShadeColor = (color?: string) => color === 'shade' || color === 'primary
               aria-label="Border color"
             />
 
-            <ThemeStudioSliderRow
+            <ThemeStudioRow
               v-for="(slider, modeName) in borderShades"
               v-show="borderColor === 'shade' || borderColor === 'primary-shade'"
               :key="modeName"
               v-model="slider.model.value"
+              control="slider"
               :mode="modeName"
               :chip="borderColor === 'primary-shade' ? primaryChip : neutralChip"
               resettable

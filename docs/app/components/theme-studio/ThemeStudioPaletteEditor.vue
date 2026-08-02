@@ -692,8 +692,9 @@ function resetEffects() {
 
           <template #content>
             <div class="flex flex-col gap-1.5 pt-2 px-1">
-              <ThemeStudioSliderRow
+              <ThemeStudioRow
                 v-model="effectAmount"
+                control="slider"
                 label="Effect"
                 icon="i-lucide-eye"
                 :min="0"
@@ -703,10 +704,11 @@ function resetEffects() {
                 @update:model-value="applyEffects()"
               />
 
-              <ThemeStudioSliderRow
+              <ThemeStudioRow
                 v-for="row in effectRows"
                 :key="row.key"
                 v-model="effects[row.key]"
+                control="slider"
                 :label="row.label"
                 :min="row.min"
                 :max="row.max"

@@ -67,10 +67,11 @@ const shadeEditor = ref(false)
 
       <!-- The accent pair for color aliases. -->
       <div v-if="shadeEditor && alias !== 'neutral'" class="flex flex-col gap-1.5 pt-2">
-        <ThemeStudioSliderRow
+        <ThemeStudioRow
           v-for="(slider, modeName) in sections[0]!.sliders"
           :key="modeName"
           v-model="slider.model.value"
+          control="slider"
           :mode="modeName"
           :chip="rampChip(alias)"
           :ladder="shadeLadder"

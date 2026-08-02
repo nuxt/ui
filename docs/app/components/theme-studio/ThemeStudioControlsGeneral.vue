@@ -209,10 +209,11 @@ const defaultSize = computed({
 
                 <template #content>
                   <div class="w-64 p-3 flex flex-col gap-1.5">
-                    <ThemeStudioSliderRow
+                    <ThemeStudioRow
                       v-for="weight in row.weights"
                       :key="weight.label"
                       v-model="weight.model.value"
+                      control="slider"
                       :label="weight.label"
                       :min="weight.min"
                       :max="weight.max"
@@ -249,8 +250,9 @@ const defaultSize = computed({
                 </UTooltip>
 
                 <template #content>
-                  <ThemeStudioSliderRow
+                  <ThemeStudioRow
                     v-model="row.letterSpacing.value"
+                    control="slider"
                     label="Spacing"
                     :min="-0.05"
                     :max="0.25"
@@ -275,8 +277,9 @@ const defaultSize = computed({
                 </UTooltip>
 
                 <template #content>
-                  <ThemeStudioSliderRow
+                  <ThemeStudioRow
                     v-model="row.lineHeight.value"
+                    control="slider"
                     label="Height"
                     :min="1"
                     :max="2"
@@ -330,16 +333,18 @@ const defaultSize = computed({
 
     <ThemeStudioSection label="Scale" class="p-4" section-key="scale">
       <div class="flex flex-col gap-2">
-        <ThemeStudioSliderRow
+        <ThemeStudioRow
           v-model="radius"
+          control="slider"
           label="Radius"
           :min="0"
           :max="0.5"
           :step="0.125"
         />
 
-        <ThemeStudioSliderRow
+        <ThemeStudioRow
           v-model="fontSize"
+          control="slider"
           label="Text"
           :min="14"
           :max="18"
@@ -347,19 +352,23 @@ const defaultSize = computed({
           unit="px"
         />
 
-        <ThemeStudioSliderRow v-model="spacing" label="Spacing" :min="0.15" :max="0.35" :step="0.025" />
+        <ThemeStudioRow
+          v-model="spacing"
+          control="slider"
+          label="Spacing"
+          :min="0.15"
+          :max="0.35"
+          :step="0.025"
+        />
 
-        <div class="flex items-center gap-2">
-          <span class="text-xs text-muted w-13 shrink-0 select-none">Size</span>
-
-          <ThemeStudioDefaultSelect
-            v-model="defaultSize"
-            :items="defaultSizeItems"
-            icon="i-lucide-proportions"
-            class="flex-1"
-            aria-label="Default size"
-          />
-        </div>
+        <ThemeStudioRow
+          v-model="defaultSize"
+          control="select"
+          label="Size"
+          control-icon="i-lucide-proportions"
+          :items="defaultSizeItems"
+          aria-label="Default size"
+        />
       </div>
     </ThemeStudioSection>
   </div>
