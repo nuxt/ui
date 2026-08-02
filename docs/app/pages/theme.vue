@@ -144,7 +144,7 @@ const shareMode = ref<'import' | 'export'>('export')
             <!-- fullscreen hides the header, and with it the only way to
                  flip the mode a theme is being judged in -->
             <UTooltip v-if="fullscreen" text="Color mode" :kbds="['ctrl', 'shift', 'D']">
-              <UColorModeButton color="neutral" variant="subtle" data-keep-panels class="shrink-0" />
+              <UColorModeButton color="neutral" variant="outline" data-keep-panels class="shrink-0" />
             </UTooltip>
 
             <UFieldGroup class="shrink-0">
@@ -152,7 +152,7 @@ const shareMode = ref<'import' | 'export'>('export')
                 <UButton
                   :icon="studioIcons.undo"
                   color="neutral"
-                  variant="subtle"
+                  variant="outline"
                   :disabled="!past.length"
                   aria-label="Undo theme change"
                   @click="undo"
@@ -163,7 +163,7 @@ const shareMode = ref<'import' | 'export'>('export')
                 <UButton
                   :icon="studioIcons.redo"
                   color="neutral"
-                  variant="subtle"
+                  variant="outline"
                   :disabled="!future.length"
                   aria-label="Redo theme change"
                   @click="redo"
@@ -175,7 +175,7 @@ const shareMode = ref<'import' | 'export'>('export')
               <UButton
                 :icon="studioIcons.reset"
                 color="neutral"
-                variant="subtle"
+                variant="outline"
                 :disabled="!canReset"
                 :aria-label="resetLabel"
                 @click="resetToBaseline"
@@ -188,7 +188,7 @@ const shareMode = ref<'import' | 'export'>('export')
                   <UButton
                     :icon="appConfig.ui.icons.upload"
                     color="neutral"
-                    variant="subtle"
+                    variant="outline"
                     aria-label="Import theme"
                     @click="shareMode = 'import'; shareOpen = true"
                   />
@@ -198,7 +198,7 @@ const shareMode = ref<'import' | 'export'>('export')
                   label="Export"
                   :icon="studioIcons.export"
                   color="neutral"
-                  variant="subtle"
+                  variant="outline"
                   @click="shareMode = 'export'; shareOpen = true"
                 />
               </UFieldGroup>
@@ -208,7 +208,7 @@ const shareMode = ref<'import' | 'export'>('export')
               <UButton
                 :icon="fullscreen ? studioIcons.exitFullscreen : studioIcons.fullscreen"
                 color="neutral"
-                variant="subtle"
+                variant="outline"
                 :aria-label="fullscreen ? 'Exit fullscreen preview' : 'Fullscreen preview'"
                 @click="fullscreen = !fullscreen"
               />

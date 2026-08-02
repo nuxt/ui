@@ -33,7 +33,7 @@ const templateViews = views.filter(tab => tab.image)
         :label="activeView?.label"
         :trailing-icon="appConfig.ui.icons.chevronDown"
         color="neutral"
-        variant="subtle"
+        variant="ghost"
         aria-label="Preview page"
         v-bind="$attrs"
       />
