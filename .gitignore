@@ -41,3 +41,6 @@ playgrounds/repl/dist/
 
 # VSC
 .history
+
+# Playwright MCP scratch output
+.playwright-mcp
