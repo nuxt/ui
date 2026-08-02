@@ -23,18 +23,20 @@ const props = withDefaults(defineProps<{
   /** A colour source with no shades keeps its group, minus the sliders. */
   showRows?: boolean
 }>(), {
+  // an empty record rather than undefined: a `?? {}` in the v-for widens the
+  // item to never, and a Partial makes every row possibly-undefined
+  sliders: () => ({}) as Record<'light' | 'dark', ShadeSlider>,
   separator: undefined,
   showRows: true,
   ladder: () => SHADE_LADDER
 })
 
-// `?? {}` inline in the v-for widens the item to never: keep the shape here
-const rows = computed<Partial<Record<'light' | 'dark', ShadeSlider>>>(() => props.sliders ?? {})
+const rows = computed(() => Object.values(props.sliders))
 
-const dirty = computed(() => Object.values(rows.value).some(slider => slider.dirty.value))
+const dirty = computed(() => rows.value.some(slider => slider.dirty.value))
 
 function reset() {
-  Object.values(rows.value).forEach(slider => slider.reset())
+  rows.value.forEach(slider => slider.reset())
 }
 </script>
 
@@ -42,7 +44,7 @@ function reset() {
   <ThemeStudioSection
     :label="label"
     :separator="separator"
-    :resettable="!!sliders"
+    :resettable="!!rows.length"
     :reset-dirty="dirty"
     @reset="reset"
   >
@@ -50,7 +52,7 @@ function reset() {
     <slot />
 
     <ThemeStudioRow
-      v-for="(slider, mode) in rows"
+      v-for="(slider, mode) in sliders"
       v-show="showRows"
       :key="mode"
       v-model="slider.model.value"
