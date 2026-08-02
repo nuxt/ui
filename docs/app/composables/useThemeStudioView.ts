@@ -74,6 +74,25 @@ export function useStudioViewIcons() {
 }
 
 /**
+ * Mirrors the preview into ?view=, so a reload (or a shared link) lands on the
+ * same page. Read during setup rather than on mount: the server renders the
+ * requested view, and hydration has nothing to correct.
+ */
+export function useThemeStudioViewParam() {
+  const { view, views } = useThemeStudioView()
+  const route = useRoute()
+  const router = useRouter()
+
+  const requested = route.query.view
+  if (typeof requested === 'string' && views.some(tab => tab.value === requested)) {
+    view.value = requested as ThemeStudioView
+  }
+
+  // grid is the default, so it stays out of the URL
+  watch(view, value => router.replace({ query: { ...route.query, view: value === 'grid' ? undefined : value } }))
+}
+
+/**
  * The fullscreen preview's chrome, for the page that hosts it: Esc to leave,
  * and a bar that reveals as the pointer nears the bottom edge.
  */

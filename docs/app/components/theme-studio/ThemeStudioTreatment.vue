@@ -16,7 +16,8 @@ defineProps<{
   colorItems: DefaultSelectItem[]
   /** Names the colour fold-out; defaults to "<label> colour". */
   colorLabel?: string
-  shades: Record<'light' | 'dark', ShadeSlider>
+  /** Omit where the treatment's stops live on its tokens instead. */
+  shades?: Record<'light' | 'dark', ShadeSlider>
 }>()
 
 const model = defineModel<string>({ required: true })
@@ -77,9 +78,8 @@ const chip = computed(() => (color.value === 'primary-shade' ? primaryChip.value
                 class="w-full"
                 :aria-label="`${label} color`"
               />
+              <slot name="shades" />
             </ThemeStudioShadeGroup>
-
-            <slot name="shades" />
           </div>
         </template>
       </UCollapsible>

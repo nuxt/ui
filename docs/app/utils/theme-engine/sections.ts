@@ -177,8 +177,7 @@ export function pickSection(doc: ThemeDoc, key: SectionKey): unknown {
         border: style.border ?? 'default',
         width: style.borderWidth ?? null,
         frame: !!style.frame,
-        color: style.borderColor ?? null,
-        shade: style.borderShade ?? null
+        color: style.borderColor ?? null
       }
   }
 }
@@ -342,7 +341,6 @@ export function mergeSection(current: ThemeDoc, base: ThemeDoc, key: SectionKey)
       setOrDelete(doc.style, 'borderWidth', baseStyle.borderWidth)
       setOrDelete(doc.style, 'frame', baseStyle.frame)
       setOrDelete(doc.style, 'borderColor', baseStyle.borderColor)
-      setOrDelete(doc.style, 'borderShade', baseStyle.borderShade ? structuredClone(baseStyle.borderShade) : undefined)
       break
   }
 

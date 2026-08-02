@@ -14,9 +14,10 @@ export interface ShadeSlider {
 
 const props = withDefaults(defineProps<{
   label?: string
-  sliders: Record<'light' | 'dark', ShadeSlider>
+  /** Omit for a group whose rows come from its slot instead. */
+  sliders?: Record<'light' | 'dark', ShadeSlider>
   /** Palette the stops resolve against. */
-  chip: string
+  chip?: string
   ladder?: readonly ShadeStop[]
   separator?: boolean
   /** A colour source with no shades keeps its group, minus the sliders. */
@@ -27,10 +28,10 @@ const props = withDefaults(defineProps<{
   ladder: () => SHADE_LADDER
 })
 
-const dirty = computed(() => Object.values(props.sliders).some(slider => slider.dirty.value))
+const dirty = computed(() => Object.values(props.sliders ?? {}).some(slider => slider.dirty.value))
 
 function reset() {
-  Object.values(props.sliders).forEach(slider => slider.reset())
+  Object.values(props.sliders ?? {}).forEach(slider => slider.reset())
 }
 </script>
 
@@ -38,7 +39,7 @@ function reset() {
   <ThemeStudioSection
     :label="label"
     :separator="separator"
-    resettable
+    :resettable="!!sliders"
     :reset-dirty="dirty"
     @reset="reset"
   >
@@ -46,7 +47,7 @@ function reset() {
     <slot />
 
     <ThemeStudioRow
-      v-for="(slider, mode) in sliders"
+      v-for="(slider, mode) in sliders ?? {}"
       v-show="showRows"
       :key="mode"
       v-model="slider.model.value"

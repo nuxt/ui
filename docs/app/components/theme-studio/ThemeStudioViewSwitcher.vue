@@ -35,7 +35,7 @@ const gridUi = {
   root: 'ring-0 rounded-none overflow-visible',
   content: 'max-h-none overflow-visible',
   group: 'p-0 grid grid-cols-2 gap-1',
-  item: 'flex-col p-2 rounded-xl ring-inset before:rounded-xl gap-2 data-[state=checked]:before:bg-elevated/50',
+  item: 'flex-col p-2 rounded-lg ring-inset before:rounded-lg gap-2 data-[state=checked]:before:bg-elevated/50',
   itemDescription: 'whitespace-normal line-clamp-2 text-xs p-0',
   itemTrailing: 'hidden'
 }
@@ -93,9 +93,9 @@ const gridUi = {
                 width="654"
                 height="368"
                 loading="lazy"
-                class="w-full aspect-video rounded-lg ring ring-default"
+                class="w-full aspect-video rounded ring ring-default"
               />
-              <span v-else class="w-full aspect-video rounded-lg ring ring-default bg-elevated/50 flex items-center justify-center">
+              <span v-else class="w-full aspect-video rounded ring ring-default bg-elevated/50 flex items-center justify-center">
                 <UIcon :name="viewIcons[item.value]" class="size-6" />
               </span>
             </template>

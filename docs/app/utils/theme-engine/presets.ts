@@ -84,8 +84,6 @@ export const presets: ThemePreset[] = [{
       shadowOpacity: 100,
       border: 'custom',
       frame: true,
-      borderColor: 'shade',
-      borderShade: { light: 900, dark: 950 },
       defaults: { variants: { buttons: 'solid', panels: 'subtle', inputs: 'subtle' } },
       tokenShades: {
         '--ui-bg': { light: 50, dark: 800 },
@@ -150,7 +148,6 @@ export const presets: ThemePreset[] = [{
     // Drop shadow below plus a bottom-lit hard INSET above, pressed clay.
     style: {
       shadow: 'custom',
-      shadowColor: 'shade',
       shadowShade: { light: 200, dark: 950 },
       shadowOpacity: 55,
       shadowGeometry: { x: 0, y: 3, blur: 0, spread: 0 },
@@ -284,29 +281,26 @@ export const presets: ThemePreset[] = [{
         '--ui-bg-muted': 'var(--ui-color-neutral-100)',
         '--ui-bg-elevated': 'var(--ui-color-neutral-200)',
         '--ui-text-inverted': 'var(--ui-color-neutral-50)',
-        '--ui-border': 'var(--ui-color-neutral-950)',
+        '--ui-border': 'black',
         '--ui-border-muted': 'var(--ui-color-neutral-300)',
-        '--ui-border-accented': 'var(--ui-color-neutral-950)'
+        '--ui-border-accented': 'black'
       },
       dark: {
         '--ui-primary': 'var(--ui-color-primary-500)',
         '--ui-bg-inverted': 'var(--ui-color-neutral-50)',
         '--ui-text-highlighted': 'var(--ui-color-neutral-50)',
-        '--ui-border': 'var(--ui-color-neutral-950)',
-        '--ui-border-accented': 'var(--ui-color-neutral-950)',
+        '--ui-border': 'black',
+        '--ui-border-accented': 'black',
         '--ui-border-inverted': 'var(--ui-color-neutral-50)'
       }
     },
     style: {
       shadow: 'custom',
       // black is the neutral ladder's bottom stop, not a colour of its own
-      shadowColor: 'shade',
       shadowShade: { light: 'black', dark: 'black' },
       shadowOpacity: 100,
       border: 'custom',
       frame: true,
-      borderColor: 'shade',
-      borderShade: { light: 'black', dark: 'black' },
       defaults: { variants: { panels: 'subtle' } }
     }
   }
@@ -382,7 +376,6 @@ export const presets: ThemePreset[] = [{
         spread: 0
       },
       shadowOpacity: 25,
-      shadowColor: 'shade',
       shadowShade: {
         light: 500,
         dark: 950

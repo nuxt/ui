@@ -32,7 +32,6 @@ export interface StyleOptions {
   /** Ramp shade per mode, neutral for 'shade', primary for 'primary-shade' */
   shadowShade?: { light?: ShadeStop, dark?: ShadeStop }
   /** Ramp shade per mode, neutral for 'shade', primary for 'primary-shade' */
-  borderShade?: { light?: ShadeStop, dark?: ShadeStop }
   /** Ring width in px (1–4) while `border` is 'custom'; 2 when unset. */
   borderWidth?: number
   /** Frame solid/soft surfaces too, the neobrutalist outline-everything look. */
@@ -110,7 +109,6 @@ export const SHADOW_GEOMETRY_DEFAULTS = { x: 3, y: 3, blur: 0, spread: 0 }
 export const INNER_SHADOW_GEOMETRY_DEFAULTS = { x: 0, y: 2, blur: 4, spread: 0 }
 
 /** Borders default opposite to the surface: dark ink on light, pale on dark. */
-export const BORDER_SHADE_DEFAULTS: { light: ShadeStop, dark: ShadeStop } = { light: 900, dark: 200 }
 
 /** Color scale a token slider walks, neutral, or any semantic alias's ramp. */
 export type TokenRamp = 'neutral' | 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'error'
@@ -421,21 +419,23 @@ export function styleTokens(style: StyleOptions): { light: Record<string, string
   const light: Record<string, string> = {}
   const dark: Record<string, string> = {}
 
+  // A shade source names the RAMP; each border token owns its own stop, and
+  // component rings follow the default one rather than a stop of their own.
   if (style.borderColor === 'shade' || style.borderColor === 'primary-shade') {
-    const ramp = style.borderColor === 'primary-shade' ? 'primary' : 'neutral'
-    const shade = { ...BORDER_SHADE_DEFAULTS, ...style.borderShade }
-    light['--ui-border-color'] = shadeRef(ramp, shade.light)
-    dark['--ui-border-color'] = shadeRef(ramp, shade.dark)
+    light['--ui-border-color'] = 'var(--ui-border)'
+    dark['--ui-border-color'] = 'var(--ui-border)'
   } else if (style.borderColor && style.borderColor !== 'default') {
     const value = BORDER_COLOR_VALUES[style.borderColor]
     light['--ui-border-color'] = value.light
     dark['--ui-border-color'] = value.dark
   }
+  const borderRamp = style.borderColor === 'primary-shade' ? 'primary' : 'neutral'
   for (const [token, shade] of Object.entries(style.tokenShades || {})) {
     const target = TOKEN_SHADE_TARGETS.find(target => target.token === token)
     if (target) {
-      if (shade.light !== undefined) light[token] = shadeRef(target.ramp, shade.light)
-      if (shade.dark !== undefined) dark[token] = shadeRef(target.ramp, shade.dark)
+      const ramp = target.group === 'border' ? borderRamp : target.ramp
+      if (shade.light !== undefined) light[token] = shadeRef(ramp, shade.light)
+      if (shade.dark !== undefined) dark[token] = shadeRef(ramp, shade.dark)
     }
   }
 

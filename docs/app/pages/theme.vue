@@ -14,6 +14,7 @@ const { past, future, undo, redo } = useThemeStudioHistory()
 const { colorChips, colorLabel, groupDirtyFlags, canReset, resetLabel, resetToBaseline } = useThemeStudioToolbar()
 
 useThemeStudioRecorder()
+useThemeStudioViewParam()
 
 useSeoMeta({
   title: 'Theme Studio',

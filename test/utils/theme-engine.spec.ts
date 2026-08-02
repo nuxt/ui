@@ -591,10 +591,11 @@ describe('style colors', () => {
       light: { '--ui-primary': 'var(--ui-color-primary-600)' },
       dark: { '--ui-primary': 'var(--ui-color-primary-300)' }
     })
-    // primary-shade modes reroute the frame/shadow colors through the primary ramp
-    expect(styleTokens({ borderColor: 'primary-shade', borderShade: { light: 700, dark: 300 } })).toEqual({
-      light: { '--ui-border-color': 'var(--ui-color-primary-700)' },
-      dark: { '--ui-border-color': 'var(--ui-color-primary-300)' }
+    // primary-shade reroutes the border TOKENS through the primary ramp; the
+    // rings follow the default token rather than carrying a stop of their own
+    expect(styleTokens({ borderColor: 'primary-shade', tokenShades: { '--ui-border': { light: 700, dark: 300 } } })).toEqual({
+      light: { '--ui-border-color': 'var(--ui-border)', '--ui-border': 'var(--ui-color-primary-700)' },
+      dark: { '--ui-border-color': 'var(--ui-border)', '--ui-border': 'var(--ui-color-primary-300)' }
     })
     expect(styleTokens({ shadowColor: 'primary-shade' }).light['--ui-shadow-color']).toBe('var(--ui-color-primary-950)')
   })
@@ -707,14 +708,15 @@ describe('style colors', () => {
     expect(merged.button.defaultVariants).toEqual({ variant: 'subtle', size: 'md' })
   })
 
-  it('styleTokens supports per-mode border shades', async () => {
+  it('styleTokens points rings at the default border token', async () => {
     const { styleTokens } = await import('../../docs/app/utils/theme-engine')
 
-    expect(styleTokens({ borderColor: 'shade', borderShade: { light: 700, dark: 100 } })).toEqual({
-      light: { '--ui-border-color': 'var(--ui-color-neutral-700)' },
-      dark: { '--ui-border-color': 'var(--ui-color-neutral-100)' }
+    // a shade source names the ramp; the stops live on the tokens
+    expect(styleTokens({ borderColor: 'shade', tokenShades: { '--ui-border': { light: 700, dark: 100 } } })).toEqual({
+      light: { '--ui-border-color': 'var(--ui-border)', '--ui-border': 'var(--ui-color-neutral-700)' },
+      dark: { '--ui-border-color': 'var(--ui-border)', '--ui-border': 'var(--ui-color-neutral-100)' }
     })
-    expect(styleTokens({ borderColor: 'shade' }).dark['--ui-border-color']).toBe('var(--ui-color-neutral-200)')
+    expect(styleTokens({ borderColor: 'shade' }).dark['--ui-border-color']).toBe('var(--ui-border)')
   })
 
   it('generateCSS emits style color variables', async () => {

@@ -391,15 +391,18 @@ const vReveal = {
   background: radial-gradient(ellipse at center, color-mix(in oklch, var(--ui-primary) 6%, transparent) 0%, transparent 70%);
 }
 
-/* Shimmering gradient text on the hero title's second line. */
+/* Shimmering gradient text on the hero title's second line: primary against a
+   lighter shade of itself. Mixed off --ui-primary rather than ramp stops:
+   black-as-primary has no ramp, and the stops keep painting the last palette.
+   Dark mixes toward black instead, where the primary may itself be white. */
 .landing-shimmer {
-  background-image: linear-gradient(135deg, var(--ui-color-primary-700), var(--ui-color-primary-600), var(--ui-color-primary-500), var(--ui-color-primary-400), var(--ui-color-primary-500), var(--ui-color-primary-600), var(--ui-color-primary-700));
+  background-image: linear-gradient(135deg, var(--ui-primary), color-mix(in oklch, var(--ui-primary) 65%, black), var(--ui-primary), color-mix(in oklch, var(--ui-primary) 65%, black), var(--ui-primary));
   background-size: 200% auto;
   animation: landing-shimmer 10s ease-in-out infinite alternate;
 }
 
 .dark .landing-shimmer {
-  background-image: linear-gradient(135deg, var(--ui-color-primary-400), var(--ui-color-primary-300), var(--ui-color-primary-200), var(--ui-color-primary-100), var(--ui-color-primary-200), var(--ui-color-primary-300), var(--ui-color-primary-400));
+  background-image: linear-gradient(135deg, var(--ui-primary), color-mix(in oklch, var(--ui-primary) 65%, white), var(--ui-primary), color-mix(in oklch, var(--ui-primary) 65%, white), var(--ui-primary));
 }
 
 @keyframes landing-shimmer {

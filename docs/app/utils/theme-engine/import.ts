@@ -382,12 +382,20 @@ function extractStyle(light: Record<string, string>, dark: Record<string, string
   }
 
   if (frameColor.light !== undefined || frameColor.dark !== undefined) {
-    const match = matchColorChoice(frameColor, BORDER_COLOR_VALUES)
-    if (match) {
-      style.borderColor = match.color as StyleOptions['borderColor']
-      if (match.shade) style.borderShade = match.shade
+    // Rings pointed at the default border token: the ramp is whichever one
+    // that token rides, since the ring itself no longer names a colour.
+    if (frameColor.light === 'var(--ui-border)' || frameColor.dark === 'var(--ui-border)') {
+      const borderToken = light['--ui-border'] ?? dark['--ui-border'] ?? ''
+      style.borderColor = borderToken.includes('primary') ? 'primary-shade' : 'shade'
     } else {
-      putBack('--ui-border-color', frameColor)
+      const match = matchColorChoice(frameColor, BORDER_COLOR_VALUES)
+      if (match) {
+        style.borderColor = match.color as StyleOptions['borderColor']
+        // a colour the ring named itself becomes the default token's stop
+        if (match.shade) style.tokenShades = { ...style.tokenShades, '--ui-border': match.shade }
+      } else {
+        putBack('--ui-border-color', frameColor)
+      }
     }
   }
 

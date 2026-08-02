@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { SHADE_LADDER, SHADOW_SHADE_DEFAULTS, BORDER_SHADE_DEFAULTS, BORDER_WIDTH_DEFAULT, SHADOW_GEOMETRY_DEFAULTS, INNER_SHADOW_GEOMETRY_DEFAULTS } from '../../utils/theme-engine'
+import { SHADE_LADDER, SHADOW_SHADE_DEFAULTS, BORDER_WIDTH_DEFAULT, SHADOW_GEOMETRY_DEFAULTS, INNER_SHADOW_GEOMETRY_DEFAULTS } from '../../utils/theme-engine'
 import type { ShadeStop } from '../../utils/theme-engine'
 
-const { style, setStyle, baselineDoc } = useThemeStudio()
+const { style, setStyle, baselineDoc, primaryChip, neutralChip } = useThemeStudio()
 
 const { radius, fontSize, spacing } = useTheme()
 
@@ -71,7 +71,13 @@ const innerShadowOpacity = computed({
 })
 
 const innerShadowColor = computed({
-  get: () => style.value.innerShadowColor || 'default',
+  // Absent means it tracks the outer shadow, so report whichever ramp that
+  // currently resolves to rather than a choice of its own.
+  get: () => {
+    const color = style.value.innerShadowColor
+    if (!color || color === 'default') return shadowColor.value === 'primary-shade' ? 'primary-shade' : 'shade'
+    return color
+  },
   set: (value: any) => setStyle({ innerShadowColor: value })
 })
 
@@ -97,35 +103,38 @@ const frameSolids = computed({
   set: (value: boolean) => setStyle({ frame: value })
 })
 
-// Default recolors nothing, every ring keeps its own per-element color,
-// so it reads "Per element" rather than pretending to be a paint choice.
+// Which ramp the border tokens ride. Neutral is the natural state, so it
+// leaves every ring on its own token; Primary reroutes them and points the
+// rings at the default one. The rows below pick the stops either way.
 const borderColorItems = [
-  { label: 'Per element', value: 'default', defaultTag: true },
-  { label: 'Inverted', value: 'inverted' },
-  { label: 'Neutral shade', value: 'shade' },
-  { label: 'Primary shade', value: 'primary-shade' }
+  { label: 'Neutral', value: 'default', defaultTag: true },
+  { label: 'Primary', value: 'primary-shade' }
 ]
 
 // The stock shadow colour IS the neutral shade at its resting stops, so
-// Default merges into a tagged 'Neutral shade'.
+// Neutral is simply the default. Inverted was a fixed 950/white pair, which
+// the stops below can say themselves.
 const shadowColorItems = [
-  { label: 'Neutral shade', value: 'shade', defaultTag: true },
-  { label: 'Inverted', value: 'inverted' },
-  { label: 'Primary shade', value: 'primary-shade' }
+  { label: 'Neutral', value: 'shade', defaultTag: true },
+  { label: 'Primary', value: 'primary-shade' }
 ]
 
-// The inner shadow's default is a live link, inherit whatever
-// --ui-shadow-color currently resolves to, not a pinnable shade.
+// Unset, the inner shadow rides whatever --ui-shadow-color resolves to, which
+// is the neutral ramp unless the shadow says otherwise.
 const innerShadowColorItems = [
-  { label: 'Inherit shadow', value: 'default', defaultTag: true },
-  { label: 'Inverted', value: 'inverted' },
-  { label: 'Neutral shade', value: 'shade' },
-  { label: 'Primary shade', value: 'primary-shade' }
+  { label: 'Neutral', value: 'shade', defaultTag: true },
+  { label: 'Primary', value: 'primary-shade' }
 ]
+
+/** Keeps a value the picker no longer offers readable, for older saved themes. */
+function withCurrent(items: { label: string, value: string, defaultTag?: boolean }[], value: string) {
+  if (items.some(item => item.value === value)) return items
+  return [...items, { label: capitalize(value.replace(/-/g, ' ')), value }]
+}
 
 // Slider position ↔ SHADES index, per mode. Dirty/reset measure against the
 // BASELINE preset's choice: reset restores it, or deletes the entry.
-function shadeControl(field: 'shadowShade' | 'innerShadowShade' | 'borderShade', defaults: { light: ShadeStop, dark: ShadeStop }, target: 'light' | 'dark') {
+function shadeControl(field: 'shadowShade' | 'innerShadowShade', defaults: { light: ShadeStop, dark: ShadeStop }, target: 'light' | 'dark') {
   const model = computed({
     // per-key fallback: an imported doc can carry a single-mode shade object,
     // indexOf(undefined) would park the slider at -1
@@ -156,10 +165,11 @@ const innerShadowShades = {
   dark: shadeControl('innerShadowShade', SHADOW_SHADE_DEFAULTS, 'dark')
 }
 
-const borderShades = {
-  light: shadeControl('borderShade', BORDER_SHADE_DEFAULTS, 'light'),
-  dark: shadeControl('borderShade', BORDER_SHADE_DEFAULTS, 'dark')
-}
+// The border tokens ARE the border shades: the colour select names their ramp,
+// each token owns its stop, and component rings follow the default one.
+const { shadeLadder: borderLadder, sections: borderTokens } = useTokenShades('neutral')
+const borderShadeSections = borderTokens.filter(section => section.group === 'border')
+const borderChip = computed(() => (borderColor.value === 'primary-shade' ? primaryChip.value : neutralChip.value))
 
 // Hard-shadow geometry sliders (px)
 const geometryFields = [
@@ -183,7 +193,9 @@ const borderColor = computed({
 })
 
 const shadowColor = computed({
-  // absent (and legacy 'default') read as the resting neutral shade
+  // Absent and legacy 'default' are the same choice as 'shade': under a custom
+  // shadow an unset colour resolves to the resting neutral shade anyway, and
+  // naming the ramp is what keeps its per-mode stops on screen.
   get: () => {
     const color = style.value.shadowColor
     return !color || color === 'default' ? 'shade' : color
@@ -277,7 +289,7 @@ const shadowSections = [{
     :label="section.label"
     :section-key="section.dirtyKey"
     :options="section.options"
-    :color-items="section.colorItems"
+    :color-items="withCurrent(section.colorItems, section.color.value)"
     :shades="section.shades"
   >
     <ThemeStudioRow
@@ -319,8 +331,7 @@ const shadowSections = [{
     color-label="Border colour"
     section-key="borders"
     :options="borderOptions"
-    :color-items="borderColorItems"
-    :shades="borderShades"
+    :color-items="withCurrent(borderColorItems, borderColor)"
   >
     <ThemeStudioRow
       v-model="borderWidth"
@@ -338,9 +349,17 @@ const shadowSections = [{
       label="Frame solid surfaces"
     />
 
-    <!-- the neutral border tokens, relocated from the Colors panel -->
+    <!-- a stop per border type, on the ramp the select names -->
     <template #shades>
-      <ThemeStudioTokenShades alias="neutral" :groups="['border']" />
+      <ThemeStudioShadeGroup
+        v-for="section in borderShadeSections"
+        :key="section.token"
+        :label="`Border ${section.label.toLowerCase()}`"
+        separator
+        :sliders="section.sliders"
+        :chip="borderChip"
+        :ladder="borderLadder"
+      />
     </template>
   </ThemeStudioTreatment>
 </template>
