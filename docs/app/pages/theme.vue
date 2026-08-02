@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { DEFAULT_PRESET_ID } from '../utils/theme-engine'
+import { paletteLabel } from '../utils/theme'
 
 const { track } = useAnalytics()
 const { resetTheme, icon: iconSet, font, icons, primary, neutral, blackAsPrimary } = useTheme()
@@ -48,16 +49,12 @@ const { groupDirty, presets, activePreset, applyPreset, primaryChip, neutralChip
 
 const iconSetItem = computed(() => icons.find(entry => entry.value === iconSet.value))
 
-/**
- * The Colors trigger wears the two colours it owns, so the toolbar reports
- * the current primary and neutral without being opened — the same job the
- * font and icon pickers do by showing their values.
- */
 // A custom ramp has no name worth reading — the picker calls it Custom too.
 function paletteName(alias: 'primary' | 'neutral', value: string) {
-  return isCustomPalette(alias) ? 'Custom' : capitalize(value)
+  return isCustomPalette(alias) ? 'Custom' : capitalize(paletteLabel(value))
 }
 
+/** The two colours the panel owns, so the bar reports them unopened. */
 const colorChips = computed(() => [{
   dot: blackAsPrimary.value ? undefined : `var(--color-${primaryChip.value}-500)`,
   label: blackAsPrimary.value ? 'Black' : paletteName('primary', primary.value)
@@ -203,7 +200,7 @@ const shareMode = ref<'import' | 'export'>('export')
                     color="neutral"
                     variant="subtle"
                     :trailing-icon="appConfig.ui.icons.chevronDown"
-
+                    class="w-38"
                     :ui="{ label: 'flex-1 min-w-0' }"
                     aria-label="Colors"
                   >

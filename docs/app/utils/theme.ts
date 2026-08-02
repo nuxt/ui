@@ -433,6 +433,11 @@ export const themeIcons = {
 
 export type ThemeIcons = keyof typeof themeIcons
 
+/** Palette names are ids — hyphens are word breaks, not part of the name. */
+export function paletteLabel(name: string): string {
+  return name.replace(/-/g, ' ')
+}
+
 /**
  * A short strip of a set's own glyphs, for previewing it in a picker row —
  * these eight differ enough between packs to tell them apart at a glance.

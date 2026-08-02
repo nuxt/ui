@@ -182,7 +182,7 @@ export const presets: ThemePreset[] = [{
     version: 1,
     // Sculpted pink-mauve neutral — chroma peaks mid-ramp.
     palettes: {
-      'custom-neutral': {
+      'saturated-mauve': {
         shades: {
           50: 'oklch(96.1% 0.021 325.68)',
           100: 'oklch(92.4% 0.039 325.829)',
@@ -201,7 +201,7 @@ export const presets: ThemePreset[] = [{
     colors: {
       primary: 'pink',
       secondary: 'violet',
-      neutral: 'custom-neutral'
+      neutral: 'saturated-mauve'
     },
     radius: 0.375,
     font: { sans: 'Poppins' },
@@ -254,25 +254,25 @@ export const presets: ThemePreset[] = [{
     // Teal-washed neutral: the light end never reaches white — a dim LCD
     // panel instead of paper.
     palettes: {
-      'custom-neutral': {
+      crt: {
         shades: {
           50: 'oklch(89.7% 0.031 183.464)',
-          100: 'oklch(89.1% 0.038 184.16)',
-          200: 'oklch(87.1% 0.046 184.932)',
-          300: 'oklch(78.8% 0.056 185.807)',
-          400: 'oklch(64.9% 0.068 186.838)',
-          500: 'oklch(53.7% 0.066 188.136)',
-          600: 'oklch(44.3% 0.053 190.06)',
-          700: 'oklch(36.1% 0.04 193.492)',
-          800: 'oklch(28.5% 0.027 194.529)',
-          900: 'oklch(21.5% 0.015 194.814)',
-          950: 'oklch(14.8% 0.004 194.9)'
+          100: 'oklch(81.4% 0.049 184.157)',
+          200: 'oklch(72% 0.068 184.927)',
+          300: 'oklch(63% 0.077 185.803)',
+          400: 'oklch(55.3% 0.072 186.838)',
+          500: 'oklch(48.1% 0.062 188.141)',
+          600: 'oklch(41.2% 0.05 190.061)',
+          700: 'oklch(34.5% 0.038 193.49)',
+          800: 'oklch(27.8% 0.027 194.544)',
+          900: 'oklch(21.3% 0.015 194.783)',
+          950: 'oklch(14.8% 0.004 194.814)'
         }
       }
     },
     colors: {
       primary: 'red',
-      neutral: 'custom-neutral'
+      neutral: 'crt'
     },
     radius: 0,
     font: { sans: 'Pixelify Sans', weights: { normal: 400, medium: 500, semibold: 600, bold: 700 } },

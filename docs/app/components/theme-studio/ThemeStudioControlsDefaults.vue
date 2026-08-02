@@ -88,7 +88,7 @@ const groupColors = Object.fromEntries(variantGroupFields.map(field => [field.ke
 
 <template>
   <ThemeStudioSection
-    label="Defaults"
+    label="Default variants"
     :default-open="false"
     :section-key="variantGroupFields.map(field => field.key)"
   >

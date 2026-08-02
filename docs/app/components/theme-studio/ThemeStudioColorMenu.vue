@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { ColorAlias } from '../../utils/theme-engine'
+import { paletteLabel } from '../../utils/theme'
 
 /**
  * The shared color picker: a swatch-labelled trigger opening the palette
@@ -25,7 +26,7 @@ const value = computed(() => {
 
 const label = computed(() => {
   if (props.alias === 'primary' && blackAsPrimary.value) return 'Black'
-  return isCustomPalette(props.alias) ? 'Custom' : value.value
+  return isCustomPalette(props.alias) ? 'Custom' : paletteLabel(value.value)
 })
 
 /** Palette name → the css var chip name (tailwind's neutral gray is remapped in docs). */
@@ -90,7 +91,7 @@ function isSelected(color: string) {
           <UButton
             v-for="color in colors"
             :key="color"
-            :label="color"
+            :label="paletteLabel(color)"
             size="sm"
             color="neutral"
             variant="subtle"
