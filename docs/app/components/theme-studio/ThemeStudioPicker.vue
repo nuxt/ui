@@ -44,7 +44,7 @@ const aliases = [
         <div class="flex items-center gap-2">
           <span class="text-xs text-muted w-14 shrink-0">Preset</span>
 
-          <ThemeStudioPresetMenu size="sm" class="flex-1 min-w-0" />
+          <ThemeStudioPresetMenu size="sm" :random="false" class="flex-1 min-w-0" />
         </div>
 
         <div v-for="{ alias, label } in aliases" :key="alias" class="flex items-center gap-2">

@@ -1,11 +1,19 @@
 <script setup lang="ts">
-/** The presets trigger (label + popover listbox) plus the shuffle die. */
-const props = defineProps<{
+/** The presets trigger (label + popover listbox), optionally with the die. */
+const props = withDefaults(defineProps<{
   /** Button size — the toolbar uses the default, the header picker slims down. */
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
   /** Toolbar opts out of dismissing on its own chrome; other hosts keep stock dismiss. */
   keepPanels?: boolean
-}>()
+  /**
+   * The shuffle die beside the trigger. Off in the header picker, where the
+   * row aligns with the colour selects below it and has no width to spare.
+   */
+  random?: boolean
+}>(), {
+  // absent optional booleans cast to false — pin the default so it survives
+  random: true
+})
 
 const { presets, selectedPreset, shuffle } = useThemeStudio()
 const { icon: iconSet } = useTheme()
@@ -108,7 +116,7 @@ const presetLabel = computed(() => {
       </template>
     </UPopover>
 
-    <UTooltip text="Random theme">
+    <UTooltip v-if="random" text="Random theme">
       <UButton
         :icon="diceFace"
         color="neutral"
