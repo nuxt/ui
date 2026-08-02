@@ -83,26 +83,29 @@ function openExport() {
 
       <!-- Each tile paints itself in the preset it applies. -->
       <div class="grid grid-cols-3 gap-2">
-        <button
+        <UButton
           v-for="tile in presetTiles"
           :key="tile.id"
-          type="button"
-          class="group flex flex-col gap-1 rounded-md p-1 text-left transition-colors hover:bg-elevated/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+          color="neutral"
+          variant="ghost"
+          block
+          class="rounded-lg"
+          :active="mounted && selectedPreset === tile.id"
+          active-color="primary"
+          active-variant="subtle"
+          :ui="{ base: 'flex-col gap-1 p-1' }"
+          :aria-label="tile.label"
           @click="pickPreset(tile.id)"
         >
           <span
-            class="flex items-center justify-center h-12 w-full rounded-md ring bg-[image:var(--chip-bg-light)] dark:bg-[image:var(--chip-bg-dark)]"
-            :class="mounted && selectedPreset === tile.id ? 'ring-2 ring-primary' : 'ring-default'"
+            class="flex items-center justify-center h-12 w-full rounded-md ring ring-default bg-[image:var(--chip-bg-light)] dark:bg-[image:var(--chip-bg-dark)]"
             :style="tile.chip"
           >
             <UIcon :name="tile.icon" class="size-5 text-(--chip-icon-light) dark:text-(--chip-icon-dark)" />
           </span>
 
-          <span
-            class="text-[11px] leading-tight truncate w-full"
-            :class="mounted && selectedPreset === tile.id ? 'text-highlighted font-medium' : 'text-muted'"
-          >{{ tile.label }}</span>
-        </button>
+          <span class="text-[11px] px-1 font-normal leading-tight text-center truncate w-full">{{ tile.label }}</span>
+        </UButton>
       </div>
 
       <template v-if="dirty || route.path !== '/theme'">
