@@ -41,7 +41,7 @@ defineShortcuts({
 
 // The bar pins open while a panel is open — panel content portals to <body>,
 // so hover alone would retract it under its own popovers.
-const openPanels = reactive({ presets: false, colors: false, style: false, view: false })
+const openPanels = reactive({ presets: false, colors: false, font: false, icons: false, style: false, view: false })
 const toolbarPinned = computed(() => nearBottom.value || Object.values(openPanels).some(Boolean))
 
 /** The shared import/export modal — the two toolbar buttons pick its mode. */
@@ -89,8 +89,6 @@ const shareMode = ref<'import' | 'export'>('export')
               <ThemeStudioPresetMenu v-model:open="openPanels.presets" keep-panels :tooltip="tooltip" class="w-38" />
             </ThemeStudioToolbarField>
 
-            <ThemeStudioShuffleButton />
-
             <ThemeStudioToolbarPopover
               v-model:open="openPanels.colors"
               label="Colors"
@@ -116,11 +114,11 @@ const shareMode = ref<'import' | 'export'>('export')
 
             <!-- the value names the control; the popover holds the section
                  that used to sit in the Options panel -->
-            <ThemeStudioToolbarPopover label="Font" icon="i-lucide-type" :value="font">
+            <ThemeStudioToolbarPopover v-model:open="openPanels.font" label="Font" icon="i-lucide-type" :value="font">
               <ThemeStudioFontOptions class="w-80 p-4" />
             </ThemeStudioToolbarPopover>
 
-            <ThemeStudioToolbarPopover label="Icons" :icon="iconSetItem?.icon" :value="iconSetItem?.label">
+            <ThemeStudioToolbarPopover v-model:open="openPanels.icons" label="Icons" :icon="iconSetItem?.icon" :value="iconSetItem?.label">
               <ThemeStudioIconOptions class="w-80 p-4" />
             </ThemeStudioToolbarPopover>
 
@@ -132,6 +130,8 @@ const shareMode = ref<'import' | 'export'>('export')
             >
               <ThemeStudioControls group="style" class="w-80 max-h-[70vh] overflow-y-auto" />
             </ThemeStudioToolbarPopover>
+
+            <ThemeStudioShuffleButton />
 
             <span class="flex-1" />
 

@@ -299,11 +299,14 @@ export const presets: ThemePreset[] = [{
     },
     style: {
       shadow: 'custom',
-      shadowColor: 'black',
+      // black is the neutral ladder's bottom stop, not a colour of its own
+      shadowColor: 'shade',
+      shadowShade: { light: 'black', dark: 'black' },
       shadowOpacity: 100,
       border: 'custom',
       frame: true,
-      borderColor: 'black',
+      borderColor: 'shade',
+      borderShade: { light: 'black', dark: 'black' },
       defaults: { variants: { panels: 'subtle' } }
     }
   }

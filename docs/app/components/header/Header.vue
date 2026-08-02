@@ -36,7 +36,8 @@ const viewListOpen = ref(false)
       <VersionMenu />
     </template>
 
-    <ThemeStudioViewSwitcher v-if="isStudio" v-model:open="viewListOpen" />
+    <ThemeStudioViewSwitcher v-if="isStudio" v-model:open="viewListOpen" tooltip="View switcher" />
+
     <UNavigationMenu v-else :items="desktopLinks" variant="link" content-orientation="vertical" />
 
     <template #right>

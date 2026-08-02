@@ -102,7 +102,6 @@ const frameSolids = computed({
 const borderColorItems = [
   { label: 'Per element', value: 'default', defaultTag: true },
   { label: 'Inverted', value: 'inverted' },
-  { label: 'Black', value: 'black' },
   { label: 'White', value: 'white' },
   { label: 'Primary', value: 'primary' },
   { label: 'Neutral', value: 'neutral' },
@@ -114,7 +113,6 @@ const borderColorItems = [
 // Default merges into a tagged 'Neutral shade'.
 const shadowColorItems = [
   { label: 'Neutral shade', value: 'shade', defaultTag: true },
-  { label: 'Black', value: 'black' },
   { label: 'Inverted', value: 'inverted' },
   { label: 'Primary', value: 'primary' },
   { label: 'Primary shade', value: 'primary-shade' }
@@ -124,7 +122,6 @@ const shadowColorItems = [
 // --ui-shadow-color currently resolves to — not a pinnable shade.
 const innerShadowColorItems = [
   { label: 'Inherit shadow', value: 'default', defaultTag: true },
-  { label: 'Black', value: 'black' },
   { label: 'Inverted', value: 'inverted' },
   { label: 'Primary', value: 'primary' },
   { label: 'Neutral shade', value: 'shade' },

@@ -129,11 +129,12 @@ const bodySampleStyle = computed(() => ({
           :default-value="row.defaultValue"
           :inherit="row.key === 'heading'"
           :icon="row.selectIcon"
+          size="md"
           :aria-label="`${row.label} font`"
           class="flex-1 min-w-0"
         />
 
-        <UFieldGroup size="sm">
+        <UFieldGroup size="md">
           <UPopover :content="{ align: 'start' }">
             <UTooltip :text="row.weights.length > 1 ? 'Weights' : 'Weight'">
               <UButton
