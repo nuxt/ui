@@ -51,7 +51,8 @@ const shadeEditor = ref(false)
 
       <ThemeStudioPaletteEditor v-model:open="paletteEditor" :alias="alias" />
 
-      <UCollapsible v-model:open="shadeEditor">
+      <!-- padding, not a margin: it has to sit inside the animated box -->
+      <UCollapsible v-model:open="shadeEditor" :ui="{ content: 'pt-2' }">
         <template #content>
           <ThemeStudioShadeGroup
             v-if="alias !== 'neutral'"

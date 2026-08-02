@@ -59,8 +59,9 @@ const chip = computed(() => (color.value === 'primary-shade' ? primaryChip.value
 
         <!-- Outside the gap: a closed collapsible is still a flex child, and
              its gap would hang off the bottom of the panel. The space above
-             the rule rides the CONTENT, which a closed fold doesn't render. -->
-        <UCollapsible v-model:open="shadeEditor" :ui="{ content: 'mt-2' }">
+             the rule is the fold's own padding: a margin sits outside the
+             animated box and would pop in before the height caught up. -->
+        <UCollapsible v-model:open="shadeEditor" :ui="{ content: 'pt-2' }">
           <template #content>
             <ThemeStudioShadeGroup
               :label="colorLabel ?? `${label} colour`"
