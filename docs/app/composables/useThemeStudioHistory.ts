@@ -111,3 +111,34 @@ export function useThemeStudioHistory() {
 
   return { past, future, snapshot, align, capture, undo, redo }
 }
+
+/**
+ * Drives the history stack from the live theme: aligns the baseline on mount,
+ * then folds every burst of edits into one step. Slider drags fire per pixel,
+ * so a raw watcher would record a step per frame.
+ */
+export function useThemeStudioRecorder() {
+  const { snapshot, align, capture } = useThemeStudioHistory()
+
+  const mounted = ref(false)
+  let timeout: ReturnType<typeof setTimeout> | undefined
+
+  onMounted(() => {
+    mounted.value = true
+    align(snapshot())
+  })
+
+  // the snapshot spans the doc AND the editor's curve/pin params
+  watch(() => (mounted.value ? snapshot() : undefined), (snap) => {
+    if (!snap) return
+    clearTimeout(timeout)
+    timeout = setTimeout(() => capture(snap), 350)
+  })
+
+  // A pending capture flushes rather than dies — an edit inside the debounce
+  // window would otherwise vanish from history.
+  onUnmounted(() => {
+    clearTimeout(timeout)
+    capture(snapshot())
+  })
+}

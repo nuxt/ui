@@ -1,144 +1,46 @@
 <script setup lang="ts">
-import { DEFAULT_PRESET_ID } from '../utils/theme-engine'
-import { paletteLabel } from '../utils/theme'
-
 const { track } = useAnalytics()
-const { resetTheme, icon: iconSet, font, icons, primary, neutral, blackAsPrimary } = useTheme()
+const { icon: iconSet, font, icons } = useTheme()
 
 // Toolbar skins to the applied icon pack; import/chevron reuse the standard
 // semantic keys off appConfig.ui.icons.
 const studioIcons = useStudioIcons()
+const appConfig = useAppConfig()
 
 // App-level: the site header hosts the view switcher and hides in fullscreen.
-const { view, fullscreen } = useThemeStudioView()
-const { past, future, snapshot, align, capture, undo, redo } = useThemeStudioHistory()
+const { view } = useThemeStudioView()
+const { fullscreen, nearBottom } = useThemeStudioFullscreen()
+const { past, future, undo, redo } = useThemeStudioHistory()
+const { colorChips, colorLabel, groupDirtyFlags, canReset, resetLabel, resetToBaseline } = useThemeStudioToolbar()
+
+useThemeStudioRecorder()
 
 useSeoMeta({
   title: 'Theme Studio',
   description: 'Customize Nuxt UI live: colors, radius, fonts and icons — then export only what you changed.'
 })
 
-// Resolved AFTER mount: the preference is client-only, and hydration adopts
-// SSR attributes without patching — a post-mount flip is a real update.
-const mounted = ref(false)
-onMounted(() => {
-  mounted.value = true
-  track('Theme Studio Opened')
-  align(snapshot())
-})
+onMounted(() => track('Theme Studio Opened'))
 
-// Debounced capture folds slider-drag bursts into single history steps; the
-// snapshot spans the doc AND the editor's curve/pin params.
-let captureTimeout: ReturnType<typeof setTimeout> | undefined
-watch(() => (mounted.value ? snapshot() : undefined), (snap) => {
-  if (!snap) return
-  clearTimeout(captureTimeout)
-  captureTimeout = setTimeout(() => capture(snap), 350)
-})
+const iconSetItem = computed(() => icons.find(entry => entry.value === iconSet.value))
 
 // ⌃⇧D: bare Shift+D is a screen-reader landmark key, and macOS fires ⌘⇧D/⌘⇧L
 // menu bindings at the NSMenu level where pages can't block them — control
 // chords are the safe zone.
 const colorMode = useColorMode()
-function toggleColorMode() {
-  colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'
-}
-
-const appConfig = useAppConfig()
-const { groupDirty, presets, activePreset, applyPreset, primaryChip, neutralChip, isCustomPalette } = useThemeStudio()
-
-const iconSetItem = computed(() => icons.find(entry => entry.value === iconSet.value))
-
-// A custom ramp has no name worth reading — the picker calls it Custom too.
-function paletteName(alias: 'primary' | 'neutral', value: string) {
-  return isCustomPalette(alias) ? 'Custom' : capitalize(paletteLabel(value))
-}
-
-/** The two colours the panel owns, so the bar reports them unopened. */
-const colorChips = computed(() => [{
-  dot: blackAsPrimary.value ? undefined : `var(--color-${primaryChip.value}-500)`,
-  label: blackAsPrimary.value ? 'Black' : paletteName('primary', primary.value)
-}, {
-  dot: `var(--color-${neutralChip.value}-500)`,
-  label: paletteName('neutral', neutral.value)
-}])
-
-const colorLabel = computed(() => colorChips.value.map(chip => chip.label).join(', '))
-
-/** "Changed from preset" dot per settings tab. */
-const groupDirtyFlags = {
-  colors: groupDirty('colors'),
-  style: groupDirty('style')
-}
-
-// Two-stage reset: edits reset back to the preset, a second press clears the
-// preset back to stock. Gated on `mounted` — the persisted theme is client-only
-// and hydration would adopt a disabled= that never lifts.
-const anyDirty = computed(() => mounted.value && Object.values(groupDirtyFlags).some(flag => flag.value))
-const baselinePreset = computed(() => mounted.value ? presets.find(preset => preset.id === activePreset.value) : undefined)
-const resetsToPreset = computed(() => Boolean(baselinePreset.value) && anyDirty.value)
-const canReset = computed(() => anyDirty.value || Boolean(baselinePreset.value))
-// named from the preset itself, so a rename can't leave this behind
-const stockPreset = computed(() => presets.find(preset => preset.id === DEFAULT_PRESET_ID))
-
-const resetLabel = computed(() => {
-  if (resetsToPreset.value) return `Reset to ${baselinePreset.value!.name}`
-  return baselinePreset.value ? `Reset to ${stockPreset.value?.name ?? 'stock'} theme` : 'Reset theme'
-})
-
-function resetToBaseline() {
-  if (resetsToPreset.value) applyPreset(baselinePreset.value!)
-  else resetTheme()
-}
 
 defineShortcuts({
   meta_z: undo,
   meta_shift_z: redo,
   ctrl_y: redo,
-  ctrl_shift_d: toggleColorMode,
-  // Enters fullscreen and toggles back out; Esc also exits (below). Auto-
-  // suppressed while an input is focused, so it never eats a typed 'f'.
+  ctrl_shift_d: () => (colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'),
+  // Enters fullscreen and toggles back out; Esc also exits. Auto-suppressed
+  // while an input is focused, so it never eats a typed 'f'.
   f: () => (fullscreen.value = !fullscreen.value)
 })
 
-// Esc exits fullscreen — not via defineShortcuts, whose preventDefault would
-// stop Reka's dismissable layers from ever seeing Escape. A plain listener
-// defers while a layer is open, so Esc closes the popover first.
-function onEscape(event: KeyboardEvent) {
-  if (event.key !== 'Escape' || !fullscreen.value || event.defaultPrevented) return
-  // only VISIBLE layers defer — closed overlays keep their marker in the DOM
-  const layers = document.querySelectorAll('[data-dismissable-layer]')
-  if ([...layers].some(layer => layer.getClientRects().length)) return
-  fullscreen.value = false
-}
-onMounted(() => window.addEventListener('keydown', onEscape))
-
-// Fullscreen must not leak past the studio. The pending capture flushes rather
-// than dies — an edit inside the debounce window would vanish from history.
-onUnmounted(() => {
-  window.removeEventListener('keydown', onEscape)
-  fullscreen.value = false
-  clearTimeout(captureTimeout)
-  capture(snapshot())
-})
-
-// Fullscreen reveal via mousemove, not a hover overlay (it would eat clicks on
-// the preview's bottom edge). The bar pins open while a panel is open — panel
-// content portals to <body>, so hover alone would retract it under its popovers.
-const nearBottom = ref(false)
-function onPointerNear(event: MouseEvent) {
-  nearBottom.value = window.innerHeight - event.clientY <= 96
-}
-watch(fullscreen, (on) => {
-  if (on) {
-    window.addEventListener('mousemove', onPointerNear)
-  } else {
-    window.removeEventListener('mousemove', onPointerNear)
-    nearBottom.value = false
-  }
-})
-onUnmounted(() => window.removeEventListener('mousemove', onPointerNear))
-
+// The bar pins open while a panel is open — panel content portals to <body>,
+// so hover alone would retract it under its own popovers.
 const openPanels = reactive({ presets: false, colors: false, style: false, view: false })
 const toolbarPinned = computed(() => nearBottom.value || Object.values(openPanels).some(Boolean))
 
