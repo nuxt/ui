@@ -26,32 +26,19 @@ const shadeEditor = ref(false)
 <template>
   <ThemeStudioSection :label="title" :help-to="helpTo" :section-key="sectionKey">
     <template #actions>
-      <UTooltip text="Adjust shades">
-        <UButton
-          icon="i-lucide-settings-2"
-          color="neutral"
-          variant="ghost"
-          size="sm"
-          :active="shadeEditor"
-          active-color="primary"
-          active-variant="subtle"
-          :aria-label="`Adjust ${alias} shades`"
-          @click="shadeEditor = !shadeEditor"
-        />
-      </UTooltip>
-      <UTooltip text="Edit palette">
-        <UButton
-          icon="i-lucide-tangent"
-          color="neutral"
-          variant="ghost"
-          size="sm"
-          :active="paletteEditor"
-          active-color="primary"
-          active-variant="subtle"
-          :aria-label="`Edit ${alias} palette`"
-          @click="paletteEditor = !paletteEditor"
-        />
-      </UTooltip>
+      <ThemeStudioActionToggle
+        v-model="shadeEditor"
+        icon="i-lucide-settings-2"
+        tooltip="Adjust shades"
+        :aria-label="`Adjust ${alias} shades`"
+      />
+
+      <ThemeStudioActionToggle
+        v-model="paletteEditor"
+        icon="i-lucide-tangent"
+        tooltip="Edit palette"
+        :aria-label="`Edit ${alias} palette`"
+      />
     </template>
 
     <div>

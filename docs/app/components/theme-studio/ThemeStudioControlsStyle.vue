@@ -2,7 +2,7 @@
 import { SHADE_LADDER, SHADOW_SHADE_DEFAULTS, BORDER_SHADE_DEFAULTS, BORDER_WIDTH_DEFAULT, SHADOW_GEOMETRY_DEFAULTS, INNER_SHADOW_GEOMETRY_DEFAULTS } from '../../utils/theme-engine'
 import type { ShadeStop } from '../../utils/theme-engine'
 
-const { style, setStyle, primaryChip, neutralChip, baselineDoc } = useThemeStudio()
+const { style, setStyle, baselineDoc } = useThemeStudio()
 
 const { radius, fontSize, spacing } = useTheme()
 
@@ -232,12 +232,6 @@ const shadowSections = [{
   hard: computed(() => style.value.innerShadow === 'custom'),
   press: undefined
 }]
-
-// Per-section fold-out for shade fine-tuning, mirroring the Colors panel's
-// "Adjust shades"; keyed by dirtyKey so the sections toggle independently.
-const shadeEditors = reactive<Record<string, boolean>>({})
-const borderShadeEditor = ref(false)
-const isShadeColor = (color?: string) => color === 'shade' || color === 'primary-shade'
 </script>
 
 <template>
@@ -283,157 +277,78 @@ const isShadeColor = (color?: string) => color === 'shade' || color === 'primary
   </ThemeStudioSection>
 
   <!-- Sections own their padding so the separators run edge to edge. -->
-  <template v-for="section in shadowSections" :key="section.label">
-    <ThemeStudioSection :label="section.label" :section-key="section.dirtyKey">
-      <template v-if="section.model.value === 'custom'" #actions>
-        <UTooltip text="Colour & shades">
-          <UButton
-            icon="i-lucide-settings-2"
-            color="neutral"
-            variant="ghost"
-            size="sm"
-            :active="shadeEditors[section.dirtyKey]"
-            active-color="primary"
-            active-variant="subtle"
-            :aria-label="`${section.label} colour and shades`"
-            @click="shadeEditors[section.dirtyKey] = !shadeEditors[section.dirtyKey]"
-          />
-        </UTooltip>
-      </template>
+  <ThemeStudioTreatment
+    v-for="section in shadowSections"
+    :key="section.label"
+    v-model="section.model.value"
+    v-model:color="section.color.value"
+    :label="section.label"
+    :section-key="section.dirtyKey"
+    :options="section.options"
+    :color-items="section.colorItems"
+    :shades="section.shades"
+  >
+    <ThemeStudioRow
+      v-model="section.opacity.value"
+      control="slider"
+      label="Opacity"
+      :min="5"
+      :max="100"
+      :step="5"
+      unit="%"
+    />
 
-      <div>
-        <UTabs
-          v-model="section.model.value"
-          :items="section.options"
-          :content="false"
-          size="sm"
-          color="primary"
-          class="w-full"
-        />
-
-        <div v-if="section.model.value === 'custom'" class="mt-2 flex flex-col gap-2">
-          <ThemeStudioRow
-            v-model="section.opacity.value"
-            control="slider"
-            label="Opacity"
-            :min="5"
-            :max="100"
-            :step="5"
-            unit="%"
-          />
-
-          <template v-if="section.hard.value">
-            <ThemeStudioRow
-              v-for="field in geometryFields"
-              :key="field.key"
-              v-model="section.geometry[field.key].value"
-              control="slider"
-              :label="field.label"
-              :min="field.min"
-              :max="field.max"
-              :step="1"
-              unit="px"
-            />
-
-            <ThemeStudioRow
-              v-if="section.press"
-              v-model="section.press.value"
-              control="switch"
-              label="Buttons sink on press"
-            />
-          </template>
-
-          <!-- colour + shade sliders sit last, behind the header toggle -->
-          <UCollapsible v-model:open="shadeEditors[section.dirtyKey]">
-            <template #content>
-              <ThemeStudioShadeGroup
-                :label="`${section.label} colour`"
-                :sliders="section.shades"
-                :chip="section.color.value === 'primary-shade' ? primaryChip : neutralChip"
-                :show-rows="isShadeColor(section.color.value)"
-              >
-                <ThemeStudioDefaultSelect
-                  v-model="section.color.value"
-                  :items="section.colorItems"
-                  icon="i-lucide-paint-bucket"
-                  class="w-full"
-                  :aria-label="`${section.label} color`"
-                />
-              </ThemeStudioShadeGroup>
-            </template>
-          </UCollapsible>
-        </div>
-      </div>
-    </ThemeStudioSection>
-  </template>
-
-  <ThemeStudioSection label="Borders" section-key="borders">
-    <template v-if="borderStyle === 'custom'" #actions>
-      <UTooltip text="Colour & shades">
-        <UButton
-          icon="i-lucide-settings-2"
-          color="neutral"
-          variant="ghost"
-          size="sm"
-          :active="borderShadeEditor"
-          active-color="primary"
-          active-variant="subtle"
-          aria-label="Border colour and shades"
-          @click="borderShadeEditor = !borderShadeEditor"
-        />
-      </UTooltip>
-    </template>
-
-    <div>
-      <UTabs
-        v-model="borderStyle"
-        :items="borderOptions"
-        :content="false"
-        size="sm"
-        color="primary"
-        class="w-full"
+    <template v-if="section.hard.value">
+      <ThemeStudioRow
+        v-for="field in geometryFields"
+        :key="field.key"
+        v-model="section.geometry[field.key].value"
+        control="slider"
+        :label="field.label"
+        :min="field.min"
+        :max="field.max"
+        :step="1"
+        unit="px"
       />
 
-      <div v-if="borderStyle === 'custom'" class="mt-1.5 flex flex-col gap-2">
-        <ThemeStudioRow
-          v-model="borderWidth"
-          control="slider"
-          label="Width"
-          :min="1"
-          :max="4"
-          :step="1"
-          unit="px"
-        />
+      <ThemeStudioRow
+        v-if="section.press"
+        v-model="section.press.value"
+        control="switch"
+        label="Buttons sink on press"
+      />
+    </template>
+  </ThemeStudioTreatment>
 
-        <ThemeStudioRow
-          v-model="frameSolids"
-          control="switch"
-          label="Frame solid surfaces"
-        />
+  <ThemeStudioTreatment
+    v-model="borderStyle"
+    v-model:color="borderColor"
+    label="Borders"
+    color-label="Border colour"
+    section-key="borders"
+    :options="borderOptions"
+    :color-items="borderColorItems"
+    :shades="borderShades"
+  >
+    <ThemeStudioRow
+      v-model="borderWidth"
+      control="slider"
+      label="Width"
+      :min="1"
+      :max="4"
+      :step="1"
+      unit="px"
+    />
 
-        <!-- colour, shades and the neutral border tokens (relocated from the
-               Colors panel), behind the header toggle -->
-        <UCollapsible v-model:open="borderShadeEditor">
-          <template #content>
-            <ThemeStudioShadeGroup
-              label="Border colour"
-              :sliders="borderShades"
-              :chip="borderColor === 'primary-shade' ? primaryChip : neutralChip"
-              :show-rows="isShadeColor(borderColor)"
-            >
-              <ThemeStudioDefaultSelect
-                v-model="borderColor"
-                :items="borderColorItems"
-                icon="i-lucide-paint-bucket"
-                class="w-full"
-                aria-label="Border color"
-              />
-            </ThemeStudioShadeGroup>
+    <ThemeStudioRow
+      v-model="frameSolids"
+      control="switch"
+      label="Frame solid surfaces"
+    />
 
-            <ThemeStudioTokenShades :alias="'neutral'" :groups="['border']" />
-          </template>
-        </UCollapsible>
-      </div>
-    </div>
-  </ThemeStudioSection>
+    <!-- the neutral border tokens, relocated from the Colors panel -->
+    <template #shades>
+      <ThemeStudioTokenShades alias="neutral" :groups="['border']" />
+    </template>
+  </ThemeStudioTreatment>
 </template>
