@@ -159,7 +159,7 @@ const showTextLabel = computed(() => !props.icon && !shade.value)
         :ui="{
           /* bare until hovered, when a ring says it's editable */
           /* pe-7 is reserved for a chevron we hide, and outranks px-* */
-          base: 'px-1 pe-1 text-xs justify-end font-mono text-dimmed focus:text-default focus:ring-1 transition-all focus:ring-default hover:ring-1 ring-default',
+          base: 'px-1 pe-1 text-xs justify-end font-mono text-dimmed focus:text-default focus:ring-1 ring-inset transition-all focus:ring-default hover:ring-1 ring-default',
           value: 'truncate',
           trailing: 'hidden',
           /* the menu would inherit the readout's 10-wide trigger */
@@ -179,7 +179,7 @@ const showTextLabel = computed(() => !props.icon && !shade.value)
         variant="none"
         size="xs"
         class="w-10 shrink-0"
-        :ui="{ base: 'px-1 text-xs text-right font-mono text-dimmed focus:text-default focus:ring-1 transition-all focus:ring-default hover:ring-1 ring-default' }"
+        :ui="{ base: 'px-1 text-xs text-right font-mono text-dimmed focus:text-default focus:ring-1 ring-inset transition-all focus:ring-default hover:ring-1 ring-default' }"
         :aria-label="`${label ?? 'Value'} (arrow keys to adjust, Shift for ×10)`"
         @keydown="onReadoutKeydown"
         @change="commitReadout"
