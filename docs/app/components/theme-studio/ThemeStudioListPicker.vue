@@ -35,7 +35,7 @@ const selected = computed(() => props.items.find(item => item.value === model.va
       block
       :icon="icon"
       trailing-icon="i-lucide-chevron-down"
-      :ui="{ label: 'flex-1 text-left truncate' }"
+      :ui="{ label: 'flex-1 min-w-0 text-left truncate' }"
       :aria-label="ariaLabel"
     >
       <slot name="trigger" :selected="selected">

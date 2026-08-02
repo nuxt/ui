@@ -77,13 +77,13 @@ const emptyLabel = computed(() => {
       block
       :icon="icon"
       trailing-icon="i-lucide-chevron-down"
-      :ui="{ label: 'flex-1 text-left truncate' }"
+      :ui="{ label: 'flex-1 min-w-0 text-left truncate' }"
       :aria-label="ariaLabel"
     >
       <span
         class="truncate"
         :style="model === 'inherit' ? undefined : { fontFamily: `'${model}', sans-serif` }"
-      >{{ model === 'inherit' ? 'Inherit base' : model }}<span v-if="model === defaultValue" class="text-dimmed font-normal">&nbsp;(Default)</span></span>
+      >{{ model === 'inherit' ? 'Inherit base' : model }}</span>
     </UButton>
 
     <template #content>
