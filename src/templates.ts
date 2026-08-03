@@ -342,6 +342,15 @@ declare module '@nuxt/schema' {
   }
 }
 
+// nuxt/schema re-exports @nuxt/schema but only bridges CustomAppConfig, not
+// AppConfigInput, so augment it here too to keep ui optional when a user
+// augments nuxt/schema themselves (the surface defineAppConfig reads).
+declare module 'nuxt/schema' {
+  interface AppConfigInput {
+    ui?: AppConfigUI
+  }
+}
+
 export {}
 `
     }
