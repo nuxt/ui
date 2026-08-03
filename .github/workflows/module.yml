@@ -226,7 +226,7 @@ jobs:
         run: pnpm run dev:prepare
 
       - name: Run benchmarks
-        uses: CodSpeedHQ/action@v4
+        uses: CodSpeedHQ/action@v5
         with:
           mode: simulation
           run: pnpm run bench
