@@ -211,7 +211,7 @@ const { editor } = useComarkEditor({
 The [EditorToolbar](/docs/components/editor-toolbar) items and handlers call your editor's commands directly, so only include items whose extensions are registered on your editor — same for the mention, emoji and suggestion menus (like `Mention` above). The theme's placeholder styling applies automatically once your editor registers the Placeholder extension.
 
 ::note
-The editor instance is never modified: the theme's [prose classes](#prose) style your content from a wrapper element, so an external editor inherits the default typography automatically. Attributes of the editable element itself remain yours — for parity with the built-in editor, set the theme's `base` slot classes at creation:
+The editor instance is never modified — only TipTap's own `EditorContent` sets `options.element` when mounting. The theme's [prose classes](#prose) style your content from a wrapper element, so an external editor inherits the default typography automatically. Attributes of the editable element itself remain yours — for parity with the built-in editor, set the theme's `base` slot classes at creation:
 
 ```ts
 const editor = useEditor({
