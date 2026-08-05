@@ -115,6 +115,19 @@ describe('Editor', () => {
       wrapper.unmount()
     })
 
+    it('keeps a fallthrough `data-slot` on the root, not the content wrapper', async () => {
+      const editor = createEditor()
+      const wrapper = await mountSuspended(Editor, {
+        props: { editor },
+        attrs: { 'data-slot': 'custom' }
+      })
+
+      expect(wrapper.find('div').attributes('data-slot')).toBe('custom')
+      expect(wrapper.find('[data-slot="content"]').exists()).toBe(true)
+
+      wrapper.unmount()
+    })
+
     it('ignores engine props (content owned by the external editor)', async () => {
       // Silence the dev-only warning about inert props.
       const warn = vi.spyOn(console, 'warn').mockImplementation(() => {})

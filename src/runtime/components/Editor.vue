@@ -382,7 +382,7 @@ defineExpose({
         :editor="editor"
         data-slot="content"
         :class="ui.content({ class: props.ui?.content })"
-        v-bind="isExternalEditor ? $attrs : undefined"
+        v-bind="isExternalEditor ? omit($attrs, ['data-slot']) : undefined"
       />
     </template>
 
