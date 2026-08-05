@@ -28,7 +28,7 @@ exports[`Alert > renders with as correctly 1`] = `
 `;
 
 exports[`Alert > renders with avatar correctly 1`] = `
-"<div data-orientation="vertical" data-slot="root" class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-start bg-primary text-inverted"><span data-slot="root" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-11 text-[22px] shrink-0"><img src="https://github.com/benjamincanac.png" width="44" height="44" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span>
+"<div data-orientation="vertical" data-slot="root" class="relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5 items-start bg-primary text-inverted"><span data-slot="avatar" class="inline-flex items-center justify-center select-none rounded-full align-middle bg-elevated size-11 text-[22px] shrink-0"><img src="https://github.com/benjamincanac.png" width="44" height="44" data-slot="image" class="h-full w-full rounded-[inherit] object-cover"></span>
   <div data-slot="wrapper" class="min-w-0 flex-1 flex flex-col">
     <div data-slot="title" class="text-sm font-medium">Alert</div>
     <!--v-if-->
@@ -59,7 +59,7 @@ exports[`Alert > renders with close correctly 1`] = `
     <!--v-if-->
   </div>
   <div data-slot="actions" class="flex flex-wrap gap-1.5 shrink-0 items-center">
-    <!--v-if--><button type="button" aria-label="Close" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted outline-inverted/25 focus-visible:outline-3 p-0"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+    <!--v-if--><button type="button" data-slot="close" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted outline-inverted/25 focus-visible:outline-3 p-0"><span class="iconify i-lucide:x shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
     </button>
@@ -88,7 +88,7 @@ exports[`Alert > renders with closeIcon correctly 1`] = `
     <!--v-if-->
   </div>
   <div data-slot="actions" class="flex flex-wrap gap-1.5 shrink-0 items-center">
-    <!--v-if--><button type="button" aria-label="Close" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted outline-inverted/25 focus-visible:outline-3 p-0"><span class="iconify i-lucide:trash shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
+    <!--v-if--><button type="button" data-slot="close" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted outline-inverted/25 focus-visible:outline-3 p-0"><span class="iconify i-lucide:trash shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span>
       <!--v-if-->
       <!--v-if-->
     </button>

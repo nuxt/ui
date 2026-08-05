@@ -195,10 +195,25 @@ const isInternalLink = computed(() => {
   return true
 })
 
-const externalRel = computed(() => {
-  if (props.noRel) return null
-  if (props.rel) return props.rel
-  return 'noopener noreferrer'
+// NuxtLink strips `rel` from its slot props when rendered with `custom`, so
+// the prop is applied here for every branch instead of read from the slot.
+const rel = computed(() => {
+  // If noRel is explicitly set, return null
+  if (props.noRel) {
+    return null
+  }
+
+  // If rel is explicitly set, use it
+  if (props.rel !== undefined) {
+    return props.rel || null
+  }
+
+  // Default to "noopener noreferrer" for external links or links with target
+  if (!isInternalLink.value || (props.target && props.target !== '_self')) {
+    return 'noopener noreferrer'
+  }
+
+  return null
 })
 
 function isLinkActive({ route: linkRoute, isActive, isExactActive }: any = {}) {
@@ -254,7 +269,7 @@ function resolveLinkClass({ route, isActive, isExactActive }: any = {}) {
           disabled,
           href,
           navigate,
-          rel: (rest as NuxtLinkDefaultSlotProps).rel,
+          rel,
           target: (rest as NuxtLinkDefaultSlotProps).target,
           isExternal: (rest as NuxtLinkDefaultSlotProps).isExternal,
           active: isLinkActive({ route: linkRoute, isActive, isExactActive })
@@ -271,7 +286,7 @@ function resolveLinkClass({ route, isActive, isExactActive }: any = {}) {
         disabled,
         href,
         navigate,
-        rel: (rest as NuxtLinkDefaultSlotProps).rel,
+        rel,
         target: (rest as NuxtLinkDefaultSlotProps).target,
         isExternal: (rest as NuxtLinkDefaultSlotProps).isExternal
       }"
@@ -288,7 +303,7 @@ function resolveLinkClass({ route, isActive, isExactActive }: any = {}) {
         as,
         type,
         disabled,
-        ...(to ? { href: String(to), target: props.target, rel: externalRel, isExternal: true } : {}),
+        ...(to ? { href: String(to), target: props.target, rel, isExternal: true } : {}),
         active: active ?? false
       }"
     />
@@ -300,7 +315,7 @@ function resolveLinkClass({ route, isActive, isExactActive }: any = {}) {
       as,
       type,
       disabled,
-      ...(to ? { href: String(to), target: props.target, rel: externalRel, isExternal: true } : {})
+      ...(to ? { href: String(to), target: props.target, rel, isExternal: true } : {})
     }"
     :class="resolveLinkClass()"
   >

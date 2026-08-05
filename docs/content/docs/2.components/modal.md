@@ -360,7 +360,7 @@ slots:
 :placeholder{class="h-full"}
 ::
 
-### Unmount :badge{label="Soon" class="align-text-top"}
+### Unmount :badge{label="4.10+" class="align-text-top"}
 
 Use the `unmount-on-hide` prop to prevent the Modal's content from being unmounted when it is closed. Defaults to `true`.
 

@@ -147,6 +147,30 @@ Usage in compoundVariants:
 `ring-${color}/50` // with opacity
 ```
 
+## Logical Properties (RTL)
+
+Components must work in RTL by default. Reka's `dir` is already wired through `UApp`, so the theme only needs to stay direction-agnostic: always use CSS **logical** properties, never physical ones.
+
+| Physical (avoid) | Logical (use) |
+|---|---|
+| `ml-*` / `mr-*` | `ms-*` / `me-*` |
+| `pl-*` / `pr-*` | `ps-*` / `pe-*` |
+| `left-*` / `right-*` | `start-*` / `end-*` |
+| `text-left` / `text-right` | `text-start` / `text-end` |
+| `border-l` / `border-r` | `border-s` / `border-e` |
+| `rounded-l/r-*` | `rounded-s/e-*` |
+| `rounded-tl/tr/bl/br-*` | `rounded-ss/se/es/ee-*` |
+
+These render identically in LTR, so prefer them even when a component has no RTL case yet.
+
+Some things logical properties don't cover, handle them explicitly:
+- **`transform`** (`translate-x-*`, `-scale-x-*`) does not flip. Add an `rtl:` counterpart when it is direction-dependent (e.g. `translate-x-1/2 rtl:-translate-x-1/2`). Centering (`*-1/2` with a translate) is symmetric and needs nothing.
+- **`cursor-w/e-resize`** and **gradients** (`bg-gradient-to-l/r`) are physical with no logical form, add `rtl:` counterparts.
+- **Transitions** must name the logical property they animate (`transition-[inset-inline-start,inset-inline-end,width]`, not `transition-[left,right,width]`).
+- An **`absolute`** element needs an explicit `start-*`/`end-*` anchor, don't rely on its static position (unreliable in RTL).
+
+Keep physical only when the class is tied to a physical prop **value** (`side`, `direction`, `position` = `left`/`right`), or when positioning is driven by a Reka `offsetLeft`-based CSS variable (which already tracks correctly in RTL).
+
 ## Conditional Transitions
 
 Add transitions based on module options:

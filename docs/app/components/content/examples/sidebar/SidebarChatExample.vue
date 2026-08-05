@@ -108,7 +108,6 @@ const ui = {
           :autofocus="false"
           variant="subtle"
           size="sm"
-          :ui="{ base: 'px-0' }"
           @submit="onSubmit"
         >
           <UChatPromptSubmit

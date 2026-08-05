@@ -323,6 +323,10 @@ const value = ref('<h1>Hello World</h1>\n')
 </template>
 ```
 
+::tip
+Set `starter-kit` to `false` for a plain text editor. It keeps the essential nodes (paragraph, text, history) and disables every formatting feature such as bold, italic, headings, lists, code, blockquote, links and horizontal rules.
+::
+
 ::callout{icon="i-custom-tiptap" to="https://tiptap.dev/docs/editor/extensions/functionality/starterkit" target="_blank"}
 Learn more about StarterKit extension in the TipTap documentation.
 ::

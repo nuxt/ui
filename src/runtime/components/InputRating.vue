@@ -117,14 +117,14 @@ function onUpdate(value: number) {
 
 <template>
   <RatingRoot
-    v-bind="{ ...rootProps, ...$attrs, ...ariaAttrs }"
     :id="id"
     v-slot="{ items }"
+    data-slot="root"
+    v-bind="{ ...rootProps, ...$attrs, ...ariaAttrs }"
     :name="name"
     :disabled="disabled"
     :aria-readonly="props.readonly || undefined"
     :orientation="props.orientation"
-    data-slot="root"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     @update:model-value="onUpdate"
   >

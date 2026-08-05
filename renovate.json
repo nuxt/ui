@@ -11,8 +11,7 @@
     "v4"
   ],
   "ignoreDeps": [
-    "actions/stale",
-    "@nuxt/test-utils"
+    "actions/stale"
   ],
   "packageRules": [
     {

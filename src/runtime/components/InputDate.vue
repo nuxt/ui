@@ -183,14 +183,14 @@ defineExpose({
   </DefineSegmentsTemplate>
 
   <DateField.Root
-    v-bind="{ ...rootProps, ...$attrs, ...ariaAttrs }"
     :id="id"
     v-slot="{ segments }"
+    data-slot="base"
+    v-bind="{ ...rootProps, ...$attrs, ...ariaAttrs }"
     :model-value="(props.modelValue as DateValue)"
     :default-value="(props.defaultValue as DateValue)"
     :name="name"
     :disabled="disabled"
-    data-slot="base"
     :class="ui.base({ class: [props.ui?.base, props.class] })"
     @update:model-value="onUpdate"
     @blur="onBlur"
