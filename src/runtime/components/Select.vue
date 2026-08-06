@@ -4,7 +4,10 @@ import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/select'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
-import type { AvatarProps, ChipProps, IconProps, InputProps } from '../types'
+import type { AvatarProps } from './Avatar.vue'
+import type { ChipProps } from './Chip.vue'
+import type { IconProps } from './Icon.vue'
+import type { InputProps } from './Input.vue'
 import type { ModelModifiers, ApplyModifiers } from '../types/input'
 import type { ButtonHTMLAttributes } from '../types/html'
 import type { AcceptableValue, ArrayOrNested, GetItemKeys, GetModelValue, NestedItem, EmitsToProps } from '../types/utils'
@@ -181,7 +184,7 @@ const props = useComponentProps<SelectProps<T, VK, M, Mod>>('select', _props)
 
 const appConfig = useAppConfig() as Select['AppConfig']
 
-const rootProps = useForwardProps(reactivePick(props, 'open', 'defaultOpen', 'disabled', 'autocomplete', 'required', 'multiple'), emits)
+const rootProps = useForwardProps(reactivePick(props, 'open', 'defaultOpen', 'disabled', 'autocomplete', 'required', 'multiple', 'nullableValue'), emits)
 const portalProps = usePortal(toRef(() => props.portal))
 const position = computed(() => props.content?.position ?? appConfig.ui?.select?.defaultVariants?.position ?? theme.defaultVariants?.position)
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: position.value }) as SelectContentProps)
@@ -189,14 +192,26 @@ const arrowProps = toRef(() => defu(props.arrow, { rounded: true }) as SelectArr
 
 const { emitFormChange, emitFormInput, emitFormBlur, emitFormFocus, size: formFieldSize, color, id, name, highlight, disabled, ariaAttrs } = useFormField<InputProps>(_props)
 const { orientation, size: fieldGroupSize } = useFieldGroup<InputProps>(_props)
-const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(toRef(() => defu(props, { trailingIcon: appConfig.ui.icons.chevronDown })))
+// Pass only the props the composable reads: `defu(props, ...)` copied every prop
+// through the `useComponentProps` proxy and subscribed this computed (and `ui`,
+// which reads `isLeading`/`isTrailing`) to all of them, re-running the whole tv
+// pipeline on unrelated prop changes.
+const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(computed(() => ({
+  icon: props.icon,
+  leading: props.leading,
+  leadingIcon: props.leadingIcon,
+  trailing: props.trailing,
+  trailingIcon: props.trailingIcon ?? appConfig.ui.icons.chevronDown,
+  loading: props.loading,
+  loadingIcon: props.loadingIcon
+})))
 
 const selectSize = computed(() => fieldGroupSize.value || formFieldSize.value)
 
 const isItemAligned = computed(() => position.value === 'item-aligned')
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.select || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.select || {}) })({
   color: color.value ?? props.color,
   variant: props.variant,
   size: selectSize.value ?? props.size,

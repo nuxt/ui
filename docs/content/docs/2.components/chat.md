@@ -128,18 +128,21 @@ export default defineConfig({
 Create a server API endpoint to handle chat requests using [`streamText`](https://ai-sdk.dev/docs/reference/ai-sdk-core/stream-text). You can use the [Vercel AI Gateway](https://vercel.com/ai-gateway) to access AI models through a centralized endpoint:
 
 ```ts [server/api/chat.post.ts]
-import { streamText, convertToModelMessages } from 'ai'
+import { streamText, convertToModelMessages, toUIMessageStream, createUIMessageStreamResponse } from 'ai'
 import { gateway } from '@ai-sdk/gateway'
 
 export default defineEventHandler(async (event) => {
   const { messages } = await readBody(event)
 
-  return streamText({
-    model: gateway('anthropic/claude-sonnet-4.6'),
+  const result = streamText({
+    model: gateway('anthropic/claude-sonnet-5'),
     maxOutputTokens: 10000,
-    system: 'You are a helpful assistant.',
+    instructions: 'You are a helpful assistant.',
     messages: await convertToModelMessages(messages)
-  }).toUIMessageStreamResponse()
+  })
+
+  const stream = toUIMessageStream({ stream: result.stream })
+  return createUIMessageStreamResponse({ stream })
 })
 ```
 
@@ -148,16 +151,16 @@ export default defineEventHandler(async (event) => {
 To enable [reasoning](https://ai-sdk.dev/docs/ai-sdk-ui/chatbot#reasoning), configure `providerOptions` for your provider ([Anthropic](https://ai-sdk.dev/docs/guides/providers/anthropic#reasoning), [Google](https://ai-sdk.dev/providers/ai-sdk-providers/google-generative-ai#thinking), [OpenAI](https://ai-sdk.dev/docs/guides/providers/openai#reasoning)):
 
 ```ts [server/api/chat.post.ts]
-import { streamText, convertToModelMessages } from 'ai'
+import { streamText, convertToModelMessages, toUIMessageStream, createUIMessageStreamResponse } from 'ai'
 import { gateway } from '@ai-sdk/gateway'
 
 export default defineEventHandler(async (event) => {
   const { messages } = await readBody(event)
 
-  return streamText({
-    model: gateway('anthropic/claude-sonnet-4.6'),
+  const result = streamText({
+    model: gateway('anthropic/claude-sonnet-5'),
     maxOutputTokens: 10000,
-    system: 'You are a helpful assistant.',
+    instructions: 'You are a helpful assistant.',
     messages: await convertToModelMessages(messages),
     providerOptions: {
       anthropic: {
@@ -177,7 +180,10 @@ export default defineEventHandler(async (event) => {
         reasoningSummary: 'detailed'
       }
     }
-  }).toUIMessageStreamResponse()
+  })
+
+  const stream = toUIMessageStream({ stream: result.stream })
+  return createUIMessageStreamResponse({ stream })
 })
 ```
 
@@ -188,59 +194,68 @@ Some providers offer built-in web search tools: [Anthropic](https://ai-sdk.dev/d
 ::code-group
 
 ```ts [Anthropic]
-import { streamText, convertToModelMessages } from 'ai'
+import { streamText, convertToModelMessages, toUIMessageStream, createUIMessageStreamResponse } from 'ai'
 import { anthropic } from '@ai-sdk/anthropic'
 import { gateway } from '@ai-sdk/gateway'
 
 export default defineEventHandler(async (event) => {
   const { messages } = await readBody(event)
 
-  return streamText({
-    model: gateway('anthropic/claude-sonnet-4.6'),
-    system: 'You are a helpful assistant.',
+  const result = streamText({
+    model: gateway('anthropic/claude-sonnet-5'),
+    instructions: 'You are a helpful assistant.',
     messages: await convertToModelMessages(messages),
     tools: {
       web_search: anthropic.tools.webSearch_20250305({})
     }
-  }).toUIMessageStreamResponse()
+  })
+
+  const stream = toUIMessageStream({ stream: result.stream })
+  return createUIMessageStreamResponse({ stream })
 })
 ```
 
 ```ts [Google]
-import { streamText, convertToModelMessages } from 'ai'
+import { streamText, convertToModelMessages, toUIMessageStream, createUIMessageStreamResponse } from 'ai'
 import { google } from '@ai-sdk/google'
 import { gateway } from '@ai-sdk/gateway'
 
 export default defineEventHandler(async (event) => {
   const { messages } = await readBody(event)
 
-  return streamText({
+  const result = streamText({
     model: gateway('google/gemini-3-flash'),
-    system: 'You are a helpful assistant.',
+    instructions: 'You are a helpful assistant.',
     messages: await convertToModelMessages(messages),
     tools: {
       google_search: google.tools.googleSearch({})
     }
-  }).toUIMessageStreamResponse()
+  })
+
+  const stream = toUIMessageStream({ stream: result.stream })
+  return createUIMessageStreamResponse({ stream })
 })
 ```
 
 ```ts [OpenAI]
-import { streamText, convertToModelMessages } from 'ai'
+import { streamText, convertToModelMessages, toUIMessageStream, createUIMessageStreamResponse } from 'ai'
 import { openai } from '@ai-sdk/openai'
 import { gateway } from '@ai-sdk/gateway'
 
 export default defineEventHandler(async (event) => {
   const { messages } = await readBody(event)
 
-  return streamText({
+  const result = streamText({
     model: gateway('openai/gpt-5-nano'),
-    system: 'You are a helpful assistant.',
+    instructions: 'You are a helpful assistant.',
     messages: await convertToModelMessages(messages),
     tools: {
       web_search: openai.tools.webSearch({})
     }
-  }).toUIMessageStreamResponse()
+  })
+
+  const stream = toUIMessageStream({ stream: result.stream })
+  return createUIMessageStreamResponse({ stream })
 })
 ```
 
@@ -271,7 +286,7 @@ yarn add @ai-sdk/mcp
 Then, configure your server endpoint to use MCP tools:
 
 ```ts [server/api/chat.post.ts]
-import { streamText, convertToModelMessages, stepCountIs } from 'ai'
+import { streamText, convertToModelMessages, isStepCount, toUIMessageStream, createUIMessageStreamResponse } from 'ai'
 import { createMCPClient } from '@ai-sdk/mcp'
 import { gateway } from '@ai-sdk/gateway'
 
@@ -281,49 +296,93 @@ export default defineEventHandler(async (event) => {
   const httpClient = await createMCPClient({
     transport: { type: 'http', url: 'https://your-app.com/mcp' }
   })
-  const tools = await httpClient.tools()
+  try {
+    const tools = await httpClient.tools()
 
-  return streamText({
-    model: gateway('anthropic/claude-sonnet-4.6'),
+    const result = streamText({
+      model: gateway('anthropic/claude-sonnet-5'),
+      maxOutputTokens: 10000,
+      instructions: 'You are a helpful assistant. Use your tools to search for relevant information before answering questions.',
+      messages: await convertToModelMessages(messages),
+      stopWhen: isStepCount(6),
+      tools,
+      onEnd: async () => {
+        await httpClient.close()
+      },
+      onError: async (error) => {
+        console.error(error)
+        await httpClient.close()
+      }
+    })
+
+    const stream = toUIMessageStream({ stream: result.stream })
+    return createUIMessageStreamResponse({ stream })
+  } catch (error) {
+    // Close the MCP client if setup fails before streaming starts
+    await httpClient.close()
+    throw error
+  }
+})
+```
+
+### Tool Approval
+
+Require a user confirmation before a tool runs with the [`toolApproval`](https://ai-sdk.dev/docs/agents/tool-approvals) option. The tool part pauses in the `approval-requested` state until the user responds:
+
+```ts [server/api/chat.post.ts]
+import { streamText, convertToModelMessages, toUIMessageStream, createUIMessageStreamResponse, tool } from 'ai'
+import { gateway } from '@ai-sdk/gateway'
+import { z } from 'zod'
+
+export default defineEventHandler(async (event) => {
+  const { messages } = await readBody(event)
+
+  const result = streamText({
+    model: gateway('anthropic/claude-sonnet-5'),
     maxOutputTokens: 10000,
-    system: 'You are a helpful assistant. Use your tools to search for relevant information before answering questions.',
+    instructions: 'You are a helpful assistant.',
     messages: await convertToModelMessages(messages),
-    stopWhen: stepCountIs(6),
-    tools,
-    onFinish: async () => {
-      await httpClient.close()
+    tools: {
+      deleteFile: tool({
+        description: 'Delete a file from the project',
+        inputSchema: z.object({ path: z.string() }),
+        execute: async ({ path }) => ({ deleted: path })
+      })
     },
-    onError: async (error) => {
-      console.error(error)
-      await httpClient.close()
+    toolApproval: {
+      deleteFile: 'user-approval'
     }
-  }).toUIMessageStreamResponse()
+  })
+
+  const stream = toUIMessageStream({ stream: result.stream })
+  return createUIMessageStreamResponse({ stream })
 })
 ```
 
 ## Client Setup
 
-Use the `Chat` class from `@ai-sdk/vue` to manage chat state and connect to your server endpoint:
+Use the `useChat` composable from `@ai-sdk/vue` to manage chat state and connect to your server endpoint:
 
 ::framework-only
 #nuxt
 ```vue
 <script setup lang="ts">
-import { isReasoningUIPart, isTextUIPart, isToolUIPart, getToolName } from 'ai'
-import { Chat } from '@ai-sdk/vue'
+import { isReasoningUIPart, isTextUIPart, isToolUIPart, getToolName, lastAssistantMessageIsCompleteWithApprovalResponses } from 'ai'
+import { useChat } from '@ai-sdk/vue'
 import { isPartStreaming, isToolStreaming } from '@nuxt/ui/utils/ai'
 import highlight from '@comark/nuxt/plugins/highlight'
 
 const input = ref('')
 
-const chat = new Chat({
+const { messages, status, error, sendMessage, regenerate, stop, addToolApprovalResponse } = useChat({
+  sendAutomaticallyWhen: lastAssistantMessageIsCompleteWithApprovalResponses,
   onError(error) {
     console.error(error)
   }
 })
 
 function onSubmit() {
-  chat.sendMessage({ text: input.value })
+  sendMessage({ text: input.value })
 
   input.value = ''
 }
@@ -331,8 +390,8 @@ function onSubmit() {
 
 <template>
   <UChatMessages
-    :messages="chat.messages"
-    :status="chat.status"
+    :messages="messages"
+    :status="status"
   >
     <template #content="{ message }">
       <template
@@ -356,6 +415,10 @@ function onSubmit() {
           v-else-if="isToolUIPart(part)"
           :text="getToolName(part)"
           :streaming="isToolStreaming(part)"
+          :actions="part.state === 'approval-requested' ? [
+            { label: 'Approve', onClick: () => addToolApprovalResponse({ id: part.approval.id, approved: true }) },
+            { label: 'Deny', color: 'neutral', variant: 'ghost', onClick: () => addToolApprovalResponse({ id: part.approval.id, approved: false }) }
+          ] : undefined"
         />
 
         <template v-else-if="isTextUIPart(part)">
@@ -376,13 +439,13 @@ function onSubmit() {
 
   <UChatPrompt
     v-model="input"
-    :error="chat.error"
+    :error="error"
     @submit="onSubmit"
   >
     <UChatPromptSubmit
-      :status="chat.status"
-      @stop="chat.stop()"
-      @reload="chat.regenerate()"
+      :status="status"
+      @stop="stop()"
+      @reload="regenerate()"
     />
   </UChatPrompt>
 </template>
@@ -392,22 +455,23 @@ function onSubmit() {
 ```vue
 <script setup lang="ts">
 import { ref } from 'vue'
-import { isReasoningUIPart, isTextUIPart, isToolUIPart, getToolName } from 'ai'
-import { Chat } from '@ai-sdk/vue'
+import { isReasoningUIPart, isTextUIPart, isToolUIPart, getToolName, lastAssistantMessageIsCompleteWithApprovalResponses } from 'ai'
+import { useChat } from '@ai-sdk/vue'
 import { isPartStreaming, isToolStreaming } from '@nuxt/ui/utils/ai'
 import { Comark } from '@comark/vue'
 import highlight from '@comark/vue/plugins/highlight'
 
 const input = ref('')
 
-const chat = new Chat({
+const { messages, status, error, sendMessage, regenerate, stop, addToolApprovalResponse } = useChat({
+  sendAutomaticallyWhen: lastAssistantMessageIsCompleteWithApprovalResponses,
   onError(error) {
     console.error(error)
   }
 })
 
 function onSubmit() {
-  chat.sendMessage({ text: input.value })
+  sendMessage({ text: input.value })
 
   input.value = ''
 }
@@ -415,8 +479,8 @@ function onSubmit() {
 
 <template>
   <UChatMessages
-    :messages="chat.messages"
-    :status="chat.status"
+    :messages="messages"
+    :status="status"
   >
     <template #content="{ message }">
       <template
@@ -440,6 +504,10 @@ function onSubmit() {
           v-else-if="isToolUIPart(part)"
           :text="getToolName(part)"
           :streaming="isToolStreaming(part)"
+          :actions="part.state === 'approval-requested' ? [
+            { label: 'Approve', onClick: () => addToolApprovalResponse({ id: part.approval.id, approved: true }) },
+            { label: 'Deny', color: 'neutral', variant: 'ghost', onClick: () => addToolApprovalResponse({ id: part.approval.id, approved: false }) }
+          ] : undefined"
         />
 
         <template v-else-if="isTextUIPart(part)">
@@ -460,13 +528,13 @@ function onSubmit() {
 
   <UChatPrompt
     v-model="input"
-    :error="chat.error"
+    :error="error"
     @submit="onSubmit"
   >
     <UChatPromptSubmit
-      :status="chat.status"
-      @stop="chat.stop()"
-      @reload="chat.regenerate()"
+      :status="status"
+      @stop="stop()"
+      @reload="regenerate()"
     />
   </UChatPrompt>
 </template>

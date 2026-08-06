@@ -2,7 +2,8 @@
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/prose/card'
-import type { IconProps, LinkProps } from '../../types'
+import type { IconProps } from '../Icon.vue'
+import type { LinkProps } from '../Link.vue'
 import type { ComponentConfig } from '../../types/tv'
 
 type ProseCard = ComponentConfig<typeof theme, AppConfig, 'card', 'ui.prose'>
@@ -45,7 +46,7 @@ const props = useComponentProps('prose.card', _props)
 const appConfig = useAppConfig() as ProseCard['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.card || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.prose?.card || {}) })({
   color: props.color,
   to: !!props.to,
   title: !!props.title
@@ -58,7 +59,7 @@ const ariaLabel = computed(() => (props.title || 'Card link').trim())
 </script>
 
 <template>
-  <div :class="ui.base({ class: [props.ui?.base, props.class] })">
+  <div v-bind="!props.to ? $attrs : {}" :class="ui.base({ class: [props.ui?.base, props.class] })">
     <ULink
       v-if="props.to"
       :aria-label="ariaLabel"

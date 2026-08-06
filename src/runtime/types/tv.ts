@@ -18,7 +18,7 @@ export type SlotClass = ClassValue | SlotClassReplacer
  * Defines the AppConfig object based on the tailwind-variants configuration.
  */
 export type TVConfig<T extends Record<string, any>> = {
-  [P in keyof T]?: {
+  [P in keyof T]?: P extends 'prose' ? TVConfig<T[P]> : {
     [K in keyof T[P]as K extends 'base' | 'slots' | 'variants' | 'defaultVariants' ? K : never]?: K extends 'base' ? SlotClass
       : K extends 'slots' ? {
         [S in keyof T[P]['slots']]?: SlotClass
@@ -28,7 +28,7 @@ export type TVConfig<T extends Record<string, any>> = {
             : never
   }
 } & {
-  [P in keyof T]?: {
+  [P in keyof T]?: P extends 'prose' ? TVConfig<T[P]> : {
     compoundVariants?: TVCompoundVariants<WidenVariantsValues<T[P]['variants']>, T[P]['slots'], ClassValue, object, undefined>
   }
 }

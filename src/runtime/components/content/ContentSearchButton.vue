@@ -1,18 +1,22 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/content/content-search-button'
-import type { ButtonProps, ButtonSlots, IconProps, KbdProps, TooltipProps, LinkPropsKeys } from '../../types'
+import type { ButtonProps, ButtonSlots } from '../Button.vue'
+import type { IconProps } from '../Icon.vue'
+import type { KbdProps } from '../Kbd.vue'
+import type { TooltipProps } from '../Tooltip.vue'
+import type { LinkPropsKeys } from '../Link.vue'
 import type { ComponentConfig } from '../../types/tv'
 
 type ContentSearchButton = ComponentConfig<typeof theme, AppConfig, 'contentSearchButton'>
 
 export interface ContentSearchButtonProps extends Omit<ButtonProps, LinkPropsKeys | 'icon' | 'label' | 'color' | 'variant'> {
   /**
-   * The icon displayed in the button.
+   * The icon displayed in the button. Set to `false` to hide the icon.
    * @defaultValue appConfig.ui.icons.search
    * @IconifyIcon
    */
-  icon?: IconProps['name']
+  icon?: IconProps['name'] | false
   /**
    * The label displayed in the button.
    * @defaultValue t('contentSearchButton.label')
@@ -88,7 +92,7 @@ const { open } = useContentSearch()
 const appConfig = useAppConfig() as ContentSearchButton['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.contentSearchButton || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.contentSearchButton || {}) })({
   collapsed: props.collapsed
 }))
 </script>
@@ -96,7 +100,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.contentSearc
 <template>
   <DefineButtonTemplate>
     <UButton
-      :icon="props.icon || appConfig.ui.icons.search"
+      :icon="props.icon === false ? undefined : (props.icon ?? appConfig.ui.icons.search)"
       :label="props.label || t('contentSearchButton.label')"
       :variant="props.variant || (props.collapsed ? 'ghost' : 'outline')"
       v-bind="{

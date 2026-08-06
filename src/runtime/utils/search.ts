@@ -13,18 +13,6 @@ function escapeHTML(str: string): string {
   return str.replace(/[&<>"']/g, char => htmlEscapes[char]!)
 }
 
-// Check if string is already HTML-escaped to avoid double-escaping
-function isAlreadyEscaped(str: string): boolean {
-  return /&(?:amp|lt|gt|quot|#39);/.test(str)
-}
-
-function sanitize(str: string): string {
-  if (isAlreadyEscaped(str)) {
-    return str
-  }
-  return escapeHTML(str)
-}
-
 function truncateHTMLFromStart(html: string, maxLength: number) {
   let truncated = ''
   let totalLength = 0
@@ -93,16 +81,16 @@ export function highlight<T>(item: T & { matches?: FuseResult<T>['matches'] }, s
       const isMatched = (lastIndiceNextIndex - region[0]) >= minTokenLength
 
       content += [
-        sanitize(value.substring(nextUnhighlightedRegionStartingIndex, region[0])),
+        escapeHTML(value.substring(nextUnhighlightedRegionStartingIndex, region[0])),
         isMatched && `<mark>`,
-        sanitize(value.substring(region[0], lastIndiceNextIndex)),
+        escapeHTML(value.substring(region[0], lastIndiceNextIndex)),
         isMatched && '</mark>'
       ].filter(Boolean).join('')
 
       nextUnhighlightedRegionStartingIndex = lastIndiceNextIndex
     })
 
-    content += sanitize(value.substring(nextUnhighlightedRegionStartingIndex))
+    content += escapeHTML(value.substring(nextUnhighlightedRegionStartingIndex))
 
     const markIndex = content.indexOf('<mark>')
     if (markIndex !== -1) {

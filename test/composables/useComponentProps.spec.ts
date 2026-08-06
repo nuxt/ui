@@ -1,21 +1,23 @@
-import { describe, expectTypeOf, test } from 'vitest'
+import { describe, expectTypeOf, it, expect, test, beforeAll, afterAll } from 'vitest'
+import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { useAppConfig } from '#imports'
+import { UFormField } from '#components'
 import type * as ui from '#build/ui'
-import type { ThemeDefaults } from '../../src/runtime/composables/useComponentProps'
+import type { ThemeDefaults } from '../../src/runtime/types/theme'
 
 /**
  * Hand-maintained list of `#build/ui` exports that intentionally don't
- * participate in `<UTheme :props>` overrides. Two reasons land here:
+ * participate in `<UTheme :props>` overrides: the matching Vue file doesn't
+ * run `useComponentProps`, so a `:props` entry would types-check but no-op at
+ * runtime. If a key stays here long-term, consider migrating the component to
+ * `useComponentProps` and removing it from this list.
  *
- *   - `prose` is a namespace, not a single component (its children live
- *     under `prose.<tag>` and are read via `useComponentProps('prose.p', …)`).
- *   - The matching Vue file doesn't run `useComponentProps`, so a `:props`
- *     entry would types-check but no-op at runtime. If a key stays here
- *     long-term, consider migrating the component to `useComponentProps`
- *     and removing it from this list.
+ * Note: `prose` is a namespace whose children (`prose.h2`, …) *do* read
+ * `useComponentProps('prose.<tag>', …)`, so it participates via a nested
+ * `ThemeDefaults['prose']` shape and is not excluded here.
  */
 type NonProxyComponents
-  = | 'prose'
-    | 'link'
+  = | 'link'
     | 'editorEmojiMenu'
     | 'editorMentionMenu'
     | 'editorSuggestionMenu'
@@ -36,5 +38,42 @@ describe('ThemeDefaults registry', () => {
 
   test('ThemeDefaults declares no entries beyond the `#build/ui` registry', () => {
     expectTypeOf<ExtraInThemeDefaults>().toBeNever()
+  })
+})
+
+// `app.config.ui.<name>.defaultVariants` must override a prop the component
+// pins in `withDefaults` (here `orientation`). Regression test for #6683.
+describe('app.config defaultVariants', () => {
+  let appConfig: { ui?: Record<string, any> }
+
+  beforeAll(() => {
+    appConfig = useAppConfig() as { ui?: Record<string, any> }
+    appConfig.ui ??= {}
+    appConfig.ui.formField = { defaultVariants: { orientation: 'horizontal' } }
+  })
+
+  afterAll(() => {
+    delete appConfig.ui!.formField
+  })
+
+  it('overrides the withDefaults fallback', async () => {
+    const wrapper = await mountSuspended(UFormField, {
+      props: { label: 'Label' }
+    })
+
+    const root = wrapper.find('[data-slot="root"]')
+    // Drives both the `data-orientation` attribute and the tv class resolution,
+    // even though `orientation` isn't set in the theme's `defaultVariants`.
+    expect(root.attributes('data-orientation')).toBe('horizontal')
+    expect(root.classes()).toContain('place-items-baseline')
+  })
+
+  it('still lets an explicit prop win', async () => {
+    const wrapper = await mountSuspended(UFormField, {
+      props: { label: 'Label', orientation: 'vertical' }
+    })
+
+    const root = wrapper.find('[data-slot="root"]')
+    expect(root.attributes('data-orientation')).toBe('vertical')
   })
 })

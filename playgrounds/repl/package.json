@@ -11,11 +11,11 @@
   "dependencies": {
     "@nuxt/ui": "workspace:*",
     "@vue/repl": "^4.7.2",
-    "tailwindcss": "^4.3.0",
-    "vue": "^3.5.35"
+    "tailwindcss": "^4.3.3",
+    "vue": "^3.5.40"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^6.0.7",
-    "vite": "^7.3.5"
+    "@vitejs/plugin-vue": "^6.0.8",
+    "vite": "^8.1.5"
   }
 }

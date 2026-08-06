@@ -2,7 +2,7 @@
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/page-logos'
-import type { MarqueeProps } from '../types'
+import type { MarqueeProps } from './Marquee.vue'
 import type { ComponentConfig } from '../types/tv'
 
 type PageLogos = ComponentConfig<typeof theme, AppConfig, 'pageLogos'>
@@ -55,7 +55,7 @@ const props = useComponentProps('pageLogos', _props)
 const appConfig = useAppConfig() as PageLogos['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pageLogos || {}) })())
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.pageLogos || {}) })())
 </script>
 
 <template>
@@ -80,7 +80,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pageLogos ||
     </template>
   </DefineCreateItemTemplate>
 
-  <Primitive :as="props.as" v-bind="$attrs" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <Primitive :as="props.as" data-slot="root" v-bind="$attrs" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <h2 v-if="props.title" data-slot="title" :class="ui.title({ class: props.ui?.title })">
       {{ props.title }}
     </h2>

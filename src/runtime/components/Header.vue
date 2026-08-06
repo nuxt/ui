@@ -2,7 +2,11 @@
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/header'
-import type { ButtonProps, DrawerProps, ModalProps, SlideoverProps, LinkPropsKeys } from '../types'
+import type { ButtonProps } from './Button.vue'
+import type { DrawerProps } from './Drawer.vue'
+import type { ModalProps } from './Modal.vue'
+import type { SlideoverProps } from './Slideover.vue'
+import type { LinkPropsKeys } from './Link.vue'
 import type { ComponentConfig } from '../types/tv'
 
 type Header = ComponentConfig<typeof theme, AppConfig, 'header'>
@@ -113,7 +117,7 @@ watch(() => route.fullPath, () => {
 })
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.header || {}) })())
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.header || {}) })())
 
 const Menu = computed(() => ({
   slideover: USlideover,
@@ -167,7 +171,7 @@ function toggleOpen() {
     </div>
   </DefineRightTemplate>
 
-  <Primitive :as="props.as" v-bind="$attrs" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <Primitive :as="props.as" data-slot="root" v-bind="$attrs" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <slot name="top" />
 
     <UContainer data-slot="container" :class="ui.container({ class: props.ui?.container })">

@@ -3,7 +3,9 @@ import type { NumberFieldRootProps } from 'reka-ui'
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/input-number'
-import type { ButtonProps, IconProps, LinkPropsKeys } from '../types'
+import type { ButtonProps } from './Button.vue'
+import type { IconProps } from './Icon.vue'
+import type { LinkPropsKeys } from './Link.vue'
 import type { InputHTMLAttributes } from '../types/html'
 import type { ModelModifiers } from '../types/input'
 import type { ComponentConfig } from '../types/tv'
@@ -123,7 +125,7 @@ const { orientation, size: fieldGroupSize } = useFieldGroup<InputNumberProps<T, 
 const inputSize = computed(() => fieldGroupSize.value || formFieldSize.value)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.inputNumber || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.inputNumber || {}) })({
   color: color.value ?? props.color,
   variant: props.variant,
   size: inputSize.value ?? props.size,
@@ -186,7 +188,7 @@ defineExpose({
     :min="props.min"
     :max="props.max"
     :step="props.step"
-    data-slot="root"
+    :data-slot="($attrs['data-slot'] as string | undefined) ?? 'root'"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     :name="name"
     :disabled="disabled"

@@ -3,7 +3,8 @@ import type { ComponentPublicInstance, VNode } from 'vue'
 import type { DateFieldRootProps, DateFieldRootEmits, DateRangeFieldRootProps, DateRangeFieldRootEmits, DateValue, SegmentPart } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
-import type { AvatarProps, IconProps } from '../types'
+import type { AvatarProps } from './Avatar.vue'
+import type { IconProps } from './Icon.vue'
 import type { ComponentConfig } from '../types/tv'
 import theme from '#build/ui/input-date'
 
@@ -108,7 +109,7 @@ const [DefineSegmentsTemplate, ReuseSegmentsTemplate] = createReusableTemplate<{
 const inputSize = computed(() => fieldGroupSize.value || formFieldSize.value)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.inputDate || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.inputDate || {}) })({
   color: color.value ?? props.color,
   variant: props.variant,
   size: inputSize.value ?? props.size,
@@ -182,14 +183,14 @@ defineExpose({
   </DefineSegmentsTemplate>
 
   <DateField.Root
-    v-bind="{ ...rootProps, ...$attrs, ...ariaAttrs }"
     :id="id"
     v-slot="{ segments }"
+    data-slot="base"
+    v-bind="{ ...rootProps, ...$attrs, ...ariaAttrs }"
     :model-value="(props.modelValue as DateValue)"
     :default-value="(props.defaultValue as DateValue)"
     :name="name"
     :disabled="disabled"
-    data-slot="base"
     :class="ui.base({ class: [props.ui?.base, props.class] })"
     @update:model-value="onUpdate"
     @blur="onBlur"

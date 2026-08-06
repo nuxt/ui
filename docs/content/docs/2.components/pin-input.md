@@ -110,7 +110,7 @@ props:
 ---
 ::
 
-### Separator :badge{label="Soon" class="align-text-top"}
+### Separator :badge{label="4.9+" class="align-text-top"}
 
 Use the `separator` prop to insert a separator between groups of inputs. Pass a number to insert one after every Nth input.
 
@@ -206,7 +206,7 @@ props:
 
 ## Examples
 
-### With separator slot :badge{label="Soon" class="align-text-top"}
+### With separator slot :badge{label="4.9+" class="align-text-top"}
 
 Use the `separator` slot to customize the separator appearance.
 

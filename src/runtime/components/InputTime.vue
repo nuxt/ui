@@ -4,7 +4,8 @@ import type { TimeFieldRootEmits, TimeFieldRootProps, TimeRangeFieldRootEmits, T
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/input-time'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
-import type { AvatarProps, IconProps } from '../types'
+import type { AvatarProps } from './Avatar.vue'
+import type { IconProps } from './Icon.vue'
 import type { ComponentConfig } from '../types/tv'
 
 type InputTime = ComponentConfig<typeof theme, AppConfig, 'inputTime'>
@@ -114,7 +115,7 @@ const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponen
 const inputSize = computed(() => fieldGroupSize.value || formFieldSize.value)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.inputTime || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.inputTime || {}) })({
   color: color.value ?? props.color,
   variant: props.variant,
   size: inputSize.value ?? props.size,
@@ -196,14 +197,14 @@ defineExpose({
   </DefineSegmentsTemplate>
 
   <TimeField.Root
-    v-bind="{ ...rootProps, ...$attrs, ...ariaAttrs }"
     :id="id"
     v-slot="{ segments }"
+    data-slot="base"
+    v-bind="{ ...rootProps, ...$attrs, ...ariaAttrs }"
     :name="name"
     :disabled="disabled"
     :model-value="(props.modelValue as TimeValue)"
     :default-value="(props.defaultValue as TimeValue)"
-    data-slot="base"
     :class="ui.base({ class: [props.ui?.base, props.class] })"
     @update:model-value="onUpdate"
     @blur="onBlur"

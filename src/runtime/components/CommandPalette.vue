@@ -7,7 +7,13 @@ import type { AppConfig } from '@nuxt/schema'
 import type { UseFuseOptions } from '@vueuse/integrations/useFuse'
 import theme from '#build/ui/command-palette'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
-import type { AvatarProps, ButtonProps, ChipProps, KbdProps, InputProps, LinkProps, IconProps, LinkPropsKeys } from '../types'
+import type { AvatarProps } from './Avatar.vue'
+import type { ButtonProps } from './Button.vue'
+import type { ChipProps } from './Chip.vue'
+import type { KbdProps } from './Kbd.vue'
+import type { InputProps } from './Input.vue'
+import type { LinkProps, LinkPropsKeys } from './Link.vue'
+import type { IconProps } from './Icon.vue'
 import type { GetItemKeys } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
@@ -71,11 +77,11 @@ export interface CommandPaletteProps<G extends CommandPaletteGroup<T> = CommandP
    */
   size?: CommandPalette['variants']['size']
   /**
-   * The icon displayed in the input.
+   * The icon displayed in the input. Set to `false` to hide the icon.
    * @defaultValue appConfig.ui.icons.search
    * @IconifyIcon
    */
-  icon?: IconProps['name']
+  icon?: IconProps['name'] | false
   /**
    * The icon displayed on the right side of the input.
    * @defaultValue appConfig.ui.icons.search
@@ -296,7 +302,7 @@ const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: C
 })
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.commandPalette || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.commandPalette || {}) })({
   size: props.size,
   virtualize: !!props.virtualize
 }))
@@ -583,7 +589,7 @@ function onSelect(e: Event, item: T) {
     </ULink>
   </DefineItemTemplate>
 
-  <ListboxRoot v-bind="{ ...rootProps, ...$attrs }" ref="rootRef" :selection-behavior="props.selectionBehavior" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <ListboxRoot ref="rootRef" data-slot="root" v-bind="{ ...rootProps, ...$attrs }" :selection-behavior="props.selectionBehavior" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <ListboxFilter v-if="props.input" v-model="searchTerm" as-child>
       <UInput
         variant="none"
@@ -593,7 +599,7 @@ function onSelect(e: Event, item: T) {
         :loading="props.loading"
         :loading-icon="props.loadingIcon"
         :trailing-icon="props.trailingIcon"
-        :icon="props.icon || appConfig.ui.icons.search"
+        :icon="props.icon === false ? undefined : (props.icon ?? appConfig.ui.icons.search)"
         v-bind="typeof props.input === 'object' ? props.input : {}"
         data-slot="input"
         :class="ui.input({ class: props.ui?.input })"

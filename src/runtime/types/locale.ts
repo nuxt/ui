@@ -79,6 +79,9 @@ export type Messages = {
     close: string
     open: string
   }
+  drawer: {
+    close: string
+  }
   error: {
     clear: string
   }

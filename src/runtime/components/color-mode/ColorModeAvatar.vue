@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { AvatarProps } from '../../types'
+import type { AvatarProps } from '../Avatar.vue'
 
 export interface ColorModeAvatarProps extends Omit<AvatarProps, 'src'> {
   light: string

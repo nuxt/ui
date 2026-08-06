@@ -1,4 +1,4 @@
-import type { Messages } from '../types'
+import type { Messages } from '../types/locale'
 import { defineLocale } from '../composables/defineLocale'
 
 export default defineLocale<Messages>({
@@ -76,6 +76,9 @@ export default defineLocale<Messages>({
     dashboardSidebarToggle: {
       close: 'ปิดแถบด้านข้าง',
       open: 'เปิดแถบด้านข้าง'
+    },
+    drawer: {
+      close: 'ปิด'
     },
     error: {
       clear: 'กลับไปยังหน้าหลัก'

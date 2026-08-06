@@ -2,7 +2,9 @@
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/user'
-import type { AvatarProps, ChipProps, LinkProps } from '../types'
+import type { AvatarProps } from './Avatar.vue'
+import type { ChipProps } from './Chip.vue'
+import type { LinkProps } from './Link.vue'
 import type { ComponentConfig } from '../types/tv'
 
 type User = ComponentConfig<typeof theme, AppConfig, 'user'>
@@ -28,7 +30,7 @@ export interface UserProps {
   orientation?: User['variants']['orientation']
   to?: LinkProps['to']
   target?: LinkProps['target']
-  onClick?: (event: MouseEvent) => void | Promise<void>
+  onClick?: (event: MouseEvent) => void
   class?: any
   ui?: User['slots']
 }
@@ -65,7 +67,7 @@ const appConfig = useAppConfig() as User['AppConfig']
 const prefix = usePrefix()
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.user || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.user || {}) })({
   size: props.size,
   orientation: props.orientation,
   to: !!props.to || !!props.onClick
@@ -73,7 +75,14 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.user || {}) 
 </script>
 
 <template>
-  <Primitive :as="props.as" :data-orientation="props.orientation" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })" @click="props.onClick">
+  <Primitive
+    :as="props.as"
+    v-bind="!props.to ? $attrs : {}"
+    :data-orientation="props.orientation"
+    :data-slot="($attrs['data-slot'] as string | undefined) ?? 'root'"
+    :class="ui.root({ class: [props.ui?.root, props.class] })"
+    @click="props.onClick"
+  >
     <slot name="avatar" :ui="ui">
       <UChip v-if="props.chip && props.avatar" inset v-bind="typeof props.chip === 'object' ? props.chip : {}" :size="props.size">
         <UAvatar :alt="props.name" v-bind="props.avatar" :size="props.size" data-slot="avatar" :class="ui.avatar({ class: props.ui?.avatar })" />
@@ -92,7 +101,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.user || {}) 
       <ULink
         v-if="props.to"
         :aria-label="props.name"
-        v-bind="{ to: props.to, target: props.target, ...$attrs }"
+        v-bind="{ 'to': props.to, 'target': props.target, ...$attrs, 'data-slot': undefined }"
         :class="prefix('focus:outline-none peer')"
         raw
       >

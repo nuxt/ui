@@ -69,7 +69,7 @@ const { size } = useAvatarGroup(_props)
 const appConfig = useAppConfig() as Chip['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.chip || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.chip || {}) })({
   color: props.color,
   size: size.value ?? props.size,
   position: props.position,
@@ -79,8 +79,8 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.chip || {}) 
 </script>
 
 <template>
-  <Primitive :as="props.as" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <Slot v-bind="$attrs">
+  <Primitive :as="props.as" :data-slot="($attrs['data-slot'] as string | undefined) ?? 'root'" :class="ui.root({ class: [props.ui?.root, props.class] })">
+    <Slot v-bind="{ ...$attrs, 'data-slot': undefined }">
       <slot />
     </Slot>
 

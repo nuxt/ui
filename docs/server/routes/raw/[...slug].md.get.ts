@@ -47,7 +47,6 @@ export default defineEventHandler(async (event) => {
     `title: ${JSON.stringify(page.title || '')}`,
     `description: ${JSON.stringify(page.description || '')}`,
     `canonical_url: ${JSON.stringify(canonicalUrl)}`,
-    `last_updated: ${JSON.stringify(new Date().toISOString().split('T')[0])}`,
     '---',
     ''
   ].join('\n')

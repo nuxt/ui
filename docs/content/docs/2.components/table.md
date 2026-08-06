@@ -16,6 +16,8 @@ links:
 
 The Table component is built on top of [TanStack Table](https://tanstack.com/table/latest) and is powered by the [useVueTable](https://tanstack.com/table/latest/docs/framework/vue/vue-table#usevuetable) composable to provide a flexible and fully type-safe API.
 
+It renders your data as rows and columns and supports sorting, filtering, pagination, row selection, expansion, grouping, pinning and virtualization, so you can build everything from a simple data table to a fully featured data grid.
+
 ::component-example
 ---
 source: false
@@ -182,6 +184,10 @@ props:
       amount: 639
   class: 'flex-1'
 ---
+::
+
+::tip
+The loading animation is automatically disabled when the user prefers reduced motion, the bar is displayed as a full width pulse instead.
 ::
 
 ### Sticky
@@ -684,6 +690,24 @@ class: '!p-0'
 
 ::note
 A height constraint is required on the table for virtualization to work properly (e.g., `class="h-[400px]"`).
+::
+
+### With external scroll element :badge{label="4.10+" class="align-text-top"}
+
+Pass a `getScrollElement` function in the `virtualize` prop to virtualize against an ancestor scroll container instead of the table's own root. Set `scrollMargin` to the table's offset from the scroll element's start (e.g. the height of the content above it), so a header and the table body share a single scrollbar.
+
+::component-example
+---
+prettier: true
+collapse: true
+overflowHidden: true
+name: 'table-external-scroll-example'
+class: '!p-0'
+---
+::
+
+::note
+In this mode the table root's `overflow` is `visible` and the external container owns scrolling on both axes, so give it `overflow-auto` (not just `overflow-y-auto`) to keep wide tables horizontally scrollable. A `sticky` header then anchors to that container.
 ::
 
 ### With tree data

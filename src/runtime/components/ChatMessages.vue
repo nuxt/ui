@@ -4,7 +4,10 @@ import type { ComponentPublicInstance, VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type { UIDataTypes, UIMessage, UITools, ChatStatus } from 'ai'
 import theme from '#build/ui/chat-messages'
-import type { ButtonProps, ChatMessageProps, ChatMessageSlots, IconProps, LinkPropsKeys } from '../types'
+import type { ButtonProps } from './Button.vue'
+import type { ChatMessageProps, ChatMessageSlots } from './ChatMessage.vue'
+import type { IconProps } from './Icon.vue'
+import type { LinkPropsKeys } from './Link.vue'
 import type { ComponentConfig } from '../types/tv'
 
 type ChatMessages = ComponentConfig<typeof theme, AppConfig, 'chatMessages'>
@@ -70,7 +73,7 @@ export interface ChatMessagesProps<T extends UIMessage[] = UIMessage[]> {
 }
 
 export type ChatMessagesSlots<T extends UIMessage[] = UIMessage[]> = {
-  default?(props?: {}): VNode[]
+  default?(props: { registerMessageRef: (id: string, element: ComponentPublicInstance | null) => void }): VNode[]
   indicator?(props: { ui: ChatMessages['ui'] }): VNode[]
   viewport?(props: { ui: ChatMessages['ui'], onClick: () => void }): VNode[]
 } & {
@@ -105,13 +108,20 @@ const props = useComponentProps<ChatMessagesProps<T>>('chatMessages', _props)
 
 const getProxySlots = () => omit(slots, ['default', 'indicator', 'viewport'])
 
-const showIndicator = computed(() => {
+// This is intentionally a function (not a `computed`) so it is re-evaluated on
+// every render. `@ai-sdk/vue` stores messages in a `shallowRef` and grows them
+// via in-place mutation + `triggerRef`, so the array reference and the message
+// objects never change identity. A `computed` would cache its result on the
+// first `streaming` render (when the assistant message is still empty) and never
+// recompute as parts stream in, leaving the indicator stuck. Evaluating during
+// render ties the indicator to the same re-render that displays the streamed content.
+function showIndicator() {
   if (props.status === 'submitted') return true
   if (props.status !== 'streaming') return false
 
   const lastMessage = props.messages?.[props.messages.length - 1]
   return lastMessage?.role === 'assistant' && !lastMessage.parts?.length
-})
+}
 
 const appConfig = useAppConfig() as ChatMessages['AppConfig']
 
@@ -119,7 +129,7 @@ const userProps = toRef(() => defu(props.user, { side: 'right' as const, variant
 const assistantProps = toRef(() => defu(props.assistant, { side: 'left' as const, variant: 'naked' as const }))
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.chatMessages || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.chatMessages || {}) })({
   compact: props.compact
 }))
 
@@ -308,6 +318,10 @@ onMounted(() => {
     }, { childList: true, subtree: true })
   }
 })
+
+defineExpose({
+  registerMessageRef
+})
 </script>
 
 <template>
@@ -318,7 +332,7 @@ onMounted(() => {
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     :style="{ '--last-message-height': `${lastMessageHeight}px` }"
   >
-    <slot>
+    <slot :register-message-ref="registerMessageRef">
       <template v-for="message in props.messages" :key="message.id">
         <UChatMessage
           v-if="message.parts?.length"
@@ -334,7 +348,7 @@ onMounted(() => {
     </slot>
 
     <UChatMessage
-      v-if="showIndicator"
+      v-if="showIndicator()"
       id="indicator"
       role="assistant"
       v-bind="{ ...assistantProps, actions: undefined, parts: [] }"

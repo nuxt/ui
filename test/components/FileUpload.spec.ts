@@ -92,6 +92,22 @@ describe('FileUpload', () => {
     ['with file-trailing slot', { props, slots: { 'file-trailing': () => 'File trailing slot' } }]
   ])
 
+  it('hides the icon when icon is false', async () => {
+    const withIcon = await mountSuspended(FileUpload)
+    expect(withIcon.find('[data-slot="icon"]').exists()).toBe(true)
+
+    const withoutIcon = await mountSuspended(FileUpload, { props: { icon: false } })
+    expect(withoutIcon.find('[data-slot="icon"]').exists()).toBe(false)
+  })
+
+  it('hides the icon when icon is false with variant button', async () => {
+    const withIcon = await mountSuspended(FileUpload, { props: { variant: 'button' } })
+    expect(withIcon.find('[data-slot="icon"]').exists()).toBe(true)
+
+    const withoutIcon = await mountSuspended(FileUpload, { props: { variant: 'button', icon: false } })
+    expect(withoutIcon.find('[data-slot="icon"]').exists()).toBe(false)
+  })
+
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(FileUpload, {
       props: {

@@ -11,18 +11,9 @@
     "v4"
   ],
   "ignoreDeps": [
-    "actions/stale",
-    "@nuxt/test-utils"
+    "actions/stale"
   ],
   "packageRules": [
-    {
-      "groupName": "tailwindcss",
-      "matchPackageNames": [
-        "tailwindcss",
-        "@tailwindcss/postcss",
-        "@tailwindcss/vite"
-      ]
-    },
     {
       "groupName": "reka-ui",
       "matchPackageNames": [
@@ -34,22 +25,6 @@
       "groupName": "tiptap",
       "matchPackageNames": [
         "@tiptap/*"
-      ]
-    },
-    {
-      "groupName": "vite",
-      "matchPackageNames": [
-        "@vitejs/plugin-vue",
-        "vite",
-        "vue",
-        "vue-router"
-      ]
-    },
-    {
-      "groupName": "vue-tsc",
-      "matchPackageNames": [
-        "vue-tsc",
-        "vue-component-type-helpers"
       ]
     },
     {

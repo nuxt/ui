@@ -3,7 +3,9 @@ import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/empty'
 import type { ComponentConfig } from '../types/tv'
-import type { ButtonProps, IconProps, AvatarProps } from '../types'
+import type { ButtonProps } from './Button.vue'
+import type { IconProps } from './Icon.vue'
+import type { AvatarProps } from './Avatar.vue'
 
 type Empty = ComponentConfig<typeof theme, AppConfig, 'empty'>
 
@@ -19,6 +21,14 @@ export interface EmptyProps {
    */
   icon?: IconProps['name']
   avatar?: AvatarProps
+  /** When `true`, the loading icon will be displayed. */
+  loading?: boolean
+  /**
+   * The icon when the `loading` prop is `true`.
+   * @defaultValue appConfig.ui.icons.loading
+   * @IconifyIcon
+   */
+  loadingIcon?: IconProps['name']
   title?: string
   description?: string
   /**
@@ -64,19 +74,22 @@ const props = useComponentProps('empty', _props)
 
 const appConfig = useAppConfig() as Empty['AppConfig']
 
+const iconName = computed(() => props.loading ? (props.loadingIcon || appConfig.ui.icons.loading) : props.icon)
+
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.empty || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.empty || {}) })({
   variant: props.variant,
-  size: props.size
+  size: props.size,
+  loading: props.loading
 }))
 </script>
 
 <template>
-  <Primitive :as="props.as" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <div v-if="!!slots.header || (props.icon || props.avatar || !!slots.leading) || (props.title || !!slots.title) || (props.description || !!slots.description)" data-slot="header" :class="ui.header({ class: props.ui?.header })">
+  <Primitive :as="props.as" :aria-busy="props.loading ? 'true' : undefined" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+    <div v-if="!!slots.header || (iconName || props.avatar || !!slots.leading) || (props.title || !!slots.title) || (props.description || !!slots.description)" data-slot="header" :class="ui.header({ class: props.ui?.header })">
       <slot name="header">
         <slot name="leading" :ui="ui">
-          <UAvatar v-if="props.icon || props.avatar" :icon="props.icon" v-bind="typeof props.avatar === 'object' ? props.avatar : {}" data-slot="avatar" :class="ui.avatar({ class: props.ui?.avatar })" />
+          <UAvatar v-if="iconName || props.avatar" :icon="iconName" v-bind="typeof props.avatar === 'object' ? props.avatar : {}" data-slot="avatar" :class="ui.avatar({ class: props.ui?.avatar })" />
         </slot>
 
         <h2 v-if="props.title || !!slots.title" data-slot="title" :class="ui.title({ class: props.ui?.title })">

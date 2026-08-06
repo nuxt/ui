@@ -2,7 +2,8 @@
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/avatar'
-import type { ChipProps, IconProps } from '../types'
+import type { ChipProps } from './Chip.vue'
+import type { IconProps } from './Icon.vue'
 import type { ImgHTMLAttributes } from '../types/html'
 import type { ComponentConfig } from '../types/tv'
 
@@ -74,7 +75,7 @@ const appConfig = useAppConfig() as Avatar['AppConfig']
 const { size, color } = useAvatarGroup(_props)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.avatar || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.avatar || {}) })({
   size: size.value ?? props.size,
   color: color.value ?? props.color
 }))
@@ -109,7 +110,7 @@ function onError() {
     :is="props.chip ? UChip : Primitive"
     :as="as.root"
     v-bind="props.chip ? (typeof props.chip === 'object' ? { inset: true, ...props.chip } : { inset: true }) : {}"
-    data-slot="root"
+    :data-slot="($attrs['data-slot'] as string | undefined) ?? 'root'"
     :class="rootClass"
     :style="props.style"
   >
@@ -126,7 +127,7 @@ function onError() {
       @error="onError"
     />
 
-    <Slot v-else v-bind="$attrs">
+    <Slot v-else v-bind="{ ...$attrs, 'data-slot': undefined }">
       <slot>
         <UIcon v-if="props.icon" :name="props.icon" data-slot="icon" :class="ui.icon({ class: props.ui?.icon })" />
         <span v-else data-slot="fallback" :class="ui.fallback({ class: props.ui?.fallback })">{{ fallback || '&nbsp;' }}</span>

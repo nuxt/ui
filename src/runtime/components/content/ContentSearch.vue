@@ -5,7 +5,12 @@ import type { ContentNavigationItem } from '@nuxt/content'
 import type { AppConfig } from '@nuxt/schema'
 import type { UseFuseOptions } from '@vueuse/integrations/useFuse'
 import theme from '#build/ui/content/content-search'
-import type { ButtonProps, LinkProps, ModalProps, CommandPaletteProps, CommandPaletteSlots, CommandPaletteGroup, CommandPaletteItem, IconProps, InputProps, LinkPropsKeys } from '../../types'
+import type { ButtonProps } from '../Button.vue'
+import type { LinkProps, LinkPropsKeys } from '../Link.vue'
+import type { ModalProps } from '../Modal.vue'
+import type { CommandPaletteProps, CommandPaletteSlots, CommandPaletteGroup, CommandPaletteItem } from '../CommandPalette.vue'
+import type { IconProps } from '../Icon.vue'
+import type { InputProps } from '../Input.vue'
 import type { ComponentConfig } from '../../types/tv'
 
 type ContentSearch = ComponentConfig<typeof theme, AppConfig, 'contentSearch'>
@@ -55,7 +60,7 @@ export interface ContentSearchItem extends Omit<LinkProps, 'custom'>, CommandPal
   icon?: IconProps['name']
 }
 
-export interface ContentSearchProps<T extends ContentSearchLink = ContentSearchLink> extends Pick<ModalProps, 'title' | 'description' | 'overlay' | 'transition' | 'content' | 'dismissible' | 'fullscreen' | 'modal' | 'portal'>, Pick<CommandPaletteProps<CommandPaletteGroup<ContentSearchItem>, ContentSearchItem>, 'icon' | 'trailingIcon' | 'selectedIcon' | 'childrenIcon' | 'placeholder' | 'autofocus' | 'loading' | 'loadingIcon' | 'closeIcon' | 'back' | 'backIcon' | 'disabled' | 'highlightOnHover' | 'labelKey' | 'descriptionKey' | 'preserveGroupOrder' | 'virtualize' | 'groups'> {
+export interface ContentSearchProps<T extends ContentSearchLink = ContentSearchLink> extends Pick<ModalProps, 'title' | 'description' | 'overlay' | 'transition' | 'content' | 'dismissible' | 'fullscreen' | 'modal' | 'portal' | 'unmountOnHide'>, Pick<CommandPaletteProps<CommandPaletteGroup<ContentSearchItem>, ContentSearchItem>, 'icon' | 'trailingIcon' | 'selectedIcon' | 'childrenIcon' | 'placeholder' | 'autofocus' | 'loading' | 'loadingIcon' | 'closeIcon' | 'back' | 'backIcon' | 'disabled' | 'highlightOnHover' | 'labelKey' | 'descriptionKey' | 'preserveGroupOrder' | 'virtualize' | 'groups'> {
   /**
    * @defaultValue 'md'
    */
@@ -164,7 +169,7 @@ const colorMode = useColorMode()
 const appConfig = useAppConfig() as ContentSearch['AppConfig']
 
 const commandPaletteProps = useForwardProps(reactivePick(props, 'size', 'icon', 'trailingIcon', 'selectedIcon', 'childrenIcon', 'placeholder', 'autofocus', 'loading', 'loadingIcon', 'close', 'closeIcon', 'back', 'backIcon', 'disabled', 'highlightOnHover', 'labelKey', 'descriptionKey', 'preserveGroupOrder', 'virtualize', 'searchDelay'))
-const modalProps = useForwardProps(reactivePick(props, 'overlay', 'transition', 'content', 'dismissible', 'fullscreen', 'modal', 'portal'))
+const modalProps = useForwardProps(reactivePick(props, 'overlay', 'transition', 'content', 'dismissible', 'fullscreen', 'modal', 'portal', 'unmountOnHide'))
 const inputProps = computed(() => {
   if (props.input === false) {
     return false
@@ -184,7 +189,7 @@ const fuse = computed(() => defu({}, props.fuse, {
 } as UseFuseOptions<T>))
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.contentSearch || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.contentSearch || {}) })({
   size: props.size,
   fullscreen: props.fullscreen
 }))

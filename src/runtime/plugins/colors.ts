@@ -1,7 +1,7 @@
 import { computed } from 'vue'
 import colors from 'tailwindcss/colors'
 import type { UseHeadInput } from '@unhead/vue/types'
-import { defineNuxtPlugin, useAppConfig, useNuxtApp, useHead } from '#imports'
+import { defineNuxtPlugin, injectHead, useAppConfig, useNuxtApp, useHead } from '#imports'
 
 const shades = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950] as const
 
@@ -18,6 +18,10 @@ function generateShades(key: string, value: string, prefix?: string) {
 }
 function generateColor(key: string, shade: number) {
   return `--ui-${key}: var(--ui-color-${key}-${shade});`
+}
+
+function removeTemporaryColorsStyle() {
+  document.querySelector('[data-nuxt-ui-colors]')?.remove()
 }
 
 export default defineNuxtPlugin(() => {
@@ -58,9 +62,13 @@ export default defineNuxtPlugin(() => {
     style.setAttribute('data-nuxt-ui-colors', '')
     document.head.appendChild(style)
 
-    headData.script = [{
-      innerHTML: 'document.head.removeChild(document.querySelector(\'[data-nuxt-ui-colors]\'))'
-    }]
+    // `hookOnce` is only available on unhead v2's `Hookable`. In v3 `hooks` is a `HookableCore`
+    // that exposes `hook` only, so self-unhook to keep the once semantics across both versions.
+    const head = injectHead()
+    const unhook = head.hooks?.hook('dom:rendered', () => {
+      removeTemporaryColorsStyle()
+      unhook?.()
+    })
   }
 
   useHead(headData)

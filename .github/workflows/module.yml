@@ -8,6 +8,12 @@ on:
     branches:
       - v4
 
+concurrency:
+  # Group pull request runs per number so a new push cancels the previous one, and give every push on v4
+  # its own group since each of them also covers windows and publishes its own preview package
+  group: ${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.event.number || github.run_id }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 jobs:
   build:
     runs-on: ${{ matrix.os }}
@@ -19,20 +25,22 @@ jobs:
     strategy:
       matrix:
         os: ${{ github.event_name == 'pull_request' && fromJSON('["ubuntu-latest"]') || fromJSON('["ubuntu-latest", "windows-latest"]') }} # macos-latest
-        node: [22]
+        node: [24]
 
     env:
       NUXT_GITHUB_TOKEN: ${{ secrets.NUXT_GITHUB_TOKEN }}
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
 
       - name: Install pnpm
         uses: pnpm/action-setup@v6
 
       - name: Install node
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: ${{ matrix.node }}
           cache: pnpm
@@ -43,23 +51,22 @@ jobs:
       - name: Prepare
         run: pnpm run dev:prepare
 
-      - name: Lint
-        run: pnpm run lint
-
-      - name: Typecheck
-        run: pnpm run typecheck
-
-      - name: Test
-        run: pnpm run test run
+      - parallel:
+          - name: Lint
+            run: pnpm run lint
+          - name: Typecheck
+            run: pnpm run typecheck
+          - name: Test
+            run: pnpm run test run
 
       - name: Build
         run: pnpm run build
 
-      - name: Build Nuxt playground
-        run: pnpm run dev:build
-
-      - name: Build Vue playground
-        run: pnpm run dev:vue:build
+      - parallel:
+          - name: Build Nuxt playground
+            run: pnpm run dev:build
+          - name: Build Vue playground
+            run: pnpm run dev:vue:build
 
       - name: Publish
         # Only publish preview package on ubuntu, and skip forks of the repo (pkg-pr-new still runs on fork PRs against nuxt/ui)
@@ -81,15 +88,18 @@ jobs:
 
     env:
       pnpm_config_strict_dep_builds: false
+      pnpm_config_verify_deps_before_run: false
 
     strategy:
       matrix:
         os: [ubuntu-latest] # macos-latest, windows-latest
-        node: [22]
+        node: [24]
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
 
       - name: Store commit SHA
         run: |
@@ -99,7 +109,7 @@ jobs:
         uses: pnpm/action-setup@v6
 
       - name: Install node
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: ${{ matrix.node }}
           cache: pnpm
@@ -116,7 +126,7 @@ jobs:
       - name: Typecheck
         run: pnpm run typecheck
 
-  starter:
+  templates:
     needs: build
 
     runs-on: ${{ matrix.os }}
@@ -126,15 +136,35 @@ jobs:
       pull-requests: read
 
     strategy:
+      # Keep validating every template when one of them breaks
+      fail-fast: false
       matrix:
         os: [ubuntu-latest] # macos-latest, windows-latest
-        node: [22]
+        node: [24]
+        template:
+          - starter
+          - starter-vue
+          - landing
+          - docs
+          - saas
+          - dashboard
+          - dashboard-vue
+          - chat
+          - chat-vue
+          - portfolio
+          - changelog
+          - editor
+        include:
+          # Build with vite directly since the `build` script also runs the database migrations
+          - template: chat-vue
+            build: pnpm vite build
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
-          repository: nuxt-ui-templates/starter
+          persist-credentials: false
+          repository: nuxt-ui-templates/${{ matrix.template }}
 
       - name: Store commit SHA
         run: |
@@ -144,52 +174,7 @@ jobs:
         uses: pnpm/action-setup@v6
 
       - name: Install node
-        uses: actions/setup-node@v6
-        with:
-          node-version: ${{ matrix.node }}
-          cache: pnpm
-
-      - name: Install latest nuxt/ui
-        run: pnpm install https://pkg.pr.new/@nuxt/ui@${{ env.COMMIT_SHA }} --lockfile-only
-
-      - name: Install dependencies
-        run: pnpm install
-
-      - name: Typecheck
-        run: pnpm run typecheck
-
-      - name: Build
-        run: pnpm run build
-
-  starter-vue:
-    needs: build
-
-    runs-on: ${{ matrix.os }}
-
-    permissions:
-      contents: read
-      pull-requests: read
-
-    strategy:
-      matrix:
-        os: [ubuntu-latest] # macos-latest, windows-latest
-        node: [22]
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-        with:
-          repository: nuxt-ui-templates/starter-vue
-
-      - name: Store commit SHA
-        run: |
-          echo "COMMIT_SHA=$(echo ${{ github.event.pull_request.head.sha || github.sha }} | cut -c1-7)" >> $GITHUB_ENV
-
-      - name: Install pnpm
-        uses: pnpm/action-setup@v6
-
-      - name: Install node
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: ${{ matrix.node }}
           cache: pnpm
@@ -201,412 +186,47 @@ jobs:
         run: pnpm install
 
       - name: Build
-        run: pnpm run build
+        run: ${{ matrix.build || 'pnpm run build' }}
 
       - name: Typecheck
         run: pnpm run typecheck
 
-  landing:
-    needs: build
+  benchmarks:
+    runs-on: ubuntu-latest
 
-    runs-on: ${{ matrix.os }}
+    # Skip forks of the repo, they can't authenticate with CodSpeed
+    if: github.repository_owner == 'nuxt'
 
     permissions:
       contents: read
-      pull-requests: read
+      id-token: write # for OpenID Connect authentication with CodSpeed
 
-    strategy:
-      matrix:
-        os: [ubuntu-latest] # macos-latest, windows-latest
-        node: [22]
+    env:
+      NUXT_GITHUB_TOKEN: ${{ secrets.NUXT_GITHUB_TOKEN }}
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
-          repository: nuxt-ui-templates/landing
-
-      - name: Store commit SHA
-        run: |
-          echo "COMMIT_SHA=$(echo ${{ github.event.pull_request.head.sha || github.sha }} | cut -c1-7)" >> $GITHUB_ENV
+          persist-credentials: false
 
       - name: Install pnpm
         uses: pnpm/action-setup@v6
 
       - name: Install node
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
-          node-version: ${{ matrix.node }}
+          node-version: 24
           cache: pnpm
-
-      - name: Install latest nuxt/ui
-        run: pnpm install https://pkg.pr.new/@nuxt/ui@${{ env.COMMIT_SHA }} --lockfile-only
 
       - name: Install dependencies
         run: pnpm install
 
-      - name: Typecheck
-        run: pnpm run typecheck
+      - name: Prepare
+        run: pnpm run dev:prepare
 
-      - name: Build
-        run: pnpm run build
-
-  docs:
-    needs: build
-
-    runs-on: ${{ matrix.os }}
-
-    permissions:
-      contents: read
-      pull-requests: read
-
-    strategy:
-      matrix:
-        os: [ubuntu-latest] # macos-latest, windows-latest
-        node: [22]
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
+      - name: Run benchmarks
+        uses: CodSpeedHQ/action@v5
         with:
-          repository: nuxt-ui-templates/docs
-
-      - name: Store commit SHA
-        run: |
-          echo "COMMIT_SHA=$(echo ${{ github.event.pull_request.head.sha || github.sha }} | cut -c1-7)" >> $GITHUB_ENV
-
-      - name: Install pnpm
-        uses: pnpm/action-setup@v6
-
-      - name: Install node
-        uses: actions/setup-node@v6
-        with:
-          node-version: ${{ matrix.node }}
-          cache: pnpm
-
-      - name: Install latest nuxt/ui
-        run: pnpm install https://pkg.pr.new/@nuxt/ui@${{ env.COMMIT_SHA }} --lockfile-only
-
-      - name: Install dependencies
-        run: pnpm install
-
-      - name: Typecheck
-        run: pnpm run typecheck
-
-      - name: Build
-        run: pnpm run build
-
-  saas:
-    needs: build
-
-    runs-on: ${{ matrix.os }}
-
-    permissions:
-      contents: read
-      pull-requests: read
-
-    strategy:
-      matrix:
-        os: [ubuntu-latest] # macos-latest, windows-latest
-        node: [22]
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-        with:
-          repository: nuxt-ui-templates/saas
-
-      - name: Store commit SHA
-        run: |
-          echo "COMMIT_SHA=$(echo ${{ github.event.pull_request.head.sha || github.sha }} | cut -c1-7)" >> $GITHUB_ENV
-
-      - name: Install pnpm
-        uses: pnpm/action-setup@v6
-
-      - name: Install node
-        uses: actions/setup-node@v6
-        with:
-          node-version: ${{ matrix.node }}
-          cache: pnpm
-
-      - name: Install latest nuxt/ui
-        run: pnpm install https://pkg.pr.new/@nuxt/ui@${{ env.COMMIT_SHA }} --lockfile-only
-
-      - name: Install dependencies
-        run: pnpm install
-
-      - name: Typecheck
-        run: pnpm run typecheck
-
-      - name: Build
-        run: pnpm run build
-
-  dashboard:
-    needs: build
-
-    runs-on: ${{ matrix.os }}
-
-    permissions:
-      contents: read
-      pull-requests: read
-
-    strategy:
-      matrix:
-        os: [ubuntu-latest] # macos-latest, windows-latest
-        node: [22]
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-        with:
-          repository: nuxt-ui-templates/dashboard
-
-      - name: Store commit SHA
-        run: |
-          echo "COMMIT_SHA=$(echo ${{ github.event.pull_request.head.sha || github.sha }} | cut -c1-7)" >> $GITHUB_ENV
-
-      - name: Install pnpm
-        uses: pnpm/action-setup@v6
-
-      - name: Install node
-        uses: actions/setup-node@v6
-        with:
-          node-version: ${{ matrix.node }}
-          cache: pnpm
-
-      - name: Install latest nuxt/ui
-        run: pnpm install https://pkg.pr.new/@nuxt/ui@${{ env.COMMIT_SHA }} --lockfile-only
-
-      - name: Install dependencies
-        run: pnpm install
-
-      - name: Typecheck
-        run: pnpm run typecheck
-
-      - name: Build
-        run: pnpm run build
-
-  dashboard-vue:
-    needs: build
-
-    runs-on: ${{ matrix.os }}
-
-    permissions:
-      contents: read
-      pull-requests: read
-
-    strategy:
-      matrix:
-        os: [ubuntu-latest] # macos-latest, windows-latest
-        node: [22]
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-        with:
-          repository: nuxt-ui-templates/dashboard-vue
-
-      - name: Store commit SHA
-        run: |
-          echo "COMMIT_SHA=$(echo ${{ github.event.pull_request.head.sha || github.sha }} | cut -c1-7)" >> $GITHUB_ENV
-
-      - name: Install pnpm
-        uses: pnpm/action-setup@v6
-
-      - name: Install node
-        uses: actions/setup-node@v6
-        with:
-          node-version: ${{ matrix.node }}
-          cache: pnpm
-
-      - name: Install latest nuxt/ui
-        run: pnpm install https://pkg.pr.new/@nuxt/ui@${{ env.COMMIT_SHA }} --lockfile-only
-
-      - name: Install dependencies
-        run: pnpm install
-
-      - name: Build
-        run: pnpm run build
-
-      - name: Typecheck
-        run: pnpm run typecheck
-
-  chat:
-    needs: build
-
-    runs-on: ${{ matrix.os }}
-
-    permissions:
-      contents: read
-      pull-requests: read
-
-    strategy:
-      matrix:
-        os: [ubuntu-latest] # macos-latest, windows-latest
-        node: [22]
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-        with:
-          repository: nuxt-ui-templates/chat
-
-      - name: Store commit SHA
-        run: |
-          echo "COMMIT_SHA=$(echo ${{ github.event.pull_request.head.sha || github.sha }} | cut -c1-7)" >> $GITHUB_ENV
-
-      - name: Install pnpm
-        uses: pnpm/action-setup@v6
-
-      - name: Install node
-        uses: actions/setup-node@v6
-        with:
-          node-version: ${{ matrix.node }}
-          cache: pnpm
-
-      - name: Install latest nuxt/ui
-        run: pnpm install https://pkg.pr.new/@nuxt/ui@${{ env.COMMIT_SHA }} --lockfile-only
-
-      - name: Install dependencies
-        run: pnpm install
-
-      - name: Typecheck
-        run: pnpm run typecheck
-
-      - name: Build
-        run: pnpm run build
-
-  portfolio:
-    needs: build
-
-    runs-on: ${{ matrix.os }}
-
-    permissions:
-      contents: read
-      pull-requests: read
-
-    strategy:
-      matrix:
-        os: [ubuntu-latest] # macos-latest, windows-latest
-        node: [22]
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-        with:
-          repository: nuxt-ui-templates/portfolio
-
-      - name: Store commit SHA
-        run: |
-          echo "COMMIT_SHA=$(echo ${{ github.event.pull_request.head.sha || github.sha }} | cut -c1-7)" >> $GITHUB_ENV
-
-      - name: Install pnpm
-        uses: pnpm/action-setup@v6
-
-      - name: Install node
-        uses: actions/setup-node@v6
-        with:
-          node-version: ${{ matrix.node }}
-          cache: pnpm
-
-      - name: Install latest nuxt/ui
-        run: pnpm install https://pkg.pr.new/@nuxt/ui@${{ env.COMMIT_SHA }} --lockfile-only
-
-      - name: Install dependencies
-        run: pnpm install
-
-      - name: Typecheck
-        run: pnpm run typecheck
-
-      - name: Build
-        run: pnpm run build
-
-  changelog:
-    needs: build
-
-    runs-on: ${{ matrix.os }}
-
-    permissions:
-      contents: read
-      pull-requests: read
-
-    strategy:
-      matrix:
-        os: [ubuntu-latest] # macos-latest, windows-latest
-        node: [22]
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-        with:
-          repository: nuxt-ui-templates/changelog
-
-      - name: Store commit SHA
-        run: |
-          echo "COMMIT_SHA=$(echo ${{ github.event.pull_request.head.sha || github.sha }} | cut -c1-7)" >> $GITHUB_ENV
-
-      - name: Install pnpm
-        uses: pnpm/action-setup@v6
-
-      - name: Install node
-        uses: actions/setup-node@v6
-        with:
-          node-version: ${{ matrix.node }}
-          cache: pnpm
-
-      - name: Install latest nuxt/ui
-        run: pnpm install https://pkg.pr.new/@nuxt/ui@${{ env.COMMIT_SHA }} --lockfile-only
-
-      - name: Install dependencies
-        run: pnpm install
-
-      - name: Typecheck
-        run: pnpm run typecheck
-
-      - name: Build
-        run: pnpm run build
-
-  editor:
-    needs: build
-
-    runs-on: ${{ matrix.os }}
-
-    permissions:
-      contents: read
-      pull-requests: read
-
-    strategy:
-      matrix:
-        os: [ubuntu-latest] # macos-latest, windows-latest
-        node: [22]
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-        with:
-          repository: nuxt-ui-templates/editor
-
-      - name: Store commit SHA
-        run: |
-          echo "COMMIT_SHA=$(echo ${{ github.event.pull_request.head.sha || github.sha }} | cut -c1-7)" >> $GITHUB_ENV
-
-      - name: Install pnpm
-        uses: pnpm/action-setup@v6
-
-      - name: Install node
-        uses: actions/setup-node@v6
-        with:
-          node-version: ${{ matrix.node }}
-          cache: pnpm
-
-      - name: Install latest nuxt/ui
-        run: pnpm install https://pkg.pr.new/@nuxt/ui@${{ env.COMMIT_SHA }} --lockfile-only
-
-      - name: Install dependencies
-        run: pnpm install
-
-      - name: Typecheck
-        run: pnpm run typecheck
-
-      - name: Build
-        run: pnpm run build
+          mode: simulation
+          run: pnpm run bench

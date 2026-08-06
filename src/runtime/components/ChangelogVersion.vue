@@ -2,7 +2,9 @@
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/changelog-version'
-import type { BadgeProps, LinkProps, UserProps } from '../types'
+import type { BadgeProps } from './Badge.vue'
+import type { LinkProps } from './Link.vue'
+import type { UserProps } from './User.vue'
 import type { ImgHTMLAttributes } from '../types/html'
 import type { ComponentConfig } from '../types/tv'
 
@@ -35,7 +37,7 @@ export interface ChangelogVersionProps {
   indicator?: boolean
   to?: LinkProps['to']
   target?: LinkProps['target']
-  onClick?: (event: MouseEvent) => void | Promise<void>
+  onClick?: (event: MouseEvent) => void
   class?: any
   ui?: ChangelogVersion['slots']
 }
@@ -96,7 +98,7 @@ const [DefineDateTemplate, ReuseDateTemplate] = createReusableTemplate<{ hidden?
 })
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.changelogVersion || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.changelogVersion || {}) })({
   to: !!props.to || !!props.onClick
 }))
 
@@ -107,7 +109,7 @@ const date = computed(() => {
   }
 
   try {
-    return formatter.custom(new Date(props.date), { dateStyle: 'medium' })
+    return formatter.custom(new Date(props.date), { dateStyle: 'medium', timeZone: 'UTC' })
   } catch {
     return props.date
   }
@@ -134,7 +136,7 @@ const ariaLabel = computed(() => {
     <ULink
       v-if="props.to"
       :aria-label="ariaLabel"
-      v-bind="{ to: props.to, target: props.target, ...$attrs }"
+      v-bind="{ 'to': props.to, 'target': props.target, ...$attrs, 'data-slot': undefined }"
       :class="prefix('focus:outline-none peer')"
       raw
     >
@@ -150,7 +152,7 @@ const ariaLabel = computed(() => {
     </time>
   </DefineDateTemplate>
 
-  <Primitive :as="props.as" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })" @click="props.onClick">
+  <Primitive :as="props.as" v-bind="!props.to ? $attrs : {}" :data-slot="($attrs['data-slot'] as string | undefined) ?? 'root'" :class="ui.root({ class: [props.ui?.root, props.class] })" @click="props.onClick">
     <div v-if="!!props.indicator || !!slots.indicator" data-slot="indicator" :class="ui.indicator({ class: props.ui?.indicator })">
       <slot name="indicator" :ui="ui">
         <ReuseDateTemplate />

@@ -22,7 +22,6 @@ description: 'A Nuxt/Vue-integrated UI library providing a rich set of fully-sty
 
 ::::u-page-card{variant="subtle" class="rounded-lg"}
 
-#default{unwrap="p"}
 ![App screenshot](/blocks/image4.png){width="4804" height="3000" class="rounded-sm shadow-2xl ring ring-default"}
 
 ::::

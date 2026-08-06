@@ -2,7 +2,8 @@
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/page-card'
-import type { IconProps, LinkProps } from '../types'
+import type { IconProps } from './Icon.vue'
+import type { LinkProps } from './Link.vue'
 import type { ComponentConfig } from '../types/tv'
 
 type PageCard = ComponentConfig<typeof theme, AppConfig, 'pageCard'>
@@ -52,7 +53,7 @@ export interface PageCardProps {
   variant?: PageCard['variants']['variant']
   to?: LinkProps['to']
   target?: LinkProps['target']
-  onClick?: (event: MouseEvent) => void | Promise<void>
+  onClick?: (event: MouseEvent) => void
   class?: any
   ui?: PageCard['slots']
 }
@@ -110,7 +111,7 @@ watch(() => props.spotlight, (value) => {
 }, { immediate: true })
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.pageCard || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.pageCard || {}) })({
   orientation: props.orientation,
   reverse: props.reverse,
   variant: props.variant,
@@ -132,8 +133,9 @@ const ariaLabel = computed(() => {
   <Primitive
     ref="cardRef"
     :as="props.as"
+    v-bind="!props.to ? $attrs : {}"
     :data-orientation="props.orientation"
-    data-slot="root"
+    :data-slot="($attrs['data-slot'] as string | undefined) ?? 'root'"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     :style="spotlight && { '--spotlight-x': `${elementX}px`, '--spotlight-y': `${elementY}px` }"
     @click="props.onClick"
@@ -179,7 +181,7 @@ const ariaLabel = computed(() => {
     <ULink
       v-if="props.to"
       :aria-label="ariaLabel"
-      v-bind="{ to: props.to, target: props.target, ...$attrs }"
+      v-bind="{ 'to': props.to, 'target': props.target, ...$attrs, 'data-slot': undefined }"
       :class="prefix('focus:outline-none peer')"
       raw
     >
