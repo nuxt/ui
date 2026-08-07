@@ -248,7 +248,11 @@ const editor = useEditor({
       editor.view.dispatch(editor.state.tr)
     }
   },
-  onUpdate: ({ editor }) => {
+  onUpdate: ({ editor, transaction }) => {
+    if (!transaction.docChanged) {
+      return
+    }
+
     let value
     try {
       if (contentType.value === 'html') {

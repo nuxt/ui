@@ -26,4 +26,21 @@ describe('Editor', () => {
 
     wrapper.unmount()
   })
+
+  it('does not update the model when the document is unchanged', async () => {
+    const wrapper = await mountSuspended(Editor, {
+      props: {
+        contentType: 'markdown',
+        modelValue: '## Demand & Service Level Decisions',
+        placeholder: 'Write something...'
+      }
+    })
+    const editor = wrapper.vm.editor!
+
+    editor.view.dispatch(editor.state.tr.setMeta('test', true))
+
+    expect(wrapper.emitted('update:modelValue')).toBeUndefined()
+
+    wrapper.unmount()
+  })
 })
