@@ -31,7 +31,7 @@ describe('Editor', () => {
     const wrapper = await mountSuspended(Editor, {
       props: {
         contentType: 'markdown',
-        modelValue: '## Demand & Service Level Decisions',
+        modelValue: '# Building Modern Interfaces with Nuxt UI',
         placeholder: 'Write something...'
       }
     })
