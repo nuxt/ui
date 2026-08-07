@@ -94,7 +94,7 @@ const page = usePage()
 
 const appConfig = useAppConfig() as Link['AppConfig']
 
-const routerLinkProps = useForwardProps(reactiveOmit(props, 'as', 'type', 'disabled', 'active', 'exact', 'activeClass', 'inactiveClass', 'to', 'href', 'raw', 'custom', 'class', 'target', 'rel', 'noRel'))
+const routerLinkProps = useForwardProps(reactiveOmit(props, 'as', 'type', 'disabled', 'active', 'exact', 'activeClass', 'inactiveClass', 'to', 'href', 'raw', 'custom', 'class', 'target', 'rel', 'noRel', 'ariaCurrentValue'))
 
 const ui = computed(() => tv({
   extend: theme,
@@ -147,24 +147,36 @@ const rel = computed(() => {
   return null
 })
 
+function normalizePath(url: string) {
+  const path = url.split('#')[0]!.split('?')[0]!
+
+  if (!path) {
+    return '/'
+  }
+
+  return path.length > 1 && path.endsWith('/') ? path.slice(0, -1) : path
+}
+
+const currentPath = computed(() => normalizePath(page.url))
+
+const targetPath = computed(() => href.value ? normalizePath(href.value) : undefined)
+
+const isLinkExactActive = computed(() => !!targetPath.value && currentPath.value === targetPath.value)
+
 const isLinkActive = computed(() => {
   if (props.active !== undefined) {
     return props.active
   }
 
-  if (!href.value) {
+  if (!targetPath.value) {
     return false
   }
 
-  if (props.exact && page.url === href.value) {
+  if (isLinkExactActive.value) {
     return true
   }
 
-  if (!props.exact && page.url.startsWith(href.value)) {
-    return true
-  }
-
-  return false
+  return !props.exact && currentPath.value.startsWith(targetPath.value === '/' ? '/' : `${targetPath.value}/`)
 })
 
 const linkClass = computed(() => {
@@ -184,6 +196,7 @@ const linkClass = computed(() => {
       v-bind="{
         ...$attrs,
         ...routerLinkProps,
+        ...(exact && isLinkExactActive ? { 'aria-current': props.ariaCurrentValue } : {}),
         as,
         type,
         disabled,
@@ -200,6 +213,7 @@ const linkClass = computed(() => {
     v-bind="{
       ...$attrs,
       ...routerLinkProps,
+      ...(exact && isLinkExactActive ? { 'aria-current': props.ariaCurrentValue } : {}),
       as,
       type,
       disabled,
