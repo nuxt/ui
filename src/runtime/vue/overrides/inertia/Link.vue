@@ -40,7 +40,7 @@ export interface LinkProps extends Partial<Omit<InertiaLinkProps, 'href' | 'onCl
    */
   noRel?: boolean
   /**
-   * Value passed to the attribute `aria-current` when the link is exact active.
+   * Value passed to the attribute `aria-current` when the link points at the current page.
    *
    * @defaultValue `'page'`
    */
@@ -161,7 +161,19 @@ const currentPath = computed(() => normalizePath(page.url))
 
 const targetPath = computed(() => href.value ? normalizePath(href.value) : undefined)
 
-const isLinkExactActive = computed(() => !!targetPath.value && currentPath.value === targetPath.value)
+/**
+ * Whether the link points at the page currently being rendered, which is what
+ * `aria-current` announces. Distinct from `isLinkActive`: a link to a section
+ * index stays active while browsing that section, but it is not the current
+ * page.
+ */
+const isLinkCurrentPage = computed(() => {
+  if (!href.value) {
+    return false
+  }
+
+  return props.exact ? page.url === href.value : currentPath.value === targetPath.value
+})
 
 const isLinkActive = computed(() => {
   if (props.active !== undefined) {
@@ -172,11 +184,12 @@ const isLinkActive = computed(() => {
     return false
   }
 
-  if (isLinkExactActive.value) {
-    return true
+  if (props.exact) {
+    return page.url === href.value
   }
 
-  return !props.exact && currentPath.value.startsWith(targetPath.value === '/' ? '/' : `${targetPath.value}/`)
+  return currentPath.value === targetPath.value
+    || currentPath.value.startsWith(targetPath.value === '/' ? '/' : `${targetPath.value}/`)
 })
 
 const linkClass = computed(() => {
@@ -196,7 +209,7 @@ const linkClass = computed(() => {
       v-bind="{
         ...$attrs,
         ...routerLinkProps,
-        ...(exact && isLinkExactActive ? { 'aria-current': props.ariaCurrentValue } : {}),
+        ...(isLinkCurrentPage ? { 'aria-current': props.ariaCurrentValue } : {}),
         as,
         type,
         disabled,
@@ -213,7 +226,7 @@ const linkClass = computed(() => {
     v-bind="{
       ...$attrs,
       ...routerLinkProps,
-      ...(exact && isLinkExactActive ? { 'aria-current': props.ariaCurrentValue } : {}),
+      ...(isLinkCurrentPage ? { 'aria-current': props.ariaCurrentValue } : {}),
       as,
       type,
       disabled,
