@@ -173,6 +173,61 @@ describe('Link (inertia)', () => {
     })
   })
 
+  describe('hrefs with no path portion', () => {
+    // A query- or fragment-only href addresses the current page rather than a
+    // path, so it has nothing to match against and must never be treated as a
+    // path match. Collapsing it to `/` would make every such link active on
+    // every page, since any url starts with `/`.
+    it('does not make a query-only link active', async () => {
+      setPageUrl('/orders')
+
+      const wrapper = await mountSuspended(Link, {
+        props: { to: '?tab=refunds', activeClass: 'is-active' },
+        slots: { default: () => 'Refunds' }
+      })
+
+      expect(wrapper.find('a').classes()).not.toContain('is-active')
+      expect(wrapper.find('a').attributes('aria-current')).toBeUndefined()
+    })
+
+    it('does not make a fragment-only link active', async () => {
+      setPageUrl('/orders')
+
+      const wrapper = await mountSuspended(Link, {
+        props: { to: '#summary', activeClass: 'is-active' },
+        slots: { default: () => 'Summary' }
+      })
+
+      expect(wrapper.find('a').classes()).not.toContain('is-active')
+      expect(wrapper.find('a').attributes('aria-current')).toBeUndefined()
+    })
+
+    it('does not make a query-only link active on the root page either', async () => {
+      setPageUrl('/')
+
+      const wrapper = await mountSuspended(Link, {
+        props: { to: '?tab=refunds', activeClass: 'is-active' },
+        slots: { default: () => 'Refunds' }
+      })
+
+      expect(wrapper.find('a').classes()).not.toContain('is-active')
+      expect(wrapper.find('a').attributes('aria-current')).toBeUndefined()
+    })
+
+    it('keeps sibling tab links from all reporting active at once', async () => {
+      setPageUrl('/orders')
+
+      const tabs = await Promise.all(['?tab=open', '?tab=refunds', '?tab=closed'].map(to =>
+        mountSuspended(Link, {
+          props: { to, activeClass: 'is-active' },
+          slots: { default: () => to }
+        })
+      ))
+
+      expect(tabs.filter(tab => tab.find('a').classes().includes('is-active'))).toHaveLength(0)
+    })
+  })
+
   it('passes accessibility tests', async () => {
     setPageUrl('/inventory')
 

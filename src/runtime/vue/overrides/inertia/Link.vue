@@ -147,17 +147,23 @@ const rel = computed(() => {
   return null
 })
 
+/**
+ * Path portion of a url, without the query or hash and without a trailing
+ * slash. Returns `undefined` when there is no path at all — `?tab=orders` and
+ * `#section` address the current page rather than a path, so they have nothing
+ * to match against.
+ */
 function normalizePath(url: string) {
   const path = url.split('#')[0]!.split('?')[0]!
 
   if (!path) {
-    return '/'
+    return undefined
   }
 
   return path.length > 1 && path.endsWith('/') ? path.slice(0, -1) : path
 }
 
-const currentPath = computed(() => normalizePath(page.url))
+const currentPath = computed(() => normalizePath(page.url) ?? '/')
 
 const targetPath = computed(() => href.value ? normalizePath(href.value) : undefined)
 
@@ -172,7 +178,15 @@ const isLinkCurrentPage = computed(() => {
     return false
   }
 
-  return props.exact ? page.url === href.value : currentPath.value === targetPath.value
+  if (props.exact) {
+    return page.url === href.value
+  }
+
+  if (!targetPath.value) {
+    return false
+  }
+
+  return currentPath.value === targetPath.value
 })
 
 const isLinkActive = computed(() => {
