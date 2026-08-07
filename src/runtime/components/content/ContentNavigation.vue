@@ -204,7 +204,14 @@ const defaultValue = computed(() => {
   </DefineLinkTemplate>
 
   <Primitive :as="props.as" data-slot="root" v-bind="$attrs" :as-child="props.level! > 0" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <AccordionRoot as="ul" :disabled="disabled" v-bind="rootProps" :default-value="defaultValue" :class="props.level! > 0 ? ui.listWithChildren({ class: props.ui?.listWithChildren }) : ui.list({ class: props.ui?.list })">
+    <AccordionRoot
+      as="ul"
+      :disabled="disabled"
+      v-bind="rootProps"
+      :model-value="disabled ? defaultValue : undefined"
+      :default-value="disabled ? undefined : defaultValue"
+      :class="props.level! > 0 ? ui.listWithChildren({ class: props.ui?.listWithChildren }) : ui.list({ class: props.ui?.list })"
+    >
       <template v-for="(link, index) in props.navigation" :key="`${index}-${link.path}`">
         <AccordionItem
           v-if="link.children?.length"

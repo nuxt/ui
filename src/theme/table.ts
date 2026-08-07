@@ -71,25 +71,25 @@ export default (options: Required<ModuleOptions>) => ({
     loading: true,
     loadingAnimation: 'carousel',
     class: {
-      thead: 'motion-safe:after:animate-[carousel_2s_ease-in-out_infinite] motion-safe:rtl:after:animate-[carousel-rtl_2s_ease-in-out_infinite]'
+      thead: 'motion-safe:after:animate-[carousel_2s_linear_infinite] motion-safe:rtl:after:animate-[carousel-rtl_2s_linear_infinite]'
     }
   }, {
     loading: true,
     loadingAnimation: 'carousel-inverse',
     class: {
-      thead: 'motion-safe:after:animate-[carousel-inverse_2s_ease-in-out_infinite] motion-safe:rtl:after:animate-[carousel-inverse-rtl_2s_ease-in-out_infinite]'
+      thead: 'motion-safe:after:animate-[carousel-inverse_2s_linear_infinite] motion-safe:rtl:after:animate-[carousel-inverse-rtl_2s_linear_infinite]'
     }
   }, {
     loading: true,
     loadingAnimation: 'swing',
     class: {
-      thead: 'motion-safe:after:animate-[swing_2s_ease-in-out_infinite]'
+      thead: 'motion-safe:after:animate-[swing_2s_var(--ease-in-out)_infinite]'
     }
   }, {
     loading: true,
     loadingAnimation: 'elastic',
     class: {
-      thead: 'motion-safe:after:animate-[elastic_2s_ease-in-out_infinite]'
+      thead: 'motion-safe:after:animate-[elastic_2s_var(--ease-in-out)_infinite]'
     }
   }],
   defaultVariants: {
