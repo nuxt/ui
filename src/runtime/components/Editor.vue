@@ -248,8 +248,8 @@ const editor = useEditor({
       editor.view.dispatch(editor.state.tr)
     }
   },
-  onUpdate: ({ editor, transaction }) => {
-    if (!transaction.docChanged) {
+  onUpdate: ({ editor, transaction, appendedTransactions }) => {
+    if (!transaction.docChanged && !appendedTransactions.some(transaction => transaction.docChanged)) {
       return
     }
 

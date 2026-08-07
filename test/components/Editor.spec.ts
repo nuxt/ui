@@ -37,7 +37,7 @@ describe('Editor', () => {
     })
     const editor = wrapper.vm.editor!
 
-    editor.view.dispatch(editor.state.tr.setMeta('test', true))
+    editor.setEditable(false)
 
     expect(wrapper.emitted('update:modelValue')).toBeUndefined()
 
