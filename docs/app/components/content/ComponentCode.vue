@@ -447,7 +447,7 @@ const { data: ast } = useAsyncData(codeKey, async () => {
             </USelect>
             <UInput
               v-else
-              :type="option.type?.includes('number') && typeof getComponentProp(option.name) === 'number' ? 'number' : 'text'"
+              :type="option.type?.includes('number') && typeof get(props.props, option.name) === 'number' ? 'number' : 'text'"
               :model-value="getComponentProp(option.name)"
               color="neutral"
               variant="soft"
