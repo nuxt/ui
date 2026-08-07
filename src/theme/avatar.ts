@@ -18,6 +18,10 @@ export default (options: Required<ModuleOptions>) => ({
         root: 'bg-elevated',
         fallback: 'text-muted',
         icon: 'text-muted'
+      },
+      auto: {
+        fallback: 'text-inverted',
+        icon: 'text-inverted'
       }
     },
     size: {
