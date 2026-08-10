@@ -3,7 +3,7 @@ import { isReasoningUIPart, isTextUIPart, isToolUIPart, getToolName, lastAssista
 import { useChat } from '@ai-sdk/vue'
 import { isPartStreaming, isToolStreaming, isToolApprovalPending } from '@nuxt/ui/utils/ai'
 import { Markdown } from '@comark/vue'
-import highlight from '@comark/vue/plugins/highlight'
+import shiki from '@comark/vue/plugins/shiki'
 
 const toast = useToast()
 
@@ -123,7 +123,7 @@ function generateMessages() {
             <Markdown
               :value="part.text"
               :streaming="isPartStreaming(part)"
-              :plugins="[highlight()]"
+              :plugins="[shiki()]"
               class="*:first:mt-0 *:last:mb-0"
             />
           </UChatReasoning>
@@ -133,7 +133,7 @@ function generateMessages() {
               v-if="message.role === 'assistant'"
               :value="part.text"
               :streaming="isPartStreaming(part)"
-              :plugins="[highlight()]"
+              :plugins="[shiki()]"
               class="*:first:mt-0 *:last:mb-0"
             />
             <p v-else-if="message.role === 'user'" class="whitespace-pre-wrap">

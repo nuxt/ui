@@ -471,11 +471,11 @@ The [`UChatPrompt`](/docs/components/chat-prompt) component automatically handle
 
 ### Setting up Markdown rendering
 
-AI models often respond with Markdown formatting (code blocks, lists, bold text, etc.). Before building the chat page, create a custom [`Comark`](https://comark.dev) component that will handle streaming Markdown rendering. Using [`defineMarkdownComponent`](https://comark.dev/rendering/vue#code-markdown-code-definemarkdowncomponent-code), you can enable the `highlight` plugin for syntax highlighting in code blocks and register additional [Shiki](https://shiki.style) languages beyond the defaults (TypeScript, JavaScript, Vue, Shell, JSON, YAML, Markdown):
+AI models often respond with Markdown formatting (code blocks, lists, bold text, etc.). Before building the chat page, create a custom [`Comark`](https://comark.dev) component that will handle streaming Markdown rendering. Using [`defineMarkdownComponent`](https://comark.dev/rendering/vue#code-markdown-code-definemarkdowncomponent-code), you can enable the `shiki` plugin for syntax highlighting in code blocks and register additional [Shiki](https://shiki.style) languages beyond the defaults (TypeScript, JavaScript, Vue, Shell, JSON, YAML, Markdown):
 
 ::code-tree-intersection
 ```ts [app/components/chat/Markdown.ts]
-import highlight from '@comark/nuxt/plugins/highlight'
+import shiki from '@comark/nuxt/plugins/shiki'
 import python from '@shikijs/langs/python'
 import sql from '@shikijs/langs/sql'
 import go from '@shikijs/langs/go'
@@ -484,7 +484,7 @@ import rust from '@shikijs/langs/rust'
 export default defineMarkdownComponent({
   name: 'ChatMarkdown',
   plugins: [
-    highlight({
+    shiki({
       languages: [python, sql, go, rust]
     })
   ],

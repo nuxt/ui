@@ -370,7 +370,7 @@ Use the `useChat` composable from `@ai-sdk/vue` to manage chat state and connect
 import { isReasoningUIPart, isTextUIPart, isToolUIPart, getToolName, lastAssistantMessageIsCompleteWithApprovalResponses } from 'ai'
 import { useChat } from '@ai-sdk/vue'
 import { isPartStreaming, isToolStreaming } from '@nuxt/ui/utils/ai'
-import highlight from '@comark/nuxt/plugins/highlight'
+import shiki from '@comark/nuxt/plugins/shiki'
 
 const input = ref('')
 
@@ -406,7 +406,7 @@ function onSubmit() {
           <Markdown
             :value="part.text"
             :streaming="isPartStreaming(part)"
-            :plugins="[highlight()]"
+            :plugins="[shiki()]"
             class="*:first:mt-0 *:last:mb-0"
           />
         </UChatReasoning>
@@ -426,7 +426,7 @@ function onSubmit() {
             v-if="message.role === 'assistant'"
             :value="part.text"
             :streaming="isPartStreaming(part)"
-            :plugins="[highlight()]"
+            :plugins="[shiki()]"
             class="*:first:mt-0 *:last:mb-0"
           />
           <p v-else-if="message.role === 'user'" class="whitespace-pre-wrap">
@@ -459,7 +459,7 @@ import { isReasoningUIPart, isTextUIPart, isToolUIPart, getToolName, lastAssista
 import { useChat } from '@ai-sdk/vue'
 import { isPartStreaming, isToolStreaming } from '@nuxt/ui/utils/ai'
 import { Markdown } from '@comark/vue'
-import highlight from '@comark/vue/plugins/highlight'
+import shiki from '@comark/vue/plugins/shiki'
 
 const input = ref('')
 
@@ -495,7 +495,7 @@ function onSubmit() {
           <Markdown
             :value="part.text"
             :streaming="isPartStreaming(part)"
-            :plugins="[highlight()]"
+            :plugins="[shiki()]"
             class="*:first:mt-0 *:last:mb-0"
           />
         </UChatReasoning>
@@ -515,7 +515,7 @@ function onSubmit() {
             v-if="message.role === 'assistant'"
             :value="part.text"
             :streaming="isPartStreaming(part)"
-            :plugins="[highlight()]"
+            :plugins="[shiki()]"
             class="*:first:mt-0 *:last:mb-0"
           />
           <p v-else-if="message.role === 'user'" class="whitespace-pre-wrap">
@@ -549,11 +549,11 @@ For reusable Comark configuration (plugins, class, etc.), use [`defineMarkdownCo
 #nuxt
 :::div{class="*:my-0"}
 ```ts [components/chat/Markdown.ts]
-import highlight from '@comark/nuxt/plugins/highlight'
+import shiki from '@comark/nuxt/plugins/shiki'
 
 export default defineMarkdownComponent({
   name: 'ChatMarkdown',
-  plugins: [highlight()],
+  plugins: [shiki()],
   class: '*:first:mt-0 *:last:mb-0'
 })
 ```
@@ -563,11 +563,11 @@ export default defineMarkdownComponent({
 :::div{class="*:my-0"}
 ```ts [components/chat/Markdown.ts]
 import { defineMarkdownComponent } from '@comark/vue'
-import highlight from '@comark/vue/plugins/highlight'
+import shiki from '@comark/vue/plugins/shiki'
 
 export default defineMarkdownComponent({
   name: 'ChatMarkdown',
-  plugins: [highlight()],
+  plugins: [shiki()],
   class: '*:first:mt-0 *:last:mb-0'
 })
 ```
@@ -577,7 +577,7 @@ export default defineMarkdownComponent({
 ::
 
 ::note
-When using the `highlight` plugin, add the following CSS to your stylesheet to support dark mode:
+When using the `shiki` plugin, add the following CSS to your stylesheet to support dark mode:
 
 ```css [main.css]
 html.dark .shiki span {

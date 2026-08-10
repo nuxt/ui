@@ -4,7 +4,7 @@ import { isTextUIPart } from 'ai'
 import { useChat } from '@ai-sdk/vue'
 import { isPartStreaming } from '@nuxt/ui/utils/ai'
 import { Markdown } from '@comark/vue'
-import highlight from '@comark/vue/plugins/highlight'
+import shiki from '@comark/vue/plugins/shiki'
 
 const open = ref(true)
 const input = ref('')
@@ -89,7 +89,7 @@ const ui = {
                   v-if="message.role === 'assistant'"
                   :value="part.text"
                   :streaming="isPartStreaming(part)"
-                  :plugins="[highlight()]"
+                  :plugins="[shiki()]"
                   class="*:first:mt-0 *:last:mb-0"
                 />
                 <p v-else-if="message.role === 'user'" class="whitespace-pre-wrap text-sm/6">
