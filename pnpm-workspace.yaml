@@ -18,6 +18,10 @@ overrides:
   "@codspeed/vitest-plugin>vite": ^7.0.0 || ^8.0.0
   "@nuxt/kit": ^4.5.1
   "@nuxt/ui": workspace:*
+  # `@nuxt/image` 2.1.0 depends on `ipx` 4.0.0-beta.1, which pulls a second sharp
+  # alongside 0.34.5 and kills the docs prerender as soon as it hits `/_ipx`.
+  # Pinned until ipx 4 is stable, keep in sync with the renovate.json rule.
+  "@nuxt/image": 2.0.0
   # tailwind-variants 3.3.x is a full internal rewrite: invoking a tv() result is
   # 18 to 103x slower than 3.2.2 (see test/bench/tv.bench.ts) and the exported
   # type constraints changed in a breaking way. Pinned until upstream addresses
