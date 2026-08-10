@@ -28,10 +28,8 @@ overrides:
   h3: 1.15.11
   typescript: ^6.0.3
 
-# The nuxt renovate preset updates Nuxt org packages the moment they publish,
-# exempt them from pnpm's release age window so fresh renovate branches install.
 minimumReleaseAgeExclude:
-  - '@nuxt/*'
+  - '@nuxt/icon@2.5.0'
 
 allowBuilds:
   better-sqlite3: true
