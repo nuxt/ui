@@ -28,6 +28,24 @@
       ]
     },
     {
+      "matchPackageNames": [
+        "tailwind-variants"
+      ],
+      "allowedVersions": "<3.3.0"
+    },
+    {
+      "matchPackageNames": [
+        "@nuxtjs/mdc"
+      ],
+      "allowedVersions": "<0.23.0 || >0.23.0"
+    },
+    {
+      "matchPackageNames": [
+        "@nuxt/image"
+      ],
+      "allowedVersions": "<2.1.0"
+    },
+    {
       "matchDepTypes": [
         "peerDependencies"
       ],

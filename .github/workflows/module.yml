@@ -192,10 +192,10 @@ jobs:
         run: pnpm run typecheck
 
   benchmarks:
-    runs-on: ubuntu-latest
-
     # Skip forks of the repo, they can't authenticate with CodSpeed
     if: github.repository_owner == 'nuxt'
+
+    runs-on: ${{ matrix.os }}
 
     permissions:
       contents: read
@@ -203,6 +203,11 @@ jobs:
 
     env:
       NUXT_GITHUB_TOKEN: ${{ secrets.NUXT_GITHUB_TOKEN }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node: [24]
 
     steps:
       - name: Checkout
@@ -216,7 +221,7 @@ jobs:
       - name: Install node
         uses: actions/setup-node@v7
         with:
-          node-version: 24
+          node-version: ${{ matrix.node }}
           cache: pnpm
 
       - name: Install dependencies
@@ -226,7 +231,7 @@ jobs:
         run: pnpm run dev:prepare
 
       - name: Run benchmarks
-        uses: CodSpeedHQ/action@v4
+        uses: CodSpeedHQ/action@v5
         with:
           mode: simulation
           run: pnpm run bench

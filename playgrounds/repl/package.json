@@ -12,10 +12,10 @@
     "@nuxt/ui": "workspace:*",
     "@vue/repl": "^4.7.2",
     "tailwindcss": "^4.3.3",
-    "vue": "^3.5.40"
+    "vue": "^3.5.41"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^6.0.8",
-    "vite": "^8.1.5"
+    "vite": "^8.2.1"
   }
 }

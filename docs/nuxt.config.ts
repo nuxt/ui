@@ -60,6 +60,9 @@ export default defineNuxtConfig({
           langs: ['bash', 'ts', 'typescript', 'diff', 'vue', 'json', 'yml', 'css', 'mdc', 'blade', 'edge']
         }
       }
+    },
+    experimental: {
+      sqliteConnector: 'native'
     }
   },
 
@@ -250,7 +253,7 @@ export default defineNuxtConfig({
         'prettier',
         'tailwind-variants',
         '@comark/vue',
-        '@comark/vue/plugins/highlight',
+        '@comark/vue/plugins/shiki',
         'vaul-vue',
         '@vueuse/integrations/useFuse',
         '@floating-ui/dom',
