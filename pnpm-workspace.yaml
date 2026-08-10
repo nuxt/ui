@@ -18,10 +18,20 @@ overrides:
   "@codspeed/vitest-plugin>vite": ^7.0.0 || ^8.0.0
   "@nuxt/kit": ^4.5.1
   "@nuxt/ui": workspace:*
+  # tailwind-variants 3.3.x is a full internal rewrite: invoking a tv() result is
+  # 18 to 103x slower than 3.2.2 (see test/bench/tv.bench.ts) and the exported
+  # type constraints changed in a breaking way. Pinned until upstream addresses
+  # the perf regression, keep in sync with the renovate.json rule.
+  tailwind-variants: 3.2.2
   unplugin: ^3.3.0
   c12: ^3.3.4
   h3: 1.15.11
   typescript: ^6.0.3
+
+# The nuxt renovate preset updates Nuxt org packages the moment they publish,
+# exempt them from pnpm's release age window so fresh renovate branches install.
+minimumReleaseAgeExclude:
+  - '@nuxt/*'
 
 allowBuilds:
   better-sqlite3: true

@@ -28,6 +28,12 @@
       ]
     },
     {
+      "matchPackageNames": [
+        "tailwind-variants"
+      ],
+      "allowedVersions": "<3.3.0"
+    },
+    {
       "matchDepTypes": [
         "peerDependencies"
       ],
