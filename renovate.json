@@ -34,6 +34,12 @@
       "allowedVersions": "<3.3.0"
     },
     {
+      "matchPackageNames": [
+        "@nuxtjs/mdc"
+      ],
+      "allowedVersions": "<0.23.0 || >0.23.0"
+    },
+    {
       "matchDepTypes": [
         "peerDependencies"
       ],
