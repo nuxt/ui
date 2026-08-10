@@ -16,7 +16,7 @@ overrides:
   # the whole vite peer group down to vitest's vite 7. The plugin only ever runs
   # inside vitest's own vite, so the wider range is bookkeeping, not runtime.
   "@codspeed/vitest-plugin>vite": ^7.0.0 || ^8.0.0
-  "@nuxt/kit": ^4.5.1
+  "@nuxt/kit": ^4.5.2
   "@nuxt/ui": workspace:*
   # `@nuxt/image` 2.1.0 depends on `ipx` 4.0.0-beta.1, which pulls a second sharp
   # alongside 0.34.5 and kills the docs prerender as soon as it hits `/_ipx`.
