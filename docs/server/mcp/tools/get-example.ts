@@ -24,7 +24,7 @@ export default defineMcpTool({
       const err = error as { statusCode?: number, response?: { status?: number } }
       const status = err?.statusCode ?? err?.response?.status
       if (status === 404) {
-        throw createError({ statusCode: 404, message: `Example '${exampleName}' not found. Use the list_examples tool to see all available examples.` })
+        throw createError({ statusCode: 404, message: `Example '${exampleName}' not found. Use the list-examples tool to see all available examples.` })
       }
       throw error
     }
