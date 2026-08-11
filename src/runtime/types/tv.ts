@@ -2,8 +2,11 @@ import type { ClassValue, TVVariants, TVCompoundVariants, TVDefaultVariants } fr
 
 /**
  * A function form for a slot class that **replaces** the slot's default classes
- * instead of merging onto them. It receives the slot's fully resolved default
- * class string and returns the classes to use in its place.
+ * instead of merging onto them, returning the classes to use in their place.
+ * In `app.config.ui` it receives the slot's own theme classes and replaces only
+ * those — `variants` and `compoundVariants` still apply on top. In `:ui` / `class`
+ * it runs after variant resolution, so it receives the fully resolved class
+ * string and its return value is all that remains on the slot.
  * @example title: defaults => 'text-xl font-bold'
  */
 export type SlotClassReplacer = (defaults: string) => ClassValue
