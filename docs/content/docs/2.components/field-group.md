@@ -10,7 +10,7 @@ links:
 
 ## Usage
 
-Wrap multiple [Button](/components/button) within a FieldGroup to group them together.
+Wrap multiple [Button](/docs/components/button) within a FieldGroup to group them together.
 
 ::component-code
 ---
@@ -67,7 +67,7 @@ slots:
 
 ### With input
 
-You can use components like [Input](/components/input), [InputMenu](/components/input-menu), [Select](/components/select) [SelectMenu](/components/select-menu), etc. within a field group.
+You can use components like [Input](/docs/components/input), [InputMenu](/docs/components/input-menu), [Select](/docs/components/select) [SelectMenu](/docs/components/select-menu), etc. within a field group.
 
 ::component-code
 ---
@@ -85,19 +85,19 @@ slots:
 
 ### With tooltip
 
-You can use a [Tooltip](/components/tooltip) within a field group.
+You can use a [Tooltip](/docs/components/tooltip) within a field group.
 
 :component-example{name="field-group-tooltip-example"}
 
 ### With dropdown menu
 
-You can use a [DropdownMenu](/components/dropdown-menu) within a field group.
+You can use a [DropdownMenu](/docs/components/dropdown-menu) within a field group.
 
 :component-example{name="field-group-dropdown-example"}
 
 ### With badge
 
-You can use a [Badge](/components/badge) within a field group.
+You can use a [Badge](/docs/components/badge) within a field group.
 
 :component-example{name="field-group-badge-example"}
 
