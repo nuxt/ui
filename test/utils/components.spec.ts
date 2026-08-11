@@ -1,4 +1,5 @@
-import { describe, it, expect, afterAll } from 'vitest'
+import { describe, it, expect, afterAll, vi } from 'vitest'
+import { consola } from 'consola'
 import { mkdtempSync, mkdirSync, writeFileSync, rmSync, realpathSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
@@ -71,6 +72,68 @@ describe('detectUsedComponents', () => {
 
     expect(detected).toContain('Modal')
     expect(detected).toContain('Button')
+  })
+
+  it('ignores identifiers that only look like components', async () => {
+    // `URL` matches the pattern as `RL`, `UUID` as `UID`: junk names must not
+    // defeat the include-everything fallback, which would blank every theme.
+    const junk = fixtureUsing('<div />')
+    writeFileSync(join(junk, 'vite.config.ts'), `import { fileURLToPath, URL } from 'node:url'\ntype UUID = string\n`)
+
+    expect(await detectUsedComponents([junk], 'U', componentDir)).toBeUndefined()
+
+    const mixed = fixtureUsing('<UButton label="x" />')
+    writeFileSync(join(mixed, 'vite.config.ts'), `import { fileURLToPath, URL } from 'node:url'\n`)
+    const detected = await detectUsedComponents([mixed], 'U', componentDir)
+
+    expect(detected).toContain('Button')
+    expect(detected).not.toContain('RL')
+  })
+
+  it('falls back to undefined when only kebab-case usage exists', async () => {
+    // Kebab-case tags resolve at runtime but are invisible to the pattern:
+    // keeping everything styled beats silently blanking the used component.
+    expect(await detectUsedComponents([fixtureUsing('<u-button label="x" />')], 'U', componentDir)).toBeUndefined()
+  })
+
+  it('warns on unknown includeComponents names without poisoning detection', async () => {
+    const warn = vi.spyOn(consola, 'warn').mockImplementation(() => {})
+
+    expect(await detectUsedComponents([fixtureUsing('<div />')], 'U', componentDir, ['Dropdown'])).toBeUndefined()
+    expect(warn).toHaveBeenCalledWith(expect.stringContaining('Dropdown'))
+
+    warn.mockRestore()
+  })
+
+  it('resolves dependencies of components shadowed by prose themes', async () => {
+    // `prose/Tabs.vue` shares its basename with `Tabs.vue`: the graph must keep
+    // the regular component's dependency set, not the prose one's.
+    const detected = await detectUsedComponents([fixtureUsing('<UTabs :items="[]" />')], 'U', componentDir)
+
+    expect(detected).toContain('Icon')
+    expect(detected).toContain('Avatar')
+    expect(detected).toContain('Badge')
+  })
+
+  it('resolves internal dependencies with a custom prefix', async () => {
+    // Nuxt UI's own components reference each other with `U` regardless of the
+    // configured prefix: the graph pass must not use the user prefix.
+    const detected = await detectUsedComponents([fixtureUsing('<XAlert title="x" />')], 'X', componentDir)
+
+    expect(detected).toContain('Alert')
+    expect(detected).toContain('Button')
+    expect(detected).toContain('Icon')
+  })
+
+  it('scans the dist directory of a scanned package', async () => {
+    // Published packages ship their code in `dist/` as `.mjs`: the project
+    // build-output ignores must not apply to `scanPackages` directories.
+    const root = fixtureRoot()
+    const pkgDir = fixturePackage(root, 'dist-lib')
+    mkdirSync(join(pkgDir, 'dist'), { recursive: true })
+    writeFileSync(join(pkgDir, 'dist', 'index.mjs'), `export const render = () => h(UChip)\n`)
+
+    expect(await detectUsedComponents([pkgDir], 'U', componentDir)).toContain('Chip')
   })
 
   it('skips files in nested node_modules and dist directories', async () => {
