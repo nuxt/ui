@@ -34,8 +34,8 @@ export default defineCommand({
       process.exit(1)
     }
 
-    if (!args.code.match(/^[a-z]{2,3}(?:_[a-z]{2,4})?$/)) {
-      consola.error(`🚨 ${args.code} is not a valid locale code!\nExample: en or en_gb`)
+    if (!args.code.match(/^[a-z]{2,3}(?:_(?:[a-z]{2}|\d{3}))?$/)) {
+      consola.error(`🚨 ${args.code} is not a valid locale code!\nExample: en, en_gb or es_419`)
       process.exit(1)
     }
 
