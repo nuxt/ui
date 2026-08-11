@@ -47,7 +47,7 @@ export default defineConfig({
           name: 'vue',
           environment: 'happy-dom',
           dir: './test',
-          include: ['components/**.spec.ts', 'composables/**.spec.ts', 'utils/**/**.spec.ts'],
+          include: ['components/**.spec.ts', 'composables/**.spec.ts', 'utils/**/**.spec.ts', 'locale.spec.ts'],
           benchmark: { include: ['bench/**/*.bench.ts'] },
           setupFiles: ['./test/utils/setup.ts']
         },
