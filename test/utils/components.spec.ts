@@ -54,6 +54,18 @@ describe('detectUsedComponents', () => {
     expect(detected).toContain('Tooltip')
   })
 
+  it('ignores declaration files', async () => {
+    const dir = fixtureUsing('<UButton label="x" />')
+    // `components.d.ts` declares every component ever rendered: scanning it
+    // would keep anything used once detected forever.
+    writeFileSync(join(dir, 'components.d.ts'), `UTable: typeof import('./Table.vue')['default']\n`)
+
+    const detected = await detectUsedComponents([dir], 'U', componentDir)
+
+    expect(detected).toContain('Button')
+    expect(detected).not.toContain('Table')
+  })
+
   it('always includes components from includeComponents', async () => {
     const detected = await detectUsedComponents([fixtureUsing('<div>no nuxt ui here</div>')], 'U', componentDir, ['Modal'])
 

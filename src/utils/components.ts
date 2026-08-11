@@ -129,7 +129,10 @@ export async function detectUsedComponents(
       cwd: dir,
       // `**/` prefixes so nested dirs are skipped too: the Vue integration
       // scans the whole Vite root, not just Nuxt layer `app/` directories.
-      ignore: ['**/node_modules/**', '**/.nuxt/**', '**/dist/**']
+      // Declaration files can't render components, and the generated
+      // `components.d.ts` declares every component ever rendered, which would
+      // keep anything used once detected forever.
+      ignore: ['**/node_modules/**', '**/.nuxt/**', '**/dist/**', '**/*.d.ts']
     })
 
     for (const file of appFiles) {
