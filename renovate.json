@@ -35,12 +35,6 @@
     },
     {
       "matchPackageNames": [
-        "@nuxtjs/mdc"
-      ],
-      "allowedVersions": "<0.23.0 || >0.23.0"
-    },
-    {
-      "matchPackageNames": [
         "@nuxt/image"
       ],
       "allowedVersions": "<2.1.0"
