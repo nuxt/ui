@@ -12,7 +12,7 @@ export default (options: Required<ModuleOptions>) => ({
     leadingAvatarSize: '',
     files: 'flex items-center gap-1.5',
     content: 'relative text-pretty wrap-break-word *:first:mt-0 *:last:mb-0',
-    actions: ['[@media(hover:hover)]:opacity-0 group-hover/message:opacity-100 absolute bottom-0 flex items-center', options.theme.transitions && 'transition-opacity']
+    actions: ['[@media(hover:hover)]:opacity-0 group-hover/message:opacity-100 absolute bottom-0 flex items-center', options.theme.transitions && 'transition-opacity ease-out']
   },
   variants: {
     variant: {
