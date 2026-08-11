@@ -50,3 +50,5 @@ allowBuilds:
   esbuild: false
   unrs-resolver: false
   vue-demi: false
+
+shellEmulator: true

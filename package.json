@@ -124,10 +124,10 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "typecheck": "vue-tsc --noEmit && nuxt typecheck playgrounds/nuxt && nuxt typecheck docs && cd playgrounds/vue && vue-tsc --noEmit",
-    "test": "vitest",
-    "test:vue": "vitest --project vue",
-    "test:nuxt": "vitest --project nuxt",
-    "bench": "vitest bench --project vue",
+    "test": "VITE_CONFIG_NATIVE_IGNORE_WARNING=true vitest",
+    "test:vue": "VITE_CONFIG_NATIVE_IGNORE_WARNING=true vitest --project vue",
+    "test:nuxt": "VITE_CONFIG_NATIVE_IGNORE_WARNING=true vitest --project nuxt",
+    "bench": "VITE_CONFIG_NATIVE_IGNORE_WARNING=true vitest bench --project vue",
     "release": "release-it"
   },
   "dependencies": {
