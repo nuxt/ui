@@ -188,8 +188,10 @@ const { isDragging, open, inputRef, dropzoneRef } = useFileUpload({
   dropzone: props.dropzone,
   onUpdate
 })
-const { emitFormInput, emitFormChange, id, name, color, highlight, disabled, ariaAttrs } = useFormField<FileUploadProps>(_props)
+const { emitFormInput, emitFormChange, id, name, size: formFieldSize, color, highlight, disabled, ariaAttrs } = useFormField<FileUploadProps>(_props)
 
+// eslint-disable-next-line vue/no-dupe-keys
+const size = computed(() => formFieldSize.value ?? props.size)
 // eslint-disable-next-line vue/no-dupe-keys
 const variant = computed(() => props.multiple ? 'area' : props.variant)
 // eslint-disable-next-line vue/no-dupe-keys
@@ -211,13 +213,13 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.fileUpload || {}
   dropzone: props.dropzone,
   interactive: props.interactive,
   color: color.value ?? props.color,
-  size: props.size,
+  size: size.value,
   variant: variant.value,
   layout: layout.value,
   position: position.value,
   multiple: props.multiple,
   highlight: highlight.value ?? props.highlight,
-  disabled: props.disabled
+  disabled: disabled.value || props.disabled
 }))
 
 function createObjectUrl(file: File): string | undefined {
@@ -234,8 +236,8 @@ function formatFileSize(bytes: number): string {
   const sizes = ['B', 'KB', 'MB', 'GB']
   const i = Math.floor(Math.log(bytes) / Math.log(k))
 
-  const size = bytes / Math.pow(k, i)
-  const formattedSize = i === 0 ? size.toString() : size.toFixed(0)
+  const value = bytes / Math.pow(k, i)
+  const formattedSize = i === 0 ? value.toString() : value.toFixed(0)
 
   return `${formattedSize}${sizes[i]}`
 }
@@ -307,7 +309,7 @@ defineExpose({
                   :as="{ img: 'img' }"
                   :src="createObjectUrl(file)"
                   :icon="props.fileIcon || appConfig.ui.icons.file"
-                  :size="props.size"
+                  :size="size"
                   data-slot="fileLeadingAvatar"
                   :class="ui.fileLeadingAvatar({ class: props.ui?.fileLeadingAvatar })"
                 />
@@ -337,7 +339,7 @@ defineExpose({
                       size: 'xs'
                     } : {
                       variant: 'link',
-                      size: props.size
+                      size
                     }),
                     ...typeof props.fileDelete === 'object' ? props.fileDelete : undefined
                   }"
@@ -380,7 +382,7 @@ defineExpose({
           <slot name="leading" :ui="ui">
             <template v-if="props.icon !== false">
               <UIcon v-if="variant === 'button'" :name="props.icon ?? appConfig.ui.icons.upload" data-slot="icon" :class="ui.icon({ class: props.ui?.icon })" />
-              <UAvatar v-else :icon="props.icon ?? appConfig.ui.icons.upload" :size="props.size" data-slot="avatar" :class="ui.avatar({ class: props.ui?.avatar })" />
+              <UAvatar v-else :icon="props.icon ?? appConfig.ui.icons.upload" :size="size" data-slot="avatar" :class="ui.avatar({ class: props.ui?.avatar })" />
             </template>
           </slot>
 

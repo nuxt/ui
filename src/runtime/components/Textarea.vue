@@ -104,7 +104,7 @@ const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponen
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.textarea || {}) })({
   color: color.value ?? props.color,
   variant: props.variant,
-  size: size?.value ?? props.size,
+  size: size.value ?? props.size,
   loading: props.loading,
   highlight: highlight.value ?? props.highlight,
   fixed: props.fixed,

@@ -349,7 +349,7 @@ const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: I
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.inputMenu || {}) })({
   color: color.value ?? props.color,
   variant: props.variant,
-  size: inputSize?.value ?? props.size,
+  size: inputSize.value ?? props.size,
   loading: props.loading,
   highlight: highlight.value ?? props.highlight,
   fixed: props.fixed,
@@ -488,10 +488,10 @@ function onFocus(event: FocusEvent) {
 }
 
 const isOpen = ref(false)
+let timeoutId: ReturnType<typeof setTimeout> | undefined
+
 function onUpdateOpen(value: boolean) {
   isOpen.value = value
-
-  let timeoutId
 
   if (!value) {
     const event = new FocusEvent('blur')

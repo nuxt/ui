@@ -107,7 +107,7 @@ const inputSize = computed(() => fieldGroupSize.value || formFieldSize.value)
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.inputTags || {}) })({
   color: color.value ?? props.color,
   variant: props.variant,
-  size: inputSize?.value ?? props.size,
+  size: inputSize.value ?? props.size,
   loading: props.loading,
   highlight: highlight.value ?? props.highlight,
   fixed: props.fixed,
