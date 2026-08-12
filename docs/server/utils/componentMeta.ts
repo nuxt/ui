@@ -32,7 +32,9 @@ export function compactProp(prop: any, defaultVariants?: Record<string, any>): C
   let type: string = typeof rawType === 'string' ? rawType : 'any'
 
   if (!type.startsWith('boolean') && prop.schema?.kind === 'enum' && Object.keys(prop.schema.schema ?? {}).length) {
-    type = Object.values(prop.schema.schema).map((schema: any) => schema?.type ? schema.type : schema).join(' | ')
+    const values = Object.values(prop.schema.schema).map((schema: any) => schema?.type ? schema.type : schema)
+    // Enum schemas list `undefined` first, keep it last so optional props read like their source type
+    type = [...values.filter(value => value !== 'undefined'), ...values.filter(value => value === 'undefined')].join(' | ')
   }
 
   let defaultValue = prop.default
