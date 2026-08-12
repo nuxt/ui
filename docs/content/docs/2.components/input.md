@@ -318,7 +318,7 @@ It also provides validation and error handling when used within a **Form** compo
 
 ### Within a FieldGroup
 
-You can use the Input within a [FieldGroup](/components/field-group) component to group multiple elements together.
+You can use the Input within a [FieldGroup](/docs/components/field-group) component to group multiple elements together.
 
 ::component-example
 ---

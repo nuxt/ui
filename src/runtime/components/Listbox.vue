@@ -1,7 +1,6 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import type { VNode } from 'vue'
-import { computed, toRaw, toRef } from 'vue'
 import type { ListboxRootEmits, ListboxRootProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/listbox'
@@ -161,6 +160,7 @@ export type ListboxSlots<T extends ArrayOrNested<ListboxItem> = ArrayOrNested<Li
 </script>
 
 <script setup lang="ts" generic="T extends ArrayOrNested<ListboxItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false, Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>">
+import { computed, toRaw, toRef } from 'vue'
 import { ListboxRoot, ListboxContent, ListboxGroup, ListboxGroupLabel, ListboxVirtualizer, ListboxItem as RekaListboxItem, ListboxItemIndicator, ListboxFilter } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
 import { createReusableTemplate, reactivePick } from '@vueuse/core'
