@@ -1,6 +1,10 @@
 ---
 description: A drawer that smoothly slides in & out of the screen.
 category: overlay
+keywords:
+  - bottom sheet
+  - action sheet
+  - mobile sheet
 links:
   - label: Drawer
     icon: i-custom-reka-ui
