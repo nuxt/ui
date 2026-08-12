@@ -31,6 +31,23 @@ describe('Editor', () => {
     wrapper.unmount()
   })
 
+  it('does not update the model when the document is unchanged', async () => {
+    const wrapper = await mountSuspended(Editor, {
+      props: {
+        contentType: 'markdown',
+        modelValue: '# Building Modern Interfaces with Nuxt UI',
+        placeholder: 'Write something...'
+      }
+    })
+    const editor = wrapper.vm.editor!
+
+    editor.setEditable(false)
+
+    expect(wrapper.emitted('update:modelValue')).toBeUndefined()
+
+    wrapper.unmount()
+  })
+
   it('styles the built-in editor via the editable element, not the content wrapper', async () => {
     const wrapper = await mountSuspended(Editor, { props })
 

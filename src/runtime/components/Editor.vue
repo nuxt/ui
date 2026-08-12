@@ -302,7 +302,11 @@ const internalEditor = isExternalEditor
           editor.view.dispatch(editor.state.tr)
         }
       },
-      onUpdate: ({ editor }) => {
+      onUpdate: ({ editor, transaction, appendedTransactions }) => {
+        if (!transaction.docChanged && !appendedTransactions.some(tr => tr.docChanged)) {
+          return
+        }
+
         let value
         try {
           if (contentType.value === 'html') {

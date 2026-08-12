@@ -20,7 +20,7 @@ export default defineNuxtConfig({
       include: [
         '@ai-sdk/vue',
         '@comark/vue',
-        '@comark/vue/plugins/highlight',
+        '@comark/vue/plugins/shiki',
         '@vueuse/core',
         '@vueuse/integrations/useFuse',
         'ai',

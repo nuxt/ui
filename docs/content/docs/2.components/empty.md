@@ -2,6 +2,10 @@
 title: Empty
 description: 'A component to display an empty state.'
 category: data
+keywords:
+  - no data
+  - placeholder
+  - zero state
 links:
   - label: GitHub
     icon: i-simple-icons-github

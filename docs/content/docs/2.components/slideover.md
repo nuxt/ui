@@ -1,6 +1,10 @@
 ---
 description: A dialog that slides in from any side of the screen.
 category: overlay
+keywords:
+  - sheet
+  - side panel
+  - off-canvas
 links:
   - label: Dialog
     icon: i-custom-reka-ui
