@@ -18,9 +18,11 @@ import { resolvePathSync } from 'mlly'
  * prose would match far too much ordinary text.
  */
 function createComponentPattern(prefix: string): RegExp {
-  const kebabPrefix = kebabCase(prefix)
+  // The prefix is user-configured, so it can carry regex metacharacters.
+  const escapedPrefix = prefix.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+  const kebabPrefix = kebabCase(prefix).replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 
-  return new RegExp(`<(?:Lazy)?${prefix}([A-Z][a-zA-Z]+)|<(?:lazy-)?${kebabPrefix}-([a-z][a-z0-9-]*)|\\b(?:Lazy)?${prefix}([A-Z][a-zA-Z]+)\\b`, 'g')
+  return new RegExp(`<(?:Lazy)?${escapedPrefix}([A-Z][a-zA-Z]+)|<(?:lazy-)?${kebabPrefix}-([a-z][a-z0-9-]*)|\\b(?:Lazy)?${escapedPrefix}([A-Z][a-zA-Z]+)\\b`, 'g')
 }
 
 /**

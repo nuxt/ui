@@ -393,7 +393,7 @@ export function addTemplates(options: ModuleOptions, nuxt: Nuxt, resolve: Resolv
 
   if (options.experimental?.componentDetection && nuxt.options.dev) {
     nuxt.hook('builder:watch', async (_, path) => {
-      if (/\.(?:vue|ts|js|tsx|jsx)$/.test(path)) {
+      if (/\.(?:vue|ts|mts|js|mjs|cjs|tsx|jsx)$/.test(path)) {
         await updateTemplates({ filter: template => template.filename === 'ui.css' })
       }
     })

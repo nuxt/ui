@@ -98,6 +98,15 @@ describe('detectUsedComponents', () => {
     expect(detected).toContain('Button')
   })
 
+  it('detects kebab-case tags of components with acronyms', async () => {
+    // Vue camelizes a kebab tag one hyphen at a time, so `PageCTA` is written
+    // `<u-page-c-t-a>`. `<u-page-cta>` resolves to `PageCta` for Vue too, so it
+    // renders nothing and is correctly not detected.
+    const detected = await detectUsedComponents([fixtureUsing('<u-page-c-t-a title="x" />')], 'U', componentDir)
+
+    expect(detected).toContain('PageCTA')
+  })
+
   it('detects kebab-case and PascalCase usage in the same file', async () => {
     const detected = await detectUsedComponents([fixtureUsing('<UCard><u-badge label="x" /></UCard>')], 'U', componentDir)
 
