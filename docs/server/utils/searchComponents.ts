@@ -15,7 +15,7 @@ function normalizeQuery(query: string): string {
 
 /** Tokens only contain `[a-z0-9]` so they are safe to inline in a regex. */
 function matchesWord(text: string, token: string): boolean {
-  return new RegExp(`\\b${token}`).test(text)
+  return new RegExp(`\\b${token}\\b`).test(text)
 }
 
 /**
