@@ -2,6 +2,10 @@
 title: Kbd
 description: A kbd element to display a keyboard key.
 category: element
+keywords:
+  - keyboard shortcut
+  - hotkey
+  - keybinding
 links:
   - label: GitHub
     icon: i-simple-icons-github

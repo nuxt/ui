@@ -2,6 +2,9 @@
 title: FormField
 description: A wrapper for form elements that provides validation and error handling.
 category: form
+keywords:
+  - field wrapper
+  - form label
 links:
   - label: GitHub
     icon: i-simple-icons-github

@@ -1,6 +1,8 @@
 ---
 description: A hierarchy of links to navigate through a website.
 category: navigation
+keywords:
+  - breadcrumbs
 links:
   - label: GitHub
     icon: i-simple-icons-github

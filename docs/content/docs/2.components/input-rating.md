@@ -2,6 +2,9 @@
 title: InputRating
 description: A component to display and collect ratings from users.
 category: form
+keywords:
+  - star rating
+  - stars
 links:
   - label: Rating
     icon: i-custom-reka-ui

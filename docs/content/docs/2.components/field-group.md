@@ -2,6 +2,11 @@
 title: FieldGroup
 description: Group multiple button-like elements together.
 category: element
+keywords:
+  - segmented control
+  - toggle group
+  - button group
+  - input group
 links:
   - label: GitHub
     icon: i-simple-icons-github

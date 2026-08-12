@@ -5,6 +5,7 @@ import { visit } from '@nuxt/content/runtime'
 import { queryCollection } from '@nuxt/content/server'
 import * as theme from '../../.nuxt/ui'
 import meta from '#nuxt-component-meta'
+import { compactProps, getDefaultVariants, hasLinkPassthrough, partitionLinkProps } from './componentMeta'
 // @ts-expect-error - no types available
 import { getComponentExample } from '#component-example/nitro'
 
@@ -189,9 +190,26 @@ function generateTSInterface(
   itemHandler: (item: any) => string,
   description: string
 ) {
+  return generateGroupedTSInterface(name, [{ items }], itemHandler, description)
+}
+
+function generateGroupedTSInterface(
+  name: string,
+  groups: Array<{ comment?: string, items: any[] }>,
+  itemHandler: (item: any) => string,
+  description: string
+) {
   let code = `/**\n * ${description}\n */\ninterface ${name} {\n`
-  for (const item of items) {
-    code += itemHandler(item)
+  for (const group of groups) {
+    if (!group.items.length) {
+      continue
+    }
+    if (group.comment) {
+      code += `\n  // ${group.comment}\n`
+    }
+    for (const item of group.items) {
+      code += itemHandler(item)
+    }
   }
   code += `}`
   return code
@@ -200,11 +218,8 @@ function generateTSInterface(
 function propItemHandler(propValue: any): string {
   if (!propValue?.name) return ''
   const propName = propValue.name
+  // Props are pre-normalized by `compactProp`, so `type` is always a string
   const propType = propValue.type
-    ? Array.isArray(propValue.type)
-      ? propValue.type.map((t: any) => t.name || t).join(' | ')
-      : propValue.type.name || propValue.type
-    : 'any'
   const isRequired = propValue.required || false
   const hasDescription = propValue.description && propValue.description.trim().length > 0
   const hasDefault = propValue.default !== undefined
@@ -218,13 +233,8 @@ function propItemHandler(propValue: any): string {
       })
     }
     if (hasDefault) {
-      let defaultValue = propValue.default
-      if (typeof defaultValue === 'string') {
-        defaultValue = `"${defaultValue.replace(/"/g, '\\"')}"`
-      } else {
-        defaultValue = JSON.stringify(defaultValue)
-      }
-      result += `   * @default ${defaultValue}\n`
+      const defaultValue = propValue.default
+      result += `   * @default ${typeof defaultValue === 'string' ? defaultValue : JSON.stringify(defaultValue)}\n`
     }
     result += `   */\n`
   }
@@ -510,13 +520,22 @@ export async function transformMDC(event: H3Event, doc: Document): Promise<Docum
     if (!componentMeta?.props) return
 
     const interfaceName = isProse ? `Prose${pascalCaseName}Props` : `${pascalCaseName}Props`
+    const interfaceDescription = `Props for the ${isProse ? 'Prose' : ''}${pascalCaseName} component`
 
-    const interfaceCode = generateTSInterface(
-      interfaceName,
-      Object.values(componentMeta.props),
-      propItemHandler,
-      `Props for the ${isProse ? 'Prose' : ''}${pascalCaseName} component`
-    )
+    const componentProps = compactProps(Object.values(componentMeta.props), getDefaultVariants(finalComponentName, isProse))
+
+    let interfaceCode: string
+    if (pascalCaseName !== 'Link' && hasLinkPassthrough(componentProps)) {
+      const { own, inherited } = partitionLinkProps(componentProps)
+
+      interfaceCode = generateGroupedTSInterface(interfaceName, [
+        { items: own },
+        { comment: 'Props inherited from the Link component: https://ui.nuxt.com/docs/components/link', items: inherited }
+      ], propItemHandler, interfaceDescription)
+    } else {
+      interfaceCode = generateTSInterface(interfaceName, componentProps, propItemHandler, interfaceDescription)
+    }
+
     replaceNodeWithPre(node, 'ts', interfaceCode)
   })
 

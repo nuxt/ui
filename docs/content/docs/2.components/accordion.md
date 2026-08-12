@@ -1,6 +1,11 @@
 ---
 description: A stacked set of collapsible panels.
 category: data
+keywords:
+  - disclosure
+  - collapse
+  - faq
+  - expansion panel
 links:
   - label: Accordion
     icon: i-custom-reka-ui
