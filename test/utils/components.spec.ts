@@ -90,10 +90,26 @@ describe('detectUsedComponents', () => {
     expect(detected).not.toContain('RL')
   })
 
-  it('falls back to undefined when only kebab-case usage exists', async () => {
-    // Kebab-case tags resolve at runtime but are invisible to the pattern:
-    // keeping everything styled beats silently blanking the used component.
-    expect(await detectUsedComponents([fixtureUsing('<u-button label="x" />')], 'U', componentDir)).toBeUndefined()
+  it('detects kebab-case component tags', async () => {
+    const detected = await detectUsedComponents([fixtureUsing('<u-alert title="x" /><lazy-u-tooltip text="y" />')], 'U', componentDir)
+
+    expect(detected).toContain('Alert')
+    expect(detected).toContain('Tooltip')
+    expect(detected).toContain('Button')
+  })
+
+  it('detects kebab-case and PascalCase usage in the same file', async () => {
+    const detected = await detectUsedComponents([fixtureUsing('<UCard><u-badge label="x" /></UCard>')], 'U', componentDir)
+
+    expect(detected).toContain('Card')
+    expect(detected).toContain('Badge')
+  })
+
+  it('detects kebab-case tags with a custom prefix', async () => {
+    const detected = await detectUsedComponents([fixtureUsing('<nx-alert title="x" />')], 'Nx', componentDir)
+
+    expect(detected).toContain('Alert')
+    expect(detected).toContain('Button')
   })
 
   it('warns on unknown includeComponents names without poisoning detection', async () => {

@@ -3,18 +3,36 @@ import { readFile } from 'node:fs/promises'
 import { consola } from 'consola'
 import { dirname, join, normalize, resolve } from 'pathe'
 import { globSync } from 'tinyglobby'
-import { pascalCase } from 'scule'
+import { kebabCase, pascalCase } from 'scule'
 import { resolvePathSync } from 'mlly'
 
 /**
  * Pattern to match:
  * - <UButton in templates
+ * - <u-button in templates (kebab-case, mandatory for in-DOM templates)
  * - UButton in script (imports, usage)
- * - <LazyUButton (lazy components)
+ * - <LazyUButton / <lazy-u-button (lazy components)
  * - LazyUButton in script
+ *
+ * The kebab form only matches as a tag: bare kebab identifiers in scripts and
+ * prose would match far too much ordinary text.
  */
 function createComponentPattern(prefix: string): RegExp {
-  return new RegExp(`<(?:Lazy)?${prefix}([A-Z][a-zA-Z]+)|\\b(?:Lazy)?${prefix}([A-Z][a-zA-Z]+)\\b`, 'g')
+  const kebabPrefix = kebabCase(prefix)
+
+  return new RegExp(`<(?:Lazy)?${prefix}([A-Z][a-zA-Z]+)|<(?:lazy-)?${kebabPrefix}-([a-z][a-z0-9-]*)|\\b(?:Lazy)?${prefix}([A-Z][a-zA-Z]+)\\b`, 'g')
+}
+
+/**
+ * The component name a pattern match refers to, normalised to prefix-less
+ * PascalCase (`match[2]` is the kebab-case tag capture).
+ */
+function getMatchedComponent(match: RegExpMatchArray): string | undefined {
+  if (match[2]) {
+    return pascalCase(match[2])
+  }
+
+  return match[1] || match[3]
 }
 
 /**
@@ -50,7 +68,7 @@ async function buildComponentDependencyGraph(componentDir: string): Promise<Map<
 
       const matches = content.matchAll(componentPattern)
       for (const match of matches) {
-        const depName = match[1] || match[2]
+        const depName = getMatchedComponent(match)
         if (depName && depName !== componentName && componentNames.has(depName)) {
           dependencies.add(depName)
         }
@@ -177,7 +195,7 @@ export async function detectUsedComponents(
         const matches = content.matchAll(componentPattern)
 
         for (const match of matches) {
-          const componentName = match[1] || match[2]
+          const componentName = getMatchedComponent(match)
           if (componentName) {
             detectedComponents.add(componentName)
           }
