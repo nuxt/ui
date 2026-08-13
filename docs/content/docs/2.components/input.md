@@ -1,6 +1,8 @@
 ---
 description: An input element to enter text.
 category: form
+keywords:
+  - text field
 links:
   - label: GitHub
     icon: i-simple-icons-github
@@ -316,7 +318,7 @@ It also provides validation and error handling when used within a **Form** compo
 
 ### Within a FieldGroup
 
-You can use the Input within a [FieldGroup](/components/field-group) component to group multiple elements together.
+You can use the Input within a [FieldGroup](/docs/components/field-group) component to group multiple elements together.
 
 ::component-example
 ---

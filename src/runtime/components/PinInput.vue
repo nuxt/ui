@@ -61,7 +61,7 @@ export interface PinInputSlots {
 </script>
 
 <script setup lang="ts" generic="T extends PinInputType">
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, onScopeDispose } from 'vue'
 import { PinInputInput, PinInputRoot } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
 import { reactivePick } from '@vueuse/core'
@@ -85,14 +85,23 @@ const appConfig = useAppConfig() as PinInput['AppConfig']
 
 const rootProps = useForwardProps(reactivePick(props, 'disabled', 'id', 'mask', 'name', 'otp', 'required', 'type'), emits)
 
-const { emitFormInput, emitFormFocus, emitFormChange, emitFormBlur, size, color, id, name, highlight, disabled, ariaAttrs } = useFormField<PinInputProps>(_props)
+const { emitFormInput, emitFormFocus, emitFormChange, emitFormBlur, size: formFieldSize, color: formFieldColor, id, name, highlight: formFieldHighlight, disabled: formFieldDisabled, ariaAttrs } = useFormField<PinInputProps>(_props)
+
+// eslint-disable-next-line vue/no-dupe-keys
+const color = computed(() => formFieldColor.value ?? props.color)
+// eslint-disable-next-line vue/no-dupe-keys
+const highlight = computed(() => formFieldHighlight.value ?? props.highlight)
+// eslint-disable-next-line vue/no-dupe-keys
+const size = computed(() => formFieldSize.value ?? props.size)
+
+const disabled = computed(() => formFieldDisabled.value ?? props.disabled)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.pinInput || {}) })({
-  color: color.value ?? props.color,
+  color: color.value,
   variant: props.variant,
-  size: size.value ?? props.size,
-  highlight: highlight.value ?? props.highlight,
+  size: size.value,
+  highlight: highlight.value,
   fixed: props.fixed
 }))
 
@@ -103,7 +112,6 @@ function setInputRef(index: number, el: Element | ComponentPublicInstance | null
   inputsRef.value[index] = el
 }
 
-const completed = ref(false)
 function onComplete(value: string[] | number[]) {
   // @ts-expect-error - 'target' does not exist in type 'EventInit'
   const event = new Event('change', { target: { value } })
@@ -112,7 +120,7 @@ function onComplete(value: string[] | number[]) {
 }
 
 function onBlur(event: FocusEvent) {
-  if (!event.relatedTarget || completed.value) {
+  if (!event.relatedTarget) {
     emits('blur', event)
     emitFormBlur()
   }
@@ -142,11 +150,15 @@ function shouldInsertSeparator(index: number) {
   return Number.isInteger(separator) && separator > 0 && position % separator === 0
 }
 
+let autofocusTimeoutId: ReturnType<typeof setTimeout> | undefined
+
 onMounted(() => {
-  setTimeout(() => {
+  autofocusTimeoutId = setTimeout(() => {
     autoFocus()
   }, props.autofocusDelay)
 })
+
+onScopeDispose(() => clearTimeout(autofocusTimeoutId))
 
 defineExpose({
   inputsRef

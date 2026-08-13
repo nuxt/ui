@@ -94,7 +94,7 @@ const columns: TableColumn<Payment>[] = [{
       'div',
       {
         style: {
-          paddingLeft: `${row.depth}rem`
+          paddingInlineStart: `${row.depth}rem`
         },
         class: 'flex items-center gap-2'
       },

@@ -116,14 +116,23 @@ const appConfig = useAppConfig() as RadioGroup['AppConfig']
 
 const rootProps = useForwardProps(reactivePick(props, 'as', 'loop', 'required'), emits)
 
-const { emitFormChange, emitFormInput, color, name, size, highlight, id: _id, disabled, ariaAttrs } = useFormField<RadioGroupProps<T>>(_props, { bind: false })
+const { emitFormChange, emitFormInput, color: formFieldColor, name, size: formFieldSize, highlight: formFieldHighlight, id: _id, disabled: formFieldDisabled, ariaAttrs } = useFormField<RadioGroupProps<T>>(_props, { bind: false })
 const id = _id.value ?? useId()
 
 // eslint-disable-next-line vue/no-dupe-keys
+const color = computed(() => formFieldColor.value ?? props.color)
+// eslint-disable-next-line vue/no-dupe-keys
+const highlight = computed(() => formFieldHighlight.value ?? props.highlight)
+// eslint-disable-next-line vue/no-dupe-keys
+const size = computed(() => formFieldSize.value ?? props.size)
+
+const disabled = computed(() => formFieldDisabled.value ?? props.disabled)
+
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.radioGroup || {}) })({
-  size: size.value ?? props.size,
-  color: color.value ?? props.color,
-  highlight: highlight.value ?? props.highlight,
+  size: size.value,
+  color: color.value,
+  highlight: highlight.value,
   disabled: disabled.value,
   required: props.required,
   orientation: props.orientation,

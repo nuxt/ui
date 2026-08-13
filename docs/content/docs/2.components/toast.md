@@ -1,6 +1,10 @@
 ---
 description: A succinct message to provide information or feedback to the user.
 category: overlay
+keywords:
+  - notification
+  - snackbar
+  - flash message
 links:
   - label: Toast
     icon: i-custom-reka-ui

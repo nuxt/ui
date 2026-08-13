@@ -1,6 +1,10 @@
 ---
 description: An indicator showing the progress of a task.
 category: element
+keywords:
+  - progress bar
+  - loading bar
+  - meter
 links:
   - label: Progress
     icon: i-custom-reka-ui

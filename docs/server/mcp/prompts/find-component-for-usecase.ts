@@ -12,7 +12,7 @@ export default defineMcpPrompt({
     const components = await queryCollection(event, 'docs')
       .where('path', 'LIKE', '%/components/%')
       .where('extension', '=', 'md')
-      .select('path', 'title', 'description', 'category')
+      .select('path', 'title', 'description', 'category', 'keywords')
       .all()
 
     return {
