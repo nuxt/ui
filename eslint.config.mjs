@@ -235,14 +235,20 @@ const noUnresolvedFormFieldRefs = {
         const key = formFieldRefs.get(node.object.name)
         if (!key) return
 
-        // Climb to the outermost `??` so the whole chain is in scope, then
-        // check every operand for the `props.<key>` fallback.
+        // Climb to the outermost `??` so the whole chain is in scope, then look
+        // for the `props.<key>` fallback in the operands that follow this read.
+        // Only a fallback placed after it is a fallback: `props.size ?? size.value`
+        // reads the other way round and would let a theme default win over the
+        // wrapping FormField.
         let top = node
         while (top.parent?.type === 'LogicalExpression' && top.parent.operator === '??') {
           top = top.parent
         }
 
-        if (top !== node && chainOperands(top).some(operand => isPropsAccess(operand, key))) {
+        const operands = chainOperands(top)
+        const index = operands.indexOf(node)
+
+        if (index !== -1 && operands.slice(index + 1).some(operand => isPropsAccess(operand, key))) {
           return
         }
 
