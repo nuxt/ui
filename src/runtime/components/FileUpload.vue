@@ -188,10 +188,16 @@ const { isDragging, open, inputRef, dropzoneRef } = useFileUpload({
   dropzone: props.dropzone,
   onUpdate
 })
-const { emitFormInput, emitFormChange, id, name, size: formFieldSize, color, highlight, disabled, ariaAttrs } = useFormField<FileUploadProps>(_props)
+const { emitFormInput, emitFormChange, id, name, size: formFieldSize, color: formFieldColor, highlight: formFieldHighlight, disabled: formFieldDisabled, ariaAttrs } = useFormField<FileUploadProps>(_props)
 
 // eslint-disable-next-line vue/no-dupe-keys
+const color = computed(() => formFieldColor.value ?? props.color)
+// eslint-disable-next-line vue/no-dupe-keys
+const highlight = computed(() => formFieldHighlight.value ?? props.highlight)
+// eslint-disable-next-line vue/no-dupe-keys
 const size = computed(() => formFieldSize.value ?? props.size)
+// eslint-disable-next-line vue/no-dupe-keys
+const disabled = computed(() => formFieldDisabled.value ?? props.disabled)
 // eslint-disable-next-line vue/no-dupe-keys
 const variant = computed(() => props.multiple ? 'area' : props.variant)
 // eslint-disable-next-line vue/no-dupe-keys
@@ -212,14 +218,14 @@ const position = computed(() => {
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.fileUpload || {}) })({
   dropzone: props.dropzone,
   interactive: props.interactive,
-  color: color.value ?? props.color,
+  color: color.value,
   size: size.value,
   variant: variant.value,
   layout: layout.value,
   position: position.value,
   multiple: props.multiple,
-  highlight: highlight.value ?? props.highlight,
-  disabled: disabled.value || props.disabled
+  highlight: highlight.value,
+  disabled: disabled.value
 }))
 
 function createObjectUrl(file: File): string | undefined {
@@ -243,6 +249,12 @@ function formatFileSize(bytes: number): string {
 }
 
 function onUpdate(files: File[], reset = false) {
+  // `useDropZone` is registered on mount regardless of state, so a disabled
+  // control would still accept dropped files without this guard.
+  if (disabled.value) {
+    return
+  }
+
   if (props.multiple) {
     if (reset) {
       modelValue.value = files as (M extends true ? File[] : File) | null
