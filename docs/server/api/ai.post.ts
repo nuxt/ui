@@ -131,7 +131,7 @@ const getComponentTheme = tool({
 })
 
 const getThemeGuide = tool({
-  description: 'Get detailed instructions for applying live theme changes. Call this ONLY when you are about to use applyTheme (e.g. user says "make it blue", "create a dark theme"). Do NOT call for documentation questions about theming, search docs instead.',
+  description: 'Get detailed instructions for applying live theme changes. Call this ONLY when you are about to use applyTheme (e.g. user says "make it blue", "create a dark theme"). Do NOT call for documentation questions about theming — search docs instead.',
   inputSchema: z.object({}),
   execute: async () => ({
     guide: `When users ask to change the theme, customize colors, or modify the appearance, use the \`applyTheme\` tool to apply changes live on this docs site. Only include properties that changed.
@@ -345,7 +345,7 @@ export type DocsChatTools = InferUITools<typeof tools>
 export type DocsChatMessage = UIMessage<unknown, never, DocsChatTools>
 
 function buildInstructions(framework: 'nuxt' | 'vue') {
-  return `You are a helpful assistant for Nuxt UI, a UI library for Nuxt and Vue. Nuxt UI includes \`@nuxt/fonts\` and \`@nuxt/icon\` as built-in dependencies, never tell users to install them separately. Use your knowledge base tools to search for relevant information before answering questions.
+  return `You are a helpful assistant for Nuxt UI, a UI library for Nuxt and Vue. Nuxt UI includes \`@nuxt/fonts\` and \`@nuxt/icon\` as built-in dependencies — never tell users to install them separately. Use your knowledge base tools to search for relevant information before answering questions.
 
 The user is using **${framework === 'vue' ? 'Vue' : 'Nuxt'}**. Tailor your answers accordingly — ${framework === 'vue' ? 'use the Vite plugin setup, Vue Router, and vite.config.ts instead of Nuxt-specific features like modules or app.config.ts. IMPORTANT: The Vite plugin auto-imports components and Nuxt UI composables, but Vue core APIs and VueUse must be explicitly imported — always include these in code examples (e.g. `import { ref, computed } from \'vue\'`, `import { useColorMode } from \'@vueuse/core\'`).' : 'use Nuxt modules, auto-imports, app.config.ts, and other Nuxt-specific features. Nuxt auto-imports Vue APIs (ref, computed, etc.), composables, and components — do not include these imports in code examples.'}
 

@@ -9,12 +9,12 @@ import LinkBase from '../../src/runtime/components/LinkBase.vue'
 // Decomposes the no-link Button stack layer by layer so each rung's cost is
 // attributable. Every case is wrapped in the same parent whose `cls` prop
 // toggles, re-rendering the target subtree:
-//   plain <button>                , Vue baseline
-//   Primitive                     , reka render primitive
-//   ULinkBase                     , LinkBase -> Primitive
-//   ULink (default slot)          , Link -> LinkBase -> Primitive, class via tv
-//   ULink custom + ULinkBase      , the exact pattern Button/NavigationMenu use
-//   UButton                       , full component
+//   plain <button>                 — Vue baseline
+//   Primitive                      — reka render primitive
+//   ULinkBase                      — LinkBase -> Primitive
+//   ULink (default slot)           — Link -> LinkBase -> Primitive, class via tv
+//   ULink custom + ULinkBase       — the exact pattern Button/NavigationMenu use
+//   UButton                        — full component
 const CASES: [string, (cls: string) => any][] = [
   ['plain <button>', cls => h('button', { class: cls, type: 'button' }, 'x')],
   ['Primitive', cls => h(Primitive, { as: 'button', class: cls }, () => 'x')],

@@ -575,7 +575,10 @@ function detectBorder(components: Record<string, any>): Pick<StyleOptions, 'bord
     ...((component?.compoundVariants || []) as Array<Record<string, unknown>>).map(classOf)
   ])
 
-  const widths = texts.flatMap(text => [...text.matchAll(/(?:^|\s)(?:sm:)?ring-(\d)(?:\s|$)/g)].map(match => Number(match[1])))
+  // Lookahead, not a consuming `\s`: a consumed separator hides the next
+  // token, so `ring-2 ring-4` would only ever count the 2 and the majority
+  // vote below would read a mixed-width paste wrong.
+  const widths = texts.flatMap(text => [...text.matchAll(/(?:^|\s)(?:sm:)?ring-(\d)(?=\s|$)/g)].map(match => Number(match[1])))
   if (!widths.length) return {}
   // A mixed-width paste has no single right answer, take the most common
   // width, ties toward the larger, so the choice is deterministic.

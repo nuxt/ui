@@ -27,8 +27,8 @@ export const SHADE_SETS: Record<ShadeStep, readonly Shade[]> = {
 export type ShadeStop = 'white' | Shade | 'black'
 
 /**
- * The shade sliders' travel: a density's stops plus literal white/black ends
- *, several stock defaults are literals the ramp can't express (--ui-bg is
+ * The shade sliders' travel: a density's stops plus literal white/black ends,
+ * several stock defaults are literals the ramp can't express (--ui-bg is
  * `white`).
  */
 const ladder = (step: ShadeStep): readonly ShadeStop[] => ['white', ...SHADE_SETS[step], 'black']
