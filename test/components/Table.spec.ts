@@ -1,5 +1,5 @@
 import { h, ref, computed } from 'vue'
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, vi } from 'vitest'
 import { axe } from 'vitest-axe'
 import { flushPromises } from '@vue/test-utils'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
@@ -212,6 +212,36 @@ describe('Table', () => {
         'empty-table-header': { enabled: false }
       }
     })).toHaveNoViolations()
+  })
+
+  it('passes accessibility tests with select event', async () => {
+    const wrapper = await mountSuspended(Table, {
+      props: {
+        ...props,
+        columns: columns as any,
+        caption: 'Table caption',
+        onSelect: () => {}
+      }
+    })
+    expect(await axe(wrapper.element, {
+      rules: {
+        'empty-table-header': { enabled: false }
+      }
+    })).toHaveNoViolations()
+  })
+
+  it('calls select on Enter and Space', async () => {
+    const onSelect = vi.fn()
+    const wrapper = await mountSuspended(Table, {
+      props: { ...props, onSelect }
+    })
+
+    const row = wrapper.find('tbody tr')
+    await row.trigger('keydown', { key: 'Enter' })
+    expect(onSelect).toHaveBeenCalledTimes(1)
+
+    await row.trigger('keydown', { key: ' ' })
+    expect(onSelect).toHaveBeenCalledTimes(2)
   })
 
   it('reactive columns', async () => {
