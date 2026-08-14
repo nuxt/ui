@@ -1,24 +1,21 @@
 <script setup lang="ts">
 /**
- * The header's theme popover: a grid of presets, with reset and export
- * beside them and the full studio one click away.
+ * The header's theme popover: a grid of preset swatches with the full studio
+ * one click away. Picking only, everything else (export, reset, the rest of
+ * the axes) lives in the studio. The header drops this on /theme, where the
+ * studio's own toolbar covers it.
  */
-import { themeChipStyle } from '../../utils/theme-section'
+import { themeSwatchStyle } from '../../utils/theme-section'
 
-const route = useRoute()
 const { track } = useAnalytics()
 const studioIcons = useStudioIcons()
-const { hasCSSChanges, hasConfigChanges, resetTheme } = useTheme()
 
 const open = ref(false)
-const shareOpen = ref(false)
 
-// The persisted theme is client-only, gate the dirty-driven affordances on
-// mount so hydration doesn't adopt a disabled= that never lifts.
+// The persisted theme is client-only, gate the selection on mount so
+// hydration doesn't adopt a checked row the server never rendered.
 const mounted = ref(false)
 onMounted(() => (mounted.value = true))
-
-const dirty = computed(() => mounted.value && (hasCSSChanges.value || hasConfigChanges.value))
 
 watch(open, (isOpen) => {
   if (isOpen) {
@@ -32,11 +29,9 @@ const presetTiles = computed(() => presets.map(preset => ({
   id: preset.id,
   label: preset.name,
   icon: preset.icon,
-  themeChip: themeChipStyle(preset.doc)
+  swatch: themeSwatchStyle(preset.doc)
 })))
 
-// the applied preset is client-only, no selection until mount, or hydration
-// would adopt a checked row the server never rendered
 const selected = computed({
   get: () => (mounted.value ? selectedPreset.value : undefined),
   set: (id: string | undefined) => {
@@ -44,25 +39,18 @@ const selected = computed({
     if (preset) applyPreset(preset)
   }
 })
-
-function openExport() {
-  open.value = false
-  shareOpen.value = true
-}
 </script>
 
 <template>
   <UPopover
     v-model:open="open"
     :content="{ onInteractOutside: keepPanels }"
-    :ui="{ content: 'w-72' }"
+    :ui="{ content: 'divide-y divide-default w-56' }"
   >
     <UTooltip text="Theme">
       <UButton
         :icon="studioIcons.themes"
         color="neutral"
-        active-color="primary"
-        :active="route.path === '/theme'"
         :variant="open ? 'soft' : 'ghost'"
         square
         aria-label="Theme"
@@ -70,91 +58,41 @@ function openExport() {
     </UTooltip>
 
     <template #content>
-      <!-- the card brings the rules and the padding; the popover already has
-           the surface, so its root drops its own ring and background -->
-      <UCard :ui="{ root: 'ring-0 bg-transparent', header: 'p-3 sm:px-3', body: 'p-2 sm:p-2', footer: 'p-3 sm:px-3' }">
-        <template #header>
-          <div class="flex items-center justify-between gap-2">
-            <span class="text-sm font-semibold text-highlighted">Theme</span>
-
-            <UTooltip :text="dirty ? 'Reset theme' : 'Nothing to reset'">
-              <UButton
-                :icon="studioIcons.reset"
-                size="xs"
-                color="neutral"
-                variant="outline"
-                :active="dirty"
-                :disabled="!dirty"
-                aria-label="Reset theme"
-                @click="resetTheme()"
-              />
-            </UTooltip>
-          </div>
+      <UListbox
+        v-model="selected"
+        :items="presetTiles"
+        value-key="id"
+        :ui="{
+          root: () => 'p-1.5',
+          content: 'max-h-none',
+          group: 'p-0 grid grid-cols-3',
+          item: 'flex-col items-center gap-1.5 data-[state=checked]:before:bg-elevated hover:data-[state=checked]:before:bg-elevated',
+          itemWrapper: 'min-w-0 w-full text-center',
+          itemLabel: 'w-full truncate text-[11px]',
+          itemTrailing: 'hidden'
+        }"
+      >
+        <template #item-leading="{ item }">
+          <span
+            class="flex items-center justify-center size-8 rounded-full bg-(image:--swatch-light) dark:bg-(image:--swatch-dark)"
+            :style="item.swatch"
+          >
+            <UIcon :name="item.icon" class="size-5 text-(--swatch-ink-light) dark:text-(--swatch-ink-dark)" />
+          </span>
         </template>
+      </UListbox>
 
-        <!-- Each tile paints itself in the preset it applies; the same
-             listbox the view switcher uses, three across. -->
-        <UListbox
-          v-model="selected"
-          :items="presetTiles"
-          value-key="id"
-          :ui="{
-            root: 'ring-0',
-            content: 'max-h-none',
-            group: 'p-0 grid grid-cols-3',
-            item: 'flex-col rounded-lg before:rounded-lg data-[state=checked]:before:bg-elevated/50',
-            itemWrapper: 'min-w-0 w-full text-center',
-            itemLabel: 'w-full truncate text-xs',
-            itemTrailing: 'hidden'
-          }"
-        >
-          <template #item-leading="{ item }">
-            <span
-              class="flex items-center justify-center h-12 w-full rounded-md ring ring-default bg-[image:var(--chip-bg-light)] dark:bg-[image:var(--chip-bg-dark)]"
-              :style="item.themeChip"
-            >
-              <UIcon :name="item.icon" class="size-5 text-(--chip-icon-light) dark:text-(--chip-icon-dark)" />
-            </span>
-          </template>
-        </UListbox>
-
-        <!-- v-if on the template itself: an empty footer would still draw its
-             rule and padding -->
-        <template v-if="dirty || route.path !== '/theme'" #footer>
-          <div class="flex items-center gap-2">
-            <!-- Export only once there's something to export. -->
-            <UButton
-              v-if="dirty"
-              label="Export"
-              :icon="studioIcons.export"
-              color="neutral"
-              variant="outline"
-              size="sm"
-              :block="route.path === '/theme'"
-              :class="route.path !== '/theme' && 'flex-1 min-w-0'"
-              @click="openExport"
-            />
-
-            <UButton
-              v-if="route.path !== '/theme'"
-              label="Edit theme"
-              :icon="studioIcons.themes"
-              trailing-icon="i-lucide-arrow-right"
-              color="neutral"
-              variant="outline"
-              size="sm"
-              :block="!dirty"
-              :class="dirty && 'flex-1 min-w-0'"
-              to="/theme"
-              @click="open = false"
-            />
-          </div>
-        </template>
-      </UCard>
+      <div class="p-3">
+        <UButton
+          block
+          label="Edit theme"
+          :icon="studioIcons.themes"
+          color="neutral"
+          variant="outline"
+          to="/theme"
+          @click="open = false"
+        />
+      </div>
     </template>
   </UPopover>
-
-  <!-- outside the popover: opening the modal dismisses it, which would
-       unmount a modal nested inside -->
-  <ThemeStudioShareModal v-model:open="shareOpen" mode="export" />
 </template>
