@@ -209,7 +209,7 @@ Tailwind Variants uses `tailwind-merge` under the hood — conflicting classes a
 
 Classes from the `ui` prop, the `class` prop, and global config are merged onto the component defaults. To replace them instead, set the slot to a function, which receives the default classes as its argument so you can reuse part of them.
 
-In global config it replaces the slot's own classes, so `variants` and `compoundVariants` still apply on top. In the `ui` and `class` props it replaces the resolved classes, variants included, since they are applied after the variants.
+In global config it replaces the slot's own classes, so `variants` and `compoundVariants` still apply on top. In the `ui` and `class` props it runs after the variants, so it replaces the resolved classes, variants included.
 
 ```vue
 <UButton :ui="{ label: () => 'text-base font-bold' }" />
