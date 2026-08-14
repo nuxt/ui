@@ -15,7 +15,7 @@ export interface ThemeStudioViewTab {
 const templateImage = (name: string) => `/assets/templates/nuxt/${name}`
 
 export const THEME_STUDIO_VIEWS: ThemeStudioViewTab[] = [
-  { label: 'Grid', icon: 'i-lucide-layout-grid', value: 'grid', description: 'Every themed component at a glance, the component wall.' },
+  { label: 'Components', icon: 'i-lucide-layout-grid', value: 'grid', description: 'Every themed component at a glance, the component wall.' },
   { label: 'Dashboard', icon: 'i-lucide-layout-dashboard', value: 'dashboard', description: 'Multi-column admin interface with multiple views.', image: templateImage('dashboard') },
   { label: 'Chat', icon: 'i-lucide-message-circle', value: 'chat', description: 'An AI chatbot with sidebar history and streaming replies.', image: templateImage('chat') },
   { label: 'SaaS', icon: 'i-lucide-rocket', value: 'saas', description: 'A SaaS home with hero, pricing and feature sections.', image: templateImage('saas') },
