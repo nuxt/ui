@@ -15,7 +15,13 @@ export function useThemeStudio() {
    * preset, a shuffle, an import or a full reset. Persisted so the menu
    * still names it after a reload.
    */
-  const activePreset = useState<string | undefined>(THEME_STATE_KEYS.themePreset, () => readLocalStorage(THEME_STORAGE_KEYS.preset, undefined))
+  const activePreset = useState<string | undefined>(THEME_STATE_KEYS.themePreset, () => {
+    const stored = readLocalStorage<string | undefined>(THEME_STORAGE_KEYS.preset, undefined)
+    // Presets get renamed, so a persisted id can stop naming anything. Drop it
+    // rather than holding a baseline no preset defines, which would leave the
+    // pickers with nothing selected and every section reading dirty forever.
+    return stored && presets.some(preset => preset.id === stored) ? stored : undefined
+  })
 
   function setActivePreset(id: string | undefined) {
     activePreset.value = id
@@ -41,6 +47,23 @@ export function useThemeStudio() {
       window.localStorage.setItem(THEME_STORAGE_KEYS.paletteParams, JSON.stringify(value))
     } else {
       window.localStorage.removeItem(THEME_STORAGE_KEYS.paletteParams)
+    }
+  }
+
+  // Self-heal an orphaned preset. The id above is dropped when it names
+  // nothing, but the theme it applied still sits in the other storage keys, so
+  // the page would keep a look no preset can name and every picker would read
+  // Custom. Reset to stock instead: the doc came from a build that no longer
+  // exists, so there's nothing to preserve it against. This does discard edits
+  // made on top of a since-renamed preset, which is the trade for the pickers
+  // and the page agreeing.
+  const presetHealed = useState('nuxt-ui-preset-healed', () => false)
+  if (import.meta.client && !presetHealed.value) {
+    presetHealed.value = true
+    const stored = readLocalStorage<string | undefined>(THEME_STORAGE_KEYS.preset, undefined)
+    if (stored && !presets.some(preset => preset.id === stored)) {
+      // resetTheme clears the preset key along with the rest of the theme
+      onNuxtReady(() => theme.resetTheme({ track: false }))
     }
   }
 
