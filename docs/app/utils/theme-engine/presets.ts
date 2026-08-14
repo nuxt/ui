@@ -25,23 +25,31 @@ export const presets: ThemePreset[] = [{
     version: 1
   }
 }, {
-  id: 'shadcn',
-  name: 'Shadcn',
-  description: 'Black on zinc, generous radius, quiet surfaces.',
-  icon: 'i-simple-icons-shadcnui',
+  id: 'mono',
+  name: 'Mono',
+  description: 'Black on a pure gray neutral, generous radius, quiet surfaces.',
+  icon: 'i-lucide-contrast',
   doc: {
     version: 1,
     blackAsPrimary: true,
     colors: {
-      neutral: 'zinc'
+      neutral: 'neutral'
     },
     radius: 0.5,
     font: { sans: 'Geist' },
-    tokens: {
-      dark: {
-        '--ui-bg': 'var(--ui-color-neutral-950)',
-        '--ui-bg-muted': 'var(--ui-color-neutral-900)',
-        '--ui-bg-elevated': 'var(--ui-color-neutral-900)'
+    style: {
+      defaults: {
+        variants: {
+          inputs: 'subtle'
+        }
+      },
+      tokenShades: {
+        '--ui-bg': { dark: 950 },
+        '--ui-bg-muted': { light: 100, dark: 900 },
+        '--ui-bg-elevated': { light: 100, dark: 900 },
+        '--ui-bg-accented': { light: 200, dark: 800 },
+        '--ui-text': { light: 900, dark: 100 },
+        '--ui-text-highlighted': { light: 950, dark: 50 }
       }
     }
   }
@@ -305,10 +313,10 @@ export const presets: ThemePreset[] = [{
     }
   }
 }, {
-  id: 'anthropic',
-  name: 'Anthropic',
+  id: 'parchment',
+  name: 'Parchment',
   description: 'Warm parchment neutrals with a book-cloth clay primary.',
-  icon: 'i-simple-icons-anthropic',
+  icon: 'i-lucide-scroll-text',
   doc: {
     version: 1,
     palettes: {
@@ -384,10 +392,10 @@ export const presets: ThemePreset[] = [{
     }
   }
 }, {
-  id: 'spotify',
-  name: 'Spotify',
+  id: 'signal',
+  name: 'Signal',
   description: 'Dark-first ink surfaces, signal green, pill buttons.',
-  icon: 'i-simple-icons-spotify',
+  icon: 'i-lucide-audio-lines',
   doc: {
     version: 1,
     palettes: {
@@ -444,17 +452,17 @@ export const presets: ThemePreset[] = [{
     }
   }
 }, {
-  id: 'bootstrap',
-  name: 'Bootstrap',
-  description: 'The Bootstrap 5 look, its blue, its grays, .375rem corners, flat bordered surfaces.',
-  icon: 'i-simple-icons-bootstrap',
+  id: 'cobalt',
+  name: 'Cobalt',
+  description: 'Utility blue on cool grays, tight corners, flat bordered surfaces.',
+  icon: 'i-lucide-gem',
   doc: {
     version: 1,
     // The real 5.3 tint/shade-color() scales, extended to 50/950 with the
     // same math. Prefixed names: a palette named plainly 'blue'/'gray' would
     // override the same-named tailwind ramp app-wide while active.
     palettes: {
-      'bs-blue': {
+      'cobalt': {
         shades: {
           50: 'oklch(95.3% 0.022 260.723)',
           100: 'oklch(90.8% 0.045 258.763)',
@@ -470,7 +478,7 @@ export const presets: ThemePreset[] = [{
         }
       },
       // $gray-100…$gray-900 verbatim, with 50/950 extrapolated.
-      'bs-gray': {
+      'cobalt-gray': {
         shades: {
           50: 'oklch(99.1% 0 0)',
           100: 'oklch(98.2% 0.002 247.839)',
@@ -548,13 +556,13 @@ export const presets: ThemePreset[] = [{
     },
     // secondary is literally $gray-600, so the gray ramp serves both roles.
     colors: {
-      primary: 'bs-blue',
-      secondary: 'bs-gray',
+      primary: 'cobalt',
+      secondary: 'cobalt-gray',
       success: 'bs-green',
       info: 'bs-cyan',
       warning: 'bs-yellow',
       error: 'bs-red',
-      neutral: 'bs-gray'
+      neutral: 'cobalt-gray'
     },
     radius: 0.125,
     // Bootstrap ships the system-ui stack; Roboto is its named Android
@@ -592,4 +600,4 @@ export const presets: ThemePreset[] = [{
     // Bootstrap is famously flat: borders, not shadows.
     style: { shadow: 'flat', defaults: { variants: { panels: 'subtle', inputs: 'outline' } } }
   }
-}]
+}] satisfies ThemePreset[]
