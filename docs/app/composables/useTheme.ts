@@ -162,7 +162,7 @@ export function useTheme() {
     }
   })
 
-  const radiuses = [0, 0.125, 0.25, 0.375, 0.5]
+  const radiuses = [0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75]
   const radius = computed({
     get() {
       return _radius.value

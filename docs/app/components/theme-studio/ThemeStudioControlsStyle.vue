@@ -246,7 +246,7 @@ const shadowSections = [{
         control="slider"
         label="Radius"
         :min="0"
-        :max="0.5"
+        :max="0.75"
         :step="0.125"
       />
 
