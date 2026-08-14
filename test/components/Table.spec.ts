@@ -9,6 +9,13 @@ import Table from '../../src/runtime/components/Table.vue'
 import type { TableColumn, TableRow } from '../../src/runtime/components/Table.vue'
 import theme from '#build/ui/table'
 
+async function triggerKeydown(element: Element, init: KeyboardEventInit) {
+  const event = new KeyboardEvent('keydown', { bubbles: true, cancelable: true, ...init })
+  element.dispatchEvent(event)
+  await flushPromises()
+  return event
+}
+
 describe('Table', () => {
   const loadingColors = Object.keys(theme.variants.loadingColor) as any
   const loadingAnimations = Object.keys(theme.variants.loadingAnimation) as any
@@ -240,11 +247,13 @@ describe('Table', () => {
     expect(row.attributes('tabindex')).toBe('0')
     expect(row.attributes('role')).toBeUndefined()
 
-    await row.trigger('keydown', { key: 'Enter' })
+    const enterEvent = await triggerKeydown(row.element, { key: 'Enter' })
     expect(onSelect).toHaveBeenCalledTimes(1)
+    expect(enterEvent.defaultPrevented).toBe(true)
 
-    await row.trigger('keydown', { key: ' ' })
+    const spaceEvent = await triggerKeydown(row.element, { key: ' ' })
     expect(onSelect).toHaveBeenCalledTimes(2)
+    expect(spaceEvent.defaultPrevented).toBe(true)
   })
 
   it('does not call select on repeated keydown', async () => {
@@ -281,14 +290,19 @@ describe('Table', () => {
     })
 
     const checkbox = wrapper.find<HTMLInputElement>('tbody tr input')
-    await checkbox.trigger('keydown', { key: ' ' })
+    const checkboxEvent = await triggerKeydown(checkbox.element, { key: ' ' })
+    expect(checkboxEvent.defaultPrevented).toBe(false)
+
+    const buttonEvent = await triggerKeydown(wrapper.find('tbody tr button').element, { key: ' ' })
+    expect(buttonEvent.defaultPrevented).toBe(false)
+
+    const linkEvent = await triggerKeydown(wrapper.find('tbody tr a').element, { key: 'Enter' })
+    expect(linkEvent.defaultPrevented).toBe(false)
+
     await checkbox.trigger('click')
     expect(checkbox.element.checked).toBe(true)
 
-    await wrapper.find('tbody tr button').trigger('keydown', { key: ' ' })
     await wrapper.find('tbody tr button').trigger('click')
-
-    await wrapper.find('tbody tr a').trigger('keydown', { key: 'Enter' })
     await wrapper.find('tbody tr a').trigger('click')
 
     expect(onSelect).not.toHaveBeenCalled()
