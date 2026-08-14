@@ -11,8 +11,8 @@ const email = ref('')
       <UInput v-model="email" type="email" placeholder="john@example.com" :icon="extra.mail" class="w-full" />
     </UFormField>
 
-    <UFormField label="Search" hint="⌘K">
-      <UInput placeholder="Search documentation…" :icon="appConfig.ui.icons.search" class="w-full">
+    <UFormField label="Search">
+      <UInput placeholder="Search documentation…" :icon="appConfig.ui.icons.search" :ui="{ trailing: 'gap-px' }" class="w-full">
         <template #trailing>
           <UKbd value="meta" />
           <UKbd value="K" />

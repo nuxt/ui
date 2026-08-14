@@ -11,6 +11,61 @@ const awsMarketplace = ref(true)
 const claudeInChrome = ref(true)
 const webSearch = ref(true)
 
+const models = [
+  { value: 'opus-5', label: 'Opus 5', description: 'Deep reasoning and hard problems' },
+  { value: 'sonnet-5', label: 'Sonnet 5', description: 'Balanced speed and intelligence' },
+  { value: 'haiku-4-5', label: 'Haiku 4.5', description: 'Fastest for everyday tasks' }
+]
+const legacyModels = [
+  { value: 'opus-4-8', label: 'Opus 4.8' },
+  { value: 'sonnet-4-6', label: 'Sonnet 4.6' }
+]
+const efforts = ['Low', 'Medium', 'High', 'Max']
+
+const model = ref('opus-5')
+const effort = ref('High')
+
+const activeModel = computed(() => [...models, ...legacyModels].find(m => m.value === model.value))
+
+const modelItems = computed<DropdownMenuItem[][]>(() => [
+  models.map(m => ({
+    label: m.label,
+    description: m.description,
+    type: 'checkbox',
+    checked: model.value === m.value,
+    onUpdateChecked() {
+      model.value = m.value
+    }
+  })),
+  [
+    {
+      label: 'Legacy models',
+      icon: extra.clock,
+      children: legacyModels.map(m => ({
+        label: m.label,
+        type: 'checkbox',
+        checked: model.value === m.value,
+        onUpdateChecked() {
+          model.value = m.value
+        }
+      }))
+    },
+    {
+      label: 'Effort',
+      icon: extra.zap,
+      slot: 'effort',
+      children: efforts.map(e => ({
+        label: e,
+        type: 'checkbox',
+        checked: effort.value === e,
+        onUpdateChecked() {
+          effort.value = e
+        }
+      }))
+    }
+  ]
+])
+
 const items = computed<DropdownMenuItem[][]>(() => [
   [
     { label: 'Add files or photos', icon: extra.paperclip, kbds: ['meta', 'U'] },
@@ -97,17 +152,18 @@ function onSubmit() {
   <UChatPrompt
     v-model="input"
     variant="naked"
+    size="md"
     :rows="3"
     autoresize
     :autofocus="false"
     placeholder="Paste a doc, an email, or a question to get started"
-    :ui="{ root: 'rounded-none p-2.5', footer: 'pt-1' }"
+    :ui="{ root: 'rounded-none p-2.5', body: 'p-1.5', base: 'px-0' }"
     @submit="onSubmit"
   >
     <template #footer>
       <div class="flex items-center justify-between gap-2 w-full">
         <div class="flex items-center gap-1">
-          <UDropdownMenu :items="items" :content="{ align: 'start', side: 'top' }" :ui="{ content: 'w-60' }">
+          <UDropdownMenu :items="items" :content="{ align: 'start', side: 'top' }" :ui="{ content: 'w-60' }" size="sm">
             <UButton
               :icon="appConfig.ui.icons.plus"
               color="neutral"
@@ -122,9 +178,23 @@ function onSubmit() {
             </template>
           </UDropdownMenu>
 
-          <UButton color="neutral" variant="ghost" size="sm" :trailing-icon="appConfig.ui.icons.chevronDown">
-            Opus 4.8 <span class="text-dimmed">High</span>
-          </UButton>
+          <UDropdownMenu :items="modelItems" :content="{ align: 'start', side: 'top' }" :ui="{ content: 'w-72' }" size="sm">
+            <UButton
+              color="neutral"
+              variant="ghost"
+              size="sm"
+              :trailing-icon="appConfig.ui.icons.chevronDown"
+              class="group"
+              :ui="{ trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200' }"
+            >
+              {{ activeModel?.label }} <span class="text-dimmed">{{ effort }}</span>
+            </UButton>
+
+            <template #effort-trailing="{ ui }">
+              <span class="text-dimmed">{{ effort }}</span>
+              <UIcon :name="appConfig.ui.icons.chevronRight" :class="ui.itemTrailingIcon()" />
+            </template>
+          </UDropdownMenu>
         </div>
 
         <div class="flex items-center gap-1">

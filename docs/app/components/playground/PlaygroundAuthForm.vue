@@ -17,10 +17,6 @@ const fields: AuthFormField[] = [{
   type: 'password',
   placeholder: 'Enter your password',
   required: true
-}, {
-  name: 'remember',
-  label: 'Remember me',
-  type: 'checkbox'
 }]
 
 const providers = [{
@@ -55,7 +51,6 @@ function onSubmit(payload: FormSubmitEvent<Schema>) {
       :schema="schema"
       title="Login"
       description="Enter your credentials to access your account."
-      :icon="extra.user"
       :fields="fields"
       :providers="providers"
       @submit="onSubmit"

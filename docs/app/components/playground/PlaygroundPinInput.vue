@@ -15,10 +15,10 @@ const value = ref<string[]>(['4', '3', '2'])
       </p>
     </div>
 
-    <UPinInput v-model="value" :length="6" otp />
+    <UPinInput v-model="value" :length="6" otp :separator="3" />
 
     <p class="text-sm text-muted">
-      Didn't get a code? <UButton variant="link" size="sm" class="p-0" label="Resend" />
+      Didn't get a code? <UButton variant="link" class="p-0" label="Resend" />
     </p>
   </div>
 </template>

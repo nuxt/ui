@@ -148,9 +148,7 @@ const groupColors = Object.fromEntries(variantGroupFields.map(field => [field.ke
         >
           <template #leading>
             <UChip
-              :color="(groupColors[field.key].value === 'default' ? 'primary' : groupColors[field.key].value) as any"
-              inset
-              standalone
+              :color="((groupColors[field.key].value === 'default' ? 'primary' : groupColors[field.key].value) as any)"
             />
           </template>
         </ThemeStudioRow>
