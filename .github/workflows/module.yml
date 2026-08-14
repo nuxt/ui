@@ -154,6 +154,7 @@ jobs:
           - portfolio
           - changelog
           - editor
+          - calendar
         include:
           # Build with vite directly since the `build` script also runs the database migrations
           - template: chat-vue
