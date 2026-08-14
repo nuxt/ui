@@ -237,11 +237,29 @@ describe('Table', () => {
     })
 
     const row = wrapper.find('tbody tr')
+    expect(row.attributes('tabindex')).toBe('0')
+    expect(row.attributes('role')).toBeUndefined()
+
     await row.trigger('keydown', { key: 'Enter' })
     expect(onSelect).toHaveBeenCalledTimes(1)
 
     await row.trigger('keydown', { key: ' ' })
     expect(onSelect).toHaveBeenCalledTimes(2)
+  })
+
+  it('does not call select on repeated keydown', async () => {
+    const onSelect = vi.fn()
+    const wrapper = await mountSuspended(Table, {
+      props: { ...props, onSelect }
+    })
+
+    const row = wrapper.find('tbody tr')
+    await row.trigger('keydown', { key: 'Enter', repeat: true })
+    await row.trigger('keydown', { key: ' ', repeat: true })
+    expect(onSelect).not.toHaveBeenCalled()
+
+    await row.trigger('keydown', { key: 'Enter' })
+    expect(onSelect).toHaveBeenCalledTimes(1)
   })
 
   it('reactive columns', async () => {

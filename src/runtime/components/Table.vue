@@ -473,7 +473,7 @@ function valueUpdater<T extends Updater<any>>(updaterOrValue: T, ref: Ref) {
 }
 
 function onRowSelect(e: Event, row: TableRow<T>) {
-  if (!props.onSelect) {
+  if (!props.onSelect || (e as KeyboardEvent).repeat) {
     return
   }
   const target = e.target as HTMLElement
