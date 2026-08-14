@@ -303,7 +303,7 @@ function resolveReplacers(componentConfig: any): any {
  * Wraps `tailwind-variants`' `tv` so slot classes can be **replaced** (not just
  * merged) through a function form — `(defaults) => classes` — in `:ui`, the
  * `class` prop and `app.config.ui`. The wrapper is transparent for every other
- * usage: it preserves the `TVReturnType` (so `extend: tv(theme)` keeps working
+ * usage: it preserves the `TVReturnType` (so `extend: theme` keeps working
  * via property reads) and only intercepts the slot functions on invocation.
  */
 export const tv = ((componentConfig?: any) => {
