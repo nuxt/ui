@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const { track } = useAnalytics()
-const { icon: iconSet, font, icons } = useTheme()
+const { icon: iconSet } = useTheme()
 
 // Toolbar skins to the applied icon pack; import/chevron reuse the standard
 // semantic keys off appConfig.ui.icons.
@@ -17,24 +17,18 @@ useThemeStudioRecorder()
 useThemeStudioViewParam()
 
 useSeoMeta({
+  titleTemplate: '%s - Nuxt UI',
   title: 'Theme Studio',
   description: 'Customize Nuxt UI live: colors, radius, fonts and icons, then export only what you changed.'
 })
 
 onMounted(() => track('Theme Studio Opened'))
 
-const iconSetItem = computed(() => icons.find(entry => entry.value === iconSet.value))
-
-// ⌃⇧D: bare Shift+D is a screen-reader landmark key, and macOS fires ⌘⇧D/⌘⇧L
-// menu bindings at the NSMenu level where pages can't block them, control
-// chords are the safe zone.
-const colorMode = useColorMode()
-
+// Color mode rides the app-wide `d` binding in app.vue, no page copy needed.
 defineShortcuts({
   meta_z: undo,
   meta_shift_z: redo,
   ctrl_y: redo,
-  ctrl_shift_d: () => (colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'),
   // Enters fullscreen and toggles back out; Esc also exits. Auto-suppressed
   // while an input is focused, so it never eats a typed 'f'.
   f: () => (fullscreen.value = !fullscreen.value)
@@ -52,14 +46,14 @@ const shareMode = ref<'import' | 'export'>('export')
 
 <template>
   <!-- page tint composites on the app root's bg-default (nuxt.config rootAttrs) -->
-  <main class="bg-elevated/25">
-    <UContainer :class="fullscreen && 'max-w-none'" class="px-0 sm:px-0 lg:px-0">
+  <main class="bg-elevated/50">
+    <UContainer :class="fullscreen && 'max-w-none px-0 sm:px-0 lg:px-0'">
       <!-- structured borders like /releases: border-x rails, no floating card -->
       <div class="flex flex-col w-full bg-default" :class="fullscreen ? 'h-dvh' : 'h-[calc(100dvh-var(--ui-header-height))] border-x border-default'">
         <!-- [contain:paint]: Chromium won't clip nested composited layers by
              an ancestor's overflow alone. Keyed on the icon pack: demo views
              resolve icons at setup, so a pack swap remounts to re-resolve. -->
-        <div :key="iconSet" class="flex-1 min-h-0 overflow-hidden [&>*]:[contain:paint]">
+        <div :key="iconSet" class="flex-1 min-h-0 overflow-hidden *:contain-[paint]">
           <Playground v-if="view === 'grid'" />
           <LazyThemeStudioViewDashboard v-else-if="view === 'dashboard'" />
           <LazyThemeStudioViewChat v-else-if="view === 'chat'" />
@@ -113,15 +107,17 @@ const shareMode = ref<'import' | 'export'>('export')
               <ThemeStudioControls group="colors" class="w-80 max-h-[70vh] overflow-y-auto" />
             </ThemeStudioToolbarPopover>
 
-            <!-- the value names the control; the popover holds the section
-                 that used to sit in the Options panel -->
-            <ThemeStudioToolbarPopover v-model:open="openPanels.font" label="Font" icon="i-lucide-type" :value="font">
-              <ThemeStudioFontOptions class="w-80 p-4" />
-            </ThemeStudioToolbarPopover>
+            <!-- the picker is already a popover, so it sits in the bar directly
+                 rather than inside a second one -->
+            <ThemeStudioToolbarField v-slot="{ tooltip }" label="Font">
+              <ThemeStudioFontOptions v-model:open="openPanels.font" :tooltip="tooltip" />
+            </ThemeStudioToolbarField>
 
-            <ThemeStudioToolbarPopover v-model:open="openPanels.icons" label="Icons" :icon="iconSetItem?.icon" :value="iconSetItem?.label">
-              <ThemeStudioIconOptions class="w-80 p-4" />
-            </ThemeStudioToolbarPopover>
+            <!-- the picker is already a popover, so it sits in the bar directly
+                 rather than inside a second one -->
+            <ThemeStudioToolbarField v-slot="{ tooltip }" label="Icons">
+              <ThemeStudioIconOptions v-model:open="openPanels.icons" :tooltip="tooltip" class="w-38" />
+            </ThemeStudioToolbarField>
 
             <ThemeStudioToolbarPopover
               v-model:open="openPanels.style"
@@ -144,7 +140,7 @@ const shareMode = ref<'import' | 'export'>('export')
 
             <!-- fullscreen hides the header, and with it the only way to
                  flip the mode a theme is being judged in -->
-            <UTooltip v-if="fullscreen" text="Color mode" :kbds="['ctrl', 'shift', 'D']">
+            <UTooltip v-if="fullscreen" text="Color mode" :kbds="['d']">
               <UColorModeButton color="neutral" variant="outline" data-keep-panels class="shrink-0" />
             </UTooltip>
 

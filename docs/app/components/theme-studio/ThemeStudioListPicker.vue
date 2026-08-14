@@ -18,8 +18,13 @@ const props = withDefaults(defineProps<{
   empty?: string
   /** Panels use the default; the toolbar matches the controls beside it. */
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+  /** For hosts that hide their own label (the toolbar outside fullscreen). */
+  tooltip?: string
+  /** Panels sit on subtle; the toolbar matches the outlined controls beside it. */
+  variant?: 'subtle' | 'outline'
 }>(), {
-  size: 'sm'
+  size: 'sm',
+  variant: 'subtle'
 })
 
 const model = defineModel<string>({ required: true })
@@ -29,23 +34,25 @@ const selected = computed(() => props.items.find(item => item.value === model.va
 </script>
 
 <template>
-  <UPopover v-model:open="open" :content="{ align: 'start' }">
-    <UButton
-      color="neutral"
-      variant="subtle"
-      :size="size"
-      block
-      :icon="icon"
-      trailing-icon="i-lucide-chevron-down"
-      :aria-label="ariaLabel"
-    >
-      <!-- The classes live on this span, not `ui.label`: UButton only applies
-           that to the span it renders for the `label` PROP, so a default-slot
-           trigger never sees it and a long name wraps instead of clipping. -->
-      <span class="flex-1 min-w-0 text-left truncate">
-        <slot name="trigger" :selected="selected">{{ selected?.label }}</slot>
-      </span>
-    </UButton>
+  <UPopover v-model:open="open" :content="{ align: 'start', onInteractOutside: keepPanels }">
+    <UTooltip :text="tooltip" :disabled="!tooltip">
+      <UButton
+        color="neutral"
+        :variant="variant"
+        :size="size"
+        block
+        :icon="icon"
+        trailing-icon="i-lucide-chevron-down"
+        :aria-label="ariaLabel"
+      >
+        <!-- The classes live on this span, not `ui.label`: UButton only applies
+             that to the span it renders for the `label` PROP, so a default-slot
+             trigger never sees it and a long name wraps instead of clipping. -->
+        <span class="flex-1 min-w-0 text-left truncate">
+          <slot name="trigger" :selected="selected">{{ selected?.label }}</slot>
+        </span>
+      </UButton>
+    </UTooltip>
 
     <template #content>
       <div class="w-72 flex flex-col">

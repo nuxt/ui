@@ -18,15 +18,21 @@ const props = withDefaults(defineProps<{
   ariaLabel?: string
   /** Panels use the default; the toolbar matches the controls beside it. */
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+  /** For hosts that hide their own label (the toolbar outside fullscreen). */
+  tooltip?: string
+  /** Panels sit on subtle; the toolbar matches the outlined controls beside it. */
+  variant?: 'subtle' | 'outline'
 }>(), {
-  size: 'sm'
+  size: 'sm',
+  variant: 'subtle'
 })
 
 const model = defineModel<string>({ required: true })
+/** Exposed so the fullscreen toolbar can pin itself while the list is open. */
+const open = defineModel<boolean>('open', { default: false })
 
 const { status, load, search } = useGoogleFonts()
 
-const open = ref(false)
 const query = ref('')
 
 // A stale query would flash old results on reopen; the catalog fetch only
@@ -72,6 +78,8 @@ const emptyLabel = computed(() => {
     :items="items"
     :icon="icon"
     :size="size"
+    :tooltip="tooltip"
+    :variant="variant"
     :aria-label="ariaLabel"
     :empty="emptyLabel"
   >
