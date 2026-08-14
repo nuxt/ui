@@ -6,6 +6,17 @@ const studioFullscreen = useState('theme-studio-fullscreen', () => false)
 const appConfig = useAppConfig()
 const { style, link, color } = useTheme()
 
+const colorMode = useColorMode()
+
+// Bare `d`, site-wide since the color mode button sits in the header on every
+// page. defineShortcuts disables single-key bindings while an input or a
+// contenteditable is focused, so it never eats a typed 'd'. Reads `.value`,
+// not `.preference`, so toggling out of `system` flips away from what's
+// currently on screen rather than to it.
+defineShortcuts({
+  d: () => (colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark')
+})
+
 const { data: navigation } = await useFetch('/api/navigation.json')
 
 useHead({
