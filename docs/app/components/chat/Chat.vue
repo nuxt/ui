@@ -14,6 +14,9 @@ const { open, messages } = useChat()
 const { open: searchOpen } = useContentSearch()
 const { framework } = useFrameworks()
 const { resetTheme, applyThemeSettings, hasCSSChanges, hasConfigChanges } = useTheme()
+// A preset is a whole ThemeDoc, so it rides applyDoc (reset, style axis, class
+// bundle) rather than the settings channel applyTheme uses.
+const { presets, applyPreset } = useThemeStudio()
 
 const hasThemeChanges = computed(() => hasCSSChanges.value || hasConfigChanges.value)
 
@@ -32,6 +35,13 @@ function processThemeToolCalls() {
       if (name === 'applyTheme' && part.input) {
         _themeApplied.add(part.toolCallId)
         applyThemeSettings(part.input as DocsChatTools['applyTheme']['input'])
+      } else if (name === 'applyPreset' && part.input) {
+        _themeApplied.add(part.toolCallId)
+        const { preset: id } = part.input as DocsChatTools['applyPreset']['input']
+        // The model picks from an enum, but a renamed preset in a stale
+        // conversation would still resolve to nothing.
+        const preset = presets.find(entry => entry.id === id)
+        if (preset) applyPreset(preset)
       } else if (name === 'resetTheme') {
         _themeApplied.add(part.toolCallId)
         resetTheme()
@@ -129,6 +139,9 @@ function getToolMessage(state: ToolState, toolName: string, input: Record<string
     'getComponentTheme': `${readVerb} ${upperName(input.componentName || '')} theme`,
     'getThemeGuide': `${readVerb} theme guide`,
     'applyTheme': `${applyVerb} theme changes`,
+    // the preset's own name, upperName is for camelCase component ids and
+    // would render 'nuxt-ui' as 'NuxtUi'
+    'applyPreset': `${applyVerb} ${presets.find(preset => preset.id === input.preset)?.name ?? input.preset} preset`,
     'resetTheme': `${state === 'output-available' ? 'Reset' : 'Resetting'} theme to defaults`
   }[toolName] || `${searchVerb} ${toolName}`
 }
@@ -154,6 +167,7 @@ function getToolIcon(part: ToolPart): string {
     'getComponentTheme': 'i-lucide-file-text',
     'getThemeGuide': 'i-lucide-palette',
     'applyTheme': 'i-lucide-palette',
+    'applyPreset': 'i-lucide-palette',
     'resetTheme': 'i-lucide-palette'
   }
 

@@ -6,6 +6,9 @@ import { z } from 'zod'
 import { tools as mcpToolDefinitions } from '#nuxt-mcp-toolkit/tools.mjs'
 import * as theme from '../../.nuxt/ui'
 import { themeIcons, cssVariableDefaults } from '../../app/utils/theme'
+// The presets file itself, not the engine barrel: its only import is a type,
+// so this costs nothing beyond the preset data.
+import { presets } from '../../app/utils/theme-engine/presets'
 
 const componentNames = Object.keys(theme)
 
@@ -114,6 +117,16 @@ const resetTheme = tool({
   description: 'Reset the theme back to defaults (primary: green, neutral: slate, radius: 0.25rem, font: Public Sans). Call this when users ask to reset, revert, or restore the default theme.',
   inputSchema: z.object({}),
   execute: async () => ({ reset: true })
+})
+
+const presetIds = presets.map(preset => preset.id) as [string, ...string[]]
+
+const applyPreset = tool({
+  description: `Apply one of the docs' built-in theme presets, whole and live. Use this ONLY when the user names a preset or asks for "the <name> look"; for any other theme request (a described aesthetic, a colour, a mood) design it yourself with \`applyTheme\` instead. A preset carries shadow, border and component-default treatments that an \`applyTheme\` payload cannot express, so never try to rebuild one by hand. You can call \`applyTheme\` afterwards to tweak a preset you just applied. Available presets: ${presets.map(preset => `${preset.id} (${preset.name}: ${preset.description})`).join('; ')}.`,
+  inputSchema: z.object({
+    preset: z.enum(presetIds).describe('Id of the preset to apply.')
+  }),
+  execute: async ({ preset }) => ({ applied: true, preset })
 })
 
 const getComponentTheme = tool({
@@ -337,6 +350,7 @@ const tools = {
   ...mcpToolsToAiTools(),
   getThemeGuide,
   applyTheme,
+  applyPreset,
   resetTheme,
   getComponentTheme
 }
@@ -352,7 +366,7 @@ The user is using **${framework === 'vue' ? 'Vue' : 'Nuxt'}**. Tailor your answe
 Guidelines:
 - For documentation questions, ALWAYS use tools to search for information. Never rely on pre-trained knowledge for Nuxt UI APIs, props, or usage.
 - For questions about how to customize themes (e.g. "how do I customize colors?", "how does theming work?"), search the documentation like any other docs question.
-- When users ask you to APPLY a theme change live (e.g. "make it blue", "create a sakura theme", "change the font"), call \`getThemeGuide\` first for detailed instructions, then use \`applyTheme\` / \`resetTheme\`. Use your own judgment on aesthetics, color theory, and design — no need to search docs for that. Be decisive: pick colors/fonts/radius confidently and apply them.
+- When users ask you to APPLY a theme change live (e.g. "make it blue", "create a sakura theme", "change the font"), call \`getThemeGuide\` first for detailed instructions, then use \`applyTheme\` / \`resetTheme\`. Use your own judgment on aesthetics, color theory, and design — no need to search docs for that. Be decisive: pick colors/fonts/radius confidently and apply them. Only when the user names one of the built-in presets, or asks for "the <name> look", use \`applyPreset\` instead: a described aesthetic is yours to design, not a preset to match.
 - If a question is unrelated to Nuxt UI (e.g. general coding, off-topic), briefly answer if you can, but don't waste tool calls searching docs for it.
 - If no relevant information is found after searching, respond with "Sorry, I couldn't find information about that in the documentation."
 - Be concise and direct in your responses.
