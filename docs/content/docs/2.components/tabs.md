@@ -62,7 +62,7 @@ props:
 
 ### Content
 
-Set the `content` prop to `false` to turn the Tabs into a toggle-only control without displaying any content. Defaults to `true`.
+Set the `content` prop to `false` to render the triggers without any panels. Defaults to `true`.
 
 ::component-code
 ---

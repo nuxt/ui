@@ -2,6 +2,9 @@
 title: Banner
 description: 'Display a banner at the top of your website to inform users about important information.'
 category: element
+keywords:
+  - announcement bar
+  - top bar
 links:
   - label: GitHub
     icon: i-simple-icons-github

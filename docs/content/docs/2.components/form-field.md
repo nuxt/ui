@@ -2,6 +2,9 @@
 title: FormField
 description: A wrapper for form elements that provides validation and error handling.
 category: form
+keywords:
+  - field wrapper
+  - form label
 links:
   - label: GitHub
     icon: i-simple-icons-github
@@ -139,7 +142,7 @@ slots:
 :u-input{placeholder="Enter your email" class="w-full"}
 ::
 
-::tip{to="/docs/getting-started/theme/design-system#colors"}
+::tip{to="/docs/getting-started/theme/design-system#color-system"}
 This sets the `color` to `error` on the form control. You can change it globally in your `app.config.ts`.
 ::
 
