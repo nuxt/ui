@@ -477,7 +477,7 @@ function onRowSelect(e: Event, row: TableRow<T>) {
     return
   }
   const target = e.target as HTMLElement
-  const isInteractive = target.closest('button') || target.closest('a')
+  const isInteractive = target.closest('a, button, input, select, textarea')
   if (isInteractive) {
     return
   }

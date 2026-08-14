@@ -262,6 +262,41 @@ describe('Table', () => {
     expect(onSelect).toHaveBeenCalledTimes(1)
   })
 
+  it('does not call select from nested controls', async () => {
+    const onSelect = vi.fn()
+    const wrapper = await mountSuspended(Table, {
+      props: {
+        ...props,
+        columns: [{
+          id: 'controls',
+          header: 'Controls',
+          cell: () => [
+            h('input', { 'type': 'checkbox', 'aria-label': 'Select row' }),
+            h('button', { type: 'button' }, 'Edit'),
+            h('a', { href: '#' }, 'Details')
+          ]
+        }] as any,
+        onSelect
+      }
+    })
+
+    const checkbox = wrapper.find<HTMLInputElement>('tbody tr input')
+    await checkbox.trigger('keydown', { key: ' ' })
+    await checkbox.trigger('click')
+    expect(checkbox.element.checked).toBe(true)
+
+    await wrapper.find('tbody tr button').trigger('keydown', { key: ' ' })
+    await wrapper.find('tbody tr button').trigger('click')
+
+    await wrapper.find('tbody tr a').trigger('keydown', { key: 'Enter' })
+    await wrapper.find('tbody tr a').trigger('click')
+
+    expect(onSelect).not.toHaveBeenCalled()
+
+    await wrapper.find('tbody tr').trigger('keydown', { key: 'Enter' })
+    expect(onSelect).toHaveBeenCalledTimes(1)
+  })
+
   it('reactive columns', async () => {
     const wrapper = await mountSuspended({
       components: { Table },
