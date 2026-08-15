@@ -1,7 +1,9 @@
 import { defu } from 'defu'
-import { themeIcons, cssVariableDefaults } from '../utils/theme'
-import { THEME_STORAGE_KEYS, THEME_STATE_KEYS } from '../utils/theme-keys'
-import { mergeUi, styleComponents } from '../utils/theme-engine'
+import { themeIcons } from '../utils/theme/icons'
+import { cssVariableDefaults } from '../utils/theme/tokens'
+import { THEME_STATE_KEYS, readStoredTheme, writeStoredTheme } from '../utils/theme/storage'
+import type { StoredTheme } from '../utils/theme/storage'
+import { mergeUi, styleComponents, DEFAULT_COLORS, THEME_DEFAULTS } from '../utils/theme/engine'
 
 export default defineNuxtPlugin({
   enforce: 'post',
@@ -9,73 +11,70 @@ export default defineNuxtPlugin({
     const appConfig = useAppConfig()
 
     if (import.meta.client) {
-      const primary = localStorage.getItem('nuxt-ui-primary')
-      if (primary) appConfig.ui.colors.primary = primary
+      const saved = readStoredTheme()
 
-      const neutral = localStorage.getItem('nuxt-ui-neutral')
-      if (neutral) appConfig.ui.colors.neutral = neutral
+      // Assign, never seed. This plugin runs before the root component's
+      // setup, but AFTER the SSR payload is hydrated, so every useState key
+      // below already holds the server's default and its initializer will
+      // not re-run. Writing the values here is what makes a saved theme
+      // survive a reload.
+      const assign = <T>(key: string, value: T | undefined) => {
+        if (value !== undefined) useState<T>(key).value = value
+      }
+      assign('nuxt-ui-radius', saved.radius)
+      assign('nuxt-ui-font-size', saved.fontSize)
+      assign('nuxt-ui-spacing', saved.spacing)
+      assign('nuxt-ui-font', saved.font)
+      assign('nuxt-ui-icons', saved.icons)
+      assign('nuxt-ui-black-as-primary', saved.blackAsPrimary)
+      assign('nuxt-ui-font-prefs', saved.fontPrefs)
+      assign('nuxt-ui-custom-colors', saved.customColors)
+      assign('nuxt-ui-css-variables', saved.cssVariables)
+      assign(THEME_STATE_KEYS.stylePrefs, saved.style)
+      assign(THEME_STATE_KEYS.paletteParams, saved.paletteParams)
+      assign(THEME_STATE_KEYS.themePreset, saved.preset)
+      if (saved.colors || saved.components) {
+        useState<Record<string, any>>('nuxt-ui-ai-theme').value = {
+          ...(saved.colors ? { colors: { ...saved.colors } } : {}),
+          ...(saved.components ? { ui: { ...saved.components } } : {})
+        }
+      }
 
-      // Deferred past hydration on purpose. Icon names compile into element
-      // CLASSES, and Vue only warns about a class that disagrees with the
-      // server, it never patches it. Assigning here (pre-hydration) makes the
-      // first client render disagree with the server's stock pack, so the
-      // saved pack was silently dropped on every reload. After hydration it's
-      // an ordinary reactive update, which does repaint. Colors don't need
-      // this: their FOUC scripts rewrite the style tags before first paint.
-      const icons = localStorage.getItem('nuxt-ui-icons')
-      const pack = icons ? themeIcons[icons as keyof typeof themeIcons] : undefined
+      // Same distribution order the per-key restores used, which carries two
+      // fixes worth keeping. Colors land now, before hydration, because their
+      // FOUC scripts already rewrote the style tags before first paint. Icons
+      // land AFTER: icon names compile into element CLASSES and Vue only warns
+      // about a class that disagrees with the server, it never patches it, so
+      // assigning pre-hydration silently dropped the saved pack every reload.
+      if (saved.primary) appConfig.ui.colors.primary = saved.primary
+      if (saved.neutral) appConfig.ui.colors.neutral = saved.neutral
+      for (const [alias, name] of Object.entries(saved.colors || {})) {
+        (appConfig.ui.colors as any)[alias] = name
+      }
+
+      const pack = saved.icons ? themeIcons[saved.icons as keyof typeof themeIcons] : undefined
       if (pack) onNuxtReady(() => (appConfig.ui.icons = pack as any))
 
-      function restoreState<T>(key: string) {
-        try {
-          const raw = localStorage.getItem(key)
-          if (raw) {
-            const state = useState<T>(key)
-            state.value = JSON.parse(raw)
+      // The class bundle is DERIVED from the style prefs, so it is rebuilt
+      // here rather than stored. A generator change therefore reaches
+      // already-saved themes instead of serving a frozen bundle.
+      const styleUi = saved.style ? styleComponents(saved.style) : {}
+      if (Object.keys(styleUi).length || saved.components) {
+        useState<Record<string, any>>('nuxt-ui-style-ui').value = styleUi
+        onNuxtReady(() => {
+          // same order as the live path: style bundle first, explicit wins
+          const merged = mergeUi(styleUi, saved.components || {})
+          for (const [key, value] of Object.entries(merged)) {
+            if (key === 'colors' || key === 'icons') continue
+            (appConfig.ui as any)[key] = defu(value as Record<string, any>, (appConfig.ui as any)[key] || {})
           }
-        } catch {
-          // ignore malformed localStorage
-        }
+        })
       }
 
-      restoreState('nuxt-ui-ai-theme')
-      restoreState('nuxt-ui-style-ui')
-      restoreState('nuxt-ui-custom-colors')
-      restoreState('nuxt-ui-css-variables')
-      restoreState('nuxt-ui-font-prefs')
-
-      // Studio prefs use useState keys that differ from their storage keys
-      // (state must be clearable by resetTheme outside the composable).
-      function restoreNamedState<T>(storageKey: string, stateKey: string) {
-        try {
-          const raw = localStorage.getItem(storageKey)
-          if (raw) {
-            useState<T>(stateKey).value = JSON.parse(raw)
-          }
-        } catch {
-          // ignore malformed localStorage
-        }
-      }
-      restoreNamedState(THEME_STORAGE_KEYS.style, THEME_STATE_KEYS.stylePrefs)
-      restoreNamedState(THEME_STORAGE_KEYS.paletteParams, THEME_STATE_KEYS.paletteParams)
-
-      // The persisted style-ui bundle is DERIVED from the style prefs,
-      // recompute it on load so fragment changes shipped in code reach
-      // already-persisted themes instead of serving a stale bundle.
-      const persisted = useState<any>(THEME_STATE_KEYS.stylePrefs)
-      if (persisted.value && Object.keys(persisted.value).length) {
-        const bundle = styleComponents(persisted.value)
-        useState<Record<string, any>>('nuxt-ui-style-ui').value = bundle
-        if (Object.keys(bundle).length) {
-          localStorage.setItem('nuxt-ui-style-ui', JSON.stringify(bundle))
-        } else {
-          localStorage.removeItem('nuxt-ui-style-ui')
-        }
-      }
-
-      // One persistent watcher keeps the shadow root flags in lockstep on
-      // every path, applyDoc (presets) bypasses setStyle, so per-call-site
-      // toggles would miss it.
+      // Keeps the shadow root flags in lockstep on every path. The FOUC
+      // script only ever ADDS them, and applyDoc (presets, undo/redo,
+      // shuffle) bypasses setStyle, so without this a flag set on load never
+      // clears and a live Shadow change never activates the ramp.
       const stylePrefs = useState<{ shadow?: string }>(THEME_STATE_KEYS.stylePrefs)
       watch(() => stylePrefs.value?.shadow, (shadow) => {
         const flags = document.documentElement.classList
@@ -83,241 +82,178 @@ export default defineNuxtPlugin({
         flags.toggle('shadow-none', shadow === 'flat')
       }, { immediate: true })
 
-      try {
-        const extras = JSON.parse(localStorage.getItem('nuxt-ui-ai-theme') || '{}')
-        if (extras.colors) {
-          for (const [key, value] of Object.entries(extras.colors)) {
-            (appConfig.ui.colors as any)[key] = value
-          }
-        }
-        const styleUi = JSON.parse(localStorage.getItem('nuxt-ui-style-ui') || '{}')
-        if (extras.ui || Object.keys(styleUi).length) {
-          onNuxtReady(() => {
-            // same order as the live path: style bundle first, extras win
-            const merged = mergeUi(styleUi, extras.ui || {})
-            for (const [key, value] of Object.entries(merged)) {
-              if (key === 'colors' || key === 'icons') continue
-              (appConfig.ui as any)[key] = defu(value as Record<string, any>, (appConfig.ui as any)[key] || {})
-            }
-          })
-        }
-      } catch {
-        // ignore malformed localStorage
-      }
+      // One watcher owns every write. Each setting used to persist itself, so
+      // a reload could restore them out of step and the derived stores needed
+      // self-heals to reconcile; one atomic write makes that impossible.
+      //
+      // Reads the raw state refs rather than `currentDoc()`: the doc is diffed
+      // against a stock library install on every call, which is far too much
+      // work for a watcher that fires on every slider frame, and calling
+      // `useTheme()` outside a component would fire its onMounted with no
+      // instance. Defaults are omitted so an untouched theme stores nothing.
+      const radius = useState<number>('nuxt-ui-radius')
+      const fontSize = useState<number>('nuxt-ui-font-size')
+      const spacing = useState<number>('nuxt-ui-spacing')
+      const font = useState<string>('nuxt-ui-font')
+      const iconSet = useState<string>('nuxt-ui-icons')
+      const blackAsPrimary = useState<boolean>('nuxt-ui-black-as-primary')
+      const fontPrefs = useState<StoredTheme['fontPrefs']>('nuxt-ui-font-prefs')
+      const style = useState<StoredTheme['style']>(THEME_STATE_KEYS.stylePrefs)
+      const paletteParams = useState<StoredTheme['paletteParams']>(THEME_STATE_KEYS.paletteParams)
+      const preset = useState<string | undefined>(THEME_STATE_KEYS.themePreset)
+      const extras = useState<Record<string, any>>('nuxt-ui-ai-theme')
+      const customColors = useState<StoredTheme['customColors']>('nuxt-ui-custom-colors')
+      const cssVariables = useState<StoredTheme['cssVariables']>('nuxt-ui-css-variables')
+
+      const filled = <T extends object>(value: T | undefined) => value && Object.keys(value).length ? value : undefined
+      const unless = <T>(value: T, fallback: T) => value === fallback ? undefined : value
+
+      watch(() => JSON.stringify({
+        primary: unless(appConfig.ui.colors.primary, DEFAULT_COLORS.primary),
+        neutral: unless(appConfig.ui.colors.neutral, DEFAULT_COLORS.neutral),
+        radius: unless(radius.value, THEME_DEFAULTS.radius),
+        fontSize: unless(fontSize.value, THEME_DEFAULTS.fontSize),
+        spacing: unless(spacing.value, THEME_DEFAULTS.spacing),
+        font: unless(font.value, THEME_DEFAULTS.font),
+        icons: unless(iconSet.value, THEME_DEFAULTS.icons),
+        blackAsPrimary: blackAsPrimary.value || undefined,
+        fontPrefs: filled(fontPrefs.value),
+        colors: filled(extras.value?.colors),
+        components: filled(extras.value?.ui),
+        customColors: filled(customColors.value),
+        cssVariables: filled(cssVariables.value?.light) || filled(cssVariables.value?.dark) ? cssVariables.value : undefined,
+        style: filled(style.value),
+        paletteParams: filled(paletteParams.value),
+        preset: preset.value
+      } satisfies StoredTheme), json => writeStoredTheme(JSON.parse(json)), { flush: 'post' })
     }
 
     if (import.meta.server) {
-      // FOUC scripts: intentionally duplicate useTheme's logic to restore
-      // persisted settings on first paint, targeting the same <style> ids.
+      // One FOUC script over the one storage key. Every setting used to ship
+      // its own inline script re-reading its own key, eight of them, each
+      // duplicating a slice of useTheme's reactive style tags. This still
+      // duplicates the derivations (it has to run before paint, before any
+      // Vue code exists) but it parses once and writes every tag in order.
       useHead({
         script: [{
           innerHTML: `
             (function() {
-              var primaryColor = localStorage.getItem('nuxt-ui-primary');
-              var neutralColor = localStorage.getItem('nuxt-ui-neutral');
-              if (!primaryColor && !neutralColor) return;
-              function swapColors(el) {
-                var html = el.innerHTML;
-                if (primaryColor && primaryColor !== 'black') {
-                  html = html.replace(
-                    /(--ui-color-primary-\\d{2,3}:\\s*var\\(--color-)${appConfig.ui.colors.primary}(-\\d{2,3}.*?\\))/g,
-                    \`$1\${primaryColor}$2\`
-                  );
-                }
-                if (neutralColor) {
-                  html = html.replace(
-                    /(--ui-color-neutral-\\d{2,3}:\\s*var\\(--color-)${appConfig.ui.colors.neutral}(-\\d{2,3}.*?\\))/g,
-                    \`$1\${neutralColor === 'neutral' ? 'old-neutral' : neutralColor}$2\`
-                  );
-                }
-                el.innerHTML = html;
-              }
-              var colorsEl = document.querySelector('style#nuxt-ui-colors');
-              if (colorsEl) {
-                swapColors(colorsEl);
-              } else {
-                var obs = new MutationObserver(function(mutations) {
-                  for (var i = 0; i < mutations.length; i++) {
-                    for (var j = 0; j < mutations[i].addedNodes.length; j++) {
-                      var node = mutations[i].addedNodes[j];
-                      if (node.id === 'nuxt-ui-colors') {
-                        swapColors(node);
-                        obs.disconnect();
-                        return;
+              var T = {};
+              try { T = JSON.parse(localStorage.getItem('nuxt-ui-theme') || '{}') || {}; } catch (e) { return; }
+              var SAFE = /^[\\w -]{1,50}$/;
+              function num(v, lo, hi) { var n = parseFloat(v); return isFinite(n) ? Math.min(hi, Math.max(lo, n)) : undefined; }
+              function set(id, css) { var el = document.getElementById(id); if (el) { el.textContent = css; } }
+
+              var primaryColor = T.primary;
+              var neutralColor = T.neutral;
+              if (primaryColor || neutralColor) {
+                var swapColors = function(el) {
+                  var html = el.innerHTML;
+                  if (primaryColor && primaryColor !== 'black') {
+                    html = html.replace(/(--ui-color-primary-\\d{2,3}:\\s*var\\(--color-)${appConfig.ui.colors.primary}(-\\d{2,3}.*?\\))/g, '$1' + primaryColor + '$2');
+                  }
+                  if (neutralColor) {
+                    html = html.replace(/(--ui-color-neutral-\\d{2,3}:\\s*var\\(--color-)${appConfig.ui.colors.neutral}(-\\d{2,3}.*?\\))/g, '$1' + (neutralColor === 'neutral' ? 'old-neutral' : neutralColor) + '$2');
+                  }
+                  el.innerHTML = html;
+                };
+                var colorsEl = document.querySelector('style#nuxt-ui-colors');
+                if (colorsEl) { swapColors(colorsEl); }
+                else {
+                  var obs = new MutationObserver(function(mutations) {
+                    for (var i = 0; i < mutations.length; i++) {
+                      for (var j = 0; j < mutations[i].addedNodes.length; j++) {
+                        var node = mutations[i].addedNodes[j];
+                        if (node.id === 'nuxt-ui-colors') { swapColors(node); obs.disconnect(); return; }
                       }
                     }
-                  }
-                });
-                obs.observe(document.head, { childList: true });
+                  });
+                  obs.observe(document.head, { childList: true });
+                }
               }
-            })();
-            `.replace(/\s+/g, ' '),
-          type: 'text/javascript',
-          tagPriority: -1
-        }, {
-          innerHTML: `
-            var rRaw = localStorage.getItem('nuxt-ui-radius');
-            if (rRaw) {
-              var rNum = parseFloat(rRaw);
-              if (isFinite(rNum) && rNum >= 0) {
-                var el = document.querySelector('style#nuxt-ui-radius');
-                if (el) { el.textContent = ':root { --ui-radius: ' + rNum + 'rem; }'; }
+
+              var radius = num(T.radius, 0, 4);
+              if (radius !== undefined) { set('nuxt-ui-radius', ':root { --ui-radius: ' + radius + 'rem; }'); }
+
+              var fontSize = num(T.fontSize, 12, 20);
+              if (fontSize !== undefined && fontSize !== 16) { set('nuxt-ui-font-size', 'html { font-size: ' + fontSize + 'px; }'); }
+
+              var spacing = num(T.spacing, 0.125, 0.5);
+              if (spacing !== undefined && spacing !== 0.25) { set('nuxt-ui-spacing', ':root { --spacing: ' + spacing + 'rem; }'); }
+
+              set('nuxt-ui-black-as-primary', T.blackAsPrimary ? ':root { --ui-primary: black; } .dark { --ui-primary: white; }' : '');
+
+              var shadow = T.style && T.style.shadow;
+              if (shadow === 'custom') { document.documentElement.classList.add('shadow-custom'); }
+              else if (shadow === 'flat') { document.documentElement.classList.add('shadow-none'); }
+
+              var fontRaw = T.font || 'Public Sans';
+              var font = SAFE.test(fontRaw) ? fontRaw : 'Public Sans';
+              var prefs = T.fontPrefs || {};
+              var css = ':root { --font-sans: \\'' + font + '\\', sans-serif; }';
+              var w = prefs.weights || {};
+              var wVars = Object.keys(w).map(function(step) { var n = num(w[step], 100, 900); return (SAFE.test(step) && n !== undefined) ? '--font-weight-' + step + ': ' + n + ';' : ''; }).filter(Boolean).join(' ');
+              if (wVars) { css += ' :root { ' + wVars + ' }'; }
+              var bodyRules = '';
+              var wn = num(w.normal, 100, 900);
+              if (wn !== undefined) { bodyRules += 'font-weight: ' + wn + '; '; }
+              if (prefs.uppercase) { bodyRules += 'text-transform: uppercase; '; }
+              if (prefs.italic) { bodyRules += 'font-style: italic; '; }
+              var ls = num(prefs.letterSpacing, -0.2, 1);
+              if (ls !== undefined && ls !== 0) { bodyRules += 'letter-spacing: ' + ls + 'em; '; }
+              var lh = num(prefs.lineHeight, 0.8, 3);
+              if (lh !== undefined) { bodyRules += 'line-height: ' + lh + '; '; }
+              if (bodyRules) { css += ' body { ' + bodyRules + '}'; }
+              var h = prefs.heading || {};
+              var hFont = (h.font && SAFE.test(h.font)) ? h.font : undefined;
+              var hWeight = num(h.weight, 100, 900);
+              var hLs = num(h.letterSpacing, -0.2, 1);
+              var hLh = num(h.lineHeight, 0.8, 3);
+              if (hFont || hWeight !== undefined || h.uppercase || h.italic || h.underline || (hLs !== undefined && hLs !== 0) || hLh !== undefined) {
+                var rules = '';
+                if (hFont) { rules += 'font-family: \\'' + hFont + '\\', sans-serif; '; }
+                if (hWeight !== undefined) { rules += 'font-weight: ' + hWeight + '; '; }
+                if (h.uppercase) { rules += 'text-transform: uppercase; '; }
+                if (h.italic) { rules += 'font-style: italic; '; }
+                if (h.underline) { rules += 'text-decoration: underline; '; }
+                if (hLs !== undefined && hLs !== 0) { rules += 'letter-spacing: ' + hLs + 'em; '; }
+                if (hLh !== undefined) { rules += 'line-height: ' + hLh + '; '; }
+                css += ' h1, h2, h3, h4, h5, h6 { ' + rules + '}';
               }
-            }
-          `.replace(/\s+/g, ' '),
-          type: 'text/javascript',
-          tagPriority: -1
-        }, {
-          innerHTML: `
-            var fsRaw = localStorage.getItem('nuxt-ui-font-size');
-            if (fsRaw && fsRaw !== '16') {
-              var fsNum = parseFloat(fsRaw);
-              if (isFinite(fsNum)) {
-                fsNum = Math.min(20, Math.max(12, fsNum));
-                var fsEl = document.querySelector('style#nuxt-ui-font-size');
-                if (fsEl) { fsEl.textContent = 'html { font-size: ' + fsNum + 'px; }'; }
+              if (T.font || Object.keys(prefs).length) { set('nuxt-ui-font', css); }
+              [font, hFont].forEach(function(name) {
+                if (!name || name === 'Public Sans') return;
+                var id = 'font-' + name.toLowerCase().replace(/\\s+/g, '-');
+                if (document.getElementById(id)) return;
+                var lnk = document.createElement('link');
+                lnk.rel = 'stylesheet';
+                lnk.href = 'https://fonts.googleapis.com/css2?family=' + encodeURIComponent(name) + ':wght@300;400;500;600;700;800&display=swap';
+                lnk.id = id;
+                document.head.appendChild(lnk);
+              });
+
+              var custom = T.customColors;
+              if (custom) {
+                var vars = [];
+                for (var name in custom) {
+                  for (var shade in custom[name]) { vars.push('--color-' + name + '-' + shade + ': ' + custom[name][shade] + ';'); }
+                }
+                if (vars.length) { set('nuxt-ui-custom-colors', ':root { ' + vars.join(' ') + ' }'); }
               }
-            }
-            var spRaw = localStorage.getItem('nuxt-ui-spacing');
-            if (spRaw && spRaw !== '0.25') {
-              var spNum = parseFloat(spRaw);
-              if (isFinite(spNum)) {
-                spNum = Math.min(0.5, Math.max(0.125, spNum));
-                var spEl = document.querySelector('style#nuxt-ui-spacing');
-                if (spEl) { spEl.textContent = ':root { --spacing: ' + spNum + 'rem; }'; }
-              }
-            }
-          `.replace(/\s+/g, ' '),
-          type: 'text/javascript',
-          tagPriority: -1
-        }, {
-          innerHTML: `
-            try {
-              var st = JSON.parse(localStorage.getItem('nuxt-ui-style') || '{}');
-              var sh = st && st.shadow;
-              if (sh === 'custom') document.documentElement.classList.add('shadow-custom');
-              else if (sh === 'flat') document.documentElement.classList.add('shadow-none');
-            } catch (e) {}
-          `.replace(/\s+/g, ' '),
-          type: 'text/javascript',
-          tagPriority: -1
-        }, {
-          innerHTML: `
-            var bapEl = document.querySelector('style#nuxt-ui-black-as-primary');
-            if (bapEl) {
-              if (localStorage.getItem('nuxt-ui-black-as-primary') === 'true') {
-                bapEl.innerHTML = ':root { --ui-primary: black; } .dark { --ui-primary: white; }';
-              } else {
-                bapEl.innerHTML = '';
-              }
-            }
-          `.replace(/\s+/g, ' '),
-          type: 'text/javascript',
-          tagPriority: -1
-        }, {
-          innerHTML: [
-            `(function() {`,
-            `var SAFE = /^[\\w -]{1,50}$/;`,
-            `function num(v, lo, hi) { var n = parseFloat(v); return isFinite(n) ? Math.min(hi, Math.max(lo, n)) : undefined; }`,
-            `var fontRaw = localStorage.getItem('nuxt-ui-font') || 'Public Sans';`,
-            `var font = SAFE.test(fontRaw) ? fontRaw : 'Public Sans';`,
-            `var prefs = {};`,
-            `try { prefs = JSON.parse(localStorage.getItem('nuxt-ui-font-prefs') || '{}'); } catch(e) {}`,
-            `var css = ':root { --font-sans: \\'' + font + '\\', sans-serif; }';`,
-            `var w = prefs.weights || {};`,
-            `var wVars = Object.keys(w).map(function(s) { var n = num(w[s], 100, 900); return (SAFE.test(s) && n !== undefined) ? '--font-weight-' + s + ': ' + n + ';' : ''; }).filter(Boolean).join(' ');`,
-            `if (wVars) { css += ' :root { ' + wVars + ' }'; }`,
-            `var bodyRules = '';`,
-            `var wn = num(w.normal, 100, 900);`,
-            `if (wn !== undefined) { bodyRules += 'font-weight: ' + wn + '; '; }`,
-            `if (prefs.uppercase) { bodyRules += 'text-transform: uppercase; '; }`,
-            `if (prefs.italic) { bodyRules += 'font-style: italic; '; }`,
-            `var ls = num(prefs.letterSpacing, -0.2, 1);`,
-            `if (ls !== undefined && ls !== 0) { bodyRules += 'letter-spacing: ' + ls + 'em; '; }`,
-            `var lh = num(prefs.lineHeight, 0.8, 3);`,
-            `if (lh !== undefined) { bodyRules += 'line-height: ' + lh + '; '; }`,
-            `if (bodyRules) { css += ' body { ' + bodyRules + '}'; }`,
-            `var h = prefs.heading || {};`,
-            `var hFont = (h.font && SAFE.test(h.font)) ? h.font : undefined;`,
-            `var hWeight = num(h.weight, 100, 900);`,
-            `var hLs = num(h.letterSpacing, -0.2, 1);`,
-            `var hLh = num(h.lineHeight, 0.8, 3);`,
-            `if (hFont || hWeight !== undefined || h.uppercase || h.italic || h.underline || (hLs !== undefined && hLs !== 0) || hLh !== undefined) {`,
-            `var rules = '';`,
-            `if (hFont) { rules += 'font-family: \\'' + hFont + '\\', sans-serif; '; }`,
-            `if (hWeight !== undefined) { rules += 'font-weight: ' + hWeight + '; '; }`,
-            `if (h.uppercase) { rules += 'text-transform: uppercase; '; }`,
-            `if (h.italic) { rules += 'font-style: italic; '; }`,
-            `if (h.underline) { rules += 'text-decoration: underline; '; }`,
-            `if (hLs !== undefined && hLs !== 0) { rules += 'letter-spacing: ' + hLs + 'em; '; }`,
-            `if (hLh !== undefined) { rules += 'line-height: ' + hLh + '; '; }`,
-            `css += ' h1, h2, h3, h4, h5, h6 { ' + rules + '}';`,
-            `}`,
-            `if (localStorage.getItem('nuxt-ui-font') || Object.keys(prefs).length) {`,
-            `var fontEl = document.querySelector('style#nuxt-ui-font');`,
-            `if (fontEl) { fontEl.textContent = css; }`,
-            `}`,
-            `[font, hFont].forEach(function(name) {`,
-            `if (!name || name === 'Public Sans') return;`,
-            `var id = 'font-' + name.toLowerCase().replace(/\\s+/g, '-');`,
-            `if (document.getElementById(id)) return;`,
-            `var lnk = document.createElement('link');`,
-            `lnk.rel = 'stylesheet';`,
-            `lnk.href = 'https://fonts.googleapis.com/css2?family=' + encodeURIComponent(name) + ':wght@300;400;500;600;700;800&display=swap';`,
-            `lnk.id = id;`,
-            `document.head.appendChild(lnk);`,
-            `});`,
-            `})();`
-          ].join(' ')
-        }, {
-          innerHTML: `
-            (function() {
-              var raw = localStorage.getItem('nuxt-ui-custom-colors');
-              if (raw) {
-                try {
-                  var colors = JSON.parse(raw);
-                  var vars = [];
-                  for (var name in colors) {
-                    for (var shade in colors[name]) {
-                      vars.push('--color-' + name + '-' + shade + ': ' + colors[name][shade] + ';');
-                    }
-                  }
-                  if (vars.length) {
-                    var el = document.getElementById('nuxt-ui-custom-colors');
-                    if (el) { el.textContent = ':root { ' + vars.join(' ') + ' }'; }
-                  }
-                } catch(e) {}
-              }
-            })();
-          `.replace(/\s+/g, ' '),
-          type: 'text/javascript',
-          tagPriority: -1
-        }, {
-          innerHTML: `
-            (function() {
-              var raw = localStorage.getItem('nuxt-ui-css-variables');
-              if (raw) {
-                try {
-                  var cssVars = JSON.parse(raw);
-                  var defaults = ${JSON.stringify(cssVariableDefaults)};
-                  function merge(defs, overrides) {
-                    var result = [];
-                    for (var key in defs) { result.push(key + ': ' + (overrides[key] || defs[key]) + ';'); }
-                    for (var key in overrides) { if (!defs[key]) result.push(key + ': ' + overrides[key] + ';'); }
-                    return result;
-                  }
-                  var parts = [];
-                  if (cssVars.light && Object.keys(cssVars.light).length) {
-                    parts.push('.light { ' + merge(defaults.light, cssVars.light).join(' ') + ' }');
-                  }
-                  if (cssVars.dark && Object.keys(cssVars.dark).length) {
-                    parts.push('.dark { ' + merge(defaults.dark, cssVars.dark).join(' ') + ' }');
-                  }
-                  if (parts.length) {
-                    var el = document.getElementById('nuxt-ui-css-variables');
-                    if (el) { el.textContent = parts.join(' '); }
-                  }
-                } catch(e) {}
+
+              var cssVars = T.cssVariables;
+              if (cssVars) {
+                var defaults = ${JSON.stringify(cssVariableDefaults)};
+                var merge = function(defs, overrides) {
+                  var result = [];
+                  for (var key in defs) { result.push(key + ': ' + (overrides[key] || defs[key]) + ';'); }
+                  for (var key2 in overrides) { if (!defs[key2]) result.push(key2 + ': ' + overrides[key2] + ';'); }
+                  return result;
+                };
+                var parts = [];
+                if (cssVars.light && Object.keys(cssVars.light).length) { parts.push('.light { ' + merge(defaults.light, cssVars.light).join(' ') + ' }'); }
+                if (cssVars.dark && Object.keys(cssVars.dark).length) { parts.push('.dark { ' + merge(defaults.dark, cssVars.dark).join(' ') + ' }'); }
+                if (parts.length) { set('nuxt-ui-css-variables', parts.join(' ')); }
               }
             })();
           `.replace(/\s+/g, ' '),

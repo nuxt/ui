@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { ColorAlias } from '../../utils/theme-engine'
-import { paletteLabel } from '../../utils/theme'
+import type { ColorAlias } from '../../utils/theme/engine'
+import { paletteLabel } from '../../utils/theme/studio'
 
 /**
  * The shared color picker: a swatch-labelled trigger opening the palette

@@ -5,7 +5,7 @@
  * the axes) lives in the studio. The header drops this on /theme, where the
  * studio's own toolbar covers it.
  */
-import { themeSwatchStyle } from '../../utils/theme-section'
+import { themeSwatchStyle, keepPanels } from '../../utils/theme/studio'
 
 const { track } = useAnalytics()
 const studioIcons = useStudioIcons()

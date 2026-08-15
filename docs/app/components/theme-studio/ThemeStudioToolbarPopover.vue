@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { keepPanels } from '../../utils/theme/studio'
 /**
  * A labelled toolbar button opening its panel. The trigger reports the value
  * it holds, and a chip when that value has drifted from the preset.

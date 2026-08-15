@@ -1,4 +1,4 @@
-import type { ThemeDoc, StoredPaletteParams } from '../utils/theme-engine'
+import type { ThemeDoc, StoredPaletteParams } from '../utils/theme/engine'
 
 /**
  * One undo/redo step. The exported `doc` carries colours, style and the

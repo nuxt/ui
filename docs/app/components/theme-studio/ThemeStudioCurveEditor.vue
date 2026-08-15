@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { sampleCurve, SHADES, shadeX, parseColor, oklchToRgb } from '../../utils/theme-engine'
-import type { ChannelCurve } from '../../utils/theme-engine'
+import { sampleCurve, SHADES, shadeX, parseColor, oklchToRgb } from '../../utils/theme/engine'
+import type { ChannelCurve } from '../../utils/theme/engine'
 
 const props = defineProps<{
   /** Channel name, for the handles' accessible labels. */

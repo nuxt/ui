@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { parseCssColor } from '../../docs/app/utils/theme-engine'
+import { parseCssColor } from '../../docs/app/utils/theme/engine'
 import colors from 'tailwindcss/colors'
 
 describe('parseCssColor', () => {

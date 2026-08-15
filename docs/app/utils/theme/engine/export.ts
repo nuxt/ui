@@ -1,4 +1,4 @@
-import { themeIcons } from '../theme'
+import { themeIcons } from '../icons'
 import type { ThemeDoc } from './types'
 import { DEFAULT_COLORS, THEME_DEFAULTS } from './types'
 import { styleComponents, styleTokens, mergeUi, BORDER_WIDTH_DEFAULT } from './styles'

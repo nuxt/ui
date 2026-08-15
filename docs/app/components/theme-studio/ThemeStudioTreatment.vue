@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { SectionKey } from '../../utils/theme-engine'
+import type { SectionKey } from '../../utils/theme/engine'
 import type { ShadeSlider } from './ThemeStudioShadeGroup.vue'
 import type { DefaultSelectItem } from './ThemeStudioDefaultSelect.vue'
 

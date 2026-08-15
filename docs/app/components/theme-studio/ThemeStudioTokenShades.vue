@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { TOKEN_GROUPS } from '../../utils/theme-engine'
-import type { ColorAlias, TokenGroup } from '../../utils/theme-engine'
+import { TOKEN_GROUPS } from '../../utils/theme/engine'
+import type { ColorAlias, TokenGroup } from '../../utils/theme/engine'
 
 /**
  * Per-mode shade rows for one ramp's semantic tokens. Shared by the Colors

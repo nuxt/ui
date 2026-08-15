@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { FONT_WEIGHT_DEFAULTS } from '../../utils/theme'
+import { FONT_WEIGHT_DEFAULTS, loadFontPreviews } from '../../utils/theme/studio'
 
 /**
- * The font control: the family select itself, not a panel, with the type
- * modifiers (weights, case, tracking, leading) beside it. The picker is
+ * The font control: the family select joined to a single dropdown holding
+ * the type modifiers (case, tracking, leading, weights). The picker is
  * already a popover, so wrapping it in another one to hold a select was a
  * popover inside a popover.
  *
@@ -48,10 +48,15 @@ const lineHeight = computed({
   get: () => fontPrefs.value.lineHeight ?? 1.5,
   set: (value: number) => setFontPrefs({ ...fontPrefs.value, lineHeight: value })
 })
+
+// One trigger for four controls, so it has to carry their combined state.
+const modified = computed(() => weightsActive.value || uppercase.value || letterSpacing.value !== 0 || lineHeight.value !== 1.5)
 </script>
 
 <template>
-  <div class="flex items-center gap-1.5">
+  <!-- the select and the modifiers read as one control, so they share a
+       field group rather than sitting apart -->
+  <UFieldGroup>
     <!-- each family renders itself over a live specimen line;
          searching reaches the full Google Fonts catalog -->
     <ThemeStudioFontPicker
@@ -66,63 +71,27 @@ const lineHeight = computed({
       class="w-38"
     />
 
-    <UFieldGroup>
-      <UPopover :content="{ align: 'start' }">
-        <UTooltip text="Weights">
-          <UButton
-            icon="i-lucide-bold"
-            color="neutral"
-            variant="outline"
-            :active="weightsActive"
-            active-color="primary"
-            active-variant="subtle"
-            aria-label="Font weights"
-          />
-        </UTooltip>
-
-        <template #content>
-          <div class="w-64 p-3 flex flex-col gap-1.5">
-            <ThemeStudioRow
-              v-for="weight in weights"
-              :key="weight.label"
-              v-model="weight.model.value"
-              control="slider"
-              :label="weight.label"
-              :min="weight.min"
-              :max="weight.max"
-              :step="25"
-            />
-          </div>
-        </template>
-      </UPopover>
-
-      <UTooltip text="Uppercase">
+    <UPopover :content="{ align: 'end' }">
+      <UTooltip text="Type options">
         <UButton
-          icon="i-lucide-case-upper"
+          icon="i-lucide-a-large-small"
           color="neutral"
           variant="outline"
-          :active="uppercase"
+          :active="modified"
           active-color="primary"
           active-variant="subtle"
-          aria-label="Uppercase text"
-          @click="uppercase = !uppercase"
+          aria-label="Type options"
         />
       </UTooltip>
 
-      <UPopover :content="{ align: 'start' }">
-        <UTooltip text="Letter spacing">
-          <UButton
-            icon="i-lucide-move-horizontal"
-            color="neutral"
-            variant="outline"
-            :active="letterSpacing !== 0"
-            active-color="primary"
-            active-variant="subtle"
-            aria-label="Letter spacing"
+      <template #content>
+        <div class="w-64 p-3 flex flex-col gap-1.5">
+          <ThemeStudioRow
+            v-model="uppercase"
+            control="switch"
+            label="Uppercase"
           />
-        </UTooltip>
 
-        <template #content>
           <ThemeStudioRow
             v-model="letterSpacing"
             control="slider"
@@ -131,25 +100,8 @@ const lineHeight = computed({
             :max="0.25"
             :step="0.005"
             unit="em"
-            class="w-64 p-3"
           />
-        </template>
-      </UPopover>
 
-      <UPopover :content="{ align: 'start' }">
-        <UTooltip text="Line height">
-          <UButton
-            icon="i-lucide-move-vertical"
-            color="neutral"
-            variant="outline"
-            :active="lineHeight !== 1.5"
-            active-color="primary"
-            active-variant="subtle"
-            aria-label="Line height"
-          />
-        </UTooltip>
-
-        <template #content>
           <ThemeStudioRow
             v-model="lineHeight"
             control="slider"
@@ -157,10 +109,22 @@ const lineHeight = computed({
             :min="1"
             :max="2"
             :step="0.05"
-            class="w-64 p-3"
           />
-        </template>
-      </UPopover>
-    </UFieldGroup>
-  </div>
+
+          <USeparator class="my-1" />
+
+          <ThemeStudioRow
+            v-for="weight in weights"
+            :key="weight.label"
+            v-model="weight.model.value"
+            control="slider"
+            :label="weight.label"
+            :min="weight.min"
+            :max="weight.max"
+            :step="25"
+          />
+        </div>
+      </template>
+    </UPopover>
+  </UFieldGroup>
 </template>

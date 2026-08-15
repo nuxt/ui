@@ -1,55 +1,4 @@
-import lucide from '../../../src/theme/icons'
-
-/** Parse a persisted JSON value, falling back on SSR, absence or corruption. */
-export function readLocalStorage<T>(key: string, fallback: T): T {
-  if (!import.meta.client) return fallback
-  try {
-    const raw = window.localStorage.getItem(key)
-    return raw ? JSON.parse(raw) : fallback
-  } catch {
-    return fallback
-  }
-}
-
-/** Uppercase the first letter, labels from config values. */
-export function capitalize(value: string) {
-  return value.charAt(0).toUpperCase() + value.slice(1)
-}
-
-/** Tailwind's stock weight ladder, set steps are absences at these values. */
-export const FONT_WEIGHT_DEFAULTS = { normal: 400, medium: 500, semibold: 600, bold: 700 } as const
-
-// Families whose preview faces are already requested, Public Sans is
-// bundled. Module-level so the controls, the preset menu and every search
-// batch share one ledger and no family is fetched twice.
-const loadedFontPreviews = new Set<string>(['Public Sans'])
-
-/**
- * Load the listed families (Google Fonts, 400/700 only) so pickers can
- * render themselves in the faces they offer. Incremental: each call adds
- * one stylesheet covering only the families not yet requested, the font
- * search feeds result batches through here as the user types.
- */
-export function loadFontPreviews(fonts: readonly string[]) {
-  if (!import.meta.client) return
-  const families = fonts.filter(name => !loadedFontPreviews.has(name))
-  if (!families.length) return
-  families.forEach(name => loadedFontPreviews.add(name))
-  const link = document.createElement('link')
-  link.rel = 'stylesheet'
-  link.href = `https://fonts.googleapis.com/css2?${families.map(name => `family=${encodeURIComponent(name)}:wght@400;700`).join('&')}&display=swap`
-  document.head.appendChild(link)
-}
-
-/**
- * interact-outside handler: clicks on studio chrome marked data-keep-panels
- * (the color-mode switch) must not dismiss an open panel.
- */
-export function keepPanels(event: Event) {
-  if ((event.target as HTMLElement | null)?.closest?.('[data-keep-panels]')) {
-    event.preventDefault()
-  }
-}
+import lucide from '../../../../src/theme/icons'
 
 // Picking a set replaces appConfig.ui.icons wholesale, so every set must
 // map the full key list from src/theme/icons, a missing key would blank
@@ -433,11 +382,6 @@ export const themeIcons = {
 
 export type ThemeIcons = keyof typeof themeIcons
 
-/** Palette names are ids, hyphens are word breaks, not part of the name. */
-export function paletteLabel(name: string): string {
-  return name.replace(/-/g, ' ')
-}
-
 /**
  * A short strip of a set's own glyphs, for previewing it in a picker row,
  * these eight differ enough between packs to tell them apart at a glance.
@@ -614,44 +558,3 @@ export const studioExtraOverrides: Partial<Record<ThemeIcons, Partial<Record<key
     redo: 'i-pixelarticons-redo'
   }
 }
-
-// The docs' own render baseline. It intentionally diverges from the library
-// defaults in one place: light `--ui-bg` follows the neutral ramp (set in
-// main.css) so tinted neutrals reach the page background. Export diffing
-// uses the engine's LIBRARY_TOKEN_DEFAULTS instead.
-export const cssVariableDefaults = {
-  light: {
-    '--ui-text-dimmed': 'var(--ui-color-neutral-400)',
-    '--ui-text-muted': 'var(--ui-color-neutral-500)',
-    '--ui-text-toned': 'var(--ui-color-neutral-600)',
-    '--ui-text': 'var(--ui-color-neutral-700)',
-    '--ui-text-highlighted': 'var(--ui-color-neutral-900)',
-    '--ui-text-inverted': 'white',
-    '--ui-bg': 'var(--ui-color-neutral-50)',
-    '--ui-bg-muted': 'var(--ui-color-neutral-50)',
-    '--ui-bg-elevated': 'var(--ui-color-neutral-100)',
-    '--ui-bg-accented': 'var(--ui-color-neutral-200)',
-    '--ui-bg-inverted': 'var(--ui-color-neutral-900)',
-    '--ui-border': 'var(--ui-color-neutral-200)',
-    '--ui-border-muted': 'var(--ui-color-neutral-200)',
-    '--ui-border-accented': 'var(--ui-color-neutral-300)',
-    '--ui-border-inverted': 'var(--ui-color-neutral-900)'
-  },
-  dark: {
-    '--ui-text-dimmed': 'var(--ui-color-neutral-500)',
-    '--ui-text-muted': 'var(--ui-color-neutral-400)',
-    '--ui-text-toned': 'var(--ui-color-neutral-300)',
-    '--ui-text': 'var(--ui-color-neutral-200)',
-    '--ui-text-highlighted': 'white',
-    '--ui-text-inverted': 'var(--ui-color-neutral-900)',
-    '--ui-bg': 'var(--ui-color-neutral-900)',
-    '--ui-bg-muted': 'var(--ui-color-neutral-800)',
-    '--ui-bg-elevated': 'var(--ui-color-neutral-800)',
-    '--ui-bg-accented': 'var(--ui-color-neutral-700)',
-    '--ui-bg-inverted': 'white',
-    '--ui-border': 'var(--ui-color-neutral-800)',
-    '--ui-border-muted': 'var(--ui-color-neutral-700)',
-    '--ui-border-accented': 'var(--ui-color-neutral-700)',
-    '--ui-border-inverted': 'white'
-  }
-} as const

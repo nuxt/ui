@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { ColorAlias } from '../../utils/theme-engine'
+import type { ColorAlias } from '../../utils/theme/engine'
 
 const semanticAliases: ColorAlias[] = ['secondary', 'success', 'info', 'warning', 'error']
 </script>

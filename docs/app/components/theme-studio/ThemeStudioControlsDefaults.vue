@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { VariantGroup } from '../../utils/theme-engine'
+import type { VariantGroup } from '../../utils/theme/engine'
 
 /**
  * The variant and colour Buttons, Cards and Inputs start from. One fold over

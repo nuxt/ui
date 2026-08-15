@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { SHADE_LADDER, SHADOW_SHADE_DEFAULTS, BORDER_WIDTH_DEFAULT, SHADOW_GEOMETRY_DEFAULTS, INNER_SHADOW_GEOMETRY_DEFAULTS } from '../../utils/theme-engine'
-import type { ShadeStop } from '../../utils/theme-engine'
+import { SHADE_LADDER, SHADOW_SHADE_DEFAULTS, BORDER_WIDTH_DEFAULT, SHADOW_GEOMETRY_DEFAULTS, INNER_SHADOW_GEOMETRY_DEFAULTS } from '../../utils/theme/engine'
+import type { ShadeStop } from '../../utils/theme/engine'
 
 const { style, setStyle, baselineDoc, primaryChip, neutralChip } = useThemeStudio()
 

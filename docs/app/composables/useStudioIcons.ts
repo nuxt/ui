@@ -1,5 +1,5 @@
 import { toReactive } from '@vueuse/core'
-import { studioIcons, STUDIO_EXTRA_DEFAULTS, studioExtraOverrides } from '../utils/theme'
+import { studioIcons, STUDIO_EXTRA_DEFAULTS, studioExtraOverrides } from '../utils/theme/icons'
 
 /**
  * The studio-chrome glyphs (toolbar controls, Ask-AI, theme picker) for the

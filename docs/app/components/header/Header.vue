@@ -55,7 +55,7 @@ const viewListOpen = ref(false)
         />
       </UTooltip>
 
-      <ThemeStudioPicker />
+      <ThemeStudioPicker v-if="!isStudio" />
 
       <!-- data-keep-panels: flipping the mode is how you check a theme in
            both, so it must not dismiss the open theme popover beside it -->

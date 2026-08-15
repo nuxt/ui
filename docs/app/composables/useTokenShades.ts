@@ -1,5 +1,5 @@
-import { TOKEN_SHADE_TARGETS, SHADE_LADDER, SHADE_LADDERS, storedStopStep, canonicalTokenShades } from '../utils/theme-engine'
-import type { ColorAlias, ShadeStop } from '../utils/theme-engine'
+import { TOKEN_SHADE_TARGETS, SHADE_LADDER, SHADE_LADDERS, storedStopStep, canonicalTokenShades } from '../utils/theme/engine'
+import type { ColorAlias, ShadeStop } from '../utils/theme/engine'
 
 /**
  * Per-mode shade sliders for the semantic tokens riding one ramp, the accent

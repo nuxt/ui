@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import type { ThemeDoc } from '../../utils/theme-engine'
-import { themeIcons } from '../../utils/theme'
-import { themeChipStyle } from '../../utils/theme-section'
+import type { ThemeDoc } from '../../utils/theme/engine'
+import { themeIcons } from '../../utils/theme/icons'
+import { themeChipStyle, keepPanels, loadFontPreviews } from '../../utils/theme/studio'
 
 /** The presets trigger and its listbox: the label names the applied preset. */
 defineProps<{

@@ -1,5 +1,5 @@
-import { DEFAULT_PRESET_ID } from '../utils/theme-engine'
-import { paletteLabel } from '../utils/theme'
+import { DEFAULT_PRESET_ID } from '../utils/theme/engine'
+import { paletteLabel } from '../utils/theme/studio'
 
 /**
  * What the toolbar reports and what its reset does. The persisted theme is

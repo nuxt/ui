@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { keepPanels } from '../../utils/theme/studio'
 /**
  * A popover + listbox picker: subtle trigger button, rich rows (slots can
  * restyle labels or add description strips), closes on pick. The listbox
@@ -23,7 +24,6 @@ const props = withDefaults(defineProps<{
   /** Panels sit on subtle; the toolbar matches the outlined controls beside it. */
   variant?: 'subtle' | 'outline'
 }>(), {
-  size: 'sm',
   variant: 'subtle'
 })
 

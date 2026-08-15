@@ -1,6 +1,6 @@
 import type { InjectionKey } from 'vue'
-import { resolveAlias, resolveShade, contrastRatio } from './theme-engine'
-import type { ThemeDoc, Shade } from './theme-engine'
+import { resolveAlias, resolveShade, contrastRatio } from './engine'
+import type { ThemeDoc, Shade } from './engine'
 
 /** How deep a ThemeStudioSection sits, which decides how it behaves. */
 export const SECTION_DEPTH: InjectionKey<number> = Symbol('theme-studio-section-depth')
@@ -51,4 +51,44 @@ export function themeChipStyle(doc: ThemeDoc) {
     '--chip-icon-light': doc.blackAsPrimary ? 'black' : shade('primary', 500),
     '--chip-icon-dark': doc.blackAsPrimary ? 'white' : shade('primary', 400)
   }
+}
+
+/** Palette names are ids, hyphens are word breaks, not part of the name. */
+export function paletteLabel(name: string): string {
+  return name.replace(/-/g, ' ')
+}
+
+/**
+ * interact-outside handler: clicks on studio chrome marked data-keep-panels
+ * (the color-mode switch) must not dismiss an open panel.
+ */
+export function keepPanels(event: Event) {
+  if ((event.target as HTMLElement | null)?.closest?.('[data-keep-panels]')) {
+    event.preventDefault()
+  }
+}
+
+/** Tailwind's stock weight ladder, set steps are absences at these values. */
+export const FONT_WEIGHT_DEFAULTS = { normal: 400, medium: 500, semibold: 600, bold: 700 } as const
+
+// Families whose preview faces are already requested, Public Sans is
+// bundled. Module-level so the controls, the preset menu and every search
+// batch share one ledger and no family is fetched twice.
+const loadedFontPreviews = new Set<string>(['Public Sans'])
+
+/**
+ * Load the listed families (Google Fonts, 400/700 only) so pickers can
+ * render themselves in the faces they offer. Incremental: each call adds
+ * one stylesheet covering only the families not yet requested, the font
+ * search feeds result batches through here as the user types.
+ */
+export function loadFontPreviews(fonts: readonly string[]) {
+  if (!import.meta.client) return
+  const families = fonts.filter(name => !loadedFontPreviews.has(name))
+  if (!families.length) return
+  families.forEach(name => loadedFontPreviews.add(name))
+  const link = document.createElement('link')
+  link.rel = 'stylesheet'
+  link.href = `https://fonts.googleapis.com/css2?${families.map(name => `family=${encodeURIComponent(name)}:wght@400;700`).join('&')}&display=swap`
+  document.head.appendChild(link)
 }

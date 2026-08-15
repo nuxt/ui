@@ -1,6 +1,6 @@
 import type { ThemeDoc, ShadeStop } from './types'
 import { DEFAULT_COLORS, THEME_DEFAULTS, SEMANTIC_ALIASES } from './types'
-import { FONT_WEIGHT_DEFAULTS } from '../theme'
+import { FONT_WEIGHT_DEFAULTS } from '../studio'
 import type { StyleOptions } from './styles'
 import { styleTokens, TOKEN_SHADE_TARGETS } from './styles'
 import { parseUiColorRef } from './resolve'

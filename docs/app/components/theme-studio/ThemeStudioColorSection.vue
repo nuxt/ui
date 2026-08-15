@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { ColorAlias, SectionKey } from '../../utils/theme-engine'
+import type { ColorAlias, SectionKey } from '../../utils/theme/engine'
 
 /**
  * One color alias: its picker, with the palette and shade editors folding out

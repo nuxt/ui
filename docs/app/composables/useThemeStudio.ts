@@ -1,8 +1,7 @@
 import colors from 'tailwindcss/colors'
-import { THEME_STATE_KEYS, THEME_STORAGE_KEYS } from '../utils/theme-keys'
-import { presets, DEFAULT_PRESET_ID, docToSettings, isDefaultTheme, generatePalette, applyPaletteEffects, isDefaultEffects, parseCssColor, styleComponents, styleTokens, sectionFingerprint, mergeSection, canonicalTokenShades, storedStopStep, nearestShade, TOKEN_SHADE_TARGETS, SECTION_GROUPS, DEFAULT_COLORS, SHADES, SHADES_ALL, SHADE_SETS } from '../utils/theme-engine'
-import type { SectionKey, ThemeDoc, ThemePreset, PaletteCurveParams, PaletteEffects, StoredPaletteParams, PalettePin, StyleOptions, Shade, ShadeStep, ShadeStop, ColorAlias, TokenRamp } from '../utils/theme-engine'
-import { readLocalStorage } from '../utils/theme'
+import { THEME_STATE_KEYS, readStoredTheme } from '../utils/theme/storage'
+import { presets, DEFAULT_PRESET_ID, docToSettings, isDefaultTheme, generatePalette, applyPaletteEffects, isDefaultEffects, parseCssColor, styleComponents, styleTokens, sectionFingerprint, mergeSection, canonicalTokenShades, storedStopStep, nearestShade, TOKEN_SHADE_TARGETS, SECTION_GROUPS, DEFAULT_COLORS, SHADES, SHADES_ALL, SHADE_SETS } from '../utils/theme/engine'
+import type { SectionKey, ThemeDoc, ThemePreset, PaletteCurveParams, PaletteEffects, StoredPaletteParams, PalettePin, StyleOptions, Shade, ShadeStep, ShadeStop, ColorAlias, TokenRamp } from '../utils/theme/engine'
 
 export function useThemeStudio() {
   const theme = useTheme()
@@ -16,120 +15,60 @@ export function useThemeStudio() {
    * still names it after a reload.
    */
   const activePreset = useState<string | undefined>(THEME_STATE_KEYS.themePreset, () => {
-    const stored = readLocalStorage<string | undefined>(THEME_STORAGE_KEYS.preset, undefined)
     // Presets get renamed, so a persisted id can stop naming anything. Drop it
     // rather than holding a baseline no preset defines, which would leave the
     // pickers with nothing selected and every section reading dirty forever.
-    return stored && presets.some(preset => preset.id === stored) ? stored : undefined
+    // assigned by plugins/theme.ts on the client, defaults on the server
+    return undefined
   })
 
   function setActivePreset(id: string | undefined) {
     activePreset.value = id
-    if (!import.meta.client) return
-    if (id) {
-      window.localStorage.setItem(THEME_STORAGE_KEYS.preset, JSON.stringify(id))
-    } else {
-      window.localStorage.removeItem(THEME_STORAGE_KEYS.preset)
-    }
   }
 
   /**
-   * Curve params per alias, kept so the editor stays editable across
-   * reloads. useState + explicit persistence (not useLocalStorage) so
-   * resetTheme(), reachable from the popover and chat, outside this
-   * composable, can clear the shared state, not just the storage key.
+   * Curve params per alias, kept so the editor stays editable across reloads.
+   * The ramps they generate ride the customColors channel; both come out of
+   * the same storage write, so they can no longer restore out of step.
    */
-  const paletteParams = useState<Partial<Record<string, StoredPaletteParams>>>(THEME_STATE_KEYS.paletteParams, () => readLocalStorage(THEME_STORAGE_KEYS.paletteParams, {}))
+  const paletteParams = useState<Partial<Record<string, StoredPaletteParams>>>(THEME_STATE_KEYS.paletteParams, () => ({}))
 
   function setPaletteParams(value: Partial<Record<string, StoredPaletteParams>>) {
     paletteParams.value = value
-    if (Object.keys(value).length) {
-      window.localStorage.setItem(THEME_STORAGE_KEYS.paletteParams, JSON.stringify(value))
-    } else {
-      window.localStorage.removeItem(THEME_STORAGE_KEYS.paletteParams)
-    }
   }
 
-  // Self-heal an orphaned preset. The id above is dropped when it names
-  // nothing, but the theme it applied still sits in the other storage keys, so
-  // the page would keep a look no preset can name and every picker would read
-  // Custom. Reset to stock instead: the doc came from a build that no longer
-  // exists, so there's nothing to preserve it against. This does discard edits
-  // made on top of a since-renamed preset, which is the trade for the pickers
-  // and the page agreeing.
+  // A persisted id can name a preset that no longer exists (they get renamed).
+  // The theme it applied is still restored, so the page would keep a look no
+  // preset can name and every picker would read Custom. Reset to stock: the
+  // doc came from a build that no longer exists, so there is nothing to
+  // preserve it against. This discards edits made on top of a since-renamed
+  // preset, the trade for the pickers and the page agreeing.
   const presetHealed = useState('nuxt-ui-preset-healed', () => false)
   if (import.meta.client && !presetHealed.value) {
     presetHealed.value = true
-    const stored = readLocalStorage<string | undefined>(THEME_STORAGE_KEYS.preset, undefined)
-    if (stored && !presets.some(preset => preset.id === stored)) {
-      // resetTheme clears the preset key along with the rest of the theme
+    const id = readStoredTheme().preset
+    if (id && !presets.some(preset => preset.id === id)) {
       onNuxtReady(() => theme.resetTheme({ track: false }))
     }
   }
 
   /** Shadow/border/token-shade prefs; the expanded class bundle lives in the style-ui channel. */
-  const style = useState<StyleOptions>(THEME_STATE_KEYS.stylePrefs, () => readLocalStorage(THEME_STORAGE_KEYS.style, {}))
+  const style = useState<StyleOptions>(THEME_STATE_KEYS.stylePrefs, () => ({}))
 
-  // Self-heal: the persisted class bundle is an expansion of `style` frozen
-  // at write time, if the generator changed since (new fragment classes),
-  // regenerate it once so stale classes don't outlive their source. Guarded
-  // so the dozens of components calling this composable check only once.
-  const healed = useState('nuxt-ui-style-healed', () => false)
-  if (import.meta.client && !healed.value) {
-    healed.value = true
+  // The class bundle is an expansion of `style`, not stored state, so it is
+  // rebuilt from the restored prefs on load. That also means a generator
+  // change (new fragment classes) reaches already-saved themes for free,
+  // which used to need a self-heal comparing the two.
+  const bundleBuilt = useState('nuxt-ui-style-bundle-built', () => false)
+  if (import.meta.client && !bundleBuilt.value) {
+    bundleBuilt.value = true
     try {
       const expected = styleComponents(style.value)
-      if (JSON.stringify(expected) !== JSON.stringify(readLocalStorage(THEME_STORAGE_KEYS.styleUi, {}))) {
-        onNuxtReady(() => theme.setStyleUi(expected))
-      }
+      if (Object.keys(expected).length) onNuxtReady(() => theme.setStyleUi(expected))
     } catch {
-      // A throwing expansion (corrupt persisted style) shouldn't permanently
-      // disable healing, retry on the next load.
-      healed.value = false
+      // a throwing expansion (corrupt persisted style) shouldn't be permanent
+      bundleBuilt.value = false
     }
-  }
-
-  // Self-heal custom palettes. A custom ramp lives in three stores that
-  // restore independently on reload: the editor curves (paletteParams), the
-  // derived ramp (custom-colors) and the alias mapping. The derived stores
-  // ride useState, which hydrates from an empty SSR payload, so a lost
-  // restore race can leave the preview on a stale/absent ramp while the
-  // editor still shows the curves (and their modifiers). The curves are the
-  // source of truth: re-derive each persisted palette once on load, after the
-  // plugin restore, so the preview is rebuilt from them and always matches
-  // the editor. Re-deriving is idempotent, so healing a correct load is a
-  // harmless no-op write, cheaper than trusting a possibly-stale render.
-  const palettesHealed = useState('nuxt-ui-palettes-healed', () => false)
-  if (import.meta.client && !palettesHealed.value) {
-    palettesHealed.value = true
-    onNuxtReady(() => {
-      for (const [alias, reactiveEntry] of Object.entries(paletteParams.value)) {
-        if (!reactiveEntry || !('lightness' in reactiveEntry)) continue
-        // Deep-unwrap the reactive useState proxy to a plain object, the curve
-        // params flow into applyPaletteEffects, which structuredClones them,
-        // and a reactive proxy can't be cloned. Curves are pure numbers, so a
-        // JSON round-trip is a lossless plain copy.
-        const entry = JSON.parse(JSON.stringify(reactiveEntry)) as StoredPaletteParams
-        // The modifier lens bakes into the ramp here exactly as it did at edit
-        // time, so restoring the curves restores the modifiers' effect too.
-        const ramp = generatePalette(applyPaletteEffects(
-          { lightness: entry.lightness, chroma: entry.chroma, hue: entry.hue },
-          entry.effects,
-          entry.amount
-        ), storedStopStep(entry), entry.pins)
-        const name = customPaletteName(alias)
-        // Only the derived ramp (customColors) loses its restore race. Re-sending
-        // an already-correct alias routes through the primary/neutral setters,
-        // which reset black-as-primary and fire a spurious event every load, so
-        // heal the ramp always, touch the alias only if it drifted.
-        const aliasAlreadySet = (appConfig.ui.colors as Record<string, string>)[alias] === name
-        theme.applyThemeSettings({
-          customColors: { [name]: ramp },
-          ...(aliasAlreadySet ? {} : { [alias]: name }),
-          ...(alias === 'neutral' && !aliasAlreadySet ? { cssVariables: unownedNeutralRemaps() } : {})
-        }, { track: false })
-      }
-    })
   }
 
   // Shared across composable instances so the analytics throttle holds no
@@ -149,7 +88,6 @@ export function useThemeStudio() {
     const previousStyle = style.value
     const previous = styleTokens(previousStyle)
     style.value = { ...style.value, ...options }
-    window.localStorage.setItem(THEME_STORAGE_KEYS.style, JSON.stringify(style.value))
     // The .shadow-custom root flag is kept in sync by a watcher in plugins/theme.ts
     // (covers presets via applyDoc too), so no per-path toggle is needed here.
 
@@ -324,7 +262,7 @@ export function useThemeStudio() {
     const name = customPaletteName(alias)
     // The alias only needs pointing once. Live drags call this at ~16Hz; re-
     // sending it every tick makes applyThemeSettings re-persist the AI-extras
-    // channel (a JSON.stringify + localStorage write) on every frame. Send it
+    // channel (a JSON.stringify + reactive wake) on every frame. Send it
     // only when it actually changes.
     const aliasAlreadySet = (appConfig.ui.colors as Record<string, string>)[alias] === name
 
@@ -403,9 +341,6 @@ export function useThemeStudio() {
     // to the default theme for a frame (a white flash between presets).
     theme.resetTheme({ track: false, immediate: false })
     style.value = deriveStyle(doc)
-    if (Object.keys(style.value).length) {
-      window.localStorage.setItem(THEME_STORAGE_KEYS.style, JSON.stringify(style.value))
-    }
 
     if (!isDefaultTheme(doc)) {
       theme.applyThemeSettings(docToSettings(doc), { track: false })

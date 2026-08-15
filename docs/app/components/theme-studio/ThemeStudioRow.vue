@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { SHADE_LADDER } from '../../utils/theme-engine'
-import type { ShadeStop } from '../../utils/theme-engine'
+import { SHADE_LADDER } from '../../utils/theme/engine'
+import type { ShadeStop } from '../../utils/theme/engine'
 import type { ChipProps } from '@nuxt/ui'
 
 /** Every settings row in every panel: label, then the control, on one 28px line. */

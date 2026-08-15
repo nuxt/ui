@@ -6,6 +6,7 @@
  * faces, debounced so keystrokes don't fan out into stylesheet requests.
  */
 import { watchDebounced } from '@vueuse/core'
+import { loadFontPreviews } from '../../utils/theme/studio'
 
 const props = withDefaults(defineProps<{
   /** The curated families offered before the user searches. */
@@ -23,7 +24,6 @@ const props = withDefaults(defineProps<{
   /** Panels sit on subtle; the toolbar matches the outlined controls beside it. */
   variant?: 'subtle' | 'outline'
 }>(), {
-  size: 'sm',
   variant: 'subtle'
 })
 

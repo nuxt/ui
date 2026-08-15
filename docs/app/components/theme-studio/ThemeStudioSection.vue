@@ -1,7 +1,7 @@
 <script setup lang="ts">
 /** One settings section. Header buttons stop the click so they never fold it. */
-import type { SectionKey } from '../../utils/theme-engine'
-import { SECTION_DEPTH } from '../../utils/theme-section'
+import type { SectionKey } from '../../utils/theme/engine'
+import { SECTION_DEPTH } from '../../utils/theme/studio'
 
 const props = withDefaults(defineProps<{
   /** Omit on a static section for a bare group, no header drawn. */

@@ -5,10 +5,11 @@ import type { GatewayProviderOptions } from '@ai-sdk/gateway'
 import { z } from 'zod'
 import { tools as mcpToolDefinitions } from '#nuxt-mcp-toolkit/tools.mjs'
 import * as theme from '../../.nuxt/ui'
-import { themeIcons, cssVariableDefaults } from '../../app/utils/theme'
+import { themeIcons } from '../../app/utils/theme/icons'
+import { cssVariableDefaults } from '../../app/utils/theme/tokens'
 // The presets file itself, not the engine barrel: its only import is a type,
 // so this costs nothing beyond the preset data.
-import { presets } from '../../app/utils/theme-engine/presets'
+import { presets } from '../../app/utils/theme/engine/presets'
 
 const componentNames = Object.keys(theme)
 

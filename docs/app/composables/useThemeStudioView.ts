@@ -1,4 +1,4 @@
-import type { ThemeIcons } from '../utils/theme'
+import type { ThemeIcons } from '../utils/theme/icons'
 
 export type ThemeStudioView = 'grid' | 'dashboard' | 'chat' | 'saas' | 'landing' | 'docs' | 'portfolio' | 'changelog' | 'editor' | 'a11y'
 

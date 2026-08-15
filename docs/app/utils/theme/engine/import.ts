@@ -14,7 +14,7 @@ import {
   COLOR_SUPPORT
 } from './styles'
 import { parseUiColorRef, LIBRARY_TOKEN_DEFAULTS } from './resolve'
-import { themeIcons } from '../theme'
+import { themeIcons } from '../icons'
 
 /**
  * The inverse of generateCSS/generateConfig: parse an exported theme back

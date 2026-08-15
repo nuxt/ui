@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { SHADE_LADDER } from '../../utils/theme-engine'
-import type { ShadeStop } from '../../utils/theme-engine'
+import { SHADE_LADDER } from '../../utils/theme/engine'
+import type { ShadeStop } from '../../utils/theme/engine'
 
 /**
  * A section of per-mode shade sliders that reset as one group, the sliders

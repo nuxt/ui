@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { importTheme, isDefaultTheme } from '../../utils/theme-engine'
+import { importTheme, isDefaultTheme } from '../../utils/theme/engine'
 
 /**
  * The shared import/export modal, plain toolbar buttons open it in either
