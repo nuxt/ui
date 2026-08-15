@@ -471,20 +471,20 @@ The [`UChatPrompt`](/docs/components/chat-prompt) component automatically handle
 
 ### Setting up Markdown rendering
 
-AI models often respond with Markdown formatting (code blocks, lists, bold text, etc.). Before building the chat page, create a custom [`Comark`](https://comark.dev) component that will handle streaming Markdown rendering. Using [`defineComarkComponent`](https://comark.dev/rendering/vue#code-definecomarkcomponent), you can enable the `highlight` plugin for syntax highlighting in code blocks and register additional [Shiki](https://shiki.style) languages beyond the defaults (TypeScript, JavaScript, Vue, Shell, JSON, YAML, Markdown):
+AI models often respond with Markdown formatting (code blocks, lists, bold text, etc.). Before building the chat page, create a custom [`Comark`](https://comark.dev) component that will handle streaming Markdown rendering. Using [`defineMarkdownComponent`](https://comark.dev/rendering/vue#code-markdown-code-definemarkdowncomponent-code), you can enable the `shiki` plugin for syntax highlighting in code blocks and register additional [Shiki](https://shiki.style) languages beyond the defaults (TypeScript, JavaScript, Vue, Shell, JSON, YAML, Markdown):
 
 ::code-tree-intersection
-```ts [app/components/chat/Comark.ts]
-import highlight from '@comark/nuxt/plugins/highlight'
+```ts [app/components/chat/Markdown.ts]
+import shiki from '@comark/nuxt/plugins/shiki'
 import python from '@shikijs/langs/python'
 import sql from '@shikijs/langs/sql'
 import go from '@shikijs/langs/go'
 import rust from '@shikijs/langs/rust'
 
-export default defineComarkComponent({
-  name: 'ChatComark',
+export default defineMarkdownComponent({
+  name: 'ChatMarkdown',
   plugins: [
-    highlight({
+    shiki({
       languages: [python, sql, go, rust]
     })
   ],
@@ -493,7 +493,7 @@ export default defineComarkComponent({
 ```
 ::
 
-This creates a `<ChatComark>` component we'll use in the chat page to render assistant messages and reasoning content.
+This creates a `<ChatMarkdown>` component we'll use in the chat page to render assistant messages and reasoning content.
 
 Since Comark uses Shiki with dual themes, you need to add the following CSS to your stylesheet for dark mode support:
 
@@ -587,16 +587,16 @@ onMounted(() => {
                 :text="part.text"
                 :streaming="isPartStreaming(part)"
               >
-                <ChatComark
-                  :markdown="part.text"
+                <ChatMarkdown
+                  :value="part.text"
                   :streaming="isPartStreaming(part)"
                 />
               </UChatReasoning>
 
               <template v-else-if="isTextUIPart(part)">
-                <ChatComark
+                <ChatMarkdown
                   v-if="message.role === 'assistant'"
-                  :markdown="part.text"
+                  :value="part.text"
                   :streaming="isPartStreaming(part)"
                 />
                 <p v-else-if="message.role === 'user'" class="whitespace-pre-wrap">
@@ -653,7 +653,7 @@ The [`UChatMessages`](/docs/components/chat-messages) component is purpose-built
 
 **Rendering Message Parts**
 
-We iterate over message `parts` using AI SDK helpers like `isTextUIPart` and `isReasoningUIPart`, rendering assistant text with the `<ChatComark>` component we created earlier and reasoning content with [`UChatReasoning`](/docs/components/chat-reasoning). The `isPartStreaming` utility from `@nuxt/ui/utils/ai` detects if a part is currently being streamed.
+We iterate over message `parts` using AI SDK helpers like `isTextUIPart` and `isReasoningUIPart`, rendering assistant text with the `<ChatMarkdown>` component we created earlier and reasoning content with [`UChatReasoning`](/docs/components/chat-reasoning). The `isPartStreaming` utility from `@nuxt/ui/utils/ai` detects if a part is currently being streamed.
 
 **UChatPromptSubmit Component**
 
@@ -868,16 +868,16 @@ onMounted(() => {
                 :text="part.text"
                 :streaming="isPartStreaming(part)"
               >
-                <ChatComark
-                  :markdown="part.text"
+                <ChatMarkdown
+                  :value="part.text"
                   :streaming="isPartStreaming(part)"
                 />
               </UChatReasoning>
 
               <template v-else-if="isTextUIPart(part)">
-                <ChatComark
+                <ChatMarkdown
                   v-if="message.role === 'assistant'"
-                  :markdown="part.text"
+                  :value="part.text"
                   :streaming="isPartStreaming(part)"
                 />
                 <p v-else-if="message.role === 'user'" class="whitespace-pre-wrap">
@@ -1053,16 +1053,16 @@ onMounted(() => {
                 :text="part.text"
                 :streaming="isPartStreaming(part)"
               >
-                <ChatComark
-                  :markdown="part.text"
+                <ChatMarkdown
+                  :value="part.text"
                   :streaming="isPartStreaming(part)"
                 />
               </UChatReasoning>
 
               <template v-else-if="isTextUIPart(part)">
-                <ChatComark
+                <ChatMarkdown
                   v-if="message.role === 'assistant'"
-                  :markdown="part.text"
+                  :value="part.text"
                   :streaming="isPartStreaming(part)"
                 />
                 <p v-else-if="message.role === 'user'" class="whitespace-pre-wrap">

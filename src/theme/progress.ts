@@ -6,10 +6,10 @@ export default (options: Required<ModuleOptions>) => ({
     base: 'relative',
     circle: 'block size-full',
     track: 'fill-none stroke-(--ui-bg-accented)',
-    indicator: 'rounded-full size-full transition-transform duration-200 ease-out [stroke-linecap:round] motion-reduce:data-[state=indeterminate]:animate-pulse',
+    indicator: 'rounded-full size-full transition-transform duration-200 ease-out [stroke-linecap:round] motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse',
     status: 'flex text-dimmed',
     steps: 'grid items-end',
-    step: 'truncate text-end row-start-1 col-start-1 transition-opacity'
+    step: 'truncate text-end row-start-1 col-start-1 transition-opacity ease-out'
   },
   variants: {
     animation: {
@@ -90,7 +90,7 @@ export default (options: Required<ModuleOptions>) => ({
     variant: {
       linear: {
         base: 'overflow-hidden rounded-full bg-accented',
-        status: 'transition-[width] duration-200'
+        status: 'transition-[width] duration-200 ease-out motion-reduce:transition-none'
       },
       circular: {
         track: 'fill-none [stroke-width:var(--ui-progress-thickness)] [r:calc(50px-var(--ui-progress-thickness)/2)]',
@@ -310,56 +310,56 @@ export default (options: Required<ModuleOptions>) => ({
     orientation: 'horizontal',
     animation: 'carousel',
     class: {
-      indicator: 'motion-safe:data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]'
+      indicator: 'motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]'
     }
   }, {
     variant: 'linear',
     orientation: 'vertical',
     animation: 'carousel',
     class: {
-      indicator: 'motion-safe:data-[state=indeterminate]:animate-[carousel-vertical_2s_ease-in-out_infinite]'
+      indicator: 'motion-safe:data-[state=indeterminate]:animate-[carousel-vertical_2s_linear_infinite]'
     }
   }, {
     variant: 'linear',
     orientation: 'horizontal',
     animation: 'carousel-inverse',
     class: {
-      indicator: 'motion-safe:data-[state=indeterminate]:animate-[carousel-inverse_2s_ease-in-out_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-inverse-rtl_2s_ease-in-out_infinite]'
+      indicator: 'motion-safe:data-[state=indeterminate]:animate-[carousel-inverse_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-inverse-rtl_2s_linear_infinite]'
     }
   }, {
     variant: 'linear',
     orientation: 'vertical',
     animation: 'carousel-inverse',
     class: {
-      indicator: 'motion-safe:data-[state=indeterminate]:animate-[carousel-inverse-vertical_2s_ease-in-out_infinite]'
+      indicator: 'motion-safe:data-[state=indeterminate]:animate-[carousel-inverse-vertical_2s_linear_infinite]'
     }
   }, {
     variant: 'linear',
     orientation: 'horizontal',
     animation: 'swing',
     class: {
-      indicator: 'motion-safe:data-[state=indeterminate]:animate-[swing_2s_ease-in-out_infinite]'
+      indicator: 'motion-safe:data-[state=indeterminate]:animate-[swing_2s_var(--ease-in-out)_infinite]'
     }
   }, {
     variant: 'linear',
     orientation: 'vertical',
     animation: 'swing',
     class: {
-      indicator: 'motion-safe:data-[state=indeterminate]:animate-[swing-vertical_2s_ease-in-out_infinite]'
+      indicator: 'motion-safe:data-[state=indeterminate]:animate-[swing-vertical_2s_var(--ease-in-out)_infinite]'
     }
   }, {
     variant: 'linear',
     orientation: 'horizontal',
     animation: 'elastic',
     class: {
-      indicator: 'motion-safe:data-[state=indeterminate]:animate-[elastic_2s_ease-in-out_infinite]'
+      indicator: 'relative motion-safe:data-[state=indeterminate]:animate-[elastic_2s_var(--ease-in-out)_infinite]'
     }
   }, {
     variant: 'linear',
     orientation: 'vertical',
     animation: 'elastic',
     class: {
-      indicator: 'motion-safe:data-[state=indeterminate]:animate-[elastic-vertical_2s_ease-in-out_infinite]'
+      indicator: 'relative motion-safe:data-[state=indeterminate]:animate-[elastic-vertical_2s_var(--ease-in-out)_infinite]'
     }
   }],
   defaultVariants: {

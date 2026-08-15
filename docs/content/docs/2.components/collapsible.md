@@ -1,6 +1,9 @@
 ---
 description: A collapsible element to toggle visibility of its content.
 category: element
+keywords:
+  - disclosure
+  - expand
 links:
   - label: Collapsible
     icon: i-custom-reka-ui

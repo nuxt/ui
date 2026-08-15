@@ -1,9 +1,9 @@
-import type { UIMessage } from 'ai'
 import { createSharedComposable, useLocalStorage } from '@vueuse/core'
+import type { DocsChatMessage } from '~~/server/api/ai.post'
 
 export const useChat = createSharedComposable(() => {
   const storageOpen = useLocalStorage('chat-open', false)
-  const messages = useLocalStorage<UIMessage[]>('chat-messages', [])
+  const messages = useLocalStorage<DocsChatMessage[]>('chat-messages', [])
 
   const open = ref(false)
 

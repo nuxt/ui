@@ -2,7 +2,7 @@
 
 exports[`BlogPost > renders with as correctly 1`] = `
 "<section data-orientation="vertical" data-slot="root" class="relative group/blog-post rounded-lg overflow-hidden flex flex-col bg-default ring ring-default outline-primary/25 has-[>a:focus-visible]:outline-3 transition hover:bg-elevated/50 has-[>a:focus-visible]:ring-primary"><a href="https://github.com/benjamincanac" rel="noopener noreferrer" aria-label="Title" class="focus:outline-none absolute inset-0"></a>
-  <div data-slot="header" class="relative overflow-hidden aspect-[16/9] w-full pointer-events-none"><img src="https://picsum.photos/640/360" alt="Title" data-slot="image" class="object-cover object-top w-full h-full transform transition-transform duration-200 group-hover/blog-post:scale-110"></div>
+  <div data-slot="header" class="relative overflow-hidden aspect-[16/9] w-full pointer-events-none"><img src="https://picsum.photos/640/360" alt="Title" data-slot="image" class="object-cover object-top w-full h-full transform transition-transform ease-out motion-reduce:transition-none group-hover/blog-post:scale-110"></div>
   <div data-slot="body" class="min-w-0 flex-1 flex flex-col p-4 sm:p-6">
     <div data-slot="meta" class="flex items-center gap-2 mb-2"><span data-slot="badge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md ring ring-inset ring-accented text-default bg-elevated"><!--v-if--><span data-slot="label" class="truncate">Badge</span>
       <!--v-if--></span><time datetime="2024-01-01T00:00:00.000Z" data-slot="date" class="text-sm text-toned">Jan 1, 2024</time>
@@ -65,7 +65,7 @@ exports[`BlogPost > renders with authors correctly 1`] = `
 
 exports[`BlogPost > renders with authors slot correctly 1`] = `
 "<article data-orientation="vertical" data-slot="root" class="relative group/blog-post rounded-lg overflow-hidden flex flex-col bg-default ring ring-default outline-primary/25 has-[>a:focus-visible]:outline-3 transition hover:bg-elevated/50 has-[>a:focus-visible]:ring-primary"><a href="https://github.com/benjamincanac" rel="noopener noreferrer" aria-label="Title" class="focus:outline-none absolute inset-0"></a>
-  <div data-slot="header" class="relative overflow-hidden aspect-[16/9] w-full pointer-events-none"><img src="https://picsum.photos/640/360" alt="Title" data-slot="image" class="object-cover object-top w-full h-full transform transition-transform duration-200 group-hover/blog-post:scale-110"></div>
+  <div data-slot="header" class="relative overflow-hidden aspect-[16/9] w-full pointer-events-none"><img src="https://picsum.photos/640/360" alt="Title" data-slot="image" class="object-cover object-top w-full h-full transform transition-transform ease-out motion-reduce:transition-none group-hover/blog-post:scale-110"></div>
   <div data-slot="body" class="min-w-0 flex-1 flex flex-col p-4 sm:p-6">
     <div data-slot="meta" class="flex items-center gap-2 mb-2"><span data-slot="badge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md ring ring-inset ring-accented text-default bg-elevated"><!--v-if--><span data-slot="label" class="truncate">Badge</span>
       <!--v-if--></span><time datetime="2024-01-01T00:00:00.000Z" data-slot="date" class="text-sm text-toned">Jan 1, 2024</time>
@@ -114,7 +114,7 @@ exports[`BlogPost > renders with badge object correctly 1`] = `
 
 exports[`BlogPost > renders with badge slot correctly 1`] = `
 "<article data-orientation="vertical" data-slot="root" class="relative group/blog-post rounded-lg overflow-hidden flex flex-col bg-default ring ring-default outline-primary/25 has-[>a:focus-visible]:outline-3 transition hover:bg-elevated/50 has-[>a:focus-visible]:ring-primary"><a href="https://github.com/benjamincanac" rel="noopener noreferrer" aria-label="Title" class="focus:outline-none absolute inset-0"></a>
-  <div data-slot="header" class="relative overflow-hidden aspect-[16/9] w-full pointer-events-none"><img src="https://picsum.photos/640/360" alt="Title" data-slot="image" class="object-cover object-top w-full h-full transform transition-transform duration-200 group-hover/blog-post:scale-110"></div>
+  <div data-slot="header" class="relative overflow-hidden aspect-[16/9] w-full pointer-events-none"><img src="https://picsum.photos/640/360" alt="Title" data-slot="image" class="object-cover object-top w-full h-full transform transition-transform ease-out motion-reduce:transition-none group-hover/blog-post:scale-110"></div>
   <div data-slot="body" class="min-w-0 flex-1 flex flex-col p-4 sm:p-6">
     <div data-slot="meta" class="flex items-center gap-2 mb-2">Badge slot<time datetime="2024-01-01T00:00:00.000Z" data-slot="date" class="text-sm text-toned">Jan 1, 2024</time></div>
     <h2 data-slot="title" class="text-xl text-pretty font-semibold text-highlighted">Title</h2>
@@ -135,7 +135,7 @@ exports[`BlogPost > renders with badge slot correctly 1`] = `
 
 exports[`BlogPost > renders with body slot correctly 1`] = `
 "<article data-orientation="vertical" data-slot="root" class="relative group/blog-post rounded-lg overflow-hidden flex flex-col bg-default ring ring-default outline-primary/25 has-[>a:focus-visible]:outline-3 transition hover:bg-elevated/50 has-[>a:focus-visible]:ring-primary"><a href="https://github.com/benjamincanac" rel="noopener noreferrer" aria-label="Title" class="focus:outline-none absolute inset-0"></a>
-  <div data-slot="header" class="relative overflow-hidden aspect-[16/9] w-full pointer-events-none"><img src="https://picsum.photos/640/360" alt="Title" data-slot="image" class="object-cover object-top w-full h-full transform transition-transform duration-200 group-hover/blog-post:scale-110"></div>
+  <div data-slot="header" class="relative overflow-hidden aspect-[16/9] w-full pointer-events-none"><img src="https://picsum.photos/640/360" alt="Title" data-slot="image" class="object-cover object-top w-full h-full transform transition-transform ease-out motion-reduce:transition-none group-hover/blog-post:scale-110"></div>
   <div data-slot="body" class="min-w-0 flex-1 flex flex-col p-4 sm:p-6">Body slot</div>
   <!--v-if-->
 </article>"
@@ -143,7 +143,7 @@ exports[`BlogPost > renders with body slot correctly 1`] = `
 
 exports[`BlogPost > renders with class correctly 1`] = `
 "<article data-orientation="vertical" data-slot="root" class="group/blog-post rounded-lg overflow-hidden flex flex-col bg-default ring ring-default outline-primary/25 has-[>a:focus-visible]:outline-3 transition hover:bg-elevated/50 has-[>a:focus-visible]:ring-primary absolute"><a href="https://github.com/benjamincanac" rel="noopener noreferrer" aria-label="Title" class="focus:outline-none absolute inset-0"></a>
-  <div data-slot="header" class="relative overflow-hidden aspect-[16/9] w-full pointer-events-none"><img src="https://picsum.photos/640/360" alt="Title" data-slot="image" class="object-cover object-top w-full h-full transform transition-transform duration-200 group-hover/blog-post:scale-110"></div>
+  <div data-slot="header" class="relative overflow-hidden aspect-[16/9] w-full pointer-events-none"><img src="https://picsum.photos/640/360" alt="Title" data-slot="image" class="object-cover object-top w-full h-full transform transition-transform ease-out motion-reduce:transition-none group-hover/blog-post:scale-110"></div>
   <div data-slot="body" class="min-w-0 flex-1 flex flex-col p-4 sm:p-6">
     <div data-slot="meta" class="flex items-center gap-2 mb-2"><span data-slot="badge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md ring ring-inset ring-accented text-default bg-elevated"><!--v-if--><span data-slot="label" class="truncate">Badge</span>
       <!--v-if--></span><time datetime="2024-01-01T00:00:00.000Z" data-slot="date" class="text-sm text-toned">Jan 1, 2024</time>
@@ -182,7 +182,7 @@ exports[`BlogPost > renders with date correctly 1`] = `
 
 exports[`BlogPost > renders with date slot correctly 1`] = `
 "<article data-orientation="vertical" data-slot="root" class="relative group/blog-post rounded-lg overflow-hidden flex flex-col bg-default ring ring-default outline-primary/25 has-[>a:focus-visible]:outline-3 transition hover:bg-elevated/50 has-[>a:focus-visible]:ring-primary"><a href="https://github.com/benjamincanac" rel="noopener noreferrer" aria-label="Title" class="focus:outline-none absolute inset-0"></a>
-  <div data-slot="header" class="relative overflow-hidden aspect-[16/9] w-full pointer-events-none"><img src="https://picsum.photos/640/360" alt="Title" data-slot="image" class="object-cover object-top w-full h-full transform transition-transform duration-200 group-hover/blog-post:scale-110"></div>
+  <div data-slot="header" class="relative overflow-hidden aspect-[16/9] w-full pointer-events-none"><img src="https://picsum.photos/640/360" alt="Title" data-slot="image" class="object-cover object-top w-full h-full transform transition-transform ease-out motion-reduce:transition-none group-hover/blog-post:scale-110"></div>
   <div data-slot="body" class="min-w-0 flex-1 flex flex-col p-4 sm:p-6">
     <div data-slot="meta" class="flex items-center gap-2 mb-2"><span data-slot="badge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md ring ring-inset ring-accented text-default bg-elevated"><!--v-if--><span data-slot="label" class="truncate">Badge</span>
       <!--v-if--></span><time datetime="2024-01-01T00:00:00.000Z" data-slot="date" class="text-sm text-toned">Date slot</time>
@@ -219,7 +219,7 @@ exports[`BlogPost > renders with description correctly 1`] = `
 
 exports[`BlogPost > renders with description slot correctly 1`] = `
 "<article data-orientation="vertical" data-slot="root" class="relative group/blog-post rounded-lg overflow-hidden flex flex-col bg-default ring ring-default outline-primary/25 has-[>a:focus-visible]:outline-3 transition hover:bg-elevated/50 has-[>a:focus-visible]:ring-primary"><a href="https://github.com/benjamincanac" rel="noopener noreferrer" aria-label="Title" class="focus:outline-none absolute inset-0"></a>
-  <div data-slot="header" class="relative overflow-hidden aspect-[16/9] w-full pointer-events-none"><img src="https://picsum.photos/640/360" alt="Title" data-slot="image" class="object-cover object-top w-full h-full transform transition-transform duration-200 group-hover/blog-post:scale-110"></div>
+  <div data-slot="header" class="relative overflow-hidden aspect-[16/9] w-full pointer-events-none"><img src="https://picsum.photos/640/360" alt="Title" data-slot="image" class="object-cover object-top w-full h-full transform transition-transform ease-out motion-reduce:transition-none group-hover/blog-post:scale-110"></div>
   <div data-slot="body" class="min-w-0 flex-1 flex flex-col p-4 sm:p-6">
     <div data-slot="meta" class="flex items-center gap-2 mb-2"><span data-slot="badge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md ring ring-inset ring-accented text-default bg-elevated"><!--v-if--><span data-slot="label" class="truncate">Badge</span>
       <!--v-if--></span><time datetime="2024-01-01T00:00:00.000Z" data-slot="date" class="text-sm text-toned">Jan 1, 2024</time>
@@ -242,7 +242,7 @@ exports[`BlogPost > renders with description slot correctly 1`] = `
 
 exports[`BlogPost > renders with footer slot correctly 1`] = `
 "<article data-orientation="vertical" data-slot="root" class="relative group/blog-post rounded-lg overflow-hidden flex flex-col bg-default ring ring-default outline-primary/25 has-[>a:focus-visible]:outline-3 transition hover:bg-elevated/50 has-[>a:focus-visible]:ring-primary"><a href="https://github.com/benjamincanac" rel="noopener noreferrer" aria-label="Title" class="focus:outline-none absolute inset-0"></a>
-  <div data-slot="header" class="relative overflow-hidden aspect-[16/9] w-full pointer-events-none"><img src="https://picsum.photos/640/360" alt="Title" data-slot="image" class="object-cover object-top w-full h-full transform transition-transform duration-200 group-hover/blog-post:scale-110"></div>
+  <div data-slot="header" class="relative overflow-hidden aspect-[16/9] w-full pointer-events-none"><img src="https://picsum.photos/640/360" alt="Title" data-slot="image" class="object-cover object-top w-full h-full transform transition-transform ease-out motion-reduce:transition-none group-hover/blog-post:scale-110"></div>
   <div data-slot="body" class="min-w-0 flex-1 flex flex-col p-4 sm:p-6">
     <div data-slot="meta" class="flex items-center gap-2 mb-2"><span data-slot="badge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md ring ring-inset ring-accented text-default bg-elevated"><!--v-if--><span data-slot="label" class="truncate">Badge</span>
       <!--v-if--></span><time datetime="2024-01-01T00:00:00.000Z" data-slot="date" class="text-sm text-toned">Jan 1, 2024</time>
@@ -302,7 +302,7 @@ exports[`BlogPost > renders with image correctly 1`] = `
 
 exports[`BlogPost > renders with orientation horizontal correctly 1`] = `
 "<article data-orientation="horizontal" data-slot="root" class="relative group/blog-post flex flex-col rounded-lg overflow-hidden lg:grid lg:grid-cols-2 lg:items-center gap-x-8 bg-default ring ring-default outline-primary/25 has-[>a:focus-visible]:outline-3 transition hover:bg-elevated/50 has-[>a:focus-visible]:ring-primary"><a href="https://github.com/benjamincanac" rel="noopener noreferrer" aria-label="Title" class="focus:outline-none absolute inset-0"></a>
-  <div data-slot="header" class="relative overflow-hidden aspect-[16/9] w-full pointer-events-none"><img src="https://picsum.photos/640/360" alt="Title" data-slot="image" class="object-cover object-top w-full h-full transform transition-transform duration-200 group-hover/blog-post:scale-110"></div>
+  <div data-slot="header" class="relative overflow-hidden aspect-[16/9] w-full pointer-events-none"><img src="https://picsum.photos/640/360" alt="Title" data-slot="image" class="object-cover object-top w-full h-full transform transition-transform ease-out motion-reduce:transition-none group-hover/blog-post:scale-110"></div>
   <div data-slot="body" class="min-w-0 flex-1 flex flex-col justify-center p-4 sm:p-6 lg:px-0">
     <div data-slot="meta" class="flex items-center gap-2 mb-2"><span data-slot="badge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md ring ring-inset ring-accented text-default bg-elevated"><!--v-if--><span data-slot="label" class="truncate">Badge</span>
       <!--v-if--></span><time datetime="2024-01-01T00:00:00.000Z" data-slot="date" class="text-sm text-toned">Jan 1, 2024</time>
@@ -325,7 +325,7 @@ exports[`BlogPost > renders with orientation horizontal correctly 1`] = `
 
 exports[`BlogPost > renders with orientation vertical correctly 1`] = `
 "<article data-orientation="vertical" data-slot="root" class="relative group/blog-post rounded-lg overflow-hidden flex flex-col bg-default ring ring-default outline-primary/25 has-[>a:focus-visible]:outline-3 transition hover:bg-elevated/50 has-[>a:focus-visible]:ring-primary"><a href="https://github.com/benjamincanac" rel="noopener noreferrer" aria-label="Title" class="focus:outline-none absolute inset-0"></a>
-  <div data-slot="header" class="relative overflow-hidden aspect-[16/9] w-full pointer-events-none"><img src="https://picsum.photos/640/360" alt="Title" data-slot="image" class="object-cover object-top w-full h-full transform transition-transform duration-200 group-hover/blog-post:scale-110"></div>
+  <div data-slot="header" class="relative overflow-hidden aspect-[16/9] w-full pointer-events-none"><img src="https://picsum.photos/640/360" alt="Title" data-slot="image" class="object-cover object-top w-full h-full transform transition-transform ease-out motion-reduce:transition-none group-hover/blog-post:scale-110"></div>
   <div data-slot="body" class="min-w-0 flex-1 flex flex-col p-4 sm:p-6">
     <div data-slot="meta" class="flex items-center gap-2 mb-2"><span data-slot="badge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md ring ring-inset ring-accented text-default bg-elevated"><!--v-if--><span data-slot="label" class="truncate">Badge</span>
       <!--v-if--></span><time datetime="2024-01-01T00:00:00.000Z" data-slot="date" class="text-sm text-toned">Jan 1, 2024</time>
@@ -362,7 +362,7 @@ exports[`BlogPost > renders with title correctly 1`] = `
 
 exports[`BlogPost > renders with title slot correctly 1`] = `
 "<article data-orientation="vertical" data-slot="root" class="relative group/blog-post rounded-lg overflow-hidden flex flex-col bg-default ring ring-default outline-primary/25 has-[>a:focus-visible]:outline-3 transition hover:bg-elevated/50 has-[>a:focus-visible]:ring-primary"><a href="https://github.com/benjamincanac" rel="noopener noreferrer" aria-label="Title slot" class="focus:outline-none absolute inset-0"></a>
-  <div data-slot="header" class="relative overflow-hidden aspect-[16/9] w-full pointer-events-none"><img src="https://picsum.photos/640/360" alt="Title" data-slot="image" class="object-cover object-top w-full h-full transform transition-transform duration-200 group-hover/blog-post:scale-110"></div>
+  <div data-slot="header" class="relative overflow-hidden aspect-[16/9] w-full pointer-events-none"><img src="https://picsum.photos/640/360" alt="Title" data-slot="image" class="object-cover object-top w-full h-full transform transition-transform ease-out motion-reduce:transition-none group-hover/blog-post:scale-110"></div>
   <div data-slot="body" class="min-w-0 flex-1 flex flex-col p-4 sm:p-6">
     <div data-slot="meta" class="flex items-center gap-2 mb-2"><span data-slot="badge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md ring ring-inset ring-accented text-default bg-elevated"><!--v-if--><span data-slot="label" class="truncate">Badge</span>
       <!--v-if--></span><time datetime="2024-01-01T00:00:00.000Z" data-slot="date" class="text-sm text-toned">Jan 1, 2024</time>
@@ -385,7 +385,7 @@ exports[`BlogPost > renders with title slot correctly 1`] = `
 
 exports[`BlogPost > renders with to & image correctly 1`] = `
 "<article data-orientation="vertical" data-slot="root" class="relative group/blog-post rounded-lg overflow-hidden flex flex-col bg-default ring ring-default outline-primary/25 has-[>a:focus-visible]:outline-3 transition hover:bg-elevated/50 has-[>a:focus-visible]:ring-primary"><a href="https://github.com/benjamincanac" rel="noopener noreferrer" aria-label="Post link" class="focus:outline-none absolute inset-0"></a>
-  <div data-slot="header" class="relative overflow-hidden aspect-[16/9] w-full pointer-events-none"><img src="https://picsum.photos/640/360" data-slot="image" class="object-cover object-top w-full h-full transform transition-transform duration-200 group-hover/blog-post:scale-110"></div>
+  <div data-slot="header" class="relative overflow-hidden aspect-[16/9] w-full pointer-events-none"><img src="https://picsum.photos/640/360" data-slot="image" class="object-cover object-top w-full h-full transform transition-transform ease-out motion-reduce:transition-none group-hover/blog-post:scale-110"></div>
   <div data-slot="body" class="min-w-0 flex-1 flex flex-col p-4 sm:p-6">
     <!--v-if-->
     <!--v-if-->
@@ -411,7 +411,7 @@ exports[`BlogPost > renders with to correctly 1`] = `
 
 exports[`BlogPost > renders with ui correctly 1`] = `
 "<article data-orientation="vertical" data-slot="root" class="relative group/blog-post rounded-lg overflow-hidden flex flex-col bg-default ring ring-default outline-primary/25 has-[>a:focus-visible]:outline-3 transition hover:bg-elevated/50 has-[>a:focus-visible]:ring-primary"><a href="https://github.com/benjamincanac" rel="noopener noreferrer" aria-label="Title" class="focus:outline-none absolute inset-0"></a>
-  <div data-slot="header" class="relative overflow-hidden aspect-[16/9] w-full pointer-events-none"><img src="https://picsum.photos/640/360" alt="Title" data-slot="image" class="object-cover object-top w-full h-full transform transition-transform duration-200 group-hover/blog-post:scale-110"></div>
+  <div data-slot="header" class="relative overflow-hidden aspect-[16/9] w-full pointer-events-none"><img src="https://picsum.photos/640/360" alt="Title" data-slot="image" class="object-cover object-top w-full h-full transform transition-transform ease-out motion-reduce:transition-none group-hover/blog-post:scale-110"></div>
   <div data-slot="body" class="min-w-0 flex-1 flex flex-col p-4 sm:p-6">
     <div data-slot="meta" class="flex items-center gap-2 mb-2"><span data-slot="badge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md ring ring-inset ring-accented text-default bg-elevated"><!--v-if--><span data-slot="label" class="truncate">Badge</span>
       <!--v-if--></span><time datetime="2024-01-01T00:00:00.000Z" data-slot="date" class="text-sm text-toned">Jan 1, 2024</time>
@@ -434,7 +434,7 @@ exports[`BlogPost > renders with ui correctly 1`] = `
 
 exports[`BlogPost > renders with variant ghost correctly 1`] = `
 "<article data-orientation="vertical" data-slot="root" class="relative group/blog-post rounded-lg overflow-hidden flex flex-col outline-primary/25 has-[>a:focus-visible]:outline-3 transition hover:bg-elevated/50"><a href="https://github.com/benjamincanac" rel="noopener noreferrer" aria-label="Title" class="focus:outline-none absolute inset-0"></a>
-  <div data-slot="header" class="relative overflow-hidden aspect-[16/9] w-full pointer-events-none shadow-lg rounded-lg group-hover/blog-post:shadow-none transition-all group-hover/blog-post:rounded-b-none"><img src="https://picsum.photos/640/360" alt="Title" data-slot="image" class="object-cover object-top w-full h-full transform transition-transform duration-200 group-hover/blog-post:scale-110"></div>
+  <div data-slot="header" class="relative overflow-hidden aspect-[16/9] w-full pointer-events-none shadow-lg rounded-lg group-hover/blog-post:shadow-none transition-[box-shadow,border-radius] ease-out group-hover/blog-post:rounded-b-none"><img src="https://picsum.photos/640/360" alt="Title" data-slot="image" class="object-cover object-top w-full h-full transform transition-transform ease-out motion-reduce:transition-none group-hover/blog-post:scale-110"></div>
   <div data-slot="body" class="min-w-0 flex-1 flex flex-col p-4 sm:p-6">
     <div data-slot="meta" class="flex items-center gap-2 mb-2"><span data-slot="badge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md ring ring-inset ring-accented text-default bg-elevated"><!--v-if--><span data-slot="label" class="truncate">Badge</span>
       <!--v-if--></span><time datetime="2024-01-01T00:00:00.000Z" data-slot="date" class="text-sm text-toned">Jan 1, 2024</time>
@@ -457,7 +457,7 @@ exports[`BlogPost > renders with variant ghost correctly 1`] = `
 
 exports[`BlogPost > renders with variant naked correctly 1`] = `
 "<article data-orientation="vertical" data-slot="root" class="relative group/blog-post rounded-lg overflow-hidden flex flex-col p-0 sm:p-0 outline-primary/25 has-[>a:focus-visible]:outline-3 transition"><a href="https://github.com/benjamincanac" rel="noopener noreferrer" aria-label="Title" class="focus:outline-none absolute inset-0"></a>
-  <div data-slot="header" class="relative overflow-hidden aspect-[16/9] w-full pointer-events-none shadow-lg rounded-lg"><img src="https://picsum.photos/640/360" alt="Title" data-slot="image" class="object-cover object-top w-full h-full transform transition-transform duration-200 group-hover/blog-post:scale-110"></div>
+  <div data-slot="header" class="relative overflow-hidden aspect-[16/9] w-full pointer-events-none shadow-lg rounded-lg"><img src="https://picsum.photos/640/360" alt="Title" data-slot="image" class="object-cover object-top w-full h-full transform transition-transform ease-out motion-reduce:transition-none group-hover/blog-post:scale-110"></div>
   <div data-slot="body" class="min-w-0 flex-1 flex flex-col p-4 sm:p-6">
     <div data-slot="meta" class="flex items-center gap-2 mb-2"><span data-slot="badge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md ring ring-inset ring-accented text-default bg-elevated"><!--v-if--><span data-slot="label" class="truncate">Badge</span>
       <!--v-if--></span><time datetime="2024-01-01T00:00:00.000Z" data-slot="date" class="text-sm text-toned">Jan 1, 2024</time>
@@ -480,7 +480,7 @@ exports[`BlogPost > renders with variant naked correctly 1`] = `
 
 exports[`BlogPost > renders with variant outline correctly 1`] = `
 "<article data-orientation="vertical" data-slot="root" class="relative group/blog-post rounded-lg overflow-hidden flex flex-col bg-default ring ring-default outline-primary/25 has-[>a:focus-visible]:outline-3 transition hover:bg-elevated/50 has-[>a:focus-visible]:ring-primary"><a href="https://github.com/benjamincanac" rel="noopener noreferrer" aria-label="Title" class="focus:outline-none absolute inset-0"></a>
-  <div data-slot="header" class="relative overflow-hidden aspect-[16/9] w-full pointer-events-none"><img src="https://picsum.photos/640/360" alt="Title" data-slot="image" class="object-cover object-top w-full h-full transform transition-transform duration-200 group-hover/blog-post:scale-110"></div>
+  <div data-slot="header" class="relative overflow-hidden aspect-[16/9] w-full pointer-events-none"><img src="https://picsum.photos/640/360" alt="Title" data-slot="image" class="object-cover object-top w-full h-full transform transition-transform ease-out motion-reduce:transition-none group-hover/blog-post:scale-110"></div>
   <div data-slot="body" class="min-w-0 flex-1 flex flex-col p-4 sm:p-6">
     <div data-slot="meta" class="flex items-center gap-2 mb-2"><span data-slot="badge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md ring ring-inset ring-accented text-default bg-elevated"><!--v-if--><span data-slot="label" class="truncate">Badge</span>
       <!--v-if--></span><time datetime="2024-01-01T00:00:00.000Z" data-slot="date" class="text-sm text-toned">Jan 1, 2024</time>
@@ -503,7 +503,7 @@ exports[`BlogPost > renders with variant outline correctly 1`] = `
 
 exports[`BlogPost > renders with variant soft correctly 1`] = `
 "<article data-orientation="vertical" data-slot="root" class="relative group/blog-post rounded-lg overflow-hidden flex flex-col bg-elevated/50 outline-primary/25 has-[>a:focus-visible]:outline-3 transition hover:bg-elevated"><a href="https://github.com/benjamincanac" rel="noopener noreferrer" aria-label="Title" class="focus:outline-none absolute inset-0"></a>
-  <div data-slot="header" class="relative overflow-hidden aspect-[16/9] w-full pointer-events-none"><img src="https://picsum.photos/640/360" alt="Title" data-slot="image" class="object-cover object-top w-full h-full transform transition-transform duration-200 group-hover/blog-post:scale-110"></div>
+  <div data-slot="header" class="relative overflow-hidden aspect-[16/9] w-full pointer-events-none"><img src="https://picsum.photos/640/360" alt="Title" data-slot="image" class="object-cover object-top w-full h-full transform transition-transform ease-out motion-reduce:transition-none group-hover/blog-post:scale-110"></div>
   <div data-slot="body" class="min-w-0 flex-1 flex flex-col p-4 sm:p-6">
     <div data-slot="meta" class="flex items-center gap-2 mb-2"><span data-slot="badge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md ring ring-inset ring-accented text-default bg-elevated"><!--v-if--><span data-slot="label" class="truncate">Badge</span>
       <!--v-if--></span><time datetime="2024-01-01T00:00:00.000Z" data-slot="date" class="text-sm text-muted">Jan 1, 2024</time>
@@ -526,7 +526,7 @@ exports[`BlogPost > renders with variant soft correctly 1`] = `
 
 exports[`BlogPost > renders with variant subtle correctly 1`] = `
 "<article data-orientation="vertical" data-slot="root" class="relative group/blog-post rounded-lg overflow-hidden flex flex-col bg-elevated/50 ring ring-default outline-primary/25 has-[>a:focus-visible]:outline-3 transition hover:bg-elevated hover:ring-accented has-[>a:focus-visible]:ring-primary"><a href="https://github.com/benjamincanac" rel="noopener noreferrer" aria-label="Title" class="focus:outline-none absolute inset-0"></a>
-  <div data-slot="header" class="relative overflow-hidden aspect-[16/9] w-full pointer-events-none"><img src="https://picsum.photos/640/360" alt="Title" data-slot="image" class="object-cover object-top w-full h-full transform transition-transform duration-200 group-hover/blog-post:scale-110"></div>
+  <div data-slot="header" class="relative overflow-hidden aspect-[16/9] w-full pointer-events-none"><img src="https://picsum.photos/640/360" alt="Title" data-slot="image" class="object-cover object-top w-full h-full transform transition-transform ease-out motion-reduce:transition-none group-hover/blog-post:scale-110"></div>
   <div data-slot="body" class="min-w-0 flex-1 flex flex-col p-4 sm:p-6">
     <div data-slot="meta" class="flex items-center gap-2 mb-2"><span data-slot="badge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md ring ring-inset ring-accented text-default bg-elevated"><!--v-if--><span data-slot="label" class="truncate">Badge</span>
       <!--v-if--></span><time datetime="2024-01-01T00:00:00.000Z" data-slot="date" class="text-sm text-muted">Jan 1, 2024</time>

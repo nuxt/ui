@@ -23,18 +23,15 @@ describe('Button mount', () => {
 // its subtree. Each iteration performs a full on/off cycle so the work measured
 // is deterministic and always ends back in the initial `false` state.
 describe('Button re-render (variant prop change)', () => {
-  let wrapper: Awaited<ReturnType<typeof mountSuspended>>
+  let wrapper: Awaited<ReturnType<typeof mountSuspended>> | undefined
 
+  // Mounted lazily on the first call: CodSpeed's analysis runner invokes the
+  // bench function without tinybench's `setup`/`teardown` options, so a mount
+  // there never happens under instrumentation. The warmup pass absorbs it.
   bench('toggle loading', async () => {
+    wrapper ??= await mountSuspended(Button, { props: { label: 'Button' } })
     await wrapper.setProps({ loading: true })
     await wrapper.setProps({ loading: false })
-  }, {
-    async setup() {
-      wrapper = await mountSuspended(Button, { props: { label: 'Button' } })
-    },
-    teardown() {
-      wrapper?.unmount()
-    }
   })
 })
 
@@ -73,16 +70,10 @@ describe('Table mount (200 x 5)', () => {
 })
 
 describe('Table re-render (new data identity)', () => {
-  let wrapper: Awaited<ReturnType<typeof mountSuspended>>
+  let wrapper: Awaited<ReturnType<typeof mountSuspended>> | undefined
 
   bench('set data', async () => {
+    wrapper ??= await mountSuspended(Table, { props: tableProps(makeData(200)) })
     await wrapper.setProps({ data: makeData(200) })
-  }, {
-    async setup() {
-      wrapper = await mountSuspended(Table, { props: tableProps(makeData(200)) })
-    },
-    teardown() {
-      wrapper?.unmount()
-    }
   })
 })

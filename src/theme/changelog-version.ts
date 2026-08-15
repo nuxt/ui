@@ -32,7 +32,7 @@ export default (options: Required<ModuleOptions>) => ({
     to: {
       true: {
         title: ['outline-primary/25 has-focus-visible:outline-3 rounded-xs', options.theme.transitions && 'transition'],
-        image: 'transform transition-transform duration-200 group-hover/changelog-version-image:scale-105 group-has-focus-visible/changelog-version-image:scale-105'
+        image: 'transform transition-transform ease-out motion-reduce:transition-none group-hover/changelog-version-image:scale-105 group-has-focus-visible/changelog-version-image:scale-105'
       }
     },
     hidden: {

@@ -11,8 +11,7 @@
     "v4"
   ],
   "ignoreDeps": [
-    "actions/stale",
-    "@nuxt/test-utils"
+    "actions/stale"
   ],
   "packageRules": [
     {
@@ -27,6 +26,18 @@
       "matchPackageNames": [
         "@tiptap/*"
       ]
+    },
+    {
+      "matchPackageNames": [
+        "tailwind-variants"
+      ],
+      "allowedVersions": "<3.3.0"
+    },
+    {
+      "matchPackageNames": [
+        "@nuxt/image"
+      ],
+      "allowedVersions": "<2.1.0"
     },
     {
       "matchDepTypes": [
