@@ -230,16 +230,23 @@ export default defineNuxtModule<ModuleOptions>({
     // `@nuxt/icon` drops any name it can't resolve (collection not installed, icon
     // missing) and falls back to runtime loading instead of failing the build
     // (nuxt/icon#504), so we add them all and let it sort out what's available.
+    const hasProse = !!(options.prose || options.mdc || options.content || hasNuxtModule('@nuxtjs/mdc') || hasNuxtModule('@nuxt/content'))
+
     nuxt.hook('icon:clientBundleIcons', (icons) => {
+      const sources: (Record<string, string> | undefined)[] = [nuxt.options.appConfig.ui?.icons]
+
       // `ProseCodeIcon` looks its icon up in the code icon map, and `ProsePrompt` hardcodes
       // one logo per action (see its `actions` prop). Both live in the library rather than
-      // in the user's source, so `clientBundle.scan` never sees these names.
-      const sources = [
-        nuxt.options.appConfig.ui?.icons,
-        codeIcon,
-        nuxt.options.appConfig.ui?.prose?.codeIcon,
-        { cursor: 'i-simple-icons-cursor', windsurf: 'i-simple-icons-windsurf', claude: 'i-simple-icons-claude' }
-      ]
+      // in the user's source, so `clientBundle.scan` never sees these names. Only when the
+      // prose components are registered below, they're ~48 icons an app without prose can
+      // never render.
+      if (hasProse) {
+        sources.push(
+          codeIcon,
+          nuxt.options.appConfig.ui?.prose?.codeIcon,
+          { cursor: 'i-simple-icons-cursor', windsurf: 'i-simple-icons-windsurf', claude: 'i-simple-icons-claude' }
+        )
+      }
 
       for (const source of sources) {
         for (const name of getClientBundleIcons(source)) {
@@ -265,7 +272,7 @@ export default defineNuxtModule<ModuleOptions>({
 
     addPlugin({ src: resolve('./runtime/plugins/colors') })
 
-    if (options.prose || options.mdc || options.content || hasNuxtModule('@nuxtjs/mdc') || hasNuxtModule('@nuxt/content')) {
+    if (hasProse) {
       addComponentsDir({
         path: resolve('./runtime/components/prose'),
         pathPrefix: false,
