@@ -356,6 +356,27 @@ export default defineNuxtConfig({
       dir: resolve('./app/assets/icons')
     }],
     clientBundle: {
+      // `ProseCodeIcon` resolves through Nuxt UI's code icon map and falls back to
+      // `i-vscode-icons-file-type-{extension}`, and `ProsePrompt` hardcodes one logo per
+      // action. None of them appear in anything `scan` looks at, which is the layer roots,
+      // so they're left to runtime loading. That is currently broken during SSR
+      // (nuxt/icon#518), so bundle them by hand until nuxt/icon#527 lands.
+      icons: [
+        'simple-icons:claude',
+        'simple-icons:cursor',
+        'simple-icons:windsurf',
+        'vscode-icons:file-type-bun',
+        'vscode-icons:file-type-css',
+        'vscode-icons:file-type-dotenv',
+        'vscode-icons:file-type-edge',
+        'vscode-icons:file-type-git',
+        'vscode-icons:file-type-html',
+        'vscode-icons:file-type-npm',
+        'vscode-icons:file-type-php',
+        'vscode-icons:file-type-pnpm',
+        'vscode-icons:file-type-tsconfig',
+        'vscode-icons:file-type-yarn'
+      ],
       scan: {
         // `ts` is added because the default glob skips JS/TS for perf, but nav icons
         // live in `app/composables/*.ts`. The explicit dot pattern is required because
