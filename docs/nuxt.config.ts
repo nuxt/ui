@@ -212,19 +212,19 @@ export default defineNuxtConfig({
     '/getting-started/shortcuts': { redirect: { to: '/composables/define-shortcuts', statusCode: 301 }, prerender: false }
   },
 
+  // The SSR bundle's sourcemaps cost hundreds of MB of heap during the build and are
+  // never used, the server output is not debugged from a browser.
+  sourcemap: {
+    server: false,
+    client: false
+  },
+
   experimental: {
     defaults: {
       nuxtLink: {
         externalRelAttribute: 'noopener'
       }
     }
-  },
-
-  // The SSR bundle's sourcemaps cost hundreds of MB of heap during the build and are
-  // never used, the server output is not debugged from a browser.
-  sourcemap: {
-    server: false,
-    client: false
   },
 
   compatibilityDate: '2026-01-14',
