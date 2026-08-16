@@ -28,6 +28,15 @@ export default defineNuxtConfig({
   $production: {
     site: {
       url: 'https://ui.nuxt.com'
+    },
+    // Sourcemaps for the SSR bundle and for the Nitro server are built and never used,
+    // and they cost hundreds of MB of heap while bundling. Build only, so `nuxt dev`
+    // keeps Nuxt's defaults and stays debuggable.
+    sourcemap: {
+      server: false
+    },
+    nitro: {
+      sourceMap: false
     }
   },
 
@@ -212,13 +221,6 @@ export default defineNuxtConfig({
     '/getting-started/shortcuts': { redirect: { to: '/composables/define-shortcuts', statusCode: 301 }, prerender: false }
   },
 
-  // The SSR bundle's sourcemaps cost hundreds of MB of heap during the build and are
-  // never used, the server output is not debugged from a browser.
-  sourcemap: {
-    server: false,
-    client: false
-  },
-
   experimental: {
     defaults: {
       nuxtLink: {
@@ -230,7 +232,6 @@ export default defineNuxtConfig({
   compatibilityDate: '2026-01-14',
 
   nitro: {
-    sourceMap: false,
     experimental: {
       asyncContext: true
     },
