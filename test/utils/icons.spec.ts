@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import { getClientBundleIcons, parseIconName } from '../../src/utils/icons'
 import defaultIcons from '../../src/theme/icons'
+import codeIcon from '../../src/theme/prose/code-icon'
 
 describe('parseIconName', () => {
   it('parses the colon form for any collection', () => {
@@ -53,8 +54,9 @@ describe('getClientBundleIcons', () => {
   it('skips overrides from collections Nuxt UI does not ship defaults in', () => {
     // `heroicons` is single-word and would convert safely, but `svg-spinners` would
     // mis-convert to `svg:...`. Without `@nuxt/icon`'s collection list we can't tell them
-    // apart, so we only trust shipped collections (`lucide`) and leave everything else to
-    // runtime loading rather than emit a wrong name `@nuxt/icon` would drop and warn about.
+    // apart, so we only trust the collections Nuxt UI ships (`lucide`, `vscode-icons`) and
+    // leave everything else to runtime loading rather than emit a wrong name `@nuxt/icon`
+    // would drop and warn about.
     const names = getClientBundleIcons({
       check: 'i-heroicons-check',
       loading: 'i-svg-spinners-90-ring',
@@ -63,6 +65,17 @@ describe('getClientBundleIcons', () => {
     })
 
     expect(names).toEqual([])
+  })
+
+  it('converts the prose code icon map, which is mostly `vscode-icons`', () => {
+    const names = getClientBundleIcons(codeIcon)
+
+    // a first-dash split would read these as `vscode:icons-file-type-*`
+    expect(names).toContain('vscode-icons:file-type-npm')
+    expect(names).toContain('vscode-icons:file-type-pnpm')
+    expect(names).toContain('vscode-icons:file-type-bun')
+    expect(names).toContain('lucide:terminal')
+    expect(names).toHaveLength(new Set(Object.values(codeIcon)).size)
   })
 
   it('ignores values that are not icon names', () => {

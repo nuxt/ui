@@ -5,6 +5,7 @@ import { addTemplates } from './templates'
 import { publicComposables } from './imports'
 import { defaultOptions, getDefaultConfig, resolveColors } from './utils/defaults'
 import { getClientBundleIcons } from './utils/icons'
+import codeIcon from './theme/prose/code-icon'
 import { name, version } from '../package.json'
 
 export type * from './runtime/types'
@@ -230,8 +231,20 @@ export default defineNuxtModule<ModuleOptions>({
     // missing) and falls back to runtime loading instead of failing the build
     // (nuxt/icon#504), so we add them all and let it sort out what's available.
     nuxt.hook('icon:clientBundleIcons', (icons) => {
-      for (const name of getClientBundleIcons(nuxt.options.appConfig.ui?.icons)) {
-        icons.add(name)
+      // `ProseCodeIcon` looks its icon up in the code icon map, and `ProsePrompt` hardcodes
+      // one logo per action (see its `actions` prop). Both live in the library rather than
+      // in the user's source, so `clientBundle.scan` never sees these names.
+      const sources = [
+        nuxt.options.appConfig.ui?.icons,
+        codeIcon,
+        nuxt.options.appConfig.ui?.prose?.codeIcon,
+        { cursor: 'i-simple-icons-cursor', windsurf: 'i-simple-icons-windsurf', claude: 'i-simple-icons-claude' }
+      ]
+
+      for (const source of sources) {
+        for (const name of getClientBundleIcons(source)) {
+          icons.add(name)
+        }
       }
     })
 

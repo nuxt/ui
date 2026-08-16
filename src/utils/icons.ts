@@ -38,17 +38,21 @@ export function parseIconName(icon: string, collections: Iterable<string> = [], 
   }
 }
 
-// Collections Nuxt UI ships its default icons in (currently just `lucide`). We only
-// auto-bundle icons from these collections because they convert unambiguously; icons
-// from other collections may use multi-word collection names that can't be split
-// reliably, so they're left to runtime loading rather than emit a wrong name `@nuxt/icon`
-// would drop and warn about. Derived from the defaults (known to be single-word, hence
-// the first-dash fallback) so it stays correct if they ever change.
-const trustedCollections = new Set(
-  Object.values(defaultIcons)
+// Collections Nuxt UI ships its own icons in. We only auto-bundle icons from these
+// collections because they convert unambiguously; icons from other collections may use
+// multi-word collection names that can't be split reliably, so they're left to runtime
+// loading rather than emit a wrong name `@nuxt/icon` would drop and warn about. The
+// defaults are derived (known to be single-word, hence the first-dash fallback) so they
+// stay correct if they ever change. `vscode-icons` (prose code icons) and `simple-icons`
+// (the `ProsePrompt` action logos) are listed by hand because a first-dash split would
+// read them as `vscode` and `simple`.
+const trustedCollections = new Set([
+  ...Object.values(defaultIcons)
     .map(icon => parseIconName(icon, [], true)?.[0])
-    .filter((collection): collection is string => !!collection)
-)
+    .filter((collection): collection is string => !!collection),
+  'vscode-icons',
+  'simple-icons'
+])
 
 /**
  * Resolve the icons Nuxt UI uses into `@nuxt/icon` client-bundle names so they're
