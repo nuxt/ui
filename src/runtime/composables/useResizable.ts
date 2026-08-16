@@ -116,8 +116,18 @@ export function useResizable(key: string, options: Ref<UseResizableProps> | UseR
       : useStorage<StorageType>(key, defaultStorageValue, undefined, opts.value.storageOptions)
     : ref(defaultStorageValue)
 
+  // A persisted `null` (corrupted cookie/localStorage or cookie removed at runtime) bypasses
+  // the storage defaults and would crash every access, so guard reads and heal on write (#6517).
+  const writeStorage = (patch: Partial<StorageType>) => {
+    if (storageData.value) {
+      Object.assign(storageData.value, patch)
+    } else {
+      storageData.value = { ...defaultStorageValue, ...patch }
+    }
+  }
+
   const isCollapsed = computed({
-    get: () => storageData.value.collapsed,
+    get: () => storageData.value?.collapsed ?? defaultStorageValue.collapsed,
     set: (value: boolean) => {
       if (!opts.value.collapsible) {
         return
@@ -126,22 +136,27 @@ export function useResizable(key: string, options: Ref<UseResizableProps> | UseR
       if (isRef(collapsed)) {
         collapsed.value = value
       }
-      storageData.value.collapsed = value
+      writeStorage({ collapsed: value })
     }
   })
 
   const previousSize = ref(opts.value.defaultSize)
 
   const size = computed({
-    get: () => storageData.value.size,
-    set: (value) => { storageData.value.size = value }
+    get: () => storageData.value?.size ?? opts.value.defaultSize,
+    set: (value) => {
+      writeStorage({ size: value })
+    }
   })
 
   const currentSize = computed(() => isCollapsed.value ? opts.value.collapsedSize : size.value)
 
   const isDragging = ref(false)
 
-  const onMouseMove = (e: MouseEvent, initialPos: number, initialSize: number): void => {
+  // Read once per drag: `getComputedStyle` on every pointer move forces a style recalc.
+  const getRootFontSize = () => opts.value.unit === 'rem' ? Number.parseFloat(getComputedStyle(document.documentElement).fontSize) : 1
+
+  const resize = (clientX: number, initialPos: number, initialSize: number, rootFontSize: number): void => {
     if (!el.value || !opts.value.resizable) {
       return
     }
@@ -152,11 +167,9 @@ export function useResizable(key: string, options: Ref<UseResizableProps> | UseR
     // In RTL mode, we need to invert the delta calculation
     let delta: number
     if (isRtl) {
-      // In RTL mode, invert the logic
-      delta = opts.value.side === 'left' ? initialPos - e.clientX : e.clientX - initialPos
+      delta = opts.value.side === 'left' ? initialPos - clientX : clientX - initialPos
     } else {
-      // Original LTR logic
-      delta = opts.value.side === 'left' ? e.clientX - initialPos : initialPos - e.clientX
+      delta = opts.value.side === 'left' ? clientX - initialPos : initialPos - clientX
     }
 
     const newSize = initialSize + delta
@@ -165,7 +178,6 @@ export function useResizable(key: string, options: Ref<UseResizableProps> | UseR
     let newValue: number
     if (opts.value.unit === 'rem') {
       // Convert pixels to rem
-      const rootFontSize = Number.parseFloat(getComputedStyle(document.documentElement).fontSize)
       newValue = newSize / rootFontSize
     } else if (opts.value.unit === 'px') {
       // Use pixel value directly
@@ -201,11 +213,12 @@ export function useResizable(key: string, options: Ref<UseResizableProps> | UseR
 
     const initialX = e.clientX
     const initialWidth = elWidth
+    const rootFontSize = getRootFontSize()
 
     isDragging.value = true
 
     const handleMouseMove = (e: MouseEvent) => {
-      onMouseMove(e, initialX, initialWidth)
+      resize(e.clientX, initialX, initialWidth, rootFontSize)
     }
 
     const handleMouseUp = () => {
@@ -216,51 +229,6 @@ export function useResizable(key: string, options: Ref<UseResizableProps> | UseR
 
     document.addEventListener('mousemove', handleMouseMove)
     document.addEventListener('mouseup', handleMouseUp)
-  }
-
-  const onTouchMove = (e: TouchEvent, initialPos: number, initialSize: number): void => {
-    if (!el.value || !opts.value.resizable || !e.touches[0]) {
-      return
-    }
-
-    const parentSize = el.value.parentElement?.offsetWidth || 1
-    const isRtl = dir.value === 'rtl'
-
-    // In RTL mode, we need to invert the delta calculation
-    let delta: number
-    if (isRtl) {
-      // In RTL mode, invert the logic
-      delta = opts.value.side === 'left' ? initialPos - e.touches[0].clientX : e.touches[0].clientX - initialPos
-    } else {
-      // Original LTR logic
-      delta = opts.value.side === 'left' ? e.touches[0].clientX - initialPos : initialPos - e.touches[0].clientX
-    }
-
-    const newSize = initialSize + delta
-
-    // Calculate size based on the selected unit
-    let newValue: number
-    if (opts.value.unit === 'rem') {
-      // Convert pixels to rem
-      const rootFontSize = Number.parseFloat(getComputedStyle(document.documentElement).fontSize)
-      newValue = newSize / rootFontSize
-    } else if (opts.value.unit === 'px') {
-      // Use pixel value directly
-      newValue = newSize
-    } else {
-      // Default percentage calculation
-      newValue = (newSize / parentSize) * 100
-    }
-
-    // Auto collapse when dragging near collapsedSize
-    if (opts.value.collapsible && newValue < (opts.value.collapsedSize + 4)) {
-      collapse(true)
-      return
-    } else if (isCollapsed.value) {
-      collapse(false)
-    }
-
-    size.value = Math.min(opts.value.maxSize, Math.max(opts.value.minSize, newValue))
   }
 
   const onTouchStart = (e: TouchEvent) => {
@@ -278,11 +246,14 @@ export function useResizable(key: string, options: Ref<UseResizableProps> | UseR
 
     const initialX = e.touches[0].clientX
     const initialWidth = elWidth
+    const rootFontSize = getRootFontSize()
 
     isDragging.value = true
 
     const handleTouchMove = (e: TouchEvent) => {
-      onTouchMove(e, initialX, initialWidth)
+      if (e.touches[0]) {
+        resize(e.touches[0].clientX, initialX, initialWidth, rootFontSize)
+      }
     }
 
     const handleTouchEnd = () => {
@@ -328,7 +299,7 @@ export function useResizable(key: string, options: Ref<UseResizableProps> | UseR
   }
 
   // Initial sync of storage value to external collapsed ref
-  if (isRef(collapsed) && storageData.value.collapsed) {
+  if (isRef(collapsed) && storageData.value?.collapsed) {
     collapsed.value = storageData.value.collapsed
   }
 
@@ -339,8 +310,8 @@ export function useResizable(key: string, options: Ref<UseResizableProps> | UseR
         return
       }
 
-      if (storageData.value.collapsed !== value) {
-        storageData.value.collapsed = value
+      if (storageData.value?.collapsed !== value) {
+        isCollapsed.value = value
       }
     })
   }

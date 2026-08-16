@@ -9,24 +9,24 @@
     "typecheck": "nuxt typecheck"
   },
   "dependencies": {
-    "@ai-sdk/anthropic": "^4.0.8",
-    "@ai-sdk/gateway": "^4.0.12",
-    "@ai-sdk/vue": "^4.0.15",
-    "@comark/vue": "^0.5.0",
-    "@iconify-json/lucide": "^1.2.116",
-    "@iconify-json/simple-icons": "^1.2.89",
-    "@internationalized/date": "^3.12.2",
-    "@nuxt/content": "^3.15.0",
+    "@ai-sdk/anthropic": "^4.0.36",
+    "@ai-sdk/gateway": "^4.0.46",
+    "@ai-sdk/vue": "^4.0.58",
+    "@comark/vue": "^0.6.2",
+    "@iconify-json/lucide": "^1.2.122",
+    "@iconify-json/simple-icons": "^1.2.93",
+    "@internationalized/date": "^3.12.3",
+    "@nuxt/content": "^3.15.2",
     "@nuxt/ui": "workspace:*",
-    "@tiptap/extension-emoji": "^3.26.1",
-    "@tiptap/extension-text-align": "^3.26.1",
-    "ai": "^7.0.15",
-    "nuxt": "^4.4.8",
-    "tailwindcss": "^4.3.2",
+    "@tiptap/extension-emoji": "^3.29.2",
+    "@tiptap/extension-text-align": "^3.29.2",
+    "ai": "^7.0.58",
+    "nuxt": "^4.5.2",
+    "tailwindcss": "^4.3.3",
     "zod": "^4.4.3"
   },
   "devDependencies": {
     "typescript": "^6.0.3",
-    "vue-tsc": "^3.3.6"
+    "vue-tsc": "^3.3.9"
   }
 }

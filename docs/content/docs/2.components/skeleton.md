@@ -1,6 +1,9 @@
 ---
 description: A placeholder to show while content is loading.
 category: element
+keywords:
+  - shimmer
+  - ghost loader
 links:
   - label: GitHub
     icon: i-simple-icons-github

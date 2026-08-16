@@ -14,9 +14,10 @@ export interface ProsePromptProps {
    */
   icon?: IconProps['name']
   /**
+   * The `copy` action is always displayed, list any additional actions to show alongside it.
    * @defaultValue ['copy']
    */
-  actions?: ('copy' | 'cursor' | 'windsurf')[]
+  actions?: ('copy' | 'cursor' | 'windsurf' | 'claude')[]
   class?: any
   ui?: ProsePrompt['slots']
 }
@@ -40,7 +41,7 @@ import UButton from '../Button.vue'
 defineOptions({ inheritAttrs: false })
 
 const _props = withDefaults(defineProps<ProsePromptProps>(), {
-  actions: () => ['copy']
+  actions: () => []
 })
 const slots = defineSlots<ProsePromptSlots>()
 
@@ -53,6 +54,9 @@ const appConfig = useAppConfig() as ProsePrompt['AppConfig']
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.prose?.prompt || {}) })())
 
+// eslint-disable-next-line vue/no-dupe-keys
+const actions = computed(() => [...new Set(['copy', ...props.actions])])
+
 function getPromptText() {
   const children = slots.default?.()
   return children ? getSlotChildrenText(children).trim() : ''
@@ -63,17 +67,15 @@ function copyPrompt() {
 }
 
 function openInCursor() {
-  const url = new URL('cursor://anysphere.cursor-deeplink/prompt')
-  url.searchParams.set('text', getPromptText())
-
-  window.open(url.toString(), '_self')
+  window.open(`cursor://anysphere.cursor-deeplink/prompt?text=${encodeURIComponent(getPromptText())}`, '_self')
 }
 
 function openInWindsurf() {
-  const url = new URL('windsurf://cascade/newChat')
-  url.searchParams.set('prompt', getPromptText())
+  window.open(`windsurf://cascade/newChat?prompt=${encodeURIComponent(getPromptText())}`, '_self')
+}
 
-  window.open(url.toString(), '_self')
+function openInClaude() {
+  window.open(`claude://code/new?q=${encodeURIComponent(getPromptText())}`, '_self')
 }
 </script>
 
@@ -89,7 +91,7 @@ function openInWindsurf() {
 
     <div :class="ui.actions({ class: props.ui?.actions })">
       <UButton
-        v-if="props.actions.includes('copy')"
+        v-if="actions.includes('copy')"
         :icon="copied ? appConfig.ui.icons.copyCheck : appConfig.ui.icons.copy"
         size="sm"
         :label="t('prose.prompt.copy')"
@@ -97,7 +99,7 @@ function openInWindsurf() {
       />
 
       <UButton
-        v-if="props.actions.includes('cursor')"
+        v-if="actions.includes('cursor')"
         icon="i-simple-icons-cursor"
         color="neutral"
         variant="outline"
@@ -107,13 +109,23 @@ function openInWindsurf() {
       />
 
       <UButton
-        v-if="props.actions.includes('windsurf')"
+        v-if="actions.includes('windsurf')"
         icon="i-simple-icons-windsurf"
         color="neutral"
         variant="outline"
         size="sm"
         :label="t('prose.prompt.openIn', { name: 'Windsurf' })"
         @click="openInWindsurf"
+      />
+
+      <UButton
+        v-if="actions.includes('claude')"
+        icon="i-simple-icons-claude"
+        color="neutral"
+        variant="outline"
+        size="sm"
+        :label="t('prose.prompt.openIn', { name: 'Claude' })"
+        @click="openInClaude"
       />
     </div>
   </div>

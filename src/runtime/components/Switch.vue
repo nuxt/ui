@@ -82,8 +82,17 @@ const appConfig = useAppConfig() as Switch['AppConfig']
 
 const rootProps = useForwardProps(reactivePick(props, 'required', 'value', 'defaultValue', 'modelValue', 'trueValue', 'falseValue'), emits)
 
-const { id: _id, emitFormChange, emitFormInput, size, color, highlight, name, disabled, ariaAttrs } = useFormField<SwitchProps<T>>(_props)
+const { id: _id, emitFormChange, emitFormInput, size: formFieldSize, color: formFieldColor, highlight: formFieldHighlight, name, disabled: formFieldDisabled, ariaAttrs } = useFormField<SwitchProps<T>>(_props)
 const id = _id.value ?? useId()
+
+// eslint-disable-next-line vue/no-dupe-keys
+const color = computed(() => formFieldColor.value ?? props.color)
+// eslint-disable-next-line vue/no-dupe-keys
+const highlight = computed(() => formFieldHighlight.value ?? props.highlight)
+// eslint-disable-next-line vue/no-dupe-keys
+const size = computed(() => formFieldSize.value ?? props.size)
+
+const disabled = computed(() => formFieldDisabled.value ?? props.disabled)
 
 const attrs = useAttrs()
 // Omit `data-state` to prevent conflicts with parent components (e.g. TooltipTrigger)
@@ -94,9 +103,9 @@ const forwardedAttrs = computed(() => {
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.switch || {}) })({
-  size: size.value ?? props.size,
-  color: color.value ?? props.color,
-  highlight: highlight.value ?? props.highlight,
+  size: size.value,
+  color: color.value,
+  highlight: highlight.value,
   required: props.required,
   loading: props.loading,
   disabled: disabled.value || props.loading
@@ -112,7 +121,7 @@ function onUpdate(value: any) {
 </script>
 
 <template>
-  <Primitive :as="props.as" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <Primitive :as="props.as" :data-slot="($attrs['data-slot'] as string | undefined) ?? 'root'" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <div data-slot="container" :class="ui.container({ class: props.ui?.container })">
       <SwitchRoot
         :id="id"

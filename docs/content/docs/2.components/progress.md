@@ -1,6 +1,10 @@
 ---
 description: An indicator showing the progress of a task.
 category: element
+keywords:
+  - progress bar
+  - loading bar
+  - meter
 links:
   - label: Progress
     icon: i-custom-reka-ui
@@ -93,6 +97,10 @@ Use the `animation` prop to change the animation of the Progress to an inverse c
 props:
   animation: swing
 ---
+::
+
+::tip
+The animation is automatically disabled when the user prefers reduced motion, the indeterminate bar is displayed as a full width pulse instead.
 ::
 
 ### Orientation

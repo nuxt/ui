@@ -118,7 +118,7 @@ const nextIcon = computed(() => props.nextIcon || (dir.value === 'rtl' ? appConf
     <span v-else :class="prefix('hidden sm:block')">&nbsp;</span>
   </DefineLinkTemplate>
 
-  <Primitive v-if="props.surround" :as="props.as" v-bind="$attrs" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <Primitive v-if="props.surround" :as="props.as" data-slot="root" v-bind="$attrs" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <ReuseLinkTemplate :link="props.surround[0]" :icon="prevIcon" direction="left" />
     <ReuseLinkTemplate :link="props.surround[1]" :icon="nextIcon" direction="right" />
   </Primitive>

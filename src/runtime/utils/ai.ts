@@ -22,12 +22,21 @@ export function isPartStreaming(part: { state?: string }): boolean {
 }
 
 /**
- * Checks if a tool part is still streaming (hasn't reached a terminal state).
+ * Checks if a tool part is still streaming (hasn't reached a terminal state
+ * and isn't paused waiting for a user approval).
  *
- * Terminal states are `output-available`, `output-error`, and `output-denied`.
+ * Terminal states are `output-available`, `output-error`, and `output-denied`,
+ * `approval-requested` is a paused state.
  */
 export function isToolStreaming(part: { state: string }): boolean {
-  return !['output-available', 'output-error', 'output-denied'].includes(part.state)
+  return !['approval-requested', 'output-available', 'output-error', 'output-denied'].includes(part.state)
+}
+
+/**
+ * Checks if a tool part is waiting for a user approval response.
+ */
+export function isToolApprovalPending(part: { state: string }): boolean {
+  return part.state === 'approval-requested'
 }
 
 /**

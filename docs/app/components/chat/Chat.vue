@@ -3,7 +3,7 @@ import type { ToolUIPart, DynamicToolUIPart } from 'ai'
 import { DefaultChatTransport, isToolUIPart, isReasoningUIPart, isTextUIPart, getToolName } from 'ai'
 import { useChat as useAIChat } from '@ai-sdk/vue'
 import { isPartStreaming, isToolStreaming } from '@nuxt/ui/utils/ai'
-import * as theme from '#build/ui'
+import type { DocsChatMessage, DocsChatTools } from '~~/server/api/ai.post'
 
 const input = ref('')
 
@@ -31,7 +31,7 @@ function processThemeToolCalls() {
       const name = getToolName(part)
       if (name === 'applyTheme' && part.input) {
         _themeApplied.add(part.toolCallId)
-        applyThemeSettings(part.input)
+        applyThemeSettings(part.input as DocsChatTools['applyTheme']['input'])
       } else if (name === 'resetTheme') {
         _themeApplied.add(part.toolCallId)
         resetTheme()
@@ -40,11 +40,11 @@ function processThemeToolCalls() {
   }
 }
 
-const { messages: chatMessages, status, error, sendMessage, regenerate, stop } = useAIChat({
+const { messages: chatMessages, status, error, sendMessage, regenerate, stop } = useAIChat<DocsChatMessage>({
   messages: messages.value,
-  transport: new DefaultChatTransport({
+  transport: new DefaultChatTransport<DocsChatMessage>({
     api: '/api/ai',
-    body: () => ({ theme, framework: framework.value, currentPage: route.path.startsWith('/docs/') ? route.path : null })
+    body: () => ({ framework: framework.value, currentPage: route.path.startsWith('/docs/') ? route.path : null })
   }),
   onError: (error) => {
     let message = error.message
@@ -269,6 +269,14 @@ defineShortcuts({
     </template>
 
     <UTheme
+      :props="{
+        prose: {
+          h1: { anchor: false },
+          h2: { anchor: false },
+          h3: { anchor: false },
+          h4: { anchor: false }
+        }
+      }"
       :ui="{
         prose: {
           p: { base: 'my-2 text-sm/6' },
@@ -307,16 +315,16 @@ defineShortcuts({
               :streaming="isPartStreaming(part)"
               icon="i-lucide-brain"
             >
-              <ChatComark
-                :markdown="part.text"
+              <ChatMarkdown
+                :value="part.text"
                 :streaming="isPartStreaming(part)"
               />
             </UChatReasoning>
 
             <template v-else-if="isTextUIPart(part) && part.text.length > 0">
-              <ChatComark
+              <ChatMarkdown
                 v-if="message.role === 'assistant'"
-                :markdown="part.text"
+                :value="part.text"
                 :streaming="isPartStreaming(part)"
               />
               <p v-else-if="message.role === 'user'" class="whitespace-pre-wrap text-sm/6">
@@ -353,7 +361,6 @@ defineShortcuts({
         variant="naked"
         size="sm"
         autofocus
-        :ui="{ base: 'px-0' }"
         class="px-4"
         @submit="onSubmit"
       >

@@ -10,7 +10,7 @@ const props = defineProps<{
 const route = useRoute()
 
 function getSchemaProps(schema: PropertyMeta['schema']): any {
-  if (!schema || typeof schema === 'string' || !schema.schema) {
+  if (!schema || typeof schema === 'string' || !('schema' in schema) || !schema.schema) {
     return []
   }
 
