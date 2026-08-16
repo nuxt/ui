@@ -220,9 +220,17 @@ export default defineNuxtConfig({
     }
   },
 
+  // The SSR bundle's sourcemaps cost hundreds of MB of heap during the build and are
+  // never used, the server output is not debugged from a browser.
+  sourcemap: {
+    server: false,
+    client: false
+  },
+
   compatibilityDate: '2026-01-14',
 
   nitro: {
+    sourceMap: false,
     experimental: {
       asyncContext: true
     },
@@ -351,6 +359,13 @@ export default defineNuxtConfig({
   },
 
   icon: {
+    // The local server bundle inlines every installed collection as a JS object literal,
+    // 22MB across `logos`, `vscode-icons`, `ph` and `tabler`. Rollup builds an AST for all
+    // of it while bundling the Nitro server, which alone puts the build over Node's default
+    // heap. Importing the JSON from `node_modules` instead skips that entirely.
+    serverBundle: {
+      externalizeIconsJson: true
+    },
     customCollections: [{
       prefix: 'custom',
       dir: resolve('./app/assets/icons')
