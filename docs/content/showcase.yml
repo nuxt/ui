@@ -29,6 +29,12 @@ items:
     url: https://www.juno.one/
   - name: Kassebil
     url: https://kassebil.dk/
+  - name: Kleine Zeitung
+    url: https://www.kleinezeitung.at/
+    screenshotOptions:
+      width: 1024
+      delay: 5
+      removeElements: ['[id^="piano"]']
   - name: LearnVue
     url: https://learnvue.co/
   - name: LunixPOS
