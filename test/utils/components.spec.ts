@@ -2,7 +2,7 @@ import { describe, it, expect, afterAll, vi } from 'vitest'
 import { consola } from 'consola'
 import { mkdtempSync, mkdirSync, writeFileSync, rmSync, realpathSync } from 'node:fs'
 import { tmpdir } from 'node:os'
-import { join } from 'node:path'
+import { join, normalize } from 'pathe'
 import { detectUsedComponents, resolveExtraScanDirs } from '../../src/utils/components'
 
 const componentDir = join(process.cwd(), 'src/runtime/components')
@@ -17,9 +17,10 @@ function fixtureUsing(markup: string) {
 }
 
 // `realpathSync` because module resolution returns real paths and macOS puts
-// `tmpdir()` behind a `/private` symlink.
+// `tmpdir()` behind a `/private` symlink. `normalize` because it returns
+// backslashes on Windows while `resolveExtraScanDirs` emits forward slashes.
 function fixtureRoot() {
-  const dir = realpathSync(mkdtempSync(join(tmpdir(), 'nuxt-ui-cd-')))
+  const dir = normalize(realpathSync(mkdtempSync(join(tmpdir(), 'nuxt-ui-cd-'))))
   fixtureDirs.push(dir)
   return dir
 }
