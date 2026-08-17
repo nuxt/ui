@@ -27,6 +27,11 @@ export interface SplitterProps<T extends SplitterItem = SplitterItem> extends Pi
    */
   as?: any
   /**
+   * A unique id for the group, used internally to match panels and handles. It is not rendered as an `id` attribute.
+   * Set it when rendering on the server, an auto-generated id can differ between the server and the client and break the layout on hydration.
+   */
+  id?: string
+  /**
    * The orientation of the splitter.
    * @defaultValue 'horizontal'
    */
@@ -86,7 +91,7 @@ const props = useComponentProps<SplitterProps<T>>('splitter', _props)
 
 const appConfig = useAppConfig() as Splitter['AppConfig']
 
-const rootProps = useForwardProps(reactivePick(props, 'as', 'autoSaveId', 'keyboardResizeBy', 'storage'))
+const rootProps = useForwardProps(reactivePick(props, 'as', 'id', 'autoSaveId', 'keyboardResizeBy', 'storage'))
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.splitter || {}) })({

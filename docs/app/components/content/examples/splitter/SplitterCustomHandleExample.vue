@@ -9,7 +9,7 @@ const items: SplitterItem[] = [
 
 <template>
   <div class="w-full h-96">
-    <USplitter :items="items" :ui="{ handle: 'data-[orientation=horizontal]:w-px data-[orientation=vertical]:h-px bg-border transition-colors data-[state=hover]:bg-accented data-[state=drag]:bg-primary' }" class="rounded-lg border border-default overflow-hidden">
+    <USplitter id="splitter-custom-handle-example" :items="items" :ui="{ handle: 'data-[orientation=horizontal]:w-px data-[orientation=vertical]:h-px bg-border transition-colors data-[state=hover]:bg-accented data-[state=drag]:bg-primary' }" class="rounded-lg border border-default overflow-hidden">
       <template #left>
         Left
       </template>

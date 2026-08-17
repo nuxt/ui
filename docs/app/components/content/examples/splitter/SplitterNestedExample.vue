@@ -16,13 +16,13 @@ const nested: SplitterItem[] = [
 
 <template>
   <div class="w-full h-96">
-    <USplitter :items="items">
+    <USplitter id="splitter-nested-example" :items="items">
       <template #left>
         Left
       </template>
 
       <template #right>
-        <USplitter orientation="vertical" :items="nested" class="size-full">
+        <USplitter id="splitter-nested-example-inner" orientation="vertical" :items="nested" class="size-full">
           <template #top>
             Top
           </template>

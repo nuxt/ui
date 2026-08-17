@@ -9,7 +9,7 @@ const items: SplitterItem[] = [
 
 <template>
   <div class="w-full h-96">
-    <USplitter :items="items">
+    <USplitter id="splitter-collapsible-example" :items="items">
       <template #sidebar="{ collapsed, collapse, expand }">
         <div class="flex-1 flex items-center justify-center p-2">
           <UButton

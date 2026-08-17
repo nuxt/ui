@@ -12,7 +12,7 @@ const items: SplitterItem[] = [
 
 <template>
   <div class="w-full h-96">
-    <USplitter :items="items">
+    <USplitter id="splitter-example" :items="items">
       <template #left>
         Left
       </template>

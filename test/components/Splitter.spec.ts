@@ -27,6 +27,7 @@ describe('Splitter', () => {
     // Props
     ['with items', { props, slots }],
     ['with orientation vertical', { props: { ...props, orientation: 'vertical' as const }, slots }],
+    ['with id', { props: { ...props, id: 'test' }, slots }],
     ['with autoSaveId', { props: { ...props, autoSaveId: 'test' }, slots }],
     ['with keyboardResizeBy', { props: { ...props, keyboardResizeBy: 10 }, slots }],
     ['with as', { props: { ...props, as: 'section' }, slots }],

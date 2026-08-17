@@ -15,6 +15,10 @@ navigation.badge: Soon
 
 The Splitter component renders a resizable panel for each entry in the `items` prop, inserting a draggable handle between them. Use the `slot` key of each item to fill its content, and the `class` key to style each panel.
 
+::caution
+Set the `id` prop when rendering on the server. Panels and handles are matched through it, and an auto-generated id can differ between the server and the client which breaks the layout on hydration.
+::
+
 ::component-example
 ---
 collapse: true
@@ -52,6 +56,7 @@ external:
 externalTypes:
   - SplitterItem[]
 props:
+  id: 'splitter-items'
   items:
     - slot: 'sidebar'
       sizeUnit: 'px'
@@ -89,6 +94,7 @@ external:
 externalTypes:
   - SplitterItem[]
 props:
+  id: 'splitter-orientation'
   orientation: 'vertical'
   items:
     - slot: 'first'
