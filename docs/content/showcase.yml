@@ -5,6 +5,8 @@ hero:
   title: Showcase
   description: Discover our selection of projects built with Nuxt UI.
 items:
+  - name: Codemo
+    url: https://codemo.dev/
   - name: CodeSnap
     url: https://codesnap.dev/
   - name: Croix-Rouge française - Devenir bénévole
