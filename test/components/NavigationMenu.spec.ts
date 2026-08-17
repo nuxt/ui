@@ -1,9 +1,12 @@
+import { defineComponent } from 'vue'
 import { describe, it, expect, test } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { TooltipProvider } from 'reka-ui'
 import { renderEach } from '../component-render'
 import type { AppConfig } from '@nuxt/schema'
 import NavigationMenu from '../../src/runtime/components/NavigationMenu.vue'
+import Tooltip from '../../src/runtime/components/Tooltip.vue'
 import type { ComponentConfig } from '../../src/runtime/types/tv'
 import { expectSlotProps } from '../utils/types'
 import theme from '#build/ui/navigation-menu'
@@ -128,6 +131,80 @@ describe('NavigationMenu', () => {
     })
 
     expect(await axe(wrapper.element)).toHaveNoViolations()
+  })
+
+  describe('tooltip', () => {
+    const NavigationMenuWrapper = defineComponent({
+      components: { TooltipProvider, UNavigationMenu: NavigationMenu },
+      inheritAttrs: false,
+      template: `<TooltipProvider><UNavigationMenu v-bind="$attrs" /></TooltipProvider>`
+    })
+
+    const plain = { label: 'Dashboard', icon: 'i-lucide-house' }
+    const tooltipped = { label: 'Reports', icon: 'i-lucide-chart-column', tooltip: { text: 'Upgrade to Pro' } }
+
+    async function renderMenu(attrs: any) {
+      return await mountSuspended(NavigationMenuWrapper, { attrs })
+    }
+
+    async function countTooltips(attrs: any) {
+      return (await renderMenu(attrs)).findAllComponents(Tooltip).length
+    }
+
+    test('shows an item tooltip when vertical and not collapsed', async () => {
+      expect(await countTooltips({ items: [plain, tooltipped], orientation: 'vertical' })).toBe(1)
+    })
+
+    test('shows an item tooltip when vertical and collapsed', async () => {
+      expect(await countTooltips({ items: [plain, tooltipped], orientation: 'vertical', collapsed: true })).toBe(1)
+    })
+
+    test('shows an item tooltip when horizontal', async () => {
+      expect(await countTooltips({ items: [plain, tooltipped], orientation: 'horizontal' })).toBe(1)
+    })
+
+    test('shows no tooltip when no item opts in', async () => {
+      expect(await countTooltips({ items: [plain], orientation: 'vertical' })).toBe(0)
+    })
+
+    test('keeps the global tooltip prop scoped to collapsed menus', async () => {
+      expect(await countTooltips({ items: [plain, plain], orientation: 'vertical', tooltip: true })).toBe(0)
+      expect(await countTooltips({ items: [plain, plain], orientation: 'vertical', tooltip: true, collapsed: true })).toBe(2)
+    })
+
+    test('an item tooltip overrides the label as content', async () => {
+      const wrapper = await renderMenu({
+        items: [{ ...tooltipped, tooltip: { text: 'Upgrade to Pro', open: true, portal: false } }],
+        orientation: 'vertical'
+      })
+
+      expect(wrapper.text()).toContain('Upgrade to Pro')
+    })
+
+    test('an item tooltip falls back to the label as content', async () => {
+      const wrapper = await renderMenu({
+        items: [{ ...plain, tooltip: { open: true, portal: false } }],
+        orientation: 'vertical'
+      })
+
+      expect(wrapper.text()).toContain('Dashboard')
+    })
+
+    // A parent item renders an accordion trigger, and the tooltip trigger merges onto the same
+    // element, so assert the accordion through `aria-expanded` rather than the shared `data-state`.
+    test('keeps the accordion trigger working on a parent item', async () => {
+      const wrapper = await renderMenu({
+        items: [{ ...tooltipped, children: [{ label: 'Usage' }] }],
+        orientation: 'vertical'
+      })
+
+      expect(wrapper.find('[data-slot="link"]').attributes('aria-expanded')).toBe('false')
+
+      await wrapper.find('[data-slot="link"]').trigger('click')
+
+      expect(wrapper.find('[data-slot="link"]').attributes('aria-expanded')).toBe('true')
+      expect(wrapper.find('[data-slot="item"]').attributes('data-state')).toBe('open')
+    })
   })
 
   test('should have the correct types', () => {
