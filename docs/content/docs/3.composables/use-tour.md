@@ -1,7 +1,6 @@
 ---
 title: useTour
 description: 'A composable to build guided tours by re-anchoring a single Popover across steps.'
-navigation.badge: New
 ---
 
 ## Usage

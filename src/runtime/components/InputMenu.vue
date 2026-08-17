@@ -236,7 +236,7 @@ export interface InputMenuSlots<
 </script>
 
 <script setup lang="ts" generic="T extends ArrayOrNested<InputMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false, Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>, C extends boolean | object = false">
-import { computed, ref, useTemplateRef, toRef, onMounted, toRaw, nextTick, watch } from 'vue'
+import { computed, ref, useAttrs, useTemplateRef, toRef, onMounted, onScopeDispose, toRaw, nextTick, watch } from 'vue'
 import { TagsInputRoot, TagsInputItem, TagsInputItemText, TagsInputItemDelete, TagsInputInput } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
 import { Combobox, Autocomplete } from 'reka-ui/namespaced'
@@ -290,6 +290,17 @@ const rootPropsPick = reactivePick(props, 'as', 'modelValue', 'defaultValue', 'o
 const rootPropsOmitted = reactiveOmit(rootPropsPick, 'multiple', 'resetSearchTermOnSelect', 'resetModelValueOnClear', 'by')
 const rootProps = useForwardProps(computed(() => isAutocomplete.value ? rootPropsOmitted : rootPropsPick), emits)
 const Component = computed(() => isAutocomplete.value ? Autocomplete : Combobox)
+
+const attrs = useAttrs()
+
+// In multiple non-autocomplete mode `Root` is `as-child`: it renders no element and
+// merges its attributes onto `Anchor`, where the child's own `data-slot` wins the
+// merge. `Anchor` is then the effective root, so it reads the caller's `data-slot`
+// itself. In every other mode `Root` renders its own element (and receives the
+// caller's value through its own binding), so `Anchor` keeps its `base` label.
+const baseDataSlot = computed(() => props.multiple && !isAutocomplete.value
+  ? ((attrs['data-slot'] as string | undefined) ?? 'base')
+  : 'base')
 const portalProps = usePortal(toRef(() => props.portal))
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: 'popper' }) as ComboboxContentProps)
 const arrowProps = toRef(() => defu(props.arrow, { rounded: true }) as ComboboxArrowProps)
@@ -298,15 +309,35 @@ const virtualizerProps = toRef(() => {
   if (!props.virtualize) return false
 
   return defu(typeof props.virtualize === 'boolean' ? {} : props.virtualize, {
-    estimateSize: getEstimateSize(filteredItems.value, inputSize.value || 'md', props.descriptionKey as string, !!slots['item-description'])
+    estimateSize: getEstimateSize(filteredItems.value, size.value ?? 'md', props.descriptionKey as string, !!slots['item-description'])
   })
 })
 
-const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, size: formFieldSize, color, id, name, highlight, disabled, ariaAttrs } = useFormField<InputProps>(_props)
-const { orientation, size: fieldGroupSize } = useFieldGroup<InputProps>(_props)
-const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(toRef(() => defu(props, { trailingIcon: appConfig.ui.icons.chevronDown })))
+const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, size: formFieldSize, color: formFieldColor, id, name, highlight: formFieldHighlight, disabled: formFieldDisabled, ariaAttrs } = useFormField<InputProps>(_props)
 
-const inputSize = computed(() => fieldGroupSize.value || formFieldSize.value)
+const { orientation, size: fieldGroupSize } = useFieldGroup<InputProps>(_props)
+// Pass only the props the composable reads: `defu(props, ...)` copied every prop
+// through the `useComponentProps` proxy and subscribed this computed (and `ui`,
+// which reads `isLeading`/`isTrailing`) to all of them, re-running the whole tv
+// pipeline on unrelated prop changes.
+const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(computed(() => ({
+  icon: props.icon,
+  leading: props.leading,
+  leadingIcon: props.leadingIcon,
+  trailing: props.trailing,
+  trailingIcon: props.trailingIcon ?? appConfig.ui.icons.chevronDown,
+  loading: props.loading,
+  loadingIcon: props.loadingIcon
+})))
+
+// eslint-disable-next-line vue/no-dupe-keys
+const color = computed(() => formFieldColor.value ?? props.color)
+// eslint-disable-next-line vue/no-dupe-keys
+const highlight = computed(() => formFieldHighlight.value ?? props.highlight)
+// eslint-disable-next-line vue/no-dupe-keys
+const size = computed(() => fieldGroupSize.value ?? formFieldSize.value ?? props.size)
+
+const disabled = computed(() => formFieldDisabled.value ?? props.disabled)
 
 const [DefineCreateItemTemplate, ReuseCreateItemTemplate] = createReusableTemplate()
 const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: InputMenuItem, index: number }>({
@@ -324,11 +355,11 @@ const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: I
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.inputMenu || {}) })({
-  color: color.value ?? props.color,
+  color: color.value,
   variant: props.variant,
-  size: inputSize?.value ?? props.size,
+  size: size.value,
   loading: props.loading,
-  highlight: highlight.value ?? props.highlight,
+  highlight: highlight.value,
   fixed: props.fixed,
   leading: isLeading.value || !!props.avatar || !!slots.leading,
   trailing: isTrailing.value || !!slots.trailing,
@@ -394,6 +425,8 @@ function autoFocus() {
   }
 }
 
+let autofocusTimeoutId: ReturnType<typeof setTimeout> | undefined
+
 onMounted(() => {
   nextTick(() => {
     if (isAutocomplete.value) {
@@ -403,10 +436,12 @@ onMounted(() => {
     }
   })
 
-  setTimeout(() => {
+  autofocusTimeoutId = setTimeout(() => {
     autoFocus()
   }, props.autofocusDelay)
 })
+
+onScopeDispose(() => clearTimeout(autofocusTimeoutId))
 
 watch(() => props.modelValue, (newValue) => {
   if (isAutocomplete.value) {
@@ -465,10 +500,12 @@ function onFocus(event: FocusEvent) {
 }
 
 const isOpen = ref(false)
+let timeoutId: ReturnType<typeof setTimeout> | undefined
+
+onScopeDispose(() => clearTimeout(timeoutId))
+
 function onUpdateOpen(value: boolean) {
   isOpen.value = value
-
-  let timeoutId
 
   if (!value) {
     const event = new FocusEvent('blur')
@@ -544,9 +581,11 @@ const comboboxRootRef = useTemplateRef('comboboxRootRef')
 // reka-ui only re-highlights the first item when the list goes from empty to non-empty.
 // With `create-item`, the create item is always registered so the count never drops to 0,
 // leaving the highlight stale when async `items` load. Re-highlight when items change while open.
+// Scoped to `create-item` only, otherwise this fires on infinite-scroll appends too and
+// scrolls the viewport back to the top.
 // Wait an extra tick so freshly mounted items are registered in reka-ui's collection before highlighting.
 watch(() => props.items, async () => {
-  if (!isOpen.value) {
+  if (!isOpen.value || !props.createItem) {
     return
   }
 
@@ -638,14 +677,14 @@ defineExpose({
     v-bind="rootProps"
     :name="name"
     :disabled="disabled"
-    data-slot="root"
+    :data-slot="($attrs['data-slot'] as string | undefined) ?? 'root'"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     :as-child="!!props.multiple && !isAutocomplete"
     ignore-filter
     @update:model-value="onUpdate"
     @update:open="onUpdateOpen"
   >
-    <Component.Anchor :as-child="!props.multiple" data-slot="base" :class="ui.base({ class: props.ui?.base })">
+    <Component.Anchor :as-child="!props.multiple" :data-slot="baseDataSlot" :class="ui.base({ class: props.ui?.base })">
       <TagsInputRoot
         v-if="props.multiple && !isAutocomplete"
         v-slot="{ modelValue: tags }"
@@ -690,6 +729,7 @@ defineExpose({
         :id="id"
         ref="inputRef"
         v-bind="{ ...(!isAutocomplete ? { displayValue } : {}), ...$attrs, ...ariaAttrs }"
+        :data-slot="props.multiple ? undefined : 'base'"
         :type="props.type"
         :placeholder="props.placeholder"
         :required="props.required"
@@ -712,7 +752,7 @@ defineExpose({
             <UButton
               as="span"
               :icon="props.clearIcon || appConfig.ui.icons.close"
-              :size="inputSize"
+              :size="size"
               variant="link"
               color="neutral"
               tabindex="-1"

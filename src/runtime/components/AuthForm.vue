@@ -13,7 +13,7 @@ import type { SelectMenuProps } from './SelectMenu.vue'
 import type { PinInputProps } from './PinInput.vue'
 import type { IconProps } from './Icon.vue'
 import type { LinkPropsKeys } from './Link.vue'
-import type { FormSchema, FormSubmitEvent, InferInput } from '../types/form'
+import type { FormData, FormSchema, FormSubmitEvent, InferInput } from '../types/form'
 import type { FormHTMLAttributes } from '../types/html'
 import type { NonUnion } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
@@ -151,7 +151,7 @@ const state = reactive<FormStateType>((_props.fields as TypedAuthFormField[] || 
   return acc
 }, {} as FormStateType))
 
-defineEmits<AuthFormEmits<typeof state>>()
+defineEmits<AuthFormEmits<FormData<T>>>()
 const slots = defineSlots<AuthFormSlots<typeof state, F>>()
 
 const props = useComponentProps<AuthFormProps<T, F>>('authForm', _props)
@@ -207,7 +207,7 @@ defineExpose({
 </script>
 
 <template>
-  <Primitive :as="props.as" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <Primitive :as="props.as" :data-slot="($attrs['data-slot'] as string | undefined) ?? 'root'" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <div v-if="(props.icon || !!slots.leading) || (props.title || !!slots.title) || (props.description || !!slots.description) || !!slots.header" data-slot="header" :class="ui.header({ class: props.ui?.header })">
       <slot name="header">
         <div v-if="props.icon || !!slots.leading" data-slot="leading" :class="ui.leading({ class: props.ui?.leading })">
@@ -262,9 +262,9 @@ defineExpose({
         :validate-on="props.validateOn"
         :disabled="props.disabled"
         :loading-auto="props.loadingAuto"
-        data-slot="form"
         :class="ui.form({ class: props.ui?.form })"
         v-bind="$attrs"
+        data-slot="form"
         @submit="props.onSubmit"
       >
         <UFormField

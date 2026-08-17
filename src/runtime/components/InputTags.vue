@@ -69,7 +69,7 @@ export interface InputTagsSlots<T extends InputTagItem = InputTagItem> {
 </script>
 
 <script setup lang="ts" generic="T extends InputTagItem">
-import { computed, useTemplateRef, onMounted, toRaw, toRef } from 'vue'
+import { computed, useTemplateRef, onMounted, onScopeDispose, toRaw, toRef } from 'vue'
 import { TagsInputRoot, TagsInputItem, TagsInputItemText, TagsInputItemDelete, TagsInputInput } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
 import { reactivePick } from '@vueuse/core'
@@ -97,19 +97,27 @@ const appConfig = useAppConfig() as InputTags['AppConfig']
 
 const rootProps = useForwardProps(reactivePick(props, 'as', 'addOnPaste', 'addOnTab', 'addOnBlur', 'duplicate', 'delimiter', 'max', 'convertValue', 'displayValue', 'required'), emits)
 
-const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, size: formFieldSize, color, id, name, highlight, disabled, ariaAttrs } = useFormField<InputTagsProps>(_props)
+const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, size: formFieldSize, color: formFieldColor, id, name, highlight: formFieldHighlight, disabled: formFieldDisabled, ariaAttrs } = useFormField<InputTagsProps>(_props)
+
 const { orientation, size: fieldGroupSize } = useFieldGroup<InputTagsProps>(_props)
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props)
 
-const inputSize = computed(() => fieldGroupSize.value || formFieldSize.value)
+// eslint-disable-next-line vue/no-dupe-keys
+const color = computed(() => formFieldColor.value ?? props.color)
+// eslint-disable-next-line vue/no-dupe-keys
+const highlight = computed(() => formFieldHighlight.value ?? props.highlight)
+// eslint-disable-next-line vue/no-dupe-keys
+const size = computed(() => fieldGroupSize.value ?? formFieldSize.value ?? props.size)
+
+const disabled = computed(() => formFieldDisabled.value ?? props.disabled)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.inputTags || {}) })({
-  color: color.value ?? props.color,
+  color: color.value,
   variant: props.variant,
-  size: inputSize?.value ?? props.size,
+  size: size.value,
   loading: props.loading,
-  highlight: highlight.value ?? props.highlight,
+  highlight: highlight.value,
   fixed: props.fixed,
   leading: isLeading.value || !!props.avatar || !!slots.leading,
   trailing: isTrailing.value || !!slots.trailing,
@@ -124,11 +132,15 @@ function autoFocus() {
   }
 }
 
+let autofocusTimeoutId: ReturnType<typeof setTimeout> | undefined
+
 onMounted(() => {
-  setTimeout(() => {
+  autofocusTimeoutId = setTimeout(() => {
     autoFocus()
   }, props.autofocusDelay)
 })
+
+onScopeDispose(() => clearTimeout(autofocusTimeoutId))
 
 function onUpdate(value: T[]) {
   if (toRaw(props.modelValue) === value) {
@@ -163,7 +175,7 @@ defineExpose({
     v-slot="{ modelValue: tags }"
     :model-value="props.modelValue"
     :default-value="props.defaultValue"
-    data-slot="root"
+    :data-slot="($attrs['data-slot'] as string | undefined) ?? 'root'"
     :class="ui.root({ class: [ui.base({ class: props.ui?.base }), props.ui?.root, props.class] })"
     v-bind="rootProps"
     :name="name"

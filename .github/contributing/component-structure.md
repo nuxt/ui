@@ -69,7 +69,7 @@ const appConfig = useAppConfig() as ComponentName['AppConfig']
 
 // 10. Computed UI - always computed for reactivity
 const ui = computed(() => tv({
-  extend: tv(theme),
+  extend: theme,
   ...(appConfig.ui?.componentName || {})
 })({
   color: props.color,
@@ -139,7 +139,7 @@ const appConfig = useAppConfig() as Collapsible['AppConfig']
 // and would strip <UTheme :props> values.
 const rootProps = useForwardProps(reactivePick(props, 'as', 'defaultOpen', 'open', 'disabled', 'unmountOnHide'), emits)
 
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.collapsible || {}) })())
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.collapsible || {}) })())
 </script>
 
 <template>
@@ -215,7 +215,7 @@ const inputSize = computed(() => fieldGroupSize.value || formFieldSize.value)
 //
 // Final precedence: explicit > closer-context (form/group) > <UTheme :props>
 //                   > withDefaults > app.config > tv defaults
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.input || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.input || {}) })({
   color: color.value ?? props.color,
   size: inputSize.value ?? props.size,
   highlight: highlight.value ?? props.highlight,
@@ -237,6 +237,35 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.input || {})
 ```
 
 The same `?? props.X` pattern applies to `useAvatarGroup` (`size`) and any other context composable whose contract is `props?.x ?? injected.x`. The composable itself stays untouched — the fallback lives at the `tv()` call site so the wrapper-vs-theme precedence is explicit and reviewable.
+
+## `data-slot` on the root
+
+Parents label a child by passing `data-slot` (e.g. `<UIcon data-slot="leadingIcon" />`, `<UAvatar data-slot="leadingAvatar" />`). The rule is: **a caller-supplied `data-slot` always wins on the component's root element**, with the component's own value (`root`/`base`) as the fallback. Inner elements keep their own `data-slot`.
+
+How you achieve it depends on how the root receives attributes:
+
+- **Single root, default `inheritAttrs`** (Badge, Card, …): nothing to do. Vue's attribute fallthrough already lets the caller's `data-slot` override the static one on the root. This only holds when the template root renders an element: `Button`'s root is a renderless `ULink custom` that hands `$attrs` back as slot props, so its `ULinkBase` needs the default placed before the spread (`<ULinkBase data-slot="base" v-bind="slotProps">`), same as the `$attrs` case below.
+- **`inheritAttrs: false`, `$attrs` spread on the root**: fallthrough is off, so a static `data-slot="root"` placed *after* `v-bind` would win over the caller. Put the attribute *before* the `v-bind` instead, so a caller value in `$attrs` overrides it:
+
+  ```vue
+  <Primitive :as="props.as" data-slot="root" v-bind="$attrs" :class="ui.root({ class: [props.ui?.root, props.class] })" />
+
+  <Separator data-slot="root" v-bind="{ ...rootProps, ...$attrs }" :class="ui.root({ class: [props.ui?.root, props.class] })" />
+  ```
+
+  Keep `:id`, `ref` and `v-slot` **before** `data-slot`: `vue/attributes-order` ranks them first, and its autofix moves `data-slot` past the `v-bind` (reverting the override) instead of moving them up. `test/components/DataSlot.spec.ts` catches this, but better not to trip it.
+
+- **`inheritAttrs: false`, `$attrs` forwarded to an inner element** (Avatar, Input, Checkbox, Switch, …): the root never receives `$attrs`, so read the caller's value on the root explicitly, and keep each inner element's own `data-slot` *after* its `$attrs` spread so the caller's value does not leak onto it:
+
+  ```vue
+  <Primitive :as="props.as" :data-slot="($attrs['data-slot'] as string | undefined) ?? 'root'" :class="ui.root({ class: [props.ui?.root, props.class] })">
+    <input v-bind="{ ...$attrs, ...ariaAttrs }" data-slot="base" :class="ui.base({ class: props.ui?.base })">
+  </Primitive>
+  ```
+
+  For `<Slot>` forwards and inner elements that have no `data-slot` of their own, strip it from what you forward so it cannot leak: `v-bind="{ ...$attrs, 'data-slot': undefined }"`. The same applies when attributes are forwarded from the script, like `Editor` spreading `useAttrs()` into tiptap's `editorProps.attributes`: use `omit(attrs, ['data-slot'])`.
+
+The rule is enforced by `test/components/DataSlot.spec.ts`, which mounts every component with a caller `data-slot` and asserts it lands exactly once, on the outermost rendered element.
 
 ## Components with Icons
 
@@ -290,6 +319,7 @@ Notes:
 | `useForwardProps(source, emits?)` (local) | Forward Reka UI props/emits without filtering theme defaults |
 | `withDefaults` | Runtime default values |
 | `defineOptions({ inheritAttrs: false })` | When spreading `$attrs` to inner element |
+| Caller `data-slot` wins on root | Place the default `data-slot` before the root `v-bind`, or read `$attrs['data-slot']` on the root — see [`data-slot` on the root](#data-slot-on-the-root) |
 | `reactivePick` | Pick keys off `props` (the proxy) before forwarding |
 | `createReusableTemplate` | Complex template reuse (Table, Modal) |
 | `useTemplateRef` | Template refs (Vue 3.5+) |

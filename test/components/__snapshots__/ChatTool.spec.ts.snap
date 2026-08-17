@@ -1,13 +1,79 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
+exports[`ChatTool > renders with actions and content correctly 1`] = `
+"<div data-state="open" data-slot="root" class=""><button type="button" aria-controls="" aria-expanded="true" data-state="open" data-slot="trigger" class="group flex w-full items-center gap-1.5 text-muted text-sm disabled:cursor-default disabled:hover:text-muted hover:text-default min-w-0 transition-colors rounded-sm outline-primary/25 focus-visible:outline-3">
+    <!--v-if--><span data-slot="label" class="truncate">Searching components<!--v-if--></span><span class="iconify i-lucide:chevron-down size-4 shrink-0 group-data-[state=open]:rotate-180 transition-transform duration-200 ease-out motion-reduce:transition-none" aria-hidden="true" data-slot="trailingIcon"></span>
+  </button>
+  <div data-slot="content" class="data-[state=open]:animate-[collapsible-down_200ms_var(--ease-out)] data-[state=closed]:animate-[collapsible-up_200ms_var(--ease-out)] data-[state=closed]:overflow-hidden" id="reka-collapsible-content-v-0-0-0" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px; transition-duration: 0s; animation-name: none;">
+    <div data-slot="body" class="text-sm text-dimmed whitespace-pre-wrap pt-2">Tool output content</div>
+  </div>
+  <div data-slot="actions" data-state="open" class="flex items-center justify-end gap-1.5 pt-2"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2 py-1 text-xs gap-1 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
+      <!--v-if--><span data-slot="label" class="truncate">Approve</span>
+      <!--v-if-->
+    </button><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2 py-1 text-xs gap-1 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
+      <!--v-if--><span data-slot="label" class="truncate">Deny</span>
+      <!--v-if-->
+    </button></div>
+</div>"
+`;
+
+exports[`ChatTool > renders with actions correctly 1`] = `
+"<div data-state="closed" data-slot="root" class=""><button type="button" aria-controls="" aria-expanded="false" data-state="closed" disabled="" data-slot="trigger" class="group flex w-full items-center gap-1.5 text-muted text-sm disabled:cursor-default disabled:hover:text-muted hover:text-default min-w-0 transition-colors rounded-sm outline-primary/25 focus-visible:outline-3">
+    <!--v-if--><span data-slot="label" class="truncate">Searching components<!--v-if--></span>
+    <!--v-if-->
+  </button>
+  <div data-slot="content" class="data-[state=open]:animate-[collapsible-down_200ms_var(--ease-out)] data-[state=closed]:animate-[collapsible-up_200ms_var(--ease-out)] data-[state=closed]:overflow-hidden" id="reka-collapsible-content-v-0-0-0" hidden="" data-state="closed" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;">
+    <div data-slot="body" class="text-sm text-dimmed whitespace-pre-wrap pt-2"></div>
+  </div>
+  <div data-slot="actions" data-state="closed" class="flex items-center justify-end gap-1.5 pt-2"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2 py-1 text-xs gap-1 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
+      <!--v-if--><span data-slot="label" class="truncate">Approve</span>
+      <!--v-if-->
+    </button><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2 py-1 text-xs gap-1 text-default bg-elevated hover:bg-accented/75 active:bg-accented/75 outline-inverted/25 focus-visible:outline-3 disabled:bg-elevated aria-disabled:bg-elevated">
+      <!--v-if--><span data-slot="label" class="truncate">Deny</span>
+      <!--v-if-->
+    </button></div>
+</div>"
+`;
+
+exports[`ChatTool > renders with actions slot correctly 1`] = `
+"<div data-state="closed" data-slot="root" class=""><button type="button" aria-controls="" aria-expanded="false" data-state="closed" disabled="" data-slot="trigger" class="group flex w-full items-center gap-1.5 text-muted text-sm disabled:cursor-default disabled:hover:text-muted hover:text-default min-w-0 transition-colors rounded-sm outline-primary/25 focus-visible:outline-3">
+    <!--v-if--><span data-slot="label" class="truncate">Searching components<!--v-if--></span>
+    <!--v-if-->
+  </button>
+  <div data-slot="content" class="data-[state=open]:animate-[collapsible-down_200ms_var(--ease-out)] data-[state=closed]:animate-[collapsible-up_200ms_var(--ease-out)] data-[state=closed]:overflow-hidden" id="reka-collapsible-content-v-0-0-0" hidden="" data-state="closed" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;">
+    <div data-slot="body" class="text-sm text-dimmed whitespace-pre-wrap pt-2"></div>
+  </div>
+  <div data-slot="actions" data-state="closed" class="flex items-center justify-end gap-1.5 pt-2">Custom actions</div>
+</div>"
+`;
+
+exports[`ChatTool > renders with actions variant card correctly 1`] = `
+"<div data-state="closed" data-slot="root" class="rounded-md ring ring-default overflow-hidden outline-primary/25 has-focus-visible:outline-3 has-focus-visible:ring-primary"><button type="button" aria-controls="" aria-expanded="false" data-state="closed" disabled="" data-slot="trigger" class="group flex w-full items-center gap-1.5 text-muted text-sm disabled:cursor-default disabled:hover:text-muted hover:text-default min-w-0 transition-colors px-2 py-1 focus:outline-none">
+    <!--v-if--><span data-slot="label" class="truncate">Searching components<!--v-if--></span>
+    <!--v-if-->
+  </button>
+  <div data-slot="content" class="data-[state=open]:animate-[collapsible-down_200ms_var(--ease-out)] data-[state=closed]:animate-[collapsible-up_200ms_var(--ease-out)] data-[state=closed]:overflow-hidden" id="reka-collapsible-content-v-0-0-0" hidden="" data-state="closed" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;">
+    <div data-slot="body" class="text-sm text-dimmed whitespace-pre-wrap border-t border-default p-2 max-h-[200px] overflow-y-auto focus:outline-none"></div>
+  </div>
+  <div data-slot="actions" data-state="closed" class="flex items-center justify-end gap-1.5 border-t border-default p-2"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2 py-1 text-xs gap-1 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
+      <!--v-if--><span data-slot="label" class="truncate">Approve</span>
+      <!--v-if-->
+    </button><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2 py-1 text-xs gap-1 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
+      <!--v-if--><span data-slot="label" class="truncate">Deny</span>
+      <!--v-if-->
+    </button></div>
+</div>"
+`;
+
 exports[`ChatTool > renders with chevron leading and icon correctly 1`] = `
-"<div data-state="closed" data-slot="root" class=""><button type="button" aria-controls="" aria-expanded="false" data-state="closed" disabled="" data-slot="trigger" class="group flex w-full items-center gap-1.5 text-muted text-sm disabled:cursor-default disabled:hover:text-muted hover:text-default min-w-0 transition-colors rounded-sm outline-primary/25 focus-visible:outline-3"><span data-slot="leading" class="relative size-4 shrink-0"><span class="iconify i-lucide:search size-4 shrink-0 group-hover:opacity-0" aria-hidden="true" data-slot="leadingIcon"></span>
+"<div data-state="closed" data-slot="root" class=""><button type="button" aria-controls="" aria-expanded="false" data-state="closed" disabled="" data-slot="trigger" class="group flex w-full items-center gap-1.5 text-muted text-sm disabled:cursor-default disabled:hover:text-muted hover:text-default min-w-0 transition-colors rounded-sm outline-primary/25 focus-visible:outline-3"><span data-slot="leading" class="relative size-4 shrink-0"><span class="iconify i-lucide:search size-4 shrink-0" aria-hidden="true" data-slot="leadingIcon"></span>
     <!--v-if--></span><span data-slot="label" class="truncate">Searching components<!--v-if--></span>
     <!--v-if-->
   </button>
-  <div data-slot="content" class="data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] data-[state=closed]:overflow-hidden" id="reka-collapsible-content-v-0-0-0" hidden="" data-state="closed" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;">
+  <div data-slot="content" class="data-[state=open]:animate-[collapsible-down_200ms_var(--ease-out)] data-[state=closed]:animate-[collapsible-up_200ms_var(--ease-out)] data-[state=closed]:overflow-hidden" id="reka-collapsible-content-v-0-0-0" hidden="" data-state="closed" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;">
     <div data-slot="body" class="text-sm text-dimmed whitespace-pre-wrap pt-2"></div>
   </div>
+  <!--v-if-->
 </div>"
 `;
 
@@ -16,9 +82,21 @@ exports[`ChatTool > renders with chevron leading correctly 1`] = `
     <!--v-if--><span data-slot="label" class="truncate">Searching components<!--v-if--></span>
     <!--v-if-->
   </button>
-  <div data-slot="content" class="data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] data-[state=closed]:overflow-hidden" id="reka-collapsible-content-v-0-0-0" hidden="" data-state="closed" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;">
+  <div data-slot="content" class="data-[state=open]:animate-[collapsible-down_200ms_var(--ease-out)] data-[state=closed]:animate-[collapsible-up_200ms_var(--ease-out)] data-[state=closed]:overflow-hidden" id="reka-collapsible-content-v-0-0-0" hidden="" data-state="closed" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;">
     <div data-slot="body" class="text-sm text-dimmed whitespace-pre-wrap pt-2"></div>
   </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`ChatTool > renders with chevron leading, icon and content correctly 1`] = `
+"<div data-state="closed" data-slot="root" class=""><button type="button" aria-controls="" aria-expanded="false" data-state="closed" data-slot="trigger" class="group flex w-full items-center gap-1.5 text-muted text-sm disabled:cursor-default disabled:hover:text-muted hover:text-default min-w-0 transition-colors rounded-sm outline-primary/25 focus-visible:outline-3"><span data-slot="leading" class="relative size-4 shrink-0"><span class="iconify i-lucide:search size-4 shrink-0 absolute inset-0 group-hover:opacity-0 group-data-[state=open]:opacity-0 transition-opacity duration-200 ease-out" aria-hidden="true" data-slot="leadingIcon"></span><span class="iconify i-lucide:chevron-down size-4 shrink-0 group-data-[state=open]:rotate-180 absolute inset-0 opacity-0 group-hover:opacity-100 group-data-[state=open]:opacity-100 transition-[rotate,opacity] duration-200 ease-out motion-reduce:transition-none" aria-hidden="true" data-slot="chevronIcon"></span></span><span data-slot="label" class="truncate">Searching components<!--v-if--></span>
+    <!--v-if-->
+  </button>
+  <div data-slot="content" class="data-[state=open]:animate-[collapsible-down_200ms_var(--ease-out)] data-[state=closed]:animate-[collapsible-up_200ms_var(--ease-out)] data-[state=closed]:overflow-hidden" id="reka-collapsible-content-v-0-0-0" hidden="" data-state="closed" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;">
+    <div data-slot="body" class="text-sm text-dimmed whitespace-pre-wrap pt-2">Tool output content</div>
+  </div>
+  <!--v-if-->
 </div>"
 `;
 
@@ -27,9 +105,10 @@ exports[`ChatTool > renders with chevronIcon correctly 1`] = `
     <!--v-if--><span data-slot="label" class="truncate">Searching components<!--v-if--></span>
     <!--v-if-->
   </button>
-  <div data-slot="content" class="data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] data-[state=closed]:overflow-hidden" id="reka-collapsible-content-v-0-0-0" hidden="" data-state="closed" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;">
+  <div data-slot="content" class="data-[state=open]:animate-[collapsible-down_200ms_var(--ease-out)] data-[state=closed]:animate-[collapsible-up_200ms_var(--ease-out)] data-[state=closed]:overflow-hidden" id="reka-collapsible-content-v-0-0-0" hidden="" data-state="closed" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;">
     <div data-slot="body" class="text-sm text-dimmed whitespace-pre-wrap pt-2"></div>
   </div>
+  <!--v-if-->
 </div>"
 `;
 
@@ -38,19 +117,21 @@ exports[`ChatTool > renders with class correctly 1`] = `
     <!--v-if--><span data-slot="label" class="truncate">Searching components<!--v-if--></span>
     <!--v-if-->
   </button>
-  <div data-slot="content" class="data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] data-[state=closed]:overflow-hidden" id="reka-collapsible-content-v-0-0-0" hidden="" data-state="closed" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;">
+  <div data-slot="content" class="data-[state=open]:animate-[collapsible-down_200ms_var(--ease-out)] data-[state=closed]:animate-[collapsible-up_200ms_var(--ease-out)] data-[state=closed]:overflow-hidden" id="reka-collapsible-content-v-0-0-0" hidden="" data-state="closed" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;">
     <div data-slot="body" class="text-sm text-dimmed whitespace-pre-wrap pt-2"></div>
   </div>
+  <!--v-if-->
 </div>"
 `;
 
 exports[`ChatTool > renders with default slot correctly 1`] = `
 "<div data-state="closed" data-slot="root" class=""><button type="button" aria-controls="" aria-expanded="false" data-state="closed" data-slot="trigger" class="group flex w-full items-center gap-1.5 text-muted text-sm disabled:cursor-default disabled:hover:text-muted hover:text-default min-w-0 transition-colors rounded-sm outline-primary/25 focus-visible:outline-3">
-    <!--v-if--><span data-slot="label" class="truncate">Searching components<!--v-if--></span><span class="iconify i-lucide:chevron-down size-4 shrink-0 group-data-[state=open]:rotate-180 transition-transform duration-200" aria-hidden="true" data-slot="trailingIcon"></span>
+    <!--v-if--><span data-slot="label" class="truncate">Searching components<!--v-if--></span><span class="iconify i-lucide:chevron-down size-4 shrink-0 group-data-[state=open]:rotate-180 transition-transform duration-200 ease-out motion-reduce:transition-none" aria-hidden="true" data-slot="trailingIcon"></span>
   </button>
-  <div data-slot="content" class="data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] data-[state=closed]:overflow-hidden" id="reka-collapsible-content-v-0-0-0" hidden="" data-state="closed" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;">
+  <div data-slot="content" class="data-[state=open]:animate-[collapsible-down_200ms_var(--ease-out)] data-[state=closed]:animate-[collapsible-up_200ms_var(--ease-out)] data-[state=closed]:overflow-hidden" id="reka-collapsible-content-v-0-0-0" hidden="" data-state="closed" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;">
     <div data-slot="body" class="text-sm text-dimmed whitespace-pre-wrap pt-2">Tool output content</div>
   </div>
+  <!--v-if-->
 </div>"
 `;
 
@@ -59,9 +140,10 @@ exports[`ChatTool > renders with defaultOpen correctly 1`] = `
     <!--v-if--><span data-slot="label" class="truncate">Searching components<!--v-if--></span>
     <!--v-if-->
   </button>
-  <div data-slot="content" class="data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] data-[state=closed]:overflow-hidden" id="reka-collapsible-content-v-0-0-0" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px; transition-duration: 0s; animation-name: none;">
+  <div data-slot="content" class="data-[state=open]:animate-[collapsible-down_200ms_var(--ease-out)] data-[state=closed]:animate-[collapsible-up_200ms_var(--ease-out)] data-[state=closed]:overflow-hidden" id="reka-collapsible-content-v-0-0-0" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px; transition-duration: 0s; animation-name: none;">
     <div data-slot="body" class="text-sm text-dimmed whitespace-pre-wrap pt-2"></div>
   </div>
+  <!--v-if-->
 </div>"
 `;
 
@@ -70,9 +152,10 @@ exports[`ChatTool > renders with icon correctly 1`] = `
     <!--v-if--></span><span data-slot="label" class="truncate">Searching components<!--v-if--></span>
     <!--v-if-->
   </button>
-  <div data-slot="content" class="data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] data-[state=closed]:overflow-hidden" id="reka-collapsible-content-v-0-0-0" hidden="" data-state="closed" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;">
+  <div data-slot="content" class="data-[state=open]:animate-[collapsible-down_200ms_var(--ease-out)] data-[state=closed]:animate-[collapsible-up_200ms_var(--ease-out)] data-[state=closed]:overflow-hidden" id="reka-collapsible-content-v-0-0-0" hidden="" data-state="closed" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;">
     <div data-slot="body" class="text-sm text-dimmed whitespace-pre-wrap pt-2"></div>
   </div>
+  <!--v-if-->
 </div>"
 `;
 
@@ -81,9 +164,10 @@ exports[`ChatTool > renders with loading and loadingIcon correctly 1`] = `
     <!--v-if--></span><span data-slot="label" class="truncate">Searching components<!--v-if--></span>
     <!--v-if-->
   </button>
-  <div data-slot="content" class="data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] data-[state=closed]:overflow-hidden" id="reka-collapsible-content-v-0-0-0" hidden="" data-state="closed" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;">
+  <div data-slot="content" class="data-[state=open]:animate-[collapsible-down_200ms_var(--ease-out)] data-[state=closed]:animate-[collapsible-up_200ms_var(--ease-out)] data-[state=closed]:overflow-hidden" id="reka-collapsible-content-v-0-0-0" hidden="" data-state="closed" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;">
     <div data-slot="body" class="text-sm text-dimmed whitespace-pre-wrap pt-2"></div>
   </div>
+  <!--v-if-->
 </div>"
 `;
 
@@ -92,21 +176,23 @@ exports[`ChatTool > renders with loading correctly 1`] = `
     <!--v-if--></span><span data-slot="label" class="truncate">Searching components<!--v-if--></span>
     <!--v-if-->
   </button>
-  <div data-slot="content" class="data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] data-[state=closed]:overflow-hidden" id="reka-collapsible-content-v-0-0-0" hidden="" data-state="closed" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;">
+  <div data-slot="content" class="data-[state=open]:animate-[collapsible-down_200ms_var(--ease-out)] data-[state=closed]:animate-[collapsible-up_200ms_var(--ease-out)] data-[state=closed]:overflow-hidden" id="reka-collapsible-content-v-0-0-0" hidden="" data-state="closed" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;">
     <div data-slot="body" class="text-sm text-dimmed whitespace-pre-wrap pt-2"></div>
   </div>
+  <!--v-if-->
 </div>"
 `;
 
 exports[`ChatTool > renders with streaming correctly 1`] = `
 "<div data-state="closed" data-slot="root" class=""><button type="button" aria-controls="" aria-expanded="false" data-state="closed" disabled="" data-slot="trigger" class="group flex w-full items-center gap-1.5 text-muted text-sm disabled:cursor-default disabled:hover:text-muted hover:text-default min-w-0 transition-colors rounded-sm outline-primary/25 focus-visible:outline-3">
-    <!--v-if--><span data-slot="label" class="truncate"><span style="--spread: 40px; --duration: 2s;" data-slot="base" class="text-transparent bg-clip-text bg-no-repeat bg-size-[calc(200%+var(--spread)*2+2px)_100%,auto] bg-[image:linear-gradient(90deg,#0000_calc(50%-var(--spread)),var(--ui-text-highlighted),#0000_calc(50%+var(--spread))),linear-gradient(var(--ui-text-muted),var(--ui-text-muted))] animate-[shimmer_var(--duration)_linear_infinite] rtl:animate-[shimmer-rtl_var(--duration)_linear_infinite] will-change-[background-position]">Searching components</span>
+    <!--v-if--><span data-slot="label" class="truncate"><span style="--spread: 40px; --duration: 2s;" data-slot="base" class="text-transparent bg-clip-text bg-no-repeat bg-size-[calc(200%+var(--spread)*2+2px)_100%,auto] bg-[image:linear-gradient(90deg,#0000_calc(50%-var(--spread)),var(--ui-text-highlighted),#0000_calc(50%+var(--spread))),linear-gradient(var(--ui-text-muted),var(--ui-text-muted))] motion-safe:animate-[shimmer_var(--duration)_linear_infinite] motion-safe:rtl:animate-[shimmer-rtl_var(--duration)_linear_infinite] will-change-[background-position] motion-reduce:bg-none motion-reduce:text-muted">Searching components</span>
     <!--v-if--></span>
     <!--v-if-->
   </button>
-  <div data-slot="content" class="data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] data-[state=closed]:overflow-hidden" id="reka-collapsible-content-v-0-0-0" hidden="" data-state="closed" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;">
+  <div data-slot="content" class="data-[state=open]:animate-[collapsible-down_200ms_var(--ease-out)] data-[state=closed]:animate-[collapsible-up_200ms_var(--ease-out)] data-[state=closed]:overflow-hidden" id="reka-collapsible-content-v-0-0-0" hidden="" data-state="closed" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;">
     <div data-slot="body" class="text-sm text-dimmed whitespace-pre-wrap pt-2"></div>
   </div>
+  <!--v-if-->
 </div>"
 `;
 
@@ -115,9 +201,10 @@ exports[`ChatTool > renders with suffix correctly 1`] = `
     <!--v-if--><span data-slot="label" class="truncate">Searching components<span data-slot="suffix" class="text-dimmed ms-1">Button</span></span>
     <!--v-if-->
   </button>
-  <div data-slot="content" class="data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] data-[state=closed]:overflow-hidden" id="reka-collapsible-content-v-0-0-0" hidden="" data-state="closed" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;">
+  <div data-slot="content" class="data-[state=open]:animate-[collapsible-down_200ms_var(--ease-out)] data-[state=closed]:animate-[collapsible-up_200ms_var(--ease-out)] data-[state=closed]:overflow-hidden" id="reka-collapsible-content-v-0-0-0" hidden="" data-state="closed" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;">
     <div data-slot="body" class="text-sm text-dimmed whitespace-pre-wrap pt-2"></div>
   </div>
+  <!--v-if-->
 </div>"
 `;
 
@@ -126,9 +213,10 @@ exports[`ChatTool > renders with text correctly 1`] = `
     <!--v-if--><span data-slot="label" class="truncate">Searching components<!--v-if--></span>
     <!--v-if-->
   </button>
-  <div data-slot="content" class="data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] data-[state=closed]:overflow-hidden" id="reka-collapsible-content-v-0-0-0" hidden="" data-state="closed" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;">
+  <div data-slot="content" class="data-[state=open]:animate-[collapsible-down_200ms_var(--ease-out)] data-[state=closed]:animate-[collapsible-up_200ms_var(--ease-out)] data-[state=closed]:overflow-hidden" id="reka-collapsible-content-v-0-0-0" hidden="" data-state="closed" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;">
     <div data-slot="body" class="text-sm text-dimmed whitespace-pre-wrap pt-2"></div>
   </div>
+  <!--v-if-->
 </div>"
 `;
 
@@ -137,9 +225,10 @@ exports[`ChatTool > renders with ui correctly 1`] = `
     <!--v-if--><span data-slot="label" class="truncate">Searching components<!--v-if--></span>
     <!--v-if-->
   </button>
-  <div data-slot="content" class="data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] data-[state=closed]:overflow-hidden" id="reka-collapsible-content-v-0-0-0" hidden="" data-state="closed" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;">
+  <div data-slot="content" class="data-[state=open]:animate-[collapsible-down_200ms_var(--ease-out)] data-[state=closed]:animate-[collapsible-up_200ms_var(--ease-out)] data-[state=closed]:overflow-hidden" id="reka-collapsible-content-v-0-0-0" hidden="" data-state="closed" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;">
     <div data-slot="body" class="text-sm whitespace-pre-wrap pt-2 text-muted"></div>
   </div>
+  <!--v-if-->
 </div>"
 `;
 
@@ -148,9 +237,10 @@ exports[`ChatTool > renders with variant card correctly 1`] = `
     <!--v-if--><span data-slot="label" class="truncate">Searching components<!--v-if--></span>
     <!--v-if-->
   </button>
-  <div data-slot="content" class="data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] data-[state=closed]:overflow-hidden" id="reka-collapsible-content-v-0-0-0" hidden="" data-state="closed" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;">
+  <div data-slot="content" class="data-[state=open]:animate-[collapsible-down_200ms_var(--ease-out)] data-[state=closed]:animate-[collapsible-up_200ms_var(--ease-out)] data-[state=closed]:overflow-hidden" id="reka-collapsible-content-v-0-0-0" hidden="" data-state="closed" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;">
     <div data-slot="body" class="text-sm text-dimmed whitespace-pre-wrap border-t border-default p-2 max-h-[200px] overflow-y-auto focus:outline-none"></div>
   </div>
+  <!--v-if-->
 </div>"
 `;
 
@@ -159,8 +249,9 @@ exports[`ChatTool > renders with variant inline correctly 1`] = `
     <!--v-if--><span data-slot="label" class="truncate">Searching components<!--v-if--></span>
     <!--v-if-->
   </button>
-  <div data-slot="content" class="data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] data-[state=closed]:overflow-hidden" id="reka-collapsible-content-v-0-0-0" hidden="" data-state="closed" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;">
+  <div data-slot="content" class="data-[state=open]:animate-[collapsible-down_200ms_var(--ease-out)] data-[state=closed]:animate-[collapsible-up_200ms_var(--ease-out)] data-[state=closed]:overflow-hidden" id="reka-collapsible-content-v-0-0-0" hidden="" data-state="closed" style="--reka-collapsible-content-height: 0px; --reka-collapsible-content-width: 0px;">
     <div data-slot="body" class="text-sm text-dimmed whitespace-pre-wrap pt-2"></div>
   </div>
+  <!--v-if-->
 </div>"
 `;

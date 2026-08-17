@@ -1,6 +1,6 @@
 # Components
 
-Quick-reference index of all 125+ components. For full API docs (props, slots, events, examples), use the MCP `get_component` or `get_component_metadata` tools.
+Quick-reference index of all 125+ components. For full API docs (props, slots, events, examples), use the MCP `get-component` or `get-component-metadata` tools.
 
 ## Layout
 

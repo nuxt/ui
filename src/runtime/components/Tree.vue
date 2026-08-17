@@ -281,7 +281,7 @@ defineExpose({
             :disabled="item.disabled || props.disabled"
             data-slot="link"
             :class="ui.link({ class: [props.ui?.link, item.ui?.link, item.class], selected: isSelected, disabled: item.disabled || props.disabled })"
-            :style="!nested && level > 1 ? { paddingLeft: flattenedPaddingFormula(level) } : undefined"
+            :style="!nested && level > 1 ? { paddingInlineStart: flattenedPaddingFormula(level) } : undefined"
           >
             <slot
               :name="((item.slot || 'item') as keyof TreeSlots<T>)"
@@ -368,11 +368,11 @@ defineExpose({
   <TreeRoot
     ref="rootRef"
     v-slot="{ flattenItems }"
+    data-slot="root"
     v-bind="{ ...rootProps, ...$attrs }"
     :as="as.root"
     :model-value="props.modelValue"
     :default-value="props.defaultValue"
-    data-slot="root"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     :get-key="getItemKey"
     :default-expanded="defaultExpanded"

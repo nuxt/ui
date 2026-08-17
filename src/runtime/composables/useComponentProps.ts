@@ -46,15 +46,15 @@ function propIsDefined(vnode: VNode | null | undefined, prop: string): boolean {
 
 /**
  * Resolve a component's props with the priority chain:
- *   explicit prop > nearest UTheme > withDefaults
- *     > app.config.ui.<name>.defaultVariants
+ *   explicit prop > nearest UTheme > app.config.ui.<name>.defaultVariants
+ *     > withDefaults
  *
  * The returned proxy transparently reads from `props`, falling through to the
  * injected `ThemeContext` and `app.config.ui.<name>.defaultVariants` for
  * defaults. The component's tv() `defaultVariants` are intentionally left out
  * of the proxy fallback — they continue to drive `tv()`-internal class
  * resolution (the original semantics) without leaking into prop reads. The
- * `ui` prop is deep-merged (explicit slot classes override theme slot classes)
+ * `ui` and `class` props are merged (explicit classes override theme classes)
  * instead of being replaced.
  */
 export function useComponentProps<T extends object>(name: string, props: T): T {
@@ -85,10 +85,29 @@ export function useComponentProps<T extends object>(name: string, props: T): T {
         return defu(raw ?? {}, themeUi ?? {})
       }
 
+      // Like `ui`, `class` is merged instead of replaced so a component passing
+      // its own `class` still gets the theme classes. The explicit class comes
+      // last to win `twMerge`'s last-in-wins resolution.
+      if (prop === 'class') {
+        const themeClass = themeEntry?.class
+        if (themeClass === undefined) return raw
+        if (raw === undefined) return themeClass
+        return [themeClass, raw]
+      }
+
       if (vm && propIsDefined(vm.vnode, prop)) return raw
 
       const themeValue = themeEntry?.[prop]
       if (themeValue !== undefined) return themeValue
+
+      // A global `app.config.ui.<name>.defaultVariants` value takes priority over
+      // the component's `withDefaults` fallback. This keeps `defaultVariants`
+      // working uniformly for every variant, including props a component pins in
+      // `withDefaults` (e.g. `orientation`, kept defined so `:data-orientation`
+      // always renders a value).
+      const appConfigEntry = name.includes('.') ? get(appConfig.ui ?? {}, name) : appConfig.ui?.[name]
+      const appConfigValue = appConfigEntry?.defaultVariants?.[prop]
+      if (appConfigValue !== undefined) return appConfigValue
 
       // Only fall back to `raw` when `withDefaults` set an explicit default for
       // this prop. Otherwise Vue's runtime would auto-cast unset Boolean props
@@ -100,8 +119,7 @@ export function useComponentProps<T extends object>(name: string, props: T): T {
         return raw
       }
 
-      const appConfigEntry = name.includes('.') ? get(appConfig.ui ?? {}, name) : appConfig.ui?.[name]
-      return appConfigEntry?.defaultVariants?.[prop]
+      return undefined
     },
     // `has`, `ownKeys`, and `getOwnPropertyDescriptor` reflect the underlying
     // `defineProps` schema only — theme defaults are NOT enumerable. As a

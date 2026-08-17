@@ -19,19 +19,18 @@ export default (options: Required<ModuleOptions>) => ({
   variants: {
     transition: {
       true: {
-        gap: 'transition-[width] duration-200 ease-out',
-        container: 'transition-[left,right,width] duration-200 ease-out',
-        rail: 'transition-all ease-out'
+        gap: 'transition-[width] duration-200 ease-out motion-reduce:transition-none',
+        container: 'transition-[inset-inline-start,inset-inline-end,width] duration-200 ease-out motion-reduce:transition-none'
       }
     },
     side: {
       left: {
-        container: 'left-0 border-e border-default',
-        rail: 'end-0 translate-x-1/2'
+        container: 'start-0 border-e border-default',
+        rail: 'end-0 translate-x-1/2 rtl:-translate-x-1/2'
       },
       right: {
-        container: 'right-0 border-s border-default',
-        rail: '-start-px -translate-x-1/2'
+        container: 'end-0 border-s border-default',
+        rail: '-start-px -translate-x-1/2 rtl:translate-x-1/2'
       }
     },
     collapsible: {
@@ -68,13 +67,13 @@ export default (options: Required<ModuleOptions>) => ({
     side: 'left',
     collapsible: ['offcanvas', 'icon'],
     class: {
-      rail: 'cursor-w-resize data-[state=collapsed]:cursor-e-resize'
+      rail: 'cursor-w-resize rtl:cursor-e-resize data-[state=collapsed]:cursor-e-resize data-[state=collapsed]:rtl:cursor-w-resize'
     }
   }, {
     side: 'right',
     collapsible: ['offcanvas', 'icon'],
     class: {
-      rail: 'cursor-e-resize data-[state=collapsed]:cursor-w-resize'
+      rail: 'cursor-e-resize rtl:cursor-w-resize data-[state=collapsed]:cursor-w-resize data-[state=collapsed]:rtl:cursor-e-resize'
     }
   }, {
     side: 'left',
@@ -92,13 +91,13 @@ export default (options: Required<ModuleOptions>) => ({
     side: 'left',
     collapsible: 'offcanvas',
     class: {
-      container: 'data-[state=collapsed]:-left-(--sidebar-width)'
+      container: 'data-[state=collapsed]:-start-(--sidebar-width)'
     }
   }, {
     side: 'right',
     collapsible: 'offcanvas',
     class: {
-      container: 'data-[state=collapsed]:-right-(--sidebar-width)'
+      container: 'data-[state=collapsed]:-end-(--sidebar-width)'
     }
   }, {
     variant: 'floating',

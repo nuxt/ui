@@ -14,6 +14,7 @@ const components = [
   'card',
   'carousel',
   'chat-message',
+  'chat-prompt',
   'chat-reasoning',
   'chat-shimmer',
   'chat-tool',

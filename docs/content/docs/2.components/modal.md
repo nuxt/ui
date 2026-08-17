@@ -1,6 +1,11 @@
 ---
 description: A dialog window that can be used to display a message or request user input.
 category: overlay
+keywords:
+  - dialog
+  - popup
+  - confirm
+  - alert dialog
 links:
   - label: Dialog
     icon: i-custom-reka-ui
@@ -360,7 +365,7 @@ slots:
 :placeholder{class="h-full"}
 ::
 
-### Unmount :badge{label="Soon" class="align-text-top"}
+### Unmount :badge{label="4.10+" class="align-text-top"}
 
 Use the `unmount-on-hide` prop to prevent the Modal's content from being unmounted when it is closed. Defaults to `true`.
 

@@ -66,7 +66,7 @@ export interface InputSlots {
 </script>
 
 <script setup lang="ts" generic="T extends InputValue, Mod extends ModelModifiers">
-import { useTemplateRef, computed, onMounted } from 'vue'
+import { useTemplateRef, computed, onMounted, onScopeDispose } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useVModel } from '@vueuse/core'
 import { useAppConfig } from '#imports'
@@ -96,20 +96,28 @@ const modelValue = useVModel<InputProps<T, Mod>, 'modelValue', 'update:modelValu
 
 const appConfig = useAppConfig() as Input['AppConfig']
 
-const { emitFormBlur, emitFormInput, emitFormChange, size: formFieldSize, color, id, name, highlight, disabled, emitFormFocus, ariaAttrs } = useFormField<InputProps<T>>(_props, { deferInputValidation: true })
+const { emitFormBlur, emitFormInput, emitFormChange, size: formFieldSize, color: formFieldColor, id, name, highlight: formFieldHighlight, disabled: formFieldDisabled, emitFormFocus, ariaAttrs } = useFormField<InputProps<T>>(_props, { deferInputValidation: true })
+
 const { orientation, size: fieldGroupSize } = useFieldGroup<InputProps<T>>(_props)
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props)
 
-const inputSize = computed(() => fieldGroupSize.value || formFieldSize.value)
+// eslint-disable-next-line vue/no-dupe-keys
+const color = computed(() => formFieldColor.value ?? props.color)
+// eslint-disable-next-line vue/no-dupe-keys
+const highlight = computed(() => formFieldHighlight.value ?? props.highlight)
+// eslint-disable-next-line vue/no-dupe-keys
+const size = computed(() => fieldGroupSize.value ?? formFieldSize.value ?? props.size)
+// eslint-disable-next-line vue/no-dupe-keys
+const disabled = computed(() => formFieldDisabled.value ?? props.disabled)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.input || {}) })({
   type: props.type as Input['variants']['type'],
-  color: color.value ?? props.color,
+  color: color.value,
   variant: props.variant,
-  size: inputSize?.value ?? props.size,
+  size: size.value,
   loading: props.loading,
-  highlight: highlight.value ?? props.highlight,
+  highlight: highlight.value,
   fixed: props.fixed,
   leading: isLeading.value || !!props.avatar || !!slots.leading,
   trailing: isTrailing.value || !!slots.trailing,
@@ -173,11 +181,15 @@ function autoFocus() {
   }
 }
 
+let autofocusTimeoutId: ReturnType<typeof setTimeout> | undefined
+
 onMounted(() => {
-  setTimeout(() => {
+  autofocusTimeoutId = setTimeout(() => {
     autoFocus()
   }, props.autofocusDelay)
 })
+
+onScopeDispose(() => clearTimeout(autofocusTimeoutId))
 
 defineExpose({
   inputRef
@@ -185,7 +197,7 @@ defineExpose({
 </script>
 
 <template>
-  <Primitive :as="props.as" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <Primitive :as="props.as" :data-slot="($attrs['data-slot'] as string | undefined) ?? 'root'" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <input
       :id="id"
       ref="inputRef"
@@ -193,12 +205,12 @@ defineExpose({
       :value="modelValue"
       :name="name"
       :placeholder="props.placeholder"
-      data-slot="base"
       :class="ui.base({ class: props.ui?.base })"
       :disabled="disabled"
       :required="props.required"
       :autocomplete="props.autocomplete"
       v-bind="{ ...$attrs, ...ariaAttrs }"
+      data-slot="base"
       @input="onInput"
       @blur="onBlur"
       @change="onChange"

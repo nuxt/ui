@@ -32,19 +32,19 @@ export default {
     orientation: 'horizontal',
     class: {
       root: 'flex-row',
-      content: 'flex-row animate-[marquee_var(--duration)_linear_infinite] rtl:animate-[marquee-rtl_var(--duration)_linear_infinite] backface-hidden'
+      content: 'flex-row motion-safe:animate-[marquee_var(--duration)_linear_infinite] motion-safe:rtl:animate-[marquee-rtl_var(--duration)_linear_infinite] backface-hidden'
     }
   }, {
     orientation: 'horizontal',
     overlay: true,
     class: {
-      root: 'before:inset-y-0 before:left-0 before:h-full before:w-1/3 before:bg-gradient-to-r after:inset-y-0 after:right-0 after:h-full after:w-1/3 after:bg-gradient-to-l backface-hidden'
+      root: 'before:inset-y-0 before:start-0 before:h-full before:w-1/3 before:bg-gradient-to-r rtl:before:bg-gradient-to-l after:inset-y-0 after:end-0 after:h-full after:w-1/3 after:bg-gradient-to-l rtl:after:bg-gradient-to-r backface-hidden'
     }
   }, {
     orientation: 'vertical',
     class: {
       root: 'flex-col',
-      content: 'flex-col animate-[marquee-vertical_var(--duration)_linear_infinite] rtl:animate-[marquee-vertical-rtl_var(--duration)_linear_infinite] h-[fit-content] backface-hidden'
+      content: 'flex-col motion-safe:animate-[marquee-vertical_var(--duration)_linear_infinite] h-[fit-content] backface-hidden'
     }
   }, {
     orientation: 'vertical',
