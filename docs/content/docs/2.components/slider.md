@@ -36,6 +36,10 @@ props:
 ---
 ::
 
+::tip
+Use `aria-label` or `aria-labelledby` to name the Slider, they are forwarded to the thumb which is the element with the `slider` role. Sliders with two thumbs are named `Minimum` / `Maximum` automatically and those with three or more `Value n of m`, so you only need this when a single thumb has no visible label.
+::
+
 ### Min / Max
 
 Use the `min` and `max` props to set the minimum and maximum values of the Slider. Defaults to `0` and `100`.

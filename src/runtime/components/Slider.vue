@@ -44,7 +44,7 @@ export interface SliderEmits {
 </script>
 
 <script setup lang="ts" generic="T extends number | number[]">
-import { computed } from 'vue'
+import { computed, useAttrs } from 'vue'
 import { SliderRoot, SliderRange, SliderTrack, SliderThumb } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
 import { reactivePick } from '@vueuse/core'
@@ -61,6 +61,8 @@ const _props = withDefaults(defineProps<SliderProps>(), {
   orientation: 'horizontal'
 })
 const emits = defineEmits<SliderEmits>()
+
+defineOptions({ inheritAttrs: false })
 
 const props = useComponentProps<SliderProps>('slider', _props)
 
@@ -100,6 +102,22 @@ const sliderValue = computed({
 
 const thumbs = computed(() => sliderValue.value?.length ?? 1)
 
+const attrs = useAttrs()
+
+// The thumb is the element rendered with `role="slider"`, so `aria-*` attributes belong there
+// rather than on the root, which is neither focusable nor labelable and is never announced.
+const thumbAttrs = computed(() => {
+  const ariaAttrs = Object.fromEntries(Object.entries(attrs).filter(([key]) => key.startsWith('aria-')))
+
+  if (thumbs.value === 1 && !ariaAttrs['aria-label'] && !ariaAttrs['aria-labelledby']) {
+    ariaAttrs['aria-label'] = 'Thumb'
+  }
+
+  return ariaAttrs
+})
+
+const rootAttrs = computed(() => Object.fromEntries(Object.entries(attrs).filter(([key]) => !key.startsWith('aria-'))))
+
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.slider || {}) })({
   disabled: disabled.value,
@@ -118,12 +136,12 @@ function onChange(value: any) {
 
 <template>
   <SliderRoot
-    v-bind="rootProps"
     :id="id"
     v-model="sliderValue"
+    data-slot="root"
+    v-bind="{ ...rootProps, ...rootAttrs }"
     :name="name"
     :disabled="disabled"
-    data-slot="root"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     :default-value="defaultSliderValue"
     @update:model-value="emitFormInput()"
@@ -140,9 +158,9 @@ function onChange(value: any) {
         disable-closing-trigger
         v-bind="(typeof props.tooltip === 'object' ? props.tooltip : {})"
       >
-        <SliderThumb data-slot="thumb" :class="ui.thumb({ class: props.ui?.thumb })" :aria-label="thumbs === 1 ? 'Thumb' : `Thumb ${thumb} of ${thumbs}`" v-bind="ariaAttrs" />
+        <SliderThumb data-slot="thumb" :class="ui.thumb({ class: props.ui?.thumb })" v-bind="{ ...thumbAttrs, ...ariaAttrs }" />
       </UTooltip>
-      <SliderThumb v-else data-slot="thumb" :class="ui.thumb({ class: props.ui?.thumb })" :aria-label="thumbs === 1 ? 'Thumb' : `Thumb ${thumb} of ${thumbs}`" v-bind="ariaAttrs" />
+      <SliderThumb v-else data-slot="thumb" :class="ui.thumb({ class: props.ui?.thumb })" v-bind="{ ...thumbAttrs, ...ariaAttrs }" />
     </template>
   </SliderRoot>
 </template>
