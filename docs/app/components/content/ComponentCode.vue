@@ -189,10 +189,13 @@ const options = computed(() => {
             chip: key.toLowerCase().endsWith('color') ? { color: variant } : undefined
           }))
 
+    const type = props?.cast?.[key] ?? prop?.type
+
     return {
       name: key,
       label: key,
-      type: props?.cast?.[key] ?? prop?.type,
+      // Determined from the original value so clearing a number input doesn't turn it into a text one
+      inputType: type?.includes('number') && typeof get(props.props, key) === 'number' ? 'number' : 'text',
       items
     }
   })
@@ -447,7 +450,7 @@ const { data: ast } = useAsyncData(codeKey, async () => {
             </USelect>
             <UInput
               v-else
-              :type="option.type?.includes('number') && typeof getComponentProp(option.name) === 'number' ? 'number' : 'text'"
+              :type="option.inputType"
               :model-value="getComponentProp(option.name)"
               color="neutral"
               variant="soft"
@@ -462,7 +465,7 @@ const { data: ast } = useAsyncData(codeKey, async () => {
         <component :is="component" v-bind="{ ...componentProps, ...componentEvents }">
           <template v-for="slot in Object.keys(slots || {})" :key="slot" #[slot]>
             <slot :name="slot" mdc-unwrap="p">
-              {{ slots?.[slot] }}
+              {{ typeof slots?.[slot] === 'string' ? slots[slot].trim() : slots?.[slot] }}
             </slot>
           </template>
         </component>

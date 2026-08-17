@@ -72,13 +72,14 @@ export interface ContentTocSlots<T extends ContentTocLink = ContentTocLink> {
 </script>
 
 <script setup lang="ts" generic="T extends ContentTocLink">
-import { computed, onUnmounted } from 'vue'
+import { computed, onUnmounted, useTemplateRef, watch, nextTick } from 'vue'
 import { CollapsibleRoot, CollapsibleTrigger, CollapsibleContent } from 'reka-ui'
 import { reactivePick, createReusableTemplate } from '@vueuse/core'
 import { useRouter, useAppConfig, useNuxtApp } from '#imports'
 import { useComponentProps } from '../../composables/useComponentProps'
 import { useForwardProps } from '../../composables/useForwardProps'
 import { useScrollspy } from '../../composables/useScrollspy'
+import { useScrollShadow } from '../../composables/useScrollShadow'
 import { useLocale } from '../../composables/useLocale'
 import { usePrefix } from '../../composables/usePrefix'
 import { tv } from '../../utils/tv'
@@ -101,6 +102,9 @@ const router = useRouter()
 const appConfig = useAppConfig() as ContentToc['AppConfig']
 const { activeHeadings, updateHeadings } = useScrollspy()
 const prefix = usePrefix()
+
+const contentRef = useTemplateRef<HTMLElement>('contentRef')
+const { style: scrollShadowStyle } = useScrollShadow(contentRef)
 
 const [DefineListTemplate, ReuseListTemplate] = createReusableTemplate<{ links: T[], level: number }>({
   props: {
@@ -138,18 +142,55 @@ function flattenLinksWithLevel(links: T[], level = 0): { link: T, level: number 
 
 const linkHeight = 1.75 // rem — text-sm line-height (1.25rem) + py-1 (0.5rem)
 
+const activeIndex = computed(() => {
+  if (!activeHeadings.value?.length) {
+    return -1
+  }
+
+  return flattenLinks(props.links || []).findIndex(link => activeHeadings.value.includes(link.id))
+})
+
+// The natural height of the list, so the theme can floor how far the list may
+// shrink without inflating a short one: `min(var(--list-height), <floor>)`.
+const listStyle = computed(() => ({
+  '--list-height': `${flattenLinks(props.links || []).length * linkHeight}rem`
+}))
+
 const indicatorStyle = computed(() => {
   if (!activeHeadings.value?.length) {
     return
   }
 
-  const flatLinks = flattenLinks(props.links || [])
-  const activeIndex = flatLinks.findIndex(link => activeHeadings.value.includes(link.id))
-
   return {
     '--indicator-size': `${linkHeight * activeHeadings.value.length}rem`,
-    '--indicator-position': activeIndex >= 0 ? `${activeIndex * linkHeight}rem` : '0rem'
+    '--indicator-position': activeIndex.value >= 0 ? `${activeIndex.value * linkHeight}rem` : '0rem'
   }
+})
+
+// Keep the active link centered within the (desktop) list when it changes.
+// Scroll the container directly rather than `scrollIntoView` so only the list
+// moves, never the page.
+watch(activeIndex, (index) => {
+  const container = contentRef.value
+  if (index < 0 || !container) {
+    return
+  }
+
+  nextTick(() => {
+    const link = container.querySelectorAll<HTMLElement>('a[data-slot="link"]')[index]
+    if (!link) {
+      return
+    }
+
+    const containerRect = container.getBoundingClientRect()
+    const linkRect = link.getBoundingClientRect()
+    const linkOffset = (linkRect.top - containerRect.top) + container.scrollTop
+
+    container.scrollTo({
+      top: linkOffset - container.clientHeight / 2 + linkRect.height / 2,
+      behavior: 'smooth'
+    })
+  })
 })
 
 // Generate SVG path for the circuit line structure
@@ -261,7 +302,7 @@ onUnmounted(() => {
     </slot>
   </DefineContentTemplate>
 
-  <CollapsibleRoot v-slot="{ open }" v-bind="{ ...rootProps, ...$attrs }" :default-open="props.defaultOpen" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <CollapsibleRoot v-slot="{ open }" data-slot="root" v-bind="{ ...rootProps, ...$attrs }" :default-open="props.defaultOpen" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <div data-slot="container" :class="ui.container({ class: props.ui?.container })">
       <div v-if="!!slots.top" data-slot="top" :class="ui.top({ class: props.ui?.top })">
         <slot name="top" :links="props.links" />
@@ -280,7 +321,7 @@ onUnmounted(() => {
           <ReuseTriggerTemplate :open="open" />
         </p>
 
-        <div data-slot="content" :class="ui.content({ class: [props.ui?.content, prefix('hidden lg:flex')] })">
+        <div ref="contentRef" data-slot="content" :class="ui.content({ class: [props.ui?.content, prefix('hidden lg:flex')] })" :style="[listStyle, scrollShadowStyle]">
           <ReuseContentTemplate />
         </div>
       </template>

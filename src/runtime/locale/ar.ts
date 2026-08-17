@@ -83,6 +83,9 @@ export default defineLocale<Messages>({
       close: 'إغلاق الشريط الجانبي',
       open: 'فتح الشريط الجانبي'
     },
+    drawer: {
+      close: 'إغلاق'
+    },
     error: {
       clear: 'العودة إلى الصفحة الرئيسية'
     },

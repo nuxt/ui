@@ -2,7 +2,7 @@ import type { Messages } from '../types/locale'
 import { defineLocale } from '../composables/defineLocale'
 
 export default defineLocale<Messages>({
-  name: 'Suomeksi',
+  name: 'Suomi',
   code: 'fi',
   messages: {
     alert: {
@@ -81,6 +81,9 @@ export default defineLocale<Messages>({
     dashboardSidebarToggle: {
       close: 'Sulje sivupalkki',
       open: 'Avaa sivupalkki'
+    },
+    drawer: {
+      close: 'Sulje'
     },
     error: {
       clear: 'Takaisin etusivulle'

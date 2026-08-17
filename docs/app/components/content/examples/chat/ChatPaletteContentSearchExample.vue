@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { isTextUIPart } from 'ai'
-import type { UIMessage } from 'ai'
-import { Chat } from '@ai-sdk/vue'
+import { useChat } from '@ai-sdk/vue'
 import { isPartStreaming } from '@nuxt/ui/utils/ai'
-import { Comark } from '@comark/vue'
-import highlight from '@comark/vue/plugins/highlight'
+import { Markdown } from '@comark/vue'
+import shiki from '@comark/vue/plugins/shiki'
 
-const messages: UIMessage[] = []
 const input = ref('')
+
+const { messages, status, error, sendMessage, regenerate } = useChat()
 
 const groups = computed(() => [{
   id: 'ai',
@@ -21,13 +21,13 @@ const groups = computed(() => [{
       ai.value = true
 
       if (searchTerm.value) {
-        messages.push({
+        messages.value = [...messages.value, {
           id: '1',
           role: 'user',
           parts: [{ type: 'text', text: searchTerm.value }]
-        })
+        }]
 
-        chat.regenerate()
+        regenerate()
       }
     }
   }]
@@ -36,14 +36,10 @@ const groups = computed(() => [{
 const ai = ref(false)
 const searchTerm = ref('')
 
-const chat = new Chat({
-  messages
-})
-
 function onSubmit() {
   if (!input.value.trim()) return
 
-  chat.sendMessage({ text: input.value })
+  sendMessage({ text: input.value })
 
   input.value = ''
 }
@@ -77,19 +73,19 @@ const ui = {
       <UTheme :ui="ui">
         <UChatPalette>
           <UChatMessages
-            :messages="chat.messages"
-            :status="chat.status"
+            :messages="messages"
+            :status="status"
             :user="{ side: 'left', variant: 'naked', avatar: { src: 'https://github.com/benjamincanac.png', loading: 'lazy' as const } }"
             :assistant="{ icon: 'i-lucide-bot' }"
           >
             <template #content="{ message }">
               <template v-for="(part, index) in message.parts" :key="`${message.id}-${part.type}-${index}`">
                 <template v-if="isTextUIPart(part)">
-                  <Comark
+                  <Markdown
                     v-if="message.role === 'assistant'"
-                    :markdown="part.text"
+                    :value="part.text"
                     :streaming="isPartStreaming(part)"
-                    :plugins="[highlight()]"
+                    :plugins="[shiki()]"
                     class="*:first:mt-0 *:last:mb-0"
                   />
                   <p v-else-if="message.role === 'user'" class="whitespace-pre-wrap leading-6">
@@ -105,7 +101,7 @@ const ui = {
               v-model="input"
               icon="i-lucide-search"
               variant="naked"
-              :error="chat.error"
+              :error="error"
               @submit="onSubmit"
               @close="onClose"
             />

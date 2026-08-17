@@ -31,7 +31,7 @@ export interface ButtonProps extends UseComponentIconsProps, Omit<LinkProps, 'ra
   block?: boolean
   /** Set loading state automatically based on the `@click` promise state */
   loadingAuto?: boolean
-  onClick?: ((event: MouseEvent) => void | Promise<void>) | Array<((event: MouseEvent) => void | Promise<void>)>
+  onClick?: ((event: MouseEvent) => void) | Array<((event: MouseEvent) => void)>
   class?: any
   ui?: Button['slots']
 }
@@ -68,7 +68,11 @@ const props = useComponentProps('button', _props)
 const appConfig = useAppConfig() as Button['AppConfig']
 const { orientation, size: buttonSize } = useFieldGroup<ButtonProps>(_props)
 
+// Memoized: `omit` iterates every forwarded key through three proxy layers
+// (useForwardProps -> reactivePick -> useComponentProps), so doing it inline in
+// the template re-paid that walk on every render.
 const linkProps = useForwardProps(pickLinkProps(props))
+const forwardedLinkProps = computed(() => omit(linkProps.value, ['type', 'disabled', 'onClick']))
 
 const loadingAutoState = ref(false)
 const formLoading = inject<Ref<boolean> | undefined>(formLoadingInjectionKey, undefined)
@@ -87,8 +91,20 @@ const isLoading = computed(() => {
   return props.loading || (props.loadingAuto && (loadingAutoState.value || (formLoading?.value && props.type === 'submit')))
 })
 
+// Pass only the props the composable reads: a `{ ...props }` spread would walk
+// every prop through the `useComponentProps` proxy and subscribe this computed
+// (and `ui`, which reads `isLeading`/`isTrailing`) to all of them, re-running
+// the whole tv pipeline on unrelated prop changes like `class`.
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(
-  computed(() => ({ ...props, loading: isLoading.value }))
+  computed(() => ({
+    icon: props.icon,
+    leading: props.leading,
+    leadingIcon: props.leadingIcon,
+    trailing: props.trailing,
+    trailingIcon: props.trailingIcon,
+    loading: isLoading.value,
+    loadingIcon: props.loadingIcon
+  }))
 )
 
 // eslint-disable-next-line vue/no-dupe-keys
@@ -124,12 +140,12 @@ const ui = computed(() => tv({
     v-slot="{ active, ...slotProps }"
     :type="props.type"
     :disabled="props.disabled || isLoading"
-    v-bind="omit(linkProps, ['type', 'disabled', 'onClick'])"
+    v-bind="forwardedLinkProps"
     custom
   >
     <ULinkBase
-      v-bind="slotProps"
       data-slot="base"
+      v-bind="slotProps"
       :class="ui.base({
         class: [props.ui?.base, props.class],
         active,

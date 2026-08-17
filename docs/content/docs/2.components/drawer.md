@@ -1,6 +1,10 @@
 ---
 description: A drawer that smoothly slides in & out of the screen.
 category: overlay
+keywords:
+  - bottom sheet
+  - action sheet
+  - mobile sheet
 links:
   - label: Drawer
     icon: i-custom-reka-ui
@@ -74,6 +78,70 @@ ignore:
 props:
   title: 'Drawer with description'
   description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+slots:
+  default: |
+
+    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
+
+  body: |
+
+    <Placeholder class="h-48" />
+---
+
+:u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
+
+#body
+:placeholder{class="h-48"}
+::
+
+### Close :badge{label="4.10+" class="align-text-top"}
+
+Use the `close` prop to display a close button in the Drawer. Defaults to `false`.
+
+You can pass any property from the [Button](/docs/components/button) component to customize it.
+
+::component-code
+---
+prettier: true
+ignore:
+  - title
+  - close.color
+  - close.variant
+props:
+  title: 'Drawer with close button'
+  close:
+    color: primary
+    variant: outline
+    class: 'rounded-full'
+slots:
+  default: |
+
+    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
+
+  body: |
+
+    <Placeholder class="h-48" />
+---
+
+:u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
+
+#body
+:placeholder{class="h-48"}
+::
+
+### Close Icon :badge{label="4.10+" class="align-text-top"}
+
+Use the `close-icon` prop to customize the close button [Icon](/docs/components/icon). Defaults to `i-lucide-x`.
+
+::component-code
+---
+prettier: true
+ignore:
+  - title
+props:
+  title: 'Drawer with close button'
+  close: true
+  closeIcon: 'i-lucide-arrow-right'
 slots:
   default: |
 

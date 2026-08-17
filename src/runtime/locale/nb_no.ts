@@ -82,6 +82,9 @@ export default defineLocale<Messages>({
       close: 'Lukk sidepanel',
       open: 'Åpne sidepanel'
     },
+    drawer: {
+      close: 'Lukk'
+    },
     error: {
       clear: 'Tilbake til forsiden'
     },

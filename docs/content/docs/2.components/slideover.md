@@ -1,6 +1,10 @@
 ---
 description: A dialog that slides in from any side of the screen.
 category: overlay
+keywords:
+  - sheet
+  - side panel
+  - off-canvas
 links:
   - label: Dialog
     icon: i-custom-reka-ui
@@ -351,7 +355,7 @@ slots:
 :placeholder{class="h-full"}
 ::
 
-### Unmount :badge{label="Soon" class="align-text-top"}
+### Unmount :badge{label="4.10+" class="align-text-top"}
 
 Use the `unmount-on-hide` prop to prevent the Slideover's content from being unmounted when it is closed. Defaults to `true`.
 

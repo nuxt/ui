@@ -83,6 +83,9 @@ export default defineLocale<Messages>({
       close: 'داخستنی لاتەنیشت',
       open: 'کردنەوەی لاتەنیشت'
     },
+    drawer: {
+      close: 'داخستن'
+    },
     error: {
       clear: 'گەڕانەوە بۆ سەرەتا'
     },

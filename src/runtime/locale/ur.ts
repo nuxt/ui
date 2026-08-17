@@ -2,7 +2,7 @@ import type { Messages } from '../types/locale'
 import { defineLocale } from '../composables/defineLocale'
 
 export default defineLocale<Messages>({
-  name: 'Urdu',
+  name: 'اردو',
   code: 'ur',
   dir: 'rtl',
   messages: {
@@ -82,6 +82,9 @@ export default defineLocale<Messages>({
     dashboardSidebarToggle: {
       close: 'سائیڈ بار بند کریں',
       open: 'سائیڈ بار کھولیں'
+    },
+    drawer: {
+      close: 'بند کریں'
     },
     error: {
       clear: 'ہوم پیج پر واپس جائیں'

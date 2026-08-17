@@ -103,7 +103,7 @@ props:
 ::
 
 ::note
-Here's the detail of the different statuses from the AI SDK Chat class:
+Here's the detail of the different statuses from the AI SDK `useChat` composable:
 
 - `submitted`: The message has been sent to the API and we're awaiting the start of the response stream.
 - `streaming`: The response is actively streaming in from the API, receiving chunks of data.

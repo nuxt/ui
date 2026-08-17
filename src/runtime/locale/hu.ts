@@ -82,6 +82,9 @@ export default defineLocale<Messages>({
       close: 'Oldalsáv bezárása',
       open: 'Oldalsáv megnyitása'
     },
+    drawer: {
+      close: 'Bezárás'
+    },
     error: {
       clear: 'Vissza a főoldalra'
     },

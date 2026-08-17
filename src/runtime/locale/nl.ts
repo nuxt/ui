@@ -82,6 +82,9 @@ export default defineLocale<Messages>({
       close: 'Zijbalk sluiten',
       open: 'Zijbalk openen'
     },
+    drawer: {
+      close: 'Sluiten'
+    },
     error: {
       clear: 'Terug naar home'
     },

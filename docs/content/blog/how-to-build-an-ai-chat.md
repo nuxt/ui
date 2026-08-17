@@ -237,7 +237,8 @@ import {
   createUIMessageStream,
   createUIMessageStreamResponse,
   generateText,
-  streamText
+  streamText,
+  toUIMessageStream
 } from 'ai'
 import type { UIMessage } from 'ai'
 
@@ -274,7 +275,7 @@ export default defineEventHandler(async (event) => {
   if (!chat.title) {
     const { text: title } = await generateText({
       model: DEFAULT_MODEL,
-      system: `Generate a short title (max 30 characters) based on the user's message. No quotes or punctuation.`,
+      instructions: `Generate a short title (max 30 characters) based on the user's message. No quotes or punctuation.`,
       prompt: JSON.stringify(messages[0])
     })
 
@@ -296,7 +297,7 @@ export default defineEventHandler(async (event) => {
     execute: async ({ writer }) => {
       const result = streamText({
         model,
-        system: `You are a helpful AI assistant. Be concise and friendly.`,
+        instructions: `You are a helpful AI assistant. Be concise and friendly.`,
         messages: await convertToModelMessages(messages),
         providerOptions: {
           anthropic: {
@@ -327,9 +328,9 @@ export default defineEventHandler(async (event) => {
         })
       }
 
-      writer.merge(result.toUIMessageStream())
+      writer.merge(toUIMessageStream({ stream: result.stream }))
     },
-    onFinish: async ({ messages }) => {
+    onEnd: async ({ messages }) => {
       // Save the assistant's response to the database
       await db.insert(schema.messages).values(messages.map(message => ({
         chatId: chat.id,
@@ -360,14 +361,14 @@ When a chat doesn't have a title yet, we use [`generateText`](https://ai-sdk.dev
 
 The [`streamText`](https://ai-sdk.dev/docs/reference/ai-sdk-core/stream-text) function generates a streaming response from the AI model. Key options include:
 - `model`: The AI model to use
-- `system`: Instructions that guide the AI's behavior
+- `instructions`: Guidance that shapes the AI's behavior
 - `messages`: The conversation history
 
 **UIMessageStream**
 
 The [`createUIMessageStream`](https://ai-sdk.dev/docs/reference/ai-sdk-ui/create-ui-message-stream#createuimessagestream) and [`createUIMessageStreamResponse`](https://ai-sdk.dev/docs/reference/ai-sdk-ui/create-ui-message-stream-response#createuimessagestreamresponse) functions create a stream that the AI SDK client can consume. The response streams chunks as they're generated, creating the real-time typing effect.
 
-The `writer.write()` method allows sending custom data events to the client (like `data-chat-title`), while `onFinish` is called when streaming completes, perfect for persisting the assistant's response.
+The `writer.write()` method allows sending custom data events to the client (like `data-chat-title`), while `onEnd` is called when streaming completes, perfect for persisting the assistant's response.
 
 ### Fetching a chat
 
@@ -470,20 +471,20 @@ The [`UChatPrompt`](/docs/components/chat-prompt) component automatically handle
 
 ### Setting up Markdown rendering
 
-AI models often respond with Markdown formatting (code blocks, lists, bold text, etc.). Before building the chat page, create a custom [`Comark`](https://comark.dev) component that will handle streaming Markdown rendering. Using [`defineComarkComponent`](https://comark.dev/rendering/vue#code-definecomarkcomponent), you can enable the `highlight` plugin for syntax highlighting in code blocks and register additional [Shiki](https://shiki.style) languages beyond the defaults (TypeScript, JavaScript, Vue, Shell, JSON, YAML, Markdown):
+AI models often respond with Markdown formatting (code blocks, lists, bold text, etc.). Before building the chat page, create a custom [`Comark`](https://comark.dev) component that will handle streaming Markdown rendering. Using [`defineMarkdownComponent`](https://comark.dev/rendering/vue#code-markdown-code-definemarkdowncomponent-code), you can enable the `shiki` plugin for syntax highlighting in code blocks and register additional [Shiki](https://shiki.style) languages beyond the defaults (TypeScript, JavaScript, Vue, Shell, JSON, YAML, Markdown):
 
 ::code-tree-intersection
-```ts [app/components/chat/Comark.ts]
-import highlight from '@comark/nuxt/plugins/highlight'
+```ts [app/components/chat/Markdown.ts]
+import shiki from '@comark/nuxt/plugins/shiki'
 import python from '@shikijs/langs/python'
 import sql from '@shikijs/langs/sql'
 import go from '@shikijs/langs/go'
 import rust from '@shikijs/langs/rust'
 
-export default defineComarkComponent({
-  name: 'ChatComark',
+export default defineMarkdownComponent({
+  name: 'ChatMarkdown',
   plugins: [
-    highlight({
+    shiki({
       languages: [python, sql, go, rust]
     })
   ],
@@ -492,7 +493,7 @@ export default defineComarkComponent({
 ```
 ::
 
-This creates a `<ChatComark>` component we'll use in the chat page to render assistant messages and reasoning content.
+This creates a `<ChatMarkdown>` component we'll use in the chat page to render assistant messages and reasoning content.
 
 Since Comark uses Shiki with dual themes, you need to add the following CSS to your stylesheet for dark mode support:
 
@@ -516,7 +517,7 @@ The chat page is where the actual conversation happens. It integrates the AI SDK
 ```vue [app/pages/chat/[id].vue] {2-4,19-38}
 <script setup lang="ts">
 import { DefaultChatTransport, isReasoningUIPart, isTextUIPart } from 'ai'
-import { Chat } from '@ai-sdk/vue'
+import { useChat } from '@ai-sdk/vue'
 import { isPartStreaming } from '@nuxt/ui/utils/ai'
 
 const route = useRoute()
@@ -532,7 +533,7 @@ if (!chatData.value) {
 const input = ref('')
 
 // Initialize the Chat class from AI SDK
-const chat = new Chat({
+const { messages, status, error, sendMessage, regenerate, stop } = useChat({
   id: chatData.value.id,
   messages: chatData.value.messages,
   transport: new DefaultChatTransport({
@@ -556,7 +557,7 @@ const chat = new Chat({
 function handleSubmit(e: Event) {
   e.preventDefault()
   if (input.value.trim()) {
-    chat.sendMessage({ text: input.value })
+    sendMessage({ text: input.value })
     input.value = ''
   }
 }
@@ -564,7 +565,7 @@ function handleSubmit(e: Event) {
 // Auto-generate response for first message
 onMounted(() => {
   if (chatData.value?.messages.length === 1) {
-    chat.regenerate()
+    regenerate()
   }
 })
 </script>
@@ -574,8 +575,8 @@ onMounted(() => {
     <template #body>
       <UContainer class="min-h-dvh flex flex-col py-4 sm:py-6">
         <UChatMessages
-          :messages="chat.messages"
-          :status="chat.status"
+          :messages="messages"
+          :status="status"
           should-auto-scroll
           class="flex-1"
         >
@@ -586,16 +587,16 @@ onMounted(() => {
                 :text="part.text"
                 :streaming="isPartStreaming(part)"
               >
-                <ChatComark
-                  :markdown="part.text"
+                <ChatMarkdown
+                  :value="part.text"
                   :streaming="isPartStreaming(part)"
                 />
               </UChatReasoning>
 
               <template v-else-if="isTextUIPart(part)">
-                <ChatComark
+                <ChatMarkdown
                   v-if="message.role === 'assistant'"
-                  :markdown="part.text"
+                  :value="part.text"
                   :streaming="isPartStreaming(part)"
                 />
                 <p v-else-if="message.role === 'user'" class="whitespace-pre-wrap">
@@ -608,16 +609,16 @@ onMounted(() => {
 
         <UChatPrompt
           v-model="input"
-          :error="chat.error"
+          :error="error"
           variant="subtle"
           class="sticky bottom-0"
           @submit="handleSubmit"
         >
           <UChatPromptSubmit
-            :status="chat.status"
+            :status="status"
             color="neutral"
-            @stop="chat.stop()"
-            @reload="chat.regenerate()"
+            @stop="stop()"
+            @reload="regenerate()"
           />
         </UChatPrompt>
       </UContainer>
@@ -633,12 +634,12 @@ Here's a breakdown of the key parts:
 
 **The Chat Class**
 
-The [`Chat`](https://ai-sdk.dev/docs/reference/ai-sdk-ui/chat) class from `@ai-sdk/vue` manages the entire conversation state. It handles:
-- Message history with `chat.messages`
-- Connection status with `chat.status` (`ready`, `submitted`, `streaming`, `error`)
-- Sending messages with `chat.sendMessage()`
-- Stopping generation with `chat.stop()`
-- Regenerating responses with `chat.regenerate()`
+The [`useChat`](https://ai-sdk.dev/docs/reference/ai-sdk-ui/use-chat) composable from `@ai-sdk/vue` manages the entire conversation state. It handles:
+- Message history with `messages`
+- Connection status with `status` (`ready`, `submitted`, `streaming`, `error`)
+- Sending messages with `sendMessage()`
+- Stopping generation with `stop()`
+- Regenerating responses with `regenerate()`
 
 The `onData` callback receives [custom data events](https://ai-sdk.dev/docs/ai-sdk-ui/streaming-data) from the server (like `data-chat-title`), allowing you to react to server-side events during streaming.
 
@@ -652,7 +653,7 @@ The [`UChatMessages`](/docs/components/chat-messages) component is purpose-built
 
 **Rendering Message Parts**
 
-We iterate over message `parts` using AI SDK helpers like `isTextUIPart` and `isReasoningUIPart`, rendering assistant text with the `<ChatComark>` component we created earlier and reasoning content with [`UChatReasoning`](/docs/components/chat-reasoning). The `isPartStreaming` utility from `@nuxt/ui/utils/ai` detects if a part is currently being streamed.
+We iterate over message `parts` using AI SDK helpers like `isTextUIPart` and `isReasoningUIPart`, rendering assistant text with the `<ChatMarkdown>` component we created earlier and reasoning content with [`UChatReasoning`](/docs/components/chat-reasoning). The `isPartStreaming` utility from `@nuxt/ui/utils/ai` detects if a part is currently being streamed.
 
 **UChatPromptSubmit Component**
 
@@ -794,7 +795,7 @@ async function createChat() {
 ```vue [app/pages/chat/[id].vue] {62-64}
 <script setup lang="ts">
 import { DefaultChatTransport, isReasoningUIPart, isTextUIPart } from 'ai'
-import { Chat } from '@ai-sdk/vue'
+import { useChat } from '@ai-sdk/vue'
 import { isPartStreaming } from '@nuxt/ui/utils/ai'
 
 const route = useRoute()
@@ -810,7 +811,7 @@ if (!chatData.value) {
 const input = ref('')
 
 // Initialize the Chat class from AI SDK
-const chat = new Chat({
+const { messages, status, error, sendMessage, regenerate, stop } = useChat({
   id: chatData.value.id,
   messages: chatData.value.messages,
   transport: new DefaultChatTransport({
@@ -834,7 +835,7 @@ const chat = new Chat({
 function handleSubmit(e: Event) {
   e.preventDefault()
   if (input.value.trim()) {
-    chat.sendMessage({ text: input.value })
+    sendMessage({ text: input.value })
     input.value = ''
   }
 }
@@ -842,7 +843,7 @@ function handleSubmit(e: Event) {
 // Auto-generate response for first message
 onMounted(() => {
   if (chatData.value?.messages.length === 1) {
-    chat.regenerate()
+    regenerate()
   }
 })
 </script>
@@ -855,8 +856,8 @@ onMounted(() => {
     <template #body>
       <UContainer class="min-h-dvh flex flex-col py-4 sm:py-6">
         <UChatMessages
-          :messages="chat.messages"
-          :status="chat.status"
+          :messages="messages"
+          :status="status"
           should-auto-scroll
           class="flex-1"
         >
@@ -867,16 +868,16 @@ onMounted(() => {
                 :text="part.text"
                 :streaming="isPartStreaming(part)"
               >
-                <ChatComark
-                  :markdown="part.text"
+                <ChatMarkdown
+                  :value="part.text"
                   :streaming="isPartStreaming(part)"
                 />
               </UChatReasoning>
 
               <template v-else-if="isTextUIPart(part)">
-                <ChatComark
+                <ChatMarkdown
                   v-if="message.role === 'assistant'"
-                  :markdown="part.text"
+                  :value="part.text"
                   :streaming="isPartStreaming(part)"
                 />
                 <p v-else-if="message.role === 'user'" class="whitespace-pre-wrap">
@@ -889,16 +890,16 @@ onMounted(() => {
 
         <UChatPrompt
           v-model="input"
-          :error="chat.error"
+          :error="error"
           variant="subtle"
           class="sticky bottom-0"
           @submit="handleSubmit"
         >
           <UChatPromptSubmit
-            :status="chat.status"
+            :status="status"
             color="neutral"
-            @stop="chat.stop()"
-            @reload="chat.regenerate()"
+            @stop="stop()"
+            @reload="regenerate()"
           />
         </UChatPrompt>
       </UContainer>
@@ -979,7 +980,7 @@ Update the chat page to include the model selector and pass the selected model t
 ```vue [app/pages/chat/[id].vue] {8,24-26,94-96}
 <script setup lang="ts">
 import { DefaultChatTransport, isReasoningUIPart, isTextUIPart } from 'ai'
-import { Chat } from '@ai-sdk/vue'
+import { useChat } from '@ai-sdk/vue'
 import { isPartStreaming } from '@nuxt/ui/utils/ai'
 
 const route = useRoute()
@@ -994,7 +995,7 @@ if (!chatData.value) {
 
 const input = ref('')
 
-const chat = new Chat({
+const { messages, status, error, sendMessage, regenerate, stop } = useChat({
   id: chatData.value.id,
   messages: chatData.value.messages,
   transport: new DefaultChatTransport({
@@ -1020,14 +1021,14 @@ const chat = new Chat({
 function handleSubmit(e: Event) {
   e.preventDefault()
   if (input.value.trim()) {
-    chat.sendMessage({ text: input.value })
+    sendMessage({ text: input.value })
     input.value = ''
   }
 }
 
 onMounted(() => {
   if (chatData.value?.messages.length === 1) {
-    chat.regenerate()
+    regenerate()
   }
 })
 </script>
@@ -1040,8 +1041,8 @@ onMounted(() => {
     <template #body>
       <UContainer class="min-h-dvh flex flex-col py-4 sm:py-6">
         <UChatMessages
-          :messages="chat.messages"
-          :status="chat.status"
+          :messages="messages"
+          :status="status"
           should-auto-scroll
           class="flex-1"
         >
@@ -1052,16 +1053,16 @@ onMounted(() => {
                 :text="part.text"
                 :streaming="isPartStreaming(part)"
               >
-                <ChatComark
-                  :markdown="part.text"
+                <ChatMarkdown
+                  :value="part.text"
                   :streaming="isPartStreaming(part)"
                 />
               </UChatReasoning>
 
               <template v-else-if="isTextUIPart(part)">
-                <ChatComark
+                <ChatMarkdown
                   v-if="message.role === 'assistant'"
-                  :markdown="part.text"
+                  :value="part.text"
                   :streaming="isPartStreaming(part)"
                 />
                 <p v-else-if="message.role === 'user'" class="whitespace-pre-wrap">
@@ -1074,7 +1075,7 @@ onMounted(() => {
 
         <UChatPrompt
           v-model="input"
-          :error="chat.error"
+          :error="error"
           variant="subtle"
           class="sticky bottom-0"
           @submit="handleSubmit"
@@ -1084,10 +1085,10 @@ onMounted(() => {
           </template>
 
           <UChatPromptSubmit
-            :status="chat.status"
+            :status="status"
             color="neutral"
-            @stop="chat.stop()"
-            @reload="chat.regenerate()"
+            @stop="stop()"
+            @reload="regenerate()"
           />
         </UChatPrompt>
       </UContainer>

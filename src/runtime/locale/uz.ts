@@ -82,6 +82,9 @@ export default defineLocale<Messages>({
       close: 'Yon panelni yopish',
       open: 'Yon panelni ochish'
     },
+    drawer: {
+      close: 'Yopish'
+    },
     error: {
       clear: 'Bosh sahifaga qaytish'
     },

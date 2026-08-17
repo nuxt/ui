@@ -3,7 +3,7 @@ import { defineLocale } from '../composables/defineLocale'
 
 export default defineLocale<Messages>({
   name: 'Тоҷикӣ',
-  code: 'tj',
+  code: 'tg',
   messages: {
     alert: {
       close: 'Бастан'
@@ -81,6 +81,9 @@ export default defineLocale<Messages>({
     dashboardSidebarToggle: {
       close: 'Пӯшидан',
       open: 'Кушодан'
+    },
+    drawer: {
+      close: 'Бастан'
     },
     error: {
       clear: 'Тоза кардан'

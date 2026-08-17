@@ -41,7 +41,7 @@ export interface BlogPostProps {
   variant?: BlogPost['variants']['variant']
   to?: LinkProps['to']
   target?: LinkProps['target']
-  onClick?: (event: MouseEvent) => void | Promise<void>
+  onClick?: (event: MouseEvent) => void
   class?: any
   ui?: BlogPost['slots']
 }
@@ -104,7 +104,7 @@ const date = computed(() => {
   }
 
   try {
-    return formatter.custom(new Date(props.date), { dateStyle: 'medium' })
+    return formatter.custom(new Date(props.date), { dateStyle: 'medium', timeZone: 'UTC' })
   } catch {
     return props.date
   }
@@ -131,14 +131,14 @@ const ariaLabel = computed(() => {
     :as="props.as"
     v-bind="!props.to ? $attrs : {}"
     :data-orientation="props.orientation"
-    data-slot="root"
+    :data-slot="($attrs['data-slot'] as string | undefined) ?? 'root'"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     @click="props.onClick"
   >
     <ULink
       v-if="props.to"
       :aria-label="ariaLabel"
-      v-bind="{ to: props.to, target: props.target, ...$attrs }"
+      v-bind="{ 'to': props.to, 'target': props.target, ...$attrs, 'data-slot': undefined }"
       :class="prefix('focus:outline-none absolute inset-0')"
       raw
     />

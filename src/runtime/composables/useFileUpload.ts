@@ -15,12 +15,13 @@ export interface UseFileUploadOptions {
   onUpdate: (files: File[]) => void
 }
 
-function parseAcceptToDataTypes(accept: string): string[] | undefined {
+function parseAcceptToDataTypes(accept: string): string[] {
+  // An empty list means no restriction (`useDropZone` allows all types for an empty array).
   if (!accept || accept === '*') {
-    return undefined
+    return []
   }
 
-  const types = accept
+  return accept
     .split(',')
     .map((type) => {
       const trimmedType = type.trim()
@@ -33,8 +34,6 @@ function parseAcceptToDataTypes(accept: string): string[] | undefined {
     .filter((type) => {
       return !type.startsWith('.')
     })
-
-  return types.length > 0 ? types : undefined
 }
 
 export function useFileUpload(options: UseFileUploadOptions) {
@@ -48,7 +47,7 @@ export function useFileUpload(options: UseFileUploadOptions) {
   const inputRef = ref<ComponentPublicInstance>()
   const dropzoneRef = ref<HTMLDivElement>()
 
-  const dataTypes = computed(() => parseAcceptToDataTypes(unref(accept)))
+  const dataTypes = computed<readonly string[]>(() => parseAcceptToDataTypes(unref(accept)))
 
   const onDrop = (files: FileList | File[] | null, fromDropZone = false) => {
     if (!files || files.length === 0) {
@@ -87,7 +86,7 @@ export function useFileUpload(options: UseFileUploadOptions) {
 
   onMounted(() => {
     const { isOverDropZone } = dropzone
-      ? useDropZone(dropzoneRef, { dataTypes: dataTypes.value, onDrop: files => onDrop(files, true) })
+      ? useDropZone(dropzoneRef, { dataTypes, onDrop: files => onDrop(files, true) })
       : { isOverDropZone: ref(false) }
 
     watch(isOverDropZone, (value) => {

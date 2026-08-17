@@ -1,6 +1,11 @@
 ---
 description: A carousel with motion and swipe built using Embla.
 category: data
+keywords:
+  - swiper
+  - gallery
+  - image slider
+  - slideshow
 links:
   - label: Embla
     to: https://www.embla-carousel.com/api/

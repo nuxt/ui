@@ -33,6 +33,10 @@ slots:
 :u-icon{name="i-simple-icons-facebook" class="size-10 shrink-0"}
 ::
 
+::tip
+The animation is automatically disabled when the user prefers reduced motion, the content is displayed statically instead.
+::
+
 ### Pause on Hover
 
 Use the `pause-on-hover` prop to pause the animation when the user hovers over the content.

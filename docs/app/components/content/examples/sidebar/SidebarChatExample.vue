@@ -1,15 +1,15 @@
 <script setup lang="ts">
 import type { UIMessage } from 'ai'
 import { isTextUIPart } from 'ai'
-import { Chat } from '@ai-sdk/vue'
+import { useChat } from '@ai-sdk/vue'
 import { isPartStreaming } from '@nuxt/ui/utils/ai'
-import { Comark } from '@comark/vue'
-import highlight from '@comark/vue/plugins/highlight'
+import { Markdown } from '@comark/vue'
+import shiki from '@comark/vue/plugins/shiki'
 
 const open = ref(true)
 const input = ref('')
 
-const messages: UIMessage[] = [{
+const initialMessages: UIMessage[] = [{
   id: '1',
   role: 'user',
   parts: [{ type: 'text', text: 'What is Nuxt UI?' }]
@@ -19,14 +19,14 @@ const messages: UIMessage[] = [{
   parts: [{ type: 'text', text: 'Nuxt UI is a Vue component library built on Reka UI, Tailwind CSS, and Tailwind Variants. It provides 125+ accessible components for building modern web apps.' }]
 }]
 
-const chat = new Chat({
-  messages
+const { messages, status, error, sendMessage, regenerate, stop } = useChat({
+  messages: initialMessages
 })
 
 function onSubmit() {
   if (!input.value.trim()) return
 
-  chat.sendMessage({ text: input.value })
+  sendMessage({ text: input.value })
 
   input.value = ''
 }
@@ -77,19 +77,19 @@ const ui = {
     >
       <UTheme :ui="ui">
         <UChatMessages
-          :messages="chat.messages"
-          :status="chat.status"
+          :messages="messages"
+          :status="status"
           compact
           class="px-0"
         >
           <template #content="{ message }">
             <template v-for="(part, index) in message.parts" :key="`${message.id}-${part.type}-${index}`">
               <template v-if="isTextUIPart(part)">
-                <Comark
+                <Markdown
                   v-if="message.role === 'assistant'"
-                  :markdown="part.text"
+                  :value="part.text"
                   :streaming="isPartStreaming(part)"
-                  :plugins="[highlight()]"
+                  :plugins="[shiki()]"
                   class="*:first:mt-0 *:last:mb-0"
                 />
                 <p v-else-if="message.role === 'user'" class="whitespace-pre-wrap text-sm/6">
@@ -104,18 +104,17 @@ const ui = {
       <template #footer>
         <UChatPrompt
           v-model="input"
-          :error="chat.error"
+          :error="error"
           :autofocus="false"
           variant="subtle"
           size="sm"
-          :ui="{ base: 'px-0' }"
           @submit="onSubmit"
         >
           <UChatPromptSubmit
             size="sm"
-            :status="chat.status"
-            @stop="chat.stop()"
-            @reload="chat.regenerate()"
+            :status="status"
+            @stop="stop()"
+            @reload="regenerate()"
           />
         </UChatPrompt>
       </template>
