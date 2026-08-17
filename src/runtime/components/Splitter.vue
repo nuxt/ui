@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
-import type { SplitterGroupProps, SplitterGroupEmits } from 'reka-ui'
-import type { VNode } from 'vue'
+import type { SplitterGroupProps, SplitterGroupEmits, SplitterResizeHandleProps } from 'reka-ui'
+import type { VNode, ComponentPublicInstance } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/splitter'
 import type { DynamicSlots } from '../types/utils'
@@ -36,60 +36,72 @@ export interface SplitterItem {
    */
   unit?: '%' | 'px'
   /**
-   * The order of the panel within the group, required for groups with conditionally rendered panels.
+   * The order of the panel within the group, required for groups with conditionally rendered or reordered panels.
    */
   order?: number
   /**
-   * A unique id for the panel. Also used as the Vue `key`. Defaults to the index.
+   * A unique id for the panel. Also used as the Vue `key`. Defaults to an auto-generated id.
    */
   id?: string
   slot?: string
   class?: any
   ui?: Pick<Splitter['slots'], 'panel'>
+  [key: string]: any
 }
 
-export interface SplitterProps<T extends SplitterItem = SplitterItem> extends Pick<SplitterGroupProps, 'as' | 'autoSaveId' | 'keyboardResizeBy' | 'storage'> {
+export interface SplitterProps<T extends SplitterItem = SplitterItem> extends Pick<SplitterGroupProps, 'autoSaveId' | 'keyboardResizeBy' | 'storage'> {
+  /**
+   * The element or component this component should render as.
+   * @defaultValue 'div'
+   */
+  as?: any
   /**
    * The orientation of the splitter.
    * @defaultValue 'horizontal'
    */
-  orientation?: 'horizontal' | 'vertical'
+  orientation?: Splitter['variants']['orientation']
   items?: T[]
+  /**
+   * Whether the resize handles are disabled, locking the current layout.
+   * @defaultValue false
+   */
+  disabled?: boolean
+  /**
+   * The margins around each handle where pointer interactions still register, per pointer type.
+   */
+  hitAreaMargins?: SplitterResizeHandleProps['hitAreaMargins']
   class?: any
   ui?: Splitter['slots']
 }
 
-export interface SplitterEmits extends SplitterGroupEmits {}
+export interface SplitterEmits extends SplitterGroupEmits {
+  layout: [val: number[]]
+  collapse: [index: number]
+  expand: [index: number]
+  resize: [index: number, size: number, prevSize?: number]
+  dragging: [index: number, dragging: boolean]
+}
 
-type SlotProps<T extends SplitterItem> = (props: {
-  item: T
+type PanelSlotProps = {
   index: number
   collapsed: boolean
-  expanded: boolean
   collapse: () => void
   expand: () => void
   resize: (size: number) => void
   ui: Splitter['ui']
-}) => VNode[]
+}
+type SlotProps<T extends SplitterItem> = (props: { item: T } & PanelSlotProps) => VNode[]
 
 export type SplitterSlots<T extends SplitterItem = SplitterItem> = {
   'resize-handle'?: (props: { index: number, ui: Splitter['ui'] }) => VNode[]
-} & DynamicSlots<T, undefined, {
-  index: number
-  collapsed: boolean
-  expanded: boolean
-  collapse: () => void
-  expand: () => void
-  resize: (size: number) => void
-  ui: Splitter['ui']
-}> & {
-  [key: `panel-${number}`]: SlotProps<T>
+} & DynamicSlots<T, undefined, PanelSlotProps> & {
+  [key: `panel-${number}`]: SlotProps<T> | undefined
 }
 
 </script>
 
 <script setup lang="ts" generic="T extends SplitterItem">
-import { computed } from 'vue'
+import { ref, computed } from 'vue'
 import { SplitterGroup, SplitterPanel, SplitterResizeHandle } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
@@ -107,18 +119,32 @@ const props = useComponentProps<SplitterProps<T>>('splitter', _props)
 
 const appConfig = useAppConfig() as Splitter['AppConfig']
 
-const rootProps = useForwardProps(reactivePick(props, 'as', 'autoSaveId', 'keyboardResizeBy', 'storage'), emits)
+const rootProps = useForwardProps(reactivePick(props, 'as', 'autoSaveId', 'keyboardResizeBy', 'storage'))
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.splitter || {}) })())
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.splitter || {}) })({
+  orientation: props.orientation
+}))
+
+const panelsRef = ref<InstanceType<typeof SplitterPanel>[]>([])
+
+function setPanelRef(index: number, el: Element | ComponentPublicInstance | null) {
+  // @ts-expect-error - ComponentPublicInstance type mismatch in Nuxt module augmentation
+  panelsRef.value[index] = el
+}
+
+defineExpose({
+  panelsRef
+})
 </script>
 
 <template>
-  <SplitterGroup v-bind="rootProps" :direction="props.orientation || 'horizontal'" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <SplitterGroup v-bind="rootProps" :direction="props.orientation!" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })" @layout="emits('layout', $event)">
     <template v-for="(item, index) in props.items" :key="item.id ?? index">
       <SplitterPanel
         :id="item.id"
-        v-slot="{ isCollapsed, isExpanded, collapse, expand, resize }"
+        :ref="(el) => setPanelRef(index, el)"
+        v-slot="{ isCollapsed, collapse, expand, resize }"
         :default-size="item.default"
         :min-size="item.min"
         :max-size="item.max"
@@ -128,13 +154,15 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.splitter || {}) 
         :order="item.order"
         data-slot="panel"
         :class="ui.panel({ class: [props.ui?.panel, item.ui?.panel, item.class] })"
+        @collapse="emits('collapse', index)"
+        @expand="emits('expand', index)"
+        @resize="(size, prevSize) => emits('resize', index, size, prevSize)"
       >
         <slot
           :name="((item.slot || `panel-${index}`) as keyof SplitterSlots<T>)"
           :item="(item as Extract<T, { slot: string }>)"
           :index="index"
           :collapsed="isCollapsed"
-          :expanded="isExpanded"
           :collapse="collapse"
           :expand="expand"
           :resize="resize"
@@ -143,9 +171,12 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.splitter || {}) 
       </SplitterPanel>
 
       <SplitterResizeHandle
-        v-if="index < (props.items?.length ?? 0) - 1"
+        v-if="index < props.items!.length - 1"
+        :disabled="props.disabled"
+        :hit-area-margins="props.hitAreaMargins"
         data-slot="handle"
         :class="ui.handle({ class: props.ui?.handle })"
+        @dragging="(dragging) => emits('dragging', index, dragging)"
       >
         <slot name="resize-handle" :index="index" :ui="ui" />
       </SplitterResizeHandle>

@@ -31,6 +31,7 @@ describe('Splitter', () => {
     ['with keyboardResizeBy', { props: { ...props, keyboardResizeBy: 10 }, slots }],
     ['with as', { props: { ...props, as: 'section' }, slots }],
     ['with unit', { props: { items: [{ default: 200, min: 100, unit: 'px', slot: 'sidebar' }, { slot: 'main' }] as SplitterItem[] }, slots }],
+    ['with disabled', { props: { ...props, disabled: true }, slots }],
     ['with class', { props: { ...props, class: 'h-96' }, slots }],
     ['with ui', { props: { ...props, ui: { handle: 'bg-primary' } }, slots }],
     // Slots

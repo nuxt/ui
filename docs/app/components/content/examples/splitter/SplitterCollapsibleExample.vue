@@ -2,7 +2,7 @@
 import type { SplitterItem } from '@nuxt/ui'
 
 const items: SplitterItem[] = [
-  { slot: 'sidebar', min: 15, default: 25, collapsible: true, collapsedSize: 0 },
+  { slot: 'sidebar', unit: 'px', min: 150, default: 250, collapsible: true, collapsedSize: 48 },
   { slot: 'main' }
 ]
 </script>
@@ -11,9 +11,10 @@ const items: SplitterItem[] = [
   <div class="w-full h-96">
     <USplitter :items="items">
       <template #sidebar="{ collapsed, collapse, expand }">
-        <div class="flex-1 flex items-center justify-center p-4">
+        <div class="flex-1 flex items-center justify-center p-2">
           <UButton
-            :label="collapsed ? 'Expand' : 'Collapse'"
+            :icon="collapsed ? 'i-lucide-panel-left-open' : 'i-lucide-panel-left-close'"
+            :label="collapsed ? undefined : 'Collapse'"
             color="neutral"
             variant="subtle"
             @click="collapsed ? expand() : collapse()"

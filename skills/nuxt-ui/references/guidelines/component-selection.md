@@ -30,6 +30,7 @@ Decision matrices for choosing the right component. When in doubt, use the MCP `
 | Search + keyboard-driven navigation | `UCommandPalette` | Power users, global search |
 | Contextual actions on a trigger element | `UDropdownMenu` | Right-click menus, action buttons |
 | Step-by-step process | `UStepper` | Multi-step forms, wizards |
+| Resizable side-by-side panes | `USplitter` | IDE-style layouts, resizable sidebars |
 
 ### Rules
 - Use `UNavigationMenu` with `orientation="vertical"` in sidebars, default horizontal in headers

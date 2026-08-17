@@ -1,7 +1,10 @@
 <script setup lang="ts">
+import theme from '#build/ui/splitter'
 import type { SplitterItem } from '@nuxt/ui'
 
-const orientation = ref('horizontal' as 'horizontal' | 'vertical')
+const orientations = Object.keys(theme.variants.orientation)
+
+const orientation = ref('horizontal' as keyof typeof theme.variants.orientation)
 
 // Transparent handle acts as the gap between panels (Reka demo style).
 const handle = 'bg-transparent data-[state=hover]:bg-transparent data-[state=drag]:bg-transparent data-[orientation=horizontal]:w-2 data-[orientation=vertical]:h-2'
@@ -21,7 +24,7 @@ const nested: SplitterItem[] = [
 
 <template>
   <Navbar>
-    <USelect v-model="orientation" :items="['horizontal', 'vertical']" class="w-48" />
+    <USelect v-model="orientation" :items="orientations" class="w-48" />
   </Navbar>
 
   <div class="flex-1 w-full p-8">

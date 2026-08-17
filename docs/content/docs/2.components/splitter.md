@@ -94,7 +94,7 @@ Use the `default`, `min` and `max` keys on an item to control its size. Values a
 
 ### With collapsible panel
 
-Set `collapsible: true` on an item to let it collapse past its `min` size. The panel slot exposes `collapsed`, `collapse` and `expand` so you can control it programmatically.
+Set `collapsible: true` on an item to let it collapse past its `min` size, and use `collapsedSize` to keep part of the panel visible when collapsed. The panel slot exposes `collapsed`, `collapse` and `expand` so you can control it programmatically, and the `collapse`, `expand` and `resize` events fire with the panel index.
 
 ::component-example
 ---
