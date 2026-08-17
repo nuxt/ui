@@ -1,40 +1,30 @@
 <script setup lang="ts">
-import theme from '#build/ui/splitter'
 import type { SplitterItem } from '@nuxt/ui'
 
-const orientations = Object.keys(theme.variants.orientation)
-
-const orientation = ref('horizontal' as keyof typeof theme.variants.orientation)
-
-// Transparent handle acts as the gap between panels (Reka demo style).
-const handle = 'bg-transparent data-[state=hover]:bg-transparent data-[state=drag]:bg-transparent data-[orientation=horizontal]:w-2 data-[orientation=vertical]:h-2'
-
-const card = 'bg-elevated border border-default rounded-xl items-center justify-center text-muted font-semibold'
+const card = 'bg-elevated/50 border border-default rounded-xl items-center justify-center text-muted font-semibold'
 
 const items: SplitterItem[] = [
-  { slot: 'a', min: 20, class: card },
-  { slot: 'bc', min: 20 }
+  { slot: 'a', minSize: 20, class: card },
+  { slot: 'bc', minSize: 20 }
 ]
 
 const nested: SplitterItem[] = [
-  { slot: 'b', min: 20, class: card },
-  { slot: 'c', min: 20, class: card }
+  { slot: 'b', minSize: 20, class: card },
+  { slot: 'c', minSize: 20, class: card }
 ]
 </script>
 
 <template>
-  <Navbar>
-    <USelect v-model="orientation" :items="orientations" class="w-48" />
-  </Navbar>
+  <Navbar />
 
-  <div class="flex-1 w-full p-8">
-    <USplitter :orientation="orientation" :items="items" :ui="{ handle }" class="size-full">
+  <div class="flex-1 w-full">
+    <USplitter orientation="horizontal" :items="items" class="size-full">
       <template #a>
         Panel A
       </template>
 
       <template #bc>
-        <USplitter orientation="vertical" :items="nested" :ui="{ handle }" class="size-full">
+        <USplitter orientation="vertical" :items="nested" class="size-full">
           <template #b>
             Panel B
           </template>

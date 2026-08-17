@@ -7,8 +7,8 @@ import type { SplitterItem } from '../../src/runtime/components/Splitter.vue'
 
 describe('Splitter', () => {
   const items: SplitterItem[] = [{
-    min: 20,
-    default: 30,
+    minSize: 20,
+    defaultSize: 30,
     collapsible: true,
     collapsedSize: 5,
     slot: 'sidebar'
@@ -30,7 +30,7 @@ describe('Splitter', () => {
     ['with autoSaveId', { props: { ...props, autoSaveId: 'test' }, slots }],
     ['with keyboardResizeBy', { props: { ...props, keyboardResizeBy: 10 }, slots }],
     ['with as', { props: { ...props, as: 'section' }, slots }],
-    ['with unit', { props: { items: [{ default: 200, min: 100, unit: 'px', slot: 'sidebar' }, { slot: 'main' }] as SplitterItem[] }, slots }],
+    ['with sizeUnit', { props: { items: [{ defaultSize: 200, minSize: 100, sizeUnit: 'px', slot: 'sidebar' }, { slot: 'main' }] as SplitterItem[] }, slots }],
     ['with disabled', { props: { ...props, disabled: true }, slots }],
     ['with class', { props: { ...props, class: 'h-96' }, slots }],
     ['with ui', { props: { ...props, ui: { handle: 'bg-primary' } }, slots }],

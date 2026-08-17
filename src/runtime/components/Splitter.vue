@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
-import type { SplitterGroupProps, SplitterGroupEmits, SplitterResizeHandleProps } from 'reka-ui'
+import type { SplitterGroupProps, SplitterGroupEmits, SplitterPanelProps, SplitterResizeHandleProps } from 'reka-ui'
 import type { VNode, ComponentPublicInstance } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/splitter'
@@ -9,36 +9,7 @@ import type { ComponentConfig } from '../types/tv'
 
 type Splitter = ComponentConfig<typeof theme, AppConfig, 'splitter'>
 
-export interface SplitterItem {
-  /**
-   * The initial size of the panel, interpreted using `unit`.
-   */
-  default?: number
-  /**
-   * The minimum allowable size of the panel, interpreted using `unit`.
-   */
-  min?: number
-  /**
-   * The maximum allowable size of the panel, interpreted using `unit`.
-   */
-  max?: number
-  /**
-   * Whether the panel can collapse when resized beyond its `min`.
-   */
-  collapsible?: boolean
-  /**
-   * The size of the panel when it is collapsed, interpreted using `unit`.
-   */
-  collapsedSize?: number
-  /**
-   * The unit used for sizing values.
-   * @defaultValue '%'
-   */
-  unit?: '%' | 'px'
-  /**
-   * The order of the panel within the group, required for groups with conditionally rendered or reordered panels.
-   */
-  order?: number
+export interface SplitterItem extends Omit<SplitterPanelProps, 'as' | 'asChild'> {
   /**
    * A unique id for the panel. Also used as the Vue `key`. Defaults to an auto-generated id.
    */
@@ -49,7 +20,7 @@ export interface SplitterItem {
   [key: string]: any
 }
 
-export interface SplitterProps<T extends SplitterItem = SplitterItem> extends Pick<SplitterGroupProps, 'autoSaveId' | 'keyboardResizeBy' | 'storage'> {
+export interface SplitterProps<T extends SplitterItem = SplitterItem> extends Pick<SplitterGroupProps, 'autoSaveId' | 'keyboardResizeBy' | 'storage'>, Pick<SplitterResizeHandleProps, 'hitAreaMargins'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -66,16 +37,12 @@ export interface SplitterProps<T extends SplitterItem = SplitterItem> extends Pi
    * @defaultValue false
    */
   disabled?: boolean
-  /**
-   * The margins around each handle where pointer interactions still register, per pointer type.
-   */
-  hitAreaMargins?: SplitterResizeHandleProps['hitAreaMargins']
   class?: any
   ui?: Splitter['slots']
 }
 
-export interface SplitterEmits extends SplitterGroupEmits {
-  layout: [val: number[]]
+export interface SplitterEmits {
+  layout: SplitterGroupEmits['layout']
   collapse: [index: number]
   expand: [index: number]
   resize: [index: number, size: number, prevSize?: number]
@@ -145,12 +112,12 @@ defineExpose({
         :id="item.id"
         :ref="(el) => setPanelRef(index, el)"
         v-slot="{ isCollapsed, collapse, expand, resize }"
-        :default-size="item.default"
-        :min-size="item.min"
-        :max-size="item.max"
+        :default-size="item.defaultSize"
+        :min-size="item.minSize"
+        :max-size="item.maxSize"
         :collapsible="item.collapsible"
         :collapsed-size="item.collapsedSize"
-        :size-unit="item.unit"
+        :size-unit="item.sizeUnit"
         :order="item.order"
         data-slot="panel"
         :class="ui.panel({ class: [props.ui?.panel, item.ui?.panel, item.class] })"

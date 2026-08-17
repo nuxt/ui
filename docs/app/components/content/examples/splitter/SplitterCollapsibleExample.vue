@@ -2,8 +2,8 @@
 import type { SplitterItem } from '@nuxt/ui'
 
 const items: SplitterItem[] = [
-  { slot: 'sidebar', unit: 'px', min: 150, default: 250, collapsible: true, collapsedSize: 48 },
-  { slot: 'main' }
+  { slot: 'sidebar', sizeUnit: 'px', minSize: 150, defaultSize: 250, collapsible: true, collapsedSize: 48, class: 'bg-elevated/50 border border-default rounded-xl' },
+  { slot: 'main', class: 'bg-elevated/50 border border-default rounded-xl items-center justify-center text-muted font-medium' }
 ]
 </script>
 
@@ -23,7 +23,7 @@ const items: SplitterItem[] = [
       </template>
 
       <template #main>
-        <Placeholder class="size-full" />
+        Main
       </template>
     </USplitter>
   </div>
