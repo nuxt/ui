@@ -15,6 +15,7 @@ const items: SplitterItem[] = [
           <UButton
             :icon="collapsed ? 'i-lucide-panel-left-open' : 'i-lucide-panel-left-close'"
             :label="collapsed ? undefined : 'Collapse'"
+            :aria-label="collapsed ? 'Expand' : undefined"
             color="neutral"
             variant="subtle"
             @click="collapsed ? expand() : collapse()"
