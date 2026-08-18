@@ -13,11 +13,7 @@ navigation.badge: Soon
 
 ## Usage
 
-The Splitter component renders a resizable panel for each entry in the `items` prop, inserting a draggable handle between them. Use the `slot` key of each item to fill its content, and the `class` key to style each panel.
-
-::caution
-Set the `id` prop when rendering on the server. Panels and handles are matched through it, and an auto-generated id can differ between the server and the client which breaks the layout on hydration.
-::
+Use the Splitter component to display a list of resizable panels separated by draggable handles.
 
 ::component-example
 ---
@@ -42,7 +38,11 @@ Use the `items` prop as an array of objects with the following properties:
 - `class?: any`{lang="ts-type"}
 - `ui?: { panel?: ClassNameValue }`{lang="ts-type"}
 
-Sizes are percentages by default, set `sizeUnit: 'px'` on an item for pixel values.
+Use the `slot` key to fill the content of a panel and the `class` key to style it. Sizes are percentages by default, set `sizeUnit: 'px'` on an item for pixel values.
+
+::caution
+When rendering on the server, set the `id` prop and give every item a `defaultSize`. Ids are generated on the client otherwise and can differ from the server which breaks the layout on hydration, and panels without a `defaultSize` are laid out incorrectly until then.
+::
 
 ::component-code
 ---
@@ -51,6 +51,7 @@ class: 'h-96'
 prettier: true
 ignore:
   - items
+  - id
 external:
   - items
 externalTypes:
@@ -65,6 +66,8 @@ props:
       defaultSize: 250
       class: 'bg-elevated/50 border border-default rounded-xl items-center justify-center text-muted font-medium'
     - slot: 'main'
+      sizeUnit: 'px'
+      defaultSize: 750
       class: 'bg-elevated/50 border border-default rounded-xl items-center justify-center text-muted font-medium'
 slots:
   sidebar: Sidebar
@@ -89,6 +92,7 @@ class: 'h-96'
 prettier: true
 ignore:
   - items
+  - id
 external:
   - items
 externalTypes:

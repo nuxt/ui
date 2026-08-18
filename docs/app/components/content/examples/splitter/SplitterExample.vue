@@ -5,7 +5,7 @@ const card = 'bg-elevated/50 border border-default rounded-xl items-center justi
 
 const items: SplitterItem[] = [
   { slot: 'left', minSize: 15, defaultSize: 25, class: card },
-  { slot: 'main', minSize: 30, class: card },
+  { slot: 'main', minSize: 30, defaultSize: 50, class: card },
   { slot: 'right', minSize: 15, defaultSize: 25, class: card }
 ]
 </script>
