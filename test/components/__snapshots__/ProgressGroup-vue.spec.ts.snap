@@ -287,7 +287,7 @@ exports[`ProgressGroup > renders with orientation horizontal correctly 1`] = `
 exports[`ProgressGroup > renders with orientation vertical correctly 1`] = `
 "<div data-orientation="vertical" data-slot="root" class="gap-2 h-full flex flex-row">
   <div data-slot="status" class="flex text-dimmed duration-200 ease-out motion-reduce:transition-none text-sm flex-col justify-end h-(--percent) min-h-fit transition-[height]" style="--percent: 67%;">67% </div>
-  <div data-slot="base" class="relative flex overflow-hidden rounded-full bg-accented h-full flex-col-reverse w-2">
+  <div data-slot="base" class="relative flex overflow-hidden rounded-full bg-accented h-full flex-col w-2">
     <div aria-valuemax="128" aria-valuemin="0" aria-valuenow="24" aria-label="System" role="progressbar" data-state="loading" data-value="24" data-max="128" data-slot="segment" class="duration-200 ease-out motion-reduce:transition-none w-full transition-[height]" style="height: 18.75%;">
       <div data-state="loading" data-value="24" data-max="128" data-slot="indicator" class="size-full bg-inverted"></div>
     </div>

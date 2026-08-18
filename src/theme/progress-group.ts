@@ -80,7 +80,7 @@ export default (options: Required<ModuleOptions>) => ({
       },
       vertical: {
         root: 'h-full flex flex-row',
-        base: 'h-full flex-col-reverse',
+        base: 'h-full flex-col',
         segment: 'w-full transition-[height]',
         status: 'flex-col justify-end h-(--percent) min-h-fit transition-[height]'
       }

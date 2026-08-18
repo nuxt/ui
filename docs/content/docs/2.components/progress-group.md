@@ -212,8 +212,6 @@ props:
 
 Use the `orientation` prop to change the orientation of the ProgressGroup. Defaults to `horizontal`.
 
-In `vertical` orientation the first item sits at the bottom of the bar.
-
 ::component-code
 ---
 collapse: true
