@@ -246,17 +246,6 @@ props:
 
 ## Examples
 
-### With custom colors
-
-Give each item a CSS color to build a breakdown outside the theme palette.
-
-::component-example
----
-collapse: true
-name: progress-group-custom-color-example
----
-::
-
 ### With status slot
 
 Use the `#status` slot to replace the summed percentage with your own content.
@@ -276,6 +265,17 @@ Use the `#item-label` and `#item-trailing` slots to change what each entry displ
 ---
 collapse: true
 name: progress-group-item-example
+---
+::
+
+### With custom colors
+
+Give each item a CSS color to build a breakdown outside the theme palette.
+
+::component-example
+---
+collapse: true
+name: progress-group-custom-color-example
 ---
 ::
 
