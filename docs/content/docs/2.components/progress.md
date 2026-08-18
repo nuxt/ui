@@ -79,6 +79,10 @@ props:
 ---
 ::
 
+::tip
+The status tracks the end of the bar, use `:ui="{ status: 'w-full' }"` to make it span the full width instead.
+::
+
 ### Indeterminate
 
 When no `v-model` is set or the value is `null`, the Progress becomes _indeterminate_. The progress bar is animated as a `carousel`, but you can change it using the [`animation`](#animation) prop.
@@ -138,7 +142,7 @@ This prop also accepts any CSS color value for palettes outside the theme.
 
 ### Size
 
-Use the `size` prop to change the size of the Slider.
+Use the `size` prop to change the size of the Progress.
 
 ::component-code
 ---
