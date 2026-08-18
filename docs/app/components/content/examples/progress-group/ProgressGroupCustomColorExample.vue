@@ -17,14 +17,12 @@ const used = items.reduce((total, item) => total + (item.value ?? 0), 0)
 </script>
 
 <template>
-  <UProgressGroup :items="items" :max="max" status class="w-96" :ui="{ status: 'w-full' }">
-    <template #status>
-      <div class="flex justify-between w-full">
-        <p>{{ Math.round((used / max) * 100) }}% Full</p>
-        <p class="text-muted">
-          ~{{ used.toFixed(1) }}K / {{ max }}K Tokens
-        </p>
-      </div>
+  <UProgressGroup :items="items" :max="max" status class="w-96" :ui="{ status: 'w-full justify-between' }">
+    <template #status="{ percent }">
+      <p>{{ percent }}% Full</p>
+      <p class="text-muted">
+        ~{{ used.toFixed(1) }}K / {{ max }}K Tokens
+      </p>
     </template>
 
     <template #item-trailing="{ item }">
