@@ -27,6 +27,10 @@ props:
 ---
 ::
 
+::note
+Use the [`ProgressGroup`](/docs/components/progress-group) component to split a single bar into multiple segments that add up to a total.
+::
+
 ### Max
 
 Use the `max` prop to set the maximum value of the Progress.

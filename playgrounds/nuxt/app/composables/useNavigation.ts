@@ -71,6 +71,7 @@ const components = [
   'pricing-plan',
   'pricing-table',
   'progress',
+  'progress-group',
   'radio-group',
   'scroll-area',
   'select-menu',
