@@ -56,13 +56,26 @@ describe('PinInput', () => {
       expect(wrapper.emitted()).toMatchObject({ change: [[{ type: 'change' }]] })
     })
 
+    test('blur event when focus leaves the group, not between pins', async () => {
+      const wrapper = mount(PinInput)
+      const pins = wrapper.findAll('input[aria-label^="pin input"]')
+
+      pins[0]!.element.dispatchEvent(new FocusEvent('focusout', { bubbles: true, relatedTarget: pins[1]!.element }))
+      await flushPromises()
+      expect(wrapper.emitted('blur')).toBeUndefined()
+
+      pins[1]!.element.dispatchEvent(new FocusEvent('focusout', { bubbles: true, relatedTarget: document.body }))
+      await flushPromises()
+      expect(wrapper.emitted('blur')).toHaveLength(1)
+    })
+
     test('blur event', async () => {
       const wrapper = mount(PinInput)
       const lastPin = wrapper.find('input[aria-label="pin input 5 of 0"]')
-      lastPin.trigger('blur')
+      lastPin.element.dispatchEvent(new FocusEvent('focusout', { bubbles: true, relatedTarget: null }))
       await flushPromises()
 
-      expect(wrapper.emitted()).toMatchObject({ blur: [[{ type: 'blur' }]] })
+      expect(wrapper.emitted()).toMatchObject({ blur: [[{ type: 'focusout' }]] })
     })
   })
 
@@ -108,12 +121,12 @@ describe('PinInput', () => {
       const lastPin = wrapper.find('input[aria-label="pin input 5 of 5"]')
 
       await input.vm.$emit('update:modelValue', ['1', '2', '3', '4'])
-      lastPin.trigger('blur')
+      lastPin.element.dispatchEvent(new FocusEvent('focusout', { bubbles: true, relatedTarget: document.body }))
       await flushPromises()
       expect(wrapper.text()).toContain('Error message')
 
       await input.vm.$emit('update:modelValue', ['1', '2', '3', '4', '5'])
-      lastPin.trigger('blur')
+      lastPin.element.dispatchEvent(new FocusEvent('focusout', { bubbles: true, relatedTarget: document.body }))
       await flushPromises()
       expect(wrapper.text()).not.toContain('Error message')
     })

@@ -119,11 +119,21 @@ function onComplete(value: string[] | number[]) {
   emitFormChange()
 }
 
-function onBlur(event: FocusEvent) {
-  if (!event.relatedTarget) {
-    emits('blur', event)
-    emitFormBlur()
+function onFocusOut(event: FocusEvent) {
+  if (event.relatedTarget && (event.currentTarget as HTMLElement).contains(event.relatedTarget as Node)) {
+    return
   }
+
+  emits('blur', event)
+  emitFormBlur()
+}
+
+function onFocusIn(event: FocusEvent) {
+  if (event.relatedTarget && (event.currentTarget as HTMLElement).contains(event.relatedTarget as Node)) {
+    return
+  }
+
+  emitFormFocus()
 }
 
 function autoFocus() {
@@ -177,6 +187,8 @@ defineExpose({
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     @update:model-value="emitFormInput()"
     @complete="onComplete"
+    @focusout="onFocusOut"
+    @focusin="onFocusIn"
   >
     <template v-for="(ids, index) in looseToNumber(props.length)" :key="ids">
       <PinInputInput
@@ -185,8 +197,6 @@ defineExpose({
         data-slot="base"
         :class="ui.base({ class: props.ui?.base })"
         :disabled="disabled"
-        @blur="onBlur"
-        @focus="emitFormFocus"
       />
       <span
         v-if="shouldInsertSeparator(index as number)"
