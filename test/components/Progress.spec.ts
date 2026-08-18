@@ -16,6 +16,7 @@ describe('Progress', () => {
     ['with modelValue', { props: { modelValue: 50 } }],
     ['with status', { props: { modelValue: 50, status: true } }],
     ['with status inverted', { props: { modelValue: 50, status: true, inverted: true } }],
+    ['with status vertical', { props: { modelValue: 50, status: true, orientation: 'vertical' } }],
     ['with max', { props: { modelValue: 2, status: true, max } }],
     ['with max inverted', { props: { modelValue: 2, status: true, inverted: true, max } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { size } }]),

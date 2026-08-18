@@ -127,10 +127,9 @@ const indicatorStyle = computed(() => {
   }
 })
 
-const statusStyle = computed(() => {
-  const value = `${Math.max(percent.value ?? 0, 0)}%`
-  return props.orientation === 'vertical' ? { height: value } : { width: value }
-})
+// The theme reads the size off `--percent` so `ui.status` can override it, an inline
+// `width` would win over the class.
+const statusStyle = computed(() => ({ '--percent': `${Math.max(percent.value ?? 0, 0)}%` }))
 
 function isActive(index: number) {
   return index === Number(props.modelValue)
