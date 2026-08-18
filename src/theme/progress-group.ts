@@ -3,10 +3,10 @@ import type { ModuleOptions } from '../module'
 export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: 'gap-2',
-    base: 'relative flex overflow-hidden rounded-full bg-accented',
-    segment: 'duration-200 ease-out motion-reduce:transition-none',
+    base: 'flex overflow-hidden rounded-full bg-accented',
+    segment: [options.theme.transitions && 'duration-200 ease-out motion-reduce:transition-none'],
     indicator: 'size-full',
-    status: 'flex text-dimmed duration-200 ease-out motion-reduce:transition-none',
+    status: ['flex text-dimmed', options.theme.transitions && 'duration-200 ease-out motion-reduce:transition-none'],
     list: 'flex flex-col gap-1',
     item: 'flex items-center gap-1.5 min-w-0',
     itemLeadingIcon: 'shrink-0',
@@ -75,14 +75,14 @@ export default (options: Required<ModuleOptions>) => ({
       horizontal: {
         root: 'w-full flex flex-col',
         base: 'w-full flex-row',
-        segment: 'h-full transition-[width]',
-        status: 'flex-row items-center justify-end w-(--percent) min-w-fit transition-[width]'
+        segment: ['h-full', options.theme.transitions && 'transition-[width]'],
+        status: ['flex-row items-center justify-end w-(--percent) min-w-fit', options.theme.transitions && 'transition-[width]']
       },
       vertical: {
         root: 'h-full flex flex-row',
         base: 'h-full flex-col',
-        segment: 'w-full transition-[height]',
-        status: 'flex-col justify-end h-(--percent) min-h-fit transition-[height]'
+        segment: ['w-full', options.theme.transitions && 'transition-[height]'],
+        status: ['flex-col justify-end h-(--percent) min-h-fit', options.theme.transitions && 'transition-[height]']
       }
     }
   },

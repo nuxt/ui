@@ -21,9 +21,10 @@ describe('ProgressGroup', () => {
 
   renderEach(ProgressGroup, [
     // Props
-    ['with items', { props }],
+    ['with items', { props: { items } }],
     ['without items', { props: {} }],
-    ['with max', { props: { items } }],
+    ['with max', { props }],
+    ['with invalid max', { props: { items, max: 0 } }],
     ['with status', { props: { ...props, status: true } }],
     ['with values above max', { props: { items: [{ label: 'System', value: 96 }, { label: 'Apps', value: 64 }], max: 128, status: true } }],
     ['with value out of bounds', { props: { items: [{ label: 'System', value: -8 }, { label: 'Apps', value: 512 }], max: 128 } }],
@@ -36,6 +37,8 @@ describe('ProgressGroup', () => {
     ['with class', { props: { ...props, class: 'w-48' } }],
     ['with ui', { props: { ...props, ui: { base: 'bg-default' } } }],
     ['with item ui', { props: { items: [{ label: 'System', value: 24, ui: { itemLabel: 'font-bold' } }], max: 128 } }],
+    ['with item class', { props: { items: [{ label: 'System', value: 24, class: 'font-bold' }], max: 128 } }],
+    ['with item slot', { props: { items: [{ label: 'System', value: 24, slot: 'custom' }], max: 128 }, slots: { custom: () => 'Custom slot' } }],
     // Slots
     ['with status slot', { props: { ...props, status: true }, slots: { status: () => 'Status slot' } }],
     ['with item slot', { props, slots: { item: () => 'Item slot' } }],

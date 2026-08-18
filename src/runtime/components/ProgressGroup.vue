@@ -126,8 +126,9 @@ const itemColors = computed(() => (props.items ?? []).map(item => (item.color ||
 
 const customColors = computed(() => itemColors.value.map(color => color && !themeColors.value.includes(color) ? color : undefined))
 
-const hasList = computed(() => (props.items ?? []).some(item => item.label || item.icon || item.slot)
-  || !!slots.item || !!slots['item-leading'] || !!slots['item-label'] || !!slots['item-trailing'])
+const hasList = computed(() => !!props.items?.length
+  && (props.items.some(item => item.label || item.icon || item.slot)
+    || !!slots.item || !!slots['item-leading'] || !!slots['item-label'] || !!slots['item-trailing']))
 
 function segmentStyle(index: number) {
   const value = `${percents.value[index] ?? 0}%`
@@ -135,12 +136,13 @@ function segmentStyle(index: number) {
   return props.orientation === 'vertical' ? { height: value } : { width: value }
 }
 
-// `ProgressRoot` derives `aria-label` from `getValueLabel`, so name each segment after
-// its item and keep reka's percentage as the fallback.
-function valueLabel(item: T) {
-  return (value: number | null | undefined, valueMax: number) => item.label
-    ?? (typeof value === 'number' ? `${Math.round((value / valueMax) * 100)}%` : undefined)
-}
+// `ProgressRoot` derives `aria-label` from `getValueLabel`, whose default is the segment's
+// percentage, so only override it to name a segment after its item.
+const valueLabels = computed(() => (props.items ?? []).map((item) => {
+  const label = item.label
+
+  return label ? () => label : undefined
+}))
 </script>
 
 <template>
@@ -157,9 +159,9 @@ function valueLabel(item: T) {
         :key="index"
         :model-value="values[index]"
         :max="max"
-        :get-value-label="valueLabel(item)"
+        :get-value-label="valueLabels[index]"
         data-slot="segment"
-        :class="ui.segment({ class: [props.ui?.segment, item.ui?.segment, item.class] })"
+        :class="ui.segment({ class: [props.ui?.segment, item.ui?.segment] })"
         :style="segmentStyle(index)"
       >
         <ProgressIndicator data-slot="indicator" :class="ui.indicator({ color: itemColors[index], class: [props.ui?.indicator, item.ui?.indicator] })" :style="customColors[index] ? { backgroundColor: customColors[index] } : undefined" />
@@ -167,7 +169,7 @@ function valueLabel(item: T) {
     </div>
 
     <ul v-if="hasList" data-slot="list" :class="ui.list({ class: props.ui?.list })">
-      <li v-for="(item, index) in props.items" :key="index" data-slot="item" :class="ui.item({ class: [props.ui?.item, item.ui?.item] })">
+      <li v-for="(item, index) in props.items" :key="index" data-slot="item" :class="ui.item({ class: [props.ui?.item, item.ui?.item, item.class] })">
         <slot :name="((item.slot || 'item') as keyof ProgressGroupSlots<T>)" :item="(item as Extract<T, { slot: string; }>)" :index="index" :percent="percents[index] ?? 0">
           <slot :name="((item.slot ? `${item.slot}-leading` : 'item-leading') as keyof ProgressGroupSlots<T>)" :item="(item as Extract<T, { slot: string; }>)" :index="index" :percent="percents[index] ?? 0">
             <UIcon v-if="item.icon" :name="item.icon" data-slot="itemLeadingIcon" :class="ui.itemLeadingIcon({ color: itemColors[index], class: [props.ui?.itemLeadingIcon, item.ui?.itemLeadingIcon] })" :style="customColors[index] ? { color: customColors[index] } : undefined" />
