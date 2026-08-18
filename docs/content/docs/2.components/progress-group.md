@@ -65,8 +65,6 @@ Use the `items` prop as an array of objects with the following properties:
 - `class?: any`{lang="ts-type"}
 - `ui?: { segment?: ClassNameValue, indicator?: ClassNameValue, item?: ClassNameValue, itemLeadingIcon?: ClassNameValue, itemLeadingDot?: ClassNameValue, itemLabel?: ClassNameValue, itemTrailing?: ClassNameValue }`{lang="ts-type"}
 
-Items without an `icon` get a colored dot in the list instead.
-
 ::component-code
 ---
 collapse: true
@@ -92,11 +90,13 @@ props:
 ---
 ::
 
+::note
+Items without an `icon` get a colored dot in the list instead.
+::
+
 ### Max
 
 Use the `max` prop to set the value all items add up to. Defaults to `100`.
-
-Values are clamped between `0` and `max`, and segments that add up to more than `max` share the track proportionally.
 
 ::component-code
 ---
@@ -121,11 +121,13 @@ props:
 ---
 ::
 
+::note
+Values are clamped between `0` and `max`, and segments that add up to more than `max` share the track proportionally.
+::
+
 ### Status
 
 Use the `status` prop to display the summed value above the bar.
-
-The status tracks the end of the bar, use `:ui="{ status: 'w-full' }"` to make it span the full width instead.
 
 ::component-code
 ---
@@ -154,11 +156,13 @@ props:
 ---
 ::
 
+::tip
+The status tracks the end of the bar, use `:ui="{ status: 'w-full' }"` to make it span the full width instead.
+::
+
 ### Color
 
 Use the `color` prop to change the color of every segment that doesn't set its own.
-
-Both this prop and each item's `color` accept any CSS color value, which is handy for palettes outside the theme.
 
 ::component-code
 ---
@@ -179,6 +183,10 @@ props:
       value: 18
   class: 'w-96'
 ---
+::
+
+::tip
+Both this prop and each item's `color` accept any CSS color value, which is handy for palettes outside the theme.
 ::
 
 ### Size
@@ -241,19 +249,34 @@ props:
 
 Give each item a CSS color to build a breakdown outside the theme palette.
 
-:component-example{name="progress-group-custom-color-example"}
+::component-example
+---
+collapse: true
+name: progress-group-custom-color-example
+---
+::
 
 ### With status slot
 
 Use the `#status` slot to replace the summed percentage with your own content.
 
-:component-example{name="progress-group-status-example"}
+::component-example
+---
+collapse: true
+name: progress-group-status-example
+---
+::
 
 ### With item slots
 
 Use the `#item-label` and `#item-trailing` slots to change what each entry displays. Both receive the `item`, its `index` and its `percent`.
 
-:component-example{name="progress-group-item-example"}
+::component-example
+---
+collapse: true
+name: progress-group-item-example
+---
+::
 
 ## API
 
