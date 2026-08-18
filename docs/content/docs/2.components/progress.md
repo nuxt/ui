@@ -27,7 +27,7 @@ props:
 ---
 ::
 
-### Variant
+### Variant :badge{label="Soon" class="align-text-top"}
 
 Use the `variant` prop to change the style of the Progress. Defaults to `linear`.
 
@@ -48,9 +48,9 @@ props:
 The `circular` variant is rendered as an SVG, so the `track` slot is used for the background circle instead of the `base` background.
 ::
 
-### Thickness
+### Thickness :badge{label="Soon" class="align-text-top"}
 
-Use the `thickness` prop to change the stroke width of the `circular` variant, in pixels. Defaults to `auto`, which derives the thickness from the [`size`](#size) prop.
+Use the `thickness` prop to change the stroke width of the `circular` variant, relative to its `100x100` coordinate system so it scales with the rendered size. Defaults to `auto`, which derives the thickness from the [`size`](#size) prop.
 
 ::component-code
 ---
@@ -167,7 +167,7 @@ props:
 ::
 
 ::tip
-With the `linear` variant, the animation is automatically disabled when the user prefers reduced motion, the indeterminate bar is displayed as a full width pulse instead.
+The animation is automatically disabled when the user prefers reduced motion, the indeterminate indicator is displayed as a pulse instead.
 ::
 
 ### Orientation

@@ -3,11 +3,11 @@ import type { ModuleOptions } from '../module'
 export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: 'gap-2',
-    base: 'relative',
+    base: 'relative overflow-hidden rounded-full bg-accented',
     circle: 'block size-full',
     track: 'fill-none stroke-(--ui-bg-accented)',
     indicator: 'rounded-full size-full transition-transform duration-200 ease-out [stroke-linecap:round] motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse',
-    status: 'flex text-dimmed',
+    status: 'flex text-dimmed transition-[width] duration-200 ease-out motion-reduce:transition-none',
     steps: 'grid items-end',
     step: 'truncate text-end row-start-1 col-start-1 transition-opacity ease-out'
   },
@@ -74,12 +74,12 @@ export default (options: Required<ModuleOptions>) => ({
     },
     orientation: {
       horizontal: {
-        root: 'w-full flex',
+        root: 'w-full flex flex-col',
         base: 'w-full',
         status: 'flex-row items-center justify-end min-w-fit'
       },
       vertical: {
-        root: 'h-full flex',
+        root: 'h-full flex flex-row-reverse',
         base: 'h-full',
         status: 'flex-col justify-end min-h-fit'
       }
@@ -88,13 +88,11 @@ export default (options: Required<ModuleOptions>) => ({
       true: ''
     },
     variant: {
-      linear: {
-        base: 'overflow-hidden rounded-full bg-accented',
-        status: 'transition-[width] duration-200 ease-out motion-reduce:transition-none'
-      },
+      linear: '',
       circular: {
+        base: 'bg-transparent [--ui-progress-thickness:8px]',
         track: 'fill-none [stroke-width:var(--ui-progress-thickness)] [r:calc(50px-var(--ui-progress-thickness)/2)]',
-        indicator: 'fill-none origin-center -rotate-90 [stroke-width:var(--ui-progress-thickness)] [r:calc(50px-var(--ui-progress-thickness)/2)] transition-[stroke-dasharray,opacity] duration-700 data-[value=\'0\']:opacity-0',
+        indicator: 'fill-none origin-center -rotate-90 [stroke-width:var(--ui-progress-thickness)] [r:calc(50px-var(--ui-progress-thickness)/2)] transition-[stroke-dasharray,opacity] duration-700 data-[percent=\'0\']:opacity-0',
         status: 'absolute inset-0 items-center justify-center'
       }
     },
@@ -106,13 +104,15 @@ export default (options: Required<ModuleOptions>) => ({
     variant: 'circular',
     orientation: 'vertical',
     class: {
-      root: 'flex-col items-center'
+      root: 'flex-col items-center',
+      step: 'text-center'
     }
   }, {
     variant: 'circular',
     orientation: 'horizontal',
     class: {
-      root: 'flex-row items-center'
+      root: 'flex-row items-center',
+      step: 'text-start'
     }
   }, {
     variant: 'circular',
@@ -187,25 +187,25 @@ export default (options: Required<ModuleOptions>) => ({
     variant: 'circular',
     animation: 'carousel',
     class: {
-      indicator: 'data-[state=indeterminate]:transform-view data-[state=indeterminate]:origin-center data-[state=indeterminate]:[stroke-dasharray:75,100] data-[state=indeterminate]:animate-[circular-rotate_1.4s_linear_infinite] data-[state=indeterminate]:transition-none'
+      indicator: 'data-[state=indeterminate]:transform-view data-[state=indeterminate]:origin-center data-[state=indeterminate]:[stroke-dasharray:75,100] motion-safe:data-[state=indeterminate]:animate-[circular-rotate_1.4s_linear_infinite] data-[state=indeterminate]:transition-none'
     }
   }, {
     variant: 'circular',
     animation: 'carousel-inverse',
     class: {
-      indicator: 'data-[state=indeterminate]:transform-view data-[state=indeterminate]:origin-center data-[state=indeterminate]:[stroke-dasharray:75,100] data-[state=indeterminate]:animate-[circular-rotate-ccw_1.4s_linear_infinite] data-[state=indeterminate]:transition-none'
+      indicator: 'data-[state=indeterminate]:transform-view data-[state=indeterminate]:origin-center data-[state=indeterminate]:[stroke-dasharray:75,100] motion-safe:data-[state=indeterminate]:animate-[circular-rotate-ccw_1.4s_linear_infinite] data-[state=indeterminate]:transition-none'
     }
   }, {
     variant: 'circular',
     animation: 'swing',
     class: {
-      indicator: 'data-[state=indeterminate]:transform-view data-[state=indeterminate]:origin-center data-[state=indeterminate]:[stroke-dasharray:75,100] data-[state=indeterminate]:transition-none data-[state=indeterminate]:animate-[circular-swing_1.4s_ease-in-out_infinite]'
+      indicator: 'data-[state=indeterminate]:transform-view data-[state=indeterminate]:origin-center data-[state=indeterminate]:[stroke-dasharray:75,100] data-[state=indeterminate]:transition-none motion-safe:data-[state=indeterminate]:animate-[circular-swing_1.4s_ease-in-out_infinite]'
     }
   }, {
     variant: 'circular',
     animation: 'elastic',
     class: {
-      indicator: 'data-[state=indeterminate]:transform-view data-[state=indeterminate]:origin-center data-[state=indeterminate]:animate-[circular-rotate_2s_linear_infinite,circular-elastic_1.4s_ease-in-out_infinite]'
+      indicator: 'data-[state=indeterminate]:transform-view data-[state=indeterminate]:origin-center data-[state=indeterminate]:[stroke-dasharray:75,100] motion-safe:data-[state=indeterminate]:animate-[circular-rotate_2s_linear_infinite,circular-elastic_1.4s_ease-in-out_infinite]'
     }
   }, {
     variant: 'linear',
@@ -222,18 +222,6 @@ export default (options: Required<ModuleOptions>) => ({
     class: {
       steps: 'items-start',
       status: 'self-end flex-col-reverse'
-    }
-  }, {
-    variant: 'linear',
-    orientation: 'horizontal',
-    class: {
-      root: 'flex-col'
-    }
-  }, {
-    variant: 'linear',
-    orientation: 'vertical',
-    class: {
-      root: 'flex-row-reverse'
     }
   }, {
     variant: 'linear',

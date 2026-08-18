@@ -29,7 +29,7 @@ export interface ProgressProps extends Pick<ProgressRootProps, 'getValueLabel' |
    */
   color?: Progress['variants']['color']
   /**
-   * The orientation of the progress bar. When `circular` variant is enabled, controls the axis along which the steps are lait out next to it
+   * The orientation of the progress bar. When `circular` variant is enabled, controls the axis along which the steps are laid out next to it.
    * @defaultValue 'horizontal'
    */
   orientation?: Progress['variants']['orientation']
@@ -39,12 +39,12 @@ export interface ProgressProps extends Pick<ProgressRootProps, 'getValueLabel' |
    */
   animation?: Progress['variants']['animation']
   /**
-   * The progress bar variant
+   * The progress bar variant.
    * @defaultValue 'linear'
    */
   variant?: Progress['variants']['variant']
   /**
-   * The thickness of the circular progress stroke in pixels, `auto` derives it from the `size` prop.
+   * The thickness of the circular progress stroke, in units of the circle's `100x100` coordinate system so it scales with the rendered size, `auto` derives it from the `size` prop.
    * Only applies to the `circular` variant.
    * @defaultValue 'auto'
    */
@@ -224,6 +224,7 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.progress || {}) 
               cy="50"
               pathLength="100"
               data-slot="indicator"
+              :data-percent="percent"
               :class="ui.indicator({ class: props.ui?.indicator })"
               :style="indicatorStyle"
             />
