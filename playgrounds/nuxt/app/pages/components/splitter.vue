@@ -18,13 +18,13 @@ const nested: SplitterItem[] = [
   <Navbar />
 
   <div class="flex-1 w-full">
-    <USplitter id="splitter" orientation="horizontal" :items="items" class="size-full">
+    <USplitter id="splitter" orientation="horizontal" :items="items">
       <template #a>
         Panel A
       </template>
 
       <template #bc>
-        <USplitter id="splitter-nested" orientation="vertical" :items="nested" class="size-full">
+        <USplitter id="splitter-nested" orientation="vertical" :items="nested">
           <template #b>
             Panel B
           </template>

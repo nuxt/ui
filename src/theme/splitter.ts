@@ -1,6 +1,6 @@
 export default {
   slots: {
-    root: 'flex w-full',
+    root: '',
     panel: 'flex',
     handle: 'group relative shrink-0 focus-visible:outline-2 focus-visible:outline-primary data-[panel-resize-handle-enabled=false]:cursor-default'
   },
@@ -10,7 +10,6 @@ export default {
         handle: 'w-2 cursor-col-resize'
       },
       vertical: {
-        root: 'flex-col',
         handle: 'h-2 cursor-row-resize'
       }
     }

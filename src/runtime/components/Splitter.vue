@@ -73,7 +73,7 @@ export type SplitterSlots<T extends SplitterItem = SplitterItem> = {
 </script>
 
 <script setup lang="ts" generic="T extends SplitterItem">
-import { ref, computed } from 'vue'
+import { ref, computed, onBeforeUpdate } from 'vue'
 import { SplitterGroup, SplitterPanel, SplitterResizeHandle } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
@@ -100,9 +100,17 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.splitter || {}) 
 
 const panelsRef = ref<InstanceType<typeof SplitterPanel>[]>([])
 
+// Refs are rebuilt on every render, otherwise removing an item would leave the panel
+// that took its index behind as `null` since the unmounted panel resets it afterwards.
+onBeforeUpdate(() => {
+  panelsRef.value.length = 0
+})
+
 function setPanelRef(index: number, el: Element | ComponentPublicInstance | null) {
-  // @ts-expect-error - ComponentPublicInstance type mismatch in Nuxt module augmentation
-  panelsRef.value[index] = el
+  if (el) {
+    // @ts-expect-error - ComponentPublicInstance type mismatch in Nuxt module augmentation
+    panelsRef.value[index] = el
+  }
 }
 
 defineExpose({
