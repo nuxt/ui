@@ -18,7 +18,7 @@ exports[`ProgressGroup > renders with as correctly 1`] = `
     </div>
   </div>
   <ul data-slot="list" class="flex flex-col gap-1 text-sm">
-    <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span class="iconify i-lucide:cog shrink-0 text-inverted size-4" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemLabel" class="truncate">System</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">19% </span></li>
+    <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span class="iconify i-lucide:cog shrink-0 text-highlighted size-4" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemLabel" class="truncate">System</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">19% </span></li>
     <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span class="iconify i-lucide:app-window shrink-0 text-error size-4" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemLabel" class="truncate">Apps</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">6% </span></li>
     <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span data-slot="itemLeadingDot" class="shrink-0 rounded-full bg-warning size-2"></span><span data-slot="itemLabel" class="truncate">Documents</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">9% </span></li>
     <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span data-slot="itemLeadingDot" class="shrink-0 rounded-full bg-success size-2"></span><span data-slot="itemLabel" class="truncate">Multimedia</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">33% </span></li>
@@ -44,7 +44,7 @@ exports[`ProgressGroup > renders with class correctly 1`] = `
     </div>
   </div>
   <ul data-slot="list" class="flex flex-col gap-1 text-sm">
-    <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span class="iconify i-lucide:cog shrink-0 text-inverted size-4" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemLabel" class="truncate">System</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">19% </span></li>
+    <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span class="iconify i-lucide:cog shrink-0 text-highlighted size-4" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemLabel" class="truncate">System</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">19% </span></li>
     <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span class="iconify i-lucide:app-window shrink-0 text-error size-4" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemLabel" class="truncate">Apps</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">6% </span></li>
     <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span data-slot="itemLeadingDot" class="shrink-0 rounded-full bg-warning size-2"></span><span data-slot="itemLabel" class="truncate">Documents</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">9% </span></li>
     <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span data-slot="itemLeadingDot" class="shrink-0 rounded-full bg-success size-2"></span><span data-slot="itemLabel" class="truncate">Multimedia</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">33% </span></li>
@@ -66,6 +66,24 @@ exports[`ProgressGroup > renders with color correctly 1`] = `
   <ul data-slot="list" class="flex flex-col gap-1 text-sm">
     <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span data-slot="itemLeadingDot" class="shrink-0 rounded-full bg-inverted size-2"></span><span data-slot="itemLabel" class="truncate">System</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">19% </span></li>
     <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span data-slot="itemLeadingDot" class="shrink-0 rounded-full bg-inverted size-2"></span><span data-slot="itemLabel" class="truncate">Apps</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">6% </span></li>
+  </ul>
+</div>"
+`;
+
+exports[`ProgressGroup > renders with custom color correctly 1`] = `
+"<div data-orientation="horizontal" data-slot="root" class="gap-2 w-full flex flex-col">
+  <!--v-if-->
+  <div data-slot="base" class="relative flex overflow-hidden rounded-full bg-accented w-full flex-row h-2">
+    <div aria-valuemax="128" aria-valuemin="0" aria-valuenow="24" aria-label="System" role="progressbar" data-state="loading" data-value="24" data-max="128" data-slot="segment" class="duration-200 ease-out motion-reduce:transition-none h-full transition-[width]" style="width: 18.75%;">
+      <div data-state="loading" data-value="24" data-max="128" data-slot="indicator" class="size-full" style="background-color: #8b5cf6;"></div>
+    </div>
+    <div aria-valuemax="128" aria-valuemin="0" aria-valuenow="8" aria-label="Apps" role="progressbar" data-state="loading" data-value="8" data-max="128" data-slot="segment" class="duration-200 ease-out motion-reduce:transition-none h-full transition-[width]" style="width: 6.25%;">
+      <div data-state="loading" data-value="8" data-max="128" data-slot="indicator" class="size-full" style="background-color: var(--color-green-400);"></div>
+    </div>
+  </div>
+  <ul data-slot="list" class="flex flex-col gap-1 text-sm">
+    <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span data-slot="itemLeadingDot" class="shrink-0 rounded-full size-2" style="background-color: #8b5cf6;"></span><span data-slot="itemLabel" class="truncate">System</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">19% </span></li>
+    <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span data-slot="itemLeadingDot" class="shrink-0 rounded-full size-2" style="background-color: var(--color-green-400);"></span><span data-slot="itemLabel" class="truncate">Apps</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">6% </span></li>
   </ul>
 </div>"
 `;
@@ -128,7 +146,7 @@ exports[`ProgressGroup > renders with item-label slot correctly 1`] = `
     </div>
   </div>
   <ul data-slot="list" class="flex flex-col gap-1 text-sm">
-    <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span class="iconify i-lucide:cog shrink-0 text-inverted size-4" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemLabel" class="truncate">Label slot</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">19% </span></li>
+    <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span class="iconify i-lucide:cog shrink-0 text-highlighted size-4" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemLabel" class="truncate">Label slot</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">19% </span></li>
     <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span class="iconify i-lucide:app-window shrink-0 text-error size-4" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemLabel" class="truncate">Label slot</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">6% </span></li>
     <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span data-slot="itemLeadingDot" class="shrink-0 rounded-full bg-warning size-2"></span><span data-slot="itemLabel" class="truncate">Label slot</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">9% </span></li>
     <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span data-slot="itemLeadingDot" class="shrink-0 rounded-full bg-success size-2"></span><span data-slot="itemLabel" class="truncate">Label slot</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">33% </span></li>
@@ -180,7 +198,7 @@ exports[`ProgressGroup > renders with item-trailing slot correctly 1`] = `
     </div>
   </div>
   <ul data-slot="list" class="flex flex-col gap-1 text-sm">
-    <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span class="iconify i-lucide:cog shrink-0 text-inverted size-4" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemLabel" class="truncate">System</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">Trailing slot</span></li>
+    <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span class="iconify i-lucide:cog shrink-0 text-highlighted size-4" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemLabel" class="truncate">System</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">Trailing slot</span></li>
     <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span class="iconify i-lucide:app-window shrink-0 text-error size-4" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemLabel" class="truncate">Apps</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">Trailing slot</span></li>
     <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span data-slot="itemLeadingDot" class="shrink-0 rounded-full bg-warning size-2"></span><span data-slot="itemLabel" class="truncate">Documents</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">Trailing slot</span></li>
     <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span data-slot="itemLeadingDot" class="shrink-0 rounded-full bg-success size-2"></span><span data-slot="itemLabel" class="truncate">Multimedia</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">Trailing slot</span></li>
@@ -206,7 +224,7 @@ exports[`ProgressGroup > renders with items correctly 1`] = `
     </div>
   </div>
   <ul data-slot="list" class="flex flex-col gap-1 text-sm">
-    <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span class="iconify i-lucide:cog shrink-0 text-inverted size-4" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemLabel" class="truncate">System</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">19% </span></li>
+    <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span class="iconify i-lucide:cog shrink-0 text-highlighted size-4" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemLabel" class="truncate">System</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">19% </span></li>
     <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span class="iconify i-lucide:app-window shrink-0 text-error size-4" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemLabel" class="truncate">Apps</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">6% </span></li>
     <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span data-slot="itemLeadingDot" class="shrink-0 rounded-full bg-warning size-2"></span><span data-slot="itemLabel" class="truncate">Documents</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">9% </span></li>
     <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span data-slot="itemLeadingDot" class="shrink-0 rounded-full bg-success size-2"></span><span data-slot="itemLabel" class="truncate">Multimedia</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">33% </span></li>
@@ -232,7 +250,7 @@ exports[`ProgressGroup > renders with max correctly 1`] = `
     </div>
   </div>
   <ul data-slot="list" class="flex flex-col gap-1 text-sm">
-    <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span class="iconify i-lucide:cog shrink-0 text-inverted size-4" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemLabel" class="truncate">System</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">24% </span></li>
+    <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span class="iconify i-lucide:cog shrink-0 text-highlighted size-4" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemLabel" class="truncate">System</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">24% </span></li>
     <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span class="iconify i-lucide:app-window shrink-0 text-error size-4" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemLabel" class="truncate">Apps</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">8% </span></li>
     <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span data-slot="itemLeadingDot" class="shrink-0 rounded-full bg-warning size-2"></span><span data-slot="itemLabel" class="truncate">Documents</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">12% </span></li>
     <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span data-slot="itemLeadingDot" class="shrink-0 rounded-full bg-success size-2"></span><span data-slot="itemLabel" class="truncate">Multimedia</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">42% </span></li>
@@ -242,7 +260,7 @@ exports[`ProgressGroup > renders with max correctly 1`] = `
 
 exports[`ProgressGroup > renders with orientation horizontal correctly 1`] = `
 "<div data-orientation="horizontal" data-slot="root" class="gap-2 w-full flex flex-col">
-  <div data-slot="status" class="flex text-dimmed duration-200 ease-out motion-reduce:transition-none text-sm flex-row items-center justify-end min-w-fit transition-[width]" style="width: 67%;">67% </div>
+  <div data-slot="status" class="flex text-dimmed duration-200 ease-out motion-reduce:transition-none text-sm flex-row items-center justify-end w-(--percent) min-w-fit transition-[width]" style="--percent: 67%;">67% </div>
   <div data-slot="base" class="relative flex overflow-hidden rounded-full bg-accented w-full flex-row h-2">
     <div aria-valuemax="128" aria-valuemin="0" aria-valuenow="24" aria-label="System" role="progressbar" data-state="loading" data-value="24" data-max="128" data-slot="segment" class="duration-200 ease-out motion-reduce:transition-none h-full transition-[width]" style="width: 18.75%;">
       <div data-state="loading" data-value="24" data-max="128" data-slot="indicator" class="size-full bg-inverted"></div>
@@ -258,7 +276,7 @@ exports[`ProgressGroup > renders with orientation horizontal correctly 1`] = `
     </div>
   </div>
   <ul data-slot="list" class="flex flex-col gap-1 text-sm">
-    <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span class="iconify i-lucide:cog shrink-0 text-inverted size-4" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemLabel" class="truncate">System</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">19% </span></li>
+    <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span class="iconify i-lucide:cog shrink-0 text-highlighted size-4" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemLabel" class="truncate">System</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">19% </span></li>
     <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span class="iconify i-lucide:app-window shrink-0 text-error size-4" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemLabel" class="truncate">Apps</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">6% </span></li>
     <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span data-slot="itemLeadingDot" class="shrink-0 rounded-full bg-warning size-2"></span><span data-slot="itemLabel" class="truncate">Documents</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">9% </span></li>
     <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span data-slot="itemLeadingDot" class="shrink-0 rounded-full bg-success size-2"></span><span data-slot="itemLabel" class="truncate">Multimedia</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">33% </span></li>
@@ -268,7 +286,7 @@ exports[`ProgressGroup > renders with orientation horizontal correctly 1`] = `
 
 exports[`ProgressGroup > renders with orientation vertical correctly 1`] = `
 "<div data-orientation="vertical" data-slot="root" class="gap-2 h-full flex flex-row">
-  <div data-slot="status" class="flex text-dimmed duration-200 ease-out motion-reduce:transition-none text-sm flex-col justify-end min-h-fit transition-[height]" style="height: 67%;">67% </div>
+  <div data-slot="status" class="flex text-dimmed duration-200 ease-out motion-reduce:transition-none text-sm flex-col justify-end h-(--percent) min-h-fit transition-[height]" style="--percent: 67%;">67% </div>
   <div data-slot="base" class="relative flex overflow-hidden rounded-full bg-accented h-full flex-col-reverse w-2">
     <div aria-valuemax="128" aria-valuemin="0" aria-valuenow="24" aria-label="System" role="progressbar" data-state="loading" data-value="24" data-max="128" data-slot="segment" class="duration-200 ease-out motion-reduce:transition-none w-full transition-[height]" style="height: 18.75%;">
       <div data-state="loading" data-value="24" data-max="128" data-slot="indicator" class="size-full bg-inverted"></div>
@@ -284,7 +302,7 @@ exports[`ProgressGroup > renders with orientation vertical correctly 1`] = `
     </div>
   </div>
   <ul data-slot="list" class="flex flex-col gap-1 text-sm">
-    <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span class="iconify i-lucide:cog shrink-0 text-inverted size-4" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemLabel" class="truncate">System</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">19% </span></li>
+    <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span class="iconify i-lucide:cog shrink-0 text-highlighted size-4" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemLabel" class="truncate">System</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">19% </span></li>
     <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span class="iconify i-lucide:app-window shrink-0 text-error size-4" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemLabel" class="truncate">Apps</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">6% </span></li>
     <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span data-slot="itemLeadingDot" class="shrink-0 rounded-full bg-warning size-2"></span><span data-slot="itemLabel" class="truncate">Documents</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">9% </span></li>
     <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span data-slot="itemLeadingDot" class="shrink-0 rounded-full bg-success size-2"></span><span data-slot="itemLabel" class="truncate">Multimedia</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">33% </span></li>
@@ -294,7 +312,7 @@ exports[`ProgressGroup > renders with orientation vertical correctly 1`] = `
 
 exports[`ProgressGroup > renders with size 2xl correctly 1`] = `
 "<div data-orientation="horizontal" data-slot="root" class="gap-2 w-full flex flex-col">
-  <div data-slot="status" class="flex text-dimmed duration-200 ease-out motion-reduce:transition-none text-base flex-row items-center justify-end min-w-fit transition-[width]" style="width: 67%;">67% </div>
+  <div data-slot="status" class="flex text-dimmed duration-200 ease-out motion-reduce:transition-none text-base flex-row items-center justify-end w-(--percent) min-w-fit transition-[width]" style="--percent: 67%;">67% </div>
   <div data-slot="base" class="relative flex overflow-hidden rounded-full bg-accented w-full flex-row h-5">
     <div aria-valuemax="128" aria-valuemin="0" aria-valuenow="24" aria-label="System" role="progressbar" data-state="loading" data-value="24" data-max="128" data-slot="segment" class="duration-200 ease-out motion-reduce:transition-none h-full transition-[width]" style="width: 18.75%;">
       <div data-state="loading" data-value="24" data-max="128" data-slot="indicator" class="size-full bg-inverted"></div>
@@ -310,7 +328,7 @@ exports[`ProgressGroup > renders with size 2xl correctly 1`] = `
     </div>
   </div>
   <ul data-slot="list" class="flex flex-col gap-1 text-base">
-    <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span class="iconify i-lucide:cog shrink-0 text-inverted size-5" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemLabel" class="truncate">System</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">19% </span></li>
+    <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span class="iconify i-lucide:cog shrink-0 text-highlighted size-5" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemLabel" class="truncate">System</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">19% </span></li>
     <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span class="iconify i-lucide:app-window shrink-0 text-error size-5" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemLabel" class="truncate">Apps</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">6% </span></li>
     <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span data-slot="itemLeadingDot" class="shrink-0 rounded-full bg-warning size-2.5"></span><span data-slot="itemLabel" class="truncate">Documents</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">9% </span></li>
     <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span data-slot="itemLeadingDot" class="shrink-0 rounded-full bg-success size-2.5"></span><span data-slot="itemLabel" class="truncate">Multimedia</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">33% </span></li>
@@ -320,7 +338,7 @@ exports[`ProgressGroup > renders with size 2xl correctly 1`] = `
 
 exports[`ProgressGroup > renders with size 2xs correctly 1`] = `
 "<div data-orientation="horizontal" data-slot="root" class="gap-2 w-full flex flex-col">
-  <div data-slot="status" class="flex text-dimmed duration-200 ease-out motion-reduce:transition-none text-xs flex-row items-center justify-end min-w-fit transition-[width]" style="width: 67%;">67% </div>
+  <div data-slot="status" class="flex text-dimmed duration-200 ease-out motion-reduce:transition-none text-xs flex-row items-center justify-end w-(--percent) min-w-fit transition-[width]" style="--percent: 67%;">67% </div>
   <div data-slot="base" class="relative flex overflow-hidden rounded-full bg-accented w-full flex-row h-px">
     <div aria-valuemax="128" aria-valuemin="0" aria-valuenow="24" aria-label="System" role="progressbar" data-state="loading" data-value="24" data-max="128" data-slot="segment" class="duration-200 ease-out motion-reduce:transition-none h-full transition-[width]" style="width: 18.75%;">
       <div data-state="loading" data-value="24" data-max="128" data-slot="indicator" class="size-full bg-inverted"></div>
@@ -336,7 +354,7 @@ exports[`ProgressGroup > renders with size 2xs correctly 1`] = `
     </div>
   </div>
   <ul data-slot="list" class="flex flex-col gap-1 text-xs">
-    <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span class="iconify i-lucide:cog shrink-0 text-inverted size-3" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemLabel" class="truncate">System</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">19% </span></li>
+    <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span class="iconify i-lucide:cog shrink-0 text-highlighted size-3" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemLabel" class="truncate">System</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">19% </span></li>
     <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span class="iconify i-lucide:app-window shrink-0 text-error size-3" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemLabel" class="truncate">Apps</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">6% </span></li>
     <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span data-slot="itemLeadingDot" class="shrink-0 rounded-full bg-warning size-1.5"></span><span data-slot="itemLabel" class="truncate">Documents</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">9% </span></li>
     <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span data-slot="itemLeadingDot" class="shrink-0 rounded-full bg-success size-1.5"></span><span data-slot="itemLabel" class="truncate">Multimedia</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">33% </span></li>
@@ -346,7 +364,7 @@ exports[`ProgressGroup > renders with size 2xs correctly 1`] = `
 
 exports[`ProgressGroup > renders with size lg correctly 1`] = `
 "<div data-orientation="horizontal" data-slot="root" class="gap-2 w-full flex flex-col">
-  <div data-slot="status" class="flex text-dimmed duration-200 ease-out motion-reduce:transition-none text-sm flex-row items-center justify-end min-w-fit transition-[width]" style="width: 67%;">67% </div>
+  <div data-slot="status" class="flex text-dimmed duration-200 ease-out motion-reduce:transition-none text-sm flex-row items-center justify-end w-(--percent) min-w-fit transition-[width]" style="--percent: 67%;">67% </div>
   <div data-slot="base" class="relative flex overflow-hidden rounded-full bg-accented w-full flex-row h-3">
     <div aria-valuemax="128" aria-valuemin="0" aria-valuenow="24" aria-label="System" role="progressbar" data-state="loading" data-value="24" data-max="128" data-slot="segment" class="duration-200 ease-out motion-reduce:transition-none h-full transition-[width]" style="width: 18.75%;">
       <div data-state="loading" data-value="24" data-max="128" data-slot="indicator" class="size-full bg-inverted"></div>
@@ -362,7 +380,7 @@ exports[`ProgressGroup > renders with size lg correctly 1`] = `
     </div>
   </div>
   <ul data-slot="list" class="flex flex-col gap-1 text-sm">
-    <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span class="iconify i-lucide:cog shrink-0 text-inverted size-4" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemLabel" class="truncate">System</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">19% </span></li>
+    <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span class="iconify i-lucide:cog shrink-0 text-highlighted size-4" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemLabel" class="truncate">System</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">19% </span></li>
     <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span class="iconify i-lucide:app-window shrink-0 text-error size-4" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemLabel" class="truncate">Apps</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">6% </span></li>
     <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span data-slot="itemLeadingDot" class="shrink-0 rounded-full bg-warning size-2"></span><span data-slot="itemLabel" class="truncate">Documents</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">9% </span></li>
     <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span data-slot="itemLeadingDot" class="shrink-0 rounded-full bg-success size-2"></span><span data-slot="itemLabel" class="truncate">Multimedia</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">33% </span></li>
@@ -372,7 +390,7 @@ exports[`ProgressGroup > renders with size lg correctly 1`] = `
 
 exports[`ProgressGroup > renders with size md correctly 1`] = `
 "<div data-orientation="horizontal" data-slot="root" class="gap-2 w-full flex flex-col">
-  <div data-slot="status" class="flex text-dimmed duration-200 ease-out motion-reduce:transition-none text-sm flex-row items-center justify-end min-w-fit transition-[width]" style="width: 67%;">67% </div>
+  <div data-slot="status" class="flex text-dimmed duration-200 ease-out motion-reduce:transition-none text-sm flex-row items-center justify-end w-(--percent) min-w-fit transition-[width]" style="--percent: 67%;">67% </div>
   <div data-slot="base" class="relative flex overflow-hidden rounded-full bg-accented w-full flex-row h-2">
     <div aria-valuemax="128" aria-valuemin="0" aria-valuenow="24" aria-label="System" role="progressbar" data-state="loading" data-value="24" data-max="128" data-slot="segment" class="duration-200 ease-out motion-reduce:transition-none h-full transition-[width]" style="width: 18.75%;">
       <div data-state="loading" data-value="24" data-max="128" data-slot="indicator" class="size-full bg-inverted"></div>
@@ -388,7 +406,7 @@ exports[`ProgressGroup > renders with size md correctly 1`] = `
     </div>
   </div>
   <ul data-slot="list" class="flex flex-col gap-1 text-sm">
-    <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span class="iconify i-lucide:cog shrink-0 text-inverted size-4" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemLabel" class="truncate">System</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">19% </span></li>
+    <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span class="iconify i-lucide:cog shrink-0 text-highlighted size-4" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemLabel" class="truncate">System</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">19% </span></li>
     <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span class="iconify i-lucide:app-window shrink-0 text-error size-4" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemLabel" class="truncate">Apps</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">6% </span></li>
     <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span data-slot="itemLeadingDot" class="shrink-0 rounded-full bg-warning size-2"></span><span data-slot="itemLabel" class="truncate">Documents</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">9% </span></li>
     <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span data-slot="itemLeadingDot" class="shrink-0 rounded-full bg-success size-2"></span><span data-slot="itemLabel" class="truncate">Multimedia</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">33% </span></li>
@@ -398,7 +416,7 @@ exports[`ProgressGroup > renders with size md correctly 1`] = `
 
 exports[`ProgressGroup > renders with size sm correctly 1`] = `
 "<div data-orientation="horizontal" data-slot="root" class="gap-2 w-full flex flex-col">
-  <div data-slot="status" class="flex text-dimmed duration-200 ease-out motion-reduce:transition-none text-sm flex-row items-center justify-end min-w-fit transition-[width]" style="width: 67%;">67% </div>
+  <div data-slot="status" class="flex text-dimmed duration-200 ease-out motion-reduce:transition-none text-sm flex-row items-center justify-end w-(--percent) min-w-fit transition-[width]" style="--percent: 67%;">67% </div>
   <div data-slot="base" class="relative flex overflow-hidden rounded-full bg-accented w-full flex-row h-1">
     <div aria-valuemax="128" aria-valuemin="0" aria-valuenow="24" aria-label="System" role="progressbar" data-state="loading" data-value="24" data-max="128" data-slot="segment" class="duration-200 ease-out motion-reduce:transition-none h-full transition-[width]" style="width: 18.75%;">
       <div data-state="loading" data-value="24" data-max="128" data-slot="indicator" class="size-full bg-inverted"></div>
@@ -414,7 +432,7 @@ exports[`ProgressGroup > renders with size sm correctly 1`] = `
     </div>
   </div>
   <ul data-slot="list" class="flex flex-col gap-1 text-sm">
-    <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span class="iconify i-lucide:cog shrink-0 text-inverted size-4" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemLabel" class="truncate">System</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">19% </span></li>
+    <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span class="iconify i-lucide:cog shrink-0 text-highlighted size-4" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemLabel" class="truncate">System</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">19% </span></li>
     <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span class="iconify i-lucide:app-window shrink-0 text-error size-4" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemLabel" class="truncate">Apps</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">6% </span></li>
     <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span data-slot="itemLeadingDot" class="shrink-0 rounded-full bg-warning size-2"></span><span data-slot="itemLabel" class="truncate">Documents</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">9% </span></li>
     <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span data-slot="itemLeadingDot" class="shrink-0 rounded-full bg-success size-2"></span><span data-slot="itemLabel" class="truncate">Multimedia</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">33% </span></li>
@@ -424,7 +442,7 @@ exports[`ProgressGroup > renders with size sm correctly 1`] = `
 
 exports[`ProgressGroup > renders with size xl correctly 1`] = `
 "<div data-orientation="horizontal" data-slot="root" class="gap-2 w-full flex flex-col">
-  <div data-slot="status" class="flex text-dimmed duration-200 ease-out motion-reduce:transition-none text-base flex-row items-center justify-end min-w-fit transition-[width]" style="width: 67%;">67% </div>
+  <div data-slot="status" class="flex text-dimmed duration-200 ease-out motion-reduce:transition-none text-base flex-row items-center justify-end w-(--percent) min-w-fit transition-[width]" style="--percent: 67%;">67% </div>
   <div data-slot="base" class="relative flex overflow-hidden rounded-full bg-accented w-full flex-row h-4">
     <div aria-valuemax="128" aria-valuemin="0" aria-valuenow="24" aria-label="System" role="progressbar" data-state="loading" data-value="24" data-max="128" data-slot="segment" class="duration-200 ease-out motion-reduce:transition-none h-full transition-[width]" style="width: 18.75%;">
       <div data-state="loading" data-value="24" data-max="128" data-slot="indicator" class="size-full bg-inverted"></div>
@@ -440,7 +458,7 @@ exports[`ProgressGroup > renders with size xl correctly 1`] = `
     </div>
   </div>
   <ul data-slot="list" class="flex flex-col gap-1 text-base">
-    <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span class="iconify i-lucide:cog shrink-0 text-inverted size-5" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemLabel" class="truncate">System</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">19% </span></li>
+    <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span class="iconify i-lucide:cog shrink-0 text-highlighted size-5" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemLabel" class="truncate">System</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">19% </span></li>
     <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span class="iconify i-lucide:app-window shrink-0 text-error size-5" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemLabel" class="truncate">Apps</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">6% </span></li>
     <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span data-slot="itemLeadingDot" class="shrink-0 rounded-full bg-warning size-2.5"></span><span data-slot="itemLabel" class="truncate">Documents</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">9% </span></li>
     <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span data-slot="itemLeadingDot" class="shrink-0 rounded-full bg-success size-2.5"></span><span data-slot="itemLabel" class="truncate">Multimedia</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">33% </span></li>
@@ -450,7 +468,7 @@ exports[`ProgressGroup > renders with size xl correctly 1`] = `
 
 exports[`ProgressGroup > renders with size xs correctly 1`] = `
 "<div data-orientation="horizontal" data-slot="root" class="gap-2 w-full flex flex-col">
-  <div data-slot="status" class="flex text-dimmed duration-200 ease-out motion-reduce:transition-none text-xs flex-row items-center justify-end min-w-fit transition-[width]" style="width: 67%;">67% </div>
+  <div data-slot="status" class="flex text-dimmed duration-200 ease-out motion-reduce:transition-none text-xs flex-row items-center justify-end w-(--percent) min-w-fit transition-[width]" style="--percent: 67%;">67% </div>
   <div data-slot="base" class="relative flex overflow-hidden rounded-full bg-accented w-full flex-row h-0.5">
     <div aria-valuemax="128" aria-valuemin="0" aria-valuenow="24" aria-label="System" role="progressbar" data-state="loading" data-value="24" data-max="128" data-slot="segment" class="duration-200 ease-out motion-reduce:transition-none h-full transition-[width]" style="width: 18.75%;">
       <div data-state="loading" data-value="24" data-max="128" data-slot="indicator" class="size-full bg-inverted"></div>
@@ -466,7 +484,7 @@ exports[`ProgressGroup > renders with size xs correctly 1`] = `
     </div>
   </div>
   <ul data-slot="list" class="flex flex-col gap-1 text-xs">
-    <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span class="iconify i-lucide:cog shrink-0 text-inverted size-3" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemLabel" class="truncate">System</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">19% </span></li>
+    <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span class="iconify i-lucide:cog shrink-0 text-highlighted size-3" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemLabel" class="truncate">System</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">19% </span></li>
     <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span class="iconify i-lucide:app-window shrink-0 text-error size-3" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemLabel" class="truncate">Apps</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">6% </span></li>
     <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span data-slot="itemLeadingDot" class="shrink-0 rounded-full bg-warning size-1.5"></span><span data-slot="itemLabel" class="truncate">Documents</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">9% </span></li>
     <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span data-slot="itemLeadingDot" class="shrink-0 rounded-full bg-success size-1.5"></span><span data-slot="itemLabel" class="truncate">Multimedia</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">33% </span></li>
@@ -476,7 +494,7 @@ exports[`ProgressGroup > renders with size xs correctly 1`] = `
 
 exports[`ProgressGroup > renders with status correctly 1`] = `
 "<div data-orientation="horizontal" data-slot="root" class="gap-2 w-full flex flex-col">
-  <div data-slot="status" class="flex text-dimmed duration-200 ease-out motion-reduce:transition-none text-sm flex-row items-center justify-end min-w-fit transition-[width]" style="width: 67%;">67% </div>
+  <div data-slot="status" class="flex text-dimmed duration-200 ease-out motion-reduce:transition-none text-sm flex-row items-center justify-end w-(--percent) min-w-fit transition-[width]" style="--percent: 67%;">67% </div>
   <div data-slot="base" class="relative flex overflow-hidden rounded-full bg-accented w-full flex-row h-2">
     <div aria-valuemax="128" aria-valuemin="0" aria-valuenow="24" aria-label="System" role="progressbar" data-state="loading" data-value="24" data-max="128" data-slot="segment" class="duration-200 ease-out motion-reduce:transition-none h-full transition-[width]" style="width: 18.75%;">
       <div data-state="loading" data-value="24" data-max="128" data-slot="indicator" class="size-full bg-inverted"></div>
@@ -492,7 +510,7 @@ exports[`ProgressGroup > renders with status correctly 1`] = `
     </div>
   </div>
   <ul data-slot="list" class="flex flex-col gap-1 text-sm">
-    <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span class="iconify i-lucide:cog shrink-0 text-inverted size-4" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemLabel" class="truncate">System</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">19% </span></li>
+    <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span class="iconify i-lucide:cog shrink-0 text-highlighted size-4" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemLabel" class="truncate">System</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">19% </span></li>
     <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span class="iconify i-lucide:app-window shrink-0 text-error size-4" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemLabel" class="truncate">Apps</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">6% </span></li>
     <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span data-slot="itemLeadingDot" class="shrink-0 rounded-full bg-warning size-2"></span><span data-slot="itemLabel" class="truncate">Documents</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">9% </span></li>
     <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span data-slot="itemLeadingDot" class="shrink-0 rounded-full bg-success size-2"></span><span data-slot="itemLabel" class="truncate">Multimedia</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">33% </span></li>
@@ -502,7 +520,7 @@ exports[`ProgressGroup > renders with status correctly 1`] = `
 
 exports[`ProgressGroup > renders with status slot correctly 1`] = `
 "<div data-orientation="horizontal" data-slot="root" class="gap-2 w-full flex flex-col">
-  <div data-slot="status" class="flex text-dimmed duration-200 ease-out motion-reduce:transition-none text-sm flex-row items-center justify-end min-w-fit transition-[width]" style="width: 67%;">Status slot</div>
+  <div data-slot="status" class="flex text-dimmed duration-200 ease-out motion-reduce:transition-none text-sm flex-row items-center justify-end w-(--percent) min-w-fit transition-[width]" style="--percent: 67%;">Status slot</div>
   <div data-slot="base" class="relative flex overflow-hidden rounded-full bg-accented w-full flex-row h-2">
     <div aria-valuemax="128" aria-valuemin="0" aria-valuenow="24" aria-label="System" role="progressbar" data-state="loading" data-value="24" data-max="128" data-slot="segment" class="duration-200 ease-out motion-reduce:transition-none h-full transition-[width]" style="width: 18.75%;">
       <div data-state="loading" data-value="24" data-max="128" data-slot="indicator" class="size-full bg-inverted"></div>
@@ -518,7 +536,7 @@ exports[`ProgressGroup > renders with status slot correctly 1`] = `
     </div>
   </div>
   <ul data-slot="list" class="flex flex-col gap-1 text-sm">
-    <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span class="iconify i-lucide:cog shrink-0 text-inverted size-4" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemLabel" class="truncate">System</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">19% </span></li>
+    <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span class="iconify i-lucide:cog shrink-0 text-highlighted size-4" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemLabel" class="truncate">System</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">19% </span></li>
     <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span class="iconify i-lucide:app-window shrink-0 text-error size-4" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemLabel" class="truncate">Apps</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">6% </span></li>
     <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span data-slot="itemLeadingDot" class="shrink-0 rounded-full bg-warning size-2"></span><span data-slot="itemLabel" class="truncate">Documents</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">9% </span></li>
     <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span data-slot="itemLeadingDot" class="shrink-0 rounded-full bg-success size-2"></span><span data-slot="itemLabel" class="truncate">Multimedia</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">33% </span></li>
@@ -544,7 +562,7 @@ exports[`ProgressGroup > renders with ui correctly 1`] = `
     </div>
   </div>
   <ul data-slot="list" class="flex flex-col gap-1 text-sm">
-    <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span class="iconify i-lucide:cog shrink-0 text-inverted size-4" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemLabel" class="truncate">System</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">19% </span></li>
+    <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span class="iconify i-lucide:cog shrink-0 text-highlighted size-4" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemLabel" class="truncate">System</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">19% </span></li>
     <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span class="iconify i-lucide:app-window shrink-0 text-error size-4" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemLabel" class="truncate">Apps</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">6% </span></li>
     <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span data-slot="itemLeadingDot" class="shrink-0 rounded-full bg-warning size-2"></span><span data-slot="itemLabel" class="truncate">Documents</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">9% </span></li>
     <li data-slot="item" class="flex items-center gap-1.5 min-w-0"><span data-slot="itemLeadingDot" class="shrink-0 rounded-full bg-success size-2"></span><span data-slot="itemLabel" class="truncate">Multimedia</span><span data-slot="itemTrailing" class="ms-auto shrink-0 text-dimmed">33% </span></li>
@@ -572,7 +590,7 @@ exports[`ProgressGroup > renders with value out of bounds correctly 1`] = `
 
 exports[`ProgressGroup > renders with values above max correctly 1`] = `
 "<div data-orientation="horizontal" data-slot="root" class="gap-2 w-full flex flex-col">
-  <div data-slot="status" class="flex text-dimmed duration-200 ease-out motion-reduce:transition-none text-sm flex-row items-center justify-end min-w-fit transition-[width]" style="width: 100%;">100% </div>
+  <div data-slot="status" class="flex text-dimmed duration-200 ease-out motion-reduce:transition-none text-sm flex-row items-center justify-end w-(--percent) min-w-fit transition-[width]" style="--percent: 100%;">100% </div>
   <div data-slot="base" class="relative flex overflow-hidden rounded-full bg-accented w-full flex-row h-2">
     <div aria-valuemax="128" aria-valuemin="0" aria-valuenow="96" aria-label="System" role="progressbar" data-state="loading" data-value="96" data-max="128" data-slot="segment" class="duration-200 ease-out motion-reduce:transition-none h-full transition-[width]" style="width: 75%;">
       <div data-state="loading" data-value="96" data-max="128" data-slot="indicator" class="size-full bg-primary"></div>

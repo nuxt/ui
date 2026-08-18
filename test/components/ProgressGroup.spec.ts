@@ -31,6 +31,7 @@ describe('ProgressGroup', () => {
     ...sizes.map((size: string) => [`with size ${size}`, { props: { ...props, size, status: true } }]),
     ...orientations.map((orientation: string) => [`with orientation ${orientation}`, { props: { ...props, orientation, status: true } }]),
     ['with color', { props: { items: [{ label: 'System', value: 24 }, { label: 'Apps', value: 8 }], max: 128, color: 'neutral' } }],
+    ['with custom color', { props: { items: [{ label: 'System', value: 24, color: '#8b5cf6' }, { label: 'Apps', value: 8 }], max: 128, color: 'var(--color-green-400)' } }],
     ['with as', { props: { ...props, as: 'section' } }],
     ['with class', { props: { ...props, class: 'w-48' } }],
     ['with ui', { props: { ...props, ui: { base: 'bg-default' } } }],

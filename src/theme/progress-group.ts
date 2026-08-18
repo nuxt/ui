@@ -23,7 +23,7 @@ export default (options: Required<ModuleOptions>) => ({
       }])),
       neutral: {
         indicator: 'bg-inverted',
-        itemLeadingIcon: 'text-inverted',
+        itemLeadingIcon: 'text-highlighted',
         itemLeadingDot: 'bg-inverted'
       }
     },
@@ -76,13 +76,13 @@ export default (options: Required<ModuleOptions>) => ({
         root: 'w-full flex flex-col',
         base: 'w-full flex-row',
         segment: 'h-full transition-[width]',
-        status: 'flex-row items-center justify-end min-w-fit transition-[width]'
+        status: 'flex-row items-center justify-end w-(--percent) min-w-fit transition-[width]'
       },
       vertical: {
         root: 'h-full flex flex-row',
         base: 'h-full flex-col-reverse',
         segment: 'w-full transition-[height]',
-        status: 'flex-col justify-end min-h-fit transition-[height]'
+        status: 'flex-col justify-end h-(--percent) min-h-fit transition-[height]'
       }
     }
   },

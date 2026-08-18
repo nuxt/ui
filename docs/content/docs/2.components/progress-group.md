@@ -18,13 +18,14 @@ links:
 
 ## Usage
 
-Use the `items` prop to split the bar into segments. Each segment takes up its share of [`max`](#max) and gets an entry in the list below the bar.
+Use the ProgressGroup component to display multiple values as segments of a single progress bar.
 
 ::component-code
 ---
 collapse: true
 ignore:
   - items
+  - max
   - class
 external:
   - items
@@ -60,7 +61,7 @@ Use the `items` prop as an array of objects with the following properties:
 - `label?: string`{lang="ts-type"}
 - `icon?: string`{lang="ts-type"}
 - `value?: number`{lang="ts-type"}
-- `color?: "primary" | "secondary" | "success" | "info" | "warning" | "error" | "neutral"`{lang="ts-type"}
+- `color?: "primary" | "secondary" | "success" | "info" | "warning" | "error" | "neutral" | (string & {})`{lang="ts-type"}
 - `class?: any`{lang="ts-type"}
 - `ui?: { segment?: ClassNameValue, indicator?: ClassNameValue, item?: ClassNameValue, itemLeadingIcon?: ClassNameValue, itemLeadingDot?: ClassNameValue, itemLabel?: ClassNameValue, itemTrailing?: ClassNameValue }`{lang="ts-type"}
 
@@ -124,6 +125,8 @@ props:
 
 Use the `status` prop to display the summed value above the bar.
 
+The status tracks the end of the bar, use `:ui="{ status: 'w-full' }"` to make it span the full width instead.
+
 ::component-code
 ---
 collapse: true
@@ -154,6 +157,8 @@ props:
 ### Color
 
 Use the `color` prop to change the color of every segment that doesn't set its own.
+
+Both this prop and each item's `color` accept any CSS color value, which is handy for palettes outside the theme.
 
 ::component-code
 ---
@@ -233,6 +238,12 @@ props:
 ::
 
 ## Examples
+
+### With custom colors
+
+Give each item a CSS color to build a breakdown outside the theme palette.
+
+:component-example{name="progress-group-custom-color-example"}
 
 ### With status slot
 

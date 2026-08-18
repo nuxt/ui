@@ -18,9 +18,10 @@ export interface ProgressGroupItem {
   /** The part of `max` this segment takes up. */
   value?: number
   /**
+   * Any theme color, or any CSS color value for palettes outside the theme.
    * @defaultValue 'primary'
    */
-  color?: ProgressGroup['variants']['color']
+  color?: ProgressGroup['variants']['color'] | (string & {})
   slot?: string
   class?: any
   ui?: Pick<ProgressGroup['slots'], 'segment' | 'indicator' | 'item' | 'itemLeadingIcon' | 'itemLeadingDot' | 'itemLabel' | 'itemTrailing'>
@@ -46,9 +47,10 @@ export interface ProgressGroupProps<T extends ProgressGroupItem = ProgressGroupI
    */
   size?: ProgressGroup['variants']['size']
   /**
+   * Any theme color, or any CSS color value for palettes outside the theme.
    * @defaultValue 'primary'
    */
-  color?: ProgressGroup['variants']['color']
+  color?: ProgressGroup['variants']['color'] | (string & {})
   /**
    * The orientation of the progress bar.
    * @defaultValue 'horizontal'
@@ -90,7 +92,7 @@ const appConfig = useAppConfig() as ProgressGroup['AppConfig']
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.progressGroup || {}) })({
   size: props.size,
-  color: props.color,
+  color: props.color as ProgressGroup['variants']['color'],
   orientation: props.orientation
 }))
 
@@ -111,11 +113,17 @@ const percents = computed(() => values.value.map(value => (value / max.value) * 
 
 const percent = computed(() => Math.min(100, Math.round(percents.value.reduce((total, value) => total + value, 0))))
 
-const statusStyle = computed(() => {
-  const value = `${percent.value}%`
+// The theme reads the size off `--percent` so `ui.status` can override it, an inline
+// `width` would win over the class.
+const statusStyle = computed(() => ({ '--percent': `${percent.value}%` }))
 
-  return props.orientation === 'vertical' ? { height: value } : { width: value }
-})
+// `tv` skips a color it doesn't know, so a value outside the theme palette adds no class
+// and is applied inline instead.
+const themeColors = computed(() => Object.keys({ ...theme.variants?.color, ...appConfig.ui?.progressGroup?.variants?.color }))
+
+const itemColors = computed(() => (props.items ?? []).map(item => (item.color || props.color) as ProgressGroup['variants']['color']))
+
+const customColors = computed(() => itemColors.value.map(color => color && !themeColors.value.includes(color) ? color : undefined))
 
 const hasList = computed(() => (props.items ?? []).some(item => item.label || item.icon || item.slot)
   || !!slots.item || !!slots['item-leading'] || !!slots['item-label'] || !!slots['item-trailing'])
@@ -153,7 +161,7 @@ function valueLabel(item: T) {
         :class="ui.segment({ class: [props.ui?.segment, item.ui?.segment, item.class] })"
         :style="segmentStyle(index)"
       >
-        <ProgressIndicator data-slot="indicator" :class="ui.indicator({ color: item.color || props.color, class: [props.ui?.indicator, item.ui?.indicator] })" />
+        <ProgressIndicator data-slot="indicator" :class="ui.indicator({ color: itemColors[index], class: [props.ui?.indicator, item.ui?.indicator] })" :style="customColors[index] ? { backgroundColor: customColors[index] } : undefined" />
       </ProgressRoot>
     </div>
 
@@ -161,8 +169,8 @@ function valueLabel(item: T) {
       <li v-for="(item, index) in props.items" :key="index" data-slot="item" :class="ui.item({ class: [props.ui?.item, item.ui?.item] })">
         <slot :name="((item.slot || 'item') as keyof ProgressGroupSlots<T>)" :item="(item as Extract<T, { slot: string; }>)" :index="index" :percent="percents[index] ?? 0">
           <slot :name="((item.slot ? `${item.slot}-leading` : 'item-leading') as keyof ProgressGroupSlots<T>)" :item="(item as Extract<T, { slot: string; }>)" :index="index" :percent="percents[index] ?? 0">
-            <UIcon v-if="item.icon" :name="item.icon" data-slot="itemLeadingIcon" :class="ui.itemLeadingIcon({ color: item.color || props.color, class: [props.ui?.itemLeadingIcon, item.ui?.itemLeadingIcon] })" />
-            <span v-else data-slot="itemLeadingDot" :class="ui.itemLeadingDot({ color: item.color || props.color, class: [props.ui?.itemLeadingDot, item.ui?.itemLeadingDot] })" />
+            <UIcon v-if="item.icon" :name="item.icon" data-slot="itemLeadingIcon" :class="ui.itemLeadingIcon({ color: itemColors[index], class: [props.ui?.itemLeadingIcon, item.ui?.itemLeadingIcon] })" :style="customColors[index] ? { color: customColors[index] } : undefined" />
+            <span v-else data-slot="itemLeadingDot" :class="ui.itemLeadingDot({ color: itemColors[index], class: [props.ui?.itemLeadingDot, item.ui?.itemLeadingDot] })" :style="customColors[index] ? { backgroundColor: customColors[index] } : undefined" />
           </slot>
 
           <span v-if="item.label || !!slots[(item.slot ? `${item.slot}-label` : 'item-label') as keyof ProgressGroupSlots<T>]" data-slot="itemLabel" :class="ui.itemLabel({ class: [props.ui?.itemLabel, item.ui?.itemLabel] })">

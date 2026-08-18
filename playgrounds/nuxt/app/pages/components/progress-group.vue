@@ -26,6 +26,11 @@ const plain = ref<ProgressGroupItem[]>([
   { label: 'Write', value: 18 }
 ])
 
+const custom = ref<ProgressGroupItem[]>([
+  { label: 'Read', value: 42, color: 'var(--color-violet-400)' },
+  { label: 'Write', value: 18, color: '#22c55e' }
+])
+
 function shuffle() {
   items.value = items.value.map(item => ({ ...item, value: Math.round(Math.random() * 32) }))
 }
@@ -47,5 +52,6 @@ function shuffle() {
   >
     <UProgressGroup :items="items" :max="128" status :orientation="orientation" v-bind="props" />
     <UProgressGroup :items="plain" :orientation="orientation" v-bind="props" />
+    <UProgressGroup :items="custom" :orientation="orientation" v-bind="props" />
   </Matrix>
 </template>
