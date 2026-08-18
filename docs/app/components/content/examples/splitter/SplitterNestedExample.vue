@@ -22,7 +22,7 @@ const nested: SplitterItem[] = [
       </template>
 
       <template #right>
-        <USplitter id="splitter-nested-example-inner" orientation="vertical" :items="nested" class="size-full">
+        <USplitter id="splitter-nested-example-inner" orientation="vertical" :items="nested">
           <template #top>
             Top
           </template>

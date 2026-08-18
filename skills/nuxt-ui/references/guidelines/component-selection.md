@@ -30,7 +30,6 @@ Decision matrices for choosing the right component. When in doubt, use the MCP `
 | Search + keyboard-driven navigation | `UCommandPalette` | Power users, global search |
 | Contextual actions on a trigger element | `UDropdownMenu` | Right-click menus, action buttons |
 | Step-by-step process | `UStepper` | Multi-step forms, wizards |
-| Resizable side-by-side panes | `USplitter` | IDE-style layouts, resizable sidebars |
 
 ### Rules
 - Use `UNavigationMenu` with `orientation="vertical"` in sidebars, default horizontal in headers
@@ -115,6 +114,7 @@ When rendering Markdown (for instance with Comark), **prefer Prose components** 
 | Centered content wrapper | `UContainer` | Max-width container |
 | Collapsible section | `UCollapsible` | Animated expand/collapse |
 | Accordion (multiple collapsibles) | `UAccordion` | FAQ, grouped collapsible content |
+| Resizable side-by-side panes | `USplitter` | IDE-style layouts, resizable sidebars |
 
 ### Rules
 - Don't overuse `UCard` — plain content with spacing is often better than wrapping everything in cards

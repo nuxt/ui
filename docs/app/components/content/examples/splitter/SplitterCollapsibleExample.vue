@@ -3,7 +3,7 @@ import type { SplitterItem } from '@nuxt/ui'
 
 const items: SplitterItem[] = [
   { slot: 'sidebar', sizeUnit: 'px', minSize: 150, defaultSize: 250, collapsible: true, collapsedSize: 48, class: 'bg-elevated/50 border border-default rounded-xl' },
-  { slot: 'main', sizeUnit: 'px', defaultSize: 750, class: 'bg-elevated/50 border border-default rounded-xl items-center justify-center text-muted font-medium' }
+  { slot: 'main', class: 'bg-elevated/50 border border-default rounded-xl items-center justify-center text-muted font-medium' }
 ]
 </script>
 

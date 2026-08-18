@@ -22,6 +22,10 @@ name: 'splitter-example'
 ---
 ::
 
+::note
+The Splitter fills the height of its container, so make sure a parent element defines one.
+::
+
 ### Items
 
 Use the `items` prop as an array of objects with the following properties:
@@ -38,10 +42,10 @@ Use the `items` prop as an array of objects with the following properties:
 - `class?: any`{lang="ts-type"}
 - `ui?: { panel?: ClassNameValue }`{lang="ts-type"}
 
-Use the `slot` key to fill the content of a panel and the `class` key to style it. Sizes are percentages by default, set `sizeUnit: 'px'` on an item for pixel values.
+Use the `slot` key to fill the content of a panel and the `class` key to style it. Items without a `slot` key fall back to a `panel-{index}` slot. Sizes are percentages by default, set `sizeUnit: 'px'` on an item for pixel values.
 
 ::caution
-When rendering on the server, set the `id` prop and give every item a `defaultSize`. Ids are generated on the client otherwise and can differ from the server which breaks the layout on hydration, and panels without a `defaultSize` are laid out incorrectly until then.
+When rendering on the server, set the `id` prop and give `defaultSize` to all items or to none. Ids are generated automatically otherwise and the server and the client can disagree, which breaks the layout on hydration. An item without a `defaultSize` falls back to an equal share on the server, so mixing the two makes panels jump once hydrated. Pixel sizes are measured on the client and always shift a little.
 ::
 
 ::component-code
@@ -60,14 +64,12 @@ props:
   id: 'splitter-items'
   items:
     - slot: 'sidebar'
-      sizeUnit: 'px'
-      minSize: 150
-      maxSize: 400
-      defaultSize: 250
+      minSize: 15
+      maxSize: 40
+      defaultSize: 25
       class: 'bg-elevated/50 border border-default rounded-xl items-center justify-center text-muted font-medium'
     - slot: 'main'
-      sizeUnit: 'px'
-      defaultSize: 750
+      defaultSize: 75
       class: 'bg-elevated/50 border border-default rounded-xl items-center justify-center text-muted font-medium'
 slots:
   sidebar: Sidebar
@@ -143,7 +145,7 @@ name: 'splitter-nested-example'
 
 ### With custom handle
 
-The handle is invisible by default. Use the `ui` prop to restyle it, for example as a visible divider for flush layouts.
+The handle is invisible by default. Use the `ui` prop to restyle it, for example as a visible divider for flush layouts, and the `resize-handle` slot to render content inside it like a grip.
 
 ::component-example
 ---
@@ -158,7 +160,7 @@ Provide an `auto-save-id` to persist the layout to `localStorage` and restore it
 
 ```vue
 <template>
-  <USplitter auto-save-id="my-layout" :items="items">
+  <USplitter id="my-layout" auto-save-id="my-layout" :items="items">
     <!-- ... -->
   </USplitter>
 </template>
