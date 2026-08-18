@@ -125,13 +125,15 @@ props:
 
 Use the `color` prop to change the color of the Progress.
 
-This prop also accepts any CSS color value for palettes outside the theme. :badge{label="Soon" class="align-text-top"}
-
 ::component-code
 ---
 props:
   color: neutral
 ---
+::
+
+::tip
+This prop also accepts any CSS color value for palettes outside the theme.
 ::
 
 ### Size
