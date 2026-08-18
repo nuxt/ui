@@ -8,7 +8,7 @@ const items: ProgressGroupItem[] = [
   { label: 'Tool definitions', value: 18.4, color: 'var(--color-violet-400)' },
   { label: 'Rules', value: 12.8, color: 'var(--color-green-400)' },
   { label: 'Skills', value: 7.1, color: 'var(--color-amber-400)' },
-  { label: 'MCP & dynamic tools', value: 17.1, color: 'var(--color-pink-300)' },
+  { label: 'MCP & dynamic tools', value: 17.1, color: 'var(--color-rose-400)' },
   { label: 'Subagent definitions', value: 5.5, color: 'var(--color-sky-400)' },
   { label: 'Conversation', value: 24.6, color: 'var(--color-orange-400)' }
 ]
