@@ -27,8 +27,8 @@ export interface SplitterProps<T extends SplitterItem = SplitterItem> extends Pi
    */
   as?: any
   /**
-   * A unique id for the group, used internally to match panels and handles. It is not rendered as an `id` attribute.
-   * Set it when rendering on the server, an auto-generated id can differ between the server and the client and break the layout on hydration.
+   * A unique id for the group, also used to derive the ids of its panels and handles.
+   * Set it when rendering on the server, auto-generated ids can differ between the server and the client and break resizing on hydration.
    */
   id?: string
   /**
@@ -106,6 +106,16 @@ onBeforeUpdate(() => {
   panelsRef.value.length = 0
 })
 
+// Panels and handles are matched through their ids, so they have to be derived from the
+// group id to stay identical between the server and the client.
+function getPanelId(item: T, index: number) {
+  return item.id ?? (props.id ? `${props.id}-panel-${index}` : undefined)
+}
+
+function getHandleId(index: number) {
+  return props.id ? `${props.id}-handle-${index}` : undefined
+}
+
 function setPanelRef(index: number, el: Element | ComponentPublicInstance | null) {
   if (el) {
     // @ts-expect-error - ComponentPublicInstance type mismatch in Nuxt module augmentation
@@ -122,7 +132,7 @@ defineExpose({
   <SplitterGroup v-bind="rootProps" :direction="props.orientation!" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })" @layout="emits('layout', $event)">
     <template v-for="(item, index) in props.items" :key="item.id ?? index">
       <SplitterPanel
-        :id="item.id"
+        :id="getPanelId(item, index)"
         :ref="(el) => setPanelRef(index, el)"
         v-slot="{ isCollapsed, collapse, expand, resize }"
         :default-size="item.defaultSize"
@@ -152,6 +162,7 @@ defineExpose({
 
       <SplitterResizeHandle
         v-if="index < props.items!.length - 1"
+        :id="getHandleId(index)"
         :disabled="props.disabled"
         :hit-area-margins="props.hitAreaMargins"
         data-slot="handle"
