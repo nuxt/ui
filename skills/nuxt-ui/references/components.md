@@ -12,6 +12,7 @@ Quick-reference index of all 125+ components. For full API docs (props, slots, e
 | `UFooterColumns` | Multi-column footer with link groups |
 | `UMain` | Main content area |
 | `UContainer` | Centered max-width container |
+| `USplitter` | Resizable panels separated by draggable handles |
 | `ULink` | Enhanced link — NuxtLink/RouterLink with active states |
 
 ## Element
