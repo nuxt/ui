@@ -134,6 +134,20 @@ describe('NavigationMenu', () => {
     expect(wrapper.find('[data-slot="link"]').attributes('data-state')).toBe('open')
   })
 
+  it('keeps the trailing accordion trigger for a vertical item with `to`', async () => {
+    const wrapper = await mountSuspended(NavigationMenu, {
+      props: {
+        orientation: 'vertical',
+        items: [{ label: 'Group', to: '/group', children: [{ label: 'Child', to: '/child' }] }]
+      }
+    })
+
+    expect(wrapper.find('[data-slot="link"]').element.tagName).toBe('A')
+
+    await wrapper.find('[data-slot="linkTrailing"]').trigger('click')
+    expect(wrapper.find('[data-slot="content"]').attributes('data-state')).toBe('open')
+  })
+
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(NavigationMenu, {
       props: {
