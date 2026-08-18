@@ -81,6 +81,7 @@ import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 
 const _props = withDefaults(defineProps<ProgressGroupProps<T>>(), {
+  max: 100,
   orientation: 'horizontal'
 })
 const slots = defineSlots<ProgressGroupSlots<T>>()
@@ -100,7 +101,7 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.progressGroup ||
 // number, so resolve it here to keep the segment widths and the console quiet.
 // eslint-disable-next-line vue/no-dupe-keys
 const max = computed(() => {
-  const value = Number(props.max ?? 100)
+  const value = Number(props.max)
 
   return Number.isFinite(value) && value > 0 ? value : 100
 })
