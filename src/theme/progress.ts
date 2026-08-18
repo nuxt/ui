@@ -23,7 +23,7 @@ export default (options: Required<ModuleOptions>) => ({
       }])),
       neutral: {
         indicator: 'bg-inverted',
-        steps: 'text-inverted'
+        steps: 'text-highlighted'
       }
     },
     size: {
