@@ -100,9 +100,13 @@ export const presets: ThemePreset[] = [{
         '--ui-text-toned': { light: 900 },
         '--ui-text': { light: 900 },
         '--ui-text-highlighted': { light: 950, dark: 100 },
-        '--ui-border': { light: 950, dark: 950 },
-        '--ui-border-muted': { light: 950, dark: 950 },
-        '--ui-border-accented': { light: 950, dark: 950 },
+        // Light keeps the ink hairline; dark has to run the other way, a
+        // border below the surface's own lightness just reads as a seam.
+        '--ui-border': { light: 950, dark: 600 },
+        // dark is left at the library's own neutral-700, restating it would
+        // only add a line the importer then has to recognise as generated
+        '--ui-border-muted': { light: 400 },
+        '--ui-border-accented': { light: 950, dark: 500 },
         '--ui-border-inverted': { light: 500, dark: 50 }
       }
     }
@@ -154,8 +158,6 @@ export const presets: ThemePreset[] = [{
         '--ui-bg-muted': { light: 100 },
         '--ui-bg-elevated': { light: 200 },
         '--ui-bg-accented': { light: 300 },
-        '--ui-border': { dark: 950 },
-        '--ui-border-accented': { dark: 950 },
         '--ui-success': { light: 600, dark: 300 },
         '--ui-error': { light: 600, dark: 300 }
       }
@@ -255,8 +257,9 @@ export const presets: ThemePreset[] = [{
         '--ui-primary': 'var(--ui-color-primary-500)',
         '--ui-bg-inverted': 'var(--ui-color-neutral-50)',
         '--ui-text-highlighted': 'var(--ui-color-neutral-50)',
-        '--ui-border': 'black',
-        '--ui-border-accented': 'black',
+        // the ink inverts in dark: an arcade outline is a bright edge there
+        '--ui-border': 'var(--ui-color-neutral-200)',
+        '--ui-border-accented': 'var(--ui-color-neutral-100)',
         '--ui-border-inverted': 'var(--ui-color-neutral-50)'
       }
     },
