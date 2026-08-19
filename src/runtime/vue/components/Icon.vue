@@ -33,17 +33,17 @@ const size = computed(() => props.size || appConfig.icon?.size)
 
 const customize = computed(() => resolveCustomizeFn(props.customize, appConfig.icon?.customize))
 
-const iconName = computed(() => typeof props.name === 'string' ? props.name.replace(/^i-/, '') : '')
+const icon = computed(() => typeof props.name === 'string' ? props.name.replace(/^i-/, '') : '')
 
 // `@iconify/vue` only resolves icon data in `setup()` when `ssr` is set. Only opt in for icons
 // already in memory (bundled) so the others keep loading from the API on mount.
-const ssr = computed(() => iconLoaded(iconName.value))
+const ssr = computed(() => iconLoaded(icon.value))
 </script>
 
 <template>
   <IconifyIcon
     v-if="typeof name === 'string'"
-    :icon="iconName"
+    :icon="icon"
     :mode="mode"
     :width="size"
     :height="size"
