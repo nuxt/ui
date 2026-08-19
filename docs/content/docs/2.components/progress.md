@@ -27,6 +27,10 @@ props:
 ---
 ::
 
+::note
+Use the [`ProgressGroup`](/docs/components/progress-group) component to split a single bar into multiple segments that add up to a total.
+::
+
 ### Variant :badge{label="Soon" class="align-text-top"}
 
 Use the `variant` prop to change the style of the Progress. Defaults to `linear`.
@@ -120,6 +124,10 @@ props:
 ---
 ::
 
+::tip
+With the `linear` variant, the status tracks the end of the bar, use `:ui="{ status: 'w-full' }"` to make it span the full width instead.
+::
+
 Use the `#status` slot to customize the content, it receives the current `percent` value.
 
 ```vue
@@ -198,6 +206,10 @@ props:
   color: neutral
   variant: linear
 ---
+::
+
+::tip
+This prop also accepts any CSS color value for palettes outside the theme.
 ::
 
 ### Size

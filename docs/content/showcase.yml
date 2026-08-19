@@ -71,8 +71,12 @@ items:
     url: https://thuprai.com/
   - name: TresJS
     url: https://tresjs.org/
+  - name: Triad Trainer
+    url: https://triadtrainer.vercel.app/
   - name: Uneed
     url: https://uneed.best/
+  - name: Volta
+    url: https://volta.net/
   - name: Wiredash
     url: https://wiredash.com/
   - name: Zielgestalt
