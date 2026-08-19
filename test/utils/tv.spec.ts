@@ -21,6 +21,8 @@ describe('tv class replace', () => {
   }
 
   const build = () => tvt({ extend: tvt(theme) })({ color: 'primary', size: 'md' })
+  // Mirrors a component config with `app.config.ui` slot overrides spread in.
+  const buildWith = (slots: any) => tvt({ extend: theme, slots })({ color: 'primary', size: 'md' })
 
   it('keeps merging plain string classes (no regression)', () => {
     const ui = build()
@@ -65,15 +67,50 @@ describe('tv class replace', () => {
   })
 
   it('applies a construction-time replacer from `app.config.ui` slots', () => {
-    const ui = tvt({ extend: tvt(theme), slots: { label: () => 'text-xl' } })({ color: 'primary', size: 'md' })
+    const ui = buildWith({ label: () => 'text-xl' })
     expect(ui.label()).toBe('text-xl')
     // A sibling slot keeps its defaults.
     expect(ui.base()).toContain('inline-flex')
   })
 
+  it('keeps the variants merging on top of a construction-time replacer', () => {
+    const base = buildWith({ base: () => 'block w-full' }).base()
+    // The slot's own theme classes are gone…
+    expect(base).not.toContain('inline-flex')
+    expect(base).not.toContain('rounded-md')
+    expect(base).toContain('block')
+    expect(base).toContain('w-full')
+    // …but variants and compound variants still apply (#6800).
+    expect(base).toContain('bg-primary')
+    expect(base).toContain('px-2.5')
+    expect(base).toContain('gap-1.5')
+  })
+
+  it('passes only the slot own classes to a construction-time replacer', () => {
+    let received: string | undefined
+    buildWith({ base: (defaults: string) => {
+      received = defaults
+      return 'whatever'
+    } }).base()
+    expect(received).toBe('inline-flex rounded-md text-sm')
+  })
+
+  it('keeps a construction-time replacer merging classes passed at call time', () => {
+    expect(buildWith({ label: () => 'text-xl' }).label({ class: 'font-bold' })).toBe('text-xl font-bold')
+  })
+
+  it('resolves a construction-time replacer when `extend` is a tv result', () => {
+    // Components pass the generated theme object, but `extend` also accepts a
+    // `tv()` return, which exposes the same `slots` / `base` properties.
+    const ui = tvt({ extend: tvt(theme), slots: { base: () => 'block' } })({ color: 'primary', size: 'md' })
+    const base = ui.base()
+    expect(base).not.toContain('inline-flex')
+    expect(base).toContain('block')
+    expect(base).toContain('bg-primary')
+  })
+
   it('lets a call-time `:ui` replacer win over an `app.config.ui` one', () => {
-    const ui = tvt({ extend: tvt(theme), slots: { label: () => 'from-config' } })({ color: 'primary', size: 'md' })
-    expect(ui.label({ class: () => 'from-ui' })).toBe('from-ui')
+    expect(buildWith({ label: () => 'from-config' }).label({ class: () => 'from-ui' })).toBe('from-ui')
   })
 
   it('replaces the base slot through a function forwarded in the class array', () => {

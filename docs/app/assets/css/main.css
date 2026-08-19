@@ -1,6 +1,11 @@
-@import "tailwindcss" theme(static) source("../../../..");
+@import "tailwindcss" theme(static) source(none);
 @import "@nuxt/ui";
 
+/* Scoped to what the docs render: the site and the library source, which `--uiDev`
+   resolves components and theme from. A repo-root source also put `test`,
+   `playgrounds` and `skills` on the CSS watcher. */
+@source "../../..";
+@source "../../../../src";
 @source "../../../content/**/*";
 
 @theme static {

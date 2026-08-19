@@ -1,5 +1,12 @@
-@import "tailwindcss" theme(static) source("../../../../..");
+@import "tailwindcss" theme(static) source(none);
 @import "@nuxt/ui";
+
+/* Scoped to this playground, the Nuxt playground's `app` that `vite.config.ts`
+   borrows components and composables from, and the library source, which
+   `--uiDev` resolves components and theme from. */
+@source "../../..";
+@source "../../../../nuxt/app";
+@source "../../../../../src";
 
 @theme static {
   --font-sans: 'Public Sans', sans-serif;
