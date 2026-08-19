@@ -48,9 +48,6 @@ export function generateCSS(doc: ThemeDoc): string {
       themeLines.push(`  --font-weight-${step}: ${weight};`)
     }
   }
-  if (doc.spacing !== undefined && doc.spacing !== THEME_DEFAULTS.spacing) {
-    themeLines.push(`  --spacing: ${doc.spacing}rem;`)
-  }
   if (themeLines.length) {
     lines.push('', '@theme {', ...themeLines, '}')
   }
@@ -210,7 +207,6 @@ export function docToSettings(doc: ThemeDoc): Record<string, any> {
   if (doc.blackAsPrimary) settings.blackAsPrimary = true
   if (doc.radius !== undefined) settings.radius = doc.radius
   if (doc.fontSize !== undefined) settings.fontSize = doc.fontSize
-  if (doc.spacing !== undefined) settings.spacing = doc.spacing
   if (doc.font?.sans) settings.fontSans = doc.font.sans
   if (doc.font?.serif) settings.fontSerif = doc.font.serif
   if (doc.font?.mono) settings.fontMono = doc.font.mono
@@ -265,7 +261,6 @@ const SHADE_SET = new Set<number>(SHADES_ALL)
 interface ParsedCSS {
   palettes: Record<string, Partial<Record<Shade, string>>>
   font?: string
-  spacing?: number
   fontSize?: number
   radius?: number
   fontWeights?: { normal?: number, medium?: number, semibold?: number, bold?: number }
@@ -355,10 +350,6 @@ function parseDeclaration(result: ParsedCSS, selector: string, prop: string, val
       result.fontWeights = { ...result.fontWeights, [weightStep[1]!]: Number(value) }
       return true
     }
-    if (prop === '--spacing' && value.endsWith('rem')) {
-      result.spacing = Number.parseFloat(value)
-      return true
-    }
     return false
   }
 
@@ -415,10 +406,6 @@ function parseDeclaration(result: ParsedCSS, selector: string, prop: string, val
     }
     if (prop === '--ui-primary' && value === 'black') {
       result.blackAsPrimary = true
-      return true
-    }
-    if (prop === '--spacing' && value.endsWith('rem')) {
-      result.spacing = Number.parseFloat(value)
       return true
     }
     return false
@@ -705,7 +692,6 @@ export function importTheme(input: { css?: string, config?: string }): ThemeImpo
         ...(css.body?.lineHeight !== undefined ? { lineHeight: css.body.lineHeight } : {})
       }
     }
-    if (css.spacing !== undefined) doc.spacing = css.spacing
     if (css.fontSize !== undefined) doc.fontSize = css.fontSize
     if (css.radius !== undefined) doc.radius = css.radius
     if (css.blackAsPrimary) {

@@ -13,10 +13,6 @@ defineProps<{
   <div class="flex flex-col [&>*:first-child]:border-t-0">
     <ThemeStudioControlsColors v-if="group === 'colors'" />
 
-    <template v-else>
-      <ThemeStudioControlsStyle />
-
-      <ThemeStudioControlsDefaults />
-    </template>
+    <ThemeStudioControlsDefaults v-else />
   </div>
 </template>

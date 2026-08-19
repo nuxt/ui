@@ -29,7 +29,6 @@ export interface StoredTheme {
   neutral?: string
   radius?: number
   fontSize?: number
-  spacing?: number
   icons?: string
   blackAsPrimary?: boolean
   font?: FontPrefs
@@ -48,8 +47,8 @@ export interface StoredTheme {
 
 /**
  * Every key the theme picker wrote before this became one key: the nine that
- * are live on v4 today plus three this branch added (font size, spacing and
- * the typography bag). The studio's own (style, palette params, preset) never
+ * are live on v4 today plus two this branch added (font size and the
+ * typography bag). The studio's own (style, palette params, preset) never
  * left the branch and are not worth carrying.
  *
  * vueuse's `useLocalStorage` writes strings and numbers RAW, not JSON, so
@@ -57,7 +56,7 @@ export interface StoredTheme {
  */
 const LEGACY_KEYS = [
   'nuxt-ui-primary', 'nuxt-ui-neutral', 'nuxt-ui-radius', 'nuxt-ui-font-size',
-  'nuxt-ui-spacing', 'nuxt-ui-font', 'nuxt-ui-icons', 'nuxt-ui-black-as-primary',
+  'nuxt-ui-font', 'nuxt-ui-icons', 'nuxt-ui-black-as-primary',
   'nuxt-ui-font-prefs', 'nuxt-ui-ai-theme', 'nuxt-ui-custom-colors', 'nuxt-ui-css-variables'
 ]
 
@@ -82,7 +81,6 @@ function migrateLegacyTheme(): StoredTheme {
     neutral: read('nuxt-ui-neutral'),
     radius: number('nuxt-ui-radius'),
     fontSize: number('nuxt-ui-font-size'),
-    spacing: number('nuxt-ui-spacing'),
     icons: read('nuxt-ui-icons'),
     blackAsPrimary: read('nuxt-ui-black-as-primary') === 'true' || undefined,
     // the family and the rest of the typography were two keys back then

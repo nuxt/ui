@@ -13,11 +13,6 @@ function toggleChat() {
   }
   open.value = !open.value
 }
-
-// On /theme the header center becomes the studio's view switcher.
-const isStudio = computed(() => route.path === '/theme')
-
-const viewListOpen = ref(false)
 </script>
 
 <!-- eslint-disable vue/no-template-shadow -->
@@ -36,9 +31,7 @@ const viewListOpen = ref(false)
       <VersionMenu />
     </template>
 
-    <ThemeStudioViewSwitcher v-if="isStudio" v-model:open="viewListOpen" tooltip="View switcher" />
-
-    <UNavigationMenu v-else :items="desktopLinks" variant="link" content-orientation="vertical" />
+    <UNavigationMenu :items="desktopLinks" variant="link" content-orientation="vertical" />
 
     <template #right>
       <UTooltip text="Search" :kbds="['meta', 'K']" ignore-non-keyboard-focus>
@@ -55,12 +48,10 @@ const viewListOpen = ref(false)
         />
       </UTooltip>
 
-      <ThemeStudioPicker v-if="!isStudio" />
+      <ThemeStudioPicker />
 
-      <!-- data-keep-panels: flipping the mode is how you check a theme in
-           both, so it must not dismiss the open theme popover beside it -->
       <UTooltip text="Color mode">
-        <UColorModeButton data-keep-panels variant="ghost" />
+        <UColorModeButton variant="ghost" />
       </UTooltip>
 
       <UTooltip text="Open on GitHub" class="hidden lg:flex">

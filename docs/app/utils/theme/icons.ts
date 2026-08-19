@@ -408,28 +408,30 @@ export const studioIcons: Record<ThemeIcons, {
   redo: string
   reset: string
   export: string
-  fullscreen: string
-  exitFullscreen: string
   /** Header "Ask AI" button. */
   assistant: string
   /** Theme-picker + preset-menu button. */
   themes: string
   /** The studio toolbar's Options panel trigger. */
   options: string
+  /** The studio toolbar's Text panel trigger. */
+  text: string
+  /** The studio toolbar's Radius trigger. */
+  radius: string
   /** Preset-menu randomize die. Packs without a die use their shuffle glyph. */
   dice: string
 }> = {
-  lucide: { undo: 'i-lucide-undo-2', redo: 'i-lucide-redo-2', reset: 'i-lucide-rotate-ccw', export: 'i-lucide-download', fullscreen: 'i-lucide-maximize', exitFullscreen: 'i-lucide-minimize', assistant: 'i-lucide-bot-message-square', themes: 'i-lucide-swatch-book', options: 'i-lucide-sliders-horizontal', dice: 'i-lucide-dices' },
-  bootstrap: { undo: 'i-bi-arrow-90deg-left', redo: 'i-bi-arrow-90deg-right', reset: 'i-bi-arrow-counterclockwise', export: 'i-bi-download', fullscreen: 'i-bi-fullscreen', exitFullscreen: 'i-bi-fullscreen-exit', assistant: 'i-bi-robot', themes: 'i-bi-palette', options: 'i-bi-sliders', dice: 'i-bi-dice-5' },
-  heroicons: { undo: 'i-heroicons-arrow-uturn-left', redo: 'i-heroicons-arrow-uturn-right', reset: 'i-heroicons-arrow-path', export: 'i-heroicons-arrow-down-tray', fullscreen: 'i-heroicons-arrows-pointing-out', exitFullscreen: 'i-heroicons-arrows-pointing-in', assistant: 'i-heroicons-sparkles', themes: 'i-heroicons-swatch', options: 'i-heroicons-adjustments-horizontal', dice: 'i-heroicons-arrows-right-left' },
-  iconoir: { undo: 'i-iconoir-undo', redo: 'i-iconoir-redo', reset: 'i-iconoir-refresh-double', export: 'i-iconoir-download', fullscreen: 'i-iconoir-expand', exitFullscreen: 'i-iconoir-collapse', assistant: 'i-iconoir-magic-wand', themes: 'i-iconoir-palette', options: 'i-iconoir-settings', dice: 'i-iconoir-shuffle' },
-  material: { undo: 'i-material-symbols-undo', redo: 'i-material-symbols-redo', reset: 'i-material-symbols-refresh', export: 'i-material-symbols-download', fullscreen: 'i-material-symbols-fullscreen', exitFullscreen: 'i-material-symbols-fullscreen-exit', assistant: 'i-material-symbols-robot', themes: 'i-material-symbols-palette', options: 'i-material-symbols-tune', dice: 'i-material-symbols-shuffle' },
-  phosphor: { undo: 'i-ph-arrow-arc-left', redo: 'i-ph-arrow-arc-right', reset: 'i-ph-arrow-counter-clockwise', export: 'i-ph-download', fullscreen: 'i-ph-arrows-out', exitFullscreen: 'i-ph-arrows-in', assistant: 'i-ph-robot', themes: 'i-ph-palette', options: 'i-ph-sliders-horizontal', dice: 'i-ph-shuffle' },
-  remix: { undo: 'i-ri-arrow-go-back-line', redo: 'i-ri-arrow-go-forward-line', reset: 'i-ri-restart-line', export: 'i-ri-download-line', fullscreen: 'i-ri-fullscreen-line', exitFullscreen: 'i-ri-fullscreen-exit-line', assistant: 'i-ri-robot-2-line', themes: 'i-ri-palette-line', options: 'i-ri-equalizer-line', dice: 'i-ri-dice-line' },
-  tabler: { undo: 'i-tabler-arrow-back-up', redo: 'i-tabler-arrow-forward-up', reset: 'i-tabler-refresh', export: 'i-tabler-download', fullscreen: 'i-tabler-maximize', exitFullscreen: 'i-tabler-minimize', assistant: 'i-tabler-robot', themes: 'i-tabler-palette', options: 'i-tabler-adjustments-horizontal', dice: 'i-tabler-dice' },
+  lucide: { undo: 'i-lucide-undo-2', redo: 'i-lucide-redo-2', reset: 'i-lucide-rotate-ccw', export: 'i-lucide-download', assistant: 'i-lucide-bot-message-square', themes: 'i-lucide-swatch-book', options: 'i-lucide-sliders-horizontal', text: 'i-lucide-type', radius: 'i-lucide-square-round-corner', dice: 'i-lucide-dices' },
+  bootstrap: { undo: 'i-bi-arrow-90deg-left', redo: 'i-bi-arrow-90deg-right', reset: 'i-bi-arrow-counterclockwise', export: 'i-bi-download', assistant: 'i-bi-robot', themes: 'i-bi-palette', options: 'i-bi-sliders', text: 'i-bi-fonts', radius: 'i-bi-bounding-box', dice: 'i-bi-dice-5' },
+  heroicons: { undo: 'i-heroicons-arrow-uturn-left', redo: 'i-heroicons-arrow-uturn-right', reset: 'i-heroicons-arrow-path', export: 'i-heroicons-arrow-down-tray', assistant: 'i-heroicons-sparkles', themes: 'i-heroicons-swatch', options: 'i-heroicons-adjustments-horizontal', text: 'i-heroicons-language', radius: 'i-heroicons-stop', dice: 'i-heroicons-arrows-right-left' },
+  iconoir: { undo: 'i-iconoir-undo', redo: 'i-iconoir-redo', reset: 'i-iconoir-refresh-double', export: 'i-iconoir-download', assistant: 'i-iconoir-magic-wand', themes: 'i-iconoir-palette', options: 'i-iconoir-settings', text: 'i-iconoir-text', radius: 'i-iconoir-square', dice: 'i-iconoir-shuffle' },
+  material: { undo: 'i-material-symbols-undo', redo: 'i-material-symbols-redo', reset: 'i-material-symbols-refresh', export: 'i-material-symbols-download', assistant: 'i-material-symbols-robot', themes: 'i-material-symbols-palette', options: 'i-material-symbols-tune', text: 'i-material-symbols-text-fields', radius: 'i-material-symbols-rounded-corner', dice: 'i-material-symbols-shuffle' },
+  phosphor: { undo: 'i-ph-arrow-arc-left', redo: 'i-ph-arrow-arc-right', reset: 'i-ph-arrow-counter-clockwise', export: 'i-ph-download', assistant: 'i-ph-robot', themes: 'i-ph-palette', options: 'i-ph-sliders-horizontal', text: 'i-ph-text-aa', radius: 'i-ph-square', dice: 'i-ph-shuffle' },
+  remix: { undo: 'i-ri-arrow-go-back-line', redo: 'i-ri-arrow-go-forward-line', reset: 'i-ri-restart-line', export: 'i-ri-download-line', assistant: 'i-ri-robot-2-line', themes: 'i-ri-palette-line', options: 'i-ri-equalizer-line', text: 'i-ri-font-size', radius: 'i-ri-rounded-corner', dice: 'i-ri-dice-line' },
+  tabler: { undo: 'i-tabler-arrow-back-up', redo: 'i-tabler-arrow-forward-up', reset: 'i-tabler-refresh', export: 'i-tabler-download', assistant: 'i-tabler-robot', themes: 'i-tabler-palette', options: 'i-tabler-adjustments-horizontal', text: 'i-tabler-typography', radius: 'i-tabler-border-radius', dice: 'i-tabler-dice' },
   // Pixel pack has no `themes`/`palette` glyph, so `colors-swatch` stands in
   // for the swatch-book.
-  pixelarticons: { undo: 'i-pixelarticons-undo', redo: 'i-pixelarticons-redo', reset: 'i-pixelarticons-reload', export: 'i-pixelarticons-download', fullscreen: 'i-pixelarticons-viewport-wide', exitFullscreen: 'i-pixelarticons-viewport-narrow', assistant: 'i-pixelarticons-robot', themes: 'i-pixelarticons-colors-swatch', options: 'i-pixelarticons-sliders', dice: 'i-pixelarticons-dice' }
+  pixelarticons: { undo: 'i-pixelarticons-undo', redo: 'i-pixelarticons-redo', reset: 'i-pixelarticons-reload', export: 'i-pixelarticons-download', assistant: 'i-pixelarticons-robot', themes: 'i-pixelarticons-colors-swatch', options: 'i-pixelarticons-sliders', text: 'i-pixelarticons-text-add', radius: 'i-pixelarticons-card', dice: 'i-pixelarticons-dice' }
 }
 
 /**

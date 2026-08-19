@@ -82,8 +82,6 @@ export interface ThemeDoc {
   radius?: number
   /** Root font size in px (`html { font-size }`), scales every rem-based metric */
   fontSize?: number
-  /** Tailwind v4 `--spacing` base unit in rem, the density knob behind all spacing utilities */
-  spacing?: number
   font?: {
     sans?: string
     /**
@@ -129,7 +127,6 @@ export const SEMANTIC_ALIASES = ['secondary', 'success', 'info', 'warning', 'err
 export const THEME_DEFAULTS = {
   radius: 0.25,
   fontSize: 16,
-  spacing: 0.25,
   font: 'Public Sans',
   icons: 'lucide'
 } as const
@@ -477,7 +474,7 @@ export function resolveShade(doc: ThemeDoc, palette: string, shade: Shade): stri
 /** A document with no overrides means "stock Nuxt UI". */
 export function isDefaultTheme(doc: ThemeDoc): boolean {
   return !doc.palettes && !doc.colors && !doc.blackAsPrimary && !doc.tokens
-    && doc.radius === undefined && doc.fontSize === undefined && doc.spacing === undefined
+    && doc.radius === undefined && doc.fontSize === undefined
     && !doc.font?.sans && !doc.font?.serif && !doc.font?.mono && !doc.font?.weights
     && !doc.font?.uppercase && !doc.font?.italic
     && doc.font?.letterSpacing === undefined && doc.font?.lineHeight === undefined

@@ -7,6 +7,24 @@ import type { VariantGroup } from '../../utils/theme/engine'
  */
 const { style, setStyle } = useThemeStudio()
 
+// MD is the stock default, one deduped entry storing 'default'
+const defaultSizeItems = [
+  { label: 'XS', value: 'xs' },
+  { label: 'SM', value: 'sm' },
+  { label: 'MD', value: 'default', defaultTag: true },
+  { label: 'LG', value: 'lg' },
+  { label: 'XL', value: 'xl' }
+]
+
+const defaultSize = computed({
+  // legacy saved prefs may still pin 'md' explicitly, it IS the default
+  get: () => {
+    const size = style.value.defaults?.size || 'default'
+    return size === 'md' ? 'default' : size
+  },
+  set: (value: any) => setStyle({ defaults: { ...style.value.defaults, size: value } })
+})
+
 // Each group offers only what its components support; the app-wide
 // `variant` shows through as the fallback.
 const variantItems = (values: string[]) => values.map(value => ({ label: capitalize(value), value }))
@@ -90,8 +108,19 @@ const groupColors = Object.fromEntries(variantGroupFields.map(field => [field.ke
   <ThemeStudioSection
     label="Default variants"
     :default-open="false"
-    :section-key="variantGroupFields.map(field => field.key)"
+    :section-key="[...variantGroupFields.map(field => field.key), 'size']"
   >
+    <div class="pb-1.5">
+      <ThemeStudioRow
+        v-model="defaultSize"
+        control="select"
+        label="Size"
+        control-icon="i-lucide-proportions"
+        :items="defaultSizeItems"
+        aria-label="Default size"
+      />
+    </div>
+
     <ThemeStudioSection
       v-for="field in variantGroupFields"
       :key="field.key"

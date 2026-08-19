@@ -366,7 +366,9 @@ export function useThemeStudio() {
         neutral: pick(theme.neutralColors)
       },
       radius: pick(theme.radiuses),
-      font: { sans: pick(theme.fonts) }
+      icons: pick(theme.icons).value,
+      // body faces only, a shuffled monospace page is never the tasteful roll
+      font: { sans: pick(theme.fonts.filter(entry => entry.category === 'Sans')).name }
     }
 
     // An app-wide variant is the loud roll, sprinkled in rarely enough that

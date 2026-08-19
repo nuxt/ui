@@ -12,13 +12,16 @@ import { FONT_WEIGHT_DEFAULTS } from '../studio'
  */
 export type SectionKey
   = | 'primary' | 'neutral' | 'semantic'
-    | 'font' | 'icons' | 'scale' | 'buttons' | 'panels' | 'inputs'
+    | 'font' | 'icons' | 'radius' | 'size' | 'buttons' | 'panels' | 'inputs'
 
-export const SECTION_GROUPS: Record<'colors' | 'style', SectionKey[]> = {
+/**
+ * Only the two that still back a multi-section panel. Type, icons and radius
+ * each own a toolbar control now, so they carry their own `sectionDirty`
+ * rather than rolling up into a group.
+ */
+export const SECTION_GROUPS: Record<'colors' | 'defaults', SectionKey[]> = {
   colors: ['primary', 'neutral', 'semantic'],
-  // Everything that isn't colour: type, icons, scale, per-component defaults.
-  // One group, the General/Style split only ever chopped a long list in half.
-  style: ['font', 'icons', 'scale', 'buttons', 'panels', 'inputs']
+  defaults: ['size', 'buttons', 'panels', 'inputs']
 }
 
 /** Which color section a semantic token (or token shade) belongs to. */
@@ -122,17 +125,15 @@ export function pickSection(doc: ThemeDoc, key: SectionKey): unknown {
       else delete font.weights
       if (font.letterSpacing === 0) delete font.letterSpacing
       if (font.lineHeight === 1.5) delete font.lineHeight
-      return font
+      // size lives in the type panel, so the type section owns it
+      return { ...font, size: doc.fontSize ?? THEME_DEFAULTS.fontSize }
     }
     case 'icons':
       return doc.icons ?? THEME_DEFAULTS.icons
-    case 'scale':
-      return {
-        radius: doc.radius ?? THEME_DEFAULTS.radius,
-        fontSize: doc.fontSize ?? THEME_DEFAULTS.fontSize,
-        spacing: doc.spacing ?? THEME_DEFAULTS.spacing,
-        size: style.defaults?.size ?? null
-      }
+    case 'radius':
+      return doc.radius ?? THEME_DEFAULTS.radius
+    case 'size':
+      return style.defaults?.size ?? null
     case 'buttons':
     case 'panels':
     case 'inputs':
@@ -250,14 +251,15 @@ export function mergeSection(current: ThemeDoc, base: ThemeDoc, key: SectionKey)
       break
     case 'font':
       setOrDelete(doc, 'font', base.font ? structuredClone(base.font) : undefined)
+      setOrDelete(doc, 'fontSize', base.fontSize)
       break
     case 'icons':
       setOrDelete(doc, 'icons', base.icons)
       break
-    case 'scale':
+    case 'radius':
       setOrDelete(doc, 'radius', base.radius)
-      setOrDelete(doc, 'fontSize', base.fontSize)
-      setOrDelete(doc, 'spacing', base.spacing)
+      break
+    case 'size':
       if (doc.style?.defaults || baseStyle.defaults?.size !== undefined) {
         doc.style ??= {}
         doc.style.defaults = { ...doc.style.defaults }

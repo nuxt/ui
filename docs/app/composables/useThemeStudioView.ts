@@ -50,16 +50,11 @@ const studioViewIcons: Partial<Record<ThemeIcons, Partial<Record<ThemeStudioView
   }
 }
 
-/**
- * The studio's preview state lives at app level: while on /theme the site
- * header hosts the view switcher and fullscreen gates the chrome, so both
- * the page and the header read the same state.
- */
+/** The studio's preview state, shared by the page and its toolbar. */
 export function useThemeStudioView() {
   const view = useState<ThemeStudioView>('theme-studio-view', () => 'grid')
-  const fullscreen = useState('theme-studio-fullscreen', () => false)
 
-  return { view, fullscreen, views: THEME_STUDIO_VIEWS }
+  return { view, views: THEME_STUDIO_VIEWS }
 }
 
 /** The view glyphs resolved for the active icon pack (override ?? Lucide). */
@@ -90,50 +85,4 @@ export function useThemeStudioViewParam() {
 
   // grid is the default, so it stays out of the URL
   watch(view, value => router.replace({ query: { ...route.query, view: value === 'grid' ? undefined : value } }))
-}
-
-/**
- * The fullscreen preview's chrome, for the page that hosts it: Esc to leave,
- * and a bar that reveals as the pointer nears the bottom edge.
- */
-export function useThemeStudioFullscreen() {
-  const { fullscreen } = useThemeStudioView()
-
-  // Reveal by proximity, not a hover overlay, an overlay would eat clicks on
-  // the preview's bottom edge.
-  const nearBottom = ref(false)
-  function onPointerNear(event: MouseEvent) {
-    nearBottom.value = window.innerHeight - event.clientY <= 96
-  }
-
-  // Esc isn't a defineShortcuts binding: its preventDefault would stop Reka's
-  // dismissable layers from ever seeing Escape. A plain listener defers while
-  // a layer is open, so Esc closes the popover first.
-  function onEscape(event: KeyboardEvent) {
-    if (event.key !== 'Escape' || !fullscreen.value || event.defaultPrevented) return
-    // only VISIBLE layers defer, closed overlays keep their marker in the DOM
-    const layers = document.querySelectorAll('[data-dismissable-layer]')
-    if ([...layers].some(layer => layer.getClientRects().length)) return
-    fullscreen.value = false
-  }
-
-  watch(fullscreen, (on) => {
-    if (on) {
-      window.addEventListener('mousemove', onPointerNear)
-    } else {
-      window.removeEventListener('mousemove', onPointerNear)
-      nearBottom.value = false
-    }
-  })
-
-  onMounted(() => window.addEventListener('keydown', onEscape))
-
-  // fullscreen is app-level state, it must not leak past the studio
-  onUnmounted(() => {
-    window.removeEventListener('keydown', onEscape)
-    window.removeEventListener('mousemove', onPointerNear)
-    fullscreen.value = false
-  })
-
-  return { fullscreen, nearBottom }
 }

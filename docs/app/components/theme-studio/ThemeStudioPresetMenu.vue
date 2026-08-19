@@ -14,7 +14,7 @@ const { fonts } = useTheme()
 const appConfig = useAppConfig()
 const studioIcons = useStudioIcons()
 
-/** Exposed so hosts (the fullscreen toolbar) can pin themselves while open. */
+/** Exposed so the toolbar can pin itself while the menu is open. */
 const open = defineModel<boolean>('open', { default: false })
 
 // The persisted preset (and any persisted edits) are client-only, resolve
@@ -23,14 +23,15 @@ const mounted = ref(false)
 onMounted(() => {
   mounted.value = true
   // the rows render their own font names, load the faces once
-  loadFontPreviews(fonts)
+  loadFontPreviews(fonts.map(entry => entry.name))
 })
 
 // the toolbar stays open when a click lands on its own chrome
 const onKeepPanels = keepPanels
 
-// Edits deliberately don't clear the preset name (the dirty dots carry
-// divergence); 'Custom' only when preset-less but diverged from stock.
+// Edits deliberately don't clear the preset name (the controls that changed
+// go primary to carry divergence); 'Custom' only when preset-less but
+// diverged from stock.
 const activeEntry = computed(() => (mounted.value
   ? presets.find(preset => preset.id === selectedPreset.value)
   : undefined))

@@ -1,8 +1,6 @@
 <script setup lang="ts">
 const route = useRoute()
 
-/** The theme studio's UI-hiding fullscreen also hides the site chrome. */
-const studioFullscreen = useState('theme-studio-fullscreen', () => false)
 const appConfig = useAppConfig()
 const { style, link, color } = useTheme()
 
@@ -46,6 +44,8 @@ useFaviconFromTheme()
 const { rootNavigation, navigationByFramework } = useNavigation(navigation)
 
 provide('navigation', rootNavigation)
+
+const showLayout = computed(() => !route.path.startsWith('/examples') && route.path !== '/theme')
 </script>
 
 <template>
@@ -54,7 +54,7 @@ provide('navigation', rootNavigation)
 
     <div class="flex">
       <div class="flex-1 min-w-0" :class="[route.path.startsWith('/docs/') && 'root']">
-        <template v-if="!route.path.startsWith('/examples') && !(route.path === '/theme' && studioFullscreen)">
+        <template v-if="showLayout">
           <!-- <Banner /> -->
 
           <Header />
@@ -64,10 +64,9 @@ provide('navigation', rootNavigation)
           <NuxtPage />
         </NuxtLayout>
 
-        <template v-if="!route.path.startsWith('/examples') && route.path !== '/theme'">
+        <template v-if="showLayout">
           <Footer />
         </template>
-        <!-- footer stays off /theme: the studio is a fixed-height app page -->
       </div>
 
       <template v-if="!route.path.startsWith('/examples')">

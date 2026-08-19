@@ -12,6 +12,9 @@ import colors from 'tailwindcss/colors'
 // AI `applyTheme` output is untrusted and gets concatenated into <style> rules,
 // this is the single write boundary, so only CSS-safe tokens may persist.
 const SAFE_NAME = /^[\w -]{1,50}$/
+
+/** The three groups every font select offers. */
+export type FontCategory = 'Sans' | 'Serif' | 'Mono'
 const SAFE_HEX = /^#[0-9a-f]{3,8}$/i
 // the engine's canonical shade format: `oklch(62.3% 0.214 259.815)`
 const SAFE_OKLCH = /^oklch\(\d{1,3}(?:\.\d+)?% \d(?:\.\d+)? \d{1,3}(?:\.\d+)?\)$/i
@@ -90,7 +93,6 @@ export function useTheme() {
   // shares one ref directly instead of converging through storage events.
   const _radius = useState('nuxt-ui-radius', () => THEME_DEFAULTS.radius as number)
   const _fontSize = useState('nuxt-ui-font-size', () => THEME_DEFAULTS.fontSize as number)
-  const _spacing = useState('nuxt-ui-spacing', () => THEME_DEFAULTS.spacing as number)
   const _iconSet = useState('nuxt-ui-icons', () => THEME_DEFAULTS.icons as string)
   const _blackAsPrimary = useState('nuxt-ui-black-as-primary', () => false)
 
@@ -169,21 +171,33 @@ export function useTheme() {
     }
   })
 
-  const spacing = computed({
-    get() {
-      return _spacing.value
-    },
-    set(option) {
-      _spacing.value = option
-      trackThrottled('Theme Changed', { setting: 'spacing', value: option })
-    }
-  })
-
-  // The shortlists each picker opens on. Any family is still reachable
-  // through the catalog search, these are just the ones that suit the slot.
-  const fonts = ['Public Sans', 'Comic Neue', 'DM Sans', 'Geist', 'Inter', 'Poppins', 'Outfit', 'Raleway', 'Roboto']
-  const headingFonts = ['Source Serif 4', 'Lora', 'Playfair Display', 'Merriweather', 'Libre Baskerville', 'Space Grotesk', 'Instrument Serif']
-  const monoFonts = ['Geist Mono', 'JetBrains Mono', 'Fira Code', 'IBM Plex Mono', 'Space Mono', 'Source Code Pro']
+  /**
+   * The shortlist every font select opens on, grouped by what the face is
+   * rather than by which slot it is for: the three stacks are independent, so
+   * nothing should stop a mono heading. Any other family is still reachable
+   * through the catalog search.
+   */
+  const fonts: Array<{ name: string, category: FontCategory }> = [
+    { name: 'Public Sans', category: 'Sans' },
+    { name: 'Inter', category: 'Sans' },
+    { name: 'DM Sans', category: 'Sans' },
+    { name: 'Geist', category: 'Sans' },
+    { name: 'Outfit', category: 'Sans' },
+    { name: 'Poppins', category: 'Sans' },
+    { name: 'Raleway', category: 'Sans' },
+    { name: 'Roboto', category: 'Sans' },
+    { name: 'Comic Neue', category: 'Sans' },
+    { name: 'Source Serif 4', category: 'Serif' },
+    { name: 'Lora', category: 'Serif' },
+    { name: 'Playfair Display', category: 'Serif' },
+    { name: 'Merriweather', category: 'Serif' },
+    { name: 'Instrument Serif', category: 'Serif' },
+    { name: 'Geist Mono', category: 'Mono' },
+    { name: 'JetBrains Mono', category: 'Mono' },
+    { name: 'Fira Code', category: 'Mono' },
+    { name: 'IBM Plex Mono', category: 'Mono' },
+    { name: 'Space Mono', category: 'Mono' }
+  ]
 
   /** The body family, the `sans` field of the font document. */
   const font = computed({
@@ -281,9 +295,8 @@ export function useTheme() {
   const hasCSSVariables = computed(() => Object.keys(cssVariablesData.value.light || {}).length > 0 || Object.keys(cssVariablesData.value.dark || {}).length > 0)
 
   const radiusStyle = computed(() => `:root { --ui-radius: ${_radius.value}rem; }`)
-  // font-size scales every rem metric; --spacing is tailwind's base density unit
+  // font-size scales every rem-based metric on the page
   const fontSizeStyle = computed(() => _fontSize.value !== 16 ? `html { font-size: ${_fontSize.value}px; }` : 'html {}')
-  const spacingStyle = computed(() => _spacing.value !== 0.25 ? `:root { --spacing: ${_spacing.value}rem; }` : ':root {}')
   const blackAsPrimaryStyle = computed(() => _blackAsPrimary.value ? `:root { --ui-primary: black; } .dark { --ui-primary: white; }` : ':root {}')
   const fontStyle = computed(() => {
     // fonts hydrate unvalidated from localStorage, re-assert SAFE_NAME at
@@ -359,7 +372,6 @@ export function useTheme() {
   const style = [
     { innerHTML: radiusStyle, id: 'nuxt-ui-radius', tagPriority: -2 },
     { innerHTML: fontSizeStyle, id: 'nuxt-ui-font-size', tagPriority: -2 },
-    { innerHTML: spacingStyle, id: 'nuxt-ui-spacing', tagPriority: -2 },
     { innerHTML: blackAsPrimaryStyle, id: 'nuxt-ui-black-as-primary', tagPriority: -2 },
     { innerHTML: fontStyle, id: 'nuxt-ui-font', tagPriority: -2 },
     { innerHTML: customColorsStyle, id: THEME_TAG_IDS.customColors, tagPriority: -2 },
@@ -369,7 +381,6 @@ export function useTheme() {
   const hasCSSChanges = computed(() => {
     return _radius.value !== 0.25
       || _fontSize.value !== 16
-      || _spacing.value !== 0.25
       || _blackAsPrimary.value
       || Object.keys(fontPrefs.value).length > 0
       || hasCustomColors.value
@@ -402,7 +413,6 @@ export function useTheme() {
     if (_blackAsPrimary.value) doc.blackAsPrimary = true
     if (_radius.value !== THEME_DEFAULTS.radius) doc.radius = _radius.value
     if (_fontSize.value !== THEME_DEFAULTS.fontSize) doc.fontSize = _fontSize.value
-    if (_spacing.value !== THEME_DEFAULTS.spacing) doc.spacing = _spacing.value
     // setFontPrefs already normalized this to the doc's own sparse shape,
     // so it only needs copying out of the reactive object.
     const fontDoc: ThemeDoc['font'] = {
@@ -521,7 +531,6 @@ export function useTheme() {
     if (settings.radius !== undefined && Number.isFinite(Number(settings.radius))) radius.value = Number(settings.radius)
     // clamped: these scale the whole page
     if (settings.fontSize !== undefined && Number.isFinite(Number(settings.fontSize))) fontSize.value = Math.min(20, Math.max(12, Number(settings.fontSize)))
-    if (settings.spacing !== undefined && Number.isFinite(Number(settings.spacing))) spacing.value = Math.min(0.5, Math.max(0.125, Number(settings.spacing)))
     // All three stacks and the body treatment share one channel, so they are
     // applied in one pass: setFontPrefs takes the WHOLE object, and any field
     // the payload leaves out has to fall back to what is already set. A
@@ -607,7 +616,6 @@ export function useTheme() {
 
     _radius.value = THEME_DEFAULTS.radius
     _fontSize.value = THEME_DEFAULTS.fontSize
-    _spacing.value = THEME_DEFAULTS.spacing
     fontPrefs.value = {}
     _iconSet.value = THEME_DEFAULTS.icons
     appConfig.ui.icons = themeIcons.lucide as any
@@ -661,10 +669,7 @@ export function useTheme() {
     radiuses,
     radius,
     fontSize,
-    spacing,
     fonts,
-    headingFonts,
-    monoFonts,
     font,
     fontPrefs,
     setFontPrefs,

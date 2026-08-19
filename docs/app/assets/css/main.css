@@ -42,6 +42,20 @@
   }
 }
 
+/* The theme studio floats its preview on a canvas recessed BEHIND the card,
+   so the two modes run opposite ways: a step down from white in light, past
+   --ui-bg in dark. Unlayered, to outrank the bg-default utility the Nuxt root
+   carries, and pointed at the neutral ramp so a themed palette reaches it. */
+body.theme-studio,
+body.theme-studio #__nuxt {
+  background-color: var(--ui-color-neutral-100);
+}
+
+.dark body.theme-studio,
+.dark body.theme-studio #__nuxt {
+  background-color: var(--ui-color-neutral-950);
+}
+
 html[data-framework="nuxt"] .vue-only,
 html[data-framework="vue"] .nuxt-only {
   display: none;

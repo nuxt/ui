@@ -9,7 +9,7 @@ import { paletteLabel } from '../utils/theme/studio'
  */
 export function useThemeStudioToolbar() {
   const { resetTheme, primary, neutral, blackAsPrimary } = useTheme()
-  const { groupDirty, presets, activePreset, applyPreset, primaryChip, neutralChip, isCustomPalette } = useThemeStudio()
+  const { groupDirty, sectionDirty, presets, activePreset, applyPreset, primaryChip, neutralChip, isCustomPalette } = useThemeStudio()
 
   const mounted = ref(false)
   onMounted(() => (mounted.value = true))
@@ -30,10 +30,26 @@ export function useThemeStudioToolbar() {
 
   const colorLabel = computed(() => colorChips.value.map(chip => chip.label).join(', '))
 
-  /** "Changed from preset" dot per settings tab. */
+  /**
+   * "Changed from preset" per toolbar control. Type, icons and radius sit in
+   * the bar on their own now, so they are listed here rather than rolled into
+   * a group: `anyDirty` below folds over this object, and a section left out
+   * of it would leave the reset button dead after a real change.
+   *
+   * Gated on mount like everything else here. The theme plugin restores the
+   * saved doc BEFORE the root component's setup, so an ungated flag is
+   * already true on the client's first render while the server rendered it
+   * false; hydration adopts the server's markup without patching, and the
+   * control would sit un-highlighted until something else forced a re-render.
+   */
+  const afterMount = (source: ComputedRef<boolean>) => computed(() => mounted.value && source.value)
+
   const groupDirtyFlags = {
-    colors: groupDirty('colors'),
-    style: groupDirty('style')
+    colors: afterMount(groupDirty('colors')),
+    defaults: afterMount(groupDirty('defaults')),
+    font: afterMount(sectionDirty('font')),
+    icons: afterMount(sectionDirty('icons')),
+    radius: afterMount(sectionDirty('radius'))
   }
 
   // Two-stage reset: edits reset back to the preset, a second press clears

@@ -1,38 +1,35 @@
 <script setup lang="ts">
 /**
- * The font family picker: the curated families up front, with a search box
- * over the full Google Fonts catalog (fetched lazily on first open). Rows
- * render themselves in their own face, each result batch loads its preview
- * faces, debounced so keystrokes don't fan out into stylesheet requests.
+ * A font family picker: the curated shortlist grouped by category up front,
+ * with a search box over the full Google Fonts catalog (fetched lazily on
+ * first open). Rows render themselves in their own face, and each result
+ * batch loads its preview faces, debounced so keystrokes don't fan out into
+ * stylesheet requests.
+ *
+ * Every instance offers all three categories. The stacks are independent, so
+ * the slot a picker fills says nothing about which face belongs in it.
  */
 import { watchDebounced } from '@vueuse/core'
-import { loadFontPreviews } from '../../utils/theme/studio'
+import { loadFontPreviews, keepPanels } from '../../utils/theme/studio'
+import type { FontCategory } from '../../composables/useTheme'
 
-const props = withDefaults(defineProps<{
-  /** The curated families offered before the user searches. */
-  curated: readonly string[]
+const props = defineProps<{
+  /** The shortlist offered before the user searches. */
+  curated: Array<{ name: string, category: FontCategory }>
   /** The value that wears the (Default) tag. */
-  defaultValue: string
-  /** Prepend an "Inherit base" option (the Heading and Code rows). */
+  defaultValue?: string
+  /** Prepend an "Inherit" option, for the stacks that may follow the body. */
   inherit?: boolean
-  icon?: string
   ariaLabel?: string
-  /** Panels use the default; the toolbar matches the controls beside it. */
-  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
-  /** For hosts that hide their own label (the toolbar outside fullscreen). */
-  tooltip?: string
-  /** Panels sit on subtle; the toolbar matches the outlined controls beside it. */
-  variant?: 'subtle' | 'outline'
-}>(), {
-  variant: 'subtle'
-})
+}>()
 
 const model = defineModel<string>({ required: true })
-/** Exposed so the fullscreen toolbar can pin itself while the list is open. */
-const open = defineModel<boolean>('open', { default: false })
 
 const { status, load, search } = useGoogleFonts()
+// the studio chrome skins to the applied pack, the search glyph included
+const appConfig = useAppConfig()
 
+const open = ref(false)
 const query = ref('')
 
 // A stale query would flash old results on reopen; the catalog fetch only
@@ -46,73 +43,91 @@ watch(open, (value) => {
 
 const results = computed(() => open.value ? search(query.value) : [])
 
-// a type, not an interface, the picker's item type wants an index signature
-type FontItem = { label: string, value: string, category?: string }
+/** Google reports `sans-serif` / `monospace` / `display` / `handwriting`. */
+function categoryOf(raw: string): FontCategory {
+  if (raw.startsWith('mono')) return 'Mono'
+  if (raw === 'serif') return 'Serif'
+  return 'Sans'
+}
 
-const items = computed<FontItem[]>(() => {
+type FontItem = { label: string, value?: string, type?: 'label' }
+
+/** One group per category, each led by its own label row. */
+function group(entries: Array<{ name: string, category: FontCategory }>): FontItem[][] {
+  return (['Sans', 'Serif', 'Mono'] as const)
+    .map(category => ({ category, entries: entries.filter(entry => entry.category === category) }))
+    .filter(({ entries }) => entries.length)
+    .map(({ category, entries }) => [
+      { label: category, type: 'label' as const },
+      ...entries.map(entry => ({ label: entry.name, value: entry.name }))
+    ])
+}
+
+const items = computed<FontItem[][]>(() => {
   if (query.value.trim()) {
-    return results.value.map(font => ({ label: font.name, value: font.name, category: font.category }))
+    return group(results.value.map(font => ({ name: font.name, category: categoryOf(font.category) })))
   }
-  const curated: FontItem[] = props.curated.map(name => ({ label: name, value: name }))
-  // A searched pick isn't in the curated list, pin it on top so the
-  // selection stays visible (and deselectable) on reopen.
-  if (model.value !== 'inherit' && !props.curated.includes(model.value)) {
-    curated.unshift({ label: model.value, value: model.value })
+  const curated = [...props.curated]
+  // A searched pick isn't in the shortlist, pin it on top so the selection
+  // stays visible (and deselectable) on reopen.
+  if (model.value !== 'inherit' && !curated.some(entry => entry.name === model.value)) {
+    curated.unshift({ name: model.value, category: 'Sans' })
   }
-  return props.inherit ? [{ label: 'Inherit base', value: 'inherit' }, ...curated] : curated
+  return [
+    ...(props.inherit ? [[{ label: 'Inherit', value: 'inherit' }]] : []),
+    ...group(curated)
+  ]
 })
 
 watchDebounced(results, value => loadFontPreviews(value.map(font => font.name)), { debounce: 250 })
 
-const emptyLabel = computed(() => {
+const empty = computed(() => {
   if (status.value === 'loading') return 'Loading the Google Fonts catalog…'
   if (status.value === 'error') return 'Couldn’t load the Google Fonts catalog'
   return 'No fonts match your search'
 })
+
+/** Rows preview themselves; `inherit` has no face of its own to show. */
+function faceOf(value?: string) {
+  return !value || value === 'inherit' ? undefined : { fontFamily: `'${value}', sans-serif` }
+}
 </script>
 
 <template>
-  <ThemeStudioListPicker
+  <USelectMenu
     v-model="model"
     v-model:open="open"
+    v-model:search-term="query"
     :items="items"
-    :icon="icon"
-    :size="size"
-    :tooltip="tooltip"
-    :variant="variant"
+    value-key="value"
+    ignore-filter
+    :content="{ onInteractOutside: keepPanels, sideOffset: 7 }"
+    :search-input="{ placeholder: 'Search Google Fonts…', icon: appConfig.ui.icons.search }"
     :aria-label="ariaLabel"
-    :empty="emptyLabel"
+    size="sm"
+    class="w-full"
+    :ui="{ content: 'w-(--reka-combobox-trigger-width)', trailingIcon: 'transition-transform duration-200 group-data-[state=open]:rotate-180' }"
   >
-    <!-- No inline family on the trigger: the page already renders in the
-         picked font, so it inherits. The rows below set their own. -->
-    <template #trigger>
-      {{ model === 'inherit' ? 'Inherit base' : model }}
-    </template>
-
-    <template #header>
-      <UInput
-        v-model="query"
-        icon="i-lucide-search"
-        placeholder="Search Google Fonts…"
-        variant="none"
-        autofocus
-        class="border-b border-default"
-        aria-label="Search Google Fonts"
-      />
+    <!-- No inline face on the trigger: the panel already renders in the body
+         font, so the name inherits it. -->
+    <template #default>
+      <span class="truncate">{{ model === 'inherit' ? 'Inherit' : model }}</span>
     </template>
 
     <template #item-label="{ item }">
-      <span :style="item.value === 'inherit' ? undefined : { fontFamily: `'${item.value}', sans-serif` }">{{ item.label }}</span><span v-if="item.value === defaultValue" class="text-dimmed">&nbsp;(Default)</span>
+      <span :style="faceOf(item.value)">{{ item.label }}</span><span v-if="item.value && item.value === defaultValue" class="text-dimmed">&nbsp;(Default)</span>
     </template>
 
     <template #item-description="{ item }">
-      <span v-if="item.value !== 'inherit'" class="flex items-center gap-2 min-w-0">
-        <span
-          class="text-xs text-muted truncate"
-          :style="{ fontFamily: `'${item.value}', sans-serif` }"
-        >Grumpy wizards make toxic brew</span>
-        <span v-if="item.category" class="text-xs text-dimmed shrink-0 ms-auto">{{ item.category }}</span>
-      </span>
+      <span
+        v-if="item.value && item.value !== 'inherit'"
+        class="text-xs text-muted truncate"
+        :style="faceOf(item.value)"
+      >Grumpy wizards make toxic brew</span>
     </template>
-  </ThemeStudioListPicker>
+
+    <template #empty>
+      {{ empty }}
+    </template>
+  </USelectMenu>
 </template>

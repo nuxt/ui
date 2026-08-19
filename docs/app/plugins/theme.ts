@@ -23,7 +23,6 @@ export default defineNuxtPlugin({
       }
       assign('nuxt-ui-radius', saved.radius)
       assign('nuxt-ui-font-size', saved.fontSize)
-      assign('nuxt-ui-spacing', saved.spacing)
       assign('nuxt-ui-font', saved.font)
       assign('nuxt-ui-icons', saved.icons)
       assign('nuxt-ui-black-as-primary', saved.blackAsPrimary)
@@ -81,7 +80,6 @@ export default defineNuxtPlugin({
       // instance. Defaults are omitted so an untouched theme stores nothing.
       const radius = useState<number>('nuxt-ui-radius')
       const fontSize = useState<number>('nuxt-ui-font-size')
-      const spacing = useState<number>('nuxt-ui-spacing')
       const font = useState<StoredTheme['font']>('nuxt-ui-font')
       const iconSet = useState<string>('nuxt-ui-icons')
       const blackAsPrimary = useState<boolean>('nuxt-ui-black-as-primary')
@@ -100,7 +98,6 @@ export default defineNuxtPlugin({
         neutral: unless(appConfig.ui.colors.neutral, DEFAULT_COLORS.neutral),
         radius: unless(radius.value, THEME_DEFAULTS.radius),
         fontSize: unless(fontSize.value, THEME_DEFAULTS.fontSize),
-        spacing: unless(spacing.value, THEME_DEFAULTS.spacing),
         font: filled(font.value),
         icons: unless(iconSet.value, THEME_DEFAULTS.icons),
         blackAsPrimary: blackAsPrimary.value || undefined,
@@ -164,8 +161,6 @@ export default defineNuxtPlugin({
               var fontSize = num(T.fontSize, 12, 20);
               if (fontSize !== undefined && fontSize !== 16) { set('nuxt-ui-font-size', 'html { font-size: ' + fontSize + 'px; }'); }
 
-              var spacing = num(T.spacing, 0.125, 0.5);
-              if (spacing !== undefined && spacing !== 0.25) { set('nuxt-ui-spacing', ':root { --spacing: ' + spacing + 'rem; }'); }
 
               set('nuxt-ui-black-as-primary', T.blackAsPrimary ? ':root { --ui-primary: black; } .dark { --ui-primary: white; }' : '');
 
