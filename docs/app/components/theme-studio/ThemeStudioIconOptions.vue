@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { themeIcons, iconSetSamples } from '../../utils/theme/icons'
+import { iconSetSamples } from '../../utils/theme/icons'
 
 /**
  * The icon set picker: the toolbar control itself, not a panel. The list is

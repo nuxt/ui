@@ -1,4 +1,18 @@
-import { isDefaultStyle } from './styles'
+/**
+ * The theme document: its schema, the tables it expands into, and the
+ * library defaults it is diffed against.
+ *
+ * A theme doc is sparse, so serializing it IS the minimal export. Two style
+ * axes survive on v4, and both map onto public API: default variants/sizes/
+ * colors (`defaultVariants` per component) and semantic token shades
+ * (`--ui-*`). Shadow and border treatments used to live here too, expanded
+ * into static per-component class bundles because the library has no
+ * semantic tokens for them; they come back in v5 on `--ui-shadow-*` /
+ * `--ui-border-width`.
+ */
+import colors from 'tailwindcss/colors'
+
+/* --------------------------------------------------------------- shades -- */
 
 export const SHADES = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950] as const
 
@@ -73,6 +87,14 @@ export interface ThemeDoc {
   font?: {
     sans?: string
     /**
+     * Tailwind's other two stacks. Setting `mono` is all `font-mono` and the
+     * `code`/`kbd`/`pre`/`samp` elements need, preflight wires them from the
+     * variable. Nothing consumes `--font-serif`, so it doubles as the heading
+     * family through one element rule, until v5 ships `--ui-font-heading`.
+     */
+    serif?: string
+    mono?: string
+    /**
      * Sparse overrides for tailwind's weight steps (`font-medium` compiles to
      * `var(--font-weight-medium)`); normal also drives classless body text.
      */
@@ -83,20 +105,10 @@ export interface ThemeDoc {
     letterSpacing?: number
     /** Unitless line height (browser/tailwind default is 1.5). */
     lineHeight?: number
-    /** Heading treatment (h1–h6); every field falls back to the base. */
-    heading?: {
-      font?: string
-      weight?: number
-      uppercase?: boolean
-      italic?: boolean
-      underline?: boolean
-      letterSpacing?: number
-      lineHeight?: number
-    }
   }
   icons?: string
-  /** Shadow/border treatment, expanded into per-component overrides (no semantic tokens in core yet). */
-  style?: import('./styles').StyleOptions
+  /** Default variants and semantic token shades. */
+  style?: StyleOptions
   /** L4, per-component overrides merged into `app.config ui.<component>` */
   components?: Record<string, Record<string, unknown>>
 }
@@ -122,11 +134,351 @@ export const THEME_DEFAULTS = {
   icons: 'lucide'
 } as const
 
+/* ---------------------------------------------------------------- style -- */
+
+export type DefaultVariant = 'default' | 'solid' | 'outline' | 'soft' | 'subtle' | 'ghost' | 'link' | 'none'
+export type DefaultSize = 'default' | 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+export type DefaultColor = 'default' | 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'error' | 'neutral'
+export type VariantGroup = 'buttons' | 'panels' | 'inputs'
+
+export interface StyleOptions {
+  /**
+   * Default variant/size/color, expanded into per-component `defaultVariants`
+   * only where the component supports the value. `variant` is app-wide;
+   * `variants`/`colors` refine per group and win where set.
+   */
+  defaults?: { variant?: DefaultVariant, size?: DefaultSize, variants?: Partial<Record<VariantGroup, DefaultVariant>>, colors?: Partial<Record<VariantGroup, DefaultColor>> }
+  /**
+   * Semantic token → ramp shade, keys whitelisted in TOKEN_SHADE_TARGETS.
+   * An absent mode stays inherited, presets hydrating one mode must not
+   * leak a phantom override for the other into exports.
+   */
+  tokenShades?: Record<string, { light?: ShadeStop, dark?: ShadeStop }>
+}
+
+/** The whole input family shares input's variant vocabulary (they extend it via defu). */
+const FIELD_VARIANTS = ['outline', 'soft', 'subtle', 'ghost', 'none']
+const FIELD_COMPONENTS = ['input', 'select', 'textarea', 'selectMenu', 'inputMenu', 'inputNumber', 'inputTags', 'inputDate', 'inputTime', 'pinInput']
+
+/** Which components support which default variant values. */
+export const VARIANT_SUPPORT: Record<string, string[]> = {
+  button: ['solid', 'outline', 'soft', 'subtle', 'ghost', 'link'],
+  badge: ['solid', 'outline', 'soft', 'subtle'],
+  alert: ['solid', 'outline', 'soft', 'subtle'],
+  card: ['solid', 'outline', 'soft', 'subtle'],
+  empty: ['solid', 'outline', 'soft', 'subtle'],
+  // fields have no solid variant, an unsupported value would silently unstyle them
+  ...Object.fromEntries(FIELD_COMPONENTS.map(component => [component, FIELD_VARIANTS]))
+}
+
+/**
+ * Components the app-wide Size default scales, exactly the xs–xl axis.
+ * Components on other scales (avatar's 3xs–3xl, kbd's sm–lg) stay out.
+ */
+export const SIZE_SUPPORT = [
+  'button', 'badge', ...FIELD_COMPONENTS, 'inputRating',
+  'tabs', 'checkbox', 'checkboxGroup', 'radioGroup', 'switch', 'slider', 'stepper',
+  'calendar', 'colorPicker', 'fileUpload', 'formField', 'fieldGroup',
+  'dropdownMenu', 'contextMenu', 'commandPalette', 'listbox'
+]
+
+/** Components with a color prop, the panels group has no color axis. */
+export const COLOR_SUPPORT = ['button', 'badge', ...FIELD_COMPONENTS]
+
+/** Component groups behind the per-group default-variant selects. */
+export const VARIANT_GROUPS: Record<VariantGroup, string[]> = {
+  buttons: ['button', 'badge'],
+  panels: ['card', 'alert', 'empty'],
+  inputs: FIELD_COMPONENTS
+}
+
+/** Color scale a token slider walks, neutral, or any semantic alias's ramp. */
+export type TokenRamp = 'neutral' | 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'error'
+
+export type TokenGroup = 'colors' | 'background' | 'text' | 'border'
+
+export const TOKEN_GROUPS: Array<{ key: TokenGroup, label: string }> = [
+  { key: 'colors', label: 'Color shades' },
+  { key: 'background', label: 'Background shades' },
+  { key: 'text', label: 'Text shades' },
+  { key: 'border', label: 'Border shades' }
+]
+
+/**
+ * Semantic tokens exposed as per-mode shade sliders. `defaults` are the
+ * LIBRARY's real resting values, some are the literal ladder ends (light
+ * --ui-bg is `white`, not a ramp stop); `ramp` names the scale the slider walks.
+ */
+export const TOKEN_SHADE_TARGETS: Array<{ token: string, label: string, ramp: TokenRamp, group: TokenGroup, defaults: { light: ShadeStop, dark: ShadeStop } }> = [
+  { token: '--ui-primary', label: 'Primary', ramp: 'primary', group: 'colors', defaults: { light: 500, dark: 400 } },
+  { token: '--ui-secondary', label: 'Secondary', ramp: 'secondary', group: 'colors', defaults: { light: 500, dark: 400 } },
+  { token: '--ui-success', label: 'Success', ramp: 'success', group: 'colors', defaults: { light: 500, dark: 400 } },
+  { token: '--ui-info', label: 'Info', ramp: 'info', group: 'colors', defaults: { light: 500, dark: 400 } },
+  { token: '--ui-warning', label: 'Warning', ramp: 'warning', group: 'colors', defaults: { light: 500, dark: 400 } },
+  { token: '--ui-error', label: 'Error', ramp: 'error', group: 'colors', defaults: { light: 500, dark: 400 } },
+  { token: '--ui-bg', label: 'Default', ramp: 'neutral', group: 'background', defaults: { light: 'white', dark: 900 } },
+  { token: '--ui-bg-muted', label: 'Muted', ramp: 'neutral', group: 'background', defaults: { light: 50, dark: 800 } },
+  { token: '--ui-bg-elevated', label: 'Elevated', ramp: 'neutral', group: 'background', defaults: { light: 100, dark: 800 } },
+  { token: '--ui-bg-accented', label: 'Accented', ramp: 'neutral', group: 'background', defaults: { light: 200, dark: 700 } },
+  { token: '--ui-bg-inverted', label: 'Inverted', ramp: 'neutral', group: 'background', defaults: { light: 900, dark: 'white' } },
+  { token: '--ui-text-dimmed', label: 'Dimmed', ramp: 'neutral', group: 'text', defaults: { light: 400, dark: 500 } },
+  { token: '--ui-text-muted', label: 'Muted', ramp: 'neutral', group: 'text', defaults: { light: 500, dark: 400 } },
+  { token: '--ui-text-toned', label: 'Toned', ramp: 'neutral', group: 'text', defaults: { light: 600, dark: 300 } },
+  { token: '--ui-text', label: 'Default', ramp: 'neutral', group: 'text', defaults: { light: 700, dark: 200 } },
+  { token: '--ui-text-highlighted', label: 'Highlighted', ramp: 'neutral', group: 'text', defaults: { light: 900, dark: 'white' } },
+  { token: '--ui-text-inverted', label: 'Inverted', ramp: 'neutral', group: 'text', defaults: { light: 'white', dark: 900 } },
+  { token: '--ui-border', label: 'Default', ramp: 'neutral', group: 'border', defaults: { light: 200, dark: 800 } },
+  { token: '--ui-border-muted', label: 'Muted', ramp: 'neutral', group: 'border', defaults: { light: 200, dark: 700 } },
+  { token: '--ui-border-accented', label: 'Accented', ramp: 'neutral', group: 'border', defaults: { light: 300, dark: 700 } },
+  { token: '--ui-border-inverted', label: 'Inverted', ramp: 'neutral', group: 'border', defaults: { light: 900, dark: 'white' } }
+]
+/**
+ * A ramp shade reference, or the literal for white/black. In-between stops
+ * (finer than 100) have no `--ui-color-*` indirection, the runtime colors
+ * plugin only generates the 11 standard stops, so they hit the custom
+ * ramp's `--color-*` directly; such stops only exist on custom palettes,
+ * whose @theme block defines those vars in both preview and export.
+ */
+function shadeRef(ramp: string, stop: ShadeStop | number): string {
+  if (stop === 'white' || stop === 'black') return stop
+  if (typeof stop === 'number' && !(SHADES as readonly number[]).includes(stop)) {
+    return `var(--color-custom-${ramp}-${stop})`
+  }
+  return `var(--ui-color-${ramp}-${stop})`
+}
+
+/** The `ui.<component>` override shape the studio and presets both speak. */
+interface ComponentFragment {
+  slots?: Record<string, string>
+  compoundVariants?: Array<Record<string, unknown>>
+  defaultVariants?: Record<string, string>
+}
+
+type Fragments = Record<string, ComponentFragment>
+
+/** Semantic token shades, the only CSS variables a style still emits. */
+export function styleTokens(style: StyleOptions): { light: Record<string, string>, dark: Record<string, string> } {
+  const light: Record<string, string> = {}
+  const dark: Record<string, string> = {}
+
+  for (const [token, shade] of Object.entries(style.tokenShades || {})) {
+    const target = TOKEN_SHADE_TARGETS.find(target => target.token === token)
+    if (target) {
+      if (shade.light !== undefined) light[token] = shadeRef(target.ramp, shade.light)
+      if (shade.dark !== undefined) dark[token] = shadeRef(target.ramp, shade.dark)
+    }
+  }
+
+  return { light, dark }
+}
+
+/** Expand default variant/size/color choices into `ui.<component>` overrides. */
+export function styleComponents(style: StyleOptions): Fragments {
+  // App-wide defaults, only where the component supports the chosen value.
+  const defaults: Fragments = {}
+  const variant = style.defaults?.variant
+  if (variant && variant !== 'default') {
+    for (const [component, supported] of Object.entries(VARIANT_SUPPORT)) {
+      if (supported.includes(variant)) {
+        defaults[component] = { defaultVariants: { variant } }
+      }
+    }
+  }
+  // group refinements replace the app-wide value for the components they cover
+  for (const [group, components] of Object.entries(VARIANT_GROUPS)) {
+    const groupVariant = style.defaults?.variants?.[group as VariantGroup]
+    if (groupVariant && groupVariant !== 'default') {
+      for (const component of components) {
+        if (VARIANT_SUPPORT[component]?.includes(groupVariant)) {
+          defaults[component] = {
+            ...defaults[component],
+            defaultVariants: { ...defaults[component]?.defaultVariants, variant: groupVariant }
+          }
+        }
+      }
+    }
+  }
+
+  // Per-group default colors, only on components with a color axis.
+  for (const [group, components] of Object.entries(VARIANT_GROUPS)) {
+    const groupColor = style.defaults?.colors?.[group as VariantGroup]
+    if (groupColor && groupColor !== 'default') {
+      for (const component of components) {
+        if (COLOR_SUPPORT.includes(component)) {
+          defaults[component] = {
+            ...defaults[component],
+            defaultVariants: { ...(defaults[component] as any)?.defaultVariants, color: groupColor }
+          }
+        }
+      }
+    }
+  }
+
+  const size = style.defaults?.size
+  if (size && size !== 'default') {
+    for (const component of SIZE_SUPPORT) {
+      defaults[component] = {
+        ...defaults[component],
+        defaultVariants: { ...(defaults[component] as any)?.defaultVariants, size }
+      }
+    }
+  }
+
+  return defaults
+}
+
+/**
+ * Merge two `ui.<component>` override fragments so both take effect: slot
+ * class strings concatenate (extra last, winning the tailwind-merge),
+ * compoundVariants append in the same order. A spread would silently drop
+ * whichever side loses.
+ */
+export function mergeComponentOverrides(
+  base: Record<string, any> | undefined,
+  extra: Record<string, any> | undefined
+): Record<string, any> | undefined {
+  if (!base || !Object.keys(base).length) return extra
+  if (!extra || !Object.keys(extra).length) return base
+
+  const result: Record<string, any> = {}
+  for (const key of new Set([...Object.keys(base), ...Object.keys(extra)])) {
+    const a = base[key]
+    const b = extra[key]
+    if (a === undefined) {
+      result[key] = b
+    } else if (b === undefined) {
+      result[key] = a
+    } else if (key === 'compoundVariants' && Array.isArray(a) && Array.isArray(b)) {
+      result[key] = [...a, ...b]
+    } else if (key === 'defaultVariants') {
+      // variant NAMES, not class strings, later value replaces per key
+      result[key] = { ...a, ...b }
+    } else if (typeof a === 'string' && typeof b === 'string') {
+      result[key] = `${a} ${b}`
+    } else if (typeof a === 'object' && typeof b === 'object' && !Array.isArray(a) && !Array.isArray(b)) {
+      result[key] = mergeComponentOverrides(a, b)
+    } else {
+      result[key] = b
+    }
+  }
+  return result
+}
+
+/** Merge two whole `ui` records component-wise. */
+export function mergeUi(
+  base: Record<string, any> | undefined,
+  extra: Record<string, any> | undefined
+): Record<string, any> {
+  const result: Record<string, any> = {}
+  for (const key of new Set([...Object.keys(base || {}), ...Object.keys(extra || {})])) {
+    const merged = mergeComponentOverrides(base?.[key], extra?.[key])
+    if (merged && Object.keys(merged).length) result[key] = merged
+  }
+  return result
+}
+
+/** Nothing set that changes rendering. */
+export function isDefaultStyle(style: StyleOptions = {}): boolean {
+  return !Object.values(style).some(value => value && value !== 'default')
+}
+
+/* ------------------------------------------------------ library defaults -- */
+
+/**
+ * The semantic token defaults as @nuxt/ui ships them (src/runtime/index.css).
+ * Exports diff against THESE, not the docs site's diverging baseline, an
+ * exported theme must reproduce the preview on a stock library install.
+ */
+export const LIBRARY_TOKEN_DEFAULTS = {
+  light: {
+    // the --ui-<alias> tokens are generated by the runtime colors plugin, not index.css
+    '--ui-primary': 'var(--ui-color-primary-500)',
+    '--ui-secondary': 'var(--ui-color-secondary-500)',
+    '--ui-success': 'var(--ui-color-success-500)',
+    '--ui-info': 'var(--ui-color-info-500)',
+    '--ui-warning': 'var(--ui-color-warning-500)',
+    '--ui-error': 'var(--ui-color-error-500)',
+    '--ui-text-dimmed': 'var(--ui-color-neutral-400)',
+    '--ui-text-muted': 'var(--ui-color-neutral-500)',
+    '--ui-text-toned': 'var(--ui-color-neutral-600)',
+    '--ui-text': 'var(--ui-color-neutral-700)',
+    '--ui-text-highlighted': 'var(--ui-color-neutral-900)',
+    '--ui-text-inverted': 'white',
+    '--ui-bg': 'white',
+    '--ui-bg-muted': 'var(--ui-color-neutral-50)',
+    '--ui-bg-elevated': 'var(--ui-color-neutral-100)',
+    '--ui-bg-accented': 'var(--ui-color-neutral-200)',
+    '--ui-bg-inverted': 'var(--ui-color-neutral-900)',
+    '--ui-border': 'var(--ui-color-neutral-200)',
+    '--ui-border-muted': 'var(--ui-color-neutral-200)',
+    '--ui-border-accented': 'var(--ui-color-neutral-300)',
+    '--ui-border-inverted': 'var(--ui-color-neutral-900)'
+  },
+  dark: {
+    '--ui-primary': 'var(--ui-color-primary-400)',
+    '--ui-secondary': 'var(--ui-color-secondary-400)',
+    '--ui-success': 'var(--ui-color-success-400)',
+    '--ui-info': 'var(--ui-color-info-400)',
+    '--ui-warning': 'var(--ui-color-warning-400)',
+    '--ui-error': 'var(--ui-color-error-400)',
+    '--ui-text-dimmed': 'var(--ui-color-neutral-500)',
+    '--ui-text-muted': 'var(--ui-color-neutral-400)',
+    '--ui-text-toned': 'var(--ui-color-neutral-300)',
+    '--ui-text': 'var(--ui-color-neutral-200)',
+    '--ui-text-highlighted': 'white',
+    '--ui-text-inverted': 'var(--ui-color-neutral-900)',
+    '--ui-bg': 'var(--ui-color-neutral-900)',
+    '--ui-bg-muted': 'var(--ui-color-neutral-800)',
+    '--ui-bg-elevated': 'var(--ui-color-neutral-800)',
+    '--ui-bg-accented': 'var(--ui-color-neutral-700)',
+    '--ui-bg-inverted': 'white',
+    '--ui-border': 'var(--ui-color-neutral-800)',
+    '--ui-border-muted': 'var(--ui-color-neutral-700)',
+    '--ui-border-accented': 'var(--ui-color-neutral-700)',
+    '--ui-border-inverted': 'white'
+  }
+} as const
+
+// Standard stops ride the `--ui-color-<alias>-<shade>` indirection; midpoints
+// have none (the runtime colours plugin only generates the 11 standard stops)
+// so they emit against `--color-custom-<alias>-<stop>` instead. One
+// alternation parses both forms with the ramp in the same capture position.
+const UI_COLOR_RE = /^var\(--(?:ui-color|color-custom)-([a-z]+)-(\d{2,3})\)$/
+
+/**
+ * Parse a shade reference the studio emits (either form) to `{ alias, shade }`.
+ * Callers apply their own ownership check, a foreign-ramp ref is parsed but
+ * not adopted.
+ */
+export function parseUiColorRef(value?: string): { alias: string, shade: number } | undefined {
+  const match = value?.match(UI_COLOR_RE)
+  return match ? { alias: match[1]!, shade: Number(match[2]) } : undefined
+}
+
+export function resolveAlias(doc: ThemeDoc, alias: ColorAlias): string {
+  return doc.colors?.[alias] || DEFAULT_COLORS[alias]
+}
+
+/** Color of a palette shade: custom palette first, then its base, then tailwind. */
+export function resolveShade(doc: ThemeDoc, palette: string, shade: Shade): string | undefined {
+  const custom = doc.palettes?.[palette]
+  if (custom) {
+    return custom.shades[shade]
+  }
+  const tailwind = (colors as Record<string, unknown>)[palette]
+  if (tailwind && typeof tailwind === 'object') {
+    return (tailwind as Record<string, string>)[shade]
+  }
+  return undefined
+}
+
+/* -------------------------------------------------------------- defaults -- */
+
 /** A document with no overrides means "stock Nuxt UI". */
 export function isDefaultTheme(doc: ThemeDoc): boolean {
   return !doc.palettes && !doc.colors && !doc.blackAsPrimary && !doc.tokens
     && doc.radius === undefined && doc.fontSize === undefined && doc.spacing === undefined
-    && !doc.font?.sans && !doc.font?.weights && !doc.font?.heading
+    && !doc.font?.sans && !doc.font?.serif && !doc.font?.mono && !doc.font?.weights
     && !doc.font?.uppercase && !doc.font?.italic
     && doc.font?.letterSpacing === undefined && doc.font?.lineHeight === undefined
     && !doc.icons && !doc.components

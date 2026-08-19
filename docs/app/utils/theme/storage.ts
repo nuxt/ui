@@ -1,16 +1,13 @@
 import type { ThemeDoc, StoredPaletteParams, StyleOptions } from './engine'
+import { THEME_DEFAULTS } from './engine'
 
-/** Typography beyond the base family. */
-export interface FontPrefs {
-  weights?: { normal?: number, medium?: number, semibold?: number, bold?: number }
-  uppercase?: boolean
-  italic?: boolean
-  /** Tracking in em. */
-  letterSpacing?: number
-  /** Unitless line height, 1.5 is the tailwind preflight default. */
-  lineHeight?: number
-  heading?: { font?: string, weight?: number, uppercase?: boolean, italic?: boolean, underline?: boolean, letterSpacing?: number, lineHeight?: number }
-}
+/**
+ * The font document: all three stacks plus the body treatment, exactly the
+ * doc's own shape. It used to be this type minus `sans`, because the sans
+ * shipped as its own `nuxt-ui-font` key long before the rest existed and the
+ * two never got folded back together.
+ */
+export type FontPrefs = NonNullable<ThemeDoc['font']>
 
 /**
  * The theme's single persisted key. Every setting used to own a localStorage
@@ -33,10 +30,9 @@ export interface StoredTheme {
   radius?: number
   fontSize?: number
   spacing?: number
-  font?: string
   icons?: string
   blackAsPrimary?: boolean
-  fontPrefs?: FontPrefs
+  font?: FontPrefs
   /** Semantic alias overrides (secondary, success, info, warning, error). */
   colors?: Record<string, string>
   /** Explicit per-component overrides, from presets, imports or the AI chat. */
@@ -51,9 +47,10 @@ export interface StoredTheme {
 }
 
 /**
- * The keys the shipped theme picker wrote before this became one key. Only
- * the nine that are live on v4 today, the studio's own (style, palette
- * params, preset) never shipped and are not worth carrying.
+ * Every key the theme picker wrote before this became one key: the nine that
+ * are live on v4 today plus three this branch added (font size, spacing and
+ * the typography bag). The studio's own (style, palette params, preset) never
+ * left the branch and are not worth carrying.
  *
  * vueuse's `useLocalStorage` writes strings and numbers RAW, not JSON, so
  * these read back per type rather than through JSON.parse.
@@ -86,10 +83,10 @@ function migrateLegacyTheme(): StoredTheme {
     radius: number('nuxt-ui-radius'),
     fontSize: number('nuxt-ui-font-size'),
     spacing: number('nuxt-ui-spacing'),
-    font: read('nuxt-ui-font'),
     icons: read('nuxt-ui-icons'),
     blackAsPrimary: read('nuxt-ui-black-as-primary') === 'true' || undefined,
-    fontPrefs: json('nuxt-ui-font-prefs'),
+    // the family and the rest of the typography were two keys back then
+    font: normalizeFont({ ...json<Record<string, unknown>>('nuxt-ui-font-prefs'), sans: read('nuxt-ui-font') }),
     colors: extras?.colors,
     components: extras?.ui,
     customColors: json('nuxt-ui-custom-colors'),
@@ -103,6 +100,53 @@ function migrateLegacyTheme(): StoredTheme {
   return migrated
 }
 
+const SAFE_FONT = /^[\w -]{1,50}$/
+
+/** Clamp to a range, or drop the value if it isn't a finite number. */
+function clamped(value: unknown, min: number, max: number): number | undefined {
+  const number = Number(value)
+  return Number.isFinite(number) ? Math.min(max, Math.max(min, number)) : undefined
+}
+
+/**
+ * Restores bypass `setFontPrefs`, so this is where a stored font document is
+ * made to satisfy the same invariants: no unusable family name, no
+ * out-of-range number, and no explicitly-stock family (which would otherwise
+ * read as a change forever, keeping the reset button lit).
+ */
+function normalizeFont(raw: unknown): FontPrefs | undefined {
+  if (!raw || typeof raw !== 'object') return undefined
+  const input = raw as Record<string, any>
+  const font: FontPrefs = {}
+
+  // `heading` was the old h1–h6 treatment. Only the family survived the
+  // rework, as the serif stack; the rest is dropped rather than kept as dead
+  // weight that every dirty check would still measure.
+  const family = (value: unknown) => typeof value === 'string' && SAFE_FONT.test(value) ? value : undefined
+  const sans = family(input.sans)
+  if (sans && sans !== THEME_DEFAULTS.font) font.sans = sans
+  const serif = family(input.serif) ?? family(input.heading?.font)
+  if (serif) font.serif = serif
+  const mono = family(input.mono)
+  if (mono) font.mono = mono
+
+  const weights: NonNullable<FontPrefs['weights']> = {}
+  for (const step of ['normal', 'medium', 'semibold', 'bold'] as const) {
+    const weight = clamped(input.weights?.[step], 100, 900)
+    if (weight !== undefined) weights[step] = weight
+  }
+  if (Object.keys(weights).length) font.weights = weights
+
+  if (input.uppercase) font.uppercase = true
+  if (input.italic) font.italic = true
+  const letterSpacing = clamped(input.letterSpacing, -0.2, 1)
+  if (letterSpacing !== undefined && letterSpacing !== 0) font.letterSpacing = letterSpacing
+  const lineHeight = clamped(input.lineHeight, 0.8, 3)
+  if (lineHeight !== undefined && lineHeight !== 1.5) font.lineHeight = lineHeight
+
+  return Object.keys(font).length ? font : undefined
+}
+
 /** Never throws: a corrupt or absent key reads as "no saved theme". */
 export function readStoredTheme(): StoredTheme {
   if (!import.meta.client) return {}
@@ -114,7 +158,16 @@ export function readStoredTheme(): StoredTheme {
         : {}
     }
     const parsed = JSON.parse(raw)
-    return parsed && typeof parsed === 'object' ? parsed as StoredTheme : {}
+    if (!parsed || typeof parsed !== 'object') return {}
+    // Interim shape from this key's first iteration, where the family was
+    // still a bare string beside a `fontPrefs` object. Never shipped, so this
+    // only has to survive a branch checkout, not a release.
+    if (typeof parsed.font === 'string' || parsed.fontPrefs) {
+      parsed.font = { ...parsed.fontPrefs, ...(typeof parsed.font === 'string' ? { sans: parsed.font } : {}) }
+      Reflect.deleteProperty(parsed, 'fontPrefs')
+    }
+    parsed.font = normalizeFont(parsed.font)
+    return parsed as StoredTheme
   } catch {
     return {}
   }

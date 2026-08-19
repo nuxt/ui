@@ -1,20 +1,252 @@
-import type { ThemeDoc, Shade } from './types'
-import { SHADES_ALL, DEFAULT_COLORS } from './types'
-import type { StyleOptions, DefaultVariant, DefaultSize, DefaultColor, VariantGroup } from './styles'
+/**
+ * The theme's wire format, both directions.
+ *
+ * `generateCSS`/`generateConfig` emit the minimal `main.css` +
+ * `app.config.ts` pair for a doc; `importTheme` parses that pair back. They
+ * are a contract, not two independent modules: any change to what the
+ * emitters print needs a matching change to the grammar the parser accepts,
+ * or a theme stops round-tripping. They live together so that drift is
+ * visible in one diff.
+ */
+import type { ThemeDoc, Shade, StyleOptions, DefaultVariant, DefaultSize, DefaultColor, VariantGroup } from './types'
 import {
+  SHADES_ALL,
+  DEFAULT_COLORS,
+  THEME_DEFAULTS,
+  LIBRARY_TOKEN_DEFAULTS,
   styleComponents,
-  BORDER_COLOR_VALUES,
-  SHADOW_COLOR_VALUES,
-  SHADOW_GEOMETRY_DEFAULTS,
-  INNER_SHADOW_GEOMETRY_DEFAULTS,
-  BORDER_WIDTH_DEFAULT,
+  styleTokens,
+  mergeUi,
   VARIANT_GROUPS,
   VARIANT_SUPPORT,
   SIZE_SUPPORT,
   COLOR_SUPPORT
-} from './styles'
-import { parseUiColorRef, LIBRARY_TOKEN_DEFAULTS } from './resolve'
+} from './types'
 import { themeIcons } from '../icons'
+
+/* ======================================================== emit (export) == */
+
+/** Generate the minimal `main.css`, the doc only holds overrides, so everything present is emitted. */
+export function generateCSS(doc: ThemeDoc): string {
+  const lines = [
+    '@import "tailwindcss";',
+    '@import "@nuxt/ui";'
+  ]
+
+  const themeLines: string[] = []
+  if (doc.font?.sans && doc.font.sans !== THEME_DEFAULTS.font) {
+    themeLines.push(`  --font-sans: '${doc.font.sans}', sans-serif;`)
+  }
+  // Tailwind's own stacks: setting them is all `font-serif` / `font-mono` need.
+  if (doc.font?.serif) themeLines.push(`  --font-serif: '${doc.font.serif}', serif;`)
+  if (doc.font?.mono) themeLines.push(`  --font-mono: '${doc.font.mono}', monospace;`)
+  // Weight steps are live variables in tailwind v4, so remapping them
+  // reaches every component, not just inherited text.
+  for (const step of ['normal', 'medium', 'semibold', 'bold'] as const) {
+    const weight = doc.font?.weights?.[step]
+    if (weight !== undefined) {
+      themeLines.push(`  --font-weight-${step}: ${weight};`)
+    }
+  }
+  if (doc.spacing !== undefined && doc.spacing !== THEME_DEFAULTS.spacing) {
+    themeLines.push(`  --spacing: ${doc.spacing}rem;`)
+  }
+  if (themeLines.length) {
+    lines.push('', '@theme {', ...themeLines, '}')
+  }
+
+  const colorLines: string[] = []
+  for (const [name, palette] of Object.entries(doc.palettes || {})) {
+    for (const [shade, color] of Object.entries(palette.shades)) {
+      colorLines.push(`  --color-${name}-${shade}: ${color};`)
+    }
+  }
+
+  if (colorLines.length) {
+    lines.push('', '@theme static {', ...colorLines, '}')
+  }
+
+  if (doc.fontSize !== undefined && doc.fontSize !== THEME_DEFAULTS.fontSize) {
+    lines.push('', '@layer base {', '  html {', `    font-size: ${doc.fontSize}px;`, '  }', '}')
+  }
+
+  // Classless text has no utility to dereference the weight variable, and
+  // case/tracking/leading are inherited properties. These element rules ride
+  // `@layer base`: unlayered CSS outranks every layer, so a bare rule here
+  // would beat the utilities too and `<h1 class="font-mono">` could not
+  // override the heading family. In base they still beat preflight (same
+  // layer, later source order) while utilities keep winning.
+  const bodyLines: string[] = []
+  if (doc.font?.weights?.normal !== undefined) bodyLines.push(`  font-weight: ${doc.font.weights.normal};`)
+  if (doc.font?.uppercase) bodyLines.push('  text-transform: uppercase;')
+  if (doc.font?.italic) bodyLines.push('  font-style: italic;')
+  if (doc.font?.letterSpacing !== undefined) bodyLines.push(`  letter-spacing: ${doc.font.letterSpacing}em;`)
+  if (doc.font?.lineHeight !== undefined) bodyLines.push(`  line-height: ${doc.font.lineHeight};`)
+  if (bodyLines.length) {
+    lines.push('', '@layer base {', '  body {', ...bodyLines.map(line => `  ${line}`), '  }', '}')
+  }
+
+  // Sans and mono ride tailwind's preflight (`--default-font-family` and
+  // `--default-mono-font-family`), so neither needs a rule. Nothing consumes
+  // `--font-serif`, so headings get this one, emitted only when a serif is
+  // set: without the guard, picking just a sans would drop every heading to
+  // Georgia. A stopgap until v5's `--ui-font-heading`.
+  if (doc.font?.serif) {
+    lines.push('', '/* until v5 ships --ui-font-heading */', '@layer base {', '  h1, h2, h3, h4, h5, h6 {', '    font-family: var(--font-serif);', '  }', '}')
+  }
+
+  const rootLines: string[] = []
+  if (doc.radius !== undefined && doc.radius !== THEME_DEFAULTS.radius) {
+    rootLines.push(`  --ui-radius: ${doc.radius}rem;`)
+  }
+  if (doc.blackAsPrimary) {
+    rootLines.push('  --ui-primary: black;')
+  }
+
+  if (rootLines.length) {
+    lines.push('', ':root {', ...rootLines, '}')
+  }
+
+  // Semantic token shades behind the style choices.
+  const style = styleTokens(doc.style || {})
+  // Style expansion and explicit token overrides merge, explicit last so a
+  // round-tripped doc collapses instead of printing every variable twice.
+  const light = { ...style.light, ...doc.tokens?.light }
+
+  const dark: Record<string, string> = {
+    ...style.dark,
+    ...(doc.blackAsPrimary ? { '--ui-primary': 'white' } : {}),
+    ...doc.tokens?.dark
+  }
+  // `:root, .light` matches `<html class="dark">` too and lands after the
+  // library's `.dark` block, so a light-only override would win in dark mode.
+  // Restate the library's dark value so the `.dark` block wins it back.
+  for (const [key, value] of Object.entries(light)) {
+    if (key in dark) continue
+    const fallback = (LIBRARY_TOKEN_DEFAULTS.dark as Record<string, string>)[key]
+    if (fallback && fallback !== value) {
+      dark[key] = fallback
+    }
+  }
+
+  if (Object.keys(light).length) {
+    lines.push('', ':root, .light {', ...Object.entries(light).map(([key, val]) => `  ${key}: ${val};`), '}')
+  }
+
+  if (Object.keys(dark).length) {
+    lines.push('', '.dark {', ...Object.entries(dark).map(([key, val]) => `  ${key}: ${val};`), '}')
+  }
+
+  return lines.join('\n')
+}
+
+/**
+ * Serialize to JS object-literal source: unquote only identifier-safe keys,
+ * prefer single-quoted strings, keep double quotes around apostrophes.
+ */
+function toObjectSource(value: Record<string, any>): string {
+  return JSON.stringify(value, null, 2)
+    .replace(/"([a-z_$][\w$]*)":/gi, '$1:')
+    .replace(/"((?:[^"\\]|\\.)*)"/g, (match, body: string) =>
+      body.includes('\'') ? match : `'${body}'`)
+}
+
+/** The `app.config.ts` / `vite.config.ts` side of the export. */
+export function generateConfig(doc: ThemeDoc, framework: string = 'nuxt'): string {
+  const config: Record<string, any> = {}
+
+  const colorEntries = Object.entries(doc.colors || {}).filter(([key, value]) => value !== DEFAULT_COLORS[key as keyof typeof DEFAULT_COLORS])
+  if (colorEntries.length) {
+    config.ui = { colors: Object.fromEntries(colorEntries) }
+  }
+
+  if (doc.icons && doc.icons !== THEME_DEFAULTS.icons && doc.icons in themeIcons) {
+    config.ui = config.ui || {}
+    config.ui.icons = themeIcons[doc.icons as keyof typeof themeIcons]
+  }
+
+  // Explicit components merge INTO the style expansion (classes concatenate,
+  // explicit last), a spread would drop one side wholesale.
+  const componentOverrides = mergeUi(doc.style ? styleComponents(doc.style) : undefined, doc.components)
+  if (Object.keys(componentOverrides).length) {
+    config.ui = config.ui || {}
+    Object.assign(config.ui, componentOverrides)
+  }
+
+  const configString = toObjectSource(config)
+
+  if (framework === 'vue') {
+    const pluginConfig = config.ui
+      ? toObjectSource({ ui: config.ui })
+      : '{}'
+    return [
+      'import { defineConfig } from \'vite\'',
+      'import vue from \'@vitejs/plugin-vue\'',
+      'import ui from \'@nuxt/ui/vite\'',
+      '',
+      `export default defineConfig({`,
+      '  plugins: [',
+      '    vue(),',
+      `    ui(${pluginConfig.split('\n').map((line, i) => i === 0 ? line : '    ' + line).join('\n')})`,
+      '  ]',
+      '})'
+    ].join('\n')
+  }
+
+  return `export default defineAppConfig(${configString})`
+}
+
+/**
+ * Translate a document into the shape `applyThemeSettings()` accepts, the
+ * sanitized write path shared with the AI theme feature.
+ */
+export function docToSettings(doc: ThemeDoc): Record<string, any> {
+  const settings: Record<string, any> = {}
+
+  for (const [alias, palette] of Object.entries(doc.colors || {})) {
+    settings[alias] = palette
+  }
+
+  if (doc.blackAsPrimary) settings.blackAsPrimary = true
+  if (doc.radius !== undefined) settings.radius = doc.radius
+  if (doc.fontSize !== undefined) settings.fontSize = doc.fontSize
+  if (doc.spacing !== undefined) settings.spacing = doc.spacing
+  if (doc.font?.sans) settings.fontSans = doc.font.sans
+  if (doc.font?.serif) settings.fontSerif = doc.font.serif
+  if (doc.font?.mono) settings.fontMono = doc.font.mono
+  if (doc.font?.weights) settings.fontWeights = doc.font.weights
+  if (doc.font?.uppercase || doc.font?.italic || doc.font?.letterSpacing !== undefined || doc.font?.lineHeight !== undefined) {
+    settings.fontBody = { uppercase: doc.font.uppercase, italic: doc.font.italic, letterSpacing: doc.font.letterSpacing, lineHeight: doc.font.lineHeight }
+  }
+  if (doc.icons) settings.icons = doc.icons
+
+  if (doc.palettes) {
+    settings.customColors = Object.fromEntries(
+      Object.entries(doc.palettes).map(([name, palette]) => [name, palette.shades])
+    )
+  }
+
+  // Token overrides plus the style treatment's color variables.
+  const style = doc.style ? styleTokens(doc.style) : { light: {}, dark: {} }
+  const light = { ...style.light, ...doc.tokens?.light }
+  const dark = { ...style.dark, ...doc.tokens?.dark }
+  if (Object.keys(light).length || Object.keys(dark).length) {
+    settings.cssVariables = {
+      ...(Object.keys(light).length ? { light } : {}),
+      ...(Object.keys(dark).length ? { dark } : {})
+    }
+  }
+
+  // Only explicit components ride the settings channel, the style expansion
+  // goes through the dedicated style-ui channel (applyDoc).
+  if (doc.components && Object.keys(doc.components).length) {
+    settings.ui = doc.components
+  }
+
+  return settings
+}
+
+/* ====================================================== parse (import) == */
 
 /**
  * The inverse of generateCSS/generateConfig: parse an exported theme back
@@ -38,10 +270,9 @@ interface ParsedCSS {
   radius?: number
   fontWeights?: { normal?: number, medium?: number, semibold?: number, bold?: number }
   body?: { weight?: number, uppercase?: boolean, italic?: boolean, letterSpacing?: number, lineHeight?: number }
-  heading?: { font?: string, weight?: number, uppercase?: boolean, italic?: boolean, underline?: boolean, letterSpacing?: number, lineHeight?: number }
+  serif?: string
+  mono?: string
   blackAsPrimary?: boolean
-  /** From @theme --default-border-width, the export's width channel. */
-  borderWidth?: number
   light: Record<string, string>
   dark: Record<string, string>
   skipped: string[]
@@ -50,6 +281,10 @@ interface ParsedCSS {
 function parseCSS(css: string): ParsedCSS {
   const result: ParsedCSS = { palettes: {}, light: {}, dark: {}, skipped: [] }
   let clean = css.replace(/\/\*[\s\S]*?\*\//g, '')
+
+  // Our own export wraps the element rules in `@layer base` (so utilities can
+  // still win); unwrap that one layer so the flat scanner below sees them.
+  clean = clean.replace(/@layer\s+base\s*\{((?:[^{}]*\{[^{}]*\})*)\s*\}/g, '$1')
 
   // The flat block scanner can't see nesting, a nested at-rule's inner
   // blocks would import as GLOBAL tokens. Lift each whole one into `skipped`.
@@ -105,10 +340,13 @@ function parseDeclaration(result: ParsedCSS, selector: string, prop: string, val
       palette[Number(shade[2]) as Shade] = value
       return true
     }
-    if (prop === '--font-sans') {
+    const stack = prop.match(/^--font-(sans|serif|mono)$/)
+    if (stack) {
       const family = value.match(/^'([^']+)'/) || value.match(/^"([^"]+)"/)
       if (family) {
-        result.font = family[1]
+        if (stack[1] === 'sans') result.font = family[1]
+        else if (stack[1] === 'serif') result.serif = family[1]
+        else result.mono = family[1]
         return true
       }
     }
@@ -119,18 +357,6 @@ function parseDeclaration(result: ParsedCSS, selector: string, prop: string, val
     }
     if (prop === '--spacing' && value.endsWith('rem')) {
       result.spacing = Number.parseFloat(value)
-      return true
-    }
-    if (prop === '--default-border-width' && value.endsWith('px')) {
-      result.borderWidth = Number.parseFloat(value)
-      return true
-    }
-    if (prop === '--default-ring-width' && value.endsWith('px')) {
-      // always exported alongside --default-border-width with the same value
-      return true
-    }
-    if (/^--shadow-(?:2xs|xs|sm|md|lg|xl|2xl)$/.test(prop)) {
-      // Derived ramp, regenerated on export, carries no independent data.
       return true
     }
     return false
@@ -167,38 +393,17 @@ function parseDeclaration(result: ParsedCSS, selector: string, prop: string, val
     return false
   }
 
+  // The heading rule only carries the serif stack. `var(--font-serif)` is a
+  // no-op (the @theme line already set it); a literal family is an older
+  // export, so it lands on serif and keeps round-tripping.
   if (selector === 'h1, h2, h3, h4, h5, h6') {
-    const heading = result.heading ||= {}
     if (prop === 'font-family') {
+      if (value.includes('var(--font-serif)')) return true
       const family = value.match(/^'([^']+)'/) || value.match(/^"([^"]+)"/)
       if (family) {
-        heading.font = family[1]
+        result.serif ||= family[1]
         return true
       }
-    }
-    if (prop === 'font-weight' && /^\d+$/.test(value)) {
-      heading.weight = Number(value)
-      return true
-    }
-    if (prop === 'text-transform' && value === 'uppercase') {
-      heading.uppercase = true
-      return true
-    }
-    if (prop === 'font-style' && value === 'italic') {
-      heading.italic = true
-      return true
-    }
-    if (prop === 'text-decoration' && value === 'underline') {
-      heading.underline = true
-      return true
-    }
-    if (prop === 'letter-spacing' && value.endsWith('em')) {
-      heading.letterSpacing = Number.parseFloat(value)
-      return true
-    }
-    if (prop === 'line-height' && /^\d+(?:\.\d+)?$/.test(value)) {
-      heading.lineHeight = Number(value)
-      return true
     }
     return false
   }
@@ -235,174 +440,6 @@ function parseDeclaration(result: ParsedCSS, selector: string, prop: string, val
 
   return false
 }
-
-/* ------------------------------------------------- style reconstruction -- */
-
-/** Reconstruct a color choice (named, or a per-mode ramp shade) from emitted per-mode values. */
-function matchColorChoice(value: { light?: string, dark?: string }, table: Record<string, { light: string, dark: string }>): { color: string, shade?: { light: Shade, dark: Shade } } | undefined {
-  const named = Object.keys(table).find(key => table[key]!.light === value.light && table[key]!.dark === value.dark)
-  if (named) return { color: named }
-  const lightRef = parseUiColorRef(value.light)
-  const darkRef = parseUiColorRef(value.dark)
-  if (lightRef && darkRef && lightRef.alias === darkRef.alias && (lightRef.alias === 'neutral' || lightRef.alias === 'primary')) {
-    return { color: lightRef.alias === 'primary' ? 'primary-shade' : 'shade', shade: { light: lightRef.shade as Shade, dark: darkRef.shade as Shade } }
-  }
-  return undefined
-}
-
-/**
- * Consume the style-owned variables out of the per-mode records and work
- * backwards to the StyleOptions that would emit them; what remains is plain
- * token overrides.
- */
-function extractStyle(light: Record<string, string>, dark: Record<string, string>): StyleOptions {
-  const style: StyleOptions = {}
-
-  const take = (prop: string): { light?: string, dark?: string } => {
-    const value = { light: light[prop], dark: dark[prop] }
-    Reflect.deleteProperty(light, prop)
-    Reflect.deleteProperty(dark, prop)
-    return value
-  }
-
-  // What the style axis can't express goes back into the residual maps and
-  // survives as a plain token override instead of silently vanishing.
-  const putBack = (prop: string, value: { light?: string, dark?: string }) => {
-    if (value.light !== undefined) light[prop] = value.light
-    if (value.dark !== undefined) dark[prop] = value.dark
-  }
-
-  const opacity = take('--ui-shadow-opacity')
-  const geometry = {
-    x: take('--ui-shadow-offset-x'),
-    y: take('--ui-shadow-offset-y'),
-    blur: take('--ui-shadow-blur'),
-    spread: take('--ui-shadow-spread')
-  }
-  const pressColor = take('--ui-shadow-press-color')
-  // force-emitted compositions, never a choice of their own, consume silently
-  take('--ui-shadow-press')
-  take('--ui-shadow-press-half')
-  const shadowColor = take('--ui-shadow-color')
-  const frameColor = take('--ui-border-color')
-
-  if (geometry.x.light !== undefined) {
-    style.shadow = 'custom'
-    const parsed = {
-      x: Number.parseFloat(geometry.x.light),
-      y: Number.parseFloat(geometry.y.light ?? '3'),
-      blur: Number.parseFloat(geometry.blur.light ?? '0'),
-      spread: Number.parseFloat(geometry.spread.light ?? '0')
-    }
-    // The export force-emits default geometry, only a real change is a choice.
-    if (JSON.stringify(parsed) !== JSON.stringify(SHADOW_GEOMETRY_DEFAULTS)) {
-      style.shadowGeometry = parsed
-    }
-  } else if (pressColor.light !== undefined) {
-    style.shadow = 'custom'
-  }
-
-  if (style.shadow !== 'custom') {
-    // dark-only geometry can't seed a hard shadow, keep it as tokens
-    putBack('--ui-shadow-offset-x', geometry.x)
-    putBack('--ui-shadow-offset-y', geometry.y)
-    putBack('--ui-shadow-blur', geometry.blur)
-    putBack('--ui-shadow-spread', geometry.spread)
-  }
-
-  if (opacity.light !== undefined && style.shadow) {
-    style.shadowOpacity = Number.parseFloat(opacity.light)
-  } else {
-    // without a shadow the option would never re-emit; as a token it round-trips
-    putBack('--ui-shadow-opacity', opacity)
-  }
-
-  const innerOpacity = take('--ui-inner-shadow-opacity')
-  const innerGeometry = {
-    x: take('--ui-inner-shadow-offset-x'),
-    y: take('--ui-inner-shadow-offset-y'),
-    blur: take('--ui-inner-shadow-blur'),
-    spread: take('--ui-inner-shadow-spread')
-  }
-  const innerFinal = take('--ui-inner-shadow-mix')
-  const innerColor = take('--ui-inner-shadow-color')
-  take('--ui-inner-shadow')
-
-  if (innerGeometry.x.light !== undefined) {
-    style.innerShadow = 'custom'
-    const parsed = {
-      x: Number.parseFloat(innerGeometry.x.light),
-      y: Number.parseFloat(innerGeometry.y.light ?? '2'),
-      blur: Number.parseFloat(innerGeometry.blur.light ?? '4'),
-      spread: Number.parseFloat(innerGeometry.spread.light ?? '0')
-    }
-    if (JSON.stringify(parsed) !== JSON.stringify(INNER_SHADOW_GEOMETRY_DEFAULTS)) {
-      style.innerShadowGeometry = parsed
-    }
-  } else if (innerFinal.light !== undefined) {
-    style.innerShadow = 'custom'
-  }
-
-  if (style.innerShadow !== 'custom') {
-    putBack('--ui-inner-shadow-offset-x', innerGeometry.x)
-    putBack('--ui-inner-shadow-offset-y', innerGeometry.y)
-    putBack('--ui-inner-shadow-blur', innerGeometry.blur)
-    putBack('--ui-inner-shadow-spread', innerGeometry.spread)
-  }
-
-  if (innerOpacity.light !== undefined && style.innerShadow) {
-    style.innerShadowOpacity = Number.parseFloat(innerOpacity.light)
-  } else {
-    putBack('--ui-inner-shadow-opacity', innerOpacity)
-  }
-
-  if (shadowColor.light !== undefined || shadowColor.dark !== undefined) {
-    // The export force-emits neutral-950/black when no color was chosen.
-    const forced = shadowColor.light === 'var(--ui-color-neutral-950)' && shadowColor.dark === 'black'
-    if (!forced) {
-      const match = matchColorChoice(shadowColor, SHADOW_COLOR_VALUES)
-      if (match) {
-        style.shadowColor = match.color as StyleOptions['shadowColor']
-        if (match.shade) style.shadowShade = match.shade
-      } else {
-        putBack('--ui-shadow-color', shadowColor)
-      }
-    }
-  }
-
-  if (innerColor.light !== undefined || innerColor.dark !== undefined) {
-    // Never force-emitted, any presence is a real choice.
-    const match = matchColorChoice(innerColor, SHADOW_COLOR_VALUES)
-    if (match) {
-      style.innerShadowColor = match.color as StyleOptions['innerShadowColor']
-      if (match.shade) style.innerShadowShade = match.shade
-    } else {
-      putBack('--ui-inner-shadow-color', innerColor)
-    }
-  }
-
-  if (frameColor.light !== undefined || frameColor.dark !== undefined) {
-    // Rings pointed at the default border token: the ramp is whichever one
-    // that token rides, since the ring itself no longer names a colour.
-    if (frameColor.light === 'var(--ui-border)' || frameColor.dark === 'var(--ui-border)') {
-      const borderToken = light['--ui-border'] ?? dark['--ui-border'] ?? ''
-      style.borderColor = borderToken.includes('primary') ? 'primary-shade' : 'shade'
-    } else {
-      const match = matchColorChoice(frameColor, BORDER_COLOR_VALUES)
-      if (match) {
-        style.borderColor = match.color as StyleOptions['borderColor']
-        // a colour the ring named itself becomes the default token's stop
-        if (match.shade) style.tokenShades = { ...style.tokenShades, '--ui-border': match.shade }
-      } else {
-        putBack('--ui-border-color', frameColor)
-      }
-    }
-  }
-
-  return style
-}
-
-/* ------------------------------------------------------------- config -- */
 
 /**
  * Parser for the restricted object-literal grammar generateConfig emits,
@@ -566,115 +603,6 @@ function extractDefaults(components: Record<string, any>): StyleOptions['default
   return Object.keys(defaults).length ? defaults : undefined
 }
 
-/** A compound entry's classes, whether written as a string or a slot map. */
-const classOf = (entry: Record<string, unknown>) => typeof entry.class === 'string' ? entry.class : Object.values(entry.class || {}).join(' ')
-
-function detectBorder(components: Record<string, any>): Pick<StyleOptions, 'border' | 'borderWidth' | 'frame'> {
-  const texts = Object.values(components).flatMap(component => [
-    ...Object.values((component?.slots || {}) as Record<string, string>),
-    ...((component?.compoundVariants || []) as Array<Record<string, unknown>>).map(classOf)
-  ])
-
-  // Lookahead, not a consuming `\s`: a consumed separator hides the next
-  // token, so `ring-2 ring-4` would only ever count the 2 and the majority
-  // vote below would read a mixed-width paste wrong.
-  const widths = texts.flatMap(text => [...text.matchAll(/(?:^|\s)(?:sm:)?ring-(\d)(?=\s|$)/g)].map(match => Number(match[1])))
-  if (!widths.length) return {}
-  // A mixed-width paste has no single right answer, take the most common
-  // width, ties toward the larger, so the choice is deterministic.
-  const counts = new Map<number, number>()
-  for (const value of widths) counts.set(value, (counts.get(value) ?? 0) + 1)
-  const width = [...counts.entries()].sort((a, b) => b[1] - a[1] || b[0] - a[0])[0]![0]
-  if (width === 0) return { border: 'none' }
-
-  return {
-    border: 'custom',
-    ...(width !== BORDER_WIDTH_DEFAULT ? { borderWidth: width } : {}),
-    ...(detectFrame(components) ? { frame: true } : {})
-  }
-}
-
-/** Frame outlines live on solid-variant compounds referencing the accented border. */
-function detectFrame(components: Record<string, any>): boolean {
-  return Object.values(components).some(component =>
-    ((component?.compoundVariants || []) as Array<Record<string, unknown>>).some(entry =>
-      entry.variant === 'solid' && classOf(entry).includes('ring-(--ui-border-accented)')
-    )
-  )
-}
-
-/** Shadow fallback when only a config was pasted (CSS normally decides). */
-function detectShadow(components: Record<string, any>): StyleOptions['shadow'] {
-  const slots = Object.values(components).flatMap(component => Object.values(component?.slots || {})) as string[]
-  if (slots.some(classes => classes.includes('--ui-shadow-press') || classes.includes('var(--ui-shadow-offset-x)'))) return 'custom'
-  // the flat treatment is bare shadow-none on the overlay surfaces
-  if (components.popover?.slots?.content?.includes('shadow-none') && components.toast?.slots?.root?.includes('shadow-none')) return 'flat'
-  return undefined
-}
-
-/** Inner-shadow fallback when only a config was pasted. */
-function detectInnerShadow(components: Record<string, any>): StyleOptions['innerShadow'] {
-  const slots = Object.values(components).flatMap(component => Object.values(component?.slots || {})) as string[]
-  if (slots.some(classes => classes.includes('(--ui-inner-shadow)'))) return 'custom'
-  if (slots.some(classes => classes.includes('--ui-inner-shadow-mix'))) return 'custom'
-  return undefined
-}
-
-/**
- * Old exports carried border widths as class fragments (ring-2, divide-y-2
- * …); widths now live on the style axis. Drop them, and renormalize old
- * frame literals to the default-width form so subtraction recognizes them.
- */
-function normalizeLegacyWidths(components: Record<string, any>) {
-  // The width digit is REQUIRED: a bare presence token (`border`, `divide-y`)
-  // is a real class the style axis never regenerates, scrubbing it would
-  // corrupt a genuine divider rather than strip a migrated width.
-  const WIDTH_TOKEN = /^(?:sm:)?(?:ring|divide-y|border(?:-[tbesxy])?)-[0-4]$|^lg:not-last:border-e-[0-4]$/
-  const scrub = (classes: unknown): string | undefined => {
-    if (typeof classes !== 'string') return undefined
-    const tokens = classes.split(/\s+/).flatMap((token) => {
-      if (/^(?:sm:)?ring-[1-4]$/.test(token)) {
-        // part of a frame literal → default-width ring; bare width → drop
-        return classes.includes('ring-(--ui-border-accented)') ? [token.replace(/ring-[1-4]$/, 'ring')] : []
-      }
-      return WIDTH_TOKEN.test(token) ? [] : [token]
-    })
-    return tokens.join(' ')
-  }
-
-  for (const [name, component] of Object.entries(components)) {
-    for (const [slot, classes] of Object.entries(component?.slots || {})) {
-      const cleaned = scrub(classes)
-      if (cleaned !== undefined) {
-        if (cleaned) component.slots[slot] = cleaned
-        else Reflect.deleteProperty(component.slots, slot)
-      }
-    }
-    if (component?.slots && !Object.keys(component.slots).length) Reflect.deleteProperty(component, 'slots')
-    if (Array.isArray(component?.compoundVariants)) {
-      component.compoundVariants = component.compoundVariants.filter((compound: any) => {
-        if (typeof compound.class === 'string') {
-          const cleaned = scrub(compound.class)!
-          if (!cleaned) return false
-          compound.class = cleaned
-        } else if (compound.class && typeof compound.class === 'object') {
-          for (const [slot, classes] of Object.entries(compound.class)) {
-            const cleaned = scrub(classes)
-            if (cleaned !== undefined) {
-              if (cleaned) compound.class[slot] = cleaned
-              else Reflect.deleteProperty(compound.class, slot)
-            }
-          }
-          if (!Object.keys(compound.class).length) return false
-        }
-        return true
-      })
-      if (!component.compoundVariants.length) Reflect.deleteProperty(component, 'compoundVariants')
-    }
-    if (component && !Object.keys(component).length) Reflect.deleteProperty(components, name)
-  }
-}
-
 /** Remove the fragments the reconstructed style regenerates, only genuinely explicit overrides remain. */
 function subtractStyleExpansion(components: Record<string, any>, style: StyleOptions): Record<string, any> {
   const expected = styleComponents(style)
@@ -746,38 +674,11 @@ export function importTheme(input: { css?: string, config?: string }): ThemeImpo
     Object.entries(ui).filter(([key]) => key !== 'colors' && key !== 'icons')
   )
 
-  // Style: color/geometry variables come from the CSS, structure from the
-  // config classes; either half alone still reconstructs what it can.
-  const style: StyleOptions = css ? extractStyle(css.light, css.dark) : {}
-  style.shadow ||= detectShadow(components)
-  style.innerShadow ||= detectInnerShadow(components)
-
-  // New exports carry width through the @theme variables; older ones (and
-  // config-only pastes) still declare it through ring-N classes.
-  if (css?.borderWidth !== undefined) {
-    style.border = css!.borderWidth === 0 ? 'none' : 'custom'
-    if (css!.borderWidth !== 0 && css!.borderWidth !== BORDER_WIDTH_DEFAULT) style.borderWidth = css!.borderWidth
-    if (detectFrame(components)) style.frame = true
-  } else {
-    const border = detectBorder(components)
-    if (border.border) {
-      style.border = border.border
-      if (border.borderWidth !== undefined) style.borderWidth = border.borderWidth
-      if (border.frame) style.frame = true
-      // Scrub only pastes that carry legacy ring-N tokens, unconditionally
-      // it would eat genuine user classes out of config-only pastes.
-      normalizeLegacyWidths(components)
-    }
-  }
+  // Everything the style axis still owns comes from the config's
+  // `defaultVariants`; the token shades ride the CSS as plain overrides.
+  const style: StyleOptions = {}
   const defaults = extractDefaults(components)
   if (defaults) style.defaults = defaults
-
-  // Press-off exports keep the button's resting shadow but drop the
-  // hover/active choreography, detect it so the expansion subtracts cleanly.
-  if (style.shadow === 'custom') {
-    const base = String(components.button?.slots?.base ?? '')
-    if (base.includes('--ui-shadow-press') && !base.includes('hover:translate')) style.shadowPress = false
-  }
 
   const explicit = subtractStyleExpansion(components, style)
   if (Object.keys(explicit).length) doc.components = explicit
@@ -792,15 +693,16 @@ export function importTheme(input: { css?: string, config?: string }): ThemeImpo
     }
     // A body weight without theme steps (older exports) reads as normal.
     const weights = css.fontWeights || (css.body?.weight !== undefined ? { normal: css.body.weight } : undefined)
-    if (css.font || weights || css.body || css.heading) {
+    if (css.font || css.serif || css.mono || weights || css.body) {
       doc.font = {
         ...(css.font ? { sans: css.font } : {}),
+        ...(css.serif ? { serif: css.serif } : {}),
+        ...(css.mono ? { mono: css.mono } : {}),
         ...(weights ? { weights } : {}),
         ...(css.body?.uppercase ? { uppercase: true } : {}),
         ...(css.body?.italic ? { italic: true } : {}),
         ...(css.body?.letterSpacing !== undefined ? { letterSpacing: css.body.letterSpacing } : {}),
-        ...(css.body?.lineHeight !== undefined ? { lineHeight: css.body.lineHeight } : {}),
-        ...(css.heading ? { heading: css.heading } : {})
+        ...(css.body?.lineHeight !== undefined ? { lineHeight: css.body.lineHeight } : {})
       }
     }
     if (css.spacing !== undefined) doc.spacing = css.spacing

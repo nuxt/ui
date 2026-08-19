@@ -54,9 +54,9 @@ export const presets: ThemePreset[] = [{
     }
   }
 }, {
-  id: 'neo-brutalist',
-  name: 'Neo-brutalist',
-  description: 'Amber on a warm carbon neutral, everything framed in ink, dropped hard shadows.',
+  id: 'carbon',
+  name: 'Carbon',
+  description: 'Amber on a warm carbon neutral, with ink-dark borders throughout.',
   icon: 'i-lucide-zap',
   doc: {
     version: 1,
@@ -87,11 +87,6 @@ export const presets: ThemePreset[] = [{
     font: { sans: 'Outfit' },
     icons: 'tabler',
     style: {
-      shadow: 'custom',
-      shadowGeometry: { x: 0, y: 3, blur: 0, spread: 0 },
-      shadowOpacity: 100,
-      border: 'custom',
-      frame: true,
       defaults: { variants: { buttons: 'solid', panels: 'subtle', inputs: 'subtle' } },
       tokenShades: {
         '--ui-bg': { light: 50, dark: 800 },
@@ -115,7 +110,7 @@ export const presets: ThemePreset[] = [{
 }, {
   id: 'orchard',
   name: 'Orchard',
-  description: 'Orange on deep sage greens, subtle surfaces, hard shadows dropped below and inset above.',
+  description: 'Orange on deep sage greens, subtle surfaces, foliage-tinted throughout.',
   icon: 'i-lucide-citrus',
   doc: {
     version: 1,
@@ -153,19 +148,7 @@ export const presets: ThemePreset[] = [{
         '--ui-text-highlighted': 'var(--ui-color-neutral-50)'
       }
     },
-    // Drop shadow below plus a bottom-lit hard INSET above, pressed clay.
     style: {
-      shadow: 'custom',
-      shadowShade: { light: 200, dark: 950 },
-      shadowOpacity: 55,
-      shadowGeometry: { x: 0, y: 3, blur: 0, spread: 0 },
-      innerShadow: 'custom',
-      innerShadowGeometry: { x: 0, y: -3, blur: 0, spread: 0 },
-      innerShadowOpacity: 50,
-      innerShadowColor: 'shade',
-      innerShadowShade: { light: 500, dark: 950 },
-      border: 'custom',
-      borderWidth: 1,
       defaults: { variant: 'subtle' },
       tokenShades: {
         '--ui-bg-muted': { light: 100 },
@@ -222,31 +205,6 @@ export const presets: ThemePreset[] = [{
         '--ui-text-highlighted': 'var(--ui-color-neutral-50)',
         '--ui-border-inverted': 'var(--ui-color-neutral-50)'
       }
-    },
-    style: {
-      shadow: 'custom',
-      shadowGeometry: { x: 0, y: 6, blur: 12, spread: 0 },
-      shadowOpacity: 15,
-      shadowPress: false,
-      innerShadow: 'custom',
-      innerShadowGeometry: {
-        x: 0,
-        y: -4,
-        blur: 4,
-        spread: 0
-      },
-      shadowColor: 'primary-shade',
-      shadowShade: {
-        light: 700,
-        dark: 950
-      },
-      innerShadowColor: 'primary-shade',
-      innerShadowShade: {
-        light: 500,
-        dark: 900
-      },
-      border: 'custom',
-      borderWidth: 1
     }
   }
 }, {
@@ -303,12 +261,7 @@ export const presets: ThemePreset[] = [{
       }
     },
     style: {
-      shadow: 'custom',
       // black is the neutral ladder's bottom stop, not a colour of its own
-      shadowShade: { light: 'black', dark: 'black' },
-      shadowOpacity: 100,
-      border: 'custom',
-      frame: true,
       defaults: { variants: { panels: 'subtle' } }
     }
   }
@@ -359,7 +312,7 @@ export const presets: ThemePreset[] = [{
       neutral: 'parchment'
     },
     radius: 0.375,
-    font: { sans: 'DM Sans', heading: { font: 'Source Serif 4', weight: 400 } },
+    font: { sans: 'DM Sans', serif: 'Source Serif 4' },
     icons: 'heroicons',
     // Border family stepped one deeper to hold on the tinted cream page.
     tokens: {
@@ -376,18 +329,6 @@ export const presets: ThemePreset[] = [{
       }
     },
     style: {
-      shadow: 'custom',
-      shadowGeometry: {
-        x: 0,
-        y: 2,
-        blur: 9,
-        spread: 0
-      },
-      shadowOpacity: 25,
-      shadowShade: {
-        light: 500,
-        dark: 950
-      },
       defaults: { variants: { panels: 'subtle' } }
     }
   }
@@ -567,7 +508,7 @@ export const presets: ThemePreset[] = [{
     radius: 0.125,
     // Bootstrap ships the system-ui stack; Roboto is its named Android
     // fallback and the closest loadable stand-in.
-    font: { sans: 'Roboto', heading: { weight: 500 } },
+    font: { sans: 'Roboto' },
     icons: 'bootstrap',
     // Light rides the gray ramp one step deeper than stock.
     tokens: {
@@ -596,8 +537,6 @@ export const presets: ThemePreset[] = [{
         '--ui-bg-muted': 'var(--ui-color-neutral-700)',
         '--ui-text': 'var(--ui-color-neutral-300)'
       }
-    },
-    // Bootstrap is famously flat: borders, not shadows.
-    style: { shadow: 'flat', defaults: { variants: { panels: 'subtle', inputs: 'outline' } } }
+    }
   }
 }] satisfies ThemePreset[]

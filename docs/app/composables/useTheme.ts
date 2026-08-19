@@ -91,16 +91,22 @@ export function useTheme() {
   const _radius = useState('nuxt-ui-radius', () => THEME_DEFAULTS.radius as number)
   const _fontSize = useState('nuxt-ui-font-size', () => THEME_DEFAULTS.fontSize as number)
   const _spacing = useState('nuxt-ui-spacing', () => THEME_DEFAULTS.spacing as number)
-  const _font = useState('nuxt-ui-font', () => THEME_DEFAULTS.font as string)
   const _iconSet = useState('nuxt-ui-icons', () => THEME_DEFAULTS.icons as string)
   const _blackAsPrimary = useState('nuxt-ui-black-as-primary', () => false)
 
-  /** Typography beyond the base family, one JSON channel shared with the FOUC script. */
-  const fontPrefs = useState<FontPrefs>('nuxt-ui-font-prefs', () => ({}))
+  /**
+   * The whole font document in one JSON channel, shared with the FOUC script.
+   * Sparse, exactly like `ThemeDoc['font']` it is typed as: an absent field
+   * means "inherit", so a stock theme stores nothing.
+   */
+  const fontPrefs = useState<FontPrefs>('nuxt-ui-font', () => ({}))
 
-  function setFontPrefs(next: FontPrefs) {
+  function setFontPrefs(next: FontPrefs, options: { track?: boolean } = {}) {
     // Normalize: defaults are absences, so hasCSSChanges/export stay clean.
     const clean: FontPrefs = {}
+    if (next.sans && next.sans !== THEME_DEFAULTS.font) clean.sans = next.sans
+    if (next.serif) clean.serif = next.serif
+    if (next.mono) clean.mono = next.mono
     const weights: NonNullable<FontPrefs['weights']> = {}
     for (const step of ['normal', 'medium', 'semibold', 'bold'] as const) {
       const weight = next.weights?.[step]
@@ -111,21 +117,9 @@ export function useTheme() {
     if (next.italic) clean.italic = true
     if (next.letterSpacing !== undefined && next.letterSpacing !== 0) clean.letterSpacing = next.letterSpacing
     if (next.lineHeight !== undefined && next.lineHeight !== 1.5) clean.lineHeight = next.lineHeight
-    const heading = next.heading || {}
-    const cleanHeading: NonNullable<FontPrefs['heading']> = {}
-    if (heading.font && heading.font !== _font.value) cleanHeading.font = heading.font
-    // 700 is the heading resting point, storing it would pollute exports
-    if (heading.weight !== undefined && heading.weight !== 700) cleanHeading.weight = heading.weight
-    if (heading.uppercase) cleanHeading.uppercase = true
-    if (heading.italic) cleanHeading.italic = true
-    if (heading.underline) cleanHeading.underline = true
-    if (heading.letterSpacing !== undefined && heading.letterSpacing !== 0) cleanHeading.letterSpacing = heading.letterSpacing
-    // headings natively lead at ~1.25, not the body's 1.5
-    if (heading.lineHeight !== undefined && heading.lineHeight !== 1.25) cleanHeading.lineHeight = heading.lineHeight
-    if (Object.keys(cleanHeading).length) clean.heading = cleanHeading
 
     fontPrefs.value = clean
-    trackThrottled('Theme Changed', { setting: 'fontPrefs' })
+    if (options.track !== false) trackThrottled('Theme Changed', { setting: 'fontPrefs' })
   }
 
   // taupe/mauve/mist/olive ship in tailwind's theme.css but not (yet) the
@@ -185,14 +179,19 @@ export function useTheme() {
     }
   })
 
+  // The shortlists each picker opens on. Any family is still reachable
+  // through the catalog search, these are just the ones that suit the slot.
   const fonts = ['Public Sans', 'Comic Neue', 'DM Sans', 'Geist', 'Inter', 'Poppins', 'Outfit', 'Raleway', 'Roboto']
+  const headingFonts = ['Source Serif 4', 'Lora', 'Playfair Display', 'Merriweather', 'Libre Baskerville', 'Space Grotesk', 'Instrument Serif']
+  const monoFonts = ['Geist Mono', 'JetBrains Mono', 'Fira Code', 'IBM Plex Mono', 'Space Mono', 'Source Code Pro']
 
+  /** The body family, the `sans` field of the font document. */
   const font = computed({
     get() {
-      return _font.value
+      return fontPrefs.value.sans ?? THEME_DEFAULTS.font
     },
     set(option) {
-      _font.value = option
+      setFontPrefs({ ...fontPrefs.value, sans: option }, { track: false })
       track('Theme Changed', { setting: 'font', value: option })
     }
   })
@@ -289,9 +288,12 @@ export function useTheme() {
   const fontStyle = computed(() => {
     // fonts hydrate unvalidated from localStorage, re-assert SAFE_NAME at
     // the sink so a tampered name can't break out of the quoted string
-    const safeFont = SAFE_NAME.test(_font.value) ? _font.value : 'Public Sans'
-    const parts = [`:root { --font-sans: '${safeFont}', sans-serif; }`]
     const prefs = fontPrefs.value
+    const safeFont = prefs.sans && SAFE_NAME.test(prefs.sans) ? prefs.sans : 'Public Sans'
+    const parts = [`:root { --font-sans: '${safeFont}', sans-serif; }`]
+    // The stacks themselves, so `font-serif` / `font-mono` follow the theme.
+    if (prefs.serif && SAFE_NAME.test(prefs.serif)) parts.push(`:root { --font-serif: '${prefs.serif}', serif; }`)
+    if (prefs.mono && SAFE_NAME.test(prefs.mono)) parts.push(`:root { --font-mono: '${prefs.mono}', monospace; }`)
     const weights = prefs.weights || {}
     const weightVars = (Object.keys(weights) as Array<keyof typeof weights>)
       .map(step => `--font-weight-${step}: ${weights[step]};`)
@@ -307,18 +309,10 @@ export function useTheme() {
     if (bodyRules.length) {
       parts.push(`body { ${bodyRules.join(' ')} }`)
     }
-    const heading = prefs.heading
-    if (heading && Object.keys(heading).length) {
-      const rules: string[] = []
-      if (heading.font && SAFE_NAME.test(heading.font)) rules.push(`font-family: '${heading.font}', sans-serif;`)
-      if (heading.weight !== undefined) rules.push(`font-weight: ${heading.weight};`)
-      if (heading.uppercase) rules.push('text-transform: uppercase;')
-      if (heading.italic) rules.push('font-style: italic;')
-      if (heading.underline) rules.push('text-decoration: underline;')
-      if (heading.letterSpacing !== undefined) rules.push(`letter-spacing: ${heading.letterSpacing}em;`)
-      if (heading.lineHeight !== undefined) rules.push(`line-height: ${heading.lineHeight};`)
-      parts.push(`h1, h2, h3, h4, h5, h6 { ${rules.join(' ')} }`)
-    }
+    // No element rules here: preflight points `code`/`kbd`/`pre`/`samp` at
+    // --font-mono, and the h1–h6 rule that reads --font-serif lives in
+    // main.css, inside `@layer base` so `font-mono` on a heading still wins.
+    // Injected here it would be unlayered, and outrank every utility.
     return parts.join(' ')
   })
   const customColorsStyle = computed(() => {
@@ -356,7 +350,9 @@ export function useTheme() {
   }
 
   const link = computed(() => {
-    const names = new Set([_font.value, fontPrefs.value.heading?.font].filter((name): name is string => !!name && name !== 'Public Sans'))
+    // Same guard as fontStyle's, so a name the stylesheet refuses can't still
+    // cost a Google Fonts request.
+    const names = new Set([fontPrefs.value.sans, fontPrefs.value.serif, fontPrefs.value.mono].filter((name): name is string => !!name && name !== 'Public Sans' && SAFE_NAME.test(name)))
     return [...names].map(fontLink)
   })
 
@@ -375,7 +371,6 @@ export function useTheme() {
       || _fontSize.value !== 16
       || _spacing.value !== 0.25
       || _blackAsPrimary.value
-      || _font.value !== 'Public Sans'
       || Object.keys(fontPrefs.value).length > 0
       || hasCustomColors.value
       || hasCSSVariables.value
@@ -408,14 +403,11 @@ export function useTheme() {
     if (_radius.value !== THEME_DEFAULTS.radius) doc.radius = _radius.value
     if (_fontSize.value !== THEME_DEFAULTS.fontSize) doc.fontSize = _fontSize.value
     if (_spacing.value !== THEME_DEFAULTS.spacing) doc.spacing = _spacing.value
+    // setFontPrefs already normalized this to the doc's own sparse shape,
+    // so it only needs copying out of the reactive object.
     const fontDoc: ThemeDoc['font'] = {
-      ...(_font.value !== THEME_DEFAULTS.font ? { sans: _font.value } : {}),
-      ...(fontPrefs.value.weights ? { weights: { ...fontPrefs.value.weights } } : {}),
-      ...(fontPrefs.value.uppercase ? { uppercase: true } : {}),
-      ...(fontPrefs.value.italic ? { italic: true } : {}),
-      ...(fontPrefs.value.letterSpacing !== undefined ? { letterSpacing: fontPrefs.value.letterSpacing } : {}),
-      ...(fontPrefs.value.lineHeight !== undefined ? { lineHeight: fontPrefs.value.lineHeight } : {}),
-      ...(fontPrefs.value.heading ? { heading: { ...fontPrefs.value.heading } } : {})
+      ...fontPrefs.value,
+      ...(fontPrefs.value.weights ? { weights: { ...fontPrefs.value.weights } } : {})
     }
     if (Object.keys(fontDoc).length) doc.font = fontDoc
     if (_iconSet.value !== THEME_DEFAULTS.icons) doc.icons = _iconSet.value
@@ -530,33 +522,36 @@ export function useTheme() {
     // clamped: these scale the whole page
     if (settings.fontSize !== undefined && Number.isFinite(Number(settings.fontSize))) fontSize.value = Math.min(20, Math.max(12, Number(settings.fontSize)))
     if (settings.spacing !== undefined && Number.isFinite(Number(settings.spacing))) spacing.value = Math.min(0.5, Math.max(0.125, Number(settings.spacing)))
-    if (settings.font && SAFE_NAME.test(settings.font)) font.value = settings.font
-    if (settings.fontWeights !== undefined || settings.fontBody !== undefined || settings.fontHeading !== undefined) {
-      const heading = settings.fontHeading && typeof settings.fontHeading === 'object' ? settings.fontHeading : {}
-      const rawWeights = settings.fontWeights && typeof settings.fontWeights === 'object' ? settings.fontWeights : fontPrefs.value.weights || {}
+    // All three stacks and the body treatment share one channel, so they are
+    // applied in one pass: setFontPrefs takes the WHOLE object, and any field
+    // the payload leaves out has to fall back to what is already set. A
+    // payload naming only the heading font would otherwise clear the rest,
+    // the body family included.
+    if (settings.fontSans !== undefined || settings.fontSerif !== undefined || settings.fontMono !== undefined
+      || settings.fontWeights !== undefined || settings.fontBody !== undefined) {
+      const current = fontPrefs.value
+      const rawWeights = settings.fontWeights && typeof settings.fontWeights === 'object' ? settings.fontWeights : current.weights || {}
       const weights: NonNullable<FontPrefs['weights']> = {}
       for (const step of ['normal', 'medium', 'semibold', 'bold'] as const) {
         const weight = Number(rawWeights[step])
         if (Number.isFinite(weight)) weights[step] = Math.min(900, Math.max(100, weight))
       }
-      const body = settings.fontBody && typeof settings.fontBody === 'object' ? settings.fontBody : {}
+      const body = settings.fontBody && typeof settings.fontBody === 'object' ? settings.fontBody : undefined
       const em = (value: unknown) => Number.isFinite(Number(value)) ? Math.min(1, Math.max(-0.2, Number(value))) : undefined
       const leading = (value: unknown) => Number.isFinite(Number(value)) ? Math.min(3, Math.max(0.8, Number(value))) : undefined
+      // Absent OR unusable keeps what is set: a rejected name must not read
+      // as "clear this slot".
+      const family = (value: unknown, fallback?: string) =>
+        typeof value === 'string' && SAFE_NAME.test(value) ? value : fallback
       setFontPrefs({
+        sans: family(settings.fontSans, current.sans),
+        serif: family(settings.fontSerif, current.serif),
+        mono: family(settings.fontMono, current.mono),
         weights,
-        uppercase: !!body.uppercase,
-        italic: !!body.italic,
-        letterSpacing: em(body.letterSpacing),
-        lineHeight: leading(body.lineHeight),
-        heading: {
-          font: heading.font && SAFE_NAME.test(heading.font) ? heading.font : undefined,
-          weight: Number.isFinite(Number(heading.weight)) ? Math.min(900, Math.max(100, Number(heading.weight))) : undefined,
-          uppercase: !!heading.uppercase,
-          italic: !!heading.italic,
-          underline: !!heading.underline,
-          letterSpacing: em(heading.letterSpacing),
-          lineHeight: leading(heading.lineHeight)
-        }
+        uppercase: body ? !!body.uppercase : current.uppercase,
+        italic: body ? !!body.italic : current.italic,
+        letterSpacing: body ? em(body.letterSpacing) : current.letterSpacing,
+        lineHeight: body ? leading(body.lineHeight) : current.lineHeight
       })
     }
     if (settings.icons && settings.icons in themeIcons) icon.value = settings.icons
@@ -613,7 +608,6 @@ export function useTheme() {
     _radius.value = THEME_DEFAULTS.radius
     _fontSize.value = THEME_DEFAULTS.fontSize
     _spacing.value = THEME_DEFAULTS.spacing
-    _font.value = THEME_DEFAULTS.font
     fontPrefs.value = {}
     _iconSet.value = THEME_DEFAULTS.icons
     appConfig.ui.icons = themeIcons.lucide as any
@@ -669,6 +663,8 @@ export function useTheme() {
     fontSize,
     spacing,
     fonts,
+    headingFonts,
+    monoFonts,
     font,
     fontPrefs,
     setFontPrefs,

@@ -7,18 +7,20 @@ import { FONT_WEIGHT_DEFAULTS, loadFontPreviews } from '../../utils/theme/studio
  * already a popover, so wrapping it in another one to hold a select was a
  * popover inside a popover.
  *
- * Heading treatment has no control here any more. Presets still set
- * `fontPrefs.heading` (Parchment pairs Source Serif 4 with DM Sans) and the
- * engine still exports it, it just isn't a knob in the bar.
+ * Heading and Code are rows in that dropdown rather than two more selects in
+ * the bar, which is what made it feel heavy before. They set tailwind's
+ * `--font-serif` and `--font-mono`: mono needs nothing else (preflight points
+ * `code`/`kbd`/`pre`/`samp` at it), serif drives the h1–h6 rule in main.css
+ * until v5 ships `--ui-font-heading`.
  */
 defineProps<{ tooltip?: string }>()
 
 /** Exposed so the fullscreen toolbar can pin itself while the list is open. */
 const open = defineModel<boolean>('open', { default: false })
 
-const { fonts, font, fontPrefs, setFontPrefs } = useTheme()
+const { fonts, headingFonts, monoFonts, font, fontPrefs, setFontPrefs } = useTheme()
 
-onMounted(() => loadFontPreviews(fonts))
+onMounted(() => loadFontPreviews([...fonts, ...headingFonts, ...monoFonts]))
 
 // One writable model per tailwind weight step, the knobs components
 // actually dereference at runtime.
@@ -49,8 +51,23 @@ const lineHeight = computed({
   set: (value: number) => setFontPrefs({ ...fontPrefs.value, lineHeight: value })
 })
 
-// One trigger for four controls, so it has to carry their combined state.
-const modified = computed(() => weightsActive.value || uppercase.value || letterSpacing.value !== 0 || lineHeight.value !== 1.5)
+/**
+ * Tailwind's other two stacks, labelled by what they do rather than by their
+ * variable: serif is the heading family, mono is code. `undefined` (not the
+ * string) is inherit, so an untouched row exports clean.
+ */
+function stackModel(key: 'serif' | 'mono') {
+  return computed({
+    get: () => fontPrefs.value[key] ?? 'inherit',
+    set: (value: string) => setFontPrefs({ ...fontPrefs.value, [key]: value === 'inherit' ? undefined : value })
+  })
+}
+
+const headingFont = stackModel('serif')
+const monoFont = stackModel('mono')
+
+// One trigger for every control below it, so it has to carry their combined state.
+const modified = computed(() => weightsActive.value || uppercase.value || letterSpacing.value !== 0 || lineHeight.value !== 1.5 || headingFont.value !== 'inherit' || monoFont.value !== 'inherit')
 </script>
 
 <template>
@@ -86,6 +103,34 @@ const modified = computed(() => weightsActive.value || uppercase.value || letter
 
       <template #content>
         <div class="w-64 p-3 flex flex-col gap-1.5">
+          <!-- pairing a display face with the body text is the highest-leverage
+               type choice here, so headings lead the panel -->
+          <ThemeStudioRow control="custom" label="Heading">
+            <ThemeStudioFontPicker
+              v-model="headingFont"
+              :curated="headingFonts"
+              default-value="inherit"
+              inherit
+              size="xs"
+              aria-label="Heading font"
+              class="w-full"
+            />
+          </ThemeStudioRow>
+
+          <ThemeStudioRow control="custom" label="Code">
+            <ThemeStudioFontPicker
+              v-model="monoFont"
+              :curated="monoFonts"
+              default-value="inherit"
+              inherit
+              size="xs"
+              aria-label="Code font"
+              class="w-full"
+            />
+          </ThemeStudioRow>
+
+          <USeparator class="my-1" />
+
           <ThemeStudioRow
             v-model="uppercase"
             control="switch"

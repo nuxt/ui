@@ -242,7 +242,7 @@ const vReveal = {
       </template>
 
       <div class="rounded-2xl border border-default bg-default overflow-hidden">
-        <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-[var(--studio-border-width,1px)]">
+        <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-px">
           <UPageCard
             v-for="(feature, index) in features"
             :key="feature.title"
@@ -278,7 +278,7 @@ const vReveal = {
       </template>
 
       <div class="rounded-2xl border border-default bg-default overflow-hidden">
-        <div class="grid grid-cols-2 xl:grid-cols-4 gap-[var(--studio-border-width,1px)]">
+        <div class="grid grid-cols-2 xl:grid-cols-4 gap-px">
           <UPageCard
             v-for="(metric, index) in metrics"
             :key="metric.label"

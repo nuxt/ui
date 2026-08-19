@@ -52,7 +52,10 @@ export interface ApplyThemeSettings {
   warning?: string
   error?: string
   radius?: number
-  font?: string
+  /** Tailwind's three stacks. Headings follow serif, code follows mono. */
+  fontSans?: string
+  fontSerif?: string
+  fontMono?: string
   blackAsPrimary?: boolean
   icons?: string
   customColors?: Record<string, Record<string, string>>
@@ -77,7 +80,9 @@ const applyTheme = tool({
       warning: { type: 'string', description: 'Warning color name' },
       error: { type: 'string', description: 'Error color name' },
       radius: { type: 'number', description: 'Border radius in rem: 0, 0.125, 0.25, 0.375, 0.5' },
-      font: { type: 'string', description: 'Font family name — any Google Font works (e.g. Public Sans, DM Sans, Geist, Inter, Poppins, Outfit, Raleway, Playfair Display, Nunito, JetBrains Mono, etc.)' },
+      fontSans: { type: 'string', description: 'Body font family (tailwind\'s --font-sans), the one every element inherits. Any Google Font works, and it does not have to be a sans (e.g. Public Sans, DM Sans, Geist, Inter, Poppins, Outfit, Playfair Display).' },
+      fontSerif: { type: 'string', description: 'Heading font family (tailwind\'s --font-serif; h1–h6 follow it). Any Google Font. Omit to keep headings on the body font.' },
+      fontMono: { type: 'string', description: 'Code font family (tailwind\'s --font-mono; code, kbd, pre and samp follow it). Any Google Font.' },
       blackAsPrimary: { type: 'boolean', description: 'Use solid black/white as primary color for a monochrome look' },
       icons: { type: 'string', description: 'Icon set for live preview: lucide (default), phosphor, or tabler. For exported code, any Iconify icon set can be suggested.' },
       customColors: {
@@ -123,7 +128,7 @@ const resetTheme = tool({
 const presetIds = presets.map(preset => preset.id) as [string, ...string[]]
 
 const applyPreset = tool({
-  description: `Apply one of the docs' built-in theme presets, whole and live. Use this ONLY when the user names a preset or asks for "the <name> look"; for any other theme request (a described aesthetic, a colour, a mood) design it yourself with \`applyTheme\` instead. A preset carries shadow, border and component-default treatments that an \`applyTheme\` payload cannot express, so never try to rebuild one by hand. You can call \`applyTheme\` afterwards to tweak a preset you just applied. Available presets: ${presets.map(preset => `${preset.id} (${preset.name}: ${preset.description})`).join('; ')}.`,
+  description: `Apply one of the docs' built-in theme presets, whole and live. Use this ONLY when the user names a preset or asks for "the <name> look"; for any other theme request (a described aesthetic, a colour, a mood) design it yourself with \`applyTheme\` instead. A preset carries a full palette, token shades and component defaults that an \`applyTheme\` payload cannot express, so never try to rebuild one by hand. You can call \`applyTheme\` afterwards to tweak a preset you just applied. Available presets: ${presets.map(preset => `${preset.id} (${preset.name}: ${preset.description})`).join('; ')}.`,
   inputSchema: z.object({
     preset: z.enum(presetIds).describe('Id of the preset to apply.')
   }),
@@ -150,7 +155,7 @@ const getThemeGuide = tool({
   execute: async () => ({
     guide: `When users ask to change the theme, customize colors, or modify the appearance, use the \`applyTheme\` tool to apply changes live on this docs site. Only include properties that changed.
 
-When users ask for a complete theme, to change "all colors", or describe a broad aesthetic (e.g. "sakura-inspired theme"), you MUST set ALL of: primary, neutral, secondary, success, info, warning, error, radius, and font. You can change the icon set (lucide, phosphor, or tabler) if it really enhances the theme, but prefer keeping lucide as the default — it works well with most themes. You can optionally include component-level \`ui\` overrides for a more polished result — if you do, look up the component theme first with \`getComponentTheme\` and prefer \`defaultVariants\` (e.g. button size or variant) over slot class overrides. Create a cohesive design system, not just random colors:
+When users ask for a complete theme, to change "all colors", or describe a broad aesthetic (e.g. "sakura-inspired theme"), you MUST set ALL of: primary, neutral, secondary, success, info, warning, error, radius, and fontSans. You can change the icon set (lucide, phosphor, or tabler) if it really enhances the theme, but prefer keeping lucide as the default — it works well with most themes. You can optionally include component-level \`ui\` overrides for a more polished result — if you do, look up the component theme first with \`getComponentTheme\` and prefer \`defaultVariants\` (e.g. button size or variant) over slot class overrides. Create a cohesive design system, not just random colors:
 - Pick a **primary** that embodies the theme's identity. If no standard Tailwind color fits, use \`customColors\` to define a bespoke palette with all shades 50-950 as \`oklch(L% C H)\` values, tailwind v4's native format, e.g. \`oklch(62.3% 0.214 259.815)\`. This is encouraged for creative/unique themes.
 - Pick a **secondary** that complements the primary (analogous or contrasting on the color wheel). Can also be a custom palette.
 - Pick **success/info/warning/error** that feel harmonious with the palette while staying semantically meaningful (success = green-ish, error = red-ish, warning = amber/yellow-ish, info = blue/cyan-ish). You can shift hues — e.g. \`lime\` for success in a nature theme, \`rose\` for error in a warm theme — but keep them recognizable.
@@ -263,12 +268,16 @@ For Nuxt, wrap in \`defineAppConfig({ ui: { ... } })\`. For Vue, pass as \`ui({ 
   - **0.25** — balanced, default
   - **0.375** — rounded, friendly
   - **0.5** — pill-like, playful, soft
-- Font: any Google Font works, \`@nuxt/fonts\` auto-loads it. Pick a font that matches the theme's personality:
+- Fonts: three independent stacks, any Google Font works and \`@nuxt/fonts\` auto-loads it.
+  - \`fontSans\` — the body face everything inherits. Despite the name it takes any face, a serif body is a valid choice.
+  - \`fontSerif\` — headings (h1–h6) follow it. Set it only when you want headings to differ from the body; omit it and they match.
+  - \`fontMono\` — code, kbd, pre and samp follow it.
+  Pick faces that match the theme's personality:
   - Sans-serif (clean/modern): Inter, DM Sans, Geist, Public Sans, Outfit, Plus Jakarta Sans, Space Grotesk
-  - Serif (elegant/editorial): Playfair Display, Lora, Merriweather, Fraunces, Newsreader
+  - Serif (elegant/editorial): Playfair Display, Lora, Merriweather, Fraunces, Newsreader, Source Serif 4
   - Rounded (friendly/playful): Nunito, Quicksand, Varela Round
-  - Monospace (techy/dev): JetBrains Mono, Fira Code, IBM Plex Mono
-  ALWAYS change the font when creating a complete theme — don't leave the default unless it genuinely fits.
+  - Monospace (techy/dev): JetBrains Mono, Fira Code, IBM Plex Mono, Geist Mono
+  ALWAYS set \`fontSans\` when creating a complete theme — don't leave the default unless it genuinely fits. Pairing a display \`fontSerif\` with a plain body is the highest-leverage type choice available.
 - Icons: lucide (default), phosphor, or tabler for live preview. Any Iconify icon set works in the exported config. When suggesting a non-default icon set, include the FULL \`ui.icons\` mapping in the exported config and tell the user to install \`@iconify-json/{collection}\` (e.g. \`@iconify-json/ph\` for Phosphor). Required keys: ${Object.keys(themeIcons.phosphor).join(', ')}. Values use \`i-<set>-<name>\` format.
 
 **Component Theme Lookup:**
@@ -294,7 +303,16 @@ CRITICAL rules for component \`ui\` overrides:
 @import "@nuxt/ui";
 
 @theme {
-  --font-sans: 'FontName', sans-serif; /* only if font changed */
+  --font-sans: 'FontName', sans-serif; /* only if the body font changed */
+  --font-serif: 'FontName', serif;     /* only if headings differ from the body */
+  --font-mono: 'FontName', monospace;  /* only if the code font changed */
+}
+
+/* ONLY when --font-serif is set: nothing in tailwind consumes it, so headings
+   need this one rule. Omit the whole block otherwise, or every heading falls
+   back to Georgia. --font-sans and --font-mono need no rule at all. */
+@layer base {
+  h1, h2, h3, h4, h5, h6 { font-family: var(--font-serif); }
 }
 
 @theme static {

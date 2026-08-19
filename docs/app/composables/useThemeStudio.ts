@@ -52,7 +52,7 @@ export function useThemeStudio() {
     }
   }
 
-  /** Shadow/border/token-shade prefs; the expanded class bundle lives in the style-ui channel. */
+  /** Default-variant and token-shade prefs; the expansion lives in the style-ui channel. */
   const style = useState<StyleOptions>(THEME_STATE_KEYS.stylePrefs, () => ({}))
 
   // The class bundle is an expansion of `style`, not stored state, so it is
@@ -88,8 +88,6 @@ export function useThemeStudio() {
     const previousStyle = style.value
     const previous = styleTokens(previousStyle)
     style.value = { ...style.value, ...options }
-    // The .shadow-custom root flag is kept in sync by a watcher in plugins/theme.ts
-    // (covers presets via applyDoc too), so no per-path toggle is needed here.
 
     // Remove only the tokens the PREVIOUS style emitted and the next one
     // doesn't, never preset/doc-owned values sharing the same names.
@@ -112,10 +110,8 @@ export function useThemeStudio() {
 
     // Sliders stream through here at drag frequency, one event per burst.
     trackThrottled('Theme Style Changed', {
-      shadow: style.value.shadow || 'none',
-      border: style.value.border || 'default',
-      borderColor: style.value.borderColor || 'default',
-      shadowColor: style.value.shadowColor || 'default'
+      variant: style.value.defaults?.variant || 'default',
+      size: style.value.defaults?.size || 'default'
     })
   }
 
@@ -370,29 +366,14 @@ export function useThemeStudio() {
         neutral: pick(theme.neutralColors)
       },
       radius: pick(theme.radiuses),
-      font: { sans: pick(theme.fonts) },
-      // Weighted so most rolls stay clean, with the occasional loud one.
-      style: {
-        ...(Math.random() < 0.5 ? { shadow: 'custom' as const } : {}),
-        border: pick(['default', 'default', 'custom', 'none'] as const)
-      }
+      font: { sans: pick(theme.fonts) }
     }
 
-    // Colored borders/shadows and app-wide variants are the loud rolls,
-    // sprinkle them in rarely enough that most shuffles stay tasteful.
-    if (doc.style!.border === 'custom' && Math.random() < 0.4) {
-      doc.style!.borderColor = pick(['inverted', 'primary', 'neutral'] as const)
-    }
-    if (doc.style!.shadow === 'custom') {
-      // One config shadow: roll its geometry between a crisp offset (hard) and a
-      // soft blur, plus an occasional coloured cast.
-      const crisp = Math.random() < 0.5
-      doc.style!.shadowGeometry = crisp ? { x: 3, y: 3, blur: 0, spread: 0 } : { x: 0, y: 6, blur: 12, spread: 0 }
-      doc.style!.shadowOpacity = crisp ? 100 : 25
-      if (Math.random() < 0.4) doc.style!.shadowColor = pick(['black', 'inverted', 'primary'] as const)
-    }
+    // An app-wide variant is the loud roll, sprinkled in rarely enough that
+    // most shuffles stay tasteful. Left off entirely otherwise, an empty
+    // `style` would ride into history and exports as a phantom key.
     if (Math.random() < 0.25) {
-      doc.style!.defaults = { variant: pick(['solid', 'outline', 'soft', 'subtle'] as const) }
+      doc.style = { defaults: { variant: pick(['solid', 'outline', 'soft', 'subtle'] as const) } }
     }
 
     if (Math.random() < 0.125) {

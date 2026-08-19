@@ -713,7 +713,7 @@ const pageTitles: Record<Page, string> = {
         <!-- shrink-0 everywhere: the panel body is a scrollable flex column,
              and a shrinking child gets crushed into its own overflow-hidden -->
         <template v-if="page === 'home'">
-          <UPageGrid class="shrink-0 grid-cols-2 xl:grid-cols-4 gap-4 xl:gap-[var(--studio-border-width,1px)]">
+          <UPageGrid class="shrink-0 grid-cols-2 xl:grid-cols-4 gap-4 xl:gap-px">
             <UPageCard
               v-for="stat in stats"
               :key="stat.title"
@@ -780,7 +780,7 @@ const pageTitles: Record<Page, string> = {
               base: 'table-fixed border-separate border-spacing-0',
               thead: '[&>tr]:bg-elevated/50 [&>tr]:after:content-none',
               tbody: '[&>tr]:last:[&>td]:border-b-0',
-              th: 'first:rounded-l-lg last:rounded-r-lg border-y border-default first:border-l-[length:var(--studio-border-width,1px)] last:border-r-[length:var(--studio-border-width,1px)]',
+              th: 'first:rounded-l-lg last:rounded-r-lg border-y border-default first:border-l last:border-r',
               td: 'border-b border-default'
             }"
           />
@@ -827,7 +827,7 @@ const pageTitles: Record<Page, string> = {
               base: 'table-fixed border-separate border-spacing-0',
               thead: '[&>tr]:bg-elevated/50 [&>tr]:after:content-none',
               tbody: '[&>tr]:last:[&>td]:border-b-0',
-              th: 'py-2 first:rounded-l-lg last:rounded-r-lg border-y border-default first:border-l-[length:var(--studio-border-width,1px)] last:border-r-[length:var(--studio-border-width,1px)]',
+              th: 'py-2 first:rounded-l-lg last:rounded-r-lg border-y border-default first:border-l last:border-r',
               td: 'border-b border-default'
             }"
           />

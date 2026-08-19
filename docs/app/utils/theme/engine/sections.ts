@@ -1,9 +1,6 @@
-import type { ThemeDoc, ShadeStop } from './types'
-import { DEFAULT_COLORS, THEME_DEFAULTS, SEMANTIC_ALIASES } from './types'
+import type { ThemeDoc, ShadeStop, StyleOptions } from './types'
+import { DEFAULT_COLORS, THEME_DEFAULTS, SEMANTIC_ALIASES, styleTokens, TOKEN_SHADE_TARGETS, parseUiColorRef } from './types'
 import { FONT_WEIGHT_DEFAULTS } from '../studio'
-import type { StyleOptions } from './styles'
-import { styleTokens, TOKEN_SHADE_TARGETS } from './styles'
-import { parseUiColorRef } from './resolve'
 
 /**
  * The studio's setting sections, each owning a slice of the ThemeDoc.
@@ -16,14 +13,12 @@ import { parseUiColorRef } from './resolve'
 export type SectionKey
   = | 'primary' | 'neutral' | 'semantic'
     | 'font' | 'icons' | 'scale' | 'buttons' | 'panels' | 'inputs'
-    | 'shadow' | 'innerShadow' | 'borders'
 
 export const SECTION_GROUPS: Record<'colors' | 'style', SectionKey[]> = {
   colors: ['primary', 'neutral', 'semantic'],
-  // Everything that isn't colour: type, icons, scale, per-component defaults
-  // and the shadow/border treatments. One group, the General/Style split
-  // only ever chopped a long list in half.
-  style: ['font', 'icons', 'scale', 'shadow', 'innerShadow', 'borders', 'buttons', 'panels', 'inputs']
+  // Everything that isn't colour: type, icons, scale, per-component defaults.
+  // One group, the General/Style split only ever chopped a long list in half.
+  style: ['font', 'icons', 'scale', 'buttons', 'panels', 'inputs']
 }
 
 /** Which color section a semantic token (or token shade) belongs to. */
@@ -127,14 +122,6 @@ export function pickSection(doc: ThemeDoc, key: SectionKey): unknown {
       else delete font.weights
       if (font.letterSpacing === 0) delete font.letterSpacing
       if (font.lineHeight === 1.5) delete font.lineHeight
-      if (font.heading) {
-        const heading = { ...font.heading }
-        if (heading.weight === 700) delete heading.weight
-        if (heading.letterSpacing === 0) delete heading.letterSpacing
-        if (heading.lineHeight === 1.25) delete heading.lineHeight
-        if (Object.keys(heading).length) font.heading = heading
-        else delete font.heading
-      }
       return font
     }
     case 'icons':
@@ -150,35 +137,6 @@ export function pickSection(doc: ThemeDoc, key: SectionKey): unknown {
     case 'panels':
     case 'inputs':
       return groupPick(doc, key)
-    case 'shadow': {
-      // 'shade' with no explicit stops emits exactly the stock shadow
-      // colors (neutral-950 / black), a non-choice, same as absent
-      const color = style.shadowColor === 'default' ? null : style.shadowColor ?? null
-      return {
-        shadow: style.shadow ?? null,
-        color: color === 'shade' && !style.shadowShade ? null : color,
-        shade: style.shadowShade ?? null,
-        opacity: style.shadowOpacity ?? null,
-        geometry: style.shadowGeometry ?? null,
-        // explicit true equals absent (press is the default)
-        press: style.shadowPress === false ? false : null
-      }
-    }
-    case 'innerShadow':
-      return {
-        shadow: style.innerShadow ?? null,
-        color: style.innerShadowColor ?? null,
-        shade: style.innerShadowShade ?? null,
-        opacity: style.innerShadowOpacity ?? null,
-        geometry: style.innerShadowGeometry ?? null
-      }
-    case 'borders':
-      return {
-        border: style.border ?? 'default',
-        width: style.borderWidth ?? null,
-        frame: !!style.frame,
-        color: style.borderColor ?? null
-      }
   }
 }
 
@@ -317,30 +275,6 @@ export function mergeSection(current: ThemeDoc, base: ThemeDoc, key: SectionKey)
         setOrDelete(doc.style.defaults.variants, key, baseStyle.defaults?.variants?.[key])
         setOrDelete(doc.style.defaults.colors, key, baseStyle.defaults?.colors?.[key])
       }
-      break
-    case 'shadow':
-      doc.style ??= {}
-      setOrDelete(doc.style, 'shadow', baseStyle.shadow)
-      setOrDelete(doc.style, 'shadowColor', baseStyle.shadowColor)
-      setOrDelete(doc.style, 'shadowShade', baseStyle.shadowShade ? structuredClone(baseStyle.shadowShade) : undefined)
-      setOrDelete(doc.style, 'shadowOpacity', baseStyle.shadowOpacity)
-      setOrDelete(doc.style, 'shadowGeometry', baseStyle.shadowGeometry ? structuredClone(baseStyle.shadowGeometry) : undefined)
-      setOrDelete(doc.style, 'shadowPress', baseStyle.shadowPress)
-      break
-    case 'innerShadow':
-      doc.style ??= {}
-      setOrDelete(doc.style, 'innerShadow', baseStyle.innerShadow)
-      setOrDelete(doc.style, 'innerShadowColor', baseStyle.innerShadowColor)
-      setOrDelete(doc.style, 'innerShadowShade', baseStyle.innerShadowShade ? structuredClone(baseStyle.innerShadowShade) : undefined)
-      setOrDelete(doc.style, 'innerShadowOpacity', baseStyle.innerShadowOpacity)
-      setOrDelete(doc.style, 'innerShadowGeometry', baseStyle.innerShadowGeometry ? structuredClone(baseStyle.innerShadowGeometry) : undefined)
-      break
-    case 'borders':
-      doc.style ??= {}
-      setOrDelete(doc.style, 'border', baseStyle.border)
-      setOrDelete(doc.style, 'borderWidth', baseStyle.borderWidth)
-      setOrDelete(doc.style, 'frame', baseStyle.frame)
-      setOrDelete(doc.style, 'borderColor', baseStyle.borderColor)
       break
   }
 

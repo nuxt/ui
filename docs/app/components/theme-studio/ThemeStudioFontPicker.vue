@@ -13,7 +13,7 @@ const props = withDefaults(defineProps<{
   curated: readonly string[]
   /** The value that wears the (Default) tag. */
   defaultValue: string
-  /** Prepend an "Inherit base" option (the headings row). */
+  /** Prepend an "Inherit base" option (the Heading and Code rows). */
   inherit?: boolean
   icon?: string
   ariaLabel?: string

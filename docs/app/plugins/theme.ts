@@ -27,7 +27,6 @@ export default defineNuxtPlugin({
       assign('nuxt-ui-font', saved.font)
       assign('nuxt-ui-icons', saved.icons)
       assign('nuxt-ui-black-as-primary', saved.blackAsPrimary)
-      assign('nuxt-ui-font-prefs', saved.fontPrefs)
       assign('nuxt-ui-custom-colors', saved.customColors)
       assign('nuxt-ui-css-variables', saved.cssVariables)
       assign(THEME_STATE_KEYS.stylePrefs, saved.style)
@@ -71,17 +70,6 @@ export default defineNuxtPlugin({
         })
       }
 
-      // Keeps the shadow root flags in lockstep on every path. The FOUC
-      // script only ever ADDS them, and applyDoc (presets, undo/redo,
-      // shuffle) bypasses setStyle, so without this a flag set on load never
-      // clears and a live Shadow change never activates the ramp.
-      const stylePrefs = useState<{ shadow?: string }>(THEME_STATE_KEYS.stylePrefs)
-      watch(() => stylePrefs.value?.shadow, (shadow) => {
-        const flags = document.documentElement.classList
-        flags.toggle('shadow-custom', shadow === 'custom')
-        flags.toggle('shadow-none', shadow === 'flat')
-      }, { immediate: true })
-
       // One watcher owns every write. Each setting used to persist itself, so
       // a reload could restore them out of step and the derived stores needed
       // self-heals to reconcile; one atomic write makes that impossible.
@@ -94,10 +82,9 @@ export default defineNuxtPlugin({
       const radius = useState<number>('nuxt-ui-radius')
       const fontSize = useState<number>('nuxt-ui-font-size')
       const spacing = useState<number>('nuxt-ui-spacing')
-      const font = useState<string>('nuxt-ui-font')
+      const font = useState<StoredTheme['font']>('nuxt-ui-font')
       const iconSet = useState<string>('nuxt-ui-icons')
       const blackAsPrimary = useState<boolean>('nuxt-ui-black-as-primary')
-      const fontPrefs = useState<StoredTheme['fontPrefs']>('nuxt-ui-font-prefs')
       const style = useState<StoredTheme['style']>(THEME_STATE_KEYS.stylePrefs)
       const paletteParams = useState<StoredTheme['paletteParams']>(THEME_STATE_KEYS.paletteParams)
       const preset = useState<string | undefined>(THEME_STATE_KEYS.themePreset)
@@ -114,10 +101,9 @@ export default defineNuxtPlugin({
         radius: unless(radius.value, THEME_DEFAULTS.radius),
         fontSize: unless(fontSize.value, THEME_DEFAULTS.fontSize),
         spacing: unless(spacing.value, THEME_DEFAULTS.spacing),
-        font: unless(font.value, THEME_DEFAULTS.font),
+        font: filled(font.value),
         icons: unless(iconSet.value, THEME_DEFAULTS.icons),
         blackAsPrimary: blackAsPrimary.value || undefined,
-        fontPrefs: filled(fontPrefs.value),
         colors: filled(extras.value?.colors),
         components: filled(extras.value?.ui),
         customColors: filled(customColors.value),
@@ -183,14 +169,13 @@ export default defineNuxtPlugin({
 
               set('nuxt-ui-black-as-primary', T.blackAsPrimary ? ':root { --ui-primary: black; } .dark { --ui-primary: white; }' : '');
 
-              var shadow = T.style && T.style.shadow;
-              if (shadow === 'custom') { document.documentElement.classList.add('shadow-custom'); }
-              else if (shadow === 'flat') { document.documentElement.classList.add('shadow-none'); }
-
-              var fontRaw = T.font || 'Public Sans';
-              var font = SAFE.test(fontRaw) ? fontRaw : 'Public Sans';
-              var prefs = T.fontPrefs || {};
+              var prefs = T.font || {};
+              var font = (prefs.sans && SAFE.test(prefs.sans)) ? prefs.sans : 'Public Sans';
               var css = ':root { --font-sans: \\'' + font + '\\', sans-serif; }';
+              var serif = (prefs.serif && SAFE.test(prefs.serif)) ? prefs.serif : undefined;
+              var mono = (prefs.mono && SAFE.test(prefs.mono)) ? prefs.mono : undefined;
+              if (serif) { css += ' :root { --font-serif: \\'' + serif + '\\', serif; }'; }
+              if (mono) { css += ' :root { --font-mono: \\'' + mono + '\\', monospace; }'; }
               var w = prefs.weights || {};
               var wVars = Object.keys(w).map(function(step) { var n = num(w[step], 100, 900); return (SAFE.test(step) && n !== undefined) ? '--font-weight-' + step + ': ' + n + ';' : ''; }).filter(Boolean).join(' ');
               if (wVars) { css += ' :root { ' + wVars + ' }'; }
@@ -204,24 +189,8 @@ export default defineNuxtPlugin({
               var lh = num(prefs.lineHeight, 0.8, 3);
               if (lh !== undefined) { bodyRules += 'line-height: ' + lh + '; '; }
               if (bodyRules) { css += ' body { ' + bodyRules + '}'; }
-              var h = prefs.heading || {};
-              var hFont = (h.font && SAFE.test(h.font)) ? h.font : undefined;
-              var hWeight = num(h.weight, 100, 900);
-              var hLs = num(h.letterSpacing, -0.2, 1);
-              var hLh = num(h.lineHeight, 0.8, 3);
-              if (hFont || hWeight !== undefined || h.uppercase || h.italic || h.underline || (hLs !== undefined && hLs !== 0) || hLh !== undefined) {
-                var rules = '';
-                if (hFont) { rules += 'font-family: \\'' + hFont + '\\', sans-serif; '; }
-                if (hWeight !== undefined) { rules += 'font-weight: ' + hWeight + '; '; }
-                if (h.uppercase) { rules += 'text-transform: uppercase; '; }
-                if (h.italic) { rules += 'font-style: italic; '; }
-                if (h.underline) { rules += 'text-decoration: underline; '; }
-                if (hLs !== undefined && hLs !== 0) { rules += 'letter-spacing: ' + hLs + 'em; '; }
-                if (hLh !== undefined) { rules += 'line-height: ' + hLh + '; '; }
-                css += ' h1, h2, h3, h4, h5, h6 { ' + rules + '}';
-              }
-              if (T.font || Object.keys(prefs).length) { set('nuxt-ui-font', css); }
-              [font, hFont].forEach(function(name) {
+              if (Object.keys(prefs).length) { set('nuxt-ui-font', css); }
+              [font, serif, mono].forEach(function(name) {
                 if (!name || name === 'Public Sans') return;
                 var id = 'font-' + name.toLowerCase().replace(/\\s+/g, '-');
                 if (document.getElementById(id)) return;
