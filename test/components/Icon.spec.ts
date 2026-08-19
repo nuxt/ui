@@ -37,8 +37,11 @@ describe('Icon', () => {
   })
 
   it('falls back to an empty svg on the client when the icon is unknown', async () => {
+    // null loader on a dedicated prefix so the lookup stays offline instead of hitting the Iconify API
+    setCustomIconLoader(() => null, 'mock-missing')
+
     const wrapper = await mountSuspended(Icon, {
-      props: { name: 'i-mock-missing-icon', mode: 'svg' }
+      props: { name: 'i-mock-missing:icon', mode: 'svg' }
     })
 
     expect(wrapper.html()).toContain('<svg')
