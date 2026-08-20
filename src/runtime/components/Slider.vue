@@ -104,19 +104,27 @@ const thumbs = computed(() => sliderValue.value?.length ?? 1)
 
 const attrs = useAttrs()
 
-// The thumb is the element rendered with `role="slider"`, so `aria-*` attributes belong there
-// rather than on the root, which is neither focusable nor labelable and is never announced.
 const thumbAttrs = computed(() => {
+  if (thumbs.value > 1) return {}
+
   const ariaAttrs = Object.fromEntries(Object.entries(attrs).filter(([key]) => key.startsWith('aria-')))
 
-  if (thumbs.value === 1 && !ariaAttrs['aria-label'] && !ariaAttrs['aria-labelledby']) {
+  if (!ariaAttrs['aria-label'] && !ariaAttrs['aria-labelledby']) {
     ariaAttrs['aria-label'] = 'Thumb'
   }
 
   return ariaAttrs
 })
 
-const rootAttrs = computed(() => Object.fromEntries(Object.entries(attrs).filter(([key]) => !key.startsWith('aria-'))))
+const rootAttrs = computed(() => {
+  const rest = Object.fromEntries(Object.entries(attrs).filter(([key]) => !(key in thumbAttrs.value)))
+
+  if (rest['aria-label'] || rest['aria-labelledby']) {
+    rest.role = 'group'
+  }
+
+  return rest
+})
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.slider || {}) })({

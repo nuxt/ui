@@ -83,6 +83,32 @@ describe('Slider', () => {
       expect(thumbs.map(thumb => thumb.attributes('aria-label'))).toStrictEqual(['Value 1 of 3', 'Value 2 of 3', 'Value 3 of 3'])
     })
 
+    test('groups multiple thumbs under an aria-label instead of naming each of them', async () => {
+      const { wrapper, thumbs } = await renderThumbs({ props: { modelValue: [10, 90] }, attrs: { 'aria-label': 'Price range' } })
+
+      expect(thumbs.map(thumb => thumb.attributes('aria-label'))).toStrictEqual(['Minimum', 'Maximum'])
+
+      const root = wrapper.get('[data-slot="root"]')
+      expect(root.attributes('aria-label')).toBe('Price range')
+      expect(root.attributes('role')).toBe('group')
+    })
+
+    test('groups three or more thumbs under an aria-label instead of naming each of them', async () => {
+      const { wrapper, thumbs } = await renderThumbs({ props: { modelValue: [0, 10, 20] }, attrs: { 'aria-label': 'Levels' } })
+
+      expect(thumbs.map(thumb => thumb.attributes('aria-label'))).toStrictEqual(['Value 1 of 3', 'Value 2 of 3', 'Value 3 of 3'])
+
+      const root = wrapper.get('[data-slot="root"]')
+      expect(root.attributes('aria-label')).toBe('Levels')
+      expect(root.attributes('role')).toBe('group')
+    })
+
+    test('does not group an unlabelled slider', async () => {
+      const { wrapper } = await renderThumbs({ props: { modelValue: [10, 90] } })
+
+      expect(wrapper.get('[data-slot="root"]').attributes('role')).toBeUndefined()
+    })
+
     test('forwards aria-valuetext to the thumb', async () => {
       const { thumbs } = await renderThumbs({ props: { modelValue: 10 }, attrs: { 'aria-valuetext': '10 milliseconds' } })
 
