@@ -319,17 +319,23 @@ items:
     - table
 props:
   modelValue: 'system'
-  color: 'neutral'
+  color: 'primary'
   indicator: 'hidden'
   variant: 'table'
   orientation: 'horizontal'
   items:
-    - value: 'system'
+    - label: 'System'
       icon: 'i-lucide-monitor'
-    - value: 'light'
+      value: 'system'
+      class: 'w-20'
+    - label: 'Light'
       icon: 'i-lucide-sun'
-    - value: 'dark'
+      value: 'light'
+      class: 'w-20'
+    - label: 'Dark'
       icon: 'i-lucide-moon'
+      value: 'dark'
+      class: 'w-20'
 ---
 ::
 
