@@ -67,7 +67,7 @@ export interface TextareaSlots {
 </script>
 
 <script setup lang="ts" generic="T extends TextareaValue, Mod extends ModelModifiers = ModelModifiers">
-import { useTemplateRef, computed, onMounted, nextTick, watch } from 'vue'
+import { useTemplateRef, computed, onMounted, onScopeDispose, nextTick, watch } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useVModel } from '@vueuse/core'
 import { useAppConfig } from '#imports'
@@ -97,16 +97,25 @@ const modelValue = useVModel<TextareaProps<T, Mod>, 'modelValue', 'update:modelV
 
 const appConfig = useAppConfig() as Textarea['AppConfig']
 
-const { emitFormFocus, emitFormBlur, emitFormInput, emitFormChange, size, color, id, name, highlight, disabled, ariaAttrs } = useFormField<TextareaProps<T>>(_props, { deferInputValidation: true })
+const { emitFormFocus, emitFormBlur, emitFormInput, emitFormChange, size: formFieldSize, color: formFieldColor, id, name, highlight: formFieldHighlight, disabled: formFieldDisabled, ariaAttrs } = useFormField<TextareaProps<T>>(_props, { deferInputValidation: true })
+
+// eslint-disable-next-line vue/no-dupe-keys
+const color = computed(() => formFieldColor.value ?? props.color)
+// eslint-disable-next-line vue/no-dupe-keys
+const highlight = computed(() => formFieldHighlight.value ?? props.highlight)
+// eslint-disable-next-line vue/no-dupe-keys
+const size = computed(() => formFieldSize.value ?? props.size)
+// eslint-disable-next-line vue/no-dupe-keys
+const disabled = computed(() => formFieldDisabled.value ?? props.disabled)
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.textarea || {}) })({
-  color: color.value ?? props.color,
+  color: color.value,
   variant: props.variant,
-  size: size?.value ?? props.size,
+  size: size.value,
   loading: props.loading,
-  highlight: highlight.value ?? props.highlight,
+  highlight: highlight.value,
   fixed: props.fixed,
   autoresize: props.autoresize,
   leading: isLeading.value || !!props.avatar || !!slots.leading,
@@ -198,15 +207,23 @@ watch(modelValue, () => {
   nextTick(autoResize)
 })
 
+let autofocusTimeoutId: ReturnType<typeof setTimeout> | undefined
+let autoresizeTimeoutId: ReturnType<typeof setTimeout> | undefined
+
 onMounted(() => {
-  setTimeout(() => {
+  autofocusTimeoutId = setTimeout(() => {
     autoFocus()
   }, props.autofocusDelay)
 
-  setTimeout(async () => {
+  autoresizeTimeoutId = setTimeout(async () => {
     await nextTick()
     autoResize()
   }, props.autoresizeDelay)
+})
+
+onScopeDispose(() => {
+  clearTimeout(autofocusTimeoutId)
+  clearTimeout(autoresizeTimeoutId)
 })
 
 defineExpose({

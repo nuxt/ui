@@ -14,6 +14,11 @@ function getSchemaProps(schema: PropertyMeta['schema']): any {
     return []
   }
 
+  // `string & {}` widens a literal union, its object schema only lists String.prototype methods
+  if (schema.type === 'string & {}') {
+    return []
+  }
+
   if (schema.kind === 'object') {
     return Object.values(schema.schema).filter(prop => !props.ignore?.includes(prop.name))
   }

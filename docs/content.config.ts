@@ -150,7 +150,10 @@ export const collections = {
         url: z.string(),
         screenshotUrl: z.string().optional(),
         screenshotOptions: z.object({
-          delay: z.number()
+          delay: z.number().optional(),
+          width: z.number().optional(),
+          cookies: z.array(z.string()).optional(),
+          removeElements: z.array(z.string()).optional()
         }).optional()
       }))
     })
