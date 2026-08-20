@@ -63,7 +63,7 @@ You can also pass an array of objects with the following properties:
 - `disabled?: boolean`{lang="ts-type"}
 - `icon?: string`{lang="ts-type"}
 - `class?: any`{lang="ts-type"}
-- `ui?: { item?: ClassNameValue, container?: ClassNameValue, base?: ClassNameValue, 'indicator'?: ClassNameValue, wrapper?: ClassNameValue, label?: ClassNameValue, leadingIcon?: ClassNameValue, description?: ClassNameValue }`{lang="ts-type"}
+- `ui?: { item?: ClassNameValue, container?: ClassNameValue, base?: ClassNameValue, 'indicator'?: ClassNameValue, wrapper?: ClassNameValue, label?: ClassNameValue, icon?: ClassNameValue, description?: ClassNameValue }`{lang="ts-type"}
 
 ::component-code
 ---
@@ -125,15 +125,16 @@ props:
 ---
 ::
 
-### Icon
+### Icon :badge{label="Soon" class="align-text-top"}
 
-Use the `icon` property in the items to display an icon next to the label.
+Use the `icon` property in the items to display an icon next to the label when `indicator` is `hidden`, which is how you build a visual picker.
 
 ::component-code
 ---
 ignore:
   - modelValue
   - items
+  - variant
 external:
   - items
   - modelValue
@@ -141,6 +142,8 @@ externalTypes:
   - RadioGroupItem[]
 props:
   modelValue: 'system'
+  variant: 'card'
+  indicator: 'hidden'
   items:
     - label: 'System'
       icon: 'i-lucide-monitor'

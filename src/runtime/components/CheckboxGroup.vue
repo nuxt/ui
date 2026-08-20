@@ -4,6 +4,7 @@ import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/checkbox-group'
 import type { CheckboxProps } from './Checkbox.vue'
+import type { IconProps } from './Icon.vue'
 import type { AcceptableValue, GetItemKeys, GetModelValue, GetModelValueEmits } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
@@ -17,7 +18,7 @@ export type CheckboxGroupItem = CheckboxGroupValue | {
   disabled?: boolean
   value?: string
   /**
-   * The icon displayed next to the label.
+   * The icon displayed when checked, or next to the label when `indicator` is `hidden`.
    * @IconifyIcon
    */
   icon?: IconProps['name']
@@ -94,7 +95,6 @@ import { useFormField } from '../composables/useFormField'
 import { get, omit } from '../utils'
 import { tv } from '../utils/tv'
 import UCheckbox from './Checkbox.vue'
-import type { IconProps } from './Icon.vue'
 
 const _props = withDefaults(defineProps<CheckboxGroupProps<T, VK>>(), {
   labelKey: 'label',
@@ -110,7 +110,7 @@ const props = useComponentProps<CheckboxGroupProps<T, VK>>('checkboxGroup', _pro
 const appConfig = useAppConfig() as CheckboxGroup['AppConfig']
 
 const rootProps = useForwardProps(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'orientation', 'loop', 'required'), emits)
-const checkboxProps = useForwardProps(reactivePick(props, 'variant', 'indicator', 'icon'))
+const checkboxProps = useForwardProps(reactivePick(props, 'variant', 'indicator'))
 const getProxySlots = () => omit(slots, ['legend'])
 
 const { emitFormChange, emitFormInput, color: formFieldColor, highlight: formFieldHighlight, name, size: formFieldSize, id: _id, disabled: formFieldDisabled, ariaAttrs } = useFormField<CheckboxGroupProps<T>>(_props, { bind: false })
@@ -205,8 +205,8 @@ function onUpdate(value: any) {
       <UCheckbox
         v-for="item in normalizedItems"
         :key="item.value"
-        v-bind="({ ...omit(item, ['icon']), ...checkboxProps } as any)"
-        :leading-icon="item.icon"
+        v-bind="{ ...item, ...checkboxProps }"
+        :icon="item.icon ?? props.icon"
         :color="color"
         :highlight="highlight"
         :size="size"

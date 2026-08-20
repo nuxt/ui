@@ -9,7 +9,6 @@ export default (options: Required<ModuleOptions>) => ({
     icon: 'shrink-0 size-full',
     wrapper: 'w-full',
     label: 'block font-medium text-default',
-    leadingIcon: 'inline-block align-middle shrink-0 me-1.5',
     description: 'text-muted'
   },
   variants: {
@@ -49,32 +48,27 @@ export default (options: Required<ModuleOptions>) => ({
       xs: {
         base: 'size-3',
         container: 'h-4',
-        wrapper: 'text-xs',
-        leadingIcon: 'size-3'
+        wrapper: 'text-xs'
       },
       sm: {
         base: 'size-3.5',
         container: 'h-4',
-        wrapper: 'text-xs',
-        leadingIcon: 'size-3.5'
+        wrapper: 'text-xs'
       },
       md: {
         base: 'size-4',
         container: 'h-5',
-        wrapper: 'text-sm',
-        leadingIcon: 'size-4'
+        wrapper: 'text-sm'
       },
       lg: {
         base: 'size-4.5',
         container: 'h-5',
-        wrapper: 'text-sm',
-        leadingIcon: 'size-4.5'
+        wrapper: 'text-sm'
       },
       xl: {
         base: 'size-5',
         container: 'h-6',
-        wrapper: 'text-base',
-        leadingIcon: 'size-5'
+        wrapper: 'text-base'
       }
     },
     required: {
@@ -98,6 +92,11 @@ export default (options: Required<ModuleOptions>) => ({
     }
   },
   compoundVariants: [
+    { size: 'xs', indicator: 'hidden', class: { icon: 'size-3' } },
+    { size: 'sm', indicator: 'hidden', class: { icon: 'size-3.5' } },
+    { size: 'md', indicator: 'hidden', class: { icon: 'size-4' } },
+    { size: 'lg', indicator: 'hidden', class: { icon: 'size-4.5' } },
+    { size: 'xl', indicator: 'hidden', class: { icon: 'size-5' } },
     { size: 'xs', variant: 'card', class: { root: 'p-2.5' } },
     { size: 'sm', variant: 'card', class: { root: 'p-3' } },
     { size: 'md', variant: 'card', class: { root: 'p-3.5' } },

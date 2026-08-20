@@ -116,6 +116,8 @@ props:
 
 Use the `icon` prop to set the icon of the Checkbox when it is checked. Defaults to `i-lucide-check`.
 
+When [`indicator`](#indicator) is `hidden`, the icon is displayed next to the label instead. :badge{label="Soon" class="align-text-top"}
+
 ::component-code
 ---
 ignore:
@@ -138,20 +140,6 @@ You can customize this icon globally in your `app.config.ts` under `ui.icons.che
 :::tip{to="/docs/getting-started/integrations/icons/vue#theme"}
 You can customize this icon globally in your `vite.config.ts` under `ui.icons.check` key.
 :::
-::
-
-### Leading Icon
-
-Use the `leading-icon` prop to display an icon next to the label of the Checkbox.
-
-::component-code
----
-ignore:
-  - label
-props:
-  leadingIcon: 'i-lucide-tag'
-  label: Check me
----
 ::
 
 ### Color

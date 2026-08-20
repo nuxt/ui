@@ -36,14 +36,6 @@ const itemsWithIcon = [
   { value: '2', label: 'Light', icon: 'i-lucide-sun' },
   { value: '3', label: 'Dark', icon: 'i-lucide-moon' }
 ]
-const viewItems = [
-  { value: 'table', label: 'Table', icon: 'i-lucide-table' },
-  { value: 'board', label: 'Board', icon: 'i-lucide-kanban' },
-  { value: 'calendar', label: 'Calendar', icon: 'i-lucide-calendar' },
-  { value: 'list', label: 'List', icon: 'i-lucide-list' },
-  { value: 'gallery', label: 'Gallery', icon: 'i-lucide-images' },
-  { value: 'map', label: 'Map', icon: 'i-lucide-map' }
-]
 </script>
 
 <template>
@@ -76,19 +68,4 @@ const viewItems = [
       </template>
     </URadioGroup>
   </Matrix>
-
-  <!-- Icon-on-top card grid built on the per-item `icon`, using only `ui` overrides -->
-  <div class="p-4 border-t border-default">
-    <URadioGroup
-      default-value="table"
-      variant="card"
-      indicator="hidden"
-      :items="viewItems"
-      :ui="{
-        fieldset: 'grid grid-cols-3 gap-2 w-96',
-        label: 'flex flex-col items-center gap-1.5',
-        leadingIcon: 'size-6 me-0'
-      }"
-    />
-  </div>
 </template>

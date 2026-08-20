@@ -66,7 +66,7 @@ You can also pass an array of objects with the following properties:
 - `disabled?: boolean`{lang="ts-type"}
 - `icon?: string`{lang="ts-type"}
 - `class?: any`{lang="ts-type"}
-- `ui?: { item?: ClassNameValue, container?: ClassNameValue, base?: ClassNameValue, 'indicator'?: ClassNameValue, icon?: ClassNameValue, wrapper?: ClassNameValue, label?: ClassNameValue, leadingIcon?: ClassNameValue, description?: ClassNameValue }`{lang="ts-type"}
+- `ui?: { item?: ClassNameValue, container?: ClassNameValue, base?: ClassNameValue, 'indicator'?: ClassNameValue, icon?: ClassNameValue, wrapper?: ClassNameValue, label?: ClassNameValue, description?: ClassNameValue }`{lang="ts-type"}
 
 ::component-code
 ---
@@ -130,15 +130,18 @@ props:
 ---
 ::
 
-### Icon
+### Icon :badge{label="Soon" class="align-text-top"}
 
-Use the `icon` property in the items to display an icon next to the label.
+Use the `icon` property in the items to display an icon when the checkbox is checked.
+
+When `indicator` is `hidden`, the icon is displayed next to the label instead, which is how you build a visual picker.
 
 ::component-code
 ---
 ignore:
   - modelValue
   - items
+  - variant
 external:
   - items
   - modelValue
@@ -147,6 +150,8 @@ externalTypes:
 props:
   modelValue:
     - 'system'
+  variant: 'card'
+  indicator: 'hidden'
   items:
     - label: 'System'
       icon: 'i-lucide-monitor'
