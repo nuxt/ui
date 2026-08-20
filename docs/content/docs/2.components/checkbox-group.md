@@ -342,34 +342,40 @@ props:
 
 Use the `icon` property in the items to display an icon when the checkbox is checked.
 
-When `indicator` is `hidden`, the icon is displayed next to the label instead, which is how you build a visual picker.
+::note
+When `indicator` is `hidden`, the icon is displayed above the label instead.
+::
 
 ::component-code
 ---
+prettier: true
 ignore:
   - modelValue
   - items
-  - variant
+  - indicator
 external:
   - items
   - modelValue
 externalTypes:
   - CheckboxGroupItem[]
+items:
+  variant:
+    - card
+    - table
 props:
   modelValue:
     - 'system'
-  variant: 'card'
+  color: 'neutral'
+  variant: 'table'
   indicator: 'hidden'
+  orientation: 'horizontal'
   items:
-    - label: 'System'
+    - value: 'system'
       icon: 'i-lucide-monitor'
-      value: 'system'
-    - label: 'Light'
+    - value: 'light'
       icon: 'i-lucide-sun'
-      value: 'light'
-    - label: 'Dark'
+    - value: 'dark'
       icon: 'i-lucide-moon'
-      value: 'dark'
 ---
 ::
 

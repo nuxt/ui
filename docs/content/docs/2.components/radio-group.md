@@ -295,33 +295,41 @@ props:
 
 ### With icon in items :badge{label="Soon" class="align-text-top"}
 
-Use the `icon` property in the items to display an icon next to the label when `indicator` is `hidden`, which is how you build a visual picker.
+Use the `icon` property in the items to display an icon when the radio is checked.
+
+::note
+When `indicator` is `hidden`, the icon is displayed above the label instead.
+::
 
 ::component-code
 ---
+prettier: true
 ignore:
   - modelValue
   - items
-  - variant
+  - indicator
 external:
   - items
   - modelValue
 externalTypes:
   - RadioGroupItem[]
+items:
+  variant:
+    - card
+    - table
 props:
   modelValue: 'system'
-  variant: 'card'
+  color: 'neutral'
   indicator: 'hidden'
+  variant: 'table'
+  orientation: 'horizontal'
   items:
-    - label: 'System'
+    - value: 'system'
       icon: 'i-lucide-monitor'
-      value: 'system'
-    - label: 'Light'
+    - value: 'light'
       icon: 'i-lucide-sun'
-      value: 'light'
-    - label: 'Dark'
+    - value: 'dark'
       icon: 'i-lucide-moon'
-      value: 'dark'
 ---
 ::
 
