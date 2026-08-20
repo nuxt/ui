@@ -1873,7 +1873,7 @@ exports[`Table > renders with sticky correctly 1`] = `
 "<div data-slot="root" class="relative overflow-auto outline-primary/25 focus-visible:outline-3">
   <table data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
-    <thead data-slot="thead" class="sticky top-0 inset-x-0 bg-default/75 backdrop-blur z-1">
+    <thead data-slot="thead" class="sticky top-0 inset-x-0 bg-default/75 backdrop-blur-sm z-1">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
@@ -1983,7 +1983,7 @@ exports[`Table > renders with virtualize and sticky correctly 1`] = `
 "<div data-slot="root" class="relative overflow-auto outline-primary/25 focus-visible:outline-3">
   <table data-slot="base" class="min-w-full overflow-clip">
     <!--v-if-->
-    <thead data-slot="thead" class="sticky top-0 inset-x-0 bg-default/75 backdrop-blur z-1">
+    <thead data-slot="thead" class="sticky top-0 inset-x-0 bg-default/75 backdrop-blur-sm z-1">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">
           <div data-slot="root" class="relative flex items-start flex-row">
@@ -2014,7 +2014,7 @@ exports[`Table > renders with virtualize and sticky correctly 1`] = `
       <!--v-if-->
       <!--v-if-->
     </tbody>
-    <tfoot data-slot="tfoot" class="sticky bottom-0 inset-x-0 bg-default/75 backdrop-blur z-1">
+    <tfoot data-slot="tfoot" class="sticky bottom-0 inset-x-0 bg-default/75 backdrop-blur-sm z-1">
       <tr data-slot="separator" class="absolute z-1 start-0 w-full h-px bg-(--ui-border-accented)"></tr>
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">
