@@ -9,14 +9,16 @@ const items = ref([
 ] satisfies WheelPickerItem[])
 
 const value = ref('pro')
+
+const prices = computed(() => Object.fromEntries(items.value.map(item => [item.value, item.price])))
 </script>
 
 <template>
   <UWheelPicker v-model="value" :items="items" :item-height="44" class="w-64" aria-label="Plan">
     <template #item="{ item, active }">
-      <UIcon :name="(item.raw as any).icon" class="size-5 shrink-0" />
+      <UIcon v-if="item.icon" :name="item.icon" class="size-5 shrink-0" />
       <span class="flex-1 text-start truncate">{{ item.label }}</span>
-      <span class="text-sm" :class="active ? 'text-primary' : 'text-dimmed'">{{ (item.raw as any).price }}</span>
+      <span class="text-sm" :class="active ? 'text-primary' : 'text-dimmed'">{{ prices[String(item.value)] }}</span>
     </template>
   </UWheelPicker>
 </template>
