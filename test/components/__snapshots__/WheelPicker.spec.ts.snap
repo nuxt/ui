@@ -1,0 +1,927 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`WheelPicker > renders with ariaLabel correctly 1`] = `
+"<div data-slot="root" data-orientation="vertical" class="relative isolate inline-flex select-none w-36">
+  <div id="v-0-0" role="listbox" aria-label="Pick an item" aria-orientation="vertical" aria-activedescendant="v-0-0-0" tabindex="0" data-slot="viewport" style="height: 160px; width: 100%;" class="relative w-full overflow-hidden touch-none outline-none rounded-md bg-default ring ring-inset ring-accented focus-visible:ring-2 transition-[color,box-shadow] focus-visible:ring-inverted">
+    <div aria-hidden="true" data-slot="indicator" style="height: 32px;" class="absolute inset-x-1 top-1/2 -translate-y-1/2 pointer-events-none rounded-md bg-elevated"></div>
+    <div data-slot="list" class="absolute inset-0 [mask-image:linear-gradient(to_bottom,transparent,#000_25%,#000_75%,transparent)] [-webkit-mask-image:linear-gradient(to_bottom,transparent,#000_25%,#000_75%,transparent)]">
+      <div id="v-0-0-0" role="option" aria-selected="true" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(0px) scaleY(1); opacity: 1;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 1</span>
+      </div>
+      <div id="v-0-0-1" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(30.557749073643905px) scaleY(0.8660254037844387); opacity: 0.8660254037844387;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 2</span>
+      </div>
+      <div id="v-0-0-2" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(52.92757396049204px) scaleY(0.5000000000000001); opacity: 0.5000000000000001;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 3</span>
+      </div>
+      <div id="v-0-0-3" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(61.115498147287816px) scaleY(6.123233995736766e-17); opacity: 0; visibility: hidden;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 4</span>
+      </div>
+      <div id="v-0-0-4" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(52.92757396049205px) scaleY(0); opacity: 0; visibility: hidden;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 5</span>
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`WheelPicker > renders with as correctly 1`] = `
+"<section data-slot="root" data-orientation="vertical" class="relative isolate inline-flex select-none w-36">
+  <div id="v-0-0" role="listbox" aria-orientation="vertical" aria-activedescendant="v-0-0-0" tabindex="0" data-slot="viewport" style="height: 160px; width: 100%;" class="relative w-full overflow-hidden touch-none outline-none rounded-md bg-default ring ring-inset ring-accented focus-visible:ring-2 transition-[color,box-shadow] focus-visible:ring-inverted">
+    <div aria-hidden="true" data-slot="indicator" style="height: 32px;" class="absolute inset-x-1 top-1/2 -translate-y-1/2 pointer-events-none rounded-md bg-elevated"></div>
+    <div data-slot="list" class="absolute inset-0 [mask-image:linear-gradient(to_bottom,transparent,#000_25%,#000_75%,transparent)] [-webkit-mask-image:linear-gradient(to_bottom,transparent,#000_25%,#000_75%,transparent)]">
+      <div id="v-0-0-0" role="option" aria-selected="true" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(0px) scaleY(1); opacity: 1;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 1</span>
+      </div>
+      <div id="v-0-0-1" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(30.557749073643905px) scaleY(0.8660254037844387); opacity: 0.8660254037844387;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 2</span>
+      </div>
+      <div id="v-0-0-2" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(52.92757396049204px) scaleY(0.5000000000000001); opacity: 0.5000000000000001;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 3</span>
+      </div>
+      <div id="v-0-0-3" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(61.115498147287816px) scaleY(6.123233995736766e-17); opacity: 0; visibility: hidden;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 4</span>
+      </div>
+      <div id="v-0-0-4" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(52.92757396049205px) scaleY(0); opacity: 0; visibility: hidden;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 5</span>
+      </div>
+    </div>
+  </div>
+</section>"
+`;
+
+exports[`WheelPicker > renders with class correctly 1`] = `
+"<div data-slot="root" data-orientation="vertical" class="relative isolate inline-flex select-none w-40">
+  <div id="v-0-0" role="listbox" aria-orientation="vertical" aria-activedescendant="v-0-0-0" tabindex="0" data-slot="viewport" style="height: 160px; width: 100%;" class="relative w-full overflow-hidden touch-none outline-none rounded-md bg-default ring ring-inset ring-accented focus-visible:ring-2 transition-[color,box-shadow] focus-visible:ring-inverted">
+    <div aria-hidden="true" data-slot="indicator" style="height: 32px;" class="absolute inset-x-1 top-1/2 -translate-y-1/2 pointer-events-none rounded-md bg-elevated"></div>
+    <div data-slot="list" class="absolute inset-0 [mask-image:linear-gradient(to_bottom,transparent,#000_25%,#000_75%,transparent)] [-webkit-mask-image:linear-gradient(to_bottom,transparent,#000_25%,#000_75%,transparent)]">
+      <div id="v-0-0-0" role="option" aria-selected="true" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(0px) scaleY(1); opacity: 1;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 1</span>
+      </div>
+      <div id="v-0-0-1" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(30.557749073643905px) scaleY(0.8660254037844387); opacity: 0.8660254037844387;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 2</span>
+      </div>
+      <div id="v-0-0-2" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(52.92757396049204px) scaleY(0.5000000000000001); opacity: 0.5000000000000001;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 3</span>
+      </div>
+      <div id="v-0-0-3" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(61.115498147287816px) scaleY(6.123233995736766e-17); opacity: 0; visibility: hidden;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 4</span>
+      </div>
+      <div id="v-0-0-4" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(52.92757396049205px) scaleY(0); opacity: 0; visibility: hidden;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 5</span>
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`WheelPicker > renders with color error correctly 1`] = `
+"<div data-slot="root" data-orientation="vertical" class="relative isolate inline-flex select-none w-36">
+  <div id="v-0-0" role="listbox" aria-orientation="vertical" aria-activedescendant="v-0-0-0" tabindex="0" data-slot="viewport" style="height: 160px; width: 100%;" class="relative w-full overflow-hidden touch-none outline-none rounded-md bg-default ring ring-inset ring-accented focus-visible:ring-2 transition-[color,box-shadow] focus-visible:ring-error">
+    <div aria-hidden="true" data-slot="indicator" style="height: 32px;" class="absolute inset-x-1 top-1/2 -translate-y-1/2 pointer-events-none rounded-md bg-error/10"></div>
+    <div data-slot="list" class="absolute inset-0 [mask-image:linear-gradient(to_bottom,transparent,#000_25%,#000_75%,transparent)] [-webkit-mask-image:linear-gradient(to_bottom,transparent,#000_25%,#000_75%,transparent)]">
+      <div id="v-0-0-0" role="option" aria-selected="true" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(0px) scaleY(1); opacity: 1;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-error text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 1</span>
+      </div>
+      <div id="v-0-0-1" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(30.557749073643905px) scaleY(0.8660254037844387); opacity: 0.8660254037844387;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-error text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 2</span>
+      </div>
+      <div id="v-0-0-2" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(52.92757396049204px) scaleY(0.5000000000000001); opacity: 0.5000000000000001;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-error text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 3</span>
+      </div>
+      <div id="v-0-0-3" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(61.115498147287816px) scaleY(6.123233995736766e-17); opacity: 0; visibility: hidden;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-error text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 4</span>
+      </div>
+      <div id="v-0-0-4" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(52.92757396049205px) scaleY(0); opacity: 0; visibility: hidden;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-error text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 5</span>
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`WheelPicker > renders with color info correctly 1`] = `
+"<div data-slot="root" data-orientation="vertical" class="relative isolate inline-flex select-none w-36">
+  <div id="v-0-0" role="listbox" aria-orientation="vertical" aria-activedescendant="v-0-0-0" tabindex="0" data-slot="viewport" style="height: 160px; width: 100%;" class="relative w-full overflow-hidden touch-none outline-none rounded-md bg-default ring ring-inset ring-accented focus-visible:ring-2 transition-[color,box-shadow] focus-visible:ring-info">
+    <div aria-hidden="true" data-slot="indicator" style="height: 32px;" class="absolute inset-x-1 top-1/2 -translate-y-1/2 pointer-events-none rounded-md bg-info/10"></div>
+    <div data-slot="list" class="absolute inset-0 [mask-image:linear-gradient(to_bottom,transparent,#000_25%,#000_75%,transparent)] [-webkit-mask-image:linear-gradient(to_bottom,transparent,#000_25%,#000_75%,transparent)]">
+      <div id="v-0-0-0" role="option" aria-selected="true" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(0px) scaleY(1); opacity: 1;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-info text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 1</span>
+      </div>
+      <div id="v-0-0-1" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(30.557749073643905px) scaleY(0.8660254037844387); opacity: 0.8660254037844387;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-info text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 2</span>
+      </div>
+      <div id="v-0-0-2" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(52.92757396049204px) scaleY(0.5000000000000001); opacity: 0.5000000000000001;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-info text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 3</span>
+      </div>
+      <div id="v-0-0-3" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(61.115498147287816px) scaleY(6.123233995736766e-17); opacity: 0; visibility: hidden;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-info text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 4</span>
+      </div>
+      <div id="v-0-0-4" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(52.92757396049205px) scaleY(0); opacity: 0; visibility: hidden;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-info text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 5</span>
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`WheelPicker > renders with color neutral correctly 1`] = `
+"<div data-slot="root" data-orientation="vertical" class="relative isolate inline-flex select-none w-36">
+  <div id="v-0-0" role="listbox" aria-orientation="vertical" aria-activedescendant="v-0-0-0" tabindex="0" data-slot="viewport" style="height: 160px; width: 100%;" class="relative w-full overflow-hidden touch-none outline-none rounded-md bg-default ring ring-inset ring-accented focus-visible:ring-2 transition-[color,box-shadow] focus-visible:ring-inverted">
+    <div aria-hidden="true" data-slot="indicator" style="height: 32px;" class="absolute inset-x-1 top-1/2 -translate-y-1/2 pointer-events-none rounded-md bg-elevated"></div>
+    <div data-slot="list" class="absolute inset-0 [mask-image:linear-gradient(to_bottom,transparent,#000_25%,#000_75%,transparent)] [-webkit-mask-image:linear-gradient(to_bottom,transparent,#000_25%,#000_75%,transparent)]">
+      <div id="v-0-0-0" role="option" aria-selected="true" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(0px) scaleY(1); opacity: 1;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 1</span>
+      </div>
+      <div id="v-0-0-1" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(30.557749073643905px) scaleY(0.8660254037844387); opacity: 0.8660254037844387;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 2</span>
+      </div>
+      <div id="v-0-0-2" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(52.92757396049204px) scaleY(0.5000000000000001); opacity: 0.5000000000000001;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 3</span>
+      </div>
+      <div id="v-0-0-3" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(61.115498147287816px) scaleY(6.123233995736766e-17); opacity: 0; visibility: hidden;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 4</span>
+      </div>
+      <div id="v-0-0-4" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(52.92757396049205px) scaleY(0); opacity: 0; visibility: hidden;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 5</span>
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`WheelPicker > renders with color primary correctly 1`] = `
+"<div data-slot="root" data-orientation="vertical" class="relative isolate inline-flex select-none w-36">
+  <div id="v-0-0" role="listbox" aria-orientation="vertical" aria-activedescendant="v-0-0-0" tabindex="0" data-slot="viewport" style="height: 160px; width: 100%;" class="relative w-full overflow-hidden touch-none outline-none rounded-md bg-default ring ring-inset ring-accented focus-visible:ring-2 transition-[color,box-shadow] focus-visible:ring-primary">
+    <div aria-hidden="true" data-slot="indicator" style="height: 32px;" class="absolute inset-x-1 top-1/2 -translate-y-1/2 pointer-events-none rounded-md bg-primary/10"></div>
+    <div data-slot="list" class="absolute inset-0 [mask-image:linear-gradient(to_bottom,transparent,#000_25%,#000_75%,transparent)] [-webkit-mask-image:linear-gradient(to_bottom,transparent,#000_25%,#000_75%,transparent)]">
+      <div id="v-0-0-0" role="option" aria-selected="true" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(0px) scaleY(1); opacity: 1;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-primary text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 1</span>
+      </div>
+      <div id="v-0-0-1" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(30.557749073643905px) scaleY(0.8660254037844387); opacity: 0.8660254037844387;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-primary text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 2</span>
+      </div>
+      <div id="v-0-0-2" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(52.92757396049204px) scaleY(0.5000000000000001); opacity: 0.5000000000000001;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-primary text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 3</span>
+      </div>
+      <div id="v-0-0-3" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(61.115498147287816px) scaleY(6.123233995736766e-17); opacity: 0; visibility: hidden;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-primary text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 4</span>
+      </div>
+      <div id="v-0-0-4" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(52.92757396049205px) scaleY(0); opacity: 0; visibility: hidden;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-primary text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 5</span>
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`WheelPicker > renders with color secondary correctly 1`] = `
+"<div data-slot="root" data-orientation="vertical" class="relative isolate inline-flex select-none w-36">
+  <div id="v-0-0" role="listbox" aria-orientation="vertical" aria-activedescendant="v-0-0-0" tabindex="0" data-slot="viewport" style="height: 160px; width: 100%;" class="relative w-full overflow-hidden touch-none outline-none rounded-md bg-default ring ring-inset ring-accented focus-visible:ring-2 transition-[color,box-shadow] focus-visible:ring-secondary">
+    <div aria-hidden="true" data-slot="indicator" style="height: 32px;" class="absolute inset-x-1 top-1/2 -translate-y-1/2 pointer-events-none rounded-md bg-secondary/10"></div>
+    <div data-slot="list" class="absolute inset-0 [mask-image:linear-gradient(to_bottom,transparent,#000_25%,#000_75%,transparent)] [-webkit-mask-image:linear-gradient(to_bottom,transparent,#000_25%,#000_75%,transparent)]">
+      <div id="v-0-0-0" role="option" aria-selected="true" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(0px) scaleY(1); opacity: 1;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-secondary text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 1</span>
+      </div>
+      <div id="v-0-0-1" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(30.557749073643905px) scaleY(0.8660254037844387); opacity: 0.8660254037844387;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-secondary text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 2</span>
+      </div>
+      <div id="v-0-0-2" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(52.92757396049204px) scaleY(0.5000000000000001); opacity: 0.5000000000000001;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-secondary text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 3</span>
+      </div>
+      <div id="v-0-0-3" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(61.115498147287816px) scaleY(6.123233995736766e-17); opacity: 0; visibility: hidden;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-secondary text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 4</span>
+      </div>
+      <div id="v-0-0-4" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(52.92757396049205px) scaleY(0); opacity: 0; visibility: hidden;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-secondary text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 5</span>
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`WheelPicker > renders with color success correctly 1`] = `
+"<div data-slot="root" data-orientation="vertical" class="relative isolate inline-flex select-none w-36">
+  <div id="v-0-0" role="listbox" aria-orientation="vertical" aria-activedescendant="v-0-0-0" tabindex="0" data-slot="viewport" style="height: 160px; width: 100%;" class="relative w-full overflow-hidden touch-none outline-none rounded-md bg-default ring ring-inset ring-accented focus-visible:ring-2 transition-[color,box-shadow] focus-visible:ring-success">
+    <div aria-hidden="true" data-slot="indicator" style="height: 32px;" class="absolute inset-x-1 top-1/2 -translate-y-1/2 pointer-events-none rounded-md bg-success/10"></div>
+    <div data-slot="list" class="absolute inset-0 [mask-image:linear-gradient(to_bottom,transparent,#000_25%,#000_75%,transparent)] [-webkit-mask-image:linear-gradient(to_bottom,transparent,#000_25%,#000_75%,transparent)]">
+      <div id="v-0-0-0" role="option" aria-selected="true" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(0px) scaleY(1); opacity: 1;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-success text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 1</span>
+      </div>
+      <div id="v-0-0-1" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(30.557749073643905px) scaleY(0.8660254037844387); opacity: 0.8660254037844387;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-success text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 2</span>
+      </div>
+      <div id="v-0-0-2" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(52.92757396049204px) scaleY(0.5000000000000001); opacity: 0.5000000000000001;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-success text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 3</span>
+      </div>
+      <div id="v-0-0-3" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(61.115498147287816px) scaleY(6.123233995736766e-17); opacity: 0; visibility: hidden;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-success text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 4</span>
+      </div>
+      <div id="v-0-0-4" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(52.92757396049205px) scaleY(0); opacity: 0; visibility: hidden;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-success text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 5</span>
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`WheelPicker > renders with color warning correctly 1`] = `
+"<div data-slot="root" data-orientation="vertical" class="relative isolate inline-flex select-none w-36">
+  <div id="v-0-0" role="listbox" aria-orientation="vertical" aria-activedescendant="v-0-0-0" tabindex="0" data-slot="viewport" style="height: 160px; width: 100%;" class="relative w-full overflow-hidden touch-none outline-none rounded-md bg-default ring ring-inset ring-accented focus-visible:ring-2 transition-[color,box-shadow] focus-visible:ring-warning">
+    <div aria-hidden="true" data-slot="indicator" style="height: 32px;" class="absolute inset-x-1 top-1/2 -translate-y-1/2 pointer-events-none rounded-md bg-warning/10"></div>
+    <div data-slot="list" class="absolute inset-0 [mask-image:linear-gradient(to_bottom,transparent,#000_25%,#000_75%,transparent)] [-webkit-mask-image:linear-gradient(to_bottom,transparent,#000_25%,#000_75%,transparent)]">
+      <div id="v-0-0-0" role="option" aria-selected="true" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(0px) scaleY(1); opacity: 1;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-warning text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 1</span>
+      </div>
+      <div id="v-0-0-1" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(30.557749073643905px) scaleY(0.8660254037844387); opacity: 0.8660254037844387;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-warning text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 2</span>
+      </div>
+      <div id="v-0-0-2" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(52.92757396049204px) scaleY(0.5000000000000001); opacity: 0.5000000000000001;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-warning text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 3</span>
+      </div>
+      <div id="v-0-0-3" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(61.115498147287816px) scaleY(6.123233995736766e-17); opacity: 0; visibility: hidden;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-warning text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 4</span>
+      </div>
+      <div id="v-0-0-4" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(52.92757396049205px) scaleY(0); opacity: 0; visibility: hidden;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-warning text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 5</span>
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`WheelPicker > renders with defaultValue correctly 1`] = `
+"<div data-slot="root" data-orientation="vertical" class="relative isolate inline-flex select-none w-36">
+  <div id="v-0-0" role="listbox" aria-orientation="vertical" aria-activedescendant="v-0-0-1" tabindex="0" data-slot="viewport" style="height: 160px; width: 100%;" class="relative w-full overflow-hidden touch-none outline-none rounded-md bg-default ring ring-inset ring-accented focus-visible:ring-2 transition-[color,box-shadow] focus-visible:ring-inverted">
+    <div aria-hidden="true" data-slot="indicator" style="height: 32px;" class="absolute inset-x-1 top-1/2 -translate-y-1/2 pointer-events-none rounded-md bg-elevated"></div>
+    <div data-slot="list" class="absolute inset-0 [mask-image:linear-gradient(to_bottom,transparent,#000_25%,#000_75%,transparent)] [-webkit-mask-image:linear-gradient(to_bottom,transparent,#000_25%,#000_75%,transparent)]">
+      <div id="v-0-0-0" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(-30.557749073643905px) scaleY(0.8660254037844387); opacity: 0.8660254037844387;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 1</span>
+      </div>
+      <div id="v-0-0-1" role="option" aria-selected="true" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(0px) scaleY(1); opacity: 1;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 2</span>
+      </div>
+      <div id="v-0-0-2" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(30.557749073643905px) scaleY(0.8660254037844387); opacity: 0.8660254037844387;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 3</span>
+      </div>
+      <div id="v-0-0-3" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(52.92757396049204px) scaleY(0.5000000000000001); opacity: 0.5000000000000001;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 4</span>
+      </div>
+      <div id="v-0-0-4" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(61.115498147287816px) scaleY(6.123233995736766e-17); opacity: 0; visibility: hidden;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 5</span>
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`WheelPicker > renders with disabled correctly 1`] = `
+"<div data-slot="root" data-orientation="vertical" class="relative isolate inline-flex select-none w-36 opacity-75 cursor-not-allowed">
+  <div id="v-0-0" role="listbox" aria-orientation="vertical" aria-activedescendant="v-0-0-0" aria-disabled="true" tabindex="-1" data-slot="viewport" style="height: 160px; width: 100%;" class="relative w-full overflow-hidden touch-none outline-none rounded-md bg-default ring ring-inset ring-accented focus-visible:ring-2 transition-[color,box-shadow] focus-visible:ring-inverted pointer-events-none">
+    <div aria-hidden="true" data-slot="indicator" style="height: 32px;" class="absolute inset-x-1 top-1/2 -translate-y-1/2 pointer-events-none rounded-md bg-elevated"></div>
+    <div data-slot="list" class="absolute inset-0 [mask-image:linear-gradient(to_bottom,transparent,#000_25%,#000_75%,transparent)] [-webkit-mask-image:linear-gradient(to_bottom,transparent,#000_25%,#000_75%,transparent)]">
+      <div id="v-0-0-0" role="option" aria-selected="true" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(0px) scaleY(1); opacity: 1;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 1</span>
+      </div>
+      <div id="v-0-0-1" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(30.557749073643905px) scaleY(0.8660254037844387); opacity: 0.8660254037844387;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 2</span>
+      </div>
+      <div id="v-0-0-2" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(52.92757396049204px) scaleY(0.5000000000000001); opacity: 0.5000000000000001;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 3</span>
+      </div>
+      <div id="v-0-0-3" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(61.115498147287816px) scaleY(6.123233995736766e-17); opacity: 0; visibility: hidden;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 4</span>
+      </div>
+      <div id="v-0-0-4" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(52.92757396049205px) scaleY(0); opacity: 0; visibility: hidden;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 5</span>
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`WheelPicker > renders with empty slot correctly 1`] = `
+"<div data-slot="root" data-orientation="vertical" class="relative isolate inline-flex select-none w-36">
+  <div id="v-0-0" role="listbox" aria-orientation="vertical" tabindex="0" data-slot="viewport" style="height: 160px; width: 100%;" class="relative w-full overflow-hidden touch-none outline-none rounded-md bg-default ring ring-inset ring-accented focus-visible:ring-2 transition-[color,box-shadow] focus-visible:ring-inverted">
+    <div aria-hidden="true" data-slot="indicator" style="height: 32px;" class="absolute inset-x-1 top-1/2 -translate-y-1/2 pointer-events-none rounded-md bg-elevated"></div>
+    <div data-slot="empty" class="absolute inset-0 flex items-center justify-center text-center text-muted text-sm">Nothing here</div>
+  </div>
+</div>"
+`;
+
+exports[`WheelPicker > renders with haptics correctly 1`] = `
+"<div data-slot="root" data-orientation="vertical" class="relative isolate inline-flex select-none w-36">
+  <div id="v-0-0" role="listbox" aria-orientation="vertical" aria-activedescendant="v-0-0-0" tabindex="0" data-slot="viewport" style="height: 160px; width: 100%;" class="relative w-full overflow-hidden touch-none outline-none rounded-md bg-default ring ring-inset ring-accented focus-visible:ring-2 transition-[color,box-shadow] focus-visible:ring-inverted">
+    <div aria-hidden="true" data-slot="indicator" style="height: 32px;" class="absolute inset-x-1 top-1/2 -translate-y-1/2 pointer-events-none rounded-md bg-elevated"></div>
+    <div data-slot="list" class="absolute inset-0 [mask-image:linear-gradient(to_bottom,transparent,#000_25%,#000_75%,transparent)] [-webkit-mask-image:linear-gradient(to_bottom,transparent,#000_25%,#000_75%,transparent)]">
+      <div id="v-0-0-0" role="option" aria-selected="true" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(0px) scaleY(1); opacity: 1;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 1</span>
+      </div>
+      <div id="v-0-0-1" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(30.557749073643905px) scaleY(0.8660254037844387); opacity: 0.8660254037844387;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 2</span>
+      </div>
+      <div id="v-0-0-2" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(52.92757396049204px) scaleY(0.5000000000000001); opacity: 0.5000000000000001;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 3</span>
+      </div>
+      <div id="v-0-0-3" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(61.115498147287816px) scaleY(6.123233995736766e-17); opacity: 0; visibility: hidden;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 4</span>
+      </div>
+      <div id="v-0-0-4" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(52.92757396049205px) scaleY(0); opacity: 0; visibility: hidden;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 5</span>
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`WheelPicker > renders with item slot correctly 1`] = `
+"<div data-slot="root" data-orientation="vertical" class="relative isolate inline-flex select-none w-36">
+  <div id="v-0-0" role="listbox" aria-orientation="vertical" aria-activedescendant="v-0-0-0" tabindex="0" data-slot="viewport" style="height: 160px; width: 100%;" class="relative w-full overflow-hidden touch-none outline-none rounded-md bg-default ring ring-inset ring-accented focus-visible:ring-2 transition-[color,box-shadow] focus-visible:ring-inverted">
+    <div aria-hidden="true" data-slot="indicator" style="height: 32px;" class="absolute inset-x-1 top-1/2 -translate-y-1/2 pointer-events-none rounded-md bg-elevated"></div>
+    <div data-slot="list" class="absolute inset-0 [mask-image:linear-gradient(to_bottom,transparent,#000_25%,#000_75%,transparent)] [-webkit-mask-image:linear-gradient(to_bottom,transparent,#000_25%,#000_75%,transparent)]">
+      <div id="v-0-0-0" role="option" aria-selected="true" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(0px) scaleY(1); opacity: 1;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">Item: Item 1</div>
+      <div id="v-0-0-1" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(30.557749073643905px) scaleY(0.8660254037844387); opacity: 0.8660254037844387;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">Item: Item 2</div>
+      <div id="v-0-0-2" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(52.92757396049204px) scaleY(0.5000000000000001); opacity: 0.5000000000000001;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">Item: Item 3</div>
+      <div id="v-0-0-3" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(61.115498147287816px) scaleY(6.123233995736766e-17); opacity: 0; visibility: hidden;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">Item: Item 4</div>
+      <div id="v-0-0-4" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(52.92757396049205px) scaleY(0); opacity: 0; visibility: hidden;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">Item: Item 5</div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`WheelPicker > renders with itemHeight correctly 1`] = `
+"<div data-slot="root" data-orientation="vertical" class="relative isolate inline-flex select-none w-36">
+  <div id="v-0-0" role="listbox" aria-orientation="vertical" aria-activedescendant="v-0-0-0" tabindex="0" data-slot="viewport" style="height: 240px; width: 100%;" class="relative w-full overflow-hidden touch-none outline-none rounded-md bg-default ring ring-inset ring-accented focus-visible:ring-2 transition-[color,box-shadow] focus-visible:ring-inverted">
+    <div aria-hidden="true" data-slot="indicator" style="height: 48px;" class="absolute inset-x-1 top-1/2 -translate-y-1/2 pointer-events-none rounded-md bg-elevated"></div>
+    <div data-slot="list" class="absolute inset-0 [mask-image:linear-gradient(to_bottom,transparent,#000_25%,#000_75%,transparent)] [-webkit-mask-image:linear-gradient(to_bottom,transparent,#000_25%,#000_75%,transparent)]">
+      <div id="v-0-0-0" role="option" aria-selected="true" data-slot="item" style="position: absolute; top: 50%; height: 48px; margin-top: -24px; transform: translateY(0px) scaleY(1); opacity: 1;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 1</span>
+      </div>
+      <div id="v-0-0-1" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 48px; margin-top: -24px; transform: translateY(45.83662361046586px) scaleY(0.8660254037844387); opacity: 0.8660254037844387;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 2</span>
+      </div>
+      <div id="v-0-0-2" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 48px; margin-top: -24px; transform: translateY(79.39136094073807px) scaleY(0.5000000000000001); opacity: 0.5000000000000001;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 3</span>
+      </div>
+      <div id="v-0-0-3" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 48px; margin-top: -24px; transform: translateY(91.67324722093173px) scaleY(6.123233995736766e-17); opacity: 0; visibility: hidden;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 4</span>
+      </div>
+      <div id="v-0-0-4" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 48px; margin-top: -24px; transform: translateY(79.39136094073807px) scaleY(0); opacity: 0; visibility: hidden;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 5</span>
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`WheelPicker > renders with items correctly 1`] = `
+"<div data-slot="root" data-orientation="vertical" class="relative isolate inline-flex select-none w-36">
+  <div id="v-0-0" role="listbox" aria-orientation="vertical" aria-activedescendant="v-0-0-0" tabindex="0" data-slot="viewport" style="height: 160px; width: 100%;" class="relative w-full overflow-hidden touch-none outline-none rounded-md bg-default ring ring-inset ring-accented focus-visible:ring-2 transition-[color,box-shadow] focus-visible:ring-inverted">
+    <div aria-hidden="true" data-slot="indicator" style="height: 32px;" class="absolute inset-x-1 top-1/2 -translate-y-1/2 pointer-events-none rounded-md bg-elevated"></div>
+    <div data-slot="list" class="absolute inset-0 [mask-image:linear-gradient(to_bottom,transparent,#000_25%,#000_75%,transparent)] [-webkit-mask-image:linear-gradient(to_bottom,transparent,#000_25%,#000_75%,transparent)]">
+      <div id="v-0-0-0" role="option" aria-selected="true" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(0px) scaleY(1); opacity: 1;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 1</span>
+      </div>
+      <div id="v-0-0-1" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(30.557749073643905px) scaleY(0.8660254037844387); opacity: 0.8660254037844387;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 2</span>
+      </div>
+      <div id="v-0-0-2" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(52.92757396049204px) scaleY(0.5000000000000001); opacity: 0.5000000000000001;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 3</span>
+      </div>
+      <div id="v-0-0-3" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(61.115498147287816px) scaleY(6.123233995736766e-17); opacity: 0; visibility: hidden;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 4</span>
+      </div>
+      <div id="v-0-0-4" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(52.92757396049205px) scaleY(0); opacity: 0; visibility: hidden;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 5</span>
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`WheelPicker > renders with loop correctly 1`] = `
+"<div data-slot="root" data-orientation="vertical" class="relative isolate inline-flex select-none w-36">
+  <div id="v-0-0" role="listbox" aria-orientation="vertical" aria-activedescendant="v-0-0-0" tabindex="0" data-slot="viewport" style="height: 160px; width: 100%;" class="relative w-full overflow-hidden touch-none outline-none rounded-md bg-default ring ring-inset ring-accented focus-visible:ring-2 transition-[color,box-shadow] focus-visible:ring-inverted">
+    <div aria-hidden="true" data-slot="indicator" style="height: 32px;" class="absolute inset-x-1 top-1/2 -translate-y-1/2 pointer-events-none rounded-md bg-elevated"></div>
+    <div data-slot="list" class="absolute inset-0 [mask-image:linear-gradient(to_bottom,transparent,#000_25%,#000_75%,transparent)] [-webkit-mask-image:linear-gradient(to_bottom,transparent,#000_25%,#000_75%,transparent)]">
+      <div id="v-0-0-4" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(-7.484489918437201e-15px) scaleY(0); opacity: 0; visibility: hidden;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 5</span>
+      </div>
+      <div id="v-0-0-0" role="option" aria-selected="true" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(-30.557749073643905px) scaleY(0); opacity: 0; visibility: hidden;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 1</span>
+      </div>
+      <div id="v-0-0-1" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(-52.92757396049205px) scaleY(0); opacity: 0; visibility: hidden;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 2</span>
+      </div>
+      <div id="v-0-0-2" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(-61.115498147287816px) scaleY(6.123233995736766e-17); opacity: 0; visibility: hidden;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 3</span>
+      </div>
+      <div id="v-0-0-3" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(-52.92757396049204px) scaleY(0.5000000000000001); opacity: 0.5000000000000001;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 4</span>
+      </div>
+      <div id="v-0-0-4" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(-30.557749073643905px) scaleY(0.8660254037844387); opacity: 0.8660254037844387;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 5</span>
+      </div>
+      <div id="v-0-0-0" role="option" aria-selected="true" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(0px) scaleY(1); opacity: 1;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 1</span>
+      </div>
+      <div id="v-0-0-1" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(30.557749073643905px) scaleY(0.8660254037844387); opacity: 0.8660254037844387;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 2</span>
+      </div>
+      <div id="v-0-0-2" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(52.92757396049204px) scaleY(0.5000000000000001); opacity: 0.5000000000000001;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 3</span>
+      </div>
+      <div id="v-0-0-3" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(61.115498147287816px) scaleY(6.123233995736766e-17); opacity: 0; visibility: hidden;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 4</span>
+      </div>
+      <div id="v-0-0-4" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(52.92757396049205px) scaleY(0); opacity: 0; visibility: hidden;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 5</span>
+      </div>
+      <div id="v-0-0-0" role="option" aria-selected="true" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(30.557749073643905px) scaleY(0); opacity: 0; visibility: hidden;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 1</span>
+      </div>
+      <div id="v-0-0-1" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(7.484489918437201e-15px) scaleY(0); opacity: 0; visibility: hidden;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 2</span>
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`WheelPicker > renders with modelValue correctly 1`] = `
+"<div data-slot="root" data-orientation="vertical" class="relative isolate inline-flex select-none w-36">
+  <div id="v-0-0" role="listbox" aria-orientation="vertical" aria-activedescendant="v-0-0-2" tabindex="0" data-slot="viewport" style="height: 160px; width: 100%;" class="relative w-full overflow-hidden touch-none outline-none rounded-md bg-default ring ring-inset ring-accented focus-visible:ring-2 transition-[color,box-shadow] focus-visible:ring-inverted">
+    <div aria-hidden="true" data-slot="indicator" style="height: 32px;" class="absolute inset-x-1 top-1/2 -translate-y-1/2 pointer-events-none rounded-md bg-elevated"></div>
+    <div data-slot="list" class="absolute inset-0 [mask-image:linear-gradient(to_bottom,transparent,#000_25%,#000_75%,transparent)] [-webkit-mask-image:linear-gradient(to_bottom,transparent,#000_25%,#000_75%,transparent)]">
+      <div id="v-0-0-0" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(-52.92757396049204px) scaleY(0.5000000000000001); opacity: 0.5000000000000001;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 1</span>
+      </div>
+      <div id="v-0-0-1" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(-30.557749073643905px) scaleY(0.8660254037844387); opacity: 0.8660254037844387;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 2</span>
+      </div>
+      <div id="v-0-0-2" role="option" aria-selected="true" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(0px) scaleY(1); opacity: 1;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 3</span>
+      </div>
+      <div id="v-0-0-3" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(30.557749073643905px) scaleY(0.8660254037844387); opacity: 0.8660254037844387;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 4</span>
+      </div>
+      <div id="v-0-0-4" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(52.92757396049204px) scaleY(0.5000000000000001); opacity: 0.5000000000000001;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 5</span>
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`WheelPicker > renders with name correctly 1`] = `
+"<div data-slot="root" data-orientation="vertical" class="relative isolate inline-flex select-none w-36">
+  <div id="v-0-0" role="listbox" aria-label="name" aria-orientation="vertical" aria-activedescendant="v-0-0-0" tabindex="0" data-slot="viewport" style="height: 160px; width: 100%;" class="relative w-full overflow-hidden touch-none outline-none rounded-md bg-default ring ring-inset ring-accented focus-visible:ring-2 transition-[color,box-shadow] focus-visible:ring-inverted">
+    <div aria-hidden="true" data-slot="indicator" style="height: 32px;" class="absolute inset-x-1 top-1/2 -translate-y-1/2 pointer-events-none rounded-md bg-elevated"></div>
+    <div data-slot="list" class="absolute inset-0 [mask-image:linear-gradient(to_bottom,transparent,#000_25%,#000_75%,transparent)] [-webkit-mask-image:linear-gradient(to_bottom,transparent,#000_25%,#000_75%,transparent)]">
+      <div id="v-0-0-0" role="option" aria-selected="true" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(0px) scaleY(1); opacity: 1;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 1</span>
+      </div>
+      <div id="v-0-0-1" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(30.557749073643905px) scaleY(0.8660254037844387); opacity: 0.8660254037844387;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 2</span>
+      </div>
+      <div id="v-0-0-2" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(52.92757396049204px) scaleY(0.5000000000000001); opacity: 0.5000000000000001;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 3</span>
+      </div>
+      <div id="v-0-0-3" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(61.115498147287816px) scaleY(6.123233995736766e-17); opacity: 0; visibility: hidden;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 4</span>
+      </div>
+      <div id="v-0-0-4" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(52.92757396049205px) scaleY(0); opacity: 0; visibility: hidden;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 5</span>
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`WheelPicker > renders with object items correctly 1`] = `
+"<div data-slot="root" data-orientation="vertical" class="relative isolate inline-flex select-none w-36">
+  <div id="v-0-0" role="listbox" aria-orientation="vertical" aria-activedescendant="v-0-0-0" tabindex="0" data-slot="viewport" style="height: 160px; width: 100%;" class="relative w-full overflow-hidden touch-none outline-none rounded-md bg-default ring ring-inset ring-accented focus-visible:ring-2 transition-[color,box-shadow] focus-visible:ring-inverted">
+    <div aria-hidden="true" data-slot="indicator" style="height: 32px;" class="absolute inset-x-1 top-1/2 -translate-y-1/2 pointer-events-none rounded-md bg-elevated"></div>
+    <div data-slot="list" class="absolute inset-0 [mask-image:linear-gradient(to_bottom,transparent,#000_25%,#000_75%,transparent)] [-webkit-mask-image:linear-gradient(to_bottom,transparent,#000_25%,#000_75%,transparent)]">
+      <div id="v-0-0-0" role="option" aria-selected="true" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(0px) scaleY(1); opacity: 1;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">London</span>
+      </div>
+      <div id="v-0-0-1" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(30.557749073643905px) scaleY(0.8660254037844387); opacity: 0.8660254037844387;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Paris</span>
+      </div>
+      <div id="v-0-0-2" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(52.92757396049204px) scaleY(0.5000000000000001); opacity: 0.5000000000000001;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium"><span class="iconify i-lucide:map-pin shrink-0 flex items-center" aria-hidden="true" data-slot="itemLeading"></span><span data-slot="itemLabel" class="truncate">Tokyo</span></div>
+      <div id="v-0-0-3" role="option" aria-selected="false" aria-disabled="true" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(61.115498147287816px) scaleY(6.123233995736766e-17); opacity: 0; visibility: hidden;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Berlin</span>
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`WheelPicker > renders with orientation horizontal correctly 1`] = `
+"<div data-slot="root" data-orientation="horizontal" class="relative isolate inline-flex select-none w-auto max-w-full">
+  <div id="v-0-0" role="listbox" aria-orientation="horizontal" aria-activedescendant="v-0-0-0" tabindex="0" data-slot="viewport" style="width: 240px; height: 32px;" class="relative w-full overflow-hidden touch-none outline-none rounded-md bg-default ring ring-inset ring-accented focus-visible:ring-2 transition-[color,box-shadow] focus-visible:ring-inverted">
+    <div aria-hidden="true" data-slot="indicator" style="width: 32px;" class="absolute pointer-events-none rounded-md bg-elevated inset-x-auto inset-y-1 start-1/2 top-auto translate-y-0 -translate-x-1/2 rtl:translate-x-1/2"></div>
+    <div data-slot="list" class="absolute inset-0 [mask-image:linear-gradient(to_right,transparent,#000_25%,#000_75%,transparent)] [-webkit-mask-image:linear-gradient(to_right,transparent,#000_25%,#000_75%,transparent)]">
+      <div id="v-0-0-0" role="option" aria-selected="true" data-slot="item" style="position: absolute; inset-inline-start: 50%; transform: translateX(calc(-50% + 0px)) scaleX(1); opacity: 1;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 1</span>
+      </div>
+      <div id="v-0-0-1" role="option" aria-selected="false" data-slot="item" style="position: absolute; inset-inline-start: 50%; transform: translateX(calc(-50% + 45.83662361046586px)) scaleX(0.8660254037844387); opacity: 0.8660254037844387;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 2</span>
+      </div>
+      <div id="v-0-0-2" role="option" aria-selected="false" data-slot="item" style="position: absolute; inset-inline-start: 50%; transform: translateX(calc(-50% + 79.39136094073807px)) scaleX(0.5000000000000001); opacity: 0.5000000000000001;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 3</span>
+      </div>
+      <div id="v-0-0-3" role="option" aria-selected="false" data-slot="item" style="position: absolute; inset-inline-start: 50%; transform: translateX(calc(-50% + 91.67324722093173px)) scaleX(6.123233995736766e-17); opacity: 0; visibility: hidden;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 4</span>
+      </div>
+      <div id="v-0-0-4" role="option" aria-selected="false" data-slot="item" style="position: absolute; inset-inline-start: 50%; transform: translateX(calc(-50% + 79.39136094073807px)) scaleX(0); opacity: 0; visibility: hidden;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 5</span>
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`WheelPicker > renders with orientation vertical correctly 1`] = `
+"<div data-slot="root" data-orientation="vertical" class="relative isolate inline-flex select-none w-36">
+  <div id="v-0-0" role="listbox" aria-orientation="vertical" aria-activedescendant="v-0-0-0" tabindex="0" data-slot="viewport" style="height: 160px; width: 100%;" class="relative w-full overflow-hidden touch-none outline-none rounded-md bg-default ring ring-inset ring-accented focus-visible:ring-2 transition-[color,box-shadow] focus-visible:ring-inverted">
+    <div aria-hidden="true" data-slot="indicator" style="height: 32px;" class="absolute inset-x-1 top-1/2 -translate-y-1/2 pointer-events-none rounded-md bg-elevated"></div>
+    <div data-slot="list" class="absolute inset-0 [mask-image:linear-gradient(to_bottom,transparent,#000_25%,#000_75%,transparent)] [-webkit-mask-image:linear-gradient(to_bottom,transparent,#000_25%,#000_75%,transparent)]">
+      <div id="v-0-0-0" role="option" aria-selected="true" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(0px) scaleY(1); opacity: 1;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 1</span>
+      </div>
+      <div id="v-0-0-1" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(30.557749073643905px) scaleY(0.8660254037844387); opacity: 0.8660254037844387;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 2</span>
+      </div>
+      <div id="v-0-0-2" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(52.92757396049204px) scaleY(0.5000000000000001); opacity: 0.5000000000000001;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 3</span>
+      </div>
+      <div id="v-0-0-3" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(61.115498147287816px) scaleY(6.123233995736766e-17); opacity: 0; visibility: hidden;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 4</span>
+      </div>
+      <div id="v-0-0-4" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(52.92757396049205px) scaleY(0); opacity: 0; visibility: hidden;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 5</span>
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`WheelPicker > renders with placeholder correctly 1`] = `
+"<div data-slot="root" data-orientation="vertical" class="relative isolate inline-flex select-none w-36">
+  <div id="v-0-0" role="listbox" aria-orientation="vertical" tabindex="0" data-slot="viewport" style="height: 160px; width: 100%;" class="relative w-full overflow-hidden touch-none outline-none rounded-md bg-default ring ring-inset ring-accented focus-visible:ring-2 transition-[color,box-shadow] focus-visible:ring-inverted">
+    <div aria-hidden="true" data-slot="indicator" style="height: 32px;" class="absolute inset-x-1 top-1/2 -translate-y-1/2 pointer-events-none rounded-md bg-elevated"></div>
+    <div data-slot="empty" class="absolute inset-0 flex items-center justify-center text-center text-muted text-sm">No data</div>
+  </div>
+</div>"
+`;
+
+exports[`WheelPicker > renders with prefix slot correctly 1`] = `
+"<div data-slot="root" data-orientation="vertical" class="relative isolate inline-flex select-none w-36">Prefix<div id="v-0-0" role="listbox" aria-orientation="vertical" aria-activedescendant="v-0-0-0" tabindex="0" data-slot="viewport" style="height: 160px; width: 100%;" class="relative w-full overflow-hidden touch-none outline-none rounded-md bg-default ring ring-inset ring-accented focus-visible:ring-2 transition-[color,box-shadow] focus-visible:ring-inverted">
+    <div aria-hidden="true" data-slot="indicator" style="height: 32px;" class="absolute inset-x-1 top-1/2 -translate-y-1/2 pointer-events-none rounded-md bg-elevated"></div>
+    <div data-slot="list" class="absolute inset-0 [mask-image:linear-gradient(to_bottom,transparent,#000_25%,#000_75%,transparent)] [-webkit-mask-image:linear-gradient(to_bottom,transparent,#000_25%,#000_75%,transparent)]">
+      <div id="v-0-0-0" role="option" aria-selected="true" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(0px) scaleY(1); opacity: 1;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 1</span>
+      </div>
+      <div id="v-0-0-1" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(30.557749073643905px) scaleY(0.8660254037844387); opacity: 0.8660254037844387;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 2</span>
+      </div>
+      <div id="v-0-0-2" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(52.92757396049204px) scaleY(0.5000000000000001); opacity: 0.5000000000000001;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 3</span>
+      </div>
+      <div id="v-0-0-3" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(61.115498147287816px) scaleY(6.123233995736766e-17); opacity: 0; visibility: hidden;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 4</span>
+      </div>
+      <div id="v-0-0-4" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(52.92757396049205px) scaleY(0); opacity: 0; visibility: hidden;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 5</span>
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`WheelPicker > renders with readonly correctly 1`] = `
+"<div data-slot="root" data-orientation="vertical" class="relative isolate inline-flex select-none w-36">
+  <div id="v-0-0" role="listbox" aria-orientation="vertical" aria-activedescendant="v-0-0-0" aria-readonly="true" tabindex="0" data-slot="viewport" style="height: 160px; width: 100%;" class="relative w-full overflow-hidden touch-none outline-none rounded-md bg-default ring ring-inset ring-accented focus-visible:ring-2 transition-[color,box-shadow] focus-visible:ring-inverted">
+    <div aria-hidden="true" data-slot="indicator" style="height: 32px;" class="absolute inset-x-1 top-1/2 -translate-y-1/2 pointer-events-none rounded-md bg-elevated"></div>
+    <div data-slot="list" class="absolute inset-0 [mask-image:linear-gradient(to_bottom,transparent,#000_25%,#000_75%,transparent)] [-webkit-mask-image:linear-gradient(to_bottom,transparent,#000_25%,#000_75%,transparent)]">
+      <div id="v-0-0-0" role="option" aria-selected="true" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(0px) scaleY(1); opacity: 1;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 1</span>
+      </div>
+      <div id="v-0-0-1" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(30.557749073643905px) scaleY(0.8660254037844387); opacity: 0.8660254037844387;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 2</span>
+      </div>
+      <div id="v-0-0-2" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(52.92757396049204px) scaleY(0.5000000000000001); opacity: 0.5000000000000001;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 3</span>
+      </div>
+      <div id="v-0-0-3" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(61.115498147287816px) scaleY(6.123233995736766e-17); opacity: 0; visibility: hidden;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 4</span>
+      </div>
+      <div id="v-0-0-4" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(52.92757396049205px) scaleY(0); opacity: 0; visibility: hidden;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 5</span>
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`WheelPicker > renders with selected slot correctly 1`] = `
+"<div data-slot="root" data-orientation="vertical" class="relative isolate inline-flex select-none w-36">
+  <div id="v-0-0" role="listbox" aria-orientation="vertical" aria-activedescendant="v-0-0-0" tabindex="0" data-slot="viewport" style="height: 160px; width: 100%;" class="relative w-full overflow-hidden touch-none outline-none rounded-md bg-default ring ring-inset ring-accented focus-visible:ring-2 transition-[color,box-shadow] focus-visible:ring-inverted">
+    <div aria-hidden="true" data-slot="indicator" style="height: 32px;" class="absolute inset-x-1 top-1/2 -translate-y-1/2 pointer-events-none rounded-md bg-elevated"></div>
+    <div data-slot="list" class="absolute inset-0 [mask-image:linear-gradient(to_bottom,transparent,#000_25%,#000_75%,transparent)] [-webkit-mask-image:linear-gradient(to_bottom,transparent,#000_25%,#000_75%,transparent)]">
+      <div id="v-0-0-0" role="option" aria-selected="true" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(0px) scaleY(1); opacity: 1;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 1</span>
+      </div>
+      <div id="v-0-0-1" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(30.557749073643905px) scaleY(0.8660254037844387); opacity: 0.8660254037844387;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 2</span>
+      </div>
+      <div id="v-0-0-2" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(52.92757396049204px) scaleY(0.5000000000000001); opacity: 0.5000000000000001;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 3</span>
+      </div>
+      <div id="v-0-0-3" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(61.115498147287816px) scaleY(6.123233995736766e-17); opacity: 0; visibility: hidden;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 4</span>
+      </div>
+      <div id="v-0-0-4" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(52.92757396049205px) scaleY(0); opacity: 0; visibility: hidden;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 5</span>
+      </div>
+    </div>Selected: Item 1
+  </div>
+</div>"
+`;
+
+exports[`WheelPicker > renders with sensitivity correctly 1`] = `
+"<div data-slot="root" data-orientation="vertical" class="relative isolate inline-flex select-none w-36">
+  <div id="v-0-0" role="listbox" aria-orientation="vertical" aria-activedescendant="v-0-0-0" tabindex="0" data-slot="viewport" style="height: 160px; width: 100%;" class="relative w-full overflow-hidden touch-none outline-none rounded-md bg-default ring ring-inset ring-accented focus-visible:ring-2 transition-[color,box-shadow] focus-visible:ring-inverted">
+    <div aria-hidden="true" data-slot="indicator" style="height: 32px;" class="absolute inset-x-1 top-1/2 -translate-y-1/2 pointer-events-none rounded-md bg-elevated"></div>
+    <div data-slot="list" class="absolute inset-0 [mask-image:linear-gradient(to_bottom,transparent,#000_25%,#000_75%,transparent)] [-webkit-mask-image:linear-gradient(to_bottom,transparent,#000_25%,#000_75%,transparent)]">
+      <div id="v-0-0-0" role="option" aria-selected="true" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(0px) scaleY(1); opacity: 1;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 1</span>
+      </div>
+      <div id="v-0-0-1" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(30.557749073643905px) scaleY(0.8660254037844387); opacity: 0.8660254037844387;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 2</span>
+      </div>
+      <div id="v-0-0-2" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(52.92757396049204px) scaleY(0.5000000000000001); opacity: 0.5000000000000001;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 3</span>
+      </div>
+      <div id="v-0-0-3" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(61.115498147287816px) scaleY(6.123233995736766e-17); opacity: 0; visibility: hidden;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 4</span>
+      </div>
+      <div id="v-0-0-4" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(52.92757396049205px) scaleY(0); opacity: 0; visibility: hidden;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 5</span>
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`WheelPicker > renders with size lg correctly 1`] = `
+"<div data-slot="root" data-orientation="vertical" class="relative isolate inline-flex select-none w-36">
+  <div id="v-0-0" role="listbox" aria-orientation="vertical" aria-activedescendant="v-0-0-0" tabindex="0" data-slot="viewport" style="height: 160px; width: 100%;" class="relative w-full overflow-hidden touch-none outline-none rounded-md bg-default ring ring-inset ring-accented focus-visible:ring-2 transition-[color,box-shadow] focus-visible:ring-inverted">
+    <div aria-hidden="true" data-slot="indicator" style="height: 32px;" class="absolute inset-x-1 top-1/2 -translate-y-1/2 pointer-events-none rounded-md bg-elevated"></div>
+    <div data-slot="list" class="absolute inset-0 [mask-image:linear-gradient(to_bottom,transparent,#000_25%,#000_75%,transparent)] [-webkit-mask-image:linear-gradient(to_bottom,transparent,#000_25%,#000_75%,transparent)]">
+      <div id="v-0-0-0" role="option" aria-selected="true" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(0px) scaleY(1); opacity: 1;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-lg aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 1</span>
+      </div>
+      <div id="v-0-0-1" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(30.557749073643905px) scaleY(0.8660254037844387); opacity: 0.8660254037844387;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-lg aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 2</span>
+      </div>
+      <div id="v-0-0-2" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(52.92757396049204px) scaleY(0.5000000000000001); opacity: 0.5000000000000001;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-lg aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 3</span>
+      </div>
+      <div id="v-0-0-3" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(61.115498147287816px) scaleY(6.123233995736766e-17); opacity: 0; visibility: hidden;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-lg aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 4</span>
+      </div>
+      <div id="v-0-0-4" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(52.92757396049205px) scaleY(0); opacity: 0; visibility: hidden;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-lg aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 5</span>
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`WheelPicker > renders with size md correctly 1`] = `
+"<div data-slot="root" data-orientation="vertical" class="relative isolate inline-flex select-none w-36">
+  <div id="v-0-0" role="listbox" aria-orientation="vertical" aria-activedescendant="v-0-0-0" tabindex="0" data-slot="viewport" style="height: 160px; width: 100%;" class="relative w-full overflow-hidden touch-none outline-none rounded-md bg-default ring ring-inset ring-accented focus-visible:ring-2 transition-[color,box-shadow] focus-visible:ring-inverted">
+    <div aria-hidden="true" data-slot="indicator" style="height: 32px;" class="absolute inset-x-1 top-1/2 -translate-y-1/2 pointer-events-none rounded-md bg-elevated"></div>
+    <div data-slot="list" class="absolute inset-0 [mask-image:linear-gradient(to_bottom,transparent,#000_25%,#000_75%,transparent)] [-webkit-mask-image:linear-gradient(to_bottom,transparent,#000_25%,#000_75%,transparent)]">
+      <div id="v-0-0-0" role="option" aria-selected="true" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(0px) scaleY(1); opacity: 1;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 1</span>
+      </div>
+      <div id="v-0-0-1" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(30.557749073643905px) scaleY(0.8660254037844387); opacity: 0.8660254037844387;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 2</span>
+      </div>
+      <div id="v-0-0-2" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(52.92757396049204px) scaleY(0.5000000000000001); opacity: 0.5000000000000001;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 3</span>
+      </div>
+      <div id="v-0-0-3" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(61.115498147287816px) scaleY(6.123233995736766e-17); opacity: 0; visibility: hidden;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 4</span>
+      </div>
+      <div id="v-0-0-4" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(52.92757396049205px) scaleY(0); opacity: 0; visibility: hidden;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 5</span>
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`WheelPicker > renders with size sm correctly 1`] = `
+"<div data-slot="root" data-orientation="vertical" class="relative isolate inline-flex select-none w-36">
+  <div id="v-0-0" role="listbox" aria-orientation="vertical" aria-activedescendant="v-0-0-0" tabindex="0" data-slot="viewport" style="height: 160px; width: 100%;" class="relative w-full overflow-hidden touch-none outline-none rounded-md bg-default ring ring-inset ring-accented focus-visible:ring-2 transition-[color,box-shadow] focus-visible:ring-inverted">
+    <div aria-hidden="true" data-slot="indicator" style="height: 32px;" class="absolute inset-x-1 top-1/2 -translate-y-1/2 pointer-events-none rounded-md bg-elevated"></div>
+    <div data-slot="list" class="absolute inset-0 [mask-image:linear-gradient(to_bottom,transparent,#000_25%,#000_75%,transparent)] [-webkit-mask-image:linear-gradient(to_bottom,transparent,#000_25%,#000_75%,transparent)]">
+      <div id="v-0-0-0" role="option" aria-selected="true" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(0px) scaleY(1); opacity: 1;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-sm aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 1</span>
+      </div>
+      <div id="v-0-0-1" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(30.557749073643905px) scaleY(0.8660254037844387); opacity: 0.8660254037844387;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-sm aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 2</span>
+      </div>
+      <div id="v-0-0-2" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(52.92757396049204px) scaleY(0.5000000000000001); opacity: 0.5000000000000001;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-sm aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 3</span>
+      </div>
+      <div id="v-0-0-3" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(61.115498147287816px) scaleY(6.123233995736766e-17); opacity: 0; visibility: hidden;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-sm aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 4</span>
+      </div>
+      <div id="v-0-0-4" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(52.92757396049205px) scaleY(0); opacity: 0; visibility: hidden;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-sm aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 5</span>
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`WheelPicker > renders with size xl correctly 1`] = `
+"<div data-slot="root" data-orientation="vertical" class="relative isolate inline-flex select-none w-36">
+  <div id="v-0-0" role="listbox" aria-orientation="vertical" aria-activedescendant="v-0-0-0" tabindex="0" data-slot="viewport" style="height: 160px; width: 100%;" class="relative w-full overflow-hidden touch-none outline-none rounded-md bg-default ring ring-inset ring-accented focus-visible:ring-2 transition-[color,box-shadow] focus-visible:ring-inverted">
+    <div aria-hidden="true" data-slot="indicator" style="height: 32px;" class="absolute inset-x-1 top-1/2 -translate-y-1/2 pointer-events-none rounded-md bg-elevated"></div>
+    <div data-slot="list" class="absolute inset-0 [mask-image:linear-gradient(to_bottom,transparent,#000_25%,#000_75%,transparent)] [-webkit-mask-image:linear-gradient(to_bottom,transparent,#000_25%,#000_75%,transparent)]">
+      <div id="v-0-0-0" role="option" aria-selected="true" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(0px) scaleY(1); opacity: 1;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-xl aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 1</span>
+      </div>
+      <div id="v-0-0-1" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(30.557749073643905px) scaleY(0.8660254037844387); opacity: 0.8660254037844387;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-xl aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 2</span>
+      </div>
+      <div id="v-0-0-2" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(52.92757396049204px) scaleY(0.5000000000000001); opacity: 0.5000000000000001;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-xl aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 3</span>
+      </div>
+      <div id="v-0-0-3" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(61.115498147287816px) scaleY(6.123233995736766e-17); opacity: 0; visibility: hidden;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-xl aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 4</span>
+      </div>
+      <div id="v-0-0-4" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(52.92757396049205px) scaleY(0); opacity: 0; visibility: hidden;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-xl aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 5</span>
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`WheelPicker > renders with size xs correctly 1`] = `
+"<div data-slot="root" data-orientation="vertical" class="relative isolate inline-flex select-none w-36">
+  <div id="v-0-0" role="listbox" aria-orientation="vertical" aria-activedescendant="v-0-0-0" tabindex="0" data-slot="viewport" style="height: 160px; width: 100%;" class="relative w-full overflow-hidden touch-none outline-none rounded-md bg-default ring ring-inset ring-accented focus-visible:ring-2 transition-[color,box-shadow] focus-visible:ring-inverted">
+    <div aria-hidden="true" data-slot="indicator" style="height: 32px;" class="absolute inset-x-1 top-1/2 -translate-y-1/2 pointer-events-none rounded-md bg-elevated"></div>
+    <div data-slot="list" class="absolute inset-0 [mask-image:linear-gradient(to_bottom,transparent,#000_25%,#000_75%,transparent)] [-webkit-mask-image:linear-gradient(to_bottom,transparent,#000_25%,#000_75%,transparent)]">
+      <div id="v-0-0-0" role="option" aria-selected="true" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(0px) scaleY(1); opacity: 1;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-xs aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 1</span>
+      </div>
+      <div id="v-0-0-1" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(30.557749073643905px) scaleY(0.8660254037844387); opacity: 0.8660254037844387;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-xs aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 2</span>
+      </div>
+      <div id="v-0-0-2" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(52.92757396049204px) scaleY(0.5000000000000001); opacity: 0.5000000000000001;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-xs aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 3</span>
+      </div>
+      <div id="v-0-0-3" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(61.115498147287816px) scaleY(6.123233995736766e-17); opacity: 0; visibility: hidden;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-xs aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 4</span>
+      </div>
+      <div id="v-0-0-4" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(52.92757396049205px) scaleY(0); opacity: 0; visibility: hidden;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-xs aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 5</span>
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`WheelPicker > renders with suffix slot correctly 1`] = `
+"<div data-slot="root" data-orientation="vertical" class="relative isolate inline-flex select-none w-36">
+  <div id="v-0-0" role="listbox" aria-orientation="vertical" aria-activedescendant="v-0-0-0" tabindex="0" data-slot="viewport" style="height: 160px; width: 100%;" class="relative w-full overflow-hidden touch-none outline-none rounded-md bg-default ring ring-inset ring-accented focus-visible:ring-2 transition-[color,box-shadow] focus-visible:ring-inverted">
+    <div aria-hidden="true" data-slot="indicator" style="height: 32px;" class="absolute inset-x-1 top-1/2 -translate-y-1/2 pointer-events-none rounded-md bg-elevated"></div>
+    <div data-slot="list" class="absolute inset-0 [mask-image:linear-gradient(to_bottom,transparent,#000_25%,#000_75%,transparent)] [-webkit-mask-image:linear-gradient(to_bottom,transparent,#000_25%,#000_75%,transparent)]">
+      <div id="v-0-0-0" role="option" aria-selected="true" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(0px) scaleY(1); opacity: 1;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 1</span>
+      </div>
+      <div id="v-0-0-1" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(30.557749073643905px) scaleY(0.8660254037844387); opacity: 0.8660254037844387;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 2</span>
+      </div>
+      <div id="v-0-0-2" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(52.92757396049204px) scaleY(0.5000000000000001); opacity: 0.5000000000000001;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 3</span>
+      </div>
+      <div id="v-0-0-3" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(61.115498147287816px) scaleY(6.123233995736766e-17); opacity: 0; visibility: hidden;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 4</span>
+      </div>
+      <div id="v-0-0-4" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(52.92757396049205px) scaleY(0); opacity: 0; visibility: hidden;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 5</span>
+      </div>
+    </div>
+  </div>Suffix
+</div>"
+`;
+
+exports[`WheelPicker > renders with ui correctly 1`] = `
+"<div data-slot="root" data-orientation="vertical" class="relative isolate inline-flex select-none w-36">
+  <div id="v-0-0" role="listbox" aria-orientation="vertical" aria-activedescendant="v-0-0-0" tabindex="0" data-slot="viewport" style="height: 160px; width: 100%;" class="relative w-full overflow-hidden touch-none outline-none rounded-md bg-default ring ring-inset ring-accented focus-visible:ring-2 transition-[color,box-shadow] focus-visible:ring-inverted">
+    <div aria-hidden="true" data-slot="indicator" style="height: 32px;" class="absolute inset-x-1 top-1/2 -translate-y-1/2 pointer-events-none rounded-md bg-elevated"></div>
+    <div data-slot="list" class="absolute inset-0 [mask-image:linear-gradient(to_bottom,transparent,#000_25%,#000_75%,transparent)] [-webkit-mask-image:linear-gradient(to_bottom,transparent,#000_25%,#000_75%,transparent)]">
+      <div id="v-0-0-0" role="option" aria-selected="true" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(0px) scaleY(1); opacity: 1;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium font-bold">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 1</span>
+      </div>
+      <div id="v-0-0-1" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(30.557749073643905px) scaleY(0.8660254037844387); opacity: 0.8660254037844387;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium font-bold">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 2</span>
+      </div>
+      <div id="v-0-0-2" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(52.92757396049204px) scaleY(0.5000000000000001); opacity: 0.5000000000000001;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium font-bold">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 3</span>
+      </div>
+      <div id="v-0-0-3" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(61.115498147287816px) scaleY(6.123233995736766e-17); opacity: 0; visibility: hidden;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium font-bold">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 4</span>
+      </div>
+      <div id="v-0-0-4" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(52.92757396049205px) scaleY(0); opacity: 0; visibility: hidden;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium font-bold">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 5</span>
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`WheelPicker > renders with variant line correctly 1`] = `
+"<div data-slot="root" data-orientation="vertical" class="relative isolate inline-flex select-none w-36">
+  <div id="v-0-0" role="listbox" aria-orientation="vertical" aria-activedescendant="v-0-0-0" tabindex="0" data-slot="viewport" style="height: 160px; width: 100%;" class="relative w-full overflow-hidden touch-none outline-none rounded-md bg-default ring ring-inset ring-accented focus-visible:ring-2 transition-[color,box-shadow] focus-visible:ring-inverted">
+    <div aria-hidden="true" data-slot="indicator" style="height: 32px;" class="absolute top-1/2 -translate-y-1/2 pointer-events-none bg-elevated inset-x-0 rounded-none bg-transparent! border-y border-default"></div>
+    <div data-slot="list" class="absolute inset-0 [mask-image:linear-gradient(to_bottom,transparent,#000_25%,#000_75%,transparent)] [-webkit-mask-image:linear-gradient(to_bottom,transparent,#000_25%,#000_75%,transparent)]">
+      <div id="v-0-0-0" role="option" aria-selected="true" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(0px) scaleY(1); opacity: 1;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 1</span>
+      </div>
+      <div id="v-0-0-1" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(30.557749073643905px) scaleY(0.8660254037844387); opacity: 0.8660254037844387;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 2</span>
+      </div>
+      <div id="v-0-0-2" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(52.92757396049204px) scaleY(0.5000000000000001); opacity: 0.5000000000000001;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 3</span>
+      </div>
+      <div id="v-0-0-3" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(61.115498147287816px) scaleY(6.123233995736766e-17); opacity: 0; visibility: hidden;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 4</span>
+      </div>
+      <div id="v-0-0-4" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(52.92757396049205px) scaleY(0); opacity: 0; visibility: hidden;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 5</span>
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`WheelPicker > renders with variant pill correctly 1`] = `
+"<div data-slot="root" data-orientation="vertical" class="relative isolate inline-flex select-none w-36">
+  <div id="v-0-0" role="listbox" aria-orientation="vertical" aria-activedescendant="v-0-0-0" tabindex="0" data-slot="viewport" style="height: 160px; width: 100%;" class="relative w-full overflow-hidden touch-none outline-none rounded-md bg-default ring ring-inset ring-accented focus-visible:ring-2 transition-[color,box-shadow] focus-visible:ring-inverted">
+    <div aria-hidden="true" data-slot="indicator" style="height: 32px;" class="absolute inset-x-1 top-1/2 -translate-y-1/2 pointer-events-none rounded-md bg-elevated"></div>
+    <div data-slot="list" class="absolute inset-0 [mask-image:linear-gradient(to_bottom,transparent,#000_25%,#000_75%,transparent)] [-webkit-mask-image:linear-gradient(to_bottom,transparent,#000_25%,#000_75%,transparent)]">
+      <div id="v-0-0-0" role="option" aria-selected="true" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(0px) scaleY(1); opacity: 1;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 1</span>
+      </div>
+      <div id="v-0-0-1" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(30.557749073643905px) scaleY(0.8660254037844387); opacity: 0.8660254037844387;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 2</span>
+      </div>
+      <div id="v-0-0-2" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(52.92757396049204px) scaleY(0.5000000000000001); opacity: 0.5000000000000001;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 3</span>
+      </div>
+      <div id="v-0-0-3" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(61.115498147287816px) scaleY(6.123233995736766e-17); opacity: 0; visibility: hidden;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 4</span>
+      </div>
+      <div id="v-0-0-4" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(52.92757396049205px) scaleY(0); opacity: 0; visibility: hidden;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 5</span>
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`WheelPicker > renders with visibleItems correctly 1`] = `
+"<div data-slot="root" data-orientation="vertical" class="relative isolate inline-flex select-none w-36">
+  <div id="v-0-0" role="listbox" aria-orientation="vertical" aria-activedescendant="v-0-0-0" tabindex="0" data-slot="viewport" style="height: 96px; width: 100%;" class="relative w-full overflow-hidden touch-none outline-none rounded-md bg-default ring ring-inset ring-accented focus-visible:ring-2 transition-[color,box-shadow] focus-visible:ring-inverted">
+    <div aria-hidden="true" data-slot="indicator" style="height: 32px;" class="absolute inset-x-1 top-1/2 -translate-y-1/2 pointer-events-none rounded-md bg-elevated"></div>
+    <div data-slot="list" class="absolute inset-0 [mask-image:linear-gradient(to_bottom,transparent,#000_25%,#000_75%,transparent)] [-webkit-mask-image:linear-gradient(to_bottom,transparent,#000_25%,#000_75%,transparent)]">
+      <div id="v-0-0-0" role="option" aria-selected="true" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(0px) scaleY(1); opacity: 1;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 1</span>
+      </div>
+      <div id="v-0-0-1" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(30.557749073643905px) scaleY(0.8660254037844387); opacity: 0.8660254037844387;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 2</span>
+      </div>
+      <div id="v-0-0-2" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(52.92757396049204px) scaleY(0.5000000000000001); opacity: 0.5000000000000001;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 3</span>
+      </div>
+      <div id="v-0-0-3" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(61.115498147287816px) scaleY(6.123233995736766e-17); opacity: 0; visibility: hidden;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 4</span>
+      </div>
+      <div id="v-0-0-4" role="option" aria-selected="false" data-slot="item" style="position: absolute; top: 50%; height: 32px; margin-top: -16px; transform: translateY(52.92757396049205px) scaleY(0); opacity: 0; visibility: hidden;" class="absolute flex items-center justify-center gap-1.5 px-2 whitespace-nowrap will-change-transform text-dimmed cursor-default transition-colors aria-selected:text-highlighted text-base aria-selected:font-medium">
+        <!--v-if--><span data-slot="itemLabel" class="truncate">Item 5</span>
+      </div>
+    </div>
+  </div>
+</div>"
+`;

@@ -91,7 +91,8 @@ const components = [
   'toast',
   'tooltip',
   'tree',
-  'user'
+  'user',
+  'wheel-picker'
 ].map(component => ({ label: upperName(component.split('/').pop() as string), icon: 'i-lucide-box', to: `/components/${component}` }))
 
 export const useNavigation = () => {
