@@ -198,7 +198,7 @@ const group = inject(wheelPickerGroupInjectionKey, undefined)
 const bare = computed(() => !!group)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const disabled = computed(() => !!(formFieldDisabled.value || props.disabled))
+const disabled = computed(() => !!(formFieldDisabled.value ?? props.disabled))
 const isHorizontal = computed(() => props.orientation === 'horizontal')
 const isRtl = computed(() => dir.value === 'rtl')
 
