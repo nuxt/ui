@@ -135,6 +135,7 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.checkboxGroup ||
   orientation: props.orientation,
   color: color.value,
   variant: props.variant,
+  highlight: highlight.value,
   disabled: disabled.value
 }))
 

@@ -392,7 +392,7 @@ exports[`Table > renders with columns correctly 1`] = `
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">
           <div data-slot="root" class="relative flex items-start flex-row">
-            <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-3 outline-primary/25 focus-visible:ring-primary size-4" id="v-0-0-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+            <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden size-4 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" id="v-0-0-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
                 <!---->
               </button>
               <!--v-if-->
@@ -420,7 +420,7 @@ exports[`Table > renders with columns correctly 1`] = `
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">
           <div data-slot="root" class="relative flex items-start flex-row">
-            <div data-slot="container" class="flex items-center h-5"><button aria-label="Select row" data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-3 outline-primary/25 focus-visible:ring-primary size-4" id="v-0-0-1" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+            <div data-slot="container" class="flex items-center h-5"><button aria-label="Select row" data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden size-4 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" id="v-0-0-1" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
                 <!---->
               </button>
               <!--v-if-->
@@ -446,7 +446,7 @@ exports[`Table > renders with columns correctly 1`] = `
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">
           <div data-slot="root" class="relative flex items-start flex-row">
-            <div data-slot="container" class="flex items-center h-5"><button aria-label="Select row" data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-3 outline-primary/25 focus-visible:ring-primary size-4" id="v-0-0-3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+            <div data-slot="container" class="flex items-center h-5"><button aria-label="Select row" data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden size-4 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" id="v-0-0-3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
                 <!---->
               </button>
               <!--v-if-->
@@ -472,7 +472,7 @@ exports[`Table > renders with columns correctly 1`] = `
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">
           <div data-slot="root" class="relative flex items-start flex-row">
-            <div data-slot="container" class="flex items-center h-5"><button aria-label="Select row" data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-3 outline-primary/25 focus-visible:ring-primary size-4" id="v-0-0-5" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+            <div data-slot="container" class="flex items-center h-5"><button aria-label="Select row" data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden size-4 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" id="v-0-0-5" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
                 <!---->
               </button>
               <!--v-if-->
@@ -498,7 +498,7 @@ exports[`Table > renders with columns correctly 1`] = `
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">
           <div data-slot="root" class="relative flex items-start flex-row">
-            <div data-slot="container" class="flex items-center h-5"><button aria-label="Select row" data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-3 outline-primary/25 focus-visible:ring-primary size-4" id="v-0-0-7" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+            <div data-slot="container" class="flex items-center h-5"><button aria-label="Select row" data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden size-4 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" id="v-0-0-7" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
                 <!---->
               </button>
               <!--v-if-->
@@ -524,7 +524,7 @@ exports[`Table > renders with columns correctly 1`] = `
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0">
           <div data-slot="root" class="relative flex items-start flex-row">
-            <div data-slot="container" class="flex items-center h-5"><button aria-label="Select row" data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-3 outline-primary/25 focus-visible:ring-primary size-4" id="v-0-0-9" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+            <div data-slot="container" class="flex items-center h-5"><button aria-label="Select row" data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden size-4 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" id="v-0-0-9" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
                 <!---->
               </button>
               <!--v-if-->
@@ -657,7 +657,7 @@ exports[`Table > renders with empty slot correctly 1`] = `
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">
           <div data-slot="root" class="relative flex items-start flex-row">
-            <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-3 outline-primary/25 focus-visible:ring-primary size-4" id="v-0-0-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+            <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden size-4 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" id="v-0-0-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
                 <!---->
               </button>
               <!--v-if-->
@@ -1492,7 +1492,7 @@ exports[`Table > renders with loading slot correctly 1`] = `
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">
           <div data-slot="root" class="relative flex items-start flex-row">
-            <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-3 outline-primary/25 focus-visible:ring-primary size-4" id="v-0-0-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+            <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden size-4 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" id="v-0-0-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
                 <!---->
               </button>
               <!--v-if-->
@@ -1557,7 +1557,7 @@ exports[`Table > renders with meta field on columns correctly 1`] = `
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0 custom-heading-class" style="background-color: black;">
           <div data-slot="root" class="relative flex items-start flex-row">
-            <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-3 outline-primary/25 focus-visible:ring-primary size-4" id="v-0-0-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+            <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden size-4 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" id="v-0-0-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
                 <!---->
               </button>
               <!--v-if-->
@@ -1585,7 +1585,7 @@ exports[`Table > renders with meta field on columns correctly 1`] = `
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0 custom-cell-class" style="background-color: lightgray;">
           <div data-slot="root" class="relative flex items-start flex-row">
-            <div data-slot="container" class="flex items-center h-5"><button aria-label="Select row" data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-3 outline-primary/25 focus-visible:ring-primary size-4" id="v-0-0-1" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+            <div data-slot="container" class="flex items-center h-5"><button aria-label="Select row" data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden size-4 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" id="v-0-0-1" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
                 <!---->
               </button>
               <!--v-if-->
@@ -1611,7 +1611,7 @@ exports[`Table > renders with meta field on columns correctly 1`] = `
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0 custom-cell-class" style="background-color: lightgray;">
           <div data-slot="root" class="relative flex items-start flex-row">
-            <div data-slot="container" class="flex items-center h-5"><button aria-label="Select row" data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-3 outline-primary/25 focus-visible:ring-primary size-4" id="v-0-0-3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+            <div data-slot="container" class="flex items-center h-5"><button aria-label="Select row" data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden size-4 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" id="v-0-0-3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
                 <!---->
               </button>
               <!--v-if-->
@@ -1637,7 +1637,7 @@ exports[`Table > renders with meta field on columns correctly 1`] = `
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0 custom-cell-class" style="background-color: lightgray;">
           <div data-slot="root" class="relative flex items-start flex-row">
-            <div data-slot="container" class="flex items-center h-5"><button aria-label="Select row" data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-3 outline-primary/25 focus-visible:ring-primary size-4" id="v-0-0-5" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+            <div data-slot="container" class="flex items-center h-5"><button aria-label="Select row" data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden size-4 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" id="v-0-0-5" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
                 <!---->
               </button>
               <!--v-if-->
@@ -1663,7 +1663,7 @@ exports[`Table > renders with meta field on columns correctly 1`] = `
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0 custom-cell-class" style="background-color: lightgray;">
           <div data-slot="root" class="relative flex items-start flex-row">
-            <div data-slot="container" class="flex items-center h-5"><button aria-label="Select row" data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-3 outline-primary/25 focus-visible:ring-primary size-4" id="v-0-0-7" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+            <div data-slot="container" class="flex items-center h-5"><button aria-label="Select row" data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden size-4 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" id="v-0-0-7" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
                 <!---->
               </button>
               <!--v-if-->
@@ -1689,7 +1689,7 @@ exports[`Table > renders with meta field on columns correctly 1`] = `
       <tr data-selected="false" data-selectable="false" data-expanded="false" data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <td data-pinned="false" data-slot="td" class="p-4 text-sm text-muted whitespace-nowrap [&amp;:has([role=checkbox])]:pe-0 custom-cell-class" style="background-color: lightgray;">
           <div data-slot="root" class="relative flex items-start flex-row">
-            <div data-slot="container" class="flex items-center h-5"><button aria-label="Select row" data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-3 outline-primary/25 focus-visible:ring-primary size-4" id="v-0-0-9" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+            <div data-slot="container" class="flex items-center h-5"><button aria-label="Select row" data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden size-4 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" id="v-0-0-9" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
                 <!---->
               </button>
               <!--v-if-->
@@ -1991,7 +1991,7 @@ exports[`Table > renders with virtualize and sticky correctly 1`] = `
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">
           <div data-slot="root" class="relative flex items-start flex-row">
-            <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-3 outline-primary/25 focus-visible:ring-primary size-4" id="v-0-0-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+            <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden size-4 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" id="v-0-0-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
                 <!---->
               </button>
               <!--v-if-->

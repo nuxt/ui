@@ -1,10 +1,18 @@
 import type { ModuleOptions } from '../module'
 
+const hover = 'hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:'
+
+// `list` puts focus on the control, which is the click target there. `card` and `table`
+// render the root as a label wrapping everything, so focus belongs on the card itself,
+// as it does whenever the control is `sr-only`.
+const focusControl = (token: string) => `outline-${token}/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-${token}`
+const focusCard = (token: string) => `outline-${token}/25 has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-${token}`
+
 export default (options: Required<ModuleOptions>) => ({
   slots: {
     root: 'relative flex items-start',
     container: 'flex items-center',
-    base: 'rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-3',
+    base: 'rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-none',
     indicator: 'flex items-center justify-center size-full text-inverted',
     icon: 'shrink-0',
     wrapper: 'w-full',
@@ -14,11 +22,9 @@ export default (options: Required<ModuleOptions>) => ({
   variants: {
     color: {
       ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, {
-        base: `outline-${color}/25 focus-visible:ring-${color}`,
         indicator: `bg-${color}`
       }])),
       neutral: {
-        base: 'outline-inverted/25 focus-visible:ring-inverted',
         indicator: 'bg-inverted'
       }
     },
@@ -27,7 +33,7 @@ export default (options: Required<ModuleOptions>) => ({
         root: ''
       },
       card: {
-        root: 'border border-muted rounded-lg'
+        root: [`border border-muted rounded-lg ${hover}bg-elevated/50`, options.theme.transitions && 'transition-colors']
       }
     },
     indicator: {
@@ -90,13 +96,27 @@ export default (options: Required<ModuleOptions>) => ({
       }
     },
     highlight: {
-      true: ''
+      true: '',
+      false: ''
     },
     checked: {
       true: ''
     }
   },
   compoundVariants: [
+    {
+      indicator: 'hidden',
+      class: {
+        container: 'h-auto'
+      }
+    },
+    {
+      variant: 'card',
+      highlight: false,
+      class: {
+        root: `${hover}border-accented`
+      }
+    },
     { size: 'xs', indicator: 'hidden', class: { icon: 'size-3' } },
     { size: 'sm', indicator: 'hidden', class: { icon: 'size-3.5' } },
     { size: 'md', indicator: 'hidden', class: { icon: 'size-4' } },
@@ -107,18 +127,40 @@ export default (options: Required<ModuleOptions>) => ({
     { size: 'md', variant: 'card', class: { root: 'p-3.5' } },
     { size: 'lg', variant: 'card', class: { root: 'p-4' } },
     { size: 'xl', variant: 'card', class: { root: 'p-4.5' } },
+    ...[...(options.theme.colors || []).map((color: string) => [color, color]), ['neutral', 'inverted']].map(([color, token]: string[]) => ({
+      color,
+      variant: 'list',
+      indicator: ['start', 'end'],
+      class: {
+        base: focusControl(token!)
+      }
+    })),
+    ...[...(options.theme.colors || []).map((color: string) => [color, color]), ['neutral', 'inverted']].map(([color, token]: string[]) => ({
+      color,
+      variant: 'card',
+      class: {
+        root: focusCard(token!)
+      }
+    })),
+    ...[...(options.theme.colors || []).map((color: string) => [color, color]), ['neutral', 'inverted']].map(([color, token]: string[]) => ({
+      color,
+      indicator: 'hidden',
+      class: {
+        root: focusCard(token!)
+      }
+    })),
     ...(options.theme.colors || []).map((color: string) => ({
       color,
       variant: 'card',
       class: {
-        root: `has-data-[state=checked]:border-${color}`
+        root: `has-data-[state=checked]:border-${color}/50 has-data-[state=checked]:bg-${color}/10`
       }
     })),
     {
       color: 'neutral',
       variant: 'card',
       class: {
-        root: 'has-data-[state=checked]:border-inverted'
+        root: 'has-data-[state=checked]:border-inverted/50 has-data-[state=checked]:bg-elevated'
       }
     },
     {
@@ -126,6 +168,22 @@ export default (options: Required<ModuleOptions>) => ({
       disabled: true,
       class: {
         root: 'cursor-not-allowed'
+      }
+    },
+    ...(options.theme.colors || []).map((color: string) => ({
+      color,
+      indicator: 'hidden',
+      highlight: true,
+      class: {
+        root: `not-has-disabled:border-${color} not-has-disabled:has-data-[state=checked]:border-${color}`
+      }
+    })),
+    {
+      color: 'neutral',
+      indicator: 'hidden',
+      highlight: true,
+      class: {
+        root: 'not-has-disabled:border-inverted not-has-disabled:has-data-[state=checked]:border-inverted'
       }
     },
     ...(options.theme.colors || []).map((color: string) => ({
@@ -144,6 +202,7 @@ export default (options: Required<ModuleOptions>) => ({
     }
   ],
   defaultVariants: {
+    highlight: false,
     size: 'md',
     color: 'primary',
     variant: 'list',
