@@ -142,7 +142,7 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.modal || {}) })(
   fullscreen: props.fullscreen,
   overlay: props.overlay,
   scrollable: props.scrollable
-} as any))
+}))
 </script>
 
 <!-- eslint-disable vue/no-template-shadow -->

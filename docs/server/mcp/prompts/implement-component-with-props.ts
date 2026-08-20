@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { kebabCase, camelCase, upperFirst } from 'scule'
+import { kebabCase } from 'scule'
 import { queryCollection } from '@nuxt/content/server'
 import { normalizeComponentName } from '~~/server/utils/normalizeComponentName'
 
@@ -39,32 +39,13 @@ export default defineMcpPrompt({
       }
     }
 
-    // Get component metadata
-    const camelName = camelCase(normalizedName)
-    const componentMetaName = `U${upperFirst(camelName)}`
-
-    let metadata = null
-    try {
-      metadata = await $fetch<any>(`/api/component-meta/${componentMetaName}.json`)
-    } catch {
-      // Metadata not available
-    }
-
     const component = {
       name: normalizedName,
       title: page.title,
       description: page.description,
       category: page.category,
       documentation_url: `https://ui.nuxt.com${page.path}`,
-      metadata: metadata
-        ? {
-            pascalName: metadata.pascalName,
-            kebabName: metadata.kebabName,
-            props: metadata.meta.props,
-            slots: metadata.meta.slots,
-            emits: metadata.meta.emits
-          }
-        : null
+      metadata: await fetchComponentMetadata(normalizedName)
     }
 
     return {

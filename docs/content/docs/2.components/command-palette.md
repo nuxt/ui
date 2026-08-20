@@ -2,6 +2,11 @@
 title: CommandPalette
 description: A command palette with full-text search powered by Fuse.js for efficient fuzzy matching.
 category: navigation
+keywords:
+  - command menu
+  - cmdk
+  - spotlight
+  - global search
 links:
   - label: Fuse.js
     icon: i-custom-fuse-js

@@ -30,7 +30,7 @@ export default defineMcpTool({
     )
 
     if (!template) {
-      throw createError({ statusCode: 404, message: `Template "${templateName}" not found. Use the list_templates tool to see all available templates.` })
+      throw createError({ statusCode: 404, message: `Template "${templateName}" not found. Use the list-templates tool to see all available templates.` })
     }
 
     return template
