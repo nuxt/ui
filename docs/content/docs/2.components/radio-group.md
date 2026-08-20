@@ -295,10 +295,10 @@ props:
 
 ### With icon in items :badge{label="Soon" class="align-text-top"}
 
-Use the `icon` property in the items to display an icon when the radio is checked.
+Use the `icon` property in the items to display an icon above the label when `indicator` is `hidden`.
 
 ::note
-When `indicator` is `hidden`, the icon is displayed above the label instead.
+A radio has no icon inside its indicator, so `icon` only renders when the indicator is hidden.
 ::
 
 ::component-code

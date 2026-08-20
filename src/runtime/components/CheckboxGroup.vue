@@ -18,7 +18,7 @@ export type CheckboxGroupItem = CheckboxGroupValue | {
   disabled?: boolean
   value?: string
   /**
-   * The icon displayed when checked, or next to the label when `indicator` is `hidden`.
+   * The icon displayed when checked, or above the label when `indicator` is `hidden`.
    * @IconifyIcon
    */
   icon?: IconProps['name']

@@ -37,7 +37,7 @@ export interface CheckboxProps<T = boolean> extends Pick<CheckboxRootProps<T>, '
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
   /**
-   * The icon displayed when checked, or next to the label when `indicator` is `hidden`.
+   * The icon displayed when checked, or above the label when `indicator` is `hidden`.
    * @defaultValue appConfig.ui.icons.check
    * @IconifyIcon
    */
@@ -97,11 +97,24 @@ const size = computed(() => formFieldSize.value ?? props.size)
 
 const disabled = computed(() => formFieldDisabled.value ?? props.disabled)
 
-// When the indicator is hidden the checked icon is never visible, so `icon` renders next to the
+// When the indicator is hidden the checked icon is never visible, so `icon` renders above the
 // label instead. No `appConfig` fallback here, an unset `icon` must render nothing.
 const labelIcon = computed(() => props.indicator === 'hidden' ? props.icon : undefined)
 
 const attrs = useAttrs()
+
+// An icon only item has no text to name the control, and `UIcon` is `aria-hidden`. Fall back to
+// the value like reka-ui's `Radio` does, so both components expose an accessible name.
+const ariaLabel = computed(() => {
+  if (attrs['aria-label']) {
+    return attrs['aria-label'] as string
+  }
+  if (props.label || slots.label) {
+    return undefined
+  }
+  return props.value != null ? String(props.value) : undefined
+})
+
 // Omit `data-state` to prevent conflicts with parent components (e.g. TooltipTrigger)
 const forwardedAttrs = computed(() => {
   const { 'data-state': _, ...rest } = attrs
@@ -137,6 +150,7 @@ function onUpdate(value: any) {
         v-bind="{ ...rootProps, ...forwardedAttrs, ...ariaAttrs }"
         :name="name"
         :disabled="disabled"
+        :aria-label="ariaLabel"
         data-slot="base"
         :class="ui.base({ class: props.ui?.base })"
         @update:model-value="onUpdate"

@@ -73,6 +73,19 @@ describe('RadioGroup', () => {
     expect(wrapper.find('[data-slot="wrapper"] [data-slot="icon"]').exists()).toBe(true)
   })
 
+  it('passes accessibility tests with icon only items', async () => {
+    const wrapper = await mountSuspended(RadioGroup, {
+      props: {
+        items: [{ value: 'system', icon: 'i-lucide-monitor' }, { value: 'light', icon: 'i-lucide-sun' }],
+        variant: 'table',
+        indicator: 'hidden',
+        orientation: 'horizontal',
+        defaultValue: 'system'
+      }
+    })
+    expect(await axe(wrapper.element)).toHaveNoViolations()
+  })
+
   describe('emits', () => {
     test('update:modelValue event', async () => {
       const wrapper = mount(RadioGroup, { props: { items: ['Option 1', 'Option 2'] } })

@@ -1,12 +1,13 @@
 import type { ModuleOptions } from '../module'
 
-const hover = 'hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:'
+// Shared with `checkbox-group` and `radio-group`, which style the same states on their own slots.
+export const hover = 'hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:'
 
 // `list` puts focus on the control, which is the click target there. `card` and `table`
 // render the root as a label wrapping everything, so focus belongs on the card itself,
 // as it does whenever the control is `sr-only`.
-const focusControl = (token: string) => `outline-${token}/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-${token}`
-const focusCard = (token: string) => `outline-${token}/25 has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-${token}`
+export const focusControl = (token: string) => `outline-${token}/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-${token}`
+export const focusCard = (token: string) => `outline-${token}/25 has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-${token} has-focus-visible:z-[1]`
 
 export default (options: Required<ModuleOptions>) => ({
   slots: {
@@ -144,6 +145,7 @@ export default (options: Required<ModuleOptions>) => ({
     })),
     ...[...(options.theme.colors || []).map((color: string) => [color, color]), ['neutral', 'inverted']].map(([color, token]: string[]) => ({
       color,
+      variant: 'list',
       indicator: 'hidden',
       class: {
         root: focusCard(token!)

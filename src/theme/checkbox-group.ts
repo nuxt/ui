@@ -1,9 +1,6 @@
 import type { ModuleOptions } from '../module'
-
-const hover = 'hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:'
-
 // `table` is defined here rather than in checkbox.ts, so its focus ring is too
-const focusCard = (token: string) => `outline-${token}/25 has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-${token} has-focus-visible:z-[1]`
+import { focusCard, hover } from './checkbox'
 
 export default (options: Required<ModuleOptions>) => ({
   slots: {

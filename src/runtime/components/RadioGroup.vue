@@ -17,7 +17,7 @@ export type RadioGroupItem = RadioGroupValue | {
   disabled?: boolean
   value?: RadioGroupValue
   /**
-   * The icon displayed next to the label when `indicator` is `hidden`.
+   * The icon displayed above the label when `indicator` is `hidden`.
    * @IconifyIcon
    */
   icon?: IconProps['name']
@@ -185,6 +185,12 @@ const normalizedItems = computed(() => {
   return props.items.map(normalizeItem)
 })
 
+// Mirrors `Checkbox`'s `labelIcon`: with the indicator hidden the icon has no box to sit in,
+// so it renders above the label instead.
+function labelIcon(item: any) {
+  return props.indicator === 'hidden' ? item.icon : undefined
+}
+
 function onUpdate(value: any) {
   // @ts-expect-error - 'target' does not exist in type 'EventInit'
   const event = new Event('change', { target: { value } })
@@ -227,8 +233,8 @@ function onUpdate(value: any) {
           </RRadioGroupItem>
         </div>
 
-        <div v-if="(props.indicator === 'hidden' && item.icon) || (item.label || !!slots.label) || (item.description || !!slots.description)" data-slot="wrapper" :class="ui.wrapper({ class: [props.ui?.wrapper, item.ui?.wrapper] })">
-          <UIcon v-if="props.indicator === 'hidden' && item.icon" :name="item.icon" data-slot="icon" :class="ui.icon({ class: [props.ui?.icon, item.ui?.icon] })" />
+        <div v-if="labelIcon(item) || (item.label || !!slots.label) || (item.description || !!slots.description)" data-slot="wrapper" :class="ui.wrapper({ class: [props.ui?.wrapper, item.ui?.wrapper] })">
+          <UIcon v-if="labelIcon(item)" :name="labelIcon(item)" data-slot="icon" :class="ui.icon({ class: [props.ui?.icon, item.ui?.icon] })" />
           <component :is="(!props.variant || props.variant === 'list') ? Label : 'p'" v-if="item.label || !!slots.label" :for="item.id" data-slot="label" :class="ui.label({ class: [props.ui?.label, item.ui?.label], disabled: item.disabled || disabled })">
             <slot name="label" :item="item" :model-value="(props.modelValue as RadioGroupValue)">
               {{ item.label }}

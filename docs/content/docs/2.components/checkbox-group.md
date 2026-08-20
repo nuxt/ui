@@ -340,10 +340,10 @@ props:
 
 ### With icon in items :badge{label="Soon" class="align-text-top"}
 
-Use the `icon` property in the items to display an icon when the checkbox is checked.
+Use the `icon` property in the items to display an icon above the label when `indicator` is `hidden`.
 
 ::note
-When `indicator` is `hidden`, the icon is displayed above the label instead.
+When the indicator is visible, the icon replaces the check mark inside it instead.
 ::
 
 ::component-code

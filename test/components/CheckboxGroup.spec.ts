@@ -96,6 +96,39 @@ describe('CheckboxGroup', () => {
     expect(hidden.find('[data-slot="wrapper"] [data-slot="icon"]').exists()).toBe(true)
   })
 
+  it('renders an item icon without a label', async () => {
+    const wrapper = await mountSuspended(CheckboxGroup, {
+      props: { items: [{ value: 'table', icon: 'i-lucide-table' }], indicator: 'hidden' }
+    })
+    expect(wrapper.find('[data-slot="wrapper"] [data-slot="icon"]').exists()).toBe(true)
+  })
+
+  it('names an icon only item from its value', async () => {
+    const items = [{ value: 'table', icon: 'i-lucide-table' }]
+
+    const wrapper = await mountSuspended(CheckboxGroup, { props: { items, indicator: 'hidden' } })
+    expect(wrapper.find('[data-slot="base"]').attributes('aria-label')).toBe('table')
+    expect(await axe(wrapper.element)).toHaveNoViolations()
+
+    const labelled = await mountSuspended(CheckboxGroup, {
+      props: { items: [{ ...items[0]!, label: 'Table' }], indicator: 'hidden' }
+    })
+    expect(labelled.find('[data-slot="base"]').attributes('aria-label')).toBeUndefined()
+  })
+
+  it('passes accessibility tests with icon only items', async () => {
+    const wrapper = await mountSuspended(CheckboxGroup, {
+      props: {
+        items: [{ value: 'system', icon: 'i-lucide-monitor' }, { value: 'light', icon: 'i-lucide-sun' }],
+        variant: 'table',
+        indicator: 'hidden',
+        orientation: 'horizontal',
+        defaultValue: ['system']
+      }
+    })
+    expect(await axe(wrapper.element)).toHaveNoViolations()
+  })
+
   describe('emits', () => {
     test('update:modelValue event', async () => {
       const wrapper = mount(CheckboxGroup, { props: { items: ['Option 1', 'Option 2'] } })
