@@ -1,6 +1,6 @@
 # Components
 
-Quick-reference index of all 125+ components. For full API docs (props, slots, events, examples), use the MCP `get_component` or `get_component_metadata` tools.
+Quick-reference index of all 125+ components. For full API docs (props, slots, events, examples), use the MCP `get-component` or `get-component-metadata` tools.
 
 ## Layout
 
@@ -12,6 +12,7 @@ Quick-reference index of all 125+ components. For full API docs (props, slots, e
 | `UFooterColumns` | Multi-column footer with link groups |
 | `UMain` | Main content area |
 | `UContainer` | Centered max-width container |
+| `USplitter` | Resizable panels separated by draggable handles |
 | `ULink` | Enhanced link — NuxtLink/RouterLink with active states |
 
 ## Element
@@ -31,6 +32,7 @@ Quick-reference index of all 125+ components. For full API docs (props, slots, e
 | `USeparator` | Divider line with optional label |
 | `USkeleton` | Loading placeholder |
 | `UProgress` | Progress bar |
+| `UProgressGroup` | Segmented progress bar with a list of items |
 | `UToast` | Toast notification (shown via `useToast`) |
 | `UCalendar` | Date calendar (single, range, multiple) |
 | `UCollapsible` | Animated expand/collapse |

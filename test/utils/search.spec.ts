@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { sanitizeSnippet } from '../../src/runtime/utils/search'
+import { highlight, sanitizeSnippet } from '../../src/runtime/utils/search'
 
 describe('sanitizeSnippet', () => {
   it('preserves <mark> highlights', () => {
@@ -27,5 +27,37 @@ describe('sanitizeSnippet', () => {
 
   it('handles empty input', () => {
     expect(sanitizeSnippet('')).toBe('')
+  })
+})
+
+describe('highlight', () => {
+  it('escapes an injected tag in the unmatched tail while keeping the match highlighted', () => {
+    const value = 'zzzzz &<img src=x onerror=alert(1)>'
+    const result = highlight({ label: value, matches: [{ key: 'label', value, indices: [[0, 4]] }] }, 'zzzzz', 'label')
+
+    expect(result).toContain('<mark>zzzzz</mark>')
+    expect(result).not.toContain('<img')
+    expect(result).toContain('&lt;img')
+    expect(result).toContain('&amp;')
+  })
+
+  it('escapes payloads that contain a pre-existing HTML entity (regression: sanitize bypass)', () => {
+    const value = '&amp;<img src=x onerror=alert(1)>'
+    const result = highlight({ label: value, matches: [{ key: 'label', value, indices: [] }] }, 'x', 'label')
+
+    expect(result).not.toContain('<img')
+    expect(result).toBe('&amp;amp;&lt;img src=x onerror=alert(1)&gt;')
+  })
+
+  it('escapes HTML-special characters around the highlighted region', () => {
+    const value = `match < & "a" 'b'`
+    const result = highlight({ label: value, matches: [{ key: 'label', value, indices: [[0, 4]] }] }, 'match', 'label')
+
+    expect(result).toBe(`<mark>match</mark> &lt; &amp; &quot;a&quot; &#39;b&#39;`)
+  })
+
+  it('returns undefined when there are no matches', () => {
+    expect(highlight({ label: 'foo', matches: [] }, 'foo', 'label')).toBeUndefined()
+    expect(highlight({ label: 'foo' }, 'foo', 'label')).toBeUndefined()
   })
 })

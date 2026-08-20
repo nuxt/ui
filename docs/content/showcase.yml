@@ -5,6 +5,8 @@ hero:
   title: Showcase
   description: Discover our selection of projects built with Nuxt UI.
 items:
+  - name: Codemo
+    url: https://codemo.dev/
   - name: CodeSnap
     url: https://codesnap.dev/
   - name: Croix-Rouge française - Devenir bénévole
@@ -27,6 +29,12 @@ items:
     url: https://www.juno.one/
   - name: Kassebil
     url: https://kassebil.dk/
+  - name: Kleine Zeitung
+    url: https://www.kleinezeitung.at/
+    screenshotOptions:
+      width: 1024
+      delay: 5
+      removeElements: ['[id^="piano"]']
   - name: LearnVue
     url: https://learnvue.co/
   - name: LunixPOS
@@ -63,8 +71,12 @@ items:
     url: https://thuprai.com/
   - name: TresJS
     url: https://tresjs.org/
+  - name: Triad Trainer
+    url: https://triadtrainer.vercel.app/
   - name: Uneed
     url: https://uneed.best/
+  - name: Volta
+    url: https://volta.net/
   - name: Wiredash
     url: https://wiredash.com/
   - name: Zielgestalt

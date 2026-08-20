@@ -84,7 +84,8 @@ export const collections = {
       include: 'docs/**/*'
     }],
     schema: z.object({
-      category: z.enum(['layout', 'form', 'element', 'navigation', 'data', 'overlay', 'dashboard', 'page', 'chat', 'editor', 'color-mode', 'i18n']).optional(),
+      category: z.enum(['layout', 'form', 'element', 'navigation', 'data', 'overlay', 'dashboard', 'page', 'chat', 'content', 'editor', 'color-mode', 'i18n']).optional(),
+      keywords: z.array(z.string()).optional(),
       index: z.boolean().optional(),
       framework: z.enum(['nuxt', 'vue']).optional(),
       navigation: z.object({
@@ -149,7 +150,10 @@ export const collections = {
         url: z.string(),
         screenshotUrl: z.string().optional(),
         screenshotOptions: z.object({
-          delay: z.number()
+          delay: z.number().optional(),
+          width: z.number().optional(),
+          cookies: z.array(z.string()).optional(),
+          removeElements: z.array(z.string()).optional()
         }).optional()
       }))
     })

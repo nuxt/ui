@@ -126,6 +126,38 @@ export interface ThemeDefaults {
   pricingPlans?: Partial<ComponentTypes.PricingPlansProps>
   pricingTable?: Partial<ComponentTypes.PricingTableProps>
   progress?: Partial<ComponentTypes.ProgressProps>
+  progressGroup?: Partial<ComponentTypes.ProgressGroupProps>
+  /**
+   * Prose components that expose overridable props, under a `prose` namespace
+   * (mirrors `app.config.ui.prose` and `useComponentProps('prose.<tag>', …)`).
+   * Set prop defaults per element to scope behavior for a subtree, e.g.
+   * `{ prose: { h2: { anchor: true }, img: { zoom: false } } }`. Class-only
+   * elements (`p`, `li`, `table`, `em`, …) are omitted — restyle them via `:ui`.
+   */
+  prose?: {
+    a?: Partial<ComponentTypes.ProseAProps>
+    accordion?: Partial<ComponentTypes.ProseAccordionProps>
+    callout?: Partial<ComponentTypes.ProseCalloutProps>
+    card?: Partial<ComponentTypes.ProseCardProps>
+    code?: Partial<ComponentTypes.ProseCodeProps>
+    codeCollapse?: Partial<ComponentTypes.ProseCodeCollapseProps>
+    codeGroup?: Partial<ComponentTypes.ProseCodeGroupProps>
+    codeTree?: Partial<ComponentTypes.ProseCodeTreeProps>
+    collapsible?: Partial<ComponentTypes.ProseCollapsibleProps>
+    field?: Partial<ComponentTypes.ProseFieldProps>
+    fieldGroup?: Partial<ComponentTypes.ProseFieldGroupProps>
+    h1?: Partial<ComponentTypes.ProseH1Props>
+    h2?: Partial<ComponentTypes.ProseH2Props>
+    h3?: Partial<ComponentTypes.ProseH3Props>
+    h4?: Partial<ComponentTypes.ProseH4Props>
+    img?: Partial<ComponentTypes.ProseImgProps>
+    pre?: Partial<ComponentTypes.ProsePreProps>
+    prompt?: Partial<ComponentTypes.ProsePromptProps>
+    steps?: Partial<ComponentTypes.ProseStepsProps>
+    tabs?: Partial<ComponentTypes.ProseTabsProps>
+    td?: Partial<ComponentTypes.ProseTdProps>
+    th?: Partial<ComponentTypes.ProseThProps>
+  }
   radioGroup?: Partial<ComponentTypes.RadioGroupProps>
   scrollArea?: Partial<ComponentTypes.ScrollAreaProps>
   select?: Partial<ComponentTypes.SelectProps>
@@ -135,6 +167,7 @@ export interface ThemeDefaults {
   skeleton?: Partial<ComponentTypes.SkeletonProps>
   slideover?: Partial<ComponentTypes.SlideoverProps>
   slider?: Partial<ComponentTypes.SliderProps>
+  splitter?: Partial<ComponentTypes.SplitterProps>
   stepper?: Partial<ComponentTypes.StepperProps>
   switch?: Partial<ComponentTypes.SwitchProps>
   table?: Partial<ComponentTypes.TableProps>

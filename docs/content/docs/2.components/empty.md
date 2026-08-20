@@ -2,6 +2,10 @@
 title: Empty
 description: 'A component to display an empty state.'
 category: data
+keywords:
+  - no data
+  - placeholder
+  - zero state
 links:
   - label: GitHub
     icon: i-simple-icons-github
@@ -90,7 +94,7 @@ props:
 ---
 ::
 
-### Loading :badge{label="Soon" class="align-text-top"}
+### Loading :badge{label="4.10+" class="align-text-top"}
 
 Use the `loading` prop to show a loading icon in place of the icon. The layout stays identical, so you can toggle between loading and empty states without layout shifts.
 
@@ -109,7 +113,7 @@ props:
 ---
 ::
 
-### Loading Icon :badge{label="Soon" class="align-text-top"}
+### Loading Icon :badge{label="4.10+" class="align-text-top"}
 
 Use the `loading-icon` prop to customize the loading icon. Defaults to `i-lucide-loader-circle`.
 

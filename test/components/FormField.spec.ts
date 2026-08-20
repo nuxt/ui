@@ -21,6 +21,16 @@ import {
   UFileUpload
 } from '#components'
 
+// Mock useId to force a consistent return value in Nuxt and Vue. This is required to test aria attributes.
+// `vi.mock` is hoisted to the top of the module, so it must live at the top level to reflect its actual execution order.
+vi.mock('vue', async () => {
+  const actual = await vi.importActual('vue')
+  return {
+    ...actual,
+    useId: () => 'v-0-0' // Static value matching Nuxt's format
+  }
+})
+
 const inputComponents = [UInput, URadioGroup, UTextarea, UCheckbox, USelect, USelectMenu, UInputMenu, UInputNumber, USwitch, USlider, UPinInput, UFileUpload]
 
 async function renderFormField(options: {
@@ -99,15 +109,6 @@ describe('FormField', () => {
   })
 
   describe.each(inputComponents.map(inputComponent => [(inputComponent as any).__name, inputComponent]))('%s integration', async (name: string, inputComponent: any) => {
-    // Mock useId to force a consistent return value in Nuxt and Vue. This is required to test aria attributes.
-    vi.mock('vue', async () => {
-      const actual = await vi.importActual('vue')
-      return {
-        ...actual,
-        useId: () => 'v-0-0' // Static value matching Nuxt's format
-      }
-    })
-
     if (name === 'RadioGroup') {
       test('unbinds label for', async () => {
         const wrapper = await renderFormField({
@@ -129,6 +130,20 @@ describe('FormField', () => {
 
         const input = wrapper.find('[id=v-0-0]')
         expect(input.exists()).toBe(true)
+      })
+    }
+
+    if (name === 'Slider') {
+      test('binds aria attributes on the thumb', async () => {
+        const wrapper = await renderFormField({
+          props: { error: 'Error' },
+          inputComponent
+        })
+
+        const invalid = wrapper.findAll('[aria-invalid="true"]')
+        expect(invalid).toHaveLength(1)
+        expect(invalid[0]!.attributes('role')).toBe('slider')
+        expect(invalid[0]!.attributes('aria-describedby')).toBe('v-0-0-error')
       })
     }
 

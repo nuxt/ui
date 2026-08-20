@@ -230,7 +230,7 @@ export interface SelectMenuSlots<
 </script>
 
 <script setup lang="ts" generic="T extends ArrayOrNested<SelectMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false, Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>, C extends boolean | object = false">
-import { useTemplateRef, computed, ref, onMounted, toRef, toRaw, watch, nextTick } from 'vue'
+import { useTemplateRef, computed, ref, onMounted, onScopeDispose, toRef, toRaw, watch, nextTick } from 'vue'
 import { ComboboxRoot, ComboboxArrow, ComboboxAnchor, ComboboxInput, ComboboxTrigger, ComboboxCancel, ComboboxPortal, ComboboxContent, ComboboxEmpty, ComboboxGroup, ComboboxVirtualizer, ComboboxLabel, ComboboxSeparator, ComboboxItem, ComboboxItemIndicator, FocusScope } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
 import { defu } from 'defu'
@@ -285,16 +285,36 @@ const virtualizerProps = toRef(() => {
   if (!props.virtualize) return false
 
   return defu(typeof props.virtualize === 'boolean' ? {} : props.virtualize, {
-    estimateSize: getEstimateSize(filteredItems.value, selectSize.value || 'md', props.descriptionKey as string, !!slots['item-description'])
+    estimateSize: getEstimateSize(filteredItems.value, size.value ?? 'md', props.descriptionKey as string, !!slots['item-description'])
   })
 })
 const searchInputProps = toRef(() => defu(props.searchInput, { placeholder: t('selectMenu.search'), variant: 'none' }) as Omit<InputProps, 'modelValue' | 'defaultValue'>)
 
-const { emitFormBlur, emitFormFocus, emitFormInput, emitFormChange, size: formFieldSize, color, id, name, highlight, disabled, ariaAttrs } = useFormField<InputProps>(_props)
-const { orientation, size: fieldGroupSize } = useFieldGroup<InputProps>(_props)
-const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(toRef(() => defu(props, { trailingIcon: appConfig.ui.icons.chevronDown })))
+const { emitFormBlur, emitFormFocus, emitFormInput, emitFormChange, size: formFieldSize, color: formFieldColor, id, name, highlight: formFieldHighlight, disabled: formFieldDisabled, ariaAttrs } = useFormField<InputProps>(_props)
 
-const selectSize = computed(() => fieldGroupSize.value || formFieldSize.value)
+const { orientation, size: fieldGroupSize } = useFieldGroup<InputProps>(_props)
+// Pass only the props the composable reads: `defu(props, ...)` copied every prop
+// through the `useComponentProps` proxy and subscribed this computed (and `ui`,
+// which reads `isLeading`/`isTrailing`) to all of them, re-running the whole tv
+// pipeline on unrelated prop changes.
+const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(computed(() => ({
+  icon: props.icon,
+  leading: props.leading,
+  leadingIcon: props.leadingIcon,
+  trailing: props.trailing,
+  trailingIcon: props.trailingIcon ?? appConfig.ui.icons.chevronDown,
+  loading: props.loading,
+  loadingIcon: props.loadingIcon
+})))
+
+// eslint-disable-next-line vue/no-dupe-keys
+const color = computed(() => formFieldColor.value ?? props.color)
+// eslint-disable-next-line vue/no-dupe-keys
+const highlight = computed(() => formFieldHighlight.value ?? props.highlight)
+// eslint-disable-next-line vue/no-dupe-keys
+const size = computed(() => fieldGroupSize.value ?? formFieldSize.value ?? props.size)
+
+const disabled = computed(() => formFieldDisabled.value ?? props.disabled)
 
 const [DefineCreateItemTemplate, ReuseCreateItemTemplate] = createReusableTemplate()
 const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: SelectMenuItem, index: number }>({
@@ -312,11 +332,11 @@ const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: S
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.selectMenu || {}) })({
-  color: color.value ?? props.color,
+  color: color.value,
   variant: props.variant,
-  size: selectSize?.value ?? props.size,
+  size: size.value,
   loading: props.loading,
-  highlight: highlight.value ?? props.highlight,
+  highlight: highlight.value,
   leading: isLeading.value || !!props.avatar || !!slots.leading,
   trailing: isTrailing.value || !!slots.trailing,
   fieldGroup: orientation.value,
@@ -394,11 +414,15 @@ function autoFocus() {
   }
 }
 
+let autofocusTimeoutId: ReturnType<typeof setTimeout> | undefined
+
 onMounted(() => {
-  setTimeout(() => {
+  autofocusTimeoutId = setTimeout(() => {
     autoFocus()
   }, props.autofocusDelay)
 })
+
+onScopeDispose(() => clearTimeout(autofocusTimeoutId))
 
 function onUpdate(value: any) {
   if (toRaw(props.modelValue) === value) {
@@ -433,10 +457,12 @@ function onUpdate(value: any) {
 }
 
 const isOpen = ref(false)
+let timeoutId: ReturnType<typeof setTimeout> | undefined
+
+onScopeDispose(() => clearTimeout(timeoutId))
+
 function onUpdateOpen(value: boolean) {
   isOpen.value = value
-
-  let timeoutId
 
   if (!value) {
     const event = new FocusEvent('blur')
@@ -637,7 +663,7 @@ defineExpose({
               <UButton
                 as="span"
                 :icon="props.clearIcon || appConfig.ui.icons.close"
-                :size="selectSize"
+                :size="size"
                 variant="link"
                 color="neutral"
                 tabindex="-1"
@@ -664,7 +690,7 @@ defineExpose({
               <UInput
                 autofocus
                 autocomplete="off"
-                :size="selectSize"
+                :size="size"
                 v-bind="searchInputProps"
                 :model-modifiers="{
                   trim: props.modelModifiers?.trim

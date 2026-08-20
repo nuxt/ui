@@ -3,7 +3,7 @@ import { defineLocale } from '../composables/defineLocale'
 
 export default defineLocale<Messages>({
   name: 'Тоҷикӣ',
-  code: 'tj',
+  code: 'tg',
   messages: {
     alert: {
       close: 'Бастан'

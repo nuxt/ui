@@ -7,18 +7,17 @@ import type { ThemeDefaults } from '../../src/runtime/types/theme'
 
 /**
  * Hand-maintained list of `#build/ui` exports that intentionally don't
- * participate in `<UTheme :props>` overrides. Two reasons land here:
+ * participate in `<UTheme :props>` overrides: the matching Vue file doesn't
+ * run `useComponentProps`, so a `:props` entry would types-check but no-op at
+ * runtime. If a key stays here long-term, consider migrating the component to
+ * `useComponentProps` and removing it from this list.
  *
- *   - `prose` is a namespace, not a single component (its children live
- *     under `prose.<tag>` and are read via `useComponentProps('prose.p', …)`).
- *   - The matching Vue file doesn't run `useComponentProps`, so a `:props`
- *     entry would types-check but no-op at runtime. If a key stays here
- *     long-term, consider migrating the component to `useComponentProps`
- *     and removing it from this list.
+ * Note: `prose` is a namespace whose children (`prose.h2`, …) *do* read
+ * `useComponentProps('prose.<tag>', …)`, so it participates via a nested
+ * `ThemeDefaults['prose']` shape and is not excluded here.
  */
 type NonProxyComponents
-  = | 'prose'
-    | 'link'
+  = | 'link'
     | 'editorEmojiMenu'
     | 'editorMentionMenu'
     | 'editorSuggestionMenu'

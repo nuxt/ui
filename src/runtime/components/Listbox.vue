@@ -1,7 +1,6 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import type { VNode } from 'vue'
-import { computed, toRaw, toRef } from 'vue'
 import type { ListboxRootEmits, ListboxRootProps } from 'reka-ui'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/listbox'
@@ -161,6 +160,7 @@ export type ListboxSlots<T extends ArrayOrNested<ListboxItem> = ArrayOrNested<Li
 </script>
 
 <script setup lang="ts" generic="T extends ArrayOrNested<ListboxItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false, Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>">
+import { computed, toRaw, toRef } from 'vue'
 import { ListboxRoot, ListboxContent, ListboxGroup, ListboxGroupLabel, ListboxVirtualizer, ListboxItem as RekaListboxItem, ListboxItemIndicator, ListboxFilter } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
 import { createReusableTemplate, reactivePick } from '@vueuse/core'
@@ -205,12 +205,21 @@ const virtualizerProps = toRef(() => {
   if (!props.virtualize) return false
 
   return defu(typeof props.virtualize === 'boolean' ? {} : props.virtualize, {
-    estimateSize: getEstimateSize(filteredItems.value, size.value || 'md', props.descriptionKey as string, !!slots['item-description'])
+    estimateSize: getEstimateSize(filteredItems.value, size.value ?? 'md', props.descriptionKey as string, !!slots['item-description'])
   })
 })
 const inputProps = toRef(() => defu(typeof props.filter === 'object' ? props.filter : {}, { placeholder: t('listbox.search'), variant: 'none' }) as Omit<InputProps, 'modelValue' | 'defaultValue'>)
 
-const { emitFormChange, emitFormInput, name, size, color, id, highlight, disabled, ariaAttrs } = useFormField<InputProps>(_props, { bind: false })
+const { emitFormChange, emitFormInput, name, size: formFieldSize, color: formFieldColor, id, highlight: formFieldHighlight, disabled: formFieldDisabled, ariaAttrs } = useFormField<InputProps>(_props, { bind: false })
+
+// eslint-disable-next-line vue/no-dupe-keys
+const color = computed(() => formFieldColor.value ?? props.color)
+// eslint-disable-next-line vue/no-dupe-keys
+const highlight = computed(() => formFieldHighlight.value ?? props.highlight)
+// eslint-disable-next-line vue/no-dupe-keys
+const size = computed(() => formFieldSize.value ?? props.size)
+
+const disabled = computed(() => formFieldDisabled.value ?? props.disabled)
 
 const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: ListboxItem, index: number }>({
   props: {
@@ -227,9 +236,9 @@ const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: L
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.listbox || {}) })({
-  color: color.value ?? props.color,
-  size: size.value ?? props.size,
-  highlight: highlight.value ?? props.highlight,
+  color: color.value,
+  size: size.value,
+  highlight: highlight.value,
   disabled: disabled.value,
   virtualize: !!props.virtualize
 }))

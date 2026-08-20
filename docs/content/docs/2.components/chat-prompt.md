@@ -49,7 +49,7 @@ props:
 Check the **Chat** overview page for installation instructions, server setup and usage examples.
 ::
 
-### With an Editor :badge{label="Soon" class="align-text-top"}
+### With an Editor :badge{label="4.10+" class="align-text-top"}
 
 Compose the `#header`, `#body` and `#footer` slots to build a rich prompt: file attachments, an [Editor](/docs/components/editor) with `@` mentions and `/` commands through [EditorMentionMenu](/docs/components/editor-mention-menu), and a mode selector.
 
