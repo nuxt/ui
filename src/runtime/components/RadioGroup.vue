@@ -13,6 +13,7 @@ export type RadioGroupValue = AcceptableValue
 export type RadioGroupItem = RadioGroupValue | {
   label?: string
   description?: string
+  slot?: string
   disabled?: boolean
   value?: RadioGroupValue
   class?: any
@@ -80,14 +81,25 @@ export type RadioGroupEmits<T extends RadioGroupItem[] = RadioGroupItem[], VK ex
 } & GetModelValueEmits<T, VK, false>
 
 type NormalizeItem<T extends RadioGroupItem> = Exclude<T & { id: string }, RadioGroupValue>
-
 type SlotProps<T extends RadioGroupItem> = (props: { item: NormalizeItem<T>, modelValue: RadioGroupValue }) => VNode[]
+
+type DynamicSlotProps<T extends RadioGroupItem[]> = {
+  [K in T[number] extends infer Item
+    ? Item extends { slot?: infer Slot }
+      ? Slot extends string ? Slot : never
+      : never
+    : never]?: SlotProps<T[number]>
+}
 
 export interface RadioGroupSlots<T extends RadioGroupItem[] = RadioGroupItem[]> {
   legend?(props?: {}): VNode[]
   label?: SlotProps<T[number]>
   description?: SlotProps<T[number]>
 }
+
+type RadioGroupAllSlots<T extends RadioGroupItem[] = RadioGroupItem[]> = RadioGroupSlots<T> & {
+  content?: SlotProps<T[number]>
+} & DynamicSlotProps<T>
 </script>
 
 <script setup lang="ts" generic="T extends RadioGroupItem[], VK extends GetItemKeys<T> = 'value'">
@@ -108,7 +120,7 @@ const _props = withDefaults(defineProps<RadioGroupProps<T, VK>>(), {
   orientation: 'vertical'
 })
 const emits = defineEmits<RadioGroupEmits<T, VK>>()
-const slots = defineSlots<RadioGroupSlots<T>>()
+const slots = defineSlots<RadioGroupAllSlots<T>>()
 
 const props = useComponentProps<RadioGroupProps<T, VK>>('radioGroup', _props)
 
@@ -220,17 +232,28 @@ function onUpdate(value: any) {
           </RRadioGroupItem>
         </div>
 
-        <div v-if="(item.label || !!slots.label) || (item.description || !!slots.description)" data-slot="wrapper" :class="ui.wrapper({ class: [props.ui?.wrapper, item.ui?.wrapper] })">
-          <component :is="(!props.variant || props.variant === 'list') ? Label : 'p'" v-if="item.label || !!slots.label" :for="item.id" data-slot="label" :class="ui.label({ class: [props.ui?.label, item.ui?.label], disabled: item.disabled || disabled })">
-            <slot name="label" :item="item" :model-value="(props.modelValue as RadioGroupValue)">
-              {{ item.label }}
-            </slot>
+        <div v-if="(item.label || !!slots.label) || (item.description || !!slots.description) || (item.slot ? !!slots[item.slot as keyof RadioGroupAllSlots<T>] : !!slots.content)" data-slot="wrapper" :class="ui.wrapper({ class: [props.ui?.wrapper, item.ui?.wrapper] })">
+          <component
+            :is="(!props.variant || props.variant === 'list') ? Label : 'div'"
+            v-if="item.slot ? !!slots[item.slot as keyof RadioGroupAllSlots<T>] : !!slots.content"
+            :for="(!props.variant || props.variant === 'list') ? item.id : undefined"
+            data-slot="content"
+          >
+            <slot :name="((item.slot || 'content') as keyof RadioGroupAllSlots<T>)" :item="item" :model-value="(props.modelValue as RadioGroupValue)" />
           </component>
-          <p v-if="item.description || !!slots.description" data-slot="description" :class="ui.description({ class: [props.ui?.description, item.ui?.description], disabled: item.disabled || disabled })">
-            <slot name="description" :item="item" :model-value="(props.modelValue as RadioGroupValue)">
-              {{ item.description }}
-            </slot>
-          </p>
+
+          <template v-else>
+            <component :is="(!props.variant || props.variant === 'list') ? Label : 'p'" v-if="item.label || !!slots.label" :for="item.id" data-slot="label" :class="ui.label({ class: [props.ui?.label, item.ui?.label], disabled: item.disabled || disabled })">
+              <slot name="label" :item="item" :model-value="(props.modelValue as RadioGroupValue)">
+                {{ item.label }}
+              </slot>
+            </component>
+            <p v-if="item.description || !!slots.description" data-slot="description" :class="ui.description({ class: [props.ui?.description, item.ui?.description], disabled: item.disabled || disabled })">
+              <slot name="description" :item="item" :model-value="(props.modelValue as RadioGroupValue)">
+                {{ item.description }}
+              </slot>
+            </p>
+          </template>
         </div>
       </component>
     </fieldset>

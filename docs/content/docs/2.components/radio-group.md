@@ -59,6 +59,7 @@ You can also pass an array of objects with the following properties:
 
 - `label?: string`{lang="ts-type"}
 - `description?: string`{lang="ts-type"}
+- [`slot?: string`{lang="ts-type"}](#with-custom-slot)
 - [`value?: string`{lang="ts-type"}](#value-key)
 - `disabled?: boolean`{lang="ts-type"}
 - `class?: any`{lang="ts-type"}
@@ -289,6 +290,21 @@ props:
     - 'Dark'
 ---
 ::
+
+## Examples
+
+### With custom slot :badge{label="Soon" class="align-text-top"}
+
+Use the `slot` property to replace the label and description of a specific item with custom content.
+
+You will have access to the following slots:
+
+- `#{{ item.slot }}`{lang="ts-type"}
+- `#content`{lang="ts-type"} to customize the content of items without a `slot` property
+
+Slots receive the `item` and `modelValue` properties.
+
+:component-example{name="radio-group-custom-slot-example"}
 
 ## API
 
