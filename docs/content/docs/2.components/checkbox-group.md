@@ -370,7 +370,6 @@ props:
   indicator: 'hidden'
   orientation: 'horizontal'
   items:
-  items:
     - label: 'System'
       icon: 'i-lucide-monitor'
       value: 'system'
