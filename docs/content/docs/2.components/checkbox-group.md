@@ -64,7 +64,7 @@ You can also pass an array of objects with the following properties:
 - `description?: string`{lang="ts-type"}
 - [`value?: string`{lang="ts-type"}](#value-key)
 - `disabled?: boolean`{lang="ts-type"}
-- `icon?: string`{lang="ts-type"}
+- [`icon?: string`{lang="ts-type"}](#with-icon-in-items)
 - `class?: any`{lang="ts-type"}
 - `ui?: { item?: ClassNameValue, container?: ClassNameValue, base?: ClassNameValue, 'indicator'?: ClassNameValue, icon?: ClassNameValue, wrapper?: ClassNameValue, label?: ClassNameValue, description?: ClassNameValue }`{lang="ts-type"}
 
@@ -127,41 +127,6 @@ props:
     - label: 'Dark'
       description: 'This is the third option.'
       id: 'dark'
----
-::
-
-### Icon :badge{label="Soon" class="align-text-top"}
-
-Use the `icon` property in the items to display an icon when the checkbox is checked.
-
-When `indicator` is `hidden`, the icon is displayed next to the label instead, which is how you build a visual picker.
-
-::component-code
----
-ignore:
-  - modelValue
-  - items
-  - variant
-external:
-  - items
-  - modelValue
-externalTypes:
-  - CheckboxGroupItem[]
-props:
-  modelValue:
-    - 'system'
-  variant: 'card'
-  indicator: 'hidden'
-  items:
-    - label: 'System'
-      icon: 'i-lucide-monitor'
-      value: 'system'
-    - label: 'Light'
-      icon: 'i-lucide-sun'
-      value: 'light'
-    - label: 'Dark'
-      icon: 'i-lucide-moon'
-      value: 'dark'
 ---
 ::
 
@@ -368,6 +333,43 @@ props:
     - 'System'
     - 'Light'
     - 'Dark'
+---
+::
+
+## Examples
+
+### With icon in items :badge{label="Soon" class="align-text-top"}
+
+Use the `icon` property in the items to display an icon when the checkbox is checked.
+
+When `indicator` is `hidden`, the icon is displayed next to the label instead, which is how you build a visual picker.
+
+::component-code
+---
+ignore:
+  - modelValue
+  - items
+  - variant
+external:
+  - items
+  - modelValue
+externalTypes:
+  - CheckboxGroupItem[]
+props:
+  modelValue:
+    - 'system'
+  variant: 'card'
+  indicator: 'hidden'
+  items:
+    - label: 'System'
+      icon: 'i-lucide-monitor'
+      value: 'system'
+    - label: 'Light'
+      icon: 'i-lucide-sun'
+      value: 'light'
+    - label: 'Dark'
+      icon: 'i-lucide-moon'
+      value: 'dark'
 ---
 ::
 
