@@ -6,7 +6,7 @@ export default (options: Required<ModuleOptions>) => ({
     container: 'flex items-center',
     base: 'rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-3',
     indicator: 'flex items-center justify-center size-full text-inverted',
-    icon: 'shrink-0 size-full',
+    icon: 'shrink-0',
     wrapper: 'w-full',
     label: 'block font-medium text-default',
     description: 'text-muted'
@@ -41,32 +41,37 @@ export default (options: Required<ModuleOptions>) => ({
       },
       hidden: {
         base: 'sr-only',
-        wrapper: 'text-center'
+        wrapper: 'flex flex-col items-center gap-1 text-center'
       }
     },
     size: {
       xs: {
         base: 'size-3',
+        icon: 'size-2.5',
         container: 'h-4',
         wrapper: 'text-xs'
       },
       sm: {
         base: 'size-3.5',
+        icon: 'size-3',
         container: 'h-4',
         wrapper: 'text-xs'
       },
       md: {
         base: 'size-4',
+        icon: 'size-3.5',
         container: 'h-5',
         wrapper: 'text-sm'
       },
       lg: {
         base: 'size-4.5',
+        icon: 'size-4',
         container: 'h-5',
         wrapper: 'text-sm'
       },
       xl: {
         base: 'size-5',
+        icon: 'size-4.5',
         container: 'h-6',
         wrapper: 'text-base'
       }

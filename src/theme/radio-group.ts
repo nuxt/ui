@@ -55,7 +55,7 @@ export default (options: Required<ModuleOptions>) => ({
       },
       hidden: {
         base: 'sr-only',
-        wrapper: 'text-center'
+        wrapper: 'flex flex-col items-center gap-1 text-center'
       }
     },
     size: {
