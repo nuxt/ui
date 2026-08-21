@@ -115,6 +115,14 @@ describe('Slider', () => {
       expect(thumbs[0]!.attributes('aria-valuetext')).toBe('10 milliseconds')
     })
 
+    test('forwards validity attributes to the thumb', async () => {
+      const { wrapper, thumbs } = await renderThumbs({ props: { modelValue: 10 }, attrs: { 'aria-invalid': 'true', 'aria-errormessage': 'volume-error' } })
+
+      expect(thumbs[0]!.attributes('aria-invalid')).toBe('true')
+      expect(thumbs[0]!.attributes('aria-errormessage')).toBe('volume-error')
+      expect(wrapper.get('[data-slot="root"]').attributes('aria-invalid')).toBeUndefined()
+    })
+
     test('keeps non-aria attributes on the root', async () => {
       const { wrapper, thumbs } = await renderThumbs({ props: { modelValue: 10 }, attrs: { 'data-testid': 'slider' } })
 

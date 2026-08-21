@@ -105,7 +105,7 @@ const thumbs = computed(() => sliderValue.value?.length ?? 1)
 
 // The thumb is the element with `role="slider"`, so these describe it rather than the root.
 // Multiple thumbs keep Reka UI's positional names and the caller's label groups them on the root.
-const thumbAttrs = ['aria-label', 'aria-labelledby', 'aria-describedby', 'aria-valuetext']
+const thumbAttrs = ['aria-label', 'aria-labelledby', 'aria-describedby', 'aria-valuetext', 'aria-invalid', 'aria-errormessage']
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.slider || {}) })({
