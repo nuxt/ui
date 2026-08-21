@@ -372,7 +372,7 @@ Use the `should-auto-scroll` prop to enable/disable continuous auto scroll while
 </template>
 ```
 
-### Should Scroll To Bottom
+### Should Scroll to Bottom
 
 Use the `should-scroll-to-bottom` prop to enable/disable bottom auto scroll when the component is mounted. Defaults to `true`.
 
@@ -411,7 +411,7 @@ collapse: true
 :component-slots
 
 ::tip
-You can use all the slots of the [`ChatMessage`](/docs/components/chat-message#slots) component inside ChatMessages, they are automatically forwarded allowing you to customize individual messages when using the `messages` prop.
+You can use all the slots of the [`ChatMessage`](/docs/components/chat-message#slots) component inside ChatMessages, they are automatically forwarded so you can customize individual messages when using the `messages` prop.
 
 ```vue{7-15}
 <script setup lang="ts">

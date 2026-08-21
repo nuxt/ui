@@ -2,6 +2,10 @@
 title: RadioGroup
 description: A set of radio buttons to select a single option from a list.
 category: form
+keywords:
+  - radio buttons
+  - single choice
+  - options
 links:
   - label: RadioGroup
     icon: i-custom-reka-ui

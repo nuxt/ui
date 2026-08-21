@@ -1,5 +1,4 @@
 ---
-title: Empty
 description: 'A component to display an empty state.'
 category: data
 keywords:
@@ -13,6 +12,8 @@ links:
 ---
 
 ## Usage
+
+Use the Empty component to display a placeholder state when there is no content to show.
 
 ::code-preview
 

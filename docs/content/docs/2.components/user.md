@@ -1,7 +1,10 @@
 ---
-title: User
 description: 'Display user information with name, description and avatar.'
 category: data
+keywords:
+  - profile
+  - person
+  - account
 links:
   - label: GitHub
     icon: i-simple-icons-github
@@ -9,6 +12,8 @@ links:
 ---
 
 ## Usage
+
+Use the User component to display a person with their name, description and avatar.
 
 ### Name
 

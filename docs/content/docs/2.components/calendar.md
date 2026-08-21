@@ -1,7 +1,10 @@
 ---
-title: Calendar
 description: A calendar component for selecting single dates, multiple dates or date ranges.
 category: element
+keywords:
+  - date picker
+  - datepicker
+  - schedule
 links:
   - label: Calendar
     icon: i-custom-reka-ui
@@ -159,7 +162,7 @@ props:
 ---
 ::
 
-### Number Of Months
+### Number of Months
 
 Use the `numberOfMonths` prop to change the number of months in the calendar.
 

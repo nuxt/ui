@@ -1,5 +1,5 @@
 ---
-description: A callout to draw user's attention.
+description: A callout to draw the user's attention.
 category: element
 keywords:
   - notice
@@ -11,6 +11,8 @@ links:
 ---
 
 ## Usage
+
+Use the Alert component to display a callout with a title, a description and optional actions.
 
 ### Title
 

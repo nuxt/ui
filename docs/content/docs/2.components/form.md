@@ -1,6 +1,10 @@
 ---
 description: A form component with built-in validation and submission handling.
 category: form
+keywords:
+  - validation
+  - schema
+  - submit
 links:
   - label: GitHub
     icon: i-simple-icons-github

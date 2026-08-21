@@ -3,7 +3,6 @@ description: Bridge the gap between designers and developers using professional-
 hero:
   title: From [Figma]{#figma} to [Nuxt]{#nuxt}, faster.
   description: From wireframe to production in no time with the official Nuxt UI design kit for Figma. Get access to all components, layouts, and enhanced design-to-code efficiency in one comprehensive kit.
-  image: /figma/hero.png
   links:
     - label: Open Figma Kit
       to: 'https://go.nuxt.com/figma-ui'

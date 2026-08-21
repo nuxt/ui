@@ -198,6 +198,8 @@ props:
 
 ### Trailing Icon
 
+Use the `trailing-icon` prop to customize the trailing [Icon](/docs/components/icon) of items that have children. Defaults to `i-lucide-chevron-down`.
+
 ::component-code{prefix="content"}
 ---
 prettier: true

@@ -1,5 +1,4 @@
 ---
-title: Banner
 description: 'Display a banner at the top of your website to inform users about important information.'
 category: element
 keywords:
@@ -12,6 +11,8 @@ links:
 ---
 
 ## Usage
+
+Use the Banner component to display an announcement at the very top of your app.
 
 ### Title
 

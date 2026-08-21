@@ -101,7 +101,7 @@ props:
   title: 'Tailwind CSS'
   description: 'Nuxt UI integrates with latest Tailwind CSS, bringing significant improvements.'
   icon: 'i-simple-icons-tailwindcss'
-  to: 'https://tailwindcss.com/docs/v4-beta'
+  to: 'https://tailwindcss.com/blog/tailwindcss-v4'
   target: _blank
   class: 'w-96'
 ---
@@ -126,7 +126,7 @@ props:
   title: 'Tailwind CSS'
   description: 'Nuxt UI integrates with latest Tailwind CSS, bringing significant improvements.'
   icon: 'i-simple-icons-tailwindcss'
-  to: 'https://tailwindcss.com/docs/v4-beta'
+  to: 'https://tailwindcss.com/blog/tailwindcss-v4'
   target: _blank
   variant: soft
   class: 'w-96'
