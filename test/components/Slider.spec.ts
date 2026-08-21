@@ -121,6 +121,7 @@ describe('Slider', () => {
       expect(thumbs[0]!.attributes('aria-invalid')).toBe('true')
       expect(thumbs[0]!.attributes('aria-errormessage')).toBe('volume-error')
       expect(wrapper.get('[data-slot="root"]').attributes('aria-invalid')).toBeUndefined()
+      expect(wrapper.get('[data-slot="root"]').attributes('aria-errormessage')).toBeUndefined()
     })
 
     test('keeps non-aria attributes on the root', async () => {
