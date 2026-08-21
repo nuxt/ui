@@ -153,10 +153,10 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.modal || {}) })(
         data-slot="content"
         :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })"
         v-bind="contentProps"
-        @enter="emits('enter')"
-        @after-enter="emits('after:enter')"
-        @leave="emits('leave')"
-        @after-leave="emits('after:leave')"
+        @enter="!props.scrollable && emits('enter')"
+        @after-enter="!props.scrollable && emits('after:enter')"
+        @leave="!props.scrollable && emits('leave')"
+        @after-leave="!props.scrollable && emits('after:leave')"
         v-on="contentEvents"
       >
         <VisuallyHidden v-if="(!props.title && !slots.title) || (!props.description && !slots.description) || !!slots.content">
@@ -229,7 +229,14 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.modal || {}) })(
     <DialogPortal v-bind="portalProps" :force-mount="(portalProps.disabled && props.unmountOnHide === false) || undefined">
       <FieldGroupReset>
         <template v-if="props.scrollable">
-          <DialogOverlay data-slot="overlay" :class="ui.overlay({ class: props.ui?.overlay })">
+          <DialogOverlay
+            data-slot="overlay"
+            :class="ui.overlay({ class: props.ui?.overlay })"
+            @enter="emits('enter')"
+            @after-enter="emits('after:enter')"
+            @leave="emits('leave')"
+            @after-leave="emits('after:leave')"
+          >
             <ReuseContentTemplate />
           </DialogOverlay>
         </template>

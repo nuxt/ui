@@ -1,7 +1,7 @@
 export default {
   slots: {
     viewport: 'fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-(--height) focus:outline-none',
-    base: 'pointer-events-auto absolute inset-x-0 z-(--index) transform-(--transform) data-[expanded=false]:data-[front=false]:h-(--front-height) data-[expanded=false]:data-[front=false]:*:opacity-0 data-[front=false]:*:transition-opacity data-[front=false]:*:duration-100 data-[state=closed]:animate-[toast-closed_200ms_ease-in-out] data-[state=closed]:data-[expanded=false]:data-[front=false]:animate-[toast-collapsed-closed_200ms_ease-in-out] data-[state=open]:data-[pulsing=odd]:animate-[toast-pulse-a_300ms_ease-out] data-[state=open]:data-[pulsing=even]:animate-[toast-pulse-b_300ms_ease-out] data-[swipe=move]:transition-none transition-[transform,translate,height] duration-200 ease-out'
+    base: 'pointer-events-auto absolute inset-x-0 z-(--index) transform-(--transform) data-[expanded=false]:data-[front=false]:h-(--front-height) data-[expanded=false]:data-[front=false]:*:opacity-0 data-[front=false]:*:transition-opacity data-[front=false]:*:duration-100 data-[state=closed]:animate-[toast-closed_200ms_var(--ease-out)] data-[state=closed]:data-[expanded=false]:data-[front=false]:animate-[toast-collapsed-closed_200ms_var(--ease-out)] motion-safe:data-[state=open]:data-[pulsing=odd]:animate-[toast-pulse-a_200ms_var(--ease-out)] motion-safe:data-[state=open]:data-[pulsing=even]:animate-[toast-pulse-b_200ms_var(--ease-out)] data-[swipe=move]:transition-none transition-[transform,translate,height] duration-200 ease-out motion-reduce:transition-none'
   },
   variants: {
     position: {
@@ -25,23 +25,23 @@ export default {
       }
     },
     swipeDirection: {
-      up: 'data-[swipe=end]:animate-[toast-slide-up_200ms_ease-out]',
-      right: 'data-[swipe=end]:animate-[toast-slide-right_200ms_ease-out]',
-      down: 'data-[swipe=end]:animate-[toast-slide-down_200ms_ease-out]',
-      left: 'data-[swipe=end]:animate-[toast-slide-left_200ms_ease-out]'
+      up: 'data-[swipe=end]:animate-[toast-slide-up_200ms_var(--ease-out)]',
+      right: 'data-[swipe=end]:animate-[toast-slide-right_200ms_var(--ease-out)]',
+      down: 'data-[swipe=end]:animate-[toast-slide-down_200ms_var(--ease-out)]',
+      left: 'data-[swipe=end]:animate-[toast-slide-left_200ms_var(--ease-out)]'
     }
   },
   compoundVariants: [{
     position: ['top-left', 'top-center', 'top-right'],
     class: {
       viewport: 'top-4',
-      base: 'top-0 data-[state=open]:animate-[toast-slide-in-from-top_200ms_ease-in-out]'
+      base: 'top-0 data-[state=open]:animate-[toast-slide-in-from-top_200ms_var(--ease-out)]'
     }
   }, {
     position: ['bottom-left', 'bottom-center', 'bottom-right'],
     class: {
       viewport: 'bottom-4',
-      base: 'bottom-0 data-[state=open]:animate-[toast-slide-in-from-bottom_200ms_ease-in-out]'
+      base: 'bottom-0 data-[state=open]:animate-[toast-slide-in-from-bottom_200ms_var(--ease-out)]'
     }
   }, {
     swipeDirection: ['left', 'right'],

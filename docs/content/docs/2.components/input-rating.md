@@ -163,7 +163,6 @@ items:
     - md
     - lg
     - xl
-  - defaultValue
 props:
   size: xl
   defaultValue: 4

@@ -2,6 +2,7 @@ import { fileURLToPath } from 'node:url'
 import { defineVitestProject } from '@nuxt/test-utils/config'
 import { defineConfig } from 'vitest/config'
 import vue from '@vitejs/plugin-vue'
+import codspeedPlugin from '@codspeed/vitest-plugin'
 import ui from './src/vite'
 import { glob } from 'tinyglobby'
 
@@ -51,6 +52,9 @@ export default defineConfig({
           setupFiles: ['./test/utils/setup.ts']
         },
         plugins: [
+          // Instruments benchmarks when running under the CodSpeed runner in CI,
+          // inactive for a local `pnpm bench`.
+          codspeedPlugin(),
           vue(),
           ui({ dts: false }),
           {
@@ -67,11 +71,15 @@ export default defineConfig({
             enforce: 'pre',
             resolveId(id) {
               if (id === '#components') {
-                return '#components'
+                // Resolve to a `\0`-prefixed virtual id so Vite treats it as a
+                // virtual module and doesn't reparse the `#` as a URL fragment.
+                // Vite 8 turns a returned `#components` into `?import#components`
+                // (empty pathname), which its builtin resolver then rejects.
+                return '\0virtual:nuxt-ui-components'
               }
             },
             load(id) {
-              if (id === '#components' || id === '?import#components') {
+              if (id === '\0virtual:nuxt-ui-components') {
                 const resolvedComponents = [...vueRouterOverrides, ...vueComponents, ...components]
                 const renderedComponents = new Set<string>()
                 return resolvedComponents.map((file) => {
