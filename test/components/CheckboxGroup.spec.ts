@@ -33,6 +33,9 @@ describe('CheckboxGroup', () => {
     ['with disabled', { props: { ...props, disabled: true } }],
     ['with description', { props: { items: items.map((opt, count) => ({ ...opt, description: `Description ${count}` })) } }],
     ['with icon', { props: { items: items.map(opt => ({ ...opt, icon: 'i-lucide-rocket' })), indicator: 'hidden' } }],
+    ['with icon card', { props: { items: items.map(opt => ({ ...opt, icon: 'i-lucide-rocket' })), indicator: 'hidden', variant: 'card', defaultValue: ['1'] } }],
+    ['with icon table', { props: { items: items.map(opt => ({ ...opt, icon: 'i-lucide-rocket' })), indicator: 'hidden', variant: 'table', defaultValue: ['1'] } }],
+    ['with highlight indicator hidden', { props: { ...props, indicator: 'hidden', variant: 'card', highlight: true, defaultValue: ['1'] } }],
     ['with required', { props: { ...props, legend: 'Legend', required: true } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { ...props, size, defaultValue: ['1'] } }]),
     ...variants.map((variant: string) => [`with primary variant ${variant}`, { props: { ...props, variant, defaultValue: ['1'] } }]),
@@ -103,23 +106,10 @@ describe('CheckboxGroup', () => {
     expect(wrapper.find('[data-slot="wrapper"] [data-slot="icon"]').exists()).toBe(true)
   })
 
-  it('names an icon only item from its value', async () => {
-    const items = [{ value: 'table', icon: 'i-lucide-table' }]
-
-    const wrapper = await mountSuspended(CheckboxGroup, { props: { items, indicator: 'hidden' } })
-    expect(wrapper.find('[data-slot="base"]').attributes('aria-label')).toBe('table')
-    expect(await axe(wrapper.element)).toHaveNoViolations()
-
-    const labelled = await mountSuspended(CheckboxGroup, {
-      props: { items: [{ ...items[0]!, label: 'Table' }], indicator: 'hidden' }
-    })
-    expect(labelled.find('[data-slot="base"]').attributes('aria-label')).toBeUndefined()
-  })
-
-  it('passes accessibility tests with icon only items', async () => {
+  it('passes accessibility tests with icon items', async () => {
     const wrapper = await mountSuspended(CheckboxGroup, {
       props: {
-        items: [{ value: 'system', icon: 'i-lucide-monitor' }, { value: 'light', icon: 'i-lucide-sun' }],
+        items: [{ value: 'system', label: 'System', icon: 'i-lucide-monitor' }, { value: 'light', label: 'Light', icon: 'i-lucide-sun' }],
         variant: 'table',
         indicator: 'hidden',
         orientation: 'horizontal',

@@ -334,6 +334,42 @@ exports[`CheckboxGroup > renders with disabled correctly 1`] = `
 </div>"
 `;
 
+exports[`CheckboxGroup > renders with highlight indicator hidden correctly 1`] = `
+"<div id="v-0-0" data-slot="root" class="relative" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;">
+  <fieldset data-slot="fieldset" class="flex gap-x-2 flex-col gap-y-1">
+    <!--v-if--><label data-slot="item" class="relative flex items-start border border-muted rounded-lg hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-elevated/50 transition-colors p-3.5 outline-primary/25 has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-primary has-focus-visible:z-[1] has-data-[state=checked]:border-primary/50 has-data-[state=checked]:bg-primary/10 not-has-disabled:border-primary not-has-disabled:has-data-[state=checked]:border-primary">
+      <div data-slot="container" class="flex items-center h-auto"><button data-slot="base" class="rounded-sm ring ring-inset overflow-hidden focus-visible:outline-none sr-only size-4 ring-primary" id="v-0-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-reka-collection-item="" tabindex="-1" data-orientation="vertical"></button>
+        <!--v-if-->
+      </div>
+      <div data-slot="wrapper" class="w-full flex flex-col items-center gap-1 text-center text-sm">
+        <!--v-if-->
+        <p for="v-0-0:1" data-slot="label" class="block font-medium text-default">Option 1</p>
+        <!--v-if-->
+      </div>
+    </label><label data-slot="item" class="relative flex items-start border border-muted rounded-lg hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-elevated/50 transition-colors p-3.5 outline-primary/25 has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-primary has-focus-visible:z-[1] has-data-[state=checked]:border-primary/50 has-data-[state=checked]:bg-primary/10 not-has-disabled:border-primary not-has-disabled:has-data-[state=checked]:border-primary">
+      <div data-slot="container" class="flex items-center h-auto"><button data-slot="base" class="rounded-sm ring ring-inset overflow-hidden focus-visible:outline-none sr-only size-4 ring-primary" id="v-0-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="" tabindex="-1" data-orientation="vertical"></button>
+        <!--v-if-->
+      </div>
+      <div data-slot="wrapper" class="w-full flex flex-col items-center gap-1 text-center text-sm">
+        <!--v-if-->
+        <p for="v-0-0:2" data-slot="label" class="block font-medium text-default">Option 2</p>
+        <!--v-if-->
+      </div>
+    </label><label data-slot="item" class="relative flex items-start border border-muted rounded-lg hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-elevated/50 transition-colors p-3.5 outline-primary/25 has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-primary has-focus-visible:z-[1] has-data-[state=checked]:border-primary/50 has-data-[state=checked]:bg-primary/10 not-has-disabled:border-primary not-has-disabled:has-data-[state=checked]:border-primary">
+      <div data-slot="container" class="flex items-center h-auto"><button data-slot="base" class="rounded-sm ring ring-inset overflow-hidden focus-visible:outline-none sr-only size-4 ring-primary" id="v-0-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="" tabindex="-1" data-orientation="vertical"></button>
+        <!--v-if-->
+      </div>
+      <div data-slot="wrapper" class="w-full flex flex-col items-center gap-1 text-center text-sm">
+        <!--v-if-->
+        <p for="v-0-0:3" data-slot="label" class="block font-medium text-default">Option 3</p>
+        <!--v-if-->
+      </div>
+    </label>
+  </fieldset>
+  <!--v-if-->
+</div>"
+`;
+
 exports[`CheckboxGroup > renders with horizontal variant card correctly 1`] = `
 "<div id="v-0-0" data-slot="root" class="relative" tabindex="0" data-orientation="horizontal" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;">
   <fieldset data-slot="fieldset" class="flex gap-x-2 flex-row gap-y-1">
@@ -454,6 +490,39 @@ exports[`CheckboxGroup > renders with horizontal variant table correctly 1`] = `
 </div>"
 `;
 
+exports[`CheckboxGroup > renders with icon card correctly 1`] = `
+"<div id="v-0-0" data-slot="root" class="relative" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;">
+  <fieldset data-slot="fieldset" class="flex gap-x-2 flex-col gap-y-1">
+    <!--v-if--><label data-slot="item" class="relative flex items-start border border-muted rounded-lg hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-elevated/50 transition-colors hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:border-accented p-3.5 outline-primary/25 has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-primary has-focus-visible:z-[1] has-data-[state=checked]:border-primary/50 has-data-[state=checked]:bg-primary/10">
+      <div data-slot="container" class="flex items-center h-auto"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-none sr-only size-4" id="v-0-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-reka-collection-item="" tabindex="-1" data-orientation="vertical"></button>
+        <!--v-if-->
+      </div>
+      <div data-slot="wrapper" class="w-full flex flex-col items-center gap-1 text-center text-sm"><span class="iconify i-lucide:rocket shrink-0 size-4" aria-hidden="true" data-slot="icon"></span>
+        <p for="v-0-0:1" data-slot="label" class="block font-medium text-default">Option 1</p>
+        <!--v-if-->
+      </div>
+    </label><label data-slot="item" class="relative flex items-start border border-muted rounded-lg hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-elevated/50 transition-colors hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:border-accented p-3.5 outline-primary/25 has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-primary has-focus-visible:z-[1] has-data-[state=checked]:border-primary/50 has-data-[state=checked]:bg-primary/10">
+      <div data-slot="container" class="flex items-center h-auto"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-none sr-only size-4" id="v-0-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="" tabindex="-1" data-orientation="vertical"></button>
+        <!--v-if-->
+      </div>
+      <div data-slot="wrapper" class="w-full flex flex-col items-center gap-1 text-center text-sm"><span class="iconify i-lucide:rocket shrink-0 size-4" aria-hidden="true" data-slot="icon"></span>
+        <p for="v-0-0:2" data-slot="label" class="block font-medium text-default">Option 2</p>
+        <!--v-if-->
+      </div>
+    </label><label data-slot="item" class="relative flex items-start border border-muted rounded-lg hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-elevated/50 transition-colors hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:border-accented p-3.5 outline-primary/25 has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-primary has-focus-visible:z-[1] has-data-[state=checked]:border-primary/50 has-data-[state=checked]:bg-primary/10">
+      <div data-slot="container" class="flex items-center h-auto"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-none sr-only size-4" id="v-0-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="" tabindex="-1" data-orientation="vertical"></button>
+        <!--v-if-->
+      </div>
+      <div data-slot="wrapper" class="w-full flex flex-col items-center gap-1 text-center text-sm"><span class="iconify i-lucide:rocket shrink-0 size-4" aria-hidden="true" data-slot="icon"></span>
+        <p for="v-0-0:3" data-slot="label" class="block font-medium text-default">Option 3</p>
+        <!--v-if-->
+      </div>
+    </label>
+  </fieldset>
+  <!--v-if-->
+</div>"
+`;
+
 exports[`CheckboxGroup > renders with icon correctly 1`] = `
 "<div id="v-0-0" data-slot="root" class="relative" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;">
   <fieldset data-slot="fieldset" class="flex gap-x-2 flex-col gap-y-1">
@@ -482,6 +551,39 @@ exports[`CheckboxGroup > renders with icon correctly 1`] = `
         <!--v-if-->
       </div>
     </div>
+  </fieldset>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`CheckboxGroup > renders with icon table correctly 1`] = `
+"<div id="v-0-0" data-slot="root" class="relative" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;">
+  <fieldset data-slot="fieldset" class="flex flex-col gap-0 -space-y-px">
+    <!--v-if--><label data-slot="item" class="relative flex items-start border border-muted hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-elevated/50 transition-colors outline-primary/25 has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-primary has-focus-visible:z-[1] hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:border-accented p-3.5 first-of-type:rounded-t-lg last-of-type:rounded-b-lg has-data-[state=checked]:bg-primary/10 has-data-[state=checked]:border-primary/50 has-data-[state=checked]:z-[1]">
+      <div data-slot="container" class="flex items-center h-auto"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-none sr-only size-4" id="v-0-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-reka-collection-item="" tabindex="-1" data-orientation="vertical"></button>
+        <!--v-if-->
+      </div>
+      <div data-slot="wrapper" class="w-full flex flex-col items-center gap-1 text-center text-sm"><span class="iconify i-lucide:rocket shrink-0 size-4" aria-hidden="true" data-slot="icon"></span>
+        <p for="v-0-0:1" data-slot="label" class="block font-medium text-default">Option 1</p>
+        <!--v-if-->
+      </div>
+    </label><label data-slot="item" class="relative flex items-start border border-muted hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-elevated/50 transition-colors outline-primary/25 has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-primary has-focus-visible:z-[1] hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:border-accented p-3.5 first-of-type:rounded-t-lg last-of-type:rounded-b-lg has-data-[state=checked]:bg-primary/10 has-data-[state=checked]:border-primary/50 has-data-[state=checked]:z-[1]">
+      <div data-slot="container" class="flex items-center h-auto"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-none sr-only size-4" id="v-0-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="" tabindex="-1" data-orientation="vertical"></button>
+        <!--v-if-->
+      </div>
+      <div data-slot="wrapper" class="w-full flex flex-col items-center gap-1 text-center text-sm"><span class="iconify i-lucide:rocket shrink-0 size-4" aria-hidden="true" data-slot="icon"></span>
+        <p for="v-0-0:2" data-slot="label" class="block font-medium text-default">Option 2</p>
+        <!--v-if-->
+      </div>
+    </label><label data-slot="item" class="relative flex items-start border border-muted hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-elevated/50 transition-colors outline-primary/25 has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-primary has-focus-visible:z-[1] hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:border-accented p-3.5 first-of-type:rounded-t-lg last-of-type:rounded-b-lg has-data-[state=checked]:bg-primary/10 has-data-[state=checked]:border-primary/50 has-data-[state=checked]:z-[1]">
+      <div data-slot="container" class="flex items-center h-auto"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-none sr-only size-4" id="v-0-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-reka-collection-item="" tabindex="-1" data-orientation="vertical"></button>
+        <!--v-if-->
+      </div>
+      <div data-slot="wrapper" class="w-full flex flex-col items-center gap-1 text-center text-sm"><span class="iconify i-lucide:rocket shrink-0 size-4" aria-hidden="true" data-slot="icon"></span>
+        <p for="v-0-0:3" data-slot="label" class="block font-medium text-default">Option 3</p>
+        <!--v-if-->
+      </div>
+    </label>
   </fieldset>
   <!--v-if-->
 </div>"

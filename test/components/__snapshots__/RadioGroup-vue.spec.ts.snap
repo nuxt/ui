@@ -334,6 +334,46 @@ exports[`RadioGroup > renders with disabled correctly 1`] = `
 </div>"
 `;
 
+exports[`RadioGroup > renders with highlight indicator hidden correctly 1`] = `
+"<div id="v-0" data-slot="root" class="relative" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" role="radiogroup" aria-orientation="vertical" aria-required="false">
+  <fieldset data-slot="fieldset" class="flex gap-x-2 flex-col gap-y-1">
+    <!--v-if--><label data-slot="item" class="flex items-start border border-muted rounded-lg hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-elevated/50 transition-colors text-sm p-3.5 outline-primary/25 has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-primary has-focus-visible:z-[1] has-data-[state=checked]:border-primary/50 has-data-[state=checked]:bg-primary/10 not-has-disabled:border-primary not-has-disabled:has-data-[state=checked]:border-primary">
+      <div data-slot="container" class="flex items-center h-auto"><button id="v-0:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-active="" data-slot="base" class="rounded-full ring ring-inset overflow-hidden focus-visible:outline-none sr-only size-4 ring-primary" value="1" aria-label="1"><span data-state="checked" data-slot="indicator" class="flex items-center justify-center size-full after:bg-default after:rounded-full bg-primary after:size-1.5"></span></button>
+        <!--v-if-->
+      </div>
+      <div data-slot="wrapper" class="w-full flex flex-col items-center gap-1 text-center">
+        <!--v-if-->
+        <p for="v-0:1" data-slot="label" class="block font-medium text-default">Option 1</p>
+        <!--v-if-->
+      </div>
+    </label><label data-slot="item" class="flex items-start border border-muted rounded-lg hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-elevated/50 transition-colors text-sm p-3.5 outline-primary/25 has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-primary has-focus-visible:z-[1] has-data-[state=checked]:border-primary/50 has-data-[state=checked]:bg-primary/10 not-has-disabled:border-primary not-has-disabled:has-data-[state=checked]:border-primary">
+      <div data-slot="container" class="flex items-center h-auto"><button id="v-0:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-slot="base" class="rounded-full ring ring-inset overflow-hidden focus-visible:outline-none sr-only size-4 ring-primary" value="2" aria-label="2">
+          <!---->
+        </button>
+        <!--v-if-->
+      </div>
+      <div data-slot="wrapper" class="w-full flex flex-col items-center gap-1 text-center">
+        <!--v-if-->
+        <p for="v-0:2" data-slot="label" class="block font-medium text-default">Option 2</p>
+        <!--v-if-->
+      </div>
+    </label><label data-slot="item" class="flex items-start border border-muted rounded-lg hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-elevated/50 transition-colors text-sm p-3.5 outline-primary/25 has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-primary has-focus-visible:z-[1] has-data-[state=checked]:border-primary/50 has-data-[state=checked]:bg-primary/10 not-has-disabled:border-primary not-has-disabled:has-data-[state=checked]:border-primary">
+      <div data-slot="container" class="flex items-center h-auto"><button id="v-0:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-slot="base" class="rounded-full ring ring-inset overflow-hidden focus-visible:outline-none sr-only size-4 ring-primary" value="3" aria-label="3">
+          <!---->
+        </button>
+        <!--v-if-->
+      </div>
+      <div data-slot="wrapper" class="w-full flex flex-col items-center gap-1 text-center">
+        <!--v-if-->
+        <p for="v-0:3" data-slot="label" class="block font-medium text-default">Option 3</p>
+        <!--v-if-->
+      </div>
+    </label>
+  </fieldset>
+  <!--v-if-->
+</div>"
+`;
+
 exports[`RadioGroup > renders with horizontal variant card correctly 1`] = `
 "<div id="v-0" data-slot="root" class="relative" tabindex="0" data-orientation="horizontal" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" role="radiogroup" aria-orientation="horizontal" aria-required="false">
   <fieldset data-slot="fieldset" class="flex gap-x-2 flex-row gap-y-1">
@@ -454,6 +494,43 @@ exports[`RadioGroup > renders with horizontal variant table correctly 1`] = `
 </div>"
 `;
 
+exports[`RadioGroup > renders with icon card correctly 1`] = `
+"<div id="v-0" data-slot="root" class="relative" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" role="radiogroup" aria-orientation="vertical" aria-required="false">
+  <fieldset data-slot="fieldset" class="flex gap-x-2 flex-col gap-y-1">
+    <!--v-if--><label data-slot="item" class="flex items-start border border-muted rounded-lg hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-elevated/50 transition-colors text-sm hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:border-accented p-3.5 outline-primary/25 has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-primary has-focus-visible:z-[1] has-data-[state=checked]:border-primary/50 has-data-[state=checked]:bg-primary/10">
+      <div data-slot="container" class="flex items-center h-auto"><button id="v-0:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-active="" data-slot="base" class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-none sr-only size-4" value="1" aria-label="1"><span data-state="checked" data-slot="indicator" class="flex items-center justify-center size-full after:bg-default after:rounded-full bg-primary after:size-1.5"></span></button>
+        <!--v-if-->
+      </div>
+      <div data-slot="wrapper" class="w-full flex flex-col items-center gap-1 text-center"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-4"></svg>
+        <p for="v-0:1" data-slot="label" class="block font-medium text-default">Option 1</p>
+        <!--v-if-->
+      </div>
+    </label><label data-slot="item" class="flex items-start border border-muted rounded-lg hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-elevated/50 transition-colors text-sm hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:border-accented p-3.5 outline-primary/25 has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-primary has-focus-visible:z-[1] has-data-[state=checked]:border-primary/50 has-data-[state=checked]:bg-primary/10">
+      <div data-slot="container" class="flex items-center h-auto"><button id="v-0:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-slot="base" class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-none sr-only size-4" value="2" aria-label="2">
+          <!---->
+        </button>
+        <!--v-if-->
+      </div>
+      <div data-slot="wrapper" class="w-full flex flex-col items-center gap-1 text-center"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-4"></svg>
+        <p for="v-0:2" data-slot="label" class="block font-medium text-default">Option 2</p>
+        <!--v-if-->
+      </div>
+    </label><label data-slot="item" class="flex items-start border border-muted rounded-lg hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-elevated/50 transition-colors text-sm hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:border-accented p-3.5 outline-primary/25 has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-primary has-focus-visible:z-[1] has-data-[state=checked]:border-primary/50 has-data-[state=checked]:bg-primary/10">
+      <div data-slot="container" class="flex items-center h-auto"><button id="v-0:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-slot="base" class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-none sr-only size-4" value="3" aria-label="3">
+          <!---->
+        </button>
+        <!--v-if-->
+      </div>
+      <div data-slot="wrapper" class="w-full flex flex-col items-center gap-1 text-center"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-4"></svg>
+        <p for="v-0:3" data-slot="label" class="block font-medium text-default">Option 3</p>
+        <!--v-if-->
+      </div>
+    </label>
+  </fieldset>
+  <!--v-if-->
+</div>"
+`;
+
 exports[`RadioGroup > renders with icon correctly 1`] = `
 "<div id="v-0" data-slot="root" class="relative" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" role="radiogroup" aria-orientation="vertical" aria-required="false">
   <fieldset data-slot="fieldset" class="flex gap-x-2 flex-col gap-y-1">
@@ -488,6 +565,43 @@ exports[`RadioGroup > renders with icon correctly 1`] = `
         <!--v-if-->
       </div>
     </div>
+  </fieldset>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`RadioGroup > renders with icon table correctly 1`] = `
+"<div id="v-0" data-slot="root" class="relative" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" role="radiogroup" aria-orientation="vertical" aria-required="false">
+  <fieldset data-slot="fieldset" class="flex flex-col gap-0 -space-y-px">
+    <!--v-if--><label data-slot="item" class="flex items-start border border-muted hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-elevated/50 transition-colors text-sm hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:border-accented p-3.5 first-of-type:rounded-t-lg last-of-type:rounded-b-lg outline-primary/25 has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-primary has-focus-visible:z-[1] has-data-[state=checked]:bg-primary/10 has-data-[state=checked]:border-primary/50 has-data-[state=checked]:z-[1]">
+      <div data-slot="container" class="flex items-center h-auto"><button id="v-0:1" role="radio" type="button" aria-checked="true" data-state="checked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-active="" data-slot="base" class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-none sr-only size-4" value="1" aria-label="1"><span data-state="checked" data-slot="indicator" class="flex items-center justify-center size-full after:bg-default after:rounded-full bg-primary after:size-1.5"></span></button>
+        <!--v-if-->
+      </div>
+      <div data-slot="wrapper" class="w-full flex flex-col items-center gap-1 text-center"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-4"></svg>
+        <p for="v-0:1" data-slot="label" class="block font-medium text-default">Option 1</p>
+        <!--v-if-->
+      </div>
+    </label><label data-slot="item" class="flex items-start border border-muted hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-elevated/50 transition-colors text-sm hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:border-accented p-3.5 first-of-type:rounded-t-lg last-of-type:rounded-b-lg outline-primary/25 has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-primary has-focus-visible:z-[1] has-data-[state=checked]:bg-primary/10 has-data-[state=checked]:border-primary/50 has-data-[state=checked]:z-[1]">
+      <div data-slot="container" class="flex items-center h-auto"><button id="v-0:2" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-slot="base" class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-none sr-only size-4" value="2" aria-label="2">
+          <!---->
+        </button>
+        <!--v-if-->
+      </div>
+      <div data-slot="wrapper" class="w-full flex flex-col items-center gap-1 text-center"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-4"></svg>
+        <p for="v-0:2" data-slot="label" class="block font-medium text-default">Option 2</p>
+        <!--v-if-->
+      </div>
+    </label><label data-slot="item" class="flex items-start border border-muted hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-elevated/50 transition-colors text-sm hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:border-accented p-3.5 first-of-type:rounded-t-lg last-of-type:rounded-b-lg outline-primary/25 has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-primary has-focus-visible:z-[1] has-data-[state=checked]:bg-primary/10 has-data-[state=checked]:border-primary/50 has-data-[state=checked]:z-[1]">
+      <div data-slot="container" class="flex items-center h-auto"><button id="v-0:3" role="radio" type="button" aria-checked="false" data-state="unchecked" required="false" data-reka-collection-item="" tabindex="-1" data-orientation="vertical" data-slot="base" class="rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-none sr-only size-4" value="3" aria-label="3">
+          <!---->
+        </button>
+        <!--v-if-->
+      </div>
+      <div data-slot="wrapper" class="w-full flex flex-col items-center gap-1 text-center"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-4"></svg>
+        <p for="v-0:3" data-slot="label" class="block font-medium text-default">Option 3</p>
+        <!--v-if-->
+      </div>
+    </label>
   </fieldset>
   <!--v-if-->
 </div>"

@@ -103,18 +103,6 @@ const labelIcon = computed(() => props.indicator === 'hidden' ? props.icon : und
 
 const attrs = useAttrs()
 
-// An icon only item has no text to name the control, and `UIcon` is `aria-hidden`. Fall back to
-// the value like reka-ui's `Radio` does, so both components expose an accessible name.
-const ariaLabel = computed(() => {
-  if (attrs['aria-label']) {
-    return attrs['aria-label'] as string
-  }
-  if (props.label || slots.label) {
-    return undefined
-  }
-  return props.value != null ? String(props.value) : undefined
-})
-
 // Omit `data-state` to prevent conflicts with parent components (e.g. TooltipTrigger)
 const forwardedAttrs = computed(() => {
   const { 'data-state': _, ...rest } = attrs
@@ -150,7 +138,6 @@ function onUpdate(value: any) {
         v-bind="{ ...rootProps, ...forwardedAttrs, ...ariaAttrs }"
         :name="name"
         :disabled="disabled"
-        :aria-label="ariaLabel"
         data-slot="base"
         :class="ui.base({ class: props.ui?.base })"
         @update:model-value="onUpdate"

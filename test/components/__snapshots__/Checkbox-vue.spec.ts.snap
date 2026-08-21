@@ -369,7 +369,7 @@ exports[`Checkbox > renders with ui correctly 1`] = `
 
 exports[`Checkbox > renders with value correctly 1`] = `
 "<div data-slot="root" class="relative flex items-start flex-row">
-  <div data-slot="container" class="flex items-center h-5"><button aria-label="value" data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden size-4 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" id="v-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden size-4 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" id="v-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
       <!---->
     </button>
     <!--v-if-->
