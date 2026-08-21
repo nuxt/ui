@@ -61,7 +61,7 @@ You can also pass an array of objects with the following properties:
 - `description?: string`{lang="ts-type"}
 - [`value?: string`{lang="ts-type"}](#value-key)
 - `disabled?: boolean`{lang="ts-type"}
-- [`icon?: string`{lang="ts-type"}](#with-icon-in-items)
+- [`icon?: string`{lang="ts-type"}](#indicator)
 - `class?: any`{lang="ts-type"}
 - `ui?: { item?: ClassNameValue, container?: ClassNameValue, base?: ClassNameValue, 'indicator'?: ClassNameValue, wrapper?: ClassNameValue, label?: ClassNameValue, icon?: ClassNameValue, description?: ClassNameValue }`{lang="ts-type"}
 
@@ -79,13 +79,13 @@ props:
   modelValue: 'system'
   items:
     - label: 'System'
-      description: 'This is the first option.'
+      description: 'Matches your device settings.'
       value: 'system'
     - label: 'Light'
-      description: 'This is the second option.'
+      description: 'Always uses the light theme.'
       value: 'light'
     - label: 'Dark'
-      description: 'This is the third option.'
+      description: 'Always uses the dark theme.'
       value: 'dark'
 ---
 ::
@@ -114,13 +114,13 @@ props:
   valueKey: 'id'
   items:
     - label: 'System'
-      description: 'This is the first option.'
+      description: 'Matches your device settings.'
       id: 'system'
     - label: 'Light'
-      description: 'This is the second option.'
+      description: 'Always uses the light theme.'
       id: 'light'
     - label: 'Dark'
-      description: 'This is the third option.'
+      description: 'Always uses the dark theme.'
       id: 'dark'
 ---
 ::
@@ -185,18 +185,18 @@ externalTypes:
   - RadioGroupItem[]
 props:
   color: 'primary'
-  variant: 'table'
-  defaultValue: 'pro'
+  variant: 'card'
+  defaultValue: 'system'
   items:
-    - label: 'Pro'
-      value: 'pro'
-      description: 'Tailored for indie hackers, freelancers and solo founders.'
-    - label: 'Startup'
-      value: 'startup'
-      description: 'Best suited for small teams, startups and agencies.'
-    - label: 'Enterprise'
-      value: 'enterprise'
-      description: 'Ideal for larger teams and organizations.'
+    - label: 'System'
+      value: 'system'
+      description: 'Matches your device settings.'
+    - label: 'Light'
+      value: 'light'
+      description: 'Always uses the light theme.'
+    - label: 'Dark'
+      value: 'dark'
+      description: 'Always uses the dark theme.'
 ---
 ::
 
@@ -250,6 +250,10 @@ props:
 
 Use the `indicator` prop to change the position or hide the indicator. Defaults to `start`.
 
+::note
+An item's `icon` is only displayed when `indicator` is `hidden`, above the label, since a radio has no icon inside its indicator. :badge{label="Soon" color="info" class="float-right ms-auto text-right"}
+::
+
 ::component-code
 ---
 prettier: true
@@ -258,14 +262,35 @@ ignore:
   - items
 external:
   - items
+externalTypes:
+  - RadioGroupItem[]
+items:
+  indicator:
+    - start
+    - end
+    - hidden
+  variant:
+    - list
+    - card
+    - table
 props:
-  indicator: 'end'
-  variant: 'card'
+  indicator: 'hidden'
+  orientation: 'horizontal'
+  variant: 'table'
   defaultValue: 'System'
   items:
-    - 'System'
-    - 'Light'
-    - 'Dark'
+    - label: 'System'
+      icon: 'i-lucide-monitor'
+      value: 'System'
+      class: 'w-20'
+    - label: 'Light'
+      icon: 'i-lucide-sun'
+      value: 'Light'
+      class: 'w-20'
+    - label: 'Dark'
+      icon: 'i-lucide-moon'
+      value: 'Dark'
+      class: 'w-20'
 ---
 ::
 
@@ -288,54 +313,6 @@ props:
     - 'System'
     - 'Light'
     - 'Dark'
----
-::
-
-## Examples
-
-### With icon in items :badge{label="Soon" class="align-text-top"}
-
-Use the `icon` property in the items to display an icon above the label when `indicator` is `hidden`.
-
-::note
-A radio has no icon inside its indicator, so `icon` only renders when the indicator is hidden.
-::
-
-::component-code
----
-prettier: true
-ignore:
-  - modelValue
-  - items
-  - indicator
-external:
-  - items
-  - modelValue
-externalTypes:
-  - RadioGroupItem[]
-items:
-  variant:
-    - card
-    - table
-props:
-  modelValue: 'system'
-  color: 'primary'
-  indicator: 'hidden'
-  variant: 'table'
-  orientation: 'horizontal'
-  items:
-    - label: 'System'
-      icon: 'i-lucide-monitor'
-      value: 'system'
-      class: 'w-20'
-    - label: 'Light'
-      icon: 'i-lucide-sun'
-      value: 'light'
-      class: 'w-20'
-    - label: 'Dark'
-      icon: 'i-lucide-moon'
-      value: 'dark'
-      class: 'w-20'
 ---
 ::
 
