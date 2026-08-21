@@ -372,7 +372,7 @@ Use the `should-auto-scroll` prop to enable/disable continuous auto scroll while
 </template>
 ```
 
-### Should Scroll to Bottom
+### Should Scroll To Bottom
 
 Use the `should-scroll-to-bottom` prop to enable/disable bottom auto scroll when the component is mounted. Defaults to `true`.
 

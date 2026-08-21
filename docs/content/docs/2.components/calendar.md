@@ -162,7 +162,7 @@ props:
 ---
 ::
 
-### Number of Months
+### Number Of Months
 
 Use the `numberOfMonths` prop to change the number of months in the calendar.
 

@@ -52,7 +52,7 @@ props:
 ---
 ::
 
-### Items per Page
+### Items Per Page
 
 Use the `items-per-page` prop to set the number of items per page. Defaults to `10`.
 
