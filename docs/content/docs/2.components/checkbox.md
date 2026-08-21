@@ -206,7 +206,7 @@ ignore:
   - icon
   - defaultValue
 props:
-  indicator: 'end'
+  indicator: 'hidden'
   variant: 'card'
   icon: 'i-lucide-heart'
   defaultValue: true
