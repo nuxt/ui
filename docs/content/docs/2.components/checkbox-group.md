@@ -64,6 +64,7 @@ You can also pass an array of objects with the following properties:
 - `description?: string`{lang="ts-type"}
 - [`value?: string`{lang="ts-type"}](#value-key)
 - `disabled?: boolean`{lang="ts-type"}
+- [`icon?: string`{lang="ts-type"}](#indicator)
 - `class?: any`{lang="ts-type"}
 - `ui?: { item?: ClassNameValue, container?: ClassNameValue, base?: ClassNameValue, 'indicator'?: ClassNameValue, icon?: ClassNameValue, wrapper?: ClassNameValue, label?: ClassNameValue, description?: ClassNameValue }`{lang="ts-type"}
 
@@ -82,13 +83,13 @@ props:
     - 'system'
   items:
     - label: 'System'
-      description: 'This is the first option.'
+      description: 'Matches your device settings.'
       value: 'system'
     - label: 'Light'
-      description: 'This is the second option.'
+      description: 'Always uses the light theme.'
       value: 'light'
     - label: 'Dark'
-      description: 'This is the third option.'
+      description: 'Always uses the dark theme.'
       value: 'dark'
 ---
 ::
@@ -118,13 +119,13 @@ props:
   valueKey: 'id'
   items:
     - label: 'System'
-      description: 'This is the first option.'
+      description: 'Matches your device settings.'
       id: 'system'
     - label: 'Light'
-      description: 'This is the second option.'
+      description: 'Always uses the light theme.'
       id: 'light'
     - label: 'Dark'
-      description: 'This is the third option.'
+      description: 'Always uses the dark theme.'
       id: 'dark'
 ---
 ::
@@ -196,6 +197,8 @@ ignore:
   - items
 external:
   - items
+externalTypes:
+  - CheckboxGroupItem[]
 items:
   color:
     - primary
@@ -213,11 +216,17 @@ props:
   color: 'primary'
   variant: 'card'
   defaultValue:
-    - 'System'
+    - 'system'
   items:
-    - 'System'
-    - 'Light'
-    - 'Dark'
+    - label: 'System'
+      value: 'system'
+      description: 'Matches your device settings.'
+    - label: 'Light'
+      value: 'light'
+      description: 'Always uses the light theme.'
+    - label: 'Dark'
+      value: 'dark'
+      description: 'Always uses the dark theme.'
 ---
 ::
 
@@ -283,6 +292,10 @@ props:
 
 Use the `indicator` prop to change the position or hide the indicator. Defaults to `start`.
 
+::note
+An item's `icon` replaces the check mark while the indicator is visible, and is displayed above the label when it is `hidden`. :badge{label="Soon" color="info" class="float-right ms-auto text-right"}
+::
+
 ::component-code
 ---
 prettier: true
@@ -291,6 +304,8 @@ ignore:
   - items
 external:
   - items
+externalTypes:
+  - CheckboxGroupItem[]
 items:
   indicator:
     - start
@@ -301,14 +316,24 @@ items:
     - card
     - table
 props:
-  indicator: 'end'
-  variant: 'card'
+  indicator: 'hidden'
+  orientation: 'horizontal'
+  variant: 'table'
   defaultValue:
     - 'System'
   items:
-    - 'System'
-    - 'Light'
-    - 'Dark'
+    - label: 'System'
+      icon: 'i-lucide-monitor'
+      value: 'System'
+      class: 'w-20'
+    - label: 'Light'
+      icon: 'i-lucide-sun'
+      class: 'w-20'
+      value: 'Light'
+    - label: 'Dark'
+      icon: 'i-lucide-moon'
+      class: 'w-20'
+      value: 'Dark'
 ---
 ::
 

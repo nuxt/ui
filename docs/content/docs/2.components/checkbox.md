@@ -194,14 +194,21 @@ props:
 
 Use the `indicator` prop to change the position or hide the indicator. Defaults to `start`.
 
+::note
+When `indicator` is `hidden`, the icon is displayed above the label instead. :badge{label="Soon" color="info" class="float-right ms-auto text-right"}
+::
+
 ::component-code
 ---
+prettier: true
 ignore:
   - label
+  - icon
   - defaultValue
 props:
-  indicator: 'end'
+  indicator: 'hidden'
   variant: 'card'
+  icon: 'i-lucide-heart'
   defaultValue: true
   label: Check me
 ---
