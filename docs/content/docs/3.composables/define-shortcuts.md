@@ -71,8 +71,6 @@ Shortcuts are defined using the following format:
 
 ### Modifiers
 
-Combine these with another key using `_`, for example `meta_k`.
-
 - `meta` / `command`: Represents `⌘ Command` on macOS and `Ctrl` on other platforms
 - `ctrl`: Represents `Ctrl` on all platforms
 - `shift`: Used for alphabetic keys when Shift is required
@@ -88,7 +86,7 @@ Use these names to match keys that don't produce a character.
 - `tab`: Triggers on Tab key
 - `backspace`: Triggers on Backspace key
 - `delete`: Triggers on Delete key
-- `space`: Triggers on the space bar, only when `layoutIndependent` is enabled
+- `space`: Triggers on the space bar. Requires `layoutIndependent` unless combined with `alt`
 
 ### Shortcut configuration
 

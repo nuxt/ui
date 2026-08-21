@@ -5,7 +5,6 @@ category: form
 keywords:
   - multi select
   - checklist
-  - options
 links:
   - label: CheckboxGroup
     icon: i-custom-reka-ui

@@ -36,7 +36,7 @@ Check out the [`Nuxt`](https://github.com/nuxt-ui-templates/chat) and [`Vue`](ht
 
 Before we start, make sure you have:
 
-- Node.js 20.19+ or 22.12+ installed
+- Node.js 22.19+ or 24.11+ installed
 - A [Vercel AI Gateway](https://vercel.com/docs/ai-gateway) API key (provides access to multiple AI providers through a single endpoint)
 
 ## Project setup
@@ -509,7 +509,7 @@ html.dark .shiki span {
 
 ## Creating the chat page
 
-The chat page is where the actual conversation happens. It integrates the AI SDK's [`Chat`](https://ai-sdk.dev/docs/reference/ai-sdk-ui/use-chat) class and [`DefaultChatTransport`](https://ai-sdk.dev/docs/ai-sdk-ui/transport#default-transport) for real-time streaming.
+The chat page is where the actual conversation happens. It integrates the AI SDK's [`useChat`](https://ai-sdk.dev/docs/reference/ai-sdk-ui/use-chat) composable and [`DefaultChatTransport`](https://ai-sdk.dev/docs/ai-sdk-ui/transport#default-transport) for real-time streaming.
 
 ::code-tree-intersection
 :::code-collapse

@@ -5,7 +5,6 @@ category: form
 keywords:
   - radio buttons
   - single choice
-  - options
 links:
   - label: RadioGroup
     icon: i-custom-reka-ui
