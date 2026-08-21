@@ -122,7 +122,7 @@ describe('Slider', () => {
       expect(thumbs[0]!.attributes('data-testid')).toBeUndefined()
     })
 
-    // `useAttrs()` is not deeply reactive, so pin that a parent re-render still reaches the thumb.
+    // Pin that attributes changed by a parent re-render still reach the thumb.
     test('tracks aria attributes changed after mount', async () => {
       const label = ref<string | undefined>('Volume')
       const Parent = defineComponent({
@@ -137,6 +137,29 @@ describe('Slider', () => {
       await nextTick()
 
       expect(wrapper.get('[role="slider"]').attributes('aria-label')).toBe('Thumb')
+    })
+
+    test('tracks aria attributes added after mounting without any', async () => {
+      const extra = ref<Record<string, string>>({})
+      const Parent = defineComponent({
+        setup: () => () => h(Slider, { modelValue: 10, ...extra.value })
+      })
+
+      const wrapper = await mountSuspended(Parent)
+      expect(wrapper.get('[role="slider"]').attributes('aria-label')).toBe('Thumb')
+
+      extra.value = { 'aria-label': 'Volume', 'data-testid': 'slider' }
+      await nextTick()
+      await nextTick()
+
+      expect(wrapper.get('[role="slider"]').attributes('aria-label')).toBe('Volume')
+      expect(wrapper.get('[data-slot="root"]').attributes('data-testid')).toBe('slider')
+    })
+
+    test('keeps a caller role on a grouped slider', async () => {
+      const { wrapper } = await renderThumbs({ props: { modelValue: [10, 90] }, attrs: { 'role': 'application', 'aria-label': 'Price range' } })
+
+      expect(wrapper.get('[data-slot="root"]').attributes('role')).toBe('application')
     })
 
     // The thumb carries both the caller's `aria-*` and the ones `useFormField` derives.

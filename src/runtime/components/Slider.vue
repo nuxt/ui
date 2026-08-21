@@ -44,13 +44,14 @@ export interface SliderEmits {
 </script>
 
 <script setup lang="ts" generic="T extends number | number[]">
-import { computed, useAttrs } from 'vue'
+import { computed } from 'vue'
 import { SliderRoot, SliderRange, SliderTrack, SliderThumb } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
 import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { useFormField } from '../composables/useFormField'
+import { pick, omit } from '../utils'
 import { tv } from '../utils/tv'
 import UTooltip from './Tooltip.vue'
 
@@ -102,29 +103,9 @@ const sliderValue = computed({
 
 const thumbs = computed(() => sliderValue.value?.length ?? 1)
 
-const attrs = useAttrs()
-
-const thumbAttrs = computed(() => {
-  if (thumbs.value > 1) return {}
-
-  const ariaAttrs = Object.fromEntries(Object.entries(attrs).filter(([key]) => key.startsWith('aria-')))
-
-  if (!ariaAttrs['aria-label'] && !ariaAttrs['aria-labelledby']) {
-    ariaAttrs['aria-label'] = 'Thumb'
-  }
-
-  return ariaAttrs
-})
-
-const rootAttrs = computed(() => {
-  const rest = Object.fromEntries(Object.entries(attrs).filter(([key]) => !(key in thumbAttrs.value)))
-
-  if (rest['aria-label'] || rest['aria-labelledby']) {
-    rest.role = 'group'
-  }
-
-  return rest
-})
+// The thumb is the element with `role="slider"`, so these describe it rather than the root.
+// Multiple thumbs keep Reka UI's positional names and the caller's label groups them on the root.
+const thumbAttrs = ['aria-label', 'aria-labelledby', 'aria-describedby', 'aria-valuetext']
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.slider || {}) })({
@@ -147,7 +128,8 @@ function onChange(value: any) {
     :id="id"
     v-model="sliderValue"
     data-slot="root"
-    v-bind="{ ...rootProps, ...rootAttrs }"
+    :role="thumbs > 1 && ($attrs['aria-label'] || $attrs['aria-labelledby']) ? 'group' : undefined"
+    v-bind="{ ...rootProps, ...(thumbs > 1 ? $attrs : omit($attrs, thumbAttrs)) }"
     :name="name"
     :disabled="disabled"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
@@ -166,9 +148,9 @@ function onChange(value: any) {
         disable-closing-trigger
         v-bind="(typeof props.tooltip === 'object' ? props.tooltip : {})"
       >
-        <SliderThumb data-slot="thumb" :class="ui.thumb({ class: props.ui?.thumb })" v-bind="{ ...thumbAttrs, ...ariaAttrs }" />
+        <SliderThumb data-slot="thumb" :class="ui.thumb({ class: props.ui?.thumb })" v-bind="{ ...(thumbs === 1 ? pick($attrs, thumbAttrs) : {}), ...ariaAttrs }" :aria-label="thumbs > 1 || $attrs['aria-labelledby'] ? undefined : ($attrs['aria-label'] ?? 'Thumb')" />
       </UTooltip>
-      <SliderThumb v-else data-slot="thumb" :class="ui.thumb({ class: props.ui?.thumb })" v-bind="{ ...thumbAttrs, ...ariaAttrs }" />
+      <SliderThumb v-else data-slot="thumb" :class="ui.thumb({ class: props.ui?.thumb })" v-bind="{ ...(thumbs === 1 ? pick($attrs, thumbAttrs) : {}), ...ariaAttrs }" :aria-label="thumbs > 1 || $attrs['aria-labelledby'] ? undefined : ($attrs['aria-label'] ?? 'Thumb')" />
     </template>
   </SliderRoot>
 </template>
