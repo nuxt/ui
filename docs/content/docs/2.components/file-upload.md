@@ -2,6 +2,10 @@
 title: FileUpload
 description: 'An input element to upload files.'
 category: form
+keywords:
+  - dropzone
+  - drag and drop
+  - file input
 links:
   - label: GitHub
     icon: i-simple-icons-github

@@ -11,16 +11,14 @@ export default defineCommand({
   },
   args: {
     code: {
-      description: 'Locale code to create. For example: en.',
+      description: 'Locale code to create. For example: en or en_gb.',
       required: true
     },
     name: {
-      description: 'Locale name to create. For example: English.',
-      required: true
+      description: 'Locale name in its own language. Defaults to the CLDR name for the code.'
     },
     dir: {
-      description: 'Locale direction. For example: rtl.',
-      default: 'ltr'
+      description: 'Locale direction. Defaults to the CLDR direction for the code.'
     }
   },
   async setup({ args }) {
@@ -36,13 +34,44 @@ export default defineCommand({
       process.exit(1)
     }
 
-    if (!['ltr', 'rtl'].includes(args.dir)) {
-      consola.error(`🚨 Direction ${args.dir} not supported!`)
+    if (!args.code.match(/^[a-z]{2,3}(?:_(?:[a-z]{2}|\d{3}))?$/)) {
+      consola.error(`🚨 ${args.code} is not a valid locale code!\nExample: en, en_gb or es_419`)
       process.exit(1)
     }
 
-    if (!args.code.match(/^[a-z]{2}(?:_[a-z]{2,4})?$/)) {
-      consola.error(`🚨 ${args.code} is not a valid locale code!\nExample: en or en_us`)
+    const code = normalizeLocale(args.code)
+    const language = code.split('-')[0]
+
+    // `Intl.DisplayNames` echoes the input back when the code is unknown to CLDR
+    if (new Intl.DisplayNames(['en'], { type: 'language' }).of(language) === language) {
+      consola.error(`🚨 ${language} is not a known ISO 639 language code!\nFor example, the code for Tajik is tg, not tj.`)
+      process.exit(1)
+    }
+
+    const region = code.split('-')[1]
+    if (region && new Intl.DisplayNames(['en'], { type: 'region' }).of(region) === region) {
+      consola.error(`🚨 ${region} is not a known region code!\nExample: en_gb or pt_br`)
+      process.exit(1)
+    }
+
+    let name = args.name
+    if (!name) {
+      const cldrName = new Intl.DisplayNames([code], { type: 'language', languageDisplay: 'standard' }).of(code)
+      name = cldrName.charAt(0).toLocaleUpperCase(code) + cldrName.slice(1)
+      consola.info(`🌍 Using CLDR name for ${code}: ${name}`)
+    }
+
+    let dir = args.dir
+    if (!dir) {
+      const intlLocale = new Intl.Locale(code)
+      dir = (intlLocale.getTextInfo?.() ?? intlLocale.textInfo)?.direction ?? 'ltr'
+      if (dir === 'rtl') {
+        consola.info(`🌍 Using CLDR direction for ${code}: ${dir}`)
+      }
+    }
+
+    if (!['ltr', 'rtl'].includes(dir)) {
+      consola.error(`🚨 Direction ${dir} not supported!`)
       process.exit(1)
     }
 
@@ -55,8 +84,8 @@ export default defineCommand({
     await fsp.copyFile(originLocaleFilePath, newLocaleFilePath)
     const localeFile = await fsp.readFile(newLocaleFilePath, 'utf-8')
     const rewrittenLocaleFile = localeFile
-      .replace(/name: '(.*)',/, `name: '${args.name}',`)
-      .replace(/code: '(.*)',/, `code: '${normalizeLocale(args.code)}',${(args.dir && args.dir !== 'ltr') ? `\n  dir: '${args.dir}',` : ''}`)
+      .replace(/name: '(.*)',/, `name: '${name}',`)
+      .replace(/code: '(.*)',/, `code: '${code}',${dir !== 'ltr' ? `\n  dir: '${dir}',` : ''}`)
     await fsp.writeFile(newLocaleFilePath, rewrittenLocaleFile)
 
     consola.success(`🪄 Generated ${newLocaleFilePath}`)

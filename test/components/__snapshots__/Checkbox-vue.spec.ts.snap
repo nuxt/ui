@@ -2,7 +2,7 @@
 
 exports[`Checkbox > renders with ariaLabel correctly 1`] = `
 "<div data-slot="root" class="relative flex items-start flex-row">
-  <div data-slot="container" class="flex items-center h-5"><button aria-label="Aria label" data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-3 outline-primary/25 focus-visible:ring-primary size-4" id="v-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+  <div data-slot="container" class="flex items-center h-5"><button aria-label="Aria label" data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden size-4 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" id="v-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
       <!---->
     </button>
     <!--v-if-->
@@ -13,7 +13,7 @@ exports[`Checkbox > renders with ariaLabel correctly 1`] = `
 
 exports[`Checkbox > renders with as correctly 1`] = `
 "<section data-slot="root" class="relative flex items-start flex-row">
-  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-3 outline-primary/25 focus-visible:ring-primary size-4" id="v-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden size-4 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" id="v-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
       <!---->
     </button>
     <!--v-if-->
@@ -24,7 +24,7 @@ exports[`Checkbox > renders with as correctly 1`] = `
 
 exports[`Checkbox > renders with class correctly 1`] = `
 "<div data-slot="root" class="relative items-start flex-row inline-flex">
-  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-3 outline-primary/25 focus-visible:ring-primary size-4" id="v-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden size-4 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" id="v-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
       <!---->
     </button>
     <!--v-if-->
@@ -35,7 +35,7 @@ exports[`Checkbox > renders with class correctly 1`] = `
 
 exports[`Checkbox > renders with defaultValue correctly 1`] = `
 "<div data-slot="root" class="relative flex items-start flex-row">
-  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-3 outline-primary/25 focus-visible:ring-primary size-4" id="v-0" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-primary"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-full"></svg></span></button>
+  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden size-4 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" id="v-0" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-primary"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-3.5"></svg></span></button>
     <!--v-if-->
   </div>
   <!--v-if-->
@@ -44,12 +44,13 @@ exports[`Checkbox > renders with defaultValue correctly 1`] = `
 
 exports[`Checkbox > renders with description correctly 1`] = `
 "<div data-slot="root" class="relative flex items-start flex-row">
-  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-3 outline-primary/25 focus-visible:ring-primary size-4" id="v-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden size-4 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" id="v-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
       <!---->
     </button>
     <!--v-if-->
   </div>
-  <div data-slot="wrapper" class="w-full ms-2 text-sm"><label for="v-0" data-slot="label" class="block font-medium text-default">Label</label>
+  <div data-slot="wrapper" class="w-full ms-2 text-sm">
+    <!--v-if--><label for="v-0" data-slot="label" class="block font-medium text-default">Label</label>
     <p data-slot="description" class="text-muted">Description</p>
   </div>
 </div>"
@@ -57,12 +58,13 @@ exports[`Checkbox > renders with description correctly 1`] = `
 
 exports[`Checkbox > renders with description slot correctly 1`] = `
 "<div data-slot="root" class="relative flex items-start flex-row">
-  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-3 outline-primary/25 focus-visible:ring-primary size-4" id="v-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden size-4 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" id="v-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
       <!---->
     </button>
     <!--v-if-->
   </div>
-  <div data-slot="wrapper" class="w-full ms-2 text-sm"><label for="v-0" data-slot="label" class="block font-medium text-default">Description slot</label>
+  <div data-slot="wrapper" class="w-full ms-2 text-sm">
+    <!--v-if--><label for="v-0" data-slot="label" class="block font-medium text-default">Description slot</label>
     <!--v-if-->
   </div>
 </div>"
@@ -70,7 +72,7 @@ exports[`Checkbox > renders with description slot correctly 1`] = `
 
 exports[`Checkbox > renders with disabled correctly 1`] = `
 "<div data-slot="root" class="relative flex items-start flex-row opacity-75">
-  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-3 outline-primary/25 focus-visible:ring-primary size-4 cursor-not-allowed" id="v-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-disabled="" disabled="">
+  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden size-4 cursor-not-allowed outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" id="v-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-disabled="" disabled="">
       <!---->
     </button>
     <!--v-if-->
@@ -81,7 +83,7 @@ exports[`Checkbox > renders with disabled correctly 1`] = `
 
 exports[`Checkbox > renders with icon correctly 1`] = `
 "<div data-slot="root" class="relative flex items-start flex-row">
-  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-3 outline-primary/25 focus-visible:ring-primary size-4" id="v-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden size-4 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" id="v-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
       <!---->
     </button>
     <!--v-if-->
@@ -92,7 +94,7 @@ exports[`Checkbox > renders with icon correctly 1`] = `
 
 exports[`Checkbox > renders with id correctly 1`] = `
 "<div data-slot="root" class="relative flex items-start flex-row">
-  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-3 outline-primary/25 focus-visible:ring-primary size-4" id="id" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden size-4 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" id="id" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
       <!---->
     </button>
     <!--v-if-->
@@ -103,7 +105,7 @@ exports[`Checkbox > renders with id correctly 1`] = `
 
 exports[`Checkbox > renders with indeterminate correctly 1`] = `
 "<div data-slot="root" class="relative flex items-start flex-row">
-  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-3 outline-primary/25 focus-visible:ring-primary size-4" id="v-0" role="checkbox" type="button" aria-checked="mixed" aria-required="false" data-state="indeterminate"><span data-state="indeterminate" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-primary"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-full"></svg></span></button>
+  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden size-4 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" id="v-0" role="checkbox" type="button" aria-checked="mixed" aria-required="false" data-state="indeterminate"><span data-state="indeterminate" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-primary"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-3.5"></svg></span></button>
     <!--v-if-->
   </div>
   <!--v-if-->
@@ -112,7 +114,7 @@ exports[`Checkbox > renders with indeterminate correctly 1`] = `
 
 exports[`Checkbox > renders with indeterminateIcon correctly 1`] = `
 "<div data-slot="root" class="relative flex items-start flex-row">
-  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-3 outline-primary/25 focus-visible:ring-primary size-4" id="v-0" role="checkbox" type="button" aria-checked="mixed" aria-required="false" data-state="indeterminate"><span data-state="indeterminate" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-primary"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-full"></svg></span></button>
+  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden size-4 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" id="v-0" role="checkbox" type="button" aria-checked="mixed" aria-required="false" data-state="indeterminate"><span data-state="indeterminate" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-primary"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-3.5"></svg></span></button>
     <!--v-if-->
   </div>
   <!--v-if-->
@@ -121,7 +123,7 @@ exports[`Checkbox > renders with indeterminateIcon correctly 1`] = `
 
 exports[`Checkbox > renders with indicator end correctly 1`] = `
 "<div data-slot="root" class="relative flex items-start flex-row-reverse">
-  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-3 outline-primary/25 focus-visible:ring-primary size-4" id="v-0" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-primary"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-full"></svg></span></button>
+  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden size-4 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" id="v-0" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-primary"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-3.5"></svg></span></button>
     <!--v-if-->
   </div>
   <!--v-if-->
@@ -129,8 +131,8 @@ exports[`Checkbox > renders with indicator end correctly 1`] = `
 `;
 
 exports[`Checkbox > renders with indicator hidden correctly 1`] = `
-"<div data-slot="root" class="relative flex items-start">
-  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-3 outline-primary/25 focus-visible:ring-primary sr-only size-4" id="v-0" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-primary"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-full"></svg></span></button>
+"<div data-slot="root" class="relative flex items-start outline-primary/25 has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-primary has-focus-visible:z-[1]">
+  <div data-slot="container" class="flex items-center h-auto"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-none sr-only size-4" id="v-0" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked"></button>
     <!--v-if-->
   </div>
   <!--v-if-->
@@ -139,7 +141,7 @@ exports[`Checkbox > renders with indicator hidden correctly 1`] = `
 
 exports[`Checkbox > renders with indicator start correctly 1`] = `
 "<div data-slot="root" class="relative flex items-start flex-row">
-  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-3 outline-primary/25 focus-visible:ring-primary size-4" id="v-0" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-primary"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-full"></svg></span></button>
+  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden size-4 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" id="v-0" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-primary"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-3.5"></svg></span></button>
     <!--v-if-->
   </div>
   <!--v-if-->
@@ -148,12 +150,13 @@ exports[`Checkbox > renders with indicator start correctly 1`] = `
 
 exports[`Checkbox > renders with label correctly 1`] = `
 "<div data-slot="root" class="relative flex items-start flex-row">
-  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-3 outline-primary/25 focus-visible:ring-primary size-4" id="v-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden size-4 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" id="v-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
       <!---->
     </button>
     <!--v-if-->
   </div>
-  <div data-slot="wrapper" class="w-full ms-2 text-sm"><label for="v-0" data-slot="label" class="block font-medium text-default">Label</label>
+  <div data-slot="wrapper" class="w-full ms-2 text-sm">
+    <!--v-if--><label for="v-0" data-slot="label" class="block font-medium text-default">Label</label>
     <!--v-if-->
   </div>
 </div>"
@@ -161,12 +164,13 @@ exports[`Checkbox > renders with label correctly 1`] = `
 
 exports[`Checkbox > renders with label slot correctly 1`] = `
 "<div data-slot="root" class="relative flex items-start flex-row">
-  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-3 outline-primary/25 focus-visible:ring-primary size-4" id="v-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden size-4 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" id="v-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
       <!---->
     </button>
     <!--v-if-->
   </div>
-  <div data-slot="wrapper" class="w-full ms-2 text-sm"><label for="v-0" data-slot="label" class="block font-medium text-default">Label slot</label>
+  <div data-slot="wrapper" class="w-full ms-2 text-sm">
+    <!--v-if--><label for="v-0" data-slot="label" class="block font-medium text-default">Label slot</label>
     <!--v-if-->
   </div>
 </div>"
@@ -174,7 +178,7 @@ exports[`Checkbox > renders with label slot correctly 1`] = `
 
 exports[`Checkbox > renders with modelValue correctly 1`] = `
 "<div data-slot="root" class="relative flex items-start flex-row">
-  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-3 outline-primary/25 focus-visible:ring-primary size-4" id="v-0" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-primary"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-full"></svg></span></button>
+  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden size-4 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" id="v-0" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-primary"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-3.5"></svg></span></button>
     <!--v-if-->
   </div>
   <!--v-if-->
@@ -183,7 +187,7 @@ exports[`Checkbox > renders with modelValue correctly 1`] = `
 
 exports[`Checkbox > renders with name correctly 1`] = `
 "<div data-slot="root" class="relative flex items-start flex-row">
-  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-3 outline-primary/25 focus-visible:ring-primary size-4" id="v-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden size-4 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" id="v-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
       <!---->
     </button>
     <!--v-if-->
@@ -193,8 +197,8 @@ exports[`Checkbox > renders with name correctly 1`] = `
 `;
 
 exports[`Checkbox > renders with neutral variant card correctly 1`] = `
-"<label data-slot="root" class="relative flex items-start border border-muted rounded-lg flex-row p-3.5 has-data-[state=checked]:border-inverted">
-  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-3 outline-inverted/25 focus-visible:ring-inverted size-4" id="v-0" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-inverted"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-full"></svg></span></button>
+"<label data-slot="root" class="relative flex items-start border border-muted rounded-lg hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-elevated/50 transition-colors flex-row hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:border-accented p-3.5 outline-inverted/25 has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-inverted has-focus-visible:z-[1] has-data-[state=checked]:border-inverted/50 has-data-[state=checked]:bg-elevated">
+  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-none size-4" id="v-0" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-inverted"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-3.5"></svg></span></button>
     <!--v-if-->
   </div>
   <!--v-if-->
@@ -202,8 +206,8 @@ exports[`Checkbox > renders with neutral variant card correctly 1`] = `
 `;
 
 exports[`Checkbox > renders with neutral variant card highlight correctly 1`] = `
-"<label data-slot="root" class="relative flex items-start border border-muted rounded-lg flex-row p-3.5 has-data-[state=checked]:border-inverted">
-  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset overflow-hidden focus-visible:outline-3 outline-inverted/25 focus-visible:ring-inverted size-4 ring-inverted" id="v-0" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-inverted"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-full"></svg></span></button>
+"<label data-slot="root" class="relative flex items-start border border-muted rounded-lg hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-elevated/50 transition-colors flex-row p-3.5 outline-inverted/25 has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-inverted has-focus-visible:z-[1] has-data-[state=checked]:border-inverted/50 has-data-[state=checked]:bg-elevated">
+  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset overflow-hidden focus-visible:outline-none size-4 ring-inverted" id="v-0" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-inverted"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-3.5"></svg></span></button>
     <!--v-if-->
   </div>
   <!--v-if-->
@@ -212,7 +216,7 @@ exports[`Checkbox > renders with neutral variant card highlight correctly 1`] = 
 
 exports[`Checkbox > renders with neutral variant list correctly 1`] = `
 "<div data-slot="root" class="relative flex items-start flex-row">
-  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-3 outline-inverted/25 focus-visible:ring-inverted size-4" id="v-0" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-inverted"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-full"></svg></span></button>
+  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden size-4 outline-inverted/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-inverted" id="v-0" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-inverted"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-3.5"></svg></span></button>
     <!--v-if-->
   </div>
   <!--v-if-->
@@ -221,7 +225,7 @@ exports[`Checkbox > renders with neutral variant list correctly 1`] = `
 
 exports[`Checkbox > renders with neutral variant list highlight correctly 1`] = `
 "<div data-slot="root" class="relative flex items-start flex-row">
-  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset overflow-hidden focus-visible:outline-3 outline-inverted/25 focus-visible:ring-inverted size-4 ring-inverted" id="v-0" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-inverted"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-full"></svg></span></button>
+  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset overflow-hidden size-4 outline-inverted/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-inverted ring-inverted" id="v-0" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-inverted"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-3.5"></svg></span></button>
     <!--v-if-->
   </div>
   <!--v-if-->
@@ -229,8 +233,8 @@ exports[`Checkbox > renders with neutral variant list highlight correctly 1`] = 
 `;
 
 exports[`Checkbox > renders with primary variant card correctly 1`] = `
-"<label data-slot="root" class="relative flex items-start border border-muted rounded-lg flex-row p-3.5 has-data-[state=checked]:border-primary">
-  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-3 outline-primary/25 focus-visible:ring-primary size-4" id="v-0" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-primary"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-full"></svg></span></button>
+"<label data-slot="root" class="relative flex items-start border border-muted rounded-lg hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-elevated/50 transition-colors flex-row hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:border-accented p-3.5 outline-primary/25 has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-primary has-focus-visible:z-[1] has-data-[state=checked]:border-primary/50 has-data-[state=checked]:bg-primary/10">
+  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-none size-4" id="v-0" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-primary"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-3.5"></svg></span></button>
     <!--v-if-->
   </div>
   <!--v-if-->
@@ -238,8 +242,8 @@ exports[`Checkbox > renders with primary variant card correctly 1`] = `
 `;
 
 exports[`Checkbox > renders with primary variant card highlight correctly 1`] = `
-"<label data-slot="root" class="relative flex items-start border border-muted rounded-lg flex-row p-3.5 has-data-[state=checked]:border-primary">
-  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset overflow-hidden focus-visible:outline-3 outline-primary/25 focus-visible:ring-primary size-4 ring-primary" id="v-0" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-primary"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-full"></svg></span></button>
+"<label data-slot="root" class="relative flex items-start border border-muted rounded-lg hover:not-has-disabled:not-has-focus-visible:not-has-data-[state=checked]:bg-elevated/50 transition-colors flex-row p-3.5 outline-primary/25 has-focus-visible:outline-3 not-has-disabled:has-focus-visible:border-primary has-focus-visible:z-[1] has-data-[state=checked]:border-primary/50 has-data-[state=checked]:bg-primary/10">
+  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset overflow-hidden focus-visible:outline-none size-4 ring-primary" id="v-0" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-primary"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-3.5"></svg></span></button>
     <!--v-if-->
   </div>
   <!--v-if-->
@@ -248,7 +252,7 @@ exports[`Checkbox > renders with primary variant card highlight correctly 1`] = 
 
 exports[`Checkbox > renders with primary variant list correctly 1`] = `
 "<div data-slot="root" class="relative flex items-start flex-row">
-  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-3 outline-primary/25 focus-visible:ring-primary size-4" id="v-0" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-primary"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-full"></svg></span></button>
+  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden size-4 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" id="v-0" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-primary"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-3.5"></svg></span></button>
     <!--v-if-->
   </div>
   <!--v-if-->
@@ -257,7 +261,7 @@ exports[`Checkbox > renders with primary variant list correctly 1`] = `
 
 exports[`Checkbox > renders with primary variant list highlight correctly 1`] = `
 "<div data-slot="root" class="relative flex items-start flex-row">
-  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset overflow-hidden focus-visible:outline-3 outline-primary/25 focus-visible:ring-primary size-4 ring-primary" id="v-0" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-primary"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-full"></svg></span></button>
+  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset overflow-hidden size-4 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary ring-primary" id="v-0" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-primary"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-3.5"></svg></span></button>
     <!--v-if-->
   </div>
   <!--v-if-->
@@ -266,12 +270,13 @@ exports[`Checkbox > renders with primary variant list highlight correctly 1`] = 
 
 exports[`Checkbox > renders with required correctly 1`] = `
 "<div data-slot="root" class="relative flex items-start flex-row">
-  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-3 outline-primary/25 focus-visible:ring-primary size-4" id="v-0" role="checkbox" type="button" aria-checked="false" aria-required="true" data-state="unchecked">
+  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden size-4 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" id="v-0" role="checkbox" type="button" aria-checked="false" aria-required="true" data-state="unchecked">
       <!---->
     </button>
     <!--v-if-->
   </div>
-  <div data-slot="wrapper" class="w-full ms-2 text-sm"><label for="v-0" data-slot="label" class="block font-medium text-default after:content-['*'] after:ms-0.5 after:text-error">Label</label>
+  <div data-slot="wrapper" class="w-full ms-2 text-sm">
+    <!--v-if--><label for="v-0" data-slot="label" class="block font-medium text-default after:content-['*'] after:ms-0.5 after:text-error">Label</label>
     <!--v-if-->
   </div>
 </div>"
@@ -279,7 +284,7 @@ exports[`Checkbox > renders with required correctly 1`] = `
 
 exports[`Checkbox > renders with size lg correctly 1`] = `
 "<div data-slot="root" class="relative flex items-start flex-row">
-  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-3 outline-primary/25 focus-visible:ring-primary size-4.5" id="v-0" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-primary"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-full"></svg></span></button>
+  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden size-4.5 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" id="v-0" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-primary"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-4"></svg></span></button>
     <!--v-if-->
   </div>
   <!--v-if-->
@@ -288,7 +293,7 @@ exports[`Checkbox > renders with size lg correctly 1`] = `
 
 exports[`Checkbox > renders with size md correctly 1`] = `
 "<div data-slot="root" class="relative flex items-start flex-row">
-  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-3 outline-primary/25 focus-visible:ring-primary size-4" id="v-0" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-primary"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-full"></svg></span></button>
+  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden size-4 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" id="v-0" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-primary"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-3.5"></svg></span></button>
     <!--v-if-->
   </div>
   <!--v-if-->
@@ -297,7 +302,7 @@ exports[`Checkbox > renders with size md correctly 1`] = `
 
 exports[`Checkbox > renders with size sm correctly 1`] = `
 "<div data-slot="root" class="relative flex items-start flex-row">
-  <div data-slot="container" class="flex items-center h-4"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-3 outline-primary/25 focus-visible:ring-primary size-3.5" id="v-0" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-primary"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-full"></svg></span></button>
+  <div data-slot="container" class="flex items-center h-4"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden size-3.5 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" id="v-0" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-primary"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-3"></svg></span></button>
     <!--v-if-->
   </div>
   <!--v-if-->
@@ -306,7 +311,7 @@ exports[`Checkbox > renders with size sm correctly 1`] = `
 
 exports[`Checkbox > renders with size xl correctly 1`] = `
 "<div data-slot="root" class="relative flex items-start flex-row">
-  <div data-slot="container" class="flex items-center h-6"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-3 outline-primary/25 focus-visible:ring-primary size-5" id="v-0" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-primary"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-full"></svg></span></button>
+  <div data-slot="container" class="flex items-center h-6"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden size-5 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" id="v-0" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-primary"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-4.5"></svg></span></button>
     <!--v-if-->
   </div>
   <!--v-if-->
@@ -315,7 +320,7 @@ exports[`Checkbox > renders with size xl correctly 1`] = `
 
 exports[`Checkbox > renders with size xs correctly 1`] = `
 "<div data-slot="root" class="relative flex items-start flex-row">
-  <div data-slot="container" class="flex items-center h-4"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-3 outline-primary/25 focus-visible:ring-primary size-3" id="v-0" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-primary"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-full"></svg></span></button>
+  <div data-slot="container" class="flex items-center h-4"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden size-3 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" id="v-0" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-primary"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-2.5"></svg></span></button>
     <!--v-if-->
   </div>
   <!--v-if-->
@@ -324,7 +329,7 @@ exports[`Checkbox > renders with size xs correctly 1`] = `
 
 exports[`Checkbox > renders with trueValue/falseValue as number correctly 1`] = `
 "<div data-slot="root" class="relative flex items-start flex-row">
-  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-3 outline-primary/25 focus-visible:ring-primary size-4" id="v-0" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-primary"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-full"></svg></span></button>
+  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden size-4 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" id="v-0" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-primary"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-3.5"></svg></span></button>
     <!--v-if-->
   </div>
   <!--v-if-->
@@ -333,7 +338,7 @@ exports[`Checkbox > renders with trueValue/falseValue as number correctly 1`] = 
 
 exports[`Checkbox > renders with trueValue/falseValue as string correctly 1`] = `
 "<div data-slot="root" class="relative flex items-start flex-row">
-  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-3 outline-primary/25 focus-visible:ring-primary size-4" id="v-0" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-primary"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-full"></svg></span></button>
+  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden size-4 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" id="v-0" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked"><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class="flex items-center justify-center size-full text-inverted bg-primary"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="shrink-0 size-3.5"></svg></span></button>
     <!--v-if-->
   </div>
   <!--v-if-->
@@ -342,7 +347,7 @@ exports[`Checkbox > renders with trueValue/falseValue as string correctly 1`] = 
 
 exports[`Checkbox > renders with trueValue/falseValue unchecked correctly 1`] = `
 "<div data-slot="root" class="relative flex items-start flex-row">
-  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-3 outline-primary/25 focus-visible:ring-primary size-4" id="v-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden size-4 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" id="v-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
       <!---->
     </button>
     <!--v-if-->
@@ -353,7 +358,7 @@ exports[`Checkbox > renders with trueValue/falseValue unchecked correctly 1`] = 
 
 exports[`Checkbox > renders with ui correctly 1`] = `
 "<div data-slot="root" class="relative flex items-start flex-row">
-  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-3 outline-primary/25 focus-visible:ring-primary size-4" id="v-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden size-4 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" id="v-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
       <!---->
     </button>
     <!--v-if-->
@@ -364,7 +369,7 @@ exports[`Checkbox > renders with ui correctly 1`] = `
 
 exports[`Checkbox > renders with value correctly 1`] = `
 "<div data-slot="root" class="relative flex items-start flex-row">
-  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden focus-visible:outline-3 outline-primary/25 focus-visible:ring-primary size-4" id="v-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+  <div data-slot="container" class="flex items-center h-5"><button data-slot="base" class="rounded-sm ring ring-inset ring-accented overflow-hidden size-4 outline-primary/25 focus-visible:outline-solid focus-visible:outline-3 focus-visible:ring-primary" id="v-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
       <!---->
     </button>
     <!--v-if-->

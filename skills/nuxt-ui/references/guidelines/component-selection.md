@@ -1,6 +1,6 @@
 # Component Selection
 
-Decision matrices for choosing the right component. When in doubt, use the MCP `search_components` tool.
+Decision matrices for choosing the right component. When in doubt, use the MCP `search-components` tool.
 
 ## Overlays
 
@@ -76,6 +76,7 @@ Decision matrices for choosing the right component. When in doubt, use the MCP `
 | App-wide announcement | `UBanner` | Sticky top bar, dismissible |
 | Loading state | `USkeleton` | Placeholder shimmer while loading |
 | Progress indicator | `UProgress` | Determinate or indeterminate progress |
+| Breakdown of a total | `UProgressGroup` | One bar split into colored segments that add up to `max` |
 
 ### Rules
 - Use `useToast()` for action feedback: "Item saved", "Email sent", "Error occurred"
@@ -114,6 +115,7 @@ When rendering Markdown (for instance with Comark), **prefer Prose components** 
 | Centered content wrapper | `UContainer` | Max-width container |
 | Collapsible section | `UCollapsible` | Animated expand/collapse |
 | Accordion (multiple collapsibles) | `UAccordion` | FAQ, grouped collapsible content |
+| Resizable side-by-side panes | `USplitter` | IDE-style layouts, resizable sidebars |
 
 ### Rules
 - Don't overuse `UCard` — plain content with spacing is often better than wrapping everything in cards

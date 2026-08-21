@@ -1,12 +1,16 @@
 ---
 description: A responsive table element to display data in rows and columns.
 category: data
+keywords:
+  - data table
+  - datagrid
+  - data grid
 links:
   - label: TanStack Table
     avatar:
       src: https://github.com/tanstack.png
       loading: lazy
-    to: https://tanstack.com/table/latest
+    to: https://tanstack.com/table/v8
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/Table.vue
@@ -14,7 +18,7 @@ links:
 
 ## Usage
 
-The Table component is built on top of [TanStack Table](https://tanstack.com/table/latest) and is powered by the [useVueTable](https://tanstack.com/table/latest/docs/framework/vue/vue-table#usevuetable) composable to provide a flexible and fully type-safe API.
+The Table component is built on top of [TanStack Table v8](https://tanstack.com/table/v8) and is powered by the [useVueTable](https://tanstack.com/table/v8/docs/framework/vue/vue-table#usevuetable) composable to provide a flexible and fully type-safe API.
 
 It renders your data as rows and columns and supports sorting, filtering, pagination, row selection, expansion, grouping, pinning and virtualization, so you can build everything from a simple data table to a fully featured data grid.
 
@@ -77,7 +81,7 @@ props:
 
 ### Columns
 
-Use the `columns` prop as an array of [ColumnDef](https://tanstack.com/table/latest/docs/api/core/column-def) objects with properties like:
+Use the `columns` prop as an array of [ColumnDef](https://tanstack.com/table/v8/docs/api/core/column-def) objects with properties like:
 
 - `accessorKey`: [The key of the row object to use when extracting the value for the column.]{class="text-muted"}
 - `header`: [The header to display for the column. If a string is passed, it can be used as a default for the column ID. If a function is passed, it will be passed a props object for the header and should return the rendered header value (the exact type depends on the adapter being used).]{class="text-muted"}
@@ -119,7 +123,7 @@ When rendering components with `h`, you can either use the `resolveComponent` fu
 
 ### Meta
 
-Use the `meta` prop as an object ([TableMeta](https://tanstack.com/table/latest/docs/api/core/table#meta)) to pass properties like:
+Use the `meta` prop as an object ([TableMeta](https://tanstack.com/table/v8/docs/api/core/table#meta)) to pass properties like:
 
 - `class`:
   - `tr`: [The classes to apply to the `tr` element.]{class="text-muted"}
@@ -270,7 +274,7 @@ class: '!p-0'
 
 ### With expandable rows
 
-You can add a new column that renders a [Button](/docs/components/button) component inside the `cell` to toggle the expandable state of a row using the TanStack Table [Expanding APIs](https://tanstack.com/table/latest/docs/api/features/expanding).
+You can add a new column that renders a [Button](/docs/components/button) component inside the `cell` to toggle the expandable state of a row using the TanStack Table [Expanding APIs](https://tanstack.com/table/v8/docs/api/features/expanding).
 
 ::caution
 You need to define the `#expanded` slot to render the expanded content which will receive the row as a parameter.
@@ -298,7 +302,7 @@ You could also add this action to the [`DropdownMenu`](/docs/components/dropdown
 
 ### With grouped rows
 
-You can group rows based on a given column value and show/hide sub rows via some button added to the cell using the TanStack Table [Grouping APIs](https://tanstack.com/table/latest/docs/api/features/grouping).
+You can group rows based on a given column value and show/hide sub rows via some button added to the cell using the TanStack Table [Grouping APIs](https://tanstack.com/table/v8/docs/api/features/grouping).
 
 #### Important parts:
 
@@ -322,7 +326,7 @@ class: '!p-0'
 
 ### With row pinning :badge{label="4.6+" class="align-text-top"}
 
-You can add a column that renders a [Button](/docs/components/button) component inside the `cell` to toggle the pinning state of a row using the TanStack Table [Row Pinning APIs](https://tanstack.com/table/latest/docs/api/features/row-pinning). Pinned rows will stay at the top or bottom of the table regardless of sorting or filtering.
+You can add a column that renders a [Button](/docs/components/button) component inside the `cell` to toggle the pinning state of a row using the TanStack Table [Row Pinning APIs](https://tanstack.com/table/v8/docs/api/features/row-pinning). Pinned rows will stay at the top or bottom of the table regardless of sorting or filtering.
 
 ::component-example
 ---
@@ -346,7 +350,7 @@ You can use the `row-pinning` prop to control the pinning state of the rows (can
 
 ### With row selection
 
-You can add a new column that renders a [Checkbox](/docs/components/checkbox) component inside the `header` and `cell` to select rows using the TanStack Table [Row Selection APIs](https://tanstack.com/table/latest/docs/api/features/row-selection).
+You can add a new column that renders a [Checkbox](/docs/components/checkbox) component inside the `header` and `cell` to select rows using the TanStack Table [Row Selection APIs](https://tanstack.com/table/v8/docs/api/features/row-selection).
 
 ::component-example
 ---
@@ -467,7 +471,7 @@ class: '!p-0'
 
 ### With column sorting
 
-You can update a column `header` to render a [Button](/docs/components/button) component inside the `header` to toggle the sorting state using the TanStack Table [Sorting APIs](https://tanstack.com/table/latest/docs/api/features/sorting).
+You can update a column `header` to render a [Button](/docs/components/button) component inside the `header` to toggle the sorting state using the TanStack Table [Sorting APIs](https://tanstack.com/table/v8/docs/api/features/sorting).
 
 ::component-example
 ---
@@ -505,7 +509,7 @@ In this example, we use a function to define the column header but you can also 
 
 ### With column pinning
 
-You can update a column `header` to render a [Button](/docs/components/button) component inside the `header` to toggle the pinning state using the TanStack Table [Pinning APIs](https://tanstack.com/table/latest/docs/api/features/row-pinning).
+You can update a column `header` to render a [Button](/docs/components/button) component inside the `header` to toggle the pinning state using the TanStack Table [Column Pinning APIs](https://tanstack.com/table/v8/docs/api/features/column-pinning).
 
 ::note
 A pinned column will become sticky on the left or right side of the table. When using column pinning, you should define explicit `size` values for your columns to ensure proper column width handling, especially with multiple pinned columns.
@@ -530,7 +534,7 @@ You can use the `column-pinning` prop to control the pinning state of the column
 
 ### With column visibility
 
-You can use a [DropdownMenu](/docs/components/dropdown-menu) component to toggle the visibility of the columns using the TanStack Table [Column Visibility APIs](https://tanstack.com/table/latest/docs/api/features/column-visibility).
+You can use a [DropdownMenu](/docs/components/dropdown-menu) component to toggle the visibility of the columns using the TanStack Table [Column Visibility APIs](https://tanstack.com/table/v8/docs/api/features/column-visibility).
 
 ::component-example
 ---
@@ -550,7 +554,7 @@ You can use the `column-visibility` prop to control the visibility state of the 
 
 ### With column filters
 
-You can use an [Input](/docs/components/input) component to filter per column the rows using the TanStack Table [Column Filtering APIs](https://tanstack.com/table/latest/docs/api/features/column-filtering).
+You can use an [Input](/docs/components/input) component to filter per column the rows using the TanStack Table [Column Filtering APIs](https://tanstack.com/table/v8/docs/api/features/column-filtering).
 
 ::component-example
 ---
@@ -570,7 +574,7 @@ You can use the `column-filters` prop to control the filters state of the column
 
 ### With global filter
 
-You can use an [Input](/docs/components/input) component to filter the rows using the TanStack Table [Global Filtering APIs](https://tanstack.com/table/latest/docs/api/features/global-filtering).
+You can use an [Input](/docs/components/input) component to filter the rows using the TanStack Table [Global Filtering APIs](https://tanstack.com/table/v8/docs/api/features/global-filtering).
 
 ::component-example
 ---
@@ -589,9 +593,9 @@ You can use the `global-filter` prop to control the global filter state (can be 
 
 ### With pagination
 
-You can use a [Pagination](/docs/components/pagination) component to control the pagination state using the [Pagination APIs](https://tanstack.com/table/latest/docs/api/features/pagination).
+You can use a [Pagination](/docs/components/pagination) component to control the pagination state using the [Pagination APIs](https://tanstack.com/table/v8/docs/api/features/pagination).
 
-There are different pagination approaches as explained in [Pagination Guide](https://tanstack.com/table/latest/docs/guide/pagination#pagination-guide). In this example, we use client-side pagination so we need to manually pass `getPaginationRowModel()`{lang="ts-type"} function.
+There are different pagination approaches as explained in [Pagination Guide](https://tanstack.com/table/v8/docs/guide/pagination#pagination-guide). In this example, we use client-side pagination so we need to manually pass `getPaginationRowModel()`{lang="ts-type"} function.
 
 ::component-example
 ---
@@ -776,7 +780,7 @@ This will give you access to the following:
 | Name | Type |
 | ---- | ---- |
 | `tableRef`{lang="ts-type"} | `Ref<HTMLTableElement \| null>`{lang="ts-type"} |
-| `tableApi`{lang="ts-type"} | [`Table`{lang="ts-type"}](https://tanstack.com/table/latest/docs/api/core/table#table-api) |
+| `tableApi`{lang="ts-type"} | [`Table`{lang="ts-type"}](https://tanstack.com/table/v8/docs/api/core/table#table-api) |
 
 ## Theme
 

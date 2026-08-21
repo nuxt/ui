@@ -5,6 +5,40 @@ hero:
   description: 'Explore ready-made templates powered by our Vue components. These templates are fully responsive, accessible, and easy to customize, so you can launch your project quickly and effortlessly.'
 navigation: false
 items:
+  - title: 'Calendar'
+    description: "An Apple Calendar-inspired template with day, week and month views, drag and drop and optimistic updates."
+    icon: i-lucide-calendar
+    framework: nuxt
+    features:
+      - title: Day, week & month views
+        icon: i-lucide-calendar-days
+      - title: Drag and drop events
+        icon: i-lucide-grab
+      - title: Optimistic updates & offline support
+        icon: i-lucide-wifi-off
+    deploy_links:
+      - label: Vercel
+        to: https://vercel.com/new/clone?repository-name=calendar&repository-url=https%3A%2F%2Fgithub.com%2Fnuxt-ui-templates%2Fcalendar&demo-image=https%3A%2F%2Fui.nuxt.com%2Fassets%2Ftemplates%2Fnuxt%2Fcalendar-dark.png&demo-url=https%3A%2F%2Fcalendar-template.nuxt.dev%2F&demo-title=Nuxt%20Calendar%20Template&demo-description=An%20Apple%20Calendar-inspired%20template%20with%20day%2C%20week%20and%20month%20views%2C%20drag%20and%20drop%20and%20optimistic%20updates.
+        target: _blank
+        icon: i-simple-icons-vercel
+      - label: Netlify
+        to: https://app.netlify.com/start/deploy?repository=https://github.com/nuxt-ui-templates/calendar
+        target: _blank
+        icon: i-simple-icons-netlify
+    links:
+      - label: Preview
+        to: https://calendar-template.nuxt.dev
+        target: _blank
+        icon: i-lucide-link
+    open_links:
+      - label: GitHub
+        to: https://github.com/nuxt-ui-templates/calendar
+        target: _blank
+        icon: i-simple-icons-github
+      - label: v0
+        to: https://v0.app/chat/api/open?url=https://github.com/nuxt-ui-templates/calendar
+        target: _blank
+        icon: i-simple-icons-v0
   - title: 'Editor'
     description: "A rich text editor template powered by TipTap with support for markdown, HTML, and JSON content types."
     icon: i-lucide-file-text
