@@ -293,7 +293,7 @@ props:
 Use the `indicator` prop to change the position or hide the indicator. Defaults to `start`.
 
 ::note
-An item's `icon` replaces the check mark while the indicator is visible, and is displayed above the label when it is `hidden`. :badge{label="Soon" color="info" class="float-right ms-auto text-right"}
+An item's `icon` replaces the check mark while the indicator is visible, and is displayed above the label when it is `hidden`.
 ::
 
 ::component-code

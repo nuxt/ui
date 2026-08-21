@@ -251,7 +251,7 @@ props:
 Use the `indicator` prop to change the position or hide the indicator. Defaults to `start`.
 
 ::note
-An item's `icon` is only displayed when `indicator` is `hidden`, above the label, since a radio has no icon inside its indicator. :badge{label="Soon" color="info" class="float-right ms-auto text-right"}
+An item's `icon` is only displayed when `indicator` is `hidden`, above the label, since a radio has no icon inside its indicator.
 ::
 
 ::component-code
