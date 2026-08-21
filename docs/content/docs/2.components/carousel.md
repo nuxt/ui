@@ -254,7 +254,7 @@ class: 'p-8 px-16'
 
 ### With thumbnails
 
-You can use the [`emblaApi`](#expose) function [scrollTo](https://www.embla-carousel.com/docs/v8/api/methods#scrollto) to display thumbnails under the carousel that navigate to a specific slide.
+You can use the [`scrollTo`](https://www.embla-carousel.com/docs/v8/api/methods#scrollto) method on [`emblaApi`](#expose) to display thumbnails under the carousel that navigate to a specific slide.
 
 ::component-example
 ---

@@ -440,7 +440,7 @@ preview: false
 ::
 
 ::note
-We are emitting a `close` event when the modal is closed or dismissed here. You can emit any data through the `close` event, but it must be emitted to capture the return value.
+We are emitting a `close` event when the modal is closed or dismissed here. You can emit any data through the `close` event, and that data becomes the resolved value of `open()`. The event must be emitted for the promise to resolve.
 ::
 
 Then, use it in your app:

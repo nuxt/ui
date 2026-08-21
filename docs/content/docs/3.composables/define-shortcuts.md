@@ -88,7 +88,7 @@ Use these names to match keys that don't produce a character.
 - `tab`: Triggers on Tab key
 - `backspace`: Triggers on Backspace key
 - `delete`: Triggers on Delete key
-- `space`: Triggers on the space bar
+- `space`: Triggers on the space bar, only when `layoutIndependent` is enabled
 
 ### Shortcut configuration
 
