@@ -327,6 +327,11 @@ export function useWheelPicker(options: UseWheelPickerOptions) {
   function onPointerDown(event: PointerEvent) {
     if (isBlocked() || count() <= 0 || event.button !== 0) return
 
+    // Cancel a pending wheel snap so it can't fire mid-drag.
+    if (wheelTimer) {
+      clearTimeout(wheelTimer)
+      wheelTimer = null
+    }
     cancelAnimation()
     dragging = true
     pointerId = event.pointerId

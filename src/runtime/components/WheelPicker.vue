@@ -331,21 +331,42 @@ watch(modelValue, (value) => {
   }
 })
 
-// Re-center if the items change underneath the current value. Watching the
+// Center on the current value, resolving a disabled value to the nearest enabled
+// item. When the value maps to a disabled item, keep `modelValue` in sync with
+// the enabled item actually shown — but without emitting a form-change event,
+// since this runs on init / item updates, not on user interaction.
+function alignToValue(animated: boolean) {
+  const current = indexOfValue(modelValue.value as WheelPickerValue)
+  if (current === -1) return
+
+  if (!normalizedItems.value[current]?.disabled) {
+    if (current !== activeIndex.value) engine.scrollToIndex(current, animated)
+    return
+  }
+
+  const enabled = nearestEnabled(current)
+  if (enabled === -1) return
+  if (enabled !== activeIndex.value) engine.scrollToIndex(enabled, animated)
+
+  const item = normalizedItems.value[enabled]
+  if (item && !compare<WheelPickerValue>(modelValue.value as WheelPickerValue, item.value)) {
+    modelValue.value = item.value as GetModelValue<T, VK, false>
+  }
+}
+
+// Re-align when the items change underneath the current value. Watching the
 // normalized items (not just the count) also catches reordering or replacing
 // items with another array of the same length.
-watch(normalizedItems, () => {
-  const index = indexOfValue(modelValue.value as WheelPickerValue)
-  if (index !== -1 && index !== activeIndex.value) {
-    engine.scrollToIndex(index, false)
-  }
-})
+watch(normalizedItems, () => alignToValue(false))
 
 onMounted(() => {
-  const index = indexOfValue(modelValue.value as WheelPickerValue)
-  const target = index !== -1 ? index : 0
-  const enabled = normalizedItems.value[target]?.disabled ? nearestEnabled(target) : target
-  engine.scrollToIndex(enabled !== -1 ? enabled : target, false)
+  if (indexOfValue(modelValue.value as WheelPickerValue) !== -1) {
+    alignToValue(false)
+    return
+  }
+  // No (or unknown) value: center on the first enabled item without touching modelValue.
+  const start = normalizedItems.value[0]?.disabled ? nearestEnabled(0) : 0
+  engine.scrollToIndex(start !== -1 ? start : 0, false)
 })
 
 // Type-ahead: jump to the item whose label matches the typed characters. A run
@@ -415,13 +436,25 @@ const cells = computed(() => {
 const selectedItem = computed(() => normalizedItems.value[activeIndex.value])
 
 // Each rendered cell needs a unique DOM id: in loop mode several cells map to
-// the same item, so we key the id by the (unique) virtual index. The centered
-// cell — the one whose virtual index rounds the current position — is what
-// `aria-activedescendant` must point to.
+// the same item, so we key the id by the (unique) virtual index.
 function cellId(virtualIndex: number) {
   return `${id.value}-cell-${virtualIndex}`
 }
-const activeDescendant = computed(() => count.value > 0 ? cellId(Math.round(engine.position.value)) : undefined)
+
+// The centered cell is the one whose virtual index rounds the current position.
+const activeVirtualIndex = computed(() => Math.round(engine.position.value))
+
+// In loop mode the window can contain the same item index more than once, so
+// selection must key off the centered *virtual* cell. In non-loop mode each
+// index is rendered once, so the original index comparison is preserved.
+function isActiveCell(cell: { virtualIndex: number, index: number }) {
+  return props.loop ? cell.virtualIndex === activeVirtualIndex.value : cell.index === activeIndex.value
+}
+
+const activeDescendant = computed(() => {
+  if (count.value === 0) return undefined
+  return props.loop ? cellId(activeVirtualIndex.value) : cellId(activeIndex.value)
+})
 
 // In horizontal orientation items are sized to their content, so measure the
 // widest item (to drive the pitch) and the active item (to size the highlight).
@@ -504,7 +537,7 @@ defineExpose({
             :id="cellId(cell.virtualIndex)"
             :key="cell.key"
             role="option"
-            :aria-selected="cell.index === activeIndex"
+            :aria-selected="isActiveCell(cell)"
             :aria-disabled="normalizedItems[cell.index]?.disabled || undefined"
             data-slot="item"
             :style="engine.itemStyle(cell.virtualIndex)"
@@ -514,13 +547,13 @@ defineExpose({
               name="item"
               :item="(normalizedItems[cell.index] as NormalizedItem)"
               :index="cell.index"
-              :active="cell.index === activeIndex"
+              :active="isActiveCell(cell)"
               :ui="ui"
             >
               <slot
                 :item="(normalizedItems[cell.index] as NormalizedItem)"
                 :index="cell.index"
-                :active="cell.index === activeIndex"
+                :active="isActiveCell(cell)"
                 :ui="ui"
               >
                 <UIcon

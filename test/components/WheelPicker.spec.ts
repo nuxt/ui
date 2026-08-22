@@ -209,6 +209,37 @@ describe('WheelPicker', () => {
     })
   })
 
+  describe('disabled value alignment', () => {
+    test('realigns an initially disabled value to the nearest enabled item', async () => {
+      const wrapper = await mountSuspended(WheelPicker, {
+        props: { items: objectItems, modelValue: 'ber', animationDuration: 0 }
+      })
+      await flushPromises()
+
+      // 'ber' is disabled → snaps to the nearest enabled item ('tok') and syncs modelValue.
+      expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual(['tok'])
+      expect(wrapper.find('[role="option"][aria-selected="true"]').text()).toContain('Tokyo')
+    })
+
+    test('realigns when the selected item becomes disabled after an items update', async () => {
+      const wrapper = await mountSuspended(WheelPicker, {
+        props: {
+          items: [{ label: 'A', value: 'a' }, { label: 'B', value: 'b' }, { label: 'C', value: 'c' }],
+          modelValue: 'b',
+          animationDuration: 0
+        }
+      })
+      await flushPromises()
+
+      await wrapper.setProps({
+        items: [{ label: 'A', value: 'a' }, { label: 'B', value: 'b', disabled: true }, { label: 'C', value: 'c' }]
+      })
+      await flushPromises()
+
+      expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual(['c'])
+    })
+  })
+
   describe('form integration', () => {
     test('validates on change', async () => {
       const wrapper = await renderForm({
