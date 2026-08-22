@@ -44,7 +44,9 @@ export default (options: Required<ModuleOptions>) => ({
       true: {
         // Reserve the indicator gutter (`w-32`) on both sides so the centered container
         // never slides under the absolutely positioned indicator on narrow containers.
-        container: 'lg:w-[calc(100%-16rem)]'
+        // The `50%` floor keeps the container from collapsing to `0` when the root is
+        // narrower than the reservation itself.
+        container: 'lg:w-[max(50%,calc(100%-16rem))]'
       }
     }
   }
