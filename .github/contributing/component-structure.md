@@ -69,7 +69,7 @@ const appConfig = useAppConfig() as ComponentName['AppConfig']
 
 // 10. Computed UI - always computed for reactivity
 const ui = computed(() => tv({
-  extend: tv(theme),
+  extend: theme,
   ...(appConfig.ui?.componentName || {})
 })({
   color: props.color,
@@ -139,7 +139,7 @@ const appConfig = useAppConfig() as Collapsible['AppConfig']
 // and would strip <UTheme :props> values.
 const rootProps = useForwardProps(reactivePick(props, 'as', 'defaultOpen', 'open', 'disabled', 'unmountOnHide'), emits)
 
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.collapsible || {}) })())
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.collapsible || {}) })())
 </script>
 
 <template>
@@ -215,7 +215,7 @@ const inputSize = computed(() => fieldGroupSize.value || formFieldSize.value)
 //
 // Final precedence: explicit > closer-context (form/group) > <UTheme :props>
 //                   > withDefaults > app.config > tv defaults
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.input || {}) })({
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.input || {}) })({
   color: color.value ?? props.color,
   size: inputSize.value ?? props.size,
   highlight: highlight.value ?? props.highlight,

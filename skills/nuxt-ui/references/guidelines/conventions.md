@@ -365,6 +365,7 @@ npx nuxi@latest init -t ui/chat         # AI chat (Vercel AI SDK)
 npx nuxi@latest init -t ui/editor       # Rich text editor
 npx nuxi@latest init -t ui/portfolio    # Portfolio
 npx nuxi@latest init -t ui/changelog    # Changelog
+npx nuxi@latest init -t ui/calendar     # Calendar
 ```
 
 ## Responsive patterns

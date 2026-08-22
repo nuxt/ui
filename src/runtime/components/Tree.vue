@@ -281,7 +281,7 @@ defineExpose({
             :disabled="item.disabled || props.disabled"
             data-slot="link"
             :class="ui.link({ class: [props.ui?.link, item.ui?.link, item.class], selected: isSelected, disabled: item.disabled || props.disabled })"
-            :style="!nested && level > 1 ? { paddingLeft: flattenedPaddingFormula(level) } : undefined"
+            :style="!nested && level > 1 ? { paddingInlineStart: flattenedPaddingFormula(level) } : undefined"
           >
             <slot
               :name="((item.slot || 'item') as keyof TreeSlots<T>)"

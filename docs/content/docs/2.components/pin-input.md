@@ -2,6 +2,10 @@
 title: PinInput
 description: An input element to enter a pin.
 category: form
+keywords:
+  - otp
+  - one-time password
+  - verification code
 links:
   - label: PinInput
     icon: i-custom-reka-ui

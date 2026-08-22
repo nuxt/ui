@@ -80,7 +80,7 @@ export interface InputTimeSlots {
 </script>
 
 <script setup lang="ts" generic="R extends boolean">
-import { computed, onMounted, ref } from 'vue'
+import { computed, onMounted, onScopeDispose, ref } from 'vue'
 import { TimeRangeFieldRoot, TimeRangeFieldInput } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
 import { TimeField as SingleTimeField } from 'reka-ui/namespaced'
@@ -108,19 +108,27 @@ const appConfig = useAppConfig() as InputTime['AppConfig']
 
 const rootProps = useForwardProps(reactiveOmit(props, 'id', 'name', 'range', 'modelValue', 'defaultValue', 'color', 'variant', 'size', 'highlight', 'fixed', 'disabled', 'autofocus', 'autofocusDelay', 'icon', 'avatar', 'leading', 'leadingIcon', 'trailing', 'trailingIcon', 'loading', 'loadingIcon', 'separatorIcon', 'class', 'ui'), emits)
 
-const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, id, color, size: formFieldSize, name, highlight, disabled, ariaAttrs } = useFormField<InputTimeProps<R>>(_props)
+const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, id, color: formFieldColor, size: formFieldSize, name, highlight: formFieldHighlight, disabled: formFieldDisabled, ariaAttrs } = useFormField<InputTimeProps<R>>(_props)
+
 const { orientation, size: fieldGroupSize } = useFieldGroup<InputTimeProps<R>>(_props)
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props)
 
-const inputSize = computed(() => fieldGroupSize.value || formFieldSize.value)
+// eslint-disable-next-line vue/no-dupe-keys
+const color = computed(() => formFieldColor.value ?? props.color)
+// eslint-disable-next-line vue/no-dupe-keys
+const highlight = computed(() => formFieldHighlight.value ?? props.highlight)
+// eslint-disable-next-line vue/no-dupe-keys
+const size = computed(() => fieldGroupSize.value ?? formFieldSize.value ?? props.size)
+
+const disabled = computed(() => formFieldDisabled.value ?? props.disabled)
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.inputTime || {}) })({
-  color: color.value ?? props.color,
+  color: color.value,
   variant: props.variant,
-  size: inputSize.value ?? props.size,
+  size: size.value,
   loading: props.loading,
-  highlight: highlight.value ?? props.highlight,
+  highlight: highlight.value,
   fixed: props.fixed,
   leading: isLeading.value || !!props.avatar || !!slots.leading,
   trailing: isTrailing.value || !!slots.trailing,
@@ -169,11 +177,15 @@ function autoFocus() {
   }
 }
 
+let autofocusTimeoutId: ReturnType<typeof setTimeout> | undefined
+
 onMounted(() => {
-  setTimeout(() => {
+  autofocusTimeoutId = setTimeout(() => {
     autoFocus()
   }, props.autofocusDelay)
 })
+
+onScopeDispose(() => clearTimeout(autofocusTimeoutId))
 
 defineExpose({
   inputsRef

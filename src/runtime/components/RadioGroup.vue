@@ -3,6 +3,7 @@ import type { RadioGroupRootProps, RadioGroupRootEmits } from 'reka-ui'
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/radio-group'
+import type { IconProps } from './Icon.vue'
 import type { AcceptableValue, GetItemKeys, GetModelValue, GetModelValueEmits } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
@@ -15,8 +16,13 @@ export type RadioGroupItem = RadioGroupValue | {
   description?: string
   disabled?: boolean
   value?: RadioGroupValue
+  /**
+   * The icon displayed above the label when `indicator` is `hidden`.
+   * @IconifyIcon
+   */
+  icon?: IconProps['name']
   class?: any
-  ui?: Pick<RadioGroup['slots'], 'item' | 'container' | 'base' | 'indicator' | 'wrapper' | 'label' | 'description'>
+  ui?: Pick<RadioGroup['slots'], 'item' | 'container' | 'base' | 'indicator' | 'wrapper' | 'label' | 'icon' | 'description'>
   [key: string]: any
 }
 
@@ -100,6 +106,7 @@ import { useForwardProps } from '../composables/useForwardProps'
 import { useFormField } from '../composables/useFormField'
 import { get } from '../utils'
 import { tv } from '../utils/tv'
+import UIcon from './Icon.vue'
 
 const _props = withDefaults(defineProps<RadioGroupProps<T, VK>>(), {
   valueKey: 'value' as never,
@@ -116,14 +123,23 @@ const appConfig = useAppConfig() as RadioGroup['AppConfig']
 
 const rootProps = useForwardProps(reactivePick(props, 'as', 'loop', 'required'), emits)
 
-const { emitFormChange, emitFormInput, color, name, size, highlight, id: _id, disabled, ariaAttrs } = useFormField<RadioGroupProps<T>>(_props, { bind: false })
+const { emitFormChange, emitFormInput, color: formFieldColor, name, size: formFieldSize, highlight: formFieldHighlight, id: _id, disabled: formFieldDisabled, ariaAttrs } = useFormField<RadioGroupProps<T>>(_props, { bind: false })
 const id = _id.value ?? useId()
 
 // eslint-disable-next-line vue/no-dupe-keys
+const color = computed(() => formFieldColor.value ?? props.color)
+// eslint-disable-next-line vue/no-dupe-keys
+const highlight = computed(() => formFieldHighlight.value ?? props.highlight)
+// eslint-disable-next-line vue/no-dupe-keys
+const size = computed(() => formFieldSize.value ?? props.size)
+
+const disabled = computed(() => formFieldDisabled.value ?? props.disabled)
+
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.radioGroup || {}) })({
-  size: size.value ?? props.size,
-  color: color.value ?? props.color,
-  highlight: highlight.value ?? props.highlight,
+  size: size.value,
+  color: color.value,
+  highlight: highlight.value,
   disabled: disabled.value,
   required: props.required,
   orientation: props.orientation,
@@ -169,6 +185,12 @@ const normalizedItems = computed(() => {
   return props.items.map(normalizeItem)
 })
 
+// Mirrors `Checkbox`'s `labelIcon`: with the indicator hidden the icon has no box to sit in,
+// so it renders above the label instead.
+function labelIcon(item: any) {
+  return props.indicator === 'hidden' ? item.icon : undefined
+}
+
 function onUpdate(value: any) {
   // @ts-expect-error - 'target' does not exist in type 'EventInit'
   const event = new Event('change', { target: { value } })
@@ -211,7 +233,8 @@ function onUpdate(value: any) {
           </RRadioGroupItem>
         </div>
 
-        <div v-if="(item.label || !!slots.label) || (item.description || !!slots.description)" data-slot="wrapper" :class="ui.wrapper({ class: [props.ui?.wrapper, item.ui?.wrapper] })">
+        <div v-if="labelIcon(item) || (item.label || !!slots.label) || (item.description || !!slots.description)" data-slot="wrapper" :class="ui.wrapper({ class: [props.ui?.wrapper, item.ui?.wrapper] })">
+          <UIcon v-if="labelIcon(item)" :name="labelIcon(item)" data-slot="icon" :class="ui.icon({ class: [props.ui?.icon, item.ui?.icon] })" />
           <component :is="(!props.variant || props.variant === 'list') ? Label : 'p'" v-if="item.label || !!slots.label" :for="item.id" data-slot="label" :class="ui.label({ class: [props.ui?.label, item.ui?.label], disabled: item.disabled || disabled })">
             <slot name="label" :item="item" :model-value="(props.modelValue as RadioGroupValue)">
               {{ item.label }}

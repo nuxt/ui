@@ -2,6 +2,9 @@
 title: InputRating
 description: A component to display and collect ratings from users.
 category: form
+keywords:
+  - star rating
+  - stars
 links:
   - label: Rating
     icon: i-custom-reka-ui
@@ -9,7 +12,6 @@ links:
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/InputRating.vue
-navigation.badge: New
 ---
 
 ## Usage

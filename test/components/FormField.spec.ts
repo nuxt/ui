@@ -133,6 +133,20 @@ describe('FormField', () => {
       })
     }
 
+    if (name === 'Slider') {
+      test('binds aria attributes on the thumb', async () => {
+        const wrapper = await renderFormField({
+          props: { error: 'Error' },
+          inputComponent
+        })
+
+        const invalid = wrapper.findAll('[aria-invalid="true"]')
+        expect(invalid).toHaveLength(1)
+        expect(invalid[0]!.attributes('role')).toBe('slider')
+        expect(invalid[0]!.attributes('aria-describedby')).toBe('v-0-0-error')
+      })
+    }
+
     test('binds hints with aria-describedby', async () => {
       const wrapper = await renderFormField({
         props: { hint: 'somehint' },
