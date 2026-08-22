@@ -532,7 +532,7 @@ if (!chatData.value) {
 
 const input = ref('')
 
-// Initialize the Chat class from AI SDK
+// Initialize the useChat composable from AI SDK
 const { messages, status, error, sendMessage, regenerate, stop } = useChat({
   id: chatData.value.id,
   messages: chatData.value.messages,
@@ -632,7 +632,7 @@ onMounted(() => {
 
 Here's a breakdown of the key parts:
 
-**The Chat Class**
+**The `useChat` composable**
 
 The [`useChat`](https://ai-sdk.dev/docs/reference/ai-sdk-ui/use-chat) composable from `@ai-sdk/vue` manages the entire conversation state. It handles:
 - Message history with `messages`
@@ -810,7 +810,7 @@ if (!chatData.value) {
 
 const input = ref('')
 
-// Initialize the Chat class from AI SDK
+// Initialize the useChat composable from AI SDK
 const { messages, status, error, sendMessage, regenerate, stop } = useChat({
   id: chatData.value.id,
   messages: chatData.value.messages,
