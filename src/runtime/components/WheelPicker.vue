@@ -187,7 +187,7 @@ const { dir } = useLocale()
 // eslint-disable-next-line vue/no-dupe-keys
 const modelValue = useVModel<WheelPickerProps<T, VK>, 'modelValue', 'update:modelValue'>(props, 'modelValue', emits, { defaultValue: props.defaultValue })
 
-const { id: _id, name, size: formFieldSize, color, disabled: formFieldDisabled, ariaAttrs, emitFormChange, emitFormInput } = useFormField<WheelPickerProps<T, VK>>(_props, { bind: false })
+const { id: _id, name, size: formFieldSize, color, disabled: formFieldDisabled, ariaAttrs, emitFormBlur, emitFormChange, emitFormInput } = useFormField<WheelPickerProps<T, VK>>(_props, { bind: false })
 const fallbackId = useId()
 // eslint-disable-next-line vue/no-dupe-keys
 const id = computed(() => _id.value ?? fallbackId)
@@ -265,10 +265,18 @@ function indexOfValue(value: WheelPickerValue | undefined): number {
 
 function nearestEnabled(index: number): number {
   const items = normalizedItems.value
+  const n = items.length
+  if (n === 0) return -1
   if (!items[index]?.disabled) return index
-  for (let offset = 1; offset < items.length; offset++) {
-    if (!items[index + offset]?.disabled && items[index + offset]) return index + offset
-    if (!items[index - offset]?.disabled && items[index - offset]) return index - offset
+
+  const loop = props.loop
+  for (let offset = 1; offset < n; offset++) {
+    // In loop mode the search wraps so it can reach enabled items at the
+    // opposite end of the list.
+    const forward = loop ? (index + offset) % n : index + offset
+    const backward = loop ? ((index - offset) % n + n) % n : index - offset
+    if (items[forward] && !items[forward].disabled) return forward
+    if (items[backward] && !items[backward].disabled) return backward
   }
   return -1
 }
@@ -323,8 +331,10 @@ watch(modelValue, (value) => {
   }
 })
 
-// Re-center if the item list changes underneath the current value.
-watch(count, () => {
+// Re-center if the items change underneath the current value. Watching the
+// normalized items (not just the count) also catches reordering or replacing
+// items with another array of the same length.
+watch(normalizedItems, () => {
   const index = indexOfValue(modelValue.value as WheelPickerValue)
   if (index !== -1 && index !== activeIndex.value) {
     engine.scrollToIndex(index, false)
@@ -404,6 +414,15 @@ const cells = computed(() => {
 
 const selectedItem = computed(() => normalizedItems.value[activeIndex.value])
 
+// Each rendered cell needs a unique DOM id: in loop mode several cells map to
+// the same item, so we key the id by the (unique) virtual index. The centered
+// cell — the one whose virtual index rounds the current position — is what
+// `aria-activedescendant` must point to.
+function cellId(virtualIndex: number) {
+  return `${id.value}-cell-${virtualIndex}`
+}
+const activeDescendant = computed(() => count.value > 0 ? cellId(Math.round(engine.position.value)) : undefined)
+
 // In horizontal orientation items are sized to their content, so measure the
 // widest item (to drive the pitch) and the active item (to size the highlight).
 function measure() {
@@ -454,7 +473,7 @@ defineExpose({
       role="listbox"
       :aria-label="props.ariaLabel || name"
       :aria-orientation="props.orientation"
-      :aria-activedescendant="selectedItem?.id"
+      :aria-activedescendant="activeDescendant"
       :aria-disabled="disabled || undefined"
       :aria-readonly="props.readonly || undefined"
       :tabindex="disabled ? -1 : 0"
@@ -468,6 +487,7 @@ defineExpose({
       @pointerup="engine.onPointerUp"
       @pointercancel="engine.onPointerUp"
       @keydown="onKeydown"
+      @blur="emitFormBlur"
     >
       <div
         v-if="!bare"
@@ -481,7 +501,7 @@ defineExpose({
         <div data-slot="list" :class="ui.list({ class: props.ui?.list })">
           <div
             v-for="cell in cells"
-            :id="normalizedItems[cell.index]?.id"
+            :id="cellId(cell.virtualIndex)"
             :key="cell.key"
             role="option"
             :aria-selected="cell.index === activeIndex"

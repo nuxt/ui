@@ -54,6 +54,8 @@ export interface UseWheelPickerOptions {
 const MAX_UNIT_ANGLE = 30
 const WHEEL_SNAP_DELAY = 120
 const MOMENTUM_AMPLITUDE = 90
+// Approximate px-per-line for normalizing line-mode wheel events (deltaMode 1).
+const WHEEL_LINE_HEIGHT = 16
 
 function easeOutCubic(t: number): number {
   return 1 - Math.pow(1 - t, 3)
@@ -75,6 +77,10 @@ export function useWheelPicker(options: UseWheelPickerOptions) {
 
   let rafId: number | null = null
   let wheelTimer: ReturnType<typeof setTimeout> | null = null
+  // Bumped whenever an animation is cancelled/superseded so a stale RAF step
+  // (e.g. one revived by an onChange → scrollToIndex re-entry) bails out instead
+  // of overwriting `rafId` for the newer animation.
+  let animationGeneration = 0
 
   // Pointer drag bookkeeping.
   let dragging = false
@@ -151,6 +157,7 @@ export function useWheelPicker(options: UseWheelPickerOptions) {
   })
 
   function cancelAnimation() {
+    animationGeneration++
     if (rafId !== null) {
       cancelAnimationFrame(rafId)
       rafId = null
@@ -181,6 +188,7 @@ export function useWheelPicker(options: UseWheelPickerOptions) {
   /** Animate `position` to a target value using an ease-out curve. */
   function animateTo(to: number, duration: number) {
     cancelAnimation()
+    const generation = animationGeneration
     const from = position.value
     const distance = to - from
     const startTime = performance.now()
@@ -204,6 +212,9 @@ export function useWheelPicker(options: UseWheelPickerOptions) {
     beginScroll()
 
     const step = (now: number) => {
+      // Bail if a newer animation superseded this one.
+      if (generation !== animationGeneration) return
+
       const elapsed = now - startTime
       const t = Math.min(1, elapsed / total)
       position.value = from + distance * easeOutCubic(t)
@@ -252,7 +263,9 @@ export function useWheelPicker(options: UseWheelPickerOptions) {
       if (animated) {
         animateTo(to, baseDuration())
       } else {
-        settle(to)
+        // Non-animated jumps (v-model / mount sync) must not emit `change`,
+        // matching the non-loop path below. `activeIndex` wraps `position`.
+        position.value = to
       }
       return
     }
@@ -278,9 +291,20 @@ export function useWheelPicker(options: UseWheelPickerOptions) {
     cancelAnimation()
     beginScroll()
 
+    // Normalize wheel deltas to pixels: Firefox reports line (deltaMode 1) or
+    // page (deltaMode 2) units, which would otherwise be far too small.
+    const axisSize = Math.max(1, toValue(options.visibleItems)) * itemSize()
+    const toPixels = (delta: number) => event.deltaMode === 1
+      ? delta * WHEEL_LINE_HEIGHT
+      : event.deltaMode === 2
+        ? delta * axisSize
+        : delta
+
+    const deltaX = toPixels(event.deltaX)
+    const deltaY = toPixels(event.deltaY)
     const primary = isHorizontal()
-      ? (Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY)
-      : event.deltaY
+      ? (Math.abs(deltaX) > Math.abs(deltaY) ? deltaX : deltaY)
+      : deltaY
     const direction = isHorizontal() && toValue(options.rtl) ? -1 : 1
 
     position.value = resist(position.value + (primary * direction * sensitivity()) / itemSize())

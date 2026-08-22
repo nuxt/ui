@@ -169,10 +169,10 @@ describe('WheelPicker', () => {
       const wrapper = await mountSuspended(WheelPicker, {
         props: { items: objectItems, modelValue: 'tok', animationDuration: 0 }
       })
-      // 'ber' (index 3) is disabled, so moving down from 'tok' should be blocked.
+      // 'ber' (last, disabled) is the only item below 'tok', so ArrowDown must
+      // not change the value at all — it snaps back to the current enabled item.
       await wrapper.find('[role="listbox"]').trigger('keydown', { key: 'ArrowDown' })
-      const emitted = wrapper.emitted('update:modelValue')
-      expect(emitted?.at(-1)).not.toEqual(['ber'])
+      expect(wrapper.emitted('update:modelValue')).toBeFalsy()
     })
   })
 
@@ -231,6 +231,11 @@ describe('WheelPicker', () => {
       await wrapper.find('[role="listbox"]').trigger('keydown', { key: 'ArrowDown' })
       await flushPromises()
       expect(wrapper.html()).not.toContain('Error message')
+
+      // Moving back to an invalid value surfaces the error.
+      await wrapper.find('[role="listbox"]').trigger('keydown', { key: 'ArrowUp' })
+      await flushPromises()
+      expect(wrapper.html()).toContain('Error message')
     })
   })
 })
