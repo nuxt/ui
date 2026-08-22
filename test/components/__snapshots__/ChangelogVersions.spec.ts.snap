@@ -14,7 +14,7 @@ exports[`ChangelogVersions > renders with as correctly 1`] = `
           <div data-slot="dotInner" class="size-2 rounded-full bg-primary"></div>
         </div>
       </div>
-      <div data-slot="container" class="flex flex-col mx-auto max-w-2xl">
+      <div data-slot="container" class="flex flex-col mx-auto max-w-2xl lg:w-[calc(100%-16rem)]">
         <div data-slot="header" class="">
           <div data-slot="meta" class="flex items-center gap-3 mb-2"><span data-slot="badge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md text-inverted bg-inverted"><!--v-if--><span data-slot="label" class="truncate">Badge</span>
             <!--v-if--></span><time datetime="2024-12-13T09:32:32.598Z" data-slot="date" class="text-sm/6 text-toned truncate lg:hidden">Dec 13, 2024</time>
@@ -58,7 +58,7 @@ exports[`ChangelogVersions > renders with class correctly 1`] = `
           <div data-slot="dotInner" class="size-2 rounded-full bg-primary"></div>
         </div>
       </div>
-      <div data-slot="container" class="flex flex-col mx-auto max-w-2xl">
+      <div data-slot="container" class="flex flex-col mx-auto max-w-2xl lg:w-[calc(100%-16rem)]">
         <div data-slot="header" class="">
           <div data-slot="meta" class="flex items-center gap-3 mb-2"><span data-slot="badge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md text-inverted bg-inverted"><!--v-if--><span data-slot="label" class="truncate">Badge</span>
             <!--v-if--></span><time datetime="2024-12-13T09:32:32.598Z" data-slot="date" class="text-sm/6 text-toned truncate lg:hidden">Dec 13, 2024</time>
@@ -109,7 +109,7 @@ exports[`ChangelogVersions > renders with indicator slot correctly 1`] = `
           <div data-slot="dotInner" class="size-2 rounded-full bg-primary"></div>
         </div>
       </div>
-      <div data-slot="container" class="flex flex-col mx-auto max-w-2xl">
+      <div data-slot="container" class="flex flex-col mx-auto max-w-2xl lg:w-[calc(100%-16rem)]">
         <div data-slot="header" class="">
           <div data-slot="meta" class="flex items-center gap-3 mb-2"><span data-slot="badge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md text-inverted bg-inverted"><!--v-if--><span data-slot="label" class="truncate">Badge</span>
             <!--v-if--></span><time datetime="2024-12-13T09:32:32.598Z" data-slot="date" class="text-sm/6 text-toned truncate lg:hidden">Dec 13, 2024</time>
@@ -153,7 +153,7 @@ exports[`ChangelogVersions > renders with ui correctly 1`] = `
           <div data-slot="dotInner" class="size-2 rounded-full bg-primary"></div>
         </div>
       </div>
-      <div data-slot="container" class="flex flex-col mx-auto max-w-2xl">
+      <div data-slot="container" class="flex flex-col mx-auto max-w-2xl lg:w-[calc(100%-16rem)]">
         <div data-slot="header" class="">
           <div data-slot="meta" class="flex items-center gap-3 mb-2"><span data-slot="badge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md text-inverted bg-inverted"><!--v-if--><span data-slot="label" class="truncate">Badge</span>
             <!--v-if--></span><time datetime="2024-12-13T09:32:32.598Z" data-slot="date" class="text-sm/6 text-toned truncate lg:hidden">Dec 13, 2024</time>
@@ -197,7 +197,7 @@ exports[`ChangelogVersions > renders with versions correctly 1`] = `
           <div data-slot="dotInner" class="size-2 rounded-full bg-primary"></div>
         </div>
       </div>
-      <div data-slot="container" class="flex flex-col mx-auto max-w-2xl">
+      <div data-slot="container" class="flex flex-col mx-auto max-w-2xl lg:w-[calc(100%-16rem)]">
         <div data-slot="header" class="">
           <div data-slot="meta" class="flex items-center gap-3 mb-2"><span data-slot="badge" class="font-medium inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md text-inverted bg-inverted"><!--v-if--><span data-slot="label" class="truncate">Badge</span>
             <!--v-if--></span><time datetime="2024-12-13T09:32:32.598Z" data-slot="date" class="text-sm/6 text-toned truncate lg:hidden">Dec 13, 2024</time>
