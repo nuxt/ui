@@ -4,12 +4,20 @@ const months = [
   'July', 'August', 'September', 'October', 'November', 'December'
 ]
 
-const days = Array.from({ length: 31 }, (_, i) => i + 1)
 const years = Array.from({ length: 60 }, (_, i) => 1980 + i)
 
 const month = ref('June')
 const day = ref(15)
 const year = ref(2000)
+
+// Derive the valid days from the selected month and year (handles leap years).
+const daysInMonth = computed(() => new Date(year.value, months.indexOf(month.value) + 1, 0).getDate())
+const days = computed(() => Array.from({ length: daysInMonth.value }, (_, i) => i + 1))
+
+// Clamp the day when switching to a shorter month.
+watch(daysInMonth, (max) => {
+  if (day.value > max) day.value = max
+})
 
 const date = computed(() => `${month.value} ${day.value}, ${year.value}`)
 </script>

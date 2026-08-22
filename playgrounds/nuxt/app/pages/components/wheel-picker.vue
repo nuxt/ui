@@ -20,11 +20,17 @@ const readonly = ref(false)
 const haptics = ref(false)
 
 const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-const monthDays = Array.from({ length: 31 }, (_, i) => i + 1)
 const years = Array.from({ length: 60 }, (_, i) => 1980 + i)
 const month = ref('June')
 const day = ref(15)
 const year = ref(2000)
+
+// Derive the valid days from the selected month and year (handles leap years).
+const daysInMonth = computed(() => new Date(year.value, months.indexOf(month.value) + 1, 0).getDate())
+const monthDays = computed(() => Array.from({ length: daysInMonth.value }, (_, i) => i + 1))
+watch(daysInMonth, (max) => {
+  if (day.value > max) day.value = max
+})
 
 const days = [
   'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'
