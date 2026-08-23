@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { axe } from 'vitest-axe'
+import { h } from 'vue'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { renderEach } from '../component-render'
 import PageCard from '../../src/runtime/components/PageCard.vue'
@@ -76,5 +77,14 @@ describe('PageCard', () => {
     })
     expect(wrapper.attributes('aria-label')).toBeUndefined()
     expect(wrapper.find('a').attributes('aria-label')).toBe('test-label')
+  })
+
+  it('renders the link before the container so nested interactive elements stay on top', async () => {
+    const wrapper = await mountSuspended(PageCard, {
+      props: { title: 'Title', to: 'https://github.com/benjamincanac' },
+      slots: { footer: () => h('button', 'Click me') }
+    })
+    const html = wrapper.html()
+    expect(html.indexOf('<a')).toBeLessThan(html.indexOf('<button'))
   })
 })

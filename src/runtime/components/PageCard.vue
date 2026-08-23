@@ -142,6 +142,16 @@ const ariaLabel = computed(() => {
   >
     <div v-if="props.spotlight" data-slot="spotlight" :class="ui.spotlight({ class: props.ui?.spotlight })" />
 
+    <ULink
+      v-if="props.to"
+      :aria-label="ariaLabel"
+      v-bind="{ 'to': props.to, 'target': props.target, ...$attrs, 'data-slot': undefined }"
+      :class="prefix('focus:outline-none peer')"
+      raw
+    >
+      <span :class="prefix('absolute inset-0')" aria-hidden="true" />
+    </ULink>
+
     <div data-slot="container" :class="ui.container({ class: props.ui?.container })">
       <div v-if="!!slots.header || (props.icon || !!slots.leading) || !!slots.body || (props.title || !!slots.title) || (props.description || !!slots.description) || !!slots.footer" data-slot="wrapper" :class="ui.wrapper({ class: props.ui?.wrapper })">
         <div v-if="!!slots.header" data-slot="header" :class="ui.header({ class: props.ui?.header })">
@@ -177,15 +187,5 @@ const ariaLabel = computed(() => {
 
       <slot />
     </div>
-
-    <ULink
-      v-if="props.to"
-      :aria-label="ariaLabel"
-      v-bind="{ 'to': props.to, 'target': props.target, ...$attrs, 'data-slot': undefined }"
-      :class="prefix('focus:outline-none peer')"
-      raw
-    >
-      <span :class="prefix('absolute inset-0')" aria-hidden="true" />
-    </ULink>
   </Primitive>
 </template>
