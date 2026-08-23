@@ -116,6 +116,7 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.pageCard || {}) 
   reverse: props.reverse,
   variant: props.variant,
   to: !!props.to || !!props.onClick,
+  overlay: !!props.to,
   title: !!props.title || !!slots.title,
   highlight: props.highlight,
   highlightColor: props.highlightColor,

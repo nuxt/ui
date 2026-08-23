@@ -84,9 +84,19 @@ describe('PageCard', () => {
       props: { title: 'Title', to: 'https://github.com/benjamincanac' },
       slots: { footer: () => h('button', 'Click me') }
     })
+    expect(wrapper.find('a').exists()).toBe(true)
     const html = wrapper.html()
     expect(html.indexOf('<a')).toBeLessThan(html.indexOf('<button'))
     expect(wrapper.find('[data-slot="container"]').classes()).toContain('pointer-events-none')
     expect(wrapper.find('[data-slot="wrapper"]').classes()).toContain('pointer-events-auto')
+  })
+
+  it('does not restrict pointer events when only `onClick` is set', async () => {
+    const wrapper = await mountSuspended(PageCard, {
+      props: { title: 'Title', onClick: () => {} },
+      slots: { footer: () => h('button', 'Click me') }
+    })
+    expect(wrapper.find('[data-slot="container"]').classes()).not.toContain('pointer-events-none')
+    expect(wrapper.find('[data-slot="wrapper"]').classes()).not.toContain('pointer-events-auto')
   })
 })
