@@ -601,7 +601,7 @@ exports[`PageCard > renders with title slot correctly 1`] = `
 exports[`PageCard > renders with to correctly 1`] = `
 "<div data-orientation="vertical" data-slot="root" class="relative flex rounded-lg bg-default ring ring-default outline-primary/25 has-[>a:focus-visible]:outline-3 transition hover:bg-elevated/50 has-[>a:focus-visible]:ring-primary">
   <!--v-if--><a href="https://github.com/benjamincanac" rel="noopener noreferrer" aria-label="Card link" class="focus:outline-none peer"><span class="absolute inset-0" aria-hidden="true"></span></a>
-  <div data-slot="container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
+  <div data-slot="container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6 pointer-events-none">
     <!--v-if-->
   </div>
 </div>"
@@ -664,8 +664,8 @@ exports[`PageCard > renders with variant ghost highlight correctly 1`] = `
 exports[`PageCard > renders with variant ghost to correctly 1`] = `
 "<div data-orientation="vertical" data-slot="root" class="relative flex rounded-lg outline-primary/25 has-[>a:focus-visible]:outline-3 transition hover:bg-elevated/50">
   <!--v-if--><a href="https://github.com/benjamincanac" rel="noopener noreferrer" aria-label="Title" class="focus:outline-none peer"><span class="absolute inset-0" aria-hidden="true"></span></a>
-  <div data-slot="container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
-    <div data-slot="wrapper" class="flex flex-col flex-1 items-start">
+  <div data-slot="container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6 pointer-events-none">
+    <div data-slot="wrapper" class="flex flex-col flex-1 items-start pointer-events-auto">
       <!--v-if-->
       <div data-slot="leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="leadingIcon"></span></div>
       <div data-slot="body" class="flex-1">
@@ -717,8 +717,8 @@ exports[`PageCard > renders with variant naked highlight correctly 1`] = `
 exports[`PageCard > renders with variant naked to correctly 1`] = `
 "<div data-orientation="vertical" data-slot="root" class="relative flex rounded-lg outline-primary/25 has-[>a:focus-visible]:outline-3 transition">
   <!--v-if--><a href="https://github.com/benjamincanac" rel="noopener noreferrer" aria-label="Title" class="focus:outline-none peer"><span class="absolute inset-0" aria-hidden="true"></span></a>
-  <div data-slot="container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-0 sm:p-0">
-    <div data-slot="wrapper" class="flex flex-col flex-1 items-start">
+  <div data-slot="container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-0 sm:p-0 pointer-events-none">
+    <div data-slot="wrapper" class="flex flex-col flex-1 items-start pointer-events-auto">
       <!--v-if-->
       <div data-slot="leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="leadingIcon"></span></div>
       <div data-slot="body" class="flex-1">
@@ -770,8 +770,8 @@ exports[`PageCard > renders with variant outline highlight correctly 1`] = `
 exports[`PageCard > renders with variant outline to correctly 1`] = `
 "<div data-orientation="vertical" data-slot="root" class="relative flex rounded-lg bg-default ring ring-default outline-primary/25 has-[>a:focus-visible]:outline-3 transition hover:bg-elevated/50 has-[>a:focus-visible]:ring-primary">
   <!--v-if--><a href="https://github.com/benjamincanac" rel="noopener noreferrer" aria-label="Title" class="focus:outline-none peer"><span class="absolute inset-0" aria-hidden="true"></span></a>
-  <div data-slot="container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
-    <div data-slot="wrapper" class="flex flex-col flex-1 items-start">
+  <div data-slot="container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6 pointer-events-none">
+    <div data-slot="wrapper" class="flex flex-col flex-1 items-start pointer-events-auto">
       <!--v-if-->
       <div data-slot="leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="leadingIcon"></span></div>
       <div data-slot="body" class="flex-1">
@@ -823,8 +823,8 @@ exports[`PageCard > renders with variant soft highlight correctly 1`] = `
 exports[`PageCard > renders with variant soft to correctly 1`] = `
 "<div data-orientation="vertical" data-slot="root" class="relative flex rounded-lg bg-elevated/50 outline-primary/25 has-[>a:focus-visible]:outline-3 transition hover:bg-elevated">
   <!--v-if--><a href="https://github.com/benjamincanac" rel="noopener noreferrer" aria-label="Title" class="focus:outline-none peer"><span class="absolute inset-0" aria-hidden="true"></span></a>
-  <div data-slot="container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
-    <div data-slot="wrapper" class="flex flex-col flex-1 items-start">
+  <div data-slot="container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6 pointer-events-none">
+    <div data-slot="wrapper" class="flex flex-col flex-1 items-start pointer-events-auto">
       <!--v-if-->
       <div data-slot="leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="leadingIcon"></span></div>
       <div data-slot="body" class="flex-1">
@@ -876,8 +876,8 @@ exports[`PageCard > renders with variant solid highlight correctly 1`] = `
 exports[`PageCard > renders with variant solid to correctly 1`] = `
 "<div data-orientation="vertical" data-slot="root" class="relative flex rounded-lg bg-inverted text-inverted outline-primary/25 has-[>a:focus-visible]:outline-3 transition hover:bg-inverted/90">
   <!--v-if--><a href="https://github.com/benjamincanac" rel="noopener noreferrer" aria-label="Title" class="focus:outline-none peer"><span class="absolute inset-0" aria-hidden="true"></span></a>
-  <div data-slot="container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
-    <div data-slot="wrapper" class="flex flex-col flex-1 items-start">
+  <div data-slot="container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6 pointer-events-none">
+    <div data-slot="wrapper" class="flex flex-col flex-1 items-start pointer-events-auto">
       <!--v-if-->
       <div data-slot="leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="leadingIcon"></span></div>
       <div data-slot="body" class="flex-1">
@@ -929,8 +929,8 @@ exports[`PageCard > renders with variant subtle highlight correctly 1`] = `
 exports[`PageCard > renders with variant subtle to correctly 1`] = `
 "<div data-orientation="vertical" data-slot="root" class="relative flex rounded-lg bg-elevated/50 ring ring-default outline-primary/25 has-[>a:focus-visible]:outline-3 transition hover:bg-elevated hover:ring-accented has-[>a:focus-visible]:ring-primary">
   <!--v-if--><a href="https://github.com/benjamincanac" rel="noopener noreferrer" aria-label="Title" class="focus:outline-none peer"><span class="absolute inset-0" aria-hidden="true"></span></a>
-  <div data-slot="container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6">
-    <div data-slot="wrapper" class="flex flex-col flex-1 items-start">
+  <div data-slot="container" class="relative flex flex-col flex-1 lg:grid gap-x-8 gap-y-4 p-4 sm:p-6 pointer-events-none">
+    <div data-slot="wrapper" class="flex flex-col flex-1 items-start pointer-events-auto">
       <!--v-if-->
       <div data-slot="leading" class="inline-flex items-center mb-2.5"><span class="iconify i-lucide:house size-5 shrink-0 text-primary" aria-hidden="true" data-slot="leadingIcon"></span></div>
       <div data-slot="body" class="flex-1">

@@ -79,12 +79,14 @@ describe('PageCard', () => {
     expect(wrapper.find('a').attributes('aria-label')).toBe('test-label')
   })
 
-  it('renders the link before the container so nested interactive elements stay on top', async () => {
+  it('keeps nested interactive elements above the link overlay', async () => {
     const wrapper = await mountSuspended(PageCard, {
       props: { title: 'Title', to: 'https://github.com/benjamincanac' },
       slots: { footer: () => h('button', 'Click me') }
     })
     const html = wrapper.html()
     expect(html.indexOf('<a')).toBeLessThan(html.indexOf('<button'))
+    expect(wrapper.find('[data-slot="container"]').classes()).toContain('pointer-events-none')
+    expect(wrapper.find('[data-slot="wrapper"]').classes()).toContain('pointer-events-auto')
   })
 })

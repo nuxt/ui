@@ -56,7 +56,9 @@ export default (options: Required<ModuleOptions>) => ({
     },
     to: {
       true: {
-        root: ['outline-primary/25 has-[>a:focus-visible]:outline-3', options.theme.transitions && 'transition']
+        root: ['outline-primary/25 has-[>a:focus-visible]:outline-3', options.theme.transitions && 'transition'],
+        container: 'pointer-events-none',
+        wrapper: 'pointer-events-auto'
       }
     },
     title: {
