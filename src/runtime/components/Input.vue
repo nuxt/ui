@@ -136,12 +136,15 @@ function updateInput(value: string | null | undefined) {
     value = looseToNumber(value)
   }
 
-  if (props.modelModifiers?.nullable) {
-    value ||= null
+  // Only empty values are mapped, `0` is a value on its own with the `number` modifier
+  const isEmpty = value === '' || value === null || value === undefined
+
+  if (props.modelModifiers?.nullable && isEmpty) {
+    value = null
   }
 
-  if (props.modelModifiers?.optional && !props.modelModifiers?.nullable && value !== null) {
-    value ||= undefined
+  if (props.modelModifiers?.optional && !props.modelModifiers?.nullable && value !== null && isEmpty) {
+    value = undefined
   }
 
   modelValue.value = value as ApplyModifiers<T, Mod>
