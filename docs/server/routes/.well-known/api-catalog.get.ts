@@ -1,4 +1,4 @@
-const DOMAIN = 'https://ui.nuxt.com'
+const DOMAIN = SITE_URL
 
 export default defineCachedEventHandler((event) => {
   const linkset = {
@@ -14,6 +14,23 @@ export default defineCachedEventHandler((event) => {
         'service-doc': [
           {
             href: `${DOMAIN}/docs/getting-started/ai/mcp`,
+            type: 'text/html'
+          }
+        ]
+      },
+      {
+        // The OpenAPI document describes the whole site (`servers` is the
+        // origin), so it is anchored at the origin rather than at `/api`.
+        'anchor': `${DOMAIN}/`,
+        'service-desc': [
+          {
+            href: `${DOMAIN}/openapi.json`,
+            type: 'application/vnd.oai.openapi+json'
+          }
+        ],
+        'service-doc': [
+          {
+            href: `${DOMAIN}/docs`,
             type: 'text/html'
           }
         ]

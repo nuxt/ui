@@ -1,8 +1,12 @@
 import { queryCollection } from '@nuxt/content/server'
 
-const DOMAIN = 'https://ui.nuxt.com'
+const DOMAIN = SITE_URL
 
-export default defineCachedEventHandler(async (event) => {
+// Prerendered from `app/pages/index.vue`, so the response is never computed
+// at runtime in production. It used to be a `defineCachedEventHandler` with
+// `swr`, which hands the prerenderer the previous build's cached body when the
+// build cache survives between builds.
+export default defineEventHandler(async (event) => {
   const page = await queryCollection(event, 'index').first() as any
 
   const title = page?.title || 'Nuxt UI'
@@ -20,6 +24,8 @@ export default defineCachedEventHandler(async (event) => {
   const body = `# ${title}
 
 ${description}
+
+${renderLlmsSection(WHEN_TO_USE_SECTION)}
 
 ## About
 
@@ -54,6 +60,7 @@ Nuxt UI is a free and open source Vue UI library powered by [Reka UI](https://re
 - MCP Server Card: <${DOMAIN}/.well-known/mcp/server-card.json>
 - MCP endpoint: <${DOMAIN}/mcp>
 - API Catalog: <${DOMAIN}/.well-known/api-catalog>
+- OpenAPI specification: <${DOMAIN}/openapi.json>
 - Agent Skill: <${DOMAIN}/.well-known/skills/nuxt-ui/SKILL.md>
 - Skills index: <${DOMAIN}/.well-known/skills/index.json>
 
@@ -71,7 +78,4 @@ Nuxt UI is a free and open source Vue UI library powered by [Reka UI](https://re
     `<${DOMAIN}>; rel="alternate"; type="text/html"`
   ].join(', '))
   return frontmatter + body
-}, {
-  swr: true,
-  maxAge: 60 * 60
 })

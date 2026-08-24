@@ -9,9 +9,11 @@ export default defineNitroPlugin((nitroApp) => {
   nitroApp.hooks.hook('llms:generate', (_, { sections }) => {
     sections.forEach((section) => {
       if (section.title !== 'Documentation Sets') {
-        section.links = section.links.map(link => ({
+        section.links = (section.links || []).map(link => ({
           ...link,
-          href: transformRawLink(link.href)
+          // Only documentation links have a markdown representation, the MCP
+          // endpoint and the `.well-known` resources have to stay as they are.
+          href: toRawDocsLink(link.href)
         }))
       }
     })
@@ -22,8 +24,11 @@ export default defineNitroPlugin((nitroApp) => {
       sections.push(docSet)
     }
   })
-})
 
-function transformRawLink(href: string) {
-  return `${href.replace(/^https:\/\/ui.nuxt.com/, 'https://ui.nuxt.com/raw')}.md`
-}
+  // `llms-full.txt` is built from the documentation pages alone, so the
+  // when-to-use guidance has to be prepended here to reach agents that only
+  // read the full document.
+  nitroApp.hooks.hook('llms:generate:full', (_event, _options, contents) => {
+    contents.unshift(renderLlmsSection(WHEN_TO_USE_SECTION))
+  })
+})

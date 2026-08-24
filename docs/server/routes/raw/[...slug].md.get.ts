@@ -4,17 +4,26 @@ import { queryCollection } from '@nuxt/content/server'
 import type { Collections, PageCollectionItemBase } from '@nuxt/content'
 import collections from '#content/manifest'
 import { transformMDC } from '../../utils/transformMDC'
+import { SITE_URL } from '../../utils/markdownNegotiation'
 
-const DOMAIN = 'https://ui.nuxt.com'
+const DOMAIN = SITE_URL
+
+/**
+ * A missing page has to answer a real 404 so agents can tell an unknown URL
+ * from an empty one. `server/error.ts` renders it as markdown for `/raw/**`,
+ * reporting the documentation path the client asked for.
+ */
+function notFound(path: string) {
+  return createError({ statusCode: 404, statusMessage: 'Page Not Found', data: { path } })
+}
 
 export default defineEventHandler(async (event) => {
   const slug = getRouterParams(event)['slug.md']
   if (!slug?.endsWith('.md')) {
-    setResponseHeader(event, 'Content-Type', 'text/markdown; charset=utf-8')
-    return '---\ntitle: Not Found\n---\n\n# Page Not Found\n\nThe requested page does not exist. Browse the [sitemap](/sitemap.md) to find available pages.\n'
+    throw notFound(event.path)
   }
 
-  let path = withLeadingSlash(slug.replace('.md', ''))
+  let path = withLeadingSlash(slug.slice(0, -3))
   if (path.endsWith('/index')) {
     path = path.substring(0, path.length - 6)
   }
@@ -30,8 +39,7 @@ export default defineEventHandler(async (event) => {
   }
 
   if (!page) {
-    setResponseHeader(event, 'Content-Type', 'text/markdown; charset=utf-8')
-    return `---\ntitle: Not Found\n---\n\n# Page Not Found\n\nThe page \`${path}\` does not exist. Browse the [sitemap](/sitemap.md) to find available pages.\n`
+    throw notFound(path)
   }
 
   await transformMDC(event, page as any)

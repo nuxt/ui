@@ -4,7 +4,7 @@ function xmlEscape(str: string): string {
   return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;')
 }
 
-const DOMAIN = 'https://ui.nuxt.com'
+const DOMAIN = SITE_URL
 
 export default defineEventHandler(async (event) => {
   const pages = await queryCollection(event, 'docs')

@@ -1,6 +1,6 @@
 import { listMcpDefinitions } from '@nuxtjs/mcp-toolkit/server'
 
-const DOMAIN = 'https://ui.nuxt.com'
+const DOMAIN = SITE_URL
 
 export default defineCachedEventHandler(async (event) => {
   const { version } = useRuntimeConfig(event).public

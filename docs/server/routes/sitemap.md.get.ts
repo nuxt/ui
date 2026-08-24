@@ -1,6 +1,6 @@
 import { queryCollection } from '@nuxt/content/server'
 
-const DOMAIN = 'https://ui.nuxt.com'
+const DOMAIN = SITE_URL
 
 export default defineEventHandler(async (event) => {
   const pages = await queryCollection(event, 'docs')
