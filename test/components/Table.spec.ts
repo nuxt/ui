@@ -216,17 +216,20 @@ describe('Table', () => {
 
   it('sets aria-sort on sortable th elements', async () => {
     const sortableColumns: TableColumn<typeof data[number]>[] = [
-      { accessorKey: 'id', header: 'Id' },
-      { accessorKey: 'email', header: 'Email', enableSorting: false }
+      { accessorKey: 'id', header: 'Id', enableSorting: true },
+      { accessorKey: 'email', header: 'Email', enableSorting: false },
+      { accessorKey: 'amount', header: 'Amount' }
     ]
 
     const wrapper = await mountSuspended(Table, {
       props: { data, columns: sortableColumns as any }
     })
 
-    const [idTh, emailTh] = wrapper.findAll('th')
+    const [idTh, emailTh, amountTh] = wrapper.findAll('th')
     expect(idTh!.attributes('aria-sort')).toBe('none')
     expect(emailTh!.attributes('aria-sort')).toBeUndefined()
+    // No `enableSorting` means no sort UI, so the column must not claim to be sortable.
+    expect(amountTh!.attributes('aria-sort')).toBeUndefined()
 
     await wrapper.setProps({ sorting: [{ id: 'id', desc: false }] })
     expect(wrapper.findAll('th')[0]!.attributes('aria-sort')).toBe('ascending')
@@ -237,8 +240,8 @@ describe('Table', () => {
 
   it('only sets a directional aria-sort on the primary sort column', async () => {
     const sortableColumns: TableColumn<typeof data[number]>[] = [
-      { accessorKey: 'id', header: 'Id' },
-      { accessorKey: 'email', header: 'Email' }
+      { accessorKey: 'id', header: 'Id', enableSorting: true },
+      { accessorKey: 'email', header: 'Email', enableSorting: true }
     ]
 
     const wrapper = await mountSuspended(Table, {
@@ -254,10 +257,40 @@ describe('Table', () => {
     expect(idTh!.attributes('aria-sort')).toBe('none')
   })
 
+  it('skips sort keys with no th on screen when picking the primary sort column', async () => {
+    const sortableColumns: TableColumn<typeof data[number]>[] = [
+      { accessorKey: 'id', header: 'Id', enableSorting: true },
+      { accessorKey: 'email', header: 'Email', enableSorting: true }
+    ]
+
+    const unknownIdWrapper = await mountSuspended(Table, {
+      props: {
+        data,
+        columns: sortableColumns as any,
+        sorting: [{ id: 'unknown', desc: false }, { id: 'id', desc: true }]
+      }
+    })
+
+    expect(unknownIdWrapper.findAll('th')[0]!.attributes('aria-sort')).toBe('descending')
+
+    const hiddenColumnWrapper = await mountSuspended(Table, {
+      props: {
+        data,
+        columns: sortableColumns as any,
+        columnVisibility: { email: false },
+        sorting: [{ id: 'email', desc: false }, { id: 'id', desc: true }]
+      }
+    })
+
+    const visibleThs = hiddenColumnWrapper.findAll('thead th')
+    expect(visibleThs.length).toBe(1)
+    expect(visibleThs[0]!.attributes('aria-sort')).toBe('descending')
+  })
+
   it('does not set aria-sort on footer or placeholder th elements', async () => {
     const groupedColumns: TableColumn<typeof data[number]>[] = [
-      { header: 'Group', columns: [{ accessorKey: 'id', header: 'Id', footer: 'Id total' }] },
-      { accessorKey: 'email', header: 'Email' }
+      { header: 'Group', columns: [{ accessorKey: 'id', header: 'Id', footer: 'Id total', enableSorting: true }] },
+      { accessorKey: 'email', header: 'Email', enableSorting: true }
     ]
 
     const wrapper = await mountSuspended(Table, {
@@ -266,8 +299,11 @@ describe('Table', () => {
 
     const [, emailPlaceholderTh] = wrapper.findAll('thead th')
     expect(emailPlaceholderTh!.attributes('aria-sort')).toBeUndefined()
+    // The real email header sits on the second header row and does carry the attribute.
+    expect(wrapper.findAll('thead tr')[1]!.findAll('th')[1]!.attributes('aria-sort')).toBe('ascending')
 
     const footerThs = wrapper.findAll('tfoot th')
+    expect(footerThs.length).toBeGreaterThan(0)
     expect(footerThs.every(th => th.attributes('aria-sort') === undefined)).toBe(true)
   })
 

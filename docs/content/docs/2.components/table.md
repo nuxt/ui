@@ -473,14 +473,16 @@ class: '!p-0'
 
 You can update a column `header` to render a [Button](/docs/components/button) component inside the `header` to toggle the sorting state using the TanStack Table [Sorting APIs](https://tanstack.com/table/v8/docs/api/features/sorting).
 
+Set `enableSorting: true` on those columns as well. It puts `aria-sort` on the `<th>` so screen readers announce the column as sortable and read its current direction.
+
 ::component-example
 ---
 prettier: true
 collapse: true
 name: 'table-column-sorting-example'
 highlights:
-  - 90
-  - 105
+  - 91
+  - 106
 class: '!p-0'
 ---
 ::
@@ -497,8 +499,8 @@ prettier: true
 collapse: true
 name: 'table-column-sorting-reusable-example'
 highlights:
-  - 110
-  - 161
+  - 112
+  - 163
 class: '!p-0'
 ---
 ::

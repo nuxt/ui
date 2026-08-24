@@ -77,9 +77,11 @@ const columns: TableColumn<Payment>[] = [{
   }
 }, {
   accessorKey: 'email',
+  enableSorting: true,
   header: ({ column }) => getHeader(column, 'Email')
 }, {
   accessorKey: 'amount',
+  enableSorting: true,
   header: ({ column }) => getHeader(column, 'Amount'),
   meta: {
     class: {

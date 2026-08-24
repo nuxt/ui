@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
-import type { Ref, WatchOptions, ComponentPublicInstance, VNode } from 'vue'
+import type { AriaAttributes, Ref, WatchOptions, ComponentPublicInstance, VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import type {
   Cell,
@@ -529,18 +529,31 @@ function getColumnStyles(column: Column<T>): Record<string, string> {
   return styles
 }
 
-function getAriaSort(header: Header<T, unknown>): 'ascending' | 'descending' | 'none' | undefined {
-  if (header.isPlaceholder || !header.column.getCanSort()) {
+function getAriaSort(header: Header<T, unknown>): AriaAttributes['aria-sort'] {
+  // `getCanSort()` is true for every accessor column, so it cannot tell a column that offers sort
+  // UI from a plain one. Only an explicit `enableSorting: true` marks a header as sortable.
+  if (header.isPlaceholder || header.column.columnDef.enableSorting !== true) {
     return undefined
   }
 
-  // Only the primary sort key gets a direction: aria-sort is a single-column pattern.
-  if (header.column.getSortIndex() !== 0) {
+  const sorted = header.column.getIsSorted()
+  if (!sorted) {
     return 'none'
   }
 
-  const sorted = header.column.getIsSorted()
-  return sorted === 'asc' ? 'ascending' : sorted === 'desc' ? 'descending' : 'none'
+  // `aria-sort` is a single-column pattern, so the direction goes to the first sort key that has a
+  // header on screen. Keys for an unknown id, a hidden column or a column with no sort UI are
+  // skipped, otherwise every header would report `none` while the rows are sorted.
+  const sortableIds = new Set(tableApi.getVisibleLeafColumns()
+    .filter(column => column.columnDef.enableSorting === true)
+    .map(column => column.id))
+  const primary = tableApi.getState().sorting.find(({ id }) => sortableIds.has(id))
+
+  if (primary?.id !== header.column.id) {
+    return 'none'
+  }
+
+  return sorted === 'asc' ? 'ascending' : 'descending'
 }
 
 watch(() => props.data, () => {

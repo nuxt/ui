@@ -6,10 +6,10 @@ exports[`Table > renders with as correctly 1`] = `
     <!--v-if-->
     <thead data-slot="thead" class="relative">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
       </tr>
       <tr data-slot="separator" class="absolute z-1 start-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
@@ -61,10 +61,10 @@ exports[`Table > renders with body-bottom slot correctly 1`] = `
     <!--v-if-->
     <thead data-slot="thead" class="relative">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
       </tr>
       <tr data-slot="separator" class="absolute z-1 start-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
@@ -116,10 +116,10 @@ exports[`Table > renders with body-top slot correctly 1`] = `
     <!--v-if-->
     <thead data-slot="thead" class="relative">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
       </tr>
       <tr data-slot="separator" class="absolute z-1 start-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
@@ -170,10 +170,10 @@ exports[`Table > renders with caption correctly 1`] = `
     <caption data-slot="caption" class="sr-only">Table caption</caption>
     <thead data-slot="thead" class="relative">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
       </tr>
       <tr data-slot="separator" class="absolute z-1 start-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
@@ -225,10 +225,10 @@ exports[`Table > renders with caption slot correctly 1`] = `
     <caption data-slot="caption" class="sr-only">Caption slot</caption>
     <thead data-slot="thead" class="relative">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
       </tr>
       <tr data-slot="separator" class="absolute z-1 start-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
@@ -280,10 +280,10 @@ exports[`Table > renders with cell slot correctly 1`] = `
     <!--v-if-->
     <thead data-slot="thead" class="relative">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
       </tr>
       <tr data-slot="separator" class="absolute z-1 start-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
@@ -335,10 +335,10 @@ exports[`Table > renders with class correctly 1`] = `
     <!--v-if-->
     <thead data-slot="thead" class="relative">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
       </tr>
       <tr data-slot="separator" class="absolute z-1 start-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
@@ -403,13 +403,13 @@ exports[`Table > renders with columns correctly 1`] = `
             </div>
           </div>
         </th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">#</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Date</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent -mx-2.5"><span class="iconify i-lucide:arrow-up-down shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span><span data-slot="label" class="truncate">Email</span>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">#</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Date</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent -mx-2.5"><span class="iconify i-lucide:arrow-up-down shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span><span data-slot="label" class="truncate">Email</span>
             <!--v-if-->
           </button></th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted font-semibold [&amp;:has([role=checkbox])]:pe-0 text-right">Amount</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted font-semibold [&amp;:has([role=checkbox])]:pe-0 text-right">Amount</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">
           <!---->
         </th>
@@ -582,10 +582,10 @@ exports[`Table > renders with data correctly 1`] = `
     <!--v-if-->
     <thead data-slot="thead" class="relative">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
       </tr>
       <tr data-slot="separator" class="absolute z-1 start-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
@@ -668,13 +668,13 @@ exports[`Table > renders with empty slot correctly 1`] = `
             </div>
           </div>
         </th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">#</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Date</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent -mx-2.5"><span class="iconify i-lucide:arrow-up-down shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span><span data-slot="label" class="truncate">Email</span>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">#</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Date</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent -mx-2.5"><span class="iconify i-lucide:arrow-up-down shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span><span data-slot="label" class="truncate">Email</span>
             <!--v-if-->
           </button></th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted font-semibold [&amp;:has([role=checkbox])]:pe-0 text-right">Amount</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted font-semibold [&amp;:has([role=checkbox])]:pe-0 text-right">Amount</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">
           <!---->
         </th>
@@ -720,10 +720,10 @@ exports[`Table > renders with expanded slot correctly 1`] = `
     <!--v-if-->
     <thead data-slot="thead" class="relative">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
       </tr>
       <tr data-slot="separator" class="absolute z-1 start-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
@@ -775,10 +775,10 @@ exports[`Table > renders with header slot correctly 1`] = `
     <!--v-if-->
     <thead data-slot="thead" class="relative">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">ID Header slot</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">ID Header slot</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
       </tr>
       <tr data-slot="separator" class="absolute z-1 start-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
@@ -830,10 +830,10 @@ exports[`Table > renders with loading animation carousel correctly 1`] = `
     <!--v-if-->
     <thead data-slot="thead" class="relative after:absolute after:z-1 after:h-px motion-reduce:after:inset-x-0 motion-reduce:after:animate-pulse after:bg-primary motion-safe:after:animate-[carousel_2s_linear_infinite] motion-safe:rtl:after:animate-[carousel-rtl_2s_linear_infinite]">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
       </tr>
       <tr data-slot="separator" class="absolute z-1 start-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
@@ -885,10 +885,10 @@ exports[`Table > renders with loading animation carousel-inverse correctly 1`] =
     <!--v-if-->
     <thead data-slot="thead" class="relative after:absolute after:z-1 after:h-px motion-reduce:after:inset-x-0 motion-reduce:after:animate-pulse after:bg-primary motion-safe:after:animate-[carousel-inverse_2s_linear_infinite] motion-safe:rtl:after:animate-[carousel-inverse-rtl_2s_linear_infinite]">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
       </tr>
       <tr data-slot="separator" class="absolute z-1 start-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
@@ -940,10 +940,10 @@ exports[`Table > renders with loading animation elastic correctly 1`] = `
     <!--v-if-->
     <thead data-slot="thead" class="relative after:absolute after:z-1 after:h-px motion-reduce:after:inset-x-0 motion-reduce:after:animate-pulse after:bg-primary motion-safe:after:animate-[elastic_2s_var(--ease-in-out)_infinite]">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
       </tr>
       <tr data-slot="separator" class="absolute z-1 start-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
@@ -995,10 +995,10 @@ exports[`Table > renders with loading animation swing correctly 1`] = `
     <!--v-if-->
     <thead data-slot="thead" class="relative after:absolute after:z-1 after:h-px motion-reduce:after:inset-x-0 motion-reduce:after:animate-pulse after:bg-primary motion-safe:after:animate-[swing_2s_var(--ease-in-out)_infinite]">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
       </tr>
       <tr data-slot="separator" class="absolute z-1 start-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
@@ -1050,10 +1050,10 @@ exports[`Table > renders with loading color error correctly 1`] = `
     <!--v-if-->
     <thead data-slot="thead" class="relative after:absolute after:z-1 after:h-px motion-reduce:after:inset-x-0 motion-reduce:after:animate-pulse after:bg-error motion-safe:after:animate-[carousel_2s_linear_infinite] motion-safe:rtl:after:animate-[carousel-rtl_2s_linear_infinite]">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
       </tr>
       <tr data-slot="separator" class="absolute z-1 start-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
@@ -1105,10 +1105,10 @@ exports[`Table > renders with loading color info correctly 1`] = `
     <!--v-if-->
     <thead data-slot="thead" class="relative after:absolute after:z-1 after:h-px motion-reduce:after:inset-x-0 motion-reduce:after:animate-pulse after:bg-info motion-safe:after:animate-[carousel_2s_linear_infinite] motion-safe:rtl:after:animate-[carousel-rtl_2s_linear_infinite]">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
       </tr>
       <tr data-slot="separator" class="absolute z-1 start-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
@@ -1160,10 +1160,10 @@ exports[`Table > renders with loading color neutral correctly 1`] = `
     <!--v-if-->
     <thead data-slot="thead" class="relative after:absolute after:z-1 after:h-px motion-reduce:after:inset-x-0 motion-reduce:after:animate-pulse after:bg-inverted motion-safe:after:animate-[carousel_2s_linear_infinite] motion-safe:rtl:after:animate-[carousel-rtl_2s_linear_infinite]">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
       </tr>
       <tr data-slot="separator" class="absolute z-1 start-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
@@ -1215,10 +1215,10 @@ exports[`Table > renders with loading color primary correctly 1`] = `
     <!--v-if-->
     <thead data-slot="thead" class="relative after:absolute after:z-1 after:h-px motion-reduce:after:inset-x-0 motion-reduce:after:animate-pulse after:bg-primary motion-safe:after:animate-[carousel_2s_linear_infinite] motion-safe:rtl:after:animate-[carousel-rtl_2s_linear_infinite]">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
       </tr>
       <tr data-slot="separator" class="absolute z-1 start-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
@@ -1270,10 +1270,10 @@ exports[`Table > renders with loading color secondary correctly 1`] = `
     <!--v-if-->
     <thead data-slot="thead" class="relative after:absolute after:z-1 after:h-px motion-reduce:after:inset-x-0 motion-reduce:after:animate-pulse after:bg-secondary motion-safe:after:animate-[carousel_2s_linear_infinite] motion-safe:rtl:after:animate-[carousel-rtl_2s_linear_infinite]">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
       </tr>
       <tr data-slot="separator" class="absolute z-1 start-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
@@ -1325,10 +1325,10 @@ exports[`Table > renders with loading color success correctly 1`] = `
     <!--v-if-->
     <thead data-slot="thead" class="relative after:absolute after:z-1 after:h-px motion-reduce:after:inset-x-0 motion-reduce:after:animate-pulse after:bg-success motion-safe:after:animate-[carousel_2s_linear_infinite] motion-safe:rtl:after:animate-[carousel-rtl_2s_linear_infinite]">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
       </tr>
       <tr data-slot="separator" class="absolute z-1 start-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
@@ -1380,10 +1380,10 @@ exports[`Table > renders with loading color warning correctly 1`] = `
     <!--v-if-->
     <thead data-slot="thead" class="relative after:absolute after:z-1 after:h-px motion-reduce:after:inset-x-0 motion-reduce:after:animate-pulse after:bg-warning motion-safe:after:animate-[carousel_2s_linear_infinite] motion-safe:rtl:after:animate-[carousel-rtl_2s_linear_infinite]">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
       </tr>
       <tr data-slot="separator" class="absolute z-1 start-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
@@ -1435,10 +1435,10 @@ exports[`Table > renders with loading correctly 1`] = `
     <!--v-if-->
     <thead data-slot="thead" class="relative after:absolute after:z-1 after:h-px motion-reduce:after:inset-x-0 motion-reduce:after:animate-pulse after:bg-primary motion-safe:after:animate-[carousel_2s_linear_infinite] motion-safe:rtl:after:animate-[carousel-rtl_2s_linear_infinite]">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
       </tr>
       <tr data-slot="separator" class="absolute z-1 start-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
@@ -1503,13 +1503,13 @@ exports[`Table > renders with loading slot correctly 1`] = `
             </div>
           </div>
         </th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">#</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Date</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent -mx-2.5"><span class="iconify i-lucide:arrow-up-down shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span><span data-slot="label" class="truncate">Email</span>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">#</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Date</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent -mx-2.5"><span class="iconify i-lucide:arrow-up-down shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span><span data-slot="label" class="truncate">Email</span>
             <!--v-if-->
           </button></th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted font-semibold [&amp;:has([role=checkbox])]:pe-0 text-right">Amount</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted font-semibold [&amp;:has([role=checkbox])]:pe-0 text-right">Amount</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">
           <!---->
         </th>
@@ -1568,13 +1568,13 @@ exports[`Table > renders with meta field on columns correctly 1`] = `
             </div>
           </div>
         </th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0 custom-heading-class" style="background-color: black;">#</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0 custom-heading-class" style="background-color: black;">Date</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0 custom-heading-class" style="background-color: black;">Status</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0 custom-heading-class" style="background-color: black;"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent -mx-2.5"><span class="iconify i-lucide:arrow-up-down shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span><span data-slot="label" class="truncate">Email</span>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0 custom-heading-class" style="background-color: black;">#</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0 custom-heading-class" style="background-color: black;">Date</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0 custom-heading-class" style="background-color: black;">Status</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0 custom-heading-class" style="background-color: black;"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent -mx-2.5"><span class="iconify i-lucide:arrow-up-down shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span><span data-slot="label" class="truncate">Email</span>
             <!--v-if-->
           </button></th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0 custom-heading-class" style="background-color: black;">Amount</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0 custom-heading-class" style="background-color: black;">Amount</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0 custom-heading-class" style="background-color: black;">
           <!---->
         </th>
@@ -1747,10 +1747,10 @@ exports[`Table > renders with meta prop correctly 1`] = `
     <!--v-if-->
     <thead data-slot="thead" class="relative">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
       </tr>
       <tr data-slot="separator" class="absolute z-1 start-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
@@ -1802,10 +1802,10 @@ exports[`Table > renders with row pinning and virtualization correctly 1`] = `
     <!--v-if-->
     <thead data-slot="thead" class="relative">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
       </tr>
       <tr data-slot="separator" class="absolute z-1 start-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
@@ -1824,10 +1824,10 @@ exports[`Table > renders with row pinning correctly 1`] = `
     <!--v-if-->
     <thead data-slot="thead" class="relative">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
       </tr>
       <tr data-slot="separator" class="absolute z-1 start-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
@@ -1879,10 +1879,10 @@ exports[`Table > renders with sticky correctly 1`] = `
     <!--v-if-->
     <thead data-slot="thead" class="sticky top-0 inset-x-0 bg-default/75 backdrop-blur-sm z-1">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
       </tr>
       <tr data-slot="separator" class="absolute z-1 start-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
@@ -1934,10 +1934,10 @@ exports[`Table > renders with ui correctly 1`] = `
     <!--v-if-->
     <thead data-slot="thead" class="relative">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
       </tr>
       <tr data-slot="separator" class="absolute z-1 start-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
@@ -2002,13 +2002,13 @@ exports[`Table > renders with virtualize and sticky correctly 1`] = `
             </div>
           </div>
         </th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">#</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Date</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent -mx-2.5"><span class="iconify i-lucide:arrow-up-down shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span><span data-slot="label" class="truncate">Email</span>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">#</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Date</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent -mx-2.5"><span class="iconify i-lucide:arrow-up-down shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span><span data-slot="label" class="truncate">Email</span>
             <!--v-if-->
           </button></th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted font-semibold [&amp;:has([role=checkbox])]:pe-0 text-right">Amount</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted font-semibold [&amp;:has([role=checkbox])]:pe-0 text-right">Amount</th>
         <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">
           <!---->
         </th>
@@ -2053,10 +2053,10 @@ exports[`Table > renders with virtualize correctly 1`] = `
     <!--v-if-->
     <thead data-slot="thead" class="relative">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
       </tr>
       <tr data-slot="separator" class="absolute z-1 start-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
@@ -2075,10 +2075,10 @@ exports[`Table > renders with virtualize external scroll element correctly 1`] =
     <!--v-if-->
     <thead data-slot="thead" class="relative">
       <tr data-slot="tr" class="data-[selected=true]:bg-elevated/50">
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
-        <th data-pinned="false" scope="col" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Id</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Amount</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Status</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">Email</th>
       </tr>
       <tr data-slot="separator" class="absolute z-1 start-0 w-full h-px bg-(--ui-border-accented)"></tr>
     </thead>
