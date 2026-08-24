@@ -266,12 +266,8 @@ export function createOpenApiDocument(options: { version: string, url?: string }
           description: 'Describes the MCP endpoint, its capabilities and the tools, resources and prompts it exposes.',
           responses: {
             200: {
-              description: 'MCP server card.',
-              content: {
-                'application/json': {
-                  schema: { $ref: '#/components/schemas/McpServerCard' }
-                }
-              }
+              description: 'MCP server card, following the schema it declares in `$schema`.',
+              content: { 'application/json': { schema: { type: 'object' } } }
             }
           }
         }
@@ -304,7 +300,7 @@ export function createOpenApiDocument(options: { version: string, url?: string }
             required: true,
             content: {
               'application/json': {
-                schema: { $ref: '#/components/schemas/JsonRpcRequest' }
+                schema: { type: 'object', description: 'JSON-RPC 2.0 request.' }
               }
             }
           },
@@ -312,7 +308,7 @@ export function createOpenApiDocument(options: { version: string, url?: string }
             200: {
               description: 'JSON-RPC 2.0 response, or an SSE stream of them.',
               content: {
-                'application/json': { schema: { $ref: '#/components/schemas/JsonRpcResponse' } },
+                'application/json': { schema: { type: 'object', description: 'JSON-RPC 2.0 response.' } },
                 'text/event-stream': { schema: { type: 'string' } }
               }
             },
@@ -625,59 +621,6 @@ export function createOpenApiDocument(options: { version: string, url?: string }
             required: ['href']
           }
         },
-        McpServerCard: {
-          type: 'object',
-          description: 'Describes the MCP server, following the Model Context Protocol server card schema.',
-          properties: {
-            $schema: { type: 'string', format: 'uri' },
-            serverInfo: {
-              type: 'object',
-              properties: {
-                name: { type: 'string' },
-                version: { type: 'string' },
-                title: { type: 'string' },
-                description: { type: 'string' },
-                homepage: { type: 'string', format: 'uri' },
-                documentation: { type: 'string', format: 'uri' },
-                license: { type: 'string' },
-                repository: { type: 'string', format: 'uri' }
-              },
-              required: ['name', 'version']
-            },
-            endpoints: {
-              type: 'array',
-              items: {
-                type: 'object',
-                properties: {
-                  type: { type: 'string', example: 'streamable-http' },
-                  url: { type: 'string', format: 'uri' }
-                },
-                required: ['type', 'url']
-              }
-            },
-            capabilities: { type: 'object', additionalProperties: true },
-            tools: { $ref: '#/components/schemas/McpDefinitions' },
-            resources: { $ref: '#/components/schemas/McpDefinitions' },
-            prompts: { $ref: '#/components/schemas/McpDefinitions' },
-            authentication: {
-              type: 'object',
-              properties: { required: { type: 'boolean' } }
-            }
-          },
-          required: ['serverInfo', 'endpoints']
-        },
-        McpDefinitions: {
-          type: 'array',
-          items: {
-            type: 'object',
-            properties: {
-              name: { type: 'string' },
-              description: { type: 'string' },
-              uri: { type: 'string', description: 'Resources only.' }
-            },
-            required: ['name']
-          }
-        },
         SkillsIndex: {
           type: 'object',
           description: 'Agent skills published by this site, served under `/.well-known/skills/{name}/`.',
@@ -700,35 +643,6 @@ export function createOpenApiDocument(options: { version: string, url?: string }
             }
           },
           required: ['skills']
-        },
-        JsonRpcRequest: {
-          type: 'object',
-          description: 'JSON-RPC 2.0 request. Use an MCP client rather than building these by hand.',
-          properties: {
-            jsonrpc: { type: 'string', const: '2.0' },
-            id: { oneOf: [{ type: 'string' }, { type: 'integer' }] },
-            method: { type: 'string', example: 'tools/call' },
-            params: { type: 'object', additionalProperties: true }
-          },
-          required: ['jsonrpc', 'method']
-        },
-        JsonRpcResponse: {
-          type: 'object',
-          description: 'JSON-RPC 2.0 response. A tool that fails answers with `result.isError` set rather than an `error` member.',
-          properties: {
-            jsonrpc: { type: 'string', const: '2.0' },
-            id: { oneOf: [{ type: 'string' }, { type: 'integer' }] },
-            result: { type: 'object', additionalProperties: true },
-            error: {
-              type: 'object',
-              properties: {
-                code: { type: 'integer' },
-                message: { type: 'string' }
-              },
-              required: ['code', 'message']
-            }
-          },
-          required: ['jsonrpc']
         },
         Error: {
           type: 'object',

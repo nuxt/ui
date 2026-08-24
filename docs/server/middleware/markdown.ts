@@ -34,17 +34,9 @@ export default defineEventHandler(async (event) => {
     return
   }
 
-  const headers: Record<string, string> = { accept: 'text/markdown' }
-
-  // Let the raw handler (or the static file) answer conditional requests.
-  for (const name of ['if-none-match', 'if-modified-since']) {
-    const value = getRequestHeader(event, name)
-    if (value) {
-      headers[name] = value
-    }
-  }
-
-  const response = await useNitroApp().localFetch(rawPath, { headers })
+  const response = await useNitroApp().localFetch(rawPath, {
+    headers: { accept: 'text/markdown' }
+  })
 
   // The inner request has already handled and logged the original failure
   // against the `/raw/**` path; rethrowing reports the status on the path the
@@ -53,22 +45,16 @@ export default defineEventHandler(async (event) => {
     throw createError({ statusCode: response.status, statusMessage: response.statusText })
   }
 
+  setResponseStatus(event, response.status)
+  setResponseHeader(event, 'Content-Type', response.headers.get('content-type') || 'text/markdown; charset=utf-8')
   setResponseHeader(event, 'Vary', MARKDOWN_VARY)
 
-  for (const name of ['cache-control', 'etag', 'last-modified', 'x-content-type-options', 'x-frame-options', 'referrer-policy', 'content-security-policy']) {
+  for (const name of ['cache-control', 'x-content-type-options', 'x-frame-options', 'referrer-policy']) {
     const value = response.headers.get(name)
     if (value) {
       setResponseHeader(event, name, value)
     }
   }
-
-  // A 304 carries only validators and cache metadata, no representation headers.
-  if (response.status === 304) {
-    return sendNoContent(event, 304)
-  }
-
-  setResponseStatus(event, response.status)
-  setResponseHeader(event, 'Content-Type', response.headers.get('content-type') || 'text/markdown; charset=utf-8')
 
   // Keep the canonical/alternate links the raw handlers set on this response.
   const link = response.headers.get('link')
