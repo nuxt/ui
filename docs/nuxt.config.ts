@@ -229,6 +229,9 @@ export default defineNuxtConfig({
         '/',
         '/docs/getting-started',
         '/openapi.json',
+        // Also prerendered through `prerenderRoutes()` in `app/pages/index.vue`;
+        // listed here so the guarantee does not hang off a page component.
+        '/raw/index.md',
         '/api/countries.json',
         '/api/phone-codes.json',
         '/api/locales.json',
@@ -280,9 +283,15 @@ export default defineNuxtConfig({
     // JSON fallback. Each handler that doesn't write a response hands over to
     // the next one.
     'nitro:config'(config) {
-      const handlers = config.errorHandler
-        ? (Array.isArray(config.errorHandler) ? config.errorHandler : [config.errorHandler])
-        : []
+      // Nuxt assigns its handler while building the config, before this hook
+      // runs. If that ever changes, prepending ours would make Nuxt skip
+      // registering the HTML error page, so fail loudly instead of silently
+      // degrading browser errors to Nitro's JSON fallback.
+      if (!config.errorHandler) {
+        throw new Error('Expected Nuxt to have set `nitro.errorHandler` before the `nitro:config` hook')
+      }
+
+      const handlers = Array.isArray(config.errorHandler) ? config.errorHandler : [config.errorHandler]
 
       config.errorHandler = [resolve('./server/error'), ...handlers]
     }

@@ -34,40 +34,46 @@ export default defineEventHandler(async (event) => {
     return
   }
 
-  const response = await useNitroApp().localFetch(rawPath, {
-    headers: {
-      'accept': 'text/markdown',
-      // Let the raw handler (or the static file) answer conditional requests.
-      'if-none-match': getRequestHeader(event, 'if-none-match') || '',
-      'if-modified-since': getRequestHeader(event, 'if-modified-since') || ''
-    }
-  })
+  const headers: Record<string, string> = { accept: 'text/markdown' }
 
-  // Surface server errors on this request, so they are logged and reported
-  // against the path the client asked for rather than the `/raw/**` one.
+  // Let the raw handler (or the static file) answer conditional requests.
+  for (const name of ['if-none-match', 'if-modified-since']) {
+    const value = getRequestHeader(event, name)
+    if (value) {
+      headers[name] = value
+    }
+  }
+
+  const response = await useNitroApp().localFetch(rawPath, { headers })
+
+  // The inner request has already handled and logged the original failure
+  // against the `/raw/**` path; rethrowing reports the status on the path the
+  // client asked for and keeps its `Cache-Control: no-cache`.
   if (response.status >= 500) {
     throw createError({ statusCode: response.status, statusMessage: response.statusText })
   }
 
-  setResponseStatus(event, response.status)
-  setResponseHeader(event, 'Content-Type', response.headers.get('content-type') || 'text/markdown; charset=utf-8')
   setResponseHeader(event, 'Vary', MARKDOWN_VARY)
 
-  for (const name of ['cache-control', 'etag', 'last-modified']) {
+  for (const name of ['cache-control', 'etag', 'last-modified', 'x-content-type-options', 'x-frame-options', 'referrer-policy', 'content-security-policy']) {
     const value = response.headers.get(name)
     if (value) {
       setResponseHeader(event, name, value)
     }
   }
 
-  // Keep the discovery links the routeRules already set on this response.
+  // A 304 carries only validators and cache metadata, no representation headers.
+  if (response.status === 304) {
+    return sendNoContent(event, 304)
+  }
+
+  setResponseStatus(event, response.status)
+  setResponseHeader(event, 'Content-Type', response.headers.get('content-type') || 'text/markdown; charset=utf-8')
+
+  // Keep the canonical/alternate links the raw handlers set on this response.
   const link = response.headers.get('link')
   if (link) {
     appendResponseHeader(event, 'Link', link)
-  }
-
-  if (response.status === 304) {
-    return sendNoContent(event, 304)
   }
 
   return await response.text()

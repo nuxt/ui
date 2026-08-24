@@ -16,9 +16,9 @@ export default defineNuxtModule((_options, nuxt) => {
       // https://vercel.com/docs/build-output-api/configuration
       const vcJSON = resolve(nitro.options.output.dir, 'config.json')
       const vcConfig = JSON.parse(await readFile(vcJSON, 'utf8'))
-      // The routes are defined in `server/utils/markdownNegotiation.ts` so the
-      // Nitro middleware (which handles the same negotiation on the server
-      // function and in dev) and the unit tests share one source of truth.
+      // The routes are defined in `server/utils/markdownNegotiation.ts` so
+      // they share one source of truth with the Nitro middleware, which
+      // handles the same negotiation on the server function and in dev.
       //
       // Note: the `Vary` and `Link` routeRules in `nuxt.config.ts` only cover
       // responses Nitro serves itself. A request rewritten here to a

@@ -12,7 +12,7 @@ import { SITE_URL } from './markdownNegotiation'
  * purpose: they back the documentation chat, are unauthenticated and metered
  * upstream, and documenting them would read as an invitation.
  *
- * Kept dependency-free so it can be unit tested from `test/docs`.
+ * Kept dependency-free on purpose.
  */
 
 // OpenAPI ignores a header parameter named `Accept`, so the negotiation is

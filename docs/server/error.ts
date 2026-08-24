@@ -1,4 +1,3 @@
-import type { H3Event } from 'h3'
 import type { NitroErrorHandler } from 'nitropack/types'
 import { MARKDOWN_VARY, errorMarkdown, prefersMarkdownError } from './utils/markdownNegotiation'
 
@@ -12,7 +11,7 @@ import { MARKDOWN_VARY, errorMarkdown, prefersMarkdownError } from './utils/mark
  * error back to the chain, so browsers keep the HTML error page and API
  * clients keep the JSON payload.
  */
-const errorHandler: NitroErrorHandler = async (error, event: H3Event, { defaultHandler }) => {
+const errorHandler: NitroErrorHandler = async (error, event, { defaultHandler }) => {
   if (event.handled || getRequestHeader(event, 'x-nuxt-error')) {
     return
   }
@@ -51,7 +50,8 @@ const errorHandler: NitroErrorHandler = async (error, event: H3Event, { defaultH
   return send(event, errorMarkdown({
     path: typeof data?.path === 'string' ? data.path : event.path,
     status,
-    statusMessage: error.statusMessage
+    // Already passed through h3's status message sanitizer.
+    statusMessage: res.statusText
   }))
 }
 

@@ -21,7 +21,7 @@ export function toRawDocsLink(href: string): string {
  * Shaped like a `nuxt-llms` section: the `description` is written straight into
  * the document under the `##` heading, so the Markdown below is what agents
  * read. Kept dependency-free so it can be imported from `nuxt.config.ts`
- * (loaded through jiti) and unit tested from `test/docs`.
+ * (loaded through jiti).
  */
 export const WHEN_TO_USE_SECTION = {
   title: 'When to use Nuxt UI',
@@ -46,6 +46,7 @@ export const WHEN_TO_USE_SECTION = {
     '- The user wants unstyled headless primitives with no prebuilt UI (Reka UI, Headless UI).',
     '- The user targets web, mobile and desktop from one codebase (Quasar).',
     '- The project is React, Svelte or Angular. Nuxt UI is Vue only.',
+    '- The user wants a minimal or unstyled UI layer with no design system. Prefer headless or minimal libraries over a full suite.',
     '',
     'How an agent should call this site:',
     '',

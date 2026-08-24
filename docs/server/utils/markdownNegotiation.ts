@@ -2,8 +2,8 @@
  * Shared markdown content negotiation helpers.
  *
  * Kept dependency-free on purpose: this module is imported by the build-time
- * Nuxt module (`modules/md-rewrite.ts`, loaded through jiti), auto-imported in
- * the Nitro server bundle, and unit tested from `test/docs`.
+ * Nuxt module (`modules/md-rewrite.ts`, loaded through jiti) and auto-imported
+ * in the Nitro server bundle.
  */
 
 export const SITE_URL = 'https://ui.nuxt.com'
@@ -29,7 +29,7 @@ export const AGENT_LINK_HEADER = [
 ].join(', ')
 
 /** User agents we serve markdown to without an explicit `Accept` header. */
-export const AGENT_USER_AGENTS = [
+const AGENT_USER_AGENTS = [
   'ClaudeBot',
   'Claude-Web',
   'anthropic-ai',
@@ -51,13 +51,13 @@ export const AGENT_USER_AGENTS = [
 ]
 
 /** `has` matcher for the Vercel Build Output API, which anchors the value. */
-export const AGENT_UA_PATTERN = `.*(${AGENT_USER_AGENTS.join('|')}).*`
+const AGENT_UA_PATTERN = `.*(${AGENT_USER_AGENTS.join('|')}).*`
 
 /** Paths owned by the framework or the API, never markdown. */
 const NON_MARKDOWN_PREFIXES = ['/_', '/api/', '/mcp']
 
 /** Case-sensitive on purpose, so it agrees with the Vercel `has` matcher. */
-export function isAgentUserAgent(userAgent?: string | null): boolean {
+function isAgentUserAgent(userAgent?: string | null): boolean {
   if (!userAgent) {
     return false
   }
@@ -65,7 +65,7 @@ export function isAgentUserAgent(userAgent?: string | null): boolean {
   return AGENT_USER_AGENTS.some(agent => userAgent.includes(agent))
 }
 
-export function acceptsMarkdown(accept?: string | null): boolean {
+function acceptsMarkdown(accept?: string | null): boolean {
   return !!accept?.toLowerCase().includes('text/markdown')
 }
 
@@ -74,7 +74,7 @@ function acceptsHtml(accept?: string | null): boolean {
 }
 
 /** Drops the query string and any trailing slash, keeping the root as `/`. */
-export function normalizePathname(path: string): string {
+function normalizePathname(path: string): string {
   const pathname = (path || '/').split('?')[0]!.split('#')[0]!
   if (pathname.length > 1 && pathname.endsWith('/')) {
     return pathname.slice(0, -1)
@@ -116,6 +116,11 @@ export function negotiatedRawPath(path: string, options: { accept?: string | nul
     return `/raw${pathname}`
   }
 
+  // Any other dotted path is an asset (`_payload.json`, images), not a page.
+  if (hasFileExtension(pathname)) {
+    return undefined
+  }
+
   return wantsMarkdown ? `/raw${pathname}.md` : undefined
 }
 
@@ -137,13 +142,18 @@ export function prefersMarkdownError(options: {
 
   const pathname = normalizePathname(options.path)
 
-  // Explicit markdown URLs.
-  if (pathname.startsWith('/raw/') || pathname.endsWith('.md')) {
+  if (pathname.startsWith('/raw/')) {
     return true
   }
 
+  // The API and framework surfaces keep their JSON errors, `.md` or not.
   if (NON_MARKDOWN_PREFIXES.some(prefix => pathname.startsWith(prefix))) {
     return false
+  }
+
+  // Explicit markdown URLs.
+  if (pathname.endsWith('.md')) {
+    return true
   }
 
   // Assets and non-page documents: images, `.xml`, `.json`, `.js`, ...
@@ -195,12 +205,15 @@ const STATUS_TEXT: Record<number, string> = {
 
 export function errorMarkdown(options: { path: string, status?: number, statusMessage?: string }): string {
   const status = options.status || 404
-  const pathname = normalizePathname(options.path)
+  // The pathname is attacker-chosen and lands in a code span of a document
+  // written for agents, so drop anything that could close the span or smuggle
+  // markdown in.
+  const pathname = normalizePathname(options.path).replace(/[`\\]/g, '')
   // Server errors never surface their message. Client errors use the status
   // message when there is one, stripped of anything that could break the
   // heading or the frontmatter line.
   const statusMessage = status < 500
-    ? options.statusMessage?.replace(/[\r\n\t]+/g, ' ').trim()
+    ? options.statusMessage?.replace(/[\r\n\t`\\]+/g, ' ').trim()
     : undefined
   const title = status === 404
     ? STATUS_TEXT[404]!
@@ -284,9 +297,10 @@ export function vercelMarkdownRoutes() {
       check: true
     },
     // Serve markdown when Accept: text/markdown is requested. The negative
-    // lookahead keeps `.md` URLs on the rewrite above. Without it they would
-    // be rewritten to `…md.md`, miss the filesystem and fall through to the
-    // Nuxt function with the original URL, which answers a 404 HTML page.
+    // lookahead keeps `.md` URLs on the rewrite above: without it, production
+    // traces showed `.md` URLs with a negotiated Accept or agent user agent
+    // reaching the Nuxt function with the original URL and answering the 404
+    // HTML page.
     {
       src: '^/docs/(?!.*\\.md$)(.*)$',
       dest: '/raw/docs/$1.md',
