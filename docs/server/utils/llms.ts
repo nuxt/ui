@@ -11,7 +11,12 @@ export function toRawDocsLink(href: string): string {
     return href
   }
 
-  return `${href.replace(SITE_URL, `${SITE_URL}/raw`)}.md`
+  // `.md` belongs on the pathname, ahead of any query string or fragment.
+  const separator = href.search(/[?#]/)
+  const pathname = separator === -1 ? href : href.slice(0, separator)
+  const suffix = separator === -1 ? '' : href.slice(separator)
+
+  return `${pathname.replace(SITE_URL, `${SITE_URL}/raw`)}.md${suffix}`
 }
 
 /**

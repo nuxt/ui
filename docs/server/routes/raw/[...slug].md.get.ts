@@ -6,8 +6,6 @@ import collections from '#content/manifest'
 import { transformMDC } from '../../utils/transformMDC'
 import { SITE_URL } from '../../utils/markdownNegotiation'
 
-const DOMAIN = SITE_URL
-
 /**
  * A missing page has to answer a real 404 so agents can tell an unknown URL
  * from an empty one. `server/error.ts` renders it as markdown for `/raw/**`,
@@ -49,7 +47,7 @@ export default defineEventHandler(async (event) => {
     page.body.value.unshift(['h1', {}, page.title])
   }
 
-  const canonicalUrl = `${DOMAIN}${page.path}`
+  const canonicalUrl = `${SITE_URL}${page.path}`
   const frontmatter = [
     '---',
     `title: ${JSON.stringify(page.title || '')}`,

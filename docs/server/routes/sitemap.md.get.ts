@@ -1,7 +1,5 @@
 import { queryCollection } from '@nuxt/content/server'
 
-const DOMAIN = SITE_URL
-
 export default defineEventHandler(async (event) => {
   const pages = await queryCollection(event, 'docs')
     .select('path', 'title')
@@ -39,7 +37,7 @@ export default defineEventHandler(async (event) => {
         .replace(/\\/g, '\\\\')
         .replace(/\[/g, '\\[')
         .replace(/\]/g, '\\]')
-      md += `- [${pageLabel}](${DOMAIN}${page.path}.md)\n`
+      md += `- [${pageLabel}](${SITE_URL}${page.path}.md)\n`
     }
     md += '\n'
   }

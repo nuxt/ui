@@ -1,7 +1,5 @@
 import { queryCollection } from '@nuxt/content/server'
 
-const DOMAIN = SITE_URL
-
 // Prerendered from `app/pages/index.vue`, so the response is never computed
 // at runtime in production. It used to be a `defineCachedEventHandler` with
 // `swr`, which hands the prerenderer the previous build's cached body when the
@@ -16,7 +14,7 @@ export default defineEventHandler(async (event) => {
     '---',
     `title: ${JSON.stringify(title)}`,
     `description: ${JSON.stringify(description)}`,
-    `canonical_url: ${JSON.stringify(DOMAIN)}`,
+    `canonical_url: ${JSON.stringify(SITE_URL)}`,
     '---',
     '\n'
   ].join('\n')
@@ -41,32 +39,32 @@ Nuxt UI is a free and open source Vue UI library powered by [Reka UI](https://re
 
 ## Installation
 
-- Nuxt: <${DOMAIN}/raw/docs/getting-started/installation/nuxt.md>
-- Vue: <${DOMAIN}/raw/docs/getting-started/installation/vue.md>
+- Nuxt: <${SITE_URL}/raw/docs/getting-started/installation/nuxt.md>
+- Vue: <${SITE_URL}/raw/docs/getting-started/installation/vue.md>
 
 ## Explore
 
-- Documentation: <${DOMAIN}/docs>
-- Components: <${DOMAIN}/raw/docs/components.md>
-- Composables: <${DOMAIN}/raw/docs/composables/define-shortcuts.md>
-- Typography: <${DOMAIN}/raw/docs/typography.md>
-- Sitemap (XML): <${DOMAIN}/sitemap.xml>
-- Sitemap (Markdown): <${DOMAIN}/sitemap.md>
-- LLMs index: <${DOMAIN}/llms.txt>
-- Full LLMs documentation: <${DOMAIN}/llms-full.txt>
+- Documentation: <${SITE_URL}/docs>
+- Components: <${SITE_URL}/raw/docs/components.md>
+- Composables: <${SITE_URL}/raw/docs/composables/define-shortcuts.md>
+- Typography: <${SITE_URL}/raw/docs/typography.md>
+- Sitemap (XML): <${SITE_URL}/sitemap.xml>
+- Sitemap (Markdown): <${SITE_URL}/sitemap.md>
+- LLMs index: <${SITE_URL}/llms.txt>
+- Full LLMs documentation: <${SITE_URL}/llms-full.txt>
 
 ## Resources for Agents
 
-- MCP Server Card: <${DOMAIN}/.well-known/mcp/server-card.json>
-- MCP endpoint: <${DOMAIN}/mcp>
-- API Catalog: <${DOMAIN}/.well-known/api-catalog>
-- OpenAPI specification: <${DOMAIN}/openapi.json>
-- Agent Skill: <${DOMAIN}/.well-known/skills/nuxt-ui/SKILL.md>
-- Skills index: <${DOMAIN}/.well-known/skills/index.json>
+- MCP Server Card: <${SITE_URL}/.well-known/mcp/server-card.json>
+- MCP endpoint: <${SITE_URL}/mcp>
+- API Catalog: <${SITE_URL}/.well-known/api-catalog>
+- OpenAPI specification: <${SITE_URL}/openapi.json>
+- Agent Skill: <${SITE_URL}/.well-known/skills/nuxt-ui/SKILL.md>
+- Skills index: <${SITE_URL}/.well-known/skills/index.json>
 
 ## Links
 
-- Website: <${DOMAIN}>
+- Website: <${SITE_URL}>
 - GitHub: <https://github.com/nuxt/ui>
 - Discord: <https://discord.gg/ps2h6QT>
 - X (Twitter): <https://x.com/nuxt_js>
@@ -74,8 +72,8 @@ Nuxt UI is a free and open source Vue UI library powered by [Reka UI](https://re
 
   setResponseHeader(event, 'Content-Type', 'text/markdown; charset=utf-8')
   setResponseHeader(event, 'Link', [
-    `<${DOMAIN}>; rel="canonical"`,
-    `<${DOMAIN}>; rel="alternate"; type="text/html"`
+    `<${SITE_URL}>; rel="canonical"`,
+    `<${SITE_URL}>; rel="alternate"; type="text/html"`
   ].join(', '))
   return frontmatter + body
 })

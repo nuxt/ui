@@ -1,19 +1,17 @@
-const DOMAIN = SITE_URL
-
 export default defineCachedEventHandler((event) => {
   const linkset = {
     linkset: [
       {
-        'anchor': `${DOMAIN}/mcp`,
+        'anchor': `${SITE_URL}/mcp`,
         'service-desc': [
           {
-            href: `${DOMAIN}/.well-known/mcp/server-card.json`,
+            href: `${SITE_URL}/.well-known/mcp/server-card.json`,
             type: 'application/json'
           }
         ],
         'service-doc': [
           {
-            href: `${DOMAIN}/docs/getting-started/ai/mcp`,
+            href: `${SITE_URL}/docs/getting-started/ai/mcp`,
             type: 'text/html'
           }
         ]
@@ -21,35 +19,35 @@ export default defineCachedEventHandler((event) => {
       {
         // The OpenAPI document describes the whole site (`servers` is the
         // origin), so it is anchored at the origin rather than at `/api`.
-        'anchor': `${DOMAIN}/`,
+        'anchor': `${SITE_URL}/`,
         'service-desc': [
           {
-            href: `${DOMAIN}/openapi.json`,
+            href: `${SITE_URL}/openapi.json`,
             type: 'application/vnd.oai.openapi+json'
           }
         ],
         'service-doc': [
           {
-            href: `${DOMAIN}/docs`,
+            href: `${SITE_URL}/docs`,
             type: 'text/html'
           }
         ]
       },
       {
-        'anchor': `${DOMAIN}/docs`,
+        'anchor': `${SITE_URL}/docs`,
         'service-desc': [
           {
-            href: `${DOMAIN}/llms.txt`,
+            href: `${SITE_URL}/llms.txt`,
             type: 'text/plain'
           },
           {
-            href: `${DOMAIN}/llms-full.txt`,
+            href: `${SITE_URL}/llms-full.txt`,
             type: 'text/plain'
           }
         ],
         'service-doc': [
           {
-            href: `${DOMAIN}/docs`,
+            href: `${SITE_URL}/docs`,
             type: 'text/html'
           }
         ]
