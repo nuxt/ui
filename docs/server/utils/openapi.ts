@@ -19,6 +19,18 @@ import { SITE_URL } from './markdownNegotiation'
 // described in prose and through the two response media types instead.
 const MARKDOWN_DESCRIPTION = 'Every documentation page is available as Markdown. Append `.md` to the URL, or send `Accept: text/markdown` on the HTML URL. Known AI agent user agents receive Markdown by default.'
 
+/** Nitro's JSON error payload, returned by every `/api/**` failure. */
+function jsonError(description: string) {
+  return {
+    description,
+    content: {
+      'application/json': {
+        schema: { $ref: '#/components/schemas/Error' }
+      }
+    }
+  }
+}
+
 function json(schemaRef: string, description: string) {
   return {
     description,
@@ -72,6 +84,9 @@ export function createOpenApiDocument(options: { version: string, url?: string }
       }
     },
     servers: [{ url, description: 'Production' }],
+    // Everything here is public and read-only: an empty requirement tells
+    // agents no credentials are needed, rather than leaving them to guess.
+    security: [],
     tags: [
       { name: 'Documentation', description: 'Documentation pages as Markdown.' },
       { name: 'Discovery', description: 'Machine-readable indexes and agent metadata.' },
@@ -174,6 +189,7 @@ export function createOpenApiDocument(options: { version: string, url?: string }
           operationId: 'getSitemapXml',
           tags: ['Discovery'],
           summary: 'XML sitemap',
+          description: 'Every indexable page, in the sitemaps.org XML format. `/sitemap.md` is the same index as Markdown links.',
           responses: {
             200: {
               description: 'Sitemap in the sitemaps.org XML format.',
@@ -215,6 +231,7 @@ export function createOpenApiDocument(options: { version: string, url?: string }
           operationId: 'getOpenApiDocument',
           tags: ['Discovery'],
           summary: 'This OpenAPI document',
+          description: 'This document. It is regenerated on every deploy, so `info.version` tracks the published `@nuxt/ui` release.',
           responses: {
             200: {
               description: 'OpenAPI 3.1 document.',
@@ -232,7 +249,11 @@ export function createOpenApiDocument(options: { version: string, url?: string }
           responses: {
             200: {
               description: 'Linkset document.',
-              content: { 'application/linkset+json': { schema: { type: 'object' } } }
+              content: {
+                'application/linkset+json': {
+                  schema: { $ref: '#/components/schemas/Linkset' }
+                }
+              }
             }
           }
         }
@@ -246,7 +267,11 @@ export function createOpenApiDocument(options: { version: string, url?: string }
           responses: {
             200: {
               description: 'MCP server card.',
-              content: { 'application/json': { schema: { type: 'object' } } }
+              content: {
+                'application/json': {
+                  schema: { $ref: '#/components/schemas/McpServerCard' }
+                }
+              }
             }
           }
         }
@@ -260,7 +285,11 @@ export function createOpenApiDocument(options: { version: string, url?: string }
           responses: {
             200: {
               description: 'Skills index.',
-              content: { 'application/json': { schema: { type: 'object' } } }
+              content: {
+                'application/json': {
+                  schema: { $ref: '#/components/schemas/SkillsIndex' }
+                }
+              }
             }
           }
         }
@@ -275,19 +304,19 @@ export function createOpenApiDocument(options: { version: string, url?: string }
             required: true,
             content: {
               'application/json': {
-                schema: { type: 'object', description: 'JSON-RPC 2.0 request.' }
+                schema: { $ref: '#/components/schemas/JsonRpcRequest' }
               }
             }
           },
           responses: {
             200: {
-              description: 'JSON-RPC 2.0 response, or an SSE stream.',
+              description: 'JSON-RPC 2.0 response, or an SSE stream of them.',
               content: {
-                'application/json': { schema: { type: 'object' } },
+                'application/json': { schema: { $ref: '#/components/schemas/JsonRpcResponse' } },
                 'text/event-stream': { schema: { type: 'string' } }
               }
             },
-            400: { description: 'Unknown MCP tool requested through `x-mcp-tools`.' }
+            400: jsonError('Unknown MCP tool requested through `x-mcp-tools`.')
           }
         }
       },
@@ -296,6 +325,7 @@ export function createOpenApiDocument(options: { version: string, url?: string }
           operationId: 'getNavigation',
           tags: ['Content'],
           summary: 'Documentation navigation tree',
+          description: 'The documentation navigation tree as rendered in the sidebar: nested items carrying the page title, path, framework and category.',
           responses: {
             200: {
               description: 'Nested navigation items.',
@@ -313,6 +343,7 @@ export function createOpenApiDocument(options: { version: string, url?: string }
           operationId: 'getModuleStats',
           tags: ['Content'],
           summary: 'Module stats, team and contributors',
+          description: 'npm downloads and GitHub stars for `@nuxt/ui`, plus the team and contributor lists shown on the homepage. Cached for an hour.',
           responses: { 200: json('Module', 'Download and star counts, team members and contributors.') }
         }
       },
@@ -321,6 +352,7 @@ export function createOpenApiDocument(options: { version: string, url?: string }
           operationId: 'getComponentExample',
           tags: ['Content'],
           summary: 'Source of a documentation example component',
+          description: 'The single file component behind an example on a documentation page. Names are listed by the `list-examples` MCP tool and accepted in PascalCase, camelCase or kebab-case, with an optional `.json` suffix.',
           parameters: [
             {
               name: 'component',
@@ -333,7 +365,7 @@ export function createOpenApiDocument(options: { version: string, url?: string }
           ],
           responses: {
             200: json('ComponentExample', 'Source code of the example component.'),
-            404: { description: 'Example not found.' }
+            404: jsonError('No example component with that name.')
           }
         }
       },
@@ -342,6 +374,7 @@ export function createOpenApiDocument(options: { version: string, url?: string }
           operationId: 'getCountries',
           tags: ['Data'],
           summary: 'Countries',
+          description: 'Countries with their ISO 3166-1 alpha-2 code and flag emoji, the dataset behind the country select examples.',
           responses: {
             200: {
               description: 'Countries with their ISO 3166-1 alpha-2 code and flag.',
@@ -359,6 +392,7 @@ export function createOpenApiDocument(options: { version: string, url?: string }
           operationId: 'getPhoneCodes',
           tags: ['Data'],
           summary: 'Phone dial codes',
+          description: 'Countries with their dial code and phone number mask, the dataset behind the phone input examples.',
           responses: {
             200: {
               description: 'Countries with their dial code and phone number mask.',
@@ -376,6 +410,7 @@ export function createOpenApiDocument(options: { version: string, url?: string }
           operationId: 'getLocales',
           tags: ['Data'],
           summary: 'Locales',
+          description: 'Every locale Nuxt UI ships a translation for, mapped to its flag emoji.',
           responses: {
             200: {
               description: 'Map of locale tag to flag emoji, for example `{ "fr-FR": "🇫🇷" }`.',
@@ -454,7 +489,7 @@ export function createOpenApiDocument(options: { version: string, url?: string }
                 }
               }
             },
-            400: { description: 'The `path` query parameter is missing.' }
+            400: jsonError('The `path` query parameter is missing.')
           }
         }
       }
@@ -559,6 +594,154 @@ export function createOpenApiDocument(options: { version: string, url?: string }
             message: { type: 'string', description: 'First line of the commit message.' }
           },
           required: ['sha', 'date', 'message']
+        },
+        Linkset: {
+          type: 'object',
+          description: 'RFC 9727 linkset. Each entry anchors a resource and points at its description and documentation.',
+          properties: {
+            linkset: {
+              type: 'array',
+              items: {
+                type: 'object',
+                properties: {
+                  'anchor': { type: 'string', format: 'uri' },
+                  'service-desc': { $ref: '#/components/schemas/LinksetTargets' },
+                  'service-doc': { $ref: '#/components/schemas/LinksetTargets' }
+                },
+                required: ['anchor']
+              }
+            }
+          },
+          required: ['linkset']
+        },
+        LinksetTargets: {
+          type: 'array',
+          items: {
+            type: 'object',
+            properties: {
+              href: { type: 'string', format: 'uri' },
+              type: { type: 'string', description: 'Media type of the target.' }
+            },
+            required: ['href']
+          }
+        },
+        McpServerCard: {
+          type: 'object',
+          description: 'Describes the MCP server, following the Model Context Protocol server card schema.',
+          properties: {
+            $schema: { type: 'string', format: 'uri' },
+            serverInfo: {
+              type: 'object',
+              properties: {
+                name: { type: 'string' },
+                version: { type: 'string' },
+                title: { type: 'string' },
+                description: { type: 'string' },
+                homepage: { type: 'string', format: 'uri' },
+                documentation: { type: 'string', format: 'uri' },
+                license: { type: 'string' },
+                repository: { type: 'string', format: 'uri' }
+              },
+              required: ['name', 'version']
+            },
+            endpoints: {
+              type: 'array',
+              items: {
+                type: 'object',
+                properties: {
+                  type: { type: 'string', example: 'streamable-http' },
+                  url: { type: 'string', format: 'uri' }
+                },
+                required: ['type', 'url']
+              }
+            },
+            capabilities: { type: 'object', additionalProperties: true },
+            tools: { $ref: '#/components/schemas/McpDefinitions' },
+            resources: { $ref: '#/components/schemas/McpDefinitions' },
+            prompts: { $ref: '#/components/schemas/McpDefinitions' },
+            authentication: {
+              type: 'object',
+              properties: { required: { type: 'boolean' } }
+            }
+          },
+          required: ['serverInfo', 'endpoints']
+        },
+        McpDefinitions: {
+          type: 'array',
+          items: {
+            type: 'object',
+            properties: {
+              name: { type: 'string' },
+              description: { type: 'string' },
+              uri: { type: 'string', description: 'Resources only.' }
+            },
+            required: ['name']
+          }
+        },
+        SkillsIndex: {
+          type: 'object',
+          description: 'Agent skills published by this site, served under `/.well-known/skills/{name}/`.',
+          properties: {
+            skills: {
+              type: 'array',
+              items: {
+                type: 'object',
+                properties: {
+                  name: { type: 'string' },
+                  description: { type: 'string' },
+                  files: {
+                    type: 'array',
+                    description: 'Paths relative to the skill directory.',
+                    items: { type: 'string' }
+                  }
+                },
+                required: ['name', 'description', 'files']
+              }
+            }
+          },
+          required: ['skills']
+        },
+        JsonRpcRequest: {
+          type: 'object',
+          description: 'JSON-RPC 2.0 request. Use an MCP client rather than building these by hand.',
+          properties: {
+            jsonrpc: { type: 'string', const: '2.0' },
+            id: { oneOf: [{ type: 'string' }, { type: 'integer' }] },
+            method: { type: 'string', example: 'tools/call' },
+            params: { type: 'object', additionalProperties: true }
+          },
+          required: ['jsonrpc', 'method']
+        },
+        JsonRpcResponse: {
+          type: 'object',
+          description: 'JSON-RPC 2.0 response. A tool that fails answers with `result.isError` set rather than an `error` member.',
+          properties: {
+            jsonrpc: { type: 'string', const: '2.0' },
+            id: { oneOf: [{ type: 'string' }, { type: 'integer' }] },
+            result: { type: 'object', additionalProperties: true },
+            error: {
+              type: 'object',
+              properties: {
+                code: { type: 'integer' },
+                message: { type: 'string' }
+              },
+              required: ['code', 'message']
+            }
+          },
+          required: ['jsonrpc']
+        },
+        Error: {
+          type: 'object',
+          description: 'Error payload returned by the JSON endpoints. Documentation pages answer errors as Markdown instead, and browsers get the HTML error page.',
+          properties: {
+            error: { type: 'boolean', const: true },
+            url: { type: 'string', description: 'The requested URL.' },
+            statusCode: { type: 'integer', example: 404 },
+            statusMessage: { type: 'string', description: 'Machine-readable reason phrase.', example: 'Example not found!' },
+            message: { type: 'string', description: 'Human-readable message.', example: 'Example not found!' },
+            data: { type: 'object', description: 'Extra context, when the endpoint provides any.', additionalProperties: true }
+          },
+          required: ['error', 'statusCode', 'statusMessage', 'message']
         },
         GitHubObject: {
           type: 'object',
