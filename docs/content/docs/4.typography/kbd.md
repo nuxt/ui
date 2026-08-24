@@ -30,6 +30,10 @@ Use the `kbd` component to display a [Kbd](/docs/components/kbd) in your content
 
 :component-props{prose}
 
+### Slots
+
+:component-slots{prose}
+
 ## Theme
 
 :component-theme{prose}
