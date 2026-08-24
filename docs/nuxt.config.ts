@@ -474,6 +474,8 @@ export default defineNuxtConfig({
     identity: {
       type: 'Organization',
       name: 'Nuxt',
+      description: 'Nuxt is the open source team behind the Nuxt framework and Nuxt UI, a Vue component library built on Reka UI and Tailwind CSS.',
+      url: 'https://ui.nuxt.com',
       logo: '/icon.svg',
       sameAs: [
         'https://github.com/nuxt',
