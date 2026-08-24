@@ -37,11 +37,6 @@ const itemsWithIcon = [
   { value: '2', label: 'Light', icon: 'i-lucide-sun' },
   { value: '3', label: 'Dark', icon: 'i-lucide-moon' }
 ]
-const itemsReadonly = [
-  { value: 'system', label: 'System' },
-  { value: 'light', label: 'Light' },
-  { value: 'dark', label: 'Dark' }
-] as const
 </script>
 
 <template>
@@ -58,7 +53,6 @@ const itemsReadonly = [
     <UCheckboxGroup :items="itemsLiteral" :default-value="['Option 1']" :orientation="orientation" v-bind="props" />
     <UCheckboxGroup :items="itemsWithDescription" :orientation="orientation" v-bind="props" />
     <UCheckboxGroup :items="itemsWithIcon" :orientation="orientation" v-bind="props" />
-    <UCheckboxGroup :items="itemsReadonly" :default-value="['system']" :orientation="orientation" v-bind="props" />
     <UCheckboxGroup :items="items" disabled :orientation="orientation" v-bind="props" />
     <UCheckboxGroup :items="items" legend="Legend" :orientation="orientation" v-bind="props" />
     <UCheckboxGroup :items="items" legend="Legend" required :orientation="orientation" v-bind="props" />

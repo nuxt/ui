@@ -99,21 +99,6 @@ const items = [
     disabled: true
   }]
 ] satisfies NavigationMenuItem[][]
-
-const itemsReadonly = [{
-  label: 'Guide',
-  icon: 'i-lucide-book-open',
-  children: [{
-    label: 'Introduction',
-    icon: 'i-lucide-house'
-  }, {
-    label: 'Installation',
-    icon: 'i-lucide-cloud-download'
-  }]
-}, {
-  label: 'Help',
-  icon: 'i-lucide-circle-help'
-}] as const
 </script>
 
 <template>
@@ -141,13 +126,6 @@ const itemsReadonly = [{
       :highlight-color="highlightColor"
       v-bind="props"
       :class="highlight && 'data-[orientation=horizontal]:border-b border-default'"
-      class="data-[orientation=vertical]:data-[collapsed=false]:w-48"
-    />
-    <UNavigationMenu
-      :items="itemsReadonly"
-      :orientation="orientation"
-      :content-orientation="contentOrientation"
-      v-bind="props"
       class="data-[orientation=vertical]:data-[collapsed=false]:w-48"
     />
   </Matrix>
