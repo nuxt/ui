@@ -67,7 +67,7 @@ export interface NavigationMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'cu
    * @defaultValue `item-${index}`, `item-${level}-${index}` for nested children, or `group-${listIndex}-item-${index}` when using grouped items
    */
   value?: string
-  children?: NavigationMenuChildItem[]
+  children?: readonly NavigationMenuChildItem[]
   defaultOpen?: boolean
   open?: boolean
   onSelect?: (e: Event) => void
@@ -319,7 +319,7 @@ function getItemValue(item: NavigationMenuItem, index: number, level: number, li
   return get(item, props.valueKey as string) ?? (level > 0 ? `${prefix}item-${level}-${index}` : `${prefix}item-${index}`)
 }
 
-function getAccordionDefaultValue(list: NavigationMenuItem[], level = 0, listIndex = 0) {
+function getAccordionDefaultValue(list: readonly NavigationMenuItem[], level = 0, listIndex = 0) {
   const indexes = list.reduce((acc: string[], item, index) => {
     if (item.defaultOpen || item.open) {
       acc.push(getItemValue(item, index, level, listIndex))
