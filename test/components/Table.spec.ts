@@ -214,6 +214,27 @@ describe('Table', () => {
     })).toHaveNoViolations()
   })
 
+  it('sets aria-sort on sortable th elements', async () => {
+    const sortableColumns: TableColumn<typeof data[number]>[] = [
+      { accessorKey: 'id', header: 'Id' },
+      { accessorKey: 'email', header: 'Email', enableSorting: false }
+    ]
+
+    const wrapper = await mountSuspended(Table, {
+      props: { data, columns: sortableColumns as any }
+    })
+
+    const [idTh, emailTh] = wrapper.findAll('th')
+    expect(idTh!.attributes('aria-sort')).toBe('none')
+    expect(emailTh!.attributes('aria-sort')).toBeUndefined()
+
+    await wrapper.setProps({ sorting: [{ id: 'id', desc: false }] })
+    expect(wrapper.findAll('th')[0]!.attributes('aria-sort')).toBe('ascending')
+
+    await wrapper.setProps({ sorting: [{ id: 'id', desc: true }] })
+    expect(wrapper.findAll('th')[0]!.attributes('aria-sort')).toBe('descending')
+  })
+
   it('reactive columns', async () => {
     const wrapper = await mountSuspended({
       components: { Table },

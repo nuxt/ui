@@ -529,6 +529,15 @@ function getColumnStyles(column: Column<T>): Record<string, string> {
   return styles
 }
 
+function getAriaSort(column: Column<T>): 'ascending' | 'descending' | 'none' | undefined {
+  if (!column.getCanSort()) {
+    return undefined
+  }
+
+  const sorted = column.getIsSorted()
+  return sorted === 'asc' ? 'ascending' : sorted === 'desc' ? 'descending' : 'none'
+}
+
 watch(() => props.data, () => {
   data.value = props.data ? [...props.data] : []
 }, props.watchOptions)
@@ -613,6 +622,7 @@ defineExpose({
             :scope="header.colSpan > 1 ? 'colgroup' : 'col'"
             :colspan="header.colSpan > 1 ? header.colSpan : undefined"
             :rowspan="header.rowSpan > 1 ? header.rowSpan : undefined"
+            :aria-sort="getAriaSort(header.column)"
             data-slot="th"
             :class="ui.th({
               class: [
@@ -695,6 +705,7 @@ defineExpose({
             :data-pinned="header.column.getIsPinned()"
             :colspan="header.colSpan > 1 ? header.colSpan : undefined"
             :rowspan="header.rowSpan > 1 ? header.rowSpan : undefined"
+            :aria-sort="getAriaSort(header.column)"
             data-slot="th"
             :class="ui.th({
               class: [
