@@ -534,6 +534,11 @@ function getAriaSort(header: Header<T, unknown>): 'ascending' | 'descending' | '
     return undefined
   }
 
+  // Only the primary sort key gets a direction: aria-sort is a single-column pattern.
+  if (header.column.getSortIndex() !== 0) {
+    return 'none'
+  }
+
   const sorted = header.column.getIsSorted()
   return sorted === 'asc' ? 'ascending' : sorted === 'desc' ? 'descending' : 'none'
 }

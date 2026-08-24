@@ -235,6 +235,25 @@ describe('Table', () => {
     expect(wrapper.findAll('th')[0]!.attributes('aria-sort')).toBe('descending')
   })
 
+  it('only sets a directional aria-sort on the primary sort column', async () => {
+    const sortableColumns: TableColumn<typeof data[number]>[] = [
+      { accessorKey: 'id', header: 'Id' },
+      { accessorKey: 'email', header: 'Email' }
+    ]
+
+    const wrapper = await mountSuspended(Table, {
+      props: {
+        data,
+        columns: sortableColumns as any,
+        sorting: [{ id: 'email', desc: false }, { id: 'id', desc: true }]
+      }
+    })
+
+    const [idTh, emailTh] = wrapper.findAll('th')
+    expect(emailTh!.attributes('aria-sort')).toBe('ascending')
+    expect(idTh!.attributes('aria-sort')).toBe('none')
+  })
+
   it('does not set aria-sort on footer or placeholder th elements', async () => {
     const groupedColumns: TableColumn<typeof data[number]>[] = [
       { header: 'Group', columns: [{ accessorKey: 'id', header: 'Id', footer: 'Id total' }] },
