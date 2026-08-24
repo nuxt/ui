@@ -139,16 +139,30 @@ export default defineNuxtModule({
         // is every request the MCP `get-example` tool makes, since its
         // internal `$fetch` reaches the handler instead of the CDN).
         const examples: Record<string, unknown> = {}
+        // Only the examples that actually loaded are listed, so
+        // `listComponentExamples()` never advertises a name that
+        // `getComponentExample()` cannot return.
+        const availableNames: string[] = []
+
         for (const name of names) {
+          let contents: string
           try {
-            examples[name] = JSON.parse(readFileSync(join(outputDir, `${name}.json`), 'utf-8'))
-          } catch {
-            // A missing file means the example was removed between the scan
-            // and codegen; leave it out rather than failing the build.
+            contents = readFileSync(join(outputDir, `${name}.json`), 'utf-8')
+          } catch (error) {
+            // The example was removed between the scan and codegen. Anything
+            // else (a permission error, unreadable JSON below) is a real
+            // problem and should fail the build.
+            if ((error as NodeJS.ErrnoException).code === 'ENOENT') {
+              continue
+            }
+            throw error
           }
+
+          examples[name] = JSON.parse(contents)
+          availableNames.push(name)
         }
 
-        return `const names = ${JSON.stringify(names)}
+        return `const names = ${JSON.stringify(availableNames)}
 const examples = ${JSON.stringify(examples)}
 
 function _load(name) {
