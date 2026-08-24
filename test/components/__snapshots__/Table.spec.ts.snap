@@ -554,19 +554,19 @@ exports[`Table > renders with columns correctly 1`] = `
         <th data-pinned="false" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">
           <!---->
         </th>
-        <th data-pinned="false" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">
+        <th data-pinned="false" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">
           <!---->
         </th>
-        <th data-pinned="false" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">
+        <th data-pinned="false" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">
           <!---->
         </th>
-        <th data-pinned="false" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">
+        <th data-pinned="false" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">
           <!---->
         </th>
-        <th data-pinned="false" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">
+        <th data-pinned="false" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">
           <!---->
         </th>
-        <th data-pinned="false" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted font-semibold [&amp;:has([role=checkbox])]:pe-0 text-right">Total: €2,990.00</th>
+        <th data-pinned="false" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted font-semibold [&amp;:has([role=checkbox])]:pe-0 text-right">Total: €2,990.00</th>
         <th data-pinned="false" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">
           <!---->
         </th>
@@ -692,19 +692,19 @@ exports[`Table > renders with empty slot correctly 1`] = `
         <th data-pinned="false" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">
           <!---->
         </th>
-        <th data-pinned="false" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">
+        <th data-pinned="false" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">
           <!---->
         </th>
-        <th data-pinned="false" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">
+        <th data-pinned="false" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">
           <!---->
         </th>
-        <th data-pinned="false" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">
+        <th data-pinned="false" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">
           <!---->
         </th>
-        <th data-pinned="false" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">
+        <th data-pinned="false" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">
           <!---->
         </th>
-        <th data-pinned="false" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted font-semibold [&amp;:has([role=checkbox])]:pe-0 text-right">Total: €0.00</th>
+        <th data-pinned="false" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted font-semibold [&amp;:has([role=checkbox])]:pe-0 text-right">Total: €0.00</th>
         <th data-pinned="false" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">
           <!---->
         </th>
@@ -1527,19 +1527,19 @@ exports[`Table > renders with loading slot correctly 1`] = `
         <th data-pinned="false" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">
           <!---->
         </th>
-        <th data-pinned="false" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">
+        <th data-pinned="false" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">
           <!---->
         </th>
-        <th data-pinned="false" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">
+        <th data-pinned="false" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">
           <!---->
         </th>
-        <th data-pinned="false" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">
+        <th data-pinned="false" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">
           <!---->
         </th>
-        <th data-pinned="false" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">
+        <th data-pinned="false" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">
           <!---->
         </th>
-        <th data-pinned="false" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted font-semibold [&amp;:has([role=checkbox])]:pe-0 text-right">Total: €0.00</th>
+        <th data-pinned="false" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted font-semibold [&amp;:has([role=checkbox])]:pe-0 text-right">Total: €0.00</th>
         <th data-pinned="false" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">
           <!---->
         </th>
@@ -1719,19 +1719,19 @@ exports[`Table > renders with meta field on columns correctly 1`] = `
         <th data-pinned="false" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0 custom-heading-class" style="background-color: black;">
           <!---->
         </th>
-        <th data-pinned="false" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0 custom-heading-class" style="background-color: black;">
+        <th data-pinned="false" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0 custom-heading-class" style="background-color: black;">
           <!---->
         </th>
-        <th data-pinned="false" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0 custom-heading-class" style="background-color: black;">
+        <th data-pinned="false" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0 custom-heading-class" style="background-color: black;">
           <!---->
         </th>
-        <th data-pinned="false" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0 custom-heading-class" style="background-color: black;">
+        <th data-pinned="false" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0 custom-heading-class" style="background-color: black;">
           <!---->
         </th>
-        <th data-pinned="false" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0 custom-heading-class" style="background-color: black;">
+        <th data-pinned="false" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0 custom-heading-class" style="background-color: black;">
           <!---->
         </th>
-        <th data-pinned="false" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0 custom-heading-class" style="background-color: black;">Total: €2,990.00</th>
+        <th data-pinned="false" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0 custom-heading-class" style="background-color: black;">Total: €2,990.00</th>
         <th data-pinned="false" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0 custom-heading-class" style="background-color: black;">
           <!---->
         </th>
@@ -2025,19 +2025,19 @@ exports[`Table > renders with virtualize and sticky correctly 1`] = `
         <th data-pinned="false" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">
           <!---->
         </th>
-        <th data-pinned="false" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">
+        <th data-pinned="false" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">
           <!---->
         </th>
-        <th data-pinned="false" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">
+        <th data-pinned="false" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">
           <!---->
         </th>
-        <th data-pinned="false" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">
+        <th data-pinned="false" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">
           <!---->
         </th>
-        <th data-pinned="false" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">
+        <th data-pinned="false" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">
           <!---->
         </th>
-        <th data-pinned="false" aria-sort="none" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted font-semibold [&amp;:has([role=checkbox])]:pe-0 text-right">Total: €2,990.00</th>
+        <th data-pinned="false" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted font-semibold [&amp;:has([role=checkbox])]:pe-0 text-right">Total: €2,990.00</th>
         <th data-pinned="false" data-slot="th" class="px-4 py-3.5 text-sm text-highlighted text-start font-semibold [&amp;:has([role=checkbox])]:pe-0">
           <!---->
         </th>

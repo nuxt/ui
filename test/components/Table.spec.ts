@@ -235,6 +235,23 @@ describe('Table', () => {
     expect(wrapper.findAll('th')[0]!.attributes('aria-sort')).toBe('descending')
   })
 
+  it('does not set aria-sort on footer or placeholder th elements', async () => {
+    const groupedColumns: TableColumn<typeof data[number]>[] = [
+      { header: 'Group', columns: [{ accessorKey: 'id', header: 'Id', footer: 'Id total' }] },
+      { accessorKey: 'email', header: 'Email' }
+    ]
+
+    const wrapper = await mountSuspended(Table, {
+      props: { data, columns: groupedColumns as any, sorting: [{ id: 'email', desc: false }] }
+    })
+
+    const [, emailPlaceholderTh] = wrapper.findAll('thead th')
+    expect(emailPlaceholderTh!.attributes('aria-sort')).toBeUndefined()
+
+    const footerThs = wrapper.findAll('tfoot th')
+    expect(footerThs.every(th => th.attributes('aria-sort') === undefined)).toBe(true)
+  })
+
   it('reactive columns', async () => {
     const wrapper = await mountSuspended({
       components: { Table },

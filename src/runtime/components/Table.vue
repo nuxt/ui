@@ -529,12 +529,12 @@ function getColumnStyles(column: Column<T>): Record<string, string> {
   return styles
 }
 
-function getAriaSort(column: Column<T>): 'ascending' | 'descending' | 'none' | undefined {
-  if (!column.getCanSort()) {
+function getAriaSort(header: Header<T, unknown>): 'ascending' | 'descending' | 'none' | undefined {
+  if (header.isPlaceholder || !header.column.getCanSort()) {
     return undefined
   }
 
-  const sorted = column.getIsSorted()
+  const sorted = header.column.getIsSorted()
   return sorted === 'asc' ? 'ascending' : sorted === 'desc' ? 'descending' : 'none'
 }
 
@@ -622,7 +622,7 @@ defineExpose({
             :scope="header.colSpan > 1 ? 'colgroup' : 'col'"
             :colspan="header.colSpan > 1 ? header.colSpan : undefined"
             :rowspan="header.rowSpan > 1 ? header.rowSpan : undefined"
-            :aria-sort="getAriaSort(header.column)"
+            :aria-sort="getAriaSort(header)"
             data-slot="th"
             :class="ui.th({
               class: [
@@ -705,7 +705,6 @@ defineExpose({
             :data-pinned="header.column.getIsPinned()"
             :colspan="header.colSpan > 1 ? header.colSpan : undefined"
             :rowspan="header.rowSpan > 1 ? header.rowSpan : undefined"
-            :aria-sort="getAriaSort(header.column)"
             data-slot="th"
             :class="ui.th({
               class: [
