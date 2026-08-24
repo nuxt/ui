@@ -132,21 +132,27 @@ export default defineNuxtModule({
           ? JSON.parse(readFileSync(indexPath, 'utf-8'))
           : []
 
-        return `import { readFileSync } from 'node:fs'
+        // The examples are inlined rather than read from `outputDir` at
+        // runtime: that directory only exists on the build machine, so on a
+        // serverless deployment every read failed and the handler answered a
+        // 404 for anything that was not prerendered as a static file (which
+        // is every request the MCP `get-example` tool makes, since its
+        // internal `$fetch` reaches the handler instead of the CDN).
+        const examples: Record<string, unknown> = {}
+        for (const name of names) {
+          try {
+            examples[name] = JSON.parse(readFileSync(join(outputDir, `${name}.json`), 'utf-8'))
+          } catch {
+            // A missing file means the example was removed between the scan
+            // and codegen; leave it out rather than failing the build.
+          }
+        }
 
-const basePath = ${JSON.stringify(outputDir)}
-const names = ${JSON.stringify(names)}
-const _cache = Object.create(null)
+        return `const names = ${JSON.stringify(names)}
+const examples = ${JSON.stringify(examples)}
 
 function _load(name) {
-  if (!(name in _cache)) {
-    try {
-      _cache[name] = JSON.parse(readFileSync(basePath + '/' + name + '.json', 'utf-8'))
-    } catch {
-      _cache[name] = null
-    }
-  }
-  return _cache[name]
+  return examples[name] || null
 }
 
 export function getComponentExample(name) {
