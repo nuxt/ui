@@ -41,7 +41,7 @@ export interface AccordionProps<T extends AccordionItem = AccordionItem> extends
    * @defaultValue 'div'
    */
   as?: any
-  items?: T[]
+  items?: readonly T[]
   /**
    * The icon displayed on the right side of the trigger.
    * @defaultValue appConfig.ui.icons.chevronDown

@@ -367,8 +367,8 @@ function displayValue(value: GetItemValue<T, VK, ExcludeItem> | GetItemValue<T, 
 const groups = computed<SelectMenuItem[][]>(() =>
   props.items?.length
     ? isArrayOfArray(props.items)
-      ? props.items
-      : [props.items]
+      ? props.items as SelectMenuItem[][]
+      : [props.items as SelectMenuItem[]]
     : []
 )
 // eslint-disable-next-line vue/no-dupe-keys

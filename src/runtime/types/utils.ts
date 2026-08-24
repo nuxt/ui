@@ -33,8 +33,8 @@ export type GetObjectField<MaybeObject, Key extends string> = MaybeObject extend
 // NOTE: `Boolean` could potentially cause casting issues, but have been safe so far.
 // https://vuejs.org/guide/components/props.html#boolean-casting
 export type AcceptableValue = Exclude<_AcceptableValue, Record<string, any>> | boolean
-export type ArrayOrNested<T> = T[] | T[][]
-export type NestedItem<T> = T extends Array<infer I> ? NestedItem<I> : T
+export type ArrayOrNested<T> = readonly T[] | readonly (readonly T[])[]
+export type NestedItem<T> = T extends ReadonlyArray<infer I> ? NestedItem<I> : T
 type AllKeys<T> = T extends any ? keyof T : never
 type NonCommonKeys<T extends object> = Exclude<AllKeys<T>, keyof T>
 type PickTypeOf<T, K extends string | number | symbol> = K extends AllKeys<T>

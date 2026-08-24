@@ -68,7 +68,7 @@ export interface CarouselProps<T extends CarouselItem = CarouselItem> extends Om
    * @defaultValue 'horizontal'
    */
   orientation?: Carousel['variants']['orientation']
-  items?: T[]
+  items?: readonly T[]
   /**
    * Enable Autoplay plugin
    * @see https://www.embla-carousel.com/docs/v8/plugins/autoplay

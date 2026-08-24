@@ -382,8 +382,8 @@ function displayValue(value: GetItemValue<T, VK, ExcludeItem>): string {
 const groups = computed<InputMenuItem[][]>(() =>
   props.items?.length
     ? isArrayOfArray(props.items)
-      ? props.items
-      : [props.items]
+      ? props.items as InputMenuItem[][]
+      : [props.items as InputMenuItem[]]
     : []
 )
 

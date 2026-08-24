@@ -2,6 +2,7 @@
 import type { AppConfig } from '@nuxt/schema'
 import type { EditorMenuOptions } from '../composables/useEditorMenu'
 import type { ComponentConfig } from '../types/tv'
+import type { ArrayOrNested } from '../types/utils'
 import theme from '#build/ui/editor-emoji-menu'
 
 type EditorEmojiMenu = ComponentConfig<typeof theme, AppConfig, 'editorEmojiMenu'>
@@ -21,7 +22,7 @@ export interface EditorEmojiMenuProps<T extends EditorEmojiMenuItem = EditorEmoj
    * @defaultValue 'md'
    */
   size?: EditorEmojiMenu['variants']['size']
-  items?: T[] | T[][]
+  items?: ArrayOrNested<T>
   class?: any
   ui?: EditorEmojiMenu['slots']
 }

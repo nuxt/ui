@@ -57,6 +57,8 @@ const { data: users, status } = await useFetch('https://jsonplaceholder.typicode
   lazy: true
 })
 
+const itemsReadonly = ['Apple', 'Banana', 'Blueberry'] as const
+
 const value = ref('Apple')
 const valueMultiple = ref([fruits[0]!, vegetables[0]!])
 </script>
@@ -84,6 +86,7 @@ const valueMultiple = ref([fruits[0]!, vegetables[0]!])
     <USelectMenu placeholder="Disabled" disabled :items="items" v-bind="props" />
     <USelectMenu placeholder="Required" required :items="items" v-bind="props" />
     <USelectMenu placeholder="Search..." icon="i-lucide-search" :items="items" v-bind="props" />
+    <USelectMenu placeholder="Readonly items" :items="itemsReadonly" v-bind="props" />
     <USelectMenu placeholder="Search..." trailing-icon="i-lucide-search" :items="items" v-bind="props" />
     <USelectMenu placeholder="Search..." :avatar="{ src: 'https://github.com/benjamincanac.png' }" :items="items" v-bind="props" />
     <USelectMenu placeholder="Loading..." loading :items="items" v-bind="props" />

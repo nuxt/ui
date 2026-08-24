@@ -34,7 +34,7 @@ export interface ProgressGroupProps<T extends ProgressGroupItem = ProgressGroupI
    * @defaultValue 'div'
    */
   as?: any
-  items?: T[]
+  items?: readonly T[]
   /**
    * The value all items add up to, used to compute each segment's share of the track.
    * @defaultValue 100

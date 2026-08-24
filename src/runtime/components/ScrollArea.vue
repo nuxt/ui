@@ -58,7 +58,7 @@ export interface ScrollAreaProps<T extends ScrollAreaItem = ScrollAreaItem> {
   /**
    * Array of items to render.
    */
-  items?: T[]
+  items?: readonly T[]
   /**
    * Enable virtualization for large lists.
    * @see https://tanstack.com/virtual/latest/docs/api/virtualizer#options

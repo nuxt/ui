@@ -309,8 +309,8 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.navigationMenu |
 const lists = computed<NavigationMenuItem[][]>(() =>
   props.items?.length
     ? isArrayOfArray(props.items)
-      ? props.items
-      : [props.items]
+      ? props.items as NavigationMenuItem[][]
+      : [props.items as NavigationMenuItem[]]
     : []
 )
 

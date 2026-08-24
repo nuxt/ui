@@ -26,7 +26,7 @@ export type RadioGroupItem = RadioGroupValue | {
   [key: string]: any
 }
 
-export interface RadioGroupProps<T extends RadioGroupItem[] = RadioGroupItem[], VK extends GetItemKeys<T> = 'value'> extends Pick<RadioGroupRootProps, 'disabled' | 'loop' | 'name' | 'required'> {
+export interface RadioGroupProps<T extends readonly RadioGroupItem[] = RadioGroupItem[], VK extends GetItemKeys<T> = 'value'> extends Pick<RadioGroupRootProps, 'disabled' | 'loop' | 'name' | 'required'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -81,7 +81,7 @@ export interface RadioGroupProps<T extends RadioGroupItem[] = RadioGroupItem[], 
   ui?: RadioGroup['slots']
 }
 
-export type RadioGroupEmits<T extends RadioGroupItem[] = RadioGroupItem[], VK extends GetItemKeys<T> = 'value'> = Omit<RadioGroupRootEmits, 'update:modelValue'> & {
+export type RadioGroupEmits<T extends readonly RadioGroupItem[] = RadioGroupItem[], VK extends GetItemKeys<T> = 'value'> = Omit<RadioGroupRootEmits, 'update:modelValue'> & {
   change: [event: Event]
 } & GetModelValueEmits<T, VK, false>
 
@@ -89,14 +89,14 @@ type NormalizeItem<T extends RadioGroupItem> = Exclude<T & { id: string }, Radio
 
 type SlotProps<T extends RadioGroupItem> = (props: { item: NormalizeItem<T>, modelValue: RadioGroupValue }) => VNode[]
 
-export interface RadioGroupSlots<T extends RadioGroupItem[] = RadioGroupItem[]> {
+export interface RadioGroupSlots<T extends readonly RadioGroupItem[] = RadioGroupItem[]> {
   legend?(props?: {}): VNode[]
   label?: SlotProps<T[number]>
   description?: SlotProps<T[number]>
 }
 </script>
 
-<script setup lang="ts" generic="T extends RadioGroupItem[], VK extends GetItemKeys<T> = 'value'">
+<script setup lang="ts" generic="T extends readonly RadioGroupItem[], VK extends GetItemKeys<T> = 'value'">
 import { computed, useId } from 'vue'
 import { RadioGroupRoot, RadioGroupItem as RRadioGroupItem, RadioGroupIndicator, Label } from 'reka-ui'
 import { reactivePick } from '@vueuse/core'

@@ -29,7 +29,7 @@ export interface TimelineProps<T extends TimelineItem = TimelineItem> {
    * @defaultValue 'div'
    */
   as?: any
-  items: T[]
+  items: readonly T[]
   /**
    * @defaultValue 'md'
    */

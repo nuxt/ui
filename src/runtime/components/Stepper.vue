@@ -32,7 +32,7 @@ export interface StepperProps<T extends StepperItem = StepperItem> extends Pick<
    * @defaultValue 'div'
    */
   as?: any
-  items: T[]
+  items: readonly T[]
   /**
    * @defaultValue 'md'
    */

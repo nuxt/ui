@@ -72,8 +72,8 @@ const childrenIcon = computed(() => dir.value === 'rtl' ? appConfig.ui.icons.che
 const groups = computed<ContextMenuItem[][]>(() =>
   props.items?.length
     ? isArrayOfArray(props.items)
-      ? props.items
-      : [props.items]
+      ? props.items as ContextMenuItem[][]
+      : [props.items as ContextMenuItem[]]
     : []
 )
 </script>

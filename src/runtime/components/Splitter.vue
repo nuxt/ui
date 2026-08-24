@@ -36,7 +36,7 @@ export interface SplitterProps<T extends SplitterItem = SplitterItem> extends Pi
    * @defaultValue 'horizontal'
    */
   orientation?: Splitter['variants']['orientation']
-  items?: T[]
+  items?: readonly T[]
   /**
    * Whether the resize handles are disabled, locking the current layout.
    * @defaultValue false

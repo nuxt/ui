@@ -19,7 +19,7 @@ type TreeItem = {
 }
 
 export interface ProseCodeTreeProps {
-  items?: TreeItem[]
+  items?: readonly TreeItem[]
   /**
    * The selected path.
    * @example 'package.json'
@@ -96,7 +96,7 @@ watch(() => props.modelValue, (value) => {
 })
 const rerenderCount = ref(1)
 
-const flatItems = computed<TreeItem[]>(() => {
+const flatItems = computed<readonly TreeItem[]>(() => {
   // eslint-disable-next-line @typescript-eslint/no-unused-expressions
   rerenderCount.value
   return props.items || slots.default?.()?.flatMap(transformSlot).filter(Boolean) || []
@@ -105,7 +105,7 @@ const flatItems = computed<TreeItem[]>(() => {
 // eslint-disable-next-line vue/no-dupe-keys
 const items = computed(() => buildTree(flatItems.value))
 
-function buildTree(items: { label: string }[]): TreeNode[] {
+function buildTree(items: readonly { label: string }[]): TreeNode[] {
   const map = new Map<string, TreeNode>()
   const root: TreeNode[] = []
 

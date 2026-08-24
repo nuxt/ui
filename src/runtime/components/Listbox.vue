@@ -283,8 +283,8 @@ function onSelect(e: Event, item: ListboxItem) {
 const groups = computed<ListboxItem[][]>(() =>
   props.items?.length
     ? isArrayOfArray(props.items)
-      ? props.items
-      : [props.items]
+      ? props.items as ListboxItem[][]
+      : [props.items as ListboxItem[]]
     : []
 )
 

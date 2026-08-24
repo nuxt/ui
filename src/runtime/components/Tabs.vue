@@ -44,7 +44,7 @@ export interface TabsProps<T extends TabsItem = TabsItem> extends Pick<TabsRootP
    * @defaultValue 'div'
    */
   as?: any
-  items?: T[]
+  items?: readonly T[]
   /**
    * @defaultValue 'primary'
    */

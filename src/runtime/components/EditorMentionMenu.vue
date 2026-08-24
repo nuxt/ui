@@ -5,6 +5,7 @@ import type { EditorMenuOptions } from '../composables/useEditorMenu'
 import type { AvatarProps } from './Avatar.vue'
 import type { IconProps } from './Icon.vue'
 import type { ComponentConfig } from '../types/tv'
+import type { ArrayOrNested } from '../types/utils'
 
 type EditorMentionMenu = ComponentConfig<typeof theme, AppConfig, 'editorMentionMenu'>
 
@@ -26,7 +27,7 @@ export interface EditorMentionMenuProps<T extends EditorMentionMenuItem = Editor
    * @defaultValue 'md'
    */
   size?: EditorMentionMenu['variants']['size']
-  items?: T[] | T[][]
+  items?: ArrayOrNested<T>
   class?: any
   ui?: EditorMentionMenu['slots']
 }

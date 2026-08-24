@@ -235,8 +235,8 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.select || {}) })
 const groups = computed<SelectItem[][]>(() =>
   props.items?.length
     ? isArrayOfArray(props.items)
-      ? props.items
-      : [props.items]
+      ? props.items as SelectItem[][]
+      : [props.items as SelectItem[]]
     : []
 )
 // eslint-disable-next-line vue/no-dupe-keys

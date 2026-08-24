@@ -30,7 +30,7 @@ export interface BreadcrumbProps<T extends BreadcrumbItem = BreadcrumbItem> {
    * @defaultValue 'nav'
    */
   as?: any
-  items?: T[]
+  items?: readonly T[]
   /**
    * The icon to use as a separator.
    * @defaultValue appConfig.ui.icons.chevronRight

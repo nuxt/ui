@@ -19,7 +19,7 @@ export interface PageLogosProps {
    */
   as?: any
   title?: string
-  items?: PageLogosItem[]
+  items?: readonly PageLogosItem[]
   marquee?: boolean | MarqueeProps
   class?: any
   ui?: PageLogos['slots']

@@ -121,7 +121,7 @@ export function isEmpty(value: unknown): boolean {
   return false
 }
 
-export function getDisplayValue<T extends Array<any>, V>(
+export function getDisplayValue<T extends ReadonlyArray<any>, V>(
   items: T,
   value: V | undefined | null,
   options: {
@@ -161,10 +161,10 @@ export function getDisplayValue<T extends Array<any>, V>(
 }
 
 export function isArrayOfArray<
-  A extends any[] | any[][]
->(item: A): item is A extends Array<infer T>
-  ? T extends any[]
-    ? T[]
+  A extends readonly any[] | readonly (readonly any[])[]
+>(item: A): item is A extends ReadonlyArray<infer T>
+  ? T extends readonly any[]
+    ? readonly T[]
     : never
   : never {
   return Array.isArray(item[0])

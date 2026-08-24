@@ -5,6 +5,7 @@ import type { EditorMenuOptions } from '../composables/useEditorMenu'
 import type { IconProps } from './Icon.vue'
 import type { EditorItem, EditorCustomHandlers } from '../types/editor'
 import type { ComponentConfig } from '../types/tv'
+import type { ArrayOrNested } from '../types/utils'
 
 type EditorSuggestionMenu = ComponentConfig<typeof theme, AppConfig, 'editorSuggestionMenu'>
 
@@ -44,7 +45,7 @@ export interface EditorSuggestionMenuProps<T extends EditorSuggestionMenuItem = 
    * @defaultValue 'md'
    */
   size?: EditorSuggestionMenu['variants']['size']
-  items?: T[] | T[][]
+  items?: ArrayOrNested<T>
   class?: any
   ui?: EditorSuggestionMenu['slots']
 }

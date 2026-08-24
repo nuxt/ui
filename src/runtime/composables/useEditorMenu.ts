@@ -11,6 +11,7 @@ import Suggestion from '@tiptap/suggestion'
 import { PluginKey } from '@tiptap/pm/state'
 import type { Plugin } from '@tiptap/pm/state'
 import type { FloatingUIOptions } from '../types/editor'
+import type { ArrayOrNested } from '../types/utils'
 import { buildFloatingUIMiddleware } from '../utils/editor'
 import { get, isArrayOfArray } from '../utils'
 
@@ -27,7 +28,7 @@ export interface EditorMenuOptions<T = any> {
   /**
    * The items to display (can be a flat array or grouped)
    */
-  items?: MaybeRef<T[] | T[][] | undefined>
+  items?: MaybeRef<ArrayOrNested<T> | undefined>
   /**
    * Fields to filter items by.
    * @defaultValue ['label']

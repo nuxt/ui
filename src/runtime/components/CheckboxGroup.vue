@@ -27,7 +27,7 @@ export type CheckboxGroupItem = CheckboxGroupValue | {
   [key: string]: any
 }
 
-export interface CheckboxGroupProps<T extends CheckboxGroupItem[] = CheckboxGroupItem[], VK extends GetItemKeys<T> = 'value'> extends Pick<CheckboxGroupRootProps, 'disabled' | 'loop' | 'name' | 'required'>, Pick<CheckboxProps, 'color' | 'highlight' | 'indicator' | 'icon'> {
+export interface CheckboxGroupProps<T extends readonly CheckboxGroupItem[] = CheckboxGroupItem[], VK extends GetItemKeys<T> = 'value'> extends Pick<CheckboxGroupRootProps, 'disabled' | 'loop' | 'name' | 'required'>, Pick<CheckboxProps, 'color' | 'highlight' | 'indicator' | 'icon'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -71,20 +71,20 @@ export interface CheckboxGroupProps<T extends CheckboxGroupItem[] = CheckboxGrou
   ui?: CheckboxGroup['slots'] & CheckboxProps['ui']
 }
 
-export type CheckboxGroupEmits<T extends CheckboxGroupItem[] = CheckboxGroupItem[], VK extends GetItemKeys<T> = 'value'> = Omit<CheckboxGroupRootEmits, 'update:modelValue'> & {
+export type CheckboxGroupEmits<T extends readonly CheckboxGroupItem[] = CheckboxGroupItem[], VK extends GetItemKeys<T> = 'value'> = Omit<CheckboxGroupRootEmits, 'update:modelValue'> & {
   change: [event: Event]
 } & GetModelValueEmits<T, VK, true>
 
 type SlotProps<T extends CheckboxGroupItem> = (props: { item: T & { id: string } }) => VNode[]
 
-export interface CheckboxGroupSlots<T extends CheckboxGroupItem[] = CheckboxGroupItem[]> {
+export interface CheckboxGroupSlots<T extends readonly CheckboxGroupItem[] = CheckboxGroupItem[]> {
   legend?(props?: {}): VNode[]
   label?: SlotProps<T[number]>
   description?: SlotProps<T[number]>
 }
 </script>
 
-<script setup lang="ts" generic="T extends CheckboxGroupItem[], VK extends GetItemKeys<T> = 'value'">
+<script setup lang="ts" generic="T extends readonly CheckboxGroupItem[], VK extends GetItemKeys<T> = 'value'">
 import { computed, useId } from 'vue'
 import { CheckboxGroupRoot } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
