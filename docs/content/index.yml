@@ -30,7 +30,7 @@ features:
     description: A complete design system powered by Tailwind CSS and Reka UI for top performance and accessibility.
     icon: i-lucide-rocket
     to: /docs/getting-started
-  - title: Large icons sets
+  - title: Large icon sets
     description: Access to over 200,000 customizable icons from Iconify powered by @nuxt/icon.
     icon: i-lucide-smile
     to: /docs/getting-started/integrations/icons
@@ -84,12 +84,12 @@ design_system:
       --color-brand-200: #bae6fd;
       --color-brand-300: #7dd3fc;
       --color-brand-400: #38bdf8;
-      --color-brand-500: #3b82f6;
-      --color-brand-600: #2563eb;
-      --color-brand-700: #1d4ed8;
-      --color-brand-800: #1e40af;
-      --color-brand-900: #1e3a8a;
-      --color-brand-950: #172554;
+      --color-brand-500: #0ea5e9;
+      --color-brand-600: #0284c7;
+      --color-brand-700: #0369a1;
+      --color-brand-800: #075985;
+      --color-brand-900: #0c4a6e;
+      --color-brand-950: #082f49;
     }
     ```
 
