@@ -13,8 +13,6 @@ links:
 
 ## Usage
 
-Use the User component to display a person with their name, description and avatar.
-
 ### Name
 
 Use the `name` prop to display a name for the user.

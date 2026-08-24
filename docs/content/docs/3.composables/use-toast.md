@@ -149,7 +149,7 @@ Updates an existing toast notification.
   ::
 
   ::field{name="toast" type="Omit<Partial<Toast>, 'id'>" required}
-  A partial `Toast` object with the properties to update. The `id` cannot be changed.
+  A partial `Toast` object with the properties to update. The `id` cannot be changed, the toast is reopened, and `duration` is reset unless you pass it again.
   ::
 ::
 

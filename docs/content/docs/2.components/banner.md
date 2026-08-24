@@ -12,8 +12,6 @@ links:
 
 ## Usage
 
-Use the Banner component to display an announcement at the very top of your app.
-
 ### Title
 
 Use the `title` prop to display a title on the Banner.

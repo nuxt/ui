@@ -78,7 +78,7 @@ Shortcuts are defined using the following format:
 
 ### Special keys
 
-Use these names to match keys that don't produce a character.
+Use these names to match special keys.
 
 - `escape`: Triggers on Esc key
 - `enter`: Triggers on Enter key

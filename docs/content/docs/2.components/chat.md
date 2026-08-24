@@ -147,7 +147,7 @@ export default defineEventHandler(async (event) => {
 
 ### Reasoning
 
-To enable [reasoning](https://ai-sdk.dev/docs/ai-sdk-ui/chatbot#reasoning), configure `providerOptions` for your provider ([Anthropic](https://ai-sdk.dev/docs/guides/providers/anthropic#reasoning), [Google](https://ai-sdk.dev/providers/ai-sdk-providers/google#thinking), [OpenAI](https://ai-sdk.dev/docs/guides/providers/openai#reasoning)):
+To enable [reasoning](https://ai-sdk.dev/docs/ai-sdk-ui/chatbot#reasoning), configure `providerOptions` for your provider ([Anthropic](https://ai-sdk.dev/providers/ai-sdk-providers/anthropic#reasoning), [Google](https://ai-sdk.dev/providers/ai-sdk-providers/google#thinking), [OpenAI](https://ai-sdk.dev/providers/ai-sdk-providers/openai#reasoning)):
 
 ```ts [server/api/chat.post.ts]
 import { streamText, convertToModelMessages, toUIMessageStream, createUIMessageStreamResponse } from 'ai'
@@ -188,7 +188,7 @@ export default defineEventHandler(async (event) => {
 
 ### Web Search
 
-Some providers offer built-in web search tools: [Anthropic](https://ai-sdk.dev/docs/guides/providers/anthropic#web-search-tool), [Google](https://ai-sdk.dev/providers/ai-sdk-providers/google#google-search), [OpenAI](https://ai-sdk.dev/providers/ai-sdk-providers/openai#web-search-tool).
+Some providers offer built-in web search tools: [Anthropic](https://ai-sdk.dev/providers/ai-sdk-providers/anthropic#web-search-tool), [Google](https://ai-sdk.dev/providers/ai-sdk-providers/google#google-search), [OpenAI](https://ai-sdk.dev/providers/ai-sdk-providers/openai#web-search-tool).
 
 ::code-group
 

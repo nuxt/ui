@@ -12,8 +12,6 @@ links:
 
 ## Usage
 
-Use the Alert component to display a callout with a title, a description and optional actions.
-
 ### Title
 
 Use the `title` prop to set the title of the Alert.
