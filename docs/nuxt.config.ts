@@ -1,16 +1,19 @@
 import { createResolver } from '@nuxt/kit'
 import pkg from '../package.json'
 import { WHEN_TO_USE_SECTION } from './server/utils/llms'
-import { AGENT_LINK_HEADER, MARKDOWN_VARY } from './server/utils/markdownNegotiation'
+import { SITE_URL } from './server/utils/site'
 
 const { resolve } = createResolver(import.meta.url)
 
 export default defineNuxtConfig({
   modules: [
     '../src/module',
+    '@nuxtjs/robots',
+    '@nuxtjs/sitemap',
     '@nuxt/content',
     '@nuxt/image',
     '@nuxtjs/mcp-toolkit',
+    'nuxt-agent-discovery',
     '@vueuse/nuxt',
     'nuxt-component-meta',
     'nuxt-llms',
@@ -82,19 +85,6 @@ export default defineNuxtConfig({
 
   routeRules: {
     '/api/navigation.json': { prerender: true },
-    // Agent discovery Link headers on the homepage (RFC 8288, RFC 9727)
-    '/': {
-      headers: {
-        Link: AGENT_LINK_HEADER,
-        Vary: MARKDOWN_VARY
-      }
-    },
-    '/docs/**': { headers: { Vary: MARKDOWN_VARY } },
-    // Direct `/raw/**` requests. Requests rewritten there by
-    // `modules/md-rewrite.ts` are served from a prerendered file and never
-    // reach these rules, so that `Vary` is emitted by the rewrite itself (see
-    // `vercelMarkdownRoutes()`) and by `server/middleware/markdown.ts`.
-    '/raw/**': { headers: { Vary: MARKDOWN_VARY } },
     // v4 redirects - moved to `docs/`
     '/getting-started/**': { redirect: { to: '/docs/getting-started/**', statusCode: 301 }, prerender: false },
     '/components/**': { redirect: { to: '/docs/components/**', statusCode: 301 }, prerender: false },
@@ -219,11 +209,6 @@ export default defineNuxtConfig({
     experimental: {
       asyncContext: true
     },
-    publicAssets: [{
-      dir: resolve('../skills'),
-      baseURL: '/.well-known/skills',
-      maxAge: 60 * 60 * 24
-    }],
     prerender: {
       routes: [
         '/',
@@ -276,25 +261,49 @@ export default defineNuxtConfig({
     }
   },
 
-  hooks: {
-    // Answer errors with Markdown for agents, ahead of Nuxt's HTML error page.
-    // Nuxt only sets `errorHandler` when it is empty and never appends to it,
-    // so the chain has to be built here: ours first, then Nuxt's, then Nitro's
-    // JSON fallback. Each handler that doesn't write a response hands over to
-    // the next one.
-    'nitro:config'(config) {
-      // Nuxt assigns its handler while building the config, before this hook
-      // runs. If that ever changes, prepending ours would make Nuxt skip
-      // registering the HTML error page, so fail loudly instead of silently
-      // degrading browser errors to Nitro's JSON fallback.
-      if (!config.errorHandler) {
-        throw new Error('Expected Nuxt to have set `nitro.errorHandler` before the `nitro:config` hook')
+  agentDiscovery: {
+    siteUrl: SITE_URL,
+    siteName: 'Nuxt UI',
+    // Only the homepage and the documentation have a Markdown representation.
+    // `*` matches one path segment, `**` one or more, so the generated Vercel
+    // route table stays O(patterns) instead of growing with the page count.
+    routes: [
+      { path: '/', raw: '/raw/index.md' },
+      '/docs/**'
+    ],
+    sitemap: {
+      markdown: {
+        // Split `/docs/**` into a section per area; `/blog/**` stays whole.
+        expand: ['/docs'],
+        labels: { 'getting-started': 'Getting Started' }
       }
-
-      const handlers = Array.isArray(config.errorHandler) ? config.errorHandler : [config.errorHandler]
-
-      config.errorHandler = [resolve('./server/error'), ...handlers]
+    },
+    // Scanned from `../skills`, with `/.well-known/skills/index.json` generated
+    // from the files on disk rather than hand-maintained.
+    skills: { dir: '../skills' },
+    discovery: {
+      mcpServerCard: {
+        endpoint: '/mcp',
+        name: 'Nuxt UI',
+        title: 'Nuxt UI MCP Server',
+        description: 'MCP server providing tools, resources and prompts to help AI agents build with Nuxt UI — search components and composables, retrieve documentation, fetch component metadata, and list starter templates.',
+        documentation: '/docs/getting-started/ai/mcp',
+        repository: 'https://github.com/nuxt/ui',
+        license: 'MIT',
+        version: pkg.version
+      },
+      links: [
+        { href: '/openapi.json', rel: 'service-desc', type: 'application/vnd.oai.openapi+json', title: 'OpenAPI specification: machine-readable API surface', anchor: '/' },
+        { href: '/docs', rel: 'service-doc', type: 'text/html', anchor: '/' },
+        // Entry points for agents recovering from an error. `header: false`
+        // keeps them out of the `Link` header, which advertises the discovery
+        // documents rather than individual pages.
+        { href: '/raw/docs/getting-started.md', rel: 'index', type: 'text/markdown', title: 'Documentation home', header: false },
+        { href: '/raw/index.md', rel: 'start', type: 'text/markdown', title: 'Homepage', header: false }
+      ]
     }
+    // `robots.txt` and `sitemap.md` are generated by the module, and
+    // `sitemap.xml` by `@nuxtjs/sitemap`, which the module keeps `/raw/**` out of.
   },
 
   componentMeta: {

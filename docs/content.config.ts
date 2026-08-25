@@ -1,5 +1,6 @@
 import { z } from 'zod'
 import { defineCollection } from '@nuxt/content'
+import { asSitemapCollection } from '@nuxtjs/sitemap/content'
 
 const Image = z.object({
   src: z.string(),
@@ -57,7 +58,7 @@ const Page = z.object({
 })
 
 export const collections = {
-  index: defineCollection({
+  index: defineCollection(asSitemapCollection({
     type: 'page',
     source: 'index.yml',
     schema: Page.extend({
@@ -77,8 +78,8 @@ export const collections = {
       templates: PageSection,
       community: PageSection
     })
-  }),
-  docs: defineCollection({
+  })),
+  docs: defineCollection(asSitemapCollection({
     type: 'page',
     source: [{
       include: 'docs/**/*'
@@ -94,8 +95,8 @@ export const collections = {
       }),
       links: z.array(Button)
     })
-  }),
-  figma: defineCollection({
+  })),
+  figma: defineCollection(asSitemapCollection({
     type: 'page',
     source: 'figma.yml',
     schema: Page.extend({
@@ -140,8 +141,8 @@ export const collections = {
         }))
       })
     })
-  }),
-  showcase: defineCollection({
+  })),
+  showcase: defineCollection(asSitemapCollection({
     type: 'page',
     source: 'showcase.yml',
     schema: Page.extend({
@@ -157,8 +158,8 @@ export const collections = {
         }).optional()
       }))
     })
-  }),
-  templates: defineCollection({
+  })),
+  templates: defineCollection(asSitemapCollection({
     type: 'page',
     source: 'templates.yml',
     schema: Page.extend({
@@ -173,8 +174,8 @@ export const collections = {
         deploy_links: z.array(Button).optional()
       }))
     })
-  }),
-  community: defineCollection({
+  })),
+  community: defineCollection(asSitemapCollection({
     type: 'page',
     source: 'community.yml',
     schema: Page.extend({
@@ -190,18 +191,18 @@ export const collections = {
         to: z.string()
       }))
     })
-  }),
-  team: defineCollection({
+  })),
+  team: defineCollection(asSitemapCollection({
     type: 'page',
     source: 'team.yml',
     schema: Page
-  }),
-  blog: defineCollection({
+  })),
+  blog: defineCollection(asSitemapCollection({
     type: 'page',
     source: 'blog.yml',
     schema: Page
-  }),
-  posts: defineCollection({
+  })),
+  posts: defineCollection(asSitemapCollection({
     type: 'page',
     source: [{
       include: 'blog/**/*'
@@ -215,10 +216,10 @@ export const collections = {
         to: z.string().optional()
       })).optional()
     })
-  }),
-  releases: defineCollection({
+  })),
+  releases: defineCollection(asSitemapCollection({
     type: 'page',
     source: 'releases.yml',
     schema: Page
-  })
+  }))
 }

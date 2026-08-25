@@ -1,4 +1,5 @@
 import { queryCollection } from '@nuxt/content/server'
+import { rawUrl, renderAgentResources } from '#agent-discovery'
 
 // Prerendered from `app/pages/index.vue`, so the response is never computed
 // at runtime in production. It used to be a `defineCachedEventHandler` with
@@ -23,7 +24,7 @@ export default defineEventHandler(async (event) => {
 
 ${description}
 
-${renderLlmsSection(WHEN_TO_USE_SECTION)}
+${renderLlmsSection(WHEN_TO_USE_SECTION, href => rawUrl(event, href))}
 
 ## About
 
@@ -48,20 +49,8 @@ Nuxt UI is a free and open source Vue UI library powered by [Reka UI](https://re
 - Components: <${SITE_URL}/raw/docs/components.md>
 - Composables: <${SITE_URL}/raw/docs/composables/define-shortcuts.md>
 - Typography: <${SITE_URL}/raw/docs/typography.md>
-- Sitemap (XML): <${SITE_URL}/sitemap.xml>
-- Sitemap (Markdown): <${SITE_URL}/sitemap.md>
-- LLMs index: <${SITE_URL}/llms.txt>
-- Full LLMs documentation: <${SITE_URL}/llms-full.txt>
 
-## Resources for Agents
-
-- MCP Server Card: <${SITE_URL}/.well-known/mcp/server-card.json>
-- MCP endpoint: <${SITE_URL}/mcp>
-- API Catalog: <${SITE_URL}/.well-known/api-catalog>
-- OpenAPI specification: <${SITE_URL}/openapi.json>
-- Agent Skill: <${SITE_URL}/.well-known/skills/nuxt-ui/SKILL.md>
-- Skills index: <${SITE_URL}/.well-known/skills/index.json>
-
+${renderAgentResources(event)}
 ## Links
 
 - Website: <${SITE_URL}>

@@ -1,4 +1,4 @@
-import { SITE_URL } from './markdownNegotiation'
+import { SITE_URL } from './site'
 
 /**
  * Hand-authored OpenAPI description of the public surface of ui.nuxt.com.
