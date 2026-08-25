@@ -29,8 +29,11 @@ const appConfig = useAppConfig()
           :trailing-icon="appConfig.ui.icons.chevronDown"
           :color="dirty ? 'primary' : 'neutral'"
           variant="outline"
-          :class="value && 'w-38'"
-          :ui="{ label: 'flex-1 min-w-0 text-left truncate' }"
+          :class="['group', value && 'w-38']"
+          :ui="{
+            label: 'flex-1 min-w-0 text-left truncate',
+            trailingIcon: ['transition-transform duration-200', open && 'rotate-180']
+          }"
           :aria-label="label"
         >
           <template v-if="!!$slots.leading" #leading>

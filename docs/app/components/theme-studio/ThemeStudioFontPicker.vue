@@ -106,7 +106,7 @@ function faceOf(value?: string) {
     :aria-label="ariaLabel"
     size="sm"
     class="w-full"
-    :ui="{ content: 'w-(--reka-combobox-trigger-width)', trailingIcon: 'transition-transform duration-200 group-data-[state=open]:rotate-180' }"
+    :ui="{ content: 'w-(--reka-combobox-trigger-width)', trailingIcon: ['transition-transform duration-200', open && 'rotate-180'] }"
   >
     <!-- No inline face on the trigger: the panel already renders in the body
          font, so the name inherits it. -->

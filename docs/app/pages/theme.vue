@@ -52,10 +52,16 @@ const shareMode = ref<'import' | 'export'>('export')
         <HeaderLogo />
       </template>
 
-      <ThemeStudioViewSwitcher v-model:open="openPanels.view" :content="{ align: 'end' }" variant="outline" />
+      <ThemeStudioViewSwitcher v-model:open="openPanels.view" :content="{ align: 'end' }" variant="soft" />
+
+      <template #right>
+        <UTooltip text="Color mode" :kbds="['d']">
+          <UColorModeButton color="neutral" variant="ghost" data-keep-panels class="shrink-0" />
+        </UTooltip>
+      </template>
     </UHeader>
 
-    <div class="flex flex-col w-full bg-default rounded-xl overflow-hidden shadow ring ring-default h-[calc(100dvh-var(--ui-header-height)-var(--ui-header-height))]">
+    <div class="flex flex-col bg-default rounded-xl overflow-hidden shadow ring ring-default h-[calc(100dvh-var(--ui-header-height)-var(--ui-header-height))] mx-2">
       <!-- [contain:paint]: Chromium won't clip nested composited layers by
              an ancestor's overflow alone. Keyed on the icon pack: demo views
              resolve icons at setup, so a pack swap remounts to re-resolve. -->
@@ -74,126 +80,118 @@ const shareMode = ref<'import' | 'export'>('export')
     </div>
 
     <UFooter>
-      <template #left>
-        <ThemeStudioToolbarField v-slot="{ tooltip }" label="Preset">
-          <ThemeStudioPresetMenu v-model:open="openPanels.presets" keep-panels :tooltip="tooltip" class="w-38" />
-        </ThemeStudioToolbarField>
+      <ThemeStudioToolbarField v-slot="{ tooltip }" label="Preset">
+        <ThemeStudioPresetMenu v-model:open="openPanels.presets" keep-panels :tooltip="tooltip" class="w-38" />
+      </ThemeStudioToolbarField>
 
-        <ThemeStudioToolbarPopover
-          v-model:open="openPanels.colors"
-          label="Colors"
-          :value="colorLabel"
-          :dirty="groupDirtyFlags.colors.value"
-        >
-          <template #leading>
-            <span class="flex items-center -space-x-0.5">
-              <!-- primary stacks on top; black-as-primary has no ramp
+      <ThemeStudioToolbarPopover
+        v-model:open="openPanels.colors"
+        label="Colors"
+        :value="colorLabel"
+        :dirty="groupDirtyFlags.colors.value"
+      >
+        <template #leading>
+          <span class="flex items-center -space-x-0.5">
+            <!-- primary stacks on top; black-as-primary has no ramp
                        variable to point at -->
-              <span
-                v-for="(chip, index) in colorChips"
-                :key="chip.label"
-                class="relative size-3 rounded-full ring-2 ring-(--ui-bg-elevated)"
-                :class="!chip.dot && 'bg-black dark:bg-white'"
-                :style="{ ...(chip.dot ? { backgroundColor: chip.dot } : {}), zIndex: colorChips.length - index }"
-              />
-            </span>
-          </template>
+            <span
+              v-for="(chip, index) in colorChips"
+              :key="chip.label"
+              class="relative size-3 rounded-full ring-2 ring-(--ui-bg-elevated)"
+              :class="!chip.dot && 'bg-black dark:bg-white'"
+              :style="{ ...(chip.dot ? { backgroundColor: chip.dot } : {}), zIndex: colorChips.length - index }"
+            />
+          </span>
+        </template>
 
-          <ThemeStudioControls group="colors" class="w-80 max-h-[70vh] overflow-y-auto" />
-        </ThemeStudioToolbarPopover>
+        <ThemeStudioControls group="colors" class="w-80 max-h-[70vh] overflow-y-auto" />
+      </ThemeStudioToolbarPopover>
 
-        <ThemeStudioToolbarPopover
-          v-model:open="openPanels.font"
-          label="Text"
-          :icon="studioIcons.text"
-          :value="font"
-          :dirty="groupDirtyFlags.font.value"
-        >
-          <ThemeStudioFontOptions />
-        </ThemeStudioToolbarPopover>
+      <ThemeStudioToolbarPopover
+        v-model:open="openPanels.font"
+        label="Text"
+        :icon="studioIcons.text"
+        :value="font"
+        :dirty="groupDirtyFlags.font.value"
+      >
+        <ThemeStudioFontOptions />
+      </ThemeStudioToolbarPopover>
 
-        <!-- the picker is already a popover, so it sits in the bar directly
+      <!-- the picker is already a popover, so it sits in the bar directly
                  rather than inside a second one -->
-        <ThemeStudioToolbarField v-slot="{ tooltip }" label="Icons">
-          <ThemeStudioIconOptions v-model:open="openPanels.icons" :tooltip="tooltip" :dirty="groupDirtyFlags.icons.value" class="w-38" />
-        </ThemeStudioToolbarField>
+      <ThemeStudioToolbarField v-slot="{ tooltip }" label="Icons">
+        <ThemeStudioIconOptions v-model:open="openPanels.icons" :tooltip="tooltip" :dirty="groupDirtyFlags.icons.value" class="w-38" />
+      </ThemeStudioToolbarField>
 
-        <ThemeStudioToolbarField v-slot="{ tooltip }" label="Radius">
-          <ThemeStudioRadiusOptions v-model:open="openPanels.radius" :tooltip="tooltip" :dirty="groupDirtyFlags.radius.value" class="w-30" />
-        </ThemeStudioToolbarField>
+      <ThemeStudioToolbarField v-slot="{ tooltip }" label="Radius">
+        <ThemeStudioRadiusOptions v-model:open="openPanels.radius" :tooltip="tooltip" :dirty="groupDirtyFlags.radius.value" class="w-34" />
+      </ThemeStudioToolbarField>
 
-        <ThemeStudioToolbarPopover
-          v-model:open="openPanels.style"
-          label="Defaults"
-          :icon="studioIcons.options"
-          :dirty="groupDirtyFlags.defaults.value"
-        >
-          <ThemeStudioControls group="style" class="w-80 max-h-[70vh] overflow-y-auto" />
-        </ThemeStudioToolbarPopover>
-      </template>
+      <ThemeStudioToolbarPopover
+        v-model:open="openPanels.style"
+        label="Defaults"
+        :icon="studioIcons.options"
+        :dirty="groupDirtyFlags.defaults.value"
+      >
+        <ThemeStudioControls group="style" class="w-80 max-h-[70vh] overflow-y-auto" />
+      </ThemeStudioToolbarPopover>
 
-      <template #right>
-        <UTooltip text="Color mode" :kbds="['d']">
-          <UColorModeButton color="neutral" variant="outline" data-keep-panels class="shrink-0" />
-        </UTooltip>
+      <ThemeStudioShuffleButton />
 
-        <ThemeStudioShuffleButton />
-
-        <UFieldGroup class="shrink-0">
-          <UTooltip text="Undo" :kbds="['meta', 'Z']">
-            <UButton
-              :icon="studioIcons.undo"
-              color="neutral"
-              variant="outline"
-              :disabled="!past.length"
-              aria-label="Undo theme change"
-              @click="undo"
-            />
-          </UTooltip>
-
-          <UTooltip text="Redo" :kbds="['meta', 'shift', 'Z']">
-            <UButton
-              :icon="studioIcons.redo"
-              color="neutral"
-              variant="outline"
-              :disabled="!future.length"
-              aria-label="Redo theme change"
-              @click="redo"
-            />
-          </UTooltip>
-        </UFieldGroup>
-
-        <UTooltip :text="resetLabel">
+      <UFieldGroup class="shrink-0">
+        <UTooltip text="Undo" :kbds="['meta', 'Z']">
           <UButton
-            :icon="studioIcons.reset"
+            :icon="studioIcons.undo"
             color="neutral"
             variant="outline"
-            :disabled="!canReset"
-            :aria-label="resetLabel"
-            @click="resetToBaseline"
+            :disabled="!past.length"
+            aria-label="Undo theme change"
+            @click="undo"
           />
         </UTooltip>
 
-        <UFieldGroup>
-          <UTooltip text="Import theme">
-            <UButton
-              :icon="appConfig.ui.icons.upload"
-              color="neutral"
-              variant="outline"
-              aria-label="Import theme"
-              @click="shareMode = 'import'; shareOpen = true"
-            />
-          </UTooltip>
-
+        <UTooltip text="Redo" :kbds="['meta', 'shift', 'Z']">
           <UButton
-            label="Export"
-            :icon="studioIcons.export"
+            :icon="studioIcons.redo"
             color="neutral"
             variant="outline"
-            @click="shareMode = 'export'; shareOpen = true"
+            :disabled="!future.length"
+            aria-label="Redo theme change"
+            @click="redo"
           />
-        </UFieldGroup>
-      </template>
+        </UTooltip>
+      </UFieldGroup>
+
+      <UTooltip :text="resetLabel">
+        <UButton
+          :icon="studioIcons.reset"
+          color="neutral"
+          variant="outline"
+          :disabled="!canReset"
+          :aria-label="resetLabel"
+          @click="resetToBaseline"
+        />
+      </UTooltip>
+
+      <UFieldGroup>
+        <UTooltip text="Import theme">
+          <UButton
+            :icon="appConfig.ui.icons.upload"
+            color="neutral"
+            variant="outline"
+            aria-label="Import theme"
+            @click="shareMode = 'import'; shareOpen = true"
+          />
+        </UTooltip>
+
+        <UButton
+          label="Export"
+          :icon="studioIcons.export"
+          color="neutral"
+          variant="outline"
+          @click="shareMode = 'export'; shareOpen = true"
+        />
+      </UFieldGroup>
     </UFooter>
 
     <ThemeStudioShareModal v-model:open="shareOpen" v-model:mode="shareMode" />

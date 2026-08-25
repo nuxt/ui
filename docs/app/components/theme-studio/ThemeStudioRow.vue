@@ -121,7 +121,7 @@ const showTextLabel = computed(() => !props.icon && !shade.value)
     :ui="{
       /* the row contract: 28px, matching a size-sm button */
       root: 'flex items-center gap-2 min-h-7',
-      wrapper: spread ? 'shrink-0' : 'w-13 shrink-0',
+      wrapper: spread ? 'shrink-0' : 'w-16 shrink-0',
       /* truncate text labels only, it would clip the shade chip's ring */
       label: `w-full text-muted font-normal select-none${showTextLabel && !spread ? ' truncate' : ''}`,
       container: `flex-1 flex items-center gap-2 mt-0${spread ? ' justify-end' : ''}`

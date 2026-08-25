@@ -32,7 +32,7 @@ const { icon, icons } = useTheme()
       :ui="{
         base: dirty && 'ring-primary/50 text-primary',
         leadingIcon: dirty && 'text-primary',
-        trailingIcon: dirty && 'text-primary',
+        trailingIcon: ['transition-transform duration-200', open && 'rotate-180', dirty && 'text-primary'],
         content: 'w-72'
       }"
       v-bind="$attrs"

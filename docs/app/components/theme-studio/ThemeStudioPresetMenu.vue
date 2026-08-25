@@ -88,7 +88,12 @@ const selected = computed({
           color="neutral"
           variant="outline"
           block
-          :ui="{ leadingIcon: 'text-primary' }"
+          class="group"
+          :ui="{
+            label: 'flex-1 min-w-0 text-left truncate',
+            leadingIcon: 'text-primary',
+            trailingIcon: ['transition-transform duration-200', open && 'rotate-180']
+          }"
         />
       </UTooltip>
 
