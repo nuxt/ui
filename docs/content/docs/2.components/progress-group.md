@@ -2,8 +2,7 @@
 title: ProgressGroup
 description: A progress bar split into multiple segments that add up to a total.
 category: element
-navigation:
-  badge: Soon
+navigation.badge: New
 keywords:
   - meter
   - meter group

@@ -731,7 +731,7 @@ export async function transformMDC(event: H3Event, doc: Document): Promise<Docum
       .all()
 
     const listItems = components.map((c: any) =>
-      ['li', {}, ['a', { href: `https://ui.nuxt.com/raw${c.path}.md` }, c.title]]
+      ['li', {}, ['a', { href: `${SITE_URL}/raw${c.path}.md` }, c.title]]
     )
 
     node[0] = 'ul'

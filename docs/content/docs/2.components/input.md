@@ -278,7 +278,7 @@ name: 'input-kbd-example'
 ---
 ::
 
-::note{to="/composables/define-shortcuts"}
+::note{to="/docs/composables/define-shortcuts"}
 This example uses the `defineShortcuts` composable to focus the Input when the :kbd{value="/"} key is pressed.
 ::
 

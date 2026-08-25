@@ -5,6 +5,10 @@ hero:
   title: Showcase
   description: Discover our selection of projects built with Nuxt UI.
 items:
+  - name: Brusnika.LMS
+    url: https://brusnika-lms.com/
+    screenshotOptions:
+      cookies: ['cookie-consent=accepted']
   - name: Codemo
     url: https://codemo.dev/
   - name: CodeSnap
