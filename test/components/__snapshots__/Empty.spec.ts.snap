@@ -7,7 +7,7 @@ exports[`Empty > renders with actions correctly 1`] = `
     <div data-slot="description" class="text-balance text-center text-sm text-muted">Description</div>
   </div>
   <div data-slot="body" class="flex flex-col items-center gap-4 max-w-sm">
-    <div data-slot="actions" class="flex flex-wrap justify-center gap-2 shrink-0"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span><span data-slot="label" class="truncate">Add</span>
+    <div data-slot="actions" class="flex flex-wrap justify-center gap-2 shrink-0"><button type="button" data-slot="base" data-orientation="horizontal" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span><span data-slot="label" class="truncate">Add</span>
         <!--v-if-->
       </button></div>
   </div>
@@ -65,7 +65,7 @@ exports[`Empty > renders with class correctly 1`] = `
     <div data-slot="description" class="text-balance text-center text-sm text-muted">Description</div>
   </div>
   <div data-slot="body" class="flex flex-col items-center gap-4 max-w-sm">
-    <div data-slot="actions" class="flex flex-wrap justify-center gap-2 shrink-0"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span><span data-slot="label" class="truncate">Add</span>
+    <div data-slot="actions" class="flex flex-wrap justify-center gap-2 shrink-0"><button type="button" data-slot="base" data-orientation="horizontal" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span><span data-slot="label" class="truncate">Add</span>
         <!--v-if-->
       </button></div>
   </div>
@@ -91,7 +91,7 @@ exports[`Empty > renders with description slot correctly 1`] = `
     <div data-slot="description" class="text-balance text-center text-sm text-muted">Description slot</div>
   </div>
   <div data-slot="body" class="flex flex-col items-center gap-4 max-w-sm">
-    <div data-slot="actions" class="flex flex-wrap justify-center gap-2 shrink-0"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span><span data-slot="label" class="truncate">Add</span>
+    <div data-slot="actions" class="flex flex-wrap justify-center gap-2 shrink-0"><button type="button" data-slot="base" data-orientation="horizontal" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span><span data-slot="label" class="truncate">Add</span>
         <!--v-if-->
       </button></div>
   </div>
@@ -106,7 +106,7 @@ exports[`Empty > renders with footer slot correctly 1`] = `
     <div data-slot="description" class="text-balance text-center text-sm text-muted">Description</div>
   </div>
   <div data-slot="body" class="flex flex-col items-center gap-4 max-w-sm">
-    <div data-slot="actions" class="flex flex-wrap justify-center gap-2 shrink-0"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span><span data-slot="label" class="truncate">Add</span>
+    <div data-slot="actions" class="flex flex-wrap justify-center gap-2 shrink-0"><button type="button" data-slot="base" data-orientation="horizontal" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span><span data-slot="label" class="truncate">Add</span>
         <!--v-if-->
       </button></div>
   </div>
@@ -118,7 +118,7 @@ exports[`Empty > renders with header slot correctly 1`] = `
 "<div data-slot="root" class="relative flex flex-col items-center justify-center gap-4 rounded-lg p-4 sm:p-6 lg:p-8 min-w-0 bg-default ring ring-default">
   <div data-slot="header" class="flex flex-col items-center gap-2 max-w-sm text-center">Header slot</div>
   <div data-slot="body" class="flex flex-col items-center gap-4 max-w-sm">
-    <div data-slot="actions" class="flex flex-wrap justify-center gap-2 shrink-0"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span><span data-slot="label" class="truncate">Add</span>
+    <div data-slot="actions" class="flex flex-wrap justify-center gap-2 shrink-0"><button type="button" data-slot="base" data-orientation="horizontal" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span><span data-slot="label" class="truncate">Add</span>
         <!--v-if-->
       </button></div>
   </div>
@@ -143,7 +143,7 @@ exports[`Empty > renders with leading slot correctly 1`] = `
     <div data-slot="description" class="text-balance text-center text-sm text-muted">Description</div>
   </div>
   <div data-slot="body" class="flex flex-col items-center gap-4 max-w-sm">
-    <div data-slot="actions" class="flex flex-wrap justify-center gap-2 shrink-0"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span><span data-slot="label" class="truncate">Add</span>
+    <div data-slot="actions" class="flex flex-wrap justify-center gap-2 shrink-0"><button type="button" data-slot="base" data-orientation="horizontal" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span><span data-slot="label" class="truncate">Add</span>
         <!--v-if-->
       </button></div>
   </div>
@@ -191,7 +191,7 @@ exports[`Empty > renders with primary variant naked correctly 1`] = `
     <div data-slot="description" class="text-balance text-center text-sm text-muted">Description</div>
   </div>
   <div data-slot="body" class="flex flex-col items-center gap-4 max-w-sm">
-    <div data-slot="actions" class="flex flex-wrap justify-center gap-2 shrink-0"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span><span data-slot="label" class="truncate">Add</span>
+    <div data-slot="actions" class="flex flex-wrap justify-center gap-2 shrink-0"><button type="button" data-slot="base" data-orientation="horizontal" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span><span data-slot="label" class="truncate">Add</span>
         <!--v-if-->
       </button></div>
   </div>
@@ -206,7 +206,7 @@ exports[`Empty > renders with primary variant outline correctly 1`] = `
     <div data-slot="description" class="text-balance text-center text-sm text-muted">Description</div>
   </div>
   <div data-slot="body" class="flex flex-col items-center gap-4 max-w-sm">
-    <div data-slot="actions" class="flex flex-wrap justify-center gap-2 shrink-0"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span><span data-slot="label" class="truncate">Add</span>
+    <div data-slot="actions" class="flex flex-wrap justify-center gap-2 shrink-0"><button type="button" data-slot="base" data-orientation="horizontal" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span><span data-slot="label" class="truncate">Add</span>
         <!--v-if-->
       </button></div>
   </div>
@@ -221,7 +221,7 @@ exports[`Empty > renders with primary variant soft correctly 1`] = `
     <div data-slot="description" class="text-balance text-center text-sm text-toned">Description</div>
   </div>
   <div data-slot="body" class="flex flex-col items-center gap-4 max-w-sm">
-    <div data-slot="actions" class="flex flex-wrap justify-center gap-2 shrink-0"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span><span data-slot="label" class="truncate">Add</span>
+    <div data-slot="actions" class="flex flex-wrap justify-center gap-2 shrink-0"><button type="button" data-slot="base" data-orientation="horizontal" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span><span data-slot="label" class="truncate">Add</span>
         <!--v-if-->
       </button></div>
   </div>
@@ -236,7 +236,7 @@ exports[`Empty > renders with primary variant solid correctly 1`] = `
     <div data-slot="description" class="text-balance text-center text-sm text-dimmed">Description</div>
   </div>
   <div data-slot="body" class="flex flex-col items-center gap-4 max-w-sm">
-    <div data-slot="actions" class="flex flex-wrap justify-center gap-2 shrink-0"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span><span data-slot="label" class="truncate">Add</span>
+    <div data-slot="actions" class="flex flex-wrap justify-center gap-2 shrink-0"><button type="button" data-slot="base" data-orientation="horizontal" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span><span data-slot="label" class="truncate">Add</span>
         <!--v-if-->
       </button></div>
   </div>
@@ -251,7 +251,7 @@ exports[`Empty > renders with primary variant subtle correctly 1`] = `
     <div data-slot="description" class="text-balance text-center text-sm text-toned">Description</div>
   </div>
   <div data-slot="body" class="flex flex-col items-center gap-4 max-w-sm">
-    <div data-slot="actions" class="flex flex-wrap justify-center gap-2 shrink-0"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span><span data-slot="label" class="truncate">Add</span>
+    <div data-slot="actions" class="flex flex-wrap justify-center gap-2 shrink-0"><button type="button" data-slot="base" data-orientation="horizontal" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span><span data-slot="label" class="truncate">Add</span>
         <!--v-if-->
       </button></div>
   </div>
@@ -266,7 +266,7 @@ exports[`Empty > renders with size lg correctly 1`] = `
     <div data-slot="description" class="text-balance text-center text-sm text-muted">Description</div>
   </div>
   <div data-slot="body" class="flex flex-col items-center gap-4 max-w-sm">
-    <div data-slot="actions" class="flex flex-wrap justify-center gap-2 shrink-0"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span><span data-slot="label" class="truncate">Add</span>
+    <div data-slot="actions" class="flex flex-wrap justify-center gap-2 shrink-0"><button type="button" data-slot="base" data-orientation="horizontal" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span><span data-slot="label" class="truncate">Add</span>
         <!--v-if-->
       </button></div>
   </div>
@@ -281,7 +281,7 @@ exports[`Empty > renders with size md correctly 1`] = `
     <div data-slot="description" class="text-balance text-center text-sm text-muted">Description</div>
   </div>
   <div data-slot="body" class="flex flex-col items-center gap-4 max-w-sm">
-    <div data-slot="actions" class="flex flex-wrap justify-center gap-2 shrink-0"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span><span data-slot="label" class="truncate">Add</span>
+    <div data-slot="actions" class="flex flex-wrap justify-center gap-2 shrink-0"><button type="button" data-slot="base" data-orientation="horizontal" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span><span data-slot="label" class="truncate">Add</span>
         <!--v-if-->
       </button></div>
   </div>
@@ -296,7 +296,7 @@ exports[`Empty > renders with size sm correctly 1`] = `
     <div data-slot="description" class="text-balance text-center text-xs text-muted">Description</div>
   </div>
   <div data-slot="body" class="flex flex-col items-center gap-4 max-w-sm">
-    <div data-slot="actions" class="flex flex-wrap justify-center gap-2 shrink-0"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-xs gap-1.5 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3"><span class="iconify i-lucide:plus shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span><span data-slot="label" class="truncate">Add</span>
+    <div data-slot="actions" class="flex flex-wrap justify-center gap-2 shrink-0"><button type="button" data-slot="base" data-orientation="horizontal" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-xs gap-1.5 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3"><span class="iconify i-lucide:plus shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span><span data-slot="label" class="truncate">Add</span>
         <!--v-if-->
       </button></div>
   </div>
@@ -311,7 +311,7 @@ exports[`Empty > renders with size xl correctly 1`] = `
     <div data-slot="description" class="text-balance text-center text-base text-muted">Description</div>
   </div>
   <div data-slot="body" class="flex flex-col items-center gap-4 max-w-sm">
-    <div data-slot="actions" class="flex flex-wrap justify-center gap-2 shrink-0"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-base gap-2 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3"><span class="iconify i-lucide:plus shrink-0 size-6" aria-hidden="true" data-slot="leadingIcon"></span><span data-slot="label" class="truncate">Add</span>
+    <div data-slot="actions" class="flex flex-wrap justify-center gap-2 shrink-0"><button type="button" data-slot="base" data-orientation="horizontal" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-base gap-2 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3"><span class="iconify i-lucide:plus shrink-0 size-6" aria-hidden="true" data-slot="leadingIcon"></span><span data-slot="label" class="truncate">Add</span>
         <!--v-if-->
       </button></div>
   </div>
@@ -326,7 +326,7 @@ exports[`Empty > renders with size xs correctly 1`] = `
     <div data-slot="description" class="text-balance text-center text-xs text-muted">Description</div>
   </div>
   <div data-slot="body" class="flex flex-col items-center gap-4 max-w-sm">
-    <div data-slot="actions" class="flex flex-wrap justify-center gap-2 shrink-0"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2 py-1 text-xs gap-1 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3"><span class="iconify i-lucide:plus shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span><span data-slot="label" class="truncate">Add</span>
+    <div data-slot="actions" class="flex flex-wrap justify-center gap-2 shrink-0"><button type="button" data-slot="base" data-orientation="horizontal" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2 py-1 text-xs gap-1 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3"><span class="iconify i-lucide:plus shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span><span data-slot="label" class="truncate">Add</span>
         <!--v-if-->
       </button></div>
   </div>
@@ -352,7 +352,7 @@ exports[`Empty > renders with title slot correctly 1`] = `
     <div data-slot="description" class="text-balance text-center text-sm text-muted">Description</div>
   </div>
   <div data-slot="body" class="flex flex-col items-center gap-4 max-w-sm">
-    <div data-slot="actions" class="flex flex-wrap justify-center gap-2 shrink-0"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span><span data-slot="label" class="truncate">Add</span>
+    <div data-slot="actions" class="flex flex-wrap justify-center gap-2 shrink-0"><button type="button" data-slot="base" data-orientation="horizontal" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span><span data-slot="label" class="truncate">Add</span>
         <!--v-if-->
       </button></div>
   </div>
@@ -367,7 +367,7 @@ exports[`Empty > renders with ui correctly 1`] = `
     <div data-slot="description" class="text-balance text-center text-sm text-muted">Description</div>
   </div>
   <div data-slot="body" class="flex flex-col items-center gap-4 max-w-sm">
-    <div data-slot="actions" class="flex flex-wrap justify-center gap-2 shrink-0"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span><span data-slot="label" class="truncate">Add</span>
+    <div data-slot="actions" class="flex flex-wrap justify-center gap-2 shrink-0"><button type="button" data-slot="base" data-orientation="horizontal" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3"><span class="iconify i-lucide:plus shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span><span data-slot="label" class="truncate">Add</span>
         <!--v-if-->
       </button></div>
   </div>

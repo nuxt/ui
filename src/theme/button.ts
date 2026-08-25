@@ -24,6 +24,13 @@ export default (options: Required<ModuleOptions>) => ({
       ghost: '',
       link: ''
     },
+    orientation: {
+      horizontal: '',
+      vertical: {
+        base: 'flex-col',
+        label: 'max-w-full text-center'
+      }
+    },
     size: {
       xs: {
         base: 'px-2 py-1 text-xs gap-1',
@@ -151,6 +158,12 @@ export default (options: Required<ModuleOptions>) => ({
     size: 'xl',
     square: true,
     class: 'p-2'
+  }, {
+    block: true,
+    orientation: 'vertical',
+    class: {
+      trailingIcon: 'ms-0'
+    }
   }, {
     loading: true,
     leading: true,
