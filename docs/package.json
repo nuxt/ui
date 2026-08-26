@@ -45,7 +45,7 @@
     "minimark": "^0.2.0",
     "motion-v": "^2.4.0",
     "nuxt": "^4.5.2",
-    "nuxt-agent-discovery": "https://pkg.pr.new/nuxt-agent-discovery@95976a3",
+    "nuxt-agent-discovery": "https://pkg.pr.new/nuxt-agent-discovery@a4669a3",
     "nuxt-component-meta": "^0.18.0",
     "nuxt-llms": "^0.2.0",
     "nuxt-og-image": "^6.7.8",
