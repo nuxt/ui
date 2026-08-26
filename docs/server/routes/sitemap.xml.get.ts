@@ -4,8 +4,6 @@ function xmlEscape(str: string): string {
   return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;')
 }
 
-const DOMAIN = 'https://ui.nuxt.com'
-
 export default defineEventHandler(async (event) => {
   const pages = await queryCollection(event, 'docs')
     .select('path')
@@ -18,7 +16,7 @@ export default defineEventHandler(async (event) => {
   // truthful per-page date is unavailable, and a uniform build date is a signal search engines
   // learn to ignore. Omitting it lets them rely on their own crawl history instead.
   const urls = pages.map(page =>
-    `  <url>\n    <loc>${xmlEscape(`${DOMAIN}${page.path}`)}</loc>\n  </url>`
+    `  <url>\n    <loc>${xmlEscape(`${SITE_URL}${page.path}`)}</loc>\n  </url>`
   ).join('\n')
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>

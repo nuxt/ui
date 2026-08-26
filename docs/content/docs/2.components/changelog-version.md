@@ -36,11 +36,11 @@ authors:
     to: https://x.com/atinux
     target: _blank
   - name: Hugo Richard
-    description: '@hugorcd__'
+    description: '@hugorcd'
     avatar:
       src: https://github.com/hugorcd.png
       loading: lazy
-    to: https://x.com/hugorcd__
+    to: https://x.com/hugorcd
     target: _blank
 to: 'https://nuxt.com/blog/nuxt-ui-v3'
 target: '_blank'
@@ -254,11 +254,11 @@ props:
       to: https://x.com/atinux
       target: _blank
     - name: Hugo Richard
-      description: '@hugorcd__'
+      description: '@hugorcd'
       avatar:
         src: https://github.com/hugorcd.png
         loading: lazy
-      to: https://x.com/hugorcd__
+      to: https://x.com/hugorcd
       target: _blank
   class: 'w-full'
   ui.container: 'max-w-lg'

@@ -1,6 +1,5 @@
 ---
-title: Footer
-description: 'A responsive footer component.'
+description: 'A responsive footer for your site links and legal notices.'
 category: layout
 links:
   - label: GitHub
