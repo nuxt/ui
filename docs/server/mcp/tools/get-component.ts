@@ -57,7 +57,7 @@ export default defineMcpTool({
       description: page.description,
       category: page.category,
       documentation: document.markdown,
-      documentation_url: `https://ui.nuxt.com${page.path}`,
+      documentation_url: `${SITE_URL}${page.path}`,
       sections_returned: sections || ['full']
     }
   }
