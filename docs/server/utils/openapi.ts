@@ -1,19 +1,35 @@
 import { SITE_URL } from './site'
 
 /**
- * Hand-authored OpenAPI description of the public surface of ui.nuxt.com.
+ * OpenAPI description of the public surface of ui.nuxt.com.
  *
- * Nitro can generate one from the server handlers (`experimental.openAPI`), but
- * it lists every internal route (`/__nuxt_error`, `/api/_mdc/**`, the OAuth
- * metadata endpoints) and hardcodes a localhost `servers` entry when
- * prerendered, so agents would read a spec that mostly describes plumbing.
+ * The discovery layer (the negotiated pages, their raw twins, `sitemap.md`,
+ * the llms indexes, the `.well-known` documents) is contributed by
+ * `nuxt-agent-discovery` from the same route config the negotiation and the
+ * CDN rewrites use, so it cannot drift from what the site actually serves.
+ * What stays here is what only this site knows: its `/api/**` endpoints, the
+ * MCP endpoint and the prose.
+ *
+ * Nitro can generate a document from the server handlers
+ * (`experimental.openAPI`), but it lists every internal route
+ * (`/__nuxt_error`, `/api/_mdc/**`, the OAuth metadata endpoints) and hardcodes
+ * a localhost `servers` entry when prerendered, so agents would read a spec
+ * that mostly describes plumbing.
  *
  * The AI endpoints (`/api/ai`, `/api/chat`, `/api/completion`) are left out on
  * purpose: they back the documentation chat, are unauthenticated and metered
  * upstream, and documenting them would read as an invitation.
  *
- * Kept dependency-free on purpose.
+ * Kept dependency-free on purpose: the fragments are passed in rather than
+ * imported.
  */
+
+/** The `tags`, `paths` and `components` `agentDiscoveryOpenApi()` returns. */
+export interface OpenApiFragments {
+  tags: Record<string, unknown>[]
+  paths: Record<string, unknown>
+  components: { headers: Record<string, unknown>, responses: Record<string, unknown>, schemas: Record<string, unknown> }
+}
 
 // OpenAPI ignores a header parameter named `Accept`, so the negotiation is
 // described in prose and through the two response media types instead.
@@ -42,19 +58,9 @@ function json(schemaRef: string, description: string) {
   }
 }
 
-function markdown(description: string) {
-  return {
-    description,
-    content: {
-      'text/markdown': {
-        schema: { type: 'string' }
-      }
-    }
-  }
-}
-
-export function createOpenApiDocument(options: { version: string, url?: string }) {
+export function createOpenApiDocument(options: { version: string, url?: string, discovery: OpenApiFragments }) {
   const url = options.url || SITE_URL
+  const { discovery } = options
 
   return {
     openapi: '3.1.0',
@@ -88,144 +94,13 @@ export function createOpenApiDocument(options: { version: string, url?: string }
     // agents no credentials are needed, rather than leaving them to guess.
     security: [],
     tags: [
-      { name: 'Documentation', description: 'Documentation pages as Markdown.' },
-      { name: 'Discovery', description: 'Machine-readable indexes and agent metadata.' },
+      ...discovery.tags,
       { name: 'Content', description: 'Navigation and module metadata behind the documentation site.' },
       { name: 'Data', description: 'Static datasets used by the component examples.' },
       { name: 'GitHub', description: 'Cached GitHub metadata for the repository.' }
     ],
     paths: {
-      '/': {
-        get: {
-          operationId: 'getHomepage',
-          tags: ['Documentation'],
-          summary: 'Homepage',
-          description: `Returns HTML by default, Markdown when negotiated. ${MARKDOWN_DESCRIPTION}`,
-          responses: {
-            200: {
-              description: 'The homepage, as HTML or Markdown.',
-              headers: { Vary: { $ref: '#/components/headers/Vary' } },
-              content: {
-                'text/html': { schema: { type: 'string' } },
-                'text/markdown': { schema: { type: 'string' } }
-              }
-            }
-          }
-        }
-      },
-      '/docs/{path}': {
-        get: {
-          operationId: 'getDocumentationPage',
-          tags: ['Documentation'],
-          summary: 'Documentation page',
-          description: `Returns HTML by default, Markdown when negotiated. ${MARKDOWN_DESCRIPTION}`,
-          parameters: [
-            {
-              name: 'path',
-              in: 'path',
-              required: true,
-              description: 'Page path below `/docs`, may contain slashes. For example `components/button` or `getting-started/installation/nuxt`.',
-              schema: { type: 'string' },
-              example: 'components/button'
-            }
-          ],
-          responses: {
-            200: {
-              description: 'The documentation page, as HTML or Markdown.',
-              headers: { Vary: { $ref: '#/components/headers/Vary' } },
-              content: {
-                'text/html': { schema: { type: 'string' } },
-                'text/markdown': { schema: { type: 'string' } }
-              }
-            },
-            404: { $ref: '#/components/responses/NotFoundMarkdown' }
-          }
-        }
-      },
-      '/raw/index.md': {
-        get: {
-          operationId: 'getHomepageMarkdown',
-          tags: ['Documentation'],
-          summary: 'Homepage as Markdown',
-          description: 'Markdown summary of the project with links to the installation guides and the agent resources.',
-          responses: {
-            200: markdown('Homepage as Markdown, with YAML frontmatter.')
-          }
-        }
-      },
-      '/raw/docs/{path}.md': {
-        get: {
-          operationId: 'getDocumentationPageMarkdown',
-          tags: ['Documentation'],
-          summary: 'Documentation page as Markdown',
-          description: 'Markdown source of a documentation page, with YAML frontmatter (`title`, `description`, `canonical_url`). Equivalent to `/docs/{path}.md`.',
-          parameters: [
-            {
-              name: 'path',
-              in: 'path',
-              required: true,
-              description: 'Page path below `/docs`, may contain slashes.',
-              schema: { type: 'string' },
-              example: 'components/button'
-            }
-          ],
-          responses: {
-            200: markdown('Documentation page as Markdown, with YAML frontmatter.'),
-            404: { $ref: '#/components/responses/NotFoundMarkdown' }
-          }
-        }
-      },
-      '/sitemap.md': {
-        get: {
-          operationId: 'getSitemapMarkdown',
-          tags: ['Discovery'],
-          summary: 'Markdown sitemap',
-          description: 'Every documentation page, grouped by section, linking to the Markdown URLs.',
-          responses: { 200: markdown('Markdown index of every page.') }
-        }
-      },
-      '/sitemap.xml': {
-        get: {
-          operationId: 'getSitemapXml',
-          tags: ['Discovery'],
-          summary: 'XML sitemap',
-          description: 'Every indexable page, in the sitemaps.org XML format. `/sitemap.md` is the same index as Markdown links.',
-          responses: {
-            200: {
-              description: 'Sitemap in the sitemaps.org XML format.',
-              content: { 'application/xml': { schema: { type: 'string' } } }
-            }
-          }
-        }
-      },
-      '/llms.txt': {
-        get: {
-          operationId: 'getLlmsTxt',
-          tags: ['Discovery'],
-          summary: 'llms.txt index',
-          description: 'Index of the documentation for LLMs, following the llms.txt convention, including a "When to use Nuxt UI" section.',
-          responses: {
-            200: {
-              description: 'Markdown index.',
-              content: { 'text/plain': { schema: { type: 'string' } } }
-            }
-          }
-        }
-      },
-      '/llms-full.txt': {
-        get: {
-          operationId: 'getLlmsFullTxt',
-          tags: ['Discovery'],
-          summary: 'Full documentation for LLMs',
-          description: 'Every documentation page concatenated as Markdown. Large response.',
-          responses: {
-            200: {
-              description: 'Full documentation as Markdown.',
-              content: { 'text/plain': { schema: { type: 'string' } } }
-            }
-          }
-        }
-      },
+      ...discovery.paths,
       '/openapi.json': {
         get: {
           operationId: 'getOpenApiDocument',
@@ -236,56 +111,6 @@ export function createOpenApiDocument(options: { version: string, url?: string }
             200: {
               description: 'OpenAPI 3.1 document.',
               content: { 'application/json': { schema: { type: 'object' } } }
-            }
-          }
-        }
-      },
-      '/.well-known/api-catalog': {
-        get: {
-          operationId: 'getApiCatalog',
-          tags: ['Discovery'],
-          summary: 'API catalog (RFC 9727)',
-          description: 'Linkset pointing at this specification, the MCP server card and the LLM indexes.',
-          responses: {
-            200: {
-              description: 'Linkset document.',
-              content: {
-                'application/linkset+json': {
-                  schema: { $ref: '#/components/schemas/Linkset' }
-                }
-              }
-            }
-          }
-        }
-      },
-      '/.well-known/mcp/server-card.json': {
-        get: {
-          operationId: 'getMcpServerCard',
-          tags: ['Discovery'],
-          summary: 'MCP server card',
-          description: 'Describes the MCP endpoint, its capabilities and the tools, resources and prompts it exposes.',
-          responses: {
-            200: {
-              description: 'MCP server card, following the schema it declares in `$schema`.',
-              content: { 'application/json': { schema: { type: 'object' } } }
-            }
-          }
-        }
-      },
-      '/.well-known/skills/index.json': {
-        get: {
-          operationId: 'getSkillsIndex',
-          tags: ['Discovery'],
-          summary: 'Agent skills index',
-          description: 'Lists the agent skills published by this site and the files each one is made of, served under `/.well-known/skills/{name}/`.',
-          responses: {
-            200: {
-              description: 'Skills index.',
-              content: {
-                'application/json': {
-                  schema: { $ref: '#/components/schemas/SkillsIndex' }
-                }
-              }
             }
           }
         }
@@ -491,21 +316,12 @@ export function createOpenApiDocument(options: { version: string, url?: string }
       }
     },
     components: {
-      headers: {
-        Vary: {
-          description: 'Always includes `Accept` and `User-Agent`, since the representation depends on both.',
-          schema: { type: 'string' }
-        }
-      },
-      responses: {
-        NotFoundMarkdown: {
-          description: 'The page does not exist. The body is a short Markdown document linking to the sitemap and the other entry points.',
-          content: {
-            'text/markdown': { schema: { type: 'string' } }
-          }
-        }
-      },
+      // `headers` and `responses` are entirely the module's: the `Vary` header
+      // and the markdown 404 belong to the negotiation, not to this site.
+      headers: discovery.components.headers,
+      responses: discovery.components.responses,
       schemas: {
+        ...discovery.components.schemas,
         NavigationItem: {
           type: 'object',
           description: 'A documentation navigation entry.',
@@ -590,59 +406,6 @@ export function createOpenApiDocument(options: { version: string, url?: string }
             message: { type: 'string', description: 'First line of the commit message.' }
           },
           required: ['sha', 'date', 'message']
-        },
-        Linkset: {
-          type: 'object',
-          description: 'RFC 9727 linkset. Each entry anchors a resource and points at its description and documentation.',
-          properties: {
-            linkset: {
-              type: 'array',
-              items: {
-                type: 'object',
-                properties: {
-                  'anchor': { type: 'string', format: 'uri' },
-                  'service-desc': { $ref: '#/components/schemas/LinksetTargets' },
-                  'service-doc': { $ref: '#/components/schemas/LinksetTargets' }
-                },
-                required: ['anchor']
-              }
-            }
-          },
-          required: ['linkset']
-        },
-        LinksetTargets: {
-          type: 'array',
-          items: {
-            type: 'object',
-            properties: {
-              href: { type: 'string', format: 'uri' },
-              type: { type: 'string', description: 'Media type of the target.' }
-            },
-            required: ['href']
-          }
-        },
-        SkillsIndex: {
-          type: 'object',
-          description: 'Agent skills published by this site, served under `/.well-known/skills/{name}/`.',
-          properties: {
-            skills: {
-              type: 'array',
-              items: {
-                type: 'object',
-                properties: {
-                  name: { type: 'string' },
-                  description: { type: 'string' },
-                  files: {
-                    type: 'array',
-                    description: 'Paths relative to the skill directory.',
-                    items: { type: 'string' }
-                  }
-                },
-                required: ['name', 'description', 'files']
-              }
-            }
-          },
-          required: ['skills']
         },
         Error: {
           type: 'object',
