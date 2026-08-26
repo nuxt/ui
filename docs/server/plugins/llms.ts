@@ -1,12 +1,6 @@
-import type { H3Event } from 'h3'
-import type { PageCollectionItemBase } from '@nuxt/content'
 import { rawUrl } from '#agent-discovery'
 
 export default defineNitroPlugin((nitroApp) => {
-  nitroApp.hooks.hook('content:llms:generate:document', async (event: H3Event, doc: PageCollectionItemBase) => {
-    await transformMDC(event, doc as any)
-  })
-
   // `nuxt-llms` unshifts its "Documentation Sets" section, which is a single
   // link to `llms-full.txt`. The documentation itself is more useful first.
   //
