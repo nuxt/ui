@@ -1,6 +1,6 @@
 import { z } from 'zod'
 import { defineCollection } from '@nuxt/content'
-import { asSitemapCollection } from '@nuxtjs/sitemap/content'
+import { defineSitemapSchema } from '@nuxtjs/sitemap/content'
 
 const Image = z.object({
   src: z.string(),
@@ -51,14 +51,19 @@ const PageSection = z.object({
   features: z.array(PageFeature).optional()
 })
 
+// `@nuxtjs/sitemap` only walks a collection whose schema declares this field,
+// and reads its per-page options (`lastmod`, `changefreq`, `priority`) off it.
+const sitemap = defineSitemapSchema({ z })
+
 const Page = z.object({
   title: z.string(),
   description: z.string(),
-  hero: PageHero
+  hero: PageHero,
+  sitemap
 })
 
 export const collections = {
-  index: defineCollection(asSitemapCollection({
+  index: defineCollection({
     type: 'page',
     source: 'index.yml',
     schema: Page.extend({
@@ -78,8 +83,8 @@ export const collections = {
       templates: PageSection,
       community: PageSection
     })
-  })),
-  docs: defineCollection(asSitemapCollection({
+  }),
+  docs: defineCollection({
     type: 'page',
     source: [{
       include: 'docs/**/*'
@@ -93,10 +98,11 @@ export const collections = {
         title: z.string().optional(),
         badge: z.string().optional()
       }),
-      links: z.array(Button)
+      links: z.array(Button),
+      sitemap
     })
-  })),
-  figma: defineCollection(asSitemapCollection({
+  }),
+  figma: defineCollection({
     type: 'page',
     source: 'figma.yml',
     schema: Page.extend({
@@ -141,8 +147,8 @@ export const collections = {
         }))
       })
     })
-  })),
-  showcase: defineCollection(asSitemapCollection({
+  }),
+  showcase: defineCollection({
     type: 'page',
     source: 'showcase.yml',
     schema: Page.extend({
@@ -158,8 +164,8 @@ export const collections = {
         }).optional()
       }))
     })
-  })),
-  templates: defineCollection(asSitemapCollection({
+  }),
+  templates: defineCollection({
     type: 'page',
     source: 'templates.yml',
     schema: Page.extend({
@@ -174,8 +180,8 @@ export const collections = {
         deploy_links: z.array(Button).optional()
       }))
     })
-  })),
-  community: defineCollection(asSitemapCollection({
+  }),
+  community: defineCollection({
     type: 'page',
     source: 'community.yml',
     schema: Page.extend({
@@ -191,18 +197,18 @@ export const collections = {
         to: z.string()
       }))
     })
-  })),
-  team: defineCollection(asSitemapCollection({
+  }),
+  team: defineCollection({
     type: 'page',
     source: 'team.yml',
     schema: Page
-  })),
-  blog: defineCollection(asSitemapCollection({
+  }),
+  blog: defineCollection({
     type: 'page',
     source: 'blog.yml',
     schema: Page
-  })),
-  posts: defineCollection(asSitemapCollection({
+  }),
+  posts: defineCollection({
     type: 'page',
     source: [{
       include: 'blog/**/*'
@@ -214,12 +220,13 @@ export const collections = {
         name: z.string(),
         avatar: Avatar.optional(),
         to: z.string().optional()
-      })).optional()
+      })).optional(),
+      sitemap
     })
-  })),
-  releases: defineCollection(asSitemapCollection({
+  }),
+  releases: defineCollection({
     type: 'page',
     source: 'releases.yml',
     schema: Page
-  }))
+  })
 }
