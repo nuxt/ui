@@ -44,6 +44,10 @@ const presetLabel = computed(() => {
 /** Its row's own glyph; the swatch book stands in when no preset is behind it. */
 const presetIcon = computed(() => activeEntry.value?.icon ?? studioIcons.themes)
 
+// The trigger's visible text is the value, so the name names the control AND
+// keeps that text (voice control matches on what's on screen).
+const ariaLabel = computed(() => `Preset: ${presetLabel.value}`)
+
 /** A taste of the doc's icon set (its own, or the default lucide). */
 function iconSamples(doc: ThemeDoc): string[] {
   const sets = themeIcons as Record<string, Record<string, string>>
@@ -94,6 +98,7 @@ const selected = computed({
             leadingIcon: 'text-primary',
             trailingIcon: ['transition-transform duration-200', open && 'rotate-180']
           }"
+          :aria-label="ariaLabel"
         />
       </UTooltip>
 

@@ -581,21 +581,22 @@ const pageTitles: Record<Page, string> = {
               color="neutral"
               variant="ghost"
               class="-ms-1.5"
+              aria-label="Close mail"
               @click="selectedMail = null"
             />
           </template>
 
           <template #right>
             <UTooltip text="Archive">
-              <UButton :icon="extra.inbox" color="neutral" variant="ghost" />
+              <UButton :icon="extra.inbox" color="neutral" variant="ghost" aria-label="Archive" />
             </UTooltip>
 
             <UTooltip text="Reply">
-              <UButton :icon="extra.reply" color="neutral" variant="ghost" />
+              <UButton :icon="extra.reply" color="neutral" variant="ghost" aria-label="Reply" />
             </UTooltip>
 
             <UDropdownMenu :items="mailDropdownItems">
-              <UButton :icon="appConfig.ui.icons.ellipsis" color="neutral" variant="ghost" />
+              <UButton :icon="appConfig.ui.icons.ellipsis" color="neutral" variant="ghost" aria-label="More actions" />
             </UDropdownMenu>
           </template>
         </UDashboardNavbar>

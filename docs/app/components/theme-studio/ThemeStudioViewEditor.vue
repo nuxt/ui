@@ -263,6 +263,7 @@ function dragHandleItems(editor: Editor): DropdownMenuItem[][] {
             variant="ghost"
             size="sm"
             :class="ui.handle()"
+            aria-label="Insert block"
             @click="(e) => {
               e.stopPropagation()
               const selected = onClick()
@@ -286,6 +287,7 @@ function dragHandleItems(editor: Editor): DropdownMenuItem[][] {
               :icon="appConfig.ui.icons.drag"
               :active="open"
               :class="ui.handle()"
+              aria-label="Block actions"
             />
           </UDropdownMenu>
         </UEditorDragHandle>
