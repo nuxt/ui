@@ -31,8 +31,8 @@ const { icon, icons } = useTheme()
       aria-label="Icon set"
       :ui="{
         base: dirty && 'ring-primary/50 text-primary',
-        leadingIcon: dirty && 'text-primary',
-        trailingIcon: ['transition-transform duration-200', open && 'rotate-180', dirty && 'text-primary'],
+        leadingIcon: dirty ? 'text-primary' : 'text-dimmed',
+        trailingIcon: ['transition-transform duration-200', open && 'rotate-180', dirty ? 'text-primary' : 'text-dimmed'],
         content: 'w-72'
       }"
       v-bind="$attrs"

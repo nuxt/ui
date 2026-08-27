@@ -38,7 +38,8 @@ const ariaLabel = computed(() => props.value ? `${props.label}: ${props.value}` 
           :class="['group', vertical ? 'w-full justify-between' : value && 'w-38']"
           :ui="{
             label: 'flex-1 min-w-0 text-left truncate',
-            trailingIcon: ['transition-transform duration-200', open && 'rotate-180']
+            leadingIcon: 'text-dimmed',
+            trailingIcon: ['text-dimmed transition-transform duration-200', open && 'rotate-180']
           }"
           :aria-label="ariaLabel"
         >

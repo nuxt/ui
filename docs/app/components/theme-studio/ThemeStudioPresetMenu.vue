@@ -96,7 +96,7 @@ const selected = computed({
           :ui="{
             label: 'flex-1 min-w-0 text-left truncate',
             leadingIcon: 'text-primary',
-            trailingIcon: ['transition-transform duration-200', open && 'rotate-180']
+            trailingIcon: ['text-dimmed transition-transform duration-200', open && 'rotate-180']
           }"
           :aria-label="ariaLabel"
         />
