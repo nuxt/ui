@@ -308,22 +308,6 @@ export default defineNuxtConfig({
     // disallow list below by us.
   },
 
-  robots: {
-    // Carried over from the static `public/robots.txt` this replaced. The
-    // module only contributes `Allow: /` groups for the agent user agents, so
-    // nothing else puts these back.
-    disallow: [
-      '/vercel/',
-      '/node_modules/',
-      '/docs/src/',
-      '/home/',
-      '/_nuxt/',
-      '/_plausible',
-      '/dev/',
-      '/api/'
-    ]
-  },
-
   componentMeta: {
     transformers: [(component, code) => {
       // Simplify ui in slot prop types: `leading(props: { ui: Button['ui'] })` -> `leading(props: { ui: object })`
@@ -495,6 +479,22 @@ export default defineNuxtConfig({
     security: {
       renderTimeout: 60000
     }
+  },
+
+  robots: {
+    // Carried over from the static `public/robots.txt` this replaced. The
+    // module only contributes `Allow: /` groups for the agent user agents, so
+    // nothing else puts these back.
+    disallow: [
+      '/vercel/',
+      '/node_modules/',
+      '/docs/src/',
+      '/home/',
+      '/_nuxt/',
+      '/_plausible',
+      '/dev/',
+      '/api/'
+    ]
   },
 
   schemaOrg: {
