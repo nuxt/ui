@@ -17,6 +17,10 @@ const { resetTheme, applyThemeSettings, hasCSSChanges, hasConfigChanges } = useT
 // A preset is a whole ThemeDoc, so it rides applyDoc (reset, style axis, class
 // bundle) rather than the settings channel applyTheme uses.
 const { presets, applyPreset } = useThemeStudio()
+// The theme actions the chat exposes are the studio's own, so they take the
+// studio's glyphs and skin to the applied icon pack with it.
+const studioIcons = useStudioIcons()
+const appConfig = useAppConfig()
 
 const hasThemeChanges = computed(() => hasCSSChanges.value || hasConfigChanges.value)
 
@@ -165,13 +169,13 @@ function getToolIcon(part: ToolPart): string {
     'get-migration-guide': 'i-lucide-file-text',
     'get-example': 'i-lucide-file-text',
     'getComponentTheme': 'i-lucide-file-text',
-    'getThemeGuide': 'i-lucide-palette',
-    'applyTheme': 'i-lucide-palette',
-    'applyPreset': 'i-lucide-palette',
-    'resetTheme': 'i-lucide-palette'
+    'getThemeGuide': studioIcons.themes,
+    'applyTheme': studioIcons.themes,
+    'applyPreset': studioIcons.themes,
+    'resetTheme': studioIcons.reset
   }
 
-  return iconMap[toolName] || 'i-lucide-search'
+  return iconMap[toolName] || appConfig.ui.icons.search
 }
 
 function askQuestion(question: string) {
@@ -253,9 +257,10 @@ defineShortcuts({
     <template #actions>
       <UTooltip v-if="hasThemeChanges" text="Reset theme">
         <UButton
-          icon="i-lucide-rotate-ccw"
+          :icon="studioIcons.reset"
           color="neutral"
           variant="ghost"
+          aria-label="Reset theme"
           @click="resetTheme()"
         />
       </UTooltip>

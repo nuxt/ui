@@ -46,6 +46,8 @@ const model = defineModel<any>()
 
 const emit = defineEmits<{ reset: [] }>()
 
+const studioIcons = useStudioIcons()
+
 const slots = defineSlots<{
   /** The control area, for `custom`. */
   default: () => any
@@ -187,7 +189,7 @@ const showTextLabel = computed(() => !props.icon && !shade.value)
 
       <UButton
         v-if="resettable"
-        icon="i-lucide-rotate-ccw"
+        :icon="studioIcons.reset"
         size="xs"
         color="neutral"
         variant="ghost"

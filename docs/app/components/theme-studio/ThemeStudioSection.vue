@@ -29,6 +29,7 @@ const props = withDefaults(defineProps<{
 const emit = defineEmits<{ reset: [] }>()
 
 const { sectionDirty, resetSection } = useThemeStudio()
+const studioIcons = useStudioIcons()
 
 // A section resets either its doc slice or whatever the caller wired up.
 const showReset = computed(() => !!props.sectionKey || !!props.resettable)
@@ -115,7 +116,7 @@ const contentClass = 'pt-2 flex flex-col gap-2 [&>[data-studio-section]:first-ch
           variant="ghost"
           :active="dirty"
           active-color="primary"
-          icon="i-lucide-rotate-ccw"
+          :icon="studioIcons.reset"
           :disabled="!dirty"
           :aria-label="label ? `Reset ${label} to preset` : 'Reset to preset'"
           @click.stop="reset"

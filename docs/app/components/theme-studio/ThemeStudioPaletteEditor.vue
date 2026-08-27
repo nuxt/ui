@@ -8,6 +8,7 @@ const props = defineProps<{
 }>()
 
 const appConfig = useAppConfig()
+const studioIcons = useStudioIcons()
 const { paletteParams, isCustomPalette, paletteShades, setPaletteFromCurve } = useThemeStudio()
 
 const open = defineModel<boolean>('open', { default: false })
@@ -679,7 +680,7 @@ function resetEffects() {
                  only the dirty styling mirrors the section resets -->
             <UTooltip :text="effectsDirty ? 'Reset modifiers' : 'No modifiers active'">
               <UButton
-                icon="i-lucide-rotate-ccw"
+                :icon="studioIcons.reset"
                 color="neutral"
                 variant="ghost"
                 :active="effectsDirty"
