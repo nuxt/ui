@@ -68,6 +68,11 @@ const scrollArea = useTemplateRef('scrollArea')
 const { width } = useElementSize(computed(() => scrollArea.value?.$el))
 const lanes = computed(() => width.value >= 1200 ? 4 : width.value >= 900 ? 3 : width.value >= 600 ? 2 : 1)
 
+// The gutters follow the container too, so the vertical padding matches the
+// horizontal one and the tiles sit in an even frame at every width.
+const compact = computed(() => width.value > 0 && width.value < 600)
+const padding = computed(() => (compact.value ? 16 : 24))
+
 const REVEAL_COUNTS = [6, 12, 19, tiles.length] as const
 const visibleTiles = computed(() => tiles.slice(0, REVEAL_COUNTS[lanes.value - 1]))
 </script>
@@ -80,12 +85,12 @@ const visibleTiles = computed(() => tiles.slice(0, REVEAL_COUNTS[lanes.value - 1
       lanes,
       gap: 16,
       estimateSize: 360,
-      paddingStart: 24,
-      paddingEnd: 24,
+      paddingStart: padding,
+      paddingEnd: padding,
       overscan: 0,
       getItemKey: (index: number) => visibleTiles[index]!.name
     }"
-    class="playground-grid h-full px-4 sm:px-6"
+    :class="['playground-grid h-full', compact ? 'px-4' : 'px-6']"
   >
     <template #default="{ item }">
       <PlaygroundCard>
