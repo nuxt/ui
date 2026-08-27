@@ -50,13 +50,17 @@ const gridUi = {
         :trailing-icon="appConfig.ui.icons.chevronDown"
         color="neutral"
         variant="outline"
-        aria-label="Preview page"
+        :ui="{
+          label: 'flex-1 min-w-0 text-left truncate',
+          trailingIcon: ['transition-transform duration-200', open && 'rotate-180']
+        }"
+        :aria-label="`View: ${activeView?.label}`"
         v-bind="$attrs"
       />
     </UTooltip>
 
     <template #content>
-      <div class="w-96 max-h-[70vh] overflow-y-auto p-1.5 overflow-x-hidden">
+      <div class="w-96 max-w-[calc(100vw-2rem)] max-h-[70vh] overflow-y-auto p-1.5 overflow-x-hidden">
         <template v-for="(section, index) in sections" :key="section.label">
           <!-- the templates heading sits between the two grids -->
           <template v-if="index">

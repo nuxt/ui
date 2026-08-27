@@ -67,7 +67,7 @@ onUnmounted(clearRollTimers)
     <UButton
       :icon="diceFace"
       color="neutral"
-      variant="outline"
+      variant="ghost"
       :size="size"
       aria-label="Random theme"
       :class="rolling && 'dice-bumping'"
