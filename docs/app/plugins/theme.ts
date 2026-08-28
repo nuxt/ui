@@ -4,6 +4,7 @@ import { cssVariableDefaults } from '../utils/theme/tokens'
 import { THEME_STATE_KEYS, readStoredTheme, writeStoredTheme } from '../utils/theme/storage'
 import type { StoredTheme } from '../utils/theme/storage'
 import { mergeUi, styleComponents, DEFAULT_COLORS, THEME_DEFAULTS } from '../utils/theme/engine'
+import { sanitizeCustomColors, sanitizeCSSVariables } from '../utils/theme/sanitize'
 
 export default defineNuxtPlugin({
   enforce: 'post',
@@ -26,8 +27,12 @@ export default defineNuxtPlugin({
       assign('nuxt-ui-font', saved.font)
       assign('nuxt-ui-icons', saved.icons)
       assign('nuxt-ui-black-as-primary', saved.blackAsPrimary)
-      assign('nuxt-ui-custom-colors', saved.customColors)
-      assign('nuxt-ui-css-variables', saved.cssVariables)
+      // Through the same boundary the AI path uses: these two are
+      // concatenated into <style> text, and storage is writable by anything
+      // on the origin. (The inline FOUC script above still paints the raw
+      // values once, before this runs.)
+      assign('nuxt-ui-custom-colors', saved.customColors && sanitizeCustomColors(saved.customColors))
+      assign('nuxt-ui-css-variables', saved.cssVariables && sanitizeCSSVariables(saved.cssVariables))
       assign(THEME_STATE_KEYS.stylePrefs, saved.style)
       assign(THEME_STATE_KEYS.paletteParams, saved.paletteParams)
       assign(THEME_STATE_KEYS.themePreset, saved.preset)

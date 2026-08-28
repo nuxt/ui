@@ -1,5 +1,5 @@
 import { DEFAULT_PRESET_ID } from '../utils/theme/engine'
-import { paletteLabel } from '../utils/theme/studio'
+import { paletteLabel, rampCssName } from '../utils/theme/studio'
 
 /**
  * What the toolbar reports and what its reset does. The persisted theme is
@@ -9,26 +9,46 @@ import { paletteLabel } from '../utils/theme/studio'
  */
 export function useThemeStudioToolbar() {
   const { resetTheme, primary, neutral, blackAsPrimary } = useTheme()
-  const { groupDirty, sectionDirty, presets, activePreset, applyPreset, primaryChip, neutralChip, isCustomPalette } = useThemeStudio()
+  const { groupDirty, sectionDirty, presets, activePreset, applyPreset, primaryChip, neutralChip, isCustomPalette, style } = useThemeStudio()
 
-  const mounted = ref(false)
-  onMounted(() => (mounted.value = true))
+  const mounted = useMounted()
 
   // A custom ramp has no name worth reading, the picker calls it Custom too.
   function paletteName(alias: 'primary' | 'neutral', value: string) {
     return isCustomPalette(alias) ? 'Custom' : capitalize(paletteLabel(value))
   }
 
-  /** The two colours the panel owns, so the bar reports them unopened. */
-  const colorChips = computed(() => [{
-    dot: blackAsPrimary.value ? undefined : `var(--color-${primaryChip.value}-500)`,
-    label: blackAsPrimary.value ? 'Black' : paletteName('primary', primary.value)
-  }, {
-    dot: `var(--color-${neutralChip.value}-500)`,
-    label: paletteName('neutral', neutral.value)
-  }])
+  /**
+   * The two colours the panel owns, so the bar reports them unopened. Gated
+   * on mount like the flags below: the label ends up in an aria-label, and
+   * hydration adopts attributes from the server markup without patching.
+   */
+  const colorChips = computed(() => (mounted.value
+    ? [{
+        dot: blackAsPrimary.value ? undefined : `var(--color-${rampCssName(primaryChip.value)}-500)`,
+        label: blackAsPrimary.value ? 'Black' : paletteName('primary', primary.value)
+      }, {
+        dot: `var(--color-${neutralChip.value}-500)`,
+        label: paletteName('neutral', neutral.value)
+      }]
+    : [{ dot: 'var(--color-green-500)', label: 'Green' }, { dot: 'var(--color-slate-500)', label: 'Slate' }]))
 
   const colorLabel = computed(() => colorChips.value.map(chip => chip.label).join(', '))
+
+  /**
+   * The two the defaults panel leads with, so its trigger reports a value
+   * like every other control in the bar. Both fall back to what the library
+   * itself ships, which is what the panel shows tagged as Default.
+   */
+  const defaultsLabel = computed(() => {
+    // same mount gate as colorChips, for the same aria-label reason
+    const defaults = mounted.value ? style.value.defaults : undefined
+    // the pickers store the stock choice as 'default', which is no choice
+    const chosen = (value?: string) => (value && value !== 'default' ? value : undefined)
+    const size = chosen(defaults?.size) ?? 'md'
+    const variant = chosen(defaults?.variants?.buttons) ?? chosen(defaults?.variant) ?? 'solid'
+    return `${size.toUpperCase()}, ${capitalize(variant)}`
+  })
 
   /**
    * "Changed from preset" per toolbar control. Type, icons and radius sit in
@@ -47,7 +67,7 @@ export function useThemeStudioToolbar() {
   const groupDirtyFlags = {
     colors: afterMount(groupDirty('colors')),
     defaults: afterMount(groupDirty('defaults')),
-    font: afterMount(sectionDirty('font')),
+    font: afterMount(sectionDirty(['font', 'type', 'weights'])),
     icons: afterMount(sectionDirty('icons')),
     radius: afterMount(sectionDirty('radius'))
   }
@@ -71,5 +91,5 @@ export function useThemeStudioToolbar() {
     else resetTheme()
   }
 
-  return { colorChips, colorLabel, groupDirtyFlags, canReset, resetLabel, resetToBaseline }
+  return { colorChips, colorLabel, defaultsLabel, groupDirtyFlags, canReset, resetLabel, resetToBaseline }
 }

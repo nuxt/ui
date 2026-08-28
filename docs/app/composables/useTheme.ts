@@ -1,69 +1,18 @@
 import { defu } from 'defu'
 import { THEME_TAG_IDS, THEME_STATE_KEYS } from '../utils/theme/storage'
 import type { FontPrefs } from '../utils/theme/storage'
-import { FONT_WEIGHT_DEFAULTS } from '../utils/theme/studio'
-import { themeIcons } from '../utils/theme/icons'
+import { FONT_WEIGHT_DEFAULTS, FONTS, RADIUSES, NEUTRAL_COLORS, PRIMARY_COLORS } from '../utils/theme/studio'
+import { themeIcons, ICON_PACKS } from '../utils/theme/icons'
 import { cssVariableDefaults } from '../utils/theme/tokens'
-import { generateCSS, generateConfig, mergeUi, isDefaultStyle, styleTokens, DEFAULT_COLORS, THEME_DEFAULTS, SEMANTIC_ALIASES, LIBRARY_TOKEN_DEFAULTS } from '../utils/theme/engine'
-import type { ThemeDoc, ThemePalette } from '../utils/theme/engine'
-import { omit } from '#ui/utils'
+import { SAFE_NAME, sanitizeCustomColors, sanitizeCSSVariables } from '../utils/theme/sanitize'
+import { generateCSS, generateConfig, mergeUi, isDefaultStyle, isDefaultTheme, styleTokens, DEFAULT_COLORS, THEME_DEFAULTS, SEMANTIC_ALIASES, LIBRARY_TOKEN_DEFAULTS } from '../utils/theme/engine'
+import type { ThemeDoc, ThemePalette, StyleOptions, StoredPaletteParams } from '../utils/theme/engine'
 import colors from 'tailwindcss/colors'
-
-// AI `applyTheme` output is untrusted and gets concatenated into <style> rules,
-// this is the single write boundary, so only CSS-safe tokens may persist.
-const SAFE_NAME = /^[\w -]{1,50}$/
-
-/** The three groups every font select offers. */
-export type FontCategory = 'Sans' | 'Serif' | 'Mono'
-const SAFE_HEX = /^#[0-9a-f]{3,8}$/i
-// the engine's canonical shade format: `oklch(62.3% 0.214 259.815)`
-const SAFE_OKLCH = /^oklch\(\d{1,3}(?:\.\d+)?% \d(?:\.\d+)? \d{1,3}(?:\.\d+)?\)$/i
-const SAFE_CSS_VAR_KEY = /^--[\w-]+$/
-const SAFE_CSS_VAR_VALUE = /^(?:var\(--[\w-]+\)|#[0-9a-f]{3,8}|[a-z]+|-?\d{1,3}(?:\.\d+)?(?:px|%))$/i
-
-function sanitizeCustomColors(input: Record<string, any>): Record<string, Record<string, string>> {
-  const result: Record<string, Record<string, string>> = {}
-  for (const [name, shades] of Object.entries(input)) {
-    if (!SAFE_NAME.test(name) || typeof shades !== 'object' || !shades) continue
-    const safeShades: Record<string, string> = {}
-    for (const [shade, value] of Object.entries(shades as Record<string, unknown>)) {
-      if (/^\d{2,3}$/.test(shade) && typeof value === 'string' && (SAFE_OKLCH.test(value) || SAFE_HEX.test(value))) {
-        safeShades[shade] = value
-      }
-    }
-    if (Object.keys(safeShades).length) result[name] = safeShades
-  }
-  return result
-}
-
-function sanitizeCSSVariables(input: { light?: Record<string, any>, dark?: Record<string, any> }): { light: Record<string, string>, dark: Record<string, string> } {
-  const clean = (vars?: Record<string, unknown>) => {
-    const result: Record<string, string> = {}
-    for (const [key, value] of Object.entries(vars || {})) {
-      if (SAFE_CSS_VAR_KEY.test(key) && typeof value === 'string' && SAFE_CSS_VAR_VALUE.test(value)) {
-        result[key] = value
-      }
-    }
-    return result
-  }
-  return { light: clean(input.light), dark: clean(input.dark) }
-}
-
-export type { FontPrefs }
 
 export function useTheme() {
   const appConfig = useAppConfig()
   const colorMode = useColorMode()
-  const { track } = useAnalytics()
-
-  // sliders stream through setters at drag frequency, one event per burst
-  let trackedAt: number | undefined
-  function trackThrottled(...args: Parameters<typeof track>) {
-    if (!trackedAt || Date.now() - trackedAt > 2000) {
-      trackedAt = Date.now()
-      track(...args)
-    }
-  }
+  const { track, trackThrottled } = useAnalytics()
   const { framework } = useFrameworks()
 
   // Defaults only. The saved theme is ASSIGNED by plugins/theme.ts on the
@@ -87,8 +36,16 @@ export function useTheme() {
     return (colors as any)[neutral]?.[shade] || customColorsData.value[neutral]?.[shade] || (colors as any).slate[shade]
   })
   const cssVariablesData = useState<{ light?: Record<string, string>, dark?: Record<string, string> }>('nuxt-ui-css-variables', () => ({}))
-  /** The studio's style axis (it owns writes); read here for currentDoc/export. */
-  const stylePrefs = useState<ThemeDoc['style']>(THEME_STATE_KEYS.stylePrefs, () => ({}))
+
+  // The studio's three channels are declared here with the rest of the
+  // persisted state, so one reset covers the whole document. useThemeStudio
+  // owns every write to them.
+  /** Default variants and token shades, expanded into the style-ui bundle. */
+  const stylePrefs = useState<StyleOptions>(THEME_STATE_KEYS.stylePrefs, () => ({}))
+  /** The preset the per-section dirty and reset comparisons measure against. */
+  const activePreset = useState<string | undefined>(THEME_STATE_KEYS.themePreset, () => undefined)
+  /** The palette editor's curves and pins, the source its custom ramps derive from. */
+  const paletteParams = useState<Partial<Record<string, StoredPaletteParams>>>(THEME_STATE_KEYS.paletteParams, () => ({}))
   // useState, not useLocalStorage: these are app-level, so every useTheme call
   // shares one ref directly instead of converging through storage events.
   const _radius = useState('nuxt-ui-radius', () => THEME_DEFAULTS.radius as number)
@@ -104,7 +61,7 @@ export function useTheme() {
   const fontPrefs = useState<FontPrefs>('nuxt-ui-font', () => ({}))
 
   function setFontPrefs(next: FontPrefs, options: { track?: boolean } = {}) {
-    // Normalize: defaults are absences, so hasCSSChanges/export stay clean.
+    // Normalize: defaults are absences, so hasChanges/export stay clean.
     const clean: FontPrefs = {}
     if (next.sans && next.sans !== THEME_DEFAULTS.font) clean.sans = next.sans
     if (next.serif) clean.serif = next.serif
@@ -124,9 +81,6 @@ export function useTheme() {
     if (options.track !== false) trackThrottled('Theme Changed', { setting: 'fontPrefs' })
   }
 
-  // taupe/mauve/mist/olive ship in tailwind's theme.css but not (yet) the
-  // tailwindcss/colors JS export, swatches resolve them from CSS variables
-  const neutralColors = ['slate', 'gray', 'zinc', 'neutral', 'stone', 'taupe', 'mauve', 'mist', 'olive']
   const neutral = computed({
     get() {
       return appConfig.ui.colors.neutral
@@ -137,8 +91,6 @@ export function useTheme() {
     }
   })
 
-  const colorsToOmit = ['inherit', 'current', 'transparent', 'black', 'white', ...neutralColors]
-  const primaryColors = Object.keys(omit(colors, colorsToOmit as any))
   const primary = computed({
     get() {
       return appConfig.ui.colors.primary
@@ -150,7 +102,6 @@ export function useTheme() {
     }
   })
 
-  const radiuses = [0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75]
   const radius = computed({
     get() {
       return _radius.value
@@ -171,34 +122,6 @@ export function useTheme() {
     }
   })
 
-  /**
-   * The shortlist every font select opens on, grouped by what the face is
-   * rather than by which slot it is for: the three stacks are independent, so
-   * nothing should stop a mono heading. Any other family is still reachable
-   * through the catalog search.
-   */
-  const fonts: Array<{ name: string, category: FontCategory }> = [
-    { name: 'Public Sans', category: 'Sans' },
-    { name: 'Inter', category: 'Sans' },
-    { name: 'DM Sans', category: 'Sans' },
-    { name: 'Geist', category: 'Sans' },
-    { name: 'Outfit', category: 'Sans' },
-    { name: 'Poppins', category: 'Sans' },
-    { name: 'Raleway', category: 'Sans' },
-    { name: 'Roboto', category: 'Sans' },
-    { name: 'Comic Neue', category: 'Sans' },
-    { name: 'Source Serif 4', category: 'Serif' },
-    { name: 'Lora', category: 'Serif' },
-    { name: 'Playfair Display', category: 'Serif' },
-    { name: 'Merriweather', category: 'Serif' },
-    { name: 'Instrument Serif', category: 'Serif' },
-    { name: 'Geist Mono', category: 'Mono' },
-    { name: 'JetBrains Mono', category: 'Mono' },
-    { name: 'Fira Code', category: 'Mono' },
-    { name: 'IBM Plex Mono', category: 'Mono' },
-    { name: 'Space Mono', category: 'Mono' }
-  ]
-
   /** The body family, the `sans` field of the font document. */
   const font = computed({
     get() {
@@ -210,43 +133,6 @@ export function useTheme() {
     }
   })
 
-  const icons = [{
-    label: 'Lucide',
-    icon: 'i-lucide-feather',
-    value: 'lucide'
-  }, {
-    label: 'Bootstrap',
-    icon: 'i-bi-bootstrap',
-    value: 'bootstrap'
-  }, {
-    label: 'Heroicons',
-    icon: 'i-simple-icons-tailwindcss',
-    value: 'heroicons'
-  }, {
-    label: 'Iconoir',
-    icon: 'i-iconoir-iconoir',
-    value: 'iconoir'
-  }, {
-    label: 'Material Symbols',
-    icon: 'i-simple-icons-materialdesign',
-    value: 'material'
-  }, {
-    label: 'Phosphor',
-    icon: 'i-ph-phosphor-logo',
-    value: 'phosphor'
-  }, {
-    label: 'Pixelart',
-    icon: 'i-pixelarticons-pixelarticons',
-    value: 'pixelarticons'
-  }, {
-    label: 'Remix',
-    icon: 'i-ri-remixicon-line',
-    value: 'remix'
-  }, {
-    label: 'Tabler',
-    icon: 'i-tabler-brand-tabler',
-    value: 'tabler'
-  }]
   // The saved pack is client-only, so anything rendered FROM it, the studio
   // chrome, a picker's own brand glyph, would differ from the server on the
   // first client render, and Vue only warns about a mismatched class, it never
@@ -267,21 +153,6 @@ export function useTheme() {
     }
   })
 
-  const modes = computed(() => [
-    { label: 'light', icon: appConfig.ui.icons.light },
-    { label: 'dark', icon: appConfig.ui.icons.dark },
-    { label: 'system', icon: appConfig.ui.icons.system }
-  ])
-  const mode = computed({
-    get() {
-      return colorMode.value
-    },
-    set(option) {
-      colorMode.preference = option
-      track('Theme Changed', { setting: 'colorMode', value: option })
-    }
-  })
-
   const blackAsPrimary = computed(() => _blackAsPrimary.value)
 
   function setBlackAsPrimary(value: boolean) {
@@ -290,9 +161,6 @@ export function useTheme() {
       track('Theme Changed', { setting: 'primary', value: 'black' })
     }
   }
-
-  const hasCustomColors = computed(() => Object.keys(customColorsData.value).length > 0)
-  const hasCSSVariables = computed(() => Object.keys(cssVariablesData.value.light || {}).length > 0 || Object.keys(cssVariablesData.value.dark || {}).length > 0)
 
   const radiusStyle = computed(() => `:root { --ui-radius: ${_radius.value}rem; }`)
   // font-size scales every rem-based metric on the page
@@ -378,22 +246,8 @@ export function useTheme() {
     { innerHTML: cssVariablesStyle, id: THEME_TAG_IDS.cssVariables, tagPriority: -2 }
   ]
 
-  const hasCSSChanges = computed(() => {
-    return _radius.value !== 0.25
-      || _fontSize.value !== 16
-      || _blackAsPrimary.value
-      || Object.keys(fontPrefs.value).length > 0
-      || hasCustomColors.value
-      || hasCSSVariables.value
-  })
-
-  const hasConfigChanges = computed(() => {
-    return appConfig.ui.colors.primary !== 'green'
-      || appConfig.ui.colors.neutral !== 'slate'
-      || _iconSet.value !== 'lucide'
-      || !!aiThemeExtras.value.colors
-      || !!aiThemeExtras.value.ui
-  })
+  /** Anything to export: the live theme diverges from a stock install. */
+  const hasChanges = computed(() => !isDefaultTheme(currentDoc()))
 
   /** Snapshot the live theme state as a sparse ThemeDoc, the export generators' input. */
   function currentDoc(): ThemeDoc {
@@ -527,8 +381,9 @@ export function useTheme() {
 
     if (settings.primary && SAFE_NAME.test(settings.primary)) primary.value = settings.primary
     // any known palette is a valid neutral, custom ones included
-    if (settings.neutral && SAFE_NAME.test(settings.neutral) && (neutralColors.includes(settings.neutral) || primaryColors.includes(settings.neutral) || (customColorsData.value[settings.neutral] || safeCustomColors[settings.neutral]))) neutral.value = settings.neutral
-    if (settings.radius !== undefined && Number.isFinite(Number(settings.radius))) radius.value = Number(settings.radius)
+    if (settings.neutral && SAFE_NAME.test(settings.neutral) && (NEUTRAL_COLORS.includes(settings.neutral) || PRIMARY_COLORS.includes(settings.neutral) || (customColorsData.value[settings.neutral] || safeCustomColors[settings.neutral]))) neutral.value = settings.neutral
+    // clamped like the FOUC script clamps it, or a reload would repaint a different value
+    if (settings.radius !== undefined && Number.isFinite(Number(settings.radius))) radius.value = Math.min(4, Math.max(0, Number(settings.radius)))
     // clamped: these scale the whole page
     if (settings.fontSize !== undefined && Number.isFinite(Number(settings.fontSize))) fontSize.value = Math.min(20, Math.max(12, Number(settings.fontSize)))
     // All three stacks and the body treatment share one channel, so they are
@@ -563,7 +418,7 @@ export function useTheme() {
         lineHeight: body ? leading(body.lineHeight) : current.lineHeight
       })
     }
-    if (settings.icons && settings.icons in themeIcons) icon.value = settings.icons
+    if (settings.icons && Object.hasOwn(themeIcons, settings.icons)) icon.value = settings.icons
     if (settings.blackAsPrimary !== undefined) setBlackAsPrimary(!!settings.blackAsPrimary)
 
     const colorKeys = SEMANTIC_ALIASES
@@ -621,11 +476,10 @@ export function useTheme() {
     appConfig.ui.icons = themeIcons.lucide as any
     _blackAsPrimary.value = false
 
-    const defaultColors: Record<string, string> = { secondary: 'blue', success: 'green', info: 'blue', warning: 'yellow', error: 'red' }
     const extras = aiThemeExtras.value
     if (extras.colors) {
       for (const key of Object.keys(extras.colors)) {
-        (appConfig.ui.colors as any)[key] = defaultColors[key] || (appConfig.ui.colors as any)[key]
+        (appConfig.ui.colors as any)[key] = DEFAULT_COLORS[key as keyof typeof DEFAULT_COLORS] || (appConfig.ui.colors as any)[key]
       }
     }
     if (extras.ui) {
@@ -638,13 +492,13 @@ export function useTheme() {
     customColorsData.value = {}
     cssVariablesData.value = {}
 
-    // studio-owned state resets too, orphaned style prefs would silently
-    // resurrect on the next style click or export
+    // the studio channels too: orphaned style prefs would silently resurrect
+    // on the next style click or export, and orphaned curve params would be
+    // re-persisted by the palette editor
     setStyleUi({})
-    useState<Record<string, any>>(THEME_STATE_KEYS.stylePrefs).value = {}
-    useState<string | undefined>(THEME_STATE_KEYS.themePreset).value = undefined
-    // in-memory curve params too, or the palette editor re-persists them
-    useState<Record<string, any>>(THEME_STATE_KEYS.paletteParams).value = {}
+    stylePrefs.value = {}
+    activePreset.value = undefined
+    paletteParams.value = {}
 
     // Imperative clearing makes a bare reset land the same frame, but a
     // reset-then-reapply (preset swap, undo/redo) would flash the default
@@ -660,29 +514,29 @@ export function useTheme() {
     color,
     style,
     link,
-    neutralColors,
+    neutralColors: NEUTRAL_COLORS,
     neutral,
-    primaryColors,
+    primaryColors: PRIMARY_COLORS,
     primary,
     blackAsPrimary,
     setBlackAsPrimary,
-    radiuses,
+    radiuses: RADIUSES,
     radius,
     fontSize,
-    fonts,
+    fonts: FONTS,
     font,
     fontPrefs,
     setFontPrefs,
     icon,
-    icons,
-    modes,
-    mode,
-    hasCSSChanges,
-    hasConfigChanges,
+    icons: ICON_PACKS,
+    hasChanges,
     configLabel: computed(() => framework.value === 'vue' ? 'vite.config.ts' : 'app.config.ts'),
     currentDoc,
     cssVariablesData,
     customColorsData,
+    stylePrefs,
+    activePreset,
+    paletteParams,
     removeCustomColors,
     removeCSSVariables,
     setStyleUi,

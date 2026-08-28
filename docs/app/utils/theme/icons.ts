@@ -1,4 +1,5 @@
 import lucide from '../../../../src/theme/icons'
+import type { ThemeStudioView } from './studio'
 
 // Picking a set replaces appConfig.ui.icons wholesale, so every set must
 // map the full key list from src/theme/icons, a missing key would blank
@@ -560,3 +561,65 @@ export const studioExtraOverrides: Partial<Record<ThemeIcons, Partial<Record<key
     redo: 'i-pixelarticons-redo'
   }
 }
+
+/**
+ * Per-pack overrides for the view-switcher glyphs, so the switcher skins to
+ * the applied theme like the rest of the studio chrome. A view falls back to
+ * its Lucide default (THEME_STUDIO_VIEWS) wherever the active pack has no
+ * entry. Only pixelarticons is curated today; other packs keep Lucide until
+ * filled in. Pixel has no rocket/panels/newspaper/accessibility glyphs, so
+ * SaaS→zap, Landing→layout, Changelog→article and A11y→human stand in.
+ */
+export const studioViewOverrides: Partial<Record<ThemeIcons, Partial<Record<ThemeStudioView, string>>>> = {
+  pixelarticons: {
+    grid: 'i-pixelarticons-dashboard',
+    dashboard: 'i-pixelarticons-dashboard',
+    chat: 'i-pixelarticons-message',
+    saas: 'i-pixelarticons-zap',
+    landing: 'i-pixelarticons-layout',
+    docs: 'i-pixelarticons-book-open',
+    portfolio: 'i-pixelarticons-user',
+    changelog: 'i-pixelarticons-article',
+    editor: 'i-pixelarticons-edit-box',
+    a11y: 'i-pixelarticons-human'
+  }
+}
+
+/** The icon packs the studio offers, each with its own brand glyph. */
+export const ICON_PACKS = [{
+  label: 'Lucide',
+  icon: 'i-lucide-feather',
+  value: 'lucide'
+}, {
+  label: 'Bootstrap',
+  icon: 'i-bi-bootstrap',
+  value: 'bootstrap'
+}, {
+  label: 'Heroicons',
+  icon: 'i-simple-icons-tailwindcss',
+  value: 'heroicons'
+}, {
+  label: 'Iconoir',
+  icon: 'i-iconoir-iconoir',
+  value: 'iconoir'
+}, {
+  label: 'Material Symbols',
+  icon: 'i-simple-icons-materialdesign',
+  value: 'material'
+}, {
+  label: 'Phosphor',
+  icon: 'i-ph-phosphor-logo',
+  value: 'phosphor'
+}, {
+  label: 'Pixelart',
+  icon: 'i-pixelarticons-pixelarticons',
+  value: 'pixelarticons'
+}, {
+  label: 'Remix',
+  icon: 'i-ri-remixicon-line',
+  value: 'remix'
+}, {
+  label: 'Tabler',
+  icon: 'i-tabler-brand-tabler',
+  value: 'tabler'
+}]

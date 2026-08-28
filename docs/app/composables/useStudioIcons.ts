@@ -1,31 +1,39 @@
 import { toReactive } from '@vueuse/core'
-import { studioIcons, STUDIO_EXTRA_DEFAULTS, studioExtraOverrides } from '../utils/theme/icons'
+import { studioIcons, STUDIO_EXTRA_DEFAULTS, studioExtraOverrides, studioViewOverrides } from '../utils/theme/icons'
+import type { ThemeIcons } from '../utils/theme/icons'
+import { THEME_STUDIO_VIEWS } from '../utils/theme/studio'
+import type { ThemeStudioView } from '../utils/theme/studio'
 
 /**
- * The studio-chrome glyphs (toolbar controls, Ask-AI, theme picker) for the
- * ACTIVE icon pack, so the studio's own UI skins to the applied theme. Falls
- * back to Lucide for any unrecognized pack name. Returned as a reactive object
- * (not a ref), like useStudioExtraIcons, so `studioIcons.undo` resolves
- * directly in both script and templates.
+ * A glyph table resolved for the ACTIVE icon pack, as a reactive object (not
+ * a ref) so `icons.undo` reads directly in script and templates, exactly like
+ * `appConfig.ui.icons.*`. `icon` already reports the stock pack until mounted
+ * (see useTheme), so everything built on it inherits that hydration safety.
  */
-export function useStudioIcons() {
-  // `icon` already reports the stock pack until mounted (see useTheme), so the
-  // chrome inherits that hydration-safety for free.
+function forActivePack<T extends object>(resolve: (pack: ThemeIcons) => T) {
   const { icon } = useTheme()
-  return toReactive(computed(() => studioIcons[icon.value as keyof typeof studioIcons] ?? studioIcons.lucide))
+  return toReactive(computed(() => resolve(icon.value as ThemeIcons)))
+}
+
+/** The studio-chrome glyphs (toolbar controls, Ask-AI, theme picker); Lucide for an unknown pack. */
+export function useStudioIcons() {
+  return forActivePack(pack => (Object.hasOwn(studioIcons, pack) ? studioIcons[pack] : studioIcons.lucide))
 }
 
 /**
- * The extended functional glyphs the preview demos use (dashboard nav, account
- * menus, etc.) resolved for the active pack, each pack's override merged over
- * the Lucide defaults, so an unset pack/key falls back to Lucide. Returned as a
- * reactive object (not a ref) so `extra.home` resolves directly in both script
- * arrays and templates, exactly like `appConfig.ui.icons.*`.
+ * The extended functional glyphs the preview demos use (dashboard nav,
+ * account menus, etc.), each pack's overrides merged over the Lucide defaults.
  */
 export function useStudioExtraIcons() {
-  const { icon } = useTheme()
-  return toReactive(computed(() => ({
-    ...STUDIO_EXTRA_DEFAULTS,
-    ...(studioExtraOverrides[icon.value as keyof typeof studioExtraOverrides] ?? {})
-  })))
+  return forActivePack(pack => ({ ...STUDIO_EXTRA_DEFAULTS, ...(studioExtraOverrides[pack] ?? {}) }))
+}
+
+/** The view-switcher glyphs, a pack's override or the view's own Lucide default. */
+export function useStudioViewIcons() {
+  return forActivePack((pack) => {
+    const overrides = studioViewOverrides[pack] ?? {}
+    return Object.fromEntries(
+      THEME_STUDIO_VIEWS.map(tab => [tab.value, overrides[tab.value] ?? tab.icon])
+    ) as Record<ThemeStudioView, string>
+  })
 }

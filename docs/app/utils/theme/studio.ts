@@ -1,6 +1,91 @@
 import type { InjectionKey } from 'vue'
+import colors from 'tailwindcss/colors'
 import { resolveAlias, resolveShade, contrastRatio } from './engine'
 import type { ThemeDoc, Shade } from './engine'
+
+/* ------------------------------------------------------------- choices -- */
+
+// What the pickers offer. Static, so it lives here rather than in the
+// composables that hand it out.
+
+// taupe/mauve/mist/olive ship in tailwind's theme.css but not (yet) the
+// tailwindcss/colors JS export, swatches resolve them from CSS variables
+export const NEUTRAL_COLORS = ['slate', 'gray', 'zinc', 'neutral', 'stone', 'taupe', 'mauve', 'mist', 'olive']
+const NOT_A_RAMP = ['inherit', 'current', 'transparent', 'black', 'white', ...NEUTRAL_COLORS]
+export const PRIMARY_COLORS = Object.keys(colors).filter(name => !NOT_A_RAMP.includes(name))
+
+export const RADIUSES = [0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75]
+
+/** The three groups every font select offers. */
+export type FontCategory = 'Sans' | 'Serif' | 'Mono'
+
+/**
+ * The shortlist every font select opens on, grouped by what the face is
+ * rather than by which slot it is for: the three stacks are independent, so
+ * nothing should stop a mono heading. Any other family is still reachable
+ * through the catalog search.
+ */
+export const FONTS: Array<{ name: string, category: FontCategory }> = [
+  { name: 'Public Sans', category: 'Sans' },
+  { name: 'Inter', category: 'Sans' },
+  { name: 'DM Sans', category: 'Sans' },
+  { name: 'Geist', category: 'Sans' },
+  { name: 'Outfit', category: 'Sans' },
+  { name: 'Poppins', category: 'Sans' },
+  { name: 'Raleway', category: 'Sans' },
+  { name: 'Roboto', category: 'Sans' },
+  { name: 'Comic Neue', category: 'Sans' },
+  { name: 'Source Serif 4', category: 'Serif' },
+  { name: 'Lora', category: 'Serif' },
+  { name: 'Playfair Display', category: 'Serif' },
+  { name: 'Merriweather', category: 'Serif' },
+  { name: 'Instrument Serif', category: 'Serif' },
+  { name: 'Geist Mono', category: 'Mono' },
+  { name: 'JetBrains Mono', category: 'Mono' },
+  { name: 'Fira Code', category: 'Mono' },
+  { name: 'IBM Plex Mono', category: 'Mono' },
+  { name: 'Space Mono', category: 'Mono' }
+]
+
+/**
+ * A palette name as its `--color-*` prefix. Tailwind's own `neutral` ramp
+ * ships in the docs as `old-neutral`, the module's neutral alias having
+ * taken the name.
+ */
+export function rampCssName(name: string) {
+  return name === 'neutral' ? 'old-neutral' : name
+}
+
+/* --------------------------------------------------------------- views -- */
+
+export type ThemeStudioView = 'grid' | 'dashboard' | 'chat' | 'saas' | 'landing' | 'docs' | 'portfolio' | 'changelog' | 'editor' | 'a11y'
+
+export interface ThemeStudioViewTab {
+  label: string
+  icon: string
+  value: ThemeStudioView
+  /** One-liner for the rich switcher, template blurbs from /templates. */
+  description: string
+  /** /templates screenshot base path (`-light.png`/`-dark.png` appended); grid and a11y are studio-only and have none. */
+  image?: string
+}
+
+const templateImage = (name: string) => `/assets/templates/nuxt/${name}`
+
+export const THEME_STUDIO_VIEWS: ThemeStudioViewTab[] = [
+  { label: 'Components', icon: 'i-lucide-layout-grid', value: 'grid', description: 'Every themed component at a glance, the component wall.' },
+  { label: 'Dashboard', icon: 'i-lucide-layout-dashboard', value: 'dashboard', description: 'Multi-column admin interface with multiple views.', image: templateImage('dashboard') },
+  { label: 'Chat', icon: 'i-lucide-message-circle', value: 'chat', description: 'An AI chatbot with sidebar history and streaming replies.', image: templateImage('chat') },
+  { label: 'SaaS', icon: 'i-lucide-rocket', value: 'saas', description: 'A SaaS home with hero, pricing and feature sections.', image: templateImage('saas') },
+  { label: 'Landing', icon: 'i-lucide-panels-top-left', value: 'landing', description: 'A modern marketing landing page.', image: templateImage('landing') },
+  { label: 'Docs', icon: 'i-lucide-book-open', value: 'docs', description: 'Navigation, prose, code and TOC.', image: templateImage('docs') },
+  { label: 'Portfolio', icon: 'i-lucide-user-round', value: 'portfolio', description: 'A personal portfolio with work, blog and testimonials.', image: templateImage('portfolio') },
+  { label: 'Changelog', icon: 'i-lucide-newspaper', value: 'changelog', description: 'Release notes with sticky intro and version timeline.', image: templateImage('changelog') },
+  { label: 'Editor', icon: 'i-lucide-file-pen-line', value: 'editor', description: 'A rich text editor with toolbar, slash menu and drag handles.', image: templateImage('editor') },
+  { label: 'A11y', icon: 'i-lucide-accessibility', value: 'a11y', description: 'Contrast matrix for every token pair in the theme.' }
+]
+
+/* ------------------------------------------------------------- sections -- */
 
 /** How deep a ThemeStudioSection sits, which decides how it behaves. */
 export const SECTION_DEPTH: InjectionKey<number> = Symbol('theme-studio-section-depth')

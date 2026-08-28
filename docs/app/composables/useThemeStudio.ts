@@ -1,12 +1,19 @@
+import type { MaybeRefOrGetter } from 'vue'
 import colors from 'tailwindcss/colors'
-import { THEME_STATE_KEYS, readStoredTheme } from '../utils/theme/storage'
+import { readStoredTheme } from '../utils/theme/storage'
+import { rampCssName, THEME_STUDIO_VIEWS } from '../utils/theme/studio'
+import type { ThemeStudioView } from '../utils/theme/studio'
 import { presets, DEFAULT_PRESET_ID, docToSettings, isDefaultTheme, generatePalette, applyPaletteEffects, isDefaultEffects, parseCssColor, styleComponents, styleTokens, sectionFingerprint, mergeSection, canonicalTokenShades, storedStopStep, nearestShade, TOKEN_SHADE_TARGETS, SECTION_GROUPS, DEFAULT_COLORS, SHADES, SHADES_ALL, SHADE_SETS } from '../utils/theme/engine'
 import type { SectionKey, ThemeDoc, ThemePreset, PaletteCurveParams, PaletteEffects, StoredPaletteParams, PalettePin, StyleOptions, Shade, ShadeStep, ShadeStop, ColorAlias, TokenRamp } from '../utils/theme/engine'
 
 export function useThemeStudio() {
   const theme = useTheme()
   const appConfig = useAppConfig()
-  const { track } = useAnalytics()
+  const { track, trackThrottled } = useAnalytics()
+
+  // The three studio channels are declared in useTheme with the rest of the
+  // persisted state (assigned by plugins/theme.ts on the client); this
+  // composable owns every write to them.
 
   /**
    * The BASELINE preset: stays set through ordinary edits (per-section
@@ -14,13 +21,7 @@ export function useThemeStudio() {
    * preset, a shuffle, an import or a full reset. Persisted so the menu
    * still names it after a reload.
    */
-  const activePreset = useState<string | undefined>(THEME_STATE_KEYS.themePreset, () => {
-    // Presets get renamed, so a persisted id can stop naming anything. Drop it
-    // rather than holding a baseline no preset defines, which would leave the
-    // pickers with nothing selected and every section reading dirty forever.
-    // assigned by plugins/theme.ts on the client, defaults on the server
-    return undefined
-  })
+  const { activePreset, paletteParams, stylePrefs: style } = theme
 
   function setActivePreset(id: string | undefined) {
     activePreset.value = id
@@ -31,8 +32,6 @@ export function useThemeStudio() {
    * The ramps they generate ride the customColors channel; both come out of
    * the same storage write, so they can no longer restore out of step.
    */
-  const paletteParams = useState<Partial<Record<string, StoredPaletteParams>>>(THEME_STATE_KEYS.paletteParams, () => ({}))
-
   function setPaletteParams(value: Partial<Record<string, StoredPaletteParams>>) {
     paletteParams.value = value
   }
@@ -52,9 +51,6 @@ export function useThemeStudio() {
     }
   }
 
-  /** Default-variant and token-shade prefs; the expansion lives in the style-ui channel. */
-  const style = useState<StyleOptions>(THEME_STATE_KEYS.stylePrefs, () => ({}))
-
   // The class bundle is an expansion of `style`, not stored state, so it is
   // rebuilt from the restored prefs on load. That also means a generator
   // change (new fragment classes) reaches already-saved themes for free,
@@ -71,31 +67,34 @@ export function useThemeStudio() {
     }
   }
 
-  // Shared across composable instances so the analytics throttle holds no
-  // matter which component fires the event.
-  const trackedAt = useState<number | undefined>('nuxt-ui-style-tracked-at', () => undefined)
-
-  // Style and palette edits share one clock deliberately: a drag session
-  // is one gesture, not two metrics.
-  function trackThrottled(...args: Parameters<typeof track>) {
-    if (!trackedAt.value || Date.now() - trackedAt.value > 2000) {
-      trackedAt.value = Date.now()
-      track(...args)
-    }
-  }
-
   function setStyle(options: StyleOptions) {
     const previousStyle = style.value
     const previous = styleTokens(previousStyle)
+    // Whether the neutral remaps are in effect, read BEFORE the removal
+    // below can take one of them out. Both modes are probed together: light
+    // has only two remapped tokens, and a user can own both.
+    const remapsActive = (['light', 'dark'] as const).some(neutralRemapsActive)
     style.value = { ...style.value, ...options }
 
     // Remove only the tokens the PREVIOUS style emitted and the next one
     // doesn't, never preset/doc-owned values sharing the same names.
     const tokens = styleTokens(style.value)
-    theme.removeCSSVariables({
+    const removed = {
       light: Object.keys(previous.light).filter(key => !(key in tokens.light)),
       dark: Object.keys(previous.dark).filter(key => !(key in tokens.dark))
-    })
+    }
+    theme.removeCSSVariables(removed)
+
+    // A shade slider on one of the five remapped tokens had overwritten the
+    // remap under the same name; resetting that slider must fall back to
+    // the remap, not to the library's white literal.
+    const restored = {
+      light: Object.fromEntries(removed.light.filter(key => remapsActive && key in NEUTRAL_TOKEN_REMAPS.light).map(key => [key, NEUTRAL_TOKEN_REMAPS.light[key as keyof typeof NEUTRAL_TOKEN_REMAPS.light]])),
+      dark: Object.fromEntries(removed.dark.filter(key => remapsActive && key in NEUTRAL_TOKEN_REMAPS.dark).map(key => [key, NEUTRAL_TOKEN_REMAPS.dark[key as keyof typeof NEUTRAL_TOKEN_REMAPS.dark]]))
+    }
+    if (Object.keys(restored.light).length || Object.keys(restored.dark).length) {
+      theme.applyThemeSettings({ cssVariables: restored }, { track: false })
+    }
 
     // The class bundle lives in its own channel (never touches preset/AI
     // overrides), and shade-only edits skip the component churn entirely.
@@ -146,9 +145,8 @@ export function useThemeStudio() {
 
     if (import.meta.client) {
       const styles = getComputedStyle(document.documentElement)
-      const cssName = name === 'neutral' ? 'old-neutral' : name
       const entries = SHADES_ALL
-        .map(shade => [shade, parseCssColor(styles.getPropertyValue(`--color-${cssName}-${shade}`))] as const)
+        .map(shade => [shade, parseCssColor(styles.getPropertyValue(`--color-${rampCssName(name)}-${shade}`))] as const)
         .filter(([, color]) => color)
       if (entries.length >= 2) {
         return Object.fromEntries(entries)
@@ -164,6 +162,13 @@ export function useThemeStudio() {
    * stale Custom; an open editor refits from the new color by itself.
    */
   function selectPalette(alias: ColorAlias, name: string) {
+    // A click on the swatch already selected is a no-op. Without this it
+    // would still write the neutral remaps below, turning a stock theme
+    // into a changed one. Black-as-primary is the exception: the primary
+    // swatch is the way back off it.
+    const current = (appConfig.ui.colors as Record<string, string>)[alias]
+    if (current === name && !isCustomPalette(alias) && !(alias === 'primary' && theme.blackAsPrimary.value)) return
+
     if (isCustomPalette(alias)) {
       clearCustomPalette(alias)
     }
@@ -200,6 +205,16 @@ export function useThemeStudio() {
       '--ui-bg-inverted': 'var(--ui-color-neutral-50)',
       '--ui-border-inverted': 'var(--ui-color-neutral-50)'
     }
+  }
+
+  /**
+   * Whether a neutral was chosen through selectPalette: any remapped token
+   * not owned by a shade slider still carries its remap value.
+   */
+  function neutralRemapsActive(mode: 'light' | 'dark') {
+    const owned = style.value.tokenShades || {}
+    const vars = theme.cssVariablesData.value[mode] || {}
+    return Object.entries(NEUTRAL_TOKEN_REMAPS[mode]).some(([token, value]) => owned[token]?.[mode] === undefined && vars[token] === value)
   }
 
   /** Remaps minus any token the user's shade sliders already own. */
@@ -394,15 +409,19 @@ export function useThemeStudio() {
   }
 
   /** Palette-name chips coloring shade-slider swatches, each alias's current ramp. */
-  const neutralChip = computed(() => theme.neutral.value === 'neutral' ? 'old-neutral' : theme.neutral.value)
-  const primaryChip = computed(() => isCustomPalette('primary') ? 'custom-primary' : theme.primary.value)
+  const neutralChip = computed(() => rampCssName(theme.neutral.value))
+  const primaryChip = computed(() => isCustomPalette('primary') ? customPaletteName('primary') : theme.primary.value)
 
   function rampChip(ramp: TokenRamp): string {
     if (ramp === 'primary') return primaryChip.value
     if (ramp === 'neutral') return neutralChip.value
-    const name = (appConfig.ui.colors as Record<string, string>)[ramp] || ramp
-    return name === 'neutral' ? 'old-neutral' : name
+    return rampCssName((appConfig.ui.colors as Record<string, string>)[ramp] || ramp)
   }
+
+  /* ------------------------------------------------------------ preview -- */
+
+  /** Which preview the studio shows, shared by the page and its switcher. */
+  const view = useState<ThemeStudioView>('theme-studio-view', () => 'grid')
 
   /* ----------------------------------------------- section reset/delta -- */
 
@@ -414,12 +433,20 @@ export function useThemeStudio() {
    */
   const baselineDoc = computed(() => presets.find(preset => preset.id === activePreset.value)?.doc ?? { version: 1 as const })
 
-  /** One key, or several when a fold owns more than one slice (Defaults). */
-  function sectionDirty(key: SectionKey | SectionKey[]) {
-    const keys = Array.isArray(key) ? key : [key]
-    return computed(() => keys.some(entry =>
-      sectionFingerprint(theme.currentDoc(), entry) !== sectionFingerprint(baselineDoc.value, entry)
-    ))
+  /**
+   * One key, or several when a control owns more than one slice. Takes a
+   * getter too, so a component can hand over its prop and keep the flag
+   * following it.
+   */
+  function sectionDirty(key: MaybeRefOrGetter<SectionKey | SectionKey[] | undefined>) {
+    return computed(() => {
+      const value = toValue(key)
+      if (!value) return false
+      const keys = Array.isArray(value) ? value : [value]
+      return keys.some(entry =>
+        sectionFingerprint(theme.currentDoc(), entry) !== sectionFingerprint(baselineDoc.value, entry)
+      )
+    })
   }
 
   function groupDirty(group: keyof typeof SECTION_GROUPS) {
@@ -464,7 +491,7 @@ export function useThemeStudio() {
    */
   const selectedPreset = computed(() => {
     if (activePreset.value) return activePreset.value
-    return (theme.hasCSSChanges.value || theme.hasConfigChanges.value) ? undefined : DEFAULT_PRESET_ID
+    return theme.hasChanges.value ? undefined : DEFAULT_PRESET_ID
   })
 
   return {
@@ -489,6 +516,8 @@ export function useThemeStudio() {
     shuffle,
     neutralChip,
     primaryChip,
-    rampChip
+    rampChip,
+    view,
+    views: THEME_STUDIO_VIEWS
   }
 }
