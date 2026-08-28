@@ -11,8 +11,13 @@ const colorMode = useColorMode()
 // contenteditable is focused, so it never eats a typed 'd'. Reads `.value`,
 // not `.preference`, so toggling out of `system` flips away from what's
 // currently on screen rather than to it.
+// Not in the example iframes: those pin their mode from ?theme= to match
+// the page embedding them.
 defineShortcuts({
-  d: () => (colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark')
+  d: () => {
+    if (route.path.startsWith('/examples')) return
+    colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'
+  }
 })
 
 const { data: navigation } = await useFetch('/api/navigation.json')

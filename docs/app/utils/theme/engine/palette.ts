@@ -599,7 +599,10 @@ export function fitCurve(points: Array<[number, number]>): ChannelCurve {
     }
   }
 
-  return winner!
+  // Every trial scored NaN (a stop with an unparseable channel): no basin
+  // ever won, so fall back to the straight line rather than hand back
+  // undefined for the seed to dereference.
+  return winner ?? { y0, p1x: 0.33, p1y: lerp(0.33), p2x: 0.66, p2y: lerp(0.66), y1 }
 }
 
 /**

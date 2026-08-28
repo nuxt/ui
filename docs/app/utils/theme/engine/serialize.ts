@@ -157,7 +157,7 @@ export function generateConfig(doc: ThemeDoc, framework: string = 'nuxt'): strin
     config.ui = { colors: Object.fromEntries(colorEntries) }
   }
 
-  if (doc.icons && doc.icons !== THEME_DEFAULTS.icons && doc.icons in themeIcons) {
+  if (doc.icons && doc.icons !== THEME_DEFAULTS.icons && Object.hasOwn(themeIcons, doc.icons)) {
     config.ui = config.ui || {}
     config.ui.icons = themeIcons[doc.icons as keyof typeof themeIcons]
   }

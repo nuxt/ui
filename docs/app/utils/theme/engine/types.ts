@@ -374,9 +374,18 @@ export function mergeUi(
   return result
 }
 
-/** Nothing set that changes rendering. */
+/**
+ * Nothing set that changes rendering: every defaults leaf absent or the
+ * stock `'default'` sentinel the pickers store, and no shade pinned. The
+ * containers themselves don't count, a bag holding only sentinels is stock.
+ */
 export function isDefaultStyle(style: StyleOptions = {}): boolean {
-  return !Object.values(style).some(value => value && value !== 'default')
+  const set = (value?: string) => !!value && value !== 'default'
+  const defaults = style.defaults ?? {}
+  return !set(defaults.variant) && !set(defaults.size)
+    && !Object.values(defaults.variants ?? {}).some(set)
+    && !Object.values(defaults.colors ?? {}).some(set)
+    && !Object.values(style.tokenShades ?? {}).some(modes => modes && Object.keys(modes).length)
 }
 
 /* ------------------------------------------------------ library defaults -- */

@@ -1,6 +1,6 @@
 import { fileURLToPath } from 'node:url'
 import { defineVitestProject } from '@nuxt/test-utils/config'
-import { defineConfig, defaultExclude } from 'vitest/config'
+import { defineConfig } from 'vitest/config'
 import vue from '@vitejs/plugin-vue'
 import codspeedPlugin from '@codspeed/vitest-plugin'
 import ui from './src/vite'
@@ -29,10 +29,6 @@ export default defineConfig({
           name: 'nuxt',
           dir: './test',
           include: ['components/**/**.spec.ts', 'composables/**.spec.ts', 'utils/**/**.spec.ts'],
-          // The docs theme-engine specs are pure functions over `docs/app/utils`,
-          // they need neither environment, so they run in `vue` (happy-dom,
-          // faster) only rather than twice.
-          exclude: [...defaultExclude, '**/theme-*.spec.ts'],
           // Benchmarks run in the `vue` project only (happy-dom, faster); keep them
           // out of the nuxt project so a bare `vitest bench` doesn't double-run them.
           benchmark: { include: [] },

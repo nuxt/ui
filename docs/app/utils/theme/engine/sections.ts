@@ -1,5 +1,5 @@
 import type { ThemeDoc, ShadeStop, StyleOptions } from './types'
-import { DEFAULT_COLORS, THEME_DEFAULTS, SEMANTIC_ALIASES, styleTokens, TOKEN_SHADE_TARGETS, parseUiColorRef } from './types'
+import { DEFAULT_COLORS, THEME_DEFAULTS, SEMANTIC_ALIASES, VARIANT_GROUPS, VARIANT_SUPPORT, styleTokens, TOKEN_SHADE_TARGETS, parseUiColorRef } from './types'
 import { FONT_WEIGHT_DEFAULTS } from '../studio'
 
 /**
@@ -12,7 +12,12 @@ import { FONT_WEIGHT_DEFAULTS } from '../studio'
  */
 export type SectionKey
   = | 'primary' | 'neutral' | 'semantic'
-    | 'font' | 'icons' | 'radius' | 'size' | 'buttons' | 'panels' | 'inputs'
+    | 'font' | 'type' | 'weights'
+    | 'icons' | 'radius' | 'size' | 'buttons' | 'panels' | 'inputs'
+
+/** The Text panel's three sections, each owning part of the font document. */
+const FONT_STACKS = ['sans', 'serif', 'mono'] as const
+const TYPE_FIELDS = ['uppercase', 'italic', 'letterSpacing', 'lineHeight'] as const
 
 /**
  * Only the two that still back a multi-section panel. Type, icons and radius
@@ -81,12 +86,15 @@ function aliasPalette(doc: ThemeDoc, name: keyof typeof DEFAULT_COLORS) {
 
 type VariantGroupKey = 'buttons' | 'panels' | 'inputs'
 
+/** The pickers store the stock choice as `'default'`; for a fingerprint that is the same as nothing chosen. */
+const chosen = (value?: string | null) => (value && value !== 'default' ? value : null)
+
 function groupPick(doc: ThemeDoc, group: VariantGroupKey) {
   const defaults = doc.style?.defaults
   return {
     // effective variant: the group's own choice, else the app-wide fallback
-    variant: defaults?.variants?.[group] ?? defaults?.variant ?? null,
-    color: defaults?.colors?.[group] ?? null
+    variant: chosen(defaults?.variants?.[group]) ?? chosen(defaults?.variant),
+    color: chosen(defaults?.colors?.[group])
   }
 }
 
@@ -114,26 +122,37 @@ export function pickSection(doc: ThemeDoc, key: SectionKey): unknown {
         tokens: ownedTokens(doc, 'semantic'),
         shades: ownedTokenShades(doc, 'semantic')
       }
+    // Explicit stock values count as absent throughout: setFontPrefs strips
+    // them on apply while a preset doc may spell them out (8-bit), and a raw
+    // comparison would read dirty forever, jamming the toolbar reset.
     case 'font': {
-      // Explicit stock values count as absent: setFontPrefs strips them on
-      // apply while a preset doc may spell them out (8-bit), raw comparison
-      // would read dirty forever, jamming the toolbar reset.
-      const font = { ...(doc.font ?? {}) }
-      const weights = Object.fromEntries(Object.entries(font.weights ?? {})
+      const font = doc.font ?? {}
+      return {
+        sans: font.sans && font.sans !== THEME_DEFAULTS.font ? font.sans : null,
+        serif: font.serif ?? null,
+        mono: font.mono ?? null
+      }
+    }
+    case 'weights':
+      return Object.fromEntries(Object.entries(doc.font?.weights ?? {})
         .filter(([step, weight]) => weight !== FONT_WEIGHT_DEFAULTS[step as keyof typeof FONT_WEIGHT_DEFAULTS]))
-      if (Object.keys(weights).length) font.weights = weights as typeof font.weights
-      else delete font.weights
-      if (font.letterSpacing === 0) delete font.letterSpacing
-      if (font.lineHeight === 1.5) delete font.lineHeight
-      // size lives in the type panel, so the type section owns it
-      return { ...font, size: doc.fontSize ?? THEME_DEFAULTS.fontSize }
+    case 'type': {
+      const font = doc.font ?? {}
+      return {
+        // size lives in the Treatment section, so the type slice owns it
+        size: doc.fontSize ?? THEME_DEFAULTS.fontSize,
+        uppercase: !!font.uppercase,
+        italic: !!font.italic,
+        letterSpacing: font.letterSpacing ?? 0,
+        lineHeight: font.lineHeight ?? 1.5
+      }
     }
     case 'icons':
       return doc.icons ?? THEME_DEFAULTS.icons
     case 'radius':
       return doc.radius ?? THEME_DEFAULTS.radius
     case 'size':
-      return style.defaults?.size ?? null
+      return chosen(style.defaults?.size)
     case 'buttons':
     case 'panels':
     case 'inputs':
@@ -169,7 +188,7 @@ function setOrDelete<T extends object, K extends keyof T>(target: T, key: K, val
 }
 
 function pruneEmpty(doc: ThemeDoc) {
-  for (const key of ['colors', 'palettes', 'style'] as const) {
+  for (const key of ['colors', 'palettes'] as const) {
     if (doc[key] && !Object.keys(doc[key]!).length) Reflect.deleteProperty(doc, key)
   }
   if (doc.tokens) {
@@ -185,15 +204,32 @@ function pruneEmpty(doc: ThemeDoc) {
     if (!Object.keys(doc.style.defaults).length) delete doc.style.defaults
   }
   if (doc.style?.tokenShades && !Object.keys(doc.style.tokenShades).length) delete doc.style.tokenShades
+  // last: the two prunes above can empty it
+  if (doc.style && !Object.keys(doc.style).length) delete doc.style
+}
+
+/** Replace the listed font fields with the base doc's, dropping `font` when nothing is left. */
+function mergeFontFields(doc: ThemeDoc, base: ThemeDoc, fields: readonly (keyof NonNullable<ThemeDoc['font']>)[]) {
+  const font = { ...doc.font } as Record<string, unknown>
+  for (const field of fields) {
+    const value = base.font?.[field]
+    if (value === undefined) Reflect.deleteProperty(font, field)
+    else font[field] = structuredClone(value)
+  }
+  setOrDelete(doc, 'font', Object.keys(font).length ? font as ThemeDoc['font'] : undefined)
 }
 
 /** Replace one alias's color + referenced palette with the base doc's. */
 function mergeAlias(doc: ThemeDoc, base: ThemeDoc, name: keyof typeof DEFAULT_COLORS) {
   const currentPaletteName = alias(doc, name)
-  if (doc.palettes) Reflect.deleteProperty(doc.palettes, currentPaletteName)
 
   doc.colors ??= {}
   setOrDelete(doc.colors, name, base.colors?.[name])
+
+  // The ramp this alias just left goes only if no other alias still rides it.
+  const stillReferenced = (Object.keys(DEFAULT_COLORS) as Array<keyof typeof DEFAULT_COLORS>)
+    .some(other => alias(doc, other) === currentPaletteName)
+  if (doc.palettes && !stillReferenced) Reflect.deleteProperty(doc.palettes, currentPaletteName)
 
   const basePalette = aliasPalette(base, name)
   if (basePalette) {
@@ -250,7 +286,13 @@ export function mergeSection(current: ThemeDoc, base: ThemeDoc, key: SectionKey)
       mergeColorExtras(doc, base, 'semantic')
       break
     case 'font':
-      setOrDelete(doc, 'font', base.font ? structuredClone(base.font) : undefined)
+      mergeFontFields(doc, base, FONT_STACKS)
+      break
+    case 'weights':
+      mergeFontFields(doc, base, ['weights'])
+      break
+    case 'type':
+      mergeFontFields(doc, base, TYPE_FIELDS)
       setOrDelete(doc, 'fontSize', base.fontSize)
       break
     case 'icons':
@@ -271,11 +313,25 @@ export function mergeSection(current: ThemeDoc, base: ThemeDoc, key: SectionKey)
     case 'inputs':
       if (doc.style?.defaults || baseStyle.defaults) {
         doc.style ??= {}
-        doc.style.defaults = { ...doc.style.defaults }
-        doc.style.defaults.variants = { ...doc.style.defaults.variants }
-        doc.style.defaults.colors = { ...doc.style.defaults.colors }
-        setOrDelete(doc.style.defaults.variants, key, baseStyle.defaults?.variants?.[key])
-        setOrDelete(doc.style.defaults.colors, key, baseStyle.defaults?.colors?.[key])
+        const defaults = doc.style.defaults = { ...doc.style.defaults }
+        defaults.variants = { ...defaults.variants }
+        defaults.colors = { ...defaults.colors }
+        // An app-wide variant reaches this group through the fallback the
+        // fingerprint reads, so it explodes into the other groups (where
+        // they support it) before this one is set, or it would come back.
+        const appWide = chosen(defaults.variant)
+        if (appWide) {
+          for (const group of Object.keys(VARIANT_GROUPS) as VariantGroupKey[]) {
+            if (group === key || chosen(defaults.variants[group])) continue
+            if (VARIANT_GROUPS[group].some(component => VARIANT_SUPPORT[component]?.includes(appWide))) {
+              defaults.variants[group] = appWide as typeof defaults.variant
+            }
+          }
+          delete defaults.variant
+        }
+        // chosen() answers null for the fingerprint's sake, setOrDelete wants undefined
+        setOrDelete(defaults.variants, key, (chosen(baseStyle.defaults?.variants?.[key]) ?? chosen(baseStyle.defaults?.variant) ?? undefined) as typeof defaults.variant)
+        setOrDelete(defaults.colors, key, baseStyle.defaults?.colors?.[key])
       }
       break
   }
