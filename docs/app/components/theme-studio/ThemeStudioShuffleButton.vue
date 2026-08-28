@@ -1,8 +1,13 @@
 <script setup lang="ts">
 /** Rolls a random theme, the die tumbling through faces as it goes. */
-defineProps<{
+withDefaults(defineProps<{
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
-}>()
+  variant?: 'ghost' | 'subtle' | 'outline'
+  /** A full-width labelled row, for the mobile menu where the other controls stack. */
+  vertical?: boolean
+}>(), {
+  variant: 'ghost'
+})
 
 const { shuffle } = useThemeStudio()
 const { icon: iconSet } = useTheme()
@@ -63,15 +68,17 @@ onUnmounted(clearRollTimers)
 </script>
 
 <template>
-  <UTooltip text="Random theme">
+  <UTooltip text="Random theme" :disabled="vertical">
     <UButton
       :icon="diceFace"
+      :label="vertical ? 'Random theme' : undefined"
       color="neutral"
-      variant="ghost"
+      :variant="vertical ? 'outline' : variant"
       :size="size"
+      :block="vertical"
       aria-label="Random theme"
       :class="rolling && 'dice-bumping'"
-      :ui="{ leadingIcon: rolling ? 'dice-rolling' : undefined }"
+      :ui="{ leadingIcon: [rolling && 'dice-rolling', vertical && 'text-dimmed'] }"
       @click="rollDice"
       @animationend="onRollEnd"
     />

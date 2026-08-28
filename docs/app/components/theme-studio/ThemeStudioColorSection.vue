@@ -1,23 +1,19 @@
 <script setup lang="ts">
+import { TOKEN_GROUPS } from '../../utils/theme/engine'
 import type { ColorAlias, SectionKey } from '../../utils/theme/engine'
 
 /**
  * One color alias: its picker, with the palette and shade editors folding out
  * under it. Aliases expose their accent pair; neutral its every token group.
  */
-const props = withDefaults(defineProps<{
+const props = defineProps<{
   alias: ColorAlias
   /** Header text, defaults to the capitalized alias. */
   label?: string
   helpTo?: string
   /** Passed through to the section header's reset affordance. */
   sectionKey?: SectionKey
-  /** Nested under a fold already, see ThemeStudioSection. */
-  collapsible?: boolean
-}>(), {
-  // absent must stay undefined so the section's depth rule still decides
-  collapsible: undefined
-})
+}>()
 
 const { rampChip } = useThemeStudio()
 const { shadeLadder, sections } = useTokenShades(props.alias)
@@ -26,24 +22,43 @@ const title = computed(() => props.label ?? capitalize(props.alias))
 
 const paletteEditor = ref(false)
 const shadeEditor = ref(false)
+
+// Neutral rides every semantic token, so its shades come grouped rather than
+// as one accent pair. Borders are left out: they have no control to sit with
+// since the border axis went.
+const NEUTRAL_GROUPS = ['background', 'text']
+const tokenGroups = TOKEN_GROUPS
+  .filter(group => NEUTRAL_GROUPS.includes(group.key))
+  .map(group => ({ ...group, sections: sections.filter(section => section.group === group.key) }))
+  .filter(group => group.sections.length)
+
+const editors = [
+  { open: shadeEditor, icon: 'i-lucide-settings-2', tooltip: 'Adjust shades', ariaLabel: `Adjust ${props.alias} shades` },
+  { open: paletteEditor, icon: 'i-lucide-tangent', tooltip: 'Edit palette', ariaLabel: `Edit ${props.alias} palette` }
+]
 </script>
 
 <template>
-  <ThemeStudioSection :label="title" :help-to="helpTo" :section-key="sectionKey" :collapsible="collapsible">
+  <ThemeStudioSection :label="title" :help-to="helpTo" :section-key="sectionKey">
+    <!-- the only two folds left in a panel: ghost until on, tinted while open -->
     <template #actions>
-      <ThemeStudioActionToggle
-        v-model="shadeEditor"
-        icon="i-lucide-settings-2"
-        tooltip="Adjust shades"
-        :aria-label="`Adjust ${alias} shades`"
-      />
-
-      <ThemeStudioActionToggle
-        v-model="paletteEditor"
-        icon="i-lucide-tangent"
-        tooltip="Edit palette"
-        :aria-label="`Edit ${alias} palette`"
-      />
+      <UTooltip
+        v-for="editor in editors"
+        :key="editor.tooltip"
+        :text="editor.tooltip"
+      >
+        <UButton
+          :icon="editor.icon"
+          color="neutral"
+          variant="ghost"
+          size="sm"
+          :active="editor.open.value"
+          active-color="primary"
+          active-variant="subtle"
+          :aria-label="editor.ariaLabel"
+          @click="editor.open.value = !editor.open.value"
+        />
+      </UTooltip>
     </template>
 
     <div>
@@ -64,8 +79,25 @@ const shadeEditor = ref(false)
               :ladder="shadeLadder"
             />
 
-            <!-- borders live in the Style panel's Borders section -->
-            <ThemeStudioTokenShades v-else :alias="alias" :groups="['background', 'text']" />
+            <!-- Every group keeps its name: a headerless section can't be
+                 told apart from the rows above it. -->
+            <div v-else class="flex flex-col gap-2">
+              <ThemeStudioSection
+                v-for="tokenGroup in tokenGroups"
+                :key="tokenGroup.key"
+                :label="tokenGroup.label"
+              >
+                <ThemeStudioShadeGroup
+                  v-for="section in tokenGroup.sections"
+                  :key="section.token"
+                  :label="`${tokenGroup.label.replace(/ shades$/, '')} ${section.label.toLowerCase()}`"
+                  separator
+                  :sliders="section.sliders"
+                  :chip="rampChip(section.ramp)"
+                  :ladder="shadeLadder"
+                />
+              </ThemeStudioSection>
+            </div>
           </div>
         </template>
       </UCollapsible>

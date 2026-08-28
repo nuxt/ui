@@ -5,12 +5,26 @@ const { icon: iconSet } = useTheme()
 // The chrome skins to the applied icon pack.
 const studioIcons = useStudioIcons()
 
-const { view } = useThemeStudioView()
-const { past, future, undo, redo } = useThemeStudioHistory()
-const { canReset, resetLabel, resetToBaseline } = useThemeStudioToolbar()
+const { view, views } = useThemeStudio()
+const { past, future, undo, redo } = useThemeStudioHistory({ record: true })
 
-useThemeStudioRecorder()
-useThemeStudioViewParam()
+// The preview mirrors into ?view=, so a reload (or a shared link) lands on
+// the same page. Read during setup rather than on mount: the server renders
+// the requested view, and hydration has nothing to correct.
+const route = useRoute()
+const router = useRouter()
+const requested = route.query.view
+if (typeof requested === 'string' && views.some(tab => tab.value === requested)) {
+  view.value = requested as typeof view.value
+}
+// grid is the default, so it stays out of the URL. Written on mount too:
+// the view is app-level state, so coming back to /theme from another page
+// lands on the last view with a URL that doesn't say so.
+const sync = (value: typeof view.value) => router.replace({ query: { ...route.query, view: value === 'grid' ? undefined : value } })
+watch(view, sync)
+onMounted(() => {
+  if ((route.query.view ?? 'grid') !== view.value) sync(view.value)
+})
 
 // The studio's preview is a card floating on a recessed canvas, which is the
 // one background the semantic tokens can't express: `--ui-bg-*` only ever
@@ -48,62 +62,50 @@ const shareMode = ref<'import' | 'export'>('export')
   <main class="max-w-(--ui-container) mx-auto">
     <!-- `modal: false` so the panels' popovers, portalled to the body, stay
          interactive over the fullscreen menu -->
-    <UHeader :menu="{ modal: false }" :ui="{ root: () => 'h-(--ui-header-height) border-b border-transparent', left: '', right: 'gap-0.5' }">
+    <UHeader :menu="{ modal: false }" :ui="{ root: () => 'h-(--ui-header-height) border-b border-transparent', right: 'gap-0.5 lg:gap-1.5' }">
       <template #left>
         <HeaderLogo />
 
-        <UTooltip text="Undo" :kbds="['meta', 'Z']">
-          <UButton
-            :icon="studioIcons.undo"
-            color="neutral"
-            variant="soft"
-            :disabled="!past.length"
-            aria-label="Undo theme change"
-            class="hidden lg:inline-flex"
-            @click="undo"
-          />
-        </UTooltip>
+        <div class="flex items-center">
+          <UTooltip text="Undo" :kbds="['meta', 'Z']">
+            <UButton
+              :icon="studioIcons.undo"
+              color="neutral"
+              variant="ghost"
+              :disabled="!past.length"
+              aria-label="Undo theme change"
+              class="hidden lg:inline-flex"
+              @click="undo"
+            />
+          </UTooltip>
 
-        <UTooltip text="Redo" :kbds="['meta', 'shift', 'Z']">
-          <UButton
-            :icon="studioIcons.redo"
-            color="neutral"
-            variant="ghost"
-            :disabled="!future.length"
-            aria-label="Redo theme change"
-            class="hidden lg:inline-flex"
-            @click="redo"
-          />
-        </UTooltip>
-
-        <UButton
-          :icon="studioIcons.export"
-          color="neutral"
-          variant="ghost"
-          aria-label="Export theme"
-          @click="shareMode = 'export'; shareOpen = true"
-        />
-
-        <ThemeStudioShuffleButton />
+          <UTooltip text="Redo" :kbds="['meta', 'shift', 'Z']">
+            <UButton
+              :icon="studioIcons.redo"
+              color="neutral"
+              variant="ghost"
+              :disabled="!future.length"
+              aria-label="Redo theme change"
+              class="hidden lg:inline-flex"
+              @click="redo"
+            />
+          </UTooltip>
+        </div>
       </template>
 
-      <ThemeStudioViewSwitcher v-model:open="openViews.bar" :content="{ align: 'end' }" variant="soft" />
+      <ThemeStudioViewSwitcher v-model:open="openViews.bar" />
 
       <template #right>
-        <UTooltip :text="resetLabel">
-          <UButton
-            :icon="studioIcons.reset"
-            color="neutral"
-            variant="ghost"
-            :disabled="!canReset"
-            :aria-label="resetLabel"
-            @click="resetToBaseline"
-          />
-        </UTooltip>
-
         <UTooltip text="Color mode" :kbds="['d']">
           <UColorModeButton color="neutral" variant="ghost" data-keep-panels class="shrink-0" />
         </UTooltip>
+
+        <UButton
+          color="neutral"
+          label="Export"
+          class="hidden lg:inline-flex"
+          @click="shareMode = 'export'; shareOpen = true"
+        />
       </template>
 
       <template #toggle="{ open, toggle, ui }">
@@ -119,10 +121,23 @@ const shareMode = ref<'import' | 'export'>('export')
       <template #body>
         <div class="flex flex-col gap-3">
           <UFormField label="View" :ui="{ root: 'text-xs', container: 'mt-1' }">
-            <ThemeStudioViewSwitcher v-model:open="openViews.menu" class="w-full" />
+            <ThemeStudioViewSwitcher v-model:open="openViews.menu" vertical class="w-full" />
           </UFormField>
 
           <ThemeStudioToolbar vertical />
+
+          <USeparator class="my-5" />
+
+          <ThemeStudioShuffleButton variant="outline" vertical />
+          <ThemeStudioResetButton variant="outline" vertical />
+
+          <UButton
+            :icon="studioIcons.export"
+            color="neutral"
+            label="Export theme"
+            block
+            @click="shareMode = 'export'; shareOpen = true"
+          />
         </div>
       </template>
     </UHeader>
@@ -146,7 +161,15 @@ const shareMode = ref<'import' | 'export'>('export')
     </div>
 
     <UFooter class="hidden lg:block" :ui="{ container: 'py-2 lg:py-4', left: 'mt-0', right: 'mt-0' }">
+      <template #left>
+        <ThemeStudioShuffleButton variant="outline" />
+      </template>
+
       <ThemeStudioToolbar />
+
+      <template #right>
+        <ThemeStudioResetButton variant="outline" />
+      </template>
     </UFooter>
 
     <ThemeStudioShareModal v-model:open="shareOpen" v-model:mode="shareMode" />

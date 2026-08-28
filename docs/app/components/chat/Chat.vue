@@ -13,7 +13,7 @@ const route = useRoute()
 const { open, messages } = useChat()
 const { open: searchOpen } = useContentSearch()
 const { framework } = useFrameworks()
-const { resetTheme, applyThemeSettings, hasCSSChanges, hasConfigChanges } = useTheme()
+const { resetTheme, applyThemeSettings, hasChanges: hasThemeChanges } = useTheme()
 // A preset is a whole ThemeDoc, so it rides applyDoc (reset, style axis, class
 // bundle) rather than the settings channel applyTheme uses.
 const { presets, applyPreset } = useThemeStudio()
@@ -21,8 +21,6 @@ const { presets, applyPreset } = useThemeStudio()
 // studio's glyphs and skin to the applied icon pack with it.
 const studioIcons = useStudioIcons()
 const appConfig = useAppConfig()
-
-const hasThemeChanges = computed(() => hasCSSChanges.value || hasConfigChanges.value)
 
 let _skipSync = false
 const _themeApplied = new Set<string>()
@@ -255,15 +253,7 @@ defineShortcuts({
     :ui="{ footer: 'p-0', actions: 'gap-0.5' }"
   >
     <template #actions>
-      <UTooltip v-if="hasThemeChanges" text="Reset theme">
-        <UButton
-          :icon="studioIcons.reset"
-          color="neutral"
-          variant="ghost"
-          aria-label="Reset theme"
-          @click="resetTheme()"
-        />
-      </UTooltip>
+      <ThemeStudioResetButton v-if="hasThemeChanges" />
 
       <UTooltip v-if="canClear" text="Clear messages">
         <UButton

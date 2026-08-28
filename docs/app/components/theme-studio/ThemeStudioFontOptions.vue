@@ -63,72 +63,76 @@ const stacks = [
 </script>
 
 <template>
-  <div class="w-72 p-3 flex flex-col gap-1.5">
-    <ThemeStudioRow
-      v-for="stack in stacks"
-      :key="stack.label"
-      control="custom"
-      :label="stack.label"
-    >
-      <ThemeStudioFontPicker
-        v-model="stack.model.value"
-        :curated="fonts"
-        :default-value="stack.default"
-        :inherit="stack.inherit"
-        :aria-label="stack.hint"
+  <!-- Sections own their padding so the separators run edge to edge, and the
+       panel drops the leading one since nothing sits above it. -->
+  <div class="flex flex-col [&>*:first-child]:border-t-0">
+    <ThemeStudioSection label="Fonts" section-key="font">
+      <ThemeStudioRow
+        v-for="stack in stacks"
+        :key="stack.label"
+        control="custom"
+        :label="stack.label"
+      >
+        <ThemeStudioFontPicker
+          v-model="stack.model.value"
+          :curated="fonts"
+          :default-value="stack.default"
+          :inherit="stack.inherit"
+          :aria-label="stack.hint"
+        />
+      </ThemeStudioRow>
+    </ThemeStudioSection>
+
+    <ThemeStudioSection label="Treatment" section-key="type">
+      <!-- font-size scales every rem metric, so it belongs with the type
+           decisions rather than beside radius -->
+      <ThemeStudioRow
+        v-model="fontSize"
+        control="slider"
+        label="Size"
+        :min="14"
+        :max="18"
+        :step="0.5"
+        unit="px"
       />
-    </ThemeStudioRow>
 
-    <USeparator class="my-1" />
+      <ThemeStudioRow
+        v-model="letterSpacing"
+        control="slider"
+        label="Spacing"
+        :min="-0.05"
+        :max="0.25"
+        :step="0.005"
+        unit="em"
+      />
 
-    <!-- font-size scales every rem metric, so it belongs with the type
-         decisions rather than beside radius -->
-    <ThemeStudioRow
-      v-model="fontSize"
-      control="slider"
-      label="Size"
-      :min="14"
-      :max="18"
-      :step="0.5"
-      unit="px"
-    />
+      <ThemeStudioRow
+        v-model="lineHeight"
+        control="slider"
+        label="Height"
+        :min="1"
+        :max="2"
+        :step="0.05"
+      />
 
-    <ThemeStudioRow
-      v-model="letterSpacing"
-      control="slider"
-      label="Spacing"
-      :min="-0.05"
-      :max="0.25"
-      :step="0.005"
-      unit="em"
-    />
+      <ThemeStudioRow
+        v-model="uppercase"
+        control="switch"
+        label="Uppercase"
+      />
+    </ThemeStudioSection>
 
-    <ThemeStudioRow
-      v-model="lineHeight"
-      control="slider"
-      label="Height"
-      :min="1"
-      :max="2"
-      :step="0.05"
-    />
-
-    <ThemeStudioRow
-      v-model="uppercase"
-      control="switch"
-      label="Uppercase"
-    />
-
-    <USeparator class="my-1" />
-
-    <ThemeStudioRow
-      v-for="weight in weights"
-      :key="weight.label"
-      v-model="weight.model.value"
-      control="slider"
-      :label="weight.label"
-      :min="100"
-      :max="900"
-      :step="25"
-    />
+    <ThemeStudioSection label="Weights" section-key="weights">
+      <ThemeStudioRow
+        v-for="weight in weights"
+        :key="weight.label"
+        v-model="weight.model.value"
+        control="slider"
+        :label="weight.label"
+        :min="100"
+        :max="900"
+        :step="25"
+      />
+    </ThemeStudioSection>
   </div>
 </template>

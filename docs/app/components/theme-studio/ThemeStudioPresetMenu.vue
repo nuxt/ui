@@ -4,30 +4,24 @@ import { themeIcons } from '../../utils/theme/icons'
 import { themeChipStyle, keepPanels, loadFontPreviews } from '../../utils/theme/studio'
 
 /** The presets trigger and its listbox: the label names the applied preset. */
-defineProps<{
-  /** Set where the trigger carries no visible label of its own. */
-  tooltip?: string
-}>()
-
 const { presets, selectedPreset, applyPreset } = useThemeStudio()
 const { fonts } = useTheme()
 const appConfig = useAppConfig()
 const studioIcons = useStudioIcons()
+
+defineProps<{
+  /** Stacked in the mobile menu: the list takes the trigger's width, like a select. */
+  vertical?: boolean
+}>()
 
 /** Exposed so the toolbar can pin itself while the menu is open. */
 const open = defineModel<boolean>('open', { default: false })
 
 // The persisted preset (and any persisted edits) are client-only, resolve
 // the label after mount so hydration matches the server's fallback.
-const mounted = ref(false)
-onMounted(() => {
-  mounted.value = true
-  // the rows render their own font names, load the faces once
-  loadFontPreviews(fonts.map(entry => entry.name))
-})
-
-// the toolbar stays open when a click lands on its own chrome
-const onKeepPanels = keepPanels
+const mounted = useMounted()
+// the rows render their own font names, load the faces once
+onMounted(() => loadFontPreviews(fonts.map(entry => entry.name)))
 
 // Edits deliberately don't clear the preset name (the controls that changed
 // go primary to carry divergence); 'Custom' only when preset-less but
@@ -68,6 +62,13 @@ const presetItems = computed(() => presets.map(preset => ({
 const selected = computed({
   get: () => mounted.value ? selectedPreset.value : undefined,
   set: (id: string | undefined) => {
+    // A second click (or Enter) on the selected preset toggles it off in
+    // Reka's single-select listbox and emits undefined. Re-applying would
+    // wipe the edits made on top of it, so it only closes.
+    if (id === undefined) {
+      open.value = false
+      return
+    }
     const preset = presets.find(entry => entry.id === id)
     if (preset) {
       applyPreset(preset)
@@ -78,65 +79,60 @@ const selected = computed({
 </script>
 
 <template>
-  <div class="flex gap-2">
-    <UPopover
-      v-model:open="open"
-      :content="{ align: 'start', onInteractOutside: onKeepPanels }"
-      class="flex-1 min-w-0"
-    >
-      <UTooltip :text="tooltip" :disabled="!tooltip">
-        <UButton
-          :label="presetLabel"
-          :icon="presetIcon"
-          :trailing-icon="appConfig.ui.icons.chevronDown"
-          color="neutral"
-          variant="outline"
-          block
-          class="group"
-          :ui="{
-            label: 'flex-1 min-w-0 text-left truncate',
-            leadingIcon: 'text-primary',
-            trailingIcon: ['text-dimmed transition-transform duration-200', open && 'rotate-180']
-          }"
-          :aria-label="ariaLabel"
-        />
-      </UTooltip>
+  <UPopover
+    v-model:open="open"
+    :content="{ align: 'center', onInteractOutside: keepPanels }"
+    :ui="{ content: vertical ? 'w-(--reka-popper-anchor-width)' : undefined }"
+  >
+    <UButton
+      :label="presetLabel"
+      :icon="presetIcon"
+      :trailing-icon="appConfig.ui.icons.chevronDown"
+      color="neutral"
+      variant="outline"
+      block
+      class="group"
+      :ui="{
+        label: 'flex-1 min-w-0 text-left truncate',
+        leadingIcon: 'text-primary',
+        trailingIcon: ['text-dimmed transition-transform duration-200', open && 'rotate-180']
+      }"
+      :aria-label="ariaLabel"
+    />
 
-      <template #content>
-        <UListbox
-          v-model="selected"
-          :items="presetItems"
-          value-key="id"
-          class="w-80"
-          :ui="{
-            root: 'ring-0 rounded-md',
-            content: 'max-h-96',
-            item: 'gap-3'
-          }"
-        >
-          <template #item-leading="{ item }">
-            <span
-              class="flex items-center justify-center size-10 rounded-md ring ring-default shrink-0 bg-[image:var(--chip-bg-light)] dark:bg-[image:var(--chip-bg-dark)]"
-              :style="item.themeChip"
-            >
-              <UIcon :name="item.chipIcon" class="size-4 text-(--chip-icon-light) dark:text-(--chip-icon-dark)" />
+    <template #content>
+      <UListbox
+        v-model="selected"
+        :items="presetItems"
+        value-key="id"
+        :ui="{
+          root: 'ring-0 rounded-none',
+          item: 'items-center',
+          content: 'max-h-60'
+        }"
+      >
+        <template #item-leading="{ item }">
+          <span
+            class="flex items-center justify-center size-8 rounded-full shrink-0 bg-(image:--chip-bg-light) dark:bg-(image:--chip-bg-dark)"
+            :style="item.themeChip"
+          >
+            <UIcon :name="item.chipIcon" class="size-4 text-(--chip-icon-light) dark:text-(--chip-icon-dark)" />
+          </span>
+        </template>
+
+        <!-- the doc's font in its own face and a taste of its icon set -->
+        <template #item-description="{ item }">
+          <span class="flex items-center gap-2">
+            <span class="shrink-0 text-xs text-muted truncate" :style="{ fontFamily: `'${item.font}', sans-serif` }">{{ item.font }}</span>
+
+            <span class="text-dimmed select-none">·</span>
+
+            <span class="flex items-center gap-1 shrink-0">
+              <UIcon v-for="name in item.iconSamples" :key="name" :name="name" class="size-3 text-dimmed" />
             </span>
-          </template>
-
-          <!-- the doc's font in its own face and a taste of its icon set -->
-          <template #item-description="{ item }">
-            <span class="flex items-center gap-2 pt-0.5">
-              <span class="shrink-0 text-xs text-muted truncate" :style="{ fontFamily: `'${item.font}', sans-serif` }">{{ item.font }}</span>
-
-              <span class="text-dimmed select-none">·</span>
-
-              <span class="flex items-center gap-1 shrink-0">
-                <UIcon v-for="name in item.iconSamples" :key="name" :name="name" class="size-3 text-dimmed" />
-              </span>
-            </span>
-          </template>
-        </UListbox>
-      </template>
-    </UPopover>
-  </div>
+          </span>
+        </template>
+      </UListbox>
+    </template>
+  </UPopover>
 </template>

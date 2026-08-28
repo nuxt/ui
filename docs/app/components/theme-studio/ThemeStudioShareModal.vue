@@ -10,7 +10,7 @@ const open = defineModel<boolean>('open', { default: false })
 const mode = defineModel<'import' | 'export'>('mode', { default: 'export' })
 
 const { applyDoc, clearActivePreset } = useThemeStudio()
-const { exportCSS, exportConfig, configLabel, hasCSSChanges, hasConfigChanges } = useTheme()
+const { exportCSS, exportConfig, configLabel, hasChanges } = useTheme()
 const { track } = useAnalytics()
 const { copy: copyCSS, copied: copiedCSS } = useClipboard()
 const { copy: copyConfig, copied: copiedConfig } = useClipboard()
@@ -59,7 +59,7 @@ function runImport() {
     <template #body>
       <div class="flex flex-col gap-4">
         <UAlert
-          v-if="mode === 'export' && !hasCSSChanges && !hasConfigChanges"
+          v-if="mode === 'export' && !hasChanges"
           title="No changes yet"
           description="You are on the default theme. Tweak something and come back."
           icon="i-lucide-info"

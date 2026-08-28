@@ -7,6 +7,11 @@ import type { ChipProps } from '@nuxt/ui'
 export interface RowSelectItem {
   label: string
   value: string
+  /**
+   * Renders a muted "(Default)" suffix in the LIST, where it tells you which
+   * option is the stock one. The trigger shows the plain label: there it only
+   * lengthens the value you already picked.
+   */
   defaultTag?: boolean
   chip?: ChipProps
 }
@@ -47,6 +52,13 @@ const model = defineModel<any>()
 const emit = defineEmits<{ reset: [] }>()
 
 const studioIcons = useStudioIcons()
+
+const selectedItem = computed(() => props.items?.find(item => item.value === model.value))
+
+/** A select's slot scope types items as the broad SelectItem union, narrow it. */
+function asItem(item: unknown) {
+  return item as RowSelectItem
+}
 
 const slots = defineSlots<{
   /** The control area, for `custom`. */
@@ -209,18 +221,29 @@ const showTextLabel = computed(() => !props.icon && !shade.value)
       :aria-label="ariaLabel ?? label"
     />
 
-    <ThemeStudioDefaultSelect
+    <USelect
       v-else-if="control === 'select'"
       v-model="model"
       :items="items ?? []"
       :icon="controlIcon"
+      size="sm"
+      color="neutral"
+      variant="subtle"
       :aria-label="ariaLabel ?? label"
       class="flex-1"
     >
       <template v-if="!!slots.leading" #leading>
         <slot name="leading" />
       </template>
-    </ThemeStudioDefaultSelect>
+
+      <template #default>
+        {{ selectedItem?.label }}
+      </template>
+
+      <template #item-label="{ item }">
+        {{ asItem(item).label }}<span v-if="asItem(item).defaultTag" class="text-dimmed">&nbsp;(Default)</span>
+      </template>
+    </USelect>
 
     <slot v-else />
   </UFormField>

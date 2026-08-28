@@ -2,8 +2,8 @@
 import type { VariantGroup } from '../../utils/theme/engine'
 
 /**
- * The variant and colour Buttons, Cards and Inputs start from. One fold over
- * all three, collapsed and last, it's the least-reached-for control.
+ * The variant and colour Buttons, Cards and Inputs start from, one section
+ * each so every group carries its own reset.
  */
 const { style, setStyle } = useThemeStudio()
 
@@ -37,9 +37,9 @@ const variantGridOpen = reactive<Record<string, boolean>>({ buttons: false, pane
 
 // `stock` is the library's own default, picking it clears the override.
 const variantGroupFields = [
-  { key: 'buttons' as const, label: 'Button Defaults', hasColor: true, stock: 'solid', items: variantItems(['solid', 'outline', 'soft', 'subtle', 'ghost', 'link']) },
-  { key: 'panels' as const, label: 'Card Defaults', hasColor: false, stock: 'outline', items: variantItems(['solid', 'outline', 'soft', 'subtle']) },
-  { key: 'inputs' as const, label: 'Input Defaults', hasColor: true, stock: 'outline', items: variantItems(['outline', 'soft', 'subtle', 'ghost', 'none']) }
+  { key: 'buttons' as const, label: 'Buttons', hasColor: true, stock: 'solid', items: variantItems(['solid', 'outline', 'soft', 'subtle', 'ghost', 'link']) },
+  { key: 'panels' as const, label: 'Cards', hasColor: false, stock: 'outline', items: variantItems(['solid', 'outline', 'soft', 'subtle']) },
+  { key: 'inputs' as const, label: 'Inputs', hasColor: true, stock: 'outline', items: variantItems(['outline', 'soft', 'subtle', 'ghost', 'none']) }
 ]
 
 function groupVariantModel(group: VariantGroup) {
@@ -105,12 +105,10 @@ const groupColors = Object.fromEntries(variantGroupFields.map(field => [field.ke
 </script>
 
 <template>
-  <ThemeStudioSection
-    label="Default variants"
-    :default-open="false"
-    :section-key="[...variantGroupFields.map(field => field.key), 'size']"
-  >
-    <div class="pb-1.5">
+  <!-- Sections own their padding so the separators run edge to edge, and the
+       panel drops the leading one since nothing sits above it. -->
+  <div class="flex flex-col [&>*:first-child]:border-t-0">
+    <ThemeStudioSection label="Global" section-key="size">
       <ThemeStudioRow
         v-model="defaultSize"
         control="select"
@@ -119,13 +117,13 @@ const groupColors = Object.fromEntries(variantGroupFields.map(field => [field.ke
         :items="defaultSizeItems"
         aria-label="Default size"
       />
-    </div>
+    </ThemeStudioSection>
 
     <ThemeStudioSection
       v-for="field in variantGroupFields"
       :key="field.key"
       :label="field.label"
-      :collapsible="false"
+      :section-key="field.key"
     >
       <div class="flex flex-col gap-1.5">
         <ThemeStudioRow control="custom" label="Variant">
@@ -138,7 +136,7 @@ const groupColors = Object.fromEntries(variantGroupFields.map(field => [field.ke
               icon="i-lucide-layers"
               trailing-icon="i-lucide-chevron-down"
               :ui="{ label: 'flex-1 text-left' }"
-              :aria-label="`${field.label} variant`"
+              :aria-label="`Default variant for ${field.label.toLowerCase()}`"
             >
               <!-- the tag belongs in the grid, where it names the stock option -->
               {{ field.items.find(item => item.value === (groupVariants[field.key].value === 'default' ? field.stock : groupVariants[field.key].value))?.label }}
@@ -173,7 +171,7 @@ const groupColors = Object.fromEntries(variantGroupFields.map(field => [field.ke
           control="select"
           label="Color"
           :items="defaultColorItems"
-          :aria-label="`${field.label} color`"
+          :aria-label="`Default color for ${field.label.toLowerCase()}`"
         >
           <template #leading>
             <UChip
@@ -183,5 +181,5 @@ const groupColors = Object.fromEntries(variantGroupFields.map(field => [field.ke
         </ThemeStudioRow>
       </div>
     </ThemeStudioSection>
-  </ThemeStudioSection>
+  </div>
 </template>

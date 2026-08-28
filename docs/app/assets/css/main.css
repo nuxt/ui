@@ -48,7 +48,7 @@
    carries, and pointed at the neutral ramp so a themed palette reaches it. */
 body.theme-studio,
 body.theme-studio #__nuxt {
-  background-color: var(--ui-color-neutral-100);
+  background-color: var(--ui-color-neutral-50);
 }
 
 .dark body.theme-studio,

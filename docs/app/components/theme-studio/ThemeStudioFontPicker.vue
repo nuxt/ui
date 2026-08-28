@@ -11,7 +11,7 @@
  */
 import { watchDebounced } from '@vueuse/core'
 import { loadFontPreviews, keepPanels } from '../../utils/theme/studio'
-import type { FontCategory } from '../../composables/useTheme'
+import type { FontCategory } from '../../utils/theme/studio'
 
 const props = defineProps<{
   /** The shortlist offered before the user searches. */
@@ -43,10 +43,14 @@ watch(open, (value) => {
 
 const results = computed(() => open.value ? search(query.value) : [])
 
-/** Google reports `sans-serif` / `monospace` / `display` / `handwriting`. */
+/**
+ * The metadata endpoint reports `Sans Serif` / `Serif` / `Monospace` /
+ * `Display` / `Handwriting`, the developer API the same in lowercase.
+ */
 function categoryOf(raw: string): FontCategory {
-  if (raw.startsWith('mono')) return 'Mono'
-  if (raw === 'serif') return 'Serif'
+  const category = raw.toLowerCase()
+  if (category.startsWith('mono')) return 'Mono'
+  if (category === 'serif') return 'Serif'
   return 'Sans'
 }
 

@@ -14,8 +14,7 @@ const open = ref(false)
 
 // The persisted theme is client-only, gate the selection on mount so
 // hydration doesn't adopt a checked row the server never rendered.
-const mounted = ref(false)
-onMounted(() => (mounted.value = true))
+const mounted = useMounted()
 
 watch(open, (isOpen) => {
   if (isOpen) {
@@ -35,6 +34,8 @@ const presetTiles = computed(() => presets.map(preset => ({
 const selected = computed({
   get: () => (mounted.value ? selectedPreset.value : undefined),
   set: (id: string | undefined) => {
+    // undefined is Reka toggling the selected tile off: nothing to apply,
+    // and re-applying would wipe the edits made on top of it
     const preset = presets.find(entry => entry.id === id)
     if (preset) applyPreset(preset)
   }

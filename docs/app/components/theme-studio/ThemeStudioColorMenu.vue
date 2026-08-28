@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { ColorAlias } from '../../utils/theme/engine'
-import { paletteLabel } from '../../utils/theme/studio'
+import { paletteLabel, rampCssName } from '../../utils/theme/studio'
 
 /**
  * The shared color picker: a swatch-labelled trigger opening the palette
@@ -29,15 +29,10 @@ const label = computed(() => {
   return isCustomPalette(props.alias) ? 'Custom' : paletteLabel(value.value)
 })
 
-/** Palette name → the css var chip name (tailwind's neutral gray is remapped in docs). */
-function paletteChip(name: string) {
-  return name === 'neutral' ? 'old-neutral' : name
-}
-
 const swatchColor = computed(() => {
   if (props.alias === 'primary' && blackAsPrimary.value) return undefined
   if (isCustomPalette(props.alias)) return `var(--color-custom-${props.alias}-500)`
-  return `var(--color-${paletteChip(value.value)}-500)`
+  return `var(--color-${rampCssName(value.value)}-500)`
 })
 
 function isSelected(color: string) {
@@ -106,7 +101,7 @@ function isSelected(color: string) {
               <span
                 class="inline-block h-2 w-4 rounded-full"
                 :style="{
-                  background: `linear-gradient(to right, var(--color-${paletteChip(color)}-400), var(--color-${paletteChip(color)}-500), var(--color-${paletteChip(color)}-600))`
+                  background: `linear-gradient(to right, var(--color-${rampCssName(color)}-400), var(--color-${rampCssName(color)}-500), var(--color-${rampCssName(color)}-600))`
                 }"
               />
             </template>
