@@ -39,7 +39,7 @@ overrides:
 minimumReleaseAgeExclude:
   - '@nuxt/icon@2.5.0'
   - '@nuxtjs/mdc@0.23.1'
-  - 'nuxt-agent-discovery@0.1.0'
+  - 'nuxt-agent-discovery@0.1.1'
 
 allowBuilds:
   better-sqlite3: true
