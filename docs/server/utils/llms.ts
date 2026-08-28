@@ -1,23 +1,4 @@
-import { SITE_URL } from './markdownNegotiation'
-
-/**
- * Points a documentation page link at its Markdown representation.
- *
- * Only `/docs/**` pages have one: `/docs` itself is a redirect, and `/mcp`,
- * `/openapi.json` and the `.well-known` resources have to stay as they are.
- */
-export function toRawDocsLink(href: string): string {
-  if (!href.startsWith(`${SITE_URL}/docs/`)) {
-    return href
-  }
-
-  // `.md` belongs on the pathname, ahead of any query string or fragment.
-  const separator = href.search(/[?#]/)
-  const pathname = separator === -1 ? href : href.slice(0, separator)
-  const suffix = separator === -1 ? '' : href.slice(separator)
-
-  return `${pathname.replace(SITE_URL, `${SITE_URL}/raw`)}.md${suffix}`
-}
+import { SITE_URL } from './site'
 
 /**
  * "When to use" guidance for agents, rendered as the first section of
@@ -64,13 +45,16 @@ export const WHEN_TO_USE_SECTION = {
     '',
     'Entry points:'
   ].join('\n'),
+  // Plain page paths: `nuxt-agent-discovery` maps them to their `/raw/**.md`
+  // twins wherever this section is rendered, from the same route config the
+  // negotiation uses.
   links: [
-    { title: 'Installation (Nuxt)', description: 'Add Nuxt UI to a Nuxt application', href: toRawDocsLink(`${SITE_URL}/docs/getting-started/installation/nuxt`) },
-    { title: 'Installation (Vue)', description: 'Add Nuxt UI to a Vue application with Vite', href: toRawDocsLink(`${SITE_URL}/docs/getting-started/installation/vue`) },
-    { title: 'MCP server', description: 'Component metadata, documentation and examples over MCP', href: toRawDocsLink(`${SITE_URL}/docs/getting-started/ai/mcp`) },
-    { title: 'Agent skill', description: 'Conventions, component selection and layout recipes', href: `${SITE_URL}/.well-known/skills/nuxt-ui/SKILL.md` },
-    { title: 'OpenAPI specification', description: 'Machine-readable description of the public endpoints', href: `${SITE_URL}/openapi.json` },
-    { title: 'Markdown sitemap', description: 'Every page on the site, as Markdown links', href: `${SITE_URL}/sitemap.md` }
+    { title: 'Installation (Nuxt)', description: 'Add Nuxt UI to a Nuxt application', href: '/docs/getting-started/installation/nuxt' },
+    { title: 'Installation (Vue)', description: 'Add Nuxt UI to a Vue application with Vite', href: '/docs/getting-started/installation/vue' },
+    { title: 'MCP server', description: 'Component metadata, documentation and examples over MCP', href: '/docs/getting-started/ai/mcp' },
+    { title: 'Agent skill', description: 'Conventions, component selection and layout recipes', href: '/.well-known/skills/nuxt-ui/SKILL.md' },
+    { title: 'OpenAPI specification', description: 'Machine-readable description of the public endpoints', href: '/openapi.json' },
+    { title: 'Markdown sitemap', description: 'Every page on the site, as Markdown links', href: '/sitemap.md' }
   ]
 }
 
@@ -78,7 +62,10 @@ export const WHEN_TO_USE_SECTION = {
  * Renders a `nuxt-llms` section the way `/llms.txt` does, so the same content
  * can be reused in other Markdown documents.
  */
-export function renderLlmsSection(section: { title: string, description?: string, links?: { title: string, description?: string, href: string }[] }): string {
+export function renderLlmsSection(
+  section: { title: string, description?: string, links?: { title: string, description?: string, href: string }[] },
+  resolveHref: (href: string) => string = href => href
+): string {
   const parts = [`## ${section.title}`]
 
   if (section.description) {
@@ -86,9 +73,12 @@ export function renderLlmsSection(section: { title: string, description?: string
   }
 
   if (section.links?.length) {
-    parts.push(section.links.map(link => link.description
-      ? `- [${link.title}](${link.href}): ${link.description}`
-      : `- [${link.title}](${link.href})`).join('\n'))
+    // `/llms.txt` gets its links rewritten to the raw twins by the module.
+    // Anywhere else has to resolve them, which is what `resolveHref` is for.
+    parts.push(section.links.map((link) => {
+      const href = resolveHref(link.href)
+      return link.description ? `- [${link.title}](${href}): ${link.description}` : `- [${link.title}](${href})`
+    }).join('\n'))
   }
 
   return parts.join('\n\n')
