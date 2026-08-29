@@ -33,6 +33,7 @@ exports[`AuthForm > renders with as correctly 1`] = `
           <div data-slot="password" class="relative inline-flex items-center w-full"><input id="v-0-0-2" type="password" name="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default ring ring-inset ring-accented outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary pe-9 md:text-sm" autocomplete="off" data-slot="base" aria-invalid="false">
             <!--v-if--><span data-slot="trailing" class="absolute inset-y-0 end-0 flex items-center pe-2.5"><button type="button" data-slot="base" aria-label="Show password" aria-pressed="false" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted outline-inverted/25 focus-visible:outline-3 p-1.5" aria-controls="v-0-0-2"><span class="iconify i-lucide:eye shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
             <!--v-if-->
+            <!--v-if-->
             <!--v-if--></button></span>
           </div>
           <!--v-if-->
@@ -40,6 +41,7 @@ exports[`AuthForm > renders with as correctly 1`] = `
       </div>
       <!--v-if--><button type="submit" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
         <!--v-if--><span data-slot="label" class="truncate">Continue</span>
+        <!--v-if-->
         <!--v-if-->
       </button>
     </form>
@@ -81,6 +83,7 @@ exports[`AuthForm > renders with class correctly 1`] = `
           <div data-slot="password" class="relative inline-flex items-center w-full"><input id="v-0-0-2" type="password" name="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default ring ring-inset ring-accented outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary pe-9 md:text-sm" autocomplete="off" data-slot="base" aria-invalid="false">
             <!--v-if--><span data-slot="trailing" class="absolute inset-y-0 end-0 flex items-center pe-2.5"><button type="button" data-slot="base" aria-label="Show password" aria-pressed="false" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted outline-inverted/25 focus-visible:outline-3 p-1.5" aria-controls="v-0-0-2"><span class="iconify i-lucide:eye shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
             <!--v-if-->
+            <!--v-if-->
             <!--v-if--></button></span>
           </div>
           <!--v-if-->
@@ -88,6 +91,7 @@ exports[`AuthForm > renders with class correctly 1`] = `
       </div>
       <!--v-if--><button type="submit" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
         <!--v-if--><span data-slot="label" class="truncate">Continue</span>
+        <!--v-if-->
         <!--v-if-->
       </button>
     </form>
@@ -133,6 +137,7 @@ exports[`AuthForm > renders with description correctly 1`] = `
           <div data-slot="password" class="relative inline-flex items-center w-full"><input id="v-0-0-2" type="password" name="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default ring ring-inset ring-accented outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary pe-9 md:text-sm" autocomplete="off" data-slot="base" aria-invalid="false">
             <!--v-if--><span data-slot="trailing" class="absolute inset-y-0 end-0 flex items-center pe-2.5"><button type="button" data-slot="base" aria-label="Show password" aria-pressed="false" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted outline-inverted/25 focus-visible:outline-3 p-1.5" aria-controls="v-0-0-2"><span class="iconify i-lucide:eye shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
             <!--v-if-->
+            <!--v-if-->
             <!--v-if--></button></span>
           </div>
           <!--v-if-->
@@ -140,6 +145,7 @@ exports[`AuthForm > renders with description correctly 1`] = `
       </div>
       <!--v-if--><button type="submit" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
         <!--v-if--><span data-slot="label" class="truncate">Continue</span>
+        <!--v-if-->
         <!--v-if-->
       </button>
     </form>
@@ -185,6 +191,7 @@ exports[`AuthForm > renders with description slot correctly 1`] = `
           <div data-slot="password" class="relative inline-flex items-center w-full"><input id="v-0-0-2" type="password" name="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default ring ring-inset ring-accented outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary pe-9 md:text-sm" autocomplete="off" data-slot="base" aria-invalid="false">
             <!--v-if--><span data-slot="trailing" class="absolute inset-y-0 end-0 flex items-center pe-2.5"><button type="button" data-slot="base" aria-label="Show password" aria-pressed="false" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted outline-inverted/25 focus-visible:outline-3 p-1.5" aria-controls="v-0-0-2"><span class="iconify i-lucide:eye shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
             <!--v-if-->
+            <!--v-if-->
             <!--v-if--></button></span>
           </div>
           <!--v-if-->
@@ -192,6 +199,7 @@ exports[`AuthForm > renders with description slot correctly 1`] = `
       </div>
       <!--v-if--><button type="submit" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
         <!--v-if--><span data-slot="label" class="truncate">Continue</span>
+        <!--v-if-->
         <!--v-if-->
       </button>
     </form>
@@ -233,6 +241,7 @@ exports[`AuthForm > renders with disabled correctly 1`] = `
           <div data-slot="password" class="relative inline-flex items-center w-full"><input id="v-0-0-2" type="password" name="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default ring ring-inset ring-accented outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary pe-9 md:text-sm" disabled="" autocomplete="off" data-slot="base" aria-invalid="false">
             <!--v-if--><span data-slot="trailing" class="absolute inset-y-0 end-0 flex items-center pe-2.5"><button type="button" data-slot="base" aria-label="Show password" aria-pressed="false" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted outline-inverted/25 focus-visible:outline-3 p-1.5" aria-controls="v-0-0-2"><span class="iconify i-lucide:eye shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
             <!--v-if-->
+            <!--v-if-->
             <!--v-if--></button></span>
           </div>
           <!--v-if-->
@@ -240,6 +249,7 @@ exports[`AuthForm > renders with disabled correctly 1`] = `
       </div>
       <!--v-if--><button type="submit" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
         <!--v-if--><span data-slot="label" class="truncate">Continue</span>
+        <!--v-if-->
         <!--v-if-->
       </button>
     </form>
@@ -281,6 +291,7 @@ exports[`AuthForm > renders with fields correctly 1`] = `
           <div data-slot="password" class="relative inline-flex items-center w-full"><input id="v-0-0-2" type="password" name="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default ring ring-inset ring-accented outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary pe-9 md:text-sm" autocomplete="off" data-slot="base" aria-invalid="false">
             <!--v-if--><span data-slot="trailing" class="absolute inset-y-0 end-0 flex items-center pe-2.5"><button type="button" data-slot="base" aria-label="Show password" aria-pressed="false" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted outline-inverted/25 focus-visible:outline-3 p-1.5" aria-controls="v-0-0-2"><span class="iconify i-lucide:eye shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
             <!--v-if-->
+            <!--v-if-->
             <!--v-if--></button></span>
           </div>
           <!--v-if-->
@@ -288,6 +299,7 @@ exports[`AuthForm > renders with fields correctly 1`] = `
       </div>
       <!--v-if--><button type="submit" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
         <!--v-if--><span data-slot="label" class="truncate">Continue</span>
+        <!--v-if-->
         <!--v-if-->
       </button>
     </form>
@@ -329,6 +341,7 @@ exports[`AuthForm > renders with footer slot correctly 1`] = `
           <div data-slot="password" class="relative inline-flex items-center w-full"><input id="v-0-0-2" type="password" name="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default ring ring-inset ring-accented outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary pe-9 md:text-sm" autocomplete="off" data-slot="base" aria-invalid="false">
             <!--v-if--><span data-slot="trailing" class="absolute inset-y-0 end-0 flex items-center pe-2.5"><button type="button" data-slot="base" aria-label="Show password" aria-pressed="false" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted outline-inverted/25 focus-visible:outline-3 p-1.5" aria-controls="v-0-0-2"><span class="iconify i-lucide:eye shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
             <!--v-if-->
+            <!--v-if-->
             <!--v-if--></button></span>
           </div>
           <!--v-if-->
@@ -336,6 +349,7 @@ exports[`AuthForm > renders with footer slot correctly 1`] = `
       </div>
       <!--v-if--><button type="submit" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
         <!--v-if--><span data-slot="label" class="truncate">Continue</span>
+        <!--v-if-->
         <!--v-if-->
       </button>
     </form>
@@ -377,6 +391,7 @@ exports[`AuthForm > renders with header slot correctly 1`] = `
           <div data-slot="password" class="relative inline-flex items-center w-full"><input id="v-0-0-2" type="password" name="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default ring ring-inset ring-accented outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary pe-9 md:text-sm" autocomplete="off" data-slot="base" aria-invalid="false">
             <!--v-if--><span data-slot="trailing" class="absolute inset-y-0 end-0 flex items-center pe-2.5"><button type="button" data-slot="base" aria-label="Show password" aria-pressed="false" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted outline-inverted/25 focus-visible:outline-3 p-1.5" aria-controls="v-0-0-2"><span class="iconify i-lucide:eye shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
             <!--v-if-->
+            <!--v-if-->
             <!--v-if--></button></span>
           </div>
           <!--v-if-->
@@ -384,6 +399,7 @@ exports[`AuthForm > renders with header slot correctly 1`] = `
       </div>
       <!--v-if--><button type="submit" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
         <!--v-if--><span data-slot="label" class="truncate">Continue</span>
+        <!--v-if-->
         <!--v-if-->
       </button>
     </form>
@@ -429,6 +445,7 @@ exports[`AuthForm > renders with icon correctly 1`] = `
           <div data-slot="password" class="relative inline-flex items-center w-full"><input id="v-0-0-2" type="password" name="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default ring ring-inset ring-accented outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary pe-9 md:text-sm" autocomplete="off" data-slot="base" aria-invalid="false">
             <!--v-if--><span data-slot="trailing" class="absolute inset-y-0 end-0 flex items-center pe-2.5"><button type="button" data-slot="base" aria-label="Show password" aria-pressed="false" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted outline-inverted/25 focus-visible:outline-3 p-1.5" aria-controls="v-0-0-2"><span class="iconify i-lucide:eye shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
             <!--v-if-->
+            <!--v-if-->
             <!--v-if--></button></span>
           </div>
           <!--v-if-->
@@ -436,6 +453,7 @@ exports[`AuthForm > renders with icon correctly 1`] = `
       </div>
       <!--v-if--><button type="submit" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
         <!--v-if--><span data-slot="label" class="truncate">Continue</span>
+        <!--v-if-->
         <!--v-if-->
       </button>
     </form>
@@ -481,6 +499,7 @@ exports[`AuthForm > renders with leading slot correctly 1`] = `
           <div data-slot="password" class="relative inline-flex items-center w-full"><input id="v-0-0-2" type="password" name="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default ring ring-inset ring-accented outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary pe-9 md:text-sm" autocomplete="off" data-slot="base" aria-invalid="false">
             <!--v-if--><span data-slot="trailing" class="absolute inset-y-0 end-0 flex items-center pe-2.5"><button type="button" data-slot="base" aria-label="Show password" aria-pressed="false" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted outline-inverted/25 focus-visible:outline-3 p-1.5" aria-controls="v-0-0-2"><span class="iconify i-lucide:eye shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
             <!--v-if-->
+            <!--v-if-->
             <!--v-if--></button></span>
           </div>
           <!--v-if-->
@@ -488,6 +507,7 @@ exports[`AuthForm > renders with leading slot correctly 1`] = `
       </div>
       <!--v-if--><button type="submit" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
         <!--v-if--><span data-slot="label" class="truncate">Continue</span>
+        <!--v-if-->
         <!--v-if-->
       </button>
     </form>
@@ -529,12 +549,14 @@ exports[`AuthForm > renders with loading correctly 1`] = `
           <div data-slot="password" class="relative inline-flex items-center w-full"><input id="v-0-0-2" type="password" name="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default ring ring-inset ring-accented outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary pe-9 md:text-sm" autocomplete="off" data-slot="base" aria-invalid="false">
             <!--v-if--><span data-slot="trailing" class="absolute inset-y-0 end-0 flex items-center pe-2.5"><button type="button" data-slot="base" aria-label="Show password" aria-pressed="false" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted outline-inverted/25 focus-visible:outline-3 p-1.5" aria-controls="v-0-0-2"><span class="iconify i-lucide:eye shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
             <!--v-if-->
+            <!--v-if-->
             <!--v-if--></button></span>
           </div>
           <!--v-if-->
         </div>
       </div>
       <!--v-if--><button type="submit" disabled="" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3"><span class="iconify i-lucide:loader-circle shrink-0 size-5 animate-spin" aria-hidden="true" data-slot="leadingIcon"></span><span data-slot="label" class="truncate">Continue</span>
+        <!--v-if-->
         <!--v-if-->
       </button>
     </form>
@@ -548,6 +570,7 @@ exports[`AuthForm > renders with providers correctly 1`] = `
   <!--v-if-->
   <div data-slot="body" class="gap-y-6 flex flex-col">
     <div data-slot="providers" class="space-y-3"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center ring ring-inset ring-accented text-default bg-elevated hover:bg-accented/75 active:bg-accented/75 disabled:bg-elevated aria-disabled:bg-elevated outline-inverted/25 focus-visible:outline-3 focus-visible:ring-inverted"><span class="iconify i-simple-icons:google shrink-0 size-5" aria-hidden="true" data-slot="leadingIcon"></span><span data-slot="label" class="truncate">Google</span>
+        <!--v-if-->
         <!--v-if-->
       </button></div>
     <!---->
@@ -585,6 +608,7 @@ exports[`AuthForm > renders with providers correctly 1`] = `
           <div data-slot="password" class="relative inline-flex items-center w-full"><input id="v-0-0-2" type="password" name="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default ring ring-inset ring-accented outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary pe-9 md:text-sm" autocomplete="off" data-slot="base" aria-invalid="false">
             <!--v-if--><span data-slot="trailing" class="absolute inset-y-0 end-0 flex items-center pe-2.5"><button type="button" data-slot="base" aria-label="Show password" aria-pressed="false" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted outline-inverted/25 focus-visible:outline-3 p-1.5" aria-controls="v-0-0-2"><span class="iconify i-lucide:eye shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
             <!--v-if-->
+            <!--v-if-->
             <!--v-if--></button></span>
           </div>
           <!--v-if-->
@@ -592,6 +616,7 @@ exports[`AuthForm > renders with providers correctly 1`] = `
       </div>
       <!--v-if--><button type="submit" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
         <!--v-if--><span data-slot="label" class="truncate">Continue</span>
+        <!--v-if-->
         <!--v-if-->
       </button>
     </form>
@@ -633,6 +658,7 @@ exports[`AuthForm > renders with providers slot correctly 1`] = `
           <div data-slot="password" class="relative inline-flex items-center w-full"><input id="v-0-0-2" type="password" name="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default ring ring-inset ring-accented outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary pe-9 md:text-sm" autocomplete="off" data-slot="base" aria-invalid="false">
             <!--v-if--><span data-slot="trailing" class="absolute inset-y-0 end-0 flex items-center pe-2.5"><button type="button" data-slot="base" aria-label="Show password" aria-pressed="false" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted outline-inverted/25 focus-visible:outline-3 p-1.5" aria-controls="v-0-0-2"><span class="iconify i-lucide:eye shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
             <!--v-if-->
+            <!--v-if-->
             <!--v-if--></button></span>
           </div>
           <!--v-if-->
@@ -640,6 +666,7 @@ exports[`AuthForm > renders with providers slot correctly 1`] = `
       </div>
       <!--v-if--><button type="submit" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
         <!--v-if--><span data-slot="label" class="truncate">Continue</span>
+        <!--v-if-->
         <!--v-if-->
       </button>
     </form>
@@ -681,6 +708,7 @@ exports[`AuthForm > renders with separator correctly 1`] = `
           <div data-slot="password" class="relative inline-flex items-center w-full"><input id="v-0-0-2" type="password" name="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default ring ring-inset ring-accented outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary pe-9 md:text-sm" autocomplete="off" data-slot="base" aria-invalid="false">
             <!--v-if--><span data-slot="trailing" class="absolute inset-y-0 end-0 flex items-center pe-2.5"><button type="button" data-slot="base" aria-label="Show password" aria-pressed="false" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted outline-inverted/25 focus-visible:outline-3 p-1.5" aria-controls="v-0-0-2"><span class="iconify i-lucide:eye shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
             <!--v-if-->
+            <!--v-if-->
             <!--v-if--></button></span>
           </div>
           <!--v-if-->
@@ -688,6 +716,7 @@ exports[`AuthForm > renders with separator correctly 1`] = `
       </div>
       <!--v-if--><button type="submit" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
         <!--v-if--><span data-slot="label" class="truncate">Continue</span>
+        <!--v-if-->
         <!--v-if-->
       </button>
     </form>
@@ -729,6 +758,7 @@ exports[`AuthForm > renders with submit correctly 1`] = `
           <div data-slot="password" class="relative inline-flex items-center w-full"><input id="v-0-0-2" type="password" name="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default ring ring-inset ring-accented outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary pe-9 md:text-sm" autocomplete="off" data-slot="base" aria-invalid="false">
             <!--v-if--><span data-slot="trailing" class="absolute inset-y-0 end-0 flex items-center pe-2.5"><button type="button" data-slot="base" aria-label="Show password" aria-pressed="false" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted outline-inverted/25 focus-visible:outline-3 p-1.5" aria-controls="v-0-0-2"><span class="iconify i-lucide:eye shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
             <!--v-if-->
+            <!--v-if-->
             <!--v-if--></button></span>
           </div>
           <!--v-if-->
@@ -736,6 +766,7 @@ exports[`AuthForm > renders with submit correctly 1`] = `
       </div>
       <!--v-if--><button type="submit" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
         <!--v-if--><span data-slot="label" class="truncate">Submit</span>
+        <!--v-if-->
         <!--v-if-->
       </button>
     </form>
@@ -776,6 +807,7 @@ exports[`AuthForm > renders with submit slot correctly 1`] = `
         <div class="relative mt-1">
           <div data-slot="password" class="relative inline-flex items-center w-full"><input id="v-0-0-2" type="password" name="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default ring ring-inset ring-accented outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary pe-9 md:text-sm" autocomplete="off" data-slot="base" aria-invalid="false">
             <!--v-if--><span data-slot="trailing" class="absolute inset-y-0 end-0 flex items-center pe-2.5"><button type="button" data-slot="base" aria-label="Show password" aria-pressed="false" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted outline-inverted/25 focus-visible:outline-3 p-1.5" aria-controls="v-0-0-2"><span class="iconify i-lucide:eye shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
+            <!--v-if-->
             <!--v-if-->
             <!--v-if--></button></span>
           </div>
@@ -826,6 +858,7 @@ exports[`AuthForm > renders with title correctly 1`] = `
           <div data-slot="password" class="relative inline-flex items-center w-full"><input id="v-0-0-2" type="password" name="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default ring ring-inset ring-accented outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary pe-9 md:text-sm" autocomplete="off" data-slot="base" aria-invalid="false">
             <!--v-if--><span data-slot="trailing" class="absolute inset-y-0 end-0 flex items-center pe-2.5"><button type="button" data-slot="base" aria-label="Show password" aria-pressed="false" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted outline-inverted/25 focus-visible:outline-3 p-1.5" aria-controls="v-0-0-2"><span class="iconify i-lucide:eye shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
             <!--v-if-->
+            <!--v-if-->
             <!--v-if--></button></span>
           </div>
           <!--v-if-->
@@ -833,6 +866,7 @@ exports[`AuthForm > renders with title correctly 1`] = `
       </div>
       <!--v-if--><button type="submit" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
         <!--v-if--><span data-slot="label" class="truncate">Continue</span>
+        <!--v-if-->
         <!--v-if-->
       </button>
     </form>
@@ -878,6 +912,7 @@ exports[`AuthForm > renders with title slot correctly 1`] = `
           <div data-slot="password" class="relative inline-flex items-center w-full"><input id="v-0-0-2" type="password" name="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default ring ring-inset ring-accented outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary pe-9 md:text-sm" autocomplete="off" data-slot="base" aria-invalid="false">
             <!--v-if--><span data-slot="trailing" class="absolute inset-y-0 end-0 flex items-center pe-2.5"><button type="button" data-slot="base" aria-label="Show password" aria-pressed="false" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted outline-inverted/25 focus-visible:outline-3 p-1.5" aria-controls="v-0-0-2"><span class="iconify i-lucide:eye shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
             <!--v-if-->
+            <!--v-if-->
             <!--v-if--></button></span>
           </div>
           <!--v-if-->
@@ -885,6 +920,7 @@ exports[`AuthForm > renders with title slot correctly 1`] = `
       </div>
       <!--v-if--><button type="submit" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
         <!--v-if--><span data-slot="label" class="truncate">Continue</span>
+        <!--v-if-->
         <!--v-if-->
       </button>
     </form>
@@ -926,6 +962,7 @@ exports[`AuthForm > renders with ui correctly 1`] = `
           <div data-slot="password" class="relative inline-flex items-center w-full"><input id="v-0-0-2" type="password" name="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default ring ring-inset ring-accented outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary pe-9 md:text-sm" autocomplete="off" data-slot="base" aria-invalid="false">
             <!--v-if--><span data-slot="trailing" class="absolute inset-y-0 end-0 flex items-center pe-2.5"><button type="button" data-slot="base" aria-label="Show password" aria-pressed="false" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted outline-inverted/25 focus-visible:outline-3 p-1.5" aria-controls="v-0-0-2"><span class="iconify i-lucide:eye shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
             <!--v-if-->
+            <!--v-if-->
             <!--v-if--></button></span>
           </div>
           <!--v-if-->
@@ -933,6 +970,7 @@ exports[`AuthForm > renders with ui correctly 1`] = `
       </div>
       <!--v-if--><button type="submit" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
         <!--v-if--><span data-slot="label" class="truncate">Continue</span>
+        <!--v-if-->
         <!--v-if-->
       </button>
     </form>
@@ -974,12 +1012,14 @@ exports[`AuthForm > renders with validation slot correctly 1`] = `
           <div data-slot="password" class="relative inline-flex items-center w-full"><input id="v-0-0-2" type="password" name="password" class="w-full rounded-md border-0 appearance-none placeholder:text-dimmed disabled:cursor-not-allowed disabled:opacity-75 transition-colors px-2.5 py-1.5 text-base/5 gap-1.5 text-highlighted bg-default ring ring-inset ring-accented outline-primary/25 focus-visible:outline-3 focus-visible:ring-primary pe-9 md:text-sm" autocomplete="off" data-slot="base" aria-invalid="false">
             <!--v-if--><span data-slot="trailing" class="absolute inset-y-0 end-0 flex items-center pe-2.5"><button type="button" data-slot="base" aria-label="Show password" aria-pressed="false" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-xs gap-1.5 text-muted hover:text-default active:text-default disabled:text-muted aria-disabled:text-muted outline-inverted/25 focus-visible:outline-3 p-1.5" aria-controls="v-0-0-2"><span class="iconify i-lucide:eye shrink-0 size-4" aria-hidden="true" data-slot="leadingIcon"></span>
             <!--v-if-->
+            <!--v-if-->
             <!--v-if--></button></span>
           </div>
           <!--v-if-->
         </div>
       </div>Validation<button type="submit" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 w-full justify-center text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
         <!--v-if--><span data-slot="label" class="truncate">Continue</span>
+        <!--v-if-->
         <!--v-if-->
       </button>
     </form>

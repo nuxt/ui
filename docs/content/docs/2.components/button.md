@@ -243,6 +243,38 @@ export default defineAppConfig({
 ```
 ::
 
+### Link with external icon
+
+You can display an external icon with the `external-icon` prop to indicate that the link will be open in a new tab.
+
+::component-code
+---
+ignore:
+  - target
+props:
+  to: https://github.com/nuxt/ui
+  target: _blank
+  externalIcon: true
+slots:
+  default: Button
+---
+::
+
+The default icon for external link (`appConfig.ui.icons.external`) can be replaced with any [Icon](/docs/components/icon).
+
+::component-code
+---
+ignore:
+  - target
+props:
+  to: https://github.com/nuxt/ui
+  target: _blank
+  externalIcon: i-lucide-external-link
+slots:
+  default: Button
+---
+::
+
 ### Loading
 
 Use the `loading` prop to show a loading icon and disable the Button.
