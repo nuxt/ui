@@ -331,6 +331,13 @@ function onTriggerPointerDown() {
   triggerSawPointerDown = true
 }
 
+// A cancelled sequence (touch scrolling, the browser taking over the gesture)
+// fires no `click`, so without this the flag would outlive the interaction and
+// make the next label click look like a real pointer press.
+function onTriggerPointerCancel() {
+  triggerSawPointerDown = false
+}
+
 function onTriggerClick(open: boolean) {
   // A real pointer click opens the menu via `pointerdown` (so `open` is already `true`
   // here), and keyboard activation opens via `keydown`. A `<label for>` click only
@@ -382,6 +389,7 @@ defineExpose({
       :class="ui.base({ class: [props.ui?.base, props.class] })"
       v-bind="{ ...$attrs, ...ariaAttrs }"
       @pointerdown="onTriggerPointerDown"
+      @pointercancel="onTriggerPointerCancel"
       @click="onTriggerClick(open)"
     >
       <span v-if="isLeading || !!props.avatar || !!slots.leading" data-slot="leading" :class="ui.leading({ class: props.ui?.leading })">
