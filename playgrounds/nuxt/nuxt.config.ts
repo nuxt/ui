@@ -7,13 +7,13 @@ export default defineNuxtConfig({
     enabled: true
   },
 
+  css: ['~/assets/css/main.css'],
+
   content: {
     experimental: {
       sqliteConnector: 'native'
     }
   },
-
-  css: ['~/assets/css/main.css'],
 
   routeRules: {
     '/docs/components/**': { redirect: { to: '/components/**', statusCode: 301 }, prerender: false }
