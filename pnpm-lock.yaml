@@ -526,21 +526,42 @@ importers:
       '@nuxt/ui':
         specifier: workspace:*
         version: link:../..
+      '@tanstack/vue-table':
+        specifier: ^8.21.3
+        version: 8.21.3(vue@3.5.42(typescript@6.0.3))
+      '@tiptap/core':
+        specifier: ^3.30.2
+        version: 3.30.2(@tiptap/pm@3.30.2)
       '@tiptap/extension-emoji':
         specifier: ^3.30.2
         version: 3.30.2(@tiptap/core@3.30.2(@tiptap/pm@3.30.2))(@tiptap/pm@3.30.2)(@tiptap/suggestion@3.30.2(@floating-ui/dom@1.8.0)(@tiptap/core@3.30.2(@tiptap/pm@3.30.2))(@tiptap/pm@3.30.2))(emojibase@17.0.0)
       '@tiptap/extension-text-align':
         specifier: ^3.30.2
         version: 3.30.2(@tiptap/core@3.30.2(@tiptap/pm@3.30.2))
+      '@tiptap/pm':
+        specifier: ^3.30.2
+        version: 3.30.2
+      '@tiptap/vue-3':
+        specifier: ^3.30.2
+        version: 3.30.2(@floating-ui/dom@1.8.0)(@tiptap/core@3.30.2(@tiptap/pm@3.30.2))(@tiptap/pm@3.30.2)(vue@3.5.42(typescript@6.0.3))
+      '@vueuse/core':
+        specifier: ^14.4.0
+        version: 14.4.0(vue@3.5.42(typescript@6.0.3))
       ai:
         specifier: ^7.0.85
         version: 7.0.85(zod@4.5.4)
       nuxt:
         specifier: ^4.5.2
         version: 4.5.2(5c792d2c2a669ceedb3253d439575f90)
+      scule:
+        specifier: ^1.3.0
+        version: 1.3.0
       tailwindcss:
         specifier: ^4.3.3
         version: 4.3.3
+      vue:
+        specifier: ^3.5.42
+        version: 3.5.42(typescript@6.0.3)
       zod:
         specifier: ^4.5.4
         version: 4.5.4

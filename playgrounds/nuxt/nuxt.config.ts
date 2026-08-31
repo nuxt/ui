@@ -35,5 +35,17 @@ export default defineNuxtConfig({
         'vaul-vue'
       ]
     }
+  },
+
+  typescript: {
+    tsConfig: {
+      compilerOptions: {
+        paths: {
+          // The docs examples imported in `pages/components/form.vue` resolve
+          // `@nuxt/ui` from `docs/`, which the isolated CI install can't reach.
+          '@nuxt/ui': ['../node_modules/@nuxt/ui/dist/module.d.mts']
+        }
+      }
+    }
   }
 })
