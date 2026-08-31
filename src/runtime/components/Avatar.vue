@@ -43,7 +43,7 @@ export interface AvatarSlots {
 
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue'
-import { Primitive, Slot } from 'reka-ui'
+import { Primitive } from 'reka-ui'
 import { defu } from 'defu'
 import { useAppConfig } from '#imports'
 import ImageComponent from '#build/ui-image-component'
@@ -109,7 +109,7 @@ function onError() {
   <component
     :is="props.chip ? UChip : Primitive"
     :as="as.root"
-    v-bind="props.chip ? (typeof props.chip === 'object' ? { inset: true, ...props.chip } : { inset: true }) : {}"
+    v-bind="{ ...(props.src && !error ? {} : $attrs), ...(props.chip ? (typeof props.chip === 'object' ? { inset: true, ...props.chip } : { inset: true }) : {}) }"
     :data-slot="($attrs['data-slot'] as string | undefined) ?? 'root'"
     :class="rootClass"
     :style="props.style"
@@ -127,11 +127,9 @@ function onError() {
       @error="onError"
     />
 
-    <Slot v-else v-bind="{ ...$attrs, 'data-slot': undefined }">
-      <slot>
-        <UIcon v-if="props.icon" :name="props.icon" data-slot="icon" :class="ui.icon({ class: props.ui?.icon })" />
-        <span v-else data-slot="fallback" :class="ui.fallback({ class: props.ui?.fallback })">{{ fallback || '&nbsp;' }}</span>
-      </slot>
-    </Slot>
+    <slot v-else>
+      <UIcon v-if="props.icon" :name="props.icon" data-slot="icon" :class="ui.icon({ class: props.ui?.icon })" />
+      <span v-else data-slot="fallback" :class="ui.fallback({ class: props.ui?.fallback })">{{ fallback || '&nbsp;' }}</span>
+    </slot>
   </component>
 </template>
