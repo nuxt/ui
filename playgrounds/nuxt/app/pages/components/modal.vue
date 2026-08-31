@@ -68,6 +68,10 @@ function showToast() {
       <UButton label="Open fullscreen" color="neutral" variant="outline" />
     </UModal>
 
+    <UModal title="Modal fullscreen below sm" description="This modal has `fullscreen: 'sm'` prop so it's only fullscreen on mobile." fullscreen="sm">
+      <UButton label="Open fullscreen sm" color="neutral" variant="subtle" />
+    </UModal>
+
     <UModal title="Modal scrollable" description="This modal has `scrollable: true` prop. Content scrolls within the overlay, preventing accidental closes on scrollbar clicks." scrollable>
       <UButton color="neutral" variant="subtle" label="Open scrollable" />
 

@@ -365,6 +365,36 @@ slots:
 :placeholder{class="h-full"}
 ::
 
+You can also pass a breakpoint to make the Modal fullscreen only below it:
+
+::component-code
+---
+prettier: true
+ignore:
+  - title
+props:
+  fullscreen: 'sm'
+  title: 'Modal fullscreen'
+slots:
+  default: |
+
+    <UButton label="Open" color="neutral" variant="subtle" />
+
+  body: |
+
+    <Placeholder class="h-full" />
+---
+
+:u-button{label="Open" color="neutral" variant="subtle"}
+
+#body
+:placeholder{class="h-full"}
+::
+
+::note
+The Modal is fullscreen below the breakpoint and renders as a regular dialog above it, resize your browser to see the difference. :badge{label="Soon" color="info" class="float-right ms-auto text-right"}
+::
+
 ### Unmount :badge{label="4.10+" class="align-text-top"}
 
 Use the `unmount-on-hide` prop to prevent the Modal's content from being unmounted when it is closed. Defaults to `true`.
