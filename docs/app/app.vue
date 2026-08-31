@@ -17,6 +17,7 @@ useHead({
 if (import.meta.server) {
   useSeoMeta({
     ogSiteName: 'Nuxt UI',
+    ogType: 'website',
     twitterCard: 'summary_large_image'
   })
 

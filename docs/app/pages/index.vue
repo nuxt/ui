@@ -164,6 +164,10 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
     <USeparator />
 
     <UPageSection :ui="{ container: 'lg:py-16' }" class="bg-elevated/25">
+      <h2 class="sr-only">
+        Features
+      </h2>
+
       <ul class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8 xl:gap-y-10">
         <Motion
           v-for="(feature, index) in page?.features"
@@ -193,10 +197,10 @@ useIntersectionObserver(contributorsRef, ([entry]) => {
             <UIcon :name="feature.icon" class="size-5 shrink-0" />
           </div>
           <div class="flex flex-col">
-            <h2 class="font-medium text-highlighted inline-flex items-center gap-x-1">
+            <h3 class="font-medium text-highlighted inline-flex items-center gap-x-1">
               {{ feature.title }}
               <UIcon v-if="feature.to" :name="appConfig.ui.icons.arrowRight" class="size-4 shrink-0 opacity-0 group-hover:opacity-100 transition-all duration-200 -translate-x-1 group-hover:translate-x-0" />
-            </h2>
+            </h3>
             <p class="text-sm text-muted">
               {{ feature.description }}
             </p>

@@ -37,7 +37,7 @@ export default defineMcpTool({
       description: page.description,
       path: page.path,
       documentation,
-      url: `https://ui.nuxt.com${page.path}`
+      url: `${SITE_URL}${page.path}`
     }
   }
 })
