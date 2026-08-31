@@ -32,12 +32,6 @@ overrides:
   h3: 1.15.11
   typescript: ^6.0.3
 
-minimumReleaseAgeExclude:
-  - '@nuxt/content@3.16.0'
-  - '@nuxt/icon@2.5.0'
-  - '@nuxtjs/mdc@0.23.1'
-  - 'nuxt-agent-discovery@0.1.1'
-
 allowBuilds:
   better-sqlite3: true
   puppeteer: true
