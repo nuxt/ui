@@ -17,10 +17,6 @@ overrides:
   # inside vitest's own vite, so the wider range is bookkeeping, not runtime.
   "@codspeed/vitest-plugin>vite": ^7.0.0 || ^8.0.0
   "@nuxt/kit": ^4.5.2
-  # `@nuxt/content` 3.15.2 caps `@nuxtjs/mdc` at ^0.22.2, so the docs bump to
-  # 0.23.1 installs a second copy and component-meta reads different components
-  # than the ones the module registers. Drop once content widens to ^0.23.0.
-  "@nuxt/content>@nuxtjs/mdc": ^0.23.1
   "@nuxt/ui": workspace:*
   # `@nuxt/image` 2.1.0 depends on `ipx` 4.0.0-beta.1, which pulls a second sharp
   # alongside 0.34.5 and kills the docs prerender as soon as it hits `/_ipx`.
@@ -35,11 +31,6 @@ overrides:
   c12: ^3.3.4
   h3: 1.15.11
   typescript: ^6.0.3
-
-minimumReleaseAgeExclude:
-  - '@nuxt/icon@2.5.0'
-  - '@nuxtjs/mdc@0.23.1'
-  - 'nuxt-agent-discovery@0.1.1'
 
 allowBuilds:
   better-sqlite3: true
