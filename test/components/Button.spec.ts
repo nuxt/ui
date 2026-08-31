@@ -11,6 +11,7 @@ import { UForm } from '#components'
 describe('Button', () => {
   const sizes = Object.keys(theme.variants.size) as any
   const variants = Object.keys(theme.variants.variant) as any
+  const orientations = Object.keys(theme.variants.orientation) as any
 
   renderEach(Button, [
     // Props
@@ -36,6 +37,8 @@ describe('Button', () => {
     ['with disabled and with link', { props: { label: 'Button', disabled: true, to: '/link' } }],
     ['with block', { props: { label: 'Button', block: true } }],
     ['with square', { props: { label: 'Button', square: true } }],
+    ...orientations.map((orientation: string) => [`with orientation ${orientation}`, { props: { label: 'Button', icon: 'i-lucide-rocket', orientation } }]),
+    ['with orientation vertical and block', { props: { label: 'Button', icon: 'i-lucide-rocket', trailing: true, block: true, orientation: 'vertical' } }],
     ['with as', { props: { label: 'Button', as: 'div' } }],
     ['with class', { props: { label: 'Button', class: 'rounded-full font-bold' } }],
     ['with activeClass', { props: { label: 'Button', active: true, activeClass: 'font-bold' } }],

@@ -113,6 +113,20 @@ props:
 ---
 ::
 
+### Orientation :badge{label="Soon" class="align-text-top"}
+
+Use the `orientation` prop to change the orientation of the Button. Defaults to `horizontal`.
+
+::component-code
+---
+props:
+  orientation: vertical
+  icon: i-lucide-rocket
+slots:
+  default: Button
+---
+::
+
 ### Avatar
 
 Use the `avatar` prop to show an [Avatar](/docs/components/avatar) inside the Button.

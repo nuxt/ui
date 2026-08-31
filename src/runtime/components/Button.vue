@@ -25,6 +25,11 @@ export interface ButtonProps extends UseComponentIconsProps, Omit<LinkProps, 'ra
    * @defaultValue 'md'
    */
   size?: Button['variants']['size']
+  /**
+   * The orientation of the button.
+   * @defaultValue 'horizontal'
+   */
+  orientation?: Button['variants']['orientation']
   /** Render the button with equal padding on all sides. */
   square?: boolean
   /** Render the button full width. */
@@ -60,13 +65,15 @@ import UAvatar from './Avatar.vue'
 import ULink from './Link.vue'
 import ULinkBase from './LinkBase.vue'
 
-const _props = defineProps<ButtonProps>()
+const _props = withDefaults(defineProps<ButtonProps>(), {
+  orientation: 'horizontal'
+})
 const slots = defineSlots<ButtonSlots>()
 
 const props = useComponentProps('button', _props)
 
 const appConfig = useAppConfig() as Button['AppConfig']
-const { orientation, size: buttonSize } = useFieldGroup<ButtonProps>(_props)
+const { orientation: fieldGroupOrientation, size: buttonSize } = useFieldGroup<ButtonProps>(_props)
 
 // Memoized: `omit` iterates every forwarded key through three proxy layers
 // (useForwardProps -> reactivePick -> useComponentProps), so doing it inline in
@@ -126,12 +133,13 @@ const ui = computed(() => tv({
   color: props.color,
   variant: props.variant,
   size: buttonSize.value ?? props.size,
+  orientation: props.orientation,
   loading: isLoading.value,
   block: props.block,
   square: props.square || (!slots.default && !props.label),
   leading: isLeading.value,
   trailing: isTrailing.value,
-  fieldGroup: orientation.value
+  fieldGroup: fieldGroupOrientation.value
 }))
 </script>
 
@@ -145,6 +153,7 @@ const ui = computed(() => tv({
   >
     <ULinkBase
       data-slot="base"
+      :data-orientation="props.orientation"
       v-bind="slotProps"
       :class="ui.base({
         class: [props.ui?.base, props.class],
