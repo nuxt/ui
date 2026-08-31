@@ -42,7 +42,7 @@ export interface AvatarSlots {
 </script>
 
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue'
+import { ref, computed, watch, useAttrs } from 'vue'
 import { Primitive } from 'reka-ui'
 import { defu } from 'defu'
 import { useAppConfig } from '#imports'
@@ -94,6 +94,9 @@ const sizePx = computed(() => {
 
 const error = ref(false)
 
+const attrs = useAttrs()
+const rootAttrs = computed(() => props.src && !error.value ? {} : attrs)
+
 watch(() => props.src, () => {
   if (error.value) {
     error.value = false
@@ -109,7 +112,7 @@ function onError() {
   <component
     :is="props.chip ? UChip : Primitive"
     :as="as.root"
-    v-bind="{ ...(props.src && !error ? {} : $attrs), ...(props.chip ? (typeof props.chip === 'object' ? { inset: true, ...props.chip } : { inset: true }) : {}) }"
+    v-bind="{ ...rootAttrs, ...(props.chip ? (typeof props.chip === 'object' ? { inset: true, ...props.chip } : { inset: true }) : {}) }"
     :data-slot="($attrs['data-slot'] as string | undefined) ?? 'root'"
     :class="rootClass"
     :style="props.style"
