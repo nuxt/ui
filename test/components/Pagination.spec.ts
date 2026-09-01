@@ -55,4 +55,23 @@ describe('Pagination', () => {
 
     expect(await axe(wrapper.element)).toHaveNoViolations()
   })
+
+  it('mirrors default control icons in RTL', async () => {
+    const wrapper = await mountSuspended(Pagination, {
+      props: {
+        total: 100,
+        page: 5,
+        showEdges: true,
+        siblingCount: 1
+      }
+    })
+
+    for (const control of ['first', 'prev', 'next', 'last']) {
+      const icon = wrapper.find(`[data-slot="${control}"] [data-slot="leadingIcon"]`)
+      expect(icon.classes(), `${control} icon`).toContain('rtl:-scale-x-100')
+    }
+
+    const ellipsisIcon = wrapper.find('[data-slot="ellipsis"] [data-slot="leadingIcon"]')
+    expect(ellipsisIcon.classes(), 'ellipsis icon').not.toContain('rtl:-scale-x-100')
+  })
 })
