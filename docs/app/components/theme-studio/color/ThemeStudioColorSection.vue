@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { TOKEN_GROUPS } from '../../utils/theme/engine'
-import type { ColorAlias, SectionKey } from '../../utils/theme/engine'
+import { TOKEN_GROUPS } from '../../../utils/theme/engine'
+import type { ColorAlias, SectionKey } from '../../../utils/theme/engine'
 
 /**
  * One color alias: its picker, with the palette and shade editors folding out
@@ -13,6 +13,9 @@ const props = defineProps<{
   helpTo?: string
   /** Passed through to the section header's reset affordance. */
   sectionKey?: SectionKey
+  /** Both forwarded to the root section. */
+  padded?: boolean
+  separator?: boolean
 }>()
 
 const { rampChip } = useThemeStudio()
@@ -39,7 +42,7 @@ const editors = [
 </script>
 
 <template>
-  <ThemeStudioSection :label="title" :help-to="helpTo" :section-key="sectionKey">
+  <ThemeStudioSection :label="title" :help-to="helpTo" :section-key="sectionKey" :padded="padded" :separator="separator">
     <!-- the only two folds left in a panel: ghost until on, tinted while open -->
     <template #actions>
       <UTooltip
@@ -71,7 +74,7 @@ const editors = [
         <template #content>
           <!-- the padding sits inside the animated box, not on it -->
           <div class="pt-2">
-            <ThemeStudioShadeGroup
+            <ThemeStudioColorShadeGroup
               v-if="alias !== 'neutral'"
               :label="`${title} shades`"
               :sliders="sections[0]!.sliders"
@@ -86,12 +89,13 @@ const editors = [
                 v-for="tokenGroup in tokenGroups"
                 :key="tokenGroup.key"
                 :label="tokenGroup.label"
+                separator
               >
-                <ThemeStudioShadeGroup
-                  v-for="section in tokenGroup.sections"
+                <ThemeStudioColorShadeGroup
+                  v-for="(section, sectionIndex) in tokenGroup.sections"
                   :key="section.token"
                   :label="`${tokenGroup.label.replace(/ shades$/, '')} ${section.label.toLowerCase()}`"
-                  separator
+                  :separator="sectionIndex > 0"
                   :sliders="section.sliders"
                   :chip="rampChip(section.ramp)"
                   :ladder="shadeLadder"

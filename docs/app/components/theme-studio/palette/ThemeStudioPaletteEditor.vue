@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useThrottleFn, watchIgnorable } from '@vueuse/core'
-import { SHADES_ALL, SHADE_STEPS, SHADE_SETS, CURVE_DEFAULTS, NEUTRAL_CURVE_DEFAULTS, PALETTE_EFFECT_DEFAULTS, generatePalette, buildRampSampler, fitPalette, applyPaletteEffects, isDefaultEffects, sampleCurve, shadeX, storedStopStep, detectStopStep, clampToGamut, formatOklch, parseColor, oklchToRgb, rgbToHex } from '../../utils/theme/engine'
-import type { PaletteCurveParams, PaletteEffects, StoredPaletteParams, PalettePin, Shade, ShadeStep, ColorAlias } from '../../utils/theme/engine'
+import { SHADES_ALL, SHADE_STEPS, SHADE_SETS, CURVE_DEFAULTS, NEUTRAL_CURVE_DEFAULTS, PALETTE_EFFECT_DEFAULTS, generatePalette, buildRampSampler, fitPalette, applyPaletteEffects, isDefaultEffects, sampleCurve, shadeX, storedStopStep, detectStopStep, clampToGamut, formatOklch, parseColor, oklchToRgb, rgbToHex } from '../../../utils/theme/engine'
+import type { PaletteCurveParams, PaletteEffects, StoredPaletteParams, PalettePin, Shade, ShadeStep, ColorAlias } from '../../../utils/theme/engine'
 
 const props = defineProps<{
   alias: ColorAlias
@@ -104,19 +104,19 @@ const stopPinned = computed(() => stopSet.value.map(shade => pinnedShades.value.
 // Pin-corrected values: the editor draws the polyline so the line bends THROUGH
 // pinned stops. Sampler built on the reactive params so a handle drag redraws.
 const CHANNEL_KEY = { lightness: 'l', chroma: 'c', hue: 'h' } as const
+// one pin-corrected sampler per (curves, pins) change, both consumers below read it
+const rampSampler = computed(() => buildRampSampler(params, pins.value))
 const stopValues = computed(() => {
   const key = CHANNEL_KEY[tab.value]
-  const sample = buildRampSampler(params, pins.value)
-  return stopSet.value.map(shade => sample(shadeX(shade))[key])
+  return stopSet.value.map(shade => rampSampler.value(shadeX(shade))[key])
 })
 const actualCurve = computed(() => {
   // no pins → no correction, draw the exact bézier
   if (!pins.value.length) return undefined
   const key = CHANNEL_KEY[tab.value]
-  const sample = buildRampSampler(params, pins.value)
   return Array.from({ length: 48 }, (_, i) => {
     const x = i / 47
-    return { x, v: sample(x)[key] }
+    return { x, v: rampSampler.value(x)[key] }
   })
 })
 
@@ -257,7 +257,6 @@ const windows = ref({
 // edited channel (top = max), each cell is the colour dragging there would give.
 const FIELD_COLUMNS = 24
 const FIELD_ROWS = 12
-const CHANNEL_KEYS = { lightness: 'l', chroma: 'c', hue: 'h' } as const
 
 // The 288 gamut-mapped cells are the biggest per-frame cost, feed a throttled
 // snapshot; the curve and stops track the pointer live, the field settles on release.
@@ -283,7 +282,7 @@ const field = computed(() => {
 
     return Array.from({ length: FIELD_ROWS }, (_, rowIndex) => {
       const value = max - (rowIndex / (FIELD_ROWS - 1)) * (max - min)
-      return formatOklch(clampToGamut({ ...base, [CHANNEL_KEYS[channel]]: value }))
+      return formatOklch(clampToGamut({ ...base, [CHANNEL_KEY[channel]]: value }))
     })
   })
 })
@@ -495,7 +494,7 @@ function resetEffects() {
         />
 
         <div>
-          <ThemeStudioCurveEditor
+          <ThemeStudioPaletteCurveEditor
             v-model="params[tab]"
             :label="tabs.find(({ value }) => value === tab)!.label"
             :y-min="windows[tab].min"

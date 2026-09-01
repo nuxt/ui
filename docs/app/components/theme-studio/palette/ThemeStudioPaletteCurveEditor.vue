@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { sampleCurve, SHADES, shadeX, parseColor, oklchToRgb } from '../../utils/theme/engine'
-import type { ChannelCurve } from '../../utils/theme/engine'
+import { sampleCurve, SHADES, shadeX, parseColor, oklchToRgb } from '../../../utils/theme/engine'
+import type { ChannelCurve } from '../../../utils/theme/engine'
 
 const props = defineProps<{
   /** Channel name, for the handles' accessible labels. */
@@ -52,6 +52,11 @@ function fromX(px: number) {
 
 function fromY(py: number) {
   return props.yMin + (1 - (py - PAD) / (H - 2 * PAD)) * (props.yMax - props.yMin)
+}
+
+/** Into the display window, the clamp every write path shares. */
+function clampY(value: number) {
+  return Math.min(props.yMax, Math.max(props.yMin, value))
 }
 
 const path = computed(() => {
@@ -183,24 +188,19 @@ function onPointerMove(event: PointerEvent) {
   if (!dragging.value) return
 
   const point = svgPoint(event)
-  const value = fromY(point.y)
   // window-clamped: an overshot handle would leave the canvas and become
   // ungrabbable (and out-of-range lightness exports nonsense)
-  const clamped = Math.min(props.yMax, Math.max(props.yMin, value))
+  const clamped = clampY(fromY(point.y))
 
   // An endpoint drag carries its control handle by the same delta (tangent
   // preserved). The handle sits on the corrected curve but steers the raw
   // control, back out the pin pull (corrected − raw) to track the pointer.
   if (dragging.value === 'y0') {
-    const raw = Math.min(props.yMax, Math.max(props.yMin, clamped - (startY.value - curve.value.y0)))
-    const delta = raw - curve.value.y0
-    const p1y = Math.min(props.yMax, Math.max(props.yMin, curve.value.p1y + delta))
-    curve.value = { ...curve.value, y0: raw, p1y }
+    const raw = clampY(clamped - (startY.value - curve.value.y0))
+    curve.value = { ...curve.value, y0: raw, p1y: clampY(curve.value.p1y + raw - curve.value.y0) }
   } else if (dragging.value === 'y1') {
-    const raw = Math.min(props.yMax, Math.max(props.yMin, clamped - (endY.value - curve.value.y1)))
-    const delta = raw - curve.value.y1
-    const p2y = Math.min(props.yMax, Math.max(props.yMin, curve.value.p2y + delta))
-    curve.value = { ...curve.value, y1: raw, p2y }
+    const raw = clampY(clamped - (endY.value - curve.value.y1))
+    curve.value = { ...curve.value, y1: raw, p2y: clampY(curve.value.p2y + raw - curve.value.y1) }
   } else if (dragging.value === 'p1') {
     curve.value = { ...curve.value, p1x: fromX(point.x), p1y: clamped }
   } else {
@@ -243,12 +243,11 @@ function nudge(handle: Handle, axis: 'x' | 'y', direction: number, coarse: boole
   const c = curve.value
   if (axis === 'y') {
     const step = (props.yMax - props.yMin) / (coarse ? 10 : 100) * direction
-    const clamp = (value: number) => Math.min(props.yMax, Math.max(props.yMin, value))
     // endpoints carry their control handle, matching the pointer drag
-    if (handle === 'y0') curve.value = { ...c, y0: clamp(c.y0 + step), p1y: clamp(c.p1y + step) }
-    else if (handle === 'y1') curve.value = { ...c, y1: clamp(c.y1 + step), p2y: clamp(c.p2y + step) }
-    else if (handle === 'p1') curve.value = { ...c, p1y: clamp(c.p1y + step) }
-    else curve.value = { ...c, p2y: clamp(c.p2y + step) }
+    if (handle === 'y0') curve.value = { ...c, y0: clampY(c.y0 + step), p1y: clampY(c.p1y + step) }
+    else if (handle === 'y1') curve.value = { ...c, y1: clampY(c.y1 + step), p2y: clampY(c.p2y + step) }
+    else if (handle === 'p1') curve.value = { ...c, p1y: clampY(c.p1y + step) }
+    else curve.value = { ...c, p2y: clampY(c.p2y + step) }
     return
   }
   const step = (coarse ? 0.1 : 0.01) * direction
