@@ -173,6 +173,33 @@ describe('SelectMenu', () => {
     })
   })
 
+  describe('search input', () => {
+    test('focuses the search input when the menu opens by default', async () => {
+      const wrapper = mount(SelectMenu, { attachTo: document.body, props: { open: true, portal: false, items } })
+
+      await flushPromises()
+      // Input.vue's autofocus runs on a macrotask
+      await new Promise(resolve => setTimeout(resolve))
+
+      const input = wrapper.find('[data-slot="input"] input')
+      expect(document.activeElement).toBe(input.element)
+
+      wrapper.unmount()
+    })
+
+    test('does not focus the search input with searchInput autofocus disabled', async () => {
+      const wrapper = mount(SelectMenu, { attachTo: document.body, props: { open: true, portal: false, items, searchInput: { autofocus: false } } })
+
+      await flushPromises()
+      await new Promise(resolve => setTimeout(resolve))
+
+      const input = wrapper.find('[data-slot="input"] input')
+      expect(document.activeElement).not.toBe(input.element)
+
+      wrapper.unmount()
+    })
+  })
+
   describe('create-item', () => {
     // With `create-item`, the create item is always registered so reka-ui's collection
     // never goes from empty to non-empty, leaving the highlight stale when async items load.

@@ -279,6 +279,10 @@ props:
 You can set the `search-input` prop to `false` to hide the search input.
 ::
 
+::note
+Use `:search-input="{ autofocus: false }"` to prevent the search input from being focused when the menu opens, e.g. to avoid opening the virtual keyboard on touch devices.
+::
+
 ### Content
 
 Use the `content` prop to control how the SelectMenu content is rendered, like its `align` or `side` for example.
