@@ -33,6 +33,10 @@ export type InferOutput<Schema> = Schema extends StandardSchemaV1 ? StandardSche
   : Schema extends SuperstructSchema<infer O, any> ? O
     : never
 
+export type FormState<S extends FormSchema> = {
+  [K in keyof InferInput<S>]?: any
+}
+
 export type FormData<S extends FormSchema, T extends boolean = true> = T extends true ? InferOutput<S> : InferInput<S>
 
 export type FormInputEvents = 'input' | 'blur' | 'change' | 'focus'
