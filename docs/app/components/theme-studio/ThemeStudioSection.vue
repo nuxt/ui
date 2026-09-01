@@ -5,9 +5,8 @@
  * two editors that do fold hang off their own toggle in the header.
  */
 import type { SectionKey } from '../../utils/theme/engine'
-import { SECTION_DEPTH } from '../../utils/theme/studio'
 
-const props = withDefaults(defineProps<{
+const props = defineProps<{
   /** Omit on a static section for a bare group, no header drawn. */
   label?: string
   /** Docs page the header's help icon links to */
@@ -17,14 +16,11 @@ const props = withDefaults(defineProps<{
   /** Reset a section the doc has no slice for, the caller says when it's dirty. */
   resettable?: boolean
   resetDirty?: boolean
-  /** Defaults from depth, pass it only to override. */
+  /** Top-level in a panel: the section carries the panel's padding. */
+  padded?: boolean
+  /** A rule against the sibling above; the first section of a run omits it. */
   separator?: boolean
-}>(), {
-  // absent optional booleans cast to false, which would read as an override
-  separator: undefined,
-  resettable: undefined,
-  resetDirty: undefined
-})
+}>()
 
 const emit = defineEmits<{ reset: [] }>()
 
@@ -50,20 +46,14 @@ const slots = defineSlots<{
   actions: () => any
 }>()
 
-// Top-level sections carry the panel's padding, nested ones only their rule.
-const depth = inject(SECTION_DEPTH, 0)
-provide(SECTION_DEPTH, depth + 1)
-
 const hasHeader = computed(() => !!(props.label || props.helpTo || showReset.value || slots.actions))
-const separator = computed(() => props.separator ?? depth < 2)
 </script>
 
 <template>
   <div
-    data-studio-section
     :class="[
       /* Space above a rule is the parent's gap, below it this padding. */
-      depth === 0 ? 'p-4' : (separator ? 'pt-2' : ''),
+      padded ? 'p-4' : (separator ? 'pt-2' : ''),
       separator && 'border-t border-default'
     ]"
   >
@@ -102,10 +92,7 @@ const separator = computed(() => props.separator ?? depth < 2)
       </div>
     </div>
 
-    <!-- A first nested section sits right under the header, nothing above it
-         to separate from. Scoped to sections: any other first child keeps
-         its padding. -->
-    <div class="pt-2 flex flex-col gap-2 [&>[data-studio-section]:first-child]:border-t-0 [&>[data-studio-section]:first-child]:mt-0 [&>[data-studio-section]:first-child]:pt-0">
+    <div class="pt-2 flex flex-col gap-2">
       <slot />
     </div>
   </div>

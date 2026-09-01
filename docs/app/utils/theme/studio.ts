@@ -1,4 +1,3 @@
-import type { InjectionKey } from 'vue'
 import colors from 'tailwindcss/colors'
 import { resolveAlias, resolveShade, contrastRatio } from './engine'
 import type { ThemeDoc, Shade } from './engine'
@@ -86,9 +85,6 @@ export const THEME_STUDIO_VIEWS: ThemeStudioViewTab[] = [
 ]
 
 /* ------------------------------------------------------------- sections -- */
-
-/** How deep a ThemeStudioSection sits, which decides how it behaves. */
-export const SECTION_DEPTH: InjectionKey<number> = Symbol('theme-studio-section-depth')
 
 /**
  * A preset's primary ramp as a round swatch carrying its brand mark. The chip
