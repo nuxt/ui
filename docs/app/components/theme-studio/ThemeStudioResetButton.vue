@@ -1,12 +1,7 @@
 <script setup lang="ts">
-/**
- * The studio's two-stage reset: edits go back to the preset, a second press
- * clears the preset back to stock. The label names whichever is next.
- */
-withDefaults(defineProps<{
-  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
-  variant?: 'ghost' | 'subtle' | 'outline'
-  /** A full-width labelled row, for the mobile menu where the other controls stack. */
+import type { ButtonProps } from '@nuxt/ui'
+
+withDefaults(defineProps<ButtonProps & {
   vertical?: boolean
 }>(), {
   variant: 'ghost'

@@ -56,9 +56,10 @@ const presetTiles = computed(() => presets.map(preset => ({
     <UTooltip text="Theme">
       <UButton
         :icon="studioIcons.themes"
-        label="Theme"
         color="neutral"
-        variant="soft"
+        :variant="open ? 'soft' : 'ghost'"
+        square
+        aria-label="Theme"
       />
     </UTooltip>
 

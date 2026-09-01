@@ -24,7 +24,6 @@ const props = withDefaults(defineProps<{
   /** The control's own glyph, not the label's. */
   controlIcon?: string
   ariaLabel?: string
-
   min?: number
   max?: number
   step?: number

@@ -67,7 +67,7 @@ const shareMode = ref<'import' | 'export'>('export')
       <ThemeStudioViewSwitcher />
 
       <template #right>
-        <UTooltip text="Color mode" :kbds="['d']">
+        <UTooltip text="Switch color mode" :kbds="['d']">
           <UColorModeButton color="neutral" variant="ghost" data-keep-panels class="shrink-0" />
         </UTooltip>
 
@@ -159,8 +159,8 @@ const shareMode = ref<'import' | 'export'>('export')
       <ThemeStudioToolbar />
 
       <template #right>
-        <ThemeStudioShuffleButton variant="outline" />
-        <ThemeStudioResetButton variant="outline" />
+        <ThemeStudioShuffleButton variant="soft" />
+        <ThemeStudioResetButton variant="soft" />
       </template>
     </UFooter>
 

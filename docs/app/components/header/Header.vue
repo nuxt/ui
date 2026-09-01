@@ -48,11 +48,7 @@ function toggleChat() {
         />
       </UTooltip>
 
-      <ThemeStudioPicker />
-
-      <UTooltip text="Color mode">
-        <UColorModeButton variant="ghost" />
-      </UTooltip>
+      <ThemeStudioPresetPicker />
 
       <UTooltip text="Open on GitHub" class="hidden lg:flex">
         <UButton
