@@ -1,4 +1,4 @@
-import type { ThemeDoc } from './types'
+import type { ThemeDoc, StyleOptions } from './types'
 
 export interface ThemePreset {
   id: string
@@ -10,6 +10,19 @@ export interface ThemePreset {
 
 /** The stock preset, what an untouched theme already is. */
 export const DEFAULT_PRESET_ID = 'nuxt-ui'
+
+/**
+ * The five tokens the library pins to white, routed through the neutral ramp
+ * the way picking a neutral in the studio does (selectPalette's remaps), so a
+ * tinted ramp reaches the page and the export reproduces the preview.
+ */
+const tintedNeutral = {
+  '--ui-bg': { light: 50 },
+  '--ui-text-inverted': { light: 50 },
+  '--ui-text-highlighted': { dark: 50 },
+  '--ui-bg-inverted': { dark: 50 },
+  '--ui-border-inverted': { dark: 50 }
+} satisfies StyleOptions['tokenShades']
 
 /**
  * Presets are plain ThemeDocs: applying one replaces the current document.
@@ -36,7 +49,7 @@ export const presets: ThemePreset[] = [{
       neutral: 'neutral'
     },
     radius: 0.5,
-    font: { sans: 'Geist' },
+    font: { sans: 'Geist', mono: 'Geist Mono' },
     style: {
       defaults: {
         variants: {
@@ -51,6 +64,247 @@ export const presets: ThemePreset[] = [{
         '--ui-text': { light: 900, dark: 100 },
         '--ui-text-highlighted': { light: 950, dark: 50 }
       }
+    }
+  }
+}, {
+  id: 'cobalt',
+  name: 'Cobalt',
+  description: 'Utility blue on cool grays, tight corners, flat bordered surfaces.',
+  icon: 'i-lucide-gem',
+  doc: {
+    version: 1,
+    // Prefixed names: a palette named plainly 'blue'/'gray' would override
+    // the same-named tailwind ramp app-wide while active.
+    palettes: {
+      'cobalt': {
+        shades: {
+          50: 'oklch(95.3% 0.022 260.723)',
+          100: 'oklch(90.8% 0.045 258.763)',
+          200: 'oklch(81.6% 0.091 257.776)',
+          300: 'oklch(72.9% 0.14 258.068)',
+          400: 'oklch(64.7% 0.186 258.256)',
+          500: 'oklch(57.8% 0.228 260.025)',
+          600: 'oklch(49.2% 0.19 259.799)',
+          700: 'oklch(40.2% 0.152 259.656)',
+          800: 'oklch(30.7% 0.109 258.934)',
+          900: 'oklch(20.4% 0.063 257.52)',
+          950: 'oklch(14.7% 0.037 249.929)'
+        }
+      },
+      // A flat cool gray, its mid stops lighter than tailwind's so borders
+      // and muted text stay soft against the tinted page.
+      'cobalt-gray': {
+        shades: {
+          50: 'oklch(99.1% 0 0)',
+          100: 'oklch(98.2% 0.002 247.839)',
+          200: 'oklch(94.2% 0.005 247.879)',
+          300: 'oklch(91.1% 0.007 247.901)',
+          400: 'oklch(86.7% 0.011 247.949)',
+          500: 'oklch(76.9% 0.015 248.017)',
+          600: 'oklch(55.8% 0.016 244.893)',
+          700: 'oklch(42.8% 0.015 248.172)',
+          800: 'oklch(34.5% 0.013 248.212)',
+          900: 'oklch(26.2% 0.009 248.19)',
+          950: 'oklch(20.7% 0.008 248.192)'
+        }
+      }
+    },
+    // The gray ramp serves as secondary too: a muted second button colour.
+    colors: {
+      primary: 'cobalt',
+      secondary: 'cobalt-gray',
+      info: 'cyan',
+      warning: 'amber',
+      neutral: 'cobalt-gray'
+    },
+    radius: 0.125,
+    // a point under stock, utility UIs run dense
+    fontSize: 15,
+    font: { sans: 'Roboto' },
+    icons: 'bootstrap',
+    // Light rides the gray ramp one step deeper than stock.
+    tokens: {
+      light: {
+        '--ui-secondary': 'var(--ui-color-secondary-600)',
+        '--ui-bg-muted': 'var(--ui-color-neutral-200)',
+        '--ui-text': 'var(--ui-color-neutral-800)',
+        '--ui-border': 'var(--ui-color-neutral-400)',
+        '--ui-border-muted': 'var(--ui-color-neutral-300)',
+        '--ui-bg': 'var(--ui-color-neutral-100)',
+        '--ui-text-toned': 'var(--ui-color-neutral-700)',
+        '--ui-text-muted': 'var(--ui-color-neutral-600)',
+        '--ui-text-dimmed': 'var(--ui-color-neutral-600)',
+        '--ui-bg-elevated': 'var(--ui-color-neutral-200)',
+        '--ui-bg-accented': 'var(--ui-color-neutral-300)'
+      },
+      // Dark keeps the same brand colours rather than lifting to the 400s.
+      dark: {
+        '--ui-primary': 'var(--ui-color-primary-500)',
+        '--ui-secondary': 'var(--ui-color-secondary-500)',
+        '--ui-success': 'var(--ui-color-success-500)',
+        '--ui-info': 'var(--ui-color-info-500)',
+        '--ui-warning': 'var(--ui-color-warning-500)',
+        '--ui-error': 'var(--ui-color-error-500)',
+        '--ui-bg-muted': 'var(--ui-color-neutral-700)',
+        '--ui-text': 'var(--ui-color-neutral-300)'
+      }
+    }
+  }
+}, {
+  id: 'sky',
+  name: 'Sky',
+  description: 'Sky blue on a mist neutral, pastel fills everywhere, airy type.',
+  icon: 'i-lucide-cloud-sun',
+  doc: {
+    version: 1,
+    colors: {
+      primary: 'sky',
+      neutral: 'mist'
+    },
+    radius: 0.75,
+    font: { sans: 'Figtree', lineHeight: 1.6 },
+    style: {
+      // nothing solid anywhere: one app-wide pastel fill
+      defaults: { variant: 'soft' },
+      tokenShades: { ...tintedNeutral }
+    }
+  }
+}, {
+  id: 'mint',
+  name: 'Mint',
+  description: 'Teal on an olive neutral, pill buttons and fields, chunky rounded type, large controls.',
+  icon: 'i-lucide-leaf',
+  doc: {
+    version: 1,
+    colors: {
+      primary: 'teal',
+      neutral: 'olive'
+    },
+    radius: 0.75,
+    // a step heavier across the ladder, Nunito reads thin at stock weights
+    font: { sans: 'Nunito', weights: { normal: 500, medium: 600, semibold: 700, bold: 800 } },
+    icons: 'iconoir',
+    style: {
+      defaults: { size: 'lg', variants: { inputs: 'soft' } },
+      tokenShades: { ...tintedNeutral }
+    },
+    // the radius ladder stops at 0.75rem, the pill has to come from the slots
+    components: {
+      button: { slots: { base: 'rounded-full' } },
+      input: { slots: { base: 'rounded-full' } },
+      select: { slots: { base: 'rounded-full' } },
+      selectMenu: { slots: { base: 'rounded-full' } },
+      inputMenu: { slots: { base: 'rounded-full' } }
+    }
+  }
+}, {
+  id: 'iris',
+  name: 'Iris',
+  description: 'Violet outlines on a mauve neutral, fuchsia secondary, tinted fields.',
+  icon: 'i-lucide-flower',
+  doc: {
+    version: 1,
+    colors: {
+      primary: 'violet',
+      secondary: 'fuchsia',
+      neutral: 'mauve'
+    },
+    radius: 0.5,
+    font: { sans: 'Manrope', letterSpacing: -0.01 },
+    icons: 'remix',
+    style: {
+      // the violet stays a line: outlined actions over tinted fields
+      defaults: { variants: { buttons: 'outline', inputs: 'subtle' } },
+      tokenShades: {
+        ...tintedNeutral,
+        // one step deeper so the mauve shows on surfaces, not just borders
+        '--ui-bg-muted': { light: 100 },
+        '--ui-bg-elevated': { light: 100 }
+      }
+    }
+  }
+}, {
+  id: 'crimson',
+  name: 'Crimson',
+  description: 'Cinema red on pure gray, square corners, filled fields, near-black in dark mode.',
+  icon: 'i-lucide-clapperboard',
+  doc: {
+    version: 1,
+    colors: {
+      primary: 'red',
+      neutral: 'neutral'
+    },
+    radius: 0,
+    font: { sans: 'Inter', weights: { semibold: 700, bold: 800 } },
+    icons: 'material',
+    style: {
+      defaults: { variants: { inputs: 'soft' } },
+      tokenShades: {
+        ...tintedNeutral,
+        // 600 is the deep cinema red, 500 leans orange; dark holds it rather
+        // than lifting to the salmon 400
+        '--ui-primary': { light: 600, dark: 500 },
+        '--ui-bg': { light: 50, dark: 950 },
+        '--ui-bg-muted': { dark: 900 },
+        '--ui-bg-elevated': { dark: 900 },
+        '--ui-bg-accented': { dark: 800 }
+      }
+    }
+  }
+}, {
+  id: 'coral',
+  name: 'Coral',
+  description: 'Rose on warm stone, cards floating on shadows, teal for success, neutral focus rings.',
+  icon: 'i-lucide-shell',
+  doc: {
+    version: 1,
+    colors: {
+      primary: 'rose',
+      success: 'teal',
+      neutral: 'stone'
+    },
+    radius: 0.5,
+    font: { sans: 'Plus Jakarta Sans' },
+    icons: 'phosphor',
+    style: {
+      // fields ring in neutral, the rose stays on actions
+      defaults: { colors: { inputs: 'neutral' } },
+      tokenShades: { ...tintedNeutral }
+    },
+    components: {
+      // Cards float on a shadow instead of sitting in a ring. Dark keeps the
+      // ring, a shadow has nothing to fall on there. A compound entry rather
+      // than the slot: the variant's own `ring` lands after the slot string
+      // and would win the merge.
+      card: { compoundVariants: [{ variant: 'outline', class: { root: 'ring-0 dark:ring shadow-xl shadow-black/5' } }] }
+    }
+  }
+}, {
+  id: 'sunset',
+  name: 'Sunset',
+  description: 'Orange on a warm taupe neutral, glowing actions, yellow secondary, subtle panels.',
+  icon: 'i-lucide-sunset',
+  doc: {
+    version: 1,
+    colors: {
+      primary: 'orange',
+      secondary: 'yellow',
+      neutral: 'taupe'
+    },
+    radius: 0.625,
+    font: { sans: 'Bricolage Grotesque' },
+    icons: 'tabler',
+    style: {
+      defaults: { variants: { panels: 'subtle' } },
+      tokenShades: {
+        ...tintedNeutral,
+        // orange-500 is too light to carry white text, 600 is the burnt stop
+        '--ui-primary': { light: 600 }
+      }
+    },
+    components: {
+      // solid primary actions cast a warm glow
+      button: { compoundVariants: [{ color: 'primary', variant: 'solid', class: 'shadow-md shadow-primary/30' }] }
     }
   }
 }, {
@@ -112,58 +366,6 @@ export const presets: ThemePreset[] = [{
     }
   }
 }, {
-  id: 'orchard',
-  name: 'Orchard',
-  description: 'Orange on deep sage greens, subtle surfaces, foliage-tinted throughout.',
-  icon: 'i-lucide-citrus',
-  doc: {
-    version: 1,
-    // Green-tinted neutral whose light end starts far below white, the
-    // whole page sits on foliage.
-    palettes: {
-      grove: {
-        shades: {
-          50: 'oklch(91% 0.036 140.516)',
-          100: 'oklch(84.9% 0.042 140.374)',
-          200: 'oklch(78.6% 0.048 140.574)',
-          300: 'oklch(72.3% 0.053 141.491)',
-          400: 'oklch(65.8% 0.057 142.244)',
-          500: 'oklch(59.1% 0.051 142.85)',
-          600: 'oklch(52.2% 0.042 143.373)',
-          700: 'oklch(45.2% 0.034 143.84)',
-          800: 'oklch(38.1% 0.028 144.268)',
-          900: 'oklch(31.1% 0.022 144.667)',
-          950: 'oklch(24.2% 0.017 145.041)'
-        }
-      }
-    },
-    colors: {
-      primary: 'orange',
-      neutral: 'grove'
-    },
-    font: { sans: 'DM Sans' },
-    icons: 'remix',
-    tokens: {
-      light: {
-        '--ui-bg': 'var(--ui-color-neutral-50)',
-        '--ui-text-inverted': 'var(--ui-color-neutral-50)'
-      },
-      dark: {
-        '--ui-text-highlighted': 'var(--ui-color-neutral-50)'
-      }
-    },
-    style: {
-      defaults: { variant: 'subtle' },
-      tokenShades: {
-        '--ui-bg-muted': { light: 100 },
-        '--ui-bg-elevated': { light: 200 },
-        '--ui-bg-accented': { light: 300 },
-        '--ui-success': { light: 600, dark: 300 },
-        '--ui-error': { light: 600, dark: 300 }
-      }
-    }
-  }
-}, {
   id: 'marshmallow',
   name: 'Marshmallow',
   description: 'Pastel pink softness with mauve-tinted grays.',
@@ -210,65 +412,6 @@ export const presets: ThemePreset[] = [{
     }
   }
 }, {
-  id: '8bit',
-  name: '8-bit',
-  description: 'Arcade red with pixel type and hard inked edges.',
-  icon: 'i-mdi-space-invaders',
-  doc: {
-    version: 1,
-    // Teal-washed neutral: the light end never reaches white, a dim LCD
-    // panel instead of paper.
-    palettes: {
-      crt: {
-        shades: {
-          50: 'oklch(89.7% 0.031 183.464)',
-          100: 'oklch(81.4% 0.049 184.157)',
-          200: 'oklch(72% 0.068 184.927)',
-          300: 'oklch(63% 0.077 185.803)',
-          400: 'oklch(55.3% 0.072 186.838)',
-          500: 'oklch(48.1% 0.062 188.141)',
-          600: 'oklch(41.2% 0.05 190.061)',
-          700: 'oklch(34.5% 0.038 193.49)',
-          800: 'oklch(27.8% 0.027 194.544)',
-          900: 'oklch(21.3% 0.015 194.783)',
-          950: 'oklch(14.8% 0.004 194.814)'
-        }
-      }
-    },
-    colors: {
-      primary: 'red',
-      neutral: 'crt'
-    },
-    radius: 0,
-    font: { sans: 'Pixelify Sans', weights: { normal: 400, medium: 500, semibold: 600, bold: 700 } },
-    icons: 'pixelarticons',
-    tokens: {
-      light: {
-        '--ui-primary': 'var(--ui-color-primary-600)',
-        '--ui-bg': 'var(--ui-color-neutral-50)',
-        '--ui-bg-muted': 'var(--ui-color-neutral-100)',
-        '--ui-bg-elevated': 'var(--ui-color-neutral-200)',
-        '--ui-text-inverted': 'var(--ui-color-neutral-50)',
-        '--ui-border': 'black',
-        '--ui-border-muted': 'var(--ui-color-neutral-300)',
-        '--ui-border-accented': 'black'
-      },
-      dark: {
-        '--ui-primary': 'var(--ui-color-primary-500)',
-        '--ui-bg-inverted': 'var(--ui-color-neutral-50)',
-        '--ui-text-highlighted': 'var(--ui-color-neutral-50)',
-        // the ink inverts in dark: an arcade outline is a bright edge there
-        '--ui-border': 'var(--ui-color-neutral-200)',
-        '--ui-border-accented': 'var(--ui-color-neutral-100)',
-        '--ui-border-inverted': 'var(--ui-color-neutral-50)'
-      }
-    },
-    style: {
-      // black is the neutral ladder's bottom stop, not a colour of its own
-      defaults: { variants: { panels: 'subtle' } }
-    }
-  }
-}, {
   id: 'parchment',
   name: 'Parchment',
   description: 'Warm parchment neutrals with a book-cloth clay primary.',
@@ -276,7 +419,7 @@ export const presets: ThemePreset[] = [{
   doc: {
     version: 1,
     palettes: {
-      // Anchored on the real brand clay, hsl(14.8 63.1% 59.6%), at 500.
+      // Book-cloth clay: the 500 anchors the ramp, the rest is fitted around it.
       clay: {
         shades: {
           50: 'oklch(97.4% 0.009 48.308)',
@@ -292,8 +435,8 @@ export const presets: ThemePreset[] = [{
           950: 'oklch(25.9% 0.054 38.197)'
         }
       },
-      // Their real --_gray-* stops mapped onto the tailwind ladder, the 50
-      // IS the signature cream background.
+      // Warm paper grays, the light end is cream rather than white: the page
+      // sits at 200 with cards lifted to 50.
       parchment: {
         shades: {
           50: 'oklch(98% 0.003 106.451)',
@@ -329,216 +472,6 @@ export const presets: ThemePreset[] = [{
       dark: {
         '--ui-primary': 'var(--ui-color-primary-500)',
         '--ui-bg-accented': 'var(--ui-color-neutral-800)'
-      }
-    },
-    style: {
-      defaults: { variants: { panels: 'subtle' } }
-    }
-  }
-}, {
-  id: 'signal',
-  name: 'Signal',
-  description: 'Dark-first ink surfaces, signal green, pill buttons.',
-  icon: 'i-lucide-audio-lines',
-  doc: {
-    version: 1,
-    palettes: {
-      signal: {
-        shades: {
-          50: 'oklch(97.3% 0.023 157.606)',
-          100: 'oklch(93.7% 0.051 157.559)',
-          200: 'oklch(88% 0.096 156.74)',
-          300: 'oklch(81.5% 0.14 155.469)',
-          400: 'oklch(75% 0.172 152.412)',
-          500: 'oklch(68.9% 0.187 148.921)',
-          600: 'oklch(60.7% 0.165 149.023)',
-          700: 'oklch(52.9% 0.141 149.561)',
-          800: 'oklch(44.9% 0.115 150.596)',
-          900: 'oklch(38.7% 0.095 151.748)',
-          950: 'oklch(25.6% 0.058 153.065)'
-        }
-      },
-      ink: {
-        shades: {
-          50: 'oklch(97.9% 0 0)',
-          100: 'oklch(95.2% 0 0)',
-          200: 'oklch(90.1% 0 0)',
-          300: 'oklch(76.7% 0 0)',
-          400: 'oklch(65% 0 0)',
-          500: 'oklch(53.8% 0 0)',
-          600: 'oklch(44.2% 0 0)',
-          700: 'oklch(37.1% 0 0)',
-          800: 'oklch(28.5% 0 0)',
-          900: 'oklch(20.9% 0 0)',
-          950: 'oklch(18.2% 0 0)'
-        }
-      }
-    },
-    colors: {
-      primary: 'signal',
-      neutral: 'ink'
-    },
-    radius: 0.5,
-    font: { sans: 'DM Sans' },
-    icons: 'material',
-    tokens: {
-      dark: {
-        '--ui-bg': 'var(--ui-color-neutral-950)',
-        '--ui-bg-muted': 'var(--ui-color-neutral-900)'
-      }
-    },
-    components: {
-      button: {
-        slots: {
-          base: 'rounded-full'
-        }
-      }
-    }
-  }
-}, {
-  id: 'cobalt',
-  name: 'Cobalt',
-  description: 'Utility blue on cool grays, tight corners, flat bordered surfaces.',
-  icon: 'i-lucide-gem',
-  doc: {
-    version: 1,
-    // The real 5.3 tint/shade-color() scales, extended to 50/950 with the
-    // same math. Prefixed names: a palette named plainly 'blue'/'gray' would
-    // override the same-named tailwind ramp app-wide while active.
-    palettes: {
-      'cobalt': {
-        shades: {
-          50: 'oklch(95.3% 0.022 260.723)',
-          100: 'oklch(90.8% 0.045 258.763)',
-          200: 'oklch(81.6% 0.091 257.776)',
-          300: 'oklch(72.9% 0.14 258.068)',
-          400: 'oklch(64.7% 0.186 258.256)',
-          500: 'oklch(57.8% 0.228 260.025)',
-          600: 'oklch(49.2% 0.19 259.799)',
-          700: 'oklch(40.2% 0.152 259.656)',
-          800: 'oklch(30.7% 0.109 258.934)',
-          900: 'oklch(20.4% 0.063 257.52)',
-          950: 'oklch(14.7% 0.037 249.929)'
-        }
-      },
-      // $gray-100…$gray-900 verbatim, with 50/950 extrapolated.
-      'cobalt-gray': {
-        shades: {
-          50: 'oklch(99.1% 0 0)',
-          100: 'oklch(98.2% 0.002 247.839)',
-          200: 'oklch(94.2% 0.005 247.879)',
-          300: 'oklch(91.1% 0.007 247.901)',
-          400: 'oklch(86.7% 0.011 247.949)',
-          500: 'oklch(76.9% 0.015 248.017)',
-          600: 'oklch(55.8% 0.016 244.893)',
-          700: 'oklch(42.8% 0.015 248.172)',
-          800: 'oklch(34.5% 0.013 248.212)',
-          900: 'oklch(26.2% 0.009 248.19)',
-          950: 'oklch(20.7% 0.008 248.192)'
-        }
-      },
-      'bs-green': {
-        shades: {
-          50: 'oklch(95.5% 0.013 167.173)',
-          100: 'oklch(90.9% 0.027 166.725)',
-          200: 'oklch(81.7% 0.054 165.592)',
-          300: 'oklch(72.6% 0.082 163.174)',
-          400: 'oklch(63.7% 0.106 160.921)',
-          500: 'oklch(55.2% 0.123 157.012)',
-          600: 'oklch(47.1% 0.104 157.226)',
-          700: 'oklch(38.6% 0.083 157.541)',
-          800: 'oklch(29.7% 0.06 159.192)',
-          900: 'oklch(20% 0.035 161.761)',
-          950: 'oklch(14.4% 0.023 167.139)'
-        }
-      },
-      'bs-red': {
-        shades: {
-          50: 'oklch(95.4% 0.019 13.379)',
-          100: 'oklch(90.7% 0.037 11.626)',
-          200: 'oklch(81.5% 0.079 12.026)',
-          300: 'oklch(73% 0.123 14.804)',
-          400: 'oklch(65.2% 0.167 17.173)',
-          500: 'oklch(59.2% 0.202 21.239)',
-          600: 'oklch(50.2% 0.17 20.933)',
-          700: 'oklch(41% 0.134 20.765)',
-          800: 'oklch(31.2% 0.097 19.17)',
-          900: 'oklch(20.7% 0.055 17.828)',
-          950: 'oklch(14.7% 0.033 12.672)'
-        }
-      },
-      'bs-yellow': {
-        shades: {
-          50: 'oklch(98.2% 0.026 92.389)',
-          100: 'oklch(96.4% 0.051 92.554)',
-          200: 'oklch(92.9% 0.097 91.534)',
-          300: 'oklch(89.8% 0.137 91.178)',
-          400: 'oklch(86.9% 0.162 88.789)',
-          500: 'oklch(84.4% 0.172 84.934)',
-          600: 'oklch(71.4% 0.145 85.028)',
-          700: 'oklch(58% 0.118 86.024)',
-          800: 'oklch(43.5% 0.088 86.646)',
-          900: 'oklch(27.9% 0.056 90.569)',
-          950: 'oklch(18.9% 0.036 93.534)'
-        }
-      },
-      'bs-cyan': {
-        shades: {
-          50: 'oklch(97.2% 0.021 211.758)',
-          100: 'oklch(94.3% 0.04 212.228)',
-          200: 'oklch(89.3% 0.077 211.321)',
-          300: 'oklch(84.6% 0.107 212.793)',
-          400: 'oklch(80.8% 0.129 214.292)',
-          500: 'oklch(77.5% 0.138 218.055)',
-          600: 'oklch(65.8% 0.116 217.451)',
-          700: 'oklch(53.2% 0.094 217.564)',
-          800: 'oklch(40.1% 0.07 216.209)',
-          900: 'oklch(25.6% 0.043 215.657)',
-          950: 'oklch(17.6% 0.029 211.647)'
-        }
-      }
-    },
-    // secondary is literally $gray-600, so the gray ramp serves both roles.
-    colors: {
-      primary: 'cobalt',
-      secondary: 'cobalt-gray',
-      success: 'bs-green',
-      info: 'bs-cyan',
-      warning: 'bs-yellow',
-      error: 'bs-red',
-      neutral: 'cobalt-gray'
-    },
-    radius: 0.125,
-    // Bootstrap ships the system-ui stack; Roboto is its named Android
-    // fallback and the closest loadable stand-in.
-    font: { sans: 'Roboto' },
-    icons: 'bootstrap',
-    // Light rides the gray ramp one step deeper than stock.
-    tokens: {
-      light: {
-        '--ui-secondary': 'var(--ui-color-secondary-600)',
-        '--ui-bg-muted': 'var(--ui-color-neutral-200)',
-        '--ui-text': 'var(--ui-color-neutral-800)',
-        '--ui-border': 'var(--ui-color-neutral-400)',
-        '--ui-border-muted': 'var(--ui-color-neutral-300)',
-        '--ui-bg': 'var(--ui-color-neutral-100)',
-        '--ui-text-toned': 'var(--ui-color-neutral-700)',
-        '--ui-text-muted': 'var(--ui-color-neutral-600)',
-        '--ui-text-dimmed': 'var(--ui-color-neutral-600)',
-        '--ui-bg-elevated': 'var(--ui-color-neutral-200)',
-        '--ui-bg-accented': 'var(--ui-color-neutral-300)'
-      },
-      // Dark keeps the same brand colors (--bs-primary stays #0d6efd);
-      // $body-color-dark: $gray-300.
-      dark: {
-        '--ui-primary': 'var(--ui-color-primary-500)',
-        '--ui-secondary': 'var(--ui-color-secondary-500)',
-        '--ui-success': 'var(--ui-color-success-500)',
-        '--ui-info': 'var(--ui-color-info-500)',
-        '--ui-warning': 'var(--ui-color-warning-500)',
-        '--ui-error': 'var(--ui-color-error-500)',
-        '--ui-bg-muted': 'var(--ui-color-neutral-700)',
-        '--ui-text': 'var(--ui-color-neutral-300)'
       }
     }
   }
