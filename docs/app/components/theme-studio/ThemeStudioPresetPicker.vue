@@ -1,19 +1,21 @@
 <script setup lang="ts">
 /**
- * The header's theme popover: a grid of preset swatches with the full studio
- * one click away. Picking only, everything else (export, reset, the rest of
- * the axes) lives in the studio. The header drops this on /theme, where the
- * studio's own toolbar covers it.
+ * The header's theme popover: the color mode up top, a grid of preset
+ * swatches, and the full studio one click away. Picking only, everything
+ * else (export, reset, the rest of the axes) lives in the studio. The
+ * header drops this on /theme, where the studio's own toolbar covers it.
  */
 import { themeSwatchStyle, keepPanels } from '../../utils/theme/studio'
 
+const appConfig = useAppConfig()
+const colorMode = useColorMode()
 const { track } = useAnalytics()
 const studioIcons = useStudioIcons()
 
 const open = ref(false)
 
-// The persisted theme is client-only, gate the selection on mount so
-// hydration doesn't adopt a checked row the server never rendered.
+// The persisted theme and the color mode are client-only, gate on mount so
+// hydration doesn't adopt a selection the server never rendered.
 const mounted = useMounted()
 
 watch(open, (isOpen) => {
@@ -24,22 +26,25 @@ watch(open, (isOpen) => {
 
 const { presets, selectedPreset, applyPreset } = useThemeStudio()
 
+// labels for AT only, the ui below hides them so the control stays icon-wide
+const modeTabs = computed(() => [
+  { label: 'Light', value: 'light', icon: appConfig.ui.icons.light },
+  { label: 'Dark', value: 'dark', icon: appConfig.ui.icons.dark },
+  { label: 'System', value: 'system', icon: appConfig.ui.icons.system }
+])
+
+const mode = computed({
+  get: () => (mounted.value ? colorMode.preference : 'system'),
+  set: (value: string) => (colorMode.preference = value)
+})
+
 const presetTiles = computed(() => presets.map(preset => ({
-  id: preset.id,
+  preset,
   label: preset.name,
   icon: preset.icon,
-  swatch: themeSwatchStyle(preset.doc)
+  swatch: themeSwatchStyle(preset.doc),
+  active: mounted.value && preset.id === selectedPreset.value
 })))
-
-const selected = computed({
-  get: () => (mounted.value ? selectedPreset.value : undefined),
-  set: (id: string | undefined) => {
-    // undefined is Reka toggling the selected tile off: nothing to apply,
-    // and re-applying would wipe the edits made on top of it
-    const preset = presets.find(entry => entry.id === id)
-    if (preset) applyPreset(preset)
-  }
-})
 </script>
 
 <template>
@@ -51,45 +56,55 @@ const selected = computed({
     <UTooltip text="Theme">
       <UButton
         :icon="studioIcons.themes"
+        label="Theme"
         color="neutral"
-        :variant="open ? 'soft' : 'ghost'"
-        square
-        aria-label="Theme"
+        variant="soft"
       />
     </UTooltip>
 
     <template #content>
-      <UListbox
-        v-model="selected"
-        :items="presetTiles"
-        value-key="id"
-        :ui="{
-          root: () => 'p-1.5',
-          content: 'max-h-none',
-          group: 'p-0 grid grid-cols-3',
-          item: 'flex-col items-center gap-1.5 data-[state=checked]:before:bg-elevated hover:data-[state=checked]:before:bg-elevated',
-          itemWrapper: 'min-w-0 w-full text-center',
-          itemLabel: 'w-full truncate text-[11px]',
-          itemTrailing: 'hidden'
-        }"
-      >
-        <template #item-leading="{ item }">
+      <div class="flex items-center justify-between gap-2 p-2 ps-3">
+        <span class="text-sm font-semibold text-highlighted">Theme</span>
+
+        <UTabs
+          v-model="mode"
+          :items="modeTabs"
+          :content="false"
+          color="neutral"
+          size="xs"
+          :ui="{ label: 'sr-only' }"
+          aria-label="Color mode"
+        />
+      </div>
+
+      <div class="grid grid-cols-3 p-1.5">
+        <button
+          v-for="tile in presetTiles"
+          :key="tile.preset.id"
+          type="button"
+          class="flex flex-col items-center gap-1.5 p-2 rounded-md transition-colors hover:bg-elevated/50"
+          :class="tile.active && 'bg-elevated hover:bg-elevated'"
+          :aria-pressed="tile.active"
+          @click="applyPreset(tile.preset)"
+        >
           <span
             class="flex items-center justify-center size-8 rounded-full bg-(image:--swatch-light) dark:bg-(image:--swatch-dark)"
-            :style="item.swatch"
+            :style="tile.swatch"
           >
-            <UIcon :name="item.icon" class="size-5 text-(--swatch-ink-light) dark:text-(--swatch-ink-dark)" />
+            <UIcon :name="tile.icon" class="size-5 text-(--swatch-ink-light) dark:text-(--swatch-ink-dark)" />
           </span>
-        </template>
-      </UListbox>
 
-      <div class="p-3">
+          <span class="w-full truncate text-[11px]" :class="tile.active ? 'text-highlighted font-medium' : 'text-muted'">{{ tile.label }}</span>
+        </button>
+      </div>
+
+      <div class="p-1.5">
         <UButton
           block
           label="Edit theme"
-          :icon="studioIcons.themes"
+          :icon="studioIcons.options"
           color="neutral"
-          variant="outline"
+          variant="ghost"
           to="/theme"
           @click="open = false"
         />
