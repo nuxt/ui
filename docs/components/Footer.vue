@@ -1,6 +1,6 @@
 <template>
   <div class="w-full h-px bg-gray-200 dark:bg-gray-800 flex items-center justify-center">
-    <div v-if="!['/playground', '/roadmap'].includes($route.path)" class="bg-white dark:bg-gray-900 px-4">
+    <div class="bg-white dark:bg-gray-900 px-4">
       <LogoOnly class="w-5 h-5" />
     </div>
   </div>
@@ -34,16 +34,5 @@ const links = [{
   icon: 'i-simple-icons-stackblitz',
   to: 'https://stackblitz.com/edit/nuxt-ui',
   target: '_blank'
-}, {
-  label: 'Roadmap',
-  icon: 'i-heroicons-map',
-  to: '/roadmap'
-}, {
-  label: 'Releases',
-  icon: 'i-heroicons-rocket-launch',
-  to: '/releases'
-}, {
-  label: 'Terms',
-  to: '/pro/terms'
 }]
 </script>

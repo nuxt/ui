@@ -21,13 +21,6 @@
             <UDivider type="dashed" />
 
             <UPageLinks title="Resources" :links="resourcesLinks" />
-
-            <UDivider type="dashed" />
-
-            <div class="space-y-3">
-              <AdsPro />
-              <AdsCarbon />
-            </div>
           </div>
         </template>
       </UContentToc>
@@ -89,10 +82,6 @@ const communityLinks = computed(() => [{
   icon: 'i-heroicons-lifebuoy',
   label: 'Contributing',
   to: '/getting-started/contributing'
-}, {
-  label: 'Roadmap',
-  icon: 'i-heroicons-map',
-  to: '/roadmap'
 }])
 
 const resourcesLinks = [{

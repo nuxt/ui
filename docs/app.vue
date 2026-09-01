@@ -56,22 +56,10 @@ const links = computed(() => {
     ? [{
         label: 'Pro',
         icon: 'i-heroicons-square-3-stack-3d',
-        to: '/pro',
-        active: route.path.startsWith('/pro/getting-started') || route.path.startsWith('/pro/components') || route.path.startsWith('/pro/prose')
-      }, {
-        label: 'Pricing',
-        icon: 'i-heroicons-ticket',
-        to: '/pro/pricing'
-      }, {
-        label: 'Templates',
-        icon: 'i-heroicons-computer-desktop',
-        to: '/pro/templates'
+        to: '/pro/getting-started',
+        active: route.path.startsWith('/pro')
       }]
-    : []), {
-    label: 'Releases',
-    icon: 'i-heroicons-rocket-launch',
-    to: '/releases'
-  }].filter(Boolean)
+    : [])]
 })
 
 // Head
