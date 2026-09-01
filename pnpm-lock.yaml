@@ -275,9 +275,6 @@ importers:
       maska:
         specifier: ^3.2.0
         version: 3.2.0
-      motion-v:
-        specifier: ^1.10.2
-        version: 1.10.2(@vueuse/core@14.2.0(vue@3.5.27(typescript@5.8.3)))(react@19.2.0)(vue@3.5.27(typescript@5.8.3))
       nuxt:
         specifier: ^4.3.0
         version: 4.3.0(@parcel/watcher@2.5.1)(@types/node@24.7.0)(@vue/compiler-sfc@3.5.27)(better-sqlite3@12.6.2)(cac@6.7.14)(db0@0.3.4(better-sqlite3@12.6.2))(eslint@10.0.0(jiti@2.6.1))(ioredis@5.9.2)(lightningcss@1.30.2)(magicast@0.5.1)(meow@13.2.0)(optionator@0.9.4)(rolldown@1.0.0-beta.53)(rollup@4.56.0)(terser@5.44.0)(typescript@5.8.3)(vite@7.3.1(@types/node@24.7.0)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.0)(yaml@2.8.2))(vue-tsc@3.2.4(typescript@5.8.3))(yaml@2.8.2)
@@ -13410,18 +13407,6 @@ snapshots:
   motion-v@1.10.2(@vueuse/core@13.9.0(vue@3.5.27(typescript@5.8.3)))(react@19.2.0)(vue@3.5.27(typescript@5.8.3)):
     dependencies:
       '@vueuse/core': 13.9.0(vue@3.5.27(typescript@5.8.3))
-      framer-motion: 12.25.0(react@19.2.0)
-      hey-listen: 1.0.8
-      motion-dom: 12.24.11
-      vue: 3.5.27(typescript@5.8.3)
-    transitivePeerDependencies:
-      - '@emotion/is-prop-valid'
-      - react
-      - react-dom
-
-  motion-v@1.10.2(@vueuse/core@14.2.0(vue@3.5.27(typescript@5.8.3)))(react@19.2.0)(vue@3.5.27(typescript@5.8.3)):
-    dependencies:
-      '@vueuse/core': 14.2.0(vue@3.5.27(typescript@5.8.3))
       framer-motion: 12.25.0(react@19.2.0)
       hey-listen: 1.0.8
       motion-dom: 12.24.11
