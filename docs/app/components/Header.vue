@@ -42,7 +42,7 @@ const items = computed(() => {
   return [
     { label: 'v4.x', to: 'https://ui.nuxt.com' },
     { label: `v${config.version}`, active: true, color: 'primary' as const, checked: true, type: 'checkbox' as const },
-    route.path === '/' ? ui2 : route.path.startsWith('/pro') ? uiPro1 : module.value === 'ui-pro' ? uiPro1 : ui2
+    module.value === 'ui-pro' ? uiPro1 : ui2
   ]
 })
 
@@ -84,12 +84,8 @@ const logoContextMenuItems = [
     <template #left>
       <UContextMenu :items="logoContextMenuItems">
         <NuxtLink to="/" class="flex items-end gap-2 font-bold text-xl text-highlighted min-w-0 focus-visible:outline-primary shrink-0" aria-label="Nuxt UI">
-          <Logo v-if="route.path === '/'" ref="logoElement" class="w-auto h-6 shrink-0" />
-          <LogoPro v-else-if="route.path.startsWith('/pro')" ref="logoElement" class="w-auto h-6 shrink-0" />
-          <template v-else>
-            <LogoPro class="w-auto h-6 shrink-0 ui-pro-only" />
-            <Logo ref="logoElement" class="w-auto h-6 shrink-0 ui-only" />
-          </template>
+          <LogoPro class="w-auto h-6 shrink-0 ui-pro-only" />
+          <Logo ref="logoElement" class="w-auto h-6 shrink-0 ui-only" />
         </NuxtLink>
       </UContextMenu>
 

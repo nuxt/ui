@@ -1,10 +1,5 @@
 <script setup lang="ts">
-const route = useRoute()
-
 const links = [{
-  label: 'Team',
-  to: '/team'
-}, {
   label: 'Releases',
   to: 'https://github.com/nuxt/ui/releases',
   target: '_blank'
@@ -12,7 +7,7 @@ const links = [{
 </script>
 
 <template>
-  <USeparator :icon="route.path === '/' ? undefined : 'i-simple-icons-nuxtdotjs'" class="h-px" />
+  <USeparator icon="i-simple-icons-nuxtdotjs" class="h-px" />
 
   <UFooter>
     <template #left>

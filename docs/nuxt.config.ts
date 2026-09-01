@@ -41,17 +41,6 @@ export default defineNuxtConfig({
   },
 
   app: {
-    head: {
-      // LemonSqueezy affiliate
-      script: [{
-        key: 'lmsqueezy-config',
-        innerHTML: 'window.lemonSqueezyAffiliateConfig = { store: "nuxt" };'
-      }, {
-        key: 'lmsqueezy',
-        src: 'https://lmsqueezy.com/affiliate.js',
-        defer: true
-      }]
-    },
     rootAttrs: {
       'data-vaul-drawer-wrapper': '',
       'class': 'bg-default'
@@ -83,6 +72,16 @@ export default defineNuxtConfig({
   },
 
   routeRules: {
+    '/': { redirect: { to: '/getting-started', statusCode: 301 }, prerender: false },
+    '/pro': { redirect: { to: 'https://ui.nuxt.com', statusCode: 301 }, prerender: false },
+    '/pro/pricing': { redirect: { to: 'https://ui.nuxt.com', statusCode: 301 }, prerender: false },
+    '/pro/templates': { redirect: { to: 'https://ui.nuxt.com/templates', statusCode: 301 }, prerender: false },
+    '/pro/activate': { redirect: { to: 'https://ui.nuxt.com', statusCode: 301 }, prerender: false },
+    '/pro/terms': { redirect: { to: 'https://ui.nuxt.com', statusCode: 301 }, prerender: false },
+    '/figma': { redirect: { to: 'https://ui.nuxt.com/figma', statusCode: 301 }, prerender: false },
+    '/showcase': { redirect: { to: 'https://ui.nuxt.com/showcase', statusCode: 301 }, prerender: false },
+    '/team': { redirect: { to: 'https://ui.nuxt.com/team', statusCode: 301 }, prerender: false },
+    '/roadmap': { redirect: { to: 'https://ui.nuxt.com', statusCode: 301 }, prerender: false },
     '/getting-started/installation': { redirect: '/getting-started/installation/nuxt', prerender: false },
     '/getting-started/installation/pro': { redirect: '/getting-started/installation/pro/nuxt', prerender: false },
     '/getting-started/icons': { redirect: '/getting-started/icons/nuxt', prerender: false },
@@ -149,8 +148,6 @@ export default defineNuxtConfig({
         '/getting-started',
         '/api/countries.json',
         '/api/locales.json',
-        // '/api/releases.json',
-        // '/api/pulls.json'
         '/404.html'
       ],
       crawlLinks: true,

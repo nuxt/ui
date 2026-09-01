@@ -49,46 +49,9 @@ export function useLinks() {
       active: route.fullPath === '/components#layout'
     }]
   }, {
-    label: 'Pro',
-    icon: 'i-lucide-panels-top-left',
-    to: '/pro',
-    active: route.path.startsWith('/pro'),
-    orientation: 'vertical',
-    children: [{
-      icon: 'i-lucide-sparkles',
-      label: 'Features',
-      description: 'A collection of premium Vue components.',
-      to: '/pro'
-    }, {
-      icon: 'i-lucide-credit-card',
-      label: 'Pricing',
-      description: 'Free in development, buy when ready to launch.',
-      to: '/pro/pricing',
-      active: route.path.startsWith('/pro/pricing')
-    }, {
-      icon: 'i-lucide-panels-top-left',
-      label: 'Templates',
-      description: 'Official templates made with Nuxt UI Pro.',
-      to: '/pro/templates'
-    }, {
-      icon: 'i-lucide-circle-check',
-      label: 'Activate',
-      description: 'Enable Nuxt UI Pro in your production projects.',
-      to: '/pro/activate'
-    }]
-  }, {
-    label: 'Figma',
-    icon: 'i-simple-icons-figma',
-    to: '/figma'
-  }, {
     label: 'Community',
     icon: 'i-lucide-users',
     children: [{
-      icon: 'i-lucide-presentation',
-      label: 'Showcase',
-      description: 'Check out some amazing projects built with Nuxt UI.',
-      to: '/showcase'
-    }, {
       label: 'Devtools Integration',
       description: 'Integrate Nuxt UI with Nuxt Devtools with Compodium.',
       icon: 'i-lucide-code',
