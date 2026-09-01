@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { keepPanels } from '../../utils/theme/studio'
+import { keepPanels } from '../../../utils/theme/studio'
 
 /**
  * The toolbar's select-shaped controls (icons, radius). Everything that makes
@@ -13,6 +13,8 @@ defineProps<{
   items: { label: string, value: string | number, icon?: string }[]
   /** The trigger's leading glyph. */
   icon?: string
+  /** Overrides the dimmed leading glyph while clean (the preset chip stays primary). */
+  leadingIconClass?: string
   dirty?: boolean
   /** For a list that needs more room than the trigger, e.g. icon previews. */
   contentClass?: string
@@ -20,7 +22,7 @@ defineProps<{
 
 const model = defineModel<string | number>()
 
-/** Exposed so the toolbar can pin itself while the list is open. */
+/** Local unless a caller binds it; drives the chevron rotation. */
 const open = defineModel<boolean>('open', { default: false })
 </script>
 
@@ -39,13 +41,13 @@ const open = defineModel<boolean>('open', { default: false })
     :ui="{
       base: dirty && 'ring-primary/50',
       value: ['font-medium', dirty ? 'text-primary' : 'text-default'],
-      leadingIcon: dirty ? 'text-primary' : 'text-dimmed',
+      leadingIcon: dirty ? 'text-primary' : (leadingIconClass ?? 'text-dimmed'),
       trailingIcon: ['transition-transform duration-200', open && 'rotate-180', dirty ? 'text-primary' : 'text-dimmed'],
       content: contentClass
     }"
   >
-    <template v-if="!!$slots['item-description']" #item-description="scope">
-      <slot name="item-description" v-bind="scope" />
+    <template v-for="(_, name) in $slots" :key="name" #[name]="scope">
+      <slot :name="name" v-bind="scope ?? {}" />
     </template>
   </USelectMenu>
 </template>

@@ -49,9 +49,6 @@ defineShortcuts({
   ctrl_y: redo
 })
 
-/** The view switcher's own popover, one instance per breakpoint. */
-const openViews = reactive({ bar: false, menu: false })
-
 /** The shared import/export modal, the two toolbar buttons pick its mode. */
 const shareOpen = ref(false)
 const shareMode = ref<'import' | 'export'>('export')
@@ -65,35 +62,9 @@ const shareMode = ref<'import' | 'export'>('export')
     <UHeader :menu="{ modal: false }" :ui="{ root: () => 'h-(--ui-header-height) border-b border-transparent', right: 'gap-0.5 lg:gap-1.5' }">
       <template #left>
         <HeaderLogo />
-
-        <div class="flex items-center">
-          <UTooltip text="Undo" :kbds="['meta', 'Z']">
-            <UButton
-              :icon="studioIcons.undo"
-              color="neutral"
-              variant="ghost"
-              :disabled="!past.length"
-              aria-label="Undo theme change"
-              class="hidden lg:inline-flex"
-              @click="undo"
-            />
-          </UTooltip>
-
-          <UTooltip text="Redo" :kbds="['meta', 'shift', 'Z']">
-            <UButton
-              :icon="studioIcons.redo"
-              color="neutral"
-              variant="ghost"
-              :disabled="!future.length"
-              aria-label="Redo theme change"
-              class="hidden lg:inline-flex"
-              @click="redo"
-            />
-          </UTooltip>
-        </div>
       </template>
 
-      <ThemeStudioViewSwitcher v-model:open="openViews.bar" />
+      <ThemeStudioViewSwitcher />
 
       <template #right>
         <UTooltip text="Color mode" :kbds="['d']">
@@ -121,7 +92,7 @@ const shareMode = ref<'import' | 'export'>('export')
       <template #body>
         <div class="flex flex-col gap-3">
           <UFormField label="View" :ui="{ root: 'text-xs', container: 'mt-1' }">
-            <ThemeStudioViewSwitcher v-model:open="openViews.menu" vertical class="w-full" />
+            <ThemeStudioViewSwitcher vertical class="w-full" />
           </UFormField>
 
           <ThemeStudioToolbar vertical />
@@ -162,12 +133,33 @@ const shareMode = ref<'import' | 'export'>('export')
 
     <UFooter class="hidden lg:block" :ui="{ container: 'py-2 lg:py-4', left: 'mt-0', right: 'mt-0' }">
       <template #left>
-        <ThemeStudioShuffleButton variant="outline" />
+        <UTooltip text="Undo" :kbds="['meta', 'Z']">
+          <UButton
+            :icon="studioIcons.undo"
+            color="neutral"
+            variant="soft"
+            :disabled="!past.length"
+            aria-label="Undo theme change"
+            @click="undo"
+          />
+        </UTooltip>
+
+        <UTooltip text="Redo" :kbds="['meta', 'shift', 'Z']">
+          <UButton
+            :icon="studioIcons.redo"
+            color="neutral"
+            variant="soft"
+            :disabled="!future.length"
+            aria-label="Redo theme change"
+            @click="redo"
+          />
+        </UTooltip>
       </template>
 
       <ThemeStudioToolbar />
 
       <template #right>
+        <ThemeStudioShuffleButton variant="outline" />
         <ThemeStudioResetButton variant="outline" />
       </template>
     </UFooter>

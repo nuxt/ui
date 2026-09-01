@@ -10,8 +10,8 @@
  * the slot a picker fills says nothing about which face belongs in it.
  */
 import { watchDebounced } from '@vueuse/core'
-import { loadFontPreviews, keepPanels } from '../../utils/theme/studio'
-import type { FontCategory } from '../../utils/theme/studio'
+import { loadFontPreviews, keepPanels } from '../../../utils/theme/studio'
+import type { FontCategory } from '../../../utils/theme/studio'
 
 const props = defineProps<{
   /** The shortlist offered before the user searches. */

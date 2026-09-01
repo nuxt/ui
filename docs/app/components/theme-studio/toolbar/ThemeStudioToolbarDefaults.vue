@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import type { VariantGroup } from '../../utils/theme/engine'
+import { keepPanels } from '../../../utils/theme/studio'
+import type { VariantGroup } from '../../../utils/theme/engine'
 
 /**
  * The variant and colour Buttons, Cards and Inputs start from, one section
@@ -102,84 +103,122 @@ function groupColorModel(group: VariantGroup) {
 }
 
 const groupColors = Object.fromEntries(variantGroupFields.map(field => [field.key, groupColorModel(field.key)])) as Record<VariantGroup, ReturnType<typeof groupColorModel>>
+
+const props = defineProps<{
+  /** Stacked in the mobile menu: the panel takes the trigger's width, like a select. */
+  vertical?: boolean
+}>()
+
+const appConfig = useAppConfig()
+const studioIcons = useStudioIcons()
+const { defaultsLabel, groupDirtyFlags } = useThemeStudioToolbar()
+
+const open = ref(false)
+const dirty = groupDirtyFlags.defaults
+
+const content = computed(() => [
+  props.vertical ? 'w-(--reka-popper-anchor-width)' : 'w-80 max-w-[calc(100vw-2rem)]',
+  'max-h-[70vh] overflow-y-auto'
+])
 </script>
 
 <template>
-  <!-- Sections own their padding so the separators run edge to edge, and the
+  <UPopover v-model:open="open" :content="{ align: 'center', onInteractOutside: keepPanels }" :ui="{ content }">
+    <UButton
+      :label="defaultsLabel"
+      :icon="studioIcons.options"
+      :trailing-icon="appConfig.ui.icons.chevronDown"
+      :color="dirty ? 'primary' : 'neutral'"
+      variant="outline"
+      :class="['group', vertical ? 'w-full' : 'w-38']"
+      :ui="{
+        label: 'flex-1 min-w-0 text-left truncate',
+        leadingIcon: dirty ? 'text-primary' : 'text-dimmed',
+        trailingIcon: ['transition-transform duration-200', open && 'rotate-180', dirty ? 'text-primary' : 'text-dimmed']
+      }"
+      :aria-label="`Defaults: ${defaultsLabel}`"
+    />
+
+    <template #content>
+      <!-- Sections own their padding so the separators run edge to edge, and the
        panel drops the leading one since nothing sits above it. -->
-  <div class="flex flex-col [&>*:first-child]:border-t-0">
-    <ThemeStudioSection label="Global" section-key="size">
-      <ThemeStudioRow
-        v-model="defaultSize"
-        control="select"
-        label="Size"
-        control-icon="i-lucide-proportions"
-        :items="defaultSizeItems"
-        aria-label="Default size"
-      />
-    </ThemeStudioSection>
+      <div class="flex flex-col">
+        <ThemeStudioSection label="Global" section-key="size" padded>
+          <ThemeStudioRow
+            v-model="defaultSize"
+            control="select"
+            label="Size"
+            control-icon="i-lucide-proportions"
+            :items="defaultSizeItems"
+            aria-label="Default size"
+          />
+        </ThemeStudioSection>
 
-    <ThemeStudioSection
-      v-for="field in variantGroupFields"
-      :key="field.key"
-      :label="field.label"
-      :section-key="field.key"
-    >
-      <div class="flex flex-col gap-1.5">
-        <ThemeStudioRow control="custom" label="Variant">
-          <UPopover v-model:open="variantGridOpen[field.key]" :content="{ side: 'bottom', align: 'start' }" class="flex-1">
-            <UButton
-              size="sm"
-              color="neutral"
-              variant="subtle"
-              block
-              icon="i-lucide-layers"
-              trailing-icon="i-lucide-chevron-down"
-              :ui="{ label: 'flex-1 text-left' }"
-              :aria-label="`Default variant for ${field.label.toLowerCase()}`"
-            >
-              <!-- the tag belongs in the grid, where it names the stock option -->
-              {{ field.items.find(item => item.value === (groupVariants[field.key].value === 'default' ? field.stock : groupVariants[field.key].value))?.label }}
-            </UButton>
-
-            <template #content>
-              <!-- each cell renders IN the variant it picks -->
-              <div class="w-64 p-2 grid grid-cols-2 gap-1">
-                <UButton
-                  v-for="item in field.items"
-                  :key="item.value"
-                  size="sm"
-                  block
-                  color="neutral"
-                  :variant="RENDERABLE_VARIANTS.includes(item.value) ? (item.value as any) : 'subtle'"
-                  :active="groupVariants[field.key].value === item.value || (groupVariants[field.key].value === 'default' && item.value === field.stock)"
-                  active-color="primary"
-                  :class="[item.value === 'none' && 'opacity-60', 'min-w-0']"
-                  @click="groupVariants[field.key].value = (item.value === field.stock ? 'default' : item.value); variantGridOpen[field.key] = false"
-                >
-                  <!-- opacity, not a color: text-dimmed would fight the variant's own text color -->
-                  <span class="truncate">{{ item.label }}<span v-if="item.value === field.stock" class="opacity-70 font-normal">&nbsp;(Default)</span></span>
-                </UButton>
-              </div>
-            </template>
-          </UPopover>
-        </ThemeStudioRow>
-
-        <ThemeStudioRow
-          v-if="field.hasColor"
-          v-model="groupColors[field.key].value"
-          control="select"
-          label="Color"
-          :items="defaultColorItems"
-          :aria-label="`Default color for ${field.label.toLowerCase()}`"
+        <ThemeStudioSection
+          v-for="field in variantGroupFields"
+          :key="field.key"
+          :label="field.label"
+          :section-key="field.key"
+          padded
+          separator
         >
-          <template #leading>
-            <UChip
-              :color="((groupColors[field.key].value === 'default' ? 'primary' : groupColors[field.key].value) as any)"
-            />
-          </template>
-        </ThemeStudioRow>
+          <div class="flex flex-col gap-1.5">
+            <ThemeStudioRow control="custom" label="Variant">
+              <UPopover v-model:open="variantGridOpen[field.key]" :content="{ side: 'bottom', align: 'start' }" class="flex-1">
+                <UButton
+                  size="sm"
+                  color="neutral"
+                  variant="subtle"
+                  block
+                  icon="i-lucide-layers"
+                  trailing-icon="i-lucide-chevron-down"
+                  :ui="{ label: 'flex-1 text-left' }"
+                  :aria-label="`Default variant for ${field.label.toLowerCase()}`"
+                >
+                  <!-- the tag belongs in the grid, where it names the stock option -->
+                  {{ field.items.find(item => item.value === (groupVariants[field.key].value === 'default' ? field.stock : groupVariants[field.key].value))?.label }}
+                </UButton>
+
+                <template #content>
+                  <!-- each cell renders IN the variant it picks -->
+                  <div class="w-64 p-2 grid grid-cols-2 gap-1">
+                    <UButton
+                      v-for="item in field.items"
+                      :key="item.value"
+                      size="sm"
+                      block
+                      color="neutral"
+                      :variant="RENDERABLE_VARIANTS.includes(item.value) ? (item.value as any) : 'subtle'"
+                      :active="groupVariants[field.key].value === item.value || (groupVariants[field.key].value === 'default' && item.value === field.stock)"
+                      active-color="primary"
+                      :class="[item.value === 'none' && 'opacity-60', 'min-w-0']"
+                      @click="groupVariants[field.key].value = (item.value === field.stock ? 'default' : item.value); variantGridOpen[field.key] = false"
+                    >
+                      <!-- opacity, not a color: text-dimmed would fight the variant's own text color -->
+                      <span class="truncate">{{ item.label }}<span v-if="item.value === field.stock" class="opacity-70 font-normal">&nbsp;(Default)</span></span>
+                    </UButton>
+                  </div>
+                </template>
+              </UPopover>
+            </ThemeStudioRow>
+
+            <ThemeStudioRow
+              v-if="field.hasColor"
+              v-model="groupColors[field.key].value"
+              control="select"
+              label="Color"
+              :items="defaultColorItems"
+              :aria-label="`Default color for ${field.label.toLowerCase()}`"
+            >
+              <template #leading>
+                <UChip
+                  :color="((groupColors[field.key].value === 'default' ? 'primary' : groupColors[field.key].value) as any)"
+                />
+              </template>
+            </ThemeStudioRow>
+          </div>
+        </ThemeStudioSection>
       </div>
-    </ThemeStudioSection>
-  </div>
+    </template>
+  </UPopover>
 </template>
