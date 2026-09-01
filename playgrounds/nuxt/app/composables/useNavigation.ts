@@ -72,6 +72,7 @@ const components = [
   'pricing-table',
   'progress',
   'progress-group',
+  'prose-code-tree',
   'radio-group',
   'scroll-area',
   'select-menu',
