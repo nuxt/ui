@@ -72,7 +72,7 @@ export interface NavigationMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'cu
   open?: boolean
   onSelect?: (e: Event) => void
   class?: any
-  ui?: Pick<NavigationMenu['slots'], 'item' | 'linkLeadingAvatarSize' | 'linkLeadingAvatar' | 'linkLeadingIcon' | 'linkLeadingChipSize' | 'linkLabel' | 'linkLabelExternalIcon' | 'linkTrailing' | 'linkTrailingBadgeSize' | 'linkTrailingBadge' | 'linkTrailingIcon' | 'label' | 'link' | 'content' | 'childList' | 'childLabel' | 'childItem' | 'childLink' | 'childLinkIcon' | 'childLinkWrapper' | 'childLinkLabel' | 'childLinkLabelExternalIcon' | 'childLinkDescription'>
+  ui?: Pick<NavigationMenu['slots'], 'item' | 'linkLeadingAvatarSize' | 'linkLeadingAvatar' | 'linkLeadingIcon' | 'linkLeadingChipSize' | 'linkLabel' | 'linkLabelExternalIcon' | 'linkTrailing' | 'linkTrailingBadgeSize' | 'linkTrailingBadge' | 'linkTrailingIcon' | 'label' | 'link' | 'content' | 'childList' | 'childLabel' | 'childItem' | 'childLink' | 'childLinkIcon' | 'childLinkLeadingChipSize' | 'childLinkWrapper' | 'childLinkLabel' | 'childLinkLabelExternalIcon' | 'childLinkDescription'>
   [key: string]: any
 }
 
@@ -471,7 +471,16 @@ function onLinkTrailingClick(e: Event, item: NavigationMenuItem) {
                 <ULink v-slot="{ active: childActive, ...childSlotProps }" v-bind="pickLinkProps(childItem)" custom>
                   <NavigationMenuLink as-child :active="childActive" @select="childItem.onSelect">
                     <ULinkBase v-bind="childSlotProps" data-slot="childLink" :class="ui.childLink({ class: [props.ui?.childLink, item.ui?.childLink, childItem.class], active: childActive })">
-                      <UIcon v-if="childItem.icon" :name="childItem.icon" data-slot="childLinkIcon" :class="ui.childLinkIcon({ class: [props.ui?.childLinkIcon, item.ui?.childLinkIcon], active: childActive })" />
+                      <UChip
+                        v-if="childItem.icon && childItem.chip"
+                        :size="((item.ui?.childLinkLeadingChipSize || props.ui?.childLinkLeadingChipSize || ui.childLinkLeadingChipSize()) as ChipProps['size'])"
+                        inset
+                        v-bind="typeof childItem.chip === 'object' ? childItem.chip : {}"
+                        data-slot="childLinkLeadingChip"
+                      >
+                        <UIcon :name="childItem.icon" data-slot="childLinkIcon" :class="ui.childLinkIcon({ class: [props.ui?.childLinkIcon, item.ui?.childLinkIcon], active: childActive })" />
+                      </UChip>
+                      <UIcon v-else-if="childItem.icon" :name="childItem.icon" data-slot="childLinkIcon" :class="ui.childLinkIcon({ class: [props.ui?.childLinkIcon, item.ui?.childLinkIcon], active: childActive })" />
 
                       <div data-slot="childLinkWrapper" :class="ui.childLinkWrapper({ class: [props.ui?.childLinkWrapper, item.ui?.childLinkWrapper] })">
                         <p data-slot="childLinkLabel" :class="ui.childLinkLabel({ class: [props.ui?.childLinkLabel, item.ui?.childLinkLabel], active: childActive })">
