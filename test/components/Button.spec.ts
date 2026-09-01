@@ -1,5 +1,5 @@
-import { ref } from 'vue'
-import { describe, it, expect, test } from 'vitest'
+import { onErrorCaptured, ref } from 'vue'
+import { describe, it, expect, test, vi } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { flushPromises } from '@vue/test-utils'
@@ -46,6 +46,34 @@ describe('Button', () => {
     ['with leading slot', { slots: { leading: () => 'Leading slot' } }],
     ['with trailing slot', { slots: { trailing: () => 'Trailing slot' } }]
   ])
+
+  test('error occurs in click handler can be caught by Vue errorCaptured hook', async () => {
+    const spyFn = vi.fn(() => false)
+    let reject: any | null = null
+    const wrapper = await mountSuspended({
+      components: { Button },
+      setup() {
+        function onClick() {
+          return new Promise<void>((_, rej) => {
+            reject = rej
+          })
+        };
+
+        onErrorCaptured(spyFn)
+
+        return { onClick }
+      },
+      template: `
+        <Button loading-auto @click="onClick"> Click </Button>
+      `
+    })
+
+    const button = wrapper.find('button')
+    button.trigger('click')
+    reject?.(new Error('Test error from click handler'))
+    await flushPromises()
+    expect(spyFn).toBeCalled()
+  })
 
   test('with loading-auto works', async () => {
     let resolve: any | null = null
