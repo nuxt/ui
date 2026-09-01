@@ -67,7 +67,7 @@ const editors = [
     <div>
       <ThemeStudioColorMenu :alias="alias" />
 
-      <ThemeStudioPaletteEditor v-model:open="paletteEditor" :alias="alias" />
+      <ThemeStudioColorPaletteEditor v-model:open="paletteEditor" :alias="alias" />
 
       <!-- padding, not a margin: it has to sit inside the animated box -->
       <UCollapsible v-model:open="shadeEditor" :ui="{ content: 'overflow-hidden' }">

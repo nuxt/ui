@@ -494,7 +494,7 @@ function resetEffects() {
         />
 
         <div>
-          <ThemeStudioPaletteCurveEditor
+          <ThemeStudioColorCurveEditor
             v-model="params[tab]"
             :label="tabs.find(({ value }) => value === tab)!.label"
             :y-min="windows[tab].min"
