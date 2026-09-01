@@ -1,8 +1,8 @@
 <script setup lang="ts">
 /** Rolls a random theme, the die tumbling through faces as it goes. */
-withDefaults(defineProps<{
-  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
-  variant?: 'ghost' | 'subtle' | 'outline'
+import type { ButtonProps } from '@nuxt/ui'
+
+withDefaults(defineProps<ButtonProps & {
   /** A full-width labelled row, for the mobile menu where the other controls stack. */
   vertical?: boolean
 }>(), {
