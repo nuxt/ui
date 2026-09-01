@@ -39,6 +39,29 @@ Learn how to use the `locale` prop to change the locale of your app. This also c
 :::
 ::
 
+### Stable IDs
+
+Reka UI primitives rely on Vue's [useId](https://vuejs.org/api/composition-api-helpers.html#useid) to generate the `id` attributes used for accessibility. A known upstream issue ([vuejs/core#12591](https://github.com/vuejs/core/issues/12591)) can make these ids differ between the server and the client in some Nuxt apps, causing hydration mismatches on components like Accordion or Tabs.
+
+You can use the `useId` prop to provide your own generator as a workaround:
+
+```vue [app.vue]
+<script setup lang="ts">
+let count = 0
+const generateId = () => `app-${++count}`
+</script>
+
+<template>
+  <UApp :use-id="generateId">
+    <NuxtPage />
+  </UApp>
+</template>
+```
+
+::warning
+A counter like this is only hydration safe when Reka UI primitives mount in the same order on the server and the client, which is not guaranteed when several lazy or data fetching components render them. Keep the default unless you actually face these mismatches.
+::
+
 ## API
 
 ### Props
