@@ -50,7 +50,7 @@ export default defineMcpTool({
       title: page.title,
       description: page.description,
       category: page.category,
-      documentation_url: `https://ui.nuxt.com${page.path}`,
+      documentation_url: `${SITE_URL}${page.path}`,
       metadata
     }
   }

@@ -73,6 +73,8 @@ items:
     url: https://www.thecompaniesapi.com/
   - name: Thuprai
     url: https://thuprai.com/
+  - name: TickServ
+    url: https://tickserv.com/
   - name: TresJS
     url: https://tresjs.org/
   - name: Triad Trainer

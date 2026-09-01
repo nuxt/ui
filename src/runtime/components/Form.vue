@@ -463,7 +463,7 @@ defineExpose(api)
     :id="formId"
     ref="formRef"
     :name="parentBus ? undefined : props.name"
-    method="post"
+    :method="parentBus ? undefined : 'post'"
     :class="ui({ class: [props.ui?.base, props.class] })"
     @submit.prevent="onSubmitWrapper"
   >

@@ -29,10 +29,10 @@ export default (options: Required<ModuleOptions>) => ({
         item: ''
       },
       card: {
-        item: [`border border-muted rounded-lg ${hover}bg-elevated/50`, options.theme.transitions && 'transition-colors']
+        item: [`border border-default rounded-lg ${hover}bg-elevated/50`, options.theme.transitions && 'transition-colors']
       },
       table: {
-        item: [`border border-muted ${hover}bg-elevated/50`, options.theme.transitions && 'transition-colors']
+        item: [`border border-default ${hover}bg-elevated/50`, options.theme.transitions && 'transition-colors']
       }
     },
     orientation: {
