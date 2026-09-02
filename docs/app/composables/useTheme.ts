@@ -5,7 +5,10 @@ import { FONT_WEIGHT_DEFAULTS, FONTS, RADIUSES, NEUTRAL_COLORS, PRIMARY_COLORS }
 import { themeIcons, ICON_PACKS } from '../utils/theme/icons'
 import { cssVariableDefaults } from '../utils/theme/tokens'
 import { SAFE_NAME, sanitizeCustomColors, sanitizeCSSVariables } from '../utils/theme/sanitize'
-import { generateCSS, generateConfig, mergeUi, isDefaultStyle, isDefaultTheme, styleTokens, DEFAULT_COLORS, THEME_DEFAULTS, SEMANTIC_ALIASES, LIBRARY_TOKEN_DEFAULTS } from '../utils/theme/engine'
+// Tables only, never the engine barrel: this composable rides the entry
+// chunk on every page, and the barrel would drag presets, the palette math
+// and the serializer with it. The serializer loads on demand below.
+import { mergeUi, isDefaultStyle, isDefaultTheme, styleTokens, DEFAULT_COLORS, THEME_DEFAULTS, SEMANTIC_ALIASES, LIBRARY_TOKEN_DEFAULTS } from '../utils/theme/engine/types'
 import type { ThemeDoc, ThemePalette, StyleOptions, StoredPaletteParams } from '../utils/theme/engine'
 import colors from 'tailwindcss/colors'
 
@@ -29,9 +32,12 @@ export function useTheme() {
 
   // The neutral may be a custom palette with no tailwindcss/colors entry,
   // a throw here would abort the whole unhead flush.
+  const route = useRoute()
   const color = computed(() => {
     const neutral = appConfig.ui.colors.neutral
-    // match the page background (docs light baseline is neutral-50, not white)
+    // match the page background: only /theme paints the recessed neutral-50
+    // canvas, every other page's body is plain white in light mode
+    if (colorMode.value !== 'dark' && route.path !== '/theme') return 'white'
     const shade = colorMode.value === 'dark' ? 900 : 50
     return (colors as any)[neutral]?.[shade] || customColorsData.value[neutral]?.[shade] || (colors as any).slate[shade]
   })
@@ -139,7 +145,10 @@ export function useTheme() {
   // patches it. Reporting the stock pack until mounted keeps that first render
   // honest; the flip afterwards is an ordinary update, which does repaint.
   // Writes are unaffected, and `_iconSet` stays ungated for dirty checks.
-  const iconMounted = ref(false)
+  // Shared, not per-call: once the app has mounted, components that set up
+  // later (keyed remounts, lazy views building icon lists as plain consts)
+  // must read the real pack, or half their glyphs freeze on Lucide.
+  const iconMounted = useState('nuxt-ui-icon-mounted', () => false)
   onMounted(() => (iconMounted.value = true))
 
   const icon = computed({
@@ -311,12 +320,15 @@ export function useTheme() {
     return doc
   }
 
-  // pure generation, callers track 'Theme Exported' on the actual copy
-  function exportCSS(): string {
+  // Pure generation, callers track 'Theme Exported' on the actual copy.
+  // Async: the serializer (and its json5) only load when an export happens.
+  async function exportCSS(): Promise<string> {
+    const { generateCSS } = await import('../utils/theme/engine/serialize')
     return generateCSS(currentDoc())
   }
 
-  function exportConfig(): string {
+  async function exportConfig(): Promise<string> {
+    const { generateConfig } = await import('../utils/theme/engine/serialize')
     return generateConfig(currentDoc(), framework.value)
   }
 
@@ -382,10 +394,11 @@ export function useTheme() {
     if (settings.primary && SAFE_NAME.test(settings.primary)) primary.value = settings.primary
     // any known palette is a valid neutral, custom ones included
     if (settings.neutral && SAFE_NAME.test(settings.neutral) && (NEUTRAL_COLORS.includes(settings.neutral) || PRIMARY_COLORS.includes(settings.neutral) || (customColorsData.value[settings.neutral] || safeCustomColors[settings.neutral]))) neutral.value = settings.neutral
-    // clamped like the FOUC script clamps it, or a reload would repaint a different value
-    if (settings.radius !== undefined && Number.isFinite(Number(settings.radius))) radius.value = Math.min(4, Math.max(0, Number(settings.radius)))
+    // Finite on the RAW value (Number(null) is 0), clamped like the FOUC
+    // script clamps it, or a reload would repaint a different value.
+    if (Number.isFinite(settings.radius)) radius.value = Math.min(4, Math.max(0, settings.radius))
     // clamped: these scale the whole page
-    if (settings.fontSize !== undefined && Number.isFinite(Number(settings.fontSize))) fontSize.value = Math.min(20, Math.max(12, Number(settings.fontSize)))
+    if (Number.isFinite(settings.fontSize)) fontSize.value = Math.min(20, Math.max(12, settings.fontSize))
     // All three stacks and the body treatment share one channel, so they are
     // applied in one pass: setFontPrefs takes the WHOLE object, and any field
     // the payload leaves out has to fall back to what is already set. A
@@ -394,7 +407,8 @@ export function useTheme() {
     if (settings.fontSans !== undefined || settings.fontSerif !== undefined || settings.fontMono !== undefined
       || settings.fontWeights !== undefined || settings.fontBody !== undefined) {
       const current = fontPrefs.value
-      const rawWeights = settings.fontWeights && typeof settings.fontWeights === 'object' ? settings.fontWeights : current.weights || {}
+      // merged over the current map: a payload naming only `bold` must not clear the rest
+      const rawWeights = { ...current.weights, ...(settings.fontWeights && typeof settings.fontWeights === 'object' ? settings.fontWeights : {}) }
       const weights: NonNullable<FontPrefs['weights']> = {}
       for (const step of ['normal', 'medium', 'semibold', 'bold'] as const) {
         const weight = Number(rawWeights[step])

@@ -97,10 +97,9 @@ const content = computed(() => [
     />
 
     <template #content>
-      <!-- Sections own their padding so the separators run edge to edge, and the
-       panel drops the leading one since nothing sits above it. -->
-      <div class="flex flex-col">
-        <ThemeStudioSection label="Fonts" section-key="font" padded>
+      <!-- the panel owns the layout: padding per section, rules between them -->
+      <div class="divide-y divide-default [&>*]:p-2">
+        <ThemeStudioSection label="Fonts" section-key="font">
           <ThemeStudioRow
             v-for="stack in stacks"
             :key="stack.label"
@@ -117,7 +116,7 @@ const content = computed(() => [
           </ThemeStudioRow>
         </ThemeStudioSection>
 
-        <ThemeStudioSection label="Treatment" section-key="type" padded separator>
+        <ThemeStudioSection label="Treatment" section-key="type">
           <!-- font-size scales every rem metric, so it belongs with the type
            decisions rather than beside radius -->
           <ThemeStudioRow
@@ -156,7 +155,7 @@ const content = computed(() => [
           />
         </ThemeStudioSection>
 
-        <ThemeStudioSection label="Weights" section-key="weights" padded separator>
+        <ThemeStudioSection label="Weights" section-key="weights">
           <ThemeStudioRow
             v-for="weight in weights"
             :key="weight.label"

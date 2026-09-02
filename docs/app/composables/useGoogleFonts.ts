@@ -1,3 +1,5 @@
+import { useFilter } from '@nuxt/ui/composables'
+
 export interface GoogleFont {
   name: string
   category: string
@@ -24,21 +26,16 @@ export function useGoogleFonts() {
     }
   }
 
-  /** Popularity-ordered matches, prefix matches ahead of substring hits. */
+  const { filter } = useFilter()
+
+  /**
+   * Relevance-tiered (exact > prefix > substring, locale-aware) and
+   * popularity-ordered within each tier, `filter`'s sort being stable.
+   */
   function search(query: string, limit = 30): GoogleFont[] {
-    const q = query.trim().toLowerCase()
+    const q = query.trim()
     if (!q) return []
-    const starts: GoogleFont[] = []
-    const contains: GoogleFont[] = []
-    for (const font of catalog.value) {
-      const name = font.name.toLowerCase()
-      if (name.startsWith(q)) {
-        if (starts.push(font) >= limit) break
-      } else if (contains.length < limit && name.includes(q)) {
-        contains.push(font)
-      }
-    }
-    return [...starts, ...contains].slice(0, limit)
+    return filter(catalog.value, q, ['name']).slice(0, limit)
   }
 
   return { catalog, status, load, search }

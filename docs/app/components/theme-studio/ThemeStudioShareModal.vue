@@ -44,9 +44,9 @@ function onCopyCapture(key: 'css' | 'config', event: Event) {
   }
 }
 
-watch(open, (isOpen) => {
-  css.value = isOpen ? exportCSS() : ''
-  config.value = isOpen ? exportConfig() : ''
+watch(open, async (isOpen) => {
+  css.value = isOpen ? await exportCSS() : ''
+  config.value = isOpen ? await exportConfig() : ''
 })
 </script>
 

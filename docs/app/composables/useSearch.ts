@@ -102,7 +102,7 @@ export function useSearch() {
   }, {
     label: 'GitHub',
     description: 'Check out the repository on GitHub.',
-    icon: extra.github,
+    icon: 'i-simple-icons-github',
     to: 'https://github.com/nuxt/ui/releases',
     target: '_blank'
   }])

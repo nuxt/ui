@@ -113,15 +113,6 @@ export function clampToGamut(color: Oklch): Oklch {
   return { ...color, c: low }
 }
 
-export function oklchToHex(color: Oklch): string {
-  const clamped = clampToGamut(color)
-  return rgbToHex(oklchToLinearRgb(clamped).map(linearToSrgb) as [number, number, number])
-}
-
-export function hexToOklch(hex: string): Oklch {
-  return rgbToOklch(hexToRgb(hex))
-}
-
 /**
  * Serialize to tailwind v4's `oklch(62.3% 0.214 259.815)` shape. No gamut
  * clamp, so wider-than-sRGB values (tailwind's own ramps have them) survive
@@ -152,7 +143,10 @@ export function parseColor(value: string): Oklch | undefined {
   const oklch = input.match(/^oklch\(\s*([\d.]+)(%?)\s+([\d.]+|none)\s+([\d.]+|none)/i)
   if (oklch) {
     const channel = (value: string) => value.toLowerCase() === 'none' ? 0 : Number(value)
-    return { l: Number(oklch[1]) / (oklch[2] === '%' ? 100 : 1), c: channel(oklch[3]!), h: channel(oklch[4]!) }
+    const color = { l: Number(oklch[1]) / (oklch[2] === '%' ? 100 : 1), c: channel(oklch[3]!), h: channel(oklch[4]!) }
+    // `[\d.]+` matches strings like `1.2.3`; a NaN channel poisons every fit
+    if (!Number.isFinite(color.l + color.c + color.h)) return undefined
+    return color
   }
 
   const rgb = input.match(/^rgba?\(\s*(\d+)[\s,]+(\d+)[\s,]+(\d+)/i)
@@ -398,27 +392,34 @@ export function applyPaletteEffects(base: PaletteCurveParams, effects?: PaletteE
 
   // Contrast expands about the curve's own midpoint, then the shift slides
   // the whole ramp; every point clamps to the physical [0, 1] window.
+  // Skipped entirely when this channel's effects are neutral: the map's
+  // clamp would otherwise clip a fitted curve's legal overshoots (handles
+  // may sit outside [0, 1]) on a hue- or saturation-only edit.
   const lightness = target.lightness
-  const mid = (lightness.y0 + lightness.y1) / 2
   const span = 1 + effective('contrast') / 100
   const shift = effective('lightness') / 100
-  const mapLightness = (value: number) => Math.min(1, Math.max(0, mid + (value - mid) * span + shift))
-  lightness.y0 = mapLightness(lightness.y0)
-  lightness.y1 = mapLightness(lightness.y1)
-  lightness.p1y = mapLightness(lightness.p1y)
-  lightness.p2y = mapLightness(lightness.p2y)
+  if (span !== 1 || shift !== 0) {
+    const mid = (lightness.y0 + lightness.y1) / 2
+    const mapLightness = (value: number) => Math.min(1, Math.max(0, mid + (value - mid) * span + shift))
+    lightness.y0 = mapLightness(lightness.y0)
+    lightness.y1 = mapLightness(lightness.y1)
+    lightness.p1y = mapLightness(lightness.p1y)
+    lightness.p2y = mapLightness(lightness.p2y)
+  }
 
   // Multiplicative, plus a small additive floor when boosting so near-gray
   // ramps (where a multiply is a no-op) respond too.
   const saturation = effective('saturation') / 100
   const factor = 1 + saturation
   const floor = Math.max(0, saturation) * 0.02
-  const mapChroma = (value: number) => Math.min(0.4, Math.max(0, value * factor + floor))
-  const chroma = target.chroma
-  chroma.y0 = mapChroma(chroma.y0)
-  chroma.y1 = mapChroma(chroma.y1)
-  chroma.p1y = mapChroma(chroma.p1y)
-  chroma.p2y = mapChroma(chroma.p2y)
+  if (factor !== 1 || floor !== 0) {
+    const mapChroma = (value: number) => Math.min(0.4, Math.max(0, value * factor + floor))
+    const chroma = target.chroma
+    chroma.y0 = mapChroma(chroma.y0)
+    chroma.y1 = mapChroma(chroma.y1)
+    chroma.p1y = mapChroma(chroma.p1y)
+    chroma.p2y = mapChroma(chroma.p2y)
+  }
 
   // A uniform shift keeps the curve continuous; re-center by full turns so
   // the mean stays in [0, 360).
@@ -538,8 +539,15 @@ export function fitCurve(points: Array<[number, number]>): ChannelCurve {
   if (!points.length) {
     return { y0: 0, p1x: 0.33, p1y: 0, p2x: 0.66, p2y: 0, y1: 0 }
   }
-  const y0 = points[0]![1]
-  const y1 = points[points.length - 1]![1]
+  // Anchored to x=0 and x=1 by extrapolating from the outermost pair when
+  // the end stops are missing: pinning an interior point's value to the
+  // endpoint slides the whole fit by a stop.
+  const first = points[0]!
+  const last = points[points.length - 1]!
+  const extrapolate = (a: [number, number], b: [number, number], x: number) =>
+    b[0] === a[0] ? a[1] : a[1] + (b[1] - a[1]) * (x - a[0]) / (b[0] - a[0])
+  const y0 = first[0] > 0 && points.length > 1 ? extrapolate(first, points[1]!, 0) : first[1]
+  const y1 = last[0] < 1 && points.length > 1 ? extrapolate(points[points.length - 2]!, last, 1) : last[1]
   const span = Math.max(Math.abs(y1 - y0), 1e-6)
 
   const lerp = (x: number) => y0 + (y1 - y0) * x

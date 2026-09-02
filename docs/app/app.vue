@@ -1,6 +1,12 @@
 <script setup lang="ts">
 const route = useRoute()
 
+const { open: chatOpen } = useChat()
+const chatSeen = ref(false)
+watch(chatOpen, (value) => {
+  if (value) chatSeen.value = true
+}, { immediate: true })
+
 const appConfig = useAppConfig()
 const { style, link, color } = useTheme()
 
@@ -77,7 +83,10 @@ const showLayout = computed(() => !route.path.startsWith('/examples') && route.p
 
       <template v-if="!route.path.startsWith('/examples')">
         <ClientOnly>
-          <Chat />
+          <!-- mounted on first open (state persists, so a kept-open chat
+               remounts on load): the chat pulls the studio engine with it,
+               which every plain docs visit can skip downloading -->
+          <LazyChat v-if="chatSeen" />
 
           <Search :navigation="navigationByFramework" />
         </ClientOnly>

@@ -11,6 +11,7 @@ import {
   styleTokens,
   mergeUi
 } from './types'
+import json5 from 'json5'
 import { themeIcons } from '../icons'
 
 /* ======================================================== emit (export) == */
@@ -21,6 +22,14 @@ export function generateCSS(doc: ThemeDoc): string {
     '@import "tailwindcss";',
     '@import "@nuxt/ui";'
   ]
+
+  // The faces the doc names have to load from somewhere: the studio pulls
+  // them at runtime (loadFontPreviews), an export has only this file.
+  const families = [...new Set([doc.font?.sans, doc.font?.serif, doc.font?.mono]
+    .filter((name): name is string => !!name && name !== THEME_DEFAULTS.font))]
+  for (const family of families) {
+    lines.push(`@import url("https://fonts.googleapis.com/css2?family=${encodeURIComponent(family)}:wght@300;400;500;600;700;800&display=swap");`)
+  }
 
   const themeLines: string[] = []
   if (doc.font?.sans && doc.font.sans !== THEME_DEFAULTS.font) {
@@ -126,15 +135,9 @@ export function generateCSS(doc: ThemeDoc): string {
   return lines.join('\n')
 }
 
-/**
- * Serialize to JS object-literal source: unquote only identifier-safe keys,
- * prefer single-quoted strings, keep double quotes around apostrophes.
- */
+/** Serialize to JS object-literal source, like the docs' code panes do. */
 function toObjectSource(value: Record<string, any>): string {
-  return JSON.stringify(value, null, 2)
-    .replace(/"([a-z_$][\w$]*)":/gi, '$1:')
-    .replace(/"((?:[^"\\]|\\.)*)"/g, (match, body: string) =>
-      body.includes('\'') ? match : `'${body}'`)
+  return json5.stringify(value, { space: 2, quote: '\'' }).replace(/,([ \t\n]+[}\]])/g, '$1')
 }
 
 /** The `app.config.ts` / `vite.config.ts` side of the export. */

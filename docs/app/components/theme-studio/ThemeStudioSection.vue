@@ -16,10 +16,6 @@ const props = defineProps<{
   /** Reset a section the doc has no slice for, the caller says when it's dirty. */
   resettable?: boolean
   resetDirty?: boolean
-  /** Top-level in a panel: the section carries the panel's padding. */
-  padded?: boolean
-  /** A rule against the sibling above; the first section of a run omits it. */
-  separator?: boolean
 }>()
 
 const emit = defineEmits<{ reset: [] }>()
@@ -50,19 +46,11 @@ const hasHeader = computed(() => !!(props.label || props.helpTo || showReset.val
 </script>
 
 <template>
-  <div
-    :class="[
-      /* Space above a rule is the parent's gap, below it this padding. */
-      padded ? 'p-4' : (separator ? 'pt-2' : ''),
-      separator && 'border-t border-default'
-    ]"
-  >
-    <div v-if="hasHeader" class="flex items-center gap-1">
-      <!-- a heading, never a trigger; text-sm/7 gives it the 28px row
-           height the buttons beside it have -->
-      <span class="flex-1 min-w-0 text-sm/7 font-medium text-highlighted truncate">{{ label }}</span>
+  <div class="flex flex-col gap-2">
+    <div v-if="hasHeader" class="flex items-center gap-0.5">
+      <span class="flex-1 min-w-0 text-xs/5 font-semibold text-highlighted truncate">{{ label }}</span>
 
-      <UTooltip v-if="helpTo" text="Docs">
+      <UTooltip v-if="helpTo" text="Docs" ignore-non-keyboard-focus>
         <UButton
           :to="helpTo"
           size="sm"
@@ -70,10 +58,11 @@ const hasHeader = computed(() => !!(props.label || props.helpTo || showReset.val
           variant="ghost"
           icon="i-lucide-help-circle"
           aria-label="Documentation for this setting"
+          class="-my-1"
         />
       </UTooltip>
 
-      <UTooltip v-if="showReset" :text="dirty ? 'Reset to preset' : 'Matches the preset'">
+      <UTooltip v-if="showReset" :text="dirty ? 'Reset to preset' : 'Matches the preset'" ignore-non-keyboard-focus>
         <UButton
           size="sm"
           color="neutral"
@@ -83,17 +72,14 @@ const hasHeader = computed(() => !!(props.label || props.helpTo || showReset.val
           :icon="studioIcons.reset"
           :disabled="!dirty"
           :aria-label="label ? `Reset ${label} to preset` : 'Reset to preset'"
+          class="-my-1"
           @click="reset"
         />
       </UTooltip>
 
-      <div v-if="!!slots.actions" class="flex items-center gap-1">
-        <slot name="actions" />
-      </div>
+      <slot name="actions" />
     </div>
 
-    <div class="pt-2 flex flex-col gap-2">
-      <slot />
-    </div>
+    <slot />
   </div>
 </template>

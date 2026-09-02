@@ -1,6 +1,6 @@
 import colors from 'tailwindcss/colors'
-import { resolveAlias, resolveShade } from './engine'
-import type { ThemeDoc, Shade } from './engine'
+import { resolveAlias, resolveShade } from './engine/types'
+import type { ThemeDoc, Shade } from './engine/types'
 
 /* ------------------------------------------------------------- choices -- */
 

@@ -119,7 +119,7 @@ const open = ref(false)
 const dirty = groupDirtyFlags.defaults
 
 const content = computed(() => [
-  props.vertical ? 'w-(--reka-popper-anchor-width)' : 'w-80 max-w-[calc(100vw-2rem)]',
+  props.vertical ? 'w-(--reka-popper-anchor-width)' : 'w-auto max-w-[calc(100vw-2rem)]',
   'max-h-[70vh] overflow-y-auto'
 ])
 </script>
@@ -142,10 +142,9 @@ const content = computed(() => [
     />
 
     <template #content>
-      <!-- Sections own their padding so the separators run edge to edge, and the
-       panel drops the leading one since nothing sits above it. -->
-      <div class="flex flex-col">
-        <ThemeStudioSection label="Global" section-key="size" padded>
+      <!-- the panel owns the layout: padding per section, rules between them -->
+      <div class="divide-y divide-default [&>*]:p-2">
+        <ThemeStudioSection label="Global" section-key="size">
           <ThemeStudioRow
             v-model="defaultSize"
             control="select"
@@ -161,12 +160,15 @@ const content = computed(() => [
           :key="field.key"
           :label="field.label"
           :section-key="field.key"
-          padded
-          separator
         >
-          <div class="flex flex-col gap-1.5">
+          <div class="flex flex-col gap-2">
             <ThemeStudioRow control="custom" label="Variant">
-              <UPopover v-model:open="variantGridOpen[field.key]" :content="{ side: 'bottom', align: 'start' }" class="flex-1">
+              <UPopover
+                v-model:open="variantGridOpen[field.key]"
+                :content="{ side: 'bottom', align: 'center' }"
+                :ui="{ content: 'p-1 grid grid-cols-2 gap-1 w-(--reka-popover-trigger-width)' }"
+                class="flex-1"
+              >
                 <UButton
                   size="sm"
                   color="neutral"
@@ -174,32 +176,33 @@ const content = computed(() => [
                   block
                   icon="i-lucide-layers"
                   trailing-icon="i-lucide-chevron-down"
-                  :ui="{ label: 'flex-1 text-left' }"
                   :aria-label="`Default variant for ${field.label.toLowerCase()}`"
+                  class="group"
+                  :ui="{
+                    label: 'flex-1 text-left',
+                    trailingIcon: 'transition-transform duration-200 group-data-[state=open]:rotate-180'
+                  }"
                 >
                   <!-- the tag belongs in the grid, where it names the stock option -->
                   {{ field.items.find(item => item.value === (groupVariants[field.key].value === 'default' ? field.stock : groupVariants[field.key].value))?.label }}
                 </UButton>
 
                 <template #content>
-                  <!-- each cell renders IN the variant it picks -->
-                  <div class="w-64 p-2 grid grid-cols-2 gap-1">
-                    <UButton
-                      v-for="item in field.items"
-                      :key="item.value"
-                      size="sm"
-                      block
-                      color="neutral"
-                      :variant="RENDERABLE_VARIANTS.includes(item.value) ? (item.value as any) : 'subtle'"
-                      :active="groupVariants[field.key].value === item.value || (groupVariants[field.key].value === 'default' && item.value === field.stock)"
-                      active-color="primary"
-                      :class="[item.value === 'none' && 'opacity-60', 'min-w-0']"
-                      @click="groupVariants[field.key].value = (item.value === field.stock ? 'default' : item.value); variantGridOpen[field.key] = false"
-                    >
-                      <!-- opacity, not a color: text-dimmed would fight the variant's own text color -->
-                      <span class="truncate">{{ item.label }}<span v-if="item.value === field.stock" class="opacity-70 font-normal">&nbsp;(Default)</span></span>
-                    </UButton>
-                  </div>
+                  <UButton
+                    v-for="item in field.items"
+                    :key="item.value"
+                    size="sm"
+                    block
+                    color="neutral"
+                    :variant="RENDERABLE_VARIANTS.includes(item.value) ? (item.value as any) : 'subtle'"
+                    :active="groupVariants[field.key].value === item.value || (groupVariants[field.key].value === 'default' && item.value === field.stock)"
+                    active-color="primary"
+                    :class="[item.value === 'none' && 'opacity-60', 'min-w-0']"
+                    @click="groupVariants[field.key].value = (item.value === field.stock ? 'default' : item.value); variantGridOpen[field.key] = false"
+                  >
+                    <!-- opacity, not a color: text-dimmed would fight the variant's own text color -->
+                    <span class="truncate">{{ item.label }}<span v-if="item.value === field.stock" class="opacity-70 font-normal">&nbsp;(Default)</span></span>
+                  </UButton>
                 </template>
               </UPopover>
             </ThemeStudioRow>
@@ -215,6 +218,10 @@ const content = computed(() => [
               <template #leading>
                 <UChip
                   :color="((groupColors[field.key].value === 'default' ? 'primary' : groupColors[field.key].value) as any)"
+                  inset
+                  standalone
+                  class="mx-1"
+                  :ui="{ base: 'ring-0' }"
                 />
               </template>
             </ThemeStudioRow>

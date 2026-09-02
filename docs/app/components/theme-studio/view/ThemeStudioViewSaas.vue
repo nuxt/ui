@@ -196,11 +196,16 @@ function generateStars(count: number): Star[] {
   }))
 }
 
-const starLayers = [
-  { stars: generateStars(80), duration: 100, opacity: 1 },
-  { stars: generateStars(60), duration: 150, opacity: 0.75 },
-  { stars: generateStars(60), duration: 200, opacity: 0.5 }
-]
+// Seeded on mount: Math.random() at setup scope would render one sky on the
+// server and another on the client, mismatching every star's inline style.
+const starLayers = ref<{ stars: Star[], duration: number, opacity: number }[]>([])
+onMounted(() => {
+  starLayers.value = [
+    { stars: generateStars(80), duration: 100, opacity: 1 },
+    { stars: generateStars(60), duration: 150, opacity: 0.75 },
+    { stars: generateStars(60), duration: 200, opacity: 0.5 }
+  ]
+})
 </script>
 
 <template>

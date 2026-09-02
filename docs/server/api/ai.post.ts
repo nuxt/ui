@@ -79,12 +79,12 @@ const applyTheme = tool({
       info: { type: 'string', description: 'Info color name' },
       warning: { type: 'string', description: 'Warning color name' },
       error: { type: 'string', description: 'Error color name' },
-      radius: { type: 'number', description: 'Border radius in rem: 0, 0.125, 0.25, 0.375, 0.5' },
+      radius: { type: 'number', description: 'Border radius in rem: 0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75' },
       fontSans: { type: 'string', description: 'Body font family (tailwind\'s --font-sans), the one every element inherits. Any Google Font works, and it does not have to be a sans (e.g. Public Sans, DM Sans, Geist, Inter, Poppins, Outfit, Playfair Display).' },
       fontSerif: { type: 'string', description: 'Heading font family (tailwind\'s --font-serif; h1–h6 follow it). Any Google Font. Omit to keep headings on the body font.' },
       fontMono: { type: 'string', description: 'Code font family (tailwind\'s --font-mono; code, kbd, pre and samp follow it). Any Google Font.' },
       blackAsPrimary: { type: 'boolean', description: 'Use solid black/white as primary color for a monochrome look' },
-      icons: { type: 'string', description: 'Icon set for live preview: lucide (default), phosphor, or tabler. For exported code, any Iconify icon set can be suggested.' },
+      icons: { type: 'string', description: 'Icon set for live preview: lucide (default), bootstrap, heroicons, iconoir, material, phosphor, pixelarticons, remix or tabler. For exported code, any Iconify icon set can be suggested.' },
       customColors: {
         type: 'object',
         description: 'Custom color palettes with shades 50-950 as oklch(L% C H) values (e.g. oklch(62.3% 0.214 259.815)); hex also accepted',
@@ -155,7 +155,7 @@ const getThemeGuide = tool({
   execute: async () => ({
     guide: `When users ask to change the theme, customize colors, or modify the appearance, use the \`applyTheme\` tool to apply changes live on this docs site. Only include properties that changed.
 
-When users ask for a complete theme, to change "all colors", or describe a broad aesthetic (e.g. "sakura-inspired theme"), you MUST set ALL of: primary, neutral, secondary, success, info, warning, error, radius, and fontSans. You can change the icon set (lucide, phosphor, or tabler) if it really enhances the theme, but prefer keeping lucide as the default — it works well with most themes. You can optionally include component-level \`ui\` overrides for a more polished result — if you do, look up the component theme first with \`getComponentTheme\` and prefer \`defaultVariants\` (e.g. button size or variant) over slot class overrides. Create a cohesive design system, not just random colors:
+When users ask for a complete theme, to change "all colors", or describe a broad aesthetic (e.g. "sakura-inspired theme"), you MUST set ALL of: primary, neutral, secondary, success, info, warning, error, radius, and fontSans. You can change the icon set (lucide, bootstrap, heroicons, iconoir, material, phosphor, pixelarticons, remix or tabler) if it really enhances the theme, but prefer keeping lucide as the default — it works well with most themes. You can optionally include component-level \`ui\` overrides for a more polished result — if you do, look up the component theme first with \`getComponentTheme\` and prefer \`defaultVariants\` (e.g. button size or variant) over slot class overrides. Create a cohesive design system, not just random colors:
 - Pick a **primary** that embodies the theme's identity. If no standard Tailwind color fits, use \`customColors\` to define a bespoke palette with all shades 50-950 as \`oklch(L% C H)\` values, tailwind v4's native format, e.g. \`oklch(62.3% 0.214 259.815)\`. This is encouraged for creative/unique themes.
 - Pick a **secondary** that complements the primary (analogous or contrasting on the color wheel). Can also be a custom palette.
 - Pick **success/info/warning/error** that feel harmonious with the palette while staying semantically meaningful (success = green-ish, error = red-ish, warning = amber/yellow-ish, info = blue/cyan-ish). You can shift hues — e.g. \`lime\` for success in a nature theme, \`rose\` for error in a warm theme — but keep them recognizable.
@@ -278,7 +278,7 @@ For Nuxt, wrap in \`defineAppConfig({ ui: { ... } })\`. For Vue, pass as \`ui({ 
   - Rounded (friendly/playful): Nunito, Quicksand, Varela Round
   - Monospace (techy/dev): JetBrains Mono, Fira Code, IBM Plex Mono, Geist Mono
   ALWAYS set \`fontSans\` when creating a complete theme — don't leave the default unless it genuinely fits. Pairing a display \`fontSerif\` with a plain body is the highest-leverage type choice available.
-- Icons: lucide (default), phosphor, or tabler for live preview. Any Iconify icon set works in the exported config. When suggesting a non-default icon set, include the FULL \`ui.icons\` mapping in the exported config and tell the user to install \`@iconify-json/{collection}\` (e.g. \`@iconify-json/ph\` for Phosphor). Required keys: ${Object.keys(themeIcons.phosphor).join(', ')}. Values use \`i-<set>-<name>\` format.
+- Icons: lucide (default), bootstrap, heroicons, iconoir, material, phosphor, pixelarticons, remix or tabler for live preview. Any Iconify icon set works in the exported config. When suggesting a non-default icon set, include the FULL \`ui.icons\` mapping in the exported config and tell the user to install \`@iconify-json/{collection}\` (e.g. \`@iconify-json/ph\` for Phosphor). Required keys: ${Object.keys(themeIcons.phosphor).join(', ')}. Values use \`i-<set>-<name>\` format.
 
 **Component Theme Lookup:**
 

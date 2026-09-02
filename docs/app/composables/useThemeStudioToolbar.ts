@@ -8,8 +8,8 @@ import { paletteLabel, rampCssName } from '../utils/theme/studio'
  * would never lift.
  */
 export function useThemeStudioToolbar() {
-  const { resetTheme, primary, neutral, blackAsPrimary } = useTheme()
-  const { groupDirty, sectionDirty, presets, activePreset, applyPreset, primaryChip, neutralChip, isCustomPalette, style } = useThemeStudio()
+  const { resetTheme, primary, neutral, blackAsPrimary, currentDoc } = useTheme()
+  const { groupDirty, sectionDirty, presets, activePreset, applyPreset, primaryChip, neutralChip, isCustomPalette, style, baselineDoc } = useThemeStudio()
 
   const mounted = useMounted()
 
@@ -72,9 +72,15 @@ export function useThemeStudioToolbar() {
     radius: afterMount(sectionDirty('radius'))
   }
 
+  // No SectionKey covers per-component overrides (the AI chat writes them),
+  // but they are edits all the same: without this the reset button stays
+  // disabled on a visibly re-themed page.
+  const componentsDirty = computed(() => mounted.value
+    && JSON.stringify(currentDoc().components ?? null) !== JSON.stringify(baselineDoc.value.components ?? null))
+
   // Two-stage reset: edits reset back to the preset, a second press clears
   // the preset back to stock.
-  const anyDirty = computed(() => mounted.value && Object.values(groupDirtyFlags).some(flag => flag.value))
+  const anyDirty = computed(() => componentsDirty.value || (mounted.value && Object.values(groupDirtyFlags).some(flag => flag.value)))
   const baselinePreset = computed(() => (mounted.value ? presets.find(preset => preset.id === activePreset.value) : undefined))
   const resetsToPreset = computed(() => Boolean(baselinePreset.value) && anyDirty.value)
   const canReset = computed(() => anyDirty.value || Boolean(baselinePreset.value))

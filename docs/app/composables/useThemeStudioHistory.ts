@@ -143,6 +143,16 @@ export function useThemeStudioHistory(options: { record?: boolean } = {}) {
     // the snapshot spans the doc AND the editor's curve/pin params
     watch(() => (mounted.value ? snapshot() : undefined), (snap) => {
       if (!snap) return
+      // The first flush after an undo/redo is the restore itself: realign
+      // now, without the debounce, so an edit made inside the window gets
+      // recorded as its own step instead of being swallowed with it.
+      if (pendingRestore.value) {
+        clearTimeout(timeout)
+        timeout = undefined
+        pending = undefined
+        capture(snap)
+        return
+      }
       clearTimeout(timeout)
       pending = snap
       timeout = setTimeout(() => {

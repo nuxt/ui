@@ -253,7 +253,18 @@ defineShortcuts({
     :ui="{ footer: 'p-0', actions: 'gap-0.5' }"
   >
     <template #actions>
-      <ThemeStudioResetButton v-if="hasThemeChanges" />
+      <!-- a plain full reset, not the studio's two-stage baseline reset: the
+           chat's changes (component overrides included) may not map to any
+           section, and "back to stock" is what this button always meant -->
+      <UTooltip v-if="hasThemeChanges" text="Reset theme">
+        <UButton
+          :icon="studioIcons.reset"
+          color="neutral"
+          variant="ghost"
+          aria-label="Reset theme"
+          @click="resetTheme()"
+        />
+      </UTooltip>
 
       <UTooltip v-if="canClear" text="Clear messages">
         <UButton

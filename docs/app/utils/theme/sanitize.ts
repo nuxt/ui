@@ -7,11 +7,12 @@
 export const SAFE_NAME = /^[\w -]{1,50}$/
 const SAFE_HEX = /^#[0-9a-f]{3,8}$/i
 // the engine's canonical shade format: `oklch(62.3% 0.214 259.815)`
-const SAFE_OKLCH = /^oklch\(\d{1,3}(?:\.\d+)?% \d(?:\.\d+)? \d{1,3}(?:\.\d+)?\)$/i
+// tailwind >=4.3.3 emits `none` for achromatic chroma/hue (the whole neutral ramp)
+const SAFE_OKLCH = /^oklch\(\d{1,3}(?:\.\d+)?% (?:\d(?:\.\d+)?|none) (?:\d{1,3}(?:\.\d+)?|none)\)$/i
 const SAFE_CSS_VAR_KEY = /^--[\w-]+$/
 // var() refs, hex, keywords, px/% lengths, and literal oklch()/rgb() colors
 // (an imported token override is as likely to be a literal as a ramp ref)
-const SAFE_CSS_VAR_VALUE = /^(?:var\(--[\w-]+\)|#[0-9a-f]{3,8}|[a-z]+|-?\d{1,3}(?:\.\d+)?(?:px|%)|oklch\([\d.% -]{1,40}\)|rgba?\([\d.%, /]{1,40}\))$/i
+const SAFE_CSS_VAR_VALUE = /^(?:var\(--[\w-]+\)|#[0-9a-f]{3,8}|[a-z]+|-?\d{1,3}(?:\.\d+)?(?:px|%)|oklch\([\w.% -]{1,40}\)|rgba?\([\d.%, /]{1,40}\))$/i
 
 export function sanitizeCustomColors(input: Record<string, any>): Record<string, Record<string, string>> {
   const result: Record<string, Record<string, string>> = {}

@@ -1,10 +1,9 @@
 import type { MaybeRefOrGetter } from 'vue'
 import colors from 'tailwindcss/colors'
-import { readStoredTheme } from '../utils/theme/storage'
 import { rampCssName, THEME_STUDIO_VIEWS } from '../utils/theme/studio'
 import type { ThemeStudioView } from '../utils/theme/studio'
 import { presets, DEFAULT_PRESET_ID, docToSettings, isDefaultTheme, generatePalette, applyPaletteEffects, isDefaultEffects, parseCssColor, styleComponents, styleTokens, sectionFingerprint, mergeSection, canonicalTokenShades, storedStopStep, nearestShade, TOKEN_SHADE_TARGETS, SECTION_GROUPS, DEFAULT_COLORS, SHADES, SHADES_ALL, SHADE_SETS } from '../utils/theme/engine'
-import type { SectionKey, ThemeDoc, ThemePreset, PaletteCurveParams, PaletteEffects, StoredPaletteParams, PalettePin, StyleOptions, Shade, ShadeStep, ShadeStop, ColorAlias, TokenRamp } from '../utils/theme/engine'
+import type { SectionKey, ThemeDoc, ThemePreset, PaletteCurveParams, PaletteEffects, StoredPaletteParams, PalettePin, StyleOptions, Shade, ShadeStep, ShadeStop, ColorAlias, TokenRamp, VariantGroup, DefaultVariant } from '../utils/theme/engine'
 
 export function useThemeStudio() {
   const theme = useTheme()
@@ -36,19 +35,12 @@ export function useThemeStudio() {
     paletteParams.value = value
   }
 
-  // A persisted id can name a preset that no longer exists (they get renamed).
-  // The theme it applied is still restored, so the page would keep a look no
-  // preset can name and every picker would read Custom. Reset to stock: the
-  // doc came from a build that no longer exists, so there is nothing to
-  // preserve it against. This discards edits made on top of a since-renamed
-  // preset, the trade for the pickers and the page agreeing.
-  const presetHealed = useState('nuxt-ui-preset-healed', () => false)
-  if (import.meta.client && !presetHealed.value) {
-    presetHealed.value = true
-    const id = readStoredTheme().preset
-    if (id && !presets.some(preset => preset.id === id)) {
-      onNuxtReady(() => theme.resetTheme({ track: false }))
-    }
+  // A persisted id can name a preset that no longer exists (they get
+  // renamed). The restored theme is still the visitor's; only the stale
+  // baseline goes, so the pickers read Custom and dirty measures against
+  // stock instead of a preset no build defines.
+  if (import.meta.client && activePreset.value && !presets.some(preset => preset.id === activePreset.value)) {
+    activePreset.value = undefined
   }
 
   // The class bundle is an expansion of `style`, not stored state, so it is
@@ -97,10 +89,13 @@ export function useThemeStudio() {
     }
 
     // The class bundle lives in its own channel (never touches preset/AI
-    // overrides), and shade-only edits skip the component churn entirely.
-    const components = styleComponents(style.value)
-    if (JSON.stringify(components) !== JSON.stringify(styleComponents(previousStyle))) {
-      theme.setStyleUi(components)
+    // overrides). It only reads `defaults`, so shade-only patches (every
+    // slider frame) skip the double expansion entirely.
+    if (options.defaults !== undefined) {
+      const components = styleComponents(style.value)
+      if (JSON.stringify(components) !== JSON.stringify(styleComponents(previousStyle))) {
+        theme.setStyleUi(components)
+      }
     }
 
     if (Object.keys(tokens.light).length || Object.keys(tokens.dark).length) {
@@ -382,17 +377,27 @@ export function useThemeStudio() {
       },
       radius: pick(theme.radiuses),
       icons: pick(theme.icons).value,
-      // body faces only, a shuffled monospace page is never the tasteful roll
+      // sans body faces only, a shuffled monospace page is never the tasteful roll
       font: { sans: pick(theme.fonts.filter(entry => entry.category === 'Sans')).name }
     }
 
-    // A variant re-roll is the loud one, sprinkled in rarely enough that most
-    // shuffles stay tasteful, and scoped to BUTTONS: an app-wide variant
-    // reaches cards, and a `solid` card is an inverted surface, a full-white
-    // panel in dark mode. Left off entirely otherwise, an empty `style`
-    // would ride into history and exports as a phantom key.
-    if (Math.random() < 0.25) {
-      doc.style = { defaults: { variants: { buttons: pick(['solid', 'outline', 'soft', 'subtle'] as const) } } }
+    // A serif heading is the boldest tasteful roll the type axis has.
+    if (Math.random() < 0.2) {
+      doc.font!.serif = pick(theme.fonts.filter(entry => entry.category === 'Serif')).name
+    }
+
+    // Variant re-rolls are the loud ones, so each group rolls rarely and
+    // independently; most shuffles restyle none, a lucky one restyles two.
+    // `solid` stays off cards (an inverted, full-white panel in dark mode)
+    // and off inputs (fields don't support it). Left off entirely when
+    // nothing rolled, an empty `style` would ride into history and exports
+    // as a phantom key.
+    const variants: Partial<Record<VariantGroup, DefaultVariant>> = {}
+    if (Math.random() < 0.25) variants.buttons = pick(['solid', 'outline', 'soft', 'subtle'] as const)
+    if (Math.random() < 0.15) variants.inputs = pick(['soft', 'subtle', 'ghost'] as const)
+    if (Math.random() < 0.1) variants.panels = pick(['soft', 'subtle'] as const)
+    if (Object.keys(variants).length) {
+      doc.style = { defaults: { variants } }
     }
 
     if (Math.random() < 0.125) {
@@ -435,6 +440,10 @@ export function useThemeStudio() {
    */
   const baselineDoc = computed(() => presets.find(preset => preset.id === activePreset.value)?.doc ?? { version: 1 as const })
 
+  // One doc build per reactive flush: every sectionDirty computed in this
+  // instance reads it instead of rebuilding the doc per key.
+  const liveDoc = computed(() => theme.currentDoc())
+
   /**
    * One key, or several when a control owns more than one slice. Takes a
    * getter too, so a component can hand over its prop and keep the flag
@@ -446,14 +455,14 @@ export function useThemeStudio() {
       if (!value) return false
       const keys = Array.isArray(value) ? value : [value]
       return keys.some(entry =>
-        sectionFingerprint(theme.currentDoc(), entry) !== sectionFingerprint(baselineDoc.value, entry)
+        sectionFingerprint(liveDoc.value, entry) !== sectionFingerprint(baselineDoc.value, entry)
       )
     })
   }
 
   function groupDirty(group: keyof typeof SECTION_GROUPS) {
     return computed(() => SECTION_GROUPS[group].some(key =>
-      sectionFingerprint(theme.currentDoc(), key) !== sectionFingerprint(baselineDoc.value, key)
+      sectionFingerprint(liveDoc.value, key) !== sectionFingerprint(baselineDoc.value, key)
     ))
   }
 
@@ -515,6 +524,7 @@ export function useThemeStudio() {
     setPaletteFromCurve,
     applyDoc,
     applyPreset,
+    clearCustomPalette,
     shuffle,
     neutralChip,
     primaryChip,

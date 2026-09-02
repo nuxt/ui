@@ -19,7 +19,6 @@ const props = withDefaults(defineProps<{
   /** Palette the stops resolve against. */
   chip?: string
   ladder?: readonly ShadeStop[]
-  separator?: boolean
   /** A colour source with no shades keeps its group, minus the sliders. */
   showRows?: boolean
 }>(), {
@@ -42,7 +41,6 @@ function reset() {
 <template>
   <ThemeStudioSection
     :label="label"
-    :separator="separator"
     :resettable="!!rows.length"
     :reset-dirty="dirty"
     @reset="reset"

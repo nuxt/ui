@@ -80,16 +80,16 @@ const selected = computed({
     leading-icon-class="text-primary"
     :placeholder="mounted ? 'Custom' : 'Presets'"
     :aria-label="`Preset: ${presetLabel}`"
-    :content-class="vertical ? undefined : 'w-(--reka-popper-anchor-width)'"
+    :content-class="vertical ? undefined : 'w-60 max-w-[calc(100vw-2rem)]'"
     :class="vertical ? 'w-full' : 'w-38'"
   >
     <template #item-description="{ item }">
-      <span class="flex items-center gap-2">
+      <span class="flex items-center gap-1">
         <span class="shrink-0 text-xs text-muted truncate" :style="{ fontFamily: `'${asPreset(item).font}', sans-serif` }">{{ asPreset(item).font }}</span>
 
         <span class="text-dimmed select-none">·</span>
 
-        <span class="flex items-center gap-1 shrink-0">
+        <span class="flex items-center gap-0.5 shrink-0">
           <UIcon v-for="name in asPreset(item).iconSamples" :key="name" :name="name" class="size-3 text-dimmed" />
         </span>
       </span>

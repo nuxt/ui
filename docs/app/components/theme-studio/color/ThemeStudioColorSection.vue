@@ -13,9 +13,6 @@ const props = defineProps<{
   helpTo?: string
   /** Passed through to the section header's reset affordance. */
   sectionKey?: SectionKey
-  /** Both forwarded to the root section. */
-  padded?: boolean
-  separator?: boolean
 }>()
 
 const { rampChip } = useThemeStudio()
@@ -42,7 +39,7 @@ const editors = [
 </script>
 
 <template>
-  <ThemeStudioSection :label="title" :help-to="helpTo" :section-key="sectionKey" :padded="padded" :separator="separator">
+  <ThemeStudioSection :label="title" :help-to="helpTo" :section-key="sectionKey">
     <!-- the only two folds left in a panel: ghost until on, tinted while open -->
     <template #actions>
       <UTooltip
@@ -59,6 +56,7 @@ const editors = [
           active-color="primary"
           active-variant="subtle"
           :aria-label="editor.ariaLabel"
+          class="-my-1"
           @click="editor.open.value = !editor.open.value"
         />
       </UTooltip>
@@ -84,18 +82,16 @@ const editors = [
 
             <!-- Every group keeps its name: a headerless section can't be
                  told apart from the rows above it. -->
-            <div v-else class="flex flex-col gap-2">
+            <div v-else class="flex flex-col gap-3">
               <ThemeStudioSection
                 v-for="tokenGroup in tokenGroups"
                 :key="tokenGroup.key"
                 :label="tokenGroup.label"
-                separator
               >
                 <ThemeStudioColorShadeGroup
-                  v-for="(section, sectionIndex) in tokenGroup.sections"
+                  v-for="section in tokenGroup.sections"
                   :key="section.token"
                   :label="`${tokenGroup.label.replace(/ shades$/, '')} ${section.label.toLowerCase()}`"
-                  :separator="sectionIndex > 0"
                   :sliders="section.sliders"
                   :chip="rampChip(section.ramp)"
                   :ladder="shadeLadder"

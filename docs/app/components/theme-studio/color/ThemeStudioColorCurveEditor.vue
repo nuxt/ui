@@ -33,6 +33,15 @@ const W = 200
 const H = 180
 const PAD = 10
 
+// The field must cover the PLOT (the PAD-inset box the curves draw in), not
+// the whole element: full-bleed it sits ~5% off everything drawn over it.
+const fieldStyle = {
+  left: `${(PAD / W) * 100}%`,
+  top: `${(PAD / H) * 100}%`,
+  width: `${((W - PAD * 2) / W) * 100}%`,
+  height: `${((H - PAD * 2) / H) * 100}%`
+}
+
 function toX(x: number) {
   return PAD + x * (W - 2 * PAD)
 }
@@ -259,8 +268,9 @@ function nudge(handle: Handle, axis: 'x' | 'y', direction: number, coarse: boole
 function jump(handle: Handle, to: 'min' | 'max') {
   const c = curve.value
   const value = to === 'min' ? props.yMin : props.yMax
-  if (handle === 'y0') curve.value = { ...c, y0: value }
-  else if (handle === 'y1') curve.value = { ...c, y1: value }
+  // endpoints carry their control handle, matching drag and nudge
+  if (handle === 'y0') curve.value = { ...c, y0: value, p1y: clampY(c.p1y + value - c.y0) }
+  else if (handle === 'y1') curve.value = { ...c, y1: value, p2y: clampY(c.p2y + value - c.y1) }
   else if (handle === 'p1') curve.value = { ...c, p1y: value }
   else curve.value = { ...c, p2y: value }
 }
@@ -268,6 +278,9 @@ function jump(handle: Handle, to: 'min' | 'max') {
 function onKeydown(handle: Handle, event: KeyboardEvent) {
   // a pin owns its endpoint, same lock the pointer path applies
   if ((handle === 'y0' && startPinned.value) || (handle === 'y1' && endPinned.value)) return
+  // endpoints have no x axis: a left/right press would change nothing but
+  // still emit dragStart, which bakes and zeroes the modifier lens
+  if ((handle === 'y0' || handle === 'y1') && (event.key === 'ArrowLeft' || event.key === 'ArrowRight')) return
 
   const steps: Record<string, () => void> = {
     ArrowUp: () => nudge(handle, 'y', 1, event.shiftKey),
@@ -315,7 +328,8 @@ onUnmounted(() => {
          page restyle (~7ms per apply during a drag) -->
     <canvas
       ref="fieldCanvas"
-      class="absolute inset-0 size-full opacity-75 pointer-events-none"
+      class="absolute opacity-75 pointer-events-none"
+      :style="fieldStyle"
     />
     <svg
       ref="svgRef"

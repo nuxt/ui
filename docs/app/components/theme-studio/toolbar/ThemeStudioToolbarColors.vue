@@ -20,7 +20,7 @@ const semanticOpen = ref(false)
 
 const content = computed(() => [
   props.vertical ? 'w-(--reka-popper-anchor-width)' : 'w-80 max-w-[calc(100vw-2rem)]',
-  'max-h-[70vh] overflow-y-auto'
+  'max-h-[70vh] overflow-y-auto divide-y divide-default *:p-4'
 ])
 </script>
 
@@ -56,58 +56,49 @@ const content = computed(() => [
     </UButton>
 
     <template #content>
-      <!-- Sections own their padding so the separators run edge to edge, and
-           the panel drops the leading one since nothing sits above it. -->
-      <div class="flex flex-col">
-        <ThemeStudioColorSection
-          alias="primary"
-          help-to="/docs/getting-started/theme/css-variables#colors"
-          section-key="primary"
-          padded
-        />
+      <ThemeStudioColorSection
+        alias="primary"
+        help-to="/docs/getting-started/theme/css-variables#colors"
+        section-key="primary"
+      />
 
-        <ThemeStudioColorSection
-          alias="neutral"
-          help-to="/docs/getting-started/theme/css-variables#text"
-          section-key="neutral"
-          padded
-          separator
-        />
+      <ThemeStudioColorSection
+        alias="neutral"
+        help-to="/docs/getting-started/theme/css-variables#text"
+        section-key="neutral"
+      />
 
-        <ThemeStudioSection
-          label="Semantic"
-          help-to="/docs/getting-started/theme/design-system"
-          section-key="semantic"
-          padded
-          separator
-        >
-          <template #actions>
-            <UButton
-              :icon="appConfig.ui.icons.chevronDown"
-              color="neutral"
-              variant="ghost"
-              size="sm"
-              :aria-label="semanticOpen ? 'Collapse semantic colors' : 'Expand semantic colors'"
-              :aria-expanded="semanticOpen"
-              :ui="{ leadingIcon: ['transition-transform duration-200', semanticOpen && 'rotate-180'] }"
-              @click="semanticOpen = !semanticOpen"
-            />
+      <ThemeStudioSection
+        label="Semantic"
+        help-to="/docs/getting-started/theme/design-system"
+        section-key="semantic"
+      >
+        <template #actions>
+          <UButton
+            :icon="appConfig.ui.icons.chevronDown"
+            color="neutral"
+            variant="ghost"
+            size="sm"
+            :aria-label="semanticOpen ? 'Collapse semantic colors' : 'Expand semantic colors'"
+            :aria-expanded="semanticOpen"
+            :ui="{ leadingIcon: ['transition-transform duration-200', semanticOpen && 'rotate-180'] }"
+            class="-my-1"
+            @click="semanticOpen = !semanticOpen"
+          />
+        </template>
+
+        <UCollapsible v-model:open="semanticOpen" :ui="{ content: 'overflow-hidden' }">
+          <template #content>
+            <div class="flex flex-col gap-3">
+              <ThemeStudioColorSection
+                v-for="alias in SEMANTIC_ALIASES"
+                :key="alias"
+                :alias="alias"
+              />
+            </div>
           </template>
-
-          <UCollapsible v-model:open="semanticOpen" :ui="{ content: 'overflow-hidden' }">
-            <template #content>
-              <div class="flex flex-col gap-2">
-                <ThemeStudioColorSection
-                  v-for="(alias, index) in SEMANTIC_ALIASES"
-                  :key="alias"
-                  :alias="alias"
-                  :separator="index > 0"
-                />
-              </div>
-            </template>
-          </UCollapsible>
-        </ThemeStudioSection>
-      </div>
+        </UCollapsible>
+      </ThemeStudioSection>
     </template>
   </UPopover>
 </template>

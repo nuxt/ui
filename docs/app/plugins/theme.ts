@@ -1,10 +1,11 @@
 import { defu } from 'defu'
+import { watchDebounced } from '@vueuse/core'
 import { themeIcons } from '../utils/theme/icons'
 import { cssVariableDefaults } from '../utils/theme/tokens'
-import { THEME_STATE_KEYS, readStoredTheme, writeStoredTheme } from '../utils/theme/storage'
+import { THEME_STATE_KEYS, THEME_STORAGE_KEY, readStoredTheme, writeStoredTheme } from '../utils/theme/storage'
 import type { StoredTheme } from '../utils/theme/storage'
-import { mergeUi, styleComponents, DEFAULT_COLORS, THEME_DEFAULTS } from '../utils/theme/engine'
-import { sanitizeCustomColors, sanitizeCSSVariables } from '../utils/theme/sanitize'
+import { mergeUi, styleComponents, DEFAULT_COLORS, THEME_DEFAULTS } from '../utils/theme/engine/types'
+import { SAFE_NAME, sanitizeCustomColors, sanitizeCSSVariables } from '../utils/theme/sanitize'
 
 export default defineNuxtPlugin({
   enforce: 'post',
@@ -12,67 +13,90 @@ export default defineNuxtPlugin({
     const appConfig = useAppConfig()
 
     if (import.meta.client) {
-      const saved = readStoredTheme()
-
-      // Assign, never seed. This plugin runs before the root component's
-      // setup, but AFTER the SSR payload is hydrated, so every useState key
-      // below already holds the server's default and its initializer will
-      // not re-run. Writing the values here is what makes a saved theme
-      // survive a reload.
-      const assign = <T>(key: string, value: T | undefined) => {
-        if (value !== undefined) useState<T>(key).value = value
-      }
-      assign('nuxt-ui-radius', saved.radius)
-      assign('nuxt-ui-font-size', saved.fontSize)
-      assign('nuxt-ui-font', saved.font)
-      assign('nuxt-ui-icons', saved.icons)
-      assign('nuxt-ui-black-as-primary', saved.blackAsPrimary)
-      // Through the same boundary the AI path uses: these two are
-      // concatenated into <style> text, and storage is writable by anything
-      // on the origin. (The inline FOUC script above still paints the raw
-      // values once, before this runs.)
-      assign('nuxt-ui-custom-colors', saved.customColors && sanitizeCustomColors(saved.customColors))
-      assign('nuxt-ui-css-variables', saved.cssVariables && sanitizeCSSVariables(saved.cssVariables))
-      assign(THEME_STATE_KEYS.stylePrefs, saved.style)
-      assign(THEME_STATE_KEYS.paletteParams, saved.paletteParams)
-      assign(THEME_STATE_KEYS.themePreset, saved.preset)
-      if (saved.colors || saved.components) {
+      // Everything a stored theme touches, in one pass, with defaults for
+      // absent fields so it also serves the cross-tab listener below (where
+      // "absent" can mean "the other tab reset it"). At boot the deferred
+      // bits ride onNuxtReady; on a storage event they run directly.
+      //
+      // Assign, never seed: at boot this runs before the root component's
+      // setup but AFTER the SSR payload is hydrated, so every useState key
+      // already holds the server's default and its initializer will not
+      // re-run.
+      let appliedUiKeys: string[] = []
+      const distribute = (saved: StoredTheme, defer: (fn: () => void) => void) => {
+        useState('nuxt-ui-radius').value = saved.radius ?? THEME_DEFAULTS.radius
+        useState('nuxt-ui-font-size').value = saved.fontSize ?? THEME_DEFAULTS.fontSize
+        useState('nuxt-ui-font').value = saved.font ?? {}
+        useState('nuxt-ui-icons').value = saved.icons ?? THEME_DEFAULTS.icons
+        useState('nuxt-ui-black-as-primary').value = saved.blackAsPrimary ?? false
+        // Through the same boundary the AI path uses: these two are
+        // concatenated into <style> text, and storage is writable by anything
+        // on the origin. (The inline FOUC script still paints the raw values
+        // once, before the boot pass runs.)
+        useState('nuxt-ui-custom-colors').value = sanitizeCustomColors(saved.customColors ?? {})
+        useState('nuxt-ui-css-variables').value = saved.cssVariables ? sanitizeCSSVariables(saved.cssVariables) : {}
+        useState(THEME_STATE_KEYS.stylePrefs).value = saved.style ?? {}
+        useState(THEME_STATE_KEYS.paletteParams).value = saved.paletteParams ?? {}
+        useState(THEME_STATE_KEYS.themePreset).value = saved.preset
         useState<Record<string, any>>('nuxt-ui-ai-theme').value = {
           ...(saved.colors ? { colors: { ...saved.colors } } : {}),
           ...(saved.components ? { ui: { ...saved.components } } : {})
         }
-      }
 
-      // Same distribution order the per-key restores used, which carries two
-      // fixes worth keeping. Colors land now, before hydration, because their
-      // FOUC scripts already rewrote the style tags before first paint. Icons
-      // land AFTER: icon names compile into element CLASSES and Vue only warns
-      // about a class that disagrees with the server, it never patches it, so
-      // assigning pre-hydration silently dropped the saved pack every reload.
-      if (saved.primary) appConfig.ui.colors.primary = saved.primary
-      if (saved.neutral) appConfig.ui.colors.neutral = saved.neutral
-      for (const [alias, name] of Object.entries(saved.colors || {})) {
-        (appConfig.ui.colors as any)[alias] = name
-      }
+        // Same distribution order the per-key restores used, which carries
+        // two fixes worth keeping. Colors land now, before hydration, because
+        // the FOUC script already rewrote the style tags before first paint.
+        // Icons land deferred: icon names compile into element CLASSES and
+        // Vue only warns about a class that disagrees with the server, it
+        // never patches it, so assigning pre-hydration silently dropped the
+        // saved pack every reload. Same SAFE_NAME gate the live path
+        // (applyThemeSettings) enforces: these names end up dereferenced
+        // inside <style> text.
+        for (const alias of Object.keys(DEFAULT_COLORS) as Array<keyof typeof DEFAULT_COLORS>) {
+          const value = alias === 'primary' ? saved.primary : alias === 'neutral' ? saved.neutral : saved.colors?.[alias]
+          ;(appConfig.ui.colors as any)[alias] = typeof value === 'string' && SAFE_NAME.test(value) ? value : DEFAULT_COLORS[alias]
+        }
 
-      const pack = saved.icons ? themeIcons[saved.icons as keyof typeof themeIcons] : undefined
-      if (pack) onNuxtReady(() => (appConfig.ui.icons = pack as any))
+        const pack = saved.icons && Object.hasOwn(themeIcons, saved.icons) ? themeIcons[saved.icons as keyof typeof themeIcons] : themeIcons.lucide
+        defer(() => (appConfig.ui.icons = pack as any))
 
-      // The class bundle is DERIVED from the style prefs, so it is rebuilt
-      // here rather than stored. A generator change therefore reaches
-      // already-saved themes instead of serving a frozen bundle.
-      const styleUi = saved.style ? styleComponents(saved.style) : {}
-      if (Object.keys(styleUi).length || saved.components) {
+        // The class bundle is DERIVED from the style prefs, so it is rebuilt
+        // here rather than stored. A generator change therefore reaches
+        // already-saved themes instead of serving a frozen bundle. Guarded
+        // like the studio's own rebuild: a corrupt persisted style must not
+        // take the whole plugin down before the persistence watcher even
+        // registers.
+        let styleUi: Record<string, any> = {}
+        try {
+          styleUi = saved.style ? styleComponents(saved.style) : {}
+        } catch {
+          // ignored: the theme still restores, minus the style bundle
+        }
         useState<Record<string, any>>('nuxt-ui-style-ui').value = styleUi
-        onNuxtReady(() => {
-          // same order as the live path: style bundle first, explicit wins
+        defer(() => {
+          // same order as the live path: style bundle first, explicit wins;
+          // keys a previous distribution touched but this one doesn't reset
           const merged = mergeUi(styleUi, saved.components || {})
+          for (const key of appliedUiKeys) {
+            if (!(key in merged)) (appConfig.ui as any)[key] = undefined
+          }
           for (const [key, value] of Object.entries(merged)) {
             if (key === 'colors' || key === 'icons') continue
             (appConfig.ui as any)[key] = defu(value as Record<string, any>, (appConfig.ui as any)[key] || {})
           }
+          appliedUiKeys = Object.keys(merged).filter(key => key !== 'colors' && key !== 'icons')
         })
       }
+
+      distribute(readStoredTheme(), onNuxtReady)
+
+      // Another tab wrote the theme: adopt it, or this tab's next debounced
+      // write would clobber it with stale state (the single key is atomic
+      // per write, not across tabs).
+      window.addEventListener('storage', (event) => {
+        if (event.key !== null && event.key !== THEME_STORAGE_KEY) return
+        distribute(readStoredTheme(), fn => fn())
+      })
 
       // One watcher owns every write. Each setting used to persist itself, so
       // a reload could restore them out of step and the derived stores needed
@@ -98,7 +122,7 @@ export default defineNuxtPlugin({
       const filled = <T extends object>(value: T | undefined) => value && Object.keys(value).length ? value : undefined
       const unless = <T>(value: T, fallback: T) => value === fallback ? undefined : value
 
-      watch(() => JSON.stringify({
+      watchDebounced(() => JSON.stringify({
         primary: unless(appConfig.ui.colors.primary, DEFAULT_COLORS.primary),
         neutral: unless(appConfig.ui.colors.neutral, DEFAULT_COLORS.neutral),
         radius: unless(radius.value, THEME_DEFAULTS.radius),
@@ -113,7 +137,9 @@ export default defineNuxtPlugin({
         style: filled(style.value),
         paletteParams: filled(paletteParams.value),
         preset: preset.value
-      } satisfies StoredTheme), json => writeStoredTheme(JSON.parse(json)), { flush: 'post' })
+        // Debounced: the getter still runs per flush, but a slider drag no
+        // longer costs a synchronous localStorage write per frame.
+      } satisfies StoredTheme), json => writeStoredTheme(JSON.parse(json)), { debounce: 250, flush: 'post' })
     }
 
     if (import.meta.server) {
@@ -132,8 +158,8 @@ export default defineNuxtPlugin({
               function num(v, lo, hi) { var n = parseFloat(v); return isFinite(n) ? Math.min(hi, Math.max(lo, n)) : undefined; }
               function set(id, css) { var el = document.getElementById(id); if (el) { el.textContent = css; } }
 
-              var primaryColor = T.primary;
-              var neutralColor = T.neutral;
+              var primaryColor = SAFE.test(T.primary || '') ? T.primary : undefined;
+              var neutralColor = SAFE.test(T.neutral || '') ? T.neutral : undefined;
               if (primaryColor || neutralColor) {
                 var swapColors = function(el) {
                   var html = el.innerHTML;
@@ -201,11 +227,13 @@ export default defineNuxtPlugin({
                 document.head.appendChild(lnk);
               });
 
+              var BREAKOUT = /[;{}<>]/;
               var custom = T.customColors;
               if (custom) {
                 var vars = [];
                 for (var name in custom) {
-                  for (var shade in custom[name]) { vars.push('--color-' + name + '-' + shade + ': ' + custom[name][shade] + ';'); }
+                  if (!SAFE.test(name)) continue;
+                  for (var shade in custom[name]) { if (!BREAKOUT.test(String(custom[name][shade]))) { vars.push('--color-' + name + '-' + shade + ': ' + custom[name][shade] + ';'); } }
                 }
                 if (vars.length) { set('nuxt-ui-custom-colors', ':root { ' + vars.join(' ') + ' }'); }
               }
@@ -215,8 +243,9 @@ export default defineNuxtPlugin({
                 var defaults = ${JSON.stringify(cssVariableDefaults)};
                 var merge = function(defs, overrides) {
                   var result = [];
-                  for (var key in defs) { result.push(key + ': ' + (overrides[key] || defs[key]) + ';'); }
-                  for (var key2 in overrides) { if (!defs[key2]) result.push(key2 + ': ' + overrides[key2] + ';'); }
+                  var safe = function(v) { return v != null && !BREAKOUT.test(String(v)); };
+                  for (var key in defs) { result.push(key + ': ' + (safe(overrides[key]) ? overrides[key] : defs[key]) + ';'); }
+                  for (var key2 in overrides) { if (!defs[key2] && safe(overrides[key2])) result.push(key2 + ': ' + overrides[key2] + ';'); }
                   return result;
                 };
                 var parts = [];

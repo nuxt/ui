@@ -124,19 +124,15 @@ const actualCurve = computed(() => {
 // stops; the parse is deferred to the single open swatch.
 const swatches = computed(() => stopSet.value.map(shade => ({ shade, oklch: shades.value[shade]! })))
 
-const { copy: copyShade } = useClipboard()
+// useClipboard's `copied` already resets itself after 1.5s; the shade ref
+// only remembers WHICH tile the checkmark belongs to
+const { copy: copyShade, copied: shadeCopied } = useClipboard()
 const copiedShade = ref<number>()
-let copiedTimeout: ReturnType<typeof setTimeout> | undefined
 
 function copySwatch(info: { shade: number, oklch: string }) {
   copyShade(info.oklch)
   copiedShade.value = info.shade
-  clearTimeout(copiedTimeout)
-  copiedTimeout = setTimeout(() => {
-    copiedShade.value = undefined
-  }, 1500)
 }
-onUnmounted(() => clearTimeout(copiedTimeout))
 
 // A popover, not a tooltip: the copy button and inputs must take focus. Hover
 // previews it (with a grace gap); click STICKS it open for typing. Stick ≠ pin:
@@ -580,7 +576,7 @@ function resetEffects() {
                         square
                         variant="ghost"
                         :ui="{ leadingIcon: 'size-3' }"
-                        :icon="copiedShade === swatchDetail.shade ? 'i-lucide-copy-check' : 'i-lucide-copy'"
+                        :icon="shadeCopied && copiedShade === swatchDetail.shade ? 'i-lucide-copy-check' : 'i-lucide-copy'"
                         :aria-label="`Copy oklch ${swatchDetail.oklch}`"
                         @click="copySwatch(swatchDetail)"
                       />

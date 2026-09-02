@@ -1,5 +1,6 @@
 import type { ThemeDoc, StoredPaletteParams, StyleOptions } from './engine'
-import { THEME_DEFAULTS } from './engine'
+import { THEME_DEFAULTS } from './engine/types'
+import { SAFE_NAME } from './sanitize'
 
 /**
  * The font document: all three stacks plus the body treatment, exactly the
@@ -98,12 +99,13 @@ function migrateLegacyTheme(): StoredTheme {
   return migrated
 }
 
-const SAFE_FONT = /^[\w -]{1,50}$/
-
 /** Clamp to a range, or drop the value if it isn't a finite number. */
 function clamped(value: unknown, min: number, max: number): number | undefined {
+  // Number() maps null/''/booleans to finite numbers, which would clamp
+  // junk to the range floor instead of dropping it.
+  if (typeof value !== 'number' && typeof value !== 'string') return undefined
   const number = Number(value)
-  return Number.isFinite(number) ? Math.min(max, Math.max(min, number)) : undefined
+  return value !== '' && Number.isFinite(number) ? Math.min(max, Math.max(min, number)) : undefined
 }
 
 /**
@@ -120,7 +122,7 @@ function normalizeFont(raw: unknown): FontPrefs | undefined {
   // `heading` was the old h1–h6 treatment. Only the family survived the
   // rework, as the serif stack; the rest is dropped rather than kept as dead
   // weight that every dirty check would still measure.
-  const family = (value: unknown) => typeof value === 'string' && SAFE_FONT.test(value) ? value : undefined
+  const family = (value: unknown) => typeof value === 'string' && SAFE_NAME.test(value) ? value : undefined
   const sans = family(input.sans)
   if (sans && sans !== THEME_DEFAULTS.font) font.sans = sans
   const serif = family(input.serif) ?? family(input.heading?.font)
@@ -179,10 +181,16 @@ export function writeStoredTheme(value: StoredTheme) {
     if (entry && typeof entry === 'object') return Object.keys(entry).length > 0
     return true
   })
-  if (entries.length) {
-    window.localStorage.setItem(THEME_STORAGE_KEY, JSON.stringify(Object.fromEntries(entries)))
-  } else {
-    window.localStorage.removeItem(THEME_STORAGE_KEY)
+  // Never throws: Safari private mode and quota-exceeded raise from setItem,
+  // and this runs from a watcher on every theme change.
+  try {
+    if (entries.length) {
+      window.localStorage.setItem(THEME_STORAGE_KEY, JSON.stringify(Object.fromEntries(entries)))
+    } else {
+      window.localStorage.removeItem(THEME_STORAGE_KEY)
+    }
+  } catch {
+    // the theme still applies in memory, it just won't survive the reload
   }
 }
 

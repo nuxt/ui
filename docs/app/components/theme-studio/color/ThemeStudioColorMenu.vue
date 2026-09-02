@@ -11,7 +11,7 @@ const props = defineProps<{ alias: ColorAlias }>()
 
 const appConfig = useAppConfig()
 const { neutralColors, primaryColors, primary, neutral, blackAsPrimary, setBlackAsPrimary } = useTheme()
-const { selectPalette, isCustomPalette } = useThemeStudio()
+const { selectPalette, isCustomPalette, clearCustomPalette } = useThemeStudio()
 
 // Strictly separated for v4: color roles offer only chromatic ramps, the
 // neutral role only gray ramps, the module's shade recipes differ per
@@ -28,6 +28,14 @@ const label = computed(() => {
   if (props.alias === 'primary' && blackAsPrimary.value) return 'Black'
   return isCustomPalette(props.alias) ? 'Custom' : paletteLabel(value.value)
 })
+
+/** Black rides the primary alias too: a custom ramp left in place would keep exporting. */
+function pickBlack() {
+  if (isCustomPalette('primary')) {
+    clearCustomPalette('primary')
+  }
+  setBlackAsPrimary(true)
+}
 
 const swatchColor = computed(() => {
   if (props.alias === 'primary' && blackAsPrimary.value) return undefined
@@ -76,7 +84,7 @@ function isSelected(color: string) {
             active-color="primary"
             active-variant="subtle"
             class="capitalize"
-            @click="setBlackAsPrimary(true)"
+            @click="pickBlack()"
           >
             <template #leading>
               <span class="inline-block h-2 w-4 rounded-full bg-black dark:bg-white" />
