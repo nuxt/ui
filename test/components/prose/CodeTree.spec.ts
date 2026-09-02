@@ -1,5 +1,6 @@
 import { defineComponent, h } from 'vue'
-import { describe, it, expect, vi } from 'vitest'
+import type { PropType } from 'vue'
+import { describe, it, expect, vi, afterEach } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import CodeTree from '../../../src/runtime/components/prose/CodeTree.vue'
@@ -7,7 +8,7 @@ import Pre from '../../../src/runtime/components/prose/Pre.vue'
 
 const Wrapper = defineComponent({
   props: {
-    files: { type: Array<string>, required: true },
+    files: { type: Array as PropType<string[]>, required: true },
     codeTreeProps: { type: Object, default: () => ({}) }
   },
   setup(props) {
@@ -19,6 +20,10 @@ const Wrapper = defineComponent({
 })
 
 describe('CodeTree', () => {
+  afterEach(() => {
+    vi.restoreAllMocks()
+  })
+
   it('does not warn about invoking the slot outside of the render function', async () => {
     const warn = vi.spyOn(console, 'warn').mockImplementation(() => {})
 
@@ -30,7 +35,6 @@ describe('CodeTree', () => {
     })
 
     expect(warn.mock.calls.flat().join('\n')).not.toMatch(/invoked outside of the render function/)
-    warn.mockRestore()
   })
 
   it('does not warn about invoking the slot outside of the render function with `expandAll`', async () => {
@@ -44,7 +48,6 @@ describe('CodeTree', () => {
     })
 
     expect(warn.mock.calls.flat().join('\n')).not.toMatch(/invoked outside of the render function/)
-    warn.mockRestore()
   })
 
   it('renders slotted files as tree items and selects the default file', async () => {
@@ -84,6 +87,57 @@ describe('CodeTree', () => {
 
     expect(wrapper.find('ul[role="group"]').exists()).toBe(true)
     expect(wrapper.text()).toContain('index.vue')
+  })
+
+  it('re-expands all directories when the slotted files change with `expandAll`', async () => {
+    const wrapper = await mountSuspended(Wrapper, {
+      props: {
+        files: ['app/app.vue', 'app/pages/index.vue'],
+        codeTreeProps: { expandAll: true }
+      }
+    })
+
+    expect(wrapper.findAll('ul[role="group"]')).toHaveLength(2)
+
+    const folderButton = wrapper.findAll('button').find(btn => btn.text().trim() === 'app')
+    await folderButton!.trigger('click')
+
+    expect(wrapper.findAll('ul[role="group"]')).toHaveLength(0)
+
+    await wrapper.setProps({ files: ['app/app.vue', 'app/pages/index.vue', 'server/api/hello.ts'] })
+
+    expect(wrapper.findAll('ul[role="group"]')).toHaveLength(4)
+  })
+
+  it('keeps the selected file visible when `expandAll` is turned off', async () => {
+    const wrapper = await mountSuspended(Wrapper, {
+      props: {
+        files: ['app/app.vue', 'app/pages/index.vue', 'server/api/hello.ts'],
+        codeTreeProps: { expandAll: true, defaultValue: 'app/pages/index.vue' }
+      }
+    })
+
+    expect(wrapper.findAll('ul[role="group"]')).toHaveLength(4)
+
+    await wrapper.setProps({ codeTreeProps: { expandAll: false, defaultValue: 'app/pages/index.vue' } })
+
+    expect(wrapper.findAll('ul[role="group"]')).toHaveLength(2)
+    expect(wrapper.text()).toContain('index.vue')
+  })
+
+  it('expands all directories when `expandAll` is turned on', async () => {
+    const wrapper = await mountSuspended(Wrapper, {
+      props: {
+        files: ['app/app.vue', 'app/pages/index.vue'],
+        codeTreeProps: { expandAll: false }
+      }
+    })
+
+    expect(wrapper.findAll('ul[role="group"]')).toHaveLength(0)
+
+    await wrapper.setProps({ codeTreeProps: { expandAll: true } })
+
+    expect(wrapper.findAll('ul[role="group"]')).toHaveLength(2)
   })
 
   it('keeps the previously selected file content when a directory is clicked', async () => {

@@ -175,8 +175,13 @@ const expanded = computed<string[]>({
   set: (value) => { expandedOverride.value = value }
 })
 
+watch(() => props.expandAll, (value) => {
+  expandedOverride.value = value ? null : getExpandedPaths(model.value?.path)
+})
+
 // Re-expand all when flatItems actually change and expandAll is true.
-// Registered as a watcher post-mount so `flatItems` (and the slot it reads) is only ever read from the render function, never from setup.
+// Registered post-mount: `watch` evaluates its source eagerly, which would invoke the slot from setup.
+// By then `flatItems` is still cached from the first render, so the slot is not invoked from the hook either.
 onMounted(() => {
   watch(flatItems, (newItems, oldItems) => {
     if (!props.expandAll) return
