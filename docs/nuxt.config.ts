@@ -214,8 +214,9 @@ export default defineNuxtConfig({
         '/',
         '/docs/getting-started',
         '/openapi.json',
-        // Also prerendered through `prerenderRoutes()` in `app/pages/index.vue`;
-        // listed here so the guarantee does not hang off a page component.
+        // Also registered by `nuxt-agent-discovery` for the `/` route in
+        // `agentDiscovery.routes`; listed here so the guarantee does not hang off
+        // the module config.
         '/raw/index.md',
         '/api/countries.json',
         '/api/phone-codes.json',

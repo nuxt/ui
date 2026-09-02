@@ -10,8 +10,6 @@ const { url } = useSiteConfig()
 const appConfig = useAppConfig()
 
 if (import.meta.server) {
-  prerenderRoutes(['/raw/index.md'])
-
   useSchemaOrg([
     defineSoftwareApp({
       name: 'Nuxt UI',
