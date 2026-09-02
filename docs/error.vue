@@ -58,15 +58,8 @@ const links = computed(() => {
     label: 'Docs',
     icon: 'i-heroicons-book-open',
     to: '/getting-started',
-    active: route.path.startsWith('/getting-started') || route.path.startsWith('/components')
-  }, ...(navigation.value.find(item => item._path === '/pro')
-    ? [{
-        label: 'Pro',
-        icon: 'i-heroicons-square-3-stack-3d',
-        to: '/pro/getting-started',
-        active: route.path.startsWith('/pro')
-      }]
-    : [])]
+    active: route.path.startsWith('/getting-started') || route.path.startsWith('/components') || route.path.startsWith('/pro')
+  }]
 })
 
 // Head
