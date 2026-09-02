@@ -6,6 +6,7 @@ import { queryCollection } from '@nuxt/content/server'
 import * as theme from '../../.nuxt/ui'
 import meta from '#nuxt-component-meta'
 import { compactProps, getDefaultVariants, hasLinkPassthrough, partitionLinkProps } from './componentMeta'
+import { fencedBlock, pipeTable } from './markdown'
 // @ts-expect-error - no types available
 import { getComponentExample } from '#component-example/nitro'
 
@@ -125,6 +126,38 @@ function replaceNodeWithPre(node: any[], language: string, code: string, filenam
   node[0] = 'pre'
   node[1] = { language, code }
   if (filename) node[1].filename = filename
+}
+
+// A paragraph holding ready-made markdown: the stringifier writes a string
+// child as is, so this is how a block it has no handler for gets through.
+function replaceNodeWithMarkdown(node: any[], markdown: string) {
+  node[0] = 'p'
+  node[1] = {}
+  node[2] = markdown
+  node.length = 3
+}
+
+// A preview without a `#code` slot is a component demo written in MDC, so
+// the closest thing to its source is the tree read back as a template.
+function templateSnippet(nodes: any[]): string {
+  return nodes.map((child) => {
+    if (typeof child === 'string') return child
+    if (!Array.isArray(child)) return ''
+
+    const [tag, attrs = {}, ...content] = child
+    const attributes = Object.entries(attrs)
+      .filter(([key, value]) => key !== 'style' && value !== '' && value !== undefined && value !== null)
+      .map(([key, value]) => {
+        if (key === 'className') return `class="${(Array.isArray(value) ? value : [value]).join(' ')}"`
+        if (typeof value === 'string') return `${key}="${value}"`
+        if (typeof value === 'object') return `:${key}="${stringifyValue(value, '\'')}"`
+        return `:${key}="${value}"`
+      })
+    const open = `<${tag}${attributes.length ? ` ${attributes.join(' ')}` : ''}`
+    const inner = templateSnippet(content).trim()
+
+    return inner ? `${open}>\n  ${inner.split('\n').join('\n  ')}\n</${tag}>` : `${open} />`
+  }).filter(Boolean).join('\n')
 }
 
 function visitAndReplace(doc: Document, type: string, handler: (node: any[]) => void) {
@@ -678,7 +711,9 @@ export async function transformMDC(event: H3Event, doc: Document): Promise<Docum
 
     const allChildren: any[] = []
     if (title) {
-      allChildren.push(['p', {}, ['strong', {}, title]])
+      // `strong` stringifies to its text alone, so the link has to wrap it.
+      const heading = ['strong', {}, title]
+      allChildren.push(['p', {}, attrs.to ? ['a', { href: attrs.to }, heading] : heading])
     }
     allChildren.push(...collectBlockChildren(content))
 
@@ -742,6 +777,12 @@ export async function transformMDC(event: H3Event, doc: Document): Promise<Docum
     }
   }
 
+  // minimark has no pipe-table handler and writes every table as HTML, so the
+  // rows are rendered here, each cell reduced to inline markdown.
+  visitAndReplace(doc, 'table', (node) => {
+    replaceNodeWithMarkdown(node, pipeTable(node as any))
+  })
+
   // Remove wrapper elements by extracting children content
   const wrapperTypes = ['card-group', 'accordion', 'steps', 'code-group', 'code-collapse', 'tabs', 'div']
   for (const wrapperType of wrapperTypes) {
@@ -797,42 +838,21 @@ export async function transformMDC(event: H3Event, doc: Document): Promise<Docum
     })
   }
 
-  // Transform code-preview to extract the Vue code as a code block
+  // Transform code-preview: the `#code` slot holds the literal source, which
+  // is what an agent wants, and the rendered preview is dropped. Without a
+  // code slot the preview itself is the demo, read back as a template.
   visitAndReplace(doc, 'code-preview', (node) => {
     const children = node.slice(2)
+    const codeSlot = children.find(child => Array.isArray(child) && child[0] === 'template' && child[1]?.['v-slot:code'] !== undefined)
 
-    const extractVueCode = (nodes: any[]): string => {
-      return nodes.map((child: any) => {
-        if (typeof child === 'string') return child
-        if (Array.isArray(child)) {
-          const tag = child[0]
-          const attrs = child[1] || {}
-          const content = child.slice(2)
-          // Build the opening tag
-          let tagStr = `<${tag}`
-          for (const [key, val] of Object.entries(attrs)) {
-            if (key.startsWith(':') || key.startsWith('v-')) {
-              tagStr += ` ${key}=${val}`
-            } else if (typeof val === 'string') {
-              tagStr += ` ${key}=${val}`
-            }
-          }
-          const innerContent = extractVueCode(content)
-          if (innerContent.trim()) {
-            tagStr += `>\n${innerContent}</${tag}>`
-          } else {
-            tagStr += ' />'
-          }
-          return tagStr
-        }
-        return ''
-      }).join('\n')
+    if (codeSlot) {
+      replaceWithChildren(node, codeSlot.slice(2))
+      return
     }
 
-    const vueCode = extractVueCode(children).trim()
-    node[0] = 'pre'
-    node[1] = { language: 'vue', code: `<template>\n  ${vueCode.split('\n').join('\n  ')}\n</template>` }
-    node.length = 2
+    const preview = children.filter(child => !(Array.isArray(child) && child[0] === 'template'))
+    const snippet = templateSnippet(preview)
+    replaceNodeWithPre(node, 'vue', `<template>\n  ${snippet.split('\n').join('\n  ')}\n</template>`)
   })
 
   // Transform icons-theme and icons-theme-select to placeholder
@@ -873,6 +893,57 @@ export async function transformMDC(event: H3Event, doc: Document): Promise<Docum
       node[1] = {}
       node[2] = label
       node.length = 3
+    }
+  })
+
+  // Inline components with no markdown of their own. A kbd becomes inline
+  // code with a readable label (minimark writes inline HTML on its own lines,
+  // so `<kbd>` is not an option), a styled span is unwrapped to its text, and
+  // a decorative icon or an interactive widget is dropped.
+  const kbdLabels: Record<string, string> = {
+    meta: 'Meta',
+    ctrl: 'Ctrl',
+    alt: 'Alt',
+    option: 'Option',
+    shift: 'Shift',
+    enter: 'Enter',
+    escape: 'Esc',
+    backspace: 'Backspace',
+    tab: 'Tab',
+    space: 'Space',
+    arrowup: '↑',
+    arrowdown: '↓',
+    arrowleft: '←',
+    arrowright: '→'
+  }
+  visitAndReplace(doc, 'kbd', (node) => {
+    const value = String(node[1]?.value ?? '')
+    node[0] = 'code'
+    node[1] = {}
+    node[2] = kbdLabels[value.toLowerCase()] ?? value
+    node.length = 3
+  })
+
+  visitAndReplace(doc, 'span', (node) => {
+    node[0] = '__flatten'
+    node[1] = {}
+  })
+
+  for (const dropped of ['icon', 'prose-icon', 'u-color-mode-select']) {
+    visitAndReplace(doc, dropped, (node) => {
+      node[0] = '__flatten'
+      node[1] = {}
+      node.length = 2
+    })
+  }
+
+  // minimark always opens a three-backtick fence, which code holding fences
+  // of its own (the typography pages documenting code blocks) breaks out of.
+  visitAndReplace(doc, 'pre', (node) => {
+    const attrs = node[1] || {}
+    const code = String(attrs.code ?? '')
+    if (code.includes('```')) {
+      replaceNodeWithMarkdown(node, fencedBlock(code, attrs.language, attrs.filename, attrs.meta))
     }
   })
 
