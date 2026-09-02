@@ -141,11 +141,11 @@ const showTextLabel = computed(() => !props.icon && !shade.value)
     }"
   >
     <template v-if="icon || shade" #label>
-      <UIcon v-if="icon" :name="icon" class="size-3.5 text-muted" />
+      <UIcon v-if="icon" :name="icon" class="size-3 text-dimmed" />
 
       <span v-else class="flex items-center gap-2 w-full">
-        <UIcon :name="mode === 'light' ? 'i-lucide-sun' : 'i-lucide-moon'" class="size-3.5 text-muted shrink-0" />
-        <span class="size-3.5 grow rounded-full bg-(--slider-color) ring ring-(--slider-contrast) me-px" />
+        <UIcon :name="mode === 'light' ? 'i-lucide-sun' : 'i-lucide-moon'" class="size-3 text-dimmed shrink-0" />
+        <span class="size-3 grow rounded-full bg-(--slider-color) ring ring-(--slider-contrast) me-px" />
       </span>
     </template>
 
@@ -168,6 +168,7 @@ const showTextLabel = computed(() => !props.icon && !shade.value)
         size="xs"
         color="neutral"
         variant="none"
+        :content="{ bodyLock: false, disableOutsidePointerEvents: false }"
         class="w-10 shrink-0"
         :ui="{
           /* bare until hovered, when a ring says it's editable */
@@ -228,8 +229,10 @@ const showTextLabel = computed(() => !props.icon && !shade.value)
       size="sm"
       color="neutral"
       variant="subtle"
+      :content="{ bodyLock: false, disableOutsidePointerEvents: false }"
       :aria-label="ariaLabel ?? label"
-      class="flex-1"
+      class="flex-1 group"
+      :ui="{ trailingIcon: 'transition-transform duration-200 group-data-[state=open]:rotate-180' }"
     >
       <template v-if="!!slots.leading" #leading>
         <slot name="leading" />

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { SEMANTIC_ALIASES } from '../../../utils/theme/engine'
-import { keepPanels } from '../../../utils/theme/studio'
+import { keepPanels, toolbarPanelClass } from '../../../utils/theme/studio'
 
 /** The Colors control: a chip-pair trigger opening the per-alias sections. */
 const props = defineProps<{
@@ -18,24 +18,16 @@ const dirty = groupDirtyFlags.colors
 // the panel's height. Dirty state still reads on the header's reset button.
 const semanticOpen = ref(false)
 
-const content = computed(() => [
-  props.vertical ? 'w-(--reka-popper-anchor-width)' : 'w-80 max-w-[calc(100vw-2rem)]',
-  'max-h-[70vh] overflow-y-auto divide-y divide-default *:p-4'
-])
+const content = computed(() => [...toolbarPanelClass(props.vertical), 'divide-y divide-default *:p-3'])
 </script>
 
 <template>
   <UPopover v-model:open="open" :content="{ align: 'center', onInteractOutside: keepPanels }" :ui="{ content }">
-    <UButton
+    <ThemeStudioToolbarTrigger
       :label="colorLabel"
-      :trailing-icon="appConfig.ui.icons.chevronDown"
-      color="neutral"
-      variant="outline"
-      :class="['group bg-default', dirty && 'ring-primary/50', vertical ? 'w-full' : 'w-38']"
-      :ui="{
-        label: ['flex-1 min-w-0 text-left truncate', dirty && 'text-primary'],
-        trailingIcon: ['transition-transform duration-200', open && 'rotate-180', dirty ? 'text-primary' : 'text-dimmed']
-      }"
+      :dirty="dirty"
+      :open="open"
+      :class="vertical ? 'w-full' : 'w-38'"
       :aria-label="`Colors: ${colorLabel}`"
     >
       <template #leading>
@@ -53,7 +45,7 @@ const content = computed(() => [
           />
         </span>
       </template>
-    </UButton>
+    </ThemeStudioToolbarTrigger>
 
     <template #content>
       <ThemeStudioColorSection
@@ -72,6 +64,7 @@ const content = computed(() => [
         label="Semantic"
         help-to="/docs/getting-started/theme/design-system"
         section-key="semantic"
+        collapsible
       >
         <template #actions>
           <UButton
@@ -82,20 +75,17 @@ const content = computed(() => [
             :aria-label="semanticOpen ? 'Collapse semantic colors' : 'Expand semantic colors'"
             :aria-expanded="semanticOpen"
             :ui="{ leadingIcon: ['transition-transform duration-200', semanticOpen && 'rotate-180'] }"
-            class="-my-1"
             @click="semanticOpen = !semanticOpen"
           />
         </template>
 
-        <UCollapsible v-model:open="semanticOpen" :ui="{ content: 'overflow-hidden' }">
+        <UCollapsible v-model:open="semanticOpen" :unmount-on-hide="true" :ui="{ content: 'overflow-hidden flex flex-col gap-2 pt-2' }">
           <template #content>
-            <div class="flex flex-col gap-3">
-              <ThemeStudioColorSection
-                v-for="alias in SEMANTIC_ALIASES"
-                :key="alias"
-                :alias="alias"
-              />
-            </div>
+            <ThemeStudioColorSection
+              v-for="alias in SEMANTIC_ALIASES"
+              :key="alias"
+              :alias="alias"
+            />
           </template>
         </UCollapsible>
       </ThemeStudioSection>

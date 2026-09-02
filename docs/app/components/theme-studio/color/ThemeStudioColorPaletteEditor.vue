@@ -667,6 +667,7 @@ function resetEffects() {
                 :items="stopItems"
                 size="sm"
                 variant="ghost"
+                :content="{ bodyLock: false, disableOutsidePointerEvents: false }"
                 class="shrink-0"
                 @click.stop
               />

@@ -55,7 +55,10 @@ const presetItems = computed(() => presets.map(preset => ({
     ui: { icon: 'text-(--chip-icon-light) dark:text-(--chip-icon-dark)' }
   } as AvatarProps,
   font: preset.doc.font?.sans ?? 'Public Sans',
-  iconSamples: iconSamples(preset.doc)
+  iconSamples: iconSamples(preset.doc),
+  ui: {
+    itemLeadingAvatar: 'self-center'
+  }
 })))
 
 /** The slot scope rides the base's loose item type, cast it back. */
@@ -80,7 +83,7 @@ const selected = computed({
     leading-icon-class="text-primary"
     :placeholder="mounted ? 'Custom' : 'Presets'"
     :aria-label="`Preset: ${presetLabel}`"
-    :content-class="vertical ? undefined : 'w-60 max-w-[calc(100vw-2rem)]'"
+    :vertical="vertical"
     :class="vertical ? 'w-full' : 'w-38'"
   >
     <template #item-description="{ item }">
@@ -89,7 +92,7 @@ const selected = computed({
 
         <span class="text-dimmed select-none">·</span>
 
-        <span class="flex items-center gap-0.5 shrink-0">
+        <span class="flex items-center gap-1 shrink-0">
           <UIcon v-for="name in asPreset(item).iconSamples" :key="name" :name="name" class="size-3 text-dimmed" />
         </span>
       </span>

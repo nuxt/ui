@@ -58,8 +58,8 @@ const selected = computed({
 
 <template>
   <div class="divide-y divide-default">
-    <div class="flex items-center justify-between gap-2 p-1">
-      <span class="font-semibold text-highlighted text-xs gap-1.5 px-1.5">Theme</span>
+    <div class="flex items-center justify-between gap-2 px-3 py-2">
+      <span class="font-semibold text-highlighted text-xs">Theme</span>
 
       <UTabs
         v-model="mode"
@@ -67,7 +67,11 @@ const selected = computed({
         :content="false"
         color="neutral"
         size="xs"
-        :ui="{ label: 'sr-only' }"
+        :ui="{
+          label: 'sr-only',
+          indicator: 'bg-default',
+          trigger: 'data-[state=active]:text-highlighted w-full in-[[data-slot=list]:not(:has([data-slot=indicator]))]:data-[state=active]:before:bg-default'
+        }"
         aria-label="Color mode"
       />
     </div>
@@ -78,18 +82,18 @@ const selected = computed({
       value-key="id"
       aria-label="Preset"
       :ui="{
-        root: () => 'p-1',
+        root: () => '',
         content: 'max-h-none',
-        group: 'p-0 grid grid-cols-3',
-        item: 'flex-col items-center gap-1 p-1.5 min-w-0 text-muted data-[state=checked]:text-highlighted data-[state=checked]:font-medium data-[state=checked]:before:bg-elevated hover:data-[state=checked]:before:bg-elevated',
+        group: 'grid grid-cols-4 py-2 px-0 gap-y-1',
+        item: () => 'group relative w-full select-none outline-none text-sm group flex flex-col items-center gap-1 p-1 min-w-0 text-muted data-[state=checked]:text-highlighted',
         itemWrapper: 'min-w-0 w-full text-center',
-        itemLabel: 'w-full truncate text-[11px]',
+        itemLabel: 'w-full truncate text-[10px]',
         itemTrailing: 'hidden'
       }"
     >
       <template #item-leading="{ item }">
         <span
-          class="flex items-center justify-center size-8 rounded-full bg-(image:--chip-bg-light) dark:bg-(image:--chip-bg-dark)"
+          class="flex items-center justify-center size-8 rounded-full bg-(image:--chip-bg-light) dark:bg-(image:--chip-bg-dark) ring-2 ring-transparent group-data-[state=checked]:ring-primary group-data-highlighted:ring-(--chip-icon-light)/50 dark:group-data-highlighted:ring-(--chip-icon-dark)/50 transition"
           :style="asTile(item).themeChip"
         >
           <UIcon :name="asTile(item).icon" class="size-4 text-(--chip-icon-light) dark:text-(--chip-icon-dark)" />
@@ -97,13 +101,13 @@ const selected = computed({
       </template>
     </UListbox>
 
-    <div class="p-2">
+    <div class="p-3">
       <UButton
         block
         label="Edit theme"
         :icon="studioIcons.options"
         color="neutral"
-        variant="outline"
+        variant="soft"
         size="sm"
         to="/theme"
         @click="emit('close')"

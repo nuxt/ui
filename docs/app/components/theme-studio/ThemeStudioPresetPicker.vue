@@ -24,7 +24,7 @@ watch(open, (isOpen) => {
   <UPopover
     v-model:open="open"
     :content="{ onInteractOutside: keepPanels }"
-    :ui="{ content: 'w-60' }"
+    :ui="{ content: 'w-62' }"
   >
     <UTooltip text="Theme">
       <UButton

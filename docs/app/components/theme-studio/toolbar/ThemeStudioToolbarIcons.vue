@@ -15,7 +15,7 @@ const { groupDirtyFlags } = useThemeStudioToolbar()
     :icon="icons.find(entry => entry.value === icon)?.icon"
     :dirty="groupDirtyFlags.icons.value"
     aria-label="Icon set"
-    :content-class="vertical ? undefined : 'w-(--reka-popper-anchor-width)'"
+    :vertical="vertical"
     :class="vertical ? 'w-full' : 'w-38'"
   >
     <template #item-description="{ item }">
@@ -24,7 +24,7 @@ const { groupDirtyFlags } = useThemeStudioToolbar()
           v-for="name in iconSetSamples(String(item.value))"
           :key="name"
           :name="name"
-          class="size-3.5 text-muted"
+          class="size-3 text-dimmed"
         />
       </span>
     </template>

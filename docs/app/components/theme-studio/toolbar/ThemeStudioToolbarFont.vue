@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { keepPanels, FONT_WEIGHT_DEFAULTS, loadFontPreviews } from '../../../utils/theme/studio'
+import { keepPanels, toolbarPanelClass, FONT_WEIGHT_DEFAULTS, loadFontPreviews } from '../../../utils/theme/studio'
 
 /**
  * Every typographic setting in one panel: the three stacks up top, then the
@@ -66,108 +66,96 @@ const props = defineProps<{
   vertical?: boolean
 }>()
 
-const appConfig = useAppConfig()
 const studioIcons = useStudioIcons()
 const { groupDirtyFlags } = useThemeStudioToolbar()
 
 const open = ref(false)
 const dirty = groupDirtyFlags.font
 
-const content = computed(() => [
-  props.vertical ? 'w-(--reka-popper-anchor-width)' : 'w-80 max-w-[calc(100vw-2rem)]',
-  'max-h-[70vh] overflow-y-auto'
-])
+const content = computed(() => [...toolbarPanelClass(props.vertical), 'divide-y divide-default *:p-3'])
 </script>
 
 <template>
   <UPopover v-model:open="open" :content="{ align: 'center', onInteractOutside: keepPanels }" :ui="{ content }">
-    <UButton
+    <ThemeStudioToolbarTrigger
       :label="font"
       :icon="studioIcons.text"
-      :trailing-icon="appConfig.ui.icons.chevronDown"
-      color="neutral"
-      variant="outline"
-      :class="['group bg-default', dirty && 'ring-primary/50', vertical ? 'w-full' : 'w-38']"
-      :ui="{
-        label: ['flex-1 min-w-0 text-left truncate', dirty && 'text-primary'],
-        leadingIcon: dirty ? 'text-primary' : 'text-dimmed',
-        trailingIcon: ['transition-transform duration-200', open && 'rotate-180', dirty ? 'text-primary' : 'text-dimmed']
-      }"
+      :dirty="dirty"
+      :open="open"
+      :class="vertical ? 'w-full' : 'w-38'"
       :aria-label="`Text: ${font}`"
     />
 
     <template #content>
       <!-- the panel owns the layout: padding per section, rules between them -->
-      <div class="divide-y divide-default [&>*]:p-2">
-        <ThemeStudioSection label="Fonts" section-key="font">
-          <ThemeStudioRow
-            v-for="stack in stacks"
-            :key="stack.label"
-            control="custom"
-            :label="stack.label"
-          >
-            <ThemeStudioToolbarFontPicker
-              v-model="stack.model.value"
-              :curated="fonts"
-              :default-value="stack.default"
-              :inherit="stack.inherit"
-              :aria-label="stack.hint"
-            />
-          </ThemeStudioRow>
-        </ThemeStudioSection>
+      <ThemeStudioSection label="Fonts" section-key="font">
+        <ThemeStudioRow
+          v-for="stack in stacks"
+          :key="stack.label"
+          control="custom"
+          :label="stack.label"
+        >
+          <ThemeStudioToolbarFontPicker
+            v-model="stack.model.value"
+            :curated="fonts"
+            :default-value="stack.default"
+            :inherit="stack.inherit"
+            :aria-label="stack.hint"
+          />
+        </ThemeStudioRow>
+      </ThemeStudioSection>
 
-        <ThemeStudioSection label="Treatment" section-key="type">
-          <!-- font-size scales every rem metric, so it belongs with the type
+      <ThemeStudioSection label="Treatment" section-key="type">
+        <!-- font-size scales every rem metric, so it belongs with the type
            decisions rather than beside radius -->
-          <ThemeStudioRow
-            v-model="fontSize"
-            control="slider"
-            label="Size"
-            :min="14"
-            :max="18"
-            :step="0.5"
-            unit="px"
-          />
+        <ThemeStudioRow
+          v-model="fontSize"
+          control="slider"
+          label="Size"
+          :min="14"
+          :max="18"
+          :step="0.5"
+          unit="px"
+        />
 
-          <ThemeStudioRow
-            v-model="letterSpacing"
-            control="slider"
-            label="Spacing"
-            :min="-0.05"
-            :max="0.25"
-            :step="0.005"
-            unit="em"
-          />
+        <ThemeStudioRow
+          v-model="letterSpacing"
+          control="slider"
+          label="Spacing"
+          :min="-0.05"
+          :max="0.25"
+          :step="0.005"
+          unit="em"
+        />
 
-          <ThemeStudioRow
-            v-model="lineHeight"
-            control="slider"
-            label="Height"
-            :min="1"
-            :max="2"
-            :step="0.05"
-          />
+        <ThemeStudioRow
+          v-model="lineHeight"
+          control="slider"
+          label="Height"
+          :min="1"
+          :max="2"
+          :step="0.05"
+        />
 
-          <ThemeStudioRow
-            v-model="uppercase"
-            control="switch"
-            label="Uppercase"
-          />
-        </ThemeStudioSection>
+        <ThemeStudioRow
+          v-model="uppercase"
+          control="switch"
+          label="Uppercase"
+        />
+      </ThemeStudioSection>
 
-        <ThemeStudioSection label="Weights" section-key="weights">
-          <ThemeStudioRow
-            v-for="weight in weights"
-            :key="weight.label"
-            v-model="weight.model.value"
-            control="slider"
-            :label="weight.label"
-            :min="100"
-            :max="900"
-            :step="25"
-          />
-        </ThemeStudioSection>
-      </div>
+      <ThemeStudioSection label="Weights" section-key="weights">
+        <ThemeStudioRow
+          v-for="weight in weights"
+          :key="weight.label"
+          v-model="weight.model.value"
+          control="slider"
+          :label="weight.label"
+          :min="100"
+          :max="900"
+          :step="25"
+        />
+      </ThemeStudioSection>
     </template>
   </UPopover>
 </template>

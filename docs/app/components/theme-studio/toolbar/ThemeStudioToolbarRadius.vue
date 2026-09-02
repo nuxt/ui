@@ -16,6 +16,7 @@ const items = radiuses.map(value => ({ label: `${value}rem`, value }))
     :icon="studioIcons.radius"
     :dirty="groupDirtyFlags.radius.value"
     aria-label="Radius"
+    :vertical="vertical"
     :class="vertical ? 'w-full' : 'w-38'"
   />
 </template>

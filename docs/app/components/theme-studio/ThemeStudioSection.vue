@@ -16,6 +16,8 @@ const props = defineProps<{
   /** Reset a section the doc has no slice for, the caller says when it's dirty. */
   resettable?: boolean
   resetDirty?: boolean
+  /** Whether the section has a collapsible content. */
+  collapsible?: boolean
 }>()
 
 const emit = defineEmits<{ reset: [] }>()
@@ -46,9 +48,9 @@ const hasHeader = computed(() => !!(props.label || props.helpTo || showReset.val
 </script>
 
 <template>
-  <div class="flex flex-col gap-2">
-    <div v-if="hasHeader" class="flex items-center gap-0.5">
-      <span class="flex-1 min-w-0 text-xs/5 font-semibold text-highlighted truncate">{{ label }}</span>
+  <div :class="[{ 'flex flex-col gap-1': !collapsible }]">
+    <div v-if="hasHeader" class="flex items-center gap-0.5" :class="[collapsible ? '-my-1' : '-mt-1']">
+      <span class="flex-1 min-w-0 text-xs/5 font-semibold truncate" :class="[collapsible ? 'text-muted' : 'text-highlighted']">{{ label }}</span>
 
       <UTooltip v-if="helpTo" text="Docs" ignore-non-keyboard-focus>
         <UButton
@@ -58,7 +60,6 @@ const hasHeader = computed(() => !!(props.label || props.helpTo || showReset.val
           variant="ghost"
           icon="i-lucide-help-circle"
           aria-label="Documentation for this setting"
-          class="-my-1"
         />
       </UTooltip>
 
@@ -72,7 +73,6 @@ const hasHeader = computed(() => !!(props.label || props.helpTo || showReset.val
           :icon="studioIcons.reset"
           :disabled="!dirty"
           :aria-label="label ? `Reset ${label} to preset` : 'Reset to preset'"
-          class="-my-1"
           @click="reset"
         />
       </UTooltip>

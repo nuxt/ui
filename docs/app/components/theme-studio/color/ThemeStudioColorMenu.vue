@@ -51,71 +51,70 @@ function isSelected(color: string) {
 </script>
 
 <template>
-  <UPopover :content="{ side: 'bottom', align: 'start' }">
+  <UPopover :content="{ side: 'bottom', align: 'center' }" :ui="{ content: 'p-2 grid grid-cols-3 gap-1 w-[calc(var(--reka-popper-anchor-width)+1rem)]' }">
     <UButton
       color="neutral"
       variant="subtle"
       size="sm"
+      :label="label"
       block
       trailing-icon="i-lucide-chevron-down"
-      class="capitalize"
+      class="capitalize group"
+      :style="swatchColor ? { '--swatch-color': swatchColor } : undefined"
+      :ui="{ trailingIcon: 'text-dimmed transition-transform duration-200 group-data-[state=open]:rotate-180' }"
     >
       <template #leading>
-        <span
-          class="inline-block size-3 rounded-full"
-          :class="{ 'bg-black dark:bg-white': alias === 'primary' && blackAsPrimary }"
-          :style="swatchColor ? { backgroundColor: swatchColor } : undefined"
+        <!-- the chip can't take an inline style, the var rides the button -->
+        <UChip
+          inset
+          standalone
+          class="mx-1"
+          :ui="{ base: ['ring-0', swatchColor ? 'bg-(--swatch-color)' : 'bg-black dark:bg-white'] }"
         />
       </template>
-
-      {{ label }}
     </UButton>
 
     <template #content>
-      <div class="w-72 p-2">
-        <div class="grid grid-cols-3 gap-1">
-          <UButton
-            v-if="alias === 'primary'"
-            label="Black"
-            size="sm"
-            color="neutral"
-            variant="subtle"
-            :active="blackAsPrimary"
-            active-color="primary"
-            active-variant="subtle"
-            class="capitalize"
-            @click="pickBlack()"
-          >
-            <template #leading>
-              <span class="inline-block h-2 w-4 rounded-full bg-black dark:bg-white" />
-            </template>
-          </UButton>
+      <UButton
+        v-if="alias === 'primary'"
+        label="Black"
+        size="sm"
+        color="neutral"
+        variant="subtle"
+        :active="blackAsPrimary"
+        active-color="primary"
+        active-variant="subtle"
+        class="capitalize"
+        @click="pickBlack()"
+      >
+        <template #leading>
+          <span class="inline-block h-2 w-3 shrink-0 rounded-full bg-black dark:bg-white" />
+        </template>
+      </UButton>
 
-          <UButton
-            v-for="color in colors"
-            :key="color"
-            :label="paletteLabel(color)"
-            size="sm"
-            color="neutral"
-            variant="subtle"
-            :active="isSelected(color)"
-            active-color="primary"
-            active-variant="subtle"
-            class="capitalize"
-            @click="selectPalette(alias, color)"
-          >
-            <template #leading>
-              <!-- a mini 400→600 ramp says more about a palette than one dot -->
-              <span
-                class="inline-block h-2 w-4 rounded-full"
-                :style="{
-                  background: `linear-gradient(to right, var(--color-${rampCssName(color)}-400), var(--color-${rampCssName(color)}-500), var(--color-${rampCssName(color)}-600))`
-                }"
-              />
-            </template>
-          </UButton>
-        </div>
-      </div>
+      <UButton
+        v-for="color in colors"
+        :key="color"
+        :label="paletteLabel(color)"
+        size="sm"
+        color="neutral"
+        variant="subtle"
+        :active="isSelected(color)"
+        active-color="primary"
+        active-variant="subtle"
+        class="capitalize"
+        @click="selectPalette(alias, color)"
+      >
+        <template #leading>
+          <!-- a mini 400→600 ramp says more about a palette than one dot -->
+          <span
+            class="inline-block h-2 w-3 shrink-0 rounded-full"
+            :style="{
+              background: `linear-gradient(to right, var(--color-${rampCssName(color)}-400), var(--color-${rampCssName(color)}-500), var(--color-${rampCssName(color)}-600))`
+            }"
+          />
+        </template>
+      </UButton>
     </template>
   </UPopover>
 </template>

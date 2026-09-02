@@ -1,14 +1,13 @@
 <script setup lang="ts">
-import { keepPanels } from '../../../utils/theme/studio'
+import { keepPanels, toolbarPanelClass } from '../../../utils/theme/studio'
 
 /**
- * The toolbar's select-shaped controls (preset, icons, radius). Everything that makes
- * a select read like the popover triggers beside it lives here once, so the
- * two can't drift apart again: a select renders its value `text-highlighted`
- * at weight 400 where a button renders its label `text-default` at 500, and
- * the dirty state has to reach the ring, the value and both icons.
+ * The toolbar's pick-one controls (preset, icons, radius): the shared trigger
+ * opening a plain listbox, the same shape as the popover panels beside them.
+ * A select menu is a whole combobox with its own trigger styling and height
+ * cap; these lists are nine rows.
  */
-defineProps<{
+const props = defineProps<{
   /** Radius stops are numbers, icon sets are strings. */
   items: { label: string, value: string | number, icon?: string }[]
   /** The trigger's leading glyph. */
@@ -16,38 +15,58 @@ defineProps<{
   /** Overrides the dimmed leading glyph while clean (the preset chip stays primary). */
   leadingIconClass?: string
   dirty?: boolean
-  /** For a list that needs more room than the trigger, e.g. icon previews. */
-  contentClass?: string
+  /** Trigger text while no item matches the value (preset-less, or pre-mount). */
+  placeholder?: string
+  /** Stacked in the mobile menu: the list takes the trigger's width. */
+  vertical?: boolean
 }>()
+
+defineOptions({ inheritAttrs: false })
 
 const model = defineModel<string | number>()
 
 /** Local unless a caller binds it; drives the chevron rotation. */
 const open = defineModel<boolean>('open', { default: false })
+
+const attrs = useAttrs()
+
+const triggerLabel = computed(() => props.items.find(item => item.value === model.value)?.label ?? props.placeholder)
+
+// Reka toggles the selected row off with `undefined`; a pick-one control
+// keeps its value and just closes.
+const selected = computed({
+  get: () => model.value,
+  set: (value: string | number | undefined) => {
+    if (value !== undefined) model.value = value
+    open.value = false
+  }
+})
 </script>
 
 <template>
-  <USelectMenu
-    v-model="model"
-    v-model:open="open"
-    :items="items"
-    value-key="value"
-    :icon="icon"
-    :content="{ onInteractOutside: keepPanels }"
-    :search-input="false"
-    :color="dirty ? 'primary' : 'neutral'"
-    :highlight="dirty"
-    variant="outline"
-    :ui="{
-      base: ['transition-colors hover:bg-elevated', dirty && 'ring-primary/50'],
-      value: ['font-medium', dirty ? 'text-primary' : 'text-default'],
-      leadingIcon: dirty ? 'text-primary' : (leadingIconClass ?? 'text-dimmed'),
-      trailingIcon: ['transition-transform duration-200', open && 'rotate-180', dirty ? 'text-primary' : 'text-dimmed'],
-      content: contentClass
-    }"
-  >
-    <template v-for="(_, name) in $slots" :key="name" #[name]="scope">
-      <slot :name="name" v-bind="scope ?? {}" />
+  <UPopover v-model:open="open" :content="{ align: 'center', onInteractOutside: keepPanels }" :ui="{ content: toolbarPanelClass(vertical) }">
+    <ThemeStudioToolbarTrigger
+      :label="triggerLabel"
+      :icon="icon"
+      :leading-icon-class="leadingIconClass"
+      :dirty="dirty"
+      :open="open"
+      v-bind="attrs"
+    />
+
+    <template #content>
+      <!-- the popover already frames the panel, the listbox only fills it -->
+      <UListbox
+        v-model="selected"
+        :items="items"
+        value-key="value"
+        :aria-label="(attrs['aria-label'] as string | undefined)"
+        :ui="{ root: 'ring-0', content: 'max-h-none' }"
+      >
+        <template v-for="(_, name) in $slots" :key="name" #[name]="scope">
+          <slot :name="name" v-bind="scope ?? {}" />
+        </template>
+      </UListbox>
     </template>
-  </USelectMenu>
+  </UPopover>
 </template>

@@ -56,7 +56,6 @@ const editors = [
           active-color="primary"
           active-variant="subtle"
           :aria-label="editor.ariaLabel"
-          class="-my-1"
           @click="editor.open.value = !editor.open.value"
         />
       </UTooltip>
@@ -82,7 +81,7 @@ const editors = [
 
             <!-- Every group keeps its name: a headerless section can't be
                  told apart from the rows above it. -->
-            <div v-else class="flex flex-col gap-3">
+            <div v-else class="flex flex-col gap-2">
               <ThemeStudioSection
                 v-for="tokenGroup in tokenGroups"
                 :key="tokenGroup.key"

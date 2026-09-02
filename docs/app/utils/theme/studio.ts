@@ -117,6 +117,15 @@ export function keepPanels(event: Event) {
   }
 }
 
+/**
+ * One footprint for every toolbar popover: the header picker's w-62 on the
+ * bar, the trigger's own width when stacked in the mobile menu. Scroll lives
+ * on the popover content so panels and listboxes cap the same way.
+ */
+export function toolbarPanelClass(vertical?: boolean): string[] {
+  return [vertical ? 'w-(--reka-popper-anchor-width)' : 'w-64 max-w-[calc(100vw-2rem)]', 'max-h-[70vh] overflow-y-auto']
+}
+
 /** Tailwind's stock weight ladder, set steps are absences at these values. */
 export const FONT_WEIGHT_DEFAULTS = { normal: 400, medium: 500, semibold: 600, bold: 700 } as const
 

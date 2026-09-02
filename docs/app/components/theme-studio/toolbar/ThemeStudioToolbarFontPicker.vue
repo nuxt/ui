@@ -105,7 +105,7 @@ function faceOf(value?: string) {
     :items="items"
     value-key="value"
     ignore-filter
-    :content="{ onInteractOutside: keepPanels, sideOffset: 7 }"
+    :content="{ onInteractOutside: keepPanels, sideOffset: 5 }"
     :search-input="{ placeholder: 'Search Google Fonts…', icon: appConfig.ui.icons.search }"
     :aria-label="ariaLabel"
     size="sm"

@@ -366,8 +366,8 @@ export const presets: ThemePreset[] = [{
     }
   }
 }, {
-  id: 'marshmallow',
-  name: 'Marshmallow',
+  id: 'bubblegum',
+  name: 'Bubblegum',
   description: 'Pastel pink softness with mauve-tinted grays.',
   icon: 'i-lucide-candy',
   doc: {
