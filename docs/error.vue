@@ -5,7 +5,7 @@
 
     <Banner />
 
-    <Header :links="links" />
+    <Header />
 
     <UContainer>
       <UMain>
@@ -18,7 +18,7 @@
     <Footer />
 
     <ClientOnly>
-      <LazyUContentSearch :files="files" :navigation="navigation" :links="links" :fuse="{ resultLimit: 42 }" />
+      <LazyUContentSearch :files="files" :navigation="navigation" :fuse="{ resultLimit: 42 }" />
     </ClientOnly>
 
     <UNotifications>
@@ -43,7 +43,6 @@ defineProps<{
   error: NuxtError
 }>()
 
-const route = useRoute()
 const colorMode = useColorMode()
 
 const { data: navigation } = await useAsyncData('navigation', () => fetchContentNavigation())
@@ -52,15 +51,6 @@ const { data: files } = useLazyFetch<ParsedContent[]>('/api/search.json', { defa
 // Computed
 
 const color = computed(() => colorMode.value === 'dark' ? '#18181b' : 'white')
-
-const links = computed(() => {
-  return [{
-    label: 'Docs',
-    icon: 'i-heroicons-book-open',
-    to: '/getting-started',
-    active: route.path.startsWith('/getting-started') || route.path.startsWith('/components') || route.path.startsWith('/pro')
-  }]
-})
 
 // Head
 
