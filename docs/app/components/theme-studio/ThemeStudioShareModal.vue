@@ -54,7 +54,7 @@ watch(open, async (isOpen) => {
   <UModal
     v-model:open="open"
     title="Export theme"
-    :ui="{ content: 'max-w-3xl' }"
+    :ui="{ content: 'max-w-5xl' }"
   >
     <template #body>
       <div class="flex flex-col gap-4">
