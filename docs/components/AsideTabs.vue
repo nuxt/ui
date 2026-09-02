@@ -4,6 +4,7 @@
     :model-value="selected"
     :items="items"
     :content="false"
+    :ui="{ list: { height: 'h-8', tab: { height: 'h-6' } } }"
     class="w-full"
     @change="onChange"
   />
