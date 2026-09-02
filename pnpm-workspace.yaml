@@ -42,3 +42,6 @@ allowBuilds:
   esbuild: false
   unrs-resolver: false
   vue-demi: false
+
+minimumReleaseAgeExclude:
+  - 'nuxt-agent-discovery@0.3.0'
