@@ -19,47 +19,45 @@ function toggleChat() {
 <template>
   <UHeader
     :ui="{
-      left: 'min-w-0',
-      right: 'gap-0.5',
       container: [route.path.startsWith('/blog/') ? 'max-w-none' : '']
     }"
     class="flex flex-col"
   >
     <template #left>
       <HeaderLogo />
-
-      <VersionMenu />
     </template>
 
     <UNavigationMenu :items="desktopLinks" variant="link" content-orientation="vertical" />
 
     <template #right>
-      <UTooltip text="Search" :kbds="['meta', 'K']" ignore-non-keyboard-focus>
-        <UContentSearchButton />
-      </UTooltip>
+      <UTheme :props="{ button: { size: 'sm' } }">
+        <UTooltip text="Search" :kbds="['meta', 'K']" ignore-non-keyboard-focus>
+          <UContentSearchButton :collapsed="false" variant="soft" class="min-w-40" />
+        </UTooltip>
 
-      <UTooltip text="Ask AI" :kbds="['meta', 'I']" ignore-non-keyboard-focus>
-        <UButton
-          color="neutral"
-          variant="ghost"
-          :icon="studioIcons.assistant"
-          aria-label="Ask AI for help"
-          @click="toggleChat"
-        />
-      </UTooltip>
+        <ThemeStudioPresetPicker />
 
-      <ThemeStudioPresetPicker />
+        <UTooltip text="Open on GitHub" class="hidden lg:flex">
+          <UButton
+            color="neutral"
+            variant="soft"
+            label="7k+"
+            to="https://github.com/nuxt/ui"
+            target="_blank"
+            icon="i-simple-icons-github"
+            aria-label="GitHub"
+          />
+        </UTooltip>
 
-      <UTooltip text="Open on GitHub" class="hidden lg:flex">
-        <UButton
-          color="neutral"
-          variant="ghost"
-          to="https://github.com/nuxt/ui"
-          target="_blank"
-          icon="i-simple-icons-github"
-          aria-label="GitHub"
-        />
-      </UTooltip>
+        <!-- <UTooltip text="Ask AI" :kbds="['meta', 'I']" ignore-non-keyboard-focus>
+          <UButton
+            color="neutral"
+            variant="soft"
+            label="Ask AI"
+            @click="toggleChat"
+          />
+        </UTooltip> -->
+      </UTheme>
     </template>
 
     <template #toggle="{ open, toggle, ui }">

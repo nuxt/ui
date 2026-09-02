@@ -6,39 +6,18 @@ export function useHeader() {
     to: '/docs',
     active: route.path.startsWith('/docs/')
   }, {
+    label: 'Components',
+    to: '/docs/components',
+    active: route.path.startsWith('/docs/components')
+  }, {
+    label: 'Theme',
+    to: '/theme'
+  }, {
     label: 'Templates',
     to: '/templates'
   }, {
-    label: 'Resources',
-    active: route.path.startsWith('/showcase') || route.path.startsWith('/community') || route.path.startsWith('/blog'),
-    children: [{
-      label: 'Showcase',
-      description: 'Discover websites built with Nuxt UI.',
-      icon: 'i-lucide-presentation',
-      to: '/showcase'
-    }, {
-      label: 'Community',
-      description: 'Explore projects built around Nuxt UI.',
-      icon: 'i-lucide-globe',
-      to: '/community'
-    }, {
-      label: 'Playground',
-      description: 'Try Nuxt UI components live in your browser.',
-      icon: 'i-lucide-square-terminal',
-      to: '/play',
-      target: '_blank'
-    }, {
-      label: 'Blog',
-      description: 'Read the latest news and updates.',
-      icon: 'i-lucide-newspaper',
-      to: '/blog'
-    }]
-  }, {
-    label: 'Figma',
-    to: '/figma'
-  }, {
-    label: 'Releases',
-    to: '/releases'
+    label: 'Showcase',
+    to: '/showcase'
   }])
 
   const mobileLinks = computed(() => [{
@@ -87,10 +66,6 @@ export function useHeader() {
     label: 'Figma',
     icon: 'i-simple-icons-figma',
     to: '/figma'
-  }, {
-    label: 'Releases',
-    icon: 'i-lucide-rocket',
-    to: '/releases'
   }, {
     label: 'GitHub',
     to: 'https://github.com/nuxt/ui',
