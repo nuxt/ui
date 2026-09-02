@@ -1,158 +1,79 @@
 <script setup lang="ts">
-import { importTheme, isDefaultTheme } from '../../utils/theme/engine'
+import type { HighlighterGeneric } from 'shiki'
 
-/**
- * The shared import/export modal, plain toolbar buttons open it in either
- * mode. Export shows the generated files with copy buttons; import parses
- * a paste of the same two files back into editable settings.
- */
+/** The export modal: the two generated files, highlighted, with copy buttons. */
 const open = defineModel<boolean>('open', { default: false })
-const mode = defineModel<'import' | 'export'>('mode', { default: 'export' })
 
-const { applyDoc, clearActivePreset } = useThemeStudio()
-const { exportCSS, exportConfig, configLabel, hasChanges } = useTheme()
+const { exportCSS, exportConfig, configLabel } = useTheme()
 const { track } = useAnalytics()
-const { copy: copyCSS, copied: copiedCSS } = useClipboard()
-const { copy: copyConfig, copied: copiedConfig } = useClipboard()
 
 const css = ref('')
 const config = ref('')
-const skipped = ref<string[]>([])
-const imported = ref(false)
-const empty = ref(false)
 
-watch([open, mode], () => {
-  skipped.value = []
-  imported.value = false
-  empty.value = false
-  // Export fills the panes with the generated files; import starts blank.
-  css.value = mode.value === 'export' && open.value ? exportCSS() : ''
-  config.value = mode.value === 'export' && open.value ? exportConfig() : ''
+const colorMode = useColorMode()
+
+// Ready on first open; the panes fall back to a plain <pre> for the frame
+// the highlighter takes to arrive.
+const highlighter = shallowRef<HighlighterGeneric<any, any> | null>(null)
+watch(open, async (isOpen) => {
+  if (isOpen && !highlighter.value) {
+    highlighter.value = await useHighlighter()
+  }
 })
 
-function runImport() {
-  const result = importTheme({ css: css.value, config: config.value })
-  skipped.value = result.skipped
-  empty.value = isDefaultTheme(result.doc)
-  imported.value = false
+// One theme per mode rather than shiki's dual-theme vars (those ride inline
+// styles), and `inline` structure: ProsePre brings the <pre> of its own.
+function highlight(code: string, lang: 'css' | 'typescript') {
+  if (!highlighter.value || !code) return ''
+  return highlighter.value.codeToHtml(code, {
+    lang,
+    theme: colorMode.value === 'dark' ? 'material-theme-palenight' : 'material-theme-lighter',
+    structure: 'inline'
+  })
+}
 
-  if (!empty.value) {
-    applyDoc(result.doc)
-    // an imported doc replaces the whole theme, the old preset is no
-    // longer the baseline the dirty indicators should measure against
-    clearActivePreset()
-    imported.value = true
-    track('Theme Imported', { skipped: result.skipped.length })
+const panes = computed(() => [
+  { key: 'css' as const, filename: 'main.css', code: css.value, html: highlight(css.value, 'css') },
+  { key: 'config' as const, filename: configLabel.value, code: config.value, html: highlight(config.value, 'typescript') }
+])
+
+/** ProsePre owns the copy button; the capture only adds the analytics event. */
+function onCopyCapture(key: 'css' | 'config', event: Event) {
+  if ((event.target as HTMLElement).closest('button')) {
+    track('Theme Exported', { type: key === 'css' ? 'CSS' : 'Config' })
   }
 }
+
+watch(open, (isOpen) => {
+  css.value = isOpen ? exportCSS() : ''
+  config.value = isOpen ? exportConfig() : ''
+})
 </script>
 
 <template>
   <UModal
     v-model:open="open"
-    :title="mode === 'export' ? 'Export theme' : 'Import theme'"
-    :description="mode === 'export'
-      ? 'Copy only what you changed, everything else stays inherited from Nuxt UI defaults.'
-      : 'Paste an exported main.css and/or app.config.ts, the studio parses it back into editable settings.'"
+    title="Export theme"
     :ui="{ content: 'max-w-3xl' }"
   >
     <template #body>
       <div class="flex flex-col gap-4">
-        <UAlert
-          v-if="mode === 'export' && !hasChanges"
-          title="No changes yet"
-          description="You are on the default theme. Tweak something and come back."
-          icon="i-lucide-info"
-          color="neutral"
-          variant="subtle"
-        />
-
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-          <div v-for="pane in (['css', 'config'] as const)" :key="pane" class="flex flex-col gap-2 min-w-0">
-            <div class="flex items-center justify-between gap-2">
-              <p class="text-xs font-semibold text-muted font-mono">
-                {{ pane === 'css' ? 'main.css' : configLabel }}
-              </p>
-
-              <UButton
-                v-if="mode === 'export'"
-                size="xs"
-                color="neutral"
-                variant="ghost"
-                :icon="(pane === 'css' ? copiedCSS : copiedConfig) ? 'i-lucide-copy-check' : 'i-lucide-copy'"
-                :aria-label="pane === 'css' ? 'Copy CSS' : 'Copy config'"
-                @click="pane === 'css'
-                  ? (copyCSS(css), track('Theme Exported', { type: 'CSS' }))
-                  : (copyConfig(config), track('Theme Exported', { type: 'Config' }))"
-              />
-            </div>
-
-            <pre v-if="mode === 'export'" class="text-xs font-mono bg-muted rounded-md p-3 overflow-x-auto max-h-96 whitespace-pre">{{ pane === 'css' ? css : config }}</pre>
-
-            <UTextarea
-              v-else-if="pane === 'css'"
-              v-model="css"
-              :rows="10"
-              placeholder="@import &quot;tailwindcss&quot;;&#10;@import &quot;@nuxt/ui&quot;;&#10;…"
-              class="w-full font-mono"
-              variant="subtle"
-              :ui="{ base: 'text-xs' }"
-            />
-
-            <UTextarea
-              v-else
-              v-model="config"
-              :rows="10"
-              variant="subtle"
-              placeholder="export default defineAppConfig({&#10;  ui: { … }&#10;})"
-              class="w-full font-mono"
-              :ui="{ base: 'text-xs' }"
-            />
+          <div v-for="pane in panes" :key="pane.key" class="min-w-0">
+            <ProsePre
+              :filename="pane.filename"
+              :code="pane.code"
+              :ui="{ root: 'my-0 h-full flex flex-col', base: 'grow max-h-96 whitespace-pre text-xs/5' }"
+              @click.capture="onCopyCapture(pane.key, $event)"
+            >
+              <!-- eslint-disable-next-line vue/no-v-html -- shiki output over our own generated files -->
+              <code v-if="pane.html" v-html="pane.html" />
+              <template v-else>
+                {{ pane.code }}
+              </template>
+            </ProsePre>
           </div>
         </div>
-
-        <UAlert
-          v-if="imported"
-          title="Theme imported"
-          :description="skipped.length ? 'Applied, a few lines were outside the theme schema and were skipped (listed below).' : 'Applied. Every line was understood.'"
-          icon="i-lucide-check"
-          color="success"
-          variant="subtle"
-        />
-
-        <UAlert
-          v-else-if="empty"
-          title="Nothing to import"
-          description="No theme settings were recognized in the pasted content."
-          icon="i-lucide-info"
-          color="warning"
-          variant="subtle"
-        />
-
-        <div v-if="skipped.length" class="flex flex-col gap-1">
-          <p class="text-xs font-semibold text-muted">
-            Skipped
-          </p>
-          <pre class="text-xs font-mono bg-muted rounded-md p-3 overflow-x-auto max-h-40 whitespace-pre">{{ skipped.join('\n') }}</pre>
-        </div>
-      </div>
-    </template>
-
-    <template v-if="mode === 'import'" #footer>
-      <div class="flex justify-end gap-2 w-full">
-        <UButton
-          label="Cancel"
-          color="neutral"
-          variant="ghost"
-          @click="open = false"
-        />
-        <UButton
-          label="Import"
-          icon="i-lucide-upload"
-          color="neutral"
-          :disabled="!css.trim() && !config.trim()"
-          @click="runImport"
-        />
       </div>
     </template>
   </UModal>

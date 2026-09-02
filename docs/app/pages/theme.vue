@@ -49,9 +49,8 @@ defineShortcuts({
   ctrl_y: redo
 })
 
-/** The shared import/export modal, the two toolbar buttons pick its mode. */
+/** The export modal, opened from the header. */
 const shareOpen = ref(false)
-const shareMode = ref<'import' | 'export'>('export')
 </script>
 
 <template>
@@ -75,7 +74,7 @@ const shareMode = ref<'import' | 'export'>('export')
           color="neutral"
           label="Export"
           class="hidden lg:inline-flex"
-          @click="shareMode = 'export'; shareOpen = true"
+          @click="shareOpen = true"
         />
       </template>
 
@@ -107,7 +106,7 @@ const shareMode = ref<'import' | 'export'>('export')
             color="neutral"
             label="Export theme"
             block
-            @click="shareMode = 'export'; shareOpen = true"
+            @click="shareOpen = true"
           />
         </div>
       </template>
@@ -164,6 +163,6 @@ const shareMode = ref<'import' | 'export'>('export')
       </template>
     </UFooter>
 
-    <ThemeStudioShareModal v-model:open="shareOpen" v-model:mode="shareMode" />
+    <ThemeStudioShareModal v-model:open="shareOpen" />
   </main>
 </template>
