@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { AvatarProps } from '@nuxt/ui'
 import type { ThemeDoc } from '../../../utils/theme/engine'
 import { themeIcons } from '../../../utils/theme/icons'
 import { themeChipStyle, loadFontPreviews } from '../../../utils/theme/studio'
@@ -45,8 +46,14 @@ function iconSamples(doc: ThemeDoc): string[] {
 const presetItems = computed(() => presets.map(preset => ({
   label: preset.name,
   value: preset.id,
-  chipIcon: preset.icon,
-  themeChip: themeChipStyle(preset.doc),
+  // the item's own avatar carries the doc's ramp as its chip
+  avatar: {
+    icon: preset.icon,
+    size: 'md',
+    class: 'bg-(image:--chip-bg-light) dark:bg-(image:--chip-bg-dark)',
+    style: themeChipStyle(preset.doc),
+    ui: { icon: 'text-(--chip-icon-light) dark:text-(--chip-icon-dark)' }
+  } as AvatarProps,
   font: preset.doc.font?.sans ?? 'Public Sans',
   iconSamples: iconSamples(preset.doc)
 })))
@@ -73,19 +80,9 @@ const selected = computed({
     leading-icon-class="text-primary"
     :placeholder="mounted ? 'Custom' : 'Presets'"
     :aria-label="`Preset: ${presetLabel}`"
-    :content-class="vertical ? undefined : 'w-72'"
+    :content-class="vertical ? undefined : 'w-(--reka-popper-anchor-width)'"
     :class="vertical ? 'w-full' : 'w-38'"
   >
-    <template #item-leading="{ item }">
-      <span
-        class="flex items-center justify-center size-8 rounded-full shrink-0 bg-(image:--chip-bg-light) dark:bg-(image:--chip-bg-dark)"
-        :style="asPreset(item).themeChip"
-      >
-        <UIcon :name="asPreset(item).chipIcon" class="size-4 text-(--chip-icon-light) dark:text-(--chip-icon-dark)" />
-      </span>
-    </template>
-
-    <!-- the doc's font in its own face and a taste of its icon set -->
     <template #item-description="{ item }">
       <span class="flex items-center gap-2">
         <span class="shrink-0 text-xs text-muted truncate" :style="{ fontFamily: `'${asPreset(item).font}', sans-serif` }">{{ asPreset(item).font }}</span>

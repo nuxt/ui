@@ -1,11 +1,13 @@
 <script setup lang="ts">
+import type { ListboxItem } from '@nuxt/ui'
+
 /**
  * The header's theme popover: the color mode up top, a grid of preset
  * swatches, and the full studio one click away. Picking only, everything
  * else (export, reset, the rest of the axes) lives in the studio. The
  * header drops this on /theme, where the studio's own toolbar covers it.
  */
-import { themeSwatchStyle, keepPanels } from '../../utils/theme/studio'
+import { themeChipStyle, keepPanels } from '../../utils/theme/studio'
 
 const appConfig = useAppConfig()
 const colorMode = useColorMode()
@@ -38,20 +40,34 @@ const mode = computed({
   set: (value: string) => (colorMode.preference = value)
 })
 
-const presetTiles = computed(() => presets.map(preset => ({
-  preset,
+const presetTiles = computed<ListboxItem[]>(() => presets.map(preset => ({
+  id: preset.id,
   label: preset.name,
   icon: preset.icon,
-  swatch: themeSwatchStyle(preset.doc),
-  active: mounted.value && preset.id === selectedPreset.value
+  themeChip: themeChipStyle(preset.doc)
 })))
+
+/** The slot scope rides the listbox's loose item type, cast it back. */
+function asTile(item: unknown) {
+  return item as { icon: string, themeChip: Record<string, string> }
+}
+
+const selected = computed({
+  get: () => (mounted.value ? selectedPreset.value : undefined),
+  set: (id: string | undefined) => {
+    // undefined is Reka toggling the selected tile off: nothing to apply,
+    // and re-applying would wipe the edits made on top of it
+    const preset = presets.find(entry => entry.id === id)
+    if (preset) applyPreset(preset)
+  }
+})
 </script>
 
 <template>
   <UPopover
     v-model:open="open"
     :content="{ onInteractOutside: keepPanels }"
-    :ui="{ content: 'divide-y divide-default w-56' }"
+    :ui="{ content: 'divide-y divide-default w-60' }"
   >
     <UTooltip text="Theme">
       <UButton
@@ -64,8 +80,8 @@ const presetTiles = computed(() => presets.map(preset => ({
     </UTooltip>
 
     <template #content>
-      <div class="flex items-center justify-between gap-2 p-2 ps-3">
-        <span class="text-sm font-semibold text-highlighted">Theme</span>
+      <div class="flex items-center justify-between gap-2 p-1">
+        <span class="font-semibold text-highlighted text-xs gap-1.5 px-1.5">Theme</span>
 
         <UTabs
           v-model="mode"
@@ -78,34 +94,39 @@ const presetTiles = computed(() => presets.map(preset => ({
         />
       </div>
 
-      <div class="grid grid-cols-3 p-1.5">
-        <button
-          v-for="tile in presetTiles"
-          :key="tile.preset.id"
-          type="button"
-          class="flex flex-col items-center gap-1.5 p-2 rounded-md transition-colors hover:bg-elevated/50"
-          :class="tile.active && 'bg-elevated hover:bg-elevated'"
-          :aria-pressed="tile.active"
-          @click="applyPreset(tile.preset)"
-        >
+      <UListbox
+        v-model="selected"
+        :items="presetTiles"
+        value-key="id"
+        aria-label="Preset"
+        :ui="{
+          root: () => 'p-1',
+          content: 'max-h-none',
+          group: 'p-0 grid grid-cols-3',
+          item: 'flex-col items-center gap-1 p-1.5 min-w-0 text-muted data-[state=checked]:text-highlighted data-[state=checked]:font-medium data-[state=checked]:before:bg-elevated hover:data-[state=checked]:before:bg-elevated',
+          itemWrapper: 'min-w-0 w-full text-center',
+          itemLabel: 'w-full truncate text-[11px]',
+          itemTrailing: 'hidden'
+        }"
+      >
+        <template #item-leading="{ item }">
           <span
-            class="flex items-center justify-center size-8 rounded-full bg-(image:--swatch-light) dark:bg-(image:--swatch-dark)"
-            :style="tile.swatch"
+            class="flex items-center justify-center size-8 rounded-full bg-(image:--chip-bg-light) dark:bg-(image:--chip-bg-dark)"
+            :style="asTile(item).themeChip"
           >
-            <UIcon :name="tile.icon" class="size-5 text-(--swatch-ink-light) dark:text-(--swatch-ink-dark)" />
+            <UIcon :name="asTile(item).icon" class="size-4 text-(--chip-icon-light) dark:text-(--chip-icon-dark)" />
           </span>
+        </template>
+      </UListbox>
 
-          <span class="w-full truncate text-[11px]" :class="tile.active ? 'text-highlighted font-medium' : 'text-muted'">{{ tile.label }}</span>
-        </button>
-      </div>
-
-      <div class="p-1.5">
+      <div class="p-2">
         <UButton
           block
           label="Edit theme"
           :icon="studioIcons.options"
           color="neutral"
-          variant="ghost"
+          variant="outline"
+          size="sm"
           to="/theme"
           @click="open = false"
         />
