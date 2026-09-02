@@ -1,4 +1,4 @@
-import { DEFAULT_PRESET_ID } from '../utils/theme/engine'
+import { DEFAULT_PRESET_ID, GROUP_STOCK_VARIANT } from '../utils/theme/engine'
 import { paletteLabel, rampCssName } from '../utils/theme/studio'
 
 /**
@@ -46,7 +46,7 @@ export function useThemeStudioToolbar() {
     // the pickers store the stock choice as 'default', which is no choice
     const chosen = (value?: string) => (value && value !== 'default' ? value : undefined)
     const size = chosen(defaults?.size) ?? 'md'
-    const variant = chosen(defaults?.variants?.buttons) ?? chosen(defaults?.variant) ?? 'solid'
+    const variant = chosen(defaults?.variants?.buttons) ?? chosen(defaults?.variant) ?? GROUP_STOCK_VARIANT.buttons
     return `${size.toUpperCase()}, ${capitalize(variant)}`
   })
 

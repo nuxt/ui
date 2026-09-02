@@ -189,6 +189,22 @@ export const VARIANT_GROUPS: Record<VariantGroup, string[]> = {
   inputs: FIELD_COMPONENTS
 }
 
+/**
+ * What a group's variant select offers: its lead component's whole
+ * vocabulary, so a variant added to the library reaches the picker by
+ * table, not by editing the panel.
+ */
+export const GROUP_VARIANTS: Record<VariantGroup, DefaultVariant[]> = Object.fromEntries(
+  (Object.keys(VARIANT_GROUPS) as VariantGroup[]).map(group => [group, VARIANT_SUPPORT[VARIANT_GROUPS[group][0]!] as DefaultVariant[]])
+) as Record<VariantGroup, DefaultVariant[]>
+
+/** The library's own default variant per group; picking it clears the override. */
+export const GROUP_STOCK_VARIANT: Record<VariantGroup, DefaultVariant> = {
+  buttons: 'solid',
+  panels: 'outline',
+  inputs: 'outline'
+}
+
 /** Color scale a token slider walks, neutral, or any semantic alias's ramp. */
 export type TokenRamp = 'neutral' | 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'error'
 
