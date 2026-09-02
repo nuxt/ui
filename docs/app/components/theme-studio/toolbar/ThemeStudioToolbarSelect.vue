@@ -2,7 +2,7 @@
 import { keepPanels } from '../../../utils/theme/studio'
 
 /**
- * The toolbar's select-shaped controls (icons, radius). Everything that makes
+ * The toolbar's select-shaped controls (preset, icons, radius). Everything that makes
  * a select read like the popover triggers beside it lives here once, so the
  * two can't drift apart again: a select renders its value `text-highlighted`
  * at weight 400 where a button renders its label `text-default` at 500, and
@@ -39,7 +39,7 @@ const open = defineModel<boolean>('open', { default: false })
     :highlight="dirty"
     variant="outline"
     :ui="{
-      base: dirty && 'ring-primary/50',
+      base: ['transition-colors hover:bg-elevated', dirty && 'ring-primary/50'],
       value: ['font-medium', dirty ? 'text-primary' : 'text-default'],
       leadingIcon: dirty ? 'text-primary' : (leadingIconClass ?? 'text-dimmed'),
       trailingIcon: ['transition-transform duration-200', open && 'rotate-180', dirty ? 'text-primary' : 'text-dimmed'],

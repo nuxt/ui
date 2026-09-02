@@ -15,11 +15,11 @@ const { groupDirtyFlags } = useThemeStudioToolbar()
     :icon="icons.find(entry => entry.value === icon)?.icon"
     :dirty="groupDirtyFlags.icons.value"
     aria-label="Icon set"
-    :content-class="vertical ? undefined : 'w-72'"
+    :content-class="vertical ? undefined : 'w-(--reka-popper-anchor-width)'"
     :class="vertical ? 'w-full' : 'w-38'"
   >
     <template #item-description="{ item }">
-      <span class="flex items-center gap-1.5 pt-0.5">
+      <span class="flex items-center gap-1 shrink-0">
         <UIcon
           v-for="name in iconSetSamples(String(item.value))"
           :key="name"

@@ -85,11 +85,11 @@ const content = computed(() => [
       :label="font"
       :icon="studioIcons.text"
       :trailing-icon="appConfig.ui.icons.chevronDown"
-      :color="dirty ? 'primary' : 'neutral'"
+      color="neutral"
       variant="outline"
-      :class="['group', vertical ? 'w-full' : 'w-38']"
+      :class="['group bg-default', dirty && 'ring-primary/50', vertical ? 'w-full' : 'w-38']"
       :ui="{
-        label: 'flex-1 min-w-0 text-left truncate',
+        label: ['flex-1 min-w-0 text-left truncate', dirty && 'text-primary'],
         leadingIcon: dirty ? 'text-primary' : 'text-dimmed',
         trailingIcon: ['transition-transform duration-200', open && 'rotate-180', dirty ? 'text-primary' : 'text-dimmed']
       }"

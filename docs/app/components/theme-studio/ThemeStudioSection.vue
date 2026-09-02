@@ -1,8 +1,8 @@
 <script setup lang="ts">
 /**
  * One settings section: a heading row over its rows, with a reset for the doc
- * slice it owns. Panels are read top to bottom, so nothing here folds; the
- * two editors that do fold hang off their own toggle in the header.
+ * slice it owns. Panels are read top to bottom, so nothing here folds;
+ * whatever does fold hangs off its own toggle in the header (#actions).
  */
 import type { SectionKey } from '../../utils/theme/engine'
 

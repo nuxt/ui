@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { keepPanels } from '../../../utils/theme/studio'
 import type { VariantGroup } from '../../../utils/theme/engine'
+import { GROUP_VARIANTS, GROUP_STOCK_VARIANT } from '../../../utils/theme/engine'
 
 /**
  * The variant and colour Buttons, Cards and Inputs start from, one section
@@ -36,11 +37,12 @@ const RENDERABLE_VARIANTS = ['solid', 'outline', 'soft', 'subtle', 'ghost', 'lin
 /** Variant grid popovers close on pick, one open flag per group. */
 const variantGridOpen = reactive<Record<string, boolean>>({ buttons: false, panels: false, inputs: false })
 
-// `stock` is the library's own default, picking it clears the override.
+// Offered variants and the stock default both come off the engine tables,
+// so a variant added to the library reaches this panel without an edit here.
 const variantGroupFields = [
-  { key: 'buttons' as const, label: 'Buttons', hasColor: true, stock: 'solid', items: variantItems(['solid', 'outline', 'soft', 'subtle', 'ghost', 'link']) },
-  { key: 'panels' as const, label: 'Cards', hasColor: false, stock: 'outline', items: variantItems(['solid', 'outline', 'soft', 'subtle']) },
-  { key: 'inputs' as const, label: 'Inputs', hasColor: true, stock: 'outline', items: variantItems(['outline', 'soft', 'subtle', 'ghost', 'none']) }
+  { key: 'buttons' as const, label: 'Buttons', hasColor: true, stock: GROUP_STOCK_VARIANT.buttons, items: variantItems(GROUP_VARIANTS.buttons) },
+  { key: 'panels' as const, label: 'Cards', hasColor: false, stock: GROUP_STOCK_VARIANT.panels, items: variantItems(GROUP_VARIANTS.panels) },
+  { key: 'inputs' as const, label: 'Inputs', hasColor: true, stock: GROUP_STOCK_VARIANT.inputs, items: variantItems(GROUP_VARIANTS.inputs) }
 ]
 
 function groupVariantModel(group: VariantGroup) {
@@ -128,11 +130,11 @@ const content = computed(() => [
       :label="defaultsLabel"
       :icon="studioIcons.options"
       :trailing-icon="appConfig.ui.icons.chevronDown"
-      :color="dirty ? 'primary' : 'neutral'"
+      color="neutral"
       variant="outline"
-      :class="['group', vertical ? 'w-full' : 'w-38']"
+      :class="['group bg-default', dirty && 'ring-primary/50', vertical ? 'w-full' : 'w-38']"
       :ui="{
-        label: 'flex-1 min-w-0 text-left truncate',
+        label: ['flex-1 min-w-0 text-left truncate', dirty && 'text-primary'],
         leadingIcon: dirty ? 'text-primary' : 'text-dimmed',
         trailingIcon: ['transition-transform duration-200', open && 'rotate-180', dirty ? 'text-primary' : 'text-dimmed']
       }"

@@ -14,6 +14,10 @@ const { colorChips, colorLabel, groupDirtyFlags } = useThemeStudioToolbar()
 const open = ref(false)
 const dirty = groupDirtyFlags.colors
 
+// Folded by default: five pickers most themes never touch, and the bulk of
+// the panel's height. Dirty state still reads on the header's reset button.
+const semanticOpen = ref(false)
+
 const content = computed(() => [
   props.vertical ? 'w-(--reka-popper-anchor-width)' : 'w-80 max-w-[calc(100vw-2rem)]',
   'max-h-[70vh] overflow-y-auto'
@@ -25,11 +29,11 @@ const content = computed(() => [
     <UButton
       :label="colorLabel"
       :trailing-icon="appConfig.ui.icons.chevronDown"
-      :color="dirty ? 'primary' : 'neutral'"
+      color="neutral"
       variant="outline"
-      :class="['group', vertical ? 'w-full' : 'w-38']"
+      :class="['group bg-default', dirty && 'ring-primary/50', vertical ? 'w-full' : 'w-38']"
       :ui="{
-        label: 'flex-1 min-w-0 text-left truncate',
+        label: ['flex-1 min-w-0 text-left truncate', dirty && 'text-primary'],
         trailingIcon: ['transition-transform duration-200', open && 'rotate-180', dirty ? 'text-primary' : 'text-dimmed']
       }"
       :aria-label="`Colors: ${colorLabel}`"
@@ -77,12 +81,31 @@ const content = computed(() => [
           padded
           separator
         >
-          <ThemeStudioColorSection
-            v-for="(alias, index) in SEMANTIC_ALIASES"
-            :key="alias"
-            :alias="alias"
-            :separator="index > 0"
-          />
+          <template #actions>
+            <UButton
+              :icon="appConfig.ui.icons.chevronDown"
+              color="neutral"
+              variant="ghost"
+              size="sm"
+              :aria-label="semanticOpen ? 'Collapse semantic colors' : 'Expand semantic colors'"
+              :aria-expanded="semanticOpen"
+              :ui="{ leadingIcon: ['transition-transform duration-200', semanticOpen && 'rotate-180'] }"
+              @click="semanticOpen = !semanticOpen"
+            />
+          </template>
+
+          <UCollapsible v-model:open="semanticOpen" :ui="{ content: 'overflow-hidden' }">
+            <template #content>
+              <div class="flex flex-col gap-2">
+                <ThemeStudioColorSection
+                  v-for="(alias, index) in SEMANTIC_ALIASES"
+                  :key="alias"
+                  :alias="alias"
+                  :separator="index > 0"
+                />
+              </div>
+            </template>
+          </UCollapsible>
         </ThemeStudioSection>
       </div>
     </template>
