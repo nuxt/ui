@@ -165,7 +165,7 @@ export const presets: ThemePreset[] = [{
     font: { sans: 'Figtree', lineHeight: 1.6 },
     style: {
       // nothing solid anywhere: one app-wide pastel fill
-      defaults: { variant: 'soft' },
+      defaults: { variants: { buttons: 'soft', inputs: 'soft' } },
       tokenShades: { ...tintedNeutral }
     }
   }
@@ -436,13 +436,13 @@ export const presets: ThemePreset[] = [{
         }
       },
       // Warm paper grays, the light end is cream rather than white: the page
-      // sits at 200 with cards lifted to 50.
+      // sits at 100 with cards lifted to 50.
       parchment: {
         shades: {
-          50: 'oklch(98% 0.003 106.451)',
-          100: 'oklch(96.5% 0.004 106.469)',
-          200: 'oklch(93.6% 0.006 97.348)',
-          300: 'oklch(85.8% 0.014 102.476)',
+          50: 'oklch(98% 0.006 100)',
+          100: 'oklch(96.5% 0.011 99)',
+          200: 'oklch(93.6% 0.014 97.348)',
+          300: 'oklch(85.8% 0.018 100)',
           400: 'oklch(72.1% 0.015 102.54)',
           500: 'oklch(57.8% 0.008 88.877)',
           600: 'oklch(43.2% 0.006 91.526)',
@@ -463,7 +463,8 @@ export const presets: ThemePreset[] = [{
     // Border family stepped one deeper to hold on the tinted cream page.
     tokens: {
       light: {
-        '--ui-bg': 'var(--ui-color-neutral-200)',
+        '--ui-bg': 'var(--ui-color-neutral-100)',
+        '--ui-bg-muted': 'var(--ui-color-neutral-200)',
         '--ui-bg-elevated': 'var(--ui-color-neutral-50)',
         '--ui-bg-accented': 'var(--ui-color-neutral-300)',
         '--ui-border': 'var(--ui-color-neutral-300)',
