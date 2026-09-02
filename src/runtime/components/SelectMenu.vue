@@ -392,6 +392,42 @@ const filteredGroups = computed(() => {
 })
 const filteredItems = computed(() => filteredGroups.value.flatMap(group => group))
 
+// Keys each rendered item by where it sits in the *unfiltered* items, so the key follows the
+// item as filtering re-sorts the list. A positional key over `filteredGroups` makes Vue reuse
+// the same `ComboboxItem` instance and rewrite its text, and reka's item id lives on that
+// instance — so `aria-activedescendant` keeps pointing at an id that never changes and a
+// screen reader is never told the active option moved.
+//
+// `filterGroups` drops groups that filter away entirely, so `filteredGroups` indices do not
+// align with `groups` and the group key has to come from an item too. Identical primitives
+// cannot be told apart by value, so each occurrence takes one of that value's original
+// positions in turn, which keeps the keys unique.
+const keyedGroups = computed(() => {
+  const positions = new Map<SelectMenuItem, string[]>()
+
+  groups.value.forEach((group, groupIndex) => {
+    group.forEach((item, index) => {
+      const key = `item-${groupIndex}-${index}`
+      const queue = positions.get(item)
+
+      if (queue) {
+        queue.push(key)
+      } else {
+        positions.set(item, [key])
+      }
+    })
+  })
+
+  return filteredGroups.value.map((group, groupIndex) => {
+    const entries = group.map((item, index) => ({
+      item,
+      key: positions.get(item)?.shift() ?? `filtered-${groupIndex}-${index}`
+    }))
+
+    return { key: entries[0]?.key ?? `filtered-${groupIndex}`, entries }
+  })
+})
+
 // eslint-disable-next-line vue/no-dupe-keys
 const createItem = computed(() => {
   if (!props.createItem || !searchTerm.value) {
@@ -739,8 +775,8 @@ defineExpose({
                   <ReuseCreateItemTemplate />
                 </ComboboxGroup>
 
-                <ComboboxGroup v-for="(group, groupIndex) in filteredGroups" :key="`group-${groupIndex}`" data-slot="group" :class="ui.group({ class: props.ui?.group })">
-                  <ReuseItemTemplate v-for="(item, index) in group" :key="`group-${groupIndex}-${index}`" :item="item" :index="index" />
+                <ComboboxGroup v-for="group in keyedGroups" :key="group.key" data-slot="group" :class="ui.group({ class: props.ui?.group })">
+                  <ReuseItemTemplate v-for="(entry, index) in group.entries" :key="entry.key" :item="entry.item" :index="index" />
                 </ComboboxGroup>
 
                 <ComboboxGroup v-if="createItem && createItemPosition === 'bottom'" data-slot="group" :class="ui.group({ class: props.ui?.group })">
