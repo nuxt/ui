@@ -17,7 +17,6 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     'nuxt-component-meta',
     'nuxt-og-image',
-    'motion-v/nuxt',
     (_, nuxt) => {
       nuxt.hook('components:dirs', (dirs) => {
         dirs.unshift({ path: resolve('./app/components/content/examples'), pathPrefix: false, prefix: '', global: true })
@@ -41,17 +40,6 @@ export default defineNuxtConfig({
   },
 
   app: {
-    head: {
-      // LemonSqueezy affiliate
-      script: [{
-        key: 'lmsqueezy-config',
-        innerHTML: 'window.lemonSqueezyAffiliateConfig = { store: "nuxt" };'
-      }, {
-        key: 'lmsqueezy',
-        src: 'https://lmsqueezy.com/affiliate.js',
-        defer: true
-      }]
-    },
     rootAttrs: {
       'data-vaul-drawer-wrapper': '',
       'class': 'bg-default'
@@ -83,6 +71,16 @@ export default defineNuxtConfig({
   },
 
   routeRules: {
+    '/': { redirect: { to: '/getting-started', statusCode: 301 }, prerender: false },
+    '/pro': { redirect: { to: 'https://ui.nuxt.com', statusCode: 301 }, prerender: false },
+    '/pro/pricing': { redirect: { to: 'https://ui.nuxt.com', statusCode: 301 }, prerender: false },
+    '/pro/templates': { redirect: { to: 'https://ui.nuxt.com/templates', statusCode: 301 }, prerender: false },
+    '/pro/activate': { redirect: { to: 'https://ui.nuxt.com', statusCode: 301 }, prerender: false },
+    '/pro/terms': { redirect: { to: 'https://ui.nuxt.com', statusCode: 301 }, prerender: false },
+    '/figma': { redirect: { to: 'https://ui.nuxt.com/figma', statusCode: 301 }, prerender: false },
+    '/showcase': { redirect: { to: 'https://ui.nuxt.com/showcase', statusCode: 301 }, prerender: false },
+    '/team': { redirect: { to: 'https://ui.nuxt.com/team', statusCode: 301 }, prerender: false },
+    '/roadmap': { redirect: { to: 'https://ui.nuxt.com', statusCode: 301 }, prerender: false },
     '/getting-started/installation': { redirect: '/getting-started/installation/nuxt', prerender: false },
     '/getting-started/installation/pro': { redirect: '/getting-started/installation/pro/nuxt', prerender: false },
     '/getting-started/icons': { redirect: '/getting-started/icons/nuxt', prerender: false },
@@ -149,8 +147,6 @@ export default defineNuxtConfig({
         '/getting-started',
         '/api/countries.json',
         '/api/locales.json',
-        // '/api/releases.json',
-        // '/api/pulls.json'
         '/404.html'
       ],
       crawlLinks: true,
@@ -180,7 +176,7 @@ export default defineNuxtConfig({
     },
     optimizeDeps: {
       // prevents reloading page when navigating between components
-      include: ['@internationalized/date', '@vueuse/shared', '@vueuse/integrations/useFuse', '@tanstack/vue-table', 'reka-ui', 'reka-ui/namespaced', 'embla-carousel-vue', 'embla-carousel-autoplay', 'embla-carousel-auto-scroll', 'embla-carousel-auto-height', 'embla-carousel-class-names', 'embla-carousel-fade', 'embla-carousel-wheel-gestures', 'colortranslator', 'tailwindcss/colors', 'tailwind-variants', 'ufo', 'zod', 'vaul-vue', 'scule', 'motion-v', 'json5', 'ohash', 'shiki-transformer-color-highlight']
+      include: ['@internationalized/date', '@vueuse/shared', '@vueuse/integrations/useFuse', '@tanstack/vue-table', 'reka-ui', 'reka-ui/namespaced', 'embla-carousel-vue', 'embla-carousel-autoplay', 'embla-carousel-auto-scroll', 'embla-carousel-auto-height', 'embla-carousel-class-names', 'embla-carousel-fade', 'embla-carousel-wheel-gestures', 'colortranslator', 'tailwindcss/colors', 'tailwind-variants', 'ufo', 'zod', 'vaul-vue', 'scule', 'json5', 'ohash', 'shiki-transformer-color-highlight']
     }
   },
 
