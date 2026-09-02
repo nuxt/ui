@@ -72,7 +72,6 @@ const components = [
   'pricing-table',
   'progress',
   'progress-group',
-  'prose-code-tree',
   'radio-group',
   'scroll-area',
   'select-menu',
@@ -94,6 +93,7 @@ const components = [
   'toast',
   'tooltip',
   'tree',
+  'typography',
   'user'
 ].map(component => ({ label: upperName(component.split('/').pop() as string), icon: 'i-lucide-box', to: `/components/${component}` }))
 
