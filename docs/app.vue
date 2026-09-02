@@ -7,7 +7,7 @@
 
     <Banner v-if="!$route.path.startsWith('/examples')" />
 
-    <Header v-if="!$route.path.startsWith('/examples')" :links="links" />
+    <Header v-if="!$route.path.startsWith('/examples')" />
 
     <NuxtLayout>
       <NuxtPage />
@@ -16,7 +16,7 @@
     <Footer v-if="!$route.path.startsWith('/examples')" />
 
     <ClientOnly>
-      <LazyUContentSearch ref="searchRef" :files="files" :navigation="navigation" :links="links" :fuse="{ resultLimit: 42 }" />
+      <LazyUContentSearch ref="searchRef" :files="files" :navigation="navigation" :fuse="{ resultLimit: 42 }" />
     </ClientOnly>
 
     <UNotifications>
@@ -45,34 +45,6 @@ const { data: files } = useLazyFetch<ParsedContent[]>('/api/search.json', { defa
 // Computed
 
 const color = computed(() => colorMode.value === 'dark' ? '#18181b' : 'white')
-
-const links = computed(() => {
-  return [{
-    label: 'Docs',
-    icon: 'i-heroicons-book-open',
-    to: '/getting-started',
-    active: route.path.startsWith('/getting-started') || route.path.startsWith('/components')
-  }, ...(navigation.value.find(item => item._path === '/pro')
-    ? [{
-        label: 'Pro',
-        icon: 'i-heroicons-square-3-stack-3d',
-        to: '/pro',
-        active: route.path.startsWith('/pro/getting-started') || route.path.startsWith('/pro/components') || route.path.startsWith('/pro/prose')
-      }, {
-        label: 'Pricing',
-        icon: 'i-heroicons-ticket',
-        to: '/pro/pricing'
-      }, {
-        label: 'Templates',
-        icon: 'i-heroicons-computer-desktop',
-        to: '/pro/templates'
-      }]
-    : []), {
-    label: 'Releases',
-    icon: 'i-heroicons-rocket-launch',
-    to: '/releases'
-  }].filter(Boolean)
-})
 
 // Head
 

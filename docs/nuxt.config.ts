@@ -71,7 +71,15 @@ export default defineNuxtConfig({
   },
 
   routeRules: {
-    '/components': { redirect: '/components/accordion', prerender: false }
+    '/': { redirect: '/getting-started', prerender: false },
+    '/components': { redirect: '/components/accordion', prerender: false },
+    '/playground': { redirect: '/getting-started', prerender: false },
+    '/releases': { redirect: 'https://github.com/nuxt/ui/releases', prerender: false },
+    '/roadmap': { redirect: '/getting-started', prerender: false },
+    '/pro': { redirect: '/pro/getting-started', prerender: false },
+    '/pro/pricing': { redirect: '/pro/getting-started', prerender: false },
+    '/pro/templates': { redirect: '/pro/getting-started', prerender: false },
+    '/templates': { redirect: '/pro/getting-started', prerender: false }
   },
 
   compatibilityDate: '2024-07-23',
@@ -79,11 +87,8 @@ export default defineNuxtConfig({
   nitro: {
     prerender: {
       routes: [
-        '/',
         '/getting-started',
-        '/api/search.json',
-        '/api/releases.json',
-        '/api/pulls.json'
+        '/api/search.json'
       ],
       ignore: !process.env.NUXT_UI_PRO_PATH && !process.env.NUXT_GITHUB_TOKEN ? ['/pro'] : []
     }

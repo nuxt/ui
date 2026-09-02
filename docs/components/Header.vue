@@ -1,10 +1,6 @@
 <template>
   <UHeader
-    :links="links"
-    :class="{
-      'border-primary-200/75 dark:border-primary-900/50': $route.path === '/',
-      'border-gray-200 dark:border-gray-800': $route.path !== '/'
-    }"
+    class="border-gray-200 dark:border-gray-800"
     :ui="{
       left: 'min-w-0'
     }"
@@ -59,7 +55,7 @@
     </template>
 
     <template #panel>
-      <UAsideLinks :links="links" />
+      <AsideTabs />
 
       <UDivider type="dashed" class="my-4" />
 
@@ -71,11 +67,6 @@
 <script setup lang="ts">
 import type { NavItem } from '@nuxt/content'
 import pkg from '@nuxt/ui-pro/package.json'
-import type { HeaderLink } from '#ui-pro/types'
-
-defineProps<{
-  links: HeaderLink[]
-}>()
 
 const route = useRoute()
 const { $ui } = useNuxtApp()
