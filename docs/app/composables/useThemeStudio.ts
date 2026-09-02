@@ -386,11 +386,13 @@ export function useThemeStudio() {
       font: { sans: pick(theme.fonts.filter(entry => entry.category === 'Sans')).name }
     }
 
-    // An app-wide variant is the loud roll, sprinkled in rarely enough that
-    // most shuffles stay tasteful. Left off entirely otherwise, an empty
-    // `style` would ride into history and exports as a phantom key.
+    // A variant re-roll is the loud one, sprinkled in rarely enough that most
+    // shuffles stay tasteful, and scoped to BUTTONS: an app-wide variant
+    // reaches cards, and a `solid` card is an inverted surface, a full-white
+    // panel in dark mode. Left off entirely otherwise, an empty `style`
+    // would ride into history and exports as a phantom key.
     if (Math.random() < 0.25) {
-      doc.style = { defaults: { variant: pick(['solid', 'outline', 'soft', 'subtle'] as const) } }
+      doc.style = { defaults: { variants: { buttons: pick(['solid', 'outline', 'soft', 'subtle'] as const) } } }
     }
 
     if (Math.random() < 0.125) {
