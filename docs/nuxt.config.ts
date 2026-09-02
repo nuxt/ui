@@ -445,13 +445,19 @@ export default defineNuxtConfig({
       title: 'Components',
       contentCollection: 'docs',
       contentFilters: [
-        { field: 'path', operator: 'LIKE', value: '/docs/components/%' }
+        { field: 'path', operator: 'LIKE', value: '/docs/components%' }
       ]
     }, {
       title: 'Composables',
       contentCollection: 'docs',
       contentFilters: [
         { field: 'path', operator: 'LIKE', value: '/docs/composables/%' }
+      ]
+    }, {
+      title: 'Typography',
+      contentCollection: 'docs',
+      contentFilters: [
+        { field: 'path', operator: 'LIKE', value: '/docs/typography%' }
       ]
     }],
     notes: [
