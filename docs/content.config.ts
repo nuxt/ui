@@ -174,10 +174,5 @@ export const collections = {
       })).optional(),
       sitemap
     })
-  }),
-  releases: defineCollection({
-    type: 'page',
-    source: 'releases.yml',
-    schema: Page
   })
 }

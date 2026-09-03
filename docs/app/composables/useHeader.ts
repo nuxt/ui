@@ -41,6 +41,11 @@ export function useHeader() {
     to: '/docs/typography',
     active: route.path.startsWith('/docs/typography')
   }, {
+    label: 'Releases',
+    icon: 'i-lucide-rocket',
+    to: '/docs/releases',
+    active: route.path.startsWith('/docs/releases')
+  }, {
     label: 'Templates',
     icon: 'i-lucide-panels-top-left',
     to: '/templates'
@@ -64,7 +69,7 @@ export function useHeader() {
     active: route.path.startsWith('/blog')
   }, {
     label: 'Figma',
-    icon: 'i-simple-icons-figma',
+    icon: 'i-lucide-figma',
     to: 'https://go.nuxt.com/figma-ui',
     target: '_blank'
   }, {
