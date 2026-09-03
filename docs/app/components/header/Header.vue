@@ -50,7 +50,7 @@ function toggleChat() {
 
       <ThemeStudioPresetPicker />
 
-      <UTooltip text="Open on GitHub" class="hidden lg:flex">
+      <UTooltip text="Open on GitHub" class="hidden lg:flex" ignore-non-keyboard-focus>
         <UButton
           color="neutral"
           variant="ghost"

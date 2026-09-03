@@ -188,7 +188,7 @@ const items = computed<DropdownMenuItem[][]>(() => [[{
   // a row, not a group label: item size and weight
   ui: { label: 'font-normal text-sm text-default' }
 }], [{
-  label: 'Customize',
+  label: 'Edit theme',
   icon: studioIcons.options,
   // its own slot for a trailing chevron, the menu only draws one for submenus
   slot: 'link',
@@ -215,10 +215,10 @@ watch(open, (isOpen) => {
   <UDropdownMenu
     v-model:open="open"
     :items="items"
-    :content="{ align: 'end', onInteractOutside: keepPanels }"
+    :content="{ align: 'end', alignOffset: -4, onInteractOutside: keepPanels }"
     :ui="{ content: 'w-60 min-w-36 max-h-98', label: 'text-xs' }"
   >
-    <UTooltip :text="name">
+    <UTooltip :text="name" ignore-non-keyboard-focus>
       <UButton
         :icon="triggerIcon"
         color="neutral"
