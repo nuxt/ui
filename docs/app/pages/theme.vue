@@ -67,7 +67,7 @@ const shareOpen = ref(false)
 
       <template #right>
         <UTooltip text="Switch color mode" :kbds="['d']">
-          <UColorModeButton color="neutral" variant="ghost" data-keep-panels class="shrink-0" />
+          <ThemeStudioColorModeTabs data-keep-panels class="shrink-0" />
         </UTooltip>
 
         <UButton
