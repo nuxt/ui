@@ -15,7 +15,9 @@ interface Module {
     stars: number
   }
   contributors: {
+    id: number
     username: string
+    contributions: number
   }[]
 }
 

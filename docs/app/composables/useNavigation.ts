@@ -152,6 +152,7 @@ function processNavigationItem(item: ContentNavigationItem, parent?: ContentNavi
 
 export const useNavigation = (navigation: Ref<ContentNavigationItem[] | undefined>) => {
   const { framework } = useFrameworks()
+  const releases = useReleases()
 
   const rootNavigation = computed(() =>
     navigation.value?.[0]?.children?.map(item => processNavigationItem(item)) as ContentNavigationItem[]
@@ -164,7 +165,15 @@ export const useNavigation = (navigation: Ref<ContentNavigationItem[] | undefine
   const navigationByCategory = computed(() => {
     const route = useRoute()
 
-    const slug = route.params.slug?.[0] as string
+    // The section is the first segment under /docs, read from the path so
+    // docs pages outside the catch-all (releases) resolve it too.
+    const slug = route.path.split('/')[2] as string
+
+    // The releases section's pages are GitHub releases, not content files.
+    if (slug === 'releases') {
+      return releasesNavigation(releases.value)
+    }
+
     const children = findPageChildren(navigation?.value, `/docs/${slug}`, { indexAsChild: true })
 
     return groupChildrenByCategory(children, slug)

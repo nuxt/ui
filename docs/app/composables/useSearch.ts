@@ -58,6 +58,12 @@ export function useSearch() {
     to: '/docs/typography',
     active: route.path.startsWith('/docs/typography')
   }, {
+    label: 'Releases',
+    description: 'Stay up to date with the latest changes.',
+    icon: 'i-lucide-rocket',
+    to: '/docs/releases',
+    active: route.path.startsWith('/docs/releases')
+  }, {
     label: 'Templates',
     description: 'Explore official starter templates.',
     icon: 'i-lucide-panels-top-left',
@@ -87,18 +93,14 @@ export function useSearch() {
   }, {
     label: 'Figma',
     description: 'Access the official Figma design kit.',
-    icon: 'i-simple-icons-figma',
-    to: '/figma'
+    icon: 'i-lucide-figma',
+    to: 'https://go.nuxt.com/figma-ui',
+    target: '_blank'
   }, {
     label: 'Team',
     description: 'Meet the team behind the project.',
     icon: extra.users,
     to: '/team'
-  }, {
-    label: 'Releases',
-    description: 'Stay up to date with the latest changes.',
-    icon: 'i-lucide-rocket',
-    to: '/releases'
   }, {
     label: 'GitHub',
     description: 'Check out the repository on GitHub.',

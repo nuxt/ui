@@ -31,7 +31,7 @@ props:
       icon: i-lucide-box
       to: /docs/components
     - label: 'Figma Kit'
-      icon: i-simple-icons-figma
+      icon: i-lucide-figma
       to: https://go.nuxt.com/figma-ui
       target: _blank
     - label: 'Releases'
@@ -70,7 +70,7 @@ props:
       icon: i-lucide-box
       to: /docs/components
     - label: 'Figma Kit'
-      icon: i-simple-icons-figma
+      icon: i-lucide-figma
       to: https://go.nuxt.com/figma-ui
       target: _blank
     - label: 'Releases'
@@ -107,7 +107,7 @@ const links: PageAnchor[] = [{
   to: '/docs/components'
 }, {
   label: 'Figma Kit',
-  icon: 'i-simple-icons-figma',
+  icon: 'i-lucide-figma',
   to: 'https://go.nuxt.com/figma-ui',
   target: '_blank'
 }, {

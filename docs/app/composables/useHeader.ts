@@ -3,42 +3,21 @@ export function useHeader() {
 
   const desktopLinks = computed(() => [{
     label: 'Docs',
-    to: '/docs',
-    active: route.path.startsWith('/docs/')
+    to: '/docs/getting-started',
+    active: route.path.startsWith('/docs/getting-started')
+  }, {
+    label: 'Components',
+    to: '/docs/components',
+    active: route.path.startsWith('/docs/components')
+  }, {
+    label: 'Theme',
+    to: '/theme'
   }, {
     label: 'Templates',
     to: '/templates'
   }, {
-    label: 'Resources',
-    active: route.path.startsWith('/showcase') || route.path.startsWith('/community') || route.path.startsWith('/blog'),
-    children: [{
-      label: 'Showcase',
-      description: 'Discover websites built with Nuxt UI.',
-      icon: 'i-lucide-presentation',
-      to: '/showcase'
-    }, {
-      label: 'Community',
-      description: 'Explore projects built around Nuxt UI.',
-      icon: 'i-lucide-globe',
-      to: '/community'
-    }, {
-      label: 'Playground',
-      description: 'Try Nuxt UI components live in your browser.',
-      icon: 'i-lucide-square-terminal',
-      to: '/play',
-      target: '_blank'
-    }, {
-      label: 'Blog',
-      description: 'Read the latest news and updates.',
-      icon: 'i-lucide-newspaper',
-      to: '/blog'
-    }]
-  }, {
-    label: 'Figma',
-    to: '/figma'
-  }, {
-    label: 'Releases',
-    to: '/releases'
+    label: 'Showcase',
+    to: '/showcase'
   }])
 
   const mobileLinks = computed(() => [{
@@ -61,6 +40,11 @@ export function useHeader() {
     icon: 'i-lucide-square-pilcrow',
     to: '/docs/typography',
     active: route.path.startsWith('/docs/typography')
+  }, {
+    label: 'Releases',
+    icon: 'i-lucide-rocket',
+    to: '/docs/releases',
+    active: route.path.startsWith('/docs/releases')
   }, {
     label: 'Templates',
     icon: 'i-lucide-panels-top-left',
@@ -85,12 +69,9 @@ export function useHeader() {
     active: route.path.startsWith('/blog')
   }, {
     label: 'Figma',
-    icon: 'i-simple-icons-figma',
-    to: '/figma'
-  }, {
-    label: 'Releases',
-    icon: 'i-lucide-rocket',
-    to: '/releases'
+    icon: 'i-lucide-figma',
+    to: 'https://go.nuxt.com/figma-ui',
+    target: '_blank'
   }, {
     label: 'GitHub',
     to: 'https://github.com/nuxt/ui',

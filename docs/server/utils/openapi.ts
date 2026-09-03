@@ -280,6 +280,24 @@ export function createOpenApiDocument(options: { version: string, url?: string, 
           }
         }
       },
+      '/api/github/contributors.json': {
+        get: {
+          operationId: 'getContributors',
+          tags: ['GitHub'],
+          summary: 'Top contributors',
+          description: 'The most active contributors of `nuxt/ui` with their public GitHub profile, most contributions first, plus the total contributor count. Without a GitHub token on the server the list comes from nuxt.com and the total is null.',
+          responses: {
+            200: {
+              description: 'Contributor count and profiles.',
+              content: {
+                'application/json': {
+                  schema: { $ref: '#/components/schemas/Contributors' }
+                }
+              }
+            }
+          }
+        }
+      },
       '/api/github/commits.json': {
         get: {
           operationId: 'getCommits',
@@ -362,12 +380,47 @@ export function createOpenApiDocument(options: { version: string, url?: string, 
             },
             contributors: {
               type: 'array',
+              description: 'GitHub contributors of `nuxt/ui`, most contributions first.',
               items: {
                 type: 'object',
-                properties: { username: { type: 'string' } }
+                properties: {
+                  id: { type: 'integer', description: 'GitHub user id.' },
+                  username: { type: 'string' },
+                  contributions: { type: 'integer', description: 'Commit count on the repository.' }
+                }
               }
             }
           }
+        },
+        Contributors: {
+          type: 'object',
+          properties: {
+            total: { type: ['integer', 'null'], description: 'Human contributors on GitHub, null when the server could not count them.' },
+            contributors: { type: 'array', items: { $ref: '#/components/schemas/Contributor' } }
+          },
+          required: ['total', 'contributors']
+        },
+        Contributor: {
+          type: 'object',
+          properties: {
+            username: { type: 'string' },
+            contributions: { type: 'integer', description: 'Commit count on the repository.' },
+            name: { type: 'string' },
+            location: { type: 'string' },
+            websiteUrl: { type: 'string', format: 'uri' },
+            socialAccounts: {
+              type: 'array',
+              items: {
+                type: 'object',
+                properties: {
+                  provider: { type: 'string', description: 'Lowercased GitHub provider name, e.g. `twitter`, `bluesky`.' },
+                  url: { type: 'string', format: 'uri' }
+                }
+              }
+            },
+            sponsorsListing: { type: 'string', format: 'uri' }
+          },
+          required: ['username', 'contributions']
         },
         ComponentExample: {
           type: 'object',
