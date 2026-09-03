@@ -62,14 +62,14 @@ export function rampCssName(name: string) {
 
 /* --------------------------------------------------------------- views -- */
 
-export type ThemeStudioView = 'grid' | 'dashboard' | 'chat' | 'saas' | 'landing' | 'docs' | 'portfolio' | 'changelog' | 'editor' | 'a11y'
+export type ThemeStudioView = 'grid' | 'dashboard' | 'chat' | 'saas' | 'landing' | 'docs' | 'portfolio' | 'changelog' | 'editor'
 
 export interface ThemeStudioViewTab {
   label: string
   value: ThemeStudioView
   /** One-liner for the rich switcher, template blurbs from /templates. */
   description: string
-  /** /templates screenshot base path (`-light.png`/`-dark.png` appended); grid and a11y are studio-only and have none. */
+  /** /templates screenshot base path (`-light.png`/`-dark.png` appended); grid is studio-only and has none. */
   image?: string
 }
 
@@ -84,8 +84,7 @@ export const THEME_STUDIO_VIEWS: ThemeStudioViewTab[] = [
   { label: 'Dashboard', value: 'dashboard', description: 'A multi-column admin: tables, charts and date pickers.', image: templateImage('dashboard') },
   { label: 'Chat', value: 'chat', description: 'An AI chat with conversation history and streaming replies.', image: templateImage('chat') },
   { label: 'Changelog', value: 'changelog', description: 'Release notes on a version timeline.', image: templateImage('changelog') },
-  { label: 'Editor', value: 'editor', description: 'A rich text editor with toolbar, slash menu and drag handles.', image: templateImage('editor') },
-  { label: 'A11y', value: 'a11y', description: 'WCAG contrast for every text and surface pair.' }
+  { label: 'Editor', value: 'editor', description: 'A rich text editor with toolbar, slash menu and drag handles.', image: templateImage('editor') }
 ]
 
 /* ------------------------------------------------------------- sections -- */

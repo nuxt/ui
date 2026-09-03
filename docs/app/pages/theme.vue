@@ -126,7 +126,6 @@ const shareOpen = ref(false)
         <LazyThemeStudioViewPortfolio v-else-if="view === 'portfolio'" />
         <LazyThemeStudioViewChangelog v-else-if="view === 'changelog'" />
         <LazyThemeStudioViewEditor v-else-if="view === 'editor'" />
-        <LazyThemeStudioViewA11y v-else-if="view === 'a11y'" />
       </div>
     </div>
 
