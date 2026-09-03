@@ -415,6 +415,7 @@ export const studioIcons = {
   text: 'i-lucide-type',
   radius: 'i-lucide-square-round-corner',
   dice: 'i-lucide-dices',
+  templates: 'i-lucide-layout-template',
   // view switcher, keyed by ThemeStudioView
   // blocks, not a grid: the wall's tiles are components, and the dashboard
   // view already owns the grid glyph
@@ -479,7 +480,22 @@ export const studioIcons = {
   heading: 'i-lucide-heading',
   briefcase: 'i-lucide-briefcase',
   bookOpen: 'i-lucide-book-open',
-  pencil: 'i-lucide-pencil'
+  pencil: 'i-lucide-pencil',
+  download: 'i-lucide-download',
+  code: 'i-lucide-code-xml',
+  component: 'i-lucide-component',
+  cpu: 'i-lucide-cpu',
+  activity: 'i-lucide-activity',
+  radar: 'i-lucide-radar',
+  layers: 'i-lucide-layers',
+  gitCommit: 'i-lucide-git-commit-horizontal',
+  notebook: 'i-lucide-notebook-pen',
+  mountain: 'i-lucide-mountain',
+  bike: 'i-lucide-bike',
+  laptop: 'i-lucide-laptop',
+  trees: 'i-lucide-trees',
+  ferrisWheel: 'i-lucide-ferris-wheel',
+  waves: 'i-lucide-waves'
 }
 
 export type StudioIcon = keyof typeof studioIcons
@@ -501,7 +517,8 @@ export const studioIconOverrides: Partial<Record<ThemeIcons, Partial<Record<Stud
     options: 'i-bi-sliders',
     text: 'i-bi-fonts',
     radius: 'i-bi-bounding-box',
-    dice: 'i-bi-dice-5'
+    dice: 'i-bi-dice-5',
+    templates: 'i-bi-window-stack'
   },
   heroicons: {
     undo: 'i-heroicons-arrow-uturn-left',
@@ -513,7 +530,8 @@ export const studioIconOverrides: Partial<Record<ThemeIcons, Partial<Record<Stud
     options: 'i-heroicons-adjustments-horizontal',
     text: 'i-heroicons-language',
     radius: 'i-heroicons-stop',
-    dice: 'i-heroicons-arrows-right-left'
+    dice: 'i-heroicons-arrows-right-left',
+    templates: 'i-heroicons-rectangle-group'
   },
   iconoir: {
     undo: 'i-iconoir-undo',
@@ -525,7 +543,8 @@ export const studioIconOverrides: Partial<Record<ThemeIcons, Partial<Record<Stud
     options: 'i-iconoir-settings',
     text: 'i-iconoir-text',
     radius: 'i-iconoir-square',
-    dice: 'i-iconoir-shuffle'
+    dice: 'i-iconoir-shuffle',
+    templates: 'i-iconoir-view-grid'
   },
   material: {
     undo: 'i-material-symbols-undo',
@@ -537,7 +556,8 @@ export const studioIconOverrides: Partial<Record<ThemeIcons, Partial<Record<Stud
     options: 'i-material-symbols-tune',
     text: 'i-material-symbols-text-fields',
     radius: 'i-material-symbols-rounded-corner',
-    dice: 'i-material-symbols-shuffle'
+    dice: 'i-material-symbols-shuffle',
+    templates: 'i-material-symbols-space-dashboard'
   },
   phosphor: {
     undo: 'i-ph-arrow-arc-left',
@@ -549,7 +569,8 @@ export const studioIconOverrides: Partial<Record<ThemeIcons, Partial<Record<Stud
     options: 'i-ph-sliders-horizontal',
     text: 'i-ph-text-aa',
     radius: 'i-ph-square',
-    dice: 'i-ph-shuffle'
+    dice: 'i-ph-shuffle',
+    templates: 'i-ph-layout'
   },
   remix: {
     undo: 'i-ri-arrow-go-back-line',
@@ -561,7 +582,8 @@ export const studioIconOverrides: Partial<Record<ThemeIcons, Partial<Record<Stud
     options: 'i-ri-equalizer-line',
     text: 'i-ri-font-size',
     radius: 'i-ri-rounded-corner',
-    dice: 'i-ri-dice-line'
+    dice: 'i-ri-dice-line',
+    templates: 'i-ri-layout-line'
   },
   tabler: {
     undo: 'i-tabler-arrow-back-up',
@@ -573,12 +595,15 @@ export const studioIconOverrides: Partial<Record<ThemeIcons, Partial<Record<Stud
     options: 'i-tabler-adjustments-horizontal',
     text: 'i-tabler-typography',
     radius: 'i-tabler-border-radius',
-    dice: 'i-tabler-dice'
+    dice: 'i-tabler-dice',
+    templates: 'i-tabler-template'
   },
   // Pixel has no settings cog (sliders stands in), no pie chart (generic
   // chart), no up-down chevron (sort), and no rocket/panels/newspaper/
   // accessibility glyphs, so SaaS→zap, Landing→layout, Changelog→article and
-  // A11y→human stand in for the views.
+  // A11y→human stand in for the views. The demo content borrows a few more:
+  // radar→target, layers→blocks, activity→analytics, component→shapes, and for
+  // the portfolio marquee mountain→map, bike→ship, ferris wheel→balloon.
   pixelarticons: {
     undo: 'i-pixelarticons-undo',
     redo: 'i-pixelarticons-redo',
@@ -590,6 +615,7 @@ export const studioIconOverrides: Partial<Record<ThemeIcons, Partial<Record<Stud
     text: 'i-pixelarticons-text-add',
     radius: 'i-pixelarticons-card',
     dice: 'i-pixelarticons-dice',
+    templates: 'i-pixelarticons-layout',
     grid: 'i-pixelarticons-card-stack',
     dashboard: 'i-pixelarticons-dashboard',
     chat: 'i-pixelarticons-message',
@@ -650,7 +676,22 @@ export const studioIconOverrides: Partial<Record<ThemeIcons, Partial<Record<Stud
     heading: 'i-pixelarticons-heading',
     briefcase: 'i-pixelarticons-briefcase',
     bookOpen: 'i-pixelarticons-book-open',
-    pencil: 'i-pixelarticons-pencil'
+    pencil: 'i-pixelarticons-pencil',
+    download: 'i-pixelarticons-download',
+    code: 'i-pixelarticons-code',
+    component: 'i-pixelarticons-shapes',
+    cpu: 'i-pixelarticons-cpu',
+    activity: 'i-pixelarticons-analytics',
+    radar: 'i-pixelarticons-target',
+    layers: 'i-pixelarticons-blocks',
+    gitCommit: 'i-pixelarticons-git-commit',
+    notebook: 'i-pixelarticons-notebook',
+    mountain: 'i-pixelarticons-map',
+    bike: 'i-pixelarticons-ship',
+    laptop: 'i-pixelarticons-laptop',
+    trees: 'i-pixelarticons-tree-pine',
+    ferrisWheel: 'i-pixelarticons-balloon',
+    waves: 'i-pixelarticons-waves'
   }
 }
 

@@ -24,36 +24,36 @@ const heroLinks = [{
 }]
 
 const sections = [{
-  title: 'Powered by Nuxt UI components',
+  title: 'Powered by Nuxt UI Components',
   description: 'Access a complete component library with beautifully styled, accessible and customizable Vue components. Everything you need to build professional SaaS applications.',
   reverse: false,
   features: [{
-    title: '100+ UI components',
+    title: '100+ UI Components',
     description: 'From buttons to modals, data tables to forms - all styled with Tailwind CSS and accessible out of the box.',
     icon: studioIcons.package
   }, {
-    title: 'Authentication ready',
+    title: 'Authentication Ready',
     description: 'Pre-built login, signup and password reset flows. Just connect your backend and start onboarding users.',
     icon: studioIcons.shield
   }, {
-    title: 'TypeScript first',
+    title: 'TypeScript First',
     description: 'Full TypeScript support with auto-completion, type safety and IntelliSense for every component.',
-    icon: studioIcons.export
+    icon: studioIcons.code
   }]
 }, {
-  title: 'Built for modern SaaS',
+  title: 'Built for Modern SaaS',
   description: 'Everything you need to launch and scale. From beautiful marketing pages to complex dashboards, ship faster with production-ready patterns.',
   reverse: true,
   features: [{
-    title: 'Edge performance',
+    title: 'Edge Performance',
     description: 'Optimized for Core Web Vitals with automatic code splitting, lazy loading and SSR/SSG support.',
     icon: studioIcons.zap
   }, {
-    title: 'Dark mode ready',
+    title: 'Dark Mode Ready',
     description: 'Automatic theme switching with smooth transitions. Respects system preferences and remembers user choice.',
     icon: appConfig.ui.icons.dark
   }, {
-    title: 'Global ready',
+    title: 'Global Ready',
     description: 'Built-in i18n support for 50+ languages with RTL/LTR layouts and font optimization.',
     icon: studioIcons.globe
   }]
@@ -85,27 +85,59 @@ const features = [{
   icon: studioIcons.settings
 }]
 
-const plans = [{
-  title: 'Basic',
-  description: 'A basic plan for individuals.',
-  price: '$9',
-  features: ['1 GB storage', '1 email account', '1 domain', 'Community support'],
-  button: { label: 'Get started', color: 'neutral' as const, variant: 'subtle' as const }
-}, {
-  title: 'Standard',
-  description: 'A standard plan for small teams.',
-  price: '$19',
-  highlight: true,
-  badge: 'Most popular',
-  features: ['10 GB storage', '10 email accounts', '10 domains', 'Priority support'],
-  button: { label: 'Get started' }
-}, {
-  title: 'Premium',
-  description: 'A premium plan for large teams.',
-  price: '$29',
-  features: ['100 GB storage', '100 email accounts', '100 domains', 'Dedicated support'],
-  button: { label: 'Get started', color: 'neutral' as const, variant: 'subtle' as const }
-}]
+// The template's pricing page: three plans over a billing cycle toggle, no
+// badge, and Standard scaled up. Prices and feature lists are content/2.pricing.yml.
+const billingCycle = ref<'month' | 'year'>('month')
+
+const billingCycleItems = [
+  { label: 'Monthly', value: 'month' },
+  { label: 'Yearly', value: 'year' }
+]
+
+const planFeatures = (count: string) => [
+  `${count} GB Storage`,
+  `${count} Email Accounts`,
+  `${count} Domains`,
+  `${count} Websites`,
+  `${count} Databases`,
+  `${count} SSL Certificates`,
+  `${count} Support Tickets`
+]
+
+const plans = computed(() => {
+  const yearly = billingCycle.value === 'year'
+
+  return [{
+    title: 'Basic',
+    description: 'A basic plan for individuals.',
+    price: yearly ? '$99.9' : '$9.9',
+    features: planFeatures('1'),
+    button: { label: 'Get Started', color: 'neutral' as const, variant: 'subtle' as const }
+  }, {
+    title: 'Standard',
+    description: 'A standard plan for small teams.',
+    price: yearly ? '$199.9' : '$19.9',
+    highlight: true,
+    scale: true,
+    features: planFeatures('10'),
+    button: { label: 'Get Started' }
+  }, {
+    title: 'Premium',
+    description: 'A premium plan for large teams.',
+    price: yearly ? '$299.9' : '$29.9',
+    features: planFeatures('100'),
+    button: { label: 'Get Started', color: 'neutral' as const, variant: 'subtle' as const }
+  }]
+})
+
+const faqItems = [
+  { label: 'Is this a secure service?', content: 'Every request is served over HTTPS, secrets stay server side, and sessions are signed and rotated. Nothing in the client bundle can read another tenant\'s data.' },
+  { label: 'How can I cancel my subscription?', content: 'From the billing page, in one click. You keep access until the end of the period you already paid for, and nothing is deleted for thirty days after that.' },
+  { label: 'How does the free trial work?', content: 'Fourteen days on the Standard plan, no card required. When it ends you pick a plan or the workspace goes read only until you do.' },
+  { label: 'Can I switch plans later?', content: 'Up or down, at any time. Upgrades apply immediately and are prorated, downgrades take effect at the start of the next cycle.' },
+  { label: 'Do you offer refunds?', content: 'Within thirty days of a charge, for any reason. Reply to the receipt and we refund the whole invoice.' },
+  { label: 'Do you offer support?', content: 'Every plan includes email support. Standard adds priority routing and Premium adds a shared channel with the engineers who build the product.' }
+]
 
 const testimonials = [{
   quote: 'Nuxt UI transformed how we build. The component quality is exceptional - everything just works with perfect TypeScript support, accessibility and dark mode built in.',
@@ -214,7 +246,7 @@ onMounted(() => {
     <UHeader :toggle="false" class="rounded-t-[inherit]">
       <template #left>
         <div class="flex items-center gap-1.5">
-          <UIcon name="i-lucide-rocket" class="size-6 text-primary shrink-0" />
+          <UIcon :name="studioIcons.saas" class="size-6 text-primary shrink-0" />
           <span class="text-xl font-bold text-highlighted">SaaS</span>
         </div>
       </template>
@@ -222,14 +254,20 @@ onMounted(() => {
       <UNavigationMenu :items="navItems" variant="link" />
 
       <template #right>
-        <UButton icon="i-lucide-sun-moon" aria-label="Color mode" color="neutral" variant="ghost" />
+        <!-- UColorModeButton renders the pack's moon/sun pair; the studio toolbar owns the real toggle. -->
+        <UButton color="neutral" variant="ghost" aria-label="Color mode">
+          <template #leading="{ ui }">
+            <UIcon :name="appConfig.ui.icons.dark" :class="ui.leadingIcon({ class: 'hidden dark:inline-block' })" />
+            <UIcon :name="appConfig.ui.icons.light" :class="ui.leadingIcon({ class: 'dark:hidden' })" />
+          </template>
+        </UButton>
         <UButton label="Sign in" color="neutral" variant="outline" class="hidden lg:inline-flex" />
         <UButton label="Sign up" color="neutral" :trailing-icon="appConfig.ui.icons.arrowRight" />
       </template>
     </UHeader>
 
     <UPageHero
-      description="Build production-ready SaaS applications with powerful components, authentication flows and enterprise features."
+      description="Build production-ready SaaS applications with Nuxt UI's powerful components, authentication flows, and enterprise features. The same component library trusted by the entire Nuxt ecosystem."
       :links="heroLinks"
     >
       <template #top>
@@ -274,12 +312,6 @@ onMounted(() => {
             </defs>
           </svg>
         </div>
-      </template>
-
-      <template #headline>
-        <UBadge variant="subtle" :icon="studioIcons.sparkles">
-          Nuxt UI v4 is out
-        </UBadge>
       </template>
 
       <template #title>
@@ -334,7 +366,7 @@ onMounted(() => {
     </UPageSection>
 
     <UPageSection
-      title="Everything you need to ship"
+      title="Everything You Need to Ship"
       description="Stop building from scratch. Focus on your unique features while Nuxt UI handles the foundations with battle-tested components and patterns."
     >
       <UPageGrid>
@@ -348,22 +380,8 @@ onMounted(() => {
     </UPageSection>
 
     <UPageSection
-      title="A plan for every need"
-      description="Our plans are designed to meet the requirements of both individuals and teams. Get the right plan that suits you."
-    >
-      <UPricingPlans>
-        <UPricingPlan
-          v-for="plan in plans"
-          :key="plan.title"
-          v-bind="plan"
-          billing-cycle="/month"
-        />
-      </UPricingPlans>
-    </UPageSection>
-
-    <UPageSection
-      headline="Trusted by developers"
-      title="Join thousands building with Nuxt UI"
+      headline="Trusted by Developers"
+      title="Join Thousands Building with Nuxt UI"
       description="See why developers choose Nuxt UI to ship their SaaS applications faster and with more confidence."
     >
       <UPageColumns class="lg:columns-2 xl:columns-3">
@@ -386,6 +404,44 @@ onMounted(() => {
     </UPageSection>
 
     <USeparator />
+
+    <UPageSection
+      title="A Plan for Every Need"
+      description="Our plans are designed to meet the requirements of both beginners and players. Get the right plan that suits you."
+      :ui="{ links: 'justify-center' }"
+    >
+      <template #links>
+        <UTabs
+          v-model="billingCycle"
+          :items="billingCycleItems"
+          :content="false"
+          color="neutral"
+          size="xs"
+          class="w-48"
+          :ui="{ list: 'ring ring-accented rounded-full', indicator: 'rounded-full', trigger: 'w-1/2' }"
+        />
+      </template>
+
+      <UPricingPlans scale>
+        <UPricingPlan
+          v-for="plan in plans"
+          :key="plan.title"
+          v-bind="plan"
+          :billing-cycle="billingCycle === 'year' ? '/year' : '/month'"
+        />
+      </UPricingPlans>
+    </UPageSection>
+
+    <UPageSection title="Frequently Asked Questions">
+      <UAccordion
+        :items="faqItems"
+        type="multiple"
+        :default-value="['0']"
+        :unmount-on-hide="false"
+        class="max-w-3xl mx-auto"
+        :ui="{ trigger: 'text-base text-highlighted', body: 'text-base text-muted' }"
+      />
+    </UPageSection>
 
     <UPageCTA
       title="Ready to build an amazing SaaS?"
@@ -442,7 +498,7 @@ onMounted(() => {
       </div>
     </UPageCTA>
 
-    <USeparator icon="i-lucide-rocket" class="h-px" />
+    <USeparator :icon="studioIcons.saas" class="h-px" />
 
     <UFooter :ui="{ top: 'border-b border-default' }">
       <template #top>
@@ -469,7 +525,7 @@ onMounted(() => {
 
       <template #right>
         <UButton :icon="studioIcons.github" aria-label="GitHub" color="neutral" variant="ghost" />
-        <UButton icon="i-lucide-twitter" aria-label="X" color="neutral" variant="ghost" />
+        <UButton icon="i-simple-icons-x" aria-label="X" color="neutral" variant="ghost" />
       </template>
     </UFooter>
   </div>

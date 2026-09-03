@@ -45,7 +45,7 @@ const tabs = computed<TabsItem[]>(() => [
   {
     label: activeTemplate.value?.label ?? 'Templates',
     value: 'templates',
-    icon: activeTemplate.value ? studioIcons[activeTemplate.value.value] : 'i-lucide-layout-template'
+    icon: activeTemplate.value ? studioIcons[activeTemplate.value.value] : studioIcons.templates
   }
 ])
 

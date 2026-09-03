@@ -21,18 +21,23 @@ const socialLinks = [
   { 'icon': studioIcons.github, 'aria-label': 'GitHub' }
 ]
 
-// The template scrolls travel photos in a marquee; we stand in gradient
-// polaroids since the studio previews stay image-free.
+// The template scrolls travel photos in a marquee; gradient polaroids stand in
+// because a tinted surface tracks the theme and a photo does not.
+//
+// Avatar policy across the views: a real image for the person whose account it
+// is (this hero, the dashboard and chat user menus), initials for invented
+// third parties like the testimonial authors, since a stranger's face pinned to
+// a made-up name reads worse than a monogram.
 const heroImages = [
-  { icon: 'i-lucide-mountain', label: 'Alps, 2024' },
+  { icon: studioIcons.mountain, label: 'Alps, 2024' },
   { icon: studioIcons.coffee, label: 'Café sketching' },
-  { icon: 'i-lucide-bike', label: 'Canal ride' },
+  { icon: studioIcons.bike, label: 'Canal ride' },
   { icon: studioIcons.camera, label: 'Street photos' },
-  { icon: 'i-lucide-laptop', label: 'Studio desk' },
-  { icon: 'i-lucide-trees', label: 'Veluwe hike' },
+  { icon: studioIcons.laptop, label: 'Studio desk' },
+  { icon: studioIcons.trees, label: 'Veluwe hike' },
   { icon: studioIcons.palette, label: 'Color studies' },
-  { icon: 'i-lucide-ferris-wheel', label: 'Rotterdam fair' },
-  { icon: 'i-lucide-waves', label: 'North Sea' }
+  { icon: studioIcons.ferrisWheel, label: 'Rotterdam fair' },
+  { icon: studioIcons.waves, label: 'North Sea' }
 ]
 
 const about = {
@@ -134,9 +139,9 @@ onUnmounted(() => clearTimeout(appearTimeout))
 
 <template>
   <!-- A mini portfolio: the pane is the scroll container, so the pill nav sticks to it. -->
-  <div class="h-full overflow-y-auto bg-default">
+  <div class="h-full overflow-y-auto bg-default" style="--ui-container: var(--container-4xl)">
     <!-- Template's AppHeader: a floating centered pill navigation. -->
-    <div class="sticky top-2 sm:top-4 z-10 flex justify-center pointer-events-none">
+    <div class="sticky top-2 sm:top-4 z-10 h-0 flex items-start justify-center pointer-events-none">
       <UNavigationMenu
         :items="navItems"
         variant="link"
@@ -148,26 +153,32 @@ onUnmounted(() => clearTimeout(appearTimeout))
         }"
       >
         <template #list-trailing>
+          <!-- UColorModeButton renders the pack's moon/sun pair; the studio toolbar owns the real toggle. -->
           <UButton
-            icon="i-lucide-sun-moon"
-            aria-label="Color mode"
             color="neutral"
             variant="ghost"
             size="sm"
-          />
+            class="rounded-full"
+            aria-label="Color mode"
+          >
+            <template #leading="{ ui }">
+              <UIcon :name="appConfig.ui.icons.dark" :class="ui.leadingIcon({ class: 'hidden dark:inline-block' })" />
+              <UIcon :name="appConfig.ui.icons.light" :class="ui.leadingIcon({ class: 'dark:hidden' })" />
+            </template>
+          </UButton>
         </template>
       </UNavigationMenu>
     </div>
 
-    <UContainer class="max-w-4xl sm:border-x border-default -mt-12 pt-10">
+    <UContainer class="sm:border-x border-default pt-10">
       <UPageHero
         title="Hey, I'm Mike Newbon Design Engineer"
         description="Based in Amsterdam, I craft intuitive digital products, where design meets fun-ctionality. Like this theme editor!"
         :ui="{
           container: 'py-18 sm:py-24 lg:py-32',
           headline: 'flex items-center justify-center',
-          title: 'text-shadow-md max-w-lg mx-auto text-balance text-3xl sm:text-4xl lg:text-5xl',
-          description: 'mt-2 text-md mx-auto max-w-2xl text-balance sm:text-md text-muted',
+          title: 'text-shadow-md max-w-lg mx-auto text-pretty text-3xl sm:text-4xl lg:text-5xl',
+          description: 'mt-2 text-md mx-auto max-w-2xl text-pretty sm:text-md text-muted',
           links: 'mt-4 flex-col justify-center items-center'
         }"
       >
@@ -342,7 +353,11 @@ onUnmounted(() => clearTimeout(appearTimeout))
           :items="faqCategories"
           orientation="horizontal"
           :ui="{
-
+            root: 'flex items-center gap-4 w-full',
+            list: 'relative flex bg-transparent dark:bg-transparent gap-2 px-0',
+            indicator: 'absolute top-[4px] duration-200 ease-out focus:outline-none rounded-lg bg-elevated/60',
+            trigger: 'px-3 py-2 rounded-lg hover:bg-muted/50 data-[state=active]:text-highlighted data-[state=inactive]:text-muted',
+            label: 'truncate'
           }"
         >
           <template #content="{ item }">

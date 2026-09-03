@@ -55,7 +55,7 @@ const terminalLines: TerminalSegment[][] = [
 
 const logos = [
   'i-simple-icons-vercel',
-  studioIcons.github,
+  'i-simple-icons-github',
   'i-simple-icons-linear',
   'i-simple-icons-supabase',
   'i-simple-icons-stripe'
@@ -66,15 +66,15 @@ const features = [{
   title: 'Predictive Alerts',
   description: 'ML models trained on your baselines detect anomalies 4 minutes before they hit your SLOs.'
 }, {
-  icon: 'i-lucide-radar',
+  icon: studioIcons.radar,
   title: 'Topology Mapping',
   description: 'Auto-discovers service dependencies with zero config. See how a deploy in auth-service ripples through checkout.'
 }, {
-  icon: 'i-lucide-layers',
+  icon: studioIcons.layers,
   title: 'Unified Telemetry',
   description: 'Logs, metrics, and traces in one query language. Stop context-switching. Start correlating.'
 }, {
-  icon: 'i-lucide-git-commit-horizontal',
+  icon: studioIcons.gitCommit,
   title: 'Deploy Tracking',
   description: 'Every deploy is automatically correlated with performance changes. Know which commit caused the regression.'
 }, {
@@ -82,7 +82,7 @@ const features = [{
   title: 'Smart Sampling',
   description: 'AI-driven sampling retains interesting traces and drops noise. Cut storage costs 10× without losing signal.'
 }, {
-  icon: 'i-lucide-notebook-pen',
+  icon: studioIcons.notebook,
   title: 'Team Notebooks',
   description: 'Collaborative investigation notebooks that turn incident debugging into reusable runbooks.'
 }]
@@ -124,29 +124,31 @@ const vReveal = {
 
 <template>
   <div class="h-full overflow-y-auto bg-default">
-    <!-- Header -->
-    <header class="sticky top-0 z-10 border-b border-default bg-default/75 backdrop-blur rounded-t-[inherit]">
-      <div class="flex h-14 items-center justify-between gap-3 px-4 sm:px-6">
-        <div class="flex items-center gap-1.5 sm:flex-1">
-          <UIcon name="i-lucide-activity" class="size-5 text-primary shrink-0" />
-          <span class="text-base font-bold text-highlighted">Telemetry</span>
+    <!-- Header. `center: 'flex'` because the pane is narrower than `lg`, where
+         UHeader would otherwise hide its center slot. -->
+    <UHeader :toggle="false" class="rounded-t-[inherit]" :ui="{ center: 'flex' }">
+      <template #left>
+        <div class="flex items-center gap-1.5">
+          <UIcon :name="studioIcons.activity" class="size-6 text-primary shrink-0" />
+          <span class="text-xl font-bold text-highlighted">Landing</span>
         </div>
+      </template>
 
-        <UNavigationMenu :items="navItems" variant="link" class="hidden sm:flex" />
+      <UNavigationMenu :items="navItems" variant="link" />
 
-        <div class="flex items-center justify-end gap-1.5 sm:flex-1">
-          <UButton label="Sign in" color="neutral" variant="ghost" class="hidden sm:inline-flex" />
-          <UButton label="Get started" color="neutral" />
-        </div>
-      </div>
-    </header>
+      <template #right>
+        <UButton label="Sign in" color="neutral" variant="ghost" class="hidden sm:inline-flex" />
+        <UButton label="Get started" color="neutral" />
+      </template>
+    </UHeader>
 
     <!-- Hero -->
     <UPageHero
       :ui="{
-        container: 'relative z-10 py-16 sm:py-24 lg:py-32 gap-12 sm:gap-16',
+        root: 'pb-24 sm:pb-32',
+        container: 'relative z-10 lg:py-32',
         wrapper: 'flex flex-col items-center',
-        title: 'sm:text-6xl lg:text-7xl tracking-tighter leading-[1.05]',
+        title: 'sm:text-6xl lg:text-7xl xl:text-[80px] tracking-tighter leading-[1.05]',
         description: 'mt-5 max-w-xl mx-auto text-base sm:text-lg leading-relaxed text-default',
         links: 'gap-3'
       }"
@@ -186,14 +188,14 @@ const vReveal = {
       </template>
 
       <template #links>
-        <div class="landing-enter flex flex-wrap justify-center gap-3" style="animation-delay: 650ms">
+        <div class="landing-enter flex flex-wrap justify-center gap-6" style="animation-delay: 650ms">
           <UButton label="Start for free" variant="solid" size="xl" class="landing-btn-glow" />
           <UButton label="View demo" color="neutral" variant="soft" size="xl" />
         </div>
       </template>
 
       <div class="landing-enter max-w-2xl mx-auto w-full" style="animation-delay: 850ms">
-        <div class="rounded-xl border border-default bg-elevated/50 backdrop-blur overflow-hidden">
+        <div class="rounded-xl border border-default bg-elevated/50 backdrop-blur-sm ring-1 ring-inverted/2 overflow-hidden">
           <div class="flex items-center gap-1.5 border-b border-default p-4 sm:px-6">
             <span class="size-2.5 rounded-full border border-default bg-muted" />
             <span class="size-2.5 rounded-full border border-default bg-muted" />
@@ -219,6 +221,7 @@ const vReveal = {
           :items="logos"
           :ui="{
             title: 'font-mono uppercase text-xs tracking-[0.12em] text-dimmed',
+            logos: 'gap-0',
             logo: 'text-muted size-6'
           }"
         />
@@ -250,11 +253,11 @@ const vReveal = {
             :icon="feature.icon"
             :title="feature.title"
             :description="feature.description"
-            class="rounded-none duration-300 hover:bg-elevated/50"
+            class="rounded-none transition duration-300 hover:bg-elevated/50"
             :ui="{
               leading: 'mb-5 flex size-9 items-center justify-center rounded-lg bg-primary/10',
               title: 'text-sm tracking-tight',
-              description: 'text-sm leading-relaxed text-dimmed'
+              description: 'text-sm leading-relaxed sm:line-clamp-2 lg:line-clamp-3 text-dimmed'
             }"
           />
         </div>
@@ -285,7 +288,7 @@ const vReveal = {
             v-reveal="index * 80"
             :title="metric.value"
             :description="metric.label"
-            class="rounded-none duration-300 hover:bg-elevated/50"
+            class="rounded-none transition duration-300 hover:bg-elevated/50"
             :ui="{
               root: 'text-center',
               wrapper: 'items-center',
@@ -338,7 +341,7 @@ const vReveal = {
     </UPageCTA>
 
     <!-- Footer -->
-    <UFooter :ui="{ container: 'border-t border-default lg:py-8', right: 'gap-x-0 flex-wrap justify-end' }">
+    <UFooter :ui="{ container: 'border-t border-default', right: 'gap-x-0 flex-wrap justify-end' }">
       <template #left>
         <p class="text-sm text-dimmed">
           Built with Nuxt UI • © 2026

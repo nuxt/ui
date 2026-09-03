@@ -1,38 +1,51 @@
 <script setup lang="ts">
-import type { DropdownMenuItem, NavigationMenuItem, PageLink } from '@nuxt/ui'
+import { Markdown } from '@comark/vue'
+import shiki from '@comark/vue/plugins/shiki'
+import type { ContentNavigationLink, ContentSurroundLink, DropdownMenuItem, PageLink } from '@nuxt/ui'
 
 const appConfig = useAppConfig()
 const studioIcons = useStudioIcons()
 
-// Left aside: the template renders UContentNavigation from @nuxt/content,
-// content-coupled, so the same tree is faked with a vertical UNavigationMenu.
-const navLinks: NavigationMenuItem[] = [{
-  label: 'Getting Started',
-  type: 'trigger',
-  defaultOpen: true,
+// Left aside. UContentNavigation is prop-driven, not content-coupled: it reads
+// `title`, and `active` forces the state without a route, so the tree is a
+// static array. Paths are empty so nothing navigates out of the studio: the
+// type wants the key, and both the mapper and ULink drop a falsy one.
+const navLinks: ContentNavigationLink[] = [{
+  path: '',
+  title: 'Getting Started',
   children: [
-    { label: 'Introduction', icon: studioIcons.home },
-    { label: 'Installation', icon: 'i-lucide-download' },
-    { label: 'Usage', icon: studioIcons.settings, active: true }
+    { path: '', title: 'Introduction', icon: studioIcons.home },
+    { path: '', title: 'Installation', icon: studioIcons.download },
+    { path: '', title: 'Usage', icon: studioIcons.settings, active: true }
   ]
 }, {
-  label: 'Essentials',
-  type: 'trigger',
-  defaultOpen: true,
+  path: '',
+  title: 'Essentials',
   children: [
-    { label: 'Markdown Syntax', icon: studioIcons.heading },
-    { label: 'Code Blocks', icon: 'i-lucide-code' },
-    { label: 'Prose Components', icon: 'i-lucide-component' },
-    { label: 'Images & Embeds', icon: studioIcons.image }
+    { path: '', title: 'Markdown Syntax', icon: studioIcons.heading },
+    { path: '', title: 'Code Blocks', icon: studioIcons.code },
+    { path: '', title: 'Prose Components', icon: studioIcons.component },
+    { path: '', title: 'Images and Embeds', icon: studioIcons.image }
   ]
 }, {
-  label: 'AI',
-  type: 'trigger',
-  defaultOpen: true,
+  path: '',
+  title: 'AI',
   children: [
-    { label: 'MCP Server', icon: studioIcons.assistant },
-    { label: 'LLMs.txt', icon: appConfig.ui.icons.file }
+    { path: '', title: 'MCP Server', icon: studioIcons.cpu },
+    { path: '', title: 'LLMs Integration', icon: appConfig.ui.icons.file }
   ]
+}]
+
+// The template's prev/next pair, inert for the same reason.
+const surround: ContentSurroundLink[] = [{
+  path: '',
+  class: 'text-start',
+  title: 'Installation',
+  description: 'Get started with the documentation template in a few steps.'
+}, {
+  path: '',
+  title: 'Markdown Syntax',
+  description: 'Headings, lists, links and everything Markdown supports.'
 }]
 
 // PageHeaderLinks dropdown, minus the real clipboard / external navigations.
@@ -60,31 +73,121 @@ const tocLinks = [
 const communityLinks: PageLink[] = [
   { label: 'Edit this page', icon: appConfig.ui.icons.external },
   { label: 'Star on GitHub', icon: appConfig.ui.icons.star },
-  { label: 'Releases', icon: 'i-lucide-rocket' }
+  { label: 'Nuxt UI docs', icon: studioIcons.bookOpen }
 ]
 
-const frontmatterFields = [
-  { key: 'title', type: 'string', description: 'Page title, shown in the header and navigation' },
-  { key: 'description', type: 'string', description: 'Page description, shown below the title' },
-  { key: 'navigation.icon', type: 'string', description: 'Icon displayed next to the link in the aside' }
-]
+/**
+ * The template's `content/1.getting-started/3.usage.md`, verbatim. It renders
+ * through ContentRenderer there and through Comark here, both of which map
+ * markdown onto the same Prose components, so the callout props, the code
+ * block filenames and the heading ids all come out of the markdown itself.
+ */
+const content = `This is only a basic example of what you can achieve with [Nuxt UI](https://ui.nuxt.com), you can tweak it to match your needs. The template uses several Nuxt modules underneath like [\`@nuxt/content\`](https://content.nuxt.com) for the content and [\`nuxt-og-image\`](https://nuxtseo.com/og-image/getting-started/installation) for social previews.
 
-const appConfigCode = `export default defineAppConfig({
+::tip
+---
+target: _blank
+to: https://ui.nuxt.com/getting-started/installation
+---
+Learn more on how to take the most out of Nuxt UI!
+::
+
+## Writing content
+
+You can just start writing \`.md\` or \`.yml\` files in the [\`content/\`](https://content.nuxt.com/usage/content-directory) directory to have your pages updated. The navigation will be automatically generated in the left aside and in the mobile menu. You will also be able to go through your content with full-text search.
+
+## App Configuration
+
+In addition to \`@nuxt/ui\` configuration through the \`app.config.ts\`, this template lets you customize the \`Header\`, \`Footer\` and the \`Table of contents\` components.
+
+### Header
+
+\`\`\`ts [app.config.ts]
+export default defineAppConfig({
   header: {
-    title: 'Docs',
+    title: '',
     to: '/',
+    // Logo configuration
+    logo: {
+      alt: '',
+      // Light mode
+      light: '',
+      // Dark mode
+      dark: ''
+    },
     // Show or hide the search bar
     search: true,
     // Show or hide the color mode button
     colorMode: true,
+    // Customize links
     links: [{
       'icon': 'i-simple-icons-github',
       'to': 'https://github.com/nuxt-ui-templates/docs',
       'target': '_blank',
       'aria-label': 'GitHub'
     }]
+  },
+})
+\`\`\`
+
+### Footer
+
+\`\`\`ts [app.config.ts]
+export default defineAppConfig({
+  footer: {
+    // Update bottom left credits
+    credits: \`Built with Nuxt UI • © \${new Date().getFullYear()}\`,
+    // Show or hide the color mode button
+    colorMode: false,
+    // Customize links
+    links: [{
+      'icon': 'i-simple-icons-discord',
+      'to': 'https://go.nuxt.com/discord',
+      'target': '_blank',
+      'aria-label': 'Nuxt on Discord'
+    }, {
+      'icon': 'i-simple-icons-x',
+      'to': 'https://go.nuxt.com/x',
+      'target': '_blank',
+      'aria-label': 'Nuxt on X'
+    }, {
+      'icon': 'i-simple-icons-github',
+      'to': 'https://github.com/nuxt/ui',
+      'target': '_blank',
+      'aria-label': 'Nuxt UI on GitHub'
+    }]
+  },
+})
+\`\`\`
+
+### Table of contents
+
+\`\`\`ts [app.config.ts]
+export default defineAppConfig({
+  toc: {
+    // Title of the main table of contents
+    title: 'Table of Contents',
+    // Customize links
+    bottom: {
+      // Title of the bottom table of contents
+      title: 'Community',
+      // URL of your repository content folder
+      edit: 'https://github.com/nuxt-ui-pro/docs/edit/main/content',
+      links: [{
+        icon: 'i-lucide-star',
+        label: 'Star on GitHub',
+        to: 'https://github.com/nuxt/ui',
+        target: '_blank'
+      }, {
+        icon: 'i-lucide-book-open',
+        label: 'Nuxt UI docs',
+        to: 'https://ui.nuxt.com/getting-started/installation',
+        target: '_blank'
+      }]
+    }
   }
-})`
+})
+\`\`\``
 </script>
 
 <template>
@@ -116,7 +219,13 @@ const appConfigCode = `export default defineAppConfig({
       </UButton>
 
       <template #right>
-        <UButton icon="i-lucide-sun-moon" aria-label="Color mode" color="neutral" variant="ghost" />
+        <!-- UColorModeButton renders the pack's moon/sun pair; the studio toolbar owns the real toggle. -->
+        <UButton color="neutral" variant="ghost" aria-label="Color mode">
+          <template #leading="{ ui }">
+            <UIcon :name="appConfig.ui.icons.dark" :class="ui.leadingIcon({ class: 'hidden dark:inline-block' })" />
+            <UIcon :name="appConfig.ui.icons.light" :class="ui.leadingIcon({ class: 'dark:hidden' })" />
+          </template>
+        </UButton>
         <UButton :icon="studioIcons.github" aria-label="GitHub" color="neutral" variant="ghost" />
       </template>
     </UHeader>
@@ -125,12 +234,7 @@ const appConfigCode = `export default defineAppConfig({
       <UPage>
         <template #left>
           <UPageAside>
-            <UNavigationMenu
-              :items="navLinks"
-              orientation="vertical"
-              highlight
-              :ui="{ linkTrailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200' }"
-            />
+            <UContentNavigation highlight :navigation="navLinks" />
           </UPageAside>
         </template>
 
@@ -167,106 +271,15 @@ const appConfigCode = `export default defineAppConfig({
           </UPageHeader>
 
           <UPageBody>
-            <ProseP>
-              This is only a basic example of what you can achieve with
-              <span class="text-primary font-medium border-b border-transparent hover:border-primary cursor-pointer">Nuxt UI</span>,
-              you can tweak it to match your needs. The template uses several Nuxt modules underneath like
-              <ProseCode>@nuxt/content</ProseCode> for the content and <ProseCode>nuxt-og-image</ProseCode>
-              for social previews.
-            </ProseP>
-
-            <ProseTip>
-              Learn more on how to take the most out of Nuxt UI!
-            </ProseTip>
-
-            <ProseH2>
-              Writing content
-            </ProseH2>
-
-            <ProseP>
-              You can just start writing <ProseCode>.md</ProseCode> or <ProseCode>.yml</ProseCode> files in the
-              <ProseCode>content/</ProseCode> directory to have your pages updated. The navigation will be
-              automatically generated in the left aside and in the mobile menu. You will also be able to go
-              through your content with full-text search.
-            </ProseP>
-
-            <ProseP>
-              Each page supports a few frontmatter fields to customize how it appears:
-            </ProseP>
-
-            <ProseTable>
-              <ProseThead>
-                <ProseTr>
-                  <ProseTh>Key</ProseTh>
-                  <ProseTh>Type</ProseTh>
-                  <ProseTh>Description</ProseTh>
-                </ProseTr>
-              </ProseThead>
-              <ProseTbody>
-                <ProseTr v-for="field in frontmatterFields" :key="field.key">
-                  <ProseTd>
-                    <ProseCode>{{ field.key }}</ProseCode>
-                  </ProseTd>
-                  <ProseTd>
-                    <ProseCode>{{ field.type }}</ProseCode>
-                  </ProseTd>
-                  <ProseTd>{{ field.description }}</ProseTd>
-                </ProseTr>
-              </ProseTbody>
-            </ProseTable>
-
-            <ProseH2>
-              App Configuration
-            </ProseH2>
-
-            <ProseP>
-              In addition to <ProseCode>@nuxt/ui</ProseCode> configuration through the
-              <ProseCode>app.config.ts</ProseCode>, this template lets you customize the
-              <ProseCode>Header</ProseCode>, <ProseCode>Footer</ProseCode> and the
-              <ProseCode>Table of contents</ProseCode> components.
-            </ProseP>
-
-            <ProseH3>
-              Header
-            </ProseH3>
-
-            <ProsePre filename="app.config.ts" :icon="studioIcons.settings" :code="appConfigCode">
-              {{ appConfigCode }}
-            </ProsePre>
-
-            <ProseH3>
-              Footer
-            </ProseH3>
-
-            <ProseP>
-              The footer follows the same pattern: update the bottom left credits, toggle the color mode
-              button and customize the social links, all from a single object in your app config.
-            </ProseP>
+            <Markdown :value="content" :plugins="[shiki()]" />
 
             <USeparator />
 
-            <!-- UContentSurround is content-coupled: same prev/next look with a UPageCard pair. -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
-              <UPageCard
-                :icon="appConfig.ui.icons.arrowLeft"
-                title="Installation"
-                description="Get started with the documentation template in a few steps."
-                variant="outline"
-                :ui="{ leadingIcon: 'text-muted group-hover:text-primary transition-colors' }"
-              />
-              <UPageCard
-                :icon="appConfig.ui.icons.arrowRight"
-                title="Markdown Syntax"
-                description="Headings, lists, links and everything Markdown supports."
-                variant="outline"
-                class="text-right"
-                :ui="{ wrapper: 'items-end', leadingIcon: 'text-muted group-hover:text-primary transition-colors' }"
-              />
-            </div>
+            <UContentSurround :surround="surround" />
           </UPageBody>
 
           <template #right>
-            <div class="hidden lg:flex flex-col gap-6 sticky top-(--ui-header-height) py-8">
+            <div class="hidden lg:flex flex-col gap-6 self-start sticky top-(--ui-header-height) py-8">
               <div>
                 <p class="text-sm font-semibold text-highlighted mb-1.5">
                   Table of Contents
