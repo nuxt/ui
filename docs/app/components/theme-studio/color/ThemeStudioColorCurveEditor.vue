@@ -91,7 +91,8 @@ function drawField() {
   const nRow = columns[0]!.length
   if (!nRow) return
 
-  // low-res backing store stretched by CSS, indistinguishable for a soft gradient
+  // fixed 3x backing store; the sample grid is the low-res part, and
+  // bilinear upscaling hides it on a gradient this soft
   if (canvas.width !== W * 3) {
     canvas.width = W * 3
     canvas.height = H * 3
@@ -367,7 +368,6 @@ onUnmounted(() => {
         stroke-dasharray="2 2"
       />
 
-      <!-- curve -->
       <path :d="path" fill="none" class="stroke-(--ui-primary)" stroke-width="1.5" />
 
       <!-- shade stops on the curve; a pinned stop wears a larger primary ring -->

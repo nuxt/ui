@@ -134,7 +134,6 @@ const content = computed(() => [...toolbarPanelClass(props.vertical), 'divide-y 
     />
 
     <template #content>
-      <!-- the panel owns the layout: padding per section, rules between them -->
       <ThemeStudioSection label="Global" section-key="size">
         <ThemeStudioRow
           v-model="defaultSize"

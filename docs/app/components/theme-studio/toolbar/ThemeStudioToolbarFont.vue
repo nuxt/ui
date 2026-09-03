@@ -4,9 +4,7 @@ import { keepPanels, toolbarPanelClass, FONT_WEIGHT_DEFAULTS, loadFontPreviews }
 
 /**
  * Every typographic setting in one panel: the three stacks up top, then the
- * treatment that rides on them. They were split across the toolbar and the
- * Options panel before, which meant the type decisions were never on screen
- * together.
+ * treatment that rides on them.
  *
  * The stacks are what tailwind reads. Mono needs nothing else (preflight
  * points `code`/`kbd`/`pre`/`samp` at it) and serif drives the h1–h6 rule in
@@ -88,7 +86,6 @@ const content = computed(() => [...toolbarPanelClass(props.vertical), 'divide-y 
     />
 
     <template #content>
-      <!-- the panel owns the layout: padding per section, rules between them -->
       <ThemeStudioSection label="Fonts" section-key="font">
         <ThemeStudioRow
           v-for="stack in stacks"

@@ -34,8 +34,6 @@ const tintedNeutral = () => structuredClone(tintedNeutralBase)
 
 /**
  * Presets are plain ThemeDocs: applying one replaces the current document.
- * Each deliberately exercises a different engine capability, so they double
- * as living tests of the schema.
  */
 export const presets: ThemePreset[] = [{
   id: 'nuxt-ui',

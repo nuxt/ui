@@ -16,7 +16,7 @@ const props = defineProps<{
   /** Reset a section the doc has no slice for, the caller says when it's dirty. */
   resettable?: boolean
   resetDirty?: boolean
-  /** Whether the section has a collapsible content. */
+  /** Tightens the header spacing and mutes the label; the fold is the caller's. */
   collapsible?: boolean
 }>()
 

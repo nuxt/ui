@@ -4,8 +4,8 @@ import { keepPanels, toolbarPanelClass } from '../../../utils/theme/studio'
 /**
  * The toolbar's pick-one controls (preset, icons, radius): the shared trigger
  * opening a plain listbox, the same shape as the popover panels beside them.
- * A select menu is a whole combobox with its own trigger styling and height
- * cap; these lists are nine rows.
+ * A select menu is a whole combobox with its own trigger styling; these
+ * lists are a dozen rows at most.
  */
 const props = defineProps<{
   /** Radius stops are numbers, icon sets are strings. */

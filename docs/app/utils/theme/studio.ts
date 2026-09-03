@@ -7,8 +7,7 @@ import type { ThemeDoc, Shade } from './engine/types'
 // What the pickers offer. Static, so it lives here rather than in the
 // composables that hand it out.
 
-// taupe/mauve/mist/olive ship in tailwind's theme.css but not (yet) the
-// tailwindcss/colors JS export, swatches resolve them from CSS variables
+// tailwind's extra neutrals, listed so they stay out of PRIMARY_COLORS
 export const NEUTRAL_COLORS = ['slate', 'gray', 'zinc', 'neutral', 'stone', 'taupe', 'mauve', 'mist', 'olive']
 const NOT_A_RAMP = ['inherit', 'current', 'transparent', 'black', 'white', ...NEUTRAL_COLORS]
 export const PRIMARY_COLORS = Object.keys(colors).filter(name => !NOT_A_RAMP.includes(name))
@@ -136,7 +135,7 @@ export function paletteLabel(name: string): string {
 
 /**
  * interact-outside handler: clicks on studio chrome marked data-keep-panels
- * (the color-mode switch) must not dismiss an open panel.
+ * must not dismiss an open panel.
  */
 export function keepPanels(event: Event) {
   if ((event.target as HTMLElement | null)?.closest?.('[data-keep-panels]')) {
@@ -145,7 +144,7 @@ export function keepPanels(event: Event) {
 }
 
 /**
- * One footprint for every toolbar popover: the header picker's w-62 on the
+ * One footprint for every toolbar popover: a fixed width on the
  * bar, the trigger's own width when stacked in the mobile menu. Scroll lives
  * on the popover content so panels and listboxes cap the same way.
  */

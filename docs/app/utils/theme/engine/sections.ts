@@ -15,14 +15,13 @@ export type SectionKey
     | 'font' | 'type' | 'weights'
     | 'icons' | 'radius' | 'size' | 'buttons' | 'panels' | 'inputs'
 
-/** The Text panel's three sections, each owning part of the font document. */
+/** Which font fields the `font` and `type` sections each own. */
 const FONT_STACKS = ['sans', 'serif', 'mono'] as const
 const TYPE_FIELDS = ['uppercase', 'italic', 'letterSpacing', 'lineHeight'] as const
 
 /**
- * Only the two that still back a multi-section panel. Type, icons and radius
- * each own a toolbar control now, so they carry their own `sectionDirty`
- * rather than rolling up into a group.
+ * Only the sections that back a multi-section panel. Every other section owns
+ * a toolbar control and carries its own `sectionDirty`.
  */
 export const SECTION_GROUPS: Record<'colors' | 'defaults', SectionKey[]> = {
   colors: ['primary', 'neutral', 'semantic'],
@@ -123,7 +122,7 @@ export function pickSection(doc: ThemeDoc, key: SectionKey): unknown {
         shades: ownedTokenShades(doc, 'semantic')
       }
     // Explicit stock values count as absent throughout: setFontPrefs strips
-    // them on apply while a preset doc may spell them out (8-bit), and a raw
+    // them on apply while a preset doc may spell them out, and a raw
     // comparison would read dirty forever, jamming the toolbar reset.
     case 'font': {
       const font = doc.font ?? {}

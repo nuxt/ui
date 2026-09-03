@@ -7,9 +7,9 @@ import { keepPanels, paletteLabel, rampCssName, themeChipStyle, loadFontPreviews
 
 /**
  * The header's theme menu: the applied preset up top with the presets a
- * submenu away, then the theme's headline settings (primary, neutral, color
- * mode, font, icons, radius), each row a submenu of its options, and the
- * full studio at the bottom. The header drops this on /theme, where the
+ * submenu away, then the theme's headline settings (primary, neutral, font,
+ * icons, radius) as rows with a submenu each, color mode as an inline
+ * segmented control, and the full studio at the bottom. The header drops this on /theme, where the
  * studio's own toolbar covers it.
  */
 const { track } = useAnalytics()
@@ -191,12 +191,10 @@ const items = computed<DropdownMenuItem[][]>(() => [[{
 }], [{
   label: 'Edit theme',
   icon: studioIcons.options,
-  // its own slot for a trailing chevron, the menu only draws one for submenus
   slot: 'link',
   to: '/theme'
 }]])
 
-/** The slot scope rides the menu's loose item type, cast it back. */
 function asRow(item: unknown) {
   return item as { label: string, icon?: string, value?: string, dot?: string, dirty?: boolean }
 }
@@ -251,7 +249,8 @@ watch(open, (isOpen) => {
       <ThemeStudioColorModeTabs class="ms-auto -my-1.5" />
     </template>
 
-    <!-- appConfig.ui.icons is swapped whole with the icon set, so the chevron follows it -->
+    <!-- its own slot: the menu only draws a trailing icon for submenus, and
+         appConfig.ui.icons is swapped whole with the pack so this follows it -->
     <template #link-trailing>
       <UIcon :name="appConfig.ui.icons.arrowRight" class="size-5 shrink-0 text-dimmed" />
     </template>

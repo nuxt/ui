@@ -14,12 +14,10 @@ export interface ShadeSlider {
 
 const props = withDefaults(defineProps<{
   label?: string
-  /** Omit for a group whose rows come from its slot instead. */
   sliders?: Record<'light' | 'dark', ShadeSlider>
   /** Palette the stops resolve against. */
   chip?: string
   ladder?: readonly ShadeStop[]
-  /** A colour source with no shades keeps its group, minus the sliders. */
   showRows?: boolean
 }>(), {
   // an empty record rather than undefined: a `?? {}` in the v-for widens the
@@ -45,7 +43,6 @@ function reset() {
     :reset-dirty="dirty"
     @reset="reset"
   >
-    <!-- whatever picks the colour these stops ride -->
     <slot />
 
     <ThemeStudioRow

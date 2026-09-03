@@ -4,18 +4,14 @@ import { SAFE_NAME } from './sanitize'
 
 /**
  * The font document: all three stacks plus the body treatment, exactly the
- * doc's own shape. It used to be this type minus `sans`, because the sans
- * shipped as its own `nuxt-ui-font` key long before the rest existed and the
- * two never got folded back together.
+ * doc's own shape.
  */
 export type FontPrefs = NonNullable<ThemeDoc['font']>
 
 /**
- * The theme's single persisted key. Every setting used to own a localStorage
- * key of its own, which meant restores could interleave: the derived stores
- * (the ramp behind a custom palette, the class bundle behind a style) could
- * come back without the source that produced them, so each needed a self-heal
- * to reconcile. One key writes atomically, so those states cannot disagree.
+ * The theme's single persisted key. One key writes atomically, so a derived
+ * store (the ramp behind a custom palette, the class bundle behind a style)
+ * can never come back without the source that produced it.
  *
  * Not a ThemeDoc: the doc is the EXPORT shape, diffed against a stock library
  * install. This is a snapshot of runtime state, and hydrating it has to
@@ -47,10 +43,7 @@ export interface StoredTheme {
 }
 
 /**
- * Every key the theme picker wrote before this became one key: the nine that
- * are live on v4 today plus two this branch added (font size and the
- * typography bag). The studio's own (style, palette params, preset) never
- * left the branch and are not worth carrying.
+ * Every key the theme picker wrote before this became one key.
  *
  * vueuse's `useLocalStorage` writes strings and numbers RAW, not JSON, so
  * these read back per type rather than through JSON.parse.
@@ -84,7 +77,7 @@ function migrateLegacyTheme(): StoredTheme {
     fontSize: number('nuxt-ui-font-size'),
     icons: read('nuxt-ui-icons'),
     blackAsPrimary: read('nuxt-ui-black-as-primary') === 'true' || undefined,
-    // the family and the rest of the typography were two keys back then
+    // the family and the rest of the typography were separate keys
     font: normalizeFont({ ...json<Record<string, unknown>>('nuxt-ui-font-prefs'), sans: read('nuxt-ui-font') }),
     colors: extras?.colors,
     components: extras?.ui,
@@ -160,8 +153,7 @@ export function readStoredTheme(): StoredTheme {
     const parsed = JSON.parse(raw)
     if (!parsed || typeof parsed !== 'object') return {}
     // Interim shape from this key's first iteration, where the family was
-    // still a bare string beside a `fontPrefs` object. Never shipped, so this
-    // only has to survive a branch checkout, not a release.
+    // still a bare string beside a `fontPrefs` object.
     if (typeof parsed.font === 'string' || parsed.fontPrefs) {
       parsed.font = { ...parsed.fontPrefs, ...(typeof parsed.font === 'string' ? { sans: parsed.font } : {}) }
       Reflect.deleteProperty(parsed, 'fontPrefs')

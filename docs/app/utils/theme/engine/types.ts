@@ -5,10 +5,8 @@
  * A theme doc is sparse, so serializing it IS the minimal export. Two style
  * axes survive on v4, and both map onto public API: default variants/sizes/
  * colors (`defaultVariants` per component) and semantic token shades
- * (`--ui-*`). Shadow and border treatments used to live here too, expanded
- * into static per-component class bundles because the library has no
- * semantic tokens for them; they come back in v5 on `--ui-shadow-*` /
- * `--ui-border-width`.
+ * (`--ui-*`). Shadow and border treatments wait on v5's `--ui-shadow-*` /
+ * `--ui-border-width`, the library has no semantic tokens for them yet.
  */
 import colors from 'tailwindcss/colors'
 
@@ -92,10 +90,8 @@ export interface ThemeDoc {
   font?: {
     sans?: string
     /**
-     * Tailwind's other two stacks. Setting `mono` is all `font-mono` and the
-     * `code`/`kbd`/`pre`/`samp` elements need, preflight wires them from the
-     * variable. Nothing consumes `--font-serif`, so it doubles as the heading
-     * family through one element rule, until v5 ships `--ui-font-heading`.
+     * Tailwind's other two stacks. `serif` doubles as the heading family,
+     * see generateCSS.
      */
     serif?: string
     mono?: string

@@ -25,8 +25,8 @@ const paletteEditor = ref(false)
 const shadeEditor = ref(false)
 
 // Neutral rides every semantic token, so its shades come grouped rather than
-// as one accent pair. Borders are left out: they have no control to sit with
-// since the border axis went.
+// as one accent pair. Border tokens are deliberately not exposed here, their
+// sliders would double the group with no visible payoff.
 const NEUTRAL_GROUPS = ['background', 'text']
 const tokenGroups = TOKEN_GROUPS
   .filter(group => NEUTRAL_GROUPS.includes(group.key))
@@ -43,7 +43,7 @@ const editors = [
 
 <template>
   <ThemeStudioSection :label="title" :help-to="helpTo" :section-key="sectionKey">
-    <!-- the only two folds left in a panel: ghost until on, tinted while open -->
+    <!-- the two editor folds: ghost until on, tinted while open -->
     <template #actions>
       <UTooltip
         v-for="editor in editors"
@@ -69,7 +69,6 @@ const editors = [
 
       <ThemeStudioColorPaletteEditor v-model:open="paletteEditor" :alias="alias" />
 
-      <!-- padding, not a margin: it has to sit inside the animated box -->
       <UCollapsible v-model:open="shadeEditor" :ui="{ content: 'overflow-hidden' }">
         <template #content>
           <!-- the padding sits inside the animated box, not on it -->

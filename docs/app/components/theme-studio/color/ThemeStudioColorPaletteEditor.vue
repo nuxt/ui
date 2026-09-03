@@ -228,7 +228,7 @@ function onSwatchCloseAutoFocus(event: Event) {
   }
 }
 
-/** The strip element, every swatch popover anchors to it, not its tile. */
+/** The strip element, the one swatch popover anchors to it, not the tile. */
 const stripRef = useTemplateRef<HTMLElement>('stripRef')
 const stripEl = computed(() => stripRef.value ?? undefined)
 
@@ -477,7 +477,7 @@ function resetEffects() {
 </script>
 
 <template>
-  <!-- unmount-on-hide: each open reseeds fresh -->
+  <!-- unmounts on hide (Collapsible default), so strip and popover state die with the fold -->
   <UCollapsible :open="open">
     <template #content>
       <div class="mt-2.5 flex flex-col gap-2.5 pb-1">

@@ -41,7 +41,6 @@ export function generateCSS(doc: ThemeDoc): string {
   if (doc.font?.sans && doc.font.sans !== THEME_DEFAULTS.font) {
     themeLines.push(`  --font-sans: '${doc.font.sans}', sans-serif;`)
   }
-  // Tailwind's own stacks: setting them is all `font-serif` / `font-mono` need.
   if (doc.font?.serif) themeLines.push(`  --font-serif: '${doc.font.serif}', serif;`)
   if (doc.font?.mono) themeLines.push(`  --font-mono: '${doc.font.mono}', monospace;`)
   // Weight steps are live variables in tailwind v4, so remapping them

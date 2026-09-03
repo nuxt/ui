@@ -327,7 +327,7 @@ export const themeIcons = {
     upload: 'i-tabler-upload',
     warning: 'i-tabler-alert-triangle'
   },
-  // 8-bit pixel-art set for the Comic preset. Pixelarticons is a functional
+  // 8-bit pixel-art set. Pixelarticons is a functional
   // UI pack (unlike streamline-pixel, which has no arrows/chevrons), but it
   // still lacks a few glyphs, noted inline where a substitute stands in.
   pixelarticons: {

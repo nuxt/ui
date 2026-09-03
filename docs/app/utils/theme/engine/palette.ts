@@ -294,7 +294,7 @@ function pinKernel(distance: number, sigma: number): number {
 }
 
 /**
- * Gauss–Jordan with partial pivoting (≤19 pins, trivially fast). A
+ * Gauss–Jordan with partial pivoting (one pin per stop, ≤91, trivially fast). A
  * near-singular pivot collapses that weight to 0 rather than exploding.
  */
 function solveLinear(a: number[][], b: number[]): number[] {

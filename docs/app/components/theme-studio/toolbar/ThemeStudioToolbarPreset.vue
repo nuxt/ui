@@ -61,7 +61,6 @@ const presetItems = computed(() => presets.map(preset => ({
   }
 })))
 
-/** The slot scope rides the base's loose item type, cast it back. */
 function asPreset(item: unknown) {
   return item as typeof presetItems.value[number]
 }
