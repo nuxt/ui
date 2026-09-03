@@ -110,14 +110,23 @@ export const PRESET_ICONS: Record<string, string> = {
   'parchment': 'i-lucide-scroll-text'
 }
 
-/** A preset's own ramp as a chip: its neutral as the page, its icon in its primary. */
+/**
+ * A preset as a chip: its icon in its primary, on that primary dimmed to a
+ * tint (the `bg-primary/10` of the subtle variants), so every preset reads
+ * as its color rather than as its neutral.
+ */
 export function themeChipStyle(doc: ThemeDoc) {
-  const shade = (alias: 'primary' | 'neutral', step: Shade) => resolveShade(doc, resolveAlias(doc, alias), step)
+  const shade = (step: Shade) => resolveShade(doc, resolveAlias(doc, 'primary'), step)
+  const light = doc.blackAsPrimary ? 'black' : shade(500)
+  const dark = doc.blackAsPrimary ? 'white' : shade(400)
+  const tint = (color: string | undefined, from: number, to: number) =>
+    `linear-gradient(135deg, color-mix(in oklab, ${color} ${from}%, transparent), color-mix(in oklab, ${color} ${to}%, transparent))`
+
   return {
-    '--chip-bg-light': `linear-gradient(135deg, ${shade('neutral', 50)}, ${shade('neutral', 200)})`,
-    '--chip-bg-dark': `linear-gradient(135deg, ${shade('neutral', 900)}, ${shade('neutral', 800)})`,
-    '--chip-icon-light': doc.blackAsPrimary ? 'black' : shade('primary', 500),
-    '--chip-icon-dark': doc.blackAsPrimary ? 'white' : shade('primary', 400)
+    '--chip-bg-light': tint(light, 10, 20),
+    '--chip-bg-dark': tint(dark, 12, 24),
+    '--chip-icon-light': light,
+    '--chip-icon-dark': dark
   }
 }
 

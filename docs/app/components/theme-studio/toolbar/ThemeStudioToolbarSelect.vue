@@ -60,8 +60,9 @@ const selected = computed({
         v-model="selected"
         :items="items"
         value-key="value"
+        highlight-on-hover
         :aria-label="(attrs['aria-label'] as string | undefined)"
-        :ui="{ root: 'ring-0', content: 'max-h-none' }"
+        :ui="{ root: 'ring-0 has-focus-visible:outline-0', content: 'max-h-none' }"
       >
         <template v-for="(_, name) in $slots" :key="name" #[name]="scope">
           <slot :name="name" v-bind="scope ?? {}" />

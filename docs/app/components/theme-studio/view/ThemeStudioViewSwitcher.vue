@@ -39,7 +39,9 @@ const sections = [
  * belongs to the wrapper, so both sections move together.
  */
 const gridUi = {
-  root: 'ring-0 rounded-none overflow-visible',
+  // the listbox frames itself with a ring, and an outline while an option
+  // has keyboard focus: neither belongs around a grid of tiles
+  root: 'ring-0 rounded-none overflow-visible has-focus-visible:outline-0',
   content: 'max-h-none overflow-visible',
   group: 'p-0 grid grid-cols-2 gap-1',
   item: 'flex-col p-2 rounded-lg ring-inset before:rounded-lg gap-2 data-[state=checked]:before:bg-elevated/50',
@@ -79,7 +81,7 @@ const gridUi = {
               variant="link"
               size="sm"
               label="View all"
-              trailing-icon="i-lucide-arrow-right"
+              :trailing-icon="appConfig.ui.icons.arrowRight"
             />
           </div>
         </template>
