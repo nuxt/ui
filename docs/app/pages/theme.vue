@@ -81,7 +81,7 @@ useHead({
 
 useSeoMeta({
   titleTemplate: '%s - Nuxt UI',
-  title: 'Theme Studio',
+  title: 'Theme',
   description: 'Customize Nuxt UI live: colors, radius, fonts and icons, then export only what you changed.'
 })
 

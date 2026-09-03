@@ -157,7 +157,7 @@ function onSubmit() {
     autoresize
     :autofocus="false"
     placeholder="Paste a doc, an email, or a question to get started"
-    :ui="{ root: 'rounded-none p-2.5', body: 'p-1.5', base: 'px-0' }"
+    :ui="{ root: 'rounded-none p-2.5 backdrop-filter-none', body: 'p-1.5', base: 'px-0' }"
     @submit="onSubmit"
   >
     <template #footer>
