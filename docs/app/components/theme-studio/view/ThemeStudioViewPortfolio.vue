@@ -2,35 +2,35 @@
 import type { NavigationMenuItem } from '@nuxt/ui'
 
 const appConfig = useAppConfig()
-const extra = useStudioExtraIcons()
+const studioIcons = useStudioIcons()
 
 // Replicates the Nuxt UI Portfolio template home page: floating pill nav,
 // avatar hero with polaroid marquee, about + work experience columns,
 // blog list, testimonial carousel, FAQ tabs and footer.
 const navItems: NavigationMenuItem[] = [
-  { label: 'Home', icon: extra.home, active: true },
+  { label: 'Home', icon: studioIcons.home, active: true },
   { label: 'Projects', icon: appConfig.ui.icons.folder },
   { label: 'Blog', icon: appConfig.ui.icons.file },
-  { label: 'Speaking', icon: extra.mic },
-  { label: 'About', icon: extra.user }
+  { label: 'Speaking', icon: studioIcons.mic },
+  { label: 'About', icon: studioIcons.user }
 ]
 
 const socialLinks = [
   { 'icon': 'i-simple-icons-discord', 'aria-label': 'Discord' },
   { 'icon': 'i-simple-icons-x', 'aria-label': 'X' },
-  { 'icon': extra.github, 'aria-label': 'GitHub' }
+  { 'icon': studioIcons.github, 'aria-label': 'GitHub' }
 ]
 
 // The template scrolls travel photos in a marquee; we stand in gradient
 // polaroids since the studio previews stay image-free.
 const heroImages = [
   { icon: 'i-lucide-mountain', label: 'Alps, 2024' },
-  { icon: extra.coffee, label: 'Café sketching' },
+  { icon: studioIcons.coffee, label: 'Café sketching' },
   { icon: 'i-lucide-bike', label: 'Canal ride' },
-  { icon: extra.camera, label: 'Street photos' },
+  { icon: studioIcons.camera, label: 'Street photos' },
   { icon: 'i-lucide-laptop', label: 'Studio desk' },
   { icon: 'i-lucide-trees', label: 'Veluwe hike' },
-  { icon: extra.palette, label: 'Color studies' },
+  { icon: studioIcons.palette, label: 'Color studies' },
   { icon: 'i-lucide-ferris-wheel', label: 'Rotterdam fair' },
   { icon: 'i-lucide-waves', label: 'North Sea' }
 ]
@@ -56,7 +56,7 @@ const experience = [{
 }, {
   date: '1995 - Present',
   position: 'Human person on',
-  company: { name: 'Earth', logo: extra.globe }
+  company: { name: 'Earth', logo: studioIcons.globe }
 }]
 
 const posts = [{
@@ -183,7 +183,7 @@ onUnmounted(() => clearTimeout(appearTimeout))
 
         <template #links>
           <div class="flex items-center gap-2">
-            <UButton :icon="extra.github" label="View Github" color="neutral" to="https://github.com/mikenewbon/" target="_blank" />
+            <UButton :icon="studioIcons.github" label="View Github" color="neutral" to="https://github.com/mikenewbon/" target="_blank" />
             <UButton color="success" variant="ghost" class="gap-2" label="Always online">
               <template #leading>
                 <span class="relative flex size-2">

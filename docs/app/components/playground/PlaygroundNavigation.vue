@@ -2,17 +2,17 @@
 import type { NavigationMenuItem } from '@nuxt/ui'
 
 const appConfig = useAppConfig()
-const extra = useStudioExtraIcons()
+const studioIcons = useStudioIcons()
 
 const items: NavigationMenuItem[][] = [
   [
     { label: 'Dashboard', icon: 'i-lucide-layout-dashboard', active: true },
-    { label: 'Inbox', icon: extra.inbox, badge: '4' },
+    { label: 'Inbox', icon: studioIcons.inbox, badge: '4' },
     { label: 'Projects', icon: appConfig.ui.icons.folder },
-    { label: 'Calendar', icon: extra.calendar }
+    { label: 'Calendar', icon: studioIcons.calendar }
   ],
   [
-    { label: 'Settings', icon: extra.settings },
+    { label: 'Settings', icon: studioIcons.settings },
     { label: 'Help', icon: appConfig.ui.icons.info }
   ]
 ]

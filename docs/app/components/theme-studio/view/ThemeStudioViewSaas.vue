@@ -2,7 +2,7 @@
 import type { NavigationMenuItem } from '@nuxt/ui'
 
 const appConfig = useAppConfig()
-const extra = useStudioExtraIcons()
+const studioIcons = useStudioIcons()
 
 const navItems: NavigationMenuItem[] = [
   { label: 'Docs', active: true },
@@ -17,7 +17,7 @@ const heroLinks = [{
   size: 'xl' as const
 }, {
   label: 'Use this template',
-  icon: extra.github,
+  icon: studioIcons.github,
   size: 'xl' as const,
   color: 'neutral' as const,
   variant: 'subtle' as const
@@ -30,11 +30,11 @@ const sections = [{
   features: [{
     title: '100+ UI components',
     description: 'From buttons to modals, data tables to forms - all styled with Tailwind CSS and accessible out of the box.',
-    icon: extra.package
+    icon: studioIcons.package
   }, {
     title: 'Authentication ready',
     description: 'Pre-built login, signup and password reset flows. Just connect your backend and start onboarding users.',
-    icon: extra.shield
+    icon: studioIcons.shield
   }, {
     title: 'TypeScript first',
     description: 'Full TypeScript support with auto-completion, type safety and IntelliSense for every component.',
@@ -47,7 +47,7 @@ const sections = [{
   features: [{
     title: 'Edge performance',
     description: 'Optimized for Core Web Vitals with automatic code splitting, lazy loading and SSR/SSG support.',
-    icon: extra.zap
+    icon: studioIcons.zap
   }, {
     title: 'Dark mode ready',
     description: 'Automatic theme switching with smooth transitions. Respects system preferences and remembers user choice.',
@@ -55,14 +55,14 @@ const sections = [{
   }, {
     title: 'Global ready',
     description: 'Built-in i18n support for 50+ languages with RTL/LTR layouts and font optimization.',
-    icon: extra.globe
+    icon: studioIcons.globe
   }]
 }]
 
 const features = [{
   title: 'Beautiful design system',
   description: 'Semantic color aliases, comprehensive design tokens and Tailwind Variants for consistent styling.',
-  icon: extra.palette
+  icon: studioIcons.palette
 }, {
   title: 'Accessible by default',
   description: 'Built on Reka UI for robust accessibility. WCAG compliant components that work for everyone.',
@@ -70,7 +70,7 @@ const features = [{
 }, {
   title: 'Developer experience',
   description: 'Auto-imports, hot module replacement and comprehensive documentation. Build faster with less friction.',
-  icon: extra.terminal
+  icon: studioIcons.terminal
 }, {
   title: 'SEO optimized',
   description: 'Server-side rendering, automatic meta tags, sitemap generation and Open Graph images out of the box.',
@@ -82,7 +82,7 @@ const features = [{
 }, {
   title: 'Infinitely customizable',
   description: 'Override any style with the ui prop, customize globally with AppConfig, or use Tailwind classes directly.',
-  icon: extra.settings
+  icon: studioIcons.settings
 }]
 
 const plans = [{
@@ -132,7 +132,7 @@ const ctaLinks = [{
   trailingIcon: appConfig.ui.icons.arrowRight
 }, {
   label: 'View on GitHub',
-  icon: extra.github,
+  icon: studioIcons.github,
   variant: 'subtle' as const
 }]
 
@@ -277,7 +277,7 @@ onMounted(() => {
       </template>
 
       <template #headline>
-        <UBadge variant="subtle" :icon="extra.sparkles">
+        <UBadge variant="subtle" :icon="studioIcons.sparkles">
           Nuxt UI v4 is out
         </UBadge>
       </template>
@@ -291,7 +291,7 @@ onMounted(() => {
         <div class="relative aspect-video w-full rounded-xl overflow-hidden bg-elevated flex items-center justify-center">
           <div class="absolute inset-0" style="background: radial-gradient(ellipse at 50% 0%, color-mix(in srgb, var(--ui-primary) 15%, transparent), transparent 70%)" />
           <UButton
-            :icon="extra.play"
+            :icon="studioIcons.play"
             size="xl"
             color="neutral"
             variant="outline"
@@ -468,7 +468,7 @@ onMounted(() => {
       </template>
 
       <template #right>
-        <UButton :icon="extra.github" aria-label="GitHub" color="neutral" variant="ghost" />
+        <UButton :icon="studioIcons.github" aria-label="GitHub" color="neutral" variant="ghost" />
         <UButton icon="i-lucide-twitter" aria-label="X" color="neutral" variant="ghost" />
       </template>
     </UFooter>

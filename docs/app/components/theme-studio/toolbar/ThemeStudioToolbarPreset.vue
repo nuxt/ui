@@ -33,7 +33,7 @@ const presetLabel = computed(() => {
 })
 
 /** Its row's own glyph; the swatch book stands in when no preset is behind it. */
-const presetIcon = computed(() => (activeEntry.value && PRESET_ICONS[activeEntry.value.id]) || studioIcons.themes)
+const presetIcon = computed(() => (activeEntry.value && PRESET_ICONS[activeEntry.value.id]) || studioIcons.palette)
 
 /** A taste of the doc's icon set (its own, or the default lucide). */
 function iconSamples(doc: ThemeDoc): string[] {

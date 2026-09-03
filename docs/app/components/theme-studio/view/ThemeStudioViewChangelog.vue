@@ -5,16 +5,16 @@
 // feed on the right. Release notes are inlined since the template fetches them
 // from GitHub and renders them with Comark, neither of which is available here.
 
-const extra = useStudioExtraIcons()
+const studioIcons = useStudioIcons()
 
 const introLinks = [{
   label: 'Documentation',
-  icon: extra.bookOpen,
+  icon: studioIcons.bookOpen,
   variant: 'ghost' as const,
   size: 'md' as const
 }, {
   label: 'GitHub',
-  icon: extra.github,
+  icon: studioIcons.github,
   variant: 'ghost' as const,
   size: 'md' as const
 }]

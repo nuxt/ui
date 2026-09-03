@@ -27,7 +27,7 @@ const presetId = computed(() => {
 })
 
 const label = computed(() => (presetId.value ? capitalize(paletteLabel(presetId.value)) : 'Theme'))
-const icon = computed(() => (presetId.value && PRESET_ICONS[presetId.value]) || studioIcons.themes)
+const icon = computed(() => (presetId.value && PRESET_ICONS[presetId.value]) || studioIcons.palette)
 
 const open = ref(false)
 

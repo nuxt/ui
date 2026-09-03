@@ -1,5 +1,4 @@
 import lucide from '../../../../src/theme/icons'
-import type { ThemeStudioView } from './studio'
 
 // Picking a set replaces appConfig.ui.icons wholesale, so every set must
 // map the full key list from src/theme/icons, a missing key would blank
@@ -395,55 +394,39 @@ export function iconSetSamples(setName: string): string[] {
 }
 
 /**
- * Glyphs for the studio's own chrome (toolbar controls, the header Ask-AI
- * button, the theme-picker/preset button), per icon pack, so the chrome skins
- * to match the applied theme. Kept OUT of `themeIcons` on purpose: these are
- * studio-only and must never ride the export's icon config. `reset` is its own
- * circular-arrow glyph rather than reusing the `reload` semantic key, in
- * several packs `reload` is a back-arrow that would collide with `undo`.
- * Import and the group-picker chevron reuse the standard `upload`/`chevronDown`
- * keys (present in every pack), so they aren't repeated here.
+ * Every glyph the studio renders outside the 43 semantic keys: its own chrome
+ * (toolbar, Ask AI, preset picker), the view switcher and the demo content.
+ * Lucide is the default, `studioIconOverrides` swaps in a pack's own glyph
+ * where it has one. Kept out of `themeIcons` on purpose, none of this rides
+ * the export's icon config. Import and the group-picker chevron reuse the
+ * standard `upload`/`chevronDown` keys, so they aren't repeated here.
  */
-export const studioIcons: Record<ThemeIcons, {
-  undo: string
-  redo: string
-  reset: string
-  export: string
-  /** Header "Ask AI" button. */
-  assistant: string
-  /** Theme-picker + preset-menu button. */
-  themes: string
-  /** The studio toolbar's Options panel trigger. */
-  options: string
-  /** The studio toolbar's Text panel trigger. */
-  text: string
-  /** The studio toolbar's Radius trigger. */
-  radius: string
-  /** Preset-menu randomize die. Packs without a die use their shuffle glyph. */
-  dice: string
-}> = {
-  lucide: { undo: 'i-lucide-undo-2', redo: 'i-lucide-redo-2', reset: 'i-lucide-rotate-ccw', export: 'i-lucide-code-xml', assistant: 'i-lucide-bot-message-square', themes: 'i-lucide-swatch-book', options: 'i-lucide-sliders-horizontal', text: 'i-lucide-type', radius: 'i-lucide-square-round-corner', dice: 'i-lucide-dices' },
-  bootstrap: { undo: 'i-bi-arrow-90deg-left', redo: 'i-bi-arrow-90deg-right', reset: 'i-bi-arrow-counterclockwise', export: 'i-bi-code-slash', assistant: 'i-bi-robot', themes: 'i-bi-palette', options: 'i-bi-sliders', text: 'i-bi-fonts', radius: 'i-bi-bounding-box', dice: 'i-bi-dice-5' },
-  heroicons: { undo: 'i-heroicons-arrow-uturn-left', redo: 'i-heroicons-arrow-uturn-right', reset: 'i-heroicons-arrow-path', export: 'i-heroicons-code-bracket', assistant: 'i-heroicons-sparkles', themes: 'i-heroicons-swatch', options: 'i-heroicons-adjustments-horizontal', text: 'i-heroicons-language', radius: 'i-heroicons-stop', dice: 'i-heroicons-arrows-right-left' },
-  iconoir: { undo: 'i-iconoir-undo', redo: 'i-iconoir-redo', reset: 'i-iconoir-refresh-double', export: 'i-iconoir-code', assistant: 'i-iconoir-magic-wand', themes: 'i-iconoir-palette', options: 'i-iconoir-settings', text: 'i-iconoir-text', radius: 'i-iconoir-square', dice: 'i-iconoir-shuffle' },
-  material: { undo: 'i-material-symbols-undo', redo: 'i-material-symbols-redo', reset: 'i-material-symbols-refresh', export: 'i-material-symbols-code', assistant: 'i-material-symbols-robot', themes: 'i-material-symbols-palette', options: 'i-material-symbols-tune', text: 'i-material-symbols-text-fields', radius: 'i-material-symbols-rounded-corner', dice: 'i-material-symbols-shuffle' },
-  phosphor: { undo: 'i-ph-arrow-arc-left', redo: 'i-ph-arrow-arc-right', reset: 'i-ph-arrow-counter-clockwise', export: 'i-ph-code', assistant: 'i-ph-robot', themes: 'i-ph-palette', options: 'i-ph-sliders-horizontal', text: 'i-ph-text-aa', radius: 'i-ph-square', dice: 'i-ph-shuffle' },
-  remix: { undo: 'i-ri-arrow-go-back-line', redo: 'i-ri-arrow-go-forward-line', reset: 'i-ri-restart-line', export: 'i-ri-code-s-slash-line', assistant: 'i-ri-robot-2-line', themes: 'i-ri-palette-line', options: 'i-ri-equalizer-line', text: 'i-ri-font-size', radius: 'i-ri-rounded-corner', dice: 'i-ri-dice-line' },
-  tabler: { undo: 'i-tabler-arrow-back-up', redo: 'i-tabler-arrow-forward-up', reset: 'i-tabler-refresh', export: 'i-tabler-code', assistant: 'i-tabler-robot', themes: 'i-tabler-palette', options: 'i-tabler-adjustments-horizontal', text: 'i-tabler-typography', radius: 'i-tabler-border-radius', dice: 'i-tabler-dice' },
-  // Pixel pack has no `themes`/`palette` glyph, so `colors-swatch` stands in
-  // for the swatch-book.
-  pixelarticons: { undo: 'i-pixelarticons-undo', redo: 'i-pixelarticons-redo', reset: 'i-pixelarticons-reload', export: 'i-pixelarticons-code', assistant: 'i-pixelarticons-robot', themes: 'i-pixelarticons-colors-swatch', options: 'i-pixelarticons-sliders', text: 'i-pixelarticons-text-add', radius: 'i-pixelarticons-card', dice: 'i-pixelarticons-dice' }
-}
-
-/**
- * Functional icons the preview demos use beyond the 43 semantic keys (dashboard
- * nav, account menus, etc.). These are NOT part of any theme, they only skin
- * the studio's demo content to the applied pack, so they stay out of themeIcons
- * (and exports). The Lucide names ARE the defaults each demo already hardcodes;
- * `studioExtraOverrides` supplies a pack's glyph where it differs, falling back
- * to the Lucide default for any pack/key with no entry.
- */
-export const STUDIO_EXTRA_DEFAULTS = {
+export const studioIcons = {
+  // studio chrome. `reset` is its own circular arrow rather than the `reload`
+  // semantic key, in several packs `reload` is a back-arrow that collides
+  // with `undo`.
+  undo: 'i-lucide-undo-2',
+  redo: 'i-lucide-redo-2',
+  reset: 'i-lucide-rotate-ccw',
+  export: 'i-lucide-code-xml',
+  assistant: 'i-lucide-bot-message-square',
+  palette: 'i-lucide-palette',
+  options: 'i-lucide-sliders-horizontal',
+  text: 'i-lucide-type',
+  radius: 'i-lucide-square-round-corner',
+  dice: 'i-lucide-dices',
+  // view switcher, keyed by ThemeStudioView
+  grid: 'i-lucide-layout-grid',
+  dashboard: 'i-lucide-layout-dashboard',
+  chat: 'i-lucide-message-circle',
+  saas: 'i-lucide-rocket',
+  landing: 'i-lucide-panels-top-left',
+  docs: 'i-lucide-book-open',
+  portfolio: 'i-lucide-user-round',
+  changelog: 'i-lucide-newspaper',
+  editor: 'i-lucide-file-pen-line',
+  a11y: 'i-lucide-accessibility',
+  // demo content (dashboard nav, account menus, etc.)
   bell: 'i-lucide-bell',
   calendar: 'i-lucide-calendar',
   settings: 'i-lucide-settings',
@@ -489,21 +472,132 @@ export const STUDIO_EXTRA_DEFAULTS = {
   zap: 'i-lucide-zap',
   package: 'i-lucide-package',
   pin: 'i-lucide-pin',
-  palette: 'i-lucide-palette',
   paintBucket: 'i-lucide-paint-bucket',
   mic: 'i-lucide-mic',
   heading: 'i-lucide-heading',
   briefcase: 'i-lucide-briefcase',
   bookOpen: 'i-lucide-book-open',
-  pencil: 'i-lucide-pencil',
-  undo: 'i-lucide-undo',
-  redo: 'i-lucide-redo'
-} as const
+  pencil: 'i-lucide-pencil'
+}
 
-export const studioExtraOverrides: Partial<Record<ThemeIcons, Partial<Record<keyof typeof STUDIO_EXTRA_DEFAULTS, string>>>> = {
-  // Pixel has no settings/cog (sliders stands in), no pie chart (generic
-  // chart) and no up-down chevron (sort). Everything else is a native match.
+export type StudioIcon = keyof typeof studioIcons
+
+/**
+ * Per-pack replacements for `studioIcons`. Every pack covers the chrome so the
+ * toolbar always skins to the applied theme, only pixelarticons goes further
+ * and redraws the views and demo content too. Heroicons and pixelarticons have
+ * no palette glyph, their swatch stands in. Packs without a die use shuffle.
+ */
+export const studioIconOverrides: Partial<Record<ThemeIcons, Partial<Record<StudioIcon, string>>>> = {
+  bootstrap: {
+    undo: 'i-bi-arrow-90deg-left',
+    redo: 'i-bi-arrow-90deg-right',
+    reset: 'i-bi-arrow-counterclockwise',
+    export: 'i-bi-code-slash',
+    assistant: 'i-bi-robot',
+    palette: 'i-bi-palette',
+    options: 'i-bi-sliders',
+    text: 'i-bi-fonts',
+    radius: 'i-bi-bounding-box',
+    dice: 'i-bi-dice-5'
+  },
+  heroicons: {
+    undo: 'i-heroicons-arrow-uturn-left',
+    redo: 'i-heroicons-arrow-uturn-right',
+    reset: 'i-heroicons-arrow-path',
+    export: 'i-heroicons-code-bracket',
+    assistant: 'i-heroicons-sparkles',
+    palette: 'i-heroicons-swatch',
+    options: 'i-heroicons-adjustments-horizontal',
+    text: 'i-heroicons-language',
+    radius: 'i-heroicons-stop',
+    dice: 'i-heroicons-arrows-right-left'
+  },
+  iconoir: {
+    undo: 'i-iconoir-undo',
+    redo: 'i-iconoir-redo',
+    reset: 'i-iconoir-refresh-double',
+    export: 'i-iconoir-code',
+    assistant: 'i-iconoir-magic-wand',
+    palette: 'i-iconoir-palette',
+    options: 'i-iconoir-settings',
+    text: 'i-iconoir-text',
+    radius: 'i-iconoir-square',
+    dice: 'i-iconoir-shuffle'
+  },
+  material: {
+    undo: 'i-material-symbols-undo',
+    redo: 'i-material-symbols-redo',
+    reset: 'i-material-symbols-refresh',
+    export: 'i-material-symbols-code',
+    assistant: 'i-material-symbols-robot',
+    palette: 'i-material-symbols-palette',
+    options: 'i-material-symbols-tune',
+    text: 'i-material-symbols-text-fields',
+    radius: 'i-material-symbols-rounded-corner',
+    dice: 'i-material-symbols-shuffle'
+  },
+  phosphor: {
+    undo: 'i-ph-arrow-arc-left',
+    redo: 'i-ph-arrow-arc-right',
+    reset: 'i-ph-arrow-counter-clockwise',
+    export: 'i-ph-code',
+    assistant: 'i-ph-robot',
+    palette: 'i-ph-palette',
+    options: 'i-ph-sliders-horizontal',
+    text: 'i-ph-text-aa',
+    radius: 'i-ph-square',
+    dice: 'i-ph-shuffle'
+  },
+  remix: {
+    undo: 'i-ri-arrow-go-back-line',
+    redo: 'i-ri-arrow-go-forward-line',
+    reset: 'i-ri-restart-line',
+    export: 'i-ri-code-s-slash-line',
+    assistant: 'i-ri-robot-2-line',
+    palette: 'i-ri-palette-line',
+    options: 'i-ri-equalizer-line',
+    text: 'i-ri-font-size',
+    radius: 'i-ri-rounded-corner',
+    dice: 'i-ri-dice-line'
+  },
+  tabler: {
+    undo: 'i-tabler-arrow-back-up',
+    redo: 'i-tabler-arrow-forward-up',
+    reset: 'i-tabler-refresh',
+    export: 'i-tabler-code',
+    assistant: 'i-tabler-robot',
+    palette: 'i-tabler-palette',
+    options: 'i-tabler-adjustments-horizontal',
+    text: 'i-tabler-typography',
+    radius: 'i-tabler-border-radius',
+    dice: 'i-tabler-dice'
+  },
+  // Pixel has no settings cog (sliders stands in), no pie chart (generic
+  // chart), no up-down chevron (sort), and no rocket/panels/newspaper/
+  // accessibility glyphs, so SaaS→zap, Landing→layout, Changelog→article and
+  // A11y→human stand in for the views.
   pixelarticons: {
+    undo: 'i-pixelarticons-undo',
+    redo: 'i-pixelarticons-redo',
+    reset: 'i-pixelarticons-reload',
+    export: 'i-pixelarticons-code',
+    assistant: 'i-pixelarticons-robot',
+    palette: 'i-pixelarticons-colors-swatch',
+    options: 'i-pixelarticons-sliders',
+    text: 'i-pixelarticons-text-add',
+    radius: 'i-pixelarticons-card',
+    dice: 'i-pixelarticons-dice',
+    grid: 'i-pixelarticons-dashboard',
+    dashboard: 'i-pixelarticons-dashboard',
+    chat: 'i-pixelarticons-message',
+    saas: 'i-pixelarticons-zap',
+    landing: 'i-pixelarticons-layout',
+    docs: 'i-pixelarticons-book-open',
+    portfolio: 'i-pixelarticons-user',
+    changelog: 'i-pixelarticons-article',
+    editor: 'i-pixelarticons-edit-box',
+    a11y: 'i-pixelarticons-human',
     bell: 'i-pixelarticons-bell',
     calendar: 'i-pixelarticons-calendar',
     settings: 'i-pixelarticons-sliders',
@@ -549,39 +643,12 @@ export const studioExtraOverrides: Partial<Record<ThemeIcons, Partial<Record<key
     zap: 'i-pixelarticons-zap',
     package: 'i-pixelarticons-package',
     pin: 'i-pixelarticons-pin',
-    // Pixel has no palette glyph, colors-swatch stands in.
-    palette: 'i-pixelarticons-colors-swatch',
     paintBucket: 'i-pixelarticons-paint-bucket',
     mic: 'i-pixelarticons-mic',
     heading: 'i-pixelarticons-heading',
     briefcase: 'i-pixelarticons-briefcase',
     bookOpen: 'i-pixelarticons-book-open',
-    pencil: 'i-pixelarticons-pencil',
-    undo: 'i-pixelarticons-undo',
-    redo: 'i-pixelarticons-redo'
-  }
-}
-
-/**
- * Per-pack overrides for the view-switcher glyphs, so the switcher skins to
- * the applied theme like the rest of the studio chrome. A view falls back to
- * its Lucide default (THEME_STUDIO_VIEWS) wherever the active pack has no
- * entry. Only pixelarticons is curated today; other packs keep Lucide until
- * filled in. Pixel has no rocket/panels/newspaper/accessibility glyphs, so
- * SaaS→zap, Landing→layout, Changelog→article and A11y→human stand in.
- */
-export const studioViewOverrides: Partial<Record<ThemeIcons, Partial<Record<ThemeStudioView, string>>>> = {
-  pixelarticons: {
-    grid: 'i-pixelarticons-dashboard',
-    dashboard: 'i-pixelarticons-dashboard',
-    chat: 'i-pixelarticons-message',
-    saas: 'i-pixelarticons-zap',
-    landing: 'i-pixelarticons-layout',
-    docs: 'i-pixelarticons-book-open',
-    portfolio: 'i-pixelarticons-user',
-    changelog: 'i-pixelarticons-article',
-    editor: 'i-pixelarticons-edit-box',
-    a11y: 'i-pixelarticons-human'
+    pencil: 'i-pixelarticons-pencil'
   }
 }
 

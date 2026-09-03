@@ -14,7 +14,7 @@ const props = withDefaults(defineProps<{
 const open = defineModel<boolean>('open', { default: false })
 
 const { view, views } = useThemeStudio()
-const viewIcons = useStudioViewIcons()
+const studioIcons = useStudioIcons()
 const appConfig = useAppConfig()
 
 const activeView = computed(() => views.find(tab => tab.value === view.value))
@@ -51,7 +51,7 @@ const gridUi = {
 <template>
   <UPopover v-model:open="open" :content="props.content" :ui="{ content: [vertical ? 'w-(--reka-popper-anchor-width)' : 'w-96 max-w-[calc(100vw-2rem)]', 'p-1.5 max-h-[70vh] overflow-y-auto'] }">
     <UButton
-      :icon="viewIcons[view]"
+      :icon="studioIcons[view]"
       :label="activeView?.label"
       :trailing-icon="appConfig.ui.icons.chevronDown"
       color="neutral"
@@ -104,7 +104,7 @@ const gridUi = {
               class="w-full aspect-video rounded ring ring-default"
             />
             <span v-else class="w-full aspect-video rounded ring ring-default bg-elevated/50 flex items-center justify-center">
-              <UIcon :name="viewIcons[item.value]" class="size-6" />
+              <UIcon :name="studioIcons[item.value]" class="size-6" />
             </span>
           </template>
         </UListbox>

@@ -8,7 +8,7 @@ import shiki from '@comark/vue/plugins/shiki'
 import type { NavigationMenuItem } from '@nuxt/ui'
 
 const appConfig = useAppConfig()
-const extra = useStudioExtraIcons()
+const studioIcons = useStudioIcons()
 
 const input = ref('')
 
@@ -90,7 +90,7 @@ const ui = {
   <div class="h-full flex bg-default overflow-hidden">
     <aside class="hidden md:flex w-56 shrink-0 flex-col gap-2 border-e border-default bg-elevated/25 p-3 min-h-0">
       <div class="flex items-center gap-1.5 px-1.5 py-1">
-        <UIcon :name="extra.messageCircle" class="size-5 text-primary shrink-0" />
+        <UIcon :name="studioIcons.messageCircle" class="size-5 text-primary shrink-0" />
         <span class="text-lg font-bold text-highlighted">Chat</span>
       </div>
 
@@ -103,7 +103,7 @@ const ui = {
       <UButton
         label="Anna Cooper"
         :avatar="{ alt: 'Anna Cooper' }"
-        :trailing-icon="extra.sort"
+        :trailing-icon="studioIcons.sort"
         color="neutral"
         variant="ghost"
         class="w-full"
@@ -120,14 +120,14 @@ const ui = {
         <div class="flex items-center gap-1">
           <UButton
             label="Private"
-            :icon="extra.lock"
+            :icon="studioIcons.lock"
             :trailing-icon="appConfig.ui.icons.chevronDown"
             color="neutral"
             variant="ghost"
             size="sm"
           />
           <UButton
-            :icon="extra.share"
+            :icon="studioIcons.share"
             color="neutral"
             variant="ghost"
             size="sm"
@@ -175,7 +175,7 @@ const ui = {
           <template #footer>
             <div class="flex items-center gap-1">
               <UButton
-                :icon="extra.paperclip"
+                :icon="studioIcons.paperclip"
                 color="neutral"
                 variant="ghost"
                 size="sm"

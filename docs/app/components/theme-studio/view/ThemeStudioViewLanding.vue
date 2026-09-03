@@ -2,7 +2,7 @@
 import type { NavigationMenuItem } from '@nuxt/ui'
 
 const appConfig = useAppConfig()
-const extra = useStudioExtraIcons()
+const studioIcons = useStudioIcons()
 
 /** Shared rhythm for the centered content sections. */
 const sectionUi = {
@@ -55,14 +55,14 @@ const terminalLines: TerminalSegment[][] = [
 
 const logos = [
   'i-simple-icons-vercel',
-  extra.github,
+  studioIcons.github,
   'i-simple-icons-linear',
   'i-simple-icons-supabase',
   'i-simple-icons-stripe'
 ]
 
 const features = [{
-  icon: extra.zap,
+  icon: studioIcons.zap,
   title: 'Predictive Alerts',
   description: 'ML models trained on your baselines detect anomalies 4 minutes before they hit your SLOs.'
 }, {
@@ -78,7 +78,7 @@ const features = [{
   title: 'Deploy Tracking',
   description: 'Every deploy is automatically correlated with performance changes. Know which commit caused the regression.'
 }, {
-  icon: extra.filter,
+  icon: studioIcons.filter,
   title: 'Smart Sampling',
   description: 'AI-driven sampling retains interesting traces and drops noise. Cut storage costs 10× without losing signal.'
 }, {

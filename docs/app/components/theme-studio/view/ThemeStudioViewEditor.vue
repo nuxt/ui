@@ -5,7 +5,7 @@ import { upperFirst } from 'scule'
 import { mapEditorItems } from '@nuxt/ui/utils/editor'
 
 const appConfig = useAppConfig()
-const extra = useStudioExtraIcons()
+const studioIcons = useStudioIcons()
 
 /**
  * Self-contained replica of the official Nuxt UI Editor template
@@ -76,7 +76,7 @@ const headingItems = [1, 2, 3, 4].map(level => ({
 const blockItems = [{
   kind: 'bulletList' as const,
   label: 'Bullet List',
-  icon: extra.list
+  icon: studioIcons.list
 }, {
   kind: 'orderedList' as const,
   label: 'Ordered List',
@@ -120,14 +120,14 @@ const markItems = [{
 
 const toolbarItems: EditorToolbarItem[][] = [[{
   kind: 'undo',
-  icon: extra.undo,
+  icon: studioIcons.undo,
   tooltip: { text: 'Undo' }
 }, {
   kind: 'redo',
-  icon: extra.redo,
+  icon: studioIcons.redo,
   tooltip: { text: 'Redo' }
 }], [{
-  icon: extra.heading,
+  icon: studioIcons.heading,
   tooltip: { text: 'Headings' },
   content: { align: 'start' },
   items: headingItems
@@ -202,7 +202,7 @@ function dragHandleItems(editor: Editor): DropdownMenuItem[][] {
     kind: 'delete',
     pos,
     label: 'Delete',
-    icon: extra.trash
+    icon: studioIcons.trash
   }]]) as DropdownMenuItem[][]
 }
 </script>
@@ -238,7 +238,7 @@ function dragHandleItems(editor: Editor): DropdownMenuItem[][] {
 
             <UButton
               label="Share"
-              :icon="extra.users"
+              :icon="studioIcons.users"
               color="neutral"
               variant="outline"
               size="sm"

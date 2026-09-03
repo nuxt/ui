@@ -9,7 +9,7 @@ const UCheckbox = resolveComponent('UCheckbox')
 const UDropdownMenu = resolveComponent('UDropdownMenu')
 
 const appConfig = useAppConfig()
-const extra = useStudioExtraIcons()
+const studioIcons = useStudioIcons()
 
 type Page = 'home' | 'inbox' | 'customers' | 'settings'
 const page = ref<Page>('home')
@@ -26,29 +26,29 @@ const teamItems = computed<DropdownMenuItem[][]>(() => [
   teams.map(team => ({ ...team, onSelect: () => { selectedTeam.value = team } })),
   [
     { label: 'Create team', icon: appConfig.ui.icons.plus },
-    { label: 'Manage teams', icon: extra.settings }
+    { label: 'Manage teams', icon: studioIcons.settings }
   ]
 ])
 
 const links = computed<NavigationMenuItem[][]>(() => [[{
   label: 'Home',
-  icon: extra.home,
+  icon: studioIcons.home,
   active: page.value === 'home',
   onSelect: () => { page.value = 'home' }
 }, {
   label: 'Inbox',
-  icon: extra.inbox,
+  icon: studioIcons.inbox,
   badge: String(unreadCount),
   active: page.value === 'inbox',
   onSelect: () => { page.value = 'inbox' }
 }, {
   label: 'Customers',
-  icon: extra.users,
+  icon: studioIcons.users,
   active: page.value === 'customers',
   onSelect: () => { page.value = 'customers' }
 }, {
   label: 'Settings',
-  icon: extra.settings,
+  icon: studioIcons.settings,
   defaultOpen: true,
   type: 'trigger',
   active: page.value === 'settings',
@@ -69,7 +69,7 @@ const links = computed<NavigationMenuItem[][]>(() => [[{
   }]
 }], [{
   label: 'Feedback',
-  icon: extra.messageCircle
+  icon: studioIcons.messageCircle
 }, {
   label: 'Help & Support',
   icon: appConfig.ui.icons.info
@@ -85,26 +85,26 @@ const userItems: DropdownMenuItem[][] = [[{
   label: user.name,
   avatar: user.avatar
 }], [
-  { label: 'Profile', icon: extra.user },
-  { label: 'Billing', icon: extra.creditCard },
-  { label: 'Settings', icon: extra.settings }
+  { label: 'Profile', icon: studioIcons.user },
+  { label: 'Billing', icon: studioIcons.creditCard },
+  { label: 'Settings', icon: studioIcons.settings }
 ], [
-  { label: 'Log out', icon: extra.logout }
+  { label: 'Log out', icon: studioIcons.logout }
 ]]
 
 const newItems: DropdownMenuItem[][] = [[
-  { label: 'New mail', icon: extra.send },
-  { label: 'New customer', icon: extra.userPlus }
+  { label: 'New mail', icon: studioIcons.send },
+  { label: 'New customer', icon: studioIcons.userPlus }
 ]]
 
 const periodItems = ['Daily', 'Weekly', 'Monthly']
 const period = ref('Daily')
 
 const stats = [
-  { title: 'Customers', icon: extra.users, value: '892', variation: 14 },
-  { title: 'Conversions', icon: extra.chart, value: '1,436', variation: 8 },
-  { title: 'Revenue', icon: extra.dollar, value: '$312,540', variation: 23 },
-  { title: 'Orders', icon: extra.cart, value: '254', variation: -5 }
+  { title: 'Customers', icon: studioIcons.users, value: '892', variation: 14 },
+  { title: 'Conversions', icon: studioIcons.chart, value: '1,436', variation: 8 },
+  { title: 'Revenue', icon: studioIcons.dollar, value: '$312,540', variation: 23 },
+  { title: 'Orders', icon: studioIcons.cart, value: '254', variation: -5 }
 ]
 
 const revenue = [6200, 7400, 6800, 9100, 8600, 10400, 9800, 11900, 11200, 13000, 12400, 14100, 13600, 15200]
@@ -301,9 +301,9 @@ const customerRowItems: DropdownMenuItem[] = [
   { type: 'label', label: 'Actions' },
   { label: 'Copy customer ID', icon: appConfig.ui.icons.copy },
   { type: 'separator' },
-  { label: 'View customer details', icon: extra.list },
+  { label: 'View customer details', icon: studioIcons.list },
   { type: 'separator' },
-  { label: 'Delete customer', icon: extra.trash, color: 'error' }
+  { label: 'Delete customer', icon: studioIcons.trash, color: 'error' }
 ]
 
 const customerColumns: TableColumn<Customer>[] = [{
@@ -366,12 +366,12 @@ const customerColumns: TableColumn<Customer>[] = [{
 // trimmed to two sections without zod/UForm validation.
 const settingsLinks = computed<NavigationMenuItem[][]>(() => [[{
   label: 'General',
-  icon: extra.user,
+  icon: studioIcons.user,
   active: settingsSection.value === 'general',
   onSelect: () => { settingsSection.value = 'general' }
 }, {
   label: 'Notifications',
-  icon: extra.bell,
+  icon: studioIcons.bell,
   active: settingsSection.value === 'notifications',
   onSelect: () => { settingsSection.value = 'notifications' }
 }]])
@@ -457,7 +457,7 @@ const pageTitles: Record<Page, string> = {
             v-bind="{
               ...selectedTeam,
               label: collapsed ? undefined : selectedTeam.label,
-              trailingIcon: collapsed ? undefined : extra.sort
+              trailingIcon: collapsed ? undefined : studioIcons.sort
             }"
             color="neutral"
             variant="ghost"
@@ -500,7 +500,7 @@ const pageTitles: Record<Page, string> = {
             v-bind="{
               ...user,
               label: collapsed ? undefined : user.name,
-              trailingIcon: collapsed ? undefined : extra.sort
+              trailingIcon: collapsed ? undefined : studioIcons.sort
             }"
             color="neutral"
             variant="ghost"
@@ -588,11 +588,11 @@ const pageTitles: Record<Page, string> = {
 
           <template #right>
             <UTooltip text="Archive">
-              <UButton :icon="extra.inbox" color="neutral" variant="ghost" aria-label="Archive" />
+              <UButton :icon="studioIcons.inbox" color="neutral" variant="ghost" aria-label="Archive" />
             </UTooltip>
 
             <UTooltip text="Reply">
-              <UButton :icon="extra.reply" color="neutral" variant="ghost" aria-label="Reply" />
+              <UButton :icon="studioIcons.reply" color="neutral" variant="ghost" aria-label="Reply" />
             </UTooltip>
 
             <UDropdownMenu :items="mailDropdownItems">
@@ -629,7 +629,7 @@ const pageTitles: Record<Page, string> = {
         <div class="pb-4 px-4 sm:px-6 shrink-0">
           <UCard variant="subtle" class="mt-auto" :ui="{ header: 'flex items-center gap-1.5 text-dimmed' }">
             <template #header>
-              <UIcon :name="extra.reply" class="size-5" />
+              <UIcon :name="studioIcons.reply" class="size-5" />
 
               <span class="text-sm truncate">
                 Reply to {{ selectedMail.from.name }} ({{ selectedMail.from.email }})
@@ -649,16 +649,16 @@ const pageTitles: Record<Page, string> = {
               />
 
               <div class="flex items-center justify-between">
-                <UButton color="neutral" variant="ghost" :icon="extra.paperclip" aria-label="Attach file" />
+                <UButton color="neutral" variant="ghost" :icon="studioIcons.paperclip" aria-label="Attach file" />
 
-                <UButton type="submit" color="neutral" label="Send" :icon="extra.send" />
+                <UButton type="submit" color="neutral" label="Send" :icon="studioIcons.send" />
               </div>
             </form>
           </UCard>
         </div>
       </UDashboardPanel>
       <div v-else class="flex-1 hidden lg:flex items-center justify-center">
-        <UIcon :name="extra.inbox" class="size-32 text-dimmed" />
+        <UIcon :name="studioIcons.inbox" class="size-32 text-dimmed" />
       </div>
     </template>
 
@@ -673,7 +673,7 @@ const pageTitles: Record<Page, string> = {
             <UTooltip text="Notifications" :shortcuts="['N']">
               <UButton color="neutral" variant="ghost" square aria-label="Notifications">
                 <UChip color="error" inset>
-                  <UIcon :name="extra.bell" class="size-5 shrink-0" />
+                  <UIcon :name="studioIcons.bell" class="size-5 shrink-0" />
                 </UChip>
               </UButton>
             </UTooltip>
@@ -694,7 +694,7 @@ const pageTitles: Record<Page, string> = {
             <UButton
               color="neutral"
               variant="ghost"
-              :icon="extra.calendar"
+              :icon="studioIcons.calendar"
               label="Jun 22 - Jul 6, 2026"
               class="-ms-1"
             />
@@ -802,7 +802,7 @@ const pageTitles: Record<Page, string> = {
                 label="Delete"
                 color="error"
                 variant="subtle"
-                :icon="extra.trash"
+                :icon="studioIcons.trash"
               >
                 <template #trailing>
                   <UKbd>{{ selectedCustomersCount }}</UKbd>

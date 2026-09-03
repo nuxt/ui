@@ -7,7 +7,6 @@ export function useSearch() {
   // the docs-nav-specific ones (square-play/-code/-function, panels, etc.)
   // have no pack glyph and stay Lucide.
   const studioIcons = useStudioIcons()
-  const extra = useStudioExtraIcons()
 
   const searchTerm = ref('')
 
@@ -70,7 +69,7 @@ export function useSearch() {
   }, {
     label: 'Community',
     description: 'Explore community projects and resources.',
-    icon: extra.globe,
+    icon: studioIcons.globe,
     to: '/community'
   }, {
     label: 'Playground',
@@ -92,7 +91,7 @@ export function useSearch() {
   }, {
     label: 'Team',
     description: 'Meet the team behind the project.',
-    icon: extra.users,
+    icon: studioIcons.users,
     to: '/team'
   }, {
     label: 'Releases',

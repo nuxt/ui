@@ -66,7 +66,6 @@ export type ThemeStudioView = 'grid' | 'dashboard' | 'chat' | 'saas' | 'landing'
 
 export interface ThemeStudioViewTab {
   label: string
-  icon: string
   value: ThemeStudioView
   /** One-liner for the rich switcher, template blurbs from /templates. */
   description: string
@@ -77,16 +76,16 @@ export interface ThemeStudioViewTab {
 const templateImage = (name: string) => `/assets/templates/nuxt/${name}`
 
 export const THEME_STUDIO_VIEWS: ThemeStudioViewTab[] = [
-  { label: 'Components', icon: 'i-lucide-layout-grid', value: 'grid', description: 'Every themed component at a glance, the component wall.' },
-  { label: 'Dashboard', icon: 'i-lucide-layout-dashboard', value: 'dashboard', description: 'Multi-column admin interface with multiple views.', image: templateImage('dashboard') },
-  { label: 'Chat', icon: 'i-lucide-message-circle', value: 'chat', description: 'An AI chatbot with sidebar history and streaming replies.', image: templateImage('chat') },
-  { label: 'SaaS', icon: 'i-lucide-rocket', value: 'saas', description: 'A SaaS home with hero, pricing and feature sections.', image: templateImage('saas') },
-  { label: 'Landing', icon: 'i-lucide-panels-top-left', value: 'landing', description: 'A modern marketing landing page.', image: templateImage('landing') },
-  { label: 'Docs', icon: 'i-lucide-book-open', value: 'docs', description: 'Navigation, prose, code and TOC.', image: templateImage('docs') },
-  { label: 'Portfolio', icon: 'i-lucide-user-round', value: 'portfolio', description: 'A personal portfolio with work, blog and testimonials.', image: templateImage('portfolio') },
-  { label: 'Changelog', icon: 'i-lucide-newspaper', value: 'changelog', description: 'Release notes with sticky intro and version timeline.', image: templateImage('changelog') },
-  { label: 'Editor', icon: 'i-lucide-file-pen-line', value: 'editor', description: 'A rich text editor with toolbar, slash menu and drag handles.', image: templateImage('editor') },
-  { label: 'A11y', icon: 'i-lucide-accessibility', value: 'a11y', description: 'Contrast matrix for every token pair in the theme.' }
+  { label: 'Components', value: 'grid', description: 'Every themed component at a glance, the component wall.' },
+  { label: 'Dashboard', value: 'dashboard', description: 'Multi-column admin interface with multiple views.', image: templateImage('dashboard') },
+  { label: 'Chat', value: 'chat', description: 'An AI chatbot with sidebar history and streaming replies.', image: templateImage('chat') },
+  { label: 'SaaS', value: 'saas', description: 'A SaaS home with hero, pricing and feature sections.', image: templateImage('saas') },
+  { label: 'Landing', value: 'landing', description: 'A modern marketing landing page.', image: templateImage('landing') },
+  { label: 'Docs', value: 'docs', description: 'Navigation, prose, code and TOC.', image: templateImage('docs') },
+  { label: 'Portfolio', value: 'portfolio', description: 'A personal portfolio with work, blog and testimonials.', image: templateImage('portfolio') },
+  { label: 'Changelog', value: 'changelog', description: 'Release notes with sticky intro and version timeline.', image: templateImage('changelog') },
+  { label: 'Editor', value: 'editor', description: 'A rich text editor with toolbar, slash menu and drag handles.', image: templateImage('editor') },
+  { label: 'A11y', value: 'a11y', description: 'Contrast matrix for every token pair in the theme.' }
 ]
 
 /* ------------------------------------------------------------- sections -- */

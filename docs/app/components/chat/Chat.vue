@@ -167,9 +167,9 @@ function getToolIcon(part: ToolPart): string {
     'get-migration-guide': 'i-lucide-file-text',
     'get-example': 'i-lucide-file-text',
     'getComponentTheme': 'i-lucide-file-text',
-    'getThemeGuide': studioIcons.themes,
-    'applyTheme': studioIcons.themes,
-    'applyPreset': studioIcons.themes,
+    'getThemeGuide': studioIcons.palette,
+    'applyTheme': studioIcons.palette,
+    'applyPreset': studioIcons.palette,
     'resetTheme': studioIcons.reset
   }
 

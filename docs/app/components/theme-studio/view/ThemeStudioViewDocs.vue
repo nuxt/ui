@@ -2,7 +2,7 @@
 import type { DropdownMenuItem, NavigationMenuItem, PageLink } from '@nuxt/ui'
 
 const appConfig = useAppConfig()
-const extra = useStudioExtraIcons()
+const studioIcons = useStudioIcons()
 
 // Left aside: the template renders UContentNavigation from @nuxt/content,
 // content-coupled, so the same tree is faked with a vertical UNavigationMenu.
@@ -11,19 +11,19 @@ const navLinks: NavigationMenuItem[] = [{
   type: 'trigger',
   defaultOpen: true,
   children: [
-    { label: 'Introduction', icon: extra.home },
+    { label: 'Introduction', icon: studioIcons.home },
     { label: 'Installation', icon: 'i-lucide-download' },
-    { label: 'Usage', icon: extra.settings, active: true }
+    { label: 'Usage', icon: studioIcons.settings, active: true }
   ]
 }, {
   label: 'Essentials',
   type: 'trigger',
   defaultOpen: true,
   children: [
-    { label: 'Markdown Syntax', icon: extra.heading },
+    { label: 'Markdown Syntax', icon: studioIcons.heading },
     { label: 'Code Blocks', icon: 'i-lucide-code' },
     { label: 'Prose Components', icon: 'i-lucide-component' },
-    { label: 'Images & Embeds', icon: extra.image }
+    { label: 'Images & Embeds', icon: studioIcons.image }
   ]
 }, {
   label: 'AI',
@@ -37,7 +37,7 @@ const navLinks: NavigationMenuItem[] = [{
 
 // PageHeaderLinks dropdown, minus the real clipboard / external navigations.
 const copyItems: DropdownMenuItem[] = [
-  { label: 'Copy Markdown link', icon: extra.link },
+  { label: 'Copy Markdown link', icon: studioIcons.link },
   { label: 'View as Markdown', icon: 'i-simple-icons:markdown' },
   { label: 'Open in ChatGPT', icon: 'i-simple-icons:openai' },
   { label: 'Open in Claude', icon: 'i-simple-icons:anthropic' }
@@ -93,7 +93,7 @@ const appConfigCode = `export default defineAppConfig({
     <UHeader :toggle="false" class="rounded-t-[inherit]" :ui="{ center: 'flex-1' }">
       <template #left>
         <div class="flex items-center gap-1.5">
-          <UIcon :name="extra.bookOpen" class="size-6 text-primary shrink-0" />
+          <UIcon :name="studioIcons.bookOpen" class="size-6 text-primary shrink-0" />
           <span class="text-xl font-bold text-highlighted">Docs</span>
         </div>
       </template>
@@ -117,7 +117,7 @@ const appConfigCode = `export default defineAppConfig({
 
       <template #right>
         <UButton icon="i-lucide-sun-moon" aria-label="Color mode" color="neutral" variant="ghost" />
-        <UButton :icon="extra.github" aria-label="GitHub" color="neutral" variant="ghost" />
+        <UButton :icon="studioIcons.github" aria-label="GitHub" color="neutral" variant="ghost" />
       </template>
     </UHeader>
 
@@ -230,7 +230,7 @@ const appConfigCode = `export default defineAppConfig({
               Header
             </ProseH3>
 
-            <ProsePre filename="app.config.ts" :icon="extra.settings" :code="appConfigCode">
+            <ProsePre filename="app.config.ts" :icon="studioIcons.settings" :code="appConfigCode">
               {{ appConfigCode }}
             </ProsePre>
 
@@ -315,7 +315,7 @@ const appConfigCode = `export default defineAppConfig({
       <template #right>
         <UButton icon="i-simple-icons-discord" aria-label="Discord" color="neutral" variant="ghost" />
         <UButton icon="i-simple-icons-x" aria-label="X" color="neutral" variant="ghost" />
-        <UButton :icon="extra.github" aria-label="GitHub" color="neutral" variant="ghost" />
+        <UButton :icon="studioIcons.github" aria-label="GitHub" color="neutral" variant="ghost" />
       </template>
     </UFooter>
   </div>

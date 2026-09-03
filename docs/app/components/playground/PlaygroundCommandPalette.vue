@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const extra = useStudioExtraIcons()
+const studioIcons = useStudioIcons()
 import type { CommandPaletteGroup, CommandPaletteItem } from '@nuxt/ui'
 
 const toast = useToast()
@@ -32,7 +32,7 @@ const groups = ref<CommandPaletteGroup<CommandPaletteItem>[]>([
       {
         label: 'Add new file',
         suffix: 'Create a new file in the current workspace.',
-        icon: extra.filePlus,
+        icon: studioIcons.filePlus,
         kbds: ['meta', 'N'],
         onSelect() {
           toast.add({ title: 'Add new file' })
@@ -41,7 +41,7 @@ const groups = ref<CommandPaletteGroup<CommandPaletteItem>[]>([
       {
         label: 'Add new folder',
         suffix: 'Create a new folder in the current workspace.',
-        icon: extra.folderPlus,
+        icon: studioIcons.folderPlus,
         kbds: ['meta', 'F'],
         onSelect() {
           toast.add({ title: 'Add new folder' })
@@ -50,7 +50,7 @@ const groups = ref<CommandPaletteGroup<CommandPaletteItem>[]>([
       {
         label: 'Add label',
         suffix: 'Add a label to the current item.',
-        icon: extra.tag,
+        icon: studioIcons.tag,
         kbds: ['meta', 'L'],
         onSelect() {
           toast.add({ title: 'Add label' })

@@ -2,7 +2,7 @@
 import type { DropdownMenuItem } from '@nuxt/ui'
 
 const appConfig = useAppConfig()
-const extra = useStudioExtraIcons()
+const studioIcons = useStudioIcons()
 
 const toast = useToast()
 
@@ -40,7 +40,7 @@ const modelItems = computed<DropdownMenuItem[][]>(() => [
   [
     {
       label: 'Legacy models',
-      icon: extra.clock,
+      icon: studioIcons.clock,
       children: legacyModels.map(m => ({
         label: m.label,
         type: 'checkbox',
@@ -52,7 +52,7 @@ const modelItems = computed<DropdownMenuItem[][]>(() => [
     },
     {
       label: 'Effort',
-      icon: extra.zap,
+      icon: studioIcons.zap,
       slot: 'effort',
       children: efforts.map(e => ({
         label: e,
@@ -68,7 +68,7 @@ const modelItems = computed<DropdownMenuItem[][]>(() => [
 
 const items = computed<DropdownMenuItem[][]>(() => [
   [
-    { label: 'Add files or photos', icon: extra.paperclip, kbds: ['meta', 'U'] },
+    { label: 'Add files or photos', icon: studioIcons.paperclip, kbds: ['meta', 'U'] },
     {
       label: 'Add to project',
       icon: appConfig.ui.icons.folder,
@@ -83,7 +83,7 @@ const items = computed<DropdownMenuItem[][]>(() => [
       label: 'Skills',
       icon: 'i-lucide-shapes',
       children: [
-        { label: 'Canvas design', icon: extra.palette },
+        { label: 'Canvas design', icon: studioIcons.palette },
         { label: 'Slides', icon: 'i-lucide-presentation' },
         { label: 'PDF', icon: appConfig.ui.icons.file }
       ]
@@ -94,7 +94,7 @@ const items = computed<DropdownMenuItem[][]>(() => [
       children: [
         [
           { label: 'Add connector', icon: appConfig.ui.icons.plus },
-          { label: 'Manage connectors', icon: extra.briefcase }
+          { label: 'Manage connectors', icon: studioIcons.briefcase }
         ],
         [
           {
@@ -130,7 +130,7 @@ const items = computed<DropdownMenuItem[][]>(() => [
     { label: 'Research', icon: 'i-lucide-activity' },
     {
       label: 'Web search',
-      icon: extra.globe,
+      icon: studioIcons.globe,
       type: 'checkbox',
       checked: webSearch.value,
       onUpdateChecked(checked: boolean) {
@@ -199,7 +199,7 @@ function onSubmit() {
 
         <div class="flex items-center gap-1">
           <UButton
-            :icon="extra.mic"
+            :icon="studioIcons.mic"
             color="neutral"
             variant="ghost"
             size="sm"
