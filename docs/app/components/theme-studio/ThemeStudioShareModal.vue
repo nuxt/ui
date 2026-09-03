@@ -1,11 +1,22 @@
 <script setup lang="ts">
 import type { HighlighterGeneric } from 'shiki'
+import { useClipboard } from '@vueuse/core'
+import { encodeThemeDoc, THEME_LINK_PREFIX } from '../../utils/theme/link'
 
-/** The export modal: the two generated files, highlighted, with copy buttons. */
+/** The export modal: a shareable link, then the two generated files. */
 const open = defineModel<boolean>('open', { default: false })
 
-const { exportCSS, exportConfig, configLabel } = useTheme()
+const appConfig = useAppConfig()
+const { exportCSS, exportConfig, configLabel, currentDoc } = useTheme()
 const { track } = useAnalytics()
+
+const link = ref('')
+const { copy: copyLinkValue, copied: linkCopied } = useClipboard()
+
+function copyLink() {
+  copyLinkValue(link.value)
+  track('Theme Exported', { type: 'Link' })
+}
 
 const css = ref('')
 const config = ref('')
@@ -47,6 +58,7 @@ function onCopyCapture(key: 'css' | 'config', event: Event) {
 watch(open, async (isOpen) => {
   css.value = isOpen ? await exportCSS() : ''
   config.value = isOpen ? await exportConfig() : ''
+  link.value = isOpen ? `${window.location.origin}${window.location.pathname}${THEME_LINK_PREFIX}${encodeThemeDoc(currentDoc())}` : ''
 })
 </script>
 
@@ -58,6 +70,30 @@ watch(open, async (isOpen) => {
   >
     <template #body>
       <div class="flex flex-col gap-4">
+        <UFormField label="Link" description="Opens the studio with this theme applied.">
+          <UInput
+            :model-value="link"
+            readonly
+            class="w-full"
+            :ui="{ base: 'font-mono text-xs pe-8' }"
+            aria-label="Shareable theme link"
+            @focus="($event.target as HTMLInputElement).select()"
+          >
+            <template #trailing>
+              <UTooltip :text="linkCopied ? 'Copied' : 'Copy link'">
+                <UButton
+                  :icon="linkCopied ? appConfig.ui.icons.copyCheck : appConfig.ui.icons.copy"
+                  :color="linkCopied ? 'success' : 'neutral'"
+                  variant="link"
+                  size="sm"
+                  :aria-label="linkCopied ? 'Link copied' : 'Copy link'"
+                  @click="copyLink"
+                />
+              </UTooltip>
+            </template>
+          </UInput>
+        </UFormField>
+
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <div v-for="pane in panes" :key="pane.key" class="min-w-0">
             <!-- A fixed pane height: the files and the highlighter both land

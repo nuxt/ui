@@ -516,6 +516,7 @@ function resetEffects() {
               :style="{ backgroundColor: info.oklch }"
               :aria-label="`Shade ${info.shade}: ${info.oklch}`"
               :aria-pressed="stuckShade === info.shade"
+              tabindex="-1"
               @click="toggleStuck(info.shade)"
               @mouseenter="onSwatchEnter(info.shade)"
               @mouseleave="onSwatchLeave"
@@ -652,12 +653,13 @@ function resetEffects() {
           <div class="flex items-center gap-1">
             <UButton
               label="Modifiers"
-              :icon="modifiersOpen ? appConfig.ui.icons.chevronDown : appConfig.ui.icons.chevronRight"
+              :trailing-icon="appConfig.ui.icons.chevronDown"
               color="neutral"
               variant="ghost"
               size="sm"
               block
               class="flex-1 justify-start"
+              :ui="{ trailingIcon: ['text-dimmed transition-transform duration-200', modifiersOpen && 'rotate-180'] }"
             />
             <!-- rides this row so it never overlaps the curve handles; its
                  click must not toggle the fold -->

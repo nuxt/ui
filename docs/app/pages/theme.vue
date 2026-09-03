@@ -1,11 +1,13 @@
 <script setup lang="ts">
+import { decodeThemeDoc, THEME_LINK_PREFIX } from '../utils/theme/link'
+
 const { track } = useAnalytics()
 const { icon: iconSet } = useTheme()
 
 // The chrome skins to the applied icon pack.
 const studioIcons = useStudioIcons()
 
-const { view, views } = useThemeStudio()
+const { view, views, applyDoc } = useThemeStudio()
 const { past, future, undo, redo } = useThemeStudioHistory({ record: true })
 
 // The preview mirrors into ?view=, so a reload (or a shared link) lands on
@@ -24,6 +26,19 @@ const sync = (value: typeof view.value) => router.replace({ query: { ...route.qu
 watch(view, sync)
 onMounted(() => {
   if ((route.query.view ?? 'grid') !== view.value) sync(view.value)
+})
+
+// A theme travels in the hash, so a link carries the whole document without a
+// server. Consumed on arrival: the URL would otherwise keep re-applying it.
+onMounted(() => {
+  if (!window.location.hash.startsWith(THEME_LINK_PREFIX)) return
+
+  const doc = decodeThemeDoc(window.location.hash.slice(THEME_LINK_PREFIX.length))
+  if (doc) {
+    applyDoc(doc)
+    track('Theme Link Applied')
+  }
+  window.history.replaceState(null, '', window.location.pathname + window.location.search)
 })
 
 // The studio's preview is a card floating on a recessed canvas, which is the
