@@ -1,7 +1,5 @@
 import type { ThemeDoc } from './engine/types'
 
-export const THEME_LINK_PREFIX = '#theme='
-
 export function encodeThemeDoc(doc: ThemeDoc): string {
   // btoa is latin1-only, and font names and palette ids can carry non-ascii
   const bytes = new TextEncoder().encode(JSON.stringify(doc))

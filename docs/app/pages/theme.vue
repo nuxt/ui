@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useClipboard } from '@vueuse/core'
-import { decodeThemeDoc, encodeThemeDoc, THEME_LINK_PREFIX } from '../utils/theme/link'
+import { decodeThemeDoc, encodeThemeDoc } from '../utils/theme/link'
 
 const { track } = useAnalytics()
 const appConfig = useAppConfig()
@@ -9,7 +9,7 @@ const { icon: iconSet, currentDoc } = useTheme()
 const { copy: copyLink, copied: linkCopied } = useClipboard()
 
 function shareTheme() {
-  copyLink(`${window.location.origin}${window.location.pathname}${THEME_LINK_PREFIX}${encodeThemeDoc(currentDoc())}`)
+  copyLink(`${window.location.origin}${window.location.pathname}#${encodeThemeDoc(currentDoc())}`)
   track('Theme Exported', { type: 'Link' })
 }
 
@@ -38,15 +38,14 @@ onMounted(() => {
 })
 
 // A theme travels in the hash, so a link carries the whole document without a
-// server. Consumed on arrival: the URL would otherwise keep re-applying it.
+// server. Consumed on arrival, or the URL would keep re-applying it; anything
+// that isn't a theme is left alone.
 onMounted(() => {
-  if (!window.location.hash.startsWith(THEME_LINK_PREFIX)) return
+  const doc = decodeThemeDoc(window.location.hash.slice(1))
+  if (!doc) return
 
-  const doc = decodeThemeDoc(window.location.hash.slice(THEME_LINK_PREFIX.length))
-  if (doc) {
-    applyDoc(doc)
-    track('Theme Link Applied')
-  }
+  applyDoc(doc)
+  track('Theme Link Applied')
   window.history.replaceState(null, '', window.location.pathname + window.location.search)
 })
 
@@ -97,7 +96,7 @@ const shareOpen = ref(false)
         <UTooltip :text="linkCopied ? 'Link copied' : 'Copy link to this theme'">
           <UButton
             :icon="linkCopied ? appConfig.ui.icons.copyCheck : appConfig.ui.icons.copy"
-            :color="linkCopied ? 'success' : 'neutral'"
+            :color="linkCopied ? 'primary' : 'neutral'"
             variant="soft"
             :aria-label="linkCopied ? 'Link copied' : 'Copy link to this theme'"
             @click="shareTheme"
