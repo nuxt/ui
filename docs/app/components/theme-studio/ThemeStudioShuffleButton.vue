@@ -2,7 +2,7 @@
 /** Rolls a random theme, the die tumbling through faces as it goes. */
 import type { ButtonProps } from '@nuxt/ui'
 
-withDefaults(defineProps<ButtonProps & {
+const props = withDefaults(defineProps<ButtonProps & {
   /** A full-width labelled row, for the mobile menu where the other controls stack. */
   vertical?: boolean
 }>(), {
@@ -65,10 +65,18 @@ function onRollEnd(event?: AnimationEvent) {
 }
 
 onUnmounted(clearRollTimers)
+
+// The page mounts this twice: the footer (hidden below lg, but mounted) and
+// the mobile menu. Only the footer binds, or an open menu rolls twice.
+if (!props.vertical) {
+  defineShortcuts({
+    r: rollDice
+  })
+}
 </script>
 
 <template>
-  <UTooltip text="Random theme" :disabled="vertical">
+  <UTooltip text="Random theme" :disabled="vertical" :kbds="['r']">
     <UButton
       :icon="diceFace"
       :label="vertical ? 'Random theme' : undefined"

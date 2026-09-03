@@ -62,5 +62,5 @@ const groups = ref<CommandPaletteGroup<CommandPaletteItem>[]>([
 </script>
 
 <template>
-  <UCommandPalette :groups="groups" placeholder="Search users and actions..." class="h-80" />
+  <UCommandPalette :groups="groups" placeholder="Search users and actions..." :autofocus="false" class="h-80" />
 </template>

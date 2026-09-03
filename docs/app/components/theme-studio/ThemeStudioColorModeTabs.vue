@@ -41,7 +41,7 @@ const mode = computed({
     :ui="{
       label: 'sr-only',
       indicator: 'bg-default',
-      trigger: 'data-[state=active]:text-highlighted w-full in-[[data-slot=list]:not(:has([data-slot=indicator]))]:data-[state=active]:before:bg-default'
+      trigger: 'data-[state=active]:text-highlighted w-full in-[[data-slot=list]:not(:has([data-slot=indicator]))]:data-[state=active]:before:bg-default p-1'
     }"
     aria-label="Color mode"
   />
