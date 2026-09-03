@@ -65,7 +65,8 @@ export function useHeader() {
   }, {
     label: 'Figma',
     icon: 'i-simple-icons-figma',
-    to: '/figma'
+    to: 'https://go.nuxt.com/figma-ui',
+    target: '_blank'
   }, {
     label: 'GitHub',
     to: 'https://github.com/nuxt/ui',

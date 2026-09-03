@@ -88,7 +88,8 @@ export function useSearch() {
     label: 'Figma',
     description: 'Access the official Figma design kit.',
     icon: 'i-simple-icons-figma',
-    to: '/figma'
+    to: 'https://go.nuxt.com/figma-ui',
+    target: '_blank'
   }, {
     label: 'Team',
     description: 'Meet the team behind the project.',

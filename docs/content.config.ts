@@ -2,13 +2,6 @@ import { z } from 'zod'
 import { defineCollection } from '@nuxt/content'
 import { defineSitemapSchema } from '@nuxtjs/sitemap/content'
 
-const Image = z.object({
-  src: z.string(),
-  alt: z.string().optional(),
-  width: z.number().optional(),
-  height: z.number().optional()
-})
-
 const Avatar = z.object({
   src: z.string(),
   alt: z.string().optional()
@@ -99,53 +92,11 @@ export const collections = {
         badge: z.string().optional()
       }),
       links: z.array(Button),
+      // External navigation entries (e.g. the Figma page): the sidebar link
+      // points at `to` instead of the page's own path.
+      to: z.string().optional(),
+      target: z.string().optional(),
       sitemap
-    })
-  }),
-  figma: defineCollection({
-    type: 'page',
-    source: 'figma.yml',
-    schema: Page.extend({
-      features1: PageSection,
-      cta1: PageSection,
-      section1: PageSection.extend({
-        tabs: z.array(z.object({
-          label: z.string(),
-          src: z.string(),
-          width: z.number().optional(),
-          height: z.number().optional(),
-          alt: z.string().optional()
-        })).optional()
-      }),
-      section2: PageSection.extend({
-        image: Image
-      }),
-      section3: PageSection.extend({
-        image: Image
-      }),
-      features2: PageSection,
-      section4: PageSection.extend({
-        steps: z.array(z.object({
-          title: z.string(),
-          description: z.string(),
-          to: z.string().optional(),
-          target: z.string().optional(),
-          image: Image
-        }))
-      }),
-      customers: PageSection.extend({
-        items: z.array(z.object({
-          src: z.string(),
-          alt: z.string()
-        }))
-      }),
-      faq: PageSection.extend({
-        items: z.array(z.object({
-          label: z.string(),
-          content: z.string(),
-          defaultOpen: z.boolean().optional()
-        }))
-      })
     })
   }),
   showcase: defineCollection({
