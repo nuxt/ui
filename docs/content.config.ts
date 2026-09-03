@@ -1,5 +1,6 @@
 import { z } from 'zod'
 import { defineCollection } from '@nuxt/content'
+import { defineSitemapSchema } from '@nuxtjs/sitemap/content'
 
 const Image = z.object({
   src: z.string(),
@@ -50,10 +51,15 @@ const PageSection = z.object({
   features: z.array(PageFeature).optional()
 })
 
+// `@nuxtjs/sitemap` only walks a collection whose schema declares this field,
+// and reads its per-page options (`lastmod`, `changefreq`, `priority`) off it.
+const sitemap = defineSitemapSchema({ z })
+
 const Page = z.object({
   title: z.string(),
   description: z.string(),
-  hero: PageHero
+  hero: PageHero,
+  sitemap
 })
 
 export const collections = {
@@ -92,7 +98,8 @@ export const collections = {
         title: z.string().optional(),
         badge: z.string().optional()
       }),
-      links: z.array(Button)
+      links: z.array(Button),
+      sitemap
     })
   }),
   figma: defineCollection({
@@ -213,7 +220,8 @@ export const collections = {
         name: z.string(),
         avatar: Avatar.optional(),
         to: z.string().optional()
-      })).optional()
+      })).optional(),
+      sitemap
     })
   }),
   releases: defineCollection({
