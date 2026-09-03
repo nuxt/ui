@@ -114,7 +114,7 @@ const items = computed<DropdownMenuItem[][]>(() => [[{
   setting({
     label: 'Primary',
     dirty: mounted.value && primaryDirty.value,
-    icon: 'i-lucide-paintbrush',
+    icon: studioIcons.brush,
     value: blackAsPrimary.value ? 'Black' : isCustomPalette('primary') ? 'Custom' : upperFirst(paletteLabel(primary.value)),
     dot: 'var(--ui-primary)',
     children: [{
@@ -136,7 +136,7 @@ const items = computed<DropdownMenuItem[][]>(() => [[{
   setting({
     label: 'Neutral',
     dirty: mounted.value && neutralDirty.value,
-    icon: 'i-lucide-contrast',
+    icon: studioIcons.contrast,
     value: isCustomPalette('neutral') ? 'Custom' : upperFirst(paletteLabel(neutral.value)),
     dot: `var(--color-${neutralChip.value}-500)`,
     children: neutralColors.map(color => ({
@@ -158,7 +158,7 @@ const items = computed<DropdownMenuItem[][]>(() => [[{
   setting({
     label: 'Icons',
     dirty: groupDirtyFlags.icons.value,
-    icon: 'i-lucide-shapes',
+    icon: studioIcons.shapes,
     value: icons.find(pack => pack.value === icon.value)?.label ?? icon.value,
     children: icons.map(pack => ({
       label: pack.label,

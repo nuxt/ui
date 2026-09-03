@@ -58,7 +58,7 @@ const hasHeader = computed(() => !!(props.label || props.helpTo || showReset.val
           size="sm"
           color="neutral"
           variant="ghost"
-          icon="i-lucide-help-circle"
+          :icon="studioIcons.help"
           aria-label="Documentation for this setting"
         />
       </UTooltip>

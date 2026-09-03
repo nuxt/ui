@@ -418,6 +418,13 @@ export const studioIcons = {
   radius: 'i-lucide-square-round-corner',
   dice: 'i-lucide-dices',
   templates: 'i-lucide-layout-template',
+  layers: 'i-lucide-layers',
+  help: 'i-lucide-circle-question-mark',
+  brush: 'i-lucide-paintbrush',
+  contrast: 'i-lucide-contrast',
+  shapes: 'i-lucide-shapes',
+  curve: 'i-lucide-tangent',
+  proportions: 'i-lucide-proportions',
   // view switcher, keyed by ThemeStudioView
   // blocks, not a grid: the wall's tiles are components, and the dashboard
   // view already owns the grid glyph
@@ -487,7 +494,6 @@ export const studioIcons = {
   cpu: 'i-lucide-cpu',
   activity: 'i-lucide-activity',
   radar: 'i-lucide-radar',
-  layers: 'i-lucide-layers',
   gitCommit: 'i-lucide-git-commit-horizontal',
   notebook: 'i-lucide-notebook-pen',
   mountain: 'i-lucide-mountain',
@@ -518,7 +524,14 @@ export const studioIconOverrides: Partial<Record<ThemeIcons, Partial<Record<Stud
     text: 'i-bi-fonts',
     radius: 'i-bi-bounding-box',
     dice: 'i-bi-dice-5',
-    templates: 'i-bi-window-stack'
+    templates: 'i-bi-window-stack',
+    help: 'i-bi-question-circle',
+    brush: 'i-bi-brush',
+    contrast: 'i-bi-circle-half',
+    shapes: 'i-bi-triangle',
+    curve: 'i-bi-graph-up',
+    proportions: 'i-bi-aspect-ratio',
+    layers: 'i-bi-layers'
   },
   heroicons: {
     undo: 'i-heroicons-arrow-uturn-left',
@@ -531,7 +544,14 @@ export const studioIconOverrides: Partial<Record<ThemeIcons, Partial<Record<Stud
     text: 'i-heroicons-language',
     radius: 'i-heroicons-stop',
     dice: 'i-heroicons-arrows-right-left',
-    templates: 'i-heroicons-rectangle-group'
+    templates: 'i-heroicons-rectangle-group',
+    help: 'i-heroicons-question-mark-circle',
+    brush: 'i-heroicons-paint-brush',
+    contrast: 'i-heroicons-eye-dropper',
+    shapes: 'i-heroicons-squares-2x2',
+    curve: 'i-heroicons-chart-bar',
+    proportions: 'i-heroicons-rectangle-group',
+    layers: 'i-heroicons-square-3-stack-3d'
   },
   iconoir: {
     undo: 'i-iconoir-undo',
@@ -544,7 +564,14 @@ export const studioIconOverrides: Partial<Record<ThemeIcons, Partial<Record<Stud
     text: 'i-iconoir-text',
     radius: 'i-iconoir-square',
     dice: 'i-iconoir-shuffle',
-    templates: 'i-iconoir-view-grid'
+    templates: 'i-iconoir-view-grid',
+    help: 'i-iconoir-question-mark-circle',
+    brush: 'i-iconoir-fill-color',
+    contrast: 'i-iconoir-half-moon',
+    shapes: 'i-iconoir-triangle',
+    curve: 'i-iconoir-graph-up',
+    proportions: 'i-iconoir-frame',
+    layers: 'i-iconoir-multiple-pages'
   },
   material: {
     undo: 'i-material-symbols-undo',
@@ -557,7 +584,14 @@ export const studioIconOverrides: Partial<Record<ThemeIcons, Partial<Record<Stud
     text: 'i-material-symbols-text-fields',
     radius: 'i-material-symbols-rounded-corner',
     dice: 'i-material-symbols-shuffle',
-    templates: 'i-material-symbols-space-dashboard'
+    templates: 'i-material-symbols-space-dashboard',
+    help: 'i-material-symbols-help-outline-rounded',
+    brush: 'i-material-symbols-brush-outline-rounded',
+    contrast: 'i-material-symbols-contrast-rounded',
+    shapes: 'i-material-symbols-shapes-outline',
+    curve: 'i-material-symbols-timeline-rounded',
+    proportions: 'i-material-symbols-aspect-ratio-outline-rounded',
+    layers: 'i-material-symbols-layers-outline-rounded'
   },
   phosphor: {
     undo: 'i-ph-arrow-arc-left',
@@ -570,7 +604,14 @@ export const studioIconOverrides: Partial<Record<ThemeIcons, Partial<Record<Stud
     text: 'i-ph-text-aa',
     radius: 'i-ph-square',
     dice: 'i-ph-shuffle',
-    templates: 'i-ph-layout'
+    templates: 'i-ph-layout',
+    help: 'i-ph-question',
+    brush: 'i-ph-paint-brush',
+    contrast: 'i-ph-circle-half',
+    shapes: 'i-ph-shapes',
+    curve: 'i-ph-chart-line',
+    proportions: 'i-ph-rectangle',
+    layers: 'i-ph-stack'
   },
   remix: {
     undo: 'i-ri-arrow-go-back-line',
@@ -583,7 +624,14 @@ export const studioIconOverrides: Partial<Record<ThemeIcons, Partial<Record<Stud
     text: 'i-ri-font-size',
     radius: 'i-ri-rounded-corner',
     dice: 'i-ri-dice-line',
-    templates: 'i-ri-layout-line'
+    templates: 'i-ri-layout-line',
+    help: 'i-ri-question-line',
+    brush: 'i-ri-brush-line',
+    contrast: 'i-ri-contrast-line',
+    shapes: 'i-ri-shape-line',
+    curve: 'i-ri-line-chart-line',
+    proportions: 'i-ri-aspect-ratio-line',
+    layers: 'i-ri-stack-line'
   },
   tabler: {
     undo: 'i-tabler-arrow-back-up',
@@ -596,7 +644,14 @@ export const studioIconOverrides: Partial<Record<ThemeIcons, Partial<Record<Stud
     text: 'i-tabler-typography',
     radius: 'i-tabler-border-radius',
     dice: 'i-tabler-dice',
-    templates: 'i-tabler-template'
+    templates: 'i-tabler-template',
+    help: 'i-tabler-help-circle',
+    brush: 'i-tabler-brush',
+    contrast: 'i-tabler-contrast',
+    shapes: 'i-tabler-shape',
+    curve: 'i-tabler-chart-line',
+    proportions: 'i-tabler-aspect-ratio',
+    layers: 'i-tabler-stack-2'
   },
   // Pixel has no settings cog (sliders stands in), no pie chart (generic
   // chart), no up-down chevron (sort), and no rocket/panels/newspaper/
@@ -616,6 +671,13 @@ export const studioIconOverrides: Partial<Record<ThemeIcons, Partial<Record<Stud
     radius: 'i-pixelarticons-card',
     dice: 'i-pixelarticons-dice',
     templates: 'i-pixelarticons-layout',
+    help: 'i-pixelarticons-circle-question',
+    brush: 'i-pixelarticons-brush',
+    contrast: 'i-pixelarticons-invert',
+    shapes: 'i-pixelarticons-shapes',
+    curve: 'i-pixelarticons-chart-line',
+    proportions: 'i-pixelarticons-aspect-ratio',
+    layers: 'i-pixelarticons-blocks',
     grid: 'i-pixelarticons-card-stack',
     dashboard: 'i-pixelarticons-dashboard',
     chat: 'i-pixelarticons-message',
@@ -682,7 +744,6 @@ export const studioIconOverrides: Partial<Record<ThemeIcons, Partial<Record<Stud
     cpu: 'i-pixelarticons-cpu',
     activity: 'i-pixelarticons-analytics',
     radar: 'i-pixelarticons-target',
-    layers: 'i-pixelarticons-blocks',
     gitCommit: 'i-pixelarticons-git-commit',
     notebook: 'i-pixelarticons-notebook',
     mountain: 'i-pixelarticons-map',

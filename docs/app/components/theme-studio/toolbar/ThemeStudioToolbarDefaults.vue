@@ -139,7 +139,7 @@ const content = computed(() => [...toolbarPanelClass(props.vertical), 'divide-y 
           v-model="defaultSize"
           control="select"
           label="Size"
-          control-icon="i-lucide-proportions"
+          :control-icon="studioIcons.proportions"
           :items="defaultSizeItems"
           aria-label="Default size"
         />
@@ -164,7 +164,7 @@ const content = computed(() => [...toolbarPanelClass(props.vertical), 'divide-y 
                 color="neutral"
                 variant="subtle"
                 block
-                icon="i-lucide-layers"
+                :icon="studioIcons.layers"
                 :trailing-icon="appConfig.ui.icons.chevronDown"
                 :aria-label="`Default variant for ${field.label.toLowerCase()}`"
                 class="group"

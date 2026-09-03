@@ -37,7 +37,7 @@ const studioIcons = useStudioIcons()
 
 const editors = [
   { open: shadeEditor, icon: studioIcons.options, tooltip: 'Adjust shades', ariaLabel: `Adjust ${props.alias} shades` },
-  { open: paletteEditor, icon: 'i-lucide-tangent', tooltip: 'Edit palette', ariaLabel: `Edit ${props.alias} palette` }
+  { open: paletteEditor, icon: studioIcons.curve, tooltip: 'Edit palette', ariaLabel: `Edit ${props.alias} palette` }
 ]
 </script>
 
