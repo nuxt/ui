@@ -2,7 +2,7 @@
 import type { AvatarProps } from '@nuxt/ui'
 import type { ThemeDoc } from '../../../utils/theme/engine'
 import { themeIcons } from '../../../utils/theme/icons'
-import { themeChipStyle, loadFontPreviews } from '../../../utils/theme/studio'
+import { themeChipStyle, loadFontPreviews, PRESET_ICONS } from '../../../utils/theme/studio'
 
 /** The preset select: the value names the applied preset, each row previews its doc. */
 defineProps<{
@@ -33,7 +33,7 @@ const presetLabel = computed(() => {
 })
 
 /** Its row's own glyph; the swatch book stands in when no preset is behind it. */
-const presetIcon = computed(() => activeEntry.value?.icon ?? studioIcons.themes)
+const presetIcon = computed(() => (activeEntry.value && PRESET_ICONS[activeEntry.value.id]) || studioIcons.themes)
 
 /** A taste of the doc's icon set (its own, or the default lucide). */
 function iconSamples(doc: ThemeDoc): string[] {
@@ -48,7 +48,7 @@ const presetItems = computed(() => presets.map(preset => ({
   value: preset.id,
   // the item's own avatar carries the doc's ramp as its chip
   avatar: {
-    icon: preset.icon,
+    icon: PRESET_ICONS[preset.id],
     size: 'md',
     class: 'bg-(image:--chip-bg-light) dark:bg-(image:--chip-bg-dark)',
     style: themeChipStyle(preset.doc),

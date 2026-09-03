@@ -12,6 +12,13 @@
  */
 import colors from 'tailwindcss/colors'
 
+/**
+ * The stock preset, what an untouched theme already is. Lives with the
+ * tables rather than the presets so entry-chunk code (the header trigger)
+ * can name it without pulling the preset docs in.
+ */
+export const DEFAULT_PRESET_ID = 'nuxt-ui'
+
 /* --------------------------------------------------------------- shades -- */
 
 export const SHADES = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950] as const

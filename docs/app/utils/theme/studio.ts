@@ -91,6 +91,26 @@ export const THEME_STUDIO_VIEWS: ThemeStudioViewTab[] = [
 
 /* ------------------------------------------------------------- sections -- */
 
+/**
+ * Each preset's glyph, keyed by id. Kept apart from the presets table so the
+ * header trigger can show the applied preset without pulling the preset docs
+ * into its chunk.
+ */
+export const PRESET_ICONS: Record<string, string> = {
+  'nuxt-ui': 'i-simple-icons-nuxt',
+  'mono': 'i-lucide-contrast',
+  'cobalt': 'i-lucide-gem',
+  'sky': 'i-lucide-cloud-sun',
+  'mint': 'i-lucide-leaf',
+  'iris': 'i-lucide-flower',
+  'crimson': 'i-lucide-clapperboard',
+  'coral': 'i-lucide-shell',
+  'sunset': 'i-lucide-sunset',
+  'carbon': 'i-lucide-zap',
+  'bubblegum': 'i-lucide-candy',
+  'parchment': 'i-lucide-scroll-text'
+}
+
 /** A preset's own ramp as a chip: its neutral as the page, its icon in its primary. */
 export function themeChipStyle(doc: ThemeDoc) {
   const shade = (alias: 'primary' | 'neutral', step: Shade) => resolveShade(doc, resolveAlias(doc, alias), step)

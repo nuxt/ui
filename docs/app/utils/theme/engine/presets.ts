@@ -4,12 +4,8 @@ export interface ThemePreset {
   id: string
   name: string
   description: string
-  icon: string
   doc: ThemeDoc
 }
-
-/** The stock preset, what an untouched theme already is. */
-export const DEFAULT_PRESET_ID = 'nuxt-ui'
 
 /**
  * The five tokens the library pins to white, routed through the neutral ramp
@@ -33,7 +29,6 @@ export const presets: ThemePreset[] = [{
   id: 'nuxt-ui',
   name: 'Default',
   description: 'The stock theme, everything inherited.',
-  icon: 'i-simple-icons-nuxt',
   doc: {
     version: 1
   }
@@ -41,7 +36,6 @@ export const presets: ThemePreset[] = [{
   id: 'mono',
   name: 'Mono',
   description: 'Black on a pure gray neutral, generous radius, quiet surfaces.',
-  icon: 'i-lucide-contrast',
   doc: {
     version: 1,
     blackAsPrimary: true,
@@ -70,7 +64,6 @@ export const presets: ThemePreset[] = [{
   id: 'cobalt',
   name: 'Cobalt',
   description: 'Utility blue on cool grays, tight corners, flat bordered surfaces.',
-  icon: 'i-lucide-gem',
   doc: {
     version: 1,
     // Prefixed names: a palette named plainly 'blue'/'gray' would override
@@ -154,7 +147,6 @@ export const presets: ThemePreset[] = [{
   id: 'sky',
   name: 'Sky',
   description: 'Sky blue on a mist neutral, pastel fills everywhere, airy type.',
-  icon: 'i-lucide-cloud-sun',
   doc: {
     version: 1,
     colors: {
@@ -173,7 +165,6 @@ export const presets: ThemePreset[] = [{
   id: 'mint',
   name: 'Mint',
   description: 'Teal on an olive neutral, pill buttons and fields, chunky rounded type, large controls.',
-  icon: 'i-lucide-leaf',
   doc: {
     version: 1,
     colors: {
@@ -201,7 +192,6 @@ export const presets: ThemePreset[] = [{
   id: 'iris',
   name: 'Iris',
   description: 'Violet outlines on a mauve neutral, fuchsia secondary, tinted fields.',
-  icon: 'i-lucide-flower',
   doc: {
     version: 1,
     colors: {
@@ -227,7 +217,6 @@ export const presets: ThemePreset[] = [{
   id: 'crimson',
   name: 'Crimson',
   description: 'Cinema red on pure gray, square corners, filled fields, near-black in dark mode.',
-  icon: 'i-lucide-clapperboard',
   doc: {
     version: 1,
     colors: {
@@ -255,7 +244,6 @@ export const presets: ThemePreset[] = [{
   id: 'coral',
   name: 'Coral',
   description: 'Rose on warm stone, cards floating on shadows, teal for success, neutral focus rings.',
-  icon: 'i-lucide-shell',
   doc: {
     version: 1,
     colors: {
@@ -283,7 +271,6 @@ export const presets: ThemePreset[] = [{
   id: 'sunset',
   name: 'Sunset',
   description: 'Orange on a warm taupe neutral, glowing actions, yellow secondary, subtle panels.',
-  icon: 'i-lucide-sunset',
   doc: {
     version: 1,
     colors: {
@@ -311,7 +298,6 @@ export const presets: ThemePreset[] = [{
   id: 'carbon',
   name: 'Carbon',
   description: 'Amber on a warm carbon neutral, with ink-dark borders throughout.',
-  icon: 'i-lucide-zap',
   doc: {
     version: 1,
     // Sculpted warm neutral: lilac-tinted paper into pure carbon.
@@ -369,7 +355,6 @@ export const presets: ThemePreset[] = [{
   id: 'bubblegum',
   name: 'Bubblegum',
   description: 'Pastel pink softness with mauve-tinted grays.',
-  icon: 'i-lucide-candy',
   doc: {
     version: 1,
     // Sculpted pink-mauve neutral, chroma peaks mid-ramp.
@@ -415,7 +400,6 @@ export const presets: ThemePreset[] = [{
   id: 'parchment',
   name: 'Parchment',
   description: 'Warm parchment neutrals with a book-cloth clay primary.',
-  icon: 'i-lucide-scroll-text',
   doc: {
     version: 1,
     palettes: {

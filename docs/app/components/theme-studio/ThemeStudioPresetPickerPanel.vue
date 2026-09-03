@@ -7,7 +7,7 @@ import type { ListboxItem } from '@nuxt/ui'
  * drags in (presets, palette math) stays out of the header's chunk and only
  * loads when the popover first opens.
  */
-import { themeChipStyle } from '../../utils/theme/studio'
+import { themeChipStyle, PRESET_ICONS } from '../../utils/theme/studio'
 
 const emit = defineEmits<{ close: [] }>()
 
@@ -36,7 +36,7 @@ const mode = computed({
 const presetTiles = computed<ListboxItem[]>(() => presets.map(preset => ({
   id: preset.id,
   label: preset.name,
-  icon: preset.icon,
+  icon: PRESET_ICONS[preset.id],
   themeChip: themeChipStyle(preset.doc)
 })))
 
