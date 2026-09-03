@@ -26,7 +26,7 @@ export default (options: Required<ModuleOptions>) => ({
       list: {},
       card: {},
       table: {
-        item: [`border border-muted ${hover}bg-elevated/50`, options.theme.transitions && 'transition-colors']
+        item: [`border border-default ${hover}bg-elevated/50`, options.theme.transitions && 'transition-colors']
       }
     },
     size: {
