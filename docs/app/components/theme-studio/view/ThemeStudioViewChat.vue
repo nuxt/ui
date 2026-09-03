@@ -81,8 +81,6 @@ const historyItems: NavigationMenuItem[] = [
 ]
 
 // The template's ModelSelect, over its own list (chat/shared/utils/models.ts).
-// Brand marks stay `i-simple-icons-*`: they identify a provider, so they are
-// not the icon pack's to reskin.
 const models = [
   { label: 'Claude Haiku 4.5', value: 'anthropic/claude-haiku-4.5', icon: 'i-simple-icons-anthropic' },
   { label: 'Gemini 3 Flash', value: 'google/gemini-3-flash', icon: 'i-simple-icons-google' },

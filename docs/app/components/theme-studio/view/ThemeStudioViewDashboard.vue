@@ -388,8 +388,7 @@ const customerColumns: TableColumn<Customer>[] = [{
   }
 }, {
   accessorKey: 'email',
-  // the one sortable column in the template, so it reads as a button next to
-  // the plain headers around it
+  // the template's one sortable column, so it reads as a button
   header: ({ column }) => h(UButton, {
     color: 'neutral',
     variant: 'ghost',
@@ -1077,7 +1076,6 @@ const pageTitles: Record<Page, string> = {
               </div>
             </UPageCard>
 
-            <!-- The one error-tinted surface in the whole studio. -->
             <UPageCard
               title="Account"
               description="No longer want to use our service? You can delete your account here. This action is not reversible. All information related to this account will be deleted permanently."

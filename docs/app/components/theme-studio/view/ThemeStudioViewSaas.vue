@@ -254,7 +254,7 @@ onMounted(() => {
       <UNavigationMenu :items="navItems" variant="link" />
 
       <template #right>
-        <!-- UColorModeButton renders the pack's moon/sun pair; the studio toolbar owns the real toggle. -->
+        <!-- Static: the studio toolbar owns color mode. -->
         <UButton color="neutral" variant="ghost" aria-label="Color mode">
           <template #leading="{ ui }">
             <UIcon :name="appConfig.ui.icons.dark" :class="ui.leadingIcon({ class: 'hidden dark:inline-block' })" />

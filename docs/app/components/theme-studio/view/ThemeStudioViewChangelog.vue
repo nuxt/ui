@@ -191,7 +191,7 @@ onMounted(() => {
   <!-- The pane is the scroll container; the intro panel sticks to it on xl. The
        color mode button sits outside it, the way the template's is fixed. -->
   <div class="relative h-full">
-    <!-- UColorModeButton renders the pack's moon/sun pair; the studio toolbar owns the real toggle. -->
+    <!-- Static: the studio toolbar owns color mode. -->
     <UButton
       color="neutral"
       variant="ghost"

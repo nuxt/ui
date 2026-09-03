@@ -23,11 +23,6 @@ const socialLinks = [
 
 // The template scrolls travel photos in a marquee; gradient polaroids stand in
 // because a tinted surface tracks the theme and a photo does not.
-//
-// Avatar policy across the views: a real image for the person whose account it
-// is (this hero, the dashboard and chat user menus), initials for invented
-// third parties like the testimonial authors, since a stranger's face pinned to
-// a made-up name reads worse than a monogram.
 const heroImages = [
   { icon: studioIcons.mountain, label: 'Alps, 2024' },
   { icon: studioIcons.coffee, label: 'Café sketching' },
@@ -153,7 +148,7 @@ onUnmounted(() => clearTimeout(appearTimeout))
         }"
       >
         <template #list-trailing>
-          <!-- UColorModeButton renders the pack's moon/sun pair; the studio toolbar owns the real toggle. -->
+          <!-- Static: the studio toolbar owns color mode. -->
           <UButton
             color="neutral"
             variant="ghost"

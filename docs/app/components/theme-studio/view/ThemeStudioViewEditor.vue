@@ -178,7 +178,6 @@ const suggestionItems: EditorSuggestionMenuItem[][] = [[{
   icon: 'i-lucide-separator-horizontal'
 }]]
 
-// The template's mention list is static too, so it copies over as is.
 const mentionItems: EditorMentionMenuItem[] = [
   { label: 'benjamincanac', avatar: { src: 'https://github.com/benjamincanac.png', loading: 'lazy' as const } },
   { label: 'atinux', avatar: { src: 'https://github.com/atinux.png', loading: 'lazy' as const } },
@@ -284,7 +283,7 @@ function dragHandleItems(editor: Editor): DropdownMenuItem[][] {
 
             <USeparator orientation="vertical" class="h-7 shrink-0" />
 
-            <!-- UColorModeButton renders the pack's moon/sun pair; the studio toolbar owns the real toggle. -->
+            <!-- Static: the studio toolbar owns color mode. -->
             <UButton color="neutral" variant="ghost" size="sm" aria-label="Color mode">
               <template #leading="{ ui }">
                 <UIcon :name="appConfig.ui.icons.dark" :class="ui.leadingIcon({ class: 'hidden dark:inline-block' })" />
