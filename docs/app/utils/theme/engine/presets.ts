@@ -11,9 +11,14 @@ export interface ThemePreset {
  * The five tokens the library pins to white, routed through the neutral ramp
  * the way picking a neutral in the studio does (selectPalette's remaps), so a
  * tinted ramp reaches the page and the export reproduces the preview.
+ *
+ * The page moving to 50 takes the muted surface with it: the library sits it
+ * at 50 too, so it would land ON the page and every muted panel (a code
+ * block, a table head) would lose its shape.
  */
 const tintedNeutral = {
   '--ui-bg': { light: 50 },
+  '--ui-bg-muted': { light: 100 },
   '--ui-text-inverted': { light: 50 },
   '--ui-text-highlighted': { dark: 50 },
   '--ui-bg-inverted': { dark: 50 },
@@ -205,12 +210,7 @@ export const presets: ThemePreset[] = [{
     style: {
       // the violet stays a line: outlined actions over tinted fields
       defaults: { variants: { buttons: 'outline', inputs: 'subtle' } },
-      tokenShades: {
-        ...tintedNeutral,
-        // one step deeper so the mauve shows on surfaces, not just borders
-        '--ui-bg-muted': { light: 100 },
-        '--ui-bg-elevated': { light: 100 }
-      }
+      tokenShades: { ...tintedNeutral }
     }
   }
 }, {
@@ -234,7 +234,8 @@ export const presets: ThemePreset[] = [{
         // than lifting to the salmon 400
         '--ui-primary': { light: 600, dark: 500 },
         '--ui-bg': { light: 50, dark: 950 },
-        '--ui-bg-muted': { dark: 900 },
+        // light restates tintedNeutral's step: this key replaces it wholesale
+        '--ui-bg-muted': { light: 100, dark: 900 },
         '--ui-bg-elevated': { dark: 900 },
         '--ui-bg-accented': { dark: 800 }
       }
@@ -420,7 +421,7 @@ export const presets: ThemePreset[] = [{
         }
       },
       // Warm paper grays, the light end is cream rather than white: the page
-      // sits at 100 with cards lifted to 50.
+      // sits at 100, its surfaces a step below.
       parchment: {
         shades: {
           50: 'oklch(98% 0.006 100)',
@@ -444,14 +445,20 @@ export const presets: ThemePreset[] = [{
     radius: 0.375,
     font: { sans: 'DM Sans', serif: 'Source Serif 4' },
     icons: 'heroicons',
-    // Border family stepped one deeper to hold on the tinted cream page.
+    // Surfaces and borders stepped one deeper to hold on the tinted cream
+    // page. Elevated has to stay below the page: the library's hover and
+    // highlight tints are bg-elevated at half opacity, a lighter elevated
+    // vanishes into it.
     tokens: {
       light: {
         '--ui-bg': 'var(--ui-color-neutral-100)',
         '--ui-bg-muted': 'var(--ui-color-neutral-200)',
-        '--ui-bg-elevated': 'var(--ui-color-neutral-50)',
+        '--ui-bg-elevated': 'var(--ui-color-neutral-200)',
         '--ui-bg-accented': 'var(--ui-color-neutral-300)',
         '--ui-border': 'var(--ui-color-neutral-300)',
+        // the library leaves this at 200, where the muted surface now sits:
+        // a code block's frame would land on its own background
+        '--ui-border-muted': 'var(--ui-color-neutral-300)',
         '--ui-border-accented': 'var(--ui-color-neutral-400)'
       },
       dark: {
