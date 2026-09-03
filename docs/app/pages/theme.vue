@@ -98,9 +98,7 @@ const shareOpen = ref(false)
           <UButton
             :icon="linkCopied ? appConfig.ui.icons.copyCheck : appConfig.ui.icons.copy"
             :color="linkCopied ? 'success' : 'neutral'"
-            variant="ghost"
-            square
-            class="hidden lg:inline-flex"
+            variant="soft"
             :aria-label="linkCopied ? 'Link copied' : 'Copy link to this theme'"
             @click="shareTheme"
           />

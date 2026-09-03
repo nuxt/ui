@@ -5,6 +5,7 @@ import type { HighlighterGeneric } from 'shiki'
 const open = defineModel<boolean>('open', { default: false })
 
 const { exportCSS, exportConfig, configLabel } = useTheme()
+const { framework } = useFrameworks()
 const { track } = useAnalytics()
 
 const css = ref('')
@@ -44,7 +45,8 @@ function onCopyCapture(key: 'css' | 'config', event: Event) {
   }
 }
 
-watch(open, async (isOpen) => {
+// framework too: only one half of the export is framework-agnostic
+watch([open, framework], async ([isOpen]) => {
   css.value = isOpen ? await exportCSS() : ''
   config.value = isOpen ? await exportConfig() : ''
 })
@@ -54,8 +56,12 @@ watch(open, async (isOpen) => {
   <UModal
     v-model:open="open"
     title="Export theme"
-    :ui="{ content: 'max-w-5xl' }"
+    :ui="{ content: 'max-w-4xl' }"
   >
+    <template #actions>
+      <FrameworkTabs class="w-40" />
+    </template>
+
     <template #body>
       <div class="flex flex-col gap-4">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
