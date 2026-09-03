@@ -2,8 +2,10 @@ import lucide from '../../../../src/theme/icons'
 
 // Picking a set replaces appConfig.ui.icons wholesale, so every set must
 // map the full key list from src/theme/icons, a missing key would blank
-// that icon across the whole app. Names are validated against the Iconify
-// API (sets beyond lucide resolve through @nuxt/icon's API fallback).
+// that icon across the whole app. The `satisfies` below enforces that: a
+// missing key fails to compile, and so does a stray one. Names are validated
+// against the Iconify API (sets beyond lucide resolve through @nuxt/icon's
+// API fallback).
 export const themeIcons = {
   lucide,
   bootstrap: {
@@ -378,7 +380,7 @@ export const themeIcons = {
     upload: 'i-pixelarticons-upload',
     warning: 'i-pixelarticons-warning-diamond'
   }
-}
+} satisfies Record<string, typeof lucide>
 
 export type ThemeIcons = keyof typeof themeIcons
 
@@ -454,7 +456,6 @@ export const studioIcons = {
   heart: 'i-lucide-heart',
   github: 'i-lucide-github',
   trendingUp: 'i-lucide-trending-up',
-  trendingDown: 'i-lucide-trending-down',
   tag: 'i-lucide-tag',
   filePlus: 'i-lucide-file-plus',
   folderPlus: 'i-lucide-folder-plus',
@@ -471,11 +472,10 @@ export const studioIcons = {
   play: 'i-lucide-play',
   terminal: 'i-lucide-terminal',
   shield: 'i-lucide-shield',
-  sparkles: 'i-lucide-sparkles',
   zap: 'i-lucide-zap',
   package: 'i-lucide-package',
   pin: 'i-lucide-pin',
-  paintBucket: 'i-lucide-paint-bucket',
+  pinOff: 'i-lucide-pin-off',
   mic: 'i-lucide-mic',
   heading: 'i-lucide-heading',
   briefcase: 'i-lucide-briefcase',
@@ -650,7 +650,6 @@ export const studioIconOverrides: Partial<Record<ThemeIcons, Partial<Record<Stud
     heart: 'i-pixelarticons-heart',
     github: 'i-pixelarticons-github',
     trendingUp: 'i-pixelarticons-trending-up',
-    trendingDown: 'i-pixelarticons-trending-down',
     tag: 'i-pixelarticons-label',
     filePlus: 'i-pixelarticons-file-plus',
     folderPlus: 'i-pixelarticons-folder-plus',
@@ -667,11 +666,11 @@ export const studioIconOverrides: Partial<Record<ThemeIcons, Partial<Record<Stud
     play: 'i-pixelarticons-play',
     terminal: 'i-pixelarticons-terminal',
     shield: 'i-pixelarticons-shield',
-    sparkles: 'i-pixelarticons-sparkles',
     zap: 'i-pixelarticons-zap',
     package: 'i-pixelarticons-package',
     pin: 'i-pixelarticons-pin',
-    paintBucket: 'i-pixelarticons-paint-bucket',
+    // no pin-off glyph, the filled pin plus the button's active state carries it
+    pinOff: 'i-pixelarticons-pin',
     mic: 'i-pixelarticons-mic',
     heading: 'i-pixelarticons-heading',
     briefcase: 'i-pixelarticons-briefcase',

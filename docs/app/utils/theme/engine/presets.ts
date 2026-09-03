@@ -16,7 +16,7 @@ export interface ThemePreset {
  * at 50 too, so it would land ON the page and every muted panel (a code
  * block, a table head) would lose its shape.
  */
-const tintedNeutral = {
+const tintedNeutralBase = {
   '--ui-bg': { light: 50 },
   '--ui-bg-muted': { light: 100 },
   '--ui-text-inverted': { light: 50 },
@@ -24,6 +24,13 @@ const tintedNeutral = {
   '--ui-bg-inverted': { dark: 50 },
   '--ui-border-inverted': { dark: 50 }
 } satisfies StyleOptions['tokenShades']
+
+/**
+ * A fresh copy per preset. `deriveStyle` puts these objects straight into
+ * reactive studio state, so a spread would hand six presets the same
+ * per-token object and one in-place write would corrupt all of them.
+ */
+const tintedNeutral = () => structuredClone(tintedNeutralBase)
 
 /**
  * Presets are plain ThemeDocs: applying one replaces the current document.
@@ -163,7 +170,7 @@ export const presets: ThemePreset[] = [{
     style: {
       // nothing solid anywhere: one app-wide pastel fill
       defaults: { variants: { buttons: 'soft', inputs: 'soft' } },
-      tokenShades: { ...tintedNeutral }
+      tokenShades: tintedNeutral()
     }
   }
 }, {
@@ -182,7 +189,7 @@ export const presets: ThemePreset[] = [{
     icons: 'iconoir',
     style: {
       defaults: { size: 'lg', variants: { inputs: 'soft' } },
-      tokenShades: { ...tintedNeutral }
+      tokenShades: tintedNeutral()
     },
     // the radius ladder stops at 0.75rem, the pill has to come from the slots
     components: {
@@ -210,7 +217,7 @@ export const presets: ThemePreset[] = [{
     style: {
       // the violet stays a line: outlined actions over tinted fields
       defaults: { variants: { buttons: 'outline', inputs: 'subtle' } },
-      tokenShades: { ...tintedNeutral }
+      tokenShades: tintedNeutral()
     }
   }
 }, {
@@ -229,7 +236,7 @@ export const presets: ThemePreset[] = [{
     style: {
       defaults: { variants: { inputs: 'soft' } },
       tokenShades: {
-        ...tintedNeutral,
+        ...tintedNeutral(),
         // 600 is the deep cinema red, 500 leans orange; dark holds it rather
         // than lifting to the salmon 400
         '--ui-primary': { light: 600, dark: 500 },
@@ -258,7 +265,7 @@ export const presets: ThemePreset[] = [{
     style: {
       // fields ring in neutral, the rose stays on actions
       defaults: { colors: { inputs: 'neutral' } },
-      tokenShades: { ...tintedNeutral }
+      tokenShades: tintedNeutral()
     },
     components: {
       // Cards float on a shadow instead of sitting in a ring. Dark keeps the
@@ -285,7 +292,7 @@ export const presets: ThemePreset[] = [{
     style: {
       defaults: { variants: { panels: 'subtle' } },
       tokenShades: {
-        ...tintedNeutral,
+        ...tintedNeutral(),
         // orange-500 is too light to carry white text, 600 is the burnt stop
         '--ui-primary': { light: 600 }
       }

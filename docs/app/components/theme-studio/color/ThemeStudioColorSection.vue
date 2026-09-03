@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { upperFirst } from 'scule'
 import { TOKEN_GROUPS } from '../../../utils/theme/engine'
 import type { ColorAlias, SectionKey } from '../../../utils/theme/engine'
 
@@ -18,7 +19,7 @@ const props = defineProps<{
 const { rampChip } = useThemeStudio()
 const { shadeLadder, sections } = useTokenShades(props.alias)
 
-const title = computed(() => props.label ?? capitalize(props.alias))
+const title = computed(() => props.label ?? upperFirst(props.alias))
 
 const paletteEditor = ref(false)
 const shadeEditor = ref(false)

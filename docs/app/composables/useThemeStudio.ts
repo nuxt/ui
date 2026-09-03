@@ -2,7 +2,13 @@ import type { MaybeRefOrGetter } from 'vue'
 import colors from 'tailwindcss/colors'
 import { rampCssName, THEME_STUDIO_VIEWS } from '../utils/theme/studio'
 import type { ThemeStudioView } from '../utils/theme/studio'
-import { presets, DEFAULT_PRESET_ID, docToSettings, isDefaultTheme, generatePalette, applyPaletteEffects, isDefaultEffects, parseCssColor, styleComponents, styleTokens, sectionFingerprint, mergeSection, canonicalTokenShades, storedStopStep, nearestShade, TOKEN_SHADE_TARGETS, SECTION_GROUPS, DEFAULT_COLORS, SHADES, SHADES_ALL, SHADE_SETS } from '../utils/theme/engine'
+// Leaf modules, never the barrel: the barrel re-exports serialize (and json5
+// with it), and this composable is reached from the header preset picker on
+// every docs page, which would put the exporter in the entry chunk.
+import { DEFAULT_PRESET_ID, docToSettings, isDefaultTheme, styleComponents, styleTokens, TOKEN_SHADE_TARGETS, DEFAULT_COLORS, SHADES, SHADES_ALL, SHADE_SETS } from '../utils/theme/engine/types'
+import { presets } from '../utils/theme/engine/presets'
+import { generatePalette, applyPaletteEffects, isDefaultEffects, parseCssColor, storedStopStep, nearestShade } from '../utils/theme/engine/palette'
+import { sectionFingerprint, mergeSection, canonicalTokenShades, SECTION_GROUPS } from '../utils/theme/engine/sections'
 import type { SectionKey, ThemeDoc, ThemePreset, PaletteCurveParams, PaletteEffects, StoredPaletteParams, PalettePin, StyleOptions, Shade, ShadeStep, ShadeStop, ColorAlias, TokenRamp, VariantGroup, DefaultVariant } from '../utils/theme/engine'
 
 export function useThemeStudio() {

@@ -9,7 +9,7 @@
  * backwards, fitting curves to a pasted palette.
  */
 import type { Shade, ShadeStep } from './types'
-import { SHADES, SHADE_SETS, SHADE_STEPS } from './types'
+import { SHADES_ALL, SHADE_SETS, SHADE_STEPS } from './types'
 
 /* ------------------------------------------------------- sRGB ↔ OKLCH -- */
 
@@ -618,12 +618,16 @@ export function fitCurve(points: Array<[number, number]>): ChannelCurve {
  * params that reproduce it, so editing always starts from the real thing.
  */
 export function fitPalette(shades: Partial<Record<Shade, string>>): PaletteCurveParams {
+  // Every stop that is actually there, not just the 11 standard ones: a ramp
+  // saved at a finer density carries up to 91, and fitting through 11 of them
+  // then regenerating all 91 shifts every intermediate stop. `shadeX` keys the
+  // position by value, so it agrees with the 11-stop case it replaces.
   const stops: Array<{ x: number, color: Oklch }> = []
-  for (const [index, shade] of SHADES.entries()) {
+  for (const shade of SHADES_ALL) {
     // Accept hex or oklch, older saved docs and pasted ramps are hex.
     const color = shades[shade] ? parseColor(shades[shade]!) : undefined
     if (color) {
-      stops.push({ x: index / (SHADES.length - 1), color })
+      stops.push({ x: shadeX(shade), color })
     }
   }
 

@@ -11,7 +11,6 @@ const toast = useToast()
 const { track } = useAnalytics()
 const route = useRoute()
 const { open, messages } = useChat()
-const { open: searchOpen } = useContentSearch()
 const { framework } = useFrameworks()
 const { resetTheme, applyThemeSettings, hasChanges: hasThemeChanges } = useTheme()
 // A preset is a whole ThemeDoc, so it rides applyDoc (reset, style axis, class
@@ -227,20 +226,6 @@ function clearMessages() {
   chatMessages.value = []
   _themeApplied.clear()
 }
-
-defineShortcuts({
-  meta_i: {
-    handler: () => {
-      if (searchOpen.value) {
-        searchOpen.value = false
-        open.value = true
-      } else {
-        open.value = !open.value
-      }
-    },
-    usingInput: true
-  }
-})
 </script>
 
 <template>

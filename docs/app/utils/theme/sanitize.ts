@@ -5,6 +5,10 @@
  * `}` and `<`, which is what keeps a value from ending its declaration early.
  */
 export const SAFE_NAME = /^[\w -]{1,50}$/
+// `__proto__` and friends pass SAFE_NAME but assigning them walks the
+// prototype instead of adding a key, so the palette vanishes from
+// Object.keys and its shades leak onto every lookup.
+const UNSAFE_KEYS = new Set(['__proto__', 'constructor', 'prototype'])
 const SAFE_HEX = /^#[0-9a-f]{3,8}$/i
 // the engine's canonical shade format: `oklch(62.3% 0.214 259.815)`
 // tailwind >=4.3.3 emits `none` for achromatic chroma/hue (the whole neutral ramp)
@@ -17,7 +21,7 @@ const SAFE_CSS_VAR_VALUE = /^(?:var\(--[\w-]+\)|#[0-9a-f]{3,8}|[a-z]+|-?\d{1,3}(
 export function sanitizeCustomColors(input: Record<string, any>): Record<string, Record<string, string>> {
   const result: Record<string, Record<string, string>> = {}
   for (const [name, shades] of Object.entries(input)) {
-    if (!SAFE_NAME.test(name) || typeof shades !== 'object' || !shades) continue
+    if (!SAFE_NAME.test(name) || UNSAFE_KEYS.has(name) || typeof shades !== 'object' || !shades) continue
     const safeShades: Record<string, string> = {}
     for (const [shade, value] of Object.entries(shades as Record<string, unknown>)) {
       if (/^\d{2,3}$/.test(shade) && typeof value === 'string' && (SAFE_OKLCH.test(value) || SAFE_HEX.test(value))) {
@@ -33,7 +37,7 @@ export function sanitizeCSSVariables(input: { light?: Record<string, any>, dark?
   const clean = (vars?: Record<string, unknown>) => {
     const result: Record<string, string> = {}
     for (const [key, value] of Object.entries(vars || {})) {
-      if (SAFE_CSS_VAR_KEY.test(key) && typeof value === 'string' && SAFE_CSS_VAR_VALUE.test(value)) {
+      if (SAFE_CSS_VAR_KEY.test(key) && !UNSAFE_KEYS.has(key.slice(2)) && typeof value === 'string' && SAFE_CSS_VAR_VALUE.test(value)) {
         result[key] = value
       }
     }

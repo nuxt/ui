@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { upperFirst } from 'scule'
 import { keepPanels, toolbarPanelClass, FONT_WEIGHT_DEFAULTS, loadFontPreviews } from '../../../utils/theme/studio'
 
 /**
@@ -26,7 +27,7 @@ function weightStepModel(step: keyof typeof FONT_WEIGHT_DEFAULTS) {
 
 const WEIGHT_STEPS = ['normal', 'medium', 'semibold', 'bold'] as const
 const weightSteps = Object.fromEntries(WEIGHT_STEPS.map(step => [step, weightStepModel(step)])) as Record<typeof WEIGHT_STEPS[number], ReturnType<typeof weightStepModel>>
-const weights = WEIGHT_STEPS.map(step => ({ label: capitalize(step), model: weightSteps[step]! }))
+const weights = WEIGHT_STEPS.map(step => ({ label: upperFirst(step), model: weightSteps[step]! }))
 
 const uppercase = computed({
   get: () => !!fontPrefs.value.uppercase,

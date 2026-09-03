@@ -252,10 +252,16 @@ function nudge(handle: Handle, axis: 'x' | 'y', direction: number, coarse: boole
   const c = curve.value
   if (axis === 'y') {
     const step = (props.yMax - props.yMin) / (coarse ? 10 : 100) * direction
-    // endpoints carry their control handle, matching the pointer drag
-    if (handle === 'y0') curve.value = { ...c, y0: clampY(c.y0 + step), p1y: clampY(c.p1y + step) }
-    else if (handle === 'y1') curve.value = { ...c, y1: clampY(c.y1 + step), p2y: clampY(c.p2y + step) }
-    else if (handle === 'p1') curve.value = { ...c, p1y: clampY(c.p1y + step) }
+    // Endpoints carry their control handle by the delta they actually moved,
+    // not by the requested step: once the endpoint clamps, the pointer path
+    // (and jump) stop moving the control handle, and so must this.
+    if (handle === 'y0') {
+      const y0 = clampY(c.y0 + step)
+      curve.value = { ...c, y0, p1y: clampY(c.p1y + y0 - c.y0) }
+    } else if (handle === 'y1') {
+      const y1 = clampY(c.y1 + step)
+      curve.value = { ...c, y1, p2y: clampY(c.p2y + y1 - c.y1) }
+    } else if (handle === 'p1') curve.value = { ...c, p1y: clampY(c.p1y + step) }
     else curve.value = { ...c, p2y: clampY(c.p2y + step) }
     return
   }

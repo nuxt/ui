@@ -524,7 +524,7 @@ function resetEffects() {
               <template v-if="pinnedShades.has(info.shade)">
                 <UIcon
                   v-if="stopStep >= 50"
-                  name="i-lucide-pin"
+                  :name="studioIcons.pin"
                   class="absolute inset-0 m-auto size-2.5 pointer-events-none"
                   :class="pinBadgeClass(info.shade, 'text')"
                 />
@@ -592,7 +592,7 @@ function resetEffects() {
                         active-variant="ghost"
                         :active="swatchDetail.pinned"
                         :ui="{ leadingIcon: 'size-3' }"
-                        :icon="swatchDetail.pinned ? 'i-lucide-pin-off' : 'i-lucide-pin'"
+                        :icon="swatchDetail.pinned ? studioIcons.pinOff : studioIcons.pin"
                         :aria-label="swatchDetail.pinned ? 'Unpin this colour' : 'Pin this colour exactly'"
                         @click="togglePinExact(swatchDetail.shade)"
                       />

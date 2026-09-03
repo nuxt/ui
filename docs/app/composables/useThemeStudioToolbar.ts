@@ -1,4 +1,5 @@
-import { DEFAULT_PRESET_ID, GROUP_STOCK_VARIANT } from '../utils/theme/engine'
+import { upperFirst } from 'scule'
+import { DEFAULT_PRESET_ID, GROUP_STOCK_VARIANT } from '../utils/theme/engine/types'
 import { paletteLabel, rampCssName } from '../utils/theme/studio'
 
 /**
@@ -15,7 +16,7 @@ export function useThemeStudioToolbar() {
 
   // A custom ramp has no name worth reading, the picker calls it Custom too.
   function paletteName(alias: 'primary' | 'neutral', value: string) {
-    return isCustomPalette(alias) ? 'Custom' : capitalize(paletteLabel(value))
+    return isCustomPalette(alias) ? 'Custom' : upperFirst(paletteLabel(value))
   }
 
   /**
@@ -47,7 +48,7 @@ export function useThemeStudioToolbar() {
     const chosen = (value?: string) => (value && value !== 'default' ? value : undefined)
     const size = chosen(defaults?.size) ?? 'md'
     const variant = chosen(defaults?.variants?.buttons) ?? chosen(defaults?.variant) ?? GROUP_STOCK_VARIANT.buttons
-    return `${size.toUpperCase()}, ${capitalize(variant)}`
+    return `${size.toUpperCase()}, ${upperFirst(variant)}`
   })
 
   /**

@@ -23,9 +23,16 @@ export default defineNuxtPlugin({
       // already holds the server's default and its initializer will not
       // re-run.
       let appliedUiKeys: string[] = []
+      // Both end up interpolated into <style> text, and storage is writable by
+      // anything on the origin, so they get the same clamp the FOUC script
+      // (num) and applyThemeSettings already apply. Three restore paths, one
+      // rule.
+      const clamp = (value: unknown, lo: number, hi: number, fallback: number) =>
+        Number.isFinite(value) ? Math.min(hi, Math.max(lo, value as number)) : fallback
+
       const distribute = (saved: StoredTheme, defer: (fn: () => void) => void) => {
-        useState('nuxt-ui-radius').value = saved.radius ?? THEME_DEFAULTS.radius
-        useState('nuxt-ui-font-size').value = saved.fontSize ?? THEME_DEFAULTS.fontSize
+        useState('nuxt-ui-radius').value = clamp(saved.radius, 0, 4, THEME_DEFAULTS.radius)
+        useState('nuxt-ui-font-size').value = clamp(saved.fontSize, 12, 20, THEME_DEFAULTS.fontSize)
         useState('nuxt-ui-font').value = saved.font ?? {}
         useState('nuxt-ui-icons').value = saved.icons ?? THEME_DEFAULTS.icons
         useState('nuxt-ui-black-as-primary').value = saved.blackAsPrimary ?? false
@@ -228,12 +235,14 @@ export default defineNuxtPlugin({
               });
 
               var BREAKOUT = /[;{}<>]/;
+              var SHADE = /^\\d{2,3}$/;
+              var VAR_KEY = /^--[\\w-]+$/;
               var custom = T.customColors;
               if (custom) {
                 var vars = [];
                 for (var name in custom) {
                   if (!SAFE.test(name)) continue;
-                  for (var shade in custom[name]) { if (!BREAKOUT.test(String(custom[name][shade]))) { vars.push('--color-' + name + '-' + shade + ': ' + custom[name][shade] + ';'); } }
+                  for (var shade in custom[name]) { if (SHADE.test(shade) && !BREAKOUT.test(String(custom[name][shade]))) { vars.push('--color-' + name + '-' + shade + ': ' + custom[name][shade] + ';'); } }
                 }
                 if (vars.length) { set('nuxt-ui-custom-colors', ':root { ' + vars.join(' ') + ' }'); }
               }
@@ -245,7 +254,7 @@ export default defineNuxtPlugin({
                   var result = [];
                   var safe = function(v) { return v != null && !BREAKOUT.test(String(v)); };
                   for (var key in defs) { result.push(key + ': ' + (safe(overrides[key]) ? overrides[key] : defs[key]) + ';'); }
-                  for (var key2 in overrides) { if (!defs[key2] && safe(overrides[key2])) result.push(key2 + ': ' + overrides[key2] + ';'); }
+                  for (var key2 in overrides) { if (!defs[key2] && VAR_KEY.test(key2) && safe(overrides[key2])) result.push(key2 + ': ' + overrides[key2] + ';'); }
                   return result;
                 };
                 var parts = [];

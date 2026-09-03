@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { upperFirst } from 'scule'
 import type { DropdownMenuItem } from '@nuxt/ui'
 import type { ThemeDoc } from '../../utils/theme/engine/types'
 import { DEFAULT_PRESET_ID } from '../../utils/theme/engine/types'
@@ -114,7 +115,7 @@ const items = computed<DropdownMenuItem[][]>(() => [[{
     label: 'Primary',
     dirty: mounted.value && primaryDirty.value,
     icon: 'i-lucide-paintbrush',
-    value: blackAsPrimary.value ? 'Black' : isCustomPalette('primary') ? 'Custom' : capitalize(paletteLabel(primary.value)),
+    value: blackAsPrimary.value ? 'Black' : isCustomPalette('primary') ? 'Custom' : upperFirst(paletteLabel(primary.value)),
     dot: 'var(--ui-primary)',
     children: [{
       label: 'Black',
@@ -124,7 +125,7 @@ const items = computed<DropdownMenuItem[][]>(() => [[{
       checked: blackAsPrimary.value,
       onSelect: keep(() => setBlackAsPrimary(true))
     }, ...primaryColors.map(color => ({
-      label: capitalize(paletteLabel(color)),
+      label: upperFirst(paletteLabel(color)),
       slot: 'color',
       dot: swatch(color),
       type: 'checkbox' as const,
@@ -136,10 +137,10 @@ const items = computed<DropdownMenuItem[][]>(() => [[{
     label: 'Neutral',
     dirty: mounted.value && neutralDirty.value,
     icon: 'i-lucide-contrast',
-    value: isCustomPalette('neutral') ? 'Custom' : capitalize(paletteLabel(neutral.value)),
+    value: isCustomPalette('neutral') ? 'Custom' : upperFirst(paletteLabel(neutral.value)),
     dot: `var(--color-${neutralChip.value}-500)`,
     children: neutralColors.map(color => ({
-      label: capitalize(paletteLabel(color)),
+      label: upperFirst(paletteLabel(color)),
       slot: 'color',
       dot: swatch(color),
       type: 'checkbox' as const,
@@ -183,7 +184,7 @@ const items = computed<DropdownMenuItem[][]>(() => [[{
   // a label, not an item: the segmented control inside takes the clicks
   type: 'label',
   slot: 'color-mode',
-  label: capitalize(mode.value),
+  label: upperFirst(mode.value),
   icon: appConfig.ui.icons[mode.value],
   // a row, not a group label: item size and weight
   ui: { label: 'font-normal text-sm text-default' }

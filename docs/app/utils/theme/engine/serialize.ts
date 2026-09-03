@@ -25,8 +25,15 @@ export function generateCSS(doc: ThemeDoc): string {
 
   // The faces the doc names have to load from somewhere: the studio pulls
   // them at runtime (loadFontPreviews), an export has only this file.
-  const families = [...new Set([doc.font?.sans, doc.font?.serif, doc.font?.mono]
-    .filter((name): name is string => !!name && name !== THEME_DEFAULTS.font))]
+  // The faces this file actually emits, which is not the same as the faces the
+  // doc names: `--font-sans` is skipped when it matches the default (nothing to
+  // override), but serif and mono are emitted whatever they are, so the default
+  // face still needs importing when it is one of those.
+  const families = [...new Set([
+    doc.font?.sans !== THEME_DEFAULTS.font ? doc.font?.sans : undefined,
+    doc.font?.serif,
+    doc.font?.mono
+  ].filter((name): name is string => !!name))]
   for (const family of families) {
     lines.push(`@import url("https://fonts.googleapis.com/css2?family=${encodeURIComponent(family)}:wght@300;400;500;600;700;800&display=swap");`)
   }
@@ -183,53 +190,4 @@ export function generateConfig(doc: ThemeDoc, framework: string = 'nuxt'): strin
   }
 
   return `export default defineAppConfig(${configString})`
-}
-
-/**
- * Translate a document into the shape `applyThemeSettings()` accepts, the
- * sanitized write path shared with the AI theme feature.
- */
-export function docToSettings(doc: ThemeDoc): Record<string, any> {
-  const settings: Record<string, any> = {}
-
-  for (const [alias, palette] of Object.entries(doc.colors || {})) {
-    settings[alias] = palette
-  }
-
-  if (doc.blackAsPrimary) settings.blackAsPrimary = true
-  if (doc.radius !== undefined) settings.radius = doc.radius
-  if (doc.fontSize !== undefined) settings.fontSize = doc.fontSize
-  if (doc.font?.sans) settings.fontSans = doc.font.sans
-  if (doc.font?.serif) settings.fontSerif = doc.font.serif
-  if (doc.font?.mono) settings.fontMono = doc.font.mono
-  if (doc.font?.weights) settings.fontWeights = doc.font.weights
-  if (doc.font?.uppercase || doc.font?.italic || doc.font?.letterSpacing !== undefined || doc.font?.lineHeight !== undefined) {
-    settings.fontBody = { uppercase: doc.font.uppercase, italic: doc.font.italic, letterSpacing: doc.font.letterSpacing, lineHeight: doc.font.lineHeight }
-  }
-  if (doc.icons) settings.icons = doc.icons
-
-  if (doc.palettes) {
-    settings.customColors = Object.fromEntries(
-      Object.entries(doc.palettes).map(([name, palette]) => [name, palette.shades])
-    )
-  }
-
-  // Token overrides plus the style treatment's color variables.
-  const style = doc.style ? styleTokens(doc.style) : { light: {}, dark: {} }
-  const light = { ...style.light, ...doc.tokens?.light }
-  const dark = { ...style.dark, ...doc.tokens?.dark }
-  if (Object.keys(light).length || Object.keys(dark).length) {
-    settings.cssVariables = {
-      ...(Object.keys(light).length ? { light } : {}),
-      ...(Object.keys(dark).length ? { dark } : {})
-    }
-  }
-
-  // Only explicit components ride the settings channel, the style expansion
-  // goes through the dedicated style-ui channel (applyDoc).
-  if (doc.components && Object.keys(doc.components).length) {
-    settings.ui = doc.components
-  }
-
-  return settings
 }
