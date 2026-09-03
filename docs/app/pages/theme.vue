@@ -96,7 +96,7 @@ const shareOpen = ref(false)
 
         <UTooltip :text="linkCopied ? 'Link copied' : 'Copy link to this theme'">
           <UButton
-            :icon="linkCopied ? appConfig.ui.icons.copyCheck : studioIcons.share"
+            :icon="linkCopied ? appConfig.ui.icons.copyCheck : appConfig.ui.icons.copy"
             :color="linkCopied ? 'success' : 'neutral'"
             variant="ghost"
             square
@@ -139,7 +139,7 @@ const shareOpen = ref(false)
           <ThemeStudioResetButton variant="outline" vertical />
 
           <UButton
-            :icon="linkCopied ? appConfig.ui.icons.copyCheck : studioIcons.share"
+            :icon="linkCopied ? appConfig.ui.icons.copyCheck : appConfig.ui.icons.copy"
             :color="linkCopied ? 'success' : 'neutral'"
             variant="outline"
             :label="linkCopied ? 'Link copied' : 'Copy link'"

@@ -50,7 +50,7 @@ const hasHeader = computed(() => !!(props.label || props.helpTo || showReset.val
 <template>
   <div :class="[{ 'flex flex-col gap-1': !collapsible }]">
     <div v-if="hasHeader" class="flex items-center gap-0.5" :class="[collapsible ? '-my-1' : '-mt-1']">
-      <span class="flex-1 min-w-0 text-xs/5 font-semibold truncate" :class="[collapsible ? 'text-muted' : 'text-highlighted']">{{ label }}</span>
+      <span class="flex-1 min-w-0 text-xs/5 font-semibold truncate text-highlighted">{{ label }}</span>
 
       <UTooltip v-if="helpTo" text="Docs" ignore-non-keyboard-focus>
         <UButton
