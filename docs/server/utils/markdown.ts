@@ -19,26 +19,38 @@ function backticks(text: string, minimum: number): string {
   return '`'.repeat(Math.max(minimum - 1, ...runs) + 1)
 }
 
+// GFM reads `\|` as a pipe anywhere in a cell, code spans included, while
+// every other backslash inside a code span stays literal. So plain text gets
+// both characters escaped and a code span only its pipes, joined rather than
+// replaced so a literal backslash is never doubled there.
+function escapeText(text: string): string {
+  return text.replace(/[\\|]/g, '\\$&')
+}
+
+function escapePipes(text: string): string {
+  return text.split('|').join('\\|')
+}
+
 /** Renders the inline nodes a table cell can hold to markdown. */
 function inlineMarkdown(node: any): string {
-  if (typeof node === 'string') return node
+  if (typeof node === 'string') return escapeText(node)
   const [tag, attrs = {}, ...children] = node
   const inner = () => children.map(inlineMarkdown).join('')
 
   switch (tag) {
     case 'code': {
-      const text = textContent(node)
+      const text = escapePipes(textContent(node))
       const fence = backticks(text, 1)
       // A space keeps a leading or trailing backtick apart from the fence.
       return /^`|`$/.test(text) ? `${fence} ${text} ${fence}` : `${fence}${text}${fence}`
     }
-    case 'a': return `[${inner()}](${attrs.href})`
+    case 'a': return `[${inner()}](${escapePipes(String(attrs.href ?? ''))})`
     case 'strong':
     case 'b': return `**${inner()}**`
     case 'em':
     case 'i': return `*${inner()}*`
     case 'del': return `~~${inner()}~~`
-    case 'img': return `![${attrs.alt || ''}](${attrs.src})`
+    case 'img': return `![${escapeText(String(attrs.alt ?? ''))}](${escapePipes(String(attrs.src ?? ''))})`
     // The one line break a pipe cell can hold.
     case 'br': return '<br>'
     default: return inner()
@@ -46,7 +58,7 @@ function inlineMarkdown(node: any): string {
 }
 
 function cell(node: any): string {
-  return inlineMarkdown(node).replace(/\s+/g, ' ').replace(/\|/g, '\\|').trim()
+  return inlineMarkdown(node).replace(/\s+/g, ' ').trim()
 }
 
 /** A `table` node as a GFM pipe table, the first row serving as header. */
