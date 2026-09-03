@@ -76,16 +76,16 @@ export interface ThemeStudioViewTab {
 const templateImage = (name: string) => `/assets/templates/nuxt/${name}`
 
 export const THEME_STUDIO_VIEWS: ThemeStudioViewTab[] = [
-  { label: 'Components', value: 'grid', description: 'Every themed component at a glance, the component wall.' },
-  { label: 'Dashboard', value: 'dashboard', description: 'Multi-column admin interface with multiple views.', image: templateImage('dashboard') },
-  { label: 'Chat', value: 'chat', description: 'An AI chatbot with sidebar history and streaming replies.', image: templateImage('chat') },
-  { label: 'SaaS', value: 'saas', description: 'A SaaS home with hero, pricing and feature sections.', image: templateImage('saas') },
-  { label: 'Landing', value: 'landing', description: 'A modern marketing landing page.', image: templateImage('landing') },
-  { label: 'Docs', value: 'docs', description: 'Navigation, prose, code and TOC.', image: templateImage('docs') },
-  { label: 'Portfolio', value: 'portfolio', description: 'A personal portfolio with work, blog and testimonials.', image: templateImage('portfolio') },
-  { label: 'Changelog', value: 'changelog', description: 'Release notes with sticky intro and version timeline.', image: templateImage('changelog') },
+  { label: 'Components', value: 'grid', description: 'Every component on one wall, in the theme as it stands.' },
+  { label: 'Landing', value: 'landing', description: 'Hero, features, pricing, testimonials and FAQ.', image: templateImage('landing') },
+  { label: 'Docs', value: 'docs', description: 'Sidebar navigation, prose, code blocks and a table of contents.', image: templateImage('docs') },
+  { label: 'SaaS', value: 'saas', description: 'A product site: landing, pricing, docs and blog.', image: templateImage('saas') },
+  { label: 'Portfolio', value: 'portfolio', description: 'Projects, blog, speaking and an about page.', image: templateImage('portfolio') },
+  { label: 'Dashboard', value: 'dashboard', description: 'A multi-column admin: tables, charts and date pickers.', image: templateImage('dashboard') },
+  { label: 'Chat', value: 'chat', description: 'An AI chat with conversation history and streaming replies.', image: templateImage('chat') },
+  { label: 'Changelog', value: 'changelog', description: 'Release notes on a version timeline.', image: templateImage('changelog') },
   { label: 'Editor', value: 'editor', description: 'A rich text editor with toolbar, slash menu and drag handles.', image: templateImage('editor') },
-  { label: 'A11y', value: 'a11y', description: 'Contrast matrix for every token pair in the theme.' }
+  { label: 'A11y', value: 'a11y', description: 'WCAG contrast for every text and surface pair.' }
 ]
 
 /* ------------------------------------------------------------- sections -- */

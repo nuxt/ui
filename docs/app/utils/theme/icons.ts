@@ -416,7 +416,9 @@ export const studioIcons = {
   radius: 'i-lucide-square-round-corner',
   dice: 'i-lucide-dices',
   // view switcher, keyed by ThemeStudioView
-  grid: 'i-lucide-layout-grid',
+  // blocks, not a grid: the wall's tiles are components, and the dashboard
+  // view already owns the grid glyph
+  grid: 'i-lucide-blocks',
   dashboard: 'i-lucide-layout-dashboard',
   chat: 'i-lucide-message-circle',
   saas: 'i-lucide-rocket',
@@ -588,7 +590,7 @@ export const studioIconOverrides: Partial<Record<ThemeIcons, Partial<Record<Stud
     text: 'i-pixelarticons-text-add',
     radius: 'i-pixelarticons-card',
     dice: 'i-pixelarticons-dice',
-    grid: 'i-pixelarticons-dashboard',
+    grid: 'i-pixelarticons-card-stack',
     dashboard: 'i-pixelarticons-dashboard',
     chat: 'i-pixelarticons-message',
     saas: 'i-pixelarticons-zap',
