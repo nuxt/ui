@@ -152,12 +152,6 @@ export function readStoredTheme(): StoredTheme {
     }
     const parsed = JSON.parse(raw)
     if (!parsed || typeof parsed !== 'object') return {}
-    // Interim shape from this key's first iteration, where the family was
-    // still a bare string beside a `fontPrefs` object.
-    if (typeof parsed.font === 'string' || parsed.fontPrefs) {
-      parsed.font = { ...parsed.fontPrefs, ...(typeof parsed.font === 'string' ? { sans: parsed.font } : {}) }
-      Reflect.deleteProperty(parsed, 'fontPrefs')
-    }
     parsed.font = normalizeFont(parsed.font)
     return parsed as StoredTheme
   } catch {

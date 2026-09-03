@@ -18,12 +18,10 @@ const props = withDefaults(defineProps<{
   /** Palette the stops resolve against. */
   chip?: string
   ladder?: readonly ShadeStop[]
-  showRows?: boolean
 }>(), {
   // an empty record rather than undefined: a `?? {}` in the v-for widens the
   // item to never, and a Partial makes every row possibly-undefined
   sliders: () => ({}) as Record<'light' | 'dark', ShadeSlider>,
-  showRows: true,
   ladder: () => SHADE_LADDER
 })
 
@@ -43,11 +41,8 @@ function reset() {
     :reset-dirty="dirty"
     @reset="reset"
   >
-    <slot />
-
     <ThemeStudioRow
       v-for="(slider, mode) in sliders"
-      v-show="showRows"
       :key="mode"
       v-model="slider.model.value"
       control="shade"

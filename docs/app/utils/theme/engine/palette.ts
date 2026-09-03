@@ -163,41 +163,6 @@ export function parseCssColor(value: string): string | undefined {
   return color ? formatOklch(color) : undefined
 }
 
-/**
- * Composite `color` at `alpha` over `backdrop`, what the browser paints for
- * `bg-primary/10`. Blends in gamma-encoded sRGB (not linear) to match the
- * rendered pixel. Undefined when either input is unparseable.
- */
-export function blendColors(color: string, backdrop: string, alpha: number): string | undefined {
-  const fg = parseColor(color)
-  const bg = parseColor(backdrop)
-  if (!fg || !bg) return undefined
-
-  const top = oklchToRgb(clampToGamut(fg))
-  const under = oklchToRgb(clampToGamut(bg))
-  return rgbToHex(top.map((channel, i) => channel * alpha + under[i]! * (1 - alpha)) as [number, number, number])
-}
-
-/** WCAG 2.x relative luminance, linear RGB is exactly what the formula wants. */
-function luminance(color: Oklch): number {
-  const [r, g, b] = oklchToLinearRgb(clampToGamut(color)).map(channel => Math.min(1, Math.max(0, channel))) as [number, number, number]
-  return 0.2126 * r + 0.7152 * g + 0.0722 * b
-}
-
-/**
- * WCAG 2.x contrast ratio between two CSS colors, 1–21. `null` when either
- * input is unparseable, unknown, not a fabricated ratio.
- */
-export function contrastRatio(colorA: string, colorB: string): number | null {
-  const a = parseColor(colorA)
-  const b = parseColor(colorB)
-  if (!a || !b) return null
-  const la = luminance(a)
-  const lb = luminance(b)
-  const [lighter, darker] = la > lb ? [la, lb] : [lb, la]
-  return (lighter + 0.05) / (darker + 0.05)
-}
-
 /* -------------------------------------------------------------- ramps -- */
 
 /**
