@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest'
 import { getEstimateSize } from '../../src/runtime/utils/virtualizer'
 
 describe('getEstimateSize', () => {
-  it('returns the size matching the theme size', () => {
+  it('returns the height for each built-in size', () => {
     expect(getEstimateSize([{ label: 'foo' }], 'xs')(0)).toBe(24)
     expect(getEstimateSize([{ label: 'foo' }], 'xl')(0)).toBe(40)
   })
