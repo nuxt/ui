@@ -13,7 +13,7 @@ const { links } = useFooter()
       </NuxtLink>
     </template>
 
-    <UNavigationMenu :items="links" variant="link" color="neutral" />
+    <UNavigationMenu :items="links" variant="link" color="neutral" :ui="{ list: 'flex-wrap justify-center' }" />
 
     <template #right>
       <UButton
