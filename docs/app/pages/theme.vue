@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useClipboard } from '@vueuse/core'
-import { decodeThemeDoc, encodeThemeDoc } from '../utils/theme/link'
+import { decodeThemeDoc, encodeThemeDoc, isSameDoc } from '../utils/theme/link'
 
 const { track } = useAnalytics()
 const appConfig = useAppConfig()
@@ -8,16 +8,30 @@ const { icon: iconSet, currentDoc } = useTheme()
 
 const { copy: copyLink, copied: linkCopied } = useClipboard()
 
-function shareTheme() {
-  copyLink(`${window.location.origin}${window.location.pathname}#${encodeThemeDoc(currentDoc())}`)
-  track('Theme Exported', { type: 'Link' })
+const { open: chatOpen } = useChat()
+
+function toggleChat() {
+  if (!chatOpen.value) {
+    track('AI Chat Opened', { source: 'header' })
+  }
+  chatOpen.value = !chatOpen.value
 }
 
 // The chrome skins to the applied icon pack.
 const studioIcons = useStudioIcons()
 
-const { view, views, applyDoc } = useThemeStudio()
+const { view, views, applyDoc, applyPreset, presets, activePreset } = useThemeStudio()
 const { past, future, undo, redo } = useThemeStudioHistory({ record: true })
+
+async function shareTheme() {
+  const doc = currentDoc()
+  const preset = presets.find(entry => entry.id === activePreset.value)
+  // the id only when nothing has been touched since, so a tweak still travels whole
+  const payload = preset && isSameDoc(doc, preset.doc) ? { version: 1 as const, preset: preset.id } : doc
+
+  copyLink(`${window.location.origin}${window.location.pathname}#${await encodeThemeDoc(payload)}`)
+  track('Theme Exported', { type: 'Link' })
+}
 
 // The preview mirrors into ?view=, so a reload (or a shared link) lands on
 // the same page. Read during setup rather than on mount: the server renders
@@ -39,14 +53,22 @@ onMounted(() => {
 
 // A theme travels in the hash, so a link carries the whole document without a
 // server. Consumed on arrival, or the URL would keep re-applying it; anything
-// that isn't a theme is left alone.
-onMounted(() => {
-  const doc = decodeThemeDoc(window.location.hash.slice(1))
-  if (!doc) return
+// that isn't a theme is left alone. On nuxt-ready, not on mount: the plugin
+// restores the stored theme on the same hook, and a link has to outlive it.
+onNuxtReady(async () => {
+  const link = await decodeThemeDoc(window.location.hash.slice(1))
+  if (!link) return
 
-  applyDoc(doc)
-  track('Theme Link Applied')
+  // consumed either way: a link naming a preset that no longer exists should
+  // not sit in the URL looking like it will still apply
   window.history.replaceState(null, '', window.location.pathname + window.location.search)
+
+  const preset = link.preset ? presets.find(entry => entry.id === link.preset) : undefined
+  if (link.preset && !preset) return
+
+  if (preset) applyPreset(preset)
+  else applyDoc(link)
+  track('Theme Link Applied')
 })
 
 // The studio's preview is a card floating on a recessed canvas, which is the
@@ -93,22 +115,37 @@ const shareOpen = ref(false)
           <ThemeStudioColorModeTabs data-keep-panels class="shrink-0" />
         </UTooltip>
 
-        <UTooltip :text="linkCopied ? 'Link copied' : 'Copy link to this theme'">
+        <UTooltip text="Ask AI" :kbds="['meta', 'I']" ignore-non-keyboard-focus>
           <UButton
-            :icon="linkCopied ? appConfig.ui.icons.copyCheck : appConfig.ui.icons.copy"
-            :color="linkCopied ? 'primary' : 'neutral'"
+            color="neutral"
             variant="soft"
-            :aria-label="linkCopied ? 'Link copied' : 'Copy link to this theme'"
-            @click="shareTheme"
+            label="Ask AI"
+            aria-label="Ask AI for help"
+            class="hidden lg:inline-flex"
+            @click="toggleChat"
           />
         </UTooltip>
 
-        <UButton
-          color="neutral"
-          label="Export"
-          class="hidden lg:inline-flex"
-          @click="shareOpen = true"
-        />
+        <UFieldGroup>
+          <UTooltip :text="linkCopied ? 'Link copied' : 'Copy link to this theme'">
+            <UButton
+              :icon="linkCopied ? appConfig.ui.icons.copyCheck : appConfig.ui.icons.copy"
+              :color="linkCopied ? 'primary' : 'neutral'"
+              variant="subtle"
+              :aria-label="linkCopied ? 'Link copied' : 'Copy link to this theme'"
+              class="hidden lg:inline-flex z-1"
+              @click="shareTheme"
+            />
+          </UTooltip>
+
+          <UButton
+            color="neutral"
+            variant="outline"
+            label="Export theme"
+            class="hidden lg:inline-flex"
+            @click="shareOpen = true"
+          />
+        </UFieldGroup>
       </template>
 
       <template #toggle="{ open, toggle, ui }">
