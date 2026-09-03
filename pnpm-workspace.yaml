@@ -44,4 +44,4 @@ allowBuilds:
   vue-demi: false
 
 minimumReleaseAgeExclude:
-  - 'nuxt-agent-discovery@0.3.0'
+  - 'nuxt-agent-discovery@0.4.0'
