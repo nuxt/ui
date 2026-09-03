@@ -601,9 +601,9 @@ export const studioIconOverrides: Partial<Record<ThemeIcons, Partial<Record<Stud
   // Pixel has no settings cog (sliders stands in), no pie chart (generic
   // chart), no up-down chevron (sort), and no rocket/panels/newspaper/
   // accessibility glyphs, so SaaS→zap, Landing→layout, Changelog→article and
-  // A11y→human stand in for the views. The demo content borrows a few more:
-  // radar→target, layers→blocks, activity→analytics, component→shapes, and for
-  // the portfolio marquee mountain→map, bike→ship, ferris wheel→balloon.
+  // A11y→human stand in for the views. The demo content borrows more, most of
+  // them obvious in the table below; the portfolio marquee is not (mountain→map,
+  // bike→ship, ferris wheel→balloon).
   pixelarticons: {
     undo: 'i-pixelarticons-undo',
     redo: 'i-pixelarticons-redo',
