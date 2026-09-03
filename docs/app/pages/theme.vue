@@ -58,7 +58,7 @@ const shareOpen = ref(false)
   <main class="max-w-(--ui-container) mx-auto">
     <!-- `modal: false` so the panels' popovers, portalled to the body, stay
          interactive over the fullscreen menu -->
-    <UHeader :menu="{ modal: false }" :ui="{ root: () => 'h-(--ui-header-height) border-b border-transparent', right: 'gap-0.5 lg:gap-1.5' }">
+    <UHeader :menu="{ modal: false }" :ui="{ root: () => 'h-(--ui-header-height) border-b border-transparent' }">
       <template #left>
         <HeaderLogo />
       </template>
@@ -81,6 +81,7 @@ const shareOpen = ref(false)
       <template #toggle="{ open, toggle, ui }">
         <HeaderToggleButton
           :open="open"
+          variant="soft"
           :class="ui.toggle({ toggleSide: 'right' })"
           @click="toggle"
         />
@@ -112,7 +113,7 @@ const shareOpen = ref(false)
       </template>
     </UHeader>
 
-    <div class="flex flex-col bg-default rounded-xl overflow-hidden shadow ring ring-default h-[calc(100dvh-var(--ui-header-height)-0.5rem)] lg:h-[calc(100dvh-var(--ui-header-height)-var(--ui-header-height))] mx-2">
+    <div class="flex flex-col bg-default rounded-xl overflow-hidden shadow ring ring-default h-[calc(100dvh-var(--ui-header-height)-0.5rem)] lg:h-[calc(100dvh-var(--ui-header-height)-var(--ui-header-height)-0.5rem)] mx-2">
       <!-- [contain:paint]: Chromium won't clip nested composited layers by
              an ancestor's overflow alone. Keyed on the icon pack: demo views
              resolve icons at setup, so a pack swap remounts to re-resolve. -->
@@ -129,13 +130,13 @@ const shareOpen = ref(false)
       </div>
     </div>
 
-    <UFooter class="hidden lg:block" :ui="{ container: 'py-2 lg:py-4', left: 'mt-0', right: 'mt-0' }">
+    <UFooter class="hidden lg:block ring ring-default rounded-xl bg-default mx-2 mt-2" :ui="{ container: 'py-3! px-6! overflow-x-auto', left: 'mt-0 gap-0 lg:flex-none', right: 'mt-0' }">
       <template #left>
         <UTooltip text="Undo" :kbds="['meta', 'Z']">
           <UButton
             :icon="studioIcons.undo"
             color="neutral"
-            variant="soft"
+            variant="ghost"
             :disabled="!past.length"
             aria-label="Undo theme change"
             @click="undo"
@@ -146,12 +147,14 @@ const shareOpen = ref(false)
           <UButton
             :icon="studioIcons.redo"
             color="neutral"
-            variant="soft"
+            variant="ghost"
             :disabled="!future.length"
             aria-label="Redo theme change"
             @click="redo"
           />
         </UTooltip>
+
+        <USeparator orientation="vertical" class="h-auto self-stretch py-1 ms-3 me-1.5" />
       </template>
 
       <ThemeStudioToolbar />
