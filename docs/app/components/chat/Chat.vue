@@ -236,6 +236,7 @@ function clearMessages() {
     rail
     :style="{ '--sidebar-width': '24rem' }"
     :ui="{ footer: 'p-0', actions: 'gap-0.5' }"
+    class="bg-default"
   >
     <template #actions>
       <!-- a plain full reset, not the studio's two-stage baseline reset: the
