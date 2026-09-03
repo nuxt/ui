@@ -3,9 +3,17 @@ const route = useRoute()
 const { desktopLinks } = useHeader()
 const { open } = useChat()
 const { track } = useAnalytics()
-// The Ask-AI button skins to the applied icon pack, like the rest of the
-// studio chrome (the theme applies site-wide, so this stays consistent).
 const studioIcons = useStudioIcons()
+const extraStudioIcons = useStudioExtraIcons()
+
+// The module route caches nuxt.com's stats for an hour, only the star count
+// rides the payload (the full response carries the team and contributors).
+const { data: stars } = await useFetch('/api/module.json', {
+  key: 'github-stars',
+  transform: module => module?.stats?.stars ?? 0
+})
+const { format } = Intl.NumberFormat('en', { notation: 'compact', maximumFractionDigits: 1 })
+const starsLabel = computed(() => (stars.value ? format(stars.value).toLowerCase() : undefined))
 
 function toggleChat() {
   if (!open.value) {
@@ -25,38 +33,45 @@ function toggleChat() {
   >
     <template #left>
       <HeaderLogo />
+
+      <VersionMenu />
     </template>
 
     <UNavigationMenu :items="desktopLinks" variant="link" content-orientation="vertical" />
 
     <template #right>
-      <UTheme :props="{ button: { size: 'sm' } }">
+      <UTheme>
+        <ThemeStudioPresetPicker />
+
         <UTooltip text="Search" :kbds="['meta', 'K']" ignore-non-keyboard-focus>
-          <UContentSearchButton :collapsed="false" variant="soft" class="min-w-40" />
+          <UContentSearchButton :collapsed="false" :kbds="[]" variant="soft" class="min-w-40" />
         </UTooltip>
 
-        <ThemeStudioPresetPicker />
+        <USeparator orientation="vertical" class="self-stretch h-auto" />
 
         <UTooltip text="Open on GitHub" class="hidden lg:flex">
           <UButton
             color="neutral"
             variant="soft"
-            label="7k+"
+            :label="starsLabel"
             to="https://github.com/nuxt/ui"
             target="_blank"
-            icon="i-simple-icons-github"
-            aria-label="GitHub"
+            :icon="extraStudioIcons.github"
+            aria-label="Open on GitHub"
           />
         </UTooltip>
 
-        <!-- <UTooltip text="Ask AI" :kbds="['meta', 'I']" ignore-non-keyboard-focus>
+        <USeparator orientation="vertical" class="self-stretch h-auto" />
+
+        <UTooltip text="Ask AI" :kbds="['meta', 'I']" ignore-non-keyboard-focus>
           <UButton
+            :icon="studioIcons.assistant"
             color="neutral"
-            variant="soft"
+            variant="outline"
             label="Ask AI"
             @click="toggleChat"
           />
-        </UTooltip> -->
+        </UTooltip>
       </UTheme>
     </template>
 

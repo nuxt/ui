@@ -3,8 +3,8 @@ export function useHeader() {
 
   const desktopLinks = computed(() => [{
     label: 'Docs',
-    to: '/docs',
-    active: route.path.startsWith('/docs/')
+    to: '/docs/getting-started',
+    active: route.path.startsWith('/docs/getting-started')
   }, {
     label: 'Components',
     to: '/docs/components',

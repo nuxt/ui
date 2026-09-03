@@ -65,9 +65,11 @@ useSeoMeta({
         The Intuitive <span class="text-primary">Vue UI Library</span>
       </template>
 
-      <UScrollArea shadow>
+      <div class="relative isolate">
+        <div aria-hidden="true" class="absolute inset-0 -z-10 rounded-xl border border-default bg-elevated/50 mask-b-from-50%" />
+
         <Playground />
-      </UScrollArea>
+      </div>
     </UPageHero>
   </main>
 </template>
