@@ -60,10 +60,12 @@ watch(open, async (isOpen) => {
       <div class="flex flex-col gap-4">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <div v-for="pane in panes" :key="pane.key" class="min-w-0">
+            <!-- A fixed pane height: the files and the highlighter both land
+                 after the modal paints, a box that sized to them would jump. -->
             <ProsePre
               :filename="pane.filename"
               :code="pane.code"
-              :ui="{ root: 'my-0 h-full flex flex-col', base: 'grow max-h-96 whitespace-pre text-xs/5' }"
+              :ui="{ root: 'my-0', base: 'h-96 whitespace-pre text-xs/5' }"
               @click.capture="onCopyCapture(pane.key, $event)"
             >
               <!-- eslint-disable-next-line vue/no-v-html -- shiki output over our own generated files -->
