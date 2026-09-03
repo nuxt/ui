@@ -1,4 +1,4 @@
-import { SITE_URL } from './site'
+import { textContent } from 'minimark'
 
 /**
  * Markdown builders for what `minimark/stringify` cannot express in its
@@ -6,62 +6,61 @@ import { SITE_URL } from './site'
  * comes out as HTML, and its `pre` handler always opens a three-backtick
  * fence, which code carrying fences of its own breaks out of. Both return a
  * string to drop into the tree as a paragraph, which the stringifier passes
- * through untouched.
+ * through untouched. Links stay as written: `nuxt-agent-discovery` absolutizes
+ * the stringified document afterwards, table rows included.
  */
 
-type Node = string | [string, Record<string, any>, ...Node[]]
-
-function textContent(node: Node): string {
-  if (typeof node === 'string') return node
-  return node.slice(2).map(child => textContent(child as Node)).join('')
-}
-
-// The tree is absolutized by `nuxt-agent-discovery` after the hook, which a
-// pre-rendered string escapes, so links are resolved here the same way.
-function absolutize(url: unknown): string {
-  const value = String(url ?? '')
-  return value.startsWith('/') && !value.startsWith('//') ? `${SITE_URL}${value}` : value
+/**
+ * A backtick run that cannot be closed early by the text: one longer than
+ * any run of `minimum` or more backticks inside it, and at least `minimum`.
+ */
+function backticks(text: string, minimum: number): string {
+  const runs = Array.from(text.matchAll(new RegExp(`\`{${minimum},}`, 'g')), match => match[0].length)
+  return '`'.repeat(Math.max(minimum - 1, ...runs) + 1)
 }
 
 /** Renders the inline nodes a table cell can hold to markdown. */
-export function inlineMarkdown(node: Node): string {
+function inlineMarkdown(node: any): string {
   if (typeof node === 'string') return node
   const [tag, attrs = {}, ...children] = node
-  const inner = () => children.map(child => inlineMarkdown(child as Node)).join('')
+  const inner = () => children.map(inlineMarkdown).join('')
 
   switch (tag) {
-    case 'code': return `\`${textContent(node)}\``
-    case 'a': return `[${inner()}](${absolutize(attrs.href)})`
+    case 'code': {
+      const text = textContent(node)
+      const fence = backticks(text, 1)
+      // A space keeps a leading or trailing backtick apart from the fence.
+      return /^`|`$/.test(text) ? `${fence} ${text} ${fence}` : `${fence}${text}${fence}`
+    }
+    case 'a': return `[${inner()}](${attrs.href})`
     case 'strong':
     case 'b': return `**${inner()}**`
     case 'em':
     case 'i': return `*${inner()}*`
     case 'del': return `~~${inner()}~~`
-    case 'img': return `![${attrs.alt || ''}](${absolutize(attrs.src)})`
-    case 'br': return ' '
+    case 'img': return `![${attrs.alt || ''}](${attrs.src})`
+    // The one line break a pipe cell can hold.
+    case 'br': return '<br>'
     default: return inner()
   }
 }
 
-function cell(node: Node): string {
-  const content = typeof node === 'string' ? node : node.slice(2).map(child => inlineMarkdown(child as Node)).join('')
-  return content.replace(/\s+/g, ' ').replace(/\|/g, '\\|').trim()
+function cell(node: any): string {
+  return inlineMarkdown(node).replace(/\s+/g, ' ').replace(/\|/g, '\\|').trim()
 }
 
 /** A `table` node as a GFM pipe table, the first row serving as header. */
-export function pipeTable(table: Node): string {
+export function pipeTable(table: any[]): string {
   const rows: string[][] = []
-  const collect = (nodes: Node[]) => {
-    for (const node of nodes) {
-      if (!Array.isArray(node)) continue
-      if (node[0] === 'tr') {
-        rows.push(node.slice(2).filter(child => Array.isArray(child)).map(child => cell(child as Node)))
-      } else {
-        collect(node.slice(2) as Node[])
+  for (const section of table.slice(2)) {
+    if (!Array.isArray(section)) continue
+    // Rows sit under `thead` and `tbody`; a bare `tr` is tolerated too.
+    for (const row of section[0] === 'tr' ? [section] : section.slice(2)) {
+      if (Array.isArray(row) && row[0] === 'tr') {
+        rows.push(row.slice(2).filter(child => Array.isArray(child)).map(cell))
       }
     }
   }
-  collect(typeof table === 'string' ? [] : table.slice(2) as Node[])
 
   const [header, ...body] = rows
   if (!header?.length) return ''
@@ -72,9 +71,8 @@ export function pipeTable(table: Node): string {
   return [line(header), line(header.map(() => '---')), ...body.map(line)].join('\n')
 }
 
-/** A fenced code block whose fence is longer than any backtick run inside. */
+/** A fenced code block whose fence is longer than any fence-like run inside. */
 export function fencedBlock(code: string, language = '', filename?: string, meta?: string): string {
-  const longest = Math.max(2, ...Array.from(code.matchAll(/`{3,}/g), match => match[0].length))
-  const fence = '`'.repeat(longest + 1)
+  const fence = backticks(code, 3)
   return `${fence}${language}${filename ? ` [${filename}]` : ''}${meta || ''}\n${code.trim()}\n${fence}`
 }

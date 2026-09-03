@@ -451,7 +451,7 @@ export default defineNuxtConfig({
       title: 'Composables',
       contentCollection: 'docs',
       contentFilters: [
-        { field: 'path', operator: 'LIKE', value: '/docs/composables/%' }
+        { field: 'path', operator: 'LIKE', value: '/docs/composables%' }
       ]
     }, {
       title: 'Typography',
