@@ -23,9 +23,8 @@ export function generateCSS(doc: ThemeDoc): string {
     '@import "@nuxt/ui";'
   ]
 
-  // The faces the doc names have to load from somewhere: the studio pulls
-  // them at runtime (loadFontPreviews), an export has only this file.
-  // The faces this file actually emits, which is not the same as the faces the
+  // The studio loads faces at runtime (loadFontPreviews), an export has only
+  // this file. What it emits is not the same as the faces the
   // doc names: `--font-sans` is skipped when it matches the default (nothing to
   // override), but serif and mono are emitted whatever they are, so the default
   // face still needs importing when it is one of those.
