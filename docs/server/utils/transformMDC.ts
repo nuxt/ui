@@ -2,10 +2,12 @@ import type { H3Event } from 'h3'
 import json5 from 'json5'
 import { camelCase, kebabCase } from 'scule'
 import { visit } from '@nuxt/content/runtime'
+import { textContent } from 'minimark'
 import { queryCollection } from '@nuxt/content/server'
 import * as theme from '../../.nuxt/ui'
 import meta from '#nuxt-component-meta'
 import { compactProps, getDefaultVariants, hasLinkPassthrough, partitionLinkProps } from './componentMeta'
+import { fencedBlock, pipeTable } from './markdown'
 // @ts-expect-error - no types available
 import { getComponentExample } from '#component-example/nitro'
 
@@ -70,6 +72,38 @@ const CAST_TEMPLATES: Record<string, (raw: any) => string> = {
   }
 }
 
+// Readable labels for the keys `useKbd` renders as glyphs or per platform.
+// Anything else (a letter, a digit, `/`) is its own label.
+const KBD_LABELS: Record<string, string> = {
+  meta: 'Meta',
+  cmd: 'Cmd',
+  command: 'Cmd',
+  ctrl: 'Ctrl',
+  control: 'Ctrl',
+  alt: 'Alt',
+  option: 'Option',
+  win: 'Win',
+  shift: 'Shift',
+  enter: 'Enter',
+  escape: 'Esc',
+  backspace: 'Backspace',
+  delete: 'Delete',
+  tab: 'Tab',
+  space: 'Space',
+  capslock: 'CapsLock',
+  pageup: 'PageUp',
+  pagedown: 'PageDown',
+  home: 'Home',
+  end: 'End',
+  arrowup: '↑',
+  arrowdown: '↓',
+  arrowleft: '←',
+  arrowright: '→'
+}
+
+// Inline components with nothing to say in markdown.
+const DROPPED_INLINE = new Set(['icon', 'prose-icon', 'u-color-mode-select'])
+
 const CAST_IMPORTS: Record<string, { name: string, from: string }> = {
   'DateValue': { name: 'CalendarDate', from: '@internationalized/date' },
   'DateValue[]': { name: 'CalendarDate', from: '@internationalized/date' },
@@ -125,6 +159,61 @@ function replaceNodeWithPre(node: any[], language: string, code: string, filenam
   node[0] = 'pre'
   node[1] = { language, code }
   if (filename) node[1].filename = filename
+  // The stringifier reads `code`, so the slot content the node held is dead
+  // weight every later pass would otherwise keep walking.
+  node.length = 2
+}
+
+// A Vue attribute for a template snippet. Bound props arrive as `:key` with
+// a JSON string value, which is re-emitted as a single-quoted object literal
+// so the double quotes of the attribute survive.
+function templateAttribute(key: string, value: unknown): string {
+  const quote = (text: string) => `"${text.replace(/"/g, '&quot;')}"`
+
+  if (key === 'className') {
+    return `class=${quote((Array.isArray(value) ? value : [value]).join(' '))}`
+  }
+  if (typeof value === 'string') {
+    if (key.startsWith(':')) {
+      try {
+        return `${key}=${quote(stringifyValue(json5.parse(value), '\''))}`
+      } catch {
+        // Not JSON: a bound expression, emitted as written.
+      }
+    }
+    return `${key}=${quote(value)}`
+  }
+  if (typeof value === 'object') {
+    return `:${key}=${quote(stringifyValue(value, '\''))}`
+  }
+  return `:${key}="${value}"`
+}
+
+// A paragraph holding ready-made markdown: the stringifier writes a string
+// child as is, so this is how a block it has no handler for gets through.
+function replaceNodeWithMarkdown(node: any[], markdown: string) {
+  node[0] = 'p'
+  node[1] = {}
+  node[2] = markdown
+  node.length = 3
+}
+
+// A preview without a `#code` slot is a component demo written in MDC, so
+// the closest thing to its source is the tree read back as a template.
+function templateSnippet(nodes: any[]): string {
+  return nodes.map((child) => {
+    if (typeof child === 'string') return child
+    if (!Array.isArray(child)) return ''
+
+    const [tag, attrs = {}, ...content] = child
+    const attributes = Object.entries(attrs)
+      .filter(([key, value]) => key !== 'style' && value !== '' && value !== undefined && value !== null)
+      .map(([key, value]) => templateAttribute(key, value))
+    const open = `<${tag}${attributes.length ? ` ${attributes.join(' ')}` : ''}`
+    const inner = templateSnippet(content).trim()
+
+    return inner ? `${open}>\n  ${inner.split('\n').join('\n  ')}\n</${tag}>` : `${open} />`
+  }).filter(Boolean).join('\n')
 }
 
 function visitAndReplace(doc: Document, type: string, handler: (node: any[]) => void) {
@@ -169,9 +258,11 @@ function replaceWithChildren(node: any[], newChildren: any[]) {
   }
 }
 
-function flattenMarkers(node: any): void {
+// `start` is 2 for a `[tag, attrs, ...children]` node and 0 for the root
+// children array, whose first two entries are blocks like any other.
+function flattenMarkers(node: any, start = 2): void {
   if (!Array.isArray(node)) return
-  let i = 2
+  let i = start
   while (i < node.length) {
     const child = node[i]
     if (Array.isArray(child) && (child[0] === '__flatten' || child[0] === 'div')) {
@@ -597,6 +688,25 @@ export async function transformMDC(event: H3Event, doc: Document): Promise<Docum
     node.length = 7
   })
 
+  // Transform code-preview: the `#code` slot holds the literal source, which
+  // is what an agent wants, and the rendered preview is dropped. Without a
+  // code slot the preview itself is the demo, read back as a template. Runs
+  // before the wrappers are unwrapped, since a preview inside `::tabs` would
+  // otherwise be dissolved into its parts and its rendered heading kept.
+  visitAndReplace(doc, 'code-preview', (node) => {
+    const children = node.slice(2)
+    const codeSlot = children.find(child => Array.isArray(child) && child[0] === 'template' && child[1]?.['v-slot:code'] !== undefined)
+
+    if (codeSlot) {
+      replaceWithChildren(node, codeSlot.slice(2))
+      return
+    }
+
+    const preview = children.filter(child => !(Array.isArray(child) && child[0] === 'template'))
+    const snippet = templateSnippet(preview)
+    replaceNodeWithPre(node, 'vue', `<template>\n  ${snippet.split('\n').join('\n  ')}\n</template>`)
+  })
+
   // Transform callout components (tip, note, warning, caution, callout) to blockquotes
   const calloutTypes = ['tip', 'note', 'warning', 'caution', 'callout']
   const calloutLabels: Record<string, string> = {
@@ -678,7 +788,9 @@ export async function transformMDC(event: H3Event, doc: Document): Promise<Docum
 
     const allChildren: any[] = []
     if (title) {
-      allChildren.push(['p', {}, ['strong', {}, title]])
+      // `strong` stringifies to its text alone, so the link has to wrap it.
+      const heading = ['strong', {}, title]
+      allChildren.push(['p', {}, attrs.to ? ['a', { href: attrs.to }, heading] : heading])
     }
     allChildren.push(...collectBlockChildren(content))
 
@@ -797,44 +909,6 @@ export async function transformMDC(event: H3Event, doc: Document): Promise<Docum
     })
   }
 
-  // Transform code-preview to extract the Vue code as a code block
-  visitAndReplace(doc, 'code-preview', (node) => {
-    const children = node.slice(2)
-
-    const extractVueCode = (nodes: any[]): string => {
-      return nodes.map((child: any) => {
-        if (typeof child === 'string') return child
-        if (Array.isArray(child)) {
-          const tag = child[0]
-          const attrs = child[1] || {}
-          const content = child.slice(2)
-          // Build the opening tag
-          let tagStr = `<${tag}`
-          for (const [key, val] of Object.entries(attrs)) {
-            if (key.startsWith(':') || key.startsWith('v-')) {
-              tagStr += ` ${key}=${val}`
-            } else if (typeof val === 'string') {
-              tagStr += ` ${key}=${val}`
-            }
-          }
-          const innerContent = extractVueCode(content)
-          if (innerContent.trim()) {
-            tagStr += `>\n${innerContent}</${tag}>`
-          } else {
-            tagStr += ' />'
-          }
-          return tagStr
-        }
-        return ''
-      }).join('\n')
-    }
-
-    const vueCode = extractVueCode(children).trim()
-    node[0] = 'pre'
-    node[1] = { language: 'vue', code: `<template>\n  ${vueCode.split('\n').join('\n  ')}\n</template>` }
-    node.length = 2
-  })
-
   // Transform icons-theme and icons-theme-select to placeholder
   visitAndReplace(doc, 'icons-theme', (node) => {
     node[0] = 'p'
@@ -876,11 +950,55 @@ export async function transformMDC(event: H3Event, doc: Document): Promise<Docum
     }
   })
 
+  // Inline components with no markdown of their own. A kbd becomes inline
+  // code with a readable label (minimark writes inline HTML on its own lines,
+  // so `<kbd>` is not an option), a styled span is unwrapped to its text, and
+  // a decorative icon or an interactive widget is dropped.
+  visitAndReplace(doc, 'kbd', (node) => {
+    // `:kbd{value="K"}` carries its key as an attribute, `<kbd>K</kbd>` as text.
+    const value = String(node[1]?.value ?? textContent(node as any))
+    node[0] = 'code'
+    node[1] = {}
+    node[2] = KBD_LABELS[value.toLowerCase()] ?? value
+    node.length = 3
+  })
+
+  visitAndReplace(doc, 'span', (node) => {
+    node[0] = '__flatten'
+    node[1] = {}
+  })
+
+  visit(doc.body, (node) => {
+    if (Array.isArray(node) && DROPPED_INLINE.has(node[0])) {
+      node[0] = '__flatten'
+      node[1] = {}
+      node.length = 2
+    }
+    return true
+  }, node => node)
+
+  // minimark has no pipe-table handler and writes every table as HTML, so the
+  // rows are rendered here, each cell reduced to inline markdown. Last of the
+  // inline passes, so a kbd or icon inside a cell has already been reduced.
+  visitAndReplace(doc, 'table', (node) => {
+    replaceNodeWithMarkdown(node, pipeTable(node))
+  })
+
+  // minimark always opens a three-backtick fence, which code holding fences
+  // of its own (the typography pages documenting code blocks) breaks out of.
+  visitAndReplace(doc, 'pre', (node) => {
+    const attrs = node[1] || {}
+    const code = String(attrs.code ?? '')
+    if (code.includes('```')) {
+      replaceNodeWithMarkdown(node, fencedBlock(code, attrs.language, attrs.filename, attrs.meta))
+    }
+  })
+
   // Flatten __flatten markers by splicing their children into parents
   if (Array.isArray(doc.body)) {
-    flattenMarkers(doc.body)
+    flattenMarkers(doc.body, 0)
   } else if (doc.body?.value && Array.isArray(doc.body.value)) {
-    flattenMarkers(doc.body.value)
+    flattenMarkers(doc.body.value, 0)
   }
 
   return doc
