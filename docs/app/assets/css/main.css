@@ -42,18 +42,18 @@
   }
 }
 
-/* The theme studio floats its preview on a canvas recessed BEHIND the card,
-   so the two modes run opposite ways: a step down from white in light, past
-   --ui-bg in dark. Unlayered, to outrank the bg-default utility the Nuxt root
-   carries, and pointed at the neutral ramp so a themed palette reaches it. */
+/* The studio's canvas sits recessed behind the preview card. Mixed off
+   --ui-bg so editing that token moves the canvas too; the weights land the
+   stock theme on neutral-50 / neutral-950. Unlayered, to outrank the
+   bg-default utility the Nuxt root carries. */
 body.theme-studio,
 body.theme-studio #__nuxt {
-  background-color: var(--ui-color-neutral-50);
+  background-color: color-mix(in oklab, var(--ui-bg) 98%, var(--ui-color-neutral-950));
 }
 
 .dark body.theme-studio,
 .dark body.theme-studio #__nuxt {
-  background-color: var(--ui-color-neutral-950);
+  background-color: color-mix(in oklab, var(--ui-bg) 70%, black);
 }
 
 html[data-framework="nuxt"] .vue-only,
