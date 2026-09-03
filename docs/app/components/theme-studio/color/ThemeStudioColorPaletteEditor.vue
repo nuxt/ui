@@ -576,7 +576,7 @@ function resetEffects() {
                         square
                         variant="ghost"
                         :ui="{ leadingIcon: 'size-3' }"
-                        :icon="shadeCopied && copiedShade === swatchDetail.shade ? 'i-lucide-copy-check' : 'i-lucide-copy'"
+                        :icon="shadeCopied && copiedShade === swatchDetail.shade ? appConfig.ui.icons.copyCheck : appConfig.ui.icons.copy"
                         :aria-label="`Copy oklch ${swatchDetail.oklch}`"
                         @click="copySwatch(swatchDetail)"
                       />
@@ -652,7 +652,7 @@ function resetEffects() {
           <div class="flex items-center gap-1">
             <UButton
               label="Modifiers"
-              :icon="modifiersOpen ? 'i-lucide-chevron-down' : 'i-lucide-chevron-right'"
+              :icon="modifiersOpen ? appConfig.ui.icons.chevronDown : appConfig.ui.icons.chevronRight"
               color="neutral"
               variant="ghost"
               size="sm"
@@ -695,7 +695,7 @@ function resetEffects() {
                 v-model="effectAmount"
                 control="slider"
                 label="Effect"
-                icon="i-lucide-eye"
+                :icon="appConfig.ui.icons.eye"
                 :min="0"
                 :max="200"
                 :step="1"

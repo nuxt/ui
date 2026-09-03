@@ -25,8 +25,10 @@ const { data: module } = await useFetch('/api/module.json')
 
 const contributors = computed(() => module.value?.contributors?.filter(contributor => !module.value?.team?.find(user => user.login === contributor.username)))
 
+const studioIcons = useStudioIcons()
+
 const icons = {
-  website: 'i-lucide-link',
+  website: studioIcons.link,
   twitter: 'i-simple-icons-x',
   twitch: 'i-simple-icons-twitch',
   youtube: 'i-simple-icons-youtube',
@@ -118,7 +120,7 @@ const icons = {
               target="_blank"
               color="neutral"
               variant="subtle"
-              icon="i-lucide-heart"
+              :icon="studioIcons.heart"
               label="Sponsor"
               :ui="{ leadingIcon: 'text-pink-500 dark:text-pink-400' }"
             />

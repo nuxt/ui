@@ -70,7 +70,7 @@ const { messages: chatMessages, status, error, sendMessage, regenerate, stop } =
 
     toast.add({
       description: message,
-      icon: 'i-lucide-alert-circle',
+      icon: appConfig.ui.icons.error,
       color: 'error',
       duration: 0
     })
@@ -160,13 +160,13 @@ function getToolIcon(part: ToolPart): string {
   const toolName = getToolName(part)
 
   const iconMap: Record<string, string> = {
-    'get-component': 'i-lucide-file-text',
-    'get-component-metadata': 'i-lucide-file-text',
-    'get-template': 'i-lucide-file-text',
-    'get-documentation-page': 'i-lucide-file-text',
-    'get-migration-guide': 'i-lucide-file-text',
-    'get-example': 'i-lucide-file-text',
-    'getComponentTheme': 'i-lucide-file-text',
+    'get-component': appConfig.ui.icons.file,
+    'get-component-metadata': appConfig.ui.icons.file,
+    'get-template': appConfig.ui.icons.file,
+    'get-documentation-page': appConfig.ui.icons.file,
+    'get-migration-guide': appConfig.ui.icons.file,
+    'get-example': appConfig.ui.icons.file,
+    'getComponentTheme': appConfig.ui.icons.file,
     'getThemeGuide': studioIcons.palette,
     'applyTheme': studioIcons.palette,
     'applyPreset': studioIcons.palette,

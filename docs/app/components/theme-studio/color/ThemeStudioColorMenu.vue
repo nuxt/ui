@@ -58,7 +58,7 @@ function isSelected(color: string) {
       size="sm"
       :label="label"
       block
-      trailing-icon="i-lucide-chevron-down"
+      :trailing-icon="appConfig.ui.icons.chevronDown"
       class="capitalize group"
       :style="swatchColor ? { '--swatch-color': swatchColor } : undefined"
       :ui="{ trailingIcon: 'text-dimmed transition-transform duration-200 group-data-[state=open]:rotate-180' }"

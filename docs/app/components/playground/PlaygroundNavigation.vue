@@ -6,7 +6,7 @@ const studioIcons = useStudioIcons()
 
 const items: NavigationMenuItem[][] = [
   [
-    { label: 'Dashboard', icon: 'i-lucide-layout-dashboard', active: true },
+    { label: 'Dashboard', icon: studioIcons.dashboard, active: true },
     { label: 'Inbox', icon: studioIcons.inbox, badge: '4' },
     { label: 'Projects', icon: appConfig.ui.icons.folder },
     { label: 'Calendar', icon: studioIcons.calendar }

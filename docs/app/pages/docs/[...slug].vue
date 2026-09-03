@@ -116,7 +116,7 @@ const { open, messages } = useChat()
 const studioIcons = useStudioIcons()
 
 const links = computed(() => [{
-  icon: 'i-lucide-file-pen',
+  icon: studioIcons.pencil,
   label: 'Edit this page',
   to: `https://github.com/nuxt/ui/edit/v4/docs/content/${page?.value?.stem}.md`,
   target: '_blank'

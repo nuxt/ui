@@ -35,14 +35,17 @@ const SOLIDS = FOREGROUNDS.slice(5)
 // not the alias against a surface it never touches.
 const VARIANTS = ['solid', 'outline', 'soft', 'subtle', 'ghost', 'link'] as const
 
+const appConfig = useAppConfig()
+const studioIcons = useStudioIcons()
+
 const VARIANT_COLORS: Array<{ key: NonNullable<ButtonProps['color']>, label: string, icon: string }> = [
   { key: 'primary', label: 'Primary', icon: 'i-lucide-rocket' },
-  { key: 'secondary', label: 'Secondary', icon: 'i-lucide-sparkles' },
-  { key: 'success', label: 'Success', icon: 'i-lucide-circle-check' },
-  { key: 'info', label: 'Info', icon: 'i-lucide-info' },
-  { key: 'warning', label: 'Warning', icon: 'i-lucide-triangle-alert' },
-  { key: 'error', label: 'Error', icon: 'i-lucide-circle-x' },
-  { key: 'neutral', label: 'Neutral', icon: 'i-lucide-settings' }
+  { key: 'secondary', label: 'Secondary', icon: studioIcons.sparkles },
+  { key: 'success', label: 'Success', icon: appConfig.ui.icons.success },
+  { key: 'info', label: 'Info', icon: appConfig.ui.icons.info },
+  { key: 'warning', label: 'Warning', icon: appConfig.ui.icons.warning },
+  { key: 'error', label: 'Error', icon: appConfig.ui.icons.error },
+  { key: 'neutral', label: 'Neutral', icon: studioIcons.settings }
 ]
 
 interface Cell {
@@ -125,7 +128,6 @@ function neutralSpecs(styles: CSSStyleDeclaration, page: string, inverted: strin
 // The theme applies through <style> tags useHead swaps asynchronously,
 // recompute a beat after any state that feeds them changes.
 const colorMode = useColorMode()
-const appConfig = useAppConfig()
 // the owning composable's refs, never re-seed these channels here
 const { cssVariablesData, customColorsData } = useTheme()
 

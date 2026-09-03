@@ -32,8 +32,10 @@ const tokenGroups = TOKEN_GROUPS
   .map(group => ({ ...group, sections: sections.filter(section => section.group === group.key) }))
   .filter(group => group.sections.length)
 
+const studioIcons = useStudioIcons()
+
 const editors = [
-  { open: shadeEditor, icon: 'i-lucide-settings-2', tooltip: 'Adjust shades', ariaLabel: `Adjust ${props.alias} shades` },
+  { open: shadeEditor, icon: studioIcons.options, tooltip: 'Adjust shades', ariaLabel: `Adjust ${props.alias} shades` },
   { open: paletteEditor, icon: 'i-lucide-tangent', tooltip: 'Edit palette', ariaLabel: `Edit ${props.alias} palette` }
 ]
 </script>

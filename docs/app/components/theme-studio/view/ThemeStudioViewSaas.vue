@@ -38,7 +38,7 @@ const sections = [{
   }, {
     title: 'TypeScript first',
     description: 'Full TypeScript support with auto-completion, type safety and IntelliSense for every component.',
-    icon: 'i-lucide-code-xml'
+    icon: studioIcons.export
   }]
 }, {
   title: 'Built for modern SaaS',
@@ -66,7 +66,7 @@ const features = [{
 }, {
   title: 'Accessible by default',
   description: 'Built on Reka UI for robust accessibility. WCAG compliant components that work for everyone.',
-  icon: 'i-lucide-accessibility'
+  icon: studioIcons.a11y
 }, {
   title: 'Developer experience',
   description: 'Auto-imports, hot module replacement and comprehensive documentation. Build faster with less friction.',

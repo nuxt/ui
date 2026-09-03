@@ -147,7 +147,7 @@ const bubbleToolbarItems: EditorToolbarItem[][] = [[{
   }, {
     kind: 'paragraph',
     label: 'Paragraph',
-    icon: 'i-lucide-type'
+    icon: studioIcons.text
   }, ...headingItems, ...blockItems]
 }], markItems]
 
@@ -157,7 +157,7 @@ const suggestionItems: EditorSuggestionMenuItem[][] = [[{
 }, {
   kind: 'paragraph',
   label: 'Paragraph',
-  icon: 'i-lucide-type'
+  icon: studioIcons.text
 }, ...headingItems, ...blockItems], [{
   type: 'label',
   label: 'Insert'
@@ -182,7 +182,7 @@ function dragHandleItems(editor: Editor): DropdownMenuItem[][] {
   }, {
     label: 'Turn into',
     icon: 'i-lucide-repeat-2',
-    children: [{ kind: 'paragraph', label: 'Paragraph', icon: 'i-lucide-type' }, ...headingItems, ...blockItems]
+    children: [{ kind: 'paragraph', label: 'Paragraph', icon: studioIcons.text }, ...headingItems, ...blockItems]
   }], [{
     kind: 'duplicate',
     pos,

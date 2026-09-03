@@ -51,6 +51,7 @@ const model = defineModel<any>()
 const emit = defineEmits<{ reset: [] }>()
 
 const studioIcons = useStudioIcons()
+const appConfig = useAppConfig()
 
 const selectedItem = computed(() => props.items?.find(item => item.value === model.value))
 
@@ -144,7 +145,7 @@ const showTextLabel = computed(() => !props.icon && !shade.value)
       <UIcon v-if="icon" :name="icon" class="size-3 text-dimmed" />
 
       <span v-else class="flex items-center gap-2 w-full">
-        <UIcon :name="mode === 'light' ? 'i-lucide-sun' : 'i-lucide-moon'" class="size-3 text-dimmed shrink-0" />
+        <UIcon :name="mode === 'light' ? appConfig.ui.icons.light : appConfig.ui.icons.dark" class="size-3 text-dimmed shrink-0" />
         <span class="size-3 grow rounded-full bg-(--slider-color) ring ring-(--slider-contrast) me-px" />
       </span>
     </template>

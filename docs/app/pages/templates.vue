@@ -1,4 +1,6 @@
 <script setup lang="ts">
+const appConfig = useAppConfig()
+
 const { data: page } = await useAsyncData('templates', () => queryCollection('templates').first())
 if (!page.value) {
   throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
@@ -74,7 +76,7 @@ if (import.meta.server) {
             color="neutral"
             variant="outline"
             icon="i-lucide-square-code"
-            trailing-icon="i-lucide-chevron-down"
+            :trailing-icon="appConfig.ui.icons.chevronDown"
             label="Open on"
             :ui="{
               trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200'
@@ -95,7 +97,7 @@ if (import.meta.server) {
             color="neutral"
             variant="outline"
             icon="i-lucide-cloud"
-            trailing-icon="i-lucide-chevron-down"
+            :trailing-icon="appConfig.ui.icons.chevronDown"
             label="Deploy to"
             :ui="{
               trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200'

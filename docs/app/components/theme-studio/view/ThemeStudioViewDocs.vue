@@ -30,7 +30,7 @@ const navLinks: NavigationMenuItem[] = [{
   type: 'trigger',
   defaultOpen: true,
   children: [
-    { label: 'MCP Server', icon: 'i-lucide-bot' },
+    { label: 'MCP Server', icon: studioIcons.assistant },
     { label: 'LLMs.txt', icon: appConfig.ui.icons.file }
   ]
 }]

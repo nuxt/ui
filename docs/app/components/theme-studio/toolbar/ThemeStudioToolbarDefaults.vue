@@ -112,6 +112,7 @@ const props = defineProps<{
 }>()
 
 const studioIcons = useStudioIcons()
+const appConfig = useAppConfig()
 const { defaultsLabel, groupDirtyFlags } = useThemeStudioToolbar()
 
 const open = ref(false)
@@ -164,7 +165,7 @@ const content = computed(() => [...toolbarPanelClass(props.vertical), 'divide-y 
                 variant="subtle"
                 block
                 icon="i-lucide-layers"
-                trailing-icon="i-lucide-chevron-down"
+                :trailing-icon="appConfig.ui.icons.chevronDown"
                 :aria-label="`Default variant for ${field.label.toLowerCase()}`"
                 class="group"
                 :ui="{
