@@ -172,7 +172,7 @@ export default defineAppConfig({
       // Title of the bottom table of contents
       title: 'Community',
       // URL of your repository content folder
-      edit: 'https://github.com/nuxt-ui-pro/docs/edit/main/content',
+      edit: 'https://github.com/nuxt-ui-templates/docs/edit/main/content',
       links: [{
         icon: 'i-lucide-star',
         label: 'Star on GitHub',

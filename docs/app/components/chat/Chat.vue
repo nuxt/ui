@@ -140,8 +140,8 @@ function getToolMessage(state: ToolState, toolName: string, input: Record<string
     'getComponentTheme': `${readVerb} ${upperName(input.componentName || '')} theme`,
     'getThemeGuide': `${readVerb} theme guide`,
     'applyTheme': `${applyVerb} theme changes`,
-    // the preset's own name, upperName is for camelCase component ids and
-    // would render 'nuxt-ui' as 'NuxtUi'
+    // a preset carries its own display name; upperName is for camelCase
+    // component ids and would mangle a hyphenated one
     'applyPreset': `${applyVerb} ${presets.find(preset => preset.id === input.preset)?.name ?? input.preset} preset`,
     'resetTheme': `${state === 'output-available' ? 'Reset' : 'Resetting'} theme to defaults`
   }[toolName] || `${searchVerb} ${toolName}`

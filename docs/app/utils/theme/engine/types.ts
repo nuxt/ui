@@ -15,7 +15,7 @@ import colors from 'tailwindcss/colors'
  * tables rather than the presets so entry-chunk code (the header trigger)
  * can name it without pulling the preset docs in.
  */
-export const DEFAULT_PRESET_ID = 'nuxt-ui'
+export const DEFAULT_PRESET_ID = 'default'
 
 /* --------------------------------------------------------------- shades -- */
 

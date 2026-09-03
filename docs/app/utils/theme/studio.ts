@@ -94,18 +94,18 @@ export const THEME_STUDIO_VIEWS: ThemeStudioViewTab[] = [
  * into its chunk.
  */
 export const PRESET_ICONS: Record<string, string> = {
-  'nuxt-ui': 'i-simple-icons-nuxt',
-  'mono': 'i-lucide-contrast',
-  'cobalt': 'i-lucide-gem',
-  'sky': 'i-lucide-cloud-sun',
-  'mint': 'i-lucide-leaf',
-  'iris': 'i-lucide-flower',
-  'crimson': 'i-lucide-clapperboard',
-  'coral': 'i-lucide-shell',
-  'sunset': 'i-lucide-sunset',
-  'carbon': 'i-lucide-zap',
-  'bubblegum': 'i-lucide-candy',
-  'parchment': 'i-lucide-scroll-text'
+  default: 'i-simple-icons-nuxt',
+  mono: 'i-lucide-contrast',
+  cobalt: 'i-lucide-gem',
+  sky: 'i-lucide-cloud-sun',
+  mint: 'i-lucide-leaf',
+  iris: 'i-lucide-flower',
+  crimson: 'i-lucide-clapperboard',
+  coral: 'i-lucide-shell',
+  sunset: 'i-lucide-sunset',
+  carbon: 'i-lucide-zap',
+  bubblegum: 'i-lucide-candy',
+  parchment: 'i-lucide-scroll-text'
 }
 
 /**

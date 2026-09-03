@@ -34,9 +34,15 @@ const modified = computed(() => Object.values(groupDirtyFlags).some(flag => flag
 const primaryDirty = sectionDirty('primary')
 const neutralDirty = sectionDirty('neutral')
 
-/** A preset's glyph; the stock theme and a custom one wear the studio's palette. */
-const presetIcon = (id?: string) => (id && id !== DEFAULT_PRESET_ID && PRESET_ICONS[id]) || studioIcons.palette
-const triggerIcon = computed(() => presetIcon(preset.value?.id))
+/** A preset's glyph in the menu; a custom theme wears the studio's palette. */
+const presetIcon = (id?: string) => (id && PRESET_ICONS[id]) || studioIcons.palette
+
+// The trigger keeps the palette for the stock theme: the header button stands
+// for the theme picker, and a Nuxt mark there would read as a Nuxt link.
+const triggerIcon = computed(() => {
+  const id = preset.value?.id
+  return (id && id !== DEFAULT_PRESET_ID && PRESET_ICONS[id]) || studioIcons.palette
+})
 
 /** A palette's swatch, through the ramp name the docs expose it under. */
 const swatch = (palette: string) => `var(--color-${rampCssName(palette)}-500)`
