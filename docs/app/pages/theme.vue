@@ -1,8 +1,17 @@
 <script setup lang="ts">
-import { decodeThemeDoc, THEME_LINK_PREFIX } from '../utils/theme/link'
+import { useClipboard } from '@vueuse/core'
+import { decodeThemeDoc, encodeThemeDoc, THEME_LINK_PREFIX } from '../utils/theme/link'
 
 const { track } = useAnalytics()
-const { icon: iconSet } = useTheme()
+const appConfig = useAppConfig()
+const { icon: iconSet, currentDoc } = useTheme()
+
+const { copy: copyLink, copied: linkCopied } = useClipboard()
+
+function shareTheme() {
+  copyLink(`${window.location.origin}${window.location.pathname}${THEME_LINK_PREFIX}${encodeThemeDoc(currentDoc())}`)
+  track('Theme Exported', { type: 'Link' })
+}
 
 // The chrome skins to the applied icon pack.
 const studioIcons = useStudioIcons()
@@ -85,6 +94,18 @@ const shareOpen = ref(false)
           <ThemeStudioColorModeTabs data-keep-panels class="shrink-0" />
         </UTooltip>
 
+        <UTooltip :text="linkCopied ? 'Link copied' : 'Copy link to this theme'">
+          <UButton
+            :icon="linkCopied ? appConfig.ui.icons.copyCheck : studioIcons.share"
+            :color="linkCopied ? 'success' : 'neutral'"
+            variant="ghost"
+            square
+            class="hidden lg:inline-flex"
+            :aria-label="linkCopied ? 'Link copied' : 'Copy link to this theme'"
+            @click="shareTheme"
+          />
+        </UTooltip>
+
         <UButton
           color="neutral"
           label="Export"
@@ -116,6 +137,15 @@ const shareOpen = ref(false)
 
           <ThemeStudioShuffleButton variant="outline" vertical />
           <ThemeStudioResetButton variant="outline" vertical />
+
+          <UButton
+            :icon="linkCopied ? appConfig.ui.icons.copyCheck : studioIcons.share"
+            :color="linkCopied ? 'success' : 'neutral'"
+            variant="outline"
+            :label="linkCopied ? 'Link copied' : 'Copy link'"
+            block
+            @click="shareTheme"
+          />
 
           <UButton
             :icon="studioIcons.export"
