@@ -71,32 +71,32 @@ export interface CarouselProps<T extends CarouselItem = CarouselItem> extends Om
   items?: T[]
   /**
    * Enable Autoplay plugin
-   * @see https://www.embla-carousel.com/plugins/autoplay/
+   * @see https://www.embla-carousel.com/docs/v8/plugins/autoplay
    */
   autoplay?: boolean | AutoplayOptionsType
   /**
    * Enable Auto Scroll plugin
-   * @see https://www.embla-carousel.com/plugins/auto-scroll/
+   * @see https://www.embla-carousel.com/docs/v8/plugins/auto-scroll
    */
   autoScroll?: boolean | AutoScrollOptionsType
   /**
    * Enable Auto Height plugin
-   * @see https://www.embla-carousel.com/plugins/auto-height/
+   * @see https://www.embla-carousel.com/docs/v8/plugins/auto-height
    */
   autoHeight?: boolean | AutoHeightOptionsType
   /**
    * Enable Class Names plugin
-   * @see https://www.embla-carousel.com/plugins/class-names/
+   * @see https://www.embla-carousel.com/docs/v8/plugins/class-names
    */
   classNames?: boolean | ClassNamesOptionsType
   /**
    * Enable Fade plugin
-   * @see https://www.embla-carousel.com/plugins/fade/
+   * @see https://www.embla-carousel.com/docs/v8/plugins/fade
    */
   fade?: boolean | FadeOptionsType
   /**
    * Enable Wheel Gestures plugin
-   * @see https://www.embla-carousel.com/plugins/wheel-gestures/
+   * @see https://www.embla-carousel.com/docs/v8/plugins/wheel-gestures
    */
   wheelGestures?: boolean | WheelGesturesPluginOptions
   class?: any

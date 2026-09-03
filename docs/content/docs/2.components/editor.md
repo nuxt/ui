@@ -1,5 +1,4 @@
 ---
-title: Editor
 description: A rich text editor component based on TipTap with support for markdown, HTML, and JSON content types.
 category: editor
 links:
@@ -399,7 +398,7 @@ const items: EditorToolbarItem[] = [
 
 #### Custom handlers
 
-Use the `handlers` prop to extend or override the default handlers. Custom handlers are merged with the default handlers, allowing you to add new actions or modify existing behavior.
+Use the `handlers` prop to extend or override the default handlers. Custom handlers are merged with the default handlers, so you can add new actions or modify existing behavior.
 
 Each handler implements the `EditorHandler`{lang="ts-type"} interface:
 

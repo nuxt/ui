@@ -1,4 +1,5 @@
 import type { ModuleOptions } from '../module'
+import { focusCard, focusControl, hover } from './checkbox'
 
 export default (options: Required<ModuleOptions>) => ({
   slots: {
@@ -7,20 +8,19 @@ export default (options: Required<ModuleOptions>) => ({
     legend: 'mb-1 block font-medium text-default',
     item: 'flex items-start',
     container: 'flex items-center',
-    base: 'rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-3',
+    base: 'rounded-full ring ring-inset ring-accented overflow-hidden focus-visible:outline-none',
     indicator: 'flex items-center justify-center size-full after:bg-default after:rounded-full',
     wrapper: 'w-full',
     label: 'block font-medium text-default',
+    icon: 'shrink-0',
     description: 'text-muted'
   },
   variants: {
     color: {
       ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, {
-        base: `outline-${color}/25 focus-visible:ring-${color}`,
         indicator: `bg-${color}`
       }])),
       neutral: {
-        base: 'outline-inverted/25 focus-visible:ring-inverted',
         indicator: 'bg-inverted'
       }
     },
@@ -29,10 +29,10 @@ export default (options: Required<ModuleOptions>) => ({
         item: ''
       },
       card: {
-        item: 'border border-muted rounded-lg'
+        item: [`border border-default rounded-lg ${hover}bg-elevated/50`, options.theme.transitions && 'transition-colors']
       },
       table: {
-        item: 'border border-muted'
+        item: [`border border-default ${hover}bg-elevated/50`, options.theme.transitions && 'transition-colors']
       }
     },
     orientation: {
@@ -54,7 +54,7 @@ export default (options: Required<ModuleOptions>) => ({
       },
       hidden: {
         base: 'sr-only',
-        wrapper: 'text-center'
+        wrapper: 'flex flex-col items-center gap-1 text-center'
       }
     },
     size: {
@@ -100,7 +100,8 @@ export default (options: Required<ModuleOptions>) => ({
       }
     },
     highlight: {
-      true: ''
+      true: '',
+      false: ''
     },
     disabled: {
       true: {
@@ -117,6 +118,24 @@ export default (options: Required<ModuleOptions>) => ({
     }
   },
   compoundVariants: [
+    {
+      indicator: 'hidden',
+      class: {
+        container: 'h-auto'
+      }
+    },
+    {
+      variant: ['card', 'table'],
+      highlight: false,
+      class: {
+        item: `${hover}border-accented`
+      }
+    },
+    { size: 'xs', indicator: 'hidden', class: { icon: 'size-3' } },
+    { size: 'sm', indicator: 'hidden', class: { icon: 'size-3.5' } },
+    { size: 'md', indicator: 'hidden', class: { icon: 'size-4' } },
+    { size: 'lg', indicator: 'hidden', class: { icon: 'size-4.5' } },
+    { size: 'xl', indicator: 'hidden', class: { icon: 'size-5' } },
     { size: 'xs', variant: ['card', 'table'], class: { item: 'p-2.5' } },
     { size: 'sm', variant: ['card', 'table'], class: { item: 'p-3' } },
     { size: 'md', variant: ['card', 'table'], class: { item: 'p-3.5' } },
@@ -138,18 +157,41 @@ export default (options: Required<ModuleOptions>) => ({
         fieldset: 'gap-0 -space-y-px'
       }
     },
+    ...[...(options.theme.colors || []).map((color: string) => [color, color]), ['neutral', 'inverted']].map(([color, token]: string[]) => ({
+      color,
+      variant: 'list',
+      indicator: ['start', 'end'],
+      class: {
+        base: focusControl(token!)
+      }
+    })),
+    ...[...(options.theme.colors || []).map((color: string) => [color, color]), ['neutral', 'inverted']].map(([color, token]: string[]) => ({
+      color,
+      variant: ['card', 'table'],
+      class: {
+        item: focusCard(token!)
+      }
+    })),
+    ...[...(options.theme.colors || []).map((color: string) => [color, color]), ['neutral', 'inverted']].map(([color, token]: string[]) => ({
+      color,
+      variant: 'list',
+      indicator: 'hidden',
+      class: {
+        item: focusCard(token!)
+      }
+    })),
     ...(options.theme.colors || []).map((color: string) => ({
       color,
       variant: 'card',
       class: {
-        item: `has-data-[state=checked]:border-${color}`
+        item: `has-data-[state=checked]:border-${color}/50 has-data-[state=checked]:bg-${color}/10`
       }
     })),
     {
       color: 'neutral',
       variant: 'card',
       class: {
-        item: 'has-data-[state=checked]:border-inverted'
+        item: 'has-data-[state=checked]:border-inverted/50 has-data-[state=checked]:bg-elevated'
       }
     },
     ...(options.theme.colors || []).map((color: string) => ({
@@ -175,6 +217,22 @@ export default (options: Required<ModuleOptions>) => ({
     },
     ...(options.theme.colors || []).map((color: string) => ({
       color,
+      indicator: 'hidden',
+      highlight: true,
+      class: {
+        item: `not-has-disabled:border-${color} not-has-disabled:has-data-[state=checked]:border-${color}`
+      }
+    })),
+    {
+      color: 'neutral',
+      indicator: 'hidden',
+      highlight: true,
+      class: {
+        item: 'not-has-disabled:border-inverted not-has-disabled:has-data-[state=checked]:border-inverted'
+      }
+    },
+    ...(options.theme.colors || []).map((color: string) => ({
+      color,
       highlight: true,
       class: {
         base: `ring-${color}`
@@ -189,6 +247,7 @@ export default (options: Required<ModuleOptions>) => ({
     }
   ],
   defaultVariants: {
+    highlight: false,
     size: 'md',
     color: 'primary',
     variant: 'list',
