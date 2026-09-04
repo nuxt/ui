@@ -1,15 +1,39 @@
 <script setup lang="ts">
+import { useClipboard } from '@vueuse/core'
 import type { HighlighterGeneric } from 'shiki'
+import { encodeThemeDoc, isSameDoc } from '../../utils/theme/link'
 
-/** The export modal: the two generated files, highlighted, with copy buttons. */
+/**
+ * The export modal: a link that carries the whole theme, then the two
+ * generated files, highlighted, with copy buttons.
+ */
 const open = defineModel<boolean>('open', { default: false })
 
-const { exportCSS, exportConfig, configLabel } = useTheme()
+const appConfig = useAppConfig()
+const { exportCSS, exportConfig, configLabel, currentDoc } = useTheme()
+const { presets, activePreset } = useThemeStudio()
 const { framework } = useFrameworks()
 const { track } = useAnalytics()
 
+const { copy, copied } = useClipboard()
+
 const css = ref('')
 const config = ref('')
+const link = ref('')
+
+/** The URL the studio reads back on load, theme and all. */
+async function buildLink() {
+  const doc = currentDoc()
+  const preset = presets.find(entry => entry.id === activePreset.value)
+  // the id only when nothing has been touched since, so a tweak still travels whole
+  const payload = preset && isSameDoc(doc, preset.doc) ? { version: 1 as const, preset: preset.id } : doc
+  return `${window.location.origin}${window.location.pathname}#${await encodeThemeDoc(payload)}`
+}
+
+function copyThemeLink() {
+  copy(link.value)
+  track('Theme Exported', { type: 'Link' })
+}
 
 const colorMode = useColorMode()
 
@@ -50,6 +74,12 @@ watch([open, framework], async ([isOpen]) => {
   css.value = isOpen ? await exportCSS() : ''
   config.value = isOpen ? await exportConfig() : ''
 })
+
+// The theme can't change while the modal covers the studio, so the link is
+// built once per open.
+watch(open, async (isOpen) => {
+  link.value = isOpen ? await buildLink() : ''
+})
 </script>
 
 <template>
@@ -64,6 +94,27 @@ watch([open, framework], async ([isOpen]) => {
 
     <template #body>
       <div class="flex flex-col gap-4">
+        <UFormField description="Opens the editor with this theme applied." :ui="{ container: 'mt-1' }">
+          <UFieldGroup class="w-full">
+            <UInput
+              :model-value="link"
+              readonly
+              class="flex-1"
+              :ui="{ base: 'font-mono text-xs' }"
+              aria-label="Link to this theme"
+              @focus="($event.target as HTMLInputElement).select()"
+            />
+
+            <UButton
+              :icon="copied ? appConfig.ui.icons.copyCheck : appConfig.ui.icons.copy"
+              :color="copied ? 'primary' : 'neutral'"
+              variant="subtle"
+              :aria-label="copied ? 'Link copied' : 'Copy link to this theme'"
+              @click="copyThemeLink"
+            />
+          </UFieldGroup>
+        </UFormField>
+
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <div v-for="pane in panes" :key="pane.key" class="min-w-0">
             <!-- A fixed pane height: the files and the highlighter both land
