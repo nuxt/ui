@@ -76,7 +76,7 @@ const { rootNavigation, navigationByFramework } = useNavigation(navigation)
 
 provide('navigation', rootNavigation)
 
-const showLayout = computed(() => !route.path.startsWith('/examples') && route.path !== '/theme')
+const showLayout = computed(() => !route.path.startsWith('/examples') && !route.path.startsWith('/theme'))
 </script>
 
 <template>
