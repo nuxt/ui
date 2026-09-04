@@ -3,7 +3,8 @@ import type { TabsProps } from '@nuxt/ui'
 
 /**
  * Light, dark and system as an icon-only segmented control, the picker the
- * theme popover and the studio header share.
+ * theme menu and the studio's theme bar share. The menu drops the framing
+ * ring, it sits on a menu row rather than beside other controls.
  */
 withDefaults(defineProps<{
   size?: TabsProps['size']
@@ -40,8 +41,9 @@ const mode = computed({
     :size="size"
     :ui="{
       label: 'sr-only',
-      indicator: 'bg-default',
-      trigger: 'data-[state=active]:text-highlighted w-full in-[[data-slot=list]:not(:has([data-slot=indicator]))]:data-[state=active]:before:bg-default p-1'
+      list: 'bg-elevated/50 ring ring-default p-0.5',
+      indicator: 'bg-default inset-y-0.5',
+      trigger: 'data-[state=active]:text-highlighted w-full in-[[data-slot=list]:not(:has([data-slot=indicator]))]:data-[state=active]:before:bg-default p-1.5'
     }"
     aria-label="Color mode"
   />

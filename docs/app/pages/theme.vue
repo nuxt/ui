@@ -97,10 +97,6 @@ const shareOpen = ref(false)
       <ThemeStudioViewSwitcher />
 
       <template #right>
-        <UTooltip text="Switch color mode" :kbds="['d']">
-          <ThemeStudioColorModeTabs data-keep-panels class="shrink-0" />
-        </UTooltip>
-
         <UTooltip text="Ask AI" :kbds="['meta', 'I']" ignore-non-keyboard-focus>
           <UButton
             color="neutral"
@@ -140,6 +136,10 @@ const shareOpen = ref(false)
 
           <ThemeStudioToolbar vertical />
 
+          <UFormField label="Color mode" :ui="{ root: 'text-xs', container: 'mt-1' }">
+            <ThemeStudioColorModeTabs size="sm" class="w-full" />
+          </UFormField>
+
           <USeparator class="my-5" />
 
           <ThemeStudioShuffleButton variant="outline" vertical />
@@ -175,36 +175,55 @@ const shareOpen = ref(false)
 
     <UFooter class="hidden lg:block ring ring-default rounded-xl bg-default mx-2 mt-2" :ui="{ container: 'py-3! px-6! overflow-x-auto', left: 'mt-0 gap-0 lg:flex-none', right: 'mt-0' }">
       <template #left>
-        <UTooltip text="Undo" :kbds="['meta', 'Z']">
-          <UButton
-            :icon="studioIcons.undo"
-            color="neutral"
-            variant="ghost"
-            :disabled="!past.length"
-            aria-label="Undo theme change"
-            @click="undo"
-          />
-        </UTooltip>
+        <!-- one cluster: these four move the whole theme, the controls beside
+             them each change one setting. Framed like the mode tabs' own track
+             at the other end, a size down on the buttons so both land at the
+             height of the plain controls between them. -->
+        <div class="flex items-center gap-0.5 p-0.5 rounded-lg ring ring-default bg-elevated/50">
+          <UTooltip text="Undo" :kbds="['meta', 'Z']">
+            <UButton
+              :icon="studioIcons.undo"
+              color="neutral"
+              variant="ghost"
+              size="sm"
+              :disabled="!past.length"
+              aria-label="Undo theme change"
+              @click="undo"
+            />
+          </UTooltip>
 
-        <UTooltip text="Redo" :kbds="['meta', 'shift', 'Z']">
-          <UButton
-            :icon="studioIcons.redo"
-            color="neutral"
-            variant="ghost"
-            :disabled="!future.length"
-            aria-label="Redo theme change"
-            @click="redo"
-          />
-        </UTooltip>
+          <UTooltip text="Redo" :kbds="['meta', 'shift', 'Z']">
+            <UButton
+              :icon="studioIcons.redo"
+              color="neutral"
+              variant="ghost"
+              size="sm"
+              :disabled="!future.length"
+              aria-label="Redo theme change"
+              @click="redo"
+            />
+          </UTooltip>
 
-        <USeparator orientation="vertical" class="h-auto self-stretch py-1 ms-3 me-1.5" />
+          <!-- undo/redo step through history, the two beside them rewrite it -->
+          <USeparator orientation="vertical" class="h-4 mx-0.5" />
+
+          <ThemeStudioResetButton size="sm" />
+          <ThemeStudioShuffleButton size="sm" />
+        </div>
+
+        <USeparator orientation="vertical" class="h-auto self-stretch py-1 ms-4.5 me-1.5" />
       </template>
 
       <ThemeStudioToolbar />
 
       <template #right>
-        <ThemeStudioShuffleButton variant="soft" />
-        <ThemeStudioResetButton variant="soft" />
+        <UTooltip text="Switch color mode" :kbds="['d']">
+          <!-- framed like the history cluster, the bar's two ends match -->
+          <ThemeStudioColorModeTabs
+            data-keep-panels
+            class="shrink-0"
+          />
+        </UTooltip>
       </template>
     </UFooter>
 

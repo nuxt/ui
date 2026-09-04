@@ -120,9 +120,9 @@ const gridUi = {
         :items="tabs"
         :content="false"
         color="neutral"
-        size="xs"
+        size="sm"
         :ui="{
-          root: 'w-64',
+          root: 'w-68',
           indicator: 'bg-default',
           trigger: 'data-[state=active]:text-highlighted in-[[data-slot=list]:not(:has([data-slot=indicator]))]:data-[state=active]:before:bg-default w-1/2'
         }"

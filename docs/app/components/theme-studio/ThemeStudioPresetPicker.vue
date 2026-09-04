@@ -221,7 +221,7 @@ watch(open, (isOpen) => {
     v-model:open="open"
     :items="items"
     :content="{ align: 'end', alignOffset: -4, onInteractOutside: keepPanels }"
-    :ui="{ content: 'w-60 min-w-36 max-h-98', label: 'text-xs' }"
+    :ui="{ content: 'w-56 min-w-36 max-h-98', label: 'text-xs' }"
   >
     <UTooltip :text="name" ignore-non-keyboard-focus>
       <UButton
@@ -252,7 +252,7 @@ watch(open, (isOpen) => {
     <template #color-mode="{ item }">
       <UIcon :name="asRow(item).icon" class="size-5 shrink-0 text-dimmed" />
       {{ asRow(item).label }}
-      <ThemeStudioColorModeTabs class="ms-auto -my-1.5" />
+      <ThemeStudioColorModeTabs class="ms-auto -my-1.5 [&>div]:ring-0" />
     </template>
 
     <!-- its own slot: the menu only draws a trailing icon for submenus, and
