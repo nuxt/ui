@@ -112,7 +112,7 @@ defineSlots<InputNumberSlots>()
 const props = useComponentProps<InputNumberProps<T, Mod>>('inputNumber', _props)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const modelValue = useVModel<InputNumberProps<T, Mod>, 'modelValue', 'update:modelValue'>(props, 'modelValue', emits, { defaultValue: props.defaultValue })
+const modelValue = useVModel<InputNumberProps<T, Mod>, 'modelValue', 'update:modelValue'>(props, 'modelValue', emits)
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as InputNumber['AppConfig']

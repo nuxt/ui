@@ -65,6 +65,18 @@ describe('InputNumber', () => {
       expect(1).toBe(1)
     })
 
+    test('increments uncontrolled defaultValue without v-model', async () => {
+      const wrapper = await mountSuspended(InputNumber, { props: { defaultValue: 5 } })
+      const increment = wrapper.find('[data-slot="increment"] button')
+
+      await increment.trigger('pointerdown')
+      await increment.trigger('pointerup')
+      await flushPromises()
+
+      expect(wrapper.emitted('update:modelValue')).toEqual([[6]])
+      expect((wrapper.find('input').element as HTMLInputElement).value).toBe('6')
+    })
+
     test('change event', async () => {
       const wrapper = await mountSuspended(InputNumber)
       const input = wrapper.findComponent({ name: 'NumberFieldRoot' })
