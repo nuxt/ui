@@ -21,6 +21,18 @@ const { presets, applyPreset } = useThemeStudio()
 const studioIcons = useStudioIcons()
 const appConfig = useAppConfig()
 
+// app.vue mounts this panel on its first open, so `open` is already true here
+// and the sidebar renders expanded, with no width change for its transition to
+// pick up. Hold it closed for a paint (two frames, the way Vue's own
+// Transition does it) so the first open slides in like every later one.
+const painted = ref(false)
+onMounted(() => requestAnimationFrame(() => requestAnimationFrame(() => (painted.value = true))))
+
+const panelOpen = computed({
+  get: () => painted.value && open.value,
+  set: (value: boolean) => (open.value = value)
+})
+
 let _skipSync = false
 const _themeApplied = new Set<string>()
 function processThemeToolCalls() {
@@ -230,7 +242,7 @@ function clearMessages() {
 
 <template>
   <USidebar
-    v-model:open="open"
+    v-model:open="panelOpen"
     side="right"
     title="Ask AI"
     rail
