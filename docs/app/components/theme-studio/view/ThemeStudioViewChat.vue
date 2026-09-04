@@ -201,8 +201,10 @@ const ui = {
     <div class="flex-1 flex m-4 lg:ms-0 rounded-lg ring ring-default bg-default/75 shadow-sm min-w-0 overflow-hidden">
       <UDashboardPanel class="relative min-h-0" :ui="{ body: 'p-0 sm:p-0 overscroll-none' }">
         <template #header>
-          <!-- Transparent and absolute, so the messages scroll under a blur. -->
-          <UDashboardNavbar :ui="{ root: 'absolute top-0 inset-x-0 border-b-0 z-10 backdrop-blur-sm sm:px-4' }">
+          <!-- Transparent and absolute, so the messages scroll under a blur.
+               Rounded like the panel: a backdrop filter paints its own square
+               corners past the parent's overflow clip. -->
+          <UDashboardNavbar :ui="{ root: 'absolute top-0 inset-x-0 rounded-t-lg border-b-0 z-10 backdrop-blur-sm sm:px-4' }">
             <template #leading>
               <span />
             </template>
