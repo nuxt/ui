@@ -1,0 +1,57 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`WheelPickerGroup > renders with class correctly 1`] = `
+"<div data-slot="root" class="relative isolate inline-flex items-stretch rounded-md bg-default ring ring-inset ring-accented shadow">
+  <div aria-hidden="true" data-slot="indicator" style="height: 32px;" class="absolute inset-x-1 top-1/2 -translate-y-1/2 pointer-events-none rounded-md bg-elevated"></div>
+  <div data-slot="content" style="height: 160px;" class="relative flex items-stretch"></div>
+</div>"
+`;
+
+exports[`WheelPickerGroup > renders with color correctly 1`] = `
+"<div data-slot="root" class="relative isolate inline-flex items-stretch rounded-md bg-default ring ring-inset ring-accented">
+  <div aria-hidden="true" data-slot="indicator" style="height: 32px;" class="absolute inset-x-1 top-1/2 -translate-y-1/2 pointer-events-none rounded-md bg-primary/10"></div>
+  <div data-slot="content" style="height: 160px;" class="relative flex items-stretch"></div>
+</div>"
+`;
+
+exports[`WheelPickerGroup > renders with default correctly 1`] = `
+"<div data-slot="root" class="relative isolate inline-flex items-stretch rounded-md bg-default ring ring-inset ring-accented">
+  <div aria-hidden="true" data-slot="indicator" style="height: 32px;" class="absolute inset-x-1 top-1/2 -translate-y-1/2 pointer-events-none rounded-md bg-elevated"></div>
+  <div data-slot="content" style="height: 160px;" class="relative flex items-stretch"></div>
+</div>"
+`;
+
+exports[`WheelPickerGroup > renders with default slot correctly 1`] = `
+"<div data-slot="root" class="relative isolate inline-flex items-stretch rounded-md bg-default ring ring-inset ring-accented">
+  <div aria-hidden="true" data-slot="indicator" style="height: 32px;" class="absolute inset-x-1 top-1/2 -translate-y-1/2 pointer-events-none rounded-md bg-elevated"></div>
+  <div data-slot="content" style="height: 160px;" class="relative flex items-stretch">Columns</div>
+</div>"
+`;
+
+exports[`WheelPickerGroup > renders with itemHeight correctly 1`] = `
+"<div data-slot="root" class="relative isolate inline-flex items-stretch rounded-md bg-default ring ring-inset ring-accented">
+  <div aria-hidden="true" data-slot="indicator" style="height: 44px;" class="absolute inset-x-1 top-1/2 -translate-y-1/2 pointer-events-none rounded-md bg-elevated"></div>
+  <div data-slot="content" style="height: 220px;" class="relative flex items-stretch"></div>
+</div>"
+`;
+
+exports[`WheelPickerGroup > renders with ui correctly 1`] = `
+"<div data-slot="root" class="relative isolate inline-flex items-stretch rounded-md bg-default ring ring-inset ring-accented">
+  <div aria-hidden="true" data-slot="indicator" style="height: 32px;" class="absolute inset-x-1 top-1/2 -translate-y-1/2 pointer-events-none rounded-md bg-primary/20"></div>
+  <div data-slot="content" style="height: 160px;" class="relative flex items-stretch"></div>
+</div>"
+`;
+
+exports[`WheelPickerGroup > renders with variant line correctly 1`] = `
+"<div data-slot="root" class="relative isolate inline-flex items-stretch rounded-md bg-default ring ring-inset ring-accented">
+  <div aria-hidden="true" data-slot="indicator" style="height: 32px;" class="absolute top-1/2 -translate-y-1/2 pointer-events-none bg-elevated inset-x-0 rounded-none bg-transparent! border-y border-default"></div>
+  <div data-slot="content" style="height: 160px;" class="relative flex items-stretch"></div>
+</div>"
+`;
+
+exports[`WheelPickerGroup > renders with visibleItems correctly 1`] = `
+"<div data-slot="root" class="relative isolate inline-flex items-stretch rounded-md bg-default ring ring-inset ring-accented">
+  <div aria-hidden="true" data-slot="indicator" style="height: 32px;" class="absolute inset-x-1 top-1/2 -translate-y-1/2 pointer-events-none rounded-md bg-elevated"></div>
+  <div data-slot="content" style="height: 224px;" class="relative flex items-stretch"></div>
+</div>"
+`;

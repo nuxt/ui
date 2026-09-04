@@ -179,6 +179,8 @@ export interface ThemeDefaults {
   tooltip?: Partial<ComponentTypes.TooltipProps>
   tree?: Partial<ComponentTypes.TreeProps>
   user?: Partial<ComponentTypes.UserProps>
+  wheelPicker?: Partial<ComponentTypes.WheelPickerProps>
+  wheelPickerGroup?: Partial<ComponentTypes.WheelPickerGroupProps>
 }
 
 /**
