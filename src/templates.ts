@@ -278,31 +278,37 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
 `
 
   templates.push({
+    filename: 'ui.sources.css',
+    write: true,
+    getContents: async () => `${themeBlocks}\n${await generateSources()}`
+  })
+
+  templates.push({
     filename: 'ui.css',
     write: true,
     getContents: async () => {
-      const sources = await generateSources()
       const prefix = options.theme?.prefix ? `${options.theme.prefix}:` : ''
 
-      return `${sources}
-
-@layer base {
+      return `@layer base {
   body {
     @apply ${prefix}antialiased ${prefix}text-default ${prefix}bg-default ${prefix}scheme-light ${prefix}dark:scheme-dark;
   }
-}
-
-${themeBlocks}`
+}`
     }
   })
 
   // Static fallback shipped in the published npm package and exposed via
   // `package.json` `imports` so tooling that resolves `#build/ui.css` through
   // Node module resolution (Prettier, Tailwind IntelliSense) has something to
-  // read. Strips `@source` directives (paths don't exist on consumer machines)
-  // and the body rule (runtime template handles it with the user's prefix).
+  // read. The body rule is generated in Nuxt projects with the user's prefix.
   templates.push({
     filename: 'ui.static.css',
+    write: true,
+    getContents: () => ''
+  })
+
+  templates.push({
+    filename: 'ui.sources.static.css',
     write: true,
     getContents: () => themeBlocks
   })
@@ -394,7 +400,7 @@ export function addTemplates(options: ModuleOptions, nuxt: Nuxt, resolve: Resolv
   if (options.experimental?.componentDetection && nuxt.options.dev) {
     nuxt.hook('builder:watch', async (_, path) => {
       if (/\.(?:vue|ts|mts|js|mjs|cjs|tsx|jsx)$/.test(path)) {
-        await updateTemplates({ filter: template => template.filename === 'ui.css' })
+        await updateTemplates({ filter: template => template.filename === 'ui.sources.css' })
       }
     })
   }
