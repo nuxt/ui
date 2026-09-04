@@ -103,7 +103,21 @@ export interface LinkProps extends NuxtLinkProps, /** @vue-ignore */ Omit<Button
 export type LinkPropsKeys = 'to' | 'href' | 'target' | 'rel' | 'noRel' | 'external' | 'prefetch' | 'prefetchOn' | 'prefetchedClass' | 'noPrefetch' | 'trailingSlash' | 'replace' | 'ariaCurrentValue' | 'active' | 'activeClass' | 'exact' | 'exactQuery' | 'exactHash' | 'inactiveClass' | 'locale' | 'download' | 'ping' | 'referrerpolicy' | 'hreflang' | 'media'
 
 export interface LinkSlots {
-  default?(props: { active: boolean }): VNode[]
+  default?(props: {
+    active: boolean
+    // only passed when using the `custom` prop
+    as?: any
+    type?: ButtonHTMLAttributes['type']
+    disabled?: boolean
+    href?: string | null
+    navigate?: (e: MouseEvent) => void
+    rel?: string | null
+    target?: NuxtLinkProps['target']
+    isExternal?: boolean
+    prefetch?: () => Promise<void>
+    prefetched?: boolean
+    shouldPrefetch?: (mode: 'visibility' | 'interaction') => boolean
+  }): VNode[]
 }
 
 // from upstream NuxtLink
@@ -111,6 +125,10 @@ interface NuxtLinkDefaultSlotProps {
   rel: string | null
   target: '_blank' | '_parent' | '_self' | '_top' | (string & {}) | null
   isExternal: boolean
+  // exposed since Nuxt 4.5, which stopped prefetching `custom` links itself
+  prefetch?: () => Promise<void>
+  prefetched?: boolean
+  shouldPrefetch?: (mode: 'visibility' | 'interaction') => boolean
 }
 </script>
 
@@ -246,14 +264,15 @@ function isLinkActive({ route: linkRoute, isActive, isExactActive }: any = {}) {
   return false
 }
 
-function resolveLinkClass({ route, isActive, isExactActive }: any = {}) {
+function resolveLinkClass({ route, isActive, isExactActive, prefetched }: any = {}) {
   const active = isLinkActive({ route, isActive, isExactActive })
+  const prefetchedClass = prefetched ? props.prefetchedClass : undefined
 
   if (props.raw) {
-    return [props.class, active ? props.activeClass : props.inactiveClass]
+    return [props.class, active ? props.activeClass : props.inactiveClass, prefetchedClass]
   }
 
-  return ui.value({ class: props.class, active, disabled: props.disabled })
+  return ui.value({ class: prefetchedClass ? [props.class, prefetchedClass] : props.class, active, disabled: props.disabled })
 }
 </script>
 
@@ -264,6 +283,7 @@ function resolveLinkClass({ route, isActive, isExactActive }: any = {}) {
         v-bind="{
           ...$attrs,
           ...(exact && isExactActive ? { 'aria-current': props.ariaCurrentValue } : {}),
+          ...((rest as NuxtLinkDefaultSlotProps).prefetched && prefetchedClass ? { class: prefetchedClass } : {}),
           as,
           type,
           disabled,
@@ -272,6 +292,9 @@ function resolveLinkClass({ route, isActive, isExactActive }: any = {}) {
           rel,
           target: (rest as NuxtLinkDefaultSlotProps).target,
           isExternal: (rest as NuxtLinkDefaultSlotProps).isExternal,
+          prefetch: (rest as NuxtLinkDefaultSlotProps).prefetch,
+          prefetched: (rest as NuxtLinkDefaultSlotProps).prefetched,
+          shouldPrefetch: (rest as NuxtLinkDefaultSlotProps).shouldPrefetch,
           active: isLinkActive({ route: linkRoute, isActive, isExactActive })
         }"
       />
@@ -288,9 +311,11 @@ function resolveLinkClass({ route, isActive, isExactActive }: any = {}) {
         navigate,
         rel,
         target: (rest as NuxtLinkDefaultSlotProps).target,
-        isExternal: (rest as NuxtLinkDefaultSlotProps).isExternal
+        isExternal: (rest as NuxtLinkDefaultSlotProps).isExternal,
+        prefetch: (rest as NuxtLinkDefaultSlotProps).prefetch,
+        shouldPrefetch: (rest as NuxtLinkDefaultSlotProps).shouldPrefetch
       }"
-      :class="resolveLinkClass({ route: linkRoute, isActive, isExactActive })"
+      :class="resolveLinkClass({ route: linkRoute, isActive, isExactActive, prefetched: (rest as NuxtLinkDefaultSlotProps).prefetched })"
     >
       <slot :active="isLinkActive({ route: linkRoute, isActive, isExactActive })" />
     </ULinkBase>
