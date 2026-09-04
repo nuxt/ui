@@ -22,7 +22,7 @@ export interface LinkBaseProps {
 </script>
 
 <script setup lang="ts">
-import { computed, onMounted, onBeforeUnmount, useTemplateRef } from 'vue'
+import { computed, getCurrentInstance, onMounted, onBeforeUnmount } from 'vue'
 import { Primitive } from 'reka-ui'
 import { requestIdleCallback, cancelIdleCallback, observeIntersection } from '../utils/prefetch'
 
@@ -31,7 +31,7 @@ const props = withDefaults(defineProps<LinkBaseProps>(), {
   type: 'button'
 })
 
-const linkRef = useTemplateRef('linkRef')
+const instance = getCurrentInstance()
 
 function onClickWrapper(e: MouseEvent) {
   if (props.disabled) {
@@ -76,8 +76,9 @@ onMounted(() => {
     return
   }
 
-  // `$el` is on the component instance but not part of reka-ui's exposed type.
-  const el = (linkRef.value as unknown as { $el?: HTMLElement } | null)?.$el
+  // Read from the instance rather than a template ref: a ref makes Vue queue a
+  // `setRef` job on every patch, and this is the hottest primitive in the library.
+  const el = instance?.proxy?.$el as HTMLElement | undefined
   if (!el?.tagName) {
     return
   }
@@ -100,7 +101,6 @@ onBeforeUnmount(() => {
 
 <template>
   <Primitive
-    ref="linkRef"
     v-bind="{
       ...(href ? {
         'as': 'a',
