@@ -4,18 +4,21 @@ import type { HighlighterGeneric } from 'shiki'
 import { encodeThemeDoc, isSameDoc } from '../../utils/theme/link'
 
 /**
- * The export modal: a link that carries the whole theme, then the two
- * generated files, highlighted, with copy buttons.
+ * The export modal: a link that carries the whole theme, then the generated
+ * files, one tab each, to copy or download.
  */
 const open = defineModel<boolean>('open', { default: false })
 
 const appConfig = useAppConfig()
+const studioIcons = useStudioIcons()
 const { exportCSS, exportConfig, configLabel, currentDoc } = useTheme()
 const { presets, activePreset } = useThemeStudio()
 const { framework } = useFrameworks()
 const { track } = useAnalytics()
 
-const { copy, copied } = useClipboard()
+// One clipboard per action, or copying a file would light up the link button.
+const { copy: copyToClipboard, copied: linkCopied } = useClipboard()
+const { copy: copyFileToClipboard, copied: fileCopied } = useClipboard()
 
 const css = ref('')
 const config = ref('')
@@ -31,13 +34,13 @@ async function buildLink() {
 }
 
 function copyThemeLink() {
-  copy(link.value)
+  copyToClipboard(link.value)
   track('Theme Exported', { type: 'Link' })
 }
 
 const colorMode = useColorMode()
 
-// Ready on first open; the panes fall back to a plain <pre> for the frame
+// Ready on first open; the pane falls back to a plain <pre> for the frame
 // the highlighter takes to arrive.
 const highlighter = shallowRef<HighlighterGeneric<any, any> | null>(null)
 watch(open, async (isOpen) => {
@@ -62,11 +65,20 @@ const panes = computed(() => [
   { key: 'config' as const, filename: configLabel.value, code: config.value, html: highlight(config.value, 'typescript') }
 ])
 
-/** ProsePre owns the copy button; the capture only adds the analytics event. */
-function onCopyCapture(key: 'css' | 'config', event: Event) {
-  if ((event.target as HTMLElement).closest('button')) {
-    track('Theme Exported', { type: key === 'css' ? 'CSS' : 'Config' })
-  }
+const tab = ref<'css' | 'config'>('css')
+const pane = computed(() => panes.value.find(entry => entry.key === tab.value) ?? panes.value[0]!)
+
+/** Copy and Download both act on the file the tab is showing. */
+function copyFile() {
+  copyFileToClipboard(pane.value.code)
+  track('Theme Exported', { type: pane.value.key === 'css' ? 'CSS' : 'Config', action: 'Copy' })
+}
+
+function downloadFile() {
+  const url = URL.createObjectURL(new Blob([pane.value.code], { type: 'text/plain;charset=utf-8' }))
+  Object.assign(document.createElement('a'), { href: url, download: pane.value.filename }).click()
+  URL.revokeObjectURL(url)
+  track('Theme Exported', { type: pane.value.key === 'css' ? 'CSS' : 'Config', action: 'Download' })
 }
 
 // framework too: only one half of the export is framework-agnostic
@@ -86,53 +98,90 @@ watch(open, async (isOpen) => {
   <UModal
     v-model:open="open"
     title="Export theme"
-    :ui="{ content: 'max-w-4xl' }"
+    :ui="{ content: 'max-w-4xl', body: 'p-0 sm:p-0' }"
   >
     <template #actions>
-      <FrameworkTabs class="w-40" />
+      <FrameworkTabs class="w-40 ms-auto me-8" />
     </template>
 
     <template #body>
-      <div class="flex flex-col gap-4">
-        <UFormField description="Opens the editor with this theme applied." :ui="{ container: 'mt-1' }">
-          <UFieldGroup class="w-full">
-            <UInput
-              :model-value="link"
-              readonly
-              class="flex-1"
-              :ui="{ base: 'font-mono text-xs' }"
-              aria-label="Link to this theme"
-              @focus="($event.target as HTMLInputElement).select()"
+      <div class="flex flex-col gap-2 p-4 sm:px-6 bg-elevated/50 border-b border-default">
+        <div class="flex items-center gap-2">
+          <UIcon :name="studioIcons.link" class="size-4 shrink-0 text-dimmed" />
+          <span class="text-sm font-semibold text-highlighted">Share link</span>
+          <span class="text-sm text-muted truncate hidden sm:block">Opens the editor with this theme applied</span>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <UInput
+            :model-value="link"
+            readonly
+            class="flex-1 min-w-0"
+            :ui="{ base: 'font-mono text-xs py-2' }"
+            aria-label="Link to this theme"
+            @focus="($event.target as HTMLInputElement).select()"
+          />
+
+          <UButton
+            :icon="linkCopied ? appConfig.ui.icons.copyCheck : appConfig.ui.icons.copy"
+            label="Copy link"
+            color="neutral"
+            @click="copyThemeLink"
+          />
+        </div>
+      </div>
+
+      <div class="flex flex-col gap-3 p-4 sm:p-6">
+        <div class="flex items-center gap-2">
+          <UButton
+            v-for="entry in panes"
+            :key="entry.key"
+            color="neutral"
+            variant="ghost"
+            :active="tab === entry.key"
+            active-variant="soft"
+            :label="entry.filename"
+            @click="tab = entry.key"
+          >
+            <template #leading>
+              <ProseCodeIcon :filename="entry.filename" class="size-5 shrink-0" />
+            </template>
+          </UButton>
+
+          <div class="ms-auto flex items-center gap-2">
+            <UButton
+              :icon="fileCopied ? appConfig.ui.icons.copyCheck : appConfig.ui.icons.copy"
+              label="Copy"
+              color="neutral"
+              variant="outline"
+              :ui="{ base: 'px-1.5 sm:px-2.5', label: 'hidden sm:inline-flex' }"
+              @click="copyFile"
             />
 
             <UButton
-              :icon="copied ? appConfig.ui.icons.copyCheck : appConfig.ui.icons.copy"
-              :color="copied ? 'primary' : 'neutral'"
-              variant="subtle"
-              :aria-label="copied ? 'Link copied' : 'Copy link to this theme'"
-              @click="copyThemeLink"
+              :icon="studioIcons.download"
+              label="Download"
+              color="neutral"
+              variant="outline"
+              class="hidden lg:inline-flex"
+              @click="downloadFile"
             />
-          </UFieldGroup>
-        </UFormField>
-
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-          <div v-for="pane in panes" :key="pane.key" class="min-w-0">
-            <!-- A fixed pane height: the files and the highlighter both land
-                 after the modal paints, a box that sized to them would jump. -->
-            <ProsePre
-              :filename="pane.filename"
-              :code="pane.code"
-              :ui="{ root: 'my-0', base: 'h-96 whitespace-pre text-xs/5' }"
-              @click.capture="onCopyCapture(pane.key, $event)"
-            >
-              <!-- eslint-disable-next-line vue/no-v-html -- shiki output over our own generated files -->
-              <code v-if="pane.html" v-html="pane.html" />
-              <template v-else>
-                {{ pane.code }}
-              </template>
-            </ProsePre>
           </div>
         </div>
+
+        <!-- A fixed pane height: the files and the highlighter both land after
+             the modal paints, a box that sized to them would jump. -->
+        <ProsePre
+          :code="pane.code"
+          :copy="false"
+          :ui="{ root: 'my-0', base: 'h-96 whitespace-pre text-xs/5' }"
+        >
+          <!-- eslint-disable-next-line vue/no-v-html -- shiki output over our own generated files -->
+          <code v-if="pane.html" v-html="pane.html" />
+          <template v-else>
+            {{ pane.code }}
+          </template>
+        </ProsePre>
       </div>
     </template>
   </UModal>
