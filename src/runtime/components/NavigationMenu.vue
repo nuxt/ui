@@ -41,8 +41,8 @@ export interface NavigationMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'cu
   chip?: boolean | ChipProps
   /**
    * Display a tooltip on the item with the label of the item.
-   * In `vertical` orientation, only works when the menu is `collapsed`.
-   * In `horizontal` orientation, works on any item.
+   * Works in any orientation, whether the menu is `collapsed` or not.
+   * This has priority over the global `tooltip` prop.
    */
   tooltip?: boolean | TooltipProps
   /**
@@ -154,7 +154,8 @@ export interface NavigationMenuProps<
   collapsed?: boolean
   /**
    * Display a tooltip on the items with the label of the item.
-   * Only works when `orientation` is `vertical` and `collapsed` is `true`.
+   * Only works when `orientation` is `vertical` and `collapsed` is `true`,
+   * use the `tooltip` property on an item to display one in any state.
    * `{ delayDuration: 0, content: { side: 'right' } }`{lang="ts-type"}
    * @defaultValue false
    */
@@ -454,7 +455,7 @@ function onLinkTrailingClick(e: Event, item: NavigationMenuItem) {
               </slot>
             </template>
           </UPopover>
-          <UTooltip v-else-if="(props.orientation === 'vertical' && props.collapsed && (!!props.tooltip || !!item.tooltip)) || (props.orientation === 'horizontal' && !!item.tooltip)" :text="get(item, props.labelKey as string)" v-bind="{ ...tooltipProps, ...(typeof item.tooltip === 'boolean' ? {} : item.tooltip || {}) }">
+          <UTooltip v-else-if="!!item.tooltip || (props.orientation === 'vertical' && props.collapsed && !!props.tooltip)" :text="get(item, props.labelKey as string)" v-bind="{ ...tooltipProps, ...(typeof item.tooltip === 'boolean' ? {} : item.tooltip || {}) }">
             <ULinkBase v-bind="slotProps" data-slot="link" :class="ui.link({ class: [props.ui?.link, item.ui?.link, item.class], active: active || item.active, disabled: !!item.disabled, level: level > 0 })">
               <ReuseLinkTemplate :item="item" :active="active || item.active" :index="index" />
             </ULinkBase>
