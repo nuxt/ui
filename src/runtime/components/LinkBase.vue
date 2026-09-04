@@ -24,7 +24,7 @@ export interface LinkBaseProps {
 <script setup lang="ts">
 import { computed, getCurrentInstance, onMounted, onBeforeUnmount } from 'vue'
 import { Primitive } from 'reka-ui'
-import { requestIdleCallback, cancelIdleCallback, observeIntersection } from '../utils/prefetch'
+import { requestIdleCallback, cancelIdleCallback, observeIntersection } from '../utils/link'
 
 const props = withDefaults(defineProps<LinkBaseProps>(), {
   as: 'button',
