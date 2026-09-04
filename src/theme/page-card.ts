@@ -59,6 +59,12 @@ export default (options: Required<ModuleOptions>) => ({
         root: ['outline-primary/25 has-[>a:focus-visible]:outline-3', options.theme.transitions && 'transition']
       }
     },
+    overlay: {
+      true: {
+        container: 'pointer-events-none',
+        wrapper: 'pointer-events-auto'
+      }
+    },
     title: {
       true: {
         description: 'mt-1'

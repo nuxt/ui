@@ -116,6 +116,7 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.pageCard || {}) 
   reverse: props.reverse,
   variant: props.variant,
   to: !!props.to || !!props.onClick,
+  overlay: !!props.to,
   title: !!props.title || !!slots.title,
   highlight: props.highlight,
   highlightColor: props.highlightColor,
@@ -141,6 +142,16 @@ const ariaLabel = computed(() => {
     @click="props.onClick"
   >
     <div v-if="props.spotlight" data-slot="spotlight" :class="ui.spotlight({ class: props.ui?.spotlight })" />
+
+    <ULink
+      v-if="props.to"
+      :aria-label="ariaLabel"
+      v-bind="{ 'to': props.to, 'target': props.target, ...$attrs, 'data-slot': undefined }"
+      :class="prefix('focus:outline-none peer')"
+      raw
+    >
+      <span :class="prefix('absolute inset-0')" aria-hidden="true" />
+    </ULink>
 
     <div data-slot="container" :class="ui.container({ class: props.ui?.container })">
       <div v-if="!!slots.header || (props.icon || !!slots.leading) || !!slots.body || (props.title || !!slots.title) || (props.description || !!slots.description) || !!slots.footer" data-slot="wrapper" :class="ui.wrapper({ class: props.ui?.wrapper })">
@@ -177,15 +188,5 @@ const ariaLabel = computed(() => {
 
       <slot />
     </div>
-
-    <ULink
-      v-if="props.to"
-      :aria-label="ariaLabel"
-      v-bind="{ 'to': props.to, 'target': props.target, ...$attrs, 'data-slot': undefined }"
-      :class="prefix('focus:outline-none peer')"
-      raw
-    >
-      <span :class="prefix('absolute inset-0')" aria-hidden="true" />
-    </ULink>
   </Primitive>
 </template>
