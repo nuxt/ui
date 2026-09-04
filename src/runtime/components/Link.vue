@@ -119,7 +119,7 @@ interface NuxtLinkDefaultSlotProps {
 </script>
 
 <script setup lang="ts">
-import { computed, getCurrentInstance, onMounted, onBeforeUnmount } from 'vue'
+import { computed, getCurrentInstance, mergeProps, onMounted, onBeforeUnmount } from 'vue'
 import { isEqual } from 'ohash/utils'
 import { useForwardProps, Slot } from 'reka-ui'
 import { defu } from 'defu'
@@ -277,14 +277,22 @@ function onPrefetch() {
   prefetchApi?.prefetch?.(nuxtApp)
 }
 
-function getPrefetchListeners({ prefetch, shouldPrefetch }: NuxtLinkDefaultSlotProps) {
+function getPrefetchListeners({ prefetch, shouldPrefetch }: NuxtLinkDefaultSlotProps, attrs: Record<string, unknown>) {
   if (!prefetch || !shouldPrefetch) {
     return undefined
   }
 
   prefetchApi = { prefetch, shouldPrefetch }
 
-  return shouldPrefetch('interaction') ? { onPointerenter: onPrefetch, onFocus: onPrefetch } : undefined
+  if (!shouldPrefetch('interaction')) {
+    return undefined
+  }
+
+  // Callers may listen to the same events on the link, keep their handlers.
+  return mergeProps(
+    { onPointerenter: attrs.onPointerenter, onFocus: attrs.onFocus },
+    { onPointerenter: onPrefetch, onFocus: onPrefetch }
+  )
 }
 
 let idleId: ReturnType<typeof requestIdleCallback>
@@ -328,7 +336,7 @@ onBeforeUnmount(() => {
           ...$attrs,
           ...(exact && isExactActive ? { 'aria-current': props.ariaCurrentValue } : {}),
           ...((rest as NuxtLinkDefaultSlotProps).prefetched && prefetchedClass ? { class: prefetchedClass } : {}),
-          ...getPrefetchListeners(rest as NuxtLinkDefaultSlotProps),
+          ...getPrefetchListeners(rest as NuxtLinkDefaultSlotProps, $attrs),
           as,
           type,
           disabled,
@@ -354,7 +362,7 @@ onBeforeUnmount(() => {
         rel,
         target: (rest as NuxtLinkDefaultSlotProps).target,
         isExternal: (rest as NuxtLinkDefaultSlotProps).isExternal,
-        ...getPrefetchListeners(rest as NuxtLinkDefaultSlotProps)
+        ...getPrefetchListeners(rest as NuxtLinkDefaultSlotProps, $attrs)
       }"
       :class="resolveLinkClass({ route: linkRoute, isActive, isExactActive, prefetched: (rest as NuxtLinkDefaultSlotProps).prefetched })"
     >

@@ -74,6 +74,22 @@ describe('Link prefetch', () => {
     expect(spy).toHaveBeenCalledTimes(1)
   })
 
+  it('keeps the caller listeners next to the interaction prefetch', async () => {
+    const spy = spyOnPrefetch()
+    const onPointerenter = vi.fn()
+    const onFocus = vi.fn()
+    wrapper = await mountSuspended(Link, { props: { to: '/about', prefetchOn: 'interaction' }, attrs: { onPointerenter, onFocus }, slots: { default: () => 'About' } })
+    const link = wrapper.get('a')
+
+    await link.trigger('pointerenter')
+    await link.trigger('focus')
+    await flushPromises()
+
+    expect(onPointerenter).toHaveBeenCalledTimes(1)
+    expect(onFocus).toHaveBeenCalledTimes(1)
+    expect(spy).toHaveBeenCalledTimes(1)
+  })
+
   it('prefetches when the link becomes visible', async () => {
     vi.stubGlobal('IntersectionObserver', MockIntersectionObserver)
     const spy = spyOnPrefetch()
