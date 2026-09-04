@@ -12,19 +12,11 @@ export interface LinkBaseProps {
   rel?: LinkProps['rel']
   active?: boolean
   isExternal?: boolean
-  /** Prefetches the target route. Provided by the `NuxtLink` custom slot through `ULink`. */
-  prefetch?: () => Promise<void>
-  /** Whether the target route has been prefetched. Provided by the `NuxtLink` custom slot through `ULink`. */
-  prefetched?: boolean
-  /** Whether prefetching should run for a trigger. Provided by the `NuxtLink` custom slot through `ULink`. */
-  shouldPrefetch?: (mode: 'visibility' | 'interaction') => boolean
 }
 </script>
 
 <script setup lang="ts">
-import { getCurrentInstance, onMounted, onBeforeUnmount } from 'vue'
 import { Primitive } from 'reka-ui'
-import { requestIdleCallback, cancelIdleCallback, observeIntersection } from '../utils/link'
 
 const props = withDefaults(defineProps<LinkBaseProps>(), {
   as: 'button',
@@ -48,51 +40,6 @@ function onClickWrapper(e: MouseEvent) {
     props.navigate(e)
   }
 }
-
-// Called without arguments on purpose: NuxtLink's `prefetch` takes an optional
-// `nuxtApp` and would otherwise receive the event.
-function onPrefetch() {
-  props.prefetch?.()
-}
-
-// Since Nuxt 4.5, NuxtLink no longer wires prefetching for `custom` links and
-// exposes `prefetch` / `shouldPrefetch` to the slot instead. The interaction
-// listeners are bound in the template, the visibility observer is set up here.
-// Only links that receive `shouldPrefetch` register hooks, so buttons and the
-// Vue build cost exactly what they did before.
-if (props.shouldPrefetch) {
-  const instance = getCurrentInstance()
-
-  let idleId: ReturnType<typeof requestIdleCallback>
-  let unobserve: (() => void) | null = null
-
-  onMounted(() => {
-    if (!props.shouldPrefetch?.('visibility')) {
-      return
-    }
-
-    // Read from the instance rather than a template ref: a ref makes Vue queue
-    // a `setRef` job on every patch.
-    const el = instance?.proxy?.$el as HTMLElement | undefined
-    if (!el?.tagName) {
-      return
-    }
-
-    idleId = requestIdleCallback(() => {
-      unobserve = observeIntersection(el, () => {
-        unobserve?.()
-        unobserve = null
-        onPrefetch()
-      })
-    })
-  })
-
-  onBeforeUnmount(() => {
-    cancelIdleCallback(idleId)
-    unobserve?.()
-    unobserve = null
-  })
-}
 </script>
 
 <template>
@@ -102,8 +49,7 @@ if (props.shouldPrefetch) {
       'href': disabled ? undefined : href,
       'aria-disabled': disabled ? 'true' : undefined,
       'role': disabled ? 'link' : undefined,
-      'tabindex': disabled ? -1 : undefined,
-      ...(shouldPrefetch?.('interaction') ? { onPointerenter: onPrefetch, onFocus: onPrefetch } : undefined)
+      'tabindex': disabled ? -1 : undefined
     } : as === 'button' ? {
       as,
       type,
