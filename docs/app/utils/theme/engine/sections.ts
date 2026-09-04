@@ -10,8 +10,11 @@ import { FONT_WEIGHT_DEFAULTS } from '../studio'
  * ACTIVE PRESET's doc: dirty means "touched after applying the preset", not
  * "differs from stock".
  */
+/** Every colour alias owns its own slice, so one changed alias stays one. */
+export type ColorSection = 'primary' | 'neutral' | typeof SEMANTIC_ALIASES[number]
+
 export type SectionKey
-  = | 'primary' | 'neutral' | 'semantic'
+  = | ColorSection
     | 'font' | 'type' | 'weights'
     | 'icons' | 'radius' | 'size' | 'buttons' | 'panels' | 'inputs'
 
@@ -24,14 +27,15 @@ const TYPE_FIELDS = ['uppercase', 'italic', 'letterSpacing', 'lineHeight'] as co
  * a toolbar control and carries its own `sectionDirty`.
  */
 export const SECTION_GROUPS: Record<'colors' | 'defaults', SectionKey[]> = {
-  colors: ['primary', 'neutral', 'semantic'],
+  colors: ['primary', 'neutral', ...SEMANTIC_ALIASES],
   defaults: ['size', 'buttons', 'panels', 'inputs']
 }
 
 /** Which color section a semantic token (or token shade) belongs to. */
-function tokenSection(token: string): 'primary' | 'semantic' | 'neutral' {
+function tokenSection(token: string): ColorSection {
   if (token === '--ui-primary' || token.startsWith('--ui-color-primary')) return 'primary'
-  if (SEMANTIC_ALIASES.some(alias => token === `--ui-${alias}`)) return 'semantic'
+  const semantic = SEMANTIC_ALIASES.find(alias => token === `--ui-${alias}`)
+  if (semantic) return semantic
   return 'neutral'
 }
 
@@ -57,7 +61,7 @@ export function promotedShades(doc: ThemeDoc): Record<string, { light?: ShadeSto
   return promoted
 }
 
-function ownedTokens(doc: ThemeDoc, section: 'primary' | 'semantic' | 'neutral') {
+function ownedTokens(doc: ThemeDoc, section: ColorSection) {
   // tokens the doc's own style treatment emits are DERIVED, a live doc
   // carries them merged into tokens, a preset doc never does
   const derived = styleTokens(doc.style ?? {})
@@ -70,7 +74,7 @@ function ownedTokens(doc: ThemeDoc, section: 'primary' | 'semantic' | 'neutral')
   return { light: pickMode('light'), dark: pickMode('dark') }
 }
 
-function ownedTokenShades(doc: ThemeDoc, section: 'primary' | 'semantic' | 'neutral') {
+function ownedTokenShades(doc: ThemeDoc, section: ColorSection) {
   return Object.fromEntries(Object.entries(canonicalTokenShades(doc)).filter(([token]) => tokenSection(token) === section))
 }
 
@@ -114,12 +118,16 @@ export function pickSection(doc: ThemeDoc, key: SectionKey): unknown {
         tokens: ownedTokens(doc, 'neutral'),
         shades: ownedTokenShades(doc, 'neutral')
       }
-    case 'semantic':
+    case 'secondary':
+    case 'success':
+    case 'info':
+    case 'warning':
+    case 'error':
       return {
-        colors: Object.fromEntries(SEMANTIC_ALIASES.map(name => [name, alias(doc, name)])),
-        palettes: Object.fromEntries(SEMANTIC_ALIASES.map(name => [name, aliasPalette(doc, name) ?? null])),
-        tokens: ownedTokens(doc, 'semantic'),
-        shades: ownedTokenShades(doc, 'semantic')
+        color: alias(doc, key),
+        palette: aliasPalette(doc, key) ?? null,
+        tokens: ownedTokens(doc, key),
+        shades: ownedTokenShades(doc, key)
       }
     // Explicit stock values count as absent throughout: setFontPrefs strips
     // them on apply while a preset doc may spell them out, and a raw
@@ -238,7 +246,7 @@ function mergeAlias(doc: ThemeDoc, base: ThemeDoc, name: keyof typeof DEFAULT_CO
 }
 
 /** Swap a color section's tokens/token-shades for the base doc's. */
-function mergeColorExtras(doc: ThemeDoc, base: ThemeDoc, section: 'primary' | 'semantic' | 'neutral') {
+function mergeColorExtras(doc: ThemeDoc, base: ThemeDoc, section: ColorSection) {
   for (const mode of ['light', 'dark'] as const) {
     const kept = Object.entries(doc.tokens?.[mode] ?? {}).filter(([token]) => tokenSection(token) !== section)
     const added = Object.entries(base.tokens?.[mode] ?? {}).filter(([token]) => tokenSection(token) === section)
@@ -280,9 +288,13 @@ export function mergeSection(current: ThemeDoc, base: ThemeDoc, key: SectionKey)
       mergeAlias(doc, base, 'neutral')
       mergeColorExtras(doc, base, 'neutral')
       break
-    case 'semantic':
-      for (const name of SEMANTIC_ALIASES) mergeAlias(doc, base, name)
-      mergeColorExtras(doc, base, 'semantic')
+    case 'secondary':
+    case 'success':
+    case 'info':
+    case 'warning':
+    case 'error':
+      mergeAlias(doc, base, key)
+      mergeColorExtras(doc, base, key)
       break
     case 'font':
       mergeFontFields(doc, base, FONT_STACKS)

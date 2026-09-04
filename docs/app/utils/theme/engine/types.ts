@@ -21,46 +21,21 @@ export const DEFAULT_PRESET_ID = 'default'
 
 export const SHADES = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950] as const
 
-/**
- * Every stop any density can emit, a stop stays a valid `Shade` whichever
- * density produced it.
- */
-export const SHADES_ALL = [50, 60, 70, 75, 80, 90, 100, 110, 120, 125, 130, 140, 150, 160, 170, 175, 180, 190, 200, 210, 220, 225, 230, 240, 250, 260, 270, 275, 280, 290, 300, 310, 320, 325, 330, 340, 350, 360, 370, 375, 380, 390, 400, 410, 420, 425, 430, 440, 450, 460, 470, 475, 480, 490, 500, 510, 520, 525, 530, 540, 550, 560, 570, 575, 580, 590, 600, 610, 620, 625, 630, 640, 650, 660, 670, 675, 680, 690, 700, 710, 720, 725, 730, 740, 750, 760, 770, 775, 780, 790, 800, 810, 820, 825, 830, 840, 850, 860, 870, 875, 880, 890, 900, 910, 920, 925, 930, 940, 950] as const
-
-export type Shade = typeof SHADES_ALL[number]
-
-/** Stop density as the gap between stops, ordered coarse → fine (detectStopStep relies on the order). */
-export const SHADE_STEPS = [100, 50, 25, 10] as const
-
-export type ShadeStep = typeof SHADE_STEPS[number]
-
-/** The stops each density emits: 11, 19, 37 and 91. */
-export const SHADE_SETS: Record<ShadeStep, readonly Shade[]> = {
-  // 100 is the only irregular set, 50/950 are half-steps at the ends.
-  100: SHADES,
-  50: SHADES_ALL.filter(shade => shade % 50 === 0),
-  25: SHADES_ALL.filter(shade => shade % 25 === 0),
-  10: SHADES_ALL.filter(shade => shade % 10 === 0)
-}
+export type Shade = typeof SHADES[number]
 
 export type ShadeStop = 'white' | Shade | 'black'
 
+/** The stop closest to a value, where an off-ladder shade reference lands. */
+export function nearestShade(value: number): Shade {
+  return SHADES.reduce((best, stop) => Math.abs(stop - value) < Math.abs(best - value) ? stop : best)
+}
+
 /**
- * The shade sliders' travel: a density's stops plus literal white/black ends,
+ * The shade sliders' travel: the ramp's stops plus literal white/black ends,
  * several stock defaults are literals the ramp can't express (--ui-bg is
  * `white`).
  */
-const ladder = (step: ShadeStep): readonly ShadeStop[] => ['white', ...SHADE_SETS[step], 'black']
-
-export const SHADE_LADDERS: Record<ShadeStep, readonly ShadeStop[]> = {
-  100: ladder(100),
-  50: ladder(50),
-  25: ladder(25),
-  10: ladder(10)
-}
-
-/** The standard ladder, what stock ramps (and plain rows) travel. */
-export const SHADE_LADDER = SHADE_LADDERS[100]
+export const SHADE_LADDER: readonly ShadeStop[] = ['white', ...SHADES, 'black']
 
 export type ColorAlias = 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'error' | 'neutral'
 
@@ -249,18 +224,14 @@ export const TOKEN_SHADE_TARGETS: Array<{ token: string, label: string, ramp: To
   { token: '--ui-border-inverted', label: 'Inverted', ramp: 'neutral', group: 'border', defaults: { light: 900, dark: 'white' } }
 ]
 /**
- * A ramp shade reference, or the literal for white/black. In-between stops
- * (finer than 100) have no `--ui-color-*` indirection, the runtime colors
- * plugin only generates the 11 standard stops, so they hit the custom
- * ramp's `--color-*` directly; such stops only exist on custom palettes,
- * whose @theme block defines those vars in both preview and export.
+ * A ramp shade reference, or the literal for white/black. Only the 11 standard
+ * stops have a `--ui-color-*` indirection, so an in-between stop (what older
+ * themes could pin a token to) snaps onto the ladder rather than emitting a
+ * variable nothing defines.
  */
 function shadeRef(ramp: string, stop: ShadeStop | number): string {
   if (stop === 'white' || stop === 'black') return stop
-  if (typeof stop === 'number' && !(SHADES as readonly number[]).includes(stop)) {
-    return `var(--color-custom-${ramp}-${stop})`
-  }
-  return `var(--ui-color-${ramp}-${stop})`
+  return `var(--ui-color-${ramp}-${nearestShade(stop)})`
 }
 
 /** The `ui.<component>` override shape the studio and presets both speak. */

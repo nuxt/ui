@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useThrottleFn, watchIgnorable } from '@vueuse/core'
-import { SHADES_ALL, SHADE_STEPS, SHADE_SETS, CURVE_DEFAULTS, NEUTRAL_CURVE_DEFAULTS, PALETTE_EFFECT_DEFAULTS, generatePalette, buildRampSampler, fitPalette, applyPaletteEffects, isDefaultEffects, sampleCurve, shadeX, storedStopStep, detectStopStep, clampToGamut, formatOklch, parseColor, oklchToRgb, rgbToHex } from '../../../utils/theme/engine'
-import type { PaletteCurveParams, PaletteEffects, StoredPaletteParams, PalettePin, Shade, ShadeStep, ColorAlias } from '../../../utils/theme/engine'
+import { SHADES, CURVE_DEFAULTS, NEUTRAL_CURVE_DEFAULTS, PALETTE_EFFECT_DEFAULTS, generatePalette, buildRampSampler, fitPalette, applyPaletteEffects, isDefaultEffects, sampleCurve, shadeX, clampToGamut, formatOklch, parseColor, oklchToRgb, rgbToHex } from '../../../utils/theme/engine'
+import type { PaletteCurveParams, PaletteEffects, StoredPaletteParams, PalettePin, Shade, ColorAlias } from '../../../utils/theme/engine'
 
 const props = defineProps<{
   alias: ColorAlias
@@ -11,7 +11,6 @@ const appConfig = useAppConfig()
 const studioIcons = useStudioIcons()
 const { paletteParams, isCustomPalette, paletteShades, setPaletteFromCurve } = useThemeStudio()
 
-const open = defineModel<boolean>('open', { default: false })
 const tab = ref<'lightness' | 'chroma' | 'hue'>('lightness')
 
 const tabs = [
@@ -40,12 +39,6 @@ const stored = paletteParams.value[props.alias]
 const effects = reactive<PaletteEffects>({ ...PALETTE_EFFECT_DEFAULTS, ...(stored?.effects ?? {}) })
 const effectAmount = ref(stored?.amount ?? 100)
 
-// Stop density: 100 = the standard 11 stops; finer steps subdivide to 19/37/91.
-const stopStep = ref<ShadeStep>(storedStopStep(stored))
-const stopSet = computed(() => SHADE_SETS[stopStep.value])
-
-const stopItems = SHADE_STEPS.map(step => ({ label: `${step}`, value: step }))
-
 // Stops locked to an exact colour, the curves bend to pass through them.
 // Kept a plain cloneable array (persisted, fed to generatePalette).
 const pins = ref<PalettePin[]>(stored?.pins ? plainPins(stored.pins) : [])
@@ -55,16 +48,12 @@ const pinnedShades = computed(() => new Map(pins.value.map(pin => [pin.shade, pi
 // L above which a stop takes the dark badge. Whole class strings, tailwind's
 // scanner only sees literals.
 const LIGHT_STOP_L = 0.62
-const PIN_BADGE_CLASS = {
-  text: { onLight: 'text-(--ui-color-neutral-950)', onDark: 'text-(--ui-color-neutral-50)' },
-  bg: { onLight: 'bg-(--ui-color-neutral-950)', onDark: 'bg-(--ui-color-neutral-50)' }
-} as const
 
 // The neutral end that contrasts with the stop, a `difference` blend vanishes
 // at mid lightness and inverts saturated hues.
-function pinBadgeClass(shade: number, property: 'text' | 'bg') {
+function pinBadgeClass(shade: number) {
   const lightness = pinnedShades.value.get(shade as Shade) ?? 0
-  return PIN_BADGE_CLASS[property][lightness > LIGHT_STOP_L ? 'onLight' : 'onDark']
+  return lightness > LIGHT_STOP_L ? 'text-(--ui-color-neutral-950)' : 'text-(--ui-color-neutral-50)'
 }
 
 function setPin(shade: number, oklch: string) {
@@ -97,10 +86,10 @@ const params = reactive<PaletteCurveParams>(applyPaletteEffects(seedBase, effect
 
 const active = computed(() => isCustomPalette(props.alias))
 
-const shades = computed(() => generatePalette(params, stopStep.value, pins.value))
-const stopColors = computed(() => stopSet.value.map(shade => shades.value[shade]))
-const stopXs = computed(() => stopSet.value.map(shadeX))
-const stopPinned = computed(() => stopSet.value.map(shade => pinnedShades.value.has(shade)))
+const shades = computed(() => generatePalette(params, pins.value))
+const stopColors = computed(() => SHADES.map(shade => shades.value[shade]))
+const stopXs = SHADES.map(shadeX)
+const stopPinned = computed(() => SHADES.map(shade => pinnedShades.value.has(shade)))
 // Pin-corrected values: the editor draws the polyline so the line bends THROUGH
 // pinned stops. Sampler built on the reactive params so a handle drag redraws.
 const CHANNEL_KEY = { lightness: 'l', chroma: 'c', hue: 'h' } as const
@@ -108,7 +97,7 @@ const CHANNEL_KEY = { lightness: 'l', chroma: 'c', hue: 'h' } as const
 const rampSampler = computed(() => buildRampSampler(params, pins.value))
 const stopValues = computed(() => {
   const key = CHANNEL_KEY[tab.value]
-  return stopSet.value.map(shade => rampSampler.value(shadeX(shade))[key])
+  return SHADES.map(shade => rampSampler.value(shadeX(shade))[key])
 })
 const actualCurve = computed(() => {
   // no pins → no correction, draw the exact bézier
@@ -122,7 +111,7 @@ const actualCurve = computed(() => {
 
 // Kept light (no hex/rgb parse), recomputes every drag frame across up to 91
 // stops; the parse is deferred to the single open swatch.
-const swatches = computed(() => stopSet.value.map(shade => ({ shade, oklch: shades.value[shade]! })))
+const swatches = computed(() => SHADES.map(shade => ({ shade, oklch: shades.value[shade]! })))
 
 // useClipboard's `copied` already resets itself after 1.5s; the shade ref
 // only remembers WHICH tile the checkmark belongs to
@@ -228,9 +217,13 @@ function onSwatchCloseAutoFocus(event: Event) {
   }
 }
 
-/** The strip element, the one swatch popover anchors to it, not the tile. */
-const stripRef = useTemplateRef<HTMLElement>('stripRef')
-const stripEl = computed(() => stripRef.value ?? undefined)
+/**
+ * The canvas and strip together, not the strip alone: one popover serves every
+ * tile, and the strip is an aspect-11/1 sliver, so aligning against it left the
+ * detail pinned to the bottom of the editor whatever `align` said.
+ */
+const anchorRef = useTemplateRef<HTMLElement>('anchorRef')
+const anchorEl = computed(() => anchorRef.value ?? undefined)
 
 // Hue normalizes to 0–360 at seed, but a seam-crossing fit can leave points
 // outside, stretch the window once, at seed, or the drag clamp would snap a
@@ -302,7 +295,7 @@ const isDragging = ref(false)
 const customName = computed(() => `custom-${props.alias}`)
 
 function applyReactive() {
-  setPaletteFromCurve(props.alias, structuredClone(seedBase), { ...effects }, effectAmount.value, stopStep.value, plainPins(pins.value))
+  setPaletteFromCurve(props.alias, structuredClone(seedBase), { ...effects }, effectAmount.value, plainPins(pins.value))
   clearCssomPreview()
 }
 
@@ -313,15 +306,13 @@ function previewViaCssom() {
   if (!import.meta.client) return
   const root = document.documentElement.style
   const ramp = shades.value
-  for (const shade of stopSet.value) root.setProperty(`--color-${customName.value}-${shade}`, ramp[shade]!)
+  for (const shade of SHADES) root.setProperty(`--color-${customName.value}-${shade}`, ramp[shade]!)
 }
 
-// Sweeps every density's stops, the density may have changed since the
-// preview was written.
 function clearCssomPreview() {
   if (!import.meta.client) return
   const root = document.documentElement.style
-  for (const shade of SHADES_ALL) root.removeProperty(`--color-${customName.value}-${shade}`)
+  for (const shade of SHADES) root.removeProperty(`--color-${customName.value}-${shade}`)
 }
 
 // Throttled (not debounced) so the theme streams while dragging; the trailing
@@ -337,20 +328,9 @@ const throttledApply = useThrottleFn(() => {
   }
 }, 60, true, true)
 
-// A density change drops pins on stops the new set doesn't emit, otherwise
-// they keep bending the ramp with no tile (25 and 10 are siblings, not nested).
-watch(stopStep, (step) => {
-  const stops = SHADE_SETS[step] as readonly number[]
-  const kept = pins.value.filter(pin => stops.includes(pin.shade))
-  if (kept.length !== pins.value.length) pins.value = kept
-  // drop popover state pointing at a tile that no longer renders
-  if (stuckShade.value !== undefined && !stops.includes(stuckShade.value)) stuckShade.value = undefined
-  if (hoveredShade.value !== undefined && !stops.includes(hoveredShade.value)) hoveredShade.value = undefined
-})
-
 // Any of these reshape the ramp. Programmatic writes (seeding, undo/redo sync)
 // wrap in ignoreUpdates so restores never fire an apply that clobbers them.
-const { ignoreUpdates } = watchIgnorable([() => params, pins, stopStep], () => {
+const { ignoreUpdates } = watchIgnorable([() => params, pins], () => {
   throttledApply()
 }, { deep: true })
 
@@ -363,8 +343,6 @@ function seed(values: PaletteCurveParams) {
   ignoreUpdates(() => {
     Object.assign(effects, PALETTE_EFFECT_DEFAULTS)
     effectAmount.value = 100
-    // a fresh fit is 11-stop; seedFromCurrent re-detects the density after
-    stopStep.value = 100
     pins.value = []
     Object.assign(params, next)
   })
@@ -406,24 +384,18 @@ function seedFromCurrent() {
   if (!name) return
 
   const source = paletteShades(name)
-  if (source) {
-    seed(fitPalette(source))
-    // keep a finer density detected on the source; ignored like the rest of the seed
-    const step = detectStopStep(source)
-    if (step !== 100) ignoreUpdates(() => (stopStep.value = step))
-  }
+  if (source) seed(fitPalette(source))
 }
 
 // External writes to the stored entry, reflect them here, lens included.
 watch(() => paletteParams.value[props.alias], (value) => {
   if (!value || !('lightness' in value)) return
-  // Echo guard: skip only when curves, pins AND density all match, curves
-  // alone would swallow a pin- or density-only undo/redo.
+  // Echo guard: skip only when curves AND pins match, curves alone would
+  // swallow a pin-only undo/redo.
   const effective = applyPaletteEffects(pickCurves(value), value.effects, value.amount)
   const curvesMatch = JSON.stringify(effective) === JSON.stringify(toRaw(params))
   const pinsMatch = JSON.stringify(value.pins ?? []) === JSON.stringify(toRaw(pins.value))
-  const stepMatch = storedStopStep(value) === stopStep.value
-  if (curvesMatch && pinsMatch && stepMatch) return
+  if (curvesMatch && pinsMatch) return
 
   seedBase = pickCurves(value)
   normalizeHue(seedBase)
@@ -432,28 +404,25 @@ watch(() => paletteParams.value[props.alias], (value) => {
     Object.assign(effects, PALETTE_EFFECT_DEFAULTS, value.effects ?? {})
     effectAmount.value = value.amount ?? 100
     pins.value = value.pins ? plainPins(value.pins) : []
-    stopStep.value = storedStopStep(value)
     Object.assign(params, applyPaletteEffects(seedBase, effects, effectAmount.value))
   })
   // a restored curve can cross the hue seam elsewhere
   windows.value.hue = hueWindow(toRaw(params).hue)
 })
 
-// Open from the curves of the colour on screen, unless the editor already OWNS
-// curves for this alias, a preset's custom ramp is active but unowned, so it
-// still gets fitted. Popover state resets: the strip unmounts with the fold.
-watch([() => (appConfig.ui.colors as Record<string, string>)[props.alias], open], ([, isOpen]) => {
+// Seed from the curves of the colour on screen, unless the editor already OWNS
+// curves for this alias: a preset's custom ramp is active but unowned, so it
+// still gets fitted. Immediate because the popover mounts this on open.
+watch(() => (appConfig.ui.colors as Record<string, string>)[props.alias], () => {
   stuckShade.value = undefined
   hoveredShade.value = undefined
   const owned = paletteParams.value[props.alias]
-  if (isOpen && !(owned && 'lightness' in owned)) {
+  if (!(owned && 'lightness' in owned)) {
     seedFromCurrent()
   }
-})
+}, { immediate: true })
 
 /* ---------------------------------------------------------- modifiers -- */
-
-const modifiersOpen = ref(false)
 
 const effectRows = [
   { key: 'lightness', label: 'Lightness', min: -30, max: 30, step: 1, unit: '%' },
@@ -477,250 +446,197 @@ function resetEffects() {
 </script>
 
 <template>
-  <!-- unmounts on hide (Collapsible default), so strip and popover state die with the fold -->
-  <UCollapsible :open="open">
-    <template #content>
-      <div class="mt-2.5 flex flex-col gap-2.5 pb-1">
-        <UTabs
-          v-model="tab"
-          :items="tabs"
-          :content="false"
-          size="xs"
-          color="neutral"
-        />
+  <div class="flex flex-col gap-2.5">
+    <UTabs
+      v-model="tab"
+      :items="tabs"
+      :content="false"
+      size="xs"
+      color="neutral"
+    />
 
-        <div>
-          <ThemeStudioColorCurveEditor
-            v-model="params[tab]"
-            :label="tabs.find(({ value }) => value === tab)!.label"
-            :y-min="windows[tab].min"
-            :y-max="windows[tab].max"
-            :stop-colors="stopColors"
-            :stop-xs="stopXs"
-            :stop-pinned="stopPinned"
-            :stop-values="stopValues"
-            :actual-curve="actualCurve"
-            :field="field"
-            @drag-start="onDragStart"
-            @drag-end="onDragEnd"
+    <div ref="anchorRef">
+      <ThemeStudioColorCurveEditor
+        v-model="params[tab]"
+        :label="tabs.find(({ value }) => value === tab)!.label"
+        :y-min="windows[tab].min"
+        :y-max="windows[tab].max"
+        :stop-colors="stopColors"
+        :stop-xs="stopXs"
+        :stop-pinned="stopPinned"
+        :stop-values="stopValues"
+        :actual-curve="actualCurve"
+        :field="field"
+        @drag-start="onDragStart"
+        @drag-end="onDragEnd"
+      />
+
+      <!-- One tile per stop, the single popover below carries their detail. -->
+      <div class="flex aspect-11/1 rounded-b-sm overflow-hidden ring ring-default">
+        <button
+          v-for="info in swatches"
+          :key="info.shade"
+          type="button"
+          class="relative flex-1"
+          :style="{ backgroundColor: info.oklch }"
+          :aria-label="`Shade ${info.shade}: ${info.oklch}`"
+          :aria-pressed="stuckShade === info.shade"
+          tabindex="-1"
+          @click="toggleStuck(info.shade)"
+          @mouseenter="onSwatchEnter(info.shade)"
+          @mouseleave="onSwatchLeave"
+        >
+          <UIcon
+            v-if="pinnedShades.has(info.shade)"
+            :name="studioIcons.pin"
+            class="absolute inset-0 m-auto size-2.5 pointer-events-none"
+            :class="pinBadgeClass(info.shade)"
           />
+        </button>
+      </div>
 
-          <!-- Fixed 11:1 ratio so a denser ramp only narrows the tiles; the
-               single strip-anchored popover carries the details. -->
-          <div ref="stripRef" class="flex aspect-11/1 rounded-b-sm overflow-hidden ring ring-default">
-            <button
-              v-for="info in swatches"
-              :key="info.shade"
-              type="button"
-              class="relative flex-1"
-              :style="{ backgroundColor: info.oklch }"
-              :aria-label="`Shade ${info.shade}: ${info.oklch}`"
-              :aria-pressed="stuckShade === info.shade"
-              tabindex="-1"
-              @click="toggleStuck(info.shade)"
-              @mouseenter="onSwatchEnter(info.shade)"
-              @mouseleave="onSwatchLeave"
-            >
-              <!-- past 19 stops a tile is narrower than the icon, use a hairline -->
-              <template v-if="pinnedShades.has(info.shade)">
-                <UIcon
-                  v-if="stopStep >= 50"
-                  :name="studioIcons.pin"
-                  class="absolute inset-0 m-auto size-2.5 pointer-events-none"
-                  :class="pinBadgeClass(info.shade, 'text')"
-                />
-                <span
-                  v-else
-                  class="absolute inset-0 mx-auto w-px pointer-events-none"
-                  :class="pinBadgeClass(info.shade, 'bg')"
-                />
-              </template>
-            </button>
-          </div>
-
-          <UPopover
-            arrow
-            :open="!!activeSwatch"
-            :reference="stripEl"
-            :content="{
-              side: 'right',
-              onEscapeKeyDown: () => onSwatchEscape(swatchDetail.shade),
-              onCloseAutoFocus: onSwatchCloseAutoFocus,
-              sideOffset: 0,
-              // hover-opened popovers must not steal focus; a stuck one takes
-              // it so Tab lands on the copy button and colour inputs
-              onOpenAutoFocus: stuckShade === swatchDetail.shade ? undefined : (event: Event) => event.preventDefault(),
-              // stuck means kept-open: clicks elsewhere (curve drags, sliders)
-              // must not dismiss, only Esc, unstick or another stick
-              onInteractOutside: stuckShade === swatchDetail.shade ? (event: Event) => event.preventDefault() : undefined,
-              onFocusOutside: stuckShade === swatchDetail.shade ? (event: Event) => event.preventDefault() : undefined
-            }"
-            @update:open="onSwatchOpenUpdate(swatchDetail.shade, $event)"
+      <UPopover
+        :open="!!activeSwatch"
+        :reference="anchorEl"
+        :content="{
+          side: 'bottom',
+          sideOffset: 0,
+          onEscapeKeyDown: () => onSwatchEscape(swatchDetail.shade),
+          onCloseAutoFocus: onSwatchCloseAutoFocus,
+          // hover-opened popovers must not steal focus; a stuck one takes
+          // it so Tab lands on the copy button and colour inputs
+          onOpenAutoFocus: stuckShade === swatchDetail.shade ? undefined : (event: Event) => event.preventDefault(),
+          // stuck means kept-open: clicks elsewhere (curve drags, sliders)
+          // must not dismiss, only Esc, unstick or another stick
+          onInteractOutside: stuckShade === swatchDetail.shade ? (event: Event) => event.preventDefault() : undefined,
+          onFocusOutside: stuckShade === swatchDetail.shade ? (event: Event) => event.preventDefault() : undefined
+        }"
+        :ui="{ content: 'w-(--reka-popover-trigger-width)' }"
+        @update:open="onSwatchOpenUpdate(swatchDetail.shade, $event)"
+      >
+        <template #content>
+          <div
+            class="p-2 text-xs font-mono flex flex-col gap-1.5"
+            @mouseenter="onSwatchEnter(swatchDetail.shade)"
+            @mouseleave="onSwatchLeave"
           >
-            <template #content>
-              <div
-                class="p-2 text-xs font-mono flex flex-col gap-1.5 w-60"
-                @mouseenter="onSwatchEnter(swatchDetail.shade)"
-                @mouseleave="onSwatchLeave"
-              >
-                <div class="flex items-center justify-between gap-3 ps-2">
-                  <span class="font-semibold flex items-center gap-1.5">
-                    {{ swatchDetail.shade }}
-                    <span v-if="swatchDetail.pinned" class="text-[10px] font-normal text-primary">pinned</span>
-                  </span>
+            <div class="flex items-center justify-between gap-3 ps-2">
+              <span class="font-semibold flex items-center gap-1.5">
+                {{ swatchDetail.shade }}
+                <span v-if="swatchDetail.pinned" class="text-[10px] font-normal text-primary">pinned</span>
+              </span>
 
-                  <div class="flex items-center">
-                    <UTooltip text="Copy oklch">
-                      <UButton
-                        size="xs"
-                        color="neutral"
-                        square
-                        variant="ghost"
-                        :ui="{ leadingIcon: 'size-3' }"
-                        :icon="shadeCopied && copiedShade === swatchDetail.shade ? appConfig.ui.icons.copyCheck : appConfig.ui.icons.copy"
-                        :aria-label="`Copy oklch ${swatchDetail.oklch}`"
-                        @click="copySwatch(swatchDetail)"
-                      />
-                    </UTooltip>
-
-                    <UTooltip :text="swatchDetail.pinned ? 'Unpin colour' : 'Pin this colour exactly'">
-                      <UButton
-                        size="xs"
-                        color="neutral"
-                        square
-                        variant="ghost"
-                        active-color="primary"
-                        active-variant="ghost"
-                        :active="swatchDetail.pinned"
-                        :ui="{ leadingIcon: 'size-3' }"
-                        :icon="swatchDetail.pinned ? studioIcons.pinOff : studioIcons.pin"
-                        :aria-label="swatchDetail.pinned ? 'Unpin this colour' : 'Pin this colour exactly'"
-                        @click="togglePinExact(swatchDetail.shade)"
-                      />
-                    </UTooltip>
-                  </div>
-                </div>
-
-                <!-- paste any format into any field: it pins the stop to that colour -->
-                <UInput
-                  :model-value="swatchDetail.oklch"
-                  size="xs"
-                  variant="ghost"
-                  autocomplete="off"
-                  spellcheck="false"
-                  aria-label="OKLCH value"
-                  :ui="{ base: 'font-mono' }"
-                  @focus="stuckShade = swatchDetail.shade"
-                  @change="onColorCommit(swatchDetail.shade, 'oklch', $event)"
-                  @keydown.enter="($event.target as HTMLInputElement).blur()"
-                />
-                <div class="flex gap-1.5">
-                  <UInput
-                    :model-value="swatchDetail.hex"
+              <div class="flex items-center">
+                <UTooltip text="Copy oklch">
+                  <UButton
                     size="xs"
+                    color="neutral"
+                    square
                     variant="ghost"
-                    autocomplete="off"
-                    spellcheck="false"
-                    aria-label="Hex value"
-                    class="w-18"
-                    :ui="{ base: 'font-mono' }"
-                    @focus="stuckShade = swatchDetail.shade"
-                    @change="onColorCommit(swatchDetail.shade, 'hex', $event)"
-                    @keydown.enter="($event.target as HTMLInputElement).blur()"
+                    :ui="{ leadingIcon: 'size-3' }"
+                    :icon="shadeCopied && copiedShade === swatchDetail.shade ? appConfig.ui.icons.copyCheck : appConfig.ui.icons.copy"
+                    :aria-label="`Copy oklch ${swatchDetail.oklch}`"
+                    @click="copySwatch(swatchDetail)"
                   />
-                  <UInput
-                    :model-value="swatchDetail.rgb"
+                </UTooltip>
+
+                <UTooltip :text="swatchDetail.pinned ? 'Unpin colour' : 'Pin this colour exactly'">
+                  <UButton
                     size="xs"
+                    color="neutral"
+                    square
                     variant="ghost"
-                    autocomplete="off"
-                    spellcheck="false"
-                    aria-label="RGB value"
-                    class="flex-1"
-                    :ui="{ base: 'font-mono' }"
-                    @focus="stuckShade = swatchDetail.shade"
-                    @change="onColorCommit(swatchDetail.shade, 'rgb', $event)"
-                    @keydown.enter="($event.target as HTMLInputElement).blur()"
+                    active-color="primary"
+                    active-variant="ghost"
+                    :active="swatchDetail.pinned"
+                    :ui="{ leadingIcon: 'size-3' }"
+                    :icon="swatchDetail.pinned ? studioIcons.pinOff : studioIcons.pin"
+                    :aria-label="swatchDetail.pinned ? 'Unpin this colour' : 'Pin this colour exactly'"
+                    @click="togglePinExact(swatchDetail.shade)"
                   />
-                </div>
+                </UTooltip>
               </div>
-            </template>
-          </UPopover>
-        </div>
+            </div>
 
-        <!-- Modifiers recompute from the fitted base; the reset stops the
-             click so it doesn't toggle the fold. -->
-        <UCollapsible v-model:open="modifiersOpen">
-          <div class="flex items-center gap-1">
-            <UButton
-              label="Modifiers"
-              :trailing-icon="appConfig.ui.icons.chevronDown"
-              color="neutral"
+            <!-- paste any format into any field: it pins the stop to that colour -->
+            <UInput
+              :model-value="swatchDetail.oklch"
+              size="xs"
               variant="ghost"
-              size="sm"
-              block
-              class="flex-1 justify-start"
-              :ui="{ trailingIcon: ['text-dimmed transition-transform duration-200', modifiersOpen && 'rotate-180'] }"
+              autocomplete="off"
+              spellcheck="false"
+              aria-label="OKLCH value"
+              :ui="{ base: 'font-mono' }"
+              @focus="stuckShade = swatchDetail.shade"
+              @change="onColorCommit(swatchDetail.shade, 'oklch', $event)"
+              @keydown.enter="($event.target as HTMLInputElement).blur()"
             />
-            <!-- rides this row so it never overlaps the curve handles; its
-                 click must not toggle the fold -->
-            <UTooltip text="Shade interval">
-              <USelect
-                v-model="stopStep"
-                :items="stopItems"
-                size="sm"
+            <div class="flex gap-1.5">
+              <UInput
+                :model-value="swatchDetail.hex"
+                size="xs"
                 variant="ghost"
-                :content="{ bodyLock: false, disableOutsidePointerEvents: false }"
-                class="shrink-0"
-                @click.stop
+                autocomplete="off"
+                spellcheck="false"
+                aria-label="Hex value"
+                class="w-18"
+                :ui="{ base: 'font-mono' }"
+                @focus="stuckShade = swatchDetail.shade"
+                @change="onColorCommit(swatchDetail.shade, 'hex', $event)"
+                @keydown.enter="($event.target as HTMLInputElement).blur()"
               />
-            </UTooltip>
-            <!-- modifiers live outside the doc, so defaults = the preset;
-                 only the dirty styling mirrors the section resets -->
-            <UTooltip :text="effectsDirty ? 'Reset modifiers' : 'No modifiers active'">
-              <UButton
-                :icon="studioIcons.reset"
-                color="neutral"
+              <UInput
+                :model-value="swatchDetail.rgb"
+                size="xs"
                 variant="ghost"
-                :active="effectsDirty"
-                active-variant="outline"
-                size="sm"
-                :disabled="!effectsDirty"
-                aria-label="Reset modifiers"
-                @click.stop="resetEffects"
-              />
-            </UTooltip>
-          </div>
-
-          <template #content>
-            <div class="flex flex-col gap-1.5 pt-2 px-1">
-              <ThemeStudioRow
-                v-model="effectAmount"
-                control="slider"
-                label="Effect"
-                :icon="appConfig.ui.icons.eye"
-                :min="0"
-                :max="200"
-                :step="1"
-                unit="%"
-                @update:model-value="applyEffects()"
-              />
-
-              <ThemeStudioRow
-                v-for="row in effectRows"
-                :key="row.key"
-                v-model="effects[row.key]"
-                control="slider"
-                :label="row.label"
-                :min="row.min"
-                :max="row.max"
-                :step="row.step"
-                :unit="row.unit"
-                @update:model-value="applyEffects()"
+                autocomplete="off"
+                spellcheck="false"
+                aria-label="RGB value"
+                class="flex-1"
+                :ui="{ base: 'font-mono' }"
+                @focus="stuckShade = swatchDetail.shade"
+                @change="onColorCommit(swatchDetail.shade, 'rgb', $event)"
+                @keydown.enter="($event.target as HTMLInputElement).blur()"
               />
             </div>
-          </template>
-        </UCollapsible>
+          </div>
+        </template>
+      </UPopover>
+    </div>
+
+    <!-- Modifiers recompute from the fitted base. They live outside the doc,
+         so their defaults ARE the preset and the reset reads the same. -->
+    <ThemeStudioSection
+      label="Modifiers"
+      resettable
+      :reset-dirty="effectsDirty"
+      @reset="resetEffects"
+    >
+      <div class="flex flex-col gap-1.5 px-1">
+        <ThemeStudioRow
+          v-model="effectAmount"
+          control="slider"
+          label="Effect"
+          :min="0"
+          :max="200"
+          :step="1"
+          unit="%"
+          @update:model-value="applyEffects()"
+        />
+
+        <ThemeStudioRow
+          v-for="row in effectRows"
+          :key="row.key"
+          v-model="effects[row.key]"
+          control="slider"
+          :label="row.label"
+          :min="row.min"
+          :max="row.max"
+          :step="row.step"
+          :unit="row.unit"
+          @update:model-value="applyEffects()"
+        />
       </div>
-    </template>
-  </UCollapsible>
+    </ThemeStudioSection>
+  </div>
 </template>

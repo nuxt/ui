@@ -8,17 +8,12 @@ const props = defineProps<{
   vertical?: boolean
 }>()
 
-const appConfig = useAppConfig()
 const { colorChips, colorLabel, groupDirtyFlags } = useThemeStudioToolbar()
 
 const open = ref(false)
 const dirty = groupDirtyFlags.colors
 
-// Folded by default: five pickers most themes never touch, and the bulk of
-// the panel's height. Dirty state still reads on the header's reset button.
-const semanticOpen = ref(false)
-
-const content = computed(() => [...toolbarPanelClass(props.vertical), 'divide-y divide-default *:p-3'])
+const content = computed(() => [...toolbarPanelClass(props.vertical), 'p-3 flex flex-col gap-3'])
 </script>
 
 <template>
@@ -48,47 +43,15 @@ const content = computed(() => [...toolbarPanelClass(props.vertical), 'divide-y 
     </ThemeStudioToolbarTrigger>
 
     <template #content>
-      <ThemeStudioColorSection
-        alias="primary"
-        help-to="/docs/getting-started/theme/css-variables#colors"
-        section-key="primary"
-      />
+      <ThemeStudioColorSection alias="primary" section-key="primary" />
+      <ThemeStudioColorSection alias="neutral" section-key="neutral" />
 
       <ThemeStudioColorSection
-        alias="neutral"
-        help-to="/docs/getting-started/theme/css-variables#text"
-        section-key="neutral"
+        v-for="alias in SEMANTIC_ALIASES"
+        :key="alias"
+        :alias="alias"
+        :section-key="alias"
       />
-
-      <ThemeStudioSection
-        label="Semantic"
-        help-to="/docs/getting-started/theme/design-system"
-        section-key="semantic"
-        collapsible
-      >
-        <template #actions>
-          <UButton
-            :icon="appConfig.ui.icons.chevronDown"
-            color="neutral"
-            variant="ghost"
-            size="sm"
-            :aria-label="semanticOpen ? 'Collapse semantic colors' : 'Expand semantic colors'"
-            :aria-expanded="semanticOpen"
-            :ui="{ leadingIcon: ['transition-transform duration-200', semanticOpen && 'rotate-180'] }"
-            @click="semanticOpen = !semanticOpen"
-          />
-        </template>
-
-        <UCollapsible v-model:open="semanticOpen" :unmount-on-hide="true" :ui="{ content: 'overflow-hidden flex flex-col gap-2 pt-2' }">
-          <template #content>
-            <ThemeStudioColorSection
-              v-for="alias in SEMANTIC_ALIASES"
-              :key="alias"
-              :alias="alias"
-            />
-          </template>
-        </UCollapsible>
-      </ThemeStudioSection>
     </template>
   </UPopover>
 </template>

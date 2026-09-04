@@ -8,8 +8,8 @@
  * samples one bezier per channel across the shade stops, and can also run
  * backwards, fitting curves to a pasted palette.
  */
-import type { Shade, ShadeStep } from './types'
-import { SHADES_ALL, SHADE_SETS, SHADE_STEPS } from './types'
+import type { Shade } from './types'
+import { SHADES } from './types'
 
 /* ------------------------------------------------------- sRGB ↔ OKLCH -- */
 
@@ -225,27 +225,8 @@ export interface PalettePin {
   h: number
 }
 
-/** A persisted palette. `fineStops` predates the density model, read, never written. */
-export type StoredPaletteParams = PaletteCurveParams & { effects?: PaletteEffects, amount?: number, stopStep?: ShadeStep, fineStops?: boolean, pins?: PalettePin[] }
-
-/** The density a persisted palette generates at. */
-export function storedStopStep(stored?: { stopStep?: ShadeStep, fineStops?: boolean }): ShadeStep {
-  return stored?.stopStep ?? (stored?.fineStops ? 50 : 100)
-}
-
-/**
- * Density read back from a ramp's stops: the coarsest set covering all of
- * them; a hand-edited mix no density emits falls to the finest.
- */
-export function detectStopStep(shades: Partial<Record<Shade, string>>): ShadeStep {
-  const present = Object.keys(shades).map(Number) as Shade[]
-  return SHADE_STEPS.find(step => present.every(shade => SHADE_SETS[step].includes(shade))) ?? 10
-}
-
-/** The stop closest to a value, where an orphaned shade reference lands. */
-export function nearestShade(value: number, stops: readonly Shade[]): Shade {
-  return stops.reduce((best, stop) => Math.abs(stop - value) < Math.abs(best - value) ? stop : best)
-}
+/** A persisted palette. */
+export type StoredPaletteParams = PaletteCurveParams & { effects?: PaletteEffects, amount?: number, pins?: PalettePin[] }
 
 // Pin influence width (ramp x). Wider than the closest pin spacing the solve
 // goes ill-conditioned (clustered pins blow neighbours to white), so sigma
@@ -464,7 +445,7 @@ export function buildRampSampler(params: PaletteCurveParams, pins: PalettePin[] 
   }
 }
 
-export function generatePalette(params: PaletteCurveParams, step: ShadeStep = 100, pins: PalettePin[] = []): Record<Shade, string> {
+export function generatePalette(params: PaletteCurveParams, pins: PalettePin[] = []): Record<Shade, string> {
   const result = {} as Record<Shade, string>
 
   const base = (x: number) => ({
@@ -475,7 +456,7 @@ export function generatePalette(params: PaletteCurveParams, step: ShadeStep = 10
   // Correction applies pre-clamp, so an in-gamut pin target is hit exactly.
   const correct = pins.length ? pinField(pins, base) : undefined
 
-  for (const shade of SHADE_SETS[step]) {
+  for (const shade of SHADES) {
     const x = shadeX(shade)
     const b = base(x)
     const d = correct ? correct(x) : { dl: 0, dc: 0, dh: 0 }
@@ -583,12 +564,8 @@ export function fitCurve(points: Array<[number, number]>): ChannelCurve {
  * params that reproduce it, so editing always starts from the real thing.
  */
 export function fitPalette(shades: Partial<Record<Shade, string>>): PaletteCurveParams {
-  // Every stop that is actually there, not just the 11 standard ones: a ramp
-  // saved at a finer density carries up to 91, and fitting through 11 of them
-  // then regenerating all 91 shifts every intermediate stop. `shadeX` keys the
-  // position by value, so it agrees with the 11-stop case it replaces.
   const stops: Array<{ x: number, color: Oklch }> = []
-  for (const shade of SHADES_ALL) {
+  for (const shade of SHADES) {
     // Accept hex or oklch, older saved docs and pasted ramps are hex.
     const color = shades[shade] ? parseColor(shades[shade]!) : undefined
     if (color) {

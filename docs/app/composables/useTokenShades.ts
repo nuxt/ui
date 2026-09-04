@@ -1,5 +1,4 @@
-import { TOKEN_SHADE_TARGETS, SHADE_LADDER, SHADE_LADDERS } from '../utils/theme/engine/types'
-import { storedStopStep } from '../utils/theme/engine/palette'
+import { TOKEN_SHADE_TARGETS, SHADE_LADDER } from '../utils/theme/engine/types'
 import { canonicalTokenShades } from '../utils/theme/engine/sections'
 import type { ColorAlias, ShadeStop } from '../utils/theme/engine/types'
 
@@ -9,17 +8,10 @@ import type { ColorAlias, ShadeStop } from '../utils/theme/engine/types'
  * the Colors panel section and the folded token groups.
  */
 export function useTokenShades(alias: ColorAlias) {
-  const { style, setStyle, baselineDoc, isCustomPalette, paletteParams } = useThemeStudio()
+  const { style, setStyle, baselineDoc } = useThemeStudio()
 
   /** The active preset's own shade choices, what a row reset restores. */
   const baselineShades = computed(() => canonicalTokenShades(baselineDoc.value))
-
-  // A custom palette's tokens can pick every stop its density emits, the
-  // sliders (and their model mapping) span that ladder, up to 91 stops. Stock
-  // ramps only define the standard 11, so they stay on the short ladder.
-  const shadeLadder = computed<readonly ShadeStop[]>(() => (isCustomPalette(alias)
-    ? SHADE_LADDERS[storedStopStep(paletteParams.value[alias])]
-    : SHADE_LADDER))
 
   // Only the touched mode is written, so an untouched mode never becomes an
   // override. Reset restores the BASELINE preset's shade, or deletes the entry
@@ -29,15 +21,15 @@ export function useTokenShades(alias: ColorAlias) {
     const model = computed({
       get: () => {
         const value = style.value.tokenShades?.[token]?.[target] ?? defaults[target]
-        // a stop coarsened off the ladder reads indexOf -1, clamp so the
+        // an older theme's off-ladder stop reads indexOf -1, clamp so the
         // slider stays grabbable
-        return Math.max(0, shadeLadder.value.indexOf(value as ShadeStop))
+        return Math.max(0, SHADE_LADDER.indexOf(value as ShadeStop))
       },
       set: (index: number) => {
         setStyle({
           tokenShades: {
             ...style.value.tokenShades,
-            [token]: { ...style.value.tokenShades?.[token], [target]: shadeLadder.value[index]! }
+            [token]: { ...style.value.tokenShades?.[token], [target]: SHADE_LADDER[index]! }
           }
         })
       }
@@ -66,5 +58,5 @@ export function useTokenShades(alias: ColorAlias) {
       }
     }))
 
-  return { shadeLadder, sections }
+  return { sections }
 }

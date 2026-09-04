@@ -1,7 +1,4 @@
 <script setup lang="ts">
-import { SHADE_LADDER } from '../../../utils/theme/engine'
-import type { ShadeStop } from '../../../utils/theme/engine'
-
 /**
  * A section of per-mode shade sliders that reset as one group, the sliders
  * carry their own dirty state, so no call site has to fold it by hand.
@@ -17,12 +14,10 @@ const props = withDefaults(defineProps<{
   sliders?: Record<'light' | 'dark', ShadeSlider>
   /** Palette the stops resolve against. */
   chip?: string
-  ladder?: readonly ShadeStop[]
 }>(), {
   // an empty record rather than undefined: a `?? {}` in the v-for widens the
   // item to never, and a Partial makes every row possibly-undefined
-  sliders: () => ({}) as Record<'light' | 'dark', ShadeSlider>,
-  ladder: () => SHADE_LADDER
+  sliders: () => ({}) as Record<'light' | 'dark', ShadeSlider>
 })
 
 const rows = computed(() => Object.values(props.sliders))
@@ -48,7 +43,6 @@ function reset() {
       control="shade"
       :mode="mode"
       :chip="chip"
-      :ladder="ladder"
     />
   </ThemeStudioSection>
 </template>

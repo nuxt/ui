@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { SHADE_LADDER } from '../../utils/theme/engine'
-import type { ShadeStop } from '../../utils/theme/engine'
 import type { ChipProps } from '@nuxt/ui'
 
 /** Every settings row in every panel: label, then the control, on one 28px line. */
@@ -32,8 +31,6 @@ const props = withDefaults(defineProps<{
   /** Palette the shade stops resolve against. */
   chip?: string
   mode?: 'light' | 'dark'
-  /** Fine ramps swap in the wider 21-stop ladder. */
-  ladder?: readonly ShadeStop[]
   /** `reset` deletes the override, writing the default would pin a lookalike. */
   resettable?: boolean
   dirty?: boolean
@@ -41,8 +38,7 @@ const props = withDefaults(defineProps<{
 }>(), {
   control: 'slider',
   min: 0,
-  step: 1,
-  ladder: () => SHADE_LADDER
+  step: 1
 })
 
 // Optional: a `custom` row's slot brings its own control.
@@ -69,8 +65,8 @@ const slots = defineSlots<{
 
 const shade = computed(() => props.control === 'shade')
 // Shade rows span the ladder; plain rows use the caller's max.
-const sliderMax = computed(() => (shade.value ? props.ladder.length - 1 : props.max ?? SHADE_LADDER.length - 1))
-const stop = computed(() => props.ladder[model.value as number])
+const sliderMax = computed(() => props.max ?? SHADE_LADDER.length - 1)
+const stop = computed(() => SHADE_LADDER[model.value as number])
 const sliderColor = computed(() => {
   if (!shade.value) return undefined
   // the ladder's ends are literals no ramp variable can express
@@ -82,7 +78,7 @@ const contrastColor = computed(() => shade.value
   ? `oklch(from ${sliderColor.value} clamp(0.12, (0.66 - l) * 1000, 0.95) 0 h / 0.65)`
   : undefined)
 
-const stopItems = computed(() => props.ladder.map((entry, index) => ({ label: String(entry), value: String(index) })))
+const stopItems = SHADE_LADDER.map((entry, index) => ({ label: String(entry), value: String(index) }))
 
 // USelect speaks strings; the value is an index into the ladder.
 const stopModel = computed({
@@ -201,14 +197,11 @@ const showTextLabel = computed(() => !props.icon && !shade.value)
       />
 
       <UButton
-        v-if="resettable"
+        v-if="resettable && dirty"
         :icon="studioIcons.reset"
         size="xs"
         color="neutral"
-        variant="ghost"
-        :active="dirty"
-        active-variant="outline"
-        :disabled="!dirty"
+        variant="outline"
         :ui="{ leadingIcon: 'size-3' }"
         :aria-label="`Reset ${label ?? mode}`"
         @click="emit('reset')"
