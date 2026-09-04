@@ -103,8 +103,8 @@ const showLayout = computed(() => !route.path.startsWith('/examples') && !route.
       <template v-if="!route.path.startsWith('/examples')">
         <ClientOnly>
           <!-- mounted on first open (state persists, so a kept-open chat
-               remounts on load): the chat pulls the studio engine with it,
-               which every plain docs visit can skip downloading -->
+               remounts on load): the AI SDK and the chat UI stay out of the
+               entry chunk, which every plain docs visit can skip downloading -->
           <LazyChat v-if="chatSeen" />
 
           <Search :navigation="navigationByFramework" />

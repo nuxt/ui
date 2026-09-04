@@ -48,7 +48,9 @@ function toggleChat() {
         />
       </UTooltip>
 
-      <ThemeStudioPresetPicker />
+      <!-- lazy for the theme engine it pulls, hydrated on idle: a plain
+           `Lazy` drops the server-rendered button until the chunk lands -->
+      <LazyThemeStudioPresetPicker hydrate-on-idle />
 
       <UTooltip text="Open on GitHub" class="hidden lg:flex" ignore-non-keyboard-focus>
         <UButton
