@@ -93,6 +93,7 @@ const components = [
   'toast',
   'tooltip',
   'tree',
+  'typography',
   'user'
 ].map(component => ({ label: upperName(component.split('/').pop() as string), icon: 'i-lucide-box', to: `/components/${component}` }))
 
