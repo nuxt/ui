@@ -22,7 +22,7 @@ export interface LinkBaseProps {
 </script>
 
 <script setup lang="ts">
-import { computed, getCurrentInstance, onMounted, onBeforeUnmount } from 'vue'
+import { getCurrentInstance, onMounted, onBeforeUnmount } from 'vue'
 import { Primitive } from 'reka-ui'
 import { requestIdleCallback, cancelIdleCallback, observeIntersection } from '../utils/link'
 
@@ -30,8 +30,6 @@ const props = withDefaults(defineProps<LinkBaseProps>(), {
   as: 'button',
   type: 'button'
 })
-
-const instance = getCurrentInstance()
 
 function onClickWrapper(e: MouseEvent) {
   if (props.disabled) {
@@ -58,64 +56,60 @@ function onPrefetch() {
 }
 
 // Since Nuxt 4.5, NuxtLink no longer wires prefetching for `custom` links and
-// exposes `prefetch` / `shouldPrefetch` to the slot instead, so both triggers
-// are attached here on the rendered element.
-const prefetchListeners = computed(() => {
-  if (!props.shouldPrefetch?.('interaction')) {
-    return {}
-  }
+// exposes `prefetch` / `shouldPrefetch` to the slot instead. The interaction
+// listeners are bound in the template, the visibility observer is set up here.
+// Only links that receive `shouldPrefetch` register hooks, so buttons and the
+// Vue build cost exactly what they did before.
+if (props.shouldPrefetch) {
+  const instance = getCurrentInstance()
 
-  return { onPointerenter: onPrefetch, onFocus: onPrefetch }
-})
+  let idleId: ReturnType<typeof requestIdleCallback>
+  let unobserve: (() => void) | null = null
 
-let idleId: ReturnType<typeof requestIdleCallback>
-let unobserve: (() => void) | null = null
+  onMounted(() => {
+    if (!props.shouldPrefetch?.('visibility')) {
+      return
+    }
 
-onMounted(() => {
-  if (!props.shouldPrefetch?.('visibility')) {
-    return
-  }
+    // Read from the instance rather than a template ref: a ref makes Vue queue
+    // a `setRef` job on every patch.
+    const el = instance?.proxy?.$el as HTMLElement | undefined
+    if (!el?.tagName) {
+      return
+    }
 
-  // Read from the instance rather than a template ref: a ref makes Vue queue a
-  // `setRef` job on every patch, and this is the hottest primitive in the library.
-  const el = instance?.proxy?.$el as HTMLElement | undefined
-  if (!el?.tagName) {
-    return
-  }
-
-  idleId = requestIdleCallback(() => {
-    unobserve = observeIntersection(el, () => {
-      unobserve?.()
-      unobserve = null
-      onPrefetch()
+    idleId = requestIdleCallback(() => {
+      unobserve = observeIntersection(el, () => {
+        unobserve?.()
+        unobserve = null
+        onPrefetch()
+      })
     })
   })
-})
 
-onBeforeUnmount(() => {
-  cancelIdleCallback(idleId)
-  unobserve?.()
-  unobserve = null
-})
+  onBeforeUnmount(() => {
+    cancelIdleCallback(idleId)
+    unobserve?.()
+    unobserve = null
+  })
+}
 </script>
 
 <template>
   <Primitive
-    v-bind="{
-      ...(href ? {
-        'as': 'a',
-        'href': disabled ? undefined : href,
-        'aria-disabled': disabled ? 'true' : undefined,
-        'role': disabled ? 'link' : undefined,
-        'tabindex': disabled ? -1 : undefined
-      } : as === 'button' ? {
-        as,
-        type,
-        disabled
-      } : {
-        as
-      }),
-      ...prefetchListeners
+    v-bind="href ? {
+      'as': 'a',
+      'href': disabled ? undefined : href,
+      'aria-disabled': disabled ? 'true' : undefined,
+      'role': disabled ? 'link' : undefined,
+      'tabindex': disabled ? -1 : undefined,
+      ...(shouldPrefetch?.('interaction') ? { onPointerenter: onPrefetch, onFocus: onPrefetch } : undefined)
+    } : as === 'button' ? {
+      as,
+      type,
+      disabled
+    } : {
+      as
     }"
     :rel="rel"
     :target="target"
