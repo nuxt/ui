@@ -65,12 +65,15 @@ function asPreset(item: unknown) {
   return item as typeof presetItems.value[number]
 }
 
+// picking the applied preset again reapplies it, dropping the edits on top
+function pick(id: string | number | undefined) {
+  const preset = presets.find(entry => entry.id === id)
+  if (preset) applyPreset(preset)
+}
+
 const selected = computed({
   get: () => (mounted.value ? selectedPreset.value : undefined),
-  set: (id: string | number | undefined) => {
-    const preset = presets.find(entry => entry.id === id)
-    if (preset) applyPreset(preset)
-  }
+  set: pick
 })
 </script>
 
@@ -84,6 +87,7 @@ const selected = computed({
     :aria-label="`Preset: ${presetLabel}`"
     :vertical="vertical"
     :class="vertical ? 'w-full' : 'w-38'"
+    @reselect="pick"
   >
     <template #item-description="{ item }">
       <span class="flex items-center gap-1">

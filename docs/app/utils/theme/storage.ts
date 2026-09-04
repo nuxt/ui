@@ -1,5 +1,5 @@
 import type { ThemeDoc, StoredPaletteParams, StyleOptions } from './engine'
-import { THEME_DEFAULTS } from './engine/types'
+import { DEFAULT_COLORS, THEME_DEFAULTS } from './engine/types'
 import { SAFE_NAME } from './sanitize'
 
 /**
@@ -92,8 +92,8 @@ function migrateLegacyTheme(): StoredTheme {
   return migrated
 }
 
-/** Clamp to a range, or drop the value if it isn't a finite number. */
-function clamped(value: unknown, min: number, max: number): number | undefined {
+/** Clamp to a range, or drop the value if it isn't a finite number (a numeric string counts). */
+export function clamped(value: unknown, min: number, max: number): number | undefined {
   // Number() maps null/''/booleans to finite numbers, which would clamp
   // junk to the range floor instead of dropping it.
   if (typeof value !== 'number' && typeof value !== 'string') return undefined
@@ -177,6 +177,37 @@ export function writeStoredTheme(value: StoredTheme) {
     }
   } catch {
     // the theme still applies in memory, it just won't survive the reload
+  }
+}
+
+/**
+ * The live theme in the stored shape, defaults omitted so an untouched theme
+ * stores nothing. Reads the raw state refs rather than `currentDoc()`: the
+ * doc is diffed against a stock library install on every call, far too much
+ * work for the persistence watcher's per-flush getter, and `useTheme()`
+ * outside a component would fire its onMounted with no instance.
+ */
+export function snapshotStoredTheme(): StoredTheme {
+  const appConfig = useAppConfig()
+  const filled = <T extends object>(value: T | undefined) => value && Object.keys(value).length ? value : undefined
+  const unless = <T>(value: T, fallback: T) => value === fallback ? undefined : value
+  const extras = useState<Record<string, any>>('nuxt-ui-ai-theme').value
+  const cssVariables = useState<StoredTheme['cssVariables']>('nuxt-ui-css-variables').value
+  return {
+    primary: unless(appConfig.ui.colors.primary, DEFAULT_COLORS.primary),
+    neutral: unless(appConfig.ui.colors.neutral, DEFAULT_COLORS.neutral),
+    radius: unless(useState<number>('nuxt-ui-radius').value, THEME_DEFAULTS.radius),
+    fontSize: unless(useState<number>('nuxt-ui-font-size').value, THEME_DEFAULTS.fontSize),
+    font: filled(useState<StoredTheme['font']>('nuxt-ui-font').value),
+    icons: unless(useState<string>('nuxt-ui-icons').value, THEME_DEFAULTS.icons),
+    blackAsPrimary: useState<boolean>('nuxt-ui-black-as-primary').value || undefined,
+    colors: filled(extras?.colors),
+    components: filled(extras?.ui),
+    customColors: filled(useState<StoredTheme['customColors']>('nuxt-ui-custom-colors').value),
+    cssVariables: filled(cssVariables?.light) || filled(cssVariables?.dark) ? cssVariables : undefined,
+    style: filled(useState<StoredTheme['style']>(THEME_STATE_KEYS.stylePrefs).value),
+    paletteParams: filled(useState<StoredTheme['paletteParams']>(THEME_STATE_KEYS.paletteParams).value),
+    preset: useState<string | undefined>(THEME_STATE_KEYS.themePreset).value
   }
 }
 

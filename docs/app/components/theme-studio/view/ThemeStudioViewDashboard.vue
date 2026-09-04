@@ -151,7 +151,7 @@ function isDateRangeSelected(range: DateRangePreset) {
 function selectDateRange(range: DateRangePreset) {
   selectedDateRange.value = { start: rangeStart(range), end: referenceDate }
 }
-const period = ref('Daily')
+const period = ref('daily')
 
 const stats = [
   { title: 'Customers', icon: studioIcons.users, value: '892', variation: 14 },

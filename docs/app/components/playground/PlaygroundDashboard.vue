@@ -8,7 +8,7 @@ const studioIcons = useStudioIcons()
 const items: DropdownMenuItem[][] = [
   [
     { label: 'View report', icon: appConfig.ui.icons.eye, onSelect: () => toast.add({ title: 'View report' }) },
-    { label: 'Export as CSV', icon: 'i-lucide-download', onSelect: () => toast.add({ title: 'Exporting…' }) },
+    { label: 'Export as CSV', icon: studioIcons.download, onSelect: () => toast.add({ title: 'Exporting…' }) },
     { label: 'Refresh', icon: appConfig.ui.icons.reload, onSelect: () => toast.add({ title: 'Refreshed' }) }
   ],
   [

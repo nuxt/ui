@@ -27,7 +27,8 @@ const contributors = computed(() => module.value?.contributors?.filter(contribut
 
 const studioIcons = useStudioIcons()
 
-const icons = {
+// computed: the pack is read after mount, a plain object would freeze on Lucide
+const icons = computed<Record<string, string>>(() => ({
   website: studioIcons.link,
   twitter: 'i-simple-icons-x',
   twitch: 'i-simple-icons-twitch',
@@ -37,7 +38,7 @@ const icons = {
   mastodon: 'i-simple-icons-mastodon',
   bluesky: 'i-simple-icons-bluesky',
   github: 'i-simple-icons-github'
-}
+}))
 </script>
 
 <template>
@@ -91,7 +92,7 @@ const icons = {
               color="neutral"
               variant="link"
               :to="link.url"
-              :icon="icons[key as keyof typeof icons] || icons.website"
+              :icon="icons[key] || icons.website"
               :aria-label="`Link to ${user.name}'s ${key} profile`"
               target="_blank"
               size="sm"

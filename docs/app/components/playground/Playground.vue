@@ -57,7 +57,9 @@ const tiles = [
 // width with fullscreen. Tile count follows lanes (the old per-breakpoint
 // reveal) so narrow layouts aren't one endless column.
 const scrollArea = useTemplateRef('scrollArea')
-const { width } = useElementSize(computed(() => scrollArea.value?.$el))
+// border-box: `compact` below switches this element's own padding, and a
+// content-box width that moves with it would flip back and forth forever
+const { width } = useElementSize(computed(() => scrollArea.value?.$el), undefined, { box: 'border-box' })
 const lanes = computed(() => width.value >= 1200 ? 4 : width.value >= 900 ? 3 : width.value >= 600 ? 2 : 1)
 
 // The gutters follow the container too, so the vertical padding matches the

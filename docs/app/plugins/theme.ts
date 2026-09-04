@@ -2,7 +2,7 @@ import { defu } from 'defu'
 import { watchDebounced } from '@vueuse/core'
 import { themeIcons } from '../utils/theme/icons'
 import { cssVariableDefaults } from '../utils/theme/tokens'
-import { THEME_STATE_KEYS, THEME_STORAGE_KEY, readStoredTheme, writeStoredTheme } from '../utils/theme/storage'
+import { THEME_STATE_KEYS, THEME_STORAGE_KEY, clamped, readStoredTheme, snapshotStoredTheme, writeStoredTheme } from '../utils/theme/storage'
 import type { StoredTheme } from '../utils/theme/storage'
 import { mergeUi, styleComponents, DEFAULT_COLORS, THEME_DEFAULTS } from '../utils/theme/engine/types'
 import { SAFE_NAME, sanitizeCustomColors, sanitizeCSSVariables } from '../utils/theme/sanitize'
@@ -11,6 +11,9 @@ export default defineNuxtPlugin({
   enforce: 'post',
   setup() {
     const appConfig = useAppConfig()
+
+    // Client only, see below; the server's copy is inert.
+    let restoreStoredTheme = () => {}
 
     if (import.meta.client) {
       // Everything a stored theme touches, in one pass, with defaults for
@@ -23,16 +26,13 @@ export default defineNuxtPlugin({
       // already holds the server's default and its initializer will not
       // re-run.
       let appliedUiKeys: string[] = []
-      // Both end up interpolated into <style> text, and storage is writable by
-      // anything on the origin, so they get the same clamp the FOUC script
-      // (num) and applyThemeSettings already apply. Three restore paths, one
-      // rule.
-      const clamp = (value: unknown, lo: number, hi: number, fallback: number) =>
-        Number.isFinite(value) ? Math.min(hi, Math.max(lo, value as number)) : fallback
 
       const distribute = (saved: StoredTheme, defer: (fn: () => void) => void) => {
-        useState('nuxt-ui-radius').value = clamp(saved.radius, 0, 4, THEME_DEFAULTS.radius)
-        useState('nuxt-ui-font-size').value = clamp(saved.fontSize, 12, 20, THEME_DEFAULTS.fontSize)
+        // Both end up interpolated into <style> text, and storage is writable
+        // by anything on the origin, so they get the same clamp the FOUC
+        // script (num) and applyThemeSettings already apply.
+        useState('nuxt-ui-radius').value = clamped(saved.radius, 0, 4) ?? THEME_DEFAULTS.radius
+        useState('nuxt-ui-font-size').value = clamped(saved.fontSize, 12, 20) ?? THEME_DEFAULTS.fontSize
         useState('nuxt-ui-font').value = saved.font ?? {}
         useState('nuxt-ui-icons').value = saved.icons ?? THEME_DEFAULTS.icons
         useState('nuxt-ui-black-as-primary').value = saved.blackAsPrimary ?? false
@@ -95,7 +95,16 @@ export default defineNuxtPlugin({
         })
       }
 
-      distribute(readStoredTheme(), onNuxtReady)
+      // A shared theme link (/theme?doc=, see pages/theme.vue) renders
+      // server-side in its own theme; restoring the stored one here would
+      // paint over it between SSR and hydration. The page applies the link
+      // instead and stores it, or calls the restore back when the payload
+      // turns out not to be a theme.
+      restoreStoredTheme = () => distribute(readStoredTheme(), onNuxtReady)
+      const linked = /^\/theme\/?$/.test(window.location.pathname) && /[?&]doc=/.test(window.location.search)
+      if (!linked) {
+        restoreStoredTheme()
+      }
 
       // Another tab wrote the theme: adopt it, or this tab's next debounced
       // write would clobber it with stale state (the single key is atomic
@@ -108,45 +117,9 @@ export default defineNuxtPlugin({
       // One watcher owns every write. Each setting used to persist itself, so
       // a reload could restore them out of step and the derived stores needed
       // self-heals to reconcile; one atomic write makes that impossible.
-      //
-      // Reads the raw state refs rather than `currentDoc()`: the doc is diffed
-      // against a stock library install on every call, which is far too much
-      // work for a watcher that fires on every slider frame, and calling
-      // `useTheme()` outside a component would fire its onMounted with no
-      // instance. Defaults are omitted so an untouched theme stores nothing.
-      const radius = useState<number>('nuxt-ui-radius')
-      const fontSize = useState<number>('nuxt-ui-font-size')
-      const font = useState<StoredTheme['font']>('nuxt-ui-font')
-      const iconSet = useState<string>('nuxt-ui-icons')
-      const blackAsPrimary = useState<boolean>('nuxt-ui-black-as-primary')
-      const style = useState<StoredTheme['style']>(THEME_STATE_KEYS.stylePrefs)
-      const paletteParams = useState<StoredTheme['paletteParams']>(THEME_STATE_KEYS.paletteParams)
-      const preset = useState<string | undefined>(THEME_STATE_KEYS.themePreset)
-      const extras = useState<Record<string, any>>('nuxt-ui-ai-theme')
-      const customColors = useState<StoredTheme['customColors']>('nuxt-ui-custom-colors')
-      const cssVariables = useState<StoredTheme['cssVariables']>('nuxt-ui-css-variables')
-
-      const filled = <T extends object>(value: T | undefined) => value && Object.keys(value).length ? value : undefined
-      const unless = <T>(value: T, fallback: T) => value === fallback ? undefined : value
-
-      watchDebounced(() => JSON.stringify({
-        primary: unless(appConfig.ui.colors.primary, DEFAULT_COLORS.primary),
-        neutral: unless(appConfig.ui.colors.neutral, DEFAULT_COLORS.neutral),
-        radius: unless(radius.value, THEME_DEFAULTS.radius),
-        fontSize: unless(fontSize.value, THEME_DEFAULTS.fontSize),
-        font: filled(font.value),
-        icons: unless(iconSet.value, THEME_DEFAULTS.icons),
-        blackAsPrimary: blackAsPrimary.value || undefined,
-        colors: filled(extras.value?.colors),
-        components: filled(extras.value?.ui),
-        customColors: filled(customColors.value),
-        cssVariables: filled(cssVariables.value?.light) || filled(cssVariables.value?.dark) ? cssVariables.value : undefined,
-        style: filled(style.value),
-        paletteParams: filled(paletteParams.value),
-        preset: preset.value
-        // Debounced: the getter still runs per flush, but a slider drag no
-        // longer costs a synchronous localStorage write per frame.
-      } satisfies StoredTheme), json => writeStoredTheme(JSON.parse(json)), { debounce: 250, flush: 'post' })
+      // Debounced: the getter still runs per flush, but a slider drag no
+      // longer costs a synchronous localStorage write per frame.
+      watchDebounced(() => JSON.stringify(snapshotStoredTheme()), json => writeStoredTheme(JSON.parse(json)), { debounce: 250, flush: 'post' })
     }
 
     if (import.meta.server) {
@@ -155,10 +128,13 @@ export default defineNuxtPlugin({
       // duplicating a slice of useTheme's reactive style tags. This still
       // duplicates the derivations (it has to run before paint, before any
       // Vue code exists) but it parses once and writes every tag in order.
+      // It stands down on a theme link, like the boot restore above: the
+      // server already rendered the linked theme.
       useHead({
         script: [{
           innerHTML: `
             (function() {
+              if (/^\\/theme\\/?$/.test(location.pathname) && /[?&]doc=/.test(location.search)) { return; }
               var T = {};
               try { T = JSON.parse(localStorage.getItem('nuxt-ui-theme') || '{}') || {}; } catch (e) { return; }
               var SAFE = /^[\\w -]{1,50}$/;
@@ -268,6 +244,10 @@ export default defineNuxtPlugin({
           tagPriority: -1
         }]
       })
+    }
+
+    return {
+      provide: { restoreStoredTheme }
     }
   }
 })

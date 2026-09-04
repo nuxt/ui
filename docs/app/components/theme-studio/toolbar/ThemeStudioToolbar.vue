@@ -16,10 +16,24 @@ const props = defineProps<{ vertical?: boolean }>()
 const fieldUi = computed(() => (props.vertical
   ? { root: 'text-xs', container: 'mt-1' }
   : { root: 'shrink-0 text-xs', label: 'hidden', container: 'mt-0' }))
+
+// The bar scrolls when the footer runs out of width, and the shadow reads
+// the scroll position of the element it masks, so the bar itself is the
+// scroller rather than the footer's container. The padding pulled back by
+// the margin keeps focus rings inside the overflow box; the scrollbar stays
+// hidden, the fade is the cue. The mobile menu stacks the controls, so it
+// never overflows sideways and the mask stays off.
+const toolbarRef = ref<HTMLElement | null>(null)
+const { style } = useScrollShadow(toolbarRef, { orientation: 'horizontal' })
 </script>
 
 <template>
-  <div class="relative" :class="vertical ? 'flex flex-col gap-3' : 'flex items-center gap-x-1.5'">
+  <div
+    ref="toolbarRef"
+    class="relative"
+    :class="vertical ? 'flex flex-col gap-3' : 'flex items-center gap-x-1.5 min-w-0 overflow-x-auto p-1 -m-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden'"
+    :style="style"
+  >
     <UFormField label="Preset" :ui="fieldUi">
       <ThemeStudioToolbarPreset :vertical="vertical" />
     </UFormField>

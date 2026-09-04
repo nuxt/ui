@@ -3,6 +3,7 @@ import { upperFirst } from 'scule'
 import type { DropdownMenuItem } from '@nuxt/ui'
 import type { ThemeDoc } from '../../utils/theme/engine/types'
 import { DEFAULT_PRESET_ID } from '../../utils/theme/engine/types'
+import { studioIcons as stockIcons } from '../../utils/theme/icons'
 import { keepPanels, paletteLabel, rampCssName, themeChipStyle, loadFontPreviews, PRESET_ICONS, FONTS } from '../../utils/theme/studio'
 
 /**
@@ -38,8 +39,12 @@ const neutralDirty = sectionDirty('neutral')
 const presetIcon = (id?: string) => (id && PRESET_ICONS[id]) || studioIcons.palette
 
 // The trigger keeps the palette for the stock theme: the header button stands
-// for the theme picker, and a Nuxt mark there would read as a Nuxt link.
+// for the theme picker, and a Nuxt mark there would read as a Nuxt link. The
+// stock glyph until mounted: this hydrates on idle, after the plugin has
+// applied the saved pack, and a class that disagrees with the server's
+// markup is never patched during hydration.
 const triggerIcon = computed(() => {
+  if (!mounted.value) return stockIcons.palette
   const id = preset.value?.id
   return (id && id !== DEFAULT_PRESET_ID && PRESET_ICONS[id]) || studioIcons.palette
 })

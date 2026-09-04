@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { decodeThemeDoc } from '../utils/theme/link'
+import { snapshotStoredTheme, writeStoredTheme } from '../utils/theme/storage'
 
 const { track } = useAnalytics()
 const { icon: iconSet } = useTheme()
@@ -16,45 +17,52 @@ function toggleChat() {
 // The chrome skins to the applied icon pack.
 const studioIcons = useStudioIcons()
 
-const { view, views, applyDoc, applyPreset, presets } = useThemeStudio()
+const { view, views, applyDoc, presets, activePreset } = useThemeStudio()
 const { past, future, undo, redo } = useThemeStudioHistory({ record: true })
+
+const route = useRoute()
+const router = useRouter()
+
+// A theme travels in ?doc=, a query rather than a hash so the server sees
+// it: the page renders in the linked theme and the boot restore stands down
+// (plugins/theme.ts), so a shared link paints right on its first frame
+// instead of after hydration. Applied on both sides, the app config writes
+// don't ride the payload. Consumed on mount, or the URL would keep
+// re-applying it. A link naming a preset that no longer exists applies
+// nothing and is consumed all the same.
+const linked = route.query.doc !== undefined
+const link = typeof route.query.doc === 'string' ? await decodeThemeDoc(route.query.doc) : undefined
+const linkedPreset = link?.preset ? presets.find(entry => entry.id === link.preset) : undefined
+const linkApplied = !!link && (!link.preset || !!linkedPreset)
+if (linkApplied) {
+  applyDoc(linkedPreset?.doc ?? link!)
+  activePreset.value = linkedPreset?.id
+}
+
+// The boot restore stood down for the link (plugins/theme.ts). One that
+// applied has to be stored: its state arrived in the payload rather than
+// through a change, so nothing else trips the persistence watcher. One that
+// turned out not to be a theme hands the visitor their own theme back.
+if (import.meta.client && linked) {
+  if (linkApplied) onMounted(() => writeStoredTheme(snapshotStoredTheme()))
+  else useNuxtApp().$restoreStoredTheme()
+}
 
 // The preview mirrors into ?view=, so a reload (or a shared link) lands on
 // the same page. Read during setup rather than on mount: the server renders
 // the requested view, and hydration has nothing to correct.
-const route = useRoute()
-const router = useRouter()
 const requested = route.query.view
 if (typeof requested === 'string' && views.some(tab => tab.value === requested)) {
   view.value = requested as typeof view.value
 }
-// grid is the default, so it stays out of the URL. Written on mount too:
-// the view is app-level state, so coming back to /theme from another page
-// lands on the last view with a URL that doesn't say so.
-const sync = (value: typeof view.value) => router.replace({ query: { ...route.query, view: value === 'grid' ? undefined : value } })
+// grid is the default, so it stays out of the URL, and a consumed theme link
+// leaves it too. Written on mount as well: the view is app-level state, so
+// coming back to /theme from another page lands on the last view with a URL
+// that doesn't say so.
+const sync = (value: typeof view.value) => router.replace({ query: { ...route.query, doc: undefined, view: value === 'grid' ? undefined : value } })
 watch(view, sync)
 onMounted(() => {
-  if ((route.query.view ?? 'grid') !== view.value) sync(view.value)
-})
-
-// A theme travels in the hash, so a link carries the whole document without a
-// server. Consumed on arrival, or the URL would keep re-applying it; anything
-// that isn't a theme is left alone. On nuxt-ready, not on mount: the plugin
-// restores the stored theme on the same hook, and a link has to outlive it.
-onNuxtReady(async () => {
-  const link = await decodeThemeDoc(window.location.hash.slice(1))
-  if (!link) return
-
-  // consumed either way: a link naming a preset that no longer exists should
-  // not sit in the URL looking like it will still apply
-  window.history.replaceState(null, '', window.location.pathname + window.location.search)
-
-  const preset = link.preset ? presets.find(entry => entry.id === link.preset) : undefined
-  if (link.preset && !preset) return
-
-  if (preset) applyPreset(preset)
-  else applyDoc(link)
-  track('Theme Link Applied')
+  if (linked || (route.query.view ?? 'grid') !== view.value) sync(view.value)
 })
 
 // The studio's preview is a card floating on a recessed canvas, which is the
@@ -68,10 +76,15 @@ useHead({
 useSeoMeta({
   titleTemplate: '%s - Nuxt UI',
   title: 'Theme',
-  description: 'Customize Nuxt UI live: colors, radius, fonts and icons, then export only what you changed.'
+  description: 'Customize Nuxt UI live: colors, radius, fonts and icons, then export only what you changed.',
+  // a shared link is one visitor's theme, not a page to index
+  robots: linked ? 'noindex' : undefined
 })
 
-onMounted(() => track('Theme Studio Opened'))
+onMounted(() => {
+  track('Theme Studio Opened')
+  if (linkApplied) track('Theme Link Applied', { preset: linkedPreset?.id })
+})
 
 // Color mode rides the app-wide `d` binding in app.vue, no page copy needed.
 defineShortcuts({
@@ -173,7 +186,9 @@ const shareOpen = ref(false)
       </div>
     </div>
 
-    <UFooter class="hidden lg:block ring ring-default rounded-xl bg-default mx-2 mt-2" :ui="{ container: 'py-3! px-6! overflow-x-auto', left: 'mt-0 gap-0 lg:flex-none', right: 'mt-0' }">
+    <!-- the centre takes every pixel the two clusters leave and shrinks
+         (min-w-0), so the toolbar inside it scrolls instead of widening the bar -->
+    <UFooter class="hidden lg:block ring ring-default rounded-xl bg-default mx-2 mt-2" :ui="{ container: 'py-3! px-6!', left: 'mt-0 gap-0 lg:flex-none', center: 'flex-1 min-w-0 justify-start', right: 'mt-0 lg:flex-none' }">
       <template #left>
         <!-- one cluster: these four move the whole theme, the controls beside
              them each change one setting. Framed like the mode tabs' own track

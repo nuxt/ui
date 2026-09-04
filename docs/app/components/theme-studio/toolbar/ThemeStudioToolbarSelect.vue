@@ -30,14 +30,19 @@ const open = defineModel<boolean>('open', { default: false })
 
 const attrs = useAttrs()
 
+/** The selected row picked again, which Reka reports as a toggle off. */
+const emit = defineEmits<{ reselect: [value: string | number] }>()
+
 const triggerLabel = computed(() => props.items.find(item => item.value === model.value)?.label ?? props.placeholder)
 
 // Reka toggles the selected row off with `undefined`; a pick-one control
-// keeps its value and just closes.
+// keeps its value and just closes, but still reports the re-pick, which the
+// preset control turns into a re-apply.
 const selected = computed({
   get: () => model.value,
   set: (value: string | number | undefined) => {
     if (value !== undefined) model.value = value
+    else if (model.value !== undefined) emit('reselect', model.value)
     open.value = false
   }
 })

@@ -10,18 +10,27 @@ export const SAFE_NAME = /^[\w -]{1,50}$/
 // Object.keys and its shades leak onto every lookup.
 const UNSAFE_KEYS = new Set(['__proto__', 'constructor', 'prototype'])
 const SAFE_HEX = /^#[0-9a-f]{3,8}$/i
-// the engine's canonical shade format: `oklch(62.3% 0.214 259.815)`
-// tailwind >=4.3.3 emits `none` for achromatic chroma/hue (the whole neutral ramp)
-const SAFE_OKLCH = /^oklch\(\d{1,3}(?:\.\d+)?% (?:\d(?:\.\d+)?|none) (?:\d{1,3}(?:\.\d+)?|none)\)$/i
+// The engine's canonical shade format is `oklch(62.3% 0.214 259.815)`, but
+// every spelling parseColor reads has to pass too (a fractional lightness,
+// a `.2` chroma, a `deg` hue, padding): the AI writes them all, and a
+// rejected shade drops the whole palette. Digits, `%`, `deg`, `none` and
+// spaces only, so a value still can't end its declaration early. Tailwind
+// >=4.3.3 emits `none` for achromatic chroma/hue (the whole neutral ramp).
+const OKLCH_NUMBER = String.raw`\d+(?:\.\d+)?|\.\d+`
+const SAFE_OKLCH = new RegExp(String.raw`^oklch\(\s*(?:${OKLCH_NUMBER})%?\s+(?:${OKLCH_NUMBER}|none)\s+(?:(?:${OKLCH_NUMBER})(?:deg)?|none)\s*\)$`, 'i')
 const SAFE_CSS_VAR_KEY = /^--[\w-]+$/
 // var() refs, hex, keywords, px/% lengths, and literal oklch()/rgb() colors
 // (an imported token override is as likely to be a literal as a ramp ref)
 const SAFE_CSS_VAR_VALUE = /^(?:var\(--[\w-]+\)|#[0-9a-f]{3,8}|[a-z]+|-?\d{1,3}(?:\.\d+)?(?:px|%)|oklch\([\w.% -]{1,40}\)|rgba?\([\d.%, /]{1,40}\))$/i
 
+// A palette name becomes `--color-<name>-<shade>`, one ident: a space, fine
+// inside a quoted font family, would split the property and drop the ramp.
+const SAFE_PALETTE_NAME = /^[\w-]{1,50}$/
+
 export function sanitizeCustomColors(input: Record<string, any>): Record<string, Record<string, string>> {
   const result: Record<string, Record<string, string>> = {}
   for (const [name, shades] of Object.entries(input)) {
-    if (!SAFE_NAME.test(name) || UNSAFE_KEYS.has(name) || typeof shades !== 'object' || !shades) continue
+    if (!SAFE_PALETTE_NAME.test(name) || UNSAFE_KEYS.has(name) || typeof shades !== 'object' || !shades) continue
     const safeShades: Record<string, string> = {}
     for (const [shade, value] of Object.entries(shades as Record<string, unknown>)) {
       if (/^\d{2,3}$/.test(shade) && typeof value === 'string' && (SAFE_OKLCH.test(value) || SAFE_HEX.test(value))) {

@@ -31,6 +31,9 @@ export const SECTION_GROUPS: Record<'colors' | 'defaults', SectionKey[]> = {
   defaults: ['size', 'buttons', 'panels', 'inputs']
 }
 
+/** Every section, for whole-document comparisons against the baseline. */
+export const ALL_SECTION_KEYS: SectionKey[] = [...SECTION_GROUPS.colors, ...SECTION_GROUPS.defaults, 'font', 'type', 'weights', 'icons', 'radius']
+
 /** Which color section a semantic token (or token shade) belongs to. */
 function tokenSection(token: string): ColorSection {
   if (token === '--ui-primary' || token.startsWith('--ui-color-primary')) return 'primary'
@@ -106,7 +109,10 @@ export function pickSection(doc: ThemeDoc, key: SectionKey): unknown {
   switch (key) {
     case 'primary':
       return {
-        color: doc.blackAsPrimary ? 'black' : alias(doc, 'primary'),
+        // both: black only overrides --ui-primary, the ramp still colours
+        // every primary-* utility, so a ramp change under black is a change
+        color: alias(doc, 'primary'),
+        black: !!doc.blackAsPrimary,
         palette: aliasPalette(doc, 'primary') ?? null,
         tokens: ownedTokens(doc, 'primary'),
         shades: ownedTokenShades(doc, 'primary')
@@ -167,16 +173,21 @@ export function pickSection(doc: ThemeDoc, key: SectionKey): unknown {
   }
 }
 
-/** Stable stringify (sorted keys) so pick results compare structurally. */
-export function sectionFingerprint(doc: ThemeDoc, key: SectionKey): string {
-  const sort = (value: unknown): unknown => {
-    if (Array.isArray(value)) return value.map(sort)
-    if (value && typeof value === 'object') {
-      return Object.fromEntries(Object.keys(value).sort().map(k => [k, sort((value as Record<string, unknown>)[k])]))
-    }
-    return value
+/** Stable stringify (sorted keys, undefined entries dropped) so values compare structurally. */
+export function stableStringify(value: unknown): string {
+  if (Array.isArray(value)) return `[${value.map(stableStringify).join(',')}]`
+  if (value && typeof value === 'object') {
+    return `{${Object.entries(value as Record<string, unknown>)
+      .filter(([, entry]) => entry !== undefined)
+      .sort(([a], [b]) => a.localeCompare(b))
+      .map(([key, entry]) => `${JSON.stringify(key)}:${stableStringify(entry)}`)
+      .join(',')}}`
   }
-  return JSON.stringify(sort(pickSection(doc, key)))
+  return JSON.stringify(value) ?? 'null'
+}
+
+export function sectionFingerprint(doc: ThemeDoc, key: SectionKey): string {
+  return stableStringify(pickSection(doc, key))
 }
 
 /**

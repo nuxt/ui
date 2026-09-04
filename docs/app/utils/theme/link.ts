@@ -46,22 +46,6 @@ function parseDoc(bytes: Uint8Array<ArrayBuffer> | undefined): ThemeLink | undef
  */
 export type ThemeLink = ThemeDoc & { preset?: string }
 
-function stable(value: unknown): string {
-  if (Array.isArray(value)) return `[${value.map(stable).join(',')}]`
-  if (value && typeof value === 'object') {
-    return `{${Object.entries(value as Record<string, unknown>)
-      .filter(([, entry]) => entry !== undefined)
-      .sort(([a], [b]) => a.localeCompare(b))
-      .map(([key, entry]) => `${JSON.stringify(key)}:${stable(entry)}`)
-      .join(',')}}`
-  }
-  return JSON.stringify(value) ?? 'null'
-}
-
-export function isSameDoc(a: ThemeDoc, b: ThemeDoc): boolean {
-  return stable(a) === stable(b)
-}
-
 export async function encodeThemeDoc(doc: ThemeLink): Promise<string> {
   // btoa is latin1-only, and font names and palette ids can carry non-ascii
   const json = new TextEncoder().encode(JSON.stringify(doc))

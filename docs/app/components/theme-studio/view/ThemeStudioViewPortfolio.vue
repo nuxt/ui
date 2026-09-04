@@ -286,7 +286,6 @@ onUnmounted(() => clearTimeout(appearTimeout))
             orientation="horizontal"
             variant="naked"
             v-bind="post"
-            to="#"
             :ui="{
               root: 'group relative lg:items-start lg:flex ring-0 hover:ring-0',
               body: 'px-0!',

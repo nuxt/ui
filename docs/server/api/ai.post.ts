@@ -267,7 +267,9 @@ For Nuxt, wrap in \`defineAppConfig({ ui: { ... } })\`. For Vue, pass as \`ui({ 
   - **0.125** — subtle, minimal softness
   - **0.25** — balanced, default
   - **0.375** — rounded, friendly
-  - **0.5** — pill-like, playful, soft
+  - **0.5** — soft, playful
+  - **0.625** — very rounded
+  - **0.75** — pill-like
 - Fonts: three independent stacks, any Google Font works and \`@nuxt/fonts\` auto-loads it.
   - \`fontSans\` — the body face everything inherits. Despite the name it takes any face, a serif body is a valid choice.
   - \`fontSerif\` — headings (h1–h6) follow it. Set it only when you want headings to differ from the body; omit it and they match.

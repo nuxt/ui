@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useClipboard } from '@vueuse/core'
 import type { HighlighterGeneric } from 'shiki'
-import { encodeThemeDoc, isSameDoc } from '../../utils/theme/link'
+import { encodeThemeDoc } from '../../utils/theme/link'
 
 /**
  * The export modal: a link that carries the whole theme, then the generated
@@ -12,7 +12,7 @@ const open = defineModel<boolean>('open', { default: false })
 const appConfig = useAppConfig()
 const studioIcons = useStudioIcons()
 const { exportCSS, exportConfig, configLabel, currentDoc } = useTheme()
-const { presets, activePreset } = useThemeStudio()
+const { presets, activePreset, dirty } = useThemeStudio()
 const { framework } = useFrameworks()
 const { track } = useAnalytics()
 
@@ -28,9 +28,12 @@ const link = ref('')
 async function buildLink() {
   const doc = currentDoc()
   const preset = presets.find(entry => entry.id === activePreset.value)
-  // the id only when nothing has been touched since, so a tweak still travels whole
-  const payload = preset && isSameDoc(doc, preset.doc) ? { version: 1 as const, preset: preset.id } : doc
-  return `${window.location.origin}${window.location.pathname}#${await encodeThemeDoc(payload)}`
+  // the id only while nothing has been touched since, so a tweak still
+  // travels whole; the studio's own measure, a raw comparison would miss
+  // every preset whose tokens applyDoc promotes into shades
+  const payload = preset && !dirty.value ? { version: 1 as const, preset: preset.id } : doc
+  // a query, not a hash, so the server renders the linked theme (pages/theme.vue)
+  return `${window.location.origin}${window.location.pathname}?doc=${await encodeThemeDoc(payload)}`
 }
 
 function copyThemeLink() {
@@ -76,8 +79,13 @@ function copyFile() {
 
 function downloadFile() {
   const url = URL.createObjectURL(new Blob([pane.value.code], { type: 'text/plain;charset=utf-8' }))
-  Object.assign(document.createElement('a'), { href: url, download: pane.value.filename }).click()
-  URL.revokeObjectURL(url)
+  const anchor = Object.assign(document.createElement('a'), { href: url, download: pane.value.filename })
+  // in the document for the click, and the URL outlives the handler: Safari
+  // starts the download after the click returns
+  document.body.appendChild(anchor)
+  anchor.click()
+  anchor.remove()
+  setTimeout(() => URL.revokeObjectURL(url), 0)
   track('Theme Exported', { type: pane.value.key === 'css' ? 'CSS' : 'Config', action: 'Download' })
 }
 

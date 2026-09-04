@@ -8,7 +8,7 @@ import type { ThemeStudioView } from '../utils/theme/studio'
 import { DEFAULT_PRESET_ID, docToSettings, isDefaultTheme, styleComponents, styleTokens, DEFAULT_COLORS, SHADES, nearestShade } from '../utils/theme/engine/types'
 import { presets } from '../utils/theme/engine/presets'
 import { generatePalette, applyPaletteEffects, isDefaultEffects, parseCssColor } from '../utils/theme/engine/palette'
-import { sectionFingerprint, mergeSection, canonicalTokenShades, SECTION_GROUPS } from '../utils/theme/engine/sections'
+import { sectionFingerprint, stableStringify, mergeSection, canonicalTokenShades, ALL_SECTION_KEYS, SECTION_GROUPS } from '../utils/theme/engine/sections'
 import type { SectionKey, ThemeDoc, ThemePreset, PaletteCurveParams, PaletteEffects, StoredPaletteParams, PalettePin, StyleOptions, Shade, ShadeStop, ColorAlias, TokenRamp, VariantGroup, DefaultVariant } from '../utils/theme/engine'
 
 export function useThemeStudio() {
@@ -47,22 +47,6 @@ export function useThemeStudio() {
   // stock instead of a preset no build defines.
   if (import.meta.client && activePreset.value && !presets.some(preset => preset.id === activePreset.value)) {
     activePreset.value = undefined
-  }
-
-  // The class bundle is an expansion of `style`, not stored state, so it is
-  // rebuilt from the restored prefs on load. That also means a generator
-  // change (new fragment classes) reaches already-saved themes for free,
-  // which used to need a self-heal comparing the two.
-  const bundleBuilt = useState('nuxt-ui-style-bundle-built', () => false)
-  if (import.meta.client && !bundleBuilt.value) {
-    bundleBuilt.value = true
-    try {
-      const expected = styleComponents(style.value)
-      if (Object.keys(expected).length) onNuxtReady(() => theme.setStyleUi(expected))
-    } catch {
-      // a throwing expansion (corrupt persisted style) shouldn't be permanent
-      bundleBuilt.value = false
-    }
   }
 
   function setStyle(options: StyleOptions) {
@@ -187,13 +171,15 @@ export function useThemeStudio() {
    * The library hardcodes five tokens to `white` (light `--ui-bg` and
    * `--ui-text-inverted`; dark `--ui-text-highlighted`, `--ui-bg-inverted`
    * and `--ui-border-inverted`), so a tinted neutral ramp would never reach
-   * them. Choosing a neutral re-routes all five through the ramp, which is
-   * also what makes the export reproduce the preview, since the docs
-   * baseline already shows neutral-50 as the page background.
+   * them. Choosing a neutral re-routes all five through the ramp, and lifts
+   * the muted surface a stop: the library sits it at 50 too, so it would
+   * land ON the page and every muted panel would lose its shape. The
+   * presets' tintedNeutralBase carries the same six.
    */
   const NEUTRAL_TOKEN_REMAPS = {
     light: {
       '--ui-bg': 'var(--ui-color-neutral-50)',
+      '--ui-bg-muted': 'var(--ui-color-neutral-100)',
       '--ui-text-inverted': 'var(--ui-color-neutral-50)'
     },
     dark: {
@@ -310,12 +296,6 @@ export function useThemeStudio() {
     sanitizeTokenShades()
   }
 
-  /**
-   * Reflect a doc's token overrides back into the sidebar's shade settings
-   * where they are representable, so controls show the preset's reality
-   * instead of stale defaults. Only neutral-ramp refs map onto sliders;
-   * anything else (white/black literals, non-neutral refs) stays token-only.
-   */
   /**
    * The style axis a doc implies: its explicit style plus ramp-shaped token
    * overrides promoted into tokenShades (canonicalTokenShades, shared with
@@ -456,6 +436,17 @@ export function useThemeStudio() {
     ))
   }
 
+  /**
+   * Anything diverging from the baseline, measured the way the sections
+   * measure it (a preset's ramp-shaped token and the shade applyDoc promoted
+   * it into compare equal), plus the component overrides no section owns:
+   * the AI chat writes them, and they are edits all the same.
+   */
+  const dirty = computed(() =>
+    ALL_SECTION_KEYS.some(key => sectionFingerprint(liveDoc.value, key) !== sectionFingerprint(baselineDoc.value, key))
+    || stableStringify(liveDoc.value.components ?? null) !== stableStringify(baselineDoc.value.components ?? null)
+  )
+
   function resetSection(key: SectionKey | SectionKey[]) {
     // several slices splice in one pass, one applyDoc, so a multi-key fold
     // costs one history entry rather than one per slice
@@ -503,6 +494,7 @@ export function useThemeStudio() {
     clearActivePreset,
     sectionDirty,
     groupDirty,
+    dirty,
     resetSection,
     style,
     setStyle,

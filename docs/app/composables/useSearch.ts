@@ -2,7 +2,7 @@ export function useSearch() {
   const route = useRoute()
   const { frameworks } = useFrameworks()
   const { track } = useAnalytics()
-  const { open, messages } = useChat()
+  const { open, ask } = useChat()
   // The ⌘K link glyphs follow the applied pack where an equivalent exists;
   // the docs-nav-specific ones (square-play/-code/-function, panels, etc.)
   // have no pack glyph and stay Lucide.
@@ -14,14 +14,10 @@ export function useSearch() {
     track('AI Chat Opened', { source: 'search', hasSearchTerm: !!searchTerm.value })
 
     if (searchTerm.value) {
-      messages.value = [...messages.value, {
-        id: String(Date.now()),
-        role: 'user',
-        parts: [{ type: 'text', text: searchTerm.value }]
-      }]
+      ask(searchTerm.value)
+    } else {
+      open.value = true
     }
-
-    open.value = true
   }
 
   const links = computed(() => [{

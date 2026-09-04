@@ -12,7 +12,12 @@ type GoogleFont = {
 export default defineCachedEventHandler(async (): Promise<GoogleFont[]> => {
   const text = await $fetch<string>('https://fonts.google.com/metadata/fonts', { responseType: 'text' })
   // Google JSON endpoints traditionally lead with an anti-hijacking prefix
-  const data = JSON.parse(text.replace(/^\)\]\}'/, ''))
+  let data: any
+  try {
+    data = JSON.parse(text.replace(/^\)\]\}'/, ''))
+  } catch {
+    // an HTML error page, handled by the shape check below
+  }
 
   // an HTML error page or a renamed field must not become a cached crash
   if (!Array.isArray(data?.familyMetadataList)) {

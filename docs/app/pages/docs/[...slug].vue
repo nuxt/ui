@@ -111,7 +111,7 @@ if (import.meta.server) {
 
 useCanonical(computed(() => `${path.value}.md`))
 
-const { open, messages } = useChat()
+const { open, ask } = useChat()
 // same glyph as the studio's Ask-AI trigger, and skins with the icon pack
 const studioIcons = useStudioIcons()
 
@@ -123,14 +123,7 @@ const links = computed(() => [{
 }, {
   icon: studioIcons.assistant,
   label: 'Explain with AI',
-  onClick: () => {
-    messages.value = [...messages.value, {
-      id: String(Date.now()),
-      role: 'user',
-      parts: [{ type: 'text', text: 'Read this documentation page and summarize it. I want to ask questions about it.' }]
-    }]
-    open.value = true
-  }
+  onClick: () => ask('Read this documentation page and summarize it. I want to ask questions about it.')
 }])
 </script>
 

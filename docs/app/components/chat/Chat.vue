@@ -10,7 +10,7 @@ const input = ref('')
 const toast = useToast()
 const { track } = useAnalytics()
 const route = useRoute()
-const { open, messages } = useChat()
+const { open, messages, pending } = useChat()
 const { framework } = useFrameworks()
 const { resetTheme, applyThemeSettings, hasChanges: hasThemeChanges } = useTheme()
 // A preset is a whole ThemeDoc, so it rides applyDoc (reset, style axis, class
@@ -124,6 +124,18 @@ watch(messages, (newMessages) => {
 
   chatMessages.value = newMessages
   if (chatMessages.value.at(-1)?.role === 'user') {
+    pending.value = false
+    regenerate()
+  }
+})
+
+// A question asked before the panel existed (its first open, from the search
+// palette or "Explain with AI") is already in the seeded messages, the
+// watcher above never saw it arrive. Only that one: a dangling user turn
+// restored from a past session must not re-send itself on every load.
+onMounted(() => {
+  if (pending.value) {
+    pending.value = false
     regenerate()
   }
 })

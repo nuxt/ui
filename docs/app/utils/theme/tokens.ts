@@ -1,7 +1,9 @@
-// The docs' own render baseline. It intentionally diverges from the library
-// defaults in one place: light `--ui-bg` follows the neutral ramp (set in
-// main.css) so tinted neutrals reach the page background. Export diffing
-// uses the engine's LIBRARY_TOKEN_DEFAULTS instead.
+// The semantic token defaults the docs render on, the library's own
+// (src/runtime/index.css) minus the --ui-<alias> tokens the colors plugin
+// generates. Restated whole into the .light/.dark blocks whenever a mode
+// carries an override, so every entry must match the library or the page
+// would silently diverge from the export, which diffs against the engine's
+// LIBRARY_TOKEN_DEFAULTS.
 export const cssVariableDefaults = {
   light: {
     '--ui-text-dimmed': 'var(--ui-color-neutral-400)',
@@ -10,7 +12,7 @@ export const cssVariableDefaults = {
     '--ui-text': 'var(--ui-color-neutral-700)',
     '--ui-text-highlighted': 'var(--ui-color-neutral-900)',
     '--ui-text-inverted': 'white',
-    '--ui-bg': 'var(--ui-color-neutral-50)',
+    '--ui-bg': 'white',
     '--ui-bg-muted': 'var(--ui-color-neutral-50)',
     '--ui-bg-elevated': 'var(--ui-color-neutral-100)',
     '--ui-bg-accented': 'var(--ui-color-neutral-200)',

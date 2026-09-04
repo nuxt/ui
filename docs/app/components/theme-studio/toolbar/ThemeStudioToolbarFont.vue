@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { upperFirst } from 'scule'
 import { keepPanels, toolbarPanelClass, FONT_WEIGHT_DEFAULTS, loadFontPreviews } from '../../../utils/theme/studio'
+import { THEME_DEFAULTS } from '../../../utils/theme/engine/types'
 
 /**
  * Every typographic setting in one panel: the three stacks up top, then the
@@ -11,6 +12,11 @@ import { keepPanels, toolbarPanelClass, FONT_WEIGHT_DEFAULTS, loadFontPreviews }
  * main.css until v5 ships `--ui-font-heading`.
  */
 const { fonts, font, fontPrefs, setFontPrefs, fontSize } = useTheme()
+
+// The saved font is client-only: report the stock face until mounted, like
+// the other triggers, so hydration adopts the server's label and aria-label.
+const mounted = useMounted()
+const fontLabel = computed(() => (mounted.value ? font.value : THEME_DEFAULTS.font))
 
 onMounted(() => loadFontPreviews(fonts.map(entry => entry.name)))
 
@@ -77,12 +83,12 @@ const content = computed(() => [...toolbarPanelClass(props.vertical), 'divide-y 
 <template>
   <UPopover v-model:open="open" :content="{ align: 'center', onInteractOutside: keepPanels }" :ui="{ content }">
     <ThemeStudioToolbarTrigger
-      :label="font"
+      :label="fontLabel"
       :icon="studioIcons.text"
       :dirty="dirty"
       :open="open"
       :class="vertical ? 'w-full' : 'w-38'"
-      :aria-label="`Text: ${font}`"
+      :aria-label="`Text: ${fontLabel}`"
     />
 
     <template #content>
