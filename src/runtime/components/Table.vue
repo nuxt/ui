@@ -99,6 +99,21 @@ export interface TableProps<T extends TableData = TableData> extends TableOption
   meta?: TableMeta<T>
   /**
    * Enable virtualization for large datasets.
+   *
+   * Pass a `measureElement` function to opt into dynamic row heights. The value returned by
+   * your `measureElement` is used as the height of the main row; when `row.getIsExpanded()`
+   * is `true`, the immediate next-sibling `<tr>`'s height is **added on top of** that value
+   * automatically, so your callback should measure the main row only. If your custom
+   * `measureElement` already includes the expanded region (e.g. by measuring a wrapper),
+   * return only the collapsed-row height to avoid double-counting.
+   *
+   * TanStack Virtual's `ResizeObserver` is attached to the main `<tr>` only, and this
+   * component re-measures rows whenever the TanStack expanded state toggles. It does **not**
+   * observe size changes *inside* the expansion sibling — late-loading images, async content,
+   * or nested toggles that resize the expansion region after mount won't trigger an automatic
+   * re-measure. Call `virtualizer.measure()` (or `virtualizer.measureElement(row)`) yourself
+   * in those cases.
+   *
    * Note: row pinning is not supported when virtualization is enabled.
    * @see https://tanstack.com/virtual/latest/docs/api/virtualizer#options
    * @defaultValue false
@@ -116,7 +131,8 @@ export interface TableProps<T extends TableData = TableData> extends TableOption
      */
     overscan?: number
     /**
-     * Estimated size (in px) of each item, or a function that returns the size for a given index
+     * Estimated size (in px) of each item, or a function that returns the size for a given index.
+     * Used as the initial estimate before the virtualizer measures actual row heights.
      * @defaultValue 65
      */
     estimateSize?: number | ((index: number) => number)
@@ -230,7 +246,7 @@ export type TableSlots<T extends TableData = TableData> = {
 </script>
 
 <script setup lang="ts" generic="T extends TableData">
-import { computed, useTemplateRef, watch, toRef } from 'vue'
+import { computed, nextTick, useTemplateRef, watch, toRef } from 'vue'
 import { Primitive } from 'reka-ui'
 import { upperFirst } from 'scule'
 import { defu } from 'defu'
@@ -300,7 +316,7 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.table || {}) })(
 }))
 
 const [DefineTableTemplate, ReuseTableTemplate] = createReusableTemplate()
-const [DefineRowTemplate, ReuseRowTemplate] = createReusableTemplate<{ row: TableRow<T>, style?: Record<string, string> }>({
+const [DefineRowTemplate, ReuseRowTemplate] = createReusableTemplate<{ row: TableRow<T>, style?: Record<string, string>, index?: number }>({
   props: {
     row: {
       type: Object,
@@ -309,6 +325,11 @@ const [DefineRowTemplate, ReuseRowTemplate] = createReusableTemplate<{ row: Tabl
     style: {
       type: Object,
       required: false
+    },
+    index: {
+      type: Number,
+      required: false,
+      default: undefined
     }
   }
 })
@@ -455,6 +476,17 @@ const virtualizer = !!props.virtualize && useVirtualizer({
   estimateSize: (index: number) => {
     const estimate = virtualizerProps.value.estimateSize
     return typeof estimate === 'function' ? estimate(index) : estimate
+  },
+  measureElement: (el, entry, instance) => {
+    const userMeasure = virtualizerProps.value.measureElement
+    const base = userMeasure
+      ? userMeasure(el, entry, instance)
+      : Math.round(entry?.borderBoxSize?.[0]?.blockSize ?? (el as HTMLElement).offsetHeight)
+    if ((el as Element).getAttribute('data-expanded') === 'true') {
+      const next = (el as Element).nextElementSibling as HTMLElement | null
+      if (next && next.tagName === 'TR') return base + next.offsetHeight
+    }
+    return base
   }
 })
 
@@ -467,6 +499,55 @@ const virtualPaddingBottom = computed(() => {
   if (!virtualizer || !virtualItems.value.length) return 0
   return virtualizer.value.getTotalSize() - (virtualItems.value[virtualItems.value.length - 1]?.end ?? 0) + scrollMargin.value
 })
+
+function measureRowRef(el: Element | ComponentPublicInstance | null) {
+  if (!virtualizer || !el) return
+  virtualizer.value.measureElement(el as Element)
+}
+
+// Re-measure rows whose expanded state toggled. TanStack's ResizeObserver is
+// attached to the main `<tr>`, but expansion inserts a *sibling* `<tr>` that
+// doesn't resize the main row, so the RO never fires — this manual re-measure
+// keeps the virtualizer's cached heights in sync. Diff the before/after state
+// and only re-measure rows whose expanded flag actually changed. When the
+// expanded state is the sentinel `true` (expand-all) we fall back to a full
+// sweep since there are no individual row ids to diff against.
+if (virtualizer) {
+  watch(
+    () => tableApi.getState().expanded,
+    (next, prev) => {
+      nextTick(() => {
+        const root = rootRef.value?.$el as HTMLElement | undefined
+        if (!root) return
+
+        const measureAll = () => {
+          root.querySelectorAll<HTMLElement>('[data-index]').forEach((row) => {
+            virtualizer.value.measureElement(row)
+          })
+        }
+
+        if (typeof next === 'boolean' || typeof prev === 'boolean') {
+          measureAll()
+          return
+        }
+
+        const prevMap = (prev ?? {}) as Record<string, boolean>
+        const nextMap = (next ?? {}) as Record<string, boolean>
+        const changedIds = new Set<string>()
+        for (const id in nextMap) if (!!nextMap[id] !== !!prevMap[id]) changedIds.add(id)
+        for (const id in prevMap) if (!!nextMap[id] !== !!prevMap[id]) changedIds.add(id)
+
+        changedIds.forEach((id) => {
+          const index = tableApi.getRow(id)?.index
+          if (index === undefined) return
+          const el = root.querySelector<HTMLElement>(`[data-index="${index}"]`)
+          if (el) virtualizer.value.measureElement(el)
+        })
+      })
+    },
+    { deep: true }
+  )
+}
 
 function valueUpdater<T extends Updater<any>>(updaterOrValue: T, ref: Ref) {
   ref.value = typeof updaterOrValue === 'function' ? updaterOrValue(ref.value) : updaterOrValue
@@ -543,8 +624,10 @@ defineExpose({
 </script>
 
 <template>
-  <DefineRowTemplate v-slot="{ row, style }">
+  <DefineRowTemplate v-slot="{ row, style, index }">
     <tr
+      :ref="index !== undefined ? measureRowRef : undefined"
+      :data-index="index"
       :data-selected="row.getIsSelected()"
       :data-selectable="!!props.onSelect || !!props.onHover || !!props.onContextmenu"
       :data-expanded="row.getIsExpanded()"
@@ -589,7 +672,7 @@ defineExpose({
       </td>
     </tr>
 
-    <tr v-if="row.getIsExpanded()" data-slot="tr" :class="ui.tr({ class: [props.ui?.tr] })">
+    <tr v-if="row.getIsExpanded()" data-slot="tr" :class="ui.tr({ class: [props.ui?.tr] })" :style="style">
       <td :colspan="row.getAllCells().length" data-slot="td" :class="ui.td({ class: [props.ui?.td] })">
         <slot name="expanded" :row="row" />
       </td>
@@ -649,7 +732,7 @@ defineExpose({
               <ReuseRowTemplate
                 v-if="centerRows[virtualRow.index]"
                 :row="centerRows[virtualRow.index]!"
-                :style="{ height: `${virtualRow.size}px` }"
+                :index="virtualRow.index"
               />
             </template>
             <tr v-if="virtualPaddingBottom > 0" :style="{ height: `${virtualPaddingBottom}px` }" aria-hidden="true">

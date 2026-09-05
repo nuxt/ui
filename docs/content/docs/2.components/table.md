@@ -714,6 +714,24 @@ class: '!p-0'
 In this mode the table root's `overflow` is `visible` and the external container owns scrolling on both axes, so give it `overflow-auto` (not just `overflow-y-auto`) to keep wide tables horizontally scrollable. A `sticky` header then anchors to that container.
 ::
 
+### Dynamic row heights :badge{label="Soon" class="align-text-top"}
+
+`estimateSize` is only the initial guess — the virtualizer measures every rendered row and updates its internal size map as you scroll. For rows with variable content (expandable rows, rich text, images), pass a `measureElement` callback to read the actual rendered height:
+
+```vue
+<UTable
+  :data="rows"
+  :columns="columns"
+  :virtualize="{
+    estimateSize: () => 65,
+    measureElement: (el) => el.getBoundingClientRect().height
+  }"
+  class="h-[500px]"
+/>
+```
+
+When a row is expanded via `row.toggleExpanded()`, the expansion row's height is automatically added to the measurement — you don't need to walk siblings yourself.
+
 ### With tree data
 
 You can use the `get-sub-rows` prop to display hierarchical (tree) data in the table.
