@@ -1,4 +1,4 @@
-import { describe, it, expect, test } from 'vitest'
+import { describe, it, expect, test, vi } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { renderEach } from '../component-render'
@@ -196,6 +196,61 @@ describe('SelectMenu', () => {
       const input = wrapper.find('[data-slot="input"] input')
       expect(document.activeElement).not.toBe(input.element)
 
+      wrapper.unmount()
+    })
+  })
+
+  describe('filtering', () => {
+    // Keying the items by position makes Vue reuse the same ComboboxItem instance and rewrite
+    // its text when the filter re-sorts the list. reka's item id lives on that instance and
+    // `aria-activedescendant` is read from the highlighted element's id, so the attribute keeps
+    // pointing at an id that never changes: the highlight moves for sighted users and is never
+    // announced to a screen reader.
+    test('moves aria-activedescendant when filtering changes the highlighted item', async () => {
+      const wrapper = mount(SelectMenu, {
+        attachTo: document.body,
+        props: { open: true, portal: false, items: ['Alpha', 'Beta', 'Gamma'] }
+      })
+      await flushPromises()
+
+      const search = wrapper.find('[data-slot="input"] input')
+      const highlighted = () => wrapper.find('[role="option"][data-highlighted]')
+      const activeDescendant = () => search.attributes('aria-activedescendant')
+
+      expect(highlighted().text()).toContain('Alpha')
+      const before = highlighted().attributes('id')
+      expect(activeDescendant()).toBe(before)
+
+      // Typed, not set as a prop: it is reka's own search-term watcher that moves the
+      // highlight, and that is the path a member takes.
+      await search.setValue('Gam')
+      await flushPromises()
+
+      expect(highlighted().text()).toContain('Gamma')
+      expect(highlighted().attributes('id')).not.toBe(before)
+      expect(activeDescendant()).toBe(highlighted().attributes('id'))
+
+      wrapper.unmount()
+    })
+
+    // Identical primitives cannot be told apart by value, so each occurrence has to take one of
+    // that value's original positions in turn or the keys collide and Vue warns.
+    test('keeps keys unique when items repeat', async () => {
+      const warn = vi.spyOn(console, 'warn').mockImplementation(() => {})
+
+      const wrapper = mount(SelectMenu, {
+        attachTo: document.body,
+        props: { open: true, portal: false, items: ['Alpha', 'Alpha', 'Beta'] }
+      })
+      await flushPromises()
+
+      await wrapper.find('[data-slot="input"] input').setValue('Alp')
+      await flushPromises()
+
+      expect(wrapper.findAll('[role="option"]')).toHaveLength(2)
+      expect(warn.mock.calls.flat().join(' ')).not.toContain('Duplicate keys')
+
+      warn.mockRestore()
       wrapper.unmount()
     })
   })
