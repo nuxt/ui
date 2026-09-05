@@ -1,5 +1,5 @@
 import { h, ref, computed } from 'vue'
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, vi } from 'vitest'
 import { axe } from 'vitest-axe'
 import { flushPromises } from '@vue/test-utils'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
@@ -8,6 +8,13 @@ import { UCheckbox, UButton, UBadge, UDropdownMenu } from '#components'
 import Table from '../../src/runtime/components/Table.vue'
 import type { TableColumn, TableRow } from '../../src/runtime/components/Table.vue'
 import theme from '#build/ui/table'
+
+async function triggerKeydown(element: Element, init: KeyboardEventInit) {
+  const event = new KeyboardEvent('keydown', { bubbles: true, cancelable: true, ...init })
+  element.dispatchEvent(event)
+  await flushPromises()
+  return event
+}
 
 describe('Table', () => {
   const loadingColors = Object.keys(theme.variants.loadingColor) as any
@@ -212,6 +219,96 @@ describe('Table', () => {
         'empty-table-header': { enabled: false }
       }
     })).toHaveNoViolations()
+  })
+
+  it('passes accessibility tests with select event', async () => {
+    const wrapper = await mountSuspended(Table, {
+      props: {
+        ...props,
+        columns: columns as any,
+        caption: 'Table caption',
+        onSelect: () => {}
+      }
+    })
+    expect(await axe(wrapper.element, {
+      rules: {
+        'empty-table-header': { enabled: false }
+      }
+    })).toHaveNoViolations()
+  })
+
+  it('calls select on Enter and Space', async () => {
+    const onSelect = vi.fn()
+    const wrapper = await mountSuspended(Table, {
+      props: { ...props, onSelect }
+    })
+
+    const row = wrapper.find('tbody tr')
+    expect(row.attributes('tabindex')).toBe('0')
+    expect(row.attributes('role')).toBeUndefined()
+
+    const enterEvent = await triggerKeydown(row.element, { key: 'Enter' })
+    expect(onSelect).toHaveBeenCalledTimes(1)
+    expect(enterEvent.defaultPrevented).toBe(true)
+
+    const spaceEvent = await triggerKeydown(row.element, { key: ' ' })
+    expect(onSelect).toHaveBeenCalledTimes(2)
+    expect(spaceEvent.defaultPrevented).toBe(true)
+  })
+
+  it('does not call select on repeated keydown', async () => {
+    const onSelect = vi.fn()
+    const wrapper = await mountSuspended(Table, {
+      props: { ...props, onSelect }
+    })
+
+    const row = wrapper.find('tbody tr')
+    await row.trigger('keydown', { key: 'Enter', repeat: true })
+    await row.trigger('keydown', { key: ' ', repeat: true })
+    expect(onSelect).not.toHaveBeenCalled()
+
+    await row.trigger('keydown', { key: 'Enter' })
+    expect(onSelect).toHaveBeenCalledTimes(1)
+  })
+
+  it('does not call select from nested controls', async () => {
+    const onSelect = vi.fn()
+    const wrapper = await mountSuspended(Table, {
+      props: {
+        ...props,
+        columns: [{
+          id: 'controls',
+          header: 'Controls',
+          cell: () => [
+            h('input', { 'type': 'checkbox', 'aria-label': 'Select row' }),
+            h('button', { type: 'button' }, 'Edit'),
+            h('a', { href: '#' }, 'Details')
+          ]
+        }] as any,
+        onSelect
+      }
+    })
+
+    const checkbox = wrapper.find<HTMLInputElement>('tbody tr input')
+    const checkboxEvent = await triggerKeydown(checkbox.element, { key: ' ' })
+    expect(checkboxEvent.defaultPrevented).toBe(false)
+
+    const buttonEvent = await triggerKeydown(wrapper.find('tbody tr button').element, { key: ' ' })
+    expect(buttonEvent.defaultPrevented).toBe(false)
+
+    const linkEvent = await triggerKeydown(wrapper.find('tbody tr a').element, { key: 'Enter' })
+    expect(linkEvent.defaultPrevented).toBe(false)
+
+    await checkbox.trigger('click')
+    expect(checkbox.element.checked).toBe(true)
+
+    await wrapper.find('tbody tr button').trigger('click')
+    await wrapper.find('tbody tr a').trigger('click')
+
+    expect(onSelect).not.toHaveBeenCalled()
+
+    await wrapper.find('tbody tr').trigger('keydown', { key: 'Enter' })
+    expect(onSelect).toHaveBeenCalledTimes(1)
   })
 
   it('reactive columns', async () => {
