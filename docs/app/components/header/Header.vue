@@ -3,6 +3,9 @@ const route = useRoute()
 const { desktopLinks } = useHeader()
 const { open } = useChat()
 const { track } = useAnalytics()
+// The Ask-AI button skins to the applied icon pack, like the rest of the
+// studio chrome (the theme applies site-wide, so this stays consistent).
+const studioIcons = useStudioIcons()
 
 function toggleChat() {
   if (!open.value) {
@@ -39,15 +42,17 @@ function toggleChat() {
         <UButton
           color="neutral"
           variant="ghost"
-          icon="i-lucide-bot-message-square"
+          :icon="studioIcons.assistant"
           aria-label="Ask AI for help"
           @click="toggleChat"
         />
       </UTooltip>
 
-      <ThemePicker />
+      <!-- lazy for the theme engine it pulls, hydrated on idle: a plain
+           `Lazy` drops the server-rendered button until the chunk lands -->
+      <LazyThemeStudioPresetPicker hydrate-on-idle />
 
-      <UTooltip text="Open on GitHub" class="hidden lg:flex">
+      <UTooltip text="Open on GitHub" class="hidden lg:flex" ignore-non-keyboard-focus>
         <UButton
           color="neutral"
           variant="ghost"

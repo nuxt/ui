@@ -2,6 +2,8 @@
 import { animate } from 'motion-v'
 import { joinURL } from 'ufo'
 
+const studioIcons = useStudioIcons()
+
 const { data: page } = await useAsyncData('figma', () => queryCollection('figma').first())
 if (!page.value) {
   throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
@@ -143,7 +145,7 @@ onMounted(async () => {
         />
         <div v-if="!played" class="group cursor-pointer absolute inset-0 flex items-center justify-center backdrop-blur-xs" @click="video?.play(); played = true">
           <UButton
-            icon="i-lucide-play"
+            :icon="studioIcons.play"
             size="xl"
             color="neutral"
             variant="solid"
