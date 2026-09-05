@@ -39,6 +39,7 @@ describe('Tree', () => {
     ['with expanded', { props: { ...props, expanded: [items[0]] } }],
     ['with defaultExpanded', { props: { ...props, defaultExpanded: [items[0]] } }],
     // Key mapping
+    ['with valueKey', { props: { ...props, valueKey: 'id' } }],
     ['with labelKey', { props: { ...props, labelKey: 'id' } }],
     ['with getKey', { props: { ...props, getKey: (item: TreeItem) => item.id } }],
     // Multiple
@@ -82,6 +83,102 @@ describe('Tree', () => {
       }
     })
     expect(await axe(wrapper.element)).toHaveNoViolations()
+  })
+
+  it('uses a custom valueKey to keep duplicate labels independent', async () => {
+    const wrapper = await mountSuspended(Tree, {
+      props: {
+        valueKey: 'path',
+        items: [
+          {
+            label: 'references',
+            path: 'root-references',
+            defaultExpanded: true,
+            children: [{ label: 'nuxt.md', path: 'root-references/nuxt.md' }]
+          },
+          {
+            label: 'module',
+            path: 'module',
+            defaultExpanded: true,
+            children: [
+              {
+                label: 'references',
+                path: 'module/references',
+                defaultExpanded: true,
+                children: [{ label: 'querying.md', path: 'module/references/querying.md' }]
+              }
+            ]
+          }
+        ]
+      }
+    })
+
+    const foundItems = wrapper.findAll('[role="treeitem"]')
+    const nestedReferences = foundItems.find(item => item.text() === 'references' && item.attributes('aria-level') === '2')
+
+    expect(nestedReferences).toBeDefined()
+    await nestedReferences!.trigger('click')
+
+    const updatedFoundItems = wrapper.findAll('[role="treeitem"]')
+    const rootReferences = updatedFoundItems.find(item => item.text() === 'references' && item.attributes('aria-level') === '1')
+    const reopenedNestedReferences = updatedFoundItems.find(item => item.text() === 'references' && item.attributes('aria-level') === '2')
+
+    expect(rootReferences?.attributes('aria-expanded')).toBe('true')
+    expect(reopenedNestedReferences?.attributes('aria-expanded')).toBe('false')
+  })
+
+  it('uses value as the default item key', async () => {
+    const wrapper = await mountSuspended(Tree, {
+      props: {
+        expanded: ['root-references'],
+        items: [
+          {
+            label: 'references',
+            value: 'root-references',
+            children: [{ label: 'nuxt.md', value: 'root-references/nuxt.md' }]
+          }
+        ]
+      }
+    })
+
+    expect(wrapper.get('[role="treeitem"]').attributes('aria-expanded')).toBe('true')
+  })
+
+  it('falls back to label when value is not provided', async () => {
+    const wrapper = await mountSuspended(Tree, {
+      props: {
+        expanded: ['references'],
+        items: [
+          {
+            label: 'references',
+            children: [{ label: 'nuxt.md' }]
+          }
+        ]
+      }
+    })
+
+    expect(wrapper.get('[role="treeitem"]').attributes('aria-expanded')).toBe('true')
+  })
+
+  it('emits getKey values for expanded state', async () => {
+    const wrapper = await mountSuspended(Tree, {
+      props: {
+        valueKey: 'value',
+        getKey: item => item.id,
+        items: [
+          {
+            id: 'custom-key',
+            label: 'label-key',
+            value: 'value-key',
+            children: [{ id: 'child-key', label: 'child-label', value: 'child-value' }]
+          }
+        ]
+      }
+    })
+
+    await wrapper.get('[role="treeitem"]').trigger('click')
+
+    expect(wrapper.emitted('update:expanded')).toEqual([[['custom-key']]])
   })
 
   test('should have the correct types', () => {
