@@ -117,6 +117,16 @@ props:
 ---
 ::
 
+Use `auto` to generate a deterministic background color from the `text` or `alt` prop. This is useful when displaying fallback initials for multiple users.
+
+::component-code
+---
+props:
+  color: auto
+  alt: 'Benjamin Canac'
+---
+::
+
 ### Chip
 
 Use the `chip` prop to display a chip around the Avatar.
