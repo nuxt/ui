@@ -323,14 +323,39 @@ function isSelectItem(item: SelectItem): item is Exclude<SelectItem, SelectValue
   return typeof item === 'object' && item !== null
 }
 
+// Set by a real pointer press on the trigger. A `<label for>` click forwards only a
+// `click`, never a `pointerdown`, and that absence is what tells the two apart.
+let triggerSawPointerDown = false
+
+function onTriggerPointerDown() {
+  triggerSawPointerDown = true
+}
+
+// A cancelled sequence (touch scrolling, the browser taking over the gesture)
+// fires no `click`, so without this the flag would outlive the interaction and
+// make the next label click look like a real pointer press.
+function onTriggerPointerCancel() {
+  triggerSawPointerDown = false
+}
+
 function onTriggerClick(open: boolean) {
   // A real pointer click opens the menu via `pointerdown` (so `open` is already `true`
   // here), and keyboard activation opens via `keydown`. A `<label for>` click only
   // forwards a `click` with no `pointerdown`, so the menu is still closed. In that case
   // re-dispatch a `pointerdown` to open it, matching SelectMenu (Combobox opens on click).
-  if (!open) {
+  //
+  // `open` alone is not enough to detect that. While the menu is open, Reka's
+  // dismissable layer normally makes the trigger unclickable, but a `pointer-events`
+  // utility on the trigger or an ancestor lets the click through: the outside
+  // `pointerdown` has already closed the menu, so `open` is `false` by the time `click`
+  // fires and the menu would immediately reopen. Requiring the absence of a real
+  // `pointerdown` keeps the label case working without reopening on a genuine click.
+  const forwardedFromLabel = !triggerSawPointerDown
+  if (!open && forwardedFromLabel) {
     triggerRef.value?.$el?.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true, button: 0 }))
   }
+  // Reset last: the synthesized `pointerdown` above re-enters `onTriggerPointerDown`.
+  triggerSawPointerDown = false
 }
 
 const viewportRef = useTemplateRef('viewportRef')
@@ -363,6 +388,8 @@ defineExpose({
       data-slot="base"
       :class="ui.base({ class: [props.ui?.base, props.class] })"
       v-bind="{ ...$attrs, ...ariaAttrs }"
+      @pointerdown="onTriggerPointerDown"
+      @pointercancel="onTriggerPointerCancel"
       @click="onTriggerClick(open)"
     >
       <span v-if="isLeading || !!props.avatar || !!slots.leading" data-slot="leading" :class="ui.leading({ class: props.ui?.leading })">
