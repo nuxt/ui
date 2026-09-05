@@ -9,6 +9,7 @@ describe('Progress', () => {
   const sizes = Object.keys(theme.variants.size) as any
   const orientations = Object.keys(theme.variants.orientation) as any
   const animations = Object.keys(theme.variants.animation) as any
+  const variants = Object.keys(theme.variants.variant) as any
   const max = ['Waiting...', 'Cloning...', 'Migrating...', 'Deploying...', 'Done!']
 
   renderEach(Progress, [
@@ -22,6 +23,7 @@ describe('Progress', () => {
     ...sizes.map((size: string) => [`with size ${size}`, { props: { size } }]),
     ...orientations.map((orientation: string) => [`with orientation ${orientation}`, { props: { orientation } }]),
     ...animations.map((animation: string) => [`with animation ${animation}`, { props: { animation } }]),
+    ...variants.map((variant: string) => [`with variant ${variant}`, { props: { variant } }]),
     ['with color neutral', { props: { color: 'neutral', modelValue: 50 } }],
     ['with color neutral and max', { props: { color: 'neutral', modelValue: 2, status: true, max } }],
     ['with custom color', { props: { color: '#8b5cf6', modelValue: 2, status: true, max } }],

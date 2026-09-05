@@ -30,7 +30,7 @@ export interface ProgressProps extends Pick<ProgressRootProps, 'getValueLabel' |
    */
   color?: Progress['variants']['color'] | (string & {})
   /**
-   * The orientation of the progress bar.
+   * The orientation of the progress bar. When `circular` variant is enabled, controls the axis along which the steps are laid out next to it.
    * @defaultValue 'horizontal'
    */
   orientation?: Progress['variants']['orientation']
@@ -39,6 +39,17 @@ export interface ProgressProps extends Pick<ProgressRootProps, 'getValueLabel' |
    * @defaultValue 'carousel'
    */
   animation?: Progress['variants']['animation']
+  /**
+   * The progress bar variant.
+   * @defaultValue 'linear'
+   */
+  variant?: Progress['variants']['variant']
+  /**
+   * The thickness of the circular progress stroke, in units of the circle's `100x100` coordinate system so it scales with the rendered size, `auto` derives it from the `size` prop.
+   * Only applies to the `circular` variant.
+   * @defaultValue 'auto'
+   */
+  thickness?: 'auto' | number
   class?: any
   ui?: Progress['slots']
 }
@@ -66,7 +77,9 @@ import { tv } from '../utils/tv'
 const _props = withDefaults(defineProps<ProgressProps>(), {
   inverted: false,
   modelValue: null,
-  orientation: 'horizontal'
+  orientation: 'horizontal',
+  variant: 'linear',
+  thickness: 'auto'
 })
 const emits = defineEmits<ProgressEmits>()
 const slots = defineSlots<ProgressSlots>()
@@ -110,20 +123,38 @@ const indicatorStyle = computed(() => {
     return
   }
 
-  if (props.orientation === 'vertical') {
-    return {
-      transform: `translateY(${props.inverted ? '' : '-'}${100 - percent.value}%)`
-    }
-  } else {
-    if (dir.value === 'rtl') {
+  if (props.variant === 'linear') {
+    if (props.orientation === 'vertical') {
       return {
-        transform: `translateX(${props.inverted ? '-' : ''}${100 - percent.value}%)`
+        transform: `translateY(${props.inverted ? '' : '-'}${100 - percent.value}%)`
       }
     } else {
-      return {
-        transform: `translateX(${props.inverted ? '' : '-'}${100 - percent.value}%)`
+      if (dir.value === 'rtl') {
+        return {
+          transform: `translateX(${props.inverted ? '-' : ''}${100 - percent.value}%)`
+        }
+      } else {
+        return {
+          transform: `translateX(${props.inverted ? '' : '-'}${100 - percent.value}%)`
+        }
       }
     }
+  } else {
+    const strokeDasharray = `${percent.value ?? 25}, 100`
+
+    return {
+      'stroke-dasharray': strokeDasharray
+    }
+  }
+})
+
+const thicknessStyle = computed(() => {
+  if (props.variant === 'linear') return
+
+  if (props.thickness === 'auto') return
+
+  return {
+    '--ui-progress-thickness': `${props.thickness}px`
   }
 })
 
@@ -167,7 +198,9 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.progress || {}) 
   size: props.size,
   color: props.color as Progress['variants']['color'],
   orientation: props.orientation,
-  inverted: props.inverted
+  inverted: props.inverted,
+  variant: props.variant,
+  thickness: props.thickness === 'auto' ? 'auto' : undefined
 }))
 
 // `tv` skips a color it doesn't know, so a value outside the theme palette adds no class
@@ -179,14 +212,36 @@ const customColor = computed(() => props.color && !themeColors.value.includes(pr
 
 <template>
   <Primitive :as="props.as" :data-orientation="props.orientation" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <div v-if="!isIndeterminate && (props.status || !!slots.status)" data-slot="status" :class="ui.status({ class: props.ui?.status })" :style="statusStyle">
+    <div v-if="!isIndeterminate && (props.status || !!slots.status) && props.variant === 'linear'" data-slot="status" :class="ui.status({ class: props.ui?.status })" :style="statusStyle">
       <slot name="status" :percent="percent">
         {{ percent }}%
       </slot>
     </div>
 
-    <ProgressRoot v-bind="rootProps" :max="realMax" data-slot="base" :class="ui.base({ class: props.ui?.base })" style="transform: translateZ(0)">
-      <ProgressIndicator data-slot="indicator" :class="ui.indicator({ class: props.ui?.indicator })" :style="[indicatorStyle, customColor ? { backgroundColor: customColor } : undefined]" />
+    <ProgressRoot v-bind="rootProps" :max="realMax" data-slot="base" :class="ui.base({ class: props.ui?.base })" :style="['transform: translateZ(0)', thicknessStyle]">
+      <template v-if="props.variant === 'circular'">
+        <svg viewBox="0 0 100 100" data-slot="circle" :class="ui.circle({ class: props.ui?.circle })">
+          <circle cx="50" cy="50" data-slot="track" :class="ui.track({ class: props.ui?.track })" />
+          <ProgressIndicator as-child>
+            <circle
+              cx="50"
+              cy="50"
+              pathLength="100"
+              data-slot="indicator"
+              :data-percent="percent"
+              :class="ui.indicator({ class: props.ui?.indicator })"
+              :style="[indicatorStyle, customColor ? { stroke: customColor } : undefined]"
+            />
+          </ProgressIndicator>
+        </svg>
+        <div v-if="!isIndeterminate && (props.status || !!slots.status)" data-slot="status" :class="ui.status({ class: props.ui?.status })" :style="statusStyle">
+          <slot name="status" :percent="percent">
+            {{ percent }}%
+          </slot>
+        </div>
+      </template>
+
+      <ProgressIndicator v-else-if="props.variant === 'linear'" data-slot="indicator" :class="ui.indicator({ class: props.ui?.indicator })" :style="[indicatorStyle, customColor ? { backgroundColor: customColor } : undefined]" />
     </ProgressRoot>
 
     <div v-if="hasSteps" data-slot="steps" :class="ui.steps({ class: props.ui?.steps })" :style="customColor ? { color: customColor } : undefined">
