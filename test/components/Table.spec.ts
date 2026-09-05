@@ -255,4 +255,22 @@ describe('Table', () => {
 
     expect(wrapper.find('[data-test-th="amount"]').exists()).toBeTruthy()
   })
+
+  it('excludes hidden columns from colspan', async () => {
+    const columnVisibility = { email: false }
+    const visibleColumns = String(columns.length - 1)
+
+    const empty = await mountSuspended(Table, {
+      props: { columns: columns as any, columnVisibility }
+    })
+
+    expect(empty.find('[data-slot="empty"]').attributes('colspan')).toBe(visibleColumns)
+
+    const expanded = await mountSuspended(Table, {
+      props: { ...props, columns: columns as any, columnVisibility, expanded: { 0: true } },
+      slots: { expanded: () => 'Expanded slot' }
+    })
+
+    expect(expanded.findAll('td').find(td => td.text() === 'Expanded slot')?.attributes('colspan')).toBe(visibleColumns)
+  })
 })
