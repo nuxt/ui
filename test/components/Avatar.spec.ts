@@ -38,4 +38,23 @@ describe('Avatar', () => {
 
     expect(await axe(wrapper.element)).toHaveNoViolations()
   })
+
+  it('forwards attrs to root when `src` prop is absent', async () => {
+    const wrapper = await mountSuspended(Avatar, {
+      props: { alt: 'Benjamin Canac' },
+      attrs: { 'aria-label': 'test-label', 'data-testid': 'test-id' }
+    })
+    expect(wrapper.attributes('aria-label')).toBe('test-label')
+    expect(wrapper.attributes('data-testid')).toBe('test-id')
+    expect(wrapper.find('[data-slot="fallback"]').attributes('aria-label')).toBeUndefined()
+  })
+
+  it('forwards attrs to image when `src` prop is set', async () => {
+    const wrapper = await mountSuspended(Avatar, {
+      props: { alt: 'Benjamin Canac', src: 'https://github.com/benjamincanac.png' },
+      attrs: { 'aria-label': 'test-label' }
+    })
+    expect(wrapper.attributes('aria-label')).toBeUndefined()
+    expect(wrapper.find('img').attributes('aria-label')).toBe('test-label')
+  })
 })
