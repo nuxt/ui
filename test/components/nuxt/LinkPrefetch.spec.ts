@@ -33,10 +33,18 @@ class MockIntersectionObserver {
   }
 }
 
-// The visibility observer is registered from an idle callback, which falls back
-// to a short timeout in happy-dom.
+// The visibility observer is registered `onNuxtReady` and then from an idle
+// callback, both falling back to short timeouts in happy-dom. Positive checks
+// poll for the observer, negative ones give the same chain time to run.
 function idle() {
-  return new Promise(resolve => setTimeout(resolve, 10))
+  return new Promise(resolve => setTimeout(resolve, 50))
+}
+
+function waitForObserver() {
+  return vi.waitFor(() => {
+    expect(MockIntersectionObserver.instances).toHaveLength(1)
+    return MockIntersectionObserver.instances[0]!
+  })
 }
 
 describe('Link prefetch', () => {
@@ -96,9 +104,7 @@ describe('Link prefetch', () => {
     wrapper = await mountSuspended(Link, { props: { to: '/about' }, slots: { default: () => 'About' } })
     const link = wrapper.get('a').element
 
-    await idle()
-
-    const observer = MockIntersectionObserver.instances[0]!
+    const observer = await waitForObserver()
     expect(observer.observed).toEqual([link])
     expect(spy).not.toHaveBeenCalled()
 
