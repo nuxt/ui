@@ -4,8 +4,6 @@ import { joinURL } from 'ufo'
 const { url } = useSiteConfig()
 
 if (import.meta.server) {
-  prerenderRoutes(['/raw/index.md'])
-
   useSchemaOrg([
     defineSoftwareApp({
       name: 'Nuxt UI',

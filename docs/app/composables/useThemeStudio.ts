@@ -2,8 +2,14 @@ import type { MaybeRefOrGetter } from 'vue'
 import colors from 'tailwindcss/colors'
 import { rampCssName, THEME_STUDIO_VIEWS } from '../utils/theme/studio'
 import type { ThemeStudioView } from '../utils/theme/studio'
-import { presets, DEFAULT_PRESET_ID, docToSettings, isDefaultTheme, generatePalette, applyPaletteEffects, isDefaultEffects, parseCssColor, styleComponents, styleTokens, sectionFingerprint, mergeSection, canonicalTokenShades, storedStopStep, nearestShade, TOKEN_SHADE_TARGETS, SECTION_GROUPS, DEFAULT_COLORS, SHADES, SHADES_ALL, SHADE_SETS } from '../utils/theme/engine'
-import type { SectionKey, ThemeDoc, ThemePreset, PaletteCurveParams, PaletteEffects, StoredPaletteParams, PalettePin, StyleOptions, Shade, ShadeStep, ShadeStop, ColorAlias, TokenRamp, VariantGroup, DefaultVariant } from '../utils/theme/engine'
+// Leaf modules, never the barrel: the barrel re-exports serialize (and json5
+// with it), and this composable is reached from the header preset picker on
+// every docs page, which would put the exporter in the entry chunk.
+import { DEFAULT_PRESET_ID, docToSettings, isDefaultTheme, styleComponents, styleTokens, DEFAULT_COLORS, SHADES, nearestShade } from '../utils/theme/engine/types'
+import { presets } from '../utils/theme/engine/presets'
+import { generatePalette, applyPaletteEffects, isDefaultEffects, parseCssColor } from '../utils/theme/engine/palette'
+import { sectionFingerprint, stableStringify, mergeSection, canonicalTokenShades, ALL_SECTION_KEYS, SECTION_GROUPS } from '../utils/theme/engine/sections'
+import type { SectionKey, ThemeDoc, ThemePreset, PaletteCurveParams, PaletteEffects, StoredPaletteParams, PalettePin, StyleOptions, Shade, ShadeStop, ColorAlias, TokenRamp, VariantGroup, DefaultVariant } from '../utils/theme/engine'
 
 export function useThemeStudio() {
   const theme = useTheme()
@@ -41,22 +47,6 @@ export function useThemeStudio() {
   // stock instead of a preset no build defines.
   if (import.meta.client && activePreset.value && !presets.some(preset => preset.id === activePreset.value)) {
     activePreset.value = undefined
-  }
-
-  // The class bundle is an expansion of `style`, not stored state, so it is
-  // rebuilt from the restored prefs on load. That also means a generator
-  // change (new fragment classes) reaches already-saved themes for free,
-  // which used to need a self-heal comparing the two.
-  const bundleBuilt = useState('nuxt-ui-style-bundle-built', () => false)
-  if (import.meta.client && !bundleBuilt.value) {
-    bundleBuilt.value = true
-    try {
-      const expected = styleComponents(style.value)
-      if (Object.keys(expected).length) onNuxtReady(() => theme.setStyleUi(expected))
-    } catch {
-      // a throwing expansion (corrupt persisted style) shouldn't be permanent
-      bundleBuilt.value = false
-    }
   }
 
   function setStyle(options: StyleOptions) {
@@ -119,19 +109,14 @@ export function useThemeStudio() {
 
   /**
    * Every defined shade of a named palette as oklch, tailwind's JS values
-   * first, CSS variables as fallback. Sampled across every stop any density
-   * can emit, so a ramp generated at a finer density is read whole; a standard
-   * 11-stop ramp simply has no in-between vars and those drop out. The editor
-   * reads the density back from which stops came through.
+   * first, CSS variables as fallback.
    */
   function paletteShades(name: string): Partial<Record<Shade, string>> | undefined {
     const tailwind = (colors as Record<string, any>)[name]
     if (tailwind && typeof tailwind === 'object') {
-      // A stock tailwind ramp has only the 11 standard stops, the rest are
-      // undefined, and parseCssColor would throw on those. Skip absent shades
-      // so a full sweep degrades cleanly to the 11 present.
+      // parseCssColor throws on an absent stop, skip what a ramp leaves out.
       return Object.fromEntries(
-        SHADES_ALL
+        SHADES
           .filter(shade => tailwind[shade] != null)
           .map(shade => [shade, parseCssColor(tailwind[shade])])
           .filter(([, color]) => color)
@@ -140,7 +125,7 @@ export function useThemeStudio() {
 
     if (import.meta.client) {
       const styles = getComputedStyle(document.documentElement)
-      const entries = SHADES_ALL
+      const entries = SHADES
         .map(shade => [shade, parseCssColor(styles.getPropertyValue(`--color-${rampCssName(name)}-${shade}`))] as const)
         .filter(([, color]) => color)
       if (entries.length >= 2) {
@@ -186,13 +171,15 @@ export function useThemeStudio() {
    * The library hardcodes five tokens to `white` (light `--ui-bg` and
    * `--ui-text-inverted`; dark `--ui-text-highlighted`, `--ui-bg-inverted`
    * and `--ui-border-inverted`), so a tinted neutral ramp would never reach
-   * them. Choosing a neutral re-routes all five through the ramp, which is
-   * also what makes the export reproduce the preview, since the docs
-   * baseline already shows neutral-50 as the page background.
+   * them. Choosing a neutral re-routes all five through the ramp, and lifts
+   * the muted surface a stop: the library sits it at 50 too, so it would
+   * land ON the page and every muted panel would lose its shape. The
+   * presets' tintedNeutralBase carries the same six.
    */
   const NEUTRAL_TOKEN_REMAPS = {
     light: {
       '--ui-bg': 'var(--ui-color-neutral-50)',
+      '--ui-bg-muted': 'var(--ui-color-neutral-100)',
       '--ui-text-inverted': 'var(--ui-color-neutral-50)'
     },
     dark: {
@@ -223,18 +210,11 @@ export function useThemeStudio() {
     }
   }
 
-  /** The stops a ramp actually emits, its density when custom, else the standard 11. */
-  function rampStops(ramp?: string): readonly Shade[] {
-    return ramp && isCustomPalette(ramp) ? SHADE_SETS[storedStopStep(paletteParams.value[ramp])] : SHADES
-  }
-
   /**
-   * A token shade pinned to an in-between stop only resolves while its ramp is
-   * a custom palette generating that stop, that's the only thing defining
-   * `--color-custom-<ramp>-<stop>`. When a ramp changes density, or is cleared
-   * / switched to a stock colour, that variable disappears, so snap any
-   * now-orphaned token to the nearest stop the ramp does emit rather than
-   * leaving a dangling reference (which renders transparent).
+   * A token shade only resolves while its ramp defines that stop. Older
+   * themes could pin a token to an in-between stop (925), which no ramp emits
+   * any more, so snap those to the nearest standard stop rather than leaving a
+   * dangling reference (which renders transparent).
    */
   function sanitizeTokenShades() {
     const shades = style.value.tokenShades
@@ -242,13 +222,12 @@ export function useThemeStudio() {
     let changed = false
     const next: NonNullable<StyleOptions['tokenShades']> = {}
     for (const [token, modes] of Object.entries(shades)) {
-      const stops = rampStops(TOKEN_SHADE_TARGETS.find(target => target.token === token)?.ramp)
       const fixed: { light?: ShadeStop, dark?: ShadeStop } = {}
       for (const mode of ['light', 'dark'] as const) {
         const value = modes[mode]
         if (value === undefined) continue
-        if (typeof value === 'number' && !stops.includes(value)) {
-          fixed[mode] = nearestShade(value, stops)
+        if (typeof value === 'number' && !SHADES.includes(value)) {
+          fixed[mode] = nearestShade(value)
           changed = true
         } else {
           fixed[mode] = value
@@ -264,7 +243,7 @@ export function useThemeStudio() {
    * modifier lens persist separately, so a reload restores the editor's
    * sliders instead of silently baking them into the curves.
    */
-  function setPaletteFromCurve(alias: ColorAlias, base: PaletteCurveParams, effects?: PaletteEffects, amount = 100, step: ShadeStep = 100, pins: PalettePin[] = []) {
+  function setPaletteFromCurve(alias: ColorAlias, base: PaletteCurveParams, effects?: PaletteEffects, amount = 100, pins: PalettePin[] = []) {
     const name = customPaletteName(alias)
     // The alias only needs pointing once. Live drags call this at ~16Hz; re-
     // sending it every tick makes applyThemeSettings re-persist the AI-extras
@@ -273,7 +252,7 @@ export function useThemeStudio() {
     const aliasAlreadySet = (appConfig.ui.colors as Record<string, string>)[alias] === name
 
     theme.applyThemeSettings({
-      customColors: { [name]: generatePalette(applyPaletteEffects(base, effects, amount), step, pins) },
+      customColors: { [name]: generatePalette(applyPaletteEffects(base, effects, amount), pins) },
       ...(aliasAlreadySet ? {} : { [alias]: name }),
       // The remaps are var() references, not ramp colours, and are kept in
       // sync with the shade sliders elsewhere, so they only need (re)sending
@@ -283,12 +262,10 @@ export function useThemeStudio() {
     const entry: StoredPaletteParams = {
       ...base,
       ...(isDefaultEffects(effects, amount) ? {} : { effects, amount }),
-      ...(step !== 100 ? { stopStep: step } : {}),
       ...(pins.length ? { pins } : {})
     }
     setPaletteParams({ ...paletteParams.value, [alias]: entry })
 
-    // A coarser density orphans any token pinned to a stop it no longer emits.
     // Only writes when something actually moved, so the drag path is a no-op.
     sanitizeTokenShades()
 
@@ -316,16 +293,9 @@ export function useThemeStudio() {
     const { [alias]: _, ...rest } = paletteParams.value
     setPaletteParams(rest)
 
-    // A stock ramp emits only the standard 11, snap any token off the rest.
     sanitizeTokenShades()
   }
 
-  /**
-   * Reflect a doc's token overrides back into the sidebar's shade settings
-   * where they are representable, so controls show the preset's reality
-   * instead of stale defaults. Only neutral-ramp refs map onto sliders;
-   * anything else (white/black literals, non-neutral refs) stays token-only.
-   */
   /**
    * The style axis a doc implies: its explicit style plus ramp-shaped token
    * overrides promoted into tokenShades (canonicalTokenShades, shared with
@@ -466,6 +436,17 @@ export function useThemeStudio() {
     ))
   }
 
+  /**
+   * Anything diverging from the baseline, measured the way the sections
+   * measure it (a preset's ramp-shaped token and the shade applyDoc promoted
+   * it into compare equal), plus the component overrides no section owns:
+   * the AI chat writes them, and they are edits all the same.
+   */
+  const dirty = computed(() =>
+    ALL_SECTION_KEYS.some(key => sectionFingerprint(liveDoc.value, key) !== sectionFingerprint(baselineDoc.value, key))
+    || stableStringify(liveDoc.value.components ?? null) !== stableStringify(baselineDoc.value.components ?? null)
+  )
+
   function resetSection(key: SectionKey | SectionKey[]) {
     // several slices splice in one pass, one applyDoc, so a multi-key fold
     // costs one history entry rather than one per slice
@@ -513,6 +494,7 @@ export function useThemeStudio() {
     clearActivePreset,
     sectionDirty,
     groupDirty,
+    dirty,
     resetSection,
     style,
     setStyle,

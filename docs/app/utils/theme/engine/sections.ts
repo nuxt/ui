@@ -10,29 +10,35 @@ import { FONT_WEIGHT_DEFAULTS } from '../studio'
  * ACTIVE PRESET's doc: dirty means "touched after applying the preset", not
  * "differs from stock".
  */
+/** Every colour alias owns its own slice, so one changed alias stays one. */
+export type ColorSection = 'primary' | 'neutral' | typeof SEMANTIC_ALIASES[number]
+
 export type SectionKey
-  = | 'primary' | 'neutral' | 'semantic'
+  = | ColorSection
     | 'font' | 'type' | 'weights'
     | 'icons' | 'radius' | 'size' | 'buttons' | 'panels' | 'inputs'
 
-/** The Text panel's three sections, each owning part of the font document. */
+/** Which font fields the `font` and `type` sections each own. */
 const FONT_STACKS = ['sans', 'serif', 'mono'] as const
 const TYPE_FIELDS = ['uppercase', 'italic', 'letterSpacing', 'lineHeight'] as const
 
 /**
- * Only the two that still back a multi-section panel. Type, icons and radius
- * each own a toolbar control now, so they carry their own `sectionDirty`
- * rather than rolling up into a group.
+ * Only the sections that back a multi-section panel. Every other section owns
+ * a toolbar control and carries its own `sectionDirty`.
  */
 export const SECTION_GROUPS: Record<'colors' | 'defaults', SectionKey[]> = {
-  colors: ['primary', 'neutral', 'semantic'],
+  colors: ['primary', 'neutral', ...SEMANTIC_ALIASES],
   defaults: ['size', 'buttons', 'panels', 'inputs']
 }
 
+/** Every section, for whole-document comparisons against the baseline. */
+export const ALL_SECTION_KEYS: SectionKey[] = [...SECTION_GROUPS.colors, ...SECTION_GROUPS.defaults, 'font', 'type', 'weights', 'icons', 'radius']
+
 /** Which color section a semantic token (or token shade) belongs to. */
-function tokenSection(token: string): 'primary' | 'semantic' | 'neutral' {
+function tokenSection(token: string): ColorSection {
   if (token === '--ui-primary' || token.startsWith('--ui-color-primary')) return 'primary'
-  if (SEMANTIC_ALIASES.some(alias => token === `--ui-${alias}`)) return 'semantic'
+  const semantic = SEMANTIC_ALIASES.find(alias => token === `--ui-${alias}`)
+  if (semantic) return semantic
   return 'neutral'
 }
 
@@ -58,7 +64,7 @@ export function promotedShades(doc: ThemeDoc): Record<string, { light?: ShadeSto
   return promoted
 }
 
-function ownedTokens(doc: ThemeDoc, section: 'primary' | 'semantic' | 'neutral') {
+function ownedTokens(doc: ThemeDoc, section: ColorSection) {
   // tokens the doc's own style treatment emits are DERIVED, a live doc
   // carries them merged into tokens, a preset doc never does
   const derived = styleTokens(doc.style ?? {})
@@ -71,7 +77,7 @@ function ownedTokens(doc: ThemeDoc, section: 'primary' | 'semantic' | 'neutral')
   return { light: pickMode('light'), dark: pickMode('dark') }
 }
 
-function ownedTokenShades(doc: ThemeDoc, section: 'primary' | 'semantic' | 'neutral') {
+function ownedTokenShades(doc: ThemeDoc, section: ColorSection) {
   return Object.fromEntries(Object.entries(canonicalTokenShades(doc)).filter(([token]) => tokenSection(token) === section))
 }
 
@@ -103,7 +109,10 @@ export function pickSection(doc: ThemeDoc, key: SectionKey): unknown {
   switch (key) {
     case 'primary':
       return {
-        color: doc.blackAsPrimary ? 'black' : alias(doc, 'primary'),
+        // both: black only overrides --ui-primary, the ramp still colours
+        // every primary-* utility, so a ramp change under black is a change
+        color: alias(doc, 'primary'),
+        black: !!doc.blackAsPrimary,
         palette: aliasPalette(doc, 'primary') ?? null,
         tokens: ownedTokens(doc, 'primary'),
         shades: ownedTokenShades(doc, 'primary')
@@ -115,15 +124,19 @@ export function pickSection(doc: ThemeDoc, key: SectionKey): unknown {
         tokens: ownedTokens(doc, 'neutral'),
         shades: ownedTokenShades(doc, 'neutral')
       }
-    case 'semantic':
+    case 'secondary':
+    case 'success':
+    case 'info':
+    case 'warning':
+    case 'error':
       return {
-        colors: Object.fromEntries(SEMANTIC_ALIASES.map(name => [name, alias(doc, name)])),
-        palettes: Object.fromEntries(SEMANTIC_ALIASES.map(name => [name, aliasPalette(doc, name) ?? null])),
-        tokens: ownedTokens(doc, 'semantic'),
-        shades: ownedTokenShades(doc, 'semantic')
+        color: alias(doc, key),
+        palette: aliasPalette(doc, key) ?? null,
+        tokens: ownedTokens(doc, key),
+        shades: ownedTokenShades(doc, key)
       }
     // Explicit stock values count as absent throughout: setFontPrefs strips
-    // them on apply while a preset doc may spell them out (8-bit), and a raw
+    // them on apply while a preset doc may spell them out, and a raw
     // comparison would read dirty forever, jamming the toolbar reset.
     case 'font': {
       const font = doc.font ?? {}
@@ -160,16 +173,21 @@ export function pickSection(doc: ThemeDoc, key: SectionKey): unknown {
   }
 }
 
-/** Stable stringify (sorted keys) so pick results compare structurally. */
-export function sectionFingerprint(doc: ThemeDoc, key: SectionKey): string {
-  const sort = (value: unknown): unknown => {
-    if (Array.isArray(value)) return value.map(sort)
-    if (value && typeof value === 'object') {
-      return Object.fromEntries(Object.keys(value).sort().map(k => [k, sort((value as Record<string, unknown>)[k])]))
-    }
-    return value
+/** Stable stringify (sorted keys, undefined entries dropped) so values compare structurally. */
+export function stableStringify(value: unknown): string {
+  if (Array.isArray(value)) return `[${value.map(stableStringify).join(',')}]`
+  if (value && typeof value === 'object') {
+    return `{${Object.entries(value as Record<string, unknown>)
+      .filter(([, entry]) => entry !== undefined)
+      .sort(([a], [b]) => a.localeCompare(b))
+      .map(([key, entry]) => `${JSON.stringify(key)}:${stableStringify(entry)}`)
+      .join(',')}}`
   }
-  return JSON.stringify(sort(pickSection(doc, key)))
+  return JSON.stringify(value) ?? 'null'
+}
+
+export function sectionFingerprint(doc: ThemeDoc, key: SectionKey): string {
+  return stableStringify(pickSection(doc, key))
 }
 
 /**
@@ -239,7 +257,7 @@ function mergeAlias(doc: ThemeDoc, base: ThemeDoc, name: keyof typeof DEFAULT_CO
 }
 
 /** Swap a color section's tokens/token-shades for the base doc's. */
-function mergeColorExtras(doc: ThemeDoc, base: ThemeDoc, section: 'primary' | 'semantic' | 'neutral') {
+function mergeColorExtras(doc: ThemeDoc, base: ThemeDoc, section: ColorSection) {
   for (const mode of ['light', 'dark'] as const) {
     const kept = Object.entries(doc.tokens?.[mode] ?? {}).filter(([token]) => tokenSection(token) !== section)
     const added = Object.entries(base.tokens?.[mode] ?? {}).filter(([token]) => tokenSection(token) === section)
@@ -281,9 +299,13 @@ export function mergeSection(current: ThemeDoc, base: ThemeDoc, key: SectionKey)
       mergeAlias(doc, base, 'neutral')
       mergeColorExtras(doc, base, 'neutral')
       break
-    case 'semantic':
-      for (const name of SEMANTIC_ALIASES) mergeAlias(doc, base, name)
-      mergeColorExtras(doc, base, 'semantic')
+    case 'secondary':
+    case 'success':
+    case 'info':
+    case 'warning':
+    case 'error':
+      mergeAlias(doc, base, key)
+      mergeColorExtras(doc, base, key)
       break
     case 'font':
       mergeFontFields(doc, base, FONT_STACKS)

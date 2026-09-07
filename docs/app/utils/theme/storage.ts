@@ -1,21 +1,17 @@
 import type { ThemeDoc, StoredPaletteParams, StyleOptions } from './engine'
-import { THEME_DEFAULTS } from './engine/types'
+import { DEFAULT_COLORS, THEME_DEFAULTS } from './engine/types'
 import { SAFE_NAME } from './sanitize'
 
 /**
  * The font document: all three stacks plus the body treatment, exactly the
- * doc's own shape. It used to be this type minus `sans`, because the sans
- * shipped as its own `nuxt-ui-font` key long before the rest existed and the
- * two never got folded back together.
+ * doc's own shape.
  */
 export type FontPrefs = NonNullable<ThemeDoc['font']>
 
 /**
- * The theme's single persisted key. Every setting used to own a localStorage
- * key of its own, which meant restores could interleave: the derived stores
- * (the ramp behind a custom palette, the class bundle behind a style) could
- * come back without the source that produced them, so each needed a self-heal
- * to reconcile. One key writes atomically, so those states cannot disagree.
+ * The theme's single persisted key. One key writes atomically, so a derived
+ * store (the ramp behind a custom palette, the class bundle behind a style)
+ * can never come back without the source that produced it.
  *
  * Not a ThemeDoc: the doc is the EXPORT shape, diffed against a stock library
  * install. This is a snapshot of runtime state, and hydrating it has to
@@ -47,10 +43,7 @@ export interface StoredTheme {
 }
 
 /**
- * Every key the theme picker wrote before this became one key: the nine that
- * are live on v4 today plus two this branch added (font size and the
- * typography bag). The studio's own (style, palette params, preset) never
- * left the branch and are not worth carrying.
+ * Every key the theme picker wrote before this became one key.
  *
  * vueuse's `useLocalStorage` writes strings and numbers RAW, not JSON, so
  * these read back per type rather than through JSON.parse.
@@ -84,7 +77,7 @@ function migrateLegacyTheme(): StoredTheme {
     fontSize: number('nuxt-ui-font-size'),
     icons: read('nuxt-ui-icons'),
     blackAsPrimary: read('nuxt-ui-black-as-primary') === 'true' || undefined,
-    // the family and the rest of the typography were two keys back then
+    // the family and the rest of the typography were separate keys
     font: normalizeFont({ ...json<Record<string, unknown>>('nuxt-ui-font-prefs'), sans: read('nuxt-ui-font') }),
     colors: extras?.colors,
     components: extras?.ui,
@@ -99,8 +92,8 @@ function migrateLegacyTheme(): StoredTheme {
   return migrated
 }
 
-/** Clamp to a range, or drop the value if it isn't a finite number. */
-function clamped(value: unknown, min: number, max: number): number | undefined {
+/** Clamp to a range, or drop the value if it isn't a finite number (a numeric string counts). */
+export function clamped(value: unknown, min: number, max: number): number | undefined {
   // Number() maps null/''/booleans to finite numbers, which would clamp
   // junk to the range floor instead of dropping it.
   if (typeof value !== 'number' && typeof value !== 'string') return undefined
@@ -159,13 +152,6 @@ export function readStoredTheme(): StoredTheme {
     }
     const parsed = JSON.parse(raw)
     if (!parsed || typeof parsed !== 'object') return {}
-    // Interim shape from this key's first iteration, where the family was
-    // still a bare string beside a `fontPrefs` object. Never shipped, so this
-    // only has to survive a branch checkout, not a release.
-    if (typeof parsed.font === 'string' || parsed.fontPrefs) {
-      parsed.font = { ...parsed.fontPrefs, ...(typeof parsed.font === 'string' ? { sans: parsed.font } : {}) }
-      Reflect.deleteProperty(parsed, 'fontPrefs')
-    }
     parsed.font = normalizeFont(parsed.font)
     return parsed as StoredTheme
   } catch {
@@ -191,6 +177,37 @@ export function writeStoredTheme(value: StoredTheme) {
     }
   } catch {
     // the theme still applies in memory, it just won't survive the reload
+  }
+}
+
+/**
+ * The live theme in the stored shape, defaults omitted so an untouched theme
+ * stores nothing. Reads the raw state refs rather than `currentDoc()`: the
+ * doc is diffed against a stock library install on every call, far too much
+ * work for the persistence watcher's per-flush getter, and `useTheme()`
+ * outside a component would fire its onMounted with no instance.
+ */
+export function snapshotStoredTheme(): StoredTheme {
+  const appConfig = useAppConfig()
+  const filled = <T extends object>(value: T | undefined) => value && Object.keys(value).length ? value : undefined
+  const unless = <T>(value: T, fallback: T) => value === fallback ? undefined : value
+  const extras = useState<Record<string, any>>('nuxt-ui-ai-theme').value
+  const cssVariables = useState<StoredTheme['cssVariables']>('nuxt-ui-css-variables').value
+  return {
+    primary: unless(appConfig.ui.colors.primary, DEFAULT_COLORS.primary),
+    neutral: unless(appConfig.ui.colors.neutral, DEFAULT_COLORS.neutral),
+    radius: unless(useState<number>('nuxt-ui-radius').value, THEME_DEFAULTS.radius),
+    fontSize: unless(useState<number>('nuxt-ui-font-size').value, THEME_DEFAULTS.fontSize),
+    font: filled(useState<StoredTheme['font']>('nuxt-ui-font').value),
+    icons: unless(useState<string>('nuxt-ui-icons').value, THEME_DEFAULTS.icons),
+    blackAsPrimary: useState<boolean>('nuxt-ui-black-as-primary').value || undefined,
+    colors: filled(extras?.colors),
+    components: filled(extras?.ui),
+    customColors: filled(useState<StoredTheme['customColors']>('nuxt-ui-custom-colors').value),
+    cssVariables: filled(cssVariables?.light) || filled(cssVariables?.dark) ? cssVariables : undefined,
+    style: filled(useState<StoredTheme['style']>(THEME_STATE_KEYS.stylePrefs).value),
+    paletteParams: filled(useState<StoredTheme['paletteParams']>(THEME_STATE_KEYS.paletteParams).value),
+    preset: useState<string | undefined>(THEME_STATE_KEYS.themePreset).value
   }
 }
 

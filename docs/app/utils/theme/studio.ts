@@ -7,8 +7,7 @@ import type { ThemeDoc, Shade } from './engine/types'
 // What the pickers offer. Static, so it lives here rather than in the
 // composables that hand it out.
 
-// taupe/mauve/mist/olive ship in tailwind's theme.css but not (yet) the
-// tailwindcss/colors JS export, swatches resolve them from CSS variables
+// tailwind's extra neutrals, listed so they stay out of PRIMARY_COLORS
 export const NEUTRAL_COLORS = ['slate', 'gray', 'zinc', 'neutral', 'stone', 'taupe', 'mauve', 'mist', 'olive']
 const NOT_A_RAMP = ['inherit', 'current', 'transparent', 'black', 'white', ...NEUTRAL_COLORS]
 export const PRIMARY_COLORS = Object.keys(colors).filter(name => !NOT_A_RAMP.includes(name))
@@ -62,43 +61,70 @@ export function rampCssName(name: string) {
 
 /* --------------------------------------------------------------- views -- */
 
-export type ThemeStudioView = 'grid' | 'dashboard' | 'chat' | 'saas' | 'landing' | 'docs' | 'portfolio' | 'changelog' | 'editor' | 'a11y'
+export type ThemeStudioView = 'grid' | 'dashboard' | 'chat' | 'saas' | 'landing' | 'docs' | 'portfolio' | 'changelog' | 'editor'
 
 export interface ThemeStudioViewTab {
   label: string
-  icon: string
   value: ThemeStudioView
   /** One-liner for the rich switcher, template blurbs from /templates. */
   description: string
-  /** /templates screenshot base path (`-light.png`/`-dark.png` appended); grid and a11y are studio-only and have none. */
+  /** /templates screenshot base path (`-light.png`/`-dark.png` appended); grid is studio-only and has none. */
   image?: string
 }
 
 const templateImage = (name: string) => `/assets/templates/nuxt/${name}`
 
 export const THEME_STUDIO_VIEWS: ThemeStudioViewTab[] = [
-  { label: 'Components', icon: 'i-lucide-layout-grid', value: 'grid', description: 'Every themed component at a glance, the component wall.' },
-  { label: 'Dashboard', icon: 'i-lucide-layout-dashboard', value: 'dashboard', description: 'Multi-column admin interface with multiple views.', image: templateImage('dashboard') },
-  { label: 'Chat', icon: 'i-lucide-message-circle', value: 'chat', description: 'An AI chatbot with sidebar history and streaming replies.', image: templateImage('chat') },
-  { label: 'SaaS', icon: 'i-lucide-rocket', value: 'saas', description: 'A SaaS home with hero, pricing and feature sections.', image: templateImage('saas') },
-  { label: 'Landing', icon: 'i-lucide-panels-top-left', value: 'landing', description: 'A modern marketing landing page.', image: templateImage('landing') },
-  { label: 'Docs', icon: 'i-lucide-book-open', value: 'docs', description: 'Navigation, prose, code and TOC.', image: templateImage('docs') },
-  { label: 'Portfolio', icon: 'i-lucide-user-round', value: 'portfolio', description: 'A personal portfolio with work, blog and testimonials.', image: templateImage('portfolio') },
-  { label: 'Changelog', icon: 'i-lucide-newspaper', value: 'changelog', description: 'Release notes with sticky intro and version timeline.', image: templateImage('changelog') },
-  { label: 'Editor', icon: 'i-lucide-file-pen-line', value: 'editor', description: 'A rich text editor with toolbar, slash menu and drag handles.', image: templateImage('editor') },
-  { label: 'A11y', icon: 'i-lucide-accessibility', value: 'a11y', description: 'Contrast matrix for every token pair in the theme.' }
+  { label: 'Components', value: 'grid', description: 'Every component on one wall, in the theme as it stands.' },
+  { label: 'Landing', value: 'landing', description: 'Hero, features, pricing, testimonials and FAQ.', image: templateImage('landing') },
+  { label: 'Docs', value: 'docs', description: 'Sidebar navigation, prose, code blocks and a table of contents.', image: templateImage('docs') },
+  { label: 'SaaS', value: 'saas', description: 'A product site: landing, pricing, docs and blog.', image: templateImage('saas') },
+  { label: 'Portfolio', value: 'portfolio', description: 'Projects, blog, speaking and an about page.', image: templateImage('portfolio') },
+  { label: 'Dashboard', value: 'dashboard', description: 'A multi-column admin: tables, charts and date pickers.', image: templateImage('dashboard') },
+  { label: 'Chat', value: 'chat', description: 'An AI chat with conversation history and streaming replies.', image: templateImage('chat') },
+  { label: 'Changelog', value: 'changelog', description: 'Release notes on a version timeline.', image: templateImage('changelog') },
+  { label: 'Editor', value: 'editor', description: 'A rich text editor with toolbar, slash menu and drag handles.', image: templateImage('editor') }
 ]
 
 /* ------------------------------------------------------------- sections -- */
 
-/** A preset's own ramp as a chip: its neutral as the page, its icon in its primary. */
+/**
+ * Each preset's glyph, keyed by id. Kept apart from the presets table so the
+ * header trigger can show the applied preset without pulling the preset docs
+ * into its chunk.
+ */
+export const PRESET_ICONS: Record<string, string> = {
+  default: 'i-simple-icons-nuxt',
+  mono: 'i-lucide-contrast',
+  cobalt: 'i-lucide-gem',
+  sky: 'i-lucide-cloud-sun',
+  mint: 'i-lucide-leaf',
+  iris: 'i-lucide-flower',
+  crimson: 'i-lucide-clapperboard',
+  coral: 'i-lucide-shell',
+  sunset: 'i-lucide-sunset',
+  carbon: 'i-lucide-zap',
+  bubblegum: 'i-lucide-candy',
+  parchment: 'i-lucide-scroll-text'
+}
+
+/**
+ * A preset as a chip: its icon in its primary, on that primary dimmed to a
+ * tint (the `bg-primary/10` of the subtle variants), so every preset reads
+ * as its color rather than as its neutral.
+ */
 export function themeChipStyle(doc: ThemeDoc) {
-  const shade = (alias: 'primary' | 'neutral', step: Shade) => resolveShade(doc, resolveAlias(doc, alias), step)
+  const shade = (step: Shade) => resolveShade(doc, resolveAlias(doc, 'primary'), step)
+  const light = doc.blackAsPrimary ? 'black' : shade(500)
+  const dark = doc.blackAsPrimary ? 'white' : shade(400)
+  const tint = (color: string | undefined, from: number, to: number) =>
+    `linear-gradient(135deg, color-mix(in oklab, ${color} ${from}%, transparent), color-mix(in oklab, ${color} ${to}%, transparent))`
+
   return {
-    '--chip-bg-light': `linear-gradient(135deg, ${shade('neutral', 50)}, ${shade('neutral', 200)})`,
-    '--chip-bg-dark': `linear-gradient(135deg, ${shade('neutral', 900)}, ${shade('neutral', 800)})`,
-    '--chip-icon-light': doc.blackAsPrimary ? 'black' : shade('primary', 500),
-    '--chip-icon-dark': doc.blackAsPrimary ? 'white' : shade('primary', 400)
+    '--chip-bg-light': tint(light, 10, 20),
+    '--chip-bg-dark': tint(dark, 12, 24),
+    '--chip-icon-light': light,
+    '--chip-icon-dark': dark
   }
 }
 
@@ -109,7 +135,7 @@ export function paletteLabel(name: string): string {
 
 /**
  * interact-outside handler: clicks on studio chrome marked data-keep-panels
- * (the color-mode switch) must not dismiss an open panel.
+ * must not dismiss an open panel.
  */
 export function keepPanels(event: Event) {
   if ((event.target as HTMLElement | null)?.closest?.('[data-keep-panels]')) {
@@ -118,7 +144,7 @@ export function keepPanels(event: Event) {
 }
 
 /**
- * One footprint for every toolbar popover: the header picker's w-62 on the
+ * One footprint for every toolbar popover: a fixed width on the
  * bar, the trigger's own width when stacked in the mobile menu. Scroll lives
  * on the popover content so panels and listboxes cap the same way.
  */

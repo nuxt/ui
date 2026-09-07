@@ -16,6 +16,25 @@ watch(chatOpen, (value) => {
   if (value) chatSeen.value = true
 }, { immediate: true })
 
+// ⌘I lives here rather than in Chat.vue: the chat only mounts once it has been
+// opened, so a binding inside it would never exist on the fresh load where the
+// command palette still advertises the shortcut.
+const { open: searchOpen } = useContentSearch()
+
+defineShortcuts({
+  meta_i: {
+    handler: () => {
+      if (searchOpen.value) {
+        searchOpen.value = false
+        chatOpen.value = true
+      } else {
+        chatOpen.value = !chatOpen.value
+      }
+    },
+    usingInput: true
+  }
+})
+
 const { data: navigation } = await useFetch('/api/navigation.json')
 
 useHead({

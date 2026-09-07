@@ -26,6 +26,8 @@ const [{ data: module }, { data: github }] = await Promise.all([
   useFetch('/api/github/contributors.json')
 ])
 
+const studioIcons = useStudioIcons()
+
 const { format } = Intl.NumberFormat('en')
 const { format: formatCompact } = Intl.NumberFormat('en', { notation: 'compact' })
 
@@ -47,7 +49,8 @@ const stats = computed(() => [{
   to: 'https://github.com/nuxt/ui/graphs/contributors'
 }])
 
-const SOCIAL_ICONS: Record<string, string> = {
+// computed: the pack is read after mount, a plain object would freeze on Lucide
+const socialIcons = computed<Record<string, string>>(() => ({
   twitter: 'i-simple-icons-x',
   bluesky: 'i-simple-icons-bluesky',
   linkedin: 'i-simple-icons-linkedin',
@@ -57,8 +60,10 @@ const SOCIAL_ICONS: Record<string, string> = {
   instagram: 'i-simple-icons-instagram',
   facebook: 'i-simple-icons-facebook',
   reddit: 'i-simple-icons-reddit',
-  npm: 'i-simple-icons-npm'
-}
+  npm: 'i-simple-icons-npm',
+  github: studioIcons.github,
+  website: studioIcons.link
+}))
 
 const people = computed(() => (github.value?.contributors ?? []).map((contributor, index) => {
   const name = contributor.name || contributor.username
@@ -69,12 +74,12 @@ const people = computed(() => (github.value?.contributors ?? []).map((contributo
     rank: String(index + 1).padStart(2, '0'),
     links: [
       ...(contributor.socialAccounts ?? []).map(account => ({
-        icon: SOCIAL_ICONS[account.provider] ?? 'i-lucide-link',
+        icon: socialIcons.value[account.provider] ?? socialIcons.value.website!,
         to: account.url,
         label: `${name} on ${account.provider}`
       })),
-      { icon: 'i-simple-icons-github', to: `https://github.com/${contributor.username}`, label: `${name} on GitHub` },
-      ...(contributor.websiteUrl ? [{ icon: 'i-lucide-link', to: contributor.websiteUrl, label: `${name}'s website` }] : [])
+      { icon: socialIcons.value.github!, to: `https://github.com/${contributor.username}`, label: `${name} on GitHub` },
+      ...(contributor.websiteUrl ? [{ icon: socialIcons.value.website!, to: contributor.websiteUrl, label: `${name}'s website` }] : [])
     ]
   }
 }))
@@ -191,7 +196,7 @@ const people = computed(() => (github.value?.contributors ?? []).map((contributo
               color="neutral"
               variant="outline"
               size="sm"
-              icon="i-lucide-heart"
+              :icon="studioIcons.heart"
               label="Sponsor"
               class="rounded-[10px] hover:bg-pink-500/5 hover:ring-pink-500/30 hover:text-pink-600 dark:hover:text-pink-400"
               :ui="{ leadingIcon: 'text-pink-500' }"
@@ -241,7 +246,7 @@ const people = computed(() => (github.value?.contributors ?? []).map((contributo
             size="lg"
             color="neutral"
             variant="outline"
-            icon="i-lucide-heart"
+            :icon="studioIcons.heart"
             label="Become a sponsor"
             to="https://github.com/sponsors/benjamincanac"
             target="_blank"

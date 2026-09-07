@@ -1,11 +1,11 @@
 <script setup lang="ts">
-const extra = useStudioExtraIcons()
+const studioIcons = useStudioIcons()
 
 const transactions = [
   { name: 'Stripe Payout', category: 'Income', icon: 'i-lucide-arrow-down-left', amount: 2400.00 },
-  { name: 'Blue Bottle Coffee', category: 'Food & Drink', icon: extra.coffee, amount: -8.50 },
-  { name: 'Whole Foods Market', category: 'Groceries', icon: extra.cart, amount: -64.20 },
-  { name: 'Netflix', category: 'Entertainment', icon: extra.movie, amount: -19.99 }
+  { name: 'Blue Bottle Coffee', category: 'Food & Drink', icon: studioIcons.coffee, amount: -8.50 },
+  { name: 'Whole Foods Market', category: 'Groceries', icon: studioIcons.cart, amount: -64.20 },
+  { name: 'Netflix', category: 'Entertainment', icon: studioIcons.movie, amount: -19.99 }
 ]
 
 function format(amount: number) {

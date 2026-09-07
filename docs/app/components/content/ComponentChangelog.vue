@@ -27,6 +27,7 @@ const props = defineProps<{
 }>()
 
 const route = useRoute()
+const studioIcons = useStudioIcons()
 const name = route.path.split('/').pop() ?? ''
 const camelName = upperFirst(camelCase(name))
 const kebabName = kebabCase(name)
@@ -67,7 +68,7 @@ const groupedByRelease = computed<ReleaseGroup[]>(() => {
       const majorTag = release.tag_name.replace(/-(alpha|beta|rc)\.\d+$/, '')
       let group = groups.find(g => g.tag === majorTag)
       if (!group) {
-        group = { tag: majorTag, title: majorTag, icon: 'i-lucide-tag', published_at: release.published_at, url: release.html_url, commits: [] }
+        group = { tag: majorTag, title: majorTag, icon: studioIcons.tag, published_at: release.published_at, url: release.html_url, commits: [] }
         groups.push(group)
       }
       if (new Date(release.published_at) > new Date(group.published_at!)) {
@@ -82,7 +83,7 @@ const groupedByRelease = computed<ReleaseGroup[]>(() => {
 
   const result: ReleaseGroup[] = []
   if (unreleased.length) {
-    result.push({ tag: 'unreleased', title: 'Soon', icon: 'i-lucide-tag', commits: unreleased })
+    result.push({ tag: 'unreleased', title: 'Soon', icon: studioIcons.tag, commits: unreleased })
   }
 
   const uniqueTags = [...new Set(sortedReleases.map(r => r.tag_name.replace(/-(alpha|beta|rc)\.\d+$/, '')))]

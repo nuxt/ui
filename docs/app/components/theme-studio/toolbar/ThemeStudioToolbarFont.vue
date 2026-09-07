@@ -1,17 +1,22 @@
 <script setup lang="ts">
+import { upperFirst } from 'scule'
 import { keepPanels, toolbarPanelClass, FONT_WEIGHT_DEFAULTS, loadFontPreviews } from '../../../utils/theme/studio'
+import { THEME_DEFAULTS } from '../../../utils/theme/engine/types'
 
 /**
  * Every typographic setting in one panel: the three stacks up top, then the
- * treatment that rides on them. They were split across the toolbar and the
- * Options panel before, which meant the type decisions were never on screen
- * together.
+ * treatment that rides on them.
  *
  * The stacks are what tailwind reads. Mono needs nothing else (preflight
  * points `code`/`kbd`/`pre`/`samp` at it) and serif drives the h1–h6 rule in
  * main.css until v5 ships `--ui-font-heading`.
  */
 const { fonts, font, fontPrefs, setFontPrefs, fontSize } = useTheme()
+
+// The saved font is client-only: report the stock face until mounted, like
+// the other triggers, so hydration adopts the server's label and aria-label.
+const mounted = useMounted()
+const fontLabel = computed(() => (mounted.value ? font.value : THEME_DEFAULTS.font))
 
 onMounted(() => loadFontPreviews(fonts.map(entry => entry.name)))
 
@@ -26,7 +31,7 @@ function weightStepModel(step: keyof typeof FONT_WEIGHT_DEFAULTS) {
 
 const WEIGHT_STEPS = ['normal', 'medium', 'semibold', 'bold'] as const
 const weightSteps = Object.fromEntries(WEIGHT_STEPS.map(step => [step, weightStepModel(step)])) as Record<typeof WEIGHT_STEPS[number], ReturnType<typeof weightStepModel>>
-const weights = WEIGHT_STEPS.map(step => ({ label: capitalize(step), model: weightSteps[step]! }))
+const weights = WEIGHT_STEPS.map(step => ({ label: upperFirst(step), model: weightSteps[step]! }))
 
 const uppercase = computed({
   get: () => !!fontPrefs.value.uppercase,
@@ -78,16 +83,15 @@ const content = computed(() => [...toolbarPanelClass(props.vertical), 'divide-y 
 <template>
   <UPopover v-model:open="open" :content="{ align: 'center', onInteractOutside: keepPanels }" :ui="{ content }">
     <ThemeStudioToolbarTrigger
-      :label="font"
+      :label="fontLabel"
       :icon="studioIcons.text"
       :dirty="dirty"
       :open="open"
       :class="vertical ? 'w-full' : 'w-38'"
-      :aria-label="`Text: ${font}`"
+      :aria-label="`Text: ${fontLabel}`"
     />
 
     <template #content>
-      <!-- the panel owns the layout: padding per section, rules between them -->
       <ThemeStudioSection label="Fonts" section-key="font">
         <ThemeStudioRow
           v-for="stack in stacks"

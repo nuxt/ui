@@ -4,7 +4,6 @@ const { desktopLinks } = useHeader()
 const { open } = useChat()
 const { track } = useAnalytics()
 const studioIcons = useStudioIcons()
-const extraStudioIcons = useStudioExtraIcons()
 
 // The module route caches nuxt.com's stats for an hour, only the star count
 // rides the payload (the full response carries the team and contributors).
@@ -41,7 +40,9 @@ function toggleChat() {
 
     <template #right>
       <UTheme>
-        <ThemeStudioPresetPicker />
+        <!-- lazy for the theme engine it pulls, hydrated on idle: a plain
+             `Lazy` drops the server-rendered button until the chunk lands -->
+        <LazyThemeStudioPresetPicker hydrate-on-idle />
 
         <UTooltip text="Search" :kbds="['meta', 'K']" ignore-non-keyboard-focus>
           <UContentSearchButton :collapsed="false" :kbds="[]" variant="soft" class="min-w-40" />
@@ -49,14 +50,14 @@ function toggleChat() {
 
         <USeparator orientation="vertical" class="self-stretch h-auto" />
 
-        <UTooltip text="Open on GitHub" class="hidden lg:flex">
+        <UTooltip text="Open on GitHub" class="hidden lg:flex" ignore-non-keyboard-focus>
           <UButton
             color="neutral"
             variant="soft"
             :label="starsLabel"
             to="https://github.com/nuxt/ui"
             target="_blank"
-            :icon="extraStudioIcons.github"
+            :icon="studioIcons.github"
             aria-label="Open on GitHub"
           />
         </UTooltip>

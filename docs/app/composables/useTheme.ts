@@ -1,5 +1,5 @@
 import { defu } from 'defu'
-import { THEME_TAG_IDS, THEME_STATE_KEYS } from '../utils/theme/storage'
+import { THEME_TAG_IDS, THEME_STATE_KEYS, clamped } from '../utils/theme/storage'
 import type { FontPrefs } from '../utils/theme/storage'
 import { FONT_WEIGHT_DEFAULTS, FONTS, RADIUSES, NEUTRAL_COLORS, PRIMARY_COLORS } from '../utils/theme/studio'
 import { themeIcons, ICON_PACKS } from '../utils/theme/icons'
@@ -15,7 +15,11 @@ import colors from 'tailwindcss/colors'
 export function useTheme() {
   const appConfig = useAppConfig()
   const colorMode = useColorMode()
-  const { track, trackThrottled } = useAnalytics()
+  const { track: _track, trackThrottled } = useAnalytics()
+  // the setters below run during SSR of a shared link, where the browser build's track throws
+  const track: typeof _track = (...args) => {
+    if (import.meta.client) _track(...args)
+  }
   const { framework } = useFrameworks()
 
   // Defaults only. The saved theme is ASSIGNED by plugins/theme.ts on the
@@ -139,21 +143,19 @@ export function useTheme() {
     }
   })
 
-  // The saved pack is client-only, so anything rendered FROM it, the studio
-  // chrome, a picker's own brand glyph, would differ from the server on the
-  // first client render, and Vue only warns about a mismatched class, it never
-  // patches it. Reporting the stock pack until mounted keeps that first render
-  // honest; the flip afterwards is an ordinary update, which does repaint.
-  // Writes are unaffected, and `_iconSet` stays ungated for dirty checks.
-  // Shared, not per-call: once the app has mounted, components that set up
-  // later (keyed remounts, lazy views building icon lists as plain consts)
-  // must read the real pack, or half their glyphs freeze on Lucide.
-  const iconMounted = useState('nuxt-ui-icon-mounted', () => false)
-  onMounted(() => (iconMounted.value = true))
-
-  const icon = computed({
+  // The pack whose table appConfig.ui.icons currently IS, rather than the
+  // saved name: the saved pack is client-only and the plugin applies it after
+  // hydration (icon names compile into element classes, which a mismatch
+  // never patches), so anything rendered FROM the pack, the studio chrome, a
+  // picker's own glyph, the keyed demo views, has to follow the applied
+  // table. Both sides then agree: stock until the swap on a restore, the
+  // pack itself on a shared link, which applies during setup on the server
+  // and the client alike. Writes are unaffected, and `_iconSet` stays the
+  // saved name for dirty checks.
+  const icon = computed<string>({
     get() {
-      return iconMounted.value ? _iconSet.value : 'lucide'
+      const applied = toRaw(appConfig.ui.icons)
+      return (Object.keys(themeIcons) as Array<keyof typeof themeIcons>).find(pack => themeIcons[pack] === applied) ?? 'lucide'
     },
     set(option) {
       _iconSet.value = option
@@ -255,8 +257,13 @@ export function useTheme() {
     { innerHTML: cssVariablesStyle, id: THEME_TAG_IDS.cssVariables, tagPriority: -2 }
   ]
 
-  /** Anything to export: the live theme diverges from a stock install. */
-  const hasChanges = computed(() => !isDefaultTheme(currentDoc()))
+  /**
+   * Anything to reset: the live theme diverges from a stock install. A
+   * palette no alias points at stays out of the doc (nothing to export), but
+   * the AI can inject one to recolour a ramp the page uses by name, and that
+   * is a change the page shows.
+   */
+  const hasChanges = computed(() => !isDefaultTheme(currentDoc()) || Object.keys(customColorsData.value).length > 0)
 
   /** Snapshot the live theme state as a sparse ThemeDoc, the export generators' input. */
   function currentDoc(): ThemeDoc {
@@ -324,7 +331,7 @@ export function useTheme() {
   // Async: the serializer (and its json5) only load when an export happens.
   async function exportCSS(): Promise<string> {
     const { generateCSS } = await import('../utils/theme/engine/serialize')
-    return generateCSS(currentDoc())
+    return generateCSS(currentDoc(), framework.value)
   }
 
   async function exportConfig(): Promise<string> {
@@ -391,14 +398,20 @@ export function useTheme() {
       injectCSSVariables(sanitizeCSSVariables(settings.cssVariables))
     }
 
-    if (settings.primary && SAFE_NAME.test(settings.primary)) primary.value = settings.primary
-    // any known palette is a valid neutral, custom ones included
-    if (settings.neutral && SAFE_NAME.test(settings.neutral) && (NEUTRAL_COLORS.includes(settings.neutral) || PRIMARY_COLORS.includes(settings.neutral) || (customColorsData.value[settings.neutral] || safeCustomColors[settings.neutral]))) neutral.value = settings.neutral
-    // Finite on the RAW value (Number(null) is 0), clamped like the FOUC
-    // script clamps it, or a reload would repaint a different value.
-    if (Number.isFinite(settings.radius)) radius.value = Math.min(4, Math.max(0, settings.radius))
-    // clamped: these scale the whole page
-    if (Number.isFinite(settings.fontSize)) fontSize.value = Math.min(20, Math.max(12, settings.fontSize))
+    // A name is only a palette if something defines it: a tailwind ramp, or
+    // a custom one sent alongside (or already in place). An alias pointed at
+    // a ramp that doesn't exist renders every use of it transparent, and the
+    // AI does name palettes it forgot to send.
+    const knownPalette = (name: string) => PRIMARY_COLORS.includes(name) || NEUTRAL_COLORS.includes(name) || !!(customColorsData.value[name] || safeCustomColors[name])
+    const validPalette = (value: unknown): value is string => typeof value === 'string' && SAFE_NAME.test(value) && knownPalette(value)
+    if (validPalette(settings.primary)) primary.value = settings.primary
+    if (validPalette(settings.neutral)) neutral.value = settings.neutral
+    // Clamped like the FOUC script clamps them, or a reload would repaint a
+    // different value; a numeric string from the model counts, null doesn't.
+    const radiusValue = clamped(settings.radius, 0, 4)
+    if (radiusValue !== undefined) radius.value = radiusValue
+    const fontSizeValue = clamped(settings.fontSize, 12, 20)
+    if (fontSizeValue !== undefined) fontSize.value = fontSizeValue
     // All three stacks and the body treatment share one channel, so they are
     // applied in one pass: setFontPrefs takes the WHOLE object, and any field
     // the payload leaves out has to fall back to what is already set. A
@@ -411,12 +424,10 @@ export function useTheme() {
       const rawWeights = { ...current.weights, ...(settings.fontWeights && typeof settings.fontWeights === 'object' ? settings.fontWeights : {}) }
       const weights: NonNullable<FontPrefs['weights']> = {}
       for (const step of ['normal', 'medium', 'semibold', 'bold'] as const) {
-        const weight = Number(rawWeights[step])
-        if (Number.isFinite(weight)) weights[step] = Math.min(900, Math.max(100, weight))
+        const weight = clamped(rawWeights[step], 100, 900)
+        if (weight !== undefined) weights[step] = weight
       }
       const body = settings.fontBody && typeof settings.fontBody === 'object' ? settings.fontBody : undefined
-      const em = (value: unknown) => Number.isFinite(Number(value)) ? Math.min(1, Math.max(-0.2, Number(value))) : undefined
-      const leading = (value: unknown) => Number.isFinite(Number(value)) ? Math.min(3, Math.max(0.8, Number(value))) : undefined
       // Absent OR unusable keeps what is set: a rejected name must not read
       // as "clear this slot".
       const family = (value: unknown, fallback?: string) =>
@@ -428,22 +439,20 @@ export function useTheme() {
         weights,
         uppercase: body ? !!body.uppercase : current.uppercase,
         italic: body ? !!body.italic : current.italic,
-        letterSpacing: body ? em(body.letterSpacing) : current.letterSpacing,
-        lineHeight: body ? leading(body.lineHeight) : current.lineHeight
+        letterSpacing: body ? clamped(body.letterSpacing, -0.2, 1) : current.letterSpacing,
+        lineHeight: body ? clamped(body.lineHeight, 0.8, 3) : current.lineHeight
       })
     }
     if (settings.icons && Object.hasOwn(themeIcons, settings.icons)) icon.value = settings.icons
     if (settings.blackAsPrimary !== undefined) setBlackAsPrimary(!!settings.blackAsPrimary)
 
-    const colorKeys = SEMANTIC_ALIASES
+    const semanticUpdates = SEMANTIC_ALIASES.filter(color => validPalette(settings[color]))
     const savedExtras: Record<string, any> = { ...aiThemeExtras.value }
 
-    for (const color of colorKeys) {
-      if (settings[color] && SAFE_NAME.test(settings[color])) {
-        (appConfig.ui.colors as any)[color] = settings[color]
-        savedExtras.colors = savedExtras.colors || {}
-        savedExtras.colors[color] = settings[color]
-      }
+    for (const color of semanticUpdates) {
+      (appConfig.ui.colors as any)[color] = settings[color]
+      savedExtras.colors = savedExtras.colors || {}
+      savedExtras.colors[color] = settings[color]
     }
 
     if (settings.ui) {
@@ -459,7 +468,7 @@ export function useTheme() {
 
     // only rewrite the channel when touched, slider/curve drags stream
     // through here and must not reactively wake the AI extras every tick
-    const touchedExtras = settings.ui || colorKeys.some(color => settings[color] && SAFE_NAME.test(settings[color]))
+    const touchedExtras = settings.ui || semanticUpdates.length > 0
     if (touchedExtras) {
       aiThemeExtras.value = savedExtras
     }

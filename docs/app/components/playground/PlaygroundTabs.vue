@@ -1,15 +1,15 @@
 <script setup lang="ts">
-const extra = useStudioExtraIcons()
+const studioIcons = useStudioIcons()
 
 const items = [
   {
     label: 'Account',
-    icon: extra.user,
+    icon: studioIcons.user,
     slot: 'account'
   },
   {
     label: 'Password',
-    icon: extra.lock,
+    icon: studioIcons.lock,
     slot: 'password'
   }
 ]

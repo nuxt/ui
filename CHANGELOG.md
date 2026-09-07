@@ -1,5 +1,24 @@
 # Changelog
 
+## [4.11.1](https://github.com/nuxt/ui/compare/v4.11.0...v4.11.1) (2026-09-07)
+
+### Bug Fixes
+
+* **ChatMessages:** add missing `color` to `user` and `assistant` props ([#6920](https://github.com/nuxt/ui/issues/6920)) ([bbf1e14](https://github.com/nuxt/ui/commit/bbf1e14906158453db54e1692740372edf092268))
+* **Checkbox/RadioGroup:** add `flex-wrap` on `list` and `card` variants ([#6913](https://github.com/nuxt/ui/issues/6913)) ([90c45a6](https://github.com/nuxt/ui/commit/90c45a66e6f69855980ace5e162af61629eb929e))
+* **Checkbox/RadioGroup:** use `border-default` on `card` and `table` variants ([#6884](https://github.com/nuxt/ui/issues/6884)) ([9bdb89b](https://github.com/nuxt/ui/commit/9bdb89b0c7585a3a9189ca42c75561396789f927))
+* **CommandPalette:** keep astral characters intact when truncating search results ([#6817](https://github.com/nuxt/ui/issues/6817)) ([e4cb042](https://github.com/nuxt/ui/commit/e4cb042b0e31a7ebb9e2d6eb904dc58339ec1a6b))
+* **Form:** omit method attribute on nested forms ([#6888](https://github.com/nuxt/ui/issues/6888)) ([a494a97](https://github.com/nuxt/ui/commit/a494a97daf9d9dffe9dc38c4755c8964e666ed46))
+* **InputNumber:** work uncontrolled with only a default value ([#6859](https://github.com/nuxt/ui/issues/6859)) ([2d4782b](https://github.com/nuxt/ui/commit/2d4782ba926ff911a2a7178372c062a3e7150fff))
+* **Link:** restore prefetching with Nuxt 4.5 custom slot ([#6921](https://github.com/nuxt/ui/issues/6921)) ([c4ee0ea](https://github.com/nuxt/ui/commit/c4ee0ea3164a965940ab2f058fab47e8c756444a))
+* **Link:** wait for `onNuxtReady` before observing visibility ([#6922](https://github.com/nuxt/ui/issues/6922)) ([612ab1c](https://github.com/nuxt/ui/commit/612ab1cb03f2aba546d57a2e1813d73cf205ac43))
+* **NavigationMenu:** avoid duplicate accordion trigger on items without `to` ([#6862](https://github.com/nuxt/ui/issues/6862)) ([726e142](https://github.com/nuxt/ui/commit/726e1420accfa81d2c438074dab2212a92e956c7))
+* **ProseCodeTree:** invoke default slot from render ([#6906](https://github.com/nuxt/ui/issues/6906)) ([fbb9e22](https://github.com/nuxt/ui/commit/fbb9e22032072fb2bb03fb86496809070f54d7b2))
+* **Select/SelectMenu:** add responsive text size ([#6903](https://github.com/nuxt/ui/issues/6903)) ([e791d30](https://github.com/nuxt/ui/commit/e791d302bac0a761d1e53a281cc99d669bc823ee))
+* **SelectMenu:** prevent search input focus on open with `autofocus: false` ([#6905](https://github.com/nuxt/ui/issues/6905)) ([6caa6a9](https://github.com/nuxt/ui/commit/6caa6a9522d50b301ca031e760b2d53f714eb87b))
+* **Slider:** emit a number for a single thumb ([#6890](https://github.com/nuxt/ui/issues/6890)) ([3d2de0c](https://github.com/nuxt/ui/commit/3d2de0ce790f3fd90a95447b7145bf25c9ee4b3a))
+* **Table:** exclude hidden columns from colspan ([#6894](https://github.com/nuxt/ui/issues/6894)) ([2e8f533](https://github.com/nuxt/ui/commit/2e8f533dc684531844e3fa7a5ef7c0e53b7b6797))
+
 ## [4.11.0](https://github.com/nuxt/ui/compare/v4.10.0...v4.11.0) (2026-08-21)
 
 ### Features

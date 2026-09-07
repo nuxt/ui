@@ -7,6 +7,25 @@ watch(chatOpen, (value) => {
   if (value) chatSeen.value = true
 }, { immediate: true })
 
+// ⌘I lives here rather than in Chat.vue: the chat only mounts once it has been
+// opened, so a binding inside it would never exist on the fresh load where the
+// command palette still advertises the shortcut.
+const { open: searchOpen } = useContentSearch()
+
+defineShortcuts({
+  meta_i: {
+    handler: () => {
+      if (searchOpen.value) {
+        searchOpen.value = false
+        chatOpen.value = true
+      } else {
+        chatOpen.value = !chatOpen.value
+      }
+    },
+    usingInput: true
+  }
+})
+
 const appConfig = useAppConfig()
 const { style, link, color } = useTheme()
 
@@ -57,7 +76,7 @@ const { rootNavigation, navigationByFramework } = useNavigation(navigation)
 
 provide('navigation', rootNavigation)
 
-const showLayout = computed(() => !route.path.startsWith('/examples') && route.path !== '/theme')
+const showLayout = computed(() => !route.path.startsWith('/examples') && !route.path.startsWith('/theme'))
 </script>
 
 <template>
@@ -84,8 +103,8 @@ const showLayout = computed(() => !route.path.startsWith('/examples') && route.p
       <template v-if="!route.path.startsWith('/examples')">
         <ClientOnly>
           <!-- mounted on first open (state persists, so a kept-open chat
-               remounts on load): the chat pulls the studio engine with it,
-               which every plain docs visit can skip downloading -->
+               remounts on load): the AI SDK and the chat UI stay out of the
+               entry chunk, which every plain docs visit can skip downloading -->
           <LazyChat v-if="chatSeen" />
 
           <Search :navigation="navigationByFramework" />

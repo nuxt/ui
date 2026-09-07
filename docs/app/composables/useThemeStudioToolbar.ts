@@ -1,4 +1,5 @@
-import { DEFAULT_PRESET_ID, GROUP_STOCK_VARIANT } from '../utils/theme/engine'
+import { upperFirst } from 'scule'
+import { DEFAULT_PRESET_ID, GROUP_STOCK_VARIANT } from '../utils/theme/engine/types'
 import { paletteLabel, rampCssName } from '../utils/theme/studio'
 
 /**
@@ -8,14 +9,14 @@ import { paletteLabel, rampCssName } from '../utils/theme/studio'
  * would never lift.
  */
 export function useThemeStudioToolbar() {
-  const { resetTheme, primary, neutral, blackAsPrimary, currentDoc } = useTheme()
-  const { groupDirty, sectionDirty, presets, activePreset, applyPreset, primaryChip, neutralChip, isCustomPalette, style, baselineDoc } = useThemeStudio()
+  const { resetTheme, primary, neutral, blackAsPrimary } = useTheme()
+  const { groupDirty, sectionDirty, dirty, presets, activePreset, applyPreset, primaryChip, neutralChip, isCustomPalette, style } = useThemeStudio()
 
   const mounted = useMounted()
 
   // A custom ramp has no name worth reading, the picker calls it Custom too.
   function paletteName(alias: 'primary' | 'neutral', value: string) {
-    return isCustomPalette(alias) ? 'Custom' : capitalize(paletteLabel(value))
+    return isCustomPalette(alias) ? 'Custom' : upperFirst(paletteLabel(value))
   }
 
   /**
@@ -47,14 +48,13 @@ export function useThemeStudioToolbar() {
     const chosen = (value?: string) => (value && value !== 'default' ? value : undefined)
     const size = chosen(defaults?.size) ?? 'md'
     const variant = chosen(defaults?.variants?.buttons) ?? chosen(defaults?.variant) ?? GROUP_STOCK_VARIANT.buttons
-    return `${size.toUpperCase()}, ${capitalize(variant)}`
+    return `${size.toUpperCase()}, ${upperFirst(variant)}`
   })
 
   /**
-   * "Changed from preset" per toolbar control. Type, icons and radius sit in
-   * the bar on their own now, so they are listed here rather than rolled into
-   * a group: `anyDirty` below folds over this object, and a section left out
-   * of it would leave the reset button dead after a real change.
+   * "Changed from preset" per toolbar control, the cue each trigger carries.
+   * Type, icons and radius sit in the bar on their own, so they are listed
+   * here rather than rolled into a group.
    *
    * Gated on mount like everything else here. The theme plugin restores the
    * saved doc BEFORE the root component's setup, so an ungated flag is
@@ -72,15 +72,9 @@ export function useThemeStudioToolbar() {
     radius: afterMount(sectionDirty('radius'))
   }
 
-  // No SectionKey covers per-component overrides (the AI chat writes them),
-  // but they are edits all the same: without this the reset button stays
-  // disabled on a visibly re-themed page.
-  const componentsDirty = computed(() => mounted.value
-    && JSON.stringify(currentDoc().components ?? null) !== JSON.stringify(baselineDoc.value.components ?? null))
-
   // Two-stage reset: edits reset back to the preset, a second press clears
-  // the preset back to stock.
-  const anyDirty = computed(() => componentsDirty.value || (mounted.value && Object.values(groupDirtyFlags).some(flag => flag.value)))
+  // the preset back to stock. The studio's own measure, gated like the flags.
+  const anyDirty = computed(() => mounted.value && dirty.value)
   const baselinePreset = computed(() => (mounted.value ? presets.find(preset => preset.id === activePreset.value) : undefined))
   const resetsToPreset = computed(() => Boolean(baselinePreset.value) && anyDirty.value)
   const canReset = computed(() => anyDirty.value || Boolean(baselinePreset.value))

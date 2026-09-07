@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { upperFirst } from 'scule'
 import { keepPanels, toolbarPanelClass } from '../../../utils/theme/studio'
 import type { VariantGroup } from '../../../utils/theme/engine'
 import { GROUP_VARIANTS, GROUP_STOCK_VARIANT } from '../../../utils/theme/engine'
@@ -29,7 +30,7 @@ const defaultSize = computed({
 
 // Each group offers only what its components support; the app-wide
 // `variant` shows through as the fallback.
-const variantItems = (values: string[]) => values.map(value => ({ label: capitalize(value), value }))
+const variantItems = (values: string[]) => values.map(value => ({ label: upperFirst(value), value }))
 
 /** Variant names UButton can render itself, the rest (none) fall back. */
 const RENDERABLE_VARIANTS = ['solid', 'outline', 'soft', 'subtle', 'ghost', 'link']
@@ -91,7 +92,7 @@ const groupVariants = Object.fromEntries(variantGroupFields.map(field => [field.
 const defaultColorItems = [
   { label: 'Primary', value: 'default', chip: { color: 'primary' as any }, defaultTag: true },
   ...['secondary', 'success', 'info', 'warning', 'error', 'neutral'].map(value => ({
-    label: capitalize(value),
+    label: upperFirst(value),
     value,
     chip: { color: value as any }
   }))
@@ -112,6 +113,7 @@ const props = defineProps<{
 }>()
 
 const studioIcons = useStudioIcons()
+const appConfig = useAppConfig()
 const { defaultsLabel, groupDirtyFlags } = useThemeStudioToolbar()
 
 const open = ref(false)
@@ -132,13 +134,12 @@ const content = computed(() => [...toolbarPanelClass(props.vertical), 'divide-y 
     />
 
     <template #content>
-      <!-- the panel owns the layout: padding per section, rules between them -->
       <ThemeStudioSection label="Global" section-key="size">
         <ThemeStudioRow
           v-model="defaultSize"
           control="select"
           label="Size"
-          control-icon="i-lucide-proportions"
+          :control-icon="studioIcons.proportions"
           :items="defaultSizeItems"
           aria-label="Default size"
         />
@@ -163,8 +164,8 @@ const content = computed(() => [...toolbarPanelClass(props.vertical), 'divide-y 
                 color="neutral"
                 variant="subtle"
                 block
-                icon="i-lucide-layers"
-                trailing-icon="i-lucide-chevron-down"
+                :icon="studioIcons.layers"
+                :trailing-icon="appConfig.ui.icons.chevronDown"
                 :aria-label="`Default variant for ${field.label.toLowerCase()}`"
                 class="group"
                 :ui="{

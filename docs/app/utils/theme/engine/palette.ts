@@ -8,8 +8,8 @@
  * samples one bezier per channel across the shade stops, and can also run
  * backwards, fitting curves to a pasted palette.
  */
-import type { Shade, ShadeStep } from './types'
-import { SHADES, SHADE_SETS, SHADE_STEPS } from './types'
+import type { Shade } from './types'
+import { SHADES } from './types'
 
 /* ------------------------------------------------------- sRGB ↔ OKLCH -- */
 
@@ -163,41 +163,6 @@ export function parseCssColor(value: string): string | undefined {
   return color ? formatOklch(color) : undefined
 }
 
-/**
- * Composite `color` at `alpha` over `backdrop`, what the browser paints for
- * `bg-primary/10`. Blends in gamma-encoded sRGB (not linear) to match the
- * rendered pixel. Undefined when either input is unparseable.
- */
-export function blendColors(color: string, backdrop: string, alpha: number): string | undefined {
-  const fg = parseColor(color)
-  const bg = parseColor(backdrop)
-  if (!fg || !bg) return undefined
-
-  const top = oklchToRgb(clampToGamut(fg))
-  const under = oklchToRgb(clampToGamut(bg))
-  return rgbToHex(top.map((channel, i) => channel * alpha + under[i]! * (1 - alpha)) as [number, number, number])
-}
-
-/** WCAG 2.x relative luminance, linear RGB is exactly what the formula wants. */
-function luminance(color: Oklch): number {
-  const [r, g, b] = oklchToLinearRgb(clampToGamut(color)).map(channel => Math.min(1, Math.max(0, channel))) as [number, number, number]
-  return 0.2126 * r + 0.7152 * g + 0.0722 * b
-}
-
-/**
- * WCAG 2.x contrast ratio between two CSS colors, 1–21. `null` when either
- * input is unparseable, unknown, not a fabricated ratio.
- */
-export function contrastRatio(colorA: string, colorB: string): number | null {
-  const a = parseColor(colorA)
-  const b = parseColor(colorB)
-  if (!a || !b) return null
-  const la = luminance(a)
-  const lb = luminance(b)
-  const [lighter, darker] = la > lb ? [la, lb] : [lb, la]
-  return (lighter + 0.05) / (darker + 0.05)
-}
-
 /* -------------------------------------------------------------- ramps -- */
 
 /**
@@ -260,27 +225,8 @@ export interface PalettePin {
   h: number
 }
 
-/** A persisted palette. `fineStops` predates the density model, read, never written. */
-export type StoredPaletteParams = PaletteCurveParams & { effects?: PaletteEffects, amount?: number, stopStep?: ShadeStep, fineStops?: boolean, pins?: PalettePin[] }
-
-/** The density a persisted palette generates at. */
-export function storedStopStep(stored?: { stopStep?: ShadeStep, fineStops?: boolean }): ShadeStep {
-  return stored?.stopStep ?? (stored?.fineStops ? 50 : 100)
-}
-
-/**
- * Density read back from a ramp's stops: the coarsest set covering all of
- * them; a hand-edited mix no density emits falls to the finest.
- */
-export function detectStopStep(shades: Partial<Record<Shade, string>>): ShadeStep {
-  const present = Object.keys(shades).map(Number) as Shade[]
-  return SHADE_STEPS.find(step => present.every(shade => SHADE_SETS[step].includes(shade))) ?? 10
-}
-
-/** The stop closest to a value, where an orphaned shade reference lands. */
-export function nearestShade(value: number, stops: readonly Shade[]): Shade {
-  return stops.reduce((best, stop) => Math.abs(stop - value) < Math.abs(best - value) ? stop : best)
-}
+/** A persisted palette. */
+export type StoredPaletteParams = PaletteCurveParams & { effects?: PaletteEffects, amount?: number, pins?: PalettePin[] }
 
 // Pin influence width (ramp x). Wider than the closest pin spacing the solve
 // goes ill-conditioned (clustered pins blow neighbours to white), so sigma
@@ -294,7 +240,7 @@ function pinKernel(distance: number, sigma: number): number {
 }
 
 /**
- * Gauss–Jordan with partial pivoting (≤19 pins, trivially fast). A
+ * Gauss–Jordan with partial pivoting (one pin per stop, ≤91, trivially fast). A
  * near-singular pivot collapses that weight to 0 rather than exploding.
  */
 function solveLinear(a: number[][], b: number[]): number[] {
@@ -499,7 +445,7 @@ export function buildRampSampler(params: PaletteCurveParams, pins: PalettePin[] 
   }
 }
 
-export function generatePalette(params: PaletteCurveParams, step: ShadeStep = 100, pins: PalettePin[] = []): Record<Shade, string> {
+export function generatePalette(params: PaletteCurveParams, pins: PalettePin[] = []): Record<Shade, string> {
   const result = {} as Record<Shade, string>
 
   const base = (x: number) => ({
@@ -510,7 +456,7 @@ export function generatePalette(params: PaletteCurveParams, step: ShadeStep = 10
   // Correction applies pre-clamp, so an in-gamut pin target is hit exactly.
   const correct = pins.length ? pinField(pins, base) : undefined
 
-  for (const shade of SHADE_SETS[step]) {
+  for (const shade of SHADES) {
     const x = shadeX(shade)
     const b = base(x)
     const d = correct ? correct(x) : { dl: 0, dc: 0, dh: 0 }
@@ -619,11 +565,11 @@ export function fitCurve(points: Array<[number, number]>): ChannelCurve {
  */
 export function fitPalette(shades: Partial<Record<Shade, string>>): PaletteCurveParams {
   const stops: Array<{ x: number, color: Oklch }> = []
-  for (const [index, shade] of SHADES.entries()) {
+  for (const shade of SHADES) {
     // Accept hex or oklch, older saved docs and pasted ramps are hex.
     const color = shades[shade] ? parseColor(shades[shade]!) : undefined
     if (color) {
-      stops.push({ x: index / (SHADES.length - 1), color })
+      stops.push({ x: shadeX(shade), color })
     }
   }
 

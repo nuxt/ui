@@ -4,20 +4,21 @@ export interface ThemePreset {
   id: string
   name: string
   description: string
-  icon: string
   doc: ThemeDoc
 }
-
-/** The stock preset, what an untouched theme already is. */
-export const DEFAULT_PRESET_ID = 'nuxt-ui'
 
 /**
  * The five tokens the library pins to white, routed through the neutral ramp
  * the way picking a neutral in the studio does (selectPalette's remaps), so a
  * tinted ramp reaches the page and the export reproduces the preview.
+ *
+ * The page moving to 50 takes the muted surface with it: the library sits it
+ * at 50 too, so it would land ON the page and every muted panel (a code
+ * block, a table head) would lose its shape.
  */
-const tintedNeutral = {
+const tintedNeutralBase = {
   '--ui-bg': { light: 50 },
+  '--ui-bg-muted': { light: 100 },
   '--ui-text-inverted': { light: 50 },
   '--ui-text-highlighted': { dark: 50 },
   '--ui-bg-inverted': { dark: 50 },
@@ -25,15 +26,19 @@ const tintedNeutral = {
 } satisfies StyleOptions['tokenShades']
 
 /**
+ * A fresh copy per preset. `deriveStyle` puts these objects straight into
+ * reactive studio state, so a spread would hand six presets the same
+ * per-token object and one in-place write would corrupt all of them.
+ */
+const tintedNeutral = () => structuredClone(tintedNeutralBase)
+
+/**
  * Presets are plain ThemeDocs: applying one replaces the current document.
- * Each deliberately exercises a different engine capability, so they double
- * as living tests of the schema.
  */
 export const presets: ThemePreset[] = [{
-  id: 'nuxt-ui',
+  id: 'default',
   name: 'Default',
   description: 'The stock theme, everything inherited.',
-  icon: 'i-simple-icons-nuxt',
   doc: {
     version: 1
   }
@@ -41,7 +46,6 @@ export const presets: ThemePreset[] = [{
   id: 'mono',
   name: 'Mono',
   description: 'Black on a pure gray neutral, generous radius, quiet surfaces.',
-  icon: 'i-lucide-contrast',
   doc: {
     version: 1,
     blackAsPrimary: true,
@@ -70,7 +74,6 @@ export const presets: ThemePreset[] = [{
   id: 'cobalt',
   name: 'Cobalt',
   description: 'Utility blue on cool grays, tight corners, flat bordered surfaces.',
-  icon: 'i-lucide-gem',
   doc: {
     version: 1,
     // Prefixed names: a palette named plainly 'blue'/'gray' would override
@@ -154,7 +157,6 @@ export const presets: ThemePreset[] = [{
   id: 'sky',
   name: 'Sky',
   description: 'Sky blue on a mist neutral, pastel fills everywhere, airy type.',
-  icon: 'i-lucide-cloud-sun',
   doc: {
     version: 1,
     colors: {
@@ -166,14 +168,13 @@ export const presets: ThemePreset[] = [{
     style: {
       // nothing solid anywhere: one app-wide pastel fill
       defaults: { variants: { buttons: 'soft', inputs: 'soft' } },
-      tokenShades: { ...tintedNeutral }
+      tokenShades: tintedNeutral()
     }
   }
 }, {
   id: 'mint',
   name: 'Mint',
   description: 'Teal on an olive neutral, pill buttons and fields, chunky rounded type, large controls.',
-  icon: 'i-lucide-leaf',
   doc: {
     version: 1,
     colors: {
@@ -186,7 +187,7 @@ export const presets: ThemePreset[] = [{
     icons: 'iconoir',
     style: {
       defaults: { size: 'lg', variants: { inputs: 'soft' } },
-      tokenShades: { ...tintedNeutral }
+      tokenShades: tintedNeutral()
     },
     // the radius ladder stops at 0.75rem, the pill has to come from the slots
     components: {
@@ -201,7 +202,6 @@ export const presets: ThemePreset[] = [{
   id: 'iris',
   name: 'Iris',
   description: 'Violet outlines on a mauve neutral, fuchsia secondary, tinted fields.',
-  icon: 'i-lucide-flower',
   doc: {
     version: 1,
     colors: {
@@ -215,19 +215,13 @@ export const presets: ThemePreset[] = [{
     style: {
       // the violet stays a line: outlined actions over tinted fields
       defaults: { variants: { buttons: 'outline', inputs: 'subtle' } },
-      tokenShades: {
-        ...tintedNeutral,
-        // one step deeper so the mauve shows on surfaces, not just borders
-        '--ui-bg-muted': { light: 100 },
-        '--ui-bg-elevated': { light: 100 }
-      }
+      tokenShades: tintedNeutral()
     }
   }
 }, {
   id: 'crimson',
   name: 'Crimson',
   description: 'Cinema red on pure gray, square corners, filled fields, near-black in dark mode.',
-  icon: 'i-lucide-clapperboard',
   doc: {
     version: 1,
     colors: {
@@ -240,12 +234,13 @@ export const presets: ThemePreset[] = [{
     style: {
       defaults: { variants: { inputs: 'soft' } },
       tokenShades: {
-        ...tintedNeutral,
+        ...tintedNeutral(),
         // 600 is the deep cinema red, 500 leans orange; dark holds it rather
         // than lifting to the salmon 400
         '--ui-primary': { light: 600, dark: 500 },
         '--ui-bg': { light: 50, dark: 950 },
-        '--ui-bg-muted': { dark: 900 },
+        // light restates tintedNeutral's step: this key replaces it wholesale
+        '--ui-bg-muted': { light: 100, dark: 900 },
         '--ui-bg-elevated': { dark: 900 },
         '--ui-bg-accented': { dark: 800 }
       }
@@ -255,7 +250,6 @@ export const presets: ThemePreset[] = [{
   id: 'coral',
   name: 'Coral',
   description: 'Rose on warm stone, cards floating on shadows, teal for success, neutral focus rings.',
-  icon: 'i-lucide-shell',
   doc: {
     version: 1,
     colors: {
@@ -269,7 +263,7 @@ export const presets: ThemePreset[] = [{
     style: {
       // fields ring in neutral, the rose stays on actions
       defaults: { colors: { inputs: 'neutral' } },
-      tokenShades: { ...tintedNeutral }
+      tokenShades: tintedNeutral()
     },
     components: {
       // Cards float on a shadow instead of sitting in a ring. Dark keeps the
@@ -283,7 +277,6 @@ export const presets: ThemePreset[] = [{
   id: 'sunset',
   name: 'Sunset',
   description: 'Orange on a warm taupe neutral, glowing actions, yellow secondary, subtle panels.',
-  icon: 'i-lucide-sunset',
   doc: {
     version: 1,
     colors: {
@@ -297,7 +290,7 @@ export const presets: ThemePreset[] = [{
     style: {
       defaults: { variants: { panels: 'subtle' } },
       tokenShades: {
-        ...tintedNeutral,
+        ...tintedNeutral(),
         // orange-500 is too light to carry white text, 600 is the burnt stop
         '--ui-primary': { light: 600 }
       }
@@ -311,7 +304,6 @@ export const presets: ThemePreset[] = [{
   id: 'carbon',
   name: 'Carbon',
   description: 'Amber on a warm carbon neutral, with ink-dark borders throughout.',
-  icon: 'i-lucide-zap',
   doc: {
     version: 1,
     // Sculpted warm neutral: lilac-tinted paper into pure carbon.
@@ -369,7 +361,6 @@ export const presets: ThemePreset[] = [{
   id: 'bubblegum',
   name: 'Bubblegum',
   description: 'Pastel pink softness with mauve-tinted grays.',
-  icon: 'i-lucide-candy',
   doc: {
     version: 1,
     // Sculpted pink-mauve neutral, chroma peaks mid-ramp.
@@ -415,7 +406,6 @@ export const presets: ThemePreset[] = [{
   id: 'parchment',
   name: 'Parchment',
   description: 'Warm parchment neutrals with a book-cloth clay primary.',
-  icon: 'i-lucide-scroll-text',
   doc: {
     version: 1,
     palettes: {
@@ -436,7 +426,7 @@ export const presets: ThemePreset[] = [{
         }
       },
       // Warm paper grays, the light end is cream rather than white: the page
-      // sits at 100 with cards lifted to 50.
+      // sits at 100, its surfaces a step below.
       parchment: {
         shades: {
           50: 'oklch(98% 0.006 100)',
@@ -460,14 +450,20 @@ export const presets: ThemePreset[] = [{
     radius: 0.375,
     font: { sans: 'DM Sans', serif: 'Source Serif 4' },
     icons: 'heroicons',
-    // Border family stepped one deeper to hold on the tinted cream page.
+    // Surfaces and borders stepped one deeper to hold on the tinted cream
+    // page. Elevated has to stay below the page: the library's hover and
+    // highlight tints are bg-elevated at half opacity, a lighter elevated
+    // vanishes into it.
     tokens: {
       light: {
         '--ui-bg': 'var(--ui-color-neutral-100)',
         '--ui-bg-muted': 'var(--ui-color-neutral-200)',
-        '--ui-bg-elevated': 'var(--ui-color-neutral-50)',
+        '--ui-bg-elevated': 'var(--ui-color-neutral-200)',
         '--ui-bg-accented': 'var(--ui-color-neutral-300)',
         '--ui-border': 'var(--ui-color-neutral-300)',
+        // the library leaves this at 200, where the muted surface now sits:
+        // a code block's frame would land on its own background
+        '--ui-border-muted': 'var(--ui-color-neutral-300)',
         '--ui-border-accented': 'var(--ui-color-neutral-400)'
       },
       dark: {

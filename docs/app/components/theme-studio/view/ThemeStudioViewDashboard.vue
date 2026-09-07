@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { h, resolveComponent } from 'vue'
+import { CalendarDate, DateFormatter } from '@internationalized/date'
 import type { DropdownMenuItem, NavigationMenuItem, TableColumn } from '@nuxt/ui'
 
 const UAvatar = resolveComponent('UAvatar')
@@ -9,11 +10,11 @@ const UCheckbox = resolveComponent('UCheckbox')
 const UDropdownMenu = resolveComponent('UDropdownMenu')
 
 const appConfig = useAppConfig()
-const extra = useStudioExtraIcons()
+const studioIcons = useStudioIcons()
 
 type Page = 'home' | 'inbox' | 'customers' | 'settings'
 const page = ref<Page>('home')
-const settingsSection = ref<'general' | 'notifications'>('general')
+const settingsSection = ref<'general' | 'notifications' | 'security'>('general')
 
 const teams = [
   { label: 'Nuxt', avatar: { src: 'https://github.com/nuxt.png', alt: 'Nuxt' } },
@@ -26,29 +27,29 @@ const teamItems = computed<DropdownMenuItem[][]>(() => [
   teams.map(team => ({ ...team, onSelect: () => { selectedTeam.value = team } })),
   [
     { label: 'Create team', icon: appConfig.ui.icons.plus },
-    { label: 'Manage teams', icon: extra.settings }
+    { label: 'Manage teams', icon: studioIcons.settings }
   ]
 ])
 
 const links = computed<NavigationMenuItem[][]>(() => [[{
   label: 'Home',
-  icon: extra.home,
+  icon: studioIcons.home,
   active: page.value === 'home',
   onSelect: () => { page.value = 'home' }
 }, {
   label: 'Inbox',
-  icon: extra.inbox,
+  icon: studioIcons.inbox,
   badge: String(unreadCount),
   active: page.value === 'inbox',
   onSelect: () => { page.value = 'inbox' }
 }, {
   label: 'Customers',
-  icon: extra.users,
+  icon: studioIcons.users,
   active: page.value === 'customers',
   onSelect: () => { page.value = 'customers' }
 }, {
   label: 'Settings',
-  icon: extra.settings,
+  icon: studioIcons.settings,
   defaultOpen: true,
   type: 'trigger',
   active: page.value === 'settings',
@@ -66,10 +67,17 @@ const links = computed<NavigationMenuItem[][]>(() => [[{
       page.value = 'settings'
       settingsSection.value = 'notifications'
     }
+  }, {
+    label: 'Security',
+    active: page.value === 'settings' && settingsSection.value === 'security',
+    onSelect: () => {
+      page.value = 'settings'
+      settingsSection.value = 'security'
+    }
   }]
 }], [{
   label: 'Feedback',
-  icon: extra.messageCircle
+  icon: studioIcons.messageCircle
 }, {
   label: 'Help & Support',
   icon: appConfig.ui.icons.info
@@ -85,26 +93,71 @@ const userItems: DropdownMenuItem[][] = [[{
   label: user.name,
   avatar: user.avatar
 }], [
-  { label: 'Profile', icon: extra.user },
-  { label: 'Billing', icon: extra.creditCard },
-  { label: 'Settings', icon: extra.settings }
+  { label: 'Profile', icon: studioIcons.user },
+  { label: 'Billing', icon: studioIcons.creditCard },
+  { label: 'Settings', icon: studioIcons.settings }
 ], [
-  { label: 'Log out', icon: extra.logout }
+  { label: 'Log out', icon: studioIcons.logout }
 ]]
 
 const newItems: DropdownMenuItem[][] = [[
-  { label: 'New mail', icon: extra.send },
-  { label: 'New customer', icon: extra.userPlus }
+  { label: 'New mail', icon: studioIcons.send },
+  { label: 'New customer', icon: studioIcons.userPlus }
 ]]
 
-const periodItems = ['Daily', 'Weekly', 'Monthly']
-const period = ref('Daily')
+// lowercase like the template, capitalized back through the select's `ui`
+const periodItems = ['daily', 'weekly', 'monthly']
+
+/**
+ * The template's HomeDateRangePicker, over CalendarDate directly since nothing
+ * downstream wants a `Date`. The reference day is fixed rather than `today()`:
+ * the studio renders on the server too, and a live date risks a hydration
+ * mismatch across timezones.
+ */
+const dateFormatter = new DateFormatter('en-US', { dateStyle: 'medium' })
+const referenceDate = new CalendarDate(2026, 7, 6)
+
+const dateRanges = [
+  { label: 'Last 7 days', days: 7 },
+  { label: 'Last 14 days', days: 14 },
+  { label: 'Last 30 days', days: 30 },
+  { label: 'Last 3 months', months: 3 },
+  { label: 'Last 6 months', months: 6 },
+  { label: 'Last year', years: 1 }
+]
+
+type DateRangePreset = (typeof dateRanges)[number]
+
+function rangeStart(range: DateRangePreset) {
+  return referenceDate.subtract({ days: range.days, months: range.months, years: range.years })
+}
+
+// shallowRef, not ref: a deep ref unwraps the CalendarDate instances and they
+// stop matching the calendar's DateValue.
+const selectedDateRange = shallowRef({ start: rangeStart(dateRanges[1]!), end: referenceDate })
+
+const dateRangeLabel = computed(() => {
+  const { start, end } = selectedDateRange.value
+  if (!start) return 'Pick a date'
+  if (!end) return dateFormatter.format(start.toDate('UTC'))
+  return `${dateFormatter.format(start.toDate('UTC'))} - ${dateFormatter.format(end.toDate('UTC'))}`
+})
+
+function isDateRangeSelected(range: DateRangePreset) {
+  const { start, end } = selectedDateRange.value
+  return !!start && !!end && start.compare(rangeStart(range)) === 0 && end.compare(referenceDate) === 0
+}
+
+function selectDateRange(range: DateRangePreset) {
+  selectedDateRange.value = { start: rangeStart(range), end: referenceDate }
+}
+const period = ref('daily')
 
 const stats = [
-  { title: 'Customers', icon: extra.users, value: '892', variation: 14 },
-  { title: 'Conversions', icon: extra.chart, value: '1,436', variation: 8 },
-  { title: 'Revenue', icon: extra.dollar, value: '$312,540', variation: 23 },
-  { title: 'Orders', icon: extra.cart, value: '254', variation: -5 }
+  { title: 'Customers', icon: studioIcons.users, value: '892', variation: 14 },
+  { title: 'Conversions', icon: studioIcons.chart, value: '1,436', variation: 8 },
+  { title: 'Revenue', icon: studioIcons.dollar, value: '$312,540', variation: 23 },
+  { title: 'Orders', icon: studioIcons.cart, value: '254', variation: -5 }
 ]
 
 const revenue = [6200, 7400, 6800, 9100, 8600, 10400, 9800, 11900, 11200, 13000, 12400, 14100, 13600, 15200]
@@ -154,7 +207,7 @@ const salesColumns: TableColumn<Sale>[] = [{
       refunded: 'neutral' as const
     })[row.getValue('status') as string]
 
-    return h(UBadge, { class: 'capitalize', color }, () => row.getValue('status'))
+    return h(UBadge, { class: 'capitalize', variant: 'subtle', color }, () => row.getValue('status'))
   }
 }, {
   accessorKey: 'email',
@@ -195,7 +248,7 @@ const mails: Mail[] = [{
   subject: 'Meeting Schedule: Project Update',
   date: '14:32',
   datetime: '10 Jul 14:32',
-  body: 'Hi there,\n\nJust a quick reminder that we have a meeting scheduled for tomorrow at 10 AM to discuss the latest project updates. Please come prepared with your progress reports.\n\nBest regards,\nAlex'
+  body: 'Hi there,\n\nJust a quick reminder that we have a meeting scheduled for tomorrow at 10 AM to discuss the latest project updates. Please come prepared with your progress reports.\n\nHere is the agenda so nobody has to improvise:\n\n- Sprint 12 review, twenty minutes\n- The migration off the legacy billing service\n- Headcount for Q3, including the two open design roles\n- Anything you add to the shared doc before tonight\n\nI have blocked the room until noon in case we run long. If you cannot make it, send me your notes beforehand and I will present them on your behalf rather than push the whole thing another week.\n\nBest regards,\nAlex'
 }, {
   id: 2,
   unread: true,
@@ -203,14 +256,14 @@ const mails: Mail[] = [{
   subject: 'Urgent: Server Maintenance Tonight',
   date: '11:05',
   datetime: '10 Jul 11:05',
-  body: 'Attention team,\n\nWe will be conducting server maintenance tonight from 11 PM to 2 AM. During this period, all services will be temporarily unavailable. We apologize for the inconvenience.\n\nIT Department'
+  body: 'Attention team,\n\nWe will be conducting server maintenance tonight from 11 PM to 2 AM. During this period, all services will be temporarily unavailable.\n\nWhat is changing:\n\n- Database failover to the new primary in eu-west-1\n- Certificate rotation across every edge node\n- A long overdue kernel upgrade on the build fleet\n\nQueued jobs will drain before the window opens and resume automatically afterwards, so nothing should need replaying by hand. If you have a deploy planned for tonight, land it before 10 PM or hold it until the morning.\n\nWe will post updates in #ops as each step completes.\n\nIT Department'
 }, {
   id: 3,
   from: { name: 'Taylor Green', email: 'taylor.green@example.com', avatar: { src: 'https://github.com/nuxt-hub.png', alt: 'Taylor Green' } },
   subject: 'Feedback Request: New Design Mockups',
   date: '09 Jul',
   datetime: '09 Jul 16:20',
-  body: 'Hello,\n\nWe value your opinion! Could you please take a moment to review the attached design mockups for the upcoming dashboard refresh? Your feedback would be greatly appreciated.\n\nThank you,\nTaylor'
+  body: 'Hello,\n\nWe value your opinion! Could you please take a moment to review the attached design mockups for the upcoming dashboard refresh?\n\nThe main changes since the last round:\n\n- The stats row is now four cards that join into a single surface on wide screens\n- Revenue moved above the fold, with the range picker beside the period select\n- Table rows gained a hover state and the status column reads as a badge\n\nI am mostly after a gut check on the density. The old layout wasted a lot of vertical space and this one may have overcorrected. Comments directly on the file are perfect, no need to write anything long.\n\nThank you,\nTaylor'
 }, {
   id: 4,
   unread: true,
@@ -301,9 +354,9 @@ const customerRowItems: DropdownMenuItem[] = [
   { type: 'label', label: 'Actions' },
   { label: 'Copy customer ID', icon: appConfig.ui.icons.copy },
   { type: 'separator' },
-  { label: 'View customer details', icon: extra.list },
+  { label: 'View customer details', icon: studioIcons.list },
   { type: 'separator' },
-  { label: 'Delete customer', icon: extra.trash, color: 'error' }
+  { label: 'Delete customer', icon: studioIcons.trash, color: 'error' }
 ]
 
 const customerColumns: TableColumn<Customer>[] = [{
@@ -335,7 +388,15 @@ const customerColumns: TableColumn<Customer>[] = [{
   }
 }, {
   accessorKey: 'email',
-  header: 'Email'
+  // the template's one sortable column, so it reads as a button
+  header: ({ column }) => h(UButton, {
+    color: 'neutral',
+    variant: 'ghost',
+    label: 'Email',
+    icon: studioIcons.sort,
+    class: '-mx-2.5',
+    onClick: () => column.toggleSorting(column.getIsSorted() === 'asc')
+  })
 }, {
   accessorKey: 'location',
   header: 'Location'
@@ -366,14 +427,22 @@ const customerColumns: TableColumn<Customer>[] = [{
 // trimmed to two sections without zod/UForm validation.
 const settingsLinks = computed<NavigationMenuItem[][]>(() => [[{
   label: 'General',
-  icon: extra.user,
+  icon: studioIcons.user,
   active: settingsSection.value === 'general',
   onSelect: () => { settingsSection.value = 'general' }
 }, {
   label: 'Notifications',
-  icon: extra.bell,
+  icon: studioIcons.bell,
   active: settingsSection.value === 'notifications',
   onSelect: () => { settingsSection.value = 'notifications' }
+}, {
+  label: 'Security',
+  icon: studioIcons.shield,
+  active: settingsSection.value === 'security',
+  onSelect: () => { settingsSection.value = 'security' }
+}], [{
+  label: 'Documentation',
+  icon: studioIcons.bookOpen
 }]])
 
 const profile = reactive({
@@ -388,6 +457,8 @@ const profileFields = [
   { name: 'email', label: 'Email', description: 'Used to sign in, for email receipts and product updates.' },
   { name: 'username', label: 'Username', description: 'Your unique username for logging in and your profile URL.' }
 ] as const
+
+const password = reactive({ current: '', new: '' })
 
 const notificationsState = reactive<{ [key: string]: boolean }>({
   email: true,
@@ -411,6 +482,23 @@ const notificationSections = [{
     { name: 'product_updates', label: 'Product updates', description: 'Receive a monthly email with all new features and updates.' }
   ]
 }]
+
+// the template's Display menu, over real column visibility
+const customerColumnVisibility = ref<Record<string, boolean>>({})
+
+const customerDisplayItems = computed<DropdownMenuItem[]>(() =>
+  (['email', 'location', 'status'] as const).map(column => ({
+    label: column,
+    type: 'checkbox' as const,
+    checked: customerColumnVisibility.value[column] !== false,
+    onUpdateChecked(checked: boolean) {
+      customerColumnVisibility.value = { ...customerColumnVisibility.value, [column]: checked }
+    },
+    onSelect(event: Event) {
+      event.preventDefault()
+    }
+  }))
+)
 
 const customerPage = ref(1)
 
@@ -457,7 +545,7 @@ const pageTitles: Record<Page, string> = {
             v-bind="{
               ...selectedTeam,
               label: collapsed ? undefined : selectedTeam.label,
-              trailingIcon: collapsed ? undefined : extra.sort
+              trailingIcon: collapsed ? undefined : studioIcons.sort
             }"
             color="neutral"
             variant="ghost"
@@ -500,7 +588,7 @@ const pageTitles: Record<Page, string> = {
             v-bind="{
               ...user,
               label: collapsed ? undefined : user.name,
-              trailingIcon: collapsed ? undefined : extra.sort
+              trailingIcon: collapsed ? undefined : studioIcons.sort
             }"
             color="neutral"
             variant="ghost"
@@ -518,7 +606,7 @@ const pageTitles: Record<Page, string> = {
       <UDashboardPanel
         id="theme-studio-inbox-list"
         resizable
-        :default-size="35"
+        :default-size="25"
         :min-size="25"
         :max-size="45"
         :ui="{ root: 'min-h-0' }"
@@ -588,11 +676,11 @@ const pageTitles: Record<Page, string> = {
 
           <template #right>
             <UTooltip text="Archive">
-              <UButton :icon="extra.inbox" color="neutral" variant="ghost" aria-label="Archive" />
+              <UButton :icon="studioIcons.inbox" color="neutral" variant="ghost" aria-label="Archive" />
             </UTooltip>
 
             <UTooltip text="Reply">
-              <UButton :icon="extra.reply" color="neutral" variant="ghost" aria-label="Reply" />
+              <UButton :icon="studioIcons.reply" color="neutral" variant="ghost" aria-label="Reply" />
             </UTooltip>
 
             <UDropdownMenu :items="mailDropdownItems">
@@ -629,7 +717,7 @@ const pageTitles: Record<Page, string> = {
         <div class="pb-4 px-4 sm:px-6 shrink-0">
           <UCard variant="subtle" class="mt-auto" :ui="{ header: 'flex items-center gap-1.5 text-dimmed' }">
             <template #header>
-              <UIcon :name="extra.reply" class="size-5" />
+              <UIcon :name="studioIcons.reply" class="size-5" />
 
               <span class="text-sm truncate">
                 Reply to {{ selectedMail.from.name }} ({{ selectedMail.from.email }})
@@ -649,16 +737,21 @@ const pageTitles: Record<Page, string> = {
               />
 
               <div class="flex items-center justify-between">
-                <UButton color="neutral" variant="ghost" :icon="extra.paperclip" aria-label="Attach file" />
+                <UTooltip text="Attach file">
+                  <UButton color="neutral" variant="ghost" :icon="studioIcons.paperclip" aria-label="Attach file" />
+                </UTooltip>
 
-                <UButton type="submit" color="neutral" label="Send" :icon="extra.send" />
+                <div class="flex items-center gap-2">
+                  <UButton color="neutral" variant="ghost" label="Save draft" />
+                  <UButton type="submit" color="neutral" label="Send" :icon="studioIcons.send" />
+                </div>
               </div>
             </form>
           </UCard>
         </div>
       </UDashboardPanel>
       <div v-else class="flex-1 hidden lg:flex items-center justify-center">
-        <UIcon :name="extra.inbox" class="size-32 text-dimmed" />
+        <UIcon :name="studioIcons.inbox" class="size-32 text-dimmed" />
       </div>
     </template>
 
@@ -673,7 +766,7 @@ const pageTitles: Record<Page, string> = {
             <UTooltip text="Notifications" :shortcuts="['N']">
               <UButton color="neutral" variant="ghost" square aria-label="Notifications">
                 <UChip color="error" inset>
-                  <UIcon :name="extra.bell" class="size-5 shrink-0" />
+                  <UIcon :name="studioIcons.bell" class="size-5 shrink-0" />
                 </UChip>
               </UButton>
             </UTooltip>
@@ -691,15 +784,55 @@ const pageTitles: Record<Page, string> = {
 
         <UDashboardToolbar v-if="page === 'home'">
           <template #left>
-            <UButton
-              color="neutral"
-              variant="ghost"
-              :icon="extra.calendar"
-              label="Jun 22 - Jul 6, 2026"
-              class="-ms-1"
-            />
+            <UPopover :content="{ align: 'start' }">
+              <UButton
+                color="neutral"
+                variant="ghost"
+                :icon="studioIcons.calendar"
+                class="-ms-1 group data-[state=open]:bg-elevated"
+              >
+                <span class="truncate">{{ dateRangeLabel }}</span>
 
-            <USelect v-model="period" :items="periodItems" class="w-28" />
+                <template #trailing>
+                  <UIcon
+                    :name="appConfig.ui.icons.chevronDown"
+                    class="shrink-0 text-dimmed size-5 group-data-[state=open]:rotate-180 transition-transform duration-200"
+                  />
+                </template>
+              </UButton>
+
+              <template #content>
+                <div class="flex items-stretch sm:divide-x divide-default">
+                  <div class="hidden sm:flex flex-col justify-center">
+                    <UButton
+                      v-for="range in dateRanges"
+                      :key="range.label"
+                      :label="range.label"
+                      color="neutral"
+                      variant="ghost"
+                      class="rounded-none px-4"
+                      :class="isDateRangeSelected(range) ? 'bg-elevated' : 'hover:bg-elevated/50'"
+                      truncate
+                      @click="selectDateRange(range)"
+                    />
+                  </div>
+
+                  <UCalendar v-model="selectedDateRange" class="p-2" :number-of-months="2" range />
+                </div>
+              </template>
+            </UPopover>
+
+            <USelect
+              v-model="period"
+              :items="periodItems"
+              variant="ghost"
+              class="data-[state=open]:bg-elevated"
+              :ui="{
+                value: 'capitalize',
+                itemLabel: 'capitalize',
+                trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200'
+              }"
+            />
           </template>
         </UDashboardToolbar>
 
@@ -726,14 +859,15 @@ const pageTitles: Record<Page, string> = {
                 leading: 'p-2.5 rounded-full bg-primary/10 ring ring-inset ring-primary/25 flex-col',
                 title: 'font-normal text-muted text-xs uppercase'
               }"
-              class="xl:rounded-none xl:first:rounded-l-lg xl:last:rounded-r-lg hover:z-1"
+              variant="subtle"
+              class="xl:rounded-none xl:first:rounded-l-lg xl:last:rounded-r-lg"
             >
               <div class="flex items-center gap-2 flex-wrap min-w-0">
                 <span class="text-2xl font-semibold text-highlighted">
                   {{ stat.value }}
                 </span>
 
-                <UBadge :color="stat.variation > 0 ? 'success' : 'error'" class="text-xs">
+                <UBadge :color="stat.variation > 0 ? 'success' : 'error'" variant="subtle" class="text-xs">
                   {{ stat.variation > 0 ? '+' : '' }}{{ stat.variation }}%
                 </UBadge>
               </div>
@@ -755,7 +889,7 @@ const pageTitles: Record<Page, string> = {
             <svg
               viewBox="0 0 400 120"
               preserveAspectRatio="none"
-              class="w-full h-40 text-primary"
+              class="w-full h-80 text-primary"
               aria-hidden="true"
             >
               <polygon :points="chartArea" fill="currentColor" class="opacity-10" />
@@ -802,7 +936,7 @@ const pageTitles: Record<Page, string> = {
                 label="Delete"
                 color="error"
                 variant="subtle"
-                :icon="extra.trash"
+                :icon="studioIcons.trash"
               >
                 <template #trailing>
                   <UKbd>{{ selectedCustomersCount }}</UKbd>
@@ -816,11 +950,21 @@ const pageTitles: Record<Page, string> = {
                 placeholder="Filter status"
                 class="min-w-28"
               />
+
+              <UDropdownMenu :items="customerDisplayItems" :content="{ align: 'end' }" :ui="{ itemLabel: 'capitalize' }">
+                <UButton
+                  label="Display"
+                  color="neutral"
+                  variant="outline"
+                  :trailing-icon="studioIcons.options"
+                />
+              </UDropdownMenu>
             </div>
           </div>
 
           <UTable
             v-model:row-selection="customerRowSelection"
+            v-model:column-visibility="customerColumnVisibility"
             :data="paginatedCustomers"
             :columns="customerColumns"
             class="shrink-0"
@@ -884,7 +1028,7 @@ const pageTitles: Record<Page, string> = {
             </UPageCard>
           </template>
 
-          <template v-else>
+          <template v-else-if="settingsSection === 'notifications'">
             <div v-for="(section, index) in notificationSections" :key="index">
               <UPageCard
                 :title="section.title"
@@ -906,6 +1050,41 @@ const pageTitles: Record<Page, string> = {
                 </UFormField>
               </UPageCard>
             </div>
+          </template>
+
+          <template v-else>
+            <UPageCard
+              title="Password"
+              description="Confirm your current password before setting a new one."
+              variant="subtle"
+            >
+              <div class="flex flex-col gap-4 max-w-xs">
+                <UInput
+                  v-model="password.current"
+                  type="password"
+                  placeholder="Current password"
+                  class="w-full"
+                />
+                <UInput
+                  v-model="password.new"
+                  type="password"
+                  placeholder="New password"
+                  class="w-full"
+                />
+
+                <UButton label="Update" class="w-fit" />
+              </div>
+            </UPageCard>
+
+            <UPageCard
+              title="Account"
+              description="No longer want to use our service? You can delete your account here. This action is not reversible. All information related to this account will be deleted permanently."
+              class="bg-linear-to-tl from-error/10 from-5% to-default"
+            >
+              <template #footer>
+                <UButton label="Delete account" color="error" />
+              </template>
+            </UPageCard>
           </template>
         </div>
       </template>

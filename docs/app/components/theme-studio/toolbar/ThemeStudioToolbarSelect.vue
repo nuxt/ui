@@ -4,8 +4,8 @@ import { keepPanels, toolbarPanelClass } from '../../../utils/theme/studio'
 /**
  * The toolbar's pick-one controls (preset, icons, radius): the shared trigger
  * opening a plain listbox, the same shape as the popover panels beside them.
- * A select menu is a whole combobox with its own trigger styling and height
- * cap; these lists are nine rows.
+ * A select menu is a whole combobox with its own trigger styling; these
+ * lists are a dozen rows at most.
  */
 const props = defineProps<{
   /** Radius stops are numbers, icon sets are strings. */
@@ -30,14 +30,19 @@ const open = defineModel<boolean>('open', { default: false })
 
 const attrs = useAttrs()
 
+/** The selected row picked again, which Reka reports as a toggle off. */
+const emit = defineEmits<{ reselect: [value: string | number] }>()
+
 const triggerLabel = computed(() => props.items.find(item => item.value === model.value)?.label ?? props.placeholder)
 
 // Reka toggles the selected row off with `undefined`; a pick-one control
-// keeps its value and just closes.
+// keeps its value and just closes, but still reports the re-pick, which the
+// preset control turns into a re-apply.
 const selected = computed({
   get: () => model.value,
   set: (value: string | number | undefined) => {
     if (value !== undefined) model.value = value
+    else if (model.value !== undefined) emit('reselect', model.value)
     open.value = false
   }
 })
@@ -60,8 +65,9 @@ const selected = computed({
         v-model="selected"
         :items="items"
         value-key="value"
+        highlight-on-hover
         :aria-label="(attrs['aria-label'] as string | undefined)"
-        :ui="{ root: 'ring-0', content: 'max-h-none' }"
+        :ui="{ root: 'ring-0 has-focus-visible:outline-0', content: 'max-h-106' }"
       >
         <template v-for="(_, name) in $slots" :key="name" #[name]="scope">
           <slot :name="name" v-bind="scope ?? {}" />

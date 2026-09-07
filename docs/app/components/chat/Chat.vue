@@ -10,8 +10,7 @@ const input = ref('')
 const toast = useToast()
 const { track } = useAnalytics()
 const route = useRoute()
-const { open, messages } = useChat()
-const { open: searchOpen } = useContentSearch()
+const { open, messages, pending } = useChat()
 const { framework } = useFrameworks()
 const { resetTheme, applyThemeSettings, hasChanges: hasThemeChanges } = useTheme()
 // A preset is a whole ThemeDoc, so it rides applyDoc (reset, style axis, class
@@ -21,6 +20,18 @@ const { presets, applyPreset } = useThemeStudio()
 // studio's glyphs and skin to the applied icon pack with it.
 const studioIcons = useStudioIcons()
 const appConfig = useAppConfig()
+
+// app.vue mounts this panel on its first open, so `open` is already true here
+// and the sidebar renders expanded, with no width change for its transition to
+// pick up. Hold it closed for a paint (two frames, the way Vue's own
+// Transition does it) so the first open slides in like every later one.
+const painted = ref(false)
+onMounted(() => requestAnimationFrame(() => requestAnimationFrame(() => (painted.value = true))))
+
+const panelOpen = computed({
+  get: () => painted.value && open.value,
+  set: (value: boolean) => (open.value = value)
+})
 
 let _skipSync = false
 const _themeApplied = new Set<string>()
@@ -70,7 +81,7 @@ const { messages: chatMessages, status, error, sendMessage, regenerate, stop } =
 
     toast.add({
       description: message,
-      icon: 'i-lucide-alert-circle',
+      icon: appConfig.ui.icons.error,
       color: 'error',
       duration: 0
     })
@@ -113,6 +124,18 @@ watch(messages, (newMessages) => {
 
   chatMessages.value = newMessages
   if (chatMessages.value.at(-1)?.role === 'user') {
+    pending.value = false
+    regenerate()
+  }
+})
+
+// A question asked before the panel existed (its first open, from the search
+// palette or "Explain with AI") is already in the seeded messages, the
+// watcher above never saw it arrive. Only that one: a dangling user turn
+// restored from a past session must not re-send itself on every load.
+onMounted(() => {
+  if (pending.value) {
+    pending.value = false
     regenerate()
   }
 })
@@ -141,8 +164,8 @@ function getToolMessage(state: ToolState, toolName: string, input: Record<string
     'getComponentTheme': `${readVerb} ${upperName(input.componentName || '')} theme`,
     'getThemeGuide': `${readVerb} theme guide`,
     'applyTheme': `${applyVerb} theme changes`,
-    // the preset's own name, upperName is for camelCase component ids and
-    // would render 'nuxt-ui' as 'NuxtUi'
+    // a preset carries its own display name; upperName is for camelCase
+    // component ids and would mangle a hyphenated one
     'applyPreset': `${applyVerb} ${presets.find(preset => preset.id === input.preset)?.name ?? input.preset} preset`,
     'resetTheme': `${state === 'output-available' ? 'Reset' : 'Resetting'} theme to defaults`
   }[toolName] || `${searchVerb} ${toolName}`
@@ -160,16 +183,16 @@ function getToolIcon(part: ToolPart): string {
   const toolName = getToolName(part)
 
   const iconMap: Record<string, string> = {
-    'get-component': 'i-lucide-file-text',
-    'get-component-metadata': 'i-lucide-file-text',
-    'get-template': 'i-lucide-file-text',
-    'get-documentation-page': 'i-lucide-file-text',
-    'get-migration-guide': 'i-lucide-file-text',
-    'get-example': 'i-lucide-file-text',
-    'getComponentTheme': 'i-lucide-file-text',
-    'getThemeGuide': studioIcons.themes,
-    'applyTheme': studioIcons.themes,
-    'applyPreset': studioIcons.themes,
+    'get-component': appConfig.ui.icons.file,
+    'get-component-metadata': appConfig.ui.icons.file,
+    'get-template': appConfig.ui.icons.file,
+    'get-documentation-page': appConfig.ui.icons.file,
+    'get-migration-guide': appConfig.ui.icons.file,
+    'get-example': appConfig.ui.icons.file,
+    'getComponentTheme': appConfig.ui.icons.file,
+    'getThemeGuide': studioIcons.palette,
+    'applyTheme': studioIcons.palette,
+    'applyPreset': studioIcons.palette,
     'resetTheme': studioIcons.reset
   }
 
@@ -227,30 +250,17 @@ function clearMessages() {
   chatMessages.value = []
   _themeApplied.clear()
 }
-
-defineShortcuts({
-  meta_i: {
-    handler: () => {
-      if (searchOpen.value) {
-        searchOpen.value = false
-        open.value = true
-      } else {
-        open.value = !open.value
-      }
-    },
-    usingInput: true
-  }
-})
 </script>
 
 <template>
   <USidebar
-    v-model:open="open"
+    v-model:open="panelOpen"
     side="right"
     title="Ask AI"
     rail
     :style="{ '--sidebar-width': '24rem' }"
     :ui="{ footer: 'p-0', actions: 'gap-0.5' }"
+    class="bg-default"
   >
     <template #actions>
       <!-- a plain full reset, not the studio's two-stage baseline reset: the

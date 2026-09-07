@@ -3,16 +3,16 @@ import type { DropdownMenuItem } from '@nuxt/ui'
 
 const toast = useToast()
 const appConfig = useAppConfig()
-const extra = useStudioExtraIcons()
+const studioIcons = useStudioIcons()
 
 const items: DropdownMenuItem[][] = [
   [
     { label: 'View report', icon: appConfig.ui.icons.eye, onSelect: () => toast.add({ title: 'View report' }) },
-    { label: 'Export as CSV', icon: 'i-lucide-download', onSelect: () => toast.add({ title: 'Exporting…' }) },
+    { label: 'Export as CSV', icon: studioIcons.download, onSelect: () => toast.add({ title: 'Exporting…' }) },
     { label: 'Refresh', icon: appConfig.ui.icons.reload, onSelect: () => toast.add({ title: 'Refreshed' }) }
   ],
   [
-    { label: 'Delete', icon: extra.trash, color: 'error', onSelect: () => toast.add({ title: 'Deleted', color: 'error' }) }
+    { label: 'Delete', icon: studioIcons.trash, color: 'error', onSelect: () => toast.add({ title: 'Deleted', color: 'error' }) }
   ]
 ]
 
@@ -32,7 +32,7 @@ const progress = ref(75)
       </div>
 
       <div class="flex items-center gap-2">
-        <UBadge color="success" variant="subtle" size="sm" :icon="extra.trendingUp">
+        <UBadge color="success" variant="subtle" size="sm" :icon="studioIcons.trendingUp">
           +12.5%
         </UBadge>
 
