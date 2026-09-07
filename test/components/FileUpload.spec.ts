@@ -4,6 +4,7 @@ import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { renderEach } from '../component-render'
 import { mount } from '@vue/test-utils'
 import FileUpload from '../../src/runtime/components/FileUpload.vue'
+import type { FileUploadItem } from '../../src/runtime/components/FileUpload.vue'
 import type { FormInputEvents } from '../../src/module'
 import { renderForm } from '../utils/form'
 import theme from '#build/ui/file-upload'
@@ -140,6 +141,48 @@ describe('FileUpload', () => {
 
     expect(input.attributes('accept')).toBe('application/pdf')
     expect(input.attributes('multiple')).toBe('')
+  })
+
+  it('renders a custom file item', async () => {
+    const item: FileUploadItem = {
+      name: 'avatar.png',
+      avatar: {
+        src: 'https://example.com/avatar.png',
+        alt: 'User avatar'
+      }
+    }
+    const wrapper = await mountSuspended(FileUpload, {
+      props: { modelValue: item }
+    })
+
+    expect(wrapper.get('[data-slot="fileName"]').text()).toBe(item.name)
+    expect(wrapper.get('[data-slot="fileLeadingAvatar"] img').attributes()).toMatchObject({
+      src: item.avatar?.src,
+      alt: item.avatar?.alt
+    })
+  })
+
+  it('preserves custom file items when adding files', async () => {
+    interface CustomFileUploadItem extends FileUploadItem {
+      id: string
+    }
+
+    const item: CustomFileUploadItem = {
+      id: 'file-1',
+      name: 'existing.png',
+      avatar: { src: 'https://example.com/existing.png' }
+    }
+    const wrapper = mount(FileUpload, {
+      props: {
+        modelValue: [item],
+        multiple: true
+      }
+    })
+    const file = new File(['foo'], 'new.txt', { type: 'text/plain' })
+
+    await setFilesOnInput(wrapper.find('input'), [file])
+
+    expect(wrapper.emitted('update:modelValue')?.at(-1)?.[0]).toEqual([item, file])
   })
 
   describe('emits', () => {
