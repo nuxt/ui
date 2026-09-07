@@ -269,6 +269,16 @@ props:
 
 ## Examples
 
+### With custom file items :badge{label="Soon" class="align-text-top"}
+
+Use an object with a `name`, optional file metadata and an [Avatar](/docs/components/avatar) to display an existing file. Native files selected by the user are added to the same model.
+
+::component-example
+---
+name: 'file-upload-items-example'
+---
+::
+
 ### With Form validation
 
 You can use the FileUpload within a [Form](/docs/components/form) and [FormField](/docs/components/form-field) components to handle validation and error handling.
