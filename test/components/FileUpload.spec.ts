@@ -3,6 +3,7 @@ import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { renderEach } from '../component-render'
 import { mount } from '@vue/test-utils'
+import Avatar from '../../src/runtime/components/Avatar.vue'
 import FileUpload from '../../src/runtime/components/FileUpload.vue'
 import type { FileUploadItem } from '../../src/runtime/components/FileUpload.vue'
 import type { FormInputEvents } from '../../src/module'
@@ -180,13 +181,22 @@ describe('FileUpload', () => {
       props: {
         modelValue: {
           name: 'avatar.png',
-          avatar: { src: 'https://example.com/avatar.png' }
+          avatar: {
+            src: 'https://example.com/avatar.png',
+            icon: 'i-lucide-user',
+            text: 'UA'
+          }
         },
-        fileImage: false
+        fileImage: false,
+        fileIcon: 'i-lucide-file-text'
       }
     })
 
+    const fileAvatar = wrapper.findAllComponents(Avatar).find(component => component.attributes('data-slot') === 'fileLeadingAvatar')
+
     expect(wrapper.find('[data-slot="fileLeadingAvatar"] img').exists()).toBe(false)
+    expect(fileAvatar?.props('icon')).toBe('i-lucide-file-text')
+    expect(wrapper.text()).not.toContain('UA')
   })
 
   it('preserves custom file items when adding files', async () => {

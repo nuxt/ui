@@ -335,7 +335,7 @@ defineExpose({
                   :alt="file.name"
                   :icon="props.fileIcon || appConfig.ui.icons.file"
                   :size="size"
-                  v-bind="file.avatar"
+                  v-bind="props.fileImage ? file.avatar : undefined"
                   :src="getFilePreview(file)"
                   data-slot="fileLeadingAvatar"
                   :class="ui.fileLeadingAvatar({ class: props.ui?.fileLeadingAvatar })"
