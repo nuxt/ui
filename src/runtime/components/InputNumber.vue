@@ -89,7 +89,7 @@ export interface InputNumberSlots {
 import { onMounted, onScopeDispose, computed, useTemplateRef, toRef } from 'vue'
 import { NumberFieldRoot, NumberFieldInput, NumberFieldDecrement, NumberFieldIncrement } from 'reka-ui'
 import { useForwardProps } from '../composables/useForwardProps'
-import { reactivePick, useVModel } from '@vueuse/core'
+import { reactivePick } from '@vueuse/core'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { useFieldGroup } from '../composables/useFieldGroup'
@@ -111,13 +111,10 @@ defineSlots<InputNumberSlots>()
 
 const props = useComponentProps<InputNumberProps<T, Mod>>('inputNumber', _props)
 
-// eslint-disable-next-line vue/no-dupe-keys
-const modelValue = useVModel<InputNumberProps<T, Mod>, 'modelValue', 'update:modelValue'>(props, 'modelValue', emits)
-
 const { t } = useLocale()
 const appConfig = useAppConfig() as InputNumber['AppConfig']
 
-const rootProps = useForwardProps(reactivePick(props, 'as', 'stepSnapping', 'formatOptions', 'disableWheelChange', 'invertWheelChange', 'required', 'readonly', 'focusOnChange', 'locale'), emits)
+const rootProps = useForwardProps(reactivePick(props, 'as', 'stepSnapping', 'formatOptions', 'disableWheelChange', 'invertWheelChange', 'required', 'readonly', 'focusOnChange', 'locale'))
 
 const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, id, color: formFieldColor, size: formFieldSize, name, highlight: formFieldHighlight, disabled: formFieldDisabled, ariaAttrs } = useFormField<InputNumberProps<T, Mod>>(_props)
 
@@ -154,8 +151,15 @@ const inputRef = useTemplateRef('inputRef')
 
 function onUpdate(value: ApplyModifiers<T, Mod> | undefined) {
   if (props.modelModifiers?.optional) {
-    modelValue.value = value = value ?? undefined
+    value = value ?? undefined
   }
+
+  // In controlled mode reka emits on every write, even when nothing changed (blur, Enter, stepping at a bound).
+  if (value === props.modelValue || (value == null && props.modelValue == null)) {
+    return
+  }
+
+  emits('update:modelValue', value as ApplyModifiers<T, Mod>)
 
   // @ts-expect-error - 'target' does not exist in type 'EventInit'
   const event = new Event('change', { target: { value } })
@@ -196,7 +200,7 @@ defineExpose({
     v-bind="rootProps"
     :id="id"
     :default-value="props.defaultValue"
-    :model-value="modelValue"
+    :model-value="props.modelValue"
     :min="props.min"
     :max="props.max"
     :step="props.step"
