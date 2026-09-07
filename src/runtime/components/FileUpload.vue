@@ -178,7 +178,7 @@ const _props = withDefaults(defineProps<FileUploadProps<M>>(), {
 const emits = defineEmits<FileUploadEmits>()
 const slots = defineSlots<FileUploadSlots<M>>()
 
-const modelValue = defineModel<(M extends true ? FileUploadItem[] : FileUploadItem) | null>()
+const modelValue = defineModel<FileUploadFiles<M>>()
 
 const props = useComponentProps<FileUploadProps<M>>('fileUpload', _props)
 
@@ -261,7 +261,11 @@ function formatFileSize(bytes?: number): string | undefined {
   return `${formattedSize}${sizes[i]}`
 }
 
-function onUpdate(files: File[], reset = false) {
+function setModelValue(value: FileUploadItem | FileUploadItem[] | null) {
+  modelValue.value = value as FileUploadFiles<M>
+}
+
+function onUpdate(files: FileUploadItem[], reset = false) {
   // `useDropZone` is registered on mount regardless of state, so a disabled
   // control would still accept dropped files without this guard.
   if (disabled.value) {
@@ -269,14 +273,10 @@ function onUpdate(files: File[], reset = false) {
   }
 
   if (props.multiple) {
-    if (reset) {
-      modelValue.value = files as (M extends true ? FileUploadItem[] : FileUploadItem) | null
-    } else {
-      const existingFiles = (modelValue.value as FileUploadItem[]) || []
-      modelValue.value = [...existingFiles, ...(files || [])] as (M extends true ? FileUploadItem[] : FileUploadItem) | null
-    }
+    const existingFiles = reset ? [] : (modelValue.value as FileUploadItem[]) || []
+    setModelValue([...existingFiles, ...files])
   } else {
-    modelValue.value = (files?.[0] ?? null) as (M extends true ? FileUploadItem[] : FileUploadItem) | null
+    setModelValue(files[0] ?? null)
   }
 
   // @ts-expect-error - 'target' does not exist in type 'EventInit'
