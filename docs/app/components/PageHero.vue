@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import type { ButtonProps } from '@nuxt/ui'
+// as a string this stays an unresolved <nuxtlink> element, with no href
+import { NuxtLink } from '#components'
 
 /**
  * The hero every top-level page shares: an eyebrow pill, a two-tone title
@@ -51,7 +53,6 @@ const leadText = computed(() => (props.breakLine ? props.lead : `${props.lead} `
         :label="eyebrow"
         color="neutral"
         variant="outline"
-        size="lg"
         class="self-start rounded-full bg-default font-medium text-muted"
         :ui="{ leadingIcon: 'text-primary' }"
       />
@@ -72,7 +73,7 @@ const leadText = computed(() => (props.breakLine ? props.lead : `${props.lead} `
 
     <UContainer v-if="stats?.length || note" class="relative mt-10 sm:mt-14 pb-8 flex flex-wrap items-end gap-x-10 sm:gap-x-14 gap-y-6">
       <component
-        :is="stat.to ? 'NuxtLink' : 'div'"
+        :is="stat.to ? NuxtLink : 'div'"
         v-for="stat in stats"
         :key="stat.label"
         :to="stat.to"

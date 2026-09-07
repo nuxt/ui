@@ -8,6 +8,7 @@ if (!page.value) {
 }
 
 const { url } = useSiteConfig()
+const { version } = useRuntimeConfig().public
 
 const { data: module } = await useFetch('/api/module.json', { key: 'index-stats' })
 const { format } = Intl.NumberFormat('en', { notation: 'compact' })
@@ -75,7 +76,7 @@ useSeoMeta({
 
 <template>
   <main v-if="page">
-    <PageHero v-bind="page.hero" :stats="stats" />
+    <PageHero v-bind="page.hero" :eyebrow="`Nuxt UI v${version} is out`" :stats="stats" />
 
     <UContainer as="section" class="pt-12 sm:pt-14 pb-16">
       <div class="flex items-center gap-3.5 mb-4">
@@ -83,36 +84,28 @@ useSeoMeta({
           Try every component live
         </h2>
 
-        <span class="flex-1 h-px bg-border" />
+        <span class="hidden sm:block flex-1 h-px bg-border" />
+
+        <!-- every preset on one line: the chip carries it, the name rides the
+             tooltip so twelve of them stay beside the heading -->
+        <div class="flex gap-0.5 min-w-0 overflow-x-auto">
+          <UTooltip v-for="pill in pills" :key="pill.id" :text="pill.label" :delay-duration="0">
+            <UButton
+              :avatar="pill.avatar"
+              color="neutral"
+              :variant="pill.active ? 'subtle' : 'ghost'"
+              size="sm"
+              square
+              :aria-label="`${pill.label} theme`"
+              @click="pill.apply()"
+            />
+          </UTooltip>
+        </div>
       </div>
 
-      <!-- every preset, on its own row: the wall below is what they change -->
-      <div class="flex flex-wrap gap-1.5 mb-5">
-        <UButton
-          v-for="pill in pills"
-          :key="pill.id"
-          :label="pill.label"
-          :avatar="pill.avatar"
-          color="neutral"
-          :variant="pill.active ? 'subtle' : 'outline'"
-          size="sm"
-          @click="pill.apply()"
-        />
-      </div>
-
-      <div class="relative isolate rounded-xl border border-default bg-elevated/30 overflow-hidden">
+      <!-- the wall keeps every tile, its last rows fading into the link below -->
+      <div class="relative isolate rounded-xl border border-default bg-elevated/30 overflow-hidden mask-b-from-90%">
         <Playground static />
-      </div>
-
-      <div class="flex justify-center pt-6">
-        <UButton
-          label="Explore all components"
-          to="/docs/components"
-          color="neutral"
-          variant="outline"
-          size="lg"
-          trailing-icon="i-lucide-arrow-right"
-        />
       </div>
     </UContainer>
   </main>
