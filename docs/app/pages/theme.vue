@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { joinURL } from 'ufo'
 import { decodeThemeDoc } from '../utils/theme/link'
 import { snapshotStoredTheme, writeStoredTheme } from '../utils/theme/storage'
 
@@ -73,13 +74,26 @@ useHead({
   bodyAttrs: { class: 'theme-studio' }
 })
 
+const { url } = useSiteConfig()
+
+const title = 'Theme'
+const description = 'Customize Nuxt UI live: colors, radius, fonts and icons, then export only what you changed.'
+
 useSeoMeta({
   titleTemplate: '%s - Nuxt UI',
-  title: 'Theme',
-  description: 'Customize Nuxt UI live: colors, radius, fonts and icons, then export only what you changed.',
+  title,
+  description,
+  ogTitle: `${title} - Nuxt UI`,
+  ogDescription: description,
+  // A static file rather than defineOgImage: the page renders per request
+  // for ?doc= (nuxt.config routeRules) and ogImage.zeroRuntime only builds
+  // images for prerendered routes, so the call would be a no-op here.
+  ogImage: joinURL(url, '/theme/og-image.png'),
   // a shared link is one visitor's theme, not a page to index
   robots: linked ? 'noindex' : undefined
 })
+
+useCanonical()
 
 onMounted(() => {
   track('Theme Studio Opened')
