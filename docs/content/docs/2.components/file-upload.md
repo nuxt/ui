@@ -285,6 +285,8 @@ Use an object with a `name`, optional file metadata and an [Avatar](/docs/compon
 ::component-example
 ---
 name: 'file-upload-items-example'
+prettier: true
+collapse: true
 ---
 ::
 
@@ -294,6 +296,8 @@ Extend `FileUploadItem` with custom fields and use the file slots to display upl
 
 ::component-example
 ---
+prettier: true
+collapse: true
 name: 'file-upload-status-example'
 ---
 ::
