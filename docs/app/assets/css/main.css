@@ -12,6 +12,10 @@
   --container-8xl: 90rem;
 
   --font-sans: 'Public Sans', sans-serif;
+  /* Tailwind's preflight wires --font-sans and --font-mono itself, nothing
+     consumes --font-serif. Defaulting it to the body stack keeps the heading
+     rule below inert until the studio sets a serif of its own. */
+  --font-serif: var(--font-sans);
 
   --color-green-50: #EFFDF5;
   --color-green-100: #D9FBE8;
@@ -28,6 +32,28 @@
 
 :root {
   --ui-container: var(--container-8xl);
+}
+
+/* The live counterpart of the export's heading rule, until v5 ships
+   --ui-font-heading. In `base` so `font-mono` on an h1 still wins. */
+@layer base {
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-serif);
+  }
+}
+
+/* The studio's canvas sits recessed behind the preview card. Mixed off
+   --ui-bg so editing that token moves the canvas too; the weights land the
+   stock theme on neutral-50 / neutral-950. Unlayered, to outrank the
+   bg-default utility the Nuxt root carries. */
+body.theme-studio,
+body.theme-studio #__nuxt {
+  background-color: color-mix(in oklab, var(--ui-bg) 98%, var(--ui-color-neutral-950));
+}
+
+.dark body.theme-studio,
+.dark body.theme-studio #__nuxt {
+  background-color: color-mix(in oklab, var(--ui-bg) 70%, black);
 }
 
 html[data-framework="nuxt"] .vue-only,

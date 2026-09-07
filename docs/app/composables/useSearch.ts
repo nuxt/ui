@@ -2,7 +2,11 @@ export function useSearch() {
   const route = useRoute()
   const { frameworks } = useFrameworks()
   const { track } = useAnalytics()
-  const { open, messages } = useChat()
+  const { open, ask } = useChat()
+  // The ⌘K link glyphs follow the applied pack where an equivalent exists;
+  // the docs-nav-specific ones (square-play/-code/-function, panels, etc.)
+  // have no pack glyph and stay Lucide.
+  const studioIcons = useStudioIcons()
 
   const searchTerm = ref('')
 
@@ -10,19 +14,15 @@ export function useSearch() {
     track('AI Chat Opened', { source: 'search', hasSearchTerm: !!searchTerm.value })
 
     if (searchTerm.value) {
-      messages.value = [...messages.value, {
-        id: String(Date.now()),
-        role: 'user',
-        parts: [{ type: 'text', text: searchTerm.value }]
-      }]
+      ask(searchTerm.value)
+    } else {
+      open.value = true
     }
-
-    open.value = true
   }
 
   const links = computed(() => [{
     label: 'Ask AI',
-    icon: 'i-lucide-bot-message-square',
+    icon: studioIcons.assistant,
     kbds: ['meta', 'i'],
     ui: {
       itemLeadingIcon: 'group-data-highlighted:not-group-data-disabled:text-primary'
@@ -65,7 +65,7 @@ export function useSearch() {
   }, {
     label: 'Community',
     description: 'Explore community projects and resources.',
-    icon: 'i-lucide-globe',
+    icon: studioIcons.globe,
     to: '/community'
   }, {
     label: 'Playground',
@@ -87,7 +87,7 @@ export function useSearch() {
   }, {
     label: 'Team',
     description: 'Meet the team behind the project.',
-    icon: 'i-lucide-users',
+    icon: studioIcons.users,
     to: '/team'
   }, {
     label: 'Releases',
@@ -119,7 +119,7 @@ export function useSearch() {
     },
     items: [{
       label: 'Ask AI',
-      icon: 'i-lucide-bot-message-square',
+      icon: studioIcons.assistant,
       ui: {
         itemLeadingIcon: 'group-data-highlighted:not-group-data-disabled:text-primary'
       },

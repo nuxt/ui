@@ -32,7 +32,7 @@ const { data: components } = await useAsyncData(`components-${props.category}`, 
       }"
     >
       <template #header>
-        <div class="rounded-md rounded-b-none border border-muted overflow-hidden aspect-video -m-px">
+        <div class="rounded-md rounded-b-none border border-muted overflow-hidden aspect-video -m-px bg-muted">
           <UColorModeImage
             :light="`${component.path.replace('/docs/components/', '/components/light/')}.png`"
             :dark="`${component.path.replace('/docs/components/', '/components/dark/')}.png`"

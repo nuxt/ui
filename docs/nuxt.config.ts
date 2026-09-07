@@ -85,6 +85,9 @@ export default defineNuxtConfig({
 
   routeRules: {
     '/api/navigation.json': { prerender: true },
+    // rendered per request: a shared theme rides ?doc=, which a prerendered
+    // page would never see (pages/theme.vue)
+    '/theme': { prerender: false },
     // v4 redirects - moved to `docs/`
     '/getting-started/**': { redirect: { to: '/docs/getting-started/**', statusCode: 301 }, prerender: false },
     '/components/**': { redirect: { to: '/docs/components/**', statusCode: 301 }, prerender: false },

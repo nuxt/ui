@@ -1,4 +1,6 @@
 <script setup lang="ts">
+const appConfig = useAppConfig()
+
 const { data: page } = await useAsyncData('blog', () =>
   queryCollection('blog').first()
 )
@@ -91,7 +93,7 @@ function formatDate(date: string) {
                 </UAvatarGroup>
 
                 <UIcon
-                  name="i-lucide-chevron-right"
+                  :name="appConfig.ui.icons.chevronRight"
                   class="size-4 text-muted group-hover:text-highlighted transition-colors duration-200 shrink-0"
                 />
               </div>
