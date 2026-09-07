@@ -2,6 +2,7 @@
 const logoRef = ref()
 
 const toast = useToast()
+const appConfig = useAppConfig()
 const { copy } = useClipboard()
 
 const items = [
@@ -18,7 +19,7 @@ const items = [
       toast.add({
         title: 'Nuxt logo copied as SVG',
         description: 'You can now paste it into your project',
-        icon: 'i-lucide-circle-check',
+        icon: appConfig.ui.icons.success,
         color: 'success'
       })
     }

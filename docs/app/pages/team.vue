@@ -25,8 +25,11 @@ const { data: module } = await useFetch('/api/module.json')
 
 const contributors = computed(() => module.value?.contributors?.filter(contributor => !module.value?.team?.find(user => user.login === contributor.username)))
 
-const icons = {
-  website: 'i-lucide-link',
+const studioIcons = useStudioIcons()
+
+// computed: the pack is read after mount, a plain object would freeze on Lucide
+const icons = computed<Record<string, string>>(() => ({
+  website: studioIcons.link,
   twitter: 'i-simple-icons-x',
   twitch: 'i-simple-icons-twitch',
   youtube: 'i-simple-icons-youtube',
@@ -35,7 +38,7 @@ const icons = {
   mastodon: 'i-simple-icons-mastodon',
   bluesky: 'i-simple-icons-bluesky',
   github: 'i-simple-icons-github'
-}
+}))
 </script>
 
 <template>
@@ -89,7 +92,7 @@ const icons = {
               color="neutral"
               variant="link"
               :to="link.url"
-              :icon="icons[key as keyof typeof icons] || icons.website"
+              :icon="icons[key] || icons.website"
               :aria-label="`Link to ${user.name}'s ${key} profile`"
               target="_blank"
               size="sm"
@@ -118,7 +121,7 @@ const icons = {
               target="_blank"
               color="neutral"
               variant="subtle"
-              icon="i-lucide-heart"
+              :icon="studioIcons.heart"
               label="Sponsor"
               :ui="{ leadingIcon: 'text-pink-500 dark:text-pink-400' }"
             />
