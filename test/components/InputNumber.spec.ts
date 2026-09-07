@@ -65,6 +65,71 @@ describe('InputNumber', () => {
       expect(1).toBe(1)
     })
 
+    test('increments uncontrolled defaultValue without v-model', async () => {
+      const wrapper = await mountSuspended(InputNumber, { props: { defaultValue: 5 }, attachTo: document.body })
+      const increment = wrapper.find('[data-slot="increment"] button')
+
+      await increment.trigger('pointerdown')
+      await increment.trigger('pointerup')
+      await wrapper.find('input').trigger('blur')
+      await flushPromises()
+
+      expect(wrapper.emitted('update:modelValue')).toEqual([[6]])
+      expect((wrapper.find('input').element as HTMLInputElement).value).toBe('6')
+
+      wrapper.unmount()
+    })
+
+    test('emits once when controlled and blurred', async () => {
+      const wrapper = await mountSuspended(InputNumber, {
+        attachTo: document.body,
+        props: {
+          'modelValue': 5,
+          'onUpdate:modelValue': (value: number | null | undefined) => wrapper.setProps({ modelValue: value })
+        }
+      })
+      const increment = wrapper.find('[data-slot="increment"] button')
+
+      await increment.trigger('pointerdown')
+      await increment.trigger('pointerup')
+      await flushPromises()
+      await wrapper.find('input').trigger('blur')
+      await flushPromises()
+
+      expect(wrapper.emitted('update:modelValue')).toEqual([[6]])
+      expect(wrapper.emitted('change')).toHaveLength(1)
+
+      wrapper.unmount()
+    })
+
+    test('emits undefined once when cleared with .optional modifier', async () => {
+      const wrapper = await mountSuspended(InputNumber, {
+        props: {
+          'modelValue': 5,
+          'modelModifiers': { optional: true },
+          'onUpdate:modelValue': (value: number | null | undefined) => wrapper.setProps({ modelValue: value })
+        }
+      })
+      const input = wrapper.find('input')
+
+      await input.setValue('')
+      await input.trigger('blur')
+      await flushPromises()
+      await input.trigger('blur')
+      await flushPromises()
+
+      expect(wrapper.emitted('update:modelValue')).toEqual([[undefined]])
+    })
+
+    test('does not emit when blurred with a null modelValue', async () => {
+      const wrapper = await mountSuspended(InputNumber, { props: { modelValue: null } })
+
+      await wrapper.find('input').trigger('blur')
+      await flushPromises()
+
+      expect(wrapper.emitted('update:modelValue')).toBeUndefined()
+    })
+
     test('change event', async () => {
       const wrapper = await mountSuspended(InputNumber)
       const input = wrapper.findComponent({ name: 'NumberFieldRoot' })
