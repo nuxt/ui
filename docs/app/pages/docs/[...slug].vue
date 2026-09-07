@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { joinURL } from 'ufo'
 import { kebabCase } from 'scule'
 import type { ContentNavigationItem } from '@nuxt/content'
 
@@ -77,8 +76,6 @@ useSeoMeta({
 const path = computed(() => route.path.replace(/\/$/, ''))
 
 if (import.meta.server) {
-  prerenderRoutes([joinURL('/raw', `${path.value}.md`)])
-
   if (route.path.startsWith('/docs/components/')) {
     defineOgImage('Component.takumi', {
       title: page.value.title,
