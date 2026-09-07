@@ -162,6 +162,19 @@ describe('FileUpload', () => {
     })
   })
 
+  it('uses the file name as preview alt text', async () => {
+    const wrapper = await mountSuspended(FileUpload, {
+      props: {
+        modelValue: {
+          name: 'avatar.png',
+          avatar: { src: 'https://example.com/avatar.png' }
+        }
+      }
+    })
+
+    expect(wrapper.get('[data-slot="fileLeadingAvatar"] img').attributes('alt')).toBe('avatar.png')
+  })
+
   it('hides custom item previews when fileImage is false', async () => {
     const wrapper = await mountSuspended(FileUpload, {
       props: {

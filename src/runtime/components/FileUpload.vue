@@ -332,6 +332,7 @@ defineExpose({
               <slot name="file-leading" :file="file" :index="index" :ui="ui">
                 <UAvatar
                   :as="{ img: 'img' }"
+                  :alt="file.name"
                   :icon="props.fileIcon || appConfig.ui.icons.file"
                   :size="size"
                   v-bind="file.avatar"
