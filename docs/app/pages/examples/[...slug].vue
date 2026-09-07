@@ -1,11 +1,19 @@
 <script setup lang="ts">
-import { upperFirst, camelCase } from 'scule'
+import { upperFirst, camelCase, titleCase } from 'scule'
 
 const route = useRoute()
 const colorMode = useColorMode()
 const appConfig = useAppConfig()
 
 const name = route.params.slug?.[0]
+
+// Demos are only ever framed by the docs, never pages of their own: keep
+// them out of the index (header and meta) and give the frame a title.
+useRobotsRule('noindex')
+useSeoMeta({
+  titleTemplate: '%s - Nuxt UI',
+  title: titleCase(name || 'example')
+})
 
 const exampleModules = import.meta.glob('~/components/content/examples/**/*.vue')
 const exampleMatch = Object.entries(exampleModules).find(([path]) => path.endsWith(`/${upperFirst(camelCase(name || ''))}.vue`))
