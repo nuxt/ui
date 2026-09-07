@@ -89,7 +89,7 @@ const people = computed(() => (github.value?.contributors ?? []).map((contributo
   <main v-if="page">
     <PageHero v-bind="page.hero" :stats="stats" />
 
-    <UContainer class="max-w-7xl pt-16 lg:pt-19">
+    <UContainer class="pt-16 lg:pt-19">
       <div class="flex items-baseline gap-3.5 mb-1.5">
         <h2 class="text-xs font-medium uppercase tracking-widest text-muted whitespace-nowrap">
           Everyone who ships it
@@ -177,7 +177,7 @@ const people = computed(() => (github.value?.contributors ?? []).map((contributo
       </div>
     </UContainer>
 
-    <UContainer class="max-w-7xl py-18 lg:pb-26">
+    <UContainer class="py-18 lg:pb-26">
       <div class="relative overflow-hidden rounded-[22px] border border-default bg-linear-to-b from-(--ui-bg) to-(--ui-bg-elevated)/60 px-8 py-10 sm:px-13 sm:py-12 flex flex-col lg:flex-row lg:items-center gap-8 lg:gap-10">
         <div class="absolute inset-0 pointer-events-none bg-[radial-gradient(var(--ui-border-accented)_1px,transparent_1px)] bg-[size:26px_26px] opacity-50 [mask-image:radial-gradient(80%_120%_at_90%_50%,black,transparent_70%)]" />
 

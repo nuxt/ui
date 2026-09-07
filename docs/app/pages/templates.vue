@@ -34,7 +34,7 @@ if (import.meta.server) {
   <main v-if="page">
     <PageHero v-bind="page.hero" />
 
-    <UContainer class="max-w-[1180px] pt-10 pb-16">
+    <UContainer class="pt-10 pb-16">
       <div class="flex flex-wrap items-center gap-x-3.5 gap-y-3">
         <FrameworkTabs size="sm" class="w-40" />
 

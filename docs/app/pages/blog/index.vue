@@ -38,7 +38,7 @@ function formatDate(date: string) {
   <main v-if="page">
     <PageHero v-bind="page.hero" />
 
-    <UContainer class="max-w-[1180px] pt-8 pb-16">
+    <UContainer class="pt-8 pb-16">
       <ULink
         v-for="post in posts"
         :key="post.path"

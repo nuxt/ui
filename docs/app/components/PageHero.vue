@@ -44,7 +44,7 @@ const leadText = computed(() => (props.breakLine ? props.lead : `${props.lead} `
     </template>
     <div v-else-if="backdrop === 'halo'" aria-hidden="true" class="absolute -top-70 left-1/2 -translate-x-1/2 w-[1000px] h-[540px] pointer-events-none bg-radial from-primary/20 to-transparent to-70%" />
 
-    <div class="relative max-w-[1180px] mx-auto px-4 sm:px-6 lg:px-8 flex flex-col gap-6">
+    <UContainer class="relative flex flex-col gap-6">
       <UBadge
         v-if="eyebrow"
         :icon="eyebrowIcon"
@@ -58,7 +58,7 @@ const leadText = computed(() => (props.breakLine ? props.lead : `${props.lead} `
 
       <h1 class="max-w-[820px] text-4xl sm:text-5xl lg:text-6xl font-medium leading-none tracking-tighter text-balance text-highlighted">
         <!-- the serif runs a size up: at the same em it reads smaller -->
-        {{ leadText }}<br v-if="breakLine"><span class="font-[family-name:Instrument_Serif] font-normal italic text-[1.13em] tracking-tight text-(--ui-color-primary-700) dark:text-(--ui-color-primary-400)">{{ accent }}</span>
+        {{ leadText }}<br v-if="breakLine"><span class="font-[family-name:Instrument_Serif] font-normal italic text-[1.13em] tracking-tight text-primary">{{ accent }}</span>
       </h1>
 
       <p v-if="description" class="max-w-[580px] text-base sm:text-[17px] leading-relaxed text-muted text-pretty">
@@ -68,9 +68,9 @@ const leadText = computed(() => (props.breakLine ? props.lead : `${props.lead} `
       <div v-if="links?.length" class="flex flex-wrap gap-2.5 pt-2">
         <UButton v-for="(link, index) in links" :key="index" size="xl" v-bind="link" />
       </div>
-    </div>
+    </UContainer>
 
-    <div v-if="stats?.length || note" class="relative max-w-[1180px] mx-auto px-4 sm:px-6 lg:px-8 mt-10 sm:mt-14 pb-8 flex flex-wrap items-end gap-x-10 sm:gap-x-14 gap-y-6">
+    <UContainer v-if="stats?.length || note" class="relative mt-10 sm:mt-14 pb-8 flex flex-wrap items-end gap-x-10 sm:gap-x-14 gap-y-6">
       <component
         :is="stat.to ? 'NuxtLink' : 'div'"
         v-for="stat in stats"
@@ -88,7 +88,7 @@ const leadText = computed(() => (props.breakLine ? props.lead : `${props.lead} `
       </component>
 
       <span v-if="note" class="ms-auto text-xs text-muted whitespace-nowrap">{{ note }}</span>
-    </div>
+    </UContainer>
 
     <div class="h-12 sm:h-16" />
   </section>

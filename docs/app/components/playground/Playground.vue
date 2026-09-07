@@ -130,26 +130,17 @@ const visibleTiles = computed(() => tiles.slice(0, REVEAL_COUNTS[lanes.value - 1
   break-inside: avoid;
 }
 
-/* Same reveal ladder as the virtualized wall: a narrow box shows fewer tiles
-   rather than one endless column. */
-.wall > :nth-child(n + 7) {
-  display: none;
-}
-
+/* Every tile, at every width: the lanes carry the narrow layouts rather than
+   a shorter list. */
 @container (min-width: 600px) {
   .wall { padding: 24px; columns: 2; }
-  .wall > :nth-child(n + 7) { display: block; }
-  .wall > :nth-child(n + 13) { display: none; }
 }
 
 @container (min-width: 900px) {
   .wall { columns: 3; }
-  .wall > :nth-child(n + 13) { display: block; }
-  .wall > :nth-child(n + 20) { display: none; }
 }
 
 @container (min-width: 1200px) {
   .wall { columns: 4; }
-  .wall > :nth-child(n + 20) { display: block; }
 }
 </style>

@@ -26,7 +26,7 @@ if (import.meta.server) {
   <main v-if="page">
     <PageHero v-bind="page.hero" />
 
-    <UContainer class="max-w-[1180px] pt-12 pb-16">
+    <UContainer class="pt-12 pb-16">
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         <NuxtLink
           v-for="item in page.items"
