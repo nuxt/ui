@@ -162,6 +162,20 @@ describe('FileUpload', () => {
     })
   })
 
+  it('hides custom item previews when fileImage is false', async () => {
+    const wrapper = await mountSuspended(FileUpload, {
+      props: {
+        modelValue: {
+          name: 'avatar.png',
+          avatar: { src: 'https://example.com/avatar.png' }
+        },
+        fileImage: false
+      }
+    })
+
+    expect(wrapper.find('[data-slot="fileLeadingAvatar"] img').exists()).toBe(false)
+  })
+
   it('preserves custom file items when adding files', async () => {
     interface CustomFileUploadItem extends FileUploadItem {
       id: string

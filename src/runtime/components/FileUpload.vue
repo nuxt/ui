@@ -238,7 +238,8 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.fileUpload || {}
 }))
 
 function getFilePreview(file: FileUploadItem): string | undefined {
-  if (!props.fileImage || file.avatar?.src) return file.avatar?.src
+  if (!props.fileImage) return undefined
+  if (file.avatar?.src) return file.avatar.src
   if (!(file instanceof File)) return undefined
 
   return URL.createObjectURL(file)
@@ -331,11 +332,10 @@ defineExpose({
               <slot name="file-leading" :file="file" :index="index" :ui="ui">
                 <UAvatar
                   :as="{ img: 'img' }"
-                  :src="getFilePreview(file)"
-                  :alt="file.name"
                   :icon="props.fileIcon || appConfig.ui.icons.file"
                   :size="size"
                   v-bind="file.avatar"
+                  :src="getFilePreview(file)"
                   data-slot="fileLeadingAvatar"
                   :class="ui.fileLeadingAvatar({ class: props.ui?.fileLeadingAvatar })"
                 />
