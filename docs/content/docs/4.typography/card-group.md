@@ -111,6 +111,10 @@ A landing page you can use as starting point.
 
 ## API
 
+### Props
+
+:component-props{prose}
+
 ### Slots
 
 :component-slots{prose}

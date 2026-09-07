@@ -1,6 +1,10 @@
 ---
 description: A set of tab panels that are displayed one at a time.
 category: navigation
+keywords:
+  - tabbed
+  - panels
+  - sections
 links:
   - label: Tabs
     icon: i-custom-reka-ui
@@ -12,7 +16,7 @@ links:
 
 ## Usage
 
-Use the Tabs component to display a list of items in a tabs.
+Use the Tabs component to display a list of items in tabs.
 
 ::component-example
 ---

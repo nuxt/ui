@@ -1,5 +1,4 @@
 ---
-title: Kbd
 description: A kbd element to display a keyboard key.
 category: element
 keywords:

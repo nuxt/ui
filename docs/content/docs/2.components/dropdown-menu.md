@@ -2,6 +2,10 @@
 title: DropdownMenu
 description: A menu to display actions when clicking on an element.
 category: overlay
+keywords:
+  - menu
+  - context menu
+  - actions
 links:
   - label: DropdownMenu
     icon: i-custom-reka-ui

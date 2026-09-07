@@ -26,7 +26,7 @@ items:
     to: 'https://www.raycast.com/HugoRCD/nuxt'
     target: '_blank'
     user:
-      name: 'HugoRDC'
+      name: 'HugoRCD'
       to: 'https://github.com/HugoRCD'
       target: '_blank'
       avatar:

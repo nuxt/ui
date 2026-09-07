@@ -1,5 +1,4 @@
 ---
-title: Timeline
 description: 'A component that displays a sequence of events with dates, titles, icons or avatars.'
 category: data
 keywords:

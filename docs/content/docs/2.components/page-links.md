@@ -26,7 +26,7 @@ props:
   links:
     - label: 'Edit this page'
       icon: i-lucide-file-pen
-      to: https://github.com/nuxt/ui/blob/v4/docs/content/3.components/page-links.md
+      to: https://github.com/nuxt/ui/blob/v4/docs/content/docs/2.components/page-links.md
     - label: 'Star on GitHub'
       icon: i-lucide-star
       to: https://github.com/nuxt/ui
@@ -60,7 +60,7 @@ props:
   links:
     - label: 'Edit this page'
       icon: i-lucide-file-pen
-      to: https://github.com/nuxt/ui/blob/v4/docs/content/3.components/page-links.md
+      to: https://github.com/nuxt/ui/blob/v4/docs/content/docs/2.components/page-links.md
     - label: 'Star on GitHub'
       icon: i-lucide-star
       to: https://github.com/nuxt/ui
@@ -88,7 +88,7 @@ props:
   links:
     - label: 'Edit this page'
       icon: i-lucide-file-pen
-      to: https://github.com/nuxt/ui/blob/v4/docs/content/3.components/page-links.md
+      to: https://github.com/nuxt/ui/blob/v4/docs/content/docs/2.components/page-links.md
     - label: 'Star on GitHub'
       icon: i-lucide-star
       to: https://github.com/nuxt/ui

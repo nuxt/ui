@@ -7,7 +7,7 @@ const focusHighlight = (utilities: string) => ['textarea', '[contenteditable]']
 
 export default (options: Required<ModuleOptions>) => ({
   slots: {
-    root: 'relative flex flex-col items-stretch gap-2 px-2.5 py-2 w-full rounded-lg backdrop-blur',
+    root: 'relative flex flex-col items-stretch gap-2 px-2.5 py-2 w-full rounded-lg backdrop-blur-sm',
     header: 'flex items-center gap-1.5',
     body: 'items-start gap-1.5',
     footer: 'flex items-center justify-between gap-1.5',

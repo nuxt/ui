@@ -1,6 +1,6 @@
 ---
 title: ColorModeSelect
-description: 'A Select to switch between system, dark & light mode.'
+description: 'A Select to switch between system, dark and light mode.'
 category: color-mode
 links:
   - label: SelectMenu

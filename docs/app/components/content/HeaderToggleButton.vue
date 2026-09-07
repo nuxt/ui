@@ -55,7 +55,7 @@ const state = computed(() => props.open ? 'close' : 'normal')
         :variants="variants"
         :animate="state"
         :custom="1"
-        class="outline-none"
+        tabindex="-1"
       />
       <motion.line
         x1="4"
@@ -65,7 +65,7 @@ const state = computed(() => props.open ? 'close' : 'normal')
         :variants="variants"
         :animate="state"
         :custom="2"
-        class="outline-none"
+        tabindex="-1"
       />
       <motion.line
         x1="4"
@@ -75,7 +75,7 @@ const state = computed(() => props.open ? 'close' : 'normal')
         :variants="variants"
         :animate="state"
         :custom="3"
-        class="outline-none"
+        tabindex="-1"
       />
     </svg>
   </UButton>

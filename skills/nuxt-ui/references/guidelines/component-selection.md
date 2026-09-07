@@ -76,6 +76,7 @@ Decision matrices for choosing the right component. When in doubt, use the MCP `
 | App-wide announcement | `UBanner` | Sticky top bar, dismissible |
 | Loading state | `USkeleton` | Placeholder shimmer while loading |
 | Progress indicator | `UProgress` | Determinate or indeterminate progress |
+| Breakdown of a total | `UProgressGroup` | One bar split into colored segments that add up to `max` |
 
 ### Rules
 - Use `useToast()` for action feedback: "Item saved", "Email sent", "Error occurred"

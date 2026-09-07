@@ -1,6 +1,7 @@
 import { z } from 'zod'
 import { kebabCase } from 'scule'
 import { queryCollection } from '@nuxt/content/server'
+import { getAgentDocument } from '#agent-discovery'
 
 const sectionEnum = z.enum(['usage', 'examples', 'api', 'theme', 'changelog'])
 
@@ -42,13 +43,12 @@ export default defineMcpTool({
       throw createError({ statusCode: 404, message: `Component '${componentName}' not found in documentation` })
     }
 
-    const fullDocumentation = await $fetch<string>(`/raw${page.path}.md`)
-
-    let documentation = fullDocumentation
-
-    // If sections are specified, extract only those sections
-    if (sections && sections.length > 0) {
-      documentation = extractSections(fullDocumentation, sections)
+    // Same document `/raw/**.md` serves, resolved in-process rather than
+    // fetched back out of the function, and narrowed to the requested `##`
+    // sections by the module.
+    const document = await getAgentDocument(event, page.path, { sections })
+    if (!document || 'redirect' in document) {
+      throw createError({ statusCode: 404, message: `Component '${componentName}' has no documentation page` })
     }
 
     return {
@@ -56,8 +56,8 @@ export default defineMcpTool({
       title: page.title,
       description: page.description,
       category: page.category,
-      documentation,
-      documentation_url: `https://ui.nuxt.com${page.path}`,
+      documentation: document.markdown,
+      documentation_url: `${SITE_URL}${page.path}`,
       sections_returned: sections || ['full']
     }
   }

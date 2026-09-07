@@ -2,6 +2,10 @@
 title: FooterColumns
 description: 'A list of links as columns to display in your Footer.'
 category: navigation
+keywords:
+  - footer links
+  - sitemap
+  - columns
 links:
   - label: GitHub
     icon: i-simple-icons-github

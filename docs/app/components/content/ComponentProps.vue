@@ -66,6 +66,8 @@ const metaProps: ComputedRef<ComponentMeta['props']> = computed(() => {
 
     // @ts-expect-error - Type is not correct
     prop.type = !prop.type.startsWith('boolean') && prop.schema?.kind === 'enum' && Object.keys(prop.schema.schema)?.length ? Object.values(prop.schema.schema).map(schema => schema?.type ? schema.type : schema).join(' | ') : prop.type
+    // `(string & {})` widens a literal union while keeping autocompletion, display it as plain `string`
+    prop.type = prop.type.replace(/\(?string & \{\}\)?/g, 'string')
     return prop
   }).sort((a, b) => {
     if (a.name === 'as') {

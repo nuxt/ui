@@ -1,6 +1,6 @@
 ---
 title: ColorModeSwitch
-description: 'A switch to toggle between light and dark mode.'
+description: 'A Switch to toggle between light and dark mode.'
 category: color-mode
 links:
   - label: Switch
