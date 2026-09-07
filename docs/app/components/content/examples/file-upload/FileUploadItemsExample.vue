@@ -15,6 +15,7 @@ const files = ref<FileUploadItem[]>([{
 <template>
   <UFileUpload
     v-model="files"
+    layout="list"
     label="Drop your images here"
     description="SVG, PNG, JPG or GIF"
     accept="image/*"
