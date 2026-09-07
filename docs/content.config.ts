@@ -31,17 +31,17 @@ const PageFeature = z.object({
 })
 
 const PageHero = z.object({
-  title: z.string(),
+  /** The title's two halves: body face, then the serif accent. */
+  lead: z.string(),
+  accent: z.string(),
+  /** Break between them rather than running them on one line. */
+  breakLine: z.boolean().optional(),
   description: z.string(),
+  eyebrow: z.string().optional(),
+  eyebrowIcon: z.string().optional(),
+  note: z.string().optional(),
+  backdrop: z.enum(['horizon', 'halo', 'none']).optional(),
   links: z.array(Button).optional()
-})
-
-const PageSection = z.object({
-  title: z.string(),
-  description: z.string(),
-  icon: z.string().optional(),
-  links: z.array(Button).optional(),
-  features: z.array(PageFeature).optional()
 })
 
 // `@nuxtjs/sitemap` only walks a collection whose schema declares this field,
@@ -59,23 +59,7 @@ export const collections = {
   index: defineCollection({
     type: 'page',
     source: 'index.yml',
-    schema: Page.extend({
-      hero: PageHero.extend({
-        features: z.array(PageFeature)
-      }),
-      features: z.array(PageFeature),
-      design_system: PageSection.extend({
-        code: z.string()
-      }),
-      css_variables: PageSection.extend({
-        code: z.string()
-      }),
-      components: PageSection.extend({
-        code: z.string()
-      }),
-      templates: PageSection,
-      community: PageSection
-    })
+    schema: Page
   }),
   docs: defineCollection({
     type: 'page',

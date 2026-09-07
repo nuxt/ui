@@ -1,6 +1,13 @@
 <script setup lang="ts">
 const appConfig = useAppConfig()
 
+// The two counts render side by side, each hidden by the framework class:
+// a JS count would disagree with the server, which has no cookie to read.
+const counts = computed(() => ({
+  nuxt: page.value?.items.filter(item => item.framework === 'nuxt').length ?? 0,
+  vue: page.value?.items.filter(item => item.framework === 'vue').length ?? 0
+}))
+
 const { data: page } = await useAsyncData('templates', () => queryCollection('templates').first())
 if (!page.value) {
   throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
@@ -23,106 +30,103 @@ if (import.meta.server) {
 }
 </script>
 
-<!-- eslint-disable vue/no-v-html -->
 <template>
   <main v-if="page">
-    <UPageHero :ui="{ container: 'relative py-10 sm:py-16 lg:py-24' }">
-      <template #title>
-        <MDC :value="page.hero.title" unwrap="p" cache-key="pro-templates-hero-title" />
-      </template>
+    <PageHero v-bind="page.hero" />
 
-      <template #description>
-        <MDC :value="page.hero.description" unwrap="p" cache-key="pro-templates-hero-description" />
-      </template>
+    <UContainer class="max-w-[1180px] pt-10 pb-16">
+      <div class="flex flex-wrap items-center gap-x-3.5 gap-y-3">
+        <FrameworkTabs size="sm" class="w-40" />
 
-      <template #links>
-        <FrameworkTabs size="md" class="w-48" />
-      </template>
+        <span class="hidden sm:block flex-1 h-px bg-(--ui-border)" />
 
-      <template #top>
-        <div class="absolute z-[-1] rounded-full bg-primary blur-[300px] size-60 sm:size-80 transform -translate-x-1/2 left-1/2 -translate-y-80" />
-      </template>
+        <span class="nuxt-only text-xs text-muted whitespace-nowrap">{{ counts.nuxt }} templates</span>
+        <span class="vue-only text-xs text-muted whitespace-nowrap">{{ counts.vue }} templates</span>
+      </div>
 
-      <LazyStarsBg />
-
-      <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-default inset-0 mx-4 sm:mx-6 lg:mx-8" />
-    </UPageHero>
-
-    <UPageSection
-      v-for="(template, index) in page.items"
-      :key="index"
-      :title="template.title"
-      :features="template.features"
-      orientation="horizontal"
-      class="lg:border-t border-default"
-      :class="`${template.framework}-only`"
-      :ui="{
-        title: 'lg:text-4xl',
-        wrapper: 'lg:py-16 lg:min-h-[481px] flex flex-col justify-center lg:border-r border-default order-last lg:pr-16',
-        container: 'lg:py-0',
-        links: 'gap-x-3'
-      }"
-    >
-      <template #links>
-        <UButton v-for="link of template.links" :key="link.label" color="neutral" variant="outline" v-bind="link" />
-
-        <UDropdownMenu
-          :items="template.open_links"
-          :ui="{ content: 'w-(--reka-dropdown-menu-trigger-width) min-w-auto' }"
-          :modal="false"
-          class="group"
+      <div class="flex flex-col">
+        <article
+          v-for="(template, index) in page.items"
+          :key="index"
+          :class="`${template.framework}-only`"
+          class="flex flex-col sm:flex-row gap-5 lg:gap-9 py-7 border-b border-default"
         >
-          <UButton
-            color="neutral"
-            variant="outline"
-            icon="i-lucide-square-code"
-            :trailing-icon="appConfig.ui.icons.chevronDown"
-            label="Open on"
-            :ui="{
-              trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200'
-            }"
-          />
-        </UDropdownMenu>
-
-        <UDropdownMenu
-          :items="[
-            ...template.deploy_links,
-            { label: 'Other', icon: 'i-lucide-globe', to: 'https://nuxt.com/deploy', target: '_blank' }
-          ]"
-          :ui="{ content: 'w-(--reka-dropdown-menu-trigger-width) min-w-auto' }"
-          :modal="false"
-          class="group"
-        >
-          <UButton
-            color="neutral"
-            variant="outline"
-            icon="i-lucide-cloud"
-            :trailing-icon="appConfig.ui.icons.chevronDown"
-            label="Deploy to"
-            :ui="{
-              trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200'
-            }"
-          />
-        </UDropdownMenu>
-      </template>
-
-      <template #description>
-        <MDC :value="template.description" unwrap="p" :cache-key="`pro-templates-${index}-description`" />
-      </template>
-
-      <div class="lg:border-x border-default h-full flex items-center lg:bg-muted/20">
-        <Motion class="flex-1" :initial="{ opacity: 0, transform: 'translateY(10px)' }" :while-in-view="{ opacity: 1, transform: 'translateY(0px)' }" :in-view-options="{ once: true }" :transition="{ duration: 0.5, delay: 0.2 }">
           <UColorModeImage
             :light="`/assets/templates/${template.framework}/${template.title.toLowerCase()}-light.png`"
             :dark="`/assets/templates/${template.framework}/${template.title.toLowerCase()}-dark.png`"
-            class="w-full h-auto border lg:border-y lg:border-x-0 border-default rounded-sm lg:rounded-none"
             :alt="`Template ${template.title} screenshot`"
             width="654"
             height="368"
             loading="lazy"
+            class="w-full sm:w-[340px] shrink-0 aspect-video object-cover object-top rounded-xl border border-default bg-muted/40"
           />
-        </Motion>
+
+          <div class="flex flex-col gap-3 min-w-0">
+            <h2 class="text-xl font-semibold tracking-tight text-highlighted">
+              {{ template.title }}
+            </h2>
+
+            <p class="max-w-[520px] text-[15px] leading-relaxed text-muted text-pretty">
+              {{ template.description }}
+            </p>
+
+            <ul class="flex flex-col gap-1.5">
+              <li v-for="feature in template.features" :key="feature.title" class="flex items-center gap-2 text-[13px] text-toned">
+                <UIcon :name="feature.icon" class="size-4 shrink-0 text-primary" />
+                {{ feature.title }}
+              </li>
+            </ul>
+
+            <div class="flex flex-wrap gap-2 mt-auto pt-2">
+              <UButton
+                v-for="link of template.links"
+                :key="link.label"
+                color="neutral"
+                variant="outline"
+                size="sm"
+                v-bind="link"
+              />
+
+              <UDropdownMenu
+                :items="template.open_links"
+                :ui="{ content: 'w-(--reka-dropdown-menu-trigger-width) min-w-auto' }"
+                :modal="false"
+                class="group"
+              >
+                <UButton
+                  color="neutral"
+                  variant="outline"
+                  size="sm"
+                  icon="i-lucide-square-code"
+                  :trailing-icon="appConfig.ui.icons.chevronDown"
+                  label="Open on"
+                  :ui="{ trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200' }"
+                />
+              </UDropdownMenu>
+
+              <UDropdownMenu
+                :items="[
+                  ...template.deploy_links,
+                  { label: 'Other', icon: 'i-lucide-globe', to: 'https://nuxt.com/deploy', target: '_blank' }
+                ]"
+                :ui="{ content: 'w-(--reka-dropdown-menu-trigger-width) min-w-auto' }"
+                :modal="false"
+                class="group"
+              >
+                <UButton
+                  color="neutral"
+                  variant="outline"
+                  size="sm"
+                  icon="i-lucide-cloud"
+                  :trailing-icon="appConfig.ui.icons.chevronDown"
+                  label="Deploy to"
+                  :ui="{ trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200' }"
+                />
+              </UDropdownMenu>
+            </div>
+          </div>
+        </article>
       </div>
-    </UPageSection>
+    </UContainer>
   </main>
 </template>

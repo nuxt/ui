@@ -24,56 +24,42 @@ if (import.meta.server) {
 
 <template>
   <main v-if="page">
-    <UPageHero
-      :title="page.hero.title"
-      :description="page.hero.description"
-      class="md:border-b border-default"
-      :ui="{ container: 'relative py-10 sm:py-16 lg:py-24' }"
-    >
-      <template #top>
-        <div class="absolute z-[-1] rounded-full bg-primary blur-[300px] size-60 sm:size-80 transform -translate-x-1/2 left-1/2 -translate-y-80" />
-      </template>
+    <PageHero v-bind="page.hero" />
 
-      <LazyStarsBg />
+    <UContainer class="max-w-[1180px] pt-12 pb-16">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <NuxtLink
+          v-for="item in page.items"
+          :key="item.label"
+          :to="item.to"
+          target="_blank"
+          class="group flex flex-col gap-3 rounded-2xl border border-default p-5 hover:border-accented hover:shadow-lg hover:shadow-black/5 dark:hover:shadow-black/20 transition focus-visible:outline-primary"
+        >
+          <UAvatar
+            v-bind="item.avatar"
+            :alt="`${item.label} logo`"
+            size="lg"
+            loading="lazy"
+            class="rounded-xl bg-elevated"
+          />
 
-      <div aria-hidden="true" class="hidden md:block absolute z-[-1] border-x border-default inset-0 mx-4 sm:mx-6 lg:mx-8" />
-    </UPageHero>
+          <span class="font-semibold tracking-tight text-highlighted">{{ item.label }}</span>
 
-    <UPageSection :ui="{ container: '!py-0' }">
-      <div class="pb-16 sm:pb-24 lg:pb-32 md:border-x border-default">
-        <UPageGrid class="gap-px">
-          <UPageCard
-            v-for="item in page.items"
-            :key="item.label"
-            :title="item.label"
-            :description="item.description"
-            :to="item.to"
-            target="_blank"
-            class="rounded-none group"
-            :ui="{ footer: 'pointer-events-auto z-[1]' }"
-          >
-            <template #leading>
-              <UAvatar v-bind="item.avatar" :alt="`${item.label} logo`" size="3xl" class="mx-auto" loading="lazy" />
-            </template>
+          <p class="text-[13.5px] leading-relaxed text-muted text-pretty">
+            {{ item.description }}
+          </p>
 
-            <template v-if="item.user" #footer>
-              <UButton
-                :label="item.user.name"
-                :avatar="{
-                  ...item.user.avatar,
-                  alt: `${item.user.name} avatar`
-                }"
-                :to="item.user.to"
-                target="_blank"
-                size="sm"
-                color="neutral"
-                variant="outline"
-                class="ring-default group-hover:ring-accented transition bg-transparent"
-              />
-            </template>
-          </UPageCard>
-        </UPageGrid>
+          <span v-if="item.user" class="mt-auto self-start flex items-center gap-2 rounded-full border border-default ps-1 pe-3 py-1">
+            <UAvatar
+              v-bind="item.user.avatar"
+              :alt="`${item.user.name} avatar`"
+              size="2xs"
+              loading="lazy"
+            />
+            <span class="text-xs font-medium text-toned">{{ item.user.name }}</span>
+          </span>
+        </NuxtLink>
       </div>
-    </UPageSection>
+    </UContainer>
   </main>
 </template>

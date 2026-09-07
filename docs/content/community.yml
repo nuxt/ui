@@ -2,7 +2,10 @@ title: Community
 description: Explore amazing projects built around Nuxt UI by the community.
 navigation: false
 hero:
-  title: Community
+  eyebrow: Tools, presets and integrations
+  eyebrowIcon: i-lucide-puzzle
+  lead: Made by the
+  accent: Community
   description: Explore amazing projects built around Nuxt UI by the community.
 items:
   - label: 'Compodium'

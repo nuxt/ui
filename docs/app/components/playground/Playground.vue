@@ -56,6 +56,13 @@ const tiles = [
 // Lanes follow the CONTAINER, not the viewport, the preview pane changes
 // width with fullscreen. Tile count follows lanes (the old per-breakpoint
 // reveal) so narrow layouts aren't one endless column.
+/**
+ * The landing renders the same tiles without the virtualizer: it shows them
+ * all anyway, and a virtualized wall needs a measured DOM, so the server
+ * would paint an empty box that only fills in on hydration.
+ */
+defineProps<{ static?: boolean }>()
+
 const scrollArea = useTemplateRef('scrollArea')
 // border-box: `compact` below switches this element's own padding, and a
 // content-box width that moves with it would flip back and forth forever
@@ -72,7 +79,18 @@ const visibleTiles = computed(() => tiles.slice(0, REVEAL_COUNTS[lanes.value - 1
 </script>
 
 <template>
+  <!-- CSS columns, so the server paints the wall it will keep: the lanes and
+       the tile count come from container queries rather than measurement. -->
+  <div v-if="static" class="playground-wall">
+    <div class="wall">
+      <PlaygroundCard v-for="tile in tiles" :key="tile.name">
+        <component :is="tile.component" />
+      </PlaygroundCard>
+    </div>
+  </div>
+
   <UScrollArea
+    v-else
     ref="scrollArea"
     :items="visibleTiles"
     :virtualize="{
@@ -93,3 +111,45 @@ const visibleTiles = computed(() => tiles.slice(0, REVEAL_COUNTS[lanes.value - 1
     </template>
   </UScrollArea>
 </template>
+
+<style scoped>
+/* The lanes follow this box, not the viewport: the studio and the landing
+   hand the wall very different widths. */
+.playground-wall {
+  container-type: inline-size;
+}
+
+.wall {
+  padding: 16px;
+  columns: 1;
+  gap: 16px;
+}
+
+.wall > * {
+  margin-bottom: 16px;
+  break-inside: avoid;
+}
+
+/* Same reveal ladder as the virtualized wall: a narrow box shows fewer tiles
+   rather than one endless column. */
+.wall > :nth-child(n + 7) {
+  display: none;
+}
+
+@container (min-width: 600px) {
+  .wall { padding: 24px; columns: 2; }
+  .wall > :nth-child(n + 7) { display: block; }
+  .wall > :nth-child(n + 13) { display: none; }
+}
+
+@container (min-width: 900px) {
+  .wall { columns: 3; }
+  .wall > :nth-child(n + 13) { display: block; }
+  .wall > :nth-child(n + 20) { display: none; }
+}
+
+@container (min-width: 1200px) {
+  .wall { columns: 4; }
+  .wall > :nth-child(n + 20) { display: block; }
+}
+</style>

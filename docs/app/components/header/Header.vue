@@ -33,7 +33,7 @@ function toggleChat() {
     <template #left>
       <HeaderLogo />
 
-      <VersionMenu />
+      <VersionMenu v-if="route.path.startsWith('/docs/')" />
     </template>
 
     <UNavigationMenu :items="desktopLinks" variant="link" content-orientation="vertical" />

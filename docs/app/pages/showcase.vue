@@ -4,7 +4,10 @@ if (!page.value) {
   throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
 }
 
-const appConfig = useAppConfig()
+/** The site behind a project, as its second line. */
+function hostname(url: string) {
+  return url.replace(/^https?:\/\//, '').replace(/^www\./, '').replace(/\/$/, '')
+}
 
 useSeoMeta({
   titleTemplate: '%s - Nuxt UI',
@@ -26,55 +29,52 @@ if (import.meta.server) {
 
 <template>
   <main v-if="page">
-    <UPageHero
-      :title="page.hero.title"
-      :description="page.hero.description"
-      :links="page.hero.links"
-      :ui="{ container: 'relative py-10 sm:py-16 lg:py-24' }"
-    >
-      <template #top>
-        <div class="absolute z-[-1] rounded-full bg-primary blur-[300px] size-60 sm:size-80 transform -translate-x-1/2 left-1/2 -translate-y-80" />
-      </template>
+    <PageHero v-bind="page.hero" />
 
-      <LazyStarsBg />
+    <UContainer class="max-w-[1180px] pt-12 pb-16">
+      <div class="flex items-baseline gap-3.5 mb-5">
+        <h2 class="text-xs font-medium uppercase tracking-widest text-muted whitespace-nowrap">
+          Selected projects
+        </h2>
 
-      <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-default inset-0 mx-4 sm:mx-6 lg:mx-8" />
-    </UPageHero>
+        <span class="flex-1 h-px bg-(--ui-border) mb-1" />
 
-    <UPageSection :ui="{ container: '!pt-0 relative' }">
-      <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-default inset-0 mx-4 sm:mx-6 lg:mx-8" />
+        <ULink
+          to="https://github.com/nuxt/ui/edit/v4/docs/content/showcase.yml"
+          target="_blank"
+          class="text-xs text-muted hover:text-highlighted transition-colors whitespace-nowrap"
+        >
+          Submit yours
+        </ULink>
+      </div>
 
-      <div class="border-l border-t border-default">
-        <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 items-start justify-center divide-y divide-x divide-default">
-          <li
-            v-for="item in page.items"
-            :key="item.name"
-            class="group relative flex items-center justify-center flex-1 size-full p-2 last:border-r last:border-b border-default overflow-hidden"
-          >
-            <NuxtLink class="inset-0 absolute" :to="item.url" target="_blank">
-              <span class="sr-only">Go to {{ item.name }}</span>
-            </NuxtLink>
-
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-4.5 gap-y-6">
+        <NuxtLink
+          v-for="item in page.items"
+          :key="item.name"
+          :to="item.url"
+          target="_blank"
+          class="group flex flex-col gap-3 focus-visible:outline-primary"
+        >
+          <div class="rounded-xl border border-default overflow-hidden bg-muted/40">
             <NuxtImg
               :src="`/assets/showcase/${item.name.toLowerCase().replace(/\s/g, '-')}.png`"
               :alt="`Screenshot of ${item.name}`"
               width="327"
               height="184"
-              :modifiers="{
-                position: 'top'
-              }"
-              class="aspect-video size-full opacity-75 group-hover:opacity-100 group-hover:scale-110 duration-200 transition-[scale,opacity] pointer-events-none"
+              :modifiers="{ position: 'top' }"
+              loading="lazy"
+              class="aspect-video w-full object-cover object-top group-hover:scale-[1.03] transition-transform duration-300"
             />
+          </div>
 
-            <div class="absolute flex items-center px-2.5 py-0.75 gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none bg-black/90 rounded-full">
-              <span class="text-sm text-white font-medium">
-                {{ item.name }}
-              </span>
-              <UIcon :name="appConfig.ui.icons.external" class="size-4 shrink-0 text-white" />
-            </div>
-          </li>
-        </ul>
+          <div class="flex items-center gap-2 min-w-0">
+            <span class="text-sm font-semibold tracking-tight text-highlighted truncate">{{ item.name }}</span>
+            <span class="text-xs text-muted truncate">{{ hostname(item.url) }}</span>
+            <UIcon name="i-lucide-arrow-up-right" class="ms-auto size-4 shrink-0 text-dimmed group-hover:text-primary transition-colors" />
+          </div>
+        </NuxtLink>
       </div>
-    </UPageSection>
+    </UContainer>
   </main>
 </template>

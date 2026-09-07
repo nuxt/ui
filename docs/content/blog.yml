@@ -4,6 +4,9 @@ seo:
 title: Blog
 description: Tutorials, guides, and insights to help you build beautiful applications with Nuxt UI.
 hero:
-  title: Nuxt [UI]{.text-primary} Blog
+  eyebrow: Tutorials and release notes
+  eyebrowIcon: i-lucide-book-open
+  lead: Nuxt UI
+  accent: Blog
   description: Tutorials, guides, and insights to help you build beautiful applications with Nuxt UI.
 navigation: false

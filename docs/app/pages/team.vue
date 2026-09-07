@@ -87,50 +87,7 @@ const people = computed(() => (github.value?.contributors ?? []).map((contributo
 
 <template>
   <main v-if="page">
-    <section class="relative overflow-hidden border-b border-default">
-      <!-- A dot grid fading out from the top center, with the primary glow behind the title. -->
-      <div class="absolute inset-0 pointer-events-none bg-[radial-gradient(var(--ui-border-accented)_1px,transparent_1px)] bg-[size:28px_28px] opacity-55 [mask-image:radial-gradient(70%_80%_at_50%_0%,black,transparent_70%)]" />
-      <div class="absolute -top-70 left-1/2 -translate-x-1/2 w-[1000px] h-[540px] pointer-events-none bg-radial from-primary/20 to-transparent to-70%" />
-
-      <UContainer class="relative max-w-7xl pt-20 sm:pt-25 flex flex-col gap-6">
-        <UBadge
-          color="neutral"
-          variant="outline"
-          size="lg"
-          icon="i-lucide-git-pull-request-arrow"
-          label="Built in the open · MIT licensed"
-          class="self-start rounded-full bg-default font-medium text-muted"
-          :ui="{ leadingIcon: 'text-primary' }"
-        />
-
-        <h1 class="max-w-[900px] text-6xl sm:text-8xl lg:text-[112px] font-extrabold leading-[.92] tracking-tighter text-highlighted">
-          Meet the <span class="font-[family-name:Instrument_Serif] font-normal italic tracking-tight text-primary">Team</span>
-        </h1>
-
-        <p class="max-w-[520px] text-lg sm:text-[19px] leading-relaxed text-muted text-pretty">
-          {{ page.hero.description }}
-        </p>
-      </UContainer>
-
-      <UContainer class="relative max-w-7xl mt-16 sm:mt-22 pb-8 flex flex-wrap items-end gap-x-12 gap-y-8 lg:gap-x-16">
-        <NuxtLink
-          v-for="stat in stats"
-          :key="stat.label"
-          :to="stat.to"
-          target="_blank"
-          class="group flex flex-col gap-1.5 focus-visible:outline-primary"
-        >
-          <span class="text-4xl sm:text-5xl lg:text-[52px] font-bold leading-[.9] tracking-[-.045em] tabular-nums text-highlighted group-hover:text-primary transition-colors">
-            {{ stat.value }}
-          </span>
-          <span class="text-xs font-medium uppercase tracking-widest text-muted whitespace-nowrap">
-            {{ stat.label }}
-          </span>
-        </NuxtLink>
-
-        <span class="ms-auto text-xs text-muted whitespace-nowrap">From GitHub and npm</span>
-      </UContainer>
-    </section>
+    <PageHero v-bind="page.hero" :stats="stats" />
 
     <UContainer class="max-w-7xl pt-16 lg:pt-19">
       <div class="flex items-baseline gap-3.5 mb-1.5">
