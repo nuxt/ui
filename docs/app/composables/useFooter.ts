@@ -1,20 +1,23 @@
 export function useFooter() {
-  // The secondary destinations the header no longer carries (resources,
-  // releases, figma) live here, next to the ones it never did.
-  const links = [{
+  const route = useRoute()
+
+  const links = computed(() => [{
     label: 'Blog',
-    to: '/blog'
+    to: '/blog',
+    active: route.path.startsWith('/blog')
   }, {
     label: 'Community',
-    to: '/community'
+    to: '/community',
+    active: route.path.startsWith('/community')
   }, {
     label: 'Playground',
     to: '/play',
     target: '_blank'
   }, {
     label: 'Team',
-    to: '/team'
-  }]
+    to: '/team',
+    active: route.path.startsWith('/team')
+  }])
 
   return {
     links

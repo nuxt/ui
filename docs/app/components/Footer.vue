@@ -1,10 +1,17 @@
 <script setup lang="ts">
 const route = useRoute()
 const { links } = useFooter()
+const { framework } = useFrameworks()
+
+const icon = computed(() => {
+  if (framework.value === 'nuxt') return 'i-simple-icons-nuxtdotjs'
+  if (framework.value === 'vue') return 'i-simple-icons-vuedotjs'
+  return undefined
+})
 </script>
 
 <template>
-  <USeparator :icon="route.path === '/' ? undefined : 'i-simple-icons-nuxtdotjs'" class="h-px" />
+  <USeparator :icon="route.path === '/' ? undefined : icon" class="h-px" />
 
   <UFooter>
     <template #left>
