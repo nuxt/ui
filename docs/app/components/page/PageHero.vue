@@ -79,9 +79,11 @@ const ui = computed(() => ({
       <div aria-hidden="true" class="absolute inset-0 pointer-events-none bg-[radial-gradient(var(--ui-border-accented)_1px,transparent_1px)] bg-size-[28px_28px] opacity-50 mask-[linear-gradient(to_bottom,transparent,black_30%,black_70%,transparent)]" />
 
       <!-- The horizon: a glow rising from the bottom edge, under a hairline
-           that fades out at both ends. -->
-      <div aria-hidden="true" class="absolute inset-x-0 bottom-0 h-45 pointer-events-none bg-linear-to-t from-primary/15 to-transparent" />
-      <div aria-hidden="true" class="absolute inset-x-0 bottom-0 h-px pointer-events-none bg-[linear-gradient(to_right,transparent,var(--ui-primary)_30%,var(--ui-primary)_70%,transparent)]" />
+           that fades out at both ends. Both take their strength from the
+           primary's chroma (the `horizon` rule below), so a mono theme,
+           whose primary is black or white, gets a faint line and no wash. -->
+      <div aria-hidden="true" class="horizon absolute inset-x-0 bottom-0 h-45 pointer-events-none bg-linear-to-t from-(--horizon-glow) to-transparent" />
+      <div aria-hidden="true" class="horizon absolute inset-x-0 bottom-0 h-px pointer-events-none bg-[linear-gradient(to_right,transparent,var(--horizon-line)_30%,var(--horizon-line)_70%,transparent)]" />
 
       <!-- A few of the grid's dots light up in primary, under the same fade as the grid. -->
       <div aria-hidden="true" class="absolute inset-0 pointer-events-none mask-[linear-gradient(to_bottom,transparent,black_30%,black_70%,transparent)]">
@@ -119,6 +121,15 @@ const ui = computed(() => ({
 </template>
 
 <style scoped>
+/* A vivid primary has a chroma around 0.2 in oklch, black and white have
+   none: both alphas follow it from a floor, so a colored theme keeps about
+   the 15% wash it had and a mono theme gets a hint of one rather than a
+   gray band. */
+.horizon {
+  --horizon-glow: oklch(from var(--ui-primary) l c h / calc(0.06 + c * 0.45));
+  --horizon-line: oklch(from var(--ui-primary) l c h / calc(0.35 + c * 3));
+}
+
 .twinkle {
   animation: twinkle 3s ease-in-out infinite;
 }
