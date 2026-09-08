@@ -75,32 +75,48 @@ useSeoMeta({
 </script>
 
 <template>
-  <main v-if="page">
-    <PageHero v-bind="page.hero" :eyebrow="`What's new in v${version}`" :eyebrow-to="`/docs/releases/v${version}`" :stats="stats" />
+  <UMain v-if="page">
+    <PageHero
+      v-bind="page.hero"
+      :badge="{
+        label: `What's new in v${version}`,
+        trailingIcon: 'i-lucide-arrow-right',
+        to: `/docs/releases/v${version}`
+      }"
+    >
+      <template #bottom>
+        <PageStats :items="stats" v-bind="page.stats" />
+      </template>
+    </PageHero>
 
-    <UContainer as="section" class="pt-12 sm:pt-14 pb-16">
-      <PageSectionHeading title="Try every component live">
-        <!-- every preset on one line: the chip carries it, the name rides the
-             tooltip so twelve of them stay beside the heading -->
-        <div class="flex gap-0.5 w-full sm:w-auto min-w-0 overflow-x-auto">
-          <UTooltip v-for="pill in pills" :key="pill.id" :text="pill.label" :delay-duration="0">
-            <UButton
-              :avatar="pill.avatar"
-              color="neutral"
-              variant="ghost"
-              :active="pill.active"
-              :aria-label="`${pill.label} theme`"
-              @click="pill.apply()"
-            />
-          </UTooltip>
-        </div>
-      </PageSectionHeading>
+    <UContainer>
+      <UPage>
+        <UPageBody class="space-y-0">
+          <PageSectionHeading title="Try components live">
+            <div class="flex gap-px w-full sm:w-auto min-w-0 overflow-x-auto">
+              <UTooltip v-for="pill in pills" :key="pill.id" :text="pill.label" :delay-duration="0">
+                <UButton
+                  :avatar="pill.avatar"
+                  color="neutral"
+                  variant="ghost"
+                  active-variant="soft"
+                  size="xl"
+                  :active="pill.active"
+                  :aria-label="`${pill.label} theme`"
+                  class="p-1.5"
+                  @click="pill.apply()"
+                />
+              </UTooltip>
+            </div>
+          </PageSectionHeading>
 
-      <div class="relative isolate">
-        <div aria-hidden="true" class="absolute inset-0 -z-10 rounded-xl border border-default bg-elevated/50 mask-b-from-25%" />
+          <div class="relative isolate">
+            <div aria-hidden="true" class="absolute inset-0 -z-10 rounded-xl border border-default bg-elevated/50 mask-b-from-25%" />
 
-        <Playground static />
-      </div>
+            <Playground static />
+          </div>
+        </UPageBody>
+      </UPage>
     </UContainer>
-  </main>
+  </UMain>
 </template>

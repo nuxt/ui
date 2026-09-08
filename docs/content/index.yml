@@ -2,19 +2,10 @@ title: The Intuitive Vue UI Library
 description: A Vue UI library with 125+ accessible components styled with Tailwind CSS. Works out of the box with Nuxt and any Vue app, try every component live and make the theme yours.
 navigation: false
 hero:
-  eyebrowIcon: i-lucide-arrow-right
   lead: The Intuitive
   accent: Vue UI Library
   breakLine: true
   description: A Vue UI library with 125+ accessible components styled with Tailwind CSS. Works out of the box with Nuxt and any Vue app, try every component live and make the theme yours.
-  note: Works with
-  marks:
-    - icon: i-simple-icons-nuxt
-      label: Nuxt
-      color: '#00dc82'
-    - icon: i-simple-icons-vite
-      label: Vite
-      color: '#646cff'
   links:
     - label: Get started
       to: /docs/getting-started/installation/nuxt
@@ -27,3 +18,12 @@ hero:
       variant: outline
       color: neutral
       trailingIcon: i-lucide-arrow-right
+stats:
+  note: Works with
+  marks:
+    - icon: i-simple-icons-nuxt
+      label: Nuxt
+      color: '#00dc82'
+    - icon: i-simple-icons-vite
+      label: Vite
+      color: '#646cff'

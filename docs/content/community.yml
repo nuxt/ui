@@ -2,8 +2,9 @@ title: Community
 description: Explore amazing projects built around Nuxt UI by the community.
 navigation: false
 hero:
-  eyebrow: Tools, presets and integrations
-  eyebrowIcon: i-lucide-puzzle
+  badge:
+    label: Tools, presets and integrations
+    icon: i-lucide-puzzle
   lead: Made by the
   accent: Community
   description: Explore amazing projects built around Nuxt UI by the community.

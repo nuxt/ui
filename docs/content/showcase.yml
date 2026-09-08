@@ -2,8 +2,9 @@ title: Showcase
 description: Check out some of the amazing projects built with Nuxt UI.
 navigation: false
 hero:
-  eyebrow: Live in production
-  eyebrowIcon: i-lucide-globe
+  badge:
+    label: Live in production
+    icon: i-lucide-globe
   lead: Built with
   accent: Nuxt UI
   description: Discover our selection of projects built with Nuxt UI.

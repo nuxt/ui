@@ -22,6 +22,21 @@ const Button = z.object({
   class: z.string().optional()
 })
 
+// UBadge's props, plus `to` for a badge that links somewhere
+const Badge = z.object({
+  label: z.string(),
+  icon: z.string().optional(),
+  avatar: Avatar.optional(),
+  leadingIcon: z.string().optional(),
+  trailingIcon: z.string().optional(),
+  to: z.string().optional(),
+  target: z.enum(['_blank', '_self']).optional(),
+  color: z.enum(['primary', 'neutral', 'success', 'warning', 'error', 'info']).optional(),
+  size: z.enum(['xs', 'sm', 'md', 'lg', 'xl']).optional(),
+  variant: z.enum(['solid', 'outline', 'subtle', 'soft']).optional(),
+  class: z.string().optional()
+})
+
 const PageFeature = z.object({
   title: z.string(),
   description: z.string().optional(),
@@ -31,15 +46,19 @@ const PageFeature = z.object({
 })
 
 const PageHero = z.object({
-  /** The title's two halves: body face, then the serif accent. */
+  /** The pill above the title: its label, or a badge plus `to` for a link. */
+  badge: z.union([z.string(), Badge]).optional(),
+  /** The title's two halves: the second one in primary. */
   lead: z.string(),
   accent: z.string(),
   /** Break between them rather than running them on one line. */
   breakLine: z.boolean().optional(),
   description: z.string(),
-  eyebrow: z.string().optional(),
-  eyebrowIcon: z.string().optional(),
-  eyebrowTo: z.string().optional(),
+  links: z.array(Button).optional()
+})
+
+/** The trailing side of the figures row under the hero (PageStats). */
+const PageStats = z.object({
   /** The caption opposite the figures, alone or leading the marks. */
   note: z.string().optional(),
   noteIcon: z.string().optional(),
@@ -48,8 +67,7 @@ const PageHero = z.object({
     icon: z.string(),
     label: z.string(),
     color: z.string().optional()
-  })).optional(),
-  links: z.array(Button).optional()
+  })).optional()
 })
 
 // `@nuxtjs/sitemap` only walks a collection whose schema declares this field,
@@ -60,6 +78,7 @@ const Page = z.object({
   title: z.string(),
   description: z.string(),
   hero: PageHero,
+  stats: PageStats.optional(),
   sitemap
 })
 
