@@ -77,6 +77,19 @@ describe('PinInput', () => {
 
       expect(wrapper.emitted()).toMatchObject({ blur: [[{ type: 'focusout' }]] })
     })
+
+    test('focus event when focus enters the group, not between pins', async () => {
+      const wrapper = mount(PinInput)
+      const pins = wrapper.findAll('input[aria-label^="pin input"]')
+
+      pins[0]!.element.dispatchEvent(new FocusEvent('focusin', { bubbles: true, relatedTarget: null }))
+      await flushPromises()
+      expect(wrapper.emitted()).toMatchObject({ focus: [[{ type: 'focusin' }]] })
+
+      pins[1]!.element.dispatchEvent(new FocusEvent('focusin', { bubbles: true, relatedTarget: pins[0]!.element }))
+      await flushPromises()
+      expect(wrapper.emitted('focus')).toHaveLength(1)
+    })
   })
 
   describe('form integration', async () => {

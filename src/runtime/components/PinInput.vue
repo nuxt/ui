@@ -53,6 +53,7 @@ export interface PinInputProps<T extends PinInputType = 'text'> extends Pick<Pin
 export type PinInputEmits<T extends PinInputType = 'text'> = PinInputRootEmits<T> & {
   change: [event: Event]
   blur: [event: Event]
+  focus: [event: Event]
 }
 
 export interface PinInputSlots {
@@ -133,6 +134,7 @@ function onFocusIn(event: FocusEvent) {
     return
   }
 
+  emits('focus', event)
   emitFormFocus()
 }
 
