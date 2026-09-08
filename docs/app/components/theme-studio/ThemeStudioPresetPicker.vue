@@ -227,7 +227,7 @@ watch(open, (isOpen) => {
   <UDropdownMenu
     v-model:open="open"
     :items="items"
-    :content="{ align: 'end', alignOffset: -4, onInteractOutside: keepPanels }"
+    :content="{ align: 'start', alignOffset: -4, onInteractOutside: keepPanels }"
     :ui="{ content: 'w-56 min-w-36 max-h-98', label: 'text-xs' }"
   >
     <UTooltip :text="name" ignore-non-keyboard-focus>
