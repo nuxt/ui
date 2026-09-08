@@ -80,7 +80,7 @@ const headingItems = [1, 2, 3, 4].map(level => ({
   icon: `i-lucide-heading-${level}`
 }))
 
-const blockItems = [{
+const blockItems = computed(() => [{
   kind: 'bulletList' as const,
   label: 'Bullet List',
   icon: studioIcons.list
@@ -96,7 +96,7 @@ const blockItems = [{
   kind: 'codeBlock' as const,
   label: 'Code Block',
   icon: 'i-lucide-square-code'
-}]
+}])
 
 const markItems = [{
   kind: 'mark' as const,
@@ -125,7 +125,7 @@ const markItems = [{
   tooltip: { text: 'Code' }
 }]
 
-const toolbarItems: EditorToolbarItem[][] = [[{
+const toolbarItems = computed<EditorToolbarItem[][]>(() => [[{
   kind: 'undo',
   icon: studioIcons.undo,
   tooltip: { text: 'Undo' }
@@ -138,9 +138,9 @@ const toolbarItems: EditorToolbarItem[][] = [[{
   tooltip: { text: 'Headings' },
   content: { align: 'start' },
   items: headingItems
-}, ...blockItems.map(({ label, ...item }) => ({ ...item, tooltip: { text: label } }))], markItems]
+}, ...blockItems.value.map(({ label, ...item }) => ({ ...item, tooltip: { text: label } }))], markItems])
 
-const bubbleToolbarItems: EditorToolbarItem[][] = [[{
+const bubbleToolbarItems = computed<EditorToolbarItem[][]>(() => [[{
   label: 'Turn into',
   trailingIcon: appConfig.ui.icons.chevronDown,
   activeColor: 'neutral',
@@ -155,28 +155,28 @@ const bubbleToolbarItems: EditorToolbarItem[][] = [[{
     kind: 'paragraph',
     label: 'Paragraph',
     icon: studioIcons.text
-  }, ...headingItems, ...blockItems]
+  }, ...headingItems, ...blockItems.value]
 }], markItems, [{
   slot: 'link' as const,
   icon: studioIcons.link,
   tooltip: { text: 'Link' }
-}]]
+}]])
 
-const suggestionItems: EditorSuggestionMenuItem[][] = [[{
+const suggestionItems = computed<EditorSuggestionMenuItem[][]>(() => [[{
   type: 'label',
   label: 'Style'
 }, {
   kind: 'paragraph',
   label: 'Paragraph',
   icon: studioIcons.text
-}, ...headingItems, ...blockItems], [{
+}, ...headingItems, ...blockItems.value], [{
   type: 'label',
   label: 'Insert'
 }, {
   kind: 'horizontalRule',
   label: 'Horizontal Rule',
   icon: 'i-lucide-separator-horizontal'
-}]]
+}]])
 
 const mentionItems: EditorMentionMenuItem[] = [
   { label: 'benjamincanac', avatar: { src: 'https://github.com/benjamincanac.png', loading: 'lazy' as const } },
@@ -215,7 +215,7 @@ function dragHandleItems(editor: Editor): DropdownMenuItem[][] {
   }, {
     label: 'Turn into',
     icon: 'i-lucide-repeat-2',
-    children: [{ kind: 'paragraph', label: 'Paragraph', icon: studioIcons.text }, ...headingItems, ...blockItems]
+    children: [{ kind: 'paragraph', label: 'Paragraph', icon: studioIcons.text }, ...headingItems, ...blockItems.value]
   }], [{
     kind: 'duplicate',
     pos,

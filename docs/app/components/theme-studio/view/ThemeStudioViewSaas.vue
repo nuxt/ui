@@ -11,7 +11,7 @@ const navItems: NavigationMenuItem[] = [
   { label: 'Changelog' }
 ]
 
-const heroLinks = [{
+const heroLinks = computed(() => [{
   label: 'Get started',
   trailingIcon: appConfig.ui.icons.arrowRight,
   size: 'xl' as const
@@ -21,9 +21,9 @@ const heroLinks = [{
   size: 'xl' as const,
   color: 'neutral' as const,
   variant: 'subtle' as const
-}]
+}])
 
-const sections = [{
+const sections = computed(() => [{
   title: 'Powered by Nuxt UI Components',
   description: 'Access a complete component library with beautifully styled, accessible and customizable Vue components. Everything you need to build professional SaaS applications.',
   reverse: false,
@@ -57,9 +57,9 @@ const sections = [{
     description: 'Built-in i18n support for 50+ languages with RTL/LTR layouts and font optimization.',
     icon: studioIcons.globe
   }]
-}]
+}])
 
-const features = [{
+const features = computed(() => [{
   title: 'Beautiful design system',
   description: 'Semantic color aliases, comprehensive design tokens and Tailwind Variants for consistent styling.',
   icon: studioIcons.palette
@@ -83,7 +83,7 @@ const features = [{
   title: 'Infinitely customizable',
   description: 'Override any style with the ui prop, customize globally with AppConfig, or use Tailwind classes directly.',
   icon: studioIcons.settings
-}]
+}])
 
 // The template's pricing page: three plans over a billing cycle toggle, no
 // badge, and Standard scaled up. Prices and feature lists are content/2.pricing.yml.
@@ -159,14 +159,14 @@ const testimonials = [{
   user: { name: 'Lisa Patel', description: 'CEO at AutoScale' }
 }]
 
-const ctaLinks = [{
+const ctaLinks = computed(() => [{
   label: 'Start building',
   trailingIcon: appConfig.ui.icons.arrowRight
 }, {
   label: 'View on GitHub',
   icon: 'i-simple-icons-github',
   variant: 'subtle' as const
-}]
+}])
 
 const footerColumns = [{
   label: 'Resources',

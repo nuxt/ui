@@ -11,7 +11,7 @@ import shiki from '@comark/vue/plugins/shiki'
 const appConfig = useAppConfig()
 const studioIcons = useStudioIcons()
 
-const introLinks = [{
+const introLinks = computed(() => [{
   label: 'Documentation',
   icon: studioIcons.bookOpen,
   color: 'neutral' as const,
@@ -23,7 +23,7 @@ const introLinks = [{
   color: 'neutral' as const,
   variant: 'ghost' as const,
   size: 'md' as const
-}]
+}])
 
 /**
  * Invented releases in the shape the template fetches from GitHub: a tag, a

@@ -51,21 +51,21 @@ function newChat() {
   input.value = ''
 }
 
-const menuItems: NavigationMenuItem[] = [
+const menuItems = computed<NavigationMenuItem[]>(() => [
   { label: 'New chat', icon: appConfig.ui.icons.plus, kbds: ['meta', 'o'], onSelect: () => newChat() },
   { label: 'Search', icon: appConfig.ui.icons.search, kbds: ['meta', 'k'] }
-]
+])
 
 // The per-chat menu, on the sidebar rows and behind the navbar title.
-const chatActions: DropdownMenuItem[] = [
+const chatActions = computed<DropdownMenuItem[]>(() => [
   { label: 'Rename', icon: studioIcons.pencil },
   { label: 'Delete', icon: studioIcons.trash, color: 'error' }
-]
+])
 
-const userItems: DropdownMenuItem[][] = [
+const userItems = computed<DropdownMenuItem[][]>(() => [
   [{ label: 'Benjamin Canac', avatar: { src: 'https://github.com/benjamincanac.png', alt: 'Benjamin Canac' }, type: 'label' }],
   [{ label: 'Settings', icon: studioIcons.settings }, { label: 'Log out', icon: studioIcons.logout }]
-]
+])
 
 const historyItems: NavigationMenuItem[] = [
   { label: 'Today', type: 'label' },
