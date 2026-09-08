@@ -95,6 +95,8 @@ export default defineNuxtConfig({
     // v4 redirects - default root pages
     '/docs': { redirect: '/docs/getting-started', prerender: false },
     '/docs/getting-started/migration': { redirect: '/docs/getting-started/migration/v4', prerender: false },
+    // the v2 to v3 guide lives with the v3 docs now
+    '/docs/getting-started/migration/v3': { redirect: 'https://ui3.nuxt.com/getting-started/migration', prerender: false },
     '/docs/getting-started/theme': { redirect: '/docs/getting-started/theme/design-system', prerender: false },
     '/docs/getting-started/integrations': { redirect: '/docs/getting-started/integrations/icons', prerender: false },
     '/docs/getting-started/ai': { redirect: '/docs/getting-started/ai/mcp', prerender: false },
