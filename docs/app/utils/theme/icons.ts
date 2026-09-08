@@ -397,7 +397,7 @@ export function iconSetSamples(setName: string): string[] {
 
 /**
  * Every glyph the studio renders outside the 43 semantic keys: its own chrome
- * (toolbar, preset picker), the view switcher and the demo content.
+ * (toolbar, preset picker, Ask AI panel), the view switcher and the demo content.
  * Lucide is the default, `studioIconOverrides` swaps in a pack's own glyph
  * where it has one. Kept out of `themeIcons` on purpose, none of this rides
  * the export's icon config. Import and the group-picker chevron reuse the
@@ -418,6 +418,10 @@ export const studioIcons = {
   dice: 'i-lucide-dices',
   templates: 'i-lucide-layout-template',
   layers: 'i-lucide-layers',
+  // the Ask AI panel: its close, clear and thinking glyphs
+  panelRightClose: 'i-lucide-panel-right-close',
+  clear: 'i-lucide-list-x',
+  brain: 'i-lucide-brain',
   help: 'i-lucide-circle-question-mark',
   brush: 'i-lucide-paintbrush',
   contrast: 'i-lucide-contrast',
@@ -535,7 +539,11 @@ export const studioIconOverrides: Partial<Record<ThemeIcons, Partial<Record<Stud
     shapes: 'i-bi-triangle',
     curve: 'i-bi-graph-up',
     proportions: 'i-bi-aspect-ratio',
-    layers: 'i-bi-layers'
+    layers: 'i-bi-layers',
+    // the Ask AI panel: its close, clear and thinking glyphs
+    panelRightClose: 'i-bi-arrow-bar-right',
+    clear: 'i-bi-eraser',
+    brain: 'i-bi-lightbulb'
   },
   heroicons: {
     undo: 'i-heroicons-arrow-uturn-left',
@@ -554,7 +562,11 @@ export const studioIconOverrides: Partial<Record<ThemeIcons, Partial<Record<Stud
     shapes: 'i-heroicons-squares-2x2',
     curve: 'i-heroicons-chart-bar',
     proportions: 'i-heroicons-rectangle-group',
-    layers: 'i-heroicons-square-3-stack-3d'
+    layers: 'i-heroicons-square-3-stack-3d',
+    // the Ask AI panel: its close, clear and thinking glyphs
+    panelRightClose: 'i-heroicons-chevron-right',
+    clear: 'i-heroicons-x-circle',
+    brain: 'i-heroicons-light-bulb'
   },
   iconoir: {
     undo: 'i-iconoir-undo',
@@ -573,7 +585,11 @@ export const studioIconOverrides: Partial<Record<ThemeIcons, Partial<Record<Stud
     shapes: 'i-iconoir-triangle',
     curve: 'i-iconoir-graph-up',
     proportions: 'i-iconoir-frame',
-    layers: 'i-iconoir-multiple-pages'
+    layers: 'i-iconoir-multiple-pages',
+    // the Ask AI panel: its close, clear and thinking glyphs
+    panelRightClose: 'i-iconoir-sidebar-expand',
+    clear: 'i-iconoir-erase',
+    brain: 'i-iconoir-brain'
   },
   material: {
     undo: 'i-material-symbols-undo',
@@ -592,7 +608,11 @@ export const studioIconOverrides: Partial<Record<ThemeIcons, Partial<Record<Stud
     shapes: 'i-material-symbols-shapes-outline',
     curve: 'i-material-symbols-timeline-rounded',
     proportions: 'i-material-symbols-aspect-ratio-outline-rounded',
-    layers: 'i-material-symbols-layers-outline-rounded'
+    layers: 'i-material-symbols-layers-outline-rounded',
+    // the Ask AI panel: its close, clear and thinking glyphs
+    panelRightClose: 'i-material-symbols-right-panel-close-outline-rounded',
+    clear: 'i-material-symbols-playlist-remove-rounded',
+    brain: 'i-material-symbols-neurology-outline-rounded'
   },
   phosphor: {
     undo: 'i-ph-arrow-arc-left',
@@ -611,7 +631,11 @@ export const studioIconOverrides: Partial<Record<ThemeIcons, Partial<Record<Stud
     shapes: 'i-ph-shapes',
     curve: 'i-ph-chart-line',
     proportions: 'i-ph-rectangle',
-    layers: 'i-ph-stack'
+    layers: 'i-ph-stack',
+    // the Ask AI panel: its close, clear and thinking glyphs
+    panelRightClose: 'i-ph-caret-right',
+    clear: 'i-ph-eraser',
+    brain: 'i-ph-brain'
   },
   remix: {
     undo: 'i-ri-arrow-go-back-line',
@@ -630,7 +654,11 @@ export const studioIconOverrides: Partial<Record<ThemeIcons, Partial<Record<Stud
     shapes: 'i-ri-shape-line',
     curve: 'i-ri-line-chart-line',
     proportions: 'i-ri-aspect-ratio-line',
-    layers: 'i-ri-stack-line'
+    layers: 'i-ri-stack-line',
+    // the Ask AI panel: its close, clear and thinking glyphs
+    panelRightClose: 'i-ri-sidebar-unfold-line',
+    clear: 'i-ri-eraser-line',
+    brain: 'i-ri-brain-line'
   },
   tabler: {
     undo: 'i-tabler-arrow-back-up',
@@ -649,7 +677,11 @@ export const studioIconOverrides: Partial<Record<ThemeIcons, Partial<Record<Stud
     shapes: 'i-tabler-shape',
     curve: 'i-tabler-chart-line',
     proportions: 'i-tabler-aspect-ratio',
-    layers: 'i-tabler-stack-2'
+    layers: 'i-tabler-stack-2',
+    // the Ask AI panel: its close, clear and thinking glyphs
+    panelRightClose: 'i-tabler-layout-sidebar-right-collapse',
+    clear: 'i-tabler-clear-all',
+    brain: 'i-tabler-brain'
   },
   // Pixel has no settings cog (sliders stands in), no pie chart (generic
   // chart), no up-down chevron (sort), and no rocket/panels/newspaper/
@@ -675,6 +707,10 @@ export const studioIconOverrides: Partial<Record<ThemeIcons, Partial<Record<Stud
     curve: 'i-pixelarticons-chart-line',
     proportions: 'i-pixelarticons-aspect-ratio',
     layers: 'i-pixelarticons-blocks',
+    // the Ask AI panel: its close, clear and thinking glyphs
+    panelRightClose: 'i-pixelarticons-chevron-right',
+    clear: 'i-pixelarticons-notes-delete',
+    brain: 'i-pixelarticons-lightbulb',
     grid: 'i-pixelarticons-card-stack',
     dashboard: 'i-pixelarticons-dashboard',
     chat: 'i-pixelarticons-message',

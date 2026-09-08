@@ -278,7 +278,7 @@ function clearMessages() {
 
       <UTooltip v-if="canClear" text="Clear messages">
         <UButton
-          icon="i-lucide-list-x"
+          :icon="studioIcons.clear"
           color="neutral"
           variant="ghost"
           @click="clearMessages"
@@ -289,7 +289,7 @@ function clearMessages() {
     <template #close>
       <UTooltip text="Close" :kbds="['meta', 'i']">
         <UButton
-          icon="i-lucide-panel-right-close"
+          :icon="studioIcons.panelRightClose"
           color="neutral"
           variant="ghost"
           aria-label="Close"
@@ -334,7 +334,7 @@ function clearMessages() {
         :user="{ ui: { container: 'max-w-full' } }"
       >
         <template #indicator>
-          <UChatTool icon="i-lucide-brain" text="Thinking..." streaming />
+          <UChatTool :icon="studioIcons.brain" text="Thinking..." streaming />
         </template>
 
         <template #content="{ message }">
@@ -343,7 +343,7 @@ function clearMessages() {
               v-if="isReasoningUIPart(part)"
               :text="part.text"
               :streaming="isPartStreaming(part)"
-              icon="i-lucide-brain"
+              :icon="studioIcons.brain"
             >
               <ChatMarkdown
                 :value="part.text"
