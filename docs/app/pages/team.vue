@@ -27,6 +27,7 @@ const [{ data: module }, { data: github }] = await Promise.all([
 ])
 
 const studioIcons = useStudioIcons()
+const appConfig = useAppConfig()
 
 const { format } = Intl.NumberFormat('en')
 const { format: formatCompact } = Intl.NumberFormat('en', { notation: 'compact' })
@@ -93,7 +94,7 @@ const people = computed(() => (github.value?.contributors ?? []).map((contributo
 
     <UContainer>
       <UPage>
-        <UPageBody>
+        <UPageBody class="space-y-24">
           <section>
             <PageSectionHeading title="Everyone who ships it" :meta="`${people.length} people · by contributions`" />
 
@@ -101,7 +102,7 @@ const people = computed(() => (github.value?.contributors ?? []).map((contributo
               <li
                 v-for="person in people"
                 :key="person.username"
-                class="flex items-center gap-4 sm:gap-6 py-4 sm:py-5"
+                class="flex items-center gap-4 sm:gap-6 py-4 first:pt-0 last:pb-0"
               >
                 <span class="hidden sm:block w-5.5 shrink-0 font-mono text-xs text-muted">{{ person.rank }}</span>
 
@@ -136,15 +137,7 @@ const people = computed(() => (github.value?.contributors ?? []).map((contributo
                     square
                     class="text-muted hover:text-highlighted"
                   />
-                </div>
 
-                <div class="ms-auto flex items-baseline gap-2 shrink-0">
-                  <span class="text-lg sm:text-xl font-semibold leading-none tracking-tight tabular-nums text-highlighted">{{ format(person.contributions) }}</span>
-                  <span class="text-xs text-muted whitespace-nowrap">contributions</span>
-                </div>
-
-                <!-- The slot is reserved even without a listing so the counts line up. -->
-                <div class="hidden sm:flex justify-end w-24 shrink-0">
                   <UButton
                     v-if="person.sponsorsListing"
                     :to="person.sponsorsListing"
@@ -154,28 +147,22 @@ const people = computed(() => (github.value?.contributors ?? []).map((contributo
                     size="sm"
                     :icon="studioIcons.heart"
                     label="Sponsor"
+                    class="ms-1"
+                    square
                     :ui="{ leadingIcon: 'text-pink-500' }"
                   />
                 </div>
+
+                <div class="ms-auto flex items-baseline gap-1 shrink-0">
+                  <span class="text-base font-semibold leading-none tracking-tight tabular-nums text-highlighted">{{ format(person.contributions) }}</span>
+                  <span class="text-xs text-muted whitespace-nowrap">contributions</span>
+                </div>
               </li>
             </ul>
-
-            <div class="flex justify-center pt-8">
-              <UButton
-                :label="`See all ${total} contributors`"
-                trailing-icon="i-lucide-arrow-right"
-                to="https://github.com/nuxt/ui/graphs/contributors"
-                target="_blank"
-                color="neutral"
-                variant="outline"
-                size="lg"
-                :ui="{ trailingIcon: 'text-dimmed' }"
-              />
-            </div>
           </section>
 
           <section>
-            <div class="relative overflow-hidden rounded-2xl border border-default bg-linear-to-b from-(--ui-bg) to-(--ui-bg-elevated)/60 px-8 py-10 sm:px-13 sm:py-12 flex flex-col lg:flex-row lg:items-center gap-8 lg:gap-10">
+            <div class="relative overflow-hidden rounded-2xl border border-default bg-linear-to-b from-default to-(--ui-bg-elevated)/60 px-8 py-10 sm:px-13 sm:py-12 flex flex-col lg:flex-row lg:items-center gap-8 lg:gap-10">
               <div class="absolute inset-0 pointer-events-none bg-[radial-gradient(var(--ui-border-accented)_1px,transparent_1px)] bg-[size:26px_26px] opacity-50 [mask-image:radial-gradient(80%_120%_at_90%_50%,black,transparent_70%)]" />
 
               <div class="relative flex flex-col gap-2">
@@ -190,20 +177,21 @@ const people = computed(() => (github.value?.contributors ?? []).map((contributo
               <div class="relative lg:ms-auto flex flex-wrap gap-2.5 shrink-0">
                 <UButton
                   size="lg"
-                  icon="i-simple-icons-github"
-                  label="Contribute"
-                  to="https://github.com/nuxt/ui"
+                  color="neutral"
+                  variant="outline"
+                  label="See all contributors"
+                  :trailing-icon="appConfig.ui.icons.arrowRight"
+                  to="https://github.com/nuxt/ui/graphs/contributors"
                   target="_blank"
+                  :ui="{ trailingIcon: 'text-dimmed' }"
                 />
                 <UButton
                   size="lg"
                   color="neutral"
-                  variant="outline"
-                  :icon="studioIcons.heart"
-                  label="Become a sponsor"
-                  to="https://github.com/sponsors/benjamincanac"
+                  icon="i-simple-icons-github"
+                  label="Contribute"
+                  to="https://github.com/nuxt/ui"
                   target="_blank"
-                  :ui="{ leadingIcon: 'text-pink-500' }"
                 />
               </div>
             </div>

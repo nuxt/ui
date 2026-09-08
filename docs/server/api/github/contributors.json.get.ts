@@ -20,7 +20,7 @@ export interface Contributors {
 }
 
 /** How many contributors the page profiles, the rest are a link away on GitHub. */
-const LIMIT = 12
+const LIMIT = 24
 
 const REPO = { owner: 'nuxt', repo: 'ui' }
 
