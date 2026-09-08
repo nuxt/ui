@@ -7,7 +7,6 @@ const { copy } = useClipboard()
 
 const studioIcons = useStudioIcons()
 
-// computed: the pack is read after mount, a plain array would freeze on Lucide
 const items = computed(() => [
   [{
     label: 'Copy logo as SVG',

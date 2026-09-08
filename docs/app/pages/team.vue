@@ -50,7 +50,6 @@ const stats = computed(() => [{
   to: 'https://github.com/nuxt/ui/graphs/contributors'
 }])
 
-// computed: the pack is read after mount, a plain object would freeze on Lucide
 const socialIcons = computed<Record<string, string>>(() => ({
   twitter: 'i-simple-icons-x',
   bluesky: 'i-simple-icons-bluesky',

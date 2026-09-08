@@ -5,7 +5,7 @@ const toast = useToast()
 const appConfig = useAppConfig()
 const studioIcons = useStudioIcons()
 
-const items: DropdownMenuItem[][] = [
+const items = computed<DropdownMenuItem[][]>(() => [
   [
     { label: 'View report', icon: appConfig.ui.icons.eye, onSelect: () => toast.add({ title: 'View report' }) },
     { label: 'Export as CSV', icon: studioIcons.download, onSelect: () => toast.add({ title: 'Exporting…' }) },
@@ -14,7 +14,7 @@ const items: DropdownMenuItem[][] = [
   [
     { label: 'Delete', icon: studioIcons.trash, color: 'error', onSelect: () => toast.add({ title: 'Deleted', color: 'error' }) }
   ]
-]
+])
 
 const progress = ref(75)
 </script>
