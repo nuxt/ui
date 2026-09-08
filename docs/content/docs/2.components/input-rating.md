@@ -130,8 +130,8 @@ Use the `empty-icon` prop to customize the icon used for empty stars. If not pro
 ignore:
   - defaultValue
 props:
-  emptyIcon: 'i-ph-star'
-  icon: 'i-ph-star-fill'
+  emptyIcon: 'i-lucide-circle'
+  icon: 'i-lucide-circle-check'
   defaultValue: 3
 ---
 ::

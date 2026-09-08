@@ -31,8 +31,8 @@ Use the `app.config.ts` to customize the icon with the `ui.icons` property:
 export default defineAppConfig({
   ui: {
     icons: {
-      light: 'i-ph-sun',
-      dark: 'i-ph-moon'
+      light: 'i-lucide-sun-medium',
+      dark: 'i-lucide-moon-star'
     }
   }
 })
@@ -55,8 +55,8 @@ export default defineConfig({
     ui({
       ui: {
         icons: {
-          light: 'i-ph-sun',
-          dark: 'i-ph-moon'
+          light: 'i-lucide-sun-medium',
+          dark: 'i-lucide-moon-star'
         }
       }
     })
