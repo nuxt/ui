@@ -74,7 +74,7 @@ import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFormField } from '../composables/useFormField'
-import { looseToNumber } from '../utils'
+import { isEmpty, looseToNumber } from '../utils'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
@@ -135,13 +135,11 @@ function updateInput(value: string | null | undefined) {
   }
 
   // Only empty values are mapped, `0` is a value on its own with the `number` modifier
-  const isEmpty = value === '' || value === null || value === undefined
-
-  if (props.modelModifiers?.nullable && isEmpty) {
+  if (props.modelModifiers?.nullable && isEmpty(value)) {
     value = null
   }
 
-  if (props.modelModifiers?.optional && !props.modelModifiers?.nullable && value !== null && isEmpty) {
+  if (props.modelModifiers?.optional && !props.modelModifiers?.nullable && value !== null && isEmpty(value)) {
     value = undefined
   }
 
