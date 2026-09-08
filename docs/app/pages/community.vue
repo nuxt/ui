@@ -26,14 +26,24 @@ if (import.meta.server) {
   <main v-if="page">
     <PageHero v-bind="page.hero" />
 
-    <UContainer class="pt-12 pb-16">
+    <UContainer class="pt-12 sm:pt-14 pb-16">
+      <PageSectionHeading title="Projects and integrations">
+        <ULink
+          to="https://github.com/nuxt/ui/edit/v4/docs/content/community.yml"
+          target="_blank"
+          class="text-xs text-muted hover:text-highlighted transition-colors whitespace-nowrap"
+        >
+          Submit yours
+        </ULink>
+      </PageSectionHeading>
+
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         <NuxtLink
           v-for="item in page.items"
           :key="item.label"
           :to="item.to"
           target="_blank"
-          class="group flex flex-col gap-3 rounded-2xl border border-default p-5 hover:border-accented hover:shadow-lg hover:shadow-black/5 dark:hover:shadow-black/20 transition focus-visible:outline-primary"
+          class="group flex flex-col gap-3 rounded-xl border border-default p-5 hover:border-accented hover:bg-elevated/40 transition-colors focus-visible:outline-primary"
         >
           <UAvatar
             v-bind="item.avatar"
@@ -45,7 +55,7 @@ if (import.meta.server) {
 
           <span class="font-semibold tracking-tight text-highlighted">{{ item.label }}</span>
 
-          <p class="text-[13.5px] leading-relaxed text-muted text-pretty">
+          <p class="text-sm leading-relaxed text-muted text-pretty">
             {{ item.description }}
           </p>
 

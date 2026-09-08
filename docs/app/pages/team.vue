@@ -89,20 +89,16 @@ const people = computed(() => (github.value?.contributors ?? []).map((contributo
   <main v-if="page">
     <PageHero v-bind="page.hero" :stats="stats" />
 
-    <UContainer class="pt-16 lg:pt-19">
-      <div class="flex items-baseline gap-3.5 mb-1.5">
-        <h2 class="text-xs font-medium uppercase tracking-widest text-muted whitespace-nowrap">
-          Everyone who ships it
-        </h2>
-        <span class="flex-1 h-px bg-(--ui-border) mb-1" />
+    <UContainer class="pt-12 sm:pt-14">
+      <PageSectionHeading title="Everyone who ships it" class="mb-1">
         <span class="text-xs text-muted whitespace-nowrap">{{ people.length }} people · by contributions</span>
-      </div>
+      </PageSectionHeading>
 
-      <ul>
+      <ul class="divide-y divide-default">
         <li
           v-for="person in people"
           :key="person.username"
-          class="flex items-center gap-4 sm:gap-6 py-4 sm:py-5 px-2 sm:px-3 border-b border-default hover:bg-elevated/50 transition-colors"
+          class="flex items-center gap-4 sm:gap-6 py-4 sm:py-5"
         >
           <span class="hidden sm:block w-5.5 shrink-0 font-mono text-xs text-muted">{{ person.rank }}</span>
 
@@ -116,7 +112,7 @@ const people = computed(() => (github.value?.contributors ?? []).map((contributo
           />
 
           <div class="flex-1 md:flex-none md:w-72 min-w-0 flex flex-col gap-0.5">
-            <span class="text-lg sm:text-xl font-bold leading-tight tracking-tight text-highlighted truncate">{{ person.name }}</span>
+            <span class="text-base sm:text-lg font-semibold leading-tight tracking-tight text-highlighted truncate">{{ person.name }}</span>
             <span v-if="person.location" class="flex items-center gap-1.5 text-[13px] text-muted whitespace-nowrap">
               <UIcon name="i-lucide-map-pin" class="size-3 text-dimmed" />
               {{ person.location }}
@@ -140,7 +136,7 @@ const people = computed(() => (github.value?.contributors ?? []).map((contributo
           </div>
 
           <div class="ms-auto flex items-baseline gap-2 shrink-0">
-            <span class="text-lg sm:text-[22px] font-bold leading-none tracking-tight tabular-nums text-highlighted">{{ format(person.contributions) }}</span>
+            <span class="text-lg sm:text-xl font-semibold leading-none tracking-tight tabular-nums text-highlighted">{{ format(person.contributions) }}</span>
             <span class="text-xs text-muted whitespace-nowrap">contributions</span>
           </div>
 
@@ -155,14 +151,13 @@ const people = computed(() => (github.value?.contributors ?? []).map((contributo
               size="sm"
               :icon="studioIcons.heart"
               label="Sponsor"
-              class="rounded-[10px] hover:bg-pink-500/5 hover:ring-pink-500/30 hover:text-pink-600 dark:hover:text-pink-400"
               :ui="{ leadingIcon: 'text-pink-500' }"
             />
           </div>
         </li>
       </ul>
 
-      <div class="flex justify-center pt-6.5">
+      <div class="flex justify-center pt-8">
         <UButton
           :label="`See all ${total} contributors`"
           trailing-icon="i-lucide-arrow-right"
@@ -171,18 +166,17 @@ const people = computed(() => (github.value?.contributors ?? []).map((contributo
           color="neutral"
           variant="outline"
           size="lg"
-          class="rounded-[10px]"
           :ui="{ trailingIcon: 'text-dimmed' }"
         />
       </div>
     </UContainer>
 
-    <UContainer class="py-18 lg:pb-26">
-      <div class="relative overflow-hidden rounded-[22px] border border-default bg-linear-to-b from-(--ui-bg) to-(--ui-bg-elevated)/60 px-8 py-10 sm:px-13 sm:py-12 flex flex-col lg:flex-row lg:items-center gap-8 lg:gap-10">
+    <UContainer class="pt-12 sm:pt-14 pb-16">
+      <div class="relative overflow-hidden rounded-2xl border border-default bg-linear-to-b from-(--ui-bg) to-(--ui-bg-elevated)/60 px-8 py-10 sm:px-13 sm:py-12 flex flex-col lg:flex-row lg:items-center gap-8 lg:gap-10">
         <div class="absolute inset-0 pointer-events-none bg-[radial-gradient(var(--ui-border-accented)_1px,transparent_1px)] bg-[size:26px_26px] opacity-50 [mask-image:radial-gradient(80%_120%_at_90%_50%,black,transparent_70%)]" />
 
         <div class="relative flex flex-col gap-2">
-          <h2 class="text-2xl sm:text-3xl font-bold leading-tight tracking-tight text-highlighted">
+          <h2 class="text-2xl sm:text-3xl font-semibold leading-tight tracking-tight text-highlighted">
             {{ total }} people have shipped Nuxt UI
           </h2>
           <p class="text-[15px] text-muted">
@@ -197,7 +191,6 @@ const people = computed(() => (github.value?.contributors ?? []).map((contributo
             label="Contribute"
             to="https://github.com/nuxt/ui"
             target="_blank"
-            class="rounded-[11px]"
           />
           <UButton
             size="lg"
@@ -207,7 +200,6 @@ const people = computed(() => (github.value?.contributors ?? []).map((contributo
             label="Become a sponsor"
             to="https://github.com/sponsors/benjamincanac"
             target="_blank"
-            class="rounded-[11px]"
             :ui="{ leadingIcon: 'text-pink-500' }"
           />
         </div>

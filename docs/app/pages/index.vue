@@ -76,35 +76,29 @@ useSeoMeta({
 
 <template>
   <main v-if="page">
-    <PageHero v-bind="page.hero" :eyebrow="`Nuxt UI v${version} is out`" :stats="stats" />
+    <PageHero v-bind="page.hero" :eyebrow="`What's new in v${version}`" :stats="stats" />
 
     <UContainer as="section" class="pt-12 sm:pt-14 pb-16">
-      <div class="flex items-center gap-3.5 mb-4">
-        <h2 class="text-xs font-medium uppercase tracking-widest text-muted whitespace-nowrap">
-          Try every component live
-        </h2>
-
-        <span class="hidden sm:block flex-1 h-px bg-border" />
-
+      <PageSectionHeading title="Try every component live">
         <!-- every preset on one line: the chip carries it, the name rides the
              tooltip so twelve of them stay beside the heading -->
-        <div class="flex gap-0.5 min-w-0 overflow-x-auto">
+        <div class="flex gap-0.5 w-full sm:w-auto min-w-0 overflow-x-auto">
           <UTooltip v-for="pill in pills" :key="pill.id" :text="pill.label" :delay-duration="0">
             <UButton
               :avatar="pill.avatar"
               color="neutral"
-              :variant="pill.active ? 'subtle' : 'ghost'"
-              size="sm"
-              square
+              variant="ghost"
+              :active="pill.active"
               :aria-label="`${pill.label} theme`"
               @click="pill.apply()"
             />
           </UTooltip>
         </div>
-      </div>
+      </PageSectionHeading>
 
-      <!-- the wall keeps every tile, its last rows fading into the link below -->
-      <div class="relative isolate rounded-xl border border-default bg-elevated/30 overflow-hidden mask-b-from-90%">
+      <div class="relative isolate">
+        <div aria-hidden="true" class="absolute inset-0 -z-10 rounded-xl border border-default bg-elevated/50 mask-b-from-25%" />
+
         <Playground static />
       </div>
     </UContainer>

@@ -38,33 +38,39 @@ function formatDate(date: string) {
   <main v-if="page">
     <PageHero v-bind="page.hero" />
 
-    <UContainer class="pt-8 pb-16">
-      <ULink
-        v-for="post in posts"
-        :key="post.path"
-        :to="post.path"
-        class="group flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-7 py-6 px-3 border-b border-default hover:bg-elevated/40 transition-colors"
-      >
-        <span class="w-24 shrink-0 font-mono text-xs text-muted">{{ formatDate(post.date) }}</span>
+    <UContainer class="pt-12 sm:pt-14 pb-16">
+      <PageSectionHeading title="Latest posts" class="mb-1">
+        <span class="text-xs text-muted whitespace-nowrap">{{ posts?.length ?? 0 }} {{ posts?.length === 1 ? 'post' : 'posts' }}</span>
+      </PageSectionHeading>
 
-        <span class="flex flex-col gap-1 min-w-0">
-          <span class="text-[17px] font-semibold tracking-tight text-highlighted group-hover:text-primary transition-colors">{{ post.title }}</span>
-          <span class="text-sm leading-relaxed text-muted text-pretty line-clamp-2">{{ post.description }}</span>
-        </span>
+      <div class="divide-y divide-default">
+        <ULink
+          v-for="post in posts"
+          :key="post.path"
+          :to="post.path"
+          class="group flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-7 py-6"
+        >
+          <span class="w-24 shrink-0 font-mono text-xs text-muted">{{ formatDate(post.date) }}</span>
 
-        <span class="sm:ms-auto flex items-center gap-3 shrink-0">
-          <UAvatarGroup v-if="post.authors?.length" size="sm">
-            <UAvatar
-              v-for="author in post.authors.slice(0, 3)"
-              :key="author.name"
-              :src="author.avatar?.src"
-              :alt="`${author.name} avatar`"
-            />
-          </UAvatarGroup>
+          <span class="flex flex-col gap-1 min-w-0">
+            <span class="text-[17px] font-semibold tracking-tight text-highlighted group-hover:text-primary transition-colors">{{ post.title }}</span>
+            <span class="text-sm leading-relaxed text-muted text-pretty line-clamp-2">{{ post.description }}</span>
+          </span>
 
-          <UIcon :name="appConfig.ui.icons.chevronRight" class="size-4 text-dimmed group-hover:text-highlighted transition-colors" />
-        </span>
-      </ULink>
+          <span class="sm:ms-auto flex items-center gap-3 shrink-0">
+            <UAvatarGroup v-if="post.authors?.length" size="sm">
+              <UAvatar
+                v-for="author in post.authors.slice(0, 3)"
+                :key="author.name"
+                :src="author.avatar?.src"
+                :alt="`${author.name} avatar`"
+              />
+            </UAvatarGroup>
+
+            <UIcon :name="appConfig.ui.icons.chevronRight" class="size-4 text-dimmed group-hover:text-primary transition-colors" />
+          </span>
+        </ULink>
+      </div>
     </UContainer>
   </main>
 </template>

@@ -31,14 +31,8 @@ if (import.meta.server) {
   <main v-if="page">
     <PageHero v-bind="page.hero" />
 
-    <UContainer class="pt-12 pb-16">
-      <div class="flex items-baseline gap-3.5 mb-5">
-        <h2 class="text-xs font-medium uppercase tracking-widest text-muted whitespace-nowrap">
-          Selected projects
-        </h2>
-
-        <span class="flex-1 h-px bg-(--ui-border) mb-1" />
-
+    <UContainer class="pt-12 sm:pt-14 pb-16">
+      <PageSectionHeading title="Selected projects">
         <ULink
           to="https://github.com/nuxt/ui/edit/v4/docs/content/showcase.yml"
           target="_blank"
@@ -46,9 +40,9 @@ if (import.meta.server) {
         >
           Submit yours
         </ULink>
-      </div>
+      </PageSectionHeading>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-4.5 gap-y-6">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-6">
         <NuxtLink
           v-for="item in page.items"
           :key="item.name"

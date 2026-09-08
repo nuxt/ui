@@ -34,22 +34,20 @@ if (import.meta.server) {
   <main v-if="page">
     <PageHero v-bind="page.hero" />
 
-    <UContainer class="pt-10 pb-16">
-      <div class="flex flex-wrap items-center gap-x-3.5 gap-y-3">
+    <UContainer class="pt-12 sm:pt-14 pb-16">
+      <PageSectionHeading title="Starters" class="mb-1">
+        <span class="nuxt-only text-xs text-muted whitespace-nowrap">{{ counts.nuxt }} {{ counts.nuxt === 1 ? 'template' : 'templates' }}</span>
+        <span class="vue-only text-xs text-muted whitespace-nowrap">{{ counts.vue }} {{ counts.vue === 1 ? 'template' : 'templates' }}</span>
+
         <FrameworkTabs size="sm" class="w-40" />
+      </PageSectionHeading>
 
-        <span class="hidden sm:block flex-1 h-px bg-(--ui-border)" />
-
-        <span class="nuxt-only text-xs text-muted whitespace-nowrap">{{ counts.nuxt }} templates</span>
-        <span class="vue-only text-xs text-muted whitespace-nowrap">{{ counts.vue }} templates</span>
-      </div>
-
-      <div class="flex flex-col">
+      <div class="flex flex-col divide-y divide-default">
         <article
           v-for="(template, index) in page.items"
           :key="index"
           :class="`${template.framework}-only`"
-          class="flex flex-col sm:flex-row gap-5 lg:gap-9 py-7 border-b border-default"
+          class="flex flex-col sm:flex-row gap-5 lg:gap-9 py-7"
         >
           <UColorModeImage
             :light="`/assets/templates/${template.framework}/${template.title.toLowerCase()}-light.png`"
