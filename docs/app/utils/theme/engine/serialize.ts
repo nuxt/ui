@@ -1,7 +1,12 @@
 /**
  * The theme's wire format: `generateCSS`/`generateConfig` emit the minimal
- * `main.css` + `app.config.ts` pair for a doc.
+ * `main.css` + `app.config.ts` pair for a doc. `explicit` writes the headline
+ * settings (the semantic colors, the body font) even at their defaults, for
+ * a pane that shows the theme rather than a diff to paste.
  */
+export interface SerializeOptions {
+  explicit?: boolean
+}
 import type { ThemeDoc } from './types'
 import {
   DEFAULT_COLORS,
@@ -17,7 +22,7 @@ import { themeIcons } from '../icons'
 /* ======================================================== emit (export) == */
 
 /** Generate the minimal `main.css`, the doc only holds overrides, so everything present is emitted. */
-export function generateCSS(doc: ThemeDoc, framework: string = 'nuxt'): string {
+export function generateCSS(doc: ThemeDoc, framework: string = 'nuxt', { explicit = false }: SerializeOptions = {}): string {
   const lines = [
     '@import "tailwindcss";',
     '@import "@nuxt/ui";'
@@ -42,8 +47,8 @@ export function generateCSS(doc: ThemeDoc, framework: string = 'nuxt'): string {
   }
 
   const themeLines: string[] = []
-  if (doc.font?.sans && doc.font.sans !== THEME_DEFAULTS.font) {
-    themeLines.push(`  --font-sans: '${doc.font.sans}', sans-serif;`)
+  if (explicit || (doc.font?.sans && doc.font.sans !== THEME_DEFAULTS.font)) {
+    themeLines.push(`  --font-sans: '${doc.font?.sans ?? THEME_DEFAULTS.font}', sans-serif;`)
   }
   if (doc.font?.serif) themeLines.push(`  --font-serif: '${doc.font.serif}', serif;`)
   if (doc.font?.mono) themeLines.push(`  --font-mono: '${doc.font.mono}', monospace;`)
@@ -150,12 +155,13 @@ function toObjectSource(value: Record<string, any>): string {
 }
 
 /** The `app.config.ts` / `vite.config.ts` side of the export. */
-export function generateConfig(doc: ThemeDoc, framework: string = 'nuxt'): string {
+export function generateConfig(doc: ThemeDoc, framework: string = 'nuxt', { explicit = false }: SerializeOptions = {}): string {
   const config: Record<string, any> = {}
 
   const colorEntries = Object.entries(doc.colors || {}).filter(([key, value]) => value !== DEFAULT_COLORS[key as keyof typeof DEFAULT_COLORS])
-  if (colorEntries.length) {
-    config.ui = { colors: Object.fromEntries(colorEntries) }
+  const colors = explicit ? { ...DEFAULT_COLORS, ...doc.colors } : Object.fromEntries(colorEntries)
+  if (Object.keys(colors).length) {
+    config.ui = { colors }
   }
 
   if (doc.icons && doc.icons !== THEME_DEFAULTS.icons && Object.hasOwn(themeIcons, doc.icons)) {

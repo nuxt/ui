@@ -4,6 +4,7 @@ import type { FontPrefs } from '../utils/theme/storage'
 import { FONT_WEIGHT_DEFAULTS, FONTS, RADIUSES, NEUTRAL_COLORS, PRIMARY_COLORS } from '../utils/theme/studio'
 import { themeIcons, ICON_PACKS } from '../utils/theme/icons'
 import { cssVariableDefaults } from '../utils/theme/tokens'
+import type { SerializeOptions } from '../utils/theme/engine/serialize'
 import { SAFE_NAME, sanitizeCustomColors, sanitizeCSSVariables } from '../utils/theme/sanitize'
 // Tables only, never the engine barrel: this composable rides the entry
 // chunk on every page, and the barrel would drag presets, the palette math
@@ -329,14 +330,14 @@ export function useTheme() {
 
   // Pure generation, callers track 'Theme Exported' on the actual copy.
   // Async: the serializer (and its json5) only load when an export happens.
-  async function exportCSS(): Promise<string> {
+  async function exportCSS(options?: SerializeOptions): Promise<string> {
     const { generateCSS } = await import('../utils/theme/engine/serialize')
-    return generateCSS(currentDoc(), framework.value)
+    return generateCSS(currentDoc(), framework.value, options)
   }
 
-  async function exportConfig(): Promise<string> {
+  async function exportConfig(options?: SerializeOptions): Promise<string> {
     const { generateConfig } = await import('../utils/theme/engine/serialize')
-    return generateConfig(currentDoc(), framework.value)
+    return generateConfig(currentDoc(), framework.value, options)
   }
 
   function injectCustomColors(customColors: Record<string, Record<string, string>>) {

@@ -10,23 +10,6 @@ if (!page.value) {
 const { url } = useSiteConfig()
 const { version } = useRuntimeConfig().public
 
-const { data: module } = await useFetch('/api/module.json', { key: 'index-stats' })
-const { format } = Intl.NumberFormat('en', { notation: 'compact' })
-
-const stats = computed(() => [{
-  value: '125+',
-  label: 'components',
-  to: '/docs/components'
-}, {
-  value: `${format(module.value?.stats?.downloads ?? 0)}+`,
-  label: 'monthly downloads',
-  to: 'https://npm.chart.dev/@nuxt/ui'
-}, {
-  value: `${format(module.value?.stats?.stars ?? 0)}+`,
-  label: 'GitHub stars',
-  to: 'https://github.com/nuxt/ui'
-}])
-
 // A taste of the theme studio: the pills retheme the page in place, and the
 // wall below shows what that does to every component.
 const { presets, selectedPreset, applyPreset } = useThemeStudio()
@@ -84,9 +67,7 @@ useSeoMeta({
         to: `/docs/releases/v${version}`
       }"
     >
-      <template #bottom>
-        <PageStats :items="stats" v-bind="page.stats" />
-      </template>
+      <HomeThemeCode />
     </PageHero>
 
     <UContainer>
