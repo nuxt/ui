@@ -175,6 +175,7 @@ function getToolMessage(state: ToolState, toolName: string, input: Record<string
     'get-example': `${readVerb} ${upperName(input.exampleName || '')} example`,
     'getComponentTheme': `${readVerb} ${upperName(input.componentName || '')} theme`,
     'getThemeGuide': `${readVerb} theme guide`,
+    'searchFonts': `${searchVerb} fonts${input.category ? ` (${input.category})` : ''}${input.query ? ` for "${input.query}"` : ''}`,
     'applyTheme': `${applyVerb} theme changes`,
     // a preset carries its own display name; upperName is for camelCase
     // component ids and would mangle a hyphenated one
@@ -203,6 +204,7 @@ function getToolIcon(part: ToolPart): string {
     'get-example': appConfig.ui.icons.file,
     'getComponentTheme': appConfig.ui.icons.file,
     'getThemeGuide': studioIcons.palette,
+    'searchFonts': studioIcons.text,
     'applyTheme': studioIcons.palette,
     'applyPreset': studioIcons.palette,
     'resetTheme': studioIcons.reset

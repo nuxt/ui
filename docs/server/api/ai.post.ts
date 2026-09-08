@@ -10,6 +10,7 @@ import { cssVariableDefaults } from '../../app/utils/theme/tokens'
 // The presets file itself, not the engine barrel: its only import is a type,
 // so this costs nothing beyond the preset data.
 import { presets } from '../../app/utils/theme/engine/presets'
+import { FONTS } from '../../app/utils/theme/studio'
 
 const componentNames = Object.keys(theme)
 
@@ -149,6 +150,33 @@ const getComponentTheme = tool({
   }
 })
 
+// Google's own category names, the catalog route passes them through as is.
+const FONT_CATEGORIES = ['Sans Serif', 'Serif', 'Display', 'Handwriting', 'Monospace'] as const
+
+const searchFonts = tool({
+  description: `Browse fonts for \`applyTheme\`'s fontSans / fontSerif / fontMono. Returns the studio's curated shortlist (safe, proven faces) and the best matches from the full Google Fonts catalog (1900+ families, most popular first), each with its category. Call it when designing a theme whose personality the shortlist doesn't cover (editorial, playful, brutalist, retro, luxury...) and pick from the results rather than from memory. Filter by category (${FONT_CATEGORIES.join(', ')}) and/or search by name. Display and Handwriting faces suit headings (fontSerif) far better than body text.`,
+  inputSchema: z.object({
+    query: z.string().optional().describe('Part of a family name, e.g. "grotesk", "serif", "mono"'),
+    category: z.enum(FONT_CATEGORIES).optional().describe('Restrict to one Google Fonts category'),
+    limit: z.number().int().min(1).max(50).optional().describe('Matches to return, 20 by default')
+  }),
+  execute: async ({ query, category, limit = 20 }) => {
+    // the docs' own cached copy of the catalog, popularity-ordered
+    const catalog = await $fetch<Array<{ name: string, category: string }>>('/api/fonts.json')
+    const q = query?.trim().toLowerCase()
+    const matches = catalog
+      .filter(font => !category || font.category === category)
+      .filter(font => !q || font.name.toLowerCase().includes(q))
+      .slice(0, limit)
+
+    return {
+      curated: FONTS.map(font => ({ name: font.name, category: font.category })),
+      matches,
+      note: 'Any Google Font works in applyTheme; @nuxt/fonts loads it. Popularity order is a proxy for how well a face reads at body sizes.'
+    }
+  }
+})
+
 const getThemeGuide = tool({
   description: 'Get detailed instructions for applying live theme changes. Call this ONLY when you are about to use applyTheme (e.g. user says "make it blue", "create a dark theme"). Do NOT call for documentation questions about theming — search docs instead.',
   inputSchema: z.object({}),
@@ -279,6 +307,7 @@ For Nuxt, wrap in \`defineAppConfig({ ui: { ... } })\`. For Vue, pass as \`ui({ 
   - Serif (elegant/editorial): Playfair Display, Lora, Merriweather, Fraunces, Newsreader, Source Serif 4
   - Rounded (friendly/playful): Nunito, Quicksand, Varela Round
   - Monospace (techy/dev): JetBrains Mono, Fira Code, IBM Plex Mono, Geist Mono
+  For anything with a stronger personality (editorial, playful, brutalist, retro, luxury), call \`searchFonts\` and choose from the catalog rather than reusing the faces above: a distinctive type pairing is what makes a theme feel unique.
   ALWAYS set \`fontSans\` when creating a complete theme — don't leave the default unless it genuinely fits. Pairing a display \`fontSerif\` with a plain body is the highest-leverage type choice available.
 - Icons: lucide (default), bootstrap, heroicons, iconoir, material, phosphor, pixelarticons, remix or tabler for live preview. Any Iconify icon set works in the exported config. When suggesting a non-default icon set, include the FULL \`ui.icons\` mapping in the exported config and tell the user to install \`@iconify-json/{collection}\` (e.g. \`@iconify-json/ph\` for Phosphor). Required keys: ${Object.keys(themeIcons.phosphor).join(', ')}. Values use \`i-<set>-<name>\` format.
 
@@ -370,6 +399,7 @@ NEVER recommend \`appConfig.theme.*\` properties (like \`blackAsPrimary\`, \`rad
 const tools = {
   ...mcpToolsToAiTools(),
   getThemeGuide,
+  searchFonts,
   applyTheme,
   applyPreset,
   resetTheme,
