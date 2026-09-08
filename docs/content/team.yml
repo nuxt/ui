@@ -7,4 +7,5 @@ hero:
   lead: Meet the
   accent: Team
   description: The development of Nuxt UI is led by a community of developers from all over the world.
-  note: Updated weekly from GitHub
+  note: Updated weekly
+  noteIcon: i-simple-icons-github

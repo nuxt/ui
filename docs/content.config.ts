@@ -39,8 +39,15 @@ const PageHero = z.object({
   description: z.string(),
   eyebrow: z.string().optional(),
   eyebrowIcon: z.string().optional(),
+  /** The caption opposite the figures, alone or leading the marks. */
   note: z.string().optional(),
-  backdrop: z.enum(['horizon', 'halo', 'none']).optional(),
+  noteIcon: z.string().optional(),
+  /** The platforms behind the note: a logo in its own color with its name. */
+  marks: z.array(z.object({
+    icon: z.string(),
+    label: z.string(),
+    color: z.string().optional()
+  })).optional(),
   links: z.array(Button).optional()
 })
 
