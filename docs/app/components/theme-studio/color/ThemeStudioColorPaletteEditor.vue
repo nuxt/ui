@@ -527,7 +527,7 @@ function resetEffects() {
               </span>
 
               <div class="flex items-center">
-                <UTooltip text="Copy oklch">
+                <UTooltip text="Copy oklch" ignore-non-keyboard-focus>
                   <UButton
                     size="xs"
                     color="neutral"
@@ -540,7 +540,7 @@ function resetEffects() {
                   />
                 </UTooltip>
 
-                <UTooltip :text="swatchDetail.pinned ? 'Unpin colour' : 'Pin this colour exactly'">
+                <UTooltip :text="swatchDetail.pinned ? 'Unpin colour' : 'Pin this colour exactly'" ignore-non-keyboard-focus>
                   <UButton
                     size="xs"
                     color="neutral"
