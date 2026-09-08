@@ -1,6 +1,4 @@
 <script setup lang="ts">
-const appConfig = useAppConfig()
-
 const { data: page } = await useAsyncData('blog', () =>
   queryCollection('blog').first()
 )
@@ -28,49 +26,35 @@ if (import.meta.server) {
     description: page.value.description
   })
 }
-
-function formatDate(date: string) {
-  return new Date(date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })
-}
 </script>
 
 <template>
-  <main v-if="page">
+  <UMain v-if="page">
     <PageHero v-bind="page.hero" />
 
-    <UContainer class="pt-12 sm:pt-14 pb-16">
-      <PageSectionHeading title="Latest posts" class="mb-1">
-        <span class="text-xs text-muted whitespace-nowrap">{{ posts?.length ?? 0 }} {{ posts?.length === 1 ? 'post' : 'posts' }}</span>
-      </PageSectionHeading>
+    <UContainer>
+      <UPage>
+        <UPageBody class="space-y-0">
+          <PageSectionHeading title="Latest posts" :meta="`${posts?.length ?? 0} ${posts?.length === 1 ? 'post' : 'posts'}`" />
 
-      <div class="divide-y divide-default">
-        <ULink
-          v-for="post in posts"
-          :key="post.path"
-          :to="post.path"
-          class="group flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-7 py-6"
-        >
-          <span class="w-24 shrink-0 font-mono text-xs text-muted">{{ formatDate(post.date) }}</span>
-
-          <span class="flex flex-col gap-1 min-w-0">
-            <span class="text-[17px] font-semibold tracking-tight text-highlighted group-hover:text-primary transition-colors">{{ post.title }}</span>
-            <span class="text-sm leading-relaxed text-muted text-pretty line-clamp-2">{{ post.description }}</span>
-          </span>
-
-          <span class="sm:ms-auto flex items-center gap-3 shrink-0">
-            <UAvatarGroup v-if="post.authors?.length" size="sm">
-              <UAvatar
-                v-for="author in post.authors.slice(0, 3)"
-                :key="author.name"
-                :src="author.avatar?.src"
-                :alt="`${author.name} avatar`"
-              />
-            </UAvatarGroup>
-
-            <UIcon :name="appConfig.ui.icons.chevronRight" class="size-4 text-dimmed group-hover:text-primary transition-colors" />
-          </span>
-        </ULink>
-      </div>
+          <UBlogPosts orientation="vertical">
+            <UBlogPost
+              v-for="post in posts"
+              :key="post.path"
+              :to="post.path"
+              :title="post.title"
+              :description="post.description"
+              :image="post.image"
+              :date="post.date"
+              :badge="post.category"
+              :authors="post.authors?.map(author => ({ ...author, target: '_blank' }))"
+              orientation="horizontal"
+              variant="naked"
+              :ui="{ root: 'lg:grid-cols-[auto_1fr] lg:gap-x-9', header: 'lg:w-110 rounded-md border border-default shadow-none' }"
+            />
+          </UBlogPosts>
+        </UPageBody>
+      </UPage>
     </UContainer>
-  </main>
+  </UMain>
 </template>

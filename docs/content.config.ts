@@ -158,6 +158,7 @@ export const collections = {
     schema: z.object({
       image: z.string(),
       date: z.string(),
+      category: z.string().optional(),
       authors: z.array(z.object({
         name: z.string(),
         avatar: Avatar.optional(),
