@@ -501,7 +501,13 @@ export const studioIcons = {
   laptop: 'i-lucide-laptop',
   trees: 'i-lucide-trees',
   ferrisWheel: 'i-lucide-ferris-wheel',
-  waves: 'i-lucide-waves'
+  waves: 'i-lucide-waves',
+  landmark: 'i-lucide-landmark',
+  plug: 'i-lucide-plug',
+  presentation: 'i-lucide-presentation',
+  audioLines: 'i-lucide-audio-lines',
+  shieldCheck: 'i-lucide-shield-check',
+  arrowDownLeft: 'i-lucide-arrow-down-left'
 }
 
 export type StudioIcon = keyof typeof studioIcons
@@ -751,7 +757,13 @@ export const studioIconOverrides: Partial<Record<ThemeIcons, Partial<Record<Stud
     laptop: 'i-pixelarticons-laptop',
     trees: 'i-pixelarticons-tree-pine',
     ferrisWheel: 'i-pixelarticons-balloon',
-    waves: 'i-pixelarticons-waves'
+    waves: 'i-pixelarticons-waves',
+    landmark: 'i-pixelarticons-building',
+    plug: 'i-pixelarticons-plug',
+    presentation: 'i-pixelarticons-monitor',
+    audioLines: 'i-pixelarticons-volume-3',
+    shieldCheck: 'i-pixelarticons-shield',
+    arrowDownLeft: 'i-pixelarticons-corner-down-left'
   }
 }
 
