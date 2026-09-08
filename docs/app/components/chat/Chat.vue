@@ -35,6 +35,18 @@ const panelOpen = computed({
 
 let _skipSync = false
 const _themeApplied = new Set<string>()
+
+// The conversation is restored from a past session with its tool calls in
+// it. Those were applied back then and the theme they produced persists on
+// its own, so they count as seen from the start: otherwise the next answer's
+// stream would replay every one of them over whatever theme is on screen
+// now, a shared link's for one.
+for (const message of messages.value) {
+  for (const part of message.parts || []) {
+    if (isToolUIPart(part)) _themeApplied.add(part.toolCallId)
+  }
+}
+
 function processThemeToolCalls() {
   for (const message of chatMessages.value) {
     if (message.role !== 'assistant') continue
