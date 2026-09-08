@@ -291,7 +291,7 @@ function dragHandleItems(editor: Editor): DropdownMenuItem[][] {
               </template>
             </UButton>
 
-            <UButton :icon="studioIcons.github" color="neutral" variant="ghost" size="sm" aria-label="GitHub" />
+            <UButton icon="i-simple-icons-github" color="neutral" variant="ghost" size="sm" aria-label="GitHub" />
           </template>
         </UHeader>
 

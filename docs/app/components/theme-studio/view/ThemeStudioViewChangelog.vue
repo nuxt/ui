@@ -19,7 +19,7 @@ const introLinks = [{
   size: 'md' as const
 }, {
   label: 'GitHub',
-  icon: studioIcons.github,
+  icon: 'i-simple-icons-github',
   color: 'neutral' as const,
   variant: 'ghost' as const,
   size: 'md' as const

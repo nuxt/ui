@@ -3,7 +3,6 @@ import * as z from 'zod'
 import type { FormSubmitEvent, AuthFormField } from '@nuxt/ui'
 
 const toast = useToast()
-const studioIcons = useStudioIcons()
 
 const fields: AuthFormField[] = [{
   name: 'email',
@@ -27,7 +26,7 @@ const providers = [{
   }
 }, {
   label: 'GitHub',
-  icon: studioIcons.github,
+  icon: 'i-simple-icons-github',
   onClick: () => {
     toast.add({ title: 'GitHub', description: 'Login with GitHub' })
   }

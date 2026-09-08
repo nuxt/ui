@@ -17,7 +17,7 @@ const heroLinks = [{
   size: 'xl' as const
 }, {
   label: 'Use this template',
-  icon: studioIcons.github,
+  icon: 'i-simple-icons-github',
   size: 'xl' as const,
   color: 'neutral' as const,
   variant: 'subtle' as const
@@ -164,7 +164,7 @@ const ctaLinks = [{
   trailingIcon: appConfig.ui.icons.arrowRight
 }, {
   label: 'View on GitHub',
-  icon: studioIcons.github,
+  icon: 'i-simple-icons-github',
   variant: 'subtle' as const
 }]
 
@@ -524,7 +524,7 @@ onMounted(() => {
       </template>
 
       <template #right>
-        <UButton :icon="studioIcons.github" aria-label="GitHub" color="neutral" variant="ghost" />
+        <UButton icon="i-simple-icons-github" aria-label="GitHub" color="neutral" variant="ghost" />
         <UButton icon="i-simple-icons-x" aria-label="X" color="neutral" variant="ghost" />
       </template>
     </UFooter>

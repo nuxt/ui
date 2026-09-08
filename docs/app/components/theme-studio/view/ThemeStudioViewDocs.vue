@@ -226,7 +226,7 @@ export default defineAppConfig({
             <UIcon :name="appConfig.ui.icons.light" :class="ui.leadingIcon({ class: 'dark:hidden' })" />
           </template>
         </UButton>
-        <UButton :icon="studioIcons.github" aria-label="GitHub" color="neutral" variant="ghost" />
+        <UButton icon="i-simple-icons-github" aria-label="GitHub" color="neutral" variant="ghost" />
       </template>
     </UHeader>
 
@@ -328,7 +328,7 @@ export default defineAppConfig({
       <template #right>
         <UButton icon="i-simple-icons-discord" aria-label="Discord" color="neutral" variant="ghost" />
         <UButton icon="i-simple-icons-x" aria-label="X" color="neutral" variant="ghost" />
-        <UButton :icon="studioIcons.github" aria-label="GitHub" color="neutral" variant="ghost" />
+        <UButton icon="i-simple-icons-github" aria-label="GitHub" color="neutral" variant="ghost" />
       </template>
     </UFooter>
   </div>

@@ -61,7 +61,7 @@ const socialIcons = computed<Record<string, string>>(() => ({
   facebook: 'i-simple-icons-facebook',
   reddit: 'i-simple-icons-reddit',
   npm: 'i-simple-icons-npm',
-  github: studioIcons.github,
+  github: 'i-simple-icons-github',
   website: studioIcons.link
 }))
 

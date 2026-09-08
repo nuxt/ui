@@ -18,7 +18,7 @@ const navItems: NavigationMenuItem[] = [
 const socialLinks = [
   { 'icon': 'i-simple-icons-discord', 'aria-label': 'Discord' },
   { 'icon': 'i-simple-icons-x', 'aria-label': 'X' },
-  { 'icon': studioIcons.github, 'aria-label': 'GitHub' }
+  { 'icon': 'i-simple-icons-github', 'aria-label': 'GitHub' }
 ]
 
 // The template scrolls travel photos in a marquee; gradient polaroids stand in
@@ -189,7 +189,7 @@ onUnmounted(() => clearTimeout(appearTimeout))
 
         <template #links>
           <div class="flex items-center gap-2">
-            <UButton :icon="studioIcons.github" label="View Github" color="neutral" to="https://github.com/mikenewbon/" target="_blank" />
+            <UButton icon="i-simple-icons-github" label="View Github" color="neutral" to="https://github.com/mikenewbon/" target="_blank" />
             <UButton color="success" variant="ghost" class="gap-2" label="Always online">
               <template #leading>
                 <span class="relative flex size-2">
