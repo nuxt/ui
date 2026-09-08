@@ -18,12 +18,3 @@ hero:
       variant: outline
       color: neutral
       trailingIcon: i-lucide-arrow-right
-stats:
-  note: Works with
-  marks:
-    - icon: i-simple-icons-nuxt
-      label: Nuxt
-      color: '#00dc82'
-    - icon: i-simple-icons-vite
-      label: Vite
-      color: '#646cff'

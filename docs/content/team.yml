@@ -8,6 +8,3 @@ hero:
   lead: Meet the
   accent: Team
   description: Nuxt UI is built in the open by contributors from all over the world. Here is everyone who ships it, ranked by their contributions on GitHub.
-stats:
-  note: Updated weekly
-  noteIcon: i-simple-icons-github

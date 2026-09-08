@@ -42,19 +42,6 @@ const PageHero = z.object({
   links: z.array(Button).optional()
 })
 
-/** The trailing side of the figures row under the hero (PageStats). */
-const PageStats = z.object({
-  /** The caption opposite the figures, alone or leading the marks. */
-  note: z.string().optional(),
-  noteIcon: z.string().optional(),
-  /** The platforms behind the note: a logo in its own color with its name. */
-  marks: z.array(z.object({
-    icon: z.string(),
-    label: z.string(),
-    color: z.string().optional()
-  })).optional()
-})
-
 // `@nuxtjs/sitemap` only walks a collection whose schema declares this field,
 // and reads its per-page options (`lastmod`, `changefreq`, `priority`) off it.
 const sitemap = defineSitemapSchema({ z })
@@ -63,7 +50,6 @@ const Page = z.object({
   title: z.string(),
   description: z.string(),
   hero: PageHero,
-  stats: PageStats.optional(),
   sitemap
 })
 

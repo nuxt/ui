@@ -88,9 +88,7 @@ const people = computed(() => (github.value?.contributors ?? []).map((contributo
 <template>
   <UMain v-if="page">
     <PageHero v-bind="page.hero">
-      <template #bottom>
-        <PageStats :items="stats" v-bind="page.stats" />
-      </template>
+      <PageStats :items="stats" />
     </PageHero>
 
     <UContainer>
