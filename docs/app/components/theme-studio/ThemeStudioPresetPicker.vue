@@ -76,10 +76,12 @@ const submenu = { content: { class: 'w-auto' } }
 
 /**
  * A setting row: its value and swatch ride the trailing slot, its options the
- * submenu. A value changed from the preset shows in primary.
+ * submenu. A value changed from the preset shows in primary. The label keeps
+ * its width (the menu's label wrapper is flex-1, it would give way first),
+ * a long value ("Saturated mauve") is the part that truncates.
  */
 function setting(row: { label: string, icon: string, value: string, dot?: string, dirty?: boolean, children: NonNullable<DropdownMenuItem['children']> }): DropdownMenuItem {
-  return { ...row, ...submenu, slot: 'setting' }
+  return { ...row, ...submenu, slot: 'setting', ui: { itemWrapper: 'flex-none', itemTrailing: 'min-w-0' } }
 }
 
 /** A font as a menu option, previewing its own face through the `font` slot. */
@@ -239,9 +241,9 @@ watch(open, (isOpen) => {
     </UTooltip>
 
     <template #setting-trailing="{ item }">
-      <span class="flex items-center gap-1.5" :class="asRow(item).dirty ? 'text-primary' : 'text-muted'">
-        <span v-if="asRow(item).dot" class="size-2 rounded-full" :style="{ backgroundColor: asRow(item).dot }" />
-        {{ asRow(item).value }}
+      <span class="flex items-center gap-1.5 min-w-0" :class="asRow(item).dirty ? 'text-primary' : 'text-muted'">
+        <span v-if="asRow(item).dot" class="size-2 shrink-0 rounded-full" :style="{ backgroundColor: asRow(item).dot }" />
+        <span class="truncate">{{ asRow(item).value }}</span>
       </span>
 
       <UIcon :name="appConfig.ui.icons.chevronRight" class="size-5 shrink-0 text-dimmed" />
