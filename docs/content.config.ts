@@ -119,8 +119,7 @@ export const collections = {
         framework: z.enum(['nuxt', 'vue']),
         features: z.array(PageFeature).optional(),
         links: z.array(Button).optional(),
-        open_links: z.array(Button).optional(),
-        deploy_links: z.array(Button).optional()
+        open_links: z.array(Button).optional()
       }))
     })
   }),
