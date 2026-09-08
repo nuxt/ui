@@ -58,15 +58,18 @@ export function useHeader() {
     icon: 'i-lucide-globe',
     to: '/community'
   }, {
+    label: 'Blog',
+    icon: 'i-lucide-newspaper',
+    to: '/blog'
+  }, {
+    label: 'Team',
+    icon: 'i-lucide-users',
+    to: '/team'
+  }, {
     label: 'Playground',
     icon: 'i-lucide-square-terminal',
     to: '/play',
     target: '_blank'
-  }, {
-    label: 'Blog',
-    icon: 'i-lucide-newspaper',
-    to: '/blog',
-    active: route.path.startsWith('/blog')
   }, {
     label: 'Figma',
     icon: 'i-lucide-figma',
