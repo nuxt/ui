@@ -1,5 +1,7 @@
 export function useHeader() {
   const route = useRoute()
+  // the mobile menu glyphs follow the applied icon pack
+  const studioIcons = useStudioIcons()
 
   const desktopLinks = computed(() => [{
     label: 'Docs',
@@ -22,57 +24,57 @@ export function useHeader() {
 
   const mobileLinks = computed(() => [{
     label: 'Get Started',
-    icon: 'i-lucide-square-play',
+    icon: studioIcons.squarePlay,
     to: '/docs/getting-started',
     active: route.path.startsWith('/docs/getting-started')
   }, {
     label: 'Components',
-    icon: 'i-lucide-square-code',
+    icon: studioIcons.squareCode,
     to: '/docs/components',
     active: route.path.startsWith('/docs/components')
   }, {
     label: 'Composables',
-    icon: 'i-lucide-square-function',
+    icon: studioIcons.squareFunction,
     to: '/docs/composables',
     active: route.path.startsWith('/docs/composables')
   }, {
     label: 'Typography',
-    icon: 'i-lucide-square-pilcrow',
+    icon: studioIcons.squarePilcrow,
     to: '/docs/typography',
     active: route.path.startsWith('/docs/typography')
   }, {
     label: 'Releases',
-    icon: 'i-lucide-rocket',
+    icon: studioIcons.rocket,
     to: '/docs/releases',
     active: route.path.startsWith('/docs/releases')
   }, {
     label: 'Templates',
-    icon: 'i-lucide-panels-top-left',
+    icon: studioIcons.templates,
     to: '/templates'
   }, {
     label: 'Showcase',
-    icon: 'i-lucide-presentation',
+    icon: studioIcons.presentation,
     to: '/showcase'
   }, {
     label: 'Community',
-    icon: 'i-lucide-globe',
+    icon: studioIcons.globe,
     to: '/community'
   }, {
     label: 'Blog',
-    icon: 'i-lucide-newspaper',
+    icon: studioIcons.newspaper,
     to: '/blog'
   }, {
     label: 'Team',
-    icon: 'i-lucide-users',
+    icon: studioIcons.users,
     to: '/team'
   }, {
     label: 'Playground',
-    icon: 'i-lucide-square-terminal',
+    icon: studioIcons.terminal,
     to: '/play',
     target: '_blank'
   }, {
     label: 'Figma',
-    icon: 'i-lucide-figma',
+    icon: studioIcons.figma,
     to: 'https://go.nuxt.com/figma-ui',
     target: '_blank'
   }, {

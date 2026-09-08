@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const appConfig = useAppConfig()
+const studioIcons = useStudioIcons()
 
 // One list per framework, each hidden whole by its class (a JS filter would
 // disagree with the server, which has no cookie to read), so the dividers
@@ -94,7 +95,7 @@ if (import.meta.server) {
                   <UButton
                     color="neutral"
                     variant="outline"
-                    icon="i-lucide-link"
+                    :icon="studioIcons.link"
                     :trailing-icon="appConfig.ui.icons.chevronDown"
                     label="Open on"
                     :ui="{ trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200' }"

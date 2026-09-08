@@ -100,16 +100,16 @@ function groupChildrenByCategory(items: ContentNavigationItem[], slug: string): 
   return groups
 }
 
-function resolveNavigationIcon(item: ContentNavigationItem) {
+function resolveNavigationIcon(item: ContentNavigationItem, icons: ReturnType<typeof useStudioIcons>) {
   let icon = item.icon
   if (item.path.startsWith('/docs/components')) {
-    icon = 'i-lucide-square-code'
+    icon = icons.squareCode
   }
   if (item.path.startsWith('/docs/composables')) {
-    icon = 'i-lucide-square-function'
+    icon = icons.squareFunction
   }
   if (item.path.startsWith('/docs/typography')) {
-    icon = 'i-lucide-square-pilcrow'
+    icon = icons.squarePilcrow
   }
 
   return {
@@ -118,7 +118,7 @@ function resolveNavigationIcon(item: ContentNavigationItem) {
   }
 }
 
-function filterChildrenByFramework(item: ContentNavigationItem, framework: string): ContentNavigationItem {
+function filterChildrenByFramework(item: ContentNavigationItem, framework: string, icons: ReturnType<typeof useStudioIcons>): ContentNavigationItem {
   const filteredChildren = item.children?.filter((child) => {
     if (child.path.startsWith('/docs/components')) {
       return true
@@ -128,7 +128,7 @@ function filterChildrenByFramework(item: ContentNavigationItem, framework: strin
       return false
     }
     return true
-  })?.map(child => filterChildrenByFramework(resolveNavigationIcon(child), framework))
+  })?.map(child => filterChildrenByFramework(resolveNavigationIcon(child, icons), framework, icons))
 
   return {
     ...item,
@@ -153,13 +153,15 @@ function processNavigationItem(item: ContentNavigationItem, parent?: ContentNavi
 export const useNavigation = (navigation: Ref<ContentNavigationItem[] | undefined>) => {
   const { framework } = useFrameworks()
   const releases = useReleases()
+  // the section glyphs follow the applied icon pack
+  const studioIcons = useStudioIcons()
 
   const rootNavigation = computed(() =>
     navigation.value?.[0]?.children?.map(item => processNavigationItem(item)) as ContentNavigationItem[]
   )
 
   const navigationByFramework = computed(() =>
-    rootNavigation.value?.map(item => filterChildrenByFramework(item, framework.value))
+    rootNavigation.value?.map(item => filterChildrenByFramework(item, framework.value, studioIcons))
   )
 
   const navigationByCategory = computed(() => {
@@ -181,7 +183,7 @@ export const useNavigation = (navigation: Ref<ContentNavigationItem[] | undefine
 
   function findSurround(path: string, fwk: string = framework.value): [ContentNavigationItem | undefined, ContentNavigationItem | undefined] {
     const flattenNavigation = navigationByCategory.value
-      ?.flatMap(item => filterChildrenByFramework(item, fwk)?.children) ?? []
+      ?.flatMap(item => filterChildrenByFramework(item, fwk, studioIcons)?.children) ?? []
 
     const index = flattenNavigation.findIndex(item => item?.path === path)
     if (index === -1) {

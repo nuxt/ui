@@ -5,7 +5,10 @@ const toast = useToast()
 const appConfig = useAppConfig()
 const { copy } = useClipboard()
 
-const items = [
+const studioIcons = useStudioIcons()
+
+// computed: the pack is read after mount, a plain array would freeze on Lucide
+const items = computed(() => [
   [{
     label: 'Copy logo as SVG',
     icon: 'i-simple-icons-nuxtdotjs',
@@ -26,11 +29,11 @@ const items = [
   }],
   [{
     label: 'Browse design kit',
-    icon: 'i-lucide-shapes',
+    icon: studioIcons.shapes,
     to: 'https://nuxt.com/design-kit',
     target: '_blank'
   }]
-]
+])
 </script>
 
 <template>

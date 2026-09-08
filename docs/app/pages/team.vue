@@ -117,7 +117,7 @@ const people = computed(() => (github.value?.contributors ?? []).map((contributo
                 <div class="flex-1 md:flex-none md:w-72 min-w-0 flex flex-col gap-0.5">
                   <span class="text-base sm:text-lg font-semibold leading-tight tracking-tight text-highlighted truncate">{{ person.name }}</span>
                   <span v-if="person.location" class="flex items-center gap-1.5 text-[13px] text-muted whitespace-nowrap">
-                    <UIcon name="i-lucide-map-pin" class="size-3 text-dimmed" />
+                    <UIcon :name="studioIcons.mapPin" class="size-3 text-dimmed" />
                     {{ person.location }}
                   </span>
                 </div>

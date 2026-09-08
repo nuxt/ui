@@ -14,6 +14,7 @@ const { version } = useRuntimeConfig().public
 // wall below shows what that does to every component.
 const { presets, selectedPreset, applyPreset } = useThemeStudio()
 const studioIcons = useStudioIcons()
+const appConfig = useAppConfig()
 // the applied preset is client-only, resolve after mount so hydration matches
 const mounted = useMounted()
 
@@ -63,7 +64,7 @@ useSeoMeta({
       v-bind="page.hero"
       :badge="{
         label: `What's new in v${version}`,
-        trailingIcon: 'i-lucide-arrow-right',
+        trailingIcon: appConfig.ui.icons.arrowRight,
         to: `/docs/releases/v${version}`
       }"
     >

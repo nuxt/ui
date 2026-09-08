@@ -1,4 +1,6 @@
 <script setup lang="ts">
+const appConfig = useAppConfig()
+
 const { data: page } = await useAsyncData('showcase', () => queryCollection('showcase').first())
 if (!page.value) {
   throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
@@ -41,7 +43,7 @@ if (import.meta.server) {
               color="neutral"
               variant="outline"
               size="sm"
-              trailing-icon="i-lucide-plus"
+              :trailing-icon="appConfig.ui.icons.plus"
             >
               Submit yours
             </UButton>

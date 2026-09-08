@@ -422,6 +422,14 @@ export const studioIcons = {
   panelRightClose: 'i-lucide-panel-right-close',
   clear: 'i-lucide-list-x',
   brain: 'i-lucide-brain',
+  // the docs' own nav: the ⌘K palette and the mobile menu
+  squarePlay: 'i-lucide-square-play',
+  squareCode: 'i-lucide-square-code',
+  squareFunction: 'i-lucide-square-function',
+  squarePilcrow: 'i-lucide-square-pilcrow',
+  rocket: 'i-lucide-rocket',
+  newspaper: 'i-lucide-newspaper',
+  figma: 'i-lucide-figma',
   help: 'i-lucide-circle-question-mark',
   brush: 'i-lucide-paintbrush',
   contrast: 'i-lucide-contrast',
@@ -486,6 +494,7 @@ export const studioIcons = {
   package: 'i-lucide-package',
   pin: 'i-lucide-pin',
   pinOff: 'i-lucide-pin-off',
+  mapPin: 'i-lucide-map-pin',
   mic: 'i-lucide-mic',
   heading: 'i-lucide-heading',
   briefcase: 'i-lucide-briefcase',
@@ -543,7 +552,14 @@ export const studioIconOverrides: Partial<Record<ThemeIcons, Partial<Record<Stud
     // the Ask AI panel: its close, clear and thinking glyphs
     panelRightClose: 'i-bi-arrow-bar-right',
     clear: 'i-bi-eraser',
-    brain: 'i-bi-lightbulb'
+    brain: 'i-bi-lightbulb',
+    // the docs' own nav: the ⌘K palette and the mobile menu
+    squarePlay: 'i-bi-play-btn',
+    squareCode: 'i-bi-code-square',
+    squareFunction: 'i-bi-braces',
+    squarePilcrow: 'i-bi-paragraph',
+    rocket: 'i-bi-rocket-takeoff',
+    newspaper: 'i-bi-newspaper'
   },
   heroicons: {
     undo: 'i-heroicons-arrow-uturn-left',
@@ -566,7 +582,14 @@ export const studioIconOverrides: Partial<Record<ThemeIcons, Partial<Record<Stud
     // the Ask AI panel: its close, clear and thinking glyphs
     panelRightClose: 'i-heroicons-chevron-right',
     clear: 'i-heroicons-x-circle',
-    brain: 'i-heroicons-light-bulb'
+    brain: 'i-heroicons-light-bulb',
+    // the docs' own nav: the ⌘K palette and the mobile menu
+    squarePlay: 'i-heroicons-play-circle',
+    squareCode: 'i-heroicons-code-bracket-square',
+    squareFunction: 'i-heroicons-variable',
+    squarePilcrow: 'i-heroicons-document-text',
+    rocket: 'i-heroicons-rocket-launch',
+    newspaper: 'i-heroicons-newspaper'
   },
   iconoir: {
     undo: 'i-iconoir-undo',
@@ -589,7 +612,15 @@ export const studioIconOverrides: Partial<Record<ThemeIcons, Partial<Record<Stud
     // the Ask AI panel: its close, clear and thinking glyphs
     panelRightClose: 'i-iconoir-sidebar-expand',
     clear: 'i-iconoir-erase',
-    brain: 'i-iconoir-brain'
+    brain: 'i-iconoir-brain',
+    // the docs' own nav: the ⌘K palette and the mobile menu
+    squarePlay: 'i-iconoir-play',
+    squareCode: 'i-iconoir-code-brackets-square',
+    squareFunction: 'i-iconoir-code-brackets',
+    squarePilcrow: 'i-iconoir-text-box',
+    rocket: 'i-iconoir-rocket',
+    newspaper: 'i-iconoir-journal',
+    figma: 'i-iconoir-figma'
   },
   material: {
     undo: 'i-material-symbols-undo',
@@ -612,7 +643,14 @@ export const studioIconOverrides: Partial<Record<ThemeIcons, Partial<Record<Stud
     // the Ask AI panel: its close, clear and thinking glyphs
     panelRightClose: 'i-material-symbols-right-panel-close-outline-rounded',
     clear: 'i-material-symbols-playlist-remove-rounded',
-    brain: 'i-material-symbols-neurology-outline-rounded'
+    brain: 'i-material-symbols-neurology-outline-rounded',
+    // the docs' own nav: the ⌘K palette and the mobile menu
+    squarePlay: 'i-material-symbols-play-circle-outline-rounded',
+    squareCode: 'i-material-symbols-code-blocks-outline-rounded',
+    squareFunction: 'i-material-symbols-function',
+    squarePilcrow: 'i-material-symbols-format-paragraph-rounded',
+    rocket: 'i-material-symbols-rocket-launch-outline-rounded',
+    newspaper: 'i-material-symbols-newspaper-rounded'
   },
   phosphor: {
     undo: 'i-ph-arrow-arc-left',
@@ -635,7 +673,15 @@ export const studioIconOverrides: Partial<Record<ThemeIcons, Partial<Record<Stud
     // the Ask AI panel: its close, clear and thinking glyphs
     panelRightClose: 'i-ph-caret-right',
     clear: 'i-ph-eraser',
-    brain: 'i-ph-brain'
+    brain: 'i-ph-brain',
+    // the docs' own nav: the ⌘K palette and the mobile menu
+    squarePlay: 'i-ph-play',
+    squareCode: 'i-ph-code-block',
+    squareFunction: 'i-ph-function',
+    squarePilcrow: 'i-ph-paragraph',
+    rocket: 'i-ph-rocket-launch',
+    newspaper: 'i-ph-newspaper',
+    figma: 'i-ph-figma-logo'
   },
   remix: {
     undo: 'i-ri-arrow-go-back-line',
@@ -658,7 +704,15 @@ export const studioIconOverrides: Partial<Record<ThemeIcons, Partial<Record<Stud
     // the Ask AI panel: its close, clear and thinking glyphs
     panelRightClose: 'i-ri-sidebar-unfold-line',
     clear: 'i-ri-eraser-line',
-    brain: 'i-ri-brain-line'
+    brain: 'i-ri-brain-line',
+    // the docs' own nav: the ⌘K palette and the mobile menu
+    squarePlay: 'i-ri-play-circle-line',
+    squareCode: 'i-ri-code-box-line',
+    squareFunction: 'i-ri-functions',
+    squarePilcrow: 'i-ri-paragraph',
+    rocket: 'i-ri-rocket-line',
+    newspaper: 'i-ri-newspaper-line',
+    figma: 'i-ri-figma-line'
   },
   tabler: {
     undo: 'i-tabler-arrow-back-up',
@@ -681,7 +735,15 @@ export const studioIconOverrides: Partial<Record<ThemeIcons, Partial<Record<Stud
     // the Ask AI panel: its close, clear and thinking glyphs
     panelRightClose: 'i-tabler-layout-sidebar-right-collapse',
     clear: 'i-tabler-clear-all',
-    brain: 'i-tabler-brain'
+    brain: 'i-tabler-brain',
+    // the docs' own nav: the ⌘K palette and the mobile menu
+    squarePlay: 'i-tabler-player-play',
+    squareCode: 'i-tabler-code',
+    squareFunction: 'i-tabler-math-function',
+    squarePilcrow: 'i-tabler-pilcrow',
+    rocket: 'i-tabler-rocket',
+    newspaper: 'i-tabler-news',
+    figma: 'i-tabler-brand-figma'
   },
   // Pixel has no settings cog (sliders stands in), no pie chart (generic
   // chart), no up-down chevron (sort), and no rocket/panels/newspaper/
@@ -711,6 +773,13 @@ export const studioIconOverrides: Partial<Record<ThemeIcons, Partial<Record<Stud
     panelRightClose: 'i-pixelarticons-chevron-right',
     clear: 'i-pixelarticons-notes-delete',
     brain: 'i-pixelarticons-lightbulb',
+    // the docs' own nav: the ⌘K palette and the mobile menu
+    squarePlay: 'i-pixelarticons-play',
+    squareCode: 'i-pixelarticons-code',
+    squareFunction: 'i-pixelarticons-script',
+    squarePilcrow: 'i-pixelarticons-text-wrap',
+    rocket: 'i-pixelarticons-zap',
+    newspaper: 'i-pixelarticons-article',
     grid: 'i-pixelarticons-card-stack',
     dashboard: 'i-pixelarticons-dashboard',
     chat: 'i-pixelarticons-message',
@@ -766,6 +835,7 @@ export const studioIconOverrides: Partial<Record<ThemeIcons, Partial<Record<Stud
     pin: 'i-pixelarticons-pin',
     // no pin-off glyph, the filled pin plus the button's active state carries it
     pinOff: 'i-pixelarticons-pin',
+    mapPin: 'i-pixelarticons-map-pin',
     mic: 'i-pixelarticons-mic',
     heading: 'i-pixelarticons-heading',
     briefcase: 'i-pixelarticons-briefcase',
