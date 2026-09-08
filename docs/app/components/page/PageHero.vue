@@ -1,26 +1,19 @@
 <script setup lang="ts">
 import { reactiveOmit } from '@vueuse/core'
-import type { BadgeProps, PageHeroProps, PageHeroSlots } from '@nuxt/ui'
-// as a string this stays an unresolved <nuxtlink> element, with no href
-import { NuxtLink } from '#components'
+import type { ButtonProps, PageHeroProps, PageHeroSlots } from '@nuxt/ui'
 
-/**
- * UPageHero in the docs' clothes: the docs' dot grid and horizon behind it,
- * a badge for a headline, and a two-tone title whose accent half is set in
- * primary. Everything else (description, links, orientation, the slots) is
- * the library hero's own and passes through, `bottom` included: a page
- * that wants figures along the bottom edge puts them there.
- */
-const props = defineProps<PageHeroProps & {
-  /** The pill above the title: its label, or badge props plus `to` to make it a link. */
-  badge?: string | (BadgeProps & { to?: string, target?: string })
+const props = withDefaults(defineProps<PageHeroProps & {
+  /** The pill above the title: its label, or button props (`to` makes it a link). */
+  badge?: string | ButtonProps
   /** The title's first half. */
   lead?: string
   /** Its second half, in primary. */
   accent?: string
   /** Break between the halves rather than running them on one line. */
   breakLine?: boolean
-}>()
+}>(), {
+  orientation: 'horizontal'
+})
 
 const slots = defineSlots<PageHeroSlots>()
 
@@ -43,21 +36,37 @@ const forwarded = computed(() => Object.keys(slots).filter(name =>
 // between the two would be condensed away by the template compiler.
 const leadText = computed(() => (props.breakLine ? props.lead : `${props.lead} `))
 
-// The library hero is a centered vertical stack with generous padding; the
-// docs one aligns left, opens under the header and leaves the bottom to the
-// `bottom` slot. The header stack's rhythm (headline, title, description,
-// links) is the theme's, only its measures change.
+// The cells of the dot grid that twinkle, as [column, row] on its 28px
+// lattice: a fixed pick rather than a random one, so the server and the
+// client draw the same dots, spread from the left edge so a phone gets its
+// share. Each runs its own cycle, offset so they never pulse together.
+const TWINKLES = [
+  [1, 3], [3, 11], [5, 6], [8, 15], [10, 2], [12, 9], [14, 17], [17, 5], [19, 12], [22, 1], [24, 8], [26, 14],
+  [29, 4], [31, 10], [34, 16], [36, 7], [38, 2], [41, 13], [43, 6], [46, 18], [48, 3], [50, 11], [53, 8], [56, 15]
+]
+const twinkles = TWINKLES.map(([col, row], index) => ({
+  // 13px: the cell's center less half the 2px dot
+  left: `${col! * 28 + 13}px`,
+  top: `${row! * 28 + 13}px`,
+  animationDelay: `${(index * 0.9) % 5}s`,
+  animationDuration: `${3 + (index % 4) * 0.5}s`
+}))
+
+// The library hero comes with generous padding; the docs one opens under the
+// header and leaves the bottom to the `bottom` slot. The header stack's
+// rhythm and alignment (headline, title, description, links) are the
+// theme's, only its measures change.
 const ui = computed(() => ({
   // the top padding sits on the root: the container's own responsive padding
   // is zeroed per breakpoint, and a `pt` there would lose to the theme's `py`
   root: 'overflow-hidden border-b border-default pt-14 sm:pt-22',
-  container: 'relative py-0 sm:py-0 lg:py-0 gap-0',
-  wrapper: 'text-start',
-  headline: 'justify-start mb-6',
-  title: 'max-w-205 text-4xl sm:text-5xl lg:text-6xl font-medium leading-[1.08] tracking-[-.035em] text-balance',
-  description: 'max-w-145 text-base sm:text-[17px] leading-relaxed text-pretty',
-  footer: 'mt-8',
-  links: 'justify-start gap-2.5',
+  // the second column only exists for a default slot: without one the text
+  // keeps the width, and the placeholder that would fill it gets no gap
+  container: ['relative py-0 sm:py-0 lg:py-0', slots.default ? 'gap-8 sm:gap-y-8 lg:gap-x-9' : 'gap-0 sm:gap-0 lg:grid-cols-1'],
+  headline: 'mb-6',
+  title: 'text-4xl sm:text-5xl lg:text-6xl font-medium leading-[1.08] tracking-[-.035em] text-balance',
+  description: 'max-w-152 text-base sm:text-[17px] leading-relaxed text-pretty',
+  links: 'gap-x-3',
   ...props.ui
 }))
 </script>
@@ -74,23 +83,27 @@ const ui = computed(() => ({
       <div aria-hidden="true" class="absolute inset-x-0 bottom-0 h-45 pointer-events-none bg-linear-to-t from-primary/15 to-transparent" />
       <div aria-hidden="true" class="absolute inset-x-0 bottom-0 h-px pointer-events-none bg-[linear-gradient(to_right,transparent,var(--ui-primary)_30%,var(--ui-primary)_70%,transparent)]" />
 
+      <!-- A few of the grid's dots light up in primary, under the same fade as the grid. -->
+      <div aria-hidden="true" class="absolute inset-0 pointer-events-none mask-[linear-gradient(to_bottom,transparent,black_30%,black_70%,transparent)]">
+        <span v-for="(twinkle, index) in twinkles" :key="index" class="twinkle absolute size-px rounded-full bg-primary opacity-0" :style="twinkle" />
+      </div>
+
       <slot name="top" />
     </template>
 
     <template v-if="badge" #headline>
-      <UBadge
-        :as="badge.to ? NuxtLink : 'span'"
-        color="neutral"
-        variant="outline"
+      <UButton
+        as="span"
+        color="primary"
+        variant="soft"
         v-bind="badge"
-        class="rounded-full bg-default font-medium text-muted"
-        :class="badge.to && 'hover:text-highlighted hover:ring-accented transition-colors'"
-        :ui="{ leadingIcon: 'text-primary', trailingIcon: 'text-primary' }"
+        size="xs"
+        class="rounded-full"
       />
     </template>
 
     <template v-if="lead || accent" #title>
-      {{ leadText }}<br v-if="breakLine"><span class="text-[1.13em] tracking-[-.02em] text-primary font-semibold">{{ accent }}</span>
+      {{ leadText }}<br v-if="breakLine"><span class="text-primary font-semibold">{{ accent }}</span>
     </template>
 
     <template v-for="name in forwarded" #[name]="slotProps">
@@ -100,7 +113,31 @@ const ui = computed(() => ({
     <template #bottom>
       <slot name="bottom" />
 
-      <div class="h-12 sm:h-16" />
+      <div class="h-14 sm:h-22" />
     </template>
   </UPageHero>
 </template>
+
+<style scoped>
+.twinkle {
+  animation: twinkle 3s ease-in-out infinite;
+}
+
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 0;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(2);
+  }
+}
+
+/* the grid stays still, the dots with it */
+@media (prefers-reduced-motion: reduce) {
+  .twinkle {
+    animation: none;
+  }
+}
+</style>

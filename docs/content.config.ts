@@ -22,21 +22,6 @@ const Button = z.object({
   class: z.string().optional()
 })
 
-// UBadge's props, plus `to` for a badge that links somewhere
-const Badge = z.object({
-  label: z.string(),
-  icon: z.string().optional(),
-  avatar: Avatar.optional(),
-  leadingIcon: z.string().optional(),
-  trailingIcon: z.string().optional(),
-  to: z.string().optional(),
-  target: z.enum(['_blank', '_self']).optional(),
-  color: z.enum(['primary', 'neutral', 'success', 'warning', 'error', 'info']).optional(),
-  size: z.enum(['xs', 'sm', 'md', 'lg', 'xl']).optional(),
-  variant: z.enum(['solid', 'outline', 'subtle', 'soft']).optional(),
-  class: z.string().optional()
-})
-
 const PageFeature = z.object({
   title: z.string(),
   description: z.string().optional(),
@@ -46,8 +31,8 @@ const PageFeature = z.object({
 })
 
 const PageHero = z.object({
-  /** The pill above the title: its label, or a badge plus `to` for a link. */
-  badge: z.union([z.string(), Badge]).optional(),
+  /** The pill above the title: its label, or button props (`to` for a link). */
+  badge: z.union([z.string(), Button]).optional(),
   /** The title's two halves: the second one in primary. */
   lead: z.string(),
   accent: z.string(),
