@@ -112,10 +112,7 @@ const shareOpen = ref(false)
 </script>
 
 <template>
-  <!-- page tint composites on the app root's bg-default (nuxt.config rootAttrs) -->
-  <main class="max-w-(--ui-container) mx-auto">
-    <!-- `modal: false` so the panels' popovers, portalled to the body, stay
-         interactive over the fullscreen menu -->
+  <main class="max-w-(--ui-container) mx-auto w-full">
     <UHeader :menu="{ modal: false }" :ui="{ root: () => 'h-(--ui-header-height) border-b border-transparent' }">
       <template #left>
         <HeaderLogo />
