@@ -3,7 +3,6 @@ const route = useRoute()
 const { desktopLinks } = useHeader()
 const { open } = useChat()
 const { track } = useAnalytics()
-const studioIcons = useStudioIcons()
 
 // The module route caches nuxt.com's stats for an hour, only the star count
 // rides the payload (the full response carries the team and contributors).
@@ -26,54 +25,56 @@ function toggleChat() {
 <template>
   <UHeader
     :ui="{
-      container: [route.path.startsWith('/blog/') ? 'max-w-none' : '']
+      container: [route.path.startsWith('/blog/') ? 'max-w-none' : ''],
+      right: 'gap-0.5'
     }"
     class="flex flex-col"
   >
     <template #left>
       <HeaderLogo />
 
-      <VersionMenu v-if="route.path.startsWith('/docs/')" />
+      <VersionMenu />
     </template>
 
     <UNavigationMenu :items="desktopLinks" variant="link" content-orientation="vertical" />
 
     <template #right>
-      <UTheme>
-        <!-- lazy for the theme engine it pulls, hydrated on idle: a plain
+      <UTooltip text="Search" :kbds="['meta', 'K']" ignore-non-keyboard-focus>
+        <UContentSearchButton />
+      </UTooltip>
+
+      <!-- lazy for the theme engine it pulls, hydrated on idle: a plain
              `Lazy` drops the server-rendered button until the chunk lands -->
-        <LazyThemeStudioPresetPicker hydrate-on-idle />
+      <LazyThemeStudioPresetPicker hydrate-on-idle />
 
-        <UTooltip text="Search" :kbds="['meta', 'K']" ignore-non-keyboard-focus>
-          <UContentSearchButton :collapsed="false" :kbds="[]" variant="soft" class="min-w-40" />
-        </UTooltip>
+      <UTooltip text="Open on GitHub" class="hidden lg:flex" ignore-non-keyboard-focus>
+        <UButton
+          color="neutral"
+          variant="ghost"
+          :label="starsLabel"
+          to="https://github.com/nuxt/ui"
+          target="_blank"
+          icon="i-simple-icons-github"
+          aria-label="Open on GitHub"
+        />
+      </UTooltip>
 
-        <USeparator orientation="vertical" class="self-stretch h-auto" />
+      <USeparator orientation="vertical" class="h-auto self-stretch py-1.5 mx-1.5 lg:me-3" />
 
-        <UTooltip text="Open on GitHub" class="hidden lg:flex" ignore-non-keyboard-focus>
-          <UButton
-            color="neutral"
-            variant="soft"
-            :label="starsLabel"
-            to="https://github.com/nuxt/ui"
-            target="_blank"
-            :icon="studioIcons.github"
-            aria-label="Open on GitHub"
-          />
-        </UTooltip>
-
-        <USeparator orientation="vertical" class="self-stretch h-auto" />
-
-        <UTooltip text="Ask AI" :kbds="['meta', 'I']" ignore-non-keyboard-focus>
-          <UButton
-            :icon="studioIcons.assistant"
-            color="neutral"
-            variant="outline"
-            label="Ask AI"
-            @click="toggleChat"
-          />
-        </UTooltip>
-      </UTheme>
+      <UTooltip text="Ask AI" :kbds="['meta', 'I']" class="hidden lg:flex" ignore-non-keyboard-focus>
+        <UButton
+          color="neutral"
+          variant="outline"
+          label="Ask AI"
+          aria-label="Ask AI"
+          :ui="{ label: 'hidden sm:inline' }"
+          @click="toggleChat"
+        >
+          <template #leading>
+            <NuxiIcon class="size-5 shrink-0" />
+          </template>
+        </UButton>
+      </UTooltip>
     </template>
 
     <template #toggle="{ open, toggle, ui }">

@@ -124,7 +124,7 @@ const shareOpen = ref(false)
       <ThemeStudioViewSwitcher />
 
       <template #right>
-        <UTooltip text="Ask AI" :kbds="['meta', 'I']" ignore-non-keyboard-focus>
+        <UTooltip v-if="!chatOpen" text="Ask AI" :kbds="['meta', 'I']" ignore-non-keyboard-focus>
           <UButton
             color="neutral"
             variant="outline"
@@ -132,7 +132,11 @@ const shareOpen = ref(false)
             aria-label="Ask AI for help"
             class="hidden lg:inline-flex"
             @click="toggleChat"
-          />
+          >
+            <template #leading>
+              <NuxiIcon class="size-5 shrink-0" />
+            </template>
+          </UButton>
         </UTooltip>
 
         <UButton

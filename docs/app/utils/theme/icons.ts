@@ -397,7 +397,7 @@ export function iconSetSamples(setName: string): string[] {
 
 /**
  * Every glyph the studio renders outside the 43 semantic keys: its own chrome
- * (toolbar, Ask AI, preset picker), the view switcher and the demo content.
+ * (toolbar, preset picker), the view switcher and the demo content.
  * Lucide is the default, `studioIconOverrides` swaps in a pack's own glyph
  * where it has one. Kept out of `themeIcons` on purpose, none of this rides
  * the export's icon config. Import and the group-picker chevron reuse the
@@ -411,7 +411,6 @@ export const studioIcons = {
   redo: 'i-lucide-redo-2',
   reset: 'i-lucide-rotate-ccw',
   export: 'i-lucide-code-xml',
-  assistant: 'i-lucide-bot-message-square',
   palette: 'i-lucide-palette',
   options: 'i-lucide-sliders-horizontal',
   text: 'i-lucide-type',
@@ -524,7 +523,6 @@ export const studioIconOverrides: Partial<Record<ThemeIcons, Partial<Record<Stud
     redo: 'i-bi-arrow-90deg-right',
     reset: 'i-bi-arrow-counterclockwise',
     export: 'i-bi-code-slash',
-    assistant: 'i-bi-robot',
     palette: 'i-bi-palette',
     options: 'i-bi-sliders',
     text: 'i-bi-fonts',
@@ -544,7 +542,6 @@ export const studioIconOverrides: Partial<Record<ThemeIcons, Partial<Record<Stud
     redo: 'i-heroicons-arrow-uturn-right',
     reset: 'i-heroicons-arrow-path',
     export: 'i-heroicons-code-bracket',
-    assistant: 'i-heroicons-sparkles',
     palette: 'i-heroicons-swatch',
     options: 'i-heroicons-adjustments-horizontal',
     text: 'i-heroicons-language',
@@ -564,7 +561,6 @@ export const studioIconOverrides: Partial<Record<ThemeIcons, Partial<Record<Stud
     redo: 'i-iconoir-redo',
     reset: 'i-iconoir-refresh-double',
     export: 'i-iconoir-code',
-    assistant: 'i-iconoir-magic-wand',
     palette: 'i-iconoir-palette',
     options: 'i-iconoir-settings',
     text: 'i-iconoir-text',
@@ -584,7 +580,6 @@ export const studioIconOverrides: Partial<Record<ThemeIcons, Partial<Record<Stud
     redo: 'i-material-symbols-redo',
     reset: 'i-material-symbols-refresh',
     export: 'i-material-symbols-code',
-    assistant: 'i-material-symbols-robot',
     palette: 'i-material-symbols-palette',
     options: 'i-material-symbols-tune',
     text: 'i-material-symbols-text-fields',
@@ -604,7 +599,6 @@ export const studioIconOverrides: Partial<Record<ThemeIcons, Partial<Record<Stud
     redo: 'i-ph-arrow-arc-right',
     reset: 'i-ph-arrow-counter-clockwise',
     export: 'i-ph-code',
-    assistant: 'i-ph-robot',
     palette: 'i-ph-palette',
     options: 'i-ph-sliders-horizontal',
     text: 'i-ph-text-aa',
@@ -624,7 +618,6 @@ export const studioIconOverrides: Partial<Record<ThemeIcons, Partial<Record<Stud
     redo: 'i-ri-arrow-go-forward-line',
     reset: 'i-ri-restart-line',
     export: 'i-ri-code-s-slash-line',
-    assistant: 'i-ri-robot-2-line',
     palette: 'i-ri-palette-line',
     options: 'i-ri-equalizer-line',
     text: 'i-ri-font-size',
@@ -644,7 +637,6 @@ export const studioIconOverrides: Partial<Record<ThemeIcons, Partial<Record<Stud
     redo: 'i-tabler-arrow-forward-up',
     reset: 'i-tabler-refresh',
     export: 'i-tabler-code',
-    assistant: 'i-tabler-robot',
     palette: 'i-tabler-palette',
     options: 'i-tabler-adjustments-horizontal',
     text: 'i-tabler-typography',
@@ -670,7 +662,6 @@ export const studioIconOverrides: Partial<Record<ThemeIcons, Partial<Record<Stud
     redo: 'i-pixelarticons-redo',
     reset: 'i-pixelarticons-reload',
     export: 'i-pixelarticons-code',
-    assistant: 'i-pixelarticons-robot',
     palette: 'i-pixelarticons-colors-swatch',
     options: 'i-pixelarticons-sliders',
     text: 'i-pixelarticons-text-add',
