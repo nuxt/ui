@@ -13,6 +13,8 @@ import { NuxtLink } from '#components'
 const props = defineProps<{
   eyebrow?: string
   eyebrowIcon?: string
+  /** Makes the eyebrow a link. */
+  eyebrowTo?: string
   /** The title's first half, in the body face. */
   lead: string
   /** Its second half, in the serif italic. */
@@ -54,11 +56,14 @@ const captionClass = 'text-[11.5px] font-medium uppercase tracking-[.09em] text-
     <UContainer class="relative flex flex-col gap-6">
       <UBadge
         v-if="eyebrow"
+        :as="eyebrowTo ? NuxtLink : 'span'"
+        :to="eyebrowTo"
         :icon="eyebrowIcon"
         :label="eyebrow"
         color="neutral"
         variant="outline"
         class="self-start rounded-full bg-default font-medium text-muted"
+        :class="eyebrowTo && 'hover:text-highlighted hover:ring-accented transition-colors'"
         :ui="{ leadingIcon: 'text-primary' }"
       />
 

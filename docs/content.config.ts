@@ -39,6 +39,7 @@ const PageHero = z.object({
   description: z.string(),
   eyebrow: z.string().optional(),
   eyebrowIcon: z.string().optional(),
+  eyebrowTo: z.string().optional(),
   /** The caption opposite the figures, alone or leading the marks. */
   note: z.string().optional(),
   noteIcon: z.string().optional(),

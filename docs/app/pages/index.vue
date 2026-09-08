@@ -76,7 +76,7 @@ useSeoMeta({
 
 <template>
   <main v-if="page">
-    <PageHero v-bind="page.hero" :eyebrow="`What's new in v${version}`" :stats="stats" />
+    <PageHero v-bind="page.hero" :eyebrow="`What's new in v${version}`" :eyebrow-to="`/docs/releases/v${version}`" :stats="stats" />
 
     <UContainer as="section" class="pt-12 sm:pt-14 pb-16">
       <PageSectionHeading title="Try every component live">
