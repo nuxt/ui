@@ -1,11 +1,11 @@
 title: The Intuitive Vue UI Library
-description: A Vue UI library with 125+ accessible components styled with Tailwind CSS. Works out of the box with Nuxt and any Vue app, try every component live and make the theme yours.
+description: Nuxt UI is a Vue UI library with 125+ accessible components built on Reka UI and Tailwind CSS, for Nuxt and Vue. Styled by default, themed from one config.
 navigation: false
 hero:
-  lead: The Intuitive
-  accent: Vue UI Library
+  lead: Styled by default.
+  accent: Make it yours.
   breakLine: true
-  description: A Vue UI library with 125+ accessible components styled with Tailwind CSS. Works out of the box with Nuxt and any Vue app, try every component live and make the theme yours.
+  description: Accessible components for Nuxt and Vue, built on Reka UI and Tailwind CSS. Set colors, radius and fonts once in your config and every component follows.
   links:
     - label: Get started
       to: /docs/getting-started/installation/nuxt
@@ -13,7 +13,7 @@ hero:
     - label: Get started
       to: /docs/getting-started/installation/vue
       class: vue-only
-    - label: Explore components
+    - label: Explore 125+ components
       to: /docs/components
       variant: outline
       color: neutral

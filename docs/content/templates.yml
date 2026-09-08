@@ -6,7 +6,7 @@ hero:
     icon: i-lucide-layers
   lead: Ship faster with
   accent: Templates
-  description: 'Explore ready-made templates powered by our Vue components. These templates are fully responsive, accessible, and easy to customize, so you can launch your project quickly and effortlessly.'
+  description: Starters for Nuxt and Vue, from a bare setup to a dashboard, a SaaS site or a chat app. Preview one, then open it on GitHub or deploy it.
 navigation: false
 items:
   - title: 'Calendar'

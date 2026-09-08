@@ -7,7 +7,7 @@ hero:
     icon: i-lucide-globe
   lead: Built with
   accent: Nuxt UI
-  description: Discover our selection of projects built with Nuxt UI.
+  description: Sites and apps teams have shipped with Nuxt UI, from documentation and dashboards to storefronts. Built one? Add it to the list.
 items:
   - name: Ace
     url: https://acecompany.nl/
