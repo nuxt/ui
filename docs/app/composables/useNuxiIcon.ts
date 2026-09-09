@@ -1,5 +1,5 @@
 import { useAnimate } from 'motion-v'
-import { useEventListener, useRafFn } from '@vueuse/core'
+import { useElementVisibility, useEventListener, useRafFn } from '@vueuse/core'
 
 /**
  * Nuxi, the Nuxt mascot, as the Ask AI glyph. Ported from nuxt.com: the face
@@ -30,6 +30,8 @@ interface MoodVisual {
 const BASE_Y = -6
 const PROXIMITY_RADIUS = 400
 const LERP_FACTOR = 0.10
+// under a hundredth of a pixel the face has arrived, so the loop can stop
+const LERP_EPSILON = 0.01
 
 const LOOK_OFFSETS: Record<LookDir, { x: number, y: number }> = {
   center: { x: 0, y: 0 },
@@ -73,6 +75,33 @@ export function useNuxiIcon(props: NuxiIconProps, emit?: EmitFn) {
   const maskId = useId()
   const [svgEl, animate] = useAnimate()
 
+  // Below `lg` the button is only CSS-hidden, so the icon stays mounted with a
+  // zeroed rect. Nothing animates, listens or schedules while it is out of view.
+  const isElementVisible = useElementVisibility(() => svgEl.value as unknown as SVGSVGElement | undefined)
+  const isPageVisible = ref(true)
+  const isAwake = computed(() => isElementVisible.value && isPageVisible.value)
+
+  let mounted = true
+
+  // Every timeout goes through `later` so unmounting clears the nested ones too.
+  const timers = new Set<ReturnType<typeof setTimeout>>()
+
+  function later(fn: () => void, delay: number) {
+    const timer = setTimeout(() => {
+      timers.delete(timer)
+      if (!mounted) return
+      fn()
+    }, delay)
+    timers.add(timer)
+    return timer
+  }
+
+  function clearLater(timer: ReturnType<typeof setTimeout> | undefined) {
+    if (timer === undefined) return
+    clearTimeout(timer)
+    timers.delete(timer)
+  }
+
   const internalMood = ref<NuxiMood>('idle')
   const isHovered = ref(false)
   const isInProximity = ref(false)
@@ -91,7 +120,7 @@ export function useNuxiIcon(props: NuxiIconProps, emit?: EmitFn) {
     internalMood.value = mood
     emit?.('moodChange', mood)
     if (duration) {
-      setTimeout(() => {
+      later(() => {
         if (internalMood.value === mood) {
           internalMood.value = 'idle'
           emit?.('moodChange', 'idle')
@@ -115,11 +144,28 @@ export function useNuxiIcon(props: NuxiIconProps, emit?: EmitFn) {
     return { x: look.x, y: baseY + look.y }
   })
 
-  const { resume: startLerp } = useRafFn(() => {
+  const { pause: pauseLerp, resume: resumeLerp } = useRafFn(() => {
     const t = targetOffset.value
-    lerpedOffset.x += (t.x - lerpedOffset.x) * LERP_FACTOR
-    lerpedOffset.y += (t.y - lerpedOffset.y) * LERP_FACTOR
+    const dx = t.x - lerpedOffset.x
+    const dy = t.y - lerpedOffset.y
+
+    // once the face has caught up, snap and stop: a resting icon costs no frames
+    if (Math.abs(dx) < LERP_EPSILON && Math.abs(dy) < LERP_EPSILON) {
+      lerpedOffset.x = t.x
+      lerpedOffset.y = t.y
+      pauseLerp()
+      return
+    }
+
+    lerpedOffset.x += dx * LERP_FACTOR
+    lerpedOffset.y += dy * LERP_FACTOR
   }, { immediate: false })
+
+  // a new target (pointer proximity, look around, mood, attention nudge) is the
+  // only thing that has to restart the loop
+  watch(targetOffset, () => {
+    if (isAwake.value) resumeLerp()
+  })
 
   const faceTransform = computed(() =>
     `translate(${lerpedOffset.x}px, ${BASE_Y + lerpedOffset.y}px)`
@@ -182,15 +228,14 @@ export function useNuxiIcon(props: NuxiIconProps, emit?: EmitFn) {
   let sleepTimer: ReturnType<typeof setTimeout> | undefined
   let attentionTimer: ReturnType<typeof setTimeout> | undefined
   let winkTimer: ReturnType<typeof setTimeout> | undefined
-  let winkOffTimer: ReturnType<typeof setTimeout> | undefined
-  let mounted = true
 
   function scheduleLook() {
-    lookTimer = setTimeout(() => {
+    if (!mounted) return
+    lookTimer = later(() => {
       if ((effectiveMood.value === 'idle' || effectiveMood.value === 'happy') && !isInProximity.value) {
         const dirs: LookDir[] = ['center', 'center', 'left', 'right', 'up']
         lookDir.value = dirs[Math.floor(Math.random() * dirs.length)] as LookDir
-        setTimeout(() => {
+        later(() => {
           if (effectiveMood.value === 'idle' || effectiveMood.value === 'happy') lookDir.value = 'center'
         }, 600 + Math.random() * 500)
       }
@@ -199,14 +244,15 @@ export function useNuxiIcon(props: NuxiIconProps, emit?: EmitFn) {
   }
 
   function scheduleBlink() {
-    blinkTimer = setTimeout(() => {
+    if (!mounted) return
+    blinkTimer = later(() => {
       if (visual.value.blinkEnabled && !isWinking.value) {
         isBlinking.value = true
-        setTimeout(() => (isBlinking.value = false), 110)
+        later(() => (isBlinking.value = false), 110)
         if (Math.random() < 0.1) {
-          setTimeout(() => {
+          later(() => {
             isBlinking.value = true
-            setTimeout(() => (isBlinking.value = false), 80)
+            later(() => (isBlinking.value = false), 80)
           }, 200)
         }
       }
@@ -216,18 +262,19 @@ export function useNuxiIcon(props: NuxiIconProps, emit?: EmitFn) {
 
   function scheduleWink() {
     if (!mounted) return
-    winkTimer = setTimeout(() => {
+    winkTimer = later(() => {
       if (effectiveMood.value === 'idle' || effectiveMood.value === 'happy') {
         isWinking.value = true
-        winkOffTimer = setTimeout(() => (isWinking.value = false), 250)
+        later(() => (isWinking.value = false), 250)
       }
       scheduleWink()
     }, 15000 + Math.random() * 10000)
   }
 
   function scheduleAttention() {
-    clearTimeout(attentionTimer)
-    attentionTimer = setTimeout(async () => {
+    if (!mounted) return
+    clearLater(attentionTimer)
+    attentionTimer = later(async () => {
       if (effectiveMood.value === 'idle' && !isEasterEggPlaying.value && !props.mood) {
         await doNudge()
       }
@@ -236,10 +283,26 @@ export function useNuxiIcon(props: NuxiIconProps, emit?: EmitFn) {
   }
 
   function resetSleepTimer() {
-    clearTimeout(sleepTimer)
+    clearLater(sleepTimer)
     if (isInProximity.value && !isHovered.value && internalMood.value === 'idle' && !props.mood) {
-      sleepTimer = setTimeout(() => setInternalMood('sleeping'), 8000)
+      sleepTimer = later(() => setInternalMood('sleeping'), 8000)
     }
+  }
+
+  function startIdleTimers() {
+    stopIdleTimers()
+    scheduleLook()
+    scheduleBlink()
+    scheduleWink()
+    scheduleAttention()
+  }
+
+  function stopIdleTimers() {
+    clearLater(lookTimer)
+    clearLater(blinkTimer)
+    clearLater(winkTimer)
+    clearLater(attentionTimer)
+    clearLater(sleepTimer)
   }
 
   let lastMouseX = 0
@@ -249,9 +312,12 @@ export function useNuxiIcon(props: NuxiIconProps, emit?: EmitFn) {
   function handleMouseMove(e: MouseEvent) {
     const mdx = e.clientX - lastMouseX
     const mdy = e.clientY - lastMouseY
-    mouseSpeed = Math.sqrt(mdx * mdx + mdy * mdy)
+    // tracked while asleep too, or the first move after waking reads as a jolt
     lastMouseX = e.clientX
     lastMouseY = e.clientY
+    if (!isAwake.value) return
+
+    mouseSpeed = Math.sqrt(mdx * mdx + mdy * mdy)
 
     if (!svgEl.value || isHovered.value) return
     const rect = (svgEl.value as unknown as Element).getBoundingClientRect()
@@ -274,11 +340,15 @@ export function useNuxiIcon(props: NuxiIconProps, emit?: EmitFn) {
       resetSleepTimer()
       scheduleAttention()
     } else if (isInProximity.value) {
-      isInProximity.value = false
-      rawOffset.x = 0
-      rawOffset.y = 0
-      clearTimeout(sleepTimer)
+      resetProximity()
     }
+  }
+
+  function resetProximity() {
+    isInProximity.value = false
+    rawOffset.x = 0
+    rawOffset.y = 0
+    clearLater(sleepTimer)
   }
 
   async function doFlip() {
@@ -390,18 +460,17 @@ export function useNuxiIcon(props: NuxiIconProps, emit?: EmitFn) {
     }
   }
 
-  function handleSvgClick(e: MouseEvent) {
+  function handleSvgClick() {
     clickCount++
-    clearTimeout(clickResetTimer)
-    clickResetTimer = setTimeout(() => {
+    clearLater(clickResetTimer)
+    clickResetTimer = later(() => {
       clickCount = 0
     }, 500)
     if (clickCount === 2) {
       isWinking.value = true
-      setTimeout(() => (isWinking.value = false), 300)
+      later(() => (isWinking.value = false), 300)
     } else if (clickCount >= 4) {
-      e.stopPropagation()
-      e.preventDefault()
+      // the svg sits inside the Ask AI button, so the click keeps bubbling
       doWobble()
       clickCount = 0
     }
@@ -410,8 +479,8 @@ export function useNuxiIcon(props: NuxiIconProps, emit?: EmitFn) {
   function handleMouseEnter() {
     isHovered.value = true
     hoverCount++
-    clearTimeout(hoverResetTimer)
-    hoverResetTimer = setTimeout(() => {
+    clearLater(hoverResetTimer)
+    hoverResetTimer = later(() => {
       hoverCount = 0
     }, 2000)
     if (hoverCount >= 4) {
@@ -426,28 +495,34 @@ export function useNuxiIcon(props: NuxiIconProps, emit?: EmitFn) {
     if (mouseSpeed > 60 && Math.random() < 0.4) doDizzy()
   }
 
+  watch(isAwake, (awake) => {
+    if (awake) {
+      startIdleTimers()
+      resumeLerp()
+      return
+    }
+
+    stopIdleTimers()
+    pauseLerp()
+    resetProximity()
+  })
+
   onMounted(() => {
     if (props.interactive !== false) {
       useEventListener(window, 'mousemove', handleMouseMove, { passive: true })
       useEventListener(window, 'keydown', handleKeyDown)
     }
-    scheduleLook()
-    scheduleBlink()
-    scheduleWink()
-    scheduleAttention()
-    startLerp()
+
+    isPageVisible.value = !document.hidden
+    useEventListener(document, 'visibilitychange', () => {
+      isPageVisible.value = !document.hidden
+    })
   })
 
   onUnmounted(() => {
     mounted = false
-    clearTimeout(lookTimer)
-    clearTimeout(blinkTimer)
-    clearTimeout(sleepTimer)
-    clearTimeout(clickResetTimer)
-    clearTimeout(hoverResetTimer)
-    clearTimeout(attentionTimer)
-    clearTimeout(winkTimer)
-    clearTimeout(winkOffTimer)
+    for (const timer of timers) clearTimeout(timer)
+    timers.clear()
   })
 
   return {
