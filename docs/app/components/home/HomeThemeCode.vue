@@ -72,13 +72,6 @@ const pane = computed(() => panes.value.find(entry => entry.key === tab.value) ?
           <ProseCodeIcon :filename="entry.filename" class="size-4 shrink-0" />
         </template>
       </UButton>
-
-      <!-- The pane is regenerated on every theme change, the controls below
-           are the invitation to prove it. -->
-      <span class="ms-auto inline-flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-widest text-primary">
-        <span class="size-1.5 rounded-full bg-primary animate-pulse" />
-        live
-      </span>
     </div>
 
     <!-- A fixed pane: the files change length with the theme, the hero must not.
@@ -86,7 +79,7 @@ const pane = computed(() => panes.value.find(entry => entry.key === tab.value) ?
     <CodePane
       v-if="pane"
       :doc="pane.doc"
-      :ui="{ root: 'my-0', base: 'h-74 whitespace-pre text-xs/5 bg-default/50 border-0 rounded-lg shadow-sm' }"
+      :ui="{ root: 'my-0', base: 'h-74 whitespace-pre text-xs/5 bg-default/50 border-0 rounded-lg shadow-sm backdrop-blur-xs' }"
     />
 
     <HomeThemePresets />
