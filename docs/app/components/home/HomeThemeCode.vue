@@ -47,28 +47,38 @@ onMounted(regenerate)
 // the doc reads every theme ref, the framework picks the config file
 watch(() => [JSON.stringify(currentDoc()), framework.value], regenerate)
 
-const tab = ref<Pane['key']>('config')
+const tab = ref<Pane['key']>('css')
 const pane = computed(() => panes.value.find(entry => entry.key === tab.value) ?? panes.value[0])
 </script>
 
 <template>
-  <div class="hidden lg:flex flex-col gap-3">
-    <div class="flex items-center gap-1">
+  <!-- min-w-0: the controls row would otherwise hold the grid column open at
+       its own min-content width and push the hero past the viewport -->
+  <div class="hidden lg:flex flex-col gap-2 min-w-0 rounded-xl bg-elevated/50 px-2.5 py-2">
+    <div class="flex items-center gap-1 ps-1 pe-2 pt-0.5">
       <UButton
         v-for="entry in panes"
         :key="entry.key"
         color="neutral"
         variant="ghost"
-        size="sm"
-        :active="tab === entry.key"
         active-variant="soft"
+        size="sm"
         :label="entry.filename"
+        :active="tab === entry.key"
+        :class="tab === entry.key ? 'bg-accented/75' : ''"
         @click="tab = entry.key"
       >
         <template #leading>
           <ProseCodeIcon :filename="entry.filename" class="size-4 shrink-0" />
         </template>
       </UButton>
+
+      <!-- The pane is regenerated on every theme change, the controls below
+           are the invitation to prove it. -->
+      <span class="ms-auto inline-flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-widest text-primary">
+        <span class="size-1.5 rounded-full bg-primary animate-pulse" />
+        live
+      </span>
     </div>
 
     <!-- A fixed pane: the files change length with the theme, the hero must not.
@@ -76,7 +86,9 @@ const pane = computed(() => panes.value.find(entry => entry.key === tab.value) ?
     <CodePane
       v-if="pane"
       :doc="pane.doc"
-      :ui="{ root: 'my-0', base: 'h-74 whitespace-pre text-xs/5 bg-white/4 backdrop-blur-xs rounded-lg' }"
+      :ui="{ root: 'my-0', base: 'h-74 whitespace-pre text-xs/5 bg-default/50 border-0 rounded-lg shadow-sm' }"
     />
+
+    <HomeThemePresets />
   </div>
 </template>

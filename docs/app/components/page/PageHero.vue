@@ -53,21 +53,20 @@ const twinkles = TWINKLES.map(([col, row], index) => ({
 }))
 
 // The library hero comes with generous padding; the docs one opens under the
-// header and leaves the bottom to the `bottom` slot. The header stack's
-// rhythm and alignment (headline, title, description, links) are the
-// theme's, only its measures change.
-const ui = computed(() => ({
+// header and leaves the bottom to the `bottom` slot. Plain object, not a
+// computed: `slots` isn't reactive, so there would be nothing to recompute.
+const ui = {
   // the top padding sits on the root: the container's own responsive padding
   // is zeroed per breakpoint, and a `pt` there would lose to the theme's `py`
   root: 'overflow-hidden border-b border-default pt-14 sm:pt-22',
   // the second column only exists for a default slot: without one the text
   // keeps the width, and the placeholder that would fill it gets no gap
-  container: ['relative py-0 sm:py-0 lg:py-0', slots.default ? 'gap-8 sm:gap-y-8 lg:gap-x-9' : 'gap-0 sm:gap-0 lg:grid-cols-1'],
+  container: ['py-0 sm:py-0 lg:py-0', slots.default ? 'gap-8 sm:gap-y-8 lg:gap-x-9' : 'gap-0 sm:gap-0 lg:grid-cols-1'],
   headline: 'mb-6',
   title: 'text-4xl sm:text-5xl lg:text-6xl font-medium leading-[1.08] tracking-[-.035em] text-balance',
   description: 'max-w-152 text-base sm:text-[17px] leading-relaxed text-pretty',
   links: 'gap-x-3'
-}))
+}
 </script>
 
 <template>
