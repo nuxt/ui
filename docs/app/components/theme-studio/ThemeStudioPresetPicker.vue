@@ -22,9 +22,10 @@ const { presets, selectedPreset, applyPreset, selectPalette, isCustomPalette, ne
 // "changed from the preset" per control, the cue the studio toolbar carries
 const { groupDirtyFlags } = useThemeStudioToolbar()
 
-// The persisted theme is client-only, resolve after mount so hydration
-// matches the server's fallback (the stock preset).
-const mounted = useMounted()
+// The persisted theme is client-only, resolve once the client has it so
+// hydration matches the server's fallback (the stock preset). Shared, or the
+// copy the mobile menu mounts would flash the fallback.
+const mounted = useThemeMounted()
 
 const preset = computed(() => (mounted.value ? presets.find(entry => entry.id === selectedPreset.value) : presets[0]))
 // the color mode preference is client-only too
