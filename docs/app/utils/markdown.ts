@@ -83,7 +83,7 @@ const inlineShiki = defineComarkPlugin(() => ({
  * build time (a prop description, a generated config, release notes) goes
  * through here, so the site holds one parser and one highlighter.
  */
-export const markdownPlugins = [
+const markdownPlugins = [
   shiki({
     // on top of the plugin's defaults, which the array is appended to
     languages: [...css, ...diff, ...html],
@@ -112,8 +112,30 @@ const parse = createMarkdownParser({ plugins: markdownPlugins })
 
 export type MarkdownDoc = Awaited<ReturnType<typeof parse>>
 
+/**
+ * Documents by source. Every runtime caller comes through here, and the same
+ * string is rendered over and over (a prop description repeated across pages,
+ * a type in two tables), so the parse happens once. The promise is cached, so
+ * two callers racing on one string share the work, and the whole thing is
+ * dropped once it has seen enough: this module outlives a request on the server.
+ */
+const DOCUMENT_LIMIT = 500
+const documents = new Map<string, Promise<MarkdownDoc>>()
+
 export function parseMarkdown(markdown: string): Promise<MarkdownDoc> {
-  return parse(markdown)
+  const cached = documents.get(markdown)
+  if (cached) {
+    return cached
+  }
+
+  const doc = parse(markdown)
+
+  if (documents.size >= DOCUMENT_LIMIT) {
+    documents.clear()
+  }
+  documents.set(markdown, doc)
+
+  return doc
 }
 
 /** A generated file as a highlighted document, rendered by CodePane. */

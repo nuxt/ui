@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import type { ContentNavigationItem } from '@nuxt/content'
-import { MarkdownDocument } from '@comark/vue'
 import { parseMarkdown } from '../../../utils/markdown'
 import type { MarkdownDoc } from '../../../utils/markdown'
 
@@ -111,7 +110,7 @@ if (import.meta.server) {
 
     <UPageBody>
       <!-- the document arrives parsed, so it renders rather than DocsMarkdown, which takes markdown -->
-      <MarkdownDocument v-if="notes" :value="notes" />
+      <DocsMarkdown v-if="notes" :value="notes" />
 
       <!-- an empty list or notes that would not load: the same dead end -->
       <p v-else class="text-muted">
