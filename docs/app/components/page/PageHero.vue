@@ -2,7 +2,8 @@
 import { reactiveOmit } from '@vueuse/core'
 import type { ButtonProps, PageHeroProps, PageHeroSlots } from '@nuxt/ui'
 
-const props = withDefaults(defineProps<PageHeroProps & {
+// `ui` is left out: the map below is the docs' hero, a caller's would replace it
+const props = withDefaults(defineProps<Omit<PageHeroProps, 'ui'> & {
   /** The pill above the title: its label, or button props (`to` makes it a link). */
   badge?: string | ButtonProps
   /** The title's first half. */
@@ -17,7 +18,7 @@ const props = withDefaults(defineProps<PageHeroProps & {
 
 const slots = defineSlots<PageHeroSlots>()
 
-const heroProps = reactiveOmit(props, 'badge', 'lead', 'accent', 'breakLine', 'ui')
+const heroProps = reactiveOmit(props, 'badge', 'lead', 'accent', 'breakLine')
 
 // a bare string is the label
 const badge = computed(() => (typeof props.badge === 'string' ? { label: props.badge } : props.badge))
@@ -45,9 +46,10 @@ const TWINKLES = [
   [29, 4], [31, 10], [34, 16], [36, 7], [38, 2], [41, 13], [43, 6], [46, 18], [48, 3], [50, 11], [53, 8], [56, 15]
 ]
 const twinkles = TWINKLES.map(([col, row], index) => ({
-  // 13px: the cell's center less half the 2px dot
-  left: `${col! * 28 + 13}px`,
-  top: `${row! * 28 + 13}px`,
+  // the grid paints its dot in the middle of each 28px cell, so the twinkle's
+  // own centre has to land there: 14 less half of its 1px box
+  left: `${col! * 28 + 13.5}px`,
+  top: `${row! * 28 + 13.5}px`,
   animationDelay: `${(index * 0.9) % 5}s`,
   animationDuration: `${3 + (index % 4) * 0.5}s`
 }))
@@ -74,7 +76,7 @@ const ui = {
     <template #top>
       <!-- A dot grid fading in and out vertically, so the type sits on texture
            rather than on a hard band. -->
-      <div aria-hidden="true" class="absolute inset-0 pointer-events-none bg-[radial-gradient(var(--ui-border-accented)_1px,transparent_1px)] bg-size-[28px_28px] opacity-50 mask-[linear-gradient(to_bottom,transparent,black_30%,black_70%,transparent)]" />
+      <div aria-hidden="true" class="absolute inset-0 pointer-events-none bg-[radial-gradient(var(--ui-border-accented)_1px,transparent_1px)] bg-size-[28px_28px] opacity-50 mask-[linear-gradient(to_bottom,transparent,black_30%,black_70%,transparent)] -z-10" />
 
       <!-- The horizon: a glow rising from the bottom edge, under a hairline
            that fades out at both ends. Both take their strength from the
