@@ -11,6 +11,7 @@ import { cssVariableDefaults } from '../../app/utils/theme/tokens'
 // so this costs nothing beyond the preset data.
 import { presets } from '../../app/utils/theme/engine/presets'
 import { FONTS } from '../../app/utils/theme/studio'
+import type { FontCategory } from '../../app/utils/theme/studio'
 
 const componentNames = Object.keys(theme)
 
@@ -152,6 +153,8 @@ const getComponentTheme = tool({
 
 // Google's own category names, the catalog route passes them through as is.
 const FONT_CATEGORIES = ['Sans Serif', 'Serif', 'Display', 'Handwriting', 'Monospace'] as const
+// the shortlist speaks the studio's three, mapped so one response uses one vocabulary
+const CURATED_CATEGORY: Record<FontCategory, typeof FONT_CATEGORIES[number]> = { Sans: 'Sans Serif', Serif: 'Serif', Mono: 'Monospace' }
 
 const searchFonts = tool({
   description: `Browse fonts for \`applyTheme\`'s fontSans / fontSerif / fontMono. Returns the studio's curated shortlist (safe, proven faces) and the best matches from the full Google Fonts catalog (1900+ families, most popular first), each with its category. Call it when designing a theme whose personality the shortlist doesn't cover (editorial, playful, brutalist, retro, luxury...) and pick from the results rather than from memory. Filter by category (${FONT_CATEGORIES.join(', ')}) and/or search by name. Display and Handwriting faces suit headings (fontSerif) far better than body text.`,
@@ -164,13 +167,12 @@ const searchFonts = tool({
     // the docs' own cached copy of the catalog, popularity-ordered
     const catalog = await $fetch<Array<{ name: string, category: string }>>('/api/fonts.json')
     const q = query?.trim().toLowerCase()
-    const matches = catalog
-      .filter(font => !category || font.category === category)
-      .filter(font => !q || font.name.toLowerCase().includes(q))
-      .slice(0, limit)
+    const keep = (font: { name: string, category: string }) => (!category || font.category === category) && (!q || font.name.toLowerCase().includes(q))
+    const curated = FONTS.map(font => ({ name: font.name, category: CURATED_CATEGORY[font.category] })).filter(keep)
+    const matches = catalog.filter(keep).slice(0, limit)
 
     return {
-      curated: FONTS.map(font => ({ name: font.name, category: font.category })),
+      curated,
       matches,
       note: 'Any Google Font works in applyTheme; @nuxt/fonts loads it. Popularity order is a proxy for how well a face reads at body sizes.'
     }
