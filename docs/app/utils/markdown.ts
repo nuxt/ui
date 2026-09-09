@@ -7,9 +7,7 @@ import emoji from '@comark/vue/plugins/emoji'
 import css from 'shiki/dist/langs/css.mjs'
 import diff from 'shiki/dist/langs/diff.mjs'
 import html from 'shiki/dist/langs/html.mjs'
-import type { ShikiTransformer } from '@shikijs/types'
-import { transformerColorHighlight } from 'shiki-transformer-color-highlight'
-import { transformerIconHighlight } from 'shiki-transformer-icon-highlight'
+import { shikiTransformers } from './shiki'
 
 /** A rendered element as Comark writes it: its tag, its props, then its children. */
 type MarkdownElement = [string, Record<string, unknown>, ...unknown[]]
@@ -89,12 +87,7 @@ export const markdownPlugins = [
   shiki({
     // on top of the plugin's defaults, which the array is appended to
     languages: [...css, ...diff, ...html],
-    // the pair the content pipeline uses (mdc.config.ts): a swatch on colour
-    // values, the glyph on icon names
-    transformers: [
-      transformerColorHighlight() as ShikiTransformer,
-      transformerIconHighlight()
-    ]
+    transformers: shikiTransformers()
   }),
   // the release notes carry their own table of contents
   toc({ depth: 3, searchDepth: 3 }),
