@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { joinURL } from 'ufo'
 import { themeChipStyle, PRESET_ICONS } from '../utils/theme/studio'
+import { presets } from '../utils/theme/engine/presets'
+import { DEFAULT_PRESET_ID } from '../utils/theme/engine/types'
+import type { ThemePreset } from '../utils/theme/engine/presets'
 
 const { data: page } = await useAsyncData('index', () => queryCollection('index').first())
 if (!page.value) {
@@ -11,8 +14,16 @@ const { url } = useSiteConfig()
 const { version } = useRuntimeConfig().public
 
 // A taste of the theme studio: the pills retheme the page in place, and the
-// wall below shows what that does to every component.
-const { presets, selectedPreset, applyPreset } = useThemeStudio()
+// wall below shows what that does to every component. The presets come from
+// their data module and the studio itself loads on the first click, so the
+// landing chunk carries neither the palette math nor the section engine.
+const { activePreset, hasChanges } = useTheme()
+const selectedPreset = computed(() => activePreset.value ?? (hasChanges.value ? undefined : DEFAULT_PRESET_ID))
+const nuxtApp = useNuxtApp()
+async function applyPreset(preset: ThemePreset) {
+  const { useThemeStudio } = await import('../composables/useThemeStudio')
+  nuxtApp.runWithContext(() => useThemeStudio().applyPreset(preset))
+}
 const studioIcons = useStudioIcons()
 const appConfig = useAppConfig()
 // the applied preset is client-only, resolve after mount so hydration matches
@@ -95,7 +106,7 @@ useSeoMeta({
           <div class="relative isolate">
             <div aria-hidden="true" class="absolute inset-0 -z-10 rounded-xl border border-default bg-elevated/50 mask-b-from-25%" />
 
-            <Playground static />
+            <LazyPlayground static hydrate-on-visible />
           </div>
         </UPageBody>
       </UPage>
