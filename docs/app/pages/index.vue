@@ -14,12 +14,6 @@ const appConfig = useAppConfig()
 // composable so the landing never pulls the studio engine to render it.
 const { view } = useThemeStudioView()
 
-// The quiet link beside the CTA wears the arrow, from the icon pack rather
-// than spelled out in the content.
-const links = computed(() => page.value?.hero?.links?.map(link => (
-  link.variant === 'ghost' ? { ...link, trailingIcon: appConfig.ui.icons.arrowRight } : link
-)))
-
 useSeoMeta({
   titleTemplate: '%s - Nuxt UI',
   title: page.value.title,
@@ -47,7 +41,6 @@ if (import.meta.server) {
   <UMain v-if="page">
     <PageHero
       v-bind="page.hero"
-      :links="links"
       :badge="{
         label: `What's new in v${version}`,
         trailingIcon: appConfig.ui.icons.arrowRight,
@@ -60,6 +53,12 @@ if (import.meta.server) {
     <UContainer>
       <UPage>
         <UPageBody class="space-y-0">
+          <!-- the wall and the views are the section, and the switcher names
+               them: a heading for the outline, not for the eye -->
+          <h2 class="sr-only">
+            Components and templates
+          </h2>
+
           <PageSectionHeading>
             <template #leading>
               <ThemeStudioViewSwitcher :content="{ align: 'start' }" />
