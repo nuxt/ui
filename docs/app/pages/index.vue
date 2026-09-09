@@ -65,7 +65,7 @@ useSeoMeta({
       :badge="{
         label: `What's new in v${version}`,
         trailingIcon: appConfig.ui.icons.arrowRight,
-        to: `/docs/releases/v${version}`
+        to: '/docs/releases'
       }"
     >
       <HomeThemeCode />
