@@ -39,7 +39,7 @@ interface TeamMember {
   location?: string
   websiteUrl?: string
   sponsorsListing?: string
-  socialAccounts: Record<string, { displayName: string, url: string }>
+  socialAccounts?: Record<string, { displayName: string, url: string }>
 }
 
 interface Module {
@@ -120,7 +120,7 @@ async function fromNuxtCom(): Promise<Contributors> {
           name: member?.name,
           location: location(member?.location),
           websiteUrl: absolute(member?.websiteUrl),
-          socialAccounts: member && Object.entries(member.socialAccounts).map(([provider, account]) => ({ provider, url: account.url })),
+          socialAccounts: member?.socialAccounts ? Object.entries(member.socialAccounts).map(([provider, account]) => ({ provider, url: account.url })) : [],
           sponsorsListing: member?.sponsorsListing
         }
       })
@@ -129,8 +129,17 @@ async function fromNuxtCom(): Promise<Contributors> {
 
 export default defineCachedEventHandler(async (): Promise<Contributors> => {
   const token = process.env.NUXT_GITHUB_TOKEN
+  if (!token) {
+    return fromNuxtCom()
+  }
 
-  return token ? fromGitHub(token) : fromNuxtCom()
+  try {
+    return await fromGitHub(token)
+  } catch (error) {
+    // a revoked token or an exhausted rate limit would otherwise reject the handler and skip the cache
+    console.error('[api/github/contributors] fromGitHub failed, falling back to nuxt.com', error)
+    return fromNuxtCom()
+  }
 }, {
   maxAge: 60 * 60, // 1 hour
   getKey: () => 'contributors'
