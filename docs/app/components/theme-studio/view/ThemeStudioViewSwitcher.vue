@@ -20,7 +20,7 @@ const props = withDefaults(defineProps<{
 
 const open = defineModel<boolean>('open', { default: false })
 
-const { view, views } = useThemeStudio()
+const { view, views } = useThemeStudioView()
 const studioIcons = useStudioIcons()
 const appConfig = useAppConfig()
 

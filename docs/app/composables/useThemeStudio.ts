@@ -1,7 +1,6 @@
 import type { MaybeRefOrGetter } from 'vue'
 import colors from 'tailwindcss/colors'
 import { rampCssName, THEME_STUDIO_VIEWS } from '../utils/theme/studio'
-import type { ThemeStudioView } from '../utils/theme/studio'
 // Leaf modules, never the barrel: the barrel re-exports serialize (and json5
 // with it), and this composable is reached from the header preset picker on
 // every docs page, which would put the exporter in the entry chunk.
@@ -398,7 +397,7 @@ export function useThemeStudio() {
   /* ------------------------------------------------------------ preview -- */
 
   /** Which preview the studio shows, shared by the page and its switcher. */
-  const view = useState<ThemeStudioView>('theme-studio-view', () => 'grid')
+  const { view } = useThemeStudioView()
 
   /* ----------------------------------------------- section reset/delta -- */
 
