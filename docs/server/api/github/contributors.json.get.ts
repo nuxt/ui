@@ -127,20 +127,41 @@ async function fromNuxtCom(): Promise<Contributors> {
   }
 }
 
-export default defineCachedEventHandler(async (): Promise<Contributors> => {
-  const token = process.env.NUXT_GITHUB_TOKEN
-  if (!token) {
-    return fromNuxtCom()
-  }
+/**
+ * Each source caches itself, so a GitHub blip is not written into the answer
+ * for the hour that follows: only what GitHub actually returned is kept, and
+ * the standby it falls back to expires quickly enough to let GitHub back in.
+ */
+const cachedFromGitHub = defineCachedFunction(fromGitHub, {
+  maxAge: 60 * 60,
+  name: 'contributors',
+  getKey: () => 'github'
+})
 
-  try {
-    return await fromGitHub(token)
-  } catch (error) {
-    // a revoked token or an exhausted rate limit would otherwise reject the handler and skip the cache
-    console.error('[api/github/contributors] fromGitHub failed, falling back to nuxt.com', error)
-    return fromNuxtCom()
-  }
-}, {
-  maxAge: 60 * 60, // 1 hour
-  getKey: () => 'contributors'
+const cachedFromNuxtCom = defineCachedFunction(fromNuxtCom, {
+  maxAge: 10 * 60,
+  name: 'contributors',
+  getKey: () => 'nuxt-com'
+})
+
+export default defineEventHandler(async (event): Promise<Contributors> => {
+  const token = process.env.NUXT_GITHUB_TOKEN
+
+  const contributors = await (async () => {
+    if (!token) {
+      return cachedFromNuxtCom()
+    }
+
+    try {
+      return await cachedFromGitHub(token)
+    } catch (error) {
+      console.error('[api/github/contributors] fromGitHub failed, falling back to nuxt.com', error)
+      return cachedFromNuxtCom()
+    }
+  })()
+
+  // the header the cached handler used to write, following whichever source answered
+  setResponseHeader(event, 'cache-control', `max-age=${contributors.total === null ? 600 : 3600}`)
+
+  return contributors
 })
