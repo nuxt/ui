@@ -44,9 +44,18 @@ const pills = computed(() => presets.map(preset => ({
   apply: () => applyPreset(preset)
 })))
 
-if (import.meta.server) {
-  prerenderRoutes(['/raw/index.md'])
+useSeoMeta({
+  titleTemplate: '%s - Nuxt UI',
+  title: page.value.title,
+  description: page.value.description,
+  ogTitle: `${page.value.title} - Nuxt UI`,
+  ogDescription: page.value.description,
+  ogImage: joinURL(url, '/og-image.png')
+})
 
+useCanonical('/raw/index.md')
+
+if (import.meta.server) {
   useSchemaOrg([
     defineSoftwareApp({
       name: 'Nuxt UI',
@@ -56,17 +65,6 @@ if (import.meta.server) {
     })
   ])
 }
-
-useCanonical('/raw/index.md')
-
-useSeoMeta({
-  titleTemplate: '%s - Nuxt UI',
-  title: page.value.title,
-  description: page.value.description,
-  ogTitle: `${page.value.title} - Nuxt UI`,
-  ogDescription: page.value.description,
-  ogImage: joinURL(url, '/og-image.png')
-})
 </script>
 
 <template>

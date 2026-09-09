@@ -75,6 +75,8 @@ useSeoMeta({
 
 const path = computed(() => route.path.replace(/\/$/, ''))
 
+useCanonical(computed(() => `/raw${path.value}.md`))
+
 if (import.meta.server) {
   if (route.path.startsWith('/docs/components/')) {
     defineOgImage('Component.takumi', {
@@ -105,8 +107,6 @@ if (import.meta.server) {
     })
   ])
 }
-
-useCanonical(computed(() => `${path.value}.md`))
 
 const { open, ask } = useChat()
 const studioIcons = useStudioIcons()
