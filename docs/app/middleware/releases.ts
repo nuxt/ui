@@ -6,7 +6,9 @@ export default defineNuxtRouteMiddleware(async (to) => {
   const releases = useReleases()
   if (!releases.value.length) {
     try {
-      releases.value = (await $fetch('/api/github/releases.json')).filter(release => DOCUMENTED.test(release.tag))
+      // typed explicitly: assigning the route's inferred type straight to the
+      // state ref sends TypeScript down its route table
+      releases.value = await $fetch<Release[]>('/api/github/releases.json')
     } catch (error) {
       // GitHub can be unreachable: the page renders an empty state rather than
       // failing every navigation and the prerender crawl with it

@@ -15,6 +15,9 @@ interface UnghRelease {
   markdown: string
 }
 
+/** The stable v4 line: this site documents v4, and v4.0.0 supersedes its alphas and betas. */
+export const DOCUMENTED = /^v4\.\d+\.\d+$/
+
 /**
  * The releases of nuxt/ui through ungh, newest first, v2 left out. Cached
  * for an hour and shared by the list and the per-release routes, so ungh is

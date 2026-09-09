@@ -8,9 +8,6 @@ export interface Release {
   url: string
 }
 
-/** The stable v4 line: this site documents v4, and v4.0.0 supersedes its alphas and betas. */
-export const DOCUMENTED = /^v4\.\d+\.\d+$/
-
 /** The versions, loaded by the `releases` middleware so the docs aside has them at render. */
 export const useReleases = () => useState<Release[]>('releases', () => [])
 
