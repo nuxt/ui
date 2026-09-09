@@ -447,8 +447,8 @@ importers:
         specifier: ^1.1.0
         version: 1.1.0
       shiki-transformer-icon-highlight:
-        specifier: ^0.1.0
-        version: 0.1.0
+        specifier: ^0.2.0
+        version: 0.2.0
       simple-git:
         specifier: ^3.36.0
         version: 3.36.0(supports-color@10.2.2)
@@ -8082,8 +8082,8 @@ packages:
   shiki-transformer-color-highlight@1.1.0:
     resolution: {integrity: sha512-kjmJajroVi7llqSA7vsdMlOv5jmnYUs8O3Er4RfEIm8kd2g6ou9rEHxm5mNWbb6o2aXI4F/xhkq46Vyh/1bEVQ==}
 
-  shiki-transformer-icon-highlight@0.1.0:
-    resolution: {integrity: sha512-Yxhm7SCgcbtm0+5QJq/KeQmyWDr2o5s1+EZTkzt4oEXgmsHtCL9tWxOqOtQlCtj0fjSMRHjSij9qAn4JutomQw==}
+  shiki-transformer-icon-highlight@0.2.0:
+    resolution: {integrity: sha512-TXFbjfMU6rq6t5Qd5ZXdBCLmz72LEgXuF03l5MTMWrU7zc47UunR9S5Mb9F//qO93ZZ7jSbo02s+XLMjCtxXPA==}
 
   shiki@4.4.3:
     resolution: {integrity: sha512-Mb/GvXPHBAXdgGIcnfU5L3ldpn1XcxrGkPHwqgRx17/I2XRfqlFKk2vGkHWINn1kdXvzJZeuO3is6I9KLPFm0g==}
@@ -18420,7 +18420,7 @@ snapshots:
       '@shikijs/types': 3.23.0
       colorjs.io: 0.6.1
 
-  shiki-transformer-icon-highlight@0.1.0:
+  shiki-transformer-icon-highlight@0.2.0:
     dependencies:
       '@shikijs/types': 4.4.3
 
