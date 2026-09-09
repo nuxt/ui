@@ -313,11 +313,11 @@ export function useNuxiIcon(props: NuxiIconProps, emit?: EmitFn) {
     const mdx = e.clientX - lastMouseX
     const mdy = e.clientY - lastMouseY
     // tracked while asleep too, or the first move after waking reads as a jolt
+    // and the stale speed sets off the dizzy spell on the way out
     lastMouseX = e.clientX
     lastMouseY = e.clientY
-    if (!isAwake.value) return
-
     mouseSpeed = Math.sqrt(mdx * mdx + mdy * mdy)
+    if (!isAwake.value) return
 
     if (!svgEl.value || isHovered.value) return
     const rect = (svgEl.value as unknown as Element).getBoundingClientRect()
