@@ -66,8 +66,7 @@ const ui = computed(() => ({
   headline: 'mb-6',
   title: 'text-4xl sm:text-5xl lg:text-6xl font-medium leading-[1.08] tracking-[-.035em] text-balance',
   description: 'max-w-152 text-base sm:text-[17px] leading-relaxed text-pretty',
-  links: 'gap-x-3',
-  ...props.ui
+  links: 'gap-x-3'
 }))
 </script>
 
