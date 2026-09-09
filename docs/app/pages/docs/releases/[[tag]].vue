@@ -110,19 +110,20 @@ if (import.meta.server) {
     </UPageHeader>
 
     <UPageBody>
-      <template v-if="release">
-        <!-- the document arrives parsed, so it renders rather than DocsMarkdown, which takes markdown -->
-        <MarkdownDocument v-if="notes" :value="notes" />
+      <!-- the document arrives parsed, so it renders rather than DocsMarkdown, which takes markdown -->
+      <MarkdownDocument v-if="notes" :value="notes" />
 
+      <!-- an empty list or notes that would not load: the same dead end -->
+      <p v-else class="text-muted">
+        Release notes are unavailable right now, see them on
+        <ULink to="https://github.com/nuxt/ui/releases" target="_blank" class="text-primary font-medium">GitHub</ULink>.
+      </p>
+
+      <template v-if="release">
         <USeparator v-if="surround.some(Boolean)" />
 
         <UContentSurround :surround="(surround as any)" />
       </template>
-
-      <p v-else class="text-muted">
-        Releases are unavailable right now, see them on
-        <ULink to="https://github.com/nuxt/ui/releases" target="_blank" class="text-primary font-medium">GitHub</ULink>.
-      </p>
     </UPageBody>
 
     <template v-if="notes?.meta?.toc?.links?.length" #right>
