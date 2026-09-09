@@ -64,7 +64,7 @@ if (import.meta.server) {
                 :alt="`Template ${template.title} screenshot`"
                 width="654"
                 height="368"
-                :loading="index < 2 ? 'eager' : 'lazy'"
+                :loading="framework === 'nuxt' && index < 2 ? 'eager' : 'lazy'"
                 class="w-full md:w-92 lg:w-110 md:row-span-2 xl:row-span-1 aspect-video object-cover object-top rounded-md border border-default"
               />
 
