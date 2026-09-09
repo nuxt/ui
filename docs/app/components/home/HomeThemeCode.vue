@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import { parseCode } from '../../utils/code'
+import type { CodeDocument } from '../../utils/code'
+
 /**
  * The theme as the files you would ship, for the home hero's right half:
  * main.css and the config, one tab each, regenerated as the theme changes
@@ -12,30 +15,17 @@ const { framework } = useFrameworks()
 interface Pane {
   key: 'css' | 'config'
   filename: string
-  code: string
-  html: string
-}
-
-// Both modes in one pass: the light colors inline, the dark ones in the
-// `--shiki-dark` variables main.css switches to under `html.dark`.
-async function highlight(code: string, lang: 'css' | 'typescript') {
-  const highlighter = await useHighlighter()
-  return highlighter.codeToHtml(code, {
-    lang,
-    themes: { light: 'material-theme-lighter', dark: 'material-theme-palenight' },
-    defaultColor: 'light',
-    structure: 'inline'
-  })
+  doc: CodeDocument
 }
 
 async function generate(): Promise<Pane[]> {
   // explicit: the stock theme is a pair of files too, not an empty diff
   const [css, config] = await Promise.all([exportCSS({ explicit: true }), exportConfig({ explicit: true })])
-  const [cssHtml, configHtml] = await Promise.all([highlight(css, 'css'), highlight(config, 'typescript')])
+  const [cssDoc, configDoc] = await Promise.all([parseCode(css, 'css'), parseCode(config, 'ts')])
 
   return [
-    { key: 'css', filename: 'main.css', code: css, html: cssHtml },
-    { key: 'config', filename: configLabel.value, code: config, html: configHtml }
+    { key: 'css', filename: 'main.css', doc: cssDoc },
+    { key: 'config', filename: configLabel.value, doc: configDoc }
   ]
 }
 
@@ -43,16 +33,14 @@ async function generate(): Promise<Pane[]> {
 // client-only, so the first regeneration waits for mount.
 const { data: panes } = await useAsyncData('home-theme-code', generate, { default: () => [] as Pane[] })
 
-let pending: Promise<void> | undefined
-function regenerate() {
-  // one at a time: a burst of changes (a preset applies several) ends on the last state
-  pending ??= generate()
-    .then((result) => {
-      panes.value = result
-    })
-    .finally(() => {
-      pending = undefined
-    })
+// the last change wins: a result for a theme that has moved on is dropped
+let version = 0
+async function regenerate() {
+  const current = ++version
+  const result = await generate()
+  if (current === version) {
+    panes.value = result
+  }
 }
 
 onMounted(regenerate)
@@ -85,14 +73,10 @@ const pane = computed(() => panes.value.find(entry => entry.key === tab.value) ?
 
     <!-- A fixed pane: the files change length with the theme, the hero must not.
          The tabs above are its header, so the filename stays off the block. -->
-    <ProsePre
+    <CodePane
       v-if="pane"
-      :code="pane.code"
-      :copy="false"
-      :ui="{ root: 'my-0 ', base: 'shiki h-74 whitespace-pre text-xs/5 bg-white/4 backdrop-blur-xs rounded-lg' }"
-    >
-      <!-- eslint-disable-next-line vue/no-v-html -- shiki output over our own generated files -->
-      <code v-html="pane.html" />
-    </ProsePre>
+      :doc="pane.doc"
+      :ui="{ root: 'my-0', base: 'h-74 whitespace-pre text-xs/5 bg-white/4 backdrop-blur-xs rounded-lg' }"
+    />
   </div>
 </template>

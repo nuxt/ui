@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { useClipboard } from '@vueuse/core'
-import type { HighlighterGeneric } from 'shiki'
 import { encodeThemeDoc } from '../../utils/theme/link'
+import { parseCode } from '../../utils/code'
+import type { CodeDocument } from '../../utils/code'
 
 /**
  * The export modal: a link that carries the whole theme, then the generated
@@ -41,31 +42,12 @@ function copyThemeLink() {
   track('Theme Exported', { type: 'Link' })
 }
 
-const colorMode = useColorMode()
-
-// Ready on first open; the pane falls back to a plain <pre> for the frame
-// the highlighter takes to arrive.
-const highlighter = shallowRef<HighlighterGeneric<any, any> | null>(null)
-watch(open, async (isOpen) => {
-  if (isOpen && !highlighter.value) {
-    highlighter.value = await useHighlighter()
-  }
-})
-
-// One theme per mode rather than shiki's dual-theme vars (those ride inline
-// styles), and `inline` structure: ProsePre brings the <pre> of its own.
-function highlight(code: string, lang: 'css' | 'typescript') {
-  if (!highlighter.value || !code) return ''
-  return highlighter.value.codeToHtml(code, {
-    lang,
-    theme: colorMode.value === 'dark' ? 'material-theme-palenight' : 'material-theme-lighter',
-    structure: 'inline'
-  })
-}
+// the pane shows the plain file for the frame the highlighter takes to arrive
+const docs = shallowRef<Partial<Record<'css' | 'config', CodeDocument>>>({})
 
 const panes = computed(() => [
-  { key: 'css' as const, filename: 'main.css', code: css.value, html: highlight(css.value, 'css') },
-  { key: 'config' as const, filename: configLabel.value, code: config.value, html: highlight(config.value, 'typescript') }
+  { key: 'css' as const, filename: 'main.css', code: css.value },
+  { key: 'config' as const, filename: configLabel.value, code: config.value }
 ])
 
 const tab = ref<'css' | 'config'>('css')
@@ -93,6 +75,7 @@ function downloadFile() {
 watch([open, framework], async ([isOpen]) => {
   css.value = isOpen ? await exportCSS() : ''
   config.value = isOpen ? await exportConfig() : ''
+  docs.value = isOpen ? { css: await parseCode(css.value, 'css'), config: await parseCode(config.value, 'ts') } : {}
 })
 
 // The theme can't change while the modal covers the studio, so the link is
@@ -179,16 +162,18 @@ watch(open, async (isOpen) => {
 
         <!-- A fixed pane height: the files and the highlighter both land after
              the modal paints, a box that sized to them would jump. -->
+        <CodePane
+          v-if="docs[pane.key]"
+          :doc="docs[pane.key]!"
+          :ui="{ root: 'my-0', base: 'h-96 whitespace-pre text-xs/5' }"
+        />
         <ProsePre
+          v-else
           :code="pane.code"
           :copy="false"
           :ui="{ root: 'my-0', base: 'h-96 whitespace-pre text-xs/5' }"
         >
-          <!-- eslint-disable-next-line vue/no-v-html -- shiki output over our own generated files -->
-          <code v-if="pane.html" v-html="pane.html" />
-          <template v-else>
-            {{ pane.code }}
-          </template>
+          {{ pane.code }}
         </ProsePre>
       </div>
     </template>
