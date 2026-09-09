@@ -1,41 +1,15 @@
 import type { ContentNavigationItem } from '@nuxt/content'
 
+/** A version as the nav and the page header list it. */
 export interface Release {
   tag: string
   title: string
   date: string
+  url: string
 }
-
-interface UnghRelease {
-  name?: string
-  tag: string
-  publishedAt: string
-  markdown: string
-}
-
-let cache: { at: number, releases: Promise<UnghRelease[]> } | undefined
 
 /** The stable v4 line: this site documents v4, and v4.0.0 supersedes its alphas and betas. */
-const DOCUMENTED = /^v4\.\d+\.\d+$/
-
-/**
- * The GitHub releases through ungh, newest first. One request an hour on the
- * server, one a session in the browser. The notes stay out of the payload, a
- * page parses the one it shows.
- */
-export function fetchReleases() {
-  if (!cache || (import.meta.server && Date.now() - cache.at > 60 * 60 * 1000)) {
-    const releases = $fetch<{ releases: UnghRelease[] }>('https://ungh.cc/repos/nuxt/ui/releases')
-      .then(data => data.releases.filter(release => DOCUMENTED.test(release.tag)))
-    // a failed request must not be served for the next hour
-    releases.catch(() => {
-      cache = undefined
-    })
-    cache = { at: Date.now(), releases }
-  }
-
-  return cache.releases
-}
+export const DOCUMENTED = /^v4\.\d+\.\d+$/
 
 /** The versions, loaded by the `releases` middleware so the docs aside has them at render. */
 export const useReleases = () => useState<Release[]>('releases', () => [])

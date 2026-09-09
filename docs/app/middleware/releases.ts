@@ -5,11 +5,14 @@
 export default defineNuxtRouteMiddleware(async (to) => {
   const releases = useReleases()
   if (!releases.value.length) {
-    releases.value = (await fetchReleases()).map(release => ({
-      tag: release.tag,
-      title: release.name || release.tag,
-      date: release.publishedAt
-    }))
+    try {
+      releases.value = (await $fetch('/api/github/releases.json')).filter(release => DOCUMENTED.test(release.tag))
+    } catch (error) {
+      // GitHub can be unreachable: the page renders an empty state rather than
+      // failing every navigation and the prerender crawl with it
+      console.warn('[releases] could not load the release list', error)
+      releases.value = []
+    }
   }
 
   // The latest release lives on the section root, the nav links it there.

@@ -248,17 +248,37 @@ export function createOpenApiDocument(options: { version: string, url?: string, 
         get: {
           operationId: 'getReleases',
           tags: ['GitHub'],
-          summary: 'Recent releases',
-          description: 'Releases of `nuxt/ui` as returned by the GitHub API, excluding v2. Empty when the server has no GitHub token configured.',
+          summary: 'Releases',
+          description: 'Releases of `nuxt/ui`, newest first, v2 left out. The notes are served per release by `/api/github/releases/{tag}`. Cached for an hour.',
           responses: {
             200: {
-              description: 'GitHub release objects.',
+              description: 'Releases, newest first.',
               content: {
                 'application/json': {
-                  schema: { type: 'array', items: { $ref: '#/components/schemas/GitHubObject' } }
+                  schema: { type: 'array', items: { $ref: '#/components/schemas/Release' } }
                 }
               }
             }
+          }
+        }
+      },
+      '/api/github/releases/{tag}': {
+        get: {
+          operationId: 'getReleaseNotes',
+          tags: ['GitHub'],
+          summary: 'Release notes',
+          description: 'One release with its notes parsed to the MDC tree the `/docs/releases` pages render, plus the table of contents. Cached for an hour.',
+          parameters: [{ name: 'tag', in: 'path', required: true, schema: { type: 'string', example: 'v4.0.0' } }],
+          responses: {
+            200: {
+              description: 'The release and its parsed notes.',
+              content: {
+                'application/json': {
+                  schema: { $ref: '#/components/schemas/ReleaseNotes' }
+                }
+              }
+            },
+            404: { description: 'No release has that tag.' }
           }
         }
       },
@@ -450,6 +470,30 @@ export function createOpenApiDocument(options: { version: string, url?: string, 
             mask: { type: 'string', example: '# ## ## ## ##' }
           },
           required: ['name', 'code', 'dialCode']
+        },
+        Release: {
+          type: 'object',
+          properties: {
+            tag: { type: 'string', example: 'v4.0.0' },
+            title: { type: 'string', description: 'Release name, its tag when the release has none.' },
+            date: { type: 'string', format: 'date-time', description: 'Publication date.' },
+            url: { type: 'string', format: 'uri', description: 'The release on GitHub.' }
+          },
+          required: ['tag', 'title', 'date', 'url']
+        },
+        ReleaseNotes: {
+          allOf: [
+            { $ref: '#/components/schemas/Release' },
+            {
+              type: 'object',
+              properties: {
+                body: { type: 'object', description: 'The notes as an MDC tree.' },
+                data: { type: 'object', description: 'Front matter of the notes, usually empty.' },
+                toc: { type: 'object', description: 'Headings of the notes, to depth 3.' }
+              },
+              required: ['body', 'data', 'toc']
+            }
+          ]
         },
         Commit: {
           type: 'object',
