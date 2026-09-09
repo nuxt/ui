@@ -17,7 +17,7 @@ const items = computed<NavigationMenuItem[]>(() => [{
   active: route.path.startsWith('/docs/components')
 }, {
   label: 'Figma',
-  icon: 'i-lucide-figma',
+  icon: 'i-simple-icons-figma',
   to: 'https://go.nuxt.com/figma-ui',
   target: '_blank'
 }, {

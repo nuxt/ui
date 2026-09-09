@@ -74,7 +74,7 @@ export function useHeader() {
     target: '_blank'
   }, {
     label: 'Figma',
-    icon: studioIcons.figma,
+    icon: 'i-simple-icons-figma',
     to: 'https://go.nuxt.com/figma-ui',
     target: '_blank'
   }, {

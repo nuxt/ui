@@ -91,7 +91,7 @@ export function useSearch() {
   }, {
     label: 'Figma',
     description: 'Access the official Figma design kit.',
-    icon: studioIcons.figma,
+    icon: 'i-simple-icons-figma',
     to: 'https://go.nuxt.com/figma-ui',
     target: '_blank'
   }, {

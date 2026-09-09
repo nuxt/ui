@@ -429,7 +429,6 @@ export const studioIcons = {
   squarePilcrow: 'i-lucide-square-pilcrow',
   rocket: 'i-lucide-rocket',
   newspaper: 'i-lucide-newspaper',
-  figma: 'i-lucide-figma',
   help: 'i-lucide-circle-question-mark',
   brush: 'i-lucide-paintbrush',
   contrast: 'i-lucide-contrast',
@@ -781,7 +780,6 @@ export const studioIconOverrides: Partial<Record<ThemeIcons, Partial<Record<Stud
     squarePilcrow: 'i-iconoir-text-box',
     rocket: 'i-iconoir-rocket',
     newspaper: 'i-iconoir-journal',
-    figma: 'i-iconoir-figma',
     // view switcher
     grid: 'i-iconoir-view-grid',
     dashboard: 'i-iconoir-dashboard-speed',
@@ -1004,7 +1002,6 @@ export const studioIconOverrides: Partial<Record<ThemeIcons, Partial<Record<Stud
     squarePilcrow: 'i-ph-paragraph',
     rocket: 'i-ph-rocket-launch',
     newspaper: 'i-ph-newspaper',
-    figma: 'i-ph-figma-logo',
     // view switcher
     grid: 'i-ph-squares-four',
     dashboard: 'i-ph-gauge',
@@ -1116,7 +1113,6 @@ export const studioIconOverrides: Partial<Record<ThemeIcons, Partial<Record<Stud
     squarePilcrow: 'i-ri-paragraph',
     rocket: 'i-ri-rocket-line',
     newspaper: 'i-ri-newspaper-line',
-    figma: 'i-ri-figma-line',
     // view switcher
     grid: 'i-ri-layout-grid-line',
     dashboard: 'i-ri-dashboard-line',
@@ -1228,7 +1224,6 @@ export const studioIconOverrides: Partial<Record<ThemeIcons, Partial<Record<Stud
     squarePilcrow: 'i-tabler-pilcrow',
     rocket: 'i-tabler-rocket',
     newspaper: 'i-tabler-news',
-    figma: 'i-tabler-brand-figma',
     // view switcher
     grid: 'i-tabler-layout-grid',
     dashboard: 'i-tabler-layout-dashboard',

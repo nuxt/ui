@@ -8,7 +8,7 @@ const items = [{
   active: true
 }, {
   label: 'Figma',
-  icon: 'i-lucide-figma',
+  icon: 'i-simple-icons-figma',
   to: 'https://go.nuxt.com/figma-ui',
   target: '_blank'
 }, {
