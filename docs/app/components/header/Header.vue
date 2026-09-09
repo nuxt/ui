@@ -39,7 +39,8 @@ function toggleChat() {
     <UNavigationMenu :items="desktopLinks" variant="link" content-orientation="vertical" />
 
     <template #right>
-      <UTooltip text="Search" :kbds="['meta', 'K']" ignore-non-keyboard-focus>
+      <!-- below `lg` the GitHub button is gone and Ask AI moves up beside search -->
+      <UTooltip text="Search" :kbds="['meta', 'K']" class="max-lg:order-first" ignore-non-keyboard-focus>
         <UContentSearchButton />
       </UTooltip>
 
@@ -59,7 +60,21 @@ function toggleChat() {
         />
       </UTooltip>
 
-      <USeparator orientation="vertical" class="h-auto self-stretch py-1.5 mx-1.5 lg:me-3" />
+      <USeparator orientation="vertical" class="hidden lg:flex h-auto self-stretch py-1.5 mx-1.5 lg:me-3" />
+
+      <!-- ghost among the ghost controls it sits with below `lg`, framed on its
+           own beyond the separator above it; no tooltip where there is no hover -->
+      <UButton
+        color="neutral"
+        variant="ghost"
+        aria-label="Ask AI"
+        class="lg:hidden -order-1"
+        @click="toggleChat"
+      >
+        <template #leading>
+          <NuxiIcon class="size-5 shrink-0" />
+        </template>
+      </UButton>
 
       <UTooltip text="Ask AI" :kbds="['meta', 'I']" class="hidden lg:flex" ignore-non-keyboard-focus>
         <UButton
@@ -67,7 +82,6 @@ function toggleChat() {
           variant="outline"
           label="Ask AI"
           aria-label="Ask AI"
-          :ui="{ label: 'hidden sm:inline' }"
           @click="toggleChat"
         >
           <template #leading>
