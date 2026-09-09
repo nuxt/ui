@@ -71,11 +71,26 @@ function downloadFile() {
   track('Theme Exported', { type: pane.value.key === 'css' ? 'CSS' : 'Config', action: 'Download' })
 }
 
-// framework too: only one half of the export is framework-agnostic
+// framework too: only one half of the export is framework-agnostic. The last
+// change wins: a run for a framework that has moved on is dropped.
+let version = 0
 watch([open, framework], async ([isOpen]) => {
-  css.value = isOpen ? await exportCSS() : ''
-  config.value = isOpen ? await exportConfig() : ''
-  docs.value = isOpen ? { css: await parseCode(css.value, 'css'), config: await parseCode(config.value, 'ts') } : {}
+  const current = ++version
+
+  if (!isOpen) {
+    css.value = ''
+    config.value = ''
+    docs.value = {}
+    return
+  }
+
+  const [nextCss, nextConfig] = await Promise.all([exportCSS(), exportConfig()])
+  const [cssDoc, configDoc] = await Promise.all([parseCode(nextCss, 'css'), parseCode(nextConfig, 'ts')])
+  if (current !== version) return
+
+  css.value = nextCss
+  config.value = nextConfig
+  docs.value = { css: cssDoc, config: configDoc }
 })
 
 // The theme can't change while the modal covers the studio, so the link is
