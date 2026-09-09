@@ -182,8 +182,10 @@ export const useNavigation = (navigation: Ref<ContentNavigationItem[] | undefine
   })
 
   function findSurround(path: string, fwk: string = framework.value): [ContentNavigationItem | undefined, ContentNavigationItem | undefined] {
+    // an entry with its own `to` (Figma) links out: nothing to step onto
     const flattenNavigation = navigationByCategory.value
-      ?.flatMap(item => filterChildrenByFramework(item, fwk, studioIcons)?.children) ?? []
+      ?.flatMap(item => filterChildrenByFramework(item, fwk, studioIcons)?.children)
+      .filter(item => !item?.to) ?? []
 
     const index = flattenNavigation.findIndex(item => item?.path === path)
     if (index === -1) {

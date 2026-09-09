@@ -78,7 +78,8 @@ export const collections = {
       // points at `to` instead of the page's own path.
       to: z.string().optional(),
       target: z.string().optional(),
-      sitemap
+      // an entry that links out is not a page to index
+      sitemap: defineSitemapSchema({ z, name: 'docs', filter: entry => !entry.to })
     })
   }),
   showcase: defineCollection({

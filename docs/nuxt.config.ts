@@ -98,6 +98,9 @@ export default defineNuxtConfig({
     // the v2 to v3 guide lives with the v3 docs now
     '/docs/getting-started/migration/v3': { redirect: 'https://ui3.nuxt.com/getting-started/migration', prerender: false },
     '/docs/getting-started/theme': { redirect: '/docs/getting-started/theme/design-system', prerender: false },
+    // the Figma guide lives with the kit now; the docs entry is a link, not a page
+    '/figma': { redirect: { to: 'https://go.nuxt.com/figma-ui', statusCode: 301 }, prerender: false },
+    '/docs/getting-started/figma': { redirect: { to: 'https://go.nuxt.com/figma-ui', statusCode: 301 }, prerender: false },
     '/docs/getting-started/integrations': { redirect: '/docs/getting-started/integrations/icons', prerender: false },
     '/docs/getting-started/ai': { redirect: '/docs/getting-started/ai/mcp', prerender: false },
     '/docs/composables': { redirect: '/docs/composables/define-shortcuts', prerender: false },
@@ -274,6 +277,8 @@ export default defineNuxtConfig({
       { path: '/', raw: '/raw/index.md' },
       '/docs/**'
     ],
+    // the Figma entry links out (routeRules above), there is no page to list or serve
+    excludePrefixes: { extend: ['/docs/getting-started/figma'] },
     sitemap: {
       markdown: {
         // Split `/docs/**` into a section per area; `/blog/**` stays whole.
@@ -445,7 +450,9 @@ export default defineNuxtConfig({
       title: 'Getting Started',
       contentCollection: 'docs',
       contentFilters: [
-        { field: 'path', operator: 'LIKE', value: '/docs/getting-started%' }
+        { field: 'path', operator: 'LIKE', value: '/docs/getting-started%' },
+        // an entry that links out (Figma) has no page to include
+        { field: 'to', operator: 'IS NULL' }
       ]
     }, {
       title: 'Components',
