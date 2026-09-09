@@ -1,17 +1,22 @@
 <script setup lang="ts">
 const route = useRoute()
 const { links } = useFooter()
-const { framework } = useFrameworks()
-
-const icon = computed(() => {
-  if (framework.value === 'nuxt') return 'i-simple-icons-nuxtdotjs'
-  if (framework.value === 'vue') return 'i-simple-icons-vuedotjs'
-  return undefined
-})
+const { frameworks } = useFrameworks()
 </script>
 
 <template>
-  <USeparator :icon="route.path === '/' ? undefined : icon" class="h-px" />
+  <USeparator v-if="route.path === '/'" class="h-px" />
+  <!-- both icons render, the framework class shows one: the cookie is
+       invisible to the prerendered HTML and a class mismatch on a plain
+       element is not patched on hydration -->
+  <USeparator v-else class="h-px">
+    <UIcon
+      v-for="framework in frameworks"
+      :key="framework.value"
+      :name="framework.icon"
+      :class="[`${framework.value}-only`, 'shrink-0 size-5']"
+    />
+  </USeparator>
 
   <UFooter>
     <template #left>
