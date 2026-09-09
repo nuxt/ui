@@ -128,7 +128,7 @@ function normalizeCommitMessage(commit: Commit) {
     <template #description="{ item }">
       <ul class="flex flex-col gap-1.5">
         <li v-for="commit of item.commits" :key="commit.sha">
-          <MDC :value="normalizeCommitMessage(commit)" class="text-sm [&_code]:text-xs" unwrap="p" />
+          <DocsMarkdown :value="normalizeCommitMessage(commit)" class="text-sm [&_code]:text-xs" unwrap="p" />
         </li>
       </ul>
     </template>

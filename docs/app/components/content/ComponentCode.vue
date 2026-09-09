@@ -389,9 +389,9 @@ const codeKey = computed(() => `component-code-${name}-${hash(props)}`)
 const wrapperContainer = ref<HTMLElement | null>(null)
 const componentContainer = ref<HTMLElement | null>(null)
 
-const { data: ast } = useAsyncData(codeKey, async () => {
+const { data: markdown } = useAsyncData(codeKey, async () => {
   if (!props.prettier) {
-    return cachedParseMarkdown(code.value)
+    return code.value
   }
 
   let formatted = ''
@@ -406,7 +406,7 @@ const { data: ast } = useAsyncData(codeKey, async () => {
     formatted = code.value
   }
 
-  return cachedParseMarkdown(formatted)
+  return formatted
 }, { lazy: import.meta.client, watch: [code] })
 </script>
 
@@ -483,6 +483,6 @@ const { data: ast } = useAsyncData(codeKey, async () => {
       </ClientOnly>
     </div>
 
-    <MDCRenderer v-if="ast" :body="ast.body" :data="ast.data" class="[&_pre]:rounded-t-none! [&_div.my-5]:mt-0!" />
+    <DocsMarkdown v-if="markdown" :value="markdown" class="[&_pre]:rounded-t-none! [&_div.my-5]:mt-0!" />
   </div>
 </template>

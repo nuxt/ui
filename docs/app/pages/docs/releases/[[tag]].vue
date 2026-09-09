@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import type { ContentNavigationItem } from '@nuxt/content'
+import { MarkdownDocument } from '@comark/vue'
+import { parseMarkdown } from '../../../utils/markdown'
+import type { MarkdownDoc } from '../../../utils/markdown'
 
 /**
  * One release per page, the docs frame with GitHub releases as pages: the
@@ -30,9 +33,20 @@ if (!release && releases.value.length) {
   throw createError({ statusCode: 404, statusMessage: 'Release not found', fatal: true })
 }
 
-// The notes come parsed from the route, cached per release, with the
-// headings the table of contents needs.
-const { data: ast } = await useAsyncData(`release-${release?.tag ?? 'unavailable'}`, () => release ? $fetch(`/api/github/releases/${release.tag}`) : Promise.resolve(null))
+// The route serves the notes as Markdown, the page turns them into the tree it
+// renders and the headings its table of contents needs. Parsed once into the
+// payload, which flattens the document's node union, so it is read back as the
+// parser wrote it.
+const { data: ast } = await useAsyncData(`release-${release?.tag ?? 'unavailable'}`, async () => {
+  if (!release) {
+    return null
+  }
+
+  const { markdown } = await $fetch(`/api/github/releases/${release.tag}`)
+
+  return await parseMarkdown(markdown)
+})
+const notes = computed(() => ast.value as MarkdownDoc | null)
 
 const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
 const { findBreadcrumb } = useNavigation(navigation!)
@@ -97,7 +111,8 @@ if (import.meta.server) {
 
     <UPageBody>
       <template v-if="release">
-        <MDCRenderer v-if="ast" :body="ast.body" :data="ast.data" />
+        <!-- the document arrives parsed, so it renders rather than DocsMarkdown, which takes markdown -->
+        <MarkdownDocument v-if="notes" :value="notes" />
 
         <USeparator v-if="surround.some(Boolean)" />
 
@@ -110,8 +125,8 @@ if (import.meta.server) {
       </p>
     </UPageBody>
 
-    <template v-if="ast?.toc?.links?.length" #right>
-      <UContentToc :links="ast.toc.links" class="z-2" highlight highlight-variant="circuit" />
+    <template v-if="notes?.meta?.toc?.links?.length" #right>
+      <UContentToc :links="notes.meta.toc.links" class="z-2" highlight highlight-variant="circuit" />
     </template>
   </UPage>
 </template>

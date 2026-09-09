@@ -71,12 +71,6 @@ export default defineNuxtConfig({
     }
   },
 
-  mdc: {
-    highlight: {
-      noApiRoute: false
-    }
-  },
-
   runtimeConfig: {
     public: {
       version: pkg.version

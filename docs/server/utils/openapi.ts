@@ -267,11 +267,11 @@ export function createOpenApiDocument(options: { version: string, url?: string, 
           operationId: 'getReleaseNotes',
           tags: ['GitHub'],
           summary: 'Release notes',
-          description: 'One release with its notes parsed to the MDC tree the `/docs/releases` pages render, plus the table of contents. Cached for an hour.',
+          description: 'One release with its notes, which the list route leaves out.',
           parameters: [{ name: 'tag', in: 'path', required: true, schema: { type: 'string', example: 'v4.0.0' } }],
           responses: {
             200: {
-              description: 'The release and its parsed notes.',
+              description: 'The release and its notes.',
               content: {
                 'application/json': {
                   schema: { $ref: '#/components/schemas/ReleaseNotes' }
@@ -487,11 +487,9 @@ export function createOpenApiDocument(options: { version: string, url?: string, 
             {
               type: 'object',
               properties: {
-                body: { type: 'object', description: 'The notes as an MDC tree.' },
-                data: { type: 'object', description: 'Front matter of the notes, usually empty.' },
-                toc: { type: 'object', description: 'Headings of the notes, to depth 3.' }
+                markdown: { type: 'string', description: 'The release notes, as GitHub stores them.' }
               },
-              required: ['body', 'data', 'toc']
+              required: ['markdown']
             }
           ]
         },

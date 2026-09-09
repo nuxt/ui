@@ -132,7 +132,7 @@ const links = computed(() => [{
       right: 'lg:hidden'
     } : undefined"
   >
-    <UPageHeader>
+    <UPageHeader :description="page.description">
       <template #headline>
         <UBreadcrumb :items="breadcrumb" />
       </template>
@@ -147,10 +147,6 @@ const links = computed(() => [{
           size="lg"
           class="rounded-full align-middle"
         />
-      </template>
-
-      <template #description>
-        <MDC v-if="page.description" :value="page.description" unwrap="p" :cache-key="`${kebabCase(route.path)}-description`" />
       </template>
 
       <template #links>

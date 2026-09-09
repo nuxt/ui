@@ -2,7 +2,7 @@
 import { h, resolveComponent } from 'vue'
 import type { Slots } from 'vue'
 import { MarkdownDocument } from '@comark/vue'
-import type { CodeDocument } from '../utils/code'
+import type { MarkdownDoc } from '../utils/markdown'
 
 /**
  * A generated file in a fixed pane: its fence rendered through ProsePre like
@@ -10,7 +10,7 @@ import type { CodeDocument } from '../utils/code'
  * frame around it carries both.
  */
 const props = defineProps<{
-  doc: CodeDocument
+  doc: MarkdownDoc
   ui?: { root?: string, base?: string }
 }>()
 

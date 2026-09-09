@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { parseCode } from '../../utils/code'
-import type { CodeDocument } from '../../utils/code'
+import { parseCode } from '../../utils/markdown'
+import type { MarkdownDoc } from '../../utils/markdown'
 
 /**
  * The theme as the files you would ship, for the home hero's right half:
@@ -15,7 +15,7 @@ const { framework } = useFrameworks()
 interface Pane {
   key: 'css' | 'config'
   filename: string
-  doc: CodeDocument
+  doc: MarkdownDoc
 }
 
 async function generate(): Promise<Pane[]> {

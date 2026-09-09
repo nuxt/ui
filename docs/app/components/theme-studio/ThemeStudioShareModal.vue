@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { useClipboard } from '@vueuse/core'
 import { encodeThemeDoc } from '../../utils/theme/link'
-import { parseCode } from '../../utils/code'
-import type { CodeDocument } from '../../utils/code'
+import { parseCode } from '../../utils/markdown'
+import type { MarkdownDoc } from '../../utils/markdown'
 
 /**
  * The export modal: a link that carries the whole theme, then the generated
@@ -43,7 +43,7 @@ function copyThemeLink() {
 }
 
 // the pane shows the plain file for the frame the highlighter takes to arrive
-const docs = shallowRef<Partial<Record<'css' | 'config', CodeDocument>>>({})
+const docs = shallowRef<Partial<Record<'css' | 'config', MarkdownDoc>>>({})
 
 const panes = computed(() => [
   { key: 'css' as const, filename: 'main.css', code: css.value },
