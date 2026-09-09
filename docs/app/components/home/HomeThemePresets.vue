@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { themeChipStyle, PRESET_ICONS } from '../../utils/theme/studio'
 import { presets } from '../../utils/theme/engine/presets'
-import { DEFAULT_PRESET_ID } from '../../utils/theme/engine/types'
 import type { ThemePreset } from '../../utils/theme/engine/presets'
 
 /**
@@ -10,11 +9,9 @@ import type { ThemePreset } from '../../utils/theme/engine/presets'
  * the studio itself loads on the first click, so the landing chunk carries
  * neither the palette math nor the section engine.
  */
-const { activePreset, hasChanges } = useTheme()
+const { selectedPreset } = useTheme()
 const studioIcons = useStudioIcons()
 const nuxtApp = useNuxtApp()
-
-const selectedPreset = computed(() => activePreset.value ?? (hasChanges.value ? undefined : DEFAULT_PRESET_ID))
 
 async function applyPreset(preset: ThemePreset) {
   const { useThemeStudio } = await import('../../composables/useThemeStudio')

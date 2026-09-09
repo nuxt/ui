@@ -4,7 +4,7 @@ import { rampCssName, THEME_STUDIO_VIEWS } from '../utils/theme/studio'
 // Leaf modules, never the barrel: the barrel re-exports serialize (and json5
 // with it), and this composable is reached from the header preset picker on
 // every docs page, which would put the exporter in the entry chunk.
-import { DEFAULT_PRESET_ID, docToSettings, isDefaultTheme, styleComponents, styleTokens, DEFAULT_COLORS, SHADES, nearestShade } from '../utils/theme/engine/types'
+import { docToSettings, isDefaultTheme, styleComponents, styleTokens, DEFAULT_COLORS, SHADES, nearestShade } from '../utils/theme/engine/types'
 import { presets } from '../utils/theme/engine/presets'
 import { generatePalette, applyPaletteEffects, isDefaultEffects, parseCssColor } from '../utils/theme/engine/palette'
 import { sectionFingerprint, stableStringify, mergeSection, canonicalTokenShades, ALL_SECTION_KEYS, SECTION_GROUPS } from '../utils/theme/engine/sections'
@@ -474,21 +474,11 @@ export function useThemeStudio() {
     setActivePreset(undefined)
   }
 
-  /**
-   * The preset the pickers show as selected. An untouched theme IS the stock
-   * preset, so it reads as Default rather than as nothing selected; once
-   * edits diverge with no preset behind them there's nothing to point at
-   * (the menu calls that 'Custom').
-   */
-  const selectedPreset = computed(() => {
-    if (activePreset.value) return activePreset.value
-    return theme.hasChanges.value ? undefined : DEFAULT_PRESET_ID
-  })
-
   return {
     presets,
     activePreset,
-    selectedPreset,
+    // the rule lives with the state it reads, the studio passes it on
+    selectedPreset: theme.selectedPreset,
     baselineDoc,
     clearActivePreset,
     sectionDirty,

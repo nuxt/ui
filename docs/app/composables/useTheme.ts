@@ -9,7 +9,7 @@ import { SAFE_NAME, sanitizeCustomColors, sanitizeCSSVariables } from '../utils/
 // Tables only, never the engine barrel: this composable rides the entry
 // chunk on every page, and the barrel would drag presets, the palette math
 // and the serializer with it. The serializer loads on demand below.
-import { mergeUi, isDefaultStyle, isDefaultTheme, styleTokens, DEFAULT_COLORS, THEME_DEFAULTS, SEMANTIC_ALIASES, LIBRARY_TOKEN_DEFAULTS } from '../utils/theme/engine/types'
+import { mergeUi, isDefaultStyle, isDefaultTheme, styleTokens, DEFAULT_COLORS, DEFAULT_PRESET_ID, THEME_DEFAULTS, SEMANTIC_ALIASES, LIBRARY_TOKEN_DEFAULTS } from '../utils/theme/engine/types'
 import type { ThemeDoc, ThemePalette, StyleOptions, StoredPaletteParams } from '../utils/theme/engine'
 import colors from 'tailwindcss/colors'
 
@@ -554,6 +554,13 @@ export function useTheme() {
     icon,
     icons: ICON_PACKS,
     hasChanges,
+    /**
+     * The preset the pickers show as selected. An untouched theme IS the stock
+     * preset, so it reads as Default rather than as nothing selected; once
+     * edits diverge with no preset behind them there's nothing to point at
+     * (the menu calls that 'Custom').
+     */
+    selectedPreset: computed(() => activePreset.value ?? (hasChanges.value ? undefined : DEFAULT_PRESET_ID)),
     configLabel: computed(() => framework.value === 'vue' ? 'vite.config.ts' : 'app.config.ts'),
     currentDoc,
     cssVariablesData,
