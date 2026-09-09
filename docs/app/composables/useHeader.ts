@@ -6,7 +6,7 @@ export function useHeader() {
   const desktopLinks = computed(() => [{
     label: 'Docs',
     to: '/docs/getting-started',
-    active: route.path.startsWith('/docs/getting-started')
+    active: route.path.startsWith('/docs/') && !route.path.startsWith('/docs/components')
   }, {
     label: 'Components',
     to: '/docs/components',
