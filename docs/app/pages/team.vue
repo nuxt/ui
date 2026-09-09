@@ -22,7 +22,7 @@ if (import.meta.server) {
 }
 
 const [{ data: module }, { data: github }] = await Promise.all([
-  useFetch('/api/module.json'),
+  useFetch('/api/module.json', { key: 'module', pick: ['stats'] }),
   useFetch('/api/github/contributors.json')
 ])
 

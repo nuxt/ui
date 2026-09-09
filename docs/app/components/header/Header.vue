@@ -4,14 +4,14 @@ const { desktopLinks } = useHeader()
 const { open } = useChat()
 const { track } = useAnalytics()
 
-// The module route caches nuxt.com's stats for an hour, only the star count
-// rides the payload (the full response carries the team and contributors).
-const { data: stars } = await useFetch('/api/module.json', {
-  key: 'github-stars',
-  transform: module => module?.stats?.stars ?? 0
-})
+// The module route caches nuxt.com's stats for an hour, shared with /team
+// under one key so the payload only rides once.
+const { data: module } = await useFetch('/api/module.json', { key: 'module', pick: ['stats'] })
 const { format } = Intl.NumberFormat('en', { notation: 'compact', maximumFractionDigits: 1 })
-const starsLabel = computed(() => (stars.value ? format(stars.value).toLowerCase() : undefined))
+const starsLabel = computed(() => {
+  const stars = module.value?.stats?.stars
+  return stars ? format(stars).toLowerCase() : undefined
+})
 
 function toggleChat() {
   if (!open.value) {
