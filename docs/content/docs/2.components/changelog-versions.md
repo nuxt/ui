@@ -249,7 +249,7 @@ You can use all the slots of the [`ChangelogVersion`](/docs/components/changelog
 <template>
   <UChangelogVersions :versions="versions">
     <template #body="{ version }">
-      <MDC v-if="version.content" :value="version.content" />
+      <Markdown :value="version.content" />
     </template>
   </UChangelogVersions>
 </template>
