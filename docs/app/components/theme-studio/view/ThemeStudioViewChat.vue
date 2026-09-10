@@ -5,11 +5,11 @@ import { useChat } from '@ai-sdk/vue'
 import { isPartStreaming } from '@nuxt/ui/utils/ai'
 import { Markdown } from '@comark/vue'
 import shiki from '@comark/vue/plugins/shiki'
+import security from '@comark/vue/plugins/security'
 import type { DropdownMenuItem, NavigationMenuItem } from '@nuxt/ui'
 
-// One instance for the component's life: in the template it would be a new
-// plugin on every render, and the view re-renders on every theme change.
-const plugins = [shiki()]
+// built once: in the template it would be a new plugin on every render
+const plugins = [shiki(), security({ blockedTags: ['script', 'style', 'iframe', 'object', 'embed', 'form'] })]
 
 const appConfig = useAppConfig()
 const studioIcons = useStudioIcons()

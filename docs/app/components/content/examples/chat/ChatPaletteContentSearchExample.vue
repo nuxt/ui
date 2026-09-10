@@ -4,8 +4,9 @@ import { useChat } from '@ai-sdk/vue'
 import { isPartStreaming } from '@nuxt/ui/utils/ai'
 import { Markdown } from '@comark/vue'
 import shiki from '@comark/vue/plugins/shiki'
+import security from '@comark/vue/plugins/security'
 
-const plugins = [shiki()]
+const plugins = [shiki(), security({ blockedTags: ['script', 'style', 'iframe', 'object', 'embed', 'form'] })]
 
 const input = ref('')
 
