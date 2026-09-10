@@ -65,6 +65,23 @@ describe('InputDate', () => {
       await wrapper.setValue(date)
       expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [[date]] })
     })
+
+    test('focus and blur events when focus enters and leaves the field, not between segments', async () => {
+      const wrapper = await mountSuspended(InputDate)
+      const segments = wrapper.findAll('[data-segment]').filter(segment => segment.attributes('data-segment') !== 'literal')
+      const [first, second] = segments
+
+      // nudge the mocked clock past mount so Vue's event invoker doesn't skip same-timestamp events
+      vi.setSystemTime(new Date(Date.now() + 1000))
+
+      first!.element.dispatchEvent(new FocusEvent('focusin', { bubbles: true, relatedTarget: null }))
+      first!.element.dispatchEvent(new FocusEvent('focusout', { bubbles: true, relatedTarget: second!.element }))
+      second!.element.dispatchEvent(new FocusEvent('focusin', { bubbles: true, relatedTarget: first!.element }))
+      second!.element.dispatchEvent(new FocusEvent('focusout', { bubbles: true, relatedTarget: null }))
+
+      expect(wrapper.emitted('focus')).toHaveLength(1)
+      expect(wrapper.emitted('blur')).toHaveLength(1)
+    })
   })
 
   it('passes accessibility tests', async () => {
