@@ -19,6 +19,12 @@
       "style": "./dist/runtime/index.css",
       "import": "./dist/module.mjs"
     },
+    "./sources": {
+      "style": "./dist/runtime/sources.css"
+    },
+    "./base": {
+      "style": "./dist/runtime/base.css"
+    },
     "./unplugin": {
       "types": "./dist/unplugin.d.mts",
       "import": "./dist/unplugin.mjs"
@@ -91,7 +97,8 @@
     }
   },
   "imports": {
-    "#build/ui.css": "./.nuxt/ui.static.css"
+    "#build/ui.css": "./.nuxt/ui.static.css",
+    "#build/ui.sources.css": "./.nuxt/ui.sources.static.css"
   },
   "bin": {
     "nuxt-ui": "./cli/index.mjs"
@@ -103,6 +110,7 @@
   ],
   "files": [
     ".nuxt/ui.static.css",
+    ".nuxt/ui.sources.static.css",
     "dist",
     "cli",
     "vue-plugin.d.ts"

@@ -1,0 +1,5 @@
+@import '#build/ui.sources.css';
+@source './components';
+
+@variant light (&:where(.light, .light *));
+@variant dark (&:where(.dark, .dark *));
