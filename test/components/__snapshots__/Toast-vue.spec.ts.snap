@@ -28,7 +28,7 @@ exports[`Toast > renders with actions correctly 1`] = `
       <div data-orientation="horizontal" data-slot="progress" class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
         <!--v-if-->
         <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" data-slot="base" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
-          <div data-state="complete" data-value="100" data-max="100" data-slot="indicator" class="rounded-full size-full transition-transform duration-200 ease-out motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-primary motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(-0%);"></div>
+          <div data-state="complete" data-value="100" data-max="100" data-slot="indicator" class="rounded-full size-full transition-transform duration-200 ease-out [stroke-linecap:round] motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-primary stroke-primary motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(-0%);"></div>
         </div>
         <!--v-if-->
       </div>
@@ -65,7 +65,7 @@ exports[`Toast > renders with as correctly 1`] = `
       <div data-orientation="horizontal" data-slot="progress" class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
         <!--v-if-->
         <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" data-slot="base" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
-          <div data-state="complete" data-value="100" data-max="100" data-slot="indicator" class="rounded-full size-full transition-transform duration-200 ease-out motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-primary motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(-0%);"></div>
+          <div data-state="complete" data-value="100" data-max="100" data-slot="indicator" class="rounded-full size-full transition-transform duration-200 ease-out [stroke-linecap:round] motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-primary stroke-primary motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(-0%);"></div>
         </div>
         <!--v-if-->
       </div>
@@ -101,7 +101,7 @@ exports[`Toast > renders with avatar correctly 1`] = `
       <div data-orientation="horizontal" data-slot="progress" class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
         <!--v-if-->
         <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" data-slot="base" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
-          <div data-state="complete" data-value="100" data-max="100" data-slot="indicator" class="rounded-full size-full transition-transform duration-200 ease-out motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-primary motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(-0%);"></div>
+          <div data-state="complete" data-value="100" data-max="100" data-slot="indicator" class="rounded-full size-full transition-transform duration-200 ease-out [stroke-linecap:round] motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-primary stroke-primary motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(-0%);"></div>
         </div>
         <!--v-if-->
       </div>
@@ -138,7 +138,7 @@ exports[`Toast > renders with class correctly 1`] = `
       <div data-orientation="horizontal" data-slot="progress" class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
         <!--v-if-->
         <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" data-slot="base" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
-          <div data-state="complete" data-value="100" data-max="100" data-slot="indicator" class="rounded-full size-full transition-transform duration-200 ease-out motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-primary motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(-0%);"></div>
+          <div data-state="complete" data-value="100" data-max="100" data-slot="indicator" class="rounded-full size-full transition-transform duration-200 ease-out [stroke-linecap:round] motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-primary stroke-primary motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(-0%);"></div>
         </div>
         <!--v-if-->
       </div>
@@ -172,7 +172,7 @@ exports[`Toast > renders with close slot correctly 1`] = `
       <div data-orientation="horizontal" data-slot="progress" class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
         <!--v-if-->
         <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" data-slot="base" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
-          <div data-state="complete" data-value="100" data-max="100" data-slot="indicator" class="rounded-full size-full transition-transform duration-200 ease-out motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-primary motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(-0%);"></div>
+          <div data-state="complete" data-value="100" data-max="100" data-slot="indicator" class="rounded-full size-full transition-transform duration-200 ease-out [stroke-linecap:round] motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-primary stroke-primary motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(-0%);"></div>
         </div>
         <!--v-if-->
       </div>
@@ -209,7 +209,7 @@ exports[`Toast > renders with closeIcon correctly 1`] = `
       <div data-orientation="horizontal" data-slot="progress" class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
         <!--v-if-->
         <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" data-slot="base" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
-          <div data-state="complete" data-value="100" data-max="100" data-slot="indicator" class="rounded-full size-full transition-transform duration-200 ease-out motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-primary motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(-0%);"></div>
+          <div data-state="complete" data-value="100" data-max="100" data-slot="indicator" class="rounded-full size-full transition-transform duration-200 ease-out [stroke-linecap:round] motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-primary stroke-primary motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(-0%);"></div>
         </div>
         <!--v-if-->
       </div>
@@ -246,7 +246,7 @@ exports[`Toast > renders with color neutral correctly 1`] = `
       <div data-orientation="horizontal" data-slot="progress" class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
         <!--v-if-->
         <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" data-slot="base" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
-          <div data-state="complete" data-value="100" data-max="100" data-slot="indicator" class="rounded-full size-full transition-transform duration-200 ease-out motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-inverted motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(-0%);"></div>
+          <div data-state="complete" data-value="100" data-max="100" data-slot="indicator" class="rounded-full size-full transition-transform duration-200 ease-out [stroke-linecap:round] motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-inverted stroke-inverted motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(-0%);"></div>
         </div>
         <!--v-if-->
       </div>
@@ -283,7 +283,7 @@ exports[`Toast > renders with description correctly 1`] = `
       <div data-orientation="horizontal" data-slot="progress" class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
         <!--v-if-->
         <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" data-slot="base" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
-          <div data-state="complete" data-value="100" data-max="100" data-slot="indicator" class="rounded-full size-full transition-transform duration-200 ease-out motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-primary motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(-0%);"></div>
+          <div data-state="complete" data-value="100" data-max="100" data-slot="indicator" class="rounded-full size-full transition-transform duration-200 ease-out [stroke-linecap:round] motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-primary stroke-primary motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(-0%);"></div>
         </div>
         <!--v-if-->
       </div>
@@ -320,7 +320,7 @@ exports[`Toast > renders with description slot correctly 1`] = `
       <div data-orientation="horizontal" data-slot="progress" class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
         <!--v-if-->
         <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" data-slot="base" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
-          <div data-state="complete" data-value="100" data-max="100" data-slot="indicator" class="rounded-full size-full transition-transform duration-200 ease-out motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-primary motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(-0%);"></div>
+          <div data-state="complete" data-value="100" data-max="100" data-slot="indicator" class="rounded-full size-full transition-transform duration-200 ease-out [stroke-linecap:round] motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-primary stroke-primary motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(-0%);"></div>
         </div>
         <!--v-if-->
       </div>
@@ -356,7 +356,7 @@ exports[`Toast > renders with icon correctly 1`] = `
       <div data-orientation="horizontal" data-slot="progress" class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
         <!--v-if-->
         <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" data-slot="base" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
-          <div data-state="complete" data-value="100" data-max="100" data-slot="indicator" class="rounded-full size-full transition-transform duration-200 ease-out motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-primary motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(-0%);"></div>
+          <div data-state="complete" data-value="100" data-max="100" data-slot="indicator" class="rounded-full size-full transition-transform duration-200 ease-out [stroke-linecap:round] motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-primary stroke-primary motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(-0%);"></div>
         </div>
         <!--v-if-->
       </div>
@@ -391,7 +391,7 @@ exports[`Toast > renders with leading slot correctly 1`] = `
       <div data-orientation="horizontal" data-slot="progress" class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
         <!--v-if-->
         <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" data-slot="base" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
-          <div data-state="complete" data-value="100" data-max="100" data-slot="indicator" class="rounded-full size-full transition-transform duration-200 ease-out motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-primary motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(-0%);"></div>
+          <div data-state="complete" data-value="100" data-max="100" data-slot="indicator" class="rounded-full size-full transition-transform duration-200 ease-out [stroke-linecap:round] motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-primary stroke-primary motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(-0%);"></div>
         </div>
         <!--v-if-->
       </div>
@@ -428,7 +428,7 @@ exports[`Toast > renders with orientation horizontal correctly 1`] = `
       <div data-orientation="horizontal" data-slot="progress" class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
         <!--v-if-->
         <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" data-slot="base" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
-          <div data-state="complete" data-value="100" data-max="100" data-slot="indicator" class="rounded-full size-full transition-transform duration-200 ease-out motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-primary motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(-0%);"></div>
+          <div data-state="complete" data-value="100" data-max="100" data-slot="indicator" class="rounded-full size-full transition-transform duration-200 ease-out [stroke-linecap:round] motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-primary stroke-primary motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(-0%);"></div>
         </div>
         <!--v-if-->
       </div>
@@ -467,7 +467,7 @@ exports[`Toast > renders with orientation vertical correctly 1`] = `
       <div data-orientation="horizontal" data-slot="progress" class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
         <!--v-if-->
         <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" data-slot="base" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
-          <div data-state="complete" data-value="100" data-max="100" data-slot="indicator" class="rounded-full size-full transition-transform duration-200 ease-out motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-primary motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(-0%);"></div>
+          <div data-state="complete" data-value="100" data-max="100" data-slot="indicator" class="rounded-full size-full transition-transform duration-200 ease-out [stroke-linecap:round] motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-primary stroke-primary motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(-0%);"></div>
         </div>
         <!--v-if-->
       </div>
@@ -504,7 +504,7 @@ exports[`Toast > renders with title correctly 1`] = `
       <div data-orientation="horizontal" data-slot="progress" class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
         <!--v-if-->
         <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" data-slot="base" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
-          <div data-state="complete" data-value="100" data-max="100" data-slot="indicator" class="rounded-full size-full transition-transform duration-200 ease-out motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-primary motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(-0%);"></div>
+          <div data-state="complete" data-value="100" data-max="100" data-slot="indicator" class="rounded-full size-full transition-transform duration-200 ease-out [stroke-linecap:round] motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-primary stroke-primary motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(-0%);"></div>
         </div>
         <!--v-if-->
       </div>
@@ -541,7 +541,7 @@ exports[`Toast > renders with title slot correctly 1`] = `
       <div data-orientation="horizontal" data-slot="progress" class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
         <!--v-if-->
         <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" data-slot="base" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
-          <div data-state="complete" data-value="100" data-max="100" data-slot="indicator" class="rounded-full size-full transition-transform duration-200 ease-out motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-primary motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(-0%);"></div>
+          <div data-state="complete" data-value="100" data-max="100" data-slot="indicator" class="rounded-full size-full transition-transform duration-200 ease-out [stroke-linecap:round] motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-primary stroke-primary motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(-0%);"></div>
         </div>
         <!--v-if-->
       </div>
@@ -578,7 +578,7 @@ exports[`Toast > renders with type correctly 1`] = `
       <div data-orientation="horizontal" data-slot="progress" class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
         <!--v-if-->
         <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" data-slot="base" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
-          <div data-state="complete" data-value="100" data-max="100" data-slot="indicator" class="rounded-full size-full transition-transform duration-200 ease-out motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-primary motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(-0%);"></div>
+          <div data-state="complete" data-value="100" data-max="100" data-slot="indicator" class="rounded-full size-full transition-transform duration-200 ease-out [stroke-linecap:round] motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-primary stroke-primary motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(-0%);"></div>
         </div>
         <!--v-if-->
       </div>
@@ -615,7 +615,7 @@ exports[`Toast > renders with ui correctly 1`] = `
       <div data-orientation="horizontal" data-slot="progress" class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
         <!--v-if-->
         <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" data-slot="base" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
-          <div data-state="complete" data-value="100" data-max="100" data-slot="indicator" class="rounded-full size-full transition-transform duration-200 ease-out motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-primary motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(-0%);"></div>
+          <div data-state="complete" data-value="100" data-max="100" data-slot="indicator" class="rounded-full size-full transition-transform duration-200 ease-out [stroke-linecap:round] motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-primary stroke-primary motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(-0%);"></div>
         </div>
         <!--v-if-->
       </div>
@@ -647,7 +647,7 @@ exports[`Toast > renders without close correctly 1`] = `
       <div data-orientation="horizontal" data-slot="progress" class="gap-2 w-full flex flex-col absolute inset-x-0 bottom-0">
         <!--v-if-->
         <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" aria-label="100%" role="progressbar" data-state="complete" data-value="100" data-max="100" data-slot="base" class="relative overflow-hidden rounded-full bg-accented w-full h-1" style="transform: translateZ(0);">
-          <div data-state="complete" data-value="100" data-max="100" data-slot="indicator" class="rounded-full size-full transition-transform duration-200 ease-out motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-primary motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(-0%);"></div>
+          <div data-state="complete" data-value="100" data-max="100" data-slot="indicator" class="rounded-full size-full transition-transform duration-200 ease-out [stroke-linecap:round] motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-primary stroke-primary motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(-0%);"></div>
         </div>
         <!--v-if-->
       </div>

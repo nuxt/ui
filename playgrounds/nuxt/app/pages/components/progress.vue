@@ -6,6 +6,7 @@ const colors = Object.keys(theme.variants.color)
 const sizes = Object.keys(theme.variants.size)
 const animations = Object.keys(theme.variants.animation)
 const orientations = Object.keys(theme.variants.orientation)
+const variants = Object.keys(theme.variants.variant)
 
 const attrs = reactive({
   color: [theme.defaultVariants.color],
@@ -14,6 +15,7 @@ const attrs = reactive({
 })
 
 const orientation = ref('horizontal' as keyof typeof theme.variants.orientation)
+const variant = ref('linear' as keyof typeof theme.variants.variant)
 
 const value1 = ref(0)
 const value2 = ref(0)
@@ -46,22 +48,39 @@ onMounted(() => {
     <USelect v-model="attrs.size" :items="sizes" multiple />
     <USelect v-model="attrs.animation" :items="animations" multiple />
     <USelect v-model="orientation" :items="orientations" />
+    <USelect v-model="variant" :items="variants" />
   </Navbar>
 
   <Matrix
     v-slot="props"
     :attrs="attrs"
-    :container-props="{ 'data-orientation': orientation }"
-    container-class="gap-4 data-[orientation=horizontal]:w-48 data-[orientation=vertical]:h-48 data-[orientation=vertical]:flex-row"
+    :container-props="{ 'data-orientation': orientation, 'data-variant': variant }"
+    container-class="gap-4 data-[orientation=horizontal]:data-[variant=linear]:w-48 data-[orientation=vertical]:data-[variant=linear]:h-48 data-[orientation=vertical]:flex-row"
   >
-    <UProgress :orientation="orientation" v-bind="props" />
-    <UProgress v-model="value2" :max="max" status :orientation="orientation" v-bind="props" />
+    <UProgress :orientation="orientation" :variant="variant" v-bind="props" inverted />
+    <UProgress
+      v-model="value2"
+      :max="max"
+      status
+      :orientation="orientation"
+      :variant="variant"
+      v-bind="props"
+    />
     <UProgress
       v-model="value2"
       :max="max"
       status
       inverted
       :orientation="orientation"
+      :variant="variant"
+      v-bind="props"
+    />
+    <UProgress
+      v-model="value2"
+      :max="max"
+      :thickness="5"
+      :orientation="orientation"
+      :variant="variant"
       v-bind="props"
     />
   </Matrix>
