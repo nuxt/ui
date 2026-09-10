@@ -278,7 +278,9 @@ export function useNuxiIcon(props: NuxiIconProps, emit?: EmitFn) {
       if (effectiveMood.value === 'idle' && !isEasterEggPlaying.value && !props.mood) {
         await doNudge()
       }
-      scheduleAttention()
+      // the nudge takes half a second, and `stopIdleTimers` may have run in
+      // the meantime: re-arming here would put the timer back
+      if (isAwake.value) scheduleAttention()
     }, 12000 + Math.random() * 8000)
   }
 
