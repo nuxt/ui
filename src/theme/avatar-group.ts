@@ -37,7 +37,8 @@ export default (options: Required<ModuleOptions>) => ({
     },
     color: {
       ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, ''])),
-      neutral: ''
+      neutral: '',
+      auto: ''
     }
   },
   defaultVariants: {

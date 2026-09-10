@@ -38,4 +38,27 @@ describe('Avatar', () => {
 
     expect(await axe(wrapper.element)).toHaveNoViolations()
   })
+
+  it('generates a deterministic background color from the avatar name', async () => {
+    const wrapper = await mountSuspended(Avatar, {
+      props: {
+        alt: 'Benjamin Canac',
+        color: 'auto'
+      }
+    })
+
+    expect(wrapper.attributes('style')).toBe('background-color: hsl(226, 68%, 60%);')
+  })
+
+  it('keeps an explicit background color when using auto color', async () => {
+    const wrapper = await mountSuspended(Avatar, {
+      props: {
+        alt: 'Benjamin Canac',
+        color: 'auto',
+        style: { backgroundColor: 'red' }
+      }
+    })
+
+    expect(wrapper.attributes('style')).toBe('background-color: red;')
+  })
 })
