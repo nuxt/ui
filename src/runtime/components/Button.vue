@@ -60,6 +60,11 @@ import UAvatar from './Avatar.vue'
 import ULink from './Link.vue'
 import ULinkBase from './LinkBase.vue'
 
+// Attrs are forwarded manually in both branches so fallthrough attributes keep
+// the exact position (and DOM attribute order) they had when they traveled
+// through `ULink`'s slot props.
+defineOptions({ inheritAttrs: false })
+
 const _props = defineProps<ButtonProps>()
 const slots = defineSlots<ButtonSlots>()
 
@@ -73,6 +78,19 @@ const { orientation, size: buttonSize } = useFieldGroup<ButtonProps>(_props)
 // the template re-paid that walk on every render.
 const linkProps = useForwardProps(pickLinkProps(props))
 const forwardedLinkProps = computed(() => omit(linkProps.value, ['type', 'disabled', 'onClick']))
+
+// A plain button doesn't need `ULink`'s resolution (route matching, `rel`
+// computation, the reka `Slot` wrapper): render `ULinkBase` directly and skip
+// two component instances. Any prop `ULink` would turn into markup or behavior
+// (`to`/`href`, or `target`/`rel`/`noRel`/`external` which shape the `rel` and
+// `target` attributes) forces the full path.
+const isLink = computed(() =>
+  props.to !== undefined || props.href !== undefined || props.target !== undefined
+  || props.rel !== undefined || props.noRel !== undefined || props.external !== undefined
+)
+
+// Mirrors `ULink`'s slot `active` in the no-link branch (`active ?? false`).
+const isActive = computed(() => props.active ?? false)
 
 const loadingAutoState = ref(false)
 const formLoading = inject<Ref<boolean> | undefined>(formLoadingInjectionKey, undefined)
@@ -137,10 +155,11 @@ const ui = computed(() => tv({
 
 <template>
   <ULink
+    v-if="isLink"
     v-slot="{ active, ...slotProps }"
+    v-bind="{ ...$attrs, ...forwardedLinkProps }"
     :type="props.type"
     :disabled="props.disabled || isLoading"
-    v-bind="forwardedLinkProps"
     custom
   >
     <ULinkBase
@@ -170,4 +189,35 @@ const ui = computed(() => tv({
       </slot>
     </ULinkBase>
   </ULink>
+
+  <ULinkBase
+    v-else
+    data-slot="base"
+    v-bind="$attrs"
+    :as="props.as"
+    :type="props.type"
+    :disabled="props.disabled || isLoading"
+    :class="ui.base({
+      class: [props.ui?.base, props.class],
+      active: isActive,
+      ...(isActive && props.activeVariant ? { variant: props.activeVariant } : {}),
+      ...(isActive && props.activeColor ? { color: props.activeColor } : {})
+    })"
+    @click="onClickWrapper"
+  >
+    <slot name="leading" :ui="ui">
+      <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" data-slot="leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon, active: isActive })" />
+      <UAvatar v-else-if="!!props.avatar" :size="((props.ui?.leadingAvatarSize || ui.leadingAvatarSize()) as AvatarProps['size'])" v-bind="props.avatar" data-slot="leadingAvatar" :class="ui.leadingAvatar({ class: props.ui?.leadingAvatar, active: isActive })" />
+    </slot>
+
+    <slot :ui="ui">
+      <span v-if="props.label !== undefined && props.label !== null" data-slot="label" :class="ui.label({ class: props.ui?.label, active: isActive })">
+        {{ props.label }}
+      </span>
+    </slot>
+
+    <slot name="trailing" :ui="ui">
+      <UIcon v-if="isTrailing && trailingIconName" :name="trailingIconName" data-slot="trailingIcon" :class="ui.trailingIcon({ class: props.ui?.trailingIcon, active: isActive })" />
+    </slot>
+  </ULinkBase>
 </template>
