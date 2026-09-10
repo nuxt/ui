@@ -173,6 +173,32 @@ describe('SelectMenu', () => {
     })
   })
 
+  describe('keyboard', () => {
+    test.each(['ArrowDown', 'ArrowUp'])('opens the menu on %s', async (key) => {
+      const wrapper = mount(SelectMenu, { attachTo: document.body, props: { portal: false, items } })
+
+      await wrapper.find('[data-slot="base"]').trigger('keydown', { key })
+      await flushPromises()
+
+      expect(wrapper.emitted('update:open')).toMatchObject([[true]])
+
+      wrapper.unmount()
+    })
+
+    test('does not toggle the menu on ArrowDown when already open', async () => {
+      const wrapper = mount(SelectMenu, { attachTo: document.body, props: { portal: false, items } })
+      const root = wrapper.findComponent({ name: 'ComboboxRoot' })
+
+      await root.vm.$emit('update:open', true)
+      await wrapper.find('[data-slot="base"]').trigger('keydown', { key: 'ArrowDown' })
+      await flushPromises()
+
+      expect(wrapper.emitted('update:open')).toMatchObject([[true]])
+
+      wrapper.unmount()
+    })
+  })
+
   describe('search input', () => {
     test('focuses the search input when the menu opens by default', async () => {
       const wrapper = mount(SelectMenu, { attachTo: document.body, props: { open: true, portal: false, items } })
