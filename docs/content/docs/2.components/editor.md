@@ -154,6 +154,96 @@ const value = ref('<h1>Hello World</h1>\n')
 Check out the image upload example for creating custom TipTap extensions.
 ::
 
+### External editor
+
+When you need full control over the editor — a custom schema, a different `StarterKit`, or a bespoke content lifecycle — you can create the TipTap editor yourself and pass it through the `editor` prop. The Editor then acts as a **shell**: it renders and styles the editor and wires it to the child components ([EditorToolbar](/docs/components/editor-toolbar), menus, …), but leaves the editor's extensions, content and lifecycle entirely to you.
+
+```vue
+<script setup lang="ts">
+import { useEditor } from '@tiptap/vue-3'
+import StarterKit from '@tiptap/starter-kit'
+
+const editor = useEditor({
+  content: '<h1>Hello World</h1>',
+  extensions: [StarterKit]
+})
+</script>
+
+<template>
+  <UEditor :editor="editor">
+    <UEditorToolbar :editor="editor" :items="items" />
+  </UEditor>
+</template>
+```
+
+::note
+In this mode, the engine props (`starter-kit`, `image`, `mention`, `placeholder`, `markdown`, `content-type`, `model-value`, `extensions`, `editor-props`, …) are **ignored** — the external editor owns its content, schema and options. Manage `v-model` on your own editor instance instead of on the `UEditor` component.
+::
+
+This is what enables editors backed by an extended starter kit, such as [comark-tiptap](https://github.com/sandros94/comark-tiptap), which provides a lossless markdown ↔ AST ↔ ProseMirror round-trip:
+
+```vue
+<script setup lang="ts">
+import Mention from '@tiptap/extension-mention'
+import { useComarkEditor } from 'comark-tiptap/vue'
+
+const { editor } = useComarkEditor({
+  content: '# Hello World',
+  contentType: 'markdown',
+  // Your editor owns the schema, so register the extensions the feature
+  // components rely on here — e.g. `Mention` for `UEditorMentionMenu`.
+  extensions: [Mention]
+})
+</script>
+
+<template>
+  <UEditor :editor="editor">
+    <UEditorToolbar :editor="editor" :items="items" />
+
+    <template #fallback>
+      Loading editor…
+    </template>
+  </UEditor>
+</template>
+```
+
+The [EditorToolbar](/docs/components/editor-toolbar) items and handlers call your editor's commands directly, so only include items whose extensions are registered on your editor — same for the mention, emoji and suggestion menus (like `Mention` above). The theme's placeholder styling applies automatically once your editor registers the Placeholder extension.
+
+::note
+The editor instance is never modified — only TipTap's own `EditorContent` sets `options.element` when mounting. The theme's [prose classes](#prose) style your content from a wrapper element, so an external editor inherits the default typography automatically. Attributes of the editable element itself remain yours — for parity with the built-in editor, set the theme's `base` slot classes at creation:
+
+```ts
+const editor = useEditor({
+  // ...
+  editorProps: {
+    attributes: {
+      autocomplete: 'off',
+      autocorrect: 'off',
+      autocapitalize: 'off',
+      class: 'w-full outline-none *:my-5 *:first:mt-0 *:last:mb-0 sm:px-8 selection:bg-primary/20'
+    }
+  }
+})
+```
+
+::
+
+::tip
+The `#fallback` slot renders while the editor is not yet available — during SSR and before mount, or while an asynchronously created external editor is still `undefined`.
+::
+
+### Prose
+
+The editor content is styled with the theme's prose (typography) classes. Their targets are wrapped in `:where()` so each rule keeps the specificity of a single class: your own classes and any higher-specificity styling from extensions or stylesheets can always override them. Set the `prose` prop to `false` to disable them entirely, for example when the editor brings its own content styling:
+
+```vue
+<template>
+  <UEditor :editor="editor" :prose="false">
+    <UEditorToolbar :editor="editor" :items="items" />
+  </UEditor>
+</template>
+```
+
 ### Placeholder
 
 Use the `placeholder` prop to set a placeholder text that shows in empty paragraphs.
