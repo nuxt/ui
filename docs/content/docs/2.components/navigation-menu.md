@@ -129,7 +129,7 @@ Use the `items` prop as an array of objects with the following properties:
 - `onSelect?: (e: Event) => void`{lang="ts-type"}
 - `children?: NavigationMenuChildItem[]`{lang="ts-type"}
 - `class?: any`{lang="ts-type"}
-- `ui?: { linkLeadingAvatarSize?: ClassNameValue, linkLeadingAvatar?: ClassNameValue, linkLeadingIcon?: ClassNameValue, linkLeadingChipSize?: ClassNameValue, linkLabel?: ClassNameValue, linkLabelExternalIcon?: ClassNameValue, linkTrailing?: ClassNameValue, linkTrailingBadgeSize?: ClassNameValue, linkTrailingBadge?: ClassNameValue, linkTrailingIcon?: ClassNameValue, label?: ClassNameValue, link?: ClassNameValue, content?: ClassNameValue, childList?: ClassNameValue, childLabel?: ClassNameValue, childItem?: ClassNameValue, childLink?: ClassNameValue, childLinkIcon?: ClassNameValue, childLinkWrapper?: ClassNameValue, childLinkLabel?: ClassNameValue, childLinkLabelExternalIcon?: ClassNameValue, childLinkDescription?: ClassNameValue }`{lang="ts-type"}
+- `ui?: { linkLeadingAvatarSize?: ClassNameValue, linkLeadingAvatar?: ClassNameValue, linkLeadingIcon?: ClassNameValue, linkLeadingChipSize?: ClassNameValue, linkLabel?: ClassNameValue, linkLabelExternalIcon?: ClassNameValue, linkTrailing?: ClassNameValue, linkTrailingBadgeSize?: ClassNameValue, linkTrailingBadge?: ClassNameValue, linkTrailingIcon?: ClassNameValue, label?: ClassNameValue, link?: ClassNameValue, content?: ClassNameValue, childList?: ClassNameValue, childLabel?: ClassNameValue, childItem?: ClassNameValue, childLink?: ClassNameValue, childLinkIcon?: ClassNameValue, childLinkLeadingChipSize?: ClassNameValue, childLinkWrapper?: ClassNameValue, childLinkLabel?: ClassNameValue, childLinkLabelExternalIcon?: ClassNameValue, childLinkDescription?: ClassNameValue }`{lang="ts-type"}
 
 You can pass any property from the [Link](/docs/components/link#props) component such as `to`, `target`, etc.
 
@@ -1233,7 +1233,7 @@ You can use the `#content` slot to customize the content of the popover in the `
 
 ### With chip in items :badge{label="4.5+" class="align-text-top"}
 
-Use the `chip` property to display a [Chip](/docs/components/chip) around the icon of the items, you can pass any of its props.
+Use the `chip` property to display a [Chip](/docs/components/chip) around the icon of the items, you can pass any of its props. This also works on the children of an item.
 
 ::component-code
 ---
@@ -1270,6 +1270,40 @@ props:
       - label: Help
         icon: i-lucide-circle-help
         disabled: true
+---
+::
+
+In `horizontal` orientation, the `chip` property also works on the children displayed inside the content panel.
+
+::component-code
+---
+collapse: true
+ignore:
+  - items
+  - class
+external:
+  - items
+externalTypes:
+  - NavigationMenuItem[][]
+props:
+  orientation: 'horizontal'
+  items:
+    - label: Components
+      icon: i-lucide-box
+      children:
+        - label: Link
+          icon: i-lucide-link
+          description: Use NuxtLink with superpowers.
+          to: /docs/components/link
+          chip:
+            color: success
+        - label: Modal
+          icon: i-lucide-square
+          description: Display a modal dialog overlay for important content.
+          to: /docs/components/modal
+          chip:
+            color: info
+            text: 3
 ---
 ::
 
