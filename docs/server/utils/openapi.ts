@@ -278,7 +278,7 @@ export function createOpenApiDocument(options: { version: string, url?: string, 
                 }
               }
             },
-            404: { description: 'No release has that tag.' }
+            404: jsonError('No release has that tag.')
           }
         }
       },
