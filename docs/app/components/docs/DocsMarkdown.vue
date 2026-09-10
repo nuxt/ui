@@ -35,8 +35,15 @@ async function resolve(value: string | MarkdownDoc | undefined) {
 // awaited so the server renders it; the watch covers a value that changes after
 const doc = shallowRef<MarkdownDoc | null>(await resolve(props.value))
 
+// the last change wins: a parse for a value that has moved on is dropped,
+// and a cached document resolves ahead of one still being parsed
+let version = 0
 watch(() => props.value, async (value) => {
-  doc.value = await resolve(value)
+  const current = ++version
+  const next = await resolve(value)
+  if (current === version) {
+    doc.value = next
+  }
 })
 </script>
 
