@@ -370,6 +370,9 @@ export function createOpenApiDocument(options: { version: string, url?: string, 
             framework: { type: 'string' },
             category: { type: 'string' },
             description: { type: 'string' },
+            // an entry that links out instead of rendering a page
+            to: { type: 'string' },
+            target: { type: 'string' },
             children: {
               type: 'array',
               items: { $ref: '#/components/schemas/NavigationItem' }
