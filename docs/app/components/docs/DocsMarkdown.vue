@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { MarkdownDocument } from '@comark/vue'
-import { parseMarkdown } from '../utils/markdown'
-import type { MarkdownDoc } from '../utils/markdown'
+import { parseMarkdown } from '../../utils/markdown'
+import type { MarkdownDoc } from '../../utils/markdown'
 
 /**
  * Markdown rendered at runtime, through the parser the whole site shares:
