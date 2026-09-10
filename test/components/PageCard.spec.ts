@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { axe } from 'vitest-axe'
+import { h } from 'vue'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { renderEach } from '../component-render'
 import PageCard from '../../src/runtime/components/PageCard.vue'
@@ -76,5 +77,26 @@ describe('PageCard', () => {
     })
     expect(wrapper.attributes('aria-label')).toBeUndefined()
     expect(wrapper.find('a').attributes('aria-label')).toBe('test-label')
+  })
+
+  it('keeps nested interactive elements above the link overlay', async () => {
+    const wrapper = await mountSuspended(PageCard, {
+      props: { title: 'Title', to: 'https://github.com/benjamincanac' },
+      slots: { footer: () => h('button', 'Click me') }
+    })
+    expect(wrapper.find('a').exists()).toBe(true)
+    const html = wrapper.html()
+    expect(html.indexOf('<a')).toBeLessThan(html.indexOf('<button'))
+    expect(wrapper.find('[data-slot="container"]').classes()).toContain('pointer-events-none')
+    expect(wrapper.find('[data-slot="wrapper"]').classes()).toContain('pointer-events-auto')
+  })
+
+  it('does not restrict pointer events when only `onClick` is set', async () => {
+    const wrapper = await mountSuspended(PageCard, {
+      props: { title: 'Title', onClick: () => {} },
+      slots: { footer: () => h('button', 'Click me') }
+    })
+    expect(wrapper.find('[data-slot="container"]').classes()).not.toContain('pointer-events-none')
+    expect(wrapper.find('[data-slot="wrapper"]').classes()).not.toContain('pointer-events-auto')
   })
 })
