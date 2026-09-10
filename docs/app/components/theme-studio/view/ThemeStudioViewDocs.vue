@@ -3,6 +3,10 @@ import { Markdown } from '@comark/vue'
 import shiki from '@comark/vue/plugins/shiki'
 import type { ContentNavigationLink, ContentSurroundLink, DropdownMenuItem, PageLink } from '@nuxt/ui'
 
+// One instance for the component's life: in the template it would be a new
+// plugin on every render, and the view re-renders on every theme change.
+const plugins = [shiki()]
+
 const appConfig = useAppConfig()
 const studioIcons = useStudioIcons()
 
@@ -271,7 +275,7 @@ export default defineAppConfig({
           </UPageHeader>
 
           <UPageBody>
-            <Markdown :value="content" :plugins="[shiki()]" />
+            <Markdown :value="content" :plugins="plugins" />
 
             <USeparator />
 
@@ -318,7 +322,7 @@ export default defineAppConfig({
       </UPage>
     </UContainer>
 
-    <UFooter>
+    <UFooter class="border-t border-default">
       <template #left>
         <p class="text-sm text-muted">
           Built with Nuxt UI • © 2026

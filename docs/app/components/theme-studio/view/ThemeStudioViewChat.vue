@@ -7,6 +7,10 @@ import { Markdown } from '@comark/vue'
 import shiki from '@comark/vue/plugins/shiki'
 import type { DropdownMenuItem, NavigationMenuItem } from '@nuxt/ui'
 
+// One instance for the component's life: in the template it would be a new
+// plugin on every render, and the view re-renders on every theme change.
+const plugins = [shiki()]
+
 const appConfig = useAppConfig()
 const studioIcons = useStudioIcons()
 
@@ -248,7 +252,7 @@ const ui = {
                         v-if="message.role === 'assistant'"
                         :value="part.text"
                         :streaming="isPartStreaming(part)"
-                        :plugins="[shiki()]"
+                        :plugins="plugins"
                         class="*:first:mt-0 *:last:mb-0"
                       />
                       <p v-else class="whitespace-pre-wrap leading-6">

@@ -6,6 +6,8 @@ import { isPartStreaming } from '@nuxt/ui/utils/ai'
 import { Markdown } from '@comark/vue'
 import shiki from '@comark/vue/plugins/shiki'
 
+const plugins = [shiki()]
+
 const open = ref(true)
 const input = ref('')
 
@@ -89,7 +91,7 @@ const ui = {
                   v-if="message.role === 'assistant'"
                   :value="part.text"
                   :streaming="isPartStreaming(part)"
-                  :plugins="[shiki()]"
+                  :plugins="plugins"
                   class="*:first:mt-0 *:last:mb-0"
                 />
                 <p v-else-if="message.role === 'user'" class="whitespace-pre-wrap text-sm/6">
