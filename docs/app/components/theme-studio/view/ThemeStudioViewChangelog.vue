@@ -8,8 +8,7 @@ import shiki from '@comark/vue/plugins/shiki'
 // feed on the right. Release notes are inlined since the template fetches them
 // from GitHub and renders them with Comark, neither of which is available here.
 
-// One instance for the component's life: in the template it would be a new
-// plugin on every render, and the view re-renders on every theme change.
+// built once: in the template it would be a new plugin on every render
 const plugins = [shiki()]
 
 const appConfig = useAppConfig()
