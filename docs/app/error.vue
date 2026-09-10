@@ -8,6 +8,33 @@ const props = defineProps<{
 const route = useRoute()
 const { style, link, color } = useTheme()
 
+// same lazy mount as app.vue: a static mount here would defeat the
+// dynamic import and pull the studio engine back into the entry chunk
+const { open: chatOpen } = useChat()
+const chatSeen = ref(false)
+watch(chatOpen, (value) => {
+  if (value) chatSeen.value = true
+}, { immediate: true })
+
+// ⌘I lives here rather than in Chat.vue: the chat only mounts once it has been
+// opened, so a binding inside it would never exist on the fresh load where the
+// command palette still advertises the shortcut.
+const { open: searchOpen } = useContentSearch()
+
+defineShortcuts({
+  meta_i: {
+    handler: () => {
+      if (searchOpen.value) {
+        searchOpen.value = false
+        chatOpen.value = true
+      } else {
+        chatOpen.value = !chatOpen.value
+      }
+    },
+    usingInput: true
+  }
+})
+
 const { data: navigation } = await useFetch('/api/navigation.json')
 
 useHead({
@@ -54,7 +81,7 @@ provide('navigation', rootNavigation)
       </div>
 
       <ClientOnly>
-        <Chat />
+        <LazyChat v-if="chatSeen" />
 
         <Search :navigation="navigationByFramework" />
       </ClientOnly>

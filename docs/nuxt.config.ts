@@ -85,6 +85,9 @@ export default defineNuxtConfig({
 
   routeRules: {
     '/api/navigation.json': { prerender: true },
+    // rendered per request: a shared theme rides ?doc=, which a prerendered
+    // page would never see (pages/theme.vue)
+    '/theme': { prerender: false },
     // v4 redirects - moved to `docs/`
     '/getting-started/**': { redirect: { to: '/docs/getting-started/**', statusCode: 301 }, prerender: false },
     '/components/**': { redirect: { to: '/docs/components/**', statusCode: 301 }, prerender: false },
@@ -214,9 +217,6 @@ export default defineNuxtConfig({
         '/',
         '/docs/getting-started',
         '/openapi.json',
-        // Also prerendered through `prerenderRoutes()` in `app/pages/index.vue`;
-        // listed here so the guarantee does not hang off a page component.
-        '/raw/index.md',
         '/api/countries.json',
         '/api/phone-codes.json',
         '/api/locales.json',
@@ -448,13 +448,19 @@ export default defineNuxtConfig({
       title: 'Components',
       contentCollection: 'docs',
       contentFilters: [
-        { field: 'path', operator: 'LIKE', value: '/docs/components/%' }
+        { field: 'path', operator: 'LIKE', value: '/docs/components%' }
       ]
     }, {
       title: 'Composables',
       contentCollection: 'docs',
       contentFilters: [
-        { field: 'path', operator: 'LIKE', value: '/docs/composables/%' }
+        { field: 'path', operator: 'LIKE', value: '/docs/composables%' }
+      ]
+    }, {
+      title: 'Typography',
+      contentCollection: 'docs',
+      contentFilters: [
+        { field: 'path', operator: 'LIKE', value: '/docs/typography%' }
       ]
     }],
     notes: [

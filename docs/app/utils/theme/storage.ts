@@ -1,0 +1,230 @@
+import type { ThemeDoc, StoredPaletteParams, StyleOptions } from './engine'
+import { DEFAULT_COLORS, THEME_DEFAULTS } from './engine/types'
+import { SAFE_NAME } from './sanitize'
+
+/**
+ * The font document: all three stacks plus the body treatment, exactly the
+ * doc's own shape.
+ */
+export type FontPrefs = NonNullable<ThemeDoc['font']>
+
+/**
+ * The theme's single persisted key. One key writes atomically, so a derived
+ * store (the ramp behind a custom palette, the class bundle behind a style)
+ * can never come back without the source that produced it.
+ *
+ * Not a ThemeDoc: the doc is the EXPORT shape, diffed against a stock library
+ * install. This is a snapshot of runtime state, and hydrating it has to
+ * distribute values in a specific order (colors before paint, icons after
+ * hydration, see plugins/theme.ts). `currentDoc()` still derives the doc from
+ * this state whenever an export, a preset diff or a history entry needs one.
+ */
+export const THEME_STORAGE_KEY = 'nuxt-ui-theme'
+
+export interface StoredTheme {
+  primary?: string
+  neutral?: string
+  radius?: number
+  fontSize?: number
+  icons?: string
+  blackAsPrimary?: boolean
+  font?: FontPrefs
+  /** Semantic alias overrides (secondary, success, info, warning, error). */
+  colors?: Record<string, string>
+  /** Explicit per-component overrides, from presets, imports or the AI chat. */
+  components?: Record<string, Record<string, unknown>>
+  customColors?: Record<string, Record<string, string>>
+  cssVariables?: { light?: Record<string, string>, dark?: Record<string, string> }
+  style?: StyleOptions
+  /** The palette editor's curves and pins, the source the ramps derive from. */
+  paletteParams?: Partial<Record<string, StoredPaletteParams>>
+  /** The preset the per-section dirty and reset comparisons measure against. */
+  preset?: string
+}
+
+/**
+ * Every key the theme picker wrote before this became one key.
+ *
+ * vueuse's `useLocalStorage` writes strings and numbers RAW, not JSON, so
+ * these read back per type rather than through JSON.parse.
+ */
+const LEGACY_KEYS = [
+  'nuxt-ui-primary', 'nuxt-ui-neutral', 'nuxt-ui-radius', 'nuxt-ui-font-size',
+  'nuxt-ui-font', 'nuxt-ui-icons', 'nuxt-ui-black-as-primary',
+  'nuxt-ui-font-prefs', 'nuxt-ui-ai-theme', 'nuxt-ui-custom-colors', 'nuxt-ui-css-variables'
+]
+
+function migrateLegacyTheme(): StoredTheme {
+  const read = (key: string) => window.localStorage.getItem(key) ?? undefined
+  const number = (key: string) => {
+    const value = Number.parseFloat(read(key) ?? '')
+    return Number.isFinite(value) ? value : undefined
+  }
+  const json = <T>(key: string): T | undefined => {
+    try {
+      const raw = read(key)
+      return raw ? JSON.parse(raw) as T : undefined
+    } catch {
+      return undefined
+    }
+  }
+
+  const extras = json<{ colors?: Record<string, string>, ui?: Record<string, Record<string, unknown>> }>('nuxt-ui-ai-theme')
+  const migrated: StoredTheme = {
+    primary: read('nuxt-ui-primary'),
+    neutral: read('nuxt-ui-neutral'),
+    radius: number('nuxt-ui-radius'),
+    fontSize: number('nuxt-ui-font-size'),
+    icons: read('nuxt-ui-icons'),
+    blackAsPrimary: read('nuxt-ui-black-as-primary') === 'true' || undefined,
+    // the family and the rest of the typography were separate keys
+    font: normalizeFont({ ...json<Record<string, unknown>>('nuxt-ui-font-prefs'), sans: read('nuxt-ui-font') }),
+    colors: extras?.colors,
+    components: extras?.ui,
+    customColors: json('nuxt-ui-custom-colors'),
+    cssVariables: json('nuxt-ui-css-variables')
+  }
+
+  // Written back under the new key and the old ones dropped, so this runs
+  // exactly once per browser rather than on every load.
+  writeStoredTheme(migrated)
+  LEGACY_KEYS.forEach(key => window.localStorage.removeItem(key))
+  return migrated
+}
+
+/** Clamp to a range, or drop the value if it isn't a finite number (a numeric string counts). */
+export function clamped(value: unknown, min: number, max: number): number | undefined {
+  // Number() maps null/''/booleans to finite numbers, which would clamp
+  // junk to the range floor instead of dropping it.
+  if (typeof value !== 'number' && typeof value !== 'string') return undefined
+  const number = Number(value)
+  return value !== '' && Number.isFinite(number) ? Math.min(max, Math.max(min, number)) : undefined
+}
+
+/**
+ * Restores bypass `setFontPrefs`, so this is where a stored font document is
+ * made to satisfy the same invariants: no unusable family name, no
+ * out-of-range number, and no explicitly-stock family (which would otherwise
+ * read as a change forever, keeping the reset button lit).
+ */
+function normalizeFont(raw: unknown): FontPrefs | undefined {
+  if (!raw || typeof raw !== 'object') return undefined
+  const input = raw as Record<string, any>
+  const font: FontPrefs = {}
+
+  // `heading` was the old h1–h6 treatment. Only the family survived the
+  // rework, as the serif stack; the rest is dropped rather than kept as dead
+  // weight that every dirty check would still measure.
+  const family = (value: unknown) => typeof value === 'string' && SAFE_NAME.test(value) ? value : undefined
+  const sans = family(input.sans)
+  if (sans && sans !== THEME_DEFAULTS.font) font.sans = sans
+  const serif = family(input.serif) ?? family(input.heading?.font)
+  if (serif) font.serif = serif
+  const mono = family(input.mono)
+  if (mono) font.mono = mono
+
+  const weights: NonNullable<FontPrefs['weights']> = {}
+  for (const step of ['normal', 'medium', 'semibold', 'bold'] as const) {
+    const weight = clamped(input.weights?.[step], 100, 900)
+    if (weight !== undefined) weights[step] = weight
+  }
+  if (Object.keys(weights).length) font.weights = weights
+
+  if (input.uppercase) font.uppercase = true
+  if (input.italic) font.italic = true
+  const letterSpacing = clamped(input.letterSpacing, -0.2, 1)
+  if (letterSpacing !== undefined && letterSpacing !== 0) font.letterSpacing = letterSpacing
+  const lineHeight = clamped(input.lineHeight, 0.8, 3)
+  if (lineHeight !== undefined && lineHeight !== 1.5) font.lineHeight = lineHeight
+
+  return Object.keys(font).length ? font : undefined
+}
+
+/** Never throws: a corrupt or absent key reads as "no saved theme". */
+export function readStoredTheme(): StoredTheme {
+  if (!import.meta.client) return {}
+  try {
+    const raw = window.localStorage.getItem(THEME_STORAGE_KEY)
+    if (!raw) {
+      return LEGACY_KEYS.some(key => window.localStorage.getItem(key) !== null)
+        ? migrateLegacyTheme()
+        : {}
+    }
+    const parsed = JSON.parse(raw)
+    if (!parsed || typeof parsed !== 'object') return {}
+    parsed.font = normalizeFont(parsed.font)
+    return parsed as StoredTheme
+  } catch {
+    return {}
+  }
+}
+
+/** An empty theme removes the key rather than storing `{}`. */
+export function writeStoredTheme(value: StoredTheme) {
+  if (!import.meta.client) return
+  const entries = Object.entries(value).filter(([, entry]) => {
+    if (entry === undefined) return false
+    if (entry && typeof entry === 'object') return Object.keys(entry).length > 0
+    return true
+  })
+  // Never throws: Safari private mode and quota-exceeded raise from setItem,
+  // and this runs from a watcher on every theme change.
+  try {
+    if (entries.length) {
+      window.localStorage.setItem(THEME_STORAGE_KEY, JSON.stringify(Object.fromEntries(entries)))
+    } else {
+      window.localStorage.removeItem(THEME_STORAGE_KEY)
+    }
+  } catch {
+    // the theme still applies in memory, it just won't survive the reload
+  }
+}
+
+/**
+ * The live theme in the stored shape, defaults omitted so an untouched theme
+ * stores nothing. Reads the raw state refs rather than `currentDoc()`: the
+ * doc is diffed against a stock library install on every call, far too much
+ * work for the persistence watcher's per-flush getter, and `useTheme()`
+ * outside a component would fire its onMounted with no instance.
+ */
+export function snapshotStoredTheme(): StoredTheme {
+  const appConfig = useAppConfig()
+  const filled = <T extends object>(value: T | undefined) => value && Object.keys(value).length ? value : undefined
+  const unless = <T>(value: T, fallback: T) => value === fallback ? undefined : value
+  const extras = useState<Record<string, any>>('nuxt-ui-ai-theme').value
+  const cssVariables = useState<StoredTheme['cssVariables']>('nuxt-ui-css-variables').value
+  return {
+    primary: unless(appConfig.ui.colors.primary, DEFAULT_COLORS.primary),
+    neutral: unless(appConfig.ui.colors.neutral, DEFAULT_COLORS.neutral),
+    radius: unless(useState<number>('nuxt-ui-radius').value, THEME_DEFAULTS.radius),
+    fontSize: unless(useState<number>('nuxt-ui-font-size').value, THEME_DEFAULTS.fontSize),
+    font: filled(useState<StoredTheme['font']>('nuxt-ui-font').value),
+    icons: unless(useState<string>('nuxt-ui-icons').value, THEME_DEFAULTS.icons),
+    blackAsPrimary: useState<boolean>('nuxt-ui-black-as-primary').value || undefined,
+    colors: filled(extras?.colors),
+    components: filled(extras?.ui),
+    customColors: filled(useState<StoredTheme['customColors']>('nuxt-ui-custom-colors').value),
+    cssVariables: filled(cssVariables?.light) || filled(cssVariables?.dark) ? cssVariables : undefined,
+    style: filled(useState<StoredTheme['style']>(THEME_STATE_KEYS.stylePrefs).value),
+    paletteParams: filled(useState<StoredTheme['paletteParams']>(THEME_STATE_KEYS.paletteParams).value),
+    preset: useState<string | undefined>(THEME_STATE_KEYS.themePreset).value
+  }
+}
+
+/** Doc type re-exported so consumers don't reach past this module for it. */
+export type { ThemeDoc }
+
+/* ------------------------------------------------- shared identifiers -- */
+
+/** useState keys shared across composables. */
+export const THEME_STATE_KEYS = {
+  stylePrefs: 'nuxt-ui-style-prefs',
+  themePreset: 'nuxt-ui-theme-preset',
+  paletteParams: 'nuxt-ui-palette-params-state'
+} as const
+
+/** DOM ids of the style tags useHead owns and the FOUC scripts pre-fill. */
+export const THEME_TAG_IDS = {
+  cssVariables: 'nuxt-ui-css-variables',
+  customColors: 'nuxt-ui-custom-colors'
+} as const

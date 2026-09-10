@@ -73,6 +73,17 @@ describe('Tree', () => {
     ['with dynamic slot', { props, slots: { app: () => 'dynamic slot' } }]
   ])
 
+  it('does not throw when flattened with a custom theme size', async () => {
+    const wrapper = await mountSuspended(Tree, {
+      props: {
+        items: [{ label: 'app', defaultExpanded: true, children: items }],
+        nested: false,
+        size: 'xxs' as any
+      }
+    })
+    expect(wrapper.exists()).toBe(true)
+  })
+
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(Tree, {
       props: {

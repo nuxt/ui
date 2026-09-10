@@ -26,9 +26,11 @@ export default (options: Required<ModuleOptions>) => ({
     },
     variant: {
       list: {
+        fieldset: 'flex-wrap',
         item: ''
       },
       card: {
+        fieldset: 'flex-wrap',
         item: [`border border-default rounded-lg ${hover}bg-elevated/50`, options.theme.transitions && 'transition-colors']
       },
       table: {
