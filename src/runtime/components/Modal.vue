@@ -33,9 +33,10 @@ export interface ModalProps extends DialogRootProps {
   transition?: boolean
   /**
    * When `true`, the modal will take up the full screen.
+   * Pass a breakpoint (`sm`, `md` or `lg`) to make the modal fullscreen only below it.
    * @defaultValue false
    */
-  fullscreen?: boolean
+  fullscreen?: boolean | 'sm' | 'md' | 'lg'
   /**
    * Render the modal in a portal.
    * @defaultValue true
