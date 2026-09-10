@@ -43,7 +43,7 @@ const { data: ast } = await useAsyncData(`release-${release?.tag ?? 'unavailable
 
   const { markdown } = await $fetch(`/api/github/releases/${release.tag}`)
 
-  return await parseMarkdown(markdown)
+  return await parseMarkdown(linkMentions(markdown))
 })
 const notes = computed(() => ast.value as MarkdownDoc | null)
 
@@ -109,10 +109,8 @@ if (import.meta.server) {
     </UPageHeader>
 
     <UPageBody>
-      <!-- the document arrives parsed, so it renders rather than DocsMarkdown, which takes markdown -->
       <DocsMarkdown v-if="notes" :value="notes" />
 
-      <!-- an empty list or notes that would not load: the same dead end -->
       <p v-else class="text-muted">
         Release notes are unavailable right now, see them on
         <ULink to="https://github.com/nuxt/ui/releases" target="_blank" class="text-primary font-medium">GitHub</ULink>.

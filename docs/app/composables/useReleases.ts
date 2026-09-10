@@ -33,3 +33,24 @@ export function releasesNavigation(releases: Release[]): ContentNavigationItem[]
     })
   }]
 }
+
+/**
+ * GitHub links the `@name` mentions the notes are written with, ungh serves
+ * them as plain text. Code, HTML and links already written as links are left
+ * as they are, so an import of `@nuxt/ui` or an image named `@2x` stays put.
+ */
+const PROTECTED = /```[\s\S]*?```|`[^`\n]+`|<[^>]*>|\[[^\]]*\]\([^)]*\)/g
+const MENTION = /(^|[^\w`/])@([a-z\d](?:[a-z\d-]{0,37}[a-z\d])?)(?![\w-]*\/)/gi
+
+export function linkMentions(markdown: string) {
+  const link = (text: string) => text.replace(MENTION, (_, before, name) => `${before}[@${name}](https://github.com/${name})`)
+
+  let notes = ''
+  let index = 0
+  for (const match of markdown.matchAll(PROTECTED)) {
+    notes += link(markdown.slice(index, match.index)) + match[0]
+    index = match.index + match[0].length
+  }
+
+  return notes + link(markdown.slice(index))
+}
