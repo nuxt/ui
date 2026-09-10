@@ -20,6 +20,6 @@ export default defineNuxtRouteMiddleware(async (to) => {
   // The latest release lives on the section root, the nav links it there.
   // Its tagged URL is the same page under a path the nav never lights up.
   if (to.params.tag && to.params.tag === releases.value[0]?.tag) {
-    return navigateTo('/docs/releases', { redirectCode: 301, replace: true })
+    return navigateTo('/docs/releases', { redirectCode: 302, replace: true })
   }
 })
