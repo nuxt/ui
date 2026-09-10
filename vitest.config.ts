@@ -9,6 +9,20 @@ import { glob } from 'tinyglobby'
 const components = await glob('./src/runtime/components/*.vue', { absolute: true })
 const vueComponents = await glob('./src/runtime/vue/components/*.vue', { absolute: true })
 const vueRouterOverrides = await glob('./src/runtime/vue/overrides/vue-router/*.vue', { absolute: true })
+const inertiaOverrides = await glob('./src/runtime/vue/overrides/inertia/*.vue', { absolute: true })
+
+function componentsModule(sources: string[]) {
+  const renderedComponents = new Set<string>()
+
+  return sources.map((file) => {
+    const componentName = file.split('/').pop()!.replace('.vue', '')
+    if (renderedComponents.has(componentName)) {
+      return ''
+    }
+    renderedComponents.add(componentName)
+    return `export { default as U${componentName} } from '${file}'`
+  }).join('\n')
+}
 
 export default defineConfig({
   test: {
@@ -80,16 +94,44 @@ export default defineConfig({
             },
             load(id) {
               if (id === '\0virtual:nuxt-ui-components') {
-                const resolvedComponents = [...vueRouterOverrides, ...vueComponents, ...components]
-                const renderedComponents = new Set<string>()
-                return resolvedComponents.map((file) => {
-                  const componentName = file.split('/').pop()!.replace('.vue', '')
-                  if (renderedComponents.has(componentName)) {
-                    return ''
-                  }
-                  renderedComponents.add(componentName)
-                  return `export { default as U${componentName} } from '${file}'`
-                }).join('\n')
+                return componentsModule([...vueRouterOverrides, ...vueComponents, ...components])
+              }
+            }
+          }
+        ]
+      },
+      {
+        extends: true,
+        test: {
+          name: 'vue-inertia',
+          environment: 'happy-dom',
+          dir: './test',
+          include: ['inertia/**.spec.ts'],
+          benchmark: { include: [] },
+          setupFiles: ['./test/utils/setup.ts']
+        },
+        plugins: [
+          vue(),
+          ui({ dts: false, router: 'inertia' }),
+          {
+            name: 'nuxt-ui-test:inertia',
+            enforce: 'pre',
+            resolveId(id) {
+              if (id === '@nuxt/test-utils/runtime') {
+                return fileURLToPath(new URL('test/utils/mount-inertia.ts', import.meta.url))
+              }
+              // `@inertiajs/vue3` is an optional peer dependency and is not
+              // installed here, so the overrides resolve against a stub.
+              if (id === '@inertiajs/vue3') {
+                return fileURLToPath(new URL('test/utils/inertia.ts', import.meta.url))
+              }
+              if (id === '#components') {
+                return '\0virtual:nuxt-ui-components'
+              }
+            },
+            load(id) {
+              if (id === '\0virtual:nuxt-ui-components') {
+                return componentsModule([...inertiaOverrides, ...vueComponents, ...components])
               }
             }
           }
