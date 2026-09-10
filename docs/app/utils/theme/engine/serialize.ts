@@ -31,13 +31,14 @@ export function generateCSS(doc: ThemeDoc, framework: string = 'nuxt', { explici
   // Nuxt resolves the `--font-*` variables below through @nuxt/fonts and
   // self-hosts the faces, so an import there would load each one twice. The
   // Vite plugin ships no fonts integration, so that export fetches them from
-  // Google. The families are not the doc's verbatim: `--font-sans` is skipped
-  // when it matches the default (nothing to override), but serif and mono are
-  // emitted whatever they are, so the default face still needs importing when
-  // it is one of those.
+  // Google. The families are not the doc's verbatim: `--font-sans` is only
+  // named when it differs from the default or the export is explicit, while
+  // serif and mono are emitted whatever they are, so the default face still
+  // needs importing when it is one of those.
   if (framework === 'vue') {
+    const sans = doc.font?.sans ?? THEME_DEFAULTS.font
     const families = [...new Set([
-      doc.font?.sans !== THEME_DEFAULTS.font ? doc.font?.sans : undefined,
+      explicit || sans !== THEME_DEFAULTS.font ? sans : undefined,
       doc.font?.serif,
       doc.font?.mono
     ].filter((name): name is string => !!name))]
