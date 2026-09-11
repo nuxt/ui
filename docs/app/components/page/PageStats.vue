@@ -3,8 +3,8 @@
 import { NuxtLink } from '#components'
 
 /**
- * A row of figures for the hero's `bottom` slot, each a link when it has
- * somewhere to go.
+ * A row of figures for the hero's default slot, its right column, each a
+ * link when it has somewhere to go.
  */
 defineProps<{
   items: { value: string, label: string, to?: string }[]

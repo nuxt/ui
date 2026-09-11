@@ -76,11 +76,11 @@ function downloadFile() {
 let version = 0
 watch([open, framework], async ([isOpen]) => {
   const current = ++version
+  css.value = ''
+  config.value = ''
+  docs.value = {}
 
   if (!isOpen) {
-    css.value = ''
-    config.value = ''
-    docs.value = {}
     return
   }
 
@@ -161,6 +161,7 @@ watch(open, async (isOpen) => {
               color="neutral"
               variant="outline"
               :ui="{ base: 'px-1.5 sm:px-2.5', label: 'hidden sm:inline-flex' }"
+              :disabled="!pane.code"
               @click="copyFile"
             />
 
@@ -170,6 +171,7 @@ watch(open, async (isOpen) => {
               color="neutral"
               variant="outline"
               class="hidden lg:inline-flex"
+              :disabled="!pane.code"
               @click="downloadFile"
             />
           </div>

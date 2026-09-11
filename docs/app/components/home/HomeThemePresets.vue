@@ -19,7 +19,8 @@ async function applyPreset(preset: ThemePreset) {
 }
 
 // the applied preset is client-only, resolve after mount so hydration matches
-const mounted = useMounted()
+const mounted = useThemeMounted()
+const activePreset = computed(() => mounted.value ? selectedPreset.value : 'default')
 
 // Each preset wears the chip the theme menu gives it: its glyph in its own
 // primary, on that primary dimmed to a tint.
@@ -32,7 +33,7 @@ const pills = computed(() => presets.map(preset => ({
     style: themeChipStyle(preset.doc),
     ui: { icon: 'text-(--chip-icon-light) dark:text-(--chip-icon-dark)' }
   },
-  active: mounted.value && selectedPreset.value === preset.id,
+  active: activePreset.value === preset.id,
   apply: () => applyPreset(preset)
 })))
 </script>
@@ -44,9 +45,10 @@ const pills = computed(() => presets.map(preset => ({
         :avatar="pill.avatar"
         color="neutral"
         variant="ghost"
-        active-variant="soft"
+        active-variant="subtle"
         size="md"
         :active="pill.active"
+        :aria-pressed="pill.active"
         :aria-label="`${pill.label} theme`"
         class="p-1"
         @click="pill.apply()"

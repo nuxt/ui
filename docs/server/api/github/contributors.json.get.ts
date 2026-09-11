@@ -144,19 +144,30 @@ const cachedFromNuxtCom = defineCachedFunction(fromNuxtCom, {
   getKey: () => 'nuxt-com'
 })
 
+const empty: Contributors = { total: null, contributors: [] }
+
+async function fromNuxtComOrEmpty() {
+  try {
+    return await cachedFromNuxtCom()
+  } catch (error) {
+    console.error('[api/github/contributors] fromNuxtCom failed', error)
+    return empty
+  }
+}
+
 export default defineEventHandler(async (event): Promise<Contributors> => {
   const token = process.env.NUXT_GITHUB_TOKEN
 
   const contributors = await (async () => {
     if (!token) {
-      return cachedFromNuxtCom()
+      return fromNuxtComOrEmpty()
     }
 
     try {
       return await cachedFromGitHub(token)
     } catch (error) {
       console.error('[api/github/contributors] fromGitHub failed, falling back to nuxt.com', error)
-      return cachedFromNuxtCom()
+      return fromNuxtComOrEmpty()
     }
   })()
 

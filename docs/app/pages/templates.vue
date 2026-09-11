@@ -2,6 +2,11 @@
 const appConfig = useAppConfig()
 const studioIcons = useStudioIcons()
 
+const { data: page } = await useAsyncData('templates', () => queryCollection('templates').first())
+if (!page.value) {
+  throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
+}
+
 // One list per framework, each hidden whole by its class (a JS filter would
 // disagree with the server, which has no cookie to read), so the dividers
 // only ever sit between rows that show. The counts ride the same split.
@@ -9,11 +14,6 @@ const byFramework = computed(() => ({
   nuxt: page.value?.items.filter(item => item.framework === 'nuxt') ?? [],
   vue: page.value?.items.filter(item => item.framework === 'vue') ?? []
 }))
-
-const { data: page } = await useAsyncData('templates', () => queryCollection('templates').first())
-if (!page.value) {
-  throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
-}
 
 useSeoMeta({
   title: page.value.title,

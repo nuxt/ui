@@ -37,15 +37,19 @@ const { data: panes } = await useAsyncData('home-theme-code', generate, { defaul
 let version = 0
 async function regenerate() {
   const current = ++version
-  const result = await generate()
-  if (current === version) {
-    panes.value = result
+  try {
+    const result = await generate()
+    if (current === version) {
+      panes.value = result
+    }
+  } catch (error) {
+    console.warn('[home] could not render the theme files', error)
   }
 }
 
 onMounted(regenerate)
 // the doc reads every theme ref, the framework picks the config file
-watch(() => [JSON.stringify(currentDoc()), framework.value], regenerate)
+watch(() => JSON.stringify(currentDoc()) + framework.value, regenerate)
 
 const tab = ref<Pane['key']>('css')
 const pane = computed(() => panes.value.find(entry => entry.key === tab.value) ?? panes.value[0])
@@ -65,6 +69,7 @@ const pane = computed(() => panes.value.find(entry => entry.key === tab.value) ?
         size="sm"
         :label="entry.filename"
         :active="tab === entry.key"
+        :aria-pressed="tab === entry.key"
         :class="tab === entry.key ? 'bg-accented/75' : ''"
         @click="tab = entry.key"
       >

@@ -30,7 +30,7 @@ const studioIcons = useStudioIcons()
 const appConfig = useAppConfig()
 
 const { format } = Intl.NumberFormat('en')
-const { format: formatCompact } = Intl.NumberFormat('en', { notation: 'compact' })
+const { format: formatCompact } = Intl.NumberFormat('en', { notation: 'compact', maximumFractionDigits: 1 })
 
 // Every human contributor on GitHub, the round figure when the server had no
 // token to count them.

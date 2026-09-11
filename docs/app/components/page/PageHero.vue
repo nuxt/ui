@@ -35,7 +35,7 @@ const forwarded = computed(() => Object.keys(slots).filter(name =>
 
 // The space between the halves rides the lead: a whitespace-only node
 // between the two would be condensed away by the template compiler.
-const leadText = computed(() => (props.breakLine ? props.lead : `${props.lead} `))
+const leadText = computed(() => (props.breakLine ? props.lead : `${props.lead ?? ''} `))
 
 // The cells of the dot grid that twinkle, as [column, row] on its 28px
 // lattice: a fixed pick rather than a random one, so the server and the
