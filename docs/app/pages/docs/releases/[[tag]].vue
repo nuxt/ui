@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { ContentNavigationItem } from '@nuxt/content'
-import { parseMarkdown } from '../../../utils/markdown'
+import { parseMarkdownDoc } from '../../../utils/markdown'
 import type { MarkdownDoc } from '../../../utils/markdown'
 
 /**
@@ -43,7 +43,7 @@ const { data: ast } = await useAsyncData(`release-${release?.tag ?? 'unavailable
 
   const { markdown } = await $fetch(`/api/github/releases/${release.tag}`)
 
-  return await parseMarkdown(linkMentions(markdown))
+  return await parseMarkdownDoc(linkMentions(markdown))
 })
 const notes = computed(() => ast.value as MarkdownDoc | null)
 

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { MarkdownDocument } from '@comark/vue'
-import { parseMarkdown } from '../../utils/markdown'
+import { parseMarkdownDoc } from '../../utils/markdown'
 import type { MarkdownDoc } from '../../utils/markdown'
 
 /**
@@ -21,7 +21,7 @@ async function resolve(value: string | MarkdownDoc | undefined) {
     return null
   }
 
-  const doc = typeof value === 'string' ? await parseMarkdown(value) : value
+  const doc = typeof value === 'string' ? await parseMarkdownDoc(value) : value
   if (!props.unwrap) {
     return doc
   }
@@ -32,19 +32,22 @@ async function resolve(value: string | MarkdownDoc | undefined) {
   return { ...doc, nodes } as MarkdownDoc
 }
 
-// awaited so the server renders it; the watch covers a value that changes after
-const doc = shallowRef<MarkdownDoc | null>(await resolve(props.value))
+const doc = shallowRef<MarkdownDoc | null>(null)
 
-// the last change wins: a parse for a value that has moved on is dropped,
-// and a cached document resolves ahead of one still being parsed
+// the last change wins: a parse for a value that has moved on is dropped
 let version = 0
-watch(() => props.value, async (value) => {
+async function update() {
   const current = ++version
-  const next = await resolve(value)
+  const next = await resolve(props.value)
   if (current === version) {
     doc.value = next
   }
-})
+}
+
+watch(() => [props.value, props.unwrap], update)
+
+// awaited so the server renders it
+await update()
 </script>
 
 <template>

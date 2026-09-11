@@ -1,12 +1,19 @@
 import { createMarkdownParser, defineComarkPlugin } from '@comark/vue/parse'
 import shiki, { getHighlighter } from '@comark/vue/plugins/shiki'
+import type { ShikiOptions } from '@comark/vue/plugins/shiki'
 import { codeToTokens, getTokenStyleObject, stringifyTokenStyle } from 'shiki/core'
 import type { ComarkParsePostState } from '@comark/vue'
 import toc from '@comark/vue/plugins/toc'
 import emoji from '@comark/vue/plugins/emoji'
+import bash from 'shiki/dist/langs/bash.mjs'
 import css from 'shiki/dist/langs/css.mjs'
 import diff from 'shiki/dist/langs/diff.mjs'
 import html from 'shiki/dist/langs/html.mjs'
+import javascript from 'shiki/dist/langs/javascript.mjs'
+import json from 'shiki/dist/langs/json.mjs'
+import typescript from 'shiki/dist/langs/typescript.mjs'
+import vue from 'shiki/dist/langs/vue.mjs'
+import yaml from 'shiki/dist/langs/yaml.mjs'
 import { shikiTransformers } from './shiki'
 
 /** A rendered element as Comark writes it: its tag, its props, then its children. */
@@ -14,6 +21,19 @@ type MarkdownElement = [string, Record<string, unknown>, ...unknown[]]
 type MarkdownNode = string | MarkdownElement
 
 const THEMES = { light: 'material-theme-lighter', dark: 'material-theme-palenight' } as const
+
+/**
+ * The highlighter is a singleton, built by whichever of the two plugins reaches
+ * it first, so both pass the same options: a document holding only inline code
+ * never enters the shiki plugin and would otherwise build it with the defaults.
+ * Those defaults also carry tsx, svelte and astro that nothing here writes, so
+ * the grammars are listed instead, html and the scripts before vue embeds them.
+ */
+const SHIKI_OPTIONS: ShikiOptions = {
+  registerDefaultLanguages: false,
+  languages: [...html, ...css, ...javascript, ...typescript, ...vue, ...bash, ...json, ...yaml, ...diff],
+  transformers: shikiTransformers()
+}
 
 /**
  * The pseudo languages the docs write inline, as `@nuxtjs/mdc` resolved them:
@@ -55,22 +75,25 @@ const inlineShiki = defineComarkPlugin(() => ({
     if (!pending.length) return
 
     // the instance the shiki plugin built, which runs before this one
-    const highlighter = await getHighlighter()
+    const highlighter = await getHighlighter(SHIKI_OPTIONS)
 
     for (const [node, lang, code] of pending) {
       const context = CONTEXTS[lang]
       try {
         const { tokens } = codeToTokens(highlighter, code, { themes: THEMES, ...context ?? { lang } })
+        // built aside so a throw halfway through leaves the node untouched
+        const children: MarkdownNode[] = []
+        for (const [index, line] of tokens.entries()) {
+          if (index) children.push('\n')
+          for (const token of line) {
+            const style = stringifyTokenStyle(token.htmlStyle || getTokenStyleObject(token))
+            children.push(style ? ['span', { style }, token.content] : token.content)
+          }
+        }
         const props = node[1]
         props.class = [props.class, 'shiki'].filter(Boolean).join(' ')
         node.length = 2
-        for (const [index, line] of tokens.entries()) {
-          if (index) node.push('\n')
-          for (const token of line) {
-            const style = stringifyTokenStyle(token.htmlStyle || getTokenStyleObject(token))
-            node.push(style ? ['span', { style }, token.content] : token.content)
-          }
-        }
+        node.push(...children)
       } catch {
         // an unknown language stays as it was written
       }
@@ -84,11 +107,7 @@ const inlineShiki = defineComarkPlugin(() => ({
  * through here, so the site holds one parser and one highlighter.
  */
 const markdownPlugins = [
-  shiki({
-    // on top of the plugin's defaults, which the array is appended to
-    languages: [...css, ...diff, ...html],
-    transformers: shikiTransformers()
-  }),
+  shiki(SHIKI_OPTIONS),
   // the release notes carry their own table of contents
   toc({ depth: 3, searchDepth: 3 }),
   // GitHub writes its release headings with shortcodes, and `:sparkles:` reads
@@ -116,13 +135,14 @@ export type MarkdownDoc = Awaited<ReturnType<typeof parse>>
  * Documents by source. Every runtime caller comes through here, and the same
  * string is rendered over and over (a prop description repeated across pages,
  * a type in two tables), so the parse happens once. The promise is cached, so
- * two callers racing on one string share the work, and the whole thing is
- * dropped once it has seen enough: this module outlives a request on the server.
+ * two callers racing on one string share the work, and the oldest entry goes
+ * once the map is full: this module outlives a request on the server.
  */
 const DOCUMENT_LIMIT = 500
 const documents = new Map<string, Promise<MarkdownDoc>>()
 
-export function parseMarkdown(markdown: string): Promise<MarkdownDoc> {
+// not `parseMarkdown`, which `@nuxtjs/mdc` already auto-imports under that name
+export function parseMarkdownDoc(markdown: string): Promise<MarkdownDoc> {
   const cached = documents.get(markdown)
   if (cached) {
     return cached
@@ -131,9 +151,12 @@ export function parseMarkdown(markdown: string): Promise<MarkdownDoc> {
   const doc = parse(markdown)
 
   if (documents.size >= DOCUMENT_LIMIT) {
-    documents.clear()
+    documents.delete(documents.keys().next().value!)
   }
   documents.set(markdown, doc)
+
+  // a transient failure would otherwise replay for every later caller
+  doc.catch(() => documents.delete(markdown))
 
   return doc
 }
