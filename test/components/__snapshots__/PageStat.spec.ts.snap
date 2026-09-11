@@ -1,0 +1,757 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`PageStat > renders with as correctly 1`] = `
+"<section data-slot="root" class="rounded-lg overflow-hidden flex flex-col justify-between bg-default ring ring-default">
+  <div data-slot="header" class="flex items-start gap-4 p-4 sm:p-6">
+    <div data-slot="icon" class="flex items-center justify-center shrink-0 rounded-lg size-10 p-2 bg-primary-500/10 text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:users size-5 text-primary-500 dark:text-primary-400" aria-hidden="true" data-slot="iconIcon"></span></div>
+    <div data-slot="content" class="flex-1 min-w-0">
+      <div data-slot="title" class="font-medium text-sm text-muted">Total Users</div>
+      <div data-slot="value" class="font-semibold mt-1 text-3xl text-default">12,345</div>
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if-->
+  <!--v-if-->
+</section>"
+`;
+
+exports[`PageStat > renders with class correctly 1`] = `
+"<div data-slot="root" class="overflow-hidden flex flex-col justify-between bg-default ring ring-default rounded-xl">
+  <div data-slot="header" class="flex items-start gap-4 p-4 sm:p-6">
+    <div data-slot="icon" class="flex items-center justify-center shrink-0 rounded-lg size-10 p-2 bg-primary-500/10 text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:users size-5 text-primary-500 dark:text-primary-400" aria-hidden="true" data-slot="iconIcon"></span></div>
+    <div data-slot="content" class="flex-1 min-w-0">
+      <div data-slot="title" class="font-medium text-sm text-muted">Total Users</div>
+      <div data-slot="value" class="font-semibold mt-1 text-3xl text-default">12,345</div>
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageStat > renders with color error correctly 1`] = `
+"<div data-slot="root" class="rounded-lg overflow-hidden flex flex-col justify-between bg-default ring ring-default">
+  <div data-slot="header" class="flex items-start gap-4 p-4 sm:p-6">
+    <div data-slot="icon" class="flex items-center justify-center shrink-0 rounded-lg size-10 p-2 bg-error-500/10 text-error-500 dark:text-error-400"><span class="iconify i-lucide:users size-5 text-error-500 dark:text-error-400" aria-hidden="true" data-slot="iconIcon"></span></div>
+    <div data-slot="content" class="flex-1 min-w-0">
+      <div data-slot="title" class="font-medium text-sm text-muted">Total Users</div>
+      <div data-slot="value" class="font-semibold mt-1 text-3xl text-default">12,345</div>
+      <!--v-if-->
+      <div data-slot="trend" class="flex items-center gap-1 text-xs font-medium mt-1 text-success-500! dark:text-success-400!"><span class="iconify i-lucide:arrow-up shrink-0 text-error-500 dark:text-error-400 text-success-500! dark:text-success-400!" aria-hidden="true" data-slot="trendIcon"></span><span data-slot="trendValue" class="">+5%</span></div>
+    </div>
+  </div>
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageStat > renders with color info correctly 1`] = `
+"<div data-slot="root" class="rounded-lg overflow-hidden flex flex-col justify-between bg-default ring ring-default">
+  <div data-slot="header" class="flex items-start gap-4 p-4 sm:p-6">
+    <div data-slot="icon" class="flex items-center justify-center shrink-0 rounded-lg size-10 p-2 bg-info-500/10 text-info-500 dark:text-info-400"><span class="iconify i-lucide:users size-5 text-info-500 dark:text-info-400" aria-hidden="true" data-slot="iconIcon"></span></div>
+    <div data-slot="content" class="flex-1 min-w-0">
+      <div data-slot="title" class="font-medium text-sm text-muted">Total Users</div>
+      <div data-slot="value" class="font-semibold mt-1 text-3xl text-default">12,345</div>
+      <!--v-if-->
+      <div data-slot="trend" class="flex items-center gap-1 text-xs font-medium mt-1 text-success-500! dark:text-success-400!"><span class="iconify i-lucide:arrow-up shrink-0 text-info-500 dark:text-info-400 text-success-500! dark:text-success-400!" aria-hidden="true" data-slot="trendIcon"></span><span data-slot="trendValue" class="">+5%</span></div>
+    </div>
+  </div>
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageStat > renders with color neutral correctly 1`] = `
+"<div data-slot="root" class="rounded-lg overflow-hidden flex flex-col justify-between bg-default ring ring-default">
+  <div data-slot="header" class="flex items-start gap-4 p-4 sm:p-6">
+    <div data-slot="icon" class="flex items-center justify-center shrink-0 rounded-lg size-10 p-2 bg-gray-500/10 text-gray-500 dark:text-gray-400"><span class="iconify i-lucide:users size-5 text-gray-500 dark:text-gray-400" aria-hidden="true" data-slot="iconIcon"></span></div>
+    <div data-slot="content" class="flex-1 min-w-0">
+      <div data-slot="title" class="font-medium text-sm text-muted">Total Users</div>
+      <div data-slot="value" class="font-semibold mt-1 text-3xl text-default">12,345</div>
+      <!--v-if-->
+      <div data-slot="trend" class="flex items-center gap-1 text-xs font-medium mt-1 text-success-500! dark:text-success-400!"><span class="iconify i-lucide:arrow-up shrink-0 text-gray-500 dark:text-gray-400 text-success-500! dark:text-success-400!" aria-hidden="true" data-slot="trendIcon"></span><span data-slot="trendValue" class="">+5%</span></div>
+    </div>
+  </div>
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageStat > renders with color primary correctly 1`] = `
+"<div data-slot="root" class="rounded-lg overflow-hidden flex flex-col justify-between bg-default ring ring-default">
+  <div data-slot="header" class="flex items-start gap-4 p-4 sm:p-6">
+    <div data-slot="icon" class="flex items-center justify-center shrink-0 rounded-lg size-10 p-2 bg-primary-500/10 text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:users size-5 text-primary-500 dark:text-primary-400" aria-hidden="true" data-slot="iconIcon"></span></div>
+    <div data-slot="content" class="flex-1 min-w-0">
+      <div data-slot="title" class="font-medium text-sm text-muted">Total Users</div>
+      <div data-slot="value" class="font-semibold mt-1 text-3xl text-default">12,345</div>
+      <!--v-if-->
+      <div data-slot="trend" class="flex items-center gap-1 text-xs font-medium mt-1 text-success-500! dark:text-success-400!"><span class="iconify i-lucide:arrow-up shrink-0 text-primary-500 dark:text-primary-400 text-success-500! dark:text-success-400!" aria-hidden="true" data-slot="trendIcon"></span><span data-slot="trendValue" class="">+5%</span></div>
+    </div>
+  </div>
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageStat > renders with color secondary correctly 1`] = `
+"<div data-slot="root" class="rounded-lg overflow-hidden flex flex-col justify-between bg-default ring ring-default">
+  <div data-slot="header" class="flex items-start gap-4 p-4 sm:p-6">
+    <div data-slot="icon" class="flex items-center justify-center shrink-0 rounded-lg size-10 p-2 bg-secondary-500/10 text-secondary-500 dark:text-secondary-400"><span class="iconify i-lucide:users size-5 text-secondary-500 dark:text-secondary-400" aria-hidden="true" data-slot="iconIcon"></span></div>
+    <div data-slot="content" class="flex-1 min-w-0">
+      <div data-slot="title" class="font-medium text-sm text-muted">Total Users</div>
+      <div data-slot="value" class="font-semibold mt-1 text-3xl text-default">12,345</div>
+      <!--v-if-->
+      <div data-slot="trend" class="flex items-center gap-1 text-xs font-medium mt-1 text-success-500! dark:text-success-400!"><span class="iconify i-lucide:arrow-up shrink-0 text-secondary-500 dark:text-secondary-400 text-success-500! dark:text-success-400!" aria-hidden="true" data-slot="trendIcon"></span><span data-slot="trendValue" class="">+5%</span></div>
+    </div>
+  </div>
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageStat > renders with color success correctly 1`] = `
+"<div data-slot="root" class="rounded-lg overflow-hidden flex flex-col justify-between bg-default ring ring-default">
+  <div data-slot="header" class="flex items-start gap-4 p-4 sm:p-6">
+    <div data-slot="icon" class="flex items-center justify-center shrink-0 rounded-lg size-10 p-2 bg-success-500/10 text-success-500 dark:text-success-400"><span class="iconify i-lucide:users size-5 text-success-500 dark:text-success-400" aria-hidden="true" data-slot="iconIcon"></span></div>
+    <div data-slot="content" class="flex-1 min-w-0">
+      <div data-slot="title" class="font-medium text-sm text-muted">Total Users</div>
+      <div data-slot="value" class="font-semibold mt-1 text-3xl text-default">12,345</div>
+      <!--v-if-->
+      <div data-slot="trend" class="flex items-center gap-1 text-xs font-medium mt-1 text-success-500! dark:text-success-400!"><span class="iconify i-lucide:arrow-up shrink-0 text-success-500 dark:text-success-400 text-success-500! dark:text-success-400!" aria-hidden="true" data-slot="trendIcon"></span><span data-slot="trendValue" class="">+5%</span></div>
+    </div>
+  </div>
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageStat > renders with color warning correctly 1`] = `
+"<div data-slot="root" class="rounded-lg overflow-hidden flex flex-col justify-between bg-default ring ring-default">
+  <div data-slot="header" class="flex items-start gap-4 p-4 sm:p-6">
+    <div data-slot="icon" class="flex items-center justify-center shrink-0 rounded-lg size-10 p-2 bg-warning-500/10 text-warning-500 dark:text-warning-400"><span class="iconify i-lucide:users size-5 text-warning-500 dark:text-warning-400" aria-hidden="true" data-slot="iconIcon"></span></div>
+    <div data-slot="content" class="flex-1 min-w-0">
+      <div data-slot="title" class="font-medium text-sm text-muted">Total Users</div>
+      <div data-slot="value" class="font-semibold mt-1 text-3xl text-default">12,345</div>
+      <!--v-if-->
+      <div data-slot="trend" class="flex items-center gap-1 text-xs font-medium mt-1 text-success-500! dark:text-success-400!"><span class="iconify i-lucide:arrow-up shrink-0 text-warning-500 dark:text-warning-400 text-success-500! dark:text-success-400!" aria-hidden="true" data-slot="trendIcon"></span><span data-slot="trendValue" class="">+5%</span></div>
+    </div>
+  </div>
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageStat > renders with current and max correctly 1`] = `
+"<div data-slot="root" class="rounded-lg overflow-hidden flex flex-col justify-between bg-default ring ring-default">
+  <div data-slot="header" class="flex items-start gap-4 p-4 sm:p-6">
+    <div data-slot="icon" class="flex items-center justify-center shrink-0 rounded-lg size-10 p-2 bg-primary-500/10 text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:users size-5 text-primary-500 dark:text-primary-400" aria-hidden="true" data-slot="iconIcon"></span></div>
+    <div data-slot="content" class="flex-1 min-w-0">
+      <div data-slot="title" class="font-medium text-sm text-muted">Total Users</div>
+      <div data-slot="value" class="font-semibold mt-1 text-3xl text-default">50</div>
+      <div data-slot="label" class="text-xs text-muted mt-1">50 / 100</div>
+      <!--v-if-->
+    </div>
+  </div>
+  <div data-slot="progress" class="">
+    <div data-orientation="horizontal" data-slot="root" class="gap-2 w-full flex flex-col">
+      <!--v-if-->
+      <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="50" aria-label="50%" role="progressbar" data-state="loading" data-value="50" data-max="100" data-slot="base" class="relative overflow-hidden rounded-full bg-accented w-full h-2" style="transform: translateZ(0);">
+        <div data-state="loading" data-value="50" data-max="100" data-slot="indicator" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]" style="transform: translateX(-50%);"></div>
+      </div>
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageStat > renders with data and showArea correctly 1`] = `
+"<div data-slot="root" class="rounded-lg overflow-hidden flex flex-col justify-between bg-default ring ring-default">
+  <div data-slot="header" class="flex items-start gap-4 p-4 sm:p-6">
+    <div data-slot="icon" class="flex items-center justify-center shrink-0 rounded-lg size-10 p-2 bg-primary-500/10 text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:users size-5 text-primary-500 dark:text-primary-400" aria-hidden="true" data-slot="iconIcon"></span></div>
+    <div data-slot="content" class="flex-1 min-w-0">
+      <div data-slot="title" class="font-medium text-sm text-muted">Total Users</div>
+      <div data-slot="value" class="font-semibold mt-1 text-3xl text-default">12,345</div>
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if-->
+  <div data-slot="sparkline" class="h-12"><svg data-slot="sparklineSvg" class="w-full" viewBox="0 0 100 40" preserveAspectRatio="none" style="height: 40px;">
+      <!--v-if-->
+      <path data-slot="sparklineArea" d="M 2,38 L 2,38 L 21.200000000000003,26 L 40.400000000000006,32 L 59.599999999999994,14 L 78.80000000000001,20 L 98,2 L 98,40 L 2,40 Z" class="transition-opacity duration-300 fill-primary-500/20 dark:fill-primary-400/20"></path>
+      <path data-slot="sparklinePath" d="M 2,38 L 21.200000000000003,26 L 40.400000000000006,32 L 59.599999999999994,14 L 78.80000000000001,20 L 98,2" class="fill-none transition-all duration-300 stroke-primary-500 dark:stroke-primary-400" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+    </svg></div>
+</div>"
+`;
+
+exports[`PageStat > renders with data containing negative values correctly 1`] = `
+"<div data-slot="root" class="rounded-lg overflow-hidden flex flex-col justify-between bg-default ring ring-default">
+  <div data-slot="header" class="flex items-start gap-4 p-4 sm:p-6">
+    <div data-slot="icon" class="flex items-center justify-center shrink-0 rounded-lg size-10 p-2 bg-primary-500/10 text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:users size-5 text-primary-500 dark:text-primary-400" aria-hidden="true" data-slot="iconIcon"></span></div>
+    <div data-slot="content" class="flex-1 min-w-0">
+      <div data-slot="title" class="font-medium text-sm text-muted">Total Users</div>
+      <div data-slot="value" class="font-semibold mt-1 text-3xl text-default">12,345</div>
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if-->
+  <div data-slot="sparkline" class="h-12"><svg data-slot="sparklineSvg" class="w-full" viewBox="0 0 100 40" preserveAspectRatio="none" style="height: 40px;">
+      <path data-slot="sparklineZeroLine" d="M 2,26 L 98,26" class="stroke-default dark:stroke-default" fill="none" stroke-width="1" stroke-dasharray="3 3"></path>
+      <!--v-if-->
+      <path data-slot="sparklinePath" d="M 2,38 L 21.200000000000003,20 L 40.400000000000006,32 L 59.599999999999994,8 L 78.80000000000001,2 L 98,28.4" class="fill-none transition-all duration-300 stroke-primary-500 dark:stroke-primary-400" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+    </svg></div>
+</div>"
+`;
+
+exports[`PageStat > renders with data correctly 1`] = `
+"<div data-slot="root" class="rounded-lg overflow-hidden flex flex-col justify-between bg-default ring ring-default">
+  <div data-slot="header" class="flex items-start gap-4 p-4 sm:p-6">
+    <div data-slot="icon" class="flex items-center justify-center shrink-0 rounded-lg size-10 p-2 bg-primary-500/10 text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:users size-5 text-primary-500 dark:text-primary-400" aria-hidden="true" data-slot="iconIcon"></span></div>
+    <div data-slot="content" class="flex-1 min-w-0">
+      <div data-slot="title" class="font-medium text-sm text-muted">Total Users</div>
+      <div data-slot="value" class="font-semibold mt-1 text-3xl text-default">12,345</div>
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if-->
+  <div data-slot="sparkline" class="h-12"><svg data-slot="sparklineSvg" class="w-full" viewBox="0 0 100 40" preserveAspectRatio="none" style="height: 40px;">
+      <!--v-if-->
+      <!--v-if-->
+      <path data-slot="sparklinePath" d="M 2,38 L 21.200000000000003,26 L 40.400000000000006,32 L 59.599999999999994,14 L 78.80000000000001,20 L 98,2" class="fill-none transition-all duration-300 stroke-primary-500 dark:stroke-primary-400" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+    </svg></div>
+</div>"
+`;
+
+exports[`PageStat > renders with default slot correctly 1`] = `
+"<div data-slot="root" class="rounded-lg overflow-hidden flex flex-col justify-between bg-default ring ring-default">
+  <div data-slot="header" class="flex items-start gap-4 p-4 sm:p-6">
+    <div data-slot="icon" class="flex items-center justify-center shrink-0 rounded-lg size-10 p-2 bg-primary-500/10 text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:users size-5 text-primary-500 dark:text-primary-400" aria-hidden="true" data-slot="iconIcon"></span></div>
+    <div data-slot="content" class="flex-1 min-w-0">
+      <div data-slot="title" class="font-medium text-sm text-muted">Total Users</div>
+      <div data-slot="value" class="font-semibold mt-1 text-3xl text-default">12,345</div>
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if-->
+  <!--v-if-->Default slot
+</div>"
+`;
+
+exports[`PageStat > renders with height correctly 1`] = `
+"<div data-slot="root" class="rounded-lg overflow-hidden flex flex-col justify-between bg-default ring ring-default">
+  <div data-slot="header" class="flex items-start gap-4 p-4 sm:p-6">
+    <div data-slot="icon" class="flex items-center justify-center shrink-0 rounded-lg size-10 p-2 bg-primary-500/10 text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:users size-5 text-primary-500 dark:text-primary-400" aria-hidden="true" data-slot="iconIcon"></span></div>
+    <div data-slot="content" class="flex-1 min-w-0">
+      <div data-slot="title" class="font-medium text-sm text-muted">Total Users</div>
+      <div data-slot="value" class="font-semibold mt-1 text-3xl text-default">12,345</div>
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if-->
+  <div data-slot="sparkline" class="h-12"><svg data-slot="sparklineSvg" class="w-full" viewBox="0 0 100 60" preserveAspectRatio="none" style="height: 60px;">
+      <!--v-if-->
+      <!--v-if-->
+      <path data-slot="sparklinePath" d="M 2,58 L 34,30 L 66,44 L 98,2" class="fill-none transition-all duration-300 stroke-primary-500 dark:stroke-primary-400" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+    </svg></div>
+</div>"
+`;
+
+exports[`PageStat > renders with icon correctly 1`] = `
+"<div data-slot="root" class="rounded-lg overflow-hidden flex flex-col justify-between bg-default ring ring-default">
+  <div data-slot="header" class="flex items-start gap-4 p-4 sm:p-6">
+    <div data-slot="icon" class="flex items-center justify-center shrink-0 rounded-lg size-10 p-2 bg-primary-500/10 text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:users size-5 text-primary-500 dark:text-primary-400" aria-hidden="true" data-slot="iconIcon"></span></div>
+    <div data-slot="content" class="flex-1 min-w-0">
+      <!--v-if-->
+      <!--v-if-->
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageStat > renders with icon slot correctly 1`] = `
+"<div data-slot="root" class="rounded-lg overflow-hidden flex flex-col justify-between bg-default ring ring-default">
+  <div data-slot="header" class="flex items-start gap-4 p-4 sm:p-6">
+    <div data-slot="icon" class="flex items-center justify-center shrink-0 rounded-lg size-10 p-2 bg-primary-500/10 text-primary-500 dark:text-primary-400">Icon slot</div>
+    <div data-slot="content" class="flex-1 min-w-0">
+      <div data-slot="title" class="font-medium text-sm text-muted">Total Users</div>
+      <div data-slot="value" class="font-semibold mt-1 text-3xl text-default">12,345</div>
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageStat > renders with label slot correctly 1`] = `
+"<div data-slot="root" class="rounded-lg overflow-hidden flex flex-col justify-between bg-default ring ring-default">
+  <div data-slot="header" class="flex items-start gap-4 p-4 sm:p-6">
+    <div data-slot="icon" class="flex items-center justify-center shrink-0 rounded-lg size-10 p-2 bg-primary-500/10 text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:users size-5 text-primary-500 dark:text-primary-400" aria-hidden="true" data-slot="iconIcon"></span></div>
+    <div data-slot="content" class="flex-1 min-w-0">
+      <div data-slot="title" class="font-medium text-sm text-muted">Total Users</div>
+      <div data-slot="value" class="font-semibold mt-1 text-3xl text-default">50</div>
+      <div data-slot="label" class="text-xs text-muted mt-1">Label slot</div>
+      <!--v-if-->
+    </div>
+  </div>
+  <div data-slot="progress" class="">
+    <div data-orientation="horizontal" data-slot="root" class="gap-2 w-full flex flex-col">
+      <!--v-if-->
+      <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="50" aria-label="50%" role="progressbar" data-state="loading" data-value="50" data-max="100" data-slot="base" class="relative overflow-hidden rounded-full bg-accented w-full h-2" style="transform: translateZ(0);">
+        <div data-state="loading" data-value="50" data-max="100" data-slot="indicator" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]" style="transform: translateX(-50%);"></div>
+      </div>
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageStat > renders with progress slot correctly 1`] = `
+"<div data-slot="root" class="rounded-lg overflow-hidden flex flex-col justify-between bg-default ring ring-default">
+  <div data-slot="header" class="flex items-start gap-4 p-4 sm:p-6">
+    <div data-slot="icon" class="flex items-center justify-center shrink-0 rounded-lg size-10 p-2 bg-primary-500/10 text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:users size-5 text-primary-500 dark:text-primary-400" aria-hidden="true" data-slot="iconIcon"></span></div>
+    <div data-slot="content" class="flex-1 min-w-0">
+      <div data-slot="title" class="font-medium text-sm text-muted">Total Users</div>
+      <div data-slot="value" class="font-semibold mt-1 text-3xl text-default">50</div>
+      <div data-slot="label" class="text-xs text-muted mt-1">50 / 100</div>
+      <!--v-if-->
+    </div>
+  </div>
+  <div data-slot="progress" class="">Progress slot</div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageStat > renders with progressColor correctly 1`] = `
+"<div data-slot="root" class="rounded-lg overflow-hidden flex flex-col justify-between bg-default ring ring-default">
+  <div data-slot="header" class="flex items-start gap-4 p-4 sm:p-6">
+    <div data-slot="icon" class="flex items-center justify-center shrink-0 rounded-lg size-10 p-2 bg-primary-500/10 text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:users size-5 text-primary-500 dark:text-primary-400" aria-hidden="true" data-slot="iconIcon"></span></div>
+    <div data-slot="content" class="flex-1 min-w-0">
+      <div data-slot="title" class="font-medium text-sm text-muted">Total Users</div>
+      <div data-slot="value" class="font-semibold mt-1 text-3xl text-default">50</div>
+      <div data-slot="label" class="text-xs text-muted mt-1">50 / 100</div>
+      <!--v-if-->
+    </div>
+  </div>
+  <div data-slot="progress" class="">
+    <div data-orientation="horizontal" data-slot="root" class="gap-2 w-full flex flex-col">
+      <!--v-if-->
+      <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="50" aria-label="50%" role="progressbar" data-state="loading" data-value="50" data-max="100" data-slot="base" class="relative overflow-hidden rounded-full bg-accented w-full h-2" style="transform: translateZ(0);">
+        <div data-state="loading" data-value="50" data-max="100" data-slot="indicator" class="rounded-full size-full transition-transform duration-200 ease-out bg-success data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]" style="transform: translateX(-50%);"></div>
+      </div>
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageStat > renders with size lg correctly 1`] = `
+"<div data-slot="root" class="rounded-lg overflow-hidden flex flex-col justify-between bg-default ring ring-default">
+  <div data-slot="header" class="flex items-start gap-4 p-4 sm:p-6">
+    <div data-slot="icon" class="flex items-center justify-center shrink-0 rounded-lg size-12 p-2.5 bg-primary-500/10 text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:users size-6 text-primary-500 dark:text-primary-400" aria-hidden="true" data-slot="iconIcon"></span></div>
+    <div data-slot="content" class="flex-1 min-w-0">
+      <div data-slot="title" class="font-medium text-base text-muted">Total Users</div>
+      <div data-slot="value" class="font-semibold mt-1 text-4xl text-default">12,345</div>
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageStat > renders with size md correctly 1`] = `
+"<div data-slot="root" class="rounded-lg overflow-hidden flex flex-col justify-between bg-default ring ring-default">
+  <div data-slot="header" class="flex items-start gap-4 p-4 sm:p-6">
+    <div data-slot="icon" class="flex items-center justify-center shrink-0 rounded-lg size-10 p-2 bg-primary-500/10 text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:users size-5 text-primary-500 dark:text-primary-400" aria-hidden="true" data-slot="iconIcon"></span></div>
+    <div data-slot="content" class="flex-1 min-w-0">
+      <div data-slot="title" class="font-medium text-sm text-muted">Total Users</div>
+      <div data-slot="value" class="font-semibold mt-1 text-3xl text-default">12,345</div>
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageStat > renders with size sm correctly 1`] = `
+"<div data-slot="root" class="rounded-lg overflow-hidden flex flex-col justify-between bg-default ring ring-default">
+  <div data-slot="header" class="flex items-start gap-4 p-4 sm:p-6">
+    <div data-slot="icon" class="flex items-center justify-center shrink-0 rounded-lg size-9 p-2 bg-primary-500/10 text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:users size-4 text-primary-500 dark:text-primary-400" aria-hidden="true" data-slot="iconIcon"></span></div>
+    <div data-slot="content" class="flex-1 min-w-0">
+      <div data-slot="title" class="font-medium text-sm text-muted">Total Users</div>
+      <div data-slot="value" class="font-semibold mt-1 text-2xl text-default">12,345</div>
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageStat > renders with size xl correctly 1`] = `
+"<div data-slot="root" class="rounded-lg overflow-hidden flex flex-col justify-between bg-default ring ring-default">
+  <div data-slot="header" class="flex items-start gap-4 p-4 sm:p-6">
+    <div data-slot="icon" class="flex items-center justify-center shrink-0 rounded-lg size-14 p-3 bg-primary-500/10 text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:users size-7 text-primary-500 dark:text-primary-400" aria-hidden="true" data-slot="iconIcon"></span></div>
+    <div data-slot="content" class="flex-1 min-w-0">
+      <div data-slot="title" class="font-medium text-base text-muted">Total Users</div>
+      <div data-slot="value" class="font-semibold mt-1 text-5xl text-default">12,345</div>
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageStat > renders with size xs correctly 1`] = `
+"<div data-slot="root" class="rounded-lg overflow-hidden flex flex-col justify-between bg-default ring ring-default">
+  <div data-slot="header" class="flex items-start gap-4 p-4 sm:p-6">
+    <div data-slot="icon" class="flex items-center justify-center shrink-0 rounded-lg size-8 p-1.5 bg-primary-500/10 text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:users size-4 text-primary-500 dark:text-primary-400" aria-hidden="true" data-slot="iconIcon"></span></div>
+    <div data-slot="content" class="flex-1 min-w-0">
+      <div data-slot="title" class="font-medium text-xs text-muted">Total Users</div>
+      <div data-slot="value" class="font-semibold mt-1 text-xl text-default">12,345</div>
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageStat > renders with sparkline slot correctly 1`] = `
+"<div data-slot="root" class="rounded-lg overflow-hidden flex flex-col justify-between bg-default ring ring-default">
+  <div data-slot="header" class="flex items-start gap-4 p-4 sm:p-6">
+    <div data-slot="icon" class="flex items-center justify-center shrink-0 rounded-lg size-10 p-2 bg-primary-500/10 text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:users size-5 text-primary-500 dark:text-primary-400" aria-hidden="true" data-slot="iconIcon"></span></div>
+    <div data-slot="content" class="flex-1 min-w-0">
+      <div data-slot="title" class="font-medium text-sm text-muted">Total Users</div>
+      <div data-slot="value" class="font-semibold mt-1 text-3xl text-default">12,345</div>
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if-->
+  <div data-slot="sparkline" class="h-12">Sparkline slot</div>
+</div>"
+`;
+
+exports[`PageStat > renders with strokeWidth correctly 1`] = `
+"<div data-slot="root" class="rounded-lg overflow-hidden flex flex-col justify-between bg-default ring ring-default">
+  <div data-slot="header" class="flex items-start gap-4 p-4 sm:p-6">
+    <div data-slot="icon" class="flex items-center justify-center shrink-0 rounded-lg size-10 p-2 bg-primary-500/10 text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:users size-5 text-primary-500 dark:text-primary-400" aria-hidden="true" data-slot="iconIcon"></span></div>
+    <div data-slot="content" class="flex-1 min-w-0">
+      <div data-slot="title" class="font-medium text-sm text-muted">Total Users</div>
+      <div data-slot="value" class="font-semibold mt-1 text-3xl text-default">12,345</div>
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if-->
+  <div data-slot="sparkline" class="h-12"><svg data-slot="sparklineSvg" class="w-full" viewBox="0 0 100 40" preserveAspectRatio="none" style="height: 40px;">
+      <!--v-if-->
+      <!--v-if-->
+      <path data-slot="sparklinePath" d="M 2,38 L 34,20 L 66,29 L 98,2" class="fill-none transition-all duration-300 stroke-primary-500 dark:stroke-primary-400" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path>
+    </svg></div>
+</div>"
+`;
+
+exports[`PageStat > renders with title correctly 1`] = `
+"<div data-slot="root" class="rounded-lg overflow-hidden flex flex-col justify-between bg-default ring ring-default">
+  <div data-slot="header" class="flex items-start gap-4 p-4 sm:p-6">
+    <!--v-if-->
+    <div data-slot="content" class="flex-1 min-w-0">
+      <div data-slot="title" class="font-medium text-sm text-muted">Total Users</div>
+      <!--v-if-->
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageStat > renders with title slot correctly 1`] = `
+"<div data-slot="root" class="rounded-lg overflow-hidden flex flex-col justify-between bg-default ring ring-default">
+  <div data-slot="header" class="flex items-start gap-4 p-4 sm:p-6">
+    <div data-slot="icon" class="flex items-center justify-center shrink-0 rounded-lg size-10 p-2 bg-primary-500/10 text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:users size-5 text-primary-500 dark:text-primary-400" aria-hidden="true" data-slot="iconIcon"></span></div>
+    <div data-slot="content" class="flex-1 min-w-0">
+      <div data-slot="title" class="font-medium text-sm text-muted">Title slot</div>
+      <div data-slot="value" class="font-semibold mt-1 text-3xl text-default">12,345</div>
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageStat > renders with trend and trendDirection override correctly 1`] = `
+"<div data-slot="root" class="rounded-lg overflow-hidden flex flex-col justify-between bg-default ring ring-default">
+  <div data-slot="header" class="flex items-start gap-4 p-4 sm:p-6">
+    <div data-slot="icon" class="flex items-center justify-center shrink-0 rounded-lg size-10 p-2 bg-primary-500/10 text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:users size-5 text-primary-500 dark:text-primary-400" aria-hidden="true" data-slot="iconIcon"></span></div>
+    <div data-slot="content" class="flex-1 min-w-0">
+      <div data-slot="title" class="font-medium text-sm text-muted">Total Users</div>
+      <div data-slot="value" class="font-semibold mt-1 text-3xl text-default">12,345</div>
+      <!--v-if-->
+      <div data-slot="trend" class="flex items-center gap-1 text-xs font-medium mt-1 text-error-500! dark:text-error-400!"><span class="iconify i-lucide:arrow-down shrink-0 text-primary-500 dark:text-primary-400 text-error-500! dark:text-error-400!" aria-hidden="true" data-slot="trendIcon"></span><span data-slot="trendValue" class="">+15.3%</span></div>
+    </div>
+  </div>
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageStat > renders with trend down correctly 1`] = `
+"<div data-slot="root" class="rounded-lg overflow-hidden flex flex-col justify-between bg-default ring ring-default">
+  <div data-slot="header" class="flex items-start gap-4 p-4 sm:p-6">
+    <div data-slot="icon" class="flex items-center justify-center shrink-0 rounded-lg size-10 p-2 bg-primary-500/10 text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:users size-5 text-primary-500 dark:text-primary-400" aria-hidden="true" data-slot="iconIcon"></span></div>
+    <div data-slot="content" class="flex-1 min-w-0">
+      <div data-slot="title" class="font-medium text-sm text-muted">Total Users</div>
+      <div data-slot="value" class="font-semibold mt-1 text-3xl text-default">12,345</div>
+      <!--v-if-->
+      <div data-slot="trend" class="flex items-center gap-1 text-xs font-medium mt-1 text-error-500! dark:text-error-400!"><span class="iconify i-lucide:arrow-down shrink-0 text-primary-500 dark:text-primary-400 text-error-500! dark:text-error-400!" aria-hidden="true" data-slot="trendIcon"></span><span data-slot="trendValue" class="">-8.2%</span></div>
+    </div>
+  </div>
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageStat > renders with trend slot correctly 1`] = `
+"<div data-slot="root" class="rounded-lg overflow-hidden flex flex-col justify-between bg-default ring ring-default">
+  <div data-slot="header" class="flex items-start gap-4 p-4 sm:p-6">
+    <div data-slot="icon" class="flex items-center justify-center shrink-0 rounded-lg size-10 p-2 bg-primary-500/10 text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:users size-5 text-primary-500 dark:text-primary-400" aria-hidden="true" data-slot="iconIcon"></span></div>
+    <div data-slot="content" class="flex-1 min-w-0">
+      <div data-slot="title" class="font-medium text-sm text-muted">Total Users</div>
+      <div data-slot="value" class="font-semibold mt-1 text-3xl text-default">12,345</div>
+      <!--v-if-->
+      <div data-slot="trend" class="flex items-center gap-1 text-xs font-medium mt-1 text-success-500! dark:text-success-400!">Trend slot</div>
+    </div>
+  </div>
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageStat > renders with trend up correctly 1`] = `
+"<div data-slot="root" class="rounded-lg overflow-hidden flex flex-col justify-between bg-default ring ring-default">
+  <div data-slot="header" class="flex items-start gap-4 p-4 sm:p-6">
+    <div data-slot="icon" class="flex items-center justify-center shrink-0 rounded-lg size-10 p-2 bg-primary-500/10 text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:users size-5 text-primary-500 dark:text-primary-400" aria-hidden="true" data-slot="iconIcon"></span></div>
+    <div data-slot="content" class="flex-1 min-w-0">
+      <div data-slot="title" class="font-medium text-sm text-muted">Total Users</div>
+      <div data-slot="value" class="font-semibold mt-1 text-3xl text-default">12,345</div>
+      <!--v-if-->
+      <div data-slot="trend" class="flex items-center gap-1 text-xs font-medium mt-1 text-success-500! dark:text-success-400!"><span class="iconify i-lucide:arrow-up shrink-0 text-primary-500 dark:text-primary-400 text-success-500! dark:text-success-400!" aria-hidden="true" data-slot="trendIcon"></span><span data-slot="trendValue" class="">+12.5%</span></div>
+    </div>
+  </div>
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageStat > renders with ui correctly 1`] = `
+"<div data-slot="root" class="rounded-lg overflow-hidden flex flex-col justify-between bg-default ring ring-default">
+  <div data-slot="header" class="flex items-start gap-4 p-4 sm:p-6">
+    <div data-slot="icon" class="flex items-center justify-center shrink-0 rounded-lg size-10 p-2 bg-primary-500/10 text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:users size-5 text-primary-500 dark:text-primary-400" aria-hidden="true" data-slot="iconIcon"></span></div>
+    <div data-slot="content" class="flex-1 min-w-0">
+      <div data-slot="title" class="text-sm text-muted font-bold">Total Users</div>
+      <div data-slot="value" class="font-semibold mt-1 text-3xl text-default">12,345</div>
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageStat > renders with value correctly 1`] = `
+"<div data-slot="root" class="rounded-lg overflow-hidden flex flex-col justify-between bg-default ring ring-default">
+  <div data-slot="header" class="flex items-start gap-4 p-4 sm:p-6">
+    <!--v-if-->
+    <div data-slot="content" class="flex-1 min-w-0">
+      <!--v-if-->
+      <div data-slot="value" class="font-semibold mt-1 text-3xl text-default">12,345</div>
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageStat > renders with value number correctly 1`] = `
+"<div data-slot="root" class="rounded-lg overflow-hidden flex flex-col justify-between bg-default ring ring-default">
+  <div data-slot="header" class="flex items-start gap-4 p-4 sm:p-6">
+    <!--v-if-->
+    <div data-slot="content" class="flex-1 min-w-0">
+      <!--v-if-->
+      <div data-slot="value" class="font-semibold mt-1 text-3xl text-default">12345</div>
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageStat > renders with value slot correctly 1`] = `
+"<div data-slot="root" class="rounded-lg overflow-hidden flex flex-col justify-between bg-default ring ring-default">
+  <div data-slot="header" class="flex items-start gap-4 p-4 sm:p-6">
+    <div data-slot="icon" class="flex items-center justify-center shrink-0 rounded-lg size-10 p-2 bg-primary-500/10 text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:users size-5 text-primary-500 dark:text-primary-400" aria-hidden="true" data-slot="iconIcon"></span></div>
+    <div data-slot="content" class="flex-1 min-w-0">
+      <div data-slot="title" class="font-medium text-sm text-muted">Total Users</div>
+      <div data-slot="value" class="font-semibold mt-1 text-3xl text-default">Value slot</div>
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageStat > renders with variant ghost correctly 1`] = `
+"<div data-slot="root" class="rounded-lg overflow-hidden flex flex-col justify-between">
+  <div data-slot="header" class="flex items-start gap-4 p-4 sm:p-6">
+    <div data-slot="icon" class="flex items-center justify-center shrink-0 rounded-lg size-10 p-2 bg-primary-500/10 text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:users size-5 text-primary-500 dark:text-primary-400" aria-hidden="true" data-slot="iconIcon"></span></div>
+    <div data-slot="content" class="flex-1 min-w-0">
+      <div data-slot="title" class="font-medium text-sm text-muted">Total Users</div>
+      <div data-slot="value" class="font-semibold mt-1 text-3xl text-default">12,345</div>
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageStat > renders with variant naked correctly 1`] = `
+"<div data-slot="root" class="rounded-lg overflow-hidden flex flex-col justify-between">
+  <div data-slot="header" class="flex items-start gap-4 p-0 sm:p-0">
+    <div data-slot="icon" class="flex items-center justify-center shrink-0 rounded-lg size-10 p-2 bg-primary-500/10 text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:users size-5 text-primary-500 dark:text-primary-400" aria-hidden="true" data-slot="iconIcon"></span></div>
+    <div data-slot="content" class="flex-1 min-w-0">
+      <div data-slot="title" class="font-medium text-sm text-muted">Total Users</div>
+      <div data-slot="value" class="font-semibold mt-1 text-3xl text-default">12,345</div>
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageStat > renders with variant outline correctly 1`] = `
+"<div data-slot="root" class="rounded-lg overflow-hidden flex flex-col justify-between bg-default ring ring-default">
+  <div data-slot="header" class="flex items-start gap-4 p-4 sm:p-6">
+    <div data-slot="icon" class="flex items-center justify-center shrink-0 rounded-lg size-10 p-2 bg-primary-500/10 text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:users size-5 text-primary-500 dark:text-primary-400" aria-hidden="true" data-slot="iconIcon"></span></div>
+    <div data-slot="content" class="flex-1 min-w-0">
+      <div data-slot="title" class="font-medium text-sm text-muted">Total Users</div>
+      <div data-slot="value" class="font-semibold mt-1 text-3xl text-default">12,345</div>
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageStat > renders with variant soft correctly 1`] = `
+"<div data-slot="root" class="rounded-lg overflow-hidden flex flex-col justify-between bg-elevated/50">
+  <div data-slot="header" class="flex items-start gap-4 p-4 sm:p-6">
+    <div data-slot="icon" class="flex items-center justify-center shrink-0 rounded-lg size-10 p-2 bg-primary-500/10 text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:users size-5 text-primary-500 dark:text-primary-400" aria-hidden="true" data-slot="iconIcon"></span></div>
+    <div data-slot="content" class="flex-1 min-w-0">
+      <div data-slot="title" class="font-medium text-sm text-toned">Total Users</div>
+      <div data-slot="value" class="font-semibold mt-1 text-3xl text-default">12,345</div>
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageStat > renders with variant solid correctly 1`] = `
+"<div data-slot="root" class="rounded-lg overflow-hidden flex flex-col justify-between bg-inverted text-inverted">
+  <div data-slot="header" class="flex items-start gap-4 p-4 sm:p-6">
+    <div data-slot="icon" class="flex items-center justify-center shrink-0 rounded-lg size-10 p-2 bg-primary-500/10 text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:users size-5 text-primary-500 dark:text-primary-400" aria-hidden="true" data-slot="iconIcon"></span></div>
+    <div data-slot="content" class="flex-1 min-w-0">
+      <div data-slot="title" class="font-medium text-sm text-dimmed">Total Users</div>
+      <div data-slot="value" class="font-semibold mt-1 text-3xl text-inverted">12,345</div>
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageStat > renders with variant subtle correctly 1`] = `
+"<div data-slot="root" class="rounded-lg overflow-hidden flex flex-col justify-between bg-elevated/50 ring ring-default">
+  <div data-slot="header" class="flex items-start gap-4 p-4 sm:p-6">
+    <div data-slot="icon" class="flex items-center justify-center shrink-0 rounded-lg size-10 p-2 bg-primary-500/10 text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:users size-5 text-primary-500 dark:text-primary-400" aria-hidden="true" data-slot="iconIcon"></span></div>
+    <div data-slot="content" class="flex-1 min-w-0">
+      <div data-slot="title" class="font-medium text-sm text-toned">Total Users</div>
+      <div data-slot="value" class="font-semibold mt-1 text-3xl text-default">12,345</div>
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PageStat > renders without showLabel correctly 1`] = `
+"<div data-slot="root" class="rounded-lg overflow-hidden flex flex-col justify-between bg-default ring ring-default">
+  <div data-slot="header" class="flex items-start gap-4 p-4 sm:p-6">
+    <div data-slot="icon" class="flex items-center justify-center shrink-0 rounded-lg size-10 p-2 bg-primary-500/10 text-primary-500 dark:text-primary-400"><span class="iconify i-lucide:users size-5 text-primary-500 dark:text-primary-400" aria-hidden="true" data-slot="iconIcon"></span></div>
+    <div data-slot="content" class="flex-1 min-w-0">
+      <div data-slot="title" class="font-medium text-sm text-muted">Total Users</div>
+      <div data-slot="value" class="font-semibold mt-1 text-3xl text-default">50</div>
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>
+  <div data-slot="progress" class="">
+    <div data-orientation="horizontal" data-slot="root" class="gap-2 w-full flex flex-col">
+      <!--v-if-->
+      <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="50" aria-label="50%" role="progressbar" data-state="loading" data-value="50" data-max="100" data-slot="base" class="relative overflow-hidden rounded-full bg-accented w-full h-2" style="transform: translateZ(0);">
+        <div data-state="loading" data-value="50" data-max="100" data-slot="indicator" class="rounded-full size-full transition-transform duration-200 ease-out bg-primary data-[state=indeterminate]:animate-[carousel_2s_ease-in-out_infinite] data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_ease-in-out_infinite]" style="transform: translateX(-50%);"></div>
+      </div>
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
