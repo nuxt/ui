@@ -85,6 +85,14 @@ export interface ModuleOptions {
      * @example 'tw'
      */
     prefix?: string
+
+    /**
+     * CSS engine used to compile `app.config.ts` / theme class strings.
+     * Authoring stays Tailwind utility strings either way; `stylex` converts
+     * them at build time so the app does not import `tailwindcss`.
+     * @defaultValue `'tailwind'`
+     */
+    engine?: 'tailwind' | 'stylex'
   }
 
   /**
@@ -239,18 +247,28 @@ export default defineNuxtModule<ModuleOptions>({
 
     // Isolate root node from portaled components
     nuxt.options.app.rootAttrs = nuxt.options.app.rootAttrs || {}
-    nuxt.options.app.rootAttrs.class = [nuxt.options.app.rootAttrs.class, `${options.theme?.prefix ? options.theme.prefix + ':' : ''}isolate`].filter(Boolean).join(' ')
+    if (options.theme?.engine === 'stylex') {
+      nuxt.options.app.rootAttrs.style = [nuxt.options.app.rootAttrs.style, 'isolation:isolate'].filter(Boolean).join(';')
+      const { compileUiConfig } = await import('./engine/compile-theme')
+      nuxt.options.appConfig.ui = await compileUiConfig(nuxt.options.appConfig.ui)
+    } else {
+      nuxt.options.app.rootAttrs.class = [nuxt.options.app.rootAttrs.class, `${options.theme?.prefix ? options.theme.prefix + ':' : ''}isolate`].filter(Boolean).join(' ')
+    }
 
     nuxt.hook('vite:extend', async ({ config }) => {
-      const plugin = await import('@tailwindcss/vite').then(r => r.default)
       config.plugins ||= []
+      if (options.theme?.engine === 'stylex') return
+      const plugin = await import('@tailwindcss/vite').then(r => r.default)
       config.plugins.push(plugin())
     })
-    if (nuxt.options.builder !== '@nuxt/vite-builder') {
+    if (options.theme?.engine !== 'stylex' && nuxt.options.builder !== '@nuxt/vite-builder') {
       nuxt.options.postcss.plugins['@tailwindcss/postcss'] = {}
     }
 
     addPlugin({ src: resolve('./runtime/plugins/colors') })
+    if (options.theme?.engine === 'stylex') {
+      addPlugin({ src: resolve('./runtime/plugins/stylex-app-config') })
+    }
 
     if (options.prose || options.mdc || options.content || hasNuxtModule('@nuxtjs/mdc') || hasNuxtModule('@nuxt/content')) {
       addComponentsDir({

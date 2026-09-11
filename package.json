@@ -51,6 +51,10 @@
     "./locale": {
       "types": "./dist/runtime/locale/index.d.ts",
       "import": "./dist/runtime/locale/index.js"
+    },
+    "./stylex": {
+      "style": "./dist/runtime/stylex.css",
+      "default": "./dist/runtime/stylex.css"
     }
   },
   "typesVersions": {
@@ -111,10 +115,12 @@
     "build": "nuxt-module-build build",
     "prepack": "pnpm build",
     "dev": "nuxt dev playgrounds/nuxt --uiDev",
+    "dev:stylex": "nuxt dev playgrounds/stylex",
+    "dev:stylex:build": "nuxt build playgrounds/stylex",
     "dev:build": "nuxt build playgrounds/nuxt",
     "dev:vue": "pnpm --filter './playgrounds/vue' dev -- --uiDev",
     "dev:vue:build": "pnpm --filter './playgrounds/vue' build",
-    "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxt prepare playgrounds/nuxt && nuxt prepare docs && pnpm dev:vue:build",
+    "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxt prepare playgrounds/nuxt && nuxt prepare docs && nuxt prepare playgrounds/stylex && pnpm dev:vue:build",
     "repl": "pnpm --filter './playgrounds/repl' dev",
     "repl:bundle": "pnpm --filter './playgrounds/repl' bundle",
     "repl:build": "pnpm --filter './playgrounds/repl' build",
@@ -131,6 +137,7 @@
     "release": "release-it"
   },
   "dependencies": {
+    "@babel/core": "^8.0.1",
     "@floating-ui/dom": "^1.8.0",
     "@iconify/vue": "^5.0.1",
     "@internationalized/date": "^3.12.4",
@@ -141,6 +148,8 @@
     "@nuxt/schema": "^4.5.2",
     "@nuxtjs/color-mode": "^4.0.1",
     "@standard-schema/spec": "^1.1.0",
+    "@stylexjs/babel-plugin": "0.19.0",
+    "@stylexjs/stylex": "0.19.0",
     "@tailwindcss/postcss": "^4.3.3",
     "@tailwindcss/vite": "^4.3.3",
     "@tanstack/vue-table": "^8.21.3",
@@ -224,6 +233,7 @@
     "@internationalized/date": "^3.0.0",
     "@internationalized/number": "^3.0.0",
     "@nuxt/content": "^3.0.0",
+    "@stylexjs/stylex": "^0.16.0 || ^0.17.0 || ^0.18.0 || ^0.19.0",
     "@tiptap/core": "^3",
     "@tiptap/extension-bubble-menu": "^3",
     "@tiptap/extension-code": "^3",
@@ -274,6 +284,12 @@
       "optional": true
     },
     "superstruct": {
+      "optional": true
+    },
+    "tailwindcss": {
+      "optional": true
+    },
+    "@stylexjs/stylex": {
       "optional": true
     },
     "vue-router": {

@@ -19,6 +19,10 @@ export default function TemplatePlugin(options: NuxtUIOptions, appConfig: Record
   const templateKeys = new Set(templates.map(t => `#build/${t.filename}`))
 
   async function writeTemplates(root: string) {
+    if (options.theme?.engine === 'stylex') {
+      const { compileUiConfig } = await import('../engine/compile-theme')
+      appConfig.ui = await compileUiConfig(appConfig.ui)
+    }
     const map: Record<string, string> = {}
     const dir = path.join(root, 'node_modules', '.nuxt-ui')
     const createdDirs = new Set<string>()

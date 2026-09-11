@@ -1,0 +1,97 @@
+<script setup lang="ts">
+const pg = usePg()
+
+const open = ref(false)
+const inset = ref(false)
+</script>
+
+<template>
+  <Navbar>
+    <USwitch v-model="inset" label="Inset" />
+  </Navbar>
+
+  <div :class="pg.flex_flex_col_gap_2_min_h_0">
+    <UDrawer v-model:open="open" title="Drawer with v-model" :inset="inset" close>
+      <UButton color="neutral" variant="outline" label="Open with v-model" />
+
+      <template #body>
+        <Placeholder :class="pg.h_48_w_full" />
+      </template>
+
+      <template #footer>
+        <UButton label="Submit" color="neutral" :class="pg.justify_center" />
+        <UButton label="Cancel" color="neutral" variant="outline" :class="pg.justify_center" @click="open = false" />
+      </template>
+    </UDrawer>
+
+    <UDrawer should-scale-background title="Drawer with `should-scale-background`" description="You need to add the `data-vaul-drawer-wrapper` directive to your content to make it work." :inset="inset" close>
+      <UButton color="neutral" variant="outline" label="Open with scale" />
+
+      <template #body>
+        <Placeholder :class="pg.h_screen_w_full" />
+      </template>
+    </UDrawer>
+
+    <UDrawer title="Drawer with nested" :inset="inset" :ui="{ content: pg.h_full }" should-scale-background close>
+      <UButton color="neutral" variant="outline" label="Open nested" />
+
+      <template #footer>
+        <UDrawer :inset="inset" nested :ui="{ content: pg.h_full }">
+          <UButton color="neutral" variant="outline" label="Open nested" />
+
+          <template #content>
+            <Placeholder :class="pg.flex_1_m_4" />
+          </template>
+        </UDrawer>
+      </template>
+    </UDrawer>
+
+    <UDrawer
+      title="Drawer prevent close"
+      description="This drawer has `dismissible: false` prop so it won't close when clicking outside."
+      :dismissible="false"
+      :modal="false"
+      :overlay="false"
+      :inset="inset"
+      close
+    >
+      <UButton label="Open unclosable" color="neutral" variant="outline" />
+
+      <template #body>
+        <Placeholder :class="pg.h_96_w_full" />
+      </template>
+    </UDrawer>
+
+    <UDrawer title="Drawer with bottom direction" direction="bottom" :inset="inset" close>
+      <UButton color="neutral" variant="outline" label="Open on bottom" />
+
+      <template #body>
+        <Placeholder :class="pg.h_96_w_full" />
+      </template>
+    </UDrawer>
+
+    <UDrawer title="Drawer with left direction" direction="left" :inset="inset" close>
+      <UButton color="neutral" variant="outline" label="Open on left" />
+
+      <template #body>
+        <Placeholder :class="pg.w_96_h_full" />
+      </template>
+    </UDrawer>
+
+    <UDrawer title="Drawer with top direction" direction="top" :inset="inset" close>
+      <UButton color="neutral" variant="outline" label="Open on top" />
+
+      <template #body>
+        <Placeholder :class="pg.h_96_w_full" />
+      </template>
+    </UDrawer>
+
+    <UDrawer title="Drawer with right direction" direction="right" :inset="inset" close>
+      <UButton color="neutral" variant="outline" label="Open on right" />
+
+      <template #body>
+        <Placeholder :class="pg.w_96_h_full" />
+      </template>
+    </UDrawer>
+  </div>
+</template>

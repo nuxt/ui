@@ -22,6 +22,7 @@ export function getDefaultConfig(theme?: ModuleOptions['theme']) {
     icons,
     prefix: theme?.prefix,
     tv: {
+      twMerge: theme?.engine !== 'stylex',
       twMergeConfig: {
         prefix: theme?.prefix
       }
@@ -41,7 +42,8 @@ export const defaultOptions = {
       color: undefined,
       size: undefined
     },
-    prefix: undefined
+    prefix: undefined,
+    engine: 'tailwind'
   },
   prose: false,
   mdc: false,

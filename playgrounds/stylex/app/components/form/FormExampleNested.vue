@@ -1,0 +1,57 @@
+<script setup lang="ts">
+import * as z from 'zod'
+import type { FormSubmitEvent } from '@nuxt/ui'
+const pg = usePg()
+
+
+const schema = z.object({
+  name: z.string().min(2),
+  news: z.boolean().default(false)
+})
+
+type Schema = z.output<typeof schema>
+
+const nestedSchema = z.object({
+  email: z.email()
+})
+
+type NestedSchema = z.output<typeof nestedSchema>
+
+const state = reactive<Partial<Schema & NestedSchema>>({ })
+
+const toast = useToast()
+async function onSubmit(event: FormSubmitEvent<Schema>) {
+  toast.add({ title: 'Success', description: 'The form has been submitted.', color: 'success' })
+  console.log(event.data)
+}
+</script>
+
+<template>
+  <UForm
+    ref="form"
+    :state="state"
+    :schema="schema"
+    :class="pg.gap_4_flex_flex_col_w_60"
+    @submit="onSubmit"
+  >
+    <UFormField label="Name" name="name">
+      <UInput v-model="state.name" placeholder="John Lennon" />
+    </UFormField>
+
+    <div>
+      <UCheckbox v-model="state.news" name="news" label="Register to our newsletter" @update:model-value="state.email = undefined" />
+    </div>
+
+    <UForm v-if="state.news" :schema="nestedSchema" nested>
+      <UFormField label="Email" name="email">
+        <UInput v-model="state.email" placeholder="john@lennon.com" />
+      </UFormField>
+    </UForm>
+
+    <div>
+      <UButton type="submit">
+        Submit
+      </UButton>
+    </div>
+  </UForm>
+</template>

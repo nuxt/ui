@@ -3,6 +3,7 @@ packages:
   - cli
   - docs
   - playgrounds/nuxt
+  - playgrounds/stylex
   - playgrounds/vue
   - playgrounds/repl
 

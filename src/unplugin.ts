@@ -112,7 +112,7 @@ export const NuxtUIPlugin = createUnplugin<NuxtUIOptions | undefined>((_options 
     NuxtEnvironmentPlugin(options),
     ComponentImportPlugin(options, meta),
     AutoImportPlugin(options, meta),
-    tailwind(),
+    options.theme?.engine === 'stylex' ? [] : tailwind(),
     IconsPlugin(options, appConfig),
     PluginsPlugin(options),
     TemplatePlugin(options, appConfig, join(runtimeDir, 'components')),
