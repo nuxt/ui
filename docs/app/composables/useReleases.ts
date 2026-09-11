@@ -8,6 +8,9 @@ export interface Release {
   url: string
 }
 
+/** The stable v4 line: this site documents v4, and v4.0.0 supersedes its alphas and betas. */
+export const DOCUMENTED = /^v4\.\d+\.\d+$/
+
 /** The versions, loaded by the `releases` middleware so the docs aside has them at render. */
 export const useReleases = () => useState<Release[]>('releases', () => [])
 
@@ -35,12 +38,12 @@ export function releasesNavigation(releases: Release[]): ContentNavigationItem[]
 }
 
 /**
- * GitHub links the `@name` mentions the notes are written with, ungh serves
+ * GitHub links the `@name` mentions the notes are written with, the API serves
  * them as plain text. Code, HTML and links already written as links are left
  * as they are, so an import of `@nuxt/ui` or an image named `@2x` stays put.
  */
-const PROTECTED = /```[\s\S]*?```|`[^`\n]+`|<[^>]*>|\[[^\]]*\]\([^)]*\)/g
-const MENTION = /(^|[^\w`/])@([a-z\d](?:[a-z\d-]{0,37}[a-z\d])?)(?![\w-]*\/)/gi
+const PROTECTED = /```[\s\S]*?```|`[^`\n]+`|<\/?[a-z][^>]*>|\[[^\]]*\]\([^)]*\)/gi
+const MENTION = /(^|[^\w`/])@([a-z\d](?:[a-z\d-]{0,37}[a-z\d])?)\b(?![\w-]*\/)/gi
 
 export function linkMentions(markdown: string) {
   const link = (text: string) => text.replace(MENTION, (_, before, name) => `${before}[@${name}](https://github.com/${name})`)

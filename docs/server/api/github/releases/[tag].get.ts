@@ -9,5 +9,7 @@ export default defineCachedEventHandler(async (event) => {
   return release
 }, {
   maxAge: 60 * 60,
-  getKey: event => `release-${getRouterParam(event, 'tag')}`
+  // Nitro strips every non-word character from a custom key, which would collide
+  // `v4.11.0` with `v4.1.10`; underscores survive it
+  getKey: event => `release-${getRouterParam(event, 'tag')?.replace(/\W/g, '_')}`
 })

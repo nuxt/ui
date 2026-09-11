@@ -82,6 +82,10 @@ export default defineNuxtConfig({
     // rendered per request: a shared theme rides ?doc=, which a prerendered
     // page would never see (pages/theme.vue)
     '/theme': { prerender: false },
+    // rendered per request from the GitHub data the API routes cache for an
+    // hour, a prerender would freeze the latest release at deploy time
+    '/docs/releases': { prerender: false },
+    '/docs/releases/**': { prerender: false },
     // v4 redirects - moved to `docs/`
     '/getting-started/**': { redirect: { to: '/docs/getting-started/**', statusCode: 301 }, prerender: false },
     '/components/**': { redirect: { to: '/docs/components/**', statusCode: 301 }, prerender: false },
@@ -91,6 +95,8 @@ export default defineNuxtConfig({
     '/docs/getting-started/migration': { redirect: '/docs/getting-started/migration/v4', prerender: false },
     // the v2 to v3 guide lives with the v3 docs now
     '/docs/getting-started/migration/v3': { redirect: 'https://ui3.nuxt.com/getting-started/migration', prerender: false },
+    // llms.txt advertised its Markdown twin, which has no page to serve it now
+    '/raw/docs/getting-started/migration/v3.md': { redirect: { to: 'https://ui3.nuxt.com/getting-started/migration', statusCode: 301 }, prerender: false },
     '/docs/getting-started/theme': { redirect: '/docs/getting-started/theme/design-system', prerender: false },
     // the Figma guide lives with the kit now; the docs entry is a link, not a page
     '/figma': { redirect: { to: 'https://go.nuxt.com/figma-ui', statusCode: 301 }, prerender: false },
@@ -271,8 +277,9 @@ export default defineNuxtConfig({
       { path: '/', raw: '/raw/index.md' },
       '/docs/**'
     ],
-    // the Figma entry links out (routeRules above), there is no page to list or serve
-    excludePrefixes: { extend: ['/docs/getting-started/figma'] },
+    // the Figma entry links out (routeRules above) and the release pages are Vue
+    // pages built from the GitHub API, neither has a Markdown twin to list or serve
+    excludePrefixes: { extend: ['/docs/getting-started/figma', '/docs/releases'] },
     sitemap: {
       markdown: {
         // Split `/docs/**` into a section per area; `/blog/**` stays whole.
