@@ -57,9 +57,16 @@ if (import.meta.server) {
               target="_blank"
               :title="item.name"
               :description="hostname(item.url)"
-              variant="naked"
-              class="group"
-              :ui="{ header: 'mb-3 rounded-xl border border-default overflow-hidden bg-muted/40', title: 'text-sm truncate', description: 'text-xs truncate' }"
+              variant="outline"
+              class="group overflow-hidden"
+              :ui="{
+                container: 'p-0 sm:p-0',
+                wrapper: 'items-stretch',
+                header: 'mb-0 border-b border-default overflow-hidden bg-muted/40',
+                body: 'p-3 text-center',
+                title: 'text-sm',
+                description: 'text-sm'
+              }"
             >
               <template #header>
                 <NuxtImg
