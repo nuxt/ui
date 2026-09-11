@@ -1,6 +1,6 @@
 import { existsSync, readFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
-import { join } from 'pathe'
+import { dirname, join } from 'pathe'
 import { camelCase, kebabCase } from 'scule'
 import { genExport } from 'knitwork'
 import { defu } from 'defu'
@@ -30,6 +30,21 @@ async function mergedAppUiConfig(nuxt: Nuxt | undefined, fallback: Record<string
     if (extracted) ui = defu(extracted, ui)
   }
   return ui
+}
+
+function resolveStylexMerge() {
+  const here = dirname(fileURLToPath(import.meta.url))
+  const candidates = [
+    join(here, 'runtime/utils/stylex-merge'),
+    join(here, '../runtime/utils/stylex-merge'),
+    join(here, '../src/runtime/utils/stylex-merge')
+  ]
+  for (const candidate of candidates) {
+    if (existsSync(`${candidate}.ts`) || existsSync(`${candidate}.js`)) {
+      return candidate
+    }
+  }
+  throw new Error('Cannot resolve runtime/utils/stylex-merge')
 }
 
 function extractUiFromAppConfig(file: string) {
@@ -468,8 +483,7 @@ export {}
       if (options.theme?.engine !== 'stylex') {
         return 'export function mergeStylexClasses<T>(classes: T): T {\n  return classes\n}\n'
       }
-      const mergePath = fileURLToPath(new URL('./runtime/utils/stylex-merge', import.meta.url))
-      return `export { mergeStylexClasses } from ${JSON.stringify(mergePath)}\n`
+      return `export { mergeStylexClasses } from ${JSON.stringify(resolveStylexMerge())}\n`
     }
   })
 

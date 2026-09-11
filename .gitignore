@@ -33,6 +33,11 @@ playgrounds/vue/components.d.ts
 playgrounds/vue/tsconfig.app.tsbuildinfo
 playgrounds/vue/tsconfig.node.tsbuildinfo
 
+playgrounds/vue-stylex/auto-imports.d.ts
+playgrounds/vue-stylex/components.d.ts
+playgrounds/vue-stylex/tsconfig.app.tsbuildinfo
+playgrounds/vue-stylex/tsconfig.node.tsbuildinfo
+
 # REPL playground
 playgrounds/repl/auto-imports.d.ts
 playgrounds/repl/components.d.ts
