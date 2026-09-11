@@ -217,12 +217,12 @@ const toolbarItems = computed(() => [[{
   tooltip: { text: 'Bold' }
 }, {
   kind: 'mark',
-  mark: pg.italic,
+  mark: 'italic',
   icon: 'i-lucide-italic',
   tooltip: { text: 'Italic' }
 }, {
   kind: 'mark',
-  mark: pg.underline,
+  mark: 'underline',
   icon: 'i-lucide-underline',
   tooltip: { text: 'Underline' }
 }, {

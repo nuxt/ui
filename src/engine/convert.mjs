@@ -177,7 +177,7 @@ export async function createOracle(options = {}) {
     const leaves = inputs.map((input, index) => {
       const parts = input.classes.trim().split(/\s+/).filter(Boolean)
       const unknown = parts.filter(token => !known.has(token) && !semanticToken(token))
-      return { id: input.id, classes: input.classes, anchor: `ui-oracle-leaf-${index}`, contractClass: contractName(input.id, input.classes), semanticClasses: parts.filter(semanticToken), styleObject: {}, exceptions: [], diagnostics: unknown.map(token => ({ code: 'unknown-token', token, message: 'Exact oracle generates no CSS for this token; classify semantic/no-op or correct authoring explicitly.' })), stats: { oracleDeclarations: 0, nativeDeclarations: 0, exceptionDeclarations: 0 }, validTokens: parts.filter(token => known.has(token)) }
+      return { id: input.id, classes: input.classes, anchor: `ui-oracle-leaf-${index}`, contractClass: contractName(input.id, input.classes), semanticClasses: [...parts.filter(semanticToken), ...unknown], styleObject: {}, exceptions: [], diagnostics: unknown.map(token => ({ code: 'unknown-token', token, message: 'Exact oracle generates no CSS for this token; classify semantic/no-op or correct authoring explicitly.' })), stats: { oracleDeclarations: 0, nativeDeclarations: 0, exceptionDeclarations: 0 }, validTokens: parts.filter(token => known.has(token)) }
     })
     const rawCss = await context.compile(leaves.filter(leaf => leaf.validTokens.length).map(leaf => `.${leaf.anchor} { @apply ${leaf.validTokens.join(' ')}; }`).join('\n'))
     const tree = context.postcss.parse(rawCss)

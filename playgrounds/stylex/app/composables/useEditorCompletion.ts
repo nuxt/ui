@@ -16,6 +16,20 @@ export function useEditorCompletion(editorRef: Ref<{ editor: any | undefined } |
   }>()
   const mode = ref<CompletionMode>('continue')
   const language = ref<string>()
+  let unlockEditor: (() => void) | undefined
+
+  function lockEditor(editor: any) {
+    const wasEditable = editor.isEditable
+    editor.setEditable(false)
+    unlockEditor = () => {
+      editor.setEditable(wasEditable)
+      unlockEditor = undefined
+    }
+  }
+
+  function releaseEditor() {
+    unlockEditor?.()
+  }
 
   // Helper to get completion storage
   function getCompletionStorage() {
@@ -31,39 +45,44 @@ export function useEditorCompletion(editorRef: Ref<{ editor: any | undefined } |
       language: language.value
     })),
     onFinish: (_prompt, completionText) => {
-      // For inline suggestion mode, don't clear - let user accept with Tab
-      const storage = getCompletionStorage()
-      if (mode.value === 'continue' && storage?.visible) {
-        return
-      }
+      try {
+        // For inline suggestion mode, don't clear - let user accept with Tab
+        const storage = getCompletionStorage()
+        if (mode.value === 'continue' && storage?.visible) {
+          return
+        }
 
-      // For transform modes, insert the full completion with markdown parsing
-      const transformModes = ['fix', 'extend', 'reduce', 'simplify', 'summarize', 'translate']
-      if (transformModes.includes(mode.value) && insertState.value && completionText) {
-        const editor = editorRef.value?.editor
-        if (editor) {
-          // Delete the original selection if not already done
-          if (insertState.value.deleteRange) {
+        // For transform modes, insert the full completion with markdown parsing
+        const transformModes = ['fix', 'extend', 'reduce', 'simplify', 'summarize', 'translate']
+        if (transformModes.includes(mode.value) && insertState.value && completionText) {
+          const editor = editorRef.value?.editor
+          if (editor) {
+            // Delete the original selection if not already done
+            if (insertState.value.deleteRange) {
+              editor.chain()
+                .focus()
+                .deleteRange(insertState.value.deleteRange)
+                .run()
+            }
+
+            // Insert with markdown parsing
             editor.chain()
               .focus()
-              .deleteRange(insertState.value.deleteRange)
+              .insertContentAt(insertState.value.pos, completionText, { contentType: 'markdown' })
               .run()
           }
-
-          // Insert with markdown parsing
-          editor.chain()
-            .focus()
-            .insertContentAt(insertState.value.pos, completionText, { contentType: 'markdown' })
-            .run()
         }
-      }
 
-      insertState.value = undefined
+        insertState.value = undefined
+      } finally {
+        releaseEditor()
+      }
     },
     onError: (error) => {
       console.error('AI completion error:', error)
       insertState.value = undefined
       getCompletionStorage()?.clearSuggestion()
+      releaseEditor()
     }
   })
 
@@ -145,6 +164,7 @@ export function useEditorCompletion(editorRef: Ref<{ editor: any | undefined } |
     // Replace the selected text with the transformed version
     insertState.value = { pos: selection.from, deleteRange: { from: selection.from, to: selection.to } }
 
+    lockEditor(editor)
     complete(selectedText)
   }
 
@@ -171,11 +191,13 @@ export function useEditorCompletion(editorRef: Ref<{ editor: any | undefined } |
       // No selection: continue from cursor position
       const textBefore = getMarkdownBefore(editor, selection.from)
       insertState.value = { pos: selection.from }
+      lockEditor(editor)
       complete(textBefore)
     } else {
       // Text selected: append completion after the selection
       const textBefore = getMarkdownBefore(editor, selection.to)
       insertState.value = { pos: selection.to }
+      lockEditor(editor)
       complete(textBefore)
     }
   }
@@ -263,6 +285,10 @@ export function useEditorCompletion(editorRef: Ref<{ editor: any | undefined } |
       isDisabled: (editor: any) => editor.state.selection.empty || !!isLoading.value
     }
   }
+
+  onBeforeUnmount(() => {
+    releaseEditor()
+  })
 
   return {
     extension,

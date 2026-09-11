@@ -19,7 +19,10 @@ const components = inject<{ to: string, label: string }[]>('components')
 const index = computed(() => components?.findIndex(component => component.to === route.path) ?? -1)
 
 function navigate(index: number) {
-  router.push(components?.[index]?.to as string)
+  const to = components?.[index]?.to
+  if (!to) return
+
+  router.push(to)
 }
 
 defineShortcuts({

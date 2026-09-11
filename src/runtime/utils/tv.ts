@@ -189,7 +189,7 @@ function wrapSlots(slots: Record<string, any>) {
         if (!replacer) {
           const cacheKey = memoKey(slotProps)
           if (cacheKey === undefined) {
-            return mergeStylexClasses(slot(slotProps))
+            return mergeStylexClasses(slot(slotProps) as string)
           }
 
           let cache = memo.get(key)

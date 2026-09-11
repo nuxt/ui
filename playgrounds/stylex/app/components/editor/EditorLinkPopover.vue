@@ -113,7 +113,7 @@ function handleKeyDown(event: KeyboardEvent) {
         placeholder="Paste a link..."
         @keydown="handleKeyDown"
       >
-        <div :class="pg.flex_items_center_mr_0_5">
+        <div :class="pg.flex_items_center_me_0_5">
           <UButton
             icon="i-lucide-corner-down-left"
             variant="ghost"

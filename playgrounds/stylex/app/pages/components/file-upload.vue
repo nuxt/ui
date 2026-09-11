@@ -15,7 +15,7 @@ const attrs = reactive({
 })
 
 const variant = ref(theme.defaultVariants.variant)
-const layout = ref(pg.grid as keyof typeof theme.variants.layout)
+const layout = ref('grid' as keyof typeof theme.variants.layout)
 const position = ref('outside' as keyof typeof theme.variants.position)
 
 const MAX_FILE_SIZE = 2 * 1024 * 1024 // 2MB
@@ -47,8 +47,10 @@ const schema = z.object({
       file =>
         new Promise((resolve) => {
           const reader = new FileReader()
+          reader.onerror = () => resolve(false)
           reader.onload = (e) => {
             const img = new Image()
+            img.onerror = () => resolve(false)
             img.onload = () => {
               const meetsDimensions
                 = img.width >= MIN_DIMENSIONS.width
@@ -75,10 +77,23 @@ const state = reactive<Partial<Schema>>({
 
 const value = ref<File | null>(null)
 const valueMultiple = ref<File[]>([])
+const avatarPreviewUrl = ref<string>()
 
-function createObjectUrl(file: File): string {
-  return URL.createObjectURL(file)
-}
+watch(() => state.avatar, (file) => {
+  if (avatarPreviewUrl.value) {
+    URL.revokeObjectURL(avatarPreviewUrl.value)
+    avatarPreviewUrl.value = undefined
+  }
+  if (file) {
+    avatarPreviewUrl.value = URL.createObjectURL(file)
+  }
+}, { immediate: true })
+
+onBeforeUnmount(() => {
+  if (avatarPreviewUrl.value) {
+    URL.revokeObjectURL(avatarPreviewUrl.value)
+  }
+})
 
 async function onSubmit(event: FormSubmitEvent<Schema>) {
   console.log(event.data)
@@ -98,7 +113,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
       <UFormField name="avatar" label="Avatar" description="JPG, GIF or PNG. 1MB Max." v-bind="props">
         <UFileUpload v-slot="{ open, removeFile }" v-model="state.avatar" accept="image/*">
           <div :class="pg.flex_flex_wrap_items_center_gap_3">
-            <UAvatar size="lg" :src="state.avatar ? createObjectUrl(state.avatar) : undefined" icon="i-lucide-image" />
+            <UAvatar size="lg" :src="avatarPreviewUrl" icon="i-lucide-image" />
 
             <UButton :label="state.avatar ? 'Change image' : 'Upload image'" color="neutral" @click="open()" />
           </div>

@@ -16,5 +16,5 @@ declare module '#build/ui-stylex-app-config' {
 }
 
 declare module '#build/ui-stylex-merge' {
-  export function mergeStylexClasses<T>(classes: T): T
+  export function mergeStylexClasses(classes: string | undefined): string | undefined
 }

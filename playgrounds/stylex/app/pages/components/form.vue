@@ -18,7 +18,7 @@ type Schema = z.input<typeof schema>
 const state = reactive<Partial<Schema>>({})
 
 function onSubmit(event: FormSubmitEvent<Schema>) {
-  console.log(event.data)
+  console.log('Submitted', { email: event.data.email, tos: event.data.tos })
 }
 
 const validateOn = ref(['input', 'change', 'blur'])

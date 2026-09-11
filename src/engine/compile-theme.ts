@@ -111,6 +111,24 @@ function setPath(target: any, path: Array<string | number>, next: string) {
   current[path[path.length - 1]!] = next
 }
 
+function cloneContainers<T>(value: T): T {
+  if (Array.isArray(value)) {
+    return value.map(item => cloneContainers(item)) as T
+  }
+  if (value === null || typeof value !== 'object') {
+    return value
+  }
+  const proto = Object.getPrototypeOf(value)
+  if (proto !== Object.prototype && proto !== null) {
+    return value
+  }
+  const next: Record<string, unknown> = {}
+  for (const [key, item] of Object.entries(value as Record<string, unknown>)) {
+    next[key] = cloneContainers(item)
+  }
+  return next as T
+}
+
 function classNamesFromCompiled(style: Record<string, unknown>): string {
   const names: string[] = []
   function walk(node: unknown) {
@@ -343,7 +361,7 @@ export async function compileThemeLeaves(themes: Array<{ value: unknown, prefix:
 function applyCachedClasses<T>(theme: T, prefix: string): T {
   const leaves: Leaf[] = []
   collect(theme, [prefix], leaves)
-  const next = structuredClone(theme)
+  const next = cloneContainers(theme)
   for (const leaf of leaves) setPath(next, leaf.path.slice(1), classCache.get(leaf.classes) ?? '')
   return next
 }

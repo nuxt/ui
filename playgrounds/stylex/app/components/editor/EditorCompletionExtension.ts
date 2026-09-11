@@ -206,7 +206,7 @@ export const Completion = Extension.create<CompletionOptions, CompletionStorage>
 
       // Pass editor to let the handler extract content (e.g., as markdown)
       options.onTrigger(editor)
-    }, options.debounce || 250)
+    }, options.debounce ?? 250)
   },
 
   onDestroy() {

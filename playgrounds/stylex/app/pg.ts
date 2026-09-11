@@ -68,7 +68,7 @@ export const pg = {
   flex_items_center_justify_between_gap_3: 'flex items-center justify-between gap-3',
   flex_items_center_justify_between_gap_4: 'flex items-center justify-between gap-4',
   flex_items_center_justify_center_rounded_md_border_border_dashed_border_accented_text_sm_a: 'flex items-center justify-center rounded-md border border-dashed border-accented text-sm aspect-video w-72',
-  flex_items_center_mr_0_5: 'flex items-center mr-0.5',
+  flex_items_center_me_0_5: 'flex items-center me-0.5',
   flex_items_center_ms_auto: 'flex items-center ms-auto',
   flex_items_start_gap_2_min_h_0: 'flex items-start gap-2 min-h-0',
   flex_justify_center_gap_2_p_4_w_48: 'flex justify-center gap-2 p-4 w-48',
