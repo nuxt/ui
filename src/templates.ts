@@ -473,17 +473,20 @@ export {}
     }
   })
 
-  if (options.theme?.engine === 'stylex') {
-    templates.push({
-      filename: 'ui-stylex-app-config.ts',
-      write: true,
-      getContents: async () => {
-        await warmStylex()
-        const compiled = await compileUiConfig(await mergedAppUiConfig(nuxt, uiConfig))
-        return `export default ${JSON.stringify(compiled)}`
+  templates.push({
+    filename: 'ui-stylex-app-config.ts',
+    write: true,
+    getContents: async () => {
+      if (options.theme?.engine !== 'stylex') {
+        return 'export default null\n'
       }
-    })
+      await warmStylex()
+      const compiled = await compileUiConfig(await mergedAppUiConfig(nuxt, uiConfig))
+      return `export default ${JSON.stringify(compiled)}`
+    }
+  })
 
+  if (options.theme?.engine === 'stylex') {
     templates.push({
       filename: 'ui-stylex-atlas.ts',
       write: true,

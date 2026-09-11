@@ -10,6 +10,11 @@ declare module '#build/ui-stylex-atlas' {
   export default atlas
 }
 
+declare module '#build/ui-stylex-app-config' {
+  const compiled: Record<string, unknown> | null
+  export default compiled
+}
+
 declare module '#build/ui-stylex-merge' {
   export function mergeStylexClasses<T>(classes: T): T
 }
