@@ -1,6 +1,9 @@
+import { existsSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
+import { dirname, join } from 'pathe'
 import { camelCase, kebabCase } from 'scule'
 import { genExport } from 'knitwork'
+import { defu } from 'defu'
 import colors from 'tailwindcss/colors'
 import { addTemplate, addTypeTemplate, hasNuxtModule, logger, updateTemplates, getLayerDirectories } from '@nuxt/kit'
 import type { Nuxt, NuxtTemplate, NuxtTypeTemplate } from '@nuxt/schema'
@@ -8,9 +11,42 @@ import type { Resolver } from '@nuxt/kit'
 import type { ModuleOptions } from './module'
 import { applyDefaultVariants, applyPrefixToObject, applyUnstyled } from './utils/theme'
 import { detectUsedComponents } from './utils/components'
+import { compileThemeClasses, compileThemeLeaves, compileUiConfig, compileUiConfigLeaves, takeCompiledCss, takeStylexAtlas } from './engine/compile-theme'
+import { extractUiFromAppConfigFile } from './engine/extract-app-config'
 import * as theme from './theme'
 import * as themeProse from './theme/prose'
 import * as themeContent from './theme/content'
+
+async function mergedAppUiConfig(nuxt: Nuxt | undefined, fallback: Record<string, any>) {
+  let ui = { ...((nuxt && nuxt.options.appConfig.ui) || fallback || {}) }
+  if (!nuxt) return ui
+  const files = [
+    join(nuxt.options.rootDir, 'app.config.ts'),
+    join(nuxt.options.rootDir, 'app/app.config.ts'),
+    join(nuxt.options.srcDir, 'app.config.ts')
+  ]
+  for (const file of [...new Set(files)]) {
+    if (!existsSync(file)) continue
+    const extracted = await extractUiFromAppConfigFile(file)
+    if (extracted) ui = defu(extracted, ui)
+  }
+  return ui
+}
+
+function resolveStylexMerge() {
+  const here = dirname(fileURLToPath(import.meta.url))
+  const candidates = [
+    join(here, 'runtime/utils/stylex-merge'),
+    join(here, '../runtime/utils/stylex-merge'),
+    join(here, '../src/runtime/utils/stylex-merge')
+  ]
+  for (const candidate of candidates) {
+    if (existsSync(`${candidate}.ts`) || existsSync(`${candidate}.js`)) {
+      return candidate
+    }
+  }
+  throw new Error('Cannot resolve runtime/utils/stylex-merge')
+}
 
 export function getTemplates(options: ModuleOptions, uiConfig: Record<string, any>, nuxt?: Nuxt, resolve?: Resolver['resolve'], vue?: { detectedComponents?: Set<string> }) {
   const templates: NuxtTemplate[] = []
@@ -20,6 +56,42 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
   let previousDetectedComponents: Set<string> | undefined
 
   const isDev = process.argv.includes('--uiDev')
+  let stylexWarm: Promise<void> | undefined
+
+  function prepareComponentTheme(template: any, unused = false) {
+    let result = typeof template === 'function' ? template(options) : template
+    result = applyDefaultVariants(result, options.theme?.defaultVariants)
+    result = applyUnstyled(result, options.theme?.unstyled || unused)
+    return applyPrefixToObject(result, options.theme?.prefix)
+  }
+
+  function collectStylexThemes(group: Record<string, any>, path?: string) {
+    return Object.keys(group).map(component => ({
+      value: prepareComponentTheme((group as any)[component]),
+      prefix: `${path || 'ui'}-${component}`
+    }))
+  }
+
+  function collectAppConfigThemes(ui: Record<string, any>) {
+    const skip = new Set(['colors', 'icons', 'prefix', 'tv', 'engine'])
+    return Object.entries(ui)
+      .filter(([key, value]) => !skip.has(key) && value && typeof value === 'object')
+      .map(([key, value]) => ({ value, prefix: `appConfig_${key}` }))
+  }
+
+  function warmStylex() {
+    if (options.theme?.engine !== 'stylex') return Promise.resolve()
+    stylexWarm ??= (async () => {
+      const ui = await mergedAppUiConfig(nuxt, uiConfig)
+      await compileThemeLeaves([
+        ...collectStylexThemes(theme),
+        ...(hasProse ? collectStylexThemes(themeProse, 'prose') : []),
+        ...(hasContent ? collectStylexThemes(themeContent, 'content') : []),
+        ...collectAppConfigThemes(ui)
+      ])
+    })()
+    return stylexWarm
+  }
 
   function writeThemeTemplate(theme: Record<string, any>, path?: string) {
     for (const component in theme) {
@@ -27,9 +99,6 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
         filename: `ui/${path ? path + '/' : ''}${kebabCase(component)}.ts`,
         write: true,
         getContents: async () => {
-          const template = (theme as any)[component]
-          let result = typeof template === 'function' ? template(options) : template
-
           // With `experimental.componentDetection` (Vue integration), a component
           // detection didn't find keeps its theme file — the `#build/ui` aliases
           // and type imports rely on it existing — but with every class blanked
@@ -38,12 +107,12 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
           const unused = path !== 'prose' && !!vue?.detectedComponents?.size
             && !Array.from(vue.detectedComponents).some(detected => camelCase(detected) === component)
 
-          // Override default variants from nuxt.config.ts
-          result = applyDefaultVariants(result, options.theme?.defaultVariants)
-          // Strip default theme classes if `unstyled` is enabled
-          result = applyUnstyled(result, options.theme?.unstyled || unused)
-          // Apply Tailwind prefix if configured
-          result = applyPrefixToObject(result, options.theme?.prefix)
+          let result = prepareComponentTheme((theme as any)[component], unused)
+
+          if (options.theme?.engine === 'stylex') {
+            await warmStylex()
+            result = await compileThemeClasses(result, `${path || 'ui'}-${component}`)
+          }
 
           const variants = Object.entries(result.variants || {})
             .filter(([_, values]) => {
@@ -69,8 +138,9 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
             })
           }
 
-          // For local development, import directly from theme
-          if (isDev) {
+          // For local development, import directly from theme.
+          // StyleX compiles class strings at generation time, so skip the live Tailwind source path.
+          if (isDev && options.theme?.engine !== 'stylex') {
             const templatePath = fileURLToPath(new URL(`./theme/${path ? `${path}/` : ''}${kebabCase(component)}`, import.meta.url))
             const themeUtilsPath = fileURLToPath(new URL('./utils/theme', import.meta.url))
             const defaultVariantsJson = JSON.stringify(options.theme?.defaultVariants) ?? 'undefined'
@@ -281,6 +351,26 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
     filename: 'ui.css',
     write: true,
     getContents: async () => {
+      if (options.theme?.engine === 'stylex') {
+        await warmStylex()
+        await compileUiConfigLeaves(await mergedAppUiConfig(nuxt, uiConfig))
+
+        const tokens = themeBlocks.replace(
+          /@theme(?: static| default inline) \{([\s\S]*?)\n\}/g,
+          '@layer theme {\n:root, :host {$1\n}\n}'
+        )
+
+        const compiledCss = await takeCompiledCss()
+
+        return `${tokens}
+
+@layer stylex, ui-contracts;
+@layer ui-contracts {
+${compiledCss}
+}
+`
+      }
+
       const sources = await generateSources()
       const prefix = options.theme?.prefix ? `${options.theme.prefix}:` : ''
 
@@ -365,6 +455,49 @@ export {}
   })
 
   templates.push({
+    filename: 'ui-stylex-merge.ts',
+    write: true,
+    getContents: () => {
+      if (options.theme?.engine !== 'stylex') {
+        return 'export function mergeStylexClasses<T>(classes: T): T {\n  return classes\n}\n'
+      }
+      return `export { mergeStylexClasses } from ${JSON.stringify(resolveStylexMerge())}\n`
+    }
+  })
+
+  templates.push({
+    filename: 'ui-stylex-app-config.ts',
+    write: true,
+    getContents: async () => {
+      if (options.theme?.engine !== 'stylex') {
+        return 'export default null\n'
+      }
+      await warmStylex()
+      const compiled = await compileUiConfig(await mergedAppUiConfig(nuxt, uiConfig))
+      return `export default ${JSON.stringify(compiled)}`
+    }
+  })
+
+  if (options.theme?.engine === 'stylex') {
+    templates.push({
+      filename: 'ui-stylex-atlas.ts',
+      write: true,
+      getContents: async () => {
+        await warmStylex()
+        await compileUiConfigLeaves(await mergedAppUiConfig(nuxt, uiConfig))
+        return `export default ${JSON.stringify(takeStylexAtlas())}`
+      }
+    })
+  } else {
+    // Overwrite a leftover StyleX atlas if the app switched back to Tailwind.
+    templates.push({
+      filename: 'ui-stylex-atlas.ts',
+      write: true,
+      getContents: () => 'export default {}'
+    })
+  }
+
+  templates.push({
     filename: 'ui-image-component.ts',
     write: true,
     getContents: ({ app }) => {
@@ -396,6 +529,17 @@ export function addTemplates(options: ModuleOptions, nuxt: Nuxt, resolve: Resolv
       if (/\.(?:vue|ts|mts|js|mjs|cjs|tsx|jsx)$/.test(path)) {
         await updateTemplates({ filter: template => template.filename === 'ui.css' })
       }
+    })
+  }
+
+  if (options.theme?.engine === 'stylex' && nuxt.options.dev) {
+    nuxt.hook('builder:watch', async (_, path) => {
+      if (!/app\.config\.(?:ts|js|mjs)$/.test(path)) return
+      await updateTemplates({
+        filter: template => template.filename === 'ui.css'
+          || template.filename === 'ui-stylex-app-config.ts'
+          || template.filename === 'ui-stylex-atlas.ts'
+      })
     })
   }
 }

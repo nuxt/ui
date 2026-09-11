@@ -1,0 +1,28 @@
+{
+  "name": "playground-vue-stylex",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "typecheck": "vue-tsc -p ./tsconfig.app.json"
+  },
+  "dependencies": {
+    "@nuxt/ui": "workspace:*",
+    "@stylexjs/stylex": "0.19.0",
+    "@tiptap/extension-emoji": "^3.31.3",
+    "@tiptap/extension-text-align": "^3.31.3",
+    "vue": "^3.5.42",
+    "vue-router": "^5.3.1",
+    "zod": "^4.5.4"
+  },
+  "devDependencies": {
+    "@iconify-json/lucide": "^1.2.129",
+    "@vitejs/plugin-vue": "^6.0.8",
+    "typescript": "^6.0.3",
+    "vite": "^8.2.2",
+    "vue-tsc": "^3.3.11"
+  }
+}

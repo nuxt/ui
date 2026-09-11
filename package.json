@@ -51,6 +51,10 @@
     "./locale": {
       "types": "./dist/runtime/locale/index.d.ts",
       "import": "./dist/runtime/locale/index.js"
+    },
+    "./stylex": {
+      "style": "./dist/runtime/stylex.css",
+      "default": "./dist/runtime/stylex.css"
     }
   },
   "typesVersions": {
@@ -111,10 +115,14 @@
     "build": "nuxt-module-build build",
     "prepack": "pnpm build",
     "dev": "nuxt dev playgrounds/nuxt --uiDev",
+    "dev:stylex": "nuxt dev playgrounds/stylex",
+    "dev:stylex:build": "nuxt build playgrounds/stylex",
     "dev:build": "nuxt build playgrounds/nuxt",
     "dev:vue": "pnpm --filter './playgrounds/vue' dev -- --uiDev",
     "dev:vue:build": "pnpm --filter './playgrounds/vue' build",
-    "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxt prepare playgrounds/nuxt && nuxt prepare docs && pnpm dev:vue:build",
+    "dev:vue-stylex": "pnpm --filter './playgrounds/vue-stylex' dev",
+    "dev:vue-stylex:build": "pnpm --filter './playgrounds/vue-stylex' build",
+    "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxt prepare playgrounds/nuxt && nuxt prepare docs && nuxt prepare playgrounds/stylex && pnpm dev:vue:build && pnpm dev:vue-stylex:build",
     "repl": "pnpm --filter './playgrounds/repl' dev",
     "repl:bundle": "pnpm --filter './playgrounds/repl' bundle",
     "repl:build": "pnpm --filter './playgrounds/repl' build",
@@ -123,7 +131,7 @@
     "docs:build": "nuxt build docs",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "typecheck": "vue-tsc --noEmit && nuxt typecheck playgrounds/nuxt && nuxt typecheck docs && cd playgrounds/vue && vue-tsc --noEmit",
+    "typecheck": "vue-tsc --noEmit && nuxt typecheck playgrounds/nuxt && nuxt typecheck docs && cd playgrounds/vue && vue-tsc --noEmit && cd ../vue-stylex && vue-tsc --noEmit",
     "test": "vitest",
     "test:vue": "vitest --project vue",
     "test:nuxt": "vitest --project nuxt",
@@ -131,6 +139,7 @@
     "release": "release-it"
   },
   "dependencies": {
+    "@babel/core": "^8.0.1",
     "@floating-ui/dom": "^1.8.0",
     "@iconify/vue": "^5.0.1",
     "@internationalized/date": "^3.12.4",
@@ -141,6 +150,8 @@
     "@nuxt/schema": "^4.5.2",
     "@nuxtjs/color-mode": "^4.0.1",
     "@standard-schema/spec": "^1.1.0",
+    "@stylexjs/babel-plugin": "0.19.0",
+    "@stylexjs/stylex": "0.19.0",
     "@tailwindcss/postcss": "^4.3.3",
     "@tailwindcss/vite": "^4.3.3",
     "@tanstack/vue-table": "^8.21.3",
@@ -178,6 +189,7 @@
     "embla-carousel-wheel-gestures": "^8.1.0",
     "fuse.js": "^7.5.0",
     "hookable": "^6.1.1",
+    "jiti": "^2.7.0",
     "knitwork": "^1.3.0",
     "magic-string": "^1.2.3",
     "mlly": "^1.8.2",
@@ -224,6 +236,7 @@
     "@internationalized/date": "^3.0.0",
     "@internationalized/number": "^3.0.0",
     "@nuxt/content": "^3.0.0",
+    "@stylexjs/stylex": "^0.16.0 || ^0.17.0 || ^0.18.0 || ^0.19.0",
     "@tiptap/core": "^3",
     "@tiptap/extension-bubble-menu": "^3",
     "@tiptap/extension-code": "^3",
@@ -274,6 +287,12 @@
       "optional": true
     },
     "superstruct": {
+      "optional": true
+    },
+    "tailwindcss": {
+      "optional": true
+    },
+    "@stylexjs/stylex": {
       "optional": true
     },
     "vue-router": {

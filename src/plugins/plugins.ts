@@ -12,7 +12,10 @@ import type { NuxtUIOptions } from '../unplugin'
  * Nuxt UI _Nuxt_ plugins in `src/runtime/plugins/` in a pure Vue environment.
  */
 export default function PluginsPlugin(options: NuxtUIOptions) {
-  const plugins = globSync(['**/*', '!*.d.ts'], { cwd: join(runtimeDir, 'plugins'), absolute: true })
+  // Nuxt-only: overlays compiled StyleX hashes onto `useAppConfig().ui`.
+  // The Vue plugin glob would otherwise pull it into Tailwind apps, which then
+  // fail to resolve `#build/ui-stylex-app-config`.
+  const plugins = globSync(['**/*', '!*.d.ts', '!stylex-app-config.*'], { cwd: join(runtimeDir, 'plugins'), absolute: true })
 
   plugins.unshift(resolvePathSync('../runtime/vue/plugins/router', { extensions: ['.ts', '.mjs', '.js'], url: import.meta.url }))
   plugins.unshift(resolvePathSync('../runtime/vue/plugins/head', { extensions: ['.ts', '.mjs', '.js'], url: import.meta.url }))

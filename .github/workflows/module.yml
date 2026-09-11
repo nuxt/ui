@@ -67,6 +67,8 @@ jobs:
             run: pnpm run dev:build
           - name: Build Vue playground
             run: pnpm run dev:vue:build
+          - name: Build Vue StyleX playground
+            run: pnpm run dev:vue-stylex:build
 
       - name: Publish
         # Only publish preview package on ubuntu, and skip forks of the repo (pkg-pr-new still runs on fork PRs against nuxt/ui)

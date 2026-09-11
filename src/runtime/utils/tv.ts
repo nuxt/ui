@@ -3,6 +3,7 @@ import type { ClassValue, TVVariants, TVCompoundVariants, TVDefaultVariants, TVR
 import type { AppConfig } from '@nuxt/schema'
 import type { SlotClassReplacer } from '../types/tv'
 import appConfig from '#build/app.config'
+import { mergeStylexClasses } from '#build/ui-stylex-merge'
 
 // Internal `tailwind-variants` helpers that are not re-exported.
 type TVSlots = Record<string, ClassValue> | undefined
@@ -101,7 +102,7 @@ function plainClasses(value: unknown): ClassValue[] {
  * class so the replacer can reuse part of it.
  */
 function applyReplacer(replacer: SlotClassReplacer, slotProps: Record<string, any>, resolveDefaults: () => string): string {
-  return cnMerge(replacer(resolveDefaults()), ...plainClasses(slotProps.class), ...plainClasses(slotProps.className))(config) ?? ''
+  return mergeStylexClasses(cnMerge(replacer(resolveDefaults()), ...plainClasses(slotProps.class), ...plainClasses(slotProps.className))(config) ?? '') ?? ''
 }
 
 /**
@@ -188,7 +189,7 @@ function wrapSlots(slots: Record<string, any>) {
         if (!replacer) {
           const cacheKey = memoKey(slotProps)
           if (cacheKey === undefined) {
-            return slot(slotProps)
+            return mergeStylexClasses(slot(slotProps) as string)
           }
 
           let cache = memo.get(key)
@@ -206,7 +207,7 @@ function wrapSlots(slots: Record<string, any>) {
               // reset rather than grow unbounded.
               cache.clear()
             }
-            result = slot(slotProps) as string
+            result = mergeStylexClasses(slot(slotProps) as string) as string
             cache.set(cacheKey, result)
           }
           return result
@@ -325,6 +326,7 @@ export const tv = ((componentConfig?: any) => {
         if (replacer) {
           return applyReplacer(replacer, slotProps, () => Reflect.apply(target, thisArg, [{ ...slotProps, class: undefined, className: undefined }]))
         }
+        return mergeStylexClasses(result)
       }
 
       return result
