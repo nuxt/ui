@@ -59,9 +59,10 @@ if (import.meta.server) {
             Components and templates
           </h2>
 
-          <PageSectionHeading>
+          <!-- on a phone the switcher is the whole row -->
+          <PageSectionHeading :ui="{ rule: 'max-sm:hidden', meta: 'max-sm:hidden' }">
             <template #leading>
-              <ThemeStudioViewSwitcher :content="{ align: 'start' }" />
+              <ThemeStudioViewSwitcher :content="{ align: 'start' }" class="w-full sm:w-68" />
             </template>
 
             <template #meta>
