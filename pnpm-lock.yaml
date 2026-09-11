@@ -175,6 +175,9 @@ importers:
       hookable:
         specifier: ^6.1.1
         version: 6.1.1
+      jiti:
+        specifier: ^2.7.0
+        version: 2.7.0
       joi:
         specifier: ^18.0.0
         version: 18.2.8

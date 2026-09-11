@@ -1,4 +1,4 @@
-import { existsSync, readFileSync } from 'node:fs'
+import { existsSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import { dirname, join } from 'pathe'
 import { camelCase, kebabCase } from 'scule'
@@ -12,7 +12,7 @@ import type { ModuleOptions } from './module'
 import { applyDefaultVariants, applyPrefixToObject, applyUnstyled } from './utils/theme'
 import { detectUsedComponents } from './utils/components'
 import { compileThemeClasses, compileThemeLeaves, compileUiConfig, compileUiConfigLeaves, takeCompiledCss, takeStylexAtlas } from './engine/compile-theme'
-import { extractUiFromAppConfigSource } from './engine/extract-app-config'
+import { extractUiFromAppConfigFile } from './engine/extract-app-config'
 import * as theme from './theme'
 import * as themeProse from './theme/prose'
 import * as themeContent from './theme/content'
@@ -27,7 +27,7 @@ async function mergedAppUiConfig(nuxt: Nuxt | undefined, fallback: Record<string
   ]
   for (const file of [...new Set(files)]) {
     if (!existsSync(file)) continue
-    const extracted = extractUiFromAppConfig(file)
+    const extracted = await extractUiFromAppConfigFile(file)
     if (extracted) ui = defu(extracted, ui)
   }
   return ui
@@ -46,10 +46,6 @@ function resolveStylexMerge() {
     }
   }
   throw new Error('Cannot resolve runtime/utils/stylex-merge')
-}
-
-function extractUiFromAppConfig(file: string) {
-  return extractUiFromAppConfigSource(readFileSync(file, 'utf8'))
 }
 
 export function getTemplates(options: ModuleOptions, uiConfig: Record<string, any>, nuxt?: Nuxt, resolve?: Resolver['resolve'], vue?: { detectedComponents?: Set<string> }) {

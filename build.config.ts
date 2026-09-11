@@ -36,6 +36,7 @@ export default defineBuildConfig({
     'vite',
     '@babel/core',
     '@stylexjs/babel-plugin',
-    '@stylexjs/stylex'
+    '@stylexjs/stylex',
+    'jiti'
   ]
 })
