@@ -65,8 +65,8 @@ const ui = {
   // keeps the width, and the placeholder that would fill it gets no gap
   container: ['py-0 sm:py-0 lg:py-0', slots.default ? 'gap-8 sm:gap-y-8 lg:gap-x-9' : 'gap-0 sm:gap-0 lg:grid-cols-1'],
   headline: 'mb-6',
-  title: 'text-4xl sm:text-5xl lg:text-6xl font-medium leading-[1.08] tracking-[-.035em] text-balance',
-  description: 'max-w-152 text-base sm:text-[17px] leading-relaxed text-pretty',
+  title: 'sm:text-6xl font-medium max-w-md',
+  description: 'text-base sm:text-lg max-w-154',
   links: 'gap-x-3'
 }
 </script>

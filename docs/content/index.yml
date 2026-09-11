@@ -1,11 +1,11 @@
 title: The Intuitive Vue UI Library
-description: Nuxt UI is a UI library with 125+ accessible components built on Reka UI and Tailwind CSS, for Nuxt and Vue.
+description: "Nuxt UI is a free, open source Vue component library: 125+ accessible, TypeScript components built on Reka UI and Tailwind CSS, for Nuxt and any Vue app."
 navigation: false
 hero:
-  lead: The UI library for
-  accent: Nuxt & Vue
+  lead: The Intuitive
+  accent: Vue UI library
   breakLine: true
-  description: Accessible, typed components built on Reka UI and Tailwind CSS. Beautiful by default. Make it yours.
+  description: Accessible, typed components built on Reka UI and Tailwind CSS. Beautiful by default, with icons, fonts, color mode, i18n and typography already wired in.
   links:
     - label: Get started
       to: /docs/getting-started/installation/nuxt
