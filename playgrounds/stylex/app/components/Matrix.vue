@@ -43,7 +43,7 @@ const combinations = computed(() => {
 <template>
   <div :class="pg.flex_items_start_gap_2_min_h_0">
     <template v-for="(combination, index) in combinations" :key="index">
-      <div  :class="[pg.flex_flex_col_items_start_gap_2, props.containerClass]" v-bind="props.containerProps">
+      <div :class="[pg.flex_flex_col_items_start_gap_2, props.containerClass]" v-bind="props.containerProps">
         <slot v-bind="combination" />
       </div>
     </template>

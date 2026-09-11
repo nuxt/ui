@@ -2,8 +2,8 @@
 import { Markdown } from '@comark/vue'
 
 import theme from '#build/ui/content/content-toc'
-const pg = usePg()
 
+const pg = usePg()
 
 const highlight = ref(true)
 const color = ref(theme.defaultVariants.color)

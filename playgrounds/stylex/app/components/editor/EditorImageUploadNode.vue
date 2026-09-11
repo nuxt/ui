@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { NodeViewProps } from '@tiptap/vue-3'
 import { NodeViewWrapper } from '@tiptap/vue-3'
-const pg = usePg()
 
+const pg = usePg()
 
 const props = defineProps<NodeViewProps>()
 

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import theme from '#build/ui/color-picker'
-const pg = usePg()
 
+const pg = usePg()
 
 const sizes = Object.keys(theme.variants.size)
 

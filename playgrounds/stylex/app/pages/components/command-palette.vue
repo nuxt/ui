@@ -3,8 +3,8 @@
 import { createReusableTemplate } from '@vueuse/core'
 import type { User } from '~/types'
 import theme from '#build/ui/command-palette'
-const pg = usePg()
 
+const pg = usePg()
 
 const [DefineTemplate, ReuseTemplate] = createReusableTemplate()
 const toast = useToast()

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useAppConfig } from '#imports'
-const pg = usePg()
 
+const pg = usePg()
 
 const appConfig = useAppConfig()
 </script>

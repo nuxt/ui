@@ -11,15 +11,15 @@ export default defineNuxtConfig({
 
   css: [fileURLToPath(new URL('./assets/main.css', import.meta.url))],
 
-  ui: {
-    theme: {
-      engine: 'stylex'
-    }
-  },
-
   content: {
     experimental: {
       sqliteConnector: 'native'
+    }
+  },
+
+  ui: {
+    theme: {
+      engine: 'stylex'
     }
   },
 

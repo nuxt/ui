@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { TreeItem } from '@nuxt/ui'
 import theme from '#build/ui/tree'
-const pg = usePg()
 
+const pg = usePg()
 
 const colors = Object.keys(theme.variants.color)
 const sizes = Object.keys(theme.variants.size)

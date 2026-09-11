@@ -11,10 +11,22 @@ function parts(value, separator = ' ') {
   const result = []
   for (let i = 0; i < value.length; i++) {
     const ch = value[i]
-    if (escape) { escape = false; continue }
-    if (ch === '\\') { escape = true; continue }
-    if (quote) { if (ch === quote) quote = ''; continue }
-    if (ch === '"' || ch === "'") { quote = ch; continue }
+    if (escape) {
+      escape = false
+      continue
+    }
+    if (ch === '\\') {
+      escape = true
+      continue
+    }
+    if (quote) {
+      if (ch === quote) quote = ''
+      continue
+    }
+    if (ch === '"' || ch === '\'') {
+      quote = ch
+      continue
+    }
     if (ch === '(' || ch === '[') depth++
     if (ch === ')' || ch === ']') depth--
     if (depth === 0 && (separator === ' ' ? /\s/.test(ch) : ch === separator)) {
@@ -26,7 +38,9 @@ function parts(value, separator = ' ') {
   return result
 }
 
-function quad(values) { return [values[0], values[1] ?? values[0], values[2] ?? values[0], values[3] ?? values[1] ?? values[0]] }
+function quad(values) {
+  return [values[0], values[1] ?? values[0], values[2] ?? values[0], values[3] ?? values[1] ?? values[0]]
+}
 export function normalizeDeclaration(property, value) {
   const tokens = parts(value)
   const sides = ['top', 'right', 'bottom', 'left']
@@ -72,7 +86,10 @@ function combineSelectors(parser, parents, selector) {
   for (const parent of parents) for (const original of children) {
     const child = original.clone(), parentAst = parser().astSync(parent).nodes[0]
     let replaced = false
-    child.walkNesting(node => { replaced = true; node.replaceWith(...parentAst.nodes.map(n => n.clone())) })
+    child.walkNesting((node) => {
+      replaced = true
+      node.replaceWith(...parentAst.nodes.map(n => n.clone()))
+    })
     results.push(replaced ? child.toString() : `${parent} ${child}`)
   }
   return results
@@ -136,7 +153,7 @@ function cssRule(selector, event) {
 }
 
 function contractName(id, classes) {
-  const slug = String(id).replace(/[^a-zA-Z0-9_-]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 65) || 'leaf'
+  const slug = String(id).replace(/[^\w-]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 65) || 'leaf'
   return `ui-style-${slug}-${createHash('sha256').update(classes).digest('hex').slice(0, 8)}`
 }
 
@@ -168,7 +185,7 @@ export async function createOracle(options = {}) {
     const nativeCss = [], dependencies = new Set(), animationValues = []
     const events = collectRules(tree, parser)
     for (const event of events) for (const selector of event.selectors) {
-      const anchors = [...selector.matchAll(/\.((?:ui-oracle-leaf-)\d+)\b/g)].map(match => match[1])
+      const anchors = [...selector.matchAll(/\.(ui-oracle-leaf-\d+)\b/g)].map(match => match[1])
       for (const anchor of new Set(anchors)) {
         const leaf = byAnchor.get(anchor)
         if (!leaf) continue
@@ -206,14 +223,17 @@ export async function createOracle(options = {}) {
       if (node.type === 'atrule' && node.name === 'layer' && node.params === 'properties') support.push(renameVars(node.toString()) + (node.nodes ? '' : ';'))
     }
     const definitions = new Map(), frames = new Map()
-    tree.walkDecls(decl => {
+    tree.walkDecls((decl) => {
       if (decl.prop.startsWith('--')) definitions.set(decl.prop, [...(definitions.get(decl.prop) ?? []), decl.value])
     })
     tree.walkAtRules(/^(?:-webkit-)?keyframes$/, rule => frames.set(rule.params.replace(/^['"]|['"]$/g, ''), rule.toString()))
     const expandedAnimationValues = new Set(animationValues), pending = [...animationValues]
     for (let index = 0; index < pending.length; index++) {
       for (const match of pending[index].matchAll(/var\((--[\w-]+)/g)) for (const value of definitions.get(match[1]) ?? []) {
-        if (!expandedAnimationValues.has(value)) { expandedAnimationValues.add(value); pending.push(value) }
+        if (!expandedAnimationValues.has(value)) {
+          expandedAnimationValues.add(value)
+          pending.push(value)
+        }
       }
     }
     const animationWords = new Set([...expandedAnimationValues].flatMap(value => value.match(/[\w-]+/g) ?? []))
@@ -230,7 +250,7 @@ export async function createOracle(options = {}) {
 }
 
 export function emitStylexModule(leaves, { exportName = 'styles', importSource = '@stylexjs/stylex', typescript = true } = {}) {
-  if (!/^[A-Za-z_$][\w$]*$/.test(exportName)) throw new Error('exportName must be a JS identifier')
+  if (!/^[A-Z_$][\w$]*$/i.test(exportName)) throw new Error('exportName must be a JS identifier')
   if (new Set(leaves.map(leaf => leaf.id)).size !== leaves.length) throw new Error('Cannot emit duplicate style leaf ids')
   const styles = Object.fromEntries(leaves.map(leaf => [leaf.id, leaf.styleObject]))
   const contracts = Object.fromEntries(leaves.filter(leaf => leaf.semanticClasses.length).map(leaf => [leaf.id, leaf.semanticClasses]))

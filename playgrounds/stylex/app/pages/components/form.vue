@@ -4,8 +4,8 @@ import type { FormSubmitEvent } from '@nuxt/ui'
 import FormExampleElements from '../../components/form/FormExampleElements.vue'
 import FormExampleNestedList from '../../components/form/FormExampleNestedList.vue'
 import FormExampleNested from '../../components/form/FormExampleNested.vue'
-const pg = usePg()
 
+const pg = usePg()
 
 const schema = z.object({
   email: z.email(),

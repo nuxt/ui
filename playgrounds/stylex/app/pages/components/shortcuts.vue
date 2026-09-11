@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { ShortcutsConfig } from '@nuxt/ui/composables'
-const pg = usePg()
 
+const pg = usePg()
 
 const logs = ref<string[]>([])
 

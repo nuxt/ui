@@ -2,6 +2,7 @@ import { createHash } from 'node:crypto'
 import { existsSync, readFileSync } from 'node:fs'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 import { dirname, join } from 'pathe'
+import type { PluginItem } from '@babel/core'
 
 const scalarSlots = new Set([
   'avatarSize',
@@ -60,7 +61,7 @@ function atlasKeysFromLtr(classname: string, ltr: string) {
   const escaped = classname.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
   const remainder = selector.replace(new RegExp(`\\.${escaped}`, 'g'), '').replace(/\s+/g, '')
   const prefix = ltr.slice(0, last.index).replace(/[{}]/g, '').trim()
-  const props = [...decls.matchAll(/(?:^|;)\s*(-?[\w-]+):/g)]
+  const props = [...decls.matchAll(/(?:^|;)\s*([\w-]+):/g)]
     .map(match => match[1]!)
     .filter(prop => prop !== 'syntax' && prop !== 'inherits' && prop !== 'initial-value')
   return props.map(prop => `${prefix}${remainder}|${prop}`)
@@ -269,7 +270,7 @@ async function compilePending(prefix: string, pending: Leaf[]) {
       filename: `${prefix}-${index}.stylex.js`,
       babelrc: false,
       configFile: false,
-      plugins: [plugin]
+      plugins: [plugin as PluginItem]
     })
     if (!transformed?.code) throw new Error(`StyleX compilation failed for ${prefix}`)
     const exports = evalCompiledModule(transformed.code)

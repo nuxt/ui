@@ -5,8 +5,8 @@ import type { TableColumn, TableRow } from '@nuxt/ui'
 import type { Column, RowPinningState } from '@tanstack/vue-table'
 import { getPaginationRowModel } from '@tanstack/vue-table'
 import { useClipboard, refDebounced } from '@vueuse/core'
-const pg = usePg()
 
+const pg = usePg()
 
 const UButton = resolveComponent('UButton')
 const UCheckbox = resolveComponent('UCheckbox')

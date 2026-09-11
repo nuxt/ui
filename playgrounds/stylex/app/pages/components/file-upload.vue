@@ -2,8 +2,8 @@
 import * as z from 'zod'
 import type { FormSubmitEvent } from '@nuxt/ui'
 import theme from '#build/ui/file-upload'
-const pg = usePg()
 
+const pg = usePg()
 
 const sizes = Object.keys(theme.variants.size)
 const variants = Object.keys(theme.variants.variant)

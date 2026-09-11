@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { SplitterItem } from '@nuxt/ui'
-const pg = usePg()
 
+const pg = usePg()
 
 const card = pg.bg_elevated_50_border_border_default_rounded_xl_items_center_justify_center_text_muted_fon
 

@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { Markdown } from '@comark/vue'
 import shiki from '@comark/vue/plugins/shiki'
-const pg = usePg()
 
+const pg = usePg()
 
 const markdown = ref(`
 # Typography

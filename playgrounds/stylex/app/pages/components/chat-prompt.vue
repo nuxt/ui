@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import theme from '#build/ui/chat-prompt'
-const pg = usePg()
 
+const pg = usePg()
 
 const variants = Object.keys(theme.variants.variant)
 const colors = Object.keys(theme.variants.color)

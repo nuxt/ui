@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import theme from '#build/ui/navigation-menu'
-const pg = usePg()
 
+const pg = usePg()
 
 const orientations = Object.keys(theme.variants.orientation)
 

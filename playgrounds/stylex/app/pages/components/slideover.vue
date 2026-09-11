@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { defineAsyncComponent } from 'vue'
-const pg = usePg()
 
+const pg = usePg()
 
 const LazySlideoverExample = defineAsyncComponent(() => import('../../components/SlideoverExample.vue'))
 

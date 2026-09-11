@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 import type { TimelineItem } from '@nuxt/ui'
 import theme from '#build/ui/timeline'
-const pg = usePg()
 
+const pg = usePg()
 
 const sizes = Object.keys(theme.variants.size)
 const colors = Object.keys(theme.variants.color)

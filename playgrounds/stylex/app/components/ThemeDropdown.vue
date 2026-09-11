@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { DropdownMenuItem } from '@nuxt/ui'
-const pg = usePg()
 
+const pg = usePg()
 
 const appConfig = useAppConfig()
 

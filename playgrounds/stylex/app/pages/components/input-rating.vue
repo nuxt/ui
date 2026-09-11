@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import theme from '#build/ui/input-rating'
-const pg = usePg()
 
+const pg = usePg()
 
 const colors = Object.keys(theme.variants.color)
 const sizes = Object.keys(theme.variants.size)

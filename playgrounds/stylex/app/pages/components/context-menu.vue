@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import theme from '#build/ui/context-menu'
-const pg = usePg()
 
+const pg = usePg()
 
 const loading = ref(false)
 

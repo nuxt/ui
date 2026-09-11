@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { NuxtError } from '#app'
-const pg = usePg()
 
+const pg = usePg()
 
 const { components, groups, items } = useNavigation()
 

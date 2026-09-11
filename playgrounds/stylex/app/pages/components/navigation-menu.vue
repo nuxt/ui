@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { NavigationMenuItem } from '@nuxt/ui'
 import theme from '#build/ui/navigation-menu'
-const pg = usePg()
 
+const pg = usePg()
 
 const colors = Object.keys(theme.variants.color)
 const variants = Object.keys(theme.variants.variant)
@@ -128,7 +128,6 @@ const items = [
       :highlight-color="highlightColor"
       v-bind="props"
       :class="[pg.data_orientation_vertical_data_collapsed_false_w_48, highlight && pg.data_orientation_horizontal_border_b_border_default]"
-      
     />
   </Matrix>
 </template>

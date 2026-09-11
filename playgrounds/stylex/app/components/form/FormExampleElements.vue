@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import * as z from 'zod'
 import type { FormSubmitEvent } from '@nuxt/ui'
-const pg = usePg()
 
+const pg = usePg()
 
 const schema = z.object({
   input: z.string({ message: 'Please enter your email' }).min(10, 'Must be at least 10 characters'),

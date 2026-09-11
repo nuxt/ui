@@ -15,6 +15,7 @@ describe('stylex engine', () => {
     expect(base).toMatch(/\bx[a-z0-9]+\b/)
     expect(result.variants.size.md.leadingAvatarSize).toBe('2xs')
     expect(result.defaultVariants.color).toBe('primary')
-    expect(result.compoundVariants.find((item: any) => item.loading && item.leading)?.class.leadingIcon).toMatch(/\bx[a-z0-9]+\b/)
+    const leading = result.compoundVariants.find((item: any) => item.loading && item.leading)?.class
+    expect(typeof leading === 'object' && leading && 'leadingIcon' in leading ? leading.leadingIcon : '').toMatch(/\bx[a-z0-9]+\b/)
   }, 60_000)
 })

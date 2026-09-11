@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import theme from '#build/ui/page-cta'
-const pg = usePg()
 
+const pg = usePg()
 
 const variants = Object.keys(theme.variants.variant)
 const orientations = Object.keys(theme.variants.orientation)

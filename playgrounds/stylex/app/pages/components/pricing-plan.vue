@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import theme from '#build/ui/pricing-plan'
-const pg = usePg()
 
+const pg = usePg()
 
 const variants = Object.keys(theme.variants.variant)
 const orientations = Object.keys(theme.variants.orientation)
@@ -19,7 +19,7 @@ const orientation = ref('vertical' as keyof typeof theme.variants.orientation)
     <USelect v-model="orientation" :items="orientations" />
   </Navbar>
 
-  <Matrix v-slot="props" :attrs="attrs"  :class="[pg.gap_4, orientation === 'horizontal' ? pg.flex_col : '']">
+  <Matrix v-slot="props" :attrs="attrs" :class="[pg.gap_4, orientation === 'horizontal' ? pg.flex_col : '']">
     <UPricingPlan
       title="Solo"
       description="For bootstrappers and indie hackers."

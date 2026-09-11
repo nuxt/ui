@@ -2,8 +2,8 @@
 import type { UIMessage } from 'ai'
 import { useChat } from '@ai-sdk/vue'
 import theme from '#build/ui/sidebar'
-const pg = usePg()
 
+const pg = usePg()
 
 const variants = Object.keys(theme.variants.variant)
 
@@ -40,7 +40,7 @@ function onSubmit() {
 </script>
 
 <template>
-  <div  :class="[pg.flex_flex_1, variant === 'inset' && pg.bg_neutral_50_dark_bg_neutral_950]">
+  <div :class="[pg.flex_flex_1, variant === 'inset' && pg.bg_neutral_50_dark_bg_neutral_950]">
     <USidebar
       v-model:open="openLeft"
       side="left"

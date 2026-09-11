@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { useRoute, useRouter } from '#imports'
 import { upperName } from '../utils'
-const pg = usePg()
 
+const pg = usePg()
 
 const route = useRoute()
 const router = useRouter()

@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import * as z from 'zod'
 import type { FormSubmitEvent, AuthFormField } from '@nuxt/ui'
-const pg = usePg()
 
+const pg = usePg()
 
 const toast = useToast()
 

@@ -88,7 +88,7 @@ export function getTemplates(options: ModuleOptions, uiConfig: Record<string, an
   }
 
   function collectStylexThemes(group: Record<string, any>, path?: string) {
-    return Object.keys(group).map((component) => ({
+    return Object.keys(group).map(component => ({
       value: prepareComponentTheme((group as any)[component]),
       prefix: `${path || 'ui'}-${component}`
     }))
@@ -556,7 +556,7 @@ export function addTemplates(options: ModuleOptions, nuxt: Nuxt, resolve: Resolv
 
   if (options.theme?.engine === 'stylex' && nuxt.options.dev) {
     nuxt.hook('builder:watch', async (_, path) => {
-      if (!/app\.config\.(ts|js|mjs)$/.test(path)) return
+      if (!/app\.config\.(?:ts|js|mjs)$/.test(path)) return
       await updateTemplates({
         filter: template => template.filename === 'ui.css'
           || template.filename === 'ui-stylex-app-config.ts'

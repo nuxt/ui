@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import theme from '#build/ui/toaster'
 import { useAppConfig } from '#imports'
-const pg = usePg()
 
+const pg = usePg()
 
 const positions = Object.keys(theme.variants.position)
 

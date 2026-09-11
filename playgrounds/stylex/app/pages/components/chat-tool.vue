@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { ButtonProps } from '@nuxt/ui'
-const pg = usePg()
 
+const pg = usePg()
 
 const actions: ButtonProps[] = [
   { label: 'Approve', onClick: () => console.log('approve') },

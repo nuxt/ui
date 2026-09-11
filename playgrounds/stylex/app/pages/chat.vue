@@ -4,8 +4,8 @@ import { useChat } from '@ai-sdk/vue'
 import { isPartStreaming, isToolStreaming, isToolApprovalPending } from '@nuxt/ui/utils/ai'
 import { Markdown } from '@comark/vue'
 import shiki from '@comark/vue/plugins/shiki'
-const pg = usePg()
 
+const pg = usePg()
 
 const toast = useToast()
 

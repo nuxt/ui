@@ -43,7 +43,7 @@ export const defaultOptions = {
       size: undefined
     },
     prefix: undefined,
-    engine: 'tailwind'
+    engine: 'tailwind' as const
   },
   prose: false,
   mdc: false,

@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { ListboxItem } from '@nuxt/ui'
 import theme from '#build/ui/listbox'
-const pg = usePg()
 
+const pg = usePg()
 
 const sizes = Object.keys(theme.variants.size)
 

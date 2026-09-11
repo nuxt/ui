@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import theme from '#build/ui/page-card'
-const pg = usePg()
 
+const pg = usePg()
 
 const colors = Object.keys(theme.variants.highlightColor)
 const variants = Object.keys(theme.variants.variant)

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import theme from '#build/ui/blog-post'
-const pg = usePg()
 
+const pg = usePg()
 
 const variants = Object.keys(theme.variants.variant)
 const orientations = Object.keys(theme.variants.orientation)
@@ -19,7 +19,7 @@ const orientation = ref('vertical' as keyof typeof theme.variants.orientation)
     <USelect v-model="orientation" :items="orientations" />
   </Navbar>
 
-  <Matrix v-slot="props" :attrs="attrs"  :class="[pg.gap_4, orientation === 'horizontal' ? pg.flex_col : '']">
+  <Matrix v-slot="props" :attrs="attrs" :class="[pg.gap_4, orientation === 'horizontal' ? pg.flex_col : '']">
     <UBlogPost
       title="Nuxt UI v4"
       description="Nuxt UI v4 unifies Nuxt UI and Nuxt UI Pro into one powerful, completely free library. With over 110 components, 12 templates, and a comprehensive Figma kit, all of this is available for free."

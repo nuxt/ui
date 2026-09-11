@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import theme from '#build/ui/form-field'
-const pg = usePg()
 
+const pg = usePg()
 
 const sizes = Object.keys(theme.variants.size)
 const orientations = Object.keys(theme.variants.orientation)

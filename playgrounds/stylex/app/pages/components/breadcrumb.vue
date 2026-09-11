@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { BreadcrumbItem } from '@nuxt/ui'
 import theme from '#build/ui/breadcrumb'
-const pg = usePg()
 
+const pg = usePg()
 
 const colors = Object.keys(theme.variants.color)
 
