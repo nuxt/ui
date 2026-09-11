@@ -36,6 +36,7 @@ globalThis.useFetch = async (url: string, options: RequestInit & { transform?: (
       data.value = await fetch(url, options).then(r => r.json()).then(r => options.transform ? options.transform(r) : r)
       status.value = 'success'
     } catch (error) {
+      status.value = 'error'
       console.error(error)
     }
   }

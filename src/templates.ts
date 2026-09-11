@@ -12,6 +12,7 @@ import type { ModuleOptions } from './module'
 import { applyDefaultVariants, applyPrefixToObject, applyUnstyled } from './utils/theme'
 import { detectUsedComponents } from './utils/components'
 import { compileThemeClasses, compileThemeLeaves, compileUiConfig, compileUiConfigLeaves, takeCompiledCss, takeStylexAtlas } from './engine/compile-theme'
+import { extractUiFromAppConfigSource } from './engine/extract-app-config'
 import * as theme from './theme'
 import * as themeProse from './theme/prose'
 import * as themeContent from './theme/content'
@@ -48,26 +49,7 @@ function resolveStylexMerge() {
 }
 
 function extractUiFromAppConfig(file: string) {
-  const source = readFileSync(file, 'utf8')
-  const match = /\bui:\s*\{/.exec(source)
-  if (!match || match.index == null) return null
-  const start = source.indexOf('{', match.index)
-  let depth = 0
-  for (let i = start; i < source.length; i++) {
-    const ch = source[i]
-    if (ch === '{') depth++
-    else if (ch === '}') {
-      depth--
-      if (depth === 0) {
-        try {
-          return Function(`"use strict"; return (${source.slice(start, i + 1)})`)()
-        } catch {
-          return null
-        }
-      }
-    }
-  }
-  return null
+  return extractUiFromAppConfigSource(readFileSync(file, 'utf8'))
 }
 
 export function getTemplates(options: ModuleOptions, uiConfig: Record<string, any>, nuxt?: Nuxt, resolve?: Resolver['resolve'], vue?: { detectedComponents?: Set<string> }) {
