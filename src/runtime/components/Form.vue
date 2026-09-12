@@ -60,6 +60,11 @@ export type FormProps<S extends FormSchema, T extends boolean = true, N extends 
    * @defaultValue `true`
    */
   loadingAuto?: boolean
+  /**
+   * When `true`, the form automatically focuses the first field with an error on failed submission.
+   * @defaultValue `true`
+   */
+  focusOnError?: boolean
   class?: any
   ui?: { base?: any }
   onSubmit?: ((event: FormSubmitEvent<FormData<S, T>>) => void) | (() => void)
@@ -82,7 +87,7 @@ import { useAppConfig } from '#imports'
 import { formOptionsInjectionKey, formInputsInjectionKey, formBusInjectionKey, formLoadingInjectionKey, formErrorsInjectionKey, formStateInjectionKey } from '../composables/useFormField'
 import { tv } from '../utils/tv'
 import { useComponentProps } from '../composables/useComponentProps'
-import { validateSchema, getAtPath, setAtPath } from '../utils/form'
+import { validateSchema, getAtPath, setAtPath, scrollToErrorEl } from '../utils/form'
 import { FormValidationException } from '../types/form'
 
 type I = InferInput<S>
@@ -93,6 +98,7 @@ const _props = withDefaults(defineProps<FormProps<S, T, N>>(), {
     return ['input', 'blur', 'change'] as FormInputEvents[]
   },
   validateOnInputDelay: 300,
+  focusOnError: true,
   transform: () => true as T,
   loadingAuto: true
 })
@@ -287,6 +293,11 @@ async function onSubmitWrapper(payload: Event) {
     emits('error', errorEvent)
   } finally {
     loading.value = false
+  }
+
+  if (props.focusOnError && errors.value.length > 0) {
+    await nextTick()
+    scrollToErrorEl(errors.value)
   }
 }
 
