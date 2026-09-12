@@ -88,14 +88,16 @@ const people = computed(() => (github.value?.contributors ?? []).map((contributo
 <template>
   <UMain v-if="page">
     <PageHero v-bind="page.hero">
-      <PageStats :items="stats" />
+      <template #links>
+        <PageStats :items="stats" />
+      </template>
     </PageHero>
 
     <UContainer>
       <UPage>
         <UPageBody class="space-y-24">
           <section>
-            <PageSectionHeading title="Everyone who ships it" :meta="`${people.length} people · by contributions`" />
+            <PageSectionHeading title="Everyone who ships it" meta="by contributions" />
 
             <ul class="divide-y divide-default">
               <li
@@ -114,11 +116,11 @@ const people = computed(() => (github.value?.contributors ?? []).map((contributo
                   loading="lazy"
                 />
 
-                <div class="flex-1 md:flex-none md:w-72 min-w-0 flex flex-col gap-0.5">
+                <div class="flex-1 md:flex-none md:w-86 min-w-0 flex flex-col gap-0.5">
                   <span class="text-base sm:text-lg font-semibold leading-tight tracking-tight text-highlighted truncate">{{ person.name }}</span>
-                  <span v-if="person.location" class="flex items-center gap-1.5 text-[13px] text-muted whitespace-nowrap">
-                    <UIcon :name="studioIcons.mapPin" class="size-3 text-dimmed" />
-                    {{ person.location }}
+                  <span v-if="person.location" class="flex items-center gap-1.5 text-[13px] text-muted whitespace-nowrap min-w-0">
+                    <UIcon :name="studioIcons.mapPin" class="size-3 text-dimmed shrink-0" />
+                    <span class="truncate">{{ person.location }}</span>
                   </span>
                 </div>
 
@@ -133,7 +135,6 @@ const people = computed(() => (github.value?.contributors ?? []).map((contributo
                     color="neutral"
                     variant="ghost"
                     size="sm"
-                    square
                     class="text-muted hover:text-highlighted"
                   />
 
@@ -142,12 +143,10 @@ const people = computed(() => (github.value?.contributors ?? []).map((contributo
                     :to="person.sponsorsListing"
                     target="_blank"
                     color="neutral"
-                    variant="outline"
+                    variant="ghost"
                     size="sm"
+                    :aria-label="`Sponsor ${person.name}`"
                     :icon="studioIcons.heart"
-                    label="Sponsor"
-                    class="ms-1"
-                    square
                     :ui="{ leadingIcon: 'text-pink-500' }"
                   />
                 </div>

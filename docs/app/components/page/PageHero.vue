@@ -64,10 +64,11 @@ const ui = {
   // the second column only exists for a default slot: without one the text
   // keeps the width, and the placeholder that would fill it gets no gap
   container: ['py-0 sm:py-0 lg:py-0', slots.default ? 'gap-8 sm:gap-y-8 lg:gap-x-9' : 'gap-0 sm:gap-0 lg:grid-cols-1'],
-  headline: 'mb-6',
-  title: 'sm:text-6xl font-medium max-w-md',
-  description: 'text-base sm:text-lg max-w-154',
-  links: 'gap-x-3'
+  headline: 'mb-2 sm:mb-4',
+  title: 'text-4xl sm:text-5xl lg:text-6xl font-medium max-w-md',
+  description: 'text-[15px] sm:text-base lg:text-lg max-w-154 mt-2 sm:mt-4',
+  links: 'gap-x-3',
+  footer: 'mt-8'
 }
 </script>
 

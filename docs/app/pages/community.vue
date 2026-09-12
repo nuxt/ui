@@ -35,13 +35,13 @@ if (import.meta.server) {
             <UButton
               to="https://github.com/nuxt/ui/edit/v4/docs/content/community.yml"
               target="_blank"
+              label="Submit yours"
               color="neutral"
-              variant="outline"
-              size="sm"
+              variant="link"
+              size="xs"
+              class="font-mono text-dimmed tracking-wide text-[13px]"
               :trailing-icon="appConfig.ui.icons.plus"
-            >
-              Submit yours
-            </UButton>
+            />
           </PageSectionHeading>
 
           <UPageGrid class="gap-4">
@@ -65,18 +65,11 @@ if (import.meta.server) {
               </template>
 
               <template v-if="item.user" #footer>
-                <UButton
-                  :label="item.user.name"
-                  :avatar="{
-                    ...item.user.avatar,
-                    alt: `${item.user.name} avatar`
-                  }"
-                  :to="item.user.to"
-                  target="_blank"
-                  size="sm"
-                  color="neutral"
-                  variant="outline"
-                  class="bg-transparent z-1 relative"
+                <UUser
+                  :name="item.user.name"
+                  :avatar="item.user.avatar"
+                  size="xs"
+                  class="rounded-full border border-default ps-1 pe-3 py-1"
                 />
               </template>
             </UPageCard>

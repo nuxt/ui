@@ -12,12 +12,15 @@ hero:
       class: nuxt-only
       color: neutral
       variant: solid
+      size: lg
     - label: Get started
       to: /docs/getting-started/installation/vue
       class: vue-only
       color: neutral
       variant: solid
+      size: lg
     - label: Explore 125+ components
       to: /docs/components
       color: neutral
       variant: soft
+      size: lg

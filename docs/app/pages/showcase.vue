@@ -40,13 +40,13 @@ if (import.meta.server) {
             <UButton
               to="https://github.com/nuxt/ui/edit/v4/docs/content/showcase.yml"
               target="_blank"
+              label="Submit yours"
               color="neutral"
-              variant="outline"
-              size="sm"
+              variant="link"
+              size="xs"
+              class="font-mono text-dimmed tracking-wide text-[13px]"
               :trailing-icon="appConfig.ui.icons.plus"
-            >
-              Submit yours
-            </UButton>
+            />
           </PageSectionHeading>
 
           <UPageGrid class="lg:grid-cols-4 gap-x-4 gap-y-6">
