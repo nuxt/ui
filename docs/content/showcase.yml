@@ -2,8 +2,12 @@ title: Showcase
 description: Check out some of the amazing projects built with Nuxt UI.
 navigation: false
 hero:
-  title: Showcase
-  description: Discover our selection of projects built with Nuxt UI.
+  badge:
+    label: Live in production
+    icon: i-lucide-globe
+  lead: Built with
+  accent: Nuxt UI
+  description: Sites and apps teams have shipped with Nuxt UI, from documentation and dashboards to storefronts. Built one? Add it to the list.
 items:
   - name: Ace
     url: https://acecompany.nl/

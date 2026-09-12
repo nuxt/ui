@@ -8,10 +8,13 @@ import shiki from '@comark/vue/plugins/shiki'
 // feed on the right. Release notes are inlined since the template fetches them
 // from GitHub and renders them with Comark, neither of which is available here.
 
+// built once: in the template it would be a new plugin on every render
+const plugins = [shiki()]
+
 const appConfig = useAppConfig()
 const studioIcons = useStudioIcons()
 
-const introLinks = [{
+const introLinks = computed(() => [{
   label: 'Documentation',
   icon: studioIcons.bookOpen,
   color: 'neutral' as const,
@@ -19,21 +22,23 @@ const introLinks = [{
   size: 'md' as const
 }, {
   label: 'GitHub',
-  icon: studioIcons.github,
+  icon: 'i-simple-icons-github',
   color: 'neutral' as const,
   variant: 'ghost' as const,
   size: 'md' as const
-}]
+}])
 
 /**
  * Invented releases in the shape the template fetches from GitHub: a tag, a
- * date and a markdown body. The template renders that body with Comark, and so
- * does this, so the headings, code blocks, callouts and commit links all come
- * from the markdown rather than from hand-written prose markup.
+ * date, a one line summary under the title and a markdown body. The template
+ * renders that body with Comark, and so does this, so the headings, code
+ * blocks, callouts and commit links all come from the markdown rather than
+ * from hand-written prose markup.
  */
 interface Release {
   tag: string
   title: string
+  description: string
   date: string
   body: string
 }
@@ -41,10 +46,9 @@ interface Release {
 const versions: Release[] = [{
   tag: 'v4.2.0',
   title: 'v4.2.0',
+  description: 'This release focuses on data display: a brand new component, smarter tables and a batch of theme refinements across the board.',
   date: '2026-06-18T10:00:00Z',
-  body: `This release focuses on data display: a brand new component, smarter tables and a batch of theme refinements across the board.
-
-## ✨ Highlights
+  body: `## ✨ Highlights
 
 ### Changelog component
 
@@ -87,10 +91,9 @@ const versions: Release[] = [{
 }, {
   tag: 'v4.1.0',
   title: 'v4.1.0',
+  description: 'A quality-of-life release: better forms, better keyboard navigation and a handful of long-requested props.',
   date: '2026-05-06T09:30:00Z',
-  body: `A quality-of-life release: better forms, better keyboard navigation and a handful of long-requested props.
-
-## 🚀 Features
+  body: `## 🚀 Features
 
 - **Form:** nested field support with dot notation paths ([#6612](https://github.com/nuxt/ui/pull/6612)) ([7a2c8f5](https://github.com/nuxt/ui/commit/7a2c8f5))
 - **CommandPalette:** new prop to render items lazily in large lists ([#6598](https://github.com/nuxt/ui/pull/6598)) ([c9b3e17](https://github.com/nuxt/ui/commit/c9b3e17))
@@ -110,10 +113,9 @@ const versions: Release[] = [{
 }, {
   tag: 'v4.0.1',
   title: 'v4.0.1',
+  description: 'A small patch following the v4 launch, addressing the most reported issues from the first week.',
   date: '2026-04-02T16:15:00Z',
-  body: `A small patch following the v4 launch, addressing the most reported issues from the first week.
-
-## 🐛 Bug Fixes
+  body: `## 🐛 Bug Fixes
 
 - Restore auto-import of prose components in docs projects ([#6521](https://github.com/nuxt/ui/pull/6521)) ([e2d9b40](https://github.com/nuxt/ui/commit/e2d9b40))
 - **Skeleton:** fix hydration mismatch when used with SSR color mode ([#6517](https://github.com/nuxt/ui/pull/6517)) ([a7c3f81](https://github.com/nuxt/ui/commit/a7c3f81))
@@ -126,10 +128,9 @@ const versions: Release[] = [{
 }, {
   tag: 'v4.0.0',
   title: 'v4.0.0',
+  description: 'Nuxt UI v4 unifies Nuxt UI and Nuxt UI Pro into a single free and open source library: 110+ components, Tailwind CSS v4, and a brand new theming system built on design tokens.',
   date: '2026-03-24T14:00:00Z',
-  body: `Nuxt UI v4 unifies Nuxt UI and Nuxt UI Pro into a single free and open source library: 110+ components, Tailwind CSS v4, and a brand new theming system built on design tokens.
-
-## ✨ Highlights
+  body: `## ✨ Highlights
 
 Every Pro component is now free and open source, dashboard and page sections included. Colors are semantic aliases with light and dark values generated from your palette, so a theme is a handful of tokens rather than a config file.
 
@@ -266,18 +267,20 @@ onMounted(() => {
               v-for="version in versions"
               :key="version.tag"
               :title="version.title"
+              :description="version.description"
               :date="version.date"
               :ui="{
                 root: 'flex items-start',
                 container: 'max-w-xl min-w-0',
-                header: 'border-b border-default pb-4 mb-4',
+                header: 'border-b border-default pb-4 mb-8',
                 title: 'text-3xl',
+                description: 'mt-2',
                 date: 'text-xs/9 text-highlighted font-mono',
                 indicator: 'sticky top-0 pt-16 -mt-16 sm:pt-24 sm:-mt-24 lg:pt-32 lg:-mt-32'
               }"
             >
               <template #body>
-                <Markdown :value="version.body" :plugins="[shiki()]" />
+                <Markdown :value="version.body" :plugins="plugins" class="*:first:mt-0 *:last:mb-0" />
               </template>
             </UChangelogVersion>
           </UChangelogVersions>

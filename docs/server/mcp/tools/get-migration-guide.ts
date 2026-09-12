@@ -10,7 +10,7 @@ export default defineMcpTool({
     openWorldHint: false
   },
   inputSchema: {
-    version: z.enum(['v3', 'v4']).describe('The migration version (e.g., v4, v3)')
+    version: z.enum(['v4']).describe('The migration version (e.g., v4)')
   },
   inputExamples: [
     { version: 'v4' }

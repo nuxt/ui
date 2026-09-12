@@ -75,6 +75,8 @@ useSeoMeta({
 
 const path = computed(() => route.path.replace(/\/$/, ''))
 
+useCanonical(computed(() => `/raw${path.value}.md`))
+
 if (import.meta.server) {
   if (route.path.startsWith('/docs/components/')) {
     defineOgImage('Component.takumi', {
@@ -106,10 +108,7 @@ if (import.meta.server) {
   ])
 }
 
-useCanonical(computed(() => `${path.value}.md`))
-
 const { open, ask } = useChat()
-// same glyph as the studio's Ask-AI trigger, and skins with the icon pack
 const studioIcons = useStudioIcons()
 
 const links = computed(() => [{
@@ -118,7 +117,8 @@ const links = computed(() => [{
   to: `https://github.com/nuxt/ui/edit/v4/docs/content/${page?.value?.stem}.md`,
   target: '_blank'
 }, {
-  icon: studioIcons.assistant,
+  // Nuxi, the same mark every Ask AI trigger wears, so it doesn't skin with the pack
+  icon: 'i-custom-nuxi',
   label: 'Explain with AI',
   onClick: () => ask('Read this documentation page and summarize it. I want to ask questions about it.')
 }])
@@ -132,7 +132,7 @@ const links = computed(() => [{
       right: 'lg:hidden'
     } : undefined"
   >
-    <UPageHeader>
+    <UPageHeader :description="page.description">
       <template #headline>
         <UBreadcrumb :items="breadcrumb" />
       </template>
@@ -147,10 +147,6 @@ const links = computed(() => [{
           size="lg"
           class="rounded-full align-middle"
         />
-      </template>
-
-      <template #description>
-        <MDC v-if="page.description" :value="page.description" unwrap="p" :cache-key="`${kebabCase(route.path)}-description`" />
       </template>
 
       <template #links>

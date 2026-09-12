@@ -1,96 +1,82 @@
 export function useHeader() {
   const route = useRoute()
+  // the mobile menu glyphs follow the applied icon pack
+  const studioIcons = useStudioIcons()
 
   const desktopLinks = computed(() => [{
     label: 'Docs',
-    to: '/docs',
-    active: route.path.startsWith('/docs/')
+    to: '/docs/getting-started',
+    active: route.path.startsWith('/docs/') && !route.path.startsWith('/docs/components')
+  }, {
+    label: 'Components',
+    to: '/docs/components',
+    active: route.path.startsWith('/docs/components')
+  }, {
+    label: 'Theme',
+    to: '/theme'
   }, {
     label: 'Templates',
     to: '/templates'
   }, {
-    label: 'Resources',
-    active: route.path.startsWith('/showcase') || route.path.startsWith('/community') || route.path.startsWith('/blog'),
-    children: [{
-      label: 'Showcase',
-      description: 'Discover websites built with Nuxt UI.',
-      icon: 'i-lucide-presentation',
-      to: '/showcase'
-    }, {
-      label: 'Community',
-      description: 'Explore projects built around Nuxt UI.',
-      icon: 'i-lucide-globe',
-      to: '/community'
-    }, {
-      label: 'Playground',
-      description: 'Try Nuxt UI components live in your browser.',
-      icon: 'i-lucide-square-terminal',
-      to: '/play',
-      target: '_blank'
-    }, {
-      label: 'Blog',
-      description: 'Read the latest news and updates.',
-      icon: 'i-lucide-newspaper',
-      to: '/blog'
-    }]
-  }, {
-    label: 'Figma',
-    to: '/figma'
-  }, {
-    label: 'Releases',
-    to: '/releases'
+    label: 'Showcase',
+    to: '/showcase'
   }])
 
   const mobileLinks = computed(() => [{
     label: 'Get Started',
-    icon: 'i-lucide-square-play',
+    icon: studioIcons.squarePlay,
     to: '/docs/getting-started',
     active: route.path.startsWith('/docs/getting-started')
   }, {
     label: 'Components',
-    icon: 'i-lucide-square-code',
+    icon: studioIcons.squareCode,
     to: '/docs/components',
     active: route.path.startsWith('/docs/components')
   }, {
     label: 'Composables',
-    icon: 'i-lucide-square-function',
+    icon: studioIcons.squareFunction,
     to: '/docs/composables',
     active: route.path.startsWith('/docs/composables')
   }, {
     label: 'Typography',
-    icon: 'i-lucide-square-pilcrow',
+    icon: studioIcons.squarePilcrow,
     to: '/docs/typography',
     active: route.path.startsWith('/docs/typography')
   }, {
+    label: 'Releases',
+    icon: studioIcons.rocket,
+    to: '/docs/releases',
+    active: route.path.startsWith('/docs/releases')
+  }, {
     label: 'Templates',
-    icon: 'i-lucide-panels-top-left',
+    icon: studioIcons.templates,
     to: '/templates'
   }, {
     label: 'Showcase',
-    icon: 'i-lucide-presentation',
+    icon: studioIcons.presentation,
     to: '/showcase'
   }, {
     label: 'Community',
-    icon: 'i-lucide-globe',
+    icon: studioIcons.globe,
     to: '/community'
   }, {
+    label: 'Blog',
+    icon: studioIcons.newspaper,
+    to: '/blog'
+  }, {
+    label: 'Team',
+    icon: studioIcons.users,
+    to: '/team'
+  }, {
     label: 'Playground',
-    icon: 'i-lucide-square-terminal',
+    icon: studioIcons.terminal,
     to: '/play',
     target: '_blank'
   }, {
-    label: 'Blog',
-    icon: 'i-lucide-newspaper',
-    to: '/blog',
-    active: route.path.startsWith('/blog')
-  }, {
     label: 'Figma',
     icon: 'i-simple-icons-figma',
-    to: '/figma'
-  }, {
-    label: 'Releases',
-    icon: 'i-lucide-rocket',
-    to: '/releases'
+    to: 'https://go.nuxt.com/figma-ui',
+    target: '_blank'
   }, {
     label: 'GitHub',
     to: 'https://github.com/nuxt/ui',

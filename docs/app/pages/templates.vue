@@ -1,10 +1,19 @@
 <script setup lang="ts">
 const appConfig = useAppConfig()
+const studioIcons = useStudioIcons()
 
 const { data: page } = await useAsyncData('templates', () => queryCollection('templates').first())
 if (!page.value) {
   throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
 }
+
+// One list per framework, each hidden whole by its class (a JS filter would
+// disagree with the server, which has no cookie to read), so the dividers
+// only ever sit between rows that show. The counts ride the same split.
+const byFramework = computed(() => ({
+  nuxt: page.value?.items.filter(item => item.framework === 'nuxt') ?? [],
+  vue: page.value?.items.filter(item => item.framework === 'vue') ?? []
+}))
 
 useSeoMeta({
   title: page.value.title,
@@ -23,106 +32,87 @@ if (import.meta.server) {
 }
 </script>
 
-<!-- eslint-disable vue/no-v-html -->
 <template>
-  <main v-if="page">
-    <UPageHero :ui="{ container: 'relative py-10 sm:py-16 lg:py-24' }">
-      <template #title>
-        <MDC :value="page.hero.title" unwrap="p" cache-key="pro-templates-hero-title" />
-      </template>
+  <UMain v-if="page">
+    <PageHero v-bind="page.hero" />
 
-      <template #description>
-        <MDC :value="page.hero.description" unwrap="p" cache-key="pro-templates-hero-description" />
-      </template>
+    <UContainer>
+      <UPage>
+        <UPageBody class="space-y-0">
+          <PageSectionHeading>
+            <template #leading>
+              <FrameworkTabs size="xs" class="w-40" />
+            </template>
 
-      <template #links>
-        <FrameworkTabs size="md" class="w-48" />
-      </template>
+            <!-- both counts render, the framework class shows one -->
+            <template #meta>
+              <span v-for="(templates, framework) in byFramework" :key="framework" :class="`${framework}-only`">
+                {{ templates.length }} {{ templates.length === 1 ? 'template' : 'templates' }}
+              </span>
+            </template>
+          </PageSectionHeading>
 
-      <template #top>
-        <div class="absolute z-[-1] rounded-full bg-primary blur-[300px] size-60 sm:size-80 transform -translate-x-1/2 left-1/2 -translate-y-80" />
-      </template>
+          <div v-for="(templates, framework) in byFramework" :key="framework" :class="`${framework}-only`" class="flex flex-col divide-y divide-default">
+            <article
+              v-for="(template, index) in templates"
+              :key="template.title"
+              class="grid grid-cols-1 md:grid-cols-[auto_1fr] xl:grid-cols-[auto_1fr_auto] md:items-center gap-x-6 lg:gap-x-9 gap-y-5 py-8 first:pt-0 last:pb-0"
+            >
+              <UColorModeImage
+                :light="`/assets/templates/${template.framework}/${template.title.toLowerCase()}-light.png`"
+                :dark="`/assets/templates/${template.framework}/${template.title.toLowerCase()}-dark.png`"
+                :alt="`Template ${template.title} screenshot`"
+                width="654"
+                height="368"
+                :loading="framework === 'nuxt' && index < 2 ? 'eager' : 'lazy'"
+                class="w-full md:w-92 lg:w-110 md:row-span-2 xl:row-span-1 aspect-video object-cover object-top rounded-lg border border-default"
+              />
 
-      <LazyStarsBg />
+              <div class="flex flex-col gap-3 min-w-0">
+                <h2 class="text-2xl font-semibold tracking-tight text-highlighted">
+                  {{ template.title }}
+                </h2>
 
-      <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-default inset-0 mx-4 sm:mx-6 lg:mx-8" />
-    </UPageHero>
+                <p class="max-w-130 text-base leading-relaxed text-muted text-pretty">
+                  {{ template.description }}
+                </p>
 
-    <UPageSection
-      v-for="(template, index) in page.items"
-      :key="index"
-      :title="template.title"
-      :features="template.features"
-      orientation="horizontal"
-      class="lg:border-t border-default"
-      :class="`${template.framework}-only`"
-      :ui="{
-        title: 'lg:text-4xl',
-        wrapper: 'lg:py-16 lg:min-h-[481px] flex flex-col justify-center lg:border-r border-default order-last lg:pr-16',
-        container: 'lg:py-0',
-        links: 'gap-x-3'
-      }"
-    >
-      <template #links>
-        <UButton v-for="link of template.links" :key="link.label" color="neutral" variant="outline" v-bind="link" />
+                <ul class="flex flex-col gap-2">
+                  <li v-for="feature in template.features" :key="feature.title" class="flex items-center gap-2.5 text-base text-toned">
+                    <UIcon :name="feature.icon" class="size-4.5 shrink-0 text-primary" />
+                    {{ feature.title }}
+                  </li>
+                </ul>
+              </div>
 
-        <UDropdownMenu
-          :items="template.open_links"
-          :ui="{ content: 'w-(--reka-dropdown-menu-trigger-width) min-w-auto' }"
-          :modal="false"
-          class="group"
-        >
-          <UButton
-            color="neutral"
-            variant="outline"
-            icon="i-lucide-square-code"
-            :trailing-icon="appConfig.ui.icons.chevronDown"
-            label="Open on"
-            :ui="{
-              trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200'
-            }"
-          />
-        </UDropdownMenu>
+              <div class="flex flex-wrap items-center gap-2 md:col-start-2 xl:col-start-3 xl:row-start-1">
+                <UDropdownMenu
+                  :items="template.open_links"
+                  :ui="{ content: 'w-(--reka-dropdown-menu-trigger-width) min-w-auto' }"
+                  :modal="false"
+                  class="group"
+                >
+                  <UButton
+                    color="neutral"
+                    variant="outline"
+                    :icon="studioIcons.link"
+                    :trailing-icon="appConfig.ui.icons.chevronDown"
+                    label="Open on"
+                    :ui="{ trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200' }"
+                  />
+                </UDropdownMenu>
 
-        <UDropdownMenu
-          :items="[
-            ...template.deploy_links,
-            { label: 'Other', icon: 'i-lucide-globe', to: 'https://nuxt.com/deploy', target: '_blank' }
-          ]"
-          :ui="{ content: 'w-(--reka-dropdown-menu-trigger-width) min-w-auto' }"
-          :modal="false"
-          class="group"
-        >
-          <UButton
-            color="neutral"
-            variant="outline"
-            icon="i-lucide-cloud"
-            :trailing-icon="appConfig.ui.icons.chevronDown"
-            label="Deploy to"
-            :ui="{
-              trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200'
-            }"
-          />
-        </UDropdownMenu>
-      </template>
-
-      <template #description>
-        <MDC :value="template.description" unwrap="p" :cache-key="`pro-templates-${index}-description`" />
-      </template>
-
-      <div class="lg:border-x border-default h-full flex items-center lg:bg-muted/20">
-        <Motion class="flex-1" :initial="{ opacity: 0, transform: 'translateY(10px)' }" :while-in-view="{ opacity: 1, transform: 'translateY(0px)' }" :in-view-options="{ once: true }" :transition="{ duration: 0.5, delay: 0.2 }">
-          <UColorModeImage
-            :light="`/assets/templates/${template.framework}/${template.title.toLowerCase()}-light.png`"
-            :dark="`/assets/templates/${template.framework}/${template.title.toLowerCase()}-dark.png`"
-            class="w-full h-auto border lg:border-y lg:border-x-0 border-default rounded-sm lg:rounded-none"
-            :alt="`Template ${template.title} screenshot`"
-            width="654"
-            height="368"
-            loading="lazy"
-          />
-        </Motion>
-      </div>
-    </UPageSection>
-  </main>
+                <UButton
+                  v-for="link of template.links"
+                  :key="link.label"
+                  color="neutral"
+                  v-bind="link"
+                />
+              </div>
+            </article>
+          </div>
+        </UPageBody>
+      </UPage>
+    </UContainer>
+  </UMain>
 </template>

@@ -1,19 +1,9 @@
-import { Octokit } from '@octokit/rest'
-
+/** Every release of nuxt/ui, newest first, v2 left out. The notes are served per release by releases/[tag]. */
 export default defineCachedEventHandler(async () => {
-  if (!process.env.NUXT_GITHUB_TOKEN) {
-    return []
-  }
-
-  const octokit = new Octokit({ auth: process.env.NUXT_GITHUB_TOKEN })
-
-  const { data: releases } = await octokit.rest.repos.listReleases({
-    owner: 'nuxt',
-    repo: 'ui'
-  })
-
-  return releases.filter(r => !r.tag_name.startsWith('v2'))
+  return (await fetchReleases()).map(({ markdown, ...release }) => release)
 }, {
-  maxAge: 60 * 60, // 1 hour
-  getKey: () => 'releases'
+  maxAge: 60 * 60,
+  // the response carries `cache-control` and an etag, which the changelog on
+  // every component page relies on
+  getKey: () => 'releases-list'
 })

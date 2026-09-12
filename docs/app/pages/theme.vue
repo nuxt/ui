@@ -4,7 +4,6 @@ import { decodeThemeDoc } from '../utils/theme/link'
 import { snapshotStoredTheme, writeStoredTheme } from '../utils/theme/storage'
 
 const { track } = useAnalytics()
-const { icon: iconSet } = useTheme()
 
 const { open: chatOpen } = useChat()
 
@@ -15,7 +14,6 @@ function toggleChat() {
   chatOpen.value = !chatOpen.value
 }
 
-// The chrome skins to the applied icon pack.
 const studioIcons = useStudioIcons()
 
 const { view, views, applyDoc, presets, activePreset } = useThemeStudio()
@@ -100,22 +98,17 @@ onMounted(() => {
   if (linkApplied) track('Theme Link Applied', { preset: linkedPreset?.id })
 })
 
-// Color mode rides the app-wide `d` binding in app.vue, no page copy needed.
 defineShortcuts({
   meta_z: undo,
   meta_shift_z: redo,
   ctrl_y: redo
 })
 
-/** The export modal, opened from the header. */
 const shareOpen = ref(false)
 </script>
 
 <template>
-  <!-- page tint composites on the app root's bg-default (nuxt.config rootAttrs) -->
-  <main class="max-w-(--ui-container) mx-auto">
-    <!-- `modal: false` so the panels' popovers, portalled to the body, stay
-         interactive over the fullscreen menu -->
+  <main class="max-w-(--ui-container) mx-auto w-full">
     <UHeader :menu="{ modal: false }" :ui="{ root: () => 'h-(--ui-header-height) border-b border-transparent' }">
       <template #left>
         <HeaderLogo />
@@ -124,7 +117,7 @@ const shareOpen = ref(false)
       <ThemeStudioViewSwitcher />
 
       <template #right>
-        <UTooltip text="Ask AI" :kbds="['meta', 'I']" ignore-non-keyboard-focus>
+        <UTooltip v-if="!chatOpen" text="Ask AI" :kbds="['meta', 'I']" ignore-non-keyboard-focus>
           <UButton
             color="neutral"
             variant="outline"
@@ -132,7 +125,11 @@ const shareOpen = ref(false)
             aria-label="Ask AI for help"
             class="hidden lg:inline-flex"
             @click="toggleChat"
-          />
+          >
+            <template #leading>
+              <NuxiIcon class="size-5 shrink-0" />
+            </template>
+          </UButton>
         </UTooltip>
 
         <UButton
@@ -185,9 +182,8 @@ const shareOpen = ref(false)
 
     <div class="flex flex-col bg-default rounded-xl overflow-hidden shadow ring ring-default h-[calc(100dvh-var(--ui-header-height)-0.5rem)] lg:h-[calc(100dvh-var(--ui-header-height)-var(--ui-header-height)-0.5rem)] mx-2">
       <!-- [contain:paint]: Chromium won't clip nested composited layers by
-             an ancestor's overflow alone. Keyed on the icon pack: demo views
-             resolve icons at setup, so a pack swap remounts to re-resolve. -->
-      <div :key="iconSet" class="flex-1 min-h-0 overflow-hidden *:contain-[paint]">
+             an ancestor's overflow alone -->
+      <div class="flex-1 min-h-0 overflow-hidden *:contain-[paint]">
         <Playground v-if="view === 'grid'" />
         <LazyThemeStudioViewDashboard v-else-if="view === 'dashboard'" />
         <LazyThemeStudioViewChat v-else-if="view === 'chat'" />
@@ -204,10 +200,6 @@ const shareOpen = ref(false)
          (min-w-0), so the toolbar inside it scrolls instead of widening the bar -->
     <UFooter class="hidden lg:block ring ring-default rounded-xl bg-default mx-2 mt-2" :ui="{ container: 'py-3! px-6!', left: 'mt-0 gap-0 lg:flex-none', center: 'flex-1 min-w-0 justify-start', right: 'mt-0 lg:flex-none' }">
       <template #left>
-        <!-- one cluster: these four move the whole theme, the controls beside
-             them each change one setting. Framed like the mode tabs' own track
-             at the other end, a size down on the buttons so both land at the
-             height of the plain controls between them. -->
         <div class="flex items-center gap-0.5 p-0.5 rounded-lg ring ring-default bg-elevated/50">
           <UTooltip text="Undo" :kbds="['meta', 'Z']">
             <UButton
@@ -233,7 +225,6 @@ const shareOpen = ref(false)
             />
           </UTooltip>
 
-          <!-- undo/redo step through history, the two beside them rewrite it -->
           <USeparator orientation="vertical" class="h-4 mx-0.5" />
 
           <ThemeStudioResetButton size="sm" />
@@ -247,7 +238,6 @@ const shareOpen = ref(false)
 
       <template #right>
         <UTooltip text="Switch color mode" :kbds="['d']">
-          <!-- framed like the history cluster, the bar's two ends match -->
           <ThemeStudioColorModeTabs
             data-keep-panels
             class="shrink-0"

@@ -1,10 +1,12 @@
 <script setup lang="ts">
+const studioIcons = useStudioIcons()
+
 const value = ref<string[]>(['4', '3', '2'])
 </script>
 
 <template>
   <div class="flex flex-col items-center gap-3 p-6 text-center">
-    <UIcon name="i-lucide-shield-check" class="size-7 text-primary" />
+    <UIcon :name="studioIcons.shieldCheck" class="size-7 text-primary" />
 
     <div>
       <p class="font-semibold text-highlighted">

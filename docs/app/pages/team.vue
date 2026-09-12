@@ -21,152 +21,181 @@ if (import.meta.server) {
   })
 }
 
-const { data: module } = await useFetch('/api/module.json')
-
-const contributors = computed(() => module.value?.contributors?.filter(contributor => !module.value?.team?.find(user => user.login === contributor.username)))
+const [{ data: module }, { data: github }] = await Promise.all([
+  useFetch('/api/module.json', { key: 'module', pick: ['stats'] }),
+  useFetch('/api/github/contributors.json')
+])
 
 const studioIcons = useStudioIcons()
+const appConfig = useAppConfig()
 
-// computed: the pack is read after mount, a plain object would freeze on Lucide
-const icons = computed<Record<string, string>>(() => ({
-  website: studioIcons.link,
+const { format } = Intl.NumberFormat('en')
+const { format: formatCompact } = Intl.NumberFormat('en', { notation: 'compact', maximumFractionDigits: 1 })
+
+// Every human contributor on GitHub, the round figure when the server had no
+// token to count them.
+const total = computed(() => (github.value?.total ? format(github.value.total) : '300+'))
+
+const stats = computed(() => [{
+  value: `${formatCompact(module.value?.stats?.downloads ?? 0)}+`,
+  label: 'monthly downloads',
+  to: 'https://npm.chart.dev/@nuxt/ui'
+}, {
+  value: `${formatCompact(module.value?.stats?.stars ?? 0)}+`,
+  label: 'GitHub stars',
+  to: 'https://github.com/nuxt/ui'
+}, {
+  value: total.value,
+  label: 'contributors',
+  to: 'https://github.com/nuxt/ui/graphs/contributors'
+}])
+
+const socialIcons = computed<Record<string, string>>(() => ({
   twitter: 'i-simple-icons-x',
-  twitch: 'i-simple-icons-twitch',
-  youtube: 'i-simple-icons-youtube',
-  instagram: 'i-simple-icons-instagram',
+  bluesky: 'i-simple-icons-bluesky',
   linkedin: 'i-simple-icons-linkedin',
   mastodon: 'i-simple-icons-mastodon',
-  bluesky: 'i-simple-icons-bluesky',
-  github: 'i-simple-icons-github'
+  youtube: 'i-simple-icons-youtube',
+  twitch: 'i-simple-icons-twitch',
+  instagram: 'i-simple-icons-instagram',
+  facebook: 'i-simple-icons-facebook',
+  reddit: 'i-simple-icons-reddit',
+  npm: 'i-simple-icons-npm',
+  github: 'i-simple-icons-github',
+  website: studioIcons.link
+}))
+
+const people = computed(() => (github.value?.contributors ?? []).map((contributor, index) => {
+  const name = contributor.name || contributor.username
+
+  return {
+    ...contributor,
+    name,
+    rank: String(index + 1).padStart(2, '0'),
+    links: [
+      ...(contributor.socialAccounts ?? []).map(account => ({
+        icon: socialIcons.value[account.provider] ?? socialIcons.value.website!,
+        to: account.url,
+        label: `${name} on ${account.provider}`
+      })),
+      { icon: socialIcons.value.github!, to: `https://github.com/${contributor.username}`, label: `${name} on GitHub` },
+      ...(contributor.websiteUrl ? [{ icon: socialIcons.value.website!, to: contributor.websiteUrl, label: `${name}'s website` }] : [])
+    ]
+  }
 }))
 </script>
 
 <template>
-  <main v-if="page">
-    <UPageHero
-      :title="page.hero.title"
-      :description="page.hero.description"
-      class="relative"
-      :ui="{
-        title: 'text-balance',
-        container: 'relative lg:py-32'
-      }"
-    >
-      <template #top>
-        <div class="absolute z-[-1] rounded-full bg-primary blur-[300px] size-60 sm:size-80 transform -translate-x-1/2 left-1/2 -translate-y-80" />
+  <UMain v-if="page">
+    <PageHero v-bind="page.hero">
+      <template #links>
+        <PageStats :items="stats" />
       </template>
+    </PageHero>
 
-      <LazyStarsBg />
-    </UPageHero>
+    <UContainer>
+      <UPage>
+        <UPageBody class="space-y-24">
+          <section>
+            <PageSectionHeading title="Everyone who ships it" meta="by contributions" />
 
-    <UPageSection :ui="{ container: '!pt-0' }">
-      <UPageGrid class="xl:grid-cols-4">
-        <UPageCard
-          v-for="(user, index) in module?.team"
-          :key="index"
-          :title="user.name"
-          :description="[user.pronouns, user.location].filter(Boolean).join(' ・ ')"
-          :ui="{
-            wrapper: 'items-center',
-            container: 'gap-y-4 lg:py-8',
-            leading: 'flex justify-center',
-            title: 'text-center',
-            description: 'text-center text-muted'
-          }"
-          variant="subtle"
-        >
-          <template #leading>
-            <UAvatar
-              :src="`https://ipx.nuxt.com/f_auto,s_80x80/gh_avatar/${user.login}`"
-              :srcset="`https://ipx.nuxt.com/f_auto,s_160x160/gh_avatar/${user.login} 2x`"
-              :alt="`${user.name} avatar`"
-              size="3xl"
-              class="mx-auto"
-            />
-          </template>
+            <ul class="divide-y divide-default">
+              <li
+                v-for="person in people"
+                :key="person.username"
+                class="flex items-center gap-4 sm:gap-6 py-4 first:pt-0 last:pb-0"
+              >
+                <span class="hidden sm:block w-5.5 shrink-0 font-mono text-xs text-muted">{{ person.rank }}</span>
 
-          <div class="flex items-center justify-center gap-1">
-            <UButton
-              v-for="(link, key) in user.socialAccounts"
-              :key="key"
-              color="neutral"
-              variant="link"
-              :to="link.url"
-              :icon="icons[key] || icons.website"
-              :aria-label="`Link to ${user.name}'s ${key} profile`"
-              target="_blank"
-              size="sm"
-            />
-            <UButton
-              :to="`https://github.com/${user.login}`"
-              color="neutral"
-              variant="link"
-              :aria-label="`Link to ${user.name}'s GitHub profile`"
-              :icon="icons.github"
-              target="_blank"
-            />
-            <UButton
-              v-if="user.websiteUrl"
-              :to="user.websiteUrl"
-              color="neutral"
-              variant="link"
-              :aria-label="`Link to ${user.name}'s personal website`"
-              :icon="icons.website"
-              target="_blank"
-            />
-          </div>
-          <div v-if="user.sponsorsListing" class="flex items-center justify-center">
-            <UButton
-              :to="user.sponsorsListing"
-              target="_blank"
-              color="neutral"
-              variant="subtle"
-              :icon="studioIcons.heart"
-              label="Sponsor"
-              :ui="{ leadingIcon: 'text-pink-500 dark:text-pink-400' }"
-            />
-          </div>
-        </UPageCard>
-      </UPageGrid>
+                <UAvatar
+                  :src="`https://ipx.nuxt.com/f_auto,s_104x104/gh_avatar/${person.username}`"
+                  :srcset="`https://ipx.nuxt.com/f_auto,s_208x208/gh_avatar/${person.username} 2x`"
+                  :alt="`${person.name} avatar`"
+                  size="3xl"
+                  class="size-13 shrink-0 ring ring-default"
+                  loading="lazy"
+                />
 
-      <ProseHr />
+                <div class="flex-1 md:flex-none md:w-86 min-w-0 flex flex-col gap-0.5">
+                  <span class="text-base sm:text-lg font-semibold leading-tight tracking-tight text-highlighted truncate">{{ person.name }}</span>
+                  <span v-if="person.location" class="flex items-center gap-1.5 text-[13px] text-muted whitespace-nowrap min-w-0">
+                    <UIcon :name="studioIcons.mapPin" class="size-3 text-dimmed shrink-0" />
+                    <span class="truncate">{{ person.location }}</span>
+                  </span>
+                </div>
 
-      <UPageGrid class="xl:grid-cols-6">
-        <UPageCard
-          v-for="contributor in contributors"
-          :key="contributor.username"
-          :title="contributor.username"
-          :ui="{
-            wrapper: 'items-center',
-            container: 'gap-y-2',
-            leading: 'flex justify-center',
-            title: 'text-center',
-            description: 'text-center text-muted'
-          }"
-        >
-          <template #leading>
-            <UAvatar
-              :src="`https://ipx.nuxt.com/f_auto,s_80x80/gh_avatar/${contributor.username}`"
-              :srcset="`https://ipx.nuxt.com/f_auto,s_160x160/gh_avatar/${contributor.username} 2x`"
-              :alt="`${contributor.username} avatar`"
-              size="3xl"
-              class="mx-auto"
-              loading="lazy"
-            />
-          </template>
+                <div class="hidden md:flex gap-0.5">
+                  <UButton
+                    v-for="link in person.links"
+                    :key="link.to"
+                    :to="link.to"
+                    :icon="link.icon"
+                    :aria-label="link.label"
+                    target="_blank"
+                    color="neutral"
+                    variant="ghost"
+                    size="sm"
+                    class="text-muted hover:text-highlighted"
+                  />
 
-          <div class="flex items-center justify-center gap-1">
-            <UButton
-              :to="`https://github.com/${contributor.username}`"
-              color="neutral"
-              variant="link"
-              :aria-label="`Link to ${contributor.username}'s GitHub profile`"
-              :icon="icons.github"
-              target="_blank"
-            />
-          </div>
-        </UPageCard>
-      </UPageGrid>
-    </UPageSection>
-  </main>
+                  <UButton
+                    v-if="person.sponsorsListing"
+                    :to="person.sponsorsListing"
+                    target="_blank"
+                    color="neutral"
+                    variant="ghost"
+                    size="sm"
+                    :aria-label="`Sponsor ${person.name}`"
+                    :icon="studioIcons.heart"
+                    :ui="{ leadingIcon: 'text-pink-500' }"
+                  />
+                </div>
+
+                <div class="ms-auto flex items-baseline gap-1 shrink-0">
+                  <span class="text-base font-semibold leading-none tracking-tight tabular-nums text-highlighted">{{ format(person.contributions) }}</span>
+                  <span class="text-xs text-muted whitespace-nowrap">contributions</span>
+                </div>
+              </li>
+            </ul>
+          </section>
+
+          <section>
+            <div class="relative overflow-hidden rounded-2xl border border-default bg-linear-to-b from-default to-(--ui-bg-elevated)/60 px-8 py-10 sm:px-13 sm:py-12 flex flex-col lg:flex-row lg:items-center gap-8 lg:gap-10">
+              <div class="absolute inset-0 pointer-events-none bg-[radial-gradient(var(--ui-border-accented)_1px,transparent_1px)] bg-[size:26px_26px] opacity-50 [mask-image:radial-gradient(80%_120%_at_90%_50%,black,transparent_70%)]" />
+
+              <div class="relative flex flex-col gap-2">
+                <h2 class="text-2xl sm:text-3xl font-semibold leading-tight tracking-tight text-highlighted">
+                  {{ total }} people have shipped Nuxt UI
+                </h2>
+                <p class="text-[15px] text-muted">
+                  Issues, docs, translations and pull requests all count.
+                </p>
+              </div>
+
+              <div class="relative lg:ms-auto flex flex-wrap gap-2.5 shrink-0">
+                <UButton
+                  size="lg"
+                  color="neutral"
+                  variant="outline"
+                  label="See all contributors"
+                  :trailing-icon="appConfig.ui.icons.arrowRight"
+                  to="https://github.com/nuxt/ui/graphs/contributors"
+                  target="_blank"
+                  :ui="{ trailingIcon: 'text-dimmed' }"
+                />
+                <UButton
+                  size="lg"
+                  color="neutral"
+                  icon="i-simple-icons-github"
+                  label="Contribute"
+                  to="https://github.com/nuxt/ui"
+                  target="_blank"
+                />
+              </div>
+            </div>
+          </section>
+        </UPageBody>
+      </UPage>
+    </UContainer>
+  </UMain>
 </template>

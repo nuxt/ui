@@ -45,3 +45,4 @@ allowBuilds:
 
 minimumReleaseAgeExclude:
   - 'nuxt-agent-discovery@0.4.0'
+  - 'shiki-transformer-icon-highlight@0.2.0'

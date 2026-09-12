@@ -21,16 +21,15 @@ const type = computed(() => {
   return type
 })
 
-const ast = ref<any>(null)
-
-onMounted(async () => {
-  ast.value = await cachedParseMarkdown(`\`\` ${type.value} \`\`{lang="ts-type"}`)
-})
+// Inline code carrying the type, which resolves to ProseCode. A double backtick
+// span only when the type holds one of its own: comark leaks a `_` out of the
+// span when the content has an odd number of them, which the reka-ui
+// `_Number<_Optional<...>>` modifiers hit.
+const markdown = computed(() => type.value.includes('`')
+  ? `\`\` ${type.value} \`\`{lang="ts-type"}`
+  : `\`${type.value}\`{lang="ts-type"}`)
 </script>
 
 <template>
-  <MDCRenderer v-if="ast" :body="ast.body" :data="ast.data" />
-  <ProseCode v-else>
-    {{ type }}
-  </ProseCode>
+  <DocsMarkdown :value="markdown" unwrap="p" />
 </template>

@@ -1,7 +1,10 @@
 <script setup lang="ts">
 const route = useRoute()
 const toast = useToast()
+// `copied` drives the Copy page button, so the link copy takes its own
+// clipboard: its feedback is the toast
 const { copy, copied } = useClipboard()
+const { copy: copyLink } = useClipboard()
 const site = useSiteConfig()
 const { track } = useAnalytics()
 const appConfig = useAppConfig()
@@ -16,7 +19,7 @@ const items = computed(() => [
     icon: studioIcons.link,
     onSelect() {
       track('Page Action', { action: 'Copy Markdown Link', page: route.path })
-      copy(mdPath.value)
+      copyLink(mdPath.value)
       toast.add({
         title: 'Copied to clipboard',
         icon: appConfig.ui.icons.success

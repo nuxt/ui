@@ -35,6 +35,18 @@ const panelOpen = computed({
 
 let _skipSync = false
 const _themeApplied = new Set<string>()
+
+// The conversation is restored from a past session with its tool calls in
+// it. Those were applied back then and the theme they produced persists on
+// its own, so they count as seen from the start: otherwise the next answer's
+// stream would replay every one of them over whatever theme is on screen
+// now, a shared link's for one.
+for (const message of messages.value) {
+  for (const part of message.parts || []) {
+    if (isToolUIPart(part)) _themeApplied.add(part.toolCallId)
+  }
+}
+
 function processThemeToolCalls() {
   for (const message of chatMessages.value) {
     if (message.role !== 'assistant') continue
@@ -163,6 +175,7 @@ function getToolMessage(state: ToolState, toolName: string, input: Record<string
     'get-example': `${readVerb} ${upperName(input.exampleName || '')} example`,
     'getComponentTheme': `${readVerb} ${upperName(input.componentName || '')} theme`,
     'getThemeGuide': `${readVerb} theme guide`,
+    'searchFonts': `${searchVerb} fonts${input.category ? ` (${input.category})` : ''}${input.query ? ` for "${input.query}"` : ''}`,
     'applyTheme': `${applyVerb} theme changes`,
     // a preset carries its own display name; upperName is for camelCase
     // component ids and would mangle a hyphenated one
@@ -191,6 +204,7 @@ function getToolIcon(part: ToolPart): string {
     'get-example': appConfig.ui.icons.file,
     'getComponentTheme': appConfig.ui.icons.file,
     'getThemeGuide': studioIcons.palette,
+    'searchFonts': studioIcons.text,
     'applyTheme': studioIcons.palette,
     'applyPreset': studioIcons.palette,
     'resetTheme': studioIcons.reset
@@ -278,7 +292,7 @@ function clearMessages() {
 
       <UTooltip v-if="canClear" text="Clear messages">
         <UButton
-          icon="i-lucide-list-x"
+          :icon="studioIcons.clear"
           color="neutral"
           variant="ghost"
           @click="clearMessages"
@@ -289,7 +303,7 @@ function clearMessages() {
     <template #close>
       <UTooltip text="Close" :kbds="['meta', 'i']">
         <UButton
-          icon="i-lucide-panel-right-close"
+          :icon="studioIcons.panelRightClose"
           color="neutral"
           variant="ghost"
           aria-label="Close"
@@ -334,7 +348,7 @@ function clearMessages() {
         :user="{ ui: { container: 'max-w-full' } }"
       >
         <template #indicator>
-          <UChatTool icon="i-lucide-brain" text="Thinking..." streaming />
+          <UChatTool :icon="studioIcons.brain" text="Thinking..." streaming />
         </template>
 
         <template #content="{ message }">
@@ -343,7 +357,7 @@ function clearMessages() {
               v-if="isReasoningUIPart(part)"
               :text="part.text"
               :streaming="isPartStreaming(part)"
-              icon="i-lucide-brain"
+              :icon="studioIcons.brain"
             >
               <ChatMarkdown
                 :value="part.text"

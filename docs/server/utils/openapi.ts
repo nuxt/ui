@@ -248,17 +248,37 @@ export function createOpenApiDocument(options: { version: string, url?: string, 
         get: {
           operationId: 'getReleases',
           tags: ['GitHub'],
-          summary: 'Recent releases',
-          description: 'Releases of `nuxt/ui` as returned by the GitHub API, excluding v2. Empty when the server has no GitHub token configured.',
+          summary: 'Releases',
+          description: 'Releases of `nuxt/ui`, newest first, v2 left out. The notes are served per release by `/api/github/releases/{tag}`. Cached for an hour.',
           responses: {
             200: {
-              description: 'GitHub release objects.',
+              description: 'Releases, newest first.',
               content: {
                 'application/json': {
-                  schema: { type: 'array', items: { $ref: '#/components/schemas/GitHubObject' } }
+                  schema: { type: 'array', items: { $ref: '#/components/schemas/Release' } }
                 }
               }
             }
+          }
+        }
+      },
+      '/api/github/releases/{tag}': {
+        get: {
+          operationId: 'getReleaseNotes',
+          tags: ['GitHub'],
+          summary: 'Release notes',
+          description: 'One release with its notes, which the list route leaves out.',
+          parameters: [{ name: 'tag', in: 'path', required: true, schema: { type: 'string', example: 'v4.0.0' } }],
+          responses: {
+            200: {
+              description: 'The release and its notes.',
+              content: {
+                'application/json': {
+                  schema: { $ref: '#/components/schemas/ReleaseNotes' }
+                }
+              }
+            },
+            404: jsonError('No release has that tag.')
           }
         }
       },
@@ -274,6 +294,24 @@ export function createOpenApiDocument(options: { version: string, url?: string, 
               content: {
                 'application/json': {
                   schema: { type: 'array', items: { $ref: '#/components/schemas/GitHubObject' } }
+                }
+              }
+            }
+          }
+        }
+      },
+      '/api/github/contributors.json': {
+        get: {
+          operationId: 'getContributors',
+          tags: ['GitHub'],
+          summary: 'Top contributors',
+          description: 'The most active contributors of `nuxt/ui` with their public GitHub profile, most contributions first, plus the total contributor count. Without a GitHub token on the server the list comes from nuxt.com and the total is null.',
+          responses: {
+            200: {
+              description: 'Contributor count and profiles.',
+              content: {
+                'application/json': {
+                  schema: { $ref: '#/components/schemas/Contributors' }
                 }
               }
             }
@@ -332,6 +370,9 @@ export function createOpenApiDocument(options: { version: string, url?: string, 
             framework: { type: 'string' },
             category: { type: 'string' },
             description: { type: 'string' },
+            // an entry that links out instead of rendering a page
+            to: { type: 'string' },
+            target: { type: 'string' },
             children: {
               type: 'array',
               items: { $ref: '#/components/schemas/NavigationItem' }
@@ -362,12 +403,47 @@ export function createOpenApiDocument(options: { version: string, url?: string, 
             },
             contributors: {
               type: 'array',
+              description: 'GitHub contributors of `nuxt/ui`, most contributions first.',
               items: {
                 type: 'object',
-                properties: { username: { type: 'string' } }
+                properties: {
+                  id: { type: 'integer', description: 'GitHub user id.' },
+                  username: { type: 'string' },
+                  contributions: { type: 'integer', description: 'Commit count on the repository.' }
+                }
               }
             }
           }
+        },
+        Contributors: {
+          type: 'object',
+          properties: {
+            total: { type: ['integer', 'null'], description: 'Human contributors on GitHub, null when the server could not count them.' },
+            contributors: { type: 'array', items: { $ref: '#/components/schemas/Contributor' } }
+          },
+          required: ['total', 'contributors']
+        },
+        Contributor: {
+          type: 'object',
+          properties: {
+            username: { type: 'string' },
+            contributions: { type: 'integer', description: 'Commit count on the repository.' },
+            name: { type: 'string' },
+            location: { type: 'string' },
+            websiteUrl: { type: 'string', format: 'uri' },
+            socialAccounts: {
+              type: 'array',
+              items: {
+                type: 'object',
+                properties: {
+                  provider: { type: 'string', description: 'Lowercased GitHub provider name, e.g. `twitter`, `bluesky`.' },
+                  url: { type: 'string', format: 'uri' }
+                }
+              }
+            },
+            sponsorsListing: { type: 'string', format: 'uri' }
+          },
+          required: ['username', 'contributions']
         },
         ComponentExample: {
           type: 'object',
@@ -397,6 +473,28 @@ export function createOpenApiDocument(options: { version: string, url?: string, 
             mask: { type: 'string', example: '# ## ## ## ##' }
           },
           required: ['name', 'code', 'dialCode']
+        },
+        Release: {
+          type: 'object',
+          properties: {
+            tag: { type: 'string', example: 'v4.0.0' },
+            title: { type: 'string', description: 'Release name, its tag when the release has none.' },
+            date: { type: 'string', format: 'date-time', description: 'Publication date.' },
+            url: { type: 'string', format: 'uri', description: 'The release on GitHub.' }
+          },
+          required: ['tag', 'title', 'date', 'url']
+        },
+        ReleaseNotes: {
+          allOf: [
+            { $ref: '#/components/schemas/Release' },
+            {
+              type: 'object',
+              properties: {
+                markdown: { type: 'string', description: 'The release notes, as GitHub stores them.' }
+              },
+              required: ['markdown']
+            }
+          ]
         },
         Commit: {
           type: 'object',
