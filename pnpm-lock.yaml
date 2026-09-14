@@ -336,13 +336,13 @@ importers:
         specifier: ^1.2.14
         version: 1.2.14
       '@iconify-json/lucide':
-        specifier: ^1.2.131
+        specifier: ^1.2.132
         version: 1.2.132
       '@iconify-json/ph':
         specifier: ^1.2.2
         version: 1.2.2
       '@iconify-json/simple-icons':
-        specifier: ^1.2.95
+        specifier: ^1.2.96
         version: 1.2.96
       '@iconify-json/tabler':
         specifier: ^1.2.38
@@ -511,10 +511,10 @@ importers:
         specifier: ^0.7.0
         version: 0.7.0(shiki@4.4.3)(vue@3.5.42(typescript@6.0.3))
       '@iconify-json/lucide':
-        specifier: ^1.2.131
+        specifier: ^1.2.132
         version: 1.2.132
       '@iconify-json/simple-icons':
-        specifier: ^1.2.95
+        specifier: ^1.2.96
         version: 1.2.96
       '@internationalized/date':
         specifier: ^3.12.4
@@ -619,7 +619,7 @@ importers:
         version: 4.6.4
     devDependencies:
       '@iconify-json/lucide':
-        specifier: ^1.2.131
+        specifier: ^1.2.132
         version: 1.2.132
       '@vitejs/plugin-vue':
         specifier: ^6.0.8
