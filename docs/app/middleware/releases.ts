@@ -15,9 +15,9 @@ export default defineNuxtRouteMiddleware(async (to) => {
       releases.value = list.filter(release => DOCUMENTED.test(release.tag))
     } catch (error) {
       // GitHub can be unreachable: the page renders an empty state rather than
-      // failing every navigation and the prerender crawl with it
+      // failing every navigation and the prerender crawl with it, and a list
+      // loaded earlier stays
       console.warn('[releases] could not load the release list', error)
-      releases.value = []
     }
   }
 
