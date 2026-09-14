@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import type { ContentNavigationItem } from '@nuxt/content'
 import { parseMarkdownDoc } from '../../../utils/markdown'
 import type { MarkdownDoc } from '../../../utils/markdown'
 
@@ -8,7 +7,7 @@ import type { MarkdownDoc } from '../../../utils/markdown'
  * versions are the section nav (loaded by the `releases` middleware so the
  * layout's aside has them at render) and the notes' headings the table of
  * contents. /docs/releases is the latest, older ones live under their tag.
- * The content stub at 5.releases/1.index.md gives the section its tab and copy.
+ * The content stub at 5.releases/1.index.md gives the section its tab.
  */
 definePageMeta({
   layout: 'docs',
@@ -17,15 +16,11 @@ definePageMeta({
 
 const route = useRoute()
 
-const { data: page } = await useAsyncData('docs-releases', () => queryCollection('docs').path('/docs/releases').first())
-if (!page.value) {
-  throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
-}
-
 const releases = useReleases()
 
 const index = route.params.tag ? releases.value.findIndex(entry => entry.tag === route.params.tag) : 0
 const release = releases.value[index]
+
 // A tag no version answers to is a 404. An empty list is GitHub being
 // unreachable, which the page says instead of erroring.
 if (!release && releases.value.length) {
@@ -54,11 +49,6 @@ const { data: ast } = await useAsyncData(`release-${release?.tag ?? 'unavailable
 })
 const notes = computed(() => ast.value as MarkdownDoc | null)
 
-const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
-const { findBreadcrumb } = useNavigation(navigation!)
-
-const breadcrumb = computed(() => findBreadcrumb('/docs/releases'))
-
 // Formatted in UTC, the timezone GitHub publishes in: a local one would move a
 // release published late in the day to another date for readers east of UTC.
 const formatDate = (value: string) => new Date(value).toLocaleDateString('en', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' })
@@ -73,16 +63,18 @@ const surround = release
     })
   : []
 
-// Without a release the header carries the section's own copy.
-const title = release?.title ?? page.value.title
-const description = release ? `Released on ${date}` : page.value.description
+// Without a release the header carries the section's own copy, which the
+// meta tags use on every page.
+const sectionDescription = 'Stay up to date with the newest features, enhancements, and fixes for Nuxt UI.'
+const title = release?.title ?? 'Releases'
+const description = release ? `Released on ${date}` : sectionDescription
 
 useSeoMeta({
   titleTemplate: '%s - Nuxt UI',
   title: release ? `${title} - Releases` : title,
-  description: page.value.description,
+  description: sectionDescription,
   ogTitle: release ? `${title} - Releases - Nuxt UI` : `${title} - Nuxt UI`,
-  ogDescription: page.value.description
+  ogDescription: sectionDescription
 })
 
 useCanonical()
@@ -99,6 +91,7 @@ if (import.meta.server) {
 <template>
   <UPage>
     <UPageHeader
+      :headline="release ? 'Releases' : undefined"
       :title="title"
       :description="description"
       :links="[{
@@ -109,11 +102,7 @@ if (import.meta.server) {
         color: 'neutral',
         variant: 'outline'
       }]"
-    >
-      <template #headline>
-        <UBreadcrumb :items="breadcrumb" />
-      </template>
-    </UPageHeader>
+    />
 
     <UPageBody>
       <DocsMarkdown v-if="notes" :value="notes" />

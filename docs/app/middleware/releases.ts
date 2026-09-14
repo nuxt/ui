@@ -4,7 +4,9 @@
  */
 export default defineNuxtRouteMiddleware(async (to) => {
   const releases = useReleases()
-  if (!releases.value.length) {
+  // a tag the list doesn't know may have been published since it was loaded
+  const known = !to.params.tag || releases.value.some(release => release.tag === to.params.tag)
+  if (!releases.value.length || !known) {
     try {
       // typed explicitly: assigning the route's inferred type straight to the
       // state ref sends TypeScript down its route table

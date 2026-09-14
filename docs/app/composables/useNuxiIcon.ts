@@ -329,10 +329,13 @@ export function useNuxiIcon(props: NuxiIconProps, emit?: EmitFn) {
     const dy = e.clientY - cy
     const dist = Math.sqrt(dx * dx + dy * dy)
 
-    if (dist < PROXIMITY_RADIUS && dist > 1) {
-      const strength = ((PROXIMITY_RADIUS - dist) / PROXIMITY_RADIUS) * 9
-      rawOffset.x = (dx / dist) * strength
-      rawOffset.y = (dy / dist) * strength
+    if (dist < PROXIMITY_RADIUS) {
+      // dead centre has no direction to look in, the last offset holds
+      if (dist > 1) {
+        const strength = ((PROXIMITY_RADIUS - dist) / PROXIMITY_RADIUS) * 9
+        rawOffset.x = (dx / dist) * strength
+        rawOffset.y = (dy / dist) * strength
+      }
       isInProximity.value = true
 
       if (internalMood.value === 'sleeping' && !props.mood) {

@@ -62,7 +62,8 @@ export function useHeader() {
   }, {
     label: 'Blog',
     icon: studioIcons.newspaper,
-    to: '/blog'
+    to: '/blog',
+    active: route.path.startsWith('/blog')
   }, {
     label: 'Team',
     icon: studioIcons.users,
