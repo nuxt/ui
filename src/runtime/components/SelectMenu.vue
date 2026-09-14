@@ -491,6 +491,19 @@ function onUpdateOpen(value: boolean) {
   }
 }
 
+// `ComboboxTrigger` only toggles on click, unlike `ComboboxInput` which opens on arrow keys.
+// Since the trigger is the focusable element here, replicate the same behavior.
+function onTriggerKeydown(e: KeyboardEvent) {
+  if (isOpen.value) {
+    return
+  }
+
+  const trigger = e.currentTarget as HTMLElement
+
+  e.preventDefault()
+  trigger.click()
+}
+
 function onCreate(e: Event) {
   e.preventDefault()
   e.stopPropagation()
@@ -649,6 +662,8 @@ defineExpose({
         :class="ui.base({ class: [props.ui?.base, props.class] })"
         tabindex="0"
         v-bind="{ ...$attrs, ...ariaAttrs }"
+        @keydown.down="onTriggerKeydown"
+        @keydown.up="onTriggerKeydown"
       >
         <span v-if="isLeading || !!props.avatar || !!slots.leading" data-slot="leading" :class="ui.leading({ class: props.ui?.leading })">
           <slot name="leading" :model-value="(modelValue as ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>)" :open="open" :ui="ui">
