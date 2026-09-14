@@ -44,13 +44,11 @@ if (import.meta.server) {
               :to="post.path"
               :title="post.title"
               :description="post.description"
-              :image="post.image"
               :date="post.date"
               :badge="post.category"
               :authors="post.authors?.map(author => ({ ...author, target: '_blank' }))"
-              orientation="horizontal"
               variant="naked"
-              :ui="{ root: 'lg:grid-cols-[auto_1fr] lg:gap-x-9', header: 'lg:w-110 rounded-md border border-default shadow-none' }"
+              class="rounded-none"
             />
           </UBlogPosts>
         </UPageBody>

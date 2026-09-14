@@ -96,11 +96,19 @@ const ui = {
 
     <template v-if="badge" #headline>
       <UButton
-        as="span"
+        v-if="badge.to"
         color="primary"
         variant="soft"
         v-bind="badge"
         size="xs"
+        class="rounded-full"
+      />
+      <UBadge
+        v-else
+        color="primary"
+        variant="soft"
+        v-bind="badge"
+        size="md"
         class="rounded-full"
       />
     </template>
