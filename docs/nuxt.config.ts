@@ -94,7 +94,7 @@ export default defineNuxtConfig({
     '/docs': { redirect: '/docs/getting-started', prerender: false },
     '/docs/getting-started/migration': { redirect: '/docs/getting-started/migration/v4', prerender: false },
     // the v2 to v3 guide lives with the v3 docs now
-    '/docs/getting-started/migration/v3': { redirect: 'https://ui3.nuxt.com/getting-started/migration', prerender: false },
+    '/docs/getting-started/migration/v3': { redirect: { to: 'https://ui3.nuxt.com/getting-started/migration', statusCode: 301 }, prerender: false },
     // llms.txt advertised its Markdown twin, which has no page to serve it now
     '/raw/docs/getting-started/migration/v3.md': { redirect: { to: 'https://ui3.nuxt.com/getting-started/migration', statusCode: 301 }, prerender: false },
     '/docs/getting-started/theme': { redirect: '/docs/getting-started/theme/design-system', prerender: false },

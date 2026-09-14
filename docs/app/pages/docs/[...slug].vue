@@ -16,6 +16,13 @@ if (!page.value) {
   throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
 }
 
+// A page that is only a link in the sidebar, like Figma. The route rule sends
+// full requests along, this catches client side navigations to it.
+const externalTo = (page.value as { to?: string }).to
+if (externalTo) {
+  await navigateTo(externalTo, { external: true, replace: true })
+}
+
 // Update the framework if the page has different one
 watch(page, () => {
   if (page.value?.framework && page.value?.framework !== framework.value) {

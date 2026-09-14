@@ -41,9 +41,16 @@ const { data: ast } = await useAsyncData(`release-${release?.tag ?? 'unavailable
     return null
   }
 
-  const { markdown } = await $fetch(`/api/github/releases/${release.tag}`)
+  // GitHub being unreachable leaves the page with the unavailable notice
+  // instead of erroring the whole route.
+  try {
+    const { markdown } = await $fetch(`/api/github/releases/${release.tag}`)
 
-  return await parseMarkdownDoc(linkMentions(markdown))
+    return await parseMarkdownDoc(linkMentions(markdown))
+  } catch (error) {
+    console.warn('[releases] could not load the notes', error)
+    return null
+  }
 })
 const notes = computed(() => ast.value as MarkdownDoc | null)
 

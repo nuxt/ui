@@ -7,7 +7,7 @@ export interface Contributor {
   name?: string
   location?: string
   websiteUrl?: string
-  /** Provider as GitHub names it, lowercased (`twitter`, `bluesky`, `linkedin`, ...). */
+  /** Provider lowercased, `x` normalised to `twitter` (`bluesky`, `linkedin`, ...). */
   socialAccounts?: { provider: string, url: string }[]
   sponsorsListing?: string
 }
@@ -57,6 +57,12 @@ function location(value?: string | null) {
   return value && !['undefined', 'null'].includes(value.trim().toLowerCase()) ? value : undefined
 }
 
+/** Both sources feed the same icon map, so `x` and `X` land on `twitter`. */
+function normalizeProvider(provider: string) {
+  const name = provider.toLowerCase()
+  return name === 'x' ? 'twitter' : name
+}
+
 /** One GraphQL query for the whole batch, an alias per login. */
 async function fetchProfiles(octokit: Octokit, logins: string[]) {
   const query = `query { ${logins.map((login, index) => `u${index}: user(login: ${JSON.stringify(login)}) { ...Profile }`).join(' ')} }
@@ -66,8 +72,13 @@ fragment Profile on User { name location websiteUrl socialAccounts(first: 10) { 
   try {
     data = await octokit.graphql<Record<string, Profile | null>>(query)
   } catch (error) {
-    // a deleted account fails its own alias only, the rest still resolve
-    data = (error as { data?: Record<string, Profile | null> }).data ?? {}
+    // a deleted account fails its own alias only, the rest still resolve, so
+    // keep the partial payload when there is one and let a real failure through
+    const partial = (error as { data?: Record<string, Profile | null> }).data
+    if (!partial) {
+      throw error
+    }
+    data = partial
   }
 
   return Object.fromEntries(logins.map((login, index) => [login, data[`u${index}`] ?? null]))
@@ -92,7 +103,7 @@ async function fromGitHub(token: string): Promise<Contributors> {
         name: profile?.name || undefined,
         location: location(profile?.location),
         websiteUrl: absolute(profile?.websiteUrl),
-        socialAccounts: profile?.socialAccounts.nodes.map(account => ({ provider: account.provider.toLowerCase(), url: account.url })),
+        socialAccounts: profile?.socialAccounts.nodes.map(account => ({ provider: normalizeProvider(account.provider), url: account.url })),
         sponsorsListing: profile?.hasSponsorsListing ? `https://github.com/sponsors/${contributor.login}` : undefined
       }
     })
@@ -120,7 +131,7 @@ async function fromNuxtCom(): Promise<Contributors> {
           name: member?.name,
           location: location(member?.location),
           websiteUrl: absolute(member?.websiteUrl),
-          socialAccounts: member?.socialAccounts ? Object.entries(member.socialAccounts).map(([provider, account]) => ({ provider, url: account.url })) : [],
+          socialAccounts: member?.socialAccounts ? Object.entries(member.socialAccounts).map(([provider, account]) => ({ provider: normalizeProvider(provider), url: account.url })) : [],
           sponsorsListing: member?.sponsorsListing
         }
       })
