@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const studioIcons = useStudioIcons()
 
-const items = [
+const items = computed(() => [
   {
     label: 'Account',
     icon: studioIcons.user,
@@ -12,7 +12,7 @@ const items = [
     icon: studioIcons.lock,
     slot: 'password'
   }
-]
+])
 
 const state = reactive({
   name: 'Benjamin Canac',

@@ -3,6 +3,9 @@ import { Markdown } from '@comark/vue'
 import shiki from '@comark/vue/plugins/shiki'
 import type { ContentNavigationLink, ContentSurroundLink, DropdownMenuItem, PageLink } from '@nuxt/ui'
 
+// built once: in the template it would be a new plugin on every render
+const plugins = [shiki()]
+
 const appConfig = useAppConfig()
 const studioIcons = useStudioIcons()
 
@@ -10,7 +13,7 @@ const studioIcons = useStudioIcons()
 // `title`, and `active` forces the state without a route, so the tree is a
 // static array. Paths are empty so nothing navigates out of the studio: the
 // type wants the key, and both the mapper and ULink drop a falsy one.
-const navLinks: ContentNavigationLink[] = [{
+const navLinks = computed<ContentNavigationLink[]>(() => [{
   path: '',
   title: 'Getting Started',
   children: [
@@ -34,7 +37,7 @@ const navLinks: ContentNavigationLink[] = [{
     { path: '', title: 'MCP Server', icon: studioIcons.cpu },
     { path: '', title: 'LLMs Integration', icon: appConfig.ui.icons.file }
   ]
-}]
+}])
 
 // The template's prev/next pair, inert for the same reason.
 const surround: ContentSurroundLink[] = [{
@@ -49,12 +52,12 @@ const surround: ContentSurroundLink[] = [{
 }]
 
 // PageHeaderLinks dropdown, minus the real clipboard / external navigations.
-const copyItems: DropdownMenuItem[] = [
+const copyItems = computed<DropdownMenuItem[]>(() => [
   { label: 'Copy Markdown link', icon: studioIcons.link },
   { label: 'View as Markdown', icon: 'i-simple-icons:markdown' },
   { label: 'Open in ChatGPT', icon: 'i-simple-icons:openai' },
   { label: 'Open in Claude', icon: 'i-simple-icons:anthropic' }
-]
+])
 
 // Right column: UContentToc is content-coupled and router-driven, so the
 // same sticky layout is hand-rolled with faked active states.
@@ -70,11 +73,11 @@ const tocLinks = [
   }
 ]
 
-const communityLinks: PageLink[] = [
+const communityLinks = computed<PageLink[]>(() => [
   { label: 'Edit this page', icon: appConfig.ui.icons.external },
   { label: 'Star on GitHub', icon: appConfig.ui.icons.star },
   { label: 'Nuxt UI docs', icon: studioIcons.bookOpen }
-]
+])
 
 /**
  * The template's `content/1.getting-started/3.usage.md`, verbatim. It renders
@@ -226,7 +229,7 @@ export default defineAppConfig({
             <UIcon :name="appConfig.ui.icons.light" :class="ui.leadingIcon({ class: 'dark:hidden' })" />
           </template>
         </UButton>
-        <UButton :icon="studioIcons.github" aria-label="GitHub" color="neutral" variant="ghost" />
+        <UButton icon="i-simple-icons-github" aria-label="GitHub" color="neutral" variant="ghost" />
       </template>
     </UHeader>
 
@@ -271,7 +274,7 @@ export default defineAppConfig({
           </UPageHeader>
 
           <UPageBody>
-            <Markdown :value="content" :plugins="[shiki()]" />
+            <Markdown :value="content" :plugins="plugins" />
 
             <USeparator />
 
@@ -318,7 +321,7 @@ export default defineAppConfig({
       </UPage>
     </UContainer>
 
-    <UFooter>
+    <UFooter class="border-t border-default">
       <template #left>
         <p class="text-sm text-muted">
           Built with Nuxt UI • © 2026
@@ -328,7 +331,7 @@ export default defineAppConfig({
       <template #right>
         <UButton icon="i-simple-icons-discord" aria-label="Discord" color="neutral" variant="ghost" />
         <UButton icon="i-simple-icons-x" aria-label="X" color="neutral" variant="ghost" />
-        <UButton :icon="studioIcons.github" aria-label="GitHub" color="neutral" variant="ghost" />
+        <UButton icon="i-simple-icons-github" aria-label="GitHub" color="neutral" variant="ghost" />
       </template>
     </UFooter>
   </div>

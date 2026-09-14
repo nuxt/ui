@@ -88,7 +88,7 @@ const user = {
   avatar: { src: 'https://github.com/benjamincanac.png', alt: 'Benjamin Canac' }
 }
 
-const userItems: DropdownMenuItem[][] = [[{
+const userItems = computed<DropdownMenuItem[][]>(() => [[{
   type: 'label',
   label: user.name,
   avatar: user.avatar
@@ -98,12 +98,12 @@ const userItems: DropdownMenuItem[][] = [[{
   { label: 'Settings', icon: studioIcons.settings }
 ], [
   { label: 'Log out', icon: studioIcons.logout }
-]]
+]])
 
-const newItems: DropdownMenuItem[][] = [[
+const newItems = computed<DropdownMenuItem[][]>(() => [[
   { label: 'New mail', icon: studioIcons.send },
   { label: 'New customer', icon: studioIcons.userPlus }
-]]
+]])
 
 // lowercase like the template, capitalized back through the select's `ui`
 const periodItems = ['daily', 'weekly', 'monthly']
@@ -153,12 +153,12 @@ function selectDateRange(range: DateRangePreset) {
 }
 const period = ref('daily')
 
-const stats = [
+const stats = computed(() => [
   { title: 'Customers', icon: studioIcons.users, value: '892', variation: 14 },
   { title: 'Conversions', icon: studioIcons.chart, value: '1,436', variation: 8 },
   { title: 'Revenue', icon: studioIcons.dollar, value: '$312,540', variation: 23 },
   { title: 'Orders', icon: studioIcons.cart, value: '254', variation: -5 }
-]
+])
 
 const revenue = [6200, 7400, 6800, 9100, 8600, 10400, 9800, 11900, 11200, 13000, 12400, 14100, 13600, 15200]
 const revenueMin = Math.min(...revenue)
@@ -299,12 +299,12 @@ watch(filteredMails, () => {
   }
 })
 
-const mailDropdownItems: DropdownMenuItem[][] = [[
+const mailDropdownItems = computed<DropdownMenuItem[][]>(() => [[
   { label: 'Mark as unread', icon: appConfig.ui.icons.success },
   { label: 'Mark as important', icon: appConfig.ui.icons.warning }
 ], [
   { label: 'Star thread', icon: appConfig.ui.icons.star }
-]]
+]])
 
 const reply = ref('')
 
@@ -350,14 +350,14 @@ const customerStatusItems = [
   { label: 'Bounced', value: 'bounced' }
 ]
 
-const customerRowItems: DropdownMenuItem[] = [
+const customerRowItems = computed<DropdownMenuItem[]>(() => [
   { type: 'label', label: 'Actions' },
   { label: 'Copy customer ID', icon: appConfig.ui.icons.copy },
   { type: 'separator' },
   { label: 'View customer details', icon: studioIcons.list },
   { type: 'separator' },
   { label: 'Delete customer', icon: studioIcons.trash, color: 'error' }
-]
+])
 
 const customerColumns: TableColumn<Customer>[] = [{
   id: 'select',
@@ -417,7 +417,7 @@ const customerColumns: TableColumn<Customer>[] = [{
   cell: () => {
     return h('div', { class: 'text-right' }, h(
       UDropdownMenu,
-      { content: { align: 'end' }, items: customerRowItems },
+      { content: { align: 'end' }, items: customerRowItems.value },
       () => h(UButton, { icon: appConfig.ui.icons.ellipsis, color: 'neutral', variant: 'ghost', class: 'ml-auto' })
     ))
   }

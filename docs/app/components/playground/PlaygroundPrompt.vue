@@ -81,16 +81,16 @@ const items = computed<DropdownMenuItem[][]>(() => [
   [
     {
       label: 'Skills',
-      icon: 'i-lucide-shapes',
+      icon: studioIcons.shapes,
       children: [
         { label: 'Canvas design', icon: studioIcons.palette },
-        { label: 'Slides', icon: 'i-lucide-presentation' },
+        { label: 'Slides', icon: studioIcons.presentation },
         { label: 'PDF', icon: appConfig.ui.icons.file }
       ]
     },
     {
       label: 'Connectors',
-      icon: 'i-lucide-blocks',
+      icon: studioIcons.grid,
       children: [
         [
           { label: 'Add connector', icon: appConfig.ui.icons.plus },
@@ -123,11 +123,11 @@ const items = computed<DropdownMenuItem[][]>(() => [
         ]
       ]
     },
-    { label: 'Add plugins…', icon: 'i-lucide-plug' }
+    { label: 'Add plugins…', icon: studioIcons.plug }
   ],
   [
     { label: 'Ask Vercel', icon: 'i-simple-icons-vercel' },
-    { label: 'Research', icon: 'i-lucide-activity' },
+    { label: 'Research', icon: studioIcons.activity },
     {
       label: 'Web search',
       icon: studioIcons.globe,
@@ -207,7 +207,7 @@ function onSubmit() {
             aria-label="Dictate"
           />
           <UButton
-            icon="i-lucide-audio-lines"
+            :icon="studioIcons.audioLines"
             color="neutral"
             variant="ghost"
             size="sm"

@@ -338,15 +338,9 @@ importers:
       '@iconify-json/lucide':
         specifier: ^1.2.131
         version: 1.2.132
-      '@iconify-json/ph':
-        specifier: ^1.2.2
-        version: 1.2.2
       '@iconify-json/simple-icons':
         specifier: ^1.2.95
         version: 1.2.96
-      '@iconify-json/tabler':
-        specifier: ^1.2.38
-        version: 1.2.38
       '@iconify-json/vscode-icons':
         specifier: ^1.2.77
         version: 1.2.77
@@ -1538,14 +1532,8 @@ packages:
   '@iconify-json/lucide@1.2.132':
     resolution: {integrity: sha512-YgblweuQSz0AVG+zPvfECiYrJeTEFSKEthFSfwVB3OMJrL3dJ6QS0gX2akImqg3IEMRK1wVooAEAPbd7Kzj4FA==}
 
-  '@iconify-json/ph@1.2.2':
-    resolution: {integrity: sha512-PgkEZNtqa8hBGjHXQa4pMwZa93hmfu8FUSjs/nv4oUU6yLsgv+gh9nu28Kqi8Fz9CCVu4hj1MZs9/60J57IzFw==}
-
   '@iconify-json/simple-icons@1.2.96':
     resolution: {integrity: sha512-/FmCYo/H5rIywTLV/P6OYsr0rg/31vuc8jYq0QnkOZl6m7PWIs+h5oAnSTT2cqRhOsMaKqbXcdkka6tnZ1WiUA==}
-
-  '@iconify-json/tabler@1.2.38':
-    resolution: {integrity: sha512-9v6ooRU/bKOK/Whv4w2aiK5gBnfCV9Ei+uD1iDDeLu2b+EnF3G3ZKkRKWEOOLG8bJyfKn6XEia6gUQ9oO7cF+Q==}
 
   '@iconify-json/vscode-icons@1.2.77':
     resolution: {integrity: sha512-yl8e3KlFfLLhiL9CH6YwX6syePeSLLwH2dL4cKGYC27SgdNHL3TRpheAyOjO3fw2+Ovp3tOSF5oj3AhSv4MQ8Q==}
@@ -10125,15 +10113,7 @@ snapshots:
     dependencies:
       '@iconify/types': 2.0.0
 
-  '@iconify-json/ph@1.2.2':
-    dependencies:
-      '@iconify/types': 2.0.0
-
   '@iconify-json/simple-icons@1.2.96':
-    dependencies:
-      '@iconify/types': 2.0.0
-
-  '@iconify-json/tabler@1.2.38':
     dependencies:
       '@iconify/types': 2.0.0
 

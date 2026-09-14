@@ -61,7 +61,7 @@ const logos = [
   'i-simple-icons-stripe'
 ]
 
-const features = [{
+const features = computed(() => [{
   icon: studioIcons.zap,
   title: 'Predictive Alerts',
   description: 'ML models trained on your baselines detect anomalies 4 minutes before they hit your SLOs.'
@@ -85,7 +85,7 @@ const features = [{
   icon: studioIcons.notebook,
   title: 'Team Notebooks',
   description: 'Collaborative investigation notebooks that turn incident debugging into reusable runbooks.'
-}]
+}])
 
 const metrics = [
   { value: '99.99%', label: 'Uptime SLA', class: 'text-success' },

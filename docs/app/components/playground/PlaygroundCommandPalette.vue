@@ -1,10 +1,11 @@
 <script setup lang="ts">
-const studioIcons = useStudioIcons()
 import type { CommandPaletteGroup, CommandPaletteItem } from '@nuxt/ui'
+
+const studioIcons = useStudioIcons()
 
 const toast = useToast()
 
-const groups = ref<CommandPaletteGroup<CommandPaletteItem>[]>([
+const groups = computed<CommandPaletteGroup<CommandPaletteItem>[]>(() => [
   {
     id: 'users',
     label: 'Users',
