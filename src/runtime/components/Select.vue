@@ -365,29 +365,31 @@ defineExpose({
       v-bind="{ ...$attrs, ...ariaAttrs }"
       @click="onTriggerClick(open)"
     >
-      <span v-if="isLeading || !!props.avatar || !!slots.leading" data-slot="leading" :class="ui.leading({ class: props.ui?.leading })">
-        <slot name="leading" :model-value="(modelValue as ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>)" :open="open" :ui="ui">
-          <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" data-slot="leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
-          <UAvatar v-else-if="!!props.avatar" :size="((props.ui?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="props.avatar" data-slot="itemLeadingAvatar" :class="ui.itemLeadingAvatar({ class: props.ui?.itemLeadingAvatar })" />
-        </slot>
-      </span>
-
-      <template v-for="displayedModelValue in [displayValue(modelValue as any)]" :key="displayedModelValue">
-        <RSelectValue
-          :data-slot="displayedModelValue != null ? 'value' : 'placeholder'"
-          :class="displayedModelValue != null ? ui.value({ class: props.ui?.value }) : ui.placeholder({ class: props.ui?.placeholder })"
-        >
-          <slot :model-value="(modelValue as ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>)" :open="open" :ui="ui">
-            {{ displayedModelValue ?? (props.placeholder ?? '&nbsp;') }}
+      <FieldGroupReset>
+        <span v-if="isLeading || !!props.avatar || !!slots.leading" data-slot="leading" :class="ui.leading({ class: props.ui?.leading })">
+          <slot name="leading" :model-value="(modelValue as ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>)" :open="open" :ui="ui">
+            <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" data-slot="leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
+            <UAvatar v-else-if="!!props.avatar" :size="((props.ui?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="props.avatar" data-slot="itemLeadingAvatar" :class="ui.itemLeadingAvatar({ class: props.ui?.itemLeadingAvatar })" />
           </slot>
-        </RSelectValue>
-      </template>
+        </span>
 
-      <span v-if="isTrailing || !!slots.trailing" data-slot="trailing" :class="ui.trailing({ class: props.ui?.trailing })">
-        <slot name="trailing" :model-value="(modelValue as ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>)" :open="open" :ui="ui">
-          <UIcon v-if="trailingIconName" :name="trailingIconName" data-slot="trailingIcon" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
-        </slot>
-      </span>
+        <template v-for="displayedModelValue in [displayValue(modelValue as any)]" :key="displayedModelValue">
+          <RSelectValue
+            :data-slot="displayedModelValue != null ? 'value' : 'placeholder'"
+            :class="displayedModelValue != null ? ui.value({ class: props.ui?.value }) : ui.placeholder({ class: props.ui?.placeholder })"
+          >
+            <slot :model-value="(modelValue as ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>)" :open="open" :ui="ui">
+              {{ displayedModelValue ?? (props.placeholder ?? '&nbsp;') }}
+            </slot>
+          </RSelectValue>
+        </template>
+
+        <span v-if="isTrailing || !!slots.trailing" data-slot="trailing" :class="ui.trailing({ class: props.ui?.trailing })">
+          <slot name="trailing" :model-value="(modelValue as ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>)" :open="open" :ui="ui">
+            <UIcon v-if="trailingIconName" :name="trailingIconName" data-slot="trailingIcon" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
+          </slot>
+        </span>
+      </FieldGroupReset>
     </SelectTrigger>
 
     <SelectPortal v-bind="portalProps">
