@@ -38,7 +38,15 @@ const doc = shallowRef<MarkdownDoc | null>(null)
 let version = 0
 async function update() {
   const current = ++version
-  const next = await resolve(props.value)
+  let next: MarkdownDoc | null
+  try {
+    next = await resolve(props.value)
+  } catch (error) {
+    console.warn('[markdown] could not parse', error)
+    // the source as plain text, so a broken string never fails the page
+    const fallback = { frontmatter: {}, meta: {}, nodes: [['p', {}, props.value]] } as unknown as MarkdownDoc
+    next = await resolve(fallback)
+  }
   if (current === version) {
     doc.value = next
   }

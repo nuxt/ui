@@ -5,6 +5,7 @@ import { codeToTokens, getTokenStyleObject, stringifyTokenStyle } from 'shiki/co
 import type { ComarkParsePostState } from '@comark/vue'
 import toc from '@comark/vue/plugins/toc'
 import emoji from '@comark/vue/plugins/emoji'
+import security from '@comark/vue/plugins/security'
 import bash from 'shiki/dist/langs/bash.mjs'
 import css from 'shiki/dist/langs/css.mjs'
 import diff from 'shiki/dist/langs/diff.mjs'
@@ -29,7 +30,7 @@ const THEMES = { light: 'material-theme-lighter', dark: 'material-theme-palenigh
  * Those defaults also carry tsx, svelte and astro that nothing here writes, so
  * the grammars are listed instead, html and the scripts before vue embeds them.
  */
-const SHIKI_OPTIONS: ShikiOptions = {
+export const SHIKI_OPTIONS: ShikiOptions = {
   registerDefaultLanguages: false,
   languages: [...html, ...css, ...javascript, ...typescript, ...vue, ...bash, ...json, ...yaml, ...diff],
   transformers: shikiTransformers()
@@ -124,7 +125,9 @@ const markdownPlugins = [
       rotating_light: '\u{1F6A8}'
     }
   }),
-  inlineShiki()
+  inlineShiki(),
+  // release bodies and commit messages come from contributors, and html is on by default
+  security({ blockedTags: ['script', 'style', 'iframe', 'object', 'embed', 'form'] })
 ]
 
 const parse = createMarkdownParser({ plugins: markdownPlugins })
@@ -133,18 +136,28 @@ export type MarkdownDoc = Awaited<ReturnType<typeof parse>>
 
 /**
  * Documents by source. Every runtime caller comes through here, and the same
- * string is rendered over and over (a prop description repeated across pages,
- * a type in two tables), so the parse happens once. The promise is cached, so
- * two callers racing on one string share the work, and the oldest entry goes
- * once the map is full: this module outlives a request on the server.
+ * short string is rendered over and over (a prop description repeated across
+ * pages, a type in two tables), so the parse happens once. The promise is
+ * cached, so two callers racing on one string share the work. A hit moves its
+ * entry to the end, so the oldest-first eviction drops the cold ones once the
+ * map is full: this module outlives a request on the server. A large source is
+ * a generated file or release notes, unique and not worth holding, so it skips
+ * the cache.
  */
 const DOCUMENT_LIMIT = 500
+const DOCUMENT_MAX_LENGTH = 4096
 const documents = new Map<string, Promise<MarkdownDoc>>()
 
 // not `parseMarkdown`, which `@nuxtjs/mdc` already auto-imports under that name
 export function parseMarkdownDoc(markdown: string): Promise<MarkdownDoc> {
+  if (markdown.length > DOCUMENT_MAX_LENGTH) {
+    return parse(markdown)
+  }
+
   const cached = documents.get(markdown)
   if (cached) {
+    documents.delete(markdown)
+    documents.set(markdown, cached)
     return cached
   }
 

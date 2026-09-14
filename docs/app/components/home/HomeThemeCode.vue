@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { parseCode } from '../../utils/markdown'
 import type { MarkdownDoc } from '../../utils/markdown'
 
 /**
@@ -18,29 +17,48 @@ interface Pane {
   doc: MarkdownDoc
 }
 
-async function generate(): Promise<Pane[]> {
+// the doc reads every theme ref, the framework picks the config file
+const themeKey = () => JSON.stringify(currentDoc()) + framework.value
+
+// the pane is desktop only, so a phone never parses the files
+const large = useMediaQuery('(min-width: 64rem)')
+
+async function generate(): Promise<{ key: string, panes: Pane[] }> {
+  const key = themeKey()
+  // loaded here so shiki and its grammars stay out of the landing's entry chunk
+  const { parseCode } = await import('../../utils/markdown')
   // explicit: the stock theme is a pair of files too, not an empty diff
   const [css, config] = await Promise.all([exportCSS({ explicit: true }), exportConfig({ explicit: true })])
   const [cssDoc, configDoc] = await Promise.all([parseCode(css, 'css'), parseCode(config, 'ts')])
 
-  return [
-    { key: 'css', filename: 'main.css', doc: cssDoc },
-    { key: 'config', filename: configLabel.value, doc: configDoc }
-  ]
+  return {
+    key,
+    panes: [
+      { key: 'css', filename: 'main.css', doc: cssDoc },
+      { key: 'config', filename: configLabel.value, doc: configDoc }
+    ]
+  }
 }
 
 // The payload carries the stock theme's files; the persisted theme is
 // client-only, so the first regeneration waits for mount.
-const { data: panes } = await useAsyncData('home-theme-code', generate, { default: () => [] as Pane[] })
+const { data } = await useAsyncData('home-theme-code', generate, { default: () => ({ key: '', panes: [] as Pane[] }) })
+
+const panes = computed(() => data.value.panes)
 
 // the last change wins: a result for a theme that has moved on is dropped
 let version = 0
 async function regenerate() {
+  // the payload already holds this theme's files, and nothing shows them narrow
+  if (!large.value || themeKey() === data.value.key) {
+    return
+  }
+
   const current = ++version
   try {
     const result = await generate()
     if (current === version) {
-      panes.value = result
+      data.value = result
     }
   } catch (error) {
     console.warn('[home] could not render the theme files', error)
@@ -48,8 +66,8 @@ async function regenerate() {
 }
 
 onMounted(regenerate)
-// the doc reads every theme ref, the framework picks the config file
-watch(() => JSON.stringify(currentDoc()) + framework.value, regenerate)
+// crossing the breakpoint generates the files the phone skipped
+watch(() => themeKey() + large.value, regenerate)
 
 const tab = ref<Pane['key']>('css')
 const pane = computed(() => panes.value.find(entry => entry.key === tab.value) ?? panes.value[0])
