@@ -172,7 +172,8 @@ const items = [
 ]
 ```
 
-Components supporting nested arrays: `UDropdownMenu`, `UContextMenu`, `UCommandPalette`, `UNavigationMenu`.
+Components supporting nested arrays: `UDropdownMenu`, `UContextMenu`, `UNavigationMenu`.
+`UCommandPalette` uses a `groups` prop instead, with an `items` array on each group.
 
 ## Composables
 
