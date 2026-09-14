@@ -841,21 +841,6 @@ packages:
   '@colordx/core@5.4.3':
     resolution: {integrity: sha512-kIxYSfA5T8HXjav55UaaH/o/cKivF6jCCGIb8eqtcsfI46wsvlSiT8jMDyrl779qLec3c2c2oHBZo4oAhvbjrQ==}
 
-  '@comark/vue@0.6.2':
-    resolution: {integrity: sha512-ToRyzz4I96DjXtDgYOC1WnNWt0W6YgOcazuT8rVRMJRR86NXBLATnIWb3hdMM0/8lMaDz+DmlcpX5EN1hqsG0Q==}
-    peerDependencies:
-      beautiful-mermaid: ^1.1.3
-      katex: ^0.17.0
-      shiki: ^4.3.1
-      vue: ^3.5.0
-    peerDependenciesMeta:
-      beautiful-mermaid:
-        optional: true
-      katex:
-        optional: true
-      shiki:
-        optional: true
-
   '@comark/vue@0.7.0':
     resolution: {integrity: sha512-C63ObcCAiM5DKVDhWPz27pCRsvl0IG9XZJDGjFef1h/V4kS6lEjsoyepLdl4pvAPoSn6U0oGiJTgHLj5GCw2rQ==}
     peerDependencies:
@@ -9634,15 +9619,6 @@ snapshots:
 
   '@colordx/core@5.4.3': {}
 
-  '@comark/vue@0.6.2(shiki@4.4.3)(vue@3.5.42(typescript@6.0.3))':
-    dependencies:
-      comark: 0.6.2(shiki@4.4.3)
-      vue: 3.5.42(typescript@6.0.3)
-    optionalDependencies:
-      shiki: 4.4.3
-    transitivePeerDependencies:
-      - rangi
-
   '@comark/vue@0.7.0(shiki@4.4.3)(vue@3.5.42(typescript@6.0.3))':
     dependencies:
       comark: 0.7.0(shiki@4.4.3)
@@ -13730,6 +13706,7 @@ snapshots:
       markdown-exit: 1.1.0-beta.2
     optionalDependencies:
       shiki: 4.4.3
+    optional: true
 
   comark@0.7.0(shiki@4.4.3):
     dependencies:
