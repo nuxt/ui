@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { reactiveOmit } from '@vueuse/core'
-import type { ButtonProps, PageHeroProps, PageHeroSlots } from '@nuxt/ui'
+import type { BadgeProps, ButtonProps, PageHeroProps, PageHeroSlots } from '@nuxt/ui'
 
 // `ui` is left out: the map below is the docs' hero, a caller's would replace it
 const props = withDefaults(defineProps<Omit<PageHeroProps, 'ui'> & {
@@ -107,7 +107,7 @@ const ui = {
         v-else
         color="primary"
         variant="soft"
-        v-bind="badge"
+        v-bind="(badge as BadgeProps)"
         size="md"
         class="rounded-full"
       />
