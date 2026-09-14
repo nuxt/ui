@@ -36,19 +36,27 @@ const { format: formatCompact } = Intl.NumberFormat('en', { notation: 'compact',
 // token to count them.
 const total = computed(() => (github.value?.total ? format(github.value.total) : '300+'))
 
-const stats = computed(() => [{
-  value: `${formatCompact(module.value?.stats?.downloads ?? 0)}+`,
-  label: 'monthly downloads',
-  to: 'https://npm.chart.dev/@nuxt/ui'
-}, {
-  value: `${formatCompact(module.value?.stats?.stars ?? 0)}+`,
-  label: 'GitHub stars',
-  to: 'https://github.com/nuxt/ui'
-}, {
-  value: total.value,
-  label: 'contributors',
-  to: 'https://github.com/nuxt/ui/graphs/contributors'
-}])
+const stats = computed(() => [
+  ...(module.value?.stats?.downloads
+    ? [{
+        value: `${formatCompact(module.value.stats.downloads)}+`,
+        label: 'monthly downloads',
+        to: 'https://npm.chart.dev/@nuxt/ui'
+      }]
+    : []),
+  ...(module.value?.stats?.stars
+    ? [{
+        value: `${formatCompact(module.value.stats.stars)}+`,
+        label: 'GitHub stars',
+        to: 'https://github.com/nuxt/ui'
+      }]
+    : []),
+  {
+    value: total.value,
+    label: 'contributors',
+    to: 'https://github.com/nuxt/ui/graphs/contributors'
+  }
+])
 
 const socialIcons = computed<Record<string, string>>(() => ({
   twitter: 'i-simple-icons-x',

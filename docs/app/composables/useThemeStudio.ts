@@ -469,18 +469,12 @@ export function useThemeStudio() {
     track('Theme Section Reset', { section: keys.join(',') })
   }
 
-  /** For flows that replace the whole doc outside a preset (imports). */
-  function clearActivePreset() {
-    setActivePreset(undefined)
-  }
-
   return {
     presets,
     activePreset,
     // the rule lives with the state it reads, the studio passes it on
     selectedPreset: theme.selectedPreset,
     baselineDoc,
-    clearActivePreset,
     sectionDirty,
     groupDirty,
     dirty,

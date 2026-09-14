@@ -83,7 +83,7 @@ const headingItems = [1, 2, 3, 4].map(level => ({
 const blockItems = computed(() => [{
   kind: 'bulletList' as const,
   label: 'Bullet List',
-  icon: studioIcons.list
+  icon: 'i-lucide-list'
 }, {
   kind: 'orderedList' as const,
   label: 'Ordered List',

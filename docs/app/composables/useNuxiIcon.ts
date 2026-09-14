@@ -444,6 +444,7 @@ export function useNuxiIcon(props: NuxiIconProps, emit?: EmitFn) {
   let hoverResetTimer: ReturnType<typeof setTimeout> | undefined
 
   function handleKeyDown(e: KeyboardEvent) {
+    if (!isAwake.value) return
     const target = e.target as HTMLElement
     if (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable) return
     keyBuffer.push(e.key.toLowerCase())
