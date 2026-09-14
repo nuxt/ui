@@ -117,7 +117,7 @@ const shareOpen = ref(false)
       <ThemeStudioViewSwitcher />
 
       <template #right>
-        <UTooltip v-if="!chatOpen" text="Ask AI" :kbds="['meta', 'I']" ignore-non-keyboard-focus>
+        <UTooltip text="Ask AI" :kbds="['meta', 'I']" ignore-non-keyboard-focus>
           <UButton
             color="neutral"
             variant="outline"
