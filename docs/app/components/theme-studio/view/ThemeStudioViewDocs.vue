@@ -254,7 +254,7 @@ export default defineAppConfig({
                   :icon="appConfig.ui.icons.copy"
                   color="neutral"
                   variant="outline"
-                  :ui="{ leadingIcon: 'text-neutral size-3.5' }"
+                  :ui="{ leadingIcon: 'size-3.5' }"
                 />
                 <UDropdownMenu
                   :items="copyItems"

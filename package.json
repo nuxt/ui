@@ -209,6 +209,7 @@
     "ai": "^7.0.99",
     "embla-carousel": "^8.6.0",
     "eslint": "^10.10.0",
+    "eslint-plugin-better-tailwindcss": "^4.7.0",
     "happy-dom": "^20.14.5",
     "nuxt": "^4.5.2",
     "release-it": "^21.0.2",
