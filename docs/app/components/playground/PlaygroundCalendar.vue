@@ -9,6 +9,6 @@ const modelValue = shallowRef(new CalendarDate(2026, 7, 6))
 
 <template>
   <div class="flex items-center justify-center p-4">
-    <UCalendar v-model="modelValue" :week-starts-on="1" />
+    <UCalendar v-model="modelValue" :week-starts-on="1" class="w-full" />
   </div>
 </template>

@@ -130,7 +130,9 @@ const markdownPlugins = [
   security({ blockedTags: ['script', 'style', 'iframe', 'object', 'embed', 'form'] })
 ]
 
-const parse = createMarkdownParser({ plugins: markdownPlugins })
+// Nothing here streams, and the healing that closes an unfinished document
+// adds a backtick after a double backtick span carrying attributes on 0.7.
+const parse = createMarkdownParser({ plugins: markdownPlugins, autoClose: false })
 
 export type MarkdownDoc = Awaited<ReturnType<typeof parse>>
 

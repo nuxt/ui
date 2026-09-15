@@ -173,7 +173,7 @@ onUnmounted(() => clearTimeout(appearTimeout))
           container: 'py-18 sm:py-24 lg:py-32',
           headline: 'flex items-center justify-center',
           title: 'text-shadow-md max-w-lg mx-auto text-pretty text-3xl sm:text-4xl lg:text-5xl',
-          description: 'mt-2 text-md mx-auto max-w-2xl text-pretty sm:text-md text-muted',
+          description: 'mt-2 text-base mx-auto max-w-2xl text-pretty sm:text-base text-muted',
           links: 'mt-4 flex-col justify-center items-center'
         }"
       >
@@ -234,7 +234,7 @@ onUnmounted(() => clearTimeout(appearTimeout))
           :ui="{
             container: 'p-0!',
             title: 'text-left text-xl sm:text-xl lg:text-2xl font-medium',
-            description: 'text-left mt-3 text-sm sm:text-md lg:text-sm text-muted whitespace-pre-line'
+            description: 'text-left mt-3 text-sm sm:text-base lg:text-sm text-muted whitespace-pre-line'
           }"
         />
 
@@ -276,7 +276,7 @@ onUnmounted(() => clearTimeout(appearTimeout))
         :ui="{
           container: 'px-0 pt-0! sm:gap-6 lg:gap-8',
           title: 'text-left text-xl sm:text-xl lg:text-2xl font-medium',
-          description: 'text-left mt-2 text-sm sm:text-md lg:text-sm text-muted'
+          description: 'text-left mt-2 text-sm sm:text-base lg:text-sm text-muted'
         }"
       >
         <UBlogPosts orientation="vertical" class="gap-4 lg:gap-y-4">
@@ -340,7 +340,7 @@ onUnmounted(() => clearTimeout(appearTimeout))
         :ui="{
           container: 'px-0 pt-0! gap-4 sm:gap-4',
           title: 'text-left text-xl sm:text-xl lg:text-2xl font-medium',
-          description: 'text-left mt-2 text-sm sm:text-md lg:text-sm text-muted'
+          description: 'text-left mt-2 text-sm sm:text-base lg:text-sm text-muted'
         }"
       >
         <UTabs

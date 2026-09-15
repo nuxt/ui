@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const usernames = [
-  'benjamincanac', 'romhml', 'noook', 'atinux', 'HugoRCD',
-  'sandros94', 'danielroe', 'J-Michalek', 'genu', 'smarroufin'
+  'benjamincanac', 'HugoRCD', 'atinux', 'romhml', 'sandros94',
+  'J-Michalek', 'hywax', 'maximepvrt', 'malik-jouda', 'genu'
 ]
 </script>
 

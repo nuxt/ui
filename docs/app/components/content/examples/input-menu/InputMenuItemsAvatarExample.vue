@@ -12,29 +12,29 @@ const items = ref([
     }
   },
   {
+    label: 'HugoRCD',
+    value: 'HugoRCD',
+    avatar: {
+      src: 'https://github.com/HugoRCD.png',
+      alt: 'HugoRCD',
+      loading: 'lazy' as const
+    }
+  },
+  {
+    label: 'atinux',
+    value: 'atinux',
+    avatar: {
+      src: 'https://github.com/atinux.png',
+      alt: 'atinux',
+      loading: 'lazy' as const
+    }
+  },
+  {
     label: 'romhml',
     value: 'romhml',
     avatar: {
       src: 'https://github.com/romhml.png',
       alt: 'romhml',
-      loading: 'lazy' as const
-    }
-  },
-  {
-    label: 'noook',
-    value: 'noook',
-    avatar: {
-      src: 'https://github.com/noook.png',
-      alt: 'noook',
-      loading: 'lazy' as const
-    }
-  },
-  {
-    label: 'sandros94',
-    value: 'sandros94',
-    avatar: {
-      src: 'https://github.com/sandros94.png',
-      alt: 'sandros94',
       loading: 'lazy' as const
     }
   }
