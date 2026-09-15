@@ -180,8 +180,8 @@ const suggestionItems = computed<EditorSuggestionMenuItem[][]>(() => [[{
 
 const mentionItems: EditorMentionMenuItem[] = [
   { label: 'benjamincanac', avatar: { src: 'https://github.com/benjamincanac.png', loading: 'lazy' as const } },
+  { label: 'HugoRCD', avatar: { src: 'https://github.com/HugoRCD.png', loading: 'lazy' as const } },
   { label: 'atinux', avatar: { src: 'https://github.com/atinux.png', loading: 'lazy' as const } },
-  { label: 'danielroe', avatar: { src: 'https://github.com/danielroe.png', loading: 'lazy' as const } },
   { label: 'romhml', avatar: { src: 'https://github.com/romhml.png', loading: 'lazy' as const } }
 ]
 

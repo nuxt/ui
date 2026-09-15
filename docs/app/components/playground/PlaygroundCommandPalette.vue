@@ -16,14 +16,14 @@ const groups = computed<CommandPaletteGroup<CommandPaletteItem>[]>(() => [
         avatar: { src: 'https://github.com/benjamincanac.png', loading: 'lazy' }
       },
       {
-        label: 'Romain Hamel',
-        suffix: 'romhml',
-        avatar: { src: 'https://github.com/romhml.png', loading: 'lazy' }
+        label: 'Hugo Richard',
+        suffix: 'HugoRCD',
+        avatar: { src: 'https://github.com/HugoRCD.png', loading: 'lazy' }
       },
       {
-        label: 'Neil Richter',
-        suffix: 'noook',
-        avatar: { src: 'https://github.com/noook.png', loading: 'lazy' }
+        label: 'Sébastien Chopin',
+        suffix: 'atinux',
+        avatar: { src: 'https://github.com/atinux.png', loading: 'lazy' }
       }
     ]
   },
@@ -63,5 +63,5 @@ const groups = computed<CommandPaletteGroup<CommandPaletteItem>[]>(() => [
 </script>
 
 <template>
-  <UCommandPalette :groups="groups" placeholder="Search users and actions..." :autofocus="false" class="h-80" />
+  <UCommandPalette :groups="groups" placeholder="Search users and actions..." :autofocus="false" class="h-71.5" />
 </template>
