@@ -392,13 +392,15 @@ export default defineNuxtConfig({
   },
 
   // Declared global so @nuxt/fonts emits their faces where nuxt-og-image
-  // reads them: the site's Public Sans and the mono the OG code pane uses.
+  // reads them: the site's Public Sans, and a mono for the OG code pane
+  // since the docs' own code blocks run on the system stack, which the
+  // renderer has no file for.
   // Fontsource rather than Google: Google serves them as variable fonts,
   // which takumi can't take, and the static fallback download never lands.
   fonts: {
     families: [
       { name: 'Public Sans', provider: 'fontsource', weights: [400, 500, 600, 700], global: true },
-      { name: 'DM Mono', provider: 'fontsource', weights: [400], global: true }
+      { name: 'Geist Mono', provider: 'fontsource', weights: [400], global: true }
     ]
   },
 

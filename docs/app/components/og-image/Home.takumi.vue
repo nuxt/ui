@@ -105,7 +105,7 @@ const pill = (id: keyof typeof PRESETS.light) => ({ backgroundColor: `${preset(i
           app.config.ts
         </div>
       </div>
-      <div class="flex flex-col flex-1 rounded-xl border-2 border-solid mt-3 px-5 py-4 text-[16px] leading-[27px]" :style="{ backgroundColor: c.code, borderColor: c.border, color: c.text, fontFamily: 'DM Mono' }">
+      <div class="flex flex-col flex-1 rounded-xl border-2 border-solid mt-3 px-5 py-4 text-[16px] leading-[27px]" :style="{ backgroundColor: c.code, borderColor: c.border, color: c.text, fontFamily: 'Geist Mono' }">
         <div class="flex flex-row h-[27px]">
           <span :style="{ color: c.kw }">@import "</span><span :style="{ color: c.str }">tailwindcss</span><span :style="{ color: c.kw }">";</span>
         </div>
