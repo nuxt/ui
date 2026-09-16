@@ -12,7 +12,7 @@ links:
     to: https://reka-ui.com/docs/components/date-field
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/InputDate.vue
+    to: https://github.com/nuxt/ui/blob/v5/src/runtime/components/InputDate.vue
 ---
 
 ## Usage

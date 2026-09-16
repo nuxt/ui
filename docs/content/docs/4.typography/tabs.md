@@ -6,7 +6,7 @@ navigation.title: Tabs
 links:
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/prose/Tabs.vue
+    to: https://github.com/nuxt/ui/blob/v5/src/runtime/components/prose/Tabs.vue
 ---
 
 ## Usage

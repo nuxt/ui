@@ -118,5 +118,5 @@ const locale = defineLocale<Messages>({
 ```
 
 ::note
-You can look at the [built-in locales](https://github.com/nuxt/ui/tree/v4/src/runtime/locale) for reference on how to structure the messages object.
+You can look at the [built-in locales](https://github.com/nuxt/ui/tree/v5/src/runtime/locale) for reference on how to structure the messages object.
 ::

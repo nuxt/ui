@@ -76,7 +76,7 @@ const component = computed(() => {
 const themeLink = computed(() => {
   const slug = name.startsWith('content') ? `content/${name}` : name
 
-  return `https://github.com/nuxt/ui/blob/v4/src/theme/${slug}.ts`
+  return `https://github.com/nuxt/ui/blob/v5/src/theme/${slug}.ts`
 })
 
 const markdown = computed(() => `
