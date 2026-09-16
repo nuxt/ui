@@ -11,7 +11,7 @@ links:
     to: https://reka-ui.com/docs/components/dialog
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/Slideover.vue
+    to: https://github.com/nuxt/ui/blob/v5/src/runtime/components/Slideover.vue
 ---
 
 ## Usage
@@ -416,7 +416,7 @@ This lets you move the trigger outside of the Slideover or remove it entirely.
 You can use the [`useOverlay`](/docs/composables/use-overlay) composable to open a Slideover programmatically.
 
 ::warning
-Make sure to wrap your app with the [`App`](/docs/components/app) component which uses the [`OverlayProvider`](https://github.com/nuxt/ui/blob/v4/src/runtime/components/OverlayProvider.vue) component.
+Make sure to wrap your app with the [`App`](/docs/components/app) component which uses the [`OverlayProvider`](https://github.com/nuxt/ui/blob/v5/src/runtime/components/OverlayProvider.vue) component.
 ::
 
 First, create a slideover component that will be opened programmatically:
