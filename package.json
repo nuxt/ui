@@ -127,7 +127,7 @@
     "test": "vitest",
     "test:vue": "vitest --project vue",
     "test:nuxt": "vitest --project nuxt",
-    "bench": "vitest bench --project vue",
+    "bench": "vitest bench --project \"vue (bench)\"",
     "release": "release-it"
   },
   "dependencies": {
@@ -214,7 +214,7 @@
     "nuxt": "^4.5.2",
     "release-it": "^21.0.2",
     "unbuild": "^3.6.1",
-    "vitest": "^4.1.11",
+    "vitest": "^5.0.0",
     "vitest-axe": "^0.1.0",
     "vitest-environment-nuxt": "^2.0.0",
     "vue": "^3.5.42",
