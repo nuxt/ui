@@ -162,6 +162,411 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+catalogs:
+  default:
+    '@ai-sdk/anthropic':
+      specifier: ^4.0.53
+      version: 4.0.53
+    '@ai-sdk/gateway':
+      specifier: ^4.0.80
+      version: 4.0.80
+    '@ai-sdk/vue':
+      specifier: ^4.0.99
+      version: 4.0.99
+    '@codspeed/vitest-plugin':
+      specifier: ^5.7.1
+      version: 5.7.1
+    '@comark/vue':
+      specifier: ^0.7.0
+      version: 0.7.0
+    '@floating-ui/dom':
+      specifier: ^1.8.0
+      version: 1.8.0
+    '@iconify-json/logos':
+      specifier: ^1.2.14
+      version: 1.2.14
+    '@iconify-json/lucide':
+      specifier: ^1.2.131
+      version: 1.2.132
+    '@iconify-json/simple-icons':
+      specifier: ^1.2.95
+      version: 1.2.96
+    '@iconify-json/vscode-icons':
+      specifier: ^1.2.77
+      version: 1.2.77
+    '@iconify/vue':
+      specifier: ^5.0.1
+      version: 5.0.1
+    '@internationalized/date':
+      specifier: ^3.12.4
+      version: 3.12.4
+    '@internationalized/number':
+      specifier: ^3.6.8
+      version: 3.6.8
+    '@nuxt/content':
+      specifier: ^3.16.0
+      version: 3.16.0
+    '@nuxt/eslint-config':
+      specifier: ^1.17.0
+      version: 1.17.0
+    '@nuxt/fonts':
+      specifier: ^0.14.0
+      version: 0.14.0
+    '@nuxt/icon':
+      specifier: ^2.5.1
+      version: 2.5.1
+    '@nuxt/module-builder':
+      specifier: ^1.0.3
+      version: 1.0.3
+    '@nuxt/schema':
+      specifier: ^4.5.2
+      version: 4.5.2
+    '@nuxt/test-utils':
+      specifier: ^4.3.2
+      version: 4.3.2
+    '@nuxtjs/color-mode':
+      specifier: ^4.0.1
+      version: 4.0.1
+    '@nuxtjs/mcp-toolkit':
+      specifier: ^0.21.0
+      version: 0.21.0
+    '@nuxtjs/mdc':
+      specifier: ^0.23.1
+      version: 0.23.1
+    '@nuxtjs/robots':
+      specifier: ^6.2.2
+      version: 6.2.2
+    '@nuxtjs/sitemap':
+      specifier: ^8.5.1
+      version: 8.5.1
+    '@octokit/rest':
+      specifier: ^22.0.1
+      version: 22.0.1
+    '@regle/core':
+      specifier: ^1.29.1
+      version: 1.29.1
+    '@regle/rules':
+      specifier: ^1.29.1
+      version: 1.29.1
+    '@release-it/conventional-changelog':
+      specifier: ^12.0.0
+      version: 12.0.0
+    '@shikijs/types':
+      specifier: ^4.4.3
+      version: 4.4.3
+    '@standard-schema/spec':
+      specifier: ^1.1.0
+      version: 1.1.0
+    '@tailwindcss/postcss':
+      specifier: ^4.3.3
+      version: 4.3.3
+    '@tailwindcss/vite':
+      specifier: ^4.3.3
+      version: 4.3.3
+    '@takumi-rs/core':
+      specifier: ^2.13.7
+      version: 2.13.7
+    '@tanstack/table-core':
+      specifier: ^8.21.3
+      version: 8.21.3
+    '@tanstack/vue-table':
+      specifier: ^8.21.3
+      version: 8.21.3
+    '@tanstack/vue-virtual':
+      specifier: ^3.13.38
+      version: 3.13.38
+    '@tiptap/core':
+      specifier: ^3.31.3
+      version: 3.31.3
+    '@tiptap/extension-bubble-menu':
+      specifier: ^3.31.3
+      version: 3.31.3
+    '@tiptap/extension-code':
+      specifier: ^3.31.3
+      version: 3.31.3
+    '@tiptap/extension-collaboration':
+      specifier: ^3.31.3
+      version: 3.31.3
+    '@tiptap/extension-drag-handle':
+      specifier: ^3.31.3
+      version: 3.31.3
+    '@tiptap/extension-drag-handle-vue-3':
+      specifier: ^3.31.3
+      version: 3.31.3
+    '@tiptap/extension-emoji':
+      specifier: ^3.31.3
+      version: 3.31.3
+    '@tiptap/extension-floating-menu':
+      specifier: ^3.31.3
+      version: 3.31.3
+    '@tiptap/extension-horizontal-rule':
+      specifier: ^3.31.3
+      version: 3.31.3
+    '@tiptap/extension-image':
+      specifier: ^3.31.3
+      version: 3.31.3
+    '@tiptap/extension-mention':
+      specifier: ^3.31.3
+      version: 3.31.3
+    '@tiptap/extension-node-range':
+      specifier: ^3.31.3
+      version: 3.31.3
+    '@tiptap/extension-placeholder':
+      specifier: ^3.31.3
+      version: 3.31.3
+    '@tiptap/extension-text-align':
+      specifier: ^3.31.3
+      version: 3.31.3
+    '@tiptap/markdown':
+      specifier: ^3.31.3
+      version: 3.31.3
+    '@tiptap/pm':
+      specifier: ^3.31.3
+      version: 3.31.3
+    '@tiptap/starter-kit':
+      specifier: ^3.31.3
+      version: 3.31.3
+    '@tiptap/suggestion':
+      specifier: ^3.31.3
+      version: 3.31.3
+    '@tiptap/vue-3':
+      specifier: ^3.31.3
+      version: 3.31.3
+    '@types/sortablejs':
+      specifier: ^1.15.9
+      version: 1.15.9
+    '@unhead/vue':
+      specifier: ^3.4.0
+      version: 3.4.0
+    '@vercel/analytics':
+      specifier: ^2.0.1
+      version: 2.0.1
+    '@vercel/speed-insights':
+      specifier: ^2.0.0
+      version: 2.0.0
+    '@vitejs/plugin-vue':
+      specifier: ^6.0.8
+      version: 6.0.8
+    '@vue/repl':
+      specifier: ^4.7.2
+      version: 4.7.2
+    '@vue/test-utils':
+      specifier: ^2.5.0
+      version: 2.5.0
+    '@vueuse/core':
+      specifier: ^14.4.0
+      version: 14.4.0
+    '@vueuse/integrations':
+      specifier: ^14.4.0
+      version: 14.4.0
+    '@vueuse/nuxt':
+      specifier: ^14.4.0
+      version: 14.4.0
+    '@vueuse/shared':
+      specifier: ^14.4.0
+      version: 14.4.0
+    ai:
+      specifier: ^7.0.99
+      version: 7.0.99
+    capture-website:
+      specifier: ^5.1.0
+      version: 5.1.0
+    colortranslator:
+      specifier: ^5.0.0
+      version: 5.0.0
+    consola:
+      specifier: ^3.4.2
+      version: 3.4.2
+    defu:
+      specifier: ^6.1.7
+      version: 6.1.7
+    embla-carousel:
+      specifier: ^8.6.0
+      version: 8.6.0
+    embla-carousel-auto-height:
+      specifier: ^8.6.0
+      version: 8.6.0
+    embla-carousel-auto-scroll:
+      specifier: ^8.6.0
+      version: 8.6.0
+    embla-carousel-autoplay:
+      specifier: ^8.6.0
+      version: 8.6.0
+    embla-carousel-class-names:
+      specifier: ^8.6.0
+      version: 8.6.0
+    embla-carousel-fade:
+      specifier: ^8.6.0
+      version: 8.6.0
+    embla-carousel-vue:
+      specifier: ^8.6.0
+      version: 8.6.0
+    embla-carousel-wheel-gestures:
+      specifier: ^8.1.0
+      version: 8.1.0
+    eslint:
+      specifier: ^10.10.0
+      version: 10.10.0
+    eslint-plugin-better-tailwindcss:
+      specifier: ^4.7.0
+      version: 4.7.0
+    fflate:
+      specifier: ^0.8.3
+      version: 0.8.3
+    fuse.js:
+      specifier: ^7.5.0
+      version: 7.5.0
+    happy-dom:
+      specifier: ^20.14.5
+      version: 20.14.5
+    hookable:
+      specifier: ^6.1.1
+      version: 6.1.1
+    joi:
+      specifier: ^18.2.9
+      version: 18.2.9
+    json5:
+      specifier: ^2.2.3
+      version: 2.2.3
+    knitwork:
+      specifier: ^1.3.0
+      version: 1.3.0
+    magic-string:
+      specifier: ^1.3.1
+      version: 1.3.1
+    maska:
+      specifier: ^3.2.1
+      version: 3.2.1
+    minimark:
+      specifier: ^0.2.0
+      version: 0.2.0
+    mlly:
+      specifier: ^1.8.2
+      version: 1.8.2
+    motion-v:
+      specifier: ^2.4.2
+      version: 2.4.2
+    nuxt:
+      specifier: ^4.5.2
+      version: 4.5.2
+    nuxt-agent-discovery:
+      specifier: ^0.5.1
+      version: 0.5.1
+    nuxt-component-meta:
+      specifier: ^0.18.0
+      version: 0.18.0
+    nuxt-llms:
+      specifier: ^0.2.0
+      version: 0.2.0
+    nuxt-og-image:
+      specifier: ^6.7.8
+      version: 6.7.8
+    nuxt-schema-org:
+      specifier: ^6.3.1
+      version: 6.3.1
+    ohash:
+      specifier: ^2.0.12
+      version: 2.0.12
+    pathe:
+      specifier: ^2.0.3
+      version: 2.0.3
+    prettier:
+      specifier: ^3.9.6
+      version: 3.9.6
+    reka-ui:
+      specifier: 2.10.4
+      version: 2.10.4
+    release-it:
+      specifier: ^21.0.2
+      version: 21.0.2
+    scule:
+      specifier: ^1.3.0
+      version: 1.3.0
+    shiki:
+      specifier: ^4.4.3
+      version: 4.4.3
+    shiki-transformer-color-highlight:
+      specifier: ^1.1.0
+      version: 1.1.0
+    shiki-transformer-icon-highlight:
+      specifier: ^0.2.0
+      version: 0.2.0
+    simple-git:
+      specifier: ^3.36.0
+      version: 3.36.0
+    sortablejs:
+      specifier: ^1.15.7
+      version: 1.15.7
+    superstruct:
+      specifier: ^2.0.2
+      version: 2.0.2
+    tailwind-merge:
+      specifier: ^3.7.0
+      version: 3.7.0
+    tailwindcss:
+      specifier: ^4.3.3
+      version: 4.3.3
+    tinyglobby:
+      specifier: ^0.2.17
+      version: 0.2.17
+    tiptap-extension-code-block-shiki:
+      specifier: ^1.2.0
+      version: 1.2.0
+    ufo:
+      specifier: ^1.6.4
+      version: 1.6.4
+    unbuild:
+      specifier: ^3.6.1
+      version: 3.6.1
+    unist-util-visit:
+      specifier: ^5.1.0
+      version: 5.1.0
+    unplugin-auto-import:
+      specifier: ^21.1.0
+      version: 21.1.0
+    unplugin-vue-components:
+      specifier: ^32.1.0
+      version: 32.1.0
+    valibot:
+      specifier: ^1.5.0
+      version: 1.5.0
+    vaul-vue:
+      specifier: 0.4.1
+      version: 0.4.1
+    vite:
+      specifier: ^8.3.0
+      version: 8.3.0
+    vitest:
+      specifier: ^4.1.11
+      version: 4.1.11
+    vitest-axe:
+      specifier: ^0.1.0
+      version: 0.1.0
+    vitest-environment-nuxt:
+      specifier: ^2.0.0
+      version: 2.0.0
+    vue:
+      specifier: ^3.5.42
+      version: 3.5.42
+    vue-component-meta:
+      specifier: ^3.3.11
+      version: 3.3.11
+    vue-component-type-helpers:
+      specifier: ^3.3.11
+      version: 3.3.11
+    vue-router:
+      specifier: ^5.3.1
+      version: 5.3.1
+    vue-tsc:
+      specifier: ^3.3.11
+      version: 3.3.11
+    yup:
+      specifier: ^1.7.1
+      version: 1.7.1
+    zod:
+      specifier: ^4.6.4
+      version: 4.6.4
+
 overrides:
   '@codspeed/vitest-plugin>vite': ^7.0.0 || ^8.0.0
   '@nuxt/kit': ^4.5.2
@@ -178,217 +583,217 @@ importers:
   .:
     dependencies:
       '@floating-ui/dom':
-        specifier: ^1.8.0
+        specifier: 'catalog:'
         version: 1.8.0
       '@iconify/vue':
-        specifier: ^5.0.1
+        specifier: 'catalog:'
         version: 5.0.1(vue@3.5.42(typescript@6.0.3))
       '@inertiajs/vue3':
         specifier: ^2.0.7 || ^3.0.0
         version: 3.1.1(axios@1.19.0(debug@4.4.3(supports-color@10.2.2))(supports-color@10.2.2))(vue@3.5.42(typescript@6.0.3))
       '@internationalized/date':
-        specifier: ^3.12.4
+        specifier: 'catalog:'
         version: 3.12.4
       '@internationalized/number':
-        specifier: ^3.6.8
+        specifier: 'catalog:'
         version: 3.6.8
       '@nuxt/content':
         specifier: ^3.0.0
         version: 3.16.0(@oxc-project/types@0.149.0)(@valibot/to-json-schema@1.7.1(valibot@1.5.0(typescript@6.0.3)))(better-sqlite3@12.11.1)(esbuild@0.28.0)(magic-string@1.3.1)(magicast@0.5.4)(oxc-parser@0.139.0)(rolldown@1.2.8)(rollup@4.60.4)(supports-color@10.2.2)(valibot@1.5.0(typescript@6.0.3))(vite@8.3.0(@types/node@25.9.0)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.47.1)(yaml@2.9.0))
       '@nuxt/fonts':
-        specifier: ^0.14.0
+        specifier: 'catalog:'
         version: 0.14.0(db0@0.3.4(better-sqlite3@12.11.1))(esbuild@0.28.0)(ioredis@5.10.1(supports-color@10.2.2))(magic-string@1.3.1)(magicast@0.5.4)(oxc-parser@0.139.0)(rolldown@1.2.8)(rollup@4.60.4)(vite@8.3.0(@types/node@25.9.0)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.47.1)(yaml@2.9.0))
       '@nuxt/icon':
-        specifier: ^2.5.1
+        specifier: 'catalog:'
         version: 2.5.1(magic-string@1.3.1)(magicast@0.5.4)(oxc-parser@0.139.0)(rolldown@1.2.8)(unplugin@3.3.0(esbuild@0.28.0)(rolldown@1.2.8)(rollup@4.60.4)(vite@8.3.0(@types/node@25.9.0)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.47.1)(yaml@2.9.0)))(vite@8.3.0(@types/node@25.9.0)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.47.1)(yaml@2.9.0))(vue@3.5.42(typescript@6.0.3))
       '@nuxt/kit':
         specifier: ^4.5.2
         version: 4.5.2(magic-string@1.3.1)(magicast@0.5.4)(oxc-parser@0.139.0)(rolldown@1.2.8)(unplugin@3.3.0(esbuild@0.28.0)(rolldown@1.2.8)(rollup@4.60.4)(vite@8.3.0(@types/node@25.9.0)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.47.1)(yaml@2.9.0)))
       '@nuxt/schema':
-        specifier: ^4.5.2
+        specifier: 'catalog:'
         version: 4.5.2
       '@nuxtjs/color-mode':
-        specifier: ^4.0.1
+        specifier: 'catalog:'
         version: 4.0.1(magic-string@1.3.1)(magicast@0.5.4)(oxc-parser@0.139.0)(rolldown@1.2.8)(unplugin@3.3.0(esbuild@0.28.0)(rolldown@1.2.8)(rollup@4.60.4)(vite@8.3.0(@types/node@25.9.0)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.47.1)(yaml@2.9.0)))
       '@standard-schema/spec':
-        specifier: ^1.1.0
+        specifier: 'catalog:'
         version: 1.1.0
       '@tailwindcss/postcss':
-        specifier: ^4.3.3
+        specifier: 'catalog:'
         version: 4.3.3
       '@tailwindcss/vite':
-        specifier: ^4.3.3
+        specifier: 'catalog:'
         version: 4.3.3(vite@8.3.0(@types/node@25.9.0)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.47.1)(yaml@2.9.0))
       '@tanstack/vue-table':
-        specifier: ^8.21.3
+        specifier: 'catalog:'
         version: 8.21.3(vue@3.5.42(typescript@6.0.3))
       '@tanstack/vue-virtual':
-        specifier: ^3.13.38
+        specifier: 'catalog:'
         version: 3.13.38(vue@3.5.42(typescript@6.0.3))
       '@tiptap/core':
-        specifier: ^3.31.3
+        specifier: 'catalog:'
         version: 3.31.3(@tiptap/pm@3.31.3)
       '@tiptap/extension-bubble-menu':
-        specifier: ^3.31.3
+        specifier: 'catalog:'
         version: 3.31.3(@tiptap/core@3.31.3(@tiptap/pm@3.31.3))(@tiptap/pm@3.31.3)
       '@tiptap/extension-code':
-        specifier: ^3.31.3
+        specifier: 'catalog:'
         version: 3.31.3(@tiptap/core@3.31.3(@tiptap/pm@3.31.3))
       '@tiptap/extension-collaboration':
-        specifier: ^3.31.3
+        specifier: 'catalog:'
         version: 3.31.3(@tiptap/core@3.31.3(@tiptap/pm@3.31.3))(@tiptap/pm@3.31.3)(@tiptap/y-tiptap@3.0.7(prosemirror-model@1.25.11)(prosemirror-state@1.4.4)(prosemirror-view@1.42.3)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(yjs@13.6.30)
       '@tiptap/extension-drag-handle':
-        specifier: ^3.31.3
+        specifier: 'catalog:'
         version: 3.31.3(@tiptap/core@3.31.3(@tiptap/pm@3.31.3))(@tiptap/extension-collaboration@3.31.3(@tiptap/core@3.31.3(@tiptap/pm@3.31.3))(@tiptap/pm@3.31.3)(@tiptap/y-tiptap@3.0.7(prosemirror-model@1.25.11)(prosemirror-state@1.4.4)(prosemirror-view@1.42.3)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(yjs@13.6.30))(@tiptap/extension-node-range@3.31.3(@tiptap/core@3.31.3(@tiptap/pm@3.31.3))(@tiptap/pm@3.31.3))(@tiptap/pm@3.31.3)(@tiptap/y-tiptap@3.0.7(prosemirror-model@1.25.11)(prosemirror-state@1.4.4)(prosemirror-view@1.42.3)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))
       '@tiptap/extension-drag-handle-vue-3':
-        specifier: ^3.31.3
+        specifier: 'catalog:'
         version: 3.31.3(@tiptap/extension-drag-handle@3.31.3(@tiptap/core@3.31.3(@tiptap/pm@3.31.3))(@tiptap/extension-collaboration@3.31.3(@tiptap/core@3.31.3(@tiptap/pm@3.31.3))(@tiptap/pm@3.31.3)(@tiptap/y-tiptap@3.0.7(prosemirror-model@1.25.11)(prosemirror-state@1.4.4)(prosemirror-view@1.42.3)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(yjs@13.6.30))(@tiptap/extension-node-range@3.31.3(@tiptap/core@3.31.3(@tiptap/pm@3.31.3))(@tiptap/pm@3.31.3))(@tiptap/pm@3.31.3)(@tiptap/y-tiptap@3.0.7(prosemirror-model@1.25.11)(prosemirror-state@1.4.4)(prosemirror-view@1.42.3)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)))(@tiptap/pm@3.31.3)(@tiptap/vue-3@3.31.3(@floating-ui/dom@1.8.0)(@tiptap/core@3.31.3(@tiptap/pm@3.31.3))(@tiptap/pm@3.31.3)(vue@3.5.42(typescript@6.0.3)))(vue@3.5.42(typescript@6.0.3))
       '@tiptap/extension-floating-menu':
-        specifier: ^3.31.3
+        specifier: 'catalog:'
         version: 3.31.3(@floating-ui/dom@1.8.0)(@tiptap/core@3.31.3(@tiptap/pm@3.31.3))(@tiptap/pm@3.31.3)
       '@tiptap/extension-horizontal-rule':
-        specifier: ^3.31.3
+        specifier: 'catalog:'
         version: 3.31.3(@tiptap/core@3.31.3(@tiptap/pm@3.31.3))(@tiptap/pm@3.31.3)
       '@tiptap/extension-image':
-        specifier: ^3.31.3
+        specifier: 'catalog:'
         version: 3.31.3(@tiptap/core@3.31.3(@tiptap/pm@3.31.3))
       '@tiptap/extension-mention':
-        specifier: ^3.31.3
+        specifier: 'catalog:'
         version: 3.31.3(@tiptap/core@3.31.3(@tiptap/pm@3.31.3))(@tiptap/pm@3.31.3)(@tiptap/suggestion@3.31.3(@floating-ui/dom@1.8.0)(@tiptap/core@3.31.3(@tiptap/pm@3.31.3))(@tiptap/pm@3.31.3))
       '@tiptap/extension-node-range':
-        specifier: ^3.31.3
+        specifier: 'catalog:'
         version: 3.31.3(@tiptap/core@3.31.3(@tiptap/pm@3.31.3))(@tiptap/pm@3.31.3)
       '@tiptap/extension-placeholder':
-        specifier: ^3.31.3
+        specifier: 'catalog:'
         version: 3.31.3(@tiptap/extensions@3.31.3(@tiptap/core@3.31.3(@tiptap/pm@3.31.3))(@tiptap/pm@3.31.3))
       '@tiptap/markdown':
-        specifier: ^3.31.3
+        specifier: 'catalog:'
         version: 3.31.3(@tiptap/core@3.31.3(@tiptap/pm@3.31.3))(@tiptap/pm@3.31.3)
       '@tiptap/pm':
-        specifier: ^3.31.3
+        specifier: 'catalog:'
         version: 3.31.3
       '@tiptap/starter-kit':
-        specifier: ^3.31.3
+        specifier: 'catalog:'
         version: 3.31.3
       '@tiptap/suggestion':
-        specifier: ^3.31.3
+        specifier: 'catalog:'
         version: 3.31.3(@floating-ui/dom@1.8.0)(@tiptap/core@3.31.3(@tiptap/pm@3.31.3))(@tiptap/pm@3.31.3)
       '@tiptap/vue-3':
-        specifier: ^3.31.3
+        specifier: 'catalog:'
         version: 3.31.3(@floating-ui/dom@1.8.0)(@tiptap/core@3.31.3(@tiptap/pm@3.31.3))(@tiptap/pm@3.31.3)(vue@3.5.42(typescript@6.0.3))
       '@unhead/vue':
-        specifier: ^3.4.0
+        specifier: 'catalog:'
         version: 3.4.0(@oxc-project/types@0.149.0)(@vitejs/devtools-kit@0.4.8(@modelcontextprotocol/sdk@1.30.0(supports-color@10.2.2)(zod@4.6.4))(cac@6.7.14)(srvx@0.11.22)(typescript@6.0.3)(vite@8.3.0(@types/node@25.9.0)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.47.1)(yaml@2.9.0)))(esbuild@0.28.0)(lightningcss@1.33.0)(oxc-parser@0.139.0)(rolldown@1.2.8)(rollup@4.60.4)(vite@8.3.0(@types/node@25.9.0)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.47.1)(yaml@2.9.0))(vue@3.5.42(typescript@6.0.3))
       '@vueuse/core':
-        specifier: ^14.4.0
+        specifier: 'catalog:'
         version: 14.4.0(vue@3.5.42(typescript@6.0.3))
       '@vueuse/integrations':
-        specifier: ^14.4.0
+        specifier: 'catalog:'
         version: 14.4.0(axios@1.19.0(debug@4.4.3(supports-color@10.2.2))(supports-color@10.2.2))(change-case@5.4.4)(fuse.js@7.5.0)(sortablejs@1.15.7)(vue@3.5.42(typescript@6.0.3))
       '@vueuse/shared':
-        specifier: ^14.4.0
+        specifier: 'catalog:'
         version: 14.4.0(vue@3.5.42(typescript@6.0.3))
       colortranslator:
-        specifier: ^5.0.0
+        specifier: 'catalog:'
         version: 5.0.0
       consola:
-        specifier: ^3.4.2
+        specifier: 'catalog:'
         version: 3.4.2
       defu:
-        specifier: ^6.1.7
+        specifier: 'catalog:'
         version: 6.1.7
       embla-carousel-auto-height:
-        specifier: ^8.6.0
+        specifier: 'catalog:'
         version: 8.6.0(embla-carousel@8.6.0)
       embla-carousel-auto-scroll:
-        specifier: ^8.6.0
+        specifier: 'catalog:'
         version: 8.6.0(embla-carousel@8.6.0)
       embla-carousel-autoplay:
-        specifier: ^8.6.0
+        specifier: 'catalog:'
         version: 8.6.0(embla-carousel@8.6.0)
       embla-carousel-class-names:
-        specifier: ^8.6.0
+        specifier: 'catalog:'
         version: 8.6.0(embla-carousel@8.6.0)
       embla-carousel-fade:
-        specifier: ^8.6.0
+        specifier: 'catalog:'
         version: 8.6.0(embla-carousel@8.6.0)
       embla-carousel-vue:
-        specifier: ^8.6.0
+        specifier: 'catalog:'
         version: 8.6.0(vue@3.5.42(typescript@6.0.3))
       embla-carousel-wheel-gestures:
-        specifier: ^8.1.0
+        specifier: 'catalog:'
         version: 8.1.0(embla-carousel@8.6.0)
       fuse.js:
-        specifier: ^7.5.0
+        specifier: 'catalog:'
         version: 7.5.0
       hookable:
-        specifier: ^6.1.1
+        specifier: 'catalog:'
         version: 6.1.1
       joi:
         specifier: ^18.0.0
         version: 18.2.9
       knitwork:
-        specifier: ^1.3.0
+        specifier: 'catalog:'
         version: 1.3.0
       magic-string:
-        specifier: ^1.3.1
+        specifier: 'catalog:'
         version: 1.3.1
       mlly:
-        specifier: ^1.8.2
+        specifier: 'catalog:'
         version: 1.8.2
       motion-v:
-        specifier: ^2.4.2
+        specifier: 'catalog:'
         version: 2.4.2(@vueuse/core@14.4.0(vue@3.5.42(typescript@6.0.3)))(vue@3.5.42(typescript@6.0.3))
       ohash:
-        specifier: ^2.0.12
+        specifier: 'catalog:'
         version: 2.0.12
       pathe:
-        specifier: ^2.0.3
+        specifier: 'catalog:'
         version: 2.0.3
       reka-ui:
-        specifier: 2.10.4
+        specifier: 'catalog:'
         version: 2.10.4(vue@3.5.42(typescript@6.0.3))
       scule:
-        specifier: ^1.3.0
+        specifier: 'catalog:'
         version: 1.3.0
       superstruct:
         specifier: ^2.0.0
         version: 2.0.2
       tailwind-merge:
-        specifier: ^3.7.0
+        specifier: 'catalog:'
         version: 3.7.0
       tailwind-variants:
         specifier: 3.2.2
         version: 3.2.2(tailwind-merge@3.7.0)(tailwindcss@4.3.3)
       tailwindcss:
-        specifier: ^4.3.3
+        specifier: 'catalog:'
         version: 4.3.3
       tinyglobby:
-        specifier: ^0.2.17
+        specifier: 'catalog:'
         version: 0.2.17
       typescript:
         specifier: ^6.0.3
         version: 6.0.3
       ufo:
-        specifier: ^1.6.4
+        specifier: 'catalog:'
         version: 1.6.4
       unplugin:
         specifier: ^3.3.0
         version: 3.3.0(esbuild@0.28.0)(rolldown@1.2.8)(rollup@4.60.4)(vite@8.3.0(@types/node@25.9.0)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.47.1)(yaml@2.9.0))
       unplugin-auto-import:
-        specifier: ^21.1.0
+        specifier: 'catalog:'
         version: 21.1.0(@nuxt/kit@4.5.2(magic-string@1.3.1)(magicast@0.5.4)(oxc-parser@0.139.0)(rolldown@1.2.8)(unplugin@3.3.0(esbuild@0.28.0)(rolldown@1.2.8)(rollup@4.60.4)(vite@8.3.0(@types/node@25.9.0)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.47.1)(yaml@2.9.0))))(@vueuse/core@14.4.0(vue@3.5.42(typescript@6.0.3)))(esbuild@0.28.0)(oxc-parser@0.139.0)(rolldown@1.2.8)(rollup@4.60.4)(vite@8.3.0(@types/node@25.9.0)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.47.1)(yaml@2.9.0))
       unplugin-vue-components:
-        specifier: ^32.1.0
+        specifier: 'catalog:'
         version: 32.1.0(@nuxt/kit@4.5.2(magic-string@1.3.1)(magicast@0.5.4)(oxc-parser@0.139.0)(rolldown@1.2.8)(unplugin@3.3.0(esbuild@0.28.0)(rolldown@1.2.8)(rollup@4.60.4)(vite@8.3.0(@types/node@25.9.0)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.47.1)(yaml@2.9.0))))(esbuild@0.28.0)(rolldown@1.2.8)(rollup@4.60.4)(vite@8.3.0(@types/node@25.9.0)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.47.1)(yaml@2.9.0))(vue@3.5.42(typescript@6.0.3))
       valibot:
         specifier: ^1.0.0
         version: 1.5.0(typescript@6.0.3)
       vaul-vue:
-        specifier: 0.4.1
+        specifier: 'catalog:'
         version: 0.4.1(reka-ui@2.10.4(vue@3.5.42(typescript@6.0.3)))(vue@3.5.42(typescript@6.0.3))
       vue-component-type-helpers:
-        specifier: ^3.3.11
+        specifier: 'catalog:'
         version: 3.3.11
       vue-router:
         specifier: ^4.5.0 || ^5.0.0
@@ -401,67 +806,67 @@ importers:
         version: 4.6.4
     devDependencies:
       '@codspeed/vitest-plugin':
-        specifier: ^5.7.1
+        specifier: 'catalog:'
         version: 5.7.1(debug@4.4.3(supports-color@10.2.2))(supports-color@10.2.2)(tinybench@2.9.0)(vite@8.3.0(@types/node@25.9.0)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.47.1)(yaml@2.9.0))(vitest@4.1.11(@opentelemetry/api@1.9.1)(@types/node@25.9.0)(happy-dom@20.14.5)(vite@8.3.0(@types/node@25.9.0)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.47.1)(yaml@2.9.0)))
       '@nuxt/eslint-config':
-        specifier: ^1.17.0
+        specifier: 'catalog:'
         version: 1.17.0(@typescript-eslint/utils@8.66.0(eslint@10.10.0(jiti@2.7.0)(supports-color@10.2.2))(supports-color@10.2.2)(typescript@6.0.3))(@vue/compiler-sfc@3.5.42)(eslint@10.10.0(jiti@2.7.0)(supports-color@10.2.2))(supports-color@10.2.2)(typescript@6.0.3)
       '@nuxt/module-builder':
-        specifier: ^1.0.3
+        specifier: 'catalog:'
         version: 1.0.3(@nuxt/cli@3.37.0(@nuxt/schema@4.5.2)(cac@6.7.14)(commander@14.0.3)(magicast@0.5.4)(supports-color@10.2.2))(@volar/typescript@2.4.28(typescript@6.0.3))(@vue/compiler-core@3.5.42)(@vue/language-core@3.3.11)(esbuild@0.28.0)(rolldown@1.2.8)(rollup@4.60.4)(typescript@6.0.3)(vite@8.3.0(@types/node@25.9.0)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.47.1)(yaml@2.9.0))(vue-tsc@3.3.11(typescript@6.0.3))(vue@3.5.42(typescript@6.0.3))
       '@nuxt/test-utils':
-        specifier: ^4.3.2
+        specifier: 'catalog:'
         version: 4.3.2(@vue/test-utils@2.5.0(@vue/compiler-dom@3.5.42)(@vue/server-renderer@3.5.42)(vue@3.5.42(typescript@6.0.3)))(esbuild@0.28.0)(happy-dom@20.14.5)(magicast@0.5.4)(oxc-parser@0.139.0)(rolldown@1.2.8)(rollup@4.60.4)(typescript@6.0.3)(vite@8.3.0(@types/node@25.9.0)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.47.1)(yaml@2.9.0))(vitest@4.1.11(@opentelemetry/api@1.9.1)(@types/node@25.9.0)(happy-dom@20.14.5)(vite@8.3.0(@types/node@25.9.0)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.47.1)(yaml@2.9.0)))
       '@release-it/conventional-changelog':
-        specifier: ^12.0.0
+        specifier: 'catalog:'
         version: 12.0.0(conventional-commits-filter@6.0.1)(conventional-commits-parser@7.1.2)(release-it@21.0.2(@types/node@25.9.0)(magicast@0.5.4)(supports-color@10.2.2))
       '@tanstack/table-core':
-        specifier: ^8.21.3
+        specifier: 'catalog:'
         version: 8.21.3
       '@vitejs/plugin-vue':
-        specifier: ^6.0.8
+        specifier: 'catalog:'
         version: 6.0.8(vite@8.3.0(@types/node@25.9.0)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.47.1)(yaml@2.9.0))(vue@3.5.42(typescript@6.0.3))
       '@vue/test-utils':
-        specifier: ^2.5.0
+        specifier: 'catalog:'
         version: 2.5.0(@vue/compiler-dom@3.5.42)(@vue/server-renderer@3.5.42)(vue@3.5.42(typescript@6.0.3))
       ai:
-        specifier: ^7.0.99
+        specifier: 'catalog:'
         version: 7.0.99(zod@4.6.4)
       embla-carousel:
-        specifier: ^8.6.0
+        specifier: 'catalog:'
         version: 8.6.0
       eslint:
-        specifier: ^10.10.0
+        specifier: 'catalog:'
         version: 10.10.0(jiti@2.7.0)(supports-color@10.2.2)
       eslint-plugin-better-tailwindcss:
-        specifier: ^4.7.0
+        specifier: 'catalog:'
         version: 4.7.0(eslint@10.10.0(jiti@2.7.0)(supports-color@10.2.2))(tailwindcss@4.3.3)(typescript@6.0.3)
       happy-dom:
-        specifier: ^20.14.5
+        specifier: 'catalog:'
         version: 20.14.5
       nuxt:
-        specifier: ^4.5.2
+        specifier: 'catalog:'
         version: 4.5.2(3ce49ed4174b06f52dff9bccad7754ad)
       release-it:
-        specifier: ^21.0.2
+        specifier: 'catalog:'
         version: 21.0.2(@types/node@25.9.0)(magicast@0.5.4)(supports-color@10.2.2)
       unbuild:
-        specifier: ^3.6.1
+        specifier: 'catalog:'
         version: 3.6.1(typescript@6.0.3)(vue-sfc-transformer@0.2.3(@volar/typescript@2.4.28(typescript@6.0.3))(@vue/compiler-core@3.5.42)(@vue/language-core@3.3.11)(esbuild@0.28.0)(rolldown@1.2.8)(typescript@6.0.3)(vue@3.5.42(typescript@6.0.3)))(vue-tsc@3.3.11(typescript@6.0.3))(vue@3.5.42(typescript@6.0.3))
       vitest:
-        specifier: ^4.1.11
+        specifier: 'catalog:'
         version: 4.1.11(@opentelemetry/api@1.9.1)(@types/node@25.9.0)(happy-dom@20.14.5)(vite@8.3.0(@types/node@25.9.0)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.47.1)(yaml@2.9.0))
       vitest-axe:
-        specifier: ^0.1.0
+        specifier: 'catalog:'
         version: 0.1.0(vitest@4.1.11(@opentelemetry/api@1.9.1)(@types/node@25.9.0)(happy-dom@20.14.5)(vite@8.3.0(@types/node@25.9.0)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.47.1)(yaml@2.9.0)))
       vitest-environment-nuxt:
-        specifier: ^2.0.0
+        specifier: 'catalog:'
         version: 2.0.0
       vue:
-        specifier: ^3.5.42
+        specifier: 'catalog:'
         version: 3.5.42(typescript@6.0.3)
       vue-tsc:
-        specifier: ^3.3.11
+        specifier: 'catalog:'
         version: 3.3.11(typescript@6.0.3)
 
   cli:
@@ -482,31 +887,31 @@ importers:
   docs:
     dependencies:
       '@ai-sdk/anthropic':
-        specifier: ^4.0.53
+        specifier: 'catalog:'
         version: 4.0.53(zod@4.6.4)
       '@ai-sdk/gateway':
-        specifier: ^4.0.80
+        specifier: 'catalog:'
         version: 4.0.80(zod@4.6.4)
       '@ai-sdk/vue':
-        specifier: ^4.0.99
+        specifier: 'catalog:'
         version: 4.0.99(vue@3.5.42(typescript@6.0.3))(zod@4.6.4)
       '@comark/vue':
-        specifier: ^0.7.0
+        specifier: 'catalog:'
         version: 0.7.0(shiki@4.4.3)(vue@3.5.42(typescript@6.0.3))
       '@iconify-json/logos':
-        specifier: ^1.2.14
+        specifier: 'catalog:'
         version: 1.2.14
       '@iconify-json/lucide':
-        specifier: ^1.2.131
+        specifier: 'catalog:'
         version: 1.2.132
       '@iconify-json/simple-icons':
-        specifier: ^1.2.95
+        specifier: 'catalog:'
         version: 1.2.96
       '@iconify-json/vscode-icons':
-        specifier: ^1.2.77
+        specifier: 'catalog:'
         version: 1.2.77
       '@nuxt/content':
-        specifier: ^3.16.0
+        specifier: 'catalog:'
         version: 3.16.0(@oxc-project/types@0.149.0)(@valibot/to-json-schema@1.7.1(valibot@1.5.0(typescript@6.0.3)))(better-sqlite3@12.11.1)(esbuild@0.28.0)(magic-string@1.3.1)(magicast@0.5.4)(oxc-parser@0.143.0)(rolldown@1.2.8)(rollup@4.60.4)(supports-color@10.2.2)(valibot@1.5.0(typescript@6.0.3))(vite@8.3.0(@types/node@25.9.0)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.47.1)(yaml@2.9.0))
       '@nuxt/image':
         specifier: 2.0.0
@@ -515,216 +920,216 @@ importers:
         specifier: workspace:*
         version: link:..
       '@nuxtjs/mcp-toolkit':
-        specifier: ^0.21.0
+        specifier: 'catalog:'
         version: 0.21.0(@vue/compiler-sfc@3.5.42)(h3@1.15.11)(magic-string@1.3.1)(magicast@0.5.4)(oxc-parser@0.143.0)(rolldown@1.2.8)(rollup@4.60.4)(supports-color@10.2.2)(unplugin@3.3.0(esbuild@0.28.0)(rolldown@1.2.8)(rollup@4.60.4)(vite@8.3.0(@types/node@25.9.0)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.47.1)(yaml@2.9.0)))(vite@8.3.0(@types/node@25.9.0)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.47.1)(yaml@2.9.0))(vue@3.5.42(typescript@6.0.3))(zod@4.6.4)
       '@nuxtjs/mdc':
-        specifier: ^0.23.1
+        specifier: 'catalog:'
         version: 0.23.1(magic-string@1.3.1)(magicast@0.5.4)(oxc-parser@0.143.0)(rolldown@1.2.8)(supports-color@10.2.2)(unplugin@3.3.0(esbuild@0.28.0)(rolldown@1.2.8)(rollup@4.60.4)(vite@8.3.0(@types/node@25.9.0)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.47.1)(yaml@2.9.0)))
       '@nuxtjs/robots':
-        specifier: ^6.2.2
+        specifier: 'catalog:'
         version: 6.2.2(@nuxt/schema@4.5.2)(magic-string@1.3.1)(magicast@0.5.4)(nuxt@4.5.2(26007f2267d57a55bc0a00b77d04ddb2))(oxc-parser@0.143.0)(rolldown@1.2.8)(unplugin@3.3.0(esbuild@0.28.0)(rolldown@1.2.8)(rollup@4.60.4)(vite@8.3.0(@types/node@25.9.0)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.47.1)(yaml@2.9.0)))(vite@8.3.0(@types/node@25.9.0)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.47.1)(yaml@2.9.0))(vue@3.5.42(typescript@6.0.3))(zod@4.6.4)
       '@nuxtjs/sitemap':
-        specifier: ^8.5.1
+        specifier: 'catalog:'
         version: 8.5.1(@nuxt/schema@4.5.2)(magic-string@1.3.1)(magicast@0.5.4)(nuxt@4.5.2(26007f2267d57a55bc0a00b77d04ddb2))(oxc-parser@0.143.0)(rolldown@1.2.8)(unplugin@3.3.0(esbuild@0.28.0)(rolldown@1.2.8)(rollup@4.60.4)(vite@8.3.0(@types/node@25.9.0)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.47.1)(yaml@2.9.0)))(vite@8.3.0(@types/node@25.9.0)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.47.1)(yaml@2.9.0))(vue@3.5.42(typescript@6.0.3))(zod@4.6.4)
       '@octokit/rest':
-        specifier: ^22.0.1
+        specifier: 'catalog:'
         version: 22.0.1
       '@regle/core':
-        specifier: ^1.29.1
+        specifier: 'catalog:'
         version: 1.29.1(vue@3.5.42(typescript@6.0.3))
       '@regle/rules':
-        specifier: ^1.29.1
+        specifier: 'catalog:'
         version: 1.29.1(vue@3.5.42(typescript@6.0.3))
       '@takumi-rs/core':
-        specifier: ^2.13.7
+        specifier: 'catalog:'
         version: 2.13.7(csstype@3.2.3)
       '@tiptap/extension-emoji':
-        specifier: ^3.31.3
+        specifier: 'catalog:'
         version: 3.31.3(@tiptap/core@3.31.3(@tiptap/pm@3.31.3))(@tiptap/pm@3.31.3)(@tiptap/suggestion@3.31.3(@floating-ui/dom@1.8.0)(@tiptap/core@3.31.3(@tiptap/pm@3.31.3))(@tiptap/pm@3.31.3))(emojibase@17.0.0)
       '@tiptap/extension-text-align':
-        specifier: ^3.31.3
+        specifier: 'catalog:'
         version: 3.31.3(@tiptap/core@3.31.3(@tiptap/pm@3.31.3))
       '@vercel/analytics':
-        specifier: ^2.0.1
+        specifier: 'catalog:'
         version: 2.0.1(nuxt@4.5.2(26007f2267d57a55bc0a00b77d04ddb2))(vue-router@5.3.1(@vue/compiler-sfc@3.5.42)(esbuild@0.28.0)(rolldown@1.2.8)(rollup@4.60.4)(vite@8.3.0(@types/node@25.9.0)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.47.1)(yaml@2.9.0))(vue@3.5.42(typescript@6.0.3)))(vue@3.5.42(typescript@6.0.3))
       '@vercel/speed-insights':
-        specifier: ^2.0.0
+        specifier: 'catalog:'
         version: 2.0.0(nuxt@4.5.2(26007f2267d57a55bc0a00b77d04ddb2))(vue-router@5.3.1(@vue/compiler-sfc@3.5.42)(esbuild@0.28.0)(rolldown@1.2.8)(rollup@4.60.4)(vite@8.3.0(@types/node@25.9.0)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.47.1)(yaml@2.9.0))(vue@3.5.42(typescript@6.0.3)))(vue@3.5.42(typescript@6.0.3))
       '@vueuse/integrations':
-        specifier: ^14.4.0
+        specifier: 'catalog:'
         version: 14.4.0(axios@1.19.0(debug@4.4.3(supports-color@10.2.2))(supports-color@10.2.2))(change-case@5.4.4)(fuse.js@7.5.0)(sortablejs@1.15.7)(vue@3.5.42(typescript@6.0.3))
       '@vueuse/nuxt':
-        specifier: ^14.4.0
+        specifier: 'catalog:'
         version: 14.4.0(magic-string@1.3.1)(magicast@0.5.4)(nuxt@4.5.2(26007f2267d57a55bc0a00b77d04ddb2))(oxc-parser@0.143.0)(rolldown@1.2.8)(unplugin@3.3.0(esbuild@0.28.0)(rolldown@1.2.8)(rollup@4.60.4)(vite@8.3.0(@types/node@25.9.0)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.47.1)(yaml@2.9.0)))(vue@3.5.42(typescript@6.0.3))
       ai:
-        specifier: ^7.0.99
+        specifier: 'catalog:'
         version: 7.0.99(zod@4.6.4)
       capture-website:
-        specifier: ^5.1.0
+        specifier: 'catalog:'
         version: 5.1.0(supports-color@10.2.2)(typescript@6.0.3)
       fflate:
-        specifier: ^0.8.3
+        specifier: 'catalog:'
         version: 0.8.3
       joi:
-        specifier: ^18.2.9
+        specifier: 'catalog:'
         version: 18.2.9
       json5:
-        specifier: ^2.2.3
+        specifier: 'catalog:'
         version: 2.2.3
       maska:
-        specifier: ^3.2.1
+        specifier: 'catalog:'
         version: 3.2.1
       minimark:
-        specifier: ^0.2.0
+        specifier: 'catalog:'
         version: 0.2.0
       motion-v:
-        specifier: ^2.4.2
+        specifier: 'catalog:'
         version: 2.4.2(@vueuse/core@14.4.0(vue@3.5.42(typescript@6.0.3)))(vue@3.5.42(typescript@6.0.3))
       nuxt:
-        specifier: ^4.5.2
+        specifier: 'catalog:'
         version: 4.5.2(26007f2267d57a55bc0a00b77d04ddb2)
       nuxt-agent-discovery:
-        specifier: ^0.5.1
+        specifier: 'catalog:'
         version: 0.5.1(1a8e2c39f765bbcf5208cd4f0fcdd5e7)
       nuxt-component-meta:
-        specifier: ^0.18.0
+        specifier: 'catalog:'
         version: 0.18.0(@oxc-project/types@0.149.0)(esbuild@0.28.0)(magicast@0.5.4)(rolldown@1.2.8)(rollup@4.60.4)(vite@8.3.0(@types/node@25.9.0)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.47.1)(yaml@2.9.0))
       nuxt-llms:
-        specifier: ^0.2.0
+        specifier: 'catalog:'
         version: 0.2.0(magic-string@1.3.1)(magicast@0.5.4)(oxc-parser@0.143.0)(rolldown@1.2.8)(unplugin@3.3.0(esbuild@0.28.0)(rolldown@1.2.8)(rollup@4.60.4)(vite@8.3.0(@types/node@25.9.0)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.47.1)(yaml@2.9.0)))
       nuxt-og-image:
-        specifier: ^6.7.8
+        specifier: 'catalog:'
         version: 6.7.8(40983800aed7e1f9b2af772a4836b332)
       nuxt-schema-org:
-        specifier: ^6.3.1
+        specifier: 'catalog:'
         version: 6.3.1(38b91dae4a64f259be47cefe3da1c411)
       prettier:
-        specifier: ^3.9.6
+        specifier: 'catalog:'
         version: 3.9.6
       shiki:
-        specifier: ^4.4.3
+        specifier: 'catalog:'
         version: 4.4.3
       shiki-transformer-color-highlight:
-        specifier: ^1.1.0
+        specifier: 'catalog:'
         version: 1.1.0
       shiki-transformer-icon-highlight:
-        specifier: ^0.2.0
+        specifier: 'catalog:'
         version: 0.2.0
       simple-git:
-        specifier: ^3.36.0
+        specifier: 'catalog:'
         version: 3.36.0(supports-color@10.2.2)
       sortablejs:
-        specifier: ^1.15.7
+        specifier: 'catalog:'
         version: 1.15.7
       superstruct:
-        specifier: ^2.0.2
+        specifier: 'catalog:'
         version: 2.0.2
       tailwindcss:
-        specifier: ^4.3.3
+        specifier: 'catalog:'
         version: 4.3.3
       tiptap-extension-code-block-shiki:
-        specifier: ^1.2.0
+        specifier: 'catalog:'
         version: 1.2.0(@tiptap/core@3.31.3(@tiptap/pm@3.31.3))(@tiptap/pm@3.31.3)(shiki@4.4.3)
       ufo:
-        specifier: ^1.6.4
+        specifier: 'catalog:'
         version: 1.6.4
       unist-util-visit:
-        specifier: ^5.1.0
+        specifier: 'catalog:'
         version: 5.1.0
       valibot:
-        specifier: ^1.5.0
+        specifier: 'catalog:'
         version: 1.5.0(typescript@6.0.3)
       vue-component-meta:
-        specifier: ^3.3.11
+        specifier: 'catalog:'
         version: 3.3.11(typescript@6.0.3)
       yup:
-        specifier: ^1.7.1
+        specifier: 'catalog:'
         version: 1.7.1
       zod:
-        specifier: ^4.6.4
+        specifier: 'catalog:'
         version: 4.6.4
     devDependencies:
       '@shikijs/types':
-        specifier: ^4.4.3
+        specifier: 'catalog:'
         version: 4.4.3
       '@types/sortablejs':
-        specifier: ^1.15.9
+        specifier: 'catalog:'
         version: 1.15.9
 
   playgrounds/nuxt:
     dependencies:
       '@ai-sdk/anthropic':
-        specifier: ^4.0.53
+        specifier: 'catalog:'
         version: 4.0.53(zod@4.6.4)
       '@ai-sdk/gateway':
-        specifier: ^4.0.80
+        specifier: 'catalog:'
         version: 4.0.80(zod@4.6.4)
       '@ai-sdk/vue':
-        specifier: ^4.0.99
+        specifier: 'catalog:'
         version: 4.0.99(vue@3.5.42(typescript@6.0.3))(zod@4.6.4)
       '@comark/vue':
-        specifier: ^0.7.0
+        specifier: 'catalog:'
         version: 0.7.0(shiki@4.4.3)(vue@3.5.42(typescript@6.0.3))
       '@iconify-json/lucide':
-        specifier: ^1.2.131
+        specifier: 'catalog:'
         version: 1.2.132
       '@iconify-json/simple-icons':
-        specifier: ^1.2.95
+        specifier: 'catalog:'
         version: 1.2.96
       '@internationalized/date':
-        specifier: ^3.12.4
+        specifier: 'catalog:'
         version: 3.12.4
       '@nuxt/content':
-        specifier: ^3.16.0
+        specifier: 'catalog:'
         version: 3.16.0(@oxc-project/types@0.149.0)(@valibot/to-json-schema@1.7.1(valibot@1.5.0(typescript@6.0.3)))(better-sqlite3@12.11.1)(esbuild@0.28.0)(magic-string@1.3.1)(magicast@0.5.4)(oxc-parser@0.143.0)(rolldown@1.2.8)(rollup@4.60.4)(supports-color@10.2.2)(valibot@1.5.0(typescript@6.0.3))(vite@8.3.0(@types/node@25.9.0)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.47.1)(yaml@2.9.0))
       '@nuxt/ui':
         specifier: workspace:*
         version: link:../..
       '@tanstack/vue-table':
-        specifier: ^8.21.3
+        specifier: 'catalog:'
         version: 8.21.3(vue@3.5.42(typescript@6.0.3))
       '@tiptap/core':
-        specifier: ^3.31.3
+        specifier: 'catalog:'
         version: 3.31.3(@tiptap/pm@3.31.3)
       '@tiptap/extension-emoji':
-        specifier: ^3.31.3
+        specifier: 'catalog:'
         version: 3.31.3(@tiptap/core@3.31.3(@tiptap/pm@3.31.3))(@tiptap/pm@3.31.3)(@tiptap/suggestion@3.31.3(@floating-ui/dom@1.8.0)(@tiptap/core@3.31.3(@tiptap/pm@3.31.3))(@tiptap/pm@3.31.3))(emojibase@17.0.0)
       '@tiptap/extension-text-align':
-        specifier: ^3.31.3
+        specifier: 'catalog:'
         version: 3.31.3(@tiptap/core@3.31.3(@tiptap/pm@3.31.3))
       '@tiptap/pm':
-        specifier: ^3.31.3
+        specifier: 'catalog:'
         version: 3.31.3
       '@tiptap/vue-3':
-        specifier: ^3.31.3
+        specifier: 'catalog:'
         version: 3.31.3(@floating-ui/dom@1.8.0)(@tiptap/core@3.31.3(@tiptap/pm@3.31.3))(@tiptap/pm@3.31.3)(vue@3.5.42(typescript@6.0.3))
       '@vueuse/core':
-        specifier: ^14.4.0
+        specifier: 'catalog:'
         version: 14.4.0(vue@3.5.42(typescript@6.0.3))
       ai:
-        specifier: ^7.0.99
+        specifier: 'catalog:'
         version: 7.0.99(zod@4.6.4)
       nuxt:
-        specifier: ^4.5.2
+        specifier: 'catalog:'
         version: 4.5.2(75ecb78f8240b9ae3881d29ecae62387)
       scule:
-        specifier: ^1.3.0
+        specifier: 'catalog:'
         version: 1.3.0
       tailwindcss:
-        specifier: ^4.3.3
+        specifier: 'catalog:'
         version: 4.3.3
       vue:
-        specifier: ^3.5.42
+        specifier: 'catalog:'
         version: 3.5.42(typescript@6.0.3)
       zod:
-        specifier: ^4.6.4
+        specifier: 'catalog:'
         version: 4.6.4
     devDependencies:
       typescript:
         specifier: ^6.0.3
         version: 6.0.3
       vue-tsc:
-        specifier: ^3.3.11
+        specifier: 'catalog:'
         version: 3.3.11(typescript@6.0.3)
 
   playgrounds/repl:
@@ -733,20 +1138,20 @@ importers:
         specifier: workspace:*
         version: link:../..
       '@vue/repl':
-        specifier: ^4.7.2
+        specifier: 'catalog:'
         version: 4.7.2
       tailwindcss:
-        specifier: ^4.3.3
+        specifier: 'catalog:'
         version: 4.3.3
       vue:
-        specifier: ^3.5.42
+        specifier: 'catalog:'
         version: 3.5.42(typescript@6.0.3)
     devDependencies:
       '@vitejs/plugin-vue':
-        specifier: ^6.0.8
+        specifier: 'catalog:'
         version: 6.0.8(vite@8.3.0(@types/node@25.9.0)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.47.1)(yaml@2.9.0))(vue@3.5.42(typescript@6.0.3))
       vite:
-        specifier: ^8.3.0
+        specifier: 'catalog:'
         version: 8.3.0(@types/node@25.9.0)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.47.1)(yaml@2.9.0)
 
   playgrounds/vue:
@@ -755,38 +1160,38 @@ importers:
         specifier: workspace:*
         version: link:../..
       '@tiptap/extension-emoji':
-        specifier: ^3.31.3
+        specifier: 'catalog:'
         version: 3.31.3(@tiptap/core@3.31.3(@tiptap/pm@3.31.3))(@tiptap/pm@3.31.3)(@tiptap/suggestion@3.31.3(@floating-ui/dom@1.8.0)(@tiptap/core@3.31.3(@tiptap/pm@3.31.3))(@tiptap/pm@3.31.3))(emojibase@17.0.0)
       '@tiptap/extension-text-align':
-        specifier: ^3.31.3
+        specifier: 'catalog:'
         version: 3.31.3(@tiptap/core@3.31.3(@tiptap/pm@3.31.3))
       tailwindcss:
-        specifier: ^4.3.3
+        specifier: 'catalog:'
         version: 4.3.3
       vue:
-        specifier: ^3.5.42
+        specifier: 'catalog:'
         version: 3.5.42(typescript@6.0.3)
       vue-router:
-        specifier: ^5.3.1
+        specifier: 'catalog:'
         version: 5.3.1(@vue/compiler-sfc@3.5.42)(esbuild@0.28.0)(rolldown@1.2.8)(rollup@4.60.4)(vite@8.3.0(@types/node@25.9.0)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.47.1)(yaml@2.9.0))(vue@3.5.42(typescript@6.0.3))
       zod:
-        specifier: ^4.6.4
+        specifier: 'catalog:'
         version: 4.6.4
     devDependencies:
       '@iconify-json/lucide':
-        specifier: ^1.2.131
+        specifier: 'catalog:'
         version: 1.2.132
       '@vitejs/plugin-vue':
-        specifier: ^6.0.8
+        specifier: 'catalog:'
         version: 6.0.8(vite@8.3.0(@types/node@25.9.0)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.47.1)(yaml@2.9.0))(vue@3.5.42(typescript@6.0.3))
       typescript:
         specifier: ^6.0.3
         version: 6.0.3
       vite:
-        specifier: ^8.3.0
+        specifier: 'catalog:'
         version: 8.3.0(@types/node@25.9.0)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.47.1)(yaml@2.9.0)
       vue-tsc:
-        specifier: ^3.3.11
+        specifier: 'catalog:'
         version: 3.3.11(typescript@6.0.3)
 
 packages:
