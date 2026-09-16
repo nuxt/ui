@@ -25,7 +25,8 @@ if (import.meta.server) {
   defineOgImage('Home.takumi', {
     lead: page.value.hero?.lead,
     accent: page.value.hero?.accent,
-    description: page.value.hero?.description
+    // the card has room for the first sentence, the rest is the hero's
+    description: page.value.hero?.description?.split('. ')[0]?.concat('.')
   })
 
   useSchemaOrg([
