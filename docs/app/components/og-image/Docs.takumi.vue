@@ -11,12 +11,44 @@ withDefaults(defineProps<{
 
 <template>
   <div class="bg-white size-full flex flex-col">
-    <div class="absolute inset-y-0 left-26 w-[2px] bg-slate-200" />
-    <div class="absolute inset-y-0 right-26 w-[2px] bg-slate-200" />
-    <div class="absolute top-12 inset-x-0 h-[2px] bg-slate-200" />
-    <div class="absolute bottom-26 inset-x-26 h-[2px] bg-slate-200" />
-    <div class="absolute bottom-12 inset-x-0 h-[2px] bg-slate-200" />
-    <svg class="absolute bottom-16 left-34 w-[133px] h-[26px]" viewBox="0 0 1020 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- The landing hero's texture, drawn once as an SVG since takumi has no
+         background-image, mask or oklch: a dot grid fading in and out
+         vertically, a few of its dots lit in primary, and the horizon, a
+         glow rising from the bottom edge under a hairline that fades out at
+         both ends. -->
+    <svg class="absolute inset-0" width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="dots" width="28" height="28" patternUnits="userSpaceOnUse">
+          <circle cx="14" cy="14" r="1" fill="#cad5e2" />
+        </pattern>
+        <linearGradient id="fade" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#fff" stop-opacity="0" />
+          <stop offset="0.3" stop-color="#fff" />
+          <stop offset="0.7" stop-color="#fff" />
+          <stop offset="1" stop-color="#fff" stop-opacity="0" />
+        </linearGradient>
+        <mask id="fade-mask">
+          <rect width="1200" height="630" fill="url(#fade)" />
+        </mask>
+        <linearGradient id="glow" x1="0" y1="1" x2="0" y2="0">
+          <stop offset="0" stop-color="#00C16A" stop-opacity="0.15" />
+          <stop offset="1" stop-color="#00C16A" stop-opacity="0" />
+        </linearGradient>
+        <linearGradient id="line" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stop-color="#00C16A" stop-opacity="0" />
+          <stop offset="0.3" stop-color="#00C16A" />
+          <stop offset="0.7" stop-color="#00C16A" />
+          <stop offset="1" stop-color="#00C16A" stop-opacity="0" />
+        </linearGradient>
+      </defs>
+      <rect width="1200" height="630" fill="url(#dots)" opacity="0.5" mask="url(#fade-mask)" />
+      <g fill="#00C16A" mask="url(#fade-mask)">
+        <circle cx="70" cy="126" r="1.5" /><circle cx="266" cy="70" r="1.5" /><circle cx="434" cy="238" r="1.5" /><circle cx="602" cy="98" r="1.5" /><circle cx="770" cy="322" r="1.5" /><circle cx="910" cy="182" r="1.5" /><circle cx="1050" cy="406" r="1.5" /><circle cx="1134" cy="70" r="1.5" /><circle cx="1162" cy="266" r="1.5" /><circle cx="322" cy="434" r="1.5" /><circle cx="686" cy="462" r="1.5" /><circle cx="994" cy="518" r="1.5" />
+      </g>
+      <rect y="450" width="1200" height="180" fill="url(#glow)" />
+      <rect y="628" width="1200" height="2" fill="url(#line)" />
+    </svg>
+    <svg class="absolute top-16 left-20 w-[133px] h-[26px]" viewBox="0 0 1020 200" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M377 200C379.16 200 381 198.209 381 196V103C381 103 386 112 395 127L434 194C435.785 197.74 439.744 200 443 200H470V50H443C441.202 50 439 51.4941 439 54V148L421 116L385 55C383.248 51.8912 379.479 50 376 50H350V200H377Z" fill="currentColor" />
       <path d="M726 92H739C742.314 92 745 89.3137 745 86V60H773V92H800V116H773V159C773 169.5 778.057 174 787 174H800V200H783C759.948 200 745 185.071 745 160V116H726V92Z" fill="currentColor" />
       <path d="M591 92V154C591 168.004 585.742 179.809 578 188C570.258 196.191 559.566 200 545 200C530.434 200 518.742 196.191 511 188C503.389 179.809 498 168.004 498 154V92H514C517.412 92 520.769 92.622 523 95C525.231 97.2459 526 98.5652 526 102V154C526 162.059 526.457 167.037 530 171C533.543 174.831 537.914 176 545 176C552.217 176 555.457 174.831 559 171C562.543 167.037 563 162.059 563 154V102C563 98.5652 563.769 96.378 566 94C567.96 91.9107 570.028 91.9599 573 92C573.411 92.0055 574.586 92 575 92H591Z" fill="currentColor" />
@@ -25,13 +57,12 @@ withDefaults(defineProps<{
       <path d="M958 60.0001H938C933.524 60.0001 929.926 59.9395 927 63C924.074 65.8905 925 67.5792 925 72V141C925 151.372 923.648 156.899 919 162C914.352 166.931 908.468 169 899 169C889.705 169 882.648 166.931 878 162C873.352 156.899 873 151.372 873 141V72.0001C873 67.5793 872.926 65.8906 870 63.0001C867.074 59.9396 863.476 60.0001 859 60.0001H840V141C840 159.023 845.016 173.458 855 184C865.156 194.542 879.893 200 899 200C918.107 200 932.844 194.542 943 184C953.156 173.458 958 159.023 958 141V60.0001Z" fill="#00DC82" />
       <path fill-rule="evenodd" clip-rule="evenodd" d="M1000 60.0233L1020 60V77L1020 128V156.007L1020 181L1020 189.004C1020 192.938 1019.98 194.429 1017 197.001C1014.02 199.725 1009.56 200 1005 200H986.001V181.006L986 130.012V70.0215C986 66.1576 986.016 64.5494 989 62.023C991.819 59.6358 995.437 60.0233 1000 60.0233Z" fill="#00DC82" />
     </svg>
-    <!-- takumi has no preflight reset: border-solid styles all four sides and any
-         side without an explicit width falls back to the 3px CSS default -->
-    <div class="mx-26 mt-12 border-y-2 border-x-0 border-solid border-slate-200 h-14 flex flex-row items-center">
-      <div class="h-full flex items-center border-r-2 border-y-0 border-l-0 border-solid border-slate-200 text-green-500 px-6">
+    <div class="mx-20 mt-[176px] h-[300px] flex flex-col justify-center">
+      <!-- the hero's pill, with the framework's mark in front of the section -->
+      <div v-if="headline" class="self-start flex flex-row items-center h-[38px] px-4 rounded-full bg-green-50 text-green-500 text-[20px] font-medium">
         <svg
           v-if="framework === 'nuxt'"
-          class="h-[40px] w-[40px]"
+          class="w-[24px] h-[24px] mr-2"
           viewBox="0 0 512 512"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -40,22 +71,22 @@ withDefaults(defineProps<{
         </svg>
         <svg
           v-else
-          class="w-[34px] h-[30px]"
+          class="w-[22px] h-[20px] mr-2"
           viewBox="0 0 261.76 226.69"
           xmlns="http://www.w3.org/2000/svg"
         >
+          class="w-[34px] h-[30px]"
+          viewBox="0 0 261.76 226.69"
+          xmlns="http://www.w3.org/2000/svg"
+          >
           <g transform="matrix(1.3333 0 0 -1.3333 -76.311 313.34)"><g transform="translate(178.06 235.01)"><path d="m0 0-22.669-39.264-22.669 39.264h-75.491l98.16-170.02 98.16 170.02z" fill="#41b883" /></g><g transform="translate(178.06 235.01)"><path d="m0 0-22.669-39.264-22.669 39.264h-36.227l58.896-102.01 58.896 102.01z" fill="#34495e" /></g></g>
         </svg>
-      </div>
-      <div v-if="headline" class="h-full uppercase flex items-center border-r-2 border-y-0 border-l-0 border-solid border-slate-200 text-green-500 text-[20px] font-semibold px-6">
         {{ headline }}
       </div>
-    </div>
-    <div class="mx-34 mt-12 h-[280px] flex flex-col justify-center">
-      <h1 v-if="title" class="text-4xl font-semibold text-left mb-4">
+      <h1 v-if="title" class="text-[56px] font-medium text-slate-900 mt-6 mb-0">
         {{ title }}
       </h1>
-      <p v-if="description" class="text-3xl/11 text-slate-500" :style="{ lineClamp: 3, textOverflow: 'ellipsis' }">
+      <p v-if="description" class="text-[28px] leading-[40px] text-slate-500 mt-4 mb-0" :style="{ lineClamp: 3, textOverflow: 'ellipsis' }">
         {{ description }}
       </p>
     </div>

@@ -1,12 +1,9 @@
 <script setup lang="ts">
-import { joinURL } from 'ufo'
-
 const { data: page } = await useAsyncData('index', () => queryCollection('index').first())
 if (!page.value) {
   throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
 }
 
-const { url } = useSiteConfig()
 const { version } = useRuntimeConfig().public
 const appConfig = useAppConfig()
 
@@ -19,13 +16,18 @@ useSeoMeta({
   title: page.value.title,
   description: page.value.description,
   ogTitle: `${page.value.title} - Nuxt UI`,
-  ogDescription: page.value.description,
-  ogImage: joinURL(url, '/og-image.png')
+  ogDescription: page.value.description
 })
 
 useCanonical('/raw/index.md')
 
 if (import.meta.server) {
+  defineOgImage('Home.takumi', {
+    lead: page.value.hero?.lead,
+    accent: page.value.hero?.accent,
+    description: page.value.hero?.description
+  })
+
   useSchemaOrg([
     defineSoftwareApp({
       name: 'Nuxt UI',
