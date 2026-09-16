@@ -11,7 +11,7 @@ links:
     to: https://reka-ui.com/docs/components/separator
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/Separator.vue
+    to: https://github.com/nuxt/ui/blob/v5/src/runtime/components/Separator.vue
 ---
 
 ## Usage
