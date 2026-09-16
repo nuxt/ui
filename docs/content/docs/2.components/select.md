@@ -10,7 +10,7 @@ links:
     to: https://reka-ui.com/docs/components/select
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/Select.vue
+    to: https://github.com/nuxt/ui/blob/v5/src/runtime/components/Select.vue
 ---
 
 ## Usage

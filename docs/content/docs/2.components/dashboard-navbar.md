@@ -5,7 +5,7 @@ category: dashboard
 links:
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/DashboardNavbar.vue
+    to: https://github.com/nuxt/ui/blob/v5/src/runtime/components/DashboardNavbar.vue
 ---
 
 ## Usage
