@@ -4,7 +4,7 @@
     "github>nuxt/renovate-config-nuxt"
   ],
   "baseBranchPatterns": [
-    "v4"
+    "v5"
   ],
   "packageRules": [
     {
