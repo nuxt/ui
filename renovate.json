@@ -28,6 +28,12 @@
       ]
     },
     {
+      "groupName": "tanstack",
+      "matchPackageNames": [
+        "@tanstack/*"
+      ]
+    },
+    {
       "matchPackageNames": [
         "tailwind-variants"
       ],
