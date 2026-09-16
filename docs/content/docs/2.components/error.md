@@ -4,7 +4,7 @@ category: layout
 links:
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/Error.vue
+    to: https://github.com/nuxt/ui/blob/v5/src/runtime/components/Error.vue
 ---
 
 ## Usage
@@ -172,7 +172,7 @@ const props = defineProps<{
 ```
 
 ::tip
-You might want to replicate the code of your `app.vue` inside your `error.vue` file to have the same layout and features, here is an example: <https://github.com/nuxt/ui/blob/v4/docs/app/error.vue>
+You might want to replicate the code of your `app.vue` inside your `error.vue` file to have the same layout and features, here is an example: <https://github.com/nuxt/ui/blob/v5/docs/app/error.vue>
 ::
 
 ::note
