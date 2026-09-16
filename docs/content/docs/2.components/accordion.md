@@ -12,7 +12,7 @@ links:
     to: https://reka-ui.com/docs/components/accordion
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/Accordion.vue
+    to: https://github.com/nuxt/ui/blob/v5/src/runtime/components/Accordion.vue
 ---
 
 ## Usage
