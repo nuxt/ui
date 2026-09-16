@@ -39,10 +39,11 @@ body:
     attributes:
       label: Package
       options:
+        - v5.0.0-alpha.x
         - v4.x
         - v3.x
         - v2.x
-      default: 0
+      default: 1
     validations:
       required: true
   - type: input
