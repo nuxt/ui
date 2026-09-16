@@ -140,25 +140,7 @@
     "@standard-schema/spec": "catalog:",
     "@tailwindcss/postcss": "catalog:",
     "@tailwindcss/vite": "catalog:",
-    "@tanstack/vue-table": "catalog:",
     "@tanstack/vue-virtual": "catalog:",
-    "@tiptap/core": "catalog:",
-    "@tiptap/extension-bubble-menu": "catalog:",
-    "@tiptap/extension-code": "catalog:",
-    "@tiptap/extension-collaboration": "catalog:",
-    "@tiptap/extension-drag-handle": "catalog:",
-    "@tiptap/extension-drag-handle-vue-3": "catalog:",
-    "@tiptap/extension-floating-menu": "catalog:",
-    "@tiptap/extension-horizontal-rule": "catalog:",
-    "@tiptap/extension-image": "catalog:",
-    "@tiptap/extension-mention": "catalog:",
-    "@tiptap/extension-node-range": "catalog:",
-    "@tiptap/extension-placeholder": "catalog:",
-    "@tiptap/markdown": "catalog:",
-    "@tiptap/pm": "catalog:",
-    "@tiptap/starter-kit": "catalog:",
-    "@tiptap/suggestion": "catalog:",
-    "@tiptap/vue-3": "catalog:",
     "@unhead/vue": "catalog:",
     "@vueuse/core": "catalog:",
     "@vueuse/integrations": "catalog:",
@@ -166,13 +148,6 @@
     "colortranslator": "catalog:",
     "consola": "catalog:",
     "defu": "catalog:",
-    "embla-carousel-auto-height": "catalog:",
-    "embla-carousel-auto-scroll": "catalog:",
-    "embla-carousel-autoplay": "catalog:",
-    "embla-carousel-class-names": "catalog:",
-    "embla-carousel-fade": "catalog:",
-    "embla-carousel-vue": "catalog:",
-    "embla-carousel-wheel-gestures": "catalog:",
     "fuse.js": "catalog:",
     "hookable": "catalog:",
     "knitwork": "catalog:",
@@ -201,10 +176,33 @@
     "@nuxt/test-utils": "catalog:",
     "@release-it/conventional-changelog": "catalog:",
     "@tanstack/table-core": "catalog:",
+    "@tanstack/vue-table": "catalog:",
+    "@tiptap/core": "catalog:",
+    "@tiptap/extension-bubble-menu": "catalog:",
+    "@tiptap/extension-code": "catalog:",
+    "@tiptap/extension-drag-handle": "catalog:",
+    "@tiptap/extension-drag-handle-vue-3": "catalog:",
+    "@tiptap/extension-floating-menu": "catalog:",
+    "@tiptap/extension-horizontal-rule": "catalog:",
+    "@tiptap/extension-image": "catalog:",
+    "@tiptap/extension-mention": "catalog:",
+    "@tiptap/extension-placeholder": "catalog:",
+    "@tiptap/markdown": "catalog:",
+    "@tiptap/pm": "catalog:",
+    "@tiptap/starter-kit": "catalog:",
+    "@tiptap/suggestion": "catalog:",
+    "@tiptap/vue-3": "catalog:",
     "@vitejs/plugin-vue": "catalog:",
     "@vue/test-utils": "catalog:",
     "ai": "catalog:",
     "embla-carousel": "catalog:",
+    "embla-carousel-auto-height": "catalog:",
+    "embla-carousel-auto-scroll": "catalog:",
+    "embla-carousel-autoplay": "catalog:",
+    "embla-carousel-class-names": "catalog:",
+    "embla-carousel-fade": "catalog:",
+    "embla-carousel-vue": "catalog:",
+    "embla-carousel-wheel-gestures": "catalog:",
     "eslint": "catalog:",
     "eslint-plugin-better-tailwindcss": "catalog:",
     "happy-dom": "catalog:",
@@ -222,17 +220,16 @@
     "@internationalized/date": "^3",
     "@internationalized/number": "^3",
     "@nuxt/content": "^3",
+    "@tanstack/vue-table": "^8",
     "@tiptap/core": "^3",
     "@tiptap/extension-bubble-menu": "^3",
     "@tiptap/extension-code": "^3",
-    "@tiptap/extension-collaboration": "^3",
     "@tiptap/extension-drag-handle": "^3",
     "@tiptap/extension-drag-handle-vue-3": "^3",
     "@tiptap/extension-floating-menu": "^3",
     "@tiptap/extension-horizontal-rule": "^3",
     "@tiptap/extension-image": "^3",
     "@tiptap/extension-mention": "^3",
-    "@tiptap/extension-node-range": "^3",
     "@tiptap/extension-placeholder": "^3",
     "@tiptap/markdown": "^3",
     "@tiptap/pm": "^3",
@@ -240,6 +237,14 @@
     "@tiptap/suggestion": "^3",
     "@tiptap/vue-3": "^3",
     "ai": "^6 || ^7",
+    "embla-carousel": "^8",
+    "embla-carousel-auto-height": "^8",
+    "embla-carousel-auto-scroll": "^8",
+    "embla-carousel-autoplay": "^8",
+    "embla-carousel-class-names": "^8",
+    "embla-carousel-fade": "^8",
+    "embla-carousel-vue": "^8",
+    "embla-carousel-wheel-gestures": "^8",
     "joi": "^18",
     "superstruct": "^2",
     "tailwindcss": "^4",
@@ -262,16 +267,88 @@
     "@nuxt/content": {
       "optional": true
     },
+    "@tanstack/vue-table": {
+      "optional": true
+    },
+    "@tiptap/core": {
+      "optional": true
+    },
+    "@tiptap/extension-bubble-menu": {
+      "optional": true
+    },
+    "@tiptap/extension-code": {
+      "optional": true
+    },
+    "@tiptap/extension-drag-handle": {
+      "optional": true
+    },
+    "@tiptap/extension-drag-handle-vue-3": {
+      "optional": true
+    },
+    "@tiptap/extension-floating-menu": {
+      "optional": true
+    },
+    "@tiptap/extension-horizontal-rule": {
+      "optional": true
+    },
+    "@tiptap/extension-image": {
+      "optional": true
+    },
+    "@tiptap/extension-mention": {
+      "optional": true
+    },
+    "@tiptap/extension-placeholder": {
+      "optional": true
+    },
+    "@tiptap/markdown": {
+      "optional": true
+    },
+    "@tiptap/pm": {
+      "optional": true
+    },
+    "@tiptap/starter-kit": {
+      "optional": true
+    },
+    "@tiptap/suggestion": {
+      "optional": true
+    },
+    "@tiptap/vue-3": {
+      "optional": true
+    },
     "ai": {
+      "optional": true
+    },
+    "embla-carousel": {
+      "optional": true
+    },
+    "embla-carousel-auto-height": {
+      "optional": true
+    },
+    "embla-carousel-auto-scroll": {
+      "optional": true
+    },
+    "embla-carousel-autoplay": {
+      "optional": true
+    },
+    "embla-carousel-class-names": {
+      "optional": true
+    },
+    "embla-carousel-fade": {
+      "optional": true
+    },
+    "embla-carousel-vue": {
+      "optional": true
+    },
+    "embla-carousel-wheel-gestures": {
       "optional": true
     },
     "joi": {
       "optional": true
     },
-    "valibot": {
+    "superstruct": {
       "optional": true
     },
-    "superstruct": {
+    "valibot": {
       "optional": true
     },
     "vue-router": {

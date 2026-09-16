@@ -19,6 +19,28 @@ links:
 
 Use the Carousel component to display a list of items in a carousel.
 
+Embla is an optional peer dependency, install it first:
+
+::code-group{sync="pm"}
+
+```bash [pnpm]
+pnpm add embla-carousel embla-carousel-auto-height embla-carousel-auto-scroll embla-carousel-autoplay embla-carousel-class-names embla-carousel-fade embla-carousel-vue embla-carousel-wheel-gestures
+```
+
+```bash [yarn]
+yarn add embla-carousel embla-carousel-auto-height embla-carousel-auto-scroll embla-carousel-autoplay embla-carousel-class-names embla-carousel-fade embla-carousel-vue embla-carousel-wheel-gestures
+```
+
+```bash [npm]
+npm install embla-carousel embla-carousel-auto-height embla-carousel-auto-scroll embla-carousel-autoplay embla-carousel-class-names embla-carousel-fade embla-carousel-vue embla-carousel-wheel-gestures
+```
+
+```bash [bun]
+bun add embla-carousel embla-carousel-auto-height embla-carousel-auto-scroll embla-carousel-autoplay embla-carousel-class-names embla-carousel-fade embla-carousel-vue embla-carousel-wheel-gestures
+```
+
+::
+
 ::component-example
 ---
 collapse: true
