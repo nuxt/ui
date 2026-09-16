@@ -15,7 +15,7 @@ category: element
 links:
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/ComponentName.vue
+    to: https://github.com/nuxt/ui/blob/v5/src/runtime/components/ComponentName.vue
 ---
 
 ## Usage
@@ -123,7 +123,7 @@ category: element  # element, form, overlay, navigation, layout, data
 links:
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/ComponentName.vue
+    to: https://github.com/nuxt/ui/blob/v5/src/runtime/components/ComponentName.vue
 ---
 ```
 
@@ -144,7 +144,7 @@ links:
     to: https://reka-ui.com/docs/components/dialog
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/Modal.vue
+    to: https://github.com/nuxt/ui/blob/v5/src/runtime/components/Modal.vue
 ```
 
 ## Component Code Blocks

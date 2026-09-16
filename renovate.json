@@ -8,7 +8,7 @@
     "enabled": true
   },
   "baseBranchPatterns": [
-    "v4"
+    "v5"
   ],
   "ignoreDeps": [
     "actions/stale"
