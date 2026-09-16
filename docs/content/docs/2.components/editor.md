@@ -14,6 +14,28 @@ links:
 
 The Editor component provides a powerful rich text editing experience built on [TipTap](https://tiptap.dev/). It supports multiple content formats (JSON, HTML, Markdown), customizable toolbars, drag-and-drop block reordering, slash commands, mentions, emoji picker, and extensible architecture for adding custom functionality.
 
+TipTap is an optional peer dependency, install it first:
+
+::code-group{sync="pm"}
+
+```bash [pnpm]
+pnpm add @tiptap/core @tiptap/extension-bubble-menu @tiptap/extension-code @tiptap/extension-drag-handle @tiptap/extension-drag-handle-vue-3 @tiptap/extension-floating-menu @tiptap/extension-horizontal-rule @tiptap/extension-image @tiptap/extension-mention @tiptap/extension-placeholder @tiptap/markdown @tiptap/pm @tiptap/starter-kit @tiptap/suggestion @tiptap/vue-3
+```
+
+```bash [yarn]
+yarn add @tiptap/core @tiptap/extension-bubble-menu @tiptap/extension-code @tiptap/extension-drag-handle @tiptap/extension-drag-handle-vue-3 @tiptap/extension-floating-menu @tiptap/extension-horizontal-rule @tiptap/extension-image @tiptap/extension-mention @tiptap/extension-placeholder @tiptap/markdown @tiptap/pm @tiptap/starter-kit @tiptap/suggestion @tiptap/vue-3
+```
+
+```bash [npm]
+npm install @tiptap/core @tiptap/extension-bubble-menu @tiptap/extension-code @tiptap/extension-drag-handle @tiptap/extension-drag-handle-vue-3 @tiptap/extension-floating-menu @tiptap/extension-horizontal-rule @tiptap/extension-image @tiptap/extension-mention @tiptap/extension-placeholder @tiptap/markdown @tiptap/pm @tiptap/starter-kit @tiptap/suggestion @tiptap/vue-3
+```
+
+```bash [bun]
+bun add @tiptap/core @tiptap/extension-bubble-menu @tiptap/extension-code @tiptap/extension-drag-handle @tiptap/extension-drag-handle-vue-3 @tiptap/extension-floating-menu @tiptap/extension-horizontal-rule @tiptap/extension-image @tiptap/extension-mention @tiptap/extension-placeholder @tiptap/markdown @tiptap/pm @tiptap/starter-kit @tiptap/suggestion @tiptap/vue-3
+```
+
+::
+
 ::component-example
 ---
 source: false
@@ -35,11 +57,11 @@ export default defineNuxtConfig({
   vite: {
     optimizeDeps: {
       include: [
-        '@nuxt/ui > prosemirror-state',
-        '@nuxt/ui > prosemirror-transform',
-        '@nuxt/ui > prosemirror-model',
-        '@nuxt/ui > prosemirror-view',
-        '@nuxt/ui > prosemirror-gapcursor'
+        '@tiptap/pm > prosemirror-state',
+        '@tiptap/pm > prosemirror-transform',
+        '@tiptap/pm > prosemirror-model',
+        '@tiptap/pm > prosemirror-view',
+        '@tiptap/pm > prosemirror-gapcursor'
       ]
     }
   }
