@@ -3,7 +3,7 @@ description: "Nuxt UI is a free, open source Vue component library: 125+ accessi
 navigation: false
 hero:
   lead: The Intuitive
-  accent: Vue UI library
+  accent: Vue UI Library
   breakLine: true
   description: Accessible, typed components built on Reka UI and Tailwind CSS. Beautiful by default, with icons, fonts, color mode, i18n and typography already wired in.
   links:

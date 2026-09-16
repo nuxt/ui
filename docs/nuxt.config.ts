@@ -17,6 +17,9 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     'nuxt-component-meta',
     'nuxt-llms',
+    // listed although Nuxt UI depends on it: nuxt-og-image only reads fonts
+    // from @nuxt/fonts when it finds the module here
+    '@nuxt/fonts',
     'nuxt-og-image',
     'nuxt-schema-org',
     'motion-v/nuxt',
@@ -388,6 +391,19 @@ export default defineNuxtConfig({
     }
   },
 
+  // Declared global so @nuxt/fonts emits their faces where nuxt-og-image
+  // reads them: the site's Public Sans, and a mono for the OG code pane
+  // since the docs' own code blocks run on the system stack, which the
+  // renderer has no file for.
+  // Fontsource rather than Google: Google serves them as variable fonts,
+  // which takumi can't take, and the static fallback download never lands.
+  fonts: {
+    families: [
+      { name: 'Public Sans', provider: 'fontsource', weights: [400, 500, 600, 700], global: true },
+      { name: 'Geist Mono', provider: 'fontsource', weights: [400], global: true }
+    ]
+  },
+
   icon: {
     customCollections: [{
       prefix: 'custom',
@@ -493,6 +509,10 @@ export default defineNuxtConfig({
 
   ogImage: {
     zeroRuntime: true,
+    defaults: {
+      width: 1200,
+      height: 630
+    },
     security: {
       renderTimeout: 60000
     }
