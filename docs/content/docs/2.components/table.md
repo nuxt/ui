@@ -22,6 +22,28 @@ The Table component is built on top of [TanStack Table v8](https://tanstack.com/
 
 It renders your data as rows and columns and supports sorting, filtering, pagination, row selection, expansion, grouping, pinning and virtualization, so you can build everything from a simple data table to a fully featured data grid.
 
+TanStack Table is an optional peer dependency, install it first:
+
+::code-group{sync="pm"}
+
+```bash [pnpm]
+pnpm add @tanstack/vue-table
+```
+
+```bash [yarn]
+yarn add @tanstack/vue-table
+```
+
+```bash [npm]
+npm install @tanstack/vue-table
+```
+
+```bash [bun]
+bun add @tanstack/vue-table
+```
+
+::
+
 ::component-example
 ---
 source: false

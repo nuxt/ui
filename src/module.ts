@@ -2,8 +2,9 @@ import { readFile } from 'node:fs/promises'
 import { pathToFileURL } from 'node:url'
 import { join } from 'pathe'
 import { defu } from 'defu'
-import { createResolver, defineNuxtModule, addComponentsDir, addImports, addImportsDir, addPlugin, addPluginTemplate, findPath, getLayerDirectories, hasNuxtModule, logger, resolvePath, tryResolveModule, directoryToURL } from '@nuxt/kit'
+import { createResolver, defineNuxtModule, addComponentsDir, addImports, addImportsDir, addPlugin, addPluginTemplate, addBuildPlugin, findPath, getLayerDirectories, hasNuxtModule, logger, resolvePath, tryResolveModule, directoryToURL } from '@nuxt/kit'
 import { IconUsageScanner } from '@nuxt/icon/utils'
+import { createUnplugin } from 'unplugin'
 import type { HookResult, ModuleDependencies } from '@nuxt/schema'
 import type { NuxtUIESLintOptions } from './utils/eslint'
 import { addTemplates } from './templates'
@@ -13,6 +14,7 @@ import { readAppConfigColors } from './utils/eslint'
 import { getClientBundleIcons } from './utils/icons'
 import { generateI18nPlugin, getLocaleKeys } from './utils/locales'
 import type { I18nLocale } from './utils/locales'
+import OptionalDepsPlugin from './plugins/optional-deps'
 import { name, version } from '../package.json'
 
 export type * from './runtime/types'
@@ -298,6 +300,7 @@ export default defineNuxtModule<ModuleOptions>({
     }
 
     addPlugin({ src: resolve('./runtime/plugins/colors') })
+    addBuildPlugin(createUnplugin(() => OptionalDepsPlugin(resolve('./runtime'))))
 
     if (hasNuxtModule('@nuxtjs/i18n')) {
       addPluginTemplate({
