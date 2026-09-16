@@ -214,7 +214,7 @@ links:${primitive
     to: https://reka-ui.com/docs/components/${kebabName}`}
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/${upperName}.vue
+    to: https://github.com/nuxt/ui/blob/v5/src/runtime/components/${upperName}.vue
 navigation.badge: Soon
 ---
 
