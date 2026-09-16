@@ -1,4 +1,4 @@
-import { bench, describe } from 'vitest'
+import { test } from 'vitest'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import Button from '../../src/runtime/components/Button.vue'
 import Table from '../../src/runtime/components/Table.vue'
@@ -12,27 +12,27 @@ const Toolbar = {
   template: `<div><UButton v-for="i in 25" :key="i" :label="'B' + i" /></div>`
 }
 
-describe('Button mount', () => {
-  bench('toolbar of 25', async () => {
+test('Button mount', async ({ bench }) => {
+  await bench('toolbar of 25', async () => {
     const wrapper = await mountSuspended(Toolbar)
     wrapper.unmount()
-  })
+  }).run()
 })
 
 // Toggling a variant prop re-runs the component's `ui` computed and re-renders
 // its subtree. Each iteration performs a full on/off cycle so the work measured
 // is deterministic and always ends back in the initial `false` state.
-describe('Button re-render (variant prop change)', () => {
+test('Button re-render (variant prop change)', async ({ bench }) => {
   let wrapper: Awaited<ReturnType<typeof mountSuspended>> | undefined
 
   // Mounted lazily on the first call: CodSpeed's analysis runner invokes the
-  // bench function without tinybench's `setup`/`teardown` options, so a mount
+  // bench function without the `beforeAll`/`afterAll` bench hooks, so a mount
   // there never happens under instrumentation. The warmup pass absorbs it.
-  bench('toggle loading', async () => {
+  await bench('toggle loading', async () => {
     wrapper ??= await mountSuspended(Button, { props: { label: 'Button' } })
     await wrapper.setProps({ loading: true })
     await wrapper.setProps({ loading: false })
-  })
+  }).run()
 })
 
 type Row = { id: number, name: string, email: string, amount: number, status: string }
@@ -60,20 +60,20 @@ const columns: TableColumn<Row>[] = [
 const tableProps = (data: Row[]) => ({ data, columns: columns as unknown as TableColumn<unknown, unknown>[] })
 
 // The per-cell `ui.td()` path at scale (200 rows x 5 columns = 1000 cells).
-describe('Table mount (200 x 5)', () => {
+test('Table mount (200 x 5)', async ({ bench }) => {
   const data = makeData(200)
 
-  bench('mount', async () => {
+  await bench('mount', async () => {
     const wrapper = await mountSuspended(Table, { props: tableProps(data) })
     wrapper.unmount()
-  })
+  }).run()
 })
 
-describe('Table re-render (new data identity)', () => {
+test('Table re-render (new data identity)', async ({ bench }) => {
   let wrapper: Awaited<ReturnType<typeof mountSuspended>> | undefined
 
-  bench('set data', async () => {
+  await bench('set data', async () => {
     wrapper ??= await mountSuspended(Table, { props: tableProps(makeData(200)) })
     await wrapper.setProps({ data: makeData(200) })
-  })
+  }).run()
 })
