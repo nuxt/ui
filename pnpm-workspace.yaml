@@ -57,7 +57,6 @@ catalog:
   "@tiptap/core": ^3.31.3
   "@tiptap/extension-bubble-menu": ^3.31.3
   "@tiptap/extension-code": ^3.31.3
-  "@tiptap/extension-collaboration": ^3.31.3
   "@tiptap/extension-drag-handle": ^3.31.3
   "@tiptap/extension-drag-handle-vue-3": ^3.31.3
   "@tiptap/extension-emoji": ^3.31.3
@@ -65,7 +64,6 @@ catalog:
   "@tiptap/extension-horizontal-rule": ^3.31.3
   "@tiptap/extension-image": ^3.31.3
   "@tiptap/extension-mention": ^3.31.3
-  "@tiptap/extension-node-range": ^3.31.3
   "@tiptap/extension-placeholder": ^3.31.3
   "@tiptap/extension-text-align": ^3.31.3
   "@tiptap/markdown": ^3.31.3
