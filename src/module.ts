@@ -1,5 +1,6 @@
 import { defu } from 'defu'
-import { createResolver, defineNuxtModule, addComponentsDir, addImports, addImportsDir, addPlugin, addPluginTemplate, hasNuxtModule } from '@nuxt/kit'
+import { createResolver, defineNuxtModule, addComponentsDir, addImports, addImportsDir, addPlugin, addPluginTemplate, addBuildPlugin, hasNuxtModule } from '@nuxt/kit'
+import { createUnplugin } from 'unplugin'
 import type { HookResult, ModuleDependencies } from '@nuxt/schema'
 import { addTemplates } from './templates'
 import { publicComposables } from './imports'
@@ -7,6 +8,7 @@ import { defaultOptions, getDefaultConfig, resolveColors } from './utils/default
 import { getClientBundleIcons } from './utils/icons'
 import { generateI18nPlugin, getLocaleKeys } from './utils/locales'
 import type { I18nLocale } from './utils/locales'
+import OptionalDepsPlugin from './plugins/optional-deps'
 import { name, version } from '../package.json'
 
 export type * from './runtime/types'
@@ -253,6 +255,7 @@ export default defineNuxtModule<ModuleOptions>({
     }
 
     addPlugin({ src: resolve('./runtime/plugins/colors') })
+    addBuildPlugin(createUnplugin(() => OptionalDepsPlugin(resolve('./runtime'))))
 
     if (hasNuxtModule('@nuxtjs/i18n')) {
       addPluginTemplate({
