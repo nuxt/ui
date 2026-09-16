@@ -1,7 +1,7 @@
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/nuxt/ui/v4/.github/assets/banner-dark.png">
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/nuxt/ui/v4/.github/assets/banner-light.png">
-  <img alt="Nuxt UI" width="900" height="472" src="https://raw.githubusercontent.com/nuxt/ui/v4/.github/assets/banner-light.png">
+  <source media="(prefers-color-scheme: dark)" srcset=".github/assets/banner-dark.png">
+  <source media="(prefers-color-scheme: light)" srcset=".github/assets/banner-light.png">
+  <img alt="Nuxt UI" width="900" height="472" src=".github/assets/banner-light.png">
 </picture>
 
 # Nuxt UI
