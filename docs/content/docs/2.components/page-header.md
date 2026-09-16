@@ -5,7 +5,7 @@ category: page
 links:
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/PageHeader.vue
+    to: https://github.com/nuxt/ui/blob/v5/src/runtime/components/PageHeader.vue
 ---
 
 ## Usage
@@ -101,7 +101,7 @@ props:
   links:
     - label: 'GitHub'
       icon: i-simple-icons-github
-      to: 'https://github.com/nuxt/ui/tree/v4/src/runtime/components/PageHeader.vue'
+      to: 'https://github.com/nuxt/ui/tree/v5/src/runtime/components/PageHeader.vue'
       target: '_blank'
   class: 'w-full'
 ---
