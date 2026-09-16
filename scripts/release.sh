@@ -13,4 +13,4 @@ fi
 
 # Release package
 echo "Publishing @nuxt/ui"
-pnpm publish --access public --no-git-checks
+pnpm publish --access public --no-git-checks --tag alpha

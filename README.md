@@ -14,7 +14,7 @@
 Nuxt UI is a library of accessible, typed [Vue](https://vuejs.org) components built on [Reka UI](https://reka-ui.com/), [Tailwind CSS](https://tailwindcss.com/) and [Tailwind Variants](https://www.tailwind-variants.org/). It works as a module in [Nuxt](https://nuxt.com) and as a [Vite](https://vite.dev) plugin in plain Vue apps.
 
 > [!NOTE]
-> You are on the `v4` branch. Check out the [v3 branch](https://github.com/nuxt/ui/tree/v3) for Nuxt UI v3 or the [v2 branch](https://github.com/nuxt/ui/tree/v2) for Nuxt UI v2.
+> You are on the `v5` development branch, check out the [v4 branch](https://github.com/nuxt/ui/tree/v4) for Nuxt UI v4.
 
 ## Documentation
 
@@ -129,7 +129,7 @@ Found a bug? [Open an issue](https://github.com/nuxt/ui/issues/new/choose) with 
 Before opening a pull request, read the [contribution guide](https://ui.nuxt.com/docs/getting-started/contribution) and [set up your local development environment](https://ui.nuxt.com/docs/getting-started/contribution#local-development).
 
 > [!TIP]
-> [`AGENTS.md`](https://github.com/nuxt/ui/blob/v4/AGENTS.md) gives AI coding agents the component structure, theming patterns, testing conventions and documentation guidelines they need to contribute. Agents that support it load it automatically.
+> [`AGENTS.md`](https://github.com/nuxt/ui/blob/v5/AGENTS.md) gives AI coding agents the component structure, theming patterns, testing conventions and documentation guidelines they need to contribute. Agents that support it load it automatically.
 
 ## Credits
 
@@ -145,7 +145,7 @@ Before opening a pull request, read the [contribution guide](https://ui.nuxt.com
 
 ## License
 
-Licensed under the [MIT license](https://github.com/nuxt/ui/blob/v4/LICENSE.md).
+Licensed under the [MIT license](https://github.com/nuxt/ui/blob/v5/LICENSE.md).
 
 <!-- Badges -->
 [npm-version-src]: https://img.shields.io/npm/v/@nuxt/ui.svg?style=flat&colorA=18181B&colorB=28CF8D
@@ -155,7 +155,7 @@ Licensed under the [MIT license](https://github.com/nuxt/ui/blob/v4/LICENSE.md).
 [npm-downloads-href]: https://npm.chart.dev/@nuxt/ui
 
 [license-src]: https://img.shields.io/github/license/nuxt/ui.svg?style=flat&colorA=18181B&colorB=28CF8D
-[license-href]: https://github.com/nuxt/ui/blob/v4/LICENSE.md
+[license-href]: https://github.com/nuxt/ui/blob/v5/LICENSE.md
 
 [nuxt-src]: https://img.shields.io/badge/Nuxt-18181B?logo=nuxt
 [nuxt-href]: https://nuxt.com
