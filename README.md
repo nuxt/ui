@@ -14,7 +14,7 @@
 Nuxt UI harnesses the combined strengths of [Reka UI](https://reka-ui.com/), [Tailwind CSS](https://tailwindcss.com/), and [Tailwind Variants](https://www.tailwind-variants.org/) to offer developers an unparalleled set of tools for creating sophisticated, accessible, and highly performant user interfaces.
 
 > [!NOTE]
-> You are on the `v4` branch, check out the [v3 branch](https://github.com/nuxt/ui/tree/v3) for Nuxt UI v3 or [v2 branch](https://github.com/nuxt/ui/tree/v2) for Nuxt UI v2.
+> You are on the `v5` development branch, check out the [v4 branch](https://github.com/nuxt/ui/tree/v4) for Nuxt UI v4.
 
 ## Documentation
 
@@ -130,7 +130,7 @@ Thank you for considering contributing to Nuxt UI. Here are a few ways you can g
 - Suggestions: Have any thoughts to enhance Nuxt UI? We'd love to hear them! Check out the [contribution guide](https://ui.nuxt.com/docs/getting-started/contribution) to share your suggestions.
 
 > [!TIP]
-> We provide contributing guidelines through [`AGENTS.md`](https://github.com/nuxt/ui/blob/v4/AGENTS.md) for AI assistants to help you contribute to Nuxt UI. It is automatically picked up by all AI coding agents and guides through component structure, theming patterns, testing conventions, and documentation guidelines.
+> We provide contributing guidelines through [`AGENTS.md`](https://github.com/nuxt/ui/blob/v5/AGENTS.md) for AI assistants to help you contribute to Nuxt UI. It is automatically picked up by all AI coding agents and guides through component structure, theming patterns, testing conventions, and documentation guidelines.
 
 ## Local Development
 
@@ -148,7 +148,7 @@ Follow the docs to [set up your local development environment](https://ui.nuxt.c
 
 ## License
 
-Licensed under the [MIT license](https://github.com/nuxt/ui/blob/v4/LICENSE.md).
+Licensed under the [MIT license](https://github.com/nuxt/ui/blob/v5/LICENSE.md).
 
 <!-- Badges -->
 [npm-version-src]: https://img.shields.io/npm/v/@nuxt/ui.svg?style=flat&colorA=18181B&colorB=28CF8D
@@ -158,7 +158,7 @@ Licensed under the [MIT license](https://github.com/nuxt/ui/blob/v4/LICENSE.md).
 [npm-downloads-href]: https://npm.chart.dev/@nuxt/ui
 
 [license-src]: https://img.shields.io/github/license/nuxt/ui.svg?style=flat&colorA=18181B&colorB=28CF8D
-[license-href]: https://github.com/nuxt/ui/blob/v4/LICENSE.md
+[license-href]: https://github.com/nuxt/ui/blob/v5/LICENSE.md
 
 [nuxt-src]: https://img.shields.io/badge/Nuxt-18181B?logo=nuxt
 [nuxt-href]: https://nuxt.com
