@@ -125,7 +125,7 @@
     "test:vue": "vitest --project vue",
     "test:nuxt": "vitest --project nuxt",
     "bench": "vitest bench --project vue",
-    "release": "release-it"
+    "release": "release-it --preRelease=alpha"
   },
   "dependencies": {
     "@floating-ui/dom": "catalog:",
