@@ -7,7 +7,7 @@ links:
     to: https://tiptap.dev/
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/Editor.vue
+    to: https://github.com/nuxt/ui/blob/v5/src/runtime/components/Editor.vue
 ---
 
 ## Usage
@@ -23,7 +23,7 @@ class: 'relative h-176 overflow-y-auto !p-0 rounded-b-md'
 ---
 ::
 
-::callout{icon="i-simple-icons-github" to="https://github.com/nuxt/ui/blob/v4/docs/app/components/content/examples/editor/EditorExample.vue" aria-label="View source code"}
+::callout{icon="i-simple-icons-github" to="https://github.com/nuxt/ui/blob/v5/docs/app/components/content/examples/editor/EditorExample.vue" aria-label="View source code"}
 This example demonstrates a production-ready Editor component. Check out the source code on GitHub.
 ::
 

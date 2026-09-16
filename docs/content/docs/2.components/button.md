@@ -8,7 +8,7 @@ keywords:
 links:
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/Button.vue
+    to: https://github.com/nuxt/ui/blob/v5/src/runtime/components/Button.vue
 ---
 
 ## Usage
@@ -358,7 +358,7 @@ slots:
 This component also supports all native `<button>` HTML attributes.
 ::
 
-::callout{icon="i-simple-icons-github" to="https://github.com/nuxt/ui/blob/v4/src/runtime/components/Link.vue#L13"}
+::callout{icon="i-simple-icons-github" to="https://github.com/nuxt/ui/blob/v5/src/runtime/components/Link.vue#L13"}
 The `Button` component extends the `Link` component. Check out the source code on GitHub.
 ::
 

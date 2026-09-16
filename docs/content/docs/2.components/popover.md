@@ -13,7 +13,7 @@ links:
     to: https://reka-ui.com/docs/components/popover
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/Popover.vue
+    to: https://github.com/nuxt/ui/blob/v5/src/runtime/components/Popover.vue
 ---
 
 ## Usage
