@@ -8,7 +8,7 @@ keywords:
 links:
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/Badge.vue
+    to: https://github.com/nuxt/ui/blob/v5/src/runtime/components/Badge.vue
 ---
 
 ## Usage
