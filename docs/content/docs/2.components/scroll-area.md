@@ -14,7 +14,7 @@ links:
     to: https://tanstack.com/virtual/latest
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/ScrollArea.vue
+    to: https://github.com/nuxt/ui/blob/v5/src/runtime/components/ScrollArea.vue
 ---
 
 ## Usage
