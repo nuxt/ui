@@ -6,6 +6,16 @@ This file provides guidance for AI coding agents working on the Nuxt UI reposito
 
 Nuxt UI is a component library built on [Reka UI](https://reka-ui.com/), [Tailwind CSS](https://tailwindcss.com/), and [Tailwind Variants](https://www.tailwind-variants.org/). It provides accessible, themeable components for both Nuxt and Vue applications.
 
+## v5 Branch
+
+This is the `v5` branch, where breaking changes land. Non-breaking work targets `v4`, which is merged into `v5` regularly. Releases from this branch are alphas published under the `alpha` npm tag.
+
+Every breaking change must keep three places in sync in the same PR:
+
+- **Migration guide**: add a section under "Changes from v4" in [docs/content/docs/1.getting-started/3.migration/1.v5.md](docs/content/docs/1.getting-started/3.migration/1.v5.md) with a `diff` showing the before and after.
+- **Tracking issue**: link the PR in the checklist of [nuxt/ui#6918](https://github.com/nuxt/ui/issues/6918).
+- **Roadmap**: tick the matching item in the [v5 roadmap discussion](https://github.com/nuxt/ui/discussions/6610), or add it if it was not planned.
+
 ## Project Structure
 
 ```

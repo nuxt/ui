@@ -95,7 +95,7 @@ export default defineNuxtConfig({
     '/composables/**': { redirect: { to: '/docs/composables/**', statusCode: 301 }, prerender: false },
     // v4 redirects - default root pages
     '/docs': { redirect: '/docs/getting-started', prerender: false },
-    '/docs/getting-started/migration': { redirect: '/docs/getting-started/migration/v4', prerender: false },
+    '/docs/getting-started/migration': { redirect: '/docs/getting-started/migration/v5', prerender: false },
     // the v2 to v3 guide lives with the v3 docs now
     '/docs/getting-started/migration/v3': { redirect: { to: 'https://ui3.nuxt.com/getting-started/migration', statusCode: 301 }, prerender: false },
     // llms.txt advertised its Markdown twin, which has no page to serve it now
