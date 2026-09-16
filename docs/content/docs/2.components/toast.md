@@ -11,7 +11,7 @@ links:
     to: https://reka-ui.com/docs/components/toast
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/Toast.vue
+    to: https://github.com/nuxt/ui/blob/v5/src/runtime/components/Toast.vue
 ---
 
 ## Usage
@@ -27,7 +27,7 @@ name: 'toast-example'
 ::
 
 ::warning
-Make sure to wrap your app with the [`App`](/docs/components/app) component which uses our [`Toaster`](https://github.com/nuxt/ui/blob/v4/src/runtime/components/Toaster.vue) component which uses the [`ToastProvider`](https://reka-ui.com/docs/components/toast#provider) component from Reka UI.
+Make sure to wrap your app with the [`App`](/docs/components/app) component which uses our [`Toaster`](https://github.com/nuxt/ui/blob/v5/src/runtime/components/Toaster.vue) component which uses the [`ToastProvider`](https://reka-ui.com/docs/components/toast#provider) component from Reka UI.
 ::
 
 ::tip{to="/docs/components/app#props"}

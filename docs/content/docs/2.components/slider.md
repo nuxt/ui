@@ -9,7 +9,7 @@ links:
     to: https://reka-ui.com/docs/components/slider
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/Slider.vue
+    to: https://github.com/nuxt/ui/blob/v5/src/runtime/components/Slider.vue
 ---
 
 ## Usage
