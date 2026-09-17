@@ -1,6 +1,7 @@
 import { defuFn } from 'defu'
 import type { ModuleOptions } from '../module'
 import input from './input'
+import { fieldGroupVariant, fieldGroupVariantWithRoot } from './field-group'
 
 export default (options: Required<ModuleOptions>) => {
   return defuFn({
@@ -38,8 +39,8 @@ export default (options: Required<ModuleOptions>) => {
       // Keep the `group` marker here and pick the right rounding in
       // `compoundVariants` depending on `multiple`.
       fieldGroup: {
-        horizontal: () => ({ root: 'group has-focus-visible:z-[1]' }),
-        vertical: () => ({ root: 'group has-focus-visible:z-[1]' })
+        horizontal: () => ({ root: fieldGroupVariantWithRoot.fieldGroup.horizontal.root }),
+        vertical: () => ({ root: fieldGroupVariantWithRoot.fieldGroup.vertical.root })
       },
       virtualize: {
         true: {
@@ -123,27 +124,19 @@ export default (options: Required<ModuleOptions>) => {
     compoundVariants: [{
       multiple: false,
       fieldGroup: 'horizontal',
-      class: {
-        base: 'group-not-only:group-first:rounded-e-none group-not-only:group-last:rounded-s-none group-not-last:group-not-first:rounded-none'
-      }
+      class: { base: fieldGroupVariantWithRoot.fieldGroup.horizontal.base }
     }, {
       multiple: false,
       fieldGroup: 'vertical',
-      class: {
-        base: 'group-not-only:group-first:rounded-b-none group-not-only:group-last:rounded-t-none group-not-last:group-not-first:rounded-none'
-      }
+      class: { base: fieldGroupVariantWithRoot.fieldGroup.vertical.base }
     }, {
       multiple: true,
       fieldGroup: 'horizontal',
-      class: {
-        base: 'not-only:first:rounded-e-none not-only:last:rounded-s-none not-last:not-first:rounded-none'
-      }
+      class: { base: fieldGroupVariant.fieldGroup.horizontal }
     }, {
       multiple: true,
       fieldGroup: 'vertical',
-      class: {
-        base: 'not-only:first:rounded-b-none not-only:last:rounded-t-none not-last:not-first:rounded-none'
-      }
+      class: { base: fieldGroupVariant.fieldGroup.vertical }
     }, {
       variant: 'soft',
       multiple: true,
