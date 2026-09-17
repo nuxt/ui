@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest'
 import { tv } from '../../src/runtime/utils/tv'
 
 // Cast to a permissive local signature: the strongly-typed `tv` is what
-// components rely on, whereas these tests exercise the runtime wrapper with
+// components rely on, whereas these tests exercise the engine at runtime with
 // inline themes and the `(defaults) => classes` replacer form.
 const tvt = tv as unknown as (config?: any) => (variants?: any) => {
   base: (props?: any) => string
@@ -286,13 +286,13 @@ describe('tv slot memoization', () => {
       }
     })
 
-    for (let i = 0; i < 600; i++) {
+    for (let i = 0; i < 1100; i++) {
       ui.base(props(i))
     }
 
-    // The 501st distinct key resets the cache, so it now holds 500 onwards.
+    // The 1001st distinct key resets the cache, so it now holds 1000 onwards.
     counter.reads = 0
-    expect(ui.base(props(599))).toContain('w-[599px]')
+    expect(ui.base(props(1099))).toContain('w-[1099px]')
     const hit = counter.reads
 
     // Entry 0 went with the reset and has to be resolved again.
@@ -303,8 +303,8 @@ describe('tv slot memoization', () => {
 
   it('does not key inputs carrying inherited enumerable props as plain ones', () => {
     const ui = build()
-    // Inherited `class` is read by tv but invisible to `JSON.stringify`: without
-    // the plain-object guard this would cache a `font-bold` result under `{}`.
+    // An inherited `class` resolves like an own one, so the key has to see it
+    // too, or this would cache a `font-bold` result under the same key as `{}`.
     expect(ui.label(Object.create({ class: 'font-bold' }))).toBe('truncate font-bold')
     expect(ui.label({})).toBe('truncate')
   })

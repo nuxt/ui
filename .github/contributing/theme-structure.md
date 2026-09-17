@@ -1,6 +1,6 @@
 # Theme Structure
 
-Theme files define component styling using the variants engine in `src/runtime/utils/tv-engine.ts`.
+Theme files define component styling using the variants engine in `src/runtime/utils/tv.ts`.
 
 ## File Location
 

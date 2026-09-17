@@ -4,7 +4,7 @@ This file provides guidance for AI coding agents working on the Nuxt UI reposito
 
 ## Project Overview
 
-Nuxt UI is a component library built on [Reka UI](https://reka-ui.com/) and [Tailwind CSS](https://tailwindcss.com/), with its own variants engine in `src/runtime/utils/tv-engine.ts`. It provides accessible, themeable components for both Nuxt and Vue applications.
+Nuxt UI is a component library built on [Reka UI](https://reka-ui.com/) and [Tailwind CSS](https://tailwindcss.com/), with its own variants engine in `src/runtime/utils/tv.ts`. It provides accessible, themeable components for both Nuxt and Vue applications.
 
 ## v5 Branch
 
