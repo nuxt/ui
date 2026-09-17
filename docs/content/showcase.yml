@@ -31,6 +31,8 @@ items:
     url: https://elevenspectacles.com/
   - name: Espace Asso by Benevolt
     url: https://asso.benevolt.fr/
+  - name: Fontnode
+    url: https://fontnode.com/
   - name: FrameZero
     url: https://www.framezero.app/
   - name: JSON DeepL
@@ -95,5 +97,3 @@ items:
     url: https://wiredash.com/
   - name: Zielgestalt
     url: https://zielgestalt.de/
-  - name: Fontnode
-    url: https://fontnode.com/
