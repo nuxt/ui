@@ -35,6 +35,7 @@ catalog:
   "@nuxt/module-builder": ^1.0.3
   "@nuxt/schema": ^4.5.2
   "@nuxt/test-utils": ^4.3.2
+  "@nuxt/ui": workspace:*
   "@nuxtjs/color-mode": ^4.0.1
   "@nuxtjs/mcp-toolkit": ^0.21.0
   "@nuxtjs/mdc": ^0.23.1

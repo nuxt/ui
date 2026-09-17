@@ -9,7 +9,7 @@
     "build": "pnpm bundle && vite build"
   },
   "dependencies": {
-    "@nuxt/ui": "workspace:*",
+    "@nuxt/ui": "catalog:",
     "@vue/repl": "catalog:",
     "tailwindcss": "catalog:",
     "vue": "catalog:"

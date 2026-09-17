@@ -17,7 +17,7 @@
     "@iconify-json/simple-icons": "catalog:",
     "@internationalized/date": "catalog:",
     "@nuxt/content": "catalog:",
-    "@nuxt/ui": "workspace:*",
+    "@nuxt/ui": "catalog:",
     "@tanstack/vue-table": "catalog:",
     "@tiptap/core": "catalog:",
     "@tiptap/extension-emoji": "catalog:",

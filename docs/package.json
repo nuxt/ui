@@ -19,7 +19,7 @@
     "@iconify-json/vscode-icons": "catalog:",
     "@nuxt/content": "catalog:",
     "@nuxt/image": "catalog:",
-    "@nuxt/ui": "workspace:*",
+    "@nuxt/ui": "catalog:",
     "@nuxtjs/mcp-toolkit": "catalog:",
     "@nuxtjs/mdc": "catalog:",
     "@nuxtjs/robots": "catalog:",
