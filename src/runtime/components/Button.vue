@@ -44,7 +44,7 @@ export interface ButtonSlots {
 </script>
 
 <script setup lang="ts">
-import { computed, ref, inject } from 'vue'
+import { computed, ref, inject, callWithAsyncErrorHandling, ErrorCodes } from 'vue'
 import { defu } from 'defu'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
@@ -152,7 +152,7 @@ const ui = computed(() => tv({
         ...(active && props.activeVariant ? { variant: props.activeVariant } : {}),
         ...(active && props.activeColor ? { color: props.activeColor } : {})
       })"
-      @click="onClickWrapper"
+      @click="callWithAsyncErrorHandling(onClickWrapper, $, ErrorCodes.COMPONENT_EVENT_HANDLER, [$event])"
     >
       <slot name="leading" :ui="ui">
         <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" data-slot="leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon, active })" />
