@@ -173,7 +173,7 @@ defineShortcuts({
       </template>
     </UModal>
 
-    <UDrawer should-scale-background>
+    <UDrawer>
       <UButton label="Open drawer" color="neutral" variant="outline" />
 
       <template #content>
