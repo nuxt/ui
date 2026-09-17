@@ -137,6 +137,21 @@ jobs:
         working-directory: ${{ runner.temp }}/consumer
         run: pnpm run build
 
+      # Without its optional peers the `full` fixture has to fail with the install message
+      - name: Build without optional peers
+        if: matrix.fixture == 'full'
+        working-directory: ${{ runner.temp }}
+        run: |
+          cp -r $GITHUB_WORKSPACE/test/fixtures/consumer/full consumer-missing
+          cd consumer-missing
+          node $GITHUB_WORKSPACE/test/fixtures/consumer/strip-optional-peers.mjs
+          pnpm install https://pkg.pr.new/@nuxt/ui@${{ env.COMMIT_SHA }}
+          if pnpm run build > build.log 2>&1; then
+            echo "The build passed without the optional peer dependencies"
+            exit 1
+          fi
+          grep "optional peer dependencies" build.log || { tail -n 50 build.log; exit 1; }
+
   templates:
     needs: build
 
