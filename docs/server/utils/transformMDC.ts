@@ -681,9 +681,9 @@ export async function transformMDC(event: H3Event, doc: Document): Promise<Docum
     node[0] = 'p'
     node[1] = {}
     node[2] = 'See commit history for '
-    node[3] = ['a', { href: `https://github.com/nuxt/ui/commits/v4/${componentPath}` }, 'component']
+    node[3] = ['a', { href: `https://github.com/nuxt/ui/commits/v5/${componentPath}` }, 'component']
     node[4] = ' and '
-    node[5] = ['a', { href: `https://github.com/nuxt/ui/commits/v4/${themePath}` }, 'theme']
+    node[5] = ['a', { href: `https://github.com/nuxt/ui/commits/v5/${themePath}` }, 'theme']
     node[6] = '.'
     node.length = 7
   })
