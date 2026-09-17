@@ -220,6 +220,7 @@ export interface InputMenuSlots<
   T extends NestedItem<A> = NestedItem<A>
 > {
   'leading'?(props: { modelValue: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod> | IsClearUsed<M, C>, open: boolean, ui: InputMenu['ui'] }): VNode[]
+  'default'?(props: { modelValue: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod> | IsClearUsed<M, C>, open: boolean, ui: InputMenu['ui'] }): VNode[]
   'trailing'?(props: { modelValue: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod> | IsClearUsed<M, C>, open: boolean, ui: InputMenu['ui'] }): VNode[]
   'empty'?(props: { searchTerm: string }): VNode[]
   'item'?: SlotProps<T>
@@ -738,6 +739,8 @@ defineExpose({
         @change.stop
         @update:model-value="onInputUpdate"
       />
+
+      <slot :model-value="(modelValue as ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>)" :open="open" :ui="ui" />
 
       <span v-if="isLeading || !!props.avatar || !!slots.leading" data-slot="leading" :class="ui.leading({ class: props.ui?.leading })">
         <slot name="leading" :model-value="(modelValue as ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>)" :open="open" :ui="ui">

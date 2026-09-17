@@ -829,6 +829,16 @@ name: 'input-menu-icon-example'
 ---
 ::
 
+### With floating label :badge{label="Soon" class="align-text-top"}
+
+You can use the `#default` slot to add a floating label to the InputMenu.
+
+::component-example
+---
+name: 'input-menu-floating-label-example'
+---
+::
+
 ### With create item
 
 Use the `create-item` prop to enable users to add custom values that aren't in the predefined options.
