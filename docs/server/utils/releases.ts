@@ -18,7 +18,7 @@ interface GitHubRelease {
   prerelease: boolean
 }
 
-/** Pages of 100, enough for the whole v3 and v4 line with room to grow. */
+/** Pages of 100, enough for the whole v3, v4 and v5 lines with room to grow. */
 const MAX_PAGES = 3
 
 /**

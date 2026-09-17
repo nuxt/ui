@@ -8,8 +8,20 @@ export interface Release {
   url: string
 }
 
-/** The stable v4 line: this site documents v4, and v4.0.0 supersedes its alphas and betas. */
-export const DOCUMENTED = /^v4\.\d+\.\d+$/
+/** The stable v5 and v4 lines: a `.0` release supersedes its own alphas and betas. */
+export const DOCUMENTED = /^v[45]\.\d+\.\d+$/
+
+/**
+ * Newest version first. The API sorts by date, which interleaves the two lines
+ * as soon as a v4 patch lands after a v5 release, and the latest v5 has to stay
+ * at the top since it owns the section root.
+ */
+export function compareReleases(a: Release, b: Release) {
+  const [aMajor = 0, aMinor = 0, aPatch = 0] = a.tag.slice(1).split('.').map(Number)
+  const [bMajor = 0, bMinor = 0, bPatch = 0] = b.tag.slice(1).split('.').map(Number)
+
+  return (bMajor - aMajor) || (bMinor - aMinor) || (bPatch - aPatch)
+}
 
 /** The versions, loaded by the `releases` middleware so the docs aside has them at render. */
 export const useReleases = () => useState<Release[]>('releases', () => [])
