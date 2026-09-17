@@ -121,7 +121,7 @@ const studioIcons = useStudioIcons()
 const links = computed(() => [{
   icon: studioIcons.pencil,
   label: 'Edit this page',
-  to: `https://github.com/nuxt/ui/edit/v4/docs/content/${page?.value?.stem}.md`,
+  to: `https://github.com/nuxt/ui/edit/v5/docs/content/${page?.value?.stem}.md`,
   target: '_blank'
 }, {
   // Nuxi, the same mark every Ask AI trigger wears, so it doesn't skin with the pack
