@@ -7,7 +7,7 @@ const studioIcons = useStudioIcons()
   <UBanner
     id="nuxt-ui-v5-alpha"
     title="Nuxt UI v5 is available in alpha!"
-    to="/docs/getting-started/migration/v5"
+    to="/docs/getting-started/migration"
     :icon="studioIcons.rocket"
     close
     :actions="[{
