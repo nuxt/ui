@@ -23,6 +23,7 @@ export default (options: Required<ModuleOptions>) => ({
     childLink: 'group relative size-full flex items-start text-start text-sm before:absolute before:z-[-1] before:rounded-md focus:outline-none focus-visible:outline-none focus-visible:before:outline-3',
     childLinkWrapper: 'min-w-0',
     childLinkIcon: 'size-5 shrink-0',
+    childLinkLeadingChipSize: 'sm',
     childLinkLabel: 'truncate',
     childLinkLabelExternalIcon: 'inline-block size-3 align-top text-dimmed',
     childLinkDescription: 'text-muted',

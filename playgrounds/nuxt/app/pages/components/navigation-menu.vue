@@ -31,7 +31,8 @@ const items = [
     children: [{
       label: 'Introduction',
       description: 'Fully styled and customizable components for Nuxt.',
-      icon: 'i-lucide-house'
+      icon: 'i-lucide-house',
+      chip: { color: 'success', text: 3 }
     }, {
       label: 'Installation',
       description: 'Learn how to install and configure Nuxt UI in your application.',
