@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const links = [{
   label: 'Edit this page',
-  to: 'https://github.com/nuxt/ui/edit/v4/docs/content/page-links.md',
+  to: 'https://github.com/nuxt/ui/edit/v5/docs/content/page-links.md',
   target: '_blank',
   icon: 'i-lucide-file-pen'
 }, {

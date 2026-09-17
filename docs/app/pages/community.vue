@@ -33,7 +33,7 @@ if (import.meta.server) {
         <UPageBody class="space-y-0">
           <PageSectionHeading title="Projects and integrations">
             <UButton
-              to="https://github.com/nuxt/ui/edit/v4/docs/content/community.yml"
+              to="https://github.com/nuxt/ui/edit/v5/docs/content/community.yml"
               target="_blank"
               label="Submit yours"
               color="neutral"

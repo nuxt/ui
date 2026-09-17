@@ -38,7 +38,7 @@ if (import.meta.server) {
         <UPageBody class="space-y-0">
           <PageSectionHeading title="Selected projects">
             <UButton
-              to="https://github.com/nuxt/ui/edit/v4/docs/content/showcase.yml"
+              to="https://github.com/nuxt/ui/edit/v5/docs/content/showcase.yml"
               target="_blank"
               label="Submit yours"
               color="neutral"
