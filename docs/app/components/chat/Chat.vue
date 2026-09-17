@@ -170,7 +170,7 @@ function getToolMessage(state: ToolState, toolName: string, input: Record<string
     'list-templates': `${searchVerb} templates${input.category ? ` in ${input.category} category` : ''}`,
     'get-template': `${readVerb} template ${upperName(input.templateName || '')}`,
     'get-documentation-page': `${readVerb} ${input.path || ''} page`,
-    'get-migration-guide': `${readVerb} migration guide${input.version ? ` for ${input.version}` : ''}`,
+    'get-migration-guide': `${readVerb} migration guide`,
     'list-examples': `${searchVerb} examples`,
     'get-example': `${readVerb} ${upperName(input.exampleName || '')} example`,
     'getComponentTheme': `${readVerb} ${upperName(input.componentName || '')} theme`,
