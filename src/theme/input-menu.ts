@@ -33,6 +33,14 @@ export default (options: Required<ModuleOptions>) => {
       tagsInput: 'flex-1 border-0 bg-transparent placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75'
     },
     variants: {
+      // `root` and `base` are the same element in `multiple` mode, so the
+      // `group-*` rounding utilities inherited from `input` never match there.
+      // Keep the `group` marker here and pick the right rounding in
+      // `compoundVariants` depending on `multiple`.
+      fieldGroup: {
+        horizontal: () => ({ root: 'group has-focus-visible:z-[1]' }),
+        vertical: () => ({ root: 'group has-focus-visible:z-[1]' })
+      },
       virtualize: {
         true: {
           viewport: 'p-1 isolate'
@@ -113,6 +121,30 @@ export default (options: Required<ModuleOptions>) => {
       }
     },
     compoundVariants: [{
+      multiple: false,
+      fieldGroup: 'horizontal',
+      class: {
+        base: 'group-not-only:group-first:rounded-e-none group-not-only:group-last:rounded-s-none group-not-last:group-not-first:rounded-none'
+      }
+    }, {
+      multiple: false,
+      fieldGroup: 'vertical',
+      class: {
+        base: 'group-not-only:group-first:rounded-b-none group-not-only:group-last:rounded-t-none group-not-last:group-not-first:rounded-none'
+      }
+    }, {
+      multiple: true,
+      fieldGroup: 'horizontal',
+      class: {
+        base: 'not-only:first:rounded-e-none not-only:last:rounded-s-none not-last:not-first:rounded-none'
+      }
+    }, {
+      multiple: true,
+      fieldGroup: 'vertical',
+      class: {
+        base: 'not-only:first:rounded-b-none not-only:last:rounded-t-none not-last:not-first:rounded-none'
+      }
+    }, {
       variant: 'soft',
       multiple: true,
       class: 'has-focus:bg-elevated has-focus-visible:outline-3'
