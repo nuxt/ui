@@ -7,6 +7,13 @@ const items = computed(() => {
   return [
     { label: `v${config.version}`, active: true, color: 'primary' as const, checked: true, type: 'checkbox' as const },
     {
+      label: 'v4.x',
+      to: 'https://ui4.nuxt.com',
+      onSelect() {
+        track('Version Switched', { version: 'v4.x' })
+      }
+    },
+    {
       label: 'v3.x',
       to: 'https://ui3.nuxt.com',
       onSelect() {
