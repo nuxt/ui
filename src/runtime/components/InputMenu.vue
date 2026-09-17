@@ -548,15 +548,16 @@ function onClear() {
   emits('clear')
 }
 
-function onTagInputKeydown(e: KeyboardEvent) {
-  if (e.key !== 'Enter') return
-
-  // reka-ui's TagsInputRoot adds the raw search text as a tag on Enter regardless of
-  // whether it matches a real item or createItem is enabled. Block that so
-  // we never render a chip that isn't reflected in modelValue.
-  if (!props.createItem) {
-    e.preventDefault()
+function onTagsInputKeydown(event: KeyboardEvent) {
+  // `TagsInputInput` adds the search term as a tag on `Enter`, but `TagsInputRoot` is driven by
+  // the combobox so the tag never reaches `modelValue` and renders a chip that isn't selected.
+  // It bails out when the event is already prevented, which is also what the combobox does
+  // when an item is highlighted.
+  if (event.isComposing || !searchTerm.value) {
+    return
   }
+
+  event.preventDefault()
 }
 
 const viewportRef = useTemplateRef('viewportRef')
@@ -705,7 +706,7 @@ defineExpose({
             data-slot="tagsInput"
             :class="ui.tagsInput({ class: props.ui?.tagsInput })"
             @change.stop
-            @keydown.enter="onTagInputKeydown"
+            @keydown.enter="onTagsInputKeydown"
           />
         </Component.Input>
       </TagsInputRoot>
