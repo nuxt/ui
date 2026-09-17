@@ -1,22 +1,24 @@
 import type { extendTailwindMerge } from 'tailwind-merge'
 
 /**
- * Type surface of the variants engine in `../utils/tv-engine`, ported from
- * `tailwind-variants` 3.2.2 so nothing about inference changes with the runtime.
- * Themes, `app.config.ui` autocomplete and every `ComponentConfig`-derived prop
- * type resolve through these shapes, and a widening or narrowing here surfaces
- * in user-land rather than in our test suite, so they stay structurally
- * identical to what they replace.
+ * Type surface of the variants engine in `../utils/tv-engine`, covering the
+ * shapes the engine actually resolves: `base`, `slots`, `variants`,
+ * `compoundVariants`, `defaultVariants` and `extend`.
+ *
+ * Inference is the half the snapshot suite can't prove, since it breaks in
+ * user-land (`app.config.ui` autocomplete, `ComponentConfig`-derived props)
+ * rather than in CI, so `test/utils/tv-types.spec.ts` asserts the contract.
  */
 
 type MergeConfig = Parameters<typeof extendTailwindMerge>[0]
-type LegacyMergeConfig = Extract<MergeConfig, { extend?: unknown }>['extend']
+
+/** The nested `extend` object, which is also accepted flattened at the top level. */
+type MergeConfigExtension = Extract<MergeConfig, { extend?: unknown }>['extend']
 
 /**
- * The `tailwind-merge` configuration, accepted both in its modern (`{ extend }`)
- * and legacy (flat `{ theme, classGroups, … }`) shapes.
+ * The `tailwind-merge` configuration, in either its nested or flattened shape.
  */
-export type TWMergeConfig = MergeConfig & LegacyMergeConfig
+export type TWMergeConfig = MergeConfig & MergeConfigExtension
 
 /**
  * The engine configuration, set through `app.config.ui.tv`.
@@ -33,179 +35,134 @@ export type TVMergeConfig = {
   twMergeConfig?: TWMergeConfig
 }
 
-type ClassArray = readonly ClassValue[]
+/**
+ * Anything accepted where classes are expected: a string, a nested array with
+ * falsy holes, or nothing. Clsx-style objects resolve at runtime but stay out of
+ * the type so a misplaced object is caught rather than silently joined.
+ */
+export type ClassValue = string | 0 | 0n | false | null | undefined | readonly ClassValue[]
 
 /**
- * Any value accepted where classes are expected: a string, a (nested) array with
- * falsy holes, or nothing. Clsx-style objects resolve at runtime but stay out of
- * the type, as they did under `tailwind-variants`.
+ * A component's slots, or `undefined` for a theme that only has a `base`.
  */
-export type ClassValue = ClassArray | string | null | undefined | 0 | 0n | false
-
-export type ClassProp<V = ClassValue>
-  = | { class?: V, className?: never }
-    | { class?: never, className?: V }
-
-type TVBaseName = 'base'
-
 export type TVSlots = Record<string, ClassValue> | undefined
 
-type StringToBoolean<T> = T extends 'true' | 'false' ? boolean : T
-
-type TVSlotsWithBase<S extends TVSlots, B extends ClassValue> = B extends undefined
-  ? keyof S
-  : keyof S | TVBaseName
-
-type SlotsClassValue<S extends TVSlots, B extends ClassValue> = {
-  [K in TVSlotsWithBase<S, B>]?: ClassValue
+/**
+ * `class` and `className` are interchangeable, and both apply when passed together.
+ */
+export type ClassProp<T = ClassValue> = {
+  class?: T
+  className?: T
 }
 
-type TVVariantsDefault<S extends TVSlots, B extends ClassValue> = S extends undefined
-  ? {}
-  : {
-      [key: string]: {
-        [key: string]: S extends TVSlots ? SlotsClassValue<S, B> | ClassValue : ClassValue
-      }
-    }
+/** Variant values spelled `'true'` / `'false'` are read as booleans. */
+type VariantKey<T> = T extends 'true' | 'false' ? boolean : T
 
-export type TVVariants<
-  S extends TVSlots | undefined,
-  B extends ClassValue | undefined = undefined,
-  EV extends TVVariants<ES> | undefined = undefined,
-  ES extends TVSlots | undefined = undefined
-> = EV extends undefined
-  ? TVVariantsDefault<S, B>
-  : | {
-    [K in keyof EV]: {
-      [K2 in keyof EV[K]]: S extends TVSlots ? SlotsClassValue<S, B> | ClassValue : ClassValue
-    }
-  }
-  | TVVariantsDefault<S, B>
+/** The slots a class value can target: the theme's own, plus `base` when it has one. */
+type SlotName<S extends TVSlots, B extends ClassValue> = B extends undefined ? keyof S : keyof S | 'base'
 
-export type TVCompoundVariants<
-  V extends TVVariants<S>,
-  S extends TVSlots,
-  B extends ClassValue,
-  EV extends TVVariants<ES>,
-  ES extends TVSlots
-> = Array<
-  {
-    [K in keyof V | keyof EV]?:
-      | (K extends keyof V ? StringToBoolean<keyof V[K]> : never)
-      | (K extends keyof EV ? StringToBoolean<keyof EV[K]> : never)
-      | (K extends keyof V ? StringToBoolean<keyof V[K]>[] : never)
-  } & ClassProp<SlotsClassValue<S, B> | ClassValue>
->
+/** Classes for the whole component, or per slot. */
+type SlotsClass<S extends TVSlots, B extends ClassValue> = ClassValue | { [K in SlotName<S, B>]?: ClassValue }
 
-export type TVCompoundSlots<
-  V extends TVVariants<S>,
-  S extends TVSlots,
-  B extends ClassValue
-> = Array<
-  V extends undefined
-    ? { slots: Array<TVSlotsWithBase<S, B>> } & ClassProp
-    : { slots: Array<TVSlotsWithBase<S, B>> } & {
-      [K in keyof V]?: StringToBoolean<keyof V[K]> | StringToBoolean<keyof V[K]>[]
-    } & ClassProp
->
-
-export type TVDefaultVariants<
-  V extends TVVariants<S>,
-  S extends TVSlots,
-  EV extends TVVariants<ES>,
-  ES extends TVSlots
-> = {
-  [K in keyof V | keyof EV]?:
-    | (K extends keyof V ? StringToBoolean<keyof V[K]> : never)
-    | (K extends keyof EV ? StringToBoolean<keyof EV[K]> : never)
-}
-
-type VariantProps<V> = {
-  [K in keyof V]?: StringToBoolean<keyof V[K]> | undefined
-}
-
-type MergedVariantProps<V, EV> = {
-  [K in keyof V | keyof EV]?:
-    | (K extends keyof V ? StringToBoolean<keyof V[K]> : never)
-    | (K extends keyof EV ? StringToBoolean<keyof EV[K]> : never)
-    | undefined
-}
-
-type TVProps<
-  V extends TVVariants<S>,
-  S extends TVSlots,
-  EV extends TVVariants<ES>,
-  ES extends TVSlots
-> = EV extends undefined
-  ? V extends undefined
-    ? ClassProp<ClassValue>
-    : VariantProps<V> & ClassProp<ClassValue>
-  : V extends undefined
-    ? VariantProps<EV> & ClassProp<ClassValue>
-    : MergedVariantProps<V, EV> & ClassProp<ClassValue>
-
-type TVVariantKeys<V extends TVVariants<S>, S extends TVSlots> = V extends object
-  ? Array<keyof V>
-  : undefined
+/** One variant group: every value it accepts, and the classes each contributes. */
+type VariantGroup<S extends TVSlots, B extends ClassValue> = Record<string, SlotsClass<S, B>>
 
 /**
- * The metadata a built component carries, which is what `extend: theme` reads.
+ * Variant groups declared by the theme itself. A slotless theme resolves to `{}`,
+ * which every object satisfies, so variants stay open there.
  */
-type TVReturnProps<
-  V extends TVVariants<S>,
+type OwnVariants<S extends TVSlots, B extends ClassValue> = S extends undefined ? {} : Record<string, VariantGroup<S, B>>
+
+/**
+ * The `variants` object. When extending, the extended theme's own groups are
+ * offered as-is so their values keep autocompleting, and new groups can be added
+ * alongside.
+ */
+export type TVVariants<S extends TVSlots, B extends ClassValue = undefined, EV = undefined> = EV extends undefined
+  ? OwnVariants<S, B>
+  : | { [K in keyof EV]: { [Value in keyof EV[K]]: SlotsClass<S, B> } }
+    | OwnVariants<S, B>
+
+/** The values one variant accepts, from this theme or the one it extends. */
+type VariantValue<V, EV, K>
+  = | (K extends keyof V ? VariantKey<keyof V[K]> : never)
+    | (K extends keyof EV ? VariantKey<keyof EV[K]> : never)
+
+/**
+ * `compoundVariants` entries, which match one value or any of several.
+ */
+export type TVCompoundVariants<V, S extends TVSlots, B extends ClassValue, EV = undefined> = Array<
+  {
+    [K in keyof V | keyof EV]?: VariantValue<V, EV, K> | VariantValue<V, EV, K>[]
+  } & ClassProp<SlotsClass<S, B>>
+>
+
+/**
+ * `defaultVariants`, the value each variant falls back to.
+ */
+export type TVDefaultVariants<V, EV = undefined> = {
+  [K in keyof V | keyof EV]?: VariantValue<V, EV, K>
+}
+
+/**
+ * The props a built component and its slot functions accept: the declared
+ * variants, plus classes to merge on top.
+ *
+ * Undeclared keys are allowed, because `app.config.ui.<c>.variants` can add
+ * variants the theme itself never declared and the engine ignores a prop no
+ * variant reads. Closing that is gated on deciding whether app config may
+ * introduce variants at all, not on this type.
+ */
+export type TVProps<V, EV = undefined> = {
+  [K in keyof V | keyof EV]?: VariantValue<V, EV, K>
+} & ClassProp & { [key: string]: unknown }
+
+/**
+ * The metadata `extend` reads, whether it points at a plain theme object or at a
+ * built component.
+ */
+export type TVExtend = {
+  base?: any
+  slots?: any
+  variants?: any
+  compoundVariants?: any
+  defaultVariants?: any
+}
+
+type Slotted<S extends TVSlots> = S extends undefined ? {} : S
+
+type BaseSlot<B extends ClassValue> = B extends undefined ? never : 'base'
+
+type HasSlots<S extends TVSlots, ES extends TVSlots> = S extends undefined
+  ? ES extends undefined ? false : true
+  : true
+
+/**
+ * One function per slot: the extended theme's, this theme's own, and `base`.
+ */
+type TVSlotFunctions<V, S extends TVSlots, B extends ClassValue, EV, ES extends TVSlots> = {
+  [K in keyof Slotted<S> | keyof Slotted<ES> | BaseSlot<B>]: (slotProps?: TVProps<V, EV>) => string
+}
+
+/**
+ * A built component: callable with variant props, returning one class string when
+ * the theme has no slots and a function per slot when it does. The metadata it
+ * carries alongside is what `extend` resolves against.
+ */
+export type TVReturnType<
+  V,
   S extends TVSlots,
   B extends ClassValue,
-  EV extends TVVariants<ES>,
-  ES extends TVSlots,
-  // @ts-expect-error circular reference, resolved through the default below
-  E extends TVReturnType = undefined
+  EV = undefined,
+  ES extends TVSlots = undefined,
+  E = undefined
 > = {
+  (props?: TVProps<V, EV>): HasSlots<S, ES> extends true ? TVSlotFunctions<V, S, B, EV, ES> : string
   extend: E
   base: B
   slots: S
   variants: V
-  defaultVariants: TVDefaultVariants<V, S, EV, ES>
-  compoundVariants: TVCompoundVariants<V, S, B, EV, ES>
-  compoundSlots: TVCompoundSlots<V, S, B>
-  variantKeys: TVVariantKeys<V, S>
+  compoundVariants: TVCompoundVariants<V, S, B, EV>
+  defaultVariants: TVDefaultVariants<V, EV>
+  variantKeys: (keyof V)[]
 }
-
-type HasSlots<S extends TVSlots, ES extends TVSlots> = S extends undefined
-  ? ES extends undefined
-    ? false
-    : true
-  : true
-
-/**
- * One function per slot, keyed by the extended theme's slots, this theme's own
- * slots and `base`.
- */
-type TVSlotFunctions<
-  V extends TVVariants<S>,
-  S extends TVSlots,
-  B extends ClassValue,
-  EV extends TVVariants<ES>,
-  ES extends TVSlots
-> = {
-  [K in keyof (ES extends undefined ? {} : ES)]: (slotProps?: TVProps<V, S, EV, ES>) => string
-} & {
-  [K in keyof (S extends undefined ? {} : S)]: (slotProps?: TVProps<V, S, EV, ES>) => string
-} & {
-  [K in TVSlotsWithBase<{}, B>]: (slotProps?: TVProps<V, S, EV, ES>) => string
-}
-
-/**
- * A built component: callable with variant props, returning either one class
- * string (no slots) or a slot function per slot.
- */
-export type TVReturnType<
-  V extends TVVariants<S>,
-  S extends TVSlots,
-  B extends ClassValue,
-  EV extends TVVariants<ES>,
-  ES extends TVSlots,
-  // @ts-expect-error circular reference, resolved through the default below
-  E extends TVReturnType = undefined
-> = {
-  (props?: TVProps<V, S, EV, ES>): HasSlots<S, ES> extends true ? TVSlotFunctions<V, S, B, EV, ES> : string
-} & TVReturnProps<V, S, B, EV, ES, E>

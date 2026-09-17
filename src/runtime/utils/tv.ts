@@ -1,5 +1,5 @@
 import { createTV, cnMerge } from './tv-engine'
-import type { ClassValue, TVSlots, TVVariants, TVCompoundVariants, TVDefaultVariants, TVReturnType, TVMergeConfig } from '../types/tv-engine'
+import type { ClassValue, TVSlots, TVVariants, TVCompoundVariants, TVDefaultVariants, TVReturnType, TVExtend, TVMergeConfig } from '../types/tv-engine'
 import type { AppConfig } from '@nuxt/schema'
 import type { SlotClassReplacer } from '../types/tv'
 import appConfig from '#build/app.config'
@@ -17,22 +17,21 @@ type Widen<R> = R extends (props?: infer P) => infer Slots
   : R
 
 /**
- * Mirrors the engine's own call signature (so config inference is
- * unchanged) but returns the {@link Widen}-ed result. Component prop types are
- * derived from `typeof theme` via `ComponentConfig`, not from this type, so the
- * widening only affects the internal `ui.slot(...)` calls.
+ * The engine's call signature, returning the {@link Widen}-ed result so a
+ * replacer can be passed wherever classes can. Component prop types are derived
+ * from `typeof theme` via `ComponentConfig`, not from this type, so the widening
+ * only affects the internal `ui.slot(...)` calls.
  */
 type WideTV = {
   <
     V extends TVVariants<S, B, EV>,
-    CV extends TVCompoundVariants<V, S, B, EV, ES>,
-    DV extends TVDefaultVariants<V, S, EV, ES>,
+    CV extends TVCompoundVariants<V, S, B, EV>,
+    DV extends TVDefaultVariants<V, EV>,
     B extends ClassValue = undefined,
     S extends TVSlots = undefined,
-    // @ts-expect-error mirror of the engine's own circular default
-    E extends TVReturnType = TVReturnType<V, S, B, EV extends undefined ? {} : EV, ES extends undefined ? {} : ES>,
-    EV extends TVVariants<ES, B, E['variants'], ES> = E['variants'],
-    ES extends TVSlots = E['slots'] extends TVSlots ? E['slots'] : undefined
+    E extends TVExtend | undefined = undefined,
+    EV = E extends TVExtend ? E['variants'] : undefined,
+    ES extends TVSlots = E extends TVExtend ? (E['slots'] extends TVSlots ? E['slots'] : undefined) : undefined
   >(
     options: {
       extend?: E
@@ -40,7 +39,6 @@ type WideTV = {
       slots?: S
       variants?: V
       compoundVariants?: CV
-      compoundSlots?: any
       defaultVariants?: DV
     },
     config?: TVMergeConfig

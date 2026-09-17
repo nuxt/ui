@@ -28,12 +28,12 @@ export type TVConfig<T extends Record<string, any>> = {
         [S in keyof T[P]['slots']]?: SlotClass
       }
         : K extends 'variants' ? TVVariants<T[P]['slots'], ClassValue, WidenVariantsValues<T[P]['variants']>>
-          : K extends 'defaultVariants' ? TVDefaultVariants<WidenVariantsValues<T[P]['variants']>, T[P]['slots'], object, undefined>
+          : K extends 'defaultVariants' ? TVDefaultVariants<WidenVariantsValues<T[P]['variants']>, object>
             : never
   }
 } & {
   [P in keyof T]?: P extends 'prose' ? TVConfig<T[P]> : {
-    compoundVariants?: TVCompoundVariants<WidenVariantsValues<T[P]['variants']>, T[P]['slots'], ClassValue, object, undefined>
+    compoundVariants?: TVCompoundVariants<WidenVariantsValues<T[P]['variants']>, T[P]['slots'], ClassValue, object>
   }
 }
 
