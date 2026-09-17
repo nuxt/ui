@@ -49,6 +49,12 @@ describe('DashboardNavbar', () => {
     }
   )
 
+  it('does not render the title without title', async () => {
+    const wrapper = await mountSuspended(DashboardWrapper)
+
+    expect(wrapper.find('[data-slot="title"]').exists()).toBe(false)
+  })
+
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(DashboardWrapper, {
       props: {
