@@ -5,17 +5,17 @@ const studioIcons = useStudioIcons()
 
 <template>
   <UBanner
-    id="nuxt-ui-v4"
-    title="Nuxt UI v4 is officially released!"
-    to="https://github.com/nuxt/ui/releases/tag/v4.0.0"
+    id="nuxt-ui-v5-alpha"
+    title="Nuxt UI v5 is available in alpha!"
+    to="/docs/getting-started/migration/v5"
     :icon="studioIcons.rocket"
     close
     :actions="[{
-      label: 'Read the post',
+      label: 'Follow the progress',
       color: 'neutral',
       variant: 'outline',
       trailingIcon: appConfig.ui.icons.arrowRight,
-      to: 'https://nuxt.com/blog/nuxt-ui-v4',
+      to: 'https://github.com/nuxt/ui/issues/6918',
       target: '_blank',
       class: 'ring-0'
     }]"
