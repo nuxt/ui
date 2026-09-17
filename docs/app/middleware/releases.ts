@@ -11,8 +11,8 @@ export default defineNuxtRouteMiddleware(async (to) => {
       // typed explicitly: assigning the route's inferred type straight to the
       // state ref sends TypeScript down its route table
       const list = await $fetch<Release[]>('/api/github/releases.json')
-      // the route serves every release, the docs list the stable v4 line
-      releases.value = list.filter(release => DOCUMENTED.test(release.tag))
+      // the route serves every release, the docs list the stable v5 and v4 lines
+      releases.value = list.filter(release => DOCUMENTED.test(release.tag)).sort(compareReleases)
     } catch (error) {
       // GitHub can be unreachable: the page renders an empty state rather than
       // failing every navigation and the prerender crawl with it, and a list
