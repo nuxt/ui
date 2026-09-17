@@ -574,6 +574,18 @@ function onClear() {
   emits('clear')
 }
 
+function onTagsInputKeydown(event: KeyboardEvent) {
+  // `TagsInputInput` adds the search term as a tag on `Enter`, but `TagsInputRoot` is driven by
+  // the combobox so the tag never reaches `modelValue` and renders a chip that isn't selected.
+  // It bails out when the event is already prevented, which is also what the combobox does
+  // when an item is highlighted.
+  if (event.isComposing || !searchTerm.value) {
+    return
+  }
+
+  event.preventDefault()
+}
+
 const viewportRef = useTemplateRef('viewportRef')
 
 const comboboxRootRef = useTemplateRef('comboboxRootRef')
@@ -720,6 +732,7 @@ defineExpose({
             data-slot="tagsInput"
             :class="ui.tagsInput({ class: props.ui?.tagsInput })"
             @change.stop
+            @keydown.enter="onTagsInputKeydown"
           />
         </Component.Input>
       </TagsInputRoot>
