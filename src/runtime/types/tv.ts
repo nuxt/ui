@@ -1,4 +1,4 @@
-import type { ClassValue, TVVariants, TVCompoundVariants, TVDefaultVariants } from 'tailwind-variants'
+import type { ClassValue, TVVariants, TVCompoundVariants, TVDefaultVariants } from './tv-engine'
 
 /**
  * A function form for a slot class that **replaces** the slot's default classes
@@ -19,7 +19,7 @@ export type SlotClassReplacer = (defaults: string) => ClassValue
 export type SlotClass = ClassValue | SlotClassReplacer
 
 /**
- * Defines the AppConfig object based on the tailwind-variants configuration.
+ * Defines the AppConfig object based on the theme configuration.
  */
 export type TVConfig<T extends Record<string, any>> = {
   [P in keyof T]?: P extends 'prose' ? TVConfig<T[P]> : {

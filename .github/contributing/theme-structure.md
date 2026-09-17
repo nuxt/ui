@@ -1,6 +1,6 @@
 # Theme Structure
 
-Theme files define component styling using Tailwind Variants.
+Theme files define component styling using the variants engine in `src/runtime/utils/tv-engine.ts`.
 
 ## File Location
 

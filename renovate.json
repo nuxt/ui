@@ -29,12 +29,6 @@
     },
     {
       "matchPackageNames": [
-        "tailwind-variants"
-      ],
-      "allowedVersions": "<3.3.0"
-    },
-    {
-      "matchPackageNames": [
         "@nuxt/image"
       ],
       "allowedVersions": "<2.1.0"

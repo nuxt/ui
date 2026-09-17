@@ -1,14 +1,11 @@
-import { createTV, cnMerge } from 'tailwind-variants'
-import type { ClassValue, TVVariants, TVCompoundVariants, TVDefaultVariants, TVReturnType, defaultConfig } from 'tailwind-variants'
+import { createTV, cnMerge } from './tv-engine'
+import type { ClassValue, TVSlots, TVVariants, TVCompoundVariants, TVDefaultVariants, TVReturnType, TVMergeConfig } from '../types/tv-engine'
 import type { AppConfig } from '@nuxt/schema'
 import type { SlotClassReplacer } from '../types/tv'
 import appConfig from '#build/app.config'
 
-// Internal `tailwind-variants` helpers that are not re-exported.
-type TVSlots = Record<string, ClassValue> | undefined
-
 /**
- * Widen the slot functions of a `tailwind-variants` return type so `class` /
+ * Widen the slot functions of an engine return type so `class` /
  * `className` also accept the `(defaults) => classes` replacer — `:ui` and the
  * `class` prop flow straight into them. The concrete slot keys (and the
  * extend-readable `slots` / `variants` / … properties) are preserved, so
@@ -20,7 +17,7 @@ type Widen<R> = R extends (props?: infer P) => infer Slots
   : R
 
 /**
- * Mirrors `tailwind-variants`' `TV` call signature (so config inference is
+ * Mirrors the engine's own call signature (so config inference is
  * unchanged) but returns the {@link Widen}-ed result. Component prop types are
  * derived from `typeof theme` via `ComponentConfig`, not from this type, so the
  * widening only affects the internal `ui.slot(...)` calls.
@@ -32,7 +29,7 @@ type WideTV = {
     DV extends TVDefaultVariants<V, S, EV, ES>,
     B extends ClassValue = undefined,
     S extends TVSlots = undefined,
-    // @ts-expect-error mirror of tailwind-variants' own circular default
+    // @ts-expect-error mirror of the engine's own circular default
     E extends TVReturnType = TVReturnType<V, S, B, EV extends undefined ? {} : EV, ES extends undefined ? {} : ES>,
     EV extends TVVariants<ES, B, E['variants'], ES> = E['variants'],
     ES extends TVSlots = E['slots'] extends TVSlots ? E['slots'] : undefined
@@ -46,11 +43,11 @@ type WideTV = {
       compoundSlots?: any
       defaultVariants?: DV
     },
-    config?: typeof defaultConfig
+    config?: TVMergeConfig
   ): Widen<TVReturnType<V, S, B, EV, ES, E>>
 }
 
-const appConfigTv = appConfig as AppConfig & { ui: { tv: typeof defaultConfig } }
+const appConfigTv = appConfig as AppConfig & { ui: { tv: TVMergeConfig } }
 
 const config = appConfigTv.ui?.tv
 
@@ -300,7 +297,7 @@ function resolveReplacers(componentConfig: any): any {
 }
 
 /**
- * Wraps `tailwind-variants`' `tv` so slot classes can be **replaced** (not just
+ * Wraps the engine's `tv` so slot classes can be **replaced** (not just
  * merged) through a function form — `(defaults) => classes` — in `:ui`, the
  * `class` prop and `app.config.ui`. The wrapper is transparent for every other
  * usage: it preserves the `TVReturnType` (so `extend: theme` keeps working

@@ -4,7 +4,7 @@ This file provides guidance for AI coding agents working on the Nuxt UI reposito
 
 ## Project Overview
 
-Nuxt UI is a component library built on [Reka UI](https://reka-ui.com/), [Tailwind CSS](https://tailwindcss.com/), and [Tailwind Variants](https://www.tailwind-variants.org/). It provides accessible, themeable components for both Nuxt and Vue applications.
+Nuxt UI is a component library built on [Reka UI](https://reka-ui.com/) and [Tailwind CSS](https://tailwindcss.com/), with its own variants engine in `src/runtime/utils/tv-engine.ts`. It provides accessible, themeable components for both Nuxt and Vue applications.
 
 ## v5 Branch
 
@@ -25,7 +25,7 @@ src/
 │   ├── composables/    # Composables (use*.ts)
 │   ├── types/          # TypeScript types
 │   └── utils/          # Utility functions
-├── theme/              # Tailwind Variants themes (kebab-case.ts)
+├── theme/              # Variants themes (kebab-case.ts)
 └── module.ts
 test/
 ├── components/         # Component tests (*.spec.ts)
@@ -83,7 +83,7 @@ Load these based on your task. **Do not load all files at once** — only load w
 | File | Topics |
 |------|--------|
 | **[.github/contributing/component-structure.md](.github/contributing/component-structure.md)** | Vue component file patterns, props/slots/emits interfaces, script setup |
-| **[.github/contributing/theme-structure.md](.github/contributing/theme-structure.md)** | Tailwind Variants theme files, slots, variants, compoundVariants |
+| **[.github/contributing/theme-structure.md](.github/contributing/theme-structure.md)** | Theme files, slots, variants, compoundVariants |
 | **[.github/contributing/testing.md](.github/contributing/testing.md)** | Vitest patterns, snapshot testing, accessibility testing |
 | **[.github/contributing/documentation.md](.github/contributing/documentation.md)** | Component docs structure, MDC syntax, examples |
 
