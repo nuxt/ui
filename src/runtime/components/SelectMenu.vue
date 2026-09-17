@@ -661,7 +661,7 @@ defineExpose({
         data-slot="base"
         :class="ui.base({ class: [props.ui?.base, props.class] })"
         tabindex="0"
-        v-bind="{ ...$attrs, ...ariaAttrs }"
+        v-bind="{ 'aria-label': undefined, ...$attrs, ...ariaAttrs }"
         @keydown.down="onTriggerKeydown"
         @keydown.up="onTriggerKeydown"
       >

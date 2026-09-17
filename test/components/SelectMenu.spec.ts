@@ -149,6 +149,35 @@ describe('SelectMenu', () => {
     })).toHaveNoViolations()
   })
 
+  // Reka's `ComboboxTrigger` hard-codes `aria-label="Show popup"`, which would win over the `FormField` label.
+  describe('accessible name', () => {
+    test('does not inherit the Reka trigger label', () => {
+      const wrapper = mount(SelectMenu, { props })
+
+      expect(wrapper.get('[data-slot="base"]').attributes('aria-label')).toBeUndefined()
+    })
+
+    test('keeps a caller label', () => {
+      const wrapper = mount(SelectMenu, { props, attrs: { 'aria-label': 'Aria label' } })
+
+      expect(wrapper.get('[data-slot="base"]').attributes('aria-label')).toBe('Aria label')
+    })
+
+    test('is named by the form field label', async () => {
+      const wrapper = await renderForm({
+        slotTemplate: `
+        <UFormField label="Sort order">
+          <USelectMenu :items="['Newest', 'Oldest']" />
+        </UFormField>
+        `
+      })
+
+      const trigger = wrapper.get('[data-slot="base"]')
+      expect(trigger.attributes('aria-label')).toBeUndefined()
+      expect(wrapper.get('label').attributes('for')).toBe(trigger.attributes('id'))
+    })
+  })
+
   describe('emits', () => {
     test('update:modelValue event', async () => {
       const wrapper = mount(SelectMenu, { props: { items: ['Option 1', 'Option 2'] } })
