@@ -12,7 +12,7 @@ This is the `v5` branch, where breaking changes land. Non-breaking work targets 
 
 Every breaking change must keep three places in sync in the same PR:
 
-- **Migration guide**: add a section under "Changes from v4" in [docs/content/docs/1.getting-started/3.migration.md](docs/content/docs/1.getting-started/3.migration.md) with a `diff` showing the before and after.
+- **Migration guide**: add a section under "Changes from v4" in [docs/content/docs/1.getting-started/3.migration.md](docs/content/docs/1.getting-started/3.migration.md) with a `diff` showing the before and after. If part of the change can't be applied by a find-and-replace (call-site dependent, a semantics flip, user CSS selectors, non-literal `:ui` objects), say so in the section: the codemod and the `migrate-nuxt-ui-v4-to-v5` skill are both derived from this file.
 - **Tracking issue**: link the PR in the checklist of [nuxt/ui#6918](https://github.com/nuxt/ui/issues/6918).
 - **Roadmap**: tick the matching item in the [v5 roadmap discussion](https://github.com/nuxt/ui/discussions/6610), or add it if it was not planned.
 
