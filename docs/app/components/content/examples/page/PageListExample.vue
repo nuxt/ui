@@ -12,13 +12,13 @@ const users = ref([
     }
   },
   {
-    name: 'Romain Hamel',
-    description: 'romhml',
-    to: 'https://github.com/romhml',
+    name: 'Hugo Richard',
+    description: 'HugoRCD',
+    to: 'https://github.com/HugoRCD',
     target: '_blank',
     avatar: {
-      src: 'https://github.com/romhml.png',
-      alt: 'romhml',
+      src: 'https://github.com/HugoRCD.png',
+      alt: 'HugoRCD',
       loading: 'lazy' as const
     }
   },
@@ -34,13 +34,13 @@ const users = ref([
     }
   },
   {
-    name: 'Hugo Richard',
-    description: 'HugoRCD',
-    to: 'https://github.com/HugoRCD',
+    name: 'Romain Hamel',
+    description: 'romhml',
+    to: 'https://github.com/romhml',
     target: '_blank',
     avatar: {
-      src: 'https://github.com/HugoRCD.png',
-      alt: 'HugoRCD',
+      src: 'https://github.com/romhml.png',
+      alt: 'romhml',
       loading: 'lazy' as const
     }
   },
@@ -56,17 +56,6 @@ const users = ref([
     }
   },
   {
-    name: 'Daniel Roe',
-    description: 'danielroe',
-    to: 'https://github.com/danielroe',
-    target: '_blank',
-    avatar: {
-      src: 'https://github.com/danielroe.png',
-      alt: 'danielroe',
-      loading: 'lazy' as const
-    }
-  },
-  {
     name: 'Jakub Michálek',
     description: 'J-Michalek',
     to: 'https://github.com/J-Michalek',
@@ -78,13 +67,24 @@ const users = ref([
     }
   },
   {
-    name: 'Eugen Istoc',
-    description: 'genu',
-    to: 'https://github.com/genu',
+    name: 'Alex',
+    description: 'hywax',
+    to: 'https://github.com/hywax',
     target: '_blank',
     avatar: {
-      src: 'https://github.com/genu.png',
-      alt: 'genu',
+      src: 'https://github.com/hywax.png',
+      alt: 'hywax',
+      loading: 'lazy' as const
+    }
+  },
+  {
+    name: 'Maxime Pauvert',
+    description: 'maximepvrt',
+    to: 'https://github.com/maximepvrt',
+    target: '_blank',
+    avatar: {
+      src: 'https://github.com/maximepvrt.png',
+      alt: 'maximepvrt',
       loading: 'lazy' as const
     }
   }

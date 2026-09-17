@@ -5,6 +5,9 @@ import { useChat } from '@ai-sdk/vue'
 import { isPartStreaming } from '@nuxt/ui/utils/ai'
 import { Markdown } from '@comark/vue'
 import shiki from '@comark/vue/plugins/shiki'
+import security from '@comark/vue/plugins/security'
+
+const plugins = [shiki(), security({ blockedTags: ['script', 'style', 'iframe', 'object', 'embed', 'form'] })]
 
 const open = ref(true)
 const input = ref('')
@@ -89,7 +92,7 @@ const ui = {
                   v-if="message.role === 'assistant'"
                   :value="part.text"
                   :streaming="isPartStreaming(part)"
-                  :plugins="[shiki()]"
+                  :plugins="plugins"
                   class="*:first:mt-0 *:last:mb-0"
                 />
                 <p v-else-if="message.role === 'user'" class="whitespace-pre-wrap text-sm/6">

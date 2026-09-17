@@ -1,38 +1,30 @@
-import { z } from 'zod'
 import { queryCollection } from '@nuxt/content/server'
 
 export default defineMcpTool({
-  description: 'Retrieves version-specific migration guides and upgrade instructions',
+  description: 'Retrieves the migration guide and upgrade instructions for this version of Nuxt UI',
   annotations: {
     readOnlyHint: true,
     destructiveHint: false,
     idempotentHint: true,
     openWorldHint: false
   },
-  inputSchema: {
-    version: z.enum(['v3', 'v4']).describe('The migration version (e.g., v4, v3)')
-  },
-  inputExamples: [
-    { version: 'v4' }
-  ],
   cache: '30m',
-  async handler({ version }) {
+  async handler() {
     const event = useEvent()
 
     const page = await queryCollection(event, 'docs')
-      .where('path', 'LIKE', `%/migration/${version}`)
+      .where('path', '=', '/docs/getting-started/migration')
       .where('extension', '=', 'md')
       .select('title', 'description', 'path')
       .first()
 
     if (!page) {
-      throw createError({ statusCode: 404, message: `Migration guide for '${version}' not found` })
+      throw createError({ statusCode: 404, message: 'Migration guide not found' })
     }
 
     const documentation = await $fetch<string>(`/raw${page.path}.md`)
 
     return {
-      version,
       title: page.title,
       description: page.description,
       path: page.path,

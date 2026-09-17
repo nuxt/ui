@@ -190,7 +190,7 @@ const flattenedPaddingFormula = computed(() => {
     lg: { base: 3, perLevel: 7 }, // px-3, ms-5.5 + ps-1.5
     xl: { base: 3, perLevel: 7.5 } // px-3, ms-6 + ps-1.5
   }
-  const config = sizeConfig[props.size || 'md']
+  const config = sizeConfig[props.size as keyof typeof sizeConfig] ?? sizeConfig.md
   return (level: number) => `calc(var(--spacing) * ${(level - 1) * config.perLevel + config.base})`
 })
 

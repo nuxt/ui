@@ -17,6 +17,9 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     'nuxt-component-meta',
     'nuxt-llms',
+    // listed although Nuxt UI depends on it: nuxt-og-image only reads fonts
+    // from @nuxt/fonts when it finds the module here
+    '@nuxt/fonts',
     'nuxt-og-image',
     'nuxt-schema-org',
     'motion-v/nuxt',
@@ -71,12 +74,6 @@ export default defineNuxtConfig({
     }
   },
 
-  mdc: {
-    highlight: {
-      noApiRoute: false
-    }
-  },
-
   runtimeConfig: {
     public: {
       version: pkg.version
@@ -85,17 +82,34 @@ export default defineNuxtConfig({
 
   routeRules: {
     '/api/navigation.json': { prerender: true },
+    // rendered per request: a shared theme rides ?doc=, which a prerendered
+    // page would never see (pages/theme.vue)
+    '/theme': { prerender: false },
+    // rendered per request from the GitHub data the API routes cache for an
+    // hour, a prerender would freeze the latest release at deploy time
+    '/docs/releases': { prerender: false },
+    '/docs/releases/**': { prerender: false },
     // v4 redirects - moved to `docs/`
     '/getting-started/**': { redirect: { to: '/docs/getting-started/**', statusCode: 301 }, prerender: false },
     '/components/**': { redirect: { to: '/docs/components/**', statusCode: 301 }, prerender: false },
     '/composables/**': { redirect: { to: '/docs/composables/**', statusCode: 301 }, prerender: false },
     // v4 redirects - default root pages
     '/docs': { redirect: '/docs/getting-started', prerender: false },
-    '/docs/getting-started/migration': { redirect: '/docs/getting-started/migration/v4', prerender: false },
+    // the version lives in the domain, ui4.nuxt.com/docs/getting-started/migration
+    '/docs/getting-started/migration/v4': { redirect: { to: '/docs/getting-started/migration', statusCode: 301 }, prerender: false },
+    '/raw/docs/getting-started/migration/v4.md': { redirect: { to: '/raw/docs/getting-started/migration.md', statusCode: 301 }, prerender: false },
+    // the v2 to v3 guide lives with the v3 docs now
+    '/docs/getting-started/migration/v3': { redirect: { to: 'https://ui3.nuxt.com/getting-started/migration', statusCode: 301 }, prerender: false },
+    // llms.txt advertised its Markdown twin, which has no page to serve it now
+    '/raw/docs/getting-started/migration/v3.md': { redirect: { to: 'https://ui3.nuxt.com/getting-started/migration', statusCode: 301 }, prerender: false },
     '/docs/getting-started/theme': { redirect: '/docs/getting-started/theme/design-system', prerender: false },
+    // the Figma guide lives with the kit now; the docs entry is a link, not a page
+    '/figma': { redirect: { to: 'https://go.nuxt.com/figma-ui', statusCode: 301 }, prerender: false },
+    '/docs/getting-started/figma': { redirect: { to: 'https://go.nuxt.com/figma-ui', statusCode: 301 }, prerender: false },
     '/docs/getting-started/integrations': { redirect: '/docs/getting-started/integrations/icons', prerender: false },
     '/docs/getting-started/ai': { redirect: '/docs/getting-started/ai/mcp', prerender: false },
     '/docs/composables': { redirect: '/docs/composables/define-shortcuts', prerender: false },
+    '/releases': { redirect: { to: '/docs/releases', statusCode: 301 }, prerender: false },
     // v4 redirects - default shadow pages
     '/docs/getting-started/installation': { redirect: '/docs/getting-started/installation/nuxt', prerender: false },
     '/docs/getting-started/integrations/icons': { redirect: '/docs/getting-started/integrations/icons/nuxt', prerender: false },
@@ -214,9 +228,6 @@ export default defineNuxtConfig({
         '/',
         '/docs/getting-started',
         '/openapi.json',
-        // Also prerendered through `prerenderRoutes()` in `app/pages/index.vue`;
-        // listed here so the guarantee does not hang off a page component.
-        '/raw/index.md',
         '/api/countries.json',
         '/api/phone-codes.json',
         '/api/locales.json',
@@ -271,6 +282,9 @@ export default defineNuxtConfig({
       { path: '/', raw: '/raw/index.md' },
       '/docs/**'
     ],
+    // the Figma entry links out (routeRules above) and the release pages are Vue
+    // pages built from the GitHub API, neither has a Markdown twin to list or serve
+    excludePrefixes: { extend: ['/docs/getting-started/figma', '/docs/releases'] },
     sitemap: {
       markdown: {
         // Split `/docs/**` into a section per area; `/blog/**` stays whole.
@@ -379,6 +393,19 @@ export default defineNuxtConfig({
     }
   },
 
+  // Declared global so @nuxt/fonts emits their faces where nuxt-og-image
+  // reads them: the site's Public Sans, and a mono for the OG code pane
+  // since the docs' own code blocks run on the system stack, which the
+  // renderer has no file for.
+  // Fontsource rather than Google: Google serves them as variable fonts,
+  // which takumi can't take, and the static fallback download never lands.
+  fonts: {
+    families: [
+      { name: 'Public Sans', provider: 'fontsource', weights: [400, 500, 600, 700], global: true },
+      { name: 'Geist Mono', provider: 'fontsource', weights: [400], global: true }
+    ]
+  },
+
   icon: {
     customCollections: [{
       prefix: 'custom',
@@ -425,8 +452,8 @@ export default defineNuxtConfig({
     domain: 'https://ui.nuxt.com',
     title: 'Nuxt UI',
     description: 'A comprehensive Vue UI component library (Nuxt optional) with 125+ accessible, production-ready, Tailwind CSS components for building modern web applications.',
-    // Disable content module's built-in raw markdown route - we use our own custom handler
-    // in server/routes/raw/[...slug].md.get.ts that applies MDC transformations
+    // Disable content module's built-in raw markdown route, `/raw/**` is served
+    // by nuxt-agent-discovery through the adapter in server/plugins/agent-discovery.ts
     contentRawMarkdown: false,
     full: {
       title: 'Nuxt UI Full Documentation',
@@ -442,19 +469,27 @@ export default defineNuxtConfig({
       title: 'Getting Started',
       contentCollection: 'docs',
       contentFilters: [
-        { field: 'path', operator: 'LIKE', value: '/docs/getting-started%' }
+        { field: 'path', operator: 'LIKE', value: '/docs/getting-started%' },
+        // an entry that links out (Figma) has no page to include
+        { field: 'to', operator: 'IS NULL' }
       ]
     }, {
       title: 'Components',
       contentCollection: 'docs',
       contentFilters: [
-        { field: 'path', operator: 'LIKE', value: '/docs/components/%' }
+        { field: 'path', operator: 'LIKE', value: '/docs/components%' }
       ]
     }, {
       title: 'Composables',
       contentCollection: 'docs',
       contentFilters: [
-        { field: 'path', operator: 'LIKE', value: '/docs/composables/%' }
+        { field: 'path', operator: 'LIKE', value: '/docs/composables%' }
+      ]
+    }, {
+      title: 'Typography',
+      contentCollection: 'docs',
+      contentFilters: [
+        { field: 'path', operator: 'LIKE', value: '/docs/typography%' }
       ]
     }],
     notes: [
@@ -476,6 +511,10 @@ export default defineNuxtConfig({
 
   ogImage: {
     zeroRuntime: true,
+    defaults: {
+      width: 1200,
+      height: 630
+    },
     security: {
       renderTimeout: 60000
     }

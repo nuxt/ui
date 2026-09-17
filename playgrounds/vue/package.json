@@ -10,19 +10,19 @@
     "typecheck": "vue-tsc -p ./tsconfig.app.json"
   },
   "dependencies": {
-    "@nuxt/ui": "workspace:*",
-    "@tiptap/extension-emoji": "^3.30.2",
-    "@tiptap/extension-text-align": "^3.30.2",
-    "tailwindcss": "^4.3.3",
-    "vue": "^3.5.41",
-    "vue-router": "^5.2.0",
-    "zod": "^4.4.3"
+    "@nuxt/ui": "catalog:",
+    "@tiptap/extension-emoji": "catalog:",
+    "@tiptap/extension-text-align": "catalog:",
+    "tailwindcss": "catalog:",
+    "vue": "catalog:",
+    "vue-router": "catalog:",
+    "zod": "catalog:"
   },
   "devDependencies": {
-    "@iconify-json/lucide": "^1.2.125",
-    "@vitejs/plugin-vue": "^6.0.8",
-    "typescript": "^6.0.3",
-    "vite": "^8.2.2",
-    "vue-tsc": "^3.3.11"
+    "@iconify-json/lucide": "catalog:",
+    "@vitejs/plugin-vue": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:",
+    "vue-tsc": "catalog:"
   }
 }
