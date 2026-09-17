@@ -95,8 +95,7 @@ export default defineNuxtConfig({
     '/composables/**': { redirect: { to: '/docs/composables/**', statusCode: 301 }, prerender: false },
     // v4 redirects - default root pages
     '/docs': { redirect: '/docs/getting-started', prerender: false },
-    // the version lives in the domain, ui5.nuxt.com/docs/getting-started/migration
-    // the v3 to v4 guide lives with the v4 docs now
+    // the version lives in the domain, the v3 to v4 guide is on the v4 docs now
     '/docs/getting-started/migration/v4': { redirect: { to: 'https://ui4.nuxt.com/docs/getting-started/migration', statusCode: 301 }, prerender: false },
     '/raw/docs/getting-started/migration/v4.md': { redirect: { to: 'https://ui4.nuxt.com/raw/docs/getting-started/migration.md', statusCode: 301 }, prerender: false },
     // the v2 to v3 guide lives with the v3 docs now
