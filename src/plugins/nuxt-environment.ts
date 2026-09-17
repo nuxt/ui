@@ -1,5 +1,5 @@
 import MagicString from 'magic-string'
-import { normalize } from 'pathe'
+import { join, normalize } from 'pathe'
 import { resolvePathSync } from 'mlly'
 import type { UnpluginOptions } from 'unplugin'
 import type { NuxtUIOptions } from '../unplugin'
@@ -11,9 +11,7 @@ import { resolveRouterMode } from '../utils/router'
  */
 export default function NuxtEnvironmentPlugin(options: NuxtUIOptions) {
   const routerMode = resolveRouterMode(options)
-  const stubsPath = `../runtime/vue/stubs/${routerMode}`
-
-  const stubPath = resolvePathSync(stubsPath, { extensions: ['.ts', '.mjs', '.js'], url: import.meta.url })
+  const stubPath = resolvePathSync(join(runtimeDir, 'vue/stubs', routerMode), { extensions: ['.ts', '.mjs', '.js'] })
 
   return {
     name: 'nuxt:ui',
