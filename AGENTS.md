@@ -8,7 +8,7 @@ Nuxt UI is a component library built on [Reka UI](https://reka-ui.com/), [Tailwi
 
 ## v5 Branch
 
-This is the `v5` branch, where breaking changes land. Non-breaking work targets `v4`, which is merged into `v5` regularly. Releases from this branch are alphas published under the `alpha` npm tag.
+This is the `v5` branch, where breaking changes land. Non-breaking work targets `v4`, and `v5` is rebased on top of `v4` regularly. The rebase rewrites the history of `v5`, so a branch opened against it has to be rebased after each sync. Releases from this branch are alphas published under the `alpha` npm tag.
 
 Every breaking change must keep three places in sync in the same PR:
 
