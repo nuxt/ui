@@ -118,7 +118,9 @@ jobs:
       - name: Copy fixture
         run: cp -r test/fixtures/consumer/${{ matrix.fixture }} $RUNNER_TEMP/consumer
 
-      # No lockfile on purpose: a fresh resolve is the only setup that catches missing optional peers
+      # No lockfile and no `@nuxt/ui` entry in the fixtures on purpose: a fresh resolve is the only setup that catches
+      # missing optional peers. With `@nuxt/ui` already declared, pnpm resolves the published release first and
+      # satisfies the optional peers from its dependencies.
       - name: Install latest nuxt/ui
         working-directory: ${{ runner.temp }}/consumer
         run: pnpm install https://pkg.pr.new/@nuxt/ui@${{ env.COMMIT_SHA }}
