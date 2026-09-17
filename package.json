@@ -106,7 +106,7 @@
   "scripts": {
     "build": "nuxt-module-build build",
     "prepack": "pnpm build",
-    "nuxt-ui": "node ./cli/index.mjs",
+    "cli": "node ./cli/index.mjs",
     "dev": "nuxt dev playgrounds/nuxt --uiDev",
     "dev:build": "nuxt build playgrounds/nuxt",
     "dev:vue": "pnpm --filter './playgrounds/vue' dev -- --uiDev",
