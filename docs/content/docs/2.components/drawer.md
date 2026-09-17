@@ -290,7 +290,7 @@ slots:
 
 ### Dismissible
 
-Use the `dismissible` prop to control whether the Drawer is dismissible when clicking outside of it or pressing escape. Defaults to `true`.
+Use the `dismissible` prop to control whether the Drawer can be dismissed by clicking outside of it, pressing escape or swiping it away. Defaults to `true`.
 
 ::note
 A `close:prevent` event will be emitted when the user tries to close it.
@@ -341,7 +341,7 @@ name: 'drawer-responsive-example'
 
 ### Nested drawers
 
-You can nest drawers within each other — nesting is detected automatically, no extra prop is needed.
+You can nest drawers within each other, nesting is detected automatically.
 
 ::component-example
 ---
