@@ -1,8 +1,11 @@
-import { describe, it, expect, vi, afterAll, test } from 'vitest'
+import { describe, it, expect, vi, afterAll, afterEach, test } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { flushPromises } from '@vue/test-utils'
 import { renderEach } from '../component-render'
 import InputTime from '../../src/runtime/components/InputTime.vue'
+import type { FormInputEvents } from '../../src/module'
+import { renderForm } from '../utils/form'
 import theme from '#build/ui/input-time'
 import { Time } from '@internationalized/date'
 
@@ -12,6 +15,10 @@ describe('InputTime', () => {
   const date = new Date('2025-01-01')
 
   vi.setSystemTime(date)
+
+  afterEach(() => {
+    vi.setSystemTime(date)
+  })
 
   afterAll(() => {
     vi.useRealTimers()
@@ -76,16 +83,68 @@ describe('InputTime', () => {
       const segments = wrapper.findAll('[data-segment]').filter(segment => segment.attributes('data-segment') !== 'literal')
       const [first, second] = segments
 
-      // nudge the mocked clock past mount so Vue's event invoker doesn't skip same-timestamp events
-      vi.setSystemTime(new Date(Date.now() + 1000))
+      // Vue skips native events stamped at the exact time their listener was attached
+      vi.setSystemTime(new Date(date.getTime() + 1000))
 
       first!.element.dispatchEvent(new FocusEvent('focusin', { bubbles: true, relatedTarget: null }))
       first!.element.dispatchEvent(new FocusEvent('focusout', { bubbles: true, relatedTarget: second!.element }))
       second!.element.dispatchEvent(new FocusEvent('focusin', { bubbles: true, relatedTarget: first!.element }))
       second!.element.dispatchEvent(new FocusEvent('focusout', { bubbles: true, relatedTarget: null }))
 
-      expect(wrapper.emitted('focus')).toHaveLength(1)
-      expect(wrapper.emitted('blur')).toHaveLength(1)
+      expect(wrapper.emitted()).toMatchObject({ focus: [[{ type: 'focusin' }]], blur: [[{ type: 'focusout' }]] })
+    })
+  })
+
+  describe('form integration', async () => {
+    async function createForm(validateOn?: FormInputEvents[]) {
+      const wrapper = await renderForm({
+        props: {
+          validateOn,
+          validateOnInputDelay: 0,
+          async validate(state: any) {
+            if (!state.value) {
+              return [{ name: 'value', message: 'Error message' }]
+            }
+            return []
+          }
+        },
+        slotTemplate: `
+        <UFormField name="value">
+          <UInputTime id="input" v-model="state.value" />
+        </UFormField>
+        `
+      })
+
+      const input = wrapper.findComponent({ name: 'TimeFieldRoot' })
+      const segments = wrapper.findAll('[data-segment]').filter(segment => segment.attributes('data-segment') !== 'literal')
+
+      // Vue skips native events stamped at the exact time their listener was attached
+      vi.setSystemTime(new Date(date.getTime() + 1000))
+
+      return { wrapper, input, segments }
+    }
+
+    test('validate on blur works', async () => {
+      const { wrapper, input, segments } = await createForm(['blur'])
+      const last = segments[segments.length - 1]!
+
+      last.element.dispatchEvent(new FocusEvent('focusout', { bubbles: true, relatedTarget: null }))
+      await flushPromises()
+      expect(wrapper.text()).toContain('Error message')
+
+      await input.vm.$emit('update:modelValue', new Time(12, 30))
+      last.element.dispatchEvent(new FocusEvent('focusout', { bubbles: true, relatedTarget: null }))
+      await flushPromises()
+      expect(wrapper.text()).not.toContain('Error message')
+    })
+
+    test('validate on blur ignores focus moving between segments', async () => {
+      const { wrapper, segments } = await createForm(['blur'])
+      const [first, second] = segments
+
+      first!.element.dispatchEvent(new FocusEvent('focusout', { bubbles: true, relatedTarget: second!.element }))
+      await flushPromises()
+      expect(wrapper.text()).not.toContain('Error message')
     })
   })
 

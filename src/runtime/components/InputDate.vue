@@ -149,8 +149,8 @@ function onFocusOut(event: FocusEvent) {
     return
   }
 
-  emitFormBlur()
   emits('blur', event)
+  emitFormBlur()
 }
 
 function onFocusIn(event: FocusEvent) {
@@ -158,8 +158,8 @@ function onFocusIn(event: FocusEvent) {
     return
   }
 
-  emitFormFocus()
   emits('focus', event)
+  emitFormFocus()
 }
 
 function autoFocus() {
