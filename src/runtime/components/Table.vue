@@ -473,17 +473,21 @@ function valueUpdater<T extends Updater<any>>(updaterOrValue: T, ref: Ref) {
 }
 
 function onRowSelect(e: Event, row: TableRow<T>) {
-  if (!props.onSelect || (e as KeyboardEvent).repeat) {
+  if (!props.onSelect) {
     return
   }
   const target = e.target as HTMLElement
-  const isInteractive = target.closest('a, button, input, select, textarea')
+  const isInteractive = target.closest('a, button, input, label, select, textarea')
   if (isInteractive) {
     return
   }
 
   e.preventDefault()
   e.stopPropagation()
+
+  if ((e as KeyboardEvent).repeat) {
+    return
+  }
 
   props.onSelect(e, row)
 }
@@ -559,7 +563,7 @@ defineExpose({
       })"
       :style="[resolveValue(tableApi.options.meta?.style?.tr, row), style]"
       @click="onRowSelect($event, row)"
-      @keydown.enter.space="onRowSelect($event, row)"
+      @keydown.self.enter.space="onRowSelect($event, row)"
       @pointerenter="onRowHover($event, row)"
       @pointerleave="onRowHover($event, null)"
       @contextmenu="onRowContextmenu($event, row)"

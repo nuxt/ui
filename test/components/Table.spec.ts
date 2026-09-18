@@ -264,7 +264,8 @@ describe('Table', () => {
 
     const row = wrapper.find('tbody tr')
     await row.trigger('keydown', { key: 'Enter', repeat: true })
-    await row.trigger('keydown', { key: ' ', repeat: true })
+    const spaceEvent = await triggerKeydown(row.element, { key: ' ', repeat: true })
+    expect(spaceEvent.defaultPrevented).toBe(true)
     expect(onSelect).not.toHaveBeenCalled()
 
     await row.trigger('keydown', { key: 'Enter' })
@@ -282,7 +283,8 @@ describe('Table', () => {
           cell: () => [
             h('input', { 'type': 'checkbox', 'aria-label': 'Select row' }),
             h('button', { type: 'button' }, 'Edit'),
-            h('a', { href: '#' }, 'Details')
+            h('a', { href: '#' }, 'Details'),
+            h('label', {}, [h('input', { type: 'checkbox' }), 'Toggle'])
           ]
         }] as any,
         onSelect
@@ -304,11 +306,33 @@ describe('Table', () => {
 
     await wrapper.find('tbody tr button').trigger('click')
     await wrapper.find('tbody tr a').trigger('click')
+    await wrapper.find('tbody tr label').trigger('click')
+    expect(wrapper.find<HTMLInputElement>('tbody tr label input').element.checked).toBe(true)
 
     expect(onSelect).not.toHaveBeenCalled()
 
     await wrapper.find('tbody tr').trigger('keydown', { key: 'Enter' })
     expect(onSelect).toHaveBeenCalledTimes(1)
+  })
+
+  it('does not call select from a nested contenteditable', async () => {
+    const onSelect = vi.fn()
+    const wrapper = await mountSuspended(Table, {
+      props: {
+        ...props,
+        columns: [{
+          id: 'notes',
+          header: 'Notes',
+          cell: () => h('div', { contenteditable: 'true' }, 'Notes')
+        }] as any,
+        onSelect
+      }
+    })
+
+    const editable = wrapper.find('tbody tr [contenteditable]')
+    const enterEvent = await triggerKeydown(editable.element, { key: 'Enter' })
+    expect(enterEvent.defaultPrevented).toBe(false)
+    expect(onSelect).not.toHaveBeenCalled()
   })
 
   it('reactive columns', async () => {
