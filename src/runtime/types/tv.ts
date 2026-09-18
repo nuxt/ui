@@ -247,17 +247,27 @@ type WidenVariantsValues<V extends Record<string, any> | undefined>
  */
 type Id<T> = {} & { [P in keyof T]: T[P] }
 
+/** The values each variant accepts, the way the component's props declare them. */
 type ComponentVariants<T extends { variants?: Record<string, Record<string, any>> }> = {
-  [K in keyof T['variants']]: keyof T['variants'][K]
+  [K in keyof T['variants']]: VariantKey<keyof T['variants'][K]>
 }
 
+/** The `:ui` prop: classes to merge, or a replacer, per slot. */
 type ComponentSlots<T extends { slots?: Record<string, any> }> = Id<{
   [K in keyof T['slots']]?: SlotClass
 }>
 
-type ComponentUI<T extends { slots?: Record<string, any> }> = Id<{
-  [K in keyof Required<T['slots']>]: (props?: Record<string, any>) => string
-}>
+/** The `ui` slot prop: the built component's slot functions. */
+type ComponentUI<T extends { slots?: TVSlots, variants?: Record<string, any> }> = TVSlotFunctions<T['variants'], T['slots'], undefined, undefined, undefined>
+
+/** `A['ui']`, or nothing when the base AppConfig has no `ui`. */
+type UIOf<A> = A extends { ui: infer UI } ? UI : Record<string, never>
+
+/** `A['ui']['prose']`, or nothing. */
+type ProseOf<A> = A extends { ui: { prose?: infer P } } ? NonNullable<P> : Record<string, never>
+
+/** A `ui` object with one component's config typed as its theme. */
+type WithComponent<UI, K extends string, T> = Omit<UI, K> & { [k in K]?: Partial<T> }
 
 type GetComponentAppConfig<A, U extends string, K extends string>
   = A extends Record<U, Record<K, any>> ? A[U][K] : {}
@@ -269,14 +279,8 @@ type ComponentAppConfig<
   U extends string = 'ui' | 'ui.prose'
 > = Omit<A, 'ui'> & {
   ui: U extends 'ui.prose'
-    ? (A extends { ui: infer UI } ? Omit<UI, 'prose'> : Record<string, never>) & {
-      prose?: (A extends { ui: { prose?: infer P } } ? Omit<NonNullable<P>, K> : Record<string, never>) & {
-        [k in K]?: Partial<T>
-      }
-    }
-    : (A extends { ui: infer UI } ? Omit<UI, K> : Record<string, never>) & {
-      [k in K]?: Partial<T>
-    }
+    ? Omit<UIOf<A>, 'prose'> & { prose?: WithComponent<ProseOf<A>, K, T> }
+    : WithComponent<UIOf<A>, K, T>
 }
 
 /**
@@ -284,7 +288,7 @@ type ComponentAppConfig<
  * @template T The component's theme imported from `#build/ui/*`.
  * @template A The base AppConfig type from `@nuxt/schema`.
  * @template K The key identifying the component (e.g., 'badge').
- * @template U The top-level key in AppConfig ('ui' or 'uiPro').
+ * @template U The top-level key in AppConfig ('ui' or 'ui.prose').
  */
 export type ComponentConfig<
   T extends Record<string, any>,
