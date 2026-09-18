@@ -29,6 +29,13 @@ describe('mount', () => {
   })
 })
 
+// CodSpeed measures one run after a forced GC, and a single on/off cycle is
+// short enough that the JIT state it lands in decides the number: the Button
+// benches swung between ~14 ms and ~19 ms on changes that didn't touch them.
+// Repeating the cycle lets that one-off cost amortize. The names carry the
+// count so CodSpeed reads them as new benches rather than as a 20x regression.
+const CYCLES = 20
+
 // Re-render cost: a full on/off `loading` cycle per iteration (deterministic,
 // ends in the initial state), re-rendering the whole subtree.
 function reRenderBench(name: string, comp: any, props: Record<string, any> = {}) {
@@ -37,10 +44,12 @@ function reRenderBench(name: string, comp: any, props: Record<string, any> = {})
 
     // Mounted lazily on the first call: CodSpeed's analysis runner invokes the
     // bench function without tinybench's `setup`/`teardown` options.
-    bench(name, async () => {
+    bench(`${name} x${CYCLES}`, async () => {
       wrapper ??= await mountSuspended(comp, { props })
-      await wrapper.setProps({ loading: true })
-      await wrapper.setProps({ loading: false })
+      for (let i = 0; i < CYCLES; i++) {
+        await wrapper.setProps({ loading: true })
+        await wrapper.setProps({ loading: false })
+      }
     })
   })
 }
