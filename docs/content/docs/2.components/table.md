@@ -481,7 +481,7 @@ prettier: true
 collapse: true
 name: 'table-column-sorting-example'
 highlights:
-  - 91
+  - 90
   - 106
 class: '!p-0'
 ---

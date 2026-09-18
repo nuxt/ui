@@ -166,6 +166,7 @@ const columns: TableColumn<Payment>[] = [{
   size: 128
 }, {
   accessorKey: 'email',
+  enableSorting: true,
   header: ({ column }) => {
     const isSorted = column.getIsSorted()
 

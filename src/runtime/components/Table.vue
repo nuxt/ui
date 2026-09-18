@@ -529,10 +529,15 @@ function getColumnStyles(column: Column<T>): Record<string, string> {
   return styles
 }
 
+// `getCanSort()` is true for every accessor column, so it cannot tell a column that offers sort UI
+// from a plain one, and an explicit `enableSorting: true` can still come from `defaultColumn` or be
+// overridden by `sortingOptions`. A header is sortable only when both agree.
+function isSortable(column: Column<T, unknown>) {
+  return column.columnDef.enableSorting === true && column.getCanSort()
+}
+
 function getAriaSort(header: Header<T, unknown>): AriaAttributes['aria-sort'] {
-  // `getCanSort()` is true for every accessor column, so it cannot tell a column that offers sort
-  // UI from a plain one. Only an explicit `enableSorting: true` marks a header as sortable.
-  if (header.isPlaceholder || header.column.columnDef.enableSorting !== true) {
+  if (header.isPlaceholder || !isSortable(header.column)) {
     return undefined
   }
 
@@ -545,7 +550,7 @@ function getAriaSort(header: Header<T, unknown>): AriaAttributes['aria-sort'] {
   // header on screen. Keys for an unknown id, a hidden column or a column with no sort UI are
   // skipped, otherwise every header would report `none` while the rows are sorted.
   const sortableIds = new Set(tableApi.getVisibleLeafColumns()
-    .filter(column => column.columnDef.enableSorting === true)
+    .filter(isSortable)
     .map(column => column.id))
   const primary = tableApi.getState().sorting.find(({ id }) => sortableIds.has(id))
 

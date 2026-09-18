@@ -307,6 +307,32 @@ describe('Table', () => {
     expect(footerThs.every(th => th.attributes('aria-sort') === undefined)).toBe(true)
   })
 
+  it('does not set aria-sort on th elements the table cannot sort', async () => {
+    const sortableColumns: TableColumn<typeof data[number]>[] = [
+      { accessorKey: 'id', header: 'Id', enableSorting: true },
+      { accessorKey: 'email', header: 'Email', enableSorting: true }
+    ]
+
+    const disabledWrapper = await mountSuspended(Table, {
+      props: { data, columns: sortableColumns as any, sortingOptions: { enableSorting: false } }
+    })
+
+    expect(disabledWrapper.findAll('th').every(th => th.attributes('aria-sort') === undefined)).toBe(true)
+
+    const displayColumns: TableColumn<typeof data[number]>[] = [
+      { id: 'actions', header: 'Actions' },
+      { accessorKey: 'id', header: 'Id' }
+    ]
+
+    const defaultColumnWrapper = await mountSuspended(Table, {
+      props: { data, columns: displayColumns as any, defaultColumn: { enableSorting: true } }
+    })
+
+    const [actionsTh, idTh] = defaultColumnWrapper.findAll('th')
+    expect(actionsTh!.attributes('aria-sort')).toBeUndefined()
+    expect(idTh!.attributes('aria-sort')).toBe('none')
+  })
+
   it('reactive columns', async () => {
     const wrapper = await mountSuspended({
       components: { Table },
