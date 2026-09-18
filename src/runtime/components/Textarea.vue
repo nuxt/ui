@@ -110,7 +110,7 @@ const disabled = computed(() => formFieldDisabled.value ?? props.disabled)
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.textarea || {}) })({
+const ui = computed(() => tv(theme, appConfig.ui?.textarea)({
   color: color.value,
   variant: props.variant,
   size: size.value,

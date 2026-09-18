@@ -221,7 +221,7 @@ const disabled = computed(() => formFieldDisabled.value ?? props.disabled)
 const isItemAligned = computed(() => position.value === 'item-aligned')
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.select || {}) })({
+const ui = computed(() => tv(theme, appConfig.ui?.select)({
   color: color.value,
   variant: props.variant,
   size: size.value,
