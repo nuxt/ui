@@ -42,6 +42,10 @@ describe('mount', () => {
   }
 })
 
+// One cycle is short enough for the JIT state of CodSpeed's single measured run
+// to decide the number, see `components.bench.ts`.
+const CYCLES = 20
+
 describe('re-render', () => {
   for (const [name, render] of CASES) {
     describe(name, () => {
@@ -49,10 +53,12 @@ describe('re-render', () => {
 
       // Mounted lazily on the first call: CodSpeed's analysis runner invokes the
       // bench function without tinybench's `setup`/`teardown` options.
-      bench(name, async () => {
+      bench(`${name} x${CYCLES}`, async () => {
         wrapper ??= await mountSuspended(makeParent(render), { props: { cls: 'p-2' } })
-        await wrapper.setProps({ cls: 'p-3' })
-        await wrapper.setProps({ cls: 'p-2' })
+        for (let i = 0; i < CYCLES; i++) {
+          await wrapper.setProps({ cls: 'p-3' })
+          await wrapper.setProps({ cls: 'p-2' })
+        }
       })
     })
   }
