@@ -148,6 +148,13 @@ describe('InputMenu', () => {
     expect(wrapper.get('div[data-slot="base"]').classes()).toContain('not-only:last:rounded-s-none')
   })
 
+  it('with autocomplete mode ignores multiple', () => {
+    const autocomplete = mount(InputMenu, { props: { items, mode: 'autocomplete' as const } })
+    const withMultiple = mount(InputMenu, { props: { items, mode: 'autocomplete' as const, multiple: true } })
+
+    expect(withMultiple.html()).toBe(autocomplete.html())
+  })
+
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(InputMenu, {
       props: {
