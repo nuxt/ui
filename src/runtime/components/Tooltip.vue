@@ -81,9 +81,7 @@ const contentProps = toRef(() => defu(props.content, providerContext.content.val
 const arrowProps = toRef(() => defu(props.arrow, { rounded: true }) as TooltipArrowProps)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.tooltip || {}) })({
-  side: contentProps.value.side
-}))
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.tooltip || {}) })())
 </script>
 
 <template>

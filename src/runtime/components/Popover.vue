@@ -112,9 +112,7 @@ const contentEvents = computed(() => {
 const arrowProps = toRef(() => defu(props.arrow, { rounded: true }) as PopoverArrowProps)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.popover || {}) })({
-  side: contentProps.value.side
-}))
+const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.popover || {}) })())
 
 const Component = computed(() => props.mode === 'hover' ? HoverCard : Popover)
 </script>
