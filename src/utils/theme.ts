@@ -79,7 +79,7 @@ export function applyPrefixToObject(obj: any, prefix?: string, context: string[]
  * default styles, keeping only what the user supplies via `class`, `ui` or
  * `app.config.ui`. All keys are preserved (slots stay callable, `variants` and
  * `defaultVariants` keep their values) so variant props still type-check and
- * validate. Mirrors `tailwind-variants` shapes: a slot value is either a class
+ * validate. Mirrors the engine's own shapes: a slot value is either a class
  * string/array or, inside `variants`/`compoundVariants`, an object mapping slot
  * names to classes.
  * @param result - The theme result object

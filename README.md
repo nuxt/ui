@@ -11,7 +11,7 @@
 [![License][license-src]][license-href]
 [![Nuxt][nuxt-src]][nuxt-href]
 
-Nuxt UI is a library of accessible, typed [Vue](https://vuejs.org) components built on [Reka UI](https://reka-ui.com/), [Tailwind CSS](https://tailwindcss.com/) and [Tailwind Variants](https://www.tailwind-variants.org/). It works as a module in [Nuxt](https://nuxt.com) and as a [Vite](https://vite.dev) plugin in plain Vue apps.
+Nuxt UI is a library of accessible, typed [Vue](https://vuejs.org) components built on [Reka UI](https://reka-ui.com/) and [Tailwind CSS](https://tailwindcss.com/). It works as a module in [Nuxt](https://nuxt.com) and as a [Vite](https://vite.dev) plugin in plain Vue apps.
 
 > [!NOTE]
 > You are on the `v5` development branch, check out the [v4 branch](https://github.com/nuxt/ui/tree/v4) for Nuxt UI v4.
