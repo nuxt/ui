@@ -203,7 +203,7 @@ export default defineAppConfig({
 })
 ```
 
-The variants engine uses `tailwind-merge` under the hood — conflicting classes are resolved automatically.
+The variants engine uses `tailwind-merge` under the hood, so conflicting classes are resolved automatically.
 
 ### Replace instead of merge
 

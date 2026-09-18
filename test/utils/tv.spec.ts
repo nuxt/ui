@@ -332,6 +332,19 @@ describe('tv slot memoization', () => {
     expect(tvt({ extend: shared })({ size: 'sm' }).base({})).toBe('inline-flex text-sm gap-1')
   })
 
+  it('does not confuse a `null` slot prop with an `undefined` one for an array expectation', () => {
+    // Both fall through to the invocation prop for the variant, but a compound
+    // listing `null` among its values matches one and not the other.
+    const shared = {
+      slots: { base: 'inline-flex' },
+      variants: { size: { sm: { base: 'text-sm' } } },
+      compoundVariants: [{ size: [null], class: { base: 'gap-1' } }]
+    }
+    expect(tvt({ extend: shared })().base({ size: null })).toBe('inline-flex gap-1')
+    expect(tvt({ extend: shared })().base({ size: undefined })).toBe('inline-flex')
+    expect(tvt({ extend: shared })().base({ size: null })).toBe('inline-flex gap-1')
+  })
+
   it('keys values that contain the separators', () => {
     // Tailwind arbitrary values carry `,`, `"` and `;`, so the key can't rely on
     // them as delimiters.

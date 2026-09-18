@@ -27,8 +27,9 @@ import appConfig from '#build/app.config'
  *   for that slot, compounds pre-filtered per slot), then memoizes the resolved
  *   string by a fingerprint of the few props that can affect that slot
  *
- * The caches live on the compiled entry rather than on the invocation, so they
- * survive factory rebuilds and are shared by every instance of a component.
+ * The caches live on the compiled entry rather than on the invocation, so on the
+ * shared entry they survive factory rebuilds and every instance of a component
+ * hits the same ones.
  */
 
 type Props = Record<string, any> | undefined
@@ -89,10 +90,10 @@ function hasDefinedKey(obj: Record<string, any> | undefined): boolean {
 }
 
 /**
- * The single seam every class string passes through. `app.config.ui.tv` is
- * build configuration: it is read once per config object, since the slot caches
- * hold merged results and would serve the previous setting anyway. Returns
- * `null` when merging is turned off (`twMerge: false`).
+ * The `tailwind-merge` instance for a config. `app.config.ui.tv` is build
+ * configuration: it is read once per config object, since the slot caches hold
+ * merged results and would serve the previous setting anyway. Returns `null`
+ * when merging is turned off (`twMerge: false`).
  */
 function getMerger(config: TVMergeConfig | undefined): Merger | null {
   if (!config) {
@@ -120,6 +121,9 @@ function getMerger(config: TVMergeConfig | undefined): Merger | null {
   return merger
 }
 
+/**
+ * The single seam every class string passes through.
+ */
 function mergeClasses(config: TVMergeConfig | undefined, ...classes: any[]): string | undefined {
   const joined = cx(...classes)
   if (!joined) {
@@ -525,7 +529,8 @@ function fingerprint(compiled: CompiledSlot, props: Props, slotProps: Props): st
   for (const key of compiled.relevantKeys) {
     // A nullish slot prop falls through to the invocation prop in the variant
     // lookup (`??`) but still counts as set for compound matching (`in`), so the
-    // key records the value the lookup will see plus a marker for the other view.
+    // key records the value the lookup will see plus a marker for the other
+    // view, which one since an array expectation tells `null` from `undefined`.
     const inSlot = slotProps != null && key in slotProps
     const slotValue = inSlot ? slotProps![key] : undefined
     const fallsThrough = slotValue == null
@@ -533,7 +538,7 @@ function fingerprint(compiled: CompiledSlot, props: Props, slotProps: Props): st
     if (part === BAIL) {
       return BAIL
     }
-    out += part + (inSlot && fallsThrough ? '!' : '') + ';'
+    out += part + (inSlot && fallsThrough ? (slotValue === null ? '!n' : '!u') : '') + ';'
   }
   if (slotProps) {
     const cls = serializeClass(slotProps.class)
