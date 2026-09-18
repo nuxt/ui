@@ -57,7 +57,7 @@ const appConfig = useAppConfig() as ProsePre['AppConfig']
 const baseRef = useTemplateRef('baseRef')
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.prose?.pre || {}) })())
+const ui = computed(() => tv(theme, appConfig.ui?.prose?.pre)())
 
 function copyCode() {
   const code = props.code ?? baseRef.value?.textContent ?? ''

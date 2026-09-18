@@ -77,7 +77,7 @@ const prefix = usePrefix()
 const as = computed(() => resolveAs(props.as, { root: 'div', title: 'h2' }))
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.pageCTA || {}) })({
+const ui = computed(() => tv(theme, appConfig.ui?.pageCTA)({
   variant: props.variant,
   orientation: props.orientation,
   reverse: props.reverse,

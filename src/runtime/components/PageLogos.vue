@@ -59,7 +59,7 @@ const appConfig = useAppConfig() as PageLogos['AppConfig']
 const as = computed(() => resolveAs(props.as, { root: 'div', title: 'h2' }))
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.pageLogos || {}) })())
+const ui = computed(() => tv(theme, appConfig.ui?.pageLogos)())
 </script>
 
 <template>

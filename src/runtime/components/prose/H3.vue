@@ -41,7 +41,7 @@ const appConfig = useAppConfig() as ProseH3['AppConfig']
 const { headings } = useRuntimeConfig().public?.mdc || {}
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.prose?.h3 || {}) })())
+const ui = computed(() => tv(theme, appConfig.ui?.prose?.h3)())
 
 const generate = computed(() => props.id && (props.anchor ?? (typeof headings?.anchorLinks === 'boolean' ? headings.anchorLinks : headings?.anchorLinks?.h3) ?? false))
 </script>

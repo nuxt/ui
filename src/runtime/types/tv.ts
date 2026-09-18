@@ -80,62 +80,87 @@ export type SlotClass = ClassValue | SlotClassReplacer
 /** Variant values spelled `'true'` / `'false'` are read as booleans. */
 type VariantKey<T> = T extends 'true' | 'false' ? boolean : T
 
-type BaseSlot<B extends ClassValue> = [B] extends [undefined] ? never : 'base'
+/** Values a variant or compound entry may hold, kept literal by inference. */
+type VariantPropValue = string | number | boolean | null | undefined
+
+/**
+ * A theme, the shape `src/theme/*` produces and `#build/ui/*` exports: classes
+ * for the whole component or per slot, the variants that switch them, and what
+ * they default to.
+ */
+export type TVTheme = {
+  base?: ClassValue
+  slots?: TVSlots
+  variants?: Record<string, Record<string, ClassValue | Record<string, ClassValue>>>
+  compoundVariants?: Record<string, VariantPropValue | readonly VariantPropValue[] | ClassValue | Record<string, ClassValue>>[]
+  defaultVariants?: Record<string, VariantPropValue>
+}
+
+/** The theme's variant groups, `{}` when it declares none. */
+type VariantsOf<T> = T extends { variants?: infer V } ? NonNullable<V> extends Record<string, any> ? NonNullable<V> : {} : {}
+
+/** The theme's slots, `{}` when it only has a `base`. */
+type SlotsOf<T> = T extends { slots?: infer S } ? NonNullable<S> extends Record<string, any> ? NonNullable<S> : {} : {}
+
+type BaseSlot<T> = 'base' extends keyof T ? 'base' : never
 
 /** The slots a class value can target: the theme's own, plus `base` when it has one. */
-type SlotName<S extends TVSlots, B extends ClassValue> = keyof S | BaseSlot<B>
+type SlotName<T> = keyof SlotsOf<T> | BaseSlot<T>
 
 /** Classes for the whole component, or per slot. */
-type SlotsClass<S extends TVSlots, B extends ClassValue> = ClassValue | { [K in SlotName<S, B>]?: ClassValue }
+type SlotsClass<T> = ClassValue | { [K in SlotName<T>]?: ClassValue }
 
 /** One variant group: every value it accepts, and the classes each contributes. */
-type VariantGroup<S extends TVSlots, B extends ClassValue> = Record<string, SlotsClass<S, B>>
+type VariantGroup<T> = Record<string, SlotsClass<T>>
 
 /**
- * Variant groups declared by the theme itself. A slotless theme resolves to `{}`,
- * which every object satisfies, so variants stay open there.
+ * The `variants` object of an override: the theme's own groups and values keep
+ * autocompleting, and new groups and values can be added alongside.
  */
-type OwnVariants<S extends TVSlots, B extends ClassValue> = S extends undefined ? {} : Record<string, VariantGroup<S, B>>
+export type TVVariants<T> = {
+  [K in keyof VariantsOf<T>]?: { [Value in keyof VariantsOf<T>[K]]?: SlotsClass<T> } & VariantGroup<T>
+} & Record<string, VariantGroup<T>>
 
-/**
- * The `variants` object. When extending, the extended theme's own groups are
- * offered as-is so their values keep autocompleting, and new groups can be added
- * alongside.
- */
-export type TVVariants<S extends TVSlots, B extends ClassValue = undefined, EV = undefined> = EV extends undefined
-  ? OwnVariants<S, B>
-  : | { [K in keyof EV]: { [Value in keyof EV[K]]: SlotsClass<S, B> } }
-    | OwnVariants<S, B>
-
-/** The values one variant accepts, from this theme or the one it extends. */
-type VariantValue<V, EV, K>
-  = | (K extends keyof V ? VariantKey<keyof V[K]> : never)
-    | (K extends keyof EV ? VariantKey<keyof EV[K]> : never)
+/** The values one variant accepts. */
+type VariantValue<T, K> = K extends keyof VariantsOf<T> ? VariantKey<keyof VariantsOf<T>[K]> : never
 
 /**
  * `compoundVariants` entries, which match one value or any of several.
  */
-export type TVCompoundVariants<V, S extends TVSlots, B extends ClassValue, EV = undefined> = Array<
+export type TVCompoundVariants<T> = Array<
   {
-    [K in keyof V | keyof EV]?: VariantValue<V, EV, K> | VariantValue<V, EV, K>[]
-  } & ClassProp<SlotsClass<S, B>>
+    [K in keyof VariantsOf<T>]?: VariantValue<T, K> | VariantValue<T, K>[]
+  } & ClassProp<SlotsClass<T>>
 >
 
 /**
  * `defaultVariants`, the value each variant falls back to.
  */
-export type TVDefaultVariants<V, EV = undefined> = {
-  [K in keyof V | keyof EV]?: VariantValue<V, EV, K>
+export type TVDefaultVariants<T> = {
+  [K in keyof VariantsOf<T>]?: VariantValue<T, K>
 }
 
 /**
- * The props a built component and its slot functions accept: the declared
+ * What `app.config.ui.<c>` may say on top of a theme: classes to merge or a
+ * replacer per slot, and variants, compound variants and defaults that extend
+ * the theme's own.
+ */
+export type TVOverrides<T> = {
+  base?: SlotClass
+  slots?: { [K in keyof SlotsOf<T>]?: SlotClass }
+  variants?: TVVariants<T>
+  compoundVariants?: TVCompoundVariants<T>
+  defaultVariants?: TVDefaultVariants<T>
+}
+
+/**
+ * The props a built component and its slot functions accept: the theme's
  * variants, plus classes to merge on top. Variants that `app.config.ui.<c>`
  * adds reach the component's own props through `ComponentConfig`, so nothing
  * needs to be open here.
  */
-export type TVProps<V, EV = undefined> = {
-  [K in keyof V | keyof EV]?: VariantValue<V, EV, K>
+export type TVProps<T> = {
+  [K in keyof VariantsOf<T>]?: VariantValue<T, K>
 } & ClassProp<SlotClassValue>
 
 /**
@@ -143,103 +168,49 @@ export type TVProps<V, EV = undefined> = {
  */
 export type VariantProps<Component extends (...args: any) => any> = Omit<Exclude<Parameters<Component>[0], undefined>, 'class'>
 
-/**
- * The metadata `extend` reads, whether it points at a plain theme object or at a
- * built component.
- */
-export type TVExtend = {
-  base?: any
-  slots?: any
-  variants?: any
-  compoundVariants?: any
-  defaultVariants?: any
-}
-
-// Wrapped in tuples so a theme typed with `slots?:` doesn't distribute over
-// `Record | undefined` and collapse the whole call to `string`.
-type Slotted<S extends TVSlots> = [S] extends [undefined] ? {} : S
-
-type HasSlots<S extends TVSlots, ES extends TVSlots> = [S] extends [undefined]
-  ? [ES] extends [undefined] ? false : true
-  : true
+type HasSlots<T> = [keyof SlotsOf<T>] extends [never] ? false : true
 
 /**
- * One function per slot: the extended theme's, this theme's own, and `base`.
+ * One function per slot, `base` included when the theme has one.
  */
-type TVSlotFunctions<V, S extends TVSlots, B extends ClassValue, EV, ES extends TVSlots> = {
-  [K in keyof Slotted<S> | keyof Slotted<ES> | BaseSlot<B>]: (slotProps?: TVProps<V, EV>) => string
+type TVSlotFunctions<T> = {
+  [K in SlotName<T>]: (slotProps?: TVProps<T>) => string
 }
 
 /**
- * A built component: callable with variant props, returning one class string when
- * the theme has no slots and a function per slot when it does. The metadata it
- * carries alongside is what `extend` resolves against.
+ * A built component: callable with variant props, returning one class string
+ * when the theme has no slots and a function per slot when it does.
  */
-export type TVReturnType<
-  V,
-  S extends TVSlots,
-  B extends ClassValue,
-  EV = undefined,
-  ES extends TVSlots = undefined
-> = {
-  (props?: TVProps<V, EV>): HasSlots<S, ES> extends true ? TVSlotFunctions<V, S, B, EV, ES> : string
-  base: B
-  slots: S
-  variants: V
-  compoundVariants: TVCompoundVariants<V, S, B, EV>
-  defaultVariants: TVDefaultVariants<V, EV>
+export type TVReturnType<T> = (props?: TVProps<T>) => HasSlots<T> extends true ? TVSlotFunctions<T> : string
+
+/**
+ * The theme's own `compoundVariants` and `defaultVariants` checked against its
+ * `variants`, the part of a literal theme inference alone doesn't validate.
+ */
+type TVThemeCheck<T> = {
+  compoundVariants?: TVCompoundVariants<T>
+  defaultVariants?: TVDefaultVariants<T>
 }
 
 /**
- * The engine itself: a theme in, a built component out.
+ * The engine itself: a theme and the overrides on top of it in, a built
+ * component out.
  */
-export type TV = {
-  <
-    V extends TVVariants<S, B, EV>,
-    CV extends TVCompoundVariants<V, S, B, EV>,
-    DV extends TVDefaultVariants<V, EV>,
-    B extends ClassValue = undefined,
-    S extends TVSlots = undefined,
-    E extends TVExtend | undefined = undefined,
-    EV = E extends TVExtend ? E['variants'] : undefined,
-    ES extends TVSlots = E extends TVExtend ? (E['slots'] extends TVSlots ? E['slots'] : undefined) : undefined
-  >(
-    options: {
-      extend?: E
-      base?: B
-      slots?: S
-      variants?: V
-      compoundVariants?: CV
-      defaultVariants?: DV
-    }
-  ): TVReturnType<V, S, B, EV, ES>
+export type TV = <T extends TVTheme>(theme: T & TVThemeCheck<T>, overrides?: TVOverrides<T> | null) => TVReturnType<T>
+
+/** A theme whose variant groups also accept values `app.config.ui` adds. */
+type WidenTheme<T> = Omit<T, 'variants'> & {
+  variants: T extends { variants: infer V extends Record<string, any> }
+    ? { [K in keyof V]: V[K] & Record<string & {}, any> }
+    : {}
 }
 
 /**
  * Defines the AppConfig object based on the theme configuration.
  */
 export type TVConfig<T extends Record<string, any>> = {
-  [P in keyof T]?: P extends 'prose' ? TVConfig<T[P]> : {
-    [K in keyof T[P] as K extends 'base' | 'slots' | 'variants' | 'defaultVariants' ? K : never]?: K extends 'base' ? SlotClass
-      : K extends 'slots' ? {
-        [S in keyof T[P]['slots']]?: SlotClass
-      }
-        : K extends 'variants' ? TVVariants<T[P]['slots'], ClassValue, WidenVariantsValues<T[P]['variants']>>
-          : K extends 'defaultVariants' ? TVDefaultVariants<WidenVariantsValues<T[P]['variants']>>
-            : never
-  }
-} & {
-  [P in keyof T]?: P extends 'prose' ? TVConfig<T[P]> : {
-    compoundVariants?: TVCompoundVariants<WidenVariantsValues<T[P]['variants']>, T[P]['slots'], ClassValue>
-  }
+  [P in keyof T]?: P extends 'prose' ? TVConfig<T[P]> : TVOverrides<WidenTheme<T[P]>>
 }
-
-type WidenVariantsValues<V extends Record<string, any> | undefined>
-  = V extends Record<string, any> ? V & {
-    [K in keyof V]: V[K] extends Record<string, any>
-      ? V[K] & Record<string & {}, any>
-      : V[K]
-  } : V
 
 /**
  * Utility type to flatten intersection types for better IDE hover information.
@@ -248,17 +219,14 @@ type WidenVariantsValues<V extends Record<string, any> | undefined>
 type Id<T> = {} & { [P in keyof T]: T[P] }
 
 /** The values each variant accepts, the way the component's props declare them. */
-type ComponentVariants<T extends { variants?: Record<string, Record<string, any>> }> = {
-  [K in keyof T['variants']]: VariantKey<keyof T['variants'][K]>
+type ComponentVariants<T> = {
+  [K in keyof VariantsOf<T>]: VariantKey<keyof VariantsOf<T>[K]>
 }
 
 /** The `:ui` prop: classes to merge, or a replacer, per slot. */
-type ComponentSlots<T extends { slots?: Record<string, any> }> = Id<{
-  [K in keyof T['slots']]?: SlotClass
+type ComponentSlots<T> = Id<{
+  [K in keyof SlotsOf<T>]?: SlotClass
 }>
-
-/** The `ui` slot prop: the built component's slot functions. */
-type ComponentUI<T extends { slots?: TVSlots, variants?: Record<string, any> }> = TVSlotFunctions<T['variants'], T['slots'], undefined, undefined, undefined>
 
 /** `A['ui']`, or nothing when the base AppConfig has no `ui`. */
 type UIOf<A> = A extends { ui: infer UI } ? UI : Record<string, never>
@@ -299,5 +267,5 @@ export type ComponentConfig<
   AppConfig: ComponentAppConfig<T, A, K, U>
   variants: ComponentVariants<T & GetComponentAppConfig<A, U, K>>
   slots: ComponentSlots<T>
-  ui: ComponentUI<T & GetComponentAppConfig<A, U, K>>
+  ui: TVSlotFunctions<T & GetComponentAppConfig<A, U, K>>
 }

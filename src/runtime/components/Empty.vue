@@ -81,7 +81,7 @@ const iconName = computed(() => props.loading ? (props.loadingIcon || appConfig.
 const as = computed(() => resolveAs(props.as, { root: 'div', title: 'h2' }))
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.empty || {}) })({
+const ui = computed(() => tv(theme, appConfig.ui?.empty)({
   variant: props.variant,
   size: props.size,
   loading: props.loading

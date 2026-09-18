@@ -145,7 +145,7 @@ function onAnimationEnd(open: boolean) {
 }
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.drawer || {}) })({
+const ui = computed(() => tv(theme, appConfig.ui?.drawer)({
   direction: props.direction,
   inset: props.inset,
   snapPoints: props.snapPoints && props.snapPoints.length > 0
