@@ -226,14 +226,30 @@ function mergeVariantValue(own: any, theme: any): any {
   return flat
 }
 
+/**
+ * One layer of a spec, resolved in full (slot classes, variants, compound
+ * variants) before the next one, last class winning:
+ * - the theme: its slot classes, the variants, its compound variants. The
+ *   overrides' variants merge into the theme's here, value by value, so they
+ *   stay beneath the theme's compounds. A compound is often the exception to a
+ *   variant (`square` and `size` to `p-1.5`), and tuning the variant from
+ *   `app.config.ui` doesn't mean to cancel it.
+ * - the overrides: their slot classes, then their compound variants, so
+ *   `app.config.ui.<c>.slots.<x>` wins over what the theme resolved the way
+ *   `:ui` does, and the more specific compound still wins over it.
+ */
+interface Layer {
+  /** Per slot, or under `base` for a slotless theme. */
+  statics: Record<string, ClassValue>
+  variants: Record<string, Record<string, any> | undefined>
+  compoundVariants: Record<string, any>[]
+}
+
 interface Spec {
   config: TVMergeConfig | undefined
-  base: ClassValue
-  slots: Record<string, ClassValue>
+  layers: Layer[]
+  slotKeys: string[]
   hasSlots: boolean
-  variants: Record<string, Record<string, any> | undefined>
-  variantKeys: string[]
-  compoundVariants: Record<string, any>[]
   defaultVariants: Record<string, any>
   /** Lazily compiled per-slot resolvers, shared across factory rebuilds. */
   compiled: Record<string, CompiledSlot | undefined>
@@ -249,26 +265,19 @@ function replaceClasses(config: TVMergeConfig | undefined, replacer: SlotClassRe
 
 const EMPTY: Record<string, any> = {}
 
+function flatten(value: any): any[] {
+  const flat: any[] = []
+  flatFilter(flat, value)
+  return flat
+}
+
 /**
- * Merge the overrides (`app.config.ui.<c>`) onto the theme: the theme's classes
- * come first so the overrides win conflicts, unless a replacer resolved them.
+ * Stack the overrides (`app.config.ui.<c>`) on the theme. A replacer among them
+ * resolves against the theme's slot classes and takes their place in the theme
+ * layer, so the variants and compound variants still apply on top of it.
  */
 function resolveSpec(theme: Record<string, any>, overrides: Record<string, any> | undefined, config: TVMergeConfig | undefined): Spec {
   const own = overrides ?? EMPTY
-  const ownVariants = own.variants ?? {}
-  const ownCompound = own.compoundVariants ?? []
-  const ownDefaults = own.defaultVariants ?? {}
-
-  const variants = isEmpty(theme.variants) ? ownVariants : mergeVariants(ownVariants, theme.variants)
-  const defaultVariants = isEmpty(theme.defaultVariants) ? ownDefaults : { ...theme.defaultVariants, ...ownDefaults }
-
-  let compoundVariants = ownCompound
-  if (!isEmpty(theme.compoundVariants)) {
-    const flat: any[] = []
-    flatFilter(flat, theme.compoundVariants)
-    flatFilter(flat, ownCompound)
-    compoundVariants = flat
-  }
 
   const themeSlots: Record<string, any> = theme.slots ?? {}
   const isThemeSlotsEmpty = isEmpty(themeSlots)
@@ -293,28 +302,41 @@ function resolveSpec(theme: Record<string, any>, overrides: Record<string, any> 
     ownSlots[key] = replaceClasses(config, rawSlots[key], inherited(key))
   }
 
-  const base = baseReplaced || !theme.base ? ownBase : cx(theme.base, ownBase)
-
   // Slot keys come from both sides, `base` included as soon as there are slots
-  // at all; a theme with nothing but a `base` stays slotless.
-  const slots: Record<string, any> = {}
-  if (!isThemeSlotsEmpty || !isEmpty(ownSlots)) {
-    for (const key of new Set(['base', ...Object.keys(themeSlots), ...Object.keys(ownSlots)])) {
-      const ownClasses = key === 'base' ? cx(ownBase, ownSlots.base) : ownSlots[key]
-      const replaced = typeof rawSlots[key] === 'function' || (key === 'base' && baseReplaced)
-      slots[key] = replaced ? ownClasses : cx(inherited(key), ownClasses)
+  // at all; a theme with nothing but a `base` stays slotless and resolves
+  // through an implicit `base` slot.
+  const hasSlots = !isThemeSlotsEmpty || !isEmpty(ownSlots)
+  const slotKeys = hasSlots ? [...new Set(['base', ...Object.keys(themeSlots), ...Object.keys(ownSlots)])] : []
+
+  const themeStatics: Record<string, ClassValue> = {}
+  const ownStatics: Record<string, ClassValue> = {}
+  for (const key of hasSlots ? slotKeys : ['base']) {
+    const ownClasses = key === 'base' ? cx(ownBase, hasSlots ? ownSlots.base : undefined) : ownSlots[key]
+    const replaced = typeof rawSlots[key] === 'function' || (key === 'base' && baseReplaced)
+    if (replaced) {
+      themeStatics[key] = ownClasses
+    } else {
+      themeStatics[key] = inherited(key)
+      ownStatics[key] = ownClasses
     }
+  }
+
+  const ownVariants = own.variants ?? {}
+  const layers: Layer[] = [{
+    statics: themeStatics,
+    variants: isEmpty(theme.variants) ? ownVariants : mergeVariants(ownVariants, theme.variants),
+    compoundVariants: flatten(theme.compoundVariants)
+  }]
+  if (overrides) {
+    layers.push({ statics: ownStatics, variants: {}, compoundVariants: flatten(own.compoundVariants) })
   }
 
   return {
     config,
-    base,
-    slots,
-    hasSlots: !isEmpty(slots),
-    variants,
-    variantKeys: Object.keys(variants),
-    compoundVariants,
-    defaultVariants,
+    layers,
+    slotKeys,
+    hasSlots,
+    defaultVariants: isEmpty(theme.defaultVariants) ? own.defaultVariants ?? {} : { ...theme.defaultVariants, ...own.defaultVariants },
     compiled: Object.create(null)
   }
 }
@@ -336,10 +358,14 @@ interface CompiledCompound {
   cls: string
 }
 
-interface CompiledSlot {
+interface CompiledLayer {
   static: ClassValue
   variants: CompiledVariant[]
   compounds: CompiledCompound[]
+}
+
+interface CompiledSlot {
+  layers: CompiledLayer[]
   /** Every prop key that can change this slot's output, the memo key domain. */
   relevantKeys: string[]
   cache: Generations<string | undefined>
@@ -356,12 +382,10 @@ function classForSlot(value: any, slotKey: string): any {
   return slotKey === 'base' ? value : undefined
 }
 
-function compileSlot(spec: Spec, slotKey: string): CompiledSlot {
-  const relevant = new Set<string>()
+function compileLayer(layer: Layer, defaultVariants: Record<string, any>, slotKey: string, relevant: Set<string>): CompiledLayer {
   const variants: CompiledVariant[] = []
-
-  for (const key of spec.variantKeys) {
-    const group = spec.variants[key]
+  for (const key in layer.variants) {
+    const group = layer.variants[key]
     if (!group || isEmpty(group)) {
       continue
     }
@@ -378,12 +402,12 @@ function compileSlot(spec: Spec, slotKey: string): CompiledSlot {
     // so it stays out of both the resolve path and the cache key.
     if (hasAny) {
       relevant.add(key)
-      variants.push({ key, table, defaultValue: spec.defaultVariants[key] })
+      variants.push({ key, table, defaultValue: defaultVariants[key] })
     }
   }
 
   const compounds: CompiledCompound[] = []
-  for (const compound of spec.compoundVariants) {
+  for (const compound of layer.compoundVariants) {
     const cls = cx(classForSlot(compound.class, slotKey))
     if (!cls) {
       continue
@@ -400,12 +424,14 @@ function compileSlot(spec: Spec, slotKey: string): CompiledSlot {
     compounds.push({ keys, values, cls })
   }
 
+  return { static: layer.statics[slotKey], variants, compounds }
+}
+
+function compileSlot(spec: Spec, slotKey: string): CompiledSlot {
+  const relevant = new Set<string>()
+  const layers = spec.layers.map(layer => compileLayer(layer, spec.defaultVariants, slotKey, relevant))
   return {
-    // A slotless theme resolves through an implicit `base` slot fed by its
-    // top-level `base`, which stays off `spec.slots` so it returns a string.
-    static: spec.hasSlots ? spec.slots[slotKey] : spec.base,
-    variants,
-    compounds,
+    layers,
     relevantKeys: [...relevant],
     cache: new Generations(SLOT_CACHE_LIMIT)
   }
@@ -466,16 +492,19 @@ function variantClass(variant: CompiledVariant, props: Props, slotProps: Props):
  * match, then whatever the caller passed.
  */
 function resolveSlot(spec: Spec, compiled: CompiledSlot, props: Props, slotProps: Props): string | undefined {
-  const parts: any[] = [compiled.static]
-  for (const variant of compiled.variants) {
-    const cls = variantClass(variant, props, slotProps)
-    if (cls) {
-      parts.push(cls)
+  const parts: any[] = []
+  for (const layer of compiled.layers) {
+    parts.push(layer.static)
+    for (const variant of layer.variants) {
+      const cls = variantClass(variant, props, slotProps)
+      if (cls) {
+        parts.push(cls)
+      }
     }
-  }
-  for (const compound of compiled.compounds) {
-    if (matchesCompound(compound, spec.defaultVariants, props, slotProps)) {
-      parts.push(compound.cls)
+    for (const compound of layer.compounds) {
+      if (matchesCompound(compound, spec.defaultVariants, props, slotProps)) {
+        parts.push(compound.cls)
+      }
     }
   }
   return mergeWithOverrides(spec.config, parts, slotProps)
@@ -707,7 +736,9 @@ function createTV(config?: TVMergeConfig) {
       }
 
       const fns: Record<string, (slotProps?: Record<string, any>) => string | undefined> = {}
-      for (const slotKey in spec.slots) {
+      const slotKeys = spec.slotKeys
+      for (let i = 0; i < slotKeys.length; i++) {
+        const slotKey = slotKeys[i]!
         fns[slotKey] = slotProps => resolveSlotCached(spec, slotKey, props, slotProps)
       }
       return fns
