@@ -1,5 +1,4 @@
 import { describe, it, expect } from 'vitest'
-import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import Callout from '../../../src/runtime/components/prose/Callout.vue'
 
@@ -8,7 +7,7 @@ describe('Callout', () => {
     const wrapper = await mountSuspended(Callout, {
       props: {}
     })
-    expect(await axe(wrapper.element)).toHaveNoViolations()
+    expect(await wrapper.axe()).toHaveNoViolations()
   })
 
   it('forwards attrs to root when `to` prop is absent', async () => {

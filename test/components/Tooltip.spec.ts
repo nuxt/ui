@@ -1,6 +1,5 @@
 import { defineComponent } from 'vue'
 import { describe, it, expect } from 'vitest'
-import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { renderEach } from '../component-render'
 import { TooltipProvider } from 'reka-ui'
@@ -77,6 +76,6 @@ describe('Tooltip', () => {
         kbds: ['meta', 'K']
       }
     })
-    expect(await axe(wrapper.element)).toHaveNoViolations()
+    expect(await wrapper.axe()).toHaveNoViolations()
   })
 })

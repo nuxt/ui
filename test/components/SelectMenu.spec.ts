@@ -1,5 +1,4 @@
 import { describe, it, expect, test } from 'vitest'
-import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { renderEach } from '../component-render'
 import SelectMenu from '../../src/runtime/components/SelectMenu.vue'
@@ -138,7 +137,7 @@ describe('SelectMenu', () => {
 
       }
     })
-    expect(await axe(wrapper.element, {
+    expect(await wrapper.axe({
       rules: {
         // "Certain ARIA roles must contain particular children (aria-required-children)"
 

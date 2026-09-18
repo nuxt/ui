@@ -10,7 +10,6 @@ Tests live in `test/components/` matching the component name (e.g., `Button.spec
 
 ```ts
 import { describe, it, expect } from 'vitest'
-import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import ComponentName from '../../src/runtime/components/ComponentName.vue'
 import { renderEach } from '../component-render'
@@ -45,7 +44,7 @@ describe('ComponentName', () => {
       }
     })
 
-    expect(await axe(wrapper.element)).toHaveNoViolations()
+    expect(await wrapper.axe()).toHaveNoViolations()
   })
 })
 ```
@@ -176,7 +175,7 @@ it('passes accessibility tests', async () => {
     }
   })
 
-  expect(await axe(wrapper.element)).toHaveNoViolations()
+  expect(await wrapper.axe()).toHaveNoViolations()
 })
 ```
 

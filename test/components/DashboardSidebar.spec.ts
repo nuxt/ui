@@ -1,6 +1,5 @@
 import { defineComponent } from 'vue'
 import { describe, it, expect } from 'vitest'
-import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import DashboardGroup from '../../src/runtime/components/DashboardGroup.vue'
 import DashboardSidebar from '../../src/runtime/components/DashboardSidebar.vue'
@@ -65,6 +64,6 @@ describe('DashboardSidebar', () => {
       }
     })
 
-    expect(await axe(wrapper.element)).toHaveNoViolations()
+    expect(await wrapper.axe()).toHaveNoViolations()
   })
 })

@@ -1,6 +1,5 @@
 import { h, defineComponent } from 'vue'
 import { describe, it, expect, test } from 'vitest'
-import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import type { AppConfig } from '@nuxt/schema'
 import ContextMenu from '../../src/runtime/components/ContextMenu.vue'
@@ -150,7 +149,7 @@ describe('ContextMenu', () => {
 
     await wrapper.find('span').trigger('click.right')
 
-    expect(await axe(wrapper.element)).toHaveNoViolations()
+    expect(await wrapper.axe()).toHaveNoViolations()
   })
 
   test('should have the correct types', () => {

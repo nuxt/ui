@@ -1,5 +1,4 @@
 import { describe, it, expect, vi } from 'vitest'
-import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { renderEach } from '../component-render'
 import CommandPalette from '../../src/runtime/components/CommandPalette.vue'
@@ -164,7 +163,7 @@ describe('CommandPalette', () => {
       }
     })
 
-    expect(await axe(wrapper.element, {
+    expect(await wrapper.axe({
       rules: {
         // ARIA input fields must have an accessible name (aria-input-field-name)"
         // Fix any of the following:

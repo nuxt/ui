@@ -1,5 +1,4 @@
 import { describe, it, expect, test } from 'vitest'
-import { axe } from 'vitest-axe'
 import { flushPromises, mount, type VueWrapper } from '@vue/test-utils'
 import CheckboxGroup from '../../src/runtime/components/CheckboxGroup.vue'
 import Checkbox from '../../src/runtime/components/Checkbox.vue'
@@ -66,7 +65,7 @@ describe('CheckboxGroup', () => {
       }
     })
 
-    expect(await axe(wrapper.element)).toHaveNoViolations()
+    expect(await wrapper.axe()).toHaveNoViolations()
   })
 
   it('forwards an item icon to the checkbox icon prop', async () => {
@@ -116,7 +115,7 @@ describe('CheckboxGroup', () => {
         defaultValue: ['system']
       }
     })
-    expect(await axe(wrapper.element)).toHaveNoViolations()
+    expect(await wrapper.axe()).toHaveNoViolations()
   })
 
   describe('emits', () => {

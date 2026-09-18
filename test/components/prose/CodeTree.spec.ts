@@ -1,7 +1,6 @@
 import { defineComponent, h } from 'vue'
 import type { PropType } from 'vue'
 import { describe, it, expect, vi, afterEach } from 'vitest'
-import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import CodeTree from '../../../src/runtime/components/prose/CodeTree.vue'
 import Pre from '../../../src/runtime/components/prose/Pre.vue'
@@ -164,6 +163,6 @@ describe('CodeTree', () => {
       }
     })
 
-    expect(await axe(wrapper.element)).toHaveNoViolations()
+    expect(await wrapper.axe()).toHaveNoViolations()
   })
 })

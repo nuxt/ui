@@ -1,5 +1,4 @@
 import { describe, it, expect, test } from 'vitest'
-import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { flushPromises, mount } from '@vue/test-utils'
 import { renderEach } from '../component-render'
@@ -99,7 +98,7 @@ describe('Listbox', () => {
         ariaLabel: 'Countries'
       }
     })
-    expect(await axe(wrapper.element, {
+    expect(await wrapper.axe({
       rules: {
         'aria-input-field-name': { enabled: false }
       }

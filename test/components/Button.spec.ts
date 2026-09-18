@@ -1,6 +1,5 @@
 import { ref } from 'vue'
 import { describe, it, expect, test } from 'vitest'
-import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { flushPromises } from '@vue/test-utils'
 import { renderEach } from '../component-render'
@@ -119,7 +118,7 @@ describe('Button', () => {
       }
     })
 
-    expect(await axe(wrapper.element)).toHaveNoViolations()
+    expect(await wrapper.axe()).toHaveNoViolations()
   })
 
   it('replaces a slot class through a `:ui` function', async () => {

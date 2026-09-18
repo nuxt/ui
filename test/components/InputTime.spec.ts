@@ -1,5 +1,4 @@
 import { describe, it, expect, vi, afterAll, afterEach, test } from 'vitest'
-import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { flushPromises } from '@vue/test-utils'
 import { renderEach } from '../component-render'
@@ -155,6 +154,6 @@ describe('InputTime', () => {
       }
     })
 
-    expect(await axe(wrapper.element)).toHaveNoViolations()
+    expect(await wrapper.axe()).toHaveNoViolations()
   })
 })
