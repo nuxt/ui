@@ -32,7 +32,9 @@ const custom = ref<ProgressGroupItem[]>([
 ])
 
 function shuffle() {
-  items.value = items.value.map(item => ({ ...item, value: Math.round(Math.random() * 32) }))
+  for (const item of items.value) {
+    item.value = Math.round(Math.random() * 32)
+  }
 }
 </script>
 

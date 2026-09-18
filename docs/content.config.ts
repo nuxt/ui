@@ -1,12 +1,6 @@
 import { z } from 'zod'
 import { defineCollection } from '@nuxt/content'
-
-const Image = z.object({
-  src: z.string(),
-  alt: z.string().optional(),
-  width: z.number().optional(),
-  height: z.number().optional()
-})
+import { defineSitemapSchema } from '@nuxtjs/sitemap/content'
 
 const Avatar = z.object({
   src: z.string(),
@@ -37,46 +31,33 @@ const PageFeature = z.object({
 })
 
 const PageHero = z.object({
-  title: z.string(),
+  /** The pill above the title: its label, or button props (`to` for a link). */
+  badge: z.union([z.string(), Button]).optional(),
+  /** The title's two halves: the second one in primary. */
+  lead: z.string(),
+  accent: z.string(),
+  /** Break between them rather than running them on one line. */
+  breakLine: z.boolean().optional(),
   description: z.string(),
   links: z.array(Button).optional()
 })
 
-const PageSection = z.object({
-  title: z.string(),
-  description: z.string(),
-  icon: z.string().optional(),
-  links: z.array(Button).optional(),
-  features: z.array(PageFeature).optional()
-})
+// `@nuxtjs/sitemap` only walks a collection whose schema declares this field,
+// and reads its per-page options (`lastmod`, `changefreq`, `priority`) off it.
+const sitemap = defineSitemapSchema({ z })
 
 const Page = z.object({
   title: z.string(),
   description: z.string(),
-  hero: PageHero
+  hero: PageHero,
+  sitemap
 })
 
 export const collections = {
   index: defineCollection({
     type: 'page',
     source: 'index.yml',
-    schema: Page.extend({
-      hero: PageHero.extend({
-        features: z.array(PageFeature)
-      }),
-      features: z.array(PageFeature),
-      design_system: PageSection.extend({
-        code: z.string()
-      }),
-      css_variables: PageSection.extend({
-        code: z.string()
-      }),
-      components: PageSection.extend({
-        code: z.string()
-      }),
-      templates: PageSection,
-      community: PageSection
-    })
+    schema: Page
   }),
   docs: defineCollection({
     type: 'page',
@@ -92,53 +73,13 @@ export const collections = {
         title: z.string().optional(),
         badge: z.string().optional()
       }),
-      links: z.array(Button)
-    })
-  }),
-  figma: defineCollection({
-    type: 'page',
-    source: 'figma.yml',
-    schema: Page.extend({
-      features1: PageSection,
-      cta1: PageSection,
-      section1: PageSection.extend({
-        tabs: z.array(z.object({
-          label: z.string(),
-          src: z.string(),
-          width: z.number().optional(),
-          height: z.number().optional(),
-          alt: z.string().optional()
-        })).optional()
-      }),
-      section2: PageSection.extend({
-        image: Image
-      }),
-      section3: PageSection.extend({
-        image: Image
-      }),
-      features2: PageSection,
-      section4: PageSection.extend({
-        steps: z.array(z.object({
-          title: z.string(),
-          description: z.string(),
-          to: z.string().optional(),
-          target: z.string().optional(),
-          image: Image
-        }))
-      }),
-      customers: PageSection.extend({
-        items: z.array(z.object({
-          src: z.string(),
-          alt: z.string()
-        }))
-      }),
-      faq: PageSection.extend({
-        items: z.array(z.object({
-          label: z.string(),
-          content: z.string(),
-          defaultOpen: z.boolean().optional()
-        }))
-      })
+      links: z.array(Button),
+      // External navigation entries (e.g. the Figma page): the sidebar link
+      // points at `to` instead of the page's own path.
+      to: z.string().optional(),
+      target: z.string().optional(),
+      // an entry that links out is not a page to index
+      sitemap: defineSitemapSchema({ z, name: 'docs', filter: entry => !entry.to })
     })
   }),
   showcase: defineCollection({
@@ -169,8 +110,7 @@ export const collections = {
         framework: z.enum(['nuxt', 'vue']),
         features: z.array(PageFeature).optional(),
         links: z.array(Button).optional(),
-        open_links: z.array(Button).optional(),
-        deploy_links: z.array(Button).optional()
+        open_links: z.array(Button).optional()
       }))
     })
   }),
@@ -209,16 +149,13 @@ export const collections = {
     schema: z.object({
       image: z.string(),
       date: z.string(),
+      category: z.string().optional(),
       authors: z.array(z.object({
         name: z.string(),
         avatar: Avatar.optional(),
         to: z.string().optional()
-      })).optional()
+      })).optional(),
+      sitemap
     })
-  }),
-  releases: defineCollection({
-    type: 'page',
-    source: 'releases.yml',
-    schema: Page
   })
 }

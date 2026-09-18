@@ -439,7 +439,9 @@ const api = {
     // Clear from nested forms and collect remaining errors
     const nestedErrors: FormError[] = []
     for (const form of nestedForms.value.values()) {
-      if (matchesTarget(name, form.name)) form.api.clear()
+      // A RegExp is written against the parent's prefixed names, so it cannot be
+      // re-tested inside the nested form and clears it whole.
+      if (matchesTarget(name, form.name)) form.api.clear(name instanceof RegExp ? undefined : getNestedTarget(name, form.name || ''))
       nestedErrors.push(...getFormErrors(form as any))
     }
 
@@ -463,7 +465,7 @@ defineExpose(api)
     :id="formId"
     ref="formRef"
     :name="parentBus ? undefined : props.name"
-    method="post"
+    :method="parentBus ? undefined : 'post'"
     :class="ui({ class: [props.ui?.base, props.class] })"
     @submit.prevent="onSubmitWrapper"
   >

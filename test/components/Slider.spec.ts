@@ -192,7 +192,25 @@ describe('Slider', () => {
       const input = wrapper.findComponent({ name: 'SliderRoot' })
       input.vm.$emit('update:modelValue', 1)
 
-      expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [[1], [1]] })
+      expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [[1]] })
+    })
+
+    test('update:modelValue event with a single thumb', async () => {
+      const wrapper = mount(Slider, { props: { modelValue: 25 } })
+
+      const input = wrapper.findComponent({ name: 'SliderRoot' })
+      input.vm.$emit('update:modelValue', [71])
+
+      expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [[71]] })
+    })
+
+    test('update:modelValue event with multiple thumbs', async () => {
+      const wrapper = mount(Slider, { props: { modelValue: [10, 90] } })
+
+      const input = wrapper.findComponent({ name: 'SliderRoot' })
+      input.vm.$emit('update:modelValue', [10, 71])
+
+      expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [[[10, 71]]] })
     })
 
     test('change event', async () => {

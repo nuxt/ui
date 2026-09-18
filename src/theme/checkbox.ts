@@ -34,7 +34,7 @@ export default (options: Required<ModuleOptions>) => ({
         root: ''
       },
       card: {
-        root: [`border border-muted rounded-lg ${hover}bg-elevated/50`, options.theme.transitions && 'transition-colors']
+        root: [`border border-default rounded-lg ${hover}bg-elevated/50`, options.theme.transitions && 'transition-colors']
       }
     },
     indicator: {

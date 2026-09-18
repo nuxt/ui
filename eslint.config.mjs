@@ -1,4 +1,6 @@
 import { createConfigForNuxt } from '@nuxt/eslint-config/flat'
+import { fileURLToPath } from 'node:url'
+import betterTailwindcss from 'eslint-plugin-better-tailwindcss'
 
 /**
  * Flag bare prop references in templates of components that use
@@ -289,6 +291,35 @@ const noUnresolvedFormFieldRefs = {
   }
 }
 
+/**
+ * Tailwind class checks for the apps in this repo (docs and playgrounds).
+ * `src/theme` is not covered yet: the plugin skips `export default (options) => ({...})`
+ * until https://github.com/schoero/eslint-plugin-better-tailwindcss/pull/397 ships.
+ */
+function betterTailwindcssConfig(files, entryPoint, ignore = []) {
+  // Absolute so editor ESLint servers running from a subfolder resolve it too.
+  entryPoint = fileURLToPath(new URL(entryPoint, import.meta.url))
+  return {
+    files,
+    plugins: {
+      'better-tailwindcss': betterTailwindcss
+    },
+    settings: {
+      'better-tailwindcss': {
+        entryPoint,
+        attributes: [
+          '^(v-bind:|:)?class$',
+          ['^(v-bind:|:)?ui$', [{ match: 'objectValues' }]]
+        ]
+      }
+    },
+    rules: {
+      ...betterTailwindcss.configs['correctness-error'].rules,
+      'better-tailwindcss/no-unknown-classes': ['error', { ignore }]
+    }
+  }
+}
+
 export default createConfigForNuxt({
   features: {
     tooling: true,
@@ -319,7 +350,15 @@ export default createConfigForNuxt({
     'nuxt-ui/no-bare-prop-refs': 'error',
     'nuxt-ui/no-unresolved-form-field-refs': 'error'
   }
-}).append({
+}).append(betterTailwindcssConfig(['docs/app/**/*.vue'], 'docs/app/assets/css/main.css', [
+  // Hook classes styled in scoped `<style>` blocks or `main.css`, not Tailwind utilities.
+  '^nuxi-', '^landing-', '^(nuxt|vue)-only$', '^(playground-)?wall$', '^horizon$', '^twinkle$',
+  '^stars?$', '^star-layer$', '^dice-rolling$', '^squircle$', '^carbon$', '^example$', '^my-table-tbody$'
+])).append(
+  betterTailwindcssConfig(['playgrounds/nuxt/app/**/*.vue'], 'playgrounds/nuxt/app/assets/css/main.css')
+).append(
+  betterTailwindcssConfig(['playgrounds/vue/src/**/*.vue'], 'playgrounds/vue/src/assets/css/main.css')
+).append({
   files: ['src/runtime/components/**/*.vue', 'src/runtime/composables/**/*.ts'],
   rules: {
     'no-restricted-imports': ['error', {

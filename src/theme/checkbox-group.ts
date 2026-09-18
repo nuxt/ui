@@ -23,10 +23,14 @@ export default (options: Required<ModuleOptions>) => ({
       neutral: {}
     },
     variant: {
-      list: {},
-      card: {},
+      list: {
+        fieldset: 'flex-wrap'
+      },
+      card: {
+        fieldset: 'flex-wrap'
+      },
       table: {
-        item: [`border border-muted ${hover}bg-elevated/50`, options.theme.transitions && 'transition-colors']
+        item: [`border border-default ${hover}bg-elevated/50`, options.theme.transitions && 'transition-colors']
       }
     },
     size: {
