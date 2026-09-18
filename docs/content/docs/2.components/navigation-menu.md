@@ -1010,10 +1010,10 @@ In this example, leveraging [`defineShortcuts`](/docs/composables/define-shortcu
 
 ### With tooltip in items
 
-When orientation is `vertical` and the menu is `collapsed`, you can set the `tooltip` prop to `true` to display a [Tooltip](/docs/components/tooltip) around items with their label but you can also use the `tooltip` property on each item to override the default tooltip. In `horizontal` orientation, you can use the `tooltip` property on each item to display a [Tooltip](/docs/components/tooltip) around items.
+When orientation is `vertical` and the menu is `collapsed`, you can set the `tooltip` prop to `true` to display a [Tooltip](/docs/components/tooltip) around items with their label. You can also use the `tooltip` property on each item to display a [Tooltip](/docs/components/tooltip) around a single item, which is useful to explain why an item is disabled or gated behind an upgrade.
 
 ::note
-The `tooltip` property on an item will always display a tooltip regardless of the global `tooltip` prop.
+The `tooltip` property on an item always displays a tooltip, in any orientation and whether the menu is `collapsed` or not, regardless of the global `tooltip` prop.
 ::
 
 You can pass any property from the [Tooltip](/docs/components/tooltip) component globally or on each item.
