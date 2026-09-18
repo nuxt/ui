@@ -9,10 +9,10 @@ import type { extendTailwindMerge } from 'tailwind-merge'
  * CI, so the type block of `test/utils/tv.spec.ts` asserts the contract.
  */
 
-type MergeConfig = Parameters<typeof extendTailwindMerge>[0]
+type MergeConfig = Extract<Parameters<typeof extendTailwindMerge>[0], { extend?: unknown }>
 
 /** The nested `extend` object, which is also accepted flattened at the top level. */
-type MergeConfigExtension = Extract<MergeConfig, { extend?: unknown }>['extend']
+type MergeConfigExtension = MergeConfig['extend']
 
 /**
  * The `tailwind-merge` configuration, in either its nested or flattened shape.
@@ -71,11 +71,19 @@ export type SlotClassReplacer = (defaults: string) => ClassValue
  */
 export type SlotClassValue = ClassValue | SlotClassReplacer | readonly SlotClassValue[]
 
+/**
+ * The value accepted for a slot in `:ui`, the `class` prop or `app.config.ui`:
+ * either classes to merge (the default) or a {@link SlotClassReplacer} to replace.
+ */
+export type SlotClass = ClassValue | SlotClassReplacer
+
 /** Variant values spelled `'true'` / `'false'` are read as booleans. */
 type VariantKey<T> = T extends 'true' | 'false' ? boolean : T
 
+type BaseSlot<B extends ClassValue> = [B] extends [undefined] ? never : 'base'
+
 /** The slots a class value can target: the theme's own, plus `base` when it has one. */
-type SlotName<S extends TVSlots, B extends ClassValue> = B extends undefined ? keyof S : keyof S | 'base'
+type SlotName<S extends TVSlots, B extends ClassValue> = keyof S | BaseSlot<B>
 
 /** Classes for the whole component, or per slot. */
 type SlotsClass<S extends TVSlots, B extends ClassValue> = ClassValue | { [K in SlotName<S, B>]?: ClassValue }
@@ -151,8 +159,6 @@ export type TVExtend = {
 // `Record | undefined` and collapse the whole call to `string`.
 type Slotted<S extends TVSlots> = [S] extends [undefined] ? {} : S
 
-type BaseSlot<B extends ClassValue> = [B] extends [undefined] ? never : 'base'
-
 type HasSlots<S extends TVSlots, ES extends TVSlots> = [S] extends [undefined]
   ? [ES] extends [undefined] ? false : true
   : true
@@ -210,27 +216,21 @@ export type TV = {
 }
 
 /**
- * The value accepted for a slot in `:ui`, the `class` prop or `app.config.ui`:
- * either classes to merge (the default) or a {@link SlotClassReplacer} to replace.
- */
-export type SlotClass = ClassValue | SlotClassReplacer
-
-/**
  * Defines the AppConfig object based on the theme configuration.
  */
 export type TVConfig<T extends Record<string, any>> = {
   [P in keyof T]?: P extends 'prose' ? TVConfig<T[P]> : {
-    [K in keyof T[P]as K extends 'base' | 'slots' | 'variants' | 'defaultVariants' ? K : never]?: K extends 'base' ? SlotClass
+    [K in keyof T[P] as K extends 'base' | 'slots' | 'variants' | 'defaultVariants' ? K : never]?: K extends 'base' ? SlotClass
       : K extends 'slots' ? {
         [S in keyof T[P]['slots']]?: SlotClass
       }
         : K extends 'variants' ? TVVariants<T[P]['slots'], ClassValue, WidenVariantsValues<T[P]['variants']>>
-          : K extends 'defaultVariants' ? TVDefaultVariants<WidenVariantsValues<T[P]['variants']>, object>
+          : K extends 'defaultVariants' ? TVDefaultVariants<WidenVariantsValues<T[P]['variants']>>
             : never
   }
 } & {
   [P in keyof T]?: P extends 'prose' ? TVConfig<T[P]> : {
-    compoundVariants?: TVCompoundVariants<WidenVariantsValues<T[P]['variants']>, T[P]['slots'], ClassValue, object>
+    compoundVariants?: TVCompoundVariants<WidenVariantsValues<T[P]['variants']>, T[P]['slots'], ClassValue>
   }
 }
 
@@ -276,7 +276,7 @@ type ComponentAppConfig<
   T,
   A extends Record<string, any>,
   K extends string,
-  U extends string = 'ui' | 'ui.prose'
+  U extends 'ui' | 'ui.prose'
 > = Omit<A, 'ui'> & {
   ui: U extends 'ui.prose'
     ? Omit<UIOf<A>, 'prose'> & { prose?: WithComponent<ProseOf<A>, K, T> }
@@ -299,5 +299,5 @@ export type ComponentConfig<
   AppConfig: ComponentAppConfig<T, A, K, U>
   variants: ComponentVariants<T & GetComponentAppConfig<A, U, K>>
   slots: ComponentSlots<T>
-  ui: ComponentUI<T>
+  ui: ComponentUI<T & GetComponentAppConfig<A, U, K>>
 }
