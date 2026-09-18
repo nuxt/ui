@@ -4,6 +4,7 @@ import { useAppConfig } from '#imports'
 import { UFormField } from '#components'
 import type * as ui from '#build/ui'
 import type { ThemeDefaults } from '../../src/runtime/types/theme'
+import type { TVConfig } from '../../src/runtime/types/tv'
 
 /**
  * Hand-maintained list of `#build/ui` exports that intentionally don't
@@ -41,9 +42,25 @@ describe('ThemeDefaults registry', () => {
   })
 })
 
+const fieldGroupConfig = {
+  fieldGroup: {
+    defaultVariants: {
+      size: 'lg',
+      orientation: 'vertical'
+    }
+  }
+} satisfies TVConfig<typeof ui>
+
 // `app.config.ui.<name>.defaultVariants` must override a prop the component
 // pins in `withDefaults` (here `orientation`). Regression test for #6683.
 describe('app.config defaultVariants', () => {
+  it('accepts FieldGroup default variants', () => {
+    expect(fieldGroupConfig.fieldGroup.defaultVariants).toEqual({
+      size: 'lg',
+      orientation: 'vertical'
+    })
+  })
+
   let appConfig: { ui?: Record<string, any> }
 
   beforeAll(() => {
