@@ -12,6 +12,13 @@ const Toolbar = {
   template: `<div><UButton v-for="i in 25" :key="i" :label="'B' + i" /></div>`
 }
 
+// CodSpeed measures one run after a forced GC, and a single on/off cycle is
+// short enough that the JIT state it lands in decides the number: the Button
+// benches swung between ~14 ms and ~19 ms on changes that didn't touch them.
+// Repeating the cycle lets that one-off cost amortize. The names carry the
+// count so CodSpeed reads them as new benches rather than as a 20x regression.
+const CYCLES = 20
+
 describe('Button mount', () => {
   bench('toolbar of 25', async () => {
     const wrapper = await mountSuspended(Toolbar)
@@ -28,10 +35,12 @@ describe('Button re-render (variant prop change)', () => {
   // Mounted lazily on the first call: CodSpeed's analysis runner invokes the
   // bench function without tinybench's `setup`/`teardown` options, so a mount
   // there never happens under instrumentation. The warmup pass absorbs it.
-  bench('toggle loading', async () => {
+  bench(`toggle loading x${CYCLES}`, async () => {
     wrapper ??= await mountSuspended(Button, { props: { label: 'Button' } })
-    await wrapper.setProps({ loading: true })
-    await wrapper.setProps({ loading: false })
+    for (let i = 0; i < CYCLES; i++) {
+      await wrapper.setProps({ loading: true })
+      await wrapper.setProps({ loading: false })
+    }
   })
 })
 

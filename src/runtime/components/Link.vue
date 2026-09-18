@@ -122,11 +122,9 @@ interface NuxtLinkDefaultSlotProps {
 import { computed, getCurrentInstance, mergeProps, onMounted, onBeforeUnmount } from 'vue'
 import { isEqual } from 'ohash/utils'
 import { useForwardProps, Slot } from 'reka-ui'
-import { defu } from 'defu'
 import { hasProtocol } from 'ufo'
 import { reactiveOmit } from '@vueuse/core'
 import { useRoute, useAppConfig, useNuxtApp, onNuxtReady } from '#imports'
-import { mergeClasses } from '../utils'
 import { tv } from '../utils/tv'
 import { isPartiallyEqual } from '../utils/link'
 import { requestIdleCallback, cancelIdleCallback, observeIntersection } from '../utils/prefetch'
@@ -149,25 +147,7 @@ const nuxtApp = useNuxtApp()
 
 const nuxtLinkProps = useForwardProps(reactiveOmit(props, 'as', 'type', 'disabled', 'active', 'exact', 'exactQuery', 'exactHash', 'activeClass', 'inactiveClass', 'to', 'href', 'raw', 'custom', 'locale', 'class'))
 
-// `activeClass` / `inactiveClass` fold into the `active` variant. When neither
-// is set and the config declares no variants, the config goes in as is, so
-// every instance shares one compiled entry.
-const overrides = computed(() => {
-  const config = appConfig.ui?.link
-  if (props.activeClass === undefined && props.inactiveClass === undefined && !config?.variants) {
-    return config
-  }
-  return defu({
-    variants: {
-      active: {
-        true: mergeClasses(config?.variants?.active?.true, props.activeClass),
-        false: mergeClasses(config?.variants?.active?.false, props.inactiveClass)
-      }
-    }
-  }, config || {})
-})
-
-const ui = computed(() => tv(theme, overrides.value))
+const ui = computed(() => tv(theme, appConfig.ui?.link))
 
 const to = computed(() => {
   const path = props.to ?? props.href
@@ -267,7 +247,7 @@ function resolveLinkClass({ route, isActive, isExactActive, prefetched }: any = 
     return [props.class, active ? props.activeClass : props.inactiveClass, prefetchedClass]
   }
 
-  return ui.value({ class: prefetchedClass ? [props.class, prefetchedClass] : props.class, active, disabled: props.disabled })
+  return ui.value({ class: [props.class, active ? props.activeClass : props.inactiveClass, prefetchedClass], active, disabled: props.disabled })
 }
 
 // Since Nuxt 4.5, NuxtLink no longer prefetches `custom` links itself and
