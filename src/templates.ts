@@ -325,8 +325,7 @@ ${themeBlocks}`
       const iconUnion = iconKeys.length ? iconKeys.map(i => JSON.stringify(i)).join(' | ') : 'string'
 
       return `import * as ui from '#build/ui'
-import type { TVConfig, DeepRequired } from '@nuxt/ui'
-import type { defaultConfig } from 'tailwind-variants'
+import type { TVConfig, TVMergeConfig, DeepRequired } from '@nuxt/ui'
 import colors from 'tailwindcss/colors'
 
 type IconsConfig = Record<${iconUnion} | (string & {}), string>
@@ -341,7 +340,7 @@ type AppConfigUI = {
   }
   icons?: Partial<IconsConfig>
   prefix?: string
-  tv?: typeof defaultConfig
+  tv?: TVMergeConfig
 } & TVConfig<typeof ui>
 
 type AppConfigRuntimeUI = DeepRequired<Pick<AppConfigUI, 'colors' | 'icons' | 'tv'>> & typeof ui
