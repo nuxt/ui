@@ -136,6 +136,13 @@ describe('InputMenu', () => {
     expect(wrapper.find('[data-slot="trailingIcon"]').exists()).toBe(false)
   })
 
+  it('with autocomplete mode ignores multiple', () => {
+    const autocomplete = mount(InputMenu, { props: { items, mode: 'autocomplete' as const } })
+    const withMultiple = mount(InputMenu, { props: { items, mode: 'autocomplete' as const, multiple: true } })
+
+    expect(withMultiple.html()).toBe(autocomplete.html())
+  })
+
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(InputMenu, {
       props: {
