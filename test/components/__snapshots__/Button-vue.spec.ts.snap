@@ -43,7 +43,7 @@ exports[`Button > renders with active variant subtle correctly 1`] = `
 `;
 
 exports[`Button > renders with activeClass correctly 1`] = `
-"<button type="button" data-slot="base" class="rounded-md inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors font-bold px-2.5 py-1.5 text-sm gap-1.5 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
+"<button type="button" data-slot="base" class="rounded-md inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3 font-bold">
   <!--v-if--><span data-slot="label" class="truncate">Button</span>
   <!--v-if-->
 </button>"
@@ -119,7 +119,7 @@ exports[`Button > renders with icon correctly 1`] = `
 `;
 
 exports[`Button > renders with inactiveClass correctly 1`] = `
-"<button type="button" data-slot="base" class="rounded-md inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors font-light px-2.5 py-1.5 text-sm gap-1.5 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
+"<button type="button" data-slot="base" class="rounded-md inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2.5 py-1.5 text-sm gap-1.5 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3 font-light">
   <!--v-if--><span data-slot="label" class="truncate">Button</span>
   <!--v-if-->
 </button>"

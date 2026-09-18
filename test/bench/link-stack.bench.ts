@@ -42,11 +42,9 @@ describe('mount', () => {
   }
 })
 
-// CodSpeed measures a single call of the bench body, and the runtime adds a
-// fixed ~150µs to that call on some runs. On a ~1ms body that alone crosses the
-// 10% regression threshold, so every case repeats its cycle enough to absorb
-// it. Scaling every case by the same factor keeps the ratios between rungs.
-const CYCLES = 10
+// One cycle is short enough for the JIT state of CodSpeed's single measured run
+// to decide the number, see `components.bench.ts`.
+const CYCLES = 20
 
 describe('re-render', () => {
   for (const [name, render] of CASES) {
@@ -55,7 +53,7 @@ describe('re-render', () => {
 
       // Mounted lazily on the first call: CodSpeed's analysis runner invokes the
       // bench function without tinybench's `setup`/`teardown` options.
-      bench(name, async () => {
+      bench(`${name} x${CYCLES}`, async () => {
         wrapper ??= await mountSuspended(makeParent(render), { props: { cls: 'p-2' } })
         for (let i = 0; i < CYCLES; i++) {
           await wrapper.setProps({ cls: 'p-3' })
