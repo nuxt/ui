@@ -45,6 +45,18 @@ function propIsDefined(vnode: VNode | null | undefined, prop: string): boolean {
 }
 
 /**
+ * Detect, from within a component's `setup`, whether a prop was bound by the parent,
+ * regardless of its value. Unlike `propIsDefined`, this stays `true` when the bound
+ * value is `undefined` (e.g. a binding that only resolves after the first render).
+ * Checks both camelCase and kebab-case names to cover both template conventions.
+ */
+export function isPropBound(name: string): boolean {
+  const vnode = getCurrentInstance()?.vnode
+  if (!vnode || !vnode.props) return false
+  return camelCase(name) in vnode.props || kebabCase(name) in vnode.props
+}
+
+/**
  * Resolve a component's props with the priority chain:
  *   explicit prop > nearest UTheme > app.config.ui.<name>.defaultVariants
  *     > withDefaults
