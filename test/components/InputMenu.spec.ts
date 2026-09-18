@@ -4,6 +4,7 @@ import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { renderEach } from '../component-render'
 import { flushPromises, mount } from '@vue/test-utils'
 import InputMenu from '../../src/runtime/components/InputMenu.vue'
+import { UButton, UFieldGroup } from '#components'
 import type { FormInputEvents } from '../../src/module'
 import { renderForm } from '../utils/form'
 import { expectEmitPayloadType } from '../utils/types'
@@ -134,6 +135,17 @@ describe('InputMenu', () => {
 
     expect(wrapper.find('[data-slot="trailing"]').exists()).toBe(false)
     expect(wrapper.find('[data-slot="trailingIcon"]').exists()).toBe(false)
+  })
+
+  // `root` and `base` are the same element in `multiple` mode, so the rounding
+  // has to come from the element's own position, not from a `group` ancestor.
+  it('with multiple rounds its corners inside a FieldGroup', async () => {
+    const wrapper = await mountSuspended({
+      components: { UFieldGroup, UButton, UInputMenu: InputMenu },
+      template: `<UFieldGroup><UButton label="Button" /><UInputMenu multiple /></UFieldGroup>`
+    })
+
+    expect(wrapper.get('div[data-slot="base"]').classes()).toContain('not-only:last:rounded-s-none')
   })
 
   it('with autocomplete mode ignores multiple', () => {
