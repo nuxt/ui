@@ -332,6 +332,10 @@ describe('Table', () => {
     const editable = wrapper.find('tbody tr [contenteditable]')
     const enterEvent = await triggerKeydown(editable.element, { key: 'Enter' })
     expect(enterEvent.defaultPrevented).toBe(false)
+
+    const spaceEvent = await triggerKeydown(editable.element, { key: ' ' })
+    expect(spaceEvent.defaultPrevented).toBe(false)
+
     expect(onSelect).not.toHaveBeenCalled()
   })
 
