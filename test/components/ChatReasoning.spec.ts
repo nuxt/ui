@@ -1,5 +1,4 @@
 import { describe, it, expect, vi } from 'vitest'
-import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import ChatReasoning from '../../src/runtime/components/ChatReasoning.vue'
 import { renderEach } from '../component-render'
@@ -29,7 +28,7 @@ describe('ChatReasoning', () => {
       props
     })
 
-    expect(await axe(wrapper.element)).toHaveNoViolations()
+    expect(await wrapper.axe()).toHaveNoViolations()
   })
 
   it('auto-opens when streaming starts and auto-closes when it ends', async () => {

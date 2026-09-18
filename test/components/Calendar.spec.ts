@@ -1,5 +1,4 @@
 import { describe, it, expect, vi, afterAll, test } from 'vitest'
-import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { CalendarDate } from '@internationalized/date'
 import { renderEach } from '../component-render'
@@ -144,6 +143,6 @@ describe('Calendar', () => {
       }
     })
 
-    expect(await axe(wrapper.element)).toHaveNoViolations()
+    expect(await wrapper.axe()).toHaveNoViolations()
   })
 })

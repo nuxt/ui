@@ -1,5 +1,4 @@
 import { describe, it, expect } from 'vitest'
-import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { createSSRApp, h } from 'vue'
 import { renderToString } from 'vue/server-renderer'
@@ -46,7 +45,7 @@ describe('Slideover', () => {
       }
     })
 
-    expect(await axe(wrapper.element)).toHaveNoViolations()
+    expect(await wrapper.axe()).toHaveNoViolations()
   })
 
   describe('SSR', () => {

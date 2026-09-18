@@ -1,5 +1,4 @@
 import { describe, it, expect } from 'vitest'
-import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import Sidebar from '../../src/runtime/components/Sidebar.vue'
 import { renderEach } from '../component-render'
@@ -41,6 +40,6 @@ describe('Sidebar', () => {
       }
     })
 
-    expect(await axe(wrapper.element)).toHaveNoViolations()
+    expect(await wrapper.axe()).toHaveNoViolations()
   })
 })

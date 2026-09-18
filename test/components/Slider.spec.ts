@@ -1,6 +1,5 @@
 import { defineComponent, h, nextTick, ref } from 'vue'
 import { describe, it, expect, test } from 'vitest'
-import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { renderEach } from '../component-render'
 import Slider from '../../src/runtime/components/Slider.vue'
@@ -41,7 +40,7 @@ describe('Slider', () => {
 
       }
     })
-    expect(await axe(wrapper.element)).toHaveNoViolations()
+    expect(await wrapper.axe()).toHaveNoViolations()
   })
 
   describe('aria', () => {

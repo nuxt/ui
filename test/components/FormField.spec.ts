@@ -1,6 +1,5 @@
 import { defineComponent } from 'vue'
 import { describe, it, expect, test, vi } from 'vitest'
-import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { renderEach } from '../component-render'
 import type { FormFieldProps } from '../../src/runtime/components/FormField.vue'
@@ -105,7 +104,7 @@ describe('FormField', () => {
       }
     })
 
-    expect(await axe(wrapper.element)).toHaveNoViolations()
+    expect(await wrapper.axe()).toHaveNoViolations()
   })
 
   describe.each(inputComponents.map(inputComponent => [(inputComponent as any).__name, inputComponent]))('%s integration', async (name: string, inputComponent: any) => {

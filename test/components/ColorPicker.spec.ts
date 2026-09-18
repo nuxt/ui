@@ -1,5 +1,4 @@
 import { describe, it, expect, test } from 'vitest'
-import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { renderEach } from '../component-render'
 import ColorPicker from '../../src/runtime/components/ColorPicker.vue'
@@ -28,7 +27,7 @@ describe('ColorPicker', () => {
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(ColorPicker)
 
-    expect(await axe(wrapper.element)).toHaveNoViolations()
+    expect(await wrapper.axe()).toHaveNoViolations()
   })
 
   describe('emits', () => {

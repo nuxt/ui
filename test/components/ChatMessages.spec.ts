@@ -1,6 +1,5 @@
 import { describe, it, expect } from 'vitest'
 import { defineComponent, h, nextTick, ref, shallowRef, triggerRef } from 'vue'
-import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { renderEach } from '../component-render'
 import ChatMessages, { type ChatMessagesSlots } from '../../src/runtime/components/ChatMessages.vue'
@@ -42,7 +41,7 @@ describe('ChatMessages', () => {
       props
     })
 
-    expect(await axe(wrapper.element)).toHaveNoViolations()
+    expect(await wrapper.axe()).toHaveNoViolations()
   })
 
   it('forwards content slot props together with `message`', async () => {

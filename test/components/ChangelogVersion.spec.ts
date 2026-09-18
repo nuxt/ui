@@ -1,5 +1,4 @@
 import { describe, it, expect } from 'vitest'
-import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { renderEach } from '../component-render'
 import ChangelogVersion from '../../src/runtime/components/ChangelogVersion.vue'
@@ -50,7 +49,7 @@ describe('ChangelogVersion', () => {
       }
     })
 
-    expect(await axe(wrapper.element)).toHaveNoViolations()
+    expect(await wrapper.axe()).toHaveNoViolations()
   })
 
   it('forwards attrs to root when `to` prop is absent', async () => {

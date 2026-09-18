@@ -1,6 +1,5 @@
 import { describe, it, expect, vi } from 'vitest'
 import { h } from 'vue'
-import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { renderEach } from '../component-render'
 import ChatPrompt from '../../src/runtime/components/ChatPrompt.vue'
@@ -159,6 +158,6 @@ describe('ChatPrompt', () => {
       }
     })
 
-    expect(await axe(wrapper.element)).toHaveNoViolations()
+    expect(await wrapper.axe()).toHaveNoViolations()
   })
 })

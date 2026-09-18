@@ -2,6 +2,7 @@ import * as matchers from 'vitest-axe/matchers'
 
 import { expect } from 'vitest'
 import { configureAxe } from 'vitest-axe'
+import { installVueWrapperAxePlugin } from './vue-wrapper-plugin'
 
 // @ts-expect-error incomplete implementation
 window.IntersectionObserver = class IntersectionObserver {
@@ -27,14 +28,8 @@ globalThis.fetch = () => Promise.resolve(
   })
 )
 
-configureAxe({
-  globalOptions: {
-    rules: [{
-      // Disable region rule as it doesn't work well with components rendered in isolation.
-      id: 'region',
-      enabled: false
-    }]
-  }
-})
+configureAxe({})
+
+installVueWrapperAxePlugin()
 
 expect.extend(matchers)

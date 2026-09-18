@@ -1,5 +1,4 @@
 import { describe, it, expect, test } from 'vitest'
-import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import * as z from 'zod'
 import AuthForm from '../../src/runtime/components/AuthForm.vue'
@@ -90,7 +89,7 @@ describe('AuthForm', () => {
       }
     })
 
-    expect(await axe(wrapper.element)).toHaveNoViolations()
+    expect(await wrapper.axe()).toHaveNoViolations()
   })
 
   test('should have the correct types', () => {

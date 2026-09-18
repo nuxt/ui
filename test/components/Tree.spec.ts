@@ -1,5 +1,4 @@
 import { describe, it, expect, test } from 'vitest'
-import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { renderEach } from '../component-render'
 import Tree from '../../src/runtime/components/Tree.vue'
@@ -92,7 +91,7 @@ describe('Tree', () => {
         expanded: [items[0] as any]
       }
     })
-    expect(await axe(wrapper.element)).toHaveNoViolations()
+    expect(await wrapper.axe()).toHaveNoViolations()
   })
 
   test('should have the correct types', () => {
