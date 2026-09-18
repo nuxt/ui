@@ -21,7 +21,7 @@ type Carousel = ComponentConfig<typeof theme, AppConfig, 'carousel'>
 export type CarouselValue = AcceptableValue
 export type CarouselItem = CarouselValue | {
   class?: any
-  ui?: Pick<Carousel['slots'], 'item'>
+  ui?: Partial<Pick<Carousel['slots'], 'item'>>
   [key: string]: any
 }
 

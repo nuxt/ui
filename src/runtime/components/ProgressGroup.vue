@@ -24,7 +24,7 @@ export interface ProgressGroupItem {
   color?: ProgressGroup['variants']['color'] | (string & {})
   slot?: string
   class?: any
-  ui?: Pick<ProgressGroup['slots'], 'segment' | 'indicator' | 'item' | 'itemLeadingIcon' | 'itemLeadingDot' | 'itemLabel' | 'itemTrailing'>
+  ui?: Partial<Pick<ProgressGroup['slots'], 'segment' | 'indicator' | 'item' | 'itemLeadingIcon' | 'itemLeadingDot' | 'itemLabel' | 'itemTrailing'>>
   [key: string]: any
 }
 
