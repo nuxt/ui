@@ -1,5 +1,6 @@
 import { describe, it, expectTypeOf } from 'vitest'
 import { tv } from '../../src/runtime/utils/tv'
+import type { VariantProps } from '../../src/runtime/types/tv'
 
 // Inference is the half the snapshot suite can't prove: it breaks in user-land
 // (`app.config.ui` autocomplete, `ComponentConfig`-derived props) rather than in
@@ -62,6 +63,24 @@ describe('tv types', () => {
     component({ block: true })
     // @ts-expect-error `lg` is not a declared size
     component({ size: 'lg' })
+    // @ts-expect-error a prop no variant declares
+    component({ sizee: 'sm' })
+    // classes, and a replacer, at any depth
+    component({ class: ['p-2', () => 'block'] })
+  })
+
+  it('keeps slot functions for a theme typed with optional slots', () => {
+    const loose: { slots?: Record<string, string>, variants?: Record<string, Record<string, { base?: string }>> } = button
+    const ui = tv({ extend: loose })()
+
+    expectTypeOf(ui).not.toEqualTypeOf<string>()
+  })
+
+  it('derives the variant props of a built component', () => {
+    const component = tv(button)
+
+    expectTypeOf(component).parameter(0).exclude<undefined>().omit<'class' | 'className'>().toEqualTypeOf<VariantProps<typeof component>>()
+    expectTypeOf<VariantProps<typeof component>>().toEqualTypeOf<{ size?: 'sm' | 'md', block?: boolean }>()
   })
 
   it('checks defaultVariants against the declared variants', () => {

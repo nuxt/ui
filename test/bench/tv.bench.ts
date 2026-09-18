@@ -24,6 +24,13 @@ const tableProps = {
   externalScroll: false
 } as const
 
+// What components actually spread beside `extend`: Button always injects its
+// `active` variants (`defu({ variants: { active } }, appConfig.ui?.button)`), the
+// others spread `app.config.ui.<c>` when the user set one.
+const buttonOverrides = { variants: { active: { true: { base: '' }, false: { base: '' } } } }
+const tableOverrides = { slots: { td: 'p-1' } }
+const navigationMenuOverrides = { slots: { link: 'font-medium' } }
+
 // CodSpeed runs these under a simulator that counts instructions, and GitHub's
 // hosted runners alternate between Intel and AMD CPUs whose cache sizes make
 // glibc select different string routines. Anything under ~1ms picks up phantom
@@ -32,9 +39,12 @@ const tableProps = {
 // these benchmarks exist to compare.
 const ITERATIONS = 100
 
-// Building the factory is the expensive step (deep-merges the whole variant
-// matrix, joins every slot, flattens compound variants). Today it happens inside
-// each component's `computed`, so every variant-prop change re-runs it.
+// Building the factory deep-merges the whole variant matrix, joins every slot
+// and flattens compound variants. It happens inside each component's `computed`,
+// so every variant-prop change re-runs it. `{ extend: theme }` alone is the
+// shape the engine shares across rebuilds, so it measures the WeakMap hit; the
+// `configured` cases spread `app.config.ui.<c>` in, the way every component
+// does, and pay the resolve on each build.
 describe('factory build', () => {
   bench('button (~6 slots)', () => {
     for (let i = 0; i < ITERATIONS; i++) {
@@ -51,6 +61,18 @@ describe('factory build', () => {
   bench('navigation-menu (~31 slots)', () => {
     for (let i = 0; i < ITERATIONS; i++) {
       tv({ extend: navigationMenuTheme })
+    }
+  })
+
+  bench('button, configured', () => {
+    for (let i = 0; i < ITERATIONS; i++) {
+      tv({ extend: buttonTheme, ...buttonOverrides })
+    }
+  })
+
+  bench('navigation-menu, configured', () => {
+    for (let i = 0; i < ITERATIONS; i++) {
+      tv({ extend: navigationMenuTheme, ...navigationMenuOverrides })
     }
   })
 })
@@ -89,11 +111,29 @@ describe('build + invoke (current fused pattern)', () => {
       tv({ extend: tableTheme })(tableProps)
     }
   })
+
+  // Button's real shape: `defu` injects `variants.active` on every build, so it
+  // never hits the shared entry and resolves plus compiles each time.
+  bench('button, configured', () => {
+    for (let i = 0; i < ITERATIONS; i++) {
+      const ui = tv({ extend: buttonTheme, ...buttonOverrides })(buttonProps)
+      ui.base()
+      ui.label()
+    }
+  })
+
+  bench('table, configured', () => {
+    for (let i = 0; i < ITERATIONS; i++) {
+      const ui = tv({ extend: tableTheme, ...tableOverrides })(tableProps)
+      ui.root()
+      ui.td()
+    }
+  })
 })
 
-// Table renders call `ui.td(...)` once per cell through the `wrapSlots` proxy.
-// This models a 100-cell render, exercising the per-access wrapper-closure
-// allocation and the replacer scan on every slot call.
+// Table renders call `ui.td(...)` once per cell. This models a 100-cell render,
+// exercising the fingerprint, the cache lookup and the replacer scan on every
+// slot call.
 describe('slot invocation', () => {
   const tableUi = tv({ extend: tableTheme })(tableProps)
 

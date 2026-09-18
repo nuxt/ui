@@ -123,16 +123,18 @@ export type TVDefaultVariants<V, EV = undefined> = {
 
 /**
  * The props a built component and its slot functions accept: the declared
- * variants, plus classes to merge on top.
- *
- * Undeclared keys are allowed, because `app.config.ui.<c>.variants` can add
- * variants the theme itself never declared and the engine ignores a prop no
- * variant reads. Closing that is gated on deciding whether app config may
- * introduce variants at all, not on this type.
+ * variants, plus classes to merge on top. Variants that `app.config.ui.<c>`
+ * adds reach the component's own props through `ComponentConfig`, so nothing
+ * needs to be open here.
  */
 export type TVProps<V, EV = undefined> = {
   [K in keyof V | keyof EV]?: VariantValue<V, EV, K>
-} & ClassProp<SlotClassValue> & { [key: string]: unknown }
+} & ClassProp<SlotClassValue>
+
+/**
+ * The variant props of a built component, without the class overrides.
+ */
+export type VariantProps<Component extends (...args: any) => any> = Omit<Exclude<Parameters<Component>[0], undefined>, 'class' | 'className'>
 
 /**
  * The metadata `extend` reads, whether it points at a plain theme object or at a
@@ -146,12 +148,14 @@ export type TVExtend = {
   defaultVariants?: any
 }
 
-type Slotted<S extends TVSlots> = S extends undefined ? {} : S
+// Wrapped in tuples so a theme typed with `slots?:` doesn't distribute over
+// `Record | undefined` and collapse the whole call to `string`.
+type Slotted<S extends TVSlots> = [S] extends [undefined] ? {} : S
 
-type BaseSlot<B extends ClassValue> = B extends undefined ? never : 'base'
+type BaseSlot<B extends ClassValue> = [B] extends [undefined] ? never : 'base'
 
-type HasSlots<S extends TVSlots, ES extends TVSlots> = S extends undefined
-  ? ES extends undefined ? false : true
+type HasSlots<S extends TVSlots, ES extends TVSlots> = [S] extends [undefined]
+  ? [ES] extends [undefined] ? false : true
   : true
 
 /**
@@ -171,17 +175,14 @@ export type TVReturnType<
   S extends TVSlots,
   B extends ClassValue,
   EV = undefined,
-  ES extends TVSlots = undefined,
-  E = undefined
+  ES extends TVSlots = undefined
 > = {
   (props?: TVProps<V, EV>): HasSlots<S, ES> extends true ? TVSlotFunctions<V, S, B, EV, ES> : string
-  extend: E
   base: B
   slots: S
   variants: V
   compoundVariants: TVCompoundVariants<V, S, B, EV>
   defaultVariants: TVDefaultVariants<V, EV>
-  variantKeys: (keyof V)[]
 }
 
 /**
@@ -205,9 +206,8 @@ export type TV = {
       variants?: V
       compoundVariants?: CV
       defaultVariants?: DV
-    },
-    config?: TVMergeConfig
-  ): TVReturnType<V, S, B, EV, ES, E>
+    }
+  ): TVReturnType<V, S, B, EV, ES>
 }
 
 /**

@@ -1,13 +1,14 @@
 import { twMerge, extendTailwindMerge } from 'tailwind-merge'
 import type { AppConfig } from '@nuxt/schema'
+import { isEmpty } from './index'
 import type { ClassValue, SlotClassReplacer, TVMergeConfig, TV } from '../types/tv'
 import appConfig from '#build/app.config'
 
 /**
- * The variants engine. It covers exactly the surface our themes use — `extend`,
- * `base`, `slots`, `variants`, `compoundVariants`, `defaultVariants` — and
- * deliberately leaves out `compoundSlots`, responsive variants and the per-call
- * config argument, none of which appear in any theme or call site.
+ * The variants engine. It covers exactly the surface our themes use, which is
+ * `extend`, `base`, `slots`, `variants`, `compoundVariants` and
+ * `defaultVariants`, and leaves out `compoundSlots` and the per-call config
+ * argument, neither of which appears in any theme or call site.
  *
  * Class values may be a `(defaults) => classes` **replacer**, which takes the
  * place of what it receives instead of appending to it. In `app.config.ui` that
@@ -15,17 +16,19 @@ import appConfig from '#build/app.config'
  * and `variants` / `compoundVariants` still apply on top. In `:ui` and the
  * `class` prop it is the slot's whole resolved chain.
  *
- * The performance model follows how components call it — `tv({ extend: theme,
- * ...appConfig })(props)`, rebuilt inside a computed:
- * - build defers all merging, and the no-override case (`{ extend: theme }`) is a
- *   WeakMap hit sharing one compiled entry across every rebuild and instance
+ * The performance model follows how components call it, `tv({ extend: theme,
+ * ...appConfig })(props)` rebuilt inside a computed:
+ * - build defers all merging, and the unconfigured case (`{ extend: theme }`) is
+ *   a WeakMap hit sharing one compiled entry across every rebuild and instance.
+ *   Anything spread in beside `extend` resolves a fresh spec per rebuild, which
+ *   is what the two-argument call contract will fix.
  * - invoking allocates slot closures only, with no class resolution
- * - a slot call lazily compiles a per-slot lookup table (variant value → class for
- *   that slot, compounds pre-filtered per slot), then memoizes the resolved string
- *   by a fingerprint of the few props that can affect that slot
+ * - a slot call lazily compiles a per-slot lookup table (variant value to class
+ *   for that slot, compounds pre-filtered per slot), then memoizes the resolved
+ *   string by a fingerprint of the few props that can affect that slot
  *
- * The caches live on the compiled entry rather than on the invocation, so the
- * fast path survives factory rebuilds.
+ * The caches live on the compiled entry rather than on the invocation, so they
+ * survive factory rebuilds and are shared by every instance of a component.
  */
 
 type Props = Record<string, any> | undefined
@@ -37,7 +40,7 @@ type Props = Record<string, any> | undefined
 const SPACE_REGEX = /\s+/g
 
 function push(list: string[], input: any): void {
-  if (!input && input !== 0) {
+  if (!input && input !== 0 && input !== 0n) {
     return
   }
   if (Array.isArray(input)) {
@@ -48,9 +51,6 @@ function push(list: string[], input: any): void {
   }
   const type = typeof input
   if (type === 'string' || type === 'number' || type === 'bigint') {
-    if (type === 'number' && input !== input) {
-      return
-    }
     list.push(String(input))
   } else if (type === 'object') {
     for (const key of Object.keys(input)) {
@@ -72,12 +72,12 @@ function cx(...classes: any[]): string | undefined {
 }
 
 /* ------------------------------------------------------------------ *
- * merger (config → `tailwind-merge` instance, created once per config)
+ * merger (`twMergeConfig` to `tailwind-merge` instance, created once per config)
  * ------------------------------------------------------------------ */
 
 type Merger = (classes: string) => string
 
-const mergerCache = new WeakMap<TVMergeConfig, Merger | null>()
+const mergerCache = new WeakMap<object, Merger>()
 
 function hasDefinedKey(obj: Record<string, any> | undefined): boolean {
   for (const key in obj) {
@@ -89,31 +89,37 @@ function hasDefinedKey(obj: Record<string, any> | undefined): boolean {
 }
 
 /**
- * The single seam every class string passes through. Returns `null` when merging
- * is turned off (`twMerge: false`).
+ * The single seam every class string passes through. `twMerge: false` is read
+ * on every call so it can be flipped at runtime; the instance built from
+ * `twMergeConfig` is keyed on that object's identity, so it is rebuilt when the
+ * object is replaced, not when it is mutated.
  */
 function getMerger(config: TVMergeConfig | undefined): Merger | null {
   if (!config) {
     return twMerge
   }
-  let merger = mergerCache.get(config)
-  if (merger === undefined) {
-    const mergeConfig = config.twMergeConfig as Record<string, any> | undefined
-    merger = config.twMerge === false
-      ? null
-      : !hasDefinedKey(mergeConfig)
-          ? twMerge
-          : extendTailwindMerge({
-              ...mergeConfig,
-              extend: {
-                theme: mergeConfig!.theme,
-                classGroups: mergeConfig!.classGroups,
-                conflictingClassGroupModifiers: mergeConfig!.conflictingClassGroupModifiers,
-                conflictingClassGroups: mergeConfig!.conflictingClassGroups,
-                ...mergeConfig!.extend
-              }
-            } as Parameters<typeof extendTailwindMerge>[0])
-    mergerCache.set(config, merger)
+  if (config.twMerge === false) {
+    return null
+  }
+  const mergeConfig = config.twMergeConfig as Record<string, any> | undefined
+  if (!mergeConfig) {
+    return twMerge
+  }
+  let merger = mergerCache.get(mergeConfig)
+  if (!merger) {
+    merger = !hasDefinedKey(mergeConfig)
+      ? twMerge
+      : extendTailwindMerge({
+          ...mergeConfig,
+          extend: {
+            theme: mergeConfig.theme,
+            classGroups: mergeConfig.classGroups,
+            conflictingClassGroupModifiers: mergeConfig.conflictingClassGroupModifiers,
+            conflictingClassGroups: mergeConfig.conflictingClassGroups,
+            ...mergeConfig.extend
+          }
+        } as Parameters<typeof extendTailwindMerge>[0])
+    mergerCache.set(mergeConfig, merger)
   }
   return merger
 }
@@ -153,32 +159,25 @@ function findReplacer(value: unknown): SlotClassReplacer | undefined {
 }
 
 /**
- * The plain classes passed alongside a replacer, which still apply on top of the
- * replacement. Nested arrays are flattened so none are dropped.
+ * Merge a resolved chain with the classes a caller passed. A replacer among them
+ * takes the place of the chain; the plain classes passed alongside it still
+ * apply on top, since `cx` drops the function itself when joining.
  */
-function plainClasses(value: unknown): ClassValue[] {
-  if (Array.isArray(value)) {
-    return value.flatMap(item => plainClasses(item))
+function mergeWithOverrides(config: TVMergeConfig | undefined, parts: any[], overrides: Props): string | undefined {
+  if (!overrides) {
+    return mergeClasses(config, ...parts)
   }
-  if (typeof value === 'function') {
-    return []
+  const replacer = findReplacer(overrides.class) ?? findReplacer(overrides.className)
+  if (!replacer) {
+    parts.push(overrides.class, overrides.className)
+    return mergeClasses(config, ...parts)
   }
-  return [value as ClassValue]
+  return mergeClasses(config, replacer(mergeClasses(config, ...parts) ?? ''), overrides.class, overrides.className) ?? ''
 }
 
 /* ------------------------------------------------------------------ *
  * spec resolution
  * ------------------------------------------------------------------ */
-
-function isEmptyObject(obj: any): boolean {
-  if (!obj || typeof obj !== 'object') {
-    return true
-  }
-  for (const _key in obj) {
-    return false
-  }
-  return true
-}
 
 const falsyToString = (value: any) => value === false ? 'false' : value === true ? 'true' : value === 0 ? '0' : value
 
@@ -192,29 +191,20 @@ function flatFilter(target: any[], value: any): void {
   }
 }
 
+const isPlainObject = (value: any): value is Record<string, any> => typeof value === 'object' && value !== null && !Array.isArray(value)
+
 /**
- * Merge an extended theme's variants into the extending ones: the extended value
- * comes first, and two strings are joined with a space.
+ * Merge an extended theme's variants into the extending ones, value by value.
+ * Two per-slot objects merge slot by slot, two class values are joined, and a
+ * class value meeting a per-slot object is read as its `base`, which is where a
+ * plain value lands in a slotted theme anyway. That last case is where
+ * `app.config.ui.<c>.variants.size.md = 'text-lg'` over a theme's
+ * `{ base, label }` used to resolve to `"[object Object] text-lg"`.
  */
 function mergeVariants(own: any, extended: any): any {
   const result: Record<string, any> = {}
   for (const key in own) {
-    const value = own[key]
-    if (key in extended) {
-      const extendedValue = extended[key]
-      if (Array.isArray(value) || Array.isArray(extendedValue)) {
-        const flat: any[] = []
-        flatFilter(flat, extendedValue)
-        flatFilter(flat, value)
-        result[key] = flat
-      } else if (typeof value === 'object' && typeof extendedValue === 'object' && value && extendedValue) {
-        result[key] = mergeVariants(value, extendedValue)
-      } else {
-        result[key] = extendedValue + ' ' + value
-      }
-    } else {
-      result[key] = value
-    }
+    result[key] = key in extended ? mergeVariantValue(own[key], extended[key]) : own[key]
   }
   for (const key in extended) {
     if (!(key in own)) {
@@ -222,6 +212,18 @@ function mergeVariants(own: any, extended: any): any {
     }
   }
   return result
+}
+
+function mergeVariantValue(own: any, extended: any): any {
+  const ownIsObject = isPlainObject(own)
+  const extendedIsObject = isPlainObject(extended)
+  if (ownIsObject || extendedIsObject) {
+    return mergeVariants(ownIsObject ? own : { base: own }, extendedIsObject ? extended : { base: extended })
+  }
+  const flat: any[] = []
+  flatFilter(flat, extended)
+  flatFilter(flat, own)
+  return flat
 }
 
 interface Spec {
@@ -233,9 +235,16 @@ interface Spec {
   variantKeys: string[]
   compoundVariants: Record<string, any>[]
   defaultVariants: Record<string, any>
-  extend: any
   /** Lazily compiled per-slot resolvers, shared across factory rebuilds. */
   compiled: Record<string, CompiledSlot | undefined>
+}
+
+/**
+ * Resolve a construction-time replacer against what the extended theme
+ * contributes, so it stands in for those classes instead of appending to them.
+ */
+function replaceClasses(config: TVMergeConfig | undefined, replacer: SlotClassReplacer, extended: ClassValue): ClassValue {
+  return replacer(mergeClasses(config, extended) ?? '')
 }
 
 function resolveSpec(options: Record<string, any>, config: TVMergeConfig | undefined): Spec {
@@ -245,32 +254,24 @@ function resolveSpec(options: Record<string, any>, config: TVMergeConfig | undef
   const ownCompound = options.compoundVariants ?? []
   const ownDefaults = options.defaultVariants ?? {}
 
-  const variants = extend?.variants && !isEmptyObject(extend.variants) ? mergeVariants(ownVariants, extend.variants) : ownVariants
-  const defaultVariants = extend?.defaultVariants && !isEmptyObject(extend.defaultVariants) ? { ...extend.defaultVariants, ...ownDefaults } : ownDefaults
+  const variants = isEmpty(extend?.variants) ? ownVariants : mergeVariants(ownVariants, extend.variants)
+  const defaultVariants = isEmpty(extend?.defaultVariants) ? ownDefaults : { ...extend.defaultVariants, ...ownDefaults }
 
   let compoundVariants = ownCompound
-  if (extend?.compoundVariants && !isEmptyObject(extend.compoundVariants)) {
+  if (!isEmpty(extend?.compoundVariants)) {
     const flat: any[] = []
     flatFilter(flat, extend.compoundVariants)
     flatFilter(flat, ownCompound)
     compoundVariants = flat
   }
 
-  // A construction-time replacer receives what the extended theme contributes and
-  // stands in for it, so those keys skip the join below rather than being blanked
-  // on the way in.
-  const replaced = new Set<string>()
+  const baseReplaced = typeof options.base === 'function'
+  // A slotted theme keeps its base under `slots.base` and a slotless one at the
+  // top level, so a base replacer reads whichever the extended theme has.
+  const ownBase = baseReplaced ? replaceClasses(config, options.base, extendSlots?.base ?? extend?.base) : options.base
 
-  let ownBase = options.base
-  if (typeof ownBase === 'function') {
-    // A slotted theme keeps its base under `slots.base` and a slotless one at the
-    // top level, so read whichever the extended theme actually has.
-    ownBase = (ownBase as SlotClassReplacer)(mergeClasses(config, extendSlots?.base ?? extend?.base) ?? '')
-    replaced.add('base')
-  }
-
-  const rawSlots = options.slots ?? {}
-  let ownSlots: Record<string, any> = rawSlots
+  const rawSlots: Record<string, any> = options.slots ?? {}
+  let ownSlots = rawSlots
   for (const key in rawSlots) {
     if (typeof rawSlots[key] !== 'function') {
       continue
@@ -278,26 +279,30 @@ function resolveSpec(options: Record<string, any>, config: TVMergeConfig | undef
     if (ownSlots === rawSlots) {
       ownSlots = { ...rawSlots }
     }
-    ownSlots[key] = (rawSlots[key] as SlotClassReplacer)(mergeClasses(config, extendSlots?.[key]) ?? '')
-    replaced.add(key)
+    ownSlots[key] = replaceClasses(config, rawSlots[key], extendSlots?.[key])
   }
 
-  const base = replaced.has('base') || !extend?.base ? ownBase : cx(extend.base, ownBase)
+  const base = baseReplaced || !extend?.base ? ownBase : cx(extend.base, ownBase)
 
-  const isExtendedSlotsEmpty = isEmptyObject(extendSlots)
-  const componentSlots: Record<string, any> = !isEmptyObject(ownSlots)
-    ? { base: replaced.has('base') ? ownBase : cx(ownBase, isExtendedSlotsEmpty && extend?.base), ...ownSlots }
-    : {}
+  const isExtendedSlotsEmpty = isEmpty(extendSlots)
+  // A slotless extended theme contributes its top-level `base` to the `base`
+  // slot of a slotted one, which is how a user adds slots on top of a theme
+  // that only has a `base`.
+  const componentSlots: Record<string, any> = isEmpty(ownSlots)
+    ? {}
+    : { base: baseReplaced ? ownBase : cx(ownBase, isExtendedSlotsEmpty && extend?.base), ...ownSlots }
 
   let slots: Record<string, any>
   if (isExtendedSlotsEmpty) {
     slots = componentSlots
   } else {
-    // Own slot classes are appended to the extended ones, slot by slot.
+    // Own slot classes are appended to the extended ones, slot by slot, except
+    // where a replacer already resolved them.
     slots = { ...extendSlots }
-    const own = isEmptyObject(componentSlots) ? { base: ownBase } : componentSlots
+    const own = isEmpty(componentSlots) ? { base: ownBase } : componentSlots
     for (const key in own) {
-      slots[key] = replaced.has(key) || !(key in slots) ? own[key] : cx(slots[key], own[key])
+      const replaced = typeof rawSlots[key] === 'function' || (key === 'base' && baseReplaced)
+      slots[key] = replaced || !(key in slots) ? own[key] : cx(slots[key], own[key])
     }
   }
 
@@ -305,12 +310,11 @@ function resolveSpec(options: Record<string, any>, config: TVMergeConfig | undef
     config,
     base,
     slots,
-    hasSlots: !isEmptyObject(ownSlots) || !isExtendedSlotsEmpty,
+    hasSlots: !isEmpty(slots),
     variants,
     variantKeys: Object.keys(variants),
     compoundVariants,
     defaultVariants,
-    extend,
     compiled: Object.create(null)
   }
 }
@@ -321,7 +325,7 @@ function resolveSpec(options: Record<string, any>, config: TVMergeConfig | undef
 
 interface CompiledVariant {
   key: string
-  /** Variant value key → pre-joined class string for this slot. */
+  /** Variant value key to pre-joined class string for this slot. */
   table: Record<string, string | undefined>
   defaultValue: any
 }
@@ -336,17 +340,17 @@ interface CompiledSlot {
   static: ClassValue
   variants: CompiledVariant[]
   compounds: CompiledCompound[]
-  /** Every prop key that can change this slot's output — the memo key domain. */
+  /** Every prop key that can change this slot's output, the memo key domain. */
   relevantKeys: string[]
-  cache: Map<string, string | undefined>
+  cache: SlotCache
 }
 
 /**
- * The class a variant value or compound contributes to one slot: plain strings
- * and arrays apply to `base` only, objects are indexed by slot.
+ * The class a variant value or compound contributes to one slot: objects are
+ * indexed by slot, anything else applies to `base`.
  */
 function classForSlot(value: any, slotKey: string): any {
-  if (typeof value === 'object' && value !== null && !Array.isArray(value)) {
+  if (isPlainObject(value)) {
     return value[slotKey]
   }
   return slotKey === 'base' ? value : undefined
@@ -358,7 +362,7 @@ function compileSlot(spec: Spec, slotKey: string): CompiledSlot {
 
   for (const key of spec.variantKeys) {
     const group = spec.variants[key]
-    if (!group || isEmptyObject(group)) {
+    if (!group || isEmpty(group)) {
       continue
     }
     const table: Record<string, string | undefined> = Object.create(null)
@@ -370,13 +374,12 @@ function compileSlot(spec: Spec, slotKey: string): CompiledSlot {
         hasAny = true
       }
     }
-    // A variant with nothing to contribute to this slot stays in the resolve path
-    // (it still reads the prop) but out of the cache key, since it can never
-    // change the output.
+    // A variant with nothing to contribute to this slot can't change its output,
+    // so it stays out of both the resolve path and the cache key.
     if (hasAny) {
       relevant.add(key)
+      variants.push({ key, table, defaultValue: spec.defaultVariants[key] })
     }
-    variants.push({ key, table, defaultValue: spec.defaultVariants[key] })
   }
 
   const compounds: CompiledCompound[] = []
@@ -398,11 +401,13 @@ function compileSlot(spec: Spec, slotKey: string): CompiledSlot {
   }
 
   return {
-    static: spec.slots[slotKey],
+    // A slotless theme resolves through an implicit `base` slot fed by its
+    // top-level `base`, which stays off `spec.slots` so `extend` still reads `{}`.
+    static: spec.hasSlots ? spec.slots[slotKey] : spec.base,
     variants,
     compounds,
     relevantKeys: [...relevant],
-    cache: new Map()
+    cache: new SlotCache()
   }
 }
 
@@ -412,6 +417,10 @@ function compileSlot(spec: Spec, slotKey: string): CompiledSlot {
 
 const isNullishOrFalse = (value: any) => value === null || value === undefined || value === false
 
+/**
+ * Slot props are read with `in`, so an inherited enumerable key counts, the same
+ * way the variant lookup below reads it through `slotProps[key]`.
+ */
 function matchesCompound(compound: CompiledCompound, defaults: Record<string, any>, props: Props, slotProps: Props): boolean {
   for (let i = 0; i < compound.keys.length; i++) {
     const key = compound.keys[i]!
@@ -448,19 +457,13 @@ function variantClass(variant: CompiledVariant, props: Props, slotProps: Props):
   if (prop === null) {
     return undefined
   }
-  const propKey = falsyToString(prop)
-  if (typeof propKey === 'object') {
-    return undefined
-  }
-  const key = propKey ?? falsyToString(variant.defaultValue)
+  const key = falsyToString(prop) ?? falsyToString(variant.defaultValue)
   return variant.table[(key || 'false') as string]
 }
 
 /**
  * Resolve one slot: its own classes, the variants that match, the compounds that
- * match, then whatever the caller passed. A replacer in the caller's classes
- * takes the place of everything below it, keeping the plain classes passed
- * alongside.
+ * match, then whatever the caller passed.
  */
 function resolveSlot(spec: Spec, compiled: CompiledSlot, props: Props, slotProps: Props): string | undefined {
   const parts: any[] = [compiled.static]
@@ -475,21 +478,7 @@ function resolveSlot(spec: Spec, compiled: CompiledSlot, props: Props, slotProps
       parts.push(compound.cls)
     }
   }
-  if (!slotProps) {
-    return mergeClasses(spec.config, ...parts)
-  }
-
-  const replacer = findReplacer(slotProps.class) ?? findReplacer(slotProps.className)
-  if (!replacer) {
-    parts.push(slotProps.class, slotProps.className)
-    return mergeClasses(spec.config, ...parts)
-  }
-  return mergeClasses(
-    spec.config,
-    replacer(mergeClasses(spec.config, ...parts) ?? ''),
-    plainClasses(slotProps.class),
-    plainClasses(slotProps.className)
-  ) ?? ''
+  return mergeWithOverrides(spec.config, parts, slotProps)
 }
 
 /* ------------------------------------------------------------------ *
@@ -498,6 +487,11 @@ function resolveSlot(spec: Spec, compiled: CompiledSlot, props: Props, slotProps
 
 const BAIL = Symbol('bail')
 
+/**
+ * Every value is encoded so that no two inputs share a key: strings carry their
+ * length, so a `;`, `,` or `"` inside an arbitrary value (`font-[a,"b"]`) can't
+ * read as a separator.
+ */
 function serialize(value: any): string | typeof BAIL {
   if (value === undefined) {
     return 'u'
@@ -506,7 +500,7 @@ function serialize(value: any): string | typeof BAIL {
     return 'n'
   }
   switch (typeof value) {
-    case 'string': return '"' + value
+    case 'string': return '$' + value.length + ':' + value
     case 'boolean': return value ? 't' : 'f'
     case 'number': return Number.isFinite(value) ? '#' + value : BAIL
     default: return BAIL
@@ -530,7 +524,7 @@ function serializeClass(value: any, depth = 0): string | typeof BAIL {
       }
       out += part + ','
     }
-    return out
+    return out + ']'
   }
   return serialize(value)
 }
@@ -538,16 +532,17 @@ function serializeClass(value: any, depth = 0): string | typeof BAIL {
 function fingerprint(compiled: CompiledSlot, props: Props, slotProps: Props): string | typeof BAIL {
   let out = ''
   for (const key of compiled.relevantKeys) {
-    // Variant lookup (`??`) and compound matching (spread) treat an `undefined`
-    // slot prop differently, so the key captures both views.
-    const inSlot = slotProps !== undefined && key in slotProps
+    // A nullish slot prop falls through to the invocation prop in the variant
+    // lookup (`??`) but still counts as set for compound matching (`in`), so the
+    // key records the value the lookup will see plus a marker for the other view.
+    const inSlot = slotProps != null && key in slotProps
     const slotValue = inSlot ? slotProps![key] : undefined
-    const value = inSlot && slotValue !== undefined ? slotValue : props?.[key]
-    const part = serialize(value)
+    const fallsThrough = slotValue == null
+    const part = serialize(fallsThrough ? props?.[key] : slotValue)
     if (part === BAIL) {
       return BAIL
     }
-    out += part + (inSlot && slotValue === undefined ? '!' : '') + ';'
+    out += part + (inSlot && fallsThrough ? '!' : '') + ';'
   }
   if (slotProps) {
     const cls = serializeClass(slotProps.class)
@@ -560,7 +555,46 @@ function fingerprint(compiled: CompiledSlot, props: Props, slotProps: Props): st
   return out
 }
 
-const CACHE_LIMIT = 1000
+const CACHE_LIMIT = 256
+
+/**
+ * Two generations: when the current one fills up it becomes the previous one
+ * instead of being cleared, and a hit there is promoted. Entries used within the
+ * last generation survive, so a Table with per-row classes degrades its own hit
+ * rate without wiping the static entries every other instance of that component
+ * is hitting. The cache is shared for the process, so that containment matters.
+ */
+class SlotCache {
+  private current = new Map<string, string | undefined>()
+  private previous: Map<string, string | undefined> | undefined
+
+  /** Returns `BAIL` on a miss, since `undefined` is a real cached result. */
+  get(key: string): string | undefined | typeof BAIL {
+    const current = this.current
+    const hit = current.get(key)
+    if (hit !== undefined || current.has(key)) {
+      return hit
+    }
+    const previous = this.previous
+    if (previous) {
+      const old = previous.get(key)
+      if (old !== undefined || previous.has(key)) {
+        previous.delete(key)
+        this.set(key, old)
+        return old
+      }
+    }
+    return BAIL
+  }
+
+  set(key: string, value: string | undefined): void {
+    if (this.current.size >= CACHE_LIMIT) {
+      this.previous = this.current
+      this.current = new Map()
+    }
+    this.current.set(key, value)
+  }
+}
 
 function resolveSlotCached(spec: Spec, slotKey: string, props: Props, slotProps: Props): string | undefined {
   const compiled = (spec.compiled[slotKey] ??= compileSlot(spec, slotKey))
@@ -568,18 +602,10 @@ function resolveSlotCached(spec: Spec, slotKey: string, props: Props, slotProps:
   if (key === BAIL) {
     return resolveSlot(spec, compiled, props, slotProps)
   }
-  const cache = compiled.cache
-  let result = cache.get(key)
-  // `undefined` is a real result (a slot whose chain resolves to no classes), so
-  // the extra `has` runs only for those and the hot path stays one lookup.
-  if (result === undefined && !cache.has(key)) {
-    if (cache.size >= CACHE_LIMIT) {
-      // Pathological dynamic inputs (per-row generated classes, say): reset
-      // rather than grow unbounded.
-      cache.clear()
-    }
+  let result = compiled.cache.get(key)
+  if (result === BAIL) {
     result = resolveSlot(spec, compiled, props, slotProps)
-    cache.set(key, result)
+    compiled.cache.set(key, result)
   }
   return result
 }
@@ -590,13 +616,11 @@ function resolveSlotCached(spec: Spec, slotKey: string, props: Props, slotProps:
 
 interface TVComponent {
   (props?: Record<string, any>): any
-  extend: any
   base: ClassValue
   slots: Record<string, ClassValue>
   variants: Record<string, Record<string, any> | undefined>
   defaultVariants: Record<string, any>
   compoundVariants: Record<string, any>[]
-  variantKeys: string[]
 }
 
 /**
@@ -615,42 +639,24 @@ function onlyExtend(options: Record<string, any>): boolean {
 }
 
 function createTV(config?: TVMergeConfig) {
-  return function tv(options: Record<string, any> = {}, callConfig?: TVMergeConfig): TVComponent {
-    const usedConfig = callConfig ? { ...config, ...callConfig } : config
-
+  return function tv(options: Record<string, any> = {}): TVComponent {
     let spec: Spec | undefined
-    if (!callConfig && onlyExtend(options)) {
+    if (onlyExtend(options)) {
       spec = themeSpecs.get(options.extend)
-      if (spec && spec.config !== config) {
-        spec = undefined
-      }
       if (!spec) {
         spec = resolveSpec(options, config)
         themeSpecs.set(options.extend, spec)
       }
     } else {
-      spec = resolveSpec(options, usedConfig)
+      spec = resolveSpec(options, config)
     }
     const resolved = spec
 
     const component = ((props?: Record<string, any>) => {
       if (!resolved.hasSlots) {
-        if (resolved.variantKeys.length === 0) {
-          const replacer = findReplacer(props?.class) ?? findReplacer(props?.className)
-          if (!replacer) {
-            return mergeClasses(resolved.config, resolved.base, props?.class, props?.className)
-          }
-          return mergeClasses(
-            resolved.config,
-            replacer(mergeClasses(resolved.config, resolved.base) ?? ''),
-            plainClasses(props?.class),
-            plainClasses(props?.className)
-          ) ?? ''
-        }
-        // Slotless with variants: resolve as an implicit `base` slot fed by the
-        // top-level `base` classes. `class` / `className` travel as slot props so
-        // the other invocation props keep props-only resolution.
-        resolved.compiled.base ??= compileSlot({ ...resolved, slots: { base: resolved.base } }, 'base')
+        // A slotless theme resolves as one implicit `base` slot. `class` /
+        // `className` travel as slot props so the other invocation props keep
+        // props-only resolution.
         const overrides = props && (props.class !== undefined || props.className !== undefined)
           ? { class: props.class, className: props.className }
           : undefined
@@ -665,13 +671,11 @@ function createTV(config?: TVMergeConfig) {
     }) as TVComponent
 
     // Metadata reads, which is what `extend: tv(theme)` resolves against.
-    component.extend = resolved.extend
     component.base = resolved.base
     component.slots = resolved.slots
     component.variants = resolved.variants
     component.defaultVariants = resolved.defaultVariants
     component.compoundVariants = resolved.compoundVariants
-    component.variantKeys = resolved.variantKeys
 
     return component
   }
