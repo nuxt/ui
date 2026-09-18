@@ -124,7 +124,7 @@ function thumbLabel(index: number) {
 }
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.slider || {}) })({
+const ui = computed(() => tv(theme, appConfig.ui?.slider)({
   disabled: disabled.value,
   size: size.value,
   color: color.value,

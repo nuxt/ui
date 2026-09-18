@@ -102,7 +102,7 @@ const hasContent = computed(() => !!props.content || !!textParts.value.length ||
 const messageProps = computed(() => omit(props, ['as', 'icon', 'avatar', 'variant', 'color', 'side', 'actions', 'compact', 'class', 'ui', 'content']))
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.chatMessage || {}) })({
+const ui = computed(() => tv(theme, appConfig.ui?.chatMessage)({
   variant: props.variant,
   color: props.color,
   side: props.side,

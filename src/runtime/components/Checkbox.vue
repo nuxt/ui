@@ -124,7 +124,7 @@ const labelIcon = computed(() => props.indicator === 'hidden' ? props.icon : und
 const isListVariant = computed(() => !props.variant || props.variant === 'list')
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.checkbox || {}) })({
+const ui = computed(() => tv(theme, appConfig.ui?.checkbox)({
   size: size.value,
   color: color.value,
   variant: props.variant,
