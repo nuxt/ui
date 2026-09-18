@@ -363,9 +363,7 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.inputMenu || {})
   fixed: props.fixed,
   leading: isLeading.value || !!props.avatar || !!slots.leading,
   trailing: isTrailing.value || !!slots.trailing,
-  // Only the non-autocomplete `multiple` mode renders tags and merges `root`
-  // into `base`, which is what the `multiple` variant styles.
-  multiple: props.multiple && !isAutocomplete.value,
+  multiple: props.multiple,
   fieldGroup: orientation.value,
   virtualize: !!props.virtualize
 }))
