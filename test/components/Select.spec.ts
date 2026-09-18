@@ -244,6 +244,70 @@ describe('Select', () => {
 
       expect(trigger.attributes('aria-expanded')).toBe('true')
     })
+
+    test('a real pointer click does not synthesize a second pointerdown', async () => {
+      const wrapper = await renderForm({
+        slotVars: {
+          items: ['Option 1', 'Option 2']
+        },
+        slotTemplate: `
+        <UFormField name="value" label="Label">
+          <USelect :items="items" :open="false" :portal="false" />
+        </UFormField>
+        `
+      })
+
+      const trigger = wrapper.find('[data-slot="base"]')
+      const el = trigger.element
+
+      let pointerDowns = 0
+      el.addEventListener('pointerdown', () => {
+        pointerDowns++
+      })
+
+      // A genuine pointer interaction is `pointerdown` then `click`. With a
+      // `pointer-events` utility in play, Reka's outside-pointerdown closes the
+      // menu first, so the click lands while the menu reads as closed. The
+      // trigger must not answer that click by synthesizing another
+      // `pointerdown`, which is what reopened the menu.
+      await trigger.trigger('pointerdown')
+      await trigger.trigger('click')
+      await flushPromises()
+
+      expect(pointerDowns).toBe(1)
+    })
+
+    test('a cancelled pointer sequence does not block a later label click', async () => {
+      const wrapper = await renderForm({
+        slotVars: {
+          items: ['Option 1', 'Option 2']
+        },
+        slotTemplate: `
+        <UFormField name="value" label="Label">
+          <USelect :items="items" :open="false" :portal="false" />
+        </UFormField>
+        `
+      })
+
+      const trigger = wrapper.find('[data-slot="base"]')
+      const el = trigger.element
+
+      let pointerDowns = 0
+      el.addEventListener('pointerdown', () => {
+        pointerDowns++
+      })
+
+      // Touch scrolling cancels the sequence, so no `click` follows and the
+      // "saw a real pointerdown" flag must not survive into the next
+      // interaction, or the label click after it would stop opening the menu.
+      await trigger.trigger('pointerdown')
+      await trigger.trigger('pointercancel')
+      await trigger.trigger('click')
+      await flushPromises()
+
+      // The real press plus the one synthesized for the label-style click.
+      expect(pointerDowns).toBe(2)
+    })
   })
 
   describe('form integration', async () => {
