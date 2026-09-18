@@ -60,6 +60,19 @@ export default defineLocale<Messages>({
       thought: 'Помисли',
       thoughtFor: 'Мислил {duration}'
     },
+    codeEditor: {
+      search: 'Потърсете…',
+      replace: 'Замяна…',
+      matchCase: 'Съвпадение на регистъра',
+      regexp: 'Използване на регулярен израз',
+      wholeWord: 'Цяла дума',
+      prev: 'Предишно съвпадение',
+      next: 'Следващо съвпадение',
+      selectAll: 'Избиране на всички съвпадения',
+      replaceNext: 'Замяна',
+      replaceAll: 'Замяна на всички',
+      close: 'Затворете'
+    },
     colorMode: {
       dark: 'Тъмно',
       light: 'Светло',

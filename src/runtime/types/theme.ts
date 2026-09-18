@@ -56,6 +56,7 @@ export interface ThemeDefaults {
   checkbox?: Partial<ComponentTypes.CheckboxProps>
   checkboxGroup?: Partial<ComponentTypes.CheckboxGroupProps>
   chip?: Partial<ComponentTypes.ChipProps>
+  codeEditor?: Partial<ComponentTypes.CodeEditorProps>
   collapsible?: Partial<ComponentTypes.CollapsibleProps>
   colorPicker?: Partial<ComponentTypes.ColorPickerProps>
   commandPalette?: Partial<ComponentTypes.CommandPaletteProps>

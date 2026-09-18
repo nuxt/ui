@@ -60,6 +60,19 @@ export default defineLocale<Messages>({
       thought: 'Pamąstė',
       thoughtFor: 'Mąstė {duration}'
     },
+    codeEditor: {
+      search: 'Ieškoti…',
+      replace: 'Pakeisti…',
+      matchCase: 'Skirti raidžių dydį',
+      regexp: 'Naudoti reguliariąją išraišką',
+      wholeWord: 'Visas žodis',
+      prev: 'Ankstesnis atitikmuo',
+      next: 'Kitas atitikmuo',
+      selectAll: 'Pasirinkti visus atitikmenis',
+      replaceNext: 'Pakeisti',
+      replaceAll: 'Pakeisti viską',
+      close: 'Uždaryti'
+    },
     colorMode: {
       dark: 'Tamsus',
       light: 'Šviesus',

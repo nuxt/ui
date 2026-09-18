@@ -3,6 +3,7 @@ export default {
   arrowLeft: 'i-lucide-arrow-left',
   arrowRight: 'i-lucide-arrow-right',
   arrowUp: 'i-lucide-arrow-up',
+  caseSensitive: 'i-lucide-case-sensitive',
   caution: 'i-lucide-circle-alert',
   check: 'i-lucide-check',
   chevronDoubleLeft: 'i-lucide-chevrons-left',
@@ -34,7 +35,10 @@ export default {
   panelClose: 'i-lucide-panel-left-close',
   panelOpen: 'i-lucide-panel-left-open',
   plus: 'i-lucide-plus',
+  regex: 'i-lucide-regex',
   reload: 'i-lucide-rotate-ccw',
+  replace: 'i-lucide-replace',
+  replaceAll: 'i-lucide-replace-all',
   search: 'i-lucide-search',
   stop: 'i-lucide-square',
   star: 'i-lucide-star',
@@ -43,5 +47,6 @@ export default {
   tip: 'i-lucide-lightbulb',
   trash: 'i-lucide-trash',
   upload: 'i-lucide-upload',
-  warning: 'i-lucide-triangle-alert'
+  warning: 'i-lucide-triangle-alert',
+  wholeWord: 'i-lucide-whole-word'
 }

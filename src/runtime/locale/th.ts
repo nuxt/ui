@@ -55,6 +55,19 @@ export default defineLocale<Messages>({
       reload: 'ลองอีกครั้ง',
       stop: 'หยุดการสร้าง'
     },
+    codeEditor: {
+      search: 'ค้นหา…',
+      replace: 'แทนที่…',
+      matchCase: 'ตรงตามตัวพิมพ์ใหญ่-เล็ก',
+      regexp: 'ใช้นิพจน์ทั่วไป',
+      wholeWord: 'ทั้งคำ',
+      prev: 'รายการที่ตรงกันก่อนหน้า',
+      next: 'รายการที่ตรงกันถัดไป',
+      selectAll: 'เลือกรายการที่ตรงกันทั้งหมด',
+      replaceNext: 'แทนที่',
+      replaceAll: 'แทนที่ทั้งหมด',
+      close: 'ปิด'
+    },
     colorMode: {
       dark: 'มืด',
       light: 'สว่าง',

@@ -60,6 +60,19 @@ export default defineLocale<Messages>({
       thought: 'იფიქრა',
       thoughtFor: '{duration} ფიქრობდა'
     },
+    codeEditor: {
+      search: 'ძიება…',
+      replace: 'ჩანაცვლება…',
+      matchCase: 'რეგისტრის გათვალისწინება',
+      regexp: 'რეგულარული გამოსახულების გამოყენება',
+      wholeWord: 'მთელი სიტყვა',
+      prev: 'წინა დამთხვევა',
+      next: 'შემდეგი დამთხვევა',
+      selectAll: 'ყველა დამთხვევის არჩევა',
+      replaceNext: 'ჩანაცვლება',
+      replaceAll: 'ყველას ჩანაცვლება',
+      close: 'დახურვა'
+    },
     colorMode: {
       dark: 'ბნელი',
       light: 'ნათელი',

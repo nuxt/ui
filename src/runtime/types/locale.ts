@@ -49,6 +49,19 @@ export type Messages = {
     reload: string
     stop: string
   }
+  codeEditor: {
+    search: string
+    replace: string
+    matchCase: string
+    regexp: string
+    wholeWord: string
+    prev: string
+    next: string
+    selectAll: string
+    replaceNext: string
+    replaceAll: string
+    close: string
+  }
   colorMode: {
     dark: string
     light: string

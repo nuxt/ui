@@ -60,6 +60,19 @@ export default defineLocale<Messages>({
       thought: 'Mendoi',
       thoughtFor: 'Mendoi për {duration}'
     },
+    codeEditor: {
+      search: 'Kërko…',
+      replace: 'Zëvendëso…',
+      matchCase: 'Dallo shkronjat e mëdha/të vogla',
+      regexp: 'Përdor shprehje të rregullt',
+      wholeWord: 'Fjalë e plotë',
+      prev: 'Përputhja e mëparshme',
+      next: 'Përputhja tjetër',
+      selectAll: 'Zgjidh të gjitha përputhjet',
+      replaceNext: 'Zëvendëso',
+      replaceAll: 'Zëvendëso të gjitha',
+      close: 'Mbyll'
+    },
     colorMode: {
       dark: 'I errët',
       light: 'I ndritshëm',

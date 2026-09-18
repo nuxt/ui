@@ -60,6 +60,19 @@ export default defineLocale<Messages>({
       thought: 'Ha pensat',
       thoughtFor: 'Ha pensat durant {duration}'
     },
+    codeEditor: {
+      search: 'Cerca…',
+      replace: 'Reemplaça…',
+      matchCase: 'Coincideix majúscules i minúscules',
+      regexp: 'Utilitza una expressió regular',
+      wholeWord: 'Paraula sencera',
+      prev: 'Coincidència anterior',
+      next: 'Coincidència següent',
+      selectAll: 'Selecciona totes les coincidències',
+      replaceNext: 'Reemplaça',
+      replaceAll: 'Reemplaça-ho tot',
+      close: 'Tancar'
+    },
     colorMode: {
       dark: 'Fosc',
       light: 'Clar',

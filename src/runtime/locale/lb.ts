@@ -60,6 +60,19 @@ export default defineLocale<Messages>({
       thought: 'Nogeduecht',
       thoughtFor: '{duration} nogeduecht'
     },
+    codeEditor: {
+      search: 'Sichen…',
+      replace: 'Ersetzen…',
+      matchCase: 'Grouss-/Klengschreiwung beuechten',
+      regexp: 'Regulären Ausdrock benotzen',
+      wholeWord: 'Ganzt Wuert',
+      prev: 'Viregen Treffer',
+      next: 'Nächsten Treffer',
+      selectAll: 'All Treffer auswielen',
+      replaceNext: 'Ersetzen',
+      replaceAll: 'All ersetzen',
+      close: 'Zoumaachen'
+    },
     colorMode: {
       dark: 'Donkel',
       light: 'Hell',

@@ -60,6 +60,19 @@ export default defineLocale<Messages>({
       thought: 'គិតរួចហើយ',
       thoughtFor: 'គិតរយៈពេល {duration}'
     },
+    codeEditor: {
+      search: 'ស្វែងរក…',
+      replace: 'ជំនួស…',
+      matchCase: 'ផ្គូផ្គងអក្សរតូចធំ',
+      regexp: 'ប្រើកន្សោមធម្មតា',
+      wholeWord: 'ពាក្យទាំងមូល',
+      prev: 'ការផ្គូផ្គងមុន',
+      next: 'ការផ្គូផ្គងបន្ទាប់',
+      selectAll: 'ជ្រើសរើសការផ្គូផ្គងទាំងអស់',
+      replaceNext: 'ជំនួស',
+      replaceAll: 'ជំនួសទាំងអស់',
+      close: 'បិទ'
+    },
     colorMode: {
       dark: 'ងងឹត',
       light: 'ភ្លឺ',

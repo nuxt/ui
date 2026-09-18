@@ -13,6 +13,7 @@ export const themeIcons = {
     arrowLeft: 'i-bi-arrow-left',
     arrowRight: 'i-bi-arrow-right',
     arrowUp: 'i-bi-arrow-up',
+    caseSensitive: 'i-bi-type',
     caution: 'i-bi-exclamation-circle',
     check: 'i-bi-check',
     chevronDoubleLeft: 'i-bi-chevron-double-left',
@@ -44,7 +45,10 @@ export const themeIcons = {
     panelClose: 'i-bi-arrow-bar-left',
     panelOpen: 'i-bi-arrow-bar-right',
     plus: 'i-bi-plus',
+    regex: 'i-bi-regex',
     reload: 'i-bi-arrow-counterclockwise',
+    replace: 'i-bi-arrow-repeat',
+    replaceAll: 'i-bi-arrow-clockwise',
     search: 'i-bi-search',
     stop: 'i-bi-square',
     star: 'i-bi-star',
@@ -53,13 +57,15 @@ export const themeIcons = {
     tip: 'i-bi-lightbulb',
     trash: 'i-bi-trash',
     upload: 'i-bi-upload',
-    warning: 'i-bi-exclamation-triangle'
+    warning: 'i-bi-exclamation-triangle',
+    wholeWord: 'i-bi-text-paragraph'
   },
   heroicons: {
     arrowDown: 'i-heroicons-arrow-down',
     arrowLeft: 'i-heroicons-arrow-left',
     arrowRight: 'i-heroicons-arrow-right',
     arrowUp: 'i-heroicons-arrow-up',
+    caseSensitive: 'i-heroicons-language',
     caution: 'i-heroicons-exclamation-circle',
     check: 'i-heroicons-check',
     chevronDoubleLeft: 'i-heroicons-chevron-double-left',
@@ -91,7 +97,10 @@ export const themeIcons = {
     panelClose: 'i-heroicons-chevron-left',
     panelOpen: 'i-heroicons-chevron-right',
     plus: 'i-heroicons-plus',
+    regex: 'i-heroicons-code-bracket',
     reload: 'i-heroicons-arrow-uturn-left',
+    replace: 'i-heroicons-arrow-path',
+    replaceAll: 'i-heroicons-arrow-path-rounded-square',
     search: 'i-heroicons-magnifying-glass',
     stop: 'i-heroicons-stop',
     star: 'i-heroicons-star',
@@ -100,13 +109,15 @@ export const themeIcons = {
     tip: 'i-heroicons-light-bulb',
     trash: 'i-heroicons-trash',
     upload: 'i-heroicons-arrow-up-tray',
-    warning: 'i-heroicons-exclamation-triangle'
+    warning: 'i-heroicons-exclamation-triangle',
+    wholeWord: 'i-heroicons-bars-2'
   },
   iconoir: {
     arrowDown: 'i-iconoir-arrow-down',
     arrowLeft: 'i-iconoir-arrow-left',
     arrowRight: 'i-iconoir-arrow-right',
     arrowUp: 'i-iconoir-arrow-up',
+    caseSensitive: 'i-iconoir-text-size',
     caution: 'i-iconoir-warning-circle',
     check: 'i-iconoir-check',
     chevronDoubleLeft: 'i-iconoir-fast-arrow-left',
@@ -140,7 +151,10 @@ export const themeIcons = {
     panelClose: 'i-iconoir-sidebar-collapse',
     panelOpen: 'i-iconoir-sidebar-expand',
     plus: 'i-iconoir-plus',
+    regex: 'i-iconoir-code',
     reload: 'i-iconoir-undo',
+    replace: 'i-iconoir-refresh',
+    replaceAll: 'i-iconoir-refresh-double',
     search: 'i-iconoir-search',
     stop: 'i-iconoir-square',
     star: 'i-iconoir-star',
@@ -149,13 +163,15 @@ export const themeIcons = {
     tip: 'i-iconoir-light-bulb',
     trash: 'i-iconoir-trash',
     upload: 'i-iconoir-upload',
-    warning: 'i-iconoir-warning-triangle'
+    warning: 'i-iconoir-warning-triangle',
+    wholeWord: 'i-iconoir-text'
   },
   material: {
     arrowDown: 'i-material-symbols-arrow-downward-rounded',
     arrowLeft: 'i-material-symbols-arrow-back-rounded',
     arrowRight: 'i-material-symbols-arrow-forward-rounded',
     arrowUp: 'i-material-symbols-arrow-upward-rounded',
+    caseSensitive: 'i-material-symbols-match-case-rounded',
     caution: 'i-material-symbols-error-outline-rounded',
     check: 'i-material-symbols-check-rounded',
     chevronDoubleLeft: 'i-material-symbols-keyboard-double-arrow-left-rounded',
@@ -189,7 +205,10 @@ export const themeIcons = {
     panelClose: 'i-material-symbols-left-panel-close-outline-rounded',
     panelOpen: 'i-material-symbols-left-panel-open-outline-rounded',
     plus: 'i-material-symbols-add-rounded',
+    regex: 'i-material-symbols-regular-expression-rounded',
     reload: 'i-material-symbols-refresh-rounded',
+    replace: 'i-material-symbols-find-replace-rounded',
+    replaceAll: 'i-material-symbols-find-replace-rounded',
     search: 'i-material-symbols-search-rounded',
     stop: 'i-material-symbols-stop-outline-rounded',
     star: 'i-material-symbols-star-outline-rounded',
@@ -198,13 +217,15 @@ export const themeIcons = {
     tip: 'i-material-symbols-lightbulb-outline-rounded',
     trash: 'i-material-symbols-delete-outline-rounded',
     upload: 'i-material-symbols-upload-rounded',
-    warning: 'i-material-symbols-warning-outline-rounded'
+    warning: 'i-material-symbols-warning-outline-rounded',
+    wholeWord: 'i-material-symbols-match-word-rounded'
   },
   phosphor: {
     arrowDown: 'i-ph-arrow-down',
     arrowLeft: 'i-ph-arrow-left',
     arrowRight: 'i-ph-arrow-right',
     arrowUp: 'i-ph-arrow-up',
+    caseSensitive: 'i-ph-text-aa',
     caution: 'i-ph-warning-circle',
     check: 'i-ph-check',
     chevronDoubleLeft: 'i-ph-caret-double-left',
@@ -236,7 +257,10 @@ export const themeIcons = {
     panelClose: 'i-ph-caret-left',
     panelOpen: 'i-ph-caret-right',
     plus: 'i-ph-plus',
+    regex: 'i-ph-brackets-curly',
     reload: 'i-ph-arrow-counter-clockwise',
+    replace: 'i-ph-arrows-clockwise',
+    replaceAll: 'i-ph-arrows-counter-clockwise',
     search: 'i-ph-magnifying-glass',
     stop: 'i-ph-square',
     star: 'i-ph-star',
@@ -245,13 +269,15 @@ export const themeIcons = {
     tip: 'i-ph-lightbulb',
     trash: 'i-ph-trash',
     upload: 'i-ph-upload',
-    warning: 'i-ph-warning'
+    warning: 'i-ph-warning',
+    wholeWord: 'i-ph-text-t'
   },
   remix: {
     arrowDown: 'i-ri-arrow-down-line',
     arrowLeft: 'i-ri-arrow-left-line',
     arrowRight: 'i-ri-arrow-right-line',
     arrowUp: 'i-ri-arrow-up-line',
+    caseSensitive: 'i-ri-font-size',
     caution: 'i-ri-error-warning-line',
     check: 'i-ri-check-line',
     chevronDoubleLeft: 'i-ri-arrow-left-double-line',
@@ -283,7 +309,10 @@ export const themeIcons = {
     panelClose: 'i-ri-sidebar-fold-line',
     panelOpen: 'i-ri-sidebar-unfold-line',
     plus: 'i-ri-add-line',
+    regex: 'i-ri-code-s-slash-line',
     reload: 'i-ri-arrow-go-back-line',
+    replace: 'i-ri-swap-line',
+    replaceAll: 'i-ri-swap-2-line',
     search: 'i-ri-search-line',
     stop: 'i-ri-stop-line',
     star: 'i-ri-star-line',
@@ -292,13 +321,15 @@ export const themeIcons = {
     tip: 'i-ri-lightbulb-line',
     trash: 'i-ri-delete-bin-line',
     upload: 'i-ri-upload-2-line',
-    warning: 'i-ri-alert-line'
+    warning: 'i-ri-alert-line',
+    wholeWord: 'i-ri-text'
   },
   tabler: {
     arrowDown: 'i-tabler-arrow-down',
     arrowLeft: 'i-tabler-arrow-left',
     arrowRight: 'i-tabler-arrow-right',
     arrowUp: 'i-tabler-arrow-up',
+    caseSensitive: 'i-tabler-letter-case',
     caution: 'i-tabler-alert-square-rounded',
     check: 'i-tabler-check',
     chevronDoubleLeft: 'i-tabler-chevrons-left',
@@ -330,7 +361,10 @@ export const themeIcons = {
     panelClose: 'i-tabler-layout-sidebar-left-collapse',
     panelOpen: 'i-tabler-layout-sidebar-left-expand',
     plus: 'i-tabler-plus',
+    regex: 'i-tabler-regex',
     reload: 'i-tabler-reload',
+    replace: 'i-tabler-replace',
+    replaceAll: 'i-tabler-replace-filled',
     search: 'i-tabler-search',
     stop: 'i-tabler-player-stop',
     star: 'i-tabler-star',
@@ -339,7 +373,8 @@ export const themeIcons = {
     tip: 'i-tabler-bulb',
     trash: 'i-tabler-trash',
     upload: 'i-tabler-upload',
-    warning: 'i-tabler-alert-triangle'
+    warning: 'i-tabler-alert-triangle',
+    wholeWord: 'i-tabler-abc'
   },
   // 8-bit pixel-art set. Pixelarticons is a functional
   // UI pack (unlike streamline-pixel, which has no arrows/chevrons), but it
@@ -349,6 +384,7 @@ export const themeIcons = {
     arrowLeft: 'i-pixelarticons-arrow-left',
     arrowRight: 'i-pixelarticons-arrow-right',
     arrowUp: 'i-pixelarticons-arrow-up',
+    caseSensitive: 'i-pixelarticons-edit',
     caution: 'i-pixelarticons-square-alert',
     check: 'i-pixelarticons-check',
     // No double-chevron glyph, single directional chevrons keep prev/next
@@ -384,7 +420,10 @@ export const themeIcons = {
     panelClose: 'i-pixelarticons-chevron-left',
     panelOpen: 'i-pixelarticons-chevron-right',
     plus: 'i-pixelarticons-plus',
+    regex: 'i-pixelarticons-code',
     reload: 'i-pixelarticons-reload',
+    replace: 'i-pixelarticons-reload',
+    replaceAll: 'i-pixelarticons-sync',
     search: 'i-pixelarticons-search',
     // No dedicated stop glyph, a filled square is the universal stop mark.
     stop: 'i-pixelarticons-square',
@@ -394,7 +433,8 @@ export const themeIcons = {
     tip: 'i-pixelarticons-lightbulb',
     trash: 'i-pixelarticons-trash',
     upload: 'i-pixelarticons-upload',
-    warning: 'i-pixelarticons-warning-diamond'
+    warning: 'i-pixelarticons-warning-diamond',
+    wholeWord: 'i-pixelarticons-text-wrap'
   }
 } satisfies Record<string, typeof lucide>
 

@@ -60,6 +60,19 @@ export default defineLocale<Messages>({
       thought: 'Подумав',
       thoughtFor: 'Думав {duration}'
     },
+    codeEditor: {
+      search: 'Пошук…',
+      replace: 'Замінити…',
+      matchCase: 'Враховувати регістр',
+      regexp: 'Використовувати регулярний вираз',
+      wholeWord: 'Слово цілком',
+      prev: 'Попередній збіг',
+      next: 'Наступний збіг',
+      selectAll: 'Вибрати всі збіги',
+      replaceNext: 'Замінити',
+      replaceAll: 'Замінити все',
+      close: 'Закрити'
+    },
     colorMode: {
       dark: 'Темна',
       light: 'Світла',

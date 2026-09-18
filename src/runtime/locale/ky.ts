@@ -60,6 +60,19 @@ export default defineLocale<Messages>({
       thought: 'Ойлонду',
       thoughtFor: '{duration} ойлонду'
     },
+    codeEditor: {
+      search: 'Издөө…',
+      replace: 'Алмаштыруу…',
+      matchCase: 'Регистрди эске алуу',
+      regexp: 'Регулярдуу туюнтманы колдонуу',
+      wholeWord: 'Бүтүн сөз',
+      prev: 'Мурунку дал келүү',
+      next: 'Кийинки дал келүү',
+      selectAll: 'Бардык дал келүүлөрдү тандоо',
+      replaceNext: 'Алмаштыруу',
+      replaceAll: 'Баарын алмаштыруу',
+      close: 'Жабуу'
+    },
     colorMode: {
       dark: 'Караңгы',
       light: 'Жарык',

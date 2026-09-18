@@ -60,6 +60,19 @@ export default defineLocale<Messages>({
       thought: 'Tænkte',
       thoughtFor: 'Tænkte i {duration}'
     },
+    codeEditor: {
+      search: 'Søg…',
+      replace: 'Erstat…',
+      matchCase: 'Forskel på store og små bogstaver',
+      regexp: 'Brug regulært udtryk',
+      wholeWord: 'Hele ord',
+      prev: 'Forrige match',
+      next: 'Næste match',
+      selectAll: 'Vælg alle match',
+      replaceNext: 'Erstat',
+      replaceAll: 'Erstat alle',
+      close: 'Luk'
+    },
     colorMode: {
       dark: 'Mørk',
       light: 'Lys',

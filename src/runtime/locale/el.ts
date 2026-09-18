@@ -60,6 +60,19 @@ export default defineLocale<Messages>({
       thought: 'Σκέφτηκε',
       thoughtFor: 'Σκέφτηκε για {duration}'
     },
+    codeEditor: {
+      search: 'Αναζήτηση…',
+      replace: 'Αντικατάσταση…',
+      matchCase: 'Ταίριασμα πεζών/κεφαλαίων',
+      regexp: 'Χρήση κανονικής έκφρασης',
+      wholeWord: 'Ολόκληρη λέξη',
+      prev: 'Προηγούμενη αντιστοιχία',
+      next: 'Επόμενη αντιστοιχία',
+      selectAll: 'Επιλογή όλων των αντιστοιχιών',
+      replaceNext: 'Αντικατάσταση',
+      replaceAll: 'Αντικατάσταση όλων',
+      close: 'Κλείσιμο'
+    },
     colorMode: {
       dark: 'Σκοτεινό',
       light: 'Φωτεινό',

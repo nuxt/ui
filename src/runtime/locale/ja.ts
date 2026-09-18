@@ -60,6 +60,19 @@ export default defineLocale<Messages>({
       thought: '考えました',
       thoughtFor: '{duration}考えました'
     },
+    codeEditor: {
+      search: '検索…',
+      replace: '置換…',
+      matchCase: '大文字と小文字を区別',
+      regexp: '正規表現を使用',
+      wholeWord: '単語単位',
+      prev: '前の一致',
+      next: '次の一致',
+      selectAll: 'すべての一致を選択',
+      replaceNext: '置換',
+      replaceAll: 'すべて置換',
+      close: '閉じる'
+    },
     colorMode: {
       dark: 'ダーク',
       light: 'ライト',

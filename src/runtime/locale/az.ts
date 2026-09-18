@@ -60,6 +60,19 @@ export default defineLocale<Messages>({
       thought: 'Düşündü',
       thoughtFor: '{duration} düşündü'
     },
+    codeEditor: {
+      search: 'Axtar…',
+      replace: 'Əvəz et…',
+      matchCase: 'Böyük/kiçik hərfə həssas',
+      regexp: 'Müntəzəm ifadədən istifadə et',
+      wholeWord: 'Bütöv söz',
+      prev: 'Əvvəlki uyğunluq',
+      next: 'Növbəti uyğunluq',
+      selectAll: 'Bütün uyğunluqları seç',
+      replaceNext: 'Əvəz et',
+      replaceAll: 'Hamısını əvəz et',
+      close: 'Bağla'
+    },
     colorMode: {
       dark: 'Qaranlıq',
       light: 'İşıqlı',

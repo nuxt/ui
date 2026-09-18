@@ -60,6 +60,19 @@ export default defineLocale<Messages>({
       thought: '생각했습니다',
       thoughtFor: '{duration} 동안 생각했습니다'
     },
+    codeEditor: {
+      search: '검색…',
+      replace: '바꾸기…',
+      matchCase: '대소문자 구분',
+      regexp: '정규식 사용',
+      wholeWord: '단어 단위',
+      prev: '이전 일치',
+      next: '다음 일치',
+      selectAll: '모든 일치 선택',
+      replaceNext: '바꾸기',
+      replaceAll: '모두 바꾸기',
+      close: '닫기'
+    },
     colorMode: {
       dark: '다크',
       light: '라이트',

@@ -60,6 +60,19 @@ export default defineLocale<Messages>({
       thought: 'Myślenie zakończone',
       thoughtFor: 'Myślenie zajęło {duration}'
     },
+    codeEditor: {
+      search: 'Szukaj…',
+      replace: 'Zamień…',
+      matchCase: 'Uwzględnij wielkość liter',
+      regexp: 'Użyj wyrażenia regularnego',
+      wholeWord: 'Całe słowo',
+      prev: 'Poprzednie dopasowanie',
+      next: 'Następne dopasowanie',
+      selectAll: 'Zaznacz wszystkie dopasowania',
+      replaceNext: 'Zamień',
+      replaceAll: 'Zamień wszystko',
+      close: 'Zamknij'
+    },
     colorMode: {
       dark: 'Ciemny',
       light: 'Jasny',

@@ -61,6 +61,19 @@ export default defineLocale<Messages>({
       thought: 'فكّر',
       thoughtFor: 'فكّر لمدة {duration}'
     },
+    codeEditor: {
+      search: 'بحث…',
+      replace: 'استبدال…',
+      matchCase: 'مطابقة حالة الأحرف',
+      regexp: 'استخدام تعبير نمطي',
+      wholeWord: 'كلمة كاملة',
+      prev: 'التطابق السابق',
+      next: 'التطابق التالي',
+      selectAll: 'تحديد كل التطابقات',
+      replaceNext: 'استبدال',
+      replaceAll: 'استبدال الكل',
+      close: 'إغلاق'
+    },
     colorMode: {
       dark: 'داكن',
       light: 'فاتح',

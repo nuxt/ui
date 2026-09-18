@@ -60,6 +60,19 @@ export default defineLocale<Messages>({
       thought: '已思考',
       thoughtFor: '思考了 {duration}'
     },
+    codeEditor: {
+      search: '搜尋…',
+      replace: '取代…',
+      matchCase: '區分大小寫',
+      regexp: '使用正規表示式',
+      wholeWord: '全字比對',
+      prev: '上一個相符項目',
+      next: '下一個相符項目',
+      selectAll: '選取所有相符項目',
+      replaceNext: '取代',
+      replaceAll: '全部取代',
+      close: '關閉'
+    },
     colorMode: {
       dark: '深色',
       light: '淺色',

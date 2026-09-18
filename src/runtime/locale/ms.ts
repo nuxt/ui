@@ -60,6 +60,19 @@ export default defineLocale<Messages>({
       thought: 'Telah berfikir',
       thoughtFor: 'Berfikir selama {duration}'
     },
+    codeEditor: {
+      search: 'Cari…',
+      replace: 'Ganti…',
+      matchCase: 'Padankan huruf besar/kecil',
+      regexp: 'Gunakan ungkapan biasa',
+      wholeWord: 'Seluruh perkataan',
+      prev: 'Padanan sebelumnya',
+      next: 'Padanan seterusnya',
+      selectAll: 'Pilih semua padanan',
+      replaceNext: 'Ganti',
+      replaceAll: 'Ganti semua',
+      close: 'Tutup'
+    },
     colorMode: {
       dark: 'Gelap',
       light: 'Cerah',

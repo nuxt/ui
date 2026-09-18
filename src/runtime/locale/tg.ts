@@ -60,6 +60,19 @@ export default defineLocale<Messages>({
       thought: 'Фикр кард',
       thoughtFor: '{duration} фикр кард'
     },
+    codeEditor: {
+      search: 'Ҷустуҷӯ…',
+      replace: 'Иваз кардан…',
+      matchCase: 'Ба назар гирифтани регистр',
+      regexp: 'Истифодаи ифодаи муқаррарӣ',
+      wholeWord: 'Калимаи пурра',
+      prev: 'Мувофиқати қаблӣ',
+      next: 'Мувофиқати навбатӣ',
+      selectAll: 'Интихоби ҳамаи мувофиқатҳо',
+      replaceNext: 'Иваз кардан',
+      replaceAll: 'Ҳамаро иваз кардан',
+      close: 'Бастан'
+    },
     colorMode: {
       dark: 'Торик',
       light: 'Рӯшно',

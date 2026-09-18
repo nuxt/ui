@@ -60,6 +60,19 @@ export default defineLocale<Messages>({
       thought: 'Бодсон',
       thoughtFor: '{duration} бодсон'
     },
+    codeEditor: {
+      search: 'Хайх…',
+      replace: 'Солих…',
+      matchCase: 'Том жижиг үсэг ялгах',
+      regexp: 'Тогтмол илэрхийлэл ашиглах',
+      wholeWord: 'Бүтэн үг',
+      prev: 'Өмнөх тохирол',
+      next: 'Дараагийн тохирол',
+      selectAll: 'Бүх тохирлыг сонгох',
+      replaceNext: 'Солих',
+      replaceAll: 'Бүгдийг солих',
+      close: 'Хаах'
+    },
     colorMode: {
       dark: 'Хар',
       light: 'Цагаан',

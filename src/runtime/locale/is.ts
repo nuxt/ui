@@ -60,6 +60,19 @@ export default defineLocale<Messages>({
       thought: 'Hugsaði',
       thoughtFor: 'Hugsaði í {duration}'
     },
+    codeEditor: {
+      search: 'Leita…',
+      replace: 'Skipta út…',
+      matchCase: 'Greina há- og lágstafi',
+      regexp: 'Nota reglulega segð',
+      wholeWord: 'Heilt orð',
+      prev: 'Fyrri samsvörun',
+      next: 'Næsta samsvörun',
+      selectAll: 'Velja allar samsvaranir',
+      replaceNext: 'Skipta út',
+      replaceAll: 'Skipta öllu út',
+      close: 'Loka'
+    },
     colorMode: {
       dark: 'Dökkt',
       light: 'Ljóst',
