@@ -120,7 +120,7 @@ const appConfig = useAppConfig() as ScrollArea['AppConfig']
 const isExternalScroll = computed(() => typeof props.virtualize === 'object' && !!props.virtualize.getScrollElement)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.scrollArea || {}) })({
+const ui = computed(() => tv(theme, appConfig.ui?.scrollArea)({
   orientation: props.orientation,
   externalScroll: isExternalScroll.value
 }))

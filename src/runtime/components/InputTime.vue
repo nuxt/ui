@@ -123,7 +123,7 @@ const size = computed(() => fieldGroupSize.value ?? formFieldSize.value ?? props
 const disabled = computed(() => formFieldDisabled.value ?? props.disabled)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.inputTime || {}) })({
+const ui = computed(() => tv(theme, appConfig.ui?.inputTime)({
   color: color.value,
   variant: props.variant,
   size: size.value,

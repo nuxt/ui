@@ -52,7 +52,7 @@ const { copy, copied } = useClipboard()
 const appConfig = useAppConfig() as ProsePrompt['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.prose?.prompt || {}) })())
+const ui = computed(() => tv(theme, appConfig.ui?.prose?.prompt)())
 
 // eslint-disable-next-line vue/no-dupe-keys
 const actions = computed(() => [...new Set(['copy', ...props.actions])])

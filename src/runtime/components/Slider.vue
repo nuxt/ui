@@ -108,7 +108,7 @@ const thumbs = computed(() => sliderValue.value?.length ?? 1)
 const thumbAttrs = ['aria-label', 'aria-labelledby', 'aria-describedby', 'aria-valuetext', 'aria-invalid', 'aria-errormessage']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.slider || {}) })({
+const ui = computed(() => tv(theme, appConfig.ui?.slider)({
   disabled: disabled.value,
   size: size.value,
   color: color.value,

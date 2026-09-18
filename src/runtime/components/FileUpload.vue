@@ -215,7 +215,7 @@ const position = computed(() => {
 })
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.fileUpload || {}) })({
+const ui = computed(() => tv(theme, appConfig.ui?.fileUpload)({
   dropzone: props.dropzone,
   interactive: props.interactive,
   color: color.value,

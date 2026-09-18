@@ -94,7 +94,7 @@ const appConfig = useAppConfig() as Splitter['AppConfig']
 const rootProps = useForwardProps(reactivePick(props, 'as', 'id', 'autoSaveId', 'keyboardResizeBy', 'storage'))
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.splitter || {}) })({
+const ui = computed(() => tv(theme, appConfig.ui?.splitter)({
   orientation: props.orientation
 }))
 

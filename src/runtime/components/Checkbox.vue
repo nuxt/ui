@@ -110,7 +110,7 @@ const forwardedAttrs = computed(() => {
 })
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.checkbox || {}) })({
+const ui = computed(() => tv(theme, appConfig.ui?.checkbox)({
   size: size.value,
   color: color.value,
   variant: props.variant,
