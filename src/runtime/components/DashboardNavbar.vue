@@ -81,7 +81,7 @@ const [DefineToggleTemplate, ReuseToggleTemplate] = createReusableTemplate()
 const as = computed(() => resolveAs(props.as, { root: 'div', title: 'h1' }))
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.dashboardNavbar || {}) })())
+const ui = computed(() => tv(theme, appConfig.ui?.dashboardNavbar)())
 </script>
 
 <template>

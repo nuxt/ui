@@ -5,7 +5,7 @@ import type { VariantProps } from '../../src/runtime/types/tv'
 // Cast to a permissive local signature: the strongly-typed `tv` is what
 // components rely on, whereas these tests exercise the engine at runtime with
 // inline themes and the `(defaults) => classes` replacer form.
-const tvt = tv as unknown as (config?: any) => (variants?: any) => {
+const tvt = tv as unknown as (theme: any, overrides?: any) => (props?: any) => {
   base: (props?: any) => string
   label: (props?: any) => string
 }
@@ -21,9 +21,9 @@ describe('tv class replace', () => {
     defaultVariants: { color: 'primary', size: 'md' }
   }
 
-  const build = () => tvt({ extend: tvt(theme) })({ color: 'primary', size: 'md' })
-  // Mirrors a component config with `app.config.ui` slot overrides spread in.
-  const buildWith = (slots: any) => tvt({ extend: theme, slots })({ color: 'primary', size: 'md' })
+  const build = () => tvt(theme)({ color: 'primary', size: 'md' })
+  // Mirrors a component with `app.config.ui` slot overrides.
+  const buildWith = (slots: any) => tvt(theme, { slots })({ color: 'primary', size: 'md' })
 
   it('keeps merging plain string classes (no regression)', () => {
     const ui = build()
@@ -34,7 +34,7 @@ describe('tv class replace', () => {
     expect(base).not.toContain('text-sm')
   })
 
-  it('keeps `extend` working through the wrapper (full chain resolves)', () => {
+  it('resolves the full chain', () => {
     const base = build().base()
     expect(base).toContain('inline-flex')
     expect(base).toContain('bg-primary')
@@ -93,22 +93,12 @@ describe('tv class replace', () => {
   })
 
   it('hands an empty chain to a call-time replacer as an empty string', () => {
-    const ui = tvt({ extend: { slots: { base: '', label: 'truncate' } } })()
+    const ui = tvt({ slots: { base: '', label: 'truncate' } })()
     expect(ui.base({ class: (defaults: string) => `${defaults}text-xl` })).toBe('text-xl')
   })
 
   it('keeps a construction-time replacer merging classes passed at call time', () => {
     expect(buildWith({ label: () => 'text-xl' }).label({ class: 'font-bold' })).toBe('text-xl font-bold')
-  })
-
-  it('resolves a construction-time replacer when `extend` is a tv result', () => {
-    // Components pass the generated theme object, but `extend` also accepts a
-    // `tv()` return, which exposes the same `slots` / `base` properties.
-    const ui = tvt({ extend: tvt(theme), slots: { base: () => 'block' } })({ color: 'primary', size: 'md' })
-    const base = ui.base()
-    expect(base).not.toContain('inline-flex')
-    expect(base).toContain('block')
-    expect(base).toContain('bg-primary')
   })
 
   it('lets a call-time `:ui` replacer win over an `app.config.ui` one', () => {
@@ -129,8 +119,8 @@ describe('tv class replace', () => {
 describe('tv class replace (slotless component)', () => {
   // A slotless theme has only a `base` and no `slots`, so `tv()(props)` returns
   // a string rather than an object of slot functions (e.g. the Container theme).
-  const tvBase = tv as unknown as (config?: any) => (props?: any) => string
-  const build = () => tvBase({ extend: tvBase({ base: 'inline-flex rounded-md px-4' }) })
+  const tvBase = tv as unknown as (theme: any, overrides?: any) => (props?: any) => string
+  const build = () => tvBase({ base: 'inline-flex rounded-md px-4' })
 
   it('still merges plain classes', () => {
     const result = build()({ class: 'font-bold' })
@@ -157,7 +147,7 @@ describe('tv class replace (slotless component)', () => {
   })
 
   it('applies a construction-time `base` replacer from `app.config.ui`', () => {
-    const ui = tvBase({ extend: tvBase({ base: 'inline-flex px-4' }), base: () => 'block' })
+    const ui = tvBase({ base: 'inline-flex px-4' }, { base: () => 'block' })
     expect(ui()).toBe('block')
   })
 })
@@ -173,7 +163,7 @@ describe('tv slot memoization', () => {
     }
   }
 
-  const build = () => tvt({ extend: tvt(theme) })()
+  const build = () => tvt(theme)()
 
   // Counts how often the `active` variant is read. Building the cache key reads
   // it a fixed number of times per call, so a call served from the cache reads
@@ -205,7 +195,7 @@ describe('tv slot memoization', () => {
   it('caches a slot whose chain resolves to no classes', () => {
     // `tv` returns `undefined` for such a slot rather than `''`, so it can't
     // double as the "not cached yet" sentinel (`navigation-menu` has two).
-    const ui = tvt({ extend: tvt({ slots: { base: '' }, variants: { active: { true: { base: 'font-bold' }, false: {} } } }) })()
+    const ui = tvt({ slots: { base: '' }, variants: { active: { true: { base: 'font-bold' }, false: {} } } })()
     const [props, counter] = countingProps(false)
 
     expect(ui.base(props)).toBeUndefined()
@@ -245,7 +235,7 @@ describe('tv slot memoization', () => {
   })
 
   it('does not share entries between NaN and null variant values', () => {
-    const ui = tvt({ extend: tvt(theme), defaultVariants: { active: true } })()
+    const ui = tvt(theme, { defaultVariants: { active: true } })()
     // Both serialize to `"null"`, but tv resolves `null` to the default variant
     // while NaN falls through the `key || "false"` lookup.
     expect(ui.base({ active: Number.NaN })).toContain('font-light')
@@ -312,13 +302,12 @@ describe('tv slot memoization', () => {
   it('does not share an entry between a `null` slot prop and different invocation props', () => {
     // A `null` slot prop falls through to the invocation prop, and the cache is
     // shared by every invocation of the same theme, so the key has to carry it.
-    // Only a plain object `extend` takes the shared path components use.
     const shared = { slots: { base: 'inline-flex' }, variants: { size: { sm: { base: 'text-sm' }, lg: { base: 'text-lg' } } } }
-    expect(tvt({ extend: shared })({ size: 'sm' }).base({ size: null })).toContain('text-sm')
-    expect(tvt({ extend: shared })({ size: 'lg' }).base({ size: null })).toContain('text-lg')
+    expect(tvt(shared)({ size: 'sm' }).base({ size: null })).toContain('text-sm')
+    expect(tvt(shared)({ size: 'lg' }).base({ size: null })).toContain('text-lg')
     // The other direction: `null` at the invocation with the key absent from
     // the slot call resolves to nothing, not to the entry above.
-    expect(tvt({ extend: shared })({ size: null }).base({})).not.toContain('text-')
+    expect(tvt(shared)({ size: null }).base({})).not.toContain('text-')
   })
 
   it('does not confuse a `null` slot prop with an absent one for compound matching', () => {
@@ -328,8 +317,8 @@ describe('tv slot memoization', () => {
       compoundVariants: [{ size: 'sm', class: { base: 'gap-1' } }]
     }
     // Present as `null`: the variant falls through to `sm`, the compound sees `null`.
-    expect(tvt({ extend: shared })({ size: 'sm' }).base({ size: null })).toBe('inline-flex text-sm')
-    expect(tvt({ extend: shared })({ size: 'sm' }).base({})).toBe('inline-flex text-sm gap-1')
+    expect(tvt(shared)({ size: 'sm' }).base({ size: null })).toBe('inline-flex text-sm')
+    expect(tvt(shared)({ size: 'sm' }).base({})).toBe('inline-flex text-sm gap-1')
   })
 
   it('does not confuse a `null` slot prop with an `undefined` one for an array expectation', () => {
@@ -340,9 +329,9 @@ describe('tv slot memoization', () => {
       variants: { size: { sm: { base: 'text-sm' } } },
       compoundVariants: [{ size: [null], class: { base: 'gap-1' } }]
     }
-    expect(tvt({ extend: shared })().base({ size: null })).toBe('inline-flex gap-1')
-    expect(tvt({ extend: shared })().base({ size: undefined })).toBe('inline-flex')
-    expect(tvt({ extend: shared })().base({ size: null })).toBe('inline-flex gap-1')
+    expect(tvt(shared)().base({ size: null })).toBe('inline-flex gap-1')
+    expect(tvt(shared)().base({ size: undefined })).toBe('inline-flex')
+    expect(tvt(shared)().base({ size: null })).toBe('inline-flex gap-1')
   })
 
   it('keys values that contain the separators', () => {
@@ -354,14 +343,14 @@ describe('tv slot memoization', () => {
     expect(ui.base({ class: ['a,"b'] })).not.toContain('a b')
 
     const shared = { slots: { base: 'x' }, variants: { a: { 'p-1': { base: 'A1' } }, b: { 'p-2': { base: 'B2' }, 'p-2;"p-3': { base: 'BX' } } } }
-    expect(tvt({ extend: shared })({ a: 'p-1', b: 'p-2;"p-3' }).base()).toBe('x A1 BX')
-    expect(tvt({ extend: shared })({ a: 'p-1;"p-2', b: 'p-3' }).base()).toBe('x')
+    expect(tvt(shared)({ a: 'p-1', b: 'p-2;"p-3' }).base()).toBe('x A1 BX')
+    expect(tvt(shared)({ a: 'p-1;"p-2', b: 'p-3' }).base()).toBe('x')
   })
 
   it('does not confuse a value ending in `!` with an undefined slot prop', () => {
     const shared = { slots: { base: 'x' }, variants: { size: { 'md': { base: 'text-md' }, 'md!': { base: 'BANG' } } } }
-    expect(tvt({ extend: shared })({ size: 'md' }).base({ size: undefined })).toBe('x text-md')
-    expect(tvt({ extend: shared })({ size: 'md!' }).base({})).toBe('x BANG')
+    expect(tvt(shared)({ size: 'md' }).base({ size: undefined })).toBe('x text-md')
+    expect(tvt(shared)({ size: 'md!' }).base({})).toBe('x BANG')
   })
 
   it('accepts `null` as the slot argument', () => {
@@ -381,7 +370,7 @@ describe('tv slot memoization', () => {
       variants: { active: { true: { base: 'font-bold' } } },
       compoundVariants: [{ active: true, class: { base: 'ring' } }]
     }
-    expect(tvt({ extend: shared })().base(Object.create({ active: true }))).toBe('x font-bold ring')
+    expect(tvt(shared)().base(Object.create({ active: true }))).toBe('x font-bold ring')
   })
 })
 
@@ -399,41 +388,41 @@ describe('tv variant merging', () => {
   it('reads a plain override over a per-slot value as its `base`', () => {
     // `app.config.ui.<c>.variants.size.md = 'text-lg'` over a theme's
     // `{ base, label }` used to resolve to `"[object Object] text-lg"`.
-    const ui = tvt({ extend: theme, variants: { size: { md: 'text-lg' } } })()
+    const ui = tvt(theme, { variants: { size: { md: 'text-lg' } } })()
     expect(ui.base()).toBe('inline-flex text-lg')
     expect(ui.label()).toBe('truncate leading-5')
   })
 
   it('reads an array override over a per-slot value as its `base`', () => {
     // The array form used to leak the per-slot object's keys as classes.
-    const ui = tvt({ extend: theme, variants: { size: { md: ['text-lg'] } } })()
+    const ui = tvt(theme, { variants: { size: { md: ['text-lg'] } } })()
     expect(ui.base()).toBe('inline-flex text-lg')
     expect(ui.base()).not.toContain('label')
   })
 
   it('merges two per-slot values slot by slot', () => {
-    const ui = tvt({ extend: theme, variants: { size: { md: { label: 'font-medium' } } } })()
+    const ui = tvt(theme, { variants: { size: { md: { label: 'font-medium' } } } })()
     expect(ui.base()).toBe('inline-flex text-base')
     expect(ui.label()).toBe('truncate leading-5 font-medium')
   })
 
   it('applies an array variant value to `base` in a slotted theme', () => {
-    const ui = tvt({ extend: { slots: { base: 'x', label: 'y' }, variants: { size: { sm: ['text-sm', 'p-1'] } } } })({ size: 'sm' })
+    const ui = tvt({ slots: { base: 'x', label: 'y' }, variants: { size: { sm: ['text-sm', 'p-1'] } } })({ size: 'sm' })
     expect(ui.base()).toBe('x text-sm p-1')
     expect(ui.label()).toBe('y')
   })
 
   it('resolves a per-slot value in a slotless theme through `base`', () => {
-    const tvBase = tv as unknown as (config?: any) => (props?: any) => string | undefined
-    const ui = tvBase({ extend: { base: 'x', variants: { size: { md: { base: 'text-md' } } }, defaultVariants: { size: 'md' } } })
+    const tvBase = tv as unknown as (theme: any, overrides?: any) => (props?: any) => string | undefined
+    const ui = tvBase({ base: 'x', variants: { size: { md: { base: 'text-md' } } }, defaultVariants: { size: 'md' } })
     expect(ui()).toBe('x text-md')
     // A value that names no `base` contributes nothing rather than its key.
-    expect(tvBase({ extend: { base: 'x', variants: { size: { md: { label: 'text-md' } } }, defaultVariants: { size: 'md' } } })()).toBe('x')
+    expect(tvBase({ base: 'x', variants: { size: { md: { label: 'text-md' } } }, defaultVariants: { size: 'md' } })()).toBe('x')
   })
 
   it('still matches compound variants on a slotless theme without variants', () => {
-    const tvBase = tv as unknown as (config?: any) => (props?: any) => string | undefined
-    const ui = tvBase({ extend: { base: 'x', compoundVariants: [{ class: 'always' }] } })
+    const tvBase = tv as unknown as (theme: any, overrides?: any) => (props?: any) => string | undefined
+    const ui = tvBase({ base: 'x', compoundVariants: [{ class: 'always' }] })
     expect(ui()).toBe('x always')
   })
 })
@@ -462,7 +451,7 @@ const button = {
 
 describe('tv types', () => {
   it('returns one function per slot', () => {
-    const ui = tv({ extend: tv(button) })()
+    const ui = tv(button)()
 
     expectTypeOf(ui.base()).toEqualTypeOf<string>()
     expectTypeOf(ui.label()).toEqualTypeOf<string>()
@@ -471,28 +460,21 @@ describe('tv types', () => {
   })
 
   it('returns a string for a theme with no slots', () => {
-    const ui = tv({ extend: { base: 'w-full mx-auto' } })()
+    const ui = tv({ base: 'w-full mx-auto' })()
 
     expectTypeOf(ui).toEqualTypeOf<string>()
   })
 
-  it('keeps both sides of an extend chain callable', () => {
-    const ui = tv({ extend: tv(button), slots: { icon: 'size-5' } })()
-
-    expectTypeOf(ui.base()).toEqualTypeOf<string>()
-    expectTypeOf(ui.icon()).toEqualTypeOf<string>()
-  })
-
-  it('keeps the slots when app config overrides are spread in', () => {
+  it('keeps the slots when app config overrides are passed', () => {
     const appConfig = { slots: { base: 'shadow-sm' } }
-    const ui = tv({ extend: tv(button), ...appConfig })()
+    const ui = tv(button, appConfig)()
 
     expectTypeOf(ui.base()).toEqualTypeOf<string>()
     expectTypeOf(ui.label()).toEqualTypeOf<string>()
   })
 
   it('types invocation props from the declared variants', () => {
-    const component = tv({ extend: tv(button) })
+    const component = tv(button)
 
     component({ size: 'sm' })
     // a variant keyed `true` reads as a boolean
@@ -507,7 +489,7 @@ describe('tv types', () => {
 
   it('keeps slot functions for a theme typed with optional slots', () => {
     const loose: { slots?: Record<string, string>, variants?: Record<string, Record<string, { base?: string }>> } = button
-    const ui = tv({ extend: loose })()
+    const ui = tv(loose)()
 
     expectTypeOf(ui).not.toEqualTypeOf<string>()
   })
@@ -520,55 +502,125 @@ describe('tv types', () => {
   })
 
   it('checks defaultVariants against the declared variants', () => {
-    tv({ extend: tv(button), defaultVariants: { size: 'sm', block: false } })
+    tv(button, { defaultVariants: { size: 'sm', block: false } })
     // @ts-expect-error `lg` is not a declared size
-    tv({ extend: tv(button), defaultVariants: { size: 'lg' } })
+    tv(button, { defaultVariants: { size: 'lg' } })
+    // The theme's own defaults too, which inference alone would let through.
+    tv({ variants: { size: { sm: 'text-sm' } }, defaultVariants: { size: 'sm' } })
+    // @ts-expect-error `lg` is not a declared size
+    tv({ variants: { size: { sm: 'text-sm' } }, defaultVariants: { size: 'lg' } })
   })
 
   it('accepts one value or several in compoundVariants', () => {
-    tv({
-      extend: tv(button),
+    tv(button, {
       compoundVariants: [
         { size: 'sm', class: { base: 'gap-1' } },
         { size: ['sm', 'md'], block: true, class: { label: 'sr-only' } }
       ]
     })
+    tv({
+      variants: { size: { sm: 'text-sm', md: 'text-base' } },
+      compoundVariants: [{ size: ['sm', 'md'], class: 'font-medium' }]
+    })
   })
 
-  it('carries the theme metadata that `extend` reads', () => {
-    const component = tv(button)
-
-    expectTypeOf(component.slots).toEqualTypeOf<typeof button.slots>()
-    expectTypeOf(component.variants).toEqualTypeOf<typeof button.variants>()
+  it('lets overrides add variant values and groups, but not slots', () => {
+    tv(button, {
+      variants: {
+        size: { lg: { base: 'text-lg' } },
+        rounded: { true: { base: 'rounded-full' } }
+      }
+    })
+    // @ts-expect-error a slot the theme doesn't declare
+    tv(button, { variants: { size: { sm: { icon: 'size-4' } } } })
+    // @ts-expect-error a slot the theme doesn't declare
+    tv(button, { slots: { icon: 'size-4' } })
   })
 })
 
-describe('tv extend joins', () => {
-  // A slotted theme on top of a slotless one: the extended `base` lands in the
-  // `base` slot, and the own classes come last so they win conflicts, like
-  // every other join. 3.2.2 dropped the extended base in this shape.
-  it('joins a slotless extended base into the `base` slot', () => {
-    const ui = tvt({ extend: { base: 'p-4 text-sm' }, slots: { base: 'p-2', label: 'truncate' } })()
+describe('tv theme joins', () => {
+  // Slots on top of a slotless theme: the theme's `base` lands in the `base`
+  // slot, and the override classes come last so they win conflicts, like every
+  // other join. 3.2.2 dropped the theme's base in this shape.
+  it('joins a slotless theme base into the `base` slot', () => {
+    const ui = tvt({ base: 'p-4 text-sm' }, { slots: { base: 'p-2', label: 'truncate' } })()
     expect(ui.base()).toBe('text-sm p-2')
     expect(ui.label()).toBe('truncate')
   })
 
-  it('joins a slotless extended base under a top-level own base too', () => {
-    const ui = tvt({ extend: { base: 'p-4 text-sm' }, base: 'p-2', slots: { label: 'truncate' } })()
+  it('joins a slotless theme base under a top-level override base too', () => {
+    const ui = tvt({ base: 'p-4 text-sm' }, { base: 'p-2', slots: { label: 'truncate' } })()
     expect(ui.base()).toBe('text-sm p-2')
   })
 
-  it('hands a slotless extended base to a `slots.base` replacer', () => {
+  it('hands a slotless theme base to a `slots.base` replacer', () => {
     let received: string | undefined
-    tvt({ extend: { base: 'p-4' }, slots: { base: (defaults: string) => {
+    tvt({ base: 'p-4' }, { slots: { base: (defaults: string) => {
       received = defaults
       return 'block'
     }, label: '' } })()
     expect(received).toBe('p-4')
   })
 
-  it('keeps a theme with only a base slotless when extending a slotless one', () => {
-    const tvBase = tv as unknown as (config?: any) => (props?: any) => string | undefined
-    expect(tvBase({ extend: { base: 'p-4' }, base: 'p-2' })()).toBe('p-2')
+  it('keeps a theme with only a base slotless under a base override', () => {
+    const tvBase = tv as unknown as (theme: any, overrides?: any) => (props?: any) => string | undefined
+    expect(tvBase({ base: 'p-4' }, { base: 'p-2' })()).toBe('p-2')
+  })
+})
+
+describe('tv spec sharing', () => {
+  const theme = { slots: { base: 'inline-flex', label: 'truncate' }, variants: { active: { true: { base: 'font-bold' } } } }
+
+  // A slot call served from the memo reads its props strictly fewer times than
+  // one that runs the slot, so a hit shows that two builds share one entry.
+  function countingProps() {
+    const counter = { reads: 0 }
+    const props = {
+      get active() {
+        counter.reads++
+        return true
+      }
+    }
+    return [props, counter] as const
+  }
+
+  it('shares one compiled entry between overrides with the same content', () => {
+    const [props, counter] = countingProps()
+    expect(tvt(theme, { slots: { base: 'p-1' } })().base(props)).toBe('inline-flex p-1 font-bold')
+    const miss = counter.reads
+
+    // Nuxt clones the app config per server request, so identity is never shared.
+    counter.reads = 0
+    expect(tvt(theme, { slots: { base: 'p-1' } })().base(props)).toBe('inline-flex p-1 font-bold')
+    expect(counter.reads).toBeLessThan(miss)
+  })
+
+  it('resolves a fresh entry when the overrides change in place', () => {
+    // `updateAppConfig` and app config HMR mutate the same object.
+    const overrides = { slots: { base: 'p-1' } }
+    expect(tvt(theme, overrides)().base()).toBe('inline-flex p-1')
+    overrides.slots.base = 'p-2'
+    expect(tvt(theme, overrides)().base()).toBe('inline-flex p-2')
+  })
+
+  it('keys a replacer in the overrides by identity', () => {
+    // Two replacers with the same source and different captured scope.
+    const replacer = (padding: string) => () => padding
+    expect(tvt(theme, { slots: { base: replacer('p-1') } })().base()).toBe('p-1')
+    expect(tvt(theme, { slots: { base: replacer('p-2') } })().base()).toBe('p-2')
+  })
+
+  it('treats empty overrides like none', () => {
+    const [props, counter] = countingProps()
+    tvt(theme)().base(props)
+    counter.reads = 0
+    tvt(theme)().base(props)
+    const hit = counter.reads
+
+    // Both are served from the theme's own entry.
+    counter.reads = 0
+    expect(tvt(theme, {})().base(props)).toBe('inline-flex font-bold')
+    expect(tvt(theme, null)().base(props)).toBe('inline-flex font-bold')
+    expect(counter.reads).toBe(hit * 2)
   })
 })

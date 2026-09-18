@@ -97,7 +97,7 @@ const { t, code } = useLocale()
 const appConfig = useAppConfig() as ChatReasoning['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.chatReasoning || {}) })({
+const ui = computed(() => tv(theme, appConfig.ui?.chatReasoning)({
   chevron: props.chevron
 }))
 
