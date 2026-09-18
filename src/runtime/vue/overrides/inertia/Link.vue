@@ -96,17 +96,25 @@ const appConfig = useAppConfig() as Link['AppConfig']
 
 const routerLinkProps = useForwardProps(reactiveOmit(props, 'as', 'type', 'disabled', 'active', 'exact', 'activeClass', 'inactiveClass', 'to', 'href', 'raw', 'custom', 'class', 'target', 'rel', 'noRel'))
 
-const ui = computed(() => tv({
-  extend: theme,
-  ...defu({
+// `activeClass` / `inactiveClass` fold into the `active` variant. When neither
+// is set and the config declares no variants, the config goes in as is, so
+// every instance shares one compiled entry.
+const overrides = computed(() => {
+  const config = appConfig.ui?.link
+  if (props.activeClass === undefined && props.inactiveClass === undefined && !config?.variants) {
+    return config
+  }
+  return defu({
     variants: {
       active: {
-        true: mergeClasses(appConfig.ui?.link?.variants?.active?.true, props.activeClass),
-        false: mergeClasses(appConfig.ui?.link?.variants?.active?.false, props.inactiveClass)
+        true: mergeClasses(config?.variants?.active?.true, props.activeClass),
+        false: mergeClasses(config?.variants?.active?.false, props.inactiveClass)
       }
     }
-  }, appConfig.ui?.link || {})
-}))
+  }, config || {})
+})
+
+const ui = computed(() => tv(theme, overrides.value))
 
 const href = computed(() => props.to ?? props.href)
 

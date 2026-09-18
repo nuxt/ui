@@ -160,7 +160,7 @@ const ariaLabel = computed(() => ({
 })[props.status])
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.chatPromptSubmit || {}) })())
+const ui = computed(() => tv(theme, appConfig.ui?.chatPromptSubmit)())
 </script>
 
 <template>

@@ -147,7 +147,7 @@ const textareaProps = useForwardProps(reactivePick(props, 'rows', 'autofocus', '
 const getProxySlots = () => omit(slots, ['header', 'footer', 'body', 'files', 'queue'])
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.chatPrompt || {}) })({
+const ui = computed(() => tv(theme, appConfig.ui?.chatPrompt)({
   color: props.color,
   variant: props.variant
 }))
