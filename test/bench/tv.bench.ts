@@ -1,4 +1,4 @@
-import { test } from 'vitest'
+import { bench, describe } from 'vitest'
 import { tv } from '../../src/runtime/utils/tv'
 import buttonTheme from '#build/ui/button'
 import navigationMenuTheme from '#build/ui/navigation-menu'
@@ -24,6 +24,13 @@ const tableProps = {
   externalScroll: false
 } as const
 
+// What components actually spread beside `extend`: Button always injects its
+// `active` variants (`defu({ variants: { active } }, appConfig.ui?.button)`), the
+// others spread `app.config.ui.<c>` when the user set one.
+const buttonOverrides = { variants: { active: { true: { base: '' }, false: { base: '' } } } }
+const tableOverrides = { slots: { td: 'p-1' } }
+const navigationMenuOverrides = { slots: { link: 'font-medium' } }
+
 // CodSpeed runs these under a simulator that counts instructions, and GitHub's
 // hosted runners alternate between Intel and AMD CPUs whose cache sizes make
 // glibc select different string routines. Anything under ~1ms picks up phantom
@@ -32,87 +39,121 @@ const tableProps = {
 // these benchmarks exist to compare.
 const ITERATIONS = 100
 
-// Building the factory is the expensive step (deep-merges the whole variant
-// matrix, joins every slot, flattens compound variants). `tv` memoizes it per
-// theme and config, so only the cold build below skips the cache.
-test('factory build', async ({ bench }) => {
-  await bench('button (~6 slots)', () => {
+// Building the factory deep-merges the whole variant matrix, joins every slot
+// and flattens compound variants. It happens inside each component's `computed`,
+// so every variant-prop change re-runs it. `{ extend: theme }` alone is the
+// shape the engine shares across rebuilds, so this measures the WeakMap hit;
+// the configured shapes are at the end of the file.
+describe('factory build', () => {
+  bench('button (~6 slots)', () => {
     for (let i = 0; i < ITERATIONS; i++) {
       tv({ extend: buttonTheme })
     }
-  }).run()
+  })
 
-  await bench('table (~13 slots)', () => {
+  bench('table (~13 slots)', () => {
     for (let i = 0; i < ITERATIONS; i++) {
       tv({ extend: tableTheme })
     }
-  }).run()
+  })
 
-  await bench('navigation-menu (~31 slots)', () => {
+  bench('navigation-menu (~31 slots)', () => {
     for (let i = 0; i < ITERATIONS; i++) {
       tv({ extend: navigationMenuTheme })
     }
-  }).run()
-
-  let cold = 0
-  await bench('button (~6 slots, cold build)', () => {
-    for (let i = 0; i < ITERATIONS; i++) {
-      tv({ extend: buttonTheme, base: `cold-${cold++}` })
-    }
-  }).run()
+  })
 })
 
 // Invoking a prebuilt factory is the cheap step — this is all a variant-prop
 // change should cost once the build is hoisted out of the invocation computed.
-test('invocation (prebuilt factory)', async ({ bench }) => {
+describe('invocation (prebuilt factory)', () => {
   const buttonFactory = tv({ extend: buttonTheme })
   const tableFactory = tv({ extend: tableTheme })
 
-  await bench('button', () => {
+  bench('button', () => {
     for (let i = 0; i < ITERATIONS; i++) {
       buttonFactory(buttonProps)
     }
-  }).run()
+  })
 
-  await bench('table', () => {
+  bench('table', () => {
     for (let i = 0; i < ITERATIONS; i++) {
       tableFactory(tableProps)
     }
-  }).run()
+  })
 })
 
 // Build and invoke fused in one call, as every component does today. The gap
 // between this and "invocation (prebuilt factory)" is the overhead saved by
 // hoisting factory construction out of the per-variant-prop recomputation.
-test('build + invoke (current fused pattern)', async ({ bench }) => {
-  await bench('button', () => {
+describe('build + invoke (current fused pattern)', () => {
+  bench('button', () => {
     for (let i = 0; i < ITERATIONS; i++) {
       tv({ extend: buttonTheme })(buttonProps)
     }
-  }).run()
+  })
 
-  await bench('table', () => {
+  bench('table', () => {
     for (let i = 0; i < ITERATIONS; i++) {
       tv({ extend: tableTheme })(tableProps)
     }
-  }).run()
+  })
 })
 
-// Table renders call `ui.td(...)` once per cell through the `wrapSlots` proxy.
-// This models a 100-cell render, exercising the per-access wrapper-closure
-// allocation and the replacer scan on every slot call.
-test('slot invocation', async ({ bench }) => {
+// Table renders call `ui.td(...)` once per cell. This models a 100-cell render,
+// exercising the fingerprint, the cache lookup and the replacer scan on every
+// slot call.
+describe('slot invocation', () => {
   const tableUi = tv({ extend: tableTheme })(tableProps)
 
-  await bench('td x100 (string class)', () => {
+  bench('td x100 (string class)', () => {
     for (let i = 0; i < 100; i++) {
       tableUi.td({ class: 'p-2', pinned: false })
     }
-  }).run()
+  })
 
-  await bench('td x100 (array class)', () => {
+  bench('td x100 (array class)', () => {
     for (let i = 0; i < 100; i++) {
       tableUi.td({ class: [undefined, 'p-2'], pinned: false })
     }
-  }).run()
+  })
+})
+
+// The shapes components actually call, which spread `app.config.ui.<c>` beside
+// `extend` and so resolve a fresh spec on every build. Last on purpose: each
+// iteration leaves a spec, its compiled slots and their caches as garbage, and
+// the CodSpeed runner forces a full GC before every measured run. With that
+// much to collect, V8 ages and flushes the JIT code of whatever is measured
+// next, which showed up as a 20x regression on the slot-invocation benches when
+// these ran before them.
+describe('configured shapes', () => {
+  bench('factory build: button', () => {
+    for (let i = 0; i < ITERATIONS; i++) {
+      tv({ extend: buttonTheme, ...buttonOverrides })
+    }
+  })
+
+  bench('factory build: navigation-menu', () => {
+    for (let i = 0; i < ITERATIONS; i++) {
+      tv({ extend: navigationMenuTheme, ...navigationMenuOverrides })
+    }
+  })
+
+  // Button's real shape: `defu` injects `variants.active` on every build, so it
+  // never hits the shared entry and resolves plus compiles each time.
+  bench('build + invoke: button', () => {
+    for (let i = 0; i < ITERATIONS; i++) {
+      const ui = tv({ extend: buttonTheme, ...buttonOverrides })(buttonProps)
+      ui.base()
+      ui.label()
+    }
+  })
+
+  bench('build + invoke: table', () => {
+    for (let i = 0; i < ITERATIONS; i++) {
+      const ui = tv({ extend: tableTheme, ...tableOverrides })(tableProps)
+      ui.root()
+      ui.td()
+    }
+  })
 })

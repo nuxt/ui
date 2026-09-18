@@ -509,9 +509,6 @@ catalogs:
     tailwind-merge:
       specifier: ^3.7.1
       version: 3.7.1
-    tailwind-variants:
-      specifier: 3.2.2
-      version: 3.2.2
     tailwindcss:
       specifier: ^4.3.5
       version: 4.3.5
@@ -691,9 +688,6 @@ importers:
       tailwind-merge:
         specifier: 'catalog:'
         version: 3.7.1
-      tailwind-variants:
-        specifier: 'catalog:'
-        version: 3.2.2(tailwind-merge@3.7.1)(tailwindcss@4.3.5)
       tailwindcss:
         specifier: 'catalog:'
         version: 4.3.5
@@ -8709,16 +8703,6 @@ packages:
 
   tailwind-merge@3.7.1:
     resolution: {integrity: sha512-v7y4BV4FUlO8exj/4M5UXKeoowDiuugVUg3tkMNIyOUCOHy5xp8+5aWQeXCtZ2491sUV1YPsVeM9EveZ6/xuZQ==}
-
-  tailwind-variants@3.2.2:
-    resolution: {integrity: sha512-Mi4kHeMTLvKlM98XPnK+7HoBPmf4gygdFmqQPaDivc3DpYS6aIY6KiG/PgThrGvii5YZJqRsPz0aPyhoFzmZgg==}
-    engines: {node: '>=16.x', pnpm: '>=7.x'}
-    peerDependencies:
-      tailwind-merge: '>=3.0.0'
-      tailwindcss: '*'
-    peerDependenciesMeta:
-      tailwind-merge:
-        optional: true
 
   tailwindcss@4.3.5:
     resolution: {integrity: sha512-FcQk9BuffmEHJP2G0XmB2SplU1aLTI7j07Kunk+U74Ny+XiWOtzXz9aujFZ/avntw1e2cOv/3PkgzflQ7gX2vQ==}
@@ -19332,12 +19316,6 @@ snapshots:
   tailwind-csstree@0.3.3: {}
 
   tailwind-merge@3.7.1: {}
-
-  tailwind-variants@3.2.2(tailwind-merge@3.7.1)(tailwindcss@4.3.5):
-    dependencies:
-      tailwindcss: 4.3.5
-    optionalDependencies:
-      tailwind-merge: 3.7.1
 
   tailwindcss@4.3.5: {}
 

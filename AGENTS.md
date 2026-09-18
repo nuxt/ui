@@ -4,7 +4,7 @@ This file provides guidance for AI coding agents working on the Nuxt UI reposito
 
 ## Project Overview
 
-Nuxt UI is a component library built on [Reka UI](https://reka-ui.com/), [Tailwind CSS](https://tailwindcss.com/), and [Tailwind Variants](https://www.tailwind-variants.org/). It provides accessible, themeable components for both Nuxt and Vue applications.
+Nuxt UI is a component library built on [Reka UI](https://reka-ui.com/) and [Tailwind CSS](https://tailwindcss.com/), with its own variants engine in `src/runtime/utils/tv.ts`. It provides accessible, themeable components for both Nuxt and Vue applications.
 
 ## v5 Branch
 
@@ -12,7 +12,7 @@ This is the `v5` branch, where breaking changes land. Non-breaking work targets 
 
 Every breaking change must keep three places in sync in the same PR:
 
-- **Migration guide**: add a section under "Changes from v4" in [docs/content/docs/1.getting-started/3.migration.md](docs/content/docs/1.getting-started/3.migration.md) with a `diff` showing the before and after.
+- **Migration guide**: add a section under "Changes from v4" in [docs/content/docs/1.getting-started/3.migration.md](docs/content/docs/1.getting-started/3.migration.md) with a `diff` showing the before and after. If part of the change can't be applied by a find-and-replace (call-site dependent, a semantics flip, user CSS selectors, non-literal `:ui` objects), say so in the section: the codemod and the `migrate-nuxt-ui-v4-to-v5` skill are both derived from this file.
 - **Tracking issue**: link the PR in the checklist of [nuxt/ui#6918](https://github.com/nuxt/ui/issues/6918).
 - **Roadmap**: tick the matching item in the [v5 roadmap discussion](https://github.com/nuxt/ui/discussions/6610), or add it if it was not planned.
 
@@ -25,7 +25,7 @@ src/
 │   ├── composables/    # Composables (use*.ts)
 │   ├── types/          # TypeScript types
 │   └── utils/          # Utility functions
-├── theme/              # Tailwind Variants themes (kebab-case.ts)
+├── theme/              # Variants themes (kebab-case.ts)
 └── module.ts
 test/
 ├── bundle/             # Bundle size fixtures (`pnpm run size`)
@@ -85,7 +85,7 @@ Load these based on your task. **Do not load all files at once** — only load w
 | File | Topics |
 |------|--------|
 | **[.github/contributing/component-structure.md](.github/contributing/component-structure.md)** | Vue component file patterns, props/slots/emits interfaces, script setup |
-| **[.github/contributing/theme-structure.md](.github/contributing/theme-structure.md)** | Tailwind Variants theme files, slots, variants, compoundVariants |
+| **[.github/contributing/theme-structure.md](.github/contributing/theme-structure.md)** | Theme files, slots, variants, compoundVariants |
 | **[.github/contributing/testing.md](.github/contributing/testing.md)** | Vitest patterns, snapshot testing, accessibility testing |
 | **[.github/contributing/documentation.md](.github/contributing/documentation.md)** | Component docs structure, MDC syntax, examples |
 
