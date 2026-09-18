@@ -563,7 +563,7 @@ defineExpose({
       })"
       :style="[resolveValue(tableApi.options.meta?.style?.tr, row), style]"
       @click="onRowSelect($event, row)"
-      @keydown.self.enter.space="onRowSelect($event, row)"
+      @keydown.self.exact.enter.space="onRowSelect($event, row)"
       @pointerenter="onRowHover($event, row)"
       @pointerleave="onRowHover($event, null)"
       @contextmenu="onRowContextmenu($event, row)"

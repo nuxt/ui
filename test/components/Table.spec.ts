@@ -256,6 +256,25 @@ describe('Table', () => {
     expect(spaceEvent.defaultPrevented).toBe(true)
   })
 
+  it('does not call select when a modifier key is held', async () => {
+    const onSelect = vi.fn()
+    const wrapper = await mountSuspended(Table, {
+      props: { ...props, onSelect }
+    })
+
+    const row = wrapper.find('tbody tr')
+    const metaEvent = await triggerKeydown(row.element, { key: 'Enter', metaKey: true })
+    expect(metaEvent.defaultPrevented).toBe(false)
+
+    const shiftEvent = await triggerKeydown(row.element, { key: ' ', shiftKey: true })
+    expect(shiftEvent.defaultPrevented).toBe(false)
+
+    expect(onSelect).not.toHaveBeenCalled()
+
+    await triggerKeydown(row.element, { key: 'Enter' })
+    expect(onSelect).toHaveBeenCalledTimes(1)
+  })
+
   it('does not call select on repeated keydown', async () => {
     const onSelect = vi.fn()
     const wrapper = await mountSuspended(Table, {
