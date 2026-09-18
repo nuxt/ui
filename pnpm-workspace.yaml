@@ -130,11 +130,6 @@ catalog:
   sortablejs: ^1.15.7
   superstruct: ^2.0.2
   tailwind-merge: ^3.7.0
-  # tailwind-variants 3.3.x is a full internal rewrite: invoking a tv() result is
-  # 18 to 103x slower than 3.2.2 (see test/bench/tv.bench.ts) and the exported
-  # type constraints changed in a breaking way. Pinned exactly so the published
-  # package doesn't resolve 3.3.x for users, keep in sync with the renovate.json rule.
-  tailwind-variants: 3.2.2
   tailwindcss: ^4.3.3
   tinyglobby: ^0.2.17
   tiptap-extension-code-block-shiki: ^1.2.0
