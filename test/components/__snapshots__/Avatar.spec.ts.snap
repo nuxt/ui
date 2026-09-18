@@ -16,6 +16,8 @@ exports[`Avatar > renders with chip correctly 1`] = `"<span data-slot="root" cla
 
 exports[`Avatar > renders with class correctly 1`] = `"<span data-slot="root" class="inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle size-8 text-base bg-default"><span data-slot="fallback" class="font-medium truncate text-muted">&nbsp;</span></span>"`;
 
+exports[`Avatar > renders with color auto correctly 1`] = `"<span data-slot="root" class="inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle size-8 text-base" style="background-color: hsl(226, 68%, 60%);"><span data-slot="fallback" class="font-medium truncate text-inverted">BC</span></span>"`;
+
 exports[`Avatar > renders with color error correctly 1`] = `"<span data-slot="root" class="inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle bg-error/10 size-8 text-base"><span data-slot="fallback" class="font-medium truncate text-error">BC</span></span>"`;
 
 exports[`Avatar > renders with color info correctly 1`] = `"<span data-slot="root" class="inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle bg-info/10 size-8 text-base"><span data-slot="fallback" class="font-medium truncate text-info">BC</span></span>"`;
