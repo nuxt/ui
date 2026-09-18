@@ -15,9 +15,9 @@ export default (options: Required<ModuleOptions>) => ({
       '[&_.cm-cursor]:border-s-(color:--ui-text-highlighted)! [&_.cm-dropCursor]:border-s-(color:--ui-text-highlighted)!',
       '[&_.cm-placeholder]:text-dimmed!',
       // Gutters
-      '[&_.cm-gutters]:bg-transparent! [&_.cm-gutters]:border-none! [&_.cm-gutters]:text-dimmed! [&_.cm-gutters]:ps-(--ui-code-editor-px) [&_.cm-gutters]:h-auto! [&_.cm-gutters]:self-stretch',
-      '[&_.cm-lineNumbers_.cm-gutterElement]:px-0! [&_.cm-lineNumbers_.cm-gutterElement]:min-w-0!',
-      '[&_.cm-activeLineGutter]:bg-transparent! [&_.cm-editor.cm-focused_.cm-activeLineGutter]:text-default',
+      '[&_.cm-gutters]:bg-transparent! [&_.cm-gutters]:border-none! [&_.cm-gutters]:text-dimmed! [&_.cm-gutters]:h-auto! [&_.cm-gutters]:self-stretch',
+      '[&_.cm-lineNumbers_.cm-gutterElement]:ps-(--ui-code-editor-px)! [&_.cm-lineNumbers_.cm-gutterElement]:pe-0! [&_.cm-lineNumbers_.cm-gutterElement]:min-w-0!',
+      '[&_.cm-activeLineGutter]:bg-transparent! [&_.cm-editor.cm-focused_.cm-activeLineGutter]:bg-accented/25! [&_.cm-editor.cm-focused_.cm-activeLineGutter]:text-default',
       // Active line (focused only), selection and matches
       '[&_.cm-activeLine]:bg-transparent! [&_.cm-editor.cm-focused_.cm-activeLine]:bg-accented/25!',
       // Native selection color (`Highlight`) by default, `--ui-code-editor-selection` overrides it globally (also used by `drawSelection()`)
