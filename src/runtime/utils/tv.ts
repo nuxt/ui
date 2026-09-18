@@ -736,7 +736,9 @@ function createTV(config?: TVMergeConfig) {
       }
 
       const fns: Record<string, (slotProps?: Record<string, any>) => string | undefined> = {}
-      for (const slotKey of spec.slotKeys) {
+      const slotKeys = spec.slotKeys
+      for (let i = 0; i < slotKeys.length; i++) {
+        const slotKey = slotKeys[i]!
         fns[slotKey] = slotProps => resolveSlotCached(spec, slotKey, props, slotProps)
       }
       return fns
