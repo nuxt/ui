@@ -157,6 +157,8 @@ function onUpdate(value: ApplyModifiers<T, Mod> | undefined) {
 
   if (props.modelModifiers?.optional) {
     value = value ?? undefined
+  } else {
+    value = (value ?? null) as ApplyModifiers<T, Mod>
   }
 
   // In controlled mode reka emits on every write, even when nothing changed (blur, Enter, stepping at a bound).
