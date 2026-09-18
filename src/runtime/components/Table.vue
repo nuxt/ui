@@ -291,7 +291,7 @@ function processColumns(columns: TableColumn<T>[]): TableColumn<T>[] {
 const isExternalScroll = computed(() => typeof props.virtualize === 'object' && !!props.virtualize.getScrollElement)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.table || {}) })({
+const ui = computed(() => tv(theme, appConfig.ui?.table)({
   sticky: props.sticky,
   loading: props.loading,
   loadingColor: props.loadingColor,

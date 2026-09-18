@@ -91,7 +91,7 @@ const props = useComponentProps<ProgressGroupProps<T>>('progressGroup', _props)
 const appConfig = useAppConfig() as ProgressGroup['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.progressGroup || {}) })({
+const ui = computed(() => tv(theme, appConfig.ui?.progressGroup)({
   size: props.size,
   color: props.color as ProgressGroup['variants']['color'],
   orientation: props.orientation
