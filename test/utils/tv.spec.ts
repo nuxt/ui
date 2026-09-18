@@ -568,6 +568,57 @@ describe('tv theme joins', () => {
   })
 })
 
+describe('tv override layers', () => {
+  // Shapes taken from the template app configs the order was measured against.
+  const theme = {
+    slots: { base: 'inline-flex px-2.5', label: 'text-muted' },
+    variants: {
+      size: { md: { base: 'px-2.5 text-sm' } },
+      square: { true: '' },
+      tone: { quiet: { label: 'text-dimmed' } }
+    },
+    compoundVariants: [{ size: 'md', square: true, class: { base: 'p-1.5' } }],
+    defaultVariants: { size: 'md', tone: 'quiet' }
+  }
+
+  it('lets an override slot class win over the theme variants and compounds', () => {
+    // `label` loses to the `tone` variant when it rides beneath it.
+    expect(tvt(theme, { slots: { label: 'text-inherit' } })().label()).toBe('text-inherit')
+    expect(tvt(theme, { slots: { base: 'p-4' } })({ square: true }).base()).toBe('inline-flex text-sm p-4')
+  })
+
+  it('keeps an override variant beneath the theme compounds', () => {
+    // Tuning a size from `app.config.ui` doesn't cancel the `square` exception.
+    const ui = tvt(theme, { variants: { size: { md: { base: 'px-4' } } } })
+    expect(ui().base()).toBe('inline-flex text-sm px-4')
+    expect(ui({ square: true }).base()).toBe('inline-flex text-sm p-1.5')
+  })
+
+  it('lets an override compound win over an override slot class', () => {
+    const ui = tvt(theme, {
+      slots: { label: 'text-default' },
+      compoundVariants: [{ tone: 'quiet', class: { label: 'text-toned' } }]
+    })
+    expect(ui().label()).toBe('text-toned')
+    expect(ui({ tone: null }).label()).toBe('text-default')
+  })
+
+  it('still lets `:ui` and `class` win over every layer', () => {
+    const ui = tvt(theme, { slots: { label: 'text-default' }, compoundVariants: [{ tone: 'quiet', class: { label: 'text-toned' } }] })
+    expect(ui().label({ class: 'text-highlighted' })).toBe('text-highlighted')
+  })
+
+  it('keeps the theme variants on top of an override slot replacer', () => {
+    expect(tvt(theme, { slots: { label: () => 'font-bold text-default' } })().label()).toBe('font-bold text-dimmed')
+  })
+
+  it('resolves a slotless theme through the same layers', () => {
+    const tvBase = tv as unknown as (theme: any, overrides?: any) => (props?: any) => string | undefined
+    const slotless = { base: 'px-2', variants: { size: { md: 'px-3' } }, defaultVariants: { size: 'md' } }
+    expect(tvBase(slotless, { base: 'px-6' })()).toBe('px-6')
+  })
+})
+
 describe('tv spec sharing', () => {
   const theme = { slots: { base: 'inline-flex', label: 'truncate' }, variants: { active: { true: { base: 'font-bold' } } } }
 
@@ -586,12 +637,12 @@ describe('tv spec sharing', () => {
 
   it('shares one compiled entry between overrides with the same content', () => {
     const [props, counter] = countingProps()
-    expect(tvt(theme, { slots: { base: 'p-1' } })().base(props)).toBe('inline-flex p-1 font-bold')
+    expect(tvt(theme, { slots: { base: 'p-1' } })().base(props)).toBe('inline-flex font-bold p-1')
     const miss = counter.reads
 
     // Nuxt clones the app config per server request, so identity is never shared.
     counter.reads = 0
-    expect(tvt(theme, { slots: { base: 'p-1' } })().base(props)).toBe('inline-flex p-1 font-bold')
+    expect(tvt(theme, { slots: { base: 'p-1' } })().base(props)).toBe('inline-flex font-bold p-1')
     expect(counter.reads).toBeLessThan(miss)
   })
 
