@@ -136,7 +136,7 @@ const size = computed(() => formFieldSize.value ?? props.size)
 const disabled = computed(() => formFieldDisabled.value ?? props.disabled)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.radioGroup || {}) })({
+const ui = computed(() => tv(theme, appConfig.ui?.radioGroup)({
   size: size.value,
   color: color.value,
   highlight: highlight.value,
