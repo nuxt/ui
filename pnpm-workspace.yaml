@@ -128,7 +128,6 @@ catalog:
   sortablejs: ^1.15.7
   superstruct: ^2.0.2
   tailwind-merge: ^3.7.0
-  tailwind-variants: ^3.2.2
   tailwindcss: ^4.3.3
   tinyglobby: ^0.2.17
   tiptap-extension-code-block-shiki: ^1.2.0
@@ -165,11 +164,6 @@ overrides:
   # alongside 0.34.5 and kills the docs prerender as soon as it hits `/_ipx`.
   # Pinned until ipx 4 is stable, keep in sync with the renovate.json rule.
   "@nuxt/image": 2.0.0
-  # tailwind-variants 3.3.x is a full internal rewrite: invoking a tv() result is
-  # 18 to 103x slower than 3.2.2 (see test/bench/tv.bench.ts) and the exported
-  # type constraints changed in a breaking way. Pinned until upstream addresses
-  # the perf regression, keep in sync with the renovate.json rule.
-  tailwind-variants: 3.2.2
   unplugin: ^3.4.0
   c12: ^3.3.4
   h3: 1.15.11
