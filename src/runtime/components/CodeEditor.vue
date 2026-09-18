@@ -7,7 +7,7 @@ import type { EditorView, Panel, ViewUpdate } from '@codemirror/view'
 import theme from '#build/ui/code-editor'
 import type { ModelModifiers } from '../types/input'
 import type { ComponentConfig } from '../types/tv'
-import type { CodeEditorHighlighter, CodeEditorThemes } from '../utils/code-editor'
+import type { CodeEditorHighlighter, CodeEditorThemes, CodeEditorToken } from '../utils/code-editor'
 
 type CodeEditor = ComponentConfig<typeof theme, AppConfig, 'codeEditor'>
 
@@ -115,7 +115,7 @@ export interface CodeEditorSlots {
 </script>
 
 <script setup lang="ts">
-import { computed, nextTick, onBeforeUnmount, onMounted, reactive, shallowRef, useAttrs, useTemplateRef, watch } from 'vue'
+import { computed, nextTick, onBeforeUnmount, onMounted, onServerPrefetch, reactive, ref, shallowRef, useAttrs, useTemplateRef, watch } from 'vue'
 import { Primitive } from 'reka-ui'
 import { useVModel } from '@vueuse/core'
 import { Compartment, EditorState } from '@codemirror/state'
@@ -129,7 +129,7 @@ import { useComponentProps } from '../composables/useComponentProps'
 import { useFormField } from '../composables/useFormField'
 import { useLocale } from '../composables/useLocale'
 import { omit } from '../utils'
-import { getCodeEditorHighlighter, prepareCodeEditorHighlighter, resolveCodeEditorThemes, shikiHighlight } from '../utils/code-editor'
+import { getCodeEditorHighlighter, getResolvedCodeEditorHighlighter, isCodeEditorHighlighterReady, prepareCodeEditorHighlighter, resolveCodeEditorThemes, shikiHighlight, tokenizeCodeEditorLines } from '../utils/code-editor'
 import { tv } from '../utils/tv'
 import UButton from './Button.vue'
 import UFieldGroup from './FieldGroup.vue'
@@ -334,12 +334,55 @@ function reconfigure(compartment: Compartment, extension: Extension) {
   view.value?.dispatch({ effects: compartment.reconfigure(extension) })
 }
 
+function resolveLang(): string {
+  return props.lang || 'text'
+}
+
+function resolveThemes(): CodeEditorThemes {
+  return resolveCodeEditorThemes(props.theme ?? { light: 'material-theme-lighter', dark: 'material-theme-palenight' })
+}
+
+// Bumped once the server has prepared the highlighter, so the fallback re-tokenizes.
+const highlighterReady = ref(0)
+
+// Lines rendered before CodeMirror mounts (server and hydration), highlighted when a
+// highlighter already knows the language and themes: the `highlighter` prop, or the
+// shared one once it has been created.
+const fallbackLines = computed<CodeEditorToken[][]>(() => {
+  void highlighterReady.value
+
+  const code = (modelValue.value ?? '').replace(/\r\n?/g, '\n')
+  const lang = resolveLang()
+  const themes = resolveThemes()
+  const highlighter = props.highlighter ?? getResolvedCodeEditorHighlighter()
+
+  if (highlighter && isCodeEditorHighlighterReady(highlighter, lang, themes)) {
+    try {
+      return tokenizeCodeEditorLines(highlighter, code, lang, themes)
+    } catch {
+      // Rendered as plain lines below
+    }
+  }
+
+  return code.split('\n').map(line => line ? [{ content: line }] : [])
+})
+
+onServerPrefetch(async () => {
+  try {
+    const highlighter = props.highlighter ?? await getCodeEditorHighlighter()
+    await prepareCodeEditorHighlighter(highlighter, resolveLang(), resolveThemes())
+    highlighterReady.value++
+  } catch (error) {
+    console.warn(`[Nuxt UI] CodeEditor: unable to highlight \`${resolveLang()}\` code on the server.`, error)
+  }
+})
+
 let highlightVersion = 0
 
 async function loadHighlight() {
   const version = ++highlightVersion
-  const lang = props.lang || 'text'
-  const themes = resolveCodeEditorThemes(props.theme ?? { light: 'material-theme-lighter', dark: 'material-theme-palenight' })
+  const lang = resolveLang()
+  const themes = resolveThemes()
 
   let extension: Extension = []
   try {
@@ -485,21 +528,39 @@ defineExpose({
 <template>
   <Primitive :as="props.as" :data-slot="($attrs['data-slot'] as string | undefined) ?? 'root'" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <div ref="editorRef" data-slot="base" :class="ui.base({ class: props.ui?.base })" :style="rowsStyle">
-      <textarea
-        v-if="!view"
-        :id="id"
-        :value="modelValue ?? ''"
-        :name="name"
-        :rows="props.rows"
-        :placeholder="props.placeholder"
-        :disabled="disabled"
-        :readonly="props.readonly"
-        :required="props.required"
-        v-bind="{ ...omit($attrs, ['data-slot']), ...ariaAttrs }"
-        data-slot="fallback"
-        :class="ui.fallback({ class: props.ui?.fallback })"
-      />
-      <input v-else-if="name" type="hidden" :name="name" :value="modelValue ?? ''">
+      <!-- Static replica of the editor, rendered on the server and until CodeMirror mounts -->
+      <div v-if="!view" data-slot="fallback" class="cm-editor" :class="ui.fallback({ class: props.ui?.fallback })">
+        <div class="cm-scroller">
+          <div v-if="props.lineNumbers" class="cm-gutters cm-gutters-before" aria-hidden="true">
+            <div class="cm-gutter cm-lineNumbers">
+              <div v-for="line in fallbackLines.length" :key="line" class="cm-gutterElement">
+                {{ line }}
+              </div>
+            </div>
+          </div>
+          <div
+            :id="id"
+            class="cm-content"
+            :class="{ 'cm-lineWrapping': props.lineWrapping }"
+            role="textbox"
+            aria-multiline="true"
+            :aria-readonly="readonly || undefined"
+            :aria-required="props.required || undefined"
+            :aria-disabled="disabled || undefined"
+            v-bind="{ ...omit($attrs, ['data-slot', 'style']), ...ariaAttrs }"
+            data-allow-mismatch="children"
+          >
+            <div v-for="(line, index) in fallbackLines" :key="index" class="cm-line">
+              <span v-if="!index && !modelValue && props.placeholder" class="cm-placeholder" aria-hidden="true">{{ props.placeholder }}</span><template v-for="(token, position) in line" :key="position">
+                <span v-if="token.style" class="cm-shiki" :style="token.style">{{ token.content }}</span><template v-else>
+                  {{ token.content }}
+                </template>
+              </template><br v-if="!line.length">
+            </div>
+          </div>
+        </div>
+      </div>
+      <input v-if="name" type="hidden" :name="name" :value="modelValue ?? ''">
     </div>
 
     <slot :ui="ui" />

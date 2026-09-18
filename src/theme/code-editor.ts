@@ -38,7 +38,8 @@ export default (options: Required<ModuleOptions>) => ({
       // Tooltips mirror the Tooltip component
       '[&_.cm-tooltip]:rounded-sm [&_.cm-tooltip]:border-0! [&_.cm-tooltip]:bg-default! [&_.cm-tooltip]:text-highlighted! [&_.cm-tooltip]:text-xs [&_.cm-tooltip]:font-sans [&_.cm-tooltip]:shadow-sm [&_.cm-tooltip]:ring [&_.cm-tooltip]:ring-default [&_.cm-tooltip]:px-2.5 [&_.cm-tooltip]:py-1'
     ],
-    fallback: 'w-full resize-none border-0 bg-transparent outline-none text-inherit placeholder:text-dimmed px-(--ui-code-editor-px) py-(--ui-code-editor-py)',
+    // Layout of the static replica rendered before CodeMirror mounts, mirroring its base styles
+    fallback: '[&_.cm-scroller]:flex [&_.cm-scroller]:items-start [&_.cm-scroller]:overflow-auto [&_.cm-gutters]:flex [&_.cm-gutters]:shrink-0 [&_.cm-gutter]:flex [&_.cm-gutter]:flex-col [&_.cm-gutter]:shrink-0 [&_.cm-gutter]:py-(--ui-code-editor-py) [&_.cm-lineNumbers_.cm-gutterElement]:text-end [&_.cm-lineNumbers_.cm-gutterElement]:whitespace-nowrap [&_.cm-content]:grow [&_.cm-content]:shrink-0 [&_.cm-content]:whitespace-pre [&_.cm-content.cm-lineWrapping]:shrink [&_.cm-content.cm-lineWrapping]:whitespace-pre-wrap [&_.cm-content.cm-lineWrapping]:wrap-anywhere [&_.cm-line]:block [&_.cm-placeholder]:inline-block [&_.cm-placeholder]:align-top',
     editor: '',
     content: '',
     search: 'flex flex-wrap items-center gap-1.5 p-1.5 font-sans',
@@ -50,27 +51,22 @@ export default (options: Required<ModuleOptions>) => ({
     size: {
       xs: {
         base: 'text-sm/5 [--ui-code-editor-px:--spacing(2)] [--ui-code-editor-py:--spacing(1)]',
-        fallback: 'text-sm/5',
         searchControlSize: 'xs'
       },
       sm: {
         base: 'text-sm/5 [--ui-code-editor-px:--spacing(2.5)] [--ui-code-editor-py:--spacing(1.5)]',
-        fallback: 'text-sm/5',
         searchControlSize: 'xs'
       },
       md: {
         base: 'text-base/6 [--ui-code-editor-px:--spacing(2.5)] [--ui-code-editor-py:--spacing(1.5)]',
-        fallback: 'text-base/6',
         searchControlSize: 'sm'
       },
       lg: {
         base: 'text-base/6 [--ui-code-editor-px:--spacing(3)] [--ui-code-editor-py:--spacing(2)]',
-        fallback: 'text-base/6',
         searchControlSize: 'sm'
       },
       xl: {
         base: 'text-base/7 [--ui-code-editor-px:--spacing(3)] [--ui-code-editor-py:--spacing(2)]',
-        fallback: 'text-base/7',
         searchControlSize: 'md'
       }
     },
@@ -164,15 +160,13 @@ export default (options: Required<ModuleOptions>) => ({
     fixed: false,
     size: ['xs', 'sm'],
     class: {
-      base: 'md:text-xs',
-      fallback: 'md:text-xs'
+      base: 'md:text-xs'
     }
   }, {
     fixed: false,
     size: ['md', 'lg'],
     class: {
-      base: 'md:text-sm',
-      fallback: 'md:text-sm'
+      base: 'md:text-sm'
     }
   }],
   defaultVariants: {

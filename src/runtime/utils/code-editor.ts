@@ -18,7 +18,16 @@ export interface CodeEditorHighlightOptions {
   themes: CodeEditorThemes
 }
 
+// Guards against minified lines, Shiki then emits them as a single token.
+const MAX_LINE_LENGTH = 20_000
+
+export interface CodeEditorToken {
+  content: string
+  style?: string
+}
+
 let highlighter: Promise<CodeEditorHighlighter> | undefined
+let resolvedHighlighter: CodeEditorHighlighter | undefined
 
 /**
  * The highlighter shared by every CodeEditor that does not receive its own.
@@ -26,13 +35,47 @@ let highlighter: Promise<CodeEditorHighlighter> | undefined
  * is fetched, and loaded with grammars and themes on demand.
  */
 export function getCodeEditorHighlighter(): Promise<CodeEditorHighlighter> {
-  highlighter ??= createHighlighter({
+  highlighter ??= (createHighlighter({
     langs: [],
     themes: [],
     engine: createJavaScriptRegexEngine({ forgiving: true })
-  }) as Promise<CodeEditorHighlighter>
+  }) as Promise<CodeEditorHighlighter>).then((instance) => {
+    resolvedHighlighter = instance
+    return instance
+  })
 
   return highlighter
+}
+
+/**
+ * The shared highlighter once it has been created, for synchronous use such as server-side rendering.
+ */
+export function getResolvedCodeEditorHighlighter(): CodeEditorHighlighter | undefined {
+  return resolvedHighlighter
+}
+
+/**
+ * Whether the highlighter can tokenize the language with the themes without loading anything.
+ */
+export function isCodeEditorHighlighterReady(highlighter: CodeEditorHighlighter, lang: string, themes: CodeEditorThemes): boolean {
+  const loadedThemes = highlighter.getLoadedThemes()
+
+  return (isSpecialLang(lang) || highlighter.getLoadedLanguages().includes(lang))
+    && loadedThemes.includes(themes.light)
+    && loadedThemes.includes(themes.dark)
+}
+
+/**
+ * Tokenize the code line by line, with the same styles as the editor decorations.
+ * Used to render the highlighted code before CodeMirror mounts, on the server and during hydration.
+ */
+export function tokenizeCodeEditorLines(highlighter: CodeEditorHighlighter, code: string, lang: string, themes: CodeEditorThemes): CodeEditorToken[][] {
+  const { tokens } = highlighter.codeToTokens(code, { lang, themes, defaultColor: false, tokenizeMaxLineLength: MAX_LINE_LENGTH })
+
+  return tokens.map(line => line
+    .filter(token => token.content.length)
+    .map(token => ({ content: token.content, style: (token.htmlStyle && stringifyTokenStyle(token.htmlStyle)) || undefined }))
+  )
 }
 
 export function resolveCodeEditorThemes(theme: string | CodeEditorThemes): CodeEditorThemes {
@@ -65,8 +108,6 @@ export async function prepareCodeEditorHighlighter(highlighter: CodeEditorHighli
 const CHUNK_LINES = 64
 // Lines tokenized per pass, the rest is scheduled so a large document never blocks the UI.
 const PASS_LINES = 1024
-// Guards against minified lines, Shiki then emits them as a single token.
-const MAX_LINE_LENGTH = 20_000
 
 const continueHighlight = StateEffect.define<null>()
 

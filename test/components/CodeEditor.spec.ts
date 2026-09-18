@@ -2,9 +2,25 @@ import { describe, it, expect, test, vi } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { flushPromises } from '@vue/test-utils'
+import { createSSRApp, h, onServerPrefetch } from 'vue'
+import { renderToString } from 'vue/server-renderer'
 import CodeEditor from '../../src/runtime/components/CodeEditor.vue'
+import { getCodeEditorHighlighter, prepareCodeEditorHighlighter } from '../../src/runtime/utils/code-editor'
 import { renderEach } from '../component-render'
 import theme from '#build/ui/code-editor'
+
+const supportsServerPrefetch = await (async () => {
+  let ran = false
+  await renderToString(createSSRApp({
+    setup() {
+      onServerPrefetch(async () => {
+        ran = true
+      })
+      return () => h('div')
+    }
+  }))
+  return ran
+})()
 
 describe('CodeEditor', () => {
   const sizes = Object.keys(theme.variants.size) as any
@@ -124,6 +140,56 @@ describe('CodeEditor', () => {
 
     wrapper.unmount()
   }, 15000)
+
+  describe('SSR', () => {
+    async function renderSSR(props: Record<string, any>) {
+      return renderToString(createSSRApp(() => h(CodeEditor as any, props)))
+    }
+
+    it('renders the gutter and the lines before the editor mounts', async () => {
+      const html = await renderSSR({ modelValue: 'const a = 1\nconst b = 2', theme: 'nord', lineNumbers: true })
+
+      expect(html).toContain('cm-lineNumbers')
+      expect(html).toContain('<div class="cm-gutterElement">2</div>')
+      expect(html.match(/class="cm-line"/g)).toHaveLength(2)
+      expect(html).not.toContain('<textarea')
+    })
+
+    it('highlights the code with a highlighter that knows the language', async () => {
+      const highlighter = await getCodeEditorHighlighter()
+      await prepareCodeEditorHighlighter(highlighter, 'ts', { light: 'material-theme-lighter', dark: 'material-theme-palenight' })
+
+      const html = await renderSSR({ modelValue: 'const answer = 42', lang: 'ts', highlighter })
+
+      expect(html).toContain('class="cm-shiki"')
+      expect(html).toContain('--shiki-light:')
+      expect(html).toContain('--shiki-dark:')
+      expect(html).toContain('<span class="cm-shiki" style="--shiki-light:#')
+    })
+
+    it('highlights with the shared highlighter once it has been prepared', async () => {
+      await prepareCodeEditorHighlighter(await getCodeEditorHighlighter(), 'json', { light: 'material-theme-lighter', dark: 'material-theme-palenight' })
+
+      const html = await renderSSR({ modelValue: '{ "ok": true }', lang: 'json' })
+
+      expect(html).toContain('class="cm-shiki"')
+    })
+
+    // Nuxt tree-shakes `onServerPrefetch` out of client builds, which the nuxt test project is.
+    it.skipIf(!supportsServerPrefetch)('prepares the shared highlighter during server prefetch', async () => {
+      const html = await renderSSR({ modelValue: '.a { color: red }', lang: 'css' })
+
+      expect(html).toContain('class="cm-shiki"')
+    })
+
+    it('hides the gutter without line numbers and shows the placeholder', async () => {
+      const html = await renderSSR({ placeholder: 'Paste your code', lineNumbers: false })
+
+      expect(html).not.toContain('class="cm-gutters')
+      expect(html).toContain('class="cm-placeholder"')
+      expect(html).toContain('Paste your code')
+    })
+  })
 
   test('toggles the readonly state', async () => {
     const wrapper = await mountSuspended(CodeEditor, {

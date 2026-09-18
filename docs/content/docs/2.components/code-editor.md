@@ -294,6 +294,14 @@ Use the `extensions` prop to pass additional [CodeMirror extensions](https://cod
 The built-in extensions include the history, bracket matching and closing, the search panel, the active line and selection matches highlighting. The selection is drawn natively by the browser, add `drawSelection()` and `EditorState.allowMultipleSelections.of(true)` for multiple cursors. Pass the `indent-with-tab` prop to indent with the :kbd{value="Tab"} key, disabled by default as it traps the keyboard focus.
 ::
 
+### Server-side rendering
+
+Before CodeMirror mounts, and in the server-rendered HTML, the component renders a static replica of the editor with the same line numbers gutter and styles, so the page does not shift when the editor takes over. The code is highlighted in that replica as soon as a highlighter knows the language and themes: on the server, the shared highlighter is prepared during the request, and on the client it's used as soon as it has been created. Pass a preloaded `highlighter` to get highlighted markup on both sides from the first render.
+
+::note
+The replica is read-only, editing starts once the editor is mounted.
+::
+
 ### With a custom highlighter
 
 By default, a Shiki highlighter using the [JavaScript RegExp engine](https://shiki.style/guide/regex-engines#javascript-regexp-engine) is created once and shared by every editor, loading languages and themes on demand. Use the `highlighter` prop to pass your own instance instead, for example to use the Oniguruma engine, a custom grammar or a highlighter shared with the rest of your application.
