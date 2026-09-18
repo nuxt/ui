@@ -20,8 +20,8 @@ export default (options: Required<ModuleOptions>) => ({
       '[&_.cm-activeLineGutter]:bg-transparent! [&_.cm-editor.cm-focused_.cm-activeLineGutter]:bg-accented/25! [&_.cm-editor.cm-focused_.cm-activeLineGutter]:text-default',
       // Active line (focused only), selection and matches
       '[&_.cm-activeLine]:bg-transparent! [&_.cm-editor.cm-focused_.cm-activeLine]:bg-accented/25!',
-      // Native selection color (`Highlight`) by default, `--ui-code-editor-selection` overrides it globally (also used by `drawSelection()`)
-      '[&_.cm-content]:selection:bg-(--ui-code-editor-selection,Highlight) [&_.cm-selectionBackground]:bg-(--ui-code-editor-selection,Highlight)!',
+      // Selection follows the OS accent color (translucent, so tokens stay readable in both modes), `--ui-code-editor-selection` overrides it globally (also used by `drawSelection()`)
+      '[&_.cm-content]:selection:bg-[var(--ui-code-editor-selection,color-mix(in_srgb,AccentColor_30%,transparent))] [&_.cm-selectionBackground]:bg-[var(--ui-code-editor-selection,color-mix(in_srgb,AccentColor_30%,transparent))]!',
       '[&_.cm-selectionMatch]:bg-accented/50! [&_.cm-selectionMatch]:rounded-xs',
       '[&_.cm-searchMatch]:bg-warning/25! [&_.cm-searchMatch]:rounded-xs [&_.cm-searchMatch-selected]:bg-warning/50!',
       '[&_.cm-editor.cm-focused_.cm-matchingBracket]:bg-primary/20! [&_.cm-editor.cm-focused_.cm-matchingBracket]:rounded-xs',

@@ -204,7 +204,7 @@ The `highlight` prop is used here to show the focus state. It's used internally 
 
 ### Selection color
 
-The selected text uses the native highlight color of the browser and operating system. Set the `--ui-code-editor-selection` CSS variable to change it globally, for example in your `main.css`:
+The selected text is drawn natively by the browser, tinted with the accent color of the operating system so the tokens stay readable in light and dark mode. Set the `--ui-code-editor-selection` CSS variable to change it globally, for example in your `main.css`:
 
 ```css [main.css]
 :root {
