@@ -24,10 +24,9 @@ const tableProps = {
   externalScroll: false
 } as const
 
-// What components actually spread beside `extend`: Button always injects its
-// `active` variants (`defu({ variants: { active } }, appConfig.ui?.button)`), the
-// others spread `app.config.ui.<c>` when the user set one.
-const buttonOverrides = { variants: { active: { true: { base: '' }, false: { base: '' } } } }
+// What components pass as overrides: `app.config.ui.<c>` when the user set one,
+// and for Button its `active` variants folded in when `activeClass` is set.
+const buttonOverrides = { variants: { active: { true: { base: 'font-bold' }, false: { base: '' } } } }
 const tableOverrides = { slots: { td: 'p-1' } }
 const navigationMenuOverrides = { slots: { link: 'font-medium' } }
 
@@ -41,25 +40,24 @@ const ITERATIONS = 100
 
 // Building the factory deep-merges the whole variant matrix, joins every slot
 // and flattens compound variants. It happens inside each component's `computed`,
-// so every variant-prop change re-runs it. `{ extend: theme }` alone is the
-// shape the engine shares across rebuilds, so this measures the WeakMap hit;
-// the configured shapes are at the end of the file.
+// so every variant-prop change re-runs it. The theme alone is a WeakMap hit,
+// so this measures the shared path; the configured shapes are at the end.
 describe('factory build', () => {
   bench('button (~6 slots)', () => {
     for (let i = 0; i < ITERATIONS; i++) {
-      tv({ extend: buttonTheme })
+      tv(buttonTheme)
     }
   })
 
   bench('table (~13 slots)', () => {
     for (let i = 0; i < ITERATIONS; i++) {
-      tv({ extend: tableTheme })
+      tv(tableTheme)
     }
   })
 
   bench('navigation-menu (~31 slots)', () => {
     for (let i = 0; i < ITERATIONS; i++) {
-      tv({ extend: navigationMenuTheme })
+      tv(navigationMenuTheme)
     }
   })
 })
@@ -67,8 +65,8 @@ describe('factory build', () => {
 // Invoking a prebuilt factory is the cheap step — this is all a variant-prop
 // change should cost once the build is hoisted out of the invocation computed.
 describe('invocation (prebuilt factory)', () => {
-  const buttonFactory = tv({ extend: buttonTheme })
-  const tableFactory = tv({ extend: tableTheme })
+  const buttonFactory = tv(buttonTheme)
+  const tableFactory = tv(tableTheme)
 
   bench('button', () => {
     for (let i = 0; i < ITERATIONS; i++) {
@@ -89,13 +87,13 @@ describe('invocation (prebuilt factory)', () => {
 describe('build + invoke (current fused pattern)', () => {
   bench('button', () => {
     for (let i = 0; i < ITERATIONS; i++) {
-      tv({ extend: buttonTheme })(buttonProps)
+      tv(buttonTheme)(buttonProps)
     }
   })
 
   bench('table', () => {
     for (let i = 0; i < ITERATIONS; i++) {
-      tv({ extend: tableTheme })(tableProps)
+      tv(tableTheme)(tableProps)
     }
   })
 })
@@ -104,7 +102,7 @@ describe('build + invoke (current fused pattern)', () => {
 // exercising the fingerprint, the cache lookup and the replacer scan on every
 // slot call.
 describe('slot invocation', () => {
-  const tableUi = tv({ extend: tableTheme })(tableProps)
+  const tableUi = tv(tableTheme)(tableProps)
 
   bench('td x100 (string class)', () => {
     for (let i = 0; i < 100; i++) {
@@ -119,31 +117,29 @@ describe('slot invocation', () => {
   })
 })
 
-// The shapes components actually call, which spread `app.config.ui.<c>` beside
-// `extend` and so resolve a fresh spec on every build. Last on purpose: each
-// iteration leaves a spec, its compiled slots and their caches as garbage, and
-// the CodSpeed runner forces a full GC before every measured run. With that
-// much to collect, V8 ages and flushes the JIT code of whatever is measured
-// next, which showed up as a 20x regression on the slot-invocation benches when
-// these ran before them.
+// The shapes components call with an `app.config.ui.<c>` override, which the
+// engine keys by content: the cost here is the key, not a fresh spec. Last on
+// purpose, from when these built a fresh spec per iteration: the garbage they
+// left made the CodSpeed runner's forced GC flush the JIT code of whatever was
+// measured next, a 20x regression on the slot-invocation benches.
 describe('configured shapes', () => {
   bench('factory build: button', () => {
     for (let i = 0; i < ITERATIONS; i++) {
-      tv({ extend: buttonTheme, ...buttonOverrides })
+      tv(buttonTheme, buttonOverrides)
     }
   })
 
   bench('factory build: navigation-menu', () => {
     for (let i = 0; i < ITERATIONS; i++) {
-      tv({ extend: navigationMenuTheme, ...navigationMenuOverrides })
+      tv(navigationMenuTheme, navigationMenuOverrides)
     }
   })
 
-  // Button's real shape: `defu` injects `variants.active` on every build, so it
-  // never hits the shared entry and resolves plus compiles each time.
+  // Button with `activeClass` set, the shape that used to resolve and compile
+  // a fresh spec on every build.
   bench('build + invoke: button', () => {
     for (let i = 0; i < ITERATIONS; i++) {
-      const ui = tv({ extend: buttonTheme, ...buttonOverrides })(buttonProps)
+      const ui = tv(buttonTheme, buttonOverrides)(buttonProps)
       ui.base()
       ui.label()
     }
@@ -151,7 +147,7 @@ describe('configured shapes', () => {
 
   bench('build + invoke: table', () => {
     for (let i = 0; i < ITERATIONS; i++) {
-      const ui = tv({ extend: tableTheme, ...tableOverrides })(tableProps)
+      const ui = tv(tableTheme, tableOverrides)(tableProps)
       ui.root()
       ui.td()
     }
