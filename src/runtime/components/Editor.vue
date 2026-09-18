@@ -124,7 +124,7 @@ const attrs = useAttrs()
 const appConfig = useAppConfig() as Editor['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.editor || {}) })({
+const ui = computed(() => tv(theme, appConfig.ui?.editor)({
   placeholderMode: typeof props.placeholder === 'object' ? props.placeholder.mode : undefined
 }))
 

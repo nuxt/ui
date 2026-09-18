@@ -6,30 +6,30 @@ import appConfig from '#build/app.config'
 
 /**
  * The variants engine. It covers exactly the surface our themes use, which is
- * `extend`, `base`, `slots`, `variants`, `compoundVariants` and
- * `defaultVariants`, and leaves out `compoundSlots` and the per-call config
- * argument, neither of which appears in any theme or call site.
+ * `base`, `slots`, `variants`, `compoundVariants` and `defaultVariants`, a theme
+ * and one overrides object on top of it, and leaves out `compoundSlots` and the
+ * per-call config argument, neither of which appears in any theme or call site.
  *
  * Class values may be a `(defaults) => classes` **replacer**, which takes the
  * place of what it receives instead of appending to it. In `app.config.ui` that
- * is the slot's classes from the extended theme, resolved at construction time,
- * and `variants` / `compoundVariants` still apply on top. In `:ui` and the
- * `class` prop it is the slot's whole resolved chain.
+ * is the slot's classes from the theme, resolved at construction time, and
+ * `variants` / `compoundVariants` still apply on top. In `:ui` and the `class`
+ * prop it is the slot's whole resolved chain.
  *
- * The performance model follows how components call it, `tv({ extend: theme,
- * ...appConfig })(props)` rebuilt inside a computed:
- * - build defers all merging, and the unconfigured case (`{ extend: theme }`) is
- *   a WeakMap hit sharing one compiled entry across every rebuild and instance.
- *   Anything spread in beside `extend` resolves a fresh spec per rebuild, which
- *   is what the two-argument call contract will fix.
+ * The performance model follows how components call it, `tv(theme,
+ * appConfig.ui.<c>)(props)` rebuilt inside a computed:
+ * - build defers all merging and resolves to a shared compiled entry: the theme
+ *   is a WeakMap hit, and overrides are keyed by content, so every rebuild,
+ *   instance and server request with the same `app.config.ui.<c>` shares one.
+ *   Content rather than identity because Nuxt clones the app config per request
+ *   on the server and mutates it in place on the client (`updateAppConfig`, HMR).
  * - invoking allocates slot closures only, with no class resolution
  * - a slot call lazily compiles a per-slot lookup table (variant value to class
  *   for that slot, compounds pre-filtered per slot), then memoizes the resolved
  *   string by a fingerprint of the few props that can affect that slot
  *
- * The caches live on the compiled entry rather than on the invocation, so on the
- * shared entry they survive factory rebuilds and every instance of a component
- * hits the same ones.
+ * The caches live on the compiled entry rather than on the invocation, so they
+ * survive factory rebuilds and every instance of a component hits the same ones.
  */
 
 type Props = Record<string, any> | undefined
@@ -194,34 +194,34 @@ function flatFilter(target: any[], value: any): void {
 const isPlainObject = (value: any): value is Record<string, any> => typeof value === 'object' && value !== null && !Array.isArray(value)
 
 /**
- * Merge an extended theme's variants into the extending ones, value by value.
- * Two per-slot objects merge slot by slot, two class values are joined, and a
- * class value meeting a per-slot object is read as its `base`, which is where a
- * plain value lands in a slotted theme anyway. That last case is where
+ * Merge the theme's variants into the overriding ones, value by value. Two
+ * per-slot objects merge slot by slot, two class values are joined, and a class
+ * value meeting a per-slot object is read as its `base`, which is where a plain
+ * value lands in a slotted theme anyway. That last case is where
  * `app.config.ui.<c>.variants.size.md = 'text-lg'` over a theme's
  * `{ base, label }` used to resolve to `"[object Object] text-lg"`.
  */
-function mergeVariants(own: any, extended: any): any {
+function mergeVariants(own: any, theme: any): any {
   const result: Record<string, any> = {}
   for (const key in own) {
-    result[key] = key in extended ? mergeVariantValue(own[key], extended[key]) : own[key]
+    result[key] = key in theme ? mergeVariantValue(own[key], theme[key]) : own[key]
   }
-  for (const key in extended) {
+  for (const key in theme) {
     if (!(key in own)) {
-      result[key] = extended[key]
+      result[key] = theme[key]
     }
   }
   return result
 }
 
-function mergeVariantValue(own: any, extended: any): any {
+function mergeVariantValue(own: any, theme: any): any {
   const ownIsObject = isPlainObject(own)
-  const extendedIsObject = isPlainObject(extended)
-  if (ownIsObject || extendedIsObject) {
-    return mergeVariants(ownIsObject ? own : { base: own }, extendedIsObject ? extended : { base: extended })
+  const themeIsObject = isPlainObject(theme)
+  if (ownIsObject || themeIsObject) {
+    return mergeVariants(ownIsObject ? own : { base: own }, themeIsObject ? theme : { base: theme })
   }
   const flat: any[] = []
-  flatFilter(flat, extended)
+  flatFilter(flat, theme)
   flatFilter(flat, own)
   return flat
 }
@@ -240,42 +240,48 @@ interface Spec {
 }
 
 /**
- * Resolve a construction-time replacer against what the extended theme
- * contributes, so it stands in for those classes instead of appending to them.
+ * Resolve a construction-time replacer against what the theme contributes, so
+ * it stands in for those classes instead of appending to them.
  */
-function replaceClasses(config: TVMergeConfig | undefined, replacer: SlotClassReplacer, extended: ClassValue): ClassValue {
-  return replacer(mergeClasses(config, extended) ?? '')
+function replaceClasses(config: TVMergeConfig | undefined, replacer: SlotClassReplacer, inherited: ClassValue): ClassValue {
+  return replacer(mergeClasses(config, inherited) ?? '')
 }
 
-function resolveSpec(options: Record<string, any>, config: TVMergeConfig | undefined): Spec {
-  const extend = options.extend ?? null
-  const ownVariants = options.variants ?? {}
-  const ownCompound = options.compoundVariants ?? []
-  const ownDefaults = options.defaultVariants ?? {}
+const EMPTY: Record<string, any> = {}
 
-  const variants = isEmpty(extend?.variants) ? ownVariants : mergeVariants(ownVariants, extend.variants)
-  const defaultVariants = isEmpty(extend?.defaultVariants) ? ownDefaults : { ...extend.defaultVariants, ...ownDefaults }
+/**
+ * Merge the overrides (`app.config.ui.<c>`) onto the theme: the theme's classes
+ * come first so the overrides win conflicts, unless a replacer resolved them.
+ */
+function resolveSpec(theme: Record<string, any>, overrides: Record<string, any> | undefined, config: TVMergeConfig | undefined): Spec {
+  const own = overrides ?? EMPTY
+  const ownVariants = own.variants ?? {}
+  const ownCompound = own.compoundVariants ?? []
+  const ownDefaults = own.defaultVariants ?? {}
+
+  const variants = isEmpty(theme.variants) ? ownVariants : mergeVariants(ownVariants, theme.variants)
+  const defaultVariants = isEmpty(theme.defaultVariants) ? ownDefaults : { ...theme.defaultVariants, ...ownDefaults }
 
   let compoundVariants = ownCompound
-  if (!isEmpty(extend?.compoundVariants)) {
+  if (!isEmpty(theme.compoundVariants)) {
     const flat: any[] = []
-    flatFilter(flat, extend.compoundVariants)
+    flatFilter(flat, theme.compoundVariants)
     flatFilter(flat, ownCompound)
     compoundVariants = flat
   }
 
-  const extendSlots: Record<string, any> = extend?.slots ?? {}
-  const isExtendedSlotsEmpty = isEmpty(extendSlots)
+  const themeSlots: Record<string, any> = theme.slots ?? {}
+  const isThemeSlotsEmpty = isEmpty(themeSlots)
 
-  // What the extended theme contributes to a slot. A slotless extended theme
-  // contributes its top-level `base` to the `base` slot, which is how a user
-  // adds slots on top of a theme that only has a `base`.
-  const extended = (key: string) => isExtendedSlotsEmpty ? (key === 'base' ? extend?.base : undefined) : extendSlots[key]
+  // What the theme contributes to a slot. A slotless theme contributes its
+  // top-level `base` to the `base` slot, which is how a user adds slots on top
+  // of a theme that only has a `base`.
+  const inherited = (key: string) => isThemeSlotsEmpty ? (key === 'base' ? theme.base : undefined) : themeSlots[key]
 
-  const baseReplaced = typeof options.base === 'function'
-  const ownBase = baseReplaced ? replaceClasses(config, options.base, extended('base')) : options.base
+  const baseReplaced = typeof own.base === 'function'
+  const ownBase = baseReplaced ? replaceClasses(config, own.base, inherited('base')) : own.base
 
-  const rawSlots: Record<string, any> = options.slots ?? {}
+  const rawSlots: Record<string, any> = own.slots ?? {}
   let ownSlots = rawSlots
   for (const key in rawSlots) {
     if (typeof rawSlots[key] !== 'function') {
@@ -284,20 +290,19 @@ function resolveSpec(options: Record<string, any>, config: TVMergeConfig | undef
     if (ownSlots === rawSlots) {
       ownSlots = { ...rawSlots }
     }
-    ownSlots[key] = replaceClasses(config, rawSlots[key], extended(key))
+    ownSlots[key] = replaceClasses(config, rawSlots[key], inherited(key))
   }
 
-  const base = baseReplaced || !extend?.base ? ownBase : cx(extend.base, ownBase)
+  const base = baseReplaced || !theme.base ? ownBase : cx(theme.base, ownBase)
 
   // Slot keys come from both sides, `base` included as soon as there are slots
-  // at all; a theme with nothing but a `base` stays slotless. Extended classes
-  // come first so the own ones win conflicts, unless a replacer resolved them.
+  // at all; a theme with nothing but a `base` stays slotless.
   const slots: Record<string, any> = {}
-  if (!isExtendedSlotsEmpty || !isEmpty(ownSlots)) {
-    for (const key of new Set(['base', ...Object.keys(extendSlots), ...Object.keys(ownSlots)])) {
-      const own = key === 'base' ? cx(ownBase, ownSlots.base) : ownSlots[key]
+  if (!isThemeSlotsEmpty || !isEmpty(ownSlots)) {
+    for (const key of new Set(['base', ...Object.keys(themeSlots), ...Object.keys(ownSlots)])) {
+      const ownClasses = key === 'base' ? cx(ownBase, ownSlots.base) : ownSlots[key]
       const replaced = typeof rawSlots[key] === 'function' || (key === 'base' && baseReplaced)
-      slots[key] = replaced ? own : cx(extended(key), own)
+      slots[key] = replaced ? ownClasses : cx(inherited(key), ownClasses)
     }
   }
 
@@ -337,7 +342,7 @@ interface CompiledSlot {
   compounds: CompiledCompound[]
   /** Every prop key that can change this slot's output, the memo key domain. */
   relevantKeys: string[]
-  cache: SlotCache
+  cache: Generations<string | undefined>
 }
 
 /**
@@ -397,12 +402,12 @@ function compileSlot(spec: Spec, slotKey: string): CompiledSlot {
 
   return {
     // A slotless theme resolves through an implicit `base` slot fed by its
-    // top-level `base`, which stays off `spec.slots` so `extend` still reads `{}`.
+    // top-level `base`, which stays off `spec.slots` so it returns a string.
     static: spec.hasSlots ? spec.slots[slotKey] : spec.base,
     variants,
     compounds,
     relevantKeys: [...relevant],
-    cache: new SlotCache()
+    cache: new Generations(SLOT_CACHE_LIMIT)
   }
 }
 
@@ -550,40 +555,42 @@ function fingerprint(compiled: CompiledSlot, props: Props, slotProps: Props): st
   return out
 }
 
-const CACHE_LIMIT = 256
+const SLOT_CACHE_LIMIT = 256
 
 /**
  * Two generations: when the current one fills up it becomes the previous one
  * instead of being cleared, and a hit there is promoted. Entries used within the
  * last generation survive, so a Table with per-row classes degrades its own hit
  * rate without wiping the static entries every other instance of that component
- * is hitting. The cache is shared for the process, so that containment matters.
+ * is hitting. The caches are shared for the process, so that containment matters.
  */
-class SlotCache {
-  private current = new Map<string, string | undefined>()
-  private previous: Map<string, string | undefined> | undefined
+class Generations<V> {
+  private current = new Map<string, V>()
+  private previous: Map<string, V> | undefined
+
+  constructor(private limit: number) {}
 
   /** Returns `BAIL` on a miss, since `undefined` is a real cached result. */
-  get(key: string): string | undefined | typeof BAIL {
+  get(key: string): V | typeof BAIL {
     const current = this.current
     const hit = current.get(key)
     if (hit !== undefined || current.has(key)) {
-      return hit
+      return hit as V
     }
     const previous = this.previous
     if (previous) {
       const old = previous.get(key)
       if (old !== undefined || previous.has(key)) {
         previous.delete(key)
-        this.set(key, old)
-        return old
+        this.set(key, old as V)
+        return old as V
       }
     }
     return BAIL
   }
 
-  set(key: string, value: string | undefined): void {
-    if (this.current.size >= CACHE_LIMIT) {
+  set(key: string, value: V): void {
+    if (this.current.size >= this.limit) {
       this.previous = this.current
       this.current = new Map()
     }
@@ -609,74 +616,109 @@ function resolveSlotCached(spec: Spec, slotKey: string, props: Props, slotProps:
  * factory
  * ------------------------------------------------------------------ */
 
-interface TVComponent {
-  (props?: Record<string, any>): any
-  base: ClassValue
-  slots: Record<string, ClassValue>
-  variants: Record<string, Record<string, any> | undefined>
-  defaultVariants: Record<string, any>
-  compoundVariants: Record<string, any>[]
-}
-
-/**
- * Compiled entries for the dominant `tv({ extend: theme })` call shape, keyed by
- * theme identity so every rebuild and every instance reuses one spec.
- */
+/** Compiled entries for a theme on its own, keyed by identity. */
 const themeSpecs = new WeakMap<object, Spec>()
 
-function onlyExtend(options: Record<string, any>): boolean {
-  for (const key in options) {
-    if (key !== 'extend') {
-      return false
+/** Compiled entries per theme for the overrides it was called with, keyed by content. */
+const overrideSpecs = new WeakMap<object, Generations<Spec>>()
+
+const OVERRIDES_LIMIT = 32
+
+const functionIds = new WeakMap<(...args: any[]) => any, number>()
+let nextFunctionId = 0
+
+/**
+ * The content key of an overrides object, in the `serialize` encoding, so every
+ * object that says the same thing shares one compiled entry. A replacer keys by
+ * identity, which is what its captured scope makes it.
+ */
+function keyOfOverrides(value: any, depth = 0): string | typeof BAIL {
+  if (typeof value === 'function') {
+    let id = functionIds.get(value)
+    if (id === undefined) {
+      functionIds.set(value, id = ++nextFunctionId)
     }
+    return 'F' + id
   }
-  return typeof options.extend === 'object' && options.extend !== null
+  if (typeof value !== 'object' || value === null) {
+    return serialize(value)
+  }
+  if (depth >= 8) {
+    return BAIL
+  }
+  if (Array.isArray(value)) {
+    let out = '['
+    for (const item of value) {
+      const part = keyOfOverrides(item, depth + 1)
+      if (part === BAIL) {
+        return BAIL
+      }
+      out += part + ','
+    }
+    return out + ']'
+  }
+  let out = '{'
+  for (const key of Object.keys(value)) {
+    const part = keyOfOverrides(value[key], depth + 1)
+    if (part === BAIL) {
+      return BAIL
+    }
+    out += '$' + key.length + ':' + key + '=' + part + ','
+  }
+  return out + '}'
+}
+
+function specFor(theme: Record<string, any>, overrides: Record<string, any> | null | undefined, config: TVMergeConfig | undefined): Spec {
+  if (overrides == null || isEmpty(overrides)) {
+    let spec = themeSpecs.get(theme)
+    if (!spec) {
+      spec = resolveSpec(theme, undefined, config)
+      themeSpecs.set(theme, spec)
+    }
+    return spec
+  }
+  const key = keyOfOverrides(overrides)
+  if (key === BAIL) {
+    return resolveSpec(theme, overrides, config)
+  }
+  let specs = overrideSpecs.get(theme)
+  if (!specs) {
+    specs = new Generations<Spec>(OVERRIDES_LIMIT)
+    overrideSpecs.set(theme, specs)
+  }
+  let spec = specs.get(key)
+  if (spec === BAIL) {
+    spec = resolveSpec(theme, overrides, config)
+    specs.set(key, spec)
+  }
+  return spec
 }
 
 function createTV(config?: TVMergeConfig) {
-  return function tv(options: Record<string, any> = {}): TVComponent {
-    let spec: Spec | undefined
-    if (onlyExtend(options)) {
-      spec = themeSpecs.get(options.extend)
-      if (!spec) {
-        spec = resolveSpec(options, config)
-        themeSpecs.set(options.extend, spec)
-      }
-    } else {
-      spec = resolveSpec(options, config)
-    }
-    const resolved = spec
+  return function tv(theme: Record<string, any>, overrides?: Record<string, any> | null) {
+    const spec = specFor(theme, overrides, config)
 
-    const component = ((props?: Record<string, any>) => {
-      if (!resolved.hasSlots) {
+    return (props?: Record<string, any>) => {
+      if (!spec.hasSlots) {
         // A slotless theme resolves as one implicit `base` slot. `class` travels
         // as a slot prop so the other invocation props keep props-only resolution.
-        const overrides = props && props.class !== undefined ? { class: props.class } : undefined
-        return resolveSlotCached(resolved, 'base', props, overrides)
+        const slotProps = props && props.class !== undefined ? { class: props.class } : undefined
+        return resolveSlotCached(spec, 'base', props, slotProps)
       }
 
       const fns: Record<string, (slotProps?: Record<string, any>) => string | undefined> = {}
-      for (const slotKey in resolved.slots) {
-        fns[slotKey] = slotProps => resolveSlotCached(resolved, slotKey, props, slotProps)
+      for (const slotKey in spec.slots) {
+        fns[slotKey] = slotProps => resolveSlotCached(spec, slotKey, props, slotProps)
       }
       return fns
-    }) as TVComponent
-
-    // Metadata reads, which is what `extend: tv(theme)` resolves against.
-    component.base = resolved.base
-    component.slots = resolved.slots
-    component.variants = resolved.variants
-    component.defaultVariants = resolved.defaultVariants
-    component.compoundVariants = resolved.compoundVariants
-
-    return component
+    }
   }
 }
 
 const appConfigTv = appConfig as AppConfig & { ui: { tv: TVMergeConfig } }
 
 /**
- * Build a component's classes from its theme, the `app.config.ui` overrides
+ * Build a component's classes from its theme, the `app.config.ui.<c>` overrides
  * merged on top, and the props it is invoked with.
  */
 export const tv = /* @__PURE__ */ createTV(appConfigTv.ui?.tv) as TV

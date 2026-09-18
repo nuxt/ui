@@ -71,7 +71,7 @@ const appConfig = useAppConfig() as FooterColumns['AppConfig']
 const as = computed(() => resolveAs(props.as, { root: 'nav', label: 'h3' }))
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.footerColumns || {}) })())
+const ui = computed(() => tv(theme, appConfig.ui?.footerColumns)())
 </script>
 
 <template>

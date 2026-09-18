@@ -140,7 +140,7 @@ const [DefinePriceTemplate, ReusePriceTemplate] = createReusableTemplate()
 const as = computed(() => resolveAs(props.as, { root: 'div', title: 'div' }))
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.pricingPlan || {}) })({
+const ui = computed(() => tv(theme, appConfig.ui?.pricingPlan)({
   orientation: props.orientation,
   variant: props.variant,
   highlight: props.highlight,

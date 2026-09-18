@@ -32,7 +32,7 @@ const { t } = useLocale()
 const appConfig = useAppConfig() as Skeleton['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.skeleton || {}) }))
+const ui = computed(() => tv(theme, appConfig.ui?.skeleton))
 </script>
 
 <template>

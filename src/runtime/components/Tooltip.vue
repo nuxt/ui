@@ -90,7 +90,7 @@ const ariaLabel = computed(() => {
 })
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.tooltip || {}) })())
+const ui = computed(() => tv(theme, appConfig.ui?.tooltip)())
 </script>
 
 <template>

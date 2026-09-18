@@ -71,7 +71,7 @@ const { t } = useLocale()
 
 const handlers = inject('editorHandlers', computed(() => createHandlers()))
 
-const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.editorSuggestionMenu || {}) })({
+const ui = computed(() => tv(theme, appConfig.ui?.editorSuggestionMenu)({
   size: props.size
 }))
 

@@ -45,7 +45,7 @@ const props = withDefaults(defineProps<EditorEmojiMenuProps<T>>(), {
 const appConfig = useAppConfig() as EditorEmojiMenu['AppConfig']
 const { t } = useLocale()
 
-const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.editorEmojiMenu || {}) })({
+const ui = computed(() => tv(theme, appConfig.ui?.editorEmojiMenu)({
   size: props.size
 }))
 

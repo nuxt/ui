@@ -53,7 +53,7 @@ const searchTerm = defineModel<string>('searchTerm', { default: '' })
 const appConfig = useAppConfig() as EditorMentionMenu['AppConfig']
 const { t } = useLocale()
 
-const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.editorMentionMenu || {}) })({
+const ui = computed(() => tv(theme, appConfig.ui?.editorMentionMenu)({
   size: props.size
 }))
 
