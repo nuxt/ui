@@ -62,10 +62,6 @@ describe('tv class replace', () => {
     expect(build().base({ class: () => 'block w-full' })).toBe('block w-full')
   })
 
-  it('detects a replacer in the `className` alias', () => {
-    expect(build().label({ className: () => 'text-3xl' })).toBe('text-3xl')
-  })
-
   it('applies a construction-time replacer from `app.config.ui` slots', () => {
     const ui = buildWith({ label: () => 'text-xl' })
     expect(ui.label()).toBe('text-xl')

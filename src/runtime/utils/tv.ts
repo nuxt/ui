@@ -167,12 +167,12 @@ function mergeWithOverrides(config: TVMergeConfig | undefined, parts: any[], ove
   if (!overrides) {
     return mergeClasses(config, ...parts)
   }
-  const replacer = findReplacer(overrides.class) ?? findReplacer(overrides.className)
+  const replacer = findReplacer(overrides.class)
   if (!replacer) {
-    parts.push(overrides.class, overrides.className)
+    parts.push(overrides.class)
     return mergeClasses(config, ...parts)
   }
-  return mergeClasses(config, replacer(mergeClasses(config, ...parts) ?? ''), overrides.class, overrides.className) ?? ''
+  return mergeClasses(config, replacer(mergeClasses(config, ...parts) ?? ''), overrides.class) ?? ''
 }
 
 /* ------------------------------------------------------------------ *
@@ -384,14 +384,14 @@ function compileSlot(spec: Spec, slotKey: string): CompiledSlot {
 
   const compounds: CompiledCompound[] = []
   for (const compound of spec.compoundVariants) {
-    const cls = cx(classForSlot(compound.class, slotKey), classForSlot(compound.className, slotKey))
+    const cls = cx(classForSlot(compound.class, slotKey))
     if (!cls) {
       continue
     }
     const keys: string[] = []
     const values: any[] = []
     for (const key in compound) {
-      if (key !== 'class' && key !== 'className') {
+      if (key !== 'class') {
         keys.push(key)
         values.push(compound[key])
         relevant.add(key)
@@ -508,7 +508,7 @@ function serialize(value: any): string | typeof BAIL {
 }
 
 /**
- * `class` / `className` values, where flat-ish arrays of primitives are allowed.
+ * `class` values, where flat-ish arrays of primitives are allowed.
  * A replacer is a function, so it bails here and never reaches the cache.
  */
 function serializeClass(value: any, depth = 0): string | typeof BAIL {
@@ -546,11 +546,10 @@ function fingerprint(compiled: CompiledSlot, props: Props, slotProps: Props): st
   }
   if (slotProps) {
     const cls = serializeClass(slotProps.class)
-    const clsName = serializeClass(slotProps.className)
-    if (cls === BAIL || clsName === BAIL) {
+    if (cls === BAIL) {
       return BAIL
     }
-    out += '|' + cls + '|' + clsName
+    out += '|' + cls
   }
   return out
 }
@@ -654,12 +653,9 @@ function createTV(config?: TVMergeConfig) {
 
     const component = ((props?: Record<string, any>) => {
       if (!resolved.hasSlots) {
-        // A slotless theme resolves as one implicit `base` slot. `class` /
-        // `className` travel as slot props so the other invocation props keep
-        // props-only resolution.
-        const overrides = props && (props.class !== undefined || props.className !== undefined)
-          ? { class: props.class, className: props.className }
-          : undefined
+        // A slotless theme resolves as one implicit `base` slot. `class` travels
+        // as a slot prop so the other invocation props keep props-only resolution.
+        const overrides = props && props.class !== undefined ? { class: props.class } : undefined
         return resolveSlotCached(resolved, 'base', props, overrides)
       }
 

@@ -47,11 +47,10 @@ export type ClassValue = string | 0 | 0n | false | null | undefined | readonly C
 export type TVSlots = Record<string, ClassValue> | undefined
 
 /**
- * `class` and `className` are interchangeable, and both apply when passed together.
+ * Classes to merge on top of a resolved chain.
  */
 export type ClassProp<T = ClassValue> = {
   class?: T
-  className?: T
 }
 
 /**
@@ -134,7 +133,7 @@ export type TVProps<V, EV = undefined> = {
 /**
  * The variant props of a built component, without the class overrides.
  */
-export type VariantProps<Component extends (...args: any) => any> = Omit<Exclude<Parameters<Component>[0], undefined>, 'class' | 'className'>
+export type VariantProps<Component extends (...args: any) => any> = Omit<Exclude<Parameters<Component>[0], undefined>, 'class'>
 
 /**
  * The metadata `extend` reads, whether it points at a plain theme object or at a

@@ -79,7 +79,7 @@ describe('tv types', () => {
   it('derives the variant props of a built component', () => {
     const component = tv(button)
 
-    expectTypeOf(component).parameter(0).exclude<undefined>().omit<'class' | 'className'>().toEqualTypeOf<VariantProps<typeof component>>()
+    expectTypeOf(component).parameter(0).exclude<undefined>().omit<'class'>().toEqualTypeOf<VariantProps<typeof component>>()
     expectTypeOf<VariantProps<typeof component>>().toEqualTypeOf<{ size?: 'sm' | 'md', block?: boolean }>()
   })
 
