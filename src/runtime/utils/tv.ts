@@ -194,55 +194,22 @@ function flatFilter(target: any[], value: any): void {
 const isPlainObject = (value: any): value is Record<string, any> => typeof value === 'object' && value !== null && !Array.isArray(value)
 
 /**
- * Merge the theme's variants into the overriding ones, value by value. Two
- * per-slot objects merge slot by slot, two class values are joined, and a class
- * value meeting a per-slot object is read as its `base`, which is where a plain
- * value lands in a slotted theme anyway. That last case is where
- * `app.config.ui.<c>.variants.size.md = 'text-lg'` over a theme's
- * `{ base, label }` used to resolve to `"[object Object] text-lg"`.
- */
-function mergeVariants(own: any, theme: any): any {
-  const result: Record<string, any> = {}
-  for (const key in own) {
-    result[key] = key in theme ? mergeVariantValue(own[key], theme[key]) : own[key]
-  }
-  for (const key in theme) {
-    if (!(key in own)) {
-      result[key] = theme[key]
-    }
-  }
-  return result
-}
-
-function mergeVariantValue(own: any, theme: any): any {
-  const ownIsObject = isPlainObject(own)
-  const themeIsObject = isPlainObject(theme)
-  if (ownIsObject || themeIsObject) {
-    return mergeVariants(ownIsObject ? own : { base: own }, themeIsObject ? theme : { base: theme })
-  }
-  const flat: any[] = []
-  flatFilter(flat, theme)
-  flatFilter(flat, own)
-  return flat
-}
-
-/**
- * One layer of a spec, resolved in full (slot classes, variants, compound
- * variants) before the next one, last class winning:
- * - the theme: its slot classes, the variants, its compound variants. The
- *   overrides' variants merge into the theme's here, value by value, so they
- *   stay beneath the theme's compounds. A compound is often the exception to a
- *   variant (`square` and `size` to `p-1.5`), and tuning the variant from
- *   `app.config.ui` doesn't mean to cancel it.
- * - the overrides: their slot classes, then their compound variants, so
- *   `app.config.ui.<c>.slots.<x>` wins over what the theme resolved the way
- *   `:ui` does, and the more specific compound still wins over it.
+ * One step of a spec. Steps resolve in order, last class winning:
+ * 1. the theme's slot classes and its variants
+ * 2. the overrides' variants, so tuning one from `app.config.ui` wins over
+ *    every theme variant, not only the ones declared before it
+ * 3. the theme's compound variants. A compound is often the exception to a
+ *    variant (`square` and `size` to `p-1.5`), and tuning the variant doesn't
+ *    mean to cancel it, so it stays above both.
+ * 4. the overrides' slot classes, then their compound variants, so
+ *    `app.config.ui.<c>.slots.<x>` wins over what the theme resolved the way
+ *    `:ui` does, and the more specific compound still wins over it.
  */
 interface Layer {
   /** Per slot, or under `base` for a slotless theme. */
-  statics: Record<string, ClassValue>
-  variants: Record<string, Record<string, any> | undefined>
-  compoundVariants: Record<string, any>[]
+  statics?: Record<string, ClassValue>
+  variants?: Record<string, Record<string, any> | undefined>
+  compoundVariants?: Record<string, any>[]
 }
 
 interface Spec {
@@ -269,6 +236,25 @@ function flatten(value: any): any[] {
   const flat: any[] = []
   flatFilter(flat, value)
   return flat
+}
+
+/**
+ * A plain copy of class data. Slots compile lazily, and the overrides are a
+ * reactive object Nuxt mutates in place, so a spec that kept references would
+ * compile whatever they hold by then under the key of what they held before.
+ */
+function snapshot<T>(value: T): T {
+  if (Array.isArray(value)) {
+    return value.map(snapshot) as T
+  }
+  if (isPlainObject(value)) {
+    const copy: Record<string, any> = {}
+    for (const key of Object.keys(value)) {
+      copy[key] = snapshot(value[key])
+    }
+    return copy as T
+  }
+  return value
 }
 
 /**
@@ -308,27 +294,30 @@ function resolveSpec(theme: Record<string, any>, overrides: Record<string, any> 
   const hasSlots = !isThemeSlotsEmpty || !isEmpty(ownSlots)
   const slotKeys = hasSlots ? [...new Set(['base', ...Object.keys(themeSlots), ...Object.keys(ownSlots)])] : []
 
+  // A replacer's result stands in for the theme's classes, beneath the
+  // variants. Plain classes set beside it (`base` next to a `slots.base`
+  // replacer) are overrides like any other and go on top.
   const themeStatics: Record<string, ClassValue> = {}
   const ownStatics: Record<string, ClassValue> = {}
   for (const key of hasSlots ? slotKeys : ['base']) {
-    const ownClasses = key === 'base' ? cx(ownBase, hasSlots ? ownSlots.base : undefined) : ownSlots[key]
-    const replaced = typeof rawSlots[key] === 'function' || (key === 'base' && baseReplaced)
-    if (replaced) {
-      themeStatics[key] = ownClasses
+    const slotReplaced = typeof rawSlots[key] === 'function'
+    const slotClasses = key === 'base' && !hasSlots ? undefined : ownSlots[key]
+    if (key === 'base') {
+      themeStatics[key] = baseReplaced || slotReplaced ? cx(baseReplaced && ownBase, slotReplaced && slotClasses) : inherited(key)
+      ownStatics[key] = snapshot(cx(!baseReplaced && ownBase, !slotReplaced && slotClasses))
     } else {
-      themeStatics[key] = inherited(key)
-      ownStatics[key] = ownClasses
+      themeStatics[key] = slotReplaced ? slotClasses : inherited(key)
+      ownStatics[key] = slotReplaced ? undefined : snapshot(slotClasses)
     }
   }
 
-  const ownVariants = own.variants ?? {}
-  const layers: Layer[] = [{
-    statics: themeStatics,
-    variants: isEmpty(theme.variants) ? ownVariants : mergeVariants(ownVariants, theme.variants),
-    compoundVariants: flatten(theme.compoundVariants)
-  }]
+  const layers: Layer[] = [{ statics: themeStatics, variants: theme.variants }]
+  if (!isEmpty(own.variants)) {
+    layers.push({ variants: snapshot(own.variants) })
+  }
+  layers.push({ compoundVariants: flatten(theme.compoundVariants) })
   if (overrides) {
-    layers.push({ statics: ownStatics, variants: {}, compoundVariants: flatten(own.compoundVariants) })
+    layers.push({ statics: ownStatics, compoundVariants: snapshot(flatten(own.compoundVariants)) })
   }
 
   return {
@@ -336,7 +325,7 @@ function resolveSpec(theme: Record<string, any>, overrides: Record<string, any> 
     layers,
     slotKeys,
     hasSlots,
-    defaultVariants: isEmpty(theme.defaultVariants) ? own.defaultVariants ?? {} : { ...theme.defaultVariants, ...own.defaultVariants },
+    defaultVariants: { ...theme.defaultVariants, ...own.defaultVariants },
     compiled: Object.create(null)
   }
 }
@@ -384,8 +373,9 @@ function classForSlot(value: any, slotKey: string): any {
 
 function compileLayer(layer: Layer, defaultVariants: Record<string, any>, slotKey: string, relevant: Set<string>): CompiledLayer {
   const variants: CompiledVariant[] = []
-  for (const key in layer.variants) {
-    const group = layer.variants[key]
+  const groups = layer.variants ?? EMPTY
+  for (const key in groups) {
+    const group = groups[key]
     if (!group || isEmpty(group)) {
       continue
     }
@@ -407,7 +397,7 @@ function compileLayer(layer: Layer, defaultVariants: Record<string, any>, slotKe
   }
 
   const compounds: CompiledCompound[] = []
-  for (const compound of layer.compoundVariants) {
+  for (const compound of layer.compoundVariants ?? []) {
     const cls = cx(classForSlot(compound.class, slotKey))
     if (!cls) {
       continue
@@ -424,7 +414,7 @@ function compileLayer(layer: Layer, defaultVariants: Record<string, any>, slotKe
     compounds.push({ keys, values, cls })
   }
 
-  return { static: layer.statics[slotKey], variants, compounds }
+  return { static: layer.statics?.[slotKey], variants, compounds }
 }
 
 function compileSlot(spec: Spec, slotKey: string): CompiledSlot {

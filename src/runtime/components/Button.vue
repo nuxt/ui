@@ -45,14 +45,13 @@ export interface ButtonSlots {
 
 <script setup lang="ts">
 import { computed, ref, inject } from 'vue'
-import { defu } from 'defu'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFieldGroup } from '../composables/useFieldGroup'
 import { formLoadingInjectionKey } from '../composables/useFormField'
-import { omit, mergeClasses } from '../utils'
+import { omit, mergeActiveClasses } from '../utils'
 import { tv } from '../utils/tv'
 import { pickLinkProps } from '../utils/link'
 import UIcon from './Icon.vue'
@@ -107,27 +106,7 @@ const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponen
   }))
 )
 
-// `activeClass` / `inactiveClass` fold into the `active` variant. When neither
-// is set and the config declares no variants, the config goes in as is, so
-// every instance shares one compiled entry.
-const overrides = computed(() => {
-  const config = appConfig.ui?.button
-  if (props.activeClass === undefined && props.inactiveClass === undefined && !config?.variants) {
-    return config
-  }
-  return defu({
-    variants: {
-      active: {
-        true: {
-          base: mergeClasses(config?.variants?.active?.true?.base, props.activeClass)
-        },
-        false: {
-          base: mergeClasses(config?.variants?.active?.false?.base, props.inactiveClass)
-        }
-      }
-    }
-  }, config || {})
-})
+const overrides = computed(() => mergeActiveClasses(appConfig.ui?.button, props.activeClass, props.inactiveClass, 'base'))
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv(theme, overrides.value)({

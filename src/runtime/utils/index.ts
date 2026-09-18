@@ -1,3 +1,4 @@
+import { defu } from 'defu'
 import { isEqual } from 'ohash/utils'
 import { withTrailingSlash, withLeadingSlash, joinURL } from 'ufo'
 import type { GetItemKeys } from '../types/utils'
@@ -179,6 +180,33 @@ export function mergeClasses(appConfigClass?: string | string[], propClass?: str
     ...(Array.isArray(appConfigClass) ? appConfigClass : [appConfigClass]),
     propClass
   ].filter(Boolean)
+}
+
+/**
+ * Fold `activeClass` / `inactiveClass` into the `active` variant of a component
+ * config. When neither is set the config comes back as is, so every instance
+ * shares one compiled entry. `slot` is the slot the classes apply to, for a
+ * theme with slots.
+ */
+export function mergeActiveClasses<T extends Record<string, any>>(config: T | undefined, activeClass?: string, inactiveClass?: string, slot?: string): T | undefined {
+  if (activeClass === undefined && inactiveClass === undefined) {
+    return config
+  }
+
+  const active = config?.variants?.active
+  const merge = (value: any, propClass?: string) => {
+    const classes = mergeClasses(slot ? value?.[slot] : value, propClass)
+    return slot ? { [slot]: classes } : classes
+  }
+
+  return defu({
+    variants: {
+      active: {
+        true: merge(active?.true, activeClass),
+        false: merge(active?.false, inactiveClass)
+      }
+    }
+  }, config || {}) as unknown as T
 }
 
 export function getSlotChildrenText(children: any) {
