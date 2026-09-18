@@ -6,7 +6,7 @@ import type { extendTailwindMerge } from 'tailwind-merge'
  *
  * Inference is the half the snapshot suite can't prove, since it breaks in
  * user-land (`app.config.ui` autocomplete, component prop types) rather than in
- * CI, so `test/utils/tv-types.spec.ts` asserts the contract.
+ * CI, so the type block of `test/utils/tv.spec.ts` asserts the contract.
  */
 
 type MergeConfig = Parameters<typeof extendTailwindMerge>[0]
