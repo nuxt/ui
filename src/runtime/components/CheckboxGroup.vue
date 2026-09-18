@@ -129,7 +129,7 @@ const highlight = computed(() => formFieldHighlight.value ?? props.highlight)
 const disabled = computed(() => formFieldDisabled.value ?? props.disabled)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.checkboxGroup || {}) })({
+const ui = computed(() => tv(theme, appConfig.ui?.checkboxGroup)({
   size: size.value,
   required: props.required,
   orientation: props.orientation,

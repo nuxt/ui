@@ -235,7 +235,7 @@ const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: L
 })
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.listbox || {}) })({
+const ui = computed(() => tv(theme, appConfig.ui?.listbox)({
   color: color.value,
   size: size.value,
   highlight: highlight.value,
