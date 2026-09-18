@@ -42,9 +42,8 @@ const ITERATIONS = 100
 // Building the factory deep-merges the whole variant matrix, joins every slot
 // and flattens compound variants. It happens inside each component's `computed`,
 // so every variant-prop change re-runs it. `{ extend: theme }` alone is the
-// shape the engine shares across rebuilds, so it measures the WeakMap hit; the
-// `configured` cases spread `app.config.ui.<c>` in, the way every component
-// does, and pay the resolve on each build.
+// shape the engine shares across rebuilds, so this measures the WeakMap hit;
+// the configured shapes are at the end of the file.
 describe('factory build', () => {
   bench('button (~6 slots)', () => {
     for (let i = 0; i < ITERATIONS; i++) {
@@ -61,18 +60,6 @@ describe('factory build', () => {
   bench('navigation-menu (~31 slots)', () => {
     for (let i = 0; i < ITERATIONS; i++) {
       tv({ extend: navigationMenuTheme })
-    }
-  })
-
-  bench('button, configured', () => {
-    for (let i = 0; i < ITERATIONS; i++) {
-      tv({ extend: buttonTheme, ...buttonOverrides })
-    }
-  })
-
-  bench('navigation-menu, configured', () => {
-    for (let i = 0; i < ITERATIONS; i++) {
-      tv({ extend: navigationMenuTheme, ...navigationMenuOverrides })
     }
   })
 })
@@ -111,24 +98,6 @@ describe('build + invoke (current fused pattern)', () => {
       tv({ extend: tableTheme })(tableProps)
     }
   })
-
-  // Button's real shape: `defu` injects `variants.active` on every build, so it
-  // never hits the shared entry and resolves plus compiles each time.
-  bench('button, configured', () => {
-    for (let i = 0; i < ITERATIONS; i++) {
-      const ui = tv({ extend: buttonTheme, ...buttonOverrides })(buttonProps)
-      ui.base()
-      ui.label()
-    }
-  })
-
-  bench('table, configured', () => {
-    for (let i = 0; i < ITERATIONS; i++) {
-      const ui = tv({ extend: tableTheme, ...tableOverrides })(tableProps)
-      ui.root()
-      ui.td()
-    }
-  })
 })
 
 // Table renders call `ui.td(...)` once per cell. This models a 100-cell render,
@@ -146,6 +115,45 @@ describe('slot invocation', () => {
   bench('td x100 (array class)', () => {
     for (let i = 0; i < 100; i++) {
       tableUi.td({ class: [undefined, 'p-2'], pinned: false })
+    }
+  })
+})
+
+// The shapes components actually call, which spread `app.config.ui.<c>` beside
+// `extend` and so resolve a fresh spec on every build. Last on purpose: each
+// iteration leaves a spec, its compiled slots and their caches as garbage, and
+// the CodSpeed runner forces a full GC before every measured run. With that
+// much to collect, V8 ages and flushes the JIT code of whatever is measured
+// next, which showed up as a 20x regression on the slot-invocation benches when
+// these ran before them.
+describe('configured shapes', () => {
+  bench('factory build: button', () => {
+    for (let i = 0; i < ITERATIONS; i++) {
+      tv({ extend: buttonTheme, ...buttonOverrides })
+    }
+  })
+
+  bench('factory build: navigation-menu', () => {
+    for (let i = 0; i < ITERATIONS; i++) {
+      tv({ extend: navigationMenuTheme, ...navigationMenuOverrides })
+    }
+  })
+
+  // Button's real shape: `defu` injects `variants.active` on every build, so it
+  // never hits the shared entry and resolves plus compiles each time.
+  bench('build + invoke: button', () => {
+    for (let i = 0; i < ITERATIONS; i++) {
+      const ui = tv({ extend: buttonTheme, ...buttonOverrides })(buttonProps)
+      ui.base()
+      ui.label()
+    }
+  })
+
+  bench('build + invoke: table', () => {
+    for (let i = 0; i < ITERATIONS; i++) {
+      const ui = tv({ extend: tableTheme, ...tableOverrides })(tableProps)
+      ui.root()
+      ui.td()
     }
   })
 })
