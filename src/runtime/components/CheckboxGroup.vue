@@ -4,6 +4,7 @@ import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/checkbox-group'
 import type { CheckboxProps } from './Checkbox.vue'
+import type { IconProps } from './Icon.vue'
 import type { AcceptableValue, GetItemKeys, GetModelValue, GetModelValueEmits } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
@@ -16,6 +17,11 @@ export type CheckboxGroupItem = CheckboxGroupValue | {
   description?: string
   disabled?: boolean
   value?: string
+  /**
+   * The icon displayed when checked, or above the label when `indicator` is `hidden`.
+   * @IconifyIcon
+   */
+  icon?: IconProps['name']
   class?: any
   ui?: Pick<CheckboxGroup['slots'], 'item'> & Omit<Required<CheckboxProps>['ui'], 'root'>
   [key: string]: any
@@ -104,7 +110,7 @@ const props = useComponentProps<CheckboxGroupProps<T, VK>>('checkboxGroup', _pro
 const appConfig = useAppConfig() as CheckboxGroup['AppConfig']
 
 const rootProps = useForwardProps(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'orientation', 'loop', 'required'), emits)
-const checkboxProps = useForwardProps(reactivePick(props, 'variant', 'indicator', 'icon'))
+const checkboxProps = useForwardProps(reactivePick(props, 'variant', 'indicator'))
 const getProxySlots = () => omit(slots, ['legend'])
 
 const { emitFormChange, emitFormInput, color: formFieldColor, highlight: formFieldHighlight, name, size: formFieldSize, id: _id, disabled: formFieldDisabled, ariaAttrs } = useFormField<CheckboxGroupProps<T>>(_props, { bind: false })
@@ -129,6 +135,7 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.checkboxGroup ||
   orientation: props.orientation,
   color: color.value,
   variant: props.variant,
+  highlight: highlight.value,
   disabled: disabled.value
 }))
 
@@ -200,6 +207,7 @@ function onUpdate(value: any) {
         v-for="item in normalizedItems"
         :key="item.value"
         v-bind="{ ...item, ...checkboxProps }"
+        :icon="item.icon ?? props.icon"
         :color="color"
         :highlight="highlight"
         :size="size"

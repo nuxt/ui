@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { joinURL } from 'ufo'
 import { kebabCase } from 'scule'
 import type { ContentNavigationItem } from '@nuxt/content'
 
@@ -15,6 +14,13 @@ definePageMeta({
 const { data: page } = await useAsyncData(kebabCase(route.path), () => queryCollection('docs').path(route.path).first())
 if (!page.value) {
   throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
+}
+
+// A page that is only a link in the sidebar, like Figma. The route rule sends
+// full requests along, this catches client side navigations to it.
+const externalTo = (page.value as { to?: string }).to
+if (externalTo) {
+  await navigateTo(externalTo, { external: true, replace: true })
 }
 
 // Update the framework if the page has different one
@@ -76,9 +82,9 @@ useSeoMeta({
 
 const path = computed(() => route.path.replace(/\/$/, ''))
 
-if (import.meta.server) {
-  prerenderRoutes([joinURL('/raw', `${path.value}.md`)])
+useCanonical(computed(() => `/raw${path.value}.md`))
 
+if (import.meta.server) {
   if (route.path.startsWith('/docs/components/')) {
     defineOgImage('Component.takumi', {
       title: page.value.title,
@@ -109,26 +115,19 @@ if (import.meta.server) {
   ])
 }
 
-useCanonical(computed(() => `${path.value}.md`))
-
-const { open, messages } = useChat()
+const { open, ask } = useChat()
+const studioIcons = useStudioIcons()
 
 const links = computed(() => [{
-  icon: 'i-lucide-file-pen',
+  icon: studioIcons.pencil,
   label: 'Edit this page',
   to: `https://github.com/nuxt/ui/edit/v4/docs/content/${page?.value?.stem}.md`,
   target: '_blank'
 }, {
-  icon: 'i-lucide-bot-message-square',
+  // Nuxi, the same mark every Ask AI trigger wears, so it doesn't skin with the pack
+  icon: 'i-custom-nuxi',
   label: 'Explain with AI',
-  onClick: () => {
-    messages.value = [...messages.value, {
-      id: String(Date.now()),
-      role: 'user',
-      parts: [{ type: 'text', text: 'Read this documentation page and summarize it. I want to ask questions about it.' }]
-    }]
-    open.value = true
-  }
+  onClick: () => ask('Read this documentation page and summarize it. I want to ask questions about it.')
 }])
 </script>
 
@@ -140,7 +139,7 @@ const links = computed(() => [{
       right: 'lg:hidden'
     } : undefined"
   >
-    <UPageHeader>
+    <UPageHeader :description="page.description">
       <template #headline>
         <UBreadcrumb :items="breadcrumb" />
       </template>
@@ -155,10 +154,6 @@ const links = computed(() => [{
           size="lg"
           class="rounded-full align-middle"
         />
-      </template>
-
-      <template #description>
-        <MDC v-if="page.description" :value="page.description" unwrap="p" :cache-key="`${kebabCase(route.path)}-description`" />
       </template>
 
       <template #links>

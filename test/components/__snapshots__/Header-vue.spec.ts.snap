@@ -1,7 +1,7 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Header > renders with as correctly 1`] = `
-"<section data-slot="root" class="bg-default/75 backdrop-blur border-b border-default h-(--ui-header-height) sticky top-0 z-50">
+"<section data-slot="root" class="bg-default/75 backdrop-blur-sm border-b border-default h-(--ui-header-height) sticky top-0 z-50">
   <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-full" data-slot="container">
     <div data-slot="left" class="lg:flex-1 flex items-center gap-1.5">
       <!--v-if--><a href="/" aria-label="Nuxt UI" data-slot="title" class="outline-primary/25 focus-visible:outline-3 rounded-md shrink-0 font-bold text-xl text-highlighted flex items-end gap-1.5">Nuxt UI</a>
@@ -19,7 +19,7 @@ exports[`Header > renders with as correctly 1`] = `
 `;
 
 exports[`Header > renders with body slot correctly 1`] = `
-"<header data-slot="root" class="bg-default/75 backdrop-blur border-b border-default h-(--ui-header-height) sticky top-0 z-50">
+"<header data-slot="root" class="bg-default/75 backdrop-blur-sm border-b border-default h-(--ui-header-height) sticky top-0 z-50">
   <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-full" data-slot="container">
     <div data-slot="left" class="lg:flex-1 flex items-center gap-1.5">
       <!--v-if--><a href="/" aria-label="Nuxt UI" data-slot="title" class="outline-primary/25 focus-visible:outline-3 rounded-md shrink-0 font-bold text-xl text-highlighted flex items-end gap-1.5">Nuxt UI</a>
@@ -37,7 +37,7 @@ exports[`Header > renders with body slot correctly 1`] = `
 `;
 
 exports[`Header > renders with bottom slot correctly 1`] = `
-"<header data-slot="root" class="bg-default/75 backdrop-blur border-b border-default h-(--ui-header-height) sticky top-0 z-50">
+"<header data-slot="root" class="bg-default/75 backdrop-blur-sm border-b border-default h-(--ui-header-height) sticky top-0 z-50">
   <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-full" data-slot="container">
     <div data-slot="left" class="lg:flex-1 flex items-center gap-1.5">
       <!--v-if--><a href="/" aria-label="Nuxt UI" data-slot="title" class="outline-primary/25 focus-visible:outline-3 rounded-md shrink-0 font-bold text-xl text-highlighted flex items-end gap-1.5">Nuxt UI</a>
@@ -55,7 +55,7 @@ exports[`Header > renders with bottom slot correctly 1`] = `
 `;
 
 exports[`Header > renders with class correctly 1`] = `
-"<header data-slot="root" class="bg-default/75 backdrop-blur border-default h-(--ui-header-height) sticky top-0 z-50 border-b-0">
+"<header data-slot="root" class="bg-default/75 backdrop-blur-sm border-default h-(--ui-header-height) sticky top-0 z-50 border-b-0">
   <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-full" data-slot="container">
     <div data-slot="left" class="lg:flex-1 flex items-center gap-1.5">
       <!--v-if--><a href="/" aria-label="Nuxt UI" data-slot="title" class="outline-primary/25 focus-visible:outline-3 rounded-md shrink-0 font-bold text-xl text-highlighted flex items-end gap-1.5">Nuxt UI</a>
@@ -73,7 +73,7 @@ exports[`Header > renders with class correctly 1`] = `
 `;
 
 exports[`Header > renders with content slot correctly 1`] = `
-"<header data-slot="root" class="bg-default/75 backdrop-blur border-b border-default h-(--ui-header-height) sticky top-0 z-50">
+"<header data-slot="root" class="bg-default/75 backdrop-blur-sm border-b border-default h-(--ui-header-height) sticky top-0 z-50">
   <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-full" data-slot="container">
     <div data-slot="left" class="lg:flex-1 flex items-center gap-1.5">
       <!--v-if--><a href="/" aria-label="Nuxt UI" data-slot="title" class="outline-primary/25 focus-visible:outline-3 rounded-md shrink-0 font-bold text-xl text-highlighted flex items-end gap-1.5">Nuxt UI</a>
@@ -91,7 +91,7 @@ exports[`Header > renders with content slot correctly 1`] = `
 `;
 
 exports[`Header > renders with default slot correctly 1`] = `
-"<header data-slot="root" class="bg-default/75 backdrop-blur border-b border-default h-(--ui-header-height) sticky top-0 z-50">
+"<header data-slot="root" class="bg-default/75 backdrop-blur-sm border-b border-default h-(--ui-header-height) sticky top-0 z-50">
   <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-full" data-slot="container">
     <div data-slot="left" class="lg:flex-1 flex items-center gap-1.5">
       <!--v-if--><a href="/" aria-label="Nuxt UI" data-slot="title" class="outline-primary/25 focus-visible:outline-3 rounded-md shrink-0 font-bold text-xl text-highlighted flex items-end gap-1.5">Nuxt UI</a>
@@ -109,7 +109,7 @@ exports[`Header > renders with default slot correctly 1`] = `
 `;
 
 exports[`Header > renders with left slot correctly 1`] = `
-"<header data-slot="root" class="bg-default/75 backdrop-blur border-b border-default h-(--ui-header-height) sticky top-0 z-50">
+"<header data-slot="root" class="bg-default/75 backdrop-blur-sm border-b border-default h-(--ui-header-height) sticky top-0 z-50">
   <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-full" data-slot="container">
     <div data-slot="left" class="lg:flex-1 flex items-center gap-1.5">
       <!--v-if-->Left slot
@@ -127,7 +127,7 @@ exports[`Header > renders with left slot correctly 1`] = `
 `;
 
 exports[`Header > renders with mode drawer correctly 1`] = `
-"<header data-slot="root" class="bg-default/75 backdrop-blur border-b border-default h-(--ui-header-height) sticky top-0 z-50">
+"<header data-slot="root" class="bg-default/75 backdrop-blur-sm border-b border-default h-(--ui-header-height) sticky top-0 z-50">
   <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-full" data-slot="container">
     <div data-slot="left" class="lg:flex-1 flex items-center gap-1.5">
       <!--v-if--><a href="/" aria-label="Nuxt UI" data-slot="title" class="outline-primary/25 focus-visible:outline-3 rounded-md shrink-0 font-bold text-xl text-highlighted flex items-end gap-1.5">Nuxt UI</a>
@@ -157,7 +157,7 @@ exports[`Header > renders with mode drawer correctly 1`] = `
 `;
 
 exports[`Header > renders with mode modal correctly 1`] = `
-"<header data-slot="root" class="bg-default/75 backdrop-blur border-b border-default h-(--ui-header-height) sticky top-0 z-50">
+"<header data-slot="root" class="bg-default/75 backdrop-blur-sm border-b border-default h-(--ui-header-height) sticky top-0 z-50">
   <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-full" data-slot="container">
     <div data-slot="left" class="lg:flex-1 flex items-center gap-1.5">
       <!--v-if--><a href="/" aria-label="Nuxt UI" data-slot="title" class="outline-primary/25 focus-visible:outline-3 rounded-md shrink-0 font-bold text-xl text-highlighted flex items-end gap-1.5">Nuxt UI</a>
@@ -196,7 +196,7 @@ exports[`Header > renders with mode modal correctly 1`] = `
 `;
 
 exports[`Header > renders with mode slideover correctly 1`] = `
-"<header data-slot="root" class="bg-default/75 backdrop-blur border-b border-default h-(--ui-header-height) sticky top-0 z-50">
+"<header data-slot="root" class="bg-default/75 backdrop-blur-sm border-b border-default h-(--ui-header-height) sticky top-0 z-50">
   <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-full" data-slot="container">
     <div data-slot="left" class="lg:flex-1 flex items-center gap-1.5">
       <!--v-if--><a href="/" aria-label="Nuxt UI" data-slot="title" class="outline-primary/25 focus-visible:outline-3 rounded-md shrink-0 font-bold text-xl text-highlighted flex items-end gap-1.5">Nuxt UI</a>
@@ -233,7 +233,7 @@ exports[`Header > renders with mode slideover correctly 1`] = `
 `;
 
 exports[`Header > renders with right slot correctly 1`] = `
-"<header data-slot="root" class="bg-default/75 backdrop-blur border-b border-default h-(--ui-header-height) sticky top-0 z-50">
+"<header data-slot="root" class="bg-default/75 backdrop-blur-sm border-b border-default h-(--ui-header-height) sticky top-0 z-50">
   <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-full" data-slot="container">
     <div data-slot="left" class="lg:flex-1 flex items-center gap-1.5">
       <!--v-if--><a href="/" aria-label="Nuxt UI" data-slot="title" class="outline-primary/25 focus-visible:outline-3 rounded-md shrink-0 font-bold text-xl text-highlighted flex items-end gap-1.5">Nuxt UI</a>
@@ -251,7 +251,7 @@ exports[`Header > renders with right slot correctly 1`] = `
 `;
 
 exports[`Header > renders with title correctly 1`] = `
-"<header data-slot="root" class="bg-default/75 backdrop-blur border-b border-default h-(--ui-header-height) sticky top-0 z-50">
+"<header data-slot="root" class="bg-default/75 backdrop-blur-sm border-b border-default h-(--ui-header-height) sticky top-0 z-50">
   <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-full" data-slot="container">
     <div data-slot="left" class="lg:flex-1 flex items-center gap-1.5">
       <!--v-if--><a href="/" aria-label="Documentation" data-slot="title" class="outline-primary/25 focus-visible:outline-3 rounded-md hover:text-default transition-colors shrink-0 font-bold text-xl text-highlighted flex items-end gap-1.5">Documentation</a>
@@ -269,7 +269,7 @@ exports[`Header > renders with title correctly 1`] = `
 `;
 
 exports[`Header > renders with title slot correctly 1`] = `
-"<header data-slot="root" class="bg-default/75 backdrop-blur border-b border-default h-(--ui-header-height) sticky top-0 z-50">
+"<header data-slot="root" class="bg-default/75 backdrop-blur-sm border-b border-default h-(--ui-header-height) sticky top-0 z-50">
   <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-full" data-slot="container">
     <div data-slot="left" class="lg:flex-1 flex items-center gap-1.5">
       <!--v-if--><a href="/" aria-label="Title slot" data-slot="title" class="outline-primary/25 focus-visible:outline-3 rounded-md shrink-0 font-bold text-xl text-highlighted flex items-end gap-1.5">Title slot</a>
@@ -287,7 +287,7 @@ exports[`Header > renders with title slot correctly 1`] = `
 `;
 
 exports[`Header > renders with to correctly 1`] = `
-"<header data-slot="root" class="bg-default/75 backdrop-blur border-b border-default h-(--ui-header-height) sticky top-0 z-50">
+"<header data-slot="root" class="bg-default/75 backdrop-blur-sm border-b border-default h-(--ui-header-height) sticky top-0 z-50">
   <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-full" data-slot="container">
     <div data-slot="left" class="lg:flex-1 flex items-center gap-1.5">
       <!--v-if--><a href="/docs" aria-label="Nuxt UI" data-slot="title" class="outline-primary/25 focus-visible:outline-3 rounded-md hover:text-default transition-colors shrink-0 font-bold text-xl text-highlighted flex items-end gap-1.5">Nuxt UI</a>
@@ -305,7 +305,7 @@ exports[`Header > renders with to correctly 1`] = `
 `;
 
 exports[`Header > renders with toggle correctly 1`] = `
-"<header data-slot="root" class="bg-default/75 backdrop-blur border-b border-default h-(--ui-header-height) sticky top-0 z-50">
+"<header data-slot="root" class="bg-default/75 backdrop-blur-sm border-b border-default h-(--ui-header-height) sticky top-0 z-50">
   <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-full" data-slot="container">
     <div data-slot="left" class="lg:flex-1 flex items-center gap-1.5">
       <!--v-if--><a href="/" aria-label="Nuxt UI" data-slot="title" class="outline-primary/25 focus-visible:outline-3 rounded-md shrink-0 font-bold text-xl text-highlighted flex items-end gap-1.5">Nuxt UI</a>
@@ -323,7 +323,7 @@ exports[`Header > renders with toggle correctly 1`] = `
 `;
 
 exports[`Header > renders with toggle slot correctly 1`] = `
-"<header data-slot="root" class="bg-default/75 backdrop-blur border-b border-default h-(--ui-header-height) sticky top-0 z-50">
+"<header data-slot="root" class="bg-default/75 backdrop-blur-sm border-b border-default h-(--ui-header-height) sticky top-0 z-50">
   <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-full" data-slot="container">
     <div data-slot="left" class="lg:flex-1 flex items-center gap-1.5">
       <!--v-if--><a href="/" aria-label="Nuxt UI" data-slot="title" class="outline-primary/25 focus-visible:outline-3 rounded-md shrink-0 font-bold text-xl text-highlighted flex items-end gap-1.5">Nuxt UI</a>
@@ -338,7 +338,7 @@ exports[`Header > renders with toggle slot correctly 1`] = `
 `;
 
 exports[`Header > renders with toggleSide correctly 1`] = `
-"<header data-slot="root" class="bg-default/75 backdrop-blur border-b border-default h-(--ui-header-height) sticky top-0 z-50">
+"<header data-slot="root" class="bg-default/75 backdrop-blur-sm border-b border-default h-(--ui-header-height) sticky top-0 z-50">
   <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-full" data-slot="container">
     <div data-slot="left" class="lg:flex-1 flex items-center gap-1.5"><button type="button" data-slot="toggle" aria-label="Open menu" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 text-default hover:bg-elevated active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 lg:hidden -ms-1.5"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="leadingIcon" class="shrink-0 size-5"></svg>
         <!--v-if-->
@@ -356,7 +356,7 @@ exports[`Header > renders with toggleSide correctly 1`] = `
 `;
 
 exports[`Header > renders with top slot correctly 1`] = `
-"<header data-slot="root" class="bg-default/75 backdrop-blur border-b border-default h-(--ui-header-height) sticky top-0 z-50">Top slot<div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-full" data-slot="container">
+"<header data-slot="root" class="bg-default/75 backdrop-blur-sm border-b border-default h-(--ui-header-height) sticky top-0 z-50">Top slot<div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-full" data-slot="container">
     <div data-slot="left" class="lg:flex-1 flex items-center gap-1.5">
       <!--v-if--><a href="/" aria-label="Nuxt UI" data-slot="title" class="outline-primary/25 focus-visible:outline-3 rounded-md shrink-0 font-bold text-xl text-highlighted flex items-end gap-1.5">Nuxt UI</a>
     </div>
@@ -373,7 +373,7 @@ exports[`Header > renders with top slot correctly 1`] = `
 `;
 
 exports[`Header > renders with ui correctly 1`] = `
-"<header data-slot="root" class="bg-default/75 backdrop-blur border-b border-default h-(--ui-header-height) sticky top-0 z-50">
+"<header data-slot="root" class="bg-default/75 backdrop-blur-sm border-b border-default h-(--ui-header-height) sticky top-0 z-50">
   <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-full gap-1.5" data-slot="container">
     <div data-slot="left" class="lg:flex-1 flex items-center gap-1.5">
       <!--v-if--><a href="/" aria-label="Nuxt UI" data-slot="title" class="outline-primary/25 focus-visible:outline-3 rounded-md shrink-0 font-bold text-xl text-highlighted flex items-end gap-1.5">Nuxt UI</a>
@@ -391,7 +391,7 @@ exports[`Header > renders with ui correctly 1`] = `
 `;
 
 exports[`Header > renders without toggle correctly 1`] = `
-"<header data-slot="root" class="bg-default/75 backdrop-blur border-b border-default h-(--ui-header-height) sticky top-0 z-50">
+"<header data-slot="root" class="bg-default/75 backdrop-blur-sm border-b border-default h-(--ui-header-height) sticky top-0 z-50">
   <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-full" data-slot="container">
     <div data-slot="left" class="lg:flex-1 flex items-center gap-1.5">
       <!--v-if--><a href="/" aria-label="Nuxt UI" data-slot="title" class="outline-primary/25 focus-visible:outline-3 rounded-md shrink-0 font-bold text-xl text-highlighted flex items-end gap-1.5">Nuxt UI</a>

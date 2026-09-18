@@ -126,6 +126,7 @@ export interface ThemeDefaults {
   pricingPlans?: Partial<ComponentTypes.PricingPlansProps>
   pricingTable?: Partial<ComponentTypes.PricingTableProps>
   progress?: Partial<ComponentTypes.ProgressProps>
+  progressGroup?: Partial<ComponentTypes.ProgressGroupProps>
   /**
    * Prose components that expose overridable props, under a `prose` namespace
    * (mirrors `app.config.ui.prose` and `useComponentProps('prose.<tag>', …)`).
@@ -166,6 +167,7 @@ export interface ThemeDefaults {
   skeleton?: Partial<ComponentTypes.SkeletonProps>
   slideover?: Partial<ComponentTypes.SlideoverProps>
   slider?: Partial<ComponentTypes.SliderProps>
+  splitter?: Partial<ComponentTypes.SplitterProps>
   stepper?: Partial<ComponentTypes.StepperProps>
   switch?: Partial<ComponentTypes.SwitchProps>
   table?: Partial<ComponentTypes.TableProps>

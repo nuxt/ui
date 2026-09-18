@@ -17,8 +17,25 @@ export const useChat = createSharedComposable(() => {
     storageOpen.value = value
   })
 
+  // Set by the flows that hand the panel a question before it exists (the
+  // search palette, "Explain with AI"): the panel mounts on its first open,
+  // so its own sync watcher is not there to send it. The panel clears it.
+  const pending = ref(false)
+
+  function ask(text: string) {
+    messages.value = [...messages.value, {
+      id: String(Date.now()),
+      role: 'user',
+      parts: [{ type: 'text', text }]
+    }]
+    pending.value = true
+    open.value = true
+  }
+
   return {
     open,
-    messages
+    messages,
+    pending,
+    ask
   }
 })

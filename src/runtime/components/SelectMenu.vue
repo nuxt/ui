@@ -53,6 +53,7 @@ export interface SelectMenuProps<T extends ArrayOrNested<SelectMenuItem> = Array
    * Whether to display the search input or not.
    * Can be an object to pass additional props to the input.
    * `{ placeholder: 'Search...', variant: 'none' }`{lang="ts-type"}
+   * Set `autofocus: false` to prevent the search input from being focused when the menu opens (e.g. to avoid opening the virtual keyboard on touch devices).
    * @defaultValue true
    */
   searchInput?: boolean | Omit<InputProps, 'modelValue' | 'defaultValue'>
@@ -151,6 +152,8 @@ export interface SelectMenuProps<T extends ArrayOrNested<SelectMenuItem> = Array
   multiple?: M & boolean
   /** Highlight the ring color like a focus state. */
   highlight?: boolean
+  /** Keep the mobile text size on all breakpoints. */
+  fixed?: boolean
   /**
    * Determines if custom user input that does not exist in options can be added.
    * @defaultValue false
@@ -288,7 +291,7 @@ const virtualizerProps = toRef(() => {
     estimateSize: getEstimateSize(filteredItems.value, size.value ?? 'md', props.descriptionKey as string, !!slots['item-description'])
   })
 })
-const searchInputProps = toRef(() => defu(props.searchInput, { placeholder: t('selectMenu.search'), variant: 'none' }) as Omit<InputProps, 'modelValue' | 'defaultValue'>)
+const searchInputProps = toRef(() => defu(props.searchInput, { placeholder: t('selectMenu.search'), variant: 'none', fixed: props.fixed }) as Omit<InputProps, 'modelValue' | 'defaultValue'>)
 
 const { emitFormBlur, emitFormFocus, emitFormInput, emitFormChange, size: formFieldSize, color: formFieldColor, id, name, highlight: formFieldHighlight, disabled: formFieldDisabled, ariaAttrs } = useFormField<InputProps>(_props)
 
@@ -337,6 +340,7 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.selectMenu || {}
   size: size.value,
   loading: props.loading,
   highlight: highlight.value,
+  fixed: props.fixed,
   leading: isLeading.value || !!props.avatar || !!slots.leading,
   trailing: isTrailing.value || !!slots.trailing,
   fieldGroup: orientation.value,
@@ -487,6 +491,19 @@ function onUpdateOpen(value: boolean) {
   }
 }
 
+// `ComboboxTrigger` only toggles on click, unlike `ComboboxInput` which opens on arrow keys.
+// Since the trigger is the focusable element here, replicate the same behavior.
+function onTriggerKeydown(e: KeyboardEvent) {
+  if (isOpen.value) {
+    return
+  }
+
+  const trigger = e.currentTarget as HTMLElement
+
+  e.preventDefault()
+  trigger.click()
+}
+
 function onCreate(e: Event) {
   e.preventDefault()
   e.stopPropagation()
@@ -520,6 +537,13 @@ function isModelValueEmpty(modelValue: ApplyModifiers<GetModelValue<T, VK, M, Ex
 
 function onClear() {
   emits('clear')
+}
+
+function onMountAutoFocus(event: Event) {
+  // Prevent the `FocusScope` from focusing the search input on open when its autofocus is disabled.
+  if (searchInputProps.value.autofocus === false) {
+    event.preventDefault()
+  }
 }
 
 const viewportRef = useTemplateRef('viewportRef')
@@ -637,7 +661,9 @@ defineExpose({
         data-slot="base"
         :class="ui.base({ class: [props.ui?.base, props.class] })"
         tabindex="0"
-        v-bind="{ ...$attrs, ...ariaAttrs }"
+        v-bind="{ 'aria-label': undefined, ...$attrs, ...ariaAttrs }"
+        @keydown.down="onTriggerKeydown"
+        @keydown.up="onTriggerKeydown"
       >
         <span v-if="isLeading || !!props.avatar || !!slots.leading" data-slot="leading" :class="ui.leading({ class: props.ui?.leading })">
           <slot name="leading" :model-value="(modelValue as ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>)" :open="open" :ui="ui">
@@ -683,7 +709,7 @@ defineExpose({
     <ComboboxPortal v-bind="portalProps">
       <FieldGroupReset>
         <ComboboxContent data-slot="content" :class="ui.content({ class: props.ui?.content })" v-bind="contentProps">
-          <FocusScope trapped data-slot="focusScope" :class="ui.focusScope({ class: props.ui?.focusScope })">
+          <FocusScope trapped data-slot="focusScope" :class="ui.focusScope({ class: props.ui?.focusScope })" @mount-auto-focus="onMountAutoFocus">
             <slot name="content-top" />
 
             <ComboboxInput v-if="!!props.searchInput" v-model="searchTerm" :display-value="() => searchTerm" as-child>

@@ -1,3 +1,4 @@
+import { toRaw } from 'vue'
 import type { StandardSchemaV1 } from '@standard-schema/spec'
 import type { Struct } from 'superstruct'
 import type { FormSchema, ValidateReturnSchema } from '../types/form'
@@ -57,7 +58,13 @@ async function validateSuperstructSchema(state: any, schema: Struct<any, any>): 
   }
 }
 
-export function validateSchema<T extends object>(state: T, schema: FormSchema<T>): Promise<ValidateReturnSchema<typeof state>> {
+export function validateSchema<T extends object>(state: T, _schema: FormSchema<T>): Promise<ValidateReturnSchema<typeof state>> {
+  // Schemas stored in reactive state reach us as Vue proxies. Zod 4.5 resolves
+  // `~standard` through a lazy getter that captures the proxy as `this`, then
+  // reads its non-configurable `_zod` internals through it, which violates the
+  // proxy invariant and throws.
+  const schema = toRaw(_schema)
+
   if (isStandardSchema(schema)) {
     return validateStandardSchema(state, schema)
   } else if (isSuperStructSchema(schema)) {

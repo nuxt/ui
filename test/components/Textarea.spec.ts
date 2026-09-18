@@ -69,7 +69,11 @@ describe('Textarea', () => {
       ['with .number modifier', { props: { modelModifiers: { number: true } } }, { input: '42', expected: 42 }],
       ['with .lazy modifier', { props: { modelModifiers: { lazy: true } } }, { input: 'input', expected: 'input' }],
       ['with .nullable modifier', { props: { modelModifiers: { nullable: true } } }, { input: '', expected: null }],
-      ['with .optional modifier', { props: { modelModifiers: { optional: true } } }, { input: '', expected: undefined }]
+      ['with .optional modifier', { props: { modelModifiers: { optional: true } } }, { input: '', expected: undefined }],
+      ['with .number and .nullable modifiers', { props: { modelModifiers: { number: true, nullable: true } } }, { input: '0', expected: 0 }],
+      ['with .number and .optional modifiers', { props: { modelModifiers: { number: true, optional: true } } }, { input: '0', expected: 0 }],
+      ['with .number and .nullable modifiers on an empty value', { props: { modelModifiers: { number: true, nullable: true } } }, { input: '', expected: null }],
+      ['with .number and .optional modifiers on an empty value', { props: { modelModifiers: { number: true, optional: true } } }, { input: '', expected: undefined }]
     ],
     '%s works',
     async (_, options, spec) => {

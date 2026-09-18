@@ -42,7 +42,7 @@ export default defineMcpTool({
       category: component.category,
       keywords: component.keywords ?? undefined,
       path: component.path,
-      url: `https://ui.nuxt.com${component.path}`,
+      url: `${SITE_URL}${component.path}`,
       links: component.links
     }))
 

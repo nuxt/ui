@@ -60,6 +60,22 @@ exports[`Progress > renders with class correctly 1`] = `
 </div>"
 `;
 
+exports[`Progress > renders with color neutral and max correctly 1`] = `
+"<div data-orientation="horizontal" data-slot="root" class="gap-2 w-full flex flex-col">
+  <div data-slot="status" class="flex text-dimmed duration-200 ease-out motion-reduce:transition-none text-sm flex-row items-center justify-end w-(--percent) min-w-fit transition-[width]" style="--percent: 50%;">50% </div>
+  <div aria-valuemax="4" aria-valuemin="0" aria-valuenow="2" aria-label="50%" role="progressbar" data-state="loading" data-value="2" data-max="4" data-slot="base" class="relative overflow-hidden rounded-full bg-accented w-full h-2" style="transform: translateZ(0);">
+    <div data-state="loading" data-value="2" data-max="4" data-slot="indicator" class="rounded-full size-full transition-transform duration-200 ease-out motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-inverted motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(-50%);"></div>
+  </div>
+  <div data-slot="steps" class="grid items-end text-highlighted text-sm">
+    <div data-slot="step" class="truncate text-end row-start-1 col-start-1 transition-opacity ease-out opacity-0">Waiting...</div>
+    <div data-slot="step" class="truncate text-end row-start-1 col-start-1 transition-opacity ease-out opacity-0">Cloning...</div>
+    <div data-slot="step" class="truncate text-end row-start-1 col-start-1 transition-opacity ease-out opacity-100">Migrating...</div>
+    <div data-slot="step" class="truncate text-end row-start-1 col-start-1 transition-opacity ease-out opacity-0">Deploying...</div>
+    <div data-slot="step" class="truncate text-end row-start-1 col-start-1 transition-opacity ease-out opacity-0">Done!</div>
+  </div>
+</div>"
+`;
+
 exports[`Progress > renders with color neutral correctly 1`] = `
 "<div data-orientation="horizontal" data-slot="root" class="gap-2 w-full flex flex-col">
   <!--v-if-->
@@ -70,9 +86,25 @@ exports[`Progress > renders with color neutral correctly 1`] = `
 </div>"
 `;
 
+exports[`Progress > renders with custom color correctly 1`] = `
+"<div data-orientation="horizontal" data-slot="root" class="gap-2 w-full flex flex-col">
+  <div data-slot="status" class="flex text-dimmed duration-200 ease-out motion-reduce:transition-none text-sm flex-row items-center justify-end w-(--percent) min-w-fit transition-[width]" style="--percent: 50%;">50% </div>
+  <div aria-valuemax="4" aria-valuemin="0" aria-valuenow="2" aria-label="50%" role="progressbar" data-state="loading" data-value="2" data-max="4" data-slot="base" class="relative overflow-hidden rounded-full bg-accented w-full h-2" style="transform: translateZ(0);">
+    <div data-state="loading" data-value="2" data-max="4" data-slot="indicator" class="rounded-full size-full transition-transform duration-200 ease-out motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(-50%); background-color: #8b5cf6;"></div>
+  </div>
+  <div data-slot="steps" class="grid items-end text-sm" style="color: #8b5cf6;">
+    <div data-slot="step" class="truncate text-end row-start-1 col-start-1 transition-opacity ease-out opacity-0">Waiting...</div>
+    <div data-slot="step" class="truncate text-end row-start-1 col-start-1 transition-opacity ease-out opacity-0">Cloning...</div>
+    <div data-slot="step" class="truncate text-end row-start-1 col-start-1 transition-opacity ease-out opacity-100">Migrating...</div>
+    <div data-slot="step" class="truncate text-end row-start-1 col-start-1 transition-opacity ease-out opacity-0">Deploying...</div>
+    <div data-slot="step" class="truncate text-end row-start-1 col-start-1 transition-opacity ease-out opacity-0">Done!</div>
+  </div>
+</div>"
+`;
+
 exports[`Progress > renders with max correctly 1`] = `
 "<div data-orientation="horizontal" data-slot="root" class="gap-2 w-full flex flex-col">
-  <div data-slot="status" class="flex text-dimmed transition-[width] duration-200 ease-out motion-reduce:transition-none text-sm flex-row items-center justify-end min-w-fit" style="width: 50%;">50% </div>
+  <div data-slot="status" class="flex text-dimmed duration-200 ease-out motion-reduce:transition-none text-sm flex-row items-center justify-end w-(--percent) min-w-fit transition-[width]" style="--percent: 50%;">50% </div>
   <div aria-valuemax="4" aria-valuemin="0" aria-valuenow="2" aria-label="50%" role="progressbar" data-state="loading" data-value="2" data-max="4" data-slot="base" class="relative overflow-hidden rounded-full bg-accented w-full h-2" style="transform: translateZ(0);">
     <div data-state="loading" data-value="2" data-max="4" data-slot="indicator" class="rounded-full size-full transition-transform duration-200 ease-out motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-primary motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(-50%);"></div>
   </div>
@@ -88,7 +120,7 @@ exports[`Progress > renders with max correctly 1`] = `
 
 exports[`Progress > renders with max inverted correctly 1`] = `
 "<div data-orientation="horizontal" data-slot="root" class="gap-2 w-full flex flex-col">
-  <div data-slot="status" class="flex text-dimmed transition-[width] duration-200 ease-out motion-reduce:transition-none text-sm items-center justify-end min-w-fit self-end flex-row-reverse" style="width: 50%;">50% </div>
+  <div data-slot="status" class="flex text-dimmed duration-200 ease-out motion-reduce:transition-none text-sm items-center justify-end w-(--percent) min-w-fit transition-[width] self-end flex-row-reverse" style="--percent: 50%;">50% </div>
   <div aria-valuemax="4" aria-valuemin="0" aria-valuenow="2" aria-label="50%" role="progressbar" data-state="loading" data-value="2" data-max="4" data-slot="base" class="relative overflow-hidden rounded-full bg-accented w-full h-2" style="transform: translateZ(0);">
     <div data-state="loading" data-value="2" data-max="4" data-slot="indicator" class="rounded-full size-full transition-transform duration-200 ease-out motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-primary motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(50%);"></div>
   </div>
@@ -204,7 +236,7 @@ exports[`Progress > renders with size xs correctly 1`] = `
 
 exports[`Progress > renders with status correctly 1`] = `
 "<div data-orientation="horizontal" data-slot="root" class="gap-2 w-full flex flex-col">
-  <div data-slot="status" class="flex text-dimmed transition-[width] duration-200 ease-out motion-reduce:transition-none text-sm flex-row items-center justify-end min-w-fit" style="width: 50%;">50% </div>
+  <div data-slot="status" class="flex text-dimmed duration-200 ease-out motion-reduce:transition-none text-sm flex-row items-center justify-end w-(--percent) min-w-fit transition-[width]" style="--percent: 50%;">50% </div>
   <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="50" aria-label="50%" role="progressbar" data-state="loading" data-value="50" data-max="100" data-slot="base" class="relative overflow-hidden rounded-full bg-accented w-full h-2" style="transform: translateZ(0);">
     <div data-state="loading" data-value="50" data-max="100" data-slot="indicator" class="rounded-full size-full transition-transform duration-200 ease-out motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-primary motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(-50%);"></div>
   </div>
@@ -214,7 +246,7 @@ exports[`Progress > renders with status correctly 1`] = `
 
 exports[`Progress > renders with status inverted correctly 1`] = `
 "<div data-orientation="horizontal" data-slot="root" class="gap-2 w-full flex flex-col">
-  <div data-slot="status" class="flex text-dimmed transition-[width] duration-200 ease-out motion-reduce:transition-none text-sm items-center justify-end min-w-fit self-end flex-row-reverse" style="width: 50%;">50% </div>
+  <div data-slot="status" class="flex text-dimmed duration-200 ease-out motion-reduce:transition-none text-sm items-center justify-end w-(--percent) min-w-fit transition-[width] self-end flex-row-reverse" style="--percent: 50%;">50% </div>
   <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="50" aria-label="50%" role="progressbar" data-state="loading" data-value="50" data-max="100" data-slot="base" class="relative overflow-hidden rounded-full bg-accented w-full h-2" style="transform: translateZ(0);">
     <div data-state="loading" data-value="50" data-max="100" data-slot="indicator" class="rounded-full size-full transition-transform duration-200 ease-out motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-primary motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]" style="transform: translateX(50%);"></div>
   </div>
@@ -227,6 +259,16 @@ exports[`Progress > renders with status slot correctly 1`] = `
   <!--v-if-->
   <div aria-valuemax="100" aria-valuemin="0" role="progressbar" data-state="indeterminate" data-max="100" data-slot="base" class="relative overflow-hidden rounded-full bg-accented w-full h-2" style="transform: translateZ(0);">
     <div data-state="indeterminate" data-max="100" data-slot="indicator" class="rounded-full size-full transition-transform duration-200 ease-out motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-primary motion-safe:data-[state=indeterminate]:animate-[carousel_2s_linear_infinite] motion-safe:data-[state=indeterminate]:rtl:animate-[carousel-rtl_2s_linear_infinite]"></div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Progress > renders with status vertical correctly 1`] = `
+"<div data-orientation="vertical" data-slot="root" class="gap-2 h-full flex flex-row-reverse">
+  <div data-slot="status" class="flex text-dimmed duration-200 ease-out motion-reduce:transition-none text-sm flex-col justify-end h-(--percent) min-h-fit transition-[height]" style="--percent: 50%;">50% </div>
+  <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="50" aria-label="50%" role="progressbar" data-state="loading" data-value="50" data-max="100" data-slot="base" class="relative overflow-hidden rounded-full bg-accented h-full w-2" style="transform: translateZ(0);">
+    <div data-state="loading" data-value="50" data-max="100" data-slot="indicator" class="rounded-full size-full transition-transform duration-200 ease-out motion-reduce:transition-none motion-reduce:data-[state=indeterminate]:animate-pulse bg-primary motion-safe:data-[state=indeterminate]:animate-[carousel-vertical_2s_linear_infinite]" style="transform: translateY(-50%);"></div>
   </div>
   <!--v-if-->
 </div>"

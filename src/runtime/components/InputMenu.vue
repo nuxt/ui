@@ -285,6 +285,8 @@ const appConfig = useAppConfig() as InputMenu['AppConfig']
 const { filterGroups } = useFilter()
 
 const isAutocomplete = computed(() => props.mode === 'autocomplete')
+// `multiple` doesn't apply in autocomplete mode.
+const isMultiple = computed(() => !!props.multiple && !isAutocomplete.value)
 
 const rootPropsPick = reactivePick(props, 'as', 'modelValue', 'defaultValue', 'open', 'defaultOpen', 'required', 'multiple', 'resetSearchTermOnBlur', 'resetSearchTermOnSelect', 'resetModelValueOnClear', 'highlightOnHover', 'openOnClick', 'openOnFocus', 'by')
 const rootPropsOmitted = reactiveOmit(rootPropsPick, 'multiple', 'resetSearchTermOnSelect', 'resetModelValueOnClear', 'by')
@@ -298,7 +300,7 @@ const attrs = useAttrs()
 // merge. `Anchor` is then the effective root, so it reads the caller's `data-slot`
 // itself. In every other mode `Root` renders its own element (and receives the
 // caller's value through its own binding), so `Anchor` keeps its `base` label.
-const baseDataSlot = computed(() => props.multiple && !isAutocomplete.value
+const baseDataSlot = computed(() => isMultiple.value
   ? ((attrs['data-slot'] as string | undefined) ?? 'base')
   : 'base')
 const portalProps = usePortal(toRef(() => props.portal))
@@ -363,7 +365,7 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.inputMenu || {})
   fixed: props.fixed,
   leading: isLeading.value || !!props.avatar || !!slots.leading,
   trailing: isTrailing.value || !!slots.trailing,
-  multiple: props.multiple,
+  multiple: isMultiple.value,
   fieldGroup: orientation.value,
   virtualize: !!props.virtualize
 }))
@@ -574,6 +576,18 @@ function onClear() {
   emits('clear')
 }
 
+function onTagsInputKeydown(event: KeyboardEvent) {
+  // `TagsInputInput` adds the search term as a tag on `Enter`, but `TagsInputRoot` is driven by
+  // the combobox so the tag never reaches `modelValue` and renders a chip that isn't selected.
+  // It bails out when the event is already prevented, which is also what the combobox does
+  // when an item is highlighted.
+  if (event.isComposing || !searchTerm.value) {
+    return
+  }
+
+  event.preventDefault()
+}
+
 const viewportRef = useTemplateRef('viewportRef')
 
 const comboboxRootRef = useTemplateRef('comboboxRootRef')
@@ -679,14 +693,14 @@ defineExpose({
     :disabled="disabled"
     :data-slot="($attrs['data-slot'] as string | undefined) ?? 'root'"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
-    :as-child="!!props.multiple && !isAutocomplete"
+    :as-child="isMultiple"
     ignore-filter
     @update:model-value="onUpdate"
     @update:open="onUpdateOpen"
   >
-    <Component.Anchor :as-child="!props.multiple" :data-slot="baseDataSlot" :class="ui.base({ class: props.ui?.base })">
+    <Component.Anchor :as-child="!isMultiple" :data-slot="baseDataSlot" :class="ui.base({ class: props.ui?.base })">
       <TagsInputRoot
-        v-if="props.multiple && !isAutocomplete"
+        v-if="isMultiple"
         v-slot="{ modelValue: tags }"
         :model-value="(modelValue as string[])"
         :disabled="disabled"
@@ -720,6 +734,7 @@ defineExpose({
             data-slot="tagsInput"
             :class="ui.tagsInput({ class: props.ui?.tagsInput })"
             @change.stop
+            @keydown.enter="onTagsInputKeydown"
           />
         </Component.Input>
       </TagsInputRoot>
@@ -729,7 +744,7 @@ defineExpose({
         :id="id"
         ref="inputRef"
         v-bind="{ ...(!isAutocomplete ? { displayValue } : {}), ...$attrs, ...ariaAttrs }"
-        :data-slot="props.multiple ? undefined : 'base'"
+        data-slot="base"
         :type="props.type"
         :placeholder="props.placeholder"
         :required="props.required"

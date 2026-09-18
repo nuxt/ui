@@ -62,7 +62,7 @@ slots:
 
 ### Actions
 
-Use the `actions` prop to display additional buttons. The `copy` button is always displayed, available actions are `cursor`, `windsurf` and `claude`.
+Use the `actions` prop to display additional buttons. The `copy` button is always displayed. The available actions are `cursor`, `windsurf` and `claude`.
 
 ::component-code{slug="prompt" prose}
 ---

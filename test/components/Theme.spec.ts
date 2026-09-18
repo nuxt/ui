@@ -402,6 +402,40 @@ describe('Theme', () => {
     expect(wrapper.find('button').classes()).toContain('rounded-full')
   })
 
+  // A `class` inside `:props` is merged with the component's own `class` instead
+  // of being replaced by it, otherwise any component setting a class would lose
+  // the theme class entirely.
+  test(':props class merges with an explicit class on the component', async () => {
+    const wrapper = await mountSuspended({
+      components: { Theme, Button },
+      template: `
+        <Theme :props="{ button: { class: 'rounded-full' } }">
+          <Button label="Themed" class="hidden lg:inline-flex" />
+        </Theme>
+      `
+    })
+
+    const classes = wrapper.find('button').classes()
+    expect(classes).toContain('rounded-full')
+    expect(classes).toContain('hidden')
+    expect(classes).toContain('lg:inline-flex')
+  })
+
+  test(':props class is overridden by a conflicting explicit class', async () => {
+    const wrapper = await mountSuspended({
+      components: { Theme, Button },
+      template: `
+        <Theme :props="{ button: { class: 'rounded-full' } }">
+          <Button label="Themed" class="rounded-none" />
+        </Theme>
+      `
+    })
+
+    const classes = wrapper.find('button').classes()
+    expect(classes).toContain('rounded-none')
+    expect(classes).not.toContain('rounded-full')
+  })
+
   // Boolean values supplied via `:props` must reach a Reka primitive root through
   // `useForwardProps`. This is the path where Vue's auto-casting of unset Boolean
   // props would otherwise turn the proxy result into `false` and silently swallow

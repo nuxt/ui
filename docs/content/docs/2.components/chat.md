@@ -1,5 +1,4 @@
 ---
-title: Chat
 description: Build AI chat interfaces with streaming, reasoning, and tool calling.
 category: chat
 index: true
@@ -148,7 +147,7 @@ export default defineEventHandler(async (event) => {
 
 ### Reasoning
 
-To enable [reasoning](https://ai-sdk.dev/docs/ai-sdk-ui/chatbot#reasoning), configure `providerOptions` for your provider ([Anthropic](https://ai-sdk.dev/docs/guides/providers/anthropic#reasoning), [Google](https://ai-sdk.dev/providers/ai-sdk-providers/google-generative-ai#thinking), [OpenAI](https://ai-sdk.dev/docs/guides/providers/openai#reasoning)):
+To enable [reasoning](https://ai-sdk.dev/docs/ai-sdk-ui/chatbot#reasoning), configure `providerOptions` for your provider ([Anthropic](https://ai-sdk.dev/providers/ai-sdk-providers/anthropic#reasoning), [Google](https://ai-sdk.dev/providers/ai-sdk-providers/google#thinking), [OpenAI](https://ai-sdk.dev/providers/ai-sdk-providers/openai#reasoning)):
 
 ```ts [server/api/chat.post.ts]
 import { streamText, convertToModelMessages, toUIMessageStream, createUIMessageStreamResponse } from 'ai'
@@ -189,7 +188,7 @@ export default defineEventHandler(async (event) => {
 
 ### Web Search
 
-Some providers offer built-in web search tools: [Anthropic](https://ai-sdk.dev/docs/guides/providers/anthropic#web-search-tool), [Google](https://ai-sdk.dev/providers/ai-sdk-providers/google-generative-ai#google-search), [OpenAI](https://ai-sdk.dev/providers/ai-sdk-providers/openai#web-search-tool).
+Some providers offer built-in web search tools: [Anthropic](https://ai-sdk.dev/providers/ai-sdk-providers/anthropic#web-search-tool), [Google](https://ai-sdk.dev/providers/ai-sdk-providers/google#google-search), [OpenAI](https://ai-sdk.dev/providers/ai-sdk-providers/openai#web-search-tool).
 
 ::code-group
 
@@ -372,6 +371,8 @@ import { useChat } from '@ai-sdk/vue'
 import { isPartStreaming, isToolStreaming } from '@nuxt/ui/utils/ai'
 import shiki from '@comark/nuxt/plugins/shiki'
 
+const plugins = [shiki()]
+
 const input = ref('')
 
 const { messages, status, error, sendMessage, regenerate, stop, addToolApprovalResponse } = useChat({
@@ -406,7 +407,7 @@ function onSubmit() {
           <Markdown
             :value="part.text"
             :streaming="isPartStreaming(part)"
-            :plugins="[shiki()]"
+            :plugins="plugins"
             class="*:first:mt-0 *:last:mb-0"
           />
         </UChatReasoning>
@@ -426,7 +427,7 @@ function onSubmit() {
             v-if="message.role === 'assistant'"
             :value="part.text"
             :streaming="isPartStreaming(part)"
-            :plugins="[shiki()]"
+            :plugins="plugins"
             class="*:first:mt-0 *:last:mb-0"
           />
           <p v-else-if="message.role === 'user'" class="whitespace-pre-wrap">
@@ -461,6 +462,8 @@ import { isPartStreaming, isToolStreaming } from '@nuxt/ui/utils/ai'
 import { Markdown } from '@comark/vue'
 import shiki from '@comark/vue/plugins/shiki'
 
+const plugins = [shiki()]
+
 const input = ref('')
 
 const { messages, status, error, sendMessage, regenerate, stop, addToolApprovalResponse } = useChat({
@@ -495,7 +498,7 @@ function onSubmit() {
           <Markdown
             :value="part.text"
             :streaming="isPartStreaming(part)"
-            :plugins="[shiki()]"
+            :plugins="plugins"
             class="*:first:mt-0 *:last:mb-0"
           />
         </UChatReasoning>
@@ -515,7 +518,7 @@ function onSubmit() {
             v-if="message.role === 'assistant'"
             :value="part.text"
             :streaming="isPartStreaming(part)"
-            :plugins="[shiki()]"
+            :plugins="plugins"
             class="*:first:mt-0 *:last:mb-0"
           />
           <p v-else-if="message.role === 'user'" class="whitespace-pre-wrap">

@@ -172,7 +172,8 @@ const items = [
 ]
 ```
 
-Components supporting nested arrays: `UDropdownMenu`, `UContextMenu`, `UCommandPalette`, `UNavigationMenu`.
+Components supporting nested arrays: `UDropdownMenu`, `UContextMenu`, `UNavigationMenu`.
+`UCommandPalette` uses a `groups` prop instead, with an `items` array on each group.
 
 ## Composables
 
@@ -365,6 +366,7 @@ npx nuxi@latest init -t ui/chat         # AI chat (Vercel AI SDK)
 npx nuxi@latest init -t ui/editor       # Rich text editor
 npx nuxi@latest init -t ui/portfolio    # Portfolio
 npx nuxi@latest init -t ui/changelog    # Changelog
+npx nuxi@latest init -t ui/calendar     # Calendar
 ```
 
 ## Responsive patterns

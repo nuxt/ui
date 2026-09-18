@@ -127,6 +127,14 @@ links:
 ---
 ```
 
+Optional `keywords` feed the docs search and the MCP `search-components` tool. Use alternate names from other ecosystems, not words already in the title or description:
+
+```yaml
+keywords:
+  - segmented control
+  - button group
+```
+
 For Reka UI based components, add the Reka UI link:
 
 ```yaml

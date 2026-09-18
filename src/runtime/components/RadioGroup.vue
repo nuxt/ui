@@ -3,6 +3,7 @@ import type { RadioGroupRootProps, RadioGroupRootEmits } from 'reka-ui'
 import type { VNode } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/radio-group'
+import type { IconProps } from './Icon.vue'
 import type { AcceptableValue, GetItemKeys, GetModelValue, GetModelValueEmits } from '../types/utils'
 import type { ComponentConfig } from '../types/tv'
 
@@ -15,8 +16,13 @@ export type RadioGroupItem = RadioGroupValue | {
   description?: string
   disabled?: boolean
   value?: RadioGroupValue
+  /**
+   * The icon displayed above the label when `indicator` is `hidden`.
+   * @IconifyIcon
+   */
+  icon?: IconProps['name']
   class?: any
-  ui?: Pick<RadioGroup['slots'], 'item' | 'container' | 'base' | 'indicator' | 'wrapper' | 'label' | 'description'>
+  ui?: Pick<RadioGroup['slots'], 'item' | 'container' | 'base' | 'indicator' | 'wrapper' | 'label' | 'icon' | 'description'>
   [key: string]: any
 }
 
@@ -100,6 +106,7 @@ import { useForwardProps } from '../composables/useForwardProps'
 import { useFormField } from '../composables/useFormField'
 import { get } from '../utils'
 import { tv } from '../utils/tv'
+import UIcon from './Icon.vue'
 
 const _props = withDefaults(defineProps<RadioGroupProps<T, VK>>(), {
   valueKey: 'value' as never,
@@ -178,6 +185,12 @@ const normalizedItems = computed(() => {
   return props.items.map(normalizeItem)
 })
 
+// Mirrors `Checkbox`'s `labelIcon`: with the indicator hidden the icon has no box to sit in,
+// so it renders above the label instead.
+function labelIcon(item: any) {
+  return props.indicator === 'hidden' ? item.icon : undefined
+}
+
 function onUpdate(value: any) {
   // @ts-expect-error - 'target' does not exist in type 'EventInit'
   const event = new Event('change', { target: { value } })
@@ -220,7 +233,8 @@ function onUpdate(value: any) {
           </RRadioGroupItem>
         </div>
 
-        <div v-if="(item.label || !!slots.label) || (item.description || !!slots.description)" data-slot="wrapper" :class="ui.wrapper({ class: [props.ui?.wrapper, item.ui?.wrapper] })">
+        <div v-if="labelIcon(item) || (item.label || !!slots.label) || (item.description || !!slots.description)" data-slot="wrapper" :class="ui.wrapper({ class: [props.ui?.wrapper, item.ui?.wrapper] })">
+          <UIcon v-if="labelIcon(item)" :name="labelIcon(item)" data-slot="icon" :class="ui.icon({ class: [props.ui?.icon, item.ui?.icon] })" />
           <component :is="(!props.variant || props.variant === 'list') ? Label : 'p'" v-if="item.label || !!slots.label" :for="item.id" data-slot="label" :class="ui.label({ class: [props.ui?.label, item.ui?.label], disabled: item.disabled || disabled })">
             <slot name="label" :item="item" :model-value="(props.modelValue as RadioGroupValue)">
               {{ item.label }}

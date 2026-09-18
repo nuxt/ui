@@ -1,7 +1,7 @@
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://github.com/user-attachments/assets/91ceab67-89ce-4ef4-8678-4402a92baca5">
-  <source media="(prefers-color-scheme: light)" srcset="https://github.com/user-attachments/assets/51526d6d-e5ec-41b4-aa37-242dec1cdb27">
-  <img alt="Nuxt UI" width="830" height="436" src="https://github.com/user-attachments/assets/51526d6d-e5ec-41b4-aa37-242dec1cdb27">
+  <source media="(prefers-color-scheme: dark)" srcset=".github/assets/banner-dark.png">
+  <source media="(prefers-color-scheme: light)" srcset=".github/assets/banner-light.png">
+  <img alt="Nuxt UI" width="900" height="472" src=".github/assets/banner-light.png">
 </picture>
 
 # Nuxt UI
@@ -33,6 +33,7 @@ Kickstart your project with one of our ready-to-use Nuxt UI templates or follow 
 - [Portfolio](https://github.com/nuxt-ui-templates/portfolio) — A sleek portfolio template to showcase your work, skills and blog powered by Nuxt Content.
 - [Changelog](https://github.com/nuxt-ui-templates/changelog) — A changelog template to display your repository releases notes from GitHub powered by Nuxt MDC.
 - [Editor](https://github.com/nuxt-ui-templates/editor) — A rich text editor template powered by TipTap with support for markdown, HTML, and JSON content types.
+- [Calendar](https://github.com/nuxt-ui-templates/calendar) — An Apple Calendar-inspired template with day, week and month views, drag and drop and optimistic updates.
 
 ## Installation
 

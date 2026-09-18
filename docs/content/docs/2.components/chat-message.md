@@ -58,7 +58,7 @@ props:
 ::
 
 ::note
-The `parts` prop is the recommended format for the AI SDK. Each part has a `type` (e.g., 'text') and corresponding content. The ChatMessage component also supports the deprecated `content` prop for backward compatibility.
+The `parts` prop is the recommended format for the AI SDK. Each part has a `type` (e.g. 'text') and corresponding content. The ChatMessage component also supports the deprecated `content` prop for backward compatibility.
 ::
 
 ### Side

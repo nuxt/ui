@@ -8,7 +8,7 @@ keywords:
   - slideshow
 links:
   - label: Embla
-    to: https://www.embla-carousel.com/api/
+    to: https://www.embla-carousel.com/docs/v8/api
     icon: i-custom-embla-carousel
   - label: GitHub
     icon: i-simple-icons-github
@@ -150,13 +150,13 @@ class: 'p-8 px-16 pb-12'
 
 ## Plugins
 
-The Carousel component implements the official [Embla Carousel plugins](https://www.embla-carousel.com/plugins/).
+The Carousel component implements the official [Embla Carousel plugins](https://www.embla-carousel.com/docs/v8/plugins).
 
 ### Autoplay
 
 This plugin is used to extend Embla Carousel with **autoplay** functionality.
 
-Use the `autoplay` prop as a boolean or an object to configure the [Autoplay plugin](https://www.embla-carousel.com/plugins/autoplay/).
+Use the `autoplay` prop as a boolean or an object to configure the [Autoplay plugin](https://www.embla-carousel.com/docs/v8/plugins/autoplay).
 
 ::component-example
 ---
@@ -173,7 +173,7 @@ In this example, we're using the `loop` prop for an infinite carousel.
 
 This plugin is used to extend Embla Carousel with **auto scroll** functionality.
 
-Use the `auto-scroll` prop as a boolean or an object to configure the [Auto Scroll plugin](https://www.embla-carousel.com/plugins/auto-scroll/).
+Use the `auto-scroll` prop as a boolean or an object to configure the [Auto Scroll plugin](https://www.embla-carousel.com/docs/v8/plugins/auto-scroll).
 
 ::component-example
 ---
@@ -190,7 +190,7 @@ In this example, we're using the `loop` prop for an infinite carousel.
 
 This plugin is used to extend Embla Carousel with **auto height** functionality. It changes the height of the carousel container to fit the height of the highest slide in view.
 
-Use the `auto-height` prop as a boolean or an object to configure the [Auto Height plugin](https://www.embla-carousel.com/plugins/auto-height/).
+Use the `auto-height` prop as a boolean or an object to configure the [Auto Height plugin](https://www.embla-carousel.com/docs/v8/plugins/auto-height).
 
 ::component-example
 ---
@@ -207,7 +207,7 @@ In this example, we add the `transition-[height]` class on the container to anim
 
 Class Names is a **class name toggle** utility plugin for Embla Carousel that enables you to automate the toggling of class names on your carousel.
 
-Use the `class-names` prop as a boolean or an object to configure the [Class Names plugin](https://www.embla-carousel.com/plugins/class-names/).
+Use the `class-names` prop as a boolean or an object to configure the [Class Names plugin](https://www.embla-carousel.com/docs/v8/plugins/class-names).
 
 ::component-example
 ---
@@ -224,7 +224,7 @@ In this example, we add the `transition-opacity [&:not(.is-snapped)]:opacity-10`
 
 This plugin is used to replace the Embla Carousel scroll functionality with **fade transitions**.
 
-Use the `fade` prop as a boolean or an object to configure the [Fade plugin](https://www.embla-carousel.com/plugins/fade/).
+Use the `fade` prop as a boolean or an object to configure the [Fade plugin](https://www.embla-carousel.com/docs/v8/plugins/fade).
 
 ::component-example
 ---
@@ -237,7 +237,7 @@ class: 'p-8 pb-12'
 
 This plugin is used to extend Embla Carousel with the ability to **use the mouse/trackpad wheel** to navigate the carousel.
 
-Use the `wheel-gestures` prop as a boolean or an object to configure the [Wheel Gestures plugin](https://www.embla-carousel.com/plugins/wheel-gestures/).
+Use the `wheel-gestures` prop as a boolean or an object to configure the [Wheel Gestures plugin](https://www.embla-carousel.com/docs/v8/plugins/wheel-gestures).
 
 ::note
 Use your mouse wheel to scroll the carousel.
@@ -254,7 +254,7 @@ class: 'p-8 px-16'
 
 ### With thumbnails
 
-You can use the [`emblaApi`](#expose) function [scrollTo](https://www.embla-carousel.com/api/methods/#scrollto) to display thumbnails under the carousel that allows you to navigate to a specific slide.
+You can use the [`scrollTo`](https://www.embla-carousel.com/docs/v8/api/methods#scrollto) method on [`emblaApi`](#expose) to display thumbnails under the carousel that navigate to a specific slide.
 
 ::component-example
 ---
@@ -296,7 +296,7 @@ This will give you access to the following:
 | Name | Type |
 | ---- | ---- |
 | `emblaRef`{lang="ts-type"} | `Ref<HTMLElement \| null>`{lang="ts-type"} |
-| `emblaApi`{lang="ts-type"} | [`Ref<EmblaCarouselType \| null>`{lang="ts-type"}](https://www.embla-carousel.com/api/methods/#typescript) |
+| `emblaApi`{lang="ts-type"} | [`Ref<EmblaCarouselType \| null>`{lang="ts-type"}](https://www.embla-carousel.com/docs/v8/api/methods#typescript) |
 
 ## Theme
 

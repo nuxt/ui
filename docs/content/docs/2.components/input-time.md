@@ -2,6 +2,10 @@
 title: InputTime
 description: 'An input for selecting a time.'
 category: form
+keywords:
+  - time picker
+  - clock
+  - hour
 links:
   - label: TimeField
     icon: i-custom-reka-ui

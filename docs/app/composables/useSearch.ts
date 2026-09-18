@@ -2,7 +2,9 @@ export function useSearch() {
   const route = useRoute()
   const { frameworks } = useFrameworks()
   const { track } = useAnalytics()
-  const { open, messages } = useChat()
+  const { open, ask } = useChat()
+  // the ⌘K link glyphs follow the applied icon pack
+  const studioIcons = useStudioIcons()
 
   const searchTerm = ref('')
 
@@ -10,19 +12,15 @@ export function useSearch() {
     track('AI Chat Opened', { source: 'search', hasSearchTerm: !!searchTerm.value })
 
     if (searchTerm.value) {
-      messages.value = [...messages.value, {
-        id: String(Date.now()),
-        role: 'user',
-        parts: [{ type: 'text', text: searchTerm.value }]
-      }]
+      ask(searchTerm.value)
+    } else {
+      open.value = true
     }
-
-    open.value = true
   }
 
   const links = computed(() => [{
     label: 'Ask AI',
-    icon: 'i-lucide-bot-message-square',
+    icon: 'i-custom-nuxi',
     kbds: ['meta', 'i'],
     ui: {
       itemLeadingIcon: 'group-data-highlighted:not-group-data-disabled:text-primary'
@@ -31,69 +29,71 @@ export function useSearch() {
   }, {
     label: 'Get Started',
     description: 'Learn how to install and configure the library.',
-    icon: 'i-lucide-square-play',
+    icon: studioIcons.squarePlay,
     to: '/docs/getting-started',
     active: route.path.startsWith('/docs/getting-started')
   }, {
     label: 'Components',
     description: 'Explore all available components.',
-    icon: 'i-lucide-square-code',
+    icon: studioIcons.squareCode,
     to: '/docs/components',
     active: route.path.startsWith('/docs/components')
   }, {
     label: 'Composables',
     description: 'Learn how to use the available composables.',
-    icon: 'i-lucide-square-function',
+    icon: studioIcons.squareFunction,
     to: '/docs/composables',
     active: route.path.startsWith('/docs/composables')
   }, {
     label: 'Typography',
     description: 'Discover typography features and customization options.',
-    icon: 'i-lucide-square-pilcrow',
+    icon: studioIcons.squarePilcrow,
     to: '/docs/typography',
     active: route.path.startsWith('/docs/typography')
   }, {
+    label: 'Releases',
+    description: 'Stay up to date with the latest changes.',
+    icon: studioIcons.rocket,
+    to: '/docs/releases',
+    active: route.path.startsWith('/docs/releases')
+  }, {
     label: 'Templates',
     description: 'Explore official starter templates.',
-    icon: 'i-lucide-panels-top-left',
+    icon: studioIcons.templates,
     to: '/templates'
   }, {
     label: 'Showcase',
     description: 'Discover websites built with the library.',
-    icon: 'i-lucide-presentation',
+    icon: studioIcons.presentation,
     to: '/showcase'
   }, {
     label: 'Community',
     description: 'Explore community projects and resources.',
-    icon: 'i-lucide-globe',
+    icon: studioIcons.globe,
     to: '/community'
-  }, {
-    label: 'Playground',
-    description: 'Try components live in your browser.',
-    icon: 'i-lucide-square-terminal',
-    to: '/play',
-    target: '_blank'
   }, {
     label: 'Blog',
     description: 'Read articles and tutorials.',
-    icon: 'i-lucide-newspaper',
+    icon: studioIcons.newspaper,
     to: '/blog',
     active: route.path.startsWith('/blog')
+  }, {
+    label: 'Team',
+    description: 'Meet the team behind the project.',
+    icon: studioIcons.users,
+    to: '/team'
+  }, {
+    label: 'Playground',
+    description: 'Try components live in your browser.',
+    icon: studioIcons.terminal,
+    to: '/play',
+    target: '_blank'
   }, {
     label: 'Figma',
     description: 'Access the official Figma design kit.',
     icon: 'i-simple-icons-figma',
-    to: '/figma'
-  }, {
-    label: 'Team',
-    description: 'Meet the team behind the project.',
-    icon: 'i-lucide-users',
-    to: '/team'
-  }, {
-    label: 'Releases',
-    description: 'Stay up to date with the latest changes.',
-    icon: 'i-lucide-rocket',
-    to: '/releases'
+    to: 'https://go.nuxt.com/figma-ui',
+    target: '_blank'
   }, {
     label: 'GitHub',
     description: 'Check out the repository on GitHub.',
@@ -119,7 +119,7 @@ export function useSearch() {
     },
     items: [{
       label: 'Ask AI',
-      icon: 'i-lucide-bot-message-square',
+      icon: 'i-custom-nuxi',
       ui: {
         itemLeadingIcon: 'group-data-highlighted:not-group-data-disabled:text-primary'
       },

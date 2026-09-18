@@ -2,6 +2,10 @@
 title: ScrollArea
 description: A flexible scroll container with virtualization support.
 category: data
+keywords:
+  - scrollbar
+  - overflow
+  - scrolling
 links:
   - label: TanStack Virtual
     avatar:

@@ -1,5 +1,4 @@
 ---
-title: Sidebar
 description: 'A collapsible sidebar with multiple visual variants.'
 category: layout
 links:

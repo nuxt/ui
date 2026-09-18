@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { kebabCase } from 'scule'
 import type { PropertyMeta } from 'vue-component-meta'
 
 const props = defineProps<{
@@ -7,10 +6,13 @@ const props = defineProps<{
   ignore?: string[]
 }>()
 
-const route = useRoute()
-
 function getSchemaProps(schema: PropertyMeta['schema']): any {
   if (!schema || typeof schema === 'string' || !('schema' in schema) || !schema.schema) {
+    return []
+  }
+
+  // `string & {}` widens a literal union, its object schema only lists String.prototype methods
+  if (schema.type === 'string & {}') {
     return []
   }
 
@@ -49,7 +51,7 @@ const schemaProps = computed(() => {
       <ProseLi v-for="schemaProp in schemaProps" :key="schemaProp.name">
         <HighlightInlineType :type="`${schemaProp.name}${schemaProp.required === false ? '?' : ''}: ${schemaProp.type}`" />
 
-        <MDC v-if="schemaProp.description" :value="schemaProp.description" class="text-muted my-1" :cache-key="`${kebabCase(route.path)}-${prop.name}-${schemaProp.name}-description`" />
+        <DocsMarkdown v-if="schemaProp.description" :value="schemaProp.description" class="text-muted my-1" />
       </ProseLi>
     </ProseUl>
   </ProseCollapsible>

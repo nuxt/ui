@@ -5,7 +5,7 @@ description: 'A utility to create a custom locale for your app.'
 
 ## Usage
 
-Use the `defineLocale` utility to create a custom locale with your own translations.
+Use the auto-imported `defineLocale` utility to create a custom locale with your own translations.
 
 ```vue
 <script setup lang="ts">
@@ -28,8 +28,16 @@ const locale = defineLocale<Messages>({
 </template>
 ```
 
-::tip{to="/docs/getting-started/integrations/i18n"}
+::framework-only
+#nuxt
+:::tip{to="/docs/getting-started/integrations/i18n/nuxt"}
 Learn more about internationalization in the **i18n integration** documentation.
+:::
+
+#vue
+:::tip{to="/docs/getting-started/integrations/i18n/vue"}
+Learn more about internationalization in the **i18n integration** documentation.
+:::
 ::
 
 ## API
@@ -50,11 +58,11 @@ Creates a new locale object with the provided options.
       ::field-group
 
         ::field{name="name" type="string" required}
-        The display name of the locale (e.g., `'English'`, `'Français'`).
+        The display name of the locale (e.g. `'English'`, `'Français'`).
         ::
 
         ::field{name="code" type="string" required}
-        The ISO code of the locale (e.g., `'en'`, `'fr'`, `'de-AT'`).
+        The ISO code of the locale (e.g. `'en'`, `'fr'`, `'de-AT'`).
         ::
 
         ::field{name="dir" type="'ltr' | 'rtl'"}
