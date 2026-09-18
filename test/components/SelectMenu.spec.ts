@@ -3,7 +3,9 @@ import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { renderEach } from '../component-render'
 import SelectMenu from '../../src/runtime/components/SelectMenu.vue'
+import FieldGroup from '../../src/runtime/components/FieldGroup.vue'
 import theme from '#build/ui/input'
+import { UBadge, UInput } from '#components'
 import { renderForm } from '../utils/form'
 import { flushPromises, mount } from '@vue/test-utils'
 import type { FormInputEvents } from '../../src/module'
@@ -128,6 +130,26 @@ describe('SelectMenu', () => {
 
     expect(wrapper.find('[data-slot="trailing"]').exists()).toBe(false)
     expect(wrapper.find('[data-slot="trailingIcon"]').exists()).toBe(false)
+  })
+
+  it('does not leak field group context into trigger slots', async () => {
+    const wrapper = await mountSuspended({
+      components: { FieldGroup, SelectMenu, UBadge, UInput },
+      template: `
+        <FieldGroup>
+          <SelectMenu :items="['Backlog']" model-value="Backlog">
+            <template #default="{ modelValue }">
+              <UBadge class="slot-badge" label="V1" />
+              <span>{{ modelValue }}</span>
+            </template>
+          </SelectMenu>
+          <UInput />
+        </FieldGroup>
+      `
+    })
+
+    expect(wrapper.find('button[data-slot="base"]').classes()).toContain('not-only:first:rounded-e-none')
+    expect(wrapper.find('.slot-badge').classes()).not.toContain('not-only:first:rounded-e-none')
   })
 
   it('passes accessibility tests', async () => {
