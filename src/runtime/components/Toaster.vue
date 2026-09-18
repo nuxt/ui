@@ -130,7 +130,7 @@ function getOffset(index: number) {
       :key="toast.id"
       ref="refs"
       :progress="props.progress"
-      v-bind="omit(toast, ['id', 'close', '_duplicate', '_updated'])"
+      v-bind="omit(toast, ['id', 'close', '_duplicate', '_updated', 'onClick'])"
       :close="(toast.close as boolean)"
       :data-expanded="expanded"
       :data-front="!expanded && index === toasts.length - 1"
