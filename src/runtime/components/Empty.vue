@@ -77,7 +77,7 @@ const appConfig = useAppConfig() as Empty['AppConfig']
 const iconName = computed(() => props.loading ? (props.loadingIcon || appConfig.ui.icons.loading) : props.icon)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.empty || {}) })({
+const ui = computed(() => tv(theme, appConfig.ui?.empty)({
   variant: props.variant,
   size: props.size,
   loading: props.loading

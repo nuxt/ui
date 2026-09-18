@@ -102,7 +102,7 @@ const disabled = computed(() => formFieldDisabled.value ?? props.disabled)
 const rootDisabled = computed(() => disabled.value || props.readonly)
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.inputRating || {}) })({
+const ui = computed(() => tv(theme, appConfig.ui?.inputRating)({
   size: size.value,
   color: color.value,
   orientation: props.orientation,

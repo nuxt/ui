@@ -107,22 +107,30 @@ const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponen
   }))
 )
 
-// eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({
-  extend: theme,
-  ...defu({
+// `activeClass` / `inactiveClass` fold into the `active` variant. When neither
+// is set and the config declares no variants, the config goes in as is, so
+// every instance shares one compiled entry.
+const overrides = computed(() => {
+  const config = appConfig.ui?.button
+  if (props.activeClass === undefined && props.inactiveClass === undefined && !config?.variants) {
+    return config
+  }
+  return defu({
     variants: {
       active: {
         true: {
-          base: mergeClasses(appConfig.ui?.button?.variants?.active?.true?.base, props.activeClass)
+          base: mergeClasses(config?.variants?.active?.true?.base, props.activeClass)
         },
         false: {
-          base: mergeClasses(appConfig.ui?.button?.variants?.active?.false?.base, props.inactiveClass)
+          base: mergeClasses(config?.variants?.active?.false?.base, props.inactiveClass)
         }
       }
     }
-  }, appConfig.ui?.button || {})
-})({
+  }, config || {})
+})
+
+// eslint-disable-next-line vue/no-dupe-keys
+const ui = computed(() => tv(theme, overrides.value)({
   color: props.color,
   variant: props.variant,
   size: buttonSize.value ?? props.size,
