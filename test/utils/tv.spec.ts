@@ -541,7 +541,7 @@ describe('tv types', () => {
 describe('tv theme joins', () => {
   // Slots on top of a slotless theme: the theme's `base` lands in the `base`
   // slot, and the override classes come last so they win conflicts, like every
-  // other join. 3.2.2 dropped the theme's base in this shape.
+  // other join.
   it('joins a slotless theme base into the `base` slot', () => {
     const ui = tvt({ base: 'p-4 text-sm' }, { slots: { base: 'p-2', label: 'truncate' } })()
     expect(ui.base()).toBe('text-sm p-2')
@@ -587,6 +587,32 @@ describe('tv override layers', () => {
     expect(tvt(theme, { slots: { base: 'p-4' } })({ square: true }).base()).toBe('inline-flex text-sm p-4')
   })
 
+  it('lets an override variant win over every theme variant', () => {
+    // Overriding one group used to move it ahead of the theme's others, so a
+    // theme group declared after it won the conflict, here `tone` over `size`.
+    const ordered = {
+      slots: { base: 'inline-flex', label: 'truncate' },
+      variants: { size: { md: { label: 'text-sm' } }, tone: { quiet: { label: 'text-xs' } } },
+      defaultVariants: { size: 'md', tone: 'quiet' }
+    }
+    expect(tvt(ordered)().label()).toBe('truncate text-xs')
+    expect(tvt(ordered, { variants: { size: { md: { label: 'text-lg' } } } })().label()).toBe('truncate text-lg')
+  })
+
+  it('keeps the theme variant order when an override touches another slot', () => {
+    // The calendar template's Sidebar: overriding `variant.floating.inner` must
+    // not change which of `side` and `variant` wins on `container`.
+    const sidebar = {
+      slots: { container: 'fixed', inner: 'flex' },
+      variants: { side: { left: { container: 'border-default' } }, variant: { floating: { container: 'border-transparent' } } },
+      defaultVariants: { side: 'left', variant: 'floating' }
+    }
+    const ui = tvt(sidebar, { variants: { variant: { floating: { inner: 'divide-none' } } } })() as any
+    expect(ui.container()).toBe((tvt(sidebar)() as any).container())
+    expect(ui.container()).toBe('fixed border-transparent')
+    expect(ui.inner()).toBe('flex divide-none')
+  })
+
   it('keeps an override variant beneath the theme compounds', () => {
     // Tuning a size from `app.config.ui` doesn't cancel the `square` exception.
     const ui = tvt(theme, { variants: { size: { md: { base: 'px-4' } } } })
@@ -610,6 +636,12 @@ describe('tv override layers', () => {
 
   it('keeps the theme variants on top of an override slot replacer', () => {
     expect(tvt(theme, { slots: { label: () => 'font-bold text-default' } })().label()).toBe('font-bold text-dimmed')
+  })
+
+  it('keeps a plain override on top when a replacer sits on the same slot', () => {
+    const sized = { slots: { base: 'px-2' }, variants: { size: { md: { base: 'px-3' } } }, defaultVariants: { size: 'md' } }
+    expect(tvt(sized, { base: 'px-6', slots: { base: () => 'block' } })().base()).toBe('block px-6')
+    expect(tvt(sized, { base: () => 'block', slots: { base: 'px-6' } })().base()).toBe('block px-6')
   })
 
   it('resolves a slotless theme through the same layers', () => {
@@ -652,6 +684,16 @@ describe('tv spec sharing', () => {
     expect(tvt(theme, overrides)().base()).toBe('inline-flex p-1')
     overrides.slots.base = 'p-2'
     expect(tvt(theme, overrides)().base()).toBe('inline-flex p-2')
+  })
+
+  it('compiles a slot from the overrides it was keyed on', () => {
+    // Slots compile lazily, after the overrides may have changed in place.
+    const overrides = { variants: { tone: { quiet: { label: 'font-bold' } } } }
+    const ui = tvt(theme, overrides)({ tone: 'quiet' })
+    overrides.variants.tone.quiet.label = 'font-light'
+    expect(ui.label()).toBe('truncate font-bold')
+    overrides.variants.tone.quiet.label = 'font-bold'
+    expect(tvt(theme, overrides)({ tone: 'quiet' }).label()).toBe('truncate font-bold')
   })
 
   it('keys a replacer in the overrides by identity', () => {

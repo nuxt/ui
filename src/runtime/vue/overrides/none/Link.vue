@@ -72,11 +72,9 @@ export interface LinkSlots {
 
 <script setup lang="ts">
 import { computed, inject } from 'vue'
-import { defu } from 'defu'
 import { Slot } from 'reka-ui'
 import { hasProtocol } from 'ufo'
 import { useAppConfig } from '#imports'
-import { mergeClasses } from '../../../utils'
 import { tv } from '../../../utils/tv'
 import ULinkBase from '../../../components/LinkBase.vue'
 
@@ -92,25 +90,7 @@ defineSlots<LinkSlots>()
 
 const appConfig = useAppConfig() as Link['AppConfig']
 
-// `activeClass` / `inactiveClass` fold into the `active` variant. When neither
-// is set and the config declares no variants, the config goes in as is, so
-// every instance shares one compiled entry.
-const overrides = computed(() => {
-  const config = appConfig.ui?.link
-  if (props.activeClass === undefined && props.inactiveClass === undefined && !config?.variants) {
-    return config
-  }
-  return defu({
-    variants: {
-      active: {
-        true: mergeClasses(config?.variants?.active?.true, props.activeClass),
-        false: mergeClasses(config?.variants?.active?.false, props.inactiveClass)
-      }
-    }
-  }, config || {})
-})
-
-const ui = computed(() => tv(theme, overrides.value))
+const ui = computed(() => tv(theme, appConfig.ui?.link))
 
 const href = computed(() => props.to ?? props.href)
 
@@ -147,7 +127,7 @@ const linkClass = computed(() => {
     return [props.class, active ? props.activeClass : props.inactiveClass]
   }
 
-  return ui.value({ class: props.class, active, disabled: props.disabled })
+  return ui.value({ class: [props.class, active ? props.activeClass : props.inactiveClass], active, disabled: props.disabled })
 })
 
 const rel = computed(() => {
