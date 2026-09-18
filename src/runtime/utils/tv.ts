@@ -77,7 +77,7 @@ function cx(...classes: any[]): string | undefined {
 
 type Merger = (classes: string) => string
 
-const mergerCache = new WeakMap<object, Merger>()
+const mergerCache = new WeakMap<TVMergeConfig, Merger | null>()
 
 function hasDefinedKey(obj: Record<string, any> | undefined): boolean {
   for (const key in obj) {
@@ -89,37 +89,33 @@ function hasDefinedKey(obj: Record<string, any> | undefined): boolean {
 }
 
 /**
- * The single seam every class string passes through. `twMerge: false` is read
- * on every call so it can be flipped at runtime; the instance built from
- * `twMergeConfig` is keyed on that object's identity, so it is rebuilt when the
- * object is replaced, not when it is mutated.
+ * The single seam every class string passes through. `app.config.ui.tv` is
+ * build configuration: it is read once per config object, since the slot caches
+ * hold merged results and would serve the previous setting anyway. Returns
+ * `null` when merging is turned off (`twMerge: false`).
  */
 function getMerger(config: TVMergeConfig | undefined): Merger | null {
   if (!config) {
     return twMerge
   }
-  if (config.twMerge === false) {
-    return null
-  }
-  const mergeConfig = config.twMergeConfig as Record<string, any> | undefined
-  if (!mergeConfig) {
-    return twMerge
-  }
-  let merger = mergerCache.get(mergeConfig)
-  if (!merger) {
-    merger = !hasDefinedKey(mergeConfig)
-      ? twMerge
-      : extendTailwindMerge({
-          ...mergeConfig,
-          extend: {
-            theme: mergeConfig.theme,
-            classGroups: mergeConfig.classGroups,
-            conflictingClassGroupModifiers: mergeConfig.conflictingClassGroupModifiers,
-            conflictingClassGroups: mergeConfig.conflictingClassGroups,
-            ...mergeConfig.extend
-          }
-        } as Parameters<typeof extendTailwindMerge>[0])
-    mergerCache.set(mergeConfig, merger)
+  let merger = mergerCache.get(config)
+  if (merger === undefined) {
+    const mergeConfig = config.twMergeConfig as Record<string, any> | undefined
+    merger = config.twMerge === false
+      ? null
+      : !hasDefinedKey(mergeConfig)
+          ? twMerge
+          : extendTailwindMerge({
+              ...mergeConfig,
+              extend: {
+                theme: mergeConfig!.theme,
+                classGroups: mergeConfig!.classGroups,
+                conflictingClassGroupModifiers: mergeConfig!.conflictingClassGroupModifiers,
+                conflictingClassGroups: mergeConfig!.conflictingClassGroups,
+                ...mergeConfig!.extend
+              }
+            } as Parameters<typeof extendTailwindMerge>[0])
+    mergerCache.set(config, merger)
   }
   return merger
 }
@@ -249,7 +245,6 @@ function replaceClasses(config: TVMergeConfig | undefined, replacer: SlotClassRe
 
 function resolveSpec(options: Record<string, any>, config: TVMergeConfig | undefined): Spec {
   const extend = options.extend ?? null
-  const extendSlots = extend?.slots
   const ownVariants = options.variants ?? {}
   const ownCompound = options.compoundVariants ?? []
   const ownDefaults = options.defaultVariants ?? {}
@@ -265,10 +260,16 @@ function resolveSpec(options: Record<string, any>, config: TVMergeConfig | undef
     compoundVariants = flat
   }
 
+  const extendSlots: Record<string, any> = extend?.slots ?? {}
+  const isExtendedSlotsEmpty = isEmpty(extendSlots)
+
+  // What the extended theme contributes to a slot. A slotless extended theme
+  // contributes its top-level `base` to the `base` slot, which is how a user
+  // adds slots on top of a theme that only has a `base`.
+  const extended = (key: string) => isExtendedSlotsEmpty ? (key === 'base' ? extend?.base : undefined) : extendSlots[key]
+
   const baseReplaced = typeof options.base === 'function'
-  // A slotted theme keeps its base under `slots.base` and a slotless one at the
-  // top level, so a base replacer reads whichever the extended theme has.
-  const ownBase = baseReplaced ? replaceClasses(config, options.base, extendSlots?.base ?? extend?.base) : options.base
+  const ownBase = baseReplaced ? replaceClasses(config, options.base, extended('base')) : options.base
 
   const rawSlots: Record<string, any> = options.slots ?? {}
   let ownSlots = rawSlots
@@ -279,30 +280,20 @@ function resolveSpec(options: Record<string, any>, config: TVMergeConfig | undef
     if (ownSlots === rawSlots) {
       ownSlots = { ...rawSlots }
     }
-    ownSlots[key] = replaceClasses(config, rawSlots[key], extendSlots?.[key])
+    ownSlots[key] = replaceClasses(config, rawSlots[key], extended(key))
   }
 
   const base = baseReplaced || !extend?.base ? ownBase : cx(extend.base, ownBase)
 
-  const isExtendedSlotsEmpty = isEmpty(extendSlots)
-  // A slotless extended theme contributes its top-level `base` to the `base`
-  // slot of a slotted one, which is how a user adds slots on top of a theme
-  // that only has a `base`.
-  const componentSlots: Record<string, any> = isEmpty(ownSlots)
-    ? {}
-    : { base: baseReplaced ? ownBase : cx(ownBase, isExtendedSlotsEmpty && extend?.base), ...ownSlots }
-
-  let slots: Record<string, any>
-  if (isExtendedSlotsEmpty) {
-    slots = componentSlots
-  } else {
-    // Own slot classes are appended to the extended ones, slot by slot, except
-    // where a replacer already resolved them.
-    slots = { ...extendSlots }
-    const own = isEmpty(componentSlots) ? { base: ownBase } : componentSlots
-    for (const key in own) {
+  // Slot keys come from both sides, `base` included as soon as there are slots
+  // at all; a theme with nothing but a `base` stays slotless. Extended classes
+  // come first so the own ones win conflicts, unless a replacer resolved them.
+  const slots: Record<string, any> = {}
+  if (!isExtendedSlotsEmpty || !isEmpty(ownSlots)) {
+    for (const key of new Set(['base', ...Object.keys(extendSlots), ...Object.keys(ownSlots)])) {
+      const own = key === 'base' ? cx(ownBase, ownSlots.base) : ownSlots[key]
       const replaced = typeof rawSlots[key] === 'function' || (key === 'base' && baseReplaced)
-      slots[key] = replaced || !(key in slots) ? own[key] : cx(slots[key], own[key])
+      slots[key] = replaced ? own : cx(extended(key), own)
     }
   }
 

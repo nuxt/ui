@@ -529,3 +529,33 @@ describe('tv types', () => {
     expectTypeOf(component.variants).toEqualTypeOf<typeof button.variants>()
   })
 })
+
+describe('tv extend joins', () => {
+  // A slotted theme on top of a slotless one: the extended `base` lands in the
+  // `base` slot, and the own classes come last so they win conflicts, like
+  // every other join. 3.2.2 dropped the extended base in this shape.
+  it('joins a slotless extended base into the `base` slot', () => {
+    const ui = tvt({ extend: { base: 'p-4 text-sm' }, slots: { base: 'p-2', label: 'truncate' } })()
+    expect(ui.base()).toBe('text-sm p-2')
+    expect(ui.label()).toBe('truncate')
+  })
+
+  it('joins a slotless extended base under a top-level own base too', () => {
+    const ui = tvt({ extend: { base: 'p-4 text-sm' }, base: 'p-2', slots: { label: 'truncate' } })()
+    expect(ui.base()).toBe('text-sm p-2')
+  })
+
+  it('hands a slotless extended base to a `slots.base` replacer', () => {
+    let received: string | undefined
+    tvt({ extend: { base: 'p-4' }, slots: { base: (defaults: string) => {
+      received = defaults
+      return 'block'
+    }, label: '' } })()
+    expect(received).toBe('p-4')
+  })
+
+  it('keeps a theme with only a base slotless when extending a slotless one', () => {
+    const tvBase = tv as unknown as (config?: any) => (props?: any) => string | undefined
+    expect(tvBase({ extend: { base: 'p-4' }, base: 'p-2' })()).toBe('p-2')
+  })
+})
