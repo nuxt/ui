@@ -75,7 +75,6 @@ import { computed, inject } from 'vue'
 import { Slot } from 'reka-ui'
 import { hasProtocol } from 'ufo'
 import { useAppConfig } from '#imports'
-import { mergeActiveClasses } from '../../../utils'
 import { tv } from '../../../utils/tv'
 import ULinkBase from '../../../components/LinkBase.vue'
 
@@ -91,9 +90,7 @@ defineSlots<LinkSlots>()
 
 const appConfig = useAppConfig() as Link['AppConfig']
 
-const overrides = computed(() => mergeActiveClasses(appConfig.ui?.link, props.activeClass, props.inactiveClass))
-
-const ui = computed(() => tv(theme, overrides.value))
+const ui = computed(() => tv(theme, appConfig.ui?.link))
 
 const href = computed(() => props.to ?? props.href)
 
@@ -130,7 +127,7 @@ const linkClass = computed(() => {
     return [props.class, active ? props.activeClass : props.inactiveClass]
   }
 
-  return ui.value({ class: props.class, active, disabled: props.disabled })
+  return ui.value({ class: [props.class, active ? props.activeClass : props.inactiveClass], active, disabled: props.disabled })
 })
 
 const rel = computed(() => {

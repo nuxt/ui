@@ -51,7 +51,7 @@ import { useForwardProps } from '../composables/useForwardProps'
 import { useComponentIcons } from '../composables/useComponentIcons'
 import { useFieldGroup } from '../composables/useFieldGroup'
 import { formLoadingInjectionKey } from '../composables/useFormField'
-import { omit, mergeActiveClasses } from '../utils'
+import { omit } from '../utils'
 import { tv } from '../utils/tv'
 import { pickLinkProps } from '../utils/link'
 import UIcon from './Icon.vue'
@@ -106,10 +106,8 @@ const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponen
   }))
 )
 
-const overrides = computed(() => mergeActiveClasses(appConfig.ui?.button, props.activeClass, props.inactiveClass, 'base'))
-
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, overrides.value)({
+const ui = computed(() => tv(theme, appConfig.ui?.button)({
   color: props.color,
   variant: props.variant,
   size: buttonSize.value ?? props.size,
@@ -134,7 +132,7 @@ const ui = computed(() => tv(theme, overrides.value)({
       data-slot="base"
       v-bind="slotProps"
       :class="ui.base({
-        class: [props.ui?.base, props.class],
+        class: [props.ui?.base, props.class, active ? props.activeClass : props.inactiveClass],
         active,
         ...(active && props.activeVariant ? { variant: props.activeVariant } : {}),
         ...(active && props.activeColor ? { color: props.activeColor } : {})

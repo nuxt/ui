@@ -70,7 +70,6 @@ import { hasProtocol } from 'ufo'
 import { useRoute, RouterLink } from 'vue-router'
 import { useAppConfig } from '#imports'
 import { tv } from '../../../utils/tv'
-import { mergeActiveClasses } from '../../../utils'
 import { isPartiallyEqual } from '../../../utils/link'
 import ULinkBase from '../../../components/LinkBase.vue'
 
@@ -90,9 +89,7 @@ const appConfig = useAppConfig() as Link['AppConfig']
 
 const routerLinkProps = useForwardProps(reactiveOmit(props, 'as', 'type', 'disabled', 'active', 'exact', 'exactQuery', 'exactHash', 'activeClass', 'inactiveClass', 'to', 'href', 'raw', 'custom', 'class', 'target', 'rel', 'noRel'))
 
-const overrides = computed(() => mergeActiveClasses(appConfig.ui?.link, props.activeClass, props.inactiveClass))
-
-const ui = computed(() => tv(theme, overrides.value))
+const ui = computed(() => tv(theme, appConfig.ui?.link))
 
 const to = computed(() => props.to ?? props.href)
 
@@ -166,7 +163,7 @@ function resolveLinkClass({ route, isActive, isExactActive }: any = {}) {
     return [props.class, active ? props.activeClass : props.inactiveClass]
   }
 
-  return ui.value({ class: props.class, active, disabled: props.disabled })
+  return ui.value({ class: [props.class, active ? props.activeClass : props.inactiveClass], active, disabled: props.disabled })
 }
 </script>
 

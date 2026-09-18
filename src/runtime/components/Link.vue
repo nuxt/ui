@@ -125,7 +125,6 @@ import { useForwardProps, Slot } from 'reka-ui'
 import { hasProtocol } from 'ufo'
 import { reactiveOmit } from '@vueuse/core'
 import { useRoute, useAppConfig, useNuxtApp, onNuxtReady } from '#imports'
-import { mergeActiveClasses } from '../utils'
 import { tv } from '../utils/tv'
 import { isPartiallyEqual } from '../utils/link'
 import { requestIdleCallback, cancelIdleCallback, observeIntersection } from '../utils/prefetch'
@@ -148,9 +147,7 @@ const nuxtApp = useNuxtApp()
 
 const nuxtLinkProps = useForwardProps(reactiveOmit(props, 'as', 'type', 'disabled', 'active', 'exact', 'exactQuery', 'exactHash', 'activeClass', 'inactiveClass', 'to', 'href', 'raw', 'custom', 'locale', 'class'))
 
-const overrides = computed(() => mergeActiveClasses(appConfig.ui?.link, props.activeClass, props.inactiveClass))
-
-const ui = computed(() => tv(theme, overrides.value))
+const ui = computed(() => tv(theme, appConfig.ui?.link))
 
 const to = computed(() => {
   const path = props.to ?? props.href
@@ -250,7 +247,7 @@ function resolveLinkClass({ route, isActive, isExactActive, prefetched }: any = 
     return [props.class, active ? props.activeClass : props.inactiveClass, prefetchedClass]
   }
 
-  return ui.value({ class: prefetchedClass ? [props.class, prefetchedClass] : props.class, active, disabled: props.disabled })
+  return ui.value({ class: [props.class, active ? props.activeClass : props.inactiveClass, prefetchedClass], active, disabled: props.disabled })
 }
 
 // Since Nuxt 4.5, NuxtLink no longer prefetches `custom` links itself and

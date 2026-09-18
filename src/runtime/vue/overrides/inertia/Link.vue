@@ -76,7 +76,6 @@ import { usePage } from '@inertiajs/vue3'
 import { hasProtocol } from 'ufo'
 import { useAppConfig } from '#imports'
 import { tv } from '../../../utils/tv'
-import { mergeActiveClasses } from '../../../utils'
 import ULinkBase from './LinkBase.vue'
 
 defineOptions({ inheritAttrs: false })
@@ -95,9 +94,7 @@ const appConfig = useAppConfig() as Link['AppConfig']
 
 const routerLinkProps = useForwardProps(reactiveOmit(props, 'as', 'type', 'disabled', 'active', 'exact', 'activeClass', 'inactiveClass', 'to', 'href', 'raw', 'custom', 'class', 'target', 'rel', 'noRel'))
 
-const overrides = computed(() => mergeActiveClasses(appConfig.ui?.link, props.activeClass, props.inactiveClass))
-
-const ui = computed(() => tv(theme, overrides.value))
+const ui = computed(() => tv(theme, appConfig.ui?.link))
 
 const href = computed(() => props.to ?? props.href)
 
@@ -165,7 +162,7 @@ const linkClass = computed(() => {
     return [props.class, active ? props.activeClass : props.inactiveClass]
   }
 
-  return ui.value({ class: props.class, active, disabled: props.disabled })
+  return ui.value({ class: [props.class, active ? props.activeClass : props.inactiveClass], active, disabled: props.disabled })
 })
 </script>
 
