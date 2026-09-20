@@ -12,5 +12,6 @@ upstreams:
 nextMajor:
   label: v5
   branch: v5
+  package: https://pkg.pr.new/@nuxt/ui@{sha}
 securityPolicy: https://github.com/nuxt/.github/blob/main/SECURITY.md
 help: https://ui.nuxt.com
