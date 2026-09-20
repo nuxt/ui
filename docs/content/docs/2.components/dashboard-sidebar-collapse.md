@@ -54,6 +54,10 @@ You can put this component in the `header` slot of the [DashboardSidebar](/docs/
 </template>
 ```
 
+::note
+Inside a sidebar, collapse inherits that sidebar. In a navbar with two sidebars, set `target` to a sidebar `id` or `side`. Omit `target` to keep the original behavior (every sidebar collapses).
+::
+
 ### Within `leading` slot
 
 You can put this component in the `leading` slot of the [DashboardNavbar](/docs/components/dashboard-navbar) component to display it before the title for example:

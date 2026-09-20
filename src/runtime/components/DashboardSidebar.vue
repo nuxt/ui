@@ -9,6 +9,7 @@ import type { ModalProps } from './Modal.vue'
 import type { SlideoverProps } from './Slideover.vue'
 import type { LinkPropsKeys } from './Link.vue'
 import type { ComponentConfig } from '../types/tv'
+import type { DashboardSidebarTarget } from '../utils/dashboard'
 
 type DashboardSidebar = ComponentConfig<typeof theme, AppConfig, 'dashboardSidebar'>
 
@@ -28,9 +29,10 @@ export interface DashboardSidebarProps<T extends DashboardSidebarMode = Dashboar
   /**
    * Customize the toggle button to open the sidebar.
    * `{ color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
+   * Pass `target` to control a specific sidebar (`id` or `side`); omit it to toggle every sidebar.
    * @defaultValue true
    */
-  toggle?: boolean | Omit<ButtonProps, LinkPropsKeys>
+  toggle?: boolean | (Omit<ButtonProps, LinkPropsKeys> & { target?: DashboardSidebarTarget })
   /**
    * The side to render the toggle button on.
    * @defaultValue 'left'
@@ -63,7 +65,7 @@ import { useAppConfig, useRuntimeHook, useRoute } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { useResizable } from '../composables/useResizable'
 import { useLocale } from '../composables/useLocale'
-import { useDashboard } from '../utils/dashboard'
+import { useDashboard, provideDashboardSidebarTarget, matchesDashboardSidebarTarget } from '../utils/dashboard'
 import { tv } from '../utils/tv'
 import UDashboardResizeHandle from './DashboardResizeHandle.vue'
 import UDashboardSidebarToggle from './DashboardSidebarToggle.vue'
@@ -104,23 +106,43 @@ const dashboardContext = useDashboard({
   sidebarCollapsed: ref(false)
 })
 
-const id = `${dashboardContext.storageKey}-sidebar-${props.id || useId()}`
+const uid = props.id || useId()
+const id = `${dashboardContext.storageKey}-sidebar-${uid}`
+const target = uid
+
+provideDashboardSidebarTarget(target)
 
 const { el, size, collapse, isCollapsed, isDragging, onMouseDown, onTouchStart, onDoubleClick } = useResizable(id, toRef(() => ({ ...dashboardContext, ...props })), { collapsed })
 
 const [DefineToggleTemplate, ReuseToggleTemplate] = createReusableTemplate()
 const [DefineResizeHandleTemplate, ReuseResizeHandleTemplate] = createReusableTemplate()
 
-useRuntimeHook('dashboard:sidebar:toggle', () => {
+useRuntimeHook('dashboard:sidebar:toggle', (payload?: { target?: string }) => {
+  if (!matchesDashboardSidebarTarget(payload?.target, target, props.side, props.id)) return
+
   open.value = !open.value
 })
 
-useRuntimeHook('dashboard:sidebar:collapse', (value: boolean) => {
+useRuntimeHook('dashboard:sidebar:collapse', (value: boolean, payload?: { target?: string }) => {
+  if (!matchesDashboardSidebarTarget(payload?.target, target, props.side, props.id)) return
+
   isCollapsed.value = value
 })
 
-watch(open, () => dashboardContext.sidebarOpen!.value = open.value, { immediate: true })
-watch(isCollapsed, () => dashboardContext.sidebarCollapsed!.value = isCollapsed.value, { immediate: true })
+watch(open, (value) => {
+  dashboardContext.sidebarOpen!.value = value
+  if (dashboardContext.openByTarget) {
+    dashboardContext.openByTarget[target] = value
+    dashboardContext.openByTarget[props.side] = value
+  }
+}, { immediate: true })
+watch(isCollapsed, (value) => {
+  dashboardContext.sidebarCollapsed!.value = value
+  if (dashboardContext.collapsedByTarget) {
+    dashboardContext.collapsedByTarget[target] = value
+    dashboardContext.collapsedByTarget[props.side] = value
+  }
+}, { immediate: true })
 
 watch(() => route.fullPath, () => {
   if (!props.autoClose) return
@@ -139,7 +161,7 @@ const Menu = computed(() => ({
   drawer: UDrawer
 })[props.mode as DashboardSidebarMode])
 
-const menuProps = toRef(() => defu(props.menu, {}, props.mode === 'modal' ? { fullscreen: true, transition: false } : props.mode === 'slideover' ? { side: 'left' } : {}) as DashboardSidebarMenu<T>)
+const menuProps = toRef(() => defu(props.menu, {}, props.mode === 'modal' ? { fullscreen: true, transition: false } : props.mode === 'slideover' ? { side: props.side } : {}) as DashboardSidebarMenu<T>)
 
 function toggleOpen() {
   open.value = !open.value
@@ -153,6 +175,7 @@ function toggleOpen() {
         v-if="props.toggle"
         v-bind="(typeof props.toggle === 'object' ? props.toggle : {})"
         :side="props.toggleSide"
+        :target="target"
         data-slot="toggle"
         :class="ui.toggle({ class: props.ui?.toggle, toggleSide: props.toggleSide })"
       />

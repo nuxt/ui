@@ -4,6 +4,7 @@ import theme from '#build/ui/dashboard-sidebar-toggle'
 import type { ButtonProps } from './Button.vue'
 import type { LinkPropsKeys } from './Link.vue'
 import type { ComponentConfig } from '../types/tv'
+import type { DashboardSidebarTarget } from '../utils/dashboard'
 
 type DashboardSidebarToggle = ComponentConfig<typeof theme, AppConfig, 'dashboardSidebarToggle'>
 
@@ -21,6 +22,11 @@ export interface DashboardSidebarToggleProps extends Omit<ButtonProps, LinkProps
    * @defaultValue 'left'
    */
   side?: 'left' | 'right'
+  /**
+   * The sidebar to toggle. Matches a `DashboardSidebar` `id` or `side`.
+   * Omit to toggle every sidebar (backwards compatible).
+   */
+  target?: DashboardSidebarTarget
   ui?: { base?: any }
 }
 </script>
@@ -32,7 +38,7 @@ import { useAppConfig } from '#imports'
 import { useLocale } from '../composables/useLocale'
 import { useComponentProps } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
-import { useDashboard } from '../utils/dashboard'
+import { useDashboard, useDashboardSidebarTarget } from '../utils/dashboard'
 import { tv } from '../utils/tv'
 import UButton from './Button.vue'
 
@@ -46,11 +52,20 @@ const _props = withDefaults(defineProps<DashboardSidebarToggleProps>(), {
 
 const props = useComponentProps('dashboardSidebarToggle', _props)
 
-const buttonProps = useForwardProps(reactiveOmit(props, 'icon', 'side', 'class'))
+const buttonProps = useForwardProps(reactiveOmit(props, 'icon', 'side', 'target', 'class'))
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as DashboardSidebarToggle['AppConfig']
-const { sidebarOpen, toggleSidebar } = useDashboard({ sidebarOpen: ref(false), toggleSidebar: () => {} })
+const { sidebarOpen, openByTarget, toggleSidebar } = useDashboard({ sidebarOpen: ref(false), toggleSidebar: () => {} })
+const parentTarget = useDashboardSidebarTarget()
+const resolvedTarget = computed(() => props.target || parentTarget || undefined)
+const isOpen = computed(() => {
+  const key = resolvedTarget.value
+  if (key && openByTarget && key in openByTarget) {
+    return openByTarget[key]
+  }
+  return !!sidebarOpen?.value
+})
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.dashboardSidebarToggle || {}) }))
@@ -60,11 +75,11 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.dashboardSidebar
   <UButton
     v-bind="{
       ...buttonProps,
-      'icon': props.icon || (sidebarOpen ? appConfig.ui.icons.close : appConfig.ui.icons.menu),
-      'aria-label': sidebarOpen ? t('dashboardSidebarToggle.close') : t('dashboardSidebarToggle.open'),
+      'icon': props.icon || (isOpen ? appConfig.ui.icons.close : appConfig.ui.icons.menu),
+      'aria-label': isOpen ? t('dashboardSidebarToggle.close') : t('dashboardSidebarToggle.open'),
       ...$attrs
     }"
     :class="ui({ class: [props.ui?.base, props.class], side: props.side })"
-    @click="toggleSidebar"
+    @click="toggleSidebar?.(resolvedTarget)"
   />
 </template>

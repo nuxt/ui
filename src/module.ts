@@ -127,8 +127,8 @@ export interface ModuleOptions {
 declare module '#app' {
   interface RuntimeNuxtHooks {
     'dashboard:search:toggle': () => HookResult
-    'dashboard:sidebar:toggle': () => HookResult
-    'dashboard:sidebar:collapse': (value: boolean) => HookResult
+    'dashboard:sidebar:toggle': (payload?: { target?: 'left' | 'right' | string }) => HookResult
+    'dashboard:sidebar:collapse': (value: boolean, payload?: { target?: 'left' | 'right' | string }) => HookResult
   }
 }
 

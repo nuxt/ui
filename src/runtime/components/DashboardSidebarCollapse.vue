@@ -4,6 +4,7 @@ import theme from '#build/ui/dashboard-sidebar-collapse'
 import type { ButtonProps } from './Button.vue'
 import type { LinkPropsKeys } from './Link.vue'
 import type { ComponentConfig } from '../types/tv'
+import type { DashboardSidebarTarget } from '../utils/dashboard'
 
 type DashboardSidebarCollapse = ComponentConfig<typeof theme, AppConfig, 'dashboardSidebarCollapse'>
 
@@ -21,6 +22,11 @@ export interface DashboardSidebarCollapseProps extends Omit<ButtonProps, LinkPro
    * @defaultValue 'left'
    */
   side?: 'left' | 'right'
+  /**
+   * The sidebar to collapse. Matches a `DashboardSidebar` `id` or `side`.
+   * Omit to collapse every sidebar (backwards compatible). Nested in a sidebar, it inherits that sidebar.
+   */
+  target?: DashboardSidebarTarget
   ui?: { base?: any }
 }
 </script>
@@ -32,7 +38,7 @@ import { useAppConfig } from '#imports'
 import { useLocale } from '../composables/useLocale'
 import { useComponentProps } from '../composables/useComponentProps'
 import { useForwardProps } from '../composables/useForwardProps'
-import { useDashboard } from '../utils/dashboard'
+import { useDashboard, useDashboardSidebarTarget } from '../utils/dashboard'
 import { tv } from '../utils/tv'
 import UButton from './Button.vue'
 
@@ -44,11 +50,20 @@ const _props = withDefaults(defineProps<DashboardSidebarCollapseProps>(), {
 
 const props = useComponentProps('dashboardSidebarCollapse', _props)
 
-const buttonProps = useForwardProps(reactiveOmit(props, 'icon', 'side', 'class'))
+const buttonProps = useForwardProps(reactiveOmit(props, 'icon', 'side', 'target', 'class'))
 
 const { t } = useLocale()
 const appConfig = useAppConfig() as DashboardSidebarCollapse['AppConfig']
-const { sidebarCollapsed, collapseSidebar } = useDashboard({ sidebarCollapsed: ref(false), collapseSidebar: () => {} })
+const { sidebarCollapsed, collapsedByTarget, collapseSidebar } = useDashboard({ sidebarCollapsed: ref(false), collapseSidebar: () => {} })
+const parentTarget = useDashboardSidebarTarget()
+const resolvedTarget = computed(() => props.target || parentTarget || undefined)
+const isCollapsed = computed(() => {
+  const key = resolvedTarget.value
+  if (key && collapsedByTarget && key in collapsedByTarget) {
+    return collapsedByTarget[key]
+  }
+  return !!sidebarCollapsed?.value
+})
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.dashboardSidebarCollapse || {}) }))
@@ -58,11 +73,11 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.dashboardSidebar
   <UButton
     v-bind="{
       ...buttonProps,
-      'icon': props.icon || (sidebarCollapsed ? appConfig.ui.icons.panelOpen : appConfig.ui.icons.panelClose),
-      'aria-label': sidebarCollapsed ? t('dashboardSidebarCollapse.expand') : t('dashboardSidebarCollapse.collapse'),
+      'icon': props.icon || (isCollapsed ? appConfig.ui.icons.panelOpen : appConfig.ui.icons.panelClose),
+      'aria-label': isCollapsed ? t('dashboardSidebarCollapse.expand') : t('dashboardSidebarCollapse.collapse'),
       ...$attrs
     }"
     :class="ui({ class: [props.ui?.base, props.class], side: props.side })"
-    @click="collapseSidebar?.(!sidebarCollapsed)"
+    @click="collapseSidebar?.(!isCollapsed, resolvedTarget)"
   />
 </template>
