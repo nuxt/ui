@@ -665,44 +665,46 @@ defineExpose({
         @keydown.down="onTriggerKeydown"
         @keydown.up="onTriggerKeydown"
       >
-        <span v-if="isLeading || !!props.avatar || !!slots.leading" data-slot="leading" :class="ui.leading({ class: props.ui?.leading })">
-          <slot name="leading" :model-value="(modelValue as ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>)" :open="open" :ui="ui">
-            <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" data-slot="leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
-            <UAvatar v-else-if="!!props.avatar" :size="((props.ui?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="props.avatar" data-slot="itemLeadingAvatar" :class="ui.itemLeadingAvatar({ class: props.ui?.itemLeadingAvatar })" />
+        <FieldGroupReset>
+          <span v-if="isLeading || !!props.avatar || !!slots.leading" data-slot="leading" :class="ui.leading({ class: props.ui?.leading })">
+            <slot name="leading" :model-value="(modelValue as ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>)" :open="open" :ui="ui">
+              <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" data-slot="leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
+              <UAvatar v-else-if="!!props.avatar" :size="((props.ui?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="props.avatar" data-slot="itemLeadingAvatar" :class="ui.itemLeadingAvatar({ class: props.ui?.itemLeadingAvatar })" />
+            </slot>
+          </span>
+
+          <slot :model-value="(modelValue as ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>)" :open="open" :ui="ui">
+            <template v-for="displayedModelValue in [displayValue(modelValue as any)]" :key="displayedModelValue">
+              <span v-if="displayedModelValue !== undefined && displayedModelValue !== null" data-slot="value" :class="ui.value({ class: props.ui?.value })">
+                {{ displayedModelValue }}
+              </span>
+              <span v-else data-slot="placeholder" :class="ui.placeholder({ class: props.ui?.placeholder })">
+                {{ props.placeholder ?? '&nbsp;' }}
+              </span>
+            </template>
           </slot>
-        </span>
 
-        <slot :model-value="(modelValue as ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>)" :open="open" :ui="ui">
-          <template v-for="displayedModelValue in [displayValue(modelValue as any)]" :key="displayedModelValue">
-            <span v-if="displayedModelValue !== undefined && displayedModelValue !== null" data-slot="value" :class="ui.value({ class: props.ui?.value })">
-              {{ displayedModelValue }}
-            </span>
-            <span v-else data-slot="placeholder" :class="ui.placeholder({ class: props.ui?.placeholder })">
-              {{ props.placeholder ?? '&nbsp;' }}
-            </span>
-          </template>
-        </slot>
+          <span v-if="isTrailing || !!slots.trailing || !!props.clear" data-slot="trailing" :class="ui.trailing({ class: props.ui?.trailing })">
+            <slot name="trailing" :model-value="(modelValue as ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>)" :open="open" :ui="ui">
+              <ComboboxCancel v-if="!!props.clear && !isModelValueEmpty(modelValue as ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>)" as-child>
+                <UButton
+                  as="span"
+                  :icon="props.clearIcon || appConfig.ui.icons.close"
+                  :size="size"
+                  variant="link"
+                  color="neutral"
+                  tabindex="-1"
+                  v-bind="clearProps"
+                  data-slot="trailingClear"
+                  :class="ui.trailingClear({ class: props.ui?.trailingClear })"
+                  @click.stop="onClear"
+                />
+              </ComboboxCancel>
 
-        <span v-if="isTrailing || !!slots.trailing || !!props.clear" data-slot="trailing" :class="ui.trailing({ class: props.ui?.trailing })">
-          <slot name="trailing" :model-value="(modelValue as ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>)" :open="open" :ui="ui">
-            <ComboboxCancel v-if="!!props.clear && !isModelValueEmpty(modelValue as ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>)" as-child>
-              <UButton
-                as="span"
-                :icon="props.clearIcon || appConfig.ui.icons.close"
-                :size="size"
-                variant="link"
-                color="neutral"
-                tabindex="-1"
-                v-bind="clearProps"
-                data-slot="trailingClear"
-                :class="ui.trailingClear({ class: props.ui?.trailingClear })"
-                @click.stop="onClear"
-              />
-            </ComboboxCancel>
-
-            <UIcon v-else-if="trailingIconName" :name="trailingIconName" data-slot="trailingIcon" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
-          </slot>
-        </span>
+              <UIcon v-else-if="trailingIconName" :name="trailingIconName" data-slot="trailingIcon" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
+            </slot>
+          </span>
+        </FieldGroupReset>
       </ComboboxTrigger>
     </ComboboxAnchor>
 
