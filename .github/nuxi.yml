@@ -1,0 +1,16 @@
+# nuxi triage config. Reference: https://github.com/benjamincanac/nuxi#configuration
+dryRun: true
+maintainers:
+  - benjamincanac
+package:
+  name: "@nuxt/ui"
+upstreams:
+  - nuxt/nuxt
+  - unovue/reka-ui
+  - tailwindlabs/tailwindcss
+  - ueberdosis/tiptap
+nextMajor:
+  label: v5
+  branch: v5
+securityPolicy: https://github.com/nuxt/.github/blob/main/SECURITY.md
+help: https://ui.nuxt.com
