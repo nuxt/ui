@@ -133,14 +133,18 @@ watch(open, (value) => {
   dashboardContext.sidebarOpen!.value = value
   if (dashboardContext.openByTarget) {
     dashboardContext.openByTarget[target] = value
-    dashboardContext.openByTarget[props.side] = value
+    if (props.side) {
+      dashboardContext.openByTarget[props.side] = value
+    }
   }
 }, { immediate: true })
 watch(isCollapsed, (value) => {
   dashboardContext.sidebarCollapsed!.value = value
   if (dashboardContext.collapsedByTarget) {
     dashboardContext.collapsedByTarget[target] = value
-    dashboardContext.collapsedByTarget[props.side] = value
+    if (props.side) {
+      dashboardContext.collapsedByTarget[props.side] = value
+    }
   }
 }, { immediate: true })
 
