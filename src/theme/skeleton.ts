@@ -1,3 +1,5 @@
 export default {
-  base: 'animate-pulse rounded-md bg-elevated'
+  slots: {
+    base: 'animate-pulse rounded-md bg-elevated'
+  }
 }
