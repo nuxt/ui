@@ -204,13 +204,13 @@ describe('SelectMenu', () => {
 
   describe('clear', () => {
     it('does not render the clear button when disabled', () => {
-      const wrapper = mount(SelectMenu, { props: { items, modelValue: items[0], clear: true, disabled: true } })
+      const wrapper = mount(SelectMenu, { props: { items, modelValue: items[0]!, clear: true, disabled: true } })
 
       expect(wrapper.find('[data-slot="trailingClear"]').exists()).toBe(false)
     })
 
     it('renders the clear button when not disabled', () => {
-      const wrapper = mount(SelectMenu, { props: { items, modelValue: items[0], clear: true } })
+      const wrapper = mount(SelectMenu, { props: { items, modelValue: items[0]!, clear: true } })
 
       expect(wrapper.find('[data-slot="trailingClear"]').exists()).toBe(true)
     })
