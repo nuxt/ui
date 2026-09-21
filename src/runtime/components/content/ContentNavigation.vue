@@ -207,7 +207,7 @@ const defaultValue = computed(() => {
     <AccordionRoot
       as="ul"
       :disabled="disabled"
-      data-slot="content-navigation-listWithChildren"
+      :data-slot="props.level! > 0 ? 'content-navigation-listWithChildren' : 'content-navigation-list'"
       v-bind="rootProps"
       :model-value="disabled ? defaultValue : undefined"
       :default-value="disabled ? undefined : defaultValue"

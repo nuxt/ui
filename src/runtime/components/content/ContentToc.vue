@@ -262,8 +262,8 @@ onUnmounted(() => {
 <template>
   <!-- eslint-disable-next-line vue/no-template-shadow -->
   <DefineListTemplate v-slot="{ links, level }">
-    <ul data-slot="content-toc-listWithChildren" :class="level > 0 ? ui.listWithChildren({ class: props.ui?.listWithChildren }) : ui.list({ class: props.ui?.list })">
-      <li v-for="(link, index) in links" :key="index" data-slot="content-toc-itemWithChildren" :class="link.children && link.children.length > 0 ? ui.itemWithChildren({ class: [props.ui?.itemWithChildren, link.ui?.itemWithChildren] }) : ui.item({ class: [props.ui?.item, link.ui?.item] })">
+    <ul :data-slot="level > 0 ? 'content-toc-listWithChildren' : 'content-toc-list'" :class="level > 0 ? ui.listWithChildren({ class: props.ui?.listWithChildren }) : ui.list({ class: props.ui?.list })">
+      <li v-for="(link, index) in links" :key="index" :data-slot="link.children && link.children.length > 0 ? 'content-toc-itemWithChildren' : 'content-toc-item'" :class="link.children && link.children.length > 0 ? ui.itemWithChildren({ class: [props.ui?.itemWithChildren, link.ui?.itemWithChildren] }) : ui.item({ class: [props.ui?.item, link.ui?.item] })">
         <a :href="`#${link.id}`" data-slot="content-toc-link" :class="ui.link({ class: [props.ui?.link, link.ui?.link, link.class], active: activeHeadings.includes(link.id) })" @click.prevent="scrollToHeading(link.id)">
           <slot name="link" :link="link">
             <span data-slot="content-toc-linkText" :class="ui.linkText({ class: [props.ui?.linkText, link.ui?.linkText] })">

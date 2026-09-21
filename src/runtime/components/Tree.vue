@@ -260,7 +260,7 @@ defineExpose({
   <DefineItemTemplate v-slot="{ item, index, level }">
     <li
       role="presentation"
-      data-slot="tree-itemWithChildren"
+      :data-slot="!!nested && level > 1 ? 'tree-itemWithChildren' : 'tree-item'"
       :class="!!nested && level > 1 ? ui.itemWithChildren({ class: [props.ui?.itemWithChildren, item.ui?.itemWithChildren] }) : ui.item({ class: [props.ui?.item, item.ui?.item] })"
     >
       <TreeItem

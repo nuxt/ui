@@ -25,10 +25,14 @@ export function namespaceOf(source) {
   return path?.replace(/^content\//, '').replaceAll('/', '-')
 }
 
-/** The slot a tag is styled by, read from its `:class="ui.<slot>(...)"`. */
-function slotOf(element) {
+/**
+ * The slot a tag is styled by, read from its `:class="ui.<slot>(...)"`. A
+ * binding that picks between two slots (`nested ? ui.itemWithChildren() :
+ * ui.item()`) has no single answer: its marker has to mirror the condition.
+ */
+function slotsOf(element) {
   const bound = element.props.find(prop => prop.type === DIRECTIVE && prop.name === 'bind' && prop.arg?.content === 'class')
-  return bound?.exp?.content.match(/\bui(?:\.value)?\.(\w+)\(/)?.[1]
+  return [...new Set([...(bound?.exp?.content.matchAll(/\bui(?:\.value)?\.(\w+)\(/g) ?? [])].map(match => match[1]))]
 }
 
 /**
@@ -68,7 +72,8 @@ export function transform(source, file) {
   const skipped = []
 
   for (const element of elements(ast)) {
-    const slot = slotOf(element)
+    const slots = slotsOf(element)
+    const slot = slots.length === 1 ? slots[0] : undefined
 
     const literal = element.props.find(prop => prop.type === ATTRIBUTE && prop.name === 'data-slot')
     if (literal?.value) {
@@ -98,6 +103,11 @@ export function transform(source, file) {
       const indent = source.slice(source.lastIndexOf('\n', before.loc.start.offset) + 1, before.loc.start.offset)
       const separator = /^\s+$/.test(indent) ? `\n${indent}` : ' '
       edits.push({ start: before.loc.start.offset, end: before.loc.start.offset, value: `data-slot="${valueFor(slot)}"${separator}`, line: before.loc.start.line })
+      continue
+    }
+
+    if (!bound && !literal && slots.length > 1 && !file.includes('/prose/')) {
+      skipped.push(`${file}:${element.loc.start.line} <${element.tag}> picks between ${slots.join(' / ')}, give it a \`:data-slot\` that mirrors the condition`)
       continue
     }
 
