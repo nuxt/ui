@@ -27,7 +27,7 @@ export interface KbdProps {
    */
   size?: Kbd['variants']['size']
   class?: any
-  ui?: { base?: any }
+  ui?: Kbd['slots']
 }
 
 export interface KbdSlots {
@@ -68,11 +68,15 @@ if (!import.meta.client && platformKey.value) {
 }
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.kbd))
+const ui = computed(() => tv(theme, appConfig.ui?.kbd)({
+  color: props.color,
+  variant: props.variant,
+  size: props.size
+}))
 </script>
 
 <template>
-  <Primitive :as="props.as" :class="ui({ class: [props.ui?.base, props.class], color: props.color, variant: props.variant, size: props.size })">
+  <Primitive :as="props.as" :class="ui.base({ class: [props.ui?.base, props.class] })">
     <slot>
       <template v-if="platformKey">
         <span :class="prefix('hidden in-[.ui-macos]:inline')">{{ platformKey.macos }}</span>
