@@ -130,7 +130,7 @@ describe('Button', () => {
       }
     })
 
-    const label = wrapper.get('[data-slot="label"]')
+    const label = wrapper.get('[data-slot="button-label"]')
     expect(label.classes()).toContain('text-3xl')
     // The default `truncate` class is dropped, not merged.
     expect(label.classes()).not.toContain('truncate')

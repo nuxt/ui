@@ -90,20 +90,20 @@ describe('Calendar', () => {
 
       expect(wrapper.find('[data-reka-calendar-cell-trigger]').exists()).toBe(true)
 
-      await wrapper.find('[data-slot="heading"] button').trigger('click')
+      await wrapper.find('[data-slot="calendar-heading"] button').trigger('click')
       expect(wrapper.find('[data-reka-month-picker-cell-trigger]').exists()).toBe(true)
 
-      await wrapper.find('[data-slot="heading"] button').trigger('click')
+      await wrapper.find('[data-slot="calendar-heading"] button').trigger('click')
       expect(wrapper.find('[data-reka-year-picker-cell-trigger]').exists()).toBe(true)
 
-      await wrapper.find('[data-slot="heading"] button').trigger('click')
+      await wrapper.find('[data-slot="calendar-heading"] button').trigger('click')
       expect(wrapper.find('[data-reka-calendar-cell-trigger]').exists()).toBe(true)
     })
 
     test('drill-down selection updates placeholder without emitting update:modelValue', async () => {
       const wrapper = await mountSuspended(Calendar)
 
-      await wrapper.find('[data-slot="heading"] button').trigger('click')
+      await wrapper.find('[data-slot="calendar-heading"] button').trigger('click')
       await wrapper.find('[data-reka-month-picker-cell-trigger][data-value="2025-06-01"]').trigger('click')
 
       expect(wrapper.emitted('update:modelValue')).toBeUndefined()
@@ -119,7 +119,7 @@ describe('Calendar', () => {
     test('does not forward day-only props to month and year pickers', async () => {
       const wrapper = await mountSuspended(Calendar, { props: { type: 'month', numberOfMonths: 2, weekdayFormat: 'short' } })
 
-      const root = wrapper.find('[data-slot="root"]')
+      const root = wrapper.find('[data-slot="calendar"]')
       expect(root.attributes('fixedweeks')).toBeUndefined()
       expect(root.attributes('numberofmonths')).toBeUndefined()
       expect(root.attributes('weekdayformat')).toBeUndefined()
@@ -128,7 +128,7 @@ describe('Calendar', () => {
     test('does not forward month and year props to the day calendar', async () => {
       const wrapper = await mountSuspended(Calendar, { props: { isMonthDisabled: () => true, isYearDisabled: () => true } })
 
-      const root = wrapper.find('[data-slot="root"]')
+      const root = wrapper.find('[data-slot="calendar"]')
       expect(root.attributes('ismonthdisabled')).toBeUndefined()
       expect(root.attributes('isyeardisabled')).toBeUndefined()
     })

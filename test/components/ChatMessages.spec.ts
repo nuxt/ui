@@ -101,7 +101,7 @@ describe('ChatMessages', () => {
     const wrapper = await mountSuspended(Parent)
 
     // Empty assistant message -> indicator visible.
-    expect(wrapper.find('[data-slot="indicator"]').exists()).toBe(true)
+    expect(wrapper.find('[data-slot="chat-messages-indicator"]').exists()).toBe(true)
 
     // Stream the first part in place + triggerRef, and force a re-render.
     messages.value[1]!.parts.push({ type: 'text', text: 'Hello' })
@@ -111,7 +111,7 @@ describe('ChatMessages', () => {
 
     // A cached `computed` would stay stuck on its first `streaming` result here;
     // the indicator must now be gone.
-    expect(wrapper.find('[data-slot="indicator"]').exists()).toBe(false)
+    expect(wrapper.find('[data-slot="chat-messages-indicator"]').exists()).toBe(false)
   })
 
   it('forwards `message` to the actions slot', async () => {
