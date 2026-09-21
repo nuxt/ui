@@ -15,7 +15,7 @@ export interface PageLink extends Omit<LinkProps, 'custom'> {
    */
   icon?: IconProps['name']
   class?: any
-  ui?: Pick<PageLinks['slots'], 'item' | 'link' | 'linkLabel' | 'linkLabelExternalIcon' | 'linkLeadingIcon'>
+  ui?: Partial<Pick<PageLinks['slots'], 'item' | 'link' | 'linkLabel' | 'linkLabelExternalIcon' | 'linkLeadingIcon'>>
 }
 
 export interface PageLinksProps<T extends PageLink = PageLink> {

@@ -22,7 +22,7 @@ export type RadioGroupItem = RadioGroupValue | {
    */
   icon?: IconProps['name']
   class?: any
-  ui?: Pick<RadioGroup['slots'], 'item' | 'container' | 'base' | 'indicator' | 'wrapper' | 'label' | 'icon' | 'description'>
+  ui?: Partial<Pick<RadioGroup['slots'], 'item' | 'container' | 'base' | 'indicator' | 'wrapper' | 'label' | 'icon' | 'description'>>
   [key: string]: any
 }
 
