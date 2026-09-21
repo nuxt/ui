@@ -105,59 +105,59 @@ export default (options: Required<ModuleOptions>) => ({
   }, {
     orientation: 'horizontal',
     size: '2xs',
-    class: 'h-px'
+    class: { base: 'h-px' }
   }, {
     orientation: 'horizontal',
     size: 'xs',
-    class: 'h-0.5'
+    class: { base: 'h-0.5' }
   }, {
     orientation: 'horizontal',
     size: 'sm',
-    class: 'h-1'
+    class: { base: 'h-1' }
   }, {
     orientation: 'horizontal',
     size: 'md',
-    class: 'h-2'
+    class: { base: 'h-2' }
   }, {
     orientation: 'horizontal',
     size: 'lg',
-    class: 'h-3'
+    class: { base: 'h-3' }
   }, {
     orientation: 'horizontal',
     size: 'xl',
-    class: 'h-4'
+    class: { base: 'h-4' }
   }, {
     orientation: 'horizontal',
     size: '2xl',
-    class: 'h-5'
+    class: { base: 'h-5' }
   }, {
     orientation: 'vertical',
     size: '2xs',
-    class: 'w-px'
+    class: { base: 'w-px' }
   }, {
     orientation: 'vertical',
     size: 'xs',
-    class: 'w-0.5'
+    class: { base: 'w-0.5' }
   }, {
     orientation: 'vertical',
     size: 'sm',
-    class: 'w-1'
+    class: { base: 'w-1' }
   }, {
     orientation: 'vertical',
     size: 'md',
-    class: 'w-2'
+    class: { base: 'w-2' }
   }, {
     orientation: 'vertical',
     size: 'lg',
-    class: 'w-3'
+    class: { base: 'w-3' }
   }, {
     orientation: 'vertical',
     size: 'xl',
-    class: 'w-4'
+    class: { base: 'w-4' }
   }, {
     orientation: 'vertical',
     size: '2xl',
-    class: 'w-5'
+    class: { base: 'w-5' }
   }, {
     orientation: 'horizontal',
     animation: 'carousel',

@@ -42,9 +42,9 @@ export type TVMergeConfig = {
 export type ClassValue = string | 0 | 0n | false | null | undefined | readonly ClassValue[]
 
 /**
- * A component's slots, or `undefined` for a theme that only has a `base`.
+ * A component's slots.
  */
-export type TVSlots = Record<string, ClassValue> | undefined
+export type TVSlots = Record<string, ClassValue>
 
 /**
  * Classes to merge on top of a resolved chain.
@@ -80,35 +80,36 @@ export type SlotClass = ClassValue | SlotClassReplacer
 /** Variant values spelled `'true'` / `'false'` are read as booleans. */
 type VariantKey<T> = T extends 'true' | 'false' ? boolean : T
 
+/** A variant value declared for its key alone, with no classes of its own. */
+type NoClass = '' | false | null | undefined
+
 /** Values a variant or compound entry may hold, kept literal by inference. */
 type VariantPropValue = string | number | boolean | null | undefined
 
 /**
  * A theme, the shape `src/theme/*` produces and `#build/ui/*` exports: classes
- * for the whole component or per slot, the variants that switch them, and what
- * they default to.
+ * per slot, the variants that switch them, and what they default to.
  */
 export type TVTheme = {
-  base?: ClassValue
   slots?: TVSlots
-  variants?: Record<string, Record<string, ClassValue | Record<string, ClassValue>>>
-  compoundVariants?: Record<string, VariantPropValue | readonly VariantPropValue[] | ClassValue | Record<string, ClassValue>>[]
+  // `string` rather than `''`: a theme is inferred from a literal, where the
+  // empty placeholder of a value that contributes nothing widens to `string`.
+  variants?: Record<string, Record<string, string | NoClass | Record<string, ClassValue>>>
+  compoundVariants?: Record<string, VariantPropValue | readonly VariantPropValue[] | Record<string, ClassValue>>[]
   defaultVariants?: Record<string, VariantPropValue>
 }
 
 /** The theme's variant groups, `{}` when it declares none. */
 type VariantsOf<T> = T extends { variants?: infer V } ? NonNullable<V> extends Record<string, any> ? NonNullable<V> : {} : {}
 
-/** The theme's slots, `{}` when it only has a `base`. */
+/** The theme's slots, `{}` when it declares none. */
 type SlotsOf<T> = T extends { slots?: infer S } ? NonNullable<S> extends Record<string, any> ? NonNullable<S> : {} : {}
 
-type BaseSlot<T> = 'base' extends keyof T ? 'base' : never
+/** The slots a class value can target. */
+type SlotName<T> = keyof SlotsOf<T>
 
-/** The slots a class value can target: the theme's own, plus `base` when it has one. */
-type SlotName<T> = keyof SlotsOf<T> | BaseSlot<T>
-
-/** Classes for the whole component, or per slot. */
-type SlotsClass<T> = ClassValue | { [K in SlotName<T>]?: ClassValue }
+/** Classes per slot. A variant value that contributes nothing may stay empty. */
+type SlotsClass<T> = NoClass | { [K in SlotName<T>]?: ClassValue }
 
 /** One variant group: every value it accepts, and the classes each contributes. */
 type VariantGroup<T> = Record<string, SlotsClass<T>>
@@ -146,7 +147,6 @@ export type TVDefaultVariants<T> = {
  * the theme's own.
  */
 export type TVOverrides<T> = {
-  base?: SlotClass
   slots?: { [K in keyof SlotsOf<T>]?: SlotClass }
   variants?: TVVariants<T>
   compoundVariants?: TVCompoundVariants<T>
@@ -168,20 +168,17 @@ export type TVProps<T> = {
  */
 export type VariantProps<Component extends (...args: any) => any> = Omit<Exclude<Parameters<Component>[0], undefined>, 'class'>
 
-type HasSlots<T> = [keyof SlotsOf<T>] extends [never] ? false : true
-
 /**
- * One function per slot, `base` included when the theme has one.
+ * One function per slot.
  */
 type TVSlotFunctions<T> = {
   [K in SlotName<T>]: (slotProps?: TVProps<T>) => string
 }
 
 /**
- * A built component: callable with variant props, returning one class string
- * when the theme has no slots and a function per slot when it does.
+ * A built component: callable with variant props, returning a function per slot.
  */
-export type TVReturnType<T> = (props?: TVProps<T>) => HasSlots<T> extends true ? TVSlotFunctions<T> : string
+export type TVReturnType<T> = (props?: TVProps<T>) => TVSlotFunctions<T>
 
 /**
  * The theme's own `compoundVariants` and `defaultVariants` checked against its
@@ -194,9 +191,11 @@ type TVThemeCheck<T> = {
 
 /**
  * The engine itself: a theme and the overrides on top of it in, a built
- * component out.
+ * component out. The resolved `app.config.ui.<c>` is typed after the theme,
+ * whose empty placeholders widen to `string`, so it is accepted as is: the
+ * strict shape is enforced where overrides are written, through `TVConfig`.
  */
-export type TV = <T extends TVTheme>(theme: T & TVThemeCheck<T>, overrides?: TVOverrides<T> | null) => TVReturnType<T>
+export type TV = <T extends TVTheme>(theme: T & TVThemeCheck<T>, overrides?: TVOverrides<T> | Partial<T> | null) => TVReturnType<T>
 
 /** A theme whose variant groups also accept values `app.config.ui` adds. */
 type WidenTheme<T> = Omit<T, 'variants'> & {

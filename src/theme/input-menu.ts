@@ -132,29 +132,29 @@ export default (options: Required<ModuleOptions>) => {
     }, {
       multiple: true,
       fieldGroup: 'horizontal',
-      class: { base: fieldGroupVariant.fieldGroup.horizontal }
+      class: fieldGroupVariant.fieldGroup.horizontal
     }, {
       multiple: true,
       fieldGroup: 'vertical',
-      class: { base: fieldGroupVariant.fieldGroup.vertical }
+      class: fieldGroupVariant.fieldGroup.vertical
     }, {
       variant: 'soft',
       multiple: true,
-      class: 'has-focus:bg-elevated has-focus-visible:outline-3'
+      class: { base: 'has-focus:bg-elevated has-focus-visible:outline-3' }
     }, {
       variant: 'ghost',
       multiple: true,
-      class: 'has-focus:bg-elevated has-focus-visible:outline-3'
+      class: { base: 'has-focus:bg-elevated has-focus-visible:outline-3' }
     }, ...(options.theme.colors || []).map((color: string) => ({
       color,
       multiple: true,
       variant: ['outline', 'subtle'],
-      class: `has-focus-visible:outline-3 has-focus-visible:ring-${color}`
+      class: { base: `has-focus-visible:outline-3 has-focus-visible:ring-${color}` }
     })), {
       color: 'neutral',
       multiple: true,
       variant: ['outline', 'subtle'],
-      class: 'has-focus-visible:outline-3 has-focus-visible:ring-inverted'
+      class: { base: 'has-focus-visible:outline-3 has-focus-visible:ring-inverted' }
     }]
   }, input(options))
 }

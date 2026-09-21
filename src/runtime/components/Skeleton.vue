@@ -12,7 +12,7 @@ export interface SkeletonProps {
    */
   as?: any
   class?: any
-  ui?: { base?: any }
+  ui?: Skeleton['slots']
 }
 </script>
 
@@ -32,7 +32,7 @@ const { t } = useLocale()
 const appConfig = useAppConfig() as Skeleton['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.skeleton))
+const ui = computed(() => tv(theme, appConfig.ui?.skeleton)())
 </script>
 
 <template>
@@ -42,7 +42,7 @@ const ui = computed(() => tv(theme, appConfig.ui?.skeleton))
     :aria-label="t('skeleton.label')"
     aria-live="polite"
     role="alert"
-    :class="ui({ class: [props.ui?.base, props.class] })"
+    :class="ui.base({ class: [props.ui?.base, props.class] })"
   >
     <slot />
   </Primitive>
