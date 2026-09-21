@@ -477,13 +477,17 @@ function onRowSelect(e: Event, row: TableRow<T>) {
     return
   }
   const target = e.target as HTMLElement
-  const isInteractive = target.closest('button') || target.closest('a')
+  const isInteractive = target.closest('a, button, input, label, select, textarea')
   if (isInteractive) {
     return
   }
 
   e.preventDefault()
   e.stopPropagation()
+
+  if ((e as KeyboardEvent).repeat) {
+    return
+  }
 
   props.onSelect(e, row)
 }
@@ -581,7 +585,6 @@ defineExpose({
       :data-selectable="!!props.onSelect || !!props.onHover || !!props.onContextmenu"
       :data-expanded="row.getIsExpanded()"
       :data-pinned="row.getIsPinned() || undefined"
-      :role="props.onSelect ? 'button' : undefined"
       :tabindex="props.onSelect ? 0 : undefined"
       data-slot="tr"
       :class="ui.tr({
@@ -592,6 +595,7 @@ defineExpose({
       })"
       :style="[resolveValue(tableApi.options.meta?.style?.tr, row), style]"
       @click="onRowSelect($event, row)"
+      @keydown.self.exact.enter.space="onRowSelect($event, row)"
       @pointerenter="onRowHover($event, row)"
       @pointerleave="onRowHover($event, null)"
       @contextmenu="onRowContextmenu($event, row)"
