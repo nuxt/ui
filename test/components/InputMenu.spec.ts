@@ -145,7 +145,7 @@ describe('InputMenu', () => {
       template: `<UFieldGroup><UButton label="Button" /><UInputMenu multiple /></UFieldGroup>`
     })
 
-    expect(wrapper.get('div[data-slot="input-menu-base"]').classes()).toContain('not-only:last:rounded-s-none')
+    expect(wrapper.get('div[data-slot="input-menu"]').classes()).toContain('not-only:last:rounded-s-none')
   })
 
   it('with autocomplete mode ignores multiple', () => {

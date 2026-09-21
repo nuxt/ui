@@ -318,9 +318,10 @@ function getDropdownItems(item: EditorToolbarDropdownItem) {
   <Primitive
     :as="Component"
     v-bind="Component !== 'template' ? {
-      editor: props.editor,
-      tabindex: -1,
-      class: ui.menu({ class: props.ui?.menu }),
+      'editor': props.editor,
+      'tabindex': -1,
+      'data-slot': 'editor-toolbar-menu',
+      'class': ui.menu({ class: props.ui?.menu }),
       ...rootProps,
       options,
       ...$attrs

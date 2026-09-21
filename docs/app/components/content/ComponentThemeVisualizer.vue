@@ -43,21 +43,23 @@ function getSlotClasses(slotName: string): string {
 }
 
 // A slot is marked `data-slot="card-header"`, and the outermost one, `root` or
-// a `base` with no wrapper, carries the component name alone.
-function slotSelector(slotName: string): string {
+// a `base` with no wrapper, carries the component name alone. The prefixed
+// name is tried first: a selector list would match in document order, and hand
+// back the root of an Input when asked for its `base`.
+function querySlot(scope: ParentNode, slotName: string): Element | null {
   const namespace = kebabCase(camelName.value)
-  const selectors = [`[data-slot="${namespace}-${slotName}"]`]
-  if (slotName === 'root' || slotName === 'base') {
-    selectors.push(`[data-slot="${namespace}"]`)
+  const element = scope.querySelector(`[data-slot="${namespace}-${slotName}"]`)
+  if (element || (slotName !== 'root' && slotName !== 'base')) {
+    return element
   }
-  return selectors.join(', ')
+  return scope.querySelector(`[data-slot="${namespace}"]`)
 }
 
 function findSlotElement(slotName: string): { element: Element, inPortal: boolean } | null {
   if (!props.container) return null
 
   // First check in container
-  const containerSlot = props.container.querySelector(slotSelector(slotName))
+  const containerSlot = querySlot(props.container, slotName)
   if (containerSlot) {
     return { element: containerSlot, inPortal: false }
   }
@@ -70,7 +72,7 @@ function findSlotElement(slotName: string): { element: Element, inPortal: boolea
       if (popoverContentRef.value && child.contains(popoverContentRef.value)) {
         continue
       }
-      const portalSlot = child.querySelector(slotSelector(slotName))
+      const portalSlot = querySlot(child, slotName)
       if (portalSlot) {
         return { element: portalSlot, inPortal: true }
       }

@@ -286,7 +286,7 @@ const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponen
 </script>
 
 <template>
-  <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" data-slot="leadingIcon" :class="ui.leadingIcon()" />
+  <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" data-slot="input-leadingIcon" :class="ui.leadingIcon()" />
 </template>
 ```
 

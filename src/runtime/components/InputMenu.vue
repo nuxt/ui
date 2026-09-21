@@ -298,10 +298,11 @@ const attrs = useAttrs()
 // In multiple non-autocomplete mode `Root` is `as-child`: it renders no element and
 // merges its attributes onto `Anchor`, where the child's own `data-slot` wins the
 // merge. `Anchor` is then the effective root, so it reads the caller's `data-slot`
-// itself. In every other mode `Root` renders its own element (and receives the
-// caller's value through its own binding), so `Anchor` keeps its own label.
+// itself, and is named after the component like any outermost element. In every
+// other mode `Root` renders its own element (and receives the caller's value
+// through its own binding), so `Anchor` keeps its `base` label.
 const baseDataSlot = computed(() => isMultiple.value
-  ? ((attrs['data-slot'] as string | undefined) ?? 'input-menu-base')
+  ? ((attrs['data-slot'] as string | undefined) ?? 'input-menu')
   : 'input-menu-base')
 const portalProps = usePortal(toRef(() => props.portal))
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: 'popper' }) as ComboboxContentProps)

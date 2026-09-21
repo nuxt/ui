@@ -8,7 +8,6 @@
 //   node scripts/data-slot.mjs --check   list what would change, exit 1 if any
 import { readFileSync, writeFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
-import { glob } from 'node:fs/promises'
 import { parse } from 'vue/compiler-sfc'
 
 const ELEMENT = 1
@@ -32,7 +31,39 @@ export function namespaceOf(source) {
  */
 function slotsOf(element) {
   const bound = element.props.find(prop => prop.type === DIRECTIVE && prop.name === 'bind' && prop.arg?.content === 'class')
-  return [...new Set([...(bound?.exp?.content.matchAll(/\bui(?:\.value)?\.(\w+)\(/g) ?? [])].map(match => match[1]))]
+  const expression = bound?.exp?.content.trim() ?? ''
+  // `ui.root({ class: [ui.base(...), props.class] })`: one call wraps the whole
+  // binding, the slots merged inside it land on that same element.
+  const outer = expression.match(/^ui(?:\.value)?\.(\w+)\(/)
+  if (outer && closes(expression, outer[0].length - 1) === expression.length - 1) {
+    return [outer[1]]
+  }
+  return [...new Set([...expression.matchAll(/\bui(?:\.value)?\.(\w+)\(/g)].map(match => match[1]))]
+}
+
+/** Index of the parenthesis closing the one at `open`. */
+function closes(expression, open) {
+  let depth = 0
+  for (let index = open; index < expression.length; index++) {
+    if (expression[index] === '(') {
+      depth++
+    } else if (expression[index] === ')' && --depth === 0) {
+      return index
+    }
+  }
+  return -1
+}
+
+/**
+ * A marker the script can't write, a ternary or a computed, is still checked:
+ * every value it can take has to be the component name or `<component>-<slot>`
+ * for a slot the component renders. A bare identifier is looked up in the script.
+ */
+function strays(expression, source, valid) {
+  const code = /^\w+$/.test(expression)
+    ? source.match(new RegExp(`const ${expression} = computed\\(\\(\\) => ([\\s\\S]*?)\\)\\n`))?.[1] ?? ''
+    : expression
+  return [...code.matchAll(/'([^']*)'/g)].map(match => match[1]).filter(value => value !== 'data-slot' && !valid.has(value))
 }
 
 /**
@@ -68,6 +99,13 @@ export function transform(source, file) {
 
   const outermost = outermostSlot(descriptor.template.content)
   const valueFor = slot => slot === outermost ? namespace : `${namespace}-${slot}`
+  // Windows globs with `\\`
+  const prose = file.replaceAll('\\', '/').includes('/prose/')
+  const rendered = [...source.matchAll(/\bui(?:\.value)?\.(\w+)\(/g)].map(match => match[1])
+  // `linkLeadingChipSize` sizes the child labelled `linkLeadingChip`, which has
+  // no classes of its own
+  const named = rendered.flatMap(slot => slot.endsWith('Size') ? [slot, slot.slice(0, -4)] : [slot])
+  const valid = new Set([namespace, ...named.map(slot => `${namespace}-${slot}`)])
   const edits = []
   const skipped = []
 
@@ -76,12 +114,11 @@ export function transform(source, file) {
     const slot = slots.length === 1 ? slots[0] : undefined
 
     const literal = element.props.find(prop => prop.type === ATTRIBUTE && prop.name === 'data-slot')
-    if (literal?.value) {
+    if (literal) {
       if (!slot) {
-        if (literal.value.content.startsWith(namespace)) {
-          continue
+        if (!valid.has(literal.value?.content)) {
+          skipped.push(`${file}:${literal.loc.start.line} data-slot="${literal.value?.content ?? ''}" is not \`${namespace}\` or \`${namespace}-<slot>\`, and its tag has no single ui.<slot>() to derive it from`)
         }
-        skipped.push(`${file}:${literal.loc.start.line} data-slot="${literal.value.content}" has no ui.<slot>() on its tag`)
         continue
       }
       // `loc` spans the quotes
@@ -95,7 +132,7 @@ export function transform(source, file) {
     // `v-bind="..."` spread so a caller's `data-slot` in `$attrs` still wins.
     // Prose stays bare: a marker on every `<p>` and `<li>` of a rendered
     // document is weight nobody selects on.
-    if (!bound && slot && !file.includes('/prose/') && !FORWARDED.has(element.tag)) {
+    if (!bound && slot && !prose && !FORWARDED.has(element.tag)) {
       const spread = element.props.find(prop => prop.type === DIRECTIVE && prop.name === 'bind' && !prop.arg)
       const klass = element.props.find(prop => prop.type === DIRECTIVE && prop.name === 'bind' && prop.arg?.content === 'class')
       const before = spread && spread.loc.start.offset < klass.loc.start.offset ? spread : klass
@@ -106,8 +143,8 @@ export function transform(source, file) {
       continue
     }
 
-    if (!bound && !literal && slots.length > 1 && !file.includes('/prose/')) {
-      skipped.push(`${file}:${element.loc.start.line} <${element.tag}> picks between ${slots.join(' / ')}, give it a \`:data-slot\` that mirrors the condition`)
+    if (!bound && slots.length > 1 && !prose) {
+      skipped.push(`${file}:${element.loc.start.line} <${element.tag}> is styled by ${slots.join(' / ')}, write its \`data-slot\` by hand, mirroring the condition if there is one`)
       continue
     }
 
@@ -117,8 +154,11 @@ export function transform(source, file) {
     if (bound && fallback && slot) {
       const start = bound.exp.loc.start.offset + fallback.index + fallback[0].indexOf('\'') + 1
       edits.push({ start, end: start + fallback[1].length, value: valueFor(slot), line: bound.loc.start.line })
-    } else if (bound && !bound.exp?.content.includes(`'${namespace}`) && !/^\w+$/.test(bound.exp?.content ?? '')) {
-      skipped.push(`${file}:${bound.loc.start.line} :data-slot="${bound.exp?.content}" is dynamic`)
+    } else if (bound) {
+      const wrong = strays(bound.exp?.content ?? '', source, valid)
+      if (wrong.length) {
+        skipped.push(`${file}:${bound.loc.start.line} :data-slot can be ${wrong.map(value => `"${value}"`).join(', ')}, expected \`${namespace}\` or \`${namespace}-<slot>\``)
+      }
     }
   }
 
@@ -133,6 +173,8 @@ export function transform(source, file) {
 
 // Also imported by `test/components/DataSlot.spec.ts`, which only needs `transform`.
 if (import.meta.url.startsWith('file:') && process.argv[1] === fileURLToPath(import.meta.url)) {
+  // Node 22+, which only the CLI needs
+  const { glob } = await import('node:fs/promises')
   const root = fileURLToPath(new URL('..', import.meta.url))
   const check = process.argv.includes('--check')
   let total = 0
