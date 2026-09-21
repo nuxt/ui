@@ -1,5 +1,5 @@
 export default {
   slots: {
-    base: 'mt-8 pb-24 space-y-12'
+    root: 'mt-8 pb-24 space-y-12'
   }
 }
