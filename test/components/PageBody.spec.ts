@@ -1,5 +1,4 @@
 import { describe, it, expect } from 'vitest'
-import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { renderEach } from '../component-render'
 import PageBody from '../../src/runtime/components/PageBody.vue'
@@ -20,6 +19,6 @@ describe('PageBody', () => {
       }
     })
 
-    expect(await axe(wrapper.element)).toHaveNoViolations()
+    expect(await wrapper.axe()).toHaveNoViolations()
   })
 })

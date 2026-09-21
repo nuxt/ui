@@ -1,5 +1,4 @@
 import { describe, it, expect } from 'vitest'
-import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { renderEach } from '../component-render'
 import Popover from '../../src/runtime/components/Popover.vue'
@@ -63,7 +62,7 @@ describe('Popover', () => {
       }
     })
 
-    expect(await axe(wrapper.element, {
+    expect(await wrapper.axe({
       rules: {
         // RekaUI does not handle nor check for aria-dialog-name in their tests either
         // https://github.com/unovue/reka-ui/blob/v2/packages/core/src/Popover/Popover.test.ts

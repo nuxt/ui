@@ -1,5 +1,4 @@
 import { describe, it, expect, test } from 'vitest'
-import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { renderEach } from '../component-render'
 import { mount, flushPromises } from '@vue/test-utils'
@@ -83,7 +82,7 @@ describe('Input', () => {
       }
     })
 
-    expect(await axe(wrapper.element)).toHaveNoViolations()
+    expect(await wrapper.axe()).toHaveNoViolations()
   })
 
   test('with .lazy modifier updates on change only', async () => {

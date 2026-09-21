@@ -1,6 +1,5 @@
 import { nextTick, watch } from 'vue'
 import { describe, expect, it, beforeEach, vi } from 'vitest'
-import { axe } from 'vitest-axe'
 import { flushPromises } from '@vue/test-utils'
 import * as z from 'zod'
 import * as yup from 'yup'
@@ -33,7 +32,7 @@ describe('Form', () => {
       fixture: 'FormA11y'
     })
 
-    expect(await axe(wrapper.element)).toHaveNoViolations()
+    expect(await wrapper.axe()).toHaveNoViolations()
   })
 
   renderEach(

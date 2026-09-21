@@ -1,5 +1,4 @@
 import { describe, it, expect } from 'vitest'
-import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { renderEach } from '../component-render'
 import Container from '../../src/runtime/components/Container.vue'
@@ -16,6 +15,6 @@ describe('Container', () => {
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(Container)
 
-    expect(await axe(wrapper.element)).toHaveNoViolations()
+    expect(await wrapper.axe()).toHaveNoViolations()
   })
 })

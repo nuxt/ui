@@ -1,5 +1,4 @@
 import { describe, it, expect, vi, test } from 'vitest'
-import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { renderEach } from '../component-render'
 import { mount } from '@vue/test-utils'
@@ -120,7 +119,7 @@ describe('FileUpload', () => {
       }
     })
 
-    expect(await axe(wrapper.element)).toHaveNoViolations()
+    expect(await wrapper.axe()).toHaveNoViolations()
   })
 
   it('reactively changes multiple and accept attributes', async () => {

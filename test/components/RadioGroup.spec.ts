@@ -1,5 +1,4 @@
 import { describe, it, expect, test } from 'vitest'
-import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { renderEach } from '../component-render'
 import RadioGroup from '../../src/runtime/components/RadioGroup.vue'
@@ -56,7 +55,7 @@ describe('RadioGroup', () => {
     const wrapper = await mountSuspended(RadioGroup, {
       props
     })
-    expect(await axe(wrapper.element)).toHaveNoViolations()
+    expect(await wrapper.axe()).toHaveNoViolations()
   })
 
   it('renders an item icon next to the label only when the indicator is hidden', async () => {
@@ -86,7 +85,7 @@ describe('RadioGroup', () => {
         defaultValue: 'system'
       }
     })
-    expect(await axe(wrapper.element)).toHaveNoViolations()
+    expect(await wrapper.axe()).toHaveNoViolations()
   })
 
   describe('emits', () => {

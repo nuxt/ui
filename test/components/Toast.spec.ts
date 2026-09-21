@@ -1,6 +1,5 @@
 import { defineComponent } from 'vue'
 import { describe, it, expect } from 'vitest'
-import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { renderEach } from '../component-render'
 import Toaster from '../../src/runtime/components/Toaster.vue'
@@ -60,7 +59,8 @@ describe('Toast', () => {
         actions: [{ label: 'Action' }]
       }
     })
-    expect(await axe(wrapper.element, {
+
+    expect(await wrapper.axe({
       rules: {
         // "ARIA role should be appropriate for the element (aria-allowed-role)"
 

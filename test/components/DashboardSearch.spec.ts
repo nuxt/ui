@@ -1,6 +1,5 @@
 import { defineComponent } from 'vue'
 import { describe, it, expect } from 'vitest'
-import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import DashboardGroup from '../../src/runtime/components/DashboardGroup.vue'
 import DashboardSearch from '../../src/runtime/components/DashboardSearch.vue'
@@ -62,7 +61,7 @@ describe('DashboardSearch', () => {
       props
     })
 
-    expect(await axe(wrapper.element, {
+    expect(await wrapper.axe({
       // "ARIA input fields must have an accessible name (aria-input-field-name)"
       //
       // Fix any of the following:

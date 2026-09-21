@@ -1,5 +1,4 @@
 import { describe, it, expect } from 'vitest'
-import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import ChatShimmer from '../../src/runtime/components/ChatShimmer.vue'
 import { renderEach } from '../component-render'
@@ -23,6 +22,6 @@ describe('ChatShimmer', () => {
       props
     })
 
-    expect(await axe(wrapper.element)).toHaveNoViolations()
+    expect(await wrapper.axe()).toHaveNoViolations()
   })
 })

@@ -1,6 +1,5 @@
 import { h, ref, computed } from 'vue'
 import { describe, it, expect } from 'vitest'
-import { axe } from 'vitest-axe'
 import { flushPromises } from '@vue/test-utils'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { renderEach } from '../component-render'
@@ -205,7 +204,7 @@ describe('Table', () => {
         caption: 'Table caption'
       }
     })
-    expect(await axe(wrapper.element, {
+    expect(await wrapper.axe({
       rules: {
         // This is just incorrect test setup, and generally something
         // that is in the control of the developer using the component.

@@ -1,7 +1,6 @@
 import { describe, it, expect, vi } from 'vitest'
-import { axe } from 'vitest-axe'
-import type { Editor } from '@tiptap/vue-3'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
+import type { Editor } from '@tiptap/vue-3'
 import { renderEach } from '../component-render'
 import EditorDragHandle from '../../src/runtime/components/EditorDragHandle.vue'
 
@@ -22,6 +21,6 @@ describe('EditorDragHandle', () => {
       props
     })
 
-    expect(await axe(wrapper.element)).toHaveNoViolations()
+    expect(await wrapper.axe()).toHaveNoViolations()
   })
 })

@@ -168,7 +168,6 @@ const test = ({ name, prose, content }) => {
       ? undefined
       : `
 import { describe, it, expect } from 'vitest'
-import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import ${upperName} from '../../${content ? '../' : ''}src/runtime/components/${content ? 'content/' : ''}${upperName}.vue'
 import { renderEach } from '../${content ? '../' : ''}component-render'
@@ -190,7 +189,7 @@ describe('${upperName}', () => {
       props
     })
 
-    expect(await axe(wrapper.element)).toHaveNoViolations()
+    expect(await wrapper.axe()).toHaveNoViolations()
   })
 })
 `

@@ -1,11 +1,10 @@
 import { describe, it, expect, test } from 'vitest'
-import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { mount, flushPromises } from '@vue/test-utils'
 import InputRating from '../../src/runtime/components/InputRating.vue'
 import type { InputRatingProps, InputRatingSlots } from '../../src/runtime/components/InputRating.vue'
 import type { FormInputEvents } from '../../src/module'
-import ComponentRender from '../component-render'
+import { componentRender } from '../component-render'
 import { renderForm } from '../utils/form'
 import theme from '#build/ui/input-rating'
 
@@ -36,7 +35,7 @@ describe('InputRating', () => {
     // Slots
     ['with item slot', { slots: { item: () => '⭐' }, props: { modelValue: 3 } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: InputRatingProps, slots?: Partial<InputRatingSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, InputRating)
+    const html = await componentRender(nameOrHtml, options, InputRating)
     expect(html).toMatchSnapshot()
   })
 
@@ -47,7 +46,7 @@ describe('InputRating', () => {
       }
     })
 
-    expect(await axe(wrapper.element)).toHaveNoViolations()
+    expect(await wrapper.axe()).toHaveNoViolations()
   })
 
   describe('emits', () => {
