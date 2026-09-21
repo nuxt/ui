@@ -1,17 +1,17 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`PageSection > renders with as correctly 1`] = `
-"<div data-orientation="vertical" data-slot="root" class="relative isolate">
-  <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:grid py-16 sm:py-24 lg:py-32 gap-8 sm:gap-16" data-slot="container"></div>
+"<div data-orientation="vertical" data-slot="page-section" class="relative isolate">
+  <div data-slot="page-section-container" class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:grid py-16 sm:py-24 lg:py-32 gap-8 sm:gap-16"></div>
 </div>"
 `;
 
 exports[`PageSection > renders with body slot correctly 1`] = `
-"<section data-orientation="vertical" data-slot="root" class="relative isolate">
-  <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:grid py-16 sm:py-24 lg:py-32 gap-8 sm:gap-16" data-slot="container">
-    <div data-slot="wrapper" class="">
+"<section data-orientation="vertical" data-slot="page-section" class="relative isolate">
+  <div data-slot="page-section-container" class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:grid py-16 sm:py-24 lg:py-32 gap-8 sm:gap-16">
+    <div data-slot="page-section-wrapper" class="">
       <!--v-if-->
-      <div data-slot="body" class="mt-8">Body slot</div>
+      <div data-slot="page-section-body" class="mt-8">Body slot</div>
       <!--v-if-->
     </div>
     <!--v-if-->
@@ -20,34 +20,34 @@ exports[`PageSection > renders with body slot correctly 1`] = `
 `;
 
 exports[`PageSection > renders with bottom slot correctly 1`] = `
-"<section data-orientation="vertical" data-slot="root" class="relative isolate">
-  <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:grid py-16 sm:py-24 lg:py-32 gap-8 sm:gap-16" data-slot="container"></div>Bottom slot
+"<section data-orientation="vertical" data-slot="page-section" class="relative isolate">
+  <div data-slot="page-section-container" class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:grid py-16 sm:py-24 lg:py-32 gap-8 sm:gap-16"></div>Bottom slot
 </section>"
 `;
 
 exports[`PageSection > renders with class correctly 1`] = `
-"<section data-orientation="vertical" data-slot="root" class="isolate absolute">
-  <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:grid py-16 sm:py-24 lg:py-32 gap-8 sm:gap-16" data-slot="container"></div>
+"<section data-orientation="vertical" data-slot="page-section" class="isolate absolute">
+  <div data-slot="page-section-container" class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:grid py-16 sm:py-24 lg:py-32 gap-8 sm:gap-16"></div>
 </section>"
 `;
 
 exports[`PageSection > renders with default slot correctly 1`] = `
-"<section data-orientation="vertical" data-slot="root" class="relative isolate">
-  <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:grid py-16 sm:py-24 lg:py-32 gap-8 sm:gap-16" data-slot="container">
+"<section data-orientation="vertical" data-slot="page-section" class="relative isolate">
+  <div data-slot="page-section-container" class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:grid py-16 sm:py-24 lg:py-32 gap-8 sm:gap-16">
     <!--v-if-->Default slot
   </div>
 </section>"
 `;
 
 exports[`PageSection > renders with description correctly 1`] = `
-"<section data-orientation="vertical" data-slot="root" class="relative isolate">
-  <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:grid py-16 sm:py-24 lg:py-32 gap-8 sm:gap-16" data-slot="container">
-    <div data-slot="wrapper" class="">
-      <div data-slot="header" class="">
+"<section data-orientation="vertical" data-slot="page-section" class="relative isolate">
+  <div data-slot="page-section-container" class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:grid py-16 sm:py-24 lg:py-32 gap-8 sm:gap-16">
+    <div data-slot="page-section-wrapper" class="">
+      <div data-slot="page-section-header" class="">
         <!--v-if-->
         <!--v-if-->
         <!--v-if-->
-        <div data-slot="description" class="text-base sm:text-lg text-muted text-center text-balance">Description</div>
+        <div data-slot="page-section-description" class="text-base sm:text-lg text-muted text-center text-balance">Description</div>
       </div>
       <!--v-if-->
       <!--v-if-->
@@ -58,14 +58,14 @@ exports[`PageSection > renders with description correctly 1`] = `
 `;
 
 exports[`PageSection > renders with description slot correctly 1`] = `
-"<section data-orientation="vertical" data-slot="root" class="relative isolate">
-  <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:grid py-16 sm:py-24 lg:py-32 gap-8 sm:gap-16" data-slot="container">
-    <div data-slot="wrapper" class="">
-      <div data-slot="header" class="">
+"<section data-orientation="vertical" data-slot="page-section" class="relative isolate">
+  <div data-slot="page-section-container" class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:grid py-16 sm:py-24 lg:py-32 gap-8 sm:gap-16">
+    <div data-slot="page-section-wrapper" class="">
+      <div data-slot="page-section-header" class="">
         <!--v-if-->
         <!--v-if-->
         <!--v-if-->
-        <div data-slot="description" class="text-base sm:text-lg text-muted text-center text-balance">Description slot</div>
+        <div data-slot="page-section-description" class="text-base sm:text-lg text-muted text-center text-balance">Description slot</div>
       </div>
       <!--v-if-->
       <!--v-if-->
@@ -76,23 +76,23 @@ exports[`PageSection > renders with description slot correctly 1`] = `
 `;
 
 exports[`PageSection > renders with features and description correctly 1`] = `
-"<section data-orientation="vertical" data-slot="root" class="relative isolate">
-  <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:grid py-16 sm:py-24 lg:py-32 gap-8 sm:gap-16" data-slot="container">
-    <div data-slot="wrapper" class="">
-      <div data-slot="header" class="">
+"<section data-orientation="vertical" data-slot="page-section" class="relative isolate">
+  <div data-slot="page-section-container" class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:grid py-16 sm:py-24 lg:py-32 gap-8 sm:gap-16">
+    <div data-slot="page-section-wrapper" class="">
+      <div data-slot="page-section-header" class="">
         <!--v-if-->
         <!--v-if-->
         <!--v-if-->
-        <div data-slot="description" class="text-base sm:text-lg text-muted text-center text-balance">Description</div>
+        <div data-slot="page-section-description" class="text-base sm:text-lg text-muted text-center text-balance">Description</div>
       </div>
-      <div data-slot="body" class="mt-16">
-        <ul data-slot="features" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          <li data-orientation="horizontal" data-slot="root" class="relative rounded-sm flex items-start gap-2.5">
-            <div data-slot="leading" class="inline-flex items-center justify-center p-0.5"><span class="iconify i-lucide:check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="leadingIcon"></span></div>
-            <div data-slot="wrapper" class="">
+      <div data-slot="page-section-body" class="mt-16">
+        <ul data-slot="page-section-features" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <li data-orientation="horizontal" data-slot="page-feature" class="relative rounded-sm flex items-start gap-2.5">
+            <div data-slot="page-feature-leading" class="inline-flex items-center justify-center p-0.5"><span class="iconify i-lucide:check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-feature-leadingIcon"></span></div>
+            <div data-slot="page-feature-wrapper" class="">
               <!--v-if-->
-              <div data-slot="title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
-              <div data-slot="description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
+              <div data-slot="page-feature-title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+              <div data-slot="page-feature-description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
             </div>
           </li>
         </ul>
@@ -105,23 +105,23 @@ exports[`PageSection > renders with features and description correctly 1`] = `
 `;
 
 exports[`PageSection > renders with features and title correctly 1`] = `
-"<section data-orientation="vertical" data-slot="root" class="relative isolate">
-  <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:grid py-16 sm:py-24 lg:py-32 gap-8 sm:gap-16" data-slot="container">
-    <div data-slot="wrapper" class="">
-      <div data-slot="header" class="">
+"<section data-orientation="vertical" data-slot="page-section" class="relative isolate">
+  <div data-slot="page-section-container" class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:grid py-16 sm:py-24 lg:py-32 gap-8 sm:gap-16">
+    <div data-slot="page-section-wrapper" class="">
+      <div data-slot="page-section-header" class="">
         <!--v-if-->
         <!--v-if-->
-        <h2 data-slot="title" class="text-3xl sm:text-4xl lg:text-5xl text-pretty tracking-tight font-bold text-highlighted text-center">Title</h2>
+        <h2 data-slot="page-section-title" class="text-3xl sm:text-4xl lg:text-5xl text-pretty tracking-tight font-bold text-highlighted text-center">Title</h2>
         <!--v-if-->
       </div>
-      <div data-slot="body" class="mt-16">
-        <ul data-slot="features" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          <li data-orientation="horizontal" data-slot="root" class="relative rounded-sm flex items-start gap-2.5">
-            <div data-slot="leading" class="inline-flex items-center justify-center p-0.5"><span class="iconify i-lucide:check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="leadingIcon"></span></div>
-            <div data-slot="wrapper" class="">
+      <div data-slot="page-section-body" class="mt-16">
+        <ul data-slot="page-section-features" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <li data-orientation="horizontal" data-slot="page-feature" class="relative rounded-sm flex items-start gap-2.5">
+            <div data-slot="page-feature-leading" class="inline-flex items-center justify-center p-0.5"><span class="iconify i-lucide:check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-feature-leadingIcon"></span></div>
+            <div data-slot="page-feature-wrapper" class="">
               <!--v-if-->
-              <div data-slot="title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
-              <div data-slot="description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
+              <div data-slot="page-feature-title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+              <div data-slot="page-feature-description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
             </div>
           </li>
         </ul>
@@ -134,18 +134,18 @@ exports[`PageSection > renders with features and title correctly 1`] = `
 `;
 
 exports[`PageSection > renders with features correctly 1`] = `
-"<section data-orientation="vertical" data-slot="root" class="relative isolate">
-  <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:grid py-16 sm:py-24 lg:py-32 gap-8 sm:gap-16" data-slot="container">
-    <div data-slot="wrapper" class="">
+"<section data-orientation="vertical" data-slot="page-section" class="relative isolate">
+  <div data-slot="page-section-container" class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:grid py-16 sm:py-24 lg:py-32 gap-8 sm:gap-16">
+    <div data-slot="page-section-wrapper" class="">
       <!--v-if-->
-      <div data-slot="body" class="mt-8">
-        <ul data-slot="features" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          <li data-orientation="horizontal" data-slot="root" class="relative rounded-sm flex items-start gap-2.5">
-            <div data-slot="leading" class="inline-flex items-center justify-center p-0.5"><span class="iconify i-lucide:check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="leadingIcon"></span></div>
-            <div data-slot="wrapper" class="">
+      <div data-slot="page-section-body" class="mt-8">
+        <ul data-slot="page-section-features" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <li data-orientation="horizontal" data-slot="page-feature" class="relative rounded-sm flex items-start gap-2.5">
+            <div data-slot="page-feature-leading" class="inline-flex items-center justify-center p-0.5"><span class="iconify i-lucide:check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-feature-leadingIcon"></span></div>
+            <div data-slot="page-feature-wrapper" class="">
               <!--v-if-->
-              <div data-slot="title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
-              <div data-slot="description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
+              <div data-slot="page-feature-title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+              <div data-slot="page-feature-description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
             </div>
           </li>
         </ul>
@@ -158,12 +158,12 @@ exports[`PageSection > renders with features correctly 1`] = `
 `;
 
 exports[`PageSection > renders with features slot correctly 1`] = `
-"<section data-orientation="vertical" data-slot="root" class="relative isolate">
-  <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:grid py-16 sm:py-24 lg:py-32 gap-8 sm:gap-16" data-slot="container">
-    <div data-slot="wrapper" class="">
+"<section data-orientation="vertical" data-slot="page-section" class="relative isolate">
+  <div data-slot="page-section-container" class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:grid py-16 sm:py-24 lg:py-32 gap-8 sm:gap-16">
+    <div data-slot="page-section-wrapper" class="">
       <!--v-if-->
-      <div data-slot="body" class="mt-8">
-        <ul data-slot="features" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">Features slot</ul>
+      <div data-slot="page-section-body" class="mt-8">
+        <ul data-slot="page-section-features" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">Features slot</ul>
       </div>
       <!--v-if-->
     </div>
@@ -173,12 +173,12 @@ exports[`PageSection > renders with features slot correctly 1`] = `
 `;
 
 exports[`PageSection > renders with footer slot correctly 1`] = `
-"<section data-orientation="vertical" data-slot="root" class="relative isolate">
-  <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:grid py-16 sm:py-24 lg:py-32 gap-8 sm:gap-16" data-slot="container">
-    <div data-slot="wrapper" class="">
+"<section data-orientation="vertical" data-slot="page-section" class="relative isolate">
+  <div data-slot="page-section-container" class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:grid py-16 sm:py-24 lg:py-32 gap-8 sm:gap-16">
+    <div data-slot="page-section-wrapper" class="">
       <!--v-if-->
       <!--v-if-->
-      <div data-slot="footer" class="mt-8">Footer slot</div>
+      <div data-slot="page-section-footer" class="mt-8">Footer slot</div>
     </div>
     <!--v-if-->
   </div>
@@ -186,10 +186,10 @@ exports[`PageSection > renders with footer slot correctly 1`] = `
 `;
 
 exports[`PageSection > renders with header slot correctly 1`] = `
-"<section data-orientation="vertical" data-slot="root" class="relative isolate">
-  <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:grid py-16 sm:py-24 lg:py-32 gap-8 sm:gap-16" data-slot="container">
-    <div data-slot="wrapper" class="">
-      <div data-slot="header" class="">Header slot</div>
+"<section data-orientation="vertical" data-slot="page-section" class="relative isolate">
+  <div data-slot="page-section-container" class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:grid py-16 sm:py-24 lg:py-32 gap-8 sm:gap-16">
+    <div data-slot="page-section-wrapper" class="">
+      <div data-slot="page-section-header" class="">Header slot</div>
       <!--v-if-->
       <!--v-if-->
     </div>
@@ -199,12 +199,12 @@ exports[`PageSection > renders with header slot correctly 1`] = `
 `;
 
 exports[`PageSection > renders with headline correctly 1`] = `
-"<section data-orientation="vertical" data-slot="root" class="relative isolate">
-  <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:grid py-16 sm:py-24 lg:py-32 gap-8 sm:gap-16" data-slot="container">
-    <div data-slot="wrapper" class="">
-      <div data-slot="header" class="">
+"<section data-orientation="vertical" data-slot="page-section" class="relative isolate">
+  <div data-slot="page-section-container" class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:grid py-16 sm:py-24 lg:py-32 gap-8 sm:gap-16">
+    <div data-slot="page-section-wrapper" class="">
+      <div data-slot="page-section-header" class="">
         <!--v-if-->
-        <div data-slot="headline" class="mb-3 justify-center font-semibold text-primary flex items-center gap-1.5">Headline</div>
+        <div data-slot="page-section-headline" class="mb-3 justify-center font-semibold text-primary flex items-center gap-1.5">Headline</div>
         <!--v-if-->
         <!--v-if-->
       </div>
@@ -217,12 +217,12 @@ exports[`PageSection > renders with headline correctly 1`] = `
 `;
 
 exports[`PageSection > renders with headline slot correctly 1`] = `
-"<section data-orientation="vertical" data-slot="root" class="relative isolate">
-  <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:grid py-16 sm:py-24 lg:py-32 gap-8 sm:gap-16" data-slot="container">
-    <div data-slot="wrapper" class="">
-      <div data-slot="header" class="">
+"<section data-orientation="vertical" data-slot="page-section" class="relative isolate">
+  <div data-slot="page-section-container" class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:grid py-16 sm:py-24 lg:py-32 gap-8 sm:gap-16">
+    <div data-slot="page-section-wrapper" class="">
+      <div data-slot="page-section-header" class="">
         <!--v-if-->
-        <div data-slot="headline" class="mb-3 justify-center">Headline slot</div>
+        <div data-slot="page-section-headline" class="mb-3 justify-center">Headline slot</div>
         <!--v-if-->
         <!--v-if-->
       </div>
@@ -235,11 +235,11 @@ exports[`PageSection > renders with headline slot correctly 1`] = `
 `;
 
 exports[`PageSection > renders with icon correctly 1`] = `
-"<section data-orientation="vertical" data-slot="root" class="relative isolate">
-  <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:grid py-16 sm:py-24 lg:py-32 gap-8 sm:gap-16" data-slot="container">
-    <div data-slot="wrapper" class="">
-      <div data-slot="header" class="">
-        <div data-slot="leading" class="flex items-center mb-6 justify-center"><span class="iconify i-lucide:house size-10 shrink-0 text-primary" aria-hidden="true" data-slot="leadingIcon"></span></div>
+"<section data-orientation="vertical" data-slot="page-section" class="relative isolate">
+  <div data-slot="page-section-container" class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:grid py-16 sm:py-24 lg:py-32 gap-8 sm:gap-16">
+    <div data-slot="page-section-wrapper" class="">
+      <div data-slot="page-section-header" class="">
+        <div data-slot="page-section-leading" class="flex items-center mb-6 justify-center"><span class="iconify i-lucide:house size-10 shrink-0 text-primary" aria-hidden="true" data-slot="page-section-leadingIcon"></span></div>
         <!--v-if-->
         <!--v-if-->
         <!--v-if-->
@@ -253,11 +253,11 @@ exports[`PageSection > renders with icon correctly 1`] = `
 `;
 
 exports[`PageSection > renders with leading slot correctly 1`] = `
-"<section data-orientation="vertical" data-slot="root" class="relative isolate">
-  <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:grid py-16 sm:py-24 lg:py-32 gap-8 sm:gap-16" data-slot="container">
-    <div data-slot="wrapper" class="">
-      <div data-slot="header" class="">
-        <div data-slot="leading" class="flex items-center mb-6 justify-center">Leading slot</div>
+"<section data-orientation="vertical" data-slot="page-section" class="relative isolate">
+  <div data-slot="page-section-container" class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:grid py-16 sm:py-24 lg:py-32 gap-8 sm:gap-16">
+    <div data-slot="page-section-wrapper" class="">
+      <div data-slot="page-section-header" class="">
+        <div data-slot="page-section-leading" class="flex items-center mb-6 justify-center">Leading slot</div>
         <!--v-if-->
         <!--v-if-->
         <!--v-if-->
@@ -271,25 +271,25 @@ exports[`PageSection > renders with leading slot correctly 1`] = `
 `;
 
 exports[`PageSection > renders with links and features correctly 1`] = `
-"<section data-orientation="vertical" data-slot="root" class="relative isolate">
-  <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:grid py-16 sm:py-24 lg:py-32 gap-8 sm:gap-16" data-slot="container">
-    <div data-slot="wrapper" class="">
+"<section data-orientation="vertical" data-slot="page-section" class="relative isolate">
+  <div data-slot="page-section-container" class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:grid py-16 sm:py-24 lg:py-32 gap-8 sm:gap-16">
+    <div data-slot="page-section-wrapper" class="">
       <!--v-if-->
-      <div data-slot="body" class="mt-8">
-        <ul data-slot="features" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          <li data-orientation="horizontal" data-slot="root" class="relative rounded-sm flex items-start gap-2.5">
-            <div data-slot="leading" class="inline-flex items-center justify-center p-0.5"><span class="iconify i-lucide:check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="leadingIcon"></span></div>
-            <div data-slot="wrapper" class="">
+      <div data-slot="page-section-body" class="mt-8">
+        <ul data-slot="page-section-features" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <li data-orientation="horizontal" data-slot="page-feature" class="relative rounded-sm flex items-start gap-2.5">
+            <div data-slot="page-feature-leading" class="inline-flex items-center justify-center p-0.5"><span class="iconify i-lucide:check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-feature-leadingIcon"></span></div>
+            <div data-slot="page-feature-wrapper" class="">
               <!--v-if-->
-              <div data-slot="title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
-              <div data-slot="description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
+              <div data-slot="page-feature-title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+              <div data-slot="page-feature-description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
             </div>
           </li>
         </ul>
       </div>
-      <div data-slot="footer" class="mt-16">
-        <div data-slot="links" class="flex flex-wrap gap-x-6 gap-y-3 justify-center"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
-            <!--v-if--><span data-slot="label" class="truncate">Get started</span>
+      <div data-slot="page-section-footer" class="mt-16">
+        <div data-slot="page-section-links" class="flex flex-wrap gap-x-6 gap-y-3 justify-center"><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
+            <!--v-if--><span data-slot="button-label" class="truncate">Get started</span>
             <!--v-if-->
           </button></div>
       </div>
@@ -300,14 +300,14 @@ exports[`PageSection > renders with links and features correctly 1`] = `
 `;
 
 exports[`PageSection > renders with links correctly 1`] = `
-"<section data-orientation="vertical" data-slot="root" class="relative isolate">
-  <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:grid py-16 sm:py-24 lg:py-32 gap-8 sm:gap-16" data-slot="container">
-    <div data-slot="wrapper" class="">
+"<section data-orientation="vertical" data-slot="page-section" class="relative isolate">
+  <div data-slot="page-section-container" class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:grid py-16 sm:py-24 lg:py-32 gap-8 sm:gap-16">
+    <div data-slot="page-section-wrapper" class="">
       <!--v-if-->
       <!--v-if-->
-      <div data-slot="footer" class="mt-8">
-        <div data-slot="links" class="flex flex-wrap gap-x-6 gap-y-3 justify-center"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
-            <!--v-if--><span data-slot="label" class="truncate">Get started</span>
+      <div data-slot="page-section-footer" class="mt-8">
+        <div data-slot="page-section-links" class="flex flex-wrap gap-x-6 gap-y-3 justify-center"><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
+            <!--v-if--><span data-slot="button-label" class="truncate">Get started</span>
             <!--v-if-->
           </button></div>
       </div>
@@ -318,13 +318,13 @@ exports[`PageSection > renders with links correctly 1`] = `
 `;
 
 exports[`PageSection > renders with links slot correctly 1`] = `
-"<section data-orientation="vertical" data-slot="root" class="relative isolate">
-  <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:grid py-16 sm:py-24 lg:py-32 gap-8 sm:gap-16" data-slot="container">
-    <div data-slot="wrapper" class="">
+"<section data-orientation="vertical" data-slot="page-section" class="relative isolate">
+  <div data-slot="page-section-container" class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:grid py-16 sm:py-24 lg:py-32 gap-8 sm:gap-16">
+    <div data-slot="page-section-wrapper" class="">
       <!--v-if-->
       <!--v-if-->
-      <div data-slot="footer" class="mt-8">
-        <div data-slot="links" class="flex flex-wrap gap-x-6 gap-y-3 justify-center">Links slot</div>
+      <div data-slot="page-section-footer" class="mt-8">
+        <div data-slot="page-section-links" class="flex flex-wrap gap-x-6 gap-y-3 justify-center">Links slot</div>
       </div>
     </div>
     <!--v-if-->
@@ -333,8 +333,8 @@ exports[`PageSection > renders with links slot correctly 1`] = `
 `;
 
 exports[`PageSection > renders with orientation horizontal correctly 1`] = `
-"<section data-orientation="horizontal" data-slot="root" class="relative isolate">
-  <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:grid py-16 sm:py-24 lg:py-32 gap-8 sm:gap-16 lg:grid-cols-2 lg:items-center" data-slot="container">
+"<section data-orientation="horizontal" data-slot="page-section" class="relative isolate">
+  <div data-slot="page-section-container" class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:grid py-16 sm:py-24 lg:py-32 gap-8 sm:gap-16 lg:grid-cols-2 lg:items-center">
     <!--v-if-->
     <div class="hidden lg:block"></div>
   </div>
@@ -342,18 +342,18 @@ exports[`PageSection > renders with orientation horizontal correctly 1`] = `
 `;
 
 exports[`PageSection > renders with orientation horizontal features correctly 1`] = `
-"<section data-orientation="horizontal" data-slot="root" class="relative isolate">
-  <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:grid py-16 sm:py-24 lg:py-32 gap-8 sm:gap-16 lg:grid-cols-2 lg:items-center" data-slot="container">
-    <div data-slot="wrapper" class="">
+"<section data-orientation="horizontal" data-slot="page-section" class="relative isolate">
+  <div data-slot="page-section-container" class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:grid py-16 sm:py-24 lg:py-32 gap-8 sm:gap-16 lg:grid-cols-2 lg:items-center">
+    <div data-slot="page-section-wrapper" class="">
       <!--v-if-->
-      <div data-slot="body" class="mt-8">
-        <ul data-slot="features" class="grid gap-4">
-          <li data-orientation="horizontal" data-slot="root" class="relative rounded-sm flex items-start gap-2.5">
-            <div data-slot="leading" class="inline-flex items-center justify-center p-0.5"><span class="iconify i-lucide:check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="leadingIcon"></span></div>
-            <div data-slot="wrapper" class="">
+      <div data-slot="page-section-body" class="mt-8">
+        <ul data-slot="page-section-features" class="grid gap-4">
+          <li data-orientation="horizontal" data-slot="page-feature" class="relative rounded-sm flex items-start gap-2.5">
+            <div data-slot="page-feature-leading" class="inline-flex items-center justify-center p-0.5"><span class="iconify i-lucide:check size-5 shrink-0 text-primary" aria-hidden="true" data-slot="page-feature-leadingIcon"></span></div>
+            <div data-slot="page-feature-wrapper" class="">
               <!--v-if-->
-              <div data-slot="title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
-              <div data-slot="description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
+              <div data-slot="page-feature-title" class="text-base text-pretty font-semibold text-highlighted">Title</div>
+              <div data-slot="page-feature-description" class="text-[15px] text-pretty text-muted mt-1">Description</div>
             </div>
           </li>
         </ul>
@@ -366,14 +366,14 @@ exports[`PageSection > renders with orientation horizontal features correctly 1`
 `;
 
 exports[`PageSection > renders with orientation horizontal links correctly 1`] = `
-"<section data-orientation="horizontal" data-slot="root" class="relative isolate">
-  <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:grid py-16 sm:py-24 lg:py-32 gap-8 sm:gap-16 lg:grid-cols-2 lg:items-center" data-slot="container">
-    <div data-slot="wrapper" class="">
+"<section data-orientation="horizontal" data-slot="page-section" class="relative isolate">
+  <div data-slot="page-section-container" class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:grid py-16 sm:py-24 lg:py-32 gap-8 sm:gap-16 lg:grid-cols-2 lg:items-center">
+    <div data-slot="page-section-wrapper" class="">
       <!--v-if-->
       <!--v-if-->
-      <div data-slot="footer" class="mt-8">
-        <div data-slot="links" class="flex flex-wrap gap-x-6 gap-y-3"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
-            <!--v-if--><span data-slot="label" class="truncate">Get started</span>
+      <div data-slot="page-section-footer" class="mt-8">
+        <div data-slot="page-section-links" class="flex flex-wrap gap-x-6 gap-y-3"><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-3 py-2 text-sm gap-2 text-inverted bg-primary hover:bg-primary/75 active:bg-primary/75 disabled:bg-primary aria-disabled:bg-primary outline-primary/25 focus-visible:outline-3">
+            <!--v-if--><span data-slot="button-label" class="truncate">Get started</span>
             <!--v-if-->
           </button></div>
       </div>
@@ -384,8 +384,8 @@ exports[`PageSection > renders with orientation horizontal links correctly 1`] =
 `;
 
 exports[`PageSection > renders with orientation horizontal reverse correctly 1`] = `
-"<section data-orientation="horizontal" data-slot="root" class="relative isolate">
-  <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:grid py-16 sm:py-24 lg:py-32 gap-8 sm:gap-16 lg:grid-cols-2 lg:items-center" data-slot="container">
+"<section data-orientation="horizontal" data-slot="page-section" class="relative isolate">
+  <div data-slot="page-section-container" class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:grid py-16 sm:py-24 lg:py-32 gap-8 sm:gap-16 lg:grid-cols-2 lg:items-center">
     <!--v-if-->
     <div class="hidden lg:block"></div>
   </div>
@@ -393,19 +393,19 @@ exports[`PageSection > renders with orientation horizontal reverse correctly 1`]
 `;
 
 exports[`PageSection > renders with reverse correctly 1`] = `
-"<section data-orientation="vertical" data-slot="root" class="relative isolate">
-  <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:grid py-16 sm:py-24 lg:py-32 gap-8 sm:gap-16" data-slot="container"></div>
+"<section data-orientation="vertical" data-slot="page-section" class="relative isolate">
+  <div data-slot="page-section-container" class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:grid py-16 sm:py-24 lg:py-32 gap-8 sm:gap-16"></div>
 </section>"
 `;
 
 exports[`PageSection > renders with title correctly 1`] = `
-"<section data-orientation="vertical" data-slot="root" class="relative isolate">
-  <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:grid py-16 sm:py-24 lg:py-32 gap-8 sm:gap-16" data-slot="container">
-    <div data-slot="wrapper" class="">
-      <div data-slot="header" class="">
+"<section data-orientation="vertical" data-slot="page-section" class="relative isolate">
+  <div data-slot="page-section-container" class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:grid py-16 sm:py-24 lg:py-32 gap-8 sm:gap-16">
+    <div data-slot="page-section-wrapper" class="">
+      <div data-slot="page-section-header" class="">
         <!--v-if-->
         <!--v-if-->
-        <h2 data-slot="title" class="text-3xl sm:text-4xl lg:text-5xl text-pretty tracking-tight font-bold text-highlighted text-center">Title</h2>
+        <h2 data-slot="page-section-title" class="text-3xl sm:text-4xl lg:text-5xl text-pretty tracking-tight font-bold text-highlighted text-center">Title</h2>
         <!--v-if-->
       </div>
       <!--v-if-->
@@ -417,13 +417,13 @@ exports[`PageSection > renders with title correctly 1`] = `
 `;
 
 exports[`PageSection > renders with title slot correctly 1`] = `
-"<section data-orientation="vertical" data-slot="root" class="relative isolate">
-  <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:grid py-16 sm:py-24 lg:py-32 gap-8 sm:gap-16" data-slot="container">
-    <div data-slot="wrapper" class="">
-      <div data-slot="header" class="">
+"<section data-orientation="vertical" data-slot="page-section" class="relative isolate">
+  <div data-slot="page-section-container" class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:grid py-16 sm:py-24 lg:py-32 gap-8 sm:gap-16">
+    <div data-slot="page-section-wrapper" class="">
+      <div data-slot="page-section-header" class="">
         <!--v-if-->
         <!--v-if-->
-        <h2 data-slot="title" class="text-3xl sm:text-4xl lg:text-5xl text-pretty tracking-tight font-bold text-highlighted text-center">Title slot</h2>
+        <h2 data-slot="page-section-title" class="text-3xl sm:text-4xl lg:text-5xl text-pretty tracking-tight font-bold text-highlighted text-center">Title slot</h2>
         <!--v-if-->
       </div>
       <!--v-if-->
@@ -435,12 +435,12 @@ exports[`PageSection > renders with title slot correctly 1`] = `
 `;
 
 exports[`PageSection > renders with top slot correctly 1`] = `
-"<section data-orientation="vertical" data-slot="root" class="relative isolate">Top slot<div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:grid py-16 sm:py-24 lg:py-32 gap-8 sm:gap-16" data-slot="container"></div>
+"<section data-orientation="vertical" data-slot="page-section" class="relative isolate">Top slot<div data-slot="page-section-container" class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:grid py-16 sm:py-24 lg:py-32 gap-8 sm:gap-16"></div>
 </section>"
 `;
 
 exports[`PageSection > renders with ui correctly 1`] = `
-"<section data-orientation="vertical" data-slot="root" class="relative isolate">
-  <div class="w-full mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:grid py-16 sm:py-24 lg:py-32 gap-8 sm:gap-16 max-w-5xl" data-slot="container"></div>
+"<section data-orientation="vertical" data-slot="page-section" class="relative isolate">
+  <div data-slot="page-section-container" class="w-full mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:grid py-16 sm:py-24 lg:py-32 gap-8 sm:gap-16 max-w-5xl"></div>
 </section>"
 `;
