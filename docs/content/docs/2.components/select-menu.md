@@ -806,7 +806,7 @@ name: 'select-menu-items-avatar-example'
 You can also use the `#leading` slot to display the selected avatar.
 ::
 
-### With badge in items
+### With badge in items :badge{label="Soon" class="align-text-top"}
 
 You can use the `badge` property to display a [Badge](/docs/components/badge) inside the items.
 
