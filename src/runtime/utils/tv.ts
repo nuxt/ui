@@ -267,12 +267,13 @@ function resolveSpec(theme: Record<string, any>, overrides: Record<string, any> 
   const themeSlots: Record<string, any> = theme.slots ?? EMPTY
   const ownSlots: Record<string, any> = own.slots ?? EMPTY
 
-  if (import.meta.dev) {
-    warnBareClasses(theme)
-    warnBareClasses(own)
-  }
-
   const slotKeys = [...new Set([...Object.keys(themeSlots), ...Object.keys(ownSlots)])]
+
+  if (import.meta.dev) {
+    const slot = slotKeys[0] ?? 'base'
+    warnBareClasses(theme, slot)
+    warnBareClasses(own, slot)
+  }
 
   // A replacer's result stands in for the theme's classes, beneath the
   // variants. Plain classes are overrides like any other and go on top.
@@ -346,22 +347,33 @@ function classForSlot(value: any, slotKey: string): any {
 
 /**
  * A variant or compound class outside a slot object targets nothing. Types
- * catch it, a `vite.config` or a plain JS `app.config` doesn't, so say it once
- * in development rather than dropping the classes silently.
+ * catch it where overrides are written (`app.config.ts`), a `vite.config`, a
+ * plain JS config or a theme handed straight to `tv` doesn't, so say it once in
+ * development rather than dropping the classes silently.
  */
-function warnBareClasses(source: Record<string, any>): void {
+const warned = new Set<string>()
+
+function warnBareClasses(source: Record<string, any>, slot: string): void {
   const bare = (value: any) => !!value && !isPlainObject(value)
+  const warn = (where: string, value: any) => {
+    const message = `[@nuxt/ui] ${where} must be an object of classes per slot, e.g. \`{ ${slot}: '...' }\`. Received ${typeof value === 'string' ? JSON.stringify(value) : String(value)}, which is ignored.`
+    // Specs are rebuilt per overrides, and on every call when those can't be keyed.
+    if (!warned.has(message)) {
+      warned.add(message)
+      console.warn(message)
+    }
+  }
   for (const key in source.variants ?? EMPTY) {
     const group = source.variants[key] ?? EMPTY
     for (const valueKey in group) {
       if (bare(group[valueKey])) {
-        console.warn(`[@nuxt/ui] \`variants.${key}.${valueKey}\` must be an object of classes per slot, e.g. \`{ base: '...' }\`. Received ${JSON.stringify(group[valueKey])}, which is ignored.`)
+        warn(`\`variants.${key}.${valueKey}\``, group[valueKey])
       }
     }
   }
   for (const compound of flatten(source.compoundVariants)) {
     if (bare(compound?.class)) {
-      console.warn(`[@nuxt/ui] A \`compoundVariants\` entry's \`class\` must be an object of classes per slot, e.g. \`{ base: '...' }\`. Received ${JSON.stringify(compound.class)}, which is ignored.`)
+      warn('A `compoundVariants` entry\'s `class`', compound.class)
     }
   }
 }
