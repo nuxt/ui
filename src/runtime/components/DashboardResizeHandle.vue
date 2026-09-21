@@ -44,7 +44,7 @@ const ui = computed(() => tv(theme, appConfig.ui?.dashboardResizeHandle)())
   <Primitive
     :as="props.as"
     role="separator"
-    :class="ui.base({ class: [props.ui?.base, props.class] })"
+    :class="ui.root({ class: [props.ui?.root, props.class] })"
   >
     <slot />
   </Primitive>

@@ -23,7 +23,7 @@ export const fieldGroupVariantWithRoot = {
 
 export default {
   slots: {
-    base: 'relative'
+    root: 'relative'
   },
   variants: {
     size: {
@@ -34,8 +34,8 @@ export default {
       xl: ''
     },
     orientation: {
-      horizontal: { base: 'inline-flex -space-x-px' },
-      vertical: { base: 'flex flex-col -space-y-px' }
+      horizontal: { root: 'inline-flex -space-x-px' },
+      vertical: { root: 'flex flex-col -space-y-px' }
     }
   }
 }
