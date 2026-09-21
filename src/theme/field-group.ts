@@ -34,7 +34,6 @@ export default {
     }
   },
   defaultVariants: {
-    size: 'md',
-    orientation: 'horizontal'
+    size: 'md'
   }
 }
