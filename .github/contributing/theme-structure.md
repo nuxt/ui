@@ -8,7 +8,7 @@ Themes live in `src/theme/` with kebab-case naming (e.g., `button.ts`, `input-me
 
 ## Shape
 
-A theme is `slots`, `variants`, `compoundVariants` and `defaultVariants`. Every component declares its elements under `slots`, including the ones made of a single element, which declare one `base` slot.
+A theme is `slots`, `variants`, `compoundVariants` and `defaultVariants`. Every component declares its elements under `slots`, including the ones made of a single element, which declare one `root` slot (`base` for a control or a prose component, see the table below).
 
 Classes in `variants` and `compoundVariants` are always given per slot, as an object keyed by slot name. A bare string or array targets no slot: the engine ignores it and warns in development. An empty string is fine for a value that only exists to be matched in `compoundVariants` (`solid: ''`).
 
@@ -260,8 +260,8 @@ compoundVariants: [
 
 | Slot | Usage |
 |------|-------|
-| `root` | Outermost wrapper |
-| `base` | Main interactive element |
+| `root` | Outermost element, or the wrapper around `base` when there is one |
+| `base` | The element the component stands for: the box of a control (anything that can sit in a `FieldGroup`: Button, Badge, the `<input>` of Input, the trigger of Select) or the HTML element of a prose component (`<p>`, `<h1>`, `<pre>`). Wrapped in a `root` when it needs one, outermost otherwise. Not used on other components |
 | `leading` / `trailing` | Icon/content containers |
 | `leadingIcon` / `trailingIcon` | Icon elements |
 | `label` | Text label |

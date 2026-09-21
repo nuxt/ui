@@ -1,5 +1,5 @@
 export default {
   slots: {
-    base: ''
+    root: ''
   }
 }
