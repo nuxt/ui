@@ -1,5 +1,5 @@
 export default {
   slots: {
-    base: 'relative columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8 *:break-inside-avoid-column *:will-change-transform'
+    root: 'relative columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8 *:break-inside-avoid-column *:will-change-transform'
   }
 }
