@@ -12,7 +12,7 @@ A theme is `slots`, `variants`, `compoundVariants` and `defaultVariants`. Every 
 
 Classes in `variants` and `compoundVariants` are always given per slot, as an object keyed by slot name. A bare string or array targets no slot: the engine ignores it and warns in development. An empty string is fine for a value that only exists to be matched in `compoundVariants` (`solid: ''`).
 
-`test/utils/theme-slots.spec.ts` checks every theme for this. `v4` writes classes bare, so they come back with a sync: `node scripts/theme-slots.mjs` wraps them again, and `--check` lists them.
+`test/utils/theme-slots.spec.ts` checks every theme for this and names the theme and the key. `v4` writes classes bare, where they meant the `base` slot, so they come back with a sync.
 
 ```ts
 variants: {

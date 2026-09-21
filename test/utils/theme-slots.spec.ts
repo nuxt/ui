@@ -3,13 +3,6 @@ import * as theme from '../../src/theme'
 import * as themeProse from '../../src/theme/prose'
 import * as themeContent from '../../src/theme/content'
 import { defaultOptions, resolveColors } from '../../src/utils/defaults'
-import { transform } from '../../scripts/theme-slots.mjs'
-
-declare global {
-  interface ImportMeta {
-    glob: <T>(pattern: string | string[], options?: { eager?: boolean, import?: string, query?: string }) => Record<string, T>
-  }
-}
 
 const options = { ...defaultOptions, theme: { ...defaultOptions.theme, colors: resolveColors(undefined) } }
 
@@ -23,13 +16,13 @@ const themes = [
   .map(([key, value]) => [key, typeof value === 'function' ? (value as (options: any) => unknown)(options) : value] as const)
   .filter((entry): entry is readonly [string, Record<string, any>] => isObject(entry[1]) && ('slots' in entry[1] || 'base' in entry[1] || 'variants' in entry[1]))
 
-const sources = import.meta.glob<string>('../../src/theme/**/*.ts', { eager: true, query: '?raw', import: 'default' })
-
 /**
  * The shape the engine resolves: classes always sit under a slot. A bare class
  * is ignored at runtime, and the theme types can't reject it (the `''` of a
  * value that contributes nothing widens to `string`), so it is caught here.
- * `v4` writes them bare, which is how they come back after a sync.
+ * `v4` writes them bare, where they meant the `base` slot, which is how they
+ * come back after a sync: wrap them, `class: 'ps-7'` to `class: { base: 'ps-7' }`,
+ * with `root` on a theme that has no `base` slot.
  */
 describe('theme slots', () => {
   it.each(themes)('%s declares its classes under slots', (_, resolved) => {
@@ -66,10 +59,6 @@ describe('theme slots', () => {
       check(`compoundVariants[${index}].class`, (compound as Record<string, unknown>)?.class)
     }
 
-    expect(problems, 'run `node scripts/theme-slots.mjs`').toEqual([])
-  })
-
-  it.each(Object.entries(sources))('%s has no bare class left to wrap', (file, source) => {
-    expect(transform(source, file).edits.map(edit => `${file}:${edit.line}`), 'run `node scripts/theme-slots.mjs`').toEqual([])
+    expect(problems, 'give each class per slot, e.g. `{ base: \'...\' }`').toEqual([])
   })
 })
