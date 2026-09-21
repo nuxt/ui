@@ -134,7 +134,7 @@ catalog:
   tailwindcss: ^4.3.3
   tinyglobby: ^0.2.17
   tiptap-extension-code-block-shiki: ^1.2.0
-  typescript: ^6.0.3
+  typescript: ^7.0.2
   ufo: ^1.6.4
   unbuild: ^3.6.1
   unist-util-visit: ^5.1.0
@@ -175,7 +175,7 @@ overrides:
   unplugin: ^3.3.0
   c12: ^3.3.4
   h3: 1.15.11
-  typescript: ^6.0.3
+  typescript: ^7.0.2
 
 allowBuilds:
   better-sqlite3: true
