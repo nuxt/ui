@@ -101,12 +101,6 @@ export function applyUnstyled(result: any, unstyled?: boolean): any {
   // re-generates themes as component detection grows.
   result = { ...result }
 
-  // Single-element components have no `slots`: their classes live in a
-  // top-level `base` string (or array, when parts are conditional).
-  if (result.base) {
-    result.base = ''
-  }
-
   if (result.slots) {
     result.slots = Object.fromEntries(Object.keys(result.slots).map(slot => [slot, '']))
   }
