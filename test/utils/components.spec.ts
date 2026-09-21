@@ -39,7 +39,8 @@ afterAll(() => {
   }
 })
 
-describe('detectUsedComponents', () => {
+// Scanning the fixtures is far slower on the Windows runners.
+describe('detectUsedComponents', { timeout: 20000 }, () => {
   it('detects used components and resolves their dependencies', async () => {
     const detected = await detectUsedComponents([fixtureUsing('<UButton label="x" />')], 'U', componentDir)
 
