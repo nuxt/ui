@@ -202,6 +202,20 @@ describe('SelectMenu', () => {
     })
   })
 
+  describe('clear', () => {
+    it('does not render the clear button when disabled', () => {
+      const wrapper = mount(SelectMenu, { props: { items, modelValue: items[0].value, clear: true, disabled: true } })
+
+      expect(wrapper.find('[data-slot="trailingClear"]').exists()).toBe(false)
+    })
+
+    it('renders the clear button when not disabled', () => {
+      const wrapper = mount(SelectMenu, { props: { items, modelValue: items[0].value, clear: true } })
+
+      expect(wrapper.find('[data-slot="trailingClear"]').exists()).toBe(true)
+    })
+  })
+
   describe('keyboard', () => {
     test.each(['ArrowDown', 'ArrowUp'])('opens the menu on %s', async (key) => {
       const wrapper = mount(SelectMenu, { attachTo: document.body, props: { portal: false, items } })

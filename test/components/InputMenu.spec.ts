@@ -224,6 +224,20 @@ describe('InputMenu', () => {
     })
   })
 
+  describe('clear', () => {
+    it('does not render the clear button when disabled', () => {
+      const wrapper = mount(InputMenu, { props: { items, modelValue: items[0].value, clear: true, disabled: true } })
+
+      expect(wrapper.find('[data-slot="trailingClear"]').exists()).toBe(false)
+    })
+
+    it('renders the clear button when not disabled', () => {
+      const wrapper = mount(InputMenu, { props: { items, modelValue: items[0].value, clear: true } })
+
+      expect(wrapper.find('[data-slot="trailingClear"]').exists()).toBe(true)
+    })
+  })
+
   describe('create-item', () => {
     // With `create-item`, the create item is always registered so reka-ui's collection
     // never goes from empty to non-empty, leaving the highlight stale when async items load.
