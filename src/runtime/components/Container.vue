@@ -13,7 +13,7 @@ export interface ContainerProps {
    */
   as?: any
   class?: any
-  ui?: { base?: any }
+  ui?: Container['slots']
 }
 
 export interface ContainerSlots {
@@ -37,11 +37,11 @@ const props = useComponentProps('container', _props)
 const appConfig = useAppConfig() as Container['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.container))
+const ui = computed(() => tv(theme, appConfig.ui?.container)())
 </script>
 
 <template>
-  <Primitive :as="props.as" :class="ui({ class: [props.ui?.base, props.class] })">
+  <Primitive :as="props.as" :class="ui.base({ class: [props.ui?.base, props.class] })">
     <slot />
   </Primitive>
 </template>

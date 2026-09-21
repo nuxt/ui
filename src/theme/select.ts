@@ -31,10 +31,14 @@ export default (options: Required<ModuleOptions>) => {
     },
     variants: {
       ...fieldGroupVariant,
-      variant: (prev: Record<string, string>) => ({
+      variant: (prev: Record<string, { base: string }>) => ({
         ...prev,
-        outline: [prev.outline, 'hover:bg-elevated disabled:bg-default'].join(' '),
-        subtle: [prev.subtle, 'hover:bg-accented/75 disabled:bg-elevated'].join(' ')
+        outline: {
+          base: [prev.outline!.base, 'hover:bg-elevated disabled:bg-default'].join(' ')
+        },
+        subtle: {
+          base: [prev.subtle!.base, 'hover:bg-accented/75 disabled:bg-elevated'].join(' ')
+        }
       }),
       size: {
         xs: {

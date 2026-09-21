@@ -61,55 +61,55 @@ export default (options: Required<ModuleOptions>) => ({
   compoundVariants: [...(options.theme.colors || []).map((color: string) => ({
     color,
     variant: 'solid',
-    class: `bg-${color} text-inverted`
+    class: { base: `bg-${color} text-inverted` }
   })), ...(options.theme.colors || []).map((color: string) => ({
     color,
     variant: 'outline',
-    class: `text-${color} ring ring-inset ring-${color}/50`
+    class: { base: `text-${color} ring ring-inset ring-${color}/50` }
   })), ...(options.theme.colors || []).map((color: string) => ({
     color,
     variant: 'soft',
-    class: `bg-${color}/10 text-${color}`
+    class: { base: `bg-${color}/10 text-${color}` }
   })), ...(options.theme.colors || []).map((color: string) => ({
     color,
     variant: 'subtle',
-    class: `bg-${color}/10 text-${color} ring ring-inset ring-${color}/25`
+    class: { base: `bg-${color}/10 text-${color} ring ring-inset ring-${color}/25` }
   })), {
     color: 'neutral',
     variant: 'solid',
-    class: 'text-inverted bg-inverted'
+    class: { base: 'text-inverted bg-inverted' }
   }, {
     color: 'neutral',
     variant: 'outline',
-    class: 'ring ring-inset ring-accented text-default bg-default'
+    class: { base: 'ring ring-inset ring-accented text-default bg-default' }
   }, {
     color: 'neutral',
     variant: 'soft',
-    class: 'text-default bg-elevated'
+    class: { base: 'text-default bg-elevated' }
   }, {
     color: 'neutral',
     variant: 'subtle',
-    class: 'ring ring-inset ring-accented text-default bg-elevated'
+    class: { base: 'ring ring-inset ring-accented text-default bg-elevated' }
   }, {
     size: 'xs',
     square: true,
-    class: 'p-0.5'
+    class: { base: 'p-0.5' }
   }, {
     size: 'sm',
     square: true,
-    class: 'p-1'
+    class: { base: 'p-1' }
   }, {
     size: 'md',
     square: true,
-    class: 'p-1'
+    class: { base: 'p-1' }
   }, {
     size: 'lg',
     square: true,
-    class: 'p-1'
+    class: { base: 'p-1' }
   }, {
     size: 'xl',
     square: true,
-    class: 'p-1'
+    class: { base: 'p-1' }
   }],
   defaultVariants: {
     color: 'primary',

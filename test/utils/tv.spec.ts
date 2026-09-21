@@ -1,4 +1,4 @@
-import { describe, it, expect, expectTypeOf } from 'vitest'
+import { describe, it, expect, expectTypeOf, vi } from 'vitest'
 import { tv } from '../../src/runtime/utils/tv'
 import type { VariantProps } from '../../src/runtime/types/tv'
 
@@ -116,39 +116,34 @@ describe('tv class replace', () => {
   })
 })
 
-describe('tv class replace (slotless component)', () => {
-  // A slotless theme has only a `base` and no `slots`, so `tv()(props)` returns
-  // a string rather than an object of slot functions (e.g. the Container theme).
-  const tvBase = tv as unknown as (theme: any, overrides?: any) => (props?: any) => string
-  const build = () => tvBase({ base: 'inline-flex rounded-md px-4' })
+describe('tv class replace (single-slot component)', () => {
+  // A component with one element still declares it as a slot (e.g. the
+  // Container theme), and forwards `class: [props.ui?.base, props.class]`.
+  const build = () => tvt({ slots: { base: 'inline-flex rounded-md px-4' } })()
 
   it('still merges plain classes', () => {
-    const result = build()({ class: 'font-bold' })
+    const result = build().base({ class: 'font-bold' })
     expect(result).toContain('inline-flex')
     expect(result).toContain('font-bold')
   })
 
-  it('replaces the base through a function in `:ui` / `class`', () => {
-    expect(build()({ class: () => 'block w-full' })).toBe('block w-full')
-  })
-
-  it('replaces the base through a `:ui` function forwarded in the class array', () => {
-    // Mirrors how a slotless component forwards `class: [props.ui?.base, props.class]`.
-    expect(build()({ class: [() => 'block w-full', undefined] })).toBe('block w-full')
+  it('replaces the slot through a function in `:ui` / `class`', () => {
+    expect(build().base({ class: () => 'block w-full' })).toBe('block w-full')
+    expect(build().base({ class: [() => 'block w-full', undefined] })).toBe('block w-full')
   })
 
   it('passes the resolved default classes to the replacer', () => {
     let received: string | undefined
-    build()({ class: (defaults: string) => {
+    build().base({ class: (defaults: string) => {
       received = defaults
       return 'whatever'
     } })
     expect(received).toContain('inline-flex')
   })
 
-  it('applies a construction-time `base` replacer from `app.config.ui`', () => {
-    const ui = tvBase({ base: 'inline-flex px-4' }, { base: () => 'block' })
-    expect(ui()).toBe('block')
+  it('applies a construction-time replacer from `app.config.ui`', () => {
+    const ui = tvt({ slots: { base: 'inline-flex px-4' } }, { slots: { base: () => 'block' } })()
+    expect(ui.base()).toBe('block')
   })
 })
 
@@ -385,19 +380,28 @@ describe('tv variant merging', () => {
     defaultVariants: { size: 'md' }
   }
 
-  it('reads a plain override over a per-slot value as its `base`', () => {
-    // `app.config.ui.<c>.variants.size.md = 'text-lg'` over a theme's
-    // `{ base, label }` used to resolve to `"[object Object] text-lg"`.
-    const ui = tvt(theme, { variants: { size: { md: 'text-lg' } } })()
-    expect(ui.base()).toBe('inline-flex text-lg')
-    expect(ui.label()).toBe('truncate leading-5')
+  it('ignores a class given outside a slot object', () => {
+    // Classes are always per slot: a bare string or array targets nothing, and
+    // must not leak the per-slot object it overrides as `"[object Object]"`.
+    expect(tvt(theme, { variants: { size: { md: 'text-lg' } } })().base()).toBe('inline-flex text-base')
+    expect(tvt(theme, { variants: { size: { md: ['text-lg'] } } })().base()).toBe('inline-flex text-base')
+    expect(tvt(theme, { compoundVariants: [{ size: 'md', class: 'text-lg' }] })().base()).toBe('inline-flex text-base')
   })
 
-  it('reads an array override over a per-slot value as its `base`', () => {
-    // The array form used to leak the per-slot object's keys as classes.
-    const ui = tvt(theme, { variants: { size: { md: ['text-lg'] } } })()
-    expect(ui.base()).toBe('inline-flex text-lg')
-    expect(ui.base()).not.toContain('label')
+  it('warns once in development about a class given outside a slot object', () => {
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {})
+    const overrides = { variants: { tone: { loud: 'uppercase', quiet: '', off: false, flat: {} } } }
+    tvt(theme, overrides)()
+    // A second spec for the same content, as when overrides can't be keyed.
+    tvt(theme, { ...overrides, slots: { label: 'italic' } })()
+    const calls = warn.mock.calls.map(call => call[0])
+    warn.mockRestore()
+    // `import.meta.dev` is off in the Nuxt test build, where nothing is logged.
+    expect(calls.length).toBeLessThanOrEqual(1)
+    for (const message of calls) {
+      expect(message).toContain('`variants.tone.loud`')
+      expect(message).toContain('{ base: \'...\' }')
+    }
   })
 
   it('merges two per-slot values slot by slot', () => {
@@ -406,24 +410,15 @@ describe('tv variant merging', () => {
     expect(ui.label()).toBe('truncate leading-5 font-medium')
   })
 
-  it('applies an array variant value to `base` in a slotted theme', () => {
-    const ui = tvt({ slots: { base: 'x', label: 'y' }, variants: { size: { sm: ['text-sm', 'p-1'] } } })({ size: 'sm' })
+  it('accepts an array of classes inside a slot object', () => {
+    const ui = tvt({ slots: { base: 'x', label: 'y' }, variants: { size: { sm: { base: ['text-sm', 'p-1'] } } } })({ size: 'sm' })
     expect(ui.base()).toBe('x text-sm p-1')
     expect(ui.label()).toBe('y')
   })
 
-  it('resolves a per-slot value in a slotless theme through `base`', () => {
-    const tvBase = tv as unknown as (theme: any, overrides?: any) => (props?: any) => string | undefined
-    const ui = tvBase({ base: 'x', variants: { size: { md: { base: 'text-md' } } }, defaultVariants: { size: 'md' } })
-    expect(ui()).toBe('x text-md')
-    // A value that names no `base` contributes nothing rather than its key.
-    expect(tvBase({ base: 'x', variants: { size: { md: { label: 'text-md' } } }, defaultVariants: { size: 'md' } })()).toBe('x')
-  })
-
-  it('still matches compound variants on a slotless theme without variants', () => {
-    const tvBase = tv as unknown as (theme: any, overrides?: any) => (props?: any) => string | undefined
-    const ui = tvBase({ base: 'x', compoundVariants: [{ class: 'always' }] })
-    expect(ui()).toBe('x always')
+  it('still matches compound variants on a theme without variants', () => {
+    const ui = tvt({ slots: { base: 'x' }, compoundVariants: [{ class: { base: 'always' } }] })()
+    expect(ui.base()).toBe('x always')
   })
 })
 
@@ -459,10 +454,10 @@ describe('tv types', () => {
     expectTypeOf(ui.trailing).toBeNever()
   })
 
-  it('returns a string for a theme with no slots', () => {
-    const ui = tv({ base: 'w-full mx-auto' })()
+  it('returns a function per slot for a single-slot theme', () => {
+    const ui = tv({ slots: { base: 'w-full mx-auto' } })()
 
-    expectTypeOf(ui).toEqualTypeOf<string>()
+    expectTypeOf(ui.base).returns.toEqualTypeOf<string>()
   })
 
   it('keeps the slots when app config overrides are passed', () => {
@@ -506,9 +501,9 @@ describe('tv types', () => {
     // @ts-expect-error `lg` is not a declared size
     tv(button, { defaultVariants: { size: 'lg' } })
     // The theme's own defaults too, which inference alone would let through.
-    tv({ variants: { size: { sm: 'text-sm' } }, defaultVariants: { size: 'sm' } })
+    tv({ slots: { base: '' }, variants: { size: { sm: { base: 'text-sm' } } }, defaultVariants: { size: 'sm' } })
     // @ts-expect-error `lg` is not a declared size
-    tv({ variants: { size: { sm: 'text-sm' } }, defaultVariants: { size: 'lg' } })
+    tv({ slots: { base: '' }, variants: { size: { sm: { base: 'text-sm' } } }, defaultVariants: { size: 'lg' } })
   })
 
   it('accepts one value or several in compoundVariants', () => {
@@ -519,8 +514,9 @@ describe('tv types', () => {
       ]
     })
     tv({
-      variants: { size: { sm: 'text-sm', md: 'text-base' } },
-      compoundVariants: [{ size: ['sm', 'md'], class: 'font-medium' }]
+      slots: { base: '' },
+      variants: { size: { sm: { base: 'text-sm' }, md: { base: 'text-base' } } },
+      compoundVariants: [{ size: ['sm', 'md'], class: { base: 'font-medium' } }]
     })
   })
 
@@ -539,32 +535,21 @@ describe('tv types', () => {
 })
 
 describe('tv theme joins', () => {
-  // Slots on top of a slotless theme: the theme's `base` lands in the `base`
-  // slot, and the override classes come last so they win conflicts, like every
-  // other join.
-  it('joins a slotless theme base into the `base` slot', () => {
-    const ui = tvt({ base: 'p-4 text-sm' }, { slots: { base: 'p-2', label: 'truncate' } })()
+  // The override classes come last so they win conflicts, and a slot the theme
+  // doesn't declare is added alongside.
+  it('joins override slots onto a single-slot theme', () => {
+    const ui = tvt({ slots: { base: 'p-4 text-sm' } }, { slots: { base: 'p-2', label: 'truncate' } })()
     expect(ui.base()).toBe('text-sm p-2')
     expect(ui.label()).toBe('truncate')
   })
 
-  it('joins a slotless theme base under a top-level override base too', () => {
-    const ui = tvt({ base: 'p-4 text-sm' }, { base: 'p-2', slots: { label: 'truncate' } })()
-    expect(ui.base()).toBe('text-sm p-2')
-  })
-
-  it('hands a slotless theme base to a `slots.base` replacer', () => {
+  it('hands the theme classes to a slot replacer', () => {
     let received: string | undefined
-    tvt({ base: 'p-4' }, { slots: { base: (defaults: string) => {
+    tvt({ slots: { base: 'p-4' } }, { slots: { base: (defaults: string) => {
       received = defaults
       return 'block'
     }, label: '' } })()
     expect(received).toBe('p-4')
-  })
-
-  it('keeps a theme with only a base slotless under a base override', () => {
-    const tvBase = tv as unknown as (theme: any, overrides?: any) => (props?: any) => string | undefined
-    expect(tvBase({ base: 'p-4' }, { base: 'p-2' })()).toBe('p-2')
   })
 })
 
@@ -636,18 +621,6 @@ describe('tv override layers', () => {
 
   it('keeps the theme variants on top of an override slot replacer', () => {
     expect(tvt(theme, { slots: { label: () => 'font-bold text-default' } })().label()).toBe('font-bold text-dimmed')
-  })
-
-  it('keeps a plain override on top when a replacer sits on the same slot', () => {
-    const sized = { slots: { base: 'px-2' }, variants: { size: { md: { base: 'px-3' } } }, defaultVariants: { size: 'md' } }
-    expect(tvt(sized, { base: 'px-6', slots: { base: () => 'block' } })().base()).toBe('block px-6')
-    expect(tvt(sized, { base: () => 'block', slots: { base: 'px-6' } })().base()).toBe('block px-6')
-  })
-
-  it('resolves a slotless theme through the same layers', () => {
-    const tvBase = tv as unknown as (theme: any, overrides?: any) => (props?: any) => string | undefined
-    const slotless = { base: 'px-2', variants: { size: { md: 'px-3' } }, defaultVariants: { size: 'md' } }
-    expect(tvBase(slotless, { base: 'px-6' })()).toBe('px-6')
   })
 })
 

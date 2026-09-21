@@ -8,7 +8,7 @@ type ProseBlockquote = ComponentConfig<typeof theme, AppConfig, 'blockquote', 'u
 
 export interface ProseBlockquoteProps {
   class?: any
-  ui?: { base?: any }
+  ui?: ProseBlockquote['slots']
 }
 
 export interface ProseBlockquoteSlots {
@@ -31,11 +31,11 @@ const props = useComponentProps('prose.blockquote', _props)
 const appConfig = useAppConfig() as ProseBlockquote['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.prose?.blockquote))
+const ui = computed(() => tv(theme, appConfig.ui?.prose?.blockquote)())
 </script>
 
 <template>
-  <blockquote :class="ui({ class: [props.ui?.base, props.class] })">
+  <blockquote :class="ui.base({ class: [props.ui?.base, props.class] })">
     <slot />
   </blockquote>
 </template>
