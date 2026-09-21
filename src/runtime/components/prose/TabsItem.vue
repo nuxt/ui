@@ -10,7 +10,7 @@ export interface ProseTabsItemProps {
   label: string
   description?: string
   class?: any
-  ui?: { base?: any }
+  ui?: ProseTabsItem['slots']
 }
 
 export interface ProseTabsItemSlots {
@@ -33,11 +33,11 @@ const props = useComponentProps('prose.tabsItem', _props)
 const appConfig = useAppConfig() as ProseTabsItem['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.prose?.tabsItem))
+const ui = computed(() => tv(theme, appConfig.ui?.prose?.tabsItem)())
 </script>
 
 <template>
-  <div :class="ui({ class: [props.ui?.base, props.class] })">
+  <div :class="ui.base({ class: [props.ui?.base, props.class] })">
     <slot>
       {{ props.description }}
     </slot>

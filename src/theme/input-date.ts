@@ -35,13 +35,13 @@ export default (options: Required<ModuleOptions>) => {
           segment: 'data-[segment=day]:w-10 data-[segment=month]:w-10 data-[segment=year]:w-12'
         }
       },
-      variant: (prev: Record<string, string>) => Object.fromEntries(
-        Object.entries(prev).map(([key, value]) => [key, replaceFocus(value)])
+      variant: (prev: Record<string, { base: string }>) => Object.fromEntries(
+        Object.entries(prev).map(([key, value]) => [key, { base: replaceFocus(value.base) }])
       )
     },
     compoundVariants: (prev: Record<string, any>[]) => [...prev.map(item => ({
       ...item,
-      class: typeof item.class === 'string' ? replaceFocus(item.class) : item.class
+      class: typeof item.class.base === 'string' ? { ...item.class, base: replaceFocus(item.class.base) } : item.class
     })), {
       variant: 'outline',
       class: {
