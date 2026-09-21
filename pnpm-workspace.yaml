@@ -20,9 +20,9 @@ catalog:
   "@comark/vue": ^0.7.0
   "@floating-ui/dom": ^1.8.0
   "@iconify-json/logos": ^1.2.14
-  "@iconify-json/lucide": ^1.2.134
-  "@iconify-json/simple-icons": ^1.2.96
-  "@iconify-json/vscode-icons": ^1.2.78
+  "@iconify-json/lucide": ^1.2.135
+  "@iconify-json/simple-icons": ^1.2.97
+  "@iconify-json/vscode-icons": ^1.2.79
   "@iconify/vue": ^5.0.2
   "@internationalized/date": ^3.12.4
   "@internationalized/number": ^3.6.8

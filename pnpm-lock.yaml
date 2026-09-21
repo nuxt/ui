@@ -186,14 +186,14 @@ catalogs:
       specifier: ^1.2.14
       version: 1.2.14
     '@iconify-json/lucide':
-      specifier: ^1.2.134
-      version: 1.2.134
+      specifier: ^1.2.135
+      version: 1.2.135
     '@iconify-json/simple-icons':
-      specifier: ^1.2.96
-      version: 1.2.96
+      specifier: ^1.2.97
+      version: 1.2.97
     '@iconify-json/vscode-icons':
-      specifier: ^1.2.78
-      version: 1.2.78
+      specifier: ^1.2.79
+      version: 1.2.79
     '@iconify/vue':
       specifier: ^5.0.2
       version: 5.0.2
@@ -906,13 +906,13 @@ importers:
         version: 1.2.14
       '@iconify-json/lucide':
         specifier: 'catalog:'
-        version: 1.2.134
+        version: 1.2.135
       '@iconify-json/simple-icons':
         specifier: 'catalog:'
-        version: 1.2.96
+        version: 1.2.97
       '@iconify-json/vscode-icons':
         specifier: 'catalog:'
-        version: 1.2.78
+        version: 1.2.79
       '@nuxt/content':
         specifier: 'catalog:'
         version: 3.16.0(@oxc-project/types@0.149.0)(@valibot/to-json-schema@1.7.1(valibot@1.5.0(typescript@6.0.3)))(better-sqlite3@12.11.1)(esbuild@0.28.0)(magic-string@1.4.1)(magicast@0.5.5)(oxc-parser@0.149.0)(rolldown@1.2.8)(rollup@4.60.4)(supports-color@10.2.2)(valibot@1.5.0(typescript@6.0.3))(vite@8.3.0(@types/node@25.9.0)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.47.1)(yaml@2.9.0))
@@ -1075,10 +1075,10 @@ importers:
         version: 0.7.0(shiki@4.4.3)(vue@3.5.43(typescript@6.0.3))
       '@iconify-json/lucide':
         specifier: 'catalog:'
-        version: 1.2.134
+        version: 1.2.135
       '@iconify-json/simple-icons':
         specifier: 'catalog:'
-        version: 1.2.96
+        version: 1.2.97
       '@internationalized/date':
         specifier: 'catalog:'
         version: 3.12.4
@@ -1183,7 +1183,7 @@ importers:
     devDependencies:
       '@iconify-json/lucide':
         specifier: 'catalog:'
-        version: 1.2.134
+        version: 1.2.135
       '@vitejs/plugin-vue':
         specifier: 'catalog:'
         version: 6.0.9(vite@8.3.0(@types/node@25.9.0)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.47.1)(yaml@2.9.0))(vue@3.5.43(typescript@6.0.3))
@@ -2106,14 +2106,14 @@ packages:
   '@iconify-json/logos@1.2.14':
     resolution: {integrity: sha512-O36DicXkgAMT6NAsH7MTWlOql8NktHz9fBCItTjz6L/9gyRXw4vQj6qTeVgww5UZWiVugUV1MhVFA/g9HWIkBw==}
 
-  '@iconify-json/lucide@1.2.134':
-    resolution: {integrity: sha512-MXzwT7H8Ii/aGN6NLtMbMLDaxLYsOxCKEdW0F5h3MemNUaUBqAxr9nz0mPlXzozd/piQyrdSiUyk0t5b5ErADg==}
+  '@iconify-json/lucide@1.2.135':
+    resolution: {integrity: sha512-M2RbCJMe/ZwRzGBxNGbqP3kEQ74iJjQyJsw5FgVQw+Kp8eJPQF1S19fiGJChG4yYLg73c8Z/fMnm07GTXUxmQA==}
 
-  '@iconify-json/simple-icons@1.2.96':
-    resolution: {integrity: sha512-/FmCYo/H5rIywTLV/P6OYsr0rg/31vuc8jYq0QnkOZl6m7PWIs+h5oAnSTT2cqRhOsMaKqbXcdkka6tnZ1WiUA==}
+  '@iconify-json/simple-icons@1.2.97':
+    resolution: {integrity: sha512-Z6PmM6jvWVU7rmLzqbxCLJA7SeqCnK6lMHXtjyzHPLZebwuoojBEcHHycppahDzEeN9xujRkrV5J8QpOhMyNrg==}
 
-  '@iconify-json/vscode-icons@1.2.78':
-    resolution: {integrity: sha512-IGRmD43uJjD3H7wa9BgY5XVIgh2LZiuSxATvTfhmVEoIC44qEwuXmMSY3RDmKXwLfG69zOd13pyiCqTwQN/5JQ==}
+  '@iconify-json/vscode-icons@1.2.79':
+    resolution: {integrity: sha512-JxGn5iS6a9qyF/tE9F9B8cCjQ8sS7SuLgBw3zIfoDhl4JKlIYHtK0FKQuiV47U65E7Q0OYKw0uZ7SMuCrINBHA==}
 
   '@iconify/collections@1.0.730':
     resolution: {integrity: sha512-vuSS1r5FVWH5Oo6vEnAYvCd4u13sr95s0uDjfOaSFdF15EvLAaUKA2yDpufc5KbFLBVvwzE5pIFt0dIM2kjYWA==}
@@ -10961,15 +10961,15 @@ snapshots:
     dependencies:
       '@iconify/types': 2.0.0
 
-  '@iconify-json/lucide@1.2.134':
+  '@iconify-json/lucide@1.2.135':
     dependencies:
       '@iconify/types': 2.0.0
 
-  '@iconify-json/simple-icons@1.2.96':
+  '@iconify-json/simple-icons@1.2.97':
     dependencies:
       '@iconify/types': 2.0.0
 
-  '@iconify-json/vscode-icons@1.2.78':
+  '@iconify-json/vscode-icons@1.2.79':
     dependencies:
       '@iconify/types': 2.0.0
 
