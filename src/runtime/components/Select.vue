@@ -5,10 +5,10 @@ import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/select'
 import type { UseComponentIconsProps } from '../composables/useComponentIcons'
 import type { AvatarProps } from './Avatar.vue'
+import type { BadgeProps } from './Badge.vue'
 import type { ChipProps } from './Chip.vue'
 import type { IconProps } from './Icon.vue'
 import type { InputProps } from './Input.vue'
-import type { BadgeProps } from './Badge.vue'
 import type { ModelModifiers, ApplyModifiers } from '../types/input'
 import type { ButtonHTMLAttributes } from '../types/html'
 import type { AcceptableValue, ArrayOrNested, GetItemKeys, GetModelValue, NestedItem, EmitsToProps } from '../types/utils'
@@ -174,6 +174,7 @@ import { get, getDisplayValue, isArrayOfArray, looseToNumber } from '../utils'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
 import UAvatar from './Avatar.vue'
+import UBadge from './Badge.vue'
 import UChip from './Chip.vue'
 
 defineOptions({ inheritAttrs: false })
@@ -441,11 +442,11 @@ defineExpose({
                         <UBadge
                           v-if="isSelectItem(item) && item.badge !== undefined && item.badge !== null"
                           color="neutral"
-                          variant="outline"
-                          :size="((item.ui?.itemBadgeSize || ui.itemBadgeSize()) as BadgeProps['size'])"
+                          variant="soft"
+                          :size="((item.ui?.itemBadgeSize || props.ui?.itemBadgeSize || ui.itemBadgeSize()) as BadgeProps['size'])"
                           v-bind="(typeof item.badge === 'string' || typeof item.badge === 'number') ? { label: item.badge } : item.badge"
                           data-slot="itemBadge"
-                          :class="ui.itemBadge({ class: [item.ui?.itemBadge] })"
+                          :class="ui.itemBadge({ class: [props.ui?.itemBadge, item.ui?.itemBadge] })"
                         />
                       </SelectItemText>
 
