@@ -21,7 +21,7 @@ describe('Form', () => {
     ['with method', { props: { ...props, method: 'get' } }],
     ['with id', { props: { ...props, id: 'id' } }],
     ['with class', { props: { ...props, class: 'gap-4' } }],
-    ['with ui', { props: { ...props, ui: { base: 'rounded-lg' } } }],
+    ['with ui', { props: { ...props, ui: { root: 'rounded-lg' } } }],
     // Attrs
     ['with aria-label', { props, attrs: { 'aria-label': 'Contact form' } }],
     // Slots
