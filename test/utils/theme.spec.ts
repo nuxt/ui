@@ -26,14 +26,13 @@ describe('applyUnstyled', () => {
     }
   })
 
-  it('blanks a top-level base', () => {
-    // Single-element components (e.g. Skeleton) have no `slots`, their theme
-    // is a top-level `base` string or array.
-    const stringBase = { base: 'animate-pulse rounded-md bg-elevated' }
-    expect(applyUnstyled(stringBase, true)).toEqual({ base: '' })
-    expect(stringBase.base).toBe('animate-pulse rounded-md bg-elevated')
+  it('blanks a single-slot theme', () => {
+    // Single-element components (e.g. Skeleton) declare one `base` slot.
+    const theme = { slots: { base: 'animate-pulse rounded-md bg-elevated' } }
+    expect(applyUnstyled(theme, true)).toEqual({ slots: { base: '' } })
+    expect(theme.slots.base).toBe('animate-pulse rounded-md bg-elevated')
 
-    expect(applyUnstyled({ base: ['flex', 'transition-colors'] }, true)).toEqual({ base: '' })
+    expect(applyUnstyled({ slots: { base: ['flex', 'transition-colors'] } }, true)).toEqual({ slots: { base: '' } })
   })
 
   it('does not mutate the input theme', () => {

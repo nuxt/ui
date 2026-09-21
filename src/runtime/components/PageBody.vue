@@ -13,7 +13,7 @@ export interface PageBodyProps {
    */
   as?: any
   class?: any
-  ui?: { base?: any }
+  ui?: PageBody['slots']
 }
 
 export interface PageBodySlots {
@@ -37,11 +37,11 @@ const props = useComponentProps('pageBody', _props)
 const appConfig = useAppConfig() as PageBody['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.pageBody))
+const ui = computed(() => tv(theme, appConfig.ui?.pageBody)())
 </script>
 
 <template>
-  <Primitive :as="props.as" :class="ui({ class: [props.ui?.base, props.class] })">
+  <Primitive :as="props.as" :class="ui.base({ class: [props.ui?.base, props.class] })">
     <slot />
   </Primitive>
 </template>

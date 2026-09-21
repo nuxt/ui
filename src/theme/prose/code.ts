@@ -1,11 +1,13 @@
 import type { ModuleOptions } from '../../module'
 
 export default (options: Required<ModuleOptions>) => ({
-  base: 'px-1.5 py-0.5 text-sm font-mono font-medium rounded-md inline-block',
+  slots: {
+    base: 'px-1.5 py-0.5 text-sm font-mono font-medium rounded-md inline-block'
+  },
   variants: {
     color: {
-      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, `border border-${color}/25 bg-${color}/10 text-${color}`])),
-      neutral: 'border border-muted text-highlighted bg-muted'
+      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, { base: `border border-${color}/25 bg-${color}/10 text-${color}` }])),
+      neutral: { base: 'border border-muted text-highlighted bg-muted' }
     }
   },
   defaultVariants: {

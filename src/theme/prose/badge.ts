@@ -1,3 +1,5 @@
 export default {
-  base: 'rounded-full'
+  slots: {
+    base: 'rounded-full'
+  }
 }

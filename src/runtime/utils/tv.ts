@@ -6,7 +6,7 @@ import appConfig from '#build/app.config'
 
 /**
  * The variants engine. It covers exactly the surface our themes use, which is
- * `base`, `slots`, `variants`, `compoundVariants` and `defaultVariants`, a theme
+ * `slots`, `variants`, `compoundVariants` and `defaultVariants`, a theme
  * and one overrides object on top of it, and leaves out `compoundSlots` and the
  * per-call config argument, neither of which appears in any theme or call site.
  *
@@ -206,7 +206,7 @@ const isPlainObject = (value: any): value is Record<string, any> => typeof value
  *    `:ui` does, and the more specific compound still wins over it.
  */
 interface Layer {
-  /** Per slot, or under `base` for a slotless theme. */
+  /** Per slot. */
   statics?: Record<string, ClassValue>
   variants?: Record<string, Record<string, any> | undefined>
   compoundVariants?: Record<string, any>[]
@@ -216,7 +216,6 @@ interface Spec {
   config: TVMergeConfig | undefined
   layers: Layer[]
   slotKeys: string[]
-  hasSlots: boolean
   defaultVariants: Record<string, any>
   /** Lazily compiled per-slot resolvers, shared across factory rebuilds. */
   compiled: Record<string, CompiledSlot | undefined>
@@ -265,49 +264,28 @@ function snapshot<T>(value: T): T {
 function resolveSpec(theme: Record<string, any>, overrides: Record<string, any> | undefined, config: TVMergeConfig | undefined): Spec {
   const own = overrides ?? EMPTY
 
-  const themeSlots: Record<string, any> = theme.slots ?? {}
-  const isThemeSlotsEmpty = isEmpty(themeSlots)
+  const themeSlots: Record<string, any> = theme.slots ?? EMPTY
+  const ownSlots: Record<string, any> = own.slots ?? EMPTY
 
-  // What the theme contributes to a slot. A slotless theme contributes its
-  // top-level `base` to the `base` slot, which is how a user adds slots on top
-  // of a theme that only has a `base`.
-  const inherited = (key: string) => isThemeSlotsEmpty ? (key === 'base' ? theme.base : undefined) : themeSlots[key]
+  const slotKeys = [...new Set([...Object.keys(themeSlots), ...Object.keys(ownSlots)])]
 
-  const baseReplaced = typeof own.base === 'function'
-  const ownBase = baseReplaced ? replaceClasses(config, own.base, inherited('base')) : own.base
-
-  const rawSlots: Record<string, any> = own.slots ?? {}
-  let ownSlots = rawSlots
-  for (const key in rawSlots) {
-    if (typeof rawSlots[key] !== 'function') {
-      continue
-    }
-    if (ownSlots === rawSlots) {
-      ownSlots = { ...rawSlots }
-    }
-    ownSlots[key] = replaceClasses(config, rawSlots[key], inherited(key))
+  if (import.meta.dev) {
+    const slot = slotKeys[0] ?? 'base'
+    warnBareClasses(theme, slot)
+    warnBareClasses(own, slot)
   }
 
-  // Slot keys come from both sides, `base` included as soon as there are slots
-  // at all; a theme with nothing but a `base` stays slotless and resolves
-  // through an implicit `base` slot.
-  const hasSlots = !isThemeSlotsEmpty || !isEmpty(ownSlots)
-  const slotKeys = hasSlots ? [...new Set(['base', ...Object.keys(themeSlots), ...Object.keys(ownSlots)])] : []
-
   // A replacer's result stands in for the theme's classes, beneath the
-  // variants. Plain classes set beside it (`base` next to a `slots.base`
-  // replacer) are overrides like any other and go on top.
+  // variants. Plain classes are overrides like any other and go on top.
   const themeStatics: Record<string, ClassValue> = {}
   const ownStatics: Record<string, ClassValue> = {}
-  for (const key of hasSlots ? slotKeys : ['base']) {
-    const slotReplaced = typeof rawSlots[key] === 'function'
-    const slotClasses = key === 'base' && !hasSlots ? undefined : ownSlots[key]
-    if (key === 'base') {
-      themeStatics[key] = baseReplaced || slotReplaced ? cx(baseReplaced && ownBase, slotReplaced && slotClasses) : inherited(key)
-      ownStatics[key] = snapshot(cx(!baseReplaced && ownBase, !slotReplaced && slotClasses))
+  for (const key of slotKeys) {
+    const slotClasses = ownSlots[key]
+    if (typeof slotClasses === 'function') {
+      themeStatics[key] = replaceClasses(config, slotClasses, themeSlots[key])
     } else {
-      themeStatics[key] = slotReplaced ? slotClasses : inherited(key)
-      ownStatics[key] = slotReplaced ? undefined : snapshot(slotClasses)
+      themeStatics[key] = themeSlots[key]
+      ownStatics[key] = snapshot(slotClasses)
     }
   }
 
@@ -324,7 +302,6 @@ function resolveSpec(theme: Record<string, any>, overrides: Record<string, any> 
     config,
     layers,
     slotKeys,
-    hasSlots,
     defaultVariants: { ...theme.defaultVariants, ...own.defaultVariants },
     compiled: Object.create(null)
   }
@@ -361,14 +338,44 @@ interface CompiledSlot {
 }
 
 /**
- * The class a variant value or compound contributes to one slot: objects are
- * indexed by slot, anything else applies to `base`.
+ * The class a variant value or compound contributes to one slot. Classes are
+ * always given per slot, so anything but an object contributes nothing.
  */
 function classForSlot(value: any, slotKey: string): any {
-  if (isPlainObject(value)) {
-    return value[slotKey]
+  return isPlainObject(value) ? value[slotKey] : undefined
+}
+
+/**
+ * A variant or compound class outside a slot object targets nothing. Types
+ * catch it where overrides are written (`app.config.ts`), a `vite.config`, a
+ * plain JS config or a theme handed straight to `tv` doesn't, so say it once in
+ * development rather than dropping the classes silently.
+ */
+const warned = new Set<string>()
+
+function warnBareClasses(source: Record<string, any>, slot: string): void {
+  const bare = (value: any) => !!value && !isPlainObject(value)
+  const warn = (where: string, value: any) => {
+    const message = `[@nuxt/ui] ${where} must be an object of classes per slot, e.g. \`{ ${slot}: '...' }\`. Received ${typeof value === 'string' ? JSON.stringify(value) : String(value)}, which is ignored.`
+    // Specs are rebuilt per overrides, and on every call when those can't be keyed.
+    if (!warned.has(message)) {
+      warned.add(message)
+      console.warn(message)
+    }
   }
-  return slotKey === 'base' ? value : undefined
+  for (const key in source.variants ?? EMPTY) {
+    const group = source.variants[key] ?? EMPTY
+    for (const valueKey in group) {
+      if (bare(group[valueKey])) {
+        warn(`\`variants.${key}.${valueKey}\``, group[valueKey])
+      }
+    }
+  }
+  for (const compound of flatten(source.compoundVariants)) {
+    if (bare(compound?.class)) {
+      warn('A `compoundVariants` entry\'s `class`', compound.class)
+    }
+  }
 }
 
 function compileLayer(layer: Layer, defaultVariants: Record<string, any>, slotKey: string, relevant: Set<string>): CompiledLayer {
@@ -718,13 +725,6 @@ function createTV(config?: TVMergeConfig) {
     const spec = specFor(theme, overrides, config)
 
     return (props?: Record<string, any>) => {
-      if (!spec.hasSlots) {
-        // A slotless theme resolves as one implicit `base` slot. `class` travels
-        // as a slot prop so the other invocation props keep props-only resolution.
-        const slotProps = props && props.class !== undefined ? { class: props.class } : undefined
-        return resolveSlotCached(spec, 'base', props, slotProps)
-      }
-
       const fns: Record<string, (slotProps?: Record<string, any>) => string | undefined> = {}
       const slotKeys = spec.slotKeys
       for (let i = 0; i < slotKeys.length; i++) {
