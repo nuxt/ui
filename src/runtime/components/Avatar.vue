@@ -95,7 +95,10 @@ const sizePx = computed(() => {
 const error = ref(false)
 
 const attrs = useAttrs()
-const rootAttrs = computed(() => props.src && !error.value ? {} : attrs)
+// Mirrors `ImgHTMLAttributes` in `types/html.ts` without `src` / `alt`, which are props
+const imgAttrKeys = ['crossorigin', 'decoding', 'height', 'loading', 'referrerpolicy', 'sizes', 'srcset', 'usemap', 'width']
+const imgAttrs = computed(() => Object.fromEntries(Object.entries(attrs).filter(([key]) => imgAttrKeys.includes(key))))
+const rootAttrs = computed(() => Object.fromEntries(Object.entries(attrs).filter(([key]) => !imgAttrKeys.includes(key))))
 
 watch(() => props.src, () => {
   if (error.value) {
@@ -124,7 +127,7 @@ function onError() {
       :alt="props.alt"
       :width="sizePx"
       :height="sizePx"
-      v-bind="$attrs"
+      v-bind="imgAttrs"
       data-slot="image"
       :class="ui.image({ class: props.ui?.image })"
       @error="onError"
