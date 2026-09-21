@@ -94,6 +94,7 @@ export interface LinkProps extends NuxtLinkProps, /** @vue-ignore */ Omit<Button
    */
   locale?: boolean | string
   class?: any
+  ui?: Link['slots']
 }
 
 /**
@@ -145,8 +146,9 @@ const route = useRoute()
 const appConfig = useAppConfig() as Link['AppConfig']
 const nuxtApp = useNuxtApp()
 
-const nuxtLinkProps = useForwardProps(reactiveOmit(props, 'as', 'type', 'disabled', 'active', 'exact', 'exactQuery', 'exactHash', 'activeClass', 'inactiveClass', 'to', 'href', 'raw', 'custom', 'locale', 'class'))
+const nuxtLinkProps = useForwardProps(reactiveOmit(props, 'as', 'type', 'disabled', 'active', 'exact', 'exactQuery', 'exactHash', 'activeClass', 'inactiveClass', 'to', 'href', 'raw', 'custom', 'locale', 'class', 'ui'))
 
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv(theme, appConfig.ui?.link))
 
 const to = computed(() => {
@@ -247,7 +249,7 @@ function resolveLinkClass({ route, isActive, isExactActive, prefetched }: any = 
     return [props.class, active ? props.activeClass : props.inactiveClass, prefetchedClass]
   }
 
-  return ui.value({ class: [props.class, active ? props.activeClass : props.inactiveClass, prefetchedClass], active, disabled: props.disabled })
+  return ui.value({ active, disabled: props.disabled }).base({ class: [props.ui?.base, props.class, active ? props.activeClass : props.inactiveClass, prefetchedClass] })
 }
 
 // Since Nuxt 4.5, NuxtLink no longer prefetches `custom` links itself and

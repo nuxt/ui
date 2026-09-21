@@ -21,7 +21,7 @@ export interface DashboardSidebarCollapseProps extends Omit<ButtonProps, LinkPro
    * @defaultValue 'left'
    */
   side?: 'left' | 'right'
-  ui?: { base?: any }
+  ui?: DashboardSidebarCollapse['slots']
 }
 </script>
 
@@ -51,7 +51,7 @@ const appConfig = useAppConfig() as DashboardSidebarCollapse['AppConfig']
 const { sidebarCollapsed, collapseSidebar } = useDashboard({ sidebarCollapsed: ref(false), collapseSidebar: () => {} })
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.dashboardSidebarCollapse))
+const ui = computed(() => tv(theme, appConfig.ui?.dashboardSidebarCollapse)({ side: props.side }))
 </script>
 
 <template>
@@ -62,7 +62,7 @@ const ui = computed(() => tv(theme, appConfig.ui?.dashboardSidebarCollapse))
       'aria-label': sidebarCollapsed ? t('dashboardSidebarCollapse.expand') : t('dashboardSidebarCollapse.collapse'),
       ...$attrs
     }"
-    :class="ui({ class: [props.ui?.base, props.class], side: props.side })"
+    :class="ui.base({ class: [props.ui?.base, props.class] })"
     @click="collapseSidebar?.(!sidebarCollapsed)"
   />
 </template>
