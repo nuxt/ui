@@ -1,4 +1,4 @@
-import { describe, it, expect, expectTypeOf } from 'vitest'
+import { describe, it, expect, expectTypeOf, vi } from 'vitest'
 import { tv } from '../../src/runtime/utils/tv'
 import type { VariantProps } from '../../src/runtime/types/tv'
 
@@ -388,6 +388,22 @@ describe('tv variant merging', () => {
     expect(tvt(theme, { compoundVariants: [{ size: 'md', class: 'text-lg' }] })().base()).toBe('inline-flex text-base')
   })
 
+  it('warns once in development about a class given outside a slot object', () => {
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {})
+    const overrides = { variants: { tone: { loud: 'uppercase', quiet: '', off: false, flat: {} } } }
+    tvt(theme, overrides)()
+    // A second spec for the same content, as when overrides can't be keyed.
+    tvt(theme, { ...overrides, slots: { label: 'italic' } })()
+    const calls = warn.mock.calls.map(call => call[0])
+    warn.mockRestore()
+    // `import.meta.dev` is off in the Nuxt test build, where nothing is logged.
+    expect(calls.length).toBeLessThanOrEqual(1)
+    for (const message of calls) {
+      expect(message).toContain('`variants.tone.loud`')
+      expect(message).toContain('{ base: \'...\' }')
+    }
+  })
+
   it('merges two per-slot values slot by slot', () => {
     const ui = tvt(theme, { variants: { size: { md: { label: 'font-medium' } } } })()
     expect(ui.base()).toBe('inline-flex text-base')
@@ -485,9 +501,9 @@ describe('tv types', () => {
     // @ts-expect-error `lg` is not a declared size
     tv(button, { defaultVariants: { size: 'lg' } })
     // The theme's own defaults too, which inference alone would let through.
-    tv({ variants: { size: { sm: 'text-sm' } }, defaultVariants: { size: 'sm' } })
+    tv({ slots: { base: '' }, variants: { size: { sm: { base: 'text-sm' } } }, defaultVariants: { size: 'sm' } })
     // @ts-expect-error `lg` is not a declared size
-    tv({ variants: { size: { sm: 'text-sm' } }, defaultVariants: { size: 'lg' } })
+    tv({ slots: { base: '' }, variants: { size: { sm: { base: 'text-sm' } } }, defaultVariants: { size: 'lg' } })
   })
 
   it('accepts one value or several in compoundVariants', () => {
@@ -498,8 +514,9 @@ describe('tv types', () => {
       ]
     })
     tv({
-      variants: { size: { sm: 'text-sm', md: 'text-base' } },
-      compoundVariants: [{ size: ['sm', 'md'], class: 'font-medium' }]
+      slots: { base: '' },
+      variants: { size: { sm: { base: 'text-sm' }, md: { base: 'text-base' } } },
+      compoundVariants: [{ size: ['sm', 'md'], class: { base: 'font-medium' } }]
     })
   })
 
