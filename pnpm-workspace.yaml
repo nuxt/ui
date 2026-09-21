@@ -86,7 +86,7 @@ catalog:
   ai: ^7.0.99
   capture-website: ^5.1.0
   citty: ^0.2.2
-  colortranslator: ^5.0.0
+  colortranslator: ^6.1.1
   consola: ^3.4.2
   defu: ^6.1.7
   embla-carousel: ^8.6.0
