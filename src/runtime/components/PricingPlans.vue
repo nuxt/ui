@@ -93,7 +93,7 @@ function mapSlot(slot: any) {
 </script>
 
 <template>
-  <Primitive :as="props.as" :data-orientation="props.orientation" :class="ui.base({ class: [props.ui?.base, props.class] })" :style="{ '--count': count }">
+  <Primitive :as="props.as" :data-orientation="props.orientation" :class="ui.root({ class: [props.ui?.root, props.class] })" :style="{ '--count': count }">
     <slot>
       <UPricingPlan
         v-for="(plan, index) in props.plans"
