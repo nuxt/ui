@@ -108,7 +108,7 @@ catalog:
   knitwork: ^1.3.0
   magic-string: ^1.4.1
   maska: ^3.2.1
-  minimark: ^0.2.0
+  minimark: ^1.0.0
   mlly: ^1.8.2
   motion-v: ^2.4.4
   nuxt: ^4.5.2
