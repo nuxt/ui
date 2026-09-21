@@ -1,3 +1,5 @@
 export default {
-  base: 'bg-muted'
+  slots: {
+    base: 'bg-muted'
+  }
 }

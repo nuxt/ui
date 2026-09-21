@@ -14,7 +14,7 @@ export interface DashboardGroupProps extends Pick<UseResizableProps, 'storage' |
    */
   as?: any
   class?: any
-  ui?: { base?: any }
+  ui?: DashboardGroup['slots']
 }
 
 export interface DashboardGroupSlots {
@@ -44,7 +44,7 @@ const nuxtApp = useNuxtApp()
 const appConfig = useAppConfig() as DashboardGroup['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.dashboardGroup))
+const ui = computed(() => tv(theme, appConfig.ui?.dashboardGroup)())
 
 const sidebarOpen = ref(false)
 const sidebarCollapsed = ref(false)
@@ -70,7 +70,7 @@ provideDashboardContext({
 </script>
 
 <template>
-  <Primitive :as="props.as" :class="ui({ class: [props.ui?.base, props.class] })">
+  <Primitive :as="props.as" :class="ui.base({ class: [props.ui?.base, props.class] })">
     <slot />
   </Primitive>
 </template>

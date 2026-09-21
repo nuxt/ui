@@ -79,7 +79,7 @@ export default (options: Required<ModuleOptions>) => ({
       outside: ''
     },
     dropzone: {
-      true: 'border-dashed data-[dragging=true]:bg-elevated/25'
+      true: { base: 'border-dashed data-[dragging=true]:bg-elevated/25' }
     },
     interactive: {
       true: ''
@@ -91,23 +91,23 @@ export default (options: Required<ModuleOptions>) => ({
       true: ''
     },
     disabled: {
-      true: 'cursor-not-allowed opacity-75'
+      true: { base: 'cursor-not-allowed opacity-75' }
     }
   },
   compoundVariants: [...(options.theme.colors || []).map((color: string) => ({
     color,
-    class: `outline-${color}/25 focus-visible:outline-3 focus-visible:border-${color}`
+    class: { base: `outline-${color}/25 focus-visible:outline-3 focus-visible:border-${color}` }
   })), ...(options.theme.colors || []).map((color: string) => ({
     color,
     highlight: true,
-    class: `border-${color}`
+    class: { base: `border-${color}` }
   })), {
     color: 'neutral',
-    class: 'outline-inverted/25 focus-visible:outline-3 focus-visible:border-inverted'
+    class: { base: 'outline-inverted/25 focus-visible:outline-3 focus-visible:border-inverted' }
   }, {
     color: 'neutral',
     highlight: true,
-    class: 'border-inverted'
+    class: { base: 'border-inverted' }
   }, {
     size: 'xs',
     layout: 'list',
@@ -184,7 +184,7 @@ export default (options: Required<ModuleOptions>) => ({
   }, {
     interactive: true,
     disabled: false,
-    class: 'hover:bg-elevated/25'
+    class: { base: 'hover:bg-elevated/25' }
   }],
   defaultVariants: {
     color: 'primary',
