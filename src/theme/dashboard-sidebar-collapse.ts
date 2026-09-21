@@ -1,5 +1,7 @@
 export default {
-  base: 'hidden lg:flex',
+  slots: {
+    base: 'hidden lg:flex'
+  },
   variants: {
     side: {
       left: '',

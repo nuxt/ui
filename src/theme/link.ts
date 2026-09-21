@@ -1,19 +1,21 @@
 import type { ModuleOptions } from '../module'
 
 export default (options: Required<ModuleOptions>) => ({
-  base: 'outline-primary/25 focus-visible:outline-3 rounded-md',
+  slots: {
+    base: 'outline-primary/25 focus-visible:outline-3 rounded-md'
+  },
   variants: {
     active: {
-      true: 'text-primary',
-      false: 'text-muted'
+      true: { base: 'text-primary' },
+      false: { base: 'text-muted' }
     },
     disabled: {
-      true: 'cursor-not-allowed opacity-75'
+      true: { base: 'cursor-not-allowed opacity-75' }
     }
   },
   compoundVariants: [{
     active: false,
     disabled: false,
-    class: ['hover:text-default', options.theme.transitions && 'transition-colors']
+    class: { base: ['hover:text-default', options.theme.transitions && 'transition-colors'] }
   }]
 })

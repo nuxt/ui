@@ -10,7 +10,7 @@ export interface ProseAProps {
   href?: string
   target?: '_blank' | '_parent' | '_self' | '_top' | (string & object) | null | undefined
   class?: any
-  ui?: { base?: any }
+  ui?: ProseA['slots']
 }
 
 export interface ProseASlots {
@@ -34,11 +34,11 @@ const props = useComponentProps('prose.a', _props)
 const appConfig = useAppConfig() as ProseA['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.prose?.a))
+const ui = computed(() => tv(theme, appConfig.ui?.prose?.a)())
 </script>
 
 <template>
-  <ULink :href="props.href" :target="props.target" :class="ui({ class: [props.ui?.base, props.class] })" raw>
+  <ULink :href="props.href" :target="props.target" :class="ui.base({ class: [props.ui?.base, props.class] })" raw>
     <slot />
   </ULink>
 </template>

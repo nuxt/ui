@@ -8,7 +8,7 @@ type ProseCardGroup = ComponentConfig<typeof theme, AppConfig, 'cardGroup', 'ui.
 
 export interface ProseCardGroupProps {
   class?: any
-  ui?: { base?: any }
+  ui?: ProseCardGroup['slots']
 }
 
 export interface ProseCardGroupSlots {
@@ -31,11 +31,11 @@ const props = useComponentProps('prose.cardGroup', _props)
 const appConfig = useAppConfig() as ProseCardGroup['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.prose?.cardGroup))
+const ui = computed(() => tv(theme, appConfig.ui?.prose?.cardGroup)())
 </script>
 
 <template>
-  <div :class="ui({ class: [props.ui?.base, props.class] })">
+  <div :class="ui.base({ class: [props.ui?.base, props.class] })">
     <slot />
   </div>
 </template>

@@ -26,9 +26,11 @@ export default function NuxtEnvironmentPlugin(options: NuxtUIOptions) {
       return normalize(id).includes(runtimeDir)
     },
     transform(code) {
-      if (code.includes('import.meta.client')) {
+      if (code.includes('import.meta.client') || code.includes('import.meta.dev')) {
         const s = new MagicString(code)
         s.replaceAll('import.meta.client', 'true')
+        // Nuxt defines `import.meta.dev`, every bundler replaces `process.env.NODE_ENV`
+        s.replaceAll('import.meta.dev', '(process.env.NODE_ENV !== \'production\')')
 
         if (s.hasChanged()) {
           return {

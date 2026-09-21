@@ -6,6 +6,25 @@ Theme files define component styling using the variants engine in `src/runtime/u
 
 Themes live in `src/theme/` with kebab-case naming (e.g., `button.ts`, `input-menu.ts`).
 
+## Shape
+
+A theme is `slots`, `variants`, `compoundVariants` and `defaultVariants`. Every component declares its elements under `slots`, including the ones made of a single element, which declare one `base` slot.
+
+Classes in `variants` and `compoundVariants` are always given per slot, as an object keyed by slot name. A bare string or array targets no slot: the engine ignores it and warns in development. An empty string is fine for a value that only exists to be matched in `compoundVariants` (`solid: ''`).
+
+```ts
+variants: {
+  size: {
+    md: { base: 'px-2.5 py-1.5', leadingIcon: 'size-5' }
+  }
+},
+compoundVariants: [{
+  color: 'neutral',
+  variant: 'solid',
+  class: { base: 'text-inverted bg-inverted' }
+}]
+```
+
 ## Static Theme (Simple Components)
 
 For components without dynamic colors:
@@ -68,23 +87,23 @@ export default (options: Required<ModuleOptions>) => ({
     ...(options.theme.colors || []).map((color: string) => ({
       color,
       variant: 'solid',
-      class: `bg-${color} text-inverted`
+      class: { base: `bg-${color} text-inverted` }
     })),
     ...(options.theme.colors || []).map((color: string) => ({
       color,
       variant: 'outline',
-      class: `text-${color} ring ring-inset ring-${color}/50`
+      class: { base: `text-${color} ring ring-inset ring-${color}/50` }
     })),
     // Neutral variants
     {
       color: 'neutral',
       variant: 'solid',
-      class: 'text-inverted bg-inverted'
+      class: { base: 'text-inverted bg-inverted' }
     },
     {
       color: 'neutral',
       variant: 'outline',
-      class: 'ring ring-inset ring-accented text-default bg-default'
+      class: { base: 'ring ring-inset ring-accented text-default bg-default' }
     }
   ],
   defaultVariants: {
@@ -209,14 +228,14 @@ compoundVariants: [
   {
     color: 'primary',
     variant: 'solid',
-    class: 'bg-primary text-inverted'
+    class: { base: 'bg-primary text-inverted' }
   },
   
   // Size + boolean
   {
     size: 'sm',
     square: true,
-    class: 'p-1'
+    class: { base: 'p-1' }
   },
   
   // Multiple slots
@@ -232,7 +251,7 @@ compoundVariants: [
   {
     color: 'neutral',
     variant: ['outline', 'subtle'],
-    class: 'focus-visible:ring-2 focus-visible:ring-inverted'
+    class: { base: 'focus-visible:ring-2 focus-visible:ring-inverted' }
   }
 ]
 ```

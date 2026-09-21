@@ -10,7 +10,7 @@ export interface ProseAccordionItemProps {
   label: string
   description?: string
   class?: any
-  ui?: { base?: any }
+  ui?: ProseAccordionItem['slots']
 }
 
 export interface ProseAccordionItemSlots {
@@ -33,11 +33,11 @@ const props = useComponentProps('prose.accordionItem', _props)
 const appConfig = useAppConfig() as ProseAccordionItem['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.prose?.accordionItem))
+const ui = computed(() => tv(theme, appConfig.ui?.prose?.accordionItem)())
 </script>
 
 <template>
-  <div :class="ui({ class: [props.ui?.base, props.class] })">
+  <div :class="ui.base({ class: [props.ui?.base, props.class] })">
     <slot>
       {{ props.description }}
     </slot>

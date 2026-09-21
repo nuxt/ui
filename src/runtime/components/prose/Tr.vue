@@ -8,7 +8,7 @@ type ProseTr = ComponentConfig<typeof theme, AppConfig, 'tr', 'ui.prose'>
 
 export interface ProseTrProps {
   class?: any
-  ui?: { base?: any }
+  ui?: ProseTr['slots']
 }
 
 export interface ProseTrSlots {
@@ -31,11 +31,11 @@ const props = useComponentProps('prose.tr', _props)
 const appConfig = useAppConfig() as ProseTr['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.prose?.tr))
+const ui = computed(() => tv(theme, appConfig.ui?.prose?.tr)())
 </script>
 
 <template>
-  <tr :class="ui({ class: [props.ui?.base, props.class] })">
+  <tr :class="ui.base({ class: [props.ui?.base, props.class] })">
     <slot />
   </tr>
 </template>

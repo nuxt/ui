@@ -1,7 +1,9 @@
 import type { ModuleOptions } from '../module'
 
 export default (options: Required<ModuleOptions>) => ({
-  base: 'inline-flex items-center justify-center px-1 rounded-sm font-medium font-sans uppercase',
+  slots: {
+    base: 'inline-flex items-center justify-center px-1 rounded-sm font-medium font-sans uppercase'
+  },
   variants: {
     color: {
       ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, ''])),
@@ -14,43 +16,43 @@ export default (options: Required<ModuleOptions>) => ({
       subtle: ''
     },
     size: {
-      sm: 'h-4 min-w-[16px] text-[10px]',
-      md: 'h-5 min-w-[20px] text-[11px]',
-      lg: 'h-6 min-w-[24px] text-[12px]'
+      sm: { base: 'h-4 min-w-[16px] text-[10px]' },
+      md: { base: 'h-5 min-w-[20px] text-[11px]' },
+      lg: { base: 'h-6 min-w-[24px] text-[12px]' }
     }
   },
   compoundVariants: [...(options.theme.colors || []).map((color: string) => ({
     color,
     variant: 'solid',
-    class: `text-inverted bg-${color}`
+    class: { base: `text-inverted bg-${color}` }
   })), ...(options.theme.colors || []).map((color: string) => ({
     color,
     variant: 'outline',
-    class: `ring ring-inset ring-${color}/50 text-${color}`
+    class: { base: `ring ring-inset ring-${color}/50 text-${color}` }
   })), ...(options.theme.colors || []).map((color: string) => ({
     color,
     variant: 'soft',
-    class: `text-${color} bg-${color}/10`
+    class: { base: `text-${color} bg-${color}/10` }
   })), ...(options.theme.colors || []).map((color: string) => ({
     color,
     variant: 'subtle',
-    class: `text-${color} ring ring-inset ring-${color}/25 bg-${color}/10`
+    class: { base: `text-${color} ring ring-inset ring-${color}/25 bg-${color}/10` }
   })), {
     color: 'neutral',
     variant: 'solid',
-    class: 'text-inverted bg-inverted'
+    class: { base: 'text-inverted bg-inverted' }
   }, {
     color: 'neutral',
     variant: 'outline',
-    class: 'ring ring-inset ring-accented text-default bg-default'
+    class: { base: 'ring ring-inset ring-accented text-default bg-default' }
   }, {
     color: 'neutral',
     variant: 'soft',
-    class: 'text-default bg-elevated'
+    class: { base: 'text-default bg-elevated' }
   }, {
     color: 'neutral',
     variant: 'subtle',
-    class: 'ring ring-inset ring-accented text-default bg-elevated'
+    class: { base: 'ring ring-inset ring-accented text-default bg-elevated' }
   }],
   defaultVariants: {
     variant: 'outline',

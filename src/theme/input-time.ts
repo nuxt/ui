@@ -35,13 +35,13 @@ export default (options: Required<ModuleOptions>) => {
           segment: 'not-data-[segment=literal]:w-10'
         }
       },
-      variant: (prev: Record<string, string>) => Object.fromEntries(
-        Object.entries(prev).map(([key, value]) => [key, replaceFocus(value)])
+      variant: (prev: Record<string, { base: string }>) => Object.fromEntries(
+        Object.entries(prev).map(([key, value]) => [key, { base: replaceFocus(value.base) }])
       )
     },
     compoundVariants: (prev: Record<string, any>[]) => [...prev.map(item => ({
       ...item,
-      class: typeof item.class === 'string' ? replaceFocus(item.class) : item.class
+      class: typeof item.class.base === 'string' ? { ...item.class, base: replaceFocus(item.class.base) } : item.class
     })), {
       variant: 'outline',
       class: {

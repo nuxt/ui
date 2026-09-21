@@ -15,7 +15,7 @@ import type { ComponentConfig } from '../../types/tv'
 
 type ContentSearch = ComponentConfig<typeof theme, AppConfig, 'contentSearch'>
 
-export interface ContentSearchLink extends Omit<LinkProps, 'custom'> {
+export interface ContentSearchLink extends Omit<LinkProps, 'custom' | 'ui'> {
   label?: string
   description?: string
   /**
@@ -52,7 +52,7 @@ export type ContentSearchStatus = 'idle' | 'loading' | 'ready' | 'error'
 
 export type ContentSearchFn = (query: string, opts?: ContentSearchOptions) => Promise<ContentSearchResult[]>
 
-export interface ContentSearchItem extends Omit<LinkProps, 'custom'>, CommandPaletteItem {
+export interface ContentSearchItem extends Omit<LinkProps, 'custom' | 'ui'>, CommandPaletteItem {
   level?: number
   /**
    * @IconifyIcon

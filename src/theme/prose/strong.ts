@@ -1,3 +1,5 @@
 export default {
-  base: ''
+  slots: {
+    base: ''
+  }
 }

@@ -13,7 +13,7 @@ export interface ProseStepsProps {
    */
   level?: ProseSteps['variants']['level']
   class?: any
-  ui?: { base?: any }
+  ui?: ProseSteps['slots']
 }
 
 export interface ProseStepsSlots {
@@ -36,11 +36,11 @@ const props = useComponentProps('prose.steps', _props)
 const appConfig = useAppConfig() as ProseSteps['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.prose?.steps))
+const ui = computed(() => tv(theme, appConfig.ui?.prose?.steps)({ level: props.level }))
 </script>
 
 <template>
-  <div :class="ui({ class: [props.ui?.base, props.class], level: props.level })">
+  <div :class="ui.base({ class: [props.ui?.base, props.class] })">
     <slot />
   </div>
 </template>

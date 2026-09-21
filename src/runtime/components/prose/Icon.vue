@@ -8,7 +8,7 @@ type ProseIcon = ComponentConfig<typeof theme, AppConfig, 'icon', 'ui.prose'>
 export interface ProseIconProps {
   name: string
   class?: any
-  ui?: { base?: any }
+  ui?: ProseIcon['slots']
 }
 </script>
 
@@ -26,9 +26,9 @@ const props = useComponentProps('prose.icon', _props)
 const appConfig = useAppConfig() as ProseIcon['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.prose?.icon))
+const ui = computed(() => tv(theme, appConfig.ui?.prose?.icon)())
 </script>
 
 <template>
-  <UIcon :name="props.name" :class="ui({ class: [props.ui?.base, props.class] })" />
+  <UIcon :name="props.name" :class="ui.base({ class: [props.ui?.base, props.class] })" />
 </template>

@@ -8,7 +8,7 @@ type ProseEm = ComponentConfig<typeof theme, AppConfig, 'em', 'ui.prose'>
 
 export interface ProseEmProps {
   class?: string
-  ui?: { base?: any }
+  ui?: ProseEm['slots']
 }
 
 export interface ProseEmSlots {
@@ -31,9 +31,9 @@ const props = useComponentProps('prose.em', _props)
 const appConfig = useAppConfig() as ProseEm['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.prose?.em))
+const ui = computed(() => tv(theme, appConfig.ui?.prose?.em)())
 </script>
 
 <template>
-  <em :class="ui({ class: [props.ui?.base, props.class] })"><slot /></em>
+  <em :class="ui.base({ class: [props.ui?.base, props.class] })"><slot /></em>
 </template>
