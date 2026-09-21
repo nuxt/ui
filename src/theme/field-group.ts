@@ -1,7 +1,10 @@
+const horizontal = 'not-only:first:rounded-e-none not-only:last:rounded-s-none not-last:not-first:rounded-none focus-visible:z-[1]'
+const vertical = 'not-only:first:rounded-b-none not-only:last:rounded-t-none not-last:not-first:rounded-none focus-visible:z-[1]'
+
 export const fieldGroupVariant = {
   fieldGroup: {
-    horizontal: 'not-only:first:rounded-e-none not-only:last:rounded-s-none not-last:not-first:rounded-none focus-visible:z-[1]',
-    vertical: 'not-only:first:rounded-b-none not-only:last:rounded-t-none not-last:not-first:rounded-none focus-visible:z-[1]'
+    horizontal: { base: horizontal },
+    vertical: { base: vertical }
   }
 }
 
@@ -19,7 +22,9 @@ export const fieldGroupVariantWithRoot = {
 }
 
 export default {
-  base: 'relative',
+  slots: {
+    base: 'relative'
+  },
   variants: {
     size: {
       xs: '',
@@ -29,8 +34,8 @@ export default {
       xl: ''
     },
     orientation: {
-      horizontal: 'inline-flex -space-x-px',
-      vertical: 'flex flex-col -space-y-px'
+      horizontal: { base: 'inline-flex -space-x-px' },
+      vertical: { base: 'flex flex-col -space-y-px' }
     }
   }
 }

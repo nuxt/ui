@@ -14,7 +14,7 @@ export interface PageListProps {
   as?: any
   divide?: boolean
   class?: any
-  ui?: { base?: any }
+  ui?: PageList['slots']
 }
 
 export interface PageListSlots {
@@ -39,11 +39,11 @@ const props = useComponentProps('pageList', _props)
 const appConfig = useAppConfig() as PageList['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.pageList))
+const ui = computed(() => tv(theme, appConfig.ui?.pageList)({ divide: props.divide }))
 </script>
 
 <template>
-  <Primitive :as="props.as" role="list" :class="ui({ class: [props.ui?.base, props.class], divide: props.divide })">
+  <Primitive :as="props.as" role="list" :class="ui.base({ class: [props.ui?.base, props.class] })">
     <slot />
   </Primitive>
 </template>

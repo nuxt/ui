@@ -1,12 +1,14 @@
 export default {
-  base: 'flex flex-col gap-y-8',
+  slots: {
+    base: 'flex flex-col gap-y-8'
+  },
   variants: {
     orientation: {
-      horizontal: 'lg:grid lg:grid-cols-[repeat(var(--count),minmax(0,1fr))]',
+      horizontal: { base: 'lg:grid lg:grid-cols-[repeat(var(--count),minmax(0,1fr))]' },
       vertical: ''
     },
     compact: {
-      false: 'gap-x-8'
+      false: { base: 'gap-x-8' }
     },
     scale: {
       true: ''
@@ -15,6 +17,6 @@ export default {
   compoundVariants: [{
     compact: false,
     scale: true,
-    class: 'lg:gap-x-13'
+    class: { base: 'lg:gap-x-13' }
   }]
 }

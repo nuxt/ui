@@ -63,6 +63,7 @@ export interface LinkProps extends BaseLinkProps {
   /** When `true`, only styles from `class`, `activeClass`, and `inactiveClass` will be applied. */
   raw?: boolean
   class?: any
+  ui?: Link['slots']
 }
 
 export interface LinkSlots {
@@ -90,6 +91,7 @@ defineSlots<LinkSlots>()
 
 const appConfig = useAppConfig() as Link['AppConfig']
 
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv(theme, appConfig.ui?.link))
 
 const href = computed(() => props.to ?? props.href)
@@ -127,7 +129,7 @@ const linkClass = computed(() => {
     return [props.class, active ? props.activeClass : props.inactiveClass]
   }
 
-  return ui.value({ class: [props.class, active ? props.activeClass : props.inactiveClass], active, disabled: props.disabled })
+  return ui.value({ active, disabled: props.disabled }).base({ class: [props.ui?.base, props.class, active ? props.activeClass : props.inactiveClass] })
 })
 
 const rel = computed(() => {
