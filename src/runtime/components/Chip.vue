@@ -47,7 +47,7 @@ export interface ChipSlots {
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { Primitive, Slot } from 'reka-ui'
+import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
 import { useComponentProps } from '../composables/useComponentProps'
 import { useAvatarGroup } from '../composables/useAvatarGroup'
@@ -79,10 +79,8 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.chip || {}) })({
 </script>
 
 <template>
-  <Primitive :as="props.as" :data-slot="($attrs['data-slot'] as string | undefined) ?? 'root'" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <Slot v-bind="{ ...$attrs, 'data-slot': undefined }">
-      <slot />
-    </Slot>
+  <Primitive :as="props.as" data-slot="root" v-bind="$attrs" :class="ui.root({ class: [props.ui?.root, props.class] })">
+    <slot />
 
     <span v-if="show" data-slot="base" :class="ui.base({ class: props.ui?.base })">
       <slot name="content">

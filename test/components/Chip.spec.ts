@@ -1,3 +1,4 @@
+import { h } from 'vue'
 import { describe, it, expect } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
@@ -33,5 +34,15 @@ describe('Chip', () => {
     })
 
     expect(await axe(wrapper.element)).toHaveNoViolations()
+  })
+
+  it('forwards attrs to root', async () => {
+    const wrapper = await mountSuspended(Chip, {
+      attrs: { 'aria-label': 'test-label', 'data-testid': 'test-id' },
+      slots: { default: () => h('button', 'Default slot') }
+    })
+    expect(wrapper.attributes('aria-label')).toBe('test-label')
+    expect(wrapper.attributes('data-testid')).toBe('test-id')
+    expect(wrapper.find('button').attributes('aria-label')).toBeUndefined()
   })
 })
