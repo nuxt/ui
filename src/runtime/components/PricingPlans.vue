@@ -32,7 +32,7 @@ export interface PricingPlansProps {
    */
   scale?: boolean
   class?: any
-  ui?: { base?: any }
+  ui?: PricingPlans['slots']
 }
 
 type ExtendSlotWithPlan<T extends PricingPlanProps, K extends keyof PricingPlanSlots>
@@ -71,7 +71,11 @@ const getProxySlots = () => omit(slots, ['default'])
 const appConfig = useAppConfig() as PricingPlans['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.pricingPlans))
+const ui = computed(() => tv(theme, appConfig.ui?.pricingPlans)({
+  compact: props.compact,
+  scale: props.scale,
+  orientation: props.orientation
+}))
 
 const count = computed(() => props.plans?.length || slots.default?.()?.flatMap(mapSlot).filter(Boolean)?.length || 3)
 
@@ -89,7 +93,7 @@ function mapSlot(slot: any) {
 </script>
 
 <template>
-  <Primitive :as="props.as" :data-orientation="props.orientation" :class="ui({ class: [props.ui?.base, props.class], compact: props.compact, scale: props.scale, orientation: props.orientation })" :style="{ '--count': count }">
+  <Primitive :as="props.as" :data-orientation="props.orientation" :class="ui.base({ class: [props.ui?.base, props.class] })" :style="{ '--count': count }">
     <slot>
       <UPricingPlan
         v-for="(plan, index) in props.plans"

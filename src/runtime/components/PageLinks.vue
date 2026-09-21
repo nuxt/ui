@@ -8,7 +8,7 @@ import type { ComponentConfig } from '../types/tv'
 
 type PageLinks = ComponentConfig<typeof theme, AppConfig, 'pageLinks'>
 
-export interface PageLink extends Omit<LinkProps, 'custom'> {
+export interface PageLink extends Omit<LinkProps, 'custom' | 'ui'> {
   label: string
   /**
    * @IconifyIcon

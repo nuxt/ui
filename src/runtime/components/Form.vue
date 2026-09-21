@@ -61,7 +61,7 @@ export type FormProps<S extends FormSchema, T extends boolean = true, N extends 
    */
   loadingAuto?: boolean
   class?: any
-  ui?: { base?: any }
+  ui?: FormConfig['slots']
   onSubmit?: ((event: FormSubmitEvent<FormData<S, T>>) => void) | (() => void)
 } & /** @vue-ignore */ Omit<FormHTMLAttributes, 'name'>
 
@@ -105,7 +105,7 @@ const props = useComponentProps<FormProps<S, T, N>>('form', _props)
 const appConfig = useAppConfig() as FormConfig['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.form))
+const ui = computed(() => tv(theme, appConfig.ui?.form)())
 
 const formId = props.id ?? useId() as string
 const formRef = useTemplateRef('formRef')
@@ -466,7 +466,7 @@ defineExpose(api)
     ref="formRef"
     :name="parentBus ? undefined : props.name"
     :method="parentBus ? undefined : 'post'"
-    :class="ui({ class: [props.ui?.base, props.class] })"
+    :class="ui.base({ class: [props.ui?.base, props.class] })"
     @submit.prevent="onSubmitWrapper"
   >
     <slot :errors="errors" :loading="loading" />
