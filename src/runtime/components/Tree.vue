@@ -260,6 +260,7 @@ defineExpose({
   <DefineItemTemplate v-slot="{ item, index, level }">
     <li
       role="presentation"
+      data-slot="tree-itemWithChildren"
       :class="!!nested && level > 1 ? ui.itemWithChildren({ class: [props.ui?.itemWithChildren, item.ui?.itemWithChildren] }) : ui.item({ class: [props.ui?.item, item.ui?.item] })"
     >
       <TreeItem
@@ -279,7 +280,7 @@ defineExpose({
             :is="as.link"
             :type="as.link === 'button' ? 'button' : undefined"
             :disabled="item.disabled || props.disabled"
-            data-slot="link"
+            data-slot="tree-link"
             :class="ui.link({ class: [props.ui?.link, item.ui?.link, item.class], selected: isSelected, disabled: item.disabled || props.disabled })"
             :style="!nested && level > 1 ? { paddingInlineStart: flattenedPaddingFormula(level) } : undefined"
           >
@@ -296,20 +297,20 @@ defineExpose({
                 <UIcon
                   v-if="item.icon"
                   :name="item.icon"
-                  data-slot="linkLeadingIcon"
+                  data-slot="tree-linkLeadingIcon"
                   :class="ui.linkLeadingIcon({ class: [props.ui?.linkLeadingIcon, item.ui?.linkLeadingIcon] })"
                 />
                 <UIcon
                   v-else-if="item.children?.length"
                   :name="isExpanded ? (props.expandedIcon ?? appConfig.ui.icons.folderOpen) : (props.collapsedIcon ?? appConfig.ui.icons.folder)"
-                  data-slot="linkLeadingIcon"
+                  data-slot="tree-linkLeadingIcon"
                   :class="ui.linkLeadingIcon({ class: [props.ui?.linkLeadingIcon, item.ui?.linkLeadingIcon] })"
                 />
               </slot>
 
               <span
                 v-if="getItemLabel(item) || !!slots[(item.slot ? `${item.slot}-label`: 'item-label') as keyof TreeSlots<T>]"
-                data-slot="linkLabel"
+                data-slot="tree-linkLabel"
                 :class="ui.linkLabel({ class: [props.ui?.linkLabel, item.ui?.linkLabel] })"
               >
                 <slot
@@ -323,7 +324,7 @@ defineExpose({
 
               <span
                 v-if="item.trailingIcon || item.children?.length || !!slots[(item.slot ? `${item.slot}-trailing`: 'item-trailing') as keyof TreeSlots<T>]"
-                data-slot="linkTrailing"
+                data-slot="tree-linkTrailing"
                 :class="ui.linkTrailing({ class: [props.ui?.linkTrailing, item.ui?.linkTrailing] })"
               >
                 <slot
@@ -334,13 +335,13 @@ defineExpose({
                   <UIcon
                     v-if="item.trailingIcon"
                     :name="item.trailingIcon"
-                    data-slot="linkTrailingIcon"
+                    data-slot="tree-linkTrailingIcon"
                     :class="ui.linkTrailingIcon({ class: [props.ui?.linkTrailingIcon, item.ui?.linkTrailingIcon] })"
                   />
                   <UIcon
                     v-else-if="item.children?.length"
                     :name="props.trailingIcon ?? appConfig.ui.icons.chevronDown"
-                    data-slot="linkTrailingIcon"
+                    data-slot="tree-linkTrailingIcon"
                     :class="ui.linkTrailingIcon({ class: [props.ui?.linkTrailingIcon, item.ui?.linkTrailingIcon] })"
                   />
                 </slot>
@@ -352,7 +353,7 @@ defineExpose({
         <ul
           v-if="nested && item.children?.length && isExpanded"
           role="group"
-          data-slot="listWithChildren"
+          data-slot="tree-listWithChildren"
           :class="ui.listWithChildren({ class: [props.ui?.listWithChildren, item.ui?.listWithChildren] })"
         >
           <ReuseTreeTemplate :items="item.children" :level="level + 1" />
@@ -368,7 +369,7 @@ defineExpose({
   <TreeRoot
     ref="rootRef"
     v-slot="{ flattenItems }"
-    data-slot="root"
+    data-slot="tree"
     v-bind="{ ...rootProps, ...$attrs }"
     :as="as.root"
     :model-value="props.modelValue"

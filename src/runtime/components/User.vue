@@ -79,25 +79,25 @@ const ui = computed(() => tv(theme, appConfig.ui?.user)({
     :as="props.as"
     v-bind="!props.to ? $attrs : {}"
     :data-orientation="props.orientation"
-    :data-slot="($attrs['data-slot'] as string | undefined) ?? 'root'"
+    :data-slot="($attrs['data-slot'] as string | undefined) ?? 'user'"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     @click="props.onClick"
   >
     <slot name="avatar" :ui="ui">
       <UChip v-if="props.chip && props.avatar" inset v-bind="typeof props.chip === 'object' ? props.chip : {}" :size="props.size">
-        <UAvatar :alt="props.name" v-bind="props.avatar" :size="props.size" data-slot="avatar" :class="ui.avatar({ class: props.ui?.avatar })" />
+        <UAvatar :alt="props.name" v-bind="props.avatar" :size="props.size" data-slot="user-avatar" :class="ui.avatar({ class: props.ui?.avatar })" />
       </UChip>
       <UAvatar
         v-else-if="props.avatar"
         :alt="props.name"
         v-bind="props.avatar"
         :size="props.size"
-        data-slot="avatar"
+        data-slot="user-avatar"
         :class="ui.avatar({ class: props.ui?.avatar })"
       />
     </slot>
 
-    <div data-slot="wrapper" :class="ui.wrapper({ class: props.ui?.wrapper })">
+    <div data-slot="user-wrapper" :class="ui.wrapper({ class: props.ui?.wrapper })">
       <ULink
         v-if="props.to"
         :aria-label="props.name"
@@ -109,12 +109,12 @@ const ui = computed(() => tv(theme, appConfig.ui?.user)({
       </ULink>
 
       <slot>
-        <p v-if="props.name || !!slots.name" data-slot="name" :class="ui.name({ class: props.ui?.name })">
+        <p v-if="props.name || !!slots.name" data-slot="user-name" :class="ui.name({ class: props.ui?.name })">
           <slot name="name">
             {{ props.name }}
           </slot>
         </p>
-        <p v-if="props.description || !!slots.description" data-slot="description" :class="ui.description({ class: props.ui?.description })">
+        <p v-if="props.description || !!slots.description" data-slot="user-description" :class="ui.description({ class: props.ui?.description })">
           <slot name="description">
             {{ props.description }}
           </slot>

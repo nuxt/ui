@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { camelCase } from 'scule'
+import { camelCase, kebabCase } from 'scule'
 import * as theme from '#build/ui'
 
 const props = defineProps<{
@@ -42,11 +42,22 @@ function getSlotClasses(slotName: string): string {
   return Array.isArray(baseClasses) ? baseClasses.filter(Boolean).join(' ') : baseClasses
 }
 
+// A slot is marked `data-slot="card-header"`, and the outermost one, `root` or
+// a `base` with no wrapper, carries the component name alone.
+function slotSelector(slotName: string): string {
+  const namespace = kebabCase(camelName.value)
+  const selectors = [`[data-slot="${namespace}-${slotName}"]`]
+  if (slotName === 'root' || slotName === 'base') {
+    selectors.push(`[data-slot="${namespace}"]`)
+  }
+  return selectors.join(', ')
+}
+
 function findSlotElement(slotName: string): { element: Element, inPortal: boolean } | null {
   if (!props.container) return null
 
   // First check in container
-  const containerSlot = props.container.querySelector(`[data-slot="${slotName}"]`)
+  const containerSlot = props.container.querySelector(slotSelector(slotName))
   if (containerSlot) {
     return { element: containerSlot, inPortal: false }
   }
@@ -59,7 +70,7 @@ function findSlotElement(slotName: string): { element: Element, inPortal: boolea
       if (popoverContentRef.value && child.contains(popoverContentRef.value)) {
         continue
       }
-      const portalSlot = child.querySelector(`[data-slot="${slotName}"]`)
+      const portalSlot = child.querySelector(slotSelector(slotName))
       if (portalSlot) {
         return { element: portalSlot, inPortal: true }
       }

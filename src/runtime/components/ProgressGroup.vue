@@ -146,43 +146,43 @@ const valueLabels = computed(() => (props.items ?? []).map((item) => {
 </script>
 
 <template>
-  <Primitive :as="props.as" :data-orientation="props.orientation" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <div v-if="props.status || !!slots.status" data-slot="status" :class="ui.status({ class: props.ui?.status })" :style="statusStyle">
+  <Primitive :as="props.as" :data-orientation="props.orientation" data-slot="progress-group" :class="ui.root({ class: [props.ui?.root, props.class] })">
+    <div v-if="props.status || !!slots.status" data-slot="progress-group-status" :class="ui.status({ class: props.ui?.status })" :style="statusStyle">
       <slot name="status" :percent="percent">
         {{ percent }}%
       </slot>
     </div>
 
-    <div data-slot="base" :class="ui.base({ class: props.ui?.base })">
+    <div data-slot="progress-group-base" :class="ui.base({ class: props.ui?.base })">
       <ProgressRoot
         v-for="(item, index) in props.items"
         :key="index"
         :model-value="values[index]"
         :max="max"
         :get-value-label="valueLabels[index]"
-        data-slot="segment"
+        data-slot="progress-group-segment"
         :class="ui.segment({ class: [props.ui?.segment, item.ui?.segment] })"
         :style="segmentStyle(index)"
       >
-        <ProgressIndicator data-slot="indicator" :class="ui.indicator({ color: itemColors[index], class: [props.ui?.indicator, item.ui?.indicator] })" :style="customColors[index] ? { backgroundColor: customColors[index] } : undefined" />
+        <ProgressIndicator data-slot="progress-group-indicator" :class="ui.indicator({ color: itemColors[index], class: [props.ui?.indicator, item.ui?.indicator] })" :style="customColors[index] ? { backgroundColor: customColors[index] } : undefined" />
       </ProgressRoot>
     </div>
 
-    <ul v-if="hasList" data-slot="list" :class="ui.list({ class: props.ui?.list })">
-      <li v-for="(item, index) in props.items" :key="index" data-slot="item" :class="ui.item({ class: [props.ui?.item, item.ui?.item, item.class] })">
+    <ul v-if="hasList" data-slot="progress-group-list" :class="ui.list({ class: props.ui?.list })">
+      <li v-for="(item, index) in props.items" :key="index" data-slot="progress-group-item" :class="ui.item({ class: [props.ui?.item, item.ui?.item, item.class] })">
         <slot :name="((item.slot || 'item') as keyof ProgressGroupSlots<T>)" :item="(item as Extract<T, { slot: string; }>)" :index="index" :percent="percents[index] ?? 0">
           <slot :name="((item.slot ? `${item.slot}-leading` : 'item-leading') as keyof ProgressGroupSlots<T>)" :item="(item as Extract<T, { slot: string; }>)" :index="index" :percent="percents[index] ?? 0">
-            <UIcon v-if="item.icon" :name="item.icon" data-slot="itemLeadingIcon" :class="ui.itemLeadingIcon({ color: itemColors[index], class: [props.ui?.itemLeadingIcon, item.ui?.itemLeadingIcon] })" :style="customColors[index] ? { color: customColors[index] } : undefined" />
-            <span v-else data-slot="itemLeadingDot" :class="ui.itemLeadingDot({ color: itemColors[index], class: [props.ui?.itemLeadingDot, item.ui?.itemLeadingDot] })" :style="customColors[index] ? { backgroundColor: customColors[index] } : undefined" />
+            <UIcon v-if="item.icon" :name="item.icon" data-slot="progress-group-itemLeadingIcon" :class="ui.itemLeadingIcon({ color: itemColors[index], class: [props.ui?.itemLeadingIcon, item.ui?.itemLeadingIcon] })" :style="customColors[index] ? { color: customColors[index] } : undefined" />
+            <span v-else data-slot="progress-group-itemLeadingDot" :class="ui.itemLeadingDot({ color: itemColors[index], class: [props.ui?.itemLeadingDot, item.ui?.itemLeadingDot] })" :style="customColors[index] ? { backgroundColor: customColors[index] } : undefined" />
           </slot>
 
-          <span v-if="item.label || !!slots[(item.slot ? `${item.slot}-label` : 'item-label') as keyof ProgressGroupSlots<T>]" data-slot="itemLabel" :class="ui.itemLabel({ class: [props.ui?.itemLabel, item.ui?.itemLabel] })">
+          <span v-if="item.label || !!slots[(item.slot ? `${item.slot}-label` : 'item-label') as keyof ProgressGroupSlots<T>]" data-slot="progress-group-itemLabel" :class="ui.itemLabel({ class: [props.ui?.itemLabel, item.ui?.itemLabel] })">
             <slot :name="((item.slot ? `${item.slot}-label` : 'item-label') as keyof ProgressGroupSlots<T>)" :item="(item as Extract<T, { slot: string; }>)" :index="index" :percent="percents[index] ?? 0">
               {{ item.label }}
             </slot>
           </span>
 
-          <span data-slot="itemTrailing" :class="ui.itemTrailing({ class: [props.ui?.itemTrailing, item.ui?.itemTrailing] })">
+          <span data-slot="progress-group-itemTrailing" :class="ui.itemTrailing({ class: [props.ui?.itemTrailing, item.ui?.itemTrailing] })">
             <slot :name="((item.slot ? `${item.slot}-trailing` : 'item-trailing') as keyof ProgressGroupSlots<T>)" :item="(item as Extract<T, { slot: string; }>)" :index="index" :percent="percents[index] ?? 0">
               {{ Math.round(percents[index] ?? 0) }}%
             </slot>

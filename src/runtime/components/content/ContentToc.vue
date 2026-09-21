@@ -177,7 +177,7 @@ watch(activeIndex, (index) => {
   }
 
   nextTick(() => {
-    const link = container.querySelectorAll<HTMLElement>('a[data-slot="link"]')[index]
+    const link = container.querySelectorAll<HTMLElement>('a[data-slot="content-toc-link"]')[index]
     if (!link) {
       return
     }
@@ -262,11 +262,11 @@ onUnmounted(() => {
 <template>
   <!-- eslint-disable-next-line vue/no-template-shadow -->
   <DefineListTemplate v-slot="{ links, level }">
-    <ul :class="level > 0 ? ui.listWithChildren({ class: props.ui?.listWithChildren }) : ui.list({ class: props.ui?.list })">
-      <li v-for="(link, index) in links" :key="index" :class="link.children && link.children.length > 0 ? ui.itemWithChildren({ class: [props.ui?.itemWithChildren, link.ui?.itemWithChildren] }) : ui.item({ class: [props.ui?.item, link.ui?.item] })">
-        <a :href="`#${link.id}`" data-slot="link" :class="ui.link({ class: [props.ui?.link, link.ui?.link, link.class], active: activeHeadings.includes(link.id) })" @click.prevent="scrollToHeading(link.id)">
+    <ul data-slot="content-toc-listWithChildren" :class="level > 0 ? ui.listWithChildren({ class: props.ui?.listWithChildren }) : ui.list({ class: props.ui?.list })">
+      <li v-for="(link, index) in links" :key="index" data-slot="content-toc-itemWithChildren" :class="link.children && link.children.length > 0 ? ui.itemWithChildren({ class: [props.ui?.itemWithChildren, link.ui?.itemWithChildren] }) : ui.item({ class: [props.ui?.item, link.ui?.item] })">
+        <a :href="`#${link.id}`" data-slot="content-toc-link" :class="ui.link({ class: [props.ui?.link, link.ui?.link, link.class], active: activeHeadings.includes(link.id) })" @click.prevent="scrollToHeading(link.id)">
           <slot name="link" :link="link">
-            <span data-slot="linkText" :class="ui.linkText({ class: [props.ui?.linkText, link.ui?.linkText] })">
+            <span data-slot="content-toc-linkText" :class="ui.linkText({ class: [props.ui?.linkText, link.ui?.linkText] })">
               {{ link.text }}
             </span>
           </slot>
@@ -280,21 +280,21 @@ onUnmounted(() => {
   <DefineTriggerTemplate v-slot="{ open }">
     <slot name="leading" :open="open" :ui="ui" />
 
-    <span data-slot="title" :class="ui.title({ class: props.ui?.title })">
+    <span data-slot="content-toc-title" :class="ui.title({ class: props.ui?.title })">
       <slot :open="open">{{ props.title || t('contentToc.title') }}</slot>
     </span>
 
-    <span data-slot="trailing" :class="ui.trailing({ class: props.ui?.trailing })">
+    <span data-slot="content-toc-trailing" :class="ui.trailing({ class: props.ui?.trailing })">
       <slot name="trailing" :open="open" :ui="ui">
-        <UIcon :name="props.trailingIcon || appConfig.ui.icons.chevronDown" data-slot="trailingIcon" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
+        <UIcon :name="props.trailingIcon || appConfig.ui.icons.chevronDown" data-slot="content-toc-trailingIcon" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
       </slot>
     </span>
   </DefineTriggerTemplate>
 
   <DefineContentTemplate>
-    <div v-if="props.highlight" data-slot="indicator" :class="ui.indicator({ class: props.ui?.indicator })" :style="{ ...indicatorStyle, ...(circuitMaskStyle || {}) }">
-      <div data-slot="indicatorLine" :class="ui.indicatorLine({ class: props.ui?.indicatorLine })" />
-      <div v-if="indicatorStyle" data-slot="indicatorActive" :class="ui.indicatorActive({ class: props.ui?.indicatorActive })" />
+    <div v-if="props.highlight" data-slot="content-toc-indicator" :class="ui.indicator({ class: props.ui?.indicator })" :style="{ ...indicatorStyle, ...(circuitMaskStyle || {}) }">
+      <div data-slot="content-toc-indicatorLine" :class="ui.indicatorLine({ class: props.ui?.indicatorLine })" />
+      <div v-if="indicatorStyle" data-slot="content-toc-indicatorActive" :class="ui.indicatorActive({ class: props.ui?.indicatorActive })" />
     </div>
 
     <slot name="content" :links="props.links!">
@@ -302,31 +302,31 @@ onUnmounted(() => {
     </slot>
   </DefineContentTemplate>
 
-  <CollapsibleRoot v-slot="{ open }" data-slot="root" v-bind="{ ...rootProps, ...$attrs }" :default-open="props.defaultOpen" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <div data-slot="container" :class="ui.container({ class: props.ui?.container })">
-      <div v-if="!!slots.top" data-slot="top" :class="ui.top({ class: props.ui?.top })">
+  <CollapsibleRoot v-slot="{ open }" data-slot="content-toc" v-bind="{ ...rootProps, ...$attrs }" :default-open="props.defaultOpen" :class="ui.root({ class: [props.ui?.root, props.class] })">
+    <div data-slot="content-toc-container" :class="ui.container({ class: props.ui?.container })">
+      <div v-if="!!slots.top" data-slot="content-toc-top" :class="ui.top({ class: props.ui?.top })">
         <slot name="top" :links="props.links" />
       </div>
 
       <template v-if="props.links?.length">
-        <CollapsibleTrigger data-slot="trigger" :class="ui.trigger({ class: [props.ui?.trigger, prefix('lg:hidden')] })">
+        <CollapsibleTrigger data-slot="content-toc-trigger" :class="ui.trigger({ class: [props.ui?.trigger, prefix('lg:hidden')] })">
           <ReuseTriggerTemplate :open="open" />
         </CollapsibleTrigger>
 
-        <CollapsibleContent data-slot="content" :class="ui.content({ class: [props.ui?.content, prefix('lg:hidden')] })">
+        <CollapsibleContent data-slot="content-toc-content" :class="ui.content({ class: [props.ui?.content, prefix('lg:hidden')] })">
           <ReuseContentTemplate />
         </CollapsibleContent>
 
-        <p data-slot="trigger" :class="ui.trigger({ class: [props.ui?.trigger, prefix('hidden lg:flex')] })">
+        <p data-slot="content-toc-trigger" :class="ui.trigger({ class: [props.ui?.trigger, prefix('hidden lg:flex')] })">
           <ReuseTriggerTemplate :open="open" />
         </p>
 
-        <div ref="contentRef" data-slot="content" :class="ui.content({ class: [props.ui?.content, prefix('hidden lg:flex')] })" :style="[listStyle, scrollShadowStyle]">
+        <div ref="contentRef" data-slot="content-toc-content" :class="ui.content({ class: [props.ui?.content, prefix('hidden lg:flex')] })" :style="[listStyle, scrollShadowStyle]">
           <ReuseContentTemplate />
         </div>
       </template>
 
-      <div v-if="!!slots.bottom" data-slot="bottom" :class="ui.bottom({ class: props.ui?.bottom, body: !!slots.top || !!props.links?.length })">
+      <div v-if="!!slots.bottom" data-slot="content-toc-bottom" :class="ui.bottom({ class: props.ui?.bottom, body: !!slots.top || !!props.links?.length })">
         <slot name="bottom" :links="props.links" />
       </div>
     </div>

@@ -92,16 +92,16 @@ const ui = computed(() => tv(theme, appConfig.ui?.tooltip)())
 
     <TooltipPortal v-bind="portalProps">
       <FieldGroupReset>
-        <TooltipContent v-bind="contentProps" data-slot="content" :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })">
+        <TooltipContent v-bind="contentProps" data-slot="tooltip-content" :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })">
           <slot name="content" :ui="ui">
-            <span v-if="props.text" data-slot="text" :class="ui.text({ class: props.ui?.text })">{{ props.text }}</span>
+            <span v-if="props.text" data-slot="tooltip-text" :class="ui.text({ class: props.ui?.text })">{{ props.text }}</span>
 
-            <span v-if="props.kbds?.length" data-slot="kbds" :class="ui.kbds({ class: props.ui?.kbds })">
+            <span v-if="props.kbds?.length" data-slot="tooltip-kbds" :class="ui.kbds({ class: props.ui?.kbds })">
               <UKbd v-for="(kbd, index) in props.kbds" :key="index" :size="((props.ui?.kbdsSize || ui.kbdsSize()) as KbdProps['size'])" v-bind="typeof kbd === 'string' ? { value: kbd } : kbd" />
             </span>
           </slot>
 
-          <TooltipArrow v-if="!!props.arrow" v-bind="arrowProps" data-slot="arrow" :class="ui.arrow({ class: props.ui?.arrow })" />
+          <TooltipArrow v-if="!!props.arrow" v-bind="arrowProps" data-slot="tooltip-arrow" :class="ui.arrow({ class: props.ui?.arrow })" />
         </TooltipContent>
       </FieldGroupReset>
     </TooltipPortal>

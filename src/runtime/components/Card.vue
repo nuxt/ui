@@ -52,16 +52,16 @@ const ui = computed(() => tv(theme, appConfig.ui?.card)({
 </script>
 
 <template>
-  <Primitive :as="props.as" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <div v-if="!!slots.header || (props.title || !!slots.title) || (props.description || !!slots.description)" data-slot="header" :class="ui.header({ class: props.ui?.header })">
+  <Primitive :as="props.as" data-slot="card" :class="ui.root({ class: [props.ui?.root, props.class] })">
+    <div v-if="!!slots.header || (props.title || !!slots.title) || (props.description || !!slots.description)" data-slot="card-header" :class="ui.header({ class: props.ui?.header })">
       <slot name="header">
-        <div v-if="props.title || !!slots.title" data-slot="title" :class="ui.title({ class: props.ui?.title })">
+        <div v-if="props.title || !!slots.title" data-slot="card-title" :class="ui.title({ class: props.ui?.title })">
           <slot name="title">
             {{ props.title }}
           </slot>
         </div>
 
-        <div v-if="props.description || !!slots.description" data-slot="description" :class="ui.description({ class: props.ui?.description })">
+        <div v-if="props.description || !!slots.description" data-slot="card-description" :class="ui.description({ class: props.ui?.description })">
           <slot name="description">
             {{ props.description }}
           </slot>
@@ -69,11 +69,11 @@ const ui = computed(() => tv(theme, appConfig.ui?.card)({
       </slot>
     </div>
 
-    <div v-if="!!slots.default" data-slot="body" :class="ui.body({ class: props.ui?.body })">
+    <div v-if="!!slots.default" data-slot="card-body" :class="ui.body({ class: props.ui?.body })">
       <slot />
     </div>
 
-    <div v-if="!!slots.footer" data-slot="footer" :class="ui.footer({ class: props.ui?.footer })">
+    <div v-if="!!slots.footer" data-slot="card-footer" :class="ui.footer({ class: props.ui?.footer })">
       <slot name="footer" />
     </div>
   </Primitive>

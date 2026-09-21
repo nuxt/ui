@@ -357,7 +357,7 @@ defineExpose({
     :title="props.title || t('contentSearch.title')"
     :description="props.description || t('contentSearch.description')"
     v-bind="modalProps"
-    data-slot="modal"
+    data-slot="content-search-modal"
     :class="ui.modal({ class: [props.ui?.modal, props.class] })"
   >
     <template #content="contentData">

@@ -105,32 +105,32 @@ const ui = computed(() => tv(theme, appConfig.ui?.alert)({
 </script>
 
 <template>
-  <Primitive :as="props.as" :data-orientation="props.orientation" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <Primitive :as="props.as" :data-orientation="props.orientation" data-slot="alert" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <slot name="leading" :ui="ui">
-      <UAvatar v-if="props.avatar" :size="((props.ui?.avatarSize || ui.avatarSize()) as AvatarProps['size'])" v-bind="props.avatar" data-slot="avatar" :class="ui.avatar({ class: props.ui?.avatar })" />
-      <UIcon v-else-if="props.icon" :name="props.icon" data-slot="icon" :class="ui.icon({ class: props.ui?.icon })" />
+      <UAvatar v-if="props.avatar" :size="((props.ui?.avatarSize || ui.avatarSize()) as AvatarProps['size'])" v-bind="props.avatar" data-slot="alert-avatar" :class="ui.avatar({ class: props.ui?.avatar })" />
+      <UIcon v-else-if="props.icon" :name="props.icon" data-slot="alert-icon" :class="ui.icon({ class: props.ui?.icon })" />
     </slot>
 
-    <div data-slot="wrapper" :class="ui.wrapper({ class: props.ui?.wrapper })">
-      <div v-if="props.title || !!slots.title" data-slot="title" :class="ui.title({ class: props.ui?.title })">
+    <div data-slot="alert-wrapper" :class="ui.wrapper({ class: props.ui?.wrapper })">
+      <div v-if="props.title || !!slots.title" data-slot="alert-title" :class="ui.title({ class: props.ui?.title })">
         <slot name="title">
           {{ props.title }}
         </slot>
       </div>
-      <div v-if="props.description || !!slots.description" data-slot="description" :class="ui.description({ class: props.ui?.description })">
+      <div v-if="props.description || !!slots.description" data-slot="alert-description" :class="ui.description({ class: props.ui?.description })">
         <slot name="description">
           {{ props.description }}
         </slot>
       </div>
 
-      <div v-if="props.orientation === 'vertical' && (props.actions?.length || !!slots.actions)" data-slot="actions" :class="ui.actions({ class: props.ui?.actions })">
+      <div v-if="props.orientation === 'vertical' && (props.actions?.length || !!slots.actions)" data-slot="alert-actions" :class="ui.actions({ class: props.ui?.actions })">
         <slot name="actions">
           <UButton v-for="(action, index) in props.actions" :key="index" size="xs" v-bind="action" />
         </slot>
       </div>
     </div>
 
-    <div v-if="(props.orientation === 'horizontal' && (props.actions?.length || !!slots.actions)) || props.close" data-slot="actions" :class="ui.actions({ class: props.ui?.actions, orientation: 'horizontal' })">
+    <div v-if="(props.orientation === 'horizontal' && (props.actions?.length || !!slots.actions)) || props.close" data-slot="alert-actions" :class="ui.actions({ class: props.ui?.actions, orientation: 'horizontal' })">
       <template v-if="props.orientation === 'horizontal' && (props.actions?.length || !!slots.actions)">
         <slot name="actions">
           <UButton v-for="(action, index) in props.actions" :key="index" size="xs" v-bind="action" />
@@ -145,7 +145,7 @@ const ui = computed(() => tv(theme, appConfig.ui?.alert)({
           variant="link"
           :aria-label="t('alert.close')"
           v-bind="(typeof props.close === 'object' ? props.close : {})"
-          data-slot="close"
+          data-slot="alert-close"
           :class="ui.close({ class: props.ui?.close })"
           @click="emits('update:open', false)"
         />

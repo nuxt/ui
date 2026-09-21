@@ -352,6 +352,7 @@ onBeforeUnmount(() => {
     </Slot>
     <ULinkBase
       v-else
+      data-slot="link"
       v-bind="{
         ...$attrs,
         ...(exact && isExactActive ? { 'aria-current': props.ariaCurrentValue } : {}),
@@ -385,6 +386,7 @@ onBeforeUnmount(() => {
   </Slot>
   <ULinkBase
     v-else
+    data-slot="link"
     v-bind="{
       ...$attrs,
       as,

@@ -328,9 +328,9 @@ function getDropdownItems(item: EditorToolbarDropdownItem) {
       ...$attrs
     }"
   >
-    <Primitive :as="props.as" role="toolbar" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+    <Primitive :as="props.as" role="toolbar" data-slot="editor-toolbar" :class="ui.root({ class: [props.ui?.root, props.class] })">
       <template v-for="(group, groupIndex) in groups" :key="`group-${groupIndex}`">
-        <div role="group" data-slot="group" :class="ui.group({ class: props.ui?.group })">
+        <div role="group" data-slot="editor-toolbar-group" :class="ui.group({ class: props.ui?.group })">
           <template v-for="(item, index) in group" :key="`group-${groupIndex}-${index}`">
             <slot
               :name="((item.slot || 'item') as keyof EditorToolbarSlots<T>)"
@@ -376,7 +376,7 @@ function getDropdownItems(item: EditorToolbarDropdownItem) {
 
         <Separator
           v-if="groupIndex < groups.length - 1"
-          data-slot="separator"
+          data-slot="editor-toolbar-separator"
           :class="ui.separator({ class: props.ui?.separator })"
           orientation="vertical"
         />
