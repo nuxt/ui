@@ -88,8 +88,11 @@ export function useFilter() {
           result.push({ item, score: s })
         }
       }
-      result.sort((a, b) => a.score - b.score)
-      return result.map(({ item }) => item)
+      // Sorting `result` itself would pull every structural item to the front,
+      // so only the matches are reordered and they refill the slots they held.
+      const matches = result.filter(({ score }) => score !== -1).sort((a, b) => a.score - b.score)
+      let index = 0
+      return result.map(({ item, score }) => score === -1 ? item : matches[index++]!.item)
     }).filter(group => group.some(item => !options.isStructural?.(item)))
   }
 
