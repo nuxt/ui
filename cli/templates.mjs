@@ -30,6 +30,8 @@ const component = ({ name, primitive, prose, content }) => {
   const appConfigLookup = prose
     ? `appConfig.ui?.prose?.${camelName}`
     : `appConfig.ui?.${camelName}`
+  // A prose component stands for one HTML element, its `base`.
+  const slot = prose ? 'base' : 'root'
 
   return {
     filename: `src/runtime/components/${dirPrefix}${upperName}.vue`,
@@ -77,7 +79,7 @@ const ui = computed(() => tv(theme, ${appConfigLookup})())
 </script>
 
 <template>
-  <Primitive :as="props.as" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <Primitive :as="props.as" data-slot="${slot}" :class="ui.${slot}({ class: [props.ui?.${slot}, props.class] })">
     <slot />
   </Primitive>
 </template>
@@ -130,7 +132,7 @@ const ui = computed(() => tv(theme, ${appConfigLookup})())
 </script>
 
 <template>
-  <${upperName}Root v-bind="rootProps" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <${upperName}Root v-bind="rootProps" data-slot="${slot}" :class="ui.${slot}({ class: [props.ui?.${slot}, props.class] })">
     <slot />
   </${upperName}Root>
 </template>
@@ -140,13 +142,14 @@ const ui = computed(() => tv(theme, ${appConfigLookup})())
 
 const theme = ({ name, prose, content }) => {
   const kebabName = kebabCase(name)
+  const slot = prose ? 'base' : 'root'
 
   return {
     filename: `src/theme/${prose ? 'prose/' : ''}${content ? 'content/' : ''}${kebabName}.ts`,
     contents: `
 export default {
   slots: {
-    root: ''
+    ${slot}: ''
   }
 }
 `
