@@ -11,7 +11,7 @@ import type { ComponentConfig } from '../types/tv'
 
 type Breadcrumb = ComponentConfig<typeof theme, AppConfig, 'breadcrumb'>
 
-export interface BreadcrumbItem extends Omit<LinkProps, 'raw' | 'custom'> {
+export interface BreadcrumbItem extends Omit<LinkProps, 'raw' | 'custom' | 'ui'> {
   label?: string
   /**
    * @IconifyIcon

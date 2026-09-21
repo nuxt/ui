@@ -9,7 +9,7 @@ type ProseTh = ComponentConfig<typeof theme, AppConfig, 'th', 'ui.prose'>
 export interface ProseThProps {
   align?: 'left' | 'center' | 'right'
   class?: any
-  ui?: { base?: any }
+  ui?: ProseTh['slots']
 }
 
 export interface ProseThSlots {
@@ -32,11 +32,11 @@ const props = useComponentProps('prose.th', _props)
 const appConfig = useAppConfig() as ProseTh['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.prose?.th))
+const ui = computed(() => tv(theme, appConfig.ui?.prose?.th)({ align: props.align }))
 </script>
 
 <template>
-  <th :class="ui({ align: props.align, class: [props.ui?.base, props.class] })">
+  <th :class="ui.base({ class: [props.ui?.base, props.class] })">
     <slot />
   </th>
 </template>
