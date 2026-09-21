@@ -72,5 +72,6 @@ describe('Avatar', () => {
     expect(img.attributes('loading')).toBe('lazy')
     expect(img.attributes('crossorigin')).toBe('anonymous')
     expect(img.attributes('aria-label')).toBeUndefined()
+    expect(img.attributes('data-state')).toBeUndefined()
   })
 })
