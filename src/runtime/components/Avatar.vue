@@ -42,7 +42,7 @@ export interface AvatarSlots {
 </script>
 
 <script setup lang="ts">
-import { ref, computed, watch, useAttrs } from 'vue'
+import { ref, computed, watch, useAttrs, provide } from 'vue'
 import { Primitive } from 'reka-ui'
 import { defu } from 'defu'
 import { useAppConfig } from '#imports'
@@ -51,7 +51,7 @@ import { useComponentProps } from '../composables/useComponentProps'
 import { useAvatarGroup } from '../composables/useAvatarGroup'
 import { tv } from '../utils/tv'
 import UIcon from './Icon.vue'
-import UChip from './Chip.vue'
+import UChip, { chipRootAttrsInjectionKey } from './Chip.vue'
 
 defineOptions({ inheritAttrs: false })
 
@@ -100,6 +100,10 @@ const imgAttrKeys = ['crossorigin', 'decoding', 'height', 'loading', 'referrerpo
 const imgAttrs = computed(() => Object.fromEntries(Object.entries(attrs).filter(([key]) => imgAttrKeys.includes(key))))
 const rootAttrs = computed(() => Object.fromEntries(Object.entries(attrs).filter(([key]) => !imgAttrKeys.includes(key))))
 
+// When rendering as `UChip`, bind these onto the chip's own root instead of passing them down
+// as regular fallthrough attrs, since `UChip` otherwise forwards its attrs to its slotted content
+provide(chipRootAttrsInjectionKey, rootAttrs)
+
 watch(() => props.src, () => {
   if (error.value) {
     error.value = false
@@ -115,7 +119,7 @@ function onError() {
   <component
     :is="props.chip ? UChip : Primitive"
     :as="as.root"
-    v-bind="{ ...rootAttrs, ...(props.chip ? (typeof props.chip === 'object' ? { inset: true, ...props.chip } : { inset: true }) : {}) }"
+    v-bind="props.chip ? (typeof props.chip === 'object' ? { inset: true, ...props.chip } : { inset: true }) : rootAttrs"
     :data-slot="($attrs['data-slot'] as string | undefined) ?? 'root'"
     :class="rootClass"
     :style="props.style"
