@@ -14,7 +14,7 @@ import type { ComponentConfig } from '../types/tv'
 
 type DropdownMenu = ComponentConfig<typeof theme, AppConfig, 'dropdownMenu'>
 
-export interface DropdownMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'custom'> {
+export interface DropdownMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'custom' | 'ui'> {
   label?: string
   description?: string
   /**

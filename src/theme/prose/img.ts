@@ -7,18 +7,18 @@ export default {
   },
   variants: {
     zoom: {
-      true: 'will-change-transform'
+      true: { base: 'will-change-transform' }
     },
     open: {
       true: ''
     },
     width: {
-      false: 'w-full'
+      false: { base: 'w-full' }
     }
   },
   compoundVariants: [{
     zoom: true,
     open: false,
-    class: 'cursor-zoom-in'
+    class: { base: 'cursor-zoom-in' }
   }]
 }

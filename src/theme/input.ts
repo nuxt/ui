@@ -57,11 +57,11 @@ export default (options: Required<ModuleOptions>) => ({
       }
     },
     variant: {
-      outline: 'text-highlighted bg-default ring ring-inset ring-accented',
-      soft: 'text-highlighted bg-elevated/50 hover:bg-elevated focus:bg-elevated disabled:bg-elevated/50',
-      subtle: 'text-highlighted bg-elevated ring ring-inset ring-accented',
-      ghost: 'text-highlighted bg-transparent hover:bg-elevated focus:bg-elevated disabled:bg-transparent dark:disabled:bg-transparent',
-      none: 'text-highlighted bg-transparent focus:outline-none'
+      outline: { base: 'text-highlighted bg-default ring ring-inset ring-accented' },
+      soft: { base: 'text-highlighted bg-elevated/50 hover:bg-elevated focus:bg-elevated disabled:bg-elevated/50' },
+      subtle: { base: 'text-highlighted bg-elevated ring ring-inset ring-accented' },
+      ghost: { base: 'text-highlighted bg-transparent hover:bg-elevated focus:bg-elevated disabled:bg-transparent dark:disabled:bg-transparent' },
+      none: { base: 'text-highlighted bg-transparent focus:outline-none' }
     },
     color: {
       ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, ''])),
@@ -83,73 +83,73 @@ export default (options: Required<ModuleOptions>) => ({
       false: ''
     },
     type: {
-      file: 'file:me-1.5 file:font-medium file:text-muted file:outline-none'
+      file: { base: 'file:me-1.5 file:font-medium file:text-muted file:outline-none' }
     }
   },
   compoundVariants: [...(options.theme.colors || []).map((color: string) => ({
     color,
     variant: ['outline', 'subtle'],
-    class: `outline-${color}/25 focus-visible:outline-3 focus-visible:ring-${color}`
+    class: { base: `outline-${color}/25 focus-visible:outline-3 focus-visible:ring-${color}` }
   })), ...(options.theme.colors || []).map((color: string) => ({
     color,
     variant: ['soft', 'ghost'],
-    class: `outline-${color}/25 focus-visible:outline-3`
+    class: { base: `outline-${color}/25 focus-visible:outline-3` }
   })), ...(options.theme.colors || []).map((color: string) => ({
     color,
     highlight: true,
-    class: `ring ring-inset ring-${color}`
+    class: { base: `ring ring-inset ring-${color}` }
   })), {
     color: 'neutral',
     variant: ['outline', 'subtle'],
-    class: 'outline-inverted/25 focus-visible:outline-3 focus-visible:ring-inverted'
+    class: { base: 'outline-inverted/25 focus-visible:outline-3 focus-visible:ring-inverted' }
   }, {
     color: 'neutral',
     variant: ['soft', 'ghost'],
-    class: 'outline-inverted/25 focus-visible:outline-3'
+    class: { base: 'outline-inverted/25 focus-visible:outline-3' }
   }, {
     color: 'neutral',
     highlight: true,
-    class: 'ring ring-inset ring-inverted'
+    class: { base: 'ring ring-inset ring-inverted' }
   }, {
     leading: true,
     size: 'xs',
-    class: 'ps-7'
+    class: { base: 'ps-7' }
   }, {
     leading: true,
     size: 'sm',
-    class: 'ps-8'
+    class: { base: 'ps-8' }
   }, {
     leading: true,
     size: 'md',
-    class: 'ps-9'
+    class: { base: 'ps-9' }
   }, {
     leading: true,
     size: 'lg',
-    class: 'ps-10'
+    class: { base: 'ps-10' }
   }, {
     leading: true,
     size: 'xl',
-    class: 'ps-11'
+    class: { base: 'ps-11' }
   }, {
     trailing: true,
     size: 'xs',
-    class: 'pe-7'
+    class: { base: 'pe-7' }
   }, {
     trailing: true,
     size: 'sm',
-    class: 'pe-8'
+    class: { base: 'pe-8' }
   }, {
     trailing: true,
     size: 'md',
-    class: 'pe-9'
+    class: { base: 'pe-9' }
   }, {
     trailing: true,
     size: 'lg',
-    class: 'pe-10'
+    class: { base: 'pe-10' }
   }, {
     trailing: true,
     size: 'xl',
-    class: 'pe-11'
+    class: { base: 'pe-11' }
   }, {
     loading: true,
     leading: true,
@@ -166,19 +166,19 @@ export default (options: Required<ModuleOptions>) => ({
   }, {
     fixed: false,
     size: 'xs',
-    class: 'md:text-xs'
+    class: { base: 'md:text-xs' }
   }, {
     fixed: false,
     size: 'sm',
-    class: 'md:text-xs'
+    class: { base: 'md:text-xs' }
   }, {
     fixed: false,
     size: 'md',
-    class: 'md:text-sm'
+    class: { base: 'md:text-sm' }
   }, {
     fixed: false,
     size: 'lg',
-    class: 'md:text-sm'
+    class: { base: 'md:text-sm' }
   }],
   defaultVariants: {
     size: 'md',

@@ -21,7 +21,7 @@ export interface DashboardSidebarToggleProps extends Omit<ButtonProps, LinkProps
    * @defaultValue 'left'
    */
   side?: 'left' | 'right'
-  ui?: { base?: any }
+  ui?: DashboardSidebarToggle['slots']
 }
 </script>
 
@@ -53,7 +53,7 @@ const appConfig = useAppConfig() as DashboardSidebarToggle['AppConfig']
 const { sidebarOpen, toggleSidebar } = useDashboard({ sidebarOpen: ref(false), toggleSidebar: () => {} })
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.dashboardSidebarToggle))
+const ui = computed(() => tv(theme, appConfig.ui?.dashboardSidebarToggle)({ side: props.side }))
 </script>
 
 <template>
@@ -64,7 +64,7 @@ const ui = computed(() => tv(theme, appConfig.ui?.dashboardSidebarToggle))
       'aria-label': sidebarOpen ? t('dashboardSidebarToggle.close') : t('dashboardSidebarToggle.open'),
       ...$attrs
     }"
-    :class="ui({ class: [props.ui?.base, props.class], side: props.side })"
+    :class="ui.base({ class: [props.ui?.base, props.class] })"
     @click="toggleSidebar"
   />
 </template>

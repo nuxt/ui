@@ -9,7 +9,7 @@ type ProseKbd = ComponentConfig<typeof theme, AppConfig, 'kbd', 'ui.prose'>
 export interface ProseKbdProps {
   value?: string
   class?: any
-  ui?: { base?: any }
+  ui?: ProseKbd['slots']
 }
 
 export interface ProseKbdSlots {
@@ -32,11 +32,11 @@ const props = useComponentProps('prose.kbd', _props)
 const appConfig = useAppConfig() as ProseKbd['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.prose?.kbd))
+const ui = computed(() => tv(theme, appConfig.ui?.prose?.kbd)())
 </script>
 
 <template>
-  <UKbd :value="props.value" :class="ui({ class: [props.ui?.base, props.class] })">
+  <UKbd :value="props.value" :class="ui.base({ class: [props.ui?.base, props.class] })">
     <slot />
   </UKbd>
 </template>

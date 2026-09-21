@@ -27,7 +27,7 @@ export interface KbdProps {
    */
   size?: Kbd['variants']['size']
   class?: any
-  ui?: { base?: any }
+  ui?: Kbd['slots']
 }
 
 export interface KbdSlots {
@@ -54,11 +54,15 @@ const { getKbdKey } = useKbd()
 const appConfig = useAppConfig() as Kbd['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.kbd))
+const ui = computed(() => tv(theme, appConfig.ui?.kbd)({
+  color: props.color,
+  variant: props.variant,
+  size: props.size
+}))
 </script>
 
 <template>
-  <Primitive :as="props.as" :class="ui({ class: [props.ui?.base, props.class], color: props.color, variant: props.variant, size: props.size })">
+  <Primitive :as="props.as" :class="ui.base({ class: [props.ui?.base, props.class] })">
     <slot>
       {{ getKbdKey(props.value) }}
     </slot>

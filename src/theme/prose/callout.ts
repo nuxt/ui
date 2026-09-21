@@ -20,7 +20,7 @@ export default (options: Required<ModuleOptions>) => ({
       }
     },
     to: {
-      true: 'border-dashed'
+      true: { base: 'border-dashed' }
     }
   },
   compoundVariants: [...(options.theme.colors || []).map((color: string) => ({
