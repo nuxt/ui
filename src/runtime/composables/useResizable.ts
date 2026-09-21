@@ -95,7 +95,7 @@ export function useResizable(key: string, options: Ref<UseResizableProps> | UseR
     collapsedSize: 0,
     resizable: true,
     unit: '%',
-    ...unref(options),
+    ...unref(options)
   }))
 
   const { dir } = useLocale()
