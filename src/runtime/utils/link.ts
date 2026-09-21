@@ -5,7 +5,7 @@ import { linkKeys } from './link-keys'
 
 export { linkKeys }
 
-export function pickLinkProps(link: LinkProps & { [key: string]: any }) {
+export function pickLinkProps(link: Omit<LinkProps, 'ui'> & { [key: string]: any }) {
   const keys = Object.keys(link)
 
   const ariaKeys = keys.filter(key => key.startsWith('aria-'))

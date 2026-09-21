@@ -54,6 +54,7 @@ export interface LinkProps extends Partial<Omit<RouterLinkProps, 'custom'>>, /**
   /** When `true`, only styles from `class`, `activeClass`, and `inactiveClass` will be applied. */
   raw?: boolean
   class?: any
+  ui?: Link['slots']
 }
 
 export interface LinkSlots {
@@ -87,8 +88,9 @@ const route = useRoute()
 
 const appConfig = useAppConfig() as Link['AppConfig']
 
-const routerLinkProps = useForwardProps(reactiveOmit(props, 'as', 'type', 'disabled', 'active', 'exact', 'exactQuery', 'exactHash', 'activeClass', 'inactiveClass', 'to', 'href', 'raw', 'custom', 'class', 'target', 'rel', 'noRel'))
+const routerLinkProps = useForwardProps(reactiveOmit(props, 'as', 'type', 'disabled', 'active', 'exact', 'exactQuery', 'exactHash', 'activeClass', 'inactiveClass', 'to', 'href', 'raw', 'custom', 'class', 'ui', 'target', 'rel', 'noRel'))
 
+// eslint-disable-next-line vue/no-dupe-keys
 const ui = computed(() => tv(theme, appConfig.ui?.link))
 
 const to = computed(() => props.to ?? props.href)
@@ -163,7 +165,7 @@ function resolveLinkClass({ route, isActive, isExactActive }: any = {}) {
     return [props.class, active ? props.activeClass : props.inactiveClass]
   }
 
-  return ui.value({ class: [props.class, active ? props.activeClass : props.inactiveClass], active, disabled: props.disabled })
+  return ui.value({ active, disabled: props.disabled }).base({ class: [props.ui?.base, props.class, active ? props.activeClass : props.inactiveClass] })
 }
 </script>
 

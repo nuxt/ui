@@ -8,7 +8,7 @@ import type { ComponentConfig } from '../types/tv'
 
 type FooterColumns = ComponentConfig<typeof theme, AppConfig, 'footerColumns'>
 
-export interface FooterColumnLink extends Omit<LinkProps, 'custom'> {
+export interface FooterColumnLink extends Omit<LinkProps, 'custom' | 'ui'> {
   label: string
   /**
    * @IconifyIcon

@@ -8,7 +8,7 @@ type ProseStrong = ComponentConfig<typeof theme, AppConfig, 'strong', 'ui.prose'
 
 export interface ProseStrongProps {
   class?: any
-  ui?: { base?: any }
+  ui?: ProseStrong['slots']
 }
 
 export interface ProseStrongSlots {
@@ -31,11 +31,11 @@ const props = useComponentProps('prose.strong', _props)
 const appConfig = useAppConfig() as ProseStrong['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.prose?.strong))
+const ui = computed(() => tv(theme, appConfig.ui?.prose?.strong)())
 </script>
 
 <template>
-  <strong :class="ui({ class: [props.ui?.base, props.class] })">
+  <strong :class="ui.base({ class: [props.ui?.base, props.class] })">
     <slot />
   </strong>
 </template>

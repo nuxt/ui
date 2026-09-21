@@ -13,7 +13,7 @@ import type { ComponentConfig } from '../types/tv'
 
 type ContextMenu = ComponentConfig<typeof theme, AppConfig, 'contextMenu'>
 
-export interface ContextMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'custom'> {
+export interface ContextMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'custom' | 'ui'> {
   label?: string
   description?: string
   /**

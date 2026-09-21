@@ -13,7 +13,7 @@ export interface DashboardResizeHandleProps {
    */
   as?: any
   class?: any
-  ui?: { base?: any }
+  ui?: DashboardResizeHandle['slots']
 }
 
 export interface DashboardResizeHandleSlots {
@@ -37,14 +37,14 @@ const props = useComponentProps('dashboardResizeHandle', _props)
 const appConfig = useAppConfig() as DashboardResizeHandle['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.dashboardResizeHandle))
+const ui = computed(() => tv(theme, appConfig.ui?.dashboardResizeHandle)())
 </script>
 
 <template>
   <Primitive
     :as="props.as"
     role="separator"
-    :class="ui({ class: [props.ui?.base, props.class] })"
+    :class="ui.base({ class: [props.ui?.base, props.class] })"
   >
     <slot />
   </Primitive>
