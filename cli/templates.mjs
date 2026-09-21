@@ -143,13 +143,7 @@ const theme = ({ name, prose, content }) => {
 
   return {
     filename: `src/theme/${prose ? 'prose/' : ''}${content ? 'content/' : ''}${kebabName}.ts`,
-    contents: prose
-      ? `
-export default {
-  base: ''
-}
-`
-      : `
+    contents: `
 export default {
   slots: {
     root: ''
