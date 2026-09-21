@@ -13,7 +13,7 @@ export interface PageGridProps {
    */
   as?: any
   class?: any
-  ui?: { base?: any }
+  ui?: PageGrid['slots']
 }
 
 export interface PageGridSlots {
@@ -37,11 +37,11 @@ const props = useComponentProps('pageGrid', _props)
 const appConfig = useAppConfig() as PageGrid['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.pageGrid))
+const ui = computed(() => tv(theme, appConfig.ui?.pageGrid)())
 </script>
 
 <template>
-  <Primitive :as="props.as" :class="ui({ class: [props.ui?.base, props.class] })">
+  <Primitive :as="props.as" :class="ui.base({ class: [props.ui?.base, props.class] })">
     <slot />
   </Primitive>
 </template>

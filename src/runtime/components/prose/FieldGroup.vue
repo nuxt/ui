@@ -13,7 +13,7 @@ export interface ProseFieldGroupProps {
    */
   as?: any
   class?: any
-  ui?: { base?: any }
+  ui?: ProseFieldGroup['slots']
 }
 
 export interface ProseFieldGroupSlots {
@@ -38,11 +38,11 @@ const props = useComponentProps('prose.fieldGroup', _props)
 const appConfig = useAppConfig() as ProseFieldGroup['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.prose?.fieldGroup))
+const ui = computed(() => tv(theme, appConfig.ui?.prose?.fieldGroup)())
 </script>
 
 <template>
-  <Primitive :as="typeof props.as === 'string' && !isUnsafeAs(props.as) ? props.as : undefined" :class="ui({ class: [props.ui?.base, props.class] })">
+  <Primitive :as="typeof props.as === 'string' && !isUnsafeAs(props.as) ? props.as : undefined" :class="ui.base({ class: [props.ui?.base, props.class] })">
     <slot />
   </Primitive>
 </template>

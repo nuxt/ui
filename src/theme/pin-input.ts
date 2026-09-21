@@ -25,11 +25,11 @@ export default (options: Required<ModuleOptions>) => ({
       }
     },
     variant: {
-      outline: 'text-highlighted bg-default ring ring-inset ring-accented',
-      soft: 'text-highlighted bg-elevated/50 hover:bg-elevated focus:bg-elevated disabled:bg-elevated/50',
-      subtle: 'text-highlighted bg-elevated ring ring-inset ring-accented',
-      ghost: 'text-highlighted bg-transparent hover:bg-elevated focus:bg-elevated disabled:bg-transparent dark:disabled:bg-transparent',
-      none: 'text-highlighted bg-transparent focus:outline-none'
+      outline: { base: 'text-highlighted bg-default ring ring-inset ring-accented' },
+      soft: { base: 'text-highlighted bg-elevated/50 hover:bg-elevated focus:bg-elevated disabled:bg-elevated/50' },
+      subtle: { base: 'text-highlighted bg-elevated ring ring-inset ring-accented' },
+      ghost: { base: 'text-highlighted bg-transparent hover:bg-elevated focus:bg-elevated disabled:bg-transparent dark:disabled:bg-transparent' },
+      none: { base: 'text-highlighted bg-transparent focus:outline-none' }
     },
     color: {
       ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, ''])),
@@ -45,43 +45,43 @@ export default (options: Required<ModuleOptions>) => ({
   compoundVariants: [...(options.theme.colors || []).map((color: string) => ({
     color,
     variant: ['outline', 'subtle'],
-    class: `outline-${color}/25 focus-visible:outline-3 focus-visible:ring-${color}`
+    class: { base: `outline-${color}/25 focus-visible:outline-3 focus-visible:ring-${color}` }
   })), ...(options.theme.colors || []).map((color: string) => ({
     color,
     variant: ['soft', 'ghost'],
-    class: `outline-${color}/25 focus-visible:outline-3`
+    class: { base: `outline-${color}/25 focus-visible:outline-3` }
   })), ...(options.theme.colors || []).map((color: string) => ({
     color,
     highlight: true,
-    class: `ring ring-inset ring-${color}`
+    class: { base: `ring ring-inset ring-${color}` }
   })), {
     color: 'neutral',
     variant: ['outline', 'subtle'],
-    class: 'outline-inverted/25 focus-visible:outline-3 focus-visible:ring-inverted'
+    class: { base: 'outline-inverted/25 focus-visible:outline-3 focus-visible:ring-inverted' }
   }, {
     color: 'neutral',
     variant: ['soft', 'ghost'],
-    class: 'outline-inverted/25 focus-visible:outline-3'
+    class: { base: 'outline-inverted/25 focus-visible:outline-3' }
   }, {
     color: 'neutral',
     highlight: true,
-    class: 'ring ring-inset ring-inverted'
+    class: { base: 'ring ring-inset ring-inverted' }
   }, {
     fixed: false,
     size: 'xs',
-    class: 'md:text-xs'
+    class: { base: 'md:text-xs' }
   }, {
     fixed: false,
     size: 'sm',
-    class: 'md:text-xs'
+    class: { base: 'md:text-xs' }
   }, {
     fixed: false,
     size: 'md',
-    class: 'md:text-sm'
+    class: { base: 'md:text-sm' }
   }, {
     fixed: false,
     size: 'lg',
-    class: 'md:text-sm'
+    class: { base: 'md:text-sm' }
   }],
   defaultVariants: {
     size: 'md',

@@ -22,7 +22,7 @@ export interface FieldGroupProps {
    */
   orientation?: FieldGroup['variants']['orientation']
   class?: any
-  ui?: { base?: any }
+  ui?: FieldGroup['slots']
 }
 
 export interface FieldGroupSlots {
@@ -48,7 +48,7 @@ const props = useComponentProps('fieldGroup', _props)
 const appConfig = useAppConfig() as FieldGroup['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.fieldGroup))
+const ui = computed(() => tv(theme, appConfig.ui?.fieldGroup)({ orientation: props.orientation }))
 
 provide(fieldGroupInjectionKey, computed(() => ({
   orientation: props.orientation,
@@ -57,7 +57,7 @@ provide(fieldGroupInjectionKey, computed(() => ({
 </script>
 
 <template>
-  <Primitive :as="props.as" :data-orientation="props.orientation" :class="ui({ orientation: props.orientation, class: [props.ui?.base, props.class] })">
+  <Primitive :as="props.as" :data-orientation="props.orientation" :class="ui.base({ class: [props.ui?.base, props.class] })">
     <slot />
   </Primitive>
 </template>

@@ -1,3 +1,5 @@
 export default {
-  base: 'fixed inset-0 flex overflow-hidden'
+  slots: {
+    base: 'fixed inset-0 flex overflow-hidden'
+  }
 }

@@ -8,7 +8,7 @@ type ProseLi = ComponentConfig<typeof theme, AppConfig, 'li', 'ui.prose'>
 
 export interface ProseLiProps {
   class?: any
-  ui?: { base?: any }
+  ui?: ProseLi['slots']
 }
 
 export interface ProseLiSlots {
@@ -31,11 +31,11 @@ const props = useComponentProps('prose.li', _props)
 const appConfig = useAppConfig() as ProseLi['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.prose?.li))
+const ui = computed(() => tv(theme, appConfig.ui?.prose?.li)())
 </script>
 
 <template>
-  <li :class="ui({ class: [props.ui?.base, props.class] })">
+  <li :class="ui.base({ class: [props.ui?.base, props.class] })">
     <slot />
   </li>
 </template>

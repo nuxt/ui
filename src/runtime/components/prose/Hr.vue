@@ -7,7 +7,7 @@ type ProseHr = ComponentConfig<typeof theme, AppConfig, 'hr', 'ui.prose'>
 
 export interface ProseHrProps {
   class?: any
-  ui?: { base?: any }
+  ui?: ProseHr['slots']
 }
 </script>
 
@@ -24,9 +24,9 @@ const props = useComponentProps('prose.hr', _props)
 const appConfig = useAppConfig() as ProseHr['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.prose?.hr))
+const ui = computed(() => tv(theme, appConfig.ui?.prose?.hr)())
 </script>
 
 <template>
-  <hr :class="ui({ class: [props.ui?.base, props.class] })">
+  <hr :class="ui.base({ class: [props.ui?.base, props.class] })">
 </template>

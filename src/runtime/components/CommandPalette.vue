@@ -19,7 +19,7 @@ import type { ComponentConfig } from '../types/tv'
 
 type CommandPalette = ComponentConfig<typeof theme, AppConfig, 'commandPalette'>
 
-export interface CommandPaletteItem extends Omit<LinkProps, 'type' | 'raw' | 'custom'> {
+export interface CommandPaletteItem extends Omit<LinkProps, 'type' | 'raw' | 'custom' | 'ui'> {
   prefix?: string
   label?: string
   suffix?: string

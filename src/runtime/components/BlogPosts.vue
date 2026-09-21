@@ -21,7 +21,7 @@ export interface BlogPostsProps<T extends BlogPostProps = BlogPostProps> {
    */
   orientation?: BlogPosts['variants']['orientation']
   class?: any
-  ui?: { base?: any }
+  ui?: BlogPosts['slots']
 }
 
 type ExtendSlotWithPost<T extends BlogPostProps, K extends keyof BlogPostSlots>
@@ -58,11 +58,11 @@ const getProxySlots = () => omit(slots, ['default'])
 const appConfig = useAppConfig() as BlogPosts['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv(theme, appConfig.ui?.blogPosts))
+const ui = computed(() => tv(theme, appConfig.ui?.blogPosts)({ orientation: props.orientation }))
 </script>
 
 <template>
-  <Primitive :as="props.as" :data-orientation="props.orientation" :class="ui({ orientation: props.orientation, class: [props.ui?.base, props.class] })">
+  <Primitive :as="props.as" :data-orientation="props.orientation" :class="ui.base({ class: [props.ui?.base, props.class] })">
     <slot>
       <UBlogPost
         v-for="(post, index) in props.posts"

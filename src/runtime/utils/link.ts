@@ -7,7 +7,7 @@ export { linkKeys }
 
 const linkKeySet = new Set<string>(linkKeys)
 
-export function pickLinkProps(link: LinkProps & { [key: string]: any }) {
+export function pickLinkProps(link: Omit<LinkProps, 'ui'> & { [key: string]: any }) {
   const picked: Record<string, any> = {}
   for (const key of Object.keys(link)) {
     if (linkKeySet.has(key) || key.startsWith('aria-') || key.startsWith('data-')) {

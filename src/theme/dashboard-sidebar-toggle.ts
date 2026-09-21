@@ -1,5 +1,7 @@
 export default {
-  base: 'lg:hidden',
+  slots: {
+    base: 'lg:hidden'
+  },
   variants: {
     side: {
       left: '',
