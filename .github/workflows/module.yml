@@ -153,6 +153,10 @@ jobs:
           grep "optional peer dependencies" build.log || { tail -n 50 build.log; exit 1; }
 
   templates:
+    # Off while breaking changes land on `v5`: the templates still target v4,
+    # so they fail on every intended break. Turn back on once they move to v5.
+    if: false
+
     needs: build
 
     runs-on: ${{ matrix.os }}
