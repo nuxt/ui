@@ -30,7 +30,7 @@ export default defineNuxtConfig({
         '@vueuse/core',
         '@vueuse/integrations/useFuse',
         'ai',
-        'tailwind-merge',
+        'cn',
         'tailwindcss/colors',
         'vaul-vue'
       ]

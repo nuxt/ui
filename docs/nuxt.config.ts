@@ -244,7 +244,7 @@ export default defineNuxtConfig({
         'ai',
         '@ai-sdk/vue',
         'prettier',
-        'tailwind-merge',
+        'cn',
         '@comark/vue',
         '@comark/vue/plugins/shiki',
         'vaul-vue',

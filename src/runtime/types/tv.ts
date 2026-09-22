@@ -1,5 +1,3 @@
-import type { extendTailwindMerge } from 'tailwind-merge'
-
 /**
  * The types the variants engine in `../utils/tv` resolves through, and the ones
  * `app.config.ui` and `ComponentConfig` are derived from.
@@ -8,16 +6,6 @@ import type { extendTailwindMerge } from 'tailwind-merge'
  * user-land (`app.config.ui` autocomplete, component prop types) rather than in
  * CI, so the type block of `test/utils/tv.spec.ts` asserts the contract.
  */
-
-type MergeConfig = Extract<Parameters<typeof extendTailwindMerge>[0], { extend?: unknown }>
-
-/** The nested `extend` object, which is also accepted flattened at the top level. */
-type MergeConfigExtension = MergeConfig['extend']
-
-/**
- * The `tailwind-merge` configuration, in either its nested or flattened shape.
- */
-export type TWMergeConfig = MergeConfig & MergeConfigExtension
 
 /**
  * The engine configuration, set through `app.config.ui.tv`.
@@ -29,9 +17,16 @@ export type TVMergeConfig = {
    */
   merge?: boolean
   /**
-   * The configuration handed to the merger.
+   * The Tailwind prefix, so `tw:px-2` is read as `px-2`. Set for you from the
+   * `theme.prefix` module option.
    */
-  mergeConfig?: TWMergeConfig
+  prefix?: string
+  /**
+   * How many merged strings the merger keeps. The engine memoizes per slot on
+   * top of this, so it only matters for classes that miss that cache.
+   * @defaultValue 500
+   */
+  cacheSize?: number
 }
 
 /**

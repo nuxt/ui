@@ -22,9 +22,7 @@ export function getDefaultConfig(theme?: ModuleOptions['theme']) {
     icons,
     prefix: theme?.prefix,
     tv: {
-      mergeConfig: {
-        prefix: theme?.prefix
-      }
+      prefix: theme?.prefix
     }
   }
 }
