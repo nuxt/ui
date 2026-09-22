@@ -180,7 +180,7 @@ const shareOpen = ref(false)
       </template>
     </UHeader>
 
-    <div class="flex flex-col bg-default rounded-xl overflow-hidden shadow ring ring-default h-[calc(100dvh-var(--ui-header-height)-0.5rem)] lg:h-[calc(100dvh-var(--ui-header-height)-var(--ui-header-height)-0.5rem)] mx-2">
+    <div class="flex flex-col bg-default rounded-xl overflow-hidden shadow-sm ring ring-default h-[calc(100dvh-var(--ui-header-height)-0.5rem)] lg:h-[calc(100dvh-var(--ui-header-height)-var(--ui-header-height)-0.5rem)] mx-2">
       <!-- [contain:paint]: Chromium won't clip nested composited layers by
              an ancestor's overflow alone -->
       <div class="flex-1 min-h-0 overflow-hidden *:contain-[paint]">
