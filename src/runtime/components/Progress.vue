@@ -178,19 +178,19 @@ const customColor = computed(() => props.color && !themeColors.value.includes(pr
 </script>
 
 <template>
-  <Primitive :as="props.as" :data-orientation="props.orientation" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <div v-if="!isIndeterminate && (props.status || !!slots.status)" data-slot="status" :class="ui.status({ class: props.ui?.status })" :style="statusStyle">
+  <Primitive :as="props.as" :data-orientation="props.orientation" data-slot="progress" :class="ui.root({ class: [props.ui?.root, props.class] })">
+    <div v-if="!isIndeterminate && (props.status || !!slots.status)" data-slot="progress-status" :class="ui.status({ class: props.ui?.status })" :style="statusStyle">
       <slot name="status" :percent="percent">
         {{ percent }}%
       </slot>
     </div>
 
-    <ProgressRoot v-bind="rootProps" :max="realMax" data-slot="base" :class="ui.base({ class: props.ui?.base })" style="transform: translateZ(0)">
-      <ProgressIndicator data-slot="indicator" :class="ui.indicator({ class: props.ui?.indicator })" :style="[indicatorStyle, customColor ? { backgroundColor: customColor } : undefined]" />
+    <ProgressRoot v-bind="rootProps" :max="realMax" data-slot="progress-base" :class="ui.base({ class: props.ui?.base })" style="transform: translateZ(0)">
+      <ProgressIndicator data-slot="progress-indicator" :class="ui.indicator({ class: props.ui?.indicator })" :style="[indicatorStyle, customColor ? { backgroundColor: customColor } : undefined]" />
     </ProgressRoot>
 
-    <div v-if="hasSteps" data-slot="steps" :class="ui.steps({ class: props.ui?.steps })" :style="customColor ? { color: customColor } : undefined">
-      <div v-for="(step, index) in props.max" :key="index" data-slot="step" :class="ui.step({ class: props.ui?.step, step: stepVariant(index) })">
+    <div v-if="hasSteps" data-slot="progress-steps" :class="ui.steps({ class: props.ui?.steps })" :style="customColor ? { color: customColor } : undefined">
+      <div v-for="(step, index) in props.max" :key="index" data-slot="progress-step" :class="ui.step({ class: props.ui?.step, step: stepVariant(index) })">
         <slot :name="`step-${index}`" :step="step">
           {{ step }}
         </slot>

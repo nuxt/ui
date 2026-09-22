@@ -250,7 +250,7 @@ describe('Theme', () => {
       `
     })
 
-    expect(wrapper.find('[data-slot="root"]').classes()).toContain('input-theme-class')
+    expect(wrapper.find('[data-slot="input"]').classes()).toContain('input-theme-class')
   })
 
   test(':props applies prop defaults to child', async () => {
@@ -360,7 +360,7 @@ describe('Theme', () => {
 
     // Tooltip below the inner theme inherits the outer theme's `arrow: true`
     // because the inner theme didn't touch the `tooltip` key.
-    expect(wrapper.find('[data-slot="arrow"]').exists()).toBe(true)
+    expect(wrapper.find('[data-slot="tooltip-arrow"]').exists()).toBe(true)
   })
 
   test('reacts to :props changes', async () => {
@@ -452,7 +452,7 @@ describe('Theme', () => {
       `
     })
 
-    expect(wrapper.find('[data-slot="arrow"]').exists()).toBe(true)
+    expect(wrapper.find('[data-slot="tooltip-arrow"]').exists()).toBe(true)
   })
 
   // Without a `<UTheme :props>` ancestor, an unset Boolean prop must stay unset
@@ -469,7 +469,7 @@ describe('Theme', () => {
       `
     })
 
-    expect(wrapper.find('[data-slot="arrow"]').exists()).toBe(false)
+    expect(wrapper.find('[data-slot="tooltip-arrow"]').exists()).toBe(false)
   })
 
   // `useFormField` must receive the raw `_props` rather than the
@@ -552,7 +552,7 @@ describe('Theme', () => {
 
     expect(wrapper.html()).toContain('cursor-not-allowed')
     expect(wrapper.find('input[type="file"]').attributes('disabled')).toBeDefined()
-    expect(wrapper.find('[data-slot="base"]').attributes('tabindex')).toBe('-1')
+    expect(wrapper.find('[data-slot="file-upload-base"]').attributes('tabindex')).toBe('-1')
   })
 
   // `<UForm disabled>` is the closer context and must keep winning over an
@@ -644,7 +644,7 @@ describe('Theme', () => {
       `
     })
 
-    const avatars = wrapper.findAll('span[data-slot="base"]')
+    const avatars = wrapper.findAll('span[data-slot="avatar-group-base"]')
     expect(avatars.length).toBeGreaterThan(0)
     avatars.forEach((avatar) => {
       expect(avatar.classes()).toContain('size-10')
@@ -667,11 +667,11 @@ describe('Theme', () => {
       `
     })
 
-    expect(wrapper.find('[data-slot="arrow"]').exists()).toBe(false)
+    expect(wrapper.find('[data-slot="tooltip-arrow"]').exists()).toBe(false)
 
     themeProps.value = { tooltip: { arrow: true } }
     await nextTick()
 
-    expect(wrapper.find('[data-slot="arrow"]').exists()).toBe(true)
+    expect(wrapper.find('[data-slot="tooltip-arrow"]').exists()).toBe(true)
   })
 })

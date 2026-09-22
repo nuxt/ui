@@ -183,7 +183,7 @@ const ui = computed(() => tv(theme, appConfig.ui?.pagination)())
           </slot>
         </PaginationListItem>
 
-        <PaginationEllipsis v-else as-child data-slot="ellipsis" :class="ui.ellipsis({ class: props.ui?.ellipsis })">
+        <PaginationEllipsis v-else as-child data-slot="pagination-ellipsis" :class="ui.ellipsis({ class: props.ui?.ellipsis })">
           <slot name="ellipsis" :ui="ui">
             <UButton as="div" :color="props.color" :variant="props.variant" :size="props.size" :icon="props.ellipsisIcon || appConfig.ui.icons.ellipsis" />
           </slot>

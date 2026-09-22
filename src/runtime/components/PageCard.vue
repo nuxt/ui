@@ -135,34 +135,34 @@ const ariaLabel = computed(() => {
     :as="props.as"
     v-bind="!props.to ? $attrs : {}"
     :data-orientation="props.orientation"
-    :data-slot="($attrs['data-slot'] as string | undefined) ?? 'root'"
+    :data-slot="($attrs['data-slot'] as string | undefined) ?? 'page-card'"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     :style="spotlight && { '--spotlight-x': `${elementX}px`, '--spotlight-y': `${elementY}px` }"
     @click="props.onClick"
   >
-    <div v-if="props.spotlight" data-slot="spotlight" :class="ui.spotlight({ class: props.ui?.spotlight })" />
+    <div v-if="props.spotlight" data-slot="page-card-spotlight" :class="ui.spotlight({ class: props.ui?.spotlight })" />
 
-    <div data-slot="container" :class="ui.container({ class: props.ui?.container })">
-      <div v-if="!!slots.header || (props.icon || !!slots.leading) || !!slots.body || (props.title || !!slots.title) || (props.description || !!slots.description) || !!slots.footer" data-slot="wrapper" :class="ui.wrapper({ class: props.ui?.wrapper })">
-        <div v-if="!!slots.header" data-slot="header" :class="ui.header({ class: props.ui?.header })">
+    <div data-slot="page-card-container" :class="ui.container({ class: props.ui?.container })">
+      <div v-if="!!slots.header || (props.icon || !!slots.leading) || !!slots.body || (props.title || !!slots.title) || (props.description || !!slots.description) || !!slots.footer" data-slot="page-card-wrapper" :class="ui.wrapper({ class: props.ui?.wrapper })">
+        <div v-if="!!slots.header" data-slot="page-card-header" :class="ui.header({ class: props.ui?.header })">
           <slot name="header" />
         </div>
 
-        <div v-if="props.icon || !!slots.leading" data-slot="leading" :class="ui.leading({ class: props.ui?.leading })">
+        <div v-if="props.icon || !!slots.leading" data-slot="page-card-leading" :class="ui.leading({ class: props.ui?.leading })">
           <slot name="leading" :ui="ui">
-            <UIcon v-if="props.icon" :name="props.icon" data-slot="leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
+            <UIcon v-if="props.icon" :name="props.icon" data-slot="page-card-leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
           </slot>
         </div>
 
-        <div v-if="!!slots.body || (props.title || !!slots.title) || (props.description || !!slots.description)" data-slot="body" :class="ui.body({ class: props.ui?.body })">
+        <div v-if="!!slots.body || (props.title || !!slots.title) || (props.description || !!slots.description)" data-slot="page-card-body" :class="ui.body({ class: props.ui?.body })">
           <slot name="body">
-            <div v-if="props.title || !!slots.title" data-slot="title" :class="ui.title({ class: props.ui?.title })">
+            <div v-if="props.title || !!slots.title" data-slot="page-card-title" :class="ui.title({ class: props.ui?.title })">
               <slot name="title">
                 {{ props.title }}
               </slot>
             </div>
 
-            <div v-if="props.description || !!slots.description" data-slot="description" :class="ui.description({ class: props.ui?.description })">
+            <div v-if="props.description || !!slots.description" data-slot="page-card-description" :class="ui.description({ class: props.ui?.description })">
               <slot name="description">
                 {{ props.description }}
               </slot>
@@ -170,7 +170,7 @@ const ariaLabel = computed(() => {
           </slot>
         </div>
 
-        <div v-if="!!slots.footer" data-slot="footer" :class="ui.footer({ class: props.ui?.footer })">
+        <div v-if="!!slots.footer" data-slot="page-card-footer" :class="ui.footer({ class: props.ui?.footer })">
           <slot name="footer" />
         </div>
       </div>

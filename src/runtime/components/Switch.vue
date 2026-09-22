@@ -121,33 +121,33 @@ function onUpdate(value: any) {
 </script>
 
 <template>
-  <Primitive :as="props.as" :data-slot="($attrs['data-slot'] as string | undefined) ?? 'root'" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <div data-slot="container" :class="ui.container({ class: props.ui?.container })">
+  <Primitive :as="props.as" :data-slot="($attrs['data-slot'] as string | undefined) ?? 'switch'" :class="ui.root({ class: [props.ui?.root, props.class] })">
+    <div data-slot="switch-container" :class="ui.container({ class: props.ui?.container })">
       <SwitchRoot
         :id="id"
         v-bind="{ ...rootProps, ...forwardedAttrs, ...ariaAttrs }"
         :name="name"
         :disabled="disabled || props.loading"
-        data-slot="base"
+        data-slot="switch-base"
         :class="ui.base({ class: props.ui?.base })"
         @update:model-value="onUpdate"
       >
-        <SwitchThumb data-slot="thumb" :class="ui.thumb({ class: props.ui?.thumb })">
-          <UIcon v-if="props.loading" :name="props.loadingIcon || appConfig.ui.icons.loading" data-slot="icon" :class="ui.icon({ class: props.ui?.icon, checked: true, unchecked: true })" />
+        <SwitchThumb data-slot="switch-thumb" :class="ui.thumb({ class: props.ui?.thumb })">
+          <UIcon v-if="props.loading" :name="props.loadingIcon || appConfig.ui.icons.loading" data-slot="switch-icon" :class="ui.icon({ class: props.ui?.icon, checked: true, unchecked: true })" />
           <template v-else>
-            <UIcon v-if="props.checkedIcon" :name="props.checkedIcon" data-slot="icon" :class="ui.icon({ class: props.ui?.icon, checked: true })" />
-            <UIcon v-if="props.uncheckedIcon" :name="props.uncheckedIcon" data-slot="icon" :class="ui.icon({ class: props.ui?.icon, unchecked: true })" />
+            <UIcon v-if="props.checkedIcon" :name="props.checkedIcon" data-slot="switch-icon" :class="ui.icon({ class: props.ui?.icon, checked: true })" />
+            <UIcon v-if="props.uncheckedIcon" :name="props.uncheckedIcon" data-slot="switch-icon" :class="ui.icon({ class: props.ui?.icon, unchecked: true })" />
           </template>
         </SwitchThumb>
       </SwitchRoot>
     </div>
-    <div v-if="(props.label || !!slots.label) || (props.description || !!slots.description)" data-slot="wrapper" :class="ui.wrapper({ class: props.ui?.wrapper })">
-      <Label v-if="props.label || !!slots.label" :for="id" data-slot="label" :class="ui.label({ class: props.ui?.label })">
+    <div v-if="(props.label || !!slots.label) || (props.description || !!slots.description)" data-slot="switch-wrapper" :class="ui.wrapper({ class: props.ui?.wrapper })">
+      <Label v-if="props.label || !!slots.label" :for="id" data-slot="switch-label" :class="ui.label({ class: props.ui?.label })">
         <slot name="label" :label="props.label">
           {{ props.label }}
         </slot>
       </Label>
-      <p v-if="props.description || !!slots.description" data-slot="description" :class="ui.description({ class: props.ui?.description })">
+      <p v-if="props.description || !!slots.description" data-slot="switch-description" :class="ui.description({ class: props.ui?.description })">
         <slot name="description" :description="props.description">
           {{ props.description }}
         </slot>
