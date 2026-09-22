@@ -292,6 +292,212 @@ const noUnresolvedFormFieldRefs = {
 }
 
 /**
+ * Namespace `data-slot` with the component name: every element styled by a
+ * theme slot carries `data-slot="<component>-<slot>"`, and the outermost one
+ * the component name alone (`card`, `card-header`, `button-leadingIcon`). Each
+ * value is unique across the library, so a stylesheet can target one part of
+ * one component.
+ *
+ * `<component>` is the `#build/ui/<path>` import in kebab-case, `<slot>` the
+ * theme slot key as written. Both are derived from the `ui.<slot>()` call on
+ * the tag rather than from the value already there, so the fix is idempotent
+ * and re-applies whatever a `v4` sync brings back bare.
+ *
+ * Auto-fixes a wrong value, and adds the attribute where a styled tag has none
+ * (before any `v-bind` spread, so a caller's `data-slot` still wins). A tag
+ * whose `:class` picks between two slots, and a `:data-slot` expression, are
+ * reported rather than guessed: their value is written by hand.
+ */
+const SLOT_CALL = /\bui(?:\.value)?\.(\w+)\(/g
+// Our own `*Content` components label their root themselves, with the parent's
+// namespace: `UContextMenuContent` renders `context-menu-content`.
+const FORWARDED = new Set(['UContextMenuContent', 'UDropdownMenuContent'])
+
+const dataSlotNamespace = {
+  meta: {
+    type: 'problem',
+    docs: {
+      description: 'Namespace `data-slot` with the component name'
+    },
+    fixable: 'code',
+    schema: [],
+    messages: {
+      wrong: 'This element is styled by `ui.{{ slot }}()`, so its `data-slot` is `{{ expected }}`.',
+      missing: 'Add `data-slot="{{ expected }}"`: every element styled by a slot carries one, so it can be targeted from CSS.',
+      ambiguous: 'This element is styled by {{ slots }}. Write its `data-slot` by hand, mirroring the condition.',
+      stray: '`data-slot` can be {{ values }} here, expected `{{ namespace }}` or `{{ namespace }}-<slot>`.',
+      unverifiable: 'This `:data-slot` holds no value this rule can read, so its markers go unchecked. Name them inline, as `condition ? \'{{ namespace }}-a\' : \'{{ namespace }}-b\'`, or through a `const` declared in this file.'
+    }
+  },
+  create(context) {
+    const parserServices = context.sourceCode.parserServices
+    if (!parserServices?.defineTemplateBodyVisitor) {
+      return {}
+    }
+
+    // Prose components emit no marker: one on every `<p>` and `<li>` of a
+    // rendered document is weight nobody selects on.
+    if (context.filename.replaceAll('\\', '/').includes('/prose/')) {
+      return {}
+    }
+
+    let namespace
+    const elements = []
+    // Top-level `const`s, so a `:data-slot` naming one can be read back.
+    const bindings = new Map()
+
+    const attribute = (element, name) => element.startTag.attributes.find(attr => !attr.directive && attr.key.name === name)
+    const directive = (element, name) => element.startTag.attributes.find(attr => attr.directive && attr.key.name.name === 'bind' && attr.key.argument?.name === name)
+    const spread = element => element.startTag.attributes.find(attr => attr.directive && attr.key.name.name === 'bind' && !attr.key.argument)
+
+    return parserServices.defineTemplateBodyVisitor(
+      {
+        VElement(element) {
+          const klass = directive(element, 'class')
+          const expression = klass?.value ? context.sourceCode.getText(klass.value).slice(1, -1).trim() : ''
+          // `ui.root({ class: [ui.base(...), props.class] })`: one call wraps
+          // the whole binding, the slots merged inside land on that element.
+          const outer = expression.match(/^ui(?:\.value)?\.(\w+)\(/)
+          const slots = outer && closesAt(expression, outer[0].length - 1) === expression.length - 1
+            ? [outer[1]]
+            : [...new Set([...expression.matchAll(SLOT_CALL)].map(match => match[1]))]
+
+          elements.push({ element, slots, expression })
+        },
+
+        // The `<template>` element itself, once every child has been collected.
+        'VElement:exit'(root) {
+          if (root.parent.type !== 'VDocumentFragment' || !namespace) {
+            return
+          }
+
+          const template = context.sourceCode.getText()
+          // Every slot the component reads, `:class` or not: `linkLeadingChipSize`
+          // sizes the child labelled `linkLeadingChip`, which has no classes.
+          const rendered = [...template.matchAll(SLOT_CALL)].map(match => match[1])
+          const named = rendered.flatMap(slot => slot.endsWith('Size') ? [slot, slot.slice(0, -4)] : [slot])
+          const valid = new Set([namespace, ...named.map(slot => `${namespace}-${slot}`)])
+
+          // The outermost element is the `root` slot, or the `base` that
+          // `props.class` lands on when there is none. Overlays have neither:
+          // their teleported content is `<component>-content` like any part.
+          const outermost = /\bui(?:\.value)?\.root\(/.test(template)
+            ? 'root'
+            : (/\bui(?:\.value)?\.base\(\{[^}]*\bprops\.class\b/.test(template) ? 'base' : undefined)
+          const valueFor = slot => slot === outermost ? namespace : `${namespace}-${slot}`
+
+          for (const { element, slots } of elements) {
+            const slot = slots.length === 1 ? slots[0] : undefined
+            const literal = attribute(element, 'data-slot')
+            const bound = directive(element, 'data-slot')
+
+            if (literal) {
+              if (slot) {
+                const expected = valueFor(slot)
+                if (literal.value?.value !== expected) {
+                  context.report({
+                    node: literal,
+                    messageId: 'wrong',
+                    data: { slot, expected },
+                    fix: fixer => fixer.replaceText(literal, `data-slot="${expected}"`)
+                  })
+                }
+              } else if (!valid.has(literal.value?.value)) {
+                context.report({ node: literal, messageId: 'stray', data: { values: `"${literal.value?.value ?? ''}"`, namespace } })
+              }
+              continue
+            }
+
+            if (bound) {
+              // `:data-slot="($attrs['data-slot'] as string | undefined) ?? 'root'"`:
+              // the caller's value wins, ours is the fallback.
+              const text = bound.value ? context.sourceCode.getText(bound.value).slice(1, -1) : ''
+              const fallback = slot && text.match(/\?\?\s*'([\w-]+)'\s*$/)
+              const expected = slot && valueFor(slot)
+              if (fallback && fallback[1] !== expected) {
+                const start = bound.value.range[0] + 1 + fallback.index + fallback[0].indexOf('\'') + 1
+                context.report({
+                  node: bound,
+                  messageId: 'wrong',
+                  data: { slot, expected },
+                  fix: fixer => fixer.replaceTextRange([start, start + fallback[1].length], expected)
+                })
+                continue
+              }
+              // A ternary, or a `const` named here and declared in the script:
+              // every value it can take has to be one this component renders.
+              const identifier = text.trim()
+              const source = /^[\w$]+$/.test(identifier) ? bindings.get(identifier) : text
+              const values = source === undefined
+                ? []
+                : [...source.matchAll(/'([^']*)'/g)].map(match => match[1]).filter(value => value !== 'data-slot')
+              if (!values.length) {
+                // Reported rather than passed over: reading nothing would make
+                // every value the expression can take look valid.
+                context.report({ node: bound, messageId: 'unverifiable', data: { namespace } })
+                continue
+              }
+              const wrong = values.filter(value => !valid.has(value))
+              if (wrong.length) {
+                context.report({ node: bound, messageId: 'stray', data: { values: wrong.map(value => `"${value}"`).join(', '), namespace } })
+              }
+              continue
+            }
+
+            if (slots.length > 1) {
+              context.report({ node: element.startTag, messageId: 'ambiguous', data: { slots: slots.join(' / ') } })
+              continue
+            }
+            if (!slot || FORWARDED.has(element.rawName)) {
+              continue
+            }
+
+            const klass = directive(element, 'class')
+            const spreadAttr = spread(element)
+            // Before a `v-bind` spread, so a caller's `data-slot` still wins.
+            const before = spreadAttr && spreadAttr.range[0] < klass.range[0] ? spreadAttr : klass
+            const indent = context.sourceCode.getText().slice(context.sourceCode.getText().lastIndexOf('\n', before.range[0]) + 1, before.range[0])
+            const separator = /^\s+$/.test(indent) ? `\n${indent}` : ' '
+            context.report({
+              node: element.startTag,
+              messageId: 'missing',
+              data: { expected: valueFor(slot) },
+              fix: fixer => fixer.insertTextBeforeRange(before.range, `data-slot="${valueFor(slot)}"${separator}`)
+            })
+          }
+        }
+      },
+      {
+        'Program > VariableDeclaration > VariableDeclarator'(node) {
+          if (node.id.type === 'Identifier' && node.init) {
+            bindings.set(node.id.name, context.sourceCode.getText(node.init))
+          }
+        },
+        ImportDeclaration(node) {
+          const path = node.source.value?.match?.(/^#build\/ui\/([\w/-]+)$/)?.[1]
+          if (path) {
+            namespace = path.replace(/^content\//, '').replaceAll('/', '-')
+          }
+        }
+      }
+    )
+  }
+}
+
+/** Index of the parenthesis closing the one at `open`. */
+function closesAt(expression, open) {
+  let depth = 0
+  for (let index = open; index < expression.length; index++) {
+    if (expression[index] === '(') {
+      depth++
+    } else if (expression[index] === ')' && --depth === 0) {
+      return index
+    }
+  }
+  return -1
+}
+
+/**
  * Tailwind class checks for the apps in this repo (docs and playgrounds).
  * `src/theme` is not covered yet: the plugin skips `export default (options) => ({...})`
  * until https://github.com/schoero/eslint-plugin-better-tailwindcss/pull/397 ships.
@@ -342,13 +548,15 @@ export default createConfigForNuxt({
     'nuxt-ui': {
       rules: {
         'no-bare-prop-refs': noBarePropRefs,
-        'no-unresolved-form-field-refs': noUnresolvedFormFieldRefs
+        'no-unresolved-form-field-refs': noUnresolvedFormFieldRefs,
+        'data-slot-namespace': dataSlotNamespace
       }
     }
   },
   rules: {
     'nuxt-ui/no-bare-prop-refs': 'error',
-    'nuxt-ui/no-unresolved-form-field-refs': 'error'
+    'nuxt-ui/no-unresolved-form-field-refs': 'error',
+    'nuxt-ui/data-slot-namespace': 'error'
   }
 }).append(betterTailwindcssConfig(['docs/app/**/*.vue'], 'docs/app/assets/css/main.css', [
   // Hook classes styled in scoped `<style>` blocks or `main.css`, not Tailwind utilities.
