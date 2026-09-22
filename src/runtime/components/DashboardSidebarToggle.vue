@@ -58,6 +58,7 @@ const ui = computed(() => tv(theme, appConfig.ui?.dashboardSidebarToggle)({ side
 
 <template>
   <UButton
+    data-slot="dashboard-sidebar-toggle"
     v-bind="{
       ...buttonProps,
       'icon': props.icon || (sidebarOpen ? appConfig.ui.icons.close : appConfig.ui.icons.menu),

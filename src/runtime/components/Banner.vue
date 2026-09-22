@@ -157,7 +157,7 @@ function onClose() {
     v-bind="!props.to ? $attrs : {}"
     class="banner"
     :data-banner-id="id"
-    :data-slot="($attrs['data-slot'] as string | undefined) ?? 'root'"
+    :data-slot="($attrs['data-slot'] as string | undefined) ?? 'banner'"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
   >
     <ULink
@@ -170,28 +170,28 @@ function onClose() {
       <span :class="prefix('absolute inset-0')" aria-hidden="true" />
     </ULink>
 
-    <UContainer data-slot="container" :class="ui.container({ class: props.ui?.container })">
-      <div data-slot="left" :class="ui.left({ class: props.ui?.left })" />
+    <UContainer data-slot="banner-container" :class="ui.container({ class: props.ui?.container })">
+      <div data-slot="banner-left" :class="ui.left({ class: props.ui?.left })" />
 
-      <div data-slot="center" :class="ui.center({ class: props.ui?.center })">
+      <div data-slot="banner-center" :class="ui.center({ class: props.ui?.center })">
         <slot name="leading" :ui="ui">
-          <UIcon v-if="props.icon" :name="props.icon" data-slot="icon" :class="ui.icon({ class: props.ui?.icon })" />
+          <UIcon v-if="props.icon" :name="props.icon" data-slot="banner-icon" :class="ui.icon({ class: props.ui?.icon })" />
         </slot>
 
-        <div v-if="props.title || !!slots.title" data-slot="title" :class="ui.title({ class: props.ui?.title })">
+        <div v-if="props.title || !!slots.title" data-slot="banner-title" :class="ui.title({ class: props.ui?.title })">
           <slot name="title">
             {{ props.title }}
           </slot>
         </div>
 
-        <div v-if="props.actions?.length || !!slots.actions" data-slot="actions" :class="ui.actions({ class: props.ui?.actions })">
+        <div v-if="props.actions?.length || !!slots.actions" data-slot="banner-actions" :class="ui.actions({ class: props.ui?.actions })">
           <slot name="actions">
             <UButton v-for="(action, index) in props.actions" :key="index" color="neutral" size="xs" v-bind="action" />
           </slot>
         </div>
       </div>
 
-      <div data-slot="right" :class="ui.right({ class: props.ui?.right })">
+      <div data-slot="banner-right" :class="ui.right({ class: props.ui?.right })">
         <slot name="close" :ui="ui">
           <UButton
             v-if="props.close"
@@ -201,7 +201,7 @@ function onClose() {
             variant="ghost"
             :aria-label="t('banner.close')"
             v-bind="(typeof props.close === 'object' ? props.close : {})"
-            data-slot="close"
+            data-slot="banner-close"
             :class="ui.close({ class: props.ui?.close })"
             @click="onClose"
           />
