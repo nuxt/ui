@@ -264,7 +264,13 @@ function getButtonProps(item: EditorToolbarItem) {
     }
   }
 
+  // A tooltip is a pointer-hover affordance that never reaches assistive technology, so an
+  // icon-only button would otherwise have no accessible name at all. A button with a visible
+  // label is already named by its own text and must not be relabelled on top of it.
+  const ariaLabel = baseProps.label ? undefined : (item as ButtonItem).tooltip?.text
+
   return defu(baseProps, {
+    ...(ariaLabel ? { 'aria-label': ariaLabel } : {}),
     color: props.color,
     activeColor: props.activeColor,
     activeVariant: props.activeVariant,
