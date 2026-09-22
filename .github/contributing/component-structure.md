@@ -244,7 +244,7 @@ Every element styled by a slot carries `data-slot="<component>-<slot>"`, except 
 - The outermost element is the `root` slot, or the `base` that `class` lands on when there is no `root` (Button, Select). Overlays have neither, their teleported content is `modal-content` like any other part.
 - Prose components emit no marker: one on every `<p>` and `<li>` of a rendered document is weight nobody selects on.
 
-Don't write the values by hand. `node scripts/data-slot.mjs` derives each one from the `ui.<slot>()` call on its tag, adds the marker where a styled tag has none, and changes nothing when run again. `--check` lists what it would change. Run it after a `v4` sync too, which brings bare values back.
+Don't write the values by hand. The `nuxt-ui/data-slot-namespace` lint rule derives each one from the `ui.<slot>()` call on its tag, so `pnpm run lint:fix` writes a wrong value, adds the marker where a styled tag has none, and leaves the rest alone. A tag whose `:class` picks between two slots, and a `:data-slot` expression, are reported rather than guessed: those are written by hand, and the rule still checks every value they can take.
 
 ## `data-slot` on the root
 
@@ -273,7 +273,7 @@ How you achieve it depends on how the root receives attributes:
 
   For `<Slot>` forwards and inner elements that have no `data-slot` of their own, strip it from what you forward so it cannot leak: `v-bind="{ ...$attrs, 'data-slot': undefined }"`. The same applies when attributes are forwarded from the script, like `Editor` spreading `useAttrs()` into tiptap's `editorProps.attributes`: use `omit(attrs, ['data-slot'])`.
 
-Both rules are enforced by `test/components/DataSlot.spec.ts`. It mounts every component with a caller `data-slot` and asserts it lands exactly once, on the outermost rendered element, mounts it again bare and asserts the root is named after the component, and checks every component file against `scripts/data-slot.mjs`, which also covers the closed overlays and `content/` that a mount can't reach.
+Both rules are enforced. `test/components/DataSlot.spec.ts` mounts every component with a caller `data-slot` and asserts it lands exactly once on the outermost rendered element, then mounts it bare and asserts the root is named after the component. The lint rule covers what a mount can't reach: closed overlays, `content/`, and the values a dynamic `:data-slot` can take.
 
 ## Components with Icons
 

@@ -2,7 +2,6 @@ import { describe, it, expect } from 'vitest'
 import type { Component } from 'vue'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { UIcon } from '#components'
-import { namespaceOf, transform } from '../../scripts/data-slot.mjs'
 
 declare global {
   interface ImportMeta {
@@ -59,15 +58,13 @@ const options: Record<string, { props?: any, slots?: any }> = {
 // its own implementation (the Vue override does not depend on `@nuxt/icon`).
 const modules = import.meta.glob<Component>(['../../src/runtime/components/*.vue', '!../../src/runtime/components/Icon.vue'], { eager: true, import: 'default' })
 
-const sources = import.meta.glob<string>('../../src/runtime/components/**/*.vue', { eager: true, query: '?raw', import: 'default' })
-
-const namespaces: Record<string, string> = {}
-for (const [path, source] of Object.entries(sources)) {
-  const namespace = namespaceOf(source)
-  if (namespace && /^\.\.\/\.\.\/src\/runtime\/components\/[^/]+\.vue$/.test(path)) {
-    namespaces[path.split('/').pop()!.replace('.vue', '')] = namespace
-  }
-}
+// The component name a root is expected to carry, read from the `#build/ui/<path>`
+// import the same way `nuxt-ui/data-slot-namespace` derives it.
+const namespaces: Record<string, string> = Object.fromEntries(
+  Object.entries(import.meta.glob<string>('../../src/runtime/components/*.vue', { eager: true, query: '?raw', import: 'default' }))
+    .map(([path, source]) => [path.split('/').pop()!.replace('.vue', ''), source.match(/from '#build\/ui\/([\w/-]+)'/)?.[1]])
+    .filter((entry): entry is [string, string] => !!entry[1])
+)
 
 const entries = [...Object.entries(modules).map(([path, component]) => [path.split('/').pop()!.replace('.vue', ''), component] as const), ['Icon', UIcon] as const]
   .filter(([name]) => !(name in skip))
@@ -91,16 +88,5 @@ describe('data-slot', () => {
     const wrapper = await mountSuspended(component, options[name])
 
     expect(wrapper.html().match(/<[a-z][^>]*>/i)?.[0]).toContain(`data-slot="${namespaces[name]}"`)
-  })
-
-  // Every other marker is `<component>-<slot>`, derived from the `ui.<slot>()`
-  // on its tag. `scripts/data-slot.mjs` writes them, so a file it would still
-  // change is one that drifted, typically a bare value back from a `v4` sync.
-  // Unlike the mounts above, this reaches closed overlays, `content/` and `prose/`.
-  it.each(Object.entries(sources))('%s has namespaced markers', (file, source) => {
-    const { edits, skipped } = transform(source, file)
-
-    expect(edits.map(edit => `${file}:${edit.line} -> ${edit.value.trim()}`), 'run `node scripts/data-slot.mjs`').toEqual([])
-    expect(skipped).toEqual([])
   })
 })
