@@ -325,7 +325,8 @@ const dataSlotNamespace = {
       wrong: 'This element is styled by `ui.{{ slot }}()`, so its `data-slot` is `{{ expected }}`.',
       missing: 'Add `data-slot="{{ expected }}"`: every element styled by a slot carries one, so it can be targeted from CSS.',
       ambiguous: 'This element is styled by {{ slots }}. Write its `data-slot` by hand, mirroring the condition.',
-      stray: '`data-slot` can be {{ values }} here, expected `{{ namespace }}` or `{{ namespace }}-<slot>`.'
+      stray: '`data-slot` can be {{ values }} here, expected `{{ namespace }}` or `{{ namespace }}-<slot>`.',
+      unverifiable: 'This `:data-slot` holds no value this rule can read, so its markers go unchecked. Name them inline, as `condition ? \'{{ namespace }}-a\' : \'{{ namespace }}-b\'`, or through a `const` declared in this file.'
     }
   },
   create(context) {
@@ -342,6 +343,8 @@ const dataSlotNamespace = {
 
     let namespace
     const elements = []
+    // Top-level `const`s, so a `:data-slot` naming one can be read back.
+    const bindings = new Map()
 
     const attribute = (element, name) => element.startTag.attributes.find(attr => !attr.directive && attr.key.name === name)
     const directive = (element, name) => element.startTag.attributes.find(attr => attr.directive && attr.key.name.name === 'bind' && attr.key.argument?.name === name)
@@ -421,12 +424,20 @@ const dataSlotNamespace = {
                 })
                 continue
               }
-              // A ternary, or a computed named here and resolved in the script:
+              // A ternary, or a `const` named here and declared in the script:
               // every value it can take has to be one this component renders.
-              const source = /^\w+$/.test(text.trim())
-                ? context.sourceCode.getText().match(new RegExp(`const ${text.trim()} = computed\\(\\(\\) => ([\\s\\S]*?)\\)\\n`))?.[1] ?? ''
-                : text
-              const wrong = [...source.matchAll(/'([^']*)'/g)].map(match => match[1]).filter(value => value !== 'data-slot' && !valid.has(value))
+              const identifier = text.trim()
+              const source = /^[\w$]+$/.test(identifier) ? bindings.get(identifier) : text
+              const values = source === undefined
+                ? []
+                : [...source.matchAll(/'([^']*)'/g)].map(match => match[1]).filter(value => value !== 'data-slot')
+              if (!values.length) {
+                // Reported rather than passed over: reading nothing would make
+                // every value the expression can take look valid.
+                context.report({ node: bound, messageId: 'unverifiable', data: { namespace } })
+                continue
+              }
+              const wrong = values.filter(value => !valid.has(value))
               if (wrong.length) {
                 context.report({ node: bound, messageId: 'stray', data: { values: wrong.map(value => `"${value}"`).join(', '), namespace } })
               }
@@ -457,6 +468,11 @@ const dataSlotNamespace = {
         }
       },
       {
+        'Program > VariableDeclaration > VariableDeclarator'(node) {
+          if (node.id.type === 'Identifier' && node.init) {
+            bindings.set(node.id.name, context.sourceCode.getText(node.init))
+          }
+        },
         ImportDeclaration(node) {
           const path = node.source.value?.match?.(/^#build\/ui\/([\w/-]+)$/)?.[1]
           if (path) {

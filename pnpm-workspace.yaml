@@ -84,6 +84,7 @@ catalog:
   ai: ^7.0.107
   capture-website: ^5.1.0
   citty: ^0.2.2
+  cn: 0.3.2
   colortranslator: ^5.0.0
   consola: ^3.4.2
   defu: ^6.1.7

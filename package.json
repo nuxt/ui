@@ -194,6 +194,7 @@
     "@vitejs/plugin-vue": "catalog:",
     "@vue/test-utils": "catalog:",
     "ai": "catalog:",
+    "cn": "catalog:",
     "embla-carousel": "catalog:",
     "embla-carousel-auto-height": "catalog:",
     "embla-carousel-auto-scroll": "catalog:",
