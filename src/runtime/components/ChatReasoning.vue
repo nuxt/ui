@@ -187,45 +187,45 @@ watch(() => props.text, () => {
     :open="resolvedOpen"
     :disabled="props.disabled"
     :unmount-on-hide="props.unmountOnHide"
-    data-slot="root"
+    data-slot="chat-reasoning"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     @update:open="setOpen"
   >
     <CollapsibleTrigger as-child :disabled="!hasContent">
       <button
         type="button"
-        data-slot="trigger"
+        data-slot="chat-reasoning-trigger"
         :class="ui.trigger({ class: props.ui?.trigger })"
       >
-        <span v-if="props.icon || (hasContent && props.chevron === 'leading')" data-slot="leading" :class="ui.leading({ class: props.ui?.leading })">
+        <span v-if="props.icon || (hasContent && props.chevron === 'leading')" data-slot="chat-reasoning-leading" :class="ui.leading({ class: props.ui?.leading })">
           <UIcon
             v-if="props.icon"
             :name="props.icon"
-            data-slot="leadingIcon"
+            data-slot="chat-reasoning-leadingIcon"
             :class="ui.leadingIcon({ class: props.ui?.leadingIcon, alone: !(hasContent && props.chevron === 'leading') })"
           />
           <UIcon
             v-if="hasContent && props.chevron === 'leading'"
             :name="chevronIconName"
-            data-slot="chevronIcon"
+            data-slot="chat-reasoning-chevronIcon"
             :class="ui.chevronIcon({ class: props.ui?.chevronIcon, alone: !props.icon })"
           />
         </span>
 
-        <UChatShimmer v-if="props.streaming" :text="thinkingText" v-bind="props.shimmer" data-slot="label" :class="ui.label({ class: props.ui?.label })" />
-        <span v-else data-slot="label" :class="ui.label({ class: props.ui?.label })">{{ thinkingText }}</span>
+        <UChatShimmer v-if="props.streaming" :text="thinkingText" v-bind="props.shimmer" data-slot="chat-reasoning-label" :class="ui.label({ class: props.ui?.label })" />
+        <span v-else data-slot="chat-reasoning-label" :class="ui.label({ class: props.ui?.label })">{{ thinkingText }}</span>
 
         <UIcon
           v-if="hasContent && props.chevron === 'trailing'"
           :name="chevronIconName"
-          data-slot="trailingIcon"
+          data-slot="chat-reasoning-trailingIcon"
           :class="ui.trailingIcon({ class: props.ui?.trailingIcon })"
         />
       </button>
     </CollapsibleTrigger>
 
-    <CollapsibleContent data-slot="content" :class="ui.content({ class: props.ui?.content })">
-      <div ref="bodyRef" data-slot="body" :class="ui.body({ class: props.ui?.body })" :style="scrollShadowStyle">
+    <CollapsibleContent data-slot="chat-reasoning-content" :class="ui.content({ class: props.ui?.content })">
+      <div ref="bodyRef" data-slot="chat-reasoning-body" :class="ui.body({ class: props.ui?.body })" :style="scrollShadowStyle">
         <slot :open="isOpen">
           {{ props.text }}
         </slot>

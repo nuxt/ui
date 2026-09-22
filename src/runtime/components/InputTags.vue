@@ -175,7 +175,7 @@ defineExpose({
     v-slot="{ modelValue: tags }"
     :model-value="props.modelValue"
     :default-value="props.defaultValue"
-    :data-slot="($attrs['data-slot'] as string | undefined) ?? 'root'"
+    :data-slot="($attrs['data-slot'] as string | undefined) ?? 'input-tags'"
     :class="ui.root({ class: [ui.base({ class: props.ui?.base }), props.ui?.root, props.class] })"
     v-bind="rootProps"
     :name="name"
@@ -186,20 +186,20 @@ defineExpose({
       v-for="(item, index) in tags"
       :key="index"
       :value="item"
-      data-slot="item"
+      data-slot="input-tags-item"
       :class="ui.item({ class: [props.ui?.item] })"
     >
-      <TagsInputItemText data-slot="itemText" :class="ui.itemText({ class: [props.ui?.itemText] })">
+      <TagsInputItemText data-slot="input-tags-itemText" :class="ui.itemText({ class: [props.ui?.itemText] })">
         <slot v-if="!!slots['item-text']" name="item-text" :item="(item as T)" :index="index" :ui="ui" />
       </TagsInputItemText>
 
       <TagsInputItemDelete
-        data-slot="itemDelete"
+        data-slot="input-tags-itemDelete"
         :class="ui.itemDelete({ class: [props.ui?.itemDelete] })"
         :disabled="disabled"
       >
         <slot name="item-delete" :item="(item as T)" :index="index" :ui="ui">
-          <UIcon :name="props.deleteIcon || appConfig.ui.icons.close" data-slot="itemDeleteIcon" :class="ui.itemDeleteIcon({ class: [props.ui?.itemDeleteIcon] })" />
+          <UIcon :name="props.deleteIcon || appConfig.ui.icons.close" data-slot="input-tags-itemDeleteIcon" :class="ui.itemDeleteIcon({ class: [props.ui?.itemDeleteIcon] })" />
         </slot>
       </TagsInputItemDelete>
     </TagsInputItem>
@@ -209,7 +209,7 @@ defineExpose({
       v-bind="{ ...$attrs, ...ariaAttrs }"
       :placeholder="props.placeholder"
       :max-length="props.maxLength"
-      data-slot="input"
+      data-slot="input-tags-input"
       :class="ui.input({ class: props.ui?.input })"
       @blur="onBlur"
       @focus="onFocus"
@@ -217,16 +217,16 @@ defineExpose({
 
     <slot :ui="ui" />
 
-    <span v-if="isLeading || !!props.avatar || !!slots.leading" data-slot="leading" :class="ui.leading({ class: props.ui?.leading })">
+    <span v-if="isLeading || !!props.avatar || !!slots.leading" data-slot="input-tags-leading" :class="ui.leading({ class: props.ui?.leading })">
       <slot name="leading" :ui="ui">
-        <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" data-slot="leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
-        <UAvatar v-else-if="!!props.avatar" :size="((props.ui?.leadingAvatarSize || ui.leadingAvatarSize()) as AvatarProps['size'])" v-bind="props.avatar" data-slot="leadingAvatar" :class="ui.leadingAvatar({ class: props.ui?.leadingAvatar })" />
+        <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" data-slot="input-tags-leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
+        <UAvatar v-else-if="!!props.avatar" :size="((props.ui?.leadingAvatarSize || ui.leadingAvatarSize()) as AvatarProps['size'])" v-bind="props.avatar" data-slot="input-tags-leadingAvatar" :class="ui.leadingAvatar({ class: props.ui?.leadingAvatar })" />
       </slot>
     </span>
 
-    <span v-if="isTrailing || !!slots.trailing" data-slot="trailing" :class="ui.trailing({ class: props.ui?.trailing })">
+    <span v-if="isTrailing || !!slots.trailing" data-slot="input-tags-trailing" :class="ui.trailing({ class: props.ui?.trailing })">
       <slot name="trailing" :ui="ui">
-        <UIcon v-if="trailingIconName" :name="trailingIconName" data-slot="trailingIcon" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
+        <UIcon v-if="trailingIconName" :name="trailingIconName" data-slot="input-tags-trailingIcon" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
       </slot>
     </span>
   </TagsInputRoot>

@@ -131,21 +131,21 @@ function onSelect(event: Event, item: T) {
 </script>
 
 <template>
-  <Primitive :as="props.as" :data-orientation="props.orientation" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <Primitive :as="props.as" :data-orientation="props.orientation" data-slot="timeline" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <div
       v-for="(item, index) in props.items"
       :key="index"
-      data-slot="item"
+      data-slot="timeline-item"
       :class="ui.item({ class: [props.ui?.item, item.ui?.item, item.class] })"
       :data-state="getItemState(index)"
       @click="onSelect($event, item)"
     >
-      <div data-slot="container" :class="ui.container({ class: [props.ui?.container, item.ui?.container] })">
+      <div data-slot="timeline-container" :class="ui.container({ class: [props.ui?.container, item.ui?.container] })">
         <UAvatar
           :size="props.size"
           :icon="item.icon"
           v-bind="typeof item.avatar === 'object' ? item.avatar : {}"
-          data-slot="indicator"
+          data-slot="timeline-indicator"
           :class="ui.indicator({ class: [props.ui?.indicator, item.ui?.indicator] })"
           :ui="{ icon: 'text-inherit', fallback: 'text-inherit' }"
         >
@@ -154,25 +154,25 @@ function onSelect(event: Event, item: T) {
 
         <Separator
           v-if="index < props.items.length - 1"
-          data-slot="separator"
+          data-slot="timeline-separator"
           :class="ui.separator({ class: [props.ui?.separator, item.ui?.separator] })"
           :orientation="props.orientation"
         />
       </div>
 
-      <div data-slot="wrapper" :class="ui.wrapper({ class: [props.ui?.wrapper, item.ui?.wrapper] })">
+      <div data-slot="timeline-wrapper" :class="ui.wrapper({ class: [props.ui?.wrapper, item.ui?.wrapper] })">
         <slot :name="((item.slot ? `${item.slot}-wrapper` : 'wrapper') as keyof TimelineSlots<T>)" :item="(item as Extract<T, { slot: string; }>)">
-          <div v-if="item.date || !!slots[(item.slot ? `${item.slot}-date` : 'date') as keyof TimelineSlots<T>]" data-slot="date" :class="ui.date({ class: [props.ui?.date, item.ui?.date] })">
+          <div v-if="item.date || !!slots[(item.slot ? `${item.slot}-date` : 'date') as keyof TimelineSlots<T>]" data-slot="timeline-date" :class="ui.date({ class: [props.ui?.date, item.ui?.date] })">
             <slot :name="((item.slot ? `${item.slot}-date` : 'date') as keyof TimelineSlots<T>)" :item="(item as Extract<T, { slot: string; }>)">
               {{ item.date }}
             </slot>
           </div>
-          <div v-if="item.title || !!slots[(item.slot ? `${item.slot}-title` : 'title') as keyof TimelineSlots<T>]" data-slot="title" :class="ui.title({ class: [props.ui?.title, item.ui?.title] })">
+          <div v-if="item.title || !!slots[(item.slot ? `${item.slot}-title` : 'title') as keyof TimelineSlots<T>]" data-slot="timeline-title" :class="ui.title({ class: [props.ui?.title, item.ui?.title] })">
             <slot :name="((item.slot ? `${item.slot}-title` : 'title') as keyof TimelineSlots<T>)" :item="(item as Extract<T, { slot: string; }>)">
               {{ item.title }}
             </slot>
           </div>
-          <div v-if="item.description || !!slots[(item.slot ? `${item.slot}-description` : 'description') as keyof TimelineSlots<T>]" data-slot="description" :class="ui.description({ class: [props.ui?.description, item.ui?.description] })">
+          <div v-if="item.description || !!slots[(item.slot ? `${item.slot}-description` : 'description') as keyof TimelineSlots<T>]" data-slot="timeline-description" :class="ui.description({ class: [props.ui?.description, item.ui?.description] })">
             <slot :name="((item.slot ? `${item.slot}-description` : 'description') as keyof TimelineSlots<T>)" :item="(item as Extract<T, { slot: string; }>)">
               {{ item.description }}
             </slot>

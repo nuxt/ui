@@ -32,6 +32,8 @@ const component = ({ name, primitive, prose, content }) => {
     : `appConfig.ui?.${camelName}`
   // A prose component stands for one HTML element, its `base`.
   const slot = prose ? 'base' : 'root'
+  // The outermost element is named after the component. Prose emits no marker.
+  const dataSlot = prose ? '' : `data-slot="${kebabName}" `
 
   return {
     filename: `src/runtime/components/${dirPrefix}${upperName}.vue`,
@@ -79,7 +81,7 @@ const ui = computed(() => tv(theme, ${appConfigLookup})())
 </script>
 
 <template>
-  <Primitive :as="props.as" data-slot="${slot}" :class="ui.${slot}({ class: [props.ui?.${slot}, props.class] })">
+  <Primitive :as="props.as" ${dataSlot}:class="ui.${slot}({ class: [props.ui?.${slot}, props.class] })">
     <slot />
   </Primitive>
 </template>
@@ -132,7 +134,7 @@ const ui = computed(() => tv(theme, ${appConfigLookup})())
 </script>
 
 <template>
-  <${upperName}Root v-bind="rootProps" data-slot="${slot}" :class="ui.${slot}({ class: [props.ui?.${slot}, props.class] })">
+  <${upperName}Root v-bind="rootProps" ${dataSlot}:class="ui.${slot}({ class: [props.ui?.${slot}, props.class] })">
     <slot />
   </${upperName}Root>
 </template>

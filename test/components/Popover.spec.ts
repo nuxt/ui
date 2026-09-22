@@ -29,7 +29,7 @@ describe('Popover', () => {
     })
 
     // Content renders, positioned against the reference
-    expect(wrapper.find('[data-slot="content"]').exists()).toBe(true)
+    expect(wrapper.find('[data-slot="popover-content"]').exists()).toBe(true)
     expect(wrapper.text()).toContain('Tour step')
 
     // No trigger and no leftover anchor placeholder element
@@ -44,7 +44,7 @@ describe('Popover', () => {
     })
 
     expect(wrapper.text()).toContain('Trigger')
-    expect(wrapper.find('[data-slot="content"]').exists()).toBe(true)
+    expect(wrapper.find('[data-slot="popover-content"]').exists()).toBe(true)
     expect(wrapper.text()).toContain('Anchored content')
   })
 

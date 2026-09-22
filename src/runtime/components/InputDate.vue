@@ -193,7 +193,7 @@ defineExpose({
       :ref="el => setInputRef(index, el)"
       :type="type"
       :part="segment.part"
-      data-slot="segment"
+      data-slot="input-date-segment"
       :class="ui.segment({ class: props.ui?.segment })"
       :data-segment="segment.part"
     >
@@ -204,7 +204,7 @@ defineExpose({
   <DateField.Root
     :id="id"
     v-slot="{ segments }"
-    data-slot="base"
+    data-slot="input-date"
     v-bind="{ ...rootProps, ...$attrs, ...ariaAttrs }"
     :model-value="(props.modelValue as DateValue)"
     :default-value="(props.defaultValue as DateValue)"
@@ -221,23 +221,23 @@ defineExpose({
     <template v-else>
       <ReuseSegmentsTemplate :segments="segments.start" type="start" />
       <slot name="separator" :ui="ui">
-        <UIcon :name="props.separatorIcon || appConfig.ui.icons.minus" data-slot="separatorIcon" :class="ui.separatorIcon({ class: props.ui?.separatorIcon })" />
+        <UIcon :name="props.separatorIcon || appConfig.ui.icons.minus" data-slot="input-date-separatorIcon" :class="ui.separatorIcon({ class: props.ui?.separatorIcon })" />
       </slot>
       <ReuseSegmentsTemplate :segments="segments.end" type="end" />
     </template>
 
     <slot :ui="ui" />
 
-    <span v-if="isLeading || !!props.avatar || !!slots.leading" data-slot="leading" :class="ui.leading({ class: props.ui?.leading })">
+    <span v-if="isLeading || !!props.avatar || !!slots.leading" data-slot="input-date-leading" :class="ui.leading({ class: props.ui?.leading })">
       <slot name="leading" :ui="ui">
-        <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" data-slot="leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
-        <UAvatar v-else-if="!!props.avatar" :size="((props.ui?.leadingAvatarSize || ui.leadingAvatarSize()) as AvatarProps['size'])" v-bind="props.avatar" data-slot="leadingAvatar" :class="ui.leadingAvatar({ class: props.ui?.leadingAvatar })" />
+        <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" data-slot="input-date-leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
+        <UAvatar v-else-if="!!props.avatar" :size="((props.ui?.leadingAvatarSize || ui.leadingAvatarSize()) as AvatarProps['size'])" v-bind="props.avatar" data-slot="input-date-leadingAvatar" :class="ui.leadingAvatar({ class: props.ui?.leadingAvatar })" />
       </slot>
     </span>
 
-    <span v-if="isTrailing || !!slots.trailing" data-slot="trailing" :class="ui.trailing({ class: props.ui?.trailing })">
+    <span v-if="isTrailing || !!slots.trailing" data-slot="input-date-trailing" :class="ui.trailing({ class: props.ui?.trailing })">
       <slot name="trailing" :ui="ui">
-        <UIcon v-if="trailingIconName" :name="trailingIconName" data-slot="trailingIcon" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
+        <UIcon v-if="trailingIconName" :name="trailingIconName" data-slot="input-date-trailingIcon" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
       </slot>
     </span>
   </DateField.Root>

@@ -1,17 +1,17 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Banner > renders with actions correctly 1`] = `
-"<div class="banner relative z-50 w-full transition-colors bg-primary" data-banner-id="banner-banner" data-slot="root">
+"<div class="banner relative z-50 w-full transition-colors bg-primary" data-banner-id="banner-banner" data-slot="banner">
   <!--v-if-->
-  <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-12" data-slot="container">
-    <div data-slot="left" class="hidden lg:flex-1 lg:flex lg:items-center"></div>
-    <div data-slot="center" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="size-5 shrink-0 text-inverted pointer-events-none"></svg>
-      <div data-slot="title" class="text-sm text-inverted font-medium truncate">Title</div>
-      <div data-slot="actions" class="flex gap-1.5 shrink-0 isolate"><button type="button" data-slot="base" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2 py-1 text-xs gap-1 text-inverted bg-inverted hover:bg-inverted/90 active:bg-inverted/90 disabled:bg-inverted aria-disabled:bg-inverted outline-inverted/25 focus-visible:outline-3">
-          <!--v-if--><span data-slot="label" class="truncate">Learn more</span><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="trailingIcon" class="shrink-0 size-4"></svg>
+  <div data-slot="banner-container" class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-12">
+    <div data-slot="banner-left" class="hidden lg:flex-1 lg:flex lg:items-center"></div>
+    <div data-slot="banner-center" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="banner-icon" class="size-5 shrink-0 text-inverted pointer-events-none"></svg>
+      <div data-slot="banner-title" class="text-sm text-inverted font-medium truncate">Title</div>
+      <div data-slot="banner-actions" class="flex gap-1.5 shrink-0 isolate"><button type="button" data-slot="button" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors px-2 py-1 text-xs gap-1 text-inverted bg-inverted hover:bg-inverted/90 active:bg-inverted/90 disabled:bg-inverted aria-disabled:bg-inverted outline-inverted/25 focus-visible:outline-3">
+          <!--v-if--><span data-slot="button-label" class="truncate">Learn more</span><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="button-trailingIcon" class="shrink-0 size-4"></svg>
         </button></div>
     </div>
-    <div data-slot="right" class="lg:flex-1 flex items-center justify-end">
+    <div data-slot="banner-right" class="lg:flex-1 flex items-center justify-end">
       <!--v-if-->
     </div>
   </div>
@@ -19,16 +19,16 @@ exports[`Banner > renders with actions correctly 1`] = `
 `;
 
 exports[`Banner > renders with actions slot correctly 1`] = `
-"<div class="banner relative z-50 w-full transition-colors bg-primary" data-banner-id="banner-banner" data-slot="root">
+"<div class="banner relative z-50 w-full transition-colors bg-primary" data-banner-id="banner-banner" data-slot="banner">
   <!--v-if-->
-  <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-12" data-slot="container">
-    <div data-slot="left" class="hidden lg:flex-1 lg:flex lg:items-center"></div>
-    <div data-slot="center" class="flex items-center gap-1.5 min-w-0">
+  <div data-slot="banner-container" class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-12">
+    <div data-slot="banner-left" class="hidden lg:flex-1 lg:flex lg:items-center"></div>
+    <div data-slot="banner-center" class="flex items-center gap-1.5 min-w-0">
       <!--v-if-->
       <!--v-if-->
-      <div data-slot="actions" class="flex gap-1.5 shrink-0 isolate">Actions slot</div>
+      <div data-slot="banner-actions" class="flex gap-1.5 shrink-0 isolate">Actions slot</div>
     </div>
-    <div data-slot="right" class="lg:flex-1 flex items-center justify-end">
+    <div data-slot="banner-right" class="lg:flex-1 flex items-center justify-end">
       <!--v-if-->
     </div>
   </div>
@@ -36,16 +36,16 @@ exports[`Banner > renders with actions slot correctly 1`] = `
 `;
 
 exports[`Banner > renders with as correctly 1`] = `
-"<section class="banner relative z-50 w-full transition-colors bg-primary" data-banner-id="banner-banner" data-slot="root">
+"<section class="banner relative z-50 w-full transition-colors bg-primary" data-banner-id="banner-banner" data-slot="banner">
   <!--v-if-->
-  <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-12" data-slot="container">
-    <div data-slot="left" class="hidden lg:flex-1 lg:flex lg:items-center"></div>
-    <div data-slot="center" class="flex items-center gap-1.5 min-w-0">
+  <div data-slot="banner-container" class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-12">
+    <div data-slot="banner-left" class="hidden lg:flex-1 lg:flex lg:items-center"></div>
+    <div data-slot="banner-center" class="flex items-center gap-1.5 min-w-0">
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </div>
-    <div data-slot="right" class="lg:flex-1 flex items-center justify-end">
+    <div data-slot="banner-right" class="lg:flex-1 flex items-center justify-end">
       <!--v-if-->
     </div>
   </div>
@@ -53,16 +53,16 @@ exports[`Banner > renders with as correctly 1`] = `
 `;
 
 exports[`Banner > renders with class correctly 1`] = `
-"<div class="banner relative w-full transition-colors bg-primary z-10" data-banner-id="banner-banner" data-slot="root">
+"<div class="banner relative w-full transition-colors bg-primary z-10" data-banner-id="banner-banner" data-slot="banner">
   <!--v-if-->
-  <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-12" data-slot="container">
-    <div data-slot="left" class="hidden lg:flex-1 lg:flex lg:items-center"></div>
-    <div data-slot="center" class="flex items-center gap-1.5 min-w-0">
+  <div data-slot="banner-container" class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-12">
+    <div data-slot="banner-left" class="hidden lg:flex-1 lg:flex lg:items-center"></div>
+    <div data-slot="banner-center" class="flex items-center gap-1.5 min-w-0">
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </div>
-    <div data-slot="right" class="lg:flex-1 flex items-center justify-end">
+    <div data-slot="banner-right" class="lg:flex-1 flex items-center justify-end">
       <!--v-if-->
     </div>
   </div>
@@ -70,16 +70,16 @@ exports[`Banner > renders with class correctly 1`] = `
 `;
 
 exports[`Banner > renders with close correctly 1`] = `
-"<div class="banner relative z-50 w-full transition-colors bg-primary" data-banner-id="banner-banner" data-slot="root">
+"<div class="banner relative z-50 w-full transition-colors bg-primary" data-banner-id="banner-banner" data-slot="banner">
   <!--v-if-->
-  <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-12" data-slot="container">
-    <div data-slot="left" class="hidden lg:flex-1 lg:flex lg:items-center"></div>
-    <div data-slot="center" class="flex items-center gap-1.5 min-w-0">
+  <div data-slot="banner-container" class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-12">
+    <div data-slot="banner-left" class="hidden lg:flex-1 lg:flex lg:items-center"></div>
+    <div data-slot="banner-center" class="flex items-center gap-1.5 min-w-0">
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </div>
-    <div data-slot="right" class="lg:flex-1 flex items-center justify-end"><button type="button" data-slot="close" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 text-inverted hover:bg-default/10 focus-visible:bg-default/10 -me-1.5 lg:me-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="leadingIcon" class="shrink-0 size-5"></svg>
+    <div data-slot="banner-right" class="lg:flex-1 flex items-center justify-end"><button type="button" data-slot="banner-close" aria-label="Close" class="rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 transition-colors text-sm gap-1.5 active:bg-elevated outline-inverted/25 focus-visible:outline-3 hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent p-1.5 text-inverted hover:bg-default/10 focus-visible:bg-default/10 -me-1.5 lg:me-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="button-leadingIcon" class="shrink-0 size-5"></svg>
         <!--v-if-->
         <!--v-if-->
       </button></div>
@@ -88,31 +88,31 @@ exports[`Banner > renders with close correctly 1`] = `
 `;
 
 exports[`Banner > renders with close slot correctly 1`] = `
-"<div class="banner relative z-50 w-full transition-colors bg-primary" data-banner-id="banner-banner" data-slot="root">
+"<div class="banner relative z-50 w-full transition-colors bg-primary" data-banner-id="banner-banner" data-slot="banner">
   <!--v-if-->
-  <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-12" data-slot="container">
-    <div data-slot="left" class="hidden lg:flex-1 lg:flex lg:items-center"></div>
-    <div data-slot="center" class="flex items-center gap-1.5 min-w-0">
+  <div data-slot="banner-container" class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-12">
+    <div data-slot="banner-left" class="hidden lg:flex-1 lg:flex lg:items-center"></div>
+    <div data-slot="banner-center" class="flex items-center gap-1.5 min-w-0">
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </div>
-    <div data-slot="right" class="lg:flex-1 flex items-center justify-end">Close slot</div>
+    <div data-slot="banner-right" class="lg:flex-1 flex items-center justify-end">Close slot</div>
   </div>
 </div>"
 `;
 
 exports[`Banner > renders with closeIcon correctly 1`] = `
-"<div class="banner relative z-50 w-full transition-colors bg-primary" data-banner-id="banner-banner" data-slot="root">
+"<div class="banner relative z-50 w-full transition-colors bg-primary" data-banner-id="banner-banner" data-slot="banner">
   <!--v-if-->
-  <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-12" data-slot="container">
-    <div data-slot="left" class="hidden lg:flex-1 lg:flex lg:items-center"></div>
-    <div data-slot="center" class="flex items-center gap-1.5 min-w-0">
+  <div data-slot="banner-container" class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-12">
+    <div data-slot="banner-left" class="hidden lg:flex-1 lg:flex lg:items-center"></div>
+    <div data-slot="banner-center" class="flex items-center gap-1.5 min-w-0">
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </div>
-    <div data-slot="right" class="lg:flex-1 flex items-center justify-end">
+    <div data-slot="banner-right" class="lg:flex-1 flex items-center justify-end">
       <!--v-if-->
     </div>
   </div>
@@ -120,15 +120,15 @@ exports[`Banner > renders with closeIcon correctly 1`] = `
 `;
 
 exports[`Banner > renders with icon correctly 1`] = `
-"<div class="banner relative z-50 w-full transition-colors bg-primary" data-banner-id="banner-banner" data-slot="root">
+"<div class="banner relative z-50 w-full transition-colors bg-primary" data-banner-id="banner-banner" data-slot="banner">
   <!--v-if-->
-  <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-12" data-slot="container">
-    <div data-slot="left" class="hidden lg:flex-1 lg:flex lg:items-center"></div>
-    <div data-slot="center" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="size-5 shrink-0 text-inverted pointer-events-none"></svg>
-      <div data-slot="title" class="text-sm text-inverted font-medium truncate">Title</div>
+  <div data-slot="banner-container" class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-12">
+    <div data-slot="banner-left" class="hidden lg:flex-1 lg:flex lg:items-center"></div>
+    <div data-slot="banner-center" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="banner-icon" class="size-5 shrink-0 text-inverted pointer-events-none"></svg>
+      <div data-slot="banner-title" class="text-sm text-inverted font-medium truncate">Title</div>
       <!--v-if-->
     </div>
-    <div data-slot="right" class="lg:flex-1 flex items-center justify-end">
+    <div data-slot="banner-right" class="lg:flex-1 flex items-center justify-end">
       <!--v-if-->
     </div>
   </div>
@@ -136,16 +136,16 @@ exports[`Banner > renders with icon correctly 1`] = `
 `;
 
 exports[`Banner > renders with id correctly 1`] = `
-"<div class="banner relative z-50 w-full transition-colors bg-primary" data-banner-id="banner-banner" data-slot="root">
+"<div class="banner relative z-50 w-full transition-colors bg-primary" data-banner-id="banner-banner" data-slot="banner">
   <!--v-if-->
-  <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-12" data-slot="container">
-    <div data-slot="left" class="hidden lg:flex-1 lg:flex lg:items-center"></div>
-    <div data-slot="center" class="flex items-center gap-1.5 min-w-0">
+  <div data-slot="banner-container" class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-12">
+    <div data-slot="banner-left" class="hidden lg:flex-1 lg:flex lg:items-center"></div>
+    <div data-slot="banner-center" class="flex items-center gap-1.5 min-w-0">
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </div>
-    <div data-slot="right" class="lg:flex-1 flex items-center justify-end">
+    <div data-slot="banner-right" class="lg:flex-1 flex items-center justify-end">
       <!--v-if-->
     </div>
   </div>
@@ -153,15 +153,15 @@ exports[`Banner > renders with id correctly 1`] = `
 `;
 
 exports[`Banner > renders with leading slot correctly 1`] = `
-"<div class="banner relative z-50 w-full transition-colors bg-primary" data-banner-id="banner-banner" data-slot="root">
+"<div class="banner relative z-50 w-full transition-colors bg-primary" data-banner-id="banner-banner" data-slot="banner">
   <!--v-if-->
-  <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-12" data-slot="container">
-    <div data-slot="left" class="hidden lg:flex-1 lg:flex lg:items-center"></div>
-    <div data-slot="center" class="flex items-center gap-1.5 min-w-0">Leading slot
+  <div data-slot="banner-container" class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-12">
+    <div data-slot="banner-left" class="hidden lg:flex-1 lg:flex lg:items-center"></div>
+    <div data-slot="banner-center" class="flex items-center gap-1.5 min-w-0">Leading slot
       <!--v-if-->
       <!--v-if-->
     </div>
-    <div data-slot="right" class="lg:flex-1 flex items-center justify-end">
+    <div data-slot="banner-right" class="lg:flex-1 flex items-center justify-end">
       <!--v-if-->
     </div>
   </div>
@@ -169,15 +169,15 @@ exports[`Banner > renders with leading slot correctly 1`] = `
 `;
 
 exports[`Banner > renders with neutral color correctly 1`] = `
-"<div class="banner relative z-50 w-full transition-colors bg-inverted" data-banner-id="banner-banner" data-slot="root">
+"<div class="banner relative z-50 w-full transition-colors bg-inverted" data-banner-id="banner-banner" data-slot="banner">
   <!--v-if-->
-  <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-12" data-slot="container">
-    <div data-slot="left" class="hidden lg:flex-1 lg:flex lg:items-center"></div>
-    <div data-slot="center" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class="size-5 shrink-0 text-inverted pointer-events-none"></svg>
-      <div data-slot="title" class="text-sm text-inverted font-medium truncate">Title</div>
+  <div data-slot="banner-container" class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-12">
+    <div data-slot="banner-left" class="hidden lg:flex-1 lg:flex lg:items-center"></div>
+    <div data-slot="banner-center" class="flex items-center gap-1.5 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="banner-icon" class="size-5 shrink-0 text-inverted pointer-events-none"></svg>
+      <div data-slot="banner-title" class="text-sm text-inverted font-medium truncate">Title</div>
       <!--v-if-->
     </div>
-    <div data-slot="right" class="lg:flex-1 flex items-center justify-end">
+    <div data-slot="banner-right" class="lg:flex-1 flex items-center justify-end">
       <!--v-if-->
     </div>
   </div>
@@ -185,15 +185,15 @@ exports[`Banner > renders with neutral color correctly 1`] = `
 `;
 
 exports[`Banner > renders with target correctly 1`] = `
-"<div class="banner relative z-50 w-full transition-colors bg-primary outline-(--ui-bg)/25 -outline-offset-3 has-[>a:focus-visible]:outline-3 hover:bg-primary/90" data-banner-id="banner-banner" data-slot="root"><a href="https://nuxt.com" rel="noopener noreferrer" target="_blank" class="focus:outline-none"><span class="absolute inset-0" aria-hidden="true"></span></a>
-  <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-12" data-slot="container">
-    <div data-slot="left" class="hidden lg:flex-1 lg:flex lg:items-center"></div>
-    <div data-slot="center" class="flex items-center gap-1.5 min-w-0">
+"<div class="banner relative z-50 w-full transition-colors bg-primary outline-(--ui-bg)/25 -outline-offset-3 has-[>a:focus-visible]:outline-3 hover:bg-primary/90" data-banner-id="banner-banner" data-slot="banner"><a href="https://nuxt.com" rel="noopener noreferrer" target="_blank" class="focus:outline-none"><span class="absolute inset-0" aria-hidden="true"></span></a>
+  <div data-slot="banner-container" class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-12">
+    <div data-slot="banner-left" class="hidden lg:flex-1 lg:flex lg:items-center"></div>
+    <div data-slot="banner-center" class="flex items-center gap-1.5 min-w-0">
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </div>
-    <div data-slot="right" class="lg:flex-1 flex items-center justify-end">
+    <div data-slot="banner-right" class="lg:flex-1 flex items-center justify-end">
       <!--v-if-->
     </div>
   </div>
@@ -201,16 +201,16 @@ exports[`Banner > renders with target correctly 1`] = `
 `;
 
 exports[`Banner > renders with title correctly 1`] = `
-"<div class="banner relative z-50 w-full transition-colors bg-primary" data-banner-id="banner-banner" data-slot="root">
+"<div class="banner relative z-50 w-full transition-colors bg-primary" data-banner-id="banner-banner" data-slot="banner">
   <!--v-if-->
-  <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-12" data-slot="container">
-    <div data-slot="left" class="hidden lg:flex-1 lg:flex lg:items-center"></div>
-    <div data-slot="center" class="flex items-center gap-1.5 min-w-0">
+  <div data-slot="banner-container" class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-12">
+    <div data-slot="banner-left" class="hidden lg:flex-1 lg:flex lg:items-center"></div>
+    <div data-slot="banner-center" class="flex items-center gap-1.5 min-w-0">
       <!--v-if-->
-      <div data-slot="title" class="text-sm text-inverted font-medium truncate">Title</div>
+      <div data-slot="banner-title" class="text-sm text-inverted font-medium truncate">Title</div>
       <!--v-if-->
     </div>
-    <div data-slot="right" class="lg:flex-1 flex items-center justify-end">
+    <div data-slot="banner-right" class="lg:flex-1 flex items-center justify-end">
       <!--v-if-->
     </div>
   </div>
@@ -218,16 +218,16 @@ exports[`Banner > renders with title correctly 1`] = `
 `;
 
 exports[`Banner > renders with title slot correctly 1`] = `
-"<div class="banner relative z-50 w-full transition-colors bg-primary" data-banner-id="banner-banner" data-slot="root">
+"<div class="banner relative z-50 w-full transition-colors bg-primary" data-banner-id="banner-banner" data-slot="banner">
   <!--v-if-->
-  <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-12" data-slot="container">
-    <div data-slot="left" class="hidden lg:flex-1 lg:flex lg:items-center"></div>
-    <div data-slot="center" class="flex items-center gap-1.5 min-w-0">
+  <div data-slot="banner-container" class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-12">
+    <div data-slot="banner-left" class="hidden lg:flex-1 lg:flex lg:items-center"></div>
+    <div data-slot="banner-center" class="flex items-center gap-1.5 min-w-0">
       <!--v-if-->
-      <div data-slot="title" class="text-sm text-inverted font-medium truncate">Title slot</div>
+      <div data-slot="banner-title" class="text-sm text-inverted font-medium truncate">Title slot</div>
       <!--v-if-->
     </div>
-    <div data-slot="right" class="lg:flex-1 flex items-center justify-end">
+    <div data-slot="banner-right" class="lg:flex-1 flex items-center justify-end">
       <!--v-if-->
     </div>
   </div>
@@ -235,15 +235,15 @@ exports[`Banner > renders with title slot correctly 1`] = `
 `;
 
 exports[`Banner > renders with to correctly 1`] = `
-"<div class="banner relative z-50 w-full transition-colors bg-primary outline-(--ui-bg)/25 -outline-offset-3 has-[>a:focus-visible]:outline-3 hover:bg-primary/90" data-banner-id="banner-banner" data-slot="root"><a href="/getting-started" class="focus:outline-none"><span class="absolute inset-0" aria-hidden="true"></span></a>
-  <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-12" data-slot="container">
-    <div data-slot="left" class="hidden lg:flex-1 lg:flex lg:items-center"></div>
-    <div data-slot="center" class="flex items-center gap-1.5 min-w-0">
+"<div class="banner relative z-50 w-full transition-colors bg-primary outline-(--ui-bg)/25 -outline-offset-3 has-[>a:focus-visible]:outline-3 hover:bg-primary/90" data-banner-id="banner-banner" data-slot="banner"><a href="/getting-started" class="focus:outline-none"><span class="absolute inset-0" aria-hidden="true"></span></a>
+  <div data-slot="banner-container" class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 h-12">
+    <div data-slot="banner-left" class="hidden lg:flex-1 lg:flex lg:items-center"></div>
+    <div data-slot="banner-center" class="flex items-center gap-1.5 min-w-0">
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </div>
-    <div data-slot="right" class="lg:flex-1 flex items-center justify-end">
+    <div data-slot="banner-right" class="lg:flex-1 flex items-center justify-end">
       <!--v-if-->
     </div>
   </div>
@@ -251,16 +251,16 @@ exports[`Banner > renders with to correctly 1`] = `
 `;
 
 exports[`Banner > renders with ui correctly 1`] = `
-"<div class="banner relative z-50 w-full transition-colors bg-primary" data-banner-id="banner-banner" data-slot="root">
+"<div class="banner relative z-50 w-full transition-colors bg-primary" data-banner-id="banner-banner" data-slot="banner">
   <!--v-if-->
-  <div class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-12 gap-6" data-slot="container">
-    <div data-slot="left" class="hidden lg:flex-1 lg:flex lg:items-center"></div>
-    <div data-slot="center" class="flex items-center gap-1.5 min-w-0">
+  <div data-slot="banner-container" class="w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-12 gap-6">
+    <div data-slot="banner-left" class="hidden lg:flex-1 lg:flex lg:items-center"></div>
+    <div data-slot="banner-center" class="flex items-center gap-1.5 min-w-0">
       <!--v-if-->
       <!--v-if-->
       <!--v-if-->
     </div>
-    <div data-slot="right" class="lg:flex-1 flex items-center justify-end">
+    <div data-slot="banner-right" class="lg:flex-1 flex items-center justify-end">
       <!--v-if-->
     </div>
   </div>
