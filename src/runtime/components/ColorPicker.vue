@@ -219,12 +219,12 @@ function normalizeAlpha(alpha: number): number {
   return 100 - alpha
 }
 
-const selectorRef = ref<HTMLDivElement | null>(null)
-const selectorThumbRef = ref<HTMLDivElement | null>(null)
-const trackRef = ref<HTMLDivElement | null>(null)
-const trackThumbRef = ref<HTMLDivElement | null>(null)
-const alphaTrackRef = ref<HTMLDivElement | null>(null)
-const alphaTrackThumbRef = ref<HTMLDivElement | null>(null)
+const selectorRef = useTemplateRef<HTMLDivElement>('selectorRef')
+const selectorThumbRef = useTemplateRef<HTMLDivElement>('selectorThumbRef')
+const trackRef = useTemplateRef<HTMLDivElement>('trackRef')
+const trackThumbRef = useTemplateRef<HTMLDivElement>('trackThumbRef')
+const alphaTrackRef = useTemplateRef<HTMLDivElement>('alphaTrackRef')
+const alphaTrackThumbRef = useTemplateRef<HTMLDivElement>('alphaTrackThumbRef')
 
 // eslint-disable-next-line vue/no-dupe-keys
 const disabled = computed(() => props.disabled)
