@@ -527,7 +527,7 @@ describe('Table', () => {
       props: { columns: columns as any, columnVisibility }
     })
 
-    expect(empty.find('[data-slot="empty"]').attributes('colspan')).toBe(visibleColumns)
+    expect(empty.find('[data-slot="table-empty"]').attributes('colspan')).toBe(visibleColumns)
 
     const expanded = await mountSuspended(Table, {
       props: { ...props, columns: columns as any, columnVisibility, expanded: { 0: true } },

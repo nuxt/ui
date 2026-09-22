@@ -61,7 +61,7 @@ describe('app.config defaultVariants', () => {
       props: { label: 'Label' }
     })
 
-    const root = wrapper.find('[data-slot="root"]')
+    const root = wrapper.find('[data-slot="form-field"]')
     // Drives both the `data-orientation` attribute and the tv class resolution,
     // even though `orientation` isn't set in the theme's `defaultVariants`.
     expect(root.attributes('data-orientation')).toBe('horizontal')
@@ -73,7 +73,7 @@ describe('app.config defaultVariants', () => {
       props: { label: 'Label', orientation: 'vertical' }
     })
 
-    const root = wrapper.find('[data-slot="root"]')
+    const root = wrapper.find('[data-slot="form-field"]')
     expect(root.attributes('data-orientation')).toBe('vertical')
   })
 })

@@ -212,7 +212,7 @@ const ui = computed(() => tv(theme, appConfig.ui?.dropdownMenu)({
         <slot :name="(name as keyof DropdownMenuSlots<T>)" v-bind="slotData" />
       </template>
 
-      <DropdownMenuArrow v-if="!!props.arrow" v-bind="arrowProps" data-slot="arrow" :class="ui.arrow({ class: props.ui?.arrow })" />
+      <DropdownMenuArrow v-if="!!props.arrow" v-bind="arrowProps" data-slot="dropdown-menu-arrow" :class="ui.arrow({ class: props.ui?.arrow })" />
     </UDropdownMenuContent>
   </DropdownMenuRoot>
 </template>

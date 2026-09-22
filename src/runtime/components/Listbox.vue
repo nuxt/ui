@@ -310,54 +310,54 @@ const filteredItems = computed(() => filteredGroups.value.flatMap(group => group
 <!-- eslint-disable vue/no-template-shadow -->
 <template>
   <DefineItemTemplate v-slot="{ item, index }">
-    <ListboxGroupLabel v-if="item.type === 'label'" data-slot="label" :class="ui.label({ class: [props.ui?.label, item.ui?.label, item.class] })">
+    <ListboxGroupLabel v-if="item.type === 'label'" data-slot="listbox-label" :class="ui.label({ class: [props.ui?.label, item.ui?.label, item.class] })">
       {{ get(item, props.labelKey as string) }}
     </ListboxGroupLabel>
 
-    <div v-else-if="item.type === 'separator'" role="separator" data-slot="separator" :class="ui.separator({ class: [props.ui?.separator, item.ui?.separator, item.class] })" />
+    <div v-else-if="item.type === 'separator'" role="separator" data-slot="listbox-separator" :class="ui.separator({ class: [props.ui?.separator, item.ui?.separator, item.class] })" />
 
     <RekaListboxItem
       v-else
       :value="props.valueKey ? get(item, props.valueKey as string) : item"
       :disabled="item.disabled"
-      data-slot="item"
+      data-slot="listbox-item"
       :class="ui.item({ class: [props.ui?.item, item.ui?.item, item.class] })"
       @select="onSelect($event, item)"
     >
       <slot name="item" :item="(item as NestedItem<T>)" :index="index" :ui="ui">
         <slot name="item-leading" :item="(item as NestedItem<T>)" :index="index" :ui="ui">
-          <UIcon v-if="item.icon" :name="item.icon" data-slot="itemLeadingIcon" :class="ui.itemLeadingIcon({ class: [props.ui?.itemLeadingIcon, item.ui?.itemLeadingIcon] })" />
-          <UAvatar v-else-if="item.avatar" :size="((item.ui?.itemLeadingAvatarSize || props.ui?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" data-slot="itemLeadingAvatar" :class="ui.itemLeadingAvatar({ class: [props.ui?.itemLeadingAvatar, item.ui?.itemLeadingAvatar] })" />
+          <UIcon v-if="item.icon" :name="item.icon" data-slot="listbox-itemLeadingIcon" :class="ui.itemLeadingIcon({ class: [props.ui?.itemLeadingIcon, item.ui?.itemLeadingIcon] })" />
+          <UAvatar v-else-if="item.avatar" :size="((item.ui?.itemLeadingAvatarSize || props.ui?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" data-slot="listbox-itemLeadingAvatar" :class="ui.itemLeadingAvatar({ class: [props.ui?.itemLeadingAvatar, item.ui?.itemLeadingAvatar] })" />
           <UChip
             v-else-if="item.chip"
             :size="((item.ui?.itemLeadingChipSize || props.ui?.itemLeadingChipSize || ui.itemLeadingChipSize()) as ChipProps['size'])"
             inset
             standalone
             v-bind="item.chip"
-            data-slot="itemLeadingChip"
+            data-slot="listbox-itemLeadingChip"
             :class="ui.itemLeadingChip({ class: [props.ui?.itemLeadingChip, item.ui?.itemLeadingChip] })"
           />
         </slot>
 
-        <span v-if="get(item, props.labelKey as string) || get(item, props.descriptionKey as string) || !!slots['item-label'] || !!slots['item-description']" data-slot="itemWrapper" :class="ui.itemWrapper({ class: [props.ui?.itemWrapper, item.ui?.itemWrapper] })">
-          <span v-if="get(item, props.labelKey as string) || !!slots['item-label']" data-slot="itemLabel" :class="ui.itemLabel({ class: [props.ui?.itemLabel, item.ui?.itemLabel] })">
+        <span v-if="get(item, props.labelKey as string) || get(item, props.descriptionKey as string) || !!slots['item-label'] || !!slots['item-description']" data-slot="listbox-itemWrapper" :class="ui.itemWrapper({ class: [props.ui?.itemWrapper, item.ui?.itemWrapper] })">
+          <span v-if="get(item, props.labelKey as string) || !!slots['item-label']" data-slot="listbox-itemLabel" :class="ui.itemLabel({ class: [props.ui?.itemLabel, item.ui?.itemLabel] })">
             <slot name="item-label" :item="(item as NestedItem<T>)" :index="index">
               {{ get(item, props.labelKey as string) }}
             </slot>
           </span>
 
-          <span v-if="get(item, props.descriptionKey as string) || !!slots['item-description']" data-slot="itemDescription" :class="ui.itemDescription({ class: [props.ui?.itemDescription, item.ui?.itemDescription] })">
+          <span v-if="get(item, props.descriptionKey as string) || !!slots['item-description']" data-slot="listbox-itemDescription" :class="ui.itemDescription({ class: [props.ui?.itemDescription, item.ui?.itemDescription] })">
             <slot name="item-description" :item="(item as NestedItem<T>)" :index="index">
               {{ get(item, props.descriptionKey as string) }}
             </slot>
           </span>
         </span>
 
-        <span data-slot="itemTrailing" :class="ui.itemTrailing({ class: [props.ui?.itemTrailing, item.ui?.itemTrailing] })">
+        <span data-slot="listbox-itemTrailing" :class="ui.itemTrailing({ class: [props.ui?.itemTrailing, item.ui?.itemTrailing] })">
           <slot name="item-trailing" :item="(item as NestedItem<T>)" :index="index" :ui="ui" />
 
           <ListboxItemIndicator as-child>
-            <UIcon :name="props.selectedIcon || appConfig.ui.icons.check" data-slot="itemTrailingIcon" :class="ui.itemTrailingIcon({ class: [props.ui?.itemTrailingIcon, item.ui?.itemTrailingIcon] })" />
+            <UIcon :name="props.selectedIcon || appConfig.ui.icons.check" data-slot="listbox-itemTrailingIcon" :class="ui.itemTrailingIcon({ class: [props.ui?.itemTrailingIcon, item.ui?.itemTrailingIcon] })" />
           </ListboxItemIndicator>
         </span>
       </slot>
@@ -366,7 +366,7 @@ const filteredItems = computed(() => filteredGroups.value.flatMap(group => group
 
   <ListboxRoot
     :id="id"
-    data-slot="root"
+    data-slot="listbox"
     v-bind="{ ...rootProps, ...$attrs, ...ariaAttrs }"
     :disabled="disabled"
     :name="name"
@@ -379,18 +379,18 @@ const filteredItems = computed(() => filteredGroups.value.flatMap(group => group
         :autofocus-delay="props.autofocusDelay"
         :size="size"
         v-bind="inputProps"
-        data-slot="input"
+        data-slot="listbox-input"
         :class="ui.input({ class: props.ui?.input })"
       />
     </ListboxFilter>
 
-    <ListboxContent data-slot="content" :class="ui.content({ class: props.ui?.content })">
-      <div v-if="props.loading" data-slot="loading" :class="ui.loading({ class: props.ui?.loading })">
+    <ListboxContent data-slot="listbox-content" :class="ui.content({ class: props.ui?.content })">
+      <div v-if="props.loading" data-slot="listbox-loading" :class="ui.loading({ class: props.ui?.loading })">
         <slot name="loading">
-          <UIcon :name="props.loadingIcon || appConfig.ui.icons.loading" data-slot="loadingIcon" :class="ui.loadingIcon({ class: props.ui?.loadingIcon })" />
+          <UIcon :name="props.loadingIcon || appConfig.ui.icons.loading" data-slot="listbox-loadingIcon" :class="ui.loadingIcon({ class: props.ui?.loadingIcon })" />
         </slot>
       </div>
-      <div v-else-if="!filteredItems.length" data-slot="empty" :class="ui.empty({ class: props.ui?.empty })">
+      <div v-else-if="!filteredItems.length" data-slot="listbox-empty" :class="ui.empty({ class: props.ui?.empty })">
         <slot name="empty" :search-term="searchTerm">
           {{ searchTerm ? t('listbox.noMatch', { searchTerm }) : t('listbox.noData') }}
         </slot>
@@ -407,7 +407,7 @@ const filteredItems = computed(() => filteredGroups.value.flatMap(group => group
       </ListboxVirtualizer>
 
       <template v-else>
-        <ListboxGroup v-for="(group, groupIndex) in filteredGroups" :key="`group-${groupIndex}`" data-slot="group" :class="ui.group({ class: props.ui?.group })">
+        <ListboxGroup v-for="(group, groupIndex) in filteredGroups" :key="`group-${groupIndex}`" data-slot="listbox-group" :class="ui.group({ class: props.ui?.group })">
           <ReuseItemTemplate v-for="(item, index) in group" :key="`group-${groupIndex}-${index}`" :item="item" :index="index" />
         </ListboxGroup>
       </template>

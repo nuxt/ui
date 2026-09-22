@@ -234,7 +234,7 @@ defineExpose({
 </script>
 
 <template>
-  <Primitive :as="props.as" :data-slot="($attrs['data-slot'] as string | undefined) ?? 'root'" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <Primitive :as="props.as" :data-slot="($attrs['data-slot'] as string | undefined) ?? 'textarea'" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <textarea
       :id="id"
       ref="textareaRef"
@@ -246,7 +246,7 @@ defineExpose({
       :disabled="disabled"
       :required="props.required"
       v-bind="{ ...$attrs, ...ariaAttrs }"
-      data-slot="base"
+      data-slot="textarea-base"
       @input="onInput"
       @blur="onBlur"
       @change="onChange"
@@ -255,16 +255,16 @@ defineExpose({
 
     <slot :ui="ui" />
 
-    <span v-if="isLeading || !!props.avatar || !!slots.leading" data-slot="leading" :class="ui.leading({ class: props.ui?.leading })">
+    <span v-if="isLeading || !!props.avatar || !!slots.leading" data-slot="textarea-leading" :class="ui.leading({ class: props.ui?.leading })">
       <slot name="leading" :ui="ui">
-        <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" data-slot="leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
-        <UAvatar v-else-if="!!props.avatar" :size="((props.ui?.leadingAvatarSize || ui.leadingAvatarSize()) as AvatarProps['size'])" v-bind="props.avatar" data-slot="leadingAvatar" :class="ui.leadingAvatar({ class: props.ui?.leadingAvatar })" />
+        <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" data-slot="textarea-leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
+        <UAvatar v-else-if="!!props.avatar" :size="((props.ui?.leadingAvatarSize || ui.leadingAvatarSize()) as AvatarProps['size'])" v-bind="props.avatar" data-slot="textarea-leadingAvatar" :class="ui.leadingAvatar({ class: props.ui?.leadingAvatar })" />
       </slot>
     </span>
 
-    <span v-if="isTrailing || !!slots.trailing" data-slot="trailing" :class="ui.trailing({ class: props.ui?.trailing })">
+    <span v-if="isTrailing || !!slots.trailing" data-slot="textarea-trailing" :class="ui.trailing({ class: props.ui?.trailing })">
       <slot name="trailing" :ui="ui">
-        <UIcon v-if="trailingIconName" :name="trailingIconName" data-slot="trailingIcon" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
+        <UIcon v-if="trailingIconName" :name="trailingIconName" data-slot="textarea-trailingIcon" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
       </slot>
     </span>
   </Primitive>

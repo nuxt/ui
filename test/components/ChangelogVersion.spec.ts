@@ -59,7 +59,7 @@ describe('ChangelogVersion', () => {
       attrs: { 'aria-label': 'test-label', 'data-testid': 'test-id' }
     })
     // Root is a fragment (DefineTemplate blocks render leading comments), so target the root element directly
-    const root = wrapper.find('[data-slot="root"]')
+    const root = wrapper.find('[data-slot="changelog-version"]')
     expect(root.attributes('aria-label')).toBe('test-label')
     expect(root.attributes('data-testid')).toBe('test-id')
   })
@@ -69,7 +69,7 @@ describe('ChangelogVersion', () => {
       props: { title: 'v1.0.0', to: 'https://github.com/benjamincanac' },
       attrs: { 'aria-label': 'test-label' }
     })
-    expect(wrapper.find('[data-slot="root"]').attributes('aria-label')).toBeUndefined()
+    expect(wrapper.find('[data-slot="changelog-version"]').attributes('aria-label')).toBeUndefined()
     expect(wrapper.find('a').attributes('aria-label')).toBe('test-label')
   })
 })
