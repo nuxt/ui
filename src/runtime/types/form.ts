@@ -89,13 +89,23 @@ export interface FormInjectedOptions {
 export interface FormFieldInjectedOptions<T> {
   name?: string
   size?: GetObjectField<T, 'size'>
+  /**
+   * The error, hint, description and help the field actually renders.
+   *
+   * Each is truthy only while its region is in the DOM, so `${ariaId}-<name>` can be
+   * advertised through `aria-describedby` without pointing at a missing element. A field
+   * can be invalid without rendering a message (`:error="true"`), which is what `invalid`
+   * is for — do not read "is invalid" off `error`.
+   */
   error?: string | boolean
+  hint?: string | boolean
+  description?: string | boolean
+  help?: string | boolean
+  /** Whether the field is in an invalid state, with or without a message to show for it. */
+  invalid?: boolean
   eagerValidation?: boolean
   validateOnInputDelay?: number
   errorPattern?: RegExp
-  hint?: string
-  description?: string
-  help?: string
   ariaId: string
 }
 

@@ -83,6 +83,21 @@ const formErrors = inject<Ref<FormError[]> | null>(formErrorsInjectionKey, null)
 // eslint-disable-next-line vue/no-dupe-keys
 const error = computed(() => props.error || formErrors?.value?.find(error => error.name === props.name || (props.errorPattern && error.name?.match(props.errorPattern)))?.message)
 
+// `error` declares `Boolean` before `String`, so Vue casts `:error="''"` — and a valueless
+// `error` attribute — to `true`. "Is invalid" and "has a message to render" are therefore two
+// different facts and must not share a truthiness check: `aria-invalid` follows the first,
+// `aria-describedby` the second. The same holds for the other regions below: each renders
+// under its own conditions, and one that is not rendered has no id to be described by.
+const errorMessage = computed(() => typeof error.value === 'string' && error.value ? error.value : undefined)
+const hasError = computed(() => props.error !== false && (!!errorMessage.value || !!slots.error))
+const hasLabel = computed(() => !!props.label || !!slots.label)
+// The hint used to render only inside the label wrapper, so a field with a hint and no label
+// dropped it silently while still advertising `${ariaId}-hint`.
+const hasHint = computed(() => !!props.hint || !!slots.hint)
+const hasDescription = computed(() => !!props.description || !!slots.description)
+// The error takes the help's place, so the help only describes the control while none is shown.
+const hasHelp = computed(() => !hasError.value && (!!props.help || !!slots.help))
+
 const id = ref(useId())
 // Copies id's initial value to bind aria-attributes such as aria-describedby.
 // This is required for the RadioGroup component which unsets the id value.
@@ -98,15 +113,18 @@ watch(id, () => {
 provide(inputIdInjectionKey, id)
 
 provide(formFieldInjectionKey, computed(() => ({
-  error: error.value,
+  // Truthy only while the matching region is rendered, so every id derived from these is
+  // guaranteed to resolve in the DOM.
+  error: hasError.value ? (errorMessage.value ?? true) : undefined,
+  invalid: !!error.value,
   name: props.name,
   size: props.size,
   eagerValidation: props.eagerValidation,
   validateOnInputDelay: props.validateOnInputDelay,
   errorPattern: props.errorPattern,
-  hint: props.hint,
-  description: props.description,
-  help: props.help,
+  hint: hasHint.value ? (props.hint ?? true) : undefined,
+  description: hasDescription.value ? (props.description ?? true) : undefined,
+  help: hasHelp.value ? (props.help ?? true) : undefined,
   ariaId
 }) as FormFieldInjectedOptions<FormFieldProps>))
 </script>
@@ -114,34 +132,34 @@ provide(formFieldInjectionKey, computed(() => ({
 <template>
   <Primitive :as="props.as" :data-orientation="props.orientation" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <div data-slot="wrapper" :class="ui.wrapper({ class: props.ui?.wrapper })">
-      <div v-if="props.label || !!slots.label" data-slot="labelWrapper" :class="ui.labelWrapper({ class: props.ui?.labelWrapper })">
-        <Label :for="id" data-slot="label" :class="ui.label({ class: props.ui?.label })">
+      <div v-if="hasLabel || hasHint" data-slot="labelWrapper" :class="ui.labelWrapper({ class: props.ui?.labelWrapper })">
+        <Label v-if="hasLabel" :for="id" data-slot="label" :class="ui.label({ class: props.ui?.label })">
           <slot name="label" :label="props.label">
             {{ props.label }}
           </slot>
         </Label>
-        <span v-if="props.hint || !!slots.hint" :id="`${ariaId}-hint`" data-slot="hint" :class="ui.hint({ class: props.ui?.hint })">
+        <span v-if="hasHint" :id="`${ariaId}-hint`" data-slot="hint" :class="ui.hint({ class: props.ui?.hint })">
           <slot name="hint" :hint="props.hint">
             {{ props.hint }}
           </slot>
         </span>
       </div>
 
-      <p v-if="props.description || !!slots.description" :id="`${ariaId}-description`" data-slot="description" :class="ui.description({ class: props.ui?.description })">
+      <p v-if="hasDescription" :id="`${ariaId}-description`" data-slot="description" :class="ui.description({ class: props.ui?.description })">
         <slot name="description" :description="props.description">
           {{ props.description }}
         </slot>
       </p>
     </div>
 
-    <div :class="[(props.label || !!slots.label || props.description || !!slots.description) && ui.container({ class: props.ui?.container })]">
+    <div :class="[(hasLabel || hasHint || hasDescription) && ui.container({ class: props.ui?.container })]">
       <slot :error="error" />
-      <div v-if="props.error !== false && ((typeof error === 'string' && error) || !!slots.error)" :id="`${ariaId}-error`" data-slot="error" :class="ui.error({ class: props.ui?.error })">
+      <div v-if="hasError" :id="`${ariaId}-error`" data-slot="error" :class="ui.error({ class: props.ui?.error })">
         <slot name="error" :error="error">
           {{ error }}
         </slot>
       </div>
-      <div v-else-if="props.help || !!slots.help" :id="`${ariaId}-help`" data-slot="help" :class="ui.help({ class: props.ui?.help })">
+      <div v-else-if="hasHelp" :id="`${ariaId}-help`" data-slot="help" :class="ui.help({ class: props.ui?.help })">
         <slot name="help" :help="props.help">
           {{ props.help }}
         </slot>

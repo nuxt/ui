@@ -99,10 +99,12 @@ exports[`FormField > renders with help slot correctly 1`] = `
 exports[`FormField > renders with hint correctly 1`] = `
 "<div data-orientation="vertical" data-slot="root" class="text-sm">
   <div data-slot="wrapper" class="">
-    <!--v-if-->
+    <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1">
+      <!--v-if--><span id="v-0-0-hint" data-slot="hint" class="text-muted">Use letters, numbers, and special characters</span>
+    </div>
     <!--v-if-->
   </div>
-  <div class="">
+  <div class="relative mt-1">
     <!--v-if-->
   </div>
 </div>"
@@ -111,10 +113,12 @@ exports[`FormField > renders with hint correctly 1`] = `
 exports[`FormField > renders with hint slot correctly 1`] = `
 "<div data-orientation="vertical" data-slot="root" class="text-sm">
   <div data-slot="wrapper" class="">
-    <!--v-if-->
+    <div data-slot="labelWrapper" class="flex content-center items-center justify-between gap-1">
+      <!--v-if--><span id="v-0-0-hint" data-slot="hint" class="text-muted">Hint slot</span>
+    </div>
     <!--v-if-->
   </div>
-  <div class="">
+  <div class="relative mt-1">
     <!--v-if-->
   </div>
 </div>"
