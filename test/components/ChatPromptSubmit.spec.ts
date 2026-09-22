@@ -60,10 +60,10 @@ describe('ChatPromptSubmit', () => {
 
   it('hides the icon when icon is false', async () => {
     const withIcon = await mountSuspended(ChatPromptSubmit)
-    expect(withIcon.find('[data-slot="leadingIcon"]').exists()).toBe(true)
+    expect(withIcon.find('[data-slot="button-leadingIcon"]').exists()).toBe(true)
 
     const withoutIcon = await mountSuspended(ChatPromptSubmit, { props: { icon: false } })
-    expect(withoutIcon.find('[data-slot="leadingIcon"]').exists()).toBe(false)
+    expect(withoutIcon.find('[data-slot="button-leadingIcon"]').exists()).toBe(false)
   })
 
   it('passes accessibility tests', async () => {

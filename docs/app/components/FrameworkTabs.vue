@@ -27,7 +27,7 @@ function onFrameworkChange(newFramework: string) {
     color="neutral"
     :ui="{
       indicator: 'bg-default',
-      trigger: 'px-1 data-[state=active]:text-highlighted w-full in-[[data-slot=list]:not(:has([data-slot=indicator]))]:data-[state=active]:before:bg-default'
+      trigger: 'px-1 data-[state=active]:text-highlighted w-full in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:before:bg-default'
     }"
     size="xs"
     @update:model-value="onFrameworkChange($event as string)"

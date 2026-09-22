@@ -129,10 +129,10 @@ const Component = computed(() => props.mode === 'hover' ? HoverCard : Popover)
 
     <Component.Portal v-bind="portalProps">
       <FieldGroupReset>
-        <Component.Content v-bind="contentProps" :reference="props.reference ?? props.content?.reference" data-slot="content" :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })" v-on="contentEvents">
+        <Component.Content v-bind="contentProps" :reference="props.reference ?? props.content?.reference" data-slot="popover-content" :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })" v-on="contentEvents">
           <slot name="content" v-bind="((close ? { close } : {}) as SlotProps<M>)" />
 
-          <Component.Arrow v-if="!!props.arrow" v-bind="arrowProps" data-slot="arrow" :class="ui.arrow({ class: props.ui?.arrow })" />
+          <Component.Arrow v-if="!!props.arrow" v-bind="arrowProps" data-slot="popover-arrow" :class="ui.arrow({ class: props.ui?.arrow })" />
         </Component.Content>
       </FieldGroupReset>
     </Component.Portal>

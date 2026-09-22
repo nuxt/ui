@@ -129,7 +129,7 @@ const ui = computed(() => tv(theme, appConfig.ui?.button)({
     custom
   >
     <ULinkBase
-      data-slot="base"
+      data-slot="button"
       v-bind="slotProps"
       :class="ui.base({
         class: [props.ui?.base, props.class, active ? props.activeClass : props.inactiveClass],
@@ -140,18 +140,18 @@ const ui = computed(() => tv(theme, appConfig.ui?.button)({
       @click="onClickWrapper"
     >
       <slot name="leading" :ui="ui">
-        <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" data-slot="leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon, active })" />
-        <UAvatar v-else-if="!!props.avatar" :size="((props.ui?.leadingAvatarSize || ui.leadingAvatarSize()) as AvatarProps['size'])" v-bind="props.avatar" data-slot="leadingAvatar" :class="ui.leadingAvatar({ class: props.ui?.leadingAvatar, active })" />
+        <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" data-slot="button-leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon, active })" />
+        <UAvatar v-else-if="!!props.avatar" :size="((props.ui?.leadingAvatarSize || ui.leadingAvatarSize()) as AvatarProps['size'])" v-bind="props.avatar" data-slot="button-leadingAvatar" :class="ui.leadingAvatar({ class: props.ui?.leadingAvatar, active })" />
       </slot>
 
       <slot :ui="ui">
-        <span v-if="props.label !== undefined && props.label !== null" data-slot="label" :class="ui.label({ class: props.ui?.label, active })">
+        <span v-if="props.label !== undefined && props.label !== null" data-slot="button-label" :class="ui.label({ class: props.ui?.label, active })">
           {{ props.label }}
         </span>
       </slot>
 
       <slot name="trailing" :ui="ui">
-        <UIcon v-if="isTrailing && trailingIconName" :name="trailingIconName" data-slot="trailingIcon" :class="ui.trailingIcon({ class: props.ui?.trailingIcon, active })" />
+        <UIcon v-if="isTrailing && trailingIconName" :name="trailingIconName" data-slot="button-trailingIcon" :class="ui.trailingIcon({ class: props.ui?.trailingIcon, active })" />
       </slot>
     </ULinkBase>
   </ULink>

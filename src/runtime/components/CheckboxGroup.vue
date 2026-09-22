@@ -192,12 +192,12 @@ function onUpdate(value: any) {
     v-bind="(rootProps as any)"
     :name="name"
     :disabled="disabled"
-    data-slot="root"
+    data-slot="checkbox-group"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     @update:model-value="onUpdate"
   >
-    <fieldset data-slot="fieldset" :class="ui.fieldset({ class: props.ui?.fieldset })" v-bind="ariaAttrs">
-      <legend v-if="props.legend || !!slots.legend" data-slot="legend" :class="ui.legend({ class: props.ui?.legend })">
+    <fieldset data-slot="checkbox-group-fieldset" :class="ui.fieldset({ class: props.ui?.fieldset })" v-bind="ariaAttrs">
+      <legend v-if="props.legend || !!slots.legend" data-slot="checkbox-group-legend" :class="ui.legend({ class: props.ui?.legend })">
         <slot name="legend">
           {{ props.legend }}
         </slot>
@@ -214,7 +214,7 @@ function onUpdate(value: any) {
         :name="name"
         :disabled="item.disabled || disabled"
         :ui="{ ...(props.ui ? omit(props.ui, ['root']) : undefined), ...(item.ui || {}) }"
-        data-slot="item"
+        data-slot="checkbox-group-item"
         :class="ui.item({ class: [props.ui?.item, item.ui?.item, item.class], disabled: item.disabled || disabled })"
       >
         <template v-for="(_, name) in getProxySlots()" #[name]>

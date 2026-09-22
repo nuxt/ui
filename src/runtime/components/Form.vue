@@ -473,6 +473,7 @@ defineExpose(api)
     ref="formRef"
     :name="parentBus ? undefined : props.name"
     :method="parentBus ? undefined : 'post'"
+    data-slot="form"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     @submit.prevent="onSubmitWrapper"
   >
