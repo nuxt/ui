@@ -1,5 +1,4 @@
-# nuxi triage config. Reference: https://github.com/benjamincanac/nuxi#configuration
-dryRun: true
+# https://github.com/benjamincanac/tia#configuration
 maintainers:
   - benjamincanac
 package:
