@@ -38,7 +38,7 @@ exports[`PageAside > renders with top slot correctly 1`] = `
     <div data-slot="page-aside-top" class="sticky -top-8 -mt-8 pointer-events-none z-[1]">
       <div data-slot="page-aside-topHeader" class="h-8 bg-default -mx-4 px-4"></div>
       <div data-slot="page-aside-topBody" class="bg-default relative pointer-events-auto flex flex-col -mx-4 px-4">Top slot</div>
-      <div data-slot="page-aside-topFooter" class="h-8 bg-gradient-to-b from-default -mx-4 px-4"></div>
+      <div data-slot="page-aside-topFooter" class="h-8 bg-linear-to-b from-default -mx-4 px-4"></div>
     </div>
   </div>
 </aside>"

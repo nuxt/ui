@@ -5,6 +5,6 @@ export default {
     top: 'sticky -top-8 -mt-8 pointer-events-none z-[1]',
     topHeader: 'h-8 bg-default -mx-4 px-4',
     topBody: 'bg-default relative pointer-events-auto flex flex-col -mx-4 px-4',
-    topFooter: 'h-8 bg-gradient-to-b from-default -mx-4 px-4'
+    topFooter: 'h-8 bg-linear-to-b from-default -mx-4 px-4'
   }
 }

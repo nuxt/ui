@@ -24,14 +24,14 @@ export type TWMergeConfig = MergeConfig & MergeConfigExtension
  */
 export type TVMergeConfig = {
   /**
-   * Whether to merge conflicting Tailwind classes through `tailwind-merge`.
+   * Whether to merge conflicting Tailwind classes.
    * @defaultValue true
    */
-  twMerge?: boolean
+  merge?: boolean
   /**
-   * The configuration handed to `tailwind-merge`.
+   * The configuration handed to the merger.
    */
-  twMergeConfig?: TWMergeConfig
+  mergeConfig?: TWMergeConfig
 }
 
 /**

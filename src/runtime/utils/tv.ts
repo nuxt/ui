@@ -73,7 +73,7 @@ function cx(...classes: any[]): string | undefined {
 }
 
 /* ------------------------------------------------------------------ *
- * merger (`twMergeConfig` to `tailwind-merge` instance, created once per config)
+ * merger (`app.config.ui.tv` to a `tailwind-merge` instance, created once per config)
  * ------------------------------------------------------------------ */
 
 type Merger = (classes: string) => string
@@ -93,7 +93,7 @@ function hasDefinedKey(obj: Record<string, any> | undefined): boolean {
  * The `tailwind-merge` instance for a config. `app.config.ui.tv` is build
  * configuration: it is read once per config object, since the slot caches hold
  * merged results and would serve the previous setting anyway. Returns `null`
- * when merging is turned off (`twMerge: false`).
+ * when merging is turned off (`merge: false`).
  */
 function getMerger(config: TVMergeConfig | undefined): Merger | null {
   if (!config) {
@@ -101,8 +101,8 @@ function getMerger(config: TVMergeConfig | undefined): Merger | null {
   }
   let merger = mergerCache.get(config)
   if (merger === undefined) {
-    const mergeConfig = config.twMergeConfig as Record<string, any> | undefined
-    merger = config.twMerge === false
+    const mergeConfig = config.mergeConfig as Record<string, any> | undefined
+    merger = config.merge === false
       ? null
       : !hasDefinedKey(mergeConfig)
           ? twMerge
