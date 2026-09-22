@@ -703,3 +703,35 @@ describe('tv spec sharing', () => {
     expect(counter.reads).toBe(hit * 2)
   })
 })
+
+describe('tv merger config', () => {
+  // `app.config.ui.tv` is read once when the engine module loads, so each case
+  // loads a fresh copy against its own config.
+  async function load(config: Record<string, any>) {
+    vi.resetModules()
+    vi.doMock('#build/app.config', () => ({ default: { ui: { tv: config } } }))
+    const { tv } = await import('../../src/runtime/utils/tv')
+    vi.doUnmock('#build/app.config')
+    return tv as unknown as typeof tvt
+  }
+
+  it('merges with the default engine when nothing is set', async () => {
+    const tv = await load({ prefix: undefined })
+    expect(tv({ slots: { base: 'px-2 py-1' } })().base({ class: 'px-4' })).toBe('py-1 px-4')
+  })
+
+  it('reads prefixed classes with `prefix`', async () => {
+    const tv = await load({ prefix: 'tw' })
+    expect(tv({ slots: { base: 'tw:px-2 tw:py-1' } })().base({ class: 'tw:px-4' })).toBe('tw:py-1 tw:px-4')
+  })
+
+  it('keeps every class with `merge: false`', async () => {
+    const tv = await load({ merge: false })
+    expect(tv({ slots: { base: 'px-2 py-1' } })().base({ class: 'px-4' })).toBe('px-2 py-1 px-4')
+  })
+
+  it('still merges with `cacheSize: 0`', async () => {
+    const tv = await load({ cacheSize: 0 })
+    expect(tv({ slots: { base: 'px-2 py-1' } })().base({ class: 'px-4' })).toBe('py-1 px-4')
+  })
+})
