@@ -105,8 +105,8 @@ provide(avatarGroupInjectionKey, computed(() => ({
 </script>
 
 <template>
-  <Primitive :as="props.as" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <UAvatar v-if="hiddenCount > 0" :text="`+${hiddenCount}`" data-slot="base" :class="ui.base({ class: props.ui?.base })" />
-    <component :is="avatar" v-for="(avatar, count) in visibleAvatars" :key="count" data-slot="base" :class="ui.base({ class: props.ui?.base })" />
+  <Primitive :as="props.as" data-slot="avatar-group" :class="ui.root({ class: [props.ui?.root, props.class] })">
+    <UAvatar v-if="hiddenCount > 0" :text="`+${hiddenCount}`" data-slot="avatar-group-base" :class="ui.base({ class: props.ui?.base })" />
+    <component :is="avatar" v-for="(avatar, count) in visibleAvatars" :key="count" data-slot="avatar-group-base" :class="ui.base({ class: props.ui?.base })" />
   </Primitive>
 </template>

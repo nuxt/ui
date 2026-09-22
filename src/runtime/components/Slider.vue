@@ -127,7 +127,7 @@ function onChange(value: any) {
   <SliderRoot
     :id="id"
     v-model="sliderValue"
-    data-slot="root"
+    data-slot="slider"
     :role="thumbs > 1 && ($attrs['aria-label'] || $attrs['aria-labelledby']) ? 'group' : undefined"
     v-bind="{ ...rootProps, ...(thumbs > 1 ? $attrs : omit($attrs, thumbAttrs)) }"
     :name="name"
@@ -137,8 +137,8 @@ function onChange(value: any) {
     @update:model-value="emitFormInput()"
     @value-commit="onChange"
   >
-    <SliderTrack data-slot="track" :class="ui.track({ class: props.ui?.track })">
-      <SliderRange data-slot="range" :class="ui.range({ class: props.ui?.range })" />
+    <SliderTrack data-slot="slider-track" :class="ui.track({ class: props.ui?.track })">
+      <SliderRange data-slot="slider-range" :class="ui.range({ class: props.ui?.range })" />
     </SliderTrack>
 
     <template v-for="thumb in thumbs" :key="thumb">
@@ -148,9 +148,9 @@ function onChange(value: any) {
         disable-closing-trigger
         v-bind="(typeof props.tooltip === 'object' ? props.tooltip : {})"
       >
-        <SliderThumb data-slot="thumb" :class="ui.thumb({ class: props.ui?.thumb })" v-bind="{ ...(thumbs === 1 ? pick($attrs, thumbAttrs) : {}), ...ariaAttrs }" :aria-label="thumbs > 1 || $attrs['aria-labelledby'] ? undefined : ($attrs['aria-label'] ?? 'Thumb')" />
+        <SliderThumb data-slot="slider-thumb" :class="ui.thumb({ class: props.ui?.thumb })" v-bind="{ ...(thumbs === 1 ? pick($attrs, thumbAttrs) : {}), ...ariaAttrs }" :aria-label="thumbs > 1 || $attrs['aria-labelledby'] ? undefined : ($attrs['aria-label'] ?? 'Thumb')" />
       </UTooltip>
-      <SliderThumb v-else data-slot="thumb" :class="ui.thumb({ class: props.ui?.thumb })" v-bind="{ ...(thumbs === 1 ? pick($attrs, thumbAttrs) : {}), ...ariaAttrs }" :aria-label="thumbs > 1 || $attrs['aria-labelledby'] ? undefined : ($attrs['aria-label'] ?? 'Thumb')" />
+      <SliderThumb v-else data-slot="slider-thumb" :class="ui.thumb({ class: props.ui?.thumb })" v-bind="{ ...(thumbs === 1 ? pick($attrs, thumbAttrs) : {}), ...ariaAttrs }" :aria-label="thumbs > 1 || $attrs['aria-labelledby'] ? undefined : ($attrs['aria-label'] ?? 'Thumb')" />
     </template>
   </SliderRoot>
 </template>

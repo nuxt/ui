@@ -131,7 +131,7 @@ const ariaLabel = computed(() => {
     :as="props.as"
     v-bind="!props.to ? $attrs : {}"
     :data-orientation="props.orientation"
-    :data-slot="($attrs['data-slot'] as string | undefined) ?? 'root'"
+    :data-slot="($attrs['data-slot'] as string | undefined) ?? 'blog-post'"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     @click="props.onClick"
   >
@@ -143,51 +143,51 @@ const ariaLabel = computed(() => {
       raw
     />
 
-    <div v-if="props.image || !!slots.header" data-slot="header" :class="ui.header({ class: props.ui?.header })">
+    <div v-if="props.image || !!slots.header" data-slot="blog-post-header" :class="ui.header({ class: props.ui?.header })">
       <slot name="header" :ui="ui">
         <component
           :is="ImageComponent"
           v-bind="typeof props.image === 'string' ? { src: props.image, alt: props.title } : { alt: props.title, ...props.image }"
-          data-slot="image"
+          data-slot="blog-post-image"
           :class="ui.image({ class: props.ui?.image, to: !!props.to })"
         />
       </slot>
     </div>
 
-    <div data-slot="body" :class="ui.body({ class: props.ui?.body })">
+    <div data-slot="blog-post-body" :class="ui.body({ class: props.ui?.body })">
       <slot name="body">
-        <div v-if="(date || !!slots.date) || (props.badge || !!slots.badge)" data-slot="meta" :class="ui.meta({ class: props.ui?.meta })">
+        <div v-if="(date || !!slots.date) || (props.badge || !!slots.badge)" data-slot="blog-post-meta" :class="ui.meta({ class: props.ui?.meta })">
           <slot name="badge">
             <UBadge
               v-if="props.badge"
               color="neutral"
               variant="subtle"
               v-bind="typeof props.badge === 'string' ? { label: props.badge } : props.badge"
-              data-slot="badge"
+              data-slot="blog-post-badge"
               :class="ui.badge({ class: props.ui?.badge })"
             />
           </slot>
 
-          <time v-if="date || !!slots.date" :datetime="datetime" data-slot="date" :class="ui.date({ class: props.ui?.date })">
+          <time v-if="date || !!slots.date" :datetime="datetime" data-slot="blog-post-date" :class="ui.date({ class: props.ui?.date })">
             <slot name="date">
               {{ date }}
             </slot>
           </time>
         </div>
 
-        <h2 v-if="props.title || !!slots.title" data-slot="title" :class="ui.title({ class: props.ui?.title })">
+        <h2 v-if="props.title || !!slots.title" data-slot="blog-post-title" :class="ui.title({ class: props.ui?.title })">
           <slot name="title">
             {{ props.title }}
           </slot>
         </h2>
 
-        <div v-if="props.description || !!slots.description" data-slot="description" :class="ui.description({ class: props.ui?.description })">
+        <div v-if="props.description || !!slots.description" data-slot="blog-post-description" :class="ui.description({ class: props.ui?.description })">
           <slot name="description">
             {{ props.description }}
           </slot>
         </div>
 
-        <div v-if="props.authors?.length || !!slots.authors" data-slot="authors" :class="ui.authors({ class: props.ui?.authors })">
+        <div v-if="props.authors?.length || !!slots.authors" data-slot="blog-post-authors" :class="ui.authors({ class: props.ui?.authors })">
           <slot name="authors" :ui="ui">
             <template v-if="props.authors?.length">
               <UAvatarGroup v-if="props.authors.length > 1">
@@ -196,7 +196,7 @@ const ariaLabel = computed(() => {
                   :key="index"
                   :to="author.to"
                   :target="author.target"
-                  data-slot="avatar"
+                  data-slot="blog-post-avatar"
                   :class="ui.avatar({ class: props.ui?.avatar, to: !!author.to })"
                   raw
                 >
@@ -210,7 +210,7 @@ const ariaLabel = computed(() => {
       </slot>
     </div>
 
-    <div v-if="!!slots.footer" data-slot="footer" :class="ui.footer({ class: props.ui?.footer })">
+    <div v-if="!!slots.footer" data-slot="blog-post-footer" :class="ui.footer({ class: props.ui?.footer })">
       <slot name="footer" />
     </div>
   </Primitive>

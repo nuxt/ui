@@ -191,6 +191,7 @@ function resolveLinkClass({ route, isActive, isExactActive }: any = {}) {
     </Slot>
     <ULinkBase
       v-else
+      data-slot="link"
       v-bind="{
         ...$attrs,
         ...(exact && isExactActive ? { 'aria-current': props.ariaCurrentValue } : {}),
@@ -226,6 +227,7 @@ function resolveLinkClass({ route, isActive, isExactActive }: any = {}) {
   </Slot>
   <ULinkBase
     v-else
+    data-slot="link"
     v-bind="{
       ...$attrs,
       as,

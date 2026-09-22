@@ -126,8 +126,8 @@ describe('SelectMenu', () => {
       }
     })
 
-    expect(wrapper.find('[data-slot="trailing"]').exists()).toBe(false)
-    expect(wrapper.find('[data-slot="trailingIcon"]').exists()).toBe(false)
+    expect(wrapper.find('[data-slot="select-menu-trailing"]').exists()).toBe(false)
+    expect(wrapper.find('[data-slot="select-menu-trailingIcon"]').exists()).toBe(false)
   })
 
   it('passes accessibility tests', async () => {
@@ -154,13 +154,13 @@ describe('SelectMenu', () => {
     test('does not inherit the Reka trigger label', () => {
       const wrapper = mount(SelectMenu, { props })
 
-      expect(wrapper.get('[data-slot="base"]').attributes('aria-label')).toBeUndefined()
+      expect(wrapper.get('[data-slot="select-menu"]').attributes('aria-label')).toBeUndefined()
     })
 
     test('keeps a caller label', () => {
       const wrapper = mount(SelectMenu, { props, attrs: { 'aria-label': 'Aria label' } })
 
-      expect(wrapper.get('[data-slot="base"]').attributes('aria-label')).toBe('Aria label')
+      expect(wrapper.get('[data-slot="select-menu"]').attributes('aria-label')).toBe('Aria label')
     })
 
     test('is named by the form field label', async () => {
@@ -172,7 +172,7 @@ describe('SelectMenu', () => {
         `
       })
 
-      const trigger = wrapper.get('[data-slot="base"]')
+      const trigger = wrapper.get('[data-slot="select-menu"]')
       expect(trigger.attributes('aria-label')).toBeUndefined()
       expect(wrapper.get('label').attributes('for')).toBe(trigger.attributes('id'))
     })
@@ -220,7 +220,7 @@ describe('SelectMenu', () => {
     test.each(['ArrowDown', 'ArrowUp'])('opens the menu on %s', async (key) => {
       const wrapper = mount(SelectMenu, { attachTo: document.body, props: { portal: false, items } })
 
-      await wrapper.find('[data-slot="base"]').trigger('keydown', { key })
+      await wrapper.find('[data-slot="select-menu"]').trigger('keydown', { key })
       await flushPromises()
 
       expect(wrapper.emitted('update:open')).toMatchObject([[true]])
@@ -233,7 +233,7 @@ describe('SelectMenu', () => {
       const root = wrapper.findComponent({ name: 'ComboboxRoot' })
 
       await root.vm.$emit('update:open', true)
-      await wrapper.find('[data-slot="base"]').trigger('keydown', { key: 'ArrowDown' })
+      await wrapper.find('[data-slot="select-menu"]').trigger('keydown', { key: 'ArrowDown' })
       await flushPromises()
 
       expect(wrapper.emitted('update:open')).toMatchObject([[true]])
@@ -250,7 +250,7 @@ describe('SelectMenu', () => {
       // Input.vue's autofocus runs on a macrotask
       await new Promise(resolve => setTimeout(resolve))
 
-      const input = wrapper.find('[data-slot="input"] input')
+      const input = wrapper.find('[data-slot="select-menu-input"] input')
       expect(document.activeElement).toBe(input.element)
 
       wrapper.unmount()
@@ -262,7 +262,7 @@ describe('SelectMenu', () => {
       await flushPromises()
       await new Promise(resolve => setTimeout(resolve))
 
-      const input = wrapper.find('[data-slot="input"] input')
+      const input = wrapper.find('[data-slot="select-menu-input"] input')
       expect(document.activeElement).not.toBe(input.element)
 
       wrapper.unmount()

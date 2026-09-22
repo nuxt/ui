@@ -79,12 +79,12 @@ const ui = computed(() => tv(theme, appConfig.ui?.chip)({
 </script>
 
 <template>
-  <Primitive :as="props.as" :data-slot="($attrs['data-slot'] as string | undefined) ?? 'root'" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <Primitive :as="props.as" :data-slot="($attrs['data-slot'] as string | undefined) ?? 'chip'" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <Slot v-bind="{ ...$attrs, 'data-slot': undefined }">
       <slot />
     </Slot>
 
-    <span v-if="show" data-slot="base" :class="ui.base({ class: props.ui?.base })">
+    <span v-if="show" data-slot="chip-base" :class="ui.base({ class: props.ui?.base })">
       <slot name="content">
         {{ props.text }}
       </slot>

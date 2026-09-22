@@ -118,8 +118,8 @@ describe('Select', () => {
       }
     })
 
-    expect(wrapper.find('[data-slot="trailing"]').exists()).toBe(false)
-    expect(wrapper.find('[data-slot="trailingIcon"]').exists()).toBe(false)
+    expect(wrapper.find('[data-slot="select-trailing"]').exists()).toBe(false)
+    expect(wrapper.find('[data-slot="select-trailingIcon"]').exists()).toBe(false)
   })
 
   it('passes accessibility tests', async () => {
@@ -234,7 +234,7 @@ describe('Select', () => {
         `
       })
 
-      const trigger = wrapper.find('[data-slot="base"]')
+      const trigger = wrapper.find('[data-slot="select"]')
       expect(trigger.attributes('aria-expanded')).toBe('false')
 
       // Native `<label for>` clicks forward a `click` to the trigger without a

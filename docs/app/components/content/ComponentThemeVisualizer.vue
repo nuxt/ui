@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { camelCase } from 'scule'
+import { camelCase, kebabCase } from 'scule'
 import * as theme from '#build/ui'
 
 const props = defineProps<{
@@ -42,11 +42,24 @@ function getSlotClasses(slotName: string): string {
   return Array.isArray(baseClasses) ? baseClasses.filter(Boolean).join(' ') : baseClasses
 }
 
+// A slot is marked `data-slot="card-header"`, and the outermost one, `root` or
+// a `base` with no wrapper, carries the component name alone. The prefixed
+// name is tried first: a selector list would match in document order, and hand
+// back the root of an Input when asked for its `base`.
+function querySlot(scope: ParentNode, slotName: string): Element | null {
+  const namespace = kebabCase(camelName.value)
+  const element = scope.querySelector(`[data-slot="${namespace}-${slotName}"]`)
+  if (element || (slotName !== 'root' && slotName !== 'base')) {
+    return element
+  }
+  return scope.querySelector(`[data-slot="${namespace}"]`)
+}
+
 function findSlotElement(slotName: string): { element: Element, inPortal: boolean } | null {
   if (!props.container) return null
 
   // First check in container
-  const containerSlot = props.container.querySelector(`[data-slot="${slotName}"]`)
+  const containerSlot = querySlot(props.container, slotName)
   if (containerSlot) {
     return { element: containerSlot, inPortal: false }
   }
@@ -59,7 +72,7 @@ function findSlotElement(slotName: string): { element: Element, inPortal: boolea
       if (popoverContentRef.value && child.contains(popoverContentRef.value)) {
         continue
       }
-      const portalSlot = child.querySelector(`[data-slot="${slotName}"]`)
+      const portalSlot = querySlot(child, slotName)
       if (portalSlot) {
         return { element: portalSlot, inPortal: true }
       }

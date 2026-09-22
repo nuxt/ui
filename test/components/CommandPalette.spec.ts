@@ -148,10 +148,10 @@ describe('CommandPalette', () => {
 
   it('hides the input icon when icon is false', async () => {
     const withIcon = await mountSuspended(CommandPalette, { props })
-    expect(withIcon.find('[data-slot="leadingIcon"]').exists()).toBe(true)
+    expect(withIcon.find('[data-slot="input-leadingIcon"]').exists()).toBe(true)
 
     const withoutIcon = await mountSuspended(CommandPalette, { props: { ...props, icon: false } })
-    expect(withoutIcon.find('[data-slot="leadingIcon"]').exists()).toBe(false)
+    expect(withoutIcon.find('[data-slot="input-leadingIcon"]').exists()).toBe(false)
   })
 
   it('passes accessibility tests', async () => {

@@ -311,21 +311,21 @@ const ui = computed(() => tv(theme, appConfig.ui?.calendar)({
     :model-value="(isMinView ? (props.modelValue as DateValue | DateValue[] | DateRange) : undefined)"
     :default-value="(isMinView ? (props.defaultValue as DateValue | DateValue[] | DateRange) : undefined)"
     :placeholder="placeholder"
-    data-slot="root"
+    data-slot="calendar"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     @update:placeholder="setPlaceholder"
     @update:model-value="onSelect"
     @update:start-value="(value: DateValue | undefined) => emits('update:startValue', value)"
     @update:valid-model-value="(value: DateRange) => emits('update:validModelValue', value)"
   >
-    <Picker.Header data-slot="header" :class="ui.header({ class: props.ui?.header })">
+    <Picker.Header data-slot="calendar-header" :class="ui.header({ class: props.ui?.header })">
       <Picker.Prev v-if="view === 'day' && props.yearControls" :prev-page="(date: DateValue) => paginateYear(date, -1)" :aria-label="t('calendar.prevYear')" as-child>
         <UButton :icon="prevYearIcon" :size="props.size" color="neutral" variant="ghost" v-bind="props.prevYear" />
       </Picker.Prev>
       <Picker.Prev v-if="view !== 'day' || props.monthControls" :aria-label="prevLabel" as-child>
         <UButton :icon="prevMonthIcon" :size="props.size" color="neutral" variant="ghost" v-bind="props.prevMonth" />
       </Picker.Prev>
-      <Picker.Heading v-slot="{ headingValue }" data-slot="heading" :class="ui.heading({ class: props.ui?.heading })">
+      <Picker.Heading v-slot="{ headingValue }" data-slot="calendar-heading" :class="ui.heading({ class: props.ui?.heading })">
         <slot
           name="heading"
           :value="headingValue"
@@ -344,7 +344,7 @@ const ui = computed(() => tv(theme, appConfig.ui?.calendar)({
             v-bind="(typeof props.viewControl === 'object' ? props.viewControl : {})"
             @click="cycleView"
           />
-          <span v-else data-slot="headingLabel" :class="ui.headingLabel({ class: props.ui?.headingLabel })">{{ headingValue }}</span>
+          <span v-else data-slot="calendar-headingLabel" :class="ui.headingLabel({ class: props.ui?.headingLabel })">{{ headingValue }}</span>
         </slot>
       </Picker.Heading>
       <Picker.Next v-if="view !== 'day' || props.monthControls" :aria-label="nextLabel" as-child>
@@ -354,19 +354,19 @@ const ui = computed(() => tv(theme, appConfig.ui?.calendar)({
         <UButton :icon="nextYearIcon" :size="props.size" color="neutral" variant="ghost" v-bind="props.nextYear" />
       </Picker.Next>
     </Picker.Header>
-    <div data-slot="body" :class="ui.body({ class: props.ui?.body })">
+    <div data-slot="calendar-body" :class="ui.body({ class: props.ui?.body })">
       <Picker.Grid
         v-for="month in (Array.isArray(grid) ? grid : [grid])"
         :key="month.value.toString()"
-        data-slot="grid"
+        data-slot="calendar-grid"
         :class="ui.grid({ class: props.ui?.grid })"
       >
         <Picker.GridHead v-if="'GridHead' in Picker">
-          <Picker.GridRow data-slot="gridWeekDaysRow" :class="ui.gridWeekDaysRow({ class: props.ui?.gridWeekDaysRow })">
+          <Picker.GridRow data-slot="calendar-gridWeekDaysRow" :class="ui.gridWeekDaysRow({ class: props.ui?.gridWeekDaysRow })">
             <Picker.HeadCell
               v-for="day in weekDays"
               :key="day"
-              data-slot="headCell"
+              data-slot="calendar-headCell"
               :class="ui.headCell({ class: props.ui?.headCell })"
             >
               <slot name="week-day" :day="day">
@@ -375,17 +375,17 @@ const ui = computed(() => tv(theme, appConfig.ui?.calendar)({
             </Picker.HeadCell>
           </Picker.GridRow>
         </Picker.GridHead>
-        <Picker.GridBody data-slot="gridBody" :class="ui.gridBody({ class: props.ui?.gridBody })">
+        <Picker.GridBody data-slot="calendar-gridBody" :class="ui.gridBody({ class: props.ui?.gridBody })">
           <Picker.GridRow
             v-for="(row, index) in month.rows"
             :key="`row-${index}`"
-            data-slot="gridRow"
+            data-slot="calendar-gridRow"
             :class="ui.gridRow({ class: props.ui?.gridRow })"
           >
             <td
               v-if="view === 'day' && props.weekNumbers && row[0]"
               role="gridcell"
-              data-slot="cellWeek"
+              data-slot="calendar-cellWeek"
               :class="ui.cellWeek({ class: props.ui?.cellWeek })"
             >
               {{ getWeekNumber(row[0], props.locale ?? locale.code) }}
@@ -394,13 +394,13 @@ const ui = computed(() => tv(theme, appConfig.ui?.calendar)({
               v-for="cellDate in row"
               :key="cellDate.toString()"
               :date="cellDate"
-              data-slot="cell"
+              data-slot="calendar-cell"
               :class="ui.cell({ class: props.ui?.cell })"
             >
               <Picker.CellTrigger
                 v-slot="cell"
                 v-bind="cellProps(cellDate, month.value)"
-                data-slot="cellTrigger"
+                data-slot="calendar-cellTrigger"
                 :class="ui.cellTrigger({ class: props.ui?.cellTrigger })"
               >
                 <slot v-if="view === 'day'" name="day" :day="cellDate">
