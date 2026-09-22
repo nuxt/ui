@@ -1,9 +1,10 @@
-import { defineComponent } from 'vue'
+import { defineComponent, provide, ref } from 'vue'
 import { describe, it, expect, test, vi } from 'vitest'
 import { axe } from 'vitest-axe'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { renderEach } from '../component-render'
 import type { FormFieldProps } from '../../src/runtime/components/FormField.vue'
+import { formErrorsInjectionKey } from '../../src/runtime/composables/useFormField'
 import theme from '#build/ui/form-field'
 import {
   UInput,
@@ -247,6 +248,26 @@ describe('FormField', () => {
 
       expect(wrapper.find('[aria-invalid=true]').exists()).toBe(true)
       expect(wrapper.find('input').classes().some(c => c.includes('error'))).toBe(true)
+    })
+
+    test.each([
+      ['an empty message', '', false],
+      ['a message', 'Username is already taken', true]
+    ])('stays invalid for a matching form error with %s', async (_, message, expectMessage) => {
+      const Wrapper = defineComponent({
+        components: { UFormField, UInput },
+        setup: () => {
+          provide(formErrorsInjectionKey, ref([{ name: 'username', message }]))
+        },
+        template: `<UFormField name="username"><UInput /></UFormField>`
+      })
+
+      const wrapper = await mountSuspended(Wrapper)
+
+      expect(wrapper.find('[aria-invalid=true]').exists()).toBe(true)
+      expect(wrapper.find('[data-slot=error]').exists()).toBe(expectMessage)
+      // Nothing may be advertised as describing the control when no message renders.
+      expect(wrapper.find('[aria-describedby]').exists()).toBe(expectMessage)
     })
 
     test('does not advertise help while the error takes its place', async () => {

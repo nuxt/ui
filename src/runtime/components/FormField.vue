@@ -80,8 +80,12 @@ const ui = computed(() => tv({ extend: theme, ...(appConfig.ui?.formField || {})
 
 const formErrors = inject<Ref<FormError[]> | null>(formErrorsInjectionKey, null)
 
+// The matching record is kept apart from its message: a form error with an empty message
+// still makes the field invalid, it just has nothing to render for it.
+const formError = computed(() => formErrors?.value?.find(error => error.name === props.name || (props.errorPattern && error.name?.match(props.errorPattern))))
+
 // eslint-disable-next-line vue/no-dupe-keys
-const error = computed(() => props.error || formErrors?.value?.find(error => error.name === props.name || (props.errorPattern && error.name?.match(props.errorPattern)))?.message)
+const error = computed(() => props.error || formError.value?.message)
 
 // `error` declares `Boolean` before `String`, so Vue casts `:error="''"` — and a valueless
 // `error` attribute — to `true`. "Is invalid" and "has a message to render" are therefore two
@@ -116,7 +120,7 @@ provide(formFieldInjectionKey, computed(() => ({
   // Truthy only while the matching region is rendered, so every id derived from these is
   // guaranteed to resolve in the DOM.
   error: hasError.value ? (errorMessage.value ?? true) : undefined,
-  invalid: !!error.value,
+  invalid: !!props.error || !!formError.value,
   name: props.name,
   size: props.size,
   eagerValidation: props.eagerValidation,
