@@ -530,6 +530,8 @@ function betterTailwindcssConfig(files, entryPoint, { ignore = [], settings = {}
     rules: {
       ...betterTailwindcss.configs['correctness-error'].rules,
       'better-tailwindcss/no-unknown-classes': ['error', { ignore }],
+      // Tailwind keeps the v3 names working, so nothing breaks until it doesn't.
+      'better-tailwindcss/no-deprecated-classes': 'error',
       ...rules
     }
   }
