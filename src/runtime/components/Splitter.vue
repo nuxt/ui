@@ -129,7 +129,7 @@ defineExpose({
 </script>
 
 <template>
-  <SplitterGroup v-bind="rootProps" :direction="props.orientation!" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })" @layout="emits('layout', $event)">
+  <SplitterGroup v-bind="rootProps" :direction="props.orientation!" data-slot="splitter" :class="ui.root({ class: [props.ui?.root, props.class] })" @layout="emits('layout', $event)">
     <template v-for="(item, index) in props.items" :key="item.id ?? index">
       <SplitterPanel
         :id="getPanelId(item, index)"
@@ -142,7 +142,7 @@ defineExpose({
         :collapsed-size="item.collapsedSize"
         :size-unit="item.sizeUnit"
         :order="item.order"
-        data-slot="panel"
+        data-slot="splitter-panel"
         :class="ui.panel({ class: [props.ui?.panel, item.ui?.panel, item.class] })"
         @collapse="emits('collapse', index)"
         @expand="emits('expand', index)"
@@ -165,7 +165,7 @@ defineExpose({
         :id="getHandleId(index)"
         :disabled="props.disabled"
         :hit-area-margins="props.hitAreaMargins"
-        data-slot="handle"
+        data-slot="splitter-handle"
         :class="ui.handle({ class: props.ui?.handle })"
         @dragging="(dragging) => emits('dragging', index, dragging)"
       >

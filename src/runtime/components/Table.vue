@@ -676,7 +676,7 @@ defineExpose({
       :data-expanded="row.getIsExpanded()"
       :data-pinned="row.getIsPinned() || undefined"
       :tabindex="props.onSelect ? 0 : undefined"
-      data-slot="tr"
+      data-slot="table-tr"
       :class="ui.tr({
         class: [
           props.ui?.tr,
@@ -696,7 +696,7 @@ defineExpose({
         :data-pinned="cell.column.getIsPinned()"
         :colspan="resolveValue(cell.column.columnDef.meta?.colspan?.td, cell)"
         :rowspan="resolveValue(cell.column.columnDef.meta?.rowspan?.td, cell)"
-        data-slot="td"
+        data-slot="table-td"
         :class="ui.td({
           class: [
             props.ui?.td,
@@ -729,8 +729,8 @@ defineExpose({
   </DefineRowTemplate>
 
   <DefineTableTemplate>
-    <table ref="tableRef" data-slot="base" :class="ui.base({ class: [props.ui?.base] })">
-      <caption v-if="props.caption || !!slots.caption" data-slot="caption" :class="ui.caption({ class: [props.ui?.caption] })">
+    <table ref="tableRef" data-slot="table-base" :class="ui.base({ class: [props.ui?.base] })">
+      <caption v-if="props.caption || !!slots.caption" data-slot="table-caption" :class="ui.caption({ class: [props.ui?.caption] })">
         <slot name="caption">
           {{ props.caption }}
         </slot>
@@ -746,7 +746,7 @@ defineExpose({
             :colspan="header.colSpan > 1 ? header.colSpan : undefined"
             :rowspan="rowSpan > 1 ? rowSpan : undefined"
             :aria-sort="getAriaSort(header)"
-            data-slot="th"
+            data-slot="table-th"
             :class="ui.th({
               class: [
                 props.ui?.th,
@@ -765,10 +765,10 @@ defineExpose({
           </th>
         </tr>
 
-        <tr data-slot="separator" :class="ui.separator({ class: [props.ui?.separator] })" />
+        <tr data-slot="table-separator" :class="ui.separator({ class: [props.ui?.separator] })" />
       </thead>
 
-      <tbody data-slot="tbody" :class="ui.tbody({ class: [props.ui?.tbody] })">
+      <tbody data-slot="table-tbody" :class="ui.tbody({ class: [props.ui?.tbody] })">
         <slot name="body-top" />
 
         <template v-if="rows.length">
@@ -798,13 +798,13 @@ defineExpose({
         </template>
 
         <tr v-else-if="props.loading && !!slots['loading']">
-          <td :colspan="tableApi.getVisibleLeafColumns().length" data-slot="loading" :class="ui.loading({ class: props.ui?.loading })">
+          <td :colspan="tableApi.getVisibleLeafColumns().length" data-slot="table-loading" :class="ui.loading({ class: props.ui?.loading })">
             <slot name="loading" />
           </td>
         </tr>
 
         <tr v-else>
-          <td :colspan="tableApi.getVisibleLeafColumns().length" data-slot="empty" :class="ui.empty({ class: props.ui?.empty })">
+          <td :colspan="tableApi.getVisibleLeafColumns().length" data-slot="table-empty" :class="ui.empty({ class: props.ui?.empty })">
             <slot name="empty">
               {{ props.empty || t('table.noData') }}
             </slot>
@@ -816,19 +816,19 @@ defineExpose({
 
       <tfoot
         v-if="hasFooter"
-        data-slot="tfoot"
+        data-slot="table-tfoot"
         :class="ui.tfoot({ class: [props.ui?.tfoot] })"
       >
-        <tr data-slot="separator" :class="ui.separator({ class: [props.ui?.separator] })" />
+        <tr data-slot="table-separator" :class="ui.separator({ class: [props.ui?.separator] })" />
 
-        <tr v-for="footerGroup in tableApi.getFooterGroups()" :key="footerGroup.id" data-slot="tr" :class="ui.tr({ class: [props.ui?.tr] })">
+        <tr v-for="footerGroup in tableApi.getFooterGroups()" :key="footerGroup.id" data-slot="table-tr" :class="ui.tr({ class: [props.ui?.tr] })">
           <th
             v-for="header in footerGroup.headers"
             :key="header.id"
             :data-pinned="header.column.getIsPinned()"
             :colspan="header.colSpan > 1 ? header.colSpan : undefined"
             :rowspan="header.rowSpan > 1 ? header.rowSpan : undefined"
-            data-slot="th"
+            data-slot="table-th"
             :class="ui.th({
               class: [
                 props.ui?.th,
@@ -850,7 +850,7 @@ defineExpose({
     </table>
   </DefineTableTemplate>
 
-  <Primitive ref="rootRef" :as="props.as" data-slot="root" v-bind="$attrs" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <Primitive ref="rootRef" :as="props.as" data-slot="table" v-bind="$attrs" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <ReuseTableTemplate />
   </Primitive>
 </template>

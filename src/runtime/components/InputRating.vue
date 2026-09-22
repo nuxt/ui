@@ -127,7 +127,7 @@ function onUpdate(value: number) {
   <RatingRoot
     :id="id"
     v-slot="{ items }"
-    data-slot="root"
+    data-slot="input-rating"
     v-bind="{ ...rootProps, ...$attrs, ...ariaAttrs }"
     :name="name"
     :disabled="rootDisabled"
@@ -141,14 +141,14 @@ function onUpdate(value: number) {
       v-slot="{ steps }"
       :key="item"
       :item="item"
-      data-slot="item"
+      data-slot="input-rating-item"
       :class="ui.item({ class: props.ui?.item })"
     >
       <!-- Empty icon as background -->
       <slot name="item" :index="item" :filled="false">
         <UIcon
           :name="props.emptyIcon ?? starIcon"
-          data-slot="emptyIcon"
+          data-slot="input-rating-emptyIcon"
           :class="ui.emptyIcon({ class: props.ui?.emptyIcon })"
         />
       </slot>
@@ -165,7 +165,7 @@ function onUpdate(value: number) {
         <slot name="item" :index="item" :filled="true">
           <UIcon
             :name="starIcon"
-            data-slot="icon"
+            data-slot="input-rating-icon"
             :class="ui.icon({ class: props.ui?.icon })"
           />
         </slot>

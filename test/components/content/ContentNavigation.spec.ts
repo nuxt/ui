@@ -85,13 +85,13 @@ describe('ContentNavigation', () => {
 
     const wrapper = await mountSuspended(ContentNavigation, { props: { navigation: navA } })
 
-    const before = wrapper.find('[data-slot="linkLeadingIcon"]').element
+    const before = wrapper.find('[data-slot="content-navigation-linkLeadingIcon"]').element
     expect(before).toBeTruthy()
 
     await wrapper.setProps({ navigation: navB })
     await wrapper.vm.$nextTick()
 
-    const after = wrapper.find('[data-slot="linkLeadingIcon"]').element
+    const after = wrapper.find('[data-slot="content-navigation-linkLeadingIcon"]').element
     expect(after).toBeTruthy()
 
     // Different DOM node => the item was remounted rather than patched in place.

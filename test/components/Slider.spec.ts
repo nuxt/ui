@@ -55,7 +55,7 @@ describe('Slider', () => {
 
       expect(thumbs).toHaveLength(1)
       expect(thumbs[0]!.attributes('aria-label')).toBe('Volume')
-      expect(wrapper.get('[data-slot="root"]').attributes('aria-label')).toBeUndefined()
+      expect(wrapper.get('[data-slot="slider"]').attributes('aria-label')).toBeUndefined()
     })
 
     test('names a single thumb from aria-labelledby', async () => {
@@ -88,7 +88,7 @@ describe('Slider', () => {
 
       expect(thumbs.map(thumb => thumb.attributes('aria-label'))).toStrictEqual(['Minimum', 'Maximum'])
 
-      const root = wrapper.get('[data-slot="root"]')
+      const root = wrapper.get('[data-slot="slider"]')
       expect(root.attributes('aria-label')).toBe('Price range')
       expect(root.attributes('role')).toBe('group')
     })
@@ -98,7 +98,7 @@ describe('Slider', () => {
 
       expect(thumbs.map(thumb => thumb.attributes('aria-label'))).toStrictEqual(['Value 1 of 3', 'Value 2 of 3', 'Value 3 of 3'])
 
-      const root = wrapper.get('[data-slot="root"]')
+      const root = wrapper.get('[data-slot="slider"]')
       expect(root.attributes('aria-label')).toBe('Levels')
       expect(root.attributes('role')).toBe('group')
     })
@@ -106,7 +106,7 @@ describe('Slider', () => {
     test('does not group an unlabelled slider', async () => {
       const { wrapper } = await renderThumbs({ props: { modelValue: [10, 90] } })
 
-      expect(wrapper.get('[data-slot="root"]').attributes('role')).toBeUndefined()
+      expect(wrapper.get('[data-slot="slider"]').attributes('role')).toBeUndefined()
     })
 
     test('forwards aria-valuetext to the thumb', async () => {
@@ -120,14 +120,14 @@ describe('Slider', () => {
 
       expect(thumbs[0]!.attributes('aria-invalid')).toBe('true')
       expect(thumbs[0]!.attributes('aria-errormessage')).toBe('volume-error')
-      expect(wrapper.get('[data-slot="root"]').attributes('aria-invalid')).toBeUndefined()
-      expect(wrapper.get('[data-slot="root"]').attributes('aria-errormessage')).toBeUndefined()
+      expect(wrapper.get('[data-slot="slider"]').attributes('aria-invalid')).toBeUndefined()
+      expect(wrapper.get('[data-slot="slider"]').attributes('aria-errormessage')).toBeUndefined()
     })
 
     test('keeps non-aria attributes on the root', async () => {
       const { wrapper, thumbs } = await renderThumbs({ props: { modelValue: 10 }, attrs: { 'data-testid': 'slider' } })
 
-      expect(wrapper.get('[data-slot="root"]').attributes('data-testid')).toBe('slider')
+      expect(wrapper.get('[data-slot="slider"]').attributes('data-testid')).toBe('slider')
       expect(thumbs[0]!.attributes('data-testid')).toBeUndefined()
     })
 
@@ -162,13 +162,13 @@ describe('Slider', () => {
       await nextTick()
 
       expect(wrapper.get('[role="slider"]').attributes('aria-label')).toBe('Volume')
-      expect(wrapper.get('[data-slot="root"]').attributes('data-testid')).toBe('slider')
+      expect(wrapper.get('[data-slot="slider"]').attributes('data-testid')).toBe('slider')
     })
 
     test('keeps a caller role on a grouped slider', async () => {
       const { wrapper } = await renderThumbs({ props: { modelValue: [10, 90] }, attrs: { 'role': 'application', 'aria-label': 'Price range' } })
 
-      expect(wrapper.get('[data-slot="root"]').attributes('role')).toBe('application')
+      expect(wrapper.get('[data-slot="slider"]').attributes('role')).toBe('application')
     })
 
     // The thumb carries both the caller's `aria-*` and the ones `useFormField` derives.

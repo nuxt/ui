@@ -216,12 +216,12 @@ function onUpdate(value: any) {
     :orientation="props.orientation"
     :name="name"
     :disabled="disabled"
-    data-slot="root"
+    data-slot="radio-group"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     @update:model-value="onUpdate"
   >
-    <fieldset data-slot="fieldset" :class="ui.fieldset({ class: props.ui?.fieldset })" v-bind="ariaAttrs">
-      <legend v-if="props.legend || !!slots.legend" data-slot="legend" :class="ui.legend({ class: props.ui?.legend })">
+    <fieldset data-slot="radio-group-fieldset" :class="ui.fieldset({ class: props.ui?.fieldset })" v-bind="ariaAttrs">
+      <legend v-if="props.legend || !!slots.legend" data-slot="radio-group-legend" :class="ui.legend({ class: props.ui?.legend })">
         <slot name="legend">
           {{ props.legend }}
         </slot>
@@ -233,10 +233,10 @@ function onUpdate(value: any) {
             :id="item.id"
             :value="item.value"
             :disabled="item.disabled || disabled"
-            data-slot="base"
+            data-slot="radio-group-base"
             :class="ui.base({ class: [props.ui?.base, item.ui?.base], disabled: item.disabled || disabled })"
           >
-            <RadioGroupIndicator data-slot="indicator" :class="ui.indicator({ class: [props.ui?.indicator, item.ui?.indicator] })" />
+            <RadioGroupIndicator data-slot="radio-group-indicator" :class="ui.indicator({ class: [props.ui?.indicator, item.ui?.indicator] })" />
           </RRadioGroupItem>
         </div>
 
@@ -247,7 +247,7 @@ function onUpdate(value: any) {
               {{ item.label }}
             </slot>
           </component>
-          <p v-if="item.description || !!slots.description" data-slot="description" :class="ui.description({ class: [props.ui?.description, item.ui?.description], disabled: item.disabled || disabled })">
+          <p v-if="item.description || !!slots.description" data-slot="radio-group-description" :class="ui.description({ class: [props.ui?.description, item.ui?.description], disabled: item.disabled || disabled })">
             <slot name="description" :item="item" :model-value="(props.modelValue as RadioGroupValue)">
               {{ item.description }}
             </slot>
