@@ -17,6 +17,17 @@ describe('useFilter', () => {
       ])
     })
 
+    it('does not let a match move across a label', () => {
+      const { filterGroups } = useFilter()
+      const fruits: Item = { type: 'label', label: 'Fruits' }
+      const vegetables: Item = { type: 'label', label: 'Vegetables' }
+      const group: Item[] = [fruits, 'Banana', vegetables, 'Aubergine']
+
+      expect(filterGroups([group], 'a', { fields: ['label'], isStructural })).toEqual([
+        [fruits, 'Banana', vegetables, 'Aubergine']
+      ])
+    })
+
     it('sorts the matches by relevance', () => {
       const { filterGroups } = useFilter()
       const group: Item[] = ['Aubergine', 'Broccoli', 'B']
