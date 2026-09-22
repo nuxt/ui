@@ -160,7 +160,7 @@ const gridUi = {
             width="654"
             height="368"
             loading="lazy"
-            class="w-full aspect-video rounded ring ring-default"
+            class="w-full aspect-video rounded-sm ring ring-default"
           />
         </template>
       </UListbox>
