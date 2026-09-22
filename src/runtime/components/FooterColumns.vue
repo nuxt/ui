@@ -80,7 +80,7 @@ const ui = computed(() => tv(theme, appConfig.ui?.footerColumns)())
       <slot name="left" />
     </div>
 
-    <div v-if="!!slots.default || props.columns?.length" data-slot="center" :class="ui.center({ class: props.ui?.center })">
+    <div v-if="!!slots.default || props.columns?.length" data-slot="footer-columns-center" :class="ui.center({ class: props.ui?.center })">
       <slot>
         <div v-for="(column, index) in props.columns" :key="index">
           <Primitive :as="as.label" data-slot="label" :class="ui.label({ class: props.ui?.label })">
@@ -89,21 +89,21 @@ const ui = computed(() => tv(theme, appConfig.ui?.footerColumns)())
             </slot>
           </Primitive>
 
-          <ul data-slot="list" :class="ui.list({ class: props.ui?.list })">
-            <li v-for="(link, linkIndex) in column.children" :key="linkIndex" data-slot="item" :class="ui.item({ class: [props.ui?.item, link.ui?.item] })">
+          <ul data-slot="footer-columns-list" :class="ui.list({ class: props.ui?.list })">
+            <li v-for="(link, linkIndex) in column.children" :key="linkIndex" data-slot="footer-columns-item" :class="ui.item({ class: [props.ui?.item, link.ui?.item] })">
               <ULink v-slot="{ active, ...slotProps }" v-bind="pickLinkProps(link)" custom>
-                <ULinkBase v-bind="slotProps" data-slot="link" :class="ui.link({ class: [props.ui?.link, link.ui?.link, link.class], active })">
+                <ULinkBase v-bind="slotProps" data-slot="footer-columns-link" :class="ui.link({ class: [props.ui?.link, link.ui?.link, link.class], active })">
                   <slot name="link" :link="(link as T)" :active="active" :ui="ui">
                     <slot name="link-leading" :link="(link as T)" :active="active" :ui="ui">
-                      <UIcon v-if="link.icon" :name="link.icon" data-slot="linkLeadingIcon" :class="ui.linkLeadingIcon({ class: [props.ui?.linkLeadingIcon, link.ui?.linkLeadingIcon], active })" />
+                      <UIcon v-if="link.icon" :name="link.icon" data-slot="footer-columns-linkLeadingIcon" :class="ui.linkLeadingIcon({ class: [props.ui?.linkLeadingIcon, link.ui?.linkLeadingIcon], active })" />
                     </slot>
 
-                    <span v-if="link.label || !!slots['link-label']" data-slot="linkLabel" :class="ui.linkLabel({ class: [props.ui?.linkLabel, link.ui?.linkLabel], active })">
+                    <span v-if="link.label || !!slots['link-label']" data-slot="footer-columns-linkLabel" :class="ui.linkLabel({ class: [props.ui?.linkLabel, link.ui?.linkLabel], active })">
                       <slot name="link-label" :link="(link as T)" :active="active">
                         {{ (link as T).label }}
                       </slot>
 
-                      <UIcon v-if="link.target === '_blank'" :name="appConfig.ui.icons.external" data-slot="linkLabelExternalIcon" :class="ui.linkLabelExternalIcon({ class: [props.ui?.linkLabelExternalIcon, link.ui?.linkLabelExternalIcon], active })" />
+                      <UIcon v-if="link.target === '_blank'" :name="appConfig.ui.icons.external" data-slot="footer-columns-linkLabelExternalIcon" :class="ui.linkLabelExternalIcon({ class: [props.ui?.linkLabelExternalIcon, link.ui?.linkLabelExternalIcon], active })" />
                     </span>
 
                     <slot name="link-trailing" :link="(link as T)" :active="active" />
@@ -116,7 +116,7 @@ const ui = computed(() => tv(theme, appConfig.ui?.footerColumns)())
       </slot>
     </div>
 
-    <div v-if="!!slots.right" data-slot="right" :class="ui.right({ class: props.ui?.right })">
+    <div v-if="!!slots.right" data-slot="footer-columns-right" :class="ui.right({ class: props.ui?.right })">
       <slot name="right" />
     </div>
   </Primitive>

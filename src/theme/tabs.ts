@@ -4,7 +4,7 @@ import type { ModuleOptions } from '../module'
 // reka-ui only renders the real indicator on the client (it needs DOM measurements), so we gate
 // a CSS-only pseudo-element fallback on the active trigger by the *absence* of the indicator
 // element — the instant reka's measured indicator appears, this selector stops matching.
-const ssr = (...classes: string[]) => classes.map(c => `in-[[data-slot=list]:not(:has([data-slot=indicator]))]:data-[state=active]:${c}`).join(' ')
+const ssr = (...classes: string[]) => classes.map(c => `in-[[data-slot=tabs-list]:not(:has([data-slot=tabs-indicator]))]:data-[state=active]:${c}`).join(' ')
 
 export default (options: Required<ModuleOptions>) => ({
   slots: {

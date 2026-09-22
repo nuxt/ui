@@ -150,7 +150,7 @@ const ui = computed(() => tv(theme, appConfig.ui?.modal)({
   <DialogRoot v-slot="{ open, close }" v-bind="rootProps">
     <DefineContentTemplate>
       <DialogContent
-        data-slot="content"
+        data-slot="modal-content"
         :class="ui.content({ class: [!slots.default && props.class, props.ui?.content] })"
         v-bind="contentProps"
         @enter="!props.scrollable && emits('enter')"
@@ -176,16 +176,16 @@ const ui = computed(() => tv(theme, appConfig.ui?.modal)({
         </VisuallyHidden>
 
         <slot name="content" :close="close">
-          <div v-if="!!slots.header || (props.title || !!slots.title) || (props.description || !!slots.description) || (props.close || !!slots.close)" data-slot="header" :class="ui.header({ class: props.ui?.header })">
+          <div v-if="!!slots.header || (props.title || !!slots.title) || (props.description || !!slots.description) || (props.close || !!slots.close)" data-slot="modal-header" :class="ui.header({ class: props.ui?.header })">
             <slot name="header" :close="close">
-              <div v-if="props.title || !!slots.title || props.description || !!slots.description" data-slot="wrapper" :class="ui.wrapper({ class: props.ui?.wrapper })">
-                <DialogTitle v-if="props.title || !!slots.title" data-slot="title" :class="ui.title({ class: props.ui?.title })">
+              <div v-if="props.title || !!slots.title || props.description || !!slots.description" data-slot="modal-wrapper" :class="ui.wrapper({ class: props.ui?.wrapper })">
+                <DialogTitle v-if="props.title || !!slots.title" data-slot="modal-title" :class="ui.title({ class: props.ui?.title })">
                   <slot name="title">
                     {{ props.title }}
                   </slot>
                 </DialogTitle>
 
-                <DialogDescription v-if="props.description || !!slots.description" data-slot="description" :class="ui.description({ class: props.ui?.description })">
+                <DialogDescription v-if="props.description || !!slots.description" data-slot="modal-description" :class="ui.description({ class: props.ui?.description })">
                   <slot name="description">
                     {{ props.description }}
                   </slot>
@@ -203,7 +203,7 @@ const ui = computed(() => tv(theme, appConfig.ui?.modal)({
                     variant="ghost"
                     :aria-label="t('modal.close')"
                     v-bind="(typeof props.close === 'object' ? props.close : {})"
-                    data-slot="close"
+                    data-slot="modal-close"
                     :class="ui.close({ class: props.ui?.close })"
                   />
                 </slot>
@@ -211,11 +211,11 @@ const ui = computed(() => tv(theme, appConfig.ui?.modal)({
             </slot>
           </div>
 
-          <div v-if="!!slots.body" data-slot="body" :class="ui.body({ class: props.ui?.body })">
+          <div v-if="!!slots.body" data-slot="modal-body" :class="ui.body({ class: props.ui?.body })">
             <slot name="body" :close="close" />
           </div>
 
-          <div v-if="!!slots.footer" data-slot="footer" :class="ui.footer({ class: props.ui?.footer })">
+          <div v-if="!!slots.footer" data-slot="modal-footer" :class="ui.footer({ class: props.ui?.footer })">
             <slot name="footer" :close="close" />
           </div>
         </slot>
@@ -230,7 +230,7 @@ const ui = computed(() => tv(theme, appConfig.ui?.modal)({
       <FieldGroupReset>
         <template v-if="props.scrollable">
           <DialogOverlay
-            data-slot="overlay"
+            data-slot="modal-overlay"
             :class="ui.overlay({ class: props.ui?.overlay })"
             @enter="emits('enter')"
             @after-enter="emits('after:enter')"
@@ -242,7 +242,7 @@ const ui = computed(() => tv(theme, appConfig.ui?.modal)({
         </template>
 
         <template v-else>
-          <DialogOverlay v-if="props.overlay" data-slot="overlay" :class="ui.overlay({ class: props.ui?.overlay })" />
+          <DialogOverlay v-if="props.overlay" data-slot="modal-overlay" :class="ui.overlay({ class: props.ui?.overlay })" />
 
           <ReuseContentTemplate />
         </template>

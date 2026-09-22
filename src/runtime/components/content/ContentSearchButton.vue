@@ -103,6 +103,7 @@ const ui = computed(() => tv(theme, appConfig.ui?.contentSearchButton)({
       :icon="props.icon === false ? undefined : (props.icon ?? appConfig.ui.icons.search)"
       :label="props.label || t('contentSearchButton.label')"
       :variant="props.variant || (props.collapsed ? 'ghost' : 'outline')"
+      data-slot="content-search-button"
       v-bind="{
         ...buttonProps,
         ...(props.collapsed ? {

@@ -401,7 +401,7 @@ defineExpose({
     role="log"
     :aria-busy="props.status === 'submitted' || props.status === 'streaming' ? 'true' : undefined"
     :data-status="props.status"
-    data-slot="root"
+    data-slot="chat-messages"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     :style="{ '--last-message-height': `${lastMessageHeight}px` }"
   >
@@ -449,7 +449,7 @@ defineExpose({
     >
       <template #content>
         <slot name="indicator" :ui="ui">
-          <div data-slot="indicator" :class="ui.indicator({ class: props.ui?.indicator })">
+          <div data-slot="chat-messages-indicator" :class="ui.indicator({ class: props.ui?.indicator })">
             <span />
             <span />
             <span />

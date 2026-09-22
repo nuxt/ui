@@ -71,13 +71,13 @@ const ui = computed(() => tv(theme, appConfig.ui?.pageLogos)())
           v-if="typeof item === 'object'"
           :src="item.src"
           :alt="item.alt"
-          data-slot="logo"
+          data-slot="page-logos-logo"
           :class="ui.logo({ class: props.ui?.logo })"
         />
         <UIcon
           v-else
           :name="item"
-          data-slot="logo"
+          data-slot="page-logos-logo"
           :class="ui.logo({ class: props.ui?.logo })"
         />
       </template>
@@ -92,12 +92,12 @@ const ui = computed(() => tv(theme, appConfig.ui?.pageLogos)())
     <UMarquee
       v-if="props.marquee"
       v-bind="typeof props.marquee === 'object' ? props.marquee : {}"
-      data-slot="logos"
+      data-slot="page-logos-logos"
       :class="ui.logos({ class: props.ui?.logos, marquee: true })"
     >
       <ReuseCreateItemTemplate :items="props.items" />
     </UMarquee>
-    <div v-else data-slot="logos" :class="ui.logos({ class: props.ui?.logos })">
+    <div v-else data-slot="page-logos-logos" :class="ui.logos({ class: props.ui?.logos })">
       <ReuseCreateItemTemplate :items="props.items" />
     </div>
   </Primitive>

@@ -369,7 +369,7 @@ defineExpose({
     :title="props.title || locale.messages.contentSearch?.title || t('contentSearchButton.label')"
     :description="props.description || locale.messages.contentSearch?.description"
     v-bind="modalProps"
-    data-slot="modal"
+    data-slot="content-search-modal"
     :class="ui.modal({ class: [props.ui?.modal, props.class] })"
   >
     <template #content="contentData">

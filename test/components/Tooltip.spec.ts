@@ -59,7 +59,7 @@ describe('Tooltip', () => {
       props: { text: 'Tooltip', open: true, portal: false }
     })
 
-    const content = wrapper.find('[data-slot="content"]')
+    const content = wrapper.find('[data-slot="tooltip-content"]')
     expect(content.attributes('data-side')).toBe('right')
   })
 
@@ -68,7 +68,7 @@ describe('Tooltip', () => {
       props: { text: 'Tooltip', open: true, portal: false, content: { side: 'top' } }
     })
 
-    const content = wrapper.find('[data-slot="content"]')
+    const content = wrapper.find('[data-slot="tooltip-content"]')
     expect(content.attributes('data-side')).toBe('top')
   })
 

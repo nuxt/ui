@@ -47,26 +47,26 @@ const ui = computed(() => tv(theme, appConfig.ui?.footer)())
 </script>
 
 <template>
-  <Primitive :as="props.as" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <div v-if="!!slots.top" data-slot="top" :class="ui.top({ class: props.ui?.top })">
+  <Primitive :as="props.as" data-slot="footer" :class="ui.root({ class: [props.ui?.root, props.class] })">
+    <div v-if="!!slots.top" data-slot="footer-top" :class="ui.top({ class: props.ui?.top })">
       <slot name="top" />
     </div>
 
-    <UContainer data-slot="container" :class="ui.container({ class: props.ui?.container })">
-      <div data-slot="right" :class="ui.right({ class: props.ui?.right })">
+    <UContainer data-slot="footer-container" :class="ui.container({ class: props.ui?.container })">
+      <div data-slot="footer-right" :class="ui.right({ class: props.ui?.right })">
         <slot name="right" />
       </div>
 
-      <div data-slot="center" :class="ui.center({ class: props.ui?.center })">
+      <div data-slot="footer-center" :class="ui.center({ class: props.ui?.center })">
         <slot />
       </div>
 
-      <div data-slot="left" :class="ui.left({ class: props.ui?.left })">
+      <div data-slot="footer-left" :class="ui.left({ class: props.ui?.left })">
         <slot name="left" />
       </div>
     </UContainer>
 
-    <div v-if="!!slots.bottom" data-slot="bottom" :class="ui.bottom({ class: props.ui?.bottom })">
+    <div v-if="!!slots.bottom" data-slot="footer-bottom" :class="ui.bottom({ class: props.ui?.bottom })">
       <slot name="bottom" />
     </div>
   </Primitive>

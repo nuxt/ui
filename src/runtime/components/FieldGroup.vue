@@ -57,7 +57,7 @@ provide(fieldGroupInjectionKey, computed(() => ({
 </script>
 
 <template>
-  <Primitive :as="props.as" :data-orientation="props.orientation" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <Primitive :as="props.as" :data-orientation="props.orientation" data-slot="field-group" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <slot />
   </Primitive>
 </template>

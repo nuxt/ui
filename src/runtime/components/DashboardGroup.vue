@@ -70,7 +70,7 @@ provideDashboardContext({
 </script>
 
 <template>
-  <Primitive :as="props.as" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <Primitive :as="props.as" data-slot="dashboard-group" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <slot />
   </Primitive>
 </template>

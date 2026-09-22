@@ -41,7 +41,7 @@ const ui = computed(() => tv(theme, appConfig.ui?.pageGrid)())
 </script>
 
 <template>
-  <Primitive :as="props.as" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <Primitive :as="props.as" data-slot="page-grid" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <slot />
   </Primitive>
 </template>

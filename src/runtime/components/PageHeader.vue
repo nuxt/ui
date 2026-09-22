@@ -75,14 +75,14 @@ const ui = computed(() => tv(theme, appConfig.ui?.pageHeader)({
           </slot>
         </Primitive>
 
-        <div v-if="props.links?.length || !!slots.links" data-slot="links" :class="ui.links({ class: props.ui?.links })">
+        <div v-if="props.links?.length || !!slots.links" data-slot="page-header-links" :class="ui.links({ class: props.ui?.links })">
           <slot name="links">
             <UButton v-for="(link, index) in props.links" :key="index" color="neutral" variant="outline" v-bind="link" />
           </slot>
         </div>
       </div>
 
-      <div v-if="props.description || !!slots.description" data-slot="description" :class="ui.description({ class: props.ui?.description })">
+      <div v-if="props.description || !!slots.description" data-slot="page-header-description" :class="ui.description({ class: props.ui?.description })">
         <slot name="description">
           {{ props.description }}
         </slot>

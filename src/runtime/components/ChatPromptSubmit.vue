@@ -170,6 +170,7 @@ const ui = computed(() => tv(theme, appConfig.ui?.chatPromptSubmit)())
 
 <template>
   <UButton
+    data-slot="chat-prompt-submit"
     v-bind="{
       ...buttonProps,
       ...statusButtonProps,

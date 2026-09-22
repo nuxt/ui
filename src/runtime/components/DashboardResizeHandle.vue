@@ -44,6 +44,7 @@ const ui = computed(() => tv(theme, appConfig.ui?.dashboardResizeHandle)())
   <Primitive
     :as="props.as"
     role="separator"
+    data-slot="dashboard-resize-handle"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
   >
     <slot />
