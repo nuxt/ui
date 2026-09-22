@@ -38,7 +38,7 @@ export default {
     orientation: 'horizontal',
     overlay: true,
     class: {
-      root: 'before:inset-y-0 before:start-0 before:h-full before:w-1/3 before:bg-gradient-to-r rtl:before:bg-gradient-to-l after:inset-y-0 after:end-0 after:h-full after:w-1/3 after:bg-gradient-to-l rtl:after:bg-gradient-to-r backface-hidden'
+      root: 'before:inset-y-0 before:start-0 before:h-full before:w-1/3 before:bg-linear-to-r rtl:before:bg-linear-to-l after:inset-y-0 after:end-0 after:h-full after:w-1/3 after:bg-linear-to-l rtl:after:bg-linear-to-r backface-hidden'
     }
   }, {
     orientation: 'vertical',
@@ -50,7 +50,7 @@ export default {
     orientation: 'vertical',
     overlay: true,
     class: {
-      root: 'before:inset-x-0 before:top-0 before:w-full before:h-1/3 before:bg-gradient-to-b after:inset-x-0 after:bottom-0 after:w-full after:h-1/3 after:bg-gradient-to-t backface-hidden'
+      root: 'before:inset-x-0 before:top-0 before:w-full before:h-1/3 before:bg-linear-to-b after:inset-x-0 after:bottom-0 after:w-full after:h-1/3 after:bg-linear-to-t backface-hidden'
     }
   }]
 }
