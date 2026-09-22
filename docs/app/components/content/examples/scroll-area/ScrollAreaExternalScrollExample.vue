@@ -100,7 +100,7 @@ watch(matches, () => {
 
     <div
       ref="toolbar"
-      class="z-10 flex items-center px-6 py-3 border-y border-default bg-elevated/50 backdrop-blur"
+      class="z-10 flex items-center px-6 py-3 border-y border-default bg-elevated/50 backdrop-blur-sm"
       :class="isHorizontal ? 'sticky left-0' : 'sticky top-0'"
     >
       <UFieldGroup>
