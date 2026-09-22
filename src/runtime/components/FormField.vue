@@ -152,7 +152,7 @@ provide(formFieldInjectionKey, computed(() => ({
       </p>
     </div>
 
-    <div :class="[(hasLabel || hasHint || hasDescription) && ui.container({ class: props.ui?.container })]">
+    <div data-slot="container" :class="[(hasLabel || hasHint || hasDescription) && ui.container({ class: props.ui?.container })]">
       <slot :error="error" />
       <div v-if="hasError" :id="`${ariaId}-error`" data-slot="error" :class="ui.error({ class: props.ui?.error })">
         <slot name="error" :error="error">
