@@ -16,7 +16,6 @@ interface HSVColor {
 }
 
 function HSLtoHSV(hsl: HSLObject): HSVColor {
-  console.log(`🚀 ~ ColorPicker.vue:19 ~ HSLtoHSV ~ hsl:`, hsl);
   const x = hsl.S * (hsl.L < 50 ? hsl.L : 100 - hsl.L)
   const v = hsl.L + (x / 100)
 
@@ -114,7 +113,6 @@ const pickedColor = computed<HSVColor>({
   get() {
     try {
       const color = new ColorTranslator(modelValue.value || props.defaultValue)
-      console.log(`🚀 ~ ColorPicker.vue:108 ~ color get:`, color);
 
       return HSLtoHSV(color.HSLAObject)
     } catch (_) {
@@ -122,14 +120,12 @@ const pickedColor = computed<HSVColor>({
     }
   },
   set(value) {
-    console.log(modelValue.value)
     const color = new ColorTranslator(HSVtoHSL(value), {
       labUnit: 'percent',
       cmykUnit: 'percent',
       cmykFunction: 'cmyk',
       decimals: props.decimals
     })
-      console.log(`🚀 ~ ColorPicker.vue:109 ~ color:`, color);
 
     switch (props.format) {
       case 'rgb':
@@ -259,7 +255,6 @@ const { position: alphaTrackThumbPosition } = useColorDraggable(alphaTrackThumbR
 }, disabled)
 
 const { pause: pauseWatchColor, resume: resumeWatchColor } = watchPausable(pickedColor, (hsb) => {
-  console.log(`🚀 ~ ColorPicker.vue:243 ~ hsb:`, hsb);
   selectorThumbPosition.value = {
     x: hsb.s,
     y: normalizeBrightness(hsb.v)
