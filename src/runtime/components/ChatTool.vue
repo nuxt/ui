@@ -161,14 +161,14 @@ const chevronIconName = computed(() => props.chevronIcon || appConfig.ui.icons?.
     :open="resolvedOpen"
     :disabled="props.disabled"
     :unmount-on-hide="props.unmountOnHide"
-    data-slot="root"
+    data-slot="chat-tool"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     @update:open="setOpen"
   >
     <CollapsibleTrigger as-child :disabled="!hasContent()">
       <button
         type="button"
-        data-slot="trigger"
+        data-slot="chat-tool-trigger"
         :class="ui.trigger({ class: props.ui?.trigger })"
       >
         <span v-if="resolvedIcon || (hasContent() && props.chevron === 'leading')" data-slot="leading" :class="ui.leading({ class: props.ui?.leading })">
@@ -181,28 +181,28 @@ const chevronIconName = computed(() => props.chevronIcon || appConfig.ui.icons?.
           <UIcon
             v-if="hasContent() && props.chevron === 'leading'"
             :name="chevronIconName"
-            data-slot="chevronIcon"
+            data-slot="chat-tool-chevronIcon"
             :class="ui.chevronIcon({ class: props.ui?.chevronIcon, alone: !resolvedIcon })"
           />
         </span>
 
-        <span data-slot="label" :class="ui.label({ class: props.ui?.label })">
+        <span data-slot="chat-tool-label" :class="ui.label({ class: props.ui?.label })">
           <UChatShimmer v-if="props.streaming && props.text" :text="props.text" v-bind="props.shimmer" />
           <template v-else>{{ props.text }}</template>
-          <span v-if="props.suffix" data-slot="suffix" :class="ui.suffix({ class: props.ui?.suffix })">{{ props.suffix }}</span>
+          <span v-if="props.suffix" data-slot="chat-tool-suffix" :class="ui.suffix({ class: props.ui?.suffix })">{{ props.suffix }}</span>
         </span>
 
         <UIcon
           v-if="hasContent() && props.chevron === 'trailing'"
           :name="chevronIconName"
-          data-slot="trailingIcon"
+          data-slot="chat-tool-trailingIcon"
           :class="ui.trailingIcon({ class: props.ui?.trailingIcon })"
         />
       </button>
     </CollapsibleTrigger>
 
-    <CollapsibleContent data-slot="content" :class="ui.content({ class: props.ui?.content })">
-      <div data-slot="body" :class="ui.body({ class: props.ui?.body })">
+    <CollapsibleContent data-slot="chat-tool-content" :class="ui.content({ class: props.ui?.content })">
+      <div data-slot="chat-tool-body" :class="ui.body({ class: props.ui?.body })">
         <slot :open="isOpen" />
       </div>
     </CollapsibleContent>

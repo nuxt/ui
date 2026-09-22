@@ -61,7 +61,7 @@ export default {
     },
     loading: {
       true: {
-        avatar: '[&>[data-slot=icon]]:animate-spin'
+        avatar: '[&>[data-slot=avatar-icon]]:animate-spin'
       }
     }
   },

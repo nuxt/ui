@@ -42,6 +42,7 @@ const ui = computed(() => tv(theme, appConfig.ui?.skeleton)())
     :aria-label="t('skeleton.label')"
     aria-live="polite"
     role="alert"
+    data-slot="skeleton"
     :class="ui.base({ class: [props.ui?.base, props.class] })"
   >
     <slot />

@@ -43,13 +43,13 @@ const ui = computed(() => tv(theme, appConfig.ui?.dashboardToolbar)())
 </script>
 
 <template>
-  <Primitive :as="props.as" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <Primitive :as="props.as" data-slot="dashboard-toolbar" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <slot>
-      <div data-slot="left" :class="ui.left({ class: [props.ui?.left] })">
+      <div data-slot="dashboard-toolbar-left" :class="ui.left({ class: [props.ui?.left] })">
         <slot name="left" />
       </div>
 
-      <div data-slot="right" :class="ui.right({ class: [props.ui?.right] })">
+      <div data-slot="dashboard-toolbar-right" :class="ui.right({ class: [props.ui?.right] })">
         <slot name="right" />
       </div>
     </slot>

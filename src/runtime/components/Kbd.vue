@@ -76,7 +76,7 @@ const ui = computed(() => tv(theme, appConfig.ui?.kbd)({
 </script>
 
 <template>
-  <Primitive :as="props.as" :class="ui.base({ class: [props.ui?.base, props.class] })">
+  <Primitive :as="props.as" data-slot="kbd" :class="ui.base({ class: [props.ui?.base, props.class] })">
     <slot>
       <template v-if="platformKey">
         <span :class="prefix('hidden in-[.ui-macos]:inline')">{{ platformKey.macos }}</span>
