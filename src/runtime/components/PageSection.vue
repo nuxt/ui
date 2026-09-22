@@ -99,32 +99,32 @@ const ui = computed(() => tv(theme, appConfig.ui?.pageSection)({
 </script>
 
 <template>
-  <Primitive :as="props.as" :data-orientation="props.orientation" data-slot="root" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <Primitive :as="props.as" :data-orientation="props.orientation" data-slot="page-section" :class="ui.root({ class: [props.ui?.root, props.class] })">
     <slot name="top" />
 
-    <UContainer data-slot="container" :class="ui.container({ class: props.ui?.container })">
-      <div v-if="!!slots.header || (props.icon || !!slots.leading) || (props.headline || !!slots.headline) || (props.title || !!slots.title) || (props.description || !!slots.description) || !!slots.body || (props.features?.length || !!slots.features) || !!slots.footer || (props.links?.length || !!slots.links)" data-slot="wrapper" :class="ui.wrapper({ class: props.ui?.wrapper })">
-        <div v-if="!!slots.header || (props.icon || !!slots.leading) || (props.headline || !!slots.headline) || (props.title || !!slots.title) || (props.description || !!slots.description)" data-slot="header" :class="ui.header({ class: props.ui?.header })">
+    <UContainer data-slot="page-section-container" :class="ui.container({ class: props.ui?.container })">
+      <div v-if="!!slots.header || (props.icon || !!slots.leading) || (props.headline || !!slots.headline) || (props.title || !!slots.title) || (props.description || !!slots.description) || !!slots.body || (props.features?.length || !!slots.features) || !!slots.footer || (props.links?.length || !!slots.links)" data-slot="page-section-wrapper" :class="ui.wrapper({ class: props.ui?.wrapper })">
+        <div v-if="!!slots.header || (props.icon || !!slots.leading) || (props.headline || !!slots.headline) || (props.title || !!slots.title) || (props.description || !!slots.description)" data-slot="page-section-header" :class="ui.header({ class: props.ui?.header })">
           <slot name="header">
-            <div v-if="props.icon || !!slots.leading" data-slot="leading" :class="ui.leading({ class: props.ui?.leading })">
+            <div v-if="props.icon || !!slots.leading" data-slot="page-section-leading" :class="ui.leading({ class: props.ui?.leading })">
               <slot name="leading" :ui="ui">
-                <UIcon v-if="props.icon" :name="props.icon" data-slot="leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
+                <UIcon v-if="props.icon" :name="props.icon" data-slot="page-section-leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
               </slot>
             </div>
 
-            <div v-if="props.headline || !!slots.headline" data-slot="headline" :class="ui.headline({ class: props.ui?.headline, headline: !slots.headline })">
+            <div v-if="props.headline || !!slots.headline" data-slot="page-section-headline" :class="ui.headline({ class: props.ui?.headline, headline: !slots.headline })">
               <slot name="headline">
                 {{ props.headline }}
               </slot>
             </div>
 
-            <h2 v-if="props.title || !!slots.title" data-slot="title" :class="ui.title({ class: props.ui?.title })">
+            <h2 v-if="props.title || !!slots.title" data-slot="page-section-title" :class="ui.title({ class: props.ui?.title })">
               <slot name="title">
                 {{ props.title }}
               </slot>
             </h2>
 
-            <div v-if="props.description || !!slots.description" data-slot="description" :class="ui.description({ class: props.ui?.description })">
+            <div v-if="props.description || !!slots.description" data-slot="page-section-description" :class="ui.description({ class: props.ui?.description })">
               <slot name="description">
                 {{ props.description }}
               </slot>
@@ -132,9 +132,9 @@ const ui = computed(() => tv(theme, appConfig.ui?.pageSection)({
           </slot>
         </div>
 
-        <div v-if="!!slots.body || (props.features?.length || !!slots.features)" data-slot="body" :class="ui.body({ class: props.ui?.body })">
+        <div v-if="!!slots.body || (props.features?.length || !!slots.features)" data-slot="page-section-body" :class="ui.body({ class: props.ui?.body })">
           <slot name="body">
-            <ul v-if="props.features?.length || !!slots.features" data-slot="features" :class="ui.features({ class: props.ui?.features })">
+            <ul v-if="props.features?.length || !!slots.features" data-slot="page-section-features" :class="ui.features({ class: props.ui?.features })">
               <slot name="features">
                 <UPageFeature
                   v-for="(feature, index) in props.features"
@@ -147,9 +147,9 @@ const ui = computed(() => tv(theme, appConfig.ui?.pageSection)({
           </slot>
         </div>
 
-        <div v-if="!!slots.footer || (props.links?.length || !!slots.links)" data-slot="footer" :class="ui.footer({ class: props.ui?.footer })">
+        <div v-if="!!slots.footer || (props.links?.length || !!slots.links)" data-slot="page-section-footer" :class="ui.footer({ class: props.ui?.footer })">
           <slot name="footer">
-            <div v-if="props.links?.length || !!slots.links" data-slot="links" :class="ui.links({ class: props.ui?.links })">
+            <div v-if="props.links?.length || !!slots.links" data-slot="page-section-links" :class="ui.links({ class: props.ui?.links })">
               <slot name="links">
                 <UButton v-for="(link, index) in props.links" :key="index" size="lg" v-bind="link" />
               </slot>

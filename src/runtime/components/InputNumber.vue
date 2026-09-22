@@ -204,7 +204,7 @@ defineExpose({
     :min="props.min"
     :max="props.max"
     :step="props.step"
-    :data-slot="($attrs['data-slot'] as string | undefined) ?? 'root'"
+    :data-slot="($attrs['data-slot'] as string | undefined) ?? 'input-number'"
     :class="ui.root({ class: [props.ui?.root, props.class] })"
     :name="name"
     :disabled="disabled"
@@ -215,13 +215,13 @@ defineExpose({
       ref="inputRef"
       :placeholder="props.placeholder"
       :required="props.required"
-      data-slot="base"
+      data-slot="input-number-base"
       :class="ui.base({ class: props.ui?.base })"
       @blur="onBlur"
       @focus="emitFormFocus"
     />
 
-    <div v-if="!!props.increment" data-slot="increment" :class="ui.increment({ class: props.ui?.increment })">
+    <div v-if="!!props.increment" data-slot="input-number-increment" :class="ui.increment({ class: props.ui?.increment })">
       <NumberFieldIncrement as-child :disabled="disabled || props.incrementDisabled">
         <slot name="increment">
           <UButton
@@ -236,7 +236,7 @@ defineExpose({
       </NumberFieldIncrement>
     </div>
 
-    <div v-if="!!props.decrement" data-slot="decrement" :class="ui.decrement({ class: props.ui?.decrement })">
+    <div v-if="!!props.decrement" data-slot="input-number-decrement" :class="ui.decrement({ class: props.ui?.decrement })">
       <NumberFieldDecrement as-child :disabled="disabled || props.decrementDisabled">
         <slot name="decrement">
           <UButton

@@ -67,7 +67,7 @@ describe('InputNumber', () => {
 
     test('increments uncontrolled defaultValue without v-model', async () => {
       const wrapper = await mountSuspended(InputNumber, { props: { defaultValue: 5 }, attachTo: document.body })
-      const increment = wrapper.find('[data-slot="increment"] button')
+      const increment = wrapper.find('[data-slot="input-number-increment"] button')
 
       await increment.trigger('pointerdown')
       await increment.trigger('pointerup')
@@ -88,7 +88,7 @@ describe('InputNumber', () => {
           'onUpdate:modelValue': (value: number | null | undefined) => wrapper.setProps({ modelValue: value })
         }
       })
-      const increment = wrapper.find('[data-slot="increment"] button')
+      const increment = wrapper.find('[data-slot="input-number-increment"] button')
 
       await increment.trigger('pointerdown')
       await increment.trigger('pointerup')

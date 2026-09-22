@@ -61,7 +61,7 @@ const spread = computed(() => props.text.length * props.spread)
       '--spread': `${spread}px`,
       '--duration': `${props.duration}s`
     }"
-    data-slot="base"
+    data-slot="chat-shimmer"
     :class="ui.base({ class: [props.ui?.base, props.class] })"
   >
     {{ props.text }}
