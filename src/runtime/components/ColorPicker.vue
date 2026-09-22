@@ -65,10 +65,17 @@ export type ColorPickerProps = {
    */
   format?: 'hex' | 'rgb' | 'hsl' | 'cmyk' | 'lab' | 'lch' | 'hwb'
   /**
+   * Show the alpha track or not
+   */
+  alphaTrack?: boolean
+  /**
+   * @defaultValue 4
+   */
+  decimals?: number
+  /**
    * @defaultValue 'md'
    */
   size?: ColorPicker['variants']['size']
-  alphaTrack?: boolean
   class?: any
   ui?: ColorPicker['slots']
 }
@@ -88,7 +95,8 @@ import { tv } from '../utils/tv'
 const _props = withDefaults(defineProps<ColorPickerProps>(), {
   format: 'hex',
   throttle: 50,
-  defaultValue: '#FFFFFF'
+  defaultValue: '#FFFFFF',
+  decimals: 4,
 })
 
 const props = useComponentProps('colorPicker', _props)
@@ -119,7 +127,7 @@ const pickedColor = computed<HSVColor>({
       labUnit: 'percent',
       cmykUnit: 'percent',
       cmykFunction: 'cmyk',
-      decimals: 4
+      decimals: props.decimals
     })
       console.log(`🚀 ~ ColorPicker.vue:109 ~ color:`, color);
 
